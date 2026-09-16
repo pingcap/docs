@@ -1,16 +1,16 @@
 ---
 title: Integrate TiDB Vector Search with Amazon Bedrock
-summary: TiDB Vector SearchをAmazon Bedrockと統合して、検索拡張生成（RAG）Q&Aボットを構築する方法を学びましょう。
+summary: TiDBベクトル検索をAmazon Bedrockと統合して、検索拡張生成（RAG）Q&Aボットを構築する方法を学びましょう。
 aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 ---
 
-# TiDB Vector SearchをAmazon Bedrockと統合する {#integrate-tidb-vector-search-with-amazon-bedrock}
+# TiDBベクトル検索をAmazon Bedrockと統合する {#integrate-tidb-vector-search-with-amazon-bedrock}
 
 > **Note:**
 >
 > このドキュメントはTiDB Cloudにのみ適用され、TiDB Self-Managedには適用されません。
 
-このチュートリアルでは[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
+このチュートリアルでは[TiDBベクトル検索](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
 
 > **Note:**
 >
@@ -50,7 +50,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 ## さあ始めましょう {#get-started}
 
-このセクションでは、TiDB Vector SearchをAmazon Bedrockと統合してRAGベースのQ&amp;Aボットを構築するための手順を段階的に説明します。
+このセクションでは、TiDBベクトル検索をAmazon Bedrockと統合してRAGベースのQ&amp;Aボットを構築するための手順を段階的に説明します。
 
 ### ステップ1. 環境変数を設定する {#step-1-set-the-environment-variables}
 

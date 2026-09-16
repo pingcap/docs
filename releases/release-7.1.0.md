@@ -160,9 +160,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/partitioned-table.md#manage-hash-and-key-partitions)を参照してください。
 
-- 範囲INTERVALパーティションの構文が一般公開（GA） になります [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
+- レンジ INTERVAL パーティショニングの構文が一般公開（GA） になります [#35683](https://github.com/pingcap/tidb/issues/35683) @[mjonss](https://github.com/mjonss)
 
-    バージョン6.3.0で導入されたRange INTERVALパーティショニングの構文がGAになりました。この構文を使用すると、すべてのパーティションを列挙することなく、任意の間隔でRangeパーティショニングを定義できるため、RangeパーティショニングのDDL文の長さが大幅に短縮されます。この構文は、従来のRangeパーティショニングの構文と同等です。
+    バージョン6.3.0で導入されたレンジ INTERVAL パーティショニングの構文がGAになりました。この構文を使用すると、すべてのパーティションを列挙することなく、任意の間隔でレンジパーティショニングを定義できるため、レンジパーティショニングのDDL文の長さが大幅に短縮されます。この構文は、従来のレンジパーティショニングの構文と同等です。
 
     詳細については[ドキュメント](/partitioned-table.md#range-interval-partitioning)を参照してください。
 
@@ -278,9 +278,9 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710) | 新しく追加された | ネットワーク転送のオーバーヘッドが最小となるアルゴリズムを使用するかどうかを制御します。この変数を有効にすると、TiDBはネットワークで交換されるデータのサイズをそれぞれ`Broadcast Hash Join`と`Shuffled Hash Join`で推定し、サイズが小さい方を選択します。この変数を有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)が無効になります。 |
 | [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)                                         | 新しく追加された | キャッシュできるプランの最大数を制御します。プリペアドプランキャッシュと非プリペアドプランキャッシュは同じキャッシュを共有します。                                                                                                                                                                                                                                                                                                                            |
 
-### コンフィグレーションファイルのパラメータ {#configuration-file-parameters}
+### 設定ファイルのパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションパラメータ                                                                                                                | タイプを変更   | 説明                                                                                                                                                                                 |
+| 設定ファイル | 設定パラメータ                                                                                                                | タイプを変更   | 説明                                                                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                            | 新しく追加された | TiDB の起動中にサービスを提供する前に、統計の初期化が完了するまで待機するかどうかを制御します。                                                                                                                                 |
 | TiDB           | [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                       | 新しく追加された | TiDB の起動時に軽量統計初期化を使用するかどうかを制御します。                                                                                                                                                  |

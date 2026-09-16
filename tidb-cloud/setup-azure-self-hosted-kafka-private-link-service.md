@@ -446,9 +446,9 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 4. **Backend pools**タブで、次の3つのバックエンド プールを追加し、 **Next : Inbound rules**をクリックします。
 
-    - 名前: `pool1` ; バックエンド プールコンフィグレーション: `NIC` ; IP 構成: `broker-node-1`
-    - 名前: `pool2` ; バックエンド プールコンフィグレーション: `NIC` ; IP 構成: `broker-node-2`
-    - 名前: `pool3` ; バックエンド プールコンフィグレーション: `NIC` ; IP 構成: `broker-node-3`
+    - 名前: `pool1` ; バックエンド プール設定: `NIC` ; IP 構成: `broker-node-1`
+    - 名前: `pool2` ; バックエンド プール設定: `NIC` ; IP 構成: `broker-node-2`
+    - 名前: `pool3` ; バックエンド プール設定: `NIC` ; IP 構成: `broker-node-3`
 
 5. **Inbound rules**タブで、次の3つの負荷分散規則を追加します。
 

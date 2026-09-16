@@ -9,7 +9,7 @@ summary: 概念、チュートリアル、統合、リファレンス ドキュ�
 
 ## 始めましょう {#get-started}
 
-TiDB ベクトル検索を開始するには、次のチュートリアルを参照してください。
+TiDBベクトル検索を開始するには、次のチュートリアルを参照してください。
 
 - [Pythonで始める](/ai/quickstart-via-python.md)
 - [SQL経由で開始する](/ai/quickstart-via-sql.md)

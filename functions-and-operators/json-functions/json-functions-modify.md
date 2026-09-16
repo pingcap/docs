@@ -5,7 +5,7 @@ summary: JSON 値を変更する JSON関数について学習します。
 
 # JSON値を変更するJSON関数 {#json-functions-that-modify-json-values}
 
-TiDB は、MySQL 8.0 で利用可能な[JSON値を変更するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html)すべてをサポートします。
+TiDB は、MySQL 8.0 で利用可能な[JSON値を変更するJSON関数](https://dev.mysql.com/doc/refman/8.0/en/json-modification-functions.html)のすべてをサポートします。
 
 ## `JSON_APPEND()` {#json_append}
 
@@ -51,7 +51,7 @@ SELECT JSON_ARRAY_APPEND('{"transport_options": ["Car", "Boat", "Train"]}', '$.t
 
 ## `JSON_ARRAY_INSERT()` {#json_array_insert}
 
-`JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)`関数は、 `path`の`json_array`の指定された位置に`value`挿入し、結果を返します。
+`JSON_ARRAY_INSERT(json_array, path, value [,path, value] ...)`関数は、 `path`の`json_array`の指定された位置に`value`を挿入し、結果を返します。
 
 この関数は引数をペアで受け取ります。各ペアは`path`と`value`です。
 
@@ -131,7 +131,7 @@ SELECT JSON_INSERT('{"a": 61, "b": 62}', '$.a', 41, '$.c', 63);
 
 例:
 
-次の例では、値`a`が引数 2 によって上書きされ、マージされた結果に`c`新しい属性として追加されていることがわかります。
+次の例では、値`a`が引数 2 によって上書きされ、マージされた結果に`c`が新しい属性として追加されていることがわかります。
 
 ```sql
 SELECT JSON_MERGE_PATCH(
@@ -156,7 +156,7 @@ SELECT JSON_MERGE_PATCH(
 
 例:
 
-次の例では、引数 2 の値が`a`に追加され、 `c`新しい属性として追加されていることがわかります。
+次の例では、引数 2 の値が`a`に追加され、 `c`が新しい属性として追加されていることがわかります。
 
 ```sql
 SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
@@ -175,7 +175,7 @@ SELECT JSON_MERGE_PRESERVE('{"a": 1, "b": 2}','{"a": 100}', '{"c": 300}');
 
 > **Warning:**
 >
-> この機能は非推奨です。
+> この関数は非推奨です。
 
 [`JSON_MERGE_PRESERVE()`](#json_merge_preserve)の非推奨のエイリアス。
 

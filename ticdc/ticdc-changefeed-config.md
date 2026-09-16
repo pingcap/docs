@@ -3,7 +3,7 @@ title: CLI and Configuration Parameters of TiCDC Changefeeds
 summary: TiCDCチェンジフィードのCLIの定義と設定パラメータについて学びましょう。
 ---
 
-# TiCDC ChangefeedsのCLIとコンフィグレーションパラメータ {#cli-and-configuration-parameters-of-ticdc-changefeeds}
+# TiCDC ChangefeedsのCLIと設定パラメータ {#cli-and-configuration-parameters-of-ticdc-changefeeds}
 
 ## 変更フィードCLIパラメータ {#changefeed-cli-parameters}
 
@@ -46,7 +46,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ### `case-sensitive` {#case-sensitive}
 
-- 構成ファイル内のデータベース名とテーブルが大文字と小文字を区別するかどうかを指定します。v6.5.6、v7.1.3、v7.5.0 以降、デフォルト値は`true`から`false`に変更されます。
+- 設定ファイル内のデータベース名とテーブルが大文字と小文字を区別するかどうかを指定します。v6.5.6、v7.1.3、v7.5.0 以降、デフォルト値は`true`から`false`に変更されます。
 - この設定項目は、フィルターとシンクに関連する設定に影響します。
 - デフォルト値: `false`
 
