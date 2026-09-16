@@ -42,7 +42,7 @@ TiDB バージョン: 5.0.6
 
     - TiCDC
 
-        - TiKV リロードのレート制限制御を最適化して、チェンジフィード初期化中の gPRC 輻輳を軽減します[#3110](https://github.com/pingcap/ticdc/issues/3110)
+        - TiKV リロードのレート制限制御を最適化して、チェンジフィード初期化中の gRPC 輻輳を軽減します[#3110](https://github.com/pingcap/ticdc/issues/3110)
         - 頻繁な etcd 書き込みが PD サービスに影響を与えないように、EtcdWorker にティック頻度制限を追加します[#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Kafkaシンクの`config.Metadata.Timeout`デフォルト設定を追加する [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - デフォルト値の`max-message-bytes`を`10M`に設定すると、Kafkaメッセージが送信されない可能性が減ります。 [#3081](https://github.com/pingcap/tiflow/issues/3081)

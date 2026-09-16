@@ -10,12 +10,12 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 >
 > このドキュメントはTiDB Cloudにのみ適用され、TiDB Self-Managedには適用されません。
 
-このチュートリアルでは[TiDBベクトル検索](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
+このチュートリアルでは[TiDBベクトル検索](/ai/guides/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
 
 > **Note:**
 >
 > - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) と [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) と [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **Tip**
 >
@@ -39,7 +39,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 - TiDB Cloud Starterインスタンス
 
-    お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/select-cluster-tier.md#starter)。
+    お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)。
 
 - [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)AWS アカウントと次のモデルへのアクセス:
 

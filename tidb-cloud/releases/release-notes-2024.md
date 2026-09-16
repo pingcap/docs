@@ -247,7 +247,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
     - Python のプログラミング言語サポート: [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md) 、 [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md)、および[Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md) 。
     - サンプルアプリケーションとチュートリアル： [Python](/ai/quickstart-via-python.md)または[SQL](/ai/quickstart-via-sql.md)を使用してドキュメントのセマンティック検索を実行します。
 
-    詳細については、[ベクトル検索（ベータ版）の概要](/ai/concepts/vector-search-overview.md)を参照してください。
+    詳細については、[ベクトル検索（ベータ版）の概要](/ai/guides/vector-search-overview.md)を参照してください。
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) 、組織オーナー向けに週次メールレポートの提供を開始しました。
 

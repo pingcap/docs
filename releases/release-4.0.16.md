@@ -41,7 +41,7 @@ TiDBバージョン: 4.0.16
     - TiCDC
 
         - 頻繁な etcd 書き込みが PD サービスに影響を与えないように、EtcdWorker にティック頻度制限を追加します[#3112](https://github.com/pingcap/tiflow/issues/3112)
-        - TiKV リロードのレート制限制御を最適化して、チェンジフィード初期化中の gPRC 輻輳を軽減します[#3110](https://github.com/pingcap/tiflow/issues/3110)
+        - TiKV リロードのレート制限制御を最適化して、チェンジフィード初期化中の gRPC 輻輳を軽減します[#3110](https://github.com/pingcap/tiflow/issues/3110)
 
 ## バグ修正 {#bug-fixes}
 

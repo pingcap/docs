@@ -342,7 +342,7 @@ TiDB バージョン: 6.1.0
     - CDCはRawKV をサポートしています [#11965](https://github.com/tikv/tikv/issues/11965)
     - 大きなスナップショットファイルを複数のファイルに分割することをサポートします [#11595](https://github.com/tikv/tikv/issues/11595)
     - スナップショットGCがRaftstoreのメッセージループをブロックするのを防ぐために、スナップショットガベージコレクションをRaftstoreからバックグラウンドスレッドに移動します[#11966](https://github.com/tikv/tikv/issues/11966)
-    - gPRCメッセージの最大メッセージ長（ `max-grpc-send-msg-len` ）と最大バッチサイズ（ `raft-msg-max-batch-size` ） の動的設定をサポート [#12334](https://github.com/tikv/tikv/issues/12334)
+    - gRPCメッセージの最大メッセージ長（ `max-grpc-send-msg-len` ）と最大バッチサイズ（ `raft-msg-max-batch-size` ） の動的設定をサポート [#12334](https://github.com/tikv/tikv/issues/12334)
     - Raft によるオンラインの安全でない復元計画の実行をサポート [#10483](https://github.com/tikv/tikv/issues/10483)
 
 - PD

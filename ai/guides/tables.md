@@ -1,6 +1,7 @@
 ---
 title: Working with Tables
 summary: TiDB でテーブルを操作する方法を学びます。
+aliases: ['/ja/ai/basic-with-pytidb/']
 ---
 
 # 表の操作 {#working-with-tables}
@@ -12,10 +13,6 @@ TiDBは、関連するデータのコレクションを整理して保存する�
 このドキュメントでは、 [`pytidb`](https://github.com/pingcap/pytidb)を使用してテーブルを操作する方法を説明します。
 
 `pytidb`は、TiDB 向けの公式 Python SDK であり、開発者が AI アプリケーションを効率的に構築できるように設計されています。
-
-> **Note:**
->
-> 完全な動作例については、リポジトリの[基本的な例](https://github.com/pingcap/pytidb/tree/main/examples/basic)を参照してください。
 
 ## テーブルを作成する {#create-a-table}
 
@@ -446,3 +443,51 @@ SHOW TABLES;
 
 </div>
 </SimpleTab>
+
+## 完全な `pytidb` CRUD の例を実行する
+
+`pytidb` リポジトリには、TiDB に接続し、テキスト、ベクトル、JSON のカラムを持つテーブルを作成して、CRUD 操作を実行する完全なサンプルが用意されています。
+
+始める前に、以下を用意してください。
+
+- Python 3.10 以降。
+- {{{ .starter }}} インスタンス。 [TiDB Cloud](https://tidbcloud.com/free-trial) で作成できます。
+
+サンプルを実行するには、次の手順を実行します。
+
+1. `pytidb` リポジトリをクローンし、サンプルディレクトリに移動します。
+
+    ```bash
+    git clone https://github.com/pingcap/pytidb.git
+    cd pytidb/examples/basic/
+    ```
+
+2. 仮想環境を作成して有効化し、必要なパッケージをインストールします。
+
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install -r reqs.txt
+    ```
+
+3. [TiDB Cloud コンソール](https://tidbcloud.com/) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、{{{ .starter }}} インスタンスの名前をクリックしてから、右上隅の **Connect** をクリックして接続パラメータを取得します。
+
+4. `.env` ファイルを作成し、接続パラメータを設定します。
+
+    ```bash
+    cat > .env <<'EOF'
+    TIDB_HOST={gateway-region}.prod.aws.tidbcloud.com
+    TIDB_PORT=4000
+    TIDB_USERNAME={prefix}.root
+    TIDB_PASSWORD={password}
+    TIDB_DATABASE=test
+    EOF
+    ```
+
+5. サンプルを実行します。
+
+    ```bash
+    python main.py
+    ```
+
+このサンプルは、各 CRUD 操作の結果を出力し、終了時にサンプルテーブルを削除します。実装を確認するには、 [`pytidb` basic example](https://github.com/pingcap/pytidb/tree/main/examples/basic) を参照してください。

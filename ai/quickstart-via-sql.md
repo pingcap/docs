@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-sql/','/ja/tidb/dev/v
 
 # SQL を介して TiDB + AI を使い始める {#get-started-with-tidb-ai-via-sql}
 
-TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-search-overview.md)をサポートし、新しい [ベクトルデータ型](/ai/reference/vector-search-data-types.md)といくつかの[ベクトル関数](/ai/reference/vector-search-functions-and-operators.md)を導入します。
+TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/guides/vector-search-overview.md)をサポートし、新しい [ベクトルデータ型](/ai/reference/vector-search-data-types.md)といくつかの[ベクトル関数](/ai/reference/vector-search-functions-and-operators.md)を導入します。
 
 このドキュメントでは、SQL文だけを使用して TiDBベクトル検索を開始する方法を説明します。 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)を使用して、次の操作を実行する方法を学習します。
 
@@ -18,7 +18,7 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-s
 > **Note:**
 >
 > - ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
@@ -72,7 +72,7 @@ mysql --comments --host 127.0.0.1 --port 4000 -u root
 
 ### ステップ2. ベクトルテーブルを作成する {#step-2-create-a-vector-table}
 
-テーブルを作成する際、 `VECTOR`データ型を指定することで、列を[ベクトル](/ai/concepts/vector-search-overview.md#vector-embedding)として定義できます。
+テーブルを作成する際、 `VECTOR`データ型を指定することで、列を[ベクトル](/ai/guides/vector-search-overview.md#vector-embedding)として定義できます。
 
 例えば、3次元の`VECTOR`列を持つテーブル`embedded_documents`を作成するには、MySQL CLI を使用して次の SQL文を実行します。
 
@@ -95,7 +95,7 @@ Query OK, 0 rows affected (0.27 sec)
 
 ### ステップ3. ベクトル埋め込みをテーブルに挿入する {#step-3-insert-vector-embeddings-to-the-table}
 
-[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)を持つ3つのドキュメントを`embedded_documents`テーブルに挿入します。
+[ベクトル埋め込み](/ai/guides/vector-search-overview.md#vector-embedding)を持つ3つのドキュメントを`embedded_documents`テーブルに挿入します。
 
 ```sql
 INSERT INTO embedded_documents
@@ -116,7 +116,7 @@ Records: 3  Duplicates: 0  Warnings: 0
 >
 > この例では、ベクトル埋め込みの次元を簡略化し、説明のために3次元ベクトルのみを使用しています。
 >
-> 実際のアプリケーションでは、 [埋め込みモデル](/ai/concepts/vector-search-overview.md#embedding-model)は多くの場合、数百または数千の次元を持つベクトル埋め込みを生成します。
+> 実際のアプリケーションでは、 [埋め込みモデル](/ai/guides/vector-search-overview.md#embedding-model)は多くの場合、数百または数千の次元を持つベクトル埋め込みを生成します。
 
 ### ステップ4. ベクトルテーブルを照会する {#step-4-query-the-vector-table}
 

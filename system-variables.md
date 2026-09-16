@@ -5985,33 +5985,54 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > 文字チェックをスキップすると、TiDB はアプリケーションによって書き込まれた無効な UTF-8 文字を検出できず、 `ANALYZE`の実行時にデコードエラーが発生したり、その他の未知のエンコード問題が発生したりする可能性があります。アプリケーションが書き込まれた文字列の有効性を保証できない場合は、文字チェックをスキップすることはお勧めしません。
 
-### tidb_slow_log_max_per_sec <span class="version-mark">New in v8.5.6</span>
+### tidb_slow_log_max_per_sec <span class="version-mark">v8.5.6 および CLOUD.202603.1 で新規追加</span> {#tidb_slow_log_max_per_sec}
 
-- 対象範囲：グローバル
-- クラスターに保持される: はい
-- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
+>**Note:**
+>
+> この変数は TiDB Cloud では読み取り専用です。
+
+- スコープ: GLOBAL
+- クラスターへの永続化: Yes
+- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
 - デフォルト値: `0`
-- 型: 整数
+- 型: Integer
 - 範囲: `[0, 1000000]`
-- この変数は、TiDBノードごとに1秒あたりに書き込めるスロークエリログエントリの最大数を制御します。
-    - `0`という値は、1 秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。
-    - `0`より大きい値を指定すると、TiDBは1秒あたりに指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。
-- この変数は、高負荷条件下で過剰なスロークエリログが生成されるのを防ぐために、 [`tidb_slow_log_rules`](#tidb_slow_log_rules-new-in-v856)と組み合わせて使用されることが多いです。
+- この変数は、TiDB ノードごとに 1 秒あたり書き込めるスロークエリログエントリの最大数を制御します。
+    - 値が `0` の場合、1 秒あたりに書き込まれるスロークエリログエントリ数に制限はありません。
+    - 値が `0` より大きい場合、TiDB は 1 秒あたり最大で指定された数のスロークエリログエントリのみを書き込みます。超過したログエントリは破棄され、スロークエリログファイルには書き込まれません。
+- この変数は、高負荷時に過剰なスロークエリログが生成されるのを防ぐために、[`tidb_slow_log_rules`](#tidb_slow_log_rules) とあわせて使用されることがよくあります。
 
-### tidb_slow_log_rules <span class="version-mark">New in v8.5.6</span>
+### tidb_slow_log_rules <span class="version-mark">v8.5.6 および CLOUD.202603.1 で新規追加</span> {#tidb_slow_log_rules}
 
-- 範囲: セッション | グローバル
-- クラスターに保持される: はい
-- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
+>**Note:**
+>
+> この変数は TiDB Cloud Starter ではサポートされていません。
+
+- スコープ
+    - TiDB Self-Managed および TiDB Cloud Dedicated: SESSION | GLOBAL
+    - TiDB Cloud Essential および Premium: SESSION
+- クラスターへの永続化: Yes
+- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
 - デフォルト値: ""
 - 型: String
-- この変数は、スロークエリログのトリガールールを定義します。多次元メトリクスを組み合わせることで、より柔軟で詳細なログ記録を実現します。
-- このシステム変数の使用方法の詳細については、 [`tidb_slow_log_rules`を使用する](/identify-slow-queries.md#use-tidb_slow_log_rules)を参照してください。
+- この変数は、スロークエリログのトリガールールを定義します。複数次元のメトリクスを組み合わせることで、より柔軟できめ細かなログ記録を実現します。
+- このシステム変数の使用方法の詳細については、[スロークエリのトリガールールを設定する](/config-slow-query-trigger-rules.md) を参照してください。
+
+<CustomContent platform="tidb">
 
 > **Tip:**
 >
-> - 本番環境で`tidb_slow_log_rules`を有効にする場合は、スロークエリログの出力が過度に頻繁に発生しないように、 [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec-new-in-v856)も設定することをお勧めします。
-> - 最初はより厳しい条件から始め、トラブルシューティングの必要性に応じて徐々に緩和していくことをお勧めします。パフォーマンスへの影響に関する詳細については、[推奨事項](/identify-slow-queries.md#recommendations)を参照してください。
+> - 本番環境で `tidb_slow_log_rules` を有効にする場合は、スロークエリログが過度に頻繁に出力されるのを避けるため、[`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec) も設定することを推奨します。
+> - より厳しい条件から開始し、トラブルシューティングの必要に応じて徐々に緩和していくことを推奨します。パフォーマンスへの影響の詳細については、[推奨事項](/config-slow-query-trigger-rules.md#recommendations) を参照してください。
+
+</CustomContent>
+<CustomContent platform="tidb-cloud">
+
+> **Tip:**
+>
+> より厳しい条件から開始し、トラブルシューティングの必要に応じて徐々に緩和していくことを推奨します。パフォーマンスへの影響の詳細については、[推奨事項](/config-slow-query-trigger-rules.md#recommendations) を参照してください。
+
+</CustomContent>
 
 ### tidb_slow_log_threshold
 

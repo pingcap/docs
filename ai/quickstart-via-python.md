@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 # Python を使って TiDB + AI を始めよう {#get-started-with-tidb-ai-via-python}
 
-このドキュメントでは、Python SDK を使用して TiDB で[ベクトル検索](/ai/concepts/vector-search-overview.md)を開始する方法を説明します。手順に従って、TiDB で動作する最初の AI アプリケーションを構築します。
+このドキュメントでは、Python SDK を使用して TiDB で[ベクトル検索](/ai/guides/vector-search-overview.md)を開始する方法を説明します。手順に従って、TiDB で動作する最初の AI アプリケーションを構築します。
 
 このドキュメントに従うことで、以下のことを学ぶことができます。
 
@@ -18,7 +18,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 > **Note:**
 >
 > - ベクトル検索機能はパブリックプレビューであり、予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
@@ -108,7 +108,7 @@ client = TiDBClient.connect(
 
 ## 埋め込み関数を作成する {#create-an-embedding-function}
 
-[埋め込みモデル](/ai/concepts/vector-search-overview.md#embedding-model)扱う場合、埋め込み機能を利用することで、挿入時とクエリ時の両方でデータを自動的にベクトル化できます。OpenAI、Jina AI、Hugging Face、Sentence Transformersなど、人気の埋め込みモデルをネイティブでサポートしています。
+[埋め込みモデル](/ai/guides/vector-search-overview.md#embedding-model)扱う場合、埋め込み機能を利用することで、挿入時とクエリ時の両方でデータを自動的にベクトル化できます。OpenAI、Jina AI、Hugging Face、Sentence Transformersなど、人気の埋め込みモデルをネイティブでサポートしています。
 
 <SimpleTab>
 <div label="OpenAI">

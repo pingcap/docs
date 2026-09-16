@@ -9,7 +9,7 @@ summary: アプリケーションでベクトル検索を使用する方法を�
 
 > **Note:**
 >
-> ベクトル検索の完全な例については、 [ベクトル検索の例](/ai/examples/vector-search-with-pytidb.md)を参照してください。
+> ベクトル検索の完全な例については、 [ベクトル検索の例](/ai/guides/vector-search-with-pytidb.md)を参照してください。
 
 ## 基本的な使い方 {#basic-usage}
 
@@ -113,7 +113,7 @@ VALUES
 
 > **Note:**
 >
-> 実際のアプリケーションでは、埋め込みは通常[埋め込みモデル](/ai/concepts/vector-search-overview.md#embedding-model)によって生成されます。
+> 実際のアプリケーションでは、埋め込みは通常[埋め込みモデル](/ai/guides/vector-search-overview.md#embedding-model)によって生成されます。
 
 利便性のため、pytidb は、挿入、更新、または検索時にテキスト フィールドのベクトル埋め込みを自動的に生成できる自動埋め込み機能を提供します。手動処理は必要ありません。
 

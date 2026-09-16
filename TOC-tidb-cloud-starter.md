@@ -13,7 +13,7 @@
   - [TiDB Cloudをお試しください](/tidb-cloud/tidb-cloud-quickstart.md)
   - [TiDB + AIツールを試してみよう](/tidb-cloud/use-tidb-cloud-with-ai-tools.md)
   - [HTAPを試してみてください](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [TiDB Cloud CLI をお試しください](/tidb-cloud/get-started-with-cli.md)
+  - [TiDB Cloud CLI (ticloud, Legacy) を試す](/tidb-cloud/get-started-with-cli.md)
 - 主要概念
   - [概要](/tidb-cloud/key-concepts.md)
   - [アーキテクチャ](/tidb-cloud/architecture-concepts.md)
@@ -461,7 +461,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [メタデータロック](/metadata-lock.md)
   - [TiDB高速テーブル作成](/accelerated-table-creation.md)
-- CLI リファレンス ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+- TiDB Cloud CLI (ticloud, Legacy) リファレンス ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概要](/tidb-cloud/cli-reference.md)
   - 認証
     - [ログイン](/tidb-cloud/ticloud-auth-login.md)

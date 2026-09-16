@@ -6,12 +6,12 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-sqlalchemy/','/ja/tidb/d
 
 # TiDBベクトル検索をSQLAlchemyと統合する {#integrate-tidb-vector-search-with-sqlalchemy}
 
-このチュートリアルでは、 [SQLAlchemy](https://www.sqlalchemy.org/)を使用して[TiDBベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
+このチュートリアルでは、 [SQLAlchemy](https://www.sqlalchemy.org/)を使用して[TiDBベクトル検索](/ai/guides/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
 
 > **Note:**
 >
 > - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)と[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)と[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 

@@ -12,7 +12,7 @@
 - さあ始めましょう
   - [TiDB Cloudをお試しください](/tidb-cloud/tidb-cloud-quickstart.md)
   - [HTAPを試してみてください](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [TiDB Cloud CLI をお試しください](/tidb-cloud/get-started-with-cli.md)
+  - [TiDB Cloud CLI (ticloud) を試す](/tidb-cloud/get-started-with-cli.md)
 - 主要概念
   - [概要](/tidb-cloud/key-concepts.md)
   - [アーキテクチャ](/tidb-cloud/architecture-concepts.md)
@@ -463,7 +463,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [メタデータロック](/metadata-lock.md)
   - [TiDB高速テーブル作成](/accelerated-table-creation.md)
-- CLI リファレンス ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+- TiDB Cloud CLI (ticloud) リファレンス ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概要](/tidb-cloud/cli-reference.md)
   - 認証
     - [ログイン](/tidb-cloud/ticloud-auth-login.md)
@@ -557,6 +557,7 @@
   - [サーバーステータス変数](/status-variables.md)
   - [テーブルフィルター](/table-filter.md)
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
+  - [スロークエリのトリガールールを設定する](/config-slow-query-trigger-rules.md)
   - [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
   - [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)

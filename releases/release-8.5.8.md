@@ -26,6 +26,7 @@ TiDB バージョン: 8.5.8
         - 検証時に起動時専用の処理を回避し、既存トピックに対して Schema Registry などの encoder 依存関係を確認し、TiCDC がトピックを作成する必要がある場合にのみ `replication-factor` を検証することで、TiCDC Kafka Sink の検証をより軽量かつ完全なものに改善しました [#5618](https://github.com/pingcap/ticdc/issues/5618) [#5720](https://github.com/pingcap/ticdc/issues/5720) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5811 -->
         - 同じ Sink 内のすべての Encoder で単一の `ClaimCheck` インスタンスを共有することで、Claim-Check を有効にした TiCDC Kafka Sink における外部ストレージクライアントと接続の使用量を削減しました [#5719](https://github.com/pingcap/ticdc/issues/5719) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5811 -->
         - 設定、Admin API、および producer エラーの分類とラップを標準化することで、TiCDC Kafka Sink のエラーハンドリングを簡素化および統一し、リトライ分類とトラブルシューティングを容易にしました [#5790](https://github.com/pingcap/ticdc/issues/5790) @[3AceShowHand](https://github.com/3AceShowHand) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/ticdc/pull/5811 -->
+        - TiCDC における既知のセキュリティ脆弱性を軽減するため、TiDB、`golang.org/x/crypto`、AWS SDK、およびその他の依存関係をアップグレードしました [#12775](https://github.com/pingcap/tiflow/issues/12775) [#5827](https://github.com/pingcap/ticdc/issues/5827) [#5693](https://github.com/pingcap/ticdc/issues/5693) [#5445](https://github.com/pingcap/ticdc/issues/5445) @[asddongmen](https://github.com/asddongmen) @[wk989898](https://github.com/wk989898) <!-- component: cdc --> <!-- pr: https://github.com/pingcap/tiflow/pull/12776 --> <!-- pr: https://github.com/pingcap/ticdc/pull/5829 --> <!-- pr: https://github.com/pingcap/ticdc/pull/5700 -->
 
 ## バグ修正 {#bug-fixes}
 
@@ -62,10 +63,11 @@ TiDB バージョン: 8.5.8
     - 一時的な RocksDB compaction スパイク時に、TiKV が不要な書き込みフロー制御を適用する可能性がある問題を修正しました [#19667](https://github.com/tikv/tikv/issues/19667) @[hbisheng](https://github.com/hbisheng) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19828 -->
     - 対象ストアの登録完了前に PD が一時的に store-not-found エラーを返すと、TiKV が Raft 接続を恒久的にブロックする可能性がある問題を修正しました [#19980](https://github.com/tikv/tikv/issues/19980) @[LykxSassinator](https://github.com/LykxSassinator) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19999 --> <!-- exported-on-2026-08-24 -->
     - TiKV における外部 SST 取り込みでフォアグラウンド書き込みが許可されなくなり、取り込み中の書き込みレイテンシーが増加する問題を修正しました [#19954](https://github.com/tikv/tikv/issues/19954) @[gengliqi](https://github.com/gengliqi) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19977 --> <!-- exported-on-2026-08-24 -->
+    - Rust 依存関係をアップグレードすることで、TiKV の潜在的なセキュリティ脆弱性を修正しました [#19931](https://github.com/tikv/tikv/issues/19931) @[hbisheng](https://github.com/hbisheng) <!-- component: tikv --> <!-- pr: https://github.com/tikv/tikv/pull/19933 -->
 
 + PD
 
-    - PD `/metric/query` および `/metric/query_range` が SSRF に悪用されたり、上流レスポンスの詳細を露出したりする可能性がある問題を修正しました @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11107 -->
+    - PD `/metric/query` および `/metric/query_range` が SSRF に悪用されたり、上流レスポンスの詳細を露出したりする可能性がある問題を修正しました [#11081](https://github.com/tikv/pd/issues/11081) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11107 -->
     - 同じリソースグループ内でリクエストレートが不均一な場合に、RU トークンが TiDB インスタンス間で不均等に割り当てられ、高負荷インスタンスで RU 待機時間の増加とレイテンシー上昇を引き起こす問題を修正しました [#9605](https://github.com/tikv/pd/issues/9605) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/10024 -->
     - クライアントが任意の `ConfigPath` またはパス形式の設定名を指定した場合に、PD GlobalConfig gRPC API が意図した名前空間外の etcd キーへアクセスする可能性がある問題を修正しました [#11079](https://github.com/tikv/pd/issues/11079) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11075 -->
     - `pd-forwarded-host` で渡された呼び出し元指定のアドレスに対して、現在の PD leader の advertised client URLs に転送先を制限せず、PD が外向き gRPC 接続を確立してしまう可能性がある問題を修正しました [#11070](https://github.com/tikv/pd/issues/11070) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11091 -->
@@ -84,6 +86,10 @@ TiDB バージョン: 8.5.8
         - `AUTO_ID_CACHE=1` を持つテーブルに対する BR point-in-time restore で、リストア後最初の `INSERT` 時に重複キーエラーが発生する可能性がある問題を修正しました [#69485](https://github.com/pingcap/tidb/issues/69485) @[vldmit](https://github.com/vldmit) <!-- component: br --> <!-- pr: https://github.com/pingcap/tidb/pull/70253 -->
         - ログバックアップタスク停止後に BR ログバックアップが古い GC safepoint を残し、クリーンアップや safepoint 管理に影響する可能性がある問題を修正しました [#19832](https://github.com/tikv/tikv/issues/19832) @[Leavrth](https://github.com/Leavrth) <!-- component: br --> <!-- pr: https://github.com/tikv/tikv/pull/19911 -->
         - 複数のリストアタスクが同時実行される場合に、BR が SST ダウンロードのレート制限を正しく更新できず、あるタスクの制限変更が反映されない可能性がある問題を修正しました [#19454](https://github.com/tikv/tikv/issues/19454) @[Leavrth](https://github.com/Leavrth) <!-- component: br --> <!-- pr: https://github.com/tikv/tikv/pull/19924 -->
+
+    + DM
+
+        - OpenTelemetry および `kin-openapi` 依存関係をアップグレードすることで、DM の潜在的な脆弱性を修正しました [#12637](https://github.com/pingcap/tiflow/issues/12637) @[GMHDBJD](https://github.com/GMHDBJD) <!-- component: dm --> <!-- pr: https://github.com/pingcap/tiflow/pull/12784 -->
 
     + TiCDC
 

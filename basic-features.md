@@ -111,7 +111,7 @@ summary: TiDBの機能概要について学びましょう。
 
 | 高度なSQL機能                                                                                                     | 8.5 | 8.1 | 7.5 | 7.1 | 6.5 | 6.1 | 5.4 |
 | ------------------------------------------------------------------------------------------------------------ | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| [ベクトル検索](/ai/concepts/vector-search-overview.md)                                                             |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
+| [ベクトル検索](/ai/guides/vector-search-overview.md)                                                               |  E  |  N  |  N  |  N  |  N  |  N  |  N  |
 | [プリペアドステートメントキャッシュ](/sql-prepared-plan-cache.md)                                                              |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [非プリペアドステートメントキャッシュ](/sql-non-prepared-plan-cache.md)                                                         |  Y  |  Y  |  Y  |  E  |  N  |  N  |  N  |
 | [インスタンスレベルの実行プランキャッシュ](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)                     |  E  |  N  |  N  |  N  |  N  |  N  |  N  |

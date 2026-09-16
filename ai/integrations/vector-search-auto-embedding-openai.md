@@ -292,6 +292,6 @@ CREATE TABLE sample (
 ## 関連項目 {#see-also}
 
 - [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
-- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル検索](/ai/guides/vector-search-overview.md)
 - [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
 - [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
