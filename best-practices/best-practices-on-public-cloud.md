@@ -45,7 +45,7 @@ compression-per-level = ["zstd", "zstd", "zstd", "zstd", "zstd", "zstd", "zstd"]
 
 ## Raft Engine専用のディスクを使用する {#use-a-dedicated-disk-for-raft-engine}
 
-TiKVの[Raft Engine](/glossary.md#raft-engine) 、従来のデータベースにおける先行書き込みログ（WAL）と同様の重要な役割を果たします。最適なパフォーマンスと安定性を実現するには、パブリッククラウドにTiDBをデプロイする際に、 Raft Engine専用のディスクを割り当てることが不可欠です。次の`iostat` 、書き込み負荷の高いワークロードにおけるTiKVノードのI/O特性を示しています。
+TiKVの[Raft Engine](/glossary.md#raft-engine)は、従来のデータベースにおける先行書き込みログ（WAL）と同様の重要な役割を果たします。最適なパフォーマンスと安定性を実現するには、パブリッククラウドにTiDBをデプロイする際に、 Raft Engine専用のディスクを割り当てることが不可欠です。次の`iostat`は、書き込み負荷の高いワークロードにおけるTiKVノードのI/O特性を示しています。
 
 ```
 Device            r/s     rkB/s       w/s     wkB/s      f/s  aqu-sz  %util
@@ -53,7 +53,7 @@ sdb           1649.00 209030.67   1293.33 304644.00    13.33    5.09  48.37
 sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 ```
 
-デバイス`sdb`はKV RocksDBに使用され、 `sdd` Raft Engineのログを復元するために使用されます`sdd`には、デバイスの1秒あたりのフラッシュリクエスト完了数を表す`f/s`値が大幅に高いことに注目してください。Raft Raft Engineでは、バッチ内の書き込みが同期としてマークされている場合、バッチリーダーは書き込み後に`fdatasync()`呼び出し、バッファリングされたデータがストレージにフラッシュされることを保証します。Raft Raft Engine専用のディスクを使用することで、TiKVはリクエストの平均キュー長を短縮し、最適で安定した書き込みレイテンシーを保証します。
+デバイス`sdb`はKV RocksDBに使用され、 `sdd`はRaft Engineのログを復元するために使用されます。 `sdd`には、デバイスの1秒あたりのフラッシュリクエスト完了数を表す`f/s`値が大幅に高いことに注目してください。Raft Engineでは、バッチ内の書き込みが同期としてマークされている場合、バッチリーダーは書き込み後に`fdatasync()`を呼び出し、バッファリングされたデータがストレージにフラッシュされることを保証します。Raft Engine専用のディスクを使用することで、TiKVはリクエストの平均キュー長を短縮し、最適で安定した書き込みレイテンシーを保証します。
 
 クラウドプロバイダーによって、IOPSやMBPSなどのパフォーマンス特性が異なる様々なディスクタイプが提供されています。そのため、ワークロードに応じて適切なクラウドプロバイダー、ディスクタイプ、ディスクサイズを選択することが重要です。
 
@@ -67,7 +67,7 @@ sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 
 - AWSでは[gp3](https://aws.amazon.com/ebs/general-purpose/)推奨されます。gp3ボリュームは、ボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分な値です。
 
-- Google Cloudでは[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)推奨されています。IOPSとMBPSは割り当てられたディスクサイズによって異なります。パフォーマンス要件を満たすには、 Raft Engineに200GBを割り当てることを推奨します。Raft Raft Engineはそれほど大きな容量を必要としませんが、最適なパフォーマンスを確保できます。
+- Google Cloudでは[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)が推奨されています。IOPSとMBPSは割り当てられたディスクサイズによって異なります。パフォーマンス要件を満たすには、 Raft Engineに200GBを割り当てることを推奨します。Raft Engineはそれほど大きな容量を必要としませんが、最適なパフォーマンスを確保できます。
 
 - Azureでは[プレミアム SSD v2](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssd-v2)推奨されます。AWS gp3と同様に、Premium SSD v2はボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分です。
 
@@ -88,7 +88,7 @@ AWS は、20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/)ボリュー�
 書き込み集中型のソーシャル ネットワーク アプリケーション ワークロードに AWS 上の専用の 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raft Engineディスクを使用すると、次のような改善が見られますが、推定コストはわずか 0.4% しか増加しません。
 
 - QPS（1秒あたりのクエリ数）が17.5%増加
-- 挿入文の平均レイテンシーが18.7%減少
+- 挿入ステートメントの平均レイテンシーが18.7%減少
 - 挿入ステートメントの p99レイテンシーが 45.6% 減少しました。
 
 | メトリック            | 共有Raft Engineディスク | 専用Raft Engineディスク | 違い （％） |
@@ -143,9 +143,9 @@ TiFlash MPPタスクのデータシャッフルによって発生するネット
 
 Google Cloud の[ライブマイグレーション機能](https://cloud.google.com/compute/docs/instances/live-migration-process)は、ダウンタイムを発生させることなく、ホスト間でVMをシームレスに移行できます。しかし、これらの移行イベントは頻度は低いものの、TiDBクラスタで実行されているVMを含むVMのパフォーマンスに重大な影響を与える可能性があります。このようなイベントが発生すると、影響を受けるVMのパフォーマンスが低下し、TiDBクラスタでのクエリ処理時間が長くなる可能性があります。
 
-Google Cloud によって開始されたライブマイグレーション イベントを検出し、これらのイベントによるパフォーマンスへの影響を軽減するために、TiDB は Google のメタデータ[例](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py)に基づく[スクリプトを見る](https://github.com/PingCAP-QE/tidb-google-maintenance)提供します。このスクリプトを TiDB、TiKV、PD ノードにデプロイして、メンテナンス イベントを検出できます。メンテナンス イベントが検出されると、中断を最小限に抑え、クラスタの動作を最適化するために、次のように適切なアクションが自動的に実行されます。
+Google Cloud によって開始されたライブマイグレーション イベントを検出し、これらのイベントによるパフォーマンスへの影響を軽減するために、TiDB は Google のメタデータ[例](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py)に基づく[監視スクリプト](https://github.com/PingCAP-QE/tidb-google-maintenance)を提供します。このスクリプトを TiDB、TiKV、PD ノードにデプロイして、メンテナンス イベントを検出できます。メンテナンス イベントが検出されると、中断を最小限に抑え、クラスタの動作を最適化するために、次のように適切なアクションが自動的に実行されます。
 
-- TiDB: TiDBノードをオフラインにし、TiDBポッドを削除します。これは、TiDBインスタンスのノードプールが自動スケールに設定され、TiDB専用になっていることを前提としています。ノード上で実行されている他のポッドに中断が発生する可能性があり、切断されたノードは自動スケーラーによって回収されることが想定されます。
+- TiDB: TiDBノードをコルドンしてオフラインにし、TiDBポッドを削除します。これは、TiDBインスタンスのノードプールが自動スケールに設定され、TiDB専用になっていることを前提としています。ノード上で実行されている他のポッドに中断が発生する可能性があり、コルドンされたノードは自動スケーラーによって回収されることが想定されます。
 - TiKV: メンテナンス中に、影響を受ける TiKV ストアのリーダーを削除します。
 - PD: 現在の PD インスタンスが PD リーダーである場合、リーダーを辞任します。
 
