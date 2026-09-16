@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/high-concurrency-best-practices/','/ja/tidb/dev/high-
 
 ## 対象読者 {#target-audience}
 
-このドキュメントは、読者がTiDBの基礎を理解していることを前提としています。まず、TiDBの基礎を解説した以下の3つのブログ記事と、 [TiDB ベストプラクティス](https://www.pingcap.com/blog/tidb-best-practice/)を読みいただくことをお勧めします。
+このドキュメントは、読者がTiDBの基礎を理解していることを前提としています。まず、TiDBの基礎を解説した以下の3つのブログ記事と、 [TiDB ベストプラクティス](https://www.pingcap.com/blog/tidb-best-practice/)をお読みいただくことをお勧めします。
 
 - [データストレージ](https://www.pingcap.com/blog/tidb-internal-data-storage/)
 - [コンピューティング](https://www.pingcap.com/blog/tidb-internal-computing/)
@@ -35,7 +35,7 @@ aliases: ['/ja/tidb/stable/high-concurrency-best-practices/','/ja/tidb/dev/high-
 
 上記の課題に対処するには、TiDBのデータセグメンテーションとスケジューリングの原理から始める必要があります。詳細については[スケジュール](https://www.pingcap.com/blog/tidb-internal-scheduling/)を参照してください。
 
-TiDBはデータをリージョンに分割します。リージョンはそれぞれ、デフォルトで96MBのサイズ制限を持つデータ範囲を表します。各リージョンには複数のレプリカがあり、レプリカの各グループはRaftグループと呼ばれます。Raftグループでは、リージョンリーダーがデータ範囲内の読み取りおよび書き込みタスク（TiDBは[フォロワー読み取り](/follower-read.md)をサポート）を実行します。リージョンリーダーは、Placement Driver （PD）コンポーネントによって自動的に異なる物理ノードにスケジュールされ、読み取りおよび書き込みの負荷を均等に分散します。
+TiDBはデータをリージョンに分割します。リージョンはそれぞれ、デフォルトで96MBのサイズ制限を持つデータ範囲を表します。各リージョンには複数のレプリカがあり、レプリカの各グループはRaftグループと呼ばれます。Raftグループでは、リージョンリーダーがデータ範囲内の読み取りおよび書き込みタスク（TiDBは[フォロワー読み取り](/follower-read.md)をサポートしています）を実行します。リージョンリーダーは、Placement Driver （PD）コンポーネントによって自動的に異なる物理ノードにスケジュールされ、読み取りおよび書き込みの負荷を均等に分散します。
 
 ![TiDB Data Overview](/media/best-practices/tidb-data-overview.png)
 
