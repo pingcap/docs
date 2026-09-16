@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.2 Release Notes
-summary: TiDB 5.2.0では、式インデックスのサポート、Lock ビュー GA、 TiFlashのI/Oトラフィック制限など、新機能と改善点が導入されています。互換性の変更点としては、新しいシステム変数と構成ファイルパラメータが追加されています。また、TiDB、TiKV、 TiFlash、およびTiCDC、 BR、Lightning、 Dumplingなどのツールに対するバグ修正と機能強化も含まれています。
+summary: TiDB 5.2.0では、式インデックスのサポート、Lock ビュー GA、 TiFlashのI/Oトラフィック制限など、新機能と改善点が導入されています。互換性の変更点としては、新しいシステム変数と設定ファイルパラメータが追加されています。また、TiDB、TiKV、 TiFlash、およびTiCDC、 BR、Lightning、 Dumplingなどのツールに対するバグ修正と機能強化も含まれています。
 ---
 
 # TiDB 5.2 リリースノート {#tidb-5-2-release-notes}
@@ -40,9 +40,9 @@ TiDB バージョン: 5.2.0
 | [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)    | 変更     | ステートメントサマリーテーブルがメモリに格納するステートメントの最大数を設定します。デフォルト値は`200`から`3000`に変更されます。 |
 | `tidb_enable_streaming`                                                                                   | 非推奨      | システム変数`enable-streaming`は非推奨であり、今後は使用しないことをお勧めします。                     |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーションアイテム                                                                                                                | 変更の種類  | 説明                                                                                                                              |
+| 設定ファイル | 設定項目                                                                                                                | 変更の種類  | 説明                                                                                                                              |
 | :------------- | :---------------------------------------------------------------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------ |
 | TiDB設定ファイル     | [`pessimistic-txn.deadlock-history-collect-retryable`](/tidb-configuration-file.md#deadlock-history-collect-retryable)        | 新しく追加された | [`INFORMATION\_SCHEMA.DEADLOCKS`](/information-schema/information-schema-deadlocks.md)テーブルが再試行可能なデッドロックエラーメッセージを収集するかどうかを制御します。 |
 | TiDB設定ファイル     | [`security.auto-tls`](/tidb-configuration-file.md#auto-tls)                                                                   | 新しく追加された | 起動時にTLS証明書を自動的に生成するかどうかを決定します。デフォルト値は`false`です。                                                                                 |
@@ -64,7 +64,7 @@ TiDB バージョン: 5.2.0
 - TiDB クラスターを v4.0 から v5.2 にアップグレードすると、 [`tidb_multi_statement_mode`](/system-variables.md#tidb_multi_statement_mode-new-in-v4011)のデフォルト値が`WARN`から`OFF`に変更されます。
 - アップグレード前に、TiDB 設定の[`feedback-probability`](https://docs-archive.pingcap.com/tidb/v5.2/tidb-configuration-file#feedback-probability)の値を確認してください。値が`0`でない場合、アップグレード後に「panic in the recoverable goroutine」というエラーが発生しますが、このエラーはアップグレードには影響しません。
 - TiDBはMySQL 5.7のnoop変数`innodb_default_row_format`と互換性を持つようになりました。この変数を設定しても効果はありません。 [#23541](https://github.com/pingcap/tidb/issues/23541)
-- TiDB 5.2以降では、システムセキュリティを向上させるため、クライアントからの接続のトランスレイヤーを暗号化することが推奨されています（必須ではありません）。TiDBは、TiDB内で暗号化を自動的に構成および有効化するAuto TLS機能を提供します。Auto TLS機能を使用するには、TiDBのアップグレード前に、TiDB構成ファイルの[`security.auto-tls`](/tidb-configuration-file.md#auto-tls)を`true`に設定してください。
+- TiDB 5.2以降では、システムセキュリティを向上させるため、クライアントからの接続のトランスレイヤーを暗号化することが推奨されています（必須ではありません）。TiDBは、TiDB内で暗号化を自動的に構成および有効化するAuto TLS機能を提供します。Auto TLS機能を使用するには、TiDBのアップグレード前に、TiDB設定ファイルの[`security.auto-tls`](/tidb-configuration-file.md#auto-tls)を`true`に設定してください。
 - MySQL 8.0 からの移行を容易にし、セキュリティを向上させるために、 `caching_sha2_password`認証方式をサポートします。
 
 ## 新機能 {#new-features}

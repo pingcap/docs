@@ -90,7 +90,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 MySQLはエクスポート時にスナップショットを指定できないため、エクスポート中にデータ移行タスクを更新し、その後再起動してチェックポイントからエクスポートを再開することができません。そのため、`Dump`ステージで移行が必要なテーブルを動的に追加することはできません。
 
-移行のためにテーブルを追加する必要がある場合は、新しい構成ファイルを使用してタスクを直接再起動することをお勧めします。
+移行のためにテーブルを追加する必要がある場合は、新しい設定ファイルを使用してタスクを直接再起動することをお勧めします。
 
 ### `Load`ステージ {#in-the-load-stage}
 
@@ -125,11 +125,11 @@ MySQLはエクスポート時にスナップショットを指定できないた
 以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
 
 - TiDBサーバーのグローバル変数: `max_allowed_packet` 。
-- タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスクコンフィグレーションファイル](/dm/task-configuration-file-full.md)を参照してください。
+- タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
 ## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`を処理する方法を教えてください。 {#how-to-handle-the-error-error-1054-unknown-column-binlog_gtid-in-field-list-that-occurs-when-existing-dm-migration-tasks-of-an-dm-10-cluster-are-running-on-a-dm-20-or-newer-cluster}
 
-DM v2.0 以降、増分データレプリケーションを続行するために DM 1.0 クラスターのタスク構成ファイルで`start-task`コマンドを直接実行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
+DM v2.0 以降、増分データレプリケーションを続行するために DM 1.0 クラスターのタスク設定ファイルで`start-task`コマンドを直接実行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
 
 このエラーは[DM 1.0 クラスターの DM 移行タスクを DM 2.0 クラスターに手動でインポートする](/dm/manually-upgrade-dm-1.0-to-2.0.md)で処理できます。
 
@@ -218,7 +218,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     1. ダウンストリームデータベースにインポートされたデータをクリーンアップします。
     2. データを処理する DM-workerノードに TiDB-Lightningをデプロイします。
     3. DM ダンプユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカルバックエンド モードを使用します。
-    4. 完全インポートが完了したら、次の方法でタスク構成ファイルを編集し、タスクを再起動します。
+    4. 完全インポートが完了したら、次の方法でタスク設定ファイルを編集し、タスクを再起動します。
         - `task-mode`を`incremental`に変更します。
         - ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
 
@@ -251,7 +251,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 
 これはDMの既知のバグで、DM v2.0.2で修正されています。このバグは、以下の2つの条件が同時に満たされた場合に発生します。
 
-1. ソース構成ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
+1. ソース設定ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
 2. アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`をクエリすると、次の例のように結果が不連続になります。
 
 ```
@@ -332,7 +332,7 @@ query-status test
 
 - 現在の時刻から完全エクスポート タスクのメタデータに記録された位置までのアップストリーム バイナリ ログが消去されていない場合は、次の手順を実行できます。
     1. 現在のタスクを停止し、連続しない GTID を持つすべてのデータソースを削除します。
-    2. すべてのソース構成ファイルで`enable-relay`を`false`に設定します。
+    2. すべてのソース設定ファイルで`enable-relay`を`false`に設定します。
     3. 連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     4. 増分タスクの`task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5. 増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
@@ -344,10 +344,10 @@ query-status test
     4. `task.yaml`の`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5. 増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
     6. タスクを再度開始します。
-    7. データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
+    7. データソースを再起動し、ソース設定ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
 - 上記の条件がいずれも満たされていない場合、またはタスクのデータ量が少ない場合は、次の手順を実行できます。
     1. ダウンストリームデータベースにインポートされたデータをクリーンアップします。
-    2. データソースを再起動し、ソース構成ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
+    2. データソースを再起動し、ソース設定ファイルで`enable-relay`または`enable-gtid`を`false`に設定します。
     3. 新しいタスクを作成し、コマンド`start-task task.yaml --remove-meta`を実行して、データを最初から再度移行します。
 
 上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`を構成します。

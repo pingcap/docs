@@ -3,7 +3,7 @@ title: Modify Configuration Dynamically
 summary: クラスター構成を動的に変更する方法を学習します。
 ---
 
-# コンフィグレーションを動的に変更する {#modify-configuration-dynamically}
+# 設定を動的に変更する {#modify-configuration-dynamically}
 
 このドキュメントでは、クラスター構成を動的に変更する方法について説明します。
 
@@ -111,9 +111,9 @@ show warnings;
 
 次の TiKV 設定項目は動的に変更できます。
 
-| コンフィグレーション項目                                              | 説明                                                                                                                                         |
+| 設定項目                                              | 説明                                                                                                                                         |
 | :-------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| ログレベル                                                     | ログレベル。                                                                                                                                    |
+| `log.level`                                                | ログレベル。                                                                                                                                    |
 | `raftstore.raft-max-inflight-msgs`                        | 確認するRaftログの数。この数を超えると、 Raftステートマシンはログの送信速度を低下させます。                                                                                         |
 | `raftstore.raft-log-gc-tick-interval`                     | Raftログを削除するポーリングタスクがスケジュールされる時間間隔                                                                                                          |
 | `raftstore.raft-log-gc-threshold`                         | 残存Raftログの最大許容数に関するソフト制限                                                                                                                    |
@@ -241,7 +241,7 @@ show warnings;
 - `db-name`が`rocksdb`の場合、 `cf-name`のオプションの値は`defaultcf` 、 `writecf` 、 `lockcf` 、および`raftcf`です。
 - `db-name`が`raftdb`のとき、 `cf-name`の値は`defaultcf`になります。
 
-詳細なパラメータの説明については[TiKVコンフィグレーションファイル](/tikv-configuration-file.md)を参照してください。
+詳細なパラメータの説明については[TiKV設定ファイル](/tikv-configuration-file.md)を参照してください。
 
 ### PD構成を動的に変更する {#modify-pd-configuration-dynamically}
 
@@ -263,7 +263,7 @@ Query OK, 0 rows affected (0.01 sec)
 
 次の PD 設定項目は動的に変更できます。
 
-| コンフィグレーション項目                                         | 説明                                                         |
+| 設定項目                                         | 説明                                                         |
 | :--------------------------------------------------- | :--------------------------------------------------------- |
 | `log.level`                                          | ログレベル                                                      |
 | `cluster-version`                                    | クラスターバージョン                                                 |
@@ -329,7 +329,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `replication-mode.dr-auto-sync.wait-recover-timeout` | ネットワークが回復した後、 `sync-recover`状態に戻るまでの待機時間                   |
 | `replication-mode.dr-auto-sync.pause-region-split`   | `async_wait`と`async`ステータスでリージョン分割操作を一時停止するかどうかを制御します       |
 
-詳細なパラメータの説明については[PDコンフィグレーションファイル](/pd-configuration-file.md)を参照してください。
+詳細なパラメータの説明については[PD設定ファイル](/pd-configuration-file.md)を参照してください。
 
 ### TiDB構成を動的に変更する {#modify-tidb-configuration-dynamically}
 
@@ -362,7 +362,7 @@ select @@tidb_slow_log_threshold;
 
 次の TiDB 設定項目は動的に変更できます。
 
-| コンフィグレーション項目                                            | SQL変数                                        | 説明                                                                                    |
+| 設定項目                                            | SQL変数                                        | 説明                                                                                    |
 | ------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `instance.tidb_enable_slow_log`                         | `tidb_enable_slow_log`                       | スローログを有効にするかどうかを制御します                                                                 |
 | `instance.tidb_slow_log_threshold`                      | `tidb_slow_log_threshold`                    | スローログのしきい値を指定します                                                                      |

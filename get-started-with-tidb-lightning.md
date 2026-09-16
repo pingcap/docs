@@ -62,7 +62,7 @@ tiup install tidb-lightning
 >
 > このセクションのインポート方法は、テストと機能体験にのみ適しています。本番環境については、 [MySQLからTiDBへの大規模データセットの移行](/migrate-large-mysql-to-tidb.md)を参照してください。
 
-1. 構成ファイル`tidb-lightning.toml`を作成し、クラスタ情報に基づいて以下の設定を入力してください。
+1. 設定ファイル`tidb-lightning.toml`を作成し、クラスタ情報に基づいて以下の設定を入力してください。
 
     ```toml
     [lightning]

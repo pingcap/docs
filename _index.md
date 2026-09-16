@@ -127,7 +127,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[TiDBコンフィグレーションファイルのパラメータ](https://docs.pingcap.com/ja/tidb/stable/tidb-configuration-file)
+[TiDB設定ファイルのパラメータ](https://docs.pingcap.com/ja/tidb/stable/tidb-configuration-file)
 
 [TiDB コマンドラインフラグ](https://docs.pingcap.com/ja/tidb/stable/command-line-flags-for-tidb-configuration)
 

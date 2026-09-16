@@ -39,13 +39,13 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
     tiup install dm dmctl
     ```
 
-## ステップ2: 初期化構成ファイルを編集する {#step-2-edit-the-initialization-configuration-file}
+## ステップ2: 初期化設定ファイルを編集する {#step-2-edit-the-initialization-configuration-file}
 
-意図したクラスター トポロジに応じて、クラスター初期化構成ファイルを手動で作成および編集する必要があります。
+意図したクラスター トポロジに応じて、クラスター初期化設定ファイルを手動で作成および編集する必要があります。
 
 [設定ファイルテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)に従って、YAML 設定ファイル（例： `topology.yaml` ）を作成する必要があります。その他のシナリオでは、設定を適宜編集してください。
 
-コマンド`tiup dm template > topology.yaml`を使用すると、構成ファイル テンプレートをすばやく生成できます。
+コマンド`tiup dm template > topology.yaml`を使用すると、設定ファイル テンプレートをすばやく生成できます。
 
 3 つの DM-master、3つの DM-worker、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
@@ -163,7 +163,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 | ------------------------ | ------------------------------------------------------------------------------- |
 | `${name}`                | DM クラスターの名前 (例: dm-test)                                                        |
 | `${version}`             | DM クラスターのバージョン`tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。               |
-| `./topology.yaml`        | トポロジ構成ファイルのパス。                                                                  |
+| `./topology.yaml`        | トポロジ設定ファイルのパス。                                                                  |
 | `-u`または`--user`          | クラスターのデプロイを完了するには、root ユーザーまたは ssh および sudo権限を持つ他のユーザーアカウントとしてターゲットマシンにログインします。 |
 | `-p`または`--password`      | 対象ホストのパスワード。指定すると、パスワード認証が使用されます。                                               |
 | `-i`または`--identity_file` | SSH IDファイルのパス。指定すると公開鍵認証が使用されます（デフォルトは"/root/.ssh/id_rsa"）。                     |

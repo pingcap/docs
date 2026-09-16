@@ -3,7 +3,7 @@ title: Data Migration Task Configuration Guide
 summary: Data Migration (DM) でデータ移行タスクを構成する方法を学習します。
 ---
 
-# データ移行タスクコンフィグレーションガイド {#data-migration-task-configuration-guide}
+# データ移行タスク設定ガイド {#data-migration-task-configuration-guide}
 
 このドキュメントでは、Data Migration (DM) でデータ移行タスクを構成する方法について説明します。
 
@@ -13,7 +13,7 @@ summary: Data Migration (DM) でデータ移行タスクを構成する方法を
 
 - データソースを表示するには、 [データソースの構成を確認する](/dm/dm-manage-source.md#check-data-source-configurations)を参照してください。
 - データソースを作成するには、 [データソースを作成する](/dm/migrate-data-using-dm.md#step-3-create-data-source)を参照してください。
-- データソース構成ファイルを生成するには、 [ソース構成ファイルの紹介](/dm/dm-source-configuration-file.md)を参照してください。
+- データソース設定ファイルを生成するには、 [ソース設定ファイルの紹介](/dm/dm-source-configuration-file.md)を参照してください。
 
 次の例`mysql-instances`は、データ移行タスクで移行する必要があるデータソースを構成する方法を示しています。
 
@@ -60,7 +60,7 @@ target-database:       # Configuration of target TiDB database.
 
 データ移行タスクのデータソーステーブルのブロックリストと許可リストを構成するには、次の手順を実行します。
 
-1. タスク構成ファイルで、ブロックおよび許可リストのグローバル フィルタールール セットを構成します。
+1. タスク設定ファイルで、ブロックおよび許可リストのグローバル フィルタールール セットを構成します。
 
     ```yaml
     block-allow-list:
@@ -98,7 +98,7 @@ target-database:       # Configuration of target TiDB database.
 
 データ移行タスクのbinlogイベントのフィルターを構成するには、次の手順を実行します。
 
-1. タスク構成ファイルで、 binlogイベントのグローバル フィルタールール セットを構成します。
+1. タスク設定ファイルで、 binlogイベントのグローバル フィルタールール セットを構成します。
 
     ```yaml
     filters:                                        # The filter rule set of data source binlog events. You can set multiple rules at the same time.
@@ -133,11 +133,11 @@ target-database:       # Configuration of target TiDB database.
 >
 > - データソースの特定のテーブルをダウンストリーム TiDB インスタンス内の別の名前のテーブルに移行する必要がない場合は、この構成をスキップします。
 >
-> - シャードマージタスクの場合は、タスク構成ファイルでマッピングルールを設定する**必要があります**。
+> - シャードマージタスクの場合は、タスク設定ファイルでマッピングルールを設定する**必要があります**。
 
 データソーステーブルを指定されたダウンストリーム TiDB テーブルに移行するためのルーティング マッピングルールを構成するには、次の手順を実行します。
 
-1. タスク構成ファイルでグローバル ルーティング マッピングルール セットを構成します。
+1. タスク設定ファイルでグローバル ルーティング マッピングルール セットを構成します。
 
     ```yaml
     routes:                           # The routing mapping rule set between the data source tables and downstream TiDB tables. You can set multiple rules at the same time.
@@ -186,7 +186,7 @@ shard-mode: "pessimistic"       # The shard merge mode. Optional modes are ""/"p
 
 ## その他の構成 {#other-configurations}
 
-以下は、このドキュメントの全体的なタスク設定例です。完全なタスク設定テンプレートは[DMタスク構成ファイルの完全な紹介](/dm/task-configuration-file-full.md)にあります。
+以下は、このドキュメントの全体的なタスク設定例です。完全なタスク設定テンプレートは[DMタスク設定ファイルの完全な紹介](/dm/task-configuration-file-full.md)にあります。
 
 ```yaml
 ---

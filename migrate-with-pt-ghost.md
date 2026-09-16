@@ -18,7 +18,7 @@ DM を使用して MySQL から TiDB にデータを移行する場合、 `onlin
 
 ## DM でオンライン DDL を有効にする {#enable-online-ddl-on-dm}
 
-DM のタスク構成ファイルで、以下に示すように、グローバル パラメータ`online-ddl`を`true`に設定します。
+DM のタスク設定ファイルで、以下に示すように、グローバル パラメータ`online-ddl`を`true`に設定します。
 
 ```yaml
 # ----------- Global configuration -----------

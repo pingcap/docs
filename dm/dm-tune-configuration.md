@@ -3,7 +3,7 @@ title: Optimize Configuration of DM
 summary: データ移行タスクの構成を最適化して、データ移行のパフォーマンスを向上させる方法を学習します。
 ---
 
-# DMのコンフィグレーションを最適化する {#optimize-configuration-of-dm}
+# DMの設定を最適化する {#optimize-configuration-of-dm}
 
 このドキュメントでは、データ移行タスクの構成を最適化して、データ移行のパフォーマンスを向上させる方法を紹介します。
 

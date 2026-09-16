@@ -133,7 +133,7 @@ haproxy --help
 | `-C <dir>`                      | 設定ファイルを読み込む前にディレクトリ`<dir>`に変更します。                                                                                                                               |
 | `-W`                            | マスターワーカーモード。                                                                                                                                                    |
 | `-q`                            | "quiet"モードを設定します。これにより、構成の解析中および起動中に一部のメッセージが無効になります。                                                                                                           |
-| `-c`                            | バインドを試みる前に、構成ファイルのチェックのみを実行して終了します。                                                                                                                             |
+| `-c`                            | バインドを試みる前に、設定ファイルのチェックのみを実行して終了します。                                                                                                                             |
 | `-n <limit>`                    | プロセスごとの接続制限を`<limit>`に制限します。                                                                                                                                    |
 | `-m <limit>`                    | すべてのプロセスにわたって割り当て可能なメモリのメモリを`<limit>`メガバイトに制限します。                                                                                                               |
 | `-N <limit>`                    | 組み込みのデフォルト値 (通常は 2000) ではなく、プロキシごとのデフォルトの maxconn を`<limit>`に設定します。                                                                                             |
@@ -206,7 +206,7 @@ listen tidb-cluster                        # Database load balancing.
 
 > **Note:**
 >
-> PROXY プロトコルを使用する前に、TiDBサーバーの構成ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)を構成する必要があります。
+> PROXY プロトコルを使用する前に、TiDBサーバーの設定ファイルで[`proxy-protocol.networks`](/tidb-configuration-file.md#networks)を構成する必要があります。
 
 ### HAProxyを起動する {#start-haproxy}
 

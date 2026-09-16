@@ -62,7 +62,7 @@ TiDB バージョン: 5.0.0
     >
     > 5.0 GA の`tidb_enable_clustered_index`の`INT_ONLY`値は、5.0 RC の`OFF`値と同じ意味です。 `OFF`設定の 5.0 RC クラスターから 5.0 GA にアップグレードすると、 `INT_ONLY`と表示されます。
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
 - TiDB の[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)設定項目を追加します。デフォルト値は`64`で、範囲は`[64,512]`です。MySQL テーブルは最大 64 個のインデックスをサポートします。この値がデフォルト設定を超え、テーブルに 64 個を超えるインデックスが作成された場合、テーブルスキーマが MySQL に再インポートされるとエラーが報告されます。
 - TiDB が MySQL の ENUM/SET の長さ (ENUM の長さ &lt; 255) と互換性があり、一貫性を保つように、 [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50)設定項目を追加します。デフォルト値は`true`です。

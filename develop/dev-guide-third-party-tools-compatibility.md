@@ -86,7 +86,7 @@ MySQL Connector/J の照合順序はクライアント側に保存され、サ�
 
 **回避方法**
 
-照合順序は手動で設定し、クライアント側の照合順序に依存しないでください。クライアント側のデフォルトの照合順序は、MySQL Connector/J 構成ファイルに保存されます。
+照合順序は手動で設定し、クライアント側の照合順序に依存しないでください。クライアント側のデフォルトの照合順序は、MySQL Connector/J 設定ファイルに保存されます。
 
 ### `NO_BACKSLASH_ESCAPES`パラメータは効果がありません {#the-no-backslash-escapes-parameter-does-not-take-effect}
 

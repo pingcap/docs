@@ -169,7 +169,7 @@ EXPLAIN ANALYZE SELECT * FROM t1 INNER JOIN t2 ON t1.id = t2.t1_id WHERE t1.int_
 
 ヒント[`INL_JOIN`](/optimizer-hints.md#inl_joint1_name--tl_name-)を使用したインデックス結合操作では、外部テーブルに結合する前に中間結果のハッシュテーブルが作成されます。TiDBは、ヒント[`INL_HASH_JOIN`](/optimizer-hints.md#inl_hash_join)を使用した外部テーブルへのハッシュテーブルの作成もサポートしています。これらのインデックス結合の各バリエーションは、SQLオプティマイザによって自動的に選択されます。
 
-### コンフィグレーション {#configuration}
+### 設定 {#configuration}
 
 インデックス結合のパフォーマンスは、次のシステム変数の影響を受けます。
 
@@ -245,7 +245,7 @@ Query OK, 0 rows affected (0.00 sec)
 5 rows in set (0.98 sec)
 ```
 
-### コンフィグレーション {#configuration}
+### 設定 {#configuration}
 
 ハッシュ結合のパフォーマンスは、次のシステム変数の影響を受けます。
 

@@ -21,9 +21,9 @@ MySQLエコシステムでは、gh-ostやpt-oscなどのツールが広く使用
 <SimpleTab>
 <div label="v2.0.5 and later">
 
-v2.0.5 以降のバージョンでは、 `task`構成ファイル内の`online-ddl`設定項目を使用する必要があります。
+v2.0.5 以降のバージョンでは、 `task`設定ファイル内の`online-ddl`設定項目を使用する必要があります。
 
-- アップストリーム MySQL/MariaDB (同時に) が gh-ost または pt-osc ツールを使用する場合は、タスク構成ファイルで`online-ddl`に`true`を設定します。
+- アップストリーム MySQL/MariaDB (同時に) が gh-ost または pt-osc ツールを使用する場合は、タスク設定ファイルで`online-ddl`に`true`を設定します。
 
 ```yml
 online-ddl: true
@@ -39,13 +39,13 @@ online-ddl: true
 
 v2.0.5 より前 (v2.0.5 を除く) では、 `task`設定ファイル内の`online-ddl-scheme`設定項目を使用する必要があります。
 
-- アップストリーム MySQL/MariaDB が gh-ost ツールを使用する場合は、タスク構成ファイルで設定します。
+- アップストリーム MySQL/MariaDB が gh-ost ツールを使用する場合は、タスク設定ファイルで設定します。
 
 ```yml
 online-ddl-scheme: "gh-ost"
 ```
 
-- アップストリーム MySQL/MariaDB が pt ツールを使用する場合は、タスク構成ファイルで設定します。
+- アップストリーム MySQL/MariaDB が pt ツールを使用する場合は、タスク設定ファイルで設定します。
 
 ```yml
 online-ddl-scheme: "pt"

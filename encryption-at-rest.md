@@ -68,7 +68,7 @@ TiKVは現在、 CTRモードでAES128、AES192、AES256、またはSM4（バー
 
 ### 暗号化を設定する {#configure-encryption}
 
-暗号化を有効にするには、TiKV および PD の構成ファイルに暗号化セクションを追加します。
+暗号化を有効にするには、TiKV および PD の設定ファイルに暗号化セクションを追加します。
 
 ```
 [security.encryption]
@@ -79,7 +79,7 @@ data-key-rotation-period = "168h" # 7 days
 - `data-encryption-method`は、暗号化アルゴリズムを指定します。指定可能な値は`"aes128-ctr"` 、 `"aes192-ctr"` 、 `"aes256-ctr"` 、 `"sm4-ctr"` （v6.3.0以降のバージョンのみ）、 `"plaintext"`です。デフォルト値は`"plaintext"`で、暗号化はデフォルトで無効になっています。
 
     - 新しい TiKV クラスターまたは既存の TiKV クラスターの場合、暗号化が有効になった後に書き込まれたデータのみが暗号化されることが保証されます。
-    - 暗号化を有効にした後に無効にするには、構成ファイルから`data-encryption-method`を削除するか、その値を`"plaintext"`に設定して、TiKV を再起動します。
+    - 暗号化を有効にした後に無効にするには、設定ファイルから`data-encryption-method`を削除するか、その値を`"plaintext"`に設定して、TiKV を再起動します。
     - 暗号化アルゴリズムを変更するには、値`data-encryption-method`をサポートされている暗号化アルゴリズムに置き換え、TiKVを再起動します。置き換え後、新しいデータが書き込まれると、以前の暗号化アルゴリズムで生成された暗号化ファイルが、新しい暗号化アルゴリズムで生成されたファイルに徐々に書き換えられます。
 
 - `data-key-rotation-period`は、TiKV がキーをローテーションする頻度を指定します。
@@ -198,7 +198,7 @@ Azure でキーを作成するには、 [Azure ポータルを使用して Azure
 
 **ステップ2. マスターキーを設定する**
 
-Azure KMS を使用してマスターキーを指定するには、TiKV 構成ファイルの`[security.encryption]`セクションの後に`[security.encryption.master-key]`構成を追加します。
+Azure KMS を使用してマスターキーを指定するには、TiKV 設定ファイルの`[security.encryption]`セクションの後に`[security.encryption.master-key]`構成を追加します。
 
 ```
 [security.encryption.master-key]
@@ -306,7 +306,7 @@ AWS でキーを作成するには、TiKV のキーを作成する手順を参�
 
 ### 暗号化を設定する {#configure-encryption}
 
-暗号化を有効にするには、 `tiflash-learner.toml`構成ファイルに暗号化セクションを追加します。
+暗号化を有効にするには、 `tiflash-learner.toml`設定ファイルに暗号化セクションを追加します。
 
 ```
 [security.encryption]
@@ -348,7 +348,7 @@ server_configs:
 
 上記の設定項目の意味は TiKV と同じです。
 
-ファイルに保存されているマスターキーを指定するには、 `tiflash-learner.toml`構成ファイルに次の構成を追加します。
+ファイルに保存されているマスターキーを指定するには、 `tiflash-learner.toml`設定ファイルに次の構成を追加します。
 
 ```
 [security.encryption.master-key]
@@ -371,7 +371,7 @@ server_configs:
 
 TiFlashのマスターキーをローテーションするには、TiKV のマスターキーをローテーションする手順に従ってください。現在、 TiFlash はオンラインでのマスターキーのローテーションもサポートしていません。そのため、ローテーションを有効にするにはTiFlashを再起動する必要があります。オンラインクエリを処理している稼働中のTiFlashクラスターに対して、ローリング再起動を実行することをお勧めします。
 
-KMS CMK をローテーションするには、 `tiflash-learner.toml`構成ファイルに次の内容を追加します。
+KMS CMK をローテーションするには、 `tiflash-learner.toml`設定ファイルに次の内容を追加します。
 
 ```
 [security.encryption.master-key]

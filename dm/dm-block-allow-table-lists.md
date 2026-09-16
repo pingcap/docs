@@ -9,7 +9,7 @@ TiDB Data Migration (DM) を使用してデータを移行する場合、ブロ�
 
 ## ブロックリストと許可リストを設定する {#configure-the-block-and-allow-lists}
 
-タスク構成ファイルに次の構成を追加します。
+タスク設定ファイルに次の構成を追加します。
 
 ```yaml
 block-allow-list:             # Use black-white-list if the DM version is earlier than or equal to v2.0.0-beta.2.

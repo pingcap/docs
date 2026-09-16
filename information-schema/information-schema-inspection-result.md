@@ -214,7 +214,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 - 以下の設定項目の値が期待どおりであるかどうかを確認します。
 
-    | コンポーネント   | コンフィグレーション項目       | しきい値      |
+    | コンポーネント   | 設定項目       | しきい値      |
     | ---- | ------------------ | -------- |
     | TiDB | log.slow-threshold | `0`より大きい |
 

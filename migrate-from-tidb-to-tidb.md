@@ -184,7 +184,7 @@ summary: ある TiDB クラスターから別の TiDB クラスターにデー�
     sync_diff_inspector -C ./config.yaml
     ```
 
-    sync-diff-inspector の設定方法の詳細については[コンフィグレーションファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、設定は以下のとおりです。
+    sync-diff-inspector の設定方法の詳細については[設定ファイルの説明](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description)を参照してください。このドキュメントでは、設定は以下のとおりです。
 
     ```shell
     # Diff Configuration.

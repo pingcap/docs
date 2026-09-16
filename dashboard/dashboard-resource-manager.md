@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Resource Manager Page
-summary: TiDB Dashboardのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタ容量を推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザからアクセスできます。このページには、構成、容量推定、およびメトリックのセクションがあります。容量推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
+summary: TiDB Dashboardのリソースマネージャページは、クラスタ管理者がリソースグループを作成し、クォータを設定することでリソース分離を実装するのに役立ちます。クラスタ容量を推定し、リソース消費量を監視するための方法を提供します。このページには、TiDB Dashboardまたはブラウザからアクセスできます。このページには、Configuration、Estimate Capacity、およびMetricsのセクションがあります。容量推定方法には、ハードウェアのデプロイと実際のワークロードが含まれます。監視メトリックには、消費されたRUの合計、リソースグループによる消費RU、TiDB CPUクォータと使用量、TiKV CPUクォータと使用量、TiKV IO MBpsが含まれます。
 ---
 
 # TiDB Dashboardリソースマネージャーページ {#tidb-dashboard-resource-manager-page}
@@ -23,16 +23,16 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 リソースマネージャー ページには、次の3つのセクションがあります。
 
-- コンフィグレーション: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
+- Configuration: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
-- 容量の見積もり：リソース計画を立てる前に、クラスター全体の容量を把握する必要があります。以下のいずれかの方法を使用できます。
+- Estimate Capacity：リソース計画を立てる前に、クラスター全体の容量を把握する必要があります。以下のいずれかの方法を使用できます。
 
     - [実際の作業負荷に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
     - [ハードウェアのデプロイに基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-- メトリクス: パネル上のメトリクスを観察することで、クラスターの現在の全体的なリソース消費状態を把握できます。
+- Metrics: パネル上のメトリクスを観察することで、クラスターの現在の全体的なリソース消費状態を把握できます。
 
-## 容量の見積もり {#estimate-capacity}
+## Estimate Capacity {#estimate-capacity}
 
 リソース計画を立てる前に、クラスター全体の容量を把握しておく必要があります。TiDBは、現在のクラスターの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru#what-is-request-unit-ru)の容量を見積もる2つの方法を提供しています。
 
@@ -61,13 +61,13 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
     - 時間枠内のワークロードが低すぎる場合、または`resource_manager_resource_unit`と`process_cpu_usage`監視データが欠落している場合は、エラーが報告されます`Error 1105 (HY000): The workload in selected time window is too low, with which TiDB is unable to reach a capacity estimation; please select another time window with higher workload, or calibrate resource by hardware instead`また、TiKVはmacOSのCPU使用率を監視しないため、実際のワークロードに基づく容量推定をサポートしておらず、このエラーも報告されます。
 
-    [メトリクス](#metrics)セクションの**CPU 使用率**を使用して適切な時間範囲を選択できます。
+    [Metrics](#metrics)セクションの**CPU 使用率**を使用して適切な時間範囲を選択できます。
 
 > **Note:**
 >
 > 容量推定機能を使用するには、現在のログインユーザーが権限`SUPER`または`RESOURCE_GROUP_ADMIN` 、および一部のシステムテーブルに対する権限`SELECT`持っている必要があります。この機能を使用する前に、現在のユーザーがこれらの権限を持っていることを確認してください。権限がない場合、一部の機能が正しく動作しない可能性があります。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#privileges)を参照してください。
 
-## メトリクス {#metrics}
+## Metrics {#metrics}
 
 パネル上のメトリクスを観察することで、クラスター全体の現在のリソース消費状況を把握できます。監視メトリクスとその意味は次のとおりです。
 

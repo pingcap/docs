@@ -59,13 +59,13 @@ Global Flags:
 
 ### 使用例 {#usage-example}
 
-次の`operate-source`コマンドを使用して、ソース構成ファイルを作成します。
+次の`operate-source`コマンドを使用して、ソース設定ファイルを作成します。
 
 ```bash
 operate-source create ./source.yaml
 ```
 
-`source.yaml`の設定については[アップストリームデータベースコンフィグレーションファイルの概要](/dm/dm-source-configuration-file.md)を参照してください。
+`source.yaml`の設定については[アップストリームデータベース設定ファイルの概要](/dm/dm-source-configuration-file.md)を参照してください。
 
 返される結果の例を次に示します。
 

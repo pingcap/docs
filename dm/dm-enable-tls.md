@@ -91,7 +91,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 1. アップストリームデータベースを設定し、暗号化サポートを有効にし、サーバー証明書を設定します。詳細な操作については、 [暗号化された接続の使用](https://dev.mysql.com/doc/refman/8.0/en/using-encrypted-connections.html)を参照してください。
 
-2. ソース構成ファイルで MySQL クライアント証明書を設定します。
+2. ソース設定ファイルで MySQL クライアント証明書を設定します。
 
     > **Note:**
     >
@@ -109,7 +109,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 1. 下流TiDBが暗号化接続を使用するように設定します。詳細な操作については、 [安全な接続を使用するように TiDBサーバーを構成する](/enable-tls-between-clients-and-servers.md#configure-tidb-server-to-use-secure-connections)を参照してください。
 
-2. タスク構成ファイルで TiDB クライアント証明書を設定します。
+2. タスク設定ファイルで TiDB クライアント証明書を設定します。
 
     > **Note:**
     >

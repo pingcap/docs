@@ -102,7 +102,7 @@ fCxfQ9XKCezSzuCD0Wf5dUD+LsKegSg=
 
 この暗号化された値を保存し、次の手順で MySQL データソースを作成するときに使用します。
 
-### ソース構成ファイルを編集する {#edit-the-source-configuration-file}
+### ソース設定ファイルを編集する {#edit-the-source-configuration-file}
 
 次の設定を`conf/source1.yaml`に書き込みます。
 

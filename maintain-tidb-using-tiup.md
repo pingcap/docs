@@ -63,7 +63,7 @@ tiup cluster display ${cluster-name}
 
 クラスタの稼働中にコンポーネントのパラメータを変更する必要がある場合は、コマンド`edit-config`を実行してください。詳細な手順は次のとおりです。
 
-1. クラスターの構成ファイルを編集モードで開きます。
+1. クラスターの設定ファイルを編集モードで開きます。
 
     ```bash
     tiup cluster edit-config ${cluster-name}

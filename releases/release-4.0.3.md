@@ -49,7 +49,7 @@ TiDB バージョン: 4.0.3
     - デフォルトで`tidb_allow_batch_cop`を有効にする[#18552](https://github.com/pingcap/tidb/pull/18552)
     - クエリのキャンセルを高速化[#18505](https://github.com/pingcap/tidb/pull/18505)
     - `tidb_decode_plan`の結果にヘッダーを追加 [#18501](https://github.com/pingcap/tidb/pull/18501)
-    - 構成チェッカーを以前のバージョンの構成ファイルと互換性のあるものにする [#18046](https://github.com/pingcap/tidb/pull/18046)
+    - 構成チェッカーを以前のバージョンの設定ファイルと互換性のあるものにする [#18046](https://github.com/pingcap/tidb/pull/18046)
     - 実行情報の収集をデフォルトで有効にする[#18518](https://github.com/pingcap/tidb/pull/18518)
     - システムテーブル`tiflash_tables`と`tiflash_segments`を追加する[#18536](https://github.com/pingcap/tidb/pull/18536)
     - `AUTO RANDOM`実験的機能から一般公開となり、リリースされました。改善点と互換性の変更点は以下の通りです。

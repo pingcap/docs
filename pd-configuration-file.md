@@ -1,9 +1,9 @@
 ---
 title: PD Configuration File
-summary: PD 構成ファイルについて学習します。
+summary: PD 設定ファイルについて学習します。
 ---
 
-# PDコンフィグレーションファイル {#pd-configuration-file}
+# PD設定ファイル {#pd-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 
@@ -127,7 +127,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ## pd-server {#pd-server}
 
-pd-server関連のコンフィグレーション項目
+pd-server関連の設定項目
 
 ### `server-memory-limit` <span class="version-mark">v6.6.0 の新機能</span> {#server-memory-limit-new-in-v660}
 
@@ -193,7 +193,7 @@ pd-server関連のコンフィグレーション項目
 
 ## security {#security}
 
-セキュリティ関連のコンフィグレーション項目
+セキュリティ関連の設定項目
 
 ### `cacert-path` {#cacert-path}
 
@@ -219,7 +219,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `log` {#log}
 
-ログ関連のコンフィグレーション項目
+ログ関連の設定項目
 
 ### `level` {#level}
 
@@ -240,7 +240,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `log.file` {#log-file}
 
-ログファイルに関連するコンフィグレーション項目
+ログファイルに関連する設定項目
 
 ### `max-size` {#max-size}
 
@@ -263,7 +263,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `metric` {#metric}
 
-監視に関連するコンフィグレーション項目
+監視に関連する設定項目
 
 ### `interval` {#interval}
 
@@ -272,13 +272,13 @@ pd-server関連のコンフィグレーション項目
 
 ## `schedule` {#schedule}
 
-スケジュールに関連するコンフィグレーション項目
+スケジュールに関連する設定項目
 
 > **Note:**
 >
 > `schedule`に関連するこれらの PD 設定項目を変更するには、クラスターのステータスに基づいて次のいずれかの方法を選択します。
 >
-> - 新しくデプロイするクラスターの場合は、PD 構成ファイルを直接変更できます。
+> - 新しくデプロイするクラスターの場合は、PD 設定ファイルを直接変更できます。
 > - 既存のクラスターの場合は、コマンドラインツール[PD Control](/pd-control.md)を使用して変更を加えてください。設定ファイル内の`schedule`に関連するPD設定項目を直接変更しても、既存のクラスターには反映されません。
 
 ### `max-merge-region-size` {#max-merge-region-size}
@@ -458,7 +458,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `replication` {#replication}
 
-レプリカに関連するコンフィグレーション項目
+レプリカに関連する設定項目
 
 ### `max-replicas` {#max-replicas}
 
@@ -490,7 +490,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `label-property` （非推奨） {#label-property-deprecated}
 
-ラベルに関連するコンフィグレーション項目`reject-leader`型のみをサポートします。
+ラベルに関連する設定項目`reject-leader`型のみをサポートします。
 
 > **Note:**
 >
@@ -508,7 +508,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `dashboard` {#dashboard}
 
-[TiDB Dashboard](/dashboard/dashboard-intro.md)内蔵 PD に関するコンフィグレーション項目です。
+[TiDB Dashboard](/dashboard/dashboard-intro.md)内蔵 PD に関する設定項目です。
 
 ### `disable-custom-prom-addr` {#disable-custom-prom-addr}
 
@@ -548,7 +548,7 @@ pd-server関連のコンフィグレーション項目
 
 ## `replication-mode` {#replication-mode}
 
-全リージョンのレプリケーションモードに関するコンフィグレーション項目です。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)ご覧ください。
+全リージョンのレプリケーションモードに関する設定項目です。詳細は[DR自動同期モードを有効にする](/two-data-centers-in-one-city-deployment.md#enable-the-dr-auto-sync-mode)ご覧ください。
 
 ## controller {#controller}
 

@@ -92,7 +92,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
     - `server.grpc-compression-type: gzip`を設定すると、TiKV での gRPC メッセージ圧縮が有効になり、ネットワークトラフィックが削減されます。
     - `raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`を設定して、リージョン 3 が選挙に参加するまでの時間を延長し、このリージョン内のレプリカがリーダーとして投票されるのを防ぎます。
 
-2. 上記の構成ファイルを使用してクラスターを作成します。
+2. 上記の設定ファイルを使用してクラスターを作成します。
 
     ```shell
     tiup cluster deploy drtest v6.4.0 ./topo.yaml

@@ -16,7 +16,7 @@ summary: SQL 式を使用して DML イベントをフィルター処理する�
 
 この問題に対処するため、DM v2.0.5以降では、増分データレプリケーションにおいて`binlog value filter`を使用したデータのフィルタリングをサポートしています。DM対応の`ROW`形式のbinlogでは、binlogイベントはすべての列の値を保持しており、これらの値に基づいてSQL式を設定できます。式で行の変更が`TRUE`と計算された場合、DMはこの行の変更を下流に複製しません。
 
-[Binlogイベントフィルター](/filter-binlog-event.md)と同様に、タスク設定ファイルで`binlog value filter`を設定する必要があります。詳細については、以下の設定例を参照してください。詳細なタスク設定と説明については、 [DM 高度なタスク構成ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
+[Binlogイベントフィルター](/filter-binlog-event.md)と同様に、タスク設定ファイルで`binlog value filter`を設定する必要があります。詳細については、以下の設定例を参照してください。詳細なタスク設定と説明については、 [DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)を参照してください。
 
 ```yaml
 name: test
@@ -54,7 +54,7 @@ MySQL [test]> select * from tbl;
 2 rows in set (0.001 sec)
 ```
 
-## コンフィグレーションパラメータと説明 {#configuration-parameters-and-description}
+## 設定パラメータと説明 {#configuration-parameters-and-description}
 
 - `schema` : 一致させる上流スキーマの名前。ワイルドカード一致や通常の一致はサポートされていません。
 - `table` : 照合するアップストリームテーブルの名前。ワイルドカードによる照合や通常の照合はサポートされていません。

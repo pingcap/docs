@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.3.0 Release Notes
-summary: 2022年9月30日にリリースされたTiDB 6.3.0-DMRでは、TiKVでのSM4アルゴリズムを使用した保存時の暗号化、TiDBでのSM3アルゴリズムを使用した認証、JSONデータ型と関数のサポートなど、新機能と改善点が導入されています。また、実行時間メトリクスをより細かい粒度で提供し、スローログと`TRACE`ステートメントの出力を強化し、TiDB Dashboardでデッドロック履歴情報をサポートします。さらに、TiDB v6.3.0では、新しいシステム変数と構成ファイルパラメータが導入され、さまざまなバグと問題が修正されています。このリリースには、TiKV、PD、 TiFlash、Backup & Restore (BR)、TiCDC、TiDB Binlog、TiDB Data Migration (DM)、およびTiDB Lightningの改善も含まれています。
+summary: 2022年9月30日にリリースされたTiDB 6.3.0-DMRでは、TiKVでのSM4アルゴリズムを使用した保存時の暗号化、TiDBでのSM3アルゴリズムを使用した認証、JSONデータ型と関数のサポートなど、新機能と改善点が導入されています。また、実行時間メトリクスをより細かい粒度で提供し、スローログと`TRACE`ステートメントの出力を強化し、TiDB Dashboardでデッドロック履歴情報をサポートします。さらに、TiDB v6.3.0では、新しいシステム変数と設定ファイルパラメータが導入され、さまざまなバグと問題が修正されています。このリリースには、TiKV、PD、 TiFlash、Backup & Restore (BR)、TiCDC、TiDB Binlog、TiDB Data Migration (DM)、およびTiDB Lightningの改善も含まれています。
 ---
 
 # TiDB 6.3.0 リリースノート {#tidb-6-3-0-release-notes}
@@ -189,7 +189,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - DM に新しい設定項目`safe-mode-duration`が追加されました [#6224](https://github.com/pingcap/tiflow/issues/6224) @[okJiang](https://github.com/okJiang)
 
-    この設定項目は、[タスク構成ファイル](/dm/task-configuration-file-full.md)ファイルに追加されます。DM が異常終了した後の自動セーフモードの継続時間を調整できます。デフォルト値は 60秒です。 `safe-mode-duration` `"0s"`に設定すると、DM が異常再起動後にセーフモードに入ろうとしたときにエラーが報告されます。
+    この設定項目は、[タスク設定ファイル](/dm/task-configuration-file-full.md)ファイルに追加されます。DM が異常終了した後の自動セーフモードの継続時間を調整できます。デフォルト値は 60秒です。 `safe-mode-duration` `"0s"`に設定すると、DM が異常再起動後にセーフモードに入ろうとしたときにエラーが報告されます。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -237,9 +237,9 @@ TiDBバージョン: 6.3.0-DMR
 | [`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)                                         | 新しく追加された | タイムスタンプの取得を最適化するために使用され、悲観的トランザクションのRC分離レベルにおいてポイント書き込み競合が少ないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバルタイムスタンプを取得する際に発生するレイテンシーとオーバーヘッドを回避できます。                                                                                 |
 | [`tiflash_fastscan`](/system-variables.md#tiflash_fastscan-new-in-v630)                                                     | 新しく追加された | FastScanを有効にするかどうかを制御します。FastScan[ファストスキャン](/tiflash/use-fastscan.md)が有効になっている場合（ `ON`に設定）、 TiFlashはより効率的なクエリパフォーマンスを提供しますが、クエリ結果の正確性やデータの一貫性は保証されません。                                                                                |
 
-### コンフィグレーションファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメータ {#configuration-file-parameters}
 
-| コンフィグレーションファイル | コンフィグレーション                                                                                            | 変更の種類  | 説明                                                                                                                                                                                                               |
+| 設定ファイル | 設定                                                                                            | 変更の種類  | 説明                                                                                                                                                                                                               |
 | -------------- | ----------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`temp-dir`](/tidb-configuration-file.md#temp-dir-new-in-v630)                                        | 新しく追加された | TiDB が一時データを格納するために使用するファイルシステム上の場所を指定します。機能が TiDB ノードでローカルストレージを必要とする場合、TiDB は対応する一時データをこの場所に格納します。デフォルト値は`/tmp/tidb`です。                                                                                      |
 | TiKV           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールのサイズを自動的に調整することで、TiKVの読み取りパフォーマンスが最適化されます。                                                                                               |

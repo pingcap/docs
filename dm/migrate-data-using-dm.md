@@ -13,7 +13,7 @@ summary: データ移行ツールを使用して、全データと増分デー�
 
 > **Note:**
 >
-> - すべての DM 構成ファイルのデータベース パスワードには、 `dmctl`で暗号化されたパスワードを使用することをお勧めします。データベースのパスワードが空の場合、暗号化する必要はありません。 [dmctlを使用してデータベースのパスワードを暗号化します](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
+> - すべての DM 設定ファイルのデータベース パスワードには、 `dmctl`で暗号化されたパスワードを使用することをお勧めします。データベースのパスワードが空の場合、暗号化する必要はありません。 [dmctlを使用してデータベースのパスワードを暗号化します](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 > - 上流および下流データベースのユーザーは、対応する読み取り権限と書き込み権限を持っている必要があります。
 
 ## ステップ2：クラスタ情報を確認する {#step-2-check-the-cluster-information}
@@ -68,7 +68,7 @@ MySQL ホストで必要な権限のリストは[事前チェック](/dm/dm-prec
 
 次の例では、上流の MySQL-1 および MySQL-2 インスタンスの`test_table`データベースにある`test_db`テーブルのすべてのデータを、TiDB の`test_table`データベースにある下流の`test_db`テーブルに、フルデータと増分データの両方のモードで移行する必要があることを想定しています。
 
-`task.yaml`タスク構成ファイルを以下のように編集します。
+`task.yaml`タスク設定ファイルを以下のように編集します。
 
 ```yaml
 # The task name. You need to use a different name for each of the multiple tasks that
@@ -127,7 +127,7 @@ mydumpers:
 >
 > データ移行タスクを初めて開始する前に、アップストリームの設定を完了しておく必要があります。設定が完了していない場合、タスクの開始時にエラーが発生します。
 
-データ移行タスクを開始するには、 `tiup dmctl`コマンドを実行してください。 `task.yaml`は、上記で編集した構成ファイルです。
+データ移行タスクを開始するには、 `tiup dmctl`コマンドを実行してください。 `task.yaml`は、上記で編集した設定ファイルです。
 
 ```bash
 tiup dmctl --master-addr 172.16.10.71:8261 start-task ./task.yaml

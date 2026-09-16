@@ -305,7 +305,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 ソースMySQLデータベースを準備したら、TiDB DMをそのデータベースに接続するための設定を行います。そのためには、接続の詳細を含むソース設定ファイルを作成し、 `dmctl`ツールを使用して設定を適用します。
 
-1. ソース構成ファイル`mysql-01.yaml`を作成します。
+1. ソース設定ファイル`mysql-01.yaml`を作成します。
 
     > **Note:**
     >
@@ -330,7 +330,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 ソースデータベースを設定したら、TiDB DM で移行タスクを作成できます。このタスクは、ソース MySQL インスタンスを参照し、ターゲット TiDB データベースへの接続詳細を定義します。
 
-1. DMタスク構成ファイル`tiup-playground-task.yaml`を作成します。
+1. DMタスク設定ファイル`tiup-playground-task.yaml`を作成します。
 
     ```yaml
     # Task
@@ -349,7 +349,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
       password: ""                # If the password is not empty, it is recommended to use a password encrypted with dmctl.
     ```
 
-2. 構成ファイルを使用してタスクを開始します。
+2. 設定ファイルを使用してタスクを開始します。
 
     ```shell
     tiup dmctl --master-addr 127.0.0.1:8261 start-task tiup-playground-task.yaml
@@ -461,7 +461,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     </SimpleTab>
 
-3. TiDB DM 構成ファイルが不要になった場合は削除します。
+3. TiDB DM 設定ファイルが不要になった場合は削除します。
 
     ```shell
     rm mysql-01.yaml tiup-playground-task.yaml

@@ -91,7 +91,7 @@ Usage of dm-master:
 >
 > 一部の設定がコマンドラインから参照できないため、上記の方法でDM-masterを設定できない場合があります。そのような場合は、代わりに設定ファイルを使用してください。
 
-#### DM-master構成ファイル {#dm-master-configuration-file}
+#### DM-master設定ファイル {#dm-master-configuration-file}
 
 以下はDM-masterの設定ファイルです。この方法でDM-masterを設定することをお勧めします。
 
@@ -166,7 +166,7 @@ Usage of worker:
 >
 > 一部の設定がコマンドラインから参照できないため、上記の方法でDM-workerを設定できない場合があります。そのような場合は、代わりに設定ファイルを使用してください。
 
-#### DM-worker構成ファイル {#dm-worker-configuration-file}
+#### DM-worker設定ファイル {#dm-worker-configuration-file}
 
 以下はDM-workerの設定ファイルです。この方法でDM-workerを設定することをお勧めします。
 
