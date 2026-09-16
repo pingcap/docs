@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 3.0.0
     - ウィンドウ関数をサポート。`NTILE` 、 `LEAD` 、 `LAG` 、 `PERCENT_RANK` 、 `NTH_VALUE` 、 `CUME_DIST` 、 `FIRST_VALUE` 、 `LAST_VALUE` 、 `RANK` 、 `DENSE_RANK` 、 `ROW_NUMBER`を含む、MySQL 8.0のすべてのウィンドウ関数と互換性があります
     - ビューのサポート（**Experimental**）
     - テーブルパーティションの改善
-        - 範囲パーティションをサポート
+        - レンジパーティションをサポート
         - ハッシュパーティションをサポート
     - IP ホワイトリスト (**Enterprise**) や監査ログ (**Enterprise**) などのプラグインをサポートするプラグインフレームワークを追加します。
     - クエリの安定性を確保するために SQL 実行プランバインディングを作成する SQL プラン管理機能をサポートします (**Experimental**)

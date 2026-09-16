@@ -37,7 +37,7 @@ TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアント�
 
 - [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認します。
 
-    - レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
+    - レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスの設定](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
     - レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
@@ -52,7 +52,7 @@ TiDB Cloud Starter またはTiDB Cloud Essential の場合、クライアント�
 
 - [パブリックエンドポイント経由でTiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-via-standard-connection-serverless.md)場合、次のいずれかを実行して、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認します。
 
-    - レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
+    - レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスの設定](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
     - レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
@@ -68,7 +68,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリックエンド�
 
 - [パブリックエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する](/tidb-cloud/connect-via-standard-connection.md)については、DMS レプリケーションインスタンスがインターネットにアクセスできることを確認するために、次のいずれかを実行します。さらに、レプリケーションインスタンスまたは NAT ゲートウェイのパブリック IP アドレスをクラスターの[IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)に追加する必要があります。
 
-    - レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスのコンフィグレーション](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
+    - レプリケーションインスタンスをパブリックサブネットにデプロイし、 **Public accessible**を有効にします。詳細については、 [インターネットアクセスの設定](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html#vpc-igw-internet-access)を参照してください。
 
     - レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 

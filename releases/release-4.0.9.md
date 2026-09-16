@@ -134,7 +134,7 @@ TiDB バージョン: 4.0.9
     - インデックスハッシュ結合とインデックスマージ結合が照合順序考慮しないバグを修正しました [#21219](https://github.com/pingcap/tidb/pull/21219)
     - パーティションテーブルが構文`CREATE TABLE`と`SELECT`照合順序を考慮しないバグを修正[#21181](https://github.com/pingcap/tidb/pull/21181)
     - `slow_query`のクエリ結果で一部の行が欠落する可能性がある問題を修正[#21211](https://github.com/pingcap/tidb/pull/21211)
-    - データベース名が純粋な下位表現でない場合、データが正しく削除れない可能性がある問題を修正しました`DELETE` [#21206](https://github.com/pingcap/tidb/pull/21206)
+    - データベース名が純粋な小文字表記でない場合、`DELETE`がデータを正しく削除できない可能性がある問題を修正しました [#21206](https://github.com/pingcap/tidb/pull/21206)
     - DML操作後にスキーマ変更を引き起こすバグを修正[#21050](https://github.com/pingcap/tidb/pull/21050)
     - 結合を使用するときに結合された列をクエリできないバグを修正しました [#21021](https://github.com/pingcap/tidb/pull/21021)
     - 一部のセミ結合クエリの誤った結果を修正[#21019](https://github.com/pingcap/tidb/pull/21019)

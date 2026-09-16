@@ -9,7 +9,7 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 
 > **Note:**
 >
-> - MySQLは、誤った形式の日付と時刻の値を受け入れることがよくあります。例えば、 `'2020-01-01\n\t01:01:01'`と`'2020-01_01\n\t01:01'`有効な日付と時刻の値として扱われます。
+> - MySQLは、誤った形式の日付と時刻の値を受け入れることがよくあります。例えば、 `'2020-01-01\n\t01:01:01'`と`'2020-01_01\n\t01:01'`は有効な日付と時刻の値として扱われます。
 > - TiDBはMySQLの動作に最大限合わせようとしますが、必ずしもすべてのインスタンスで一致するとは限りません。日付を正しくフォーマットすることをお勧めします。誤ったフォーマットの値に対する意図された動作は文書化されておらず、一貫性がないことがよくあります。
 
 **日付/時刻関数:**
@@ -35,7 +35,7 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 | [`DAYOFWEEK()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_dayofweek)                                       | 引数の曜日インデックスを返す                                     |
 | [`DAYOFYEAR()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_dayofyear)                                       | 年内の通算日数（1～366）を返します                                |
 | [`EXTRACT()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_extract)                                           | 日付の一部を抽出する                                         |
-| [`FROM_DAYS()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_from-days)                                       | 曜日番号を日付に変換する                                       |
+| [`FROM_DAYS()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_from-days)                                       | 日数を日付に変換する                                       |
 | [`FROM_UNIXTIME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_from-unixtime)                               | Unixタイムスタンプを日付としてフォーマットする                          |
 | [`GET_FORMAT()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_get-format)                                     | 日付形式の文字列を返す                                        |
 | [`HOUR()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_hour)                                                 | 時間を抽出                                              |
@@ -46,10 +46,10 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 | [`MAKETIME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_maketime)                                         | 時、分、秒から時間を作成する                                     |
 | [`MICROSECOND()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_microsecond)                                   | 引数からマイクロ秒を返す                                       |
 | [`MINUTE()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_minute)                                             | 引数から分を返す                                           |
-| [`MONTH()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_month)                                               | 経過日から月を返す                                          |
+| [`MONTH()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_month)                                               | 渡された日付から月を返す                                          |
 | [`MONTHNAME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_monthname)                                       | 月の名前を返す                                            |
 | [`NOW()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)                                                   | 現在の日付と時刻を返す                                        |
-| [`PERIOD_ADD()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_period-add)                                     | 年月にピリオドを追加する                                       |
+| [`PERIOD_ADD()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_period-add)                                     | 年月に期間を追加する                                       |
 | [`PERIOD_DIFF()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_period-diff)                                   | 2つの期間間の月数を返す                                          |
 | [`QUARTER()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_quarter)                                           | 日付引数から四半期を返す                                       |
 | [`SEC_TO_TIME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_sec-to-time)                                   | 秒を'HH:MM:SS'形式に変換します                               |
@@ -77,11 +77,11 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 | [`YEAR()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_year)                                                 | 年を返す                                               |
 | [`YEARWEEK()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_yearweek)                                         | 年と週を返す                                             |
 
-詳細は[日付と時刻関数](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)参照。
+詳細は[日付と時刻関数](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html)を参照。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-関数`STR_TO_DATE()` TiDBでサポートされていますが、すべての日付と時刻の値を解析できるわけではありません。また、以下の日付と時刻のフォーマットオプションは**実装されていません**。
+関数`STR_TO_DATE()`はTiDBでサポートされていますが、すべての日付と時刻の値を解析できるわけではありません。また、以下の日付と時刻のフォーマットオプションは**実装されていません**。
 
 | 形式             | 説明                                                 |
 | -------------- | -------------------------------------------------- |
@@ -96,7 +96,7 @@ TiDB は、MySQL 8.0 で利用可能な[日付と時刻関数](https://dev.mysql
 | "%X"           | 日曜日を週の最初の日とする週の年を 4 桁の数字で表します。                     |
 | "%x" | 週の年。月曜日を週の最初の日とする、数字 4 桁。                          |
 
-詳細は[問題 #30082](https://github.com/pingcap/tidb/issues/30082)ご覧ください。
+詳細は[問題 #30082](https://github.com/pingcap/tidb/issues/30082)をご覧ください。
 
 ## 関連するシステム変数 {#related-system-variables}
 

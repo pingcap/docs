@@ -1,13 +1,13 @@
 ---
 title: TiFlash Spill to Disk
-summary: TiFlash がデータをディスクに書き出す方法と、書き出し動作をカスタマイズする方法について説明します。
+summary: TiFlash がデータをディスクにスピルする方法と、スピル動作をカスタマイズする方法について説明します。
 ---
 
-# TiFlashディスクへの書き込み {#tiflash-spill-to-disk}
+# TiFlashのディスクへのスピル {#tiflash-spill-to-disk}
 
-このドキュメントでは、 TiFlash が計算中にデータをディスクに書き出す方法について説明します。
+このドキュメントでは、 TiFlash が計算中にデータをディスクにスピルする方法について説明します。
 
-バージョン7.0.0以降、 TiFlashはメモリ負荷を軽減するために中間データをディスクに書き出す機能をサポートしています。以下のオペレーターがサポートされています。
+バージョン7.0.0以降、 TiFlashはメモリ負荷を軽減するために中間データをディスクにスピルする機能をサポートしています。以下のオペレーターがサポートされています。
 
 - 等価結合条件を持つハッシュ結合オペレーター
 - `GROUP BY`キーを持つハッシュ集計オペレーター
@@ -83,9 +83,9 @@ TiFlash は、データをディスクに書き出すための 2つのトリガ�
 TiFlash v7.4.0以降、クエリレベルでの自動スピルをサポートしています。この機能は、以下のシステム変数を使用して制御できます。
 
 - [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740) : TiFlashノードでのクエリの最大メモリ使用量を制限します。
-- [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) : データの流出をトリガーするメモリ比率を制御します。
+- [`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740) : データのスピルをトリガーするメモリ比率を制御します。
 
-`tiflash_mem_quota_query_per_node`と`tiflash_query_spill_ratio`両方が 0 より大きい値に設定されている場合、クエリのメモリ使用量が`tiflash_mem_quota_query_per_node * tiflash_query_spill_ratio`超えると、 TiFlash はクエリでサポートされているオペレーターのスピルを自動的にトリガーします。
+`tiflash_mem_quota_query_per_node`と`tiflash_query_spill_ratio`の両方が 0 より大きい値に設定されている場合、クエリのメモリ使用量が`tiflash_mem_quota_query_per_node * tiflash_query_spill_ratio`超えると、 TiFlash はクエリでサポートされているオペレーターのスピルを自動的にトリガーします。
 
 #### 例 {#example}
 
@@ -134,7 +134,7 @@ TiFlash v7.4.0以降、クエリレベルでの自動スピルをサポートし
     HAVING SUM(l_quantity) > 314;
     ```
 
-5. TiFlashのログから、クエリレベルのスピルを構成すると、 TiFlash中間結果のスピルがトリガーされ、クエリで使用されるメモリが大幅に削減されることがわかります。
+5. TiFlashのログから、クエリレベルのスピルを構成すると、 TiFlashが中間結果のスピルがトリガーされ、クエリで使用されるメモリが大幅に削減されることがわかります。
 
     ```
     [DEBUG] [MemoryTracker.cpp:101] ["Peak memory usage (for query): 3.94 GiB."] [source=MemoryTracker] [thread_id=1547]
@@ -142,15 +142,15 @@ TiFlash v7.4.0以降、クエリレベルでの自動スピルをサポートし
 
 ## 注記 {#notes}
 
-- ハッシュ集計オペレーターに`GROUP BY`キーがない場合、スピルはサポートされません。ハッシュ集計オペレーターに独自の集計関数が含まれている場合でも、スピルはサポートされません。
+- ハッシュ集計オペレーターに`GROUP BY`キーがない場合、スピルはサポートされません。ハッシュ集計オペレーターにDISTINCT集計関数が含まれている場合でも、スピルはサポートされません。
 - 現在、オペレーターレベルのスピルのしきい値は各オペレーターごとに個別に計算されます。2つのハッシュ集計オペレーターを含むクエリの場合、クエリレベルのスピルが設定されておらず、集計オペレーターのしきい値が10 GiBに設定されている場合、2つのハッシュ集計オペレーターは、それぞれのメモリ使用量が10 GiBを超えた場合にのみデータをスピルします。
 - 現在、ハッシュ集計オペレーターとTopN/Sortオペレーターは、リストアフェーズでマージ集計アルゴリズムとマージソートアルゴリズムを使用しています。そのため、これら2つのオペレーターはスピルを1ラウンドのみトリガーします。メモリ需要が非常に高く、リストアフェーズ中のメモリ使用量が依然としてしきい値を超えている場合、スピルは再度トリガーされません。
 - 現在、ハッシュ結合オペレーターはパーティションベースのスピル戦略を使用しています。リストアフェーズ中のメモリ使用量が依然としてしきい値を超える場合、スピルは再度トリガーされます。ただし、スピルの規模を制御するため、スピルの回数は3回に制限されています。3回目のスピル後もリストアフェーズ中のメモリ使用量が依然としてしきい値を超える場合、スピルは再度トリガーされません。
-- クエリレベルのスピルが設定されている場合 (つまり、 [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)と[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)両方が 0 より大きい場合)、 TiFlash は個々のオペレーターのスピルしきい値を無視し、クエリレベルのスピルしきい値に基づいてクエリ内の関連するオペレーターのスピルを自動的にトリガーします。
+- クエリレベルのスピルが設定されている場合 (つまり、 [`tiflash_mem_quota_query_per_node`](/system-variables.md#tiflash_mem_quota_query_per_node-new-in-v740)と[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)の両方が 0 より大きい場合)、 TiFlash は個々のオペレーターのスピルしきい値を無視し、クエリレベルのスピルしきい値に基づいてクエリ内の関連するオペレーターのスピルを自動的にトリガーします。
 - クエリレベルのスピルが設定されている場合でも、クエリで使用されるオペレーターがスピルをサポートしていない場合、そのクエリの中間計算結果はディスクにスピルできません。この場合、そのクエリのメモリ使用量が関連するしきい値を超えると、 TiFlashはエラーを返し、クエリを終了します。
 - クエリレベルのスピルが構成されていて、クエリにスピルをサポートするオペレーターが含まれている場合でも、次のいずれかのシナリオでメモリしきい値を超えたためにクエリからエラーが返される可能性があります。
 
     - クエリ内のその他の非スピルオペレーターはメモリを大量に消費します。
     - スピルオペレーターは、タイムリーにディスクにスピルしません。
 
-    スピルオペレーターが時間内にディスクにスピルしない状況に対処するには、メモリしきい値エラーを回避するために[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)減らすことを試してください。
+    スピルオペレーターが時間内にディスクにスピルしない状況に対処するには、メモリしきい値エラーを回避するために[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)を減らすことを試してください。

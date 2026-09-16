@@ -162,4 +162,4 @@ SHOW CONFIG WHERE Type='tikv' AND Name LIKE 'in-memory-engine\.%';
 
 ### TiKV MVCCのインメモリエンジンを監視するにはどうすればよいですか？ {#how-can-i-monitor-the-tikv-mvcc-in-memory-engine}
 
-Grafanaの**TiKV-Details**ダッシュボードのセクション[**インメモリエンジン**](/grafana-tikv-dashboard.md#in-memory-engine)を確認してください。
+Grafanaの**TiKV-Details**ダッシュボードのセクション[**In Memory Engine**](/grafana-tikv-dashboard.md#in-memory-engine)を確認してください。

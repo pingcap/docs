@@ -39,7 +39,7 @@ TiDB バージョン: 6.5.8
     - ヒストグラムの境界に`NULL` が含まれている場合、ヒストグラム統計が読み取り可能な文字列に解析されない可能性がある問題を修正しました。 [#49823](https://github.com/pingcap/tidb/issues/49823) @[AilinKid](https://github.com/AilinKid)
     - `REPLACE INTO`文でヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
     - `STREAM_AGG()` CI を誤って処理したためにクエリ結果が正しくない問題を修正しました [#49902](https://github.com/pingcap/tidb/issues/49902) @[wshwsh12](https://github.com/wshwsh12)
-    - 誤ったパーティションプルーニングが原因で、範囲パーティションテーブルのクエリ結果が間違っている場合がある問題を修正しました。 [#50082](https://github.com/pingcap/tidb/issues/50082) @[Defined2014](https://github.com/Defined2014)
+    - 誤ったパーティションプルーニングが原因で、レンジパーティションテーブルのクエリ結果が間違っている場合がある問題を修正しました。 [#50082](https://github.com/pingcap/tidb/issues/50082) @[Defined2014](https://github.com/Defined2014)
     - `AUTO_ID_CACHE=1` のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。 [#50519](https://github.com/pingcap/tidb/issues/50519) @[tiancaiamao](https://github.com/tiancaiamao)
     - 多数のテーブルまたはパーティションを処理するときに TiDB ノードが OOM エラーに遭遇する可能性がある問題を軽減します。 [#50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
     - DDL所有者がネットワークから分離されている後に`ADD INDEX`を実行すると、TiDB分散実行フレームワーク（DXF）でデータが不整合になる問題を修正しました [#49773](https://github.com/pingcap/tidb/issues/49773) @[tangenta](https://github.com/tangenta)
