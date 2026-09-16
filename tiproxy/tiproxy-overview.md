@@ -96,7 +96,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
 ## インストールと使用方法 {#installation-and-usage}
 
-このセクションでは、 TiUPを使用して TiProxy をデプロイおよび変更する方法について説明します。TiProxy をスケールアウトすることで、 [TiProxyを使用して新しいクラスターを作成します](#create-a-cluster-with-tiproxy)または[既存のクラスターで TiProxy を有効にする](#enable-tiproxy-for-an-existing-cluster)のいずれかを選択できます。
+このセクションでは、 TiUPを使用して TiProxy をデプロイおよび変更する方法について説明します。 [TiProxyを使用して新しいクラスターを作成する](#create-a-cluster-with-tiproxy)か、TiProxyをスケールアウトすることで[既存のクラスターで TiProxy を有効にする](#enable-tiproxy-for-an-existing-cluster)かのいずれかを選択できます。
 
 > **Note:**
 >
@@ -290,7 +290,7 @@ TiProxyは、以下のシナリオでは接続を移行できないため、ク�
 - セッションは[ローカル一時テーブル](/temporary-tables.md#local-temporary-tables)を作成します。
 - このセッションでは[ユーザーレベルのロック](/functions-and-operators/locking-functions.md)が行われます。
 - このセッションでは[テーブルロック](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)が行われます。
-- セッションでエラーコード[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)が作成され、プリペアドステートメントが無効になります。たとえば、プリペアドステートメントに関連付けられたテーブルが、プリペアドステートメントの作成後に削除された場合などです。
+- セッションは[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)を作成しますが、そのプリペアドステートメントが無効です。たとえば、プリペアドステートメントに関連付けられたテーブルが、プリペアドステートメントの作成後に削除された場合などです。
 - セッションはセッションレベル[実行計画のバインディング](/sql-plan-management.md#sql-binding)を作成しますが、バインディングが無効です。たとえば、バインディングに関連付けられたテーブルは、バインディングが作成された後で削除されます。
 - セッションが作成された後、そのセッションで使用されているユーザーが削除されるか、ユーザー名が変更されます。
 
@@ -302,10 +302,10 @@ TiProxyでは、クライアントが使用するコネクタが[認証プラグ
 
 | 言語         | コネクタ              | サポートされている最小バージョン |
 | ---------- | ----------------- | ---------------- |
-| Java       | MySQL Connector/J | 2019年5月1日        |
+| Java       | MySQL Connector/J | 5.1.19            |
 | C          | libmysqlclient    | 5.5.7            |
-| 行く         | Go SQLDriver      | 1.4.0            |
-| JavaScript | MySQLコネクタ/Node.js | 1.0.2            |
+| Go         | Go SQLDriver      | 1.4.0            |
+| JavaScript | MySQL Connector/Node.js | 1.0.2            |
 | JavaScript | mysqljs/mysql     | 2.15.0           |
 | JavaScript | node-mysql2       | 1.0.0-rc-6       |
 | PHP        | mysqlnd           | 5.4              |

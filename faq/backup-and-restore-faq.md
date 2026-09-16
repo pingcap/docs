@@ -148,17 +148,17 @@ v6.0.0より前では、 BRは[配置ルール](/placement-rules-in-sql.md)サ�
 
 たとえば、 `samba`で構築されたネットワーク ディスクにデータをバックアップするときに、 `Code: 22(invalid argument)`エラーが発生する可能性があります。
 
-### 復元中に`rpc error: code = Unavailable desc =...` error occurred in restore?」を処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-rpc-error-code--unavailable-desc--error-occurred-in-restore}
+### 復元中に発生した`rpc error: code = Unavailable desc =...`エラーを処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-rpc-error-code--unavailable-desc--error-occurred-in-restore}
 
 このエラーは、復元するクラスターの容量が不足している場合に発生する可能性があります。このクラスターの監視メトリックまたはTiKVログを確認することで、原因をさらに確認できます。
 
 この問題に対処するには、クラスター リソースをスケールアウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
 
-### `the entry too large, the max entry size is 6291456, the size of data is 7690800` 」というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいでしょうか。 {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
+### `the entry too large, the max entry size is 6291456, the size of data is 7690800`というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいでしょうか。 {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
 
-`--ddl-batch-size` ～ `128`またはそれより小さい値を設定することで、バッチで作成されるテーブルの数を減らすことができます。
+`--ddl-batch-size`を`128`またはそれより小さい値に設定することで、バッチで作成されるテーブルの数を減らすことができます。
 
-BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップデータを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブキューに書き込みます。このとき、ジョブ メッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブルスキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマ サイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
+BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップデータを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブキューに書き込みます。このとき、ジョブ メッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブルスキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`を過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマ サイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
 
 ### `local`ストレージを使用する場合、バックアップされたファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-local-storage}
 
@@ -172,7 +172,7 @@ BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-cre
 
 データを復元する場合、各ノードは**すべての**バックアップファイル（SSTファイル）にアクセスできる必要があります。デフォルトでは、ストレージを`local`を使用している場合、バックアップファイルが複数のノードに分散しているため、データを復元できません。そのため、各TiKVノードのバックアップファイルを他のTiKVノードにコピーする必要があります。**バックアップデータは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはNFSに保存することをお勧めします**。
 
-### ルートを使用して`br`を実行しようとしたがうまくいかなかった場合、「 `Permission denied` 」または`No such file or directory` 」というエラーを処理するにはどうすればよいでしょうか? {#what-should-i-do-to-handle-the-permission-denied-or-no-such-file-or-directory-error-even-if-i-have-tried-to-run-br-using-root-in-vain}
+### ルートを使用して`br`を実行しようとしたがうまくいかなかった場合、 `Permission denied`または`No such file or directory`というエラーを処理するにはどうすればよいでしょうか? {#what-should-i-do-to-handle-the-permission-denied-or-no-such-file-or-directory-error-even-if-i-have-tried-to-run-br-using-root-in-vain}
 
 TiKVがバックアップディレクトリにアクセスできるかどうかを確認する必要があります。データをバックアップするには、TiKVに書き込み権限があるかどうかを確認してください。データを復元するには、TiKVに読み取り権限があるかどうかを確認してください。
 
@@ -311,7 +311,7 @@ v4.0.9では、 BRはデフォルトで統計情報をバックアップしま�
 
 ## 回復プロセスが中断された場合、すでに回復されたデータを削除して、回復を再度開始する必要がありますか? {#if-the-recovery-process-is-interrupted-is-it-necessary-to-delete-the-already-recovered-data-and-start-the-recovery-again}
 
-いいえ、必要ありません。BR以降では、ブレークポイントからのデータの再開をサポートしています。予期せぬ状況でリカバリが中断された場合は、リカバリタスクを再開するだけで、中断したところから再開されます。
+いいえ、必要ありません。v7.1.0以降のBRでは、ブレークポイントからのデータの再開をサポートしています。予期せぬ状況でリカバリが中断された場合は、リカバリタスクを再開するだけで、中断したところから再開されます。
 
 ## リカバリが完了したら、特定のテーブルを削除して再度リカバリできますか? {#after-the-recovery-is-complete-can-i-delete-a-specific-table-and-then-recover-it-again}
 

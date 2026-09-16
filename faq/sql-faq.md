@@ -58,7 +58,7 @@ DROP GLOBAL BINDING for
 
 ## TiDB と互換性のある MySQL 変数は何ですか? {#what-are-the-mysql-variables-that-tidb-is-compatible-with}
 
-[システム変数](/system-variables.md)参照。
+[システム変数](/system-variables.md)を参照してください。
 
 ## `ORDER BY`を省略した場合、結果の順序はMySQLと異なります。 {#the-order-of-results-is-different-from-mysql-when-order-by-is-omitted}
 
@@ -128,9 +128,9 @@ TiDB では、システム変数[`tidb_enable_ordered_result_mode`](/system-vari
 
 はい。悲観的ロック（TiDB v3.0.8以降のデフォルト）を使用する場合、 `SELECT FOR UPDATE`実行はMySQLと同様に動作します。
 
-楽観的ロックを使用する場合、トランザクションの開始時にはデータをロックしませ`SELECT FOR UPDATE`が、トランザクションのコミット時に競合をチェックします。チェックで競合が見つかった場合、コミットしたトランザクションはロールバックされます。
+楽観的ロックを使用する場合、 `SELECT FOR UPDATE`はトランザクションの開始時にはデータをロックしませんが、トランザクションのコミット時に競合をチェックします。競合が見つかった場合、トランザクションはロールバックされます。
 
-詳細は[`SELECT`構文要素の説明](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements)参照。
+詳細は[`SELECT`構文要素の説明](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements)を参照してください。
 
 ## TiDBのコーデックはUTF-8文字列がmemcomparableであることを保証できますか？キーがUTF-8をサポートする必要がある場合、コーディングに関する提案はありますか？ {#can-the-codec-of-tidb-guarantee-that-the-utf-8-string-is-memcomparable-is-there-any-coding-suggestion-if-our-key-needs-to-support-utf-8}
 
@@ -153,7 +153,7 @@ TiDB は、SESSION または GLOBAL ベースで[`sql_mode`](/system-variables.m
 - [`GLOBAL`](/sql-statements/sql-statement-set-variable.md)スコープの変数への変更は、クラスター内の残りのサーバーに伝播し、再起動後も保持されます。つまり、各 TiDBサーバーで`sql_mode`値を変更する必要はありません。
 - `SESSION`スコープ変数への変更は、現在のクライアントセッションにのみ影響します。サーバーを再起動すると、変更は失われます。
 
-## エラー: `java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation` {#error-javasqlbatchupdateexceptionstatement-count-5001-exceeds-the-transaction-limitation-while-using-sqoop-to-write-data-into-tidb-in-batches}
+## エラー: Sqoop を使用して TiDB にデータを`batches`で書き込むときに`java.sql.BatchUpdateException:statement count 5001 exceeds the transaction limitation` {#error-javasqlbatchupdateexceptionstatement-count-5001-exceeds-the-transaction-limitation-while-using-sqoop-to-write-data-into-tidb-in-batches}
 
 Sqoopでは、 `--batch`各バッチで100文をコミットすることを意味しますが、デフォルトでは各文に100個のSQL文が含まれます。つまり、100 * 100 = 10000のSQL文となり、単一のTiDBトランザクションで許可される文の最大数である5000を超えてしまいます。
 
@@ -252,7 +252,7 @@ DDL操作がブロックされておらず、各TiDBサーバーがスキーマ�
 | DDL操作タイプ                                                                                                                                                   | 推定所要時間                            |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- |
 | 再編成DDL（ `ADD INDEX`など`MODIFY COLUMN` （再編成タイプのデータ変更）                                                                                                        | データ量、システム負荷、DDL パラメータ設定によって異なります。 |
-| `ALTER TABLE ADD`的なDDL `DROP DATABASE` `TRUNCATE TABLE` `CREATE TABLE` `CREATE DATABASE` `ALTER TABLE DROP` `DROP TABLE`のみ変更） `DROP INDEX` `MODIFY COLUMN` | 約1秒                               |
+| 一般DDL（Reorg以外のDDLタイプ）（ `CREATE DATABASE`、 `CREATE TABLE`、 `DROP DATABASE`、 `DROP TABLE`、 `TRUNCATE TABLE`、 `ALTER TABLE ADD`、 `ALTER TABLE DROP`、 `MODIFY COLUMN` （メタデータのみ変更）、 `DROP INDEX`など） | 約1秒                               |
 
 > **Note:**
 >
@@ -291,11 +291,11 @@ v6.4.0 以降、TiDB は[メタデータロックメカニズム](/metadata-lock
 
 > **Note:**
 >
-> - 現在、TiDB はバージョン`schema`の変更をすべてキャッシュするわけではありません。
+> - 現在、TiDB は`schema`バージョンの変更をすべてキャッシュするわけではありません。
 > - 各 DDL 操作では、 `schema`バージョンの変更の数は、対応する`schema state`バージョンの変更の数と同じです。
-> - DDL操作によって、バージョン`schema`の変更回数は異なります。例えば、 `CREATE TABLE`文ではバージョン`schema`変更が1回発生しますが、 `ADD COLUMN`文ではバージョン5の変更が4回発生します。
+> - DDL操作によって、`schema`バージョンの変更回数は異なります。例えば、 `CREATE TABLE`文では`schema`バージョンが1回変更されますが、 `ADD COLUMN`文では`schema`バージョンが4回変更されます。
 
-### 「Information schema is out of date」というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
+### `Information schema is out of date`というエラーの原因は何ですか? {#what-are-the-causes-of-the-information-schema-is-out-of-date-error}
 
 DML文の実行時に、TiDBがDDLリース（デフォルトでは45秒）内に最新のスキーマをロードできない場合、エラー`Information schema is out of date`が発生する可能性があります。考えられる原因は以下のとおりです。
 
@@ -345,10 +345,10 @@ JDBC URL に`connectionCollation`が設定されていない場合、次の2つ�
 **シナリオ 1** : JDBC URL に`connectionCollation`も`characterEncoding`も設定されていない
 
 - Connector/J 8.0.25以前のバージョンでは、JDBCドライバはサーバーのデフォルトの文字セットを使用しようとします。TiDBのデフォルトの文字セットは`utf8mb4`であるため、ドライバは接続照合順序として`utf8mb4_bin`を使用します。
-- Connector/J 8.0.26 以降のバージョンでは、JDBC ドライバーは`utf8mb4`文字セットを使用し、戻り値`SELECT VERSION()`に基づいて照合順序を自動的に選択します。
+- Connector/J 8.0.26 以降のバージョンでは、JDBC ドライバーは`utf8mb4`文字セットを使用し、 `SELECT VERSION()`の戻り値に基づいて照合順序を自動的に選択します。
 
     - 戻り値が`8.0.1`未満の場合、ドライバは接続照合順序として`utf8mb4_general_ci`を使用します。TiDB はドライバに従い、照合順序として`utf8mb4_general_ci`を使用します。
-    - 戻り値が`8.0.1`以上の場合、ドライバは接続照合順序として`utf8mb4_0900_ai_ci`を使用します。TiDB v7.4.0 以降のバージョンではドライバに従い、照合順序として`utf8mb4_0900_ai_ci`を使用しますが、TiDB v7.4.0 より前のバージョンでは`utf8mb4_0900_ai_ci`照合順序がサポートされていないため、デフォルトの照合照合順序`utf8mb4_bin`が使用されます。
+    - 戻り値が`8.0.1`以上の場合、ドライバは接続照合順序として`utf8mb4_0900_ai_ci`を使用します。TiDB v7.4.0 以降のバージョンではドライバに従い、照合順序として`utf8mb4_0900_ai_ci`を使用しますが、TiDB v7.4.0 より前のバージョンでは`utf8mb4_0900_ai_ci`照合順序がサポートされていないため、デフォルトの照合順序`utf8mb4_bin`が使用されます。
 
 **シナリオ2** ：JDBC URLに`characterEncoding=utf8`が設定されていますが、 `connectionCollation`が設定されていません。JDBCドライバーはマッピングルールに従って`utf8mb4`文字セットを使用します。照合順序はシナリオ1で説明したルールに従って決定されます。
 
@@ -405,11 +405,11 @@ SELECT 'café' = 'cafe' COLLATE utf8mb4_0900_ai_ci;  -- Returns 1 (TRUE)
 
 ### TiDB実行計画の説明 {#tidb-execution-plan-description}
 
-[クエリ実行計画を理解する](/explain-overview.md)参照。
+[クエリ実行計画を理解する](/explain-overview.md)を参照してください。
 
 ### 統計収集 {#statistics-collection}
 
-[統計入門](/statistics.md)参照。
+[統計入門](/statistics.md)を参照してください。
 
 ### `select count(1)`を最適化するにはどうすればいいでしょうか? {#how-to-optimize-select-count1}
 
@@ -471,11 +471,11 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 ### TiDBオプションを編集する {#edit-tidb-options}
 
-[TiDBコマンドオプション](/command-line-flags-for-tidb-configuration.md)参照。
+[TiDBコマンドオプション](/command-line-flags-for-tidb-configuration.md)を参照してください。
 
 ### ホットスポットの問題を回避し、負荷分散を実現するにはどうすればよいですか？ TiDB ではホットパーティションまたはホット範囲が問題になりますか？ {#how-to-avoid-hotspot-issues-and-achieve-load-balancing-is-hot-partition-or-range-an-issue-in-tidb}
 
-ホットスポットが発生するシナリオについては、 [一般的な鍋料理](/troubleshoot-hot-spot-issues.md#common-hotspots)を参照してください。以下の TiDB 機能は、ホットスポットの問題を解決するために設計されています。
+ホットスポットが発生するシナリオについては、 [一般的なホットスポット](/troubleshoot-hot-spot-issues.md#common-hotspots)を参照してください。以下の TiDB 機能は、ホットスポットの問題を解決するために設計されています。
 
 - [`SHARD_ROW_ID_BITS`](/troubleshoot-hot-spot-issues.md#use-shard_row_id_bits-to-process-hotspots)属性。この属性を設定すると、行IDが複数のリージョンに分散して書き込まれるため、書き込みホットスポットの問題を軽減できます。
 - [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)属性は、AUTO_INCREMENT主キーによってもたらされるホットスポットを解決するのに役立ちます。

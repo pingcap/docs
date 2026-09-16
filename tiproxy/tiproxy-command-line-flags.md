@@ -104,7 +104,7 @@ tiproxyctl --host 127.0.0.1 --port 3080 config get
 - tiproxyctl のログレベルを指定します。
 - タイプ: `string`
 - デフォルト: `"warn"`
-- `debug` `info` `error`でき`panic` `warn`
+- `debug` 、 `info` 、 `warn` 、 `error` 、 `panic`を指定できます。
 
 #### `-k, --insecure` {#k-insecure}
 

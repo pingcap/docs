@@ -58,7 +58,7 @@ SQL ポートの設定。
 - デフォルト値: `0`
 - ホットリロードのサポート: はい
 - 単位: 秒
-- TiProxyがシャットダウンすると、HTTPステータスはunhealthyを返しますが、SQLポートは`graceful-wait-before-shutdown`秒間は新規接続を受け付けます。その後、新規接続は拒否され、クライアントの負荷が増大します。クライアントとTiProxyの間に他のプロキシ（NLBなど）が存在しない場合は、この値を`0`に設定することをお勧めします。
+- TiProxyがシャットダウンすると、HTTPステータスはunhealthyを返しますが、SQLポートは`graceful-wait-before-shutdown`秒間は新規接続を受け付けます。その後、新規接続は拒否され、クライアントをドレインします。クライアントとTiProxyの間に他のプロキシ（NLBなど）が存在しない場合は、この値を`0`に設定することをお勧めします。
 
 #### `graceful-close-conn-timeout` {#graceful-close-conn-timeout}
 
@@ -90,7 +90,7 @@ SQL ポートの設定。
 
 - デフォルト値: `""`
 - ホットリロードのサポート: はい、ただし新規接続のみ
-- 可能な`"v2"` : `""`
+- 値のオプション: `""` 、 `"v2"`
 - ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を有効にしてください。PROXYプロトコルを有効にすると、TiProxyは実際のクライアントIPアドレスをTiDBに渡すことができます。`"v2"` PROXYプロトコルバージョン2の使用を示し、 `""` PROXYプロトコルの無効化を示します。TiProxyでPROXYプロトコルが有効になっている場合は、TiDBサーバーでも[PROXYプロトコル](/tidb-configuration-file.md#proxy-protocol)を有効にする必要があります。
 
 ### API {#api}
@@ -107,7 +107,7 @@ HTTP ゲートウェイの構成。
 
 - デフォルト値: `""`
 - ホットリロードのサポート: いいえ
-- 可能な`"v2"` : `""`
+- 値のオプション: `""` 、 `"v2"`
 - ポートの[PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を有効にします。`"v2"` PROXY プロトコル バージョン 2 を使用することを示し、 `""` PROXY プロトコルを無効にすることを示します。
 
 ### バランス {#balance}
@@ -125,10 +125,10 @@ TiProxy の負荷分散ポリシーの構成。
 
 - デフォルト値: `resource`
 - ホットリロードのサポート: はい
-- `location` `connection`値: `resource`
+- 値のオプション: `resource` 、 `location` 、 `connection`
 - 負荷分散ポリシーを指定します。各値の意味については、 [TiProxy 負荷分散ポリシー](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies)を参照してください。
 
-### ハ {#ha}
+### HA {#ha}
 
 TiProxy の高可用性構成。
 
@@ -173,7 +173,7 @@ TiProxy v1.3.1以降、複数の仮想IPアドレスの設定がサポートさ�
 
 - デフォルト値: `info`
 - ホットリロードのサポート: はい
-- `info` `error` `panic` `warn` `debug`
+- 値のオプション: `debug` 、 `info` 、 `warn` 、 `error` 、 `panic`
 - ログレベルを指定します。レベル`panic`の場合、TiProxyはエラー発生時にpanicになります。
 
 #### `encoder` {#encoder}
@@ -247,7 +247,7 @@ TLS オブジェクト フィールド:
 
 - サーバー証明書の検証をスキップするには、 `ca`または`skip-ca`を設定する必要があります。
 - オプションで、サーバー側のクライアント検証に合格するために`cert`または`key`を設定できます。
-- 役に立たないフィールド: 自動証明書。
+- 効果のないフィールド: `auto-certs`。
 
 サーバーTLS オブジェクトの場合:
 
