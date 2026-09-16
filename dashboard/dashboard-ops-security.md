@@ -9,17 +9,17 @@ TiDB Dashboardにアクセスするにはサインインする必要がありま
 
 ## TiDBユーザーのセキュリティを強化する {#enhance-security-of-tidb-users}
 
-### TiDB `root`ユーザーに強力なパスワードを設定する {#set-a-strong-password-for-the-tidb-root-user}
+### TiDBの`root`ユーザーに強力なパスワードを設定する {#set-a-strong-password-for-the-tidb-root-user}
 
 TiDB Dashboardのアカウントシステムは、 TiDB SQLユーザーのアカウントシステムと一致しています。デフォルトでは、TiDBの`root`ユーザーにはパスワードが設定されていないため、TiDB Dashboardへのアクセスにはパスワード認証が不要です。これにより、悪意のある訪問者は、特権SQL文の実行を含む高い権限を取得できます。
 
-TiDB `root`ユーザーには強力なパスワードを設定することをお勧めします。詳細は[TiDB ユーザーアカウント管理](/user-account-management.md)ご覧ください。または、TiDB `root`ユーザーを無効にすることもできます。
+TiDBの`root`ユーザーには強力なパスワードを設定することをお勧めします。詳細は[TiDB ユーザーアカウント管理](/user-account-management.md)をご覧ください。または、TiDBの`root`ユーザーを無効にすることもできます。
 
 ### TiDB Dashboard用の最小権限ユーザーを作成する {#create-a-least-privileged-user-for-tidb-dashboard}
 
 TiDB Dashboardのアカウントシステムは、 TiDB SQLのアカウントシステムと一致しています。TiDB Dashboardにアクセスするユーザーは、 TiDB SQLユーザーの権限に基づいて認証および認可されます。そのため、TiDB Dashboardでは限定的な権限、つまり読み取り専用権限のみが必要です。最小権限の原則に基づいてユーザーがTiDB Dashboardにアクセスできるように設定することで、高い権限を持つユーザーのアクセスを回避できます。
 
-TiDB Dashboardにアクセスしてサインインするには、最小限の権限を持つSQLユーザーを作成することをお勧めします。これにより、高い権限を持つユーザーによるアクセスを回避し、セキュリティを向上できます。詳細は[TiDB Dashboardのユーザー管理](/dashboard/dashboard-user.md)ご覧ください。
+TiDB Dashboardにアクセスしてサインインするには、最小限の権限を持つSQLユーザーを作成することをお勧めします。これにより、高い権限を持つユーザーによるアクセスを回避し、セキュリティを向上できます。詳細は[TiDB Dashboardのユーザー管理](/dashboard/dashboard-user.md)をご覧ください。
 
 ## ファイアウォールを使用して信頼できないアクセスをブロックする {#use-a-firewall-to-block-untrusted-access}
 
@@ -31,7 +31,7 @@ TiDB DashboardはPDクライアントポート（デフォルトは[http://IP:23
 
 以下の対策を講じることをお勧めします。
 
-- ファイアウォールを使用して、コンポーネントが外部ネットワークまたは信頼できないネットワーク経由で PDコンポーネントの**クライアント**ポートにアクセスすることを禁止します。
+- ファイアウォールを使用して、コンポーネントが外部ネットワークまたは信頼できないネットワーク経由で PDコンポーネントの**任意の**クライアントポートにアクセスすることを禁止します。
 
     > **Note:**
     >
@@ -80,7 +80,7 @@ http://192.168.0.123:2379/dashboard/
 
 ## TiDB Dashboard専用のリバースプロキシ {#reverse-proxy-only-for-tidb-dashboard}
 
-[ファイアウォールを使用して信頼できないアクセスをブロックする](#ファイアウォールを使用して信頼できないアクセスをブロックする)で述べたように、PDクライアントポートで提供されるサービスには、TiDB Dashboard（ [http://IP:2379/dashboard/](http://IP:2379/dashboard/)に配置）だけでなく、PD内の他の特権インターフェース（ [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など）も含まれます。したがって、リバースプロキシを使用してTiDB Dashboardを外部ネットワークに提供する場合は、外部ネットワークが**リバース**プロキシを介してPD内の特権インターフェースにアクセスできないように、ポート内のすべてのサービスで**はなく**、プレフィックスが`/dashboard`サービスのみを提供するようにしてください。
+[ファイアウォールを使用して信頼できないアクセスをブロックする](#use-a-firewall-to-block-untrusted-access)で述べたように、PDクライアントポートで提供されるサービスには、TiDB Dashboard（ [http://IP:2379/dashboard/](http://IP:2379/dashboard/)に配置）だけでなく、PD内の他の特権インターフェース（ [http://IP:2379/pd/api/v1/members](http://IP:2379/pd/api/v1/members)など）も含まれます。したがって、リバースプロキシを使用してTiDB Dashboardを外部ネットワークに提供する場合は、外部ネットワークがリバースプロキシを介してPD内の特権インターフェースにアクセスできないように、ポート内のすべてのサービス**ではなく**、プレフィックスが`/dashboard`であるサービス**のみ**を提供するようにしてください。
 
 安全で推奨されるリバースプロキシ構成を確認するには、 [リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照することをお勧めします。
 
@@ -88,7 +88,7 @@ http://192.168.0.123:2379/dashboard/
 
 トランスポートレイヤーのセキュリティをさらに強化するには、リバースプロキシに対して TLS を有効にし、さらに mTLS を導入してユーザー証明書を認証することもできます。
 
-詳細は[HTTPSサーバーの設定](http://nginx.org/en/docs/http/configuring_https_servers.html)と[HAProxy SSL 終了](https://www.haproxy.com/blog/haproxy-ssl-termination/)ご覧ください。
+詳細は[HTTPSサーバーの設定](http://nginx.org/en/docs/http/configuring_https_servers.html)と[HAProxy SSL Termination](https://www.haproxy.com/blog/haproxy-ssl-termination/)をご覧ください。
 
 ## その他の推奨される安全対策 {#other-recommended-safety-measures}
 

@@ -44,7 +44,7 @@ http://192.168.0.123:2379/dashboard/
 
 [HAProxy](https://www.haproxy.org/)をリバースプロキシとして使用する場合は、次の手順を実行します。
 
-1. 例えば、TiDB Dashboardのリバースプロキシを`8033`ポート（例）で使用します。HAProxy設定ファイルに以下の設定を追加します。
+1. TiDB Dashboardのリバースプロキシを`8033`ポート（例）で使用します。HAProxy設定ファイルに以下の設定を追加します。
 
     ```haproxy
     frontend tidb_dashboard_front
@@ -56,7 +56,7 @@ http://192.168.0.123:2379/dashboard/
       server tidb_dashboard 192.168.0.123:2379
     ```
 
-    `192.168.0.123:2379` 、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスの IP とポートに置き換えます。
+    `192.168.0.123:2379`を、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスの IP とポートに置き換えます。
 
     > **Warning:**
     >
@@ -70,7 +70,7 @@ http://192.168.0.123:2379/dashboard/
 
 <details><summary><strong>NGINXを使用する</strong></summary>
 
-[NGINX](https://nginx.org/)リバースプロキシとして使用する場合は、次の手順を実行します。
+[NGINX](https://nginx.org/)をリバースプロキシとして使用する場合は、次の手順を実行します。
 
 1. TiDB Dashboardのリバースプロキシを`8033`ポート（例）で使用します。NGINX設定ファイルに以下の設定を追加します。
 
@@ -83,7 +83,7 @@ http://192.168.0.123:2379/dashboard/
     }
     ```
 
-    `http://192.168.0.123:2379/dashboard/` 、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスに置き換えます。
+    `http://192.168.0.123:2379/dashboard/`を、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスに置き換えます。
 
     > **Warning:**
     >
@@ -175,7 +175,7 @@ server_configs:
     tiup cluster reload CLUSTER_NAME -R pd
     ```
 
-詳細は[一般的なTiUP操作 - 構成の変更](/maintain-tidb-using-tiup.md#modify-the-configuration)参照。
+詳細は[一般的なTiUP操作 - 構成の変更](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 
 </details>
 
@@ -195,7 +195,7 @@ server_configs:
 
 <details><summary><strong>HAProxyを使用する</strong></summary>
 
-`http://example.com:8033/foo/`例にとると、対応する HAProxy 構成は次のようになります。
+`http://example.com:8033/foo/`を例にとると、対応する HAProxy 構成は次のようになります。
 
 ```haproxy
 frontend tidb_dashboard_front
@@ -208,7 +208,7 @@ backend tidb_dashboard_back
   server tidb_dashboard 192.168.0.123:2379
 ```
 
-`192.168.0.123:2379` 、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスの IP とポートに置き換えます。
+`192.168.0.123:2379`を、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスの IP とポートに置き換えます。
 
 > **Warning:**
 >
@@ -232,7 +232,7 @@ backend tidb_dashboard_back
 
 <details><summary><strong>NGINXを使用する</strong></summary>
 
-`http://example.com:8033/foo/`例にとると、対応する NGINX 構成は次のようになります。
+`http://example.com:8033/foo/`を例にとると、対応する NGINX 構成は次のようになります。
 
 ```nginx
 server {
@@ -243,7 +243,7 @@ server {
 }
 ```
 
-`http://192.168.0.123:2379/dashboard/` 、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスに置き換えます。
+`http://192.168.0.123:2379/dashboard/`を、 [ステップ1](#step-1-get-the-actual-tidb-dashboard-address)で取得した TiDB Dashboardの実際のアドレスに置き換えます。
 
 > **Warning:**
 >

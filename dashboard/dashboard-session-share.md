@@ -1,6 +1,6 @@
 ---
 title: Share TiDB Dashboard Sessions
-summary: TiDB Dashboardでは、ユーザーが現在のセッションを他のユーザーと共有できるため、ユーザーパスワードの入力は不要です。招待者は、特定の共有設定を含む認証コードを生成し、招待者に提供できます。招待者は、その認証コードを使用してパスワードなしでサインインできます。
+summary: TiDB Dashboardでは、ユーザーが現在のセッションを他のユーザーと共有できるため、ユーザーパスワードの入力は不要です。招待者は、特定の共有設定を含む認証コードを生成し、招待された人に提供できます。招待された人は、その認証コードを使用してパスワードなしでサインインできます。
 ---
 
 # TiDB Dashboardセッションを共有する {#share-tidb-dashboard-sessions}
@@ -27,11 +27,11 @@ TiDB Dashboardの現在のセッションを他のユーザーと共有して、
 
     - 読み取り専用権限として共有: 共有セッションでは読み取り操作のみが許可され、書き込み操作 (構成の変更など) は許可されません。
 
-5. **[認証コードの生成]を**クリックします。
+5. **Generate Authorization Code**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-settings-2-v650.png)
 
-6. 生成された**認証コードを**、セッションを共有するユーザーに提供します。
+6. 生成された**Authorization Code**を、セッションを共有するユーザーに提供します。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-settings-3-v650.png)
 
@@ -41,16 +41,16 @@ TiDB Dashboardの現在のセッションを他のユーザーと共有して、
 
 ## 招待された人の手順 {#steps-for-the-invitee}
 
-1. TiDB Dashboardのサインイン ページで、 **[代替認証の使用] を**クリックします。
+1. TiDB Dashboardのサインインページで、 **Use Alternative Authentication**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-signin-1-v650.png)
 
-2. **承認コード**をクリックしてサインインに使用します。
+2. **Authorization Code**をクリックしてサインインに使用します。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-signin-2-v650.png)
 
 3. 招待者から受け取った認証コードを入力します。
 
-4. **[サインイン]を**クリックします。
+4. **Sign In**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-share-signin-3-v650.png)

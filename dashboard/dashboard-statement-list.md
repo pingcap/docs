@@ -62,7 +62,7 @@ SQL Statementsページの上部で、表示するSQL実行の時間範囲を変
 >
 > - ステートメント システムテーブルはメモリ内にのみ保存されるため、SQL Statements機能が無効にされると、システムテーブル内のデータはクリアされます。
 >
-> - `Collect interval`と`retain duration`の値はメモリ使用量に影響するため、実際の状況に応じて調整することをお勧めします`retain duration`の値は大きすぎないようにしてください。
+> - `Collect interval`と`retain duration`の値はメモリ使用量に影響するため、実際の状況に応じて調整することをお勧めします。 `retain duration`の値は大きすぎないようにしてください。
 
 ### その他 {#others}
 

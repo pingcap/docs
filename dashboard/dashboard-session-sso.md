@@ -5,7 +5,7 @@ summary: TiDB Dashboardは、サインイン認証にOIDCベースのSSOをサ�
 
 # TiDB DashboardのSSOを構成する {#configure-sso-for-tidb-dashboard}
 
-TiDB Dashboardは、SQLベースの[OIDC](https://openid.net/connect/)サインオン（SSO）をサポートしています。TiDB DashboardのSSO機能を有効にすると、設定されたSSOサービスがサインイン認証に使用され、SQLユーザーのパスワードを入力せずにTiDB Dashboardにアクセスできるようになります。
+TiDB Dashboardは、 [OIDC](https://openid.net/connect/)ベースのシングルサインオン（SSO）をサポートしています。TiDB DashboardのSSO機能を有効にすると、設定されたSSOサービスがサインイン認証に使用され、SQLユーザーのパスワードを入力せずにTiDB Dashboardにアクセスできるようになります。
 
 ## OIDC SSO を構成する {#configure-oidc-sso}
 
@@ -25,7 +25,7 @@ TiDB Dashboardは、SQLベースの[OIDC](https://openid.net/connect/)サイン�
 
     通常、SSO サービス プロバイダーから次の2つのフィールドを取得できます。
 
-    - OIDC Client ID は、OIDC トークン発行者とも呼ばれます。
+    - OIDC Client ID は、OIDC Token Issuer とも呼ばれます。
     - OIDC Discovery URL は、OIDC Token Audience とも呼ばれます。
 
 5. **Authorize Impersonation**をクリックし、SQL パスワードを入力します。
@@ -122,7 +122,7 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT` 、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
 8. **Sign-out redirect URIs**を次のように入力します。
 
@@ -130,7 +130,7 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
     http://DASHBOARD_IP:PORT/dashboard/
     ```
 
-    同様に、 `DASHBOARD_IP:PORT`実際のドメイン (または IP アドレス) とポートに置き換えます。
+    同様に、 `DASHBOARD_IP:PORT`を実際のドメイン (または IP アドレス) とポートに置き換えます。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-okta-3.png)
 
@@ -156,7 +156,7 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
 
 ## 例2: TiDB DashboardのSSOサインインにAuth0を使用する {#example-2-use-auth0-for-tidb-dashboard-sso-sign-in}
 
-Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンティティサービスを提供します。以下の手順では、Auth0をTiDB DashboardのSSOプロバイダーとして使用できるように、Auth0とTiDB Dashboardを設定する方法について説明します。
+Oktaと同様に、 [Auth0](https://auth0.com/)もOIDC SSOアイデンティティサービスを提供します。以下の手順では、Auth0をTiDB DashboardのSSOプロバイダーとして使用できるように、Auth0とTiDB Dashboardを設定する方法について説明します。
 
 ### ステップ1: Auth0を構成する {#step-1-configure-auth0}
 
@@ -180,7 +180,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT` 、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
 6. **許可されたログアウト URL**を次のように入力します。
 
@@ -188,7 +188,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
     http://DASHBOARD_IP:PORT/dashboard/
     ```
 
-    同様に、 `DASHBOARD_IP:PORT`実際のドメイン (または IP アドレス) とポートに置き換えます。
+    同様に、 `DASHBOARD_IP:PORT`を実際のドメイン (または IP アドレス) とポートに置き換えます。
 
     ![Settings](/media/dashboard/dashboard-session-sso-auth0-settings-2.png)
 
@@ -206,11 +206,11 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
 
 ## 例3: TiDB DashboardのSSOサインインにCasdoorを使用する {#example-3-use-casdoor-for-tidb-dashboard-sso-sign-in}
 
-[Casdoor](https://casdoor.org/) 、独自のホストに導入できるオープンソースのSSOプラットフォームです。TiDB DashboardのSSO機能と互換性があります。以下の手順では、CasdoorをTiDB DashboardのSSOプロバイダーとして使用できるように、CasdoorとTiDB Dashboardを設定する方法について説明します。
+[Casdoor](https://casdoor.org/)は、独自のホストに導入できるオープンソースのSSOプラットフォームです。TiDB DashboardのSSO機能と互換性があります。以下の手順では、CasdoorをTiDB DashboardのSSOプロバイダーとして使用できるように、CasdoorとTiDB Dashboardを設定する方法について説明します。
 
 ### ステップ1：Casdoorを設定する {#step-1-configure-casdoor}
 
-1. Casdoor 管理サイトをデプロイてアクセスします。
+1. Casdoor 管理サイトをデプロイしてアクセスします。
 
 2. 上部のサイドバーの**Applications**から移動します。
 
@@ -224,7 +224,7 @@ Oktaと同様に、 [オーソ0](https://auth0.com/)もOIDC SSOアイデンテ�
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT` 、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
     ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
 

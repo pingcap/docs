@@ -21,13 +21,13 @@ TiDB Dashboardは[GitHub](https://github.com/pingcap-incubator/tidb-dashboard)�
 
 TiDB Dashboardを使用すると、TiDB クラスターの 1秒あたりのクエリ数 (QPS)、実行時間、最も多くのリソースを消費する SQL文の種類などの概要情報を確認できます。
 
-詳細は[TiDB Dashboardの概要](/dashboard/dashboard-overview.md)参照。
+詳細は[TiDB Dashboardの概要](/dashboard/dashboard-overview.md)を参照してください。
 
 ## コンポーネントとホストの実行ステータスを表示する {#show-the-running-status-of-components-and-hosts}
 
 TiDB Dashboardを使用すると、クラスター全体の TiDB、TiKV、PD、 TiFlashコンポーネントの実行状態と、これらのコンポーネントが配置されているホストの実行状態を表示できます。
 
-詳細は[TiDB Dashboardのクラスタ情報ページ](/dashboard/dashboard-cluster-info.md)参照。
+詳細は[TiDB Dashboardのクラスタ情報ページ](/dashboard/dashboard-cluster-info.md)を参照してください。
 
 ## 読み取りおよび書き込みトラフィックの分布と傾向を表示します {#show-distribution-and-trends-of-read-and-write-traffic}
 
@@ -39,7 +39,7 @@ TiDB DashboardのKey Visualizer機能は、クラスター全体の読み取り/
 
 すべてのSQL文の実行情報は、SQL Statementsページに表示されます。このページでは、すべてのステージにおける実行時間と合計実行回数を確認できます。これにより、最もリソースを消費しているSQLクエリを分析して特定し、クラスター全体のパフォーマンスを向上させることができます。
 
-詳細は[TiDB DashboardのSQL Statementsページ](/dashboard/dashboard-statement-list.md)参照。
+詳細は[TiDB DashboardのSQL Statementsページ](/dashboard/dashboard-statement-list.md)を参照してください。
 
 ## スロークエリの詳細な実行情報を知る {#learn-the-detailed-execution-information-of-slow-queries}
 
@@ -51,13 +51,13 @@ TiDB DashboardのSlow Queriesページには、実行に時間のかかるすべ
 
 TiDB Dashboardの診断機能は、クラスター内に一般的なリスク (不一致な構成など) や問題が存在するかどうかを自動的に判断し、レポートを生成して操作の提案を行ったり、異なる時間範囲で各クラスター メトリックの状態を比較して、起こりうる問題を分析したりします。
 
-詳細は[TiDB Dashboardのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)参照。
+詳細は[TiDB Dashboardのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
 
 ## すべてのコンポーネントのクエリログ {#query-logs-of-all-components}
 
-TiDB Dashboardの [ログの検索] ページでは、クラスター内で実行中のすべてのインスタンスのログをキーワード、時間範囲、その他の条件ですばやく検索し、これらのログをパッケージ化してローカルマシンにダウンロードできます。
+TiDB DashboardのSearch Logsページでは、クラスター内で実行中のすべてのインスタンスのログをキーワード、時間範囲、その他の条件ですばやく検索し、これらのログをパッケージ化してローカルマシンにダウンロードできます。
 
-詳細は[検索ログページ](/dashboard/dashboard-log-search.md)参照。
+詳細は[Search Logsページ](/dashboard/dashboard-log-search.md)を参照してください。
 
 ## リソース制御のためのクラスター容量の見積もり {#estimate-cluster-capacity-for-resource-control}
 
@@ -69,4 +69,4 @@ TiDB Dashboardの [ログの検索] ページでは、クラスター内で実�
 
 これは、サードパーティのツールを使用せずに、各インスタンスをオンラインでプロファイリングし、プロファイリング データ収集期間中にインスタンスが実行したさまざまな内部操作と、この期間中の操作実行時間の割合を分析できる高度なデバッグ機能です。
 
-詳細は[プロファイルインスタンスページ](/dashboard/dashboard-profiling.md)参照。
+詳細は[プロファイルインスタンスページ](/dashboard/dashboard-profiling.md)を参照してください。

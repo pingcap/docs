@@ -56,7 +56,7 @@ Prometheusインスタンスをデプロイしてもこの問題が引き続き�
 
 ### `required component NgMonitoring is not started`というエラーが表示されます {#a-required-component-ngmonitoring-is-not-started-error-is-shown}
 
-NgMonitoringは、TiDB v5.4.0以降のバージョンに組み込まれた高度な監視コンポーネントで、**継続的プロファイリング**や**Top SQL**などのTiDB Dashboard機能をサポートします。TiUPの新しいバージョンを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoringが自動的にデプロイされます。TiDB Operatorを使用してデプロイされたクラスターの場合は、 [継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)を参照してTiUPを手動でデプロイできます。
+NgMonitoringは、TiDB v5.4.0以降のバージョンに組み込まれた高度な監視コンポーネントで、**継続的プロファイリング**や**Top SQL**などのTiDB Dashboard機能をサポートします。TiUPの新しいバージョンを使用してクラスターをデプロイまたはアップグレードすると、NgMonitoringが自動的にデプロイされます。TiDB Operatorを使用してデプロイされたクラスターの場合は、 [継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)を参照してNgMonitoringを手動でデプロイできます。
 
 Web ページに`required component NgMonitoring is not started`が表示されている場合は、次のようにしてデプロイメントの問題をトラブルシューティングできます。
 
@@ -112,7 +112,7 @@ Web ページに`required component NgMonitoring is not started`が表示され�
 
 <details><summary>TiDB Operatorを使用してデプロイされたクラスター</summary>
 
-TiDB Operatorのドキュメントのセクション[継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)手順に従って、NgMonitoringコンポーネントをデプロイ。
+TiDB Operatorのドキュメントの[継続的なプロファイリングを有効にする](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/access-dashboard/#enable-continuous-profiling)セクションの手順に従って、NgMonitoringコンポーネントをデプロイしてください。
 
 </details>
 
