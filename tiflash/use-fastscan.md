@@ -48,7 +48,7 @@ TiFlash は古いデータの圧縮をバックグラウンドで自動的に開
 
 ## FastScanを有効または無効にする {#enable-and-disable-fastscan}
 
-デフォルトでは、セッションレベルとグローバルレベルで変数は`tiflash_fastscan=OFF`設定されており、FastScan機能は無効です。変数情報を表示するには、次のステートメントを使用します。
+デフォルトでは、セッションレベルとグローバルレベルで変数は`tiflash_fastscan=OFF`に設定されており、FastScan機能は無効です。変数情報を表示するには、次のステートメントを使用します。
 
 ```
 show variables like 'tiflash_fastscan';
@@ -72,7 +72,7 @@ show global variables like 'tiflash_fastscan';
 +------------------+-------+
 ```
 
-変数`tiflash_fastscan`セッションレベルとグローバルレベルで設定できます。現在のセッションでFastScanを有効にするには、次のステートメントを使用します。
+変数`tiflash_fastscan`はセッションレベルとグローバルレベルで設定できます。現在のセッションでFastScanを有効にするには、次のステートメントを使用します。
 
 ```
 set session tiflash_fastscan=ON;
@@ -93,7 +93,7 @@ set global tiflash_fastscan=OFF;
 
 ## FastScanの仕組み {#mechanism-of-fastscan}
 
-TiFlashのストレージレイヤーのデータは、デルタレイヤーと安定レイヤーの 2つの層に保存されます。
+TiFlashのストレージレイヤーのデータは、デルタレイヤーとステーブルレイヤーの 2つの層に保存されます。
 
 デフォルトでは、FastScan は有効になっておらず、TableScan オペレーターは次の手順でデータを処理します。
 

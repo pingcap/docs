@@ -12,7 +12,7 @@ TiDB は、MySQL 8.0 で利用可能な[制御フロー関数](https://dev.mysql
 | [`CASE`](#case)       | ケース演算子                    |
 | [`IF()`](#if)         | if/else構文                 |
 | [`IFNULL()`](#ifnull) | null if/else 構文           |
-| [`NULLIF()`](#nullif) | expr1 = expr2の場合は`NULL`返す |
+| [`NULLIF()`](#nullif) | expr1 = expr2の場合は`NULL`を返す |
 
 ## CASE {#case}
 
@@ -139,4 +139,4 @@ SELECT n, NULLIF(n+n, n+2) FROM d;
 10 rows in set (0.00 sec)
 ```
 
-この例では、 `n` `2`に等しい場合、 `n+n`と`n+2`両方とも`4`に等しくなり、両方の引数が同じになり、関数は`NULL`を返します。
+この例では、 `n`が`2`に等しい場合、 `n+n`と`n+2`の両方とも`4`に等しくなり、両方の引数が同じになり、関数は`NULL`を返します。

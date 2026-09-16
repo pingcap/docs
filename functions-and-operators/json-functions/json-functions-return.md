@@ -13,11 +13,11 @@ TiDB は、MySQL 8.0 で利用可能な[JSON値属性を返すJSON関数](https:
 
 例:
 
-次の例では、レベルが 3つあるため、 `JSON_DEPTH()` `3`を返します。
+次の例では、レベルが 3つあるため、 `JSON_DEPTH()`は`3`を返します。
 
 - ルート（ `$` ）
 - 天気 ( `$.weather` )
-- 気象潮流 ( `$.weather.sunny` )
+- 現在の天気 ( `$.weather.sunny` )
 
 ```sql
 SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
@@ -38,7 +38,7 @@ SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
 
 例:
 
-次の例では、ドキュメントのルートにある唯一の項目が`weather`あるため、返される値は`1`なります。
+次の例では、ドキュメントのルートにある唯一の項目が`weather`であるため、返される値は`1`になります。
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$');
@@ -53,7 +53,7 @@ SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$'
 1 row in set (0.00 sec)
 ```
 
-次の例では、 `$.weather`に`current`と`tomorrow` 2つの項目があるため、返される値は`2`なります。
+次の例では、 `$.weather`に`current`と`tomorrow`の2つの項目があるため、返される値は`2`になります。
 
 ```sql
 SELECT JSON_LENGTH('{"weather": {"current": "sunny", "tomorrow": "cloudy"}}','$.weather');

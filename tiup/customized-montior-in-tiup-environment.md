@@ -11,21 +11,21 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
 
 > **Note:**
 >
-> - 監視サーバーの構成ファイルを直接変更しないでください。これらの変更は、デプロイメント、スケールアウト、スケールイン、リロードなどの後続のTiUP操作によって上書きされるためです。
+> - 監視サーバーの設定ファイルを直接変更しないでください。これらの変更は、デプロイメント、スケールアウト、スケールイン、リロードなどの後続のTiUP操作によって上書きされるためです。
 >
-> - 監視サーバーがTiUPによってデプロイおよび管理されていない場合は、このドキュメントを参照する代わりに、監視サーバーの構成ファイルを直接変更できます。
+> - 監視サーバーがTiUPによってデプロイおよび管理されていない場合は、このドキュメントを参照する代わりに、監視サーバーの設定ファイルを直接変更できます。
 >
 > - この機能はTiUP v1.9.0以降でサポートされています。そのため、この機能を使用する前にTiUPのバージョンをご確認ください。
 
 ## Prometheusの設定をカスタマイズする {#customize-prometheus-configurations}
 
-現在、 TiUP はPrometheus ルールとスクレイプ構成ファイルのカスタマイズをサポートしています。
+現在、 TiUP はPrometheus ルールとスクレイプ設定ファイルのカスタマイズをサポートしています。
 
 ### Prometheusルール設定をカスタマイズする {#customize-prometheus-rule-configuration}
 
-1. ルール構成ファイルをカスタマイズし、 TiUP が配置されているマシンのディレクトリの下に配置します。
+1. ルール設定ファイルをカスタマイズし、 TiUP が配置されているマシンのディレクトリの下に配置します。
 
-2. topology.yaml ファイルで、カスタマイズされたルール構成ファイルのディレクトリに`rule_dir`を設定します。
+2. topology.yaml ファイルで、カスタマイズされたルール設定ファイルのディレクトリに`rule_dir`を設定します。
 
     以下は、topology.yaml ファイル内の monitored_servers の構成例です。
 
@@ -70,7 +70,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
             action: drop
     ```
 
-上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP は`additional_scrape_conf`フィールドの内容を Prometheus 構成ファイルの対応するパラメーターに追加します。
+上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP は`additional_scrape_conf`フィールドの内容を Prometheus 設定ファイルの対応するパラメーターに追加します。
 
 ### Prometheus external labels をカスタマイズする {#customize-prometheus-external-labels}
 
@@ -102,9 +102,9 @@ TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グロー�
 
 ### Grafanaダッシュボードをカスタマイズする {#customize-grafana-dashboard}
 
-1. Grafana ダッシュボードの構成ファイルをカスタマイズし、 TiUPが配置されているマシンのディレクトリの下に配置します。
+1. Grafana ダッシュボードの設定ファイルをカスタマイズし、 TiUPが配置されているマシンのディレクトリの下に配置します。
 
-2. topology.yaml ファイルで、カスタマイズされたダッシュボード構成ファイルのディレクトリに`dashboard_dir`を設定します。
+2. topology.yaml ファイルで、カスタマイズされたダッシュボード設定ファイルのディレクトリに`dashboard_dir`を設定します。
 
     以下は、topology.yaml ファイル内の grafana_servers の構成例です。
 
@@ -140,7 +140,7 @@ TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グロー�
         smtp.skip_verify: true
     ```
 
-上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP は`config`フィールドの内容を Grafana 構成ファイル`grafana.ini`に追加します。
+上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP は`config`フィールドの内容を Grafana 設定ファイル`grafana.ini`に追加します。
 
 ## Alertmanager の設定をカスタマイズする {#customize-alertmanager-configurations}
 

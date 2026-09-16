@@ -1,6 +1,6 @@
 ---
 title: OpenAI-Compatible Embeddings
-summary: TiDB Vector SearchをOpenAI互換の埋め込みモデルと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
+summary: TiDBベクトル検索をOpenAI互換の埋め込みモデルと統合して、埋め込みデータを保存し、セマンティック検索を実行する方法を学びましょう。
 ---
 
 # OpenAI互換埋め込み {#openai-compatible-embeddings}

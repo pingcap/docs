@@ -3,7 +3,7 @@ title: TiDB Lightning Configuration
 summary: TiDB Lightningの CLI の使用方法とサンプル構成について学習します。
 ---
 
-# TiDB Lightningコンフィグレーション {#tidb-lightning-configuration}
+# TiDB Lightning設定 {#tidb-lightning-configuration}
 
 このドキュメントでは、グローバル設定とタスク設定のサンプルを提供し、コマンドラインパラメータの使用方法を説明します。サンプル設定ファイルは[`lightning/tidb-lightning.toml`](https://github.com/pingcap/tidb/blob/master/lightning/tidb-lightning.toml)にあります。
 
@@ -513,7 +513,7 @@ CSV ファイルの解析方法を構成します。
 
 #### `host` {#host}
 
-- クラスターからの任意の TiDBサーバーのコンフィグレーション。
+- クラスターからの任意の TiDBサーバーの設定。
 
 <!-- Example: `"172.16.31.1"` -->
 

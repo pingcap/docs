@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0 Beta Release Notes
-summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安定性、SQLオプティマイザ、統計、実行エンジンに重点を置いています。新機能には、ビュー、ウィンドウ関数、範囲分割、ハッシュ分割のサポートが含まれます。SQLオプティマイザは、トランザクションにおけるインデックス結合のサポート、定数伝播の最適化、DO文におけるサブクエリのサポートなど、さまざまな最適化によって強化されました。SQLエグゼキューターも最適化され、パフォーマンスが向上しました。権限管理、サーバー、互換性、DDLがすべて改善されました。TiDB Lightningは単一テーブルのバッチインポートをサポートするようになり、PDとTiKVにもさまざまな機能強化と新機能が追加されました。
+summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安定性、SQLオプティマイザ、統計、実行エンジンに重点を置いています。新機能には、ビュー、ウィンドウ関数、レンジパーティショニング、ハッシュパーティショニングのサポートが含まれます。SQLオプティマイザは、トランザクションにおけるインデックス結合のサポート、定数伝播の最適化、DO文におけるサブクエリのサポートなど、さまざまな最適化によって強化されました。SQLエグゼキューターも最適化され、パフォーマンスが向上しました。権限管理、サーバー、互換性、DDLがすべて改善されました。TiDB Lightningは単一テーブルのバッチインポートをサポートするようになり、PDとTiKVにもさまざまな機能強化と新機能が追加されました。
 ---
 
 # TiDB 3.0 ベータ版リリースノート {#tidb-3-0-beta-release-notes}
@@ -12,7 +12,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
 - 新機能
     - ビューをサポート
     - ウィンドウ関数をサポート
-    - 範囲分割をサポート
+    - レンジパーティショニングをサポート
     - ハッシュパーティショニングをサポート
 - SQLオプティマイザ
     - `AggregationElimination` の最適化ルールを再サポート [#7676](https://github.com/pingcap/tidb/pull/7676)
@@ -31,7 +31,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - 複数のテーブルを結合する際の結合順序の選択を最適化するために貪欲アルゴリズム`Join Reorder`を導入する[#8394](https://github.com/pingcap/tidb/pull/8394)
     - ビューをサポート[#8757](https://github.com/pingcap/tidb/pull/8757)
     - ウィンドウ機能をサポート[#8630](https://github.com/pingcap/tidb/pull/8630)
-    - `TIDB_INLJ`有効になっていない場合にクライアントに警告を返し、ユーザビリティを向上させる[#9037](https://github.com/pingcap/tidb/pull/9037)
+    - `TIDB_INLJ`が有効になっていない場合にクライアントに警告を返し、ユーザビリティを向上させる[#9037](https://github.com/pingcap/tidb/pull/9037)
     - フィルタリング条件とテーブル統計に基づいてフィルタリングされたデータの統計を推測する機能をサポート[#7921](https://github.com/pingcap/tidb/pull/7921)
     - レンジパーティションのパーティションプルーニング最適化ルールの改善 [#8885](https://github.com/pingcap/tidb/pull/8885)
 - SQLエグゼキュータ
@@ -64,7 +64,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - `tidb_batch_commit`変数を使用して、ステートメントの数に基づいてトランザクションを複数のトランザクションに分割することをサポートします。 [#8293](https://github.com/pingcap/tidb/pull/8293)
     - `ADMIN SHOW SLOW`文を使用してスローログをチェックするサポート [#7785](https://github.com/pingcap/tidb/pull/7785)
 - 互換性
-    - `ALLOW_INVALID_DATES` SQLモードサポート [#9027](https://github.com/pingcap/tidb/pull/9027)
+    - `ALLOW_INVALID_DATES` SQLモードをサポート [#9027](https://github.com/pingcap/tidb/pull/9027)
     - CSVファイルのフォールトトレランスを`LoadData`向上[#9005](https://github.com/pingcap/tidb/pull/9005)
     - MySQL 3.20ハンドシェイクプロトコルサポート [#8812](https://github.com/pingcap/tidb/pull/8812)
     - 符号なし`bigint`列をAUTO_INCREMENT列として使用することをサポート [#8181](https://github.com/pingcap/tidb/pull/8181)
@@ -75,7 +75,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - `ADD INDEX`の同時実行数の動的な調整をサポート[#8295](https://github.com/pingcap/tidb/pull/8295)
     - テーブルまたは列の文字セットの`utf8`/`utf8mb4`への変更をサポート [#8037](https://github.com/pingcap/tidb/pull/8037)
     - デフォルトの文字セットを`utf8`から`utf8mb4`に変更します [#7965](https://github.com/pingcap/tidb/pull/7965)
-    - 範囲パーティションをサポート[#8011](https://github.com/pingcap/tidb/pull/8011)
+    - レンジパーティションをサポート[#8011](https://github.com/pingcap/tidb/pull/8011)
 
 ## ツール {#tools}
 

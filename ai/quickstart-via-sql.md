@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-sql/','/ja/tidb/dev/v
 
 TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/concepts/vector-search-overview.md)をサポートし、新しい [ベクトルデータ型](/ai/reference/vector-search-data-types.md)といくつかの[ベクトル関数](/ai/reference/vector-search-functions-and-operators.md)を導入します。
 
-このドキュメントでは、SQL文だけを使用して TiDB Vector Search を開始する方法を説明します。 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)を使用して、次の操作を実行する方法を学習します。
+このドキュメントでは、SQL文だけを使用して TiDBベクトル検索を開始する方法を説明します。 [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)を使用して、次の操作を実行する方法を学習します。
 
 - TiDBに接続します。
 - ベクトルテーブルを作成します。

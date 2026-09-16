@@ -47,7 +47,7 @@ SQL文を直接記述してインポートタスクを送信でき、呼び出�
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightningでは[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)を記述する必要があります。これらの構成ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
+対照的に、 TiDB Lightningでは[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)を記述する必要があります。これらの設定ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
 
 ### タスクのスケジュール {#task-scheduling}
 

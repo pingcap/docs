@@ -127,7 +127,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 `mounter_worker_num` : マウンタのスレッド番号。マウンタはTiKVから出力されたデータをデコードするために使用されます。デフォルト値は`16`です。
 
-The configuration parameters of sink are as follows:
+シンクの設定パラメータは以下のとおりです。
 
 ```json
 {

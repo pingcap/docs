@@ -1,12 +1,12 @@
 ---
 title: Improve Vector Search Performance
-summary: TiDB Vector Search のパフォーマンスを向上させるためのベストプラクティスを学びます。
+summary: TiDBベクトル検索のパフォーマンスを向上させるためのベストプラクティスを学びます。
 aliases: ['/ja/tidb/stable/vector-search-improve-performance/','/ja/tidbcloud/vector-search-improve-performance/']
 ---
 
 # ベクトル検索のパフォーマンスを向上させる {#improve-vector-search-performance}
 
-TiDB Vector Searchを使用すると、画像、ドキュメント、その他の入力に類似した結果を検索する近似近傍法（ANN）クエリを実行できます。クエリのパフォーマンスを向上させるには、以下のベストプラクティスを確認してください。
+TiDBベクトル検索を使用すると、画像、ドキュメント、その他の入力に類似した結果を検索する近似近傍法（ANN）クエリを実行できます。クエリのパフォーマンスを向上させるには、以下のベストプラクティスを確認してください。
 
 > **Note:**
 >

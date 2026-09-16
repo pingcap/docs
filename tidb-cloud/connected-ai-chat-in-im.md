@@ -3,7 +3,7 @@ title: "Connected: AI chat in IM"
 summary: インスタント メッセージ (IM) の AI チャットに関する詳細情報を紹介します。
 ---
 
-# 接続：IMでのAIチャット {#connected-ai-chat-in-im}
+# Connected: IMでのAIチャット {#connected-ai-chat-in-im}
 
 PingCAPを搭載したインスタントメッセージ（IM）のAIチャットは、TiDB AIアシスタントチャットボットを特定のIMチャネルに招待し、予備的な技術サポートや相談を提供するサービスです。このサービスは、 [TiDBベクトル検索](/ai/concepts/vector-search-overview.md)ベースに構築されたGraph RAG（Retrieval-Augmented Generation）に基づいています。
 

@@ -33,7 +33,7 @@ TiDB Lightning論理インポートモードがアプリケーションのパフ
 
 ### ログバックアップで使用される {#used-with-log-backup}
 
-このシナリオでは、 [PITR](/br/br-log-architecture.md#process-of-pitr)が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルのバックアップが不要であることが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
+このシナリオでは、 [PITR](/br/br-log-architecture.md#process-of-pitr)が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルのバックアップが不要であることが確実な場合は、 [TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
 
 TiDB Lightning物理インポートモードでインポートされたデータは、ログバックアップではバックアップできません。テーブルをバックアップする必要がある場合は、 [テーブルをバックアップする](/br/br-snapshot-manual.md#back-up-a-table)で説明されているように、インポート後にテーブルレベルのスナップショットバックアップを実行することをお勧めします。
 
@@ -45,11 +45,11 @@ TiCDC を物理インポートモードで使用することは、短期的に�
 
 - シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)が必要ないことが確実な場合は、 [TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)が必要ないことが確実な場合は、 [TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
 
 - シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。上流 TiDB クラスターの[TiDB Lightning構成ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)のパラメータ`Lightning.check-requirements`を`false`に変更し、インポートタスクを再起動する必要があります。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。上流 TiDB クラスターの[TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)のパラメータ`Lightning.check-requirements`を`false`に変更し、インポートタスクを再起動する必要があります。
 
     上流TiDBクラスタのインポートタスクが完了したら、 TiDB Lightningを使用して、同じデータを下流TiDBクラスタにインポートします。下流にRedshiftやSnowflakeなどのデータベースがある場合は、クラウドストレージサービスからCSV、SQL、またはParquetファイルを読み取り、データベースに書き込むように設定できます。
 

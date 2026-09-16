@@ -1,12 +1,12 @@
 ---
 title: Integrate Vector Search with LlamaIndex
-summary: TiDB Vector SearchとLlamaIndexを統合する方法を学びましょう。
+summary: TiDBベクトル検索とLlamaIndexを統合する方法を学びましょう。
 aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/dev/vector-search-integrate-with-llamaindex/','/ja/tidbcloud/vector-search-integrate-with-llamaindex/']
 ---
 
 # ベクトル検索をLlamaIndexと統合する {#integrate-vector-search-with-llamaindex}
 
-このチュートリアルでは、[TiDB ベクトル検索](/ai/concepts/vector-search-overview.md)を[LlamaIndex](https://www.llamaindex.ai)と統合する方法を説明します。
+このチュートリアルでは、[TiDBベクトル検索](/ai/concepts/vector-search-overview.md)を[LlamaIndex](https://www.llamaindex.ai)と統合する方法を説明します。
 
 > **Note:**
 >
@@ -33,7 +33,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 
 ## さあ始めましょう {#get-started}
 
-このセクションでは、TiDB Vector SearchをLlamaIndexと統合してセマンティック検索を実行するための手順を段階的に説明します。
+このセクションでは、TiDBベクトル検索をLlamaIndexと統合してセマンティック検索を実行するための手順を段階的に説明します。
 
 ### ステップ1. 新しいJupyter Notebookファイルを作成する {#step-1-create-a-new-jupyter-notebook-file}
 

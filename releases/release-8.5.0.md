@@ -127,9 +127,9 @@ TiDB 8.5.0は長期サポートリリース（LTS）です。
 | [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)                  | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。これは、[テーブル作成の高速化](/accelerated-table-creation.md)機能がデフォルトで有効になることを意味します。                                                                                                      |
 | [`tidb_ddl_reorg_max_write_speed`](/system-variables.md#tidb_ddl_reorg_max_write_speed-new-in-v6512-v755-and-v850) | 新しく追加された | 各 TiKV ノードの書き込み帯域幅を制限し、インデックス作成の高速化が有効になっている場合（ [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)変数で制御）にのみ有効になります。たとえば、この変数を`200MiB`に設定すると、最大書き込み速度が 200 MiB/s に制限されます。 |
 
-### コンフィグレーションパラメータ {#configuration-parameters}
+### 設定パラメータ {#configuration-parameters}
 
-| コンフィグレーションファイルまたはコンポーネント | コンフィグレーションパラメータ                                                                                                         | 変更の種類  | 説明                                                                                                                                                 |
+| 設定ファイルまたはコンポーネント | 設定パラメータ                                                                                                         | 変更の種類  | 説明                                                                                                                                                 |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB                     | [`deprecate-integer-display-length`](/tidb-configuration-file.md#deprecate-integer-display-length)                      | 変更     | バージョン8.5.0以降、整数表示幅機能は非推奨となりました。この設定項目のデフォルト値は`false`から`true`に変更されました。                                                                              |
 | TiKV                     | [`raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                          | 変更     | デフォルト値を`8192`から`16384`に変更します。                                                                                                                      |
@@ -167,7 +167,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 - バージョン8.0.0では、TiDBが並列ハッシュ集計アルゴリズムのディスクスピルをサポートするかどうかを制御するシステム変数[`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)が導入されました。このシステム変数は、今後のバージョンで非推奨となります。
 - バージョン5.1では、TiDBはパーティションテーブルの動的プルーニングモードを有効にするかどうかを制御するシステム変数[`tidb_partition_prune_mode`](/system-variables.md#tidb_partition_prune_mode-new-in-v51)を導入しました。バージョン8.5.0以降では、この変数を`static`または`static-only`に設定すると警告が表示されます。今後のバージョンでは、このシステム変数は非推奨となります。
 - TiDB Lightning のパラメータ[`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) 、今後のリリースで非推奨となり、その後削除されます。このパラメータは[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)に置き換えられます。これは、競合するレコードの最大数が、単一のインポートタスクで許容できる競合レコードの最大数と一致することを意味します。
-- バージョン6.3.0以降、パーティションテーブルはデフォルトで [動的剪定モード](/partitioned-table.md#dynamic-pruning-mode)を使用します。静的剪定モードと比較して、動的剪定モードはIndexJoinやプランキャッシュなどの機能をサポートし、パフォーマンスが向上しています。そのため、静的剪定モードは非推奨となります。
+- バージョン6.3.0以降、パーティションテーブルはデフォルトで [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用します。静的プルーニングモードと比較して、動的プルーニングモードはIndexJoinやプランキャッシュなどの機能をサポートし、パフォーマンスが向上しています。そのため、静的プルーニングモードは非推奨となります。
 
 ## 改善点 {#improvements}
 
