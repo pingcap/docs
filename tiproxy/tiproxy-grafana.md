@@ -26,17 +26,17 @@ TiProxy には 4つのパネルグループがあります。これらのパネ�
 - Connection Count: 各 TiProxy インスタンスに接続されているクライアントの数
 - Create Connection OPM: 各 TiProxy インスタンスで 1分ごとに作成される接続の数
 - Disconnection OPM: 1分ごとの切断理由別の数。切断理由には以下が含まれます。
-    - 成功: クライアントは正常に切断されます
-    - クライアントネットワークの切断: クライアントが切断前に`QUIT`コマンドを送信しません。ネットワークの問題やクライアントのシャットダウンによっても発生する可能性があります。
-    - クライアントのハンドシェイク失敗: クライアントがTiProxyとのハンドシェイクに失敗しました
-    - 認証失敗: TiDBによってアクセスが拒否されました
-    - SQL エラー: TiDB は他の SQL エラーを返します
-    - プロキシのシャットダウン: TiProxy はシャットダウンしています
-    - 不正なパケット: TiProxy は MySQL パケットを解析できません
-    - バックエンドの取得失敗: TiProxy は接続に利用可能なバックエンドを見つけることができません
-    - プロキシエラー: その他の TiProxy エラー
-    - バックエンドネットワークの中断: TiDBの読み取りまたは書き込みに失敗しました。これは、ネットワークの問題、またはTiDBサーバーのシャットダウンが原因である可能性があります。
-    - バックエンドのハンドシェイク失敗: TiProxy が TiDBサーバーとのハンドシェイクに失敗しました
+    - success: クライアントは正常に切断されます
+    - client network break: クライアントが切断前に`QUIT`コマンドを送信しません。ネットワークの問題やクライアントのシャットダウンによっても発生する可能性があります。
+    - client handshake fail: クライアントがTiProxyとのハンドシェイクに失敗しました
+    - auth fail: TiDBによってアクセスが拒否されました
+    - SQL error: TiDB は他の SQL エラーを返します
+    - proxy shutdown: TiProxy はシャットダウンしています
+    - malformed packet: TiProxy は MySQL パケットを解析できません
+    - get backend fail: TiProxy は接続に利用可能なバックエンドを見つけることができません
+    - proxy error: その他の TiProxy エラー
+    - backend network break: TiDBの読み取りまたは書き込みに失敗しました。これは、ネットワークの問題、またはTiDBサーバーのシャットダウンが原因である可能性があります。
+    - backend handshake fail: TiProxy が TiDBサーバーとのハンドシェイクに失敗しました
 - Goroutine Count: 各 TiProxy インスタンス上の Goroutine の数
 - Owner: 様々なタスクを実行するTiProxyインスタンス。例えば、 `10.24.31.1:3080 - vip`は、 `10.24.31.1:3080`のTiProxyインスタンスが仮想IPにバインドされていることを示します。タスクには以下が含まれます。
     - vip: 仮想IPをバインドする
