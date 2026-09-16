@@ -54,6 +54,8 @@ SQL statements such as `INSERT INTO t10 SELECT * FROM t1` are not affected by GC
 
 TiDB also provides a system variable (`max_execution_time`, `0` by default, indicating no limit) to limit the execution time of a single SQL statement. Currently, the system variable only takes effect for `SELECT` statements (including `SELECT ... FOR UPDATE`). The unit of `max_execution_time` is `ms`, but the actual precision is at the `100ms` level instead of the millisecond level.
 
+Starting from v8.5.9 and v9.0.0, to limit the execution time of transactional `INSERT`, `REPLACE`, `UPDATE`, and `DELETE` statements, and `COMMIT` statements, use [`tidb_dml_max_execution_time`](/system-variables.md#tidb_dml_max_execution_time-new-in-v859-and-v900). Its default value is `0` (no limit), and its unit is milliseconds. For autocommit DML, the limit includes the commit phase. The limit does not apply to non-transactional DML, Pipelined DML, or certain batch operations. For the complete scope and limitations, see the variable description.
+
 ## JDBC query timeout
 
 Starting from v6.1.0, when the [`enable-global-kill`](/tidb-configuration-file.md#enable-global-kill-new-in-v610) configuration item is set to its default value `true`, you can use the `setQueryTimeout()` method provided by MySQL JDBC to control the query timeout.
