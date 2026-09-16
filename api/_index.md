@@ -27,4 +27,4 @@ TiDB Self-Managedは、TiDBツール用のさまざまなAPIを提供し、ク�
 | [データ移行API](/dm/dm-open-api.md)                                                                                                         | DM-masterノードとDM-workerノード、データソース、およびデータレプリケーションタスクを管理します。                             |
 | [モニタリングAPI](/tidb-monitoring-api.md)                                                                                                   | TiDBサーバーの実行状況、テーブルストレージ情報、およびTiKVクラスタの詳細を取得します。                               |
 | [TiCDC API](/ticdc/ticdc-open-api-v2.md)                                                                                               | TiCDCノードの状態を照会し、レプリケーションタスク（作成、一時停止、再開、更新操作など）を管理します。                           |
-| [TiDB Operator API](https://github.com/pingcap/tidb-operator/blob/%7B%7B%7B.tidb-operator-version%7D%7D%7D/docs/api-references/docs.md) | Kubernetes 上で TiDB クラスタを管理します。これには、デプロイ、アップグレード、スケーリング、バックアップ、フェイルオーバーなどが含まれます。 |
+| [TiDB Operator API](https://github.com/pingcap/tidb-operator/blob/{{{.tidb-operator-version}}}/docs/api-references/docs.md) | Kubernetes 上で TiDB クラスタを管理します。これには、デプロイ、アップグレード、スケーリング、バックアップ、フェイルオーバーなどが含まれます。 |

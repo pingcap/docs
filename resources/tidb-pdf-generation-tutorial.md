@@ -45,7 +45,7 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
 1. TiDB 英語ドキュメント リポジトリに移動します: [https://github.com/pingcap/docs](https://github.com/pingcap/docs) 。
 
-2. 右上隅の[**フォーク**](https://github.com/pingcap/docs/fork)クリックし、フォークが完了するまで待ちます。
+2. 右上隅の[**フォーク**](https://github.com/pingcap/docs/fork)をクリックし、フォークが完了するまで待ちます。
 
 3. 次のいずれかの方法を使用して、TiDB ドキュメント リポジトリをローカルに複製します。
 
@@ -68,7 +68,7 @@ TiDB 英語ドキュメントリポジトリ: [https://github.com/pingcap/docs](
 
 ## 手順 {#steps}
 
-> 推定時間: 以下の操作には 2分しかかかりませんが、PDF の生成には 0.5 ～ 1時間かかります。
+> 推定所要時間: 以下の操作には 2分しかかかりませんが、PDF の生成には 0.5 ～ 1時間かかります。
 
 1. ローカルの TiDB ドキュメント リポジトリ内のファイルが、アップストリーム GitHub リポジトリの最新バージョンであることを確認します。
 
