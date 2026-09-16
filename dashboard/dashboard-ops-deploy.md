@@ -1,6 +1,6 @@
 ---
 title: Deploy TiDB Dashboard
-summary: TiDB Dashboardは、v4.0以降のPDに組み込まれています。追加のデプロイメントは不要です。Kubernetes上に独立してデプロイすることも可能です。複数のPDインスタンスがデプロイされている場合、ダッシュボードとして機能するのは1つだけです。`tiup cluster display`コマンドを使用して、ダッシュボードの機能を確認してください。ダッシュボードの無効化と有効化は`tiup ctl`コマンドを使用して行うことができます。
+summary: TiDB Dashboardは、v4.0以降のPDに組み込まれています。追加のデプロイメントは不要です。Kubernetes上に独立してデプロイすることも可能です。複数のPDインスタンスがデプロイされている場合、ダッシュボードを提供するのは1つだけです。`tiup cluster display`コマンドを使用して、ダッシュボードの機能を確認してください。ダッシュボードの無効化と有効化は`tiup ctl`コマンドを使用して行うことができます。
 ---
 
 # TiDB Dashboardをデプロイ {#deploy-tidb-dashboard}
@@ -23,7 +23,7 @@ TiDB Dashboard UIは、v4.0以降のバージョンのPDコンポーネントに
 
 ## 複数のPDインスタンスを使用したデプロイメント {#deployment-with-multiple-pd-instances}
 
-クラスターに複数の PD インスタンスがデプロイされている場合、これらのインスタンスのうち 1つだけが TiDB Dashboardとして機能します。
+クラスターに複数の PD インスタンスがデプロイされている場合、これらのインスタンスのうち 1つだけが TiDB Dashboardを提供します。
 
 PDインスタンスが初めて実行される際、インスタンスは自動的に相互にネゴシエーションを行い、TiDB Dashboardを提供するインスタンスを1つ選択します。TiDB Dashboardは他のPDインスタンスでは実行されません。PDインスタンスが再起動されたり、新しいPDインスタンスが追加された場合でも、TiDB Dashboardサービスは選択されたPDインスタンスによって常に提供されます。ただし、TiDB Dashboardを提供するPDインスタンスがクラスターから削除（スケールイン）された場合は、再ネゴシエーションが行われます。このネゴシエーションプロセスではユーザーの介入は必要ありません。
 
@@ -72,8 +72,8 @@ tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-add
 
 上記のコマンドでは、
 
-- `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます。
-- `9.9.9.9:2379` TiDB Dashboard サービスを実行する新しい PD インスタンスの IP とポートに置き換えます。
+- `127.0.0.1:2379`を任意の PD インスタンスの IP とポートに置き換えます。
+- `9.9.9.9:2379`を TiDB Dashboard サービスを実行する新しい PD インスタンスの IP とポートに置き換えます。
 
 変更が有効になっているかどうかを確認するには、 `tiup cluster display`コマンドを使用します ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
@@ -87,7 +87,7 @@ tiup cluster display CLUSTER_NAME --dashboard
 
 ## TiDB Dashboardを無効にする {#disable-tidb-dashboard}
 
-TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、すべての PD インスタンスで TiDB Dashboardを無効にします ( `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます)。
+TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、すべての PD インスタンスで TiDB Dashboardを無効にします ( `127.0.0.1:2379`を任意の PD インスタンスの IP とポートに置き換えます)。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address none
@@ -107,7 +107,7 @@ Dashboard is not started.
 
 ## TiDB Dashboardを再度有効にする {#re-enable-tidb-dashboard}
 
-TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、PD にインスタンスの再ネゴシエーションをリクエストし、TiDB Dashboardを実行します ( `127.0.0.1:2379`任意の PD インスタンスの IP とポートに置き換えます)。
+TiUPを使用してデプロイされた実行中のクラスターの場合は、 `tiup ctl:v<CLUSTER_VERSION> pd`コマンドを使用して、PD にインスタンスの再ネゴシエーションをリクエストし、TiDB Dashboardを実行します ( `127.0.0.1:2379`を任意の PD インスタンスの IP とポートに置き換えます)。
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address auto
