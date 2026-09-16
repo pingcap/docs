@@ -48,7 +48,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 > **Note:**
 >
-> 継続的プロファイリングを使用するには、クラスターを最新バージョンのTiUP （v1.9.0以上）またはTiDB Operator （v1.3.0以上）でデプロイまたはアップグレードする必要があります。以前のバージョンのTiUPまたはTiDB Operatorを使用してクラスターをアップグレードした場合は、手順[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)ご覧ください。
+> 継続的プロファイリングを使用するには、クラスターを最新バージョンのTiUP （v1.9.0以上）またはTiDB Operator （v1.3.0以上）でデプロイまたはアップグレードする必要があります。以前のバージョンのTiUPまたはTiDB Operatorを使用してクラスターをアップグレードした場合は、手順については[FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)をご覧ください。
 
 継続的プロファイリングを有効にすると、Webページを常にアクティブにしておくことなく、バックグラウンドで継続的にパフォーマンスデータを収集できます。収集されたデータは一定期間保存され、期限切れのデータは自動的に削除されます。
 
