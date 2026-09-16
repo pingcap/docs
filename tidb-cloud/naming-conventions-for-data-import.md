@@ -56,7 +56,7 @@ CSVファイルをインポートする際は、データファイルに以下�
 - *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
 - *`_xxx_xxx_xxx`* 、例えば`_0_0_01`
 
-`${compress}`は圧縮フォーマットであり、オプションです。TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、および`.snappy` 。
+`${compress}`は圧縮フォーマットであり、オプションです。TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、および`.snappy`をサポートしています。
 
 例えば、以下のすべてのファイルのターゲットデータベースとテーブルは`import_db`と`test_table`です。
 
@@ -103,7 +103,7 @@ SQLファイルをインポートする際は、データファイルに以下�
 - *`._xxx_xxx_xxx`* 、例えば`._0_0_01`
 - *`_xxx_xxx_xxx`* 、例えば`_0_0_01`
 
-`${compress}`は圧縮フォーマットであり、オプションです。TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、および`.snappy` 。
+`${compress}`は圧縮フォーマットであり、オプションです。TiDB Cloud は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、および`.snappy`をサポートしています。
 
 例えば：
 
