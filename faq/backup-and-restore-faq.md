@@ -296,7 +296,7 @@ Note that even if you configures [table filter](/table-filter.md#syntax), **BR d
 
 - Statistics tables (`mysql.stat_*`)
 - System variable tables (`mysql.tidb`, `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
+- [Other system tables](https://github.com/pingcap/tidb/blob/release-6.5/br/pkg/restore/systable_restore.go#L31)
 
 ### How to deal with the error of `cannot find rewrite rule` during restoration?
 
