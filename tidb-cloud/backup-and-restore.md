@@ -327,7 +327,7 @@ To restore a deleted TiDB Cloud Dedicated cluster from the Recycle Bin, take the
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
 
-    >**Tip:**
+    > **Tip:**
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 

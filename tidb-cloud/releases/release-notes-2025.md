@@ -395,7 +395,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
   Next, we plan to expand region coverage on Alibaba Cloud and add AWS support.
 
-    If you try Essential on Alibaba Cloud during this preview, you can share feedback through our web console or join our community on [Slack](https://tidbcommunity.slack.com/archives/CH7TTLL7P) or [Discord](https://discord.gg/ukhXbn69Nx).
+    If you try Essential on Alibaba Cloud during this preview, you can share feedback through our web console or join our community on [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs) or [Discord](https://discord.gg/ukhXbn69Nx).
 
 - **TiDB Cloud Dedicated**
 

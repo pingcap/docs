@@ -247,7 +247,7 @@ After configuring storage for your cloud provider, complete the step for databas
 
     You can rotate audit log files based on either file size or time interval. When either condition is met, TiDB Cloud generates a new audit log file.
 
-    >**Note:**
+    > **Note:**
     >
     > Log file rotation based on time interval only applies to TiDB v8.5.2 or later. If the TiDB  version of your TiDB Cloud Dedicated cluster is earlier than v8.5.2, you can only rotate audit log files based on file size.
 
@@ -272,7 +272,7 @@ To specify auditing filter rules for a cluster, take the following steps:
 2. In the **Add Filter Rule** dialog, configure the following items:
 
     - **Filter Name**: Enter a name for the filter rule.
-    - **SQL User**: Enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match any value or `_` to match any single character. The `@` symbol and `<host>` are optional.
+    - **SQL User**: Enter the SQL user in the `<user>@<host>` format. The username and hostname can use `%` to match zero or more characters or `_` to match exactly one character. The `@` symbol and `<host>` are optional.
     - **Filter Events**: Select the events to log. For the supported filter events, see [Audit Filter Events](#audit-filter-events).
 
 3. Click **Confirm** to add the filter rule.

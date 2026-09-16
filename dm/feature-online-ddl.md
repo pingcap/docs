@@ -1,9 +1,9 @@
 ---
-title: Migrate from Databases that Use GH-ost/PT-osc
+title: Migrate from Databases that Use gh-ost/pt-osc
 summary: This document introduces the `online-ddl/online-ddl-scheme` feature of DM.
 ---
 
-# Migrate from Databases that Use GH-ost/PT-osc
+# Migrate from Databases that Use gh-ost/pt-osc
 
 In production scenarios, table locking during DDL execution can block the reads from or writes to the database to a certain extent. Therefore, online DDL tools are often used to execute DDLs to minimize the impact on reads and writes. Common DDL tools are [gh-ost](https://github.com/github/gh-ost) and [pt-osc](https://www.percona.com/doc/percona-toolkit/3.0/pt-online-schema-change.html).
 

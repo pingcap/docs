@@ -18,7 +18,7 @@ There are two methods to load data from local files:
 1. **Stage**: Upload the local file to an internal stage, then copy data from the staged file into the table. File upload occurs either through lake-query or using a presigned URL, depending on the `presigned_url_disabled` connection option (default: `false`).
 2. **Streaming**: Load the file directly into the table during upload. Use this method when the file is too large to store as a single object in your object storage.
 
-## Tutorial 1 - Load from a Local File
+## Tutorial 1: Load from a Local File
 
 This tutorial uses a CSV file as an example to demonstrate how to import data into {{{ .lake }}} using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) from a local source.
 
@@ -125,13 +125,13 @@ root@localhost:8000/book_db> SELECT * FROM books;
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
-## Tutorial 2 - Load into Specified Columns
+## Tutorial 2: Load into Specified Columns
 
-In [Tutorial 1](#tutorial-1---load-from-a-local-file), you created a table containing three columns that exactly match the data in the sample file. You can also load data into specified columns of a table, so the table does not need to have the same columns as the data to be loaded as long as the specified columns can match. This tutorial shows how to do that.
+In [Tutorial 1](#tutorial-1-load-from-a-local-file), you created a table containing three columns that exactly match the data in the sample file. You can also load data into specified columns of a table, so the table does not need to have the same columns as the data to be loaded as long as the specified columns can match. This tutorial shows how to do that.
 
 ### Before You Begin
 
-Before you start this tutorial, make sure you have completed [Tutorial 1](#tutorial-1---load-from-a-local-file).
+Before you start this tutorial, make sure you have completed [Tutorial 1](#tutorial-1-load-from-a-local-file).
 
 ### Step 1. Create Table
 

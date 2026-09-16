@@ -39,6 +39,8 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 [Connect with AWS PrivateLink](https://docs.pingcap.com/tidbcloudlake/connect-with-aws-privatelink/)
 
+[Connect with Alibaba Cloud PrivateLink](https://docs.pingcap.com/tidbcloudlake/connect-with-alibaba-cloud-privatelink/)
+
 </LearningPath>
 
 <LearningPath label="Integrate" icon="cloud4">

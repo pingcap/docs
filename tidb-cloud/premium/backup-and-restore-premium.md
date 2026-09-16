@@ -52,32 +52,93 @@ Backup files can originate from the following sources:
 
 </CustomContent>
 
-### Automatic backup policies
+### Automatic backup modes
 
-{{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances use a multi-layer backup architecture to protect your data, as described in the following table:
+You can choose an automatic backup mode in **Backup Settings**. The available backup types, retention periods, and pricing model depend on the selected mode.
 
-| Backup type | Retention period | Restore granularity |
+<CustomContent plan="premium">
+
+| Backup mode | Supported backup types | Retention and restore options | Pricing model |
+| --- | --- | --- | --- |
+| **Standard Bundle Mode** | <ul><li>PITR</li><li>Hourly backup snapshots</li><li>Daily backup snapshots</li></ul> | <ul><li>PITR: 7 days</li><li>Hourly snapshots: 7 days</li><li>Daily snapshots: 33 days</li><li>Daily snapshots are created at 00:00 UTC.</li></ul> | Based on incremental data volume. |
+| **Custom Retention Mode** | <ul><li>PITR</li><li>Daily backup snapshots</li></ul> | You can set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. | Based on snapshot size multiplied by retention duration. Each backup is billed as a separate object. |
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+| Backup mode | Supported backup types | Retention and restore options |
 | --- | --- | --- |
-| **Point-in-time recovery (PITR)** | 7 days | Restore to any specific point in time within the 7-day window. |
-| **Hourly snapshot** | 7 days | Restore from any hourly snapshot generated within the last 7 days. |
-| **Daily snapshot** | 33 days | Restore from any daily snapshot generated within the last 33 days. By default, daily snapshots are captured at 00:00 UTC. |
+| **Standard Bundle Mode** | <ul><li>PITR</li><li>Hourly backup snapshots</li><li>Daily backup snapshots</li></ul> | <ul><li>PITR: 7 days</li><li>Hourly snapshots: 7 days</li><li>Daily snapshots: 33 days</li><li>Daily snapshots are created at 00:00 UTC.</li></ul> |
+| **Custom Retention Mode** | <ul><li>PITR</li><li>Daily backup snapshots</li></ul> | You can set the retention period from 3 to 33 days. PITR and daily snapshots use the configured retention period. |
 
-### Backup execution rules
+</CustomContent>
 
-- **Backup cycle**: {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances perform both hourly and daily automatic backups.
+PITR lets you restore data to any point in time within the retention period. A snapshot lets you restore data from a specific hourly or daily snapshot that is still within the retention period.
 
-- **Backup schedule**:
+### Configure automatic backups
 
-    - Hourly backups run at the start of every hour.
-    - Daily backups run at 00:00 UTC each day.
-    - Currently, you cannot customize or manage backup schedules.
+1. On the [**My TiDB**](https://tidbcloud.com/tidbs) page, click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance.
 
-- **Retention behavior**: backups expire automatically when they exceed their retention period (7 days or 33 days) and cannot be restored.
+2. In the left navigation pane, click **Data** > **Backup**.
+
+3. In the upper-right corner, click **...**, and then click **Backup Settings**.
+
+4. Select an automatic backup mode:
+
+    - **Standard Bundle Mode** uses predefined settings for PITR, hourly snapshots, and daily snapshots.
+    - **Custom Retention Mode** lets you specify the automatic backup retention period and daily backup time.
+
+5. If you select **Custom Retention Mode**, configure the following settings. Otherwise, skip this step.
+
+    - **Backup Retention**: select a retention period from 3 to 33 days. The default value is 7 days.
+    - **Daily Backup Time**: select the time of day for the daily snapshot. The time zone is displayed next to the setting.
+
+6. Review the **Overview** section, and then click **Save**.
+
+    The overview shows the backup types enabled by the selected backup mode, the corresponding retention periods, and the available restore options.
+
+<CustomContent plan="byoc">
 
 > **Note:**
 >
-> - Automatic backup storage costs depend on the backup data volume and the retention period.
-> - To extend the backup retention period beyond the default limits, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+> If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+> **Note:**
+>
+> - Custom Retention Mode pricing is based on snapshot size and retention duration. PITR is temporarily free during the public preview period. See [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud-premium-pricing-details) for more information.
+> - If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+
+</CustomContent>
+
+### Switch between automatic backup modes
+
+To switch between **Standard Bundle Mode** and **Custom Retention Mode**, take the following steps:
+
+1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
+2. In the upper-right corner, click **...**, and then click **Backup Settings**.
+3. In the displayed dialog, select a new mode.
+
+    - If you switch to **Custom Retention Mode**, you need to configure the backup retention period and daily backup time.
+    - If you switch to **Standard Bundle Mode**, the retention periods and daily backup time are reset to the standard bundle defaults.
+
+4. Review the retention settings in the **Overview** section, and then click **Save**.
+
+<CustomContent plan="premium">
+
+After you save the changes, future automatic backups are billed according to the pricing model of the selected mode.
+
+</CustomContent>
+
+If the new retention period is shorter than the current retention period, the confirmation dialog lists the automatic backups that are older than the new retention period and will be permanently deleted. Confirm the operation only after verifying that you no longer need those backups.
+
+### Backup protection
+
+To help prevent data loss and preserve a recovery point, TiDB Cloud protects **the latest successful automatic backup** of an instance until its retention period expires. Therefore, you cannot manually delete this protected latest backup, even after the instance is deleted. If you attempt to delete it, the console displays a message explaining that the backup is protected and cannot be deleted before it expires.
 
 ### Delete backup files
 
@@ -86,6 +147,11 @@ To delete an existing backup file for your {{{ .premium }}}<CustomContent plan="
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your instance.
 
 2. Locate the corresponding backup file you want to delete, and click **...** > **Delete** in the **Action** column.
+
+    > **Note:**
+    >
+    > TiDB Cloud protects the **latest successful automatic backup** of your instance to help prevent data loss. If you attempt to delete it, the console displays a message explaining that the backup is protected and cannot be deleted before it expires.
+    > If you have the `Organization Owner` or `Project Owner` role in TiDB Cloud, you can delete an automatic backup other than the latest successful one, or delete a manual backup.
 
 ## Manual backups
 
@@ -107,7 +173,7 @@ In addition to automatic backups, {{{ .premium }}} and {{{ .byoc }}} support man
 
 - **Storage location**: manual backups are stored in cloud storage managed by TiDB.
 
-- **Cost**: because manual backups are retained long term and incur additional charges.
+- **Cost**: manual backups incur additional charges because they are retained until you delete them.
 
 - **Limitations**: manual backups do not support point-in-time recovery (PITR) or partial backups (for example, table-level or database-level backups). You cannot restore a manual backup to an existing instance. Each restore operation creates a new instance.
 
@@ -172,7 +238,19 @@ To restore your data to a new {{{ .premium }}}<CustomContent plan="byoc"> or {{{
 
 4. Click **Next** to proceed to the **Restore to a New Instance** page.
 
-5. Configure your new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance for restoration. The steps are the same as [creating a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
+5. Configure your new {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance for restoration. Follow the steps in <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>.
+
+    <CustomContent plan="byoc">
+
+    For {{{ .byoc }}}, select an active resource pool in the same cloud provider and region as the backup. The restored instance inherits the high availability mode of the selected resource pool. You can restore the same backup to a zonal or regional resource pool. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+
+    If the selected resource pool has a Pool vCPU Limit and its current provisioned vCPU is greater than or equal to the limit, TiDB Cloud displays a warning and you cannot restore the instance to that resource pool. To continue, go to the Resource Pool details page to increase or turn off the Pool vCPU Limit, or select another resource pool.
+
+    > **Note:**
+    >
+    > Even if the current provisioned vCPU is below the Pool vCPU Limit, restoring an instance might cause the total provisioned vCPU to exceed the limit. This might constrain resource scaling and degrade the performance of all instances in the resource pool. Before restoring the instance, make sure that the resource pool has sufficient vCPU capacity. If necessary, increase or turn off the Pool vCPU Limit, or select another resource pool.
+
+    </CustomContent>
 
     > **Note:**
     >
@@ -188,7 +266,7 @@ To restore a deleted {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click **...** in the upper-right corner, and then click **Recycle Bin**.
 
-    >**Tip:**
+    > **Tip:**
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
@@ -237,7 +315,7 @@ To restore a backup generated by a {{{ .dedicated }}} cluster, follow these step
 
 <CustomContent plan="premium">
 
->**Note:**
+> **Note:**
 >
 > - Currently, only backups located in **Amazon S3** and **Alibaba Cloud OSS** are supported for restore.
 > - You can restore backups only to a new instance hosted by the same cloud provider as your storage bucket.
@@ -247,7 +325,7 @@ To restore a backup generated by a {{{ .dedicated }}} cluster, follow these step
 
 <CustomContent plan="byoc">
 
->**Note:**
+> **Note:**
 >
 > - Currently, only backups located in **Amazon S3** are supported for restore.
 > - You can restore backups only to a new instance hosted by the same cloud provider as your storage bucket.
@@ -290,7 +368,19 @@ To restore backups from cloud storage, do the following:
 
 3. Click **Verify Backup and Next**.
 
-4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in [Create a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) to restore the backup to a new instance.
+4. If the verification is successful, the **Restore to a New Instance** page appears. Review the backup information displayed at the top of the page, and then follow the steps in <CustomContent plan="premium">[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> to restore the backup to a new instance.
+
+    <CustomContent plan="byoc">
+
+    For {{{ .byoc }}}, select an active resource pool that matches the target cloud provider and region. The restored instance inherits the high availability mode of the selected resource pool. You can restore the same backup to a zonal or regional resource pool. If no suitable resource pool is available, an `Organization Owner` can create one before restoring the instance. Other roles cannot create resource pools. For more information, see [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md).
+
+    If the selected resource pool has a Pool vCPU Limit and its current provisioned vCPU is greater than or equal to the limit, TiDB Cloud displays a warning and you cannot restore the instance to that resource pool. To continue, go to the Resource Pool details page to increase or turn off the Pool vCPU Limit, or select another resource pool.
+
+    > **Note:**
+    >
+    > Even if the current provisioned vCPU is below the Pool vCPU Limit, restoring an instance might cause the total provisioned vCPU to exceed the limit. This might restrict resource scaling and affect the performance of all instances in the resource pool. Before restoring the instance, make sure that the resource pool has sufficient vCPU capacity. If necessary, increase or turn off the Pool vCPU Limit, or select another resource pool.
+
+    </CustomContent>
 
     If the backup information is incorrect, click **Previous** to return to the previous page, and then enter the correct information.
 

@@ -38,7 +38,7 @@ CREATE TABLE books
 
 Follow this tutorial to upload the sample file to the user stage and load data from the staged file into {{{ .lake }}}.
 
-### Step 1: Upload Sample File
+### Step 1. Upload Sample File
 
 1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
 
@@ -109,7 +109,7 @@ Follow this tutorial to upload the sample file to an internal stage and load dat
     ╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
     ```
 
-### Step 2: Upload Sample File
+### Step 2. Upload Sample File
 
 1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
 
@@ -189,7 +189,7 @@ Follow this tutorial to upload the sample file to an external stage and load dat
     my_external_stage|External  |'root'@'%'|       |
     ```
 
-### Step 2: Upload Sample File
+### Step 2. Upload Sample File
 
 1. Upload the sample file using [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md):
 

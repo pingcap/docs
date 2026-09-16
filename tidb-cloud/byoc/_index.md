@@ -41,11 +41,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Prepare AWS Environment](https://docs.tidb.io/tidbcloud/byoc-prepare-environment-aws/?plan=byoc)
 
-[Configure IAM Permissions](https://docs.tidb.io/tidbcloud/byoc-iam-configuration/?plan=byoc)
+[Configure IAM Permissions](https://docs.tidb.io/tidbcloud/byoc-configure-iam-permissions/?plan=byoc)
 
-[Automated Deployment](https://docs.tidb.io/tidbcloud/byoc-automated-deployment/?plan=byoc)
+[Automated Region Deployment](https://docs.tidb.io/tidbcloud/byoc-automated-deployment/?plan=byoc)
 
-[Service Initialization](https://docs.tidb.io/tidbcloud/byoc-service-initialization/?plan=byoc)
+[Initialize the Service](https://docs.tidb.io/tidbcloud/byoc-initialize-service/?plan=byoc)
 
 [Joint Validation](https://docs.tidb.io/tidbcloud/joint-validation/?plan=byoc)
 
@@ -53,7 +53,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Maintain" icon="cloud7">
 
-[Create a {{{ .byoc }}} Instance](https://docs.tidb.io/tidbcloud/create-tidb-instance-premium/?plan=byoc)
+[Create a Resource Pool](https://docs.tidb.io/tidbcloud/create-resource-pool-byoc/?plan=byoc)
+
+[Manage Resource Pools](https://docs.tidb.io/tidbcloud/manage-resource-pools-byoc/?plan=byoc)
+
+[Create a {{{ .byoc }}} Instance](https://docs.tidb.io/tidbcloud/create-tidb-instance-byoc/?plan=byoc)
 
 [Connect to a {{{ .byoc }}} Instance](https://docs.tidb.io/tidbcloud/connect-to-tidb-instance/?plan=byoc)
 

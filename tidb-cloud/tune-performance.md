@@ -14,7 +14,7 @@ TiDB Cloud provides [Slow Query](#slow-query), [Statement Analysis](#statement-a
 
 <CustomContent plan="premium">
 
-TiDB Cloud provides [Slow Query](#slow-query) and [SQL Statement](#sql-statement) to analyze performance.
+TiDB Cloud provides [Slow Query](#slow-query) and [Statement Analysis](#statement-analysis) to analyze performance.
 
 </CustomContent>
 
@@ -48,8 +48,6 @@ By default, SQL queries that take more than 300 milliseconds are considered as s
 
 To view slow queries in a <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent>, perform the following steps:
 
-<CustomContent plan="starter,essential,dedicated">
-
 1. [Navigate to the **Diagnosis** page](#view-the-diagnosis-page).
 
 2. Click the **Slow Query** tab.
@@ -57,18 +55,6 @@ To view slow queries in a <CustomContent plan="starter">{{{ .starter }}} instanc
 3. Click any slow query in the list to display its detailed execution information.
 
 4. (Optional) You can filter slow queries based on the target time range, the related databases, and SQL keywords. You can also limit the number of slow queries to be displayed.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-1. Navigate to the overview page of the {{{ .premium }}} instance, and then click **Monitoring** > **Slow Query** in the left navigation pane.
-
-2. Select a slow query from the list to view its detailed execution information.
-
-3. (Optional) You can filter slow queries based on the target time range and SQL keywords. You can also limit the number of slow queries to be displayed.
-
-</CustomContent>
 
 The results are displayed in the form of a table, and you can sort the results by different columns.
 
@@ -85,7 +71,7 @@ For more information, see [Slow Queries in TiDB Dashboard](https://docs.pingcap.
 
 </CustomContent>
 
-<CustomContent plan="starter,essential,dedicated">
+<CustomContent plan="starter,essential,dedicated,premium">
 
 ## Statement Analysis
 
@@ -96,22 +82,6 @@ To use the statement analysis, perform the following steps:
 2. Click the **SQL Statement** tab.
 
 3. Select the time period to be analyzed in the time interval box. Then you can get the execution statistics of SQL statements of all databases in this period.
-
-4. (Optional) If you only care about certain databases, you can select the corresponding schema(s) in the next box to filter the results.
-
-</CustomContent>
-
-<CustomContent plan="premium">
-
-## SQL Statement
-
-To use the **SQL Statement** page, perform the following steps:
-
-1. Navigate to the overview page of the {{{ .premium }}} instance, and then click **Monitoring** > **SQL Statement** in the left navigation pane.
-
-2. Click a SQL statement in the list to view its detailed execution information.
-
-3. In the time interval box, select the time period to be analyzed. Then you can get the execution statistics for SQL statements across all databases in this period.
 
 4. (Optional) If you only care about certain databases, you can select the corresponding schema(s) in the next box to filter the results.
 
