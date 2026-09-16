@@ -5,7 +5,7 @@ summary: TiDB Cloudの v1beta API について学習します。
 
 # TiDB Cloud API v1beta の概要 {#tidb-cloud-api-v1beta-overview}
 
-[v1beta API](https://docs.pingcap.com/tidbcloud/api/v1beta) 、 TiDB Cloud内の管理オブジェクトをプログラム的に管理するためのアクセスを提供する RESTful API です。この API を通じて、プロジェクト、クラスター、バックアップ、復元、インポートなどのリソースを自動的かつ効率的に管理できます。
+[v1beta API](https://docs.pingcap.com/tidbcloud/api/v1beta)は、 TiDB Cloud内の管理オブジェクトをプログラム的に管理するためのアクセスを提供する RESTful API です。この API を通じて、プロジェクト、クラスター、バックアップ、復元、インポートなどのリソースを自動的かつ効率的に管理できます。
 
 現在、次の v1beta API を使用してTiDB Cloud内のリソースを管理できます。
 
