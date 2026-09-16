@@ -272,6 +272,7 @@
 | listening address | 监听地址 |  |
 | load | 负载 |  |
 | load | 加载 |  |
+| load data | 导入数据 | In TiDB Cloud Lake docs, use this term, especially in TOC entries. |
 | Local Persistent Volume(s)/LPV(s) | 本地持久化卷 |  |
 | local overlay | 本地叠加层 | In TiDB Cloud Filesystem mount docs, it refers to files that a mount profile keeps on the local machine instead of in the remote namespace. |
 | locality | 局部性 |  |
@@ -481,6 +482,7 @@
 | throughput | 吞吐 |  |
 | TiDB | TiDB |  |
 | TiDB Cloud | TiDB Cloud |  |
+| TiDB Cloud BYOC | TiDB Cloud BYOC |  |
 | TiDB Cloud Dedicated | TiDB Cloud Dedicated |  |
 | TiDB Cloud Essential | TiDB Cloud Essential |  |
 | TiDB Cloud CLI (`ti`) | TiDB Cloud CLI (`ti`) | Keep it in English as the product name. |
@@ -519,6 +521,7 @@
 | unidirectional data flow | 单向数据流 |  |
 | union | 联合体 |  |
 | Universally Unique Identifier (UUID) | 通用唯一识别码 |  |
+| unload data | 导出数据 | In TiDB Cloud Lake docs, use this term, especially in TOC entries. |
 | unsigned integer | 无符号整数 |  |
 | update | 修改（如：修改行） |  |
 | user identification | 用户标识 |  |
