@@ -23,7 +23,7 @@ summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightning[個別のサーバーデプロイ](/tidb-lightning/deploy-tidb-lightning.md)が必要です。
+対照的に、 TiDB Lightningには[個別のサーバーデプロイ](/tidb-lightning/deploy-tidb-lightning.md)が必要です。
 
 ### リソースの活用 {#resource-utilization}
 
@@ -43,11 +43,11 @@ TiDB Lightning をデプロイして実行するには、別々のサーバー�
 
 #### `IMPORT INTO` {#import-into}
 
-You can directly write SQL statements to submit import tasks, which are easy to call and integrate.
+SQL文を直接記述してインポートタスクを送信でき、呼び出しと統合が容易です。
 
 #### TiDB Lightning {#tidb-lightning}
 
-対照的に、 TiDB Lightning[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)を記述する必要があります。これらの設定ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
+対照的に、 TiDB Lightningでは[タスク設定ファイル](/tidb-lightning/tidb-lightning-configuration.md)を記述する必要があります。これらの設定ファイルは複雑であり、サードパーティが簡単に呼び出すことはできません。
 
 ### タスクのスケジュール {#task-scheduling}
 
@@ -104,7 +104,7 @@ TiDB Lightningインスタンス ノードに障害が発生した場合、以�
 
 #### `IMPORT INTO` {#import-into}
 
-Due to the use of Global Sort, data imported into TiKV does not overlap, resulting in better scalability compared with TiDB Lightning.
+Global Sortを使用しているため、TiKVにインポートされるデータが重複せず、TiDB Lightningと比較してスケーラビリティが向上します。
 
 #### TiDB Lightning {#tidb-lightning}
 

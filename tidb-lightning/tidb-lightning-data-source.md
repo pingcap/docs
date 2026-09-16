@@ -50,9 +50,9 @@ rename srcdb. tgtdb. *.sql
 以下は、正規表現を使用してオンラインで名前を置換する例です。この例では、
 
 - データファイル`pattern`の一致ルールは`^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)`です。
-- `schema`を`'$1'`と指定すると、最初の正規表現の値`schema_regrex`は変更されません。または、 `schema` `'tgtdb'`などの文字列として指定すると、固定のターゲットデータベース名になります。
-- `table`を`'$2'`と指定すると、2番目の正規表現の値`table_regrex`は変更されません。または、 `table` `'t1'`などの文字列として指定すると、固定のターゲットテーブル名になります。
-- `type`を`'$3'` （データファイルの種類）として指定します。`type` `"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
+- `schema`を`'$1'`と指定すると、最初の正規表現の値`schema_regrex`は変更されません。または、 `schema`を`'tgtdb'`などの文字列として指定すると、固定のターゲットデータベース名になります。
+- `table`を`'$2'`と指定すると、2番目の正規表現の値`table_regrex`は変更されません。または、 `table`を`'t1'`などの文字列として指定すると、固定のターゲットテーブル名になります。
+- `type`を`'$3'` （データファイルの種類）として指定します。`type`は`"table-schema"` （ `schema.sql`ファイル）または`"schema-schema"` （ `schema-create.sql`ファイル）として指定できます。
 
 ```toml
 [mydumper]
@@ -73,7 +73,7 @@ table = '$2'
 type = '$3'
 ```
 
-`gzip`を使用してデータファイルをバックアップする場合は、それに応じて圧縮形式を設定する必要があります。データファイル`pattern`のマッチングルールは`'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`です。圧縮ファイル形式を表すために、 `compression` `'$4'`として指定できます。例：
+`gzip`を使用してデータファイルをバックアップする場合は、それに応じて圧縮形式を設定する必要があります。データファイル`pattern`のマッチングルールは`'^({schema_regrex})\.({table_regrex})\.({file_serial_regrex})\.(csv|parquet|sql)\.(gz)'`です。圧縮ファイル形式を表すために、 `compression`を`'$4'`として指定できます。例：
 
 ```toml
 [mydumper]
@@ -219,7 +219,7 @@ trim-last-separator = false
 
 #### `trim-last-separator` {#trim-last-separator}
 
-- `separator`行末文字として扱い、すべての末尾の区切り文字を削除するかどうか。
+- `separator`を行末文字として扱い、すべての末尾の区切り文字を削除するかどうか。
 
     たとえば、次の CSV ファイルでは、
 
@@ -404,7 +404,7 @@ type = '$3'
     - インポートするテーブルの名前（例： `table1` ）。一致したすべてのファイルは`table1`にインポートされます。
 - **type** : ファイルの種類。`sql` 、`parquet` 、`csv`をサポートします。値は次のとおりです。
     - 正規表現を使用して取得されたグループ インデックス (例: `$3` )。
-- **key** : ファイル番号 (例: `${db_name}.${table_name}.001.csv`の場合は`001` 。
+- **key** : ファイル番号（例：`${db_name}.${table_name}.001.csv`の`001`）。
     - 正規表現を使用して取得されたグループ インデックス (例: `$4` )。
 
 ## Amazon S3からデータをインポートする {#import-data-from-amazon-s3}

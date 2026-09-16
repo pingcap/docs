@@ -5,7 +5,7 @@ summary: TiDB Lightningのモニター構成と監視メトリックについて
 
 # TiDB Lightning監視 {#tidb-lightning-monitoring}
 
-`tidb-lightning` [Prometheus](https://prometheus.io/)を介してメトリクス収集をサポートします。このドキュメントでは、 TiDB Lightningの監視設定と監視メトリクスについて説明します。
+`tidb-lightning`は[Prometheus](https://prometheus.io/)を介してメトリクス収集をサポートします。このドキュメントでは、 TiDB Lightningの監視設定と監視メトリクスについて説明します。
 
 ## モニター構成 {#monitor-configuration}
 
@@ -33,7 +33,7 @@ scrape_configs:
 
 ## Grafanaダッシュボード {#grafana-dashboard}
 
-[Grafana](https://grafana.com/) 、Prometheus メトリックをダッシュボードとして視覚化するための Web インターフェースです。
+[Grafana](https://grafana.com/)は、Prometheus メトリックをダッシュボードとして視覚化するための Web インターフェースです。
 
 ### 1行目: スピード {#row-1-speed}
 
@@ -43,7 +43,7 @@ scrape_configs:
 | :-------- | :------------------- | :---------------------------------------------------------------- |
 | インポート速度   | TiDB Lightningから書き込む | TiDB Lightningから TiKV Importer への KV の送信速度。これは各テーブルの複雑さによって異なります。 |
 | インポート速度   | TIKVにアップロード          | TiKVインポーターからすべてのTiKVレプリカへの合計アップロード速度                              |
-| Chunk処理期間 |                      | Average time needed to completely encode one single data file     |
+| Chunk処理期間 |                      | 1つのデータファイルを完全にエンコードするのにかかる平均時間     |
 
 場合によっては、インポート速度がゼロになり、他のパーツが追いつくまで時間がかかることがあります。これは正常な動作です。
 
@@ -88,7 +88,7 @@ scrape_configs:
 | パネル                  | シリーズ      | 説明                                  |
 | :------------------- | :-------- | :---------------------------------- |
 | Chunkパーサーのブロック読み取り期間 | ブロックを読み込む | 解析の準備のために1ブロックのバイトを読み取るのにかかる時間      |
-| Chunkパーサーのブロック読み取り期間 | 応募者       | アイドル状態のIO同時実行を待つのにかかった時間            |
+| Chunkパーサーのブロック読み取り期間 | apply worker       | アイドル状態のIO同時実行を待つのにかかった時間            |
 | SQLプロセスの実行時間         | 行エンコード    | 1行の解析とエンコードにかかる時間                   |
 | SQLプロセスの実行時間         | ブロック配信    | KV ペアのブロックを TiKV インポーターに送信するのにかかる時間 |
 
@@ -202,7 +202,7 @@ scrape_configs:
 
 - **`lightning_import_seconds`** （ヒストグラム）
 
-    Bucketed histogram for the time needed to import a table.
+    テーブルのインポートに必要な時間のバケット化されたヒストグラム。
 
 - **`lightning_row_read_bytes`** （ヒストグラム）
 

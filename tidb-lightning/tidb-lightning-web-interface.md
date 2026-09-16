@@ -48,7 +48,7 @@ TiDB Lightningを起動したら、 `http://127.0.0.1:8289`にアクセスして
 
 タイトルバーの機能（左から右へ）：
 
-| アイコン           | 関数                                                                |
+| アイコン           | 機能                                                                |
 | :------------- | :---------------------------------------------------------------- |
 | TiDB Lightning | クリックしてトップページに戻る                                                   |
 | ⚠              | *前の*タスクからのエラーメッセージを表示する                                           |
@@ -71,7 +71,7 @@ TiDB Lightningを起動したら、 `http://127.0.0.1:8289`にアクセスして
 
 ![Submit task dialog](/media/lightning-web-submit.png)
 
-タスクは[タスク構成](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)として記述される TOML ファイルです。 **[アップロード]**をクリックしてローカル TOML ファイルを開くこともできます。
+タスクは[タスク構成](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)として記述される TOML ファイルです。 **UPLOAD**をクリックしてローカル TOML ファイルを開くこともできます。
 
 タスクを実行するには、 **SUBMIT**をクリックしてください。既にタスクが実行中の場合は、新しいタスクはキューに追加され、現在のタスクが正常に完了した後に実行されます。
 

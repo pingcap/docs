@@ -9,7 +9,7 @@ summary: TiDB Lightningに関するよくある質問 (FAQ) と回答につい�
 
 ## TiDB Lightningでサポートされる最小の TiDB/TiKV/PD クラスター バージョンは何ですか? {#what-is-the-minimum-tidbtikvpd-cluster-version-supported-by-tidb-lightning}
 
-TiDB Lightningのバージョンはクラスターと同じである必要があります。Local-backendモードを使用する場合、利用可能な最新バージョンは4.0.0です。Importer-backendモードまたはTiDB-backendモードを使用する場合、利用可能な最新バージョンは2.0.9ですが、安定版の3.0を使用することをお勧めします。
+TiDB Lightningのバージョンはクラスターと同じである必要があります。Local-backendモードを使用する場合、利用可能な最も古いバージョンは4.0.0です。Importer-backendモードまたはTiDB-backendモードを使用する場合、利用可能な最も古いバージョンは2.0.9ですが、安定版の3.0を使用することをお勧めします。
 
 ## TiDB Lightning は複数のスキーマ (データベース) のインポートをサポートしていますか? {#does-tidb-lightning-support-importing-multiple-schemas-databases}
 

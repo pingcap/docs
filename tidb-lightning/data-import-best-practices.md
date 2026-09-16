@@ -39,7 +39,7 @@ TiDB Lightning （ [物理インポートモード](/tidb-lightning/tidb-lightni
 - 表の定義
 
     - テーブルごとのセカンダリインデックスの数とサイズは、インポート速度に影響を与える可能性があります。インデックスの数が少ないほど、インポートが高速化し、インポート後のスペース消費も少なくなります。
-    - インデックスデータサイズ = インデックスの数 *インデックス サイズ* 行数。
+    - インデックスデータサイズ = インデックスの数 \* インデックスサイズ \* 行数。
 
 - 圧縮比
 
@@ -130,13 +130,13 @@ TiDB Lightningパラメータの詳細については、 [TiDB Lightning設定�
 
 ### クラスタトポロジを計画する {#plan-cluster-topology}
 
-TiDB Lightningインスタンスを準備し、各インスタンスが5TiB～10TiBのソースデータを処理できるようにします。各ノードに1つのTiDB Lightningインスタンスをデプロイ。ノードの仕様については、 TiDB Lightningインスタンスの[環境要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。
+TiDB Lightningインスタンスを準備し、各インスタンスが5TiB～10TiBのソースデータを処理できるようにします。各ノードに1つのTiDB Lightningインスタンスをデプロイします。ノードの仕様については、 TiDB Lightningインスタンスの[環境要件](/tidb-lightning/tidb-lightning-physical-import-mode.md#environment-requirements)を参照してください。
 
 ### 設定パラメータを変更する {#change-configuration-parameters}
 
-- TiDB Lightningインスタンスのコア数の`region-concurrency` ～ 75% を設定します。
+- `region-concurrency`をTiDB Lightningインスタンスのコア数の75%に設定します。
 - `send-kv-pairs`を`3200`に設定します。この方法はTiDB v7.1.0以前のバージョンに適用されます。v7.2.0以降では、このパラメータは`send-kv-size`に置き換えられ、追加の設定は不要です。
-- インスタンスが配置されているノード上のメモリを`GOMEMLIMIT` ～ 80% に調整します。
+- `GOMEMLIMIT`をインスタンスが配置されているノード上のメモリの80%に調整します。
 
 インポートプロセス中の PD 散布リージョンのレイテンシーが30分を超える場合は、次の最適化を検討してください。
 
