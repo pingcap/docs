@@ -18,7 +18,7 @@ aliases: ['/ja/docs/dev/best-practices/haproxy-best-practices/','/ja/docs/dev/re
 
 HAProxyは、C言語で書かれた無料のオープンソースソフトウェアで、TCPおよびHTTPベースのアプリケーション向けの高可用性ロードバランサおよびプロキシサーバーを提供します。CPUとメモリを高速かつ効率的に使用できるため、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS（Amazon Web Services）など、多くの著名なウェブサイトで広く利用されています。
 
-HAProxyは、LinuxカーネルのコアコントリビューターであるWilly Tarreauによって2000年に作成されました。彼は現在もプロジェクトのメンテナンスを担当し、オープンソースコミュニティに無料のソフトウェアアップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)を使用しています。最新の安定版の使用を推奨します。詳細は[HAProxyのリリースバージョン](http://www.haproxy.org/)ご覧ください。
+HAProxyは、LinuxカーネルのコアコントリビューターであるWilly Tarreauによって2000年に作成されました。彼は現在もプロジェクトのメンテナンスを担当し、オープンソースコミュニティに無料のソフトウェアアップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)を使用しています。最新の安定版の使用を推奨します。詳細は[HAProxyのリリースバージョン](http://www.haproxy.org/)をご覧ください。
 
 ## 基本機能 {#basic-features}
 
@@ -75,7 +75,7 @@ yum -y install epel-release gcc systemd-devel
 
 ## HAProxyをデプロイ {#deploy-haproxy}
 
-HAProxyを使用すると、負荷分散されたデータベース環境を簡単に構成・セットアップできます。このセクションでは、一般的なデプロイメント操作について説明します。実際のシナリオに合わせて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)カスタマイズできます。
+HAProxyを使用すると、負荷分散されたデータベース環境を簡単に構成・セットアップできます。このセクションでは、一般的なデプロイメント操作について説明します。実際のシナリオに合わせて[設定ファイル](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html)をカスタマイズできます。
 
 ### HAProxyをインストールする {#install-haproxy}
 
