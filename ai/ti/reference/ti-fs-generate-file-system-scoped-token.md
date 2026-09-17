@@ -60,7 +60,7 @@ ti fs generate-file-system-scoped-token
 
 ## 例 {#examples}
 
-- 1 つの workspace に対して sandbox に読み取りおよび書き込みアクセスを付与します。
+- 1 つのワークスペースに対してサンドボックスに読み取りおよび書き込みアクセスを付与します。
 
     ```bash
     # Inject the owner TI_FS_TOKEN from a secret manager, then create a token limited to /workspace.
@@ -70,7 +70,7 @@ ti fs generate-file-system-scoped-token
       --allow /workspace:read,list,write
     ```
 
-- 書き込み可能な workspace データと読み取り専用の artifact を分離します。
+- 書き込み可能なワークスペースデータと読み取り専用のアーティファクトを分離します。
 
     ```bash
     # Inject the owner TI_FS_TOKEN from a secret manager. Repeat --allow to assign different operations to independent prefixes.
