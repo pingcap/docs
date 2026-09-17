@@ -70,13 +70,32 @@ ti fs unmount-file-system --mount-path "$HOME/workspace"
 
 If `fusermount3` reports `Permission denied`, check the local mount path, `/dev/fuse` access, and the host's security policy. This error is not necessarily a TiDB Cloud credential failure.
 
-Ubuntu 26.04 can apply an AppArmor profile to `fusermount3` that allows paths under home directories but rejects a top-level path such as `/workspace`. Becoming root or running `chown` on `/workspace` does not bypass that policy. Prefer `$HOME/workspace`; if the application requires another path, ask the administrator to update the narrow AppArmor rule described in [Ubuntu mount-path restrictions](/tidb-cloud-filesystem/mount-filesystem.md#ubuntu-2604-mount-paths).
+Ubuntu 26.04 can apply an AppArmor profile to `fusermount3` that allows paths under home directories but rejects a top-level path such as `/workspace`. Becoming root or running `chown` on `/workspace` does not bypass that policy. Prefer `$HOME/workspace`; if the application requires another path, see [Ubuntu 26.04 mount-path restrictions](#ubuntu-2604-mount-path-restrictions).
 
 A root-created FUSE mount is also not automatically usable by an application running as a different user. Mount as the user that will run the application rather than trying to repair access with `chown` afterward.
 
 For startup failures, inspect the diagnostic log path shown by the CLI. Do not repeatedly start mounts at the same path without checking whether a previous mount is still present.
 
+## Ubuntu 26.04 mount-path restrictions
+
+Ubuntu 26.04 applies an AppArmor profile to `/usr/bin/fusermount3`. By default, mount under the current user's home directory, `/mnt`, `/media`, `/tmp`, or `/run/user/<uid>` instead of `/workspace`.
+
+If an application requires `/workspace`, ask the host administrator to add these rules to `/etc/apparmor.d/local/fusermount3`:
+
+```text
+mount fstype=@{fuse_types} options=(nosuid,nodev) options in (ro,rw,noatime,dirsync,nodiratime,noexec,sync) -> /workspace/{,**/},
+umount /workspace/{,**/},
+```
+
+The administrator can then reload the profile:
+
+```shell
+sudo apparmor_parser -r /etc/apparmor.d/fusermount3
+```
+
+For related errors, see [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md).
+
 ## What's next
 
-- [Use layers and checkpoints](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md).
+- [Manage layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 - [Share files with another machine](/tidb-cloud-filesystem/filesystem-sharing.md).

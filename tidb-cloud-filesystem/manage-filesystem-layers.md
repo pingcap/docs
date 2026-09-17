@@ -8,7 +8,7 @@ aliases: ['/ai/manage-filesystem-layers']
 
 Use layers to record isolated changes over a Filesystem base path before you commit or discard them.
 
-This guide covers individual CLI operations. For the layer model and an end-to-end parallel review example, see [Branches and Checkpoints](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md).
+This guide covers individual CLI operations. To understand layer visibility, forks, checkpoints, and their boundaries before using these commands, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md).
 
 ## Prerequisites
 
@@ -70,7 +70,7 @@ A checkpoint mount is read-only. To continue working from a checkpoint, fork a n
 
 > **Warning:**
 >
-> Before you create a checkpoint for a layer with a writable FUSE mount, run [`drain-file-system`](/tidb-cloud-filesystem/mount-filesystem.md#drain-or-unmount). A checkpoint includes only changes that have reached the service. Before you roll back or commit the layer, drain and then [`unmount-file-system`](/tidb-cloud-filesystem/mount-filesystem.md#drain-or-unmount). The CLI does not perform these steps automatically.
+> Before you create a checkpoint for a layer with a writable FUSE mount, run [`drain-file-system`](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely). A checkpoint includes only changes that have reached the service. Before you roll back or commit the layer, drain and then [`unmount-file-system`](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely). The CLI does not perform these steps automatically.
 
 Choose one outcome for a layer:
 
@@ -114,5 +114,5 @@ Use the same local overlay root when you mount the Filesystem on the destination
 
 ## What's next
 
-- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/mount-filesystem.md)
+- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

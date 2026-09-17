@@ -45,7 +45,7 @@
   - [Overview](/ai/ti/ti-overview.md)
   - [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md)
   - [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md)
-  - [Manage TiDB Cloud Filesystems via CLI](/ai/ti/guides/manage-filesystems-via-cli.md)
+  - [Use TiDB Cloud Filesystem with TiDB Cloud CLI](/ai/ti/guides/manage-filesystems-via-cli.md)
   - Scenarios for Users and Automation
     - [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/guides/ti-daily-workflow-example.md)
     - [Query TiDB Cloud Starter with Explicit SQL Roles](/ai/ti/guides/ti-query-sql-with-roles-example.md)

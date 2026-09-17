@@ -1,10 +1,10 @@
 ---
-title: Manage TiDB Cloud Filesystem Resources
+title: Manage TiDB Cloud Filesystems
 summary: Learn how to safely create, inspect, check, select, and delete TiDB Cloud Filesystem resources by using TiDB Cloud CLI.
 aliases: ['/ai/manage-filesystem-resources']
 ---
 
-# Manage TiDB Cloud Filesystem Resources
+# Manage TiDB Cloud Filesystems
 
 TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads. It provides a persistent, shareable file namespace that remains available independently of the local machine, sandbox, or CI runner that accesses it.
 
@@ -81,5 +81,5 @@ Filesystem deletion is asynchronous. After the service accepts the request, the 
 ## What's next
 
 - [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
-- [Work with TiDB Cloud Filesystem Data](/tidb-cloud-filesystem/work-with-filesystem-data.md)
+- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

@@ -26,7 +26,7 @@ When you run `import-file-system-token`, the CLI validates the token format, ext
 ti fs import-file-system-token --from-file ./fs-token --region aws-us-east-1
 ```
 
-## Generate a token
+## Generate an owner token
 
 Generate another owner token by using TiDB Cloud API credentials. The CLI does not store the generated token locally by default, so you must capture its one-time plaintext response securely:
 
@@ -40,22 +40,38 @@ ti fs generate-file-system-token \
 
 To have the CLI store the generated token locally, add `--store-locally`. Use `--replace` if a different token is already stored for this Filesystem.
 
-For least-privilege access, generate a path-and-operation-limited token from an owner token:
+## Generate and delegate a scoped token
+
+On a trusted machine with an owner token, generate a path-and-operation-limited token for an agent:
 
 ```shell
-ti fs generate-file-system-scoped-token \
+SCOPED_TOKEN="$(ti fs generate-file-system-scoped-token \
   --file-system-id "<file-system-id>" \
+  --subject report-agent \
   --ttl 24h \
-  --allow /workspace:read,list > ./scoped-token.json
+  --allow /workspace:read,list,write \
+  --query fs_token --output text)"
 ```
+
+Transfer the token through a secret manager. In the agent's environment, inject the token and the Filesystem's region:
+
+```shell
+export TI_FS_TOKEN="<scoped-token>"
+export TI_REGION_CODE="<filesystem-region-code>"
+ti fs list-files --path /workspace
+```
+
+The remote `/workspace` directory must already exist. For a mount, select the allowed subtree with `--remote-path /workspace`; a token restricted to `/workspace` cannot mount the root `/`. For the permission model and credential precedence, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 
 ## Inspect and change token status
 
 List non-secret token metadata:
 
 ```shell
-ti fs list-file-system-tokens --file-system-id "<file-system-id>"
+ti fs list-file-system-tokens --file-system-id "<file-system-id>" --output text
 ```
+
+The list does not return token plaintext. Preserve newly generated or refreshed tokens in a secret manager. If you lose an owner token, generate a replacement using TiDB Cloud API credentials; you cannot recover the original secret by listing tokens.
 
 Use [`disable-file-system-token`](/ai/ti/reference/ti-fs-disable-file-system-token.md) to suspend a token temporarily and [`enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) to restore it.
 
@@ -67,11 +83,17 @@ Use [`refresh-file-system-token`](/ai/ti/reference/ti-fs-refresh-file-system-tok
 >
 > Refresh is non-idempotent. If a request might have succeeded but its response was lost, do not retry with the old token. Instead, generate a new owner token using TiDB Cloud credentials.
 
-Use [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token.md) to revoke a token permanently. If the deleted token matches the locally stored token, the CLI automatically removes the local credential.
-
-> **Note:**
+> **Warning:**
 >
-> Before you rotate, disable, or delete a token used by an active local mount, run [`drain-file-system`](/tidb-cloud-filesystem/mount-filesystem.md#drain-or-unmount) and then [`unmount-file-system`](/tidb-cloud-filesystem/mount-filesystem.md#drain-or-unmount). The CLI checks for known active mounts and refuses the operation if the token is still in use.
+> Before you rotate, disable, or delete a token used by an active local mount, [stop writers and unmount it safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely). Drain a FUSE mount before unmounting; WebDAV does not support drain. The CLI checks known local mounts but cannot discover every remote machine using the token. Stop writes and unmount consumers on those machines before changing it.
+
+Before retiring a token, distribute and validate a replacement. Then use [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token.md) to revoke the retired token by its token ID:
+
+```shell
+ti fs delete-file-system-token --file-system-id "<file-system-id>" --token-id "<token-id>"
+```
+
+If the deleted token matches the locally stored token, the CLI automatically removes the local credential. Token changes can take time to propagate through authorization caches. Disabling an owner token does not replace reviewing and revoking scoped tokens that it issued.
 
 ## What's next
 

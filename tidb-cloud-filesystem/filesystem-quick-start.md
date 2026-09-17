@@ -115,7 +115,7 @@ The read returns `Hello from my workspace`. The file remains available after you
 
 - [Mount the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) to use it through a local directory.
 - [Share the workspace](/tidb-cloud-filesystem/filesystem-sharing.md) with another machine or agent.
-- [Use layers and checkpoints](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md) to review changes before publishing them.
+- [Manage layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to review changes before publishing them.
 
 When you no longer need this tutorial Filesystem, delete it using your TiDB Cloud API credentials:
 

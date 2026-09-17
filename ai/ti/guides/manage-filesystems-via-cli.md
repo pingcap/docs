@@ -1,18 +1,15 @@
 ---
-title: Manage TiDB Cloud Filesystems via CLI
-summary: Learn how to create a TiDB Cloud Filesystem with the CLI, write and read a file, and find detailed guides for more Filesystem tasks.
+title: Manage TiDB Cloud Filesystem
+summary: Learn how to create a TiDB Cloud Filesystem and write and read a file with `ti fs`, then find guides for other Filesystem tasks.
 ---
 
-# Manage TiDB Cloud Filesystems via CLI
+# Manage TiDB Cloud Filesystem
 
-Use the TiDB Cloud CLI (`ti`) to create a Filesystem and work with its files from a terminal or automation workflow.
-
-## Prerequisites
-
-- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md) with API keys that can create a Filesystem in your organization.
-- Choose a supported Filesystem region when you run `ti configure`. For region choices and installation details, see the [Filesystem Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md).
+With TiDB Cloud CLI (`ti`), you can create and manage TiDB Cloud Filesystems and work with their files from a terminal or automation workflow.
 
 ## Create and use a Filesystem
+
+Before you begin, [install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md) with API keys that can create a Filesystem in your organization. Choose a supported Filesystem region when you run `ti configure`.
 
 Create a Filesystem and wait until it is ready:
 
@@ -20,37 +17,25 @@ Create a Filesystem and wait until it is ready:
 ti fs create-file-system --display-name my-workspace --wait
 ```
 
-Save the returned `file_system_id` for the next commands. The CLI stores this Filesystem's token locally. Treat the returned `fs_token` as a secret; do not put it in a public issue or log.
-
-Replace `<file-system-id>` with the returned ID, write a file, and read it back:
+Copy the returned `file_system_id` and replace `<file-system-id>` in the following commands. The CLI stores the Filesystem token locally. Treat the returned `fs_token` as a secret; do not share the command output publicly.
 
 ```shell
 echo "Hello from my workspace" | ti fs copy-file --file-system-id "<file-system-id>" --from-stdin --to-remote /hello.txt
 ti fs read-file --file-system-id "<file-system-id>" --path /hello.txt
 ```
 
-The read returns `Hello from my workspace`. The file remains available after you close the terminal. For a guided first run and cleanup instructions, see the [Filesystem Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md).
+The read returns `Hello from my workspace`. For supported regions, detailed setup, and cleanup instructions, follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md).
 
-## More Filesystem operations
+## More Filesystem tasks
 
-For more Filesystem operations, see the following guides in the TiDB Cloud Filesystem documentation:
+For common tasks, see the following guides in the **TiDB Cloud Filesystem** documentation:
 
-- Manage a Filesystem
+| What you want to do | Guide |
+| --- | --- |
+| Create, inspect, or delete a Filesystem | [Manage TiDB Cloud Filesystems](/tidb-cloud-filesystem/manage-filesystem-resources.md) |
+| Manage access tokens | [Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) |
+| Copy, read, and organize files | [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) |
+| Access files through a local mount | [Mount a Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) |
+| Isolate changes with layers and checkpoints | [Manage Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) |
 
-    - [Create, inspect, check, and delete Filesystem resources](/tidb-cloud-filesystem/manage-filesystem-resources.md)
-    - [Manage Filesystem tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
-    - [Configure Filesystem AI providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
-
-- Work with Filesystem data
-
-    - [Copy, read, organize, and search files](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-    - [Manage layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
-    - [Mount a Filesystem with the CLI](/tidb-cloud-filesystem/mount-filesystem.md)
-
-- Use advanced Filesystem features
-
-    - [Manage Git workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md)
-    - [Use Filesystem journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
-    - [Manage Filesystem Vault secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
-
-For details about commands, command flags, and output fields, see [`ti fs` command reference](/ai/ti/reference/ti-filesystem.md).
+For syntax, flags, and output fields, see the [`ti fs` command reference](/ai/ti/reference/ti-filesystem.md).

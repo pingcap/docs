@@ -124,12 +124,12 @@ Aliases use the same options, authentication, output, query, and error behavior 
 
 ## See also
 
-- [Manage TiDB Cloud Filesystem Resources](/tidb-cloud-filesystem/manage-filesystem-resources.md)
+- [Manage TiDB Cloud Filesystems](/tidb-cloud-filesystem/manage-filesystem-resources.md)
 - [Configure TiDB Cloud Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
 - [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
-- [Work with TiDB Cloud Filesystem Data](/tidb-cloud-filesystem/work-with-filesystem-data.md)
+- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 - [Manage Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
-- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/mount-filesystem.md)
+- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
 - [Manage Git Workspaces on TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-git-workspaces.md)
 - [Use TiDB Cloud Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
 - [Manage TiDB Cloud Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)

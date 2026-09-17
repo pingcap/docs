@@ -110,5 +110,5 @@ If an update fails because of a timeout, lost response, or another ambiguous net
 
 ## What's next
 
-- [Work with TiDB Cloud Filesystem Data](/tidb-cloud-filesystem/work-with-filesystem-data.md)
+- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

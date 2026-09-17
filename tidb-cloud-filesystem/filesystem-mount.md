@@ -1,13 +1,12 @@
 ---
 title: Mount TiDB Cloud Filesystem Locally
 summary: Select a Filesystem and mount driver, access remote files from a local directory, and stop a mount without losing pending writes.
+aliases: ['/ai/mount-filesystem']
 ---
 
 # Mount TiDB Cloud Filesystem Locally
 
 A mount makes remote files available at a local directory. Use it when your editor, application, or agent expects filesystem paths instead of file-transfer commands. The remote Filesystem persists independently of the mount process.
-
-Start here to choose a platform, select credentials, and complete a first mount. For CLI driver options, container configuration, and mount lifecycle commands, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/mount-filesystem.md).
 
 > **Note:**
 >
@@ -20,6 +19,8 @@ Start here to choose a platform, select credentials, and complete a first mount.
 - [Docker and Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md): expose the Linux host's FUSE device and allow mounting inside the container.
 
 Native Windows mounting is not supported by `ti`. Use direct commands such as `ti fs copy-file`, `ti fs read-file`, and `ti fs list-files` instead.
+
+With `--driver auto`, the CLI selects WebDAV on macOS and FUSE on Linux. To mount a layer or checkpoint on macOS, install macFUSE and select `--driver fuse`. WebDAV mounting is not supported on Linux.
 
 ## Select a Filesystem
 
@@ -62,6 +63,8 @@ The command waits for readiness and returns a structured result with `status: mo
 
 To expose only one remote directory, pass `--remote-path /workspace`. To make a mount read-only, add `--read-only`. These are client-side mount settings, not substitutes for a scoped token's server-enforced permissions.
 
+To mount a layer or a read-only checkpoint, select the FUSE driver and use the layer options in the [`mount-file-system` command reference](/ai/ti/reference/ti-fs-mount-file-system.md).
+
 ```bash
 # These are ordinary local filesystem commands, not CLI subcommands.
 ls "$HOME/workspace"
@@ -96,5 +99,5 @@ An explicit drain is not required before every normal unmount. WebDAV does not s
 ## What's next
 
 - [Share a Filesystem across environments](/tidb-cloud-filesystem/filesystem-sharing.md).
-- [Mount a layer or historical checkpoint](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md).
+- [Manage layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 - [Look up mount options](/ai/ti/reference/ti-fs-mount-file-system.md).

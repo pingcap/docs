@@ -1,10 +1,10 @@
 ---
-title: Work with TiDB Cloud Filesystem Data
+title: Work with Files and Directories in TiDB Cloud Filesystem
 summary: Learn how to copy, read, organize, search, and inspect files and directories in TiDB Cloud Filesystem by using the CLI.
 aliases: ['/ai/work-with-filesystem-data']
 ---
 
-# Work with TiDB Cloud Filesystem Data
+# Work with Files and Directories in TiDB Cloud Filesystem
 
 In TiDB Cloud CLI, you can use [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) to transfer data between local storage and TiDB Cloud Filesystem and to manage its remote namespace.
 
@@ -72,5 +72,5 @@ ti fs find-files --path /reports --file-name-pattern "*.md" --tag stage=review
 ## What's next
 
 - [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
-- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/mount-filesystem.md)
+- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

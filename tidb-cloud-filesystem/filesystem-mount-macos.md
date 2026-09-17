@@ -60,7 +60,7 @@ To keep a FUSE mount online while waiting for pending writes to reach the servic
 ti fs drain-file-system --mount-path "$HOME/workspace" --timeout 30s
 ```
 
-For writable layer and read-only checkpoint examples, see [Branches and Checkpoints](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md). They cannot run through WebDAV.
+For layer and checkpoint mount options, see the [`mount-file-system` command reference](/ai/ti/reference/ti-fs-mount-file-system.md). Layer and checkpoint mounts cannot run through WebDAV.
 
 When finished with the FUSE mount, stop writers and unmount it:
 

@@ -1,9 +1,9 @@
 ---
-title: Share TiDB Cloud Filesystems
+title: Share a TiDB Cloud Filesystem
 summary: Share a remote workspace across machines and sandboxes with separate access tokens, and hand off files after writes reach the service.
 ---
 
-# Share TiDB Cloud Filesystems
+# Share a TiDB Cloud Filesystem
 
 Sharing a Filesystem gives participants access to the same remote namespace, not independent copies. For example, an agent can produce a report in a sandbox and a reviewer can open that report from a laptop without downloading and redistributing an archive for every revision.
 
@@ -109,5 +109,5 @@ Do not delete the Filesystem to disconnect one participant: resource deletion af
 
 ## What's next
 
-- [Use branches to compare independent drafts](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md).
+- [Understand layers and checkpoints for independent drafts](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md).
 - [Run the agent sandbox example](/ai/ti/guides/ti-agent-sandbox-example.md).
