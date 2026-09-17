@@ -156,7 +156,7 @@ password = "..."
 
 TiDB Cloud の完全なロールモデルについては、[データベースユーザーとロールの管理](/tidb-cloud/configure-sql-users.md) を参照してください。
 
-## 付随状態とマウントロケーター {#companion-state-and-mount-locators}
+## Companion 状態とマウントロケーター {#companion-state-and-mount-locators}
 
 インストーラーには `ti-drive9` が含まれており、これは `ti fs`、`ti fs-git`、`ti fs-journal`、および `ti fs-vault` の操作を実行する companion runtime です。これを直接呼び出すことはありません。登録された各 Filesystem には、分離された companion home があります。
 
