@@ -25,11 +25,11 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 このチュートリアルを完了するには、以下が必要です。
 
-- [Python 3.11以降](https://www.python.org/downloads/)がインストールされました
+- [Python 3.11以降](https://www.python.org/downloads/)がインストールされていること。
 
-- [pip](https://pypi.org/project/pip/)がインストールされました
+- [pip](https://pypi.org/project/pip/)がインストールされていること。
 
-- [AWS CLI](https://aws.amazon.com/cli/)がインストールされました
+- [AWS CLI](https://aws.amazon.com/cli/)がインストールされていること。
 
     AWS CLI プロファイルがサポートされている[Amazon Bedrock](https://aws.amazon.com/bedrock/)リージョンに設定されていることを確認してください。サポートされている地域のリストは[Amazon Bedrock リージョン](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)でご覧いただけます。サポートされているリージョンに切り替えるには、次のコマンドを実行します。
 
