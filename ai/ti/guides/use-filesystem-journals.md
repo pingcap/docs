@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Filesystem Journals を使う
-summary: Filesystem 内のエージェントおよび自動化イベント向けの append-only ジャーナルを作成、追記、読み取り、検索、検証する方法を学びます。
+summary: Filesystem 内のエージェントおよび自動化イベント向けの追記専用ジャーナルを作成、追記、読み取り、検索、検証する方法を学びます。
 ---
 
 # TiDB Cloud Filesystem Journals を使う
 
-ジャーナルは、TiDB Cloud Filesystem 上で実行されるエージェントワークフローおよび自動化パイプライン向けに、append-only かつハッシュチェーン化されたイベントログを提供します。[`ti fs-journal` コマンド](/ai/ti/reference/ti-filesystem-journal.md)を使用して、ジャーナルの作成、順序付きイベントの追記、それらの検索または読み取り、ハッシュチェーンの検証を行います。
+ジャーナルは、TiDB Cloud Filesystem 上で実行されるエージェントワークフローおよび自動化パイプライン向けに、追記専用かつハッシュチェーン化されたイベントログを提供します。[`ti fs-journal` コマンド](/ai/ti/reference/ti-filesystem-journal.md)を使用して、ジャーナルの作成、順序付きイベントの追記、それらの検索または読み取り、ハッシュチェーンの検証を行います。
 
 ## 前提条件 {#prerequisites}
 
