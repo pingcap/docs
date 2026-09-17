@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Filesystem 上で Git ワークスペースを管理する
-summary: マウントされた TiDB Cloud Filesystem 上で Git ワークスペースを clone、hydrate、リンクされた worktree の作成、削除を行う方法を学びます。
+summary: マウントされた TiDB Cloud Filesystem 上で Git ワークスペースをクローン、hydrate、リンクされた worktree の作成、削除を行う方法を学びます。
 ---
 
 # TiDB Cloud Filesystem 上で Git ワークスペースを管理する
@@ -14,7 +14,7 @@ summary: マウントされた TiDB Cloud Filesystem 上で Git ワークスペ�
 - `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または対象の Filesystem を識別する FS トークンを指定して、マウント済み Filesystem を選択します。Git ワークスペース権限を持つ FS トークンを指定してください。
 - Git をインストールし、リポジトリの認証情報を個別に設定します。
 
-## ワークスペースを clone する {#clone-a-workspace}
+## ワークスペースをクローンする {#clone-a-workspace}
 
 ```shell
 ti fs-git clone-git-workspace \
