@@ -86,7 +86,7 @@ Ubuntu 26.04 では、さらに AppArmor により `fusermount3` が制限され
 
 ## 製品の制限事項 {#product-limitations}
 
-- TiDB Cloud CLI はプレビュー段階であり、コマンド契約は変更される可能性があります。
+- TiDB Cloud CLI はプレビュー段階であり、コマンドの仕様は変更される可能性があります。
 - データベース管理の対象は TiDB Cloud Starter であり、すべての TiDB Cloud クラスター tier ではありません。
 - SQL 実行では、1 回の呼び出しにつき 1 つのステートメントのみ受け付けます。
 - read-write はデフォルトの SQL ロールです。セキュリティに敏感な自動化では、明示的なロールフラグを使用してください。
