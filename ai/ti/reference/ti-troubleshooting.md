@@ -22,7 +22,7 @@ test -n "$TIDB_CLOUD_PUBLIC_KEY"
 test -n "$TIDB_CLOUD_PRIVATE_KEY"
 ```
 
-保存済みの認証情報を使用する場合は、両方の変数を unset してから、profile を確認してください。
+保存済みの認証情報を使用する場合は、両方の変数を unset してから、プロファイルを確認してください。
 
 ```bash
 unset TIDB_CLOUD_PUBLIC_KEY TIDB_CLOUD_PRIVATE_KEY
@@ -33,7 +33,7 @@ API キーで認証自体は成功しても、コマンドが要求する権限�
 
 ## Filesystem トークンが見つからない {#filesystem-token-is-missing}
 
-クリーンな sandbox では、トークンとリージョンを指定してください。`ti` はトークンから file system ID を導出します。
+クリーンなサンドボックスでは、トークンとリージョンを指定してください。`ti` はトークンから file system ID を導出します。
 
 ```bash
 export TI_FS_TOKEN="<owner-token>"
@@ -43,7 +43,7 @@ ti fs check-file-system
 
 FS トークンは TiDB Cloud API private key ではありません。トークンが指定されている場合、`TI_FS_FILE_SYSTEM_ID` は任意です。別途配布された ID がトークンと一致することを `ti` に検証させたい場合にのみ設定してください。
 
-トークンは分かっているが現在のマシンに保存されていない場合は、それを import してから、導出された ID を選択してください。
+トークンは分かっているが現在のマシンに保存されていない場合は、それをインポートしてから、導出された ID を選択してください。
 
 ```bash
 # Store a known token without requiring TiDB Cloud API keys.
@@ -74,9 +74,9 @@ ti fs list-file-system-tokens \
   --output text
 ```
 
-トークン名は一意ではありません。enable、disable、または delete 操作には、この出力にある不変の `token_id` を使用してください。トークンライフサイクルのメタデータなしで作成または import された古い認証情報は引き続き有効な場合がありますが、`ti` は対応する一覧行を安全に特定できないため、一致を推測することはありません。
+トークン名は一意ではありません。enable、disable、または delete 操作には、この出力にある不変の `token_id` を使用してください。トークンライフサイクルのメタデータなしで作成またはインポートされた古い認証情報は引き続き有効な場合がありますが、`ti` は対応する一覧行を安全に特定できないため、一致を推測することはありません。
 
-enable、disable、delete、または refresh の後は、認証キャッシュが収束するまで約 10 秒待ってください。refresh が `fs.token_refresh_ambiguous` を返した場合、レスポンスが失われたとしてもサーバー側でトークンがローテーションされた可能性があります。結果は不明です。refresh が commit されていなければ古いトークンは引き続き使える可能性がありますが、すでに無効になっている可能性もあります。commit 済み refresh の置き換えトークンは、レスポンスが失われているため復元できません。古いトークンで refresh を再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して独立したオーナートークンを生成してください。
+enable、disable、delete、または refresh の後は、認証キャッシュが収束するまで約 10 秒待ってください。refresh が `fs.token_refresh_ambiguous` を返した場合、レスポンスが失われたとしてもサーバー側でトークンがローテーションされた可能性があります。結果は不明です。refresh がコミットされていなければ古いトークンは引き続き使える可能性がありますが、すでに無効になっている可能性もあります。コミット済みの refresh の置き換えトークンは、レスポンスが失われているため復元できません。古いトークンで refresh を再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して独立したオーナートークンを生成してください。
 
 トークンの変更操作で `fs.token_mount_active` が報告された場合は、エラー内の正確なマウントパスを使用してください。
 
@@ -96,7 +96,7 @@ ti fs list-file-systems --output text
 ti fs list-files --file-system-id <file-system-id> --path /
 ```
 
-または、現在の shell で以降のコマンド用に Filesystem を選択します。
+または、現在のシェルで以降のコマンド用に Filesystem を選択します。
 
 ```bash
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
@@ -106,7 +106,7 @@ TiDB Cloud CLI は、ローカル認証情報の数から Filesystem を推測�
 
 ## Filesystem リージョンがサポートされていない {#filesystem-region-is-unsupported}
 
-設定された TiDB Cloud リージョンが、インストール済みの TiDB Cloud CLI リリースに組み込まれている Filesystem endpoint のいずれにも含まれていない可能性があります。[現在の Filesystem リージョン](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) と比較してください。有効な profile またはコマンドスコープの `--region` を使って配置先を変更してください。生のサーバー URL は設定しないでください。
+設定された TiDB Cloud リージョンが、インストール済みの TiDB Cloud CLI リリースに組み込まれている Filesystem エンドポイントのいずれにも含まれていない可能性があります。[現在の Filesystem リージョン](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) と比較してください。有効なプロファイルまたはコマンドスコープの `--region` を使って配置先を変更してください。生のサーバー URL は設定しないでください。
 
 ## companion が見つからない、または互換性がない {#companion-is-missing-or-incompatible}
 
@@ -123,7 +123,7 @@ command -v ti
 ti --version
 ```
 
-任意の standalone Drive9 バイナリをその場所にコピーしないでください。
+任意のスタンドアロン Drive9 バイナリをその場所にコピーしないでください。
 
 ## Starter または Filesystem の作成が quota に達する {#starter-or-filesystem-creation-reaches-quota}
 
@@ -144,7 +144,7 @@ ti fs list-file-systems --output text
 ti db create-db-sql-users --db-cluster-id "<cluster-id>"
 ```
 
-その後、明示的な role を指定して再試行してください。
+その後、明示的なロールを指定して再試行してください。
 
 ```bash
 ti db execute-sql-statement \
@@ -155,12 +155,12 @@ ti db execute-sql-statement \
 
 `~/.ti/db_users/<cluster-id>/credentials` を削除すると、ローカルパスワードも削除されます。認証情報を作り出すのではなく、create/repair コマンドを実行してください。
 
-## マウントが ready にならない {#mount-does-not-become-ready}
+## マウントが準備完了にならない {#mount-does-not-become-ready}
 
 バックグラウンドマウントが成功した場合、TiDB Cloud CLI の結果は出力されますが、Drive9 の起動メッセージは表示されません。起動が失敗またはタイムアウトした場合は、エラー内にある companion のログパスを確認してください。次の点を確認します。
 
 - マウントパスが存在し、書き込み可能であること。
-- 既存のマウントがその path を覆っていないこと。
+- 既存のマウントがそのパスを覆っていないこと。
 - FS トークンとリージョンが有効であること。
 - FUSE の前提条件または WebDAV helper がインストールされていること。
 - リモートリージョンに到達可能であること。
@@ -211,7 +211,7 @@ ti fs unmount-file-system \
 
 locator が残っていない場合でもクリーンアップを成功扱いにしたいときは、`--ignore-absent` を使用します。強制的なクリーンアップでは、削除されたローカルディスク上にある保留中の書き込みのリカバリは保証されません。
 
-## アンマウント時に busy が報告されます {#unmount-reports-busy}
+## アンマウント時にビジーが報告されます {#unmount-reports-busy}
 
 エディタ、作業ディレクトリがマウント内にあるシェル、その他の開いているファイルハンドルを閉じてから、再試行してください。
 
