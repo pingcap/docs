@@ -19,7 +19,7 @@ summary: ドキュメント検索と言語生成を組み合わせた RAG アプ
 開始する前に、以下を確認してください。
 
 - **Python (>=3.10)**: [Python](https://www.python.org/downloads/) 3.10 以降をインストールします。
-- **A {{{ .starter }}} instance**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
+- **{{{ .starter }}} インスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
 - **Ollama**: [Ollama](https://ollama.com/download) からインストールします。
 
 ## 実行方法 {#how-to-run}
@@ -97,4 +97,4 @@ streamlit run main.py
 
 ## 関連リソース {#related-resources}
 
-- **ソースコード**: [GitHub で表示](https://github.com/pingcap/pytidb/tree/main/examples/rag)
+- **ソースコード**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/rag)

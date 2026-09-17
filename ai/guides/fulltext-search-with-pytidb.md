@@ -17,7 +17,7 @@ summary: TiDB の全文検索を使用して従来型のテキスト検索を実
 開始する前に、以下を確認してください。
 
 - **Python (>=3.10)**: [Python](https://www.python.org/downloads/) 3.10 以降のバージョンをインストールします。
-- **A {{{ .starter }}} instance**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
+- **{{{ .starter }}} インスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
 
 ## 実行方法 {#how-to-run}
 
@@ -64,4 +64,4 @@ streamlit run app.py
 
 ## 関連リソース {#related-resources}
 
-- **Source Code**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/fulltext_search)
+- **ソースコード**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/fulltext_search)

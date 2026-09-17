@@ -25,7 +25,7 @@ summary: チャットボットや会話型 AI アプリケーション向けに�
 
 - **Python (>=3.10)**: [Python](https://www.python.org/downloads/) 3.10 以降をインストールします。
 - **{{{ .starter }}} インスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
-- **OpenAI API key**: [OpenAI](https://platform.openai.com/api-keys) から OpenAI API key を取得します。
+- **OpenAI APIキー**: [OpenAI](https://platform.openai.com/api-keys) から OpenAI APIキーを取得します。
 
 ## 実行方法 {#how-to-run}
 
@@ -135,4 +135,4 @@ Goodbye!
 
 ## 関連リソース {#related-resources}
 
-- **Source Code**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/memory)
+- **ソースコード**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/memory)

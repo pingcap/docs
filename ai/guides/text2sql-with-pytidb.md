@@ -12,8 +12,8 @@ summary: AI モデルを使用して自然言語クエリを SQL 文に変換し
 開始する前に、以下を確認してください。
 
 - **Python (>=3.10)**: [Python](https://www.python.org/downloads/) 3.10 以降のバージョンをインストールします。
-- **A {{{ .starter }}} instance**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
-- **OpenAI API key**: [OpenAI](https://platform.openai.com/api-keys) から OpenAI API key を取得します。
+- **{{{ .starter }}} インスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
+- **OpenAI APIキー**: [OpenAI](https://platform.openai.com/api-keys) から OpenAI APIキーを取得します。
 
 ## 実行方法 {#how-to-run}
 
@@ -42,9 +42,9 @@ streamlit run app.py
 
 ブラウザを開き、`http://localhost:8501` にアクセスします。
 
-1. 左側のサイドバーに OpenAI API key を入力します
+1. 左側のサイドバーに OpenAI APIキーを入力します
 2. 左側のサイドバーに TiDB 接続文字列を入力します。例: `mysql+pymysql://root@localhost:4000/test`
 
 ## 関連リソース {#related-resources}
 
-- **Source Code**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/text2sql)
+- **ソースコード**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/text2sql)

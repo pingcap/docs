@@ -17,7 +17,7 @@ summary: 組み込みの埋め込みモデルを使用して、テキストデ�
 開始する前に、以下を確認してください。
 
 - **Python (>=3.10)**: [Python](https://www.python.org/downloads/) 3.10 以降のバージョンをインストールします。
-- **A {{{ .starter }}} instance**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
+- **{{{ .starter }}} インスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
 
 ## 実行方法 {#how-to-run}
 
@@ -84,4 +84,4 @@ id: 3, text: LlamaIndex is a Python library for building AI-powered applications
 
 ## 関連リソース {#related-resources}
 
-- **Source Code**: [GitHub で表示](https://github.com/pingcap/pytidb/tree/main/examples/auto_embedding)
+- **ソースコード**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/auto_embedding)

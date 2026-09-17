@@ -9,8 +9,8 @@ summary: テキストから画像への検索と画像から画像への検索�
 
 わずか数行のコードで、テキストと画像の両方を理解できる検索システムを作成できます。
 
-- **Text-to-image search**: 「fluffy orange cat」のように、自然言語で欲しいものを説明してペットの写真を検索します
-- **Image-to-image search**: 写真をアップロードして、品種、色、ポーズなどが視覚的に似ているペットを検索します
+- **テキストから画像への検索**: 「fluffy orange cat」のように、自然言語で欲しいものを説明してペットの写真を検索します
+- **画像から画像への検索**: 写真をアップロードして、品種、色、ポーズなどが視覚的に似ているペットを検索します
 
 <p align="center">
   <img width="700" alt="PyTiDB Image Search Demo" src="https://docs-download.pingcap.com/media/images/docs/ai/pet-image-search-via-multimodal-embeddings.png" />
@@ -22,8 +22,8 @@ summary: テキストから画像への検索と画像から画像への検索�
 開始する前に、以下を用意してください。
 
 - **Python (>=3.10)**: [Python](https://www.python.org/downloads/) 3.10 以降をインストールします。
-- **A {{{ .starter }}} instance**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
-- **Jina AI API key**: [Jina AI Embeddings](https://jina.ai/embeddings/) から無料の API キーを取得できます。
+- **{{{ .starter }}} インスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial) で無料の {{{ .starter }}} インスタンスを作成できます。
+- **Jina AI APIキー**: [Jina AI Embeddings](https://jina.ai/embeddings/) から無料の APIキーを取得できます。
 
 ## 実行方法 {#how-to-run}
 
@@ -99,4 +99,4 @@ streamlit run app.py
 
 ## 関連リソース {#related-resources}
 
-- **Source Code**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/image_search)
+- **ソースコード**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/image_search)

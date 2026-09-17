@@ -82,4 +82,4 @@ streamlit run app.py
 
 ## 関連リソース {#related-resources}
 
-- **ソースコード**: [GitHub で表示](https://github.com/pingcap/pytidb/tree/main/examples/vector_search)
+- **ソースコード**: [GitHub で見る](https://github.com/pingcap/pytidb/tree/main/examples/vector_search)
