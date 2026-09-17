@@ -114,7 +114,7 @@ The following are billing explanations related to storage:
 
     > **Note:**
     >
-    > - Infrequent Access is currently in private preview on {{{ .premium }}} <CustomContent plan="byoc">and {{{ .byoc }}}, </CustomContent>and is available only upon request.
+    > - Infrequent Access is currently in private preview for {{{ .premium }}} and {{{ .byoc }}}, and is only available upon request.
     > - IA data is cached on local disks to accelerate cold reads. You can select an IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration**. A higher cache level improves cold-read performance and increases cost. For how to change the cache level, see [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md).
 
     **How the cache level affects billing on {{{ .premium }}}**
