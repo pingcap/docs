@@ -45,7 +45,7 @@ ti fs generate-file-system-scoped-token
 
 ## オプション {#options}
 
-- `--ttl <duration>`: 秒単位に解決される、有限の正のトークン有効期間を設定します。このオプションは必須です。
+- `--ttl <duration>`: 秒単位に解決される有限の正のトークン有効期間を設定します。このオプションは必須です。
 - `--allow <prefix:ops>`: 1 つのリモートパスプレフィックス配下で許可する操作を指定します。複数のプレフィックスを指定するには、このオプションを繰り返します。操作には `read`、`list`、`search`、`write`、`delete` があり、`search` には `read` が必要です。このオプションは必須です。
 - `--file-system-id <string>`: オーナートークンに埋め込まれた Filesystem ID を検証します。このオプションは、ローカルに保存されたオーナートークンを読み込む場合にのみ必須です。
 - `--fs-token <string>`: オーナー Filesystem トークンを指定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択された Filesystem 用にローカル保存されたトークンを使用します。
