@@ -11,7 +11,7 @@ TiDB Cloud Filesystem でシークレットと委任アクセスを管理する�
 
 ## コマンド {#commands}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---|---|
 | [`create-secret`](/ai/ti/reference/ti-fs-vault-create-secret.md) | シークレットを作成します。 |
 | [`replace-secret`](/ai/ti/reference/ti-fs-vault-replace-secret.md) | シークレットを置き換えます。 |

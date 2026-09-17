@@ -9,7 +9,7 @@ summary: ジャーナルの作成、追記、読み取り、検索、検証を�
 
 ## コマンド {#commands}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---|---|
 | [`create-journal`](/ai/ti/reference/ti-fs-journal-create-journal.md) | ジャーナルを作成します。 |
 | [`append-journal-entries`](/ai/ti/reference/ti-fs-journal-append-journal-entries.md) | ジャーナルにイベントを追記します。 |

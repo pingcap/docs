@@ -11,7 +11,7 @@ summary: Filesystem リソース、ファイル、レイヤー、パック、マ
 
 ## リソースとトークンのコマンド {#resource-and-token-commands}
 
-| Command | Description |
+| コマンド | 説明 |
 | --- | --- |
 | [`create-file-system`](/ai/ti/reference/ti-fs-create-file-system.md) | Filesystem とその初期オーナートークンを作成します。 |
 | [`list-file-systems`](/ai/ti/reference/ti-fs-list-file-systems.md) | 有効なリージョン内の Filesystem を一覧表示します。 |
