@@ -61,6 +61,18 @@ When `br` retries a restore, some data that has been restored might need to be r
 
 After a restore failure, avoid writing, deleting, or creating tables in the cluster. This is because the backup data might contain DDL operations for renaming tables. If you modify the cluster data, the checkpoint restore cannot decide whether the deleted or existing table are resulted from external operations, which affects the accuracy of the next restore retry.
 
+> **Warning:**
+>
+> Starting from v8.5.5, if you delete a table during the restore process and then retry the restore from the checkpoint, you might encounter the following issues (see [#68709](https://github.com/pingcap/tidb/issues/68709) for details):
+>
+> - The restore terminates due to a checksum verification failure.
+> - The restored data is lost some time after the restore completes.
+>
+> If you are sure that you want to abandon the current restore result, first perform one of the following operations based on the restore type, and then `DROP` the restored table:
+>
+> - For `restore point`, execute [`br abort`](/br/br-pitr-manual.md#abort-restore-operations).
+> - For `restore full`, manually delete the checkpoint database in the downstream cluster. The name format of the checkpoint database is `__TiDB_BR_Temporary_Snapshot_Restore_Checkpoint_<restoreID>`, where you can find `<restoreID>` in the `mysql.tidb_restore_registry` table.
+
 ### Cross-major-version checkpoint recovery is not recommended
 
 Cross-major-version checkpoint recovery is not recommended. For clusters where `br` recovery fails using the Long-Term Support (LTS) versions prior to v8.5.0, recovery cannot be continued with v8.5.0 or later LTS versions, and vice versa.
