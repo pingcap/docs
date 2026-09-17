@@ -5,13 +5,13 @@ summary: TiDB Cloud Filesystem をマウントします。
 
 # ti fs mount-file-system
 
-automatic、FUSE、または WebDAV モードで Filesystem をマウントします。このコマンドのエイリアスは `ti fs mount` です。
+自動、FUSE、または WebDAV モードで Filesystem をマウントします。このコマンドのエイリアスは `ti fs mount` です。
 
 このコマンドはバックグラウンドでマウント処理を開始し、マウントの準備が完了するまで待機してから、結果を出力します。起動に失敗した場合、エラーには診断用のログパスが含まれます。マウントを終了するには `ti fs unmount-file-system` を使用します。
 
 > **Important:**
 >
-> レイヤーおよび checkpoint のマウントには FUSE が必要です。通常 automatic 選択で WebDAV が使用される macOS では、macFUSE をインストールし、`--driver fuse` を指定してください。checkpoint のマウントは常に読み取り専用です。
+> レイヤーおよびチェックポイントのマウントには FUSE が必要です。通常自動選択で WebDAV が使用される macOS では、macFUSE をインストールし、`--driver fuse` を指定してください。チェックポイントのマウントは常に読み取り専用です。
 
 > **Note:**
 >
@@ -49,28 +49,28 @@ ti fs mount-file-system
 
 - `--mount-path <string>`: ローカルのマウントパス。\[required]
 - `--cache-dir <string>`: ローカルの FUSE キャッシュディレクトリ。省略した場合は `~/.ti/cache/mounts/<mount-hash>` を使用します。
-- `--checkpoint-id <string>`: `--layer-ref` のこの checkpoint を読み取り専用でマウントします。FUSE が必要です。
+- `--checkpoint-id <string>`: `--layer-ref` のこのチェックポイントを読み取り専用でマウントします。FUSE が必要です。
 - `--driver <string>`: マウントドライバー: `auto`、`fuse`、または `webdav`。\[default: auto]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
-- `--layer-ref <string>`: 書き込み可能な layer ID、一意の名前、または [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references) を介してマウントします。FUSE が必要です。
+- `--layer-ref <string>`: 書き込み可能なレイヤー ID、一意の名前、または [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references) を介してマウントします。FUSE が必要です。
 - `--local-root <string>`: ローカルオーバーレイルート。省略した場合は `~/.ti/local/fs/<mount-hash>` を使用します。
 - `--mount-profile <string>`: [マウントプロファイル](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を選択します: `coding-agent`、`portable`、または `none`。省略した場合は `none` を使用します。
-- `--no-auto-unpack`: マウント前に portable マウントプロファイルのデフォルトの auto-unpack をスキップします。
-- `--pack-path <string>`: automatic または manual pack に含めるローカルオーバーレイパス。繰り返し指定できます。
+- `--no-auto-unpack`: マウント前に `portable` マウントプロファイルのデフォルトの自動 unpack をスキップします。
+- `--pack-path <string>`: 自動または手動のパックに含めるローカルオーバーレイパス。繰り返し指定できます。
 - `--read-cache-max-file-mb <int64>`: FUSE 読み取りキャッシュに格納できる最大ファイルサイズ（MiB）。0 を指定するとデフォルト値を使用します。\[default: 4]
 - `--read-cache-size-mb <int64>`: FUSE 読み取りキャッシュサイズ（MiB）。0 を指定するとデフォルト値を使用します。\[default: 128]
 - `--read-cache-ttl <duration>`: FUSE 読み取りキャッシュの有効期間。\[default: `30s`]
 - `--read-only`: 読み取り専用マウントモード。
 - `--ready-timeout <duration>`: バックグラウンドマウントの準備完了を待機する時間。\[default: `30s`]
 - `--remote-path <string>`: マウントする TiDB Cloud file system のルートパス。\[default: /]
-- `--unpack-archive-path <string>`: マウント前に pack archive を復元します。
+- `--unpack-archive-path <string>`: マウント前にパックされたアーカイブを復元します。
 - `--version`: バージョン情報を表示します。
-- `--write-back-cache`: flush 時に file system へ書き込む前に、FUSE の書き込みをローカルに永続化します。この動作はデフォルトで有効です。無効にするには `--write-back-cache=false` を指定します。常に読み取り専用である checkpoint マウントでは使用できません。\[default: true]
+- `--write-back-cache`: flush 時に file system へ書き込む前に、FUSE の書き込みをローカルに永続化します。この動作はデフォルトで有効です。無効にするには `--write-back-cache=false` を指定します。常に読み取り専用であるチェックポイントマウントでは使用できません。\[default: true]
 
-すべてのコマンドで共有されるオプションについては、[Global options](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
+すべてのコマンドで共有されるオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
 ## 例 {#examples}
 
@@ -109,7 +109,7 @@ ti fs mount-file-system
     ti fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/experiment --remote-path /workspace --driver fuse --layer-ref experiment
     ```
 
-- 変更不可の過去 checkpoint を比較します:
+- 変更不可の過去のチェックポイントを比較します:
 
     ```bash
     # A checkpoint mount is always read-only.
