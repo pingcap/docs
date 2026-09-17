@@ -19,6 +19,10 @@ Before you begin, ensure you have the following:
 - **Python (>=3.10)**: Install [Python](https://www.python.org/downloads/) 3.10 or a later version.
 - **A {{{ .starter }}} instance**: You can create a free {{{ .starter }}} instance on [TiDB Cloud](https://tidbcloud.com/free-trial).
 
+    > **Note:**
+    >
+    > Currently, full-text search is **available only on {{{ .starter }}}** in [select regions](/ai/reference/full-text-search-index.md#prerequisites).
+
 ## How to run
 
 ### Step 1. Clone the `pytidb` repository
