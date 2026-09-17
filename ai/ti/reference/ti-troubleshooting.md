@@ -31,9 +31,9 @@ ti db list-db-clusters --db-cluster-type starter --profile default
 
 API キーで認証自体は成功しても、コマンドが要求する権限を持っていない場合があります。その操作に必要なアクセス権を持つキーを使用してください。`ti configure` は TiDB Cloud に接続せずにローカル値を検証して保存するため、認証情報の失敗は最初にリモートコマンド実行時に現れます。
 
-## Filesystem token が見つからない {#filesystem-token-is-missing}
+## Filesystem トークンが見つからない {#filesystem-token-is-missing}
 
-クリーンな sandbox では、token とリージョンを指定してください。`ti` は token から file system ID を導出します。
+クリーンな sandbox では、トークンとリージョンを指定してください。`ti` はトークンから file system ID を導出します。
 
 ```bash
 export TI_FS_TOKEN="<owner-token>"
@@ -41,9 +41,9 @@ export TI_REGION_CODE="<filesystem-region-code>"
 ti fs check-file-system
 ```
 
-FS token は TiDB Cloud API private key ではありません。token が指定されている場合、`TI_FS_FILE_SYSTEM_ID` は任意です。別途配布された ID が token と一致することを `ti` に検証させたい場合にのみ設定してください。
+FS トークンは TiDB Cloud API private key ではありません。トークンが指定されている場合、`TI_FS_FILE_SYSTEM_ID` は任意です。別途配布された ID がトークンと一致することを `ti` に検証させたい場合にのみ設定してください。
 
-token は分かっているが現在のマシンに保存されていない場合は、それを import してから、導出された ID を選択してください。
+トークンは分かっているが現在のマシンに保存されていない場合は、それを import してから、導出された ID を選択してください。
 
 ```bash
 # Store a known token without requiring TiDB Cloud API keys.
@@ -52,7 +52,7 @@ ti fs import-file-system-token --from-file ./fs-token --region <filesystem-regio
 ti fs list-files --file-system-id <file-system-id> --path /
 ```
 
-既知の token がすべて失われた、または revoke された場合は、TiDB Cloud API キーを使用して別の owner token を生成してください。
+既知のトークンがすべて失われた、または revoke された場合は、TiDB Cloud API キーを使用して別の owner トークンを生成してください。
 
 ```bash
 ti fs generate-file-system-token \
@@ -61,11 +61,11 @@ ti fs generate-file-system-token \
   --ttl 24h
 ```
 
-新しい平文の token はレスポンスに一度だけ表示されます。安全に保管するか、`--store-locally` を追加して現在のマシンで選択してください。
+新しい平文のトークンはレスポンスに一度だけ表示されます。安全に保管するか、`--store-locally` を追加して現在のマシンで選択してください。
 
-## Filesystem token が拒否される {#filesystem-token-is-rejected}
+## Filesystem トークンが拒否される {#filesystem-token-is-rejected}
 
-データプレーンの HTTP 401 では、token が無効化されたのか、有効期限切れなのか、別のマシンで refresh されたのか、または revoke されたのかを区別できません。TiDB Cloud API キーを使用してリモートメタデータを確認してください。
+データプレーンの HTTP 401 では、トークンが無効化されたのか、有効期限切れなのか、別のマシンで refresh されたのか、または revoke されたのかを区別できません。TiDB Cloud API キーを使用してリモートメタデータを確認してください。
 
 ```bash
 ti fs list-file-system-tokens \
@@ -74,18 +74,18 @@ ti fs list-file-system-tokens \
   --output text
 ```
 
-token 名は一意ではありません。enable、disable、または delete 操作には、この出力にある不変の `token_id` を使用してください。token ライフサイクルのメタデータなしで作成または import された古い認証情報は引き続き有効な場合がありますが、`ti` は対応する一覧行を安全に特定できないため、一致を推測することはありません。
+トークン名は一意ではありません。enable、disable、または delete 操作には、この出力にある不変の `token_id` を使用してください。トークンライフサイクルのメタデータなしで作成または import された古い認証情報は引き続き有効な場合がありますが、`ti` は対応する一覧行を安全に特定できないため、一致を推測することはありません。
 
-enable、disable、delete、または refresh の後は、認証キャッシュが収束するまで約 10 秒待ってください。refresh が `fs.token_refresh_ambiguous` を返した場合、レスポンスが失われたとしてもサーバー側で token がローテーションされた可能性があります。結果は不明です。refresh が commit されていなければ古い token は引き続き使える可能性がありますが、すでに無効になっている可能性もあります。commit 済み refresh の置き換え token は、レスポンスが失われているため復元できません。古い token で refresh を再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して独立した owner token を生成してください。
+enable、disable、delete、または refresh の後は、認証キャッシュが収束するまで約 10 秒待ってください。refresh が `fs.token_refresh_ambiguous` を返した場合、レスポンスが失われたとしてもサーバー側でトークンがローテーションされた可能性があります。結果は不明です。refresh が commit されていなければ古いトークンは引き続き使える可能性がありますが、すでに無効になっている可能性もあります。commit 済み refresh の置き換えトークンは、レスポンスが失われているため復元できません。古いトークンで refresh を再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して独立した owner トークンを生成してください。
 
-token の変更操作で `fs.token_mount_active` が報告された場合は、エラー内の正確なマウントパスを使用してください。
+トークンの変更操作で `fs.token_mount_active` が報告された場合は、エラー内の正確なマウントパスを使用してください。
 
 ```bash
 ti fs drain-file-system --mount-path /path/to/workspace
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-その後、token 操作を再試行してください。別のマシン上のマウントはローカルからは見えないため、そのマシンとのローテーション調整は別途行ってください。
+その後、トークン操作を再試行してください。別のマシン上のマウントはローカルからは見えないため、そのマシンとのローテーション調整は別途行ってください。
 
 ## Filesystem の選択がない {#filesystem-selection-is-missing}
 
@@ -102,7 +102,7 @@ ti fs list-files --file-system-id <file-system-id> --path /
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-TiDB Cloud CLI は、ローカル認証情報の数から Filesystem を推測しないよう意図的に設計されています。これは認証情報が 1 つしかない場合も含みます。ID、または埋め込み ID を導出できる FS token を指定してください。
+TiDB Cloud CLI は、ローカル認証情報の数から Filesystem を推測しないよう意図的に設計されています。これは認証情報が 1 つしかない場合も含みます。ID、または埋め込み ID を導出できる FS トークンを指定してください。
 
 ## Filesystem リージョンがサポートされていない {#filesystem-region-is-unsupported}
 
@@ -161,7 +161,7 @@ ti db execute-sql-statement \
 
 - マウントパスが存在し、書き込み可能であること。
 - 既存のマウントがその path を覆っていないこと。
-- FS token とリージョンが有効であること。
+- FS トークンとリージョンが有効であること。
 - FUSE の前提条件または WebDAV helper がインストールされていること。
 - リモートリージョンに到達可能であること。
 

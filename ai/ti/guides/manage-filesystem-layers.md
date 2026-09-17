@@ -10,8 +10,8 @@ summary: TiDB Cloud Filesystem のレイヤーを安全に作成、確認、フ�
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
-- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または Filesystem を識別する FS token を指定して、Filesystem を選択します。
-- `--fs-token`、`TI_FS_TOKEN`、または選択した Filesystem 用に保存されているローカル認証情報を使用して、必要な読み取りまたは書き込み権限を持つ FS token を指定します。
+- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または Filesystem を識別する FS トークンを指定して、Filesystem を選択します。
+- `--fs-token`、`TI_FS_TOKEN`、または選択した Filesystem 用に保存されているローカル認証情報を使用して、必要な読み取りまたは書き込み権限を持つ FS トークンを指定します。
 - レイヤーがオーバーレイするデータのベースパスを選択します。
 
 ## レイヤーを作成して確認する {#create-and-inspect-a-layer}

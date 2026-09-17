@@ -1,15 +1,15 @@
 ---
 title: ti fs refresh-file-system-token
-summary: 1 つの TiDB Cloud Filesystem token をローテーションし、その置き換え用の平文値を 1 回だけ返します。
+summary: 1 つの TiDB Cloud Filesystem トークンをローテーションし、その置き換え用の平文値を 1 回だけ返します。
 ---
 
 # ti fs refresh-file-system-token
 
-指定した Filesystem token をローテーションし、その置き換え値を 1 回だけ返します。以前の値は、認証の変更が反映された後に機能しなくなります。反映には約 10 秒かかる場合があります。
+指定した Filesystem トークンをローテーションし、その置き換え値を 1 回だけ返します。以前の値は、認証の変更が反映された後に機能しなくなります。反映には約 10 秒かかる場合があります。
 
 > **Warning:**
 >
-> Refresh は冪等ではありません。リクエストが成功してもレスポンスを受信できなかった場合は、古い token を使って再試行しないでください。代わりに、新しい置き換え token を生成して配布してください。
+> Refresh は冪等ではありません。リクエストが成功してもレスポンスを受信できなかった場合は、古いトークンを使って再試行しないでください。代わりに、新しい置き換えトークンを生成して配布してください。
 
 > **Note:**
 >
@@ -29,10 +29,10 @@ ti fs refresh-file-system-token
 
 ## オプション {#options}
 
-- `--file-system-id <string>`: 指定した token からデコードされた Filesystem ID を検証します。ローカルで選択された token を読み込む場合、このオプションは必須です。
-- `--fs-token <string>`: 現在の token を指定します。shell history や process list への露出を避けるため、`TI_FS_TOKEN` の使用を推奨します。デフォルトでは、まず `TI_FS_TOKEN` を使用し、次に選択されたローカル credential を使用します。
+- `--file-system-id <string>`: 指定したトークンからデコードされた Filesystem ID を検証します。ローカルで選択されたトークンを読み込む場合、このオプションは必須です。
+- `--fs-token <string>`: 現在のトークンを指定します。shell history や process list への露出を避けるため、`TI_FS_TOKEN` の使用を推奨します。デフォルトでは、まず `TI_FS_TOKEN` を使用し、次に選択されたローカル credential を使用します。
 - `--ttl <duration>`: 新しい正の有効期間を秒単位で設定します。最大は 365 日です。以前の有効期間を維持する場合は省略してください。
-- `--dry-run`: token をローテーションせずに、token の選択、リージョン、TTL、および既知のローカルマウント競合を検証します。
+- `--dry-run`: トークンをローテーションせずに、トークンの選択、リージョン、TTL、および既知のローカルマウント競合を検証します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 
@@ -47,7 +47,7 @@ ti fs refresh-file-system-token
     ti fs refresh-file-system-token --file-system-id "<file-system-id>"
     ```
 
-- secret manager から提供された token を refresh します。
+- secret manager から提供されたトークンを refresh します。
 
     ```bash
     # Read the current token without echoing it or storing it in shell history.
@@ -62,7 +62,7 @@ ti fs refresh-file-system-token
     unset TI_FS_TOKEN
     ```
 
-- refresh 中に token の有効期間を変更します。
+- refresh 中にトークンの有効期間を変更します。
 
     ```bash
     # Read the current token without echoing it or storing it in shell history.

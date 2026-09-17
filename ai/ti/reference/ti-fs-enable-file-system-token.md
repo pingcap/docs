@@ -5,7 +5,7 @@ summary: 無効化された TiDB Cloud Filesystem トークンを有効化しま
 
 # ti fs enable-file-system-token
 
-無効化された Filesystem トークンを再度有効にします。トークンが使用可能になるまで約 10 秒かかる場合があります。owner token 認証では、有効化できるのは scoped token のみです。TiDB Cloud API キーでは、どちらの種類のトークンも有効化できます。
+無効化された Filesystem トークンを再度有効にします。トークンが使用可能になるまで約 10 秒かかる場合があります。owner トークン認証では、有効化できるのは scoped トークンのみです。TiDB Cloud API キーでは、どちらの種類のトークンも有効化できます。
 
 > **Note:**
 >
@@ -25,7 +25,7 @@ ti fs enable-file-system-token
 
 ## オプション {#options}
 
-- `--file-system-id <string>`: トークンを所有する Filesystem を指定します。TiDB Cloud API 認証情報を使用する場合は必須です。owner token が ID を提供する場合は省略可能です。
+- `--file-system-id <string>`: トークンを所有する Filesystem を指定します。TiDB Cloud API 認証情報を使用する場合は必須です。owner トークンが ID を提供する場合は省略可能です。
 - `--token-id <string>`: list コマンドで返される変更不可のトークン ID を指定します。このオプションは必須です。
 - `--fs-token <string>`: owner Filesystem トークンを使用してリクエストを認可します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存されたトークンを使用します。利用可能な Filesystem トークンがない場合、コマンドは設定済みの TiDB Cloud API キーを使用します。
 - `--dry-run`: リモートのトークン状態を変更せずにリクエストを検証します。
@@ -45,7 +45,7 @@ ti fs enable-file-system-token
       --token-id "<token-id>"
     ```
 
-- owner token を使用して scoped token を有効化する:
+- owner トークンを使用して scoped トークンを有効化する:
 
     ```bash
     # The owner token identifies and authorizes token management for its Filesystem.

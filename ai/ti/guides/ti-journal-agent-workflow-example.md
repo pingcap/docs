@@ -17,7 +17,7 @@ Filesystem journal は、シーケンス情報、検索可能なフィールド�
 
 ## 前提条件 {#prerequisites}
 
-設定済みのプロファイルまたは FS token 環境を通じて Filesystem を選択します。
+設定済みのプロファイルまたは FS トークン環境を通じて Filesystem を選択します。
 
 ## ステップ 1. ジャーナルを作成する {#step-1-create-the-journal}
 

@@ -10,12 +10,12 @@ TiDB Cloud Filesystem Vault を使用すると、シークレットを保存し�
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
-- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または Filesystem を識別する FS token を指定して、Filesystem を選択します。
-- オーナー操作の場合は、`--fs-token`、`TI_FS_TOKEN`、または選択した Filesystem 用にローカルに保存された認証情報を通じて、owner FS token を指定します。
+- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または Filesystem を識別する FS トークンを指定して、Filesystem を選択します。
+- オーナー操作の場合は、`--fs-token`、`TI_FS_TOKEN`、または選択した Filesystem 用にローカルに保存された認証情報を通じて、owner FS トークンを指定します。
 
 > **Note:**
 >
-> セキュリティリスクを避けるため、owner token や delegated token を表示、ログ出力、またはコミットしないでください。
+> セキュリティリスクを避けるため、owner トークンや delegated トークンを表示、ログ出力、またはコミットしないでください。
 
 ## シークレットを作成して読み取る {#create-and-read-a-secret}
 
@@ -34,7 +34,7 @@ ti fs-vault read-secret --secret-name db-prod
 
 ## 制限付きアクセスを委任する {#delegate-limited-access}
 
-短期間有効な読み取り grant を作成し、その token を取得します。
+短期間有効な読み取り grant を作成し、そのトークンを取得します。
 
 ```shell
 export TI_VAULT_TOKEN="$(ti fs-vault create-grant \
@@ -45,7 +45,7 @@ export TI_VAULT_TOKEN="$(ti fs-vault create-grant \
   --token-only)"
 ```
 
-コマンドラインの token よりも `TI_VAULT_TOKEN` を使用することを推奨します。コマンドラインの値は、プロセス一覧やシェル履歴に残る可能性があるためです。
+コマンドラインのトークンよりも `TI_VAULT_TOKEN` を使用することを推奨します。コマンドラインの値は、プロセス一覧やシェル履歴に残る可能性があるためです。
 
 ## シークレットをプロセスに注入する {#inject-a-secret-into-a-process}
 
@@ -80,7 +80,7 @@ ti fs-vault delete-grant \
 
 macOS または FUSE をサポートする Linux では、Vault secrets の読み取り専用 FUSE ビューをマウントできます。CLI はマウントを作成し、マウントパス配下のファイルとしてシークレットフィールドを提供します（たとえば、`/path/to/vault/db-prod/DB_URL`）。
 
-マウントする前に、`TI_VAULT_TOKEN` を delegated Vault token に設定します。たとえば、[制限付きアクセスを委任する](#delegate-limited-access) で作成した token を使用できます。マウントコマンドには、`TI_VAULT_TOKEN` または `--vault-token` のいずれかが必要です。
+マウントする前に、`TI_VAULT_TOKEN` を delegated Vault トークンに設定します。たとえば、[制限付きアクセスを委任する](#delegate-limited-access) で作成したトークンを使用できます。マウントコマンドには、`TI_VAULT_TOKEN` または `--vault-token` のいずれかが必要です。
 
 ```shell
 mkdir -p /path/to/vault
@@ -99,7 +99,7 @@ Vault マウントは Windows では利用できません。シークレット�
 ## セキュリティに関する推奨事項 {#security-recommendations}
 
 - フィールドスコープは可能な限り最小にし、TTL は実用上可能な限り短くしてください。
-- delegated token を CLI 設定や操作ログに保存しないでください。
+- delegated トークンを CLI 設定や操作ログに保存しないでください。
 - タスク完了後は grant を失効してください。
 
 ## 次のステップ {#what-s-next}

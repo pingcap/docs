@@ -17,14 +17,14 @@ summary: 信頼できるマシン上で Filesystem をプロビジョニング�
 
 ## 仕組み {#how-it-works}
 
-信頼できるマシンが一度だけ Filesystem をプロビジョニングします。サンドボックスには Filesystem の owner token とリージョンコードだけが渡されるため、`ti configure`、コピーした `~/.ti/` ディレクトリ、または TiDB Cloud API キーなしで、通常のファイル操作や data-plane、マウント、Git、journal、vault のワークフローを利用できます。これにより、汎用オブジェクトストレージ API で必要となるアプリケーション固有のアップロードおよびダウンロードロジックも不要になります。この token は Filesystem を識別します。エージェントが一部のシークレットだけを必要とする場合は、owner token の代わりに delegated vault token を使用してください。
+信頼できるマシンが一度だけ Filesystem をプロビジョニングします。サンドボックスには Filesystem の owner トークンとリージョンコードだけが渡されるため、`ti configure`、コピーした `~/.ti/` ディレクトリ、または TiDB Cloud API キーなしで、通常のファイル操作や data-plane、マウント、Git、journal、vault のワークフローを利用できます。これにより、汎用オブジェクトストレージ API で必要となるアプリケーション固有のアップロードおよびダウンロードロジックも不要になります。このトークンは Filesystem を識別します。エージェントが一部のシークレットだけを必要とする場合は、owner トークンの代わりに delegated vault トークンを使用してください。
 
 ## 前提条件 {#prerequisites}
 
 - 信頼できるマシンに TiDB Cloud CLI をインストールして設定します。
 - リリースインストーラーを使用して、サンドボックスに TiDB Cloud CLI をインストールします。
 - 信頼できるマシンに `jq` をインストールします。
-- token の受け渡しには、安全なシークレットマネージャーまたは暗号化されたサンドボックス入力を使用します。
+- トークンの受け渡しには、安全なシークレットマネージャーまたは暗号化されたサンドボックス入力を使用します。
 
 ## ステップ 1. 信頼できるマシンでプロビジョニングする {#step-1-provision-on-the-trusted-machine}
 
@@ -35,7 +35,7 @@ export FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
 export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
-token をシークレットマネージャーに保存し、control-plane のクリーンアップ用に `FILE_SYSTEM_ID` を記録し、Filesystem の作成に使用したリージョンコードも記録します。token を安全に保存した後、`filesystem.json` を削除してください。
+トークンをシークレットマネージャーに保存し、control-plane のクリーンアップ用に `FILE_SYSTEM_ID` を記録し、Filesystem の作成に使用したリージョンコードも記録します。トークンを安全に保存した後、`filesystem.json` を削除してください。
 
 ## ステップ 2. サンドボックスに最小限の環境を注入する {#step-2-inject-the-minimum-sandbox-environment}
 
@@ -81,7 +81,7 @@ cat "$HOME/workspace/sandbox/status.txt"
 
 macOS では、FUSE のインストールが不要な WebDAV を使用するため、`--driver fuse` を省略します。Git ワークスペース、レイヤー、online drain などの FUSE 固有の機能が必要な場合は、macFUSE をインストールして FUSE を選択してください。プラットフォーム要件とマウントパスの制限については、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) を参照してください。
 
-マウント後は、同じ FS 環境で `ti fs-git`、`ti fs-journal`、および owner に認可された `ti fs-vault` コマンドを使用できます。エージェントが一部のシークレットフィールドだけを必要とする場合は、owner token の代わりに delegated `TI_VAULT_TOKEN` を渡してください。
+マウント後は、同じ FS 環境で `ti fs-git`、`ti fs-journal`、および owner に認可された `ti fs-vault` コマンドを使用できます。エージェントが一部のシークレットフィールドだけを必要とする場合は、owner トークンの代わりに delegated `TI_VAULT_TOKEN` を渡してください。
 
 ## クリーンアップ {#cleanup}
 

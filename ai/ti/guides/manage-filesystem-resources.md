@@ -19,7 +19,7 @@ TiDB Cloud CLI コマンドを通じてファイルに直接アクセスする�
 
 ## Filesystem を作成する {#create-a-filesystem}
 
-Filesystem を作成し、返された ID と 1 回限りの owner token を、誰でも読み取り可能ではないファイルに保存します。`--wait` フラグを指定すると、CLI はデータプレーンアクセスの準備が整うまでポーリングしてから結果を返します。
+Filesystem を作成し、返された ID と 1 回限りの owner トークンを、誰でも読み取り可能ではないファイルに保存します。`--wait` フラグを指定すると、CLI はデータプレーンアクセスの準備が整うまでポーリングしてから結果を返します。
 
 ```shell
 umask 077
@@ -34,7 +34,7 @@ export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 
 > **Warning:**
 >
-> JSON レスポンスには `fs_token` が 1 回だけ含まれます。CLI はこの token をローカルの認証情報ディレクトリにも自動的に保存します。ただし、ローカルストレージが失われた場合、この token を再取得することはできません。バックアップコピーをシークレットマネージャーに保存し、その後 `filesystem.json` を削除してください。
+> JSON レスポンスには `fs_token` が 1 回だけ含まれます。CLI はこのトークンをローカルの認証情報ディレクトリにも自動的に保存します。ただし、ローカルストレージが失われた場合、このトークンを再取得することはできません。バックアップコピーをシークレットマネージャーに保存し、その後 `filesystem.json` を削除してください。
 
 > **Note:**
 >
@@ -80,6 +80,6 @@ Filesystem の削除は非同期です。サービスがリクエストを受け
 
 ## 次のステップ {#what-s-next}
 
-- [TiDB Cloud Filesystem Token を管理する](/ai/ti/guides/manage-filesystem-tokens.md)
+- [TiDB Cloud Filesystem トークンを管理する](/ai/ti/guides/manage-filesystem-tokens.md)
 - [TiDB Cloud Filesystem データを操作する](/ai/ti/guides/work-with-filesystem-data.md)
 - [TiDB Cloud Filesystem CLI コマンドリファレンス](/ai/ti/reference/ti-filesystem.md)

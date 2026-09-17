@@ -11,7 +11,7 @@ TiDB Cloud CLI では、[`ti fs` コマンド](/ai/ti/reference/ti-filesystem.md
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
 - [Filesystem を作成する](/ai/ti/guides/manage-filesystem-resources.md)か、既存の Filesystem へのアクセス権を取得します。
-- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または対象を識別する FS token を指定して、Filesystem を選択します。各操作に必要な権限を持つ FS token を指定してください。
+- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または対象を識別する FS トークンを指定して、Filesystem を選択します。各操作に必要な権限を持つ FS トークンを指定してください。
 
 ## データをコピーする {#copy-data}
 

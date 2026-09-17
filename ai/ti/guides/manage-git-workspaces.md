@@ -11,7 +11,7 @@ summary: マウントされた TiDB Cloud Filesystem 上で Git ワークスペ�
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
 - FUSE を使用して [TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md)。
-- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または対象の Filesystem を識別する FS token を指定して、マウント済み Filesystem を選択します。Git ワークスペース権限を持つ FS token を指定してください。
+- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または対象の Filesystem を識別する FS トークンを指定して、マウント済み Filesystem を選択します。Git ワークスペース権限を持つ FS トークンを指定してください。
 - Git をインストールし、リポジトリの認証情報を個別に設定します。
 
 ## ワークスペースを clone する {#clone-a-workspace}

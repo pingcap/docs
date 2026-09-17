@@ -32,17 +32,17 @@ ti fs-vault mount-vault
 - `--mount-path <string>`: ローカルのマウントパス。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: オーナー Filesystem token を設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されている token を使用します。委任認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用してください。
+- `--fs-token <string>`: オーナー Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。委任認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用してください。
 - `--help`: ヘルプ情報を表示します。
 - `--ready-timeout <duration>`: バックグラウンドマウントの準備が完了するまで待機する時間。\[default: `30s`]
-- `--vault-token <string>`: 委任された `ti fs-vault` token。`TI_VAULT_TOKEN` の使用を推奨します。
+- `--vault-token <string>`: 委任された `ti fs-vault` トークン。`TI_VAULT_TOKEN` の使用を推奨します。
 - `--version`: バージョン情報を表示します。
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
 ## 例 {#examples}
 
-どちらの例を実行する前にも、委任された Vault token を注入してください。対話型シェルでは、シェル履歴に残さないように読み取って export します。
+どちらの例を実行する前にも、委任された Vault トークンを注入してください。対話型シェルでは、シェル履歴に残さないように読み取って export します。
 
 ```bash
 printf 'Delegated Vault token: ' >&2

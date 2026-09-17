@@ -30,9 +30,9 @@ ti fs-vault run-with-secret
 
 - `--secret-path <string>`: `/n/vault/<secret-name>` 形式の正規 Vault パスです。たとえば、`db-prod` として作成されたシークレットのパスは `/n/vault/db-prod` です。\[required]
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: オーナー Filesystem token を設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存された token を使用します。委任認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用してください。
+- `--fs-token <string>`: オーナー Filesystem トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存されたトークンを使用します。委任認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用してください。
 - `--help`: ヘルプ情報を表示します。
-- `--vault-token <string>`: 委任された `ti fs-vault` token です。`TI_VAULT_TOKEN` の使用を推奨します。
+- `--vault-token <string>`: 委任された `ti fs-vault` トークンです。`TI_VAULT_TOKEN` の使用を推奨します。
 - `--version`: バージョン情報を表示します。
 
 すべてのコマンドで共有されるオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。

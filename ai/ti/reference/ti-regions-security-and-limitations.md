@@ -39,9 +39,9 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | `ti fs delete-file-system` | TiDB Cloud API key と file system ID |
 | Filesystem の extraction および embedding 設定の表示または更新 | TiDB Cloud API key と明示的な file system ID |
 | Filesystem トークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API key と明示的な file system ID |
-| Filesystem トークンの更新 | 現在の FS bearer token のみ |
-| リモートの file、レイヤー、pack、マウント、Git、journal、および owner vault 操作 | FS owner token または登録済みリソース認証情報 |
-| 委任された vault の read、list、run、またはマウント | スコープに適した delegated vault token |
+| Filesystem トークンの更新 | 現在の FS bearer トークンのみ |
+| リモートの file、レイヤー、pack、マウント、Git、journal、および owner vault 操作 | FS owner トークンまたは登録済みリソース認証情報 |
+| 委任された vault の read、list、run、またはマウント | スコープに適した delegated vault トークン |
 | 成功したバックグラウンドマウント後の drain およびアンマウント | 同じ `HOME` 内の非シークレットマウント locator |
 
 TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS 実行では、生成された SQL username/password による Basic 認証を TLS 上で使用します。これらの認証情報は相互に置き換えできません。
@@ -51,10 +51,10 @@ TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS �
 - TiDB Cloud API key は、ワークフローに必要なアクセス権のみを持つように作成してください。無人自動化で個人の管理者 key を再利用しないでください。
 - 自動化用の認証情報は、CI のシークレットストアまたは実行時シークレットマネージャーから注入してください。認証情報をソース管理、コンテナイメージ、シェルスクリプト、またはプロセス一覧やシェル履歴に表示される可能性のあるコマンドライン引数に置かないでください。
 - 完全な `~/.ti/` ディレクトリをエージェントのサンドボックスにコピーしないでください。既存の Filesystem には、`TI_FS_TOKEN` と `TI_REGION_CODE` のみを渡し、`TI_FS_FILE_SYSTEM_ID` は任意のアサーションとしてのみ使用してください。
-- FS owner token は、その Filesystem への完全アクセスとして扱ってください。エージェントが一部のシークレットのみを必要とする場合は、最も狭い field scope と実用上最短の TTL を持つ vault grant を作成し、代わりに delegated vault token を渡してください。
-- マシン、CI ワークフロー、またはサンドボックスのクラスごとに別々の Filesystem token を使用してください。これにより、ある環境を無効化または失効しても、他の環境を中断せずに済みます。token 名は運用上のラベルであり、一意識別子ではありません。token の変更は `token_id` でのみ行ってください。
-- 生成または更新された token の平文は、1 回しか返されないため、すぐに取得してください。`TI_FS_TOKEN` から更新された token は、外部シークレットマネージャーには書き戻されません。更新は冪等ではないため、ネットワーク障害が曖昧な場合は再試行しないでください。
-- 共有 token のローテーションでは、まず置き換え用 token を生成して配布し、アクセスを検証してから、古い token を無効化して削除してください。状態変更後、認証キャッシュが収束するまで約 10 秒かかります。
+- FS owner トークンは、その Filesystem への完全アクセスとして扱ってください。エージェントが一部のシークレットのみを必要とする場合は、最も狭い field scope と実用上最短の TTL を持つ vault grant を作成し、代わりに delegated vault トークンを渡してください。
+- マシン、CI ワークフロー、またはサンドボックスのクラスごとに別々の Filesystem トークンを使用してください。これにより、ある環境を無効化または失効しても、他の環境を中断せずに済みます。トークン名は運用上のラベルであり、一意識別子ではありません。トークンの変更は `token_id` でのみ行ってください。
+- 生成または更新されたトークンの平文は、1 回しか返されないため、すぐに取得してください。`TI_FS_TOKEN` から更新されたトークンは、外部シークレットマネージャーには書き戻されません。更新は冪等ではないため、ネットワーク障害が曖昧な場合は再試行しないでください。
+- 共有トークンのローテーションでは、まず置き換え用トークンを生成して配布し、アクセスを検証してから、古いトークンを無効化して削除してください。状態変更後、認証キャッシュが収束するまで約 10 秒かかります。
 - AI provider key は `TI_FS_AI_PROVIDER_API_KEY` を通じてのみ渡してください。TiDB Cloud CLI はこの値をローカルに永続化せず、Filesystem サービスはマスクされた形式でのみ返します。有効な設定を describe するまで、曖昧な障害後に AI 設定更新を再試行しないでください。
 - extraction を有効にすると、Filesystem のメディアが設定された extraction provider と共有されます。app-managed embedding を有効にすると、テキストまたは抽出された説明が設定された embedding provider と共有されます。いずれかの機能を有効にする前に、その provider のデータ保持およびセキュリティ条件を確認してください。
 - 信頼できないエージェントや探索的なエージェントによる SQL 調査には `--read-only` を使用してください。DDL または権限管理には `--admin` のみを使用し、データ変更を意図する場合にのみ `--read-write` を使用してください。
@@ -92,7 +92,7 @@ Ubuntu 26.04 では、さらに AppArmor により `fusermount3` が制限され
 - read-write はデフォルトの SQL ロールです。セキュリティに敏感な自動化では、明示的なロールフラグを使用してください。
 - journal は追記専用であり、現在の公開コマンド体系には journal を削除するコマンドはありません。
 - Filesystem の list および describe コマンドは、TiDB Cloud 認証情報を使用してリージョンスコープのリモートインベントリを照会します。リージョンをまたいで集約はしません。
-- ローカル認証情報ストアは、プロファイルおよび Filesystem ごとに 1 つの選択済み token を保持します。すべてのリモート token をミラーリングするわけではありません。既知の token ID を持たない古い create/import 認証情報も引き続き使用できますが、リモート token メタデータと関連付けることはできません。
+- ローカル認証情報ストアは、プロファイルおよび Filesystem ごとに 1 つの選択済みトークンを保持します。すべてのリモートトークンをミラーリングするわけではありません。既知のトークン ID を持たない古い create/import 認証情報も引き続き使用できますが、リモートトークンメタデータと関連付けることはできません。
 - Filesystem の extraction および embedding provider 設定は任意です。未設定でも、リソース管理、ファイルアクセス、検索、layer、Git、journal、vault、またはマウントワークフローは妨げられません。
 - OpenAI provider interface は、embedding と image、audio、video extraction でサポートされます。Alibaba Cloud Model Studio Qwen ASR は audio extraction でのみサポートされます。その他のベンダーは、正確な OpenAI-compatible contract を通じた場合にのみ条件付きで互換性があります。ネイティブの Anthropic、Gemini、Vertex AI、Bedrock、および Azure OpenAI interface はサポートされません。
 - app-managed embedding には、正確に 1024 次元を返す provider model が必要です。`source=database_auto` を報告する Filesystem は database-managed embedding を使用しており、app-managed 設定を拒否します。

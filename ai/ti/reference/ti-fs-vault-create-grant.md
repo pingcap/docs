@@ -36,10 +36,10 @@ ti fs-vault create-grant
 - `--ttl <duration>`: grant の有効期間。たとえば `1h`。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: file system を選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem token を設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されている token を使用します。
+- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--label-hint <string>`: 任意の grant label hint。
-- `--token-only`: 委任 bearer token のみを出力します。
+- `--token-only`: 委任 bearer トークンのみを出力します。
 - `--version`: バージョン情報を表示します。
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
@@ -49,7 +49,7 @@ ti fs-vault create-grant
 | 権限 | 現在の `ti` の動作 |
 | --- | --- |
 | `read` | grant scope 内で、委任された `list-secrets`、`read-secret`、`run-with-secret`、および `mount-vault` 操作を許可します。 |
-| `write` | サービスはこの権限を受け付けますが、read 権限は含まれません。現在の `ti` コマンドでは、委任 token を使用して secret を書き込む操作は公開されていません。 |
+| `write` | サービスはこの権限を受け付けますが、read 権限は含まれません。現在の `ti` コマンドでは、委任トークンを使用して secret を書き込む操作は公開されていません。 |
 
 ## 例 {#examples}
 
@@ -60,7 +60,7 @@ ti fs-vault create-grant
     ti fs-vault create-grant --file-system-id <file-system-id> --agent-id deploy-agent --scope db-prod/DB_URL --permission read --ttl 10m
     ```
 
-- 委任 token のみを返します。
+- 委任トークンのみを返します。
 
     ```bash
     # Produce token-only output for injection into an isolated CI job.

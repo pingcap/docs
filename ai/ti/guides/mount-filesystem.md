@@ -10,8 +10,8 @@ TiDB Cloud CLI では、アプリケーションがローカルファイルシ�
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
-- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または Filesystem を識別する FS token を指定して、Filesystem を選択します。
-- `--fs-token`、`TI_FS_TOKEN`、または選択した Filesystem 用に保存されているローカル認証情報を通じて FS token を指定します。
+- `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または Filesystem を識別する FS トークンを指定して、Filesystem を選択します。
+- `--fs-token`、`TI_FS_TOKEN`、または選択した Filesystem 用に保存されているローカル認証情報を通じて FS トークンを指定します。
 - Linux では、FUSE3 をインストールし、`/dev/fuse` へのアクセスを提供します。
 
 ## マウントドライバーを選択する {#choose-a-mount-driver}

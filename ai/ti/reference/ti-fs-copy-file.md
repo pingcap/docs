@@ -58,7 +58,7 @@ ti fs copy-file
 - `--from-local <string>`: ローカルのソースパスです。
 - `--from-remote <string>`: TiDB Cloud file system 内のソースパスです。
 - `--from-stdin`: stdin から読み取り、`--to-remote` に書き込みます。
-- `--fs-token <string>`: Filesystem token を設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択した Filesystem 用にローカルに保存されている token を使用します。
+- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択した Filesystem 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--layer-id <string>`: コピーした 1 つのファイルを、ベース file system ではなく file system レイヤーに書き込みます。`--recursive` とは併用できません。
 - `--overwrite`: 既存の宛先ファイルを置き換えます。
