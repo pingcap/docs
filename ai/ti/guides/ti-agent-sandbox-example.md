@@ -35,7 +35,7 @@ export FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
 export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
-トークンをシークレットマネージャーに保存し、control-plane のクリーンアップ用に `FILE_SYSTEM_ID` を記録し、Filesystem の作成に使用したリージョンコードも記録します。トークンを安全に保存した後、`filesystem.json` を削除してください。
+トークンをシークレットマネージャーに保存し、コントロールプレーンのクリーンアップ用に `FILE_SYSTEM_ID` を記録し、Filesystem の作成に使用したリージョンコードも記録します。トークンを安全に保存した後、`filesystem.json` を削除してください。
 
 ## ステップ 2. サンドボックスに最小限の環境を注入する {#step-2-inject-the-minimum-sandbox-environment}
 
