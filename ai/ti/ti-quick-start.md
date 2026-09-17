@@ -15,7 +15,7 @@ summary: TiDB Cloud CLI をインストールして設定し、その後 TiDB Cl
 
 ## 前提条件 {#prerequisites}
 
-開始する前に、[TiDB Cloud console](https://tidbcloud.com/) の [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API public key と private key を取得してください。
+開始する前に、[TiDB Cloud コンソール](https://tidbcloud.com/) の [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API public キーと private キーを取得してください。
 
 ## Step 1. TiDB Cloud CLI をインストールする {#step-1-install-tidb-cloud-cli}
 
@@ -86,8 +86,8 @@ summary: TiDB Cloud CLI をインストールして設定し、その後 TiDB Cl
 
 2. 次の情報を入力します。
 
-    - CLI 操作のデフォルトリージョン。リージョンコード（`aws-us-east-1` など）で指定します。TiDB Cloud CLI がサポートするリージョンの一覧については、[Supported regions](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) を参照してください。
-    - TiDB Cloud API public key と private key。
+    - CLI 操作のデフォルトリージョン。リージョンコード（`aws-us-east-1` など）で指定します。TiDB Cloud CLI がサポートするリージョンの一覧については、[サポートされるリージョン](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) を参照してください。
+    - TiDB Cloud API public キーと private キー。
 
 3. 読み取り専用コマンドを実行し、保存した認証情報を使用して CLI が TiDB Cloud にアクセスできることを確認します。
 

@@ -13,7 +13,7 @@ summary: TiDB Cloud CLI のリリースをインストールし、プロファ�
 
 ## 前提条件 {#prerequisites}
 
-TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API public key と private key を取得してください。
+TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API public キーと private キーを取得してください。
 
 > **Note:**
 >
@@ -84,7 +84,7 @@ TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiD
 
 ## プロファイルを設定する {#configure-a-profile}
 
-プロファイルとは、TiDB Cloud API public key、private key、およびリージョンコードの名前付きセットです。
+プロファイルとは、TiDB Cloud API public キー、private キー、およびリージョンコードの名前付きセットです。
 
 このセクションでは、TiDB Cloud CLI 用のプロファイルを設定する方法を説明します。
 
@@ -96,7 +96,7 @@ TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiD
 ti configure
 ```
 
-`ti configure` は、TiDB Cloud API public key、private key、およびデフォルトのリージョンコードの入力を求めます。CLI は、個別のコマンドで上書きしない限り、このリージョンをコマンド実行時に使用します。利用可能なリージョンについては、[サポートされているリージョン](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) を参照してください。
+`ti configure` は、TiDB Cloud API public キー、private キー、およびデフォルトのリージョンコードの入力を求めます。CLI は、個別のコマンドで上書きしない限り、このリージョンをコマンド実行時に使用します。利用可能なリージョンについては、[サポートされているリージョン](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) を参照してください。
 
 このコマンドは入力形式をローカルで検証し、TiDB Cloud へのリクエストを行わずにプロファイルを保存します。認証情報は、TiDB Cloud にアクセスするコマンドを実行したときに検証されます。デフォルトプロファイルを変更するには、再度 `ti configure` を実行してください。名前付きプロファイルを変更するには、たとえば `ti configure --profile staging` のように、その名前を指定します。
 
