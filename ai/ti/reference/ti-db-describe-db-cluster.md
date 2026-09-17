@@ -23,7 +23,7 @@ ti db describe-db-cluster
 
 ## オプション {#options}
 
-- `--db-cluster-id <string>`: Starter DB クラスター ID。\[必須]
+- `--db-cluster-id <string>`: Starter DB クラスター ID。\[required]
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 - `--view <string>`: 詳細レベル: `BASIC` または `FULL`。省略した場合、TiDB Cloud API は `BASIC` を使用します。

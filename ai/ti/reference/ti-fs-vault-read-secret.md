@@ -27,7 +27,7 @@ ti fs-vault read-secret
 
 ## オプション {#options}
 
-- `--secret-name <string>`: Vault シークレット名。\[必須]
+- `--secret-name <string>`: Vault シークレット名。\[required]
 - `--field <string>`: 読み取るオプションのフィールド名。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--format <string>`: 読み取り出力形式: `json`、`raw`、または `env`。\[デフォルト: json]

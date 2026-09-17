@@ -25,7 +25,7 @@ ti fs-vault delete-secret
 
 ## オプション {#options}
 
-- `--secret-name <string>`: Vault シークレット名。\[必須]
+- `--secret-name <string>`: Vault シークレット名。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。

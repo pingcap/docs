@@ -28,8 +28,8 @@ ti db execute-sql-statement
 
 ## オプション {#options}
 
-- `--db-cluster-id <string>`: Starter DB クラスター ID。\[必須]
-- `--sql <string>`: 実行する 1 つの SQL ステートメント。\[必須]
+- `--db-cluster-id <string>`: Starter DB クラスター ID。\[required]
+- `--sql <string>`: 実行する 1 つの SQL ステートメント。\[required]
 - `--admin`: 用意された admin DB SQL 認証情報を使用します。
 - `--database <string>`: データベース / デフォルトスキーマ名。
 - `--help`: ヘルプ情報を表示します。

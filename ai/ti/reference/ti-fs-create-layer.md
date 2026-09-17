@@ -30,7 +30,7 @@ ti fs create-layer
 
 ## オプション {#options}
 
-- `--base-root-path <string>`: TiDB Cloud file system 内のベースルートパスです。\[必須]
+- `--base-root-path <string>`: TiDB Cloud file system 内のベースルートパスです。\[required]
 - `--actor-id <string>`: レイヤーの所有者を識別する Actor ID です（例: エージェント名）。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--durability-mode <string>`: レイヤーの durability mode を設定します。明示的にサポートされている値は `restore-safe` のみで、これを指定するとリモートレイヤー内の変更が保持され、ローカル環境の終了後もレイヤーを復元できます。省略した場合、サービスは `restore-safe` を使用します。

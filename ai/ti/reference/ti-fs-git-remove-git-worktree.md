@@ -26,7 +26,7 @@ ti fs-git remove-git-worktree
 
 ## オプション {#options}
 
-- `--worktree-path <string>`: リンクされた worktree のマウント済み `ti fs` パス。\[必須]
+- `--worktree-path <string>`: リンクされた worktree のマウント済み `ti fs` パス。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--force`: リンクされた worktree にローカル変更がある場合でも削除します。

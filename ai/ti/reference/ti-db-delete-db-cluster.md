@@ -24,7 +24,7 @@ ti db delete-db-cluster
 
 ## オプション {#options}
 
-- `--db-cluster-id <string>`: Starter DB クラスター ID。\[必須]
+- `--db-cluster-id <string>`: Starter DB クラスター ID。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。

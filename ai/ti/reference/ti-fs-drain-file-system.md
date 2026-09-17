@@ -24,7 +24,7 @@ ti fs drain-file-system
 
 ## オプション {#options}
 
-- `--mount-path <string>`: ローカル FUSE マウントパス。\[必須]
+- `--mount-path <string>`: ローカル FUSE マウントパス。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--help`: ヘルプ情報を表示します。
 - `--timeout <duration>`: ダーティハンドルと保留中の書き込みがドレインされるまで待機する時間。\[デフォルト: `30s`]

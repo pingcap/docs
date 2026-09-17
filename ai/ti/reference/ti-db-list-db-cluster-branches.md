@@ -24,7 +24,7 @@ ti db list-db-cluster-branches
 
 ## オプション {#options}
 
-- `--db-cluster-id <string>`: Starter DB クラスター ID。\[必須]
+- `--db-cluster-id <string>`: Starter DB クラスター ID。\[required]
 - `--help`: ヘルプ情報を表示します。
 - `--page-size <int32>`: リクエストするブランチ数です。省略した場合、または `0` に設定した場合、API は最大 `10` 件を返します。API の最大値は `100` で、`100` を超える値は `100` に設定されます。
 - `--page-token <string>`: 以前の list-db-cluster-branches 呼び出しで返されたページトークンです。
