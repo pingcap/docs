@@ -70,7 +70,7 @@ ti fs list-layer-chain --layer-ref experiment
 >
 > 書き込み可能な FUSE マウントを持つレイヤーのチェックポイントを作成する前に、[`drain-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を実行してください。チェックポイントには、サービスに到達した変更のみが含まれます。レイヤーをロールバックまたはコミットする前に、drain を実行してから [`unmount-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を実行してください。CLI はこれらの手順を自動では実行しません。
 
-レイヤーに対して、次のいずれか 1 つの結果を選択します。
+レイヤーに対して、次のいずれかの操作を選択します。
 
 - レイヤーをロールバックして変更を破棄する場合:
 
