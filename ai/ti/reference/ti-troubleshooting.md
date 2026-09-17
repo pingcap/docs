@@ -197,7 +197,7 @@ mkdir -p "$HOME/workspace"
 ti fs mount-file-system --mount-path "$HOME/workspace"
 ```
 
-`/workspace` のオーナーや mode を変更しても、AppArmor は回避できません。パスを変更できない場合は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md#ubuntu-2604-mount-paths) で説明されているように、`/etc/apparmor.d/local/fusermount3` に `/workspace` 用の明示的なマウントおよびアンマウントルールを追加してください。
+`/workspace` のオーナーやモードを変更しても、AppArmor は回避できません。パスを変更できない場合は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md#ubuntu-2604-mount-paths) で説明されているように、`/etc/apparmor.d/local/fusermount3` に `/workspace` 用の明示的なマウントおよびアンマウントルールを追加してください。
 
 ## プロセスクラッシュ後にマウントが無効になります {#mount-becomes-stale-after-a-process-crash}
 
@@ -209,7 +209,7 @@ ti fs unmount-file-system \
   --force
 ```
 
-locator が残っていない場合でもクリーンアップを成功扱いにしたいときは、`--ignore-absent` を使用します。強制的なクリーンアップでは、削除されたローカルディスク上にある保留中の書き込みのリカバリは保証されません。
+ロケーターが残っていない場合でもクリーンアップを成功扱いにしたいときは、`--ignore-absent` を使用します。強制的なクリーンアップでは、削除されたローカルディスク上にある保留中の書き込みのリカバリは保証されません。
 
 ## アンマウント時にビジーが報告されます {#unmount-reports-busy}
 
