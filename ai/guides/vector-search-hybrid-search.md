@@ -27,7 +27,7 @@ TiDBにおけるハイブリッド検索の一般的なワークフローは以�
 
 ## さあ始めましょう {#get-started}
 
-### ステップ1. <a href="https://github.com/pingcap/pytidb">pytidb</a> Python SDKをインストールします {#step-1-install-the-a-href-https-github-com-pingcap-pytidb-pytidb-a-python-sdk}
+### ステップ1. [pytidb](https://github.com/pingcap/pytidb) Python SDKをインストールします {#step-1-install-the-pytidb-python-sdk}
 
 ```shell
 pip install "pytidb[models]"

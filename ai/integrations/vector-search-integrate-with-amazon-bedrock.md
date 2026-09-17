@@ -25,7 +25,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 このチュートリアルを完了するには、以下が必要です。
 
-- [Python 3.11以降](https://www.python.org/downloads/)インストールされています
+- [Python 3.11以降](https://www.python.org/downloads/)がインストールされました
 
 - [pip](https://pypi.org/project/pip/)がインストールされました
 

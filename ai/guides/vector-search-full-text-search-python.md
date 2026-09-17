@@ -34,7 +34,7 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 ## さあ始めましょう {#get-started}
 
-### ステップ1. <a href="https://github.com/pingcap/pytidb">pytidb</a> Python SDKをインストールします {#step-1-install-the-a-href-https-github-com-pingcap-pytidb-pytidb-a-python-sdk}
+### ステップ1. [pytidb](https://github.com/pingcap/pytidb) Python SDKをインストールします {#step-1-install-the-pytidb-python-sdk}
 
 [pytidb](https://github.com/pingcap/pytidb)はTiDBの公式Python SDKであり、開発者が効率的にAIアプリケーションを構築できるよう設計されています。ベクトル検索と全文検索の機能が組み込まれています。
 
