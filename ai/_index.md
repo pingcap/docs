@@ -101,8 +101,8 @@ The TiDB Cloud CLI (`ti`) lets users, scripts, CI jobs, and AI agents manage TiD
 | Understand what `ti` manages and when to use it | [TiDB Cloud CLI Overview](/ai/ti/ti-overview.md) |
 | Install and configure `ti`, then complete a first workflow | [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) |
 | Automate TiDB Cloud Starter instance, branch, and SQL operations | [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md) |
-| Persist and share files across machines, CI jobs, and sandboxes | [Manage Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md) and [Work with Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md) |
-| Use mounted workspaces, Git workspaces, journals, or delegated secrets | [Mount a Filesystem](/ai/ti/guides/mount-filesystem.md), [Manage Git Workspaces](/ai/ti/guides/manage-git-workspaces.md), [Use Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md), and [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md) |
+| Persist and share files across machines, CI jobs, and sandboxes | [Manage TiDB Cloud Filesystems via CLI](/ai/ti/guides/manage-filesystems-via-cli.md) |
+| Use mounted workspaces, Git workspaces, journals, or delegated secrets | [Mount a Filesystem](/tidb-cloud-filesystem/mount-filesystem.md), [Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md), [Use Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md), and [Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) |
 | Follow an end-to-end automation or agent example | [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/guides/ti-daily-workflow-example.md) or [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md) |
 | Look up commands, global options, output behavior, and errors | [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) |
 

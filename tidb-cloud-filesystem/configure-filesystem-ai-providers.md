@@ -1,6 +1,7 @@
 ---
 title: Configure TiDB Cloud Filesystem AI Providers
 summary: Learn how to inspect and configure media extraction and embedding providers for a TiDB Cloud Filesystem by using the CLI.
+aliases: ['/ai/configure-filesystem-ai-providers']
 ---
 
 # Configure TiDB Cloud Filesystem AI Providers
@@ -9,8 +10,7 @@ A TiDB Cloud Filesystem can optionally extract text from media files and generat
 
 ## Prerequisites
 
-- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-- Obtain the target Filesystem ID.
+- Follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md) to install the TiDB Cloud CLI, create a Filesystem, and obtain the Filesystem ID.
 - Obtain the API key required by your selected AI provider.
 
 The configuration commands require TiDB Cloud API credentials and an explicit Filesystem ID. Set the provider key through `TI_FS_AI_PROVIDER_API_KEY`. The CLI does not persist the key locally. The Filesystem service stores it encrypted and returns only a masked value in subsequent configuration output.
@@ -110,5 +110,5 @@ If an update fails because of a timeout, lost response, or another ambiguous net
 
 ## What's next
 
-- [Work with TiDB Cloud Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md)
+- [Work with TiDB Cloud Filesystem Data](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

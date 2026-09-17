@@ -7,6 +7,8 @@ summary: Select a Filesystem and mount driver, access remote files from a local 
 
 A mount makes remote files available at a local directory. Use it when your editor, application, or agent expects filesystem paths instead of file-transfer commands. The remote Filesystem persists independently of the mount process.
 
+Start here to choose a platform, select credentials, and complete a first mount. For CLI driver options, container configuration, and mount lifecycle commands, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/mount-filesystem.md).
+
 > **Note:**
 >
 > TiDB Cloud Filesystem is currently in public preview. Its features and interfaces are subject to change without notice.

@@ -19,5 +19,5 @@ summary: Reference every `ti fs-journal` command for creating, appending, readin
 
 ## See also
 
-- [Use TiDB Cloud Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md)
+- [Use TiDB Cloud Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
 - [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](/ai/ti/guides/ti-journal-agent-workflow-example.md)

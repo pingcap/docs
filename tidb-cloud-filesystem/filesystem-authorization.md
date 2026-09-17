@@ -100,5 +100,5 @@ Token changes can take time to propagate through authorization caches. Rotate by
 ## What's next
 
 - [Share one Filesystem with multiple machines](/tidb-cloud-filesystem/filesystem-sharing.md).
-- [Look up token management commands](/ai/ti/guides/manage-filesystem-tokens.md).
+- [Look up token management commands](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 - [Mount a token-scoped directory](/tidb-cloud-filesystem/filesystem-mount.md).

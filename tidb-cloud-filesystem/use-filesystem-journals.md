@@ -1,6 +1,7 @@
 ---
 title: Use TiDB Cloud Filesystem Journals
 summary: Learn how to create, append, read, search, and verify append-only journals for agent and automation events in a Filesystem.
+aliases: ['/ai/use-filesystem-journals']
 ---
 
 # Use TiDB Cloud Filesystem Journals
@@ -9,9 +10,8 @@ Journals provide append-only, hash-chained event logs for agent workflows and au
 
 ## Prerequisites
 
-- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-- Select a Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies the Filesystem.
-- Provide an FS token with journal permissions through `--fs-token`, `TI_FS_TOKEN`, or the local credential stored for the selected Filesystem.
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- For the commands below, set `TI_FS_FILE_SYSTEM_ID` to the Filesystem ID and use its locally stored FS token. Alternatively, set `TI_FS_TOKEN` and `TI_REGION_CODE` for token-only access; the token identifies the Filesystem. To select a Filesystem per command instead, add `--file-system-id "<file-system-id>"` to each command. Use a token with journal permissions. See [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#understand-local-selection) for selection details.
 
 ## Create a journal
 

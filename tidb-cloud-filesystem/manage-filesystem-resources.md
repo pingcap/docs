@@ -1,6 +1,7 @@
 ---
 title: Manage TiDB Cloud Filesystem Resources
 summary: Learn how to safely create, inspect, check, select, and delete TiDB Cloud Filesystem resources by using TiDB Cloud CLI.
+aliases: ['/ai/manage-filesystem-resources']
 ---
 
 # Manage TiDB Cloud Filesystem Resources
@@ -13,8 +14,7 @@ This document describes how to use [`ti fs` commands](/ai/ti/reference/ti-filesy
 
 ## Prerequisites
 
-- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-- Configure a profile with TiDB Cloud API credentials.
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli) and [configure access](/tidb-cloud-filesystem/filesystem-quick-start.md#step-2-configure-access) with TiDB Cloud API credentials.
 - Install `jq`, or use another JSON processor to capture command output safely.
 
 ## Create a Filesystem
@@ -80,6 +80,6 @@ Filesystem deletion is asynchronous. After the service accepts the request, the 
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem Tokens](/ai/ti/guides/manage-filesystem-tokens.md)
-- [Work with TiDB Cloud Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md)
+- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [Work with TiDB Cloud Filesystem Data](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

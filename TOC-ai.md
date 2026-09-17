@@ -45,16 +45,7 @@
   - [Overview](/ai/ti/ti-overview.md)
   - [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md)
   - [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md)
-  - Manage TiDB Cloud Filesystem
-    - [Manage Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md)
-    - [Configure Filesystem AI Providers](/ai/ti/guides/configure-filesystem-ai-providers.md)
-    - [Manage Filesystem Tokens](/ai/ti/guides/manage-filesystem-tokens.md)
-    - [Work with Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md)
-    - [Manage Filesystem Layers and Checkpoints](/ai/ti/guides/manage-filesystem-layers.md)
-    - [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md)
-    - [Manage Git Workspaces](/ai/ti/guides/manage-git-workspaces.md)
-    - [Use Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md)
-    - [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md)
+  - [Manage TiDB Cloud Filesystems via CLI](/ai/ti/guides/manage-filesystems-via-cli.md)
   - Scenarios for Users and Automation
     - [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/guides/ti-daily-workflow-example.md)
     - [Query TiDB Cloud Starter with Explicit SQL Roles](/ai/ti/guides/ti-query-sql-with-roles-example.md)

@@ -9,6 +9,8 @@ When two agents explore different answers, they should not overwrite each other'
 
 The CLI calls these objects **layers**, not Git branches. All commands in this guide use `ti fs`; no Git repository is required.
 
+This page explains the model through a parallel review scenario. For individual commands to create, inspect, commit, or roll back layers, see [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
+
 > **Note:**
 >
 > TiDB Cloud Filesystem is currently in public preview. Its features and interfaces are subject to change without notice.

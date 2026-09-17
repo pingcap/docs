@@ -1,6 +1,7 @@
 ---
 title: Work with TiDB Cloud Filesystem Data
 summary: Learn how to copy, read, organize, search, and inspect files and directories in TiDB Cloud Filesystem by using the CLI.
+aliases: ['/ai/work-with-filesystem-data']
 ---
 
 # Work with TiDB Cloud Filesystem Data
@@ -9,9 +10,9 @@ In TiDB Cloud CLI, you can use [`ti fs` commands](/ai/ti/reference/ti-filesystem
 
 ## Prerequisites
 
-- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-- [Create a Filesystem](/ai/ti/guides/manage-filesystem-resources.md) or obtain access to an existing one.
-- Select the Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies it. Provide an FS token with the permissions required for each operation.
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Create a Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) or obtain access to an existing one.
+- For the commands below, set `TI_FS_FILE_SYSTEM_ID` to the Filesystem ID and use its locally stored FS token. Alternatively, set `TI_FS_TOKEN` and `TI_REGION_CODE` for token-only access; the token identifies the Filesystem. To select a Filesystem per command instead, add `--file-system-id "<file-system-id>"` to each command. Use a token with the permissions required for each operation. See [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#understand-local-selection) for selection details.
 
 ## Copy data
 
@@ -70,6 +71,6 @@ ti fs find-files --path /reports --file-name-pattern "*.md" --tag stage=review
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/ai/ti/guides/manage-filesystem-layers.md)
-- [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md)
+- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
+- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/mount-filesystem.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

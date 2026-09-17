@@ -1,18 +1,20 @@
 ---
 title: Mount a TiDB Cloud Filesystem
 summary: Learn how to safely mount, use, drain, and unmount a TiDB Cloud Filesystem on macOS, Linux, or in a container.
+aliases: ['/ai/mount-filesystem']
 ---
 
 # Mount a TiDB Cloud Filesystem
 
 In TiDB Cloud CLI, you can mount a TiDB Cloud Filesystem when an application needs to access remote data through a local filesystem path.
 
+This guide covers driver selection, container setup, and mount lifecycle commands. If this is your first mount, start with [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md) for platform-specific setup and credential selection.
+
 ## Prerequisites
 
-- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-- Select a Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies the Filesystem.
-- Provide an FS token through `--fs-token`, `TI_FS_TOKEN`, or the local credential stored for the selected Filesystem.
-- On Linux, install FUSE3 and provide access to `/dev/fuse`.
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- Replace `<file-system-id>` in the mount examples with the Filesystem ID. Use its locally stored FS token, or provide a token through `--fs-token` or `TI_FS_TOKEN`. For token-only access without a configured profile, also set `TI_REGION_CODE`; the supplied ID must match the token. See [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#understand-local-selection) for selection details.
+- On Linux, [install FUSE3](/tidb-cloud-filesystem/filesystem-mount-linux.md#install-fuse3) and provide access to `/dev/fuse`.
 
 ## Choose a mount driver
 
@@ -126,5 +128,5 @@ ti fs drain-file-system --mount-path /path/to/workspace --timeout 30s
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/ai/ti/guides/manage-filesystem-layers.md)
+- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

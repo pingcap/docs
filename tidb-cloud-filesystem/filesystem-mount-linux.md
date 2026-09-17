@@ -70,7 +70,7 @@ ti fs unmount-file-system --mount-path "$HOME/workspace"
 
 If `fusermount3` reports `Permission denied`, check the local mount path, `/dev/fuse` access, and the host's security policy. This error is not necessarily a TiDB Cloud credential failure.
 
-Ubuntu 26.04 can apply an AppArmor profile to `fusermount3` that allows paths under home directories but rejects a top-level path such as `/workspace`. Becoming root or running `chown` on `/workspace` does not bypass that policy. Prefer `$HOME/workspace`; if the application requires another path, ask the administrator to update the narrow AppArmor rule described in [Ubuntu mount-path restrictions](/ai/ti/guides/mount-filesystem.md#ubuntu-2604-mount-paths).
+Ubuntu 26.04 can apply an AppArmor profile to `fusermount3` that allows paths under home directories but rejects a top-level path such as `/workspace`. Becoming root or running `chown` on `/workspace` does not bypass that policy. Prefer `$HOME/workspace`; if the application requires another path, ask the administrator to update the narrow AppArmor rule described in [Ubuntu mount-path restrictions](/tidb-cloud-filesystem/mount-filesystem.md#ubuntu-2604-mount-paths).
 
 A root-created FUSE mount is also not automatically usable by an application running as a different user. Mount as the user that will run the application rather than trying to repair access with `chown` afterward.
 

@@ -1,6 +1,7 @@
 ---
 title: Manage TiDB Cloud Filesystem Vault Secrets
 summary: Learn how to store, read, delegate, inject, audit, revoke, and mount secrets securely with TiDB Cloud Filesystem Vault.
+aliases: ['/ai/manage-filesystem-vault-secrets']
 ---
 
 # Manage TiDB Cloud Filesystem Vault Secrets
@@ -9,9 +10,8 @@ TiDB Cloud Filesystem Vault lets you store secrets, delegate narrowly scoped and
 
 ## Prerequisites
 
-- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-- Select a Filesystem by passing `--file-system-id`, setting `TI_FS_FILE_SYSTEM_ID`, or supplying an FS token that identifies the Filesystem.
-- For owner operations, provide an owner FS token through `--fs-token`, `TI_FS_TOKEN`, or the local credential stored for the selected Filesystem.
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- For the secret commands below, set `TI_FS_FILE_SYSTEM_ID` to the Filesystem ID and use its locally stored FS token. Alternatively, set `TI_FS_TOKEN` and `TI_REGION_CODE` for token-only access; the token identifies the Filesystem. Owner operations require an [owner FS token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-fs-tokens). See [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#understand-local-selection) for selection details.
 
 > **Note:**
 >

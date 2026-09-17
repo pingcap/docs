@@ -1,6 +1,7 @@
 ---
 title: Manage TiDB Cloud Filesystem Tokens
 summary: Learn how to import, generate, scope, inspect, disable, refresh, and revoke access tokens for a TiDB Cloud Filesystem.
+aliases: ['/ai/manage-filesystem-tokens']
 ---
 
 # Manage TiDB Cloud Filesystem Tokens
@@ -9,9 +10,9 @@ You can use Filesystem tokens to give users or automation access to a TiDB Cloud
 
 ## Prerequisites
 
-- [Install and configure TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-- For owner-token generation and TiDB Cloud-authenticated token management, configure TiDB Cloud API credentials and obtain the Filesystem ID.
-- For scoped-token generation or bearer-authenticated token management, obtain an owner FS token. You can pass it through `--fs-token`, set `TI_FS_TOKEN`, or use the local token stored for an explicitly selected Filesystem.
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- For owner-token generation and TiDB Cloud-authenticated token management, [configure TiDB Cloud API credentials](/tidb-cloud-filesystem/filesystem-quick-start.md#step-2-configure-access) and obtain the Filesystem ID.
+- For scoped-token generation or bearer-authenticated token management, obtain an [owner FS token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-fs-tokens). You can pass it through `--fs-token`, set `TI_FS_TOKEN`, or use the local token stored for an explicitly selected Filesystem.
 
 > **Note:**
 >
@@ -70,7 +71,7 @@ Use [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token
 
 > **Note:**
 >
-> Before you rotate, disable, or delete a token used by an active local mount, run [`drain-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) and then [`unmount-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount). The CLI checks for known active mounts and refuses the operation if the token is still in use.
+> Before you rotate, disable, or delete a token used by an active local mount, run [`drain-file-system`](/tidb-cloud-filesystem/mount-filesystem.md#drain-or-unmount) and then [`unmount-file-system`](/tidb-cloud-filesystem/mount-filesystem.md#drain-or-unmount). The CLI checks for known active mounts and refuses the operation if the token is still in use.
 
 ## What's next
 
