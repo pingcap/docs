@@ -5,7 +5,7 @@ summary: Filesystem Vault からシークレットを読み取ります。
 
 # ti fs-vault read-secret
 
-owner または delegated credential を使用して、完全なシークレットまたは 1 つのフィールドを読み取ります。
+オーナーまたは delegated credential を使用して、完全なシークレットまたは 1 つのフィールドを読み取ります。
 
 > **Note:**
 >
@@ -31,7 +31,7 @@ ti fs-vault read-secret
 - `--field <string>`: 読み取るオプションのフィールド名。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--format <string>`: 読み取り出力形式: `json`、`raw`、または `env`。\[デフォルト: json]
-- `--fs-token <string>`: owner Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。delegated 認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用します。
+- `--fs-token <string>`: オーナー Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。delegated 認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--vault-token <string>`: delegated `ti fs-vault` トークン。`TI_VAULT_TOKEN` の使用を推奨します。
 - `--version`: バージョン情報を表示します。

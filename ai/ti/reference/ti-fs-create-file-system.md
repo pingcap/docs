@@ -5,13 +5,13 @@ summary: TiDB Cloud Filesystem を作成します。
 
 # ti fs create-file-system
 
-Filesystem を作成し、その ID と owner トークンを返します。CLI は現在のプロファイルにトークンを保存して選択します。Filesystem が使用可能になるまで待機するには、`--wait` を使用します。
+Filesystem を作成し、その ID とオーナートークンを返します。CLI は現在のプロファイルにトークンを保存して選択します。Filesystem が使用可能になるまで待機するには、`--wait` を使用します。
 
 必要に応じて、表示名とラベルを設定できます。これらの値は `list-file-systems` および `describe-file-system` の出力に表示されますが、後続のコマンドで Filesystem を選択するためには使用されません。
 
 > **Important:**
 >
-> サービスは初期 owner トークンを再表示しません。CLI がトークンを保存できなかったと警告した場合は、ターミナルを閉じる前に返された値を保存してください。後でローカル認証情報が失われた場合は、[`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) と TiDB Cloud API credentials を使用して、置き換え用の owner トークンを作成してください。
+> サービスは初期オーナートークンを再表示しません。CLI がトークンを保存できなかったと警告した場合は、ターミナルを閉じる前に返された値を保存してください。後でローカル認証情報が失われた場合は、[`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) と TiDB Cloud API credentials を使用して、置き換え用のオーナートークンを作成してください。
 
 > **Note:**
 >

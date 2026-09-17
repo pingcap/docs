@@ -1,11 +1,11 @@
 ---
 title: ti fs generate-file-system-token
-summary: 1 つの TiDB Cloud Filesystem 用の追加の owner トークンを生成します。
+summary: 1 つの TiDB Cloud Filesystem 用の追加のオーナートークンを生成します。
 ---
 
 # ti fs generate-file-system-token
 
-TiDB Cloud API 認証情報を使用して、Filesystem の owner トークンを生成します。トークン値はコマンド出力にのみ表示され、後から取得することはできません。トークンをローカルの認証情報ストアに保存するには、`--store-locally` を使用します。既存の Filesystem トークンを使用して owner トークンを生成することはできません。
+TiDB Cloud API 認証情報を使用して、Filesystem のオーナートークンを生成します。トークン値はコマンド出力にのみ表示され、後から取得することはできません。トークンをローカルの認証情報ストアに保存するには、`--store-locally` を使用します。既存の Filesystem トークンを使用してオーナートークンを生成することはできません。
 
 > **Note:**
 >
@@ -27,7 +27,7 @@ ti fs generate-file-system-token
 
 ## オプション {#options}
 
-- `--file-system-id <string>`: トークンを所有する Filesystem を指定します。FS トークンではこのオプションを置き換えることも、owner トークンの生成を認可することもできません。このオプションは必須です。
+- `--file-system-id <string>`: トークンを所有する Filesystem を指定します。FS トークンではこのオプションを置き換えることも、オーナートークンの生成を認可することもできません。このオプションは必須です。
 - `--token-name <string>`: 最大 64 バイトの運用用トークン名を設定します。名前は一意ではありません。このオプションは必須です。
 - `--ttl <duration>`: 正の有効期間を秒単位で設定します。最大 365 日まで指定できます。`--ttl` と `--no-expiration` のいずれか一方を必ず指定してください。
 - `--no-expiration`: 有効期限のないトークンを作成します。`--ttl` と `--no-expiration` のいずれか一方を必ず指定してください。

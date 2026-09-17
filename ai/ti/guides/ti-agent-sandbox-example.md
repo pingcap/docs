@@ -17,7 +17,7 @@ summary: 信頼できるマシン上で Filesystem をプロビジョニング�
 
 ## 仕組み {#how-it-works}
 
-信頼できるマシンが一度だけ Filesystem をプロビジョニングします。サンドボックスには Filesystem の owner トークンとリージョンコードだけが渡されるため、`ti configure`、コピーした `~/.ti/` ディレクトリ、または TiDB Cloud API キーなしで、通常のファイル操作や data-plane、マウント、Git、journal、vault のワークフローを利用できます。これにより、汎用オブジェクトストレージ API で必要となるアプリケーション固有のアップロードおよびダウンロードロジックも不要になります。このトークンは Filesystem を識別します。エージェントが一部のシークレットだけを必要とする場合は、owner トークンの代わりに delegated vault トークンを使用してください。
+信頼できるマシンが一度だけ Filesystem をプロビジョニングします。サンドボックスには Filesystem のオーナートークンとリージョンコードだけが渡されるため、`ti configure`、コピーした `~/.ti/` ディレクトリ、または TiDB Cloud API キーなしで、通常のファイル操作や data-plane、マウント、Git、journal、vault のワークフローを利用できます。これにより、汎用オブジェクトストレージ API で必要となるアプリケーション固有のアップロードおよびダウンロードロジックも不要になります。このトークンは Filesystem を識別します。エージェントが一部のシークレットだけを必要とする場合は、オーナートークンの代わりに delegated vault トークンを使用してください。
 
 ## 前提条件 {#prerequisites}
 
@@ -81,7 +81,7 @@ cat "$HOME/workspace/sandbox/status.txt"
 
 macOS では、FUSE のインストールが不要な WebDAV を使用するため、`--driver fuse` を省略します。Git ワークスペース、レイヤー、online drain などの FUSE 固有の機能が必要な場合は、macFUSE をインストールして FUSE を選択してください。プラットフォーム要件とマウントパスの制限については、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) を参照してください。
 
-マウント後は、同じ FS 環境で `ti fs-git`、`ti fs-journal`、および owner に認可された `ti fs-vault` コマンドを使用できます。エージェントが一部のシークレットフィールドだけを必要とする場合は、owner トークンの代わりに delegated `TI_VAULT_TOKEN` を渡してください。
+マウント後は、同じ FS 環境で `ti fs-git`、`ti fs-journal`、およびオーナーに認可された `ti fs-vault` コマンドを使用できます。エージェントが一部のシークレットフィールドだけを必要とする場合は、オーナートークンの代わりに delegated `TI_VAULT_TOKEN` を渡してください。
 
 ## クリーンアップ {#cleanup}
 
@@ -100,7 +100,7 @@ ti fs delete-file-system \
 
 ## セキュリティと運用上の注意 {#security-and-operational-notes}
 
-- `TI_FS_TOKEN` は owner credential として扱ってください。
+- `TI_FS_TOKEN` はオーナー credential として扱ってください。
 - イメージ、リポジトリ、コマンドフラグ、または操作ログに配置しないでください。
 - サンドボックスを削除しても、リモートの Filesystem は削除されません。
 - 正常なアンマウントでは保留中の FUSE 書き込みが drain されますが、アンマウントせずにサンドボックスを削除しても drain されません。

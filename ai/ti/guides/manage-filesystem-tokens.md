@@ -10,8 +10,8 @@ Filesystem トークンを使用すると、TiDB Cloud API 認証情報を共有
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
-- owner トークンの生成および TiDB Cloud 認証によるトークン管理を行うには、TiDB Cloud API 認証情報を設定し、Filesystem ID を取得します。
-- scoped トークンの生成または bearer 認証によるトークン管理を行うには、owner FS トークンを取得します。`--fs-token` で渡すか、`TI_FS_TOKEN` を設定するか、明示的に選択した Filesystem 用に保存されたローカルトークンを使用できます。
+- オーナートークンの生成および TiDB Cloud 認証によるトークン管理を行うには、TiDB Cloud API 認証情報を設定し、Filesystem ID を取得します。
+- scoped トークンの生成または bearer 認証によるトークン管理を行うには、オーナー FS トークンを取得します。`--fs-token` で渡すか、`TI_FS_TOKEN` を設定するか、明示的に選択した Filesystem 用に保存されたローカルトークンを使用できます。
 
 > **Note:**
 >
@@ -27,7 +27,7 @@ ti fs import-file-system-token --from-file ./fs-token --region aws-us-east-1
 
 ## トークンを生成する {#generate-a-token}
 
-TiDB Cloud API 認証情報を使用して、別の owner トークンを生成します。CLI は生成されたトークンをデフォルトではローカルに保存しないため、一度だけ返される平文レスポンスを安全に保存する必要があります。
+TiDB Cloud API 認証情報を使用して、別のオーナートークンを生成します。CLI は生成されたトークンをデフォルトではローカルに保存しないため、一度だけ返される平文レスポンスを安全に保存する必要があります。
 
 ```shell
 umask 077
@@ -39,7 +39,7 @@ ti fs generate-file-system-token \
 
 CLI に生成したトークンをローカル保存させるには、`--store-locally` を追加します。この Filesystem に対して別のトークンがすでに保存されている場合は、`--replace` を使用します。
 
-最小権限のアクセスを実現するには、owner トークンからパスと操作が制限されたトークンを生成します。
+最小権限のアクセスを実現するには、オーナートークンからパスと操作が制限されたトークンを生成します。
 
 ```shell
 ti fs generate-file-system-scoped-token \
@@ -64,7 +64,7 @@ ti fs list-file-system-tokens --file-system-id "<file-system-id>"
 
 > **Note:**
 >
-> refresh は冪等ではありません。リクエストが成功した可能性はあるもののレスポンスが失われた場合、古いトークンで再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して新しい owner トークンを生成してください。
+> refresh は冪等ではありません。リクエストが成功した可能性はあるもののレスポンスが失われた場合、古いトークンで再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して新しいオーナートークンを生成してください。
 
 トークンを完全に取り消すには [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token.md) を使用します。削除されたトークンがローカルに保存されているトークンと一致する場合、CLI はローカル認証情報を自動的に削除します。
 

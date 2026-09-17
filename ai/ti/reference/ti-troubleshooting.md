@@ -52,7 +52,7 @@ ti fs import-file-system-token --from-file ./fs-token --region <filesystem-regio
 ti fs list-files --file-system-id <file-system-id> --path /
 ```
 
-既知のトークンがすべて失われた、または revoke された場合は、TiDB Cloud API キーを使用して別の owner トークンを生成してください。
+既知のトークンがすべて失われた、または revoke された場合は、TiDB Cloud API キーを使用して別のオーナートークンを生成してください。
 
 ```bash
 ti fs generate-file-system-token \
@@ -76,7 +76,7 @@ ti fs list-file-system-tokens \
 
 トークン名は一意ではありません。enable、disable、または delete 操作には、この出力にある不変の `token_id` を使用してください。トークンライフサイクルのメタデータなしで作成または import された古い認証情報は引き続き有効な場合がありますが、`ti` は対応する一覧行を安全に特定できないため、一致を推測することはありません。
 
-enable、disable、delete、または refresh の後は、認証キャッシュが収束するまで約 10 秒待ってください。refresh が `fs.token_refresh_ambiguous` を返した場合、レスポンスが失われたとしてもサーバー側でトークンがローテーションされた可能性があります。結果は不明です。refresh が commit されていなければ古いトークンは引き続き使える可能性がありますが、すでに無効になっている可能性もあります。commit 済み refresh の置き換えトークンは、レスポンスが失われているため復元できません。古いトークンで refresh を再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して独立した owner トークンを生成してください。
+enable、disable、delete、または refresh の後は、認証キャッシュが収束するまで約 10 秒待ってください。refresh が `fs.token_refresh_ambiguous` を返した場合、レスポンスが失われたとしてもサーバー側でトークンがローテーションされた可能性があります。結果は不明です。refresh が commit されていなければ古いトークンは引き続き使える可能性がありますが、すでに無効になっている可能性もあります。commit 済み refresh の置き換えトークンは、レスポンスが失われているため復元できません。古いトークンで refresh を再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して独立したオーナートークンを生成してください。
 
 トークンの変更操作で `fs.token_mount_active` が報告された場合は、エラー内の正確なマウントパスを使用してください。
 
@@ -197,7 +197,7 @@ mkdir -p "$HOME/workspace"
 ti fs mount-file-system --mount-path "$HOME/workspace"
 ```
 
-`/workspace` の owner や mode を変更しても、AppArmor は回避できません。パスを変更できない場合は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md#ubuntu-2604-mount-paths) で説明されているように、`/etc/apparmor.d/local/fusermount3` に `/workspace` 用の明示的なマウントおよびアンマウントルールを追加してください。
+`/workspace` のオーナーや mode を変更しても、AppArmor は回避できません。パスを変更できない場合は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md#ubuntu-2604-mount-paths) で説明されているように、`/etc/apparmor.d/local/fusermount3` に `/workspace` 用の明示的なマウントおよびアンマウントルールを追加してください。
 
 ## プロセスクラッシュ後にマウントが無効になります {#mount-becomes-stale-after-a-process-crash}
 

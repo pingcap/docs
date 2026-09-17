@@ -11,11 +11,11 @@ TiDB Cloud Filesystem Vault を使用すると、シークレットを保存し�
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
 - `--file-system-id` を渡す、`TI_FS_FILE_SYSTEM_ID` を設定する、または Filesystem を識別する FS トークンを指定して、Filesystem を選択します。
-- オーナー操作の場合は、`--fs-token`、`TI_FS_TOKEN`、または選択した Filesystem 用にローカルに保存された認証情報を通じて、owner FS トークンを指定します。
+- オーナー操作の場合は、`--fs-token`、`TI_FS_TOKEN`、または選択した Filesystem 用にローカルに保存された認証情報を通じて、オーナー FS トークンを指定します。
 
 > **Note:**
 >
-> セキュリティリスクを避けるため、owner トークンや delegated トークンを表示、ログ出力、またはコミットしないでください。
+> セキュリティリスクを避けるため、オーナートークンや delegated トークンを表示、ログ出力、またはコミットしないでください。
 
 ## シークレットを作成して読み取る {#create-and-read-a-secret}
 

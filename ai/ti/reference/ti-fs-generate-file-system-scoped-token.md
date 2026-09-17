@@ -5,7 +5,7 @@ summary: 1 つの TiDB Cloud Filesystem に対して、パスと操作が制限�
 
 # ti fs generate-file-system-scoped-token
 
-owner トークンから、パスと操作アクセスが制限された scoped トークンを生成します。トークン値はコマンド出力にのみ表示され、後から取得することはできません。scoped トークンは、許可されたパスプレフィックスと操作にのみアクセスできます。
+オーナートークンから、パスと操作アクセスが制限された scoped トークンを生成します。トークン値はコマンド出力にのみ表示され、後から取得することはできません。scoped トークンは、許可されたパスプレフィックスと操作にのみアクセスできます。
 
 scoped トークンは、要求されたパスと操作が許可範囲に含まれている場合に限り、通常の file、upload、Layer、およびマウント操作をサポートします。`chmod`、Git workspace API、Journal、Vault、SQL、fork、event、および token-management 操作は、scoped トークンでは利用できません。scoped トークンは、スコープを変更せずに自身を更新できます。
 
@@ -47,12 +47,12 @@ ti fs generate-file-system-scoped-token
 
 - `--ttl <duration>`: 秒単位に解決される、有限の正のトークン有効期間を設定します。このオプションは必須です。
 - `--allow <prefix:ops>`: 1 つのリモートパスプレフィックス配下で許可する操作を指定します。複数のプレフィックスを指定するには、このオプションを繰り返します。操作には `read`、`list`、`search`、`write`、`delete` があり、`search` には `read` が必要です。このオプションは必須です。
-- `--file-system-id <string>`: owner トークンに埋め込まれた Filesystem ID を検証します。このオプションは、ローカルに保存された owner トークンを読み込む場合にのみ必須です。
-- `--fs-token <string>`: owner Filesystem トークンを指定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択された Filesystem 用にローカル保存されたトークンを使用します。
+- `--file-system-id <string>`: オーナートークンに埋め込まれた Filesystem ID を検証します。このオプションは、ローカルに保存されたオーナートークンを読み込む場合にのみ必須です。
+- `--fs-token <string>`: オーナー Filesystem トークンを指定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択された Filesystem 用にローカル保存されたトークンを使用します。
 - `--subject <string>`: 最大 64 バイトの任意のサーバー側監査ラベルを設定します。これは一意のセレクターではありません。
 - `--store-locally`: このプロファイルと Filesystem 用に、生成された scoped トークンを保存して選択します。
 - `--replace`: 既存の選択済みローカルトークンを置き換えます。`--store-locally` が必要であり、以前のリモートトークンは revoke されません。
-- `--dry-run`: トークンを生成せずに、owner credential、リージョン、有効期間、スコープ、およびローカル保存の前提条件を検証します。
+- `--dry-run`: トークンを生成せずに、オーナー credential、リージョン、有効期間、スコープ、およびローカル保存の前提条件を検証します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 

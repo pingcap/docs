@@ -13,13 +13,13 @@ summary: Filesystem リソース、ファイル、レイヤー、パック、マ
 
 | Command | Description |
 | --- | --- |
-| [`create-file-system`](/ai/ti/reference/ti-fs-create-file-system.md) | Filesystem とその初期 owner トークンを作成します。 |
+| [`create-file-system`](/ai/ti/reference/ti-fs-create-file-system.md) | Filesystem とその初期オーナートークンを作成します。 |
 | [`list-file-systems`](/ai/ti/reference/ti-fs-list-file-systems.md) | 有効なリージョン内の Filesystem を一覧表示します。 |
 | [`describe-file-system`](/ai/ti/reference/ti-fs-describe-file-system.md) | ID で 1 つの Filesystem の詳細を表示します。 |
 | [`check-file-system`](/ai/ti/reference/ti-fs-check-file-system.md) | Filesystem の選択、ルーティング、認証情報、およびデータプレーンアクセスを確認します。 |
 | [`delete-file-system`](/ai/ti/reference/ti-fs-delete-file-system.md) | Filesystem を完全に削除します。 |
 | [`import-file-system-token`](/ai/ti/reference/ti-fs-import-file-system-token.md) | 既存の Filesystem トークンをローカルにインポートして選択します。 |
-| [`generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) | 追加の owner トークンを生成します。 |
+| [`generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) | 追加のオーナートークンを生成します。 |
 | [`generate-file-system-scoped-token`](/ai/ti/reference/ti-fs-generate-file-system-scoped-token.md) | パス、操作、および有効期間で制限されたトークンを生成します。 |
 | [`list-file-system-tokens`](/ai/ti/reference/ti-fs-list-file-system-tokens.md) | secret を含まないトークンメタデータを一覧表示します。 |
 | [`enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) | 無効化されたトークンを再度有効にします。 |
@@ -29,7 +29,7 @@ summary: Filesystem リソース、ファイル、レイヤー、パック、マ
 
 ### トークン管理の認可 {#token-management-authorization}
 
-owner トークンがトークン管理を認可している場合、そのトークンはトークンの一覧表示、scoped トークンの作成、および owner トークンまたは scoped トークンの失効を実行できます。有効化または無効化できるのは scoped トークンのみです。TiDB Cloud API credentials は、どちらの種類のトークンでも有効化、無効化、または失効できます。
+オーナートークンがトークン管理を認可している場合、そのトークンはトークンの一覧表示、scoped トークンの作成、およびオーナートークンまたは scoped トークンの失効を実行できます。有効化または無効化できるのは scoped トークンのみです。TiDB Cloud API credentials は、どちらの種類のトークンでも有効化、無効化、または失効できます。
 
 ## AI プロバイダー設定コマンド {#ai-provider-configuration-commands}
 

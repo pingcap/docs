@@ -90,9 +90,9 @@ TiDB Cloud CLI は、プロジェクトセレクターを受け付けず、保�
 
 `ti fs generate-file-system-token` は、`--store-locally` が設定されていない限り、選択済み認証情報を変更しません。`--replace` はローカルの選択のみを変更し、以前のリモートトークンは引き続き有効なままです。ローカル認証情報をソースとするリフレッシュでは、それがアトミックに置き換えられます。フラグまたは `TI_FS_TOKEN` をソースとするリフレッシュでは、置換後のプレーンテキストが返され、ローカル状態には書き込まれません。
 
-`ti fs generate-file-system-scoped-token` は owner トークンのみを受け付け、その authoritative path scopes をローカルに保存できます。トークン JWT 自体には Filesystem ID は含まれますが、トークン kind、トークン ID、または scopes は含まれません。そのため、明示的に指定されたトークンまたは環境変数のトークンは、ローカルで分類されるのではなく、認可のためにサービスへ渡されます。`TI_FS_TOKEN` には owner トークンまたは scoped トークンのいずれも指定できます。利用可能な操作は、そのサーバー側の能力に依存します。
+`ti fs generate-file-system-scoped-token` はオーナートークンのみを受け付け、その authoritative path scopes をローカルに保存できます。トークン JWT 自体には Filesystem ID は含まれますが、トークン kind、トークン ID、または scopes は含まれません。そのため、明示的に指定されたトークンまたは環境変数のトークンは、ローカルで分類されるのではなく、認可のためにサービスへ渡されます。`TI_FS_TOKEN` にはオーナートークンまたは scoped トークンのいずれも指定できます。利用可能な操作は、そのサーバー側の能力に依存します。
 
-Owner FS トークンは、Filesystem データアクセスとトークンインベントリまたはライフサイクル操作を認可します。TiDB Cloud Filesystem リソースの作成、一覧表示、詳細表示、削除は認可しません。また、別の owner トークンを生成することもできません。これらの操作には TiDB Cloud API 認証情報が必要です。さらに、`ti fs delete-file-system` では明示的な `--file-system-id` が必要です。`TI_FS_TOKEN` に埋め込まれた ID が、削除対象の Filesystem 選択に使われることはありません。
+オーナー FS トークンは、Filesystem データアクセスとトークンインベントリまたはライフサイクル操作を認可します。TiDB Cloud Filesystem リソースの作成、一覧表示、詳細表示、削除は認可しません。また、別のオーナートークンを生成することもできません。これらの操作には TiDB Cloud API 認証情報が必要です。さらに、`ti fs delete-file-system` では明示的な `--file-system-id` が必要です。`TI_FS_TOKEN` に埋め込まれた ID が、削除対象の Filesystem 選択に使われることはありません。
 
 リソースの選択順序は次のとおりです。
 
@@ -103,7 +103,7 @@ Owner FS トークンは、Filesystem データアクセスとトークンイン
 
 `ti` は、保存済みデフォルトやローカル認証情報の数から Filesystem を推測することはありません。単一コマンドには `--file-system-id` を、シェル、サンドボックス、または自動化環境には `TI_FS_FILE_SYSTEM_ID` を使用してください。
 
-リモート `fs`、`fs-git`、`fs-journal`、および owner `fs-vault` 操作における FS owner 認証情報の選択順序は次のとおりです。
+リモート `fs`、`fs-git`、`fs-journal`、およびオーナー `fs-vault` 操作における FS オーナー認証情報の選択順序は次のとおりです。
 
 1. 明示的な `--fs-token`
 2. `TI_FS_TOKEN`
@@ -235,7 +235,7 @@ ti fs list-files --file-system-id <file-system-id> --path /
 次の値はシークレットとして扱ってください。
 
 - TiDB Cloud API の秘密鍵と公開鍵のペア
-- FS owner トークン
+- FS オーナートークン
 - DB SQL のユーザー名、パスワード、および接続文字列
 - 委任された vault トークンと secret value
 
