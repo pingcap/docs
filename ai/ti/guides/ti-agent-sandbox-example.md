@@ -100,7 +100,7 @@ ti fs delete-file-system \
 
 ## セキュリティと運用上の注意 {#security-and-operational-notes}
 
-- `TI_FS_TOKEN` はオーナー credential として扱ってください。
+- `TI_FS_TOKEN` はオーナー認証情報として扱ってください。
 - イメージ、リポジトリ、コマンドフラグ、または操作ログに配置しないでください。
 - サンドボックスを削除しても、リモートの Filesystem は削除されません。
 - 正常なアンマウントでは保留中の FUSE 書き込みが drain されますが、アンマウントせずにサンドボックスを削除しても drain されません。
