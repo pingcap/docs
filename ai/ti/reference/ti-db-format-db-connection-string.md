@@ -5,7 +5,7 @@ summary: TiDB Cloud CLI で管理される SQL ユーザー向けの接続文字
 
 # ti db format-db-connection-string
 
-保存されている SQL 認証情報を、読み書き、読み取り専用、または admin アクセス用に整形します。ロールオプションを指定しない場合、このコマンドは `read_write` を使用します。このコマンドは、ローカルの SQL 認証情報を読み込む前に、クラスターが Starter であることを検証します。
+保存されている SQL 認証情報を、読み書き、読み取り専用、または管理者アクセス用に整形します。ロールオプションを指定しない場合、このコマンドは `read_write` を使用します。このコマンドは、ローカルの SQL 認証情報を読み込む前に、クラスターが Starter であることを検証します。
 
 > **Note:**
 >
@@ -31,7 +31,7 @@ ti db format-db-connection-string
 ## Options {#options}
 
 - `--db-cluster-id <string>`: Starter DB クラスター ID。\[required]
-- `--admin`: 準備済みの admin DB SQL 認証情報を使用します。
+- `--admin`: 準備済みの管理者 DB SQL 認証情報を使用します。
 - `--database <string>`: データベース名 / デフォルトスキーマ名。
 - `--env-database-url-name <string>`: `--format env` 用の Database URL 変数名。\[default: DATABASE_URL]
 - `--env-include-database-url`: `--format env` とともに Database URL 変数を含めます。
@@ -60,7 +60,7 @@ ti db format-db-connection-string
     ti db format-db-connection-string --db-cluster-id "<cluster-id>" --read-only --format env --env-prefix TIDB_
     ```
 
-- admin JDBC URL を整形する:
+- 管理者 JDBC URL を整形する:
 
     ```bash
     # Generate a JDBC connection value with the prepared admin credentials.
