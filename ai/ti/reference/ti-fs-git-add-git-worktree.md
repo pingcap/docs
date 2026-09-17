@@ -41,7 +41,7 @@ ti fs-git add-git-worktree
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されたトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
-- `--hydrate <string>`: clean-data hydration モード: `auto`、`background`、`sync`、または `off`。`auto` では、blobless ベースにリンクされた worktree はバックグラウンドで hydration され、blobless でないベースにリンクされた worktree では個別の hydration ステップは実行されません。`background` と `sync` には blobless ベースが必要です。`off` は hydration をスキップします。\[default: auto]
+- `--hydrate <string>`: クリーンデータの hydration モード: `auto`、`background`、`sync`、または `off`。`auto` では、blobless ベースにリンクされた worktree はバックグラウンドで hydration され、blobless でないベースにリンクされた worktree では個別の hydration ステップは実行されません。`background` と `sync` には blobless ベースが必要です。`off` は hydration をスキップします。\[default: auto]
 - `--version`: バージョン情報を表示します。
 
 すべてのコマンドで共有されるオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
