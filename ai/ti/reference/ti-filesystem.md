@@ -21,7 +21,7 @@ summary: Filesystem リソース、ファイル、レイヤー、パック、マ
 | [`import-file-system-token`](/ai/ti/reference/ti-fs-import-file-system-token.md) | 既存の Filesystem トークンをローカルにインポートして選択します。 |
 | [`generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) | 追加のオーナートークンを生成します。 |
 | [`generate-file-system-scoped-token`](/ai/ti/reference/ti-fs-generate-file-system-scoped-token.md) | パス、操作、および有効期間で制限されたトークンを生成します。 |
-| [`list-file-system-tokens`](/ai/ti/reference/ti-fs-list-file-system-tokens.md) | secret を含まないトークンメタデータを一覧表示します。 |
+| [`list-file-system-tokens`](/ai/ti/reference/ti-fs-list-file-system-tokens.md) | シークレットを含まないトークンメタデータを一覧表示します。 |
 | [`enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) | 無効化されたトークンを再度有効にします。 |
 | [`disable-file-system-token`](/ai/ti/reference/ti-fs-disable-file-system-token.md) | トークンを一時的に無効にします。 |
 | [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token.md) | トークンを完全に失効させます。 |

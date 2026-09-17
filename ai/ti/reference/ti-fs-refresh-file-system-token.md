@@ -47,7 +47,7 @@ ti fs refresh-file-system-token
     ti fs refresh-file-system-token --file-system-id "<file-system-id>"
     ```
 
-- secret manager から提供されたトークンを refresh します。
+- シークレットマネージャーから提供されたトークンを refresh します。
 
     ```bash
     # Read the current token without echoing it or storing it in shell history.

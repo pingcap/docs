@@ -237,7 +237,7 @@ ti fs list-files --file-system-id <file-system-id> --path /
 - TiDB Cloud API の秘密鍵と公開鍵のペア
 - FS オーナートークン
 - DB SQL のユーザー名、パスワード、および接続文字列
-- 委任された vault トークンと secret value
+- 委任された vault トークンとシークレット値
 
 これらをソース管理、チケット、ログ、コマンド例、または保護されていないシェル履歴に保存しないでください。
 

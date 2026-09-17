@@ -5,7 +5,7 @@ summary: Filesystem Vault の監査イベントを一覧表示します。
 
 # ti fs-vault list-audit-events
 
-オプションの agent、secret、時間フィルターを使用して vault の監査イベントを一覧表示します。
+オプションの agent、シークレット、時間フィルターを使用して vault の監査イベントを一覧表示します。
 
 > **Note:**
 >
@@ -40,7 +40,7 @@ ti fs-vault list-audit-events
 
 ## 例 {#examples}
 
-- 1 つの secret のイベントを一覧表示します。
+- 1 つのシークレットのイベントを一覧表示します。
 
     ```bash
     # Inspect recent access and mutation events for the selected secret.
