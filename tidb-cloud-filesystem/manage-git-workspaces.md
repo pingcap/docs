@@ -37,7 +37,7 @@ ti fs-git hydrate-git-workspace \
 
 Hydration fetches missing blob data from the remote repository without discarding your working-tree changes.
 
-If cloning or hydration fails, inspect the CLI error and diagnostic log before retrying. See [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md) for common Filesystem and companion issues.
+If cloning or hydration fails, inspect the CLI error and diagnostic log before retrying. See [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md) for common Filesystem and companion issues.
 
 ## Add and use a linked worktree
 

@@ -42,7 +42,7 @@ If you need to create a Filesystem, follow [Get Started with TiDB Cloud Filesyst
 
 If someone has given you access to an existing Filesystem, [use its FS token and region without configuring a profile](/tidb-cloud-filesystem/filesystem-mount.md#use-a-token-without-configuring-a-profile). You do not need the creator's API keys to access files within your token's permissions.
 
-For supported regions, platform requirements, and current constraints, see [Regions and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md).
+For supported regions, platform requirements, and current constraints, see [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md).
 
 ## What's next
 

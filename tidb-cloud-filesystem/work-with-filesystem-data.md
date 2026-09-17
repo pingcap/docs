@@ -73,7 +73,7 @@ ti fs find-files --path /reports --file-name-pattern "*.md" --tag stage=review
 
 `find-files` searches beneath the specified path and can filter by file name, type, tags, size, or modification time. See its [options and result limit](/ai/ti/reference/ti-fs-find-files.md).
 
-For supported regions and current CLI and platform limitations, see [Regions and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md).
+For supported regions and current Filesystem and platform limitations, see [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md).
 
 ## What's next
 

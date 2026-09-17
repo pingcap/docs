@@ -93,7 +93,7 @@ The administrator can then reload the profile:
 sudo apparmor_parser -r /etc/apparmor.d/fusermount3
 ```
 
-For related errors, see [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md).
+For related errors, see [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md).
 
 ## What's next
 

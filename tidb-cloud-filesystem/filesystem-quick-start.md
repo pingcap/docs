@@ -86,7 +86,7 @@ Choose one of these Filesystem regions:
 - `aws-us-west-2`
 - `alicloud-ap-southeast-1`
 
-Choose a region where you want to store the Filesystem's data. For the provider and location of each region, see [Supported regions](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions).
+Choose a region where you want to store the Filesystem's data. For the provider and location of each region, see [Supported regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions).
 
 Configuration saves the inputs locally. Your first remote command verifies the credentials with the service.
 

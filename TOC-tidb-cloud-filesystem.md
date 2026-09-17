@@ -38,7 +38,6 @@
 
 ## REFERENCES
 
-- TiDB for AI References
-  - [Filesystem CLI Commands](/ai/ti/reference/ti-filesystem.md)
-  - [Regions and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)
-  - [Troubleshooting](/ai/ti/reference/ti-troubleshooting.md)
+- [Filesystem CLI Commands](/ai/ti/reference/ti-filesystem.md)
+- [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
+- [Troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md)
