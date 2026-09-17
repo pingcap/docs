@@ -11,7 +11,7 @@ Filesystem トークンを使用すると、TiDB Cloud API 認証情報を共有
 
 - [TiDB Cloud CLI をインストールして設定する](/ai/ti/reference/ti-install-configure-update.md)。
 - オーナートークンの生成および TiDB Cloud 認証によるトークン管理を行うには、TiDB Cloud API 認証情報を設定し、Filesystem ID を取得します。
-- scoped トークンの生成または bearer 認証によるトークン管理を行うには、オーナー FS トークンを取得します。`--fs-token` で渡すか、`TI_FS_TOKEN` を設定するか、明示的に選択した Filesystem 用に保存されたローカルトークンを使用できます。
+- スコープ付きトークンの生成または bearer 認証によるトークン管理を行うには、オーナー FS トークンを取得します。`--fs-token` で渡すか、`TI_FS_TOKEN` を設定するか、明示的に選択した Filesystem 用に保存されたローカルトークンを使用できます。
 
 > **Note:**
 >

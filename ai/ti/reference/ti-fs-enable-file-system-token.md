@@ -5,7 +5,7 @@ summary: 無効化された TiDB Cloud Filesystem トークンを有効化しま
 
 # ti fs enable-file-system-token
 
-無効化された Filesystem トークンを再度有効にします。トークンが使用可能になるまで約 10 秒かかる場合があります。オーナートークン認証では、有効化できるのは scoped トークンのみです。TiDB Cloud API キーでは、どちらの種類のトークンも有効化できます。
+無効化された Filesystem トークンを再度有効にします。トークンが使用可能になるまで約 10 秒かかる場合があります。オーナートークン認証では、有効化できるのはスコープ付きトークンのみです。TiDB Cloud API キーでは、どちらの種類のトークンも有効化できます。
 
 > **Note:**
 >
@@ -45,7 +45,7 @@ ti fs enable-file-system-token
       --token-id "<token-id>"
     ```
 
-- オーナートークンを使用して scoped トークンを有効化する:
+- オーナートークンを使用してスコープ付きトークンを有効化する:
 
     ```bash
     # The owner token identifies and authorizes token management for its Filesystem.
