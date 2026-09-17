@@ -11,7 +11,7 @@
 ## CONCEPTS
 
 - [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)
-- [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md)
+- [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md)
 
 ## GUIDES
 
@@ -31,10 +31,14 @@
   - [Use Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
   - [Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
   - [Configure Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
+
+## USE CASES
+
 - [Automation and AI Agent Workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
 
 ## REFERENCES
 
-- [Filesystem CLI Commands](/ai/ti/reference/ti-filesystem.md)
-- [Regions and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)
-- [Troubleshooting](/ai/ti/reference/ti-troubleshooting.md)
+- TiDB for AI References
+  - [Filesystem CLI Commands](/ai/ti/reference/ti-filesystem.md)
+  - [Regions and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)
+  - [Troubleshooting](/ai/ti/reference/ti-troubleshooting.md)

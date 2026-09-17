@@ -13,6 +13,12 @@ The person who creates a Filesystem and the agent that uses its files do not nee
 
 ## Choose the credential type
 
+| Credential | Use it for | Scope | Who should hold it |
+| --- | --- | --- | --- |
+| TiDB Cloud API keys | Create and manage Filesystem resources and generate owner tokens | The account's permissions | A trusted administrator or automation environment |
+| Owner FS token | Manage files and tokens within one Filesystem | One Filesystem | A trusted machine or secret manager |
+| Scoped FS token | Delegate selected file operations | Specified paths and operations in one Filesystem | The user or application that needs that access |
+
 ### TiDB Cloud API keys
 
 A TiDB Cloud public/private API key pair authorizes resource-management operations according to the account's permissions. Use it to create, list, describe, and delete Filesystems, generate owner tokens, and configure Filesystem AI providers.
@@ -43,12 +49,20 @@ Choose a scoped token when delegating access to an agent or another machine. Kee
 
 One Filesystem can have multiple remote tokens, but one CLI profile stores at most one selected local token for that Filesystem. Local state is a credential selection, not the authoritative remote token inventory.
 
+### Select a token for data access
+
 - `--fs-token` takes precedence over `TI_FS_TOKEN` for token-based operations.
 - Without an explicit token, data-access commands use the locally stored credential for `--file-system-id` or `TI_FS_FILE_SYSTEM_ID`.
 - An explicit token contains the Filesystem ID. A clean environment therefore needs only `TI_FS_TOKEN` and `TI_REGION_CODE` for data access.
 - Generating a token does not select it locally unless you pass `--store-locally`. Replacing the local selection does not revoke the previous remote token.
 
-For token list, enable, disable, and delete commands, an explicitly supplied owner token selects bearer authentication; otherwise the CLI uses TiDB Cloud API keys and requires a Filesystem ID. A scoped token does not gain administrative capability merely because account keys also exist in the profile.
+### Keep management credentials separate
+
+For token list, enable, disable, and delete commands, an explicitly supplied owner token selects bearer authentication; otherwise the CLI uses TiDB Cloud API keys and requires a Filesystem ID.
+
+> **Note:**
+>
+> A scoped token does not gain administrative capability merely because account keys also exist in the profile.
 
 ## What's next
 

@@ -49,7 +49,7 @@ ti fs move-file --from-remote /draft.md --to-remote /reports/final.md
 ti fs delete-file --path /scratch --recursive
 ```
 
-You can also use `chmod-file`, `create-symlink`, and `create-hardlink` to manage POSIX-style metadata and links.
+You can also use [`chmod-file`](/ai/ti/reference/ti-fs-chmod-file.md), [`create-symlink`](/ai/ti/reference/ti-fs-create-symlink.md), and [`create-hardlink`](/ai/ti/reference/ti-fs-create-hardlink.md) to manage POSIX-style metadata and links.
 
 > **Warning:**
 >
@@ -63,11 +63,17 @@ Search file content below a path:
 ti fs search-file-content --path /reports --pattern "TODO"
 ```
 
+`--pattern` is a text query, not a regular expression or glob. Use `--limit` to cap the number of results; `0` uses the service default. See the [`search-file-content` reference](/ai/ti/reference/ti-fs-search-file-content.md).
+
 Find paths by name, type, tags, size, or timestamps:
 
 ```shell
 ti fs find-files --path /reports --file-name-pattern "*.md" --tag stage=review
 ```
+
+`find-files` searches beneath the specified path and can filter by file name, type, tags, size, or modification time. See its [options and result limit](/ai/ti/reference/ti-fs-find-files.md).
+
+For supported regions and current CLI and platform limitations, see [Regions and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md).
 
 ## What's next
 

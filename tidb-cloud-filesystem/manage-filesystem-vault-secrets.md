@@ -28,9 +28,21 @@ ti fs-vault create-secret \
 ti fs-vault read-secret --secret-name db-prod
 ```
 
+In `--field PASSWORD=@./password.txt`, the `@` prefix reads the field value from the local file instead of using the literal text as the value.
+
 > **Note:**
 >
 > All `read-secret` output formats, including the default JSON format, contain plaintext secret values. Direct the output only to the intended process.
+
+## Replace a secret
+
+To rotate a stored value, put each replacement field in a separate file in a local directory. For example, to change `DB_URL`, write its new value to `./secret-fields/DB_URL` and include a `./secret-fields/PASSWORD` file if you want to retain that field. Then replace the secret:
+
+```shell
+ti fs-vault replace-secret --secret-path /n/vault/db-prod --from-directory ./secret-fields
+```
+
+`replace-secret` replaces **all** fields, not only the changed field. Keep the local files out of source control and remove them after use. See the [`replace-secret` reference](/ai/ti/reference/ti-fs-vault-replace-secret.md) for the full command contract.
 
 ## Delegate limited access
 
@@ -50,6 +62,8 @@ Prefer `TI_VAULT_TOKEN` to a command-line token because command-line values can 
 ## Inject a secret into a process
 
 The CLI can inject secret fields as environment variables into a child process without writing plaintext to disk. When you run the following command, the CLI reads the secret, sets each field as an environment variable (for example, `DB_URL`, `PASSWORD`), removes its own credential environment variables from the child, and then executes the specified command:
+
+`/n/vault/db-prod` is the canonical Vault path for the secret named `db-prod`; it is not a local mount path.
 
 ```shell
 ti fs-vault run-with-secret --secret-path /n/vault/db-prod -- <command>

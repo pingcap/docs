@@ -16,7 +16,7 @@ To share work across machines and CI jobs, see the following guides in the **TiD
 | Access the same workspace from multiple machines | [Share a TiDB Cloud Filesystem Across Machines](/ai/ti/guides/ti-share-filesystem-across-machines-example.md) |
 | Pass build artifacts between isolated CI jobs | [Hand Off CI Artifacts Between Isolated Jobs with TiDB Cloud Filesystem](/ai/ti/guides/ti-ci-artifact-handoff-example.md) |
 
-To support AI agent workflows, see the following guides in the **TiDB for AI** documentation.
+To support AI agent workflows, see the following guides in the **TiDB for AI** documentation. If you are evaluating Filesystem for agents, start with the sandbox example before moving to longer-running or parallel workflows.
 
 | What you want to do | Guide |
 | --- | --- |

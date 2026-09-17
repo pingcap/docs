@@ -6,7 +6,7 @@ aliases: ['/ai/manage-git-workspaces']
 
 # Manage Git Workspaces on TiDB Cloud Filesystem
 
-Use `ti fs-git` to accelerate Git workspace setup on a mounted TiDB Cloud Filesystem while continuing to use ordinary Git commands for daily work.
+Use `ti fs-git` when you want a Git workspace on a mounted TiDB Cloud Filesystem without waiting for all file content to download before work begins. Unlike a regular `git clone` into the mount, the CLI can combine a blobless clone with background hydration. Continue to use ordinary Git commands for daily work after setup.
 
 ## Prerequisites
 
@@ -23,7 +23,7 @@ ti fs-git clone-git-workspace \
   --target-path /path/to/workspace/tidb
 ```
 
-For a large repository, add `--blobless --hydrate background` to make the directory tree available immediately. The CLI starts a background process that downloads clean file content and Git objects after the clone command returns. Use `--hydrate sync` when your workflow requires hydration to finish before the command returns.
+For a large repository, add `--blobless --hydrate background` to make the directory tree available immediately. A blobless clone initially fetches Git history and tree metadata without downloading all file contents. The CLI starts a background process that downloads clean file content and Git objects after the clone command returns. Use `--hydrate sync` when your workflow requires hydration to finish before the command returns.
 
 ## Hydrate an existing workspace
 
@@ -36,6 +36,8 @@ ti fs-git hydrate-git-workspace \
 ```
 
 Hydration fetches missing blob data from the remote repository without discarding your working-tree changes.
+
+If cloning or hydration fails, inspect the CLI error and diagnostic log before retrying. See [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md) for common Filesystem and companion issues.
 
 ## Add and use a linked worktree
 

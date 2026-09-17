@@ -61,6 +61,8 @@ export TI_REGION_CODE="<filesystem-region-code>"
 ti fs list-files --path /workspace
 ```
 
+The `--allow` value uses `<path>:<comma-separated-operations>`. In this example, the token permits `read`, `list`, and `write` under `/workspace`.
+
 The remote `/workspace` directory must already exist. For a mount, select the allowed subtree with `--remote-path /workspace`; a token restricted to `/workspace` cannot mount the root `/`. For the permission model and credential precedence, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 
 ## Inspect and change token status
@@ -81,7 +83,7 @@ Use [`refresh-file-system-token`](/ai/ti/reference/ti-fs-refresh-file-system-tok
 
 > **Note:**
 >
-> Refresh is non-idempotent. If a request might have succeeded but its response was lost, do not retry with the old token. Instead, generate a new owner token using TiDB Cloud credentials.
+> Refresh is non-idempotent. For example, after a network timeout, the service might have rotated the token even though you did not receive the new value. Do not retry with the old token. Instead, generate a new owner token using TiDB Cloud credentials.
 
 > **Warning:**
 >
@@ -97,6 +99,6 @@ If the deleted token matches the locally stored token, the CLI automatically rem
 
 ## What's next
 
-- [Share a TiDB Cloud Filesystem Across Machines](/ai/ti/guides/ti-share-filesystem-across-machines-example.md)
-- [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md)
-- [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
+- [Share a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-sharing.md).
+- [Explore automation and AI agent workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md).
+- [TiDB Cloud Filesystem CLI Command Reference (in TiDB for AI documentation)](/ai/ti/reference/ti-filesystem.md).

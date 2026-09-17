@@ -15,11 +15,13 @@ This document describes how to use [`ti fs` commands](/ai/ti/reference/ti-filesy
 ## Prerequisites
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli) and [configure access](/tidb-cloud-filesystem/filesystem-quick-start.md#step-2-configure-access) with TiDB Cloud API credentials.
-- Install `jq`, or use another JSON processor to capture command output safely.
+- Install `jq`, or use another JSON processor to extract fields from the CLI's JSON output.
 
 ## Create a Filesystem
 
 Create a Filesystem and save the returned ID and one-time owner token in a file that is not world-readable. The `--wait` flag tells the CLI to poll until data-plane access is ready before returning:
+
+`umask 077` restricts the output file to the current user because it contains the owner token.
 
 ```shell
 umask 077
@@ -56,6 +58,8 @@ ti fs describe-file-system --file-system-id "<file-system-id>"
 
 If you have access to more than one Filesystem, pass `--file-system-id` explicitly or set the `TI_FS_FILE_SYSTEM_ID` environment variable. The CLI does not automatically select a Filesystem for you.
 
+The current CLI does not provide a command to change a Filesystem's display name or labels after creation. Choose these values when creating the resource.
+
 ## Check access
 
 Verify resource selection, endpoint resolution, credentials, and companion access:
@@ -63,6 +67,8 @@ Verify resource selection, endpoint resolution, credentials, and companion acces
 ```shell
 ti fs check-file-system --file-system-id "<file-system-id>"
 ```
+
+The result includes an overall `status` and checks for local credentials, endpoint selection, the companion binary, and remote reachability. A `passed` status means all checks passed; `warning` or `failed` identifies a check that needs attention.
 
 ## Delete a Filesystem
 

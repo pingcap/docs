@@ -8,7 +8,7 @@ aliases: ['/ai/manage-filesystem-layers']
 
 Use layers to record isolated changes over a Filesystem base path before you commit or discard them.
 
-This guide covers individual CLI operations. To understand layer visibility, forks, checkpoints, and their boundaries before using these commands, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md).
+This guide covers individual CLI operations. To understand layer visibility, forks, checkpoints, and their boundaries before using these commands, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
 
 ## Prerequisites
 
@@ -24,6 +24,14 @@ ti fs create-layer \
   --layer-name agent-task \
   --durability-mode restore-safe \
   --tag task=review
+```
+
+`restore-safe` is the only `--durability-mode` value accepted by the current CLI. See the [`create-layer` command reference](/ai/ti/reference/ti-fs-create-layer.md) for the current option contract.
+
+List the layers in the selected Filesystem:
+
+```shell
+ti fs list-layers --output text
 ```
 
 Use the returned layer ID to write and inspect changes:
@@ -90,7 +98,7 @@ Choose one outcome for a layer:
 >
 > Do not run both `rollback-layer` and `commit-layer` in sequence for the same layer.
 
-## Move local state to another machine
+## Move local state to another machine (advanced)
 
 When a FUSE mount uses write-back cache, some data can remain in its local overlay directory. To move this local state to another machine, pack it to an explicit remote archive path:
 

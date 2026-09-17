@@ -8,6 +8,8 @@ aliases: ['/ai/use-filesystem-journals']
 
 Journals provide append-only, hash-chained event logs for agent workflows and automation pipelines running on a TiDB Cloud Filesystem. Use [`ti fs-journal` commands](/ai/ti/reference/ti-filesystem-journal.md) to create a journal, append ordered events, search or read them, and verify the hash chain.
 
+Use a journal when you need to trace the order of agent actions or handoffs across sessions. The hash chain lets you check the integrity and order of recorded entries. A journal records events; it does not replay actions or replace the files produced by a workflow.
+
 ## Prerequisites
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
@@ -32,7 +34,7 @@ ti fs-journal append-journal-entries \
   --entry-json '{"type":"review_started"}'
 ```
 
-For supported input forms and entry fields, see the [`append-journal-entries` reference](/ai/ti/reference/ti-fs-journal-append-journal-entries.md).
+`--entry-json` accepts a JSON object. Each entry needs a `type`, unless you supply `--entry-type`; optional fields include `summary`, `actor`, and `occurred_at`. For the complete fields and input forms, see the [`append-journal-entries` reference](/ai/ti/reference/ti-fs-journal-append-journal-entries.md).
 
 ## Read and search entries
 
@@ -57,6 +59,8 @@ Verify that the journal's hash chain is intact:
 ```shell
 ti fs-journal verify-journal --journal-id "<journal-id>"
 ```
+
+The current public CLI has no journal delete command. Keep retention needs in mind before recording sensitive or high-volume events.
 
 ## What's next
 

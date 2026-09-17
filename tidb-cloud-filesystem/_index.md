@@ -7,7 +7,7 @@ summary: Learn how TiDB Cloud Filesystem keeps agent files available across sess
 
 TiDB Cloud Filesystem is persistent, shared file storage for applications and AI agents. Keep a workspace in the cloud, access it from different machines, and retain its files after a sandbox or process ends.
 
-Use the TiDB Cloud Command Line Interface (`ti`) to create a Filesystem, upload and download files, or mount a remote directory for tools that work with local paths. You do not need to provision or manage a separate database to get started.
+Use TiDB Cloud CLI (`ti`) to create a Filesystem, upload and download files, or mount a remote directory for tools that work with local paths. You do not need to provision or manage a separate database to get started.
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ Use the TiDB Cloud Command Line Interface (`ti`) to create a Filesystem, upload 
 
 An agent might collect source documents in one sandbox, generate a report in another, and hand the result to a person on a laptop. Files stored only on the sandbox's local disk disappear when that environment is removed. Repeatedly exporting and importing archives also creates separate copies that can drift apart.
 
-With a Filesystem, these participants use the same remote files. A new environment needs an access token and the Filesystem's region code, not the creator's TiDB Cloud API keys or local configuration directory.
+With a Filesystem, these participants use the same remote files. To access an existing Filesystem from a new environment, provide an access token and the Filesystem's region code. You do not need to copy the creator's TiDB Cloud API keys or local configuration directory.
 
 - **Continue a task in another environment.** Mount the existing workspace instead of recreating its input files.
 - **Share results with a reviewer.** Give the reviewer a read-only scoped token for a report directory.
@@ -34,7 +34,7 @@ The CLI provides two ways to use the same remote Filesystem:
 
 - [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md) explains when to use API keys, owner tokens, or scoped tokens.
 - [Share a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-sharing.md) shows how to give another machine access without sharing account credentials.
-- [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-branches-checkpoints.md) explains how to isolate drafts and publish selected changes.
+- [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) explains how to isolate drafts and publish selected changes.
 
 ## Get started
 

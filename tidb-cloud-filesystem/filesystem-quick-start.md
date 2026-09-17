@@ -61,10 +61,14 @@ $env:Path = "$HOME\.ti\bin;$env:Path"
 ti --version
 ```
 
-Add `$HOME\.ti\bin` to your user `PATH` for future sessions. Windows supports the direct file commands in this quick start, but not native Filesystem mounts through `ti`.
+Add `$HOME\.ti\bin` to your user `PATH` for future sessions.
 
 </div>
 </SimpleTab>
+
+> **Note:**
+>
+> On Windows, the direct file commands in this quick start are supported, but native Filesystem mounts through `ti` are not.
 
 For other installation and upgrade details, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
@@ -81,6 +85,8 @@ Choose one of these Filesystem regions:
 - `aws-ap-southeast-1`
 - `aws-us-west-2`
 - `alicloud-ap-southeast-1`
+
+Choose a region where you want to store the Filesystem's data. For the provider and location of each region, see [Supported regions](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions).
 
 Configuration saves the inputs locally. Your first remote command verifies the credentials with the service.
 
@@ -116,6 +122,8 @@ The read returns `Hello from my workspace`. The file remains available after you
 - [Mount the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) to use it through a local directory.
 - [Share the workspace](/tidb-cloud-filesystem/filesystem-sharing.md) with another machine or agent.
 - [Manage layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to review changes before publishing them.
+
+## Clean up (optional)
 
 When you no longer need this tutorial Filesystem, delete it using your TiDB Cloud API credentials:
 

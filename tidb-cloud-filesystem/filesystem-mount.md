@@ -22,6 +22,15 @@ Native Windows mounting is not supported by `ti`. Use direct commands such as `t
 
 With `--driver auto`, the CLI selects WebDAV on macOS and FUSE on Linux. To mount a layer or checkpoint on macOS, install macFUSE and select `--driver fuse`. WebDAV mounting is not supported on Linux.
 
+| Capability | FUSE | WebDAV |
+| --- | --- | --- |
+| Supported platforms | Linux; macOS with macFUSE | macOS |
+| Layer and checkpoint mounts | Supported | Not supported |
+| Drain pending writes without unmounting | Supported | Not supported; close files and unmount normally |
+| Read-only mount with `--read-only` | Supported | Supported |
+
+The two drivers do not provide identical filesystem behavior. Use the platform guides to choose a driver rather than assuming full POSIX feature parity.
+
 ## Select a Filesystem
 
 ### Use a locally stored token
@@ -59,7 +68,7 @@ mkdir -p "$HOME/workspace"
 ti fs mount-file-system --mount-path "$HOME/workspace"
 ```
 
-The command waits for readiness and returns a structured result with `status: mounted`. A background companion process keeps the mount alive. Closing the terminal does not unmount it, but terminating that process or the machine interrupts access.
+The command waits for readiness and returns a structured result with `status: mounted`. The bundled `ti-drive9` companion keeps the mount alive in the background. Closing the terminal does not unmount it, but terminating that process or the machine interrupts access. If startup fails, inspect the diagnostic log path reported by the CLI.
 
 To expose only one remote directory, pass `--remote-path /workspace`. To make a mount read-only, add `--read-only`. These are client-side mount settings, not substitutes for a scoped token's server-enforced permissions.
 
@@ -82,6 +91,8 @@ Stop applications writing to the mount and close their files. If you need pendin
 # FUSE only: wait for pending remote writes without unmounting.
 ti fs drain-file-system --mount-path "$HOME/workspace" --timeout 30s
 ```
+
+The timeout is how long the CLI waits for dirty handles and pending writes to drain. If the command times out or returns an error, it has not confirmed that all writes reached the service. Keep the mount and machine available, resolve the error, and verify remote data before ending the session.
 
 When finished, unmount:
 

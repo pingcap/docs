@@ -31,12 +31,16 @@ Before checkpointing a layer with a writable FUSE mount, [drain the mount](/tidb
 
 Layers are not full Filesystem snapshots, backups, or authorization boundaries. Use [scoped tokens](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-fs-tokens) to limit access. A layer commit can fail if the base has conflicting changes; retain the layer and inspect the conflict rather than assuming an automatic merge.
 
-Other limitations to consider:
+## Limitations
+
+### Unsupported operations
 
 - The CLI does not provide Git-style merge, rebase, or an in-place reset to a checkpoint.
 - A layer commit does not merge changes into its parent layer.
+
+### Other boundaries
+
 - Deleting a layer logically abandons it but does not guarantee immediate physical removal of history pinned by descendants.
-- Recursive `ti fs copy-file --recursive` cannot be combined with `--layer-id`. Use a writable FUSE mount to copy a directory tree into a layer.
 - Repeated changes to layer-created files and inherited metadata can have preview limitations. Test complex edit histories before relying on them.
 
 For command flags and output fields, see the [`ti fs` command reference](/ai/ti/reference/ti-filesystem.md).

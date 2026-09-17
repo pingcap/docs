@@ -86,7 +86,7 @@ ti fs update-file-system-embedding-configuration \
   --provider-model text-embedding-3-small
 ```
 
-Application-managed embeddings require an OpenAI-compatible endpoint that returns 1024-dimensional vectors. They are available for Shared Filesystems and Native Filesystems whose effective embedding mode is `fts_only`. If a Native Filesystem uses database-managed automatic embeddings, the service rejects this update and reports `source=database_auto`.
+Application-managed embeddings require an OpenAI-compatible endpoint that returns exactly 1024-dimensional vectors. Choose a model that supports this width; models that return a different width are not supported. Before updating the configuration, run `describe-file-system-embedding-configuration` to check the effective source. If it reports `source=database_auto`, the service manages embeddings and rejects an application-managed update.
 
 After you finish configuring providers, remove the key from the current shell:
 
