@@ -3,9 +3,9 @@ title: Auto Embedding の例
 summary: 組み込みの埋め込みモデルを使用して、テキストデータの埋め込みを自動生成します。
 ---
 
-# Auto Embedding の例
+# 自動埋め込みの例
 
-この例では、[pytidb](https://github.com/pingcap/pytidb) クライアントで [Auto Embedding](/ai/integrations/vector-search-auto-embedding-overview.md) 機能を使用する方法を示します。
+この例では、[pytidb](https://github.com/pingcap/pytidb) クライアントで [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md) 機能を使用する方法を示します。
 
 1. `pytidb` クライアントを使用して TiDB に接続します。
 2. 自動埋め込み用に設定された VectorField を持つテーブルを定義します。

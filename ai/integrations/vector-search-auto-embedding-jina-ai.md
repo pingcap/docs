@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-jina-ai/']
 
 # Jina AI埋め込み {#jina-ai-embeddings}
 
-このドキュメントでは、TiDB Cloudで[Jina AI埋め込みモデル](https://jina.ai/embeddings/)with [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)を使用して、テキスト クエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、TiDB Cloudで[Jina AI埋め込みモデル](https://jina.ai/embeddings/)を[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)と組み合わせて使用して、テキストクエリによるセマンティック検索を実行する方法について説明します。
 
 > **Note:**
 >

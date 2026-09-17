@@ -78,7 +78,7 @@ TiDBは、AIアプリケーションの構築とAIエージェントワークフ
 
 | ドキュメント | 説明 |
 | --- | --- |
-| [テーブルの操作](/ai/guides/tables.md) | ベクトルフィールドを持つテーブルを作成、クエリ、管理します。 |
+| [表の操作](/ai/guides/tables.md) | ベクトルフィールドを持つテーブルを作成、クエリ、管理します。 |
 | [フィルタリング](/ai/guides/filtering.md) | メタデータ条件で検索結果をフィルタリングします。 |
 | [結合クエリ](/ai/guides/join-queries.md) | テーブル間で結合クエリを実行します。 |
 | [生のSQLクエリ](/ai/guides/raw-queries.md) | 生のSQLクエリを直接実行します。 |
@@ -101,9 +101,9 @@ TiDB Cloud CLI (`ti`) を使用すると、ユーザー、スクリプト、CI�
 | `ti` が管理する対象と使用するタイミングを理解する | [TiDB Cloud CLI の概要](/ai/ti/ti-overview.md) |
 | `ti` をインストールして設定し、最初のワークフローを完了する | [TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) |
 | TiDB Cloud Starter インスタンス、ブランチ、SQL 操作を自動化する | [TiDB Cloud Starter インスタンスを管理する](/ai/ti/guides/manage-starter-instances.md) |
-| マシン、CIジョブ、サンドボックス間でファイルを永続化して共有する | [Filesystem リソースを管理する](/ai/ti/guides/manage-filesystem-resources.md) and [Filesystem データを操作する](/ai/ti/guides/work-with-filesystem-data.md) |
-| マウントされたワークスペース、Git ワークスペース、ジャーナル、または委任されたシークレットを使用する | [Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md), [Git ワークスペースを管理する](/ai/ti/guides/manage-git-workspaces.md), [Filesystem ジャーナルを使用する](/ai/ti/guides/use-filesystem-journals.md), and [Filesystem Vault シークレットを管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md) |
-| エンドツーエンドの自動化またはエージェントの例をたどる | [毎日の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md) or [エージェントサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) |
+| マシン、CIジョブ、サンドボックス間でファイルを永続化して共有する | [Filesystem リソースを管理する](/ai/ti/guides/manage-filesystem-resources.md) および [Filesystem データを操作する](/ai/ti/guides/work-with-filesystem-data.md) |
+| マウントされたワークスペース、Git ワークスペース、ジャーナル、または委任されたシークレットを使用する | [Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md)、[Git ワークスペースを管理する](/ai/ti/guides/manage-git-workspaces.md)、[Filesystem ジャーナルを使用する](/ai/ti/guides/use-filesystem-journals.md)、および [Filesystem Vault シークレットを管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md) |
+| エンドツーエンドの自動化またはエージェントの例をたどる | [毎日の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md) または [エージェントサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) |
 | コマンド、グローバルオプション、出力動作、エラーを調べる | [TiDB Cloud CLI コマンドリファレンス](/ai/ti/reference/ti-cli-reference.md) |
 
 ## 統合 {#integrations}
