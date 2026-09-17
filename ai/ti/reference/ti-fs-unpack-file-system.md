@@ -37,7 +37,7 @@ ti fs unpack-file-system
 - `--help`: ヘルプ情報を表示します。
 - `--local-root <string>`: 復元先のローカルオーバーレイルートです。
 - `--mount-path <string>`: ローカルのマウントパスです。
-- `--mount-profile <string>`: [mount profile](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を選択します: `coding-agent`、`portable`、または `none`。省略した場合は `none` を使用します。
+- `--mount-profile <string>`: [マウントプロファイル](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を選択します: `coding-agent`、`portable`、または `none`。省略した場合は `none` を使用します。
 - `--no-replace`: アーカイブエントリを置き換える代わりにマージします。
 - `--remote-root <string>`: `--archive-path` を省略した場合、指定したルートパス配下でパックされたアーカイブを検索します。\[default: /]
 - `--version`: バージョン情報を表示します。

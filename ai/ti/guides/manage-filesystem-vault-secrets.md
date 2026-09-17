@@ -80,7 +80,7 @@ ti fs-vault delete-grant \
 
 macOS または FUSE をサポートする Linux では、Vault secrets の読み取り専用 FUSE ビューをマウントできます。CLI はマウントを作成し、マウントパス配下のファイルとしてシークレットフィールドを提供します（たとえば、`/path/to/vault/db-prod/DB_URL`）。
 
-マウントする前に、`TI_VAULT_TOKEN` を delegated Vault token に設定します。たとえば、[制限付きアクセスを委任する](#delegate-limited-access) で作成した token を使用できます。mount コマンドには、`TI_VAULT_TOKEN` または `--vault-token` のいずれかが必要です。
+マウントする前に、`TI_VAULT_TOKEN` を delegated Vault token に設定します。たとえば、[制限付きアクセスを委任する](#delegate-limited-access) で作成した token を使用できます。マウントコマンドには、`TI_VAULT_TOKEN` または `--vault-token` のいずれかが必要です。
 
 ```shell
 mkdir -p /path/to/vault
@@ -94,7 +94,7 @@ ti fs-vault mount-vault \
 ti fs-vault unmount-vault --mount-path /path/to/vault
 ```
 
-Vault mount は Windows では利用できません。シークレットの直接読み取りとプロセス注入には、mount は不要です。
+Vault マウントは Windows では利用できません。シークレットの直接読み取りとプロセス注入には、マウントは不要です。
 
 ## セキュリティに関する推奨事項 {#security-recommendations}
 

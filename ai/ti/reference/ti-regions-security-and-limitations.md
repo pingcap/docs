@@ -40,9 +40,9 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | Filesystem の extraction および embedding 設定の表示または更新 | TiDB Cloud API key と明示的な file system ID |
 | Filesystem トークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API key と明示的な file system ID |
 | Filesystem トークンの更新 | 現在の FS bearer token のみ |
-| リモートの file、レイヤー、pack、mount、Git、journal、および owner vault 操作 | FS owner token または登録済みリソース認証情報 |
-| 委任された vault の read、list、run、または mount | スコープに適した delegated vault token |
-| 成功したバックグラウンド mount 後の drain および unmount | 同じ `HOME` 内の非シークレット mount locator |
+| リモートの file、レイヤー、pack、マウント、Git、journal、および owner vault 操作 | FS owner token または登録済みリソース認証情報 |
+| 委任された vault の read、list、run、またはマウント | スコープに適した delegated vault token |
+| 成功したバックグラウンドマウント後の drain およびアンマウント | 同じ `HOME` 内の非シークレットマウント locator |
 
 TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS 実行では、生成された SQL username/password による Basic 認証を TLS 上で使用します。これらの認証情報は相互に置き換えできません。
 
@@ -62,26 +62,26 @@ TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS �
 - `/dev/fuse`、`SYS_ADMIN`、および制限のない AppArmor プロファイルへの Docker アクセスは、Dedicated で信頼できるコンテナにのみ付与してください。これらの設定はコンテナ分離を弱めます。
 - 診断情報を共有する前に、ローカルの操作ログを確認してください。ログには SQL テキスト、パス、ペイロード、認証情報の値は含まれませんが、コマンド名、フラグ名、プロファイルおよびリージョンのメタデータ、ステータスコード、操作タイミングは依然として機微情報となる可能性があります。
 
-## mount のプラットフォーム制限 {#mount-platform-limitations}
+## マウントのプラットフォーム制限 {#mount-platform-limitations}
 
-| プラットフォーム | Filesystem mount | Vault mount | 要件と代替手段 |
+| プラットフォーム | Filesystem マウント | Vault マウント | 要件と代替手段 |
 | --- | --- | --- | --- |
-| macOS | デフォルトでは WebDAV、明示的な `--driver fuse` では FUSE | FUSE | 組み込みの WebDAV helper は Filesystem mount をサポートします。FUSE または Vault mount には macFUSE をインストールし、その system extension を承認してください。 |
-| Linux | FUSE | FUSE | FUSE3 をインストールし、`/dev/fuse` へのアクセスを提供してください。WebDAV mount はサポートされていません。 |
-| Windows | 非サポート | 非サポート | 代わりに `ti fs` のデータプレーンコマンドと、mount を使用しない Vault コマンドを使用してください。 |
+| macOS | デフォルトでは WebDAV、明示的な `--driver fuse` では FUSE | FUSE | 組み込みの WebDAV helper は Filesystem マウントをサポートします。FUSE または Vault マウントには macFUSE をインストールし、その system extension を承認してください。 |
+| Linux | FUSE | FUSE | FUSE3 をインストールし、`/dev/fuse` へのアクセスを提供してください。WebDAV マウントはサポートされていません。 |
+| Windows | 非サポート | 非サポート | 代わりに `ti fs` のデータプレーンコマンドと、マウントを使用しない Vault コマンドを使用してください。 |
 
-FUSE と WebDAV は、同梱された [Drive9](https://github.com/mem9-ai/drive9) companion によって実装されています。TiDB Cloud CLI は、別個のネイティブ mount 実装にはフォールバックしません。
+FUSE と WebDAV は、同梱された [Drive9](https://github.com/mem9-ai/drive9) companion によって実装されています。TiDB Cloud CLI は、別個のネイティブマウント実装にはフォールバックしません。
 
-Ubuntu 26.04 では、さらに AppArmor により `fusermount3` が制限されます。mount パスには `$HOME` または `/mnt` 配下を使用してください。`/workspace` では、`ti` を root として実行している場合でも、明示的なローカル AppArmor ルールが必要です。
+Ubuntu 26.04 では、さらに AppArmor により `fusermount3` が制限されます。マウントパスには `$HOME` または `/mnt` 配下を使用してください。`/workspace` では、`ti` を root として実行している場合でも、明示的なローカル AppArmor ルールが必要です。
 
 ## 耐久性の制限事項 {#durability-limitations}
 
 - デフォルトの FUSE 動作では、companion によって許可される場合、ローカルバッファリングと非同期のリモート処理を使用します。
 - `unmount-file-system` が成功すると、FUSE の処理は正常に flush および drain されるため、事前に別途 drain は不要です。
-- `drain-file-system` は、mount をアクティブなままにする、FUSE 専用のオンライン耐久性バリアです。
-- mount プロセスを強制終了したり、マシンを削除したりすると、未コミットのメモリ/write-back 状態が失われる可能性があります。
-- デフォルトの coding-agent mount プロファイルは、依存関係ツリー、生成出力、キャッシュ、および Git 内部データをローカルに保存します。ローカル専用データは、pack されるか別の方法で保持されない限り、そのディスクが失われると消失します。
-- 実行中の mount は、mount 時に読み込まれた companion バージョンのまま動作し続けます。TiDB Cloud CLI を更新した後は、unmount して再度 mount してください。
+- `drain-file-system` は、マウントをアクティブなままにする、FUSE 専用のオンライン耐久性バリアです。
+- マウントプロセスを強制終了したり、マシンを削除したりすると、未コミットのメモリ/write-back 状態が失われる可能性があります。
+- デフォルトの coding-agent マウントプロファイルは、依存関係ツリー、生成出力、キャッシュ、および Git 内部データをローカルに保存します。ローカル専用データは、pack されるか別の方法で保持されない限り、そのディスクが失われると消失します。
+- 実行中のマウントは、マウント時に読み込まれた companion バージョンのまま動作し続けます。TiDB Cloud CLI を更新した後は、アンマウントして再度マウントしてください。
 - リモートにコミット済みの Filesystem データは、クライアントまたはサンドボックスが削除されても保持されます。マシンを削除しても、リモートリソースは削除されません。
 
 ## 製品の制限事項 {#product-limitations}
@@ -93,11 +93,11 @@ Ubuntu 26.04 では、さらに AppArmor により `fusermount3` が制限され
 - journal は追記専用であり、現在の公開コマンド体系には journal を削除するコマンドはありません。
 - Filesystem の list および describe コマンドは、TiDB Cloud 認証情報を使用してリージョンスコープのリモートインベントリを照会します。リージョンをまたいで集約はしません。
 - ローカル認証情報ストアは、プロファイルおよび Filesystem ごとに 1 つの選択済み token を保持します。すべてのリモート token をミラーリングするわけではありません。既知の token ID を持たない古い create/import 認証情報も引き続き使用できますが、リモート token メタデータと関連付けることはできません。
-- Filesystem の extraction および embedding provider 設定は任意です。未設定でも、リソース管理、ファイルアクセス、検索、layer、Git、journal、vault、または mount ワークフローは妨げられません。
+- Filesystem の extraction および embedding provider 設定は任意です。未設定でも、リソース管理、ファイルアクセス、検索、layer、Git、journal、vault、またはマウントワークフローは妨げられません。
 - OpenAI provider interface は、embedding と image、audio、video extraction でサポートされます。Alibaba Cloud Model Studio Qwen ASR は audio extraction でのみサポートされます。その他のベンダーは、正確な OpenAI-compatible contract を通じた場合にのみ条件付きで互換性があります。ネイティブの Anthropic、Gemini、Vertex AI、Bedrock、および Azure OpenAI interface はサポートされません。
 - app-managed embedding には、正確に 1024 次元を返す provider model が必要です。`source=database_auto` を報告する Filesystem は database-managed embedding を使用しており、app-managed 設定を拒否します。
 - telemetry 管理コマンドは意図的に実装されていません。telemetry は `~/.ti/.preferences` または `TI_TELEMETRY` で制御してください。serverless-function デプロイ、Homebrew、および Scoop 配布は実装されていません。
-- TiDB Cloud CLI は、直接のファイル操作、layer、mount、Git workspace、journal、および Vault 操作を含む、公開されているすべての Filesystem ランタイム動作について、インストール済みの `ti-drive9` companion に依存します。
+- TiDB Cloud CLI は、直接のファイル操作、layer、マウント、Git workspace、journal、および Vault 操作を含む、公開されているすべての Filesystem ランタイム動作について、インストール済みの `ti-drive9` companion に依存します。
 
 ## 関連ドキュメント {#related-documentation}
 

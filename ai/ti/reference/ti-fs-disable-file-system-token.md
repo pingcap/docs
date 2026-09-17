@@ -5,7 +5,7 @@ summary: TiDB Cloud Filesystem トークンを一時的に無効化します。
 
 # ti fs disable-file-system-token
 
-Filesystem トークンを取り消すことなく一時的に無効化します。トークンは後で [`ti fs enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) を使って再度有効化できます。既知のローカルマウントで使用されているトークンは、先に drain と unmount を実行する必要があります。owner token 認証では、無効化できるのは scoped token のみです。TiDB Cloud API キーでは、どちらの種類のトークンも無効化できます。
+Filesystem トークンを取り消すことなく一時的に無効化します。トークンは後で [`ti fs enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) を使って再度有効化できます。既知のローカルマウントで使用されているトークンは、先に drain とアンマウントを実行する必要があります。owner token 認証では、無効化できるのは scoped token のみです。TiDB Cloud API キーでは、どちらの種類のトークンも無効化できます。
 
 > **Note:**
 >

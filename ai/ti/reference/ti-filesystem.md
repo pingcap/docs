@@ -95,7 +95,7 @@ owner token がトークン管理を認可している場合、その token は 
 | コマンド | 説明 |
 | --- | --- |
 | [`mount-file-system`](/ai/ti/reference/ti-fs-mount-file-system.md) | ローカルパスに Filesystem をマウントします。 |
-| [`drain-file-system`](/ai/ti/reference/ti-fs-drain-file-system.md) | 稼働中の FUSE mount から保留中の書き込みをフラッシュします。 |
+| [`drain-file-system`](/ai/ti/reference/ti-fs-drain-file-system.md) | 稼働中の FUSE マウントから保留中の書き込みをフラッシュします。 |
 | [`unmount-file-system`](/ai/ti/reference/ti-fs-unmount-file-system.md) | Filesystem をフラッシュしてアンマウントします。 |
 
 ## コマンドエイリアス {#command-aliases}

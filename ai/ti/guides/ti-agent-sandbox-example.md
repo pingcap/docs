@@ -17,7 +17,7 @@ summary: 信頼できるマシン上で Filesystem をプロビジョニング�
 
 ## 仕組み {#how-it-works}
 
-信頼できるマシンが一度だけ Filesystem をプロビジョニングします。サンドボックスには Filesystem の owner token とリージョンコードだけが渡されるため、`ti configure`、コピーした `~/.ti/` ディレクトリ、または TiDB Cloud API キーなしで、通常のファイル操作や data-plane、mount、Git、journal、vault のワークフローを利用できます。これにより、汎用オブジェクトストレージ API で必要となるアプリケーション固有のアップロードおよびダウンロードロジックも不要になります。この token は Filesystem を識別します。エージェントが一部のシークレットだけを必要とする場合は、owner token の代わりに delegated vault token を使用してください。
+信頼できるマシンが一度だけ Filesystem をプロビジョニングします。サンドボックスには Filesystem の owner token とリージョンコードだけが渡されるため、`ti configure`、コピーした `~/.ti/` ディレクトリ、または TiDB Cloud API キーなしで、通常のファイル操作や data-plane、マウント、Git、journal、vault のワークフローを利用できます。これにより、汎用オブジェクトストレージ API で必要となるアプリケーション固有のアップロードおよびダウンロードロジックも不要になります。この token は Filesystem を識別します。エージェントが一部のシークレットだけを必要とする場合は、owner token の代わりに delegated vault token を使用してください。
 
 ## 前提条件 {#prerequisites}
 
@@ -79,7 +79,7 @@ ti fs mount-file-system \
 cat "$HOME/workspace/sandbox/status.txt"
 ```
 
-macOS では、FUSE のインストールが不要な WebDAV を使用するため、`--driver fuse` を省略します。Git ワークスペース、レイヤー、online drain などの FUSE 固有の機能が必要な場合は、macFUSE をインストールして FUSE を選択してください。プラットフォーム要件と mount-path の制限については、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) を参照してください。
+macOS では、FUSE のインストールが不要な WebDAV を使用するため、`--driver fuse` を省略します。Git ワークスペース、レイヤー、online drain などの FUSE 固有の機能が必要な場合は、macFUSE をインストールして FUSE を選択してください。プラットフォーム要件とマウントパスの制限については、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) を参照してください。
 
 マウント後は、同じ FS 環境で `ti fs-git`、`ti fs-journal`、および owner に認可された `ti fs-vault` コマンドを使用できます。エージェントが一部のシークレットフィールドだけを必要とする場合は、owner token の代わりに delegated `TI_VAULT_TOKEN` を渡してください。
 
@@ -91,7 +91,7 @@ macOS では、FUSE のインストールが不要な WebDAV を使用するた�
 ti fs unmount-file-system --mount-path "$HOME/workspace"
 ```
 
-FUSE マウントでは、マウントを維持したままリモートへの永続化を確認したい場合、`ti fs drain-file-system --mount-path "$HOME/workspace"` を別途使用します。`drain-file-system` は WebDAV ではサポートされていません。詳細は [drain または unmount](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を参照してください。信頼できるマシンに戻って、次を実行します。
+FUSE マウントでは、マウントを維持したままリモートへの永続化を確認したい場合、`ti fs drain-file-system --mount-path "$HOME/workspace"` を別途使用します。`drain-file-system` は WebDAV ではサポートされていません。詳細は [drain またはアンマウント](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を参照してください。信頼できるマシンに戻って、次を実行します。
 
 ```bash
 ti fs delete-file-system \

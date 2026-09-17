@@ -32,7 +32,7 @@ ti fs refresh-file-system-token
 - `--file-system-id <string>`: 指定した token からデコードされた Filesystem ID を検証します。ローカルで選択された token を読み込む場合、このオプションは必須です。
 - `--fs-token <string>`: 現在の token を指定します。shell history や process list への露出を避けるため、`TI_FS_TOKEN` の使用を推奨します。デフォルトでは、まず `TI_FS_TOKEN` を使用し、次に選択されたローカル credential を使用します。
 - `--ttl <duration>`: 新しい正の有効期間を秒単位で設定します。最大は 365 日です。以前の有効期間を維持する場合は省略してください。
-- `--dry-run`: token をローテーションせずに、token の選択、リージョン、TTL、および既知のローカル mount 競合を検証します。
+- `--dry-run`: token をローテーションせずに、token の選択、リージョン、TTL、および既知のローカルマウント競合を検証します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 

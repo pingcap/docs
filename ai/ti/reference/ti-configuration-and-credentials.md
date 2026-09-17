@@ -172,7 +172,7 @@ TiDB Cloud の完全なロールモデルについては、[データベース�
 ~/.ti/mounts/<mount-hash>.locator.json
 ```
 
-この locator には、同じ `HOME` から drain および unmount を行うために必要な配置先情報と companion-home 情報が記録されます。FS token は含まれません。unmount が成功すると削除されます。
+この locator には、同じ `HOME` から drain およびアンマウントを行うために必要な配置先情報と companion-home 情報が記録されます。FS token は含まれません。アンマウントが成功すると削除されます。
 
 ## Operation logs {#operation-logs}
 

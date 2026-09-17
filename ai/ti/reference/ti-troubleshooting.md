@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud CLI のトラブルシューティング
-summary: TiDB Cloud CLI の認証、プロジェクト、Filesystem の選択、companion、quota、SQL ユーザー、mount、中断されたクリーンアップ失敗を診断します。
+summary: TiDB Cloud CLI の認証、プロジェクト、Filesystem の選択、companion、quota、SQL ユーザー、マウント、中断されたクリーンアップ失敗を診断します。
 ---
 
 # TiDB Cloud CLI のトラブルシューティング
@@ -78,14 +78,14 @@ token 名は一意ではありません。enable、disable、または delete �
 
 enable、disable、delete、または refresh の後は、認証キャッシュが収束するまで約 10 秒待ってください。refresh が `fs.token_refresh_ambiguous` を返した場合、レスポンスが失われたとしてもサーバー側で token がローテーションされた可能性があります。結果は不明です。refresh が commit されていなければ古い token は引き続き使える可能性がありますが、すでに無効になっている可能性もあります。commit 済み refresh の置き換え token は、レスポンスが失われているため復元できません。古い token で refresh を再試行しないでください。代わりに、TiDB Cloud 認証情報を使用して独立した owner token を生成してください。
 
-token の変更操作で `fs.token_mount_active` が報告された場合は、エラー内の正確な mount path を使用してください。
+token の変更操作で `fs.token_mount_active` が報告された場合は、エラー内の正確なマウントパスを使用してください。
 
 ```bash
 ti fs drain-file-system --mount-path /path/to/workspace
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-その後、token 操作を再試行してください。別のマシン上の mount はローカルからは見えないため、そのマシンとのローテーション調整は別途行ってください。
+その後、token 操作を再試行してください。別のマシン上のマウントはローカルからは見えないため、そのマシンとのローテーション調整は別途行ってください。
 
 ## Filesystem の選択がない {#filesystem-selection-is-missing}
 
@@ -155,12 +155,12 @@ ti db execute-sql-statement \
 
 `~/.ti/db_users/<cluster-id>/credentials` を削除すると、ローカルパスワードも削除されます。認証情報を作り出すのではなく、create/repair コマンドを実行してください。
 
-## Mount が ready にならない {#mount-does-not-become-ready}
+## マウントが ready にならない {#mount-does-not-become-ready}
 
-バックグラウンド mount が成功した場合、TiDB Cloud CLI の結果は出力されますが、Drive9 の起動メッセージは表示されません。起動が失敗またはタイムアウトした場合は、エラー内にある companion のログパスを確認してください。次の点を確認します。
+バックグラウンドマウントが成功した場合、TiDB Cloud CLI の結果は出力されますが、Drive9 の起動メッセージは表示されません。起動が失敗またはタイムアウトした場合は、エラー内にある companion のログパスを確認してください。次の点を確認します。
 
-- mount path が存在し、書き込み可能であること。
-- 既存の mount がその path を覆っていないこと。
+- マウントパスが存在し、書き込み可能であること。
+- 既存のマウントがその path を覆っていないこと。
 - FS token とリージョンが有効であること。
 - FUSE の前提条件または WebDAV helper がインストールされていること。
 - リモートリージョンに到達可能であること。
@@ -173,7 +173,7 @@ ti fs mount-file-system \
   --driver fuse
 ```
 
-Linux では FUSE3 と `/dev/fuse` へのアクセスが必要です。Filesystem および Vault mount は Windows ではサポートされていません。代わりに `ti fs` のデータプレーンコマンド、または mount を使わない Vault コマンドを使用してください。
+Linux では FUSE3 と `/dev/fuse` へのアクセスが必要です。Filesystem および Vault マウントは Windows ではサポートされていません。代わりに `ti fs` のデータプレーンコマンド、またはマウントを使わない Vault コマンドを使用してください。
 
 ## Ubuntu 26.04 は `/workspace` 配下での FUSE マウントを拒否します {#ubuntu-2604-rejects-a-fuse-mount-under-workspace}
 
@@ -197,7 +197,7 @@ mkdir -p "$HOME/workspace"
 ti fs mount-file-system --mount-path "$HOME/workspace"
 ```
 
-`/workspace` の owner や mode を変更しても、AppArmor は回避できません。パスを変更できない場合は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md#ubuntu-2604-mount-paths) で説明されているように、`/etc/apparmor.d/local/fusermount3` に `/workspace` 用の明示的な mount および unmount ルールを追加してください。
+`/workspace` の owner や mode を変更しても、AppArmor は回避できません。パスを変更できない場合は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md#ubuntu-2604-mount-paths) で説明されているように、`/etc/apparmor.d/local/fusermount3` に `/workspace` 用の明示的なマウントおよびアンマウントルールを追加してください。
 
 ## プロセスクラッシュ後にマウントが無効になります {#mount-becomes-stale-after-a-process-crash}
 

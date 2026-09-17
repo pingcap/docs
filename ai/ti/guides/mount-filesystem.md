@@ -33,7 +33,7 @@ ti fs mount-file-system \
   --mount-path /path/to/workspace
 ```
 
-CLI はバックグラウンドのマウントプロセスを開始し、drain コマンドと unmount コマンドが正しいプロセスを見つけられるように、ローカルのマウントロケーターを書き込みます。
+CLI はバックグラウンドのマウントプロセスを開始し、drain コマンドとアンマウントコマンドが正しいプロセスを見つけられるように、ローカルのマウントロケーターを書き込みます。
 
 サブツリーを公開するには `--remote-path` を使用し、書き込みを防ぐには `--read-only` を使用します。レイヤーまたは checkpoint をマウントするには、FUSE ドライバーを選択し、[`mount-file-system` リファレンス](/ai/ti/reference/ti-fs-mount-file-system.md)で説明されている適切な layer オプションを渡します。
 
@@ -122,7 +122,7 @@ ti fs drain-file-system --mount-path /path/to/workspace --timeout 30s
 
 > **Warning:**
 >
-> 書き込みが保留中のまま、または unmount がエラーを返した後に、マシンを停止しないでください。メモリ内の書き込みとローカルのみに存在する overlay ファイルが失われる可能性があります。FUSE マウントでは、シャットダウン前に `drain-file-system` を実行して、保留中の書き込みがリモート Filesystem に到達したことを確認してください。WebDAV マウントでは、アプリケーション内でファイルを閉じ、`unmount-file-system` が成功することを確認してください。
+> 書き込みが保留中のまま、またはアンマウントがエラーを返した後に、マシンを停止しないでください。メモリ内の書き込みとローカルのみに存在する overlay ファイルが失われる可能性があります。FUSE マウントでは、シャットダウン前に `drain-file-system` を実行して、保留中の書き込みがリモート Filesystem に到達したことを確認してください。WebDAV マウントでは、アプリケーション内でファイルを閉じ、`unmount-file-system` が成功することを確認してください。
 
 ## 次のステップ {#what-s-next}
 

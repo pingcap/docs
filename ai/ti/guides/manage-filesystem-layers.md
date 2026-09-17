@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Filesystem のレイヤーとチェックポイントを管理する
-summary: TiDB Cloud Filesystem のレイヤーを安全に作成、確認、fork、checkpoint、ロールバック、コミット、pack、restore する方法を学びます。
+summary: TiDB Cloud Filesystem のレイヤーを安全に作成、確認、フォーク、チェックポイント、ロールバック、コミット、pack、restore する方法を学びます。
 ---
 
 # TiDB Cloud Filesystem のレイヤーとチェックポイントを管理する
@@ -38,11 +38,11 @@ ti fs diff-layer --layer-id "<layer-id>"
 
 > **Note:**
 >
-> `--layer-id` を指定した `copy-file` は、再帰コピーをサポートしていません。ディレクトリツリーをレイヤーに投入するには、レイヤーを書き込み可能な FUSE mount としてマウントし、その mount path 経由でファイルをコピーしてください。
+> `--layer-id` を指定した `copy-file` は、再帰コピーをサポートしていません。ディレクトリツリーをレイヤーに投入するには、レイヤーを書き込み可能な FUSE マウントとしてマウントし、そのマウントパス経由でファイルをコピーしてください。
 
-同じ書き込み可能レイヤーを、複数のローカルパスに同時にマウントしないでください。既存の mount を再利用するか、別の場所にレイヤーをマウントする前にアンマウントしてください。
+同じ書き込み可能レイヤーを、複数のローカルパスに同時にマウントしないでください。既存のマウントを再利用するか、別の場所にレイヤーをマウントする前にアンマウントしてください。
 
-## チェックポイントを作成してレイヤーを fork する {#create-a-checkpoint-and-fork-a-layer}
+## チェックポイントを作成してレイヤーをフォークする {#create-a-checkpoint-and-fork-a-layer}
 
 ```shell
 ti fs create-layer-checkpoint \
@@ -56,19 +56,19 @@ ti fs fork-layer \
   --checkpoint-id seed
 ```
 
-`list-layer-chain` を使用して、fork の固定された祖先チェーンを確認します。
+`list-layer-chain` を使用して、フォークの固定された祖先チェーンを確認します。
 
 ```shell
 ti fs list-layer-chain --layer-ref experiment
 ```
 
-checkpoint mount は読み取り専用です。チェックポイントから作業を続けるには、そこから新しい書き込み可能レイヤーを fork してください。
+チェックポイントマウントは読み取り専用です。チェックポイントから作業を続けるには、そこから新しい書き込み可能レイヤーをフォークしてください。
 
 ## レイヤーでの作業を完了する {#finish-work-in-a-layer}
 
 > **Warning:**
 >
-> 書き込み可能な FUSE mount を持つレイヤーのチェックポイントを作成する前に、[`drain-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を実行してください。チェックポイントには、サービスに到達した変更のみが含まれます。レイヤーをロールバックまたはコミットする前に、drain を実行してから [`unmount-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を実行してください。CLI はこれらの手順を自動では実行しません。
+> 書き込み可能な FUSE マウントを持つレイヤーのチェックポイントを作成する前に、[`drain-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を実行してください。チェックポイントには、サービスに到達した変更のみが含まれます。レイヤーをロールバックまたはコミットする前に、drain を実行してから [`unmount-file-system`](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を実行してください。CLI はこれらの手順を自動では実行しません。
 
 レイヤーに対して、次のいずれか 1 つの結果を選択します。
 
@@ -90,7 +90,7 @@ checkpoint mount は読み取り専用です。チェックポイントから作
 
 ## ローカル状態を別のマシンに移動する {#move-local-state-to-another-machine}
 
-FUSE mount が write-back cache を使用している場合、一部のデータがローカルの overlay directory に残ることがあります。このローカル状態を別のマシンに移動するには、明示的なリモート archive path に pack します。
+FUSE マウントが write-back cache を使用している場合、一部のデータがローカルの overlay directory に残ることがあります。このローカル状態を別のマシンに移動するには、明示的なリモート archive path に pack します。
 
 ```shell
 ti fs pack-file-system \

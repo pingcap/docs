@@ -62,7 +62,7 @@ ti fs copy-file
 - `--help`: ヘルプ情報を表示します。
 - `--layer-id <string>`: コピーした 1 つのファイルを、ベース file system ではなく file system レイヤーに書き込みます。`--recursive` とは併用できません。
 - `--overwrite`: 既存の宛先ファイルを置き換えます。
-- `--recursive`: ディレクトリ構造を再帰的にコピーします。`--layer-id` とは併用できません。代わりに、書き込み可能な FUSE mount を介してレイヤーディレクトリをシードしてください。
+- `--recursive`: ディレクトリ構造を再帰的にコピーします。`--layer-id` とは併用できません。代わりに、書き込み可能な FUSE マウントを介してレイヤーディレクトリをシードしてください。
 - `--resume`: 実行中のコピー操作を再開します。
 - `--tag <string>`: `--to-remote` 操作用に `key=value` 形式のタグを作成します。複数回指定できます。
 - `--to-local <string>`: ローカルの宛先パスです。

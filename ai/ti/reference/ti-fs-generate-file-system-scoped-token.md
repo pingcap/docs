@@ -7,7 +7,7 @@ summary: 1 つの TiDB Cloud Filesystem に対して、パスと操作が制限�
 
 owner token から、パスと操作アクセスが制限された scoped token を生成します。トークン値はコマンド出力にのみ表示され、後から取得することはできません。scoped token は、許可されたパスプレフィックスと操作にのみアクセスできます。
 
-scoped token は、要求されたパスと操作が許可範囲に含まれている場合に限り、通常の file、upload、Layer、および mount 操作をサポートします。`chmod`、Git workspace API、Journal、Vault、SQL、fork、event、および token-management 操作は、scoped token では利用できません。scoped token は、スコープを変更せずに自身を更新できます。
+scoped token は、要求されたパスと操作が許可範囲に含まれている場合に限り、通常の file、upload、Layer、およびマウント操作をサポートします。`chmod`、Git workspace API、Journal、Vault、SQL、fork、event、および token-management 操作は、scoped token では利用できません。scoped token は、スコープを変更せずに自身を更新できます。
 
 各操作の意味は次のとおりです。コマンドによっては、コピー元に対する `read` とコピー先に対する `write` のように、複数の操作が必要になる場合があります。
 

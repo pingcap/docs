@@ -87,7 +87,7 @@ ti fs read-file --path /shared/mounted.txt
 
 ### マシン B での作業 {#on-machine-b}
 
-Step 4 の graceful unmount 後、現在のシェルから認証情報を削除します。
+Step 4 の graceful アンマウント後、現在のシェルから認証情報を削除します。
 
 ```bash
 unset TI_FS_TOKEN TI_REGION_CODE
@@ -110,7 +110,7 @@ ti fs delete-file-system \
 
 - 各 FS token は owner アクセスを付与します。チャットやコマンド履歴ではなく、シークレットとして転送し、マシンごとに別のトークンを使用してください。
 - 複数のライターが同じパスを上書きする可能性があるため、ワークフローレベルで所有権を調整してください。
-- graceful unmount が完了する前にマシンを終了しないでください。FUSE マウントをオンラインのまま維持しつつリモート永続性が必要な場合にのみ、明示的な drain を使用してください。
+- graceful アンマウントが完了する前にマシンを終了しないでください。FUSE マウントをオンラインのまま維持しつつリモート永続性が必要な場合にのみ、明示的な drain を使用してください。
 
 ## 次のステップ {#what-s-next}
 

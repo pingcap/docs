@@ -37,7 +37,7 @@ ti fs pack-file-system
 - `--help`: ヘルプ情報を表示します。
 - `--local-root <string>`: オーバーレイディレクトリを含むローカルオーバーレイのルートです。
 - `--mount-path <string>`: ローカルのマウント済みパスです。
-- `--mount-profile <string>`: [mount profile](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を選択します: `coding-agent`、`portable`、または `none`。省略した場合は `none` を使用します。
+- `--mount-profile <string>`: [マウントプロファイル](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を選択します: `coding-agent`、`portable`、または `none`。省略した場合は `none` を使用します。
 - `--path <string>`: パック対象のローカルオーバーレイパスです。繰り返し指定できます。
 - `--remote-root <string>`: ローカルオーバーレイで表される TiDB Cloud ファイルシステムのルートです。\[default: /]
 - `--version`: バージョン情報を表示します。
