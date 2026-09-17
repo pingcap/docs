@@ -15,7 +15,7 @@ TiDB Cloud Filesystem Vault を使用すると、シークレットを保存し�
 
 > **Note:**
 >
-> セキュリティリスクを避けるため、オーナートークンや delegated トークンを表示、ログ出力、またはコミットしないでください。
+> セキュリティリスクを避けるため、オーナートークンや委任されたトークンを表示、ログ出力、またはコミットしないでください。
 
 ## シークレットを作成して読み取る {#create-and-read-a-secret}
 
@@ -80,7 +80,7 @@ ti fs-vault delete-grant \
 
 macOS または FUSE をサポートする Linux では、Vault secrets の読み取り専用 FUSE ビューをマウントできます。CLI はマウントを作成し、マウントパス配下のファイルとしてシークレットフィールドを提供します（たとえば、`/path/to/vault/db-prod/DB_URL`）。
 
-マウントする前に、`TI_VAULT_TOKEN` を delegated Vault トークンに設定します。たとえば、[制限付きアクセスを委任する](#delegate-limited-access) で作成したトークンを使用できます。マウントコマンドには、`TI_VAULT_TOKEN` または `--vault-token` のいずれかが必要です。
+マウントする前に、`TI_VAULT_TOKEN` を委任された Vault トークンに設定します。たとえば、[制限付きアクセスを委任する](#delegate-limited-access) で作成したトークンを使用できます。マウントコマンドには、`TI_VAULT_TOKEN` または `--vault-token` のいずれかが必要です。
 
 ```shell
 mkdir -p /path/to/vault
@@ -99,7 +99,7 @@ Vault マウントは Windows では利用できません。シークレット�
 ## セキュリティに関する推奨事項 {#security-recommendations}
 
 - フィールドスコープは可能な限り最小にし、TTL は実用上可能な限り短くしてください。
-- delegated トークンを CLI 設定や操作ログに保存しないでください。
+- 委任されたトークンを CLI 設定や操作ログに保存しないでください。
 - タスク完了後は grant を失効してください。
 
 ## 次のステップ {#what-s-next}
