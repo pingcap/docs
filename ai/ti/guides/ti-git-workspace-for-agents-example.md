@@ -13,7 +13,7 @@ summary: 大規模な Git ワークスペースをすばやく利用可能にし
 
 ## 仕組み {#how-it-works}
 
-`ti fs-git clone-git-workspace --blobless --hydrate background` は、置き換え可能なエージェントランタイム間で共有できる Git ワークスペースを登録し、すべてのクリーン blob のダウンロードが完了する前にそのファイルツリーを公開します。このコマンドはすぐに戻るため、`ti` がバックグラウンドでクリーンツリーとローカル Git オブジェクトデータベースを hydrate している間に、エージェントはパスを調査して作業を開始できます。通常の clone とは異なり、初期オブジェクト転送はワークフロー全体をブロックしません。ネイティブの blobless partial clone のみを使う場合と異なり、バックグラウンド hydration により、エージェントのクリティカルパス上で繰り返し発生するオンデマンド fetch を減らせます。hydration の完了前に到着した読み取りは、正確性を保つために引き続き Git の lazy fetch にフォールバックします。編集、commit、fetch、push は通常どおり Git が担当します。
+`ti fs-git clone-git-workspace --blobless --hydrate background` は、置き換え可能なエージェントランタイム間で共有できる Git ワークスペースを登録し、すべてのクリーン ブロブのダウンロードが完了する前にそのファイルツリーを公開します。このコマンドはすぐに戻るため、`ti` がバックグラウンドでクリーンツリーとローカル Git オブジェクトデータベースを hydrate している間に、エージェントはパスを調査して作業を開始できます。通常の clone とは異なり、初期オブジェクト転送はワークフロー全体をブロックしません。ネイティブの blobless partial clone のみを使う場合と異なり、バックグラウンド hydration により、エージェントのクリティカルパス上で繰り返し発生するオンデマンドフェッチを減らせます。hydration の完了前に到着した読み取りは、正確性を保つために引き続き Git の lazy fetch にフォールバックします。編集、commit、fetch、push は通常どおり Git が担当します。
 
 ## 前提条件 {#prerequisites}
 
