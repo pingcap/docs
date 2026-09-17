@@ -25,11 +25,11 @@ aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidb/dev/vector-search-
 
 ### ベクトル埋め込み {#vector-embedding}
 
-ベクトル埋め込み（embedding とも呼ばれます）は、現実世界のオブジェクトを高次元空間で表現する数値の列です。これは、ドキュメント、画像、音声、動画などの非構造化データの意味とコンテキストを捉えます。
+ベクトル埋め込み（単に埋め込みとも呼ばれます）は、現実世界のオブジェクトを高次元空間で表現する数値の列です。これは、ドキュメント、画像、音声、動画などの非構造化データの意味とコンテキストを捉えます。
 
 ベクトル埋め込みは機械学習において不可欠であり、セマンティック類似検索の基盤となります。
 
-TiDB は、ベクトル埋め込みの保存と取得を最適化するために設計された [Vector data types](/ai/reference/vector-search-data-types.md) と [Vector search index](/ai/reference/vector-search-index.md) を導入しています。これにより、AI アプリケーションでの活用が強化されます。これらのデータ型を使用して、TiDB にベクトル埋め込みを保存し、ベクトル検索クエリを実行して最も関連性の高いデータを見つけることができます。
+TiDB は、ベクトル埋め込みの保存と取得を最適化するために設計された [ベクトルデータ型](/ai/reference/vector-search-data-types.md) と [ベクトル検索インデックス](/ai/reference/vector-search-index.md) を導入しています。これにより、AI アプリケーションでの活用が強化されます。これらのデータ型を使用して、TiDB にベクトル埋め込みを保存し、ベクトル検索クエリを実行して最も関連性の高いデータを見つけることができます。
 
 ### 埋め込みモデル {#embedding-model}
 
@@ -43,7 +43,7 @@ TiDB は、ベクトル埋め込みの保存と取得を最適化するために
 
 生データをベクトル埋め込みに変換して TiDB に保存した後、アプリケーションはベクトル検索クエリを実行して、ユーザーのクエリに対して意味的または文脈的に最も関連するデータを見つけることができます。
 
-TiDBベクトル検索は、[distance function](/ai/reference/vector-search-functions-and-operators.md) を使用して、指定されたベクトルとデータベースに保存されているベクトルとの距離を計算し、上位 k 個の最近傍（KNN）ベクトルを特定します。クエリ内で指定されたベクトルに最も近いベクトルが、意味的に最も類似したデータを表します。
+TiDBベクトル検索は、[距離関数](/ai/reference/vector-search-functions-and-operators.md) を使用して、指定されたベクトルとデータベースに保存されているベクトルとの距離を計算し、上位 k 個の最近傍（KNN）ベクトルを特定します。クエリ内で指定されたベクトルに最も近いベクトルが、意味的に最も類似したデータを表します。
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
