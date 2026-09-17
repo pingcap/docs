@@ -24,7 +24,7 @@ ti fs describe-layer
 
 ## オプション {#options}
 
-- `--layer-id <string>`: 指定した file system layer の ID。\[required]
+- `--layer-id <string>`: 指定したファイルシステムレイヤーの ID。\[required]
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されたトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
