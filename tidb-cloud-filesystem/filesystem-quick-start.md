@@ -119,6 +119,7 @@ The read returns `Hello from my workspace`. The file remains available after you
 
 ## What's next
 
+- [Manage the Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect, check, select, and delete Filesystem resources.
 - [Mount the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) to use it through a local directory.
 - [Share the workspace](/tidb-cloud-filesystem/filesystem-sharing.md) with another machine or agent.
 - [Manage layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to review changes before publishing them.
