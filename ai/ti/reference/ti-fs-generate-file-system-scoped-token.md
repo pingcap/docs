@@ -27,7 +27,7 @@ summary: 1 つの TiDB Cloud Filesystem に対して、パスと操作が制限�
 >
 > TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。その機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```text
 ti fs generate-file-system-scoped-token
@@ -43,7 +43,7 @@ ti fs generate-file-system-scoped-token
   [--version]
 ```
 
-## Options {#options}
+## オプション {#options}
 
 - `--ttl <duration>`: 秒単位に解決される、有限の正のトークン有効期間を設定します。このオプションは必須です。
 - `--allow <prefix:ops>`: 1 つのリモートパスプレフィックス配下で許可する操作を指定します。複数のプレフィックスを指定するには、このオプションを繰り返します。操作には `read`、`list`、`search`、`write`、`delete` があり、`search` には `read` が必要です。このオプションは必須です。
@@ -58,7 +58,7 @@ ti fs generate-file-system-scoped-token
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
-## Examples {#examples}
+## 例 {#examples}
 
 - 1 つの workspace に対して sandbox に読み取りおよび書き込みアクセスを付与します。
 
@@ -92,7 +92,7 @@ ti fs generate-file-system-scoped-token
       --replace
     ```
 
-## Related documentation {#related-documentation}
+## 関連ドキュメント {#related-documentation}
 
 - [TiDB Cloud Filesystem CLI コマンドリファレンス](/ai/ti/reference/ti-filesystem.md)
 - [`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md)

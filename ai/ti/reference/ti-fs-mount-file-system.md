@@ -17,7 +17,7 @@ automatic、FUSE、または WebDAV モードで Filesystem をマウントし�
 >
 > TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。その機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```text
 ti fs mount-file-system
@@ -45,7 +45,7 @@ ti fs mount-file-system
   [--write-back-cache]
 ```
 
-## Options {#options}
+## オプション {#options}
 
 - `--mount-path <string>`: ローカルのマウントパス。\[required]
 - `--cache-dir <string>`: ローカルの FUSE キャッシュディレクトリ。省略した場合は `~/.ti/cache/mounts/<mount-hash>` を使用します。
@@ -72,7 +72,7 @@ ti fs mount-file-system
 
 すべてのコマンドで共有されるオプションについては、[Global options](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
-## Examples {#examples}
+## 例 {#examples}
 
 - デフォルトドライバーで Filesystem をマウントします:
 
@@ -116,6 +116,6 @@ ti fs mount-file-system
     ti fs mount-file-system --file-system-id <file-system-id> --mount-path /path/to/checkpoint --remote-path /workspace --driver fuse --layer-ref experiment --checkpoint-id v5
     ```
 
-## Related documentation {#related-documentation}
+## 関連ドキュメント {#related-documentation}
 
 - [TiDB Cloud Filesystem CLI コマンドリファレンス](/ai/ti/reference/ti-filesystem.md)

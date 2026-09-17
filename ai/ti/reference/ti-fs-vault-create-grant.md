@@ -44,7 +44,7 @@ ti fs-vault create-grant
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
-## Grant permissions {#grant-permissions}
+## 付与可能な権限 {#grant-permissions}
 
 | 権限 | 現在の `ti` の動作 |
 | --- | --- |

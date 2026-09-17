@@ -11,7 +11,7 @@ summary: TiDB Cloud CLI で管理される SQL ユーザー向けの接続文字
 >
 > TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```text
 ti db format-db-connection-string
@@ -28,7 +28,7 @@ ti db format-db-connection-string
   [--version]
 ```
 
-## Options {#options}
+## オプション {#options}
 
 - `--db-cluster-id <string>`: Starter DB クラスター ID。\[required]
 - `--admin`: 準備済みの管理者 DB SQL 認証情報を使用します。
@@ -44,7 +44,7 @@ ti db format-db-connection-string
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
-## Examples {#examples}
+## 例 {#examples}
 
 - 読み書き用の MySQL URI を整形する:
 
@@ -74,6 +74,6 @@ ti db format-db-connection-string
     ti db format-db-connection-string --db-cluster-id "<cluster-id>" --read-write --format env --env-include-database-url
     ```
 
-## Related documentation {#related-documentation}
+## 関連ドキュメント {#related-documentation}
 
 - [TiDB Cloud Starter CLI コマンドリファレンス](/ai/ti/reference/ti-starter-database.md)

@@ -174,7 +174,7 @@ TiDB Cloud の完全なロールモデルについては、[データベース�
 
 このロケーターには、同じ `HOME` から drain およびアンマウントを行うために必要な配置先情報と companion-home 情報が記録されます。FS トークンは含まれません。アンマウントが成功すると削除されます。
 
-## Operation logs {#operation-logs}
+## 操作ログ {#operation-logs}
 
 `ti` は、ローカルの JSON Lines 形式のイベントを秘匿化して次の場所に書き込みます。
 
@@ -230,7 +230,7 @@ TI_TELEMETRY_EXTRA='{"campaign":"launch","runtime":"e2b"}' \
 ti fs list-files --file-system-id <file-system-id> --path /
 ```
 
-## Sensitive values {#sensitive-values}
+## 機密情報 {#sensitive-values}
 
 次の値はシークレットとして扱ってください。
 
@@ -241,7 +241,7 @@ ti fs list-files --file-system-id <file-system-id> --path /
 
 これらをソース管理、チケット、ログ、コマンド例、または保護されていないシェル履歴に保存しないでください。
 
-## Related documentation {#related-documentation}
+## 関連ドキュメント {#related-documentation}
 
 - [TiDB Cloud CLI のリージョン、セキュリティ、および制限事項](/ai/ti/reference/ti-regions-security-and-limitations.md)
 - [TiDB Cloud CLI のトラブルシューティング](/ai/ti/reference/ti-troubleshooting.md)

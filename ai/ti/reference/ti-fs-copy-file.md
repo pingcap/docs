@@ -23,7 +23,7 @@ summary: TiDB Cloud Filesystem との間、またはその内部でファイル�
 >
 > TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```text
 ti fs copy-file
@@ -48,7 +48,7 @@ ti fs copy-file
   [--version]
 ```
 
-## Options {#options}
+## オプション {#options}
 
 - `--append`: ローカルファイルの内容を TiDB Cloud file system 内のファイルに追記します。
 - `--create-parents`: TiDB Cloud file system からコピーする際に、不足しているローカルの親ディレクトリを作成します。
@@ -72,7 +72,7 @@ ti fs copy-file
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
-## Examples {#examples}
+## 例 {#examples}
 
 - ローカルファイルをアップロードする:
 
@@ -116,6 +116,6 @@ ti fs copy-file
     printf 'ready\n' | ti fs copy-file --file-system-id <file-system-id> --from-stdin --to-remote /status.txt --tag source=stdin --description "generated status"
     ```
 
-## Related documentation {#related-documentation}
+## 関連ドキュメント {#related-documentation}
 
 - [TiDB Cloud Filesystem CLI コマンドリファレンス](/ai/ti/reference/ti-filesystem.md)

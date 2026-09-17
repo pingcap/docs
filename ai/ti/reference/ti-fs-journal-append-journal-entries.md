@@ -46,7 +46,7 @@ ti fs-journal append-journal-entries
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
-## Entry JSON format {#entry-json-format}
+## エントリ JSON 形式 {#entry-json-format}
 
 各入力オブジェクトは、次のフィールドをサポートします。
 
