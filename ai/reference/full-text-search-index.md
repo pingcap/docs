@@ -229,25 +229,85 @@ ALTER TABLE t DROP INDEX idx_fts;
 
 ## DDL restrictions
 
-Columns that participate in a full-text index and tables that contain a full-text index are subject to the following DDL restrictions.
+Columns that participate in a full-text index are subject to DDL restrictions. Common table-level operations on a table that contains a full-text index are not blocked, but creating and maintaining a full-text index has its own restrictions.
 
 ### Restrictions on indexed columns
 
+Full-text indexes validate scored columns and filter columns in the same way, because both belong to the indexed column set. The two kinds of columns differ only in the column types that their parser or attribute accepts. See [Parser and column type compatibility](#parser-and-column-type-compatibility).
+
 | DDL operation | Allowed | Notes |
 | :-- | :-- | :-- |
-| `DROP COLUMN` | No | Drop the full-text index first, then drop the column. |
-| `RENAME COLUMN` | No | Drop the full-text index first, rename the column, and then re-create the index. |
-| `MODIFY COLUMN` (narrowing) | No | For example, `INT` to `SMALLINT`, or `VARCHAR(40)` to `VARCHAR(20)`. |
-| `MODIFY COLUMN` (widening) | Yes | For example, `INT` to `BIGINT`, or `VARCHAR(20)` to `VARCHAR(40)`. |
-| `MODIFY COLUMN` (incompatible type) | No | For example, `TEXT` to `INT`. |
+| `DROP COLUMN` | No | TiDB rejects the statement when a full-text index covers the column, even if the index contains only that column. Drop the full-text index first, and then drop the column. You cannot combine `DROP INDEX` and `DROP COLUMN` in one `ALTER TABLE` statement, because TiDB validates every clause against the original schema. |
+| `RENAME COLUMN` | Yes | TiDB updates the column name in the index automatically, and you do not need to rebuild the index. Renaming a column with `CHANGE COLUMN` while keeping the same type is also allowed. |
+| `MODIFY COLUMN` or `CHANGE COLUMN` (no data rewrite) | Conditional | Allowed only when all four conditions in [Conditions for a type change](#conditions-for-a-type-change) are met. Typical examples are `VARCHAR(20)` to `VARCHAR(40)` and `INT` to `BIGINT`. |
+| `MODIFY COLUMN` or `CHANGE COLUMN` (data rewrite required) | No | TiDB rejects changes such as reducing a length or a type range, `CHAR` to `VARCHAR`, `FLOAT` to `DOUBLE`, and conversions between signed and unsigned types. |
+| `MODIFY COLUMN` or `CHANGE COLUMN` (type incompatible with the parser) | No | TiDB validates the new type against the parser that the column uses, even when the change does not rewrite data. For example, changing a column to `VARBINARY`, or to a `BINARY` collation, is rejected. |
+| `ALTER COLUMN SET DEFAULT` and `ALTER COLUMN DROP DEFAULT` | Yes | No full-text index restriction applies. |
+| Change the column collation | No | This is a general restriction for any indexed column and is not specific to full-text indexes. |
+| Inline `FULLTEXT` column option in `MODIFY COLUMN` or `CHANGE COLUMN` | No | You cannot add a full-text index through a column definition. Use `ALTER TABLE ... ADD FULLTEXT INDEX` instead. |
+
+#### Conditions for a type change
+
+A `MODIFY COLUMN` or `CHANGE COLUMN` operation that does not rewrite data is allowed only when all of the following conditions are met:
+
+1. TiDB supports the type conversion.
+2. The conversion does not require rewriting the column data. This is the key criterion, and it replaces a simple widening-versus-narrowing rule.
+3. The new type is still compatible with the parser that is bound to the column.
+4. The conversion does not trigger other general DDL restrictions, such as a collation change, a generated column dependency, or a partition column constraint.
+
+#### Common type changes
+
+| Type change | Supported | Reason |
+| :-- | :-- | :-- |
+| `VARCHAR(20)` to `VARCHAR(40)` | Yes | Expands the length without rewriting data. The column remains a non-binary string. |
+| `CHAR(20)` to `CHAR(40)` | Yes | Expands the length within the same non-binary `CHAR` type without rewriting data. |
+| `INT` to `BIGINT` | Yes | Expands the integer range without rewriting data. |
+| `INT UNSIGNED` to `BIGINT UNSIGNED` | Yes | Expands the integer range without changing signedness. |
+| `INT` to `BIGINT UNSIGNED` | No | Changes signedness, which requires a data rewrite. |
+| `CHAR(20)` to `VARCHAR(40)` | No | Requires a data rewrite. |
+| `FLOAT` to `DOUBLE` | No | Requires a data rewrite. |
+| `VARCHAR(20)` to `VARCHAR(40) BINARY` | No | The new type is not compatible with a full-text string parser. |
+| `VARCHAR(20)` to `VARBINARY(40)` | No | The new type is not compatible with a full-text string parser. |
+| `VARCHAR(40)` to `VARCHAR(20)` | No | Reduces the length, which requires a data rewrite. |
+| `INT` to `SMALLINT` | No | Narrows the type, which requires a data rewrite. |
+| `TEXT` to `INT` | No | Changes the type across categories, which requires a data rewrite. |
+
+This table is not exhaustive. The four conditions in [Conditions for a type change](#conditions-for-a-type-change) are the authoritative criteria. When you modify any column of a multi-column full-text index, TiDB re-validates the whole column set of that index.
+
+#### Parser and column type compatibility
+
+| Parser or attribute | Allowed column types |
+| :-- | :-- |
+| `STANDARD`, `MULTILINGUAL`, `NGRAM`, and `path_hierarchy` | Non-binary string types only, which means a string type whose collation is not `binary`. |
+| `exact` | Non-binary string types, or the following native types: `TINYINT`, `SMALLINT`, `MEDIUMINT`, `INT`, `BIGINT`, `BIT`, `YEAR`, `FLOAT`, `DOUBLE`, `DATE`, `DATETIME`, `TIMESTAMP`, `TIME`, and `ENUM`. `DECIMAL` is not supported. |
 
 ### Restrictions on tables with full-text indexes
 
+TiDB applies no full-text-specific validation to the operations in the following table, and you do not need to drop the full-text index before you run them.
+
 | DDL operation | Allowed | Notes |
 | :-- | :-- | :-- |
-| `TRUNCATE TABLE` | No | Drop the full-text index first, then truncate the table. |
-| `DROP TABLE` | No | Drop the full-text index first, then drop the table. |
-| `RENAME TABLE` | No | Drop the full-text index first, rename the table, and then re-create the index. |
+| `TRUNCATE TABLE` | Yes | No full-text index validation applies. |
+| `DROP TABLE` | Yes | TiDB removes the full-text index together with the table. |
+| `RENAME TABLE` and `ALTER TABLE ... RENAME TO` | Yes | The full-text index moves with the table. |
+| `ADD COLUMN` | Yes | TiDB does not add the new column to an existing full-text index automatically. |
+| `ADD COLUMN` with an inline `FULLTEXT` column option | Yes, with a warning | TiDB ignores the column option and returns a warning that the table type does not support full-text indexes. Use `ALTER TABLE ... ADD FULLTEXT INDEX` instead. |
+| `ALTER TABLE ... SET TIFLASH REPLICA 0` | Yes | TiDB does not reject the statement because a full-text index exists. |
+| `DROP INDEX` for a full-text index | Yes | You can combine this clause with other `DROP INDEX` clauses in one `ALTER TABLE` statement. TiDB reclaims the index data on the storage side asynchronously. |
+
+These operations are not the only table-level statements that affect a table with a full-text index. Full-text indexes do not support partitioned, temporary, or cached tables, so if you plan to convert a table that has a full-text index into one of these types, drop the index first and re-create it after the change.
+
+### Restrictions on index creation and maintenance
+
+The following restrictions apply when you create a full-text index or run maintenance statements. They are not table-level DDL blocks.
+
+| Operation | Allowed | Notes |
+| :-- | :-- | :-- |
+| Create a full-text index on a partitioned, temporary, or cached table | No | TiDB validates this restriction in both `CREATE TABLE` and `ALTER TABLE ... ADD FULLTEXT INDEX`. |
+| Combine `ADD FULLTEXT INDEX` with other `ALTER TABLE` clauses | No | Full-text indexes do not support merged schema changes. Run `ADD FULLTEXT INDEX` as a standalone statement. |
+| `ALTER INDEX ... INVISIBLE` | No | You cannot set a full-text index to invisible. `ALTER INDEX ... VISIBLE` is allowed. |
+| `ADMIN CLEANUP INDEX` | No | Full-text indexes do not support cleanup. |
+| `ADMIN CHECK TABLE` and `ADMIN CHECK INDEX` | Skipped | Full-text indexes do not participate in consistency checks. TiDB skips them and does not return an error. |
 
 For the full list of functional limitations, see [Full-Text Search Limitations](/ai/reference/full-text-search-limitations.md).
 
