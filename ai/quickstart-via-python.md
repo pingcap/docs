@@ -108,7 +108,7 @@ client = TiDBClient.connect(
 
 ## 埋め込み関数を作成する {#create-an-embedding-function}
 
-[埋め込みモデル](/ai/guides/vector-search-overview.md#embedding-model)扱う場合、埋め込み機能を利用することで、挿入時とクエリ時の両方でデータを自動的にベクトル化できます。OpenAI、Jina AI、Hugging Face、Sentence Transformersなど、人気の埋め込みモデルをネイティブでサポートしています。
+[埋め込みモデル](/ai/guides/vector-search-overview.md#embedding-model)を扱う場合、埋め込み機能を利用することで、挿入時とクエリ時の両方でデータを自動的にベクトル化できます。OpenAI、Jina AI、Hugging Face、Sentence Transformersなど、人気の埋め込みモデルをネイティブでサポートしています。
 
 <SimpleTab>
 <div label="OpenAI">

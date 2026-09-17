@@ -20,7 +20,7 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 > **Tip:**
 >
-> Python の使い方については、 [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)ご覧ください。
+> Python の使い方については、 [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)を ご覧ください。
 >
 > AI アプリで全文検索とベクトル検索を併用するには、 [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)を参照してください。
 
@@ -321,5 +321,5 @@ WHERE t.author_id IN
 
 全文検索はまだ開発初期段階であり、利用できる地域が限られています。まだ利用できない地域で全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) または [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)

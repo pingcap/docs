@@ -77,7 +77,7 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 dimensions vector,
 INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector, OK
 ```
 
-ただし、ベクトル距離は同じ次元のベクトル間でのみ計算できるため、この列に[ベクトル検索インデックス](/ai/reference/vector-search-index.md)構築できないことに注意してください。
+ただし、ベクトル距離は同じ次元のベクトル間でのみ計算できるため、この列に[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を構築できないことに注意してください。
 
 ## 比較 {#comparison}
 
