@@ -5,18 +5,18 @@
 
 ## クイックスタート
 
-- [Python による Vector Search のクイックスタート](/ai/quickstart-via-python.md)
-- [SQL による Vector Search のクイックスタート](/ai/quickstart-via-sql.md)
+- [Python によるベクトル検索のクイックスタート](/ai/quickstart-via-python.md)
+- [SQL によるベクトル検索のクイックスタート](/ai/quickstart-via-sql.md)
 - [TiDB Cloud CLI のクイックスタート](/ai/ti/ti-quick-start.md)
 
 ## ガイド
 
 - [Python から TiDB に接続する](/ai/guides/connect.md)
 - 検索と取得
-  - Vector Search
+  - ベクトル検索
     - [概要](/ai/guides/vector-search-overview.md)
-    - [Vector Search ガイド](/ai/guides/vector-search.md)
-    - [Vector Search の例](/ai/guides/vector-search-with-pytidb.md)
+    - [ベクトル検索ガイド](/ai/guides/vector-search.md)
+    - [ベクトル検索の例](/ai/guides/vector-search-with-pytidb.md)
   - 全文検索
     - [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)
     - [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)
