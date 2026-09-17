@@ -52,7 +52,7 @@ docker run --rm -it \
   <image>
 ```
 
-Docker Compose では、同じ device、capability、security、および environment の設定を渡します。
+Docker Compose では、同じデバイス、ケーパビリティ、セキュリティ、および環境変数の設定を渡します。
 
 ```yaml
 services:
