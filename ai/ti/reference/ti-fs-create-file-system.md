@@ -11,7 +11,7 @@ Filesystem を作成し、その ID とオーナートークンを返します�
 
 > **Important:**
 >
-> サービスは初期オーナートークンを再表示しません。CLI がトークンを保存できなかったと警告した場合は、ターミナルを閉じる前に返された値を保存してください。後でローカル認証情報が失われた場合は、[`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) と TiDB Cloud API credentials を使用して、置き換え用のオーナートークンを作成してください。
+> サービスは初期オーナートークンを再表示しません。CLI がトークンを保存できなかったと警告した場合は、ターミナルを閉じる前に返された値を保存してください。後でローカル認証情報が失われた場合は、[`ti fs generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) と TiDB Cloud API 認証情報を使用して、置き換え用のオーナートークンを作成してください。
 
 > **Note:**
 >

@@ -194,4 +194,4 @@ TiDB Cloud Filesystem は、ローカルマシン、CI ジョブ、サンドボ�
 - [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md) を読んで、`ti` が何を管理するのか、またどのような場合に使用するのかを理解してください。
 - タスクガイドに従って、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) または [Filesystem resources](/ai/ti/guides/manage-filesystem-resources.md) を管理してください。
 - コマンドグループ、グローバルオプション、共通の CLI 動作については、[TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) を参照してください。
-- 複数のプロファイルや非対話型認証を設定するには、[TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md) を参照してください。
+- 複数のプロファイルや非対話型認証を設定するには、[TiDB Cloud CLI の設定と認証情報](/ai/ti/reference/ti-configuration-and-credentials.md) を参照してください。
