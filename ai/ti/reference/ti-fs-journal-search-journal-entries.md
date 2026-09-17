@@ -46,7 +46,7 @@ ti fs-journal search-journal-entries
 - `--limit <int32>`: 読み取る一致結果の最大数。\[default: 100]
 - `--since <string>`: 相対期間（`24h` など）または RFC3339 タイムスタンプで指定する下限時刻。
 - `--status <string>`: エントリステータスのフィルター。
-- `--subject <string>`: subject のフィルター。繰り返し指定できます。
+- `--subject <string>`: サブジェクトのフィルター。繰り返し指定できます。
 - `--until <string>`: RFC3339 タイムスタンプで指定する上限時刻。相対期間は使用できません。
 - `--version`: バージョン情報を表示します。
 
@@ -68,7 +68,7 @@ ti fs-journal search-journal-entries
     ti fs-journal search-journal-entries --file-system-id <file-system-id> --label env=dev --since 2026-07-01T00:00:00Z --limit 100
     ```
 
-- アクターと subject で検索する場合:
+- アクターとサブジェクトで検索する場合:
 
     ```bash
     # Find events produced by one agent for a specific task subject.

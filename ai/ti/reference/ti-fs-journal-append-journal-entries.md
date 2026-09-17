@@ -41,7 +41,7 @@ ti fs-journal append-journal-entries
 - `--idempotency-key <string>`: 同じ追加リクエストの再試行を重複排除するために使用するキー。省略した場合、呼び出しごとに新しいキーが割り当てられます。
 - `--json-array`: JSONL の代わりに標準入力から JSON 配列を読み取ります。
 - `--source <string>`: エントリソース。
-- `--subject <string>`: エントリ subject。繰り返し指定できます。
+- `--subject <string>`: エントリのサブジェクト。繰り返し指定できます。
 - `--version`: バージョン情報を表示します。
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
