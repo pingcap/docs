@@ -35,7 +35,7 @@ ti fs-journal append-journal-entries
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--entry-json <string>`: 1 つの JSON ジャーナルエントリオブジェクト。繰り返し指定できます。サポートされるフィールドについては、[Entry JSON format](#entry-json-format) を参照してください。
 - `--entry-type <string>`: 入力オブジェクトで `type` が省略されている場合に使用するエントリタイプ。入力オブジェクト内で明示的に指定された `type` が優先されます。
-- `--file-system-id <string>`: file system を選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
+- `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--idempotency-key <string>`: 同じ追加リクエストの再試行を重複排除するために使用するキー。省略した場合、呼び出しごとに新しいキーが割り当てられます。
