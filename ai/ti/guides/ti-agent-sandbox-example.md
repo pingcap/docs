@@ -13,7 +13,7 @@ summary: 信頼できるマシン上で Filesystem をプロビジョニング�
 
 > **Note:**
 >
-> このワークフローを実際に試せる版として、[TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901) を開いてください。このインタラクティブな Lab Guide では、エージェントサンドボックスで永続的な Filesystem を使用する方法を案内します。
+> このワークフローを実際に試せる版として、[TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901) を開いてください。このインタラクティブな演習では、エージェントサンドボックスで永続的な Filesystem を使用する方法を案内します。
 
 ## 仕組み {#how-it-works}
 
