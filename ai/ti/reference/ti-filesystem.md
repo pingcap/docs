@@ -65,11 +65,11 @@ summary: Filesystem リソース、ファイル、レイヤー、パック、マ
 | --- | --- |
 | [`create-layer`](/ai/ti/reference/ti-fs-create-layer.md) | 分離された書き込み可能なレイヤーを作成します。 |
 | [`list-layers`](/ai/ti/reference/ti-fs-list-layers.md) | Filesystem 内のレイヤーを一覧表示します。 |
-| [`fork-layer`](/ai/ti/reference/ti-fs-fork-layer.md) | 親の tip または checkpoint から子レイヤーを fork します。 |
+| [`fork-layer`](/ai/ti/reference/ti-fs-fork-layer.md) | 親の tip またはチェックポイントから子レイヤーをフォークします。 |
 | [`list-layer-chain`](/ai/ti/reference/ti-fs-list-layer-chain.md) | レイヤーの固定された祖先チェーンを一覧表示します。 |
 | [`describe-layer`](/ai/ti/reference/ti-fs-describe-layer.md) | ID でレイヤーの詳細を表示します。 |
 | [`diff-layer`](/ai/ti/reference/ti-fs-diff-layer.md) | レイヤーに記録された変更を一覧表示します。 |
-| [`create-layer-checkpoint`](/ai/ti/reference/ti-fs-create-layer-checkpoint.md) | レイヤー内に永続的な checkpoint を作成します。 |
+| [`create-layer-checkpoint`](/ai/ti/reference/ti-fs-create-layer-checkpoint.md) | レイヤー内に永続的なチェックポイントを作成します。 |
 | [`delete-layer`](/ai/ti/reference/ti-fs-delete-layer.md) | レイヤーを論理的に破棄します。 |
 | [`rollback-layer`](/ai/ti/reference/ti-fs-rollback-layer.md) | 変更をコミットせずにレイヤーをロールバックします。 |
 | [`commit-layer`](/ai/ti/reference/ti-fs-commit-layer.md) | レイヤーの変更をベース Filesystem に適用します。 |
