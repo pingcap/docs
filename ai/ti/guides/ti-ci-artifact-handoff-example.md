@@ -52,7 +52,7 @@ ti fs copy-file \
 tar -tzf app.tar.gz
 ```
 
-stdin を受け付けるコマンドの場合は、中間のローカルファイルを避けられます。
+標準入力を受け付けるコマンドの場合は、中間のローカルファイルを避けられます。
 
 ```bash
 ti fs copy-file --from-remote "/ci/${RUN_ID}/app.tar.gz" --to-stdout \
