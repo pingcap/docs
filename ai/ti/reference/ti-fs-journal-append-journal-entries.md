@@ -39,7 +39,7 @@ ti fs-journal append-journal-entries
 - `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--idempotency-key <string>`: 同じ追加リクエストの再試行を重複排除するために使用するキー。省略した場合、呼び出しごとに新しいキーが割り当てられます。
-- `--json-array`: JSONL の代わりに stdin から JSON 配列を読み取ります。
+- `--json-array`: JSONL の代わりに標準入力から JSON 配列を読み取ります。
 - `--source <string>`: エントリソース。
 - `--subject <string>`: エントリ subject。繰り返し指定できます。
 - `--version`: バージョン情報を表示します。
