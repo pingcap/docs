@@ -41,7 +41,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
     お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)。
 
-- [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)AWS アカウントと次のモデルへのアクセス:
+- [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)および次のモデルへのアクセス権を持つ AWS アカウント:
 
     - **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) は、テキスト埋め込みを生成するために使用されます。
     - テキスト生成に使用される**Meta Llama 3** （ `us.meta.llama3-2-3b-instruct-v1:0` ）
