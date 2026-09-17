@@ -85,7 +85,7 @@ macOS では、FUSE のインストールが不要な WebDAV を使用するた�
 
 ## クリーンアップ {#cleanup}
 
-ライターを停止してアンマウントします。正常な FUSE アンマウントでは、保留中の作業が自動的に flush および drain されます。
+ライターを停止してアンマウントします。正常な FUSE アンマウントでは、保留中の作業が自動的にフラッシュおよび drain されます。
 
 ```bash
 ti fs unmount-file-system --mount-path "$HOME/workspace"
