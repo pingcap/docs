@@ -7,7 +7,7 @@ summary: TiDB Cloud CLI をインストールして設定し、その後 TiDB Cl
 
 [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) は、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) インスタンスおよび [TiDB Cloud Filesystems](/ai/ti/ti-overview.md#tidb-cloud-filesystem) を管理するためのコマンドラインツールです。対話的な利用と自動化の両方をサポートしており、コマンドのデフォルト出力形式は JSON です。
 
-このガイドでは、TiDB Cloud CLI (`ti`) のインストールと設定を行い、その後 TiDB Cloud Starter または TiDB Cloud Filesystem を使った基本的なワークフローを完了する方法を説明します。CLI の概要、機能、サポートされるワークフローについては、[TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md) を参照してください。
+このガイドでは、TiDB Cloud CLI (`ti`) のインストールと設定を行い、その後 TiDB Cloud Starter または TiDB Cloud Filesystem を使った基本的なワークフローを完了する方法を説明します。CLI の概要、機能、サポートされるワークフローについては、[TiDB Cloud CLI (`ti`) の概要](/ai/ti/ti-overview.md) を参照してください。
 
 > **Note:**
 >
@@ -191,7 +191,7 @@ TiDB Cloud Filesystem は、ローカルマシン、CI ジョブ、サンドボ�
 
 ## 次のステップ {#what-s-next}
 
-- [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md) を読んで、`ti` が何を管理するのか、またどのような場合に使用するのかを理解してください。
-- タスクガイドに従って、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) または [Filesystem resources](/ai/ti/guides/manage-filesystem-resources.md) を管理してください。
-- コマンドグループ、グローバルオプション、共通の CLI 動作については、[TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) を参照してください。
+- [TiDB Cloud CLI (`ti`) の概要](/ai/ti/ti-overview.md) を読んで、`ti` が何を管理するのか、またどのような場合に使用するのかを理解してください。
+- タスクガイドに従って、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) または [Filesystem リソース](/ai/ti/guides/manage-filesystem-resources.md) を管理してください。
+- コマンドグループ、グローバルオプション、共通の CLI 動作については、[TiDB Cloud CLI (`ti`) コマンドリファレンス](/ai/ti/reference/ti-cli-reference.md) を参照してください。
 - 複数のプロファイルや非対話型認証を設定するには、[TiDB Cloud CLI の設定と認証情報](/ai/ti/reference/ti-configuration-and-credentials.md) を参照してください。
