@@ -31,7 +31,7 @@ ti fs-vault create-grant
 ## オプション {#options}
 
 - `--agent-id <string>`: 委任 grant の Agent ID。\[required]
-- `--permission <string>`: grant 権限: `read` または `write`。現在の権限の動作については、[Grant permissions](#grant-permissions) を参照してください。\[required]
+- `--permission <string>`: grant 権限: `read` または `write`。現在の権限の動作については、[付与可能な権限](#grant-permissions) を参照してください。\[required]
 - `--scope <string>`: すべてのフィールドを対象とする場合は `<secret-name>`、1 つのフィールドを対象とする場合は `<secret-name>/<field-name>` 形式の secret scope。繰り返し指定できます。同等の正規 Vault パス `/n/vault/<secret-name>` および `/n/vault/<secret-name>/<field-name>` も使用できます。\[required]
 - `--ttl <duration>`: grant の有効期間。たとえば `1h`。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
