@@ -40,7 +40,7 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | Filesystem の抽出および埋め込み設定の表示または更新 | TiDB Cloud API キーと明示的な file system ID |
 | Filesystem トークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API キーと明示的な file system ID |
 | Filesystem トークンの更新 | 現在の FS bearer トークンのみ |
-| リモートの file、レイヤー、pack、マウント、Git、ジャーナル、およびオーナー vault 操作 | FS オーナートークンまたは登録済みリソース認証情報 |
+| リモートの file、レイヤー、パック、マウント、Git、ジャーナル、およびオーナー vault 操作 | FS オーナートークンまたは登録済みリソース認証情報 |
 | 委任された vault の read、list、run、またはマウント | スコープに適した委任された vault トークン |
 | 成功したバックグラウンドマウント後の drain およびアンマウント | 同じ `HOME` 内の機密情報を含まないマウントロケーター |
 
