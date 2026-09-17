@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Filesystem のレイヤーとチェックポイントを管理する
-summary: TiDB Cloud Filesystem のレイヤーを安全に作成、確認、フォーク、チェックポイント、ロールバック、コミット、pack、restore する方法を学びます。
+summary: TiDB Cloud Filesystem のレイヤーを安全に作成、確認、フォーク、チェックポイント、ロールバック、コミット、パック、復元する方法を学びます。
 ---
 
 # TiDB Cloud Filesystem のレイヤーとチェックポイントを管理する

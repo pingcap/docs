@@ -52,7 +52,7 @@ ti fs import-file-system-token --from-file ./fs-token --region <filesystem-regio
 ti fs list-files --file-system-id <file-system-id> --path /
 ```
 
-既知のトークンがすべて失われた、または revoke された場合は、TiDB Cloud API キーを使用して別のオーナートークンを生成してください。
+既知のトークンがすべて失われた、または失効された場合は、TiDB Cloud API キーを使用して別のオーナートークンを生成してください。
 
 ```bash
 ti fs generate-file-system-token \
@@ -65,7 +65,7 @@ ti fs generate-file-system-token \
 
 ## Filesystem トークンが拒否される {#filesystem-token-is-rejected}
 
-データプレーンの HTTP 401 では、トークンが無効化されたのか、有効期限切れなのか、別のマシンで refresh されたのか、または revoke されたのかを区別できません。TiDB Cloud API キーを使用してリモートメタデータを確認してください。
+データプレーンの HTTP 401 では、トークンが無効化されたのか、有効期限切れなのか、別のマシンで更新されたのか、または失効されたのかを区別できません。TiDB Cloud API キーを使用してリモートメタデータを確認してください。
 
 ```bash
 ti fs list-file-system-tokens \

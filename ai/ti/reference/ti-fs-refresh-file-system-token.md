@@ -40,14 +40,14 @@ ti fs refresh-file-system-token
 
 ## 例 {#examples}
 
-- 選択されたローカル認証情報を refresh します。
+- 選択されたローカル認証情報を更新します。
 
     ```bash
     # ti atomically replaces the local credential after receiving the new token.
     ti fs refresh-file-system-token --file-system-id "<file-system-id>"
     ```
 
-- シークレットマネージャーから提供されたトークンを refresh します。
+- シークレットマネージャーから提供されたトークンを更新します。
 
     ```bash
     # Read the current token without echoing it or storing it in shell history.
@@ -62,7 +62,7 @@ ti fs refresh-file-system-token
     unset TI_FS_TOKEN
     ```
 
-- refresh 中にトークンの有効期間を変更します。
+- 更新中にトークンの有効期間を変更します。
 
     ```bash
     # Read the current token without echoing it or storing it in shell history.
