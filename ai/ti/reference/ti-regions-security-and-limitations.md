@@ -44,7 +44,7 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | 委任された vault の read、list、run、またはマウント | スコープに適した委任された vault トークン |
 | 成功したバックグラウンドマウント後の drain およびアンマウント | 同じ `HOME` 内の機密情報を含まないマウントロケーター |
 
-TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS 実行では、生成された SQL username/password による Basic 認証を TLS 上で使用します。これらの認証情報は相互に置き換えできません。
+TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS 実行では、生成された SQL のユーザー名とパスワードによる Basic 認証を TLS 上で使用します。これらの認証情報は相互に置き換えできません。
 
 ## セキュリティのベストプラクティス {#security-best-practices}
 
