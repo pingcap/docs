@@ -37,7 +37,7 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | `ti configure`、すべての `ti db` コントロールプレーン操作 | TiDB Cloud API public/private key |
 | `ti fs create-file-system` | TiDB Cloud API key |
 | `ti fs delete-file-system` | TiDB Cloud API key と file system ID |
-| Filesystem の extraction および embedding 設定の表示または更新 | TiDB Cloud API key と明示的な file system ID |
+| Filesystem の抽出および埋め込み設定の表示または更新 | TiDB Cloud API key と明示的な file system ID |
 | Filesystem トークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API key と明示的な file system ID |
 | Filesystem トークンの更新 | 現在の FS bearer トークンのみ |
 | リモートの file、レイヤー、pack、マウント、Git、ジャーナル、およびオーナー vault 操作 | FS オーナートークンまたは登録済みリソース認証情報 |
@@ -55,8 +55,8 @@ TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS �
 - マシン、CI ワークフロー、またはサンドボックスのクラスごとに別々の Filesystem トークンを使用してください。これにより、ある環境を無効化または失効しても、他の環境を中断せずに済みます。トークン名は運用上のラベルであり、一意識別子ではありません。トークンの変更は `token_id` でのみ行ってください。
 - 生成または更新されたトークンの平文は、1 回しか返されないため、すぐに取得してください。`TI_FS_TOKEN` から更新されたトークンは、外部シークレットマネージャーには書き戻されません。更新は冪等ではないため、ネットワーク障害が曖昧な場合は再試行しないでください。
 - 共有トークンのローテーションでは、まず置き換え用トークンを生成して配布し、アクセスを検証してから、古いトークンを無効化して削除してください。状態変更後、認証キャッシュが収束するまで約 10 秒かかります。
-- AI provider key は `TI_FS_AI_PROVIDER_API_KEY` を通じてのみ渡してください。TiDB Cloud CLI はこの値をローカルに永続化せず、Filesystem サービスはマスクされた形式でのみ返します。有効な設定を describe するまで、曖昧な障害後に AI 設定更新を再試行しないでください。
-- extraction を有効にすると、Filesystem のメディアが設定された extraction provider と共有されます。app-managed embedding を有効にすると、テキストまたは抽出された説明が設定された embedding provider と共有されます。いずれかの機能を有効にする前に、その provider のデータ保持およびセキュリティ条件を確認してください。
+- AI プロバイダーキーは `TI_FS_AI_PROVIDER_API_KEY` を通じてのみ渡してください。TiDB Cloud CLI はこの値をローカルに永続化せず、Filesystem サービスはマスクされた形式でのみ返します。有効な設定を describe するまで、曖昧な障害後に AI 設定更新を再試行しないでください。
+- 抽出を有効にすると、Filesystem のメディアが設定された抽出プロバイダーと共有されます。アプリケーション管理埋め込みを有効にすると、テキストまたは抽出された説明が設定された埋め込みプロバイダーと共有されます。いずれかの機能を有効にする前に、そのプロバイダーのデータ保持およびセキュリティ条件を確認してください。
 - 信頼できないエージェントや探索的なエージェントによる SQL 調査には `--read-only` を使用してください。DDL または権限管理には `--admin` のみを使用し、データ変更を意図する場合にのみ `--read-write` を使用してください。
 - 破壊的なコントロールプレーン操作の前に `--dry-run` を使用してください。`~/.ti/credentials`、リソース認証情報、および DB SQL 認証情報は、所有者のみが読み取り可能にしてください。
 - `/dev/fuse`、`SYS_ADMIN`、および制限のない AppArmor プロファイルへの Docker アクセスは、Dedicated で信頼できるコンテナにのみ付与してください。これらの設定はコンテナ分離を弱めます。
@@ -93,11 +93,11 @@ Ubuntu 26.04 では、さらに AppArmor により `fusermount3` が制限され
 - ジャーナルは追記専用であり、現在の公開コマンド体系にはジャーナルを削除するコマンドはありません。
 - Filesystem の list および describe コマンドは、TiDB Cloud 認証情報を使用してリージョンスコープのリモートインベントリを照会します。リージョンをまたいで集約はしません。
 - ローカル認証情報ストアは、プロファイルおよび Filesystem ごとに 1 つの選択済みトークンを保持します。すべてのリモートトークンをミラーリングするわけではありません。既知のトークン ID を持たない古い create/import 認証情報も引き続き使用できますが、リモートトークンメタデータと関連付けることはできません。
-- Filesystem の extraction および embedding provider 設定は任意です。未設定でも、リソース管理、ファイルアクセス、検索、layer、Git、ジャーナル、vault、またはマウントワークフローは妨げられません。
-- OpenAI provider interface は、embedding と image、audio、video extraction でサポートされます。Alibaba Cloud Model Studio Qwen ASR は audio extraction でのみサポートされます。その他のベンダーは、正確な OpenAI-compatible contract を通じた場合にのみ条件付きで互換性があります。ネイティブの Anthropic、Gemini、Vertex AI、Bedrock、および Azure OpenAI interface はサポートされません。
-- app-managed embedding には、正確に 1024 次元を返す provider model が必要です。`source=database_auto` を報告する Filesystem は database-managed embedding を使用しており、app-managed 設定を拒否します。
-- telemetry 管理コマンドは意図的に実装されていません。telemetry は `~/.ti/.preferences` または `TI_TELEMETRY` で制御してください。serverless-function デプロイ、Homebrew、および Scoop 配布は実装されていません。
-- TiDB Cloud CLI は、直接のファイル操作、layer、マウント、Git workspace、journal、および Vault 操作を含む、公開されているすべての Filesystem ランタイム動作について、インストール済みの `ti-drive9` companion に依存します。
+- Filesystem の抽出および埋め込みプロバイダー設定は任意です。未設定でも、リソース管理、ファイルアクセス、検索、レイヤー、Git、ジャーナル、vault、またはマウントワークフローは妨げられません。
+- OpenAI プロバイダーインターフェースは、埋め込みと画像、音声、動画の抽出でサポートされます。Alibaba Cloud Model Studio Qwen ASR は音声抽出でのみサポートされます。その他のベンダーは、正確な OpenAI 互換コントラクトを通じた場合にのみ条件付きで互換性があります。ネイティブの Anthropic、Gemini、Vertex AI、Bedrock、および Azure OpenAI インターフェースはサポートされません。
+- アプリケーション管理埋め込みには、正確に 1024 次元を返すプロバイダーモデルが必要です。`source=database_auto` を報告する Filesystem はデータベース管理埋め込みを使用しており、アプリケーション管理設定を拒否します。
+- テレメトリー管理コマンドは意図的に実装されていません。テレメトリーは `~/.ti/.preferences` または `TI_TELEMETRY` で制御してください。サーバーレス関数のデプロイ、Homebrew、および Scoop 配布は実装されていません。
+- TiDB Cloud CLI は、直接のファイル操作、レイヤー、マウント、Git ワークスペース、ジャーナル、および Vault 操作を含む、公開されているすべての Filesystem ランタイム動作について、インストール済みの `ti-drive9` companion に依存します。
 
 ## 関連ドキュメント {#related-documentation}
 
