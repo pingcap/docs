@@ -54,7 +54,7 @@ ti fs-git remove-git-worktree \
   --worktree-path /path/to/workspace/tidb-feature
 ```
 
-CLI はコミットされていない変更があるかどうかを確認し、worktree が dirty な場合は削除を拒否します。`--force` は、worktree 内のローカル変更を破棄してよいと判断した場合にのみ使用してください。
+CLI はコミットされていない変更があるかどうかを確認し、worktree がダーティな場合は削除を拒否します。`--force` は、worktree 内のローカル変更を破棄してよいと判断した場合にのみ使用してください。
 
 > **Note:**
 >
