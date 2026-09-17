@@ -119,7 +119,7 @@ TI_REGION_CODE="aws-us-east-1" \
 ti configure --profile ci --non-interactive
 ```
 
-`--tidb-cloud-public-key`、`--tidb-cloud-private-key`、および `--region-code` を指定することもできますが、secret を含むフラグはシェル履歴やプロセス一覧に残る可能性があります。
+`--tidb-cloud-public-key`、`--tidb-cloud-private-key`、および `--region-code` を指定することもできますが、シークレットを含むフラグはシェル履歴やプロセス一覧に残る可能性があります。
 
 ## プロファイルを選択し、そのリージョンを上書きする {#select-a-profile-and-override-its-region}
 
