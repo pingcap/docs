@@ -34,7 +34,7 @@ ti fs unmount-file-system
 - `--help`: ヘルプ情報を表示します。
 - `--ignore-absent`: 指定したパスにファイルシステムのマウント状態が存在しない場合でも、成功として返します。
 - `--no-auto-pack`: マウントに設定されたデフォルトの自動 pack アクションをスキップします。組み込みの `portable` プロファイルでは、pack path として `/` を選択することでこのアクションが有効になります。
-- `--pack-archive-path <string>`: アンマウント後に、マウントのローカル overlay をこのリモート archive path に pack します。このオプションを指定すると、マウントプロファイルにデフォルトの pack path がない場合でも pack が要求されます。
+- `--pack-archive-path <string>`: アンマウント後に、マウントのローカルオーバーレイをこのリモート archive path に pack します。このオプションを指定すると、マウントプロファイルにデフォルトの pack path がない場合でも pack が要求されます。
 - `--timeout <duration>`: マウントプロセスの終了を待機する時間です。\[default: `30s`]
 - `--version`: バージョン情報を表示します。
 

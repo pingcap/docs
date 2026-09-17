@@ -73,22 +73,22 @@ summary: Filesystem リソース、ファイル、レイヤー、パック、マ
 | [`delete-layer`](/ai/ti/reference/ti-fs-delete-layer.md) | レイヤーを論理的に破棄します。 |
 | [`rollback-layer`](/ai/ti/reference/ti-fs-rollback-layer.md) | 変更をコミットせずにレイヤーをロールバックします。 |
 | [`commit-layer`](/ai/ti/reference/ti-fs-commit-layer.md) | レイヤーの変更をベース Filesystem に適用します。 |
-| [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) | 選択したローカル overlay 状態を Filesystem にアーカイブします。 |
-| [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) | アーカイブからローカル overlay 状態を復元します。 |
+| [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) | 選択したローカルオーバーレイ状態を Filesystem にアーカイブします。 |
+| [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) | アーカイブからローカルオーバーレイ状態を復元します。 |
 
 ### レイヤー参照 {#layer-references}
 
 レイヤー参照には、レイヤー ID、一意のレイヤー名、または `tag:<key>=<value>` 形式のタグ参照を使用できます。たとえば `tag:run=123` です。名前とタグ参照は曖昧になる可能性があるため、自動化ではレイヤー ID を使用してください。
 
-### マウントプロファイルとローカル overlay {#mount-profiles-and-local-overlays}
+### マウントプロファイルとローカルオーバーレイ {#mount-profiles-and-local-overlays}
 
-ローカル overlay には、マウントプロファイルがリモート名前空間ではなくローカルマシン上に保持するファイルが保存されます。マウントプロファイルは、どのパスでその overlay を使用するかを定義します。
+ローカルオーバーレイには、マウントプロファイルがリモート名前空間ではなくローカルマシン上に保持するファイルが保存されます。マウントプロファイルは、どのパスでそのオーバーレイを使用するかを定義します。
 
 | マウントプロファイル | 動作 |
 | --- | --- |
-| `coding-agent` | バージョン管理メタデータ、依存関係ディレクトリ、キャッシュ、ビルド出力、および一般的な一時パスをローカル overlay に保持します。自動 pack パスは選択しません。 |
-| `portable` | `coding-agent` と同じローカルパスルールを使用し、デフォルトで完全な overlay を pack または unpack するため、マシン間や sandbox セッション間で移動できます。 |
-| `none` | ローカル overlay のパスルーティングと、自動 pack または unpack の動作を無効にします。 |
+| `coding-agent` | バージョン管理メタデータ、依存関係ディレクトリ、キャッシュ、ビルド出力、および一般的な一時パスをローカルオーバーレイに保持します。自動 pack パスは選択しません。 |
+| `portable` | `coding-agent` と同じローカルパスルールを使用し、デフォルトで完全なオーバーレイを pack または unpack するため、マシン間や sandbox セッション間で移動できます。 |
+| `none` | ローカルオーバーレイのパスルーティングと、自動 pack または unpack の動作を無効にします。 |
 
 ## マウントコマンド {#mount-commands}
 
