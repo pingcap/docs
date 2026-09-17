@@ -54,7 +54,7 @@ ti fs update-file-system-extract-configuration \
   --provider-protocol openai
 ```
 
-`openai` プロトコルは、画像、音声、および動画の抽出をサポートします。`qwen-asr` プロトコルは、Alibaba Cloud Model Studio を通じた音声抽出でのみサポートされます。別のプロバイダのエンドポイントでも、必要な OpenAI 互換 API コントラクトを実装していれば動作する可能性があります。Anthropic、Gemini、Vertex AI、Amazon Bedrock、および Azure OpenAI のネイティブインターフェースはサポートされていません。
+`openai` プロトコルは、画像、音声、および動画の抽出をサポートします。`qwen-asr` プロトコルは、Alibaba Cloud Model Studio を通じた音声抽出でのみサポートされます。別のプロバイダのエンドポイントでも、必要な OpenAI 互換 API 仕様を実装していれば動作する可能性があります。Anthropic、Gemini、Vertex AI、Amazon Bedrock、および Azure OpenAI のネイティブインターフェースはサポートされていません。
 
 メディアタイプの抽出を無効にするには、次のようにします。
 
