@@ -26,11 +26,11 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 ## 前提条件 {#prerequisites}
 
-全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud Starterでのみご利用いただけます。
+全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおける{{{ .starter }}}でのみご利用いただけます。
 
 - AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
-このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterインスタンスがあることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+このチュートリアルを完了するには、サポートされているリージョンに{{{ .starter }}}インスタンスがあることを確認してください。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ## さあ始めましょう {#get-started}
 
@@ -66,7 +66,7 @@ db = TiDBClient.connect(
 
 これらの接続パラメータは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
 
@@ -81,7 +81,7 @@ db = TiDBClient.connect(
     CA:       /etc/ssl/cert.pem
     ```
 
-    TiDB Cloud Starterインスタンスに接続するための対応するPythonコードは以下のとおりです。
+    {{{ .starter }}}インスタンスに接続するための対応するPythonコードは以下のとおりです。
 
     ```python
     db = TiDBClient.connect(

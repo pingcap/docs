@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-gemini/']
 
 > **Note:**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされている{{{ .starter }}}インスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 

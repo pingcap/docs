@@ -23,7 +23,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-django-orm/','/ja/tidb/d
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
-- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行します {#run-the-sample-app}
@@ -79,9 +79,9 @@ mysqlclientのインストールで問題が発生した場合は、mysqlclient�
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順に従ってください。
+{{{ .starter }}}インスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順に従ってください。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 

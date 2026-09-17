@@ -37,9 +37,9 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
     aws configure set region <your-region>
     ```
 
-- TiDB Cloud Starterインスタンス
+- {{{ .starter }}}インスタンス
 
-    お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)。
+    お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)。
 
 - [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)AWS アカウントと次のモデルへのアクセス:
 
@@ -56,7 +56,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)からTiDB接続情報を取得し、開発環境の環境変数を以下のように設定してください。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -245,9 +245,9 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### ステップ7. ベクトルデータをTiDB Cloud Starterに保存します。 {#step-7-save-the-vector-data-to-tidb-cloud-starter}
+### ステップ7. ベクトルデータを{{{ .starter }}}に保存します。 {#step-7-save-the-vector-data-to-tidb-cloud-starter}
 
-`demo.py`に、ベクトルデータをTiDB Cloud Starterインスタンスに保存するための以下のコードを追加します。
+`demo.py`に、ベクトルデータを{{{ .starter }}}インスタンスに保存するための以下のコードを追加します。
 
 ```python
 # ---- Saving Vectors to TiDB ----

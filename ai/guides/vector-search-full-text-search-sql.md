@@ -26,11 +26,11 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 ## さあ始めましょう {#get-started}
 
-全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud Starterでのみご利用いただけます。
+全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおける{{{ .starter }}}でのみご利用いただけます。
 
 - AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
-全文検索を使用する前に、 TiDB Cloud Starterインスタンスがサポートされているリージョンで作成されていることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+全文検索を使用する前に、 {{{ .starter }}}インスタンスがサポートされているリージョンで作成されていることを確認してください。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 全文検索を実行するには、以下の手順に従ってください。
 
