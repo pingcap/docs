@@ -34,21 +34,21 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 
 | 操作 | 必要な認証情報 |
 | --- | --- |
-| `ti configure`、すべての `ti db` コントロールプレーン操作 | TiDB Cloud API public/private key |
-| `ti fs create-file-system` | TiDB Cloud API key |
-| `ti fs delete-file-system` | TiDB Cloud API key と file system ID |
-| Filesystem の抽出および埋め込み設定の表示または更新 | TiDB Cloud API key と明示的な file system ID |
-| Filesystem トークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API key と明示的な file system ID |
+| `ti configure`、すべての `ti db` コントロールプレーン操作 | TiDB Cloud API public/private キー |
+| `ti fs create-file-system` | TiDB Cloud API キー |
+| `ti fs delete-file-system` | TiDB Cloud API キーと file system ID |
+| Filesystem の抽出および埋め込み設定の表示または更新 | TiDB Cloud API キーと明示的な file system ID |
+| Filesystem トークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API キーと明示的な file system ID |
 | Filesystem トークンの更新 | 現在の FS bearer トークンのみ |
 | リモートの file、レイヤー、pack、マウント、Git、ジャーナル、およびオーナー vault 操作 | FS オーナートークンまたは登録済みリソース認証情報 |
 | 委任された vault の read、list、run、またはマウント | スコープに適した委任された vault トークン |
-| 成功したバックグラウンドマウント後の drain およびアンマウント | 同じ `HOME` 内の非シークレットマウント locator |
+| 成功したバックグラウンドマウント後の drain およびアンマウント | 同じ `HOME` 内の機密情報を含まないマウントロケーター |
 
 TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS 実行では、生成された SQL username/password による Basic 認証を TLS 上で使用します。これらの認証情報は相互に置き換えできません。
 
 ## セキュリティのベストプラクティス {#security-best-practices}
 
-- TiDB Cloud API key は、ワークフローに必要なアクセス権のみを持つように作成してください。無人自動化で個人の管理者 key を再利用しないでください。
+- TiDB Cloud API キーは、ワークフローに必要なアクセス権のみを持つように作成してください。無人自動化で個人の管理者キーを再利用しないでください。
 - 自動化用の認証情報は、CI のシークレットストアまたは実行時シークレットマネージャーから注入してください。認証情報をソース管理、コンテナイメージ、シェルスクリプト、またはプロセス一覧やシェル履歴に表示される可能性のあるコマンドライン引数に置かないでください。
 - 完全な `~/.ti/` ディレクトリをエージェントのサンドボックスにコピーしないでください。既存の Filesystem には、`TI_FS_TOKEN` と `TI_REGION_CODE` のみを渡し、`TI_FS_FILE_SYSTEM_ID` は任意のアサーションとしてのみ使用してください。
 - FS オーナートークンは、その Filesystem への完全アクセスとして扱ってください。エージェントが一部のシークレットのみを必要とする場合は、最も狭い field scope と実用上最短の TTL を持つ vault grant を作成し、代わりに委任された vault トークンを渡してください。
