@@ -32,7 +32,7 @@ To ensure data consistency, {{{ .premium }}} allows importing CSV files into emp
     >
     > - To achieve better performance, it is recommended to limit the size of each compressed file to 100 MiB.
     > - The Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.
-    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and use the **Mapping Settings** in [Step 4](#step-4-import-csv-files) to import your source data to a single target table.
+    > - For uncompressed files, if you cannot update the CSV filenames according to the preceding rules in some cases (for example, the CSV file links are also used by your other programs), you can keep the filenames unchanged and configure manual source-to-target mappings in [Step 4](#step-4-import-csv-files).
 
 ## Step 2. Create the target table schemas
 
@@ -105,40 +105,39 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - **Storage Provider**: select **Amazon S3**.
-    - **Source Files URI**:
-        - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
-    - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create a new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into {{{ .premium }}}.
-        - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
+    - **Source Files URI**: enter the URI of the top-level folder that contains the source files. For example, `s3://sampledata/ingest/`.
+    - **Credentials**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
+        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into {{{ .premium }}}.
+        - **AWS Access Key**: enter the **Access Key ID** and **Secret Access Key**.
     - **Test Bucket Access**: click this button after the credentials are in place to confirm that {{{ .premium }}} can reach the bucket.
     - **Target Connection**: provide the TiDB username and password that will run the import. Optionally, click **Test Connection** to validate the credentials.
 
 4. Click **Next**.
 
-5. In the **Source Files Mapping** section, {{{ .premium }}} scans the bucket and proposes mappings between the source files and destination tables.
+5. In the **Mapping and Job Configuration** step, use **Source Files Mapping** to specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    The **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
-    > **Note:**
-    >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and {{{ .premium }}} automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
+    - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
 
-    - Leave automatic mapping enabled to apply the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables. Keep **CSV** selected as the data format.
+    - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
-    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass schema compatibility validation.
+        - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `[]` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`, and `my-data-[1-4].csv` matches `my-data-1.csv` through `my-data-4.csv`.
+        - **Target Database** and **Target Table**: enter the target database and table for the matched files.
+        - To add another mapping, click **+**.
 
-    <!-- future feature -->
-    > **Note:**
-    >
-    > Manual mapping is coming soon. When the toggle becomes available, clear the automatic mapping option and configure the mapping manually:
-    >
-    > - **Source**: enter a filename pattern such as `TableName.01.csv`. Wildcards `*` and `?` are supported (for example, `my-data*.csv`).
-    > - **Target Database** and **Target Table**: choose the destination objects for the matched files.
+    In the **Job Configuration** section, review the following settings:
 
-6. {{{ .premium }}} automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+    - **Job Name**: keep the generated name or enter a name for the import job.
+    - **Advanced Options**: expand this section to view **Ignore compatibility checks (advanced)**. Leave this option disabled unless you intentionally need to bypass the pre-import compatibility checks.
 
-7. When the import progress shows **Completed**, check the imported tables.
+6. Click **Next** to run the pre-check. Review the scan results and verify the source files and target tables.
+
+    By default, **Skip first** is `0`. If each source CSV file contains a header row, click **edit CSV configuration here** and set **Skip first** to `1`. This setting applies to every matched CSV file.
+
+7. Click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
@@ -159,38 +158,37 @@ To import the CSV files to {{{ .premium }}}, take the following steps:
 3. On the **Import Data from Cloud Storage** page, provide the following information:
 
     - **Storage Provider**: select **Alibaba Cloud OSS**.
-    - **Source Files URI**:
-        - When importing one file, enter the source file URI in the following format `oss://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `oss://sampledata/ingest/TableName.01.csv`.
-        - When importing multiple files, enter the source folder URI in the following format `oss://[bucket_name]/[data_source_folder]/`. For example, `oss://sampledata/ingest/`.
-    - **Credential**: you can use an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
+    - **Source Files URI**: enter the URI of the top-level folder that contains the source files. For example, `oss://sampledata/ingest/`.
+    - **AccessKey ID** and **AccessKey Secret**: enter an AccessKey pair to access your bucket. For more information, see [Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
     - **Test Bucket Access**: click this button after the credentials are in place to confirm that {{{ .premium }}} can reach the bucket.
     - **Target Connection**: provide the TiDB username and password that will run the import. Optionally, click **Test Connection** to validate the credentials.
 
 4. Click **Next**.
 
-5. In the **Source Files Mapping** section, {{{ .premium }}} scans the bucket and proposes mappings between the source files and destination tables.
+5. In the **Mapping and Job Configuration** step, use **Source Files Mapping** to specify how source files are mapped to target tables.
 
-    When a directory is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
+    The **Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is selected by default.
 
-    > **Note:**
-    >
-    > When a single file is specified in **Source Files URI**, the **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping** option is not displayed, and {{{ .premium }}} automatically populates the **Source** field with the file name. In this case, you only need to select the target database and table for data import.
+    - To use automatic mapping, leave the option selected. {{{ .premium }}} applies the [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables.
 
-    - Leave automatic mapping enabled to apply the [file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) to your source files and target tables. Keep **CSV** selected as the data format.
+    - To configure mappings manually, deselect the automatic mapping option, and then configure a mapping for each target table:
 
-    - **Advanced options**: expand the panel to view the `Ignore compatibility checks (advanced)` toggle. Leave it disabled unless you intentionally want to bypass schema compatibility validation.
+        - **Source**: enter a source file pattern relative to the **Source Files URI**. The pattern supports `*` and `[]` wildcards. For example, `my-data*.csv` matches all CSV files whose names start with `my-data`, and `my-data-[1-4].csv` matches `my-data-1.csv` through `my-data-4.csv`.
+        - **Target Database** and **Target Table**: enter the target database and table for the matched files.
+        - To add another mapping, click **+**.
 
-    <!-- future feature -->
-    > **Note:**
-    >
-    > Manual mapping is coming soon. When the toggle becomes available, clear the automatic mapping option and configure the mapping manually:
-    >
-    > - **Source**: enter a filename pattern such as `TableName.01.csv`. Wildcards `*` and `?` are supported (for example, `my-data*.csv`).
-    > - **Target Database** and **Target Table**: choose the destination objects for the matched files.
+    In the **Job Configuration** section, review the following settings:
 
-6. {{{ .premium }}} automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+    - **Job Name**: keep the generated name or enter a name for the import job.
+    - **Advanced Options**: expand this section to view **Ignore compatibility checks (advanced)**. Leave this option disabled unless you intentionally need to bypass the pre-import compatibility checks.
 
-7. When the import progress shows **Completed**, check the imported tables.
+6. Click **Next** to run the pre-check. Review the scan results and verify the source files and target tables.
+
+    By default, **Skip first** is `0`. If each source CSV file contains a header row, click **edit CSV configuration here** and set **Skip first** to `1`. This setting applies to every matched CSV file.
+
+7. Click **Start Import**.
+
+8. When the import progress shows **Completed**, check the imported tables.
 
 </div>
 
@@ -209,10 +207,10 @@ If you get an importing error, do the following:
 
 ### Resolve warnings during data import
 
-After clicking **Start Import**, if you see a warning message such as `can't find the corresponding source files`, resolve this by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes.
+If the pre-check shows a warning such as `can't find the corresponding source files`, resolve it by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or returning to **Source Files Mapping** and configuring manual mappings.
 
-After resolving these issues, you need to import the data again.
+After resolving the issues, run the pre-check again.
 
 ### Zero rows in the imported tables
 
-After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, it means no data files matched the Bucket URI that you entered. In this case, resolve this issue by providing the correct source file, renaming the existing one according to [Naming Conventions for Data Import](/tidb-cloud/naming-conventions-for-data-import.md), or using **Advanced Settings** to make changes. After that, import those tables again.
+After the import progress shows **Completed**, check the imported tables. If the number of rows is zero, verify that the **Source Files URI** is correct and that the source files either follow the [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping or match the manual source patterns. Correct the URI, rename the files, or configure manual mappings, and then import the tables again.
