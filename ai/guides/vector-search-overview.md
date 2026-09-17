@@ -72,3 +72,9 @@ TiDBベクトル検索を使い始めるには、次のドキュメントを参�
 
 - [Python を使用してベクトル検索を始める](/ai/quickstart-via-python.md)
 - [SQL を使用してベクトル検索を始める](/ai/quickstart-via-sql.md)
+
+## 関連リソース {#related-resources}
+
+<RelatedResources>
+  <ResourceCard title="What is a Context Platform? A New Pattern for AI Agents in Production" type="blog" link="https://www.pingcap.com/blog/ai-application-data-layer-context-platform/" imgSrc="https://static.pingcap.com/files/2026/05/08132144/Copy-of-Blog-LinkedIn.png" author="Li Shen" date="2026-05-07" />
+</RelatedResources>
