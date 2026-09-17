@@ -60,7 +60,6 @@ The following provides compatibility changes you need to know when you upgrade f
 - TiDB v7.5.7 [compatibility changes](/releases/release-7.5.7.md#compatibility-changes)
 - [TiDB v7.5.8 Release Notes](https://docs.pingcap.com/tidb/stable/release-7.5.8/)
 
-
 ### Step 2: Upgrade TiUP or TiUP offline mirror
 
 Before upgrading your TiDB cluster, you first need to upgrade TiUP or TiUP mirror.
