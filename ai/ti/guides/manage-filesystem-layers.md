@@ -90,7 +90,7 @@ ti fs list-layer-chain --layer-ref experiment
 
 ## ローカル状態を別のマシンに移動する {#move-local-state-to-another-machine}
 
-FUSE マウントが write-back cache を使用している場合、一部のデータがローカルの overlay directory に残ることがあります。このローカル状態を別のマシンに移動するには、明示的なリモート archive path に pack します。
+FUSE マウントが write-back キャッシュを使用している場合、一部のデータがローカルのオーバーレイディレクトリに残ることがあります。このローカル状態を別のマシンに移動するには、明示的なリモートアーカイブパスにパックします。
 
 ```shell
 ti fs pack-file-system \
@@ -98,7 +98,7 @@ ti fs pack-file-system \
   --archive-path /workspace-overlay.tar.gz
 ```
 
-移動先のマシンでは、archive をローカル overlay root に restore します。
+移動先のマシンでは、アーカイブをローカルオーバーレイルートに復元します。
 
 ```shell
 ti fs unpack-file-system \
@@ -108,7 +108,7 @@ ti fs unpack-file-system \
   --archive-path /workspace-overlay.tar.gz
 ```
 
-移動先のマシンで Filesystem をマウントするときは、同じローカル overlay root を使用してください。pack と unpack のすべてのオプションについては、[`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) および [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) のリファレンスを参照してください。
+移動先のマシンで Filesystem をマウントするときは、同じローカルオーバーレイルートを使用してください。pack と unpack のすべてのオプションについては、[`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) および [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) のリファレンスを参照してください。
 
 ## 次のステップ {#what-s-next}
 
