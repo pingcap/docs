@@ -213,7 +213,7 @@
   - 問題シナリオ
     - スロークエリ
       - [スロークエリを特定する](/identify-slow-queries.md)
-      - [低速クエリのトリガールールを設定する](/config-slow-query-trigger-rules.md)
+      - [スロークエリのトリガールールを設定する](/config-slow-query-trigger-rules.md)
       - [スロークエリを分析する](/analyze-slow-queries.md)
     - [TiDB メモリ不足](/troubleshoot-tidb-oom.md)
     - [ホットスポット](/troubleshoot-hot-spot-issues.md)
