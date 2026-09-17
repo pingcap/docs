@@ -22,7 +22,7 @@ The database kernel is the core engine that processes your SQL queries and manag
 | Plan | Kernel | Default kernel version for newly created instances or clusters |
 | --- | --- | --- |
 | TiDB Cloud **Starter** | Running on a customized [TiDB X](/tidb-cloud/tidb-x-architecture.md) engine based on the classic TiDB kernel. | [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) |
-| TiDB Cloud **Essential** | <ul><li>TiDB Cloud Essential instances created on or after July 16, 2026, are running on the [TiDB-X-CLOUD.202603.1](https://docs.pingcap.com/tidb-cloud/releases/tidb-x-cloud.202603.1.md) kernel.</li><li>TiDB Cloud Essential instances created before July 16, 2026, are running on the [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) kernel.</li></ul> | [TiDB-X-CLOUD.202603.1](https://docs.pingcap.com/tidb-cloud/releases/tidb-x-cloud.202603.1.md) |
+| TiDB Cloud **Essential** | <ul><li>TiDB Cloud Essential instances created on or after June 30, 2026, are running on the [TiDB-X-CLOUD.202603.1](https://docs.pingcap.com/tidb-cloud/releases/tidb-x-cloud.202603.1.md) kernel.</li><li>TiDB Cloud Essential instances created before June 30, 2026, are running on the [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) kernel.</li></ul> | [TiDB-X-CLOUD.202603.1](https://docs.pingcap.com/tidb-cloud/releases/tidb-x-cloud.202603.1.md) |
 | TiDB Cloud **Premium** | Running on the [TiDB X](/tidb-cloud/tidb-x-architecture.md) kernel. | [TiDB-X-CLOUD.202603.1](/releases/tidb-x-cloud.202603.1.md) |
 | TiDB Cloud **Dedicated** | Running on the classic TiDB kernel. | [TiDB v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/) |
 
