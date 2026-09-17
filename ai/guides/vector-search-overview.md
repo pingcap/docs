@@ -1,27 +1,27 @@
 ---
-title: Vector Search の概要
-summary: TiDB の Vector Search について学びます。この機能は、ドキュメント、画像、音声、動画など、さまざまなデータ型に対してセマンティック類似検索を実行するための高度な検索ソリューションを提供します。
+title: ベクトル検索の概要
+summary: TiDB のベクトル検索について学びます。この機能は、ドキュメント、画像、音声、動画など、さまざまなデータ型に対してセマンティック類似検索を実行するための高度な検索ソリューションを提供します。
 aliases: ['/ja/tidb/stable/vector-search-overview/','/ja/tidb/dev/vector-search-overview/','/ja/tidbcloud/vector-search-overview/']
 ---
 
-# Vector Search の概要
+# ベクトル検索の概要
 
-Vector Search は、ドキュメント、画像、音声、動画などの多様なデータ型に対して、セマンティック類似検索を行うための強力なソリューションを提供します。これにより、開発者は MySQL の知識を活用して、生成 AI の機能で強化されたスケーラブルなアプリケーションを構築でき、高度な検索機能の統合を簡素化できます。
+ベクトル検索は、ドキュメント、画像、音声、動画などの多様なデータ型に対して、セマンティック類似検索を行うための強力なソリューションを提供します。これにより、開発者は MySQL の知識を活用して、生成 AI の機能で強化されたスケーラブルなアプリケーションを構築でき、高度な検索機能の統合を簡素化できます。
 
 > **Note:**
 >
-> - Vector Search 機能はパブリックプレビューです。予告なく変更される場合があります。バグを見つけた場合は、GitHub で [issue](https://github.com/pingcap/tidb/issues) を報告できます。
-> - Vector Search 機能は [TiDB Self-Managed](/overview.md) および [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) で利用できます。TiDB Self-Managed の場合、TiDB のバージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨します）。
+> - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを見つけた場合は、GitHub で [issue](https://github.com/pingcap/tidb/issues) を報告できます。
+> - ベクトル検索機能は [TiDB Self-Managed](/overview.md) および [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) で利用できます。TiDB Self-Managed の場合、TiDB のバージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨します）。
 
 ## 概念 {#concepts}
 
-Vector Search は、データの意味を重視して関連性の高い結果を返す検索手法です。
+ベクトル検索は、データの意味を重視して関連性の高い結果を返す検索手法です。
 
-従来の全文検索は、正確なキーワード一致や単語頻度に依存しますが、Vector Search はさまざまなデータ型（テキスト、画像、音声など）を高次元ベクトルに変換し、それらのベクトル間の類似度に基づいて検索します。この検索手法は、データの意味やコンテキスト情報を捉えるため、ユーザーの意図をより正確に理解できます。
+従来の全文検索は、正確なキーワード一致や単語頻度に依存しますが、ベクトル検索はさまざまなデータ型（テキスト、画像、音声など）を高次元ベクトルに変換し、それらのベクトル間の類似度に基づいて検索します。この検索手法は、データの意味やコンテキスト情報を捉えるため、ユーザーの意図をより正確に理解できます。
 
-検索語がデータベース内の内容と完全に一致しない場合でも、Vector Search はデータの意味を分析することで、ユーザーの意図に沿った結果を返すことができます。
+検索語がデータベース内の内容と完全に一致しない場合でも、ベクトル検索はデータの意味を分析することで、ユーザーの意図に沿った結果を返すことができます。
 
-たとえば、`a swimming animal` を全文検索すると、これらの正確なキーワードを含む結果しか返されません。一方、Vector Search では、結果に正確なキーワードが含まれていなくても、魚やアヒルなど、ほかの泳ぐ動物に関する結果を返すことができます。
+たとえば、`a swimming animal` を全文検索すると、これらの正確なキーワードを含む結果しか返されません。一方、ベクトル検索では、結果に正確なキーワードが含まれていなくても、魚やアヒルなど、ほかの泳ぐ動物に関する結果を返すことができます。
 
 ### ベクトル埋め込み {#vector-embedding}
 
@@ -29,7 +29,7 @@ Vector Search は、データの意味を重視して関連性の高い結果を
 
 ベクトル埋め込みは機械学習において不可欠であり、セマンティック類似検索の基盤となります。
 
-TiDB は、ベクトル埋め込みの保存と取得を最適化するために設計された [Vector data types](/ai/reference/vector-search-data-types.md) と [Vector search index](/ai/reference/vector-search-index.md) を導入しています。これにより、AI アプリケーションでの活用が強化されます。これらのデータ型を使用して、TiDB にベクトル埋め込みを保存し、Vector Search クエリを実行して最も関連性の高いデータを見つけることができます。
+TiDB は、ベクトル埋め込みの保存と取得を最適化するために設計された [Vector data types](/ai/reference/vector-search-data-types.md) と [Vector search index](/ai/reference/vector-search-index.md) を導入しています。これにより、AI アプリケーションでの活用が強化されます。これらのデータ型を使用して、TiDB にベクトル埋め込みを保存し、ベクトル検索クエリを実行して最も関連性の高いデータを見つけることができます。
 
 ### 埋め込みモデル {#embedding-model}
 
@@ -39,11 +39,11 @@ TiDB は、ベクトル埋め込みの保存と取得を最適化するために
 
 特定のデータ型に対するベクトル埋め込みの生成方法については、埋め込みモデルの統合チュートリアルまたは例を参照してください。
 
-## Vector Search の仕組み {#how-vector-search-works}
+## ベクトル検索の仕組み {#how-vector-search-works}
 
-生データをベクトル埋め込みに変換して TiDB に保存した後、アプリケーションは Vector Search クエリを実行して、ユーザーのクエリに対して意味的または文脈的に最も関連するデータを見つけることができます。
+生データをベクトル埋め込みに変換して TiDB に保存した後、アプリケーションはベクトル検索クエリを実行して、ユーザーのクエリに対して意味的または文脈的に最も関連するデータを見つけることができます。
 
-TiDB Vector Search は、[distance function](/ai/reference/vector-search-functions-and-operators.md) を使用して、指定されたベクトルとデータベースに保存されているベクトルとの距離を計算し、上位 k 個の最近傍（KNN）ベクトルを特定します。クエリ内で指定されたベクトルに最も近いベクトルが、意味的に最も類似したデータを表します。
+TiDBベクトル検索は、[distance function](/ai/reference/vector-search-functions-and-operators.md) を使用して、指定されたベクトルとデータベースに保存されているベクトルとの距離を計算し、上位 k 個の最近傍（KNN）ベクトルを特定します。クエリ内で指定されたベクトルに最も近いベクトルが、意味的に最も類似したデータを表します。
 
 ![The Schematic TiDB Vector Search](/media/vector-search/embedding-search.png)
 
@@ -56,11 +56,11 @@ TiDB Vector Search は、[distance function](/ai/reference/vector-search-functio
 
 ### Retrieval-Augmented Generation (RAG) {#retrieval-augmented-generation-rag}
 
-Retrieval-Augmented Generation (RAG) は、大規模言語モデル（LLM）の出力を最適化するために設計されたアーキテクチャです。Vector Search を使用することで、RAG アプリケーションはベクトル埋め込みをデータベースに保存し、LLM が応答を生成する際に追加コンテキストとして関連ドキュメントを取得できます。これにより、回答の品質と関連性が向上します。
+Retrieval-Augmented Generation (RAG) は、大規模言語モデル（LLM）の出力を最適化するために設計されたアーキテクチャです。ベクトル検索を使用することで、RAG アプリケーションはベクトル埋め込みをデータベースに保存し、LLM が応答を生成する際に追加コンテキストとして関連ドキュメントを取得できます。これにより、回答の品質と関連性が向上します。
 
 ### セマンティック検索 {#semantic-search}
 
-セマンティック検索は、単純にキーワードを一致させるのではなく、クエリの意味に基づいて結果を返す検索技術です。埋め込みを使用して、異なる言語やさまざまな種類のデータ（テキスト、画像、音声など）にまたがる意味を解釈します。その後、Vector Search アルゴリズムがこれらの埋め込みを使用して、ユーザーのクエリを満たす最も関連性の高いデータを見つけます。
+セマンティック検索は、単純にキーワードを一致させるのではなく、クエリの意味に基づいて結果を返す検索技術です。埋め込みを使用して、異なる言語やさまざまな種類のデータ（テキスト、画像、音声など）にまたがる意味を解釈します。その後、ベクトル検索アルゴリズムがこれらの埋め込みを使用して、ユーザーのクエリを満たす最も関連性の高いデータを見つけます。
 
 ### レコメンデーションエンジン {#recommendation-engine}
 
@@ -68,7 +68,7 @@ Retrieval-Augmented Generation (RAG) は、大規模言語モデル（LLM）の�
 
 ## 関連情報 {#see-also}
 
-TiDB Vector Search を使い始めるには、次のドキュメントを参照してください。
+TiDBベクトル検索を使い始めるには、次のドキュメントを参照してください。
 
-- [Python を使用して Vector Search を始める](/ai/quickstart-via-python.md)
-- [SQL を使用して Vector Search を始める](/ai/quickstart-via-sql.md)
+- [Python を使用してベクトル検索を始める](/ai/quickstart-via-python.md)
+- [SQL を使用してベクトル検索を始める](/ai/quickstart-via-sql.md)
