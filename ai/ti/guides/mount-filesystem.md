@@ -110,7 +110,7 @@ sudo apparmor_parser -r /etc/apparmor.d/fusermount3
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-FUSE マウントをオンラインのまま維持しつつ durability barrier が必要な場合（たとえば、layer checkpoint を作成する前など）は、`drain-file-system` を明示的に実行します。このコマンドは、アンマウントせずに保留中の書き込みをフラッシュし、それらが完了するまで待機します。
+FUSE マウントをオンラインのまま維持しつつ耐久性バリアが必要な場合（たとえば、レイヤーのチェックポイントを作成する前など）は、`drain-file-system` を明示的に実行します。このコマンドは、アンマウントせずに保留中の書き込みをフラッシュし、それらが完了するまで待機します。
 
 ```shell
 ti fs drain-file-system --mount-path /path/to/workspace --timeout 30s
