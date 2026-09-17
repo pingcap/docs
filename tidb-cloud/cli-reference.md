@@ -9,16 +9,16 @@ summary: TiDB Cloud StarterおよびEssential向けのticloud CLIの概要を説
 >
 > TiDB Cloudは現在、対象範囲が異なる2つのCLI、[`ti`](https://github.com/tidbcloud/ti-cli) と [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli) を提供しています。
 >
-> - `ti` は、必要な操作をサポートしている場合、TiDB Cloud Starterでの新しい自動化ワークフローに推奨されます。`ti` を使用してTiDB Cloud Filesystemsを管理することもできます。開始するには、[TiDB Cloud CLI (`ti`) Quick Start](/ai/ti/ti-quick-start.md) を参照してください。
+> - `ti` は、必要な操作をサポートしている場合、TiDB Cloud Starterでの新しい自動化ワークフローに推奨されます。`ti` を使用してTiDB Cloud Filesystemsを管理することもできます。開始するには、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) を参照してください。
 > - `ticloud` は引き続きTiDB Cloud Essential向けのCLIであり、データのインポート、データのエクスポート、監査ログ操作など、[`ti`](/ai/ti/ti-overview.md) がまだサポートしていない操作にも使用されます。
 >
 > `ti` または `ticloud` をいつ使用するかの詳細については、[`ti` と `ticloud` の違い](/ai/ti/ti-overview.md#differences-between-ti-and-ticloud) を参照してください。
 
-The `ticloud` CLIはコマンドラインインターフェースであり、ターミナルからTiDB Cloudを操作できます。TiDB Cloud CLIを使用すると、 {{{ .starter }}}およびEssentialインスタンスを簡単に管理したり、インスタンスにデータをインポートしたり、その他のCLIワークフローを実行したりできます。
+`ticloud` CLIはコマンドラインインターフェースであり、ターミナルからTiDB Cloudを操作できます。TiDB Cloud CLIを使用すると、 {{{ .starter }}}およびEssentialインスタンスを簡単に管理したり、インスタンスへのデータのインポートやエクスポートを行ったり、その他のCLIワークフローを実行したりできます。
 
 > **Note:**
 >
-> The `ticloud` CLIは現在パブリックプレビューであり、TiDB Cloud Dedicatedクラスターをサポートしていません。
+> `ticloud` CLIは現在パブリックプレビューであり、TiDB Cloud Dedicatedクラスターをサポートしていません。
 
 ## 始める前に {#before-you-begin}
 

@@ -18,7 +18,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
   `ti` を直接使用することも、スクリプト、CI ジョブ、AI エージェントに実行させて TiDB Cloud ワークフローを自動化することもできます。`ti` を使用すると、TiDB Cloud Starter インスタンスの作成と管理、SQL ステートメントの実行、ファイルコマンドまたはサポートされているマウントを通じた永続的な Filesystem ワークスペースの作成とアクセスが可能です。デフォルトの JSON 出力、JMESPath 出力クエリ、および該当するコマンドでの `--wait` と `--dry-run` のサポートにより、自動化が簡素化されます。
 
-  詳細は、[Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) および [TiDB Cloud CLI (`ti`) Overview](/ai/ti/ti-overview.md) を参照してください。
+  詳細は、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) および [TiDB Cloud CLI (`ti`) の概要](/ai/ti/ti-overview.md) を参照してください。
 
 ## 2026年9月8日 {#september-8-2026}
 
