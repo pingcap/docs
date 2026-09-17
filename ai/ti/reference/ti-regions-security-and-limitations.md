@@ -40,7 +40,7 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | Filesystem の extraction および embedding 設定の表示または更新 | TiDB Cloud API key と明示的な file system ID |
 | Filesystem トークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API key と明示的な file system ID |
 | Filesystem トークンの更新 | 現在の FS bearer トークンのみ |
-| リモートの file、レイヤー、pack、マウント、Git、journal、およびオーナー vault 操作 | FS オーナートークンまたは登録済みリソース認証情報 |
+| リモートの file、レイヤー、pack、マウント、Git、ジャーナル、およびオーナー vault 操作 | FS オーナートークンまたは登録済みリソース認証情報 |
 | 委任された vault の read、list、run、またはマウント | スコープに適した委任された vault トークン |
 | 成功したバックグラウンドマウント後の drain およびアンマウント | 同じ `HOME` 内の非シークレットマウント locator |
 
@@ -90,10 +90,10 @@ Ubuntu 26.04 では、さらに AppArmor により `fusermount3` が制限され
 - データベース管理の対象は TiDB Cloud Starter であり、すべての TiDB Cloud クラスター tier ではありません。
 - SQL 実行では、1 回の呼び出しにつき 1 つのステートメントのみ受け付けます。
 - read-write はデフォルトの SQL ロールです。セキュリティに敏感な自動化では、明示的なロールフラグを使用してください。
-- journal は追記専用であり、現在の公開コマンド体系には journal を削除するコマンドはありません。
+- ジャーナルは追記専用であり、現在の公開コマンド体系にはジャーナルを削除するコマンドはありません。
 - Filesystem の list および describe コマンドは、TiDB Cloud 認証情報を使用してリージョンスコープのリモートインベントリを照会します。リージョンをまたいで集約はしません。
 - ローカル認証情報ストアは、プロファイルおよび Filesystem ごとに 1 つの選択済みトークンを保持します。すべてのリモートトークンをミラーリングするわけではありません。既知のトークン ID を持たない古い create/import 認証情報も引き続き使用できますが、リモートトークンメタデータと関連付けることはできません。
-- Filesystem の extraction および embedding provider 設定は任意です。未設定でも、リソース管理、ファイルアクセス、検索、layer、Git、journal、vault、またはマウントワークフローは妨げられません。
+- Filesystem の extraction および embedding provider 設定は任意です。未設定でも、リソース管理、ファイルアクセス、検索、layer、Git、ジャーナル、vault、またはマウントワークフローは妨げられません。
 - OpenAI provider interface は、embedding と image、audio、video extraction でサポートされます。Alibaba Cloud Model Studio Qwen ASR は audio extraction でのみサポートされます。その他のベンダーは、正確な OpenAI-compatible contract を通じた場合にのみ条件付きで互換性があります。ネイティブの Anthropic、Gemini、Vertex AI、Bedrock、および Azure OpenAI interface はサポートされません。
 - app-managed embedding には、正確に 1024 次元を返す provider model が必要です。`source=database_auto` を報告する Filesystem は database-managed embedding を使用しており、app-managed 設定を拒否します。
 - telemetry 管理コマンドは意図的に実装されていません。telemetry は `~/.ti/.preferences` または `TI_TELEMETRY` で制御してください。serverless-function デプロイ、Homebrew、および Scoop 配布は実装されていません。
