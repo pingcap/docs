@@ -241,4 +241,4 @@ ti fs delete-file-system \
 
 ## 問題を報告する {#report-a-problem}
 
-TiDB Cloud CLI のバージョン、OS と architecture、コマンド名、安定したエラーコード、および秘匿情報を除去したログを含めてください。API キー、FS または vault トークン、DB パスワード、機密データを含む SQL、またはファイル内容は絶対に含めないでください。問題の報告先は [github.com/tidbcloud/ti-cli/issues](https://github.com/tidbcloud/ti-cli/issues) です。
+TiDB Cloud CLI のバージョン、OS とアーキテクチャ、コマンド名、安定したエラーコード、および秘匿情報を除去したログを含めてください。API キー、FS または vault トークン、DB パスワード、機密データを含む SQL、またはファイル内容は絶対に含めないでください。問題の報告先は [github.com/tidbcloud/ti-cli/issues](https://github.com/tidbcloud/ti-cli/issues) です。
