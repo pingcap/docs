@@ -47,7 +47,7 @@ ti fs-vault list-audit-events
     ti fs-vault list-audit-events --file-system-id <file-system-id> --secret-name db-prod --limit 20
     ```
 
-- agent の最近のイベントを一覧表示します。
+- エージェントの最近のイベントを一覧表示します。
 
     ```bash
     # Filter the audit trail to one delegated identity and time range.
