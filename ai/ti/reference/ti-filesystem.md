@@ -53,7 +53,7 @@ summary: Filesystem リソース、ファイル、レイヤー、パック、マ
 | [`move-file`](/ai/ti/reference/ti-fs-move-file.md) | リモートパスを移動または名前変更します。 |
 | [`delete-file`](/ai/ti/reference/ti-fs-delete-file.md) | リモートファイルまたはディレクトリを削除します。 |
 | [`create-directory`](/ai/ti/reference/ti-fs-create-directory.md) | リモートディレクトリを作成します。 |
-| [`chmod-file`](/ai/ti/reference/ti-fs-chmod-file.md) | POSIX スタイルの mode メタデータを変更します。 |
+| [`chmod-file`](/ai/ti/reference/ti-fs-chmod-file.md) | POSIX スタイルのモードメタデータを変更します。 |
 | [`create-symlink`](/ai/ti/reference/ti-fs-create-symlink.md) | シンボリックリンクを作成します。 |
 | [`create-hardlink`](/ai/ti/reference/ti-fs-create-hardlink.md) | ハードリンクを作成します。 |
 | [`search-file-content`](/ai/ti/reference/ti-fs-search-file-content.md) | 抽出されたファイルコンテンツと説明を検索します。 |
