@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud CLI のトラブルシューティング
-summary: TiDB Cloud CLI の認証、プロジェクト、Filesystem の選択、companion、quota、SQL ユーザー、マウント、中断されたクリーンアップ失敗を診断します。
+summary: TiDB Cloud CLI の認証、プロジェクト、Filesystem の選択、companion、クォータ、SQL ユーザー、マウント、中断されたクリーンアップ失敗を診断します。
 ---
 
 # TiDB Cloud CLI のトラブルシューティング
@@ -125,16 +125,16 @@ ti --version
 
 任意のスタンドアロン Drive9 バイナリをその場所にコピーしないでください。
 
-## Starter または Filesystem の作成が quota に達する {#starter-or-filesystem-creation-reaches-quota}
+## Starter または Filesystem の作成がクォータに達する {#starter-or-filesystem-creation-reaches-quota}
 
-quota および capacity エラーは、組織が無料の Starter 上限に達したことを意味する場合があります。新しく作成する前に、既存のリソースを一覧表示してください。
+クォータおよび容量エラーは、組織が無料の Starter 上限に達したことを意味する場合があります。新しく作成する前に、既存のリソースを一覧表示してください。
 
 ```bash
 ti db list-db-clusters --db-cluster-type starter --output text
 ti fs list-file-systems --output text
 ```
 
-自動化を通すために無関係なリソースを削除しないでください。Starter の利用上限により、billing の設定が必要になる場合があります。
+自動化を通すために無関係なリソースを削除しないでください。Starter の利用上限により、課金の設定が必要になる場合があります。
 
 ## SQL 認証情報が見つからない {#sql-credentials-are-missing}
 
