@@ -68,7 +68,7 @@ ti fs mount-file-system
 - `--remote-path <string>`: マウントする TiDB Cloud file system のルートパス。\[default: /]
 - `--unpack-archive-path <string>`: マウント前にパックされたアーカイブを復元します。
 - `--version`: バージョン情報を表示します。
-- `--write-back-cache`: flush 時に file system へ書き込む前に、FUSE の書き込みをローカルに永続化します。この動作はデフォルトで有効です。無効にするには `--write-back-cache=false` を指定します。常に読み取り専用であるチェックポイントマウントでは使用できません。\[default: true]
+- `--write-back-cache`: フラッシュ時にファイルシステムへ書き込む前に、FUSE の書き込みをローカルに永続化します。この動作はデフォルトで有効です。無効にするには `--write-back-cache=false` を指定します。常に読み取り専用であるチェックポイントマウントでは使用できません。\[default: true]
 
 すべてのコマンドで共有されるオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
