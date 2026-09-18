@@ -29,7 +29,7 @@ ti fs update-file-system-embedding-configuration
 - `--enabled <boolean>`: 完全なプロバイダー設定とともに `true` を指定するか、プロバイダーオプションなしで `false` を指定します。\[required]
 - `--file-system-id <string>`: 変更不可の Filesystem ID を設定します。\[required]
 - `--dry-run`: Filesystem バックエンドまたは埋め込みプロバイダーに接続せずに、リクエストを検証します。
-- `--provider-api-base <string>`: 有効な HTTPS OpenAI-compatible provider base URL を設定します。
+- `--provider-api-base <string>`: 有効な HTTPS の OpenAI 互換プロバイダーベース URL を設定します。
 - `--provider-model <string>`: ちょうど 1024 次元を返す埋め込みモデルを設定します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
