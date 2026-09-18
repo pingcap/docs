@@ -14,7 +14,7 @@ This document describes how to filter binlog events when you use DM to perform c
 
 ## Configuration
 
-To use binlog event filter, add a `filters` to the task configuration file of DM, as shown below:
+To use binlog event filters, add the `filters` field to the DM task configuration file, as shown below:
 
 ```yaml
 filters:
