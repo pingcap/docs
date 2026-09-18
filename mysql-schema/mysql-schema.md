@@ -96,6 +96,14 @@ Currently, the `help_topic` is NULL.
 * [`tidb_mdl_view`](/mysql-schema/mysql-schema-tidb-mdl-view.md): a view of metadata locks. You can use it to view the information about the currently blocked DDL statements. See also [Metadata Lock](/metadata-lock.md).
 * `tidb_mdl_info`: used internally by TiDB to synchronize metadata locks across nodes.
 
+## System tables related to materialized views
+
+* `tidb_mview_refresh_info`: the current refresh scheduling information for each materialized view. This table is used internally by the automatic refresh scheduler.
+* `tidb_mlog_purge_info`: the current purge scheduling information for each materialized view log. This table is used internally by the automatic purge scheduler.
+* [`tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md): the refresh history of materialized views.
+* [`tidb_mview_refresh_alert`](/mysql-schema/mysql-schema-tidb-mview-refresh-alert.md): the current refresh alert level for each materialized view.
+* [`tidb_mlog_purge_hist`](/mysql-schema/mysql-schema-tidb-mlog-purge-hist.md): the purge history of materialized view logs.
+
 ## System tables related to DDL statements
 
 * `tidb_ddl_history`: the history records of DDL statements
