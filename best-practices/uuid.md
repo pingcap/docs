@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Using UUIDs as Primary Keys
-summary: UUIDを主キーとして使用すると、ネットワーク通信の削減、ほとんどのプログラミング言語とデータベースでのサポート、列挙攻撃からの保護などの利点が得られます。UUIDはバイナリ形式でBINARY(16)`列に保存することをお勧めします。また、ホットスポットの発生を防ぐため、TiDBでは`swap_flag`の設定を避けることをお勧めします。UUIDはMySQLと互換性があります。
+summary: UUIDを主キーとして使用すると、ネットワーク通信の削減、ほとんどのプログラミング言語とデータベースでのサポート、列挙攻撃からの保護などの利点が得られます。UUIDはバイナリ形式で`BINARY(16)`列に保存することをお勧めします。また、ホットスポットの発生を防ぐため、TiDBでは`swap_flag`の設定を避けることをお勧めします。UUIDはMySQLと互換性があります。
 aliases: ['/ja/tidb/stable/uuid/','/ja/tidbcloud/uuid/']
 ---
 
@@ -26,9 +26,9 @@ UUID を主キーとして使用すると、 [`AUTO_INCREMENT`](/auto-increment.
 
 ### UUID形式のバイナリ順序とクラスター化された主キー {#uuid-format-binary-order-and-clustered-primary-keys}
 
-`UUID_TO_BIN()`関数は、 1つの引数 (UUID)、または 2つの引数 (2 番目の引数は`swap_flag`とともに使用できます。
+`UUID_TO_BIN()`関数は、 1つの引数（UUID）で使用することも、 2つの引数（2番目の引数は`swap_flag`）で使用することもできます。
 
-[ホットスポット](/best-practices/high-concurrency-best-practices.md)回避するために、 TiDB で`swap_flag`設定しないことをお勧めします。
+[ホットスポット](/best-practices/high-concurrency-best-practices.md)を回避するために、 TiDB で`swap_flag`を設定しないことをお勧めします。
 
 ホットスポットを回避するために、UUID ベースの主キーに[`CLUSTERED`オプション](/clustered-indexes.md)を明示的に設定することもできます。
 

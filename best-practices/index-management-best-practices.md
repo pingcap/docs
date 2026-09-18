@@ -95,22 +95,22 @@ DESC TIDB_INDEX_USAGE;
 - 未使用のインデックス:
 
     - `QUERY_TOTAL = 0`の場合、インデックスはどのクエリでも使用されていません。
-    - `LAST_ACCESS_TIME`かなり前のものを示している場合、インデックスはもはや関連がない可能性があります。
+    - `LAST_ACCESS_TIME`がかなり前のものを示している場合、インデックスはもはや関連がない可能性があります。
 
 - 非効率的なインデックス:
 
-    - `PERCENTAGE_ACCESS_100`値が大きい場合は完全なインデックススキャンが実行されることを意味し、インデックスが非効率的である可能性があります。
+    - `PERCENTAGE_ACCESS_100`の値が大きい場合は完全なインデックススキャンが実行されることを意味し、インデックスが非効率的である可能性があります。
     - `ROWS_ACCESS_TOTAL`と`QUERY_TOTAL`を比較して、インデックスが使用量に比べてスキャンする行数が多すぎるかどうかを判断します。
 
 `TIDB_INDEX_USAGE`システムテーブルを使用すると、インデックスのパフォーマンスに関する詳細な情報を取得できるため、不要なインデックスを削除し、クエリ実行を最適化することが容易になります。
 
-### `TIDB_INDEX_USAGE`効果的に使用する {#use-tidb-index-usage-effectively}
+### `TIDB_INDEX_USAGE`を効果的に使用する {#use-tidb-index-usage-effectively}
 
 次の点は、 `TIDB_INDEX_USAGE`システムテーブルを正しく理解して使用するのに役立ちます。
 
 #### データの更新が遅れている {#data-updates-are-delayed}
 
-パフォーマンスへの影響を最小限に抑えるため、 `TIDB_INDEX_USAGE`即座に更新されません。インデックス使用状況の指標は最大 5分ほど遅延する場合があります。クエリを分析する際は、このレイテンシーにご注意ください。
+パフォーマンスへの影響を最小限に抑えるため、 `TIDB_INDEX_USAGE`は即座に更新されません。インデックス使用状況の指標は最大 5分ほど遅延する場合があります。クエリを分析する際は、このレイテンシーにご注意ください。
 
 #### インデックス使用状況データは保存されません {#index-usage-data-is-not-persisted}
 
@@ -151,13 +151,13 @@ ORDER BY total_queries DESC;
 | インデックス追跡 | データは各データベースインスタンスに対してローカルです。          | クラスター全体の集中ビューを提供します。               |
 | 主な使用例    | データベースインスタンスレベルでインデックスの使用状況をデバッグします。 | グローバルインデックスパターンとマルチノードの動作を分析します。 |
 
-### `CLUSTER_TIDB_INDEX_USAGE`効果的に使用する {#use-cluster-tidb-index-usage-effectively}
+### `CLUSTER_TIDB_INDEX_USAGE`を効果的に使用する {#use-cluster-tidb-index-usage-effectively}
 
 `CLUSTER_TIDB_INDEX_USAGE`システムテーブルは複数のノードからのデータを統合するため、次の点に注意してください。
 
 - データ更新の遅延
 
-    パフォーマンスへの影響を最小限に抑えるため、 `CLUSTER_TIDB_INDEX_USAGE`即座に更新されません。インデックス使用状況の指標は最大 5分ほど遅延する場合があります。クエリを分析する際は、このレイテンシーにご注意ください。
+    パフォーマンスへの影響を最小限に抑えるため、 `CLUSTER_TIDB_INDEX_USAGE`は即座に更新されません。インデックス使用状況の指標は最大 5分ほど遅延する場合があります。クエリを分析する際は、このレイテンシーにご注意ください。
 
 - メモリベースのストレージ
 
@@ -167,7 +167,7 @@ ORDER BY total_queries DESC;
 
 ## `schema_unused_indexes`を使用して未使用のインデックスを識別する {#identify-unused-indexes-using-schema-unused-indexes}
 
-インデックス使用状況データを手動で分析するのは時間がかかります。このプロセスを簡素化するために、TiDBは[`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)提供しています。これは、データベースの最後の再起動以降に使用されていないインデックスを一覧表示するシステムビューです。
+インデックス使用状況データを手動で分析するのは時間がかかります。このプロセスを簡素化するために、TiDBは[`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)を提供しています。これは、データベースの最後の再起動以降に使用されていないインデックスを一覧表示するシステムビューです。
 
 これにより、次の操作を簡単に実行できるようになります。
 
@@ -177,9 +177,9 @@ ORDER BY total_queries DESC;
 
 `schema_unused_indexes`を使用すると、不要なインデックスをすばやく識別し、最小限の労力でデータベースのオーバーヘッドを削減できます。
 
-### `schema_unused_indexes`仕組み {#how-schema-unused-indexes-works}
+### `schema_unused_indexes`の仕組み {#how-schema-unused-indexes-works}
 
-`schema_unused_indexes`ビューは`TIDB_INDEX_USAGE`から派生しており、最後の TiDB 再起動以降にクエリ アクティビティが 0 個記録されたインデックスを自動的に除外することを意味します。
+`schema_unused_indexes`ビューは`TIDB_INDEX_USAGE`から派生しており、最後の TiDB 再起動以降にクエリアクティビティが 0 回記録されたインデックスを自動的に抽出することを意味します。
 
 未使用のインデックスのリストを取得するには、次の SQL文を実行します。
 
