@@ -157,7 +157,7 @@ df = (
 
 ## フィードバックとヘルプ {#feedback-x26-help}
 
-全文検索はまだ開発初期段階であり、利用できる地域が限られています。まだ利用できない地域で全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
+全文検索はまだ開発初期段階であり、利用できるリージョンが限られています。まだ利用できないリージョンで全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
 
 - [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) または [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
