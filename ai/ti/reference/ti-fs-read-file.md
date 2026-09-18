@@ -5,7 +5,7 @@ summary: TiDB Cloud Filesystem からファイルを読み取ります。
 
 # ti fs read-file
 
-リモートファイルまたはバイト範囲を読み取り、stdout に出力します。このコマンドのエイリアスは `ti fs cat` です。
+リモートファイルまたはバイト範囲を読み取り、標準出力に出力します。このコマンドのエイリアスは `ti fs cat` です。
 
 > **Note:**
 >
