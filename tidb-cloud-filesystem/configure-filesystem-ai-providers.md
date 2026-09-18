@@ -1,21 +1,38 @@
 ---
 title: Configure TiDB Cloud Filesystem AI Providers
-summary: Learn how to inspect and configure media extraction and embedding providers for a TiDB Cloud Filesystem by using the CLI.
+summary: Configure AI providers for media extraction and embeddings in a TiDB Cloud Filesystem.
 aliases: ['/ai/configure-filesystem-ai-providers']
 ---
 
 # Configure TiDB Cloud Filesystem AI Providers
 
-A TiDB Cloud Filesystem can optionally extract text from media files and generate embeddings for stored content. To enable these capabilities, you can configure one or more AI providers through the CLI.
+Use this guide when you want TiDB Cloud Filesystem to extract searchable content from images, audio, or video, or when you want to configure a custom embedding provider for semantic search.
+
+- **Media extraction** uses an AI provider to extract text or descriptions from images, audio, or video so that the content can be searched.
+- **Embeddings** represent text and extracted descriptions as vectors for semantic search.
+
+These capabilities are optional and can be configured separately. For example, you can configure media extraction without configuring a custom embedding provider.
+
+This guide shows you how to check the current configuration, configure providers for media extraction and embeddings, and disable a custom configuration when it is no longer needed.
 
 ## Prerequisites
 
-- Follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md) to install the TiDB Cloud CLI, create a Filesystem, and obtain the Filesystem ID.
-- Obtain the API key required by your selected AI provider.
+Before you begin:
 
-The configuration commands require TiDB Cloud API credentials and an explicit Filesystem ID. Set the provider key through `TI_FS_AI_PROVIDER_API_KEY`. The CLI does not persist the key locally. The Filesystem service stores it encrypted and returns only a masked value in subsequent configuration output.
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- Have access to an existing TiDB Cloud Filesystem and obtain its Filesystem ID.
+- Configure TiDB Cloud API credentials. The commands in this guide require TiDB Cloud API credentials and an explicit Filesystem ID; they do not use a Filesystem token.
+- If you want to enable or replace a provider configuration, obtain the provider endpoint, model name, and API key.
 
-For an interactive shell, read and export the provider key without placing it in shell history:
+> **Note:**
+>
+> When you configure a custom provider, TiDB Cloud Filesystem sends content to that provider for processing. Make sure that the provider account and its data retention and privacy policies are appropriate for your data.
+
+## Provide the API key of your AI provider
+
+When you enable or replace a provider configuration, provide the API key of your AI provider through `TI_FS_AI_PROVIDER_API_KEY`.
+
+For an interactive shell, read and export the key without placing it in shell history:
 
 ```bash
 printf 'Provider API key: ' >&2
@@ -24,15 +41,21 @@ printf '\n' >&2
 export TI_FS_AI_PROVIDER_API_KEY
 ```
 
-In CI, inject `TI_FS_AI_PROVIDER_API_KEY` from a masked secret. Unset the variable after you finish configuring providers.
+The TiDB Cloud CLI does not store the key locally. The Filesystem service stores it encrypted and returns only a masked value when you inspect the configuration later.
+
+In CI, provide `TI_FS_AI_PROVIDER_API_KEY` through your CI secret-management mechanism.
 
 > **Note:**
 >
-> When you enable, re-enable, or replace a provider configuration, the Filesystem service sends a small built-in request to the provider endpoint to validate the credentials, connectivity, and model response. This validation request might incur a provider charge. A disable-only or prompt-only update does not make a validation request.
+> When you enable, re-enable, or replace a provider configuration, the Filesystem service sends a small request to the provider to validate the credentials, connectivity, and model response. The provider might charge for this validation request. Disabling a provider or updating only an extraction prompt does not send a validation request.
 
-## Inspect media extraction configuration
+## Configure media extraction
 
-Read the effective extraction configuration for a media type:
+Media extraction lets TiDB Cloud Filesystem process images, audio, or video and make the extracted text or descriptions available for content search.
+
+### Check the current configuration
+
+Before changing the configuration, check the current extraction configuration for the media type you want to process:
 
 ```shell
 ti fs describe-file-system-extract-configuration \
@@ -40,9 +63,11 @@ ti fs describe-file-system-extract-configuration \
   --media-type image
 ```
 
-## Update media extraction configuration
+Replace `image` with `audio` or `video` to inspect another media type.
 
-Use [`update-file-system-extract-configuration`](/ai/ti/reference/ti-fs-update-file-system-extract-configuration.md) to enable, update, or disable image, audio, or video extraction. For example, configure image extraction through an OpenAI-compatible provider:
+### Enable or update media extraction
+
+For example, to enable image extraction with an OpenAI-compatible provider:
 
 ```shell
 ti fs update-file-system-extract-configuration \
@@ -54,7 +79,13 @@ ti fs update-file-system-extract-configuration \
   --provider-protocol openai
 ```
 
-The `openai` protocol supports image, audio, and video extraction. The `qwen-asr` protocol is supported only for audio extraction through Alibaba Cloud Model Studio. An endpoint from another provider might work if it implements the required OpenAI-compatible API contract. Native interfaces for Anthropic, Gemini, Vertex AI, Amazon Bedrock, and Azure OpenAI are not supported.
+The `openai` protocol supports image, audio, and video extraction. For audio extraction, you can also use the `qwen-asr` protocol with Alibaba Cloud Model Studio.
+
+Other provider endpoints can be used only if they implement the required OpenAI-compatible API contract. Native interfaces for Anthropic, Gemini, Vertex AI, Amazon Bedrock, and Azure OpenAI are not supported.
+
+For all available options, see [`update-file-system-extract-configuration`](/ai/ti/reference/ti-fs-update-file-system-extract-configuration.md).
+
+### Disable media extraction
 
 To disable extraction for a media type:
 
@@ -65,36 +96,40 @@ ti fs update-file-system-extract-configuration \
   --enabled false
 ```
 
-## Inspect embedding configuration
+## Configure embeddings
 
-Read whether embeddings are managed by the application or database:
+Embeddings represent text content and extracted media descriptions as vectors for semantic search.
+
+### Check the current configuration
+
+Before configuring a custom embedding provider, check the current embedding configuration:
 
 ```shell
 ti fs describe-file-system-embedding-configuration \
   --file-system-id "<file-system-id>"
 ```
 
-## Update embedding configuration
+Check the `source` field in the output. If it is `database_auto`, embeddings are managed by the service and you cannot replace the configuration with a custom provider.
 
-Use [`update-file-system-embedding-configuration`](/ai/ti/reference/ti-fs-update-file-system-embedding-configuration.md) to update the optional application-managed embedding configuration. For example:
+### Enable or update a custom embedding provider
+
+If the current configuration allows a custom provider, configure an OpenAI-compatible embedding endpoint:
 
 ```shell
 ti fs update-file-system-embedding-configuration \
   --file-system-id "<file-system-id>" \
   --enabled true \
   --provider-api-base https://api.openai.com/v1 \
-  --provider-model text-embedding-3-small
+  --provider-model "<embedding-model>"
 ```
 
-Application-managed embeddings require an OpenAI-compatible endpoint that returns exactly 1024-dimensional vectors. Choose a model that supports this width; models that return a different width are not supported. Before updating the configuration, run `describe-file-system-embedding-configuration` to check the effective source. If it reports `source=database_auto`, the service manages embeddings and rejects an application-managed update.
+The provider must implement the required OpenAI-compatible embeddings API and return exactly 1024-dimensional vectors. Make sure that the selected model and provider configuration return 1024 dimensions; other vector dimensions are not supported.
 
-After you finish configuring providers, remove the key from the current shell:
+For all available options, see [`update-file-system-embedding-configuration`](/ai/ti/reference/ti-fs-update-file-system-embedding-configuration.md).
 
-```shell
-unset TI_FS_AI_PROVIDER_API_KEY
-```
+### Disable the custom embedding configuration
 
-To disable that configuration:
+To disable the custom embedding configuration:
 
 ```shell
 ti fs update-file-system-embedding-configuration \
@@ -102,13 +137,21 @@ ti fs update-file-system-embedding-configuration \
   --enabled false
 ```
 
-## Data flow after configuration
+## Finish configuring providers
 
-After you enable extraction, the Filesystem service sends media content to the configured extraction provider. It sends the extracted text or descriptions to the configured embedding provider. Choose provider accounts and retention policies appropriate for your data.
+After you finish configuring providers, remove the provider API key from the current shell:
 
-If an update fails because of a timeout, lost response, or another ambiguous network error, run the matching `describe-file-system-*-configuration` command before retrying. The provider validation request might have succeeded and incurred a charge even if the CLI did not receive the response.
+```shell
+unset TI_FS_AI_PROVIDER_API_KEY
+```
+
+When custom media extraction is enabled, TiDB Cloud Filesystem sends the relevant media content to the configured extraction provider. When a custom embedding provider is enabled, text content and extracted media descriptions are sent to the embedding provider.
+
+If an update fails because of a timeout, lost response, or another error where you cannot tell whether the update succeeded, do not immediately retry the command. Run the corresponding `describe-file-system-*-configuration` command first.
+
+The Filesystem service might already have saved the configuration and sent the provider validation request even if the CLI did not receive the response.
 
 ## What's next
 
-- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-- [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
+- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) to search Filesystem content.
+- [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md) for complete command syntax and options.

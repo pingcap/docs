@@ -1,80 +1,122 @@
 ---
 title: Manage TiDB Cloud Filesystem Vault Secrets
-summary: Learn how to store, read, delegate, inject, audit, revoke, and mount secrets securely with TiDB Cloud Filesystem Vault.
+summary: Learn how to store and rotate secrets, delegate temporary access, inject secrets into processes, audit and revoke access, and optionally mount secrets as read-only files.
 aliases: ['/ai/manage-filesystem-vault-secrets']
 ---
 
 # Manage TiDB Cloud Filesystem Vault Secrets
 
-TiDB Cloud Filesystem Vault lets you store secrets, delegate narrowly scoped and time-limited access to users or agents, and inject credentials into processes without writing plaintext to disk.
+Use TiDB Cloud Filesystem Vault when an application, automation, or agent needs credentials or other sensitive values, but you do not want to store those values in regular Filesystem files or give the workflow broad access to the Filesystem.
+
+With Vault, a trusted owner can store a secret once and grant access to only the secret or field that a user, application, or agent needs, for a limited time. The delegated workflow can then read the permitted value, inject it into a process, or access it through a read-only mount. The owner can audit the access and revoke the grant when it is no longer needed.
+
+This guide shows you how to store and rotate secrets, delegate limited access, use delegated secrets, audit and revoke access, and optionally mount secrets as files.
 
 ## Prerequisites
 
+Before you begin:
+
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
-- Have access to an existing TiDB Cloud Filesystem. Owner operations require an [owner token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-tokens).
-- Select the Filesystem and make its token available to `ti`. For available access options, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+- Have access to an existing TiDB Cloud Filesystem.
+- Make the Filesystem and its owner token available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
-> **Note:**
->
-> To avoid security risks, never print, log, or commit owner or delegated tokens.
+An owner token is used to create and replace secrets, create and revoke grants, and view audit events. A delegated Vault token provides only the secret access allowed by its grant.
 
-## Create and read a secret
+Treat both owner tokens and delegated Vault tokens as credentials. Do not expose them in logs, source control, shared terminal output, or command-line arguments.
+
+## Create a secret
+
+A Vault secret can contain multiple named fields. For example, a database secret might contain a connection URL and a password.
+
+Create a secret named `db-prod`:
 
 ```shell
 ti fs-vault create-secret \
   --secret-name db-prod \
   --field DB_URL=mysql://example \
   --field PASSWORD=@./password.txt
-
-ti fs-vault read-secret --secret-name db-prod
 ```
 
-In `--field PASSWORD=@./password.txt`, the `@` prefix reads the field value from the local file instead of using the literal text as the value.
+In `PASSWORD=@./password.txt`, the `@` prefix tells `ti` to read the field value from the local file instead of treating the file path as the value.
 
-> **Note:**
->
-> All `read-secret` output formats, including the default JSON format, contain plaintext secret values. Direct the output only to the intended process.
+Some Vault commands identify a secret by name, such as `db-prod`. Commands that operate on a specific secret path, such as `replace-secret` and `run-with-secret`, use its full Vault path instead. For example, the Vault path of `db-prod` is `/n/vault/db-prod`.
 
-## Replace a secret
+### Read a secret value
 
-To rotate a stored value, put each replacement field in a separate file in a local directory. For example, to change `DB_URL`, write its new value to `./secret-fields/DB_URL` and include a `./secret-fields/PASSWORD` file if you want to retain that field. Then replace the secret:
+`read-secret` returns plaintext secret values. Use it only when you need the value directly, and make sure its output is not written to logs or other unintended destinations.
+
+For example, to read only the `DB_URL` field:
 
 ```shell
-ti fs-vault replace-secret --secret-path /n/vault/db-prod --from-directory ./secret-fields
+ti fs-vault read-secret \
+  --secret-name db-prod \
+  --field DB_URL \
+  --format raw
 ```
 
-`replace-secret` replaces **all** fields, not only the changed field. Keep the local files out of source control and remove them after use. See the [`replace-secret` reference](/ai/ti/reference/ti-fs-vault-replace-secret.md) for the full command contract.
+When an application needs the secret, prefer [injecting it into the process](#inject-a-secret-into-a-process) instead of reading and handling the plaintext value yourself.
+
+## Rotate a secret
+
+`replace-secret` replaces all fields in the secret, not just the field whose value changed.
+
+To rotate `DB_URL`, create a local directory containing the new `DB_URL` value and the current `PASSWORD` value that you want to keep:
+
+```text
+./secret-fields/
+├── DB_URL
+└── PASSWORD
+```
+
+Then replace the secret:
+
+```shell
+ti fs-vault replace-secret \
+  --secret-path /n/vault/db-prod \
+  --from-directory ./secret-fields
+```
+
+Each file in the directory becomes a field in the replacement secret. Any existing field that is not included in the directory is not retained.
+
+Keep these local files out of source control and remove them when they are no longer needed. For details, see the [`replace-secret` reference](/ai/ti/reference/ti-fs-vault-replace-secret.md).
 
 ## Delegate limited access
 
-Create a short-lived read grant and capture its token:
+Instead of sharing the Filesystem owner token, create a short-lived grant for only the secret fields that another user, application, or agent needs.
+
+For example, the following grant allows `deploy-agent` to read only the `DB_URL` field for 10 minutes:
 
 ```shell
-export TI_VAULT_TOKEN="$(ti fs-vault create-grant \
+ti fs-vault create-grant \
   --agent-id deploy-agent \
   --scope db-prod/DB_URL \
   --permission read \
-  --ttl 10m \
-  --token-only)"
+  --ttl 10m
 ```
 
-Prefer `TI_VAULT_TOKEN` to a command-line token because command-line values can remain in process listings or shell history.
+The command returns a delegated Vault token and a grant ID. Give the delegated token only to the workflow that needs the secret, and retain the grant ID so that you can revoke the grant before it expires if necessary.
+
+In the environment that uses the delegated secret, make the token available as `TI_VAULT_TOKEN`. Avoid putting the token directly in a command-line argument because command arguments can appear in shell history or process listings.
 
 ## Inject a secret into a process
 
-The CLI can inject secret fields as environment variables into a child process without writing plaintext to disk. When you run the following command, the CLI reads the secret, sets each field as an environment variable (for example, `DB_URL`, `PASSWORD`), removes its own credential environment variables from the child, and then executes the specified command:
-
-`/n/vault/db-prod` is the canonical Vault path for the secret named `db-prod`; it is not a local mount path.
+If an application can receive credentials through environment variables, use `run-with-secret` to make the permitted secret fields available only to the child process:
 
 ```shell
-ti fs-vault run-with-secret --secret-path /n/vault/db-prod -- <command>
+ti fs-vault run-with-secret \
+  --secret-path /n/vault/db-prod \
+  -- <command>
 ```
 
-Prefer process injection to writing plaintext to disk.
+Each permitted secret field becomes an environment variable with the same name. For example, the `DB_URL` and `PASSWORD` fields become the `DB_URL` and `PASSWORD` environment variables.
 
-Field names injected by `run-with-secret` must match `[A-Z_][A-Z0-9_]*`. The command rejects the entire injection if any field name does not match this pattern or any field value contains an unsupported control character. Use uppercase environment-variable-style names when creating fields that you plan to inject.
+The Vault credential used by `ti` is not passed to the child process. This lets the application use the secret without writing its plaintext value to a file.
+
+Field names used with `run-with-secret` must match `[A-Z_][A-Z0-9_]*`. Use uppercase environment-variable-style field names for secrets that you plan to inject into a process.
 
 ## Audit and revoke access
+
+To review recent access to `db-prod` by `deploy-agent`, run:
 
 ```shell
 ti fs-vault list-audit-events \
@@ -82,40 +124,55 @@ ti fs-vault list-audit-events \
   --agent-id deploy-agent \
   --since 24h \
   --limit 20
+```
 
+When the delegated access is no longer needed, revoke the grant using the grant ID returned by `create-grant`:
+
+```shell
 ti fs-vault delete-grant \
   --grant-id "<grant-id>" \
   --revoked-by operator \
-  --reason rotated
+  --reason task-complete
 ```
 
-Revocation prevents new authorized operations but cannot erase a value that a process already read.
+Revoking a grant prevents the delegated token from authorizing new operations. It cannot remove a secret value that a process has already read.
 
-## Mount a read-only Vault view
+## Mount secrets as read-only files
 
-On macOS or Linux with FUSE support, you can mount a read-only FUSE view of Vault secrets. The CLI creates the mount and serves secret fields as files under the mount path (for example, `/path/to/vault/db-prod/DB_URL`):
+If an application expects credentials as files instead of environment variables, you can optionally expose permitted Vault fields through a read-only FUSE mount on Linux or macOS.
 
-Before mounting, set `TI_VAULT_TOKEN` to a delegated Vault token, such as the token created in [Delegate limited access](#delegate-limited-access). The mount command requires either `TI_VAULT_TOKEN` or `--vault-token`.
+For delegated access, first make the delegated Vault token available as `TI_VAULT_TOKEN`. Then create a local mount directory and mount the Vault:
 
 ```shell
 mkdir -p /path/to/vault
+
 ti fs-vault mount-vault \
   --mount-path /path/to/vault
 ```
 
-Stop any processes that use the mount before you unmount it:
+The permitted secret fields are available as files under the mount path. For example:
 
-```shell
-ti fs-vault unmount-vault --mount-path /path/to/vault
+```text
+/path/to/vault/db-prod/DB_URL
 ```
 
-Vault mounts are unavailable on Windows. Direct secret reads and process injection do not require a mount.
+Processes that can access the mount can read the permitted secret values, so keep access to the mount limited to the intended workload.
+
+Before unmounting, stop processes that are using the mounted secrets:
+
+```shell
+ti fs-vault unmount-vault \
+  --mount-path /path/to/vault
+```
+
+Vault mounts require FUSE and are not available on Windows. Direct secret reads and `run-with-secret` do not require a mount.
 
 ## Security recommendations
 
-- Grant the narrowest field scope and shortest practical TTL.
-- Do not store delegated tokens in CLI configuration or operation logs.
-- Revoke grants after their tasks finish.
+- Grant access only to the secret fields required by the workflow and use the shortest practical TTL.
+- Prefer `run-with-secret` when an application can receive credentials through environment variables.
+- Do not expose owner or delegated tokens in logs, source control, or command-line arguments.
+- Revoke grants when their tasks finish or access is no longer needed.
 
 ## What's next
 
