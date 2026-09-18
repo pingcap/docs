@@ -11,7 +11,8 @@ TiDB Cloud Filesystem Vault lets you store secrets, delegate narrowly scoped and
 ## Prerequisites
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
-- For the secret commands below, set `TI_FS_FILE_SYSTEM_ID` to the Filesystem ID and use its locally stored FS token. Alternatively, set `TI_FS_TOKEN` and `TI_REGION_CODE` for token-only access; the token identifies the Filesystem. Owner operations require an [owner FS token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-fs-tokens). See [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#understand-local-selection) for selection details.
+- Have access to an existing TiDB Cloud Filesystem. Owner operations require an [owner token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-tokens).
+- Select the Filesystem and make its token available to `ti`. For available access options, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
 > **Note:**
 >

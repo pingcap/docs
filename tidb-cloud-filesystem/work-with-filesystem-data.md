@@ -12,7 +12,7 @@ In TiDB Cloud CLI, you can use [`ti fs` commands](/ai/ti/reference/ti-filesystem
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
 - [Create a Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) or obtain access to an existing one.
-- For the commands below, set `TI_FS_FILE_SYSTEM_ID` to the Filesystem ID and use its locally stored FS token. Alternatively, set `TI_FS_TOKEN` and `TI_REGION_CODE` for token-only access; the token identifies the Filesystem. To select a Filesystem per command instead, add `--file-system-id "<file-system-id>"` to each command. Use a token with the permissions required for each operation. See [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#understand-local-selection) for selection details.
+- Select the Filesystem and make its token available to `ti`. For available access options, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
 ## Copy data
 

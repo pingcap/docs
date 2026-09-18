@@ -1,22 +1,29 @@
 ---
 title: Manage TiDB Cloud Filesystem Layers and Checkpoints
-summary: Learn how to safely create, inspect, fork, checkpoint, roll back, commit, pack, and restore TiDB Cloud Filesystem layers.
+summary: Learn how to create, inspect, checkpoint, fork, commit, roll back, and delete TiDB Cloud Filesystem layers.
 aliases: ['/ai/manage-filesystem-layers']
 ---
 
 # Manage TiDB Cloud Filesystem Layers and Checkpoints
 
-Use layers to record isolated changes over a Filesystem base path before you commit or discard them.
+A layer gives you a separate workspace for changing files without immediately affecting the base Filesystem. You can make and review changes in the layer, then decide whether to apply them to the base Filesystem or discard them.
 
-This guide covers individual CLI operations. To understand layer visibility, forks, checkpoints, and their boundaries before using these commands, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
+You can also create a checkpoint to preserve a point in the layer's history, or fork a new layer from the current layer or a checkpoint to continue working independently.
+
+For an overview of how layers, checkpoints, forks, and the base Filesystem relate to each other, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
 
 ## Prerequisites
 
+Before you begin:
+
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
-- For the commands below, set `TI_FS_FILE_SYSTEM_ID` to the Filesystem ID and use its locally stored FS token. Alternatively, set `TI_FS_TOKEN` and `TI_REGION_CODE` for token-only access; the token identifies the Filesystem. To select a Filesystem per command instead, add `--file-system-id "<file-system-id>"` to each command. Use a token with the required read or write permission. See [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#understand-local-selection) for selection details.
+- Have access to an existing TiDB Cloud Filesystem with a token that provides the required read or write permissions.
+- Select the Filesystem and make its token available to `ti`. For available access options, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 - Choose the base path whose data the layer overlays.
 
-## Create and inspect a layer
+## Create a layer
+
+Choose the base path that you want the layer to overlay, and create a layer:
 
 ```shell
 ti fs create-layer \
@@ -26,101 +33,140 @@ ti fs create-layer \
   --tag task=review
 ```
 
-`restore-safe` is the only `--durability-mode` value accepted by the current CLI. See the [`create-layer` command reference](/ai/ti/reference/ti-fs-create-layer.md) for the current option contract.
+`--base-root-path` determines which part of the base Filesystem the layer overlays.
 
-List the layers in the selected Filesystem:
+`restore-safe` is the only `--durability-mode` value accepted by the current CLI. For all available options, see the [`create-layer` command reference](/ai/ti/reference/ti-fs-create-layer.md).
 
-```shell
-ti fs list-layers --output text
-```
+The command returns a layer ID. Use the layer ID for subsequent operations, especially in automation, because layer names are not guaranteed to be unique.
 
-Use the returned layer ID to write and inspect changes:
+## Work with and inspect layer changes
+
+Write a file to the layer by specifying its layer ID:
 
 ```shell
 ti fs copy-file \
   --from-local ./proposal.md \
   --to-remote /workspace/proposal.md \
   --layer-id "<layer-id>"
+```
 
+Inspect the layer and its changes:
+
+```shell
 ti fs describe-layer --layer-id "<layer-id>"
 ti fs diff-layer --layer-id "<layer-id>"
 ```
 
+List all layers in the selected Filesystem:
+
+```shell
+ti fs list-layers --output text
+```
+
+Changes that have not been committed remain in the layer. File operations that do not select the layer access the base Filesystem and do not show its uncommitted changes.
+
 > **Note:**
 >
-> `copy-file` with `--layer-id` does not support recursive copy. To seed a directory tree into a layer, mount the layer as a writable FUSE mount and copy files through the mount path.
+> `copy-file` with `--layer-id` does not support recursive copy. To copy a directory tree into a layer, mount the layer as a writable FUSE mount and copy files through the mount path.
+>
+> Do not mount the same writable layer at multiple local paths concurrently. Reuse its existing mount, or unmount it before mounting the layer elsewhere.
 
-Do not mount the same writable layer at multiple local paths concurrently. Reuse its existing mount, or unmount it before mounting the layer elsewhere.
+## Create a checkpoint
 
-## Create a checkpoint and fork a layer
+A checkpoint preserves a point in the layer's durable history.
+
+If the layer has an active writable FUSE mount, drain pending writes before creating the checkpoint so that the checkpoint includes the changes that have reached the service:
+
+```shell
+ti fs drain-file-system \
+  --mount-path "/path/to/workspace"
+```
+
+Then create the checkpoint:
 
 ```shell
 ti fs create-layer-checkpoint \
   --layer-id "<layer-id>" \
   --checkpoint-id seed \
   --label "before review"
+```
 
+A checkpoint mount is read-only. To continue making changes from a checkpoint, fork a new writable layer.
+
+## Fork a layer
+
+Fork a new writable layer from the current layer or one of its checkpoints:
+
+```shell
 ti fs fork-layer \
   --parent-layer-ref "<layer-id>" \
   --layer-name experiment \
   --checkpoint-id seed
 ```
 
-Use `list-layer-chain` to inspect the pinned ancestry of the fork:
+Use the layer ID returned for the fork when you perform subsequent operations on it.
+
+To inspect the fork's pinned ancestry:
 
 ```shell
-ti fs list-layer-chain --layer-ref experiment
+ti fs list-layer-chain --layer-ref "<forked-layer-id>"
 ```
 
-A checkpoint mount is read-only. To continue working from a checkpoint, fork a new writable layer from it.
+After a fork is created, changes made to the parent and child layers are independent.
 
-## Finish work in a layer
+## Commit or discard layer changes
 
-> **Warning:**
->
-> Before you create a checkpoint for a layer with a writable FUSE mount, run [`drain-file-system`](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely). A checkpoint includes only changes that have reached the service. Before you roll back or commit the layer, drain and then [`unmount-file-system`](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely). The CLI does not perform these steps automatically.
-
-Choose one outcome for a layer:
-
-- Roll back the layer to discard its changes:
-
-    ```shell
-    ti fs rollback-layer --layer-id "<layer-id>"
-    ```
-
-- Commit the layer to apply its changes to the base path:
-
-    ```shell
-    ti fs commit-layer --layer-id "<layer-id>"
-    ```
-
-> **Note:**
->
-> Do not run both `rollback-layer` and `commit-layer` in sequence for the same layer.
-
-## Move local state to another machine (advanced)
-
-When a FUSE mount uses write-back cache, some data can remain in its local overlay directory. To move this local state to another machine, pack it to an explicit remote archive path:
+Before committing or rolling back a layer with an active writable FUSE mount, stop applications that are writing to the mount, drain pending writes, and unmount it:
 
 ```shell
-ti fs pack-file-system \
-  --mount-path /path/to/workspace \
-  --archive-path /workspace-overlay.tar.gz
+ti fs drain-file-system \
+  --mount-path "/path/to/workspace"
+
+ti fs unmount-file-system \
+  --mount-path "/path/to/workspace"
 ```
 
-On the destination machine, restore the archive into a local overlay root:
+For more information about safely finishing mount activity, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
+
+To apply the layer's changes to the base Filesystem:
 
 ```shell
-ti fs unpack-file-system \
-  --local-root /path/to/local-overlay \
-  --remote-root /workspace \
-  --mount-profile portable \
-  --archive-path /workspace-overlay.tar.gz
+ti fs commit-layer --layer-id "<layer-id>"
 ```
 
-Use the same local overlay root when you mount the Filesystem on the destination machine. For all pack and unpack options, see the [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) and [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) references.
+A commit applies the layer's effective changes to the base Filesystem. If the layer was created by forking another layer, committing it does not merge the changes back into its parent layer.
+
+If the base Filesystem contains conflicting changes, the commit can fail instead of automatically merging them. Keep the layer and inspect its changes and the base Filesystem before deciding how to proceed.
+
+To discard the layer's uncommitted changes instead:
+
+```shell
+ti fs rollback-layer --layer-id "<layer-id>"
+```
+
+Rollback discards the current layer changes. It does not reset the layer to an earlier checkpoint. To continue from a checkpoint, fork a new layer from that checkpoint.
+
+## Delete a layer
+
+When you no longer need a layer, delete it by its layer ID:
+
+```shell
+ti fs delete-layer --layer-ref "<layer-id>"
+```
+
+Deleting a layer abandons it without immediately erasing all of its history. If the layer has live descendants, the command fails by default.
+
+To abandon the layer and all of its live descendants, use `--cascade`:
+
+```shell
+ti fs delete-layer \
+  --layer-ref "<layer-id>" \
+  --cascade
+```
+
+Use `--cascade` only when you intend to abandon the descendant layers as well.
 
 ## What's next
 
-- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

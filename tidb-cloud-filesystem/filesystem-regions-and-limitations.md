@@ -47,7 +47,7 @@ For the supported drain and graceful unmount workflow, see [Finish safely](/tidb
 ## Current limitations
 
 - Journals are append-only, and the current public command surface has no journal delete command.
-- The local credential store keeps one selected token per profile and Filesystem. It does not mirror all remote tokens. Older create or import credentials without a known token ID remain usable, but cannot be correlated with remote token metadata. For credential selection, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#understand-local-selection).
+- The local credential store keeps one selected token per profile and Filesystem. It does not mirror all remote tokens. Older create or import credentials without a known token ID remain usable, but cannot be correlated with remote token metadata.
 - Filesystem extraction and embedding provider configuration is optional. Leaving it unconfigured does not block resource administration, file access, search, layers, Git, journal, vault, or mount workflows.
 - OpenAI provider interfaces are supported for embedding and image, audio, and video extraction. Alibaba Cloud Model Studio Qwen ASR is supported only for audio extraction. Other vendors are conditionally compatible only through the exact OpenAI-compatible contract; native Anthropic, Gemini, Vertex AI, Bedrock, and Azure OpenAI interfaces are not supported.
 - App-managed embedding requires a provider model that returns exactly 1024 dimensions. Filesystems that report `source=database_auto` use database-managed embedding and reject app-managed configuration. For configuration steps, see [Configure TiDB Cloud Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
