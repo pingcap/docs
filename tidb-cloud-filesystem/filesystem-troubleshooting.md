@@ -125,7 +125,7 @@ Background mount success prints the CLI result without Drive9 startup messages. 
 - FUSE prerequisites or the WebDAV helper are installed;
 - the remote region is reachable.
 
-macOS defaults to WebDAV. To request FUSE after installing macFUSE:
+On macOS without macFUSE, `ti` uses WebDAV. If macFUSE is installed, automatic driver selection prefers FUSE. To explicitly request FUSE:
 
 ```bash
 ti fs mount-file-system \
@@ -133,7 +133,7 @@ ti fs mount-file-system \
   --driver fuse
 ```
 
-Linux needs FUSE3 and access to `/dev/fuse`. Filesystem and Vault mounts are not supported on Windows; use `ti fs` data-plane commands or non-mount Vault commands instead.
+Linux needs FUSE support, the `fuse3` package, and access to `/dev/fuse`. Filesystem and Vault mounts are not supported on Windows; use `ti fs` data-plane commands or non-mount Vault commands instead.
 
 ## Ubuntu 26.04 rejects a FUSE mount under `/workspace`
 

@@ -1,114 +1,194 @@
 ---
-title: Share a TiDB Cloud Filesystem
-summary: Share a remote workspace across machines and sandboxes with separate access tokens, and hand off files after writes reach the service.
+title: Share a TiDB Cloud Filesystem Across Machines
+summary: Learn how to share part of an existing TiDB Cloud Filesystem with another user, machine, CI job, or agent, and remove that access when it is no longer needed.
+aliases: ['/ai/ti-share-filesystem-across-machines-example']
 ---
 
-# Share a TiDB Cloud Filesystem
+# Share a TiDB Cloud Filesystem Across Machines
 
-Sharing a Filesystem gives participants access to the same remote namespace, not independent copies. For example, an agent can produce a report in a sandbox and a reviewer can open that report from a laptop without downloading and redistributing an archive for every revision.
+You can share files in a TiDB Cloud Filesystem with another user, machine, CI job, or agent without copying the files between environments.
+
+Create a separate scoped token for each user or environment you want to share with. Each token can limit access to specific paths and actions, so you can give only the access that is needed and revoke it later without affecting anyone else.
 
 > **Note:**
 >
 > TiDB Cloud Filesystem is currently in public preview. Its features and interfaces are subject to change without notice.
 
-## What each participant needs
+## Prerequisites
 
-The trusted machine uses TiDB Cloud API keys to create the Filesystem. Other participants need `ti`, an FS token, and the Filesystem region. They do not need a copy of `~/.ti/`, account API keys, or their own Filesystem resource.
+Before you begin:
 
-Use separate tokens so you can retire one participant's access without changing every participant's credentials. Choose a scoped token for a restricted task; an owner token grants broad Filesystem access. See [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
+- Have access to an existing TiDB Cloud Filesystem.
+- On a machine you trust, have an owner token for the Filesystem. You need an owner token to create scoped tokens.
+- [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli) on the machine or environment that needs access to the shared Filesystem.
+- Have a secure way, such as a secret manager, to transfer Filesystem tokens.
 
-## Prepare the workspace on machine A
+For information about owner and scoped tokens, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 
-With `ti` installed and configured, create a Filesystem or use an existing one. This example creates a new resource:
+## Give access to specific files
+
+To share part of a Filesystem with another user or environment:
+
+1. Decide which paths they need to access and what they need to do with those paths.
+
+2. If the path you want to share does not already exist, create it. The following example creates `/reports`:
+
+    ```bash
+    ti fs create-directory \
+      --file-system-id "<file-system-id>" \
+      --path /reports
+    ```
+
+3. Create a scoped token for the user or environment.
+
+    The following example gives a reviewer read-only access to `/reports` for 24 hours:
+
+    ```bash
+    REVIEW_TOKEN="$(ti fs generate-file-system-scoped-token \
+      --file-system-id "<file-system-id>" \
+      --subject reviewer \
+      --ttl 24h \
+      --allow /reports:read,list \
+      --query fs_token \
+      --output text)"
+    ```
+
+    This token lets the reviewer read and list files under `/reports`, but does not give access to other paths in the Filesystem.
+
+    If the reviewer also needs to add or update files, include `write` for that path. For example, `--allow /reports:read,list,write` lets the reviewer read, list, and write files under `/reports` without giving them owner access to the Filesystem.
+
+4. Send the token and the Filesystem region code through a secure channel or secret manager.
+
+    The other user or environment does not need your TiDB Cloud API credentials or a copy of your local `~/.ti/` directory.
+
+    The token remains valid until it expires or you revoke it. Saving the token in an environment variable does not extend its lifetime.
+
+> **Note:**
+>
+> The token value is shown only when the token is created. Treat it as a secret and do not expose it in logs, issues, chat messages, or source control.
+
+For more information about token permissions and expiration, see [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+
+## Access the shared files from another machine
+
+On the machine or environment that needs access:
+
+1. Set the scoped token and Filesystem region:
+
+    ```bash
+    export TI_FS_TOKEN="<reviewer-token>"
+    export TI_REGION_CODE="<filesystem-region-code>"
+    ```
+
+    The token identifies the Filesystem, so you do not need to provide the Filesystem ID.
+
+2. Verify that you can access the shared path:
+
+    ```bash
+    ti fs list-files --path /reports
+    ti fs read-file --path /reports/summary.txt
+    ```
+
+    The token can be used only for the paths and actions included in its scope. Other access is rejected by the Filesystem service.
+
+For other ways to access an existing Filesystem, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+
+### Mount the shared directory (optional)
+
+On a supported platform, you can also mount the shared directory and access its files through a local path:
 
 ```bash
-# Retain the ID; the creator's token is stored locally by the CLI.
-FILE_SYSTEM_ID="$(ti fs create-file-system \
-  --display-name shared-reports --wait \
-  --query file_system_id --output text)"
-```
-
-Create a directory and publish the first report:
-
-```bash
-# Write through the direct file interface, without a local mount.
-ti fs create-directory --file-system-id "$FILE_SYSTEM_ID" --path /reports
-printf 'The first report is ready for review.\n' | ti fs copy-file \
-  --file-system-id "$FILE_SYSTEM_ID" \
-  --from-stdin --to-remote /reports/summary.txt
-```
-
-Issue a read-only token for the reviewer:
-
-```bash
-# Keep this value in a secret manager, not in a shared log.
-REVIEW_TOKEN="$(ti fs generate-file-system-scoped-token \
-  --file-system-id "$FILE_SYSTEM_ID" \
-  --subject reviewer --ttl 24h \
-  --allow /reports:read,list \
-  --query fs_token --output text)"
-```
-
-Deliver `REVIEW_TOKEN` and the Filesystem's region code securely to machine B. Retain the Filesystem ID on machine A for administration. The token expires after the requested lifetime; a saved environment variable does not extend it.
-
-## Open the report on machine B
-
-Inject the reviewer's token and matching region into the environment:
-
-```bash
-# In production, inject the token from a secret manager instead of pasting it into a shell.
-# No ti configure is needed on the receiving machine.
-export TI_FS_TOKEN="<reviewer-token>"
-export TI_REGION_CODE="<filesystem-region-code>"
-ti fs read-file --path /reports/summary.txt
-```
-
-On macOS or Linux with the [mount dependencies](/tidb-cloud-filesystem/filesystem-mount.md#choose-your-environment), expose the allowed directory locally:
-
-```bash
-# Mount only the scope allowed by the reviewer token.
 mkdir -p "$HOME/reports"
+
 ti fs mount-file-system \
   --remote-path /reports \
   --mount-path "$HOME/reports" \
   --read-only
-cat "$HOME/reports/summary.txt"
 ```
 
-The remote `/reports` prefix becomes the local mount root, so the local file is `$HOME/reports/summary.txt`, not `$HOME/reports/reports/summary.txt`.
+The remote `/reports` directory becomes the root of the local mount. For example, `/reports/summary.txt` is available locally at:
 
-The token enforces read-only access at the service. `--read-only` also tells the local mount to reject writes; using that flag with an owner token alone would not restrict the owner's other API or CLI access.
-
-## Hand off new data safely
-
-A successful write to a FUSE-mounted file might still be buffered on the producing machine. Before telling the reviewer that a revision is ready, stop the application's writes and drain its FUSE mount, or unmount it successfully. For WebDAV, close application files and finish a normal unmount. See [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
-
-Use a direct remote read to verify a handoff independently of another mount's cache. Existing open handles and client caches can retain older content; do not assume every reader instantly sees each local write.
-
-Coordinate writers to the same path. Shared storage is not a distributed lock or an automatic merge system. Use separate paths or [layers](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) for independent drafts, and publish only after review.
-
-## End access without deleting the workspace
-
-On machine B, stop readers and unmount:
-
-```bash
-# Remove the local mount, not the shared remote data.
-ti fs unmount-file-system --mount-path "$HOME/reports"
-unset TI_FS_TOKEN TI_REGION_CODE
+```text
+$HOME/reports/summary.txt
 ```
 
-On machine A, identify and revoke the reviewer's token when no longer needed:
+The scoped token limits what you can do in the Filesystem. The `--read-only` option also prevents writes through this local mount.
 
-```bash
-# Find the reviewer token ID in the metadata, then revoke that token only.
-ti fs list-file-system-tokens --file-system-id "$FILE_SYSTEM_ID" --output text
-ti fs delete-file-system-token \
-  --file-system-id "$FILE_SYSTEM_ID" --token-id "<reviewer-token-id>"
-```
+Direct `ti fs` commands and mounts access the same files in the Filesystem. For example, a file uploaded with `ti fs copy-file` is also available through a mount. Changes made through a mount become available to direct commands and other users after the writes reach the service.
 
-Do not delete the Filesystem to disconnect one participant: resource deletion affects everyone and removes the shared data.
+For mount requirements and platform-specific setup, see [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md).
+
+## Make sure updates are ready to share
+
+When multiple users or environments access the same Filesystem, they work with the same files rather than separate copies.
+
+If files are written through a mount, make sure the latest changes have reached the Filesystem before telling someone else that they are ready.
+
+For a FUSE mount:
+
+1. Stop applications from writing to the files and close any files that are still open.
+
+2. Make sure pending writes reach the Filesystem:
+
+    - To keep the mount running, drain it.
+    - If you are finished with the mount, unmount it successfully.
+
+3. If you need to verify the handoff, read the updated file directly from the Filesystem:
+
+    ```bash
+    ti fs read-file --path /reports/summary.txt
+    ```
+
+For a WebDAV mount, close open files and unmount normally. WebDAV does not support drain. See [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
+
+If multiple users or environments have write access, avoid writing to the same files at the same time. TiDB Cloud Filesystem does not automatically merge conflicting changes.
+
+If different users or workflows need to make changes independently before applying them to the base Filesystem, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
+
+## Stop sharing access
+
+### On the machine using the shared Filesystem
+
+1. Stop applications that use the shared files.
+
+2. If the Filesystem is mounted, unmount it:
+
+    ```bash
+    ti fs unmount-file-system --mount-path "$HOME/reports"
+    ```
+
+3. Remove the token from the local environment:
+
+    ```bash
+    unset TI_FS_TOKEN TI_REGION_CODE
+    ```
+
+Removing the token from the local environment prevents that environment from using the saved value, but does not revoke the token itself. Anyone who still has the token can continue using it until it expires or is revoked.
+
+### On the machine where you manage the Filesystem
+
+1. Find the token you want to revoke:
+
+    ```bash
+    ti fs list-file-system-tokens \
+      --file-system-id "<file-system-id>" \
+      --output text
+    ```
+
+2. Revoke that token:
+
+    ```bash
+    ti fs delete-file-system-token \
+      --file-system-id "<file-system-id>" \
+      --token-id "<reviewer-token-id>"
+    ```
+
+Revoking one token removes that user's or environment's access without affecting other tokens or deleting the Filesystem.
+
+Do not delete the Filesystem just to stop sharing it with one user or environment. Deleting the Filesystem removes the shared Filesystem and its data for everyone.
 
 ## What's next
 
-- [Understand layers and checkpoints for independent drafts](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
-- [Run the agent sandbox example](/ai/ti/guides/ti-agent-sandbox-example.md).
+- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to create, rotate, disable, or revoke tokens.
+- [TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) to make changes independently before applying them to the base Filesystem.
+- [Automation and AI Agent Workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md) for workflows that use shared Filesystem data.

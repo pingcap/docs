@@ -1,11 +1,15 @@
 ---
 title: Mount TiDB Cloud Filesystem on macOS
-summary: Mount a TiDB Cloud Filesystem with macOS WebDAV, or choose macFUSE when your workflow needs layers and historical checkpoints.
+summary: Mount a TiDB Cloud Filesystem as a local directory on macOS, and use macFUSE when you need advanced mount features.
 ---
 
 # Mount TiDB Cloud Filesystem on macOS
 
-On macOS, `ti` uses WebDAV by default, so you can start with a local directory without installing FUSE. Install macFUSE and explicitly select the FUSE driver when you need layer mounts, checkpoint mounts, or the FUSE drain operation.
+On macOS, you can mount a TiDB Cloud Filesystem as a local directory and access its files with your usual applications and tools.
+
+For most workflows, no additional mount software is required. Without macFUSE, TiDB Cloud CLI (`ti`) uses WebDAV. If macFUSE is installed, `ti` prefers FUSE in automatic driver selection.
+
+If you need features that require FUSE, such as mounting layers or checkpoints or using `drain-file-system`, install macFUSE and use the FUSE driver instead.
 
 > **Note:**
 >
@@ -13,70 +17,131 @@ On macOS, `ti` uses WebDAV by default, so you can start with a local directory w
 
 ## Prerequisites
 
-Install `ti` and select a Filesystem using [a local credential or an FS token](/tidb-cloud-filesystem/filesystem-mount.md#select-a-filesystem). Use a writable owner or scoped token for the write examples below.
+Before you begin:
 
-## Mount with the default WebDAV driver
+- [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- Make the Filesystem and its token available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
-```bash
-# Mount under your home directory, not at a root-level path such as /workspace.
-mkdir -p "$HOME/workspace"
-ti fs mount-file-system --mount-path "$HOME/workspace"
-```
+The write examples below require a token with write permission.
 
-The successful result identifies the `webdav` driver. You can explicitly request the same mode with `--driver webdav`.
+## Mount with WebDAV
 
-```bash
-# Verify a write through the local mount.
-TEST_FILE="mount-check-$(date +%s).txt"
-printf 'Hello from macOS\n' > "$HOME/workspace/$TEST_FILE"
-cat "$HOME/workspace/$TEST_FILE"
-```
+To explicitly use WebDAV, pass `--driver webdav`.
 
-Before a handoff or shutdown, close application files and unmount:
+1. Create a local directory for the mount:
 
-```bash
-# WebDAV has no drain command; finish file operations and unmount normally.
-ti fs unmount-file-system --mount-path "$HOME/workspace"
-ti fs read-file --path "/$TEST_FILE"
-```
+    ```bash
+    mkdir -p "$HOME/workspace"
+    ```
 
-The final command reads from the remote service, independently of the mount. WebDAV and FUSE are different filesystem interfaces; do not assume WebDAV has every FUSE or POSIX capability.
+2. Mount the Filesystem:
 
-## Use macFUSE for layers and checkpoints
+    ```bash
+    ti fs mount-file-system \
+      --mount-path "$HOME/workspace" \
+      --driver webdav
+    ```
 
-Install [macFUSE](https://macfuse.github.io/) and complete the installation and security approvals required for your macOS version. Installing `ti` does not install macFUSE. Follow the macFUSE installation guidance for your system; do not assume every macFUSE backend is supported by the bundled Filesystem runtime.
+    This command explicitly selects WebDAV.
 
-Unmount an existing WebDAV mount before reusing its directory with FUSE:
+3. Access the Filesystem through the mounted directory:
 
-```bash
-# Select FUSE explicitly after installing macFUSE.
-ti fs mount-file-system --mount-path "$HOME/workspace" --driver fuse
-```
+    ```bash
+    ls "$HOME/workspace"
+    ```
 
-To keep a FUSE mount online while waiting for pending writes to reach the service:
+    If your token has write permission, you can also create and read a test file:
 
-```bash
-# Use this durability barrier before a layer checkpoint or cross-machine handoff.
-ti fs drain-file-system --mount-path "$HOME/workspace" --timeout 30s
-```
+    ```bash
+    TEST_FILE="mount-check-$(date +%s).txt"
 
-For layer and checkpoint mount options, see the [`mount-file-system` command reference](/ai/ti/reference/ti-fs-mount-file-system.md). Layer and checkpoint mounts cannot run through WebDAV.
+    printf 'Hello from macOS\n' > "$HOME/workspace/$TEST_FILE"
+    cat "$HOME/workspace/$TEST_FILE"
+    ```
 
-When finished with the FUSE mount, stop writers and unmount it:
+4. When you are finished, close files that are open in applications and unmount the Filesystem:
 
-```bash
-# Release the mount after pending writes have been flushed.
-ti fs unmount-file-system --mount-path "$HOME/workspace"
-```
+    ```bash
+    ti fs unmount-file-system --mount-path "$HOME/workspace"
+    ```
 
-## Troubleshoot startup
+    WebDAV does not support `drain-file-system`. Complete a normal unmount before shutting down the machine or handing updated files to another user or environment.
 
-- Use an empty directory you can write to, such as `$HOME/workspace`. A root-level path might not be writable on macOS.
-- For FUSE, verify that macFUSE installation and required approvals are complete.
-- If startup fails, inspect the diagnostic log path in the CLI error. The top-level background-process error does not by itself identify the cause.
-- If unmount fails, keep the process, local cache, and machine available until you resolve the failure and verify remote data.
+    If you created the test file above, you can optionally confirm that it is available directly from the Filesystem:
+
+    ```bash
+    ti fs read-file --path "/$TEST_FILE"
+    ```
+
+Unmounting removes the local mount but does not delete the Filesystem or its data.
+
+## Use macFUSE when you need FUSE features
+
+Use FUSE instead of WebDAV when you need to:
+
+- mount a layer or checkpoint, or
+- make pending writes reach the Filesystem while keeping the mount running with `drain-file-system`.
+
+To use FUSE on macOS:
+
+1. Install [macFUSE](https://macfuse.github.io/) and complete any installation or security approval steps required by your macOS version.
+
+    Installing `ti` does not install macFUSE.
+
+2. Prepare the local mount directory:
+
+    - If a mount is already active at `$HOME/workspace`, unmount it before reusing the same directory:
+
+        ```bash
+        ti fs unmount-file-system --mount-path "$HOME/workspace"
+        ```
+
+    - Ensure that `$HOME/workspace` exists:
+
+        ```bash
+        mkdir -p "$HOME/workspace"
+        ```
+
+3. Mount the Filesystem with FUSE:
+
+    ```bash
+    ti fs mount-file-system \
+      --mount-path "$HOME/workspace" \
+      --driver fuse
+    ```
+
+    Layer and checkpoint mounts require FUSE, and checkpoint mounts are always read-only. For details, see [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
+
+    If you need pending writes to reach the Filesystem while keeping the mount running, see [Make FUSE writes available without unmounting](/tidb-cloud-filesystem/filesystem-mount.md#make-fuse-writes-available-without-unmounting).
+
+4. When you are finished, stop applications from writing to the mount, close open files, and unmount it:
+
+    ```bash
+    ti fs unmount-file-system --mount-path "$HOME/workspace"
+    ```
+
+    A successful FUSE unmount flushes pending writes. You do not need to run `drain-file-system` before a normal unmount.
+
+## Troubleshoot mount issues
+
+If a WebDAV mount fails to start:
+
+- Make sure the local mount directory exists and is writable.
+- Check the diagnostic log path reported by `ti` for the underlying error.
+- Make sure another mount is not already using the same local directory.
+
+If a FUSE mount fails to start:
+
+- Make sure macFUSE is installed.
+- Complete any macOS security approvals required by macFUSE.
+- Check the diagnostic log path reported by `ti`.
+
+If unmounting fails, keep the mount process and machine running until you resolve the error and verify that required files have reached the Filesystem. Do not remove local mount data while pending writes might remain.
+
+For additional mount errors, see [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md).
 
 ## What's next
 
-- [Understand mount lifecycle and durability](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
-- [Share a read-only workspace](/tidb-cloud-filesystem/filesystem-sharing.md).
+- [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting part of a Filesystem, and safe unmount behavior.
+- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to work with layers and checkpoints through FUSE.
+- [Share a TiDB Cloud Filesystem Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md) to give another user or environment access to the Filesystem.

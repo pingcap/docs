@@ -28,8 +28,8 @@ Filesystem list and describe commands query only the selected region. They do no
 
 | Platform | Filesystem mount | Vault mount | Requirements and alternatives |
 | --- | --- | --- | --- |
-| macOS | WebDAV by default; FUSE with explicit `--driver fuse` | FUSE | The built-in WebDAV helper supports Filesystem mounts. Install macFUSE and approve its system extension for FUSE or Vault mounts. |
-| Linux | FUSE | FUSE | Install FUSE3 and provide access to `/dev/fuse`. WebDAV mounting is not supported. |
+| macOS | WebDAV without macFUSE; FUSE when macFUSE is installed (automatic or explicit) | FUSE | The built-in WebDAV helper supports Filesystem mounts. Install macFUSE and approve its system extension for FUSE or Vault mounts. |
+| Linux | FUSE | FUSE | Install the `fuse3` package and provide access to `/dev/fuse`. WebDAV mounting is not supported. |
 | Windows | Not supported | Not supported | Use `ti fs` data-plane commands and non-mount Vault commands instead. |
 
 FUSE and WebDAV are implemented by the bundled [Drive9](https://github.com/mem9-ai/drive9) companion. The CLI does not fall back to a separate native mount implementation. A running mount keeps the companion version loaded when it started; unmount and remount after updating `ti`.
