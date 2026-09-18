@@ -58,7 +58,7 @@ ti fs describe-file-system --file-system-id "<file-system-id>"
 
 ## アクセスをチェックする {#check-access}
 
-リソースの選択、エンドポイント解決、認証情報、および companion access を検証します。
+リソースの選択、エンドポイント解決、認証情報、および companion アクセスを検証します。
 
 ```shell
 ti fs check-file-system --file-system-id "<file-system-id>"
