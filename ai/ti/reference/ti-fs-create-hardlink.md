@@ -26,8 +26,8 @@ ti fs create-hardlink
 
 ## Options
 
-- `--link-path <string>`: The file path for the hard link being created in the TiDB Cloud file system. \[required]
-- `--source-path <string>`: The existing file path in the TiDB Cloud file system. \[required]
+- `--link-path <string>`: The file path for the hard link being created in the TiDB Cloud Filesystem. \[required]
+- `--source-path <string>`: The existing file path in the TiDB Cloud Filesystem. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
