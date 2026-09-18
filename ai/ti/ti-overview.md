@@ -79,13 +79,13 @@ TiDB Cloud は現在、対象範囲の異なる 2 つの CLI を提供してい�
 
 ## 次のステップ {#next-steps}
 
-TiDB Cloud CLI を初めて使用する場合は、[Quick Start](/ai/ti/ti-quick-start.md) から始めて、`ti` をインストールし、プロファイルを設定し、基本的な TiDB Cloud Starter または Filesystem のワークフローを完了してください。
+TiDB Cloud CLI を初めて使用する場合は、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) から始めて、`ti` をインストールし、プロファイルを設定し、基本的な TiDB Cloud Starter または Filesystem のワークフローを完了してください。
 
 その後は、実施したい内容に応じて次に進んでください。
 
 - [TiDB Cloud Starter インスタンスを管理する](/ai/ti/guides/manage-starter-instances.md)
 - [TiDB Cloud Filesystems を管理する](/ai/ti/guides/manage-filesystem-resources.md)
-- **エンドツーエンドのワークフローに従う**: [日常的な TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md) または [エージェントサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) から始めてください
+- **エンドツーエンドのワークフローに従う**: [日次の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md) または [エージェントサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) から始めてください
 - **特定のコマンドを調べる**: [TiDB Cloud CLI コマンドリファレンス](/ai/ti/reference/ti-cli-reference.md) を確認してください
 - **TiDB Cloud CLI の新機能を確認する**: [TiDB Cloud CLI (`ti`) Release Notes](https://github.com/tidbcloud/ti-cli/releases) を確認してください
 - **問題を報告する**: [TiDB Cloud CLI GitHub repository](https://github.com/tidbcloud/ti-cli/issues) で issue を作成してください。

@@ -231,7 +231,7 @@ results = (
 )
 ```
 
-他のリランカーモデルを確認するには、[ランキング変更](/ai/guides/reranking.md)ご覧ください。
+他のリランカーモデルを確認するには、[再ランキング](/ai/guides/reranking.md)をご覧ください。
 
 ## 関連項目 {#see-also}
 

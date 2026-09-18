@@ -125,7 +125,7 @@ summary: Filesystem リソース、ファイル、レイヤー、パック、マ
 ## 関連情報 {#see-also}
 
 - [TiDB Cloud Filesystem リソースを管理する](/ai/ti/guides/manage-filesystem-resources.md)
-- [TiDB Cloud Filesystem AI プロバイダーを設定する](/ai/ti/guides/configure-filesystem-ai-providers.md)
+- [TiDB Cloud Filesystem AI Providers を設定する](/ai/ti/guides/configure-filesystem-ai-providers.md)
 - [TiDB Cloud Filesystem トークンを管理する](/ai/ti/guides/manage-filesystem-tokens.md)
 - [TiDB Cloud Filesystem データを操作する](/ai/ti/guides/work-with-filesystem-data.md)
 - [Filesystem レイヤーと Checkpoint を管理する](/ai/ti/guides/manage-filesystem-layers.md)

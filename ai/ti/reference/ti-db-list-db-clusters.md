@@ -74,7 +74,7 @@ ti db list-db-clusters
 
 ## フィルタと並べ替えの動作 {#filter-and-ordering-behavior}
 
-`ti` は、ユーザー指定のフィルタ式および並べ替え式を TiDB Cloud Starter API に渡します。無効または未サポートの式は API によって拒否されます。API の仕様については、[TiDB Cloud API v1beta1 Overview](/api/tidb-cloud-api-v1beta1.md) を参照してください。
+`ti` は、ユーザー指定のフィルタ式および並べ替え式を TiDB Cloud Starter API に渡します。無効または未サポートの式は API によって拒否されます。API の仕様については、[TiDB Cloud API v1beta1 の概要](/api/tidb-cloud-api-v1beta1.md) を参照してください。
 
 ## ページトークンの再利用 {#page-token-reuse}
 

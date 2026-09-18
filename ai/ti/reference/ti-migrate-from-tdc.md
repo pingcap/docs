@@ -33,7 +33,7 @@ summary: サポートされているローカル状態と自動化を tdc v0.1.x
 
 ## ti をインストールしてローカル状態を移行する {#install-ti-and-migrate-local-state}
 
-古い `tdc update` コマンドでは、名前が変更された `ti` 実行ファイルをインストールできず、`ti` も `tdc` コマンドエイリアスを提供しません。[Install TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli) に従って、`ti` を直接インストールしてください。
+古い `tdc update` コマンドでは、名前が変更された `ti` 実行ファイルをインストールできず、`ti` も `tdc` コマンドエイリアスを提供しません。[TiDB Cloud CLI をインストールする](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli) に従って、`ti` を直接インストールしてください。
 
 `~/.tdc/` が存在し、`~/.ti/` が存在しない場合、インストーラーおよび最初の `update` 以外の `ti` コマンドは、サポートされているローカル状態を自動的に移行します。移行では、ロールバック用コピーとして `~/.tdc/` を保持し、移行完了を記録するための所有者専用マーカーを `~/.ti/` 配下に作成します。
 

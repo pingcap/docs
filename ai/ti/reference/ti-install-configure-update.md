@@ -209,7 +209,7 @@ ti fs unmount-file-system --mount-path <filesystem-mount-path>
 ti fs-vault unmount-vault --mount-path <vault-mount-path>
 ```
 
-詳細は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) および [Filesystem Vault シークレットを管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md) を参照してください。
+詳細は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) および [Filesystem Vault Secrets を管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md) を参照してください。
 
 <SimpleTab groupId="operating-systems">
 

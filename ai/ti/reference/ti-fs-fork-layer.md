@@ -29,7 +29,7 @@ ti fs fork-layer
 
 ## オプション {#options}
 
-- `--parent-layer-ref <string>`: 親レイヤー ID、一意の名前、または [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references)。\[required]
+- `--parent-layer-ref <string>`: 親レイヤー ID、一意の名前、または [タグ参照](/ai/ti/reference/ti-filesystem.md#layer-references)。\[required]
 - `--actor-id <string>`: 子の所有者を識別する Actor ID。
 - `--checkpoint-id <string>`: 子を親のこのチェックポイントに固定します。省略した場合は、シリアライズされた親の tip に固定されます。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。

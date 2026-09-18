@@ -50,7 +50,7 @@ ti fs generate-file-system-scoped-token \
   --allow /datasets/corpus:read,list > ./worker-1-token.json
 ```
 
-シークレットマネージャーを通じて、`worker-1-token.json` の `fs_token` と Filesystem のリージョンコードを転送します。各ワーカーに対して一意の subject を指定して、トークン生成コマンドを繰り返します。所有者トークンは信頼できるマシン上にのみ保持し、トークンを安全に保存した後は JSON ファイルを削除してください。
+シークレットマネージャーを通じて、`worker-1-token.json` の `fs_token` と Filesystem のリージョンコードを転送します。各ワーカーに対して一意のサブジェクトを指定して、トークン生成コマンドを繰り返します。所有者トークンは信頼できるマシン上にのみ保持し、トークンを安全に保存した後は JSON ファイルを削除してください。
 
 ## ステップ 2. 各ワーカーでマウントする {#step-2-mount-in-each-worker}
 
