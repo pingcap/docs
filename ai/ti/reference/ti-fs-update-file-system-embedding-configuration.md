@@ -36,7 +36,7 @@ ti fs update-file-system-embedding-configuration
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
-プロバイダー API キーは `TI_FS_AI_PROVIDER_API_KEY` からのみ受け付けられます。このキーは検証および暗号化保存のために Filesystem バックエンドへ送信され、`ti` によってローカルに保存されることはなく、マスクされた形式でのみ返されます。埋め込みには、OpenAI-compatible な `/v1/embeddings` コントラクトに正確に一致することが必要です。ネイティブのプロバイダーインターフェースはサポートされていません。
+プロバイダー API キーは `TI_FS_AI_PROVIDER_API_KEY` からのみ受け付けられます。このキーは検証および暗号化保存のために Filesystem バックエンドへ送信され、`ti` によってローカルに保存されることはなく、マスクされた形式でのみ返されます。埋め込みには、OpenAI 互換の `/v1/embeddings` コントラクトに正確に一致することが必要です。ネイティブのプロバイダーインターフェースはサポートされていません。
 
 `source` が `database_auto` の Filesystem は、データベース管理の埋め込みを使用しているため、このコマンドでは変更できません。タイムアウトや応答消失の後に、やみくもに更新を再試行しないでください。まず describe コマンドを実行して、更新が成功したかどうかを確認してください。
 
