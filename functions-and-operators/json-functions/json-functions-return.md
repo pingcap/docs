@@ -17,7 +17,7 @@ TiDB は、MySQL 8.0 で利用可能な[JSON値属性を返すJSON関数](https:
 
 - ルート（ `$` ）
 - 天気 ( `$.weather` )
-- 現在の天気 ( `$.weather.sunny` )
+- 現在の天気 ( `$.weather.current` )
 
 ```sql
 SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');

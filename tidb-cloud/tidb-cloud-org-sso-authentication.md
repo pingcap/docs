@@ -192,14 +192,20 @@ SAML ID プロトコルを使用する ID プロバイダーがある場合は�
 
 TiDB Cloudでは、SAML認証方式はデフォルトで無効になっています。Cloud Organization SSOを有効にした後、以下の手順でSAML認証方式を有効にして設定できます。
 
-1. TiDB Cloud Organization SSO の ID プロバイダーから次の情報を取得します。
+1. TiDB Cloud コンソールの **Authentication** ページで、**Authentication Methods**領域でSAMLの行を見つけてクリックします。 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> SAML メソッドの詳細を表示します。
+2. **Authentication Method Details** ペインから、**Sign on URL** と **Signing Certificate** を入力する前に TiDB Cloud によって事前入力される次の値をコピーします。
+
+    - **Entity ID**: TiDB Cloud のサービスプロバイダー (SP) エンティティ ID です。
+    - **Postback URL**: ID プロバイダーが SAML レスポンスを送信する SAML エンドポイント（Assertion Consumer Service (ACS) URL または Reply URL とも呼ばれます）です。
+
+3. ID プロバイダーで、前の手順の **Entity ID** と **Postback URL** を使用して、TiDB Cloud 用の SAML アプリケーションを作成または設定します。SSO チームが ID プロバイダーを管理している場合は、これらの値をそのチームに提供します。
+
+    次に、ID プロバイダーから次の情報を取得します。
 
     - サインオンURL
     - 署名証明書
 
-2. TiDB Cloud コンソールの **Authentication** ページで、**Authentication Methods**領域でSAMLの行を見つけてクリックします。 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> SAML メソッドの詳細を表示します。
-
-3. メソッドの詳細では、以下を設定できます。
+4. TiDB Cloud コンソールの **Authentication Method Details** ペインに戻り、以下を設定します。
 
     - **Name**
 
@@ -233,7 +239,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
         **SCIM Provisioning Accounts** を有効にする前に、プロビジョニングするユーザーのメールドメインを追加して検証し、 **Allowed Email Domains** フィールドで設定してください。
 
-4. **Save**をクリックします。
+5. **Activate**をクリックします。
 
 #### SCIMプロビジョニングを構成する {#configure-scim-provisioning}
 

@@ -22,7 +22,7 @@ summary: TiDB 2.0.6は、システムの互換性と安定性の向上を伴い�
     - `DROP USER`文が場合によっては MySQL の動作と互換性がない問題を修正[#7014](https://github.com/pingcap/tidb/pull/7014)
     - `INSERT` / `LOAD DATA`のような文が`tidb_batch_insert` を有効にした後にOOMに遭遇する問題を修正しました [#7092](https://github.com/pingcap/tidb/pull/7092)
     - テーブルのデータが更新され続けると統計が自動的に更新されない問題を修正しました[#7093](https://github.com/pingcap/tidb/pull/7093)
-    - ファイアウォールが非アクティブな gPRC 接続を切断する問題を修正[#7099](https://github.com/pingcap/tidb/pull/7099)
+    - ファイアウォールが非アクティブな gRPC 接続を切断する問題を修正[#7099](https://github.com/pingcap/tidb/pull/7099)
     - 一部のシナリオでプレフィックスインデックスが間違った結果を返す問題を修正[#7126](https://github.com/pingcap/tidb/pull/7126)
     - 一部のシナリオで古い統計情報によって引き起こされるpanicの問題を修正[#7155](https://github.com/pingcap/tidb/pull/7155)
     - いくつかのシナリオで`ADD INDEX`操作後にインデックスデータの1つが失われる問題を修正しました[#7156](https://github.com/pingcap/tidb/pull/7156)

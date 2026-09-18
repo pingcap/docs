@@ -6,11 +6,11 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-gemini/']
 
 # Gemini埋め込み {#gemini-embeddings}
 
-このドキュメントでは、 TiDB Cloudで Gemini 埋め込みモデルを[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)で使用する方法、およびテキストクエリによるセマンティック検索を実行する方法について説明します。
+このドキュメントでは、Geminiの埋め込みモデルをTiDB Cloudで[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)に使用して、テキストクエリによるセマンティック検索を実行する方法について説明します。
 
 > **Note:**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされている{{{ .starter }}}インスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
@@ -282,6 +282,6 @@ CREATE TABLE sample (
 ## 関連項目 {#see-also}
 
 - [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
-- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル検索](/ai/guides/vector-search-overview.md)
 - [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
 - [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

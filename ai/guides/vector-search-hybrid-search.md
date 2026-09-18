@@ -27,7 +27,7 @@ TiDBにおけるハイブリッド検索の一般的なワークフローは以�
 
 ## さあ始めましょう {#get-started}
 
-### ステップ1. <a href="https://github.com/pingcap/pytidb">pytidb</a> Python SDKをインストールします {#step-1-install-the-a-href-https-github-com-pingcap-pytidb-pytidb-a-python-sdk}
+### ステップ1. [pytidb](https://github.com/pingcap/pytidb) Python SDKをインストールします {#step-1-install-the-pytidb-python-sdk}
 
 ```shell
 pip install "pytidb[models]"
@@ -231,7 +231,7 @@ results = (
 )
 ```
 
-他のリランカーモデルを確認するには、[ランキング変更](/ai/guides/reranking.md)ご覧ください。
+他のリランカーモデルを確認するには、[再ランキング](/ai/guides/reranking.md)をご覧ください。
 
 ## 関連項目 {#see-also}
 
@@ -241,7 +241,7 @@ results = (
 
 ## フィードバックとヘルプ {#feedback-x26-help}
 
-全文検索はまだ開発初期段階であり、利用できる地域が限られています。まだ利用できない地域で全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
+全文検索はまだ開発初期段階であり、利用できるリージョンが限られています。まだ利用できないリージョンで全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) または [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)

@@ -44,7 +44,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     - 結合したテーブルの再配置 によって誤ってプッシュダウンされた条件が破棄されたときに発生する間違ったクエリ結果の問題を修正しました。 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
     - `get_lock()`で取得したロックが10分以上保持できない問題を修正[#38706](https://github.com/pingcap/tidb/issues/38706) @[tangenta](https://github.com/tangenta)
     - AUTO_INCREMENT列がチェック制約で使用できない問題を修正しました [#38894](https://github.com/pingcap/tidb/issues/38894) @[YangKeao](https://github.com/YangKeao)
-    - gPRCログが間違ったファイルに出力される問題を修正[#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
+    - gRPCログが間違ったファイルに出力される問題を修正[#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
     - テーブルが切り捨てられたり削除されたりしても、テーブルのTiFlash同期ステータスが etcd から削除されない問題を修正[#37168](https://github.com/pingcap/tidb/issues/37168) @[CalvinNeo](https://github.com/CalvinNeo)
     - データソース名インジェクションによりデータファイルに無制限にアクセスできる問題を修正 (CVE-2022-3023) [#38541](https://github.com/pingcap/tidb/issues/38541) @[lance6716](https://github.com/lance6716)
     - 関数`str_to_date`が`NO_ZERO_DATE`モードで間違った結果を返す問題を修正 [#39146](https://github.com/pingcap/tidb/issues/39146) @[mengxin9014](https://github.com/mengxin9014)

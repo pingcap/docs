@@ -11,7 +11,7 @@ aliases: ['/ja/tidb/stable/vector-search-data-types/','/ja/tidbcloud/vector-sear
 > **Note:**
 >
 > - ベクトルデータ型はパブリックプレビューであり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> - ベクトルデータ型は[TiDB Self-Managed](/overview.md) および [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で使用できます。TiDB Self-Managed の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
+> - ベクトルデータ型は[TiDB Self-Managed](/overview.md) および [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で使用できます。TiDB Self-Managed の場合、TiDB バージョンは v8.4.0 以降である必要があります（v8.5.0 以降を推奨）。
 
 現在、次のベクトルデータ型が利用可能です。
 
@@ -77,7 +77,7 @@ INSERT INTO vector_table VALUES (1, '[0.3, 0.5, -0.1]'); -- 3 dimensions vector,
 INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector, OK
 ```
 
-ただし、ベクトル距離は同じ次元のベクトル間でのみ計算できるため、この列に[ベクトル検索インデックス](/ai/reference/vector-search-index.md)構築できないことに注意してください。
+ただし、ベクトル距離は同じ次元のベクトル間でのみ計算できるため、この列に[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を構築できないことに注意してください。
 
 ## 比較 {#comparison}
 
@@ -93,7 +93,7 @@ INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector,
 異なる次元を持つ 2つのベクトルは、次の規則に従って辞書式比較を使用して比較されます。
 
 - 2 つのベクトルは最初から要素ごとに比較され、各要素は数値的に比較されます。
-- 最初の不一致要素によって、どのベクトルが辞書式に他のベクトルより*小さい*か*大きいかが*決まります。
+- 最初の不一致要素によって、どのベクトルが辞書式に他のベクトルより*小さい*か*大きい*かが決まります。
 - あるベクトルが別のベクトルの接頭辞である場合、短いベクトルは辞書順でもう一方より*小さく*なります。例えば、 `[1,2,3] < [1,2,3,0]` 。
 - 同じ長さで同一の要素を持つベクトルは辞書的に*等しい*です。
 - 空ベクトルは、辞書順で空でないベクトルよりも*小さい*。例えば、 `[] < [1]` 。

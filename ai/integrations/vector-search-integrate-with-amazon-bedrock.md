@@ -10,12 +10,12 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 >
 > このドキュメントはTiDB Cloudにのみ適用され、TiDB Self-Managedには適用されません。
 
-このチュートリアルでは[TiDBベクトル検索](/ai/concepts/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
+このチュートリアルでは[TiDBベクトル検索](/ai/guides/vector-search-overview.md)と[Amazon Bedrock](https://aws.amazon.com/bedrock/)を統合して、検索拡張生成 (RAG) Q&amp;A ボットを構築する方法を説明します。
 
 > **Note:**
 >
 > - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) と [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md) と [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 > **Tip**
 >
@@ -25,11 +25,11 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 このチュートリアルを完了するには、以下が必要です。
 
-- [Python 3.11以降](https://www.python.org/downloads/)インストールされています
+- [Python 3.11以降](https://www.python.org/downloads/)がインストールされていること。
 
-- [pip](https://pypi.org/project/pip/)がインストールされました
+- [pip](https://pypi.org/project/pip/)がインストールされていること。
 
-- [AWS CLI](https://aws.amazon.com/cli/)がインストールされました
+- [AWS CLI](https://aws.amazon.com/cli/)がインストールされていること。
 
     AWS CLI プロファイルがサポートされている[Amazon Bedrock](https://aws.amazon.com/bedrock/)リージョンに設定されていることを確認してください。サポートされている地域のリストは[Amazon Bedrock リージョン](https://docs.aws.amazon.com/bedrock/latest/userguide/models-regions.html)でご覧いただけます。サポートされているリージョンに切り替えるには、次のコマンドを実行します。
 
@@ -37,11 +37,11 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
     aws configure set region <your-region>
     ```
 
-- TiDB Cloud Starterインスタンス
+- {{{ .starter }}}インスタンス
 
-    お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/select-cluster-tier.md#starter)。
+    お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)。
 
-- [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)AWS アカウントと次のモデルへのアクセス:
+- [Amazon Bedrockに必要な権限](https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html)および次のモデルへのアクセス権を持つ AWS アカウント:
 
     - **Amazon Titan Embeddings** ( `amazon.titan-embed-text-v2:0` ) は、テキスト埋め込みを生成するために使用されます。
     - テキスト生成に使用される**Meta Llama 3** （ `us.meta.llama3-2-3b-instruct-v1:0` ）
@@ -56,7 +56,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)からTiDB接続情報を取得し、開発環境の環境変数を以下のように設定してください。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -245,9 +245,9 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### ステップ7. ベクトルデータをTiDB Cloud Starterに保存します。 {#step-7-save-the-vector-data-to-tidb-cloud-starter}
+### ステップ7. ベクトルデータを{{{ .starter }}}に保存します。 {#step-7-save-the-vector-data-to-tidb-cloud-starter}
 
-`demo.py`に、ベクトルデータをTiDB Cloud Starterインスタンスに保存するための以下のコードを追加します。
+`demo.py`に、ベクトルデータを{{{ .starter }}}インスタンスに保存するための以下のコードを追加します。
 
 ```python
 # ---- Saving Vectors to TiDB ----

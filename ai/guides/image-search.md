@@ -11,7 +11,7 @@ TiDBは**ベクトル検索**による画像検索を可能にします。自動
 
 > **Note:**
 >
-> 画像検索の完全な例については、 [画像検索の例](/ai/examples/image-search-with-pytidb.md)を参照してください。
+> 画像検索の完全な例については、 [画像検索の例](/ai/guides/image-search-with-pytidb.md)を参照してください。
 
 ## 基本的な使い方 {#basic-usage}
 
@@ -36,7 +36,7 @@ image_embed = EmbeddingFunction(
 
 ### ステップ2. テーブルとベクトルフィールドを作成する {#step-2-create-a-table-and-vector-field}
 
-`VectorField()`画像の埋め込みを格納するためのベクトルフィールドを定義します。`source_field`は画像のURLを格納するフィールドを指定するためのパラメータです。
+`VectorField()`で画像の埋め込みを格納するためのベクトルフィールドを定義します。`source_field`は画像のURLを格納するフィールドを指定するためのパラメータです。
 
 ```python
 from pytidb.schema import TableModel, Field
@@ -107,5 +107,5 @@ results = table.search("orange tabby cat").limit(3).to_list()
 ## 参照 {#see-also}
 
 - [自動埋め込みガイド](/ai/guides/auto-embedding.md)
-- [ベクトル検索ガイド](/ai/concepts/vector-search-overview.md)
-- [画像検索の例](/ai/examples/image-search-with-pytidb.md)
+- [ベクトル検索ガイド](/ai/guides/vector-search-overview.md)
+- [画像検索の例](/ai/guides/image-search-with-pytidb.md)

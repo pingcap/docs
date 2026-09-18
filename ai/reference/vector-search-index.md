@@ -6,16 +6,16 @@ aliases: ['/ja/tidb/stable/vector-search-index/','/ja/tidbcloud/vector-search-in
 
 # ベクトル検索インデックス {#vector-search-index}
 
-[ベクトル検索](/ai/concepts/vector-search-overview.md)文書で説明されているように、ベクトル検索は、与えられたベクトルとデータベースに格納されているすべてのベクトルとの距離を計算することで、与えられたベクトルの上位K近傍（KNN）を特定します。このアプローチは正確な結果をもたらしますが、テーブルに多数のベクトルが含まれている場合、テーブル全体のスキャンが必要となるため、処理速度が低下する可能性があります[^1]
+[ベクトル検索](/ai/guides/vector-search-overview.md)文書で説明されているように、ベクトル検索は、与えられたベクトルとデータベースに格納されているすべてのベクトルとの距離を計算することで、与えられたベクトルの上位K近傍（KNN）を特定します。このアプローチは正確な結果をもたらしますが、テーブルに多数のベクトルが含まれている場合、テーブル全体のスキャンが必要となるため、処理速度が低下する可能性があります[^1]
 
 検索効率を向上させるために、TiDBでは近似KNN（ANN）検索用のベクトル検索インデックスを作成できます。ベクトル検索にベクトルインデックスを使用すると、TiDBは精度をわずかに低下させるだけでクエリパフォーマンスを大幅に向上させ、通常90%以上の検索再現率を維持できます。
 
 > **Note:**
 >
 > - ベクトル検索機能はパブリックプレビューです。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> - ベクトル検索機能は[TiDB Self-Managed](/overview.md)および[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)で利用可能です。TiDB Self-Managedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能は[TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で利用可能です。TiDB Self-Managedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
-現在、TiDB は[HNSW（階層的ナビゲート可能なスモールワールド）](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)ベクトル検索インデックス アルゴリズムをサポートしています。
+現在、TiDB は[HNSW（階層的ナビゲート可能なスモールワールド）](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)ベクトル検索インデックスアルゴリズムをサポートしています。
 
 ## 制限 {#restrictions}
 
@@ -249,7 +249,7 @@ LIMIT 10;
 - `vector_index.search.total` : インデックス内の検索にかかる合計時間。レイテンシーが大きい場合、通常、インデックスがコールド状態（一度もアクセスされていない、またはかなり前にアクセスされている状態）であるため、インデックス検索時に大量のI/O操作が発生します。複数のベクトルインデックスが並列で検索される可能性があるため、このフィールドは実際のクエリ時間よりも長くなる可能性があります。
 - `vector_index.search.discarded_nodes` : 検索中に訪問されたが破棄されたベクトル行の数。これらの破棄されたベクトルは検索結果には考慮されません。この値が大きい場合、通常、 `UPDATE`または`DELETE`文によって多くの古い行が発生していることを示します。
 
-出力の解釈については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 、および[EXPLAIN コマンド](/explain-walkthrough.md)を参照してください。
+出力の解釈については、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md) 、 [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) 、および[`EXPLAIN`ウォークスルー](/explain-walkthrough.md)を参照してください。
 
 ## 参照 {#see-also}
 

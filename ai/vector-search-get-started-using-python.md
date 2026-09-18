@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 このチュートリアルでは、**セマンティック検索**機能を提供するシンプルなAIアプリケーションの開発方法を説明します。従来のキーワード検索とは異なり、セマンティック検索はクエリの背後にある意味をインテリジェントに理解し、最も関連性の高い結果を返します。たとえば、"dog"、"fish"、"tree"というタイトルの文書があり、"a swimming animal"を検索すると、アプリケーションは"fish"を最も関連性の高い結果として識別します。
 
-このチュートリアルでは、 [TiDBベクトル検索](/ai/concepts/vector-search-overview.md)、Python、 [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python) 、および AI モデルを使用して、この AI アプリケーションを開発します。
+このチュートリアルでは、 [TiDBベクトル検索](/ai/guides/vector-search-overview.md)、Python、 [TiDB Vector SDK for Python](https://github.com/pingcap/tidb-vector-python) 、および AI モデルを使用して、この AI アプリケーションを開発します。
 
 > **Note:**
 >
@@ -51,7 +51,7 @@ pip install sqlalchemy pymysql sentence-transformers tidb-vector python-dotenv
 ```
 
 - `tidb-vector` : TiDBベクトル検索と対話するためのPythonクライアント。
-- [`sentence-transformers`](https://sbert.net) : テキストから[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)を生成するための事前トレーニング済みモデルを提供する Python ライブラリです。
+- [`sentence-transformers`](https://sbert.net) : テキストから[ベクトル埋め込み](/ai/guides/vector-search-overview.md#vector-embedding)を生成するための事前トレーニング済みモデルを提供する Python ライブラリです。
 
 ### ステップ3．TiDB接続文字列を設定する {#step-3-configure-the-tidb-connection-string}
 
@@ -120,7 +120,7 @@ TiDBをローカルマシンで実行している場合、 `<HOST>`はデフォ�
 
 ### ステップ4．埋め込みモデルを初期化する {#step-4-initialize-the-embedding-model}
 
-[埋め込みモデル](/ai/concepts/vector-search-overview.md#embedding-model)データを[ベクトル埋め込み](/ai/concepts/vector-search-overview.md#vector-embedding)に変換します。この例では、テキスト埋め込みに事前トレーニング済みモデル[**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)を使用します。 `sentence-transformers`ライブラリによって提供されるこの軽量モデルは、テキストデータを 384 次元のベクトル埋め込みに変換します。
+[埋め込みモデル](/ai/guides/vector-search-overview.md#embedding-model)データを[ベクトル埋め込み](/ai/guides/vector-search-overview.md#vector-embedding)に変換します。この例では、テキスト埋め込みに事前トレーニング済みモデル[**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)を使用します。 `sentence-transformers`ライブラリによって提供されるこの軽量モデルは、テキストデータを 384 次元のベクトル埋め込みに変換します。
 
 モデルを設定するには、次のコードを`example.py`ファイルにコピーしてください。このコードは`SentenceTransformer`インスタンスを初期化し、後で使用するために`text_to_embedding()`関数を定義します。
 

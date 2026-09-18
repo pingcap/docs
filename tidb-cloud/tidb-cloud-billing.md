@@ -115,7 +115,7 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
 
     > **Note:**
     >
-    > Infrequent Access は現在 {{{ .essential }}} 向けのプライベートプレビューであり、リクエストがあった場合にのみ利用できます。
+    > Infrequent Access は現在プライベートプレビューであり、リクエストがあった場合にのみ利用できます。
 
 - **Columnar storage**: 列指向ストレージは **TiFlash** エンジンによって提供されます。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 

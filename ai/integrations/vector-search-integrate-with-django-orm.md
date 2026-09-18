@@ -6,12 +6,12 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-django-orm/','/ja/tidb/d
 
 # TiDBベクトル検索をDjango ORMと統合する {#integrate-tidb-vector-search-with-django-orm}
 
-このチュートリアルでは[Django](https://www.djangoproject.com/)ORM を使用して[TiDBベクトル検索](/ai/concepts/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
+このチュートリアルでは[Django](https://www.djangoproject.com/)ORM を使用して[TiDBベクトル検索](/ai/guides/vector-search-overview.md)と対話し、埋め込みを保存し、ベクトル検索クエリを実行する方法を説明します。
 
 > **Note:**
 >
 > - ベクトル検索機能はパブリックプレビューです。予告なく変更される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
-> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトル検索機能は、 [TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で利用できます。TiDB Self-Managedの場合、TiDBのバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## 前提条件 {#prerequisites}
 
@@ -23,7 +23,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-django-orm/','/ja/tidb/d
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
-- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行します {#run-the-sample-app}
@@ -79,9 +79,9 @@ mysqlclientのインストールで問題が発生した場合は、mysqlclient�
 <SimpleTab>
 <div label="{{{ .starter }}}">
 
-TiDB Cloud Starterインスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順に従ってください。
+{{{ .starter }}}インスタンスの場合、接続文字列を取得し、環境変数を設定するには、以下の手順に従ってください。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -171,8 +171,8 @@ python manage.py runserver
 | APIパス                                   | 説明                        |
 | --------------------------------------- | ------------------------- |
 | `POST: /insert_documents`               | 埋め込みを含むドキュメントを挿入します。      |
-| `GET: /get_nearest_neighbors_documents` | 最近隣の3件のドキュメントを入手する。 |
-| `GET: /get_documents_within_distance`   | 一定距離内にあるドキュメントを入手する。          |
+| `GET: /get_nearest_neighbors_documents` | 最近隣の3件のドキュメントを取得します。 |
+| `GET: /get_documents_within_distance`   | 一定距離内にあるドキュメントを取得します。          |
 
 ## サンプルコードスニペット {#sample-code-snippets}
 

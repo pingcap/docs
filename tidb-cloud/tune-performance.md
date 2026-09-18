@@ -46,6 +46,14 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 
 デフォルトでは、300 ミリ秒を超えて実行される SQL クエリはスロークエリと見なされます。
 
+<CustomContent plan="essential,premium">
+
+> **Note:**
+>
+> スロークエリのトリガールールを設定して、特定のメトリクスの組み合わせに基づいて対象のステートメントをフィルタリングすることもできます。詳細については、[スロークエリのトリガールールを設定する](/config-slow-query-trigger-rules.md) を参照してください。
+
+</CustomContent>
+
 <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> でスロークエリを表示するには、次の手順を実行します。
 
 1. [**Diagnosis** ページに移動します](#view-the-diagnosis-page)。

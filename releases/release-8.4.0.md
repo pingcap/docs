@@ -139,7 +139,7 @@ TiDB バージョン: 8.4.0
 
     ベクトル検索のパフォーマンスを向上させるために、[ベクトル検索インデックス](/ai/reference/vector-search-index.md)を作成して使用できます。 TiDBベクトル検索インデックスはTiFlashに依存していることに注意してください。ベクトル検索インデックスを使用する前に、 TiFlashノードが TiDB クラスターにデプロイされていることを確認してください。
 
-    詳細については、[ドキュメント](/ai/concepts/vector-search-overview.md)を参照してください。
+    詳細については、[ドキュメント](/ai/guides/vector-search-overview.md)を参照してください。
 
 ### データベース操作 {#db-operations}
 

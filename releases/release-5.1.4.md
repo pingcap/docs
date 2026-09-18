@@ -55,7 +55,7 @@ TiDB バージョン: 5.1.4
         - 増分スキャンの残り時間を観察するためのメトリックを追加します [#2985](https://github.com/pingcap/tiflow/issues/2985)
         - "EventFeed retry rate limited"ログの数を減らす[#4006](https://github.com/pingcap/tiflow/issues/4006)
         - `no owner alert`、`mounter row`、`table sink total row`、`buffer sink total row`を含む、PrometheusとGrafanaの監視メトリックとアラートを追加します [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
-        - TiKVリロードのレート制限制御を最適化して、チェンジフィード初期化中のgPRC輻輳を軽減します[#3110](https://github.com/pingcap/ticdc/issues/3110)
+        - TiKVリロードのレート制限制御を最適化して、チェンジフィード初期化中のgRPC輻輳を軽減します[#3110](https://github.com/pingcap/ticdc/issues/3110)
         - TiKVストアがダウンしたときにKVクライアントが回復するまでの時間を短縮します[#3191](https://github.com/pingcap/tiflow/issues/3191)
 
 ## バグ修正 {#bug-fixes}

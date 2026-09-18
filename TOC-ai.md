@@ -5,45 +5,162 @@
 
 ## クイックスタート
 
-- [Pythonで始める](/ai/quickstart-via-python.md)
-- [SQL経由で開始する](/ai/quickstart-via-sql.md)
-
-## 概念
-
-- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [Python によるベクトル検索のクイックスタート](/ai/quickstart-via-python.md)
+- [SQL によるベクトル検索のクイックスタート](/ai/quickstart-via-sql.md)
+- [TiDB Cloud CLI のクイックスタート](/ai/ti/ti-quick-start.md)
 
 ## ガイド
 
-- [TiDBに接続する](/ai/guides/connect.md)
-- [表の操作](/ai/guides/tables.md)
-- 検索機能
-  - [ベクトル検索](/ai/guides/vector-search.md)
+- [Python から TiDB に接続する](/ai/guides/connect.md)
+- 検索と取得
+  - ベクトル検索
+    - [概要](/ai/guides/vector-search-overview.md)
+    - [ベクトル検索ガイド](/ai/guides/vector-search.md)
+    - [ベクトル検索の例](/ai/guides/vector-search-with-pytidb.md)
   - 全文検索
     - [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)
     - [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)
-  - [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
-  - [画像検索](/ai/guides/image-search.md)
-- 高度な機能
-  - [自動埋め込み](/ai/guides/auto-embedding.md)
-  - [フィルタリング](/ai/guides/filtering.md)
+    - [全文検索の例](/ai/guides/fulltext-search-with-pytidb.md)
+  - ハイブリッド検索
+    - [ハイブリッド検索ガイド](/ai/guides/vector-search-hybrid-search.md)
+    - [ハイブリッド検索の例](/ai/guides/hybrid-search-with-pytidb.md)
+  - 自動埋め込み
+    - [自動埋め込みガイド](/ai/guides/auto-embedding.md)
+    - [自動埋め込みの例](/ai/guides/auto-embedding-with-pytidb.md)
+  - 画像検索
+    - [画像検索ガイド](/ai/guides/image-search.md)
+    - [画像検索の例](/ai/guides/image-search-with-pytidb.md)
   - [再ランキング](/ai/guides/reranking.md)
+- データを操作する
+  - [テーブルを操作する](/ai/guides/tables.md)
+  - [フィルタリング](/ai/guides/filtering.md)
   - [結合クエリ](/ai/guides/join-queries.md)
   - [生のSQLクエリ](/ai/guides/raw-queries.md)
   - [トランザクション](/ai/guides/transactions.md)
-
-## 例
-
-- [基本的なCRUD操作](/ai/examples/basic-with-pytidb.md)
-- [自動埋め込み](/ai/examples/auto-embedding-with-pytidb.md)
-- 検索と取得
-  - [ベクトル検索](/ai/examples/vector-search-with-pytidb.md)
-  - [全文検索](/ai/examples/fulltext-search-with-pytidb.md)
-  - [ハイブリッド検索](/ai/examples/hybrid-search-with-pytidb.md)
-  - [画像検索](/ai/examples/image-search-with-pytidb.md)
-- AIアプリケーション
-  - [RAG アプリケーション](/ai/examples/rag-with-pytidb.md)
-  - [会話記憶](/ai/examples/memory-with-pytidb.md)
-  - [テキストからSQLへ](/ai/examples/text2sql-with-pytidb.md)
+- AI アプリケーションを構築する
+  - [RAG の例](/ai/guides/rag-with-pytidb.md)
+  - [会話メモリの例](/ai/guides/memory-with-pytidb.md)
+  - [Text-to-SQL の例](/ai/guides/text2sql-with-pytidb.md)
+- TiDB Cloud CLI
+  - [概要](/ai/ti/ti-overview.md)
+  - [TiDB Cloud CLI のインストール、設定、および更新](/ai/ti/reference/ti-install-configure-update.md)
+  - [TiDB Cloud Starter インスタンスを管理する](/ai/ti/guides/manage-starter-instances.md)
+  - TiDB Cloud Filesystem を管理する
+    - [Filesystem リソースを管理する](/ai/ti/guides/manage-filesystem-resources.md)
+    - [Filesystem AI プロバイダーを設定する](/ai/ti/guides/configure-filesystem-ai-providers.md)
+    - [Filesystem トークンを管理する](/ai/ti/guides/manage-filesystem-tokens.md)
+    - [Filesystem データを操作する](/ai/ti/guides/work-with-filesystem-data.md)
+    - [Filesystem のレイヤーとチェックポイントを管理する](/ai/ti/guides/manage-filesystem-layers.md)
+    - [TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md)
+    - [Git ワークスペースを管理する](/ai/ti/guides/manage-git-workspaces.md)
+    - [Filesystem ジャーナルを使用する](/ai/ti/guides/use-filesystem-journals.md)
+    - [Filesystem Vault シークレットを管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md)
+  - ユーザーと自動化のシナリオ
+    - [日次の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md)
+    - [明示的な SQL ロールを使用して TiDB Cloud Starter にクエリする](/ai/ti/guides/ti-query-sql-with-roles-example.md)
+    - [複数のマシン間で TiDB Cloud Filesystem を共有する](/ai/ti/guides/ti-share-filesystem-across-machines-example.md)
+    - [TiDB Cloud Filesystem を使用して分離されたジョブ間で CI アーティファクトを受け渡す](/ai/ti/guides/ti-ci-artifact-handoff-example.md)
+  - AI エージェントのシナリオ
+    - [エージェントのサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md)
+    - [TiDB Cloud Filesystem を使用して使い捨てサンドボックス間でエージェントの状態を永続化する](/ai/ti/guides/ti-persistent-agent-state-example.md)
+    - [TiDB Cloud Filesystem を使用して並列エージェント間で読み取り専用データセットを共有する](/ai/ti/guides/ti-parallel-agent-dataset-example.md)
+    - [TiDB Cloud Filesystem 上でエージェント用の Git ワークスペースを準備する](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
+    - [TiDB Cloud Filesystem ジャーナルにエージェントのワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md)
+    - [TiDB Cloud Filesystem Vault シークレットをエージェントに委任する](/ai/ti/guides/ti-vault-agent-secrets-example.md)
+  - コマンドリファレンス
+    - [概要](/ai/ti/reference/ti-cli-reference.md)
+    - [configure](/ai/ti/reference/ti-configure.md)
+    - [update](/ai/ti/reference/ti-update.md)
+    - TiDB Cloud Starter インスタンスを管理するための `ti db` コマンド
+      - [概要](/ai/ti/reference/ti-starter-database.md)
+      - [create-db-cluster](/ai/ti/reference/ti-db-create-db-cluster.md)
+      - [list-db-clusters](/ai/ti/reference/ti-db-list-db-clusters.md)
+      - [describe-db-cluster](/ai/ti/reference/ti-db-describe-db-cluster.md)
+      - [update-db-cluster](/ai/ti/reference/ti-db-update-db-cluster.md)
+      - [delete-db-cluster](/ai/ti/reference/ti-db-delete-db-cluster.md)
+      - [create-db-cluster-branch](/ai/ti/reference/ti-db-create-db-cluster-branch.md)
+      - [list-db-cluster-branches](/ai/ti/reference/ti-db-list-db-cluster-branches.md)
+      - [describe-db-cluster-branch](/ai/ti/reference/ti-db-describe-db-cluster-branch.md)
+      - [delete-db-cluster-branch](/ai/ti/reference/ti-db-delete-db-cluster-branch.md)
+      - [create-db-sql-users](/ai/ti/reference/ti-db-create-db-sql-users.md)
+      - [format-db-connection-string](/ai/ti/reference/ti-db-format-db-connection-string.md)
+      - [execute-sql-statement](/ai/ti/reference/ti-db-execute-sql-statement.md)
+    - TiDB Cloud Filesystem を管理するための `ti fs` コマンド
+      - [概要](/ai/ti/reference/ti-filesystem.md)
+      - [create-file-system](/ai/ti/reference/ti-fs-create-file-system.md)
+      - [import-file-system-token](/ai/ti/reference/ti-fs-import-file-system-token.md)
+      - [generate-file-system-token](/ai/ti/reference/ti-fs-generate-file-system-token.md)
+      - [generate-file-system-scoped-token](/ai/ti/reference/ti-fs-generate-file-system-scoped-token.md)
+      - [list-file-system-tokens](/ai/ti/reference/ti-fs-list-file-system-tokens.md)
+      - [enable-file-system-token](/ai/ti/reference/ti-fs-enable-file-system-token.md)
+      - [disable-file-system-token](/ai/ti/reference/ti-fs-disable-file-system-token.md)
+      - [delete-file-system-token](/ai/ti/reference/ti-fs-delete-file-system-token.md)
+      - [refresh-file-system-token](/ai/ti/reference/ti-fs-refresh-file-system-token.md)
+      - [list-file-systems](/ai/ti/reference/ti-fs-list-file-systems.md)
+      - [describe-file-system](/ai/ti/reference/ti-fs-describe-file-system.md)
+      - [describe-file-system-extract-configuration](/ai/ti/reference/ti-fs-describe-file-system-extract-configuration.md)
+      - [update-file-system-extract-configuration](/ai/ti/reference/ti-fs-update-file-system-extract-configuration.md)
+      - [describe-file-system-embedding-configuration](/ai/ti/reference/ti-fs-describe-file-system-embedding-configuration.md)
+      - [update-file-system-embedding-configuration](/ai/ti/reference/ti-fs-update-file-system-embedding-configuration.md)
+      - [check-file-system](/ai/ti/reference/ti-fs-check-file-system.md)
+      - [delete-file-system](/ai/ti/reference/ti-fs-delete-file-system.md)
+      - [copy-file](/ai/ti/reference/ti-fs-copy-file.md)
+      - [read-file](/ai/ti/reference/ti-fs-read-file.md)
+      - [list-files](/ai/ti/reference/ti-fs-list-files.md)
+      - [describe-file](/ai/ti/reference/ti-fs-describe-file.md)
+      - [move-file](/ai/ti/reference/ti-fs-move-file.md)
+      - [delete-file](/ai/ti/reference/ti-fs-delete-file.md)
+      - [create-directory](/ai/ti/reference/ti-fs-create-directory.md)
+      - [chmod-file](/ai/ti/reference/ti-fs-chmod-file.md)
+      - [create-symlink](/ai/ti/reference/ti-fs-create-symlink.md)
+      - [create-hardlink](/ai/ti/reference/ti-fs-create-hardlink.md)
+      - [search-file-content](/ai/ti/reference/ti-fs-search-file-content.md)
+      - [find-files](/ai/ti/reference/ti-fs-find-files.md)
+      - [create-layer](/ai/ti/reference/ti-fs-create-layer.md)
+      - [list-layers](/ai/ti/reference/ti-fs-list-layers.md)
+      - [fork-layer](/ai/ti/reference/ti-fs-fork-layer.md)
+      - [list-layer-chain](/ai/ti/reference/ti-fs-list-layer-chain.md)
+      - [describe-layer](/ai/ti/reference/ti-fs-describe-layer.md)
+      - [diff-layer](/ai/ti/reference/ti-fs-diff-layer.md)
+      - [create-layer-checkpoint](/ai/ti/reference/ti-fs-create-layer-checkpoint.md)
+      - [delete-layer](/ai/ti/reference/ti-fs-delete-layer.md)
+      - [rollback-layer](/ai/ti/reference/ti-fs-rollback-layer.md)
+      - [commit-layer](/ai/ti/reference/ti-fs-commit-layer.md)
+      - [pack-file-system](/ai/ti/reference/ti-fs-pack-file-system.md)
+      - [unpack-file-system](/ai/ti/reference/ti-fs-unpack-file-system.md)
+      - [mount-file-system](/ai/ti/reference/ti-fs-mount-file-system.md)
+      - [drain-file-system](/ai/ti/reference/ti-fs-drain-file-system.md)
+      - [unmount-file-system](/ai/ti/reference/ti-fs-unmount-file-system.md)
+    - TiDB Cloud Filesystem Git ワークスペースを管理するための `ti fs-git` コマンド
+      - [概要](/ai/ti/reference/ti-filesystem-git.md)
+      - [clone-git-workspace](/ai/ti/reference/ti-fs-git-clone-git-workspace.md)
+      - [hydrate-git-workspace](/ai/ti/reference/ti-fs-git-hydrate-git-workspace.md)
+      - [add-git-worktree](/ai/ti/reference/ti-fs-git-add-git-worktree.md)
+      - [remove-git-worktree](/ai/ti/reference/ti-fs-git-remove-git-worktree.md)
+    - TiDB Cloud Filesystem ジャーナルを管理するための `ti fs-journal` コマンド
+      - [概要](/ai/ti/reference/ti-filesystem-journal.md)
+      - [create-journal](/ai/ti/reference/ti-fs-journal-create-journal.md)
+      - [append-journal-entries](/ai/ti/reference/ti-fs-journal-append-journal-entries.md)
+      - [read-journal-entries](/ai/ti/reference/ti-fs-journal-read-journal-entries.md)
+      - [search-journal-entries](/ai/ti/reference/ti-fs-journal-search-journal-entries.md)
+      - [verify-journal](/ai/ti/reference/ti-fs-journal-verify-journal.md)
+    - TiDB Cloud Filesystem Vault シークレットを管理するための `ti fs-vault` コマンド
+      - [概要](/ai/ti/reference/ti-filesystem-vault.md)
+      - [create-secret](/ai/ti/reference/ti-fs-vault-create-secret.md)
+      - [replace-secret](/ai/ti/reference/ti-fs-vault-replace-secret.md)
+      - [read-secret](/ai/ti/reference/ti-fs-vault-read-secret.md)
+      - [list-secrets](/ai/ti/reference/ti-fs-vault-list-secrets.md)
+      - [delete-secret](/ai/ti/reference/ti-fs-vault-delete-secret.md)
+      - [create-grant](/ai/ti/reference/ti-fs-vault-create-grant.md)
+      - [delete-grant](/ai/ti/reference/ti-fs-vault-delete-grant.md)
+      - [list-audit-events](/ai/ti/reference/ti-fs-vault-list-audit-events.md)
+      - [run-with-secret](/ai/ti/reference/ti-fs-vault-run-with-secret.md)
+      - [mount-vault](/ai/ti/reference/ti-fs-vault-mount-vault.md)
+      - [unmount-vault](/ai/ti/reference/ti-fs-vault-unmount-vault.md)
+  - [TiDB Cloud CLI の設定と認証情報](/ai/ti/reference/ti-configuration-and-credentials.md)
+  - [TiDB Cloud CLI のリージョン、セキュリティ、および制限事項](/ai/ti/reference/ti-regions-security-and-limitations.md)
+  - [tdc から TiDB Cloud CLI へ移行する](/ai/ti/reference/ti-migrate-from-tdc.md)
+  - [TiDB Cloud CLI のトラブルシューティング](/ai/ti/reference/ti-troubleshooting.md)
 
 ## 統合
 

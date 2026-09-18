@@ -11,7 +11,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 > **Note:**
 >
 > - ベクトル関数と演算子はパブリックプレビューであり、予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
-> - ベクトルデータ型は、 [TiDB Self-Managed](/overview.md) および [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) で使用できます。TiDB Self-Managedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
+> - ベクトルデータ型は、 [TiDB Self-Managed](/overview.md) および [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) で使用できます。TiDB Self-Managedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
 ## ベクトル関数 {#vector-functions}
 
@@ -75,7 +75,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 | [`<`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than)                    | 小なり演算子               |
 | [`<=`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_less-than-or-equal)          | 以下演算子                |
 | [`NOT BETWEEN ... AND ...`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-between) | 値が範囲内にないか確認する        |
-| [`!=` 、 `&lt;&gt;`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)           | 等しくない演算子             |
+| [`!=` 、 `<>`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-equal)           | 等しくない演算子             |
 | [`NOT IN()`](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#operator_not-in)                     | 値が値のセット内にないかどうかを確認する |
 
 ベクトルの比較方法の詳細については、 [ベクトルデータ型 | 比較](/ai/reference/vector-search-data-types.md#comparison)を参照してください。
@@ -108,7 +108,7 @@ VEC_L2_DISTANCE(vector1, vector2)
 
 次の式を使用して、2つのベクトル間の[L2距離](https://en.wikipedia.org/wiki/Euclidean_distance) (ユークリッド距離) を計算します。
 
-$距離(p,q)=\sqrt {\sum \limits *{i=1}^{n}{(p* {i}-q_{i})^{2}}}$
+$距離(p,q)=\sqrt {\sum \limits _{i=1}^{n}{(p_{i}-q_{i})^{2}}}$
 
 2つのベクトルの次元数は同じである必要があります。そうでない場合はエラーが返されます。
 
@@ -134,7 +134,7 @@ VEC_COSINE_DISTANCE(vector1, vector2)
 
 次の式を使用して 2つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)を計算します。
 
-$距離(p,q)=1.0 - {\frac {\sum \limits *{i=1}^{n}{p* {i}q_{i}}}{{\sqrt {\sum \limits *{i=1}^{n}{p* {i}^{2}}}}\cdot {\sqrt {\sum \limits *{i=1}^{n}{q* {i}^{2}}}}}}$
+$距離(p,q)=1.0 - {\frac {\sum \limits _{i=1}^{n}{p_{i}q_{i}}}{{\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}}\cdot {\sqrt {\sum \limits _{i=1}^{n}{q_{i}^{2}}}}}}$
 
 2つのベクトルの次元数は同じである必要があります。そうでない場合はエラーが返されます。
 
@@ -162,7 +162,7 @@ VEC_NEGATIVE_INNER_PRODUCT(vector1, vector2)
 
 次の数式を使用して、2つのベクトル間の[内積](https://en.wikipedia.org/wiki/Dot_product)の負の値を使用して距離を計算します。
 
-$DISTANCE(p,q)=- INNER_PROD(p,q)=-\sum \limits *{i=1}^{n}{p* {i}q_{i}}$
+$距離(p,q)=- INNER\_PROD(p,q)=-\sum \limits _{i=1}^{n}{p_{i}q_{i}}$
 
 2つのベクトルの次元数は同じである必要があります。そうでない場合はエラーが返されます。
 
@@ -188,7 +188,7 @@ VEC_L1_DISTANCE(vector1, vector2)
 
 次の式を使用して、2つのベクトル間の[L1距離](https://en.wikipedia.org/wiki/Taxicab_geometry) (マンハッタン距離) を計算します。
 
-$距離(p,q)=\sum \limits *{i=1}^{n}{|p* {i}-q_{i}|}$
+$距離(p,q)=\sum \limits _{i=1}^{n}{|p_{i}-q_{i}|}$
 
 2つのベクトルの次元数は同じである必要があります。そうでない場合はエラーが返されます。
 
@@ -248,7 +248,7 @@ VEC_L2_NORM(vector)
 
 次の式を使用してベクトルの[L2ノルム](https://en.wikipedia.org/wiki/Norm_(mathematics)) (ユークリッド ノルム) を計算します。
 
-$NORM(p)=\sqrt {\sum \limits *{i=1}^{n}{p* {i}^{2}}}$
+$NORM(p)=\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}$
 
 例：
 

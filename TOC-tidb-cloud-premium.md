@@ -478,6 +478,7 @@
   - [テーブルフィルター](/table-filter.md)
   - [外部ストレージサービスのURI形式](/external-storage-uri.md)
   - [DDL文に埋め込まれた `ANALYZE`](/ddl_embedded_analyze.md)
+  - [スロークエリのトリガールールを設定する](/config-slow-query-trigger-rules.md)
   - [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
 - サポートプラン

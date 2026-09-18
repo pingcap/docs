@@ -9,7 +9,7 @@ summary: アプリケーションで自動埋め込みを使用する方法を�
 
 > **Note:**
 >
-> 自動埋め込みの完全な例については、 [自動埋め込みの例](/ai/examples/auto-embedding-with-pytidb.md)を参照してください。
+> 自動埋め込みの完全な例については、 [自動埋め込みの例](/ai/guides/auto-embedding-with-pytidb.md)を参照してください。
 
 ## 基本的な使い方 {#basic-usage}
 

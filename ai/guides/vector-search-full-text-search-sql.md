@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/vector-search-full-text-search-sql/','/ja/tidbcloud/v
 
 # SQLによる全文検索 {#full-text-search-with-sql}
 
-意味的な類似性に焦点を当てる[ベクトル検索](/ai/concepts/vector-search-overview.md)とは異なり、全文検索では正確なキーワードに基づいて文書を取得できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用することで、検索品質を向上させることができます。
+意味的な類似性に焦点を当てる[ベクトル検索](/ai/guides/vector-search-overview.md)とは異なり、全文検索では正確なキーワードに基づいて文書を取得できます。検索拡張生成（RAG）シナリオでは、全文検索とベクトル検索を組み合わせて使用することで、検索品質を向上させることができます。
 
 TiDBの全文検索機能は、以下の機能を提供します。
 
@@ -20,31 +20,31 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 > **Tip:**
 >
-> Python の使い方については、 [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)ご覧ください。
+> Python の使い方については、 [Pythonによる全文検索](/ai/guides/vector-search-full-text-search-python.md)を ご覧ください。
 >
 > AI アプリで全文検索とベクトル検索を併用するには、 [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)を参照してください。
 
 ## さあ始めましょう {#get-started}
 
-全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおけるTiDB Cloud Starterでのみご利用いただけます。
+全文検索機能はまだ開発初期段階にあり、より多くのお客様に順次展開していく予定です。現在、全文検索機能は、以下のリージョンにおける{{{ .starter }}}でのみご利用いただけます。
 
 - AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
-全文検索を使用する前に、 TiDB Cloud Starterインスタンスがサポートされているリージョンで作成されていることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+全文検索を使用する前に、 {{{ .starter }}}インスタンスがサポートされているリージョンで作成されていることを確認してください。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 全文検索を実行するには、以下の手順に従ってください。
 
-1. [**全文索引を作成する**](#create-a-full-text-index): フルテキスト インデックスを持つテーブルを作成するか、既存のテーブルにフルテキスト インデックスを追加します。
+1. [**フルテキストインデックスを作成する**](#create-a-full-text-index): フルテキストインデックスを持つテーブルを作成するか、既存のテーブルにフルテキストインデックスを追加します。
 
-2. テキストデータ[**テキストデータを挿入する**](#insert-text-data): テーブルにテキストデータを挿入します。
+2. [**テキストデータを挿入する**](#insert-text-data): テーブルにテキストデータを挿入します。
 
 3. [**全文検索を実行する**](#perform-a-full-text-search): テキストクエリと全文検索関数を使用して全文検索を実行します。
 
-### 全文索引を作成する {#create-a-full-text-index}
+### フルテキストインデックスを作成する {#create-a-full-text-index}
 
-全文検索を実行するには、効率的な検索とランキングに必要なデータ構造を提供する全文インデックスが必要です。全文インデックスは、新規テーブルに作成することも、既存のテーブルに追加することもできます。
+全文検索を実行するには、効率的な検索とランキングに必要なデータ構造を提供するフルテキストインデックスが必要です。フルテキストインデックスは、新規テーブルに作成することも、既存のテーブルに追加することもできます。
 
-全文インデックス付きのテーブルを作成します。
+フルテキストインデックス付きのテーブルを作成します。
 
 ```sql
 CREATE TABLE stock_items(
@@ -54,7 +54,7 @@ CREATE TABLE stock_items(
 );
 ```
 
-または、既存のテーブルに全文インデックスを追加します。
+または、既存のテーブルにフルテキストインデックスを追加します。
 
 ```sql
 CREATE TABLE stock_items(
@@ -74,9 +74,9 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_
 
 - `MULTILINGUAL` : 英語、中国語、日本語、韓国語など、複数の言語をサポートしています。
 
-### 全文インデックスを管理する {#manage-full-text-indexes}
+### フルテキストインデックスを管理する {#manage-full-text-indexes}
 
-全文インデックスを作成する際、インデックス名の指定は任意です。指定しない場合、TiDB はデフォルトで最初にインデックス化されるカラム名をインデックス名として使用します。
+フルテキストインデックスを作成する際、インデックス名の指定は任意です。指定しない場合、TiDB はデフォルトで最初にインデックス化されるカラム名をインデックス名として使用します。
 
 ```sql
 -- Without specifying an index name, TiDB uses the first indexed column name ("title") as the index name
@@ -98,7 +98,7 @@ FROM INFORMATION_SCHEMA.STATISTICS
 WHERE TABLE_SCHEMA = 'your_database' AND TABLE_NAME = 'stock_items';
 ```
 
-**全文インデックスを削除する:**
+**フルテキストインデックスを削除する:**
 
 ```sql
 -- Use SHOW INDEX to confirm the index name first
@@ -126,7 +126,7 @@ CREATE FULLTEXT INDEX ft_name ON users (name) WITH PARSER STANDARD;
 
 ### テキストデータを挿入する {#insert-text-data}
 
-全文インデックスを持つテーブルにデータを挿入する方法は、他のテーブルにデータを挿入する方法と全く同じです。
+フルテキストインデックスを持つテーブルにデータを挿入する方法は、他のテーブルにデータを挿入する方法と全く同じです。
 
 例えば、以下のSQL文を実行することで、複数の言語でデータを挿入できます。TiDBの多言語パーサーがテキストを自動的に処理します。
 
@@ -319,7 +319,7 @@ WHERE t.author_id IN
 
 ## フィードバックとヘルプ {#feedback-x26-help}
 
-全文検索はまだ開発初期段階であり、利用できる地域が限られています。まだ利用できない地域で全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
+全文検索はまだ開発初期段階であり、利用できるリージョンが限られています。まだ利用できないリージョンで全文検索を試してみたい場合、またはご意見やご質問がある場合は、お気軽にお問い合わせください。
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc) または [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)

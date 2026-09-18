@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-amazon-titan/']
 
 > **Note:**
 >
-> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
+> [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされている{{{ .starter }}}インスタンスでのみ利用できます。
 
 ## 利用可能なモデル {#available-models}
 
@@ -130,6 +130,6 @@ LIMIT 2;
 ## 関連項目 {#see-also}
 
 - [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)
-- [ベクトル検索](/ai/concepts/vector-search-overview.md)
+- [ベクトル検索](/ai/guides/vector-search-overview.md)
 - [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
 - [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)

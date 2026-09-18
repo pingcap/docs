@@ -213,6 +213,7 @@
   - 問題シナリオ
     - スロークエリ
       - [スロークエリを特定する](/identify-slow-queries.md)
+      - [スロークエリのトリガールールを設定する](/config-slow-query-trigger-rules.md)
       - [スロークエリを分析する](/analyze-slow-queries.md)
     - [TiDB メモリ不足](/troubleshoot-tidb-oom.md)
     - [ホットスポット](/troubleshoot-hot-spot-issues.md)
@@ -224,7 +225,7 @@
   - 診断方法
     - [SQL診断](/information-schema/information-schema-sql-diagnostics.md)
     - [ステートメントサマリーテーブル](/statement-summary-tables.md)
-    - [Top SQL を使用して高コストなクエリを特定する](/dashboard/top-sql.md)
+    - [Top SQL を使用して高コストクエリを特定する](/dashboard/top-sql.md)
     - [ログを使用して高負荷なクエリを特定する](/identify-expensive-queries.md)
     - [クラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
     - [TiKVにおけるステイル読み取りとsafe-tsの理解](/troubleshoot-stale-read.md)
@@ -455,7 +456,7 @@
         - [楽観的モード](/dm/feature-shard-merge-optimistic.md)
         - [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)
       - [gh-ost/pt-osc を使用する MySQL データベースから移行する](/dm/feature-online-ddl.md)
-      - [より多くのカラムを持つダウンストリーム TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
+      - [より多くのカラムを持つ下流の TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
       - [継続的なデータ検証](/dm/dm-continuous-data-validation.md)
     - 管理
       - クラスタのアップグレード
