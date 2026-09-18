@@ -56,7 +56,7 @@
     - [Filesystem ジャーナルを使用する](/ai/ti/guides/use-filesystem-journals.md)
     - [Filesystem Vault シークレットを管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md)
   - ユーザーと自動化のシナリオ
-    - [日常的な TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md)
+    - [日次の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md)
     - [明示的な SQL ロールを使用して TiDB Cloud Starter にクエリする](/ai/ti/guides/ti-query-sql-with-roles-example.md)
     - [複数のマシン間で TiDB Cloud Filesystem を共有する](/ai/ti/guides/ti-share-filesystem-across-machines-example.md)
     - [TiDB Cloud Filesystem を使用して分離されたジョブ間で CI アーティファクトを受け渡す](/ai/ti/guides/ti-ci-artifact-handoff-example.md)

@@ -14,7 +14,7 @@ TiDBは、AIアプリケーションの構築とAIエージェントワークフ
 
 構築したいものに応じて、開始する方法を選択してください。
 
-| 目標 | 開始はこちら |
+| 目標 | まずはこちら |
 | --- | --- |
 | ベクトル検索を使用した AI アプリケーションを構築する | [Python によるベクトル検索のクイックスタート](/ai/quickstart-via-python.md) または [SQL によるベクトル検索のクイックスタート](/ai/quickstart-via-sql.md) |
 | TiDB Cloud を使用してエージェントおよび自動化ワークフローを構築する | [TiDB Cloud CLI のクイックスタート](/ai/ti/ti-quick-start.md) |
@@ -103,7 +103,7 @@ TiDB Cloud CLI (`ti`) を使用すると、ユーザー、スクリプト、CI�
 | TiDB Cloud Starter インスタンス、ブランチ、SQL 操作を自動化する | [TiDB Cloud Starter インスタンスを管理する](/ai/ti/guides/manage-starter-instances.md) |
 | マシン、CIジョブ、サンドボックス間でファイルを永続化して共有する | [Filesystem リソースを管理する](/ai/ti/guides/manage-filesystem-resources.md) および [Filesystem データを操作する](/ai/ti/guides/work-with-filesystem-data.md) |
 | マウントされたワークスペース、Git ワークスペース、ジャーナル、または委任されたシークレットを使用する | [Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md)、[Git ワークスペースを管理する](/ai/ti/guides/manage-git-workspaces.md)、[Filesystem ジャーナルを使用する](/ai/ti/guides/use-filesystem-journals.md)、および [Filesystem Vault シークレットを管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md) |
-| エンドツーエンドの自動化またはエージェントの例をたどる | [毎日の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md) または [エージェントサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) |
+| エンドツーエンドの自動化またはエージェントの例をたどる | [日次の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md) または [エージェントサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) |
 | コマンド、グローバルオプション、出力動作、エラーを調べる | [TiDB Cloud CLI コマンドリファレンス](/ai/ti/reference/ti-cli-reference.md) |
 
 ## 統合 {#integrations}
