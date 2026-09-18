@@ -9,7 +9,7 @@ TiDB Cloud Starter インスタンス用に、`ti` が管理する 3 つの SQL 
 
 これらのユーザーには、以下の事前定義されたアクセスレベルと組み込みの TiDB Cloud ロールがあります。
 
-| `ti` access mode | TiDB Cloud built-in role | 想定される用途 |
+| `ti` access mode | TiDB Cloud built-in role | 想定用途 |
 | --- | --- | --- |
 | `read_only` | `role_readonly` | データを変更せずにクエリおよび検証を行う |
 | `read_write` | `role_readwrite` | アプリケーションデータのクエリおよび変更を行う |
