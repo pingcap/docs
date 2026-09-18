@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/vector-search-index/','/ja/tidbcloud/vector-search-in
 > - ベクトル検索機能はパブリックプレビューです。予告なく変更される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)報告を行ってください。
 > - ベクトル検索機能は[TiDB Self-Managed](/overview.md)および[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter)で利用可能です。TiDB Self-Managedの場合、TiDBバージョンはv8.4.0以降である必要があります（v8.5.0以降を推奨）。
 
-現在、TiDB は[HNSW（階層的ナビゲート可能なスモールワールド）](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)ベクトル検索インデックス アルゴリズムをサポートしています。
+現在、TiDB は[HNSW（階層的ナビゲート可能なスモールワールド）](https://en.wikipedia.org/wiki/Hierarchical_navigable_small_world)ベクトル検索インデックスアルゴリズムをサポートしています。
 
 ## 制限 {#restrictions}
 
