@@ -1,11 +1,11 @@
 ---
 title: 输入与输出文件格式
-summary: "{{{ .lake }}} 支持多种文件格式，既可作为数据加载或卸载的源，也可作为目标。本文介绍支持的文件格式及其可用选项。"
+summary: "{{{ .lake }}} 支持多种文件格式，既可作为数据加载或导出的源，也可作为目标。本文介绍支持的文件格式及其可用选项。"
 ---
 
 # 输入与输出文件格式
 
-{{{ .lake }}} 支持多种文件格式，既可作为数据加载或卸载的源，也可作为目标。本文介绍支持的文件格式及其可用选项。
+{{{ .lake }}} 支持多种文件格式，既可作为数据加载或导出的源，也可作为目标。本文介绍支持的文件格式及其可用选项。
 
 ## 语法 {#syntax}
 
@@ -33,8 +33,8 @@ summary: "{{{ .lake }}} 支持多种文件格式，既可作为数据加载或�
 
 > **注意：**
 >
-> - {{{ .lake }}} 当前仅支持将 ORC 和 AVRO 用作源。暂不支持将数据卸载到 ORC 或 AVRO 文件中。
-> - {{{ .lake }}} 当前仅支持将 LANCE 用作卸载目标。`COPY INTO <location>` 写出的是 Lance 数据集目录，而不是单个独立文件，因此它适用于下游 Lance 工具链，而不是 stage-table 读取或 `COPY INTO <table>`。
+> - {{{ .lake }}} 当前仅支持将 ORC 和 AVRO 用作源。暂不支持将数据导出到 ORC 或 AVRO 文件中。
+> - {{{ .lake }}} 当前仅支持将 LANCE 用作导出目标。`COPY INTO <location>` 写出的是 Lance 数据集目录，而不是单个独立文件，因此它适用于下游 Lance 工具链，而不是 stage-table 读取或 `COPY INTO <table>`。
 > - 关于如何在 {{{ .lake }}} 中管理自定义文件格式，请参见 [文件格式](/tidb-cloud-lake/sql/file-format.md)。
 
 ### formatTypeOptions {#formattypeoptions}
@@ -395,7 +395,7 @@ parquet 文件内部块的压缩算法。
 
 ## LANCE 选项 {#lance-options}
 
-仅在使用 `COPY INTO <location>` 卸载时支持 `LANCE`。
+仅在使用 `COPY INTO <location>` 导出时支持 `LANCE`。
 
 与 CSV、TSV、NDJSON 和 Parquet 相比，Lance 导出**不会**生成一个或多个可由 {{{ .lake }}} 直接读回的独立文件。相反，{{{ .lake }}} 会写入一个数据集目录，其中包含 `.lance` 数据文件以及诸如 `_versions/` 之类的数据集元信息。
 
@@ -413,7 +413,7 @@ FILE_FORMAT = (TYPE = LANCE)
 
 | 项目 | LANCE 行为 |
 |------|----------------|
-| 支持的方向 | 仅卸载 |
+| 支持的方向 | 仅导出 |
 | 在 {{{ .lake }}} stage 查询中读回 | 不支持 |
 | `COPY INTO <table>` | 不支持 |
 | 输出布局 | 包含 `.lance` 文件和元信息的数据集目录 |
