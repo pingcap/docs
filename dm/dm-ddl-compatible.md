@@ -134,6 +134,18 @@ The following statements are rewritten before being replicated to the downstream
 |`^DROP TABLE...`|`^DROP TABLE...IF EXISTS`|
 |`^DROP INDEX...`|`^DROP INDEX...IF EXISTS`|
 
+## Multi-schema-change DDL statements
+
+In some handling paths, such as replaying DDL statements recorded from gh-ost or pt-osc shadow tables during online DDL cut-over, DM might split a multi-schema-change `ALTER TABLE` statement into multiple standalone DDL statements. After the split, each generated DDL statement is applied independently to TiDB and to DM's schema tracker. Therefore, a statement that is accepted by the upstream as one atomic multi-change `ALTER TABLE` might fail after it is split if the generated DDL order is not independently executable. This does not necessarily mean that the original upstream DDL is invalid.
+
+For example, some MySQL-compatible upstreams support replacing an existing index with the same name in one statement:
+
+```sql
+ALTER TABLE t ADD UNIQUE INDEX idx(c), DROP INDEX idx;
+```
+
+If DM splits or replays this statement as `ADD UNIQUE INDEX idx(c)` before `DROP INDEX idx`, the `ADD` statement fails because the old `idx` still exists. To avoid this issue, use DDL statements whose split execution order is valid on TiDB, such as dropping the old index and adding the new index as separate DDL statements in a safe order. If the migration task has already paused on such a DDL, use [`binlog replace`](/dm/handle-failed-ddl-statements.md) to replace it with equivalent TiDB-compatible DDL statements.
+
 ## Shard merge migration tasks
 
 When DM merges and migrates tables in pessimistic or optimistic mode, the behavior of DDL replication is different from that in other scenarios. For details, refer to [Pessimistic Mode](/dm/feature-shard-merge-pessimistic.md) and [Optimistic Mode](/dm/feature-shard-merge-optimistic.md).
