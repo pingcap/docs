@@ -5,7 +5,7 @@ summary: TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFS�
 
 # バックアップストレージ {#backup-storages}
 
-TiDBは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、NFSへのバックアップデータの保存をサポートしています。具体的には、 `br`コマンドの`--storage`または`-s`のパラメータでバックアップストレージのURIを指定できます。このドキュメントでは、 [URI形式](#uri-format)と[認証](#authentication)の外部ストレージサービスと、 [サーバー側の暗号化](#server-side-encryption)の外部ストレージサービスを紹介します。
+TiDBは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、NFSへのバックアップデータの保存をサポートしています。具体的には、 `br`コマンドの`--storage`または`-s`のパラメータでバックアップストレージのURIを指定できます。このドキュメントでは、さまざまな外部ストレージサービスの[URI形式](#uri-format)、[認証](#authentication)、および[サーバー側の暗号化](#server-side-encryption)について紹介します。
 
 ## TiKVに資格情報を送信する {#send-credentials-to-tikv}
 
@@ -106,7 +106,7 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 
 バックアップの前に、S3 上のバックアップディレクトリにアクセスするための次の権限を設定します。
 
-- バックアップ中に`s3:DeleteObject`およびバックアップ &amp; リストア ( BR ) `s3:AbortMultipartUpload`バックアップディレクトリ`s3:GetObject`アクセスするための最小権限: `s3:ListBucket` 、および`s3:PutObject`
+- バックアップ中に TiKV とバックアップ＆リストア（BR）がバックアップディレクトリにアクセスするための最小権限: `s3:ListBucket`、 `s3:GetObject`、 `s3:DeleteObject`、 `s3:PutObject`、および`s3:AbortMultipartUpload`
 - 復元中に TiKV とBRがバックアップディレクトリにアクセスするための最小権限: `s3:ListBucket`と`s3:GetObject` 。
 
 バックアップディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して指定のリージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
@@ -185,7 +185,7 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 
         > **Note:**
         >
-        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、 **方法 1: バックアップと復元のアクセスキーを指定する**を使用します。
+        > この方法を使用する場合は、手順 3 で TiKV を再起動する必要があります。クラスターを再起動できない場合は、バックアップと復元に**方法 1: アクセスキーを指定する**を使用します。
         1. このノードの TiKV ポートが`24000` 、つまり systemd サービスの名前が`tikv-24000`であるとします。
 
             ```shell

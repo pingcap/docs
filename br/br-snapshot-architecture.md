@@ -48,7 +48,7 @@ sequenceDiagram
 
 2. BRはバックアップデータのスケジュールを設定します。
 
-    - **GCの一時停止**： BRは、TiDB [TiDB GCメカニズム](/garbage-collection-overview.md)によってバックアップデータがクリーンアップされないように、TiDB GCの時間を設定します。
+    - **GCの一時停止**： BRは、 [TiDB GCメカニズム](/garbage-collection-overview.md)によってバックアップデータがクリーンアップされないように、TiDB GCの時間を設定します。
     - **TiKV とリージョン情報の取得**: BR はPD にアクセスして、すべての TiKV ノードのアドレスとデータの[リージョン](/tidb-storage.md#region)分布を取得します。
     - **TiKVにデータバックアップを依頼する**： BRはバックアップ依頼を作成し、すべてのTiKVノードに送信します。バックアップ依頼には、バックアップのタイミング、バックアップ対象のリージョン、およびストレージパスが含まれます。
 

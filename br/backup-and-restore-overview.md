@@ -16,7 +16,7 @@ BRは以下の要件を満たしています。
 
 ## 使用する前に {#before-you-use}
 
-このセクションでは、TiDB のバックアップとリストアを使用するための前提条件について説明します。これには、制限事項、使用上のヒント、互換性の問題が含まれます。BR ツールと他の機能またはバージョンとの[互換性](#compatibility)性の詳細については、 を参照してください。
+このセクションでは、TiDB のバックアップとリストアを使用するための前提条件について説明します。これには、制限事項、使用上のヒント、互換性の問題が含まれます。BR ツールと他の機能またはバージョンとの互換性の詳細については、 [互換性](#compatibility)を参照してください。
 
 ### 制限 {#restrictions}
 
@@ -76,7 +76,7 @@ TiDB BRは以下の機能を提供します。
 #### バックアップのパフォーマンスとTiDBクラスタへの影響 {#backup-performance-and-impact-on-tidb-clusters}
 
 - クラスタのCPUとI/Oリソースが十分な場合、スナップショットバックアップがTiDBクラスタに与える影響は限定的で、通常は20%未満に抑えられます。TiDBクラスタを適切に構成することで、この影響をさらに10%以下にまで最小限に抑えることができます。CPUとI/Oリソースが不足している場合は、TiKV設定項目[`backup.num-threads`](/tikv-configuration-file.md#num-threads-1)を調整して、バックアップタスクで使用されるワーカースレッド数を変更し、バックアップタスクがTiDBクラスタに与える影響を軽減できます。TiKVノードのバックアップ速度はスケーラブルで、50MB/秒から100MB/秒の範囲です。詳細については、 [バックアップのパフォーマンスと影響](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-backup)を参照してください。
-- ログバックアップタスクのみの場合、クラスタへの影響は約5%です。ログバックアップは、3～5分ごとに最後の更新後に生成されたすべての変更をバックアップストレージにフラッシュするため、**最短5分のリカバリポイント目標（RPO）を実現できます**。
+- ログバックアップタスクのみの場合、クラスタへの影響は約5%です。ログバックアップは、3～5分ごとに最後の更新後に生成されたすべての変更をバックアップストレージにフラッシュするため、**最短5分のRPO（目標復旧時点）を実現できます**。
 
 ### バックアップデータを復元する {#restore-backup-data}
 
@@ -88,12 +88,12 @@ TiDB BRは以下の機能を提供します。
 
 - 任意の時点へのデータ復元（PITR）
 
-    - `br restore point`コマンドを実行すると、リカバリ時点より前の最新のスナップショットバックアップデータを復元し、指定した時点までのバックアップデータをログに記録できます。BRは復元範囲を自動的に判断し、バックアップデータにアクセスして、ターゲットクラスタにデータを復元します。
+    - `br restore point`コマンドを実行すると、リカバリ時点より前の最新のスナップショットバックアップデータと、指定した時点までのログバックアップデータを復元できます。BRは復元範囲を自動的に判断し、バックアップデータにアクセスして、ターゲットクラスタにデータを復元します。
 
-#### TiDBクラスターのパフォーマンスと影響を回復する {#restore-performance-and-impact-on-tidb-clusters}
+#### 復元のパフォーマンスとTiDBクラスターへの影響 {#restore-performance-and-impact-on-tidb-clusters}
 
-- データの復元はスケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 1 GiB/秒です。詳細については、 [パフォーマンスとインパクトを回復](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)をご覧ください。
-- 各 TiKV ノードでは、PITR は 30 GiB/h でログデータを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)ご覧ください。
+- データの復元はスケーラブルな速度で実行されます。通常、速度は TiKV ノードあたり 1 GiB/秒です。詳細については、 [復元のパフォーマンスと影響](/br/br-snapshot-guide.md#performance-and-impact-of-snapshot-restore)をご覧ください。
+- 各 TiKV ノードでは、PITR は 30 GiB/時間でログデータを復元できます。詳細については、 [PITRのパフォーマンスと影響](/br/br-pitr-guide.md#performance-capabilities-of-pitr)をご覧ください。
 
 ## バックアップストレージ {#backup-storage}
 
@@ -116,7 +116,7 @@ TiDBの一部の機能が有効化または無効化されている場合、バ�
 | グローバル一時テーブル           |                                                  | データのバックアップと復元には、 BRのバージョン5.3.0以降を使用していることを確認してください。そうでない場合、バックアップ対象のグローバル一時テーブルの定義でエラーが発生します。                                                                                                                                                                                                                                                                                                  |
 | TiDB Lightning物理インポート |                                                  | アップストリームデータベースがTiDB Lightningの物理インポートモードを使用している場合、ログバックアップでデータをバックアップできません。データのインポート後に完全バックアップを実行することをお勧めします。詳細については、 [上流データベースがTiDB Lightningを使用して物理インポートモードでデータをインポートすると、ログバックアップ機能が利用できなくなります。なぜでしょうか？](/faq/backup-and-restore-faq.md#when-the-upstream-database-imports-data-using-tidb-lightning-in-the-physical-import-mode-the-log-backup-feature-becomes-unavailable-why)を参照してください。 |
 | TiCDC                 |                                                  | BR v8.2.0 以降: リストア対象のクラスターにチェンジフィードがあり、チェンジフィードの[CheckpointTS](/ticdc/ticdc-classic-architecture.md#checkpointts)が BackupTS より前の場合、 BR はリストアを実行しません。 BRバージョン v8.2.0 より前: リストア対象のクラスターにアクティブな TiCDC チェンジフィードがある場合、 BR はリストアを実行しません。                                                                                                                                                             |
-| ベクトル検索                |                                                  | データのバックアップと復元には、 BR v8.4.0 以降のバージョンを使用していることを確認してください。テーブルを で復元することは [ベクトルデータ型](/ai/reference/vector-search-data-types.md)v8.4.0 より前の TiDB クラスタではサポートされていません。                                                                                                                                                                                                                                  |
+| ベクトル検索                |                                                  | データのバックアップと復元には、 BR v8.4.0 以降のバージョンを使用していることを確認してください。 [ベクトルデータ型](/ai/reference/vector-search-data-types.md)を持つテーブルを v8.4.0 より前の TiDB クラスタに復元することはサポートされていません。                                                                                                                                                  |
 
 ### バージョン互換性 {#version-compatibility}
 

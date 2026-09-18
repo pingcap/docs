@@ -16,7 +16,7 @@ TiDB のバックアップおよび復元機能を使用する前に、推奨さ
 **TiDBには2種類のバックアップがあります。どちらを使用すればよいでしょうか？**フルバックアップには、特定の時点におけるクラスターの全データが含まれます。ログバックアップには、TiDBに書き込まれたデータの変更が含まれます。両方のバックアップを同時に使用することをお勧めします。
 
 - **<a href="/br/br-pitr-guide.md#start-log-backup">ログバックアップの開始</a>**： `tiup br log start`のコマンドを実行してログバックアップタスクを開始します。その後、タスクはすべてのTiKVノードで実行され続け、TiDBデータの変更を小さなバッチで指定されたストレージに定期的にバックアップします。
-- **<a href="/br/br-snapshot-guide.md#back-up-cluster-snapshots">スナップショット（フル）バックアップを</a>定期的に実行する**： `tiup br backup full`のコマンドを実行して、クラスターのスナップショットを指定されたストレージにバックアップします。例えば、毎日午前0時にクラスターのスナップショットをバックアップします。
+- **<a href="/br/br-snapshot-guide.md#back-up-cluster-snapshots">スナップショット（フル）バックアップ</a>を定期的に実行する**： `tiup br backup full`のコマンドを実行して、クラスターのスナップショットを指定されたストレージにバックアップします。例えば、毎日午前0時にクラスターのスナップショットをバックアップします。
 
 ### バックアップデータを管理するにはどうすればいいですか? {#how-to-manage-backup-data}
 
@@ -35,7 +35,7 @@ BRは基本的なバックアップと復元機能のみを提供し、バック
 
 TiDB クラスターを独自に構築したデータセンターに導入する場合は、次のプラクティスが推奨されます。
 
-- バックアップストレージシステムとして[MinIO](https://docs.min.io/docs/minio-quickstart-guide.html)構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
+- バックアップストレージシステムとして[MinIO](https://docs.min.io/docs/minio-quickstart-guide.html)を構築し、S3 プロトコルを使用してデータを MinIO にバックアップします。
 - ネットワークファイルシステム (NFS、NAS など) ディスクを br コマンドラインツールとすべての TiKV インスタンスにマウントし、POSIX ファイルシステム インターフェイスを使用して、バックアップデータを対応する NFS ディレクトリに書き込みます。
 
 > **Note:**
@@ -60,7 +60,7 @@ TiDB クラスターを独自に構築したデータセンターに導入する
 - 完全バックアップデータのみを復元するには、 `tiup br restore`を使用して、指定したバックアップの完全復元を実行できます。
 - ログバックアップを開始し、定期的に完全バックアップを実行している場合は、 `tiup br restore point`コマンドを実行して、バックアップ保持期間内の任意の時点にデータを復元できます。
 
-## BRをデプロイて使用する {#deploy-and-use-br}
+## BRをデプロイして使用する {#deploy-and-use-br}
 
 BRをデプロイするには、次の要件が満たされていることを確認してください。
 
@@ -75,7 +75,7 @@ BRをデプロイするには、次の要件が満たされていることを確
 
 TiDB は、br コマンドラインツールを使用したバックアップと復元をサポートしています。
 
-- `tiup install br`コマンドを[TiUPオンラインを使用してbrコマンドラインツールをインストールする](/migration-tools.md#install-tools-using-tiup)まで実行できます。
+- `tiup install br`コマンドを実行して、 [TiUPオンラインを使用してbrコマンドラインツールをインストールする](/migration-tools.md#install-tools-using-tiup)ことができます。
 - `br`コマンドを使用してデータをバックアップおよび復元する方法の詳細については、次のドキュメントを参照してください。
 
     - [TiDB スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)
@@ -92,7 +92,7 @@ TiDB は、SQL文を使用した完全バックアップと復元をサポート
 
 ### Kubernetes でTiDB Operatorを使用する {#use-tidb-operator-on-kubernetes}
 
-Kubernetesでは、 TiDB Operatorを使用してTiDBクラスターのデータをAmazon S3、GCS、またはAzure Blob Storageにバックアップし、これらのシステムにあるバックアップデータからデータを復元できます。詳細は[TiDB Operatorを使用したデータのバックアップと復元](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview)ご覧ください。
+Kubernetesでは、 TiDB Operatorを使用してTiDBクラスターのデータをAmazon S3、GCS、またはAzure Blob Storageにバックアップし、これらのシステムにあるバックアップデータからデータを復元できます。詳細は[TiDB Operatorを使用したデータのバックアップと復元](https://docs.pingcap.com/tidb-in-kubernetes/stable/backup-restore-overview)をご覧ください。
 
 ## 参照 {#see-also}
 

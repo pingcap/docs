@@ -5,18 +5,18 @@ summary: TiDBは、タイムリーなデータリカバリやビジネス監査�
 
 # TiDB バックアップと復元のユースケース {#tidb-backup-and-restore-use-cases}
 
-[TiDB スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)と[TiDB ログバックアップと PITR ガイド](/br/br-pitr-guide.md) 、TiDBが提供するバックアップとリストアのソリューション、すなわちスナップショット（フル）バックアップとリストア、ログバックアップ、そしてポイントインタイムリカバリ（PITR）について紹介します。このドキュメントは、特定のユースケースにおいてTiDBのバックアップとリストアのソリューションを迅速に導入するのに役立ちます。
+[TiDB スナップショットのバックアップと復元ガイド](/br/br-snapshot-guide.md)と[TiDB ログバックアップと PITR ガイド](/br/br-pitr-guide.md)は、TiDBが提供するバックアップとリストアのソリューション、すなわちスナップショット（フル）バックアップとリストア、ログバックアップ、そしてポイントインタイムリカバリ（PITR）について紹介します。このドキュメントは、特定のユースケースにおいてTiDBのバックアップとリストアのソリューションを迅速に導入するのに役立ちます。
 
 AWS に TiDB本番クラスターをデプロイし、ビジネスチームが次の要件をリクエストしているとします。
 
 - データの変更はタイムリーにバックアップしてください。データベースに災害が発生した場合でも、最小限のデータ損失（許容できるのは数分間のデータ損失のみ）でアプリケーションを迅速に復旧できます。
-- 毎月、特定の時間に業務監査を実施します。監査依頼を受けた場合、リクエストに応じて過去1ヶ月間の特定の時点のデータにクエリを実行するためのデータベースを提供する必要があります。
+- 毎月、特定の時間を定めずに業務監査を実施します。監査依頼を受けた場合、リクエストに応じて過去1ヶ月間の特定の時点のデータにクエリを実行するためのデータベースを提供する必要があります。
 
 PITR を使用すると、前述の要件を満たすことができます。
 
 ## TiDBクラスタとBRをデプロイ {#deploy-the-tidb-cluster-and-br}
 
-PITRを使用するには、TiDBクラスタ（v6.2.0以上）をデプロイし、 BRをTiDBクラスタと同じバージョンにアップデートする必要があります。このドキュメントでは、例としてv8.5.5を使用しています。
+PITRを使用するには、TiDBクラスタ（v6.2.0以上）をデプロイし、 BRをTiDBクラスタと同じバージョンにアップデートする必要があります。このドキュメントでは、例としてv{{{ .tidb-version }}}を使用しています。
 
 次の表は、TiDB クラスターで PITR を使用するために推奨されるハードウェアリソースを示しています。
 
@@ -43,13 +43,13 @@ TiUPを使用してBRをインストールまたはアップグレードしま�
 - インストール：
 
     ```shell
-    tiup install br:v8.5.5
+    tiup install br:v{{{ .tidb-version }}}
     ```
 
 - アップグレード:
 
     ```shell
-    tiup update br:v8.5.5
+    tiup update br:v{{{ .tidb-version }}}
     ```
 
 ## バックアップストレージ（Amazon S3）を構成する {#configure-backup-storage-amazon-s3}
@@ -69,7 +69,7 @@ TiUPを使用してBRをインストールまたはアップグレードしま�
 
 2. BRとTiKVがS3ディレクトリにアクセスするための権限を設定します。S3バケットにアクセスする最も安全な方法であるIAMメソッドを使用して権限を付与することをお勧めします。詳細な手順については、 [AWS ドキュメント: ユーザーポリシーによるバケットへのアクセスの制御](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)を参照してください。必要な権限は次のとおりです。
 
-    - バックアップ クラスター内の TiKV とBRには`s3:GetObject` `s3://tidb-pitr-bucket/backup-data`ディレクトリ`s3:DeleteObject` `s3:ListBucket` 、および`s3:PutObject` `s3:AbortMultipartUpload`権限が必要です。
+    - バックアップクラスター内のTiKVとBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket`、 `s3:GetObject`、 `s3:DeleteObject`、 `s3:PutObject`、および`s3:AbortMultipartUpload`権限が必要です。
     - 復元クラスター内の TiKV とBRには、 `s3://tidb-pitr-bucket/backup-data`ディレクトリの`s3:ListBucket`と`s3:GetObject`権限が必要です。
 
 3. スナップショット (完全) バックアップやログバックアップなどのバックアップデータを保存するディレクトリ構造を計画します。
