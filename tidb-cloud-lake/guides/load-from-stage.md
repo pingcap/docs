@@ -1,15 +1,15 @@
 ---
-title: 从 Stage 加载
-summary: "{{{ .lake }}} 使你能够轻松地从上传到用户 stage 或内部/外部 stage 的文件中导入数据。为此，你可以先使用 LakeSQL 将文件上传到 stage，然后使用 COPY INTO 命令从 stage 中的文件加载数据。请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 Input & Output File Formats。"
+title: 从 Stage 导入数据
+summary: "{{{ .lake }}} 使你能够轻松地从上传到用户 stage 或内部/外部 stage 的文件中导入数据。为此，你可以先使用 LakeSQL 将文件上传到 stage，然后使用 COPY INTO 命令从 stage 中的文件导入数据。请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 Input & Output File Formats。"
 ---
 
-# 从 Stage 加载
+# 从 Stage 导入数据
 
-{{{ .lake }}} 使你能够轻松地从上传到用户 stage 或内部/外部 stage 的文件中导入数据。为此，你可以先使用 [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) 将文件上传到 stage，然后使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令从 stage 中的文件加载数据。请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 [输入与输出文件格式](/tidb-cloud-lake/sql/input-output-file-formats.md)。
+{{{ .lake }}} 使你能够轻松地从上传到用户 stage 或内部/外部 stage 的文件中导入数据。为此，你可以先使用 [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) 将文件上传到 stage，然后使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令从 stage 中的文件导入数据。请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 [输入与输出文件格式](/tidb-cloud-lake/sql/input-output-file-formats.md)。
 
 ![image](/media/tidb-cloud-lake/load-data-from-stage.png)
 
-以下教程提供了详细的分步指南，帮助你顺利完成从 stage 中的文件加载数据的过程。
+以下教程提供了详细的分步指南，帮助你顺利完成从 stage 中的文件导入数据的过程。
 
 ## 开始之前 {#before-you-begin}
 
@@ -34,9 +34,9 @@ CREATE TABLE books
 );
 ```
 
-## 教程 1：从用户 stage 加载 {#tutorial-1-loading-from-user-stage}
+## 教程 1：从用户 stage 导入 {#tutorial-1-loading-from-user-stage}
 
-按照本教程将示例文件上传到用户 stage，并将 stage 中文件的数据加载到 {{{ .lake }}} 中。
+按照本教程将示例文件上传到用户 stage，并将 stage 中文件的数据导入到 {{{ .lake }}} 中。
 
 ### 步骤 1. 上传示例文件 {#step-1-upload-sample-file}
 
@@ -65,13 +65,13 @@ books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-27 16:03:51.000 +0
 
 ### 步骤 2. 将数据复制到表中 {#step-2-copy-data-into-table}
 
-1. 使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将数据加载到目标表中：
+1. 使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将数据导入到目标表中：
 
     ```sql
     COPY INTO books FROM @~ files=('books.parquet') FILE_FORMAT = (TYPE = PARQUET);
     ```
 
-2. 验证已加载的数据：
+2. 验证已导入的数据：
 
 ```sql
 SELECT * FROM books;
@@ -83,9 +83,9 @@ Transaction Processing      |Jim Gray           |1992|
 Readings in Database Systems|Michael Stonebraker|2004|
 ```
 
-## 教程 2：从内部 stage 加载 {#tutorial-2-loading-from-internal-stage}
+## 教程 2：从内部 stage 导入 {#tutorial-2-loading-from-internal-stage}
 
-按照本教程将示例文件上传到内部 stage，并将 stage 中文件的数据加载到 {{{ .lake }}} 中。
+按照本教程将示例文件上传到内部 stage，并将 stage 中文件的数据导入到 {{{ .lake }}} 中。
 
 ### 步骤 1. 创建内部 stage {#step-1-create-an-internal-stage}
 
@@ -138,7 +138,7 @@ books.parquet                      |   998|"88432bf90aadb79073682988b39d461c"|20
 
 ### 步骤 3. 将数据复制到表中 {#step-3-copy-data-into-table}
 
-1. 使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将数据加载到目标表中：
+1. 使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将数据导入到目标表中：
 
     ```sql
     COPY INTO books
@@ -149,7 +149,7 @@ books.parquet                      |   998|"88432bf90aadb79073682988b39d461c"|20
     );
     ```
 
-2. 验证已加载的数据：
+2. 验证已导入的数据：
 
 ```sql
 SELECT * FROM books;
@@ -161,9 +161,9 @@ Transaction Processing      |Jim Gray           |1992|
 Readings in Database Systems|Michael Stonebraker|2004|
 ```
 
-## 教程 3：从外部 stage 加载 {#tutorial-3-loading-from-external-stage}
+## 教程 3：从外部 stage 导入 {#tutorial-3-loading-from-external-stage}
 
-按照本教程将示例文件上传到外部 stage，并将 stage 中文件的数据加载到 {{{ .lake }}} 中。
+按照本教程将示例文件上传到外部 stage，并将 stage 中文件的数据导入到 {{{ .lake }}} 中。
 
 ### 步骤 1. 创建外部 stage {#step-1-create-an-external-stage}
 
@@ -216,7 +216,7 @@ Readings in Database Systems|Michael Stonebraker|2004|
 
 ### 第 3 步：将数据复制到表中 {#step-3-copy-data-into-table}
 
-1. 使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将数据加载到目标表中：
+1. 使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将数据导入到目标表中：
 
     ```sql
     COPY INTO books
@@ -227,7 +227,7 @@ Readings in Database Systems|Michael Stonebraker|2004|
     );
     ```
 
-2. 验证已加载的数据：
+2. 验证已导入的数据：
 
 ```sql
 SELECT * FROM books;

@@ -69,7 +69,7 @@ Data Service 中的 endpoint 是你可以自定义的 Web API，用于执行 SQL
 
 ### Full-text search
 
-与关注语义相似度的 [Vector Search](/ai/concepts/vector-search-overview.md) 不同，全文检索允许你通过精确关键字检索文档。在 RAG（Retrieval-Augmented Generation）场景中，你可以将全文检索与向量检索结合使用，以提升检索质量。
+与关注语义相似度的 [Vector Search](/ai/guides/vector-search-overview.md) 不同，全文检索允许你通过精确关键字检索文档。在 RAG（Retrieval-Augmented Generation）场景中，你可以将全文检索与向量检索结合使用，以提升检索质量。
 
 更多信息，参见 [Full-Text Search with SQL](/ai/guides/vector-search-full-text-search-sql.md) 和 [Full-Text Search with Python](/ai/guides/vector-search-full-text-search-python.md)。
 
@@ -232,7 +232,7 @@ TiDB X instance 是一种基于 [TiDB X architecture](/tidb-cloud/tidb-x-archite
 
 ### Vector search
 
-[Vector search](/ai/concepts/vector-search-overview.md) 是一种以数据语义为核心、提供相关性结果的检索方法。与依赖精确关键字匹配和词频的传统全文检索不同，vector search 会将多种数据类型（如文本、图片或音频）转换为高维向量，并基于这些向量间的相似度进行查询。该方法能够捕捉数据的语义和上下文信息，更准确理解用户意图。即使检索词与数据库内容不完全匹配，vector search 也能通过分析数据语义，返回符合用户意图的结果。
+[Vector search](/ai/guides/vector-search-overview.md) 是一种以数据语义为核心、提供相关性结果的检索方法。与依赖精确关键字匹配和词频的传统全文检索不同，vector search 会将多种数据类型（如文本、图片或音频）转换为高维向量，并基于这些向量间的相似度进行查询。该方法能够捕捉数据的语义和上下文信息，更准确理解用户意图。即使检索词与数据库内容不完全匹配，vector search 也能通过分析数据语义，返回符合用户意图的结果。
 
 ### Virtual Private Cloud
 

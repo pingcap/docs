@@ -53,11 +53,11 @@ summary: TiDB Cloud Lake 是一项面向分析型工作负载的云原生数据�
 
 </LearningPath>
 
-<LearningPath label="加载" icon="cloud3">
+<LearningPath label="导入" icon="cloud3">
 
 [Stage 概述](https://docs.pingcap.com/zh/tidbcloudlake/stage-overview/)
 
-[从文件加载](https://docs.pingcap.com/zh/tidbcloudlake/load-from-files/)
+[从文件导入](https://docs.pingcap.com/zh/tidbcloudlake/load-from-files/)
 
 [查询与转换](https://docs.pingcap.com/zh/tidbcloudlake/query-stage/)
 

@@ -1,11 +1,20 @@
 ---
-title: TiDB Cloud CLI 快速入门
-summary: 了解如何通过 TiDB Cloud CLI 管理 {{{ .starter }}} 和 Essential 实例。
+title: TiDB Cloud CLI (`ticloud`) 快速入门
+summary: 了解如何通过 ticloud CLI 管理 {{{ .starter }}} 和 Essential 实例。
 ---
 
-# TiDB Cloud CLI 快速入门
+# TiDB Cloud CLI (`ticloud`) 快速入门
 
-TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)，你可以通过在终端输入几行命令与 TiDB Cloud 进行交互。例如，你可以使用 `ticloud` 轻松完成以下操作：
+> **Note:**
+>
+> TiDB Cloud 目前提供两个作用域不同的 CLI：[`ti`](https://github.com/tidbcloud/ti-cli) 和 [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)。
+>
+> - 当 `ti` 支持你所需的操作时，建议将其用于 TiDB Cloud Starter 的新自动化工作流。你也可以使用 `ti` 管理 TiDB Cloud Filesystem。要开始使用，请参见 [TiDB Cloud CLI (`ti`) Quick Start](/ai/ti/ti-quick-start.md)。
+> - `ticloud` 仍然是用于 TiDB Cloud Essential 以及 [`ti`](/ai/ti/ti-overview.md) 尚不支持的操作（例如数据导入、数据导出和审计日志操作）的 CLI。
+>
+> 有关何时使用 `ti` 或 `ticloud` 的更多信息，请参见 [`ti` 与 `ticloud` 的区别](/ai/ti/ti-overview.md#differences-between-ti-and-ticloud)。
+
+TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)，你可以通过在终端输入几行命令与 TiDB Cloud Starter 和 Essential 进行交互。例如，你可以使用 `ticloud` 完成以下操作：
 
 - 创建、删除和列出你的 {{{ .starter }}} 或 Essential 实例。
 - 向你的 {{{ .starter }}} 或 Essential 实例导入数据。
@@ -13,7 +22,7 @@ TiDB Cloud 提供了一个命令行界面（CLI）[`ticloud`](https://github.com
 
 > **Note:**
 >
-> TiDB Cloud CLI 目前处于公开预览阶段。
+> `ticloud` CLI 目前处于公开预览阶段。
 
 ## 开始之前
 

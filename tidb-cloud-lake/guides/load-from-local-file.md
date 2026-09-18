@@ -1,24 +1,24 @@
 ---
-title: 从本地文件加载
-summary: 在将本地数据文件加载到 {{{ .lake }}} 之前，先将其上传到 stage 或存储桶可能并非必要。相反，你可以使用 {{{ .lake }}} 原生 CLI 工具 LakeSQL 直接导入数据。这样可以简化工作流，并节省存储费用。
+title: 从本地文件导入数据
+summary: 在将本地数据文件导入到 {{{ .lake }}} 之前，先将其上传到 stage 或存储桶可能并非必要。相反，你可以使用 {{{ .lake }}} 原生 CLI 工具 LakeSQL 直接导入数据。这样可以简化工作流，并节省存储费用。
 ---
 
-# 从本地文件加载
+# 从本地文件导入数据
 
-在将本地数据文件加载到 {{{ .lake }}} 之前，先将其上传到 stage 或存储桶可能并非必要。相反，你可以使用 [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)（{{{ .lake }}} 原生 CLI 工具）直接导入数据。这样可以简化工作流，并节省存储费用。
+在将本地数据文件导入到 {{{ .lake }}} 之前，先将其上传到 stage 或存储桶可能并非必要。相反，你可以使用 [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md)（{{{ .lake }}} 原生 CLI 工具）直接导入数据。这样可以简化工作流，并节省存储费用。
 
 请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 [输入与输出文件格式](/tidb-cloud-lake/sql/input-output-file-formats.md)。
 
-你还可以使用 JDBC 或 Python 驱动，以编程方式将本地文件加载到表中。
+你还可以使用 JDBC 或 Python 驱动，以编程方式将本地文件导入到表中。
 
-## 加载方法 {#load-methods}
+## 导入方法 {#load-methods}
 
-从本地文件加载数据有两种方法：
+从本地文件导入数据有两种方法：
 
 1. **Stage**：先将本地文件上传到内部 stage，然后将已暂存文件中的数据复制到表中。文件上传通过 lake-query 或 presigned URL 进行，具体取决于连接选项 `presigned_url_disabled`（默认值：`false`）。
-2. **Streaming**：在上传过程中将文件直接加载到表中。当文件过大，无法作为单个对象存储在对象存储中时，请使用此方法。
+2. **Streaming**：在上传过程中将文件直接导入到表中。当文件过大，无法作为单个对象存储在对象存储中时，请使用此方法。
 
-## 教程 1：从本地文件加载 {#tutorial-1-load-from-a-local-file}
+## 教程 1：从本地文件导入 {#tutorial-1-load-from-a-local-file}
 
 本教程以 CSV 文件为例，演示如何使用 [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) 从本地源将数据导入到 {{{ .lake }}}。
 
@@ -53,9 +53,9 @@ CREATE TABLE books (
 )
 ```
 
-### 步骤 2：将数据加载到表中 {#step-2-load-data-into-table}
+### 步骤 2：将数据导入到表中 {#step-2-load-data-into-table}
 
-使用以下命令发送加载数据请求：
+使用以下命令发送导入数据请求：
 
 ```shell
 ❯ lakesql --query='INSERT INTO book_db.books from @_databend_load file_format=(type=csv)' --data=@books.csv
@@ -111,7 +111,7 @@ try (FileInputStream fileInputStream = new FileInputStream(file);
 > 请确保你本地的 LakeSQL 可以直接连接到 {{{ .lake }}} 的后端对象存储。
 > 如果不能，则需要指定 `--set presigned_url_disabled=1` 选项以禁用 presigned url 功能。
 
-### 步骤 3：验证已加载的数据 {#step-3-verify-loaded-data}
+### 步骤 3：验证已导入的数据 {#step-3-verify-loaded-data}
 
 ```shell
 root@localhost:8000/book_db> SELECT * FROM books;
@@ -125,9 +125,9 @@ root@localhost:8000/book_db> SELECT * FROM books;
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
-## 教程 2：加载到指定列 {#tutorial-2-load-into-specified-columns}
+## 教程 2：导入到指定列 {#tutorial-2-load-into-specified-columns}
 
-在 [教程 1](#tutorial-1-load-from-a-local-file) 中，你创建了一个包含三列的表，这三列与示例文件中的数据完全对应。你也可以将数据加载到表中的指定列，因此表不需要与待加载数据具有完全相同的列，只要指定的列能够匹配即可。本教程将介绍如何实现这一点。
+在 [教程 1](#tutorial-1-load-from-a-local-file) 中，你创建了一个包含三列的表，这三列与示例文件中的数据完全对应。你也可以将数据导入到表中的指定列，因此表不需要与待导入数据具有完全相同的列，只要指定的列能够匹配即可。本教程将介绍如何实现这一点。
 
 ### 开始之前 {#before-you-begin}
 
@@ -154,17 +154,17 @@ CREATE TABLE bookcomments (
 )
 ```
 
-### 步骤 2：将数据加载到表中 {#step-2-load-data-into-table}
+### 步骤 2：将数据导入到表中 {#step-2-load-data-into-table}
 
-使用以下命令发送加载数据请求：
+使用以下命令发送导入数据请求：
 
 ```shell
 ❯ lakesql --query='INSERT INTO book_db.bookcomments(title,author,date) file_format=(type=csv)'  --data=@books.csv
 ```
 
-请注意，上述 `query` 部分指定了列（title、author 和 date）以匹配加载的数据。
+请注意，上述 `query` 部分指定了列（title、author 和 date）以匹配导入的数据。
 
-### 步骤 3：验证已加载的数据 {#step-3-verify-loaded-data}
+### 步骤 3：验证已导入的数据 {#step-3-verify-loaded-data}
 
 ```shell
 root@localhost:8000/book_db> SELECT * FROM bookcomments;

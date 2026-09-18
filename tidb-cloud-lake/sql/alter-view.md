@@ -3,7 +3,7 @@ title: ALTER VIEW
 summary: 使用另一个 QUERY 修改现有视图。
 ---
 
-# ALTER VIEW <!--Corresponding EN commit: fb0ce721ecedde2feb16086efcae0f885d20c9b2-->
+# ALTER VIEW
 
 为现有视图设置或移除标签。标签必须先通过 [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) 创建。完整说明请参见 [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md)。
 

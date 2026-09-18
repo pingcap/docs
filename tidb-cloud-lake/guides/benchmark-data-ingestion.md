@@ -157,7 +157,7 @@ summary: 本页展示了 {{{ .lake }}} 与 Snowflake 在数据摄取性能和成
     );
     ```
 
-2. 将数据卸载到 external stage。
+2. 将数据导出到 external stage。
 
     ```sql
     CREATE or REPLACE FILE FORMAT tsv_unload_format_gzip

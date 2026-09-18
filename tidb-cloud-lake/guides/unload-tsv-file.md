@@ -1,11 +1,11 @@
 ---
-title: 卸载 TSV 文件
-summary: 了解如何卸载 TSV 文件。
+title: 导出 TSV 文件
+summary: 了解如何导出 TSV 文件。
 ---
 
-# 卸载 TSV 文件
+# 导出 TSV 文件
 
-## 卸载 TSV 文件 {#unloading-tsv-file}
+## 导出 TSV 文件 {#unloading-tsv-file}
 
 语法：
 
@@ -24,7 +24,7 @@ FILE_FORMAT = (
 ```
 
 - 更多 TSV 选项，请参见 [TSV 文件格式选项](/tidb-cloud-lake/sql/input-output-file-formats.md#tsv-options)
-- 卸载到多个文件时，使用 [`MAX_FILE_SIZE` Copy 选项](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions)
+- 导出到多个文件时，使用 [`MAX_FILE_SIZE` Copy 选项](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions)
 - 有关该语法的更多详细信息，请参见 [COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md)
 
 ## 教程 {#tutorial}
@@ -48,7 +48,7 @@ CREATE FILE FORMAT tsv_unload_format
     COMPRESSION = gzip;     -- Unload with gzip compression
 ```
 
-### 第 3 步：卸载到 TSV 文件 {#step-3-unload-into-tsv-file}
+### 第 3 步：导出到 TSV 文件 {#step-3-unload-into-tsv-file}
 
 ```sql
 COPY INTO @tsv_unload_stage
@@ -70,7 +70,7 @@ DETAILED_OUTPUT = true;
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 第 4 步：验证已卸载的 TSV 文件 {#step-4-verify-the-unloaded-tsv-files}
+### 第 4 步：验证已导出的 TSV 文件 {#step-4-verify-the-unloaded-tsv-files}
 
 ```
 SELECT COUNT($1)

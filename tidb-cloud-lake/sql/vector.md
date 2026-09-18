@@ -101,9 +101,9 @@ LIMIT 3;
 
 **说明**：该查询会找出与搜索向量最相似的 3 条 simple wiki。余弦距离值越小，表示相似度越高。
 
-## 卸载和加载向量数据 {#unloading-and-loading-vector-data}
+## 导出和加载向量数据 {#unloading-and-loading-vector-data}
 
-### 卸载向量数据 {#unloading-vector-data}
+### 导出向量数据 {#unloading-vector-data}
 
 ```sql
 -- Export vector data to stage

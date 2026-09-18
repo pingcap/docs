@@ -1,17 +1,17 @@
 ---
-title: 从存储桶加载
-summary: 当数据文件存储在对象存储存储桶（例如 Amazon S3）中时，可以使用 COPY INTO 命令将其直接加载到 {{{ .lake }}} 中。请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 Input & Output File Formats。
+title: 从存储桶导入数据
+summary: 当数据文件存储在对象存储存储桶（例如 Amazon S3）中时，可以使用 COPY INTO 命令将其直接导入到 {{{ .lake }}} 中。请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 Input & Output File Formats。
 ---
 
-# 从存储桶加载
+# 从存储桶导入数据
 
-当数据文件存储在对象存储存储桶（例如 Amazon S3）中时，可以使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将其直接加载到 {{{ .lake }}} 中。请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 [输入与输出文件格式](/tidb-cloud-lake/sql/input-output-file-formats.md)。
+当数据文件存储在对象存储存储桶（例如 Amazon S3）中时，可以使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将其直接导入到 {{{ .lake }}} 中。请注意，文件必须采用 {{{ .lake }}} 支持的格式，否则无法导入数据。有关 {{{ .lake }}} 支持的文件格式的更多信息，请参见 [输入与输出文件格式](/tidb-cloud-lake/sql/input-output-file-formats.md)。
 
 ![image](/media/tidb-cloud-lake/load-data-from-s3.jpeg)
 
-本教程以 Amazon S3 存储桶为例，提供详细的分步指南，帮助你顺利完成从存储桶中的文件加载数据的过程。
+本教程以 Amazon S3 存储桶为例，提供详细的分步指南，帮助你顺利完成从存储桶中的文件导入数据的过程。
 
-## 教程：从 Amazon S3 存储桶加载 {#tutorial-loading-from-amazon-s3-bucket}
+## 教程：从 Amazon S3 存储桶导入 {#tutorial-loading-from-amazon-s3-bucket}
 
 ### 开始之前 {#before-you-begin}
 
@@ -47,7 +47,7 @@ CREATE TABLE books
 
 ### 步骤 2：将数据复制到表中 {#step-2-copy-data-into-table}
 
-1. 使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将数据加载到目标表中：
+1. 使用 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) 命令将数据导入到目标表中：
 
     ```sql
     COPY INTO books
@@ -62,7 +62,7 @@ CREATE TABLE books
     );
     ```
 
-2. 检查已加载的数据：
+2. 检查已导入的数据：
 
 ```sql
 SELECT * FROM books;

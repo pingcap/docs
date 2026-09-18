@@ -1,9 +1,9 @@
 ---
-title: 将 Parquet 加载到 TiDB Cloud Lake
+title: 将 Parquet 数据导入到 TiDB Cloud Lake
 summary: Parquet 是一种在数据分析中常用的列式存储格式。它旨在支持复杂的数据结构，并且能够高效处理大型数据集。
 ---
 
-# 将 Parquet 加载到 TiDB Cloud Lake
+# 将 Parquet 数据导入到 TiDB Cloud Lake
 
 ## 什么是 Parquet？ {#what-is-parquet}
 
@@ -11,9 +11,9 @@ Parquet 是一种在数据分析中常用的列式存储格式。它旨在支持
 
 Parquet 文件对 {{{ .lake }}} 最友好。建议使用 Parquet 文件作为 {{{ .lake }}} 的数据源。
 
-## 加载 Parquet 文件 {#loading-parquet-file}
+## 导入 Parquet 文件 {#loading-parquet-file}
 
-加载 Parquet 文件的常用语法如下：
+导入 Parquet 文件的常用语法如下：
 
 ```sql
 COPY INTO [<database>.]<table_name>
@@ -25,7 +25,7 @@ FILE_FORMAT = (TYPE = PARQUET)
 - 有关更多 Parquet 文件格式选项，请参见 [Parquet 文件格式选项](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options)。
 - 有关更多 COPY INTO table 选项，请参见 [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md)。
 
-## 教程：从 Parquet 文件加载数据 {#tutorial-loading-data-from-parquet-files}
+## 教程：从 Parquet 文件导入数据 {#tutorial-loading-data-from-parquet-files}
 
 ### 步骤 1. 创建内部 stage {#step-1-create-an-internal-stage}
 

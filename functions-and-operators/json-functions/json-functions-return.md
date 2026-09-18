@@ -17,7 +17,7 @@ TiDB 支持 MySQL 8.0 中所有 [返回 JSON 值属性的 JSON 函数](https://d
 
 - 根节点（`$`）
 - weather（`$.weather`）
-- weather current（`$.weather.sunny`）
+- weather current（`$.weather.current`）
 
 ```sql
 SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');
