@@ -15,7 +15,7 @@ TiDBベクトル検索を使用すると、画像、ドキュメント、その�
 
 ## ベクトル列にベクトル検索インデックスを追加する {#add-vector-search-index-for-vector-columns}
 
-[ベクトル検索インデックス](/ai/reference/vector-search-index.md)は、リコール率がわずかに低下するだけのトレードオフで、ベクトル検索クエリのパフォーマンスを通常 10 倍以上大幅に向上させます。
+[ベクトル検索インデックス](/ai/reference/vector-search-index.md)は、再現率がわずかに低下するだけのトレードオフで、ベクトル検索クエリのパフォーマンスを通常 10 倍以上大幅に向上させます。
 
 ## ベクトルインデックスが完全に構築されていることを確認する {#ensure-vector-indexes-are-fully-built}
 
