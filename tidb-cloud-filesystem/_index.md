@@ -1,52 +1,66 @@
 ---
-title: TiDB Cloud Filesystem
-summary: Learn how TiDB Cloud Filesystem keeps agent files available across sessions, shares workspaces, and isolates changes with layers.
+title: TiDB Cloud Filesystem Documentation
+hide_sidebar: true
+hide_commit: true
+summary: TiDB Cloud Filesystem provides persistent, shared file storage for applications, automation, and AI agents across machines and sessions.
 ---
 
-# TiDB Cloud Filesystem
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Filesystem" subTitle="TiDB Cloud Filesystem is persistent, shared file storage that applications, automation, and AI agents can access across machines and sessions.">
 
-TiDB Cloud Filesystem is persistent, shared file storage for applications and AI agents. Keep a workspace in the cloud, access it from different machines, and retain its files after a sandbox or process ends.
+<LearningPath label="Learn" icon="cloud1">
 
-Use TiDB Cloud CLI (`ti`) to create a Filesystem, upload and download files, or mount a remote directory for tools that work with local paths. You do not need to provision or manage a separate database to get started.
+[TiDB Cloud Filesystem Overview](/tidb-cloud-filesystem/filesystem-overview.md)
 
-> **Note:**
->
-> TiDB Cloud Filesystem is currently in public preview. Its features and interfaces are subject to change without notice.
+[Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md)
 
-## Keep work beyond one session
+</LearningPath>
 
-An agent might collect source documents in one sandbox, generate a report in another, and hand the result to a person on a laptop. Files stored only on the sandbox's local disk disappear when that environment is removed. Repeatedly exporting and importing archives also creates separate copies that can drift apart.
+<LearningPath label="Try" icon="cloud5">
 
-With a Filesystem, these participants use the same remote files. To access an existing Filesystem from a new environment, provide an access token and the Filesystem's region code. You do not need to copy the creator's TiDB Cloud API keys or local configuration directory.
+[Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md)
 
-- **Continue a task in another environment.** Mount the existing workspace instead of recreating its input files.
-- **Share results with a reviewer.** Give the reviewer a read-only scoped token for a report directory.
-- **Compare parallel approaches.** Fork layers for independent drafts, create checkpoints, and commit a selected result to the shared base.
+</LearningPath>
 
-## Choose how to work with files
+<LearningPath label="Connect" icon="doc8">
 
-The CLI provides two ways to use the same remote Filesystem:
+[Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md)
 
-- **Direct file commands:** [Copy, read, organize, and search files](/tidb-cloud-filesystem/work-with-filesystem-data.md) with `ti fs`, without setting up a mount.
-- **Local mounts:** [Expose remote files at a local directory](/tidb-cloud-filesystem/filesystem-mount.md) so existing tools can use filesystem paths. Mount support depends on your operating system.
+[Share a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-sharing.md)
 
-## Control access and changes
+[Mount a Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
 
-- [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md) explains when to use API keys, owner tokens, or scoped tokens.
-- [Share a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-sharing.md) shows how to give another machine access without sharing account credentials.
-- [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) explains how to isolate drafts and publish selected changes.
+</LearningPath>
 
-## Get started
+<LearningPath label="Use" icon="cloud4">
 
-If you need to create a Filesystem, follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md). You will need TiDB Cloud API keys with permission to create one.
+[Manage TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md)
 
-If someone has given you access to an existing Filesystem, [use its FS token and region without configuring a profile](/tidb-cloud-filesystem/filesystem-mount.md#use-a-token-without-configuring-a-profile). You do not need the creator's API keys to access files within your token's permissions.
+[Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 
-For supported regions, platform requirements, and current constraints, see [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md).
+[Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md)
 
-## What's next
+[Automation and AI Agent Workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
 
-- [Create a Filesystem and write your first file](/tidb-cloud-filesystem/filesystem-quick-start.md).
-- [Share a Filesystem across machines](/tidb-cloud-filesystem/filesystem-sharing.md).
-- [Explore automation and AI agent workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md).
-- [Try the interactive agent sandbox lab](https://labs.tidb.io/labs/demo_901).
+</LearningPath>
+
+<LearningPath label="Security" icon="users">
+
+[Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)
+
+[Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+
+[Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
+
+</LearningPath>
+
+<LearningPath label="Reference" icon="cloud-dev">
+
+[Filesystem CLI Commands](/ai/ti/reference/ti-filesystem.md)
+
+[Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
+
+[Troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md)
+
+</LearningPath>
+
+</LearningPathContainer>

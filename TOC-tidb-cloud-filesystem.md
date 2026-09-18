@@ -5,7 +5,7 @@
 
 ## GET STARTED
 
-- [Introduction](/tidb-cloud-filesystem/_index.md)
+- [Overview](/tidb-cloud-filesystem/filesystem-overview.md)
 - [Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md)
 
 ## CONCEPTS
