@@ -27,7 +27,7 @@ ti fs create-layer-checkpoint
 
 ## オプション {#options}
 
-- `--layer-id <string>`: レイヤーを識別する layer ID です。\[required]
+- `--layer-id <string>`: レイヤーを識別するレイヤー ID です。\[required]
 - `--checkpoint-id <string>`: チェックポイント ID です。通常はサービスによって自動生成されます。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。

@@ -24,7 +24,7 @@ ti fs create-layer \
   --tag task=review
 ```
 
-返された layer ID を使用して、変更を書き込み、確認します。
+返されたレイヤー ID を使用して、変更を書き込み、確認します。
 
 ```shell
 ti fs copy-file \
