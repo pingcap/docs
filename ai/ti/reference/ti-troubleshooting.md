@@ -13,7 +13,7 @@ summary: TiDB Cloud CLI の認証、プロジェクト、Filesystem の選択、
 
 ## API 認証が失敗する {#api-authentication-fails}
 
-症状としては、認証情報の欠落、Digest 認証の失敗、または permission denied などがあります。
+症状としては、認証情報の欠落、Digest 認証の失敗、または権限拒否などがあります。
 
 両方の環境変数がセットで設定されていることを確認してください。
 
