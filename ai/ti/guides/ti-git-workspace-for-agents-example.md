@@ -88,7 +88,7 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 
 - リポジトリ認証情報は `ti` ではなく Git によって管理されます。
 - `coding-agent` マウントプロファイルは、パフォーマンスのために Git メタデータ、依存関係ディレクトリ、キャッシュ、ビルド出力、およびその他の生成ファイルをローカルマシン上に保持します。
-- `coding-agent` profile によってローカルに保持されるファイルは、一時的なマシンとともに消えます。必要な Git の変更は commit または push し、再構築できないその他のローカルファイルを保持するには、明示的な `--path` 値を指定して [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) を使用してください。
+- `coding-agent` プロファイルによってローカルに保持されるファイルは、一時的なマシンとともに消えます。必要な Git の変更は commit または push し、再構築できないその他のローカルファイルを保持するには、明示的な `--path` 値を指定して [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) を使用してください。
 
 ## 次のステップ {#what-s-next}
 
