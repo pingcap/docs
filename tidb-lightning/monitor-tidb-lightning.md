@@ -35,91 +35,91 @@ scrape_configs:
 
 [Grafana](https://grafana.com/)は、Prometheus メトリックをダッシュボードとして視覚化するための Web インターフェースです。
 
-### 1行目: スピード {#row-1-speed}
+### 1行目: Speed {#row-1-speed}
 
 ![Panels in first row](/media/lightning-grafana-row-1.png)
 
-| パネル       | シリーズ                 | 説明                                                                |
-| :-------- | :------------------- | :---------------------------------------------------------------- |
-| インポート速度   | TiDB Lightningから書き込む | TiDB Lightningから TiKV Importer への KV の送信速度。これは各テーブルの複雑さによって異なります。 |
-| インポート速度   | TIKVにアップロード          | TiKVインポーターからすべてのTiKVレプリカへの合計アップロード速度                              |
-| Chunk処理期間 |                      | 1つのデータファイルを完全にエンコードするのにかかる平均時間     |
+| パネル | シリーズ | 説明 |
+| :--- | :--- | :--- |
+| Import speed | write from TiDB Lightning | TiDB Lightningから TiKV Importer への KV の送信速度。これは各テーブルの複雑さによって異なります。 |
+| Import speed | upload to tikv | TiKVインポーターからすべてのTiKVレプリカへの合計アップロード速度 |
+| Chunk process duration | | 単一のデータファイルを完全にエンコードするのにかかる平均時間 |
 
 場合によっては、インポート速度がゼロになり、他のパーツが追いつくまで時間がかかることがあります。これは正常な動作です。
 
-### 2行目: 進捗状況 {#row-2-progress}
+### 2行目: Progress {#row-2-progress}
 
 ![Panels in second row](/media/lightning-grafana-row-2.png)
 
-| パネル         | 説明                           |
-| :---------- | :--------------------------- |
-| インポートの進行状況  | これまでにエンコードされたデータファイルの割合      |
-| チェックサムの進行状況 | 正常にインポートされたことが検証されたテーブルの割合   |
-| 失敗          | 障害が発生したテーブルの数と障害発生ポイント（通常は空） |
+| パネル | 説明 |
+| :--- | :--- |
+| Import progress | これまでにエンコードされたデータファイルの割合 |
+| Checksum progress | 正常にインポートされたことが検証されたテーブルの割合 |
+| Failures | 障害が発生したテーブルの数と障害発生ポイント（通常は空） |
 
-### 3行目: リソース {#row-3-resource}
+### 3行目: Resource {#row-3-resource}
 
 ![Panels in third row](/media/lightning-grafana-row-3.png)
 
-| パネル                        | 説明                                    |
-| :------------------------- | :------------------------------------ |
-| メモリ使用量                     | 各サービスが占有するメモリ量                        |
-| TiDB Lightning Goroutineの数 | TiDB Lightningで使用される実行中の goroutine の数 |
-| CPU％                       | 各サービスで使用される論理CPUコアの数                  |
+| パネル | 説明 |
+| :--- | :--- |
+| Memory usage | 各サービスが占有するメモリ量 |
+| Number of TiDB Lightning Goroutines | TiDB Lightningで使用される実行中の goroutine の数 |
+| CPU% | 各サービスで使用される論理CPUコアの数 |
 
-### 4行目: 割り当て {#row-4-quota}
+### 4行目: Quota {#row-4-quota}
 
 ![Panels in fourth row](/media/lightning-grafana-row-4.png)
 
-| パネル          | シリーズ       | 説明                                                                                                                                                    |
-| :----------- | :--------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| アイドルワーカー       | io         | 未使用の数は`io-concurrency` 、通常は設定された値（デフォルトは5）に近いですが、0に近い場合はディスクが遅すぎることを意味します。                                                                            |
-| アイドルワーカー       | クローズ済みエンジン    | 閉じられているがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行性（デフォルトは 8）に近い。0 に近い場合は、 TiDB Lightning がTiKV Importer よりも高速であることを意味し、 TiDB Lightning が停止する原因になります。 |
-| アイドルワーカー       | テーブル       | 未使用の数は`table-concurrency` 、通常はプロセス終了まで 0                                                                                                              |
-| アイドルワーカー       | 索引         | 未使用の数は`index-concurrency` 、通常はプロセス終了まで 0                                                                                                              |
-| アイドルワーカー | リージョン         | 未使用の数は`region-concurrency` 、通常はプロセス終了まで 0                                                                                                             |
-| 外部リソース       | KVエンコーダ    | アクティブなKVエンコーダをカウントします。通常はプロセス終了まで`region-concurrency`と同じです。                                                                                           |
-| 外部リソース       | インポーターエンジン | 開かれたエンジンファイルの数をカウントします`max-open-engines`設定を超えないようにしてください。                                                                                             |
+| パネル | シリーズ | 説明 |
+| :--- | :--- | :--- |
+| Idle workers | io | 未使用の数は`io-concurrency` 、通常は設定された値（デフォルトは5）に近いですが、0に近い場合はディスクが遅すぎることを意味します。 |
+| Idle workers | closed-engine | 閉じられているがまだクリーンアップされていないエンジンの数。通常はインデックス + テーブル同時実行性（デフォルトは 8）に近い。0 に近い場合は、 TiDB Lightning がTiKV Importer よりも高速であることを意味し、 TiDB Lightning が停止する原因になります。 |
+| Idle workers | table | 未使用の数は`table-concurrency` 、通常はプロセス終了まで 0 |
+| Idle workers | index | 未使用の数は`index-concurrency` 、通常はプロセス終了まで 0 |
+| Idle workers | region | 未使用の数は`region-concurrency` 、通常はプロセス終了まで 0 |
+| External resources | KV Encoder | アクティブなKVエンコーダをカウントします。通常はプロセス終了まで`region-concurrency`と同じです。 |
+| External resources | Importer Engines | 開かれたエンジンファイルの数をカウントします`max-open-engines`設定を超えないようにしてください。 |
 
-### 5行目: 読み取り速度 {#row-5-read-speed}
+### 5行目: Read speed {#row-5-read-speed}
 
 ![Panels in fifth row](/media/lightning-grafana-row-5.png)
 
-| パネル                  | シリーズ      | 説明                                  |
-| :------------------- | :-------- | :---------------------------------- |
-| Chunkパーサーのブロック読み取り期間 | ブロックを読み込む | 解析の準備のために1ブロックのバイトを読み取るのにかかる時間      |
-| Chunkパーサーのブロック読み取り期間 | apply worker       | アイドル状態のIO同時実行を待つのにかかった時間            |
-| SQLプロセスの実行時間         | 行エンコード    | 1行の解析とエンコードにかかる時間                   |
-| SQLプロセスの実行時間         | ブロック配信    | KV ペアのブロックを TiKV インポーターに送信するのにかかる時間 |
+| パネル | シリーズ | 説明 |
+| :--- | :--- | :--- |
+| Chunk parser read block duration | read block | 解析の準備のために1ブロックのバイトを読み取るのにかかる時間 |
+| Chunk parser read block duration | apply worker | アイドル状態のIO同時実行を待つのにかかった時間 |
+| SQL process duration | row encode | 1行の解析とエンコードにかかる時間 |
+| SQL process duration | block deliver | KV ペアのブロックを TiKV インポーターに送信するのにかかる時間 |
 
 いずれかの期間が長すぎる場合は、 TiDB Lightningが使用するディスクが遅すぎるか、I/O でビジー状態であることを示します。
 
-### 6行目: ストレージ {#row-6-storage}
+### 6行目: Storage {#row-6-storage}
 
 ![Panels in sixth row](/media/lightning-grafana-row-6.png)
 
-| パネル     | シリーズ         | 説明                                         |
-| :------ | :----------- | :----------------------------------------- |
-| SQL処理速度 | データ配信速度      | TiKVインポーターへのデータKVペアの配信速度                   |
-| SQL処理速度 | インデックス配信率    | TiKVインポーターへのインデックスKVペアの配信速度                |
-| SQL処理速度 | 総配達率         | 上記の2つのレートの合計                               |
-| 合計バイト数  | パーサーの読み取りサイズ | TiDB Lightningによって読み取られるバイト数               |
-| 合計バイト数  | データ配信サイズ     | TiKVインポーターにすでに配信されているデータKVペアのバイト数          |
-| 合計バイト数  | インデックス配信サイズ  | TiKVインポーターにすでに配信されているインデックスKVペアのバイト数       |
-| 合計バイト数  | ストレージサイズ / 3 | TiKV クラスターが占める合計サイズを 3 で割った値 (レプリカのデフォルト数) |
+| パネル | シリーズ | 説明 |
+| :--- | :--- | :--- |
+| SQL process rate | data deliver rate | TiKVインポーターへのデータKVペアの配信速度 |
+| SQL process rate | index deliver rate | TiKVインポーターへのインデックスKVペアの配信速度 |
+| SQL process rate | total deliver rate | 上記の2つのレートの合計 |
+| Total bytes | parser read size | TiDB Lightningによって読み取られるバイト数 |
+| Total bytes | data deliver size | TiKVインポーターにすでに配信されているデータKVペアのバイト数 |
+| Total bytes | index deliver size | TiKVインポーターにすでに配信されているインデックスKVペアのバイト数 |
+| Total bytes | storage_size / 3 | TiKV クラスターが占める合計サイズを 3 で割った値 (レプリカのデフォルト数) |
 
-### 7行目: インポート速度 {#row-7-import-speed}
+### 7行目: Import speed {#row-7-import-speed}
 
 ![Panels in seventh row](/media/lightning-grafana-row-7.png)
 
-| パネル           | シリーズ      | 説明                                   |
-| :------------ | :-------- | :----------------------------------- |
-| 配送期間          | レンジデリバリー  | TiKV クラスターに KV ペアの範囲をアップロードするのにかかる時間 |
-| 配送期間          | SST配信     | SST ファイルを TiKV クラスターにアップロードするのにかかる時間 |
-| SST プロセスの継続時間 | スプリットSST  | KVペアのストリームをSSTファイルに分割するのにかかる時間       |
-| SST プロセスの継続時間 | SSTアップロード | SST ファイルのアップロードにかかる時間                |
-| SST プロセスの継続時間 | SST取り込み  | アップロードされた SST ファイルの取り込みにかかる時間        |
-| SST プロセスの継続時間 | SSTサイズ    | SSTファイルのファイルサイズ                      |
+| パネル | シリーズ | 説明 |
+| :--- | :--- | :--- |
+| Delivery duration | Range delivery | TiKV クラスターに KV ペアの範囲をアップロードするのにかかる時間 |
+| Delivery duration | SST delivery | SST ファイルを TiKV クラスターにアップロードするのにかかる時間 |
+| SST process duration | Split SST | KVペアのストリームをSSTファイルに分割するのにかかる時間 |
+| SST process duration | SST upload | SST ファイルのアップロードにかかる時間 |
+| SST process duration | SST ingest | アップロードされた SST ファイルの取り込みにかかる時間 |
+| SST process duration | SST size | SSTファイルのファイルサイズ |
 
 ## 監視メトリクス {#monitoring-metrics}
 
@@ -131,7 +131,7 @@ scrape_configs:
 
     開いているエンジンファイルと閉じているエンジンファイルの数をカウントします。ラベル:
 
-    - **タイプ**：
+    - **type**:
         - `open`
         - `closed`
 
@@ -139,7 +139,7 @@ scrape_configs:
 
     アイドル状態のワーカーをカウントします。ラベル:
 
-    - **名前**：
+    - **name**:
         - `table` : `table-concurrency`の余り。通常はプロセス終了まで 0 です。
         - `index` : `index-concurrency`の余り。通常はプロセス終了まで 0 です。
         - `region` : `region-concurrency`の余り。通常はプロセス終了まで 0 です。
@@ -150,7 +150,7 @@ scrape_configs:
 
     オープンおよびクローズされたKVエンコーダーをカウントします。KVエンコーダーは、SQL `INSERT`文をKVペアに変換するインメモリTiDBインスタンスです。健全な状況では、正味値は制限される必要があります。ラベル：
 
-    - **タイプ**：
+    - **type**:
         - `open`
         - `closed`
 
@@ -160,7 +160,7 @@ scrape_configs:
 
     処理されたテーブルとそのステータスをカウントします。ラベル:
 
-    - **状態**: テーブルの状態。どのフェーズを完了する必要があるかを示します。
+    - **state**: テーブルのステータス。どのフェーズを完了する必要があるかを示します。
         - `pending` : まだ処理されていません
         - `written` : すべてのデータがエンコードされて送信されました
         - `closed` : 対応するすべてのエンジンファイルが閉じられています
@@ -169,7 +169,7 @@ scrape_configs:
         - `checksum` : チェックサムを実行
         - `analyzed` : 統計分析を実行しました
         - `completed` : テーブルは完全にインポートされ、検証されました
-    - **結果**: 現在のフェーズの結果
+    - **result**: 現在のフェーズの結果
         - `success` : フェーズは正常に完了しました
         - `failure` : フェーズが失敗しました (完了しませんでした)
 
@@ -177,13 +177,13 @@ scrape_configs:
 
     処理されたエンジンファイルの数とそのステータスをカウントします。ラベル:
 
-    - **状態**: エンジンの状態。どのフェーズを完了する必要があるかを示します。
+    - **state**: エンジンのステータス。どのフェーズを完了する必要があるかを示します。
         - `pending` : まだ処理されていません
         - `written` : すべてのデータがエンコードされて送信されました
         - `closed` : エンジンファイルが閉じられました
         - `imported` : エンジンファイルがターゲットクラスターにインポートされました
         - `completed` : エンジンが完全にインポートされました
-    - **結果**: 現在のフェーズの結果
+    - **result**: 現在のフェーズの結果
         - `success` : フェーズは正常に完了しました
         - `failure` : フェーズが失敗しました (完了しませんでした)
 
@@ -193,8 +193,8 @@ scrape_configs:
 
     処理されたチャンクの数とそのステータスをカウントします。ラベル:
 
-    - **状態**: チャンクのステータス。チャンクがどのフェーズにあるかを示します。
-        - `estimated` : (状態ではない) この値は現在のタスク内のチャンクの合計数を示します
+    - **state**: チャンクのステータス。チャンクがどのフェーズにあるかを示します。
+        - `estimated` : (ステータスではない) この値は現在のタスク内のチャンクの合計数を示します
         - `pending` : 読み込まれているがまだ処理されていない
         - `running` : データがエンコードされ送信されています
         - `finished` : チャンク全体が処理されました
@@ -202,7 +202,7 @@ scrape_configs:
 
 - **`lightning_import_seconds`** （ヒストグラム）
 
-    テーブルのインポートに必要な時間のバケット化されたヒストグラム。
+    テーブルをインポートするために必要な時間のバケット化されたヒストグラム。
 
 - **`lightning_row_read_bytes`** （ヒストグラム）
 
@@ -236,7 +236,7 @@ scrape_configs:
 
     アイドル状態のワーカーを獲得するのに必要な時間のバケット化されたヒストグラム（ `lightning_idle_workers`ゲージも参照）。ラベル:
 
-    - **名前**：
+    - **name**:
         - `table`
         - `index`
         - `region`
