@@ -95,7 +95,7 @@ db = TiDBClient.connect(
 
     上記の例はあくまでも説明のためのものです。パラメータにはご自身の値を入力し、安全に保管してください。
 
-### ステップ3．表と全文索引を作成する {#step-3-create-a-table-and-a-full-text-index}
+### ステップ3．表とフルテキストインデックスを作成する {#step-3-create-a-table-and-a-full-text-index}
 
 例として、 `chunks`という名前のテーブルを作成し、以下の列を追加します。
 

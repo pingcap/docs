@@ -34,17 +34,17 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 全文検索を実行するには、以下の手順に従ってください。
 
-1. [**全文索引を作成する**](#create-a-full-text-index): 全文インデックスを持つテーブルを作成するか、既存のテーブルに全文インデックスを追加します。
+1. [**フルテキストインデックスを作成する**](#create-a-full-text-index): フルテキストインデックスを持つテーブルを作成するか、既存のテーブルにフルテキストインデックスを追加します。
 
 2. [**テキストデータを挿入する**](#insert-text-data): テーブルにテキストデータを挿入します。
 
 3. [**全文検索を実行する**](#perform-a-full-text-search): テキストクエリと全文検索関数を使用して全文検索を実行します。
 
-### 全文索引を作成する {#create-a-full-text-index}
+### フルテキストインデックスを作成する {#create-a-full-text-index}
 
-全文検索を実行するには、効率的な検索とランキングに必要なデータ構造を提供する全文インデックスが必要です。全文インデックスは、新規テーブルに作成することも、既存のテーブルに追加することもできます。
+全文検索を実行するには、効率的な検索とランキングに必要なデータ構造を提供するフルテキストインデックスが必要です。フルテキストインデックスは、新規テーブルに作成することも、既存のテーブルに追加することもできます。
 
-全文インデックス付きのテーブルを作成します。
+フルテキストインデックス付きのテーブルを作成します。
 
 ```sql
 CREATE TABLE stock_items(
@@ -54,7 +54,7 @@ CREATE TABLE stock_items(
 );
 ```
 
-または、既存のテーブルに全文インデックスを追加します。
+または、既存のテーブルにフルテキストインデックスを追加します。
 
 ```sql
 CREATE TABLE stock_items(
@@ -74,9 +74,9 @@ ALTER TABLE stock_items ADD FULLTEXT INDEX (title) WITH PARSER MULTILINGUAL ADD_
 
 - `MULTILINGUAL` : 英語、中国語、日本語、韓国語など、複数の言語をサポートしています。
 
-### 全文インデックスを管理する {#manage-full-text-indexes}
+### フルテキストインデックスを管理する {#manage-full-text-indexes}
 
-全文インデックスを作成する際、インデックス名の指定は任意です。指定しない場合、TiDB はデフォルトで最初にインデックス化されるカラム名をインデックス名として使用します。
+フルテキストインデックスを作成する際、インデックス名の指定は任意です。指定しない場合、TiDB はデフォルトで最初にインデックス化されるカラム名をインデックス名として使用します。
 
 ```sql
 -- Without specifying an index name, TiDB uses the first indexed column name ("title") as the index name
@@ -98,7 +98,7 @@ FROM INFORMATION_SCHEMA.STATISTICS
 WHERE TABLE_SCHEMA = 'your_database' AND TABLE_NAME = 'stock_items';
 ```
 
-**全文インデックスを削除する:**
+**フルテキストインデックスを削除する:**
 
 ```sql
 -- Use SHOW INDEX to confirm the index name first
@@ -126,7 +126,7 @@ CREATE FULLTEXT INDEX ft_name ON users (name) WITH PARSER STANDARD;
 
 ### テキストデータを挿入する {#insert-text-data}
 
-全文インデックスを持つテーブルにデータを挿入する方法は、他のテーブルにデータを挿入する方法と全く同じです。
+フルテキストインデックスを持つテーブルにデータを挿入する方法は、他のテーブルにデータを挿入する方法と全く同じです。
 
 例えば、以下のSQL文を実行することで、複数の言語でデータを挿入できます。TiDBの多言語パーサーがテキストを自動的に処理します。
 
