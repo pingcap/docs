@@ -79,7 +79,7 @@ ti fs mount-file-system \
 cat "$HOME/workspace/sandbox/status.txt"
 ```
 
-On macOS, omit `--driver fuse` to use WebDAV, which requires no FUSE installation. Install macFUSE and select FUSE when you need FUSE-specific capabilities such as Git workspaces, layers, or online drain. For platform requirements and mount-path restrictions, see [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md).
+On macOS, omit `--driver fuse` to use WebDAV, which requires no FUSE installation. Install macFUSE and select FUSE when you need FUSE-specific capabilities such as Git workspaces, layers, or online drain. For platform requirements and mount-path restrictions, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md).
 
 After mounting, you can use `ti fs-git`, `ti fs-journal`, and owner-authorized `ti fs-vault` commands with the same FS environment. Give agents a delegated `TI_VAULT_TOKEN` instead of the owner token when they need only selected secret fields.
 
@@ -91,7 +91,7 @@ Stop writers and unmount. A graceful FUSE unmount automatically flushes and drai
 ti fs unmount-file-system --mount-path "$HOME/workspace"
 ```
 
-For a FUSE mount, use `ti fs drain-file-system --mount-path "$HOME/workspace"` separately when you need to verify remote durability while keeping the mount online. `drain-file-system` is not supported for WebDAV. For more information, see [Drain or unmount](/ai/ti/guides/mount-filesystem.md#drain-or-unmount). Back on the trusted machine:
+For a FUSE mount, use `ti fs drain-file-system --mount-path "$HOME/workspace"` separately when you need to verify remote durability while keeping the mount online. `drain-file-system` is not supported for WebDAV. For more information, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely). Back on the trusted machine:
 
 ```bash
 ti fs delete-file-system \

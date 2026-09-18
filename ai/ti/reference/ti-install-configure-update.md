@@ -171,7 +171,7 @@ ti update --dry-run
 > ti fs unmount-file-system --mount-path <mount-path>
 > ```
 >
-> For a Vault mount, use `ti fs-vault unmount-vault --mount-path <mount-path>`. For details, see [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md) and [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md).
+> For a Vault mount, use `ti fs-vault unmount-vault --mount-path <mount-path>`. For details, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) and [Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md).
 
 Apply the latest update:
 
@@ -209,7 +209,7 @@ ti fs unmount-file-system --mount-path <filesystem-mount-path>
 ti fs-vault unmount-vault --mount-path <vault-mount-path>
 ```
 
-For details, see [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md) and [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md).
+For details, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) and [Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md).
 
 <SimpleTab groupId="operating-systems">
 

@@ -18,5 +18,5 @@ summary: Reference every `ti fs-git` command for cloning, hydrating, and managin
 
 ## See also
 
-- [Manage Git Workspaces on TiDB Cloud Filesystem](/ai/ti/guides/manage-git-workspaces.md)
+- [Manage Git Workspaces on TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-git-workspaces.md)
 - [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
