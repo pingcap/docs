@@ -84,7 +84,7 @@ Configuration for SQL port.
 + Hot-reload supported: Yes
 + Unit: seconds
 + Range: `>= 0`
-+ When a backend appears in [`fail-backend-list`](#fail-backend-list-从-v133-版本开始引入), TiProxy migrates existing connections away from that backend. If there are still remaining connections on that backend after `failover-timeout` seconds, TiProxy forcibly closes these connections. `0` means to forcibly close the remaining connections immediately.
++ When a backend appears in [`fail-backend-list`](#fail-backend-list-new-in-v133), TiProxy migrates existing connections away from that backend. If there are still remaining connections on that backend after `failover-timeout` seconds, TiProxy forcibly closes these connections. `0` means to forcibly close the remaining connections immediately.
 
 #### `max-connections`
 
@@ -185,7 +185,7 @@ Health-based load balancing configuration. It takes effect only when [`policy`](
 
 + Default value: `true`
 + Hot-reload supported: Yes
-+ Whether to enable [health-based load balancing](/tiproxy/tiproxy-load-balance.md#基于健康度的负载均衡).
++ Whether to enable [health-based load balancing](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing).
 
 ##### `migrations-per-second` <span class="version-mark">New in v1.3.3</span>
 
@@ -202,7 +202,7 @@ Configuration for memory-based load balancing. This item takes effect only when 
 
 + Default value: `true`
 + Hot-reload supported: Yes
-+ Whether to enable [memory-based load balancing](/tiproxy/tiproxy-load-balance.md#基于内存的负载均衡).
++ Whether to enable [memory-based load balancing](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing).
 
 ##### `migrations-per-second` <span class="version-mark">New in v1.3.3</span>
 
@@ -219,7 +219,7 @@ Configuration for CPU-based load balancing. This item takes effect only when [`p
 
 + Default value: `true`
 + Hot-reload supported: Yes
-+ Whether to enable [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#基于-cpu-的负载均衡).
++ Whether to enable [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
 
 ##### `migrations-per-second` <span class="version-mark">New in v1.3.3</span>
 
@@ -250,7 +250,7 @@ Configuration for location-based load balancing. This item takes effect only whe
 
 + Default value: `true`
 + Hot-reload supported: Yes
-+ Whether to enable [location-based load balancing](/tiproxy/tiproxy-load-balance.md#基于地理位置的负载均衡).
++ Whether to enable [location-based load balancing](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing).
 
 ##### `migrations-per-second` <span class="version-mark">New in v1.3.3</span>
 
@@ -329,7 +329,7 @@ When you need to isolate computing layer resources, you can configure multiple v
 + Default value: `30`
 + Hot-reload: No
 + Range: `>= 0`
-+ Specifies the number of times to additionally send GARP after taking over the virtual IP. The interval between two sends is 1 second, and [`garp-burst-count`](#garp-burst-count-从-v133-版本开始引入) packets are sent each time. This is used to refresh the previous virtual IP-to-MAC address mapping in upstream devices for a period of time after failover, to avoid traffic still being forwarded to the old instance. `0` means no additional packets are sent after takeover.
++ Specifies the number of times to additionally send GARP after taking over the virtual IP. The interval between two sends is 1 second, and [`garp-burst-count`](#garp-burst-count-new-in-v133) packets are sent each time. This is used to refresh the previous virtual IP-to-MAC address mapping in upstream devices for a period of time after failover, to avoid traffic still being forwarded to the old instance. `0` means no additional packets are sent after takeover.
 
 ### `labels`
 
