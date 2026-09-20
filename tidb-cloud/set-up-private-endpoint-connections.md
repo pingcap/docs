@@ -203,6 +203,17 @@ The possible statuses of a private endpoint service are explained as follows:
 - **Active**: The endpoint service is created, no matter whether the private endpoint is created or not.
 - **Deleting**: The endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
 
+## Use IPv6 connectivity over a private endpoint
+
+TiDB Cloud Dedicated supports inbound IPv6 connectivity over AWS PrivateLink. After IPv6 is enabled for a cluster, the endpoint service of the cluster becomes dual-stack, and you can create an AWS interface endpoint that connects to your cluster over IPv6.
+
+To enable IPv6 connectivity for a cluster, [contact PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) and provide the cluster ID. After IPv6 is enabled, create an AWS interface endpoint as described in [Step 2. Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint), and note the following:
+
+- For **IP address type**, select **Dualstack** to assign both IPv4 and IPv6 addresses to the endpoint network interfaces, or select **IPv6** to assign IPv6 addresses only.
+- For **Subnets**, select subnets that have IPv6 CIDR blocks associated. **Dualstack** requires all selected subnets to have both IPv4 and IPv6 CIDR blocks, whereas **IPv6** requires all selected subnets to be IPv6-only.
+
+Then complete [Step 3](#step-3-create-a-private-endpoint-connection) through [Step 5](#step-5-connect-to-your-tidb-cluster) to create the private endpoint connection and connect to your cluster over IPv6.
+
 ## Troubleshooting
 
 ### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
