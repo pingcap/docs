@@ -27,7 +27,7 @@ If only one table has an error encountered, the rest will still be processed nor
 ## How to properly restart TiDB Lightning?
 
 1. [Stop the `tidb-lightning` process](#how-to-stop-the-tidb-lightning-process).
-2. Start a new `tidb-lightning` task: execute the previous start command, such as `nohup tiup tidb-lightning:<version> -config tidb-lightning.toml`. Replace `<version>` with the TiDB Lightning version used by the original task.
+2. Start a new `tidb-lightning` task by rerunning the command used to start the original task, such as `nohup tiup tidb-lightning:<version> -config tidb-lightning.toml`. Replace `<version>` with the TiDB Lightning version used by the original task.
 
 ## How to ensure the integrity of the imported data?
 

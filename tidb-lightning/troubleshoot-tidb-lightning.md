@@ -37,7 +37,7 @@ strict-format = true
 
 **Cause 4**: TiDB Lightning is too old.
 
-A newer version might improve the import speed. When upgrading, it is recommended to keep TiDB Lightning and the target TiDB cluster at the same version.
+A newer TiDB Lightning version might improve import performance. When upgrading, it is recommended to use a TiDB Lightning version that matches the target TiDB cluster version.
 
 ## The `tidb-lightning` process suddenly quits while running in background
 
