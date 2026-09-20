@@ -142,7 +142,7 @@ Starting from BR v5.1.0, when you back up snapshots, BR backs up the **system ta
 
 - Statistics tables (`mysql.stats_*`)
 - System variable tables (`mysql.tidb` and `mysql.global_variables`)
-- [Other system tables](https://github.com/pingcap/tidb/blob/master/br/pkg/restore/systable_restore.go#L31)
+- [Other system tables](https://github.com/pingcap/tidb/blob/release-6.5/br/pkg/restore/systable_restore.go#L31)
 
 When you restore data related to system privilege, note that before restoring data, BR checks whether the system tables in the target cluster are compatible with those in the backup data. "Compatible" means that all the following conditions are met:
 

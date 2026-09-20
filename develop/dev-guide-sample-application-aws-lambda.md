@@ -350,8 +350,8 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
-- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
-- To avoid SQL injection, it is recommended to use [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements).
+- Using [connection pools](https://sidorares.github.io/node-mysql2/docs#using-connection-pools) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
+- To avoid SQL injection, it is recommended to use [prepared statements](https://sidorares.github.io/node-mysql2/docs#using-prepared-statements).
 - In scenarios where there are not many complex SQL statements involved, using ORM frameworks like [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), or [Prisma](https://www.prisma.io/) can greatly improve development efficiency. 
 - For building a RESTful API for your application, it is recommended to [use AWS Lambda with API Gateway](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html).
 - For designing high-performance applications using TiDB Serverless and AWS Lambda, refer to [this blog](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/).
@@ -359,7 +359,7 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 ## Next steps
 
 - For more details on how to use TiDB in AWS Lambda Function, see our [TiDB-Lambda-integration/aws-lambda-bookstore Demo](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md). You can also use AWS API Gateway to build a RESTful API for your application.
-- Learn more usage of `mysql2` from [the documentation of `mysql2`](https://github.com/sidorares/node-mysql2/tree/master/documentation/en).
+- Learn more usage of `mysql2` from [the documentation of `mysql2`](https://sidorares.github.io/node-mysql2/docs/documentation).
 - Learn more usage of AWS Lambda from [the AWS developer guide of `Lambda`](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html).
 - Learn the best practices for TiDB application development with the chapters in the [Developer guide](/develop/dev-guide-overview.md), such as [Insert data](/develop/dev-guide-insert-data.md), [Update data](/develop/dev-guide-update-data.md), [Delete data](/develop/dev-guide-delete-data.md), [Single table reading](/develop/dev-guide-get-data-from-single-table.md), [Transactions](/develop/dev-guide-transaction-overview.md), and [SQL performance optimization](/develop/dev-guide-optimize-sql-overview.md).
 - Learn through the professional [TiDB developer courses](https://www.pingcap.com/education/) and earn [TiDB certifications](https://www.pingcap.com/education/certification/) after passing the exam.

@@ -294,8 +294,8 @@ For more information, refer to [Delete data](/develop/dev-guide-delete-data.md).
 
 ## Useful notes
 
-- Using [connection pools](https://github.com/sidorares/node-mysql2#using-connection-pools) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
-- To avoid SQL injection, it is recommended to use [prepared statements](https://github.com/sidorares/node-mysql2#using-prepared-statements).
+- Using [connection pools](https://sidorares.github.io/node-mysql2/docs#using-connection-pools) to manage database connections can reduce the performance overhead caused by frequently establishing and destroying connections.
+- To avoid SQL injection, it is recommended to use [prepared statements](https://sidorares.github.io/node-mysql2/docs#using-prepared-statements).
 - In scenarios where there are not many complex SQL statements involved, using ORM frameworks like [Sequelize](https://sequelize.org/), [TypeORM](https://typeorm.io/), or [Prisma](https://www.prisma.io/) can greatly improve development efficiency.
 - It is recommended to enable the `supportBigNumbers: true` option when dealing with big numbers (`BIGINT` and `DECIMAL` columns) in the database.
 - It is recommended to enable the `enableKeepAlive: true` option to avoid socket error `read ECONNRESET` due to network problems. (Related issue: [sidorares/node-mysql2#683](https://github.com/sidorares/node-mysql2/issues/683))
