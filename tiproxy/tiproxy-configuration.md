@@ -155,8 +155,6 @@ Configurations for the load balancing policy of TiProxy.
 + Possible values: `resource`, `location`, `connection`
 + Specifies the load balancing policy. For the meaning of each possible value, see [TiProxy load balancing policies](/tiproxy/tiproxy-load-balance.md#configure-load-balancing-policies).
 
-<<<<<<< HEAD
-=======
 #### `routing-policy` <span class="version-mark">New in v1.3.3</span>
 
 + Default value: `prefer-idle`
@@ -285,8 +283,6 @@ Configuration for connection-count-based load balancing.
 + Support hot-reload: yes
 + Possible values: `true`, `false`
 + Specifies whether to enable [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is set to `false`, traffic capture and replay operations will result in errors.
-
->>>>>>> f9f08f3606 (Update TiProxy to v1.3.3 (#23905))
 ### ha
 
 High availability configurations for TiProxy.
