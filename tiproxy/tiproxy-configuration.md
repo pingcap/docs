@@ -70,21 +70,21 @@ Configuration for SQL port.
 #### `fail-backend-list` <span class="version-mark">New in v1.3.3</span>
 
 + Default value: `[]`
-+ Hot-reload supported: Yes
++ Support hot-reload: yes
 + Specifies the list of backends to remove from routing. After confirming that a TiDB server has failed, you can add it to this list. TiProxy stops routing new connections to these backends and migrates existing connections away from them. Each item in the list can be in one of the following two forms:
 
     - Backend Pod name, for example, `"db-tidb-0"`
     - Backend address in the format of `<ip>:<port>`, for example, `"10.0.0.10:4000"`
 
-+ If applying this list would leave no routable backends, TiProxy ignores this list to ensure that requests can still be routed.
++ If applying this list would leave no routable backends, TiProxy ignores this list to ensure that connection requests can still be routed.
 
 #### `failover-timeout` <span class="version-mark">New in v1.3.3</span>
 
 + Default value: `60`
 + Hot-reload supported: Yes
-+ Unit: seconds
++ Unit: second
 + Range: `>= 0`
-+ When a backend appears in [`fail-backend-list`](#fail-backend-list-new-in-v133), TiProxy migrates existing connections away from that backend. If there are still remaining connections on that backend after `failover-timeout` seconds, TiProxy forcibly closes these connections. `0` means to forcibly close the remaining connections immediately.
++ When a backend appears in [`fail-backend-list`](#fail-backend-list-new-in-v133), TiProxy migrates existing connections away from that backend. If any connections remain on that backend after `failover-timeout` seconds, TiProxy forcibly closes these connections. `0` means that TiProxy forcibly closes any remaining connections immediately.
 
 #### `max-connections`
 
@@ -97,8 +97,8 @@ Configuration for SQL port.
 + Default value: `0.9`
 + Hot-reload supported: Yes
 + Range: `[0, 1]`
-+ When TiProxy's memory usage reaches or exceeds this threshold, TiProxy rejects new connections, and the status port returns an unhealthy status. Existing connections are not affected. If [`ha.virtual-ip`](#virtual-ip) is configured, the instance also releases the virtual IP. For example, `0.9` means that it takes effect when memory usage reaches 90%.
-+ `0` means not rejecting new connections due to memory usage. If the configured value is greater than `0` and less than `0.5`, TiProxy adjusts it to `0.5`.
++ When the memory usage of TiProxy reaches or exceeds this threshold, TiProxy rejects new connections, and the status port returns an unhealthy status. Existing connections are not affected. If [`ha.virtual-ip`](#virtual-ip) is configured, the instance also releases the virtual IP. For example, `0.9` means that TiProxy starts rejecting new connections when the memory usage reaches 90%.
++ `0` means that TiProxy does not reject new connections based on memory usage. If the configured value is greater than `0` and less than `0.5`, TiProxy adjusts it to `0.5`.
 
 #### `conn-buffer-size`
 
@@ -163,7 +163,7 @@ Configurations for the load balancing policy of TiProxy.
 + Specifies the routing policy for new connections:
 
     - `prefer-idle`: Excludes backends that need connection migration, and then randomly selects from the remaining routable backends. Suitable for most scenarios.
-    - `random`: Randomly selects from routable backends, where the idlest backend has a slightly higher probability of being selected. Suitable for scenarios where new connections are created more intensively.
+    - `random`: Randomly selects from routable backends, where the idlest backend has a slightly higher probability of being selected. Suitable for scenarios with a high rate of new connections.
     - `idlest`: Always routes new connections to the idlest routable backend. Suitable for scenarios with long-lived connections and infrequent connection creation.
 
 #### `status` <span class="version-mark">New in v1.3.3</span>
@@ -226,7 +226,7 @@ Configuration for CPU-based load balancing. This item takes effect only when [`p
 + Default value: `0`
 + Hot-reload supported: Yes
 + Range: `>= 0`
-+ Specifies the number of connections migrated per second for CPU-based load balancing. `0` indicates that TiProxy automatically calculates the migration rate. It is not recommended to set this value too high when CPU hotspots are unstable, to avoid repeated connection migrations.
++ Specifies the number of connections migrated per second for CPU-based load balancing. `0` indicates that TiProxy automatically calculates the migration rate. When CPU hotspots shift frequently, it is not recommended to set this value too high to avoid repeated connection migrations.
 
 ##### `min-balance-usage` <span class="version-mark">New in v1.3.3</span>
 
@@ -239,7 +239,7 @@ Configuration for CPU-based load balancing. This item takes effect only when [`p
 
 + Default value: `1`
 + Hot-reload supported: Yes
-+ Value range: `0` or `[0.05, 1]`
++ Range: `0` or `[0.05, 1]`
 + Specifies the minimum CPU usage difference required to trigger CPU-based connection migration. Migration is triggered when the CPU usage difference between the source backend and the target backend reaches this threshold. For example, `0.1` means migration can be triggered when the difference reaches 10%. The default value `1` means whether to migrate depends only on adaptive rules. If you need more balanced CPU usage across backends, you can reduce this value appropriately.
 
 #### `location` <span class="version-mark">New in v1.3.3</span>
@@ -313,16 +313,16 @@ Starting from v1.3.1, TiProxy supports configuring multiple virtual IP addresses
 #### `garp-burst-count` <span class="version-mark">New in v1.3.3</span>
 
 + Default value: `5`
-+ Hot-reload supported: No
++ Support hot-reload: no
 + Value range: `>= 0`
 + Specifies the number of GARP (Gratuitous ARP) packets sent immediately after a TiProxy instance takes over and binds the virtual IP. GARP is used to notify switches and hosts to update the MAC address corresponding to the virtual IP, so that client traffic can be switched to the TiProxy instance that has taken over the virtual IP as soon as possible. Sending multiple packets continuously can reduce the risk of switchover delay caused by the loss of the first GARP packet. `0` is automatically adjusted to `1`.
 
 #### `garp-refresh-count` <span class="version-mark">New in v1.3.3</span>
 
 + Default value: `30`
-+ Hot-reload: No
++ Support hot-reload: no
 + Range: `>= 0`
-+ Specifies the number of times to additionally send GARP after taking over the virtual IP. The interval between two sends is 1 second, and [`garp-burst-count`](#garp-burst-count-new-in-v133) packets are sent each time. This is used to refresh the previous virtual IP-to-MAC address mapping in upstream devices for a period of time after failover, to avoid traffic still being forwarded to the old instance. `0` means no additional packets are sent after takeover.
++ Specifies the number of times to additionally send GARP bursts after taking over the virtual IP. The interval between two sends is 1 second, and [`garp-burst-count`](#garp-burst-count-new-in-v133) packets are sent each time. This is used to refresh the previous virtual IP-to-MAC address mapping in upstream devices for a period of time after failover, to avoid traffic still being forwarded to the old instance. `0` means no additional packets are sent after takeover.
 
 ### `labels`
 

@@ -12,7 +12,7 @@ By default, TiProxy applies these policies with the following priorities:
 1. Label-based load balancing: TiProxy prioritizes routing connection requests to TiDB servers that share the same label as the TiProxy instance, enabling resource isolation at the computing layer.
 2. Status-based load balancing: when a TiDB server cannot provide service normally or is shutting down, TiProxy migrates connections from that TiDB server to an online TiDB server.
 3. Health-based load balancing: when the health of a TiDB server is abnormal, TiProxy migrates connections from that TiDB server to a healthy TiDB server.
-4. Memory-based load balancing: when a TiDB server is at risk of Out of Memory (OOM), TiProxy migrates connections from that TiDB server to a TiDB server with lower memory usage.
+4. Memory-based load balancing: when a TiDB server is at risk of running out of memory (OOM), TiProxy migrates connections from that TiDB server to a TiDB server with lower memory usage.
 5. CPU-based load balancing: when the CPU usage of a TiDB server is much higher than that of other TiDB servers, TiProxy migrates connections from that TiDB server to a TiDB server with lower CPU usage.
 6. Location-based load balancing: TiProxy prioritizes routing requests to TiDB servers that are geographically closer to TiProxy.
 7. Connection count-based load balancing: when the connection count of a TiDB server is much higher than that of other TiDB servers, TiProxy migrates connections from that TiDB server to a TiDB server with fewer connections.
@@ -98,7 +98,7 @@ pd_servers:
 
 ## Status-based load balancing
 
-TiProxy periodically checks whether a TiDB server can provide services properly using the SQL port and status port, including whether it is offline or shutting down.
+TiProxy periodically checks whether a TiDB server can provide services normally using the SQL port and status port, such as whether it is offline or shutting down.
 
 ## Health-based load balancing
 
