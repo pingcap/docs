@@ -213,10 +213,10 @@ IPv6 connectivity is configured per node group. To use IPv6 for a node group, ta
 
 1. Enable IPv6 connectivity by contacting [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) and providing the cluster ID. After IPv6 is enabled, you can switch the IP protocol type in the TiDB Cloud console.
 2. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-3. In the private endpoint list, click **Edit** in the row of the target private endpoint connection.
+3. In the **AWS Private Endpoints** panel, click **Edit**.
 4. In the **AWS Private Endpoints Connection Settings** dialog, select **Dual Stack (IPv4 + IPv6)** for **IP Protocol type**, and then click **Save**.
 
-The IP protocol type can only be changed after the cluster is created, and it is configured independently for each node group. The change takes effect in about 1 minute.
+The IP protocol type can only be changed after the cluster is created, and it is configured independently for each node group.
 
 ### Create an AWS interface endpoint for IPv6
 
