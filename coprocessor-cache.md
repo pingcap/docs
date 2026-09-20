@@ -65,6 +65,18 @@ EXPLAIN ANALYZE SELECT * FROM t USE INDEX(a);
 
 The column `execution info` of the execution result gives the `copr_cache_hit_ratio` information, which indicates the hit rate of the Coprocessor Cache. The `0.75` in the above example means that the hit rate is about 75%.
 
+<CustomContent platform="tidb-cloud" plan="dedicated">
+
 ### View the Grafana monitoring panel
 
 In Grafana, you can see the **copr-cache** panel in the `distsql` subsystem under the `tidb` namespace. This panel monitors the number of hits, misses, and cache discards of the Coprocessor Cache in the entire cluster.
+
+</CustomContent>
+
+<CustomContent platform="tidb">
+
+### View the Grafana panel
+
+In Grafana, you can see the **copr-cache** panel in the `distsql` subsystem under the `tidb` namespace. This panel monitors the number of hits, misses, and cache discards of the Coprocessor Cache in the entire cluster.
+
+</CustomContent>

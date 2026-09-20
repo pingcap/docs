@@ -5,7 +5,7 @@ hide_commit: true
 summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. It offers guides, samples, and references for learning, trying, developing, maintaining, migrating, monitoring, tuning, securing, billing, integrating, and referencing.
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.">
 
 <LearningPath label="Learn" icon="cloud1">
 
@@ -21,7 +21,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart/?plan=starter)
 
-[Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python/?plan=starter)
+[Try Out TiDB + AI](https://docs.pingcap.com/ai/quickstart-via-python/)
 
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart/?plan=starter)
 
@@ -31,11 +31,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidbcloud/dev-guide-overview/?plan=starter)
+[Developer Guide Overview](https://docs.pingcap.com/developer/)
 
-[Quick Start](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud/?plan=starter)
+[Quick Start](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud/)
 
-[Example Application](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-spring-boot/?plan=starter)
+[Connect to TiDB](https://docs.pingcap.com/developer/dev-guide-connect-to-tidb/)
 
 </LearningPath>
 
@@ -49,9 +49,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Back Up and Restore Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=starter)
 
-[Use API (Beta)](https://docs.pingcap.com/tidbcloud/api-overview/?plan=starter)
+[Use API (PREVIEW)](https://docs.pingcap.com/tidbcloud/api-overview/?plan=starter)
 
-[Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/get-started-with-cli/?plan=starter)
+[Use TiDB Cloud CLI](https://docs.pingcap.com/tidbcloud/cli-reference/?plan=starter)
 
 </LearningPath>
 
@@ -93,9 +93,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication/?plan=starter)
 
-[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access#user-roles/?plan=starter)
+[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter#user-roles)
 
-[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access#manage-user-profiles/?plan=starter)
+[Manage User Profiles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter#manage-user-profiles)
 
 [Manage Organization Access](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter#manage-organization-access)
 
@@ -109,9 +109,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Pricing](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)
 
-[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#invoices/?plan=starter)
+[Invoices](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=starter#invoices)
 
-[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing#credits/?plan=starter)
+[Credits](https://docs.pingcap.com/tidbcloud/tidb-cloud-billing/?plan=starter#credits)
 
 </LearningPath>
 

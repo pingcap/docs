@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.17 Release Notes
 summary: TiDB 3.0.17 was released on Aug 3, 2020. The release includes improvements such as decreasing the default value of the query-feedback-limit configuration item and bug fixes like returning the actual error message instead of an empty set. TiKV also added the hibernate-timeout configuration to improve rolling update performance. TiDB Lightning deprecated the black-white-list filter format and fixed the issue of the log-file flag being ignored.
+aliases: ['/tidb/dev/release-3.0.17/','/tidb/v3.0/release-3.0.17','/tidb/v5.4/release-3.0.17','/tidb/v6.1/release-3.0.17','/tidb/v6.5/release-3.0.17','/tidb/v7.1/release-3.0.17','/tidb/v7.5/release-3.0.17','/tidb/v8.1/release-3.0.17']
 ---
 
 # TiDB 3.0.17 Release Notes

@@ -1,0 +1,52 @@
+---
+title: Support Services
+summary: "{{{ .lake }}} provides comprehensive Support Services for our {{{ .lake }}} users and customers. Our objective is to deliver exceptional support that reflects the {{{ .lake }}} product's core values – high performance, ease of use, and fast, high-quality results."
+---
+
+# Support Services
+
+{{{ .lake }}} provides comprehensive Support Services for our {{{ .lake }}} users and customers. Our objective is to deliver exceptional support that reflects the {{{ .lake }}} product's core values – high performance, ease of use, and fast, high-quality results.
+
+For detailed information about support service levels across different editions, see [Support Service Levels](#support-service-levels). For more information, contact our [sales team](https://www.pingcap.com/contact-us/).
+
+## Getting Support
+
+You can access support through multiple channels:
+
+- **Cloud Console**: Log in to the {{{ .lake }}} console and select **Support → Create New Ticket** from the menu options to open a new support case and view the status of your submitted cases.
+- **Status Page**: Subscribe to our [status page](https://status.tidbcloud.com/) to get notified quickly about any incidents affecting our platform.
+- **Documentation**: Browse our comprehensive [documentation](https://docs.pingcap.com/tidbcloudlake/) for guides, tutorials, and reference materials.
+
+## Support Service Levels
+
+{{{ .lake }}} offers different levels of support based on your subscription tier:
+
+| Feature                                                | Personal | Business | Dedicated |
+| ------------------------------------------------------ | -------- | -------- | --------- |
+| Logging and tracking support tickets                   | ✓        | ✓        | ✓         |
+| 4/7 coverage and response window for Severity 1 issues | 24 hours | 8 hours  | 4 hours   |
+| Response to non-severity-1 issues                      | 48 hours | 24 hours | 8 hours   |
+
+### Severity Levels
+
+- **Severity 1**: Critical issue halting business operations with no workaround
+- **Severity 2**: Major functionality impacted with significant performance degradation
+- **Severity 3**: Partial loss of functionality with minor business impact
+- **Severity 4**: General questions, recommendations, or feature requests
+
+> **Note:**
+>
+> Please note that only Business and Dedicated customers have a Service Level Agreement (SLA) on Support Incidents. If you are using the Personal edition – while we will try to answer your question as soon as possible, we'd encourage you to also explore our Community resources:
+>
+> - [{{{ .lake }}} Community Slack Channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=tidbcloud)
+
+## Enterprise Support
+
+For customers with mission-critical deployments, our Dedicated edition offers enhanced support options including:
+
+- Priority response times for all severity levels
+- Dedicated support engineer
+- Proactive monitoring and issue resolution
+- Regular health checks and optimization recommendations
+
+Contact our [sales team](https://www.pingcap.com/contact-us/) to learn more about our enterprise support offerings.

@@ -11,7 +11,7 @@ TiDB enables image search through **vector search**. With automatic embedding, y
 
 > **Note:**
 >
-> For a complete example of image search, see [Image Search Example](/ai/examples/image-search-with-pytidb.md).
+> For a complete example of image search, see [Image Search Example](/ai/guides/image-search-with-pytidb.md).
 
 ## Basic usage
 
@@ -107,5 +107,5 @@ Then, the multimodal embedding model converts the keyword text into an embedding
 ## See also
 
 - [Automatic embedding guide](/ai/guides/auto-embedding.md)
-- [Vector search guide](/ai/concepts/vector-search-overview.md)
-- [Image Search Example](/ai/examples/image-search-with-pytidb.md)
+- [Vector search guide](/ai/guides/vector-search-overview.md)
+- [Image Search Example](/ai/guides/image-search-with-pytidb.md)

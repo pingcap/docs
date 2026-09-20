@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.8 Release Notes
 summary: TiDB 3.0.8 was released on December 31, 2019. It includes various fixes and improvements for SQL optimizer, SQL execution engine, DDL, server, transaction, monitor, TiKV, PD, and TiDB Ansible. Notable changes include SQL binding plan fixes, error message optimizations, and support for certificate-based authentication. The default value of `tidb_txn_mode` variable is updated to `"pessimistic"`. PD also received performance optimizations and bug fixes. TiDB Ansible saw various logic optimizations and upgrades.
+aliases: ['/tidb/dev/release-3.0.8/','/tidb/v3.0/release-3.0.8','/docs/dev/releases/release-3.0.8/','/docs/dev/releases/3.0.8/','/tidb/v5.4/release-3.0.8','/tidb/v6.1/release-3.0.8','/tidb/v6.5/release-3.0.8','/tidb/v7.1/release-3.0.8','/tidb/v7.5/release-3.0.8','/tidb/v8.1/release-3.0.8']
 ---
 
 # TiDB 3.0.8 Release Notes

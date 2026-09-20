@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.1.4 Release Notes
 summary: "TiDB 5.1.4 Release Notes: Compatibility changes include default value changes for system variables. Improvements in partition pruning, memory usage tracking, and speed of inserting SST files. Bug fixes address memory leaks, configuration issues, and incorrect query results. Tools like TiCDC and TiFlash also receive various fixes and improvements."
+aliases: ['/tidb/dev/release-5.1.4/','/tidb/v5.1/release-5.1.4','/tidb/v5.4/release-5.1.4','/tidb/v6.1/release-5.1.4','/tidb/v6.5/release-5.1.4','/tidb/v7.1/release-5.1.4','/tidb/v7.5/release-5.1.4','/tidb/v8.1/release-5.1.4']
 ---
 
 # TiDB 5.1.4 Release Notes
@@ -55,7 +56,7 @@ TiDB version: 5.1.4
         - Add metrics for observing the remaining time of incremental scan [#2985](https://github.com/pingcap/tiflow/issues/2985)
         - Reduce the count of "EventFeed retry rate limited" logs [#4006](https://github.com/pingcap/tiflow/issues/4006)
         - Add more Prometheus and Grafana monitoring metrics and alerts, including `no owner alert`, `mounter row`, `table sink total row`, and `buffer sink total row` [#4054](https://github.com/pingcap/tiflow/issues/4054) [#1606](https://github.com/pingcap/tiflow/issues/1606)
-        - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
+        - Optimize rate-limiting control on TiKV reloads to reduce gRPC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Reduce the time for the KV client to recover when a TiKV store is down [#3191](https://github.com/pingcap/tiflow/issues/3191)
 
 ## Bug fixes

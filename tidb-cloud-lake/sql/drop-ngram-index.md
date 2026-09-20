@@ -1,0 +1,23 @@
+---
+title: DROP NGRAM INDEX
+summary: Drops an existing NGRAM index from a table.
+---
+
+# DROP NGRAM INDEX
+
+Drops an existing NGRAM index from a table.
+
+## Syntax
+
+```sql
+DROP NGRAM INDEX [IF EXISTS] <index_name>
+ON [<database>.]<table_name>;
+```
+
+## Examples
+
+The following example drops the `idx1` index from the `amazon_reviews_ngram` table:
+
+```sql
+DROP NGRAM INDEX idx1 ON amazon_reviews_ngram;
+```

@@ -8,6 +8,14 @@ on:
 
 env:
   DOCS_SITE_BASE_URL: "https://docs.pingcap.com"
+  # Add one repository-relative file path per line.
+  LINK_CHECK_EXCLUDED_FILES: |
+    ai/integrations/vector-search-integrate-with-langchain.md
+  # Add one repository-relative folder path per line.
+  LINK_CHECK_EXCLUDED_FOLDERS: |
+    releases
+    tidb-cloud/releases
+    resources
 
 permissions:
   contents: read
@@ -31,24 +39,92 @@ jobs:
           key: cache-lychee-${{ github.sha }}
           restore-keys: cache-lychee-
 
+      - name: Collect files to check
+        id: link-inputs
+        run: |
+          excluded_files=()
+          while IFS= read -r file; do
+            # Block scalars end with a newline, so ignore the resulting empty entry.
+            if [[ -n "$file" ]]; then
+              excluded_files+=("$file")
+              if [[ ! -f "$file" ]]; then
+                echo "::warning::Excluded link-check file does not exist: $file"
+              fi
+            fi
+          done <<< "$LINK_CHECK_EXCLUDED_FILES"
+
+          excluded_folders=()
+          while IFS= read -r folder; do
+            folder="${folder%/}"
+            # Block scalars end with a newline, so ignore the resulting empty entry.
+            if [[ -n "$folder" ]]; then
+              excluded_folders+=("$folder")
+              if [[ ! -d "$folder" ]]; then
+                echo "::warning::Excluded link-check folder does not exist: $folder"
+              fi
+            fi
+          done <<< "$LINK_CHECK_EXCLUDED_FOLDERS"
+
+          git ls-files -z -- \
+            '*.md' '*.mdx' '*.markdown' '*.mkd' '*.mdown' '*.mdwn' '*.mkdn' '*.mkdown' \
+            '*.html' '*.htm' '*.css' '*.txt' |
+            while IFS= read -r -d '' file; do
+              excluded=false
+              if (( ${#excluded_folders[@]} > 0 )); then
+                for folder in "${excluded_folders[@]}"; do
+                  if [[ "$file" == "$folder/"* ]]; then
+                    excluded=true
+                    break
+                  fi
+                done
+              fi
+
+              if [[ "$excluded" == true ]]; then
+                continue
+              fi
+
+              if (( ${#excluded_files[@]} > 0 )); then
+                for excluded_file in "${excluded_files[@]}"; do
+                  if [[ "$file" == "$excluded_file" ]]; then
+                    excluded=true
+                    break
+                  fi
+                done
+              fi
+
+              if [[ "$excluded" == true ]]; then
+                continue
+              fi
+
+              printf '%s\n' "$file"
+            done > .lychee-input-files.txt
+
+          count=$(wc -l < .lychee-input-files.txt | tr -d ' ')
+          echo "count=${count}" >> "$GITHUB_OUTPUT"
+
+          if [[ "$count" -gt 0 ]]; then
+            echo "has_inputs=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_inputs=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Check Links
-        uses: lycheeverse/lychee-action@v2
+        if: ${{ steps.link-inputs.outputs.has_inputs == 'true' }}
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
           # Don't fail as we want the workflow to continue and run 'Create Issue From File'
           fail: false
           failIfEmpty: false
-          args: --root-dir $(pwd) --cache --max-cache-age 8d --cache-exclude-status '..200,300..' --exclude '^file://' -E -i -n -t 45 --exclude-path '^\./releases/' --exclude-path '^\./tidb-cloud/releases/' --exclude-path '^\./resources/' .
+          args: --root-dir $(pwd) --cache --max-cache-age 8d --cache-exclude-status '..200,300..' --exclude '^file://' -E -i -n -t 45 --files-from .lychee-input-files.txt
           output: out-external.md
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - name: Collect doc site href URLs
+        if: ${{ steps.link-inputs.outputs.has_inputs == 'true' }}
         id: site-hrefs
         run: |
-          git ls-files -z -- \
-            '*.md' '*.mdx' '*.markdown' '*.mkd' '*.mdown' '*.mdwn' '*.mkdn' '*.mkdown' \
-            '*.html' '*.htm' '*.css' '*.txt' |
-            perl -0ne 'print unless m{^(?:releases|tidb-cloud/releases|resources)/}' |
+          tr '\n' '\0' < .lychee-input-files.txt |
             perl .github/scripts/extract-site-hrefs.pl .lychee-site-hrefs .lychee-site-href-files.txt
 
           count=$(wc -l < .lychee-site-href-files.txt | tr -d ' ')
@@ -63,7 +139,7 @@ jobs:
 
       - name: Check site href URLs
         if: ${{ steps.site-hrefs.outputs.has_hrefs == 'true' }}
-        uses: lycheeverse/lychee-action@v2
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
           # Don't fail as we want the workflow to continue and run 'Create Issue From File'
           fail: false

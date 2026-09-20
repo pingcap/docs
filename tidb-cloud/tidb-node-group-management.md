@@ -7,7 +7,7 @@ summary: Learn about how to manage TiDB node groups and their endpoints to isola
 
 This document describes how to manage TiDB node groups and their endpoints to isolate your business workload using the [TiDB Cloud console](https://tidbcloud.com/).
 
-> **Note**:
+> **Note:**
 >
 > The TiDB Node Group feature is **NOT** available for {{{ .starter }}} or {{{ .essential }}} instances.
 
@@ -25,7 +25,7 @@ This document describes how to manage TiDB node groups and their endpoints to is
 - You have a [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster deployed on AWS or Google Cloud.
 - You are in the **Organization Owner** or **Project Owner** role of your organization. For more information, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
-> **Note**:
+> **Note:**
 >
 > The TiDB node groups cannot be created during cluster creation. You need to add the groups after the cluster is created and in the **Available** state. 
 
@@ -93,7 +93,7 @@ For more information, see [Connect to TiDB Cloud Dedicated via Public Connection
      - For clusters deployed on AWS, refer to [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md). 
      - For clusters deployed on Google Cloud, refer to [Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md).
 
-    > **Note**:
+    > **Note:**
     >
     > If you use Private Link to connect different node groups, you need to create separated private endpoint connection for each node group. 
 
@@ -146,7 +146,7 @@ To update TiDB, TiKV, or TiFlash node configurations in the group, perform the f
 
 ## Delete a TiDB node group
 
-> **Note**:
+> **Note:**
 >
 > When you delete a TiDB node group, its nodes and network configurations are also removed, including private endpoint connections and the IP list for public access.
 

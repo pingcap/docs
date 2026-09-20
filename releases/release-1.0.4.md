@@ -1,6 +1,7 @@
 ---
 title: TiDB 1.0.4 Release Notes
 summary: TiDB 1.0.4 was released on December 11, 2017. Updates include speed improvements, performance enhancements, and fixes for potential issues in TiDB and TiKV. To upgrade from 1.0.3 to 1.0.4, follow the rolling upgrade order of PD, TiKV, and TiDB.
+aliases: ['/tidb/dev/release-1.0.4/','/tidb/v1.0/release-1.0.4','/docs/dev/releases/release-1.0.4/','/docs/dev/releases/104/','/tidb/v5.4/release-1.0.4','/tidb/v6.1/release-1.0.4','/tidb/v6.5/release-1.0.4','/tidb/v7.1/release-1.0.4','/tidb/v7.5/release-1.0.4','/tidb/v8.1/release-1.0.4']
 ---
 
 # TiDB 1.0.4 Release Notes

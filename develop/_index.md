@@ -19,7 +19,7 @@ This guide helps application developers quickly learn how to connect to TiDB, de
 Build your application with the language you use by following the guides with sample codes.
 
 <DevLangAccordion label="JavaScript" defaultExpanded>
-<DevToolCard title="Serverless Driver (beta)" logo="tidb" docLink="/developer/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
+<DevToolCard title="Serverless Driver (PREVIEW)" logo="tidb" docLink="/developer/serverless-driver" githubLink="https://github.com/tidbcloud/serverless-js">
 
 Connect to TiDB over HTTPS from edge environments (only applicable to TiDB Cloud).
 

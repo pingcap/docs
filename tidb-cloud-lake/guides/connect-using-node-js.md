@@ -1,0 +1,86 @@
+---
+title: Connect to TiDB Cloud Lake Using Node.js
+summary: This page describes how to connect to TiDB Cloud Lake using Node.js.
+---
+
+# Connect to TiDB Cloud Lake Using Node.js
+
+The official Node.js driver provides TypeScript support and Promise-based API for modern JavaScript applications.
+
+## Installation
+
+```bash
+npm install tidbcloudlake-driver
+```
+
+**Connection String**: See [driver overview](/tidb-cloud-lake/guides/driver-overview.md) for DSN format and examples.
+
+---
+
+## Key Features
+
+- ✅ **TypeScript Support**: Full TypeScript definitions included
+- ✅ **Promise-based API**: Modern async/await support
+- ✅ **Streaming Results**: Efficient handling of large result sets
+- ✅ **Connection Pooling**: Built-in connection management
+
+## Data Type Mappings
+
+| {{{ .lake }}} | Node.js | Notes |
+|----------|---------|-------|
+| **Basic Types** | | |
+| `BOOLEAN` | `boolean` | |
+| `TINYINT` | `number` | |
+| `SMALLINT` | `number` | |
+| `INT` | `number` | |
+| `BIGINT` | `number` | |
+| `FLOAT` | `number` | |
+| `DOUBLE` | `number` | |
+| `DECIMAL` | `string` | Precision preserved |
+| `STRING` | `string` | |
+| **Date/Time** | | |
+| `DATE` | `Date` | |
+| `TIMESTAMP` | `Date` | |
+| **Complex Types** | | |
+| `ARRAY(T)` | `Array` | |
+| `TUPLE(...)` | `Array` | |
+| `MAP(K,V)` | `Object` | |
+| `VARIANT` | `string` | JSON encoded |
+| `BINARY` | `Buffer` | |
+| `BITMAP` | `string` | Base64 encoded |
+
+---
+
+## Basic Usage
+
+```javascript
+const { Client } = require('tidbcloudlake-driver');
+
+// Connect to {{{ .lake }}}
+const client = new Client('<your-dsn>');
+const conn = await client.getConn();
+
+// DDL: Create table
+await conn.exec(`CREATE TABLE users (
+    id INT,
+    name STRING,
+    email STRING
+)`);
+
+// Write: Insert data
+await conn.exec("INSERT INTO users VALUES (?, ?, ?)", [1, "Alice", "alice@example.com"]);
+
+// Query: Select data
+const rows = await conn.queryIter("SELECT id, name, email FROM users WHERE id = ?", [1]);
+for await (const row of rows) {
+    console.log(row.values());
+}
+
+conn.close();
+```
+
+## Resources
+
+- **NPM Package**: [tidbcloudlake-driver](https://www.npmjs.com/package/tidbcloudlake-driver)
+- **GitHub Repository**: [tidbcloudlake-driver](https://github.com/tidbcloud/lakesql/tree/main/bindings/nodejs)
+- **TypeScript Definitions**: Included in package

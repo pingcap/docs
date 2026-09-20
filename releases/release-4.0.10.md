@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0.10 Release Notes
 summary: TiDB 4.0.10 was released on January 15, 2021. New features include redacting user data from logs and configurable size limits for key-value entries. Bug fixes address concurrency issues, duplicate bindings, and incorrect results. Improvements include optimized metrics and upgraded dependencies. Various tools have also been updated and fixed, such as TiCDC, Dumpling, Backup & Restore, TiDB Binlog, and TiDB Lightning.
+aliases: ['/tidb/dev/release-4.0.10/','/tidb/v4.0/release-4.0.10','/tidb/v5.4/release-4.0.10','/tidb/v6.1/release-4.0.10','/tidb/v6.5/release-4.0.10','/tidb/v7.1/release-4.0.10','/tidb/v7.5/release-4.0.10','/tidb/v8.1/release-4.0.10']
 ---
 
 # TiDB 4.0.10 Release Notes

@@ -119,7 +119,7 @@ To create an API key for a Data App, perform the following steps:
 
 ### Edit an API key
 
-> **Note**:
+> **Note:**
 >
 > You cannot edit an expired key.
 
@@ -146,7 +146,7 @@ To delete an API key for a Data App, perform the following steps:
 
 ### Expire an API key
 
-> **Note**:
+> **Note:**
 >
 > You cannot expire an expired key.
 

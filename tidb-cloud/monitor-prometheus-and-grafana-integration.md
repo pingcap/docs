@@ -11,7 +11,7 @@ This document describes how to configure your Prometheus service to read key met
 
 ## Prometheus integration versions
 
-TiDB Cloud has supported the project-level Prometheus integration (Beta) since March 15, 2022. Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (Preview). Starting from December 2, 2025, the cluster-level Prometheus integration becomes generally available (GA).
+TiDB Cloud has supported the project-level Prometheus integration (Beta) since March 15, 2022. Starting from October 21, 2025, TiDB Cloud introduces the cluster-level Prometheus integration (PREVIEW). Starting from December 2, 2025, the cluster-level Prometheus integration becomes generally available (GA).
 
 - **Cluster-level Prometheus integration**: if no legacy project-level Prometheus integration remains undeleted within your organization by October 21, 2025, TiDB Cloud provides the cluster-level Prometheus integration for your organization to experience the latest enhancements.
 
@@ -19,7 +19,7 @@ TiDB Cloud has supported the project-level Prometheus integration (Beta) since M
 
     > **Note**
     >
-    > The legacy project-level Prometheus integrations will be deprecated on January 9, 2026. If your organization is still using these legacy integrations, follow [Migrate Prometheus Integrations](/tidb-cloud/migrate-prometheus-metrics-integrations.md) to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
+    > The legacy project-level Prometheus integration was deprecated on January 9, 2026. If your organization is still using these legacy integrations, follow [Migrate Prometheus Integrations](/tidb-cloud/migrate-prometheus-metrics-integrations.md) to migrate to the new cluster-level integrations and minimize disruptions to your metrics-related services.
 
 ## Prerequisites
 

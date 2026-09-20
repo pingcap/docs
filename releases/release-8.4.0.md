@@ -1,6 +1,7 @@
 ---
 title: TiDB 8.4.0 Release Notes
 summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 8.4.0.
+aliases: ['/tidb/dev/release-8.4.0/','/tidb/v8.4/release-8.4.0','/tidb/v5.4/release-8.4.0','/tidb/v6.1/release-8.4.0','/tidb/v6.5/release-8.4.0','/tidb/v7.1/release-8.4.0','/tidb/v7.5/release-8.4.0','/tidb/v8.1/release-8.4.0']
 ---
 
 # TiDB 8.4.0 Release Notes
@@ -206,7 +207,7 @@ Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v8.4/quick-sta
 
     To enhance the performance of vector search, you can create and use [vector search indexes](/ai/reference/vector-search-index.md). Note that TiDB vector search indexes rely on TiFlash. Before using vector search indexes, make sure that TiFlash nodes are deployed in your TiDB cluster.
 
-    For more information, see [documentation](/ai/concepts/vector-search-overview.md).
+    For more information, see [documentation](/ai/guides/vector-search-overview.md).
 
 ### DB operations
 

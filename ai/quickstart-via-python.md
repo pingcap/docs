@@ -6,7 +6,7 @@ aliases: ['/tidb/stable/vector-search-get-started-using-python/','/tidb/dev/vect
 
 # Get Started with TiDB + AI via Python
 
-This document demonstrates how to get started with [Vector Search](/ai/concepts/vector-search-overview.md) in TiDB using Python SDK. Follow along to build your first AI application working with TiDB.
+This document demonstrates how to get started with [Vector Search](/ai/guides/vector-search-overview.md) in TiDB using Python SDK. Follow along to build your first AI application working with TiDB.
 
 By following this document, you will learn how to:
 
@@ -17,8 +17,8 @@ By following this document, you will learn how to:
 
 > **Note:**
 >
-> - The vector search feature is in beta and might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
-> - The vector search feature is available on [TiDB Self-Managed](/overview.md), [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter), [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential), and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated). For TiDB Self-Managed and TiDB Cloud Dedicated, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
+> - The vector search feature is in public preview and might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
+> - The vector search feature is available on [TiDB Self-Managed](/overview.md) and [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter). For TiDB Self-Managed, the TiDB version must be v8.4.0 or later (v8.5.0 or later is recommended).
 
 ## Prerequisites
 
@@ -108,7 +108,7 @@ Once connected, you can use the `client` object to operate tables, query data, a
 
 ## Create an embedding function
 
-When working with [embedding models](/ai/concepts/vector-search-overview.md#embedding-model), you can leverage the embedding function to automatically vectorize your data at both insertion and query stages. It natively supports popular embedding models like OpenAI, Jina AI, Hugging Face, Sentence Transformers, and others.
+When working with [embedding models](/ai/guides/vector-search-overview.md#embedding-model), you can leverage the embedding function to automatically vectorize your data at both insertion and query stages. It natively supports popular embedding models like OpenAI, Jina AI, Hugging Face, Sentence Transformers, and others.
 
 <SimpleTab>
 <div label="OpenAI">

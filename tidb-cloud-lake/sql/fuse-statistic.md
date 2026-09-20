@@ -1,0 +1,10 @@
+---
+title: FUSE_STATISTIC
+summary: note This function is deprecated. Use SHOW STATISTICS instead to view table statistics..
+---
+
+# FUSE_STATISTIC
+
+> **Note:**
+>
+> This function is deprecated. Use [SHOW STATISTICS](/tidb-cloud-lake/sql/show-statistics.md) instead to view table statistics.

@@ -66,3 +66,18 @@ Fields in the `SESSION_CONNECT_ATTRS` table are described as follows:
 * `ATTR_NAME`: Attribute name.
 * `ATTR_VALUE`: Attribute value.
 * `ORDINAL_POSITION`: Ordinal position of the name/value pair.
+
+## Size limit and truncation
+
+TiDB uses the [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857) global system variable to control the maximum total size of connection attributes per session.
+
+- Default value: `4096` bytes
+- Range: `[-1, 65536]`
+- `-1` means no configured limit, and TiDB treats it as up to `65536` bytes.
+- `0` means that TiDB does not retain client-provided session connection attributes, which effectively disables recording session attributes.
+
+When the total size exceeds this limit, TiDB truncates excess attributes and adds `_truncated` to indicate the number of truncated bytes.
+
+The accepted connection attributes are also written to the `Session_connect_attrs` field in the slow log and can be queried from [`INFORMATION_SCHEMA.SLOW_QUERY`](/information-schema/information-schema-slow-query.md) and `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`. To control the payload size written to the slow log, adjust `performance_schema_session_connect_attrs_size`.
+
+TiDB also enforces a hard limit of 1 MiB on connection attribute payload in handshake packets. If this hard limit is exceeded, the connection is rejected.

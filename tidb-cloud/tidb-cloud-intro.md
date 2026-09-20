@@ -6,7 +6,9 @@ category: intro
 
 # What is TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully managed, cloud-native Database-as-a-Service (DBaaS) based on [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases. <CustomContent language="en,zh">You can create TiDB Cloud resources (such as {{{ .starter }}} instances, {{{ .essential }}} instances, and {{{ .dedicated }}} clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent><CustomContent language="ja">You can create TiDB Cloud resources (such as {{{ .starter }}} instances, {{{ .essential }}} instances, and {{{ .dedicated }}} clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) is a fully managed, cloud-native Database-as-a-Service (DBaaS) based on [TiDB](https://docs.pingcap.com/tidb/stable/overview), an open-source Hybrid Transactional and Analytical Processing (HTAP) database. TiDB Cloud offers an easy way to deploy and manage databases to let you focus on your applications, not the complexities of the databases.
+
+<CustomContent language="en,zh">You can create TiDB Cloud resources (such as Starter instances, Essential instances, Premium instances, and Dedicated clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, Microsoft Azure, and Alibaba Cloud.</CustomContent><CustomContent language="ja">You can create TiDB Cloud resources (such as Starter instances, Essential instances, Premium instances, and Dedicated clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent> In addition, you can use TiDB Cloud Lake to build a cloud-native data warehouse for analytics workloads.
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
@@ -108,7 +110,7 @@ TiDB Cloud provides the following deployment options:
 
     <CustomContent language="en,zh">
 
-    Currently, {{{ .premium }}} is in public preview on AWS and Alibaba Cloud. 
+    Currently, {{{ .premium }}} is in public preview on AWS and Alibaba Cloud.
 
     </CustomContent>
 
@@ -118,11 +120,25 @@ TiDB Cloud provides the following deployment options:
 
     </CustomContent>
 
+<CustomContent plan="byoc">
+
+- {{{ .byoc }}}
+
+    {{{ .byoc }}} is designed for large-scale production workloads that require greater control, security, and compliance. It enables you to run the data plane in your own AWS account while benefiting from TiDB Cloud's automated operations, elastic scalability, and enterprise-grade security.
+
+    Currently, {{{ .byoc }}} is in private preview on AWS.
+
+</CustomContent>
+
 - TiDB Cloud Dedicated
 
     TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) capabilities.
 
     Currently, TiDB Cloud Dedicated is generally available on AWS, Azure, and Google Cloud. For more information, see [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated).
+
+- {{{ .lake }}}
+
+    TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, and supports ANSI SQL, semi-structured data processing, and AI-oriented workflows. For more details, see [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/).
 
 ## Architecture
 
@@ -139,6 +155,14 @@ TiDB Cloud provides the following deployment options:
 - Your VPC
 
     You can connect to your TiDB Cloud resource via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
+
+<CustomContent plan="byoc">
+
+> **Note:**
+>
+> TiDB Cloud BYOC uses a different architecture from other TiDB Cloud deployment options. In BYOC, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account. For details, see the [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc).
+
+</CustomContent>
 
 ## Related resources
 

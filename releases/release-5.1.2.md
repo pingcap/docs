@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.1.2 Release Notes
 summary: TiDB 5.1.2 was released on September 27, 2021. The release includes compatibility changes, improvements, bug fixes, and updates to various tools such as TiCDC, TiKV, PD, TiFlash, BR, Dumpling, and TiCDC. The release addresses numerous bug fixes and improvements to enhance performance and stability.
+aliases: ['/tidb/dev/release-5.1.2/','/tidb/v5.1/release-5.1.2','/tidb/v5.4/release-5.1.2','/tidb/v6.1/release-5.1.2','/tidb/v6.5/release-5.1.2','/tidb/v7.1/release-5.1.2','/tidb/v7.5/release-5.1.2','/tidb/v8.1/release-5.1.2']
 ---
 
 # TiDB 5.1.2 Release Notes

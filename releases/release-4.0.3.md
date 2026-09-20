@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0.3 Release Notes
 summary: TiDB 4.0.3 was released on July 24, 2020. New features include TiDB Dashboard improvements, TiFlash file encryption, and support for various tools. Improvements were made to TiDB, TiKV, PD, and TiDB Dashboard. Bug fixes were also implemented for TiDB, TiKV, PD, TiDB Dashboard, TiFlash, TiCDC, Backup & Restore, Dumpling, TiDB Lightning, and TiDB Binlog.
+aliases: ['/tidb/dev/release-4.0.3/','/tidb/v4.0/release-4.0.3','/tidb/v5.4/release-4.0.3','/tidb/v6.1/release-4.0.3','/tidb/v6.5/release-4.0.3','/tidb/v7.1/release-4.0.3','/tidb/v7.5/release-4.0.3','/tidb/v8.1/release-4.0.3']
 ---
 
 # TiDB 4.0.3 Release Notes
@@ -127,7 +128,7 @@ TiDB version: 4.0.3
     - Fix the issue that `getSchedulers` might cause a data race [#2638](https://github.com/pingcap/pd/pull/2638)
     - Fix the issue that deleting the scheduler might cause deadlocks [#2637](https://github.com/pingcap/pd/pull/2637)
     - Fix the bug that placement rules are not considered when `balance-leader-scheduler` is enabled [#2636](https://github.com/pingcap/pd/pull/2636)
-    - Fix the issue that sometimes service `safepoint` cannot be set properly, which might make BR and dumpling fail [#2635](https://github.com/pingcap/pd/pull/2635)
+    - Fix the issue that sometimes service `safepoint` cannot be set properly, which might make BR and Dumpling fail [#2635](https://github.com/pingcap/pd/pull/2635)
     - Fix the issue that the target store in `hot region scheduler` is incorrectly selected [#2627](https://github.com/pingcap/pd/pull/2627)
     - Fix the issue that the TSO request might take too long when PD leader is switched [#2622](https://github.com/pingcap/pd/pull/2622)
     - Fix the issue of stale scheduler after leader change [#2608](https://github.com/pingcap/pd/pull/2608)

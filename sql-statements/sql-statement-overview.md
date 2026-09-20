@@ -278,7 +278,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`CREATE USER`](/sql-statements/sql-statement-create-user.md) | Creates a new user. |
 | [`DROP ROLE`](/sql-statements/sql-statement-drop-role.md) | Drops an existing role. |
 | [`DROP USER`](/sql-statements/sql-statement-drop-user.md) | Drops an existing user. |
-| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) | Reloads the in-memory copy of privileges from the privilege tables. |
+| [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md) | Refreshes the in-memory privilege cache from the privilege tables. |
 | [`GRANT <privileges>`](/sql-statements/sql-statement-grant-privileges.md) | Grants privileges. |
 | [`GRANT <role>`](/sql-statements/sql-statement-grant-role.md) | Grants a role. |
 | [`RENAME USER`](/sql-statements/sql-statement-rename-user.md) | Renames an existing user. |
@@ -323,6 +323,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`DROP BINDING`](/sql-statements/sql-statement-drop-binding.md) | Drops an execution plan binding from a SQL statement. |
 | [`DROP STATS`](/sql-statements/sql-statement-drop-stats.md) | Drops statistics from a table. |
 | [`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md) | Works similar to `EXPLAIN`, with the major difference that it will execute the statement. |
+| [`FLUSH STATS_DELTA`](/sql-statements/sql-statement-flush-stats-delta.md) | Persists the pending statistics delta in TiDB memory to the system table immediately. |
 | [`LOAD STATS`](/sql-statements/sql-statement-load-stats.md) | Loads statistics into TiDB. |
 | [`SHOW ANALYZE STATUS`](/sql-statements/sql-statement-show-analyze-status.md) | Shows statistics collection tasks. |
 | [`SHOW BINDINGS`](/sql-statements/sql-statement-show-bindings.md) | Shows created SQL bindings. |

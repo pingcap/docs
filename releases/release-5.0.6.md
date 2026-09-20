@@ -2,6 +2,7 @@
 title: TiDB 5.0.6 Release Notes
 category: Releases
 summary: TiDB 5.0.6 was released on December 31, 2021. The release includes compatibility changes, improvements, bug fixes, and updates to various tools such as TiCDC, TiKV, PD, TiDB Lightning, TiFlash, Backup & Restore (BR), and Dumpling. The changes include enhancements to error handling, performance improvements, bug fixes related to SQL statements, and various optimizations for different tools.
+aliases: ['/tidb/dev/release-5.0.6/','/tidb/v5.0/release-5.0.6','/tidb/v5.4/release-5.0.6','/tidb/v6.1/release-5.0.6','/tidb/v6.5/release-5.0.6','/tidb/v7.1/release-5.0.6','/tidb/v7.5/release-5.0.6','/tidb/v8.1/release-5.0.6']
 ---
 
 # TiDB 5.0.6 Release Notes
@@ -42,7 +43,7 @@ TiDB version: 5.0.6
 
     + TiCDC
 
-        - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
+        - Optimize rate-limiting control on TiKV reloads to reduce gRPC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Add the default configuration for `config.Metadata.Timeout` in Kafka sink [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Set the default value of `max-message-bytes` to `10M`, to reduce the probability that Kafka messages cannot be sent [#3081](https://github.com/pingcap/tiflow/issues/3081)

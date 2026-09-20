@@ -10,10 +10,26 @@ The plan determines the throughput and performance of your TiDB resource.
 
 TiDB Cloud provides the following options of plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a TiDB resource, you need to consider which option suits your need better.
 
-- [TiDB Cloud Starter](#starter)
+<CustomContent plan="starter,essential,premium,dedicated">
+
+- [{{{ .starter }}}](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
-- [TiDB Cloud Dedicated](#tidb-cloud-dedicated)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+- [{{{ .lake }}}](#lake)
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+- [{{{ .starter }}}](#starter)
+- [{{{ .essential }}}](#essential)
+- [{{{ .premium }}}](#premium)
+- [{{{ .byoc }}}](#byoc)
+- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
+- [{{{ .lake }}}](#lake)
+
+</CustomContent>
 
 > **Note:**
 >
@@ -80,6 +96,7 @@ For paid organizations building agent platforms or other services that require a
 
 You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved. 
 
+
 ## {{{ .essential }}} {#essential}
 
 For applications experiencing growing workloads and needing scalability in real time, the Essential plan provides the flexibility and performance to keep pace with your business growth with the following features:
@@ -129,6 +146,22 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 - **Advanced security and compliance**: supports advanced encryption, customer-managed encryption keys (CMEK), private networking, and compliance certifications to protect sensitive data.
 
+<CustomContent plan="byoc">
+
+## {{{ .byoc }}} {#byoc}
+
+{{{ .byoc }}} is designed for enterprise workloads that require stronger control over data location, cloud resources, network boundaries, and compliance posture. With {{{ .byoc }}}, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account.
+
+{{{ .byoc }}} provides a managed TiDB Cloud experience with the following features:
+
+- **Customer-owned data plane**: keeps TiDB service resources, storage, networking, and data in your cloud account.
+- **Managed operations**: uses TiDB Cloud for deployment, scaling, monitoring, upgrades, backup and restore, and lifecycle management.
+- **Flexible high availability**: supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
+- **Cloud-account-level security controls**: lets you apply your own cloud policies, network controls, audit logging, and compliance controls to the BYOC data plane.
+- **Private connectivity**: supports private network access patterns such as VPC peering, depending on your BYOC configuration.
+
+</CustomContent>
+
 ## TiDB Cloud Dedicated
 
 TiDB Cloud Dedicated is for production use with the benefits of cross-zone high availability, horizontal scaling, and [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing).
@@ -140,3 +173,11 @@ To create a TiDB Cloud Dedicated cluster, you need to [add a payment method](/ti
 > **Note:**
 >
 > You cannot decrease the node storage after your TiDB Cloud Dedicated cluster is created.
+
+## {{{ .lake }}} {#lake}
+
+[TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, allowing you to provision warehouses independently, scale with workload changes, and store data cost-effectively in object storage.
+
+TiDB Cloud Lake supports ANSI SQL, semi-structured data processing, vector search, and AI-oriented workflows in one platform. It is designed for teams that want a managed analytics experience without operating the underlying infrastructure themselves.
+
+See [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/) and [TiDB Cloud Lake Quick Start](https://docs.pingcap.com/tidbcloudlake/lake-quick-start/).

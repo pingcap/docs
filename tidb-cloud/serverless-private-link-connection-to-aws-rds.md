@@ -25,7 +25,7 @@ This document describes how to connect a {{{ .essential }}} instance to an [Amaz
 To view the AWS account ID and availability zones, do the following:
 
 1. In the [TiDB Cloud console](https://tidbcloud.com), navigate to the overview page of your {{{ .essential }}} instance, and then click **Settings** > **Networking** in the left navigation pane.
-2. In the **Private Link Connection For Dataflow** area, click **Create Private Link Connection**.
+2. In the **AWS Private Endpoints for External Services** area, click **Create Private Endpoint for External Services**.
 3. In the displayed dialog, you can find the AWS account ID and availability zones.
 
 ## Step 1. Set up the Amazon RDS instance
@@ -48,7 +48,7 @@ The Amazon RDS instance must meet the following requirements:
 
 > **Note**
 >
-> To connect to a cross-region RDS instance, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> Currently, cross-region connectivity is not supported for {{{ .essential }}}. If you need cross-region connections, use TiDB Cloud Premium and establish connectivity through VPC peering.
 
 ## Step 2. Expose the Amazon RDS instance as an endpoint service
 

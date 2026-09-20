@@ -1,6 +1,7 @@
 ---
 title: TiDB 6.1.5 Release Notes
 summary: Learn about the compatibility changes, improvements, and bug fixes in TiDB 6.1.5.
+aliases: ['/tidb/dev/release-6.1.5/','/tidb/v6.1/release-6.1.5','/tidb/v5.4/release-6.1.5','/tidb/v6.5/release-6.1.5','/tidb/v7.1/release-6.1.5','/tidb/v7.5/release-6.1.5','/tidb/v8.1/release-6.1.5']
 ---
 
 # TiDB 6.1.5 Release Notes
@@ -9,7 +10,7 @@ Release date: February 28, 2023
 
 TiDB version: 6.1.5
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## Compatibility changes
 

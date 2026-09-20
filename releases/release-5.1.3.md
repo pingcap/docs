@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.1.3 Release Note
 summary: TiDB 5.1.3 was released on December 3, 2021. This version includes a bug fix for TiKV, addressing an issue where the `GcKeys` task does not work when called by multiple keys, leading to potential problems with compaction filter GC.
+aliases: ['/tidb/dev/release-5.1.3/','/tidb/v5.1/release-5.1.3','/tidb/v5.4/release-5.1.3','/tidb/v6.1/release-5.1.3','/tidb/v6.5/release-5.1.3','/tidb/v7.1/release-5.1.3','/tidb/v7.5/release-5.1.3','/tidb/v8.1/release-5.1.3']
 ---
 
 # TiDB 5.1.3 Release Note

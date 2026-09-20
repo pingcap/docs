@@ -1,0 +1,40 @@
+---
+title: DROP MASKING POLICY
+summary: Deletes an existing masking policy from {{{ .lake }}}. When you drop a masking policy, it is removed from {{{ .lake }}}, and its associated masking rules are no longer in effect. Please note that, before dropping a masking policy, ensure that this policy is not associated with any columns.
+---
+
+# DROP MASKING POLICY
+
+Deletes an existing masking policy from {{{ .lake }}}. When you drop a masking policy, it is removed from {{{ .lake }}}, and its associated masking rules are no longer in effect. Please note that, before dropping a masking policy, ensure that this policy is not associated with any columns.
+
+## Syntax
+
+```sql
+DROP MASKING POLICY [ IF EXISTS ] <policy_name>
+```
+
+## Access Control Requirements
+
+| Privilege | Description |
+|:----------|:------------|
+| APPLY MASKING POLICY | Required to drop a masking policy unless you own that policy. |
+
+You must have the global `APPLY MASKING POLICY` privilege or APPLY/OWNERSHIP on the target policy. {{{ .lake }}} automatically revokes OWNERSHIP from the creator role after the policy is dropped.
+
+## Examples
+
+```sql
+CREATE MASKING POLICY email_mask
+AS
+  (val string)
+  RETURNS string ->
+  CASE
+  WHEN current_role() IN ('MANAGERS') THEN
+    val
+  ELSE
+    '*********'
+  END
+  COMMENT = 'hide_email';
+
+DROP MASKING POLICY email_mask;
+```

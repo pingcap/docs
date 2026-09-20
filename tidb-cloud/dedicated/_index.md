@@ -6,7 +6,7 @@ hide_commit: true
 summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. It offers guides, samples, and references for learning, trying, developing, maintaining, migrating, monitoring, tuning, securing, billing, integrating, and referencing.
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud" subTitle="TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. Find the guide, samples, and references you need to use TiDB Cloud.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Dedicated" subTitle="TiDB Cloud Dedicated is designed for mission-critical businesses, offering high availability across multiple availability zones, horizontal scaling, and full HTAP capabilities.">
 
 <LearningPath label="Learn" icon="cloud1">
 
@@ -22,7 +22,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart)
 
-[Try Out TiDB + AI](https://docs.pingcap.com/tidbcloud/vector-search-get-started-using-python)
+[Try Out TiDB + AI](https://docs.pingcap.com/ai/quickstart-via-python/)
 
 [Try Out HTAP](https://docs.pingcap.com/tidbcloud/tidb-cloud-htap-quickstart)
 
@@ -32,11 +32,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Develop" icon="doc8">
 
-[Developer Guide Overview](https://docs.pingcap.com/tidbcloud/dev-guide-overview)
+[Developer Guide Overview](https://docs.pingcap.com/developer/)
 
-[Quick Start](https://docs.pingcap.com/tidbcloud/dev-guide-build-cluster-in-cloud)
+[Quick Start](https://docs.pingcap.com/developer/dev-guide-build-cluster-in-cloud/)
 
-[Example Application](https://docs.pingcap.com/tidbcloud/dev-guide-sample-application-spring-boot)
+[Connect to TiDB](https://docs.pingcap.com/developer/dev-guide-connect-to-tidb/)
 
 </LearningPath>
 
@@ -56,7 +56,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Stream Data](http://docs.pingcap.com/tidbcloud/changefeed-overview)
 
-[Use API (Beta)](https://docs.pingcap.com/tidbcloud/api-overview)
+[Use API (PREVIEW)](https://docs.pingcap.com/tidbcloud/api-overview)
 
 </LearningPath>
 
@@ -72,7 +72,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [From CSV Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
 
-[From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-csv-files)
+[From Apache Parquet Files](https://docs.pingcap.com/tidbcloud/import-parquet-files)
 
 </LearningPath>
 

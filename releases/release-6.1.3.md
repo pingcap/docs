@@ -1,6 +1,7 @@
 ---
 title: TiDB 6.1.3 Release Notes
 summary: TiDB 6.1.3 was released on December 5, 2022. The release includes compatibility changes, improvements, bug fixes, and updates to various tools such as TiCDC, PD, TiKV, TiFlash, Backup & Restore, TiCDC, and TiDB Data Migration. Some notable changes include default value changes in TiCDC, lock granularity optimization in PD, and bug fixes in TiDB, PD, TiKV, TiFlash, and various tools. The release also includes an upgrade to the Go compiler version of TiDB from go1.18 to go1.19, which improves stability.
+aliases: ['/tidb/dev/release-6.1.3/','/tidb/v6.1/release-6.1.3','/tidb/v5.4/release-6.1.3','/tidb/v6.5/release-6.1.3','/tidb/v7.1/release-6.1.3','/tidb/v7.5/release-6.1.3','/tidb/v8.1/release-6.1.3']
 ---
 
 # TiDB 6.1.3 Release Notes
@@ -9,7 +10,7 @@ Release date: December 5, 2022
 
 TiDB version: 6.1.3
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## Compatibility changes
 
@@ -44,7 +45,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-
     - Fix the issue of the wrong query result that occurs when the mistakenly pushed-down conditions are discarded by Join Reorder [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
     - Fix the issue that the lock acquired by `get_lock()` cannot hold for more than 10 minutes [#38706](https://github.com/pingcap/tidb/issues/38706) @[tangenta](https://github.com/tangenta)
     - Fix the issue that the auto-increment column cannot be used with check constraint [#38894](https://github.com/pingcap/tidb/issues/38894) @[YangKeao](https://github.com/YangKeao)
-    - Fix the issue that the gPRC log is output to a wrong file [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
+    - Fix the issue that the gRPC log is output to a wrong file [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
     - Fix the issue that the TiFlash sync status of a table is not deleted from etcd when the table is truncated or dropped [#37168](https://github.com/pingcap/tidb/issues/37168) @[CalvinNeo](https://github.com/CalvinNeo)
     - Fix the issue that data files can be accessed unrestrainedly via data source name injection (CVE-2022-3023) [#38541](https://github.com/pingcap/tidb/issues/38541) @[lance6716](https://github.com/lance6716)
     - Fix the issue that the function `str_to_date` returns wrong result in the `NO_ZERO_DATE` SQL mode [#39146](https://github.com/pingcap/tidb/issues/39146) @[mengxin9014](https://github.com/mengxin9014)

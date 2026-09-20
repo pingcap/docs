@@ -145,7 +145,7 @@ max-manifest-file-size = "20MiB"
 [rocksdb.defaultcf]
 # The data block size. RocksDB compresses data based on the unit of block.
 # Similar to page in other databases, block is the smallest unit cached in block-cache.
-block-size = "64KB"
+block-size = "32KiB"
 
 # The compaction mode of each layer of RocksDB data. The optional values include no, snappy, zlib,
 # bzip2, lz4, lz4hc, and zstd. Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.

@@ -52,16 +52,24 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
-    - [Top RU](/tidb-cloud/top-ru.md)
+    - [Top RU](/tidb-cloud/top-ru.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [Statement Insight](/tidb-cloud/statement-insight.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md)
     - [Integrate TiDB Cloud with Prometheus and Grafana](/tidb-cloud/prometheus-grafana-integration.md)
     - Subscribe to Alert Notifications
       - [Subscribe via Email](/tidb-cloud/monitor-alert-email.md)
       - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
+      - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
+      - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [Subscribe via Webhook](/tidb-cloud/monitor-alert-webhook.md)
+      - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
+    - [Events](/tidb-cloud/tidb-cloud-events.md)
+    - [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
+    - [Use Plan Replayer to Troubleshoot SQL Performance](/tidb-cloud/plan-replayer.md)
     - SQL Tuning
       - [Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)
       - Understanding the Query Execution Plan
@@ -134,9 +142,11 @@
   - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
+    - [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
@@ -169,6 +179,7 @@
 - Integrations
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
   - [Cloudflare](/tidb-cloud/integrate-tidbcloud-with-cloudflare.md)
+  - [Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
   - [dbt](/tidb-cloud/integrate-tidbcloud-with-dbt.md)
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
@@ -222,6 +233,7 @@
     - [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)
     - [`BATCH`](/sql-statements/sql-statement-batch.md)
     - [`BEGIN`](/sql-statements/sql-statement-begin.md)
+    - [`CANCEL DISTRIBUTION JOB`](/sql-statements/sql-statement-cancel-distribution-job.md)
     - [`CANCEL IMPORT JOB`](/sql-statements/sql-statement-cancel-import-job.md)
     - [`COMMIT`](/sql-statements/sql-statement-commit.md)
     - [`CREATE [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)
@@ -237,6 +249,7 @@
     - [`DELETE`](/sql-statements/sql-statement-delete.md)
     - [`DESC`](/sql-statements/sql-statement-desc.md)
     - [`DESCRIBE`](/sql-statements/sql-statement-describe.md)
+    - [`DISTRIBUTE TABLE`](/sql-statements/sql-statement-distribute-table.md)
     - [`DO`](/sql-statements/sql-statement-do.md)
     - [`DROP [GLOBAL|SESSION] BINDING`](/sql-statements/sql-statement-drop-binding.md)
     - [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
@@ -291,6 +304,7 @@
     - [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)
     - [`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)
     - [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)
+    - [`SHOW DISTRIBUTION JOBS`](/sql-statements/sql-statement-show-distribution-jobs.md)
     - [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)
     - [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)
     - [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)
@@ -309,6 +323,7 @@
     - [`SHOW STATS_META`](/sql-statements/sql-statement-show-stats-meta.md)
     - [`SHOW STATS_TOPN`](/sql-statements/sql-statement-show-stats-topn.md)
     - [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)
+    - [`SHOW TABLE DISTRIBUTION`](/sql-statements/sql-statement-show-table-distribution.md)
     - [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md)
     - [`SHOW TABLE STATUS`](/sql-statements/sql-statement-show-table-status.md)
     - [`SHOW TABLES`](/sql-statements/sql-statement-show-tables.md)
@@ -457,12 +472,14 @@
     - [TiDB Cloud Partners](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
     - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
-  - [Limited SQL Features on TiDB Cloud](/tidb-cloud/limited-sql-features.md)
+  - [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDB Limitations](/tidb-limitations.md)
   - [System Variables](/system-variables.md)
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
+  - [`ANALYZE` Embedded in DDL Statements](/ddl_embedded_analyze.md)
+  - [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
 - Support Plan
@@ -475,6 +492,8 @@
       - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
       - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
       - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [Subscribe via Webhook](/tidb-cloud/monitor-alert-webhook.md)
+      - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
     - Connected: IM Ticket Creation and Update Subscription
       - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
       - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)

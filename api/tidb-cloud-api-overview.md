@@ -8,7 +8,7 @@ aliases: ['/tidbcloud/api-overview/']
 
 > **Note:**
 >
-> TiDB Cloud API is in beta.
+> TiDB Cloud API is in public preview.
 
 The TiDB Cloud API is a [REST interface](https://en.wikipedia.org/wiki/Representational_state_transfer) that provides you with programmatic access to manage administrative objects within TiDB Cloud. Through this API, you can automatically and efficiently manage resources such as projects, clusters, backups, restores, imports, billings, and resources in the [Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview).
 

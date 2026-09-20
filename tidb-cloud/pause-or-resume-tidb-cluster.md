@@ -21,6 +21,8 @@ Comparing with backup and restore, pausing and resuming a cluster takes less tim
 - You cannot pause your cluster when a data import task is going on. You can either wait for the import task to be completed or cancel the import task.
 - You cannot pause your cluster when a backup job is going on. You can either wait for the current backup job to be completed or [delete the running backup job](/tidb-cloud/backup-and-restore.md#delete-a-running-backup-job).
 - You cannot pause your cluster if it has any [changefeeds](/tidb-cloud/changefeed-overview.md). You need to [delete the existing changefeeds](/tidb-cloud/changefeed-overview.md#delete-a-changefeed) before pausing the cluster.
+- You cannot pause your cluster when [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) is enabled. You need to turn off the **Point-in-time Restore** switch in **Backup Setting** before pausing the cluster.
+- You cannot pause your cluster when a [Data Migration](/tidb-cloud/tidb-cloud-migration-overview.md) job is running. Make sure that no migration job is running before pausing the cluster.
 
 ## Pause a TiDB cluster
 
@@ -86,7 +88,7 @@ To pause a cluster, take the following steps:
 
     After you click **Pause**, the cluster will enter the **Pausing** status first. Once the pause operation is done, the cluster will transition to the **Paused** status.
 
-You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also pause a cluster using TiDB Cloud API. Currently, TiDB Cloud API is in public preview. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
 
 ## Resume a TiDB cluster
 
@@ -109,4 +111,4 @@ To resume a paused cluster, take the following steps:
 
 Depending on your cluster size, it can take several minutes to resume the cluster. After the cluster is resumed, the cluster status changes from **Resuming** to **Available**.
 
-You can also resume a cluster using TiDB Cloud API. Currently, TiDB Cloud API is still in beta. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).
+You can also resume a cluster using TiDB Cloud API. Currently, TiDB Cloud API is in public preview. For more information, see [TiDB Cloud API Documentation](https://docs.pingcap.com/tidbcloud/api/v1beta).

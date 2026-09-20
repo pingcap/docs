@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.14 Release Notes
 summary: TiDB 3.0.14 was released on May 9, 2020. The release includes compatibility changes, important bug fixes, new features, bug fixes, and improvements for TiDB, TiKV, and Tools. Some of the bug fixes include issues with query results, panic occurrences, and incorrect behavior. New features include enhanced syntax support and improved performance.
+aliases: ['/tidb/dev/release-3.0.14/','/tidb/v3.0/release-3.0.14','/docs/dev/releases/release-3.0.14/','/docs/dev/releases/3.0.14/','/tidb/v5.4/release-3.0.14','/tidb/v6.1/release-3.0.14','/tidb/v6.5/release-3.0.14','/tidb/v7.1/release-3.0.14','/tidb/v7.5/release-3.0.14','/tidb/v8.1/release-3.0.14']
 ---
 
 # TiDB 3.0.14 Release Notes

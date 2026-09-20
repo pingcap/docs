@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.0.4 Release Notes
 summary: Compatibility changes include fixes for slow `SHOW VARIABLES` execution, default value change for `tidb_stmt_summary_max_stmt_count`, and bug fixes that may cause upgrade incompatibilities. Feature enhancements include support for setting `tidb_enforce_mpp=1` and dynamic TiCDC configurations. Improvements cover auto-analyze trigger, MPP query retry support, and stable result mode. Bug fixes address various issues in TiDB, TiKV, PD, TiFlash, and tools like Dumpling and TiCDC.
+aliases: ['/tidb/dev/release-5.0.4/','/tidb/v5.0/release-5.0.4','/tidb/v5.4/release-5.0.4','/tidb/v6.1/release-5.0.4','/tidb/v6.5/release-5.0.4','/tidb/v7.1/release-5.0.4','/tidb/v7.5/release-5.0.4','/tidb/v8.1/release-5.0.4']
 ---
 
 # TiDB 5.0.4 Release Notes

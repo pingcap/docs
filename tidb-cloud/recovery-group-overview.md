@@ -1,9 +1,9 @@
 ---
-title: Recovery Group Overview (Beta)
+title: Recovery Group Overview (PREVIEW)
 summary: Learn how to protect your databases against disasters by using TiDB Cloud recovery groups.
 ---
 
-# Recovery Group Overview (Beta)
+# Recovery Group Overview (PREVIEW)
 
 A TiDB Cloud recovery group allows you to replicate your databases between TiDB Cloud Dedicated clusters for protection against regional disasters. You can orchestrate the failover of databases from one cluster to another. After a failover to the secondary cluster, if the original primary cluster becomes available again, you can re-establish replication in the reverse direction to reprotect your databases.
 
@@ -29,7 +29,7 @@ A recovery group consists of a set of replicated databases that can be failed ov
 
 > **Warning**
 >
-> This feature is in beta and not recommended for production environments.
+> This feature is in public preview and not recommended for production environments.
 
 ## What's next
 

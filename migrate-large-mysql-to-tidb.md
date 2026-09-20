@@ -130,11 +130,11 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     [tidb]
     # The target TiDB cluster information.
-    host = ${host}                # e.g.: 172.16.32.1
-    port = ${port}                # e.g.: 4000
+    host = "${host}"              # e.g.: 172.16.32.1
+    port = "${port}"                # e.g.: 4000
     user = "${user_name}"         # e.g.: "root"
     password = "${password}"      # e.g.: "rootroot"
-    status-port = ${status-port}  # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
+    status-port = "${status-port}"  # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
     pd-addr = "${ip}:${port}"     # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
     ```
 
@@ -157,7 +157,6 @@ The target TiKV cluster must have enough disk space to store the imported data. 
 
     - `grep` the keyword `progress` in the log. The progress is updated every 5 minutes by default.
     - Check progress in [the monitoring dashboard](/tidb-lightning/monitor-tidb-lightning.md).
-    - Check progress in [the TiDB Lightning web interface](/tidb-lightning/tidb-lightning-web-interface.md).
 
 4. After TiDB Lightning completes the import, it exits automatically. Check whether `tidb-lightning.log` contains `the whole procedure completed` in the last lines. If yes, the import is successful. If no, the import encounters an error. Address the error as instructed in the error message.
 

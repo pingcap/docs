@@ -1,0 +1,49 @@
+---
+title: Connect to TiDB Cloud Lake
+summary: TiDB Cloud Lake supports multiple connection methods to suit different use cases. All options below work with both **TiDB Cloud Lake** and **self-hosted {{{ .lake }}}**.
+---
+
+# Connect to TiDB Cloud Lake
+
+{{{ .lake }}} supports multiple connection methods to suit different use cases.
+
+## Quick Selection
+
+| I want to... | Recommended |
+|-------------|-------------|
+| Run SQL queries interactively | **LakeSQL** (CLI) |
+| Build an application | Language-specific **Driver** |
+| Create dashboards & reports | **BI/Visualization Tools** |
+
+## Connection Strings
+
+| Deployment | Format |
+|------------|--------|
+| **{{{ .lake }}}** | `lake://<user>:<pass>@<tenant>.gw.<region>.default.tidbcloud.com:443/<db>?warehouse=<name>` |
+
+> **Tip:**
+>
+> **{{{ .lake }}}**: Log in → Click **Connect** → Copy the generated DSN
+
+## SQL Clients
+
+| Tool | Type | Best For |
+|------|------|----------|
+| [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) | CLI | Developers, Scripting, Automation |
+
+## Drivers
+
+| Language | Guide | Use Case |
+|----------|-------|----------|
+| Go | [Golang Driver](/tidb-cloud-lake/guides/connect-using-golang.md) | Backend services, microservices |
+| Python | [Python Connector](/tidb-cloud-lake/guides/connect-using-python.md) | Data science, analytics, ML |
+| Node.js | [Node.js Driver](/tidb-cloud-lake/guides/connect-using-node-js.md) | Web applications |
+| Java | [JDBC Driver](/tidb-cloud-lake/guides/connect-using-java.md) | Enterprise applications |
+| Rust | [Rust Driver](/tidb-cloud-lake/guides/connect-using-rust.md) | System programming |
+
+## Visualization Tools
+
+| Tool | Type |
+|------|------|
+| [Tableau](/tidb-cloud-lake/guides/tableau.md) | Business Intelligence |
+| [Deepnote](/tidb-cloud-lake/guides/deepnote.md) | Collaborative Notebooks |

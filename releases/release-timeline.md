@@ -1,6 +1,7 @@
 ---
 title: TiDB Release Timeline
 summary: Learn about the TiDB release timeline.
+aliases: ['/tidb/dev/release-timeline/','/tidb/v5.4/release-timeline','/tidb/v6.1/release-timeline','/tidb/v6.5/release-timeline','/tidb/v7.1/release-timeline','/tidb/v7.5/release-timeline','/tidb/v8.1/release-timeline']
 ---
 
 # TiDB Release Timeline
@@ -13,9 +14,12 @@ To learn about the support timelines for Long-Term Support (LTS) versions of TiD
 
 | Version | Release Date |
 | :--- | :--- |
+| [8.5.8](/releases/release-8.5.8.md) | 2026-08-27 |
+| [8.5.7](/releases/release-8.5.7.md) | 2026-07-09 |
 | [8.5.6](/releases/release-8.5.6.md) | 2026-04-14 |
 | [8.5.5](/releases/release-8.5.5.md) | 2026-01-15 |
 | [8.5.4](/releases/release-8.5.4.md) | 2025-11-27 |
+| [7.5.8](/releases/release-7.5.8.md) | 2026-09-17 |
 | [7.5.7](/releases/release-7.5.7.md) | 2025-09-04 |
 | [8.5.3](/releases/release-8.5.3.md) | 2025-08-14 |
 | [8.5.2](/releases/release-8.5.2.md) | 2025-06-12 |

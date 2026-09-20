@@ -594,6 +594,13 @@ Referenced in:
 - [TiDB 8.5.0 Release Notes](/releases/release-8.5.0.md)
 - [TiDB 7.6.0 Release Notes](/releases/release-7.6.0.md)
 
+### performance_schema_session_connect_attrs_size
+
+Referenced in:
+
+- [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
+- [System Variables](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857)
+
 ### plugin_dir
 
 Referenced in:
@@ -726,7 +733,6 @@ Referenced in:
 - [Connect to TiDB with peewee](/develop/dev-guide-sample-application-python-peewee.md)
 - [Integrate TiDB Vector Search with Jina AI Embeddings API](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)
 - [Integrate TiDB Vector Search with SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)
-- [Integrate Vector Search with LangChain](/ai/integrations/vector-search-integrate-with-langchain.md)
 - [Integrate Vector Search with LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md)
 - [System Variables](/system-variables.md#ssl_ca)
 

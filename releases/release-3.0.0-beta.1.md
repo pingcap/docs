@@ -1,6 +1,7 @@
 ---
 title: TiDB 3.0.0 Beta.1 Release Notes
 summary: TiDB 3.0.0 Beta.1 was released on March 26, 2019, with improved stability, usability, features, SQL optimizer, statistics, and execution engine. The release includes support for various SQL functions, privilege management, server enhancements, DDL improvements, and PD and TiKV optimizations. Tools like TiDB Binlog, Lightning, and data replication comparison tool have also been updated with new features and improvements.
+aliases: ['/tidb/dev/release-3.0.0-beta.1/','/tidb/v3.0/release-3.0.0-beta.1','/docs/dev/releases/release-3.0.0-beta.1/','/docs/dev/releases/3.0.0-beta.1/','/tidb/v5.4/release-3.0.0-beta.1','/tidb/v6.1/release-3.0.0-beta.1','/tidb/v6.5/release-3.0.0-beta.1','/tidb/v7.1/release-3.0.0-beta.1','/tidb/v7.5/release-3.0.0-beta.1','/tidb/v8.1/release-3.0.0-beta.1']
 ---
 
 # TiDB 3.0.0 Beta.1 Release Notes

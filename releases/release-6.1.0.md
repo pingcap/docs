@@ -1,6 +1,7 @@
 ---
 title: TiDB 6.1.0 Release Notes
 summary: Learn about the new features, compatibility changes, improvements, and bug fixes in TiDB 6.1.0.
+aliases: ['/tidb/dev/release-6.1.0/','/tidb/v6.1/release-6.1.0','/tidb/v5.4/release-6.1.0','/tidb/v6.5/release-6.1.0','/tidb/v7.1/release-6.1.0','/tidb/v7.5/release-6.1.0','/tidb/v8.1/release-6.1.0']
 ---
 
 # TiDB 6.1.0 Release Notes
@@ -9,7 +10,7 @@ Release date: June 13, 2022
 
 TiDB version: 6.1.0
 
-Quick access: [Quick start](https://docs.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [Production deployment](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 In 6.1.0, the key new features or improvements are as follows:
 
@@ -342,7 +343,7 @@ In 6.1.0, the key new features or improvements are as follows:
     - CDC supports RawKV [#11965](https://github.com/tikv/tikv/issues/11965)
     - Support splitting a large snapshot file into multiple files [#11595](https://github.com/tikv/tikv/issues/11595)
     - Move the snapshot garbage collection from Raftstore to background thread to prevent snapshot GC from blocking Raftstore message loops [#11966](https://github.com/tikv/tikv/issues/11966)
-    - Support dynamic setting of the maximum message length (`max-grpc-send-msg-len`) and the maximum batch size of gPRC messages (`raft-msg-max-batch-size`) [#12334](https://github.com/tikv/tikv/issues/12334)
+    - Support dynamic setting of the maximum message length (`max-grpc-send-msg-len`) and the maximum batch size of gRPC messages (`raft-msg-max-batch-size`) [#12334](https://github.com/tikv/tikv/issues/12334)
     - Support executing online unsafe recovery plan through Raft [#10483](https://github.com/tikv/tikv/issues/10483)
 
 + PD

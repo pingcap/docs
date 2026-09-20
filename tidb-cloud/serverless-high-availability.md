@@ -18,15 +18,28 @@ TiDB ensures high availability and data durability using the Raft consensus algo
 
 TiDB Cloud extends these capabilities with zonal high availability and regional high availability to meet different operational requirements.
 
+<CustomContent language="en,zh">
+
+> **Note:**
+> 
+> - For {{{ .starter }}} and Essential instances, only zonal high availability is enabled, and it is not configurable. 
+> - For {{{ .premium }}} instances, only regional high availability is enabled and is not configurable.
+
+</CustomContent>
+
+<CustomContent language="ja">
+
 > **Note:**
 >
 > - For {{{ .starter }}} instances, only zonal high availability is enabled, and it is not configurable.
 > - For {{{ .premium }}} instances, only regional high availability is enabled and is not configurable.
-> - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region or any Alibaba Cloud region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
+> - For {{{ .essential }}} instances hosted in the AWS Tokyo (ap-northeast-1) region, regional high availability is enabled by default. You can change it to zonal high availability as needed during {{{ .essential }}} instance creation. For {{{ .essential }}} instances hosted in other regions, only zonal high availability is enabled, and it is not configurable.
+
+</CustomContent>
 
 - **Zonal high availability**: This option places all nodes within a single availability zone, reducing network latency. It ensures high availability without requiring application-level redundancy across zones, making it suitable for applications that prioritize low latency within a single zone. For more information, see [Zonal high availability architecture](#zonal-high-availability-architecture).
 
-- **Regional high availability (beta)**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. This feature is available in regions with more than three availability zones. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
+- **Regional high availability (PREVIEW)**: This option distributes nodes across multiple availability zones, offering maximum infrastructure isolation and redundancy. It provides the highest level of availability but requires application-level redundancy across zones. It is recommended to choose this option if you need maximum availability protection against infrastructure failures within a zone. Note that it increases latency and might incur cross-zone data transfer fees. This feature is available in regions with more than three availability zones. For more information, see [Regional high availability architecture](#regional-high-availability-architecture).
 
 ## Zonal high availability architecture
 
@@ -86,11 +99,21 @@ The gateway and computing layers are stateless, so failover involves restarting 
 
 ## Regional high availability architecture
 
+<CustomContent language="ja">
+
 When you create a {{{ .essential }}} or {{{ .premium }}} instance with regional high availability, critical OLTP (Online Transactional Processing) workload components, such as PD and TiKV, are deployed across multiple availability zones to ensure redundant replication and maximizing availability. During normal operations, components like Gateway, TiDB, and TiFlash compute/write nodes are hosted in the primary availability zone. These components in data plane offer infrastructure redundancy through virtual machine pools, which minimizes failover time and network latency due to colocation.
+
+</CustomContent>
+
+<CustomContent language="en,zh">
+
+When you create a {{{ .premium }}} instance with regional high availability, critical OLTP (Online Transactional Processing) workload components, such as PD and TiKV, are deployed across multiple availability zones to ensure redundant replication and maximize availability. During normal operations, components like Gateway, TiDB, and TiFlash compute/write nodes are hosted in the primary availability zone. These components in the data plane offer infrastructure redundancy through virtual machine pools, which minimizes failover time and network latency due to colocation.
+
+</CustomContent>
 
 > **Note:**
 >
-> Regional high availability is currently in beta.
+> Regional high availability is currently in public preview.
 
 <CustomContent language="en,zh">
 

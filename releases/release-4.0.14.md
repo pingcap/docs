@@ -1,6 +1,7 @@
 ---
 title: TiDB 4.0.14 Release Notes
 summary: TiDB 4.0.14 was released on July 27, 2021. The release includes compatibility changes, feature enhancements, improvements, bug fixes, and updates to various tools. Some notable changes include default value updates for TiDB and TiKV, support for OIDC SSO in TiDB Dashboard, and bug fixes for TiDB, TiKV, PD, TiFlash, and various tools.
+aliases: ['/tidb/dev/release-4.0.14/','/tidb/v4.0/release-4.0.14','/tidb/v5.4/release-4.0.14','/tidb/v6.1/release-4.0.14','/tidb/v6.5/release-4.0.14','/tidb/v7.1/release-4.0.14','/tidb/v7.5/release-4.0.14','/tidb/v8.1/release-4.0.14']
 ---
 
 # TiDB 4.0.14 Release Notes

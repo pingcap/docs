@@ -1,6 +1,7 @@
 ---
 title: TiDB 8.5.2 Release Notes
 summary: Learn about the improvements and bug fixes in TiDB 8.5.2.
+aliases: ['/tidb/dev/release-8.5.2/','/tidb/v8.5/release-8.5.2','/tidb/v5.4/release-8.5.2','/tidb/v6.1/release-8.5.2','/tidb/v6.5/release-8.5.2','/tidb/v7.1/release-8.5.2','/tidb/v7.5/release-8.5.2','/tidb/v8.1/release-8.5.2']
 ---
 
 # TiDB 8.5.2 Release Notes

@@ -1,6 +1,7 @@
 ---
 title: TiDB 5.2 Release Notes
 summary: TiDB 5.2.0 introduces new features and improvements, including support for expression indexes, Lock View GA, TiFlash I/O traffic limit, and more. Compatibility changes include new system variables and configuration file parameters. The release also includes bug fixes and feature enhancements for TiDB, TiKV, TiFlash, and tools like TiCDC, BR, Lightning, and Dumpling.
+aliases: ['/tidb/dev/release-5.2.0/','/tidb/v5.2/release-5.2.0','/tidb/v5.4/release-5.2.0','/tidb/v6.1/release-5.2.0','/tidb/v6.5/release-5.2.0','/tidb/v7.1/release-5.2.0','/tidb/v7.5/release-5.2.0','/tidb/v8.1/release-5.2.0']
 ---
 
 # TiDB 5.2 Release Notes
