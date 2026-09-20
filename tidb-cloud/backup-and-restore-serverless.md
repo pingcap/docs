@@ -36,16 +36,23 @@ Automatic backup settings vary between {{{ .starter }}} instances and {{{ .essen
 | Backup Retention | 1 day                      | Up to 30 days              | Up to 30 days              |
 | Backup Time      | Fixed time                 | Configurable               | Configurable               |
 
+> **Note:**
+>
+> PostgreSQL-compatible {{{ .starter }}} instances are currently free during the Limited Public Preview, but their automatic backup settings are the same as those of {{{ .starter }}} instances with a spending limit greater than 0:
+>
+> - Backup retention is configurable from 1 to 30 days.
+> - Backup time is configurable.
+
 - **Backup Cycle** is the frequency at which backups are taken.
 
 - **Backup Retention** is the duration for which backups are retained. Expired backups cannot be restored.
 
-    - For a free {{{ .starter }}} instance, the backup retention is 1 day.
+    - For a free MySQL-compatible {{{ .starter }}} instance, the backup retention is 1 day.
     - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} instance, you can configure the backup retention to any value between 1 and 30 days. The default retention is 14 days.
 
 - **Backup Time** is the time when the backup starts to be scheduled. Note that the final backup time might fall behind the configured backup time.
 
-    - For a free {{{ .starter }}} instance, the backup time is a randomly fixed time.
+    - For a free MySQL-compatible {{{ .starter }}} instance, the backup time is a randomly fixed time.
     - For a {{{ .starter }}} (with spending limit > 0) or {{{ .essential }}} instance, you can configure the backup time to every half an hour. The default value is a randomly fixed time.
 
 ### Configure the backup setting
@@ -121,7 +128,7 @@ To restore your data to a new {{{ .starter }}} or Essential instance, take the f
 4. Enter a name for the new instance.
 5. Update the capacity as needed.
 
-    - For a {{{ .starter }}} instance, if you need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
+    - For a MySQL-compatible {{{ .starter }}} instance, if you need more resources than the [free quota](/tidb-cloud/select-cluster-tier.md#usage-quota), set a monthly spending limit.
     - For a {{{ .essential }}} instance, set the minimum RCU and maximum RCU, and then configure advanced settings as needed.
 
 6. Click **Restore** to begin the restore process.

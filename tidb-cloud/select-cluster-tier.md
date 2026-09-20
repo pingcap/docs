@@ -21,20 +21,26 @@ TiDB Cloud provides the following options of plans. Whether you are just getting
 
 ## {{{ .starter }}} {#starter}
 
-TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
+TiDB Cloud Starter is a fully managed, multi-tenant database offering that provides instant, autoscaling database instances for developers and small teams.
 
-The free plan is ideal for those who are getting started with {{{ .starter }}}. It provides developers and small teams with the following essential features:
+TiDB Cloud Starter supports the following compatibility modes:
+
+- **MySQL-compatible**: provides MySQL protocol compatibility. Each eligible instance includes a monthly free quota, and you can enable consumption-based billing to continue using the instance after exceeding the free quota.
+
+- **PostgreSQL-compatible (Limited Public Preview)**: provides PostgreSQL wire protocol compatibility. PostgreSQL-compatible Starter instances are currently free during the Limited Public Preview.
+
+The free plan is ideal for developers and small teams getting started with {{{ .starter }}}. Each compatibility mode includes a monthly free quota for storage and Request Units (RUs). The quota varies by compatibility mode.
 
 - **No cost**: This plan is free when usage is within the [free quota](https://www.pingcap.com/tidb-cloud-starter-pricing-details/). No credit card is required to get started.
 
-- **Storage**: Provides an initial 5 GiB of row-based storage and 5 GiB of columnar storage.
-- **Request Units**: Includes 50 million [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
+- **Storage**: Includes a monthly free storage quota.
+- **Request Units**: Includes [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
-### Usage quota
+### MySQL-compatible Starter
 
-For each organization in TiDB Cloud, you can create a maximum of five free {{{ .starter }}} instances by default. To create more {{{ .starter }}} instances, you need to add a credit card and specify a spending limit.
+For each organization in TiDB Cloud, you can create a maximum of five free MySQL-compatible {{{ .starter }}} instances by default. To create more {{{ .starter }}} instances, you need to add a credit card and specify a spending limit.
 
-For the first five {{{ .starter }}} instances in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
+For the first five MySQL-compatible {{{ .starter }}} instances in your organization, whether they are free or scalable, TiDB Cloud provides a free usage quota for each of them as follows:
 
 - Row-based storage: 5 GiB
 - Columnar storage: 5 GiB
@@ -46,7 +52,25 @@ Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies 
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
+### PostgreSQL-compatible Starter
+> **Note:**
+>
+> PostgreSQL-compatible TiDB Cloud Starter is currently in Limited Public Preview.
+
+PostgreSQL-compatible {{{ .starter }}} instances are currently free during the Limited Public Preview.
+
+For the first 10 PostgreSQL-compatible {{{ .starter }}} instances in your organization, TiDB Cloud provides the following monthly free quota for each instance:
+
+- Row-based storage: 50 GiB
+
+- Request Units (RUs): 500 million RUs per month
+
+When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, new connection attempts are rejected. Existing connections remain active but are throttled.
+
+
 ### Instance Capacity Plan
+
+The following instance capacity limits apply to MySQL-compatible {{{ .starter }}} instances.
 
 For each organization in TiDB Cloud, you can create a maximum of five [branches](/tidb-cloud/branch-overview.md) across all {{{ .starter }}} and Essential instances by default.
 
