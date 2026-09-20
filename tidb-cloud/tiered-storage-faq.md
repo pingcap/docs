@@ -9,7 +9,7 @@ This document answers common questions about Infrequent Access (IA) storage, inc
 
 > **Note:**
 >
-> Tiered storage is in **private preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
+> Tiered storage is in **private preview** for {{{ .premium }}} and {{{ .byoc }}} and is disabled by default. To use it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to enable it for your instance. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## Can IA tables execute `UPDATE`/`DELETE`?
 
@@ -53,15 +53,17 @@ You cannot resolve a stuck conversion yourself. Contact [TiDB Cloud Support](/ti
 
 The previous conversion is voided. In `SHOW STORAGE_CLASS TRANSITIONS`, the row for that table or partition is replaced by the new conversion: the direction changes, and the progress counts from the beginning again.
 
-The voided conversion is recorded in `mysql.tidb_storage_class_transition_history` with `state = 'SUPERSEDED'`. Its `finish_time` is the start time of the new conversion, and its `completed_replicas` and `total_replicas` are the last values observed before it was voided. Because the work already done is discarded, reversing mid-way takes longer overall than waiting for the first conversion to finish.
+The history record of the voided conversion in `mysql.tidb_storage_class_transition_history` is updated to `state = 'SUPERSEDED'`. Its `finish_time` is the start time of the new conversion. Its `completed_replicas` and `total_replicas` are `NULL`, because these counts are recorded only when a conversion completes. Because the work already done is discarded, reversing mid-way takes longer overall than waiting for the first conversion to finish.
 
 When you calculate conversion duration statistics, filter on `state = 'COMPLETED'`: the `duration` of a `SUPERSEDED` record covers only the time until it was voided, not a full conversion.
 
 ## Can I increase the local cache for IA data, and does it cost more?
 
-Yes. Select a higher IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration**. The available levels are **Economy**, **Default**, **Balanced**, and **Deep**. A higher level caches more IA data on local disks, which improves cold-read performance.
+Yes, but adjusting the cache level requires a separate allowlist on top of the tiered storage preview. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to enable it first. Then select a higher IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration**. The available levels are **Economy**, **Default**, **Balanced**, and **Deep**. A higher level caches more IA data on local disks, which improves cold-read performance.
 
 It does cost more. On {{{ .premium }}}, each cache level has an IA storage equivalent coefficient, from 0.9x for **Economy** to 1.8x for **Deep**, which is applied to your reported IA storage usage when the bill is calculated. On {{{ .byoc }}}, no coefficient applies: the additional resources are provisioned in your own cloud account and are billed by your cloud provider. The change is a hot update and does not require a restart. For the coefficient of each level, see [TiDB Cloud Billing](/tidb-cloud/tidb-cloud-billing.md).
+
+Note that the cache level applies to the underlying TiKV physical cluster, not to an individual logical instance. If your account runs multiple logical instances on the same physical cluster, a change on one instance also applies to the others.
 
 ## Does changing the cache level or the segment size rewrite data in object storage?
 

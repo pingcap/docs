@@ -9,7 +9,7 @@ This document describes how to monitor Infrequent Access (IA) storage, including
 
 > **Note:**
 >
-> Tiered storage is in **private preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
+> Tiered storage is in **private preview** for {{{ .premium }}} and {{{ .byoc }}} and is disabled by default. To use it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to enable it for your instance. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## Monitor storage class transitions
 
@@ -23,7 +23,7 @@ Conversion progress is tracked the same way whichever form you use to change the
 
 Partitioned tables support only `ENGINE_ATTRIBUTE`, so partition conversions appear in the same views as table-level conversions. A table or partition that is created directly in the IA storage class has no data to migrate, so it does not appear in these views.
 
-The `ALTER TABLE` statement itself updates the schema metadata within seconds. The region-level data migration then runs asynchronously in TiKV and is decoupled from the DDL lifecycle, so `ADMIN SHOW DDL JOBS` does not report its progress. Use `SHOW STORAGE_CLASS TRANSITIONS` to track a conversion in progress, and query `mysql.tidb_storage_class_transition_history` to review conversions that have reached a final state.
+The `ALTER TABLE` statement itself updates the schema metadata within seconds. The region-level data migration then runs asynchronously in TiKV and is decoupled from the DDL lifecycle, so `ADMIN SHOW DDL JOBS` does not report its progress. Use `SHOW STORAGE_CLASS TRANSITIONS` to track a conversion in progress, and query `mysql.tidb_storage_class_transition_history` to review past and ongoing conversions. A record is inserted into the history table when a conversion starts, with `state = 'RUNNING'`, and is updated in place when the conversion reaches a final state.
 
 ### View in-progress transitions
 
@@ -47,7 +47,7 @@ The `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` table lists the conversi
 | `DIRECTION` | VARCHAR(16) | The conversion direction: `TO_IA` or `TO_STANDARD` |
 | `TOTAL_REPLICAS` | BIGINT(21) UNSIGNED | The total number of replicas involved in the conversion. The value is `NULL` before the first successful observation |
 | `COMPLETED_REPLICAS` | BIGINT(21) UNSIGNED | The number of replicas that are ready. The value is `NULL` before the first successful observation |
-| `PROGRESS` | DOUBLE | The ratio of `COMPLETED_REPLICAS` to `TOTAL_REPLICAS`, from `0` to `1`. Multiply it by 100 to get a percentage. The value is `NULL` before the first successful observation |
+| `PROGRESS` | DOUBLE | The ratio of `COMPLETED_REPLICAS` to `TOTAL_REPLICAS`, from `0` to `1`. Multiply it by 100 to get a percentage. The value is `NULL` until an observation reports a valid progress ratio, which can be later than the first observation that populates `TOTAL_REPLICAS` and `COMPLETED_REPLICAS` |
 | `START_TIME` | DATETIME(6) | The time when the conversion started, in the session time zone |
 | `DURATION` | BIGINT(21) UNSIGNED | The elapsed time in seconds from the start of the conversion to now |
 | `LAST_UPDATE_TIME` | DATETIME(6) | The time of the most recent successful progress observation |
@@ -67,13 +67,13 @@ FROM INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS
 WHERE TABLE_SCHEMA = 'db_name' AND TABLE_NAME = 'table_name';
 ```
 
-A conversion goes through one in-progress state and ends in one of two final states:
+A conversion goes through one in-progress state and ends in one of two final states. Every state is also recorded in `mysql.tidb_storage_class_transition_history`:
 
 | State | Where it is recorded | Description |
 |-|-|-|
-| `RUNNING` | `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` | The region-level conversion is in progress. The table lists only these conversions and has no state column. Track progress with `PROGRESS`, `COMPLETED_REPLICAS`, and `TOTAL_REPLICAS`, and track elapsed time with `DURATION` |
-| `COMPLETED` | The `state` column of `mysql.tidb_storage_class_transition_history` | All replicas are ready. The conversion is removed from `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` and recorded in the history table |
-| `SUPERSEDED` | The `state` column of `mysql.tidb_storage_class_transition_history` | The conversion was voided because a reverse conversion was issued before it finished |
+| `RUNNING` | `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` and the `state` column of `mysql.tidb_storage_class_transition_history` | The region-level conversion is in progress. The `INFORMATION_SCHEMA` table lists only these conversions and has no state column. While a conversion is `RUNNING`, its history record has `NULL` in `finish_time`, `duration`, `total_replicas`, and `completed_replicas`. Track progress with `PROGRESS`, `COMPLETED_REPLICAS`, and `TOTAL_REPLICAS`, and track elapsed time with `DURATION` |
+| `COMPLETED` | The `state` column of `mysql.tidb_storage_class_transition_history` | All replicas are ready. The conversion is removed from `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` and its history record is updated to `COMPLETED` |
+| `SUPERSEDED` | The `state` column of `mysql.tidb_storage_class_transition_history` | The conversion was voided because a reverse conversion was issued before it finished. Its history record is updated to `SUPERSEDED` |
 
 ### Determine whether a conversion is stuck
 
@@ -81,7 +81,7 @@ Watch `LAST_UPDATE_TIME`, `COMPLETED_REPLICAS`, and `DURATION` together:
 
 - `COMPLETED_REPLICAS` increases and `LAST_UPDATE_TIME` keeps advancing: the conversion is progressing normally and the data volume is simply large.
 - `DURATION` keeps growing but `COMPLETED_REPLICAS` does not increase for a long time: the conversion might be stuck because of a system exception, such as a TiKV rolling restart, temporarily insufficient resources, or short-term object storage unavailability.
-- `PROGRESS`, `TOTAL_REPLICAS`, and `COMPLETED_REPLICAS` stay `NULL`: no successful observation has been made yet. Check `LAST_UPDATE_TIME` to tell whether observations are still being attempted.
+- `TOTAL_REPLICAS`, `COMPLETED_REPLICAS`, `PROGRESS`, and `LAST_UPDATE_TIME` all stay `NULL`: no successful observation has been made yet. These columns are populated and cleared together, so `LAST_UPDATE_TIME` cannot tell whether observations are still being attempted. Check `DURATION` instead: it always increases while the conversion is being tracked. If these columns stay `NULL` while `DURATION` keeps growing, polling is still running but has not returned a valid observation.
 
 You cannot resolve a stuck conversion yourself. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help. After the issue is resolved, `COMPLETED_REPLICAS` continues to increase until the conversion reaches `COMPLETED`, and no additional action is required from you.
 
@@ -90,13 +90,13 @@ You cannot resolve a stuck conversion yourself. Contact [TiDB Cloud Support](/ti
 If you issue a reverse conversion for a table or partition while the previous conversion is still in progress, the previous conversion is voided:
 
 - In `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS`, the row for that table or partition is replaced by the new conversion. `DIRECTION` shows the new direction, `START_TIME` is the start time of the new conversion, and the progress counts from the beginning again. Only one row remains for that table or partition.
-- The voided conversion is written to `mysql.tidb_storage_class_transition_history` with `state = 'SUPERSEDED'`. Its `finish_time` is the start time of the new conversion, and its `total_replicas` and `completed_replicas` are the last values observed before it was voided. If nothing had been observed yet, both columns are `NULL`.
+- The history record of the voided conversion in `mysql.tidb_storage_class_transition_history` is updated to `state = 'SUPERSEDED'`. Its `finish_time` is the start time of the new conversion. Its `total_replicas` and `completed_replicas` are always `NULL`, because these counts are written to the history table only when a conversion completes.
 
-To find out how far a voided conversion had progressed, query the history table for records with `state = 'SUPERSEDED'`.
+The history table does not record how far a voided conversion had progressed. To watch a conversion, check `SHOW STORAGE_CLASS TRANSITIONS` while it is still in progress.
 
 ### Query transition history
 
-Conversions that reach a final state, either `COMPLETED` or `SUPERSEDED`, are recorded in the `mysql.tidb_storage_class_transition_history` table, which has the following columns:
+Every conversion is recorded in the `mysql.tidb_storage_class_transition_history` table when it starts, and its record is updated as the conversion progresses. The table has the following columns:
 
 | Column | Type | Description |
 |-|-|-|
@@ -106,14 +106,14 @@ Conversions that reach a final state, either `COMPLETED` or `SUPERSEDED`, are re
 | `partition_name` | VARCHAR(64) | The partition name. The value is `NULL` for a table-level conversion |
 | `partition_id` | BIGINT | The internal ID of the partition. The value is `NULL` for a table-level conversion |
 | `direction` | VARCHAR(16) | The conversion direction: `TO_IA` or `TO_STANDARD` |
-| `state` | VARCHAR(16) | The final state of the conversion: `COMPLETED` or `SUPERSEDED` |
-| `total_replicas` | BIGINT UNSIGNED | The total number of replicas involved in the conversion. For a `SUPERSEDED` record, this is the last value observed before the conversion was voided, or `NULL` if nothing was observed |
-| `completed_replicas` | BIGINT UNSIGNED | The number of replicas that were ready. For a `COMPLETED` record, this equals `total_replicas`. For a `SUPERSEDED` record, this is the last value observed before the conversion was voided, or `NULL` if nothing was observed |
+| `state` | VARCHAR(16) | The state of the conversion: `RUNNING`, `COMPLETED`, or `SUPERSEDED` |
+| `total_replicas` | BIGINT UNSIGNED | The total number of replicas involved in the conversion. The value is `NULL` unless the conversion reached `COMPLETED` |
+| `completed_replicas` | BIGINT UNSIGNED | The number of replicas that were ready. For a `COMPLETED` record, this equals `total_replicas`. The value is `NULL` for `RUNNING` and `SUPERSEDED` records |
 | `schema_version` | BIGINT | The TiDB schema version that the conversion belongs to |
 | `start_ts` | BIGINT UNSIGNED | The start TSO of the conversion. It identifies the conversion together with `table_id` and `direction` |
 | `start_time` | DATETIME(6) | The time when the conversion started |
-| `finish_time` | DATETIME(6) | The time when the conversion reached its final state. For a `COMPLETED` record, this is when all replicas were ready. For a `SUPERSEDED` record, this is the start time of the new conversion |
-| `duration` | BIGINT UNSIGNED | The total duration in seconds. For a `SUPERSEDED` record, this covers only the time from the start until the conversion was voided, not a full conversion |
+| `finish_time` | DATETIME(6) | The time when the conversion reached its final state. For a `COMPLETED` record, this is when all replicas were ready. For a `SUPERSEDED` record, this is the start time of the new conversion. The value is `NULL` until the conversion reaches a final state |
+| `duration` | BIGINT UNSIGNED | The total duration in seconds. For a `SUPERSEDED` record, this covers only the time from the start until the conversion was voided, not a full conversion. The value is `NULL` while the conversion is still `RUNNING` |
 
 Use this table to estimate how long a similar conversion takes on your own cluster, which is more reliable than any reference figure from a test environment:
 
@@ -130,17 +130,18 @@ FROM mysql.tidb_storage_class_transition_history
 WHERE state = 'COMPLETED'
 GROUP BY direction;
 
--- The most recent conversion of a specific table
+-- The most recent finished conversion of a specific table
 SELECT table_name, direction, state, duration AS total_duration_sec,
        total_replicas, completed_replicas, start_time, finish_time
 FROM mysql.tidb_storage_class_transition_history
 WHERE table_schema = 'db_name' AND table_name = 'table_name'
+    AND state <> 'RUNNING'
 ORDER BY finish_time DESC
 LIMIT 1;
 
 -- Conversions that were voided by a reverse conversion
 SELECT table_schema, table_name, partition_name, direction,
-       completed_replicas, total_replicas, start_time, finish_time
+       start_time, finish_time, duration
 FROM mysql.tidb_storage_class_transition_history
 WHERE state = 'SUPERSEDED'
 ORDER BY finish_time DESC;

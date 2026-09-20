@@ -9,7 +9,7 @@ This document explains how to configure and manage Infrequent Access (IA) storag
 
 > **Note:**
 >
-> Tiered storage is in **private preview** for {{{ .premium }}} and {{{ .byoc }}}. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
+> Tiered storage is in **private preview** for {{{ .premium }}} and {{{ .byoc }}} and is disabled by default. To use it, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to enable it for your instance. The behavior described on this page reflects the current preview implementation and might change before general availability (GA).
 
 ## How to use
 
@@ -227,6 +227,11 @@ ORDER BY (DATA_LENGTH + INDEX_LENGTH) DESC;
 ### Configure the IA cache level
 
 The IA cache level controls how much IA data is cached on local disks. A higher level caches more data, which improves cold-read performance and increases cost.
+
+> **Note:**
+>
+> - Adjusting the IA cache level requires a separate allowlist on top of the tiered storage private preview enablement. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to enable it for your instance.
+> - The cache level takes effect at the underlying TiKV physical cluster level, not on an individual logical instance. If multiple logical instances share the same physical cluster, changing the cache level on one instance changes it on all of them. On {{{ .premium }}} and {{{ .byoc }}}, the underlying TiKV physical cluster is dedicated to you, so other customers are not affected. Control at the logical instance level is planned for a future release.
 
 | Cache level | Use case |
 |-|-|
