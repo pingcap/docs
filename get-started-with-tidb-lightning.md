@@ -50,10 +50,10 @@ For the steps on deploying a TiDB cluster, refer to the [Quick Start with TiDB S
 
 ## Step 3: Install TiDB Lightning
 
-Run the following command to install the latest version of TiDB Lightning:
+It is recommended to use the same version of TiDB Lightning as the target TiDB cluster. Run the following command to install TiDB Lightning, replacing `<version>` with the version of the target TiDB cluster (for example, `v8.5.0`):
 
 ```shell
-tiup install tidb-lightning
+tiup install tidb-lightning:<version>
 ```
 
 ## Step 4: Start TiDB Lightning
@@ -95,11 +95,11 @@ tiup install tidb-lightning
     pd-addr = "172.16.31.3:2379,56.78.90.12:3456"
     ```
 
-2. Run `tidb-lightning`. To avoid the program exiting due to the `SIGHUP` signal when starting the program directly in the command line using `nohup`, it is recommended to put the `nohup` command in a script. For example:
+2. Run `tidb-lightning`. To avoid the program exiting due to the `SIGHUP` signal when starting the program directly in the command line using `nohup`, it is recommended to put the `nohup` command in a script. In the following example, replace `<version>` with the version installed in Step 3:
 
     ```shell
     #!/bin/bash
-    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
+    nohup tiup tidb-lightning:<version> -config tidb-lightning.toml > nohup.out &
     ```
 
 ## Step 5: Check data integrity
