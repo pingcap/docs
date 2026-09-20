@@ -99,7 +99,7 @@ In the **Replication Data** area, configure how the data is replicated:
 
 5. **Sync Objects**: select which objects are replicated.
 
-    - **Customize** (default): specify explicit rules in **Table Filter Rules**. The rule syntax is the same as the [TiCDC table filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters). By default, one `*.*` rule replicates all tables. The **Filter results** panel shows the databases and tables that match the rules, and how many of them have valid keys.
+    - **Customize** (default): specify explicit rules in **Table Filter Rules**. The rule syntax is the same as the [TiCDC table filter rules](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters). By default, one `*.*` rule replicates all tables. The **Filter results** panel shows the databases and tables that match the rules.
     - **All**: replicate all tables from all databases. The table filter rules configuration is hidden.
 
     Optionally, select **Case-sensitive** to make the matching of database and table names in the filter rules case-sensitive. By default, matching is case-insensitive.
