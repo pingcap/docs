@@ -218,7 +218,7 @@ IPv6 connectivity is configured per node group. To use IPv6 for a node group, ta
 
 > **Note:**
 >
-> To switch the IP protocol type back to **IPv4 Only**, delete all private endpoints that use IPv6 connectivity first. Otherwise, the change is rejected and the console lists the private endpoints that are still using IPv6. Private endpoints that use IPv4 only do not need to be deleted.
+> To switch the IP protocol type back to **IPv4 Only**, you must first delete all private endpoints that use IPv6 connectivity. Private endpoints that use IPv4 only do not need to be deleted.
 
 The IP protocol type can only be changed after the cluster is created, and it is configured independently for each node group.
 
