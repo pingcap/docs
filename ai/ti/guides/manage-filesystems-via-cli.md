@@ -17,7 +17,7 @@ Create a Filesystem and wait until it is ready:
 ti fs create-file-system --display-name my-workspace --wait
 ```
 
-Copy the returned `file_system_id` and replace `<file-system-id>` in the following commands. The CLI stores the Filesystem token locally. Treat the returned `fs_token` as a secret; do not share the command output publicly.
+Copy the returned `file_system_id` and replace `<file-system-id>` in the following commands. The CLI stores the Filesystem token locally. Treat the returned `fs_token` (Filesystem token) as a secret; do not share the command output publicly.
 
 ```shell
 echo "Hello from my workspace" | ti fs copy-file --file-system-id "<file-system-id>" --from-stdin --to-remote /hello.txt

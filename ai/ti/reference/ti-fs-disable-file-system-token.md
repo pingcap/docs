@@ -27,7 +27,7 @@ ti fs disable-file-system-token
 
 - `--file-system-id <string>`: Specify the Filesystem that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
 - `--token-id <string>`: Specify the immutable token ID returned by the list command. This option is required.
-- `--fs-token <string>`: Authorize the request with an owner Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. If no Filesystem token is available, the command uses the configured TiDB Cloud API keys.
+- `--fs-token <string>`: Authorize the request with a Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. If no Filesystem token is available, the command uses the configured TiDB Cloud API keys.
 - `--dry-run`: Validate credentials, identifiers, and known local mount conflicts without disabling the token.
 - `--help`: Display help information.
 - `--version`: Display version information.

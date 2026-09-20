@@ -23,7 +23,7 @@ ti fs delete-file-system
 
 ## Options
 
-- `--file-system-id <string>`: Set the immutable Filesystem ID. FS tokens cannot replace this option or authorize Filesystem deletion. \[required]
+- `--file-system-id <string>`: Set the immutable Filesystem ID. Filesystem tokens cannot replace this option or authorize Filesystem deletion. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--version`: Display version information.

@@ -25,7 +25,7 @@ ti fs create-file-system \
   --wait
 ```
 
-The response includes the Filesystem ID and an owner FS token in the `fs_token` field. The CLI automatically stores the owner FS token locally.
+From the output, you can get the Filesystem ID in the `file_system_id` field and the Filesystem owner token in the `fs_token` field. The CLI automatically stores the Filesystem owner token locally.
 
 Copy the returned `file_system_id` and select the Filesystem for subsequent commands in the current shell:
 
@@ -33,11 +33,11 @@ Copy the returned `file_system_id` and select the Filesystem for subsequent comm
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-Setting `TI_FS_FILE_SYSTEM_ID` lets subsequent commands identify the target Filesystem without requiring `--file-system-id` on every command. For data-access commands, the CLI uses the locally stored FS token for the selected Filesystem.
+Setting `TI_FS_FILE_SYSTEM_ID` lets subsequent commands identify the target Filesystem without requiring `--file-system-id` on every command. For data-access commands, the CLI uses the locally stored Filesystem token for the selected Filesystem.
 
 > **Warning:**
 >
-> The owner FS token plaintext in `fs_token` is returned only when the token is issued. Treat it as a secret and do not expose it in logs, issues, or source control. If you need to use the token on another machine or store a backup, save it securely in a secret manager. For more information, see [Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+> The Filesystem owner token plaintext in `fs_token` is returned only when the token is issued. Treat it as a secret and do not expose it in logs, issues, or source control. If you need to use the token on another machine or store a backup, save it securely in a secret manager. For more information, see [Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
 > **Note:**
 >

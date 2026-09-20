@@ -21,7 +21,7 @@ export TI_REGION_CODE="<filesystem-region-code>"
 ti fs check-file-system
 ```
 
-The FS token is not the TiDB Cloud API private key. `TI_FS_FILE_SYSTEM_ID` is optional when a token is supplied; set it only when you want `ti` to verify that a separately distributed ID matches the token.
+The Filesystem token is not the TiDB Cloud API private key. `TI_FS_FILE_SYSTEM_ID` is optional when a token is supplied; set it only when you want `ti` to verify that a separately distributed ID matches the token.
 
 If the token is known but is not stored on the current machine, import it and then select the derived ID:
 
@@ -82,7 +82,7 @@ Or select the Filesystem for subsequent commands in the current shell:
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-The CLI intentionally does not infer a Filesystem from local credential count, including when only one credential exists. Supply its ID or an FS token whose embedded ID can be derived.
+The CLI intentionally does not infer a Filesystem from local credential count, including when only one credential exists. Supply its ID or a Filesystem token whose embedded ID can be derived.
 
 ## Filesystem region is unsupported
 
@@ -121,7 +121,7 @@ Background mount success prints the CLI result without Drive9 startup messages. 
 
 - the mount path exists and is writable;
 - no existing mount covers the path;
-- the FS token and region are valid;
+- the Filesystem token and region are valid;
 - FUSE prerequisites or the WebDAV helper are installed;
 - the remote region is reachable.
 

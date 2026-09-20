@@ -8,7 +8,7 @@ aliases: ['/ai/manage-filesystem-tokens']
 
 Filesystem tokens let you give users, applications, and automation access to a TiDB Cloud Filesystem without sharing your TiDB Cloud API credentials.
 
-You can use an owner token for full access to a Filesystem, or create scoped tokens that limit access to specific paths and operations. For more information about token types and permissions, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
+You can use an [owner token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-tokens) for full access to a Filesystem, or create [scoped tokens](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-tokens) that limit access to specific paths and operations. For more information about token types and permissions, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 
 ## Prerequisites
 
@@ -35,7 +35,9 @@ The CLI validates the token, extracts the Filesystem ID from it, verifies connec
 
 ## Generate an owner token
 
-To generate another owner token, configure TiDB Cloud API credentials and obtain the Filesystem ID.
+When you create a Filesystem, TiDB Cloud creates an owner token for it and returns it to you. You can generate additional owner tokens when another trusted environment or workflow needs full access to the Filesystem.
+
+To generate an additional owner token, configure TiDB Cloud API credentials and obtain the Filesystem ID.
 
 Generate the token and save its one-time plaintext response securely:
 
@@ -47,7 +49,7 @@ ti fs generate-file-system-token \
   --ttl 24h > ./ci-token.json
 ```
 
-The CLI does not store the generated token locally by default. To store it locally, add `--store-locally`. If a different token is already stored for this Filesystem, also add `--replace`.
+The CLI does not store the generated token locally by default. To store it locally, add `--store-locally` to the preceding command. If a different token is already stored for this Filesystem, also add `--replace`.
 
 ## Generate and delegate a scoped token
 

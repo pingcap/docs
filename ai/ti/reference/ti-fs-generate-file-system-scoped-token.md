@@ -48,7 +48,7 @@ ti fs generate-file-system-scoped-token
 - `--ttl <duration>`: Set a finite positive token lifetime that resolves to whole seconds. This option is required.
 - `--allow <prefix:ops>`: Allow operations under one remote path prefix. Repeat this option for multiple prefixes. Operations are `read`, `list`, `search`, `write`, and `delete`; `search` requires `read`. This option is required.
 - `--file-system-id <string>`: Assert the Filesystem ID embedded in the owner token. This option is required only when loading a locally stored owner token.
-- `--fs-token <string>`: Supply the owner Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Supply the Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
 - `--subject <string>`: Set an optional server-side audit label of at most 64 bytes. It is not a unique selector.
 - `--store-locally`: Store and select the generated scoped token for this profile and Filesystem.
 - `--replace`: Replace an existing selected local token. Requires `--store-locally` and does not revoke the previous remote token.

@@ -15,7 +15,7 @@ Create a workspace when your application's or agent's files need to outlive the 
 
 To create a Filesystem, obtain a TiDB Cloud API public key and private key from the [API Keys page](https://tidbcloud.com/org-settings/api-keys). The keys must have permission to create a Filesystem in your organization.
 
-If someone has already supplied you with an FS token, skip resource creation and follow [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+If someone has already supplied you with a Filesystem token, skip resource creation and follow [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
 ## Step 1. Install the CLI
 

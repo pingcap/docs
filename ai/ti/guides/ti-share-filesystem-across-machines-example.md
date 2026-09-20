@@ -108,7 +108,7 @@ ti fs delete-file-system \
 
 ## Security notes
 
-- Each FS token grants owner access. Transfer it as a secret, not in chat or command history, and use a separate token for each machine.
+- Each Filesystem token grants owner access. Transfer it as a secret, not in chat or command history, and use a separate token for each machine.
 - Concurrent writers can overwrite the same paths; coordinate ownership at the workflow level.
 - Do not terminate a machine before graceful unmount completes. Use an explicit drain only when you need remote durability while keeping the FUSE mount online.
 
