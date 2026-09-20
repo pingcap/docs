@@ -8,9 +8,9 @@ aliases: ['/docs/dev/tidb-lightning/tidb-lightning-faq/','/docs/dev/faq/tidb-lig
 
 This document lists the frequently asked questions (FAQs) and answers about TiDB Lightning.
 
-## What is the minimum TiDB/TiKV/PD cluster version supported by TiDB Lightning?
+## Which TiDB Lightning version should I use?
 
-It is recommended to use the same version of TiDB Lightning as the target TiDB cluster. If you use the Local-backend mode, the earliest available version is 4.0.0. If you use the Importer-backend mode or the TiDB-backend mode, the earliest available version is 2.0.9.
+It is recommended to use the same version of TiDB Lightning as the target TiDB cluster.
 
 ## Does TiDB Lightning support importing multiple schemas (databases)?
 
