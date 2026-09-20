@@ -96,7 +96,7 @@ ti fs-vault create-grant \
 
 The command returns a delegated Vault token and a grant ID. Give the delegated token only to the workflow that needs the secret, and retain the grant ID so that you can revoke the grant before it expires if necessary.
 
-In the environment that uses the delegated secret, make the token available as `TI_VAULT_TOKEN`. Avoid putting the token directly in a command-line argument because command arguments can appear in shell history or process listings.
+In the environment that uses the delegated secret, make the token available as `TI_VAULT_TOKEN`. Also set `TI_FS_FILE_SYSTEM_ID` to the Filesystem ID and `TI_REGION_CODE` to its region code. The delegated Vault token alone does not identify the Filesystem. Avoid putting the token directly in a command-line argument because command arguments can appear in shell history or process listings.
 
 ## Inject a secret into a process
 
@@ -108,7 +108,7 @@ ti fs-vault run-with-secret \
   -- <command>
 ```
 
-Each permitted secret field becomes an environment variable with the same name. For example, the `DB_URL` and `PASSWORD` fields become the `DB_URL` and `PASSWORD` environment variables.
+Each permitted secret field becomes an environment variable with the same name. With the `db-prod/DB_URL` grant in this example, `ti` injects `DB_URL` into the child process, but does not inject `PASSWORD`.
 
 The Vault credential used by `ti` is not passed to the child process. This lets the application use the secret without writing its plaintext value to a file.
 

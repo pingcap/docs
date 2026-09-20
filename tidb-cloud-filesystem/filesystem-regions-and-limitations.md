@@ -39,7 +39,7 @@ Ubuntu 26.04 also confines `fusermount3` with AppArmor. Use a mount path under `
 ## Durability boundaries
 
 - Default FUSE behavior uses local buffering and asynchronous remote work where the companion permits it. Abruptly killing the mount process or deleting a machine can lose uncommitted memory or write-back state.
-- The default coding-agent mount profile stores dependency trees, generated output, caches, and Git internals locally. Local-only data disappears when its disk disappears unless it is packed or otherwise preserved.
+- When you select the `coding-agent` mount profile with `--mount-profile coding-agent`, dependency trees, generated output, caches, and Git internals are stored locally. Local-only data disappears when its disk disappears unless it is packed or otherwise preserved.
 - Remote-committed Filesystem data survives client or sandbox deletion; deleting the machine does not delete the remote Filesystem.
 
 For the supported drain and graceful unmount workflow, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely). `drain-file-system` is a FUSE-only online durability barrier; WebDAV does not support it.
