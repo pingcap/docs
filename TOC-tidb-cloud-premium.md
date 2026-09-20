@@ -147,6 +147,12 @@
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
     - [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
+- Data Pipeline
+  - [Data Pipeline Overview](tidb-cloud/data-pipeline/data-pipeline-overview.md)
+  - [Setup Data Pipeline for TiDB Cloud Lake](tidb-cloud/data-pipeline/setup-lake-data-pipeline-for-premium.md)
+  - [Data Pipeline SQL Compatibility for TiDB Cloud Lake](tidb-cloud/data-pipeline/lake-data-pipeline-support-matrix.md)
+  - [Data Pipeline FAQ](tidb-cloud/data-pipeline/lake-data-pipeline-faq.md)
+
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
