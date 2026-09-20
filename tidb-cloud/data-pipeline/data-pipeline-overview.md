@@ -43,6 +43,6 @@ For setup instructions, refer to the guide that matches your plan:
 
 ## What's next
 
-- [Set Up Data Pipeline to TiDB Cloud Lake ({{{ .premium }}})](/tidb-cloud/pipeline/setup-lake-data-pipeline-for-premium.md) — create and manage a data pipeline from your {{{ .premium }}} instance to TiDB Cloud Lake.
-- [Data Pipeline Support Matrix](/tidb-cloud/pipeline/lake-data-pipeline-support-matrix.md) — DDL, DML, and type support reference.
-- [Data Pipeline FAQ](/tidb-cloud/pipeline/lake-data-pipeline-faq.md) — common questions about external stages, event-driven ingestion, and billing.
+- [Create and manage a data pipeline from your {{{ .premium }}} instance to TiDB Cloud Lake.](/tidb-cloud/pipeline/setup-lake-data-pipeline-for-premium.md)
+- [TiDB Lake Data Pipeline DDL, DML, and type support reference.](/tidb-cloud/pipeline/lake-data-pipeline-support-matrix.md)
+- [Data Pipeline FAQ.](/tidb-cloud/pipeline/lake-data-pipeline-faq.md)

@@ -36,7 +36,7 @@ This section covers the setup for Amazon S3. TiDB Cloud writes data to your S3 b
 > 💡 If you already have an S3 bucket ready, skip this step — just make sure the bucket region matches the region of your TiDB Cloud instance.
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/) and create a new bucket.
-2. Select a region — **make sure this region matches the region of your TiDB Cloud instance.**
+2. Select a region, **make sure this region matches the region of your TiDB Cloud instance.**
 3. Optionally, create a folder (prefix) inside the bucket to organize TiDB Cloud data (for example, `s3://tidb-cloud-lake-data/my-cluster/`).
 
 ## Step 2: Configure bucket access
@@ -198,13 +198,13 @@ The bucket is created in advance, so the queue cannot be wired to the bucket aut
 
 > 💡 Using Access Key/Secret Key (AK/SK) means you need to manage and rotate credentials manually, and there is a higher risk of accidental exposure. For simpler management and better security, we recommend using a Role ARN instead — see [Option 1](#option-1-bucket-access-with-role-arn-cloudformation) or [Option 2](#option-2-bucket-access-with-role-arn-manual-setup).
 
-With this option, you create an IAM user and provide its **Access Key ID** and **Secret Access Key** to TiDB Cloud. TiDB Cloud accesses your S3 bucket directly with these credentials — no cross-account role configuration is needed.
+With this option, you create an IAM user and provide its **Access Key ID** and **Secret Access Key** to TiDB Cloud. TiDB Cloud accesses your S3 bucket directly with these credentials.
 
 #### 3.1 Create an IAM user and access key
 
 1. Open the [IAM Console](https://console.aws.amazon.com/iam/), go to **Users → Create user**.
 2. Enter a user name (for example, `tidb-cloud-lake-user`).
-3. Select **Access key — Programmatic access**, and attach the following **inline policy** (or create a managed policy and attach it). Replace `YOUR_BUCKET_NAME` and `your-prefix` with your actual values, and remove the `SQSConsumerAccess` statement if you do not need event-driven ingestion:
+3. Select **Access key**, and attach the following **inline policy** (or create a managed policy and attach it). Replace `YOUR_BUCKET_NAME` and `your-prefix` with your actual values, and remove the `SQSConsumerAccess` statement if you do not need event-driven ingestion:
 
     ```json
     {
@@ -241,7 +241,7 @@ With this option, you create an IAM user and provide its **Access Key ID** and *
 
 4. Complete the user creation, and save the **Access Key ID** and **Secret Access Key**. You need them when you configure the External Stage in the TiDB Cloud console.
 
-    > ⚠️ **The Secret Access Key is only shown once at creation time.** Make sure to save it immediately.
+    > **The Secret Access Key is only shown once at creation time.** Make sure to save it immediately.
 
 #### 3.2 (Optional) Enable event-driven ingestion with SQS
 
@@ -306,7 +306,7 @@ This section covers the setup for Object Storage Service (OSS). TiDB Cloud write
 > 💡 If you already have an OSS bucket ready, skip this step — just make sure the bucket region matches the region of your TiDB Cloud instance.
 
 1. Open the [OSS Console](https://oss.console.aliyun.com/) and create a new bucket.
-2. Select a region — **make sure this region matches the region of your TiDB Cloud instance.**
+2. Select a region, **make sure this region matches the region of your TiDB Cloud instance.**
 3. Optionally, create a folder (prefix) inside the bucket to organize TiDB Cloud data (for example, `oss://tidb-cloud-lake-data/my-cluster/`).
 
 > **Record the following — you will need them in later steps:**
@@ -370,8 +370,8 @@ After completing the Alibaba Cloud setup, you have the following resources ready
 
 | Resource | Where to find it |
 |----------|------------------|
-| **OSS URI** | From Step 1 — e.g. `oss://tidb-cloud-lake-data/my-cluster/` |
-| **Access Key ID** | From Step 2 — e.g. `LTAI5t...` |
-| **Access Key Secret** | From Step 2 — saved at creation time |
+| **OSS URI** | From Step 1, for example, `oss://tidb-cloud-lake-data/my-cluster/` |
+| **Access Key ID** | From Step 2, for example, `LTAI5t...` |
+| **Access Key Secret** | From Step 2, saved at creation time |
 
 Open the TiDB Cloud Console, navigate to your Lake deployment, and enter these values in the **External Stage** settings to complete the data pipeline setup.
