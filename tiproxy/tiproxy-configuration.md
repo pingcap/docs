@@ -256,7 +256,7 @@ Configuration for location-based load balancing. This item takes effect only whe
 
 + Default value: `0`
 + Support hot-reload: yes
-+ Range:`>= 0`
++ Range: `>= 0`
 + Specifies the number of connections migrated per second for location-based load balancing. `0` means the default migration rate is used.
 
 #### `conn-count` <span class="version-mark">New in v1.3.3</span>
