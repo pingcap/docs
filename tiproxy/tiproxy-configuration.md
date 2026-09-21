@@ -240,7 +240,7 @@ Configuration for CPU-based load balancing. This item takes effect only when [`p
 + Default value: `1`
 + Hot-reload supported: Yes
 + Range: `0` or `[0.05, 1]`
-+ Specifies the minimum CPU usage difference required to trigger CPU-based connection migration. Migration is triggered when the CPU usage difference between the source backend and the target backend reaches this threshold. For example, `0.1` means migration can be triggered when the difference reaches 10%. The default value `1` means whether to migrate depends only on adaptive rules. If you need more balanced CPU usage across backends, you can reduce this value appropriately.
++ Specifies the minimum CPU usage difference required to trigger CPU-based connection migration. Migration is triggered when the CPU usage difference between the source backend and the target backend reaches this threshold. For example, `0.1` means migration can be triggered when the difference reaches 10%. The default value `1` means whether to migrate depends only on adaptive rules. `0` means this parameter uses the default value. If you need more balanced CPU usage across backends, you can reduce this value appropriately.
 
 #### `location` <span class="version-mark">New in v1.3.3</span>
 
@@ -257,7 +257,7 @@ Configuration for location-based load balancing. This item takes effect only whe
 + Default value: `0`
 + Hot-reload supported: Yes
 + Value range: `>= 0`
-+ Specifies the number of connections migrated per second for location-based load balancing. `0` means the default migration rate is used (1 connection per second).
++ Specifies the number of connections migrated per second for location-based load balancing. `0` means the default migration rate is used.
 
 #### `conn-count` <span class="version-mark">New in v1.3.3</span>
 
@@ -275,7 +275,7 @@ Configuration for connection-count-based load balancing.
 + Default value: `1.2`
 + Hot-reload supported: Yes
 + Value range: `0` or `> 1`
-+ Specifies the connection count ratio threshold for triggering connection-count-based migration. When the ratio of the backend with the most connections to the backend with the fewest connections exceeds this threshold, TiProxy starts migrating connections. Increasing this value can reduce migration frequency.
++ Specifies the connection count ratio threshold for triggering connection-count-based migration. When the ratio of the backend with the most connections to the backend with the fewest connections exceeds this threshold, TiProxy starts migrating connections. Increasing this value can reduce migration frequency. `0` means this parameter uses the default value.
 
 ### ha
 
