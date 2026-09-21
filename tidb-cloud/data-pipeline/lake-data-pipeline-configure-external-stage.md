@@ -294,6 +294,10 @@ Open the TiDB Cloud console data pipeline configuration and enter these values i
 
 # Alibaba Cloud
 
+> **Note:**
+>
+> Alibaba Cloud OSS support for the full Data Pipeline path (Export → Changefeed → Lake) is not yet fully verified. The instructions below cover bucket and credential setup, but the end-to-end behavior may differ from AWS S3. If you encounter issues, contact TiDB Cloud Support.
+
 This section covers the setup for Object Storage Service (OSS). TiDB Cloud writes incremental data and snapshots to your OSS bucket, and TiDB Cloud Lake reads the data from it.
 
 ## Prerequisites

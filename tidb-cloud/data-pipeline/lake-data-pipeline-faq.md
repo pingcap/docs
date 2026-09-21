@@ -30,5 +30,5 @@ In event-driven mode, the Changefeed still flushes data to the external stage on
 A data pipeline does not introduce a separate billing category. The cost comes from the existing components involved in the pipeline:
 
 1. **Export** (one-time): billed for the full snapshot export.
-2. **Changefeed** (ongoing): billed for continuously hourly.
+2. **Changefeed** (ongoing): billed hourly for continuous replication.
 3. **TiDB Cloud Lake** (ongoing): billed for data storage and warehouse compute. For details, see [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/).

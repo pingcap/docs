@@ -20,8 +20,8 @@ Data Pipeline replicates historical and incremental data from your {{{ .premium 
 ## Restrictions
 
 - The TiDB Cloud Lake warehouse must be in the **same region** as your {{{ .premium }}} instance.
-- Only tables with a **primary key** can be replicated incrementally. If a table in the sync scope has no primary key, its incremental replication fails and an error is reported for that table.
-- You can create up to 100 data pipelines per {{{ .premium }}} instance.
+- Only tables with a **primary key** can be replicated incrementally. Tables without a primary key are listed in the **Filter results** panel during pipeline creation. If included in the sync scope, their incremental replication is skipped.
+- You can create up to 100 changefeeds per {{{ .premium }}} instance. Each data pipeline with incremental replication consumes one changefeed slot.
 - Deleting a data pipeline does **not** delete the data already written to TiDB Cloud Lake, nor the target databases and tables in your warehouse.
 
 ## Prerequisites
@@ -50,7 +50,7 @@ Before you begin, make sure that you have:
 
 ### Configure the external stage
 
-An **external stage** is the object storage that bridges the two sides of a data pipeline: TiDB Cloud writes the exported snapshot and the captured row changes to the stage, and TiDB Cloud Lake loads the data from the stage into the target warehouse. See more details about [Why does a data pipeline require an external stage?](#why-does-a-data-pipeline-require-an-external-stage).
+An **external stage** is the object storage that bridges the two sides of a data pipeline: TiDB Cloud writes the exported snapshot and the captured row changes to the stage, and TiDB Cloud Lake loads the data from the stage into the target warehouse. See more details about [Why does a data pipeline require an external stage?](/tidb-cloud/data-pipeline/lake-data-pipeline-faq.md#why-does-a-data-pipeline-require-an-external-stage).
 
 Before you configure the external stage, create an S3 bucket in the same region as your {{{ .premium }}} instance. Currently, only Amazon S3 is supported.
 
@@ -66,7 +66,7 @@ To let TiDB Cloud write data to the stage and TiDB Cloud Lake read data from it,
 
 One IAM role is shared by TiDB Cloud (which writes to the stage) and TiDB Cloud Lake (which reads from the stage), so that you configure the authorization only once and no long-lived access key is stored. You can create the role with the CloudFormation template provided by TiDB Cloud, or set it up manually in AWS.
 
-For the complete AWS-side setup, see [[Setup AWS External Stage for Data Pipeline]]. After the role is created, in the TiDB Cloud console, copy the `RoleARN` output into the **Role ARN** field, and, if you also created an SQS queue, copy the queue ARN into the **SQS Queue URL** field.
+For the complete AWS-side setup, see [Set Up External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline/lake-data-pipeline-configure-external-stage.md#aws). After the role is created, in the TiDB Cloud console, copy the `RoleARN` output into the **Role ARN** field, and, if you also created an SQS queue, copy the queue URL into the **SQS Queue URL** field.
 
 ##### Use an AWS access key
 
@@ -74,7 +74,7 @@ For the complete AWS-side setup, see [[Setup AWS External Stage for Data Pipelin
 >
 > Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For stronger security, use **AWS Role ARN** instead.
 
-For the complete AWS-side setup, including the IAM user, its permissions, and the optional SQS queue, see [[Setup Access Key for TiDB Cloud Lake Data Pipeline]]. Then, in the TiDB Cloud console, select **AWS Access Key**, and fill in **Access Key ID** and **Secret Access Key**.
+For the complete AWS-side setup, including the IAM user, its permissions, and the optional SQS queue, see [Bucket Access with Access Key](/tidb-cloud/data-pipeline/lake-data-pipeline-configure-external-stage.md#option-3-bucket-access-with-access-key-not-recommended). Then, in the TiDB Cloud console, select **AWS Access Key**, and fill in **Access Key ID** and **Secret Access Key**.
 
 After you have filled in the required information for the method you selected, click **Test Connection** to verify that TiDB Cloud can access the bucket. If the check fails, verify the bucket region and the permissions granted to the role or the access key, and then test the connection again.
 
@@ -87,7 +87,7 @@ In the **Replication Data** area, configure how the data is replicated:
     - **Full Data + Incremental Data** (default): exports a full snapshot of the selected source data, and then continuously replicates row changes. This is the recommended mode for ongoing synchronization.
     - **Full Data**: exports a one-time full snapshot of the selected source data only. No incremental data is replicated, and changes made on the source after the snapshot are ignored.
 
-2. **Sync Interval**: the interval at which the data pipeline scans for new data. The default is `5 minutes`. Shorter intervals reduce data latency but increase the number of API calls to cloud storage. 
+2. **Sync Interval**: the end-to-end latency target for the data pipeline. The pipeline splits this interval between the Changefeed flush cycle and the Lake polling cycle. Shorter intervals reduce data latency but increase the number of API calls to cloud storage. The default value is shown in the console.
 
 3. **Changefeed Capacity Units**: the processing power allocated for incremental replication, shown together with the maximum replication performance it supports. For example, `2 CCUs (the max replication performance is 5000 row/s)`.
 
@@ -140,13 +140,13 @@ Both actions are available in the action menu on the list page and in the action
 2. Read the warning and confirm the operation. Deleting a data pipeline:
 
     - Immediately stops all data replication.
-    - Removes the TiDB Cloud Lake data source and integration task associated with the pipeline.
+    - Attempts to remove the TiDB Cloud Lake data source and integration task associated with the pipeline. If the Lake side refuses the request, these resources may remain and require manual cleanup.
     - **Does not** delete the data already written to TiDB Cloud Lake.
     - **Does not** delete the target databases or tables in the warehouse.
 
 This action cannot be undone.
 
-For frequently asked questions about Data Pipeline, see [Data Pipeline FAQ](/tidb-cloud/pipeline/lake-data-pipeline-faq.md).
+For frequently asked questions about Data Pipeline, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline/lake-data-pipeline-faq.md).
 
-For details on DDL, DML, and column type support, see [Data Pipeline Support Matrix](/tidb-cloud/pipeline/lake-data-pipeline-support-matrix.md).
+For details on DDL, DML, and column type support, see [Data Pipeline Support Matrix](/tidb-cloud/data-pipeline/lake-data-pipeline-support-matrix.md).
 

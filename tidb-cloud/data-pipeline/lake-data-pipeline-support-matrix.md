@@ -5,7 +5,11 @@ summary: Reference for DDL, DML, and column type support in TiDB Cloud Data Pipe
 
 # Data Pipeline Support Matrix
 
-This document summarizes the DDL, DML, and column type support for TiDB Cloud Data Pipeline. Use it as a reference when planning your data pipeline setup or troubleshooting replication behavior.
+This document summarizes the DDL, DML, and column type support for TiDB Cloud Data Pipeline based on tested behavior. Use it as a reference when planning your data pipeline setup or troubleshooting replication behavior.
+
+> **Note:**
+>
+> The behaviors described below are derived from end-to-end testing of the Data Pipeline with TiDB Cloud Lake. Actual behavior may depend on the specific TiCDC and Lake versions deployed. If you observe different behavior, contact TiDB Cloud Support.
 
 Legend:
 - ✅ = Supported

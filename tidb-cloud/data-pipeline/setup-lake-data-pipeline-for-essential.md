@@ -10,7 +10,7 @@ TiDB Cloud Essential instances do not support the native Data Pipeline UI. This 
 - The TiDB Cloud Lake warehouse must be in the **same region** as your Essential instance.
 - Only tables with a **primary key** can be replicated incrementally.
 - The pipeline requires manual setup and maintenance of IAM roles, changefeeds, and Lake integrations.
-- For details on DDL, DML, and column type support, see [Data Pipeline Support Matrix](/tidb-cloud/pipeline/lake-data-pipeline-support-matrix.md).
+- For details on DDL, DML, and column type support, see [Data Pipeline Support Matrix](/tidb-cloud/data-pipeline/lake-data-pipeline-support-matrix.md).
 
 # Prerequisites
 
@@ -31,8 +31,8 @@ Before you begin, make sure that you have:
 
 The data pipeline components (Export, Changefeed, and Lake) all require access to the same S3 bucket. Choose one of the following methods:
 
-- **Role ARN** (recommended): a single IAM role shared by all three components. More secure — no long-lived credentials.
-- **Access Key**: simpler to set up, but requires manual credential management and rotation.
+- **Role ARN**: a single IAM role shared by all three components. More secure — no long-lived credentials.
+- **Access Key**: simpler to set up and required when Role ARN is unavailable; requires manual credential management and rotation.
 
 ## Use a Role ARN
 
@@ -40,7 +40,7 @@ The Export CloudFormation stack creates the IAM role initially; you then extend 
 
 ### Step 1: Create the role with Export CloudFormation
 
-In the TiDB Cloud console, navigate to **Data → Export** and start a new export task. When configuring the S3 destination with **Role ARN** authentication, TiDB Cloud provides a CloudFormation link. Use it to create the IAM role.
+In the TiDB Cloud console, navigate to **Data → Import**, click **Export Data to** in the upper-right corner, and choose **Amazon S3**. When configuring the S3 destination with **Role ARN** authentication, TiDB Cloud provides a CloudFormation link. Use it to create the IAM role.
 
 After the stack is created, record the **Role ARN** from the stack **Outputs** (for example, `arn:aws:iam::<account-id>:role/<role-name>`).
 
@@ -56,10 +56,12 @@ The role must trust three TiDB Cloud services. Collect the following values, the
 
 - **Export**: trust relationship is already configured by CloudFormation. No action needed.
 - **Changefeed**: call the Open API to get the required values:
+
     ```shell
     curl -L -X GET 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/changefeeds:getCloudStorageAuthConfig' \
-      -u '<apiUser>:<apiKey>' --digest
+      -u '<Public Key>:<Private Key>' --digest
     ```
+
     Record `tidbCloudAccountId` and `tidbCloudAccountExternalId` from the response.
 - **Lake**: in the Lake staging console, navigate to **Data → Data Sources → Create**, in the **Basic Info** section select **Service: TiDB**, then under **Trust Cloud Platform roles**, record the following values:
     - Lake Setup & Validation Role ARN
@@ -214,7 +216,7 @@ Record the **Access Key ID** and **Secret Access Key** for use in later steps.
 
 # Export full snapshot to S3
 
-In the TiDB Cloud console, navigate to **Data → Export** and create a new export task.
+In the TiDB Cloud console, navigate to **Data → Import**, click **Export Data to** in the upper-right corner, and choose **Amazon S3** to create a new export task.
 
 **Configuration:**
 
@@ -253,7 +255,7 @@ Call the changefeed creation API with the following required fields:
 ```shell
 curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/changefeeds' \
   -H 'Content-Type: application/json' \
-  -u '<apiUser>:<apiKey>' --digest \
+  -u '<Public Key>:<Private Key>' --digest \
   -d '{
     "displayName": "<changefeed-name>",
     "sink": {
@@ -293,6 +295,7 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
 > The changefeed URI must use the `incremental/` sub-path under the same prefix as the export snapshot. The IAM role's permissions (from [Step 3](#step-3-expand-permissions-to-cover-the-full-pipeline-prefix)) must cover this path.
 >
 > If you are using **Access Key** instead of Role ARN, replace the `s3` block in the request body with:
+>
 > ```json
 > "s3": {
 >   "uri": "s3://<bucket>/<prefix>/incremental/",
@@ -303,6 +306,7 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
 >   }
 > }
 > ```
+>
 
 ---
 
@@ -332,12 +336,12 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
     - **Table Rules**: `*.*` to sync all exported tables.
     - **Changefeed S3 Prefix**: `<prefix>/incremental/`.
     - **Dumpling S3 Prefix**: `<prefix>/snapshot/`.
-    - **Poll Interval**: default or as needed. A shorter interval reduces data latency but increases Lake hosting cost.
-    - **Merge Interval**: default or as needed. A shorter interval reduces data latency but increases Lake hosting cost.
+    - **Poll Interval**: the interval at which Lake scans the external stage for new data. Default is 60 seconds. A shorter interval reduces data latency but increases Lake hosting cost.
+    - **Merge Interval**: the interval at which Lake merges incremental data into the warehouse. Default is 30 seconds. A shorter interval reduces data latency but increases Lake hosting cost.
     - **Warehouse**: select the target warehouse.
 3. Click **Create**.
 4. After creation, the integration is **Stopped** by default. Click the integration action button → **Start** to begin data loading.
 
 ---
 
-For frequently asked questions about Data Pipeline, see [Data Pipeline FAQ](/tidb-cloud/pipeline/lake-data-pipeline-faq.md).
+For frequently asked questions about Data Pipeline, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline/lake-data-pipeline-faq.md).

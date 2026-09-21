@@ -23,7 +23,7 @@ You can also run a full-export-only pipeline if you need a one-time snapshot wit
 
 An **external stage** (Amazon S3 or Alibaba Cloud OSS) is used as the intermediate storage between your TiDB Cloud instance and TiDB Cloud Lake. TiDB Cloud writes exported snapshots and captured row changes to the stage, and TiDB Cloud Lake loads data from the stage into the target warehouse. This decouples the write rate from the consumption rate, improving reliability and giving you control over cost and latency.
 
-For more information, see [Data Pipeline FAQ](/tidb-cloud/pipeline/lake-data-pipeline-faq.md).
+For more information, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline/lake-data-pipeline-faq.md).
 
 ## Availability
 
@@ -34,8 +34,8 @@ For more information, see [Data Pipeline FAQ](/tidb-cloud/pipeline/lake-data-pip
 
 For setup instructions, refer to the guide that matches your plan:
 
-- [Set Up Data Pipeline to TiDB Cloud Lake ({{{ .premium }}})](/tidb-cloud/pipeline/setup-lake-data-pipeline-for-premium.md)
-- [Set Up Data Pipeline to TiDB Cloud Lake ({{{ .essential }}})](/tidb-cloud/pipeline/setup-lake-data-pipeline-for-essential.md)
+- [Set Up Data Pipeline to TiDB Cloud Lake ({{{ .premium }}})](/tidb-cloud/data-pipeline/setup-lake-data-pipeline-for-premium.md)
+- [Set Up Data Pipeline to TiDB Cloud Lake ({{{ .essential }}})](/tidb-cloud/data-pipeline/setup-lake-data-pipeline-for-essential.md)
 
 > **Note:**
 >
@@ -43,6 +43,6 @@ For setup instructions, refer to the guide that matches your plan:
 
 ## What's next
 
-- [Create and manage a data pipeline from your {{{ .premium }}} instance to TiDB Cloud Lake.](/tidb-cloud/pipeline/setup-lake-data-pipeline-for-premium.md)
-- [TiDB Lake Data Pipeline DDL, DML, and type support reference.](/tidb-cloud/pipeline/lake-data-pipeline-support-matrix.md)
-- [Data Pipeline FAQ.](/tidb-cloud/pipeline/lake-data-pipeline-faq.md)
+- [Create and manage a data pipeline from your {{{ .premium }}} instance to TiDB Cloud Lake.](/tidb-cloud/data-pipeline/setup-lake-data-pipeline-for-premium.md)
+- [TiDB Lake Data Pipeline DDL, DML, and type support reference.](/tidb-cloud/data-pipeline/lake-data-pipeline-support-matrix.md)
+- [Data Pipeline FAQ.](/tidb-cloud/data-pipeline/lake-data-pipeline-faq.md)
