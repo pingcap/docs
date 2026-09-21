@@ -6019,7 +6019,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb">
 
-> **提示：**
+> **Tip:**
 >
 > - 在生产环境中启用 `tidb_slow_log_rules` 时，建议同时配置 [`tidb_slow_log_max_per_sec`](#tidb_slow_log_max_per_sec)，以避免过于频繁地打印慢查询日志。
 > - 建议先从更严格的条件开始，再根据故障排查需求逐步放宽。有关性能影响的更多信息，请参见[建议](/config-slow-query-trigger-rules.md#recommendations)。
@@ -6027,7 +6027,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
-> **提示：**
+> **Tip:**
 >
 > 建议先从更严格的条件开始，再根据故障排查需求逐步放宽。有关性能影响的更多信息，请参见[建议](/config-slow-query-trigger-rules.md#recommendations)。
 
