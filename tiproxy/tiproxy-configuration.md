@@ -267,7 +267,7 @@ Configuration for connection-count-based load balancing.
 
 + Default value: `0`
 + Support hot-reload: yes
-+ Range:`>= 0`
++ Range: `>= 0`
 + Specifies the number of connections migrated per second for connection-count-based load balancing. `0` means TiProxy automatically calculates the migration rate. If you observe connections frequently migrating back and forth, you can reduce this value appropriately.
 
 ##### `count-ratio-threshold` <span class="version-mark">New in v1.3.3</span>
@@ -314,7 +314,7 @@ Starting from v1.3.1, TiProxy supports configuring multiple virtual IP addresses
 
 + Default value: `5`
 + Support hot-reload: no
-+ Range:`>= 0`
++ Range: `>= 0`
 + Specifies the number of GARP (Gratuitous ARP) packets sent immediately after a TiProxy instance takes over and binds the virtual IP. GARP is used to notify switches and hosts to update the MAC address corresponding to the virtual IP, so that client traffic can be switched to the TiProxy instance that has taken over the virtual IP as soon as possible. Sending multiple packets continuously can reduce the risk of switchover delay caused by the loss of the first GARP packet. `0` is automatically adjusted to `1`.
 
 #### `garp-refresh-count` <span class="version-mark">New in v1.3.3</span>
