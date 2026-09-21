@@ -271,8 +271,7 @@
 | listening | （服务）监听 |  |
 | listening address | 监听地址 |  |
 | load | 负载 |  |
-| load | 加载 |  |
-| load data | 导入数据 | In TiDB Cloud Lake docs, use this term, especially in TOC entries. |
+| load | 加载 | Keep both the Chinese and English terms "加载 (Load)" when it first appears in a document. |
 | Local Persistent Volume(s)/LPV(s) | 本地持久化卷 |  |
 | local overlay | 本地叠加层 | In TiDB Cloud Filesystem mount docs, it refers to files that a mount profile keeps on the local machine instead of in the remote namespace. |
 | locality | 局部性 |  |
@@ -472,7 +471,7 @@
 | system variable | 系统变量 |  |
 | table schema | 表结构 |  |
 | target machine | （部署）目标机器 |  |
-| task flow | 任务流 | Keep both the English and Chinese terms "任务流 (Task Flow)" when it first appears in a document. |
+| task flow | 任务流 | Keep both the Chinese and English terms "任务流 (Task Flow)" when it first appears in a document. |
 | technology stack | 技术栈 |  |
 | test | 测试 |  |
 | configuration file | 配置文件 |  |
@@ -521,7 +520,7 @@
 | unidirectional data flow | 单向数据流 |  |
 | union | 联合体 |  |
 | Universally Unique Identifier (UUID) | 通用唯一识别码 |  |
-| unload data | 导出数据 | In TiDB Cloud Lake docs, use this term, especially in TOC entries. |
+| unload | 卸载 | Keep both the Chinese and English terms "卸载 (Unload)" when it first appears in a document. |
 | unsigned integer | 无符号整数 |  |
 | update | 修改（如：修改行） |  |
 | user identification | 用户标识 |  |
@@ -532,11 +531,11 @@
 | verification | 验证 |  |
 | verify | 验证 |  |
 | Vertical Pod Autoscaling (VPA) | Pod 自动垂直扩容 | TiDB on Kubernetes |
-| Warehouse | 计算集群 | Keep both the English and Chinese terms "计算集群 (Warehouse)" when it first appears in a document. |
+| Warehouse | 计算集群 | In TiDB Cloud Lake docs, keep both the Chinese and English terms "计算集群 (Warehouse)" when it first appears in a document. |
 | wildcard | 通配符 |  |
 | worktree | 工作树 | In Git workspace docs, it refers to a Git linked worktree. |
 | work queue(s) | 工作队列 |  |
-| Worksheet | 工作区 | Keep both the English and Chinese terms "工作区 (Worksheet)" when it first appears in a document. |
+| Worksheet | 工作区 | Keep both the Chinese and English terms "工作区 (Worksheet)" when it first appears in a document. |
 | wrapper | 封装器 |  |
 | write amplification (WA) | 写放大 |  |
 | write buffer | 写缓冲器 |  |
