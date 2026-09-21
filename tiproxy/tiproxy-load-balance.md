@@ -103,11 +103,7 @@ pd_servers:
 
 ## Status-based load balancing
 
-<<<<<<< HEAD
-TiProxy periodically checks whether a TiDB server can provide services properly using the SQL port and status port, including whether it is offline or shutting down.
-=======
 TiProxy periodically checks whether a TiDB server can provide services normally using the SQL port and status port, such as whether it is offline or shutting down.
->>>>>>> 63ffe3e9ff (Update TiProxy to v1.3.3 (#23905) (#23908))
 
 ## Health-based load balancing
 
