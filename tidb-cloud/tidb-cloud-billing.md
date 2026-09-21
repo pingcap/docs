@@ -140,7 +140,7 @@ The following are billing explanations related to storage:
 
     Before you confirm the change, the **Summary** pane on the **Update Capacity** page shows the current coefficient and the new one. For the IA storage unit price, see [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
 
-    <CustomContent plan="byoc">On {{{ .byoc }}}, no coefficient applies. The additional local cache resources that a higher cache level requires are provisioned in your own cloud account and are billed by your cloud provider.</CustomContent>
+    On {{{ .byoc }}}, no coefficient applies. The additional local cache resources that a higher cache level requires are provisioned in your own cloud account and are billed by your cloud provider.
 
 - **Columnar storage**: Columnar storage is powered by the **TiFlash** engine. <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
