@@ -185,7 +185,7 @@ Health-based load balancing configuration. It takes effect only when [`policy`](
 
 + Default value: `true`
 + Hot-reload supported: Yes
-+ Whether to enable [health-based load balancing](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing).
++ Controls whether to enable [health-based load balancing](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing).
 
 ##### `migrations-per-second` <span class="version-mark">New in v1.3.3</span>
 
@@ -202,7 +202,7 @@ Configuration for memory-based load balancing. This item takes effect only when 
 
 + Default value: `true`
 + Hot-reload supported: Yes
-+ Whether to enable [memory-based load balancing](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing).
++ Controls whether to enable [memory-based load balancing](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing).
 
 ##### `migrations-per-second` <span class="version-mark">New in v1.3.3</span>
 
@@ -219,7 +219,7 @@ Configuration for CPU-based load balancing. This item takes effect only when [`p
 
 + Default value: `true`
 + Hot-reload supported: Yes
-+ Whether to enable [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
++ Controls whether to enable [CPU-based load balancing](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing).
 
 ##### `migrations-per-second` <span class="version-mark">New in v1.3.3</span>
 
@@ -250,7 +250,7 @@ Configuration for location-based load balancing. This item takes effect only whe
 
 + Default value: `true`
 + Hot-reload supported: Yes
-+ Whether to enable [location-based load balancing](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing).
++ Controls whether to enable [location-based load balancing](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing).
 
 ##### `migrations-per-second` <span class="version-mark">New in v1.3.3</span>
 
