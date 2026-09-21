@@ -1,20 +1,20 @@
 ---
-title: TiDB Cloud Filesystem Overview
+title: TiDB Cloud Filesystem
 summary: Learn what TiDB Cloud Filesystem is, when to use it, and how to access and share persistent files across applications, automation, and AI agents.
 ---
 
-# TiDB Cloud Filesystem Overview
+# TiDB Cloud Filesystem
 
-TiDB Cloud Filesystem is persistent, shared file storage that applications, automation, and AI agents can access across machines and sessions.
+TiDB Cloud Filesystem is a persistent, shared cloud file system for applications, automation, and AI agents. Files remain available independently of the machine or process that creates them, so you can reuse the same workspace across sessions and environments.
 
-Use a Filesystem when files need to remain available after a local process or temporary environment ends, or when multiple environments need to work with the same files without repeatedly copying them between machines.
+Use TiDB Cloud Filesystem when files need to remain available after a process or sandbox ends, when your workflow spans multiple machines or temporary environments, or when multiple users or workloads need controlled access to the same files.
 
-For example, you can use a Filesystem to:
+For example, you can use a Filesystem for the following tasks:
 
-- continue working with the same files from another machine or environment;
-- share files or results with another user, application, CI job, or agent;
-- mount shared files as a local directory for tools that expect local file paths; and
-- isolate changes in layers before applying selected changes to shared files.
+- Access and modify the same files from different machines or environments.
+- Share files and results with users, applications, CI jobs, or AI agents.
+- Mount the Filesystem as a local directory for tools that require local file paths.
+- Isolate file changes in layers before applying them to shared files.
 
 > **Note:**
 >
@@ -22,26 +22,26 @@ For example, you can use a Filesystem to:
 
 ## How TiDB Cloud Filesystem works
 
-Files in a TiDB Cloud Filesystem are stored independently of the machine or process that accesses them. When you move to another environment, you can access the same Filesystem instead of copying or recreating its files.
+TiDB Cloud Filesystem persists in TiDB Cloud independently of the machines and processes that access it. Different authorized environments can therefore access the same files without copying them between machines.
 
-You use TiDB Cloud CLI (`ti`) to create and manage Filesystems and to work with their files. You do not need to provision or manage a separate database to use TiDB Cloud Filesystem.
+To create and manage Filesystems and access their files, you can use [TiDB Cloud CLI (`ti`)](/ai/ti/ti-overview.md). You do not need to provision or manage a TiDB database to use TiDB Cloud Filesystem.
 
-You can work with Filesystem data in two main ways:
+You can access and work with Filesystem data in two ways:
 
-- **Use `ti fs` commands** to upload, download, read, organize, and search files directly without mounting the Filesystem.
-- **Mount the Filesystem as a local directory** so applications and tools can work with its files through normal filesystem paths.
+- **Use `ti fs` commands**: upload, download, read, organize, and search files directly from the command line without mounting the Filesystem.
+- **Mount the Filesystem as a local directory**: let applications and tools access Filesystem data through normal local file paths.
 
-For more information, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) and [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md).
+For more information, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) and [Mount TiDB Cloud Filesystem Overview](/tidb-cloud-filesystem/filesystem-mount.md).
 
 ## Share files across environments
 
-A Filesystem can be accessed from multiple machines or environments. Each environment can use its own credential instead of sharing the credentials of the user who created the Filesystem.
+Multiple machines or environments can access a Filesystem simultaneously. Each environment can use its own Filesystem token, so credentials do not need to be shared across environments.
 
 For example:
 
-- a CI job can write build output to a Filesystem and another environment can read it later;
-- an agent can continue working with files created during an earlier session; or
-- a reviewer can receive read-only access to a specific directory.
+- A CI job can write build output to a Filesystem and another environment can read it later.
+- An AI agent can continue working on files created during an earlier session.
+- A reviewer can receive read-only access to a specific directory.
 
 TiDB Cloud Filesystem provides owner tokens and scoped tokens so you can control which files and operations each user or workload can access.
 
@@ -49,9 +49,9 @@ For more information, see [TiDB Cloud Filesystem Authorization](/tidb-cloud-file
 
 ## Isolate and manage changes
 
-When multiple tasks need to work from the same files without immediately changing the shared base, you can create Filesystem layers.
+To let multiple tasks work from the same files without modifying the shared base, you can create Filesystem layers.
 
-Each layer provides an isolated view where changes can be made independently. You can create checkpoints of a layer and later commit selected changes to the base Filesystem.
+Each layer provides an isolated view where changes can be made independently. You can create checkpoints for a layer and later commit selected changes to the base Filesystem.
 
 For more information, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
 

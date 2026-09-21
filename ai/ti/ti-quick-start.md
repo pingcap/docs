@@ -15,7 +15,7 @@ This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), a
 
 ## Prerequisites
 
-Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the [TiDB Cloud console](https://tidbcloud.com/).
+Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the [TiDB Cloud console](https://tidbcloud.com/). The keys must have the `Organization Owner` access to your organization.
 
 ## Step 1. Install TiDB Cloud CLI
 

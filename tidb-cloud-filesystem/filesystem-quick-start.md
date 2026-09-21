@@ -1,11 +1,15 @@
 ---
 title: Get Started with TiDB Cloud Filesystem
-summary: Create a TiDB Cloud Filesystem with the CLI, write and read a file, and keep the workspace available for another session.
+summary: Create a TiDB Cloud Filesystem, write and read a persistent file, and keep the workspace available across sessions.
 ---
 
 # Get Started with TiDB Cloud Filesystem
 
-Create a workspace when your application's or agent's files need to outlive the machine that produces them. This quick start writes and reads a remote file without requiring a mount. You can mount the same Filesystem afterward.
+[TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-overview.md) is a persistent, shared cloud file system for applications, automation, and AI agents. Files remain available independently of the machine or process that creates them, so you can reuse the same workspace across sessions and environments.
+
+Currently, you can access and manage TiDB Cloud Filesystems using the [TiDB Cloud CLI (`ti`)](/ai/ti/ti-quick-start.md).
+
+This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), creating a Filesystem, and writing and reading a file directly from the CLI without mounting the Filesystem. You can mount the same Filesystem afterward.
 
 > **Note:**
 >
@@ -13,124 +17,153 @@ Create a workspace when your application's or agent's files need to outlive the 
 
 ## Prerequisites
 
-To create a Filesystem, obtain a TiDB Cloud API public key and private key from the [API Keys page](https://tidbcloud.com/org-settings/api-keys). The keys must have permission to create a Filesystem in your organization.
+Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the [TiDB Cloud console](https://tidbcloud.com/). The keys must have the `Organization Owner` access to your organization.
 
-If someone has already supplied you with a Filesystem token, skip resource creation and follow [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+If someone has already provided you with a Filesystem token, skip resource creation and follow [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
-## Step 1. Install the CLI
+## Step 1. Install TiDB Cloud CLI
+
+Depending on your operating system, take the following steps to install TiDB Cloud CLI.
 
 <SimpleTab>
 
 <div label="macOS or Linux">
 
-Run the installer:
+1. On macOS or Linux, run the following command to install TiDB Cloud CLI:
 
-```bash
-# Install the CLI and its bundled Filesystem runtime.
-curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
-```
+    ```bash
+    curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
+    ```
 
-After installation, add the binary directory to your current shell:
+2. Add `ti` to the current shell and verify it:
 
-```bash
-# Make the installed CLI available in this terminal.
-export PATH="$HOME/.ti/bin:$PATH"
-ti --version
-```
+    ```bash
+    export PATH="$HOME/.ti/bin:$PATH"
 
-Add the same `export PATH` line to your shell profile to use `ti` in future terminals.
+    ti --version
+    ```
+
+3. Add `export PATH="$HOME/.ti/bin:$PATH"` to your shell profile to keep `ti` available in new terminals.
+
+    For example, if you use `zsh`, run the following command:
+
+    ```bash
+    echo 'export PATH="$HOME/.ti/bin:$PATH"' >> ~/.zshrc
+    source ~/.zshrc
+    ```
 
 </div>
 
 <div label="Windows PowerShell">
 
-Run the installer:
+1. On Windows PowerShell, run the following command to install TiDB Cloud CLI:
 
-```powershell
-# Download and run the PowerShell installer.
-$script = "$env:TEMP\install-ti.ps1"
-Invoke-WebRequest https://github.com/tidbcloud/ti-cli/releases/latest/download/install.ps1 -OutFile $script
-powershell -ExecutionPolicy Bypass -File $script -Yes
-```
+    ```powershell
+    $script = "$env:TEMP\install-ti.ps1"
+    iwr https://github.com/tidbcloud/ti-cli/releases/latest/download/install.ps1 -OutFile $script
+    powershell -ExecutionPolicy Bypass -File $script -Yes
+    ```
 
-After installation, add the binary directory to your current session:
+2. Add `ti` to the current PowerShell session and verify it:
 
-```powershell
-# Make the installed CLI available in this PowerShell session.
-$env:Path = "$HOME\.ti\bin;$env:Path"
-ti --version
-```
+    ```powershell
+    $env:Path = "$HOME\.ti\bin;$env:Path"
 
-Add `$HOME\.ti\bin` to your user `PATH` for future sessions.
+    ti --version
+    ```
+
+3. Add `$HOME\.ti\bin` to your user `PATH` to keep `ti` available in new PowerShell sessions:
+
+    ```powershell
+    $tiBin = "$HOME\.ti\bin"
+    [Environment]::SetEnvironmentVariable("Path", "$tiBin;$([Environment]::GetEnvironmentVariable('Path', 'User'))", "User")
+    ```
 
 </div>
+
 </SimpleTab>
 
 > **Note:**
 >
 > On Windows, the direct file commands in this quick start are supported, but native Filesystem mounts through `ti` are not.
 
-For other installation and upgrade details, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
+For other installation and upgrade options, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
-## Step 2. Configure access
+## Step 2. Configure TiDB Cloud CLI
 
-```shell
-# Follow the prompts to save your API keys and default region.
-ti configure
-```
+1. Run the interactive configuration:
 
-Choose one of these Filesystem regions:
+    ```bash
+    ti configure
+    ```
 
-- `aws-us-east-1`
-- `aws-ap-southeast-1`
-- `aws-us-west-2`
-- `alicloud-ap-southeast-1`
+2. Provide the following information:
 
-Choose a region where you want to store the Filesystem's data. For the provider and location of each region, see [Supported regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions).
+    - A default region for CLI operations, specified as a region code such as `aws-us-east-1`. Choose a region where you want to store the Filesystem data. For the regions supported by TiDB Cloud Filesystem, see [Supported regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions).
 
-Configuration saves the inputs locally. Your first remote command verifies the credentials with the service.
+    - Your TiDB Cloud API public key and private key.
 
-## Step 3. Create the Filesystem
+The CLI saves the configuration locally. The Filesystem creation command in the next step verifies that the CLI can access TiDB Cloud using the saved credentials.
 
-```shell
-# Wait until the new Filesystem's root is readable.
+## Step 3. Create a Filesystem
+
+Create a Filesystem and wait until it is ready:
+
+```bash
 ti fs create-file-system --display-name my-workspace --wait
 ```
 
-Copy the returned `file_system_id` for the next step. The CLI stores this Filesystem's token locally, so you do not need to export a token. Treat the returned `fs_token` as a secret; do not paste the output into a public issue or log.
+The command returns information about the new Filesystem. Copy the returned `file_system_id` for use in the next step.
 
-Display names help identify resources but are not unique selectors. Subsequent commands use the ID. A failed wait does not automatically delete the created Filesystem; inspect the reported resource before creating another one. If creation reports a free-plan quota error, follow its billing link to add a payment method.
+The CLI stores the Filesystem credential locally, so you do not need to provide a Filesystem token for subsequent file operations.
+
+The display name helps you identify the Filesystem, while the Filesystem ID uniquely identifies the resource.
 
 ## Step 4. Write and read a file
 
-Replace `<file-system-id>` with the ID returned by creation:
+Write a file to the Filesystem as follows. You need to replace `<file-system-id>` with the Filesystem ID returned in the previous step.
 
-```shell
-# Store a file in the remote workspace.
-echo "Hello from my workspace" | ti fs copy-file --file-system-id "<file-system-id>" --from-stdin --to-remote /hello.txt
+```bash
+echo "Hello from my workspace" | ti fs copy-file \
+  --file-system-id "<file-system-id>" \
+  --from-stdin \
+  --to-remote /hello.txt
 ```
 
-```shell
-# Read the same file from the service.
-ti fs read-file --file-system-id "<file-system-id>" --path /hello.txt
+Then read the file:
+
+```bash
+ti fs read-file \
+  --file-system-id "<file-system-id>" \
+  --path /hello.txt
 ```
 
-The read returns `Hello from my workspace`. The file remains available after you close the terminal. There is no local mount to keep running for this workflow.
+Expected output:
+
+```text
+Hello from my workspace
+```
+
+The file is stored in TiDB Cloud Filesystem rather than in the local terminal session. It remains available after you close the terminal, and you can access it again from another session or supported environment with access to the Filesystem.
+
+This workflow accesses the file directly through `ti`; no local Filesystem mount is required.
+
+## (Optional) Clean up
+
+When you no longer need the Filesystem created in this quick start, delete it:
+
+```bash
+ti fs delete-file-system \
+  --file-system-id "<file-system-id>"
+```
+
+Replace `<file-system-id>` with the Filesystem ID returned in Step 3.
+
+Deleting the Filesystem removes the remote resource and its data.
 
 ## What's next
 
-- [Manage the Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect, check, select, and delete Filesystem resources.
-- [Mount the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) to use it through a local directory.
-- [Share the workspace](/tidb-cloud-filesystem/filesystem-sharing.md) with another machine or agent.
-- [Manage layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to review changes before publishing them.
-
-## Clean up (optional)
-
-When you no longer need this tutorial Filesystem, delete it using your TiDB Cloud API credentials:
-
-```shell
-# Permanently request deletion of only the tutorial resource.
-ti fs delete-file-system --file-system-id "<file-system-id>"
-```
-
-Deletion removes the remote resource and its data, not just a local registration. The command reports `deleting` when the asynchronous request is accepted.
+- [Manage TiDB Cloud Filesystem resources](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your Filesystems.
+- [Mount a Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) to access its files through a local directory.
+- [Share a Filesystem](/tidb-cloud-filesystem/filesystem-sharing.md) to make the same files available to another machine, user, application, or agent.
+- [Manage Filesystem layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to isolate, review, and apply file changes.
