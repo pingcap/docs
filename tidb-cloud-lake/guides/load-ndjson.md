@@ -1,9 +1,9 @@
 ---
-title: 将 NDJSON 数据导入到 TiDB Cloud Lake
+title: 将 NDJSON 加载到 TiDB Cloud Lake
 summary: NDJSON 构建于 JSON 之上，并且是 JSON 的严格子集。每一行都必须包含一个独立且完整的有效 JSON 对象。
 ---
 
-# 将 NDJSON 数据导入到 TiDB Cloud Lake
+# 将 NDJSON 加载到 TiDB Cloud Lake
 
 ## 什么是 NDJSON？ {#what-is-ndjson}
 
@@ -16,9 +16,9 @@ NDJSON 构建于 JSON 之上，并且是 JSON 的严格子集。每一行都必�
 {"title":"Title_1","author":"Author_1"}
 ```
 
-## 导入 NDJSON 文件 {#loading-ndjson-file}
+## 加载 NDJSON 文件 {#loading-ndjson-file}
 
-导入 NDJSON 文件的通用语法如下：
+加载 NDJSON 文件的通用语法如下：
 
 ```sql
 COPY INTO [<database>.]<table_name>
@@ -33,7 +33,7 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 - 有关更多 NDJSON 文件格式选项，请参见 [NDJSON 文件格式选项](/tidb-cloud-lake/sql/input-output-file-formats.md#ndjson-options)。
 - 有关更多 COPY INTO table 选项，请参见 [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md)。
 
-## 教程：从 NDJSON 文件导入数据 {#tutorial-loading-data-from-ndjson-files}
+## 教程：从 NDJSON 文件加载数据 {#tutorial-loading-data-from-ndjson-files}
 
 ### 第 1 步：创建内部 stage {#step-1-create-an-internal-stage}
 

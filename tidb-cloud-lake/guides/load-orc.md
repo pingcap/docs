@@ -1,17 +1,17 @@
 ---
-title: 将 ORC 数据导入到 TiDB Cloud Lake
+title: 将 ORC 加载到 TiDB Cloud Lake
 summary: ORC（Optimized Row Columnar）是一种在数据分析中常用的列式存储格式。
 ---
 
-# 将 ORC 数据导入到 TiDB Cloud Lake
+# 将 ORC 加载到 TiDB Cloud Lake
 
 ## 什么是 ORC？ {#what-is-orc}
 
 ORC（Optimized Row Columnar）是一种在数据分析中常用的列式存储格式。
 
-## 导入 ORC 文件 {#loading-orc-file}
+## 加载 ORC 文件 {#loading-orc-file}
 
-导入 ORC 文件的通用语法如下：
+加载 ORC 文件的通用语法如下：
 
 ```sql
 COPY INTO [<database>.]<table_name>
@@ -23,9 +23,9 @@ FILE_FORMAT = (TYPE = ORC)
 - 有关更多 ORC 文件格式选项，请参阅 [ORC 文件格式选项](/tidb-cloud-lake/sql/input-output-file-formats.md#orc-options)。
 - 有关更多 COPY INTO table 选项，请参阅 [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md)。
 
-## 教程：从 ORC 文件导入数据 {#tutorial-loading-data-from-orc-files}
+## 教程：从 ORC 文件加载数据 {#tutorial-loading-data-from-orc-files}
 
-本教程演示如何将存储在 S3 存储桶中的 ORC 文件数据导入到 {{{ .lake }}} 表中。
+本教程演示如何将存储在 S3 存储桶中的 ORC 文件数据加载到 {{{ .lake }}} 表中。
 
 ### Step 1. 创建外部 stage {#step-1-create-an-external-stage}
 

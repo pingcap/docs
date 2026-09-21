@@ -1,17 +1,17 @@
 ---
-title: 将 Avro 数据导入到 TiDB Cloud Lake
+title: 将 Avro 加载到 TiDB Cloud Lake
 summary: Apache Avro™ 是记录数据的主流序列化格式，也是流式数据管道的首选格式。
 ---
 
-# 将 Avro 数据导入到 TiDB Cloud Lake
+# 将 Avro 加载到 TiDB Cloud Lake
 
 ## 什么是 Avro？ {#what-is-avro}
 
 [Apache Avro™](https://avro.apache.org/) 是记录数据的主流序列化格式，也是流式数据管道的首选格式。
 
-## 导入 Avro 文件 {#loading-avro-file}
+## 加载 Avro 文件 {#loading-avro-file}
 
-导入 AVRO 文件的通用语法如下：
+加载 AVRO 文件的通用语法如下：
 
 ```sql
 COPY INTO [<database>.]<table_name>
@@ -23,9 +23,9 @@ FILE_FORMAT = (TYPE = AVRO)
 - 有关更多 Avro 文件格式选项，请参阅[Avro 文件格式选项](/tidb-cloud-lake/sql/input-output-file-formats.md#avro-options)。
 - 有关更多 COPY INTO table 选项，请参阅[COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md)。
 
-## 教程：通过远程 HTTP URL 将 Avro 数据导入到 {{{ .lake }}} {#tutorial-loading-avro-data-into-lake-from-remote-http-url}
+## 教程：通过远程 HTTP URL 将 Avro 数据加载到 {{{ .lake }}} {#tutorial-loading-avro-data-into-lake-from-remote-http-url}
 
-在本教程中，你将基于 Avro schema 在 {{{ .lake }}} 中创建一张表，并通过 HTTPS 直接从 GitHub 托管的 `.avro` 文件导入 Avro 数据。
+在本教程中，你将基于 Avro schema 在 {{{ .lake }}} 中创建一张表，并通过 HTTPS 直接从 GitHub 托管的 `.avro` 文件加载 Avro 数据。
 
 ### 第 1 步：查看 Avro schema {#step-1-review-the-avro-schema}
 
@@ -75,7 +75,7 @@ CREATE TABLE userdata (
 );
 ```
 
-### 第 3 步：从远程 HTTPS URL 导入数据 {#step-3-load-data-from-a-remote-https-url}
+### 第 3 步：从远程 HTTPS URL 加载数据 {#step-3-load-data-from-a-remote-https-url}
 
 ```sql
 COPY INTO userdata

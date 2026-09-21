@@ -1,9 +1,9 @@
 ---
-title: 将 CSV 数据到 TiDB Cloud Lake
+title: 将 CSV 加载到 TiDB Cloud Lake
 summary: CSV（Comma Separated Values，逗号分隔值）是一种用于存储表格数据的简单文件格式，例如电子表格或数据库中的数据。CSV 文件是纯文本文件，以表格形式包含数据，其中每一行表示一条新记录，各列之间通过分隔符分隔。
 ---
 
-# 将 CSV 数据导入到 TiDB Cloud Lake
+# 将 CSV 加载到 TiDB Cloud Lake
 
 ## 什么是 CSV？ {#what-is-csv}
 
@@ -16,9 +16,9 @@ Title_0,Author_0
 Title_1,Author_1
 ```
 
-## 导入 CSV 文件 {#loading-csv-file}
+## 加载 CSV 文件 {#loading-csv-file}
 
-导入 CSV 文件的常用语法如下：
+加载 CSV 文件的常用语法如下：
 
 ```sql
 COPY INTO [<database>.]<table_name>
@@ -36,7 +36,7 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 - 有关更多 CSV 文件格式选项，请参见 [CSV 文件格式选项](/tidb-cloud-lake/sql/input-output-file-formats.md#csv-options)。
 - 有关更多 COPY INTO table 选项，请参见 [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md)。
 
-## 教程：从 CSV 文件导入数据 {#tutorial-loading-data-from-csv-files}
+## 教程：从 CSV 文件加载数据 {#tutorial-loading-data-from-csv-files}
 
 ### 第 1 步：创建 Internal Stage {#step-1-create-an-internal-stage}
 

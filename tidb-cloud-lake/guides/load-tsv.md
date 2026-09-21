@@ -1,9 +1,9 @@
 ---
-title: 将 TSV 数据导入到 TiDB Cloud Lake
+title: 将 TSV 加载到 TiDB Cloud Lake
 summary: TSV（Tab Separated Values）是一种用于存储表格数据的简单文件格式，例如电子表格或数据库。TSV 文件格式与 CSV 非常相似，记录之间以换行符分隔，每个字段之间以制表符分隔。以下示例展示了一个包含两条记录的 TSV 文件。
 ---
 
-# 将 TSV 数据导入到 TiDB Cloud Lake
+# 将 TSV 加载到 TiDB Cloud Lake
 
 ## 什么是 TSV？ {#what-is-tsv}
 
@@ -16,9 +16,9 @@ Title_0 Author_0
 Title_1 Author_1
 ```
 
-## 导入 TSV 文件 {#loading-tsv-file}
+## 加载 TSV 文件 {#loading-tsv-file}
 
-导入 TSV 文件的通用语法如下：
+加载 TSV 文件的通用语法如下：
 
 ```sql
 COPY INTO [<database>.]<table_name>
@@ -38,7 +38,7 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 - 有关更多 TSV 文件格式选项，请参阅 [TSV 文件格式选项](/tidb-cloud-lake/sql/input-output-file-formats.md#tsv-options)。
 - 有关更多 COPY INTO table 选项，请参阅 [COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md)。
 
-## 教程：从 TSV 文件导入数据 {#tutorial-loading-data-from-tsv-files}
+## 教程：从 TSV 文件加载数据 {#tutorial-loading-data-from-tsv-files}
 
 ### 第 1 步：创建内部 stage {#step-1-create-an-internal-stage}
 
