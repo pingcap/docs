@@ -277,6 +277,13 @@ Configuration for connection-count-based load balancing.
 + Value range: `0` or `> 1`
 + Specifies the connection count ratio threshold for triggering connection-count-based migration. When the ratio of the backend with the most connections to the backend with the fewest connections exceeds this threshold, TiProxy starts migrating connections. Increasing this value can reduce migration frequency. `0` means this parameter uses the default value.
 
+### `enable-traffic-replay`
+
++ Default value: `true`
++ Support hot-reload: yes
++ Possible values: `true`, `false`
++ Specifies whether to enable [traffic replay](/tiproxy/tiproxy-traffic-replay.md). If it is set to `false`, traffic capture and replay operations will result in errors.
+
 ### ha
 
 High availability configurations for TiProxy.
