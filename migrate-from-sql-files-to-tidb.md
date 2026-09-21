@@ -74,12 +74,14 @@ To start the import, run `tidb-lightning`. If you launch the program in the comm
 
 If you import the data from S3, you need to pass in `SecretKey` and `AccessKey` of the account as environment variables. The account has the permission to access the S3 backend storage.
 
+It is recommended to use the same version of TiDB Lightning as the target TiDB cluster. Replace `<version>` with the version of your target TiDB cluster.
+
 {{< copyable "shell-regular" >}}
 
 ```shell
 export AWS_ACCESS_KEY_ID=${access_key}
 export AWS_SECRET_ACCESS_KEY=${secret_key}
-nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
+nohup tiup tidb-lightning:<version> -config tidb-lightning.toml > nohup.out 2>&1 &
 ```
 
 TiDB Lightning also supports reading credential files from `~/.aws/credentials`.
