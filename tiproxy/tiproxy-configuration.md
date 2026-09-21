@@ -274,7 +274,7 @@ Configuration for connection-count-based load balancing.
 
 + Default value: `1.2`
 + Support hot-reload: yes
-+ Range:`0` or `> 1`
++ Range: `0` or `> 1`
 + Specifies the connection count ratio threshold for triggering connection-count-based migration. When the ratio of the backend with the most connections to the backend with the fewest connections exceeds this threshold, TiProxy starts migrating connections. Increasing this value can reduce migration frequency. `0` means this parameter uses the default value.
 
 ### ha
