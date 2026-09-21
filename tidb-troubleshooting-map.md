@@ -454,7 +454,7 @@ Check the specific cause for busy by viewing the monitor **Grafana** -> **TiKV**
         - If there is a quota on CPU (for example, limited by Kubernetes settings), TiDB Lightning might not be able to read this out. In this case, `region-concurrency` must also be manually reduced.
 
     - Every additional index introduces a new KV pair for each row. If there are N indices, the actual size to be imported would be approximately (N+1) times the size of the [Dumpling](/dumpling-overview.md) output. If the indices are negligible, you may first remove them from the schema, and add them back via `CREATE INDEX` after the import is complete.
-    - The version of TiDB Lightning is old. Try the latest version, which might improve the import speed.
+    - The version of TiDB Lightning is old. A newer TiDB Lightning version might improve import performance. When upgrading, it is recommended to use a TiDB Lightning version that matches the target TiDB cluster version.
 
 - 6.2.3 `checksum failed: checksum mismatched remote vs local`.
 
