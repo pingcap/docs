@@ -247,7 +247,7 @@ summary: 了解 2024 年 TiDB Cloud 的发布说明。
     - Python 语言支持：[SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)、[Peewee](/ai/integrations/vector-search-integrate-with-peewee.md) 和 [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)。
     - 示例应用和教程：使用 [Python](/ai/quickstart-via-python.md) 或 [SQL](/ai/quickstart-via-sql.md) 对文档进行语义检索。
 
-  更多信息，参见 [向量检索（测试版）概述](/ai/concepts/vector-search-overview.md)。
+  更多信息，参见 [向量检索（测试版）概述](/ai/guides/vector-search-overview.md)。
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) 现为组织所有者提供每周邮件报告。
 

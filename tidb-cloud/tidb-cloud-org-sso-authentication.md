@@ -186,13 +186,20 @@ TiDB Cloud 为组织 SSO 提供以下认证方式：
 
 在 TiDB Cloud 中，SAML 认证方式默认禁用。启用云组织 SSO 后，你可以按如下方式启用并配置 SAML 认证方式：
 
-1. 从你的身份提供商获取 TiDB Cloud 组织 SSO 所需的以下信息：
+1. 在 TiDB Cloud 控制台的 **Authentication** 页面，在 **Authentication Methods** 区域找到 SAML 行，然后点击 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> 展开 SAML 方法详情。
+2. 在 **Authentication Method Details** 面板中，复制以下值。TiDB Cloud 会在你输入 **Sign on URL** 和 **Signing Certificate** 之前预先填充这些值：
+
+    - **Entity ID**：这是 TiDB Cloud 的服务提供商（SP）实体 ID。
+    - **Postback URL**：这是 SAML 端点（也称为 Assertion Consumer Service (ACS) URL 或 Reply URL），你的身份提供商会将 SAML 响应发送到该端点。
+
+3. 在你的身份提供商中，使用上一步中的 **Entity ID** 和 **Postback URL** 为 TiDB Cloud 创建或配置一个 SAML 应用。如果你的身份提供商由 SSO 团队管理，请将这些值提供给该团队。
+
+    然后，从你的身份提供商获取以下信息：
 
     - Sign on URL
     - Signing Certificate
 
-2. 在 TiDB Cloud 控制台的 **Authentication** 页面，在 **Authentication Methods** 区域找到 SAML 行，然后点击 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 20H21M3.00003 20H4.67457C5.16376 20 5.40835 20 5.63852 19.9447C5.84259 19.8957 6.03768 19.8149 6.21663 19.7053C6.41846 19.5816 6.59141 19.4086 6.93732 19.0627L19.5001 6.49998C20.3285 5.67156 20.3285 4.32841 19.5001 3.49998C18.6716 2.67156 17.3285 2.67156 16.5001 3.49998L3.93729 16.0627C3.59139 16.4086 3.41843 16.5816 3.29475 16.7834C3.18509 16.9624 3.10428 17.1574 3.05529 17.3615C3.00003 17.5917 3.00003 17.8363 3.00003 18.3255V20Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg> 展开 SAML 方式详情。
-3. 在认证方式详情中，你可以配置以下内容：
+4. 返回 TiDB Cloud 控制台中的 **Authentication Method Details** 面板，然后配置以下内容：
 
     - **Name**
 
@@ -226,7 +233,7 @@ TiDB Cloud 为组织 SSO 提供以下认证方式：
 
         在启用 **SCIM Provisioning Accounts** 之前，请先为要加入的用户添加并验证邮箱域名，并在 **Allowed Email Domains** 字段中进行配置。
 
-4. 点击 **Save**。
+5. 点击 **Activate**。
 
 #### 配置 SCIM 自动化管理
 

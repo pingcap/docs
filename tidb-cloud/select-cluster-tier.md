@@ -150,7 +150,7 @@ TiDB Cloud Dedicated 适用于生产环境，具备跨可用区高可用性、�
 
 ## {{{ .lake }}} {#lake}
 
-TiDB Cloud Lake 是一项面向分析工作负载的云原生数据仓库服务。它将计算与存储分离，使你能够独立配置 warehouse，随工作负载变化进行扩展，并以经济高效的方式将数据存储在对象存储中。
+[TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) 是一项面向分析工作负载的云原生数据仓库服务。它将计算与存储分离，使你能够独立配置 warehouse，随工作负载变化进行扩展，并以经济高效的方式将数据存储在对象存储中。
 
 TiDB Cloud Lake 在一个平台中支持 ANSI SQL、半结构化数据处理、向量搜索和面向 AI 的工作流。它专为希望获得托管式分析体验而无需自行运维底层基础设施的团队而设计。
 

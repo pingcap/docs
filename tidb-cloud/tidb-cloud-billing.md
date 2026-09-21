@@ -115,7 +115,7 @@ TiDB Cloud 根据你所消耗的资源进行收费。
 
     > **注意：**
     >
-    > Infrequent Access 目前对 {{{ .essential }}} 处于私有预览阶段，仅可按请求提供。
+    > Infrequent Access 目前处于私有预览阶段，仅可按请求提供。
 
 - **Columnar storage**：列存储由 **TiFlash** 引擎提供支持。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 

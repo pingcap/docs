@@ -5,7 +5,7 @@ summary: 介绍 IM（即时消息）中 AI 聊天的详细信息。
 
 # Connected：IM 中的 AI 聊天
 
-由 PingCAP 提供支持的 IM（即时消息）中的 AI 聊天，是一项可以将 TiDB AI 助手聊天机器人邀请到指定 IM 频道中，用于初步技术支持和咨询的服务。该服务基于构建在 [TiDB Vector Search](/ai/concepts/vector-search-overview.md) 之上的 Graph RAG（检索增强生成）。
+由 PingCAP 提供支持的 IM（即时消息）中的 AI 聊天，是一项可以将 TiDB AI 助手聊天机器人邀请到指定 IM 频道中，用于初步技术支持和咨询的服务。该服务基于构建在 [TiDB Vector Search](/ai/guides/vector-search-overview.md) 之上的 Graph RAG（检索增强生成）。
 
 ## 限制
 

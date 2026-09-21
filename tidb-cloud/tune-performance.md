@@ -46,6 +46,14 @@ TiDB Cloud 提供了 [慢查询](#slow-query) 和 [语句分析](#statement-anal
 
 默认情况下，执行时间超过 300 毫秒的 SQL 查询会被视为慢查询。
 
+<CustomContent plan="essential,premium">
+
+> **注意：**
+>
+> 你还可以为慢查询配置触发规则，以根据特定指标组合筛选目标语句。更多信息，请参见[为慢查询配置触发规则](/config-slow-query-trigger-rules.md)。
+
+</CustomContent>
+
 要在 <CustomContent plan="starter">{{{ .starter }}} 实例</CustomContent><CustomContent plan="essential">{{{ .essential }}} 实例</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent> 中查看慢查询，请执行以下步骤：
 
 1. [进入 **Diagnosis** 页面](#view-the-diagnosis-page)。

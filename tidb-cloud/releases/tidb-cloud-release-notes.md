@@ -8,6 +8,18 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 9 月 15 日 {#september-15-2026}
+
+**常规变更**
+
+* **TiDB Cloud CLI**
+
+  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) 现已进入公开预览版，可用于管理 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 实例和 TiDB Cloud Filesystem。TiDB Cloud Filesystem 是一种无服务器分布式文件系统，专为 AI 代理和自动化工作负载而设计。
+
+  你可以直接使用 `ti`，也可以让脚本、CI 作业和 AI 代理运行它，以自动化 TiDB Cloud 工作流。借助 `ti`，你可以创建和管理 TiDB Cloud Starter 实例、执行 SQL 语句，以及通过文件命令或支持的挂载创建和访问持久化的 Filesystem 工作区。默认 JSON 输出、JMESPath 输出查询，以及在适用命令上支持 `--wait` 和 `--dry-run`，可简化自动化流程。
+
+  更多信息，请参见 [开始使用 TiDB Cloud CLI](/ai/ti/ti-quick-start.md) 和 [TiDB Cloud CLI (`ti`) 概览](/ai/ti/ti-overview.md)。
+
 ## 2026 年 9 月 8 日 {#september-8-2026}
 
 **控制台变更**

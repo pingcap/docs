@@ -12,7 +12,7 @@
 - 快速上手
   - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
   - [试用 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-  - [试用 TiDB Cloud CLI](/tidb-cloud/get-started-with-cli.md)
+  - [试用 TiDB Cloud CLI (ticloud)](/tidb-cloud/get-started-with-cli.md)
 - 关键概念
   - [概览](/tidb-cloud/key-concepts.md)
   - [架构](/tidb-cloud/architecture-concepts.md)
@@ -463,7 +463,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [元数据锁](/metadata-lock.md)
   - [TiDB 加速建表](/accelerated-table-creation.md)
-- CLI 参考 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+- TiDB Cloud CLI (ticloud) 参考 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/cli-reference.md)
   - auth
     - [login](/tidb-cloud/ticloud-auth-login.md)
@@ -557,6 +557,7 @@
   - [服务器状态变量](/status-variables.md)
   - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
+  - [为慢查询配置触发规则](/config-slow-query-trigger-rules.md)
   - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
   - [适用于 {{{ .starter }}} 和 Essential 的项目 API 迁移指南](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)

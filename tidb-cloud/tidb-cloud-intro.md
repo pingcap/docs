@@ -6,7 +6,9 @@ category: intro
 
 # 什么是 TiDB Cloud
 
-[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款完全托管的云原生数据库即服务（DBaaS），基于 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源 HTAP (Hybrid Transactional and Analytical Processing) 数据库。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用程序开发，而无需关注数据库的复杂性。<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 资源（例如 {{{ .starter }}} 实例、{{{ .essential }}} 实例和 {{{ .dedicated }}} 集群），快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud resources (such as {{{ .starter }}} instances, {{{ .essential }}} instances, and {{{ .dedicated }}} clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent>
+[TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 是一款完全托管的云原生数据库即服务（DBaaS），基于 [TiDB](https://docs.pingcap.com/tidb/stable/overview) —— 一个开源 HTAP (Hybrid Transactional and Analytical Processing) 数据库。TiDB Cloud 提供了一种简单的方式来部署和管理数据库，让你专注于应用程序开发，而无需关注数据库的复杂性。
+
+<CustomContent language="en,zh">你可以在 Amazon Web Services (AWS)、Google Cloud、Microsoft Azure 和阿里云上创建 TiDB Cloud 资源（例如 Starter 实例、Essential 实例、Premium 实例和 Dedicated 集群），快速构建关键业务应用。</CustomContent><CustomContent language="ja">You can create TiDB Cloud resources (such as Starter instances, Essential instances, Premium instances, and Dedicated clusters) to quickly build mission-critical applications on Amazon Web Services (AWS), Google Cloud, and Microsoft Azure.</CustomContent> 此外，你还可以使用 TiDB Cloud Lake 构建一个面向分析负载的云原生数据仓库。
 
 ![TiDB Cloud Overview](/media/tidb-cloud/tidb-cloud-overview.png)
 
