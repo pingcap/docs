@@ -49,12 +49,6 @@
     - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
     - [Compatibility](/tiflash/tiflash-compatibility.md)
     - [Pipeline Execution Model](/tiflash/tiflash-pipeline-model.md)
-  - Use Tiered Storage ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [Overview](/tidb-cloud/tiered-storage-overview.md)
-    - [Configure and Manage](/tidb-cloud/tiered-storage-guide.md)
-    - [Observability](/tidb-cloud/tiered-storage-observability.md)
-    - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
-    - [FAQ](/tidb-cloud/tiered-storage-faq.md)
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md)
@@ -509,3 +503,12 @@
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
+
+## _BUILD_ALLOWLIST
+
+- Use Tiered Storage
+  - [Overview](/tidb-cloud/tiered-storage-overview.md)
+  - [Configure and Manage](/tidb-cloud/tiered-storage-guide.md)
+  - [Observability](/tidb-cloud/tiered-storage-observability.md)
+  - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
+  - [FAQ](/tidb-cloud/tiered-storage-faq.md)
