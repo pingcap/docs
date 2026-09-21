@@ -73,7 +73,7 @@ summary: "{{{ .lake }}} 提供三个版本：Personal、Business 和 Dedicated�
 | 功能 | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
 | 新一代 SQL 工作区，用于高级查询开发、数据分析和可视化。 | ✓ | ✓ | ✓ |
-| LakeSQL，一种命令行客户端，用于构建/测试查询、加载/导出批量数据以及自动化 DDL 操作。 | ✓ | ✓ | ✓ |
+| LakeSQL，一种命令行客户端，用于构建/测试查询、加载/卸载批量数据以及自动化 DDL 操作。 | ✓ | ✓ | ✓ |
 | Rust、Python、Java、Node.js、.js、PHP 和 Go 的编程接口。 | ✓ | ✓ | ✓ |
 | 原生支持 JDBC。 | ✓ | ✓ | ✓ |
 | 丰富的生态系统，可连接 ETL、BI 以及其他第三方供应商和技术。 | ✓ | ✓ | ✓ |
@@ -83,7 +83,7 @@ summary: "{{{ .lake }}} 提供三个版本：Personal、Business 和 Dedicated�
 | 功能 | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
 | 从分隔符平面文件（CSV、TSV 等）和半结构化数据文件（JSON、ORC、Parquet）进行批量加载。 | ✓ | ✓ | ✓ |
-| 批量导出到分隔符平面文件和 JSON 文件。 | ✓ | ✓ | ✓ |
+| 批量卸载到分隔符平面文件和 JSON 文件。 | ✓ | ✓ | ✓ |
 | 持续微批加载。 | ✓ | ✓ | ✓ |
 | 用于低延时加载流式数据的流式处理。 | ✓ | ✓ | ✓ |
 | 用于从 Apache Kafka topic 加载数据的 {{{ .lake }}} Connector for Kafka。 | ✓ | ✓ | ✓ |

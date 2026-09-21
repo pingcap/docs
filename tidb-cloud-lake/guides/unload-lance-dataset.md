@@ -1,11 +1,11 @@
 ---
-title: 导出 Lance Dataset
-summary: 了解如何导出 Lance dataset。
+title: 卸载 Lance Dataset
+summary: 了解如何卸载 Lance dataset。
 ---
 
-## 导出 Lance Dataset {#unloading-lance-dataset}
+## 卸载 Lance Dataset {#unloading-lance-dataset}
 
-Lance 导出面向以 dataset 为中心的使用者，例如机器学习和向量工作流。与 CSV、TSV、NDJSON 或 Parquet 导出不同，{{{ .lake }}} 会写入一个 Lance **dataset directory**，其中包含 `.lance` 数据文件以及诸如 `_versions/` 之类的元信息。
+Lance 导出面向以 dataset 为中心的使用者，例如机器学习和向量工作流。与 CSV、TSV、NDJSON 或 Parquet 卸载不同，{{{ .lake }}} 会写入一个 Lance **dataset directory**，其中包含 `.lance` 数据文件以及诸如 `_versions/` 之类的元信息。
 
 语法：
 

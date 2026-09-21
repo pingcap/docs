@@ -11,7 +11,7 @@ summary: 本页按功能组织，全面概述了 {{{ .lake }}} 中的文件格�
 
 | Command | Description |
 |---------|-------------|
-| [CREATE FILE FORMAT](/tidb-cloud-lake/sql/create-file-format.md) | 创建一个具名的文件格式对象，用于数据加载和导出 |
+| [CREATE FILE FORMAT](/tidb-cloud-lake/sql/create-file-format.md) | 创建一个具名的文件格式对象，用于数据加载和卸载 |
 | [DROP FILE FORMAT](/tidb-cloud-lake/sql/drop-file-format.md) | 删除一个文件格式对象 |
 
 ## 文件格式信息 {#file-format-information}
@@ -22,4 +22,4 @@ summary: 本页按功能组织，全面概述了 {{{ .lake }}} 中的文件格�
 
 > **注意：**
 >
-> {{{ .lake }}} 中的文件格式定义了在数据加载操作期间应如何解析数据文件，或在数据导出操作期间应如何设置数据文件的格式。它们提供了一种可复用的方式，用于指定文件类型、字段分隔符、压缩方式以及其他格式选项。
+> {{{ .lake }}} 中的文件格式定义了在数据加载操作期间应如何解析数据文件，或在数据卸载操作期间应如何设置数据文件的格式。它们提供了一种可复用的方式，用于指定文件类型、字段分隔符、压缩方式以及其他格式选项。

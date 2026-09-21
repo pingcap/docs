@@ -56,26 +56,26 @@
     - [MySQL 集成任务](/tidb-cloud-lake/guides/integrate-with-mysql.md)
     - [PostgreSQL 集成任务](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
     - [Kafka Consumer 集成任务](/tidb-cloud-lake/guides/integrate-with-kafka.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-- 导入数据
+- 加载数据
   - 使用 Stage
     - [Stage 概述](/tidb-cloud-lake/guides/stage-overview.md)
     - [上传到 Stage](/tidb-cloud-lake/guides/upload-to-stage.md)
-  - 从文件导入
+  - 从文件加载
     - [概览](/tidb-cloud-lake/guides/load-from-files.md)
-    - [从 Stage 导入](/tidb-cloud-lake/guides/load-from-stage.md)
-    - [从存储桶导入](/tidb-cloud-lake/guides/load-from-bucket.md)
-    - [从本地文件导入](/tidb-cloud-lake/guides/load-from-local-file.md)
-    - [从远程文件导入](/tidb-cloud-lake/guides/load-from-remote-file.md)
-  - 使用平台导入
-    - [使用 dbt 导入](/tidb-cloud-lake/guides/load-with-dbt.md)
-  - 导入半结构化数据
+    - [从 Stage 加载](/tidb-cloud-lake/guides/load-from-stage.md)
+    - [从存储桶加载](/tidb-cloud-lake/guides/load-from-bucket.md)
+    - [从本地文件加载](/tidb-cloud-lake/guides/load-from-local-file.md)
+    - [从远程文件加载](/tidb-cloud-lake/guides/load-from-remote-file.md)
+  - 使用平台加载
+    - [使用 dbt 加载](/tidb-cloud-lake/guides/load-with-dbt.md)
+  - 加载半结构化数据
     - [概览](/tidb-cloud-lake/guides/load-semi-structured-data.md)
-    - [导入 Parquet](/tidb-cloud-lake/guides/load-parquet.md)
-    - [导入 CSV](/tidb-cloud-lake/guides/load-csv.md)
-    - [导入 TSV](/tidb-cloud-lake/guides/load-tsv.md)
-    - [导入 NDJSON](/tidb-cloud-lake/guides/load-ndjson.md)
-    - [导入 ORC](/tidb-cloud-lake/guides/load-orc.md)
-    - [导入 Avro](/tidb-cloud-lake/guides/load-avro.md)
+    - [加载 Parquet](/tidb-cloud-lake/guides/load-parquet.md)
+    - [加载 CSV](/tidb-cloud-lake/guides/load-csv.md)
+    - [加载 TSV](/tidb-cloud-lake/guides/load-tsv.md)
+    - [加载 NDJSON](/tidb-cloud-lake/guides/load-ndjson.md)
+    - [加载 ORC](/tidb-cloud-lake/guides/load-orc.md)
+    - [加载 Avro](/tidb-cloud-lake/guides/load-avro.md)
   - 查询与转换
     - [概览](/tidb-cloud-lake/guides/query-stage.md)
     - [查询 Parquet 文件](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md)
@@ -84,19 +84,19 @@
     - [查询 NDJSON 文件](/tidb-cloud-lake/guides/query-ndjson-files-in-stage.md)
     - [查询 Avro 文件](/tidb-cloud-lake/guides/query-avro-files-in-stage.md)
     - [查询暂存的 ORC 文件](/tidb-cloud-lake/guides/query-staged-orc-files-in-stage.md)
-    - [导入时转换数据](/tidb-cloud-lake/guides/transform-data-on-load.md)
+    - [加载时转换数据](/tidb-cloud-lake/guides/transform-data-on-load.md)
     - [Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md)
   - 持续数据管道
     - [概览](/tidb-cloud-lake/guides/continuous-data-pipelines.md)
     - [通过 Streams 跟踪和转换数据](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)
-    - [使用任务自动化数据导入](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md)
-- 导出数据
+    - [使用任务自动化数据加载](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md)
+- 卸载数据
   - [概览](/tidb-cloud-lake/guides/unload-data.md)
-  - [导出 Parquet 文件](/tidb-cloud-lake/guides/unload-parquet-file.md)
-  - [导出 CSV 文件](/tidb-cloud-lake/guides/unload-csv-file.md)
-  - [导出 TSV 文件](/tidb-cloud-lake/guides/unload-tsv-file.md)
-  - [导出 NDJSON 文件](/tidb-cloud-lake/guides/unload-ndjson-file.md)
-  - [导出 Lance 数据集](/tidb-cloud-lake/guides/unload-lance-dataset.md)
+  - [卸载 Parquet 文件](/tidb-cloud-lake/guides/unload-parquet-file.md)
+  - [卸载 CSV 文件](/tidb-cloud-lake/guides/unload-csv-file.md)
+  - [卸载 TSV 文件](/tidb-cloud-lake/guides/unload-tsv-file.md)
+  - [卸载 NDJSON 文件](/tidb-cloud-lake/guides/unload-ndjson-file.md)
+  - [卸载 Lance 数据集](/tidb-cloud-lake/guides/unload-lance-dataset.md)
 - 多模态数据分析
   - [概览](/tidb-cloud-lake/guides/multimodal-data-analytics.md)
   - [SQL 分析](/tidb-cloud-lake/guides/sql-analytics.md)

@@ -1,11 +1,11 @@
 ---
-title: 导出 CSV 文件
-summary: 了解如何导出 CSV 文件。
+title: 卸载 CSV 文件
+summary: 了解如何卸载 CSV 文件。
 ---
 
-# 导出 CSV 文件
+# 卸载 CSV 文件
 
-本页介绍如何使用 `COPY INTO` 命令导出 CSV 文件。
+本页介绍如何使用 `COPY INTO` 命令卸载 CSV 文件。
 
 ## 语法 {#syntax}
 
@@ -24,7 +24,7 @@ FILE_FORMAT = (
 ```
 
 - 更多 CSV 选项，请参见 [CSV 文件格式选项](/tidb-cloud-lake/sql/input-output-file-formats.md#csv-options)
-- 导出到多个文件时，请使用 [`MAX_FILE_SIZE` Copy 选项](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions)
+- 卸载到多个文件时，请使用 [`MAX_FILE_SIZE` Copy 选项](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions)
 - 有关该语法的更多详细信息，请参见 [COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md)
 
 ## 教程 {#tutorial}
@@ -52,7 +52,7 @@ CREATE FILE FORMAT csv_unload_format
     SKIP_HEADER = 1;        -- Only for loading, skip first line when querying if the CSV file has header
 ```
 
-### 步骤 3：导出到 CSV 文件 {#step-3-unload-into-csv-file}
+### 步骤 3：卸载到 CSV 文件 {#step-3-unload-into-csv-file}
 
 ```sql
 COPY INTO @csv_unload_stage
@@ -74,7 +74,7 @@ DETAILED_OUTPUT = true;
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 步骤 4：验证已导出的 CSV 文件 {#step-4-verify-the-unloaded-csv-files}
+### 步骤 4：验证已卸载的 CSV 文件 {#step-4-verify-the-unloaded-csv-files}
 
 ```sql
 SELECT COUNT($1)
