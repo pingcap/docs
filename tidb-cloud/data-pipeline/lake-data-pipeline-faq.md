@@ -19,9 +19,9 @@ The external stage is required for reliability. Because both sides work through 
 
 Enable event-driven ingestion when you need **lower data latency** than the default polling mode provides.
 
-In the default mode, the Data Pipeline relies on two independent polling intervals — one on the Changefeed side (which periodically flushes incremental data to the external stage) and one on the Lake side (which periodically scans the external stage for new data). Because these two intervals do not coordinate, the effective end-to-end latency is higher than either interval alone.
+In the default mode, the Data Pipeline relies on two independent polling intervals, one on the Changefeed side (which periodically flushes incremental data to the external stage) and one on the Lake side (which periodically scans the external stage for new data). Because these two intervals do not coordinate, the effective end-to-end latency is higher than either interval alone.
 
-In event-driven mode, the Changefeed still flushes data to the external stage on its configured interval, but each flush also triggers an **S3 event notification** to an SQS queue. Lake subscribes to this queue and loads new data as soon as the notification arrives, eliminating the additional latency caused by its own polling interval.
+In event-driven mode, the Changefeed still flushes data to the external stage on its configured interval, but each flush also triggers an **S3 event notification** to an SQS queue. Lake subscribes to this queue and loads new data as soon as the notification arrives, reducing the additional latency caused by its own polling interval.
 
 > **Tradeoff:** In event-driven mode, Lake consumes data more aggressively, which keeps the warehouse in an **active** state more often. This increases the warehouse hosting cost.
 

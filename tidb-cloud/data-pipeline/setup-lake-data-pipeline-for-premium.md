@@ -106,7 +106,7 @@ In the **Replication Data** area, configure how the data is replicated:
 
     > **Note:**
     >
-    > Only tables with a primary key can be replicated incrementally. Tables that lack a primary key are listed separately in the **Filter results** panel, and their incremental replication fails. Add a primary key to these tables before you create the data pipeline, or exclude them with filter rules such as `"!test.tbl1"`.
+    > Only tables with a primary key can be replicated incrementally. Tables that lack a primary key are listed separately in the **Filter results** panel, and are skipped for incremental replication. Add a primary key to these tables before you create the data pipeline, or exclude them with filter rules such as `"!test.tbl1"`.
 
 6. **Pipeline Name**: enter a name for the data pipeline.
 

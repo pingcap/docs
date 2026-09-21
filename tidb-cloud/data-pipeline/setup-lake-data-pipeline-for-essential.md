@@ -17,7 +17,7 @@ TiDB Cloud Essential instances do not support the native Data Pipeline UI. This 
 Before you begin, make sure that you have:
 
 - A TiDB Cloud Essential instance deployed in a specific region.
-- Access to the TiDB Cloud Open API for this tenant. To create an API key, refer to [Create an API Key](https://docs.pingcap.com/tidbcloud/api-overview#create-an-api-key). Make sure to save the **Public Key** and **Private Key** — they are required for all Open API calls in this guide.
+- Access to the TiDB Cloud Open API for this tenant. To create an API key, refer to [Create an API Key](https://docs.pingcap.com/tidbcloud/api-overview#create-an-api-key). Make sure to save the **Public Key** and **Private Key**, they are required for all Open API calls in this guide.
 - An S3 bucket in the same region (for example, `s3://my-datapipeline-bucket`).
 - A TiDB Cloud Lake warehouse in the same region.
 
@@ -31,7 +31,7 @@ Before you begin, make sure that you have:
 
 The data pipeline components (Export, Changefeed, and Lake) all require access to the same S3 bucket. Choose one of the following methods:
 
-- **Role ARN**: a single IAM role shared by all three components. More secure — no long-lived credentials.
+- **Role ARN**: a single IAM role shared by all three components. More secure, no long-lived credentials.
 - **Access Key**: simpler to set up and required when Role ARN is unavailable; requires manual credential management and rotation.
 
 ## Use a Role ARN
@@ -324,7 +324,7 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
     - **Role ARN**: the ARN from [Step 1](#step-1-create-the-role-with-export-cloudformation), or **Access Key ID** / **Secret Access Key** from [Use an Access Key](#use-an-access-key).
     - **S3 Bucket Name**: the bucket name only (for example, `my-datapipeline-bucket`, not the full URI).
     - **S3 Region**: the same region as your Essential instance.
-4. **SQS Queue URL** is optional.
+4. **SQS Queue URL** is optional. If you want to enable event-driven ingestion, set up an SQS queue and configure the S3 bucket notification first. For details, see [Amazon SQS and S3 IAM Role for TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/amazon-sqs-s3-iam-role/).
 5. Under **Trust Cloud Platform roles**, verify the Lake platform roles and external ID match the values you added to the consolidated trust policy in [Step 2](#step-2-consolidate-trust-relationships).
 
 ## Create an integration

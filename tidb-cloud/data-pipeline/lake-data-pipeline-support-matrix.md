@@ -9,59 +9,52 @@ This document summarizes the DDL, DML, and column type support for TiDB Cloud Da
 
 > **Note:**
 >
-> The behaviors described below are derived from end-to-end testing of the Data Pipeline with TiDB Cloud Lake. Actual behavior may depend on the specific TiCDC and Lake versions deployed. If you observe different behavior, contact TiDB Cloud Support.
-
-Legend:
-- ✅ = Supported
-- N/A = Not processed
-
----
+> This compatibility matrix is based on end-to-end testing and is not derived from the Data Pipeline implementation itself. The tested behaviors depend on the specific TiCDC and Lake versions deployed. If you observe different behavior, contact TiDB Cloud Support.
 
 ## DDL support summary
 
-| DDL pattern                   | Status | Behavior / symptom                                                                                      |
-| ----------------------------- | -----: | ------------------------------------------------------------------------------------------------------- |
-| `CREATE TABLE`                |      ✅ |                                                                                                         |
-| `ADD COLUMN`                  |      ✅ |                                                                                                         |
-| `ADD COLUMN NOT NULL DEFAULT` |      ✅ |                                                                                                         |
-| `MODIFY COLUMN (widen)`       |      ✅ |                                                                                                         |
-| `DROP COLUMN`                 |      ✅ |                                                                                                         |
-| `ADD INDEX` / `DROP INDEX`    |      ✅ |                                                                                                         |
-| `RENAME COLUMN`               |      ✅ |                                                                                                         |
-| `DROP TABLE`                  |    N/A | Destination table is kept in Lake.                                                                      |
-| `RENAME TABLE`                |    N/A | New table only has rows after rename; old table keeps pre-rename rows. Data is split across two tables. |
-| `TRUNCATE`                    |    N/A | Destination retains pre-truncate data.                                                                  |
+| DDL pattern                   | Status |
+| ----------------------------- | -----: |
+| `CREATE TABLE`                |      ✅ |
+| `ADD COLUMN`                  |      ✅ |
+| `ADD COLUMN NOT NULL DEFAULT` |      ✅ |
+| `MODIFY COLUMN (widen)`       |      ✅ |
+| `DROP COLUMN`                 |      ✅ |
+| `ADD INDEX` / `DROP INDEX`    |      ✅ |
+| `RENAME COLUMN`               |      ✅ |
+
+DDL operations not listed above are not processed by the pipeline and may block subsequent consumption for the affected table.
 
 ## DML support summary
 
-| DML pattern           | Status | Behavior / symptom                  |
-| --------------------- | -----: | ----------------------------------- |
-| `INSERT`              |      ✅ |                                     |
-| `UPDATE`              |      ✅ |                                     |
-| `DELETE`              |      ✅ |                                     |
-| `DELETE + reinsert`   |      ✅ |                                     |
-| `TRUNCATE + reinsert` |    N/A | `TRUNCATE` event is not propagated. |
+| DML pattern         | Status |
+| ------------------- | -----: |
+| `INSERT`            |      ✅ |
+| `UPDATE`            |      ✅ |
+| `DELETE`            |      ✅ |
+
+DML events not listed above are not propagated to the destination.
 
 ## Type support summary
 
-| Type category                               | Status | Notes / caveat                   |
-| ------------------------------------------- | -----: | -------------------------------- |
-| `TINYINT` ~ `BIGINT` (including `UNSIGNED`) |      ✅ |                                  |
-| `BOOLEAN`                                   |      ✅ |                                  |
-| `DECIMAL` / `NUMERIC`                       |      ✅ |                                  |
-| `FLOAT`                                     |      ✅ |                                  |
-| `DOUBLE`                                    |      ✅ |                                  |
-| `DATE` / `DATETIME` / `TIMESTAMP`           |      ✅ |                                  |
-| `TIME`                                      |      ✅ |                                  |
-| `YEAR`                                      |      ✅ |                                  |
-| `CHAR` / `VARCHAR` / `TEXT`                 |      ✅ |                                  |
-| `ENUM`                                      |      ✅ |                                  |
-| `SET`                                       |      ✅ |                                  |
-| `JSON`                                      |      ✅ |                                  |
-| `BINARY` / `VARBINARY`                      |      ✅ |                                  |
-| `BLOB`                                      |      ✅ |                                  |
-| `BIT(1)`                                    |      ✅ |                                  |
-| `BIT(>1)`                                   |      ✅ |                                  |
-| `VECTOR`                                    |      ✅ |                                  |
-| `VARIANT` / `ARRAY` / `OBJECT`              |    N/A | Not applicable to Data Pipeline. |
-| `GEOGRAPHY` / `GEOMETRY`                    |    N/A | Not applicable to Data Pipeline. |
+| Type category                               | Status |
+| ------------------------------------------- | -----: |
+| `TINYINT` ~ `BIGINT` (including `UNSIGNED`) |      ✅ |
+| `BOOLEAN`                                   |      ✅ |
+| `DECIMAL` / `NUMERIC`                       |      ✅ |
+| `FLOAT`                                     |      ✅ |
+| `DOUBLE`                                    |      ✅ |
+| `DATE` / `DATETIME` / `TIMESTAMP`           |      ✅ |
+| `TIME`                                      |      ✅ |
+| `YEAR`                                      |      ✅ |
+| `CHAR` / `VARCHAR` / `TEXT`                 |      ✅ |
+| `ENUM`                                      |      ✅ |
+| `SET`                                       |      ✅ |
+| `JSON`                                      |      ✅ |
+| `BINARY` / `VARBINARY`                      |      ✅ |
+| `BLOB`                                      |      ✅ |
+| `BIT(1)`                                    |      ✅ |
+| `BIT(>1)`                                   |      ✅ |
+| `VECTOR`                                    |      ✅ |
+
+Column types not listed above are not tested and may not be supported.
