@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Dedicated**
 
-    - TiDB Cloud Dedicated now supports inbound IPv6 connectivity over AWS PrivateLink, so you can connect to your cluster over either IPv4 or IPv6.
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) now supports inbound IPv6 connectivity over AWS PrivateLink, so you can connect to your cluster over either IPv4 or IPv6.
 
         Currently, this feature is available upon request. To access IPv6 connectivity, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request it, and then create an AWS interface endpoint with the **IP address type** set to `dualstack`.
 
