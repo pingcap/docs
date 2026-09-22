@@ -205,16 +205,21 @@ The possible statuses of a private endpoint service are explained as follows:
 
 ## Use IPv6 connectivity over a private endpoint
 
-TiDB Cloud Dedicated supports inbound IPv6 connectivity over AWS PrivateLink. When IPv6 is enabled, the endpoint service of a node group becomes dual-stack, and you can create an AWS interface endpoint that connects to your cluster over IPv6.
+TiDB Cloud Dedicated supports inbound IPv6 connectivity over AWS PrivateLink. 
 
-IPv6 connectivity is configured per node group. To use IPv6 for a node group, take the following steps.
+> **Note:**
+> 
+> Currently, the IPv6 connectivity feature is available upon request. To access this feature, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) and provide your organization ID. 
 
-### Switch the IP protocol type to dual-stack
+IPv6 connectivity is configured per [node group](/tidb-cloud/tidb-node-group-management.md). To connect to a TiDB Cloud Dedicated cluster over IPv6, switch the IP protocol type to dual-stack, then create a dual-stack AWS interface endpoint as follows.  
 
-1. Enable IPv6 connectivity by contacting [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) and providing the cluster ID. After IPv6 is enabled, you can switch the IP protocol type in the TiDB Cloud console.
-2. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
-3. In the **AWS Private Endpoints** panel, click **Edit**.
-4. In the **AWS Private Endpoints Connection Settings** dialog, select **Dual Stack (IPv4 + IPv6)** for **IP Protocol type**, and then click **Save**.
+### Step 1. Switch the IP protocol type to dual-stack
+
+After [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) enables the IPv6 connectivity feature for your organization, you can switch the IP protocol type in the [TiDB Cloud console](https://tidbcloud.com/).
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. In the **AWS Private Endpoints** panel, click **Edit**.
+3. In the **AWS Private Endpoints Connection Settings** dialog, select **Dual Stack (IPv4 + IPv6)** as the IP protocol type, and then click **Save**.
 
 > **Note:**
 >
@@ -222,7 +227,7 @@ IPv6 connectivity is configured per node group. To use IPv6 for a node group, ta
 
 The IP protocol type can only be changed after the cluster is created, and it is configured independently for each node group.
 
-### Create an AWS interface endpoint for IPv6
+### Step 2. Create an AWS interface endpoint for IPv6
 
 Create an AWS interface endpoint as described in [Step 2. Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint), and note the following:
 
