@@ -1,11 +1,11 @@
 ---
 title: Get Started with TiDB Cloud CLI
-summary: Install and configure TiDB Cloud CLI, then create and use a TiDB Cloud Filesystem or query a TiDB Cloud Starter database.
+summary: Install and configure TiDB Cloud CLI, then create and use a TiDB Cloud Filesystem or manage and query a TiDB Cloud Starter database.
 ---
 
 # Get Started with TiDB Cloud CLI
 
-[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a command-line tool for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [TiDB Cloud Filesystems](/ai/ti/ti-overview.md#tidb-cloud-filesystem). It supports both interactive use and automation, with JSON as the default output format for commands.
+[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a command-line tool for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [TiDB Cloud Filesystem](/ai/ti/ti-overview.md#tidb-cloud-filesystem) file systems. TiDB Cloud CLI supports both interactive and automated use. By default, command output is in JSON format, making it agent friendly.
 
 This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), and then completing a basic workflow with TiDB Cloud Starter or TiDB Cloud Filesystem. For an overview of the CLI, its capabilities, and supported workflows, see [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md).
 
@@ -86,73 +86,58 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 2. Provide the following information:
 
-    - A default region for CLI operations, specified as a region code (such as `aws-us-east-1`). For a list of regions that are supported by TiDB Cloud CLI, see [Supported regions](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions).
+    - A default region for CLI operations, specified as a region code (such as `aws-us-west-2`). For a list of regions that are supported by TiDB Cloud CLI, see [Supported regions](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions).
     - Your TiDB Cloud API public key and private key.
 
 3. Run a read-only command to verify that the CLI can access TiDB Cloud using the saved credentials:
 
     ```bash
-    ti db list-db-clusters --db-cluster-type starter --output text
+    ti fs list-file-systems
     ```
 
     Example output:
 
     ```bash
     {
-      "profile": "default",
-      "region_code": "aws-us-east-1",
-      "credentials_stored": true
+      "region_code": "aws-us-west-2",
+      "file_systems": []
     }
     ```
 
 ## Step 3. Choose a workflow
 
-Complete either of the following workflows.
+Please proceed with either of the following workflows based on your needs. Would you like to use TiDB Cloud Filesystem or Starter?
 
-- [Option A: Create and use a Filesystem](/ai/ti/ti-quick-start.md#option-a-create-and-use-a-filesystem)
-- [Option B: Create a TiDB Cloud Starter instance and query the database](/ai/ti/ti-quick-start.md#option-b-create-a-tidb-cloud-starter-instance-and-query-the-database)
+- [Option A: TiDB Cloud Filesystem](/ai/ti/ti-quick-start.md#option-a-create-and-use-a-filesystem)
+- [Option B: TiDB Cloud Starter](/ai/ti/ti-quick-start.md#option-b-create-a-tidb-cloud-starter-instance-and-query-the-database)
 
-### Option A: Create and use a Filesystem
+### Option A: TiDB Cloud Filesystem
 
 A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
 
-1. Create a Filesystem, wait until it is ready, and save its server-assigned ID:
+1. Create a file system and obtain the access token (typically performed outside the sandbox):
 
     ```bash
-    export TI_FS_FILE_SYSTEM_ID="$(ti fs create-file-system \
-      --wait \
-      --query file_system_id \
-      --output text)"
+    export TI_FS_TOKEN="$(ti fs create-file-system --file-system-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
     ```
 
-    `ti` stores the Filesystem credential locally, so you do not need to provide it for subsequent file operations.
-
-2. Write a file to the Filesystem, and then read the file:
+2. Mount the filesystem to a local path and use it as a normal POSIX-compliant filesystem (typically performed within the sandbox):
 
     ```bash
-    printf 'hello from ti\n' | ti fs copy-file \
-      --from-stdin \
-      --to-remote /hello.txt
-
-    ti fs read-file \
-      --path /hello.txt
+    export TI_FS_TOKEN=$TI_FS_TOKEN
+    mkdir ~/mnt-test
+    ti fs mount-file-system --file-system-name agent-workspace --mount-path ~/mnt-test --region aws-us-west-2
+    echo 'Hello Sandbox Workspace' >> ~/mnt-test/hello.txt
+    ls -l ~/mnt-test/hello.txt
     ```
 
-    Expected output:
-
-    ```text
-    hello from ti
-    ```
-
-3. Delete the Filesystem:
+3. Unmount the file system to release the workspace before passing it to another sandbox (typicall performed within the sandbox):
 
     ```bash
-    ti fs delete-file-system \
-      --file-system-id "$TI_FS_FILE_SYSTEM_ID"
-    unset TI_FS_FILE_SYSTEM_ID
+    ti fs unmount-file-system --mount-path ~/mnt-test --region aws-us-west-2
     ```
 
-### Option B: Create a TiDB Cloud Starter instance and query the database
+### Option B: TiDB Cloud Starter
 
 1. Create a TiDB Cloud Starter instance and save its ID:
 
@@ -180,13 +165,14 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
 
     The `ti db execute-sql-statement` command executes the query through the HTTPS SQL API. The output includes `ready = 1`.
 
-3. Delete the TiDB Cloud Starter instance:
+3. Generate the connection string:
 
     ```bash
-    ti db delete-db-cluster \
+    DATABASE_URL=$(ti db format-db-connection-string \
       --db-cluster-id "$TI_DB_CLUSTER_ID" \
-      --wait
-    unset TI_DB_CLUSTER_ID
+      --read-write --query connection_string \
+      --output text)
+    echo $DATABASE_URL
     ```
 
 ## What's next
