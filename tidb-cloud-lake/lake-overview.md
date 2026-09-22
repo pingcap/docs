@@ -59,11 +59,11 @@ You can use SQL to store, query, clean, and transform relational and semi-struct
 
 This is useful for application events, logs, user activity data, API payloads, and AI agent traces, which often have evolving schemas and can be costly to flatten up front.
 
-To protect sensitive data, you can apply row access policies to filter rows at query time and masking policies to redact column values, including selected keys in `VARIANT` data. For more information, see [JSON & Search](/tidb-cloud-lake/guides/json-search.md), [Row Access Policy](/tidb-cloud-lake/guides/row-access-policy.md), and [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md).
+To protect sensitive data, you can apply row access policies (an experimental feature) to filter rows at query time and masking policies to redact column values, including selected keys in `VARIANT` data. For more information, see [JSON & Search](/tidb-cloud-lake/guides/json-search.md), [Row Access Policy](/tidb-cloud-lake/guides/row-access-policy.md), and [Masking Policy](/tidb-cloud-lake/guides/masking-policy.md).
 
 ### Combine analytics, search, and AI workloads
 
-Full-text search, vector search, geospatial analysis, and SQL analytics run on the same data platform. You can use inverted indexes for keyword-oriented retrieval, vector indexes for semantic similarity search, and SQL predicates and joins to combine retrieval results with structured business data.
+Full-text search, [vector search](/tidb-cloud-lake/guides/vector-search-guide.md), [geospatial analysis](/tidb-cloud-lake/guides/geo-analytics.md), and SQL analytics run on the same data platform. You can use [full-text indexes](/tidb-cloud-lake/guides/full-text-index.md) (inverted indexes) for keyword-oriented retrieval, vector indexes for semantic similarity search, and SQL predicates and joins to combine retrieval results with structured business data.
 
 This unified approach supports use cases such as product and business analytics, application-event analysis, search and recommendations, retrieval-augmented generation (RAG), and AI-agent trace analysis without requiring a separate data copy for each workload. For an end-to-end example, see [Multimodal Data Analytics](/tidb-cloud-lake/guides/multimodal-data-analytics.md).
 
