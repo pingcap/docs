@@ -219,7 +219,7 @@ After [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
 2. Each TiDB Cloud Dedicated cluster has a default [TiDB node group](/tidb-cloud/tidb-node-group-management.md). If your cluster has multiple node groups, select your target TiDB node group from the **TiDB Node Group** list in the upper-right corner.
-3. In the **AWS Private Endpoints** panel, click **Edit**.
+3. In the **AWS Private Endpoints** section, click **Edit**.
 4. In the **AWS Private Endpoints Connection Settings** dialog, select **Dual Stack (IPv4 + IPv6)** as the IP protocol type, and then click **Save**.
 
 > **Note:**
