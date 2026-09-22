@@ -67,7 +67,8 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 > **Note:**
 >
-> For each TiDB Cloud Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
+> - If you want to connect to your cluster over IPv6, see [Use IPv6 connectivity over a private endpoint](#use-ipv6-connectivity-over-a-private-endpoint) for the additional IPv6 configuration.
+> - For each TiDB Cloud Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
