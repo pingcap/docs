@@ -123,7 +123,7 @@ ti fs update-file-system-embedding-configuration \
   --provider-model "<embedding-model>"
 ```
 
-The provider must implement the required OpenAI-compatible embeddings API and return exactly 1024-dimensional vectors. Make sure that the selected model and provider configuration return 1024 dimensions; other vector dimensions are not supported.
+The provider must return exactly 1024-dimensional vectors through the OpenAI-compatible embeddings API. Other vector dimensions are not supported.
 
 For all available options, see [`update-file-system-embedding-configuration`](/ai/ti/reference/ti-fs-update-file-system-embedding-configuration.md).
 

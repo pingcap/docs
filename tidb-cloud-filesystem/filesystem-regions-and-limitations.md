@@ -32,7 +32,7 @@ Filesystem list and describe commands query only the selected region. They do no
 | Linux | FUSE | FUSE | Install the `fuse3` package and provide access to `/dev/fuse`. WebDAV mounting is not supported. |
 | Windows | Not supported | Not supported | Use `ti fs` data-plane commands and non-mount Vault commands instead. |
 
-FUSE and WebDAV are implemented by the bundled [Drive9](https://github.com/mem9-ai/drive9) companion. The CLI does not fall back to a separate native mount implementation. A running mount keeps the companion version loaded when it started; unmount and remount after updating `ti`.
+FUSE and WebDAV are implemented by the bundled Filesystem runtime component. The CLI does not fall back to a separate native mount implementation. A running mount keeps the runtime version loaded when it started; unmount and remount after updating `ti`.
 
 Ubuntu 26.04 also confines `fusermount3` with AppArmor. Use a mount path under `$HOME` or `/mnt`; `/workspace` requires an explicit local AppArmor rule even when `ti` runs as root. For setup and workarounds, see [Mount TiDB Cloud Filesystem on Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md#ubuntu-2604-mount-path-restrictions).
 
@@ -51,6 +51,6 @@ For the supported drain and graceful unmount workflow, see [Finish safely](/tidb
 - Filesystem extraction and embedding provider configuration is optional. Leaving it unconfigured does not block resource administration, file access, search, layers, Git, journal, vault, or mount workflows.
 - OpenAI provider interfaces are supported for embedding and image, audio, and video extraction. Alibaba Cloud Model Studio Qwen ASR is supported only for audio extraction. Other vendors are conditionally compatible only through the exact OpenAI-compatible contract; native Anthropic, Gemini, Vertex AI, Bedrock, and Azure OpenAI interfaces are not supported.
 - App-managed embedding requires a provider model that returns exactly 1024 dimensions. Filesystems that report `source=database_auto` use database-managed embedding and reject app-managed configuration. For configuration steps, see [Configure TiDB Cloud Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
-- Filesystem runtime operations, including direct file access, layers, mounts, Git workspaces, journals, and Vault operations, depend on the installed `ti-drive9` companion.
+- Filesystem runtime operations, including direct file access, layers, mounts, Git workspaces, journals, and Vault operations, depend on the bundled Filesystem runtime component installed with `ti`.
 
 For token or mount failures, see [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md). For command syntax and options, see the [Filesystem CLI command reference](/ai/ti/reference/ti-filesystem.md).

@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot TiDB Cloud Filesystem
-summary: Learn how to diagnose TiDB Cloud Filesystem token, region, companion, mount, and access failures and choose a safe recovery path.
+summary: Learn how to diagnose TiDB Cloud Filesystem token, region, runtime, mount, and access failures and choose a safe recovery path.
 ---
 
 # Troubleshoot TiDB Cloud Filesystem
@@ -88,9 +88,9 @@ The CLI intentionally does not infer a Filesystem from local credential count, i
 
 The configured TiDB Cloud region might not be one of the Filesystem endpoints built into the installed `ti` release. Compare it with [supported Filesystem regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
 
-## Companion is missing or incompatible
+## Filesystem runtime is missing or incompatible
 
-The release installer places `ti-drive9`, the companion runtime for Filesystem commands, next to `ti`. You do not invoke `ti-drive9` directly. Re-run the current installer when the CLI reports a missing companion:
+The release installer places the bundled Filesystem runtime component next to `ti`. You do not invoke this runtime directly. Re-run the current installer when the CLI reports a missing runtime component:
 
 ```bash
 curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
@@ -103,7 +103,7 @@ command -v ti
 ti --version
 ```
 
-Do not copy an arbitrary standalone Drive9 binary into place.
+Do not copy an arbitrary standalone runtime binary into place.
 
 ## Filesystem creation reaches quota
 
@@ -117,7 +117,7 @@ Do not delete an unrelated Filesystem to make automation pass. If the error link
 
 ## Mount does not become ready
 
-Background mount success prints the CLI result without Drive9 startup messages. If startup fails or times out, inspect the companion log path in the error. Confirm:
+Background mount success prints the CLI result without runtime startup messages. If startup fails or times out, inspect the runtime log path in the error. Confirm:
 
 - the mount path exists and is writable;
 - no existing mount covers the path;
@@ -183,4 +183,4 @@ Unmount performs the graceful FUSE drain automatically. Running `drain-file-syst
 
 ## Report a problem
 
-Include the `ti` version, OS and architecture, command name, stable error code, and redacted logs. Never include API keys, FS or vault tokens, DB passwords, SQL containing private data, or file contents. Report issues at [github.com/tidbcloud/ti-cli/issues](https://github.com/tidbcloud/ti-cli/issues).
+Include the `ti` version, OS and architecture, command name, stable error code, and redacted logs. Never include API keys, Filesystem or Vault tokens, DB passwords, SQL containing private data, or file contents. Report issues at [github.com/tidbcloud/ti-cli/issues](https://github.com/tidbcloud/ti-cli/issues).
