@@ -99,7 +99,7 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 The CLI saves the configuration locally. The Filesystem creation command in the next step verifies that the CLI can access TiDB Cloud using the saved credentials.
 
-To learn more about configuring TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
+To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
 ## Step 3. Create a Filesystem
 
@@ -145,7 +145,7 @@ The file is stored in TiDB Cloud Filesystem rather than in the local terminal se
 > **Note:**
 >
 > This example accesses files in the Filesystem directly using `ti fs` commands, without mounting it to your machine.
-
+>
 > - On macOS or Linux, in addition to [using `ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md), you can also [mount the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) as a local directory and work with its files using standard local file operations.
 > - On Windows, native Filesystem mounting is not supported. Use `ti fs` commands such as `ti fs copy-file`, `ti fs read-file`, and `ti fs list-files` to work with files. For more information, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md).
 
