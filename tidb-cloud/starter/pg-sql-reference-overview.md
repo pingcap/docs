@@ -9,7 +9,7 @@ PostgreSQL-compatible {{{ .starter }}} supports the PostgreSQL wire protocol and
 
 This page walks you through basic PostgreSQL SQL operations, including DDL, DML, DQL, DCL, and transaction control.
 
-For PostgreSQL features that are unsupported or behave differently, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+For PostgreSQL features that are unsupported or behave differently, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## Category
 
@@ -161,7 +161,7 @@ To delete an index, use the `DROP INDEX` statement:
 DROP INDEX person_name_idx;
 ```
 
-For supported PostgreSQL index methods and compatibility differences, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+For supported PostgreSQL index methods and compatibility differences, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## Insert, update, and delete data
 
@@ -342,7 +342,7 @@ ROLLBACK TO SAVEPOINT before_second_update;
 COMMIT;
 ```
 
-For supported transaction isolation levels and PostgreSQL compatibility differences, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+For supported transaction isolation levels and PostgreSQL compatibility differences, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## Create, authorize, and delete a database user
 

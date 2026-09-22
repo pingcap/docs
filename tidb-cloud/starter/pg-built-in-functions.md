@@ -501,4 +501,4 @@ The following capabilities provide additional SQL functions:
 - Parquet import
 - UUID generation
 
-For more information, see [PostgreSQL Extensions](/tidb-cloud/pg-on-starter/pg-extensions-overview.md).
+For more information, see [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md).

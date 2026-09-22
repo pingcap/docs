@@ -214,7 +214,7 @@ VALUES
     ('::1');
 ```
 
-Equality and ordering comparisons are supported. Some PostgreSQL network operators and functions are not supported. See [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+Equality and ordering comparisons are supported. Some PostgreSQL network operators and functions are not supported. See [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## JSON and JSONB
 
@@ -277,7 +277,7 @@ CREATE TABLE embeddings (
 );
 ```
 
-For vector operators and HNSW indexes, see [Vector Search](/tidb-cloud/pg-on-starter/pg-vector-search.md).
+For vector operators and HNSW indexes, see [Vector Search](/tidb-cloud/starter/pg-vector-search.md).
 
 `TSVECTOR` and `TSQUERY` are available for PostgreSQL-compatible full-text search:
 
@@ -289,7 +289,7 @@ SELECT
     @@ plainto_tsquery('simple', 'PostgreSQL');
 ```
 
-For more information, see [Full-Text Search](/tidb-cloud/pg-on-starter/pg-full-text-search.md).
+For more information, see [Full-Text Search](/tidb-cloud/starter/pg-full-text-search.md).
 
 ## Type coercion
 

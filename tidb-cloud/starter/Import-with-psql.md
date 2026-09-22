@@ -31,7 +31,7 @@ Before migration, make sure that you have the following:
 - The connection string of the target instance. To get the connection string, open the target instance in the TiDB Cloud console, click **Connect**, and select **PostgreSQL CLI**.
 - Network access from the machine where you run the migration commands to both the source PostgreSQL database and the target instance.
 
-Before migrating production workloads, review [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md) and [PostgreSQL Extensions](/tidb-cloud/pg-on-starter/pg-extensions.md).
+Before migrating production workloads, review [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) and [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions.md).
 
 ## Prepare tools
 
@@ -82,7 +82,7 @@ FROM pg_extension
 ORDER BY extname;
 ```
 
-Compare the result with [PostgreSQL Extensions](/tidb-cloud/pg-on-starter/pg-extensions.md).
+Compare the result with [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions.md).
 
 Custom or third-party PostgreSQL extensions cannot be installed on PostgreSQL-compatible {{{ .starter }}}. Remove or replace dependencies on unsupported extensions before migration.
 
@@ -110,7 +110,7 @@ Review any matching functions before migration. In particular:
 - Exception handling with `BEGIN ... EXCEPTION` is supported only in `DO` blocks.
 - Nested procedural blocks are supported only in `DO` blocks.
 
-For more compatibility details, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+For more compatibility details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## Migrate full data
 
@@ -165,7 +165,7 @@ grep -i "CREATE RULE" schema.sql
 
 Remove or rewrite unsupported statements before importing the schema.
 
-Also review the schema for unsupported data types, index access methods, PL/pgSQL constructs, and extensions. For details, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+Also review the schema for unsupported data types, index access methods, PL/pgSQL constructs, and extensions. For details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 #### SERIAL and identity columns
 
@@ -277,7 +277,7 @@ SELECT max(id) FROM users;
 
 Connect your application to the PostgreSQL-compatible {{{ .starter }}} instance and run your application test suite.
 
-Pay particular attention to application logic that depends on PostgreSQL features that are unsupported or behave differently. For details, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+Pay particular attention to application logic that depends on PostgreSQL features that are unsupported or behave differently. For details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## Limitations
 
@@ -287,5 +287,5 @@ Keep the following limitations in mind when planning a migration:
 - PostgreSQL logical replication and streaming replication are not supported. If the source database continues to receive writes during migration, plan an appropriate maintenance window for the final cutover.
 - `COPY` supports text and CSV formats. Binary `COPY` is not supported.
 - `COPY (SELECT ...) TO STDOUT` is not supported.
-- Some PostgreSQL schema objects, data types, index access methods, extensions, and PL/pgSQL constructs are unsupported or behave differently. Review [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md) before migration.
+- Some PostgreSQL schema objects, data types, index access methods, extensions, and PL/pgSQL constructs are unsupported or behave differently. Review [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) before migration.
 - Migrated text data must use valid UTF-8 encoding.

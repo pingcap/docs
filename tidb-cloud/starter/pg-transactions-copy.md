@@ -116,7 +116,7 @@ SHOW transaction_isolation;
 
 > **Note:**
 >
-> If `SERIALIZABLE` is requested over the PostgreSQL wire protocol, PostgreSQL-compatible {{{ .starter }}} uses `REPEATABLE READ` instead. Applications that require PostgreSQL Serializable Snapshot Isolation should be reviewed before migration. For details, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+> If `SERIALIZABLE` is requested over the PostgreSQL wire protocol, PostgreSQL-compatible {{{ .starter }}} uses `REPEATABLE READ` instead. Applications that require PostgreSQL Serializable Snapshot Isolation should be reviewed before migration. For details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## Read-only transactions
 
@@ -257,7 +257,7 @@ The following common formats are supported:
 | CSV | Supported |
 | Binary | Not supported |
 
-Parquet import is also available through the `parquet` extension. For details, see [Import Parquet Data](/tidb-cloud/pg-on-starter/pg-parquet-import.md).
+Parquet import is also available through the `parquet` extension. For details, see [Import Parquet Data](/tidb-cloud/starter/pg-parquet-import.md).
 
 ### COPY limitations
 

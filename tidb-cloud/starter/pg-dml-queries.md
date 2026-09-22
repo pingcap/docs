@@ -360,7 +360,7 @@ FROM category_tree;
 
 Recursive CTEs are limited to 1,000 iterations.
 
-Use a unique name for each CTE definition in the same `WITH` list. For compatibility details, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
+Use a unique name for each CTE definition in the same `WITH` list. For compatibility details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ### Data-modifying CTEs
 

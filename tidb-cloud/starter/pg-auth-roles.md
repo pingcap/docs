@@ -360,4 +360,4 @@ TO app_user
 USING (user_id = current_user);
 ```
 
-For complete RLS syntax and behavior, see [PostgreSQL Row-Level Security](/tidb-cloud/pg-on-starter/pg-row-level-security.md).
+For complete RLS syntax and behavior, see [PostgreSQL Row-Level Security](/tidb-cloud/starter/pg-row-level-security.md).

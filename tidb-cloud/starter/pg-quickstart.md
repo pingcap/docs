@@ -55,5 +55,5 @@ The PostgreSQL CLI client `psql` opens and connects to your {{{ .starter }}} ins
 
 ## What's next
 - To learn how to connect to your PostgreSQL-compatible {{{ .starter }}} instance, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-via-standard-connection-serverless.md).
-- To learn about PostgreSQL compatibility, see [PostgreSQL Compatibility](/tidb-cloud/pg-on-starter/postgresql-compatibility.md).
-- To learn about the PostgreSQL extensions currently supported by TiDB Cloud, see [PostgreSQL extensions](/tidb-cloud/pg-on-starter/pg-extensions.md).
+- To learn about PostgreSQL compatibility, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+- To learn about the PostgreSQL extensions currently supported by TiDB Cloud, see [PostgreSQL extensions](/tidb-cloud/starter/pg-extensions.md).
