@@ -115,7 +115,7 @@ ti db delete-db-cluster \
 
 ## Security notes
 
-- Do not echo FS tokens or formatted database connection strings.
+- Do not echo Filesystem tokens or formatted database connection strings.
 - Use unique automation prefixes and delete only resources created by that run.
 - Preview destructive operations with `--dry-run`.
 

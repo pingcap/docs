@@ -27,5 +27,5 @@ Most secret-management commands identify a secret by its name, such as `db-prod`
 
 ## See also
 
-- [Manage TiDB Cloud Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md)
+- [Manage TiDB Cloud Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
 - [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)

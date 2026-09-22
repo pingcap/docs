@@ -84,7 +84,7 @@ If you are new to the TiDB Cloud CLI, start with the [Quick Start](/ai/ti/ti-qui
 Then continue based on what you want to do:
 
 - [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md)
-- [Manage TiDB Cloud Filesystems](/ai/ti/guides/manage-filesystem-resources.md)
+- [Use TiDB Cloud Filesystem with TiDB Cloud CLI](/ai/ti/guides/manage-filesystems-via-cli.md)
 - **Follow end-to-end workflows**: Start with [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/guides/ti-daily-workflow-example.md) or [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md)
 - **Look up a specific command**: Check the [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md)
 - **See what’s new in TiDB Cloud CLI**: Check the [TiDB Cloud CLI (`ti`) Release Notes](https://github.com/tidbcloud/ti-cli/releases)

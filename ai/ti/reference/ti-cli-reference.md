@@ -148,7 +148,7 @@ ti [ERROR]: <message>
 
 Errors are written to stderr and successful command output is written to stdout. Usage and configuration failures return a nonzero exit code before remote mutation. Runtime and remote API failures also return nonzero. An interrupted interactive configuration returns exit code `130`.
 
-`--debug` can show redacted request and resolution context. It must not show API keys, FS tokens, DB passwords, SQL text, file contents, or connection strings.
+`--debug` can show redacted request and resolution context. It must not show API keys, Filesystem tokens, DB passwords, SQL text, file contents, or connection strings.
 
 ## Related documentation
 

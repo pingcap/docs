@@ -8,7 +8,7 @@ summary: Build AI applications and agent workflows with TiDB using SQL, integrat
 TiDB provides data and workspace capabilities for building AI applications and running AI agent workflows.
 
 - For application development, you can use SQL or [Python SDK for TiDB AI (`pytidb`)](https://github.com/pingcap/pytidb) with structured data, vector search, full-text search, hybrid search, and AI-powered retrieval.
-- For AI agents and automation, you can use [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) to manage TiDB Cloud Starter instances and SQL workflows, and use TiDB Cloud Filesystems as persistent, shared storage across local machines, CI jobs, and ephemeral agent sandboxes. Filesystems also support mounted workspaces, Git workflows, journals, and delegated secrets.
+- For AI agents and automation, you can use [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) to manage TiDB Cloud Starter instances and SQL workflows, and use [TiDB Cloud Filesystems](/tidb-cloud-filesystem/_index.md) as persistent, shared storage across local machines, CI jobs, and ephemeral agent sandboxes. Filesystems also support mounted workspaces, Git workflows, journals, and delegated secrets.
 
 ## Get started
 
@@ -101,8 +101,8 @@ The TiDB Cloud CLI (`ti`) lets users, scripts, CI jobs, and AI agents manage TiD
 | Understand what `ti` manages and when to use it | [TiDB Cloud CLI Overview](/ai/ti/ti-overview.md) |
 | Install and configure `ti`, then complete a first workflow | [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) |
 | Automate TiDB Cloud Starter instance, branch, and SQL operations | [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md) |
-| Persist and share files across machines, CI jobs, and sandboxes | [Manage Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md) and [Work with Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md) |
-| Use mounted workspaces, Git workspaces, journals, or delegated secrets | [Mount a Filesystem](/ai/ti/guides/mount-filesystem.md), [Manage Git Workspaces](/ai/ti/guides/manage-git-workspaces.md), [Use Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md), and [Manage Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md) |
+| Persist and share files across machines, CI jobs, and sandboxes | [Use TiDB Cloud Filesystem with TiDB Cloud CLI](/ai/ti/guides/manage-filesystems-via-cli.md) |
+| Use mounted workspaces, Git workspaces, journals, or delegated secrets | [Mount a Filesystem](/tidb-cloud-filesystem/filesystem-mount.md), [Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md), [Use Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md), and [Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) |
 | Follow an end-to-end automation or agent example | [Run a Daily TiDB Cloud CLI Workflow](/ai/ti/guides/ti-daily-workflow-example.md) or [Use TiDB Cloud Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md) |
 | Look up commands, global options, output behavior, and errors | [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) |
 

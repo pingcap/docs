@@ -92,5 +92,5 @@ During the v0.2.x transition, `ti` accepts a legacy `TDC_*` environment variable
 - [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md)
 - [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md)
 - [Manage TiDB Cloud Starter Instances](/ai/ti/guides/manage-starter-instances.md)
-- [Manage Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md)
+- [Manage TiDB Cloud Filesystem](/ai/ti/guides/manage-filesystems-via-cli.md)
 - [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md)

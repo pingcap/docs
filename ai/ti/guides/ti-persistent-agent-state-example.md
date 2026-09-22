@@ -87,7 +87,7 @@ Deleting the Filesystem also deletes its task files and journals.
 
 ## Security and operational notes
 
-- The FS token is an owner credential. Keep it in a runtime secret store and do not include it in images or task prompts.
+- The Filesystem token is an owner credential. Keep it in a runtime secret store and do not include it in images or task prompts.
 - A completed direct data-plane write is remotely visible. For mounted FUSE writes, unmount gracefully before deleting the sandbox.
 - Journals preserve ordered workflow evidence; task files preserve mutable working state. Use both when you need state and history.
 

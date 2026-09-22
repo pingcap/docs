@@ -124,12 +124,12 @@ Aliases use the same options, authentication, output, query, and error behavior 
 
 ## See also
 
-- [Manage TiDB Cloud Filesystem Resources](/ai/ti/guides/manage-filesystem-resources.md)
-- [Configure TiDB Cloud Filesystem AI Providers](/ai/ti/guides/configure-filesystem-ai-providers.md)
-- [Manage TiDB Cloud Filesystem Tokens](/ai/ti/guides/manage-filesystem-tokens.md)
-- [Work with TiDB Cloud Filesystem Data](/ai/ti/guides/work-with-filesystem-data.md)
-- [Manage Filesystem Layers and Checkpoints](/ai/ti/guides/manage-filesystem-layers.md)
-- [Mount a TiDB Cloud Filesystem](/ai/ti/guides/mount-filesystem.md)
-- [Manage Git Workspaces on TiDB Cloud Filesystem](/ai/ti/guides/manage-git-workspaces.md)
-- [Use TiDB Cloud Filesystem Journals](/ai/ti/guides/use-filesystem-journals.md)
-- [Manage TiDB Cloud Filesystem Vault Secrets](/ai/ti/guides/manage-filesystem-vault-secrets.md)
+- [Manage TiDB Cloud Filesystems](/tidb-cloud-filesystem/manage-filesystem-resources.md)
+- [Configure TiDB Cloud Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
+- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
+- [Manage Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
+- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Manage Git Workspaces on TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-git-workspaces.md)
+- [Use TiDB Cloud Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
+- [Manage TiDB Cloud Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)

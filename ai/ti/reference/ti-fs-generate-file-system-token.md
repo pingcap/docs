@@ -27,7 +27,7 @@ ti fs generate-file-system-token
 
 ## Options
 
-- `--file-system-id <string>`: Specify the Filesystem that owns the token. FS tokens cannot replace this option or authorize owner-token generation. This option is required.
+- `--file-system-id <string>`: Specify the Filesystem that owns the token. Filesystem tokens cannot replace this option or authorize owner-token generation. This option is required.
 - `--token-name <string>`: Set an operational token name of at most 64 bytes. Names are not unique. This option is required.
 - `--ttl <duration>`: Set a positive lifetime in whole seconds, up to 365 days. Specify exactly one of `--ttl` and `--no-expiration`.
 - `--no-expiration`: Create a token without an expiry. Specify exactly one of `--ttl` and `--no-expiration`.
