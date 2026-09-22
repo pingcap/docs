@@ -28,14 +28,19 @@ The read returns `Hello from my workspace`. For supported regions, detailed setu
 
 ## More Filesystem tasks
 
-For common tasks, see the following guides in the **TiDB Cloud Filesystem** documentation:
+After creating a Filesystem, refer to the following guides for Filesystem tasks:
 
 | What you want to do | Guide |
 | --- | --- |
-| Create, inspect, or delete a Filesystem | [Manage TiDB Cloud Filesystems](/tidb-cloud-filesystem/manage-filesystem-resources.md) |
-| Manage access tokens | [Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) |
-| Copy, read, and organize files | [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) |
-| Access files through a local mount | [Mount a Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) |
+| Access an existing Filesystem from another machine, CI job, or agent environment | [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md) |
+| Upload, download, read, organize, inspect, or search files and directories | [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) |
+| Generate, import, scope, inspect, disable, refresh, or revoke access tokens | [Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) |
+| Share files in a Filesystem with another user, machine, CI job, or agent | [Share a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-sharing.md) |
+| Access Filesystem files through local file paths | [Mount a Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) |
 | Isolate changes with layers and checkpoints | [Manage Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) |
+| Work with Git repositories on a mounted Filesystem | [Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md) |
+| Record and verify ordered workflow events | [Use Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md) |
+| Store, delegate, inject, audit, and revoke secrets | [Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) |
+| Configure AI providers for media extraction or semantic search | [Configure Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) |
 
 For syntax, flags, and output fields, see the [`ti fs` command reference](/ai/ti/reference/ti-filesystem.md).
