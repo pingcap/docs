@@ -202,6 +202,6 @@ For additional mount errors, see [Troubleshoot TiDB Cloud Filesystem](/tidb-clou
 
 ## What's next
 
-- [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
+- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
 - [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to work with layers and checkpoints through FUSE.
 - [Share a TiDB Cloud Filesystem Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md) to give another user or environment access to the Filesystem.

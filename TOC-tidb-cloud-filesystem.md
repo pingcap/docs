@@ -5,7 +5,7 @@
 
 ## GET STARTED
 
-- [Overview](/tidb-cloud-filesystem/filesystem-overview.md)
+- [Introduction](/tidb-cloud-filesystem/filesystem-intro.md)
 - [Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md)
 - Key Concepts
   - [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)

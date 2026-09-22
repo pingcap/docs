@@ -168,5 +168,5 @@ Use `--cascade` only when you intend to abandon the descendant layers as well.
 
 ## What's next
 
-- [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

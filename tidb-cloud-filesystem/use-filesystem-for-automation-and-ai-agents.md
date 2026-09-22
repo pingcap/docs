@@ -9,13 +9,13 @@ TiDB Cloud Filesystem keeps files available when a machine, CI job, or agent san
 
 If you are new to Filesystem, start with the [Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md) to create a Filesystem and work with your first file.
 
-To share work across machines and CI jobs, see the following guides in the **TiDB for AI** documentation.
+To share work across machines and CI jobs, see the following guides in the [TiDB for AI](https://docs.pingcap.com/ai/) documentation.
 
 | What you want to do | Guide |
 | --- | --- |
 | Pass build artifacts between isolated CI jobs | [Hand Off CI Artifacts Between Isolated Jobs with TiDB Cloud Filesystem](/ai/ti/guides/ti-ci-artifact-handoff-example.md) |
 
-To support AI agent workflows, see the following guides in the **TiDB for AI** documentation. If you are evaluating Filesystem for agents, start with the sandbox example before moving to longer-running or parallel workflows.
+To support AI agent workflows, see the following guides in the [TiDB for AI](https://docs.pingcap.com/ai/) documentation. If you are evaluating Filesystem for agents, start with the sandbox example before moving to longer-running or parallel workflows.
 
 | What you want to do | Guide |
 | --- | --- |

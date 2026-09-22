@@ -1,12 +1,12 @@
 ---
-title: Mount TiDB Cloud Filesystem Overview
+title: Mount TiDB Cloud Filesystem
 summary: Learn when to mount a TiDB Cloud Filesystem, which mount method to use, and the capabilities and limitations of Filesystem mounts.
 aliases: ['/ai/mount-filesystem']
 ---
 
-# Mount TiDB Cloud Filesystem Overview
+# Mount TiDB Cloud Filesystem
 
-You can work with files in TiDB Cloud Filesystem either by using `ti fs` commands directly or by mounting the Filesystem as a local directory.
+You can work with files in TiDB Cloud Filesystem either by [using `ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md) directly or by mounting the Filesystem as a local directory.
 
 Mount your TiDB Cloud Filesystem when an editor, application, agent, or other tool needs to access its files through local file paths. After mounting, the Filesystem appears as a local directory, so the tool can read and write its files using normal filesystem operations.
 

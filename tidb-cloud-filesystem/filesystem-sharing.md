@@ -116,7 +116,7 @@ The scoped token limits what you can do in the Filesystem. The `--read-only` opt
 
 Direct `ti fs` commands and mounts access the same files in the Filesystem. For example, a file uploaded with `ti fs copy-file` is also available through a mount. Changes made through a mount become available to direct commands and other users after the writes reach the service.
 
-For mount requirements and platform-specific setup, see [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md).
+For mount requirements and platform-specific setup, see [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md).
 
 ## Make sure updates are ready to share
 

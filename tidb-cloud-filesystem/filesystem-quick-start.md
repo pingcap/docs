@@ -5,7 +5,7 @@ summary: Create a TiDB Cloud Filesystem, write and read a persistent file, and k
 
 # Get Started with TiDB Cloud Filesystem
 
-[TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-overview.md) is a persistent, shared cloud file system for applications, automation, and AI agents. Files remain available independently of the machine or process that creates them, so you can reuse the same workspace across sessions and environments.
+[TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md) is a persistent, shared cloud file system for applications, automation, and AI agents. Files remain available independently of the machine or process that creates them, so you can reuse the same workspace across sessions and environments.
 
 Currently, you can access and manage TiDB Cloud Filesystems using the [TiDB Cloud CLI (`ti`)](/ai/ti/ti-quick-start.md).
 
@@ -83,12 +83,6 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 </SimpleTab>
 
-> **Note:**
->
-> On Windows, the direct file commands in this quick start are supported, but native Filesystem mounts through `ti` are not.
-
-For other installation and upgrade options, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
-
 ## Step 2. Configure TiDB Cloud CLI
 
 1. Run the interactive configuration:
@@ -104,6 +98,8 @@ For other installation and upgrade options, see [Install, Configure, and Update 
     - Your TiDB Cloud API public key and private key.
 
 The CLI saves the configuration locally. The Filesystem creation command in the next step verifies that the CLI can access TiDB Cloud using the saved credentials.
+
+To learn more about configuring TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
 ## Step 3. Create a Filesystem
 
@@ -146,7 +142,12 @@ Hello from my workspace
 
 The file is stored in TiDB Cloud Filesystem rather than in the local terminal session. It remains available after you close the terminal, and you can access it again from another session or supported environment with access to the Filesystem.
 
-This workflow accesses the file directly through `ti`; no local Filesystem mount is required.
+> **Note:**
+>
+> This example accesses files in the Filesystem directly using `ti fs` commands, without mounting it to your machine.
+
+> - On macOS or Linux, in addition to [using `ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md), you can also [mount the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) as a local directory and work with its files using standard local file operations.
+> - On Windows, native Filesystem mounting is not supported. Use `ti fs` commands such as `ti fs copy-file`, `ti fs read-file`, and `ti fs list-files` to work with files. For more information, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md).
 
 ## (Optional) Clean up
 

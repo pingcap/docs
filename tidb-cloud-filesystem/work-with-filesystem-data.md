@@ -8,9 +8,11 @@ aliases: ['/ai/work-with-filesystem-data']
 
 You can work with files and directories in a TiDB Cloud Filesystem directly from TiDB Cloud CLI (`ti`) without mounting the Filesystem.
 
-Use `ti fs` commands to upload and download files, read file contents, list and inspect paths, organize files and directories, and search for data.
+Use `ti fs` commands to upload and download files, read file contents, list and inspect paths, organize files and directories, and search for data. For the complete command reference, see [`ti fs` reference](/ai/ti/reference/ti-filesystem.md).
 
-For the complete command reference, see [`ti fs`](/ai/ti/reference/ti-filesystem.md).
+> **Tip:**
+>
+> If you want to work with files and directories in TiDB Cloud Filesystem through local file paths, see [mount the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md).
 
 ## Prerequisites
 

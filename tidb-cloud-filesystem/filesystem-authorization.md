@@ -104,4 +104,4 @@ TiDB Cloud CLI can store a selected Filesystem token locally for convenience. Lo
 
 - [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [Share a TiDB Cloud Filesystem Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md)
-- [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)

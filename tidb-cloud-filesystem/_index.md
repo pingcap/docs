@@ -9,7 +9,7 @@ summary: TiDB Cloud Filesystem provides persistent, shared file storage for appl
 
 <LearningPath label="Learn" icon="cloud1">
 
-[TiDB Cloud Filesystem Overview](/tidb-cloud-filesystem/filesystem-overview.md)
+[Introduction](/tidb-cloud-filesystem/filesystem-intro.md)
 
 [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md)
 

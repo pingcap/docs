@@ -92,5 +92,5 @@ For the complete Filesystem and credential selection rules, see [TiDB Cloud CLI 
 ## What's next
 
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-- [Mount TiDB Cloud Filesystem Locally](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
 - [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
