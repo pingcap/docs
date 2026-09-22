@@ -7,11 +7,9 @@
 
 - [Overview](/tidb-cloud-filesystem/filesystem-overview.md)
 - [Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md)
-
-## CONCEPTS
-
-- [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)
-- [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md)
+- Key Concepts
+  - [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)
+  - [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md)
 
 ## GUIDES
 
