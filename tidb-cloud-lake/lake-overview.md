@@ -13,7 +13,7 @@ TiDB Cloud Lake supports ANSI SQL, semi-structured data processing, vector searc
 >
 > TiDB Cloud Lake is currently in **public preview**. Feature availability and service limits might change as we continue to improve the product.
 
-## Why {{{ .lake }}}?
+## Why {{{ .lake }}}? {#why-lake}
 
 {{{ .lake }}} brings analytics, data engineering, search, and AI workloads together in one cloud-native platform. It combines independently scalable compute, object-storage-based data management, SQL access, and built-in multimodal capabilities in a managed service.
 
