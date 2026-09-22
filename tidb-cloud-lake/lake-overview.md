@@ -30,7 +30,7 @@ The main cost components are straightforward:
 - **Warehouse compute** is billed per second while a warehouse is running. By default, a warehouse automatically suspends after five minutes of inactivity. A suspended warehouse does not consume compute resources.
 - **Storage** is billed according to the amount of data stored in object storage.
 - **Cloud services** are billed according to API request usage.
-- **Data integration services** are billed per second while they are running.
+- **Service hosting** for data integration services is billed per second while they are running.
 
 Administrators can set a monthly spending limit. You can monitor usage and billing history. For details, see [TiDB Cloud Lake Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md) and [Managing Costs](/tidb-cloud-lake/guides/manage-costs.md).
 
