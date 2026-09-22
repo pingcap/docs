@@ -32,7 +32,7 @@ The main cost components are straightforward:
 - **Cloud services** are billed according to API request usage.
 - **Data integration services** are billed per second while they are running.
 
-You can also set a monthly spending limit and monitor usage and billing history. For details, see [TiDB Cloud Lake Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md) and [Managing Costs](/tidb-cloud-lake/guides/manage-costs.md).
+Administrators can set a monthly spending limit. You can monitor usage and billing history. For details, see [TiDB Cloud Lake Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md) and [Managing Costs](/tidb-cloud-lake/guides/manage-costs.md).
 
 ### Run high-performance analytics at scale
 
