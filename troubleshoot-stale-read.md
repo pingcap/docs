@@ -160,7 +160,7 @@ To address this issue:
 
 ### Address CheckLeader issues
 
-To address CheckLeader issues, you can check the network and the **Check Leader Duration** metric in [**TiKV-Details** > **Resolved-TS** dashboard](/grafana-tikv-dashboard.md#resolved-ts).
+To address CheckLeader issues, you can check the network and the **Check leader duration** metric in [**TiKV-Details** > **Resolved TS** dashboard](/grafana-tikv-dashboard.md#resolved-ts).
 
 ## Example
 
