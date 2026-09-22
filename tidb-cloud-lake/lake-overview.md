@@ -55,7 +55,7 @@ Together, these capabilities support batch ingestion, change data capture (CDC),
 
 ### Work with structured and semi-structured data
 
-You can use SQL to store, query, clean, and transform relational and semi-structured data in the same platform. The `VARIANT` data type preserves nested **JSON** structures, while JSON path expressions, virtual columns, and inverted indexes help you retrieve and search frequently accessed fields efficiently.
+You can use SQL to store, query, clean, and transform relational and semi-structured data in the same platform. The `VARIANT` data type preserves nested **JSON** structures, while JSON path expressions let you access nested fields, virtual columns accelerate frequently queried paths, and inverted indexes support text search.
 
 This is useful for application events, logs, user activity data, API payloads, and AI agent traces, which often have evolving schemas and can be costly to flatten up front.
 
