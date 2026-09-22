@@ -16,7 +16,7 @@ This guide shows you how to store and rotate secrets, delegate limited access, u
 
 Before you begin:
 
-- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Have access to an existing TiDB Cloud Filesystem.
 - Make the Filesystem and its owner token available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 

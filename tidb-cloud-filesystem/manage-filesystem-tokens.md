@@ -14,7 +14,7 @@ You can use an [owner token](/tidb-cloud-filesystem/filesystem-authorization.md#
 
 Before you begin:
 
-- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Have access to an existing TiDB Cloud Filesystem. If you do not have one, follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md) to create one.
 
 Some token management operations require TiDB Cloud API credentials or an existing owner token. The relevant requirements are described in each section of this guide.

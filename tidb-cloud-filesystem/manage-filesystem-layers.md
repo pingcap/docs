@@ -16,7 +16,7 @@ For an overview of how layers, checkpoints, forks, and the base Filesystem relat
 
 Before you begin:
 
-- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Have access to an existing TiDB Cloud Filesystem with a token that provides the required read or write permissions.
 - Select the Filesystem and make its token available to `ti`. For available access options, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 - Choose the base path whose data the layer overlays.

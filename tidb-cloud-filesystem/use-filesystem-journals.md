@@ -22,7 +22,7 @@ Journals are intended for workflow events and history. Store artifacts, working 
 
 Before you begin:
 
-- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Have access to an existing TiDB Cloud Filesystem.
 - Make the Filesystem and its token available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 

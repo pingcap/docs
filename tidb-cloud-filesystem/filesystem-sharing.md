@@ -20,7 +20,7 @@ Before you begin:
 
 - Have access to an existing TiDB Cloud Filesystem.
 - On a machine you trust, have an owner token for the Filesystem. You need an owner token to create scoped tokens.
-- [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli) on the machine or environment that needs access to the shared Filesystem.
+- [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli) on the machine or environment that needs access to the shared Filesystem.
 - Have a secure way, such as a secret manager, to transfer Filesystem tokens.
 
 For information about owner and scoped tokens, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).

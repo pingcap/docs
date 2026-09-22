@@ -16,7 +16,7 @@ After the workspace is set up, you can continue to use ordinary Git commands suc
 
 Before you begin:
 
-- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) through FUSE. Git workspaces are not supported on WebDAV mounts.
 - Make the mounted Filesystem and a token with the required permissions available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 - Install Git and configure authentication for the repository you want to use.

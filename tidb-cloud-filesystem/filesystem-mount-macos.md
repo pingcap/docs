@@ -21,7 +21,7 @@ Without macFUSE, TiDB Cloud CLI (`ti`) uses WebDAV. If macFUSE is installed, `ti
 
 Before you begin:
 
-- [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Make the Filesystem and its token available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
 The write examples below require a token with write permission.

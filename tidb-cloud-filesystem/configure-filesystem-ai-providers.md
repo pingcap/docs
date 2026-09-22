@@ -19,7 +19,7 @@ This guide shows you how to check the current configuration, configure providers
 
 Before you begin:
 
-- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Have access to an existing TiDB Cloud Filesystem and obtain its Filesystem ID.
 - Configure TiDB Cloud API credentials. The commands in this guide require TiDB Cloud API credentials and an explicit Filesystem ID; they do not use a Filesystem token.
 - If you want to enable or replace a provider configuration, obtain the provider endpoint, model name, and API key.

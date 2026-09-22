@@ -14,7 +14,7 @@ How you connect depends on where you are working:
 
 ## Prerequisites
 
-Before you begin, [install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli) and make sure you have access to the Filesystem. For information about owner and scoped tokens and their permissions, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
+Before you begin, [install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli) and make sure you have access to the Filesystem. For information about owner and scoped tokens and their permissions, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 
 ## Continue using a Filesystem on the same machine
 

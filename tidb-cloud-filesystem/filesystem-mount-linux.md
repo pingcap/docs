@@ -15,7 +15,7 @@ On Linux, TiDB Cloud Filesystem uses FUSE to make Filesystem data available thro
 
 Before you begin:
 
-- [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-the-cli).
+- [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Make the Filesystem and its token available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 - Use a Linux host where you can install the `fuse3` package. For a container, follow [Docker and Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md) instead.
 
