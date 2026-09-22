@@ -32,6 +32,6 @@
 
 ## REFERENCES
 
-- [Filesystem CLI Commands](/ai/ti/reference/ti-filesystem.md)
+- [Filesystem Command Reference](/tidb-cloud-filesystem/filesystem-command-reference.md)
 - [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 - [Troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md)
