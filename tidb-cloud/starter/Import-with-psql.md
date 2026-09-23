@@ -31,7 +31,7 @@ Before migration, make sure that you have the following:
 - The connection string of the target instance. To get the connection string, open the target instance in the TiDB Cloud console, click **Connect**, and select **PostgreSQL CLI**.
 - Network access from the machine where you run the migration commands to both the source PostgreSQL database and the target instance.
 
-Before migrating production workloads, review [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) and [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions.md).
+Before migrating production workloads, review [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) and [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md).
 
 ## Prepare tools
 

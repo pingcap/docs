@@ -8,6 +8,12 @@ category: quick start
 
 This tutorial guides you through creating and connecting to a PostgreSQL-compatible TiDB Cloud Starter instance.
 
+> **Note:**
+>
+> PostgreSQL-compatible TiDB Cloud Starter is currently available in Limited Public Preview. To access this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request access for your organization.
+>
+> After access is enabled, you can create PostgreSQL-compatible {{{ .starter }}} instances from the TiDB Cloud console.
+
 Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
 ## Step 1: Create a {{{ .starter }}} instance {#step-1-create-a-starter-instance}
@@ -31,7 +37,7 @@ To create a {{{ .starter }}} instance, follow these steps:
 
     > **Note:**
     >
-    > PostgreSQL-compatible {{{ .starter }}} instances are currently free during the Preview.
+    > PostgreSQL-compatible {{{ .starter }}} instances are currently free during the Limited Public Preview.
     >
     > The first 10 PostgreSQL-compatible {{{ .starter }}} instances in your account are eligible for the free quota. Each eligible instance includes the following monthly free quota:
     >
@@ -56,4 +62,4 @@ The PostgreSQL CLI client `psql` opens and connects to your {{{ .starter }}} ins
 ## What's next
 - To learn how to connect to your PostgreSQL-compatible {{{ .starter }}} instance, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-via-standard-connection-serverless.md).
 - To learn about PostgreSQL compatibility, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
-- To learn about the PostgreSQL extensions currently supported by TiDB Cloud, see [PostgreSQL extensions](/tidb-cloud/starter/pg-extensions.md).
+- To learn about the PostgreSQL extensions currently supported by TiDB Cloud, see [PostgreSQL extensions](/tidb-cloud/starter/pg-extensions-overview.md).
