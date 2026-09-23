@@ -19,6 +19,8 @@ This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), c
 
 Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the [TiDB Cloud console](https://tidbcloud.com/). The keys must have the `Organization Owner` access to your organization.
 
+The free tier allows one file system for each region. If your organization already has a file system in the region you choose, select a different supported region, add a payment method in the [TiDB Cloud console](https://tidbcloud.com/org-settings/billing/payments), or reuse the existing file system.
+
 If someone has already provided you with a file system token, skip resource creation and follow [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
 ## Step 1. Install TiDB Cloud CLI
@@ -45,10 +47,10 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 3. Add `export PATH="$HOME/.ti/bin:$PATH"` to your shell profile to keep `ti` available in new terminals.
 
-    For example, if you use `zsh`, run the following command:
+    For example, if you use `zsh`, run the following command. It adds the line only if your profile does not already contain it, so repeating this step does not create duplicates:
 
     ```bash
-    echo 'export PATH="$HOME/.ti/bin:$PATH"' >> ~/.zshrc
+    grep -qxF 'export PATH="$HOME/.ti/bin:$PATH"' ~/.zshrc || echo 'export PATH="$HOME/.ti/bin:$PATH"' >> ~/.zshrc
     source ~/.zshrc
     ```
 
@@ -97,13 +99,23 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
     - Your TiDB Cloud API public key and private key.
 
-The CLI saves the configuration locally. The file system creation command in the next step verifies that the CLI can access TiDB Cloud using the saved credentials.
+The CLI saves the configuration locally and prints a short confirmation:
+
+```json
+{
+  "profile": "default",
+  "region_code": "aws-us-east-1",
+  "credentials_stored": true
+}
+```
+
+`credentials_stored` confirms that the keys were written to this machine. It does not confirm that TiDB Cloud accepts them. The file system creation command in the next step makes the first authenticated call, and an invalid key pair fails there with `authentication failed: TiDB Cloud rejected the API key pair`.
 
 To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
 ## Step 3. Create a file system
 
-Create a file system and wait until it is ready:
+Create a file system. The `--wait` option returns only after the file system is usable, so you do not need to check its status:
 
 ```bash
 ti fs create-file-system --display-name my-workspace --wait
@@ -111,7 +123,11 @@ ti fs create-file-system --display-name my-workspace --wait
 
 The command returns information about the new file system. Copy the returned `file_system_id` for use in the next step.
 
-The CLI stores the file system credential locally, so you do not need to provide a file system token for subsequent file operations.
+> **Warning:**
+>
+> The output also contains a file system owner token in the `fs_token` field. This token grants full access to the file system, does not expire, and is returned only when it is issued. Treat it as a secret and keep it out of logs, issues, chat messages, and source control. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+
+The CLI stores the file system owner token locally, so you do not need to provide it for subsequent file operations on this machine.
 
 The display name helps you identify the file system, while the file system ID uniquely identifies the resource.
 
