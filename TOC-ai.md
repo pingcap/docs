@@ -121,20 +121,20 @@
       - [mount-file-system](/ai/ti/reference/ti-fs-mount-file-system.md)
       - [drain-file-system](/ai/ti/reference/ti-fs-drain-file-system.md)
       - [unmount-file-system](/ai/ti/reference/ti-fs-unmount-file-system.md)
-    - `ti fs-git` commands for managing File System Git workspaces
+    - `ti fs-git` Commands for Managing File System Git Workspaces
       - [Overview](/ai/ti/reference/ti-filesystem-git.md)
       - [clone-git-workspace](/ai/ti/reference/ti-fs-git-clone-git-workspace.md)
       - [hydrate-git-workspace](/ai/ti/reference/ti-fs-git-hydrate-git-workspace.md)
       - [add-git-worktree](/ai/ti/reference/ti-fs-git-add-git-worktree.md)
       - [remove-git-worktree](/ai/ti/reference/ti-fs-git-remove-git-worktree.md)
-    - `ti fs-journal` commands for managing File System journals
+    - `ti fs-journal` Commands for Managing File System Journals
       - [Overview](/ai/ti/reference/ti-filesystem-journal.md)
       - [create-journal](/ai/ti/reference/ti-fs-journal-create-journal.md)
       - [append-journal-entries](/ai/ti/reference/ti-fs-journal-append-journal-entries.md)
       - [read-journal-entries](/ai/ti/reference/ti-fs-journal-read-journal-entries.md)
       - [search-journal-entries](/ai/ti/reference/ti-fs-journal-search-journal-entries.md)
       - [verify-journal](/ai/ti/reference/ti-fs-journal-verify-journal.md)
-    - `ti fs-vault` commands for managing File System vault secrets
+    - `ti fs-vault` Commands for Managing File System Vault Secrets
       - [Overview](/ai/ti/reference/ti-filesystem-vault.md)
       - [create-secret](/ai/ti/reference/ti-fs-vault-create-secret.md)
       - [replace-secret](/ai/ti/reference/ti-fs-vault-replace-secret.md)
