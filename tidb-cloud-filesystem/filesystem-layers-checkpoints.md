@@ -11,7 +11,7 @@ Layers can also be checkpointed or forked, which lets you preserve a point in a 
 
 File system layers are independent of Git branches and do not require a Git repository.
 
-For commands to create, inspect, fork, checkpoint, commit, or roll back layers, see [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
+For commands to create, inspect, fork, checkpoint, commit, or roll back layers, see [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 
 > **Note:**
 >
@@ -42,7 +42,7 @@ A checkpoint can be accessed as a read-only view. To continue making changes fro
 
 A fork preserves the parent layer history at the point where the fork is created. After that, new changes in the parent and child layers are independent.
 
-For operational requirements when creating checkpoints or working with mounted layers, see [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
+For operational requirements when creating checkpoints or working with mounted layers, see [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 
 ## Commit and rollback
 

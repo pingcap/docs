@@ -1,11 +1,11 @@
 ---
-title: Mount TiDB Cloud Filesystem on Linux
+title: Mount a File System on Linux
 summary: Install FUSE userspace tools, mount a file system on Linux, verify access, and troubleshoot common mount permission issues.
 ---
 
-# Mount TiDB Cloud Filesystem on Linux
+# Mount a File System on Linux
 
-On Linux, TiDB Cloud Filesystem uses FUSE to make file system data available through a local directory. After mounting, your applications and tools can access the file system by using ordinary local file paths.
+On Linux, TiDB Cloud Filesystem uses FUSE to make file system data available through a local directory. After mounting a file system, your applications and tools can access the file system by using ordinary local file paths.
 
 > **Note:**
 >
@@ -218,6 +218,6 @@ For help checking whether AppArmor caused the failure, see [Ubuntu 26.04 rejects
 
 ## What's next
 
-- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
-- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to mount and work with layers or checkpoints.
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
+- [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to mount and work with layers or checkpoints.
 - [Share a File System Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md) to give another user or environment access to the file system.

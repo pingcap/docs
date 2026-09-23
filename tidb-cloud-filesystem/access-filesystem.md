@@ -5,7 +5,7 @@ summary: Learn how to access an existing file system from your current machine, 
 
 # Access an Existing File System
 
-If a file system already exists, you can access it from your current machine or another environment.
+If you already have access to a file system in TiDB Cloud Filesystem, you can connect to it from your current machine or another environment.
 
 How you connect depends on where you are working:
 
@@ -92,5 +92,5 @@ For the complete file system and credential selection rules, see [TiDB Cloud CLI
 ## What's next
 
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md)
 - [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)

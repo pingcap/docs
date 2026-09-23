@@ -18,7 +18,7 @@ Create a separate scoped token for each user or environment you want to share wi
 
 Before you begin:
 
-- Have access to an existing file system.
+- Have access to an existing file system in TiDB Cloud Filesystem.
 - On a machine you trust, have an owner token for the file system. You need an owner token to create scoped tokens.
 - [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli) on the machine or environment that needs access to the shared file system.
 - Have a secure way, such as a secret manager, to transfer file system tokens.
@@ -116,7 +116,7 @@ The scoped token limits what you can do in the file system. The `--read-only` op
 
 Direct `ti fs` commands and mounts access the same files in the file system. For example, a file uploaded with `ti fs copy-file` is also available through a mount. Changes made through a mount become available to direct commands and other users after the writes reach the service.
 
-For mount requirements and platform-specific setup, see [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md).
+For mount requirements and platform-specific setup, see [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md).
 
 ## Make sure updates are ready to share
 

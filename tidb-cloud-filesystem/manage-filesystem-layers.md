@@ -6,7 +6,7 @@ aliases: ['/ai/manage-filesystem-layers']
 
 # Manage File System Layers and Checkpoints
 
-A layer gives you a separate workspace for changing files without immediately affecting the base file system. You can make and review changes in the layer, then decide whether to apply them to the base file system or discard them.
+In TiDB Cloud Filesystem, a layer gives you a separate workspace for changing files without immediately affecting the base file system. You can make and review changes in the layer, then decide whether to apply them to the base file system or discard them.
 
 You can also create a checkpoint to preserve a point in the layer's history, or fork a new layer from the current layer or a checkpoint to continue working independently.
 
@@ -17,7 +17,7 @@ For an overview of how layers, checkpoints, forks, and the base file system rela
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to an existing file system with a token that provides the required read or write permissions.
+- Have access to an existing file system in TiDB Cloud Filesystem with a token that provides the required read or write permissions.
 - Select the file system and make its token available to `ti`. For available access options, see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 - Choose the base path whose data the layer overlays.
 
@@ -168,5 +168,5 @@ Use `--cascade` only when you intend to abandon the descendant layers as well.
 
 ## What's next
 
-- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

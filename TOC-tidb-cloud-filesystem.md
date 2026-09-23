@@ -25,9 +25,9 @@
   - [Docker and Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md)
 - [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
 - [Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md)
-- [Use File System Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
-- [Manage File System Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
-- [Configure File System AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
+- [Use Journals in a File System](/tidb-cloud-filesystem/use-filesystem-journals.md)
+- [Manage Vault Secrets for a File System](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
+- [Configure AI Providers for a File System](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
 - [Automation and AI Agent Workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
 
 ## REFERENCES

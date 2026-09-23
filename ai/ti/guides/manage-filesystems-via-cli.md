@@ -5,7 +5,7 @@ summary: Learn how to create a file system and write and read a file with `ti fs
 
 # Manage TiDB Cloud Filesystem
 
-With TiDB Cloud CLI (`ti`), you can create and manage file systems in TiDB Cloud Filesystem and work with their files from a terminal or automation workflow.
+With TiDB Cloud CLI (`ti`), you can create and manage file system resources in TiDB Cloud Filesystem and work with their files from a terminal or automation workflow.
 
 ## Create and use a file system
 
@@ -39,8 +39,8 @@ After creating a file system, refer to the following guides for file system task
 | Access files in a file system through local file paths | [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) |
 | Isolate changes with layers and checkpoints | [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) |
 | Work with Git repositories on a mounted file system | [Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md) |
-| Record and verify ordered workflow events | [Use File System Journals](/tidb-cloud-filesystem/use-filesystem-journals.md) |
-| Store, delegate, inject, audit, and revoke secrets | [Manage File System Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) |
-| Configure AI providers for media extraction or semantic search | [Configure File System AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) |
+| Record and verify ordered workflow events | [Use Journals in a File System](/tidb-cloud-filesystem/use-filesystem-journals.md) |
+| Store, delegate, inject, audit, and revoke secrets | [Manage Vault Secrets for a File System](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) |
+| Configure AI providers for media extraction or semantic search | [Configure AI Providers for a File System](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) |
 
 For syntax, flags, and output fields, see the [`ti fs` command reference](/ai/ti/reference/ti-filesystem.md).

@@ -1,10 +1,10 @@
 ---
-title: Configure TiDB Cloud Filesystem AI Providers
+title: Configure AI Providers for a File System
 summary: Configure AI providers for media extraction and embeddings in a file system.
 aliases: ['/ai/configure-filesystem-ai-providers']
 ---
 
-# Configure TiDB Cloud Filesystem AI Providers
+# Configure AI Providers for a File System
 
 Use this guide when you want TiDB Cloud Filesystem to extract searchable content from images, audio, or video, or when you want to configure a custom embedding provider for semantic search.
 

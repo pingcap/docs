@@ -1,12 +1,12 @@
 ---
-title: Manage File System Vault Secrets
+title: Manage Vault Secrets for a File System
 summary: Learn how to store and rotate secrets, delegate temporary access, inject secrets into processes, audit and revoke access, and optionally mount secrets as read-only files.
 aliases: ['/ai/manage-filesystem-vault-secrets']
 ---
 
-# Manage File System Vault Secrets
+# Manage Vault Secrets for a File System
 
-Use the file system Vault when an application, automation, or agent needs credentials or other sensitive values, but you do not want to store those values in regular file system files or give the workflow broad access to the file system.
+In TiDB Cloud Filesystem, you can use the file system Vault when an application, automation, or agent needs credentials or other sensitive values, but you do not want to store those values in regular file system files or give the workflow broad access to the file system.
 
 With Vault, a trusted owner can store a secret once and grant access to only the secret or field that a user, application, or agent needs, for a limited time. The delegated workflow can then read the permitted value, inject it into a process, or access it through a read-only mount. The owner can audit the access and revoke the grant when it is no longer needed.
 
@@ -17,7 +17,7 @@ This guide shows you how to store and rotate secrets, delegate limited access, u
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to an existing file system.
+- Have access to an existing file system in TiDB Cloud Filesystem.
 - Make the file system and its owner token available to `ti`. See [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
 An owner token is used to create and replace secrets, create and revoke grants, and view audit events. A delegated Vault token provides only the secret access allowed by its grant.

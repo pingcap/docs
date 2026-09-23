@@ -1,11 +1,11 @@
 ---
-title: Mount TiDB Cloud Filesystem in Docker
+title: Mount a File System in Docker
 summary: Mount a file system inside a Docker container on a Linux host by enabling FUSE and the required container permissions.
 ---
 
-# Mount TiDB Cloud Filesystem in Docker
+# Mount a File System in Docker
 
-To mount a file system inside a Docker container, the container must have access to FUSE on the Linux host. In addition to installing `fuse3` inside the container, you need to expose `/dev/fuse` and grant the container permission to create the mount.
+To mount a file system from TiDB Cloud Filesystem inside a Docker container, the container must have access to FUSE on the Linux host. In addition to installing `fuse3` inside the container, you need to expose `/dev/fuse` and grant the container permission to create the mount.
 
 This guide covers both Docker and Docker Compose on a Linux host. If your environment does not provide FUSE access or allow the required container privileges, use direct `ti fs` commands such as `copy-file`, `read-file`, and `list-files` instead.
 
@@ -208,6 +208,6 @@ Stopping or removing the container does not delete the remote file system or its
 
 ## What's next
 
-- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
 - [Share a File System Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md) to give another user or environment access to the same file system.
 - [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to restrict access to specific paths and operations.

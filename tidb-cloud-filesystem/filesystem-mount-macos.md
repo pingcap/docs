@@ -1,11 +1,11 @@
 ---
-title: Mount TiDB Cloud Filesystem on macOS
+title: Mount a File System on macOS
 summary: Mount a file system as a local directory on macOS, and use macFUSE when you need FUSE-specific features.
 ---
 
-# Mount TiDB Cloud Filesystem on macOS
+# Mount a File System on macOS
 
-On macOS, you can mount a file system as a local directory and access its files with your usual applications and tools.
+On macOS, you can mount a file system in TiDB Cloud Filesystem as a local directory and access its files with your usual applications and tools.
 
 For most workflows, you can mount a file system with WebDAV. It lets you access file system files through normal local file paths and does not require additional mount software.
 
@@ -154,7 +154,7 @@ To use FUSE on macOS:
 
     If your file system token grants access only to a specific remote path, add `--remote-path` as described in [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-file-system) instead of mounting the file system root.
 
-    Layer and checkpoint mounts require FUSE, and checkpoint mounts are always read-only. For details, see [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
+    Layer and checkpoint mounts require FUSE, and checkpoint mounts are always read-only. For details, see [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 
     If you need pending writes to reach the file system while keeping the mount running, see [FUSE write behavior](/tidb-cloud-filesystem/filesystem-mount.md#fuse-write-behavior). For command syntax, see [`drain-file-system`](/ai/ti/reference/ti-fs-drain-file-system.md).
 
@@ -202,6 +202,6 @@ For additional mount errors, see [Troubleshoot TiDB Cloud Filesystem](/tidb-clou
 
 ## What's next
 
-- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
-- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to work with layers and checkpoints through FUSE.
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
+- [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to work with layers and checkpoints through FUSE.
 - [Share a File System Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md) to give another user or environment access to the file system.

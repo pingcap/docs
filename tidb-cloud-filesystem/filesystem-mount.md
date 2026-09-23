@@ -1,14 +1,14 @@
 ---
-title: Mount TiDB Cloud Filesystem
+title: Mount a File System
 summary: Learn when to mount a file system, which mount method to use, and the capabilities and limitations of file system mounts.
 aliases: ['/ai/mount-filesystem']
 ---
 
-# Mount TiDB Cloud Filesystem
+# Mount a File System
 
-You can work with files in TiDB Cloud Filesystem either by [using `ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md) directly or by mounting the file system as a local directory.
+In TiDB Cloud Filesystem, you can work with files either by [using `ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md) directly or by mounting the file system as a local directory.
 
-Mount your TiDB Cloud Filesystem when an editor, application, agent, or other tool needs to access its files through local file paths. After mounting, the file system appears as a local directory, so the tool can read and write its files using normal filesystem operations.
+Mount your file system when an editor, application, agent, or other tool needs to access its files through local file paths. After mounting, the file system appears as a local directory, so the tool can read and write its files using normal filesystem operations.
 
 If you only need to perform file operations through the CLI, such as reading, copying, organizing, or searching files, use `ti fs` commands directly instead of mounting the file system.
 
@@ -22,9 +22,9 @@ The available mount method depends on your environment:
 
 | Environment | Mount method | Detailed Guide |
 | --- | --- | --- |
-| Linux | FUSE | [Mount TiDB Cloud Filesystem on Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md) |
-| macOS | WebDAV for general file access, or FUSE with macFUSE for FUSE-specific features | [Mount TiDB Cloud Filesystem on macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md) |
-| Docker on Linux | FUSE with access to `/dev/fuse` and additional container privileges | [Mount TiDB Cloud Filesystem in Docker](/tidb-cloud-filesystem/filesystem-mount-docker.md) |
+| Linux | FUSE | [Mount a File System on Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md) |
+| macOS | WebDAV for general file access, or FUSE with macFUSE for FUSE-specific features | [Mount a File System on macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md) |
+| Docker on Linux | FUSE with access to `/dev/fuse` and additional container privileges | [Mount a File System in Docker](/tidb-cloud-filesystem/filesystem-mount-docker.md) |
 
 Native file system mounting is not supported on Windows. On Windows, use direct commands such as `ti fs copy-file`, `ti fs read-file`, and `ti fs list-files` instead.
 
@@ -57,7 +57,7 @@ Use `--read-only` to prevent writes through a particular mount. This option does
 
 Layers and checkpoints require FUSE. Checkpoint mounts are always read-only.
 
-For layer and checkpoint workflows, see [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
+For layer and checkpoint workflows, see [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 
 ## Finish safely
 
@@ -83,8 +83,8 @@ WebDAV mounts do not support `drain-file-system`.
 
 Choose the guide for your environment:
 
-- [Mount TiDB Cloud Filesystem on Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md)
-- [Mount TiDB Cloud Filesystem on macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md)
-- [Mount TiDB Cloud Filesystem in Docker](/tidb-cloud-filesystem/filesystem-mount-docker.md)
+- [Mount a File System on Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md)
+- [Mount a File System on macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md)
+- [Mount a File System in Docker](/tidb-cloud-filesystem/filesystem-mount-docker.md)
 
 For all mount options, see the [`mount-file-system` command reference](/ai/ti/reference/ti-fs-mount-file-system.md).

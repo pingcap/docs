@@ -31,7 +31,7 @@ You can access and work with file system data in two ways:
 - **Use `ti fs` commands**: upload, download, read, organize, and search files directly from the command line without mounting the file system.
 - **Mount the file system as a local directory**: let applications and tools access file system data through normal local file paths.
 
-For more information, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) and [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md).
+For more information, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) and [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md).
 
 ## Share files across environments
 
