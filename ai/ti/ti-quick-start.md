@@ -111,7 +111,7 @@ Proceed with either of the following workflows based on your needs:
 - [Option A: TiDB Cloud Filesystem](/ai/ti/ti-quick-start.md#option-a-tidb-cloud-filesystem)
 - [Option B: TiDB Cloud Starter](/ai/ti/ti-quick-start.md#option-b-tidb-cloud-starter)
 
-### Option A: Create and use a file system
+### Option A: TiDB Cloud Filesystem
 
 TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
 
