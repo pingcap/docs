@@ -20,10 +20,9 @@ This document summarizes the DDL, DML, and column type support for TiDB Cloud Da
 | `ADD COLUMN NOT NULL DEFAULT` |      ✅ |
 | `MODIFY COLUMN (widen)`       |      ✅ |
 | `DROP COLUMN`                 |      ✅ |
-| `ADD INDEX` / `DROP INDEX`    |      ✅ |
 | `RENAME COLUMN`               |      ✅ |
 
-DDL operations not listed above are not processed by the pipeline and may block subsequent consumption for the affected table.
+DDL operations not listed above are not processed by the pipeline and may block subsequent consumption for the affected table. In addition, combining multiple changes in a single `ALTER TABLE` statement is not supported.
 
 ## DML support summary
 
