@@ -27,7 +27,7 @@ summary: TiDB Cloud Filesystem provides persistent, shared file storage for appl
 
 [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md)
 
-[Mount a file system](/tidb-cloud-filesystem/filesystem-mount.md)
+[Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md)
 
 </LearningPath>
 
@@ -55,7 +55,7 @@ summary: TiDB Cloud Filesystem provides persistent, shared file storage for appl
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[file system CLI Commands](/ai/ti/reference/ti-filesystem.md)
+[File System CLI Commands](/ai/ti/reference/ti-filesystem.md)
 
 [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 

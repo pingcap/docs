@@ -99,5 +99,5 @@ File system deletion is asynchronous. After the service accepts the request, the
 
 - [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to generate, delegate, rotate, or revoke file system access.
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) to copy, read, organize, and search file system data.
-- [Mount a file system](/tidb-cloud-filesystem/filesystem-mount.md) to access remote files through a local directory.
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) to access remote files through a local directory.
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md) for command syntax, flags, and output fields.

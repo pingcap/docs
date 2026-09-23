@@ -33,7 +33,7 @@ TiDB Cloud Filesystem uses the following credential types:
 
 | Credential                 | Access                                                                              | Typical use                                                             |
 | -------------------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| TiDB Cloud API credentials | Manage file system resources and owner tokens according to the account's permissions | file system administration in a trusted environment                      |
+| TiDB Cloud API credentials | Manage file system resources and owner tokens according to the account's permissions | File system administration in a trusted environment                      |
 | Owner token                | Broad access to one file system, including its data and scoped-token management      | Trusted workflows that need full file system access                      |
 | Scoped token               | Access only to specified paths and operations in one file system                     | Users, applications, agents, or other machines that need limited access |
 

@@ -6,7 +6,7 @@ aliases: ['/ai/manage-filesystem-vault-secrets']
 
 # Manage File System Vault Secrets
 
-Use file system Vault when an application, automation, or agent needs credentials or other sensitive values, but you do not want to store those values in regular file system files or give the workflow broad access to the file system.
+Use the file system Vault when an application, automation, or agent needs credentials or other sensitive values, but you do not want to store those values in regular file system files or give the workflow broad access to the file system.
 
 With Vault, a trusted owner can store a secret once and grant access to only the secret or field that a user, application, or agent needs, for a limited time. The delegated workflow can then read the permitted value, inject it into a process, or access it through a read-only mount. The owner can audit the access and revoke the grant when it is no longer needed.
 

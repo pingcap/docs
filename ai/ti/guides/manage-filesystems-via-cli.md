@@ -36,8 +36,8 @@ After creating a file system, refer to the following guides for file system task
 | Upload, download, read, organize, inspect, or search files and directories | [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) |
 | Generate, import, scope, inspect, disable, refresh, or revoke access tokens | [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) |
 | Share files in a file system with another user, machine, CI job, or agent | [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md) |
-| Access files in a file system through local file paths | [Mount a file system](/tidb-cloud-filesystem/filesystem-mount.md) |
-| Isolate changes with layers and checkpoints | [Manage Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) |
+| Access files in a file system through local file paths | [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) |
+| Isolate changes with layers and checkpoints | [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) |
 | Work with Git repositories on a mounted file system | [Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md) |
 | Record and verify ordered workflow events | [Use File System Journals](/tidb-cloud-filesystem/use-filesystem-journals.md) |
 | Store, delegate, inject, audit, and revoke secrets | [Manage File System Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) |

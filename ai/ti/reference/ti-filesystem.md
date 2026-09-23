@@ -128,7 +128,7 @@ Aliases use the same options, authentication, output, query, and error behavior 
 - [Configure File System AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
 - [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-- [Manage Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
+- [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
 - [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md)
 - [Manage Git Workspaces on TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-git-workspaces.md)
 - [Use File System Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)

@@ -23,7 +23,7 @@
   - [Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md)
   - [macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md)
   - [Docker and Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md)
-- [Manage Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
+- [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
 - [Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md)
 - [Use File System Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
 - [Manage File System Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)

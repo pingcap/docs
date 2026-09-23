@@ -44,7 +44,7 @@ The following table summarizes which state is migrated:
 | Profiles and TiDB Cloud API credentials | Binaries |
 | Global preferences and the telemetry installation identity | Logs and caches |
 | Database SQL credentials | Local overlays |
-| file system registrations and credentials | Mount locators and companion runtime state |
+| File system registrations and credentials | Mount locators and companion runtime state |
 
 After installation, verify the new executable and run a read-only command for the resources you use. For example:
 
