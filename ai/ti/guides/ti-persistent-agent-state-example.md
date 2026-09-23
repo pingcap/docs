@@ -13,7 +13,7 @@ This workflow keeps plans, intermediate results, diagnostic files, and workflow 
 
 ## How it works
 
-A trusted machine provisions one Filesystem. Each sandbox receives only the Filesystem token and region code. The token identifies the Filesystem, so the agent can write durable task state to the remote namespace and record workflow transitions in a journal without receiving TiDB Cloud control-plane keys.
+A trusted machine provisions one Filesystem. Each sandbox receives only the file system token and region code. The token identifies the Filesystem, so the agent can write durable task state to the remote namespace and record workflow transitions in a journal without receiving TiDB Cloud control-plane keys.
 
 ## Prerequisites
 
@@ -87,7 +87,7 @@ Deleting the Filesystem also deletes its task files and journals.
 
 ## Security and operational notes
 
-- The Filesystem token is an owner credential. Keep it in a runtime secret store and do not include it in images or task prompts.
+- The file system token is an owner credential. Keep it in a runtime secret store and do not include it in images or task prompts.
 - A completed direct data-plane write is remotely visible. For mounted FUSE writes, unmount gracefully before deleting the sandbox.
 - Journals preserve ordered workflow evidence; task files preserve mutable working state. Use both when you need state and history.
 

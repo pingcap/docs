@@ -5,7 +5,7 @@ summary: Review supported TiDB Cloud Filesystem regions, mount platform requirem
 
 # TiDB Cloud Filesystem Regions and Limitations
 
-TiDB Cloud Filesystem is available only in the regions and environments listed below. Check these boundaries before creating a Filesystem or choosing how to access its data.
+TiDB Cloud Filesystem is available only in the regions and environments listed below. Check these boundaries before creating a file system or choosing how to access its data.
 
 > **Note:**
 >
@@ -50,7 +50,7 @@ For the supported drain and graceful unmount workflow, see [Finish safely](/tidb
 - The local credential store keeps one selected token per profile and Filesystem. It does not mirror all remote tokens. Older create or import credentials without a known token ID remain usable, but cannot be correlated with remote token metadata.
 - Filesystem extraction and embedding provider configuration is optional. Leaving it unconfigured does not block resource administration, file access, search, layers, Git, journal, vault, or mount workflows.
 - OpenAI provider interfaces are supported for embedding and image, audio, and video extraction. Alibaba Cloud Model Studio Qwen ASR is supported only for audio extraction. Other vendors are conditionally compatible only through the exact OpenAI-compatible contract; native Anthropic, Gemini, Vertex AI, Bedrock, and Azure OpenAI interfaces are not supported.
-- App-managed embedding requires a provider model that returns exactly 1024 dimensions. Filesystems that report `source=database_auto` use database-managed embedding and reject app-managed configuration. For configuration steps, see [Configure TiDB Cloud Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
+- App-managed embedding requires a provider model that returns exactly 1024 dimensions. File systems that report `source=database_auto` use database-managed embedding and reject app-managed configuration. For configuration steps, see [Configure TiDB Cloud Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
 - Filesystem runtime operations, including direct file access, layers, mounts, Git workspaces, journals, and Vault operations, depend on the bundled Filesystem runtime component installed with `ti`.
 
-For token or mount failures, see [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md). For command syntax and options, see the [Filesystem CLI command reference](/ai/ti/reference/ti-filesystem.md).
+For token or mount failures, see [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md). For command syntax and options, see the [TiDB Cloud Filesystem CLI command reference](/ai/ti/reference/ti-filesystem.md).

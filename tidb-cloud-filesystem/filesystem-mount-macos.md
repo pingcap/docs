@@ -48,7 +48,7 @@ For most workflows, you can use WebDAV without installing additional mount softw
 
     After the command succeeds, you can access the Filesystem through `$HOME/workspace`.
 
-    If your Filesystem token grants access only to a specific remote path, use the following command instead of the preceding mount command:
+    If your file system token grants access only to a specific remote path, use the following command instead of the preceding mount command:
 
     ```bash
     ti fs mount-file-system \
@@ -152,7 +152,7 @@ To use FUSE on macOS:
 
     Run the FUSE mount and the applications that access it as the same OS user.
 
-    If your Filesystem token grants access only to a specific remote path, add `--remote-path` as described in [Mount only part of the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-filesystem) instead of mounting the Filesystem root.
+    If your file system token grants access only to a specific remote path, add `--remote-path` as described in [Mount only part of the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-filesystem) instead of mounting the Filesystem root.
 
     Layer and checkpoint mounts require FUSE, and checkpoint mounts are always read-only. For details, see [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 

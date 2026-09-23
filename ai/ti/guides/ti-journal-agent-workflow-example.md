@@ -17,7 +17,7 @@ A Filesystem journal stores structured append-only entries with sequence informa
 
 ## Prerequisites
 
-Select a Filesystem through a configured profile or Filesystem token environment.
+Select a file system through a configured profile or file system token environment.
 
 ## Step 1. Create the journal
 

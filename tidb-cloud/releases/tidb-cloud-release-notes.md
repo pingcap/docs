@@ -26,7 +26,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 * **TiDB Cloud CLI**
 
-  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is now available in public preview for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and TiDB Cloud Filesystems. A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads.
+  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is now available in public preview for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and file systems in TiDB Cloud Filesystem. A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads.
 
   You can use `ti` directly or let your scripts, CI jobs, and AI agents run it to automate TiDB Cloud workflows. With `ti`, you can create and manage TiDB Cloud Starter instances, execute SQL statements, and create and access persistent Filesystem workspaces through file commands or supported mounts. JSON output by default, JMESPath output queries, and support for `--wait` and `--dry-run` on applicable commands simplify automation.
 

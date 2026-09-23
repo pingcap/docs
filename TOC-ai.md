@@ -75,7 +75,7 @@
       - [create-db-sql-users](/ai/ti/reference/ti-db-create-db-sql-users.md)
       - [format-db-connection-string](/ai/ti/reference/ti-db-format-db-connection-string.md)
       - [execute-sql-statement](/ai/ti/reference/ti-db-execute-sql-statement.md)
-    - `ti fs` commands for managing TiDB Cloud Filesystems
+    - `ti fs` commands for managing file systems in TiDB Cloud Filesystem
       - [Overview](/ai/ti/reference/ti-filesystem.md)
       - [create-file-system](/ai/ti/reference/ti-fs-create-file-system.md)
       - [import-file-system-token](/ai/ti/reference/ti-fs-import-file-system-token.md)

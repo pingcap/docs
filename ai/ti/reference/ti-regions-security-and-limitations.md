@@ -38,8 +38,8 @@ Supported Filesystem regions are built into each `ti` release. To use Filesystem
 | `ti fs create-file-system` | TiDB Cloud API key |
 | `ti fs delete-file-system` | TiDB Cloud API key and file system ID |
 | Describe or update Filesystem extraction and embedding configuration | TiDB Cloud API key and explicit file system ID |
-| Generate, list, enable, disable, or delete Filesystem tokens | TiDB Cloud API key and explicit file system ID |
-| Refresh a Filesystem token | The current FS bearer token only |
+| Generate, list, enable, disable, or delete file system tokens | TiDB Cloud API key and explicit file system ID |
+| Refresh a file system token | The current FS bearer token only |
 | Remote file, layer, pack, mount, Git, journal, and owner vault operations | FS owner token or registered resource credential |
 | Delegated vault read, list, run, or mount | Scope-appropriate delegated vault token |
 | Drain and unmount after a successful background mount | Non-secret mount locator in the same `HOME` |
@@ -55,7 +55,7 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.ti/credentials`, resource credentials, and DB SQL credentials owner-readable only.
 - Review local operation logs before sharing diagnostics. The logs exclude SQL text, paths, payloads, and credential values, but command names, flag names, profile and region metadata, status codes, and operational timing can still be sensitive.
 
-For Filesystem token, mount, Vault, and AI provider security, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md), [Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md), and [Configure Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
+For file system token, mount, Vault, and AI provider security, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md), [Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md), and [Configure Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
 
 ## Product limitations
 

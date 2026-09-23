@@ -13,7 +13,7 @@ This workflow gives multiple short-lived workers one shared corpus without downl
 
 ## How it works
 
-An owner uploads the corpus once and creates a scoped, read-only Filesystem token for each worker. Every worker selects the same Filesystem and mounts the corpus read-only, so ordinary tools can traverse one common namespace without a storage SDK. This reduces startup time and avoids independent point-in-time copies. If workers produce results, they write them to separate paths in a different, writable output Filesystem, not to the dataset Filesystem.
+An owner uploads the corpus once and creates a scoped, read-only file system token for each worker. Every worker selects the same Filesystem and mounts the corpus read-only, so ordinary tools can traverse one common namespace without a storage SDK. This reduces startup time and avoids independent point-in-time copies. If workers produce results, they write them to separate paths in a different, writable output Filesystem, not to the dataset Filesystem.
 
 ## Prerequisites
 
@@ -98,5 +98,5 @@ ti fs delete-file-system --file-system-id "$TI_FS_FILE_SYSTEM_ID"
 ## What's next
 
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)
-- [Use a Filesystem in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md)
+- [Use a file system in an Agent Sandbox](/ai/ti/guides/ti-agent-sandbox-example.md)
 - [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md)

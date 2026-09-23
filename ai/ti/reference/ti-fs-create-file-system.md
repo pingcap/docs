@@ -5,7 +5,7 @@ summary: Create a TiDB Cloud Filesystem.
 
 # ti fs create-file-system
 
-Creates a Filesystem and returns its ID and owner token. The CLI stores and selects the token in the current profile. Use `--wait` to wait until the Filesystem is ready for use.
+Creates a file system and returns its ID and owner token. The CLI stores and selects the token in the current profile. Use `--wait` to wait until the Filesystem is ready for use.
 
 You can optionally set a display name and labels. These values appear in `list-file-systems` and `describe-file-system` output but do not select the Filesystem in later commands.
 
@@ -42,7 +42,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- Create a Filesystem and wait until it is ready:
+- Create a file system and wait until it is ready:
 
     ```bash
     # Wait until the new Filesystem root is readable before returning.
@@ -53,7 +53,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
       --wait
     ```
 
-- Create a Filesystem asynchronously:
+- Create a file system asynchronously:
 
     ```bash
     # Return after provisioning is accepted so work can continue in parallel.

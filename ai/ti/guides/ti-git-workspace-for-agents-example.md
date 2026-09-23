@@ -17,7 +17,7 @@ This workflow removes a large repository clone from the critical path of startin
 
 ## Prerequisites
 
-- Select a Filesystem.
+- Select a file system.
 - Use Linux FUSE or macOS with macFUSE and explicit `--driver fuse`. Git workspaces rely on FUSE to combine the remote Git tree and workspace changes into the mounted path; WebDAV mounts do not provide this integration.
 - Install Git and configure repository authentication.
 

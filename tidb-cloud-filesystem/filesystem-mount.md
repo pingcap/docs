@@ -32,7 +32,7 @@ On macOS, WebDAV is sufficient for general file access and does not require addi
 
 ## Use a token without configuring a profile
 
-If another user or system administrator gives you a Filesystem token, you can use that token from the current machine without configuring a `ti` profile or using the creator's API keys:
+If another user or system administrator gives you a file system token, you can use that token from the current machine without configuring a `ti` profile or using the creator's API keys:
 
 ```bash
 export TI_FS_TOKEN="<filesystem-token>"
@@ -51,7 +51,7 @@ By default, a mount exposes the Filesystem root `/`. Use `--remote-path` to expo
 
 ### Create a read-only mount
 
-Use `--read-only` to prevent writes through a particular mount. This option does not change the permissions of the Filesystem token. To enforce read-only access at the service level, use a scoped token with read-only permissions.
+Use `--read-only` to prevent writes through a particular mount. This option does not change the permissions of the file system token. To enforce read-only access at the service level, use a scoped token with read-only permissions.
 
 ### Mount layers and checkpoints
 

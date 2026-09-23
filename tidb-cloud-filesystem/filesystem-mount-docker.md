@@ -19,7 +19,7 @@ Before you begin:
 
 - Use a Linux Docker host where `/dev/fuse` is available.
 - Have permission to start containers with access to `/dev/fuse` and the capabilities required to create a mount.
-- Have a Filesystem token and region code for an existing TiDB Cloud Filesystem. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+- Have a file system token and region code for an existing TiDB Cloud Filesystem. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
 Docker Desktop and managed container or sandbox environments might not expose `/dev/fuse` or allow the required privileges.
 
@@ -27,18 +27,18 @@ Docker Desktop and managed container or sandbox environments might not expose `/
 >
 > The examples in this guide grant the container `SYS_ADMIN` and disable its AppArmor profile with `apparmor=unconfined`. These settings give the container broader privileges than a standard Docker container.
 >
-> Use them only when permitted by your environment's security policy. Do not run untrusted code with these privileges unless your environment provides an appropriate additional isolation boundary. A scoped Filesystem token can restrict access to Filesystem data, but it does not reduce the privileges granted to the container by Docker.
+> Use them only when permitted by your environment's security policy. Do not run untrusted code with these privileges unless your environment provides an appropriate additional isolation boundary. A scoped file system token can restrict access to Filesystem data, but it does not reduce the privileges granted to the container by Docker.
 
 ## Provide Filesystem access to the container
 
-On the Docker host, set the Filesystem token and region code:
+On the Docker host, set the file system token and region code:
 
 ```bash
 export TI_FS_TOKEN="<filesystem-token>"
 export TI_REGION_CODE="<filesystem-region-code>"
 ```
 
-Treat the Filesystem token as a secret. Do not put it in a Dockerfile or commit it to source control.
+Treat the file system token as a secret. Do not put it in a Dockerfile or commit it to source control.
 
 The Docker and Docker Compose examples below pass these environment variables from the host into the container.
 
@@ -64,7 +64,7 @@ This command does the following:
 
 - Exposes the host's `/dev/fuse` device to the container;
 - Grants the capability required to create the mount; and
-- Passes the Filesystem token and region code into the container.
+- Passes the file system token and region code into the container.
 
 After the container starts, continue with [Install and mount inside the container](#install-and-mount-inside-the-container).
 
@@ -130,7 +130,7 @@ The following steps run inside the container. They use the `ubuntu:24.04` image 
 
     On Linux, `ti` uses FUSE by default. After the command succeeds, you can access the Filesystem through `$HOME/workspace`. If the mount fails to start, inspect the diagnostic log path reported by `ti`.
 
-    If your Filesystem token grants access only to a specific remote path, use the following command instead of the preceding mount command:
+    If your file system token grants access only to a specific remote path, use the following command instead of the preceding mount command:
 
     ```bash
     ti fs mount-file-system \

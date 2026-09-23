@@ -19,7 +19,7 @@ Use `ti fs` commands to upload and download files, read file contents, list and 
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- [Create a Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) or obtain access to an existing one.
+- [Create a file system](/tidb-cloud-filesystem/manage-filesystem-resources.md) or obtain access to an existing one.
 - Select the Filesystem and make its token available to `ti`. For available access options, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
 ## Upload and download files

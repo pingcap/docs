@@ -76,7 +76,7 @@ On another Linux distribution, install the FUSE package that provides `fusermoun
 
     After the mount succeeds, you can access the Filesystem through `$HOME/workspace`.
 
-    If your Filesystem token grants access only to a specific remote path, use the following command instead of the preceding mount command:
+    If your file system token grants access only to a specific remote path, use the following command instead of the preceding mount command:
 
     ```bash
     ti fs mount-file-system \

@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault list-secrets
-summary: List secrets visible to a Filesystem Vault credential.
+summary: List secrets visible to a file system Vault credential.
 ---
 
 # ti fs-vault list-secrets

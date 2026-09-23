@@ -5,7 +5,7 @@ summary: Learn how to diagnose TiDB Cloud CLI API authentication, Starter quota,
 
 # Troubleshoot TiDB Cloud CLI
 
-Use this reference to diagnose CLI authentication, Starter, SQL, and interrupted-command failures. For Filesystem tokens, regions, companion processes, and mounts, see [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md). Add `--debug` only when needed; review redacted output before sharing it.
+Use this reference to diagnose CLI authentication, Starter, SQL, and interrupted-command failures. For file system tokens, regions, companion processes, and mounts, see [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md). Add `--debug` only when needed; review redacted output before sharing it.
 
 > **Note:**
 >

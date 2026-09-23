@@ -42,7 +42,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- Unmount a Filesystem:
+- Unmount a file system:
 
     ```bash
     # Gracefully flush pending writes and detach the Filesystem mount.

@@ -29,7 +29,7 @@ ti fs search-file-content
 
 - `--pattern <string>`: Text query used for full-text and, when configured, semantic search over extracted file content and descriptions. The value is not a regular expression or glob. \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
 - `--help`: Display help information.
 - `--layer-id <string>`: Search within a file system layer.
 - `--limit <int32>`: Maximum number of search results; 0 uses the service default.

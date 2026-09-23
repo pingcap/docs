@@ -1,11 +1,11 @@
 ---
 title: ti fs refresh-file-system-token
-summary: Rotate one TiDB Cloud Filesystem token and return its replacement plaintext once.
+summary: Rotate one TiDB Cloud file system token and return its replacement plaintext once.
 ---
 
 # ti fs refresh-file-system-token
 
-Rotates the supplied Filesystem token and returns its replacement value once. The previous value stops working after authentication changes propagate, which can take approximately 10 seconds.
+Rotates the supplied file system token and returns its replacement value once. The previous value stops working after authentication changes propagate, which can take approximately 10 seconds.
 
 > **Warning:**
 >

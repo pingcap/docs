@@ -1,11 +1,11 @@
 ---
 title: ti fs enable-file-system-token
-summary: Enable a disabled TiDB Cloud Filesystem token.
+summary: Enable a disabled TiDB Cloud file system token.
 ---
 
 # ti fs enable-file-system-token
 
-Re-enables a disabled Filesystem token. The token can take approximately 10 seconds to become usable. With owner token authentication, only scoped tokens can be enabled; TiDB Cloud API keys can enable either token kind.
+Re-enables a disabled file system token. The token can take approximately 10 seconds to become usable. With owner token authentication, only scoped tokens can be enabled; TiDB Cloud API keys can enable either token kind.
 
 > **Note:**
 >
@@ -27,7 +27,7 @@ ti fs enable-file-system-token
 
 - `--file-system-id <string>`: Specify the Filesystem that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
 - `--token-id <string>`: Specify the immutable token ID returned by the list command. This option is required.
-- `--fs-token <string>`: Authorize the request with a Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. If no Filesystem token is available, the command uses the configured TiDB Cloud API keys.
+- `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. If no file system token is available, the command uses the configured TiDB Cloud API keys.
 - `--dry-run`: Validate the request without changing remote token state.
 - `--help`: Display help information.
 - `--version`: Display version information.

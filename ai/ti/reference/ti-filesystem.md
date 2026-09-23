@@ -13,12 +13,12 @@ In command syntax, square brackets (`[]`) enclose optional items. Parentheses gr
 
 | Command | Description |
 | --- | --- |
-| [`create-file-system`](/ai/ti/reference/ti-fs-create-file-system.md) | Creates a Filesystem and its initial owner token. |
-| [`list-file-systems`](/ai/ti/reference/ti-fs-list-file-systems.md) | Lists Filesystems in the effective region. |
+| [`create-file-system`](/ai/ti/reference/ti-fs-create-file-system.md) | Creates a file system and its initial owner token. |
+| [`list-file-systems`](/ai/ti/reference/ti-fs-list-file-systems.md) | Lists file systems in the effective region. |
 | [`describe-file-system`](/ai/ti/reference/ti-fs-describe-file-system.md) | Describes one Filesystem by ID. |
 | [`check-file-system`](/ai/ti/reference/ti-fs-check-file-system.md) | Checks Filesystem selection, routing, credentials, and data-plane access. |
-| [`delete-file-system`](/ai/ti/reference/ti-fs-delete-file-system.md) | Permanently deletes a Filesystem. |
-| [`import-file-system-token`](/ai/ti/reference/ti-fs-import-file-system-token.md) | Imports and selects an existing Filesystem token locally. |
+| [`delete-file-system`](/ai/ti/reference/ti-fs-delete-file-system.md) | Permanently deletes a file system. |
+| [`import-file-system-token`](/ai/ti/reference/ti-fs-import-file-system-token.md) | Imports and selects an existing file system token locally. |
 | [`generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) | Generates an additional owner token. |
 | [`generate-file-system-scoped-token`](/ai/ti/reference/ti-fs-generate-file-system-scoped-token.md) | Generates a token limited by path, operation, and lifetime. |
 | [`list-file-system-tokens`](/ai/ti/reference/ti-fs-list-file-system-tokens.md) | Lists non-secret token metadata. |
@@ -46,7 +46,7 @@ These commands configure optional providers for extracting content from media fi
 
 | Command | Description |
 | --- | --- |
-| [`copy-file`](/ai/ti/reference/ti-fs-copy-file.md) | Copies files between local storage and a Filesystem, or within a Filesystem. |
+| [`copy-file`](/ai/ti/reference/ti-fs-copy-file.md) | Copies files between local storage and a file system, or within a file system. |
 | [`read-file`](/ai/ti/reference/ti-fs-read-file.md) | Reads a remote file or byte range. |
 | [`list-files`](/ai/ti/reference/ti-fs-list-files.md) | Lists entries under a remote path. |
 | [`describe-file`](/ai/ti/reference/ti-fs-describe-file.md) | Describes a remote file or directory. |
@@ -64,7 +64,7 @@ These commands configure optional providers for extracting content from media fi
 | Command | Description |
 | --- | --- |
 | [`create-layer`](/ai/ti/reference/ti-fs-create-layer.md) | Creates an isolated writable layer. |
-| [`list-layers`](/ai/ti/reference/ti-fs-list-layers.md) | Lists layers in a Filesystem. |
+| [`list-layers`](/ai/ti/reference/ti-fs-list-layers.md) | Lists layers in a file system. |
 | [`fork-layer`](/ai/ti/reference/ti-fs-fork-layer.md) | Forks a child layer from a parent tip or checkpoint. |
 | [`list-layer-chain`](/ai/ti/reference/ti-fs-list-layer-chain.md) | Lists the pinned ancestry of a layer. |
 | [`describe-layer`](/ai/ti/reference/ti-fs-describe-layer.md) | Describes a layer by ID. |
@@ -94,9 +94,9 @@ A local overlay stores files that a mount profile keeps on the local machine ins
 
 | Command | Description |
 | --- | --- |
-| [`mount-file-system`](/ai/ti/reference/ti-fs-mount-file-system.md) | Mounts a Filesystem at a local path. |
+| [`mount-file-system`](/ai/ti/reference/ti-fs-mount-file-system.md) | Mounts a file system at a local path. |
 | [`drain-file-system`](/ai/ti/reference/ti-fs-drain-file-system.md) | Flushes pending writes from a live FUSE mount. |
-| [`unmount-file-system`](/ai/ti/reference/ti-fs-unmount-file-system.md) | Flushes and unmounts a Filesystem. |
+| [`unmount-file-system`](/ai/ti/reference/ti-fs-unmount-file-system.md) | Flushes and unmounts a file system. |
 
 ## Command aliases
 
@@ -124,11 +124,11 @@ Aliases use the same options, authentication, output, query, and error behavior 
 
 ## See also
 
-- [Manage TiDB Cloud Filesystems](/tidb-cloud-filesystem/manage-filesystem-resources.md)
+- [Manage TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md)
 - [Configure TiDB Cloud Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
 - [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-- [Manage Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
+- [Manage Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
 - [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
 - [Manage Git Workspaces on TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-git-workspaces.md)
 - [Use TiDB Cloud Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)

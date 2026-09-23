@@ -7,9 +7,9 @@ summary: Create a TiDB Cloud Filesystem, write and read a persistent file, and k
 
 [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md) is a persistent, shared cloud file system for applications, automation, and AI agents. Files remain available independently of the machine or process that creates them, so you can reuse the same workspace across sessions and environments.
 
-Currently, you can access and manage TiDB Cloud Filesystems using the [TiDB Cloud CLI (`ti`)](/ai/ti/ti-quick-start.md).
+Currently, you can access and manage TiDB Cloud Filesystem using the [TiDB Cloud CLI (`ti`)](/ai/ti/ti-quick-start.md).
 
-This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), creating a Filesystem, and writing and reading a file directly from the CLI without mounting the Filesystem. You can mount the same Filesystem afterward.
+This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), creating a file system, and writing and reading a file directly from the CLI without mounting the Filesystem. You can mount the same Filesystem afterward.
 
 > **Note:**
 >
@@ -19,7 +19,7 @@ This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), c
 
 Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the [TiDB Cloud console](https://tidbcloud.com/). The keys must have the `Organization Owner` access to your organization.
 
-If someone has already provided you with a Filesystem token, skip resource creation and follow [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+If someone has already provided you with a file system token, skip resource creation and follow [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
 
 ## Step 1. Install TiDB Cloud CLI
 
@@ -101,9 +101,9 @@ The CLI saves the configuration locally. The Filesystem creation command in the 
 
 To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
-## Step 3. Create a Filesystem
+## Step 3. Create a file system
 
-Create a Filesystem and wait until it is ready:
+Create a file system and wait until it is ready:
 
 ```bash
 ti fs create-file-system --display-name my-workspace --wait
@@ -111,7 +111,7 @@ ti fs create-file-system --display-name my-workspace --wait
 
 The command returns information about the new Filesystem. Copy the returned `file_system_id` for use in the next step.
 
-The CLI stores the Filesystem credential locally, so you do not need to provide a Filesystem token for subsequent file operations.
+The CLI stores the Filesystem credential locally, so you do not need to provide a file system token for subsequent file operations.
 
 The display name helps you identify the Filesystem, while the Filesystem ID uniquely identifies the resource.
 
@@ -164,7 +164,7 @@ Deleting the Filesystem removes the remote resource and its data.
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem resources](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your Filesystems.
-- [Mount a Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) to access its files through a local directory.
-- [Share a Filesystem](/tidb-cloud-filesystem/filesystem-sharing.md) to make the same files available to another machine, user, application, or agent.
+- [Manage TiDB Cloud Filesystem resources](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your file systems.
+- [Mount a file system](/tidb-cloud-filesystem/filesystem-mount.md) to access its files through a local directory.
+- [Share a file system](/tidb-cloud-filesystem/filesystem-sharing.md) to make the same files available to another machine, user, application, or agent.
 - [Manage Filesystem layers and checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to isolate, review, and apply file changes.

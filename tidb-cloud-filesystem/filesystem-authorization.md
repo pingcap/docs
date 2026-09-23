@@ -5,7 +5,7 @@ summary: Learn how TiDB Cloud API credentials, owner tokens, and scoped tokens p
 
 # TiDB Cloud Filesystem Authorization
 
-TiDB Cloud Filesystem uses different credentials for managing a Filesystem and accessing its data. This lets you keep high-privilege credentials in a trusted environment while giving users, applications, and agents only the access they need.
+TiDB Cloud Filesystem uses different credentials for managing a file system and accessing its data. This lets you keep high-privilege credentials in a trusted environment while giving users, applications, and agents only the access they need.
 
 In general, access becomes more limited at each level:
 
@@ -37,13 +37,13 @@ TiDB Cloud Filesystem uses the following credential types:
 | Owner token                | Broad access to one Filesystem, including its data and scoped-token management      | Trusted workflows that need full Filesystem access                      |
 | Scoped token               | Access only to specified paths and operations in one Filesystem                     | Users, applications, agents, or other machines that need limited access |
 
-These credentials are not interchangeable. TiDB Cloud API credentials manage the Filesystem resource itself, while Filesystem tokens control access within a Filesystem.
+These credentials are not interchangeable. TiDB Cloud API credentials manage the Filesystem resource itself, while file system tokens control access within a file system.
 
 ## TiDB Cloud API credentials
 
 TiDB Cloud API credentials consist of a public and private API key pair. Their permissions are determined by the associated TiDB Cloud account.
 
-Use TiDB Cloud API credentials for resource-level operations such as creating, listing, describing, and deleting Filesystems. They are also required to generate owner tokens.
+Use TiDB Cloud API credentials for resource-level operations such as creating, listing, describing, and deleting file systems. They are also required to generate owner tokens.
 
 Keep these credentials in a trusted administrative or automation environment rather than distributing them to applications or agents that only need access to Filesystem data.
 
@@ -53,9 +53,9 @@ Configure these credentials with `ti configure`, or provide `TIDB_CLOUD_PUBLIC_K
 
 An owner token provides broad access to one Filesystem. It can read, write, and delete files and can create and manage scoped tokens for that Filesystem.
 
-An owner token applies only to its Filesystem. It does not replace TiDB Cloud API credentials for resource-level operations such as creating or deleting Filesystems. An owner token also cannot create another owner token; generating another owner token requires TiDB Cloud API credentials.
+An owner token applies only to its file system. It does not replace TiDB Cloud API credentials for resource-level operations such as creating or deleting file systems. An owner token also cannot create another owner token; generating another owner token requires TiDB Cloud API credentials.
 
-Because an owner token has broad privileges within a Filesystem, keep it on a trusted machine or in a secret manager. When another user, application, or agent needs only limited access, create a scoped token instead of sharing the owner token.
+Because an owner token has broad privileges within a file system, keep it on a trusted machine or in a secret manager. When another user, application, or agent needs only limited access, create a scoped token instead of sharing the owner token.
 
 A Filesystem can have multiple active owner tokens. This lets different users, applications, or environments use separate credentials instead of sharing the same token.
 
@@ -98,7 +98,7 @@ Use the credential with the minimum access required for a workflow:
 
 Having multiple credential types available in the same environment does not combine their permissions. For example, a scoped token remains scoped even if TiDB Cloud API credentials are also configured.
 
-TiDB Cloud CLI can store a selected Filesystem token locally for convenience. Local credential selection does not change, disable, or revoke remote tokens. For details about how `ti` selects Filesystems and credentials, see [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md).
+TiDB Cloud CLI can store a selected file system token locally for convenience. Local credential selection does not change, disable, or revoke remote tokens. For details about how `ti` selects file systems and credentials, see [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md).
 
 ## What's next
 

@@ -21,7 +21,7 @@ Ordinary environment variables and files can deliver a secret, but they do not c
 
 ## Prerequisites
 
-- Select a Filesystem with owner access.
+- Select a file system with owner access.
 - Install `jq`.
 - Store the source secret value in a protected file.
 

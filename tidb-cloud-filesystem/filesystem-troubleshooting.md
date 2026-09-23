@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot TiDB Cloud Filesystem
-summary: Learn how to diagnose TiDB Cloud Filesystem token, region, runtime, mount, and access failures and choose a safe recovery path.
+summary: Learn how to diagnose TiDB Cloud file system token, region, runtime, mount, and access failures and choose a safe recovery path.
 ---
 
 # Troubleshoot TiDB Cloud Filesystem
@@ -11,7 +11,7 @@ Use the symptoms below to diagnose Filesystem access and mount failures. Add `--
 >
 > TiDB Cloud Filesystem is currently in public preview. Its features and interfaces are subject to change without notice.
 
-## Filesystem token is missing
+## file system token is missing
 
 For a clean sandbox, provide the token and region. `ti` derives the Filesystem ID from the token:
 
@@ -21,7 +21,7 @@ export TI_REGION_CODE="<filesystem-region-code>"
 ti fs check-file-system
 ```
 
-The Filesystem token is not the TiDB Cloud API private key. `TI_FS_FILE_SYSTEM_ID` is optional when a token is supplied; set it only when you want `ti` to verify that a separately distributed ID matches the token.
+The file system token is not the TiDB Cloud API private key. `TI_FS_FILE_SYSTEM_ID` is optional when a token is supplied; set it only when you want `ti` to verify that a separately distributed ID matches the token.
 
 If the token is known but is not stored on the current machine, import it and then select the derived ID:
 
@@ -43,7 +43,7 @@ ti fs generate-file-system-token \
 
 The new plaintext appears once in the response. Store it securely or add `--store-locally` to select it on the current machine.
 
-## Filesystem token is rejected
+## file system token is rejected
 
 A data-plane HTTP 401 cannot distinguish a token that was disabled, expired, refreshed on another machine, or revoked. Inspect remote metadata with TiDB Cloud API keys:
 
@@ -67,7 +67,7 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
 
-## Filesystem selection is missing
+## File system selection is missing
 
 List remote resources in the configured region with TiDB Cloud API keys and select one explicitly:
 
@@ -82,13 +82,13 @@ Or select the Filesystem for subsequent commands in the current shell:
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-The CLI intentionally does not infer a Filesystem from local credential count, including when only one credential exists. Supply its ID or a Filesystem token whose embedded ID can be derived.
+The CLI intentionally does not infer a file system from local credential count, including when only one credential exists. Supply its ID or a file system token whose embedded ID can be derived.
 
-## Filesystem region is unsupported
+## File system region is unsupported
 
 The configured TiDB Cloud region might not be one of the Filesystem endpoints built into the installed `ti` release. Compare it with [supported Filesystem regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
 
-## Filesystem runtime is missing or incompatible
+## File system runtime is missing or incompatible
 
 The release installer places the bundled Filesystem runtime component next to `ti`. You do not invoke this runtime directly. Re-run the current installer when the CLI reports a missing runtime component:
 
@@ -105,9 +105,9 @@ ti --version
 
 Do not copy an arbitrary standalone runtime binary into place.
 
-## Filesystem creation reaches quota
+## File system creation reaches quota
 
-If creation returns a quota or capacity error, list existing Filesystems in the configured region before trying again:
+If creation returns a quota or capacity error, list existing file systems in the configured region before trying again:
 
 ```bash
 ti fs list-file-systems --output text
@@ -121,7 +121,7 @@ Background mount success prints the CLI result without runtime startup messages.
 
 - the mount path exists and is writable;
 - no existing mount covers the path;
-- the Filesystem token and region are valid;
+- the file system token and region are valid;
 - FUSE prerequisites or the WebDAV helper are installed;
 - the remote region is reachable.
 

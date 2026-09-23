@@ -1,6 +1,6 @@
 ---
 title: Use TiDB Cloud Filesystem in an Agent Sandbox
-summary: Provision a Filesystem on a trusted machine and give a clean agent sandbox config-free access without TiDB Cloud API keys.
+summary: Provision a file system on a trusted machine and give a clean agent sandbox config-free access without TiDB Cloud API keys.
 ---
 
 # Use TiDB Cloud Filesystem in an Agent Sandbox

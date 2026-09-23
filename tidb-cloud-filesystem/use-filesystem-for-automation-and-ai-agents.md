@@ -7,7 +7,7 @@ summary: Find TiDB for AI examples for sharing Filesystem workspaces, handing of
 
 TiDB Cloud Filesystem keeps files available when a machine, CI job, or agent sandbox is temporary. Choose a workflow below based on what you need to share or preserve.
 
-If you are new to Filesystem, start with the [Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md) to create a Filesystem and work with your first file.
+If you are new to Filesystem, start with the [Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md) to create a file system and work with your first file.
 
 To share work across machines and CI jobs, see the following guides in the [TiDB for AI](https://docs.pingcap.com/ai/) documentation.
 

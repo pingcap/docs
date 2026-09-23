@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault run-with-secret
-summary: Run a process with a Filesystem Vault secret.
+summary: Run a process with a file system Vault secret.
 ---
 
 # ti fs-vault run-with-secret

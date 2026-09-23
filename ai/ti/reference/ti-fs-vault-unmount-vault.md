@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault unmount-vault
-summary: Unmount a Filesystem Vault view.
+summary: Unmount a file system Vault view.
 ---
 
 # ti fs-vault unmount-vault
