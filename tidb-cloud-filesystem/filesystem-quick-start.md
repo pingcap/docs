@@ -47,10 +47,10 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 3. Add `export PATH="$HOME/.ti/bin:$PATH"` to your shell profile to keep `ti` available in new terminals.
 
-    For example, if you use `zsh`, run the following command. It adds the line only if your profile does not already contain it, so repeating this step does not create duplicates:
+    For example, if you use `zsh`, run the following command:
 
     ```bash
-    grep -qxF 'export PATH="$HOME/.ti/bin:$PATH"' ~/.zshrc || echo 'export PATH="$HOME/.ti/bin:$PATH"' >> ~/.zshrc
+    echo 'export PATH="$HOME/.ti/bin:$PATH"' >> ~/.zshrc
     source ~/.zshrc
     ```
 
