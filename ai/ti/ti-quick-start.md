@@ -133,7 +133,7 @@ The following example uses an AI agent sandbox—a temporary environment that mi
     ls -l ~/mnt-test/hello.txt
     ```
 
-3. When you are done, unmount the file system:
+3. After you finish using the mounted file system in the sandbox or other environment, unmount it:
 
     ```bash
     ti fs unmount-file-system --mount-path ~/mnt-test --region aws-us-west-2
