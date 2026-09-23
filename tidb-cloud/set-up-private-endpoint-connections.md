@@ -29,11 +29,11 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 ## Restrictions
 
 - Only users with the `Organization Owner` or `Project Owner` role can create private endpoints.
-- The private endpoint and the TiDB cluster you want to connect to must be located in the same region.
+- By default, the private endpoint and the TiDB cluster you want to connect to must be located in the same region. To connect from a different region, allow that region for the target node group. For more information, see [Use cross-region connections over a private endpoint](#use-cross-region-connections-over-a-private-endpoint).
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
 
-- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. Currently, private endpoint does not support cross-region connection.
+- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. To do this over a private endpoint, the source region must be an allowed region of the target cluster. For more information, see [Use cross-region connections over a private endpoint](#use-cross-region-connections-over-a-private-endpoint).
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
@@ -69,6 +69,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 >
 > - If you want to connect to your cluster over IPv6, see [Use IPv6 connectivity over a private endpoint](#use-ipv6-connectivity-over-a-private-endpoint) for additional IPv6 configuration.
 > - For each TiDB Cloud Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
+> - For a cross-region connection, `${your_region}` in the generated command must be the region of your VPC, which is different from the region of your cluster. If you use the AWS CLI, also pass `--service-region ${your_cluster_region}`. For more information, see [Use cross-region connections over a private endpoint](#use-cross-region-connections-over-a-private-endpoint).
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
@@ -151,8 +152,12 @@ Enable private DNS in AWS. You can either use the AWS CLI or the AWS Management 
 To enable private DNS using your AWS CLI, copy the following `aws ec2 modify-vpc-endpoint` command from the **Create Private Endpoint Connection** page and run it in your AWS CLI.
 
 ```bash
-aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
+aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --region ${your_vpc_region} --private-dns-enabled
 ```
+
+> **Note:**
+>
+> `${your_vpc_region}` is the region where your VPC endpoint is created. For a cross-region connection, it is your region, not the region of your cluster. If you run the command in the wrong region, it fails with `InvalidVpcEndpointId.NotFound`.
 
 Alternatively, you can find the command on the **Networking** page of your cluster. Locate the private endpoint and click **...** > **Enable DNS** in the **Action** column.
 
@@ -242,6 +247,48 @@ Create an AWS interface endpoint as described in [Step 2. Create an AWS interfac
     ```
 
 Then complete [Step 3](#step-3-create-a-private-endpoint-connection) through [Step 5](#step-5-connect-to-your-tidb-cluster) to create the private endpoint connection and connect to your cluster over IPv6.
+
+## Use cross-region connections over a private endpoint
+
+By default, a private endpoint and the TiDB Cloud Dedicated cluster that it connects to must be in the same AWS region. TiDB Cloud Dedicated also supports cross-region connections, which let you create a VPC endpoint in one region and connect it to a cluster in another region. The connection string and DNS usage are the same as those of a same-region connection.
+
+> **Note:**
+>
+> Currently, the cross-region connection feature is available upon request. To access this feature, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) and provide your organization ID.
+
+In TiDB Cloud, you can configure the connection scope for each [TiDB node group](/tidb-cloud/tidb-node-group-management.md) independently. To connect to a cluster from another region, allow that region for the target node group, and then create an AWS interface endpoint in your own region.
+
+### Step 1. Allow the region of your VPC endpoint
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Each TiDB Cloud Dedicated cluster has a default [TiDB node group](/tidb-cloud/tidb-node-group-management.md). If your cluster has multiple node groups, select your target TiDB node group from the **TiDB Node Group** list in the upper-right corner.
+3. In the **AWS Private Endpoints** section, click **Edit**.
+4. In the **AWS Private Endpoints Connection Settings** dialog, select **Cross-Region** for **Connection Scope**, select the regions that you want to allow, and then click **Save**.
+
+After the setting is saved, the allowed regions are displayed in the **Connection Scope** area of the **AWS Private Endpoints** section.
+
+> **Notes:**
+>
+> - Each additional supported region incurs an additional cross-region PrivateLink service fee.
+> - Removing a region or switching **Connection Scope** back to **Current Region Only** does not affect existing connections in that region. It only prevents new private endpoints from being created in that region. Connections in a region that is no longer allowed are marked with a warning in the **AWS Private Endpoints** list.
+
+### Step 2. Create a cross-region AWS interface endpoint
+
+Create an AWS interface endpoint as described in [Step 2. Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint), and note the following:
+
+- Create the endpoint in the AWS region where your application runs, which is different from the region of your TiDB Cloud Dedicated cluster.
+- For **Subnets**, select subnets in availability zones that support cross-region access. Not all availability zones in a region support cross-region access. If a subnet is in an unsupported availability zone, the creation fails with an error that lists the supported availability zones, and you can select subnets in the listed availability zones instead.
+- If you use the AWS CLI, pass the region of your cluster with `--service-region ${your_cluster_region}`:
+
+    ```bash
+    aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_vpc_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids} --service-region ${your_cluster_region}
+    ```
+
+Then complete [Step 3](#step-3-create-a-private-endpoint-connection) through [Step 5](#step-5-connect-to-your-tidb-cluster) to create the private endpoint connection and connect to your cluster from another region.
+
+> **Note:**
+>
+> If the region where you create the VPC endpoint is not an allowed region of the target node group, you cannot create a private endpoint connection, and TiDB Cloud reports an error.
 
 ## Troubleshooting
 
