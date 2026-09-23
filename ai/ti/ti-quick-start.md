@@ -131,7 +131,7 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
     ls -l ~/mnt-test/hello.txt
     ```
 
-3. Unmount the file system to release the workspace before passing it to another sandbox (typicall performed within the sandbox):
+3. Unmount the file system to release the workspace before passing it to another sandbox (typically performed within the sandbox):
 
     ```bash
     ti fs unmount-file-system --mount-path ~/mnt-test --region aws-us-west-2
