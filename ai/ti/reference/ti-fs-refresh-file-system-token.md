@@ -1,11 +1,11 @@
 ---
 title: ti fs refresh-file-system-token
-summary: Rotate one TiDB Cloud Filesystem token and return its replacement plaintext once.
+summary: Rotate one file system token and return its replacement plaintext once.
 ---
 
 # ti fs refresh-file-system-token
 
-Rotates the supplied Filesystem token and returns its replacement value once. The previous value stops working after authentication changes propagate, which can take approximately 10 seconds.
+Rotates the supplied file system token and returns its replacement value once. The previous value stops working after authentication changes propagate, which can take approximately 10 seconds.
 
 > **Warning:**
 >
@@ -29,7 +29,7 @@ ti fs refresh-file-system-token
 
 ## Options
 
-- `--file-system-id <string>`: Assert the Filesystem ID decoded from a supplied token. This option is required when loading a locally selected token.
+- `--file-system-id <string>`: Assert the file system ID decoded from a supplied token. This option is required when loading a locally selected token.
 - `--fs-token <string>`: Supply the current token. Prefer `TI_FS_TOKEN` to avoid shell history and process-list exposure. Defaults to `TI_FS_TOKEN`, then the selected local credential.
 - `--ttl <duration>`: Set a new positive lifetime in whole seconds, up to 365 days. Omit it to preserve the previous lifetime period.
 - `--dry-run`: Validate token selection, region, TTL, and known local mount conflicts without rotating the token.

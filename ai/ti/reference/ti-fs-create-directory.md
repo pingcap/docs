@@ -1,6 +1,6 @@
 ---
 title: ti fs create-directory
-summary: Create a directory in a TiDB Cloud Filesystem.
+summary: Create a directory in a file system.
 ---
 
 # ti fs create-directory
@@ -29,7 +29,7 @@ ti fs create-directory
 - `--path <string>`: The file system path of the directory to create. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--mode <string>`: The directory mode as an octal value such as 0755.
 - `--version`: Display version information.

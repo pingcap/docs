@@ -17,7 +17,7 @@ To configure TiDB Cloud CLI, obtain a TiDB Cloud API public key and private key 
 
 > **Note:**
 >
-> If you previously used TiDB Cloud CLI `tdc` v0.1.x, unmount any Filesystem or Vault mounts started by `tdc`, and read [Migrate from tdc to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md) before installing `ti`.
+> If you previously used TiDB Cloud CLI `tdc` v0.1.x, unmount any file system or Vault mounts started by `tdc`, and read [Migrate from tdc to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md) before installing `ti`.
 
 ## Install TiDB Cloud CLI
 
@@ -165,13 +165,13 @@ ti update --dry-run
 
 > **Note:**
 >
-> If you have an active Filesystem or Vault mount, stop writers and unmount it before updating so that `ti` and the Filesystem runtime are updated together. For example:
+> If you have an active file system or Vault mount, stop writers and unmount it before updating so that `ti` and the file system runtime are updated together. For example:
 >
 > ```bash
 > ti fs unmount-file-system --mount-path <mount-path>
 > ```
 >
-> For a Vault mount, use `ti fs-vault unmount-vault --mount-path <mount-path>`. For details, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) and [Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md).
+> For a Vault mount, use `ti fs-vault unmount-vault --mount-path <mount-path>`. For details, see [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) and [Manage Vault Secrets for a File System](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md).
 
 Apply the latest update:
 
@@ -191,25 +191,25 @@ The update command replaces both `ti` and `ti-drive9` in a user-owned installati
 
 If you have never used `tdc` v0.1.x, skip this section.
 
-If you previously used `tdc` v0.1.x, `ti` can migrate supported local profiles, credentials, preferences, and Filesystem state from `~/.tdc/` to `~/.ti/`. Before installing `ti`, unmount any Filesystem or Vault mounts started by `tdc`.
+If you previously used `tdc` v0.1.x, `ti` can migrate supported local profiles, credentials, preferences, and file system state from `~/.tdc/` to `~/.ti/`. Before installing `ti`, unmount any file system or Vault mounts started by `tdc`.
 
 For the complete migration procedure, including migrated and excluded state, directory conflict resolution, and legacy environment variable compatibility, see [Migrate from tdc to TiDB Cloud CLI](/ai/ti/reference/ti-migrate-from-tdc.md).
 
 ## Uninstall TiDB Cloud CLI
 
-Before uninstalling, stop writers and unmount any active Filesystem or Vault mounts.
+Before uninstalling, stop writers and unmount any active file system or Vault mounts.
 
 For example, run the command that corresponds to the type of mount:
 
 ```bash
-# Filesystem mount
+# file system mount
 ti fs unmount-file-system --mount-path <filesystem-mount-path>
 
 # Vault mount
 ti fs-vault unmount-vault --mount-path <vault-mount-path>
 ```
 
-For details, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) and [Manage Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md).
+For details, see [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) and [Manage Vault Secrets for a File System](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md).
 
 <SimpleTab groupId="operating-systems">
 
@@ -247,11 +247,11 @@ For details, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesyst
 
 ### Remove local state
 
-Removing binaries preserves profiles, credentials, Filesystem registrations, DB SQL credentials, logs, and mount locators.
+Removing binaries preserves profiles, credentials, file system registrations, DB SQL credentials, logs, and mount locators.
 
 > **Note:**
 >
-> Remove `~/.ti/` only when you intend to permanently delete all local TiDB Cloud CLI state. Deleting local state does not delete remote TiDB Cloud Starter instances or Filesystem resources.
+> Remove `~/.ti/` only when you intend to permanently delete all local TiDB Cloud CLI state. Deleting local state does not delete remote TiDB Cloud Starter instances or file system resources.
 
 <SimpleTab groupId="operating-systems">
 

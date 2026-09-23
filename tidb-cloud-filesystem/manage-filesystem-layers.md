@@ -1,24 +1,24 @@
 ---
-title: Manage TiDB Cloud Filesystem Layers and Checkpoints
-summary: Learn how to create, inspect, checkpoint, fork, commit, roll back, and delete TiDB Cloud Filesystem layers.
+title: Manage File System Layers and Checkpoints
+summary: Learn how to create, inspect, checkpoint, fork, commit, roll back, and delete file system layers.
 aliases: ['/ai/manage-filesystem-layers']
 ---
 
-# Manage TiDB Cloud Filesystem Layers and Checkpoints
+# Manage File System Layers and Checkpoints
 
-A layer gives you a separate workspace for changing files without immediately affecting the base Filesystem. You can make and review changes in the layer, then decide whether to apply them to the base Filesystem or discard them.
+In TiDB Cloud Filesystem, a layer gives you a separate workspace for changing files without immediately affecting the base file system. You can make and review changes in the layer, then decide whether to apply them to the base file system or discard them.
 
 You can also create a checkpoint to preserve a point in the layer's history, or fork a new layer from the current layer or a checkpoint to continue working independently.
 
-For an overview of how layers, checkpoints, forks, and the base Filesystem relate to each other, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
+For an overview of how layers, checkpoints, forks, and the base file system relate to each other, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
 
 ## Prerequisites
 
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to an existing TiDB Cloud Filesystem with a token that provides the required read or write permissions.
-- Select the Filesystem and make its token available to `ti`. For available access options, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+- Have access to an existing file system in TiDB Cloud Filesystem with a token that provides the required read or write permissions.
+- Select the file system and make its token available to `ti`. For available access options, see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 - Choose the base path whose data the layer overlays.
 
 ## Create a layer
@@ -33,7 +33,7 @@ ti fs create-layer \
   --tag task=review
 ```
 
-`--base-root-path` determines which part of the base Filesystem the layer overlays.
+`--base-root-path` determines which part of the base file system the layer overlays.
 
 `restore-safe` is the only `--durability-mode` value accepted by the current CLI. For all available options, see the [`create-layer` command reference](/ai/ti/reference/ti-fs-create-layer.md).
 
@@ -57,13 +57,13 @@ ti fs describe-layer --layer-id "<layer-id>"
 ti fs diff-layer --layer-id "<layer-id>"
 ```
 
-List all layers in the selected Filesystem:
+List all layers in the selected file system:
 
 ```shell
 ti fs list-layers --output text
 ```
 
-Changes that have not been committed remain in the layer. File operations that do not select the layer access the base Filesystem and do not show its uncommitted changes.
+Changes that have not been committed remain in the layer. File operations that do not select the layer access the base file system and do not show its uncommitted changes.
 
 > **Note:**
 >
@@ -128,15 +128,15 @@ ti fs unmount-file-system \
 
 For more information about safely finishing mount activity, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
 
-To apply the layer's changes to the base Filesystem:
+To apply the layer's changes to the base file system:
 
 ```shell
 ti fs commit-layer --layer-id "<layer-id>"
 ```
 
-A commit applies the layer's effective changes to the base Filesystem. If the layer was created by forking another layer, committing it does not merge the changes back into its parent layer.
+A commit applies the layer's effective changes to the base file system. If the layer was created by forking another layer, committing it does not merge the changes back into its parent layer.
 
-If the base Filesystem contains conflicting changes, the commit can fail instead of automatically merging them. Keep the layer and inspect its changes and the base Filesystem before deciding how to proceed.
+If the base file system contains conflicting changes, the commit can fail instead of automatically merging them. Keep the layer and inspect its changes and the base file system before deciding how to proceed.
 
 To discard the layer's uncommitted changes instead:
 
@@ -168,5 +168,5 @@ Use `--cascade` only when you intend to abandon the descendant layers as well.
 
 ## What's next
 
-- [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md)
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md)

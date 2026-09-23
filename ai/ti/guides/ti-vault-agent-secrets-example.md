@@ -1,11 +1,11 @@
 ---
-title: Delegate TiDB Cloud Filesystem Vault Secrets to an Agent
+title: Delegate File System Vault Secrets to an Agent
 summary: Store a secret, grant one field to an agent, inject it into a process, audit access, and revoke the grant.
 ---
 
-# Delegate TiDB Cloud Filesystem Vault Secrets to an Agent
+# Delegate File System Vault Secrets to an Agent
 
-This workflow gives an agent temporary access to one secret field without sharing the Filesystem owner token or the complete secret. Use it when an agent needs a credential for one task but should not retain that value in a prompt, `.env` file, or sandbox image.
+This workflow gives an agent temporary access to one secret field without sharing the file system owner token or the complete secret. Use it when an agent needs a credential for one task but should not retain that value in a prompt, `.env` file, or sandbox image.
 
 > **Note:**
 >
@@ -13,15 +13,15 @@ This workflow gives an agent temporary access to one secret field without sharin
 
 ## How it works
 
-The Filesystem owner stores the secret once and creates a short-lived grant scoped to the required field. The agent receives only the delegated vault token and can inject the allowed value into a child process. The owner can inspect audit events and revoke the grant without rotating or exposing the Filesystem owner credential.
+The file system owner stores the secret once and creates a short-lived grant scoped to the required field. The agent receives only the delegated vault token and can inject the allowed value into a child process. The owner can inspect audit events and revoke the grant without rotating or exposing the file system owner credential.
 
 ## Why use this approach
 
-Ordinary environment variables and files can deliver a secret, but they do not create a scoped, expiring delegation or an access audit trail. Sharing the Filesystem owner token also grants broader access than one secret field requires. A separate cloud secret manager can provide similar controls, but it requires another identity, policy, and integration path for every sandbox.
+Ordinary environment variables and files can deliver a secret, but they do not create a scoped, expiring delegation or an access audit trail. Sharing the file system owner token also grants broader access than one secret field requires. A separate cloud secret manager can provide similar controls, but it requires another identity, policy, and integration path for every sandbox.
 
 ## Prerequisites
 
-- Select a Filesystem with owner access.
+- Select a file system with owner access.
 - Install `jq`.
 - Store the source secret value in a protected file.
 

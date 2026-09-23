@@ -1,6 +1,6 @@
 ---
 title: ti fs diff-layer
-summary: Show changes in a TiDB Cloud Filesystem layer.
+summary: Show changes in a file system layer.
 ---
 
 # ti fs diff-layer
@@ -27,7 +27,7 @@ ti fs diff-layer
 
 - `--layer-id <string>`: The ID of the layer. \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--max-seq <int64>`: The highest layer sequence to include; 0 includes all sequences.
 - `--version`: Display version information.

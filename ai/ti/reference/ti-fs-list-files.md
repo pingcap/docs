@@ -1,6 +1,6 @@
 ---
 title: ti fs list-files
-summary: List files in a TiDB Cloud Filesystem.
+summary: List files in a file system.
 ---
 
 # ti fs list-files
@@ -25,7 +25,7 @@ ti fs list-files
 ## Options
 
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--path <string>`: File system directory path. \[default: /]
 - `--version`: Display version information.
@@ -37,7 +37,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - List a remote directory:
 
     ```bash
-    # Return the entries under a specific Filesystem path.
+    # Return the entries under a specific file system path.
     ti fs list-files --file-system-id <file-system-id> --path /reports
     ```
 

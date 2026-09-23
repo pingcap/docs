@@ -1,11 +1,11 @@
 ---
 title: Get Started with TiDB Cloud CLI
-summary: Install and configure TiDB Cloud CLI, then create and use a TiDB Cloud Filesystem or manage and query a TiDB Cloud Starter database.
+summary: Install and configure TiDB Cloud CLI, then create and use a file system or manage and query a TiDB Cloud Starter database.
 ---
 
 # Get Started with TiDB Cloud CLI
 
-[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a command-line tool for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [file systems in TiDB Cloud Filesystem](/ai/ti/ti-overview.md#tidb-cloud-filesystem). TiDB Cloud CLI supports both interactive and automated use. By default, command output is in JSON format, making it agent friendly.
+[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a command-line tool for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [file systems in TiDB Cloud Filesystem](/ai/ti/ti-overview.md#tidb-cloud-filesystem). It supports both interactive use and automation, with JSON as the default output format for commands.
 
 This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), and then completing a basic workflow with TiDB Cloud Starter or TiDB Cloud Filesystem. For an overview of the CLI, its capabilities, and supported workflows, see [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md).
 
@@ -108,12 +108,12 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 Proceed with either of the following workflows based on your needs:
 
-- [Option A: TiDB Cloud Filesystem](/ai/ti/ti-quick-start.md#option-a-create-and-use-a-filesystem)
-- [Option B: TiDB Cloud Starter](/ai/ti/ti-quick-start.md#option-b-create-a-tidb-cloud-starter-instance-and-query-the-database)
+- [Option A: Create and use a file system](/ai/ti/ti-quick-start.md#option-a-create-and-use-a-file-system)
+- [Option B: Create a TiDB Cloud Starter instance and query the database](/ai/ti/ti-quick-start.md#option-b-create-a-tidb-cloud-starter-instance-and-query-the-database)
 
-### Option A: TiDB Cloud Filesystem
+### Option A: Create and use a file system
 
-A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
+TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
 
 1. Create a file system and obtain the access token (typically performed outside the sandbox):
 
@@ -121,7 +121,7 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
     export TI_FS_TOKEN="$(ti fs create-file-system --file-system-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
     ```
 
-2. Mount the filesystem to a local path and use it as a normal POSIX-compliant filesystem (typically performed within the sandbox):
+2. Mount the file system to a local path and use it as a normal POSIX-compliant file system (typically performed within the sandbox):
 
     ```bash
     export TI_FS_TOKEN=$TI_FS_TOKEN
@@ -131,7 +131,7 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
     ls -l ~/mnt-test/hello.txt
     ```
 
-3. Unmount the file system to release the workspace before passing it to another sandbox (typicall performed within the sandbox):
+3. Unmount the file system to release the workspace before passing it to another sandbox (typically performed within the sandbox):
 
     ```bash
     ti fs unmount-file-system --mount-path ~/mnt-test --region aws-us-west-2
@@ -178,6 +178,6 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
 ## What's next
 
 - Read the [TiDB Cloud Command Line Interface Overview](/ai/ti/ti-overview.md) to understand what `ti` manages and when to use it.
-- Follow the task guides to manage [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) or [Filesystem resources](/tidb-cloud-filesystem/manage-filesystem-resources.md).
+- Follow the task guides to manage [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) or [TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md).
 - Explore the [TiDB Cloud CLI Command Reference](/ai/ti/reference/ti-cli-reference.md) for command groups, global options, and shared CLI behavior.
 - Learn about [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md) to set up multiple profiles or non-interactive authentication.

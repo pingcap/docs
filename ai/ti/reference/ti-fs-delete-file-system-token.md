@@ -1,11 +1,11 @@
 ---
 title: ti fs delete-file-system-token
-summary: Permanently revoke a TiDB Cloud Filesystem token.
+summary: Permanently revoke a file system token so it can no longer authenticate.
 ---
 
 # ti fs delete-file-system-token
 
-Permanently revokes a Filesystem token. The token stops authenticating after the change propagates and no longer appears in list results. An owner token can revoke either token kind in the same Filesystem; a scoped token cannot use this command.
+Permanently revokes a file system token. The token stops authenticating after the change propagates and no longer appears in list results. An owner token can revoke either token kind in the same file system; a scoped token cannot use this command.
 
 > **Note:**
 >
@@ -25,9 +25,9 @@ ti fs delete-file-system-token
 
 ## Options
 
-- `--file-system-id <string>`: Specify the Filesystem that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
+- `--file-system-id <string>`: Specify the file system that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
 - `--token-id <string>`: Specify the immutable token ID returned by the list command. This option is required.
-- `--fs-token <string>`: Authorize the request with a Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. If no Filesystem token is available, the command uses the configured TiDB Cloud API keys.
+- `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system. If no file system token is available, the command uses the configured TiDB Cloud API keys.
 - `--dry-run`: Validate credentials, identifiers, and known local mount conflicts without revoking the token.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -48,7 +48,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Revoke a token by using an owner token:
 
     ```bash
-    # The owner token identifies the Filesystem; use the immutable ID of the token being revoked.
+    # The owner token identifies the file system; use the immutable ID of the token being revoked.
     TI_FS_TOKEN="<owner-fs-token>" ti fs delete-file-system-token \
       --token-id "<old-token-id>"
     ```

@@ -5,7 +5,7 @@ summary: Reference supported regions, authentication boundaries, security best p
 
 # TiDB Cloud CLI Regions, Security, and Limitations
 
-This reference describes current regions, authentication, platform, and preview boundaries for TiDB Cloud CLI. For Filesystem regions and limitations, see [TiDB Cloud Filesystem Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md).
+This reference describes current regions, authentication, platform, and preview boundaries for TiDB Cloud CLI. For file system regions and limitations, see [TiDB Cloud Filesystem Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md).
 
 > **Note:**
 >
@@ -26,9 +26,9 @@ The following table lists the supported regions for TiDB Cloud CLI and shows whi
 | AWS | Tokyo | `aws-ap-northeast-1` | Supported | Not supported |
 | Alibaba Cloud | Singapore | `alicloud-ap-southeast-1` | Supported | Supported |
 
-If your configured region supports TiDB Cloud Starter but not TiDB Cloud Filesystem, you can manage Starter instances in that region. Filesystem commands fail with an `unsupported endpoint` error.
+If your configured region supports TiDB Cloud Starter but not TiDB Cloud Filesystem, you can manage Starter instances in that region. File system commands fail with an `unsupported endpoint` error.
 
-Supported Filesystem regions are built into each `ti` release. To use Filesystem in a region added after your installed version was released, upgrade `ti`. You cannot enable an unsupported region by specifying a service URL.
+Supported file system regions are built into each `ti` release. To use a file system in a region added after your installed version was released, upgrade `ti`. You cannot enable an unsupported region by specifying a service URL.
 
 ## Credential requirements
 
@@ -37,9 +37,9 @@ Supported Filesystem regions are built into each `ti` release. To use Filesystem
 | `ti configure`, all `ti db` control-plane operations | TiDB Cloud API public/private key |
 | `ti fs create-file-system` | TiDB Cloud API key |
 | `ti fs delete-file-system` | TiDB Cloud API key and file system ID |
-| Describe or update Filesystem extraction and embedding configuration | TiDB Cloud API key and explicit file system ID |
-| Generate, list, enable, disable, or delete Filesystem tokens | TiDB Cloud API key and explicit file system ID |
-| Refresh a Filesystem token | The current FS bearer token only |
+| Describe or update file system extraction and embedding configuration | TiDB Cloud API key and explicit file system ID |
+| Generate, list, enable, disable, or delete file system tokens | TiDB Cloud API key and explicit file system ID |
+| Refresh a file system token | The current FS bearer token only |
 | Remote file, layer, pack, mount, Git, journal, and owner vault operations | FS owner token or registered resource credential |
 | Delegated vault read, list, run, or mount | Scope-appropriate delegated vault token |
 | Drain and unmount after a successful background mount | Non-secret mount locator in the same `HOME` |
@@ -50,12 +50,12 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 
 - Create TiDB Cloud API keys with only the access required for the workflow. Do not reuse a personal administrator key in unattended automation.
 - Inject automation credentials from a CI secret store or runtime secret manager. Do not place credentials in source control, container images, shell scripts, or command-line arguments that can appear in process listings and shell history.
-- Do not copy the complete `~/.ti/` directory into an agent sandbox. For an existing Filesystem, pass only `TI_FS_TOKEN` and `TI_REGION_CODE`; use `TI_FS_FILE_SYSTEM_ID` only as an optional assertion.
+- Do not copy the complete `~/.ti/` directory into an agent sandbox. For an existing file system, pass only `TI_FS_TOKEN` and `TI_REGION_CODE`; use `TI_FS_FILE_SYSTEM_ID` only as an optional assertion.
 - Use `--read-only` for SQL inspection by untrusted or exploratory agents. Use `--admin` only for DDL or privilege management, and use `--read-write` only when data changes are intended.
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.ti/credentials`, resource credentials, and DB SQL credentials owner-readable only.
 - Review local operation logs before sharing diagnostics. The logs exclude SQL text, paths, payloads, and credential values, but command names, flag names, profile and region metadata, status codes, and operational timing can still be sensitive.
 
-For Filesystem token, mount, Vault, and AI provider security, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md), [Manage Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md), and [Configure Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
+For file system tokens, mounts, Vault, and AI provider security, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md), [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md), and [Configure AI Providers for a File System](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
 
 ## Product limitations
 

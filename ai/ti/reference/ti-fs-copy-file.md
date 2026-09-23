@@ -1,6 +1,6 @@
 ---
 title: ti fs copy-file
-summary: Copy files to, from, or within a TiDB Cloud Filesystem.
+summary: Copy files to, from, or within a file system.
 ---
 
 # ti fs copy-file
@@ -58,7 +58,7 @@ ti fs copy-file
 - `--from-local <string>`: The local source path.
 - `--from-remote <string>`: The source path in the TiDB Cloud file system.
 - `--from-stdin`: Read from stdin and write to `--to-remote`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--layer-id <string>`: Write one copied file into a file system layer instead of the base file system. Cannot be combined with `--recursive`.
 - `--overwrite`: Replace an existing destination file.
@@ -77,7 +77,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Upload a local file:
 
     ```bash
-    # Copy a local report into the selected remote Filesystem.
+    # Copy a local report into the selected remote file system.
     ti fs copy-file --file-system-id <file-system-id> --from-local ./report.md --to-remote /reports/report.md
     ```
 
@@ -109,7 +109,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
     ti fs copy-file --file-system-id <file-system-id> --from-local ./tail.log --to-remote /logs/app.log --append
     ```
 
-- Stream standard input to the Filesystem:
+- Stream standard input to the file system:
 
     ```bash
     # Upload generated content without creating an intermediate local file.

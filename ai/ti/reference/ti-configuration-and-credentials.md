@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud CLI Configuration and Credentials
-summary: Reference TiDB Cloud CLI profiles, precedence rules, local state paths, Filesystem credentials, SQL credentials, mount locators, and operation logs.
+summary: Reference TiDB Cloud CLI profiles, precedence rules, local state paths, file system credentials, SQL credentials, mount locators, and operation logs.
 ---
 
 # TiDB Cloud CLI Configuration and Credentials
@@ -76,9 +76,9 @@ Command flags, environment inputs, saved configuration, and command defaults are
 
 The TiDB Cloud CLI does not accept or store a project selector. TiDB Cloud Starter instance creation omits project placement and lets TiDB Cloud select its server-side default project. Project fields and labels returned by TiDB Cloud remain visible as resource metadata and are not reused for later requests.
 
-## Filesystem credentials and remote inventory
+## File system credentials and remote inventory
 
-One profile can access multiple Filesystems. The region-scoped remote inventory is authoritative for resource existence and status. Local state stores only credentials and their routing hint:
+One profile can access multiple file systems. The region-scoped remote inventory is authoritative for resource existence and status. Local state stores only credentials and their routing hint:
 
 ```text
 ~/.ti/fs_credentials/<profile-key>/<file-system-id-key>/credentials
@@ -86,22 +86,22 @@ One profile can access multiple Filesystems. The region-scoped remote inventory 
 
 The credential contains the server-assigned file system ID, canonical region code, selected `api_key`, and optional authoritative token metadata, and uses owner-only permissions. `ti fs list-file-systems` reads remote resources and joins only the non-secret `has_local_token` hint.
 
-One remote Filesystem can have multiple tokens, but each profile stores at most one selected token per Filesystem. The local store is an operational selection, not a replica of remote token inventory. Credentials created by provisioning or older imports might not contain `token_id`, `scope_kind`, `token_name`, `expires_at`, or `scopes`; they remain valid for data-plane use, and `ti` does not guess missing metadata from token-list rows.
+One remote file system can have multiple tokens, but each profile stores at most one selected token per file system. The local store is an operational selection, not a replica of remote token inventory. Credentials created by provisioning or older imports might not contain `token_id`, `scope_kind`, `token_name`, `expires_at`, or `scopes`; they remain valid for data-plane use, and `ti` does not guess missing metadata from token-list rows.
 
 `ti fs generate-file-system-token` does not change the selected credential unless `--store-locally` is set. `--replace` changes only the local selection and leaves the previous remote token active. A refresh sourced from the local credential atomically replaces it. A refresh sourced from a flag or `TI_FS_TOKEN` returns the replacement plaintext without writing local state.
 
-`ti fs generate-file-system-scoped-token` accepts only an owner token and can store its authoritative path scopes locally. The token JWT itself contains the Filesystem ID but not the token kind, token ID, or scopes. Therefore, an explicit or environment token is passed to the service for authorization instead of being classified locally. `TI_FS_TOKEN` can contain either an owner token or a scoped token; available operations depend on its server-side capability.
+`ti fs generate-file-system-scoped-token` accepts only an owner token and can store its authoritative path scopes locally. The token JWT itself contains the file system ID but not the token kind, token ID, or scopes. Therefore, an explicit or environment token is passed to the service for authorization instead of being classified locally. `TI_FS_TOKEN` can contain either an owner token or a scoped token; available operations depend on its server-side capability.
 
-Filesystem owner tokens authorize Filesystem data access and token inventory or lifecycle operations. They do not authorize TiDB Cloud Filesystem resource creation, listing, description, or deletion, and they cannot generate another owner token. Those operations require TiDB Cloud API credentials. `ti fs delete-file-system` additionally requires an explicit `--file-system-id`; the ID embedded in `TI_FS_TOKEN` is never used to select a Filesystem for deletion.
+File system owner tokens authorize file system data access and token inventory or lifecycle operations. They do not authorize TiDB Cloud Filesystem resource creation, listing, description, or deletion, and they cannot generate another owner token. Those operations require TiDB Cloud API credentials. `ti fs delete-file-system` additionally requires an explicit `--file-system-id`; the ID embedded in `TI_FS_TOKEN` is never used to select a file system for deletion.
 
 Resource selection is:
 
 1. explicit `--file-system-id`;
 2. `TI_FS_FILE_SYSTEM_ID`;
-3. derive the ID from an explicitly supplied Filesystem token;
+3. derive the ID from an explicitly supplied file system token;
 4. otherwise fail with `fs.missing_file_system_id`.
 
-`ti` never infers a Filesystem from a saved default or from the number of local credentials. Use `--file-system-id` for one command or `TI_FS_FILE_SYSTEM_ID` for a shell, sandbox, or automation environment.
+`ti` never infers a file system from a saved default or from the number of local credentials. Use `--file-system-id` for one command or `TI_FS_FILE_SYSTEM_ID` for a shell, sandbox, or automation environment.
 
 FS owner credential selection for remote `fs`, `fs-git`, `fs-journal`, and owner `fs-vault` operations is:
 
@@ -111,7 +111,7 @@ FS owner credential selection for remote `fs`, `fs-git`, `fs-journal`, and owner
 
 Prefer `TI_FS_TOKEN` over a flag because flags can remain in shell history or process listings.
 
-## Config-free Filesystem inputs
+## Config-free file system inputs
 
 A clean sandbox needs only:
 
@@ -120,7 +120,7 @@ export TI_FS_TOKEN="<owner-token>"
 export TI_REGION_CODE="aws-us-east-1"
 ```
 
-These values form an in-memory namespace only. `ti` derives the ID from the token and does not write either value to `~/.ti/`. `TI_FS_FILE_SYSTEM_ID` is optional and, when present, must match the token. Remote Filesystem inventory, description, provisioning, and deletion require TiDB Cloud API credentials. A Filesystem token is neither required nor accepted as authorization for Filesystem deletion.
+These values form an in-memory namespace only. `ti` derives the ID from the token and does not write either value to `~/.ti/`. `TI_FS_FILE_SYSTEM_ID` is optional and, when present, must match the token. Remote file system inventory, description, provisioning, and deletion require TiDB Cloud API credentials. A file system token is neither required nor accepted as authorization for file system deletion.
 
 ## DB SQL credentials
 
@@ -158,7 +158,7 @@ For the complete TiDB Cloud role model, see [Manage Database Users and Roles](/t
 
 ## Companion state and mount locators
 
-The installer includes `ti-drive9`, the companion runtime that executes `ti fs`, `ti fs-git`, `ti fs-journal`, and `ti fs-vault` operations. You do not invoke it directly. Each registered Filesystem has an isolated companion home:
+The installer includes `ti-drive9`, the companion runtime that executes `ti fs`, `ti fs-git`, `ti fs-journal`, and `ti fs-vault` operations. You do not invoke it directly. Each registered file system has an isolated companion home:
 
 ```text
 ~/.ti/drive9-home/<profile-key>/<resource-key>/
@@ -172,7 +172,7 @@ A successful background FS or vault mount writes a non-secret locator:
 ~/.ti/mounts/<mount-hash>.locator.json
 ```
 
-The locator records the placement and companion-home information required for drain and unmount from the same `HOME`. It does not contain the Filesystem token. Successful unmount removes it.
+The locator records the placement and companion-home information required for drain and unmount from the same `HOME`. It does not contain the file system token. Successful unmount removes it.
 
 ## Operation logs
 

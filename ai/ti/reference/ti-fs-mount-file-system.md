@@ -1,11 +1,11 @@
 ---
 title: ti fs mount-file-system
-summary: Mount a TiDB Cloud Filesystem.
+summary: Mount a file system.
 ---
 
 # ti fs mount-file-system
 
-Mounts a Filesystem through automatic, FUSE, or WebDAV mode. The command alias is `ti fs mount`.
+Mounts a file system through automatic, FUSE, or WebDAV mode. The command alias is `ti fs mount`.
 
 The command starts the mount process in the background, waits for the mount to become ready, and then prints the result. If startup fails, the error includes a log path for diagnosis. Use `ti fs unmount-file-system` to end the mount.
 
@@ -53,7 +53,7 @@ ti fs mount-file-system
 - `--driver <string>`: Mount driver: `auto`, `fuse`, or `webdav`. \[default: auto]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--layer-ref <string>`: Mount through a writable layer ID, unique name, or [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references). Requires FUSE.
 - `--local-root <string>`: Local overlay root. If omitted, uses `~/.ti/local/fs/<mount-hash>`.
@@ -74,7 +74,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- Mount a Filesystem with the default driver:
+- Mount a file system with the default driver:
 
     ```bash
     # Let the CLI select the default driver for the current platform.

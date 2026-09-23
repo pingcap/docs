@@ -1,9 +1,9 @@
 ---
-title: Record an Agent Workflow in a TiDB Cloud Filesystem Journal
+title: Record an Agent Workflow in a File System Journal
 summary: Create a journal, append structured agent events, search the workflow, and verify the journal hash chain.
 ---
 
-# Record an Agent Workflow in a TiDB Cloud Filesystem Journal
+# Record an Agent Workflow in a File System Journal
 
 This workflow records planning, tool calls, tests, retries, and handoffs as a structured, ordered, and verifiable event history. Use it when operators need to reconstruct what happened across workers instead of relying on scattered console output or a mutable status file that shows only the latest state.
 
@@ -13,11 +13,11 @@ This workflow records planning, tool calls, tests, retries, and handoffs as a st
 
 ## How it works
 
-A Filesystem journal stores structured append-only entries with sequence information, searchable fields, optional idempotency keys, and hash-chain verification. Unlike a normal text file, journal entries cannot be edited or truncated after they are written, and producers do not need to implement their own parsing, concurrency, or retry-deduplication mechanism. Agents append semantic events such as `task.started` and `test.finished`; operators can query the workflow and verify the stored chain.
+A file system journal stores structured append-only entries with sequence information, searchable fields, optional idempotency keys, and hash-chain verification. Unlike a normal text file, journal entries cannot be edited or truncated after they are written, and producers do not need to implement their own parsing, concurrency, or retry-deduplication mechanism. Agents append semantic events such as `task.started` and `test.finished`; operators can query the workflow and verify the stored chain.
 
 ## Prerequisites
 
-Select a Filesystem through a configured profile or Filesystem token environment.
+Select a file system through a configured profile or file system token environment.
 
 ## Step 1. Create the journal
 
@@ -67,7 +67,7 @@ The ordered `read-journal-entries` result for `jrn-agent-demo` should include th
 
 > **Note:**
 >
-> `search-journal-entries` searches all journals in the selected Filesystem because it does not accept a journal ID. Another journal with the same labels and event fields can also match the search in this example.
+> `search-journal-entries` searches all journals in the selected file system because it does not accept a journal ID. Another journal with the same labels and event fields can also match the search in this example.
 
 The `--entry-type` and `--status` filters match the `type` and `status` fields in each `--entry-json` object. In this example, they select the entry whose payload contains `"type":"task.finished"` and `"status":"completed"`.
 
@@ -83,7 +83,7 @@ A successful result confirms the stored sequence and hash chain are consistent.
 
 ## Cleanup
 
-Journals are append-only and currently have no delete command in the public `ti` command surface. For experiments that create disposable journals, use a dedicated test Filesystem and unique journal IDs such as `jrn-test-<run-id>`. Delete the containing Filesystem only when none of its files or journals are still needed.
+Journals are append-only and currently have no delete command in the public `ti` command surface. For experiments that create disposable journals, use a dedicated test file system and unique journal IDs such as `jrn-test-<run-id>`. Delete the containing file system only when none of its files or journals are still needed.
 
 ## Security and operational notes
 

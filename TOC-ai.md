@@ -55,13 +55,13 @@
     - [Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem](/ai/ti/guides/ti-persistent-agent-state-example.md)
     - [Share a Read-Only Dataset Across Parallel Agents with TiDB Cloud Filesystem](/ai/ti/guides/ti-parallel-agent-dataset-example.md)
     - [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
-    - [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](/ai/ti/guides/ti-journal-agent-workflow-example.md)
-    - [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)
+    - [Record an Agent Workflow in a File System Journal](/ai/ti/guides/ti-journal-agent-workflow-example.md)
+    - [Delegate File System Vault Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)
   - Command Reference
     - [Overview](/ai/ti/reference/ti-cli-reference.md)
     - [configure](/ai/ti/reference/ti-configure.md)
     - [update](/ai/ti/reference/ti-update.md)
-    - `ti db` commands for managing TiDB Cloud Starter instances
+    - `ti db` Commands for Managing TiDB Cloud Starter Instances
       - [Overview](/ai/ti/reference/ti-starter-database.md)
       - [create-db-cluster](/ai/ti/reference/ti-db-create-db-cluster.md)
       - [list-db-clusters](/ai/ti/reference/ti-db-list-db-clusters.md)
@@ -75,7 +75,7 @@
       - [create-db-sql-users](/ai/ti/reference/ti-db-create-db-sql-users.md)
       - [format-db-connection-string](/ai/ti/reference/ti-db-format-db-connection-string.md)
       - [execute-sql-statement](/ai/ti/reference/ti-db-execute-sql-statement.md)
-    - `ti fs` commands for managing TiDB Cloud Filesystems
+    - `ti fs` Commands for Managing File Systems in TiDB Cloud Filesystem
       - [Overview](/ai/ti/reference/ti-filesystem.md)
       - [create-file-system](/ai/ti/reference/ti-fs-create-file-system.md)
       - [import-file-system-token](/ai/ti/reference/ti-fs-import-file-system-token.md)
@@ -121,20 +121,20 @@
       - [mount-file-system](/ai/ti/reference/ti-fs-mount-file-system.md)
       - [drain-file-system](/ai/ti/reference/ti-fs-drain-file-system.md)
       - [unmount-file-system](/ai/ti/reference/ti-fs-unmount-file-system.md)
-    - `ti fs-git` commands for managing TiDB Cloud Filesystem Git workspaces
+    - `ti fs-git` Commands for Managing File System Git Workspaces
       - [Overview](/ai/ti/reference/ti-filesystem-git.md)
       - [clone-git-workspace](/ai/ti/reference/ti-fs-git-clone-git-workspace.md)
       - [hydrate-git-workspace](/ai/ti/reference/ti-fs-git-hydrate-git-workspace.md)
       - [add-git-worktree](/ai/ti/reference/ti-fs-git-add-git-worktree.md)
       - [remove-git-worktree](/ai/ti/reference/ti-fs-git-remove-git-worktree.md)
-    - `ti fs-journal` commands for managing TiDB Cloud Filesystem journals
+    - `ti fs-journal` Commands for Managing File System Journals
       - [Overview](/ai/ti/reference/ti-filesystem-journal.md)
       - [create-journal](/ai/ti/reference/ti-fs-journal-create-journal.md)
       - [append-journal-entries](/ai/ti/reference/ti-fs-journal-append-journal-entries.md)
       - [read-journal-entries](/ai/ti/reference/ti-fs-journal-read-journal-entries.md)
       - [search-journal-entries](/ai/ti/reference/ti-fs-journal-search-journal-entries.md)
       - [verify-journal](/ai/ti/reference/ti-fs-journal-verify-journal.md)
-    - `ti fs-vault` commands for managing TiDB Cloud Filesystem vault secrets
+    - `ti fs-vault` Commands for Managing File System Vault Secrets
       - [Overview](/ai/ti/reference/ti-filesystem-vault.md)
       - [create-secret](/ai/ti/reference/ti-fs-vault-create-secret.md)
       - [replace-secret](/ai/ti/reference/ti-fs-vault-replace-secret.md)

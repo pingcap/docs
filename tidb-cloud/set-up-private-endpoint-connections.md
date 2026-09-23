@@ -67,7 +67,8 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 > **Note:**
 >
-> For each TiDB Cloud Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
+> - If you want to connect to your cluster over IPv6, see [Use IPv6 connectivity over a private endpoint](#use-ipv6-connectivity-over-a-private-endpoint) for additional IPv6 configuration.
+> - For each TiDB Cloud Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
 
@@ -202,6 +203,45 @@ The possible statuses of a private endpoint service are explained as follows:
 - **Creating**: The endpoint service is being created, which takes 3 to 5 minutes.
 - **Active**: The endpoint service is created, no matter whether the private endpoint is created or not.
 - **Deleting**: The endpoint service or the cluster is being deleted, which takes 3 to 5 minutes.
+
+## Use IPv6 connectivity over a private endpoint
+
+TiDB Cloud Dedicated supports inbound IPv6 connectivity over AWS PrivateLink. 
+
+> **Note:**
+> 
+> Currently, the IPv6 connectivity feature is available upon request. To access this feature, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) and provide your organization ID. 
+
+In TiDB Cloud, you can configure the IP protocol type for each [TiDB node group](/tidb-cloud/tidb-node-group-management.md) independently. To connect to a TiDB Cloud Dedicated cluster over IPv6, switch the IP protocol type of the target node group to dual-stack, and then create a dual-stack AWS interface endpoint as follows:
+
+### Step 1. Switch the IP protocol type to dual-stack
+
+After [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) enables the IPv6 connectivity feature for your organization, you can switch the IP protocol type in the [TiDB Cloud console](https://tidbcloud.com/).
+
+1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page of your organization, click the name of your target cluster to go to its overview page, and then click **Settings** > **Networking** in the left navigation pane.
+2. Each TiDB Cloud Dedicated cluster has a default [TiDB node group](/tidb-cloud/tidb-node-group-management.md). If your cluster has multiple node groups, select your target TiDB node group from the **TiDB Node Group** list in the upper-right corner.
+3. In the **AWS Private Endpoints** section, click **Edit**.
+4. In the **AWS Private Endpoints Connection Settings** dialog, select **Dual Stack (IPv4 + IPv6)** as the IP protocol type, and then click **Save**.
+
+> **Note:**
+>
+> To switch the IP protocol type back to **IPv4 Only**, you must first delete all private endpoints that use IPv6. Private endpoints that use IPv4 only do not need to be deleted.
+
+The IP protocol type can only be changed after the cluster is created.
+
+### Step 2. Create a dual-stack AWS interface endpoint for IPv6
+
+Create an AWS interface endpoint as described in [Step 2. Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint), and note the following:
+
+- For **IP address type**, select **Dualstack** to assign both IPv4 and IPv6 addresses to the endpoint network interfaces.
+- For **Subnets**, select subnets that each have both an IPv4 CIDR block and an IPv6 CIDR block.
+- If you use the AWS CLI, append `--ip-address-type dualstack` to the generated command:
+
+    ```bash
+    aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids} --ip-address-type dualstack
+    ```
+
+Then complete [Step 3](#step-3-create-a-private-endpoint-connection) through [Step 5](#step-5-connect-to-your-tidb-cluster) to create the private endpoint connection and connect to your cluster over IPv6.
 
 ## Troubleshooting
 

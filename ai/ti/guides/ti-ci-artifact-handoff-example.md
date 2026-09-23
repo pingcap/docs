@@ -5,7 +5,7 @@ summary: Persist build output in TiDB Cloud Filesystem and consume it from a lat
 
 # Hand Off CI Artifacts Between Isolated Jobs with TiDB Cloud Filesystem
 
-This workflow uses a Filesystem as a durable handoff point between isolated CI jobs or runners. Use it when build output must survive the producer job and become available to a later consumer without adding a provider-specific artifact API, retention model, and download workflow.
+This workflow uses a file system as a durable handoff point between isolated CI jobs or runners. Use it when build output must survive the producer job and become available to a later consumer without adding a provider-specific artifact API, retention model, and download workflow.
 
 > **Note:**
 >
@@ -13,11 +13,11 @@ This workflow uses a Filesystem as a durable handoff point between isolated CI j
 
 ## How it works
 
-The pipeline injects one Filesystem token and region into both jobs. The token identifies the Filesystem. The producer uploads output under a run-specific path such as `/ci/${RUN_ID}/`, and the consumer downloads or streams data from that exact path on another runner. Neither job needs TiDB Cloud API keys or a copied `~/.ti/` directory.
+The pipeline injects one file system token and region into both jobs. The token identifies the file system. The producer uploads output under a run-specific path such as `/ci/${RUN_ID}/`, and the consumer downloads or streams data from that exact path on another runner. Neither job needs TiDB Cloud API keys or a copied `~/.ti/` directory.
 
 ## Prerequisites
 
-[Create a Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md#create-a-filesystem) on a trusted machine, and store these values as protected CI secrets or variables:
+[Create a file system](/tidb-cloud-filesystem/manage-filesystem-resources.md#create-a-file-system) on a trusted machine, and store these values as protected CI secrets or variables:
 
 ```text
 TI_FS_TOKEN
@@ -67,7 +67,7 @@ Delete only the run-specific directory after all consumers finish:
 ti fs delete-file --path "/ci/${RUN_ID}" --recursive
 ```
 
-Use unique run IDs and do not delete the whole Filesystem from an individual job. Filesystem deletion requires the trusted control-plane configuration and should remain a separate owner operation.
+Use unique run IDs and do not delete the whole file system from an individual job. File system deletion requires the trusted control-plane configuration and should remain a separate owner operation.
 
 ## What's next
 

@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault create-secret
-summary: Create a secret in Filesystem Vault.
+summary: Create a secret in file system Vault.
 ---
 
 # ti fs-vault create-secret
@@ -30,7 +30,7 @@ ti fs-vault create-secret
 - `--secret-name <string>`: Vault secret name. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--version`: Display version information.
 

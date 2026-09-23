@@ -1,11 +1,11 @@
 ---
 title: ti fs enable-file-system-token
-summary: Enable a disabled TiDB Cloud Filesystem token.
+summary: Enable a disabled file system token so it can authenticate again.
 ---
 
 # ti fs enable-file-system-token
 
-Re-enables a disabled Filesystem token. The token can take approximately 10 seconds to become usable. With owner token authentication, only scoped tokens can be enabled; TiDB Cloud API keys can enable either token kind.
+Re-enables a disabled file system token. The token can take approximately 10 seconds to become usable. With owner token authentication, only scoped tokens can be enabled; TiDB Cloud API keys can enable either token kind.
 
 > **Note:**
 >
@@ -25,9 +25,9 @@ ti fs enable-file-system-token
 
 ## Options
 
-- `--file-system-id <string>`: Specify the Filesystem that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
+- `--file-system-id <string>`: Specify the file system that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
 - `--token-id <string>`: Specify the immutable token ID returned by the list command. This option is required.
-- `--fs-token <string>`: Authorize the request with a Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. If no Filesystem token is available, the command uses the configured TiDB Cloud API keys.
+- `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system. If no file system token is available, the command uses the configured TiDB Cloud API keys.
 - `--dry-run`: Validate the request without changing remote token state.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -48,7 +48,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Enable a scoped token by using an owner token:
 
     ```bash
-    # The owner token identifies and authorizes token management for its Filesystem.
+    # The owner token identifies and authorizes token management for its file system.
     TI_FS_TOKEN="<owner-fs-token>" ti fs enable-file-system-token \
       --token-id "<scoped-token-id>"
     ```
