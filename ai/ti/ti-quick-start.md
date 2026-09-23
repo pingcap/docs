@@ -118,7 +118,7 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
 1. Create a file system and obtain the default access token (typically performed outside the sandbox):
 
     ```bash
-    export TI_FS_TOKEN="$(ti fs create-file-system --file-system-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
+    export TI_FS_TOKEN="$(ti fs create-file-system --display-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
     ```
 
 2. Mount the filesystem to a local path and use it as a normal POSIX-compliant filesystem (typically performed within the sandbox):
