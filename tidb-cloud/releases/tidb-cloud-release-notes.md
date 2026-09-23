@@ -8,6 +8,18 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## September 22, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) now supports inbound IPv6 connectivity over AWS PrivateLink, so you can connect to your cluster over either IPv4 or IPv6.
+
+        Currently, this feature is available upon request. To access IPv6 connectivity, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request it, and then create a dual-stack AWS interface endpoint.
+
+        For more information, see [Use IPv6 connectivity over a private endpoint](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint).
+
 ## September 15, 2026
 
 **General changes**
