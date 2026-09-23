@@ -13,16 +13,16 @@ summary: サポートされているローカル状態と自動化を tdc v0.1.x
 
 ## 開始前に {#before-you-begin}
 
-- `tdc` によって開始されたすべての Filesystem マウントおよび Vault マウントをアンマウントし、書き込みプロセスを停止します。古いマウントがまだアクティブな場合、実行中の FUSE または WebDAV プロセスを移行できないため、移行は停止します。
+- `tdc` によって開始されたすべての file system マウントおよび Vault マウントをアンマウントし、書き込みプロセスを停止します。古いマウントがまだアクティブな場合、実行中の FUSE または WebDAV プロセスを移行できないため、移行は停止します。
 
-    アクティブな各マウントに対応するコマンドを実行してください。FUSE Filesystem マウントの場合は、まず `drain-file-system` を実行して保留中の書き込みをフラッシュし、その後 `unmount-file-system` を実行してマウントを切り離します。WebDAV Filesystem マウントの場合は、書き込みプロセスを停止し、`unmount-file-system` のみを実行します。Vault マウントでは `unmount-vault` のみが必要です。
+    アクティブな各マウントに対応するコマンドを実行してください。FUSE file system マウントの場合は、まず `drain-file-system` を実行して保留中の書き込みをフラッシュし、その後 `unmount-file-system` を実行してマウントを切り離します。WebDAV file system マウントの場合は、書き込みプロセスを停止し、`unmount-file-system` のみを実行します。Vault マウントでは `unmount-vault` のみが必要です。
 
     ```bash
-    # FUSE Filesystem mount
+    # FUSE file system mount
     tdc fs drain-file-system --mount-path <filesystem-mount-path>
     tdc fs unmount-file-system --mount-path <filesystem-mount-path>
 
-    # WebDAV Filesystem mount
+    # WebDAV file system mount
     tdc fs unmount-file-system --mount-path <filesystem-mount-path>
 
     # Vault mount
@@ -44,7 +44,7 @@ summary: サポートされているローカル状態と自動化を tdc v0.1.x
 | プロファイルと TiDB Cloud API 認証情報 | バイナリ |
 | グローバル設定とテレメトリーのインストール ID | ログとキャッシュ |
 | データベース SQL 認証情報 | ローカルオーバーレイ |
-| Filesystem の登録情報と認証情報 | マウントロケーターおよび付随するランタイム状態 |
+| File system の登録情報と認証情報 | マウントロケーターおよび付随するランタイム状態 |
 
 インストール後、新しい実行ファイルを確認し、使用しているリソースに対して読み取り専用コマンドを実行してください。例:
 
@@ -64,7 +64,7 @@ ti fs list-file-systems --output text
 
 `~/.tdc/` と `~/.ti/` がそれぞれ独立して作成されていた場合、または移行マーカーが存在しない、無効である、あるいは別のソースを参照している場合、`ti` はどちらのディレクトリもマージまたは上書きせずに停止します。
 
-どちらのディレクトリを正しいソースオブトゥルースとするかを判断し、もう一方のディレクトリをバックアップ場所へ移動してください。その後、インストーラーまたは `ti` コマンドを再度実行します。認証情報や Filesystem レジストリディレクトリを手動で結合しないでください。
+どちらのディレクトリを正しいソースオブトゥルースとするかを判断し、もう一方のディレクトリをバックアップ場所へ移動してください。その後、インストーラーまたは `ti` コマンドを再度実行します。認証情報や file system レジストリディレクトリを手動で結合しないでください。
 
 ## 環境変数を更新する {#update-environment-variables}
 
@@ -92,5 +92,5 @@ v0.2.x の移行期間中、`ti` は対応する新しい変数が設定され�
 - [TiDB Cloud CLI のインストール、設定、更新](/ai/ti/reference/ti-install-configure-update.md)
 - [TiDB Cloud CLI の設定と認証情報](/ai/ti/reference/ti-configuration-and-credentials.md)
 - [TiDB Cloud Starter インスタンスを管理する](/ai/ti/guides/manage-starter-instances.md)
-- [Filesystem リソースを管理する](/ai/ti/guides/manage-filesystem-resources.md)
+- [TiDB Cloud Filesystem を管理する](/ai/ti/guides/manage-filesystems-via-cli.md)
 - [TiDB Cloud CLI のトラブルシューティング](/ai/ti/reference/ti-troubleshooting.md)

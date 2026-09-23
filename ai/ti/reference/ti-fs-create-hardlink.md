@@ -1,6 +1,6 @@
 ---
 title: ti fs create-hardlink
-summary: TiDB Cloud Filesystem にハードリンクを作成します。
+summary: ファイルシステムにハードリンクを作成します。
 ---
 
 # ti fs create-hardlink
@@ -30,7 +30,7 @@ ti fs create-hardlink
 - `--source-path <string>`: TiDB Cloud file system 内の既存のファイルパスです。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 

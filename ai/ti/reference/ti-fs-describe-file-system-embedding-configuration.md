@@ -1,11 +1,11 @@
 ---
 title: ti fs describe-file-system-embedding-configuration
-summary: TiDB Cloud Filesystem の埋め込み設定を表示します。
+summary: ファイルシステムの埋め込み設定を表示します。
 ---
 
 # ti fs describe-file-system-embedding-configuration
 
-Filesystem の埋め込み設定を表示します。この設定は任意であり、カスタマイズしていない場合でも通常の Filesystem 操作には影響しません。このコマンドには TiDB Cloud API 認証情報が必要で、Filesystem トークンは使用しません。
+ファイルシステムの埋め込み設定を表示します。この設定は任意であり、カスタマイズしていない場合でも通常のファイルシステム操作には影響しません。このコマンドには TiDB Cloud API 認証情報が必要で、ファイルシステムトークンは使用しません。
 
 `source` フィールドは、設定が `custom`、`default`、`none`、または `database_auto` のいずれであるかを示します。
 
@@ -24,7 +24,7 @@ ti fs describe-file-system-embedding-configuration
 
 ## オプション {#options}
 
-- `--file-system-id <string>`: 変更不可の Filesystem ID を設定します。\[required]
+- `--file-system-id <string>`: 変更不可のファイルシステム ID を設定します。\[required]
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 

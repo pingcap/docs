@@ -1,11 +1,11 @@
 ---
 title: ti fs list-file-systems
-summary: リージョン内のリモート TiDB Cloud Filesystem を一覧表示します。
+summary: リージョン内のリモートファイルシステムを一覧表示します。
 ---
 
 # ti fs list-file-systems
 
-選択したリージョンで、選択した TiDB Cloud 認証情報を使用してアクセス可能なすべての Filesystem を一覧表示します。結果には、表示名、ラベル、ステータス、クォータと使用量、および `has_local_token` が含まれます。`has_local_token` は、このマシンに一致するローカルトークンがあるかどうかを示します。トークンの値が含まれることはありません。
+選択したリージョンで、選択した TiDB Cloud 認証情報を使用してアクセス可能なすべてのファイルシステムを一覧表示します。結果には、表示名、ラベル、ステータス、クォータと使用量、および `has_local_token` が含まれます。`has_local_token` は、このマシンに一致するローカルトークンがあるかどうかを示します。トークンの値が含まれることはありません。
 
 利用可能な場合、クォータデータにはメディアおよび動画抽出の上限と使用量が含まれます。
 
@@ -36,14 +36,14 @@ ti fs list-file-systems
 
 ## 例 {#examples}
 
-- リモート管理される Filesystem を一覧表示します。
+- リモート管理されるファイルシステムを一覧表示します。
 
     ```bash
     # Return the remote inventory for the profile's region without exposing tokens.
     ti fs list-file-systems
     ```
 
-- 表示メタデータで Filesystem をフィルタリングします。
+- 表示メタデータでファイルシステムをフィルタリングします。
 
     ```bash
     # Match a display-name substring and one exact organization-visible label.

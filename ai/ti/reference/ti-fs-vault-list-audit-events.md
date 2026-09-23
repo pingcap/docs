@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault list-audit-events
-summary: Filesystem Vault の監査イベントを一覧表示します。
+summary: file system Vault の監査イベントを一覧表示します。
 ---
 
 # ti fs-vault list-audit-events
@@ -29,7 +29,7 @@ ti fs-vault list-audit-events
 
 - `--agent-id <string>`: エージェント ID でフィルターします。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--limit <int32>`: 返されるイベントの最大数。\[default: 100]
 - `--secret-name <string>`: Vault シークレット名でフィルターします。

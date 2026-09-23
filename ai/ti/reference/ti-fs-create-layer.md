@@ -1,11 +1,11 @@
 ---
 title: ti fs create-layer
-summary: TiDB Cloud Filesystem にレイヤーを作成します。
+summary: file system にレイヤーを作成します。
 ---
 
 # ti fs create-layer
 
-Filesystem のベースパス上に、分離された変更を記録するためのレイヤーを作成します。`--layer-id` を省略した場合、サービスが自動的に生成します。
+file system のベースパス上に、分離された変更を記録するためのレイヤーを作成します。`--layer-id` を省略した場合、サービスが自動的に生成します。
 
 > **Note:**
 >
@@ -35,7 +35,7 @@ ti fs create-layer
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--durability-mode <string>`: レイヤーの耐久性モードを設定します。明示的にサポートされている値は `restore-safe` のみで、これを指定するとリモートレイヤー内の変更が保持され、ローカル環境の終了後もレイヤーを復元できます。省略した場合、サービスは `restore-safe` を使用します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--layer-id <string>`: レイヤー ID です。通常はサービスによって自動生成されます。
 - `--layer-name <string>`: レイヤーの名前です。

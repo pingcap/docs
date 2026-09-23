@@ -1,6 +1,6 @@
 ---
 title: ti fs fork-layer
-summary: TiDB Cloud Filesystem で copy-on-write の子レイヤーをフォークします。
+summary: ファイルシステムで copy-on-write の子レイヤーをフォークします。
 ---
 
 # ti fs fork-layer
@@ -34,7 +34,7 @@ ti fs fork-layer
 - `--checkpoint-id <string>`: 子を親のこのチェックポイントに固定します。省略した場合は、シリアライズされた親の tip に固定されます。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されたトークンを使用します。
+- `--fs-token <string>`: ファイルシステム トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されたトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--layer-id <string>`: 安定した子レイヤー ID。省略した場合、サービスが生成します。
 - `--layer-name <string>`: 人が判読しやすい子レイヤー名。

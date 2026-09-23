@@ -1,11 +1,11 @@
 ---
 title: ti fs import-file-system-token
-summary: 既存の TiDB Cloud Filesystem トークンをインポートします。
+summary: 既存のファイルシステムトークンを選択したローカルプロファイルにインポートします。
 ---
 
 # ti fs import-file-system-token
 
-既存の Filesystem トークンを検証し、選択したローカルプロファイルに保存します。Filesystem ID はトークンから導出されます。トークンが想定した Filesystem に属していることを確認するには、オプションの `--file-system-id` を使用します。
+既存のファイルシステムトークンを検証し、選択したローカルプロファイルに保存します。ファイルシステム ID はトークンから導出されます。トークンが想定したファイルシステムに属していることを確認するには、オプションの `--file-system-id` を使用します。
 
 > **Note:**
 >

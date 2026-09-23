@@ -1,6 +1,6 @@
 ---
 title: ti fs search-file-content
-summary: TiDB Cloud Filesystem 内のファイル内容を検索します。
+summary: ファイルシステム内のファイル内容を検索します。
 ---
 
 # ti fs search-file-content
@@ -29,7 +29,7 @@ ti fs search-file-content
 
 - `--pattern <string>`: 抽出されたファイル内容と説明に対して、全文検索および設定されている場合はセマンティック検索に使用されるテキストクエリです。この値は正規表現や glob ではありません。\[required]
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--layer-id <string>`: ファイルシステムのレイヤー内を検索します。
 - `--limit <int32>`: 検索結果の最大件数です。0 を指定するとサービスのデフォルト値が使用されます。
@@ -40,7 +40,7 @@ ti fs search-file-content
 
 ## 例 {#examples}
 
-- ベース Filesystem の内容を検索します。
+- ベースファイルシステムの内容を検索します。
 
     ```bash
     # Find matching text under a remote directory and limit the result count.
@@ -50,7 +50,7 @@ ti fs search-file-content
 - レイヤー内の内容を検索します。
 
     ```bash
-    # Inspect uncommitted layer content separately from the base Filesystem.
+    # Inspect uncommitted layer content separately from the base file system.
     ti fs search-file-content --file-system-id <file-system-id> --path /workspace --pattern "deprecated" --layer-id "<layer-id>"
     ```
 

@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault mount-vault
-summary: 読み取り専用の Filesystem Vault ビューをマウントします。
+summary: 読み取り専用の file system Vault ビューをマウントします。
 ---
 
 # ti fs-vault mount-vault
@@ -32,7 +32,7 @@ ti fs-vault mount-vault
 - `--mount-path <string>`: ローカルのマウントパス。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: オーナー Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。委任認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用してください。
+- `--fs-token <string>`: ファイルシステムのオーナートークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。委任認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用してください。
 - `--help`: ヘルプ情報を表示します。
 - `--ready-timeout <duration>`: バックグラウンドマウントの準備が完了するまで待機する時間。\[default: `30s`]
 - `--vault-token <string>`: 委任された `ti fs-vault` トークン。`TI_VAULT_TOKEN` の使用を推奨します。

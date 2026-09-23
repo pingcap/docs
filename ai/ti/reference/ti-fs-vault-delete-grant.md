@@ -1,11 +1,11 @@
 ---
 title: ti fs-vault delete-grant
-summary: 委任された Filesystem Vault grant を取り消します。
+summary: 委任された file system Vault grant を取り消します。
 ---
 
 # ti fs-vault delete-grant
 
-委任された Filesystem Vault grant を 1 つ取り消します。
+委任された file system Vault grant を 1 つ取り消します。
 
 > **Note:**
 >
@@ -30,7 +30,7 @@ ti fs-vault delete-grant
 - `--grant-id <string>`: Vault grant ID。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--reason <string>`: 取り消し理由を任意で指定します。
 - `--revoked-by <string>`: 取り消し監査エントリの実行者ラベル。\[デフォルト: `ti`]

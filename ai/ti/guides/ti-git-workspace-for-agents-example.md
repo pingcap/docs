@@ -17,7 +17,7 @@ summary: 大規模な Git ワークスペースをすばやく利用可能にし
 
 ## 前提条件 {#prerequisites}
 
-- Filesystem を選択します。
+- file system を選択します。
 - Linux FUSE、または macFUSE を使用した macOS と明示的な `--driver fuse` を使用します。Git ワークスペースは、リモート Git ツリーとワークスペースの変更をマウントパスに統合するために FUSE に依存します。WebDAV マウントではこの統合は提供されません。
 - Git をインストールし、リポジトリ認証を設定します。
 
@@ -82,7 +82,7 @@ ti fs-git remove-git-worktree \
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-未コミットの変更を破棄してよい場合にのみ、worktree の削除で `--force` を使用してください。Filesystem のアンマウントでは自動的にグレースフルな drain が実行されます。アンマウントせずにリモート作業をフラッシュする必要がある場合にのみ、`ti fs drain-file-system` を個別に使用してください。
+未コミットの変更を破棄してよい場合にのみ、worktree の削除で `--force` を使用してください。File system のアンマウントでは自動的にグレースフルな drain が実行されます。アンマウントせずにリモート作業をフラッシュする必要がある場合にのみ、`ti fs drain-file-system` を個別に使用してください。
 
 ## セキュリティおよび運用上の注意 {#security-and-operational-notes}
 

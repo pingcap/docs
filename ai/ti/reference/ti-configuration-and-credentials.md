@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud CLI の設定と認証情報
-summary: TiDB Cloud CLI のプロファイル、優先順位ルール、ローカル状態パス、Filesystem 認証情報、SQL 認証情報、マウントロケーター、および操作ログのリファレンスです。
+summary: TiDB Cloud CLI のプロファイル、優先順位ルール、ローカル状態パス、file system 認証情報、SQL 認証情報、マウントロケーター、および操作ログのリファレンスです。
 ---
 
 # TiDB Cloud CLI の設定と認証情報
@@ -76,9 +76,9 @@ enabled = false
 
 TiDB Cloud CLI は、プロジェクトセレクターを受け付けず、保存もしません。TiDB Cloud Starter インスタンスの作成ではプロジェクト配置先を省略し、TiDB Cloud がサーバー側のデフォルトプロジェクトを選択します。TiDB Cloud から返されるプロジェクトフィールドおよびラベルは、リソースメタデータとして引き続き表示されますが、後続のリクエストで再利用されることはありません。
 
-## Filesystem 認証情報とリモートインベントリ {#filesystem-credentials-and-remote-inventory}
+## File system 認証情報とリモートインベントリ {#file-system-credentials-and-remote-inventory}
 
-1 つのプロファイルで複数の Filesystem にアクセスできます。リージョン単位のリモートインベントリが、リソースの存在と状態に関する信頼できる情報源です。ローカル状態には、認証情報とそのルーティングヒントのみが保存されます。
+1 つのプロファイルで複数の file system にアクセスできます。リージョン単位のリモートインベントリが、リソースの存在と状態に関する信頼できる情報源です。ローカル状態には、認証情報とそのルーティングヒントのみが保存されます。
 
 ```text
 ~/.ti/fs_credentials/<profile-key>/<file-system-id-key>/credentials
@@ -86,22 +86,22 @@ TiDB Cloud CLI は、プロジェクトセレクターを受け付けず、保�
 
 この認証情報には、サーバーが割り当てた file system ID、正規のリージョンコード、選択された `api_key`、および任意の正式なトークンメタデータが含まれ、所有者のみがアクセスできる権限を使用します。`ti fs list-file-systems` はリモートリソースを読み取り、機密情報ではない `has_local_token` ヒントのみをテーブル結合します。
 
-1 つのリモート Filesystem に複数のトークンを持たせることはできますが、各プロファイルが Filesystem ごとに保存する選択済みトークンは最大 1 つです。ローカルストアは運用上の選択情報であり、リモートのトークンインベントリのレプリカではありません。プロビジョニングまたは古いインポートによって作成された認証情報には、`token_id`、`scope_kind`、`token_name`、`expires_at`、または `scopes` が含まれていない場合がありますが、それでもデータプレーン用途では有効です。また、`ti` は不足しているメタデータをトークン一覧の行から推測しません。
+1 つのリモート file system に複数のトークンを持たせることはできますが、各プロファイルが file system ごとに保存する選択済みトークンは最大 1 つです。ローカルストアは運用上の選択情報であり、リモートのトークンインベントリのレプリカではありません。プロビジョニングまたは古いインポートによって作成された認証情報には、`token_id`、`scope_kind`、`token_name`、`expires_at`、または `scopes` が含まれていない場合がありますが、それでもデータプレーン用途では有効です。また、`ti` は不足しているメタデータをトークン一覧の行から推測しません。
 
 `ti fs generate-file-system-token` は、`--store-locally` が設定されていない限り、選択済み認証情報を変更しません。`--replace` はローカルの選択のみを変更し、以前のリモートトークンは引き続き有効なままです。ローカル認証情報をソースとするリフレッシュでは、それがアトミックに置き換えられます。フラグまたは `TI_FS_TOKEN` をソースとするリフレッシュでは、置換後のプレーンテキストが返され、ローカル状態には書き込まれません。
 
-`ti fs generate-file-system-scoped-token` はオーナートークンのみを受け付け、その正式なパススコープをローカルに保存できます。トークン JWT 自体には Filesystem ID は含まれますが、トークンの種類、トークン ID、またはスコープは含まれません。そのため、明示的に指定されたトークンまたは環境変数のトークンは、ローカルで分類されるのではなく、認可のためにサービスへ渡されます。`TI_FS_TOKEN` にはオーナートークンまたはスコープ付きトークンのいずれも指定できます。利用可能な操作は、そのサーバー側の能力に依存します。
+`ti fs generate-file-system-scoped-token` はオーナートークンのみを受け付け、その正式なパススコープをローカルに保存できます。トークン JWT 自体には file system ID は含まれますが、トークンの種類、トークン ID、またはスコープは含まれません。そのため、明示的に指定されたトークンまたは環境変数のトークンは、ローカルで分類されるのではなく、認可のためにサービスへ渡されます。`TI_FS_TOKEN` にはオーナートークンまたはスコープ付きトークンのいずれも指定できます。利用可能な操作は、そのサーバー側の能力に依存します。
 
-オーナー FS トークンは、Filesystem データアクセスとトークンインベントリまたはライフサイクル操作を認可します。TiDB Cloud Filesystem リソースの作成、一覧表示、詳細表示、削除は認可しません。また、別のオーナートークンを生成することもできません。これらの操作には TiDB Cloud API 認証情報が必要です。さらに、`ti fs delete-file-system` では明示的な `--file-system-id` が必要です。`TI_FS_TOKEN` に埋め込まれた ID が、削除対象の Filesystem 選択に使われることはありません。
+file system オーナートークンは、file system データアクセスとトークンインベントリまたはライフサイクル操作を認可します。TiDB Cloud Filesystem リソースの作成、一覧表示、詳細表示、削除は認可しません。また、別のオーナートークンを生成することもできません。これらの操作には TiDB Cloud API 認証情報が必要です。さらに、`ti fs delete-file-system` では明示的な `--file-system-id` が必要です。`TI_FS_TOKEN` に埋め込まれた ID が、削除対象の file system 選択に使われることはありません。
 
 リソースの選択順序は次のとおりです。
 
 1. 明示的な `--file-system-id`
 2. `TI_FS_FILE_SYSTEM_ID`
-3. 明示的に指定された FS トークンから ID を導出
+3. 明示的に指定された file system トークンから ID を導出
 4. それ以外の場合は `fs.missing_file_system_id` で失敗
 
-`ti` は、保存済みデフォルトやローカル認証情報の数から Filesystem を推測することはありません。単一コマンドには `--file-system-id` を、シェル、サンドボックス、または自動化環境には `TI_FS_FILE_SYSTEM_ID` を使用してください。
+`ti` は、保存済みデフォルトやローカル認証情報の数から file system を推測することはありません。単一コマンドには `--file-system-id` を、シェル、サンドボックス、または自動化環境には `TI_FS_FILE_SYSTEM_ID` を使用してください。
 
 リモート `fs`、`fs-git`、`fs-journal`、およびオーナー `fs-vault` 操作における FS オーナー認証情報の選択順序は次のとおりです。
 
@@ -111,7 +111,7 @@ TiDB Cloud CLI は、プロジェクトセレクターを受け付けず、保�
 
 フラグはシェル履歴やプロセス一覧に残る可能性があるため、フラグよりも `TI_FS_TOKEN` を推奨します。
 
-## 設定不要の Filesystem 入力 {#config-free-filesystem-inputs}
+## 設定不要の file system 入力 {#config-free-filesystem-inputs}
 
 クリーンなサンドボックスで必要なのは次の内容だけです。
 
@@ -120,7 +120,7 @@ export TI_FS_TOKEN="<owner-token>"
 export TI_REGION_CODE="aws-us-east-1"
 ```
 
-これらの値はメモリ内の名前空間のみを構成します。`ti` はトークンから ID を導出し、どちらの値も `~/.ti/` に書き込みません。`TI_FS_FILE_SYSTEM_ID` は任意ですが、指定する場合はトークンと一致している必要があります。リモート Filesystem のインベントリ、詳細表示、プロビジョニング、および削除には TiDB Cloud API 認証情報が必要です。FS トークンは Filesystem 削除の認可としては不要であり、受け付けられません。
+これらの値はメモリ内の名前空間のみを構成します。`ti` はトークンから ID を導出し、どちらの値も `~/.ti/` に書き込みません。`TI_FS_FILE_SYSTEM_ID` は任意ですが、指定する場合はトークンと一致している必要があります。リモート file system のインベントリ、詳細表示、プロビジョニング、および削除には TiDB Cloud API 認証情報が必要です。file system トークンは file system 削除の認可としては不要であり、受け付けられません。
 
 ## DB SQL 認証情報 {#db-sql-credentials}
 
@@ -158,7 +158,7 @@ TiDB Cloud の完全なロールモデルについては、[データベース�
 
 ## Companion 状態とマウントロケーター {#companion-state-and-mount-locators}
 
-インストーラーには `ti-drive9` が含まれており、これは `ti fs`、`ti fs-git`、`ti fs-journal`、および `ti fs-vault` の操作を実行する companion runtime です。これを直接呼び出すことはありません。登録された各 Filesystem には、分離された companion home があります。
+インストーラーには `ti-drive9` が含まれており、これは `ti fs`、`ti fs-git`、`ti fs-journal`、および `ti fs-vault` の操作を実行する companion runtime です。これを直接呼び出すことはありません。登録された各 file system には、分離された companion home があります。
 
 ```text
 ~/.ti/drive9-home/<profile-key>/<resource-key>/
@@ -172,7 +172,7 @@ TiDB Cloud の完全なロールモデルについては、[データベース�
 ~/.ti/mounts/<mount-hash>.locator.json
 ```
 
-このロケーターには、同じ `HOME` から drain およびアンマウントを行うために必要な配置先情報と companion-home 情報が記録されます。FS トークンは含まれません。アンマウントが成功すると削除されます。
+このロケーターには、同じ `HOME` から drain およびアンマウントを行うために必要な配置先情報と companion-home 情報が記録されます。file system トークンは含まれません。アンマウントが成功すると削除されます。
 
 ## 操作ログ {#operation-logs}
 

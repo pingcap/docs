@@ -19,5 +19,5 @@ summary: ジャーナルの作成、追記、読み取り、検索、検証を�
 
 ## 関連情報 {#see-also}
 
-- [TiDB Cloud Filesystem Journal を使用する](/ai/ti/guides/use-filesystem-journals.md)
-- [TiDB Cloud Filesystem Journal にエージェントワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md)
+- [TiDB Cloud Filesystem Journal を使用する](/tidb-cloud-filesystem/use-filesystem-journals.md)
+- [ファイルシステムジャーナルにエージェントワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md)

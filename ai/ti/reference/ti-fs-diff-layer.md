@@ -1,6 +1,6 @@
 ---
 title: ti fs diff-layer
-summary: TiDB Cloud Filesystem のレイヤー内の変更を表示します。
+summary: ファイルシステムレイヤー内の変更を表示します。
 ---
 
 # ti fs diff-layer
@@ -27,7 +27,7 @@ ti fs diff-layer
 
 - `--layer-id <string>`: レイヤーの ID。\[required]
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合は、選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合は、選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--max-seq <int64>`: 含めるレイヤーの最大シーケンス。`0` を指定すると、すべてのシーケンスを含みます。
 - `--version`: バージョン情報を表示します。

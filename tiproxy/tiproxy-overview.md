@@ -141,7 +141,7 @@ TiProxyが適しているシナリオではTiProxyを使用し、アプリケー
 
     ```yaml
     component_versions:
-      tiproxy: "v1.3.2"
+      tiproxy: "v1.3.3"
     server_configs:
       tiproxy:
         ha.virtual-ip: "10.0.1.10/24"
@@ -173,7 +173,7 @@ TiProxyがデプロイされていないクラスターの場合、TiProxyイン
 
     ```yaml
     component_versions:
-      tiproxy: "v1.3.2"
+      tiproxy: "v1.3.3"
     server_configs:
       tiproxy:
         ha.virtual-ip: "10.0.1.10/24"

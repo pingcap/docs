@@ -1,6 +1,6 @@
 ---
 title: ti fs list-files
-summary: TiDB Cloud Filesystem 内のファイルを一覧表示します。
+summary: ファイルシステム内のファイルを一覧表示します。
 ---
 
 # ti fs list-files
@@ -25,7 +25,7 @@ ti fs list-files
 ## オプション {#options}
 
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--path <string>`: ファイルシステムのディレクトリパスです。\[default: /]
 - `--version`: バージョン情報を表示します。
@@ -37,7 +37,7 @@ ti fs list-files
 - リモートディレクトリを一覧表示する場合:
 
     ```bash
-    # Return the entries under a specific Filesystem path.
+    # 特定のファイルシステムパス配下のエントリを返します。
     ti fs list-files --file-system-id <file-system-id> --path /reports
     ```
 

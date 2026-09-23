@@ -1,6 +1,6 @@
 ---
 title: ti fs move-file
-summary: TiDB Cloud Filesystem 内のファイルを移動します。
+summary: ファイルシステム内のファイルを移動します。
 ---
 
 # ti fs move-file
@@ -31,7 +31,7 @@ ti fs move-file
 - `--to-remote <string>`: 宛先ファイルのパス。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した ファイルシステム 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--overwrite`: 既存の宛先ファイルを置き換えます。
 - `--version`: バージョン情報を表示します。
@@ -43,7 +43,7 @@ ti fs move-file
 - リモートファイルを移動する:
 
     ```bash
-    # Rename or relocate an object entirely within the selected Filesystem.
+    # Rename or relocate an object entirely within the selected file system.
     ti fs move-file --file-system-id <file-system-id> --from-remote /draft.md --to-remote /reports/final.md
     ```
 

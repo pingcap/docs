@@ -1,6 +1,6 @@
 ---
 title: ti fs-journal read-journal-entries
-summary: Filesystem ジャーナルからエントリを読み取ります。
+summary: file system ジャーナルからエントリを読み取ります。
 ---
 
 # ti fs-journal read-journal-entries
@@ -29,7 +29,7 @@ ti fs-journal read-journal-entries
 - `--journal-id <string>`: ジャーナル ID。\[required]
 - `--after-seq <int64>`: このシーケンス番号の後のエントリを読み取ります。省略した場合、または `0` に設定した場合は、最も早いエントリから読み取りを開始します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--limit <int32>`: 読み取るエントリの最大数。\[default: 100]
 - `--version`: バージョン情報を表示します。

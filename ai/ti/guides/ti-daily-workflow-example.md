@@ -1,6 +1,6 @@
 ---
 title: 日次の TiDB Cloud CLI ワークフローを実行する
-summary: リソースを確認し、TiDB Cloud Starter インスタンスと Filesystem を管理し、TiDB Cloud CLI の更新を確認して、リソースをクリーンアップします。
+summary: リソースを確認し、TiDB Cloud Starter インスタンスと file system を管理し、TiDB Cloud CLI の更新を確認して、リソースをクリーンアップします。
 ---
 
 # 日次の TiDB Cloud CLI ワークフローを実行する
@@ -14,7 +14,7 @@ summary: リソースを確認し、TiDB Cloud Starter インスタンスと Fil
 ## 前提条件 {#prerequisites}
 
 - `ti` をインストールし、`ti configure` を実行します。
-- 組織に、1 つの TiDB Cloud Starter インスタンスと 1 つの Filesystem を作成できる容量があることを確認します。
+- 組織に、1 つの TiDB Cloud Starter インスタンスと 1 つの file system を作成できる容量があることを確認します。
 
 ## ステップ 1. 現在のリソースを確認する {#step-1-inspect-current-resources}
 
@@ -58,7 +58,7 @@ ti db execute-sql-statement \
   --output text
 ```
 
-## ステップ 4. Filesystem を作成して使用する {#step-4-create-and-use-a-filesystem}
+## ステップ 4. file system を作成して使用する {#step-4-create-and-use-a-filesystem}
 
 ```bash
 export TI_FS_FILE_SYSTEM_ID="$(ti fs create-file-system \
@@ -91,7 +91,7 @@ ti update --check
 ti update --dry-run
 ```
 
-別のワークフローでアクティブな Filesystem または Vault マウントがある場合は、更新を適用する前にライターを停止してアンマウントしてください。これにより、`ti` と Filesystem ランタイムが一緒に更新されます。手順については、[TiDB Cloud CLI を更新する](/ai/ti/reference/ti-install-configure-update.md#update-tidb-cloud-cli) を参照してください。
+別のワークフローでアクティブな file system または Vault マウントがある場合は、更新を適用する前にライターを停止してアンマウントしてください。これにより、`ti` と file system ランタイムが一緒に更新されます。手順については、[TiDB Cloud CLI を更新する](/ai/ti/reference/ti-install-configure-update.md#update-tidb-cloud-cli) を参照してください。
 
 適切なタイミングで更新を適用します。
 
@@ -115,7 +115,7 @@ ti db delete-db-cluster \
 
 ## セキュリティに関する注意 {#security-notes}
 
-- FS トークンや整形済みのデータベース接続文字列を出力しないでください。
+- file system トークンや整形済みのデータベース接続文字列を出力しないでください。
 - 一意の自動化プレフィックスを使用し、その実行で作成されたリソースのみを削除してください。
 - 破壊的な操作は `--dry-run` で事前確認してください。
 

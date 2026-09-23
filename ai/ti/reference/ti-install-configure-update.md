@@ -17,7 +17,7 @@ TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiD
 
 > **Note:**
 >
-> 以前に TiDB Cloud CLI `tdc` v0.1.x を使用していた場合は、`tdc` によって開始された Filesystem または Vault のマウントをすべてアンマウントし、`ti` をインストールする前に [tdc から TiDB Cloud CLI への移行](/ai/ti/reference/ti-migrate-from-tdc.md) を確認してください。
+> 以前に TiDB Cloud CLI `tdc` v0.1.x を使用していた場合は、`tdc` によって開始された file system または Vault のマウントをすべてアンマウントし、`ti` をインストールする前に [tdc から TiDB Cloud CLI への移行](/ai/ti/reference/ti-migrate-from-tdc.md) を確認してください。
 
 ## TiDB Cloud CLI をインストールする {#install-tidb-cloud-cli}
 
@@ -165,13 +165,13 @@ ti update --dry-run
 
 > **Note:**
 >
-> アクティブな Filesystem または Vault のマウントがある場合は、`ti` と Filesystem ランタイムが一緒に更新されるように、更新前にライターを停止してアンマウントしてください。例:
+> アクティブな file system または Vault のマウントがある場合は、`ti` と file system ランタイムが一緒に更新されるように、更新前にライターを停止してアンマウントしてください。例:
 >
 > ```bash
 > ti fs unmount-file-system --mount-path <mount-path>
 > ```
 >
-> Vault マウントの場合は、`ti fs-vault unmount-vault --mount-path <mount-path>` を使用します。詳細は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) および [Filesystem Vault Secrets を管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md) を参照してください。
+> Vault マウントの場合は、`ti fs-vault unmount-vault --mount-path <mount-path>` を使用します。詳細は、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) および [ファイルシステムの Vault シークレットを管理する](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) を参照してください。
 
 最新の更新を適用します。
 
@@ -191,25 +191,25 @@ ti update --target-version <version>
 
 `tdc` v0.1.x を一度も使用したことがない場合は、このセクションをスキップしてください。
 
-以前に `tdc` v0.1.x を使用していた場合、`ti` は `~/.tdc/` から `~/.ti/` へ、サポートされているローカルプロファイル、認証情報、設定、および Filesystem の状態を移行できます。`ti` をインストールする前に、`tdc` によって開始された Filesystem または Vault のマウントをすべてアンマウントしてください。
+以前に `tdc` v0.1.x を使用していた場合、`ti` は `~/.tdc/` から `~/.ti/` へ、サポートされているローカルプロファイル、認証情報、設定、および file system の状態を移行できます。`ti` をインストールする前に、`tdc` によって開始された file system または Vault のマウントをすべてアンマウントしてください。
 
 移行される状態と除外される状態、ディレクトリ競合の解決、レガシー環境変数との互換性を含む完全な移行手順については、[tdc から TiDB Cloud CLI への移行](/ai/ti/reference/ti-migrate-from-tdc.md) を参照してください。
 
 ## TiDB Cloud CLI のアンインストール {#uninstall-tidb-cloud-cli}
 
-アンインストールする前に、writer を停止し、アクティブな Filesystem または Vault のマウントをすべてアンマウントしてください。
+アンインストールする前に、writer を停止し、アクティブな file system または Vault のマウントをすべてアンマウントしてください。
 
 たとえば、マウントの種類に応じて次のコマンドを実行します。
 
 ```bash
-# Filesystem mount
+# file system mount
 ti fs unmount-file-system --mount-path <filesystem-mount-path>
 
 # Vault mount
 ti fs-vault unmount-vault --mount-path <vault-mount-path>
 ```
 
-詳細は、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) および [Filesystem Vault Secrets を管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md) を参照してください。
+詳細は、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) および [ファイルシステムの Vault シークレットを管理する](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) を参照してください。
 
 <SimpleTab groupId="operating-systems">
 
@@ -247,11 +247,11 @@ ti fs-vault unmount-vault --mount-path <vault-mount-path>
 
 ### ローカル状態の削除 {#remove-local-state}
 
-バイナリを削除しても、プロファイル、認証情報、Filesystem の登録、DB SQL 認証情報、ログ、およびマウントロケーターは保持されます。
+バイナリを削除しても、プロファイル、認証情報、file system の登録、DB SQL 認証情報、ログ、およびマウントロケーターは保持されます。
 
 > **Note:**
 >
-> すべてのローカル TiDB Cloud CLI 状態を完全に削除する意図がある場合にのみ、`~/.ti/` を削除してください。ローカル状態を削除しても、リモートの TiDB Cloud Starter インスタンスや Filesystem リソースは削除されません。
+> すべてのローカル TiDB Cloud CLI 状態を完全に削除する意図がある場合にのみ、`~/.ti/` を削除してください。ローカル状態を削除しても、リモートの TiDB Cloud Starter インスタンスや file system リソースは削除されません。
 
 <SimpleTab groupId="operating-systems">
 

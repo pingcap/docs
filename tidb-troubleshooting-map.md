@@ -456,7 +456,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     - インデックスを追加するたびに、各行に新しいキーバリューペアが追加されます。インデックスがN個ある場合、実際にインポートされるサイズは、 [Dumpling](/dumpling-overview.md)出力のサイズのおよそ(N+1)倍になります。インデックスが無視できるほど小さい場合は、最初にスキーマからインデックスを削除し、インポート完了後に`CREATE INDEX`を使用して再度追加することができます。
 
-    - TiDB Lightningのバージョンが古いです。最新バージョンをお試しください。インポート速度が向上する可能性があります。
+    - TiDB Lightningのバージョンが古いです。新しいTiDB Lightningバージョンによりインポートパフォーマンスが向上する可能性があります。アップグレードする場合は、対象のTiDBクラスターのバージョンに一致するTiDB Lightningバージョンを使用することをお勧めします。
 
 - 6.2.3 `checksum failed: checksum mismatched remote vs local` 。
 

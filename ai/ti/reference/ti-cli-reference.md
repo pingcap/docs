@@ -52,10 +52,10 @@ ti db describe-db-cluster
 | `configure` | ローカルプロファイル、API キー、デフォルトのリージョンを設定します。 | [`ti configure`](/ai/ti/reference/ti-configure.md) |
 | `update` | TiDB Cloud CLI の更新を確認してインストールします。 | [`ti update`](/ai/ti/reference/ti-update.md) |
 | `db` | TiDB Cloud Starter インスタンス、ブランチ、SQL ユーザー、接続、SQL ステートメントを管理します。 | [`ti db` コマンド](/ai/ti/reference/ti-starter-database.md) |
-| `fs` | Filesystem リソース、AI プロバイダー、トークン、データ、レイヤー、マウントを管理します。 | [`ti fs` コマンド](/ai/ti/reference/ti-filesystem.md) |
-| `fs-git` | マウントされた Filesystem 上の Git ワークスペースを管理します。 | [`ti fs-git` コマンド](/ai/ti/reference/ti-filesystem-git.md) |
-| `fs-journal` | 検証可能な Filesystem ジャーナルを管理します。 | [`ti fs-journal` コマンド](/ai/ti/reference/ti-filesystem-journal.md) |
-| `fs-vault` | Filesystem Vault シークレットと委任アクセスを管理します。 | [`ti fs-vault` コマンド](/ai/ti/reference/ti-filesystem-vault.md) |
+| `fs` | file system リソース、AI プロバイダー、トークン、データ、レイヤー、マウントを管理します。 | [`ti fs` コマンド](/ai/ti/reference/ti-filesystem.md) |
+| `fs-git` | マウントされた file system 上の Git ワークスペースを管理します。 | [`ti fs-git` コマンド](/ai/ti/reference/ti-filesystem-git.md) |
+| `fs-journal` | 検証可能な file system ジャーナルを管理します。 | [`ti fs-journal` コマンド](/ai/ti/reference/ti-filesystem-journal.md) |
+| `fs-vault` | file system Vault シークレットと委任アクセスを管理します。 | [`ti fs-vault` コマンド](/ai/ti/reference/ti-filesystem-vault.md) |
 
 ターミナルで使用可能なコマンドを一覧表示するには、`ti help` または `ti <command-group> help` を実行します。
 
@@ -148,7 +148,7 @@ ti [ERROR]: <message>
 
 エラーは標準エラー出力に書き込まれ、正常なコマンド出力は標準出力に書き込まれます。usage および設定の失敗は、リモート変更の前に非ゼロの終了コードを返します。実行時エラーおよびリモート API の失敗も非ゼロを返します。対話型設定が中断された場合は、終了コード `130` を返します。
 
-`--debug` では、秘匿情報をマスクしたリクエストおよび解決コンテキストを表示できます。API キー、FS トークン、DB パスワード、SQL テキスト、ファイル内容、接続文字列を表示してはなりません。
+`--debug` では、秘匿情報をマスクしたリクエストおよび解決コンテキストを表示できます。API キー、file system トークン、DB パスワード、SQL テキスト、ファイル内容、接続文字列を表示してはなりません。
 
 ## 関連ドキュメント {#related-documentation}
 

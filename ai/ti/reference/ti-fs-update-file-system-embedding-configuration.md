@@ -1,11 +1,11 @@
 ---
 title: ti fs update-file-system-embedding-configuration
-summary: TiDB Cloud Filesystem の埋め込み設定を置き換えます。
+summary: ファイルシステムの埋め込み設定を置き換えます。
 ---
 
 # ti fs update-file-system-embedding-configuration
 
-1 つの Filesystem に対して、オプションのアプリ管理埋め込みを有効または無効にします。有効化すると、実際のプロバイダー検証リクエストが実行され、プロバイダー側で少額の料金が発生する場合があります。有効化後は、テキストまたは抽出された説明が選択した埋め込みプロバイダーに送信されます。
+1 つの file system に対して、オプションのアプリ管理埋め込みを有効または無効にします。有効化すると、実際のプロバイダー検証リクエストが実行され、プロバイダー側で少額の料金が発生する場合があります。有効化後は、テキストまたは抽出された説明が選択した埋め込みプロバイダーに送信されます。
 
 > **Note:**
 >
@@ -27,8 +27,8 @@ ti fs update-file-system-embedding-configuration
 ## オプション {#options}
 
 - `--enabled <boolean>`: 完全なプロバイダー設定とともに `true` を指定するか、プロバイダーオプションなしで `false` を指定します。\[required]
-- `--file-system-id <string>`: 変更不可の Filesystem ID を設定します。\[required]
-- `--dry-run`: Filesystem バックエンドまたは埋め込みプロバイダーに接続せずに、リクエストを検証します。
+- `--file-system-id <string>`: 変更不可の file system ID を設定します。\[required]
+- `--dry-run`: file system バックエンドまたは埋め込みプロバイダーに接続せずに、リクエストを検証します。
 - `--provider-api-base <string>`: 有効な HTTPS の OpenAI 互換プロバイダーベース URL を設定します。
 - `--provider-model <string>`: ちょうど 1024 次元を返す埋め込みモデルを設定します。
 - `--help`: ヘルプ情報を表示します。
@@ -36,9 +36,9 @@ ti fs update-file-system-embedding-configuration
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
-プロバイダー API キーは `TI_FS_AI_PROVIDER_API_KEY` からのみ受け付けられます。このキーは検証および暗号化保存のために Filesystem バックエンドへ送信され、`ti` によってローカルに保存されることはなく、マスクされた形式でのみ返されます。埋め込みには、OpenAI 互換の `/v1/embeddings` コントラクトに正確に一致することが必要です。ネイティブのプロバイダーインターフェースはサポートされていません。
+プロバイダー API キーは `TI_FS_AI_PROVIDER_API_KEY` からのみ受け付けられます。このキーは検証および暗号化保存のために file system バックエンドへ送信され、`ti` によってローカルに保存されることはなく、マスクされた形式でのみ返されます。埋め込みには、OpenAI 互換の `/v1/embeddings` コントラクトに正確に一致することが必要です。ネイティブのプロバイダーインターフェースはサポートされていません。
 
-`source` が `database_auto` の Filesystem は、データベース管理の埋め込みを使用しているため、このコマンドでは変更できません。タイムアウトや応答消失の後に、やみくもに更新を再試行しないでください。まず describe コマンドを実行して、更新が成功したかどうかを確認してください。
+`source` が `database_auto` の file system は、データベース管理の埋め込みを使用しているため、このコマンドでは変更できません。タイムアウトや応答消失の後に、やみくもに更新を再試行しないでください。まず describe コマンドを実行して、更新が成功したかどうかを確認してください。
 
 ## 例 {#examples}
 

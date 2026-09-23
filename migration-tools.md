@@ -81,9 +81,7 @@ TiDB は、完全なデータ移行、増分データ移行、バックアップ
 - **アップストリーム**: TiDB、MySQL
 - **下流**: TiDB、MySQL
 - **利点**: 少量のデータが不整合なシナリオでデータを修復するために使用できます
-- **制限事項**：
-    - MySQL と TiDB 間のデータ移行ではオンライン チェックはサポートされていません。
-    - JSON、BIT、BINARY、BLOB などのタイプのデータはサポートされていません。
+- **制限事項**: sync-diff-inspector は、MySQL と TiDB 間のデータ移行におけるオンラインチェックをサポートしていません。また、特定のデータ型の比較や、主キーまたは一意インデックスのないテーブル内の不整合データの修復にも制限があります。詳細は、[sync-diff-inspector の制限事項](/sync-diff-inspector/sync-diff-inspector-overview.md#restrictions-of-sync-diff-inspector) を参照してください。
 
 ## TiUPを使用してツールをインストールする {#install-tools-using-tiup}
 

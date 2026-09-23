@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault list-secrets
-summary: Filesystem Vault の認証情報から参照可能なシークレットを一覧表示します。
+summary: ファイルシステム Vault の認証情報から参照可能なシークレットを一覧表示します。
 ---
 
 # ti fs-vault list-secrets
@@ -27,7 +27,7 @@ ti fs-vault list-secrets
 ## オプション {#options}
 
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定して指定することもできます。
-- `--fs-token <string>`: オーナーの Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択した Filesystem 用にローカルに保存されているトークンを使用します。委任認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用してください。
+- `--fs-token <string>`: ファイルシステムのオーナートークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択したファイルシステム用にローカルに保存されているトークンを使用します。委任認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用してください。
 - `--help`: ヘルプ情報を表示します。
 - `--vault-token <string>`: 委任された `ti fs-vault` トークンです。`TI_VAULT_TOKEN` の使用を推奨します。
 - `--version`: バージョン情報を表示します。

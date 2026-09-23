@@ -9,7 +9,7 @@ summary: ticloud CLI を使用して、{{{ .starter }}} および Essential イ�
 >
 > TiDB Cloud は現在、対象範囲の異なる 2 つの CLI を提供しています: [`ti`](https://github.com/tidbcloud/ti-cli) と [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli)。
 >
-> - `ti` は、必要な操作をサポートしている場合、TiDB Cloud Starter の新しい自動化ワークフローに推奨されます。`ti` を使用して TiDB Cloud Filesystems を管理することもできます。開始するには、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) を参照してください。
+> - `ti` は、必要な操作をサポートしている場合、TiDB Cloud Starter の新しい自動化ワークフローに推奨されます。`ti` を使用して TiDB Cloud Filesystem 内のファイルシステムを管理することもできます。開始するには、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) を参照してください。
 > - `ticloud` は引き続き、TiDB Cloud Essential および [`ti`](/ai/ti/ti-overview.md) がまだサポートしていない操作（データのインポート、データのエクスポート、監査ログ操作など）のための CLI です。
 >
 > `ti` または `ticloud` をいつ使用するかの詳細については、[`ti` と `ticloud` の違い](/ai/ti/ti-overview.md#differences-between-ti-and-ticloud) を参照してください。

@@ -27,5 +27,5 @@ TiDB Cloud Filesystem でシークレットと委任アクセスを管理する�
 
 ## 関連情報 {#see-also}
 
-- [TiDB Cloud Filesystem Vault Secrets を管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md)
+- [TiDB Cloud Filesystem Vault Secrets を管理する](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
 - [TiDB Cloud Filesystem Vault シークレットを Agent に委任する](/ai/ti/guides/ti-vault-agent-secrets-example.md)
