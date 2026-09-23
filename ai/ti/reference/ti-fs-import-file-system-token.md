@@ -5,7 +5,7 @@ summary: Import an existing TiDB Cloud file system token.
 
 # ti fs import-file-system-token
 
-Validates an existing file system token and stores it in the selected local profile. The Filesystem ID is derived from the token; use the optional `--file-system-id` to verify that the token belongs to the expected Filesystem.
+Validates an existing file system token and stores it in the selected local profile. The file system ID is derived from the token; use the optional `--file-system-id` to verify that the token belongs to the expected file system.
 
 > **Note:**
 >

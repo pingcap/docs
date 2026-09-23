@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault mount-vault
-summary: Mount a read-only Filesystem Vault view.
+summary: Mount a read-only file system Vault view.
 ---
 
 # ti fs-vault mount-vault
@@ -32,7 +32,7 @@ ti fs-vault mount-vault
 - `--mount-path <string>`: Local mount path. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. For delegated authentication, use `--vault-token` or `TI_VAULT_TOKEN` instead.
+- `--fs-token <string>`: Set the file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system. For delegated authentication, use `--vault-token` or `TI_VAULT_TOKEN` instead.
 - `--help`: Display help information.
 - `--ready-timeout <duration>`: Time to wait for a background mount to become ready. \[default: `30s`]
 - `--vault-token <string>`: Delegated `ti fs-vault` token; prefer `TI_VAULT_TOKEN`.

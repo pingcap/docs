@@ -24,7 +24,7 @@ ti fs describe-file-system
 
 ## Options
 
-- `--file-system-id <string>`: Set the immutable Filesystem ID. \[required]
+- `--file-system-id <string>`: Set the immutable file system ID. \[required]
 - `--help`: Display help information.
 - `--version`: Display version information.
 

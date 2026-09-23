@@ -1,6 +1,6 @@
 ---
 title: Get Started with TiDB Cloud CLI
-summary: Install and configure TiDB Cloud CLI, then create and use a TiDB Cloud Filesystem or query a TiDB Cloud Starter database.
+summary: Install and configure TiDB Cloud CLI, then create and use a file system or query a TiDB Cloud Starter database.
 ---
 
 # Get Started with TiDB Cloud CLI
@@ -114,7 +114,7 @@ Complete either of the following workflows.
 
 ### Option A: Create and use a file system
 
-A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
+TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
 
 1. Create a file system, wait until it is ready, and save its server-assigned ID:
 
@@ -125,9 +125,9 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
       --output text)"
     ```
 
-    `ti` stores the Filesystem credential locally, so you do not need to provide it for subsequent file operations.
+    `ti` stores the file system credential locally, so you do not need to provide it for subsequent file operations.
 
-2. Write a file to the Filesystem, and then read the file:
+2. Write a file to the file system, and then read the file:
 
     ```bash
     printf 'hello from ti\n' | ti fs copy-file \
@@ -144,7 +144,7 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
     hello from ti
     ```
 
-3. Delete the Filesystem:
+3. Delete the file system:
 
     ```bash
     ti fs delete-file-system \

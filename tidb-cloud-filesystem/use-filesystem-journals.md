@@ -1,6 +1,6 @@
 ---
 title: Use TiDB Cloud Filesystem Journals
-summary: Learn how to record, read, search, and verify ordered events from agent and automation workflows in a TiDB Cloud Filesystem.
+summary: Learn how to record, read, search, and verify ordered events from agent and automation workflows in a file system.
 aliases: ['/ai/use-filesystem-journals']
 ---
 
@@ -12,7 +12,7 @@ Journal entries are append-only: new events are added as new entries, and existi
 
 This guide shows you how to create a journal, record events, read and search recorded events, and verify the journal history.
 
-Journals are intended for workflow events and history. Store artifacts, working files, and other workflow outputs as regular files in the Filesystem. A journal records what happened; it does not replay workflow actions or replace the files produced by the workflow.
+Journals are intended for workflow events and history. Store artifacts, working files, and other workflow outputs as regular files in the file system. A journal records what happened; it does not replay workflow actions or replace the files produced by the workflow.
 
 > **Note:**
 >
@@ -23,8 +23,8 @@ Journals are intended for workflow events and history. Store artifacts, working 
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to an existing TiDB Cloud Filesystem.
-- Make the Filesystem and its token available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+- Have access to an existing file system.
+- Make the file system and its token available to `ti`. See [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
 ## Create a journal
 
@@ -75,7 +75,7 @@ ti fs-journal read-journal-entries \
 
 Entries are returned in sequence order, so you can follow the workflow in the order it was recorded.
 
-To find events across journals in the selected Filesystem, use `search-journal-entries`. For example, the following command finds `review_started` events and returns their entry contents:
+To find events across journals in the selected file system, use `search-journal-entries`. For example, the following command finds `review_started` events and returns their entry contents:
 
 ```shell
 ti fs-journal search-journal-entries \
@@ -100,5 +100,5 @@ Hash-chain verification checks the integrity of the recorded journal history. It
 
 ## What's next
 
-- [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](/ai/ti/guides/ti-journal-agent-workflow-example.md) for an end-to-end agent workflow example.
+- [Record an Agent Workflow in a File System Journal](/ai/ti/guides/ti-journal-agent-workflow-example.md) for an end-to-end agent workflow example.
 - [TiDB Cloud Filesystem Journal CLI Command Reference](/ai/ti/reference/ti-filesystem-journal.md) for all journal commands and options.

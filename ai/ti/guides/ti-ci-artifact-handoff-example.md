@@ -13,7 +13,7 @@ This workflow uses a file system as a durable handoff point between isolated CI 
 
 ## How it works
 
-The pipeline injects one file system token and region into both jobs. The token identifies the Filesystem. The producer uploads output under a run-specific path such as `/ci/${RUN_ID}/`, and the consumer downloads or streams data from that exact path on another runner. Neither job needs TiDB Cloud API keys or a copied `~/.ti/` directory.
+The pipeline injects one file system token and region into both jobs. The token identifies the file system. The producer uploads output under a run-specific path such as `/ci/${RUN_ID}/`, and the consumer downloads or streams data from that exact path on another runner. Neither job needs TiDB Cloud API keys or a copied `~/.ti/` directory.
 
 ## Prerequisites
 
@@ -67,7 +67,7 @@ Delete only the run-specific directory after all consumers finish:
 ti fs delete-file --path "/ci/${RUN_ID}" --recursive
 ```
 
-Use unique run IDs and do not delete the whole Filesystem from an individual job. Filesystem deletion requires the trusted control-plane configuration and should remain a separate owner operation.
+Use unique run IDs and do not delete the whole file system from an individual job. File system deletion requires the trusted control-plane configuration and should remain a separate owner operation.
 
 ## What's next
 

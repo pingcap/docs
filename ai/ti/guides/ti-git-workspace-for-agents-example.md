@@ -82,7 +82,7 @@ ti fs-git remove-git-worktree \
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-Use `--force` for worktree removal only when uncommitted changes can be discarded. Filesystem unmount performs a graceful drain automatically; use `ti fs drain-file-system` separately only when you need to flush remote work without unmounting.
+Use `--force` for worktree removal only when uncommitted changes can be discarded. File system unmount performs a graceful drain automatically; use `ti fs drain-file-system` separately only when you need to flush remote work without unmounting.
 
 ## Security and operational notes
 

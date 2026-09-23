@@ -1,6 +1,6 @@
 ---
 title: Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem
-summary: Preserve plans, checkpoints, outputs, and workflow history in a TiDB Cloud Filesystem while replacing agent sandboxes.
+summary: Preserve plans, checkpoints, outputs, and workflow history in a file system while replacing agent sandboxes.
 ---
 
 # Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem
@@ -13,7 +13,7 @@ This workflow keeps plans, intermediate results, diagnostic files, and workflow 
 
 ## How it works
 
-A trusted machine provisions one Filesystem. Each sandbox receives only the file system token and region code. The token identifies the Filesystem, so the agent can write durable task state to the remote namespace and record workflow transitions in a journal without receiving TiDB Cloud control-plane keys.
+A trusted machine provisions one file system. Each sandbox receives only the file system token and region code. The token identifies the file system, so the agent can write durable task state to the remote namespace and record workflow transitions in a journal without receiving TiDB Cloud control-plane keys.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ A trusted machine provisions one Filesystem. Each sandbox receives only the file
 - Install `jq` on the trusted machine.
 - Use a secure secret manager or encrypted sandbox input for token transfer.
 
-## Step 1. Provision the state Filesystem
+## Step 1. Provision the state file system
 
 On a trusted machine:
 
@@ -76,14 +76,14 @@ Continue writing results under the same task path. Use a unique task ID so paral
 
 ## Cleanup
 
-After the sandboxes stop using the Filesystem, delete it from the trusted machine:
+After the sandboxes stop using the file system, delete it from the trusted machine:
 
 ```bash
 rm -f ./filesystem.json
 ti fs delete-file-system --file-system-id "$FILE_SYSTEM_ID"
 ```
 
-Deleting the Filesystem also deletes its task files and journals.
+Deleting the file system also deletes its task files and journals.
 
 ## Security and operational notes
 

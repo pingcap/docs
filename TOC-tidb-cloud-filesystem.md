@@ -13,12 +13,12 @@
 
 ## GUIDES
 
-- [Manage TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md)
-- [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md)
+- [Manage File Systems](/tidb-cloud-filesystem/manage-filesystem-resources.md)
+- [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md)
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md)
-- Mount a file system
+- Mount a File System
   - [Overview](/tidb-cloud-filesystem/filesystem-mount.md)
   - [Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md)
   - [macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md)
@@ -30,8 +30,8 @@
 - [Configure File System AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
 - [Automation and AI Agent Workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
 
-## COMMAND REFERENCES
+## REFERENCES
 
-- [File System Command Reference](/tidb-cloud-filesystem/filesystem-command-reference.md)
+- [Command Reference](/tidb-cloud-filesystem/filesystem-command-reference.md)
 - [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 - [Troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md)

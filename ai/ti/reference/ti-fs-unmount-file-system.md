@@ -1,6 +1,6 @@
 ---
 title: ti fs unmount-file-system
-summary: Unmount a TiDB Cloud Filesystem.
+summary: Unmount a file system.
 ---
 
 # ti fs unmount-file-system
@@ -45,7 +45,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Unmount a file system:
 
     ```bash
-    # Gracefully flush pending writes and detach the Filesystem mount.
+    # Gracefully flush pending writes and detach the file system mount.
     ti fs unmount-file-system --mount-path /path/to/workspace
     ```
 

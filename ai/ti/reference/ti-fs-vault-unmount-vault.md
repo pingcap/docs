@@ -5,7 +5,7 @@ summary: Unmount a file system Vault view.
 
 # ti fs-vault unmount-vault
 
-Unmounts a local Filesystem Vault filesystem.
+Unmounts a local file system Vault filesystem.
 
 > **Note:**
 >

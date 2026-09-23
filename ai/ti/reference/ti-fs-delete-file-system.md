@@ -1,6 +1,6 @@
 ---
 title: ti fs delete-file-system
-summary: Delete a TiDB Cloud Filesystem.
+summary: Delete a file system.
 ---
 
 # ti fs delete-file-system
@@ -23,7 +23,7 @@ ti fs delete-file-system
 
 ## Options
 
-- `--file-system-id <string>`: Set the immutable Filesystem ID. file system tokens cannot replace this option or authorize Filesystem deletion. \[required]
+- `--file-system-id <string>`: Set the immutable file system ID. File system tokens cannot replace this option or authorize file system deletion. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -39,10 +39,10 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
     ti fs delete-file-system --file-system-id <file-system-id>
     ```
 
-- Preview Filesystem deletion:
+- Preview file system deletion:
 
     ```bash
-    # Validate the selected Filesystem without sending the deletion request.
+    # Validate the selected file system without sending the deletion request.
     ti fs delete-file-system --file-system-id <file-system-id> --dry-run
     ```
 

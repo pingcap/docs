@@ -55,8 +55,8 @@
     - [Persist Agent State Across Disposable Sandboxes with TiDB Cloud Filesystem](/ai/ti/guides/ti-persistent-agent-state-example.md)
     - [Share a Read-Only Dataset Across Parallel Agents with TiDB Cloud Filesystem](/ai/ti/guides/ti-parallel-agent-dataset-example.md)
     - [Prepare a Git Workspace for Agents on TiDB Cloud Filesystem](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
-    - [Record an Agent Workflow in a TiDB Cloud Filesystem Journal](/ai/ti/guides/ti-journal-agent-workflow-example.md)
-    - [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)
+    - [Record an Agent Workflow in a File System Journal](/ai/ti/guides/ti-journal-agent-workflow-example.md)
+    - [Delegate File System Vault Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)
   - Command Reference
     - [Overview](/ai/ti/reference/ti-cli-reference.md)
     - [configure](/ai/ti/reference/ti-configure.md)
@@ -121,20 +121,20 @@
       - [mount-file-system](/ai/ti/reference/ti-fs-mount-file-system.md)
       - [drain-file-system](/ai/ti/reference/ti-fs-drain-file-system.md)
       - [unmount-file-system](/ai/ti/reference/ti-fs-unmount-file-system.md)
-    - `ti fs-git` commands for managing TiDB Cloud Filesystem Git workspaces
+    - `ti fs-git` commands for managing File System Git workspaces
       - [Overview](/ai/ti/reference/ti-filesystem-git.md)
       - [clone-git-workspace](/ai/ti/reference/ti-fs-git-clone-git-workspace.md)
       - [hydrate-git-workspace](/ai/ti/reference/ti-fs-git-hydrate-git-workspace.md)
       - [add-git-worktree](/ai/ti/reference/ti-fs-git-add-git-worktree.md)
       - [remove-git-worktree](/ai/ti/reference/ti-fs-git-remove-git-worktree.md)
-    - `ti fs-journal` commands for managing TiDB Cloud Filesystem journals
+    - `ti fs-journal` commands for managing File System journals
       - [Overview](/ai/ti/reference/ti-filesystem-journal.md)
       - [create-journal](/ai/ti/reference/ti-fs-journal-create-journal.md)
       - [append-journal-entries](/ai/ti/reference/ti-fs-journal-append-journal-entries.md)
       - [read-journal-entries](/ai/ti/reference/ti-fs-journal-read-journal-entries.md)
       - [search-journal-entries](/ai/ti/reference/ti-fs-journal-search-journal-entries.md)
       - [verify-journal](/ai/ti/reference/ti-fs-journal-verify-journal.md)
-    - `ti fs-vault` commands for managing TiDB Cloud Filesystem vault secrets
+    - `ti fs-vault` commands for managing File System vault secrets
       - [Overview](/ai/ti/reference/ti-filesystem-vault.md)
       - [create-secret](/ai/ti/reference/ti-fs-vault-create-secret.md)
       - [replace-secret](/ai/ti/reference/ti-fs-vault-replace-secret.md)

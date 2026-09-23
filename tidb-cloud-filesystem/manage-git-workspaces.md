@@ -6,7 +6,7 @@ aliases: ['/ai/manage-git-workspaces']
 
 # Manage Git Workspaces on TiDB Cloud Filesystem
 
-If you want to work with a Git repository directly on a mounted TiDB Cloud Filesystem, you can follow this guide to set up and manage the Git workspace.
+If you want to work with a Git repository directly on a mounted file system, you can follow this guide to set up and manage the Git workspace.
 
 This is especially useful for large repositories, where you can start working before all file contents finish downloading, or when you need separate working directories for different branches without cloning the repository multiple times. This guide covers cloning a repository, completing background downloads when needed, and creating and removing linked Git worktrees.
 
@@ -17,15 +17,15 @@ After the workspace is set up, you can continue to use ordinary Git commands suc
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) through FUSE. Git workspaces are not supported on WebDAV mounts.
-- Make the mounted Filesystem and a token with the required permissions available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) through FUSE. Git workspaces are not supported on WebDAV mounts.
+- Make the mounted file system and a token with the required permissions available to `ti`. See [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 - Install Git and configure authentication for the repository you want to use.
 
-All Git workspaces in this guide are created inside the mounted Filesystem path.
+All Git workspaces in this guide are created inside the mounted file system path.
 
 ## Clone a Git repository
 
-To clone a Git repository into your mounted Filesystem directory, use the `ti fs-git clone-git-workspace` command and specify the repository URL and target path as follows:
+To clone a Git repository into your mounted file system directory, use the `ti fs-git clone-git-workspace` command and specify the repository URL and target path as follows:
 
 ```shell
 ti fs-git clone-git-workspace \
@@ -114,7 +114,7 @@ ti fs-git remove-git-worktree \
   --force
 ```
 
-When you are finished using the mounted Filesystem, commit or push any Git changes you want to preserve and [unmount the Filesystem safely](/tidb-cloud-filesystem/filesystem-mount.md#unmount-when-you-are-finished).
+When you are finished using the mounted file system, commit or push any Git changes you want to preserve and [unmount the file system safely](/tidb-cloud-filesystem/filesystem-mount.md#unmount-when-you-are-finished).
 
 ## What's next
 

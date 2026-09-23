@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault read-secret
-summary: Read a secret from Filesystem Vault.
+summary: Read a secret from file system Vault.
 ---
 
 # ti fs-vault read-secret
@@ -31,7 +31,7 @@ ti fs-vault read-secret
 - `--field <string>`: Optional field name to read.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--format <string>`: Read output format: `json`, `raw`, or `env`. \[default: json]
-- `--fs-token <string>`: Set the Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. For delegated authentication, use `--vault-token` or `TI_VAULT_TOKEN` instead.
+- `--fs-token <string>`: Set the file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system. For delegated authentication, use `--vault-token` or `TI_VAULT_TOKEN` instead.
 - `--help`: Display help information.
 - `--vault-token <string>`: Delegated `ti fs-vault` token; prefer `TI_VAULT_TOKEN`.
 - `--version`: Display version information.

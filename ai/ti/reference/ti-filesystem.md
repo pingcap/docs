@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Filesystem CLI Command Reference
-summary: Reference every `ti fs` command for Filesystem resources, files, layers, packs, and mounts.
+summary: Reference every `ti fs` command for file system resources, files, layers, packs, and mounts.
 ---
 
 # TiDB Cloud Filesystem CLI Command Reference
@@ -15,8 +15,8 @@ In command syntax, square brackets (`[]`) enclose optional items. Parentheses gr
 | --- | --- |
 | [`create-file-system`](/ai/ti/reference/ti-fs-create-file-system.md) | Creates a file system and its initial owner token. |
 | [`list-file-systems`](/ai/ti/reference/ti-fs-list-file-systems.md) | Lists file systems in the effective region. |
-| [`describe-file-system`](/ai/ti/reference/ti-fs-describe-file-system.md) | Describes one Filesystem by ID. |
-| [`check-file-system`](/ai/ti/reference/ti-fs-check-file-system.md) | Checks Filesystem selection, routing, credentials, and data-plane access. |
+| [`describe-file-system`](/ai/ti/reference/ti-fs-describe-file-system.md) | Describes one file system by ID. |
+| [`check-file-system`](/ai/ti/reference/ti-fs-check-file-system.md) | Checks file system selection, routing, credentials, and data-plane access. |
 | [`delete-file-system`](/ai/ti/reference/ti-fs-delete-file-system.md) | Permanently deletes a file system. |
 | [`import-file-system-token`](/ai/ti/reference/ti-fs-import-file-system-token.md) | Imports and selects an existing file system token locally. |
 | [`generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) | Generates an additional owner token. |
@@ -33,7 +33,7 @@ When an owner token authorizes token management, it can list tokens, create scop
 
 ## AI provider configuration commands
 
-These commands configure optional providers for extracting content from media files and generating embeddings. Ordinary Filesystem resource and file operations do not require AI provider configuration.
+These commands configure optional providers for extracting content from media files and generating embeddings. Ordinary file system resource and file operations do not require AI provider configuration.
 
 | Command | Description |
 | --- | --- |
@@ -72,8 +72,8 @@ These commands configure optional providers for extracting content from media fi
 | [`create-layer-checkpoint`](/ai/ti/reference/ti-fs-create-layer-checkpoint.md) | Creates a durable checkpoint in a layer. |
 | [`delete-layer`](/ai/ti/reference/ti-fs-delete-layer.md) | Logically abandons a layer. |
 | [`rollback-layer`](/ai/ti/reference/ti-fs-rollback-layer.md) | Rolls a layer back without committing its changes. |
-| [`commit-layer`](/ai/ti/reference/ti-fs-commit-layer.md) | Applies a layer's changes to the base Filesystem. |
-| [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) | Archives selected local overlay state to the Filesystem. |
+| [`commit-layer`](/ai/ti/reference/ti-fs-commit-layer.md) | Applies a layer's changes to the base file system. |
+| [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) | Archives selected local overlay state to the file system. |
 | [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) | Restores local overlay state from an archive. |
 
 ### Layer references
@@ -124,12 +124,12 @@ Aliases use the same options, authentication, output, query, and error behavior 
 
 ## See also
 
-- [Manage TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md)
-- [Configure TiDB Cloud Filesystem AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
+- [Manage File Systems](/tidb-cloud-filesystem/manage-filesystem-resources.md)
+- [Configure File System AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
 - [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 - [Manage Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
-- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md)
 - [Manage Git Workspaces on TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-git-workspaces.md)
-- [Use TiDB Cloud Filesystem Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
-- [Manage TiDB Cloud Filesystem Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
+- [Use File System Journals](/tidb-cloud-filesystem/use-filesystem-journals.md)
+- [Manage File System Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
