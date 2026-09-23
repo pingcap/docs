@@ -1,6 +1,6 @@
 ---
 title: ti fs refresh-file-system-token
-summary: Rotate one TiDB Cloud file system token and return its replacement plaintext once.
+summary: Rotate one file system token and return its replacement plaintext once.
 ---
 
 # ti fs refresh-file-system-token

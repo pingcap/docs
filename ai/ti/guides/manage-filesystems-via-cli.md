@@ -32,7 +32,7 @@ After creating a file system, refer to the following guides for file system task
 
 | What you want to do | Guide |
 | --- | --- |
-| Access an existing File System from another machine, CI job, or agent environment | [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md) |
+| Access an existing file system from another machine, CI job, or agent environment | [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md) |
 | Upload, download, read, organize, inspect, or search files and directories | [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) |
 | Generate, import, scope, inspect, disable, refresh, or revoke access tokens | [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) |
 | Share files in a file system with another user, machine, CI job, or agent | [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md) |

@@ -1,6 +1,6 @@
 ---
 title: ti fs delete-file-system-token
-summary: Permanently revoke a TiDB Cloud file system token.
+summary: Permanently revoke a file system token so it can no longer authenticate.
 ---
 
 # ti fs delete-file-system-token

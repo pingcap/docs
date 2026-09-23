@@ -28,7 +28,7 @@ The following table lists the supported regions for TiDB Cloud CLI and shows whi
 
 If your configured region supports TiDB Cloud Starter but not TiDB Cloud Filesystem, you can manage Starter instances in that region. File system commands fail with an `unsupported endpoint` error.
 
-Supported file system regions are built into each `ti` release. To use file system in a region added after your installed version was released, upgrade `ti`. You cannot enable an unsupported region by specifying a service URL.
+Supported file system regions are built into each `ti` release. To use a file system in a region added after your installed version was released, upgrade `ti`. You cannot enable an unsupported region by specifying a service URL.
 
 ## Credential requirements
 
@@ -55,7 +55,7 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.ti/credentials`, resource credentials, and DB SQL credentials owner-readable only.
 - Review local operation logs before sharing diagnostics. The logs exclude SQL text, paths, payloads, and credential values, but command names, flag names, profile and region metadata, status codes, and operational timing can still be sensitive.
 
-For file system token, mount, Vault, and AI provider security, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md), [Manage file system Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md), and [Configure file system AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
+For file system tokens, mounts, Vault, and AI provider security, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md), [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md), and [Configure File System AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
 
 ## Product limitations
 

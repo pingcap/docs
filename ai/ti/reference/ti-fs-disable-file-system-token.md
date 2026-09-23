@@ -1,6 +1,6 @@
 ---
 title: ti fs disable-file-system-token
-summary: Temporarily disable a TiDB Cloud file system token.
+summary: Temporarily disable a file system token without deleting it.
 ---
 
 # ti fs disable-file-system-token

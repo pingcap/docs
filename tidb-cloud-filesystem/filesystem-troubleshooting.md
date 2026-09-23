@@ -1,6 +1,6 @@
 ---
 title: Troubleshoot TiDB Cloud Filesystem
-summary: Learn how to diagnose TiDB Cloud file system token, region, runtime, mount, and access failures and choose a safe recovery path.
+summary: Learn how to diagnose file system token, region, runtime, mount, and access failures and choose a safe recovery path.
 ---
 
 # Troubleshoot TiDB Cloud Filesystem

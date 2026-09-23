@@ -79,7 +79,7 @@ TiDB Cloud currently provides two CLIs with different scopes: `ti` and [`ticloud
 
 ## Next steps
 
-If you are new to the TiDB Cloud CLI, start with the [Quick Start](/ai/ti/ti-quick-start.md) to install `ti`, configure a profile, and complete a basic TiDB Cloud Starter or Filesystem workflow.
+If you are new to the TiDB Cloud CLI, start with the [Quick Start](/ai/ti/ti-quick-start.md) to install `ti`, configure a profile, and complete a basic TiDB Cloud Starter or file system workflow.
 
 Then continue based on what you want to do:
 

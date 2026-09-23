@@ -1,6 +1,6 @@
 ---
 title: ti fs enable-file-system-token
-summary: Enable a disabled TiDB Cloud file system token.
+summary: Enable a disabled file system token so it can authenticate again.
 ---
 
 # ti fs enable-file-system-token

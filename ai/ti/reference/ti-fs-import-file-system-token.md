@@ -1,6 +1,6 @@
 ---
 title: ti fs import-file-system-token
-summary: Import an existing TiDB Cloud file system token.
+summary: Import an existing file system token into the selected local profile.
 ---
 
 # ti fs import-file-system-token

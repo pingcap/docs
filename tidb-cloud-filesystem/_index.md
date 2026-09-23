@@ -47,9 +47,9 @@ summary: TiDB Cloud Filesystem provides persistent, shared file storage for appl
 
 [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)
 
-[Manage file system Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+[Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 
-[Manage file system Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
+[Manage File System Vault Secrets](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
 
 </LearningPath>
 
