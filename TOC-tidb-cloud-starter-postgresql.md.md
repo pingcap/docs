@@ -23,6 +23,7 @@
   - Monitor and Alert
     - [Overview](/tidb-cloud/monitor-tidb-cluster.md)
     - [Built-in Metrics](/tidb-cloud/starter/built-in-monitoring-pg.md)
+    - [Events](/tidb-cloud/tidb-cloud-events.md)
   - [Delete a {{{ .starter }}} Instance](/tidb-cloud/delete-tidb-cluster.md)
 - [Migrate from PostgreSQL to TiDB Cloud Starter](/tidb-cloud/starter/Import-with-psql.md)
 - Security
@@ -86,3 +87,26 @@
   - [URI Formats of External Storage Services](/external-storage-uri.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
+- Support Plan
+  - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
+  - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
+  - Connected Care Support Service Features
+    - [Connected: AI Chat in IM](/tidb-cloud/connected-ai-chat-in-im.md)
+    - Connected: IM Subscription for TiDB Cloud Alerts
+      - [Subscribe via Slack](/tidb-cloud/monitor-alert-slack.md)
+      - [Subscribe via Zoom](/tidb-cloud/monitor-alert-zoom.md)
+      - [Subscribe via Flashduty](/tidb-cloud/monitor-alert-flashduty.md)
+      - [Subscribe via PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [Subscribe via Webhook](/tidb-cloud/monitor-alert-webhook.md)
+      - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
+    - Connected: IM Ticket Creation and Update Subscription
+      - [Create Tickets and Subscribe to Ticket Updates via Slack](/tidb-cloud/connected-slack-ticket-creation.md)
+      - [Create Tickets and Subscribe to Ticket Updates via Lark](/tidb-cloud/connected-lark-ticket-creation.md)
+    - Connected: IM Interaction for Support Tickets
+      - [Interact with Support Tickets via Slack](/tidb-cloud/connected-slack-ticket-interaction.md)
+      - [Interact with Support Tickets via Lark](/tidb-cloud/connected-lark-ticket-interaction.md)
+  - [Get Support](/tidb-cloud/tidb-cloud-support.md)
+- FAQs
+  - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
+- [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
+
