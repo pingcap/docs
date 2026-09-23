@@ -37,7 +37,7 @@ Setting `TI_FS_FILE_SYSTEM_ID` lets subsequent commands identify the target file
 
 > **Warning:**
 >
-> The file system owner token plaintext in `fs_token` is returned only when the token is issued. Treat it as a secret and do not expose it in logs, issues, or source control. If you need to use the token on another machine or store a backup, save it securely in a secret manager. For more information, see [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+> The file system owner token plaintext in `fs_token` is returned only when the token is issued. Treat it as a secret and do not expose it in logs, issues, or source control. If you need to use the token on another machine or store a backup, save it securely in a secret manager. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
 > **Note:**
 >
@@ -97,7 +97,7 @@ File system deletion is asynchronous. After the service accepts the request, the
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to generate, delegate, rotate, or revoke file system access.
+- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to generate, delegate, rotate, or revoke file system access.
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) to copy, read, organize, and search file system data.
 - [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) to access remote files through a local directory.
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md) for command syntax, flags, and output fields.

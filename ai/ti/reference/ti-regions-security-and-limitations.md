@@ -55,7 +55,7 @@ TiDB Cloud API calls use Digest authentication. SQL HTTPS execution uses generat
 - Use `--dry-run` before destructive control-plane operations. Keep `~/.ti/credentials`, resource credentials, and DB SQL credentials owner-readable only.
 - Review local operation logs before sharing diagnostics. The logs exclude SQL text, paths, payloads, and credential values, but command names, flag names, profile and region metadata, status codes, and operational timing can still be sensitive.
 
-For file system tokens, mounts, Vault, and AI provider security, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md), [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md), and [Configure File System AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
+For file system tokens, mounts, Vault, and AI provider security, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md), [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md), and [Configure File System AI Providers](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md).
 
 ## Product limitations
 

@@ -17,7 +17,7 @@ The pipeline injects one file system token and region into both jobs. The token 
 
 ## Prerequisites
 
-[Create a file system](/tidb-cloud-filesystem/manage-filesystem-resources.md#create-a-filesystem) on a trusted machine, and store these values as protected CI secrets or variables:
+[Create a file system](/tidb-cloud-filesystem/manage-filesystem-resources.md#create-a-file-system) on a trusted machine, and store these values as protected CI secrets or variables:
 
 ```text
 TI_FS_TOKEN

@@ -84,7 +84,7 @@ On another Linux distribution, install the FUSE package that provides `fusermoun
       --mount-path "$HOME/workspace"
     ```
 
-    In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-filesystem).
+    In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-file-system).
 
     To prevent writes through the local mount, add `--read-only` to the mount command. For example, to mount the file system root as read-only:
 

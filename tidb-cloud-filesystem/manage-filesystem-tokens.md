@@ -1,12 +1,12 @@
 ---
-title: Manage TiDB Cloud Filesystem Tokens
+title: Manage File System Tokens
 summary: Learn how to import, generate, scope, inspect, disable, refresh, and revoke access tokens for a file system.
 aliases: ['/ai/manage-filesystem-tokens']
 ---
 
-# Manage TiDB Cloud Filesystem Tokens
+# Manage File System Tokens
 
-File system tokens let you give users, applications, and automation access to a file system without sharing your TiDB Cloud API credentials.
+In TiDB Cloud Filesystem, file system tokens let you give users, applications, and automation access to a file system without sharing your TiDB Cloud API credentials.
 
 You can use an [owner token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-tokens) for full access to a file system, or create [scoped tokens](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-tokens) that limit access to specific paths and operations. For more information about token types and permissions, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 

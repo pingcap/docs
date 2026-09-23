@@ -67,7 +67,7 @@ To share part of a file system with another user or environment:
 >
 > The token value is shown only when the token is created. Treat it as a secret and do not expose it in logs, issues, chat messages, or source control.
 
-For more information about token permissions and expiration, see [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+For more information about token permissions and expiration, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
 ## Access the shared files from another machine
 
@@ -189,6 +189,6 @@ Do not delete the file system just to stop sharing it with one user or environme
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to create, rotate, disable, or revoke tokens.
+- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to create, rotate, disable, or revoke tokens.
 - [TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) to make changes independently before applying them to the base file system.
 - [Automation and AI Agent Workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md) for workflows that use shared file system data.

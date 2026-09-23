@@ -164,7 +164,7 @@ Deleting the file system removes the remote resource and its data.
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem resources](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your file systems.
+- [Manage File Systems in TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your file systems.
 - [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) to access its files through a local directory.
 - [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md) to make the same files available to another machine, user, application, or agent.
 - [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to isolate, review, and apply file changes.

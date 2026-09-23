@@ -109,7 +109,7 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 Complete either of the following workflows.
 
-- [Option A: Create and use a file system](/ai/ti/ti-quick-start.md#option-a-create-and-use-a-filesystem)
+- [Option A: Create and use a file system](/ai/ti/ti-quick-start.md#option-a-create-and-use-a-file-system)
 - [Option B: Create a TiDB Cloud Starter instance and query the database](/ai/ti/ti-quick-start.md#option-b-create-a-tidb-cloud-starter-instance-and-query-the-database)
 
 ### Option A: Create and use a file system

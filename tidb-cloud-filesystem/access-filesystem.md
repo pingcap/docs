@@ -63,7 +63,7 @@ A scoped token can access only the paths and operations included in its scope. I
 
 Treat file system tokens as secrets. For CI jobs and agent environments, inject the token from a secret manager instead of storing it in source code, scripts, or container images.
 
-If you need to create a token for another environment, see [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+If you need to create a token for another environment, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
 ## Switch between file systems
 
@@ -87,10 +87,10 @@ If multiple token sources are available, `ti` selects the token in the following
 2. `TI_FS_TOKEN`
 3. The locally stored token for the selected file system
 
-For the complete file system and credential selection rules, see [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md#filesystem-credentials-and-remote-inventory).
+For the complete file system and credential selection rules, see [TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md#file-system-credentials-and-remote-inventory).
 
 ## What's next
 
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 - [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)
-- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)

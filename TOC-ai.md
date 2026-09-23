@@ -61,7 +61,7 @@
     - [Overview](/ai/ti/reference/ti-cli-reference.md)
     - [configure](/ai/ti/reference/ti-configure.md)
     - [update](/ai/ti/reference/ti-update.md)
-    - `ti db` commands for managing TiDB Cloud Starter instances
+    - `ti db` Commands for Managing TiDB Cloud Starter Instances
       - [Overview](/ai/ti/reference/ti-starter-database.md)
       - [create-db-cluster](/ai/ti/reference/ti-db-create-db-cluster.md)
       - [list-db-clusters](/ai/ti/reference/ti-db-list-db-clusters.md)
@@ -75,7 +75,7 @@
       - [create-db-sql-users](/ai/ti/reference/ti-db-create-db-sql-users.md)
       - [format-db-connection-string](/ai/ti/reference/ti-db-format-db-connection-string.md)
       - [execute-sql-statement](/ai/ti/reference/ti-db-execute-sql-statement.md)
-    - `ti fs` commands for managing file systems in TiDB Cloud Filesystem
+    - `ti fs` Commands for Managing File Systems in TiDB Cloud Filesystem
       - [Overview](/ai/ti/reference/ti-filesystem.md)
       - [create-file-system](/ai/ti/reference/ti-fs-create-file-system.md)
       - [import-file-system-token](/ai/ti/reference/ti-fs-import-file-system-token.md)

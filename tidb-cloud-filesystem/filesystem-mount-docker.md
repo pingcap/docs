@@ -138,7 +138,7 @@ The following steps run inside the container. They use the `ubuntu:24.04` image 
       --mount-path "$HOME/workspace"
     ```
 
-    In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-filesystem).
+    In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-file-system).
 
     To prevent writes through the local mount, add `--read-only` to the mount command. For example, to mount the file system root as read-only:
 
@@ -210,4 +210,4 @@ Stopping or removing the container does not delete the remote file system or its
 
 - [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) for read-only mounts, mounting layers or checkpoints, and other common mount options.
 - [Share a File System Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md) to give another user or environment access to the same file system.
-- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to restrict access to specific paths and operations.
+- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to restrict access to specific paths and operations.

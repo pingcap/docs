@@ -57,7 +57,7 @@ For most workflows, you can use WebDAV without installing additional mount softw
       --driver webdav
     ```
 
-    In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-filesystem).
+    In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-file-system).
 
     To prevent writes through the local mount, add `--read-only` to the mount command. For example, to mount the file system root as read-only:
 
@@ -152,7 +152,7 @@ To use FUSE on macOS:
 
     Run the FUSE mount and the applications that access it as the same OS user.
 
-    If your file system token grants access only to a specific remote path, add `--remote-path` as described in [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-filesystem) instead of mounting the file system root.
+    If your file system token grants access only to a specific remote path, add `--remote-path` as described in [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-file-system) instead of mounting the file system root.
 
     Layer and checkpoint mounts require FUSE, and checkpoint mounts are always read-only. For details, see [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 

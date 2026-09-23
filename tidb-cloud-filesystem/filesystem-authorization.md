@@ -59,7 +59,7 @@ Because an owner token has broad privileges within a file system, keep it on a t
 
 A file system can have multiple active owner tokens. This lets different users, applications, or environments use separate credentials instead of sharing the same token.
 
-For instructions on generating and managing owner tokens, see [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+For instructions on generating and managing owner tokens, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
 ## Scoped tokens
 
@@ -86,7 +86,7 @@ After a scoped token is issued, disabling or revoking the owner token that creat
 
 Use scoped tokens when giving file system access to users, applications, agents, or other machines that do not need full access to the file system.
 
-For instructions on creating and delegating scoped tokens, see [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md#generate-and-delegate-a-scoped-token).
+For instructions on creating and delegating scoped tokens, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md#generate-and-delegate-a-scoped-token).
 
 ## Credential boundaries
 
@@ -102,6 +102,6 @@ TiDB Cloud CLI can store a selected file system token locally for convenience. L
 
 ## What's next
 
-- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [Share a File System Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md)
 - [Mount TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md)

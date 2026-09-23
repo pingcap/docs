@@ -16,7 +16,7 @@
 - [Manage File Systems](/tidb-cloud-filesystem/manage-filesystem-resources.md)
 - [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md)
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-- [Manage TiDB Cloud Filesystem Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md)
 - Mount a File System
   - [Overview](/tidb-cloud-filesystem/filesystem-mount.md)
