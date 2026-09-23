@@ -127,7 +127,7 @@ The following example shows how you can create a file system in one environment 
     >
     > For simplicity, this quick start uses the owner token returned when the file system is created. For least-privilege access, you can generate a scoped token to restrict access to specific paths and operations. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
-2. In the environment where you want to use the file system, set the owner token from the previous step as `TI_FS_TOKEN`, and then mount the file system to a local path:
+2. In the environment where you want to use the file system, set the owner token from the previous step as `TI_FS_TOKEN`, and then mount the file system to a local path as follows. This environment can be the same machine where you created the file system, another machine, or an AI agent sandbox.
 
     ```bash
     export TI_FS_TOKEN="<owner-token>"
@@ -137,7 +137,7 @@ The following example shows how you can create a file system in one environment 
     ls -l ~/mnt-test/hello.txt
     ```
 
-    This environment can be the same machine where you created the file system, another machine, or an AI agent sandbox.
+    After mounting, you can work with the files using standard local file operations.
 
 3. After you finish using the mounted file system in that environment, unmount it:
 
