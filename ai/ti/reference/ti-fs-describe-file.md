@@ -1,6 +1,6 @@
 ---
 title: ti fs describe-file
-summary: Describe a file in a TiDB Cloud Filesystem.
+summary: Describe a file in a file system.
 ---
 
 # ti fs describe-file
@@ -26,7 +26,7 @@ ti fs describe-file
 
 - `--path <string>`: File or directory path in the TiDB Cloud file system. \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--version`: Display version information.
 

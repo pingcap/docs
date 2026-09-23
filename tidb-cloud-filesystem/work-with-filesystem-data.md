@@ -1,30 +1,30 @@
 ---
 title: Work with Files and Directories in TiDB Cloud Filesystem
-summary: Learn how to upload, download, read, organize, inspect, and search files and directories in TiDB Cloud Filesystem.
+summary: Learn how to upload, download, read, organize, inspect, and search files and directories in a file system.
 aliases: ['/ai/work-with-filesystem-data']
 ---
 
 # Work with Files and Directories in TiDB Cloud Filesystem
 
-You can work with files and directories in a TiDB Cloud Filesystem directly from TiDB Cloud CLI (`ti`) without mounting the Filesystem.
+You can work with files and directories in TiDB Cloud Filesystem directly from TiDB Cloud CLI (`ti`) without mounting the file system.
 
 Use `ti fs` commands to upload and download files, read file contents, list and inspect paths, organize files and directories, and search for data. For the complete command reference, see [`ti fs` reference](/ai/ti/reference/ti-filesystem.md).
 
 > **Tip:**
 >
-> If you want to work with files and directories in TiDB Cloud Filesystem through local file paths, see [mount the Filesystem](/tidb-cloud-filesystem/filesystem-mount.md).
+> If you want to work with files and directories in a file system through local file paths, see [mount the file system](/tidb-cloud-filesystem/filesystem-mount.md).
 
 ## Prerequisites
 
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- [Create a Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) or obtain access to an existing one.
-- Select the Filesystem and make its token available to `ti`. For available access options, see [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+- [Create a file system](/tidb-cloud-filesystem/manage-filesystem-resources.md) or obtain access to an existing one.
+- Select the file system and make its token available to `ti`. For available access options, see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
 ## Upload and download files
 
-Upload a local file to the Filesystem:
+Upload a local file to the file system:
 
 ```shell
 ti fs copy-file \
@@ -32,7 +32,7 @@ ti fs copy-file \
   --to-remote /reports/report.md
 ```
 
-Download a file from the Filesystem:
+Download a file from the file system:
 
 ```shell
 ti fs copy-file \
@@ -41,7 +41,7 @@ ti fs copy-file \
   --create-parents
 ```
 
-You can also use `copy-file` to copy files or directories within the Filesystem, stream data through standard input or output, append to a file, or resume an interrupted transfer.
+You can also use `copy-file` to copy files or directories within the file system, stream data through standard input or output, append to a file, or resume an interrupted transfer.
 
 To copy a directory recursively, use `--recursive`. For all supported copy operations and options, see the [`copy-file` reference](/ai/ti/reference/ti-fs-copy-file.md).
 
@@ -131,7 +131,7 @@ For all available filters, see the [`find-files` reference](/ai/ti/reference/ti-
 
 ## What's next
 
-- [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md) to work with Filesystem data through a local directory and existing local tools.
-- [Manage TiDB Cloud Filesystem Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to make and review isolated changes before applying them to the base Filesystem.
-- [Share a TiDB Cloud Filesystem Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md) to give another machine or environment access to the Filesystem.
+- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) to work with file system data through a local directory and existing local tools.
+- [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to make and review isolated changes before applying them to the base file system.
+- [Share a File System Across Machines](/tidb-cloud-filesystem/filesystem-sharing.md) to give another machine or environment access to the file system.
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md) for complete command syntax and options.

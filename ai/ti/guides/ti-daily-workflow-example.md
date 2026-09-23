@@ -1,6 +1,6 @@
 ---
 title: Run a Daily TiDB Cloud CLI Workflow
-summary: Inspect resources, manage a TiDB Cloud Starter instance and Filesystem, check for TiDB Cloud CLI updates, and clean up resources.
+summary: Inspect resources, manage a TiDB Cloud Starter instance and file system, check for TiDB Cloud CLI updates, and clean up resources.
 ---
 
 # Run a Daily TiDB Cloud CLI Workflow
@@ -14,7 +14,7 @@ This example follows a typical operator workflow across TiDB Cloud Starter and T
 ## Prerequisites
 
 - Install `ti` and run `ti configure`.
-- Ensure your organization has capacity for one TiDB Cloud Starter instance and one Filesystem.
+- Ensure your organization has capacity for one TiDB Cloud Starter instance and one file system.
 
 ## Step 1. Inspect current resources
 
@@ -58,7 +58,7 @@ ti db execute-sql-statement \
   --output text
 ```
 
-## Step 4. Create and use a Filesystem
+## Step 4. Create and use a file system
 
 ```bash
 export TI_FS_FILE_SYSTEM_ID="$(ti fs create-file-system \
@@ -91,7 +91,7 @@ Preview an update:
 ti update --dry-run
 ```
 
-If another workflow has an active Filesystem or Vault mount, stop writers and unmount it before applying the update so that `ti` and the Filesystem runtime are updated together. For instructions, see [Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md#update-tidb-cloud-cli).
+If another workflow has an active file system or Vault mount, stop writers and unmount it before applying the update so that `ti` and the file system runtime are updated together. For instructions, see [Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md#update-tidb-cloud-cli).
 
 Apply the update when appropriate:
 
@@ -115,7 +115,7 @@ ti db delete-db-cluster \
 
 ## Security notes
 
-- Do not echo Filesystem tokens or formatted database connection strings.
+- Do not echo file system tokens or formatted database connection strings.
 - Use unique automation prefixes and delete only resources created by that run.
 - Preview destructive operations with `--dry-run`.
 

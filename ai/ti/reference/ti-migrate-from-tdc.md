@@ -13,16 +13,16 @@ This migration applies only if you previously used `tdc` v0.1.x. New TiDB Cloud 
 
 ## Before you begin
 
-- Stop writers and unmount every Filesystem and Vault mount started by `tdc`. Migration stops if an old mount is still active because it cannot transfer a running FUSE or WebDAV process.
+- Stop writers and unmount every file system and Vault mount started by `tdc`. Migration stops if an old mount is still active because it cannot transfer a running FUSE or WebDAV process.
 
-    Run the commands that match each active mount. For a FUSE Filesystem mount, run `drain-file-system` to flush pending writes, and then run `unmount-file-system` to detach the mount. For a WebDAV Filesystem mount, stop writers and run only `unmount-file-system`. A Vault mount only requires `unmount-vault`.
+    Run the commands that match each active mount. For a FUSE file system mount, run `drain-file-system` to flush pending writes, and then run `unmount-file-system` to detach the mount. For a WebDAV file system mount, stop writers and run only `unmount-file-system`. A Vault mount only requires `unmount-vault`.
 
     ```bash
-    # FUSE Filesystem mount
+    # FUSE file system mount
     tdc fs drain-file-system --mount-path <filesystem-mount-path>
     tdc fs unmount-file-system --mount-path <filesystem-mount-path>
 
-    # WebDAV Filesystem mount
+    # WebDAV file system mount
     tdc fs unmount-file-system --mount-path <filesystem-mount-path>
 
     # Vault mount
@@ -44,7 +44,7 @@ The following table summarizes which state is migrated:
 | Profiles and TiDB Cloud API credentials | Binaries |
 | Global preferences and the telemetry installation identity | Logs and caches |
 | Database SQL credentials | Local overlays |
-| Filesystem registrations and credentials | Mount locators and companion runtime state |
+| File system registrations and credentials | Mount locators and companion runtime state |
 
 After installation, verify the new executable and run a read-only command for the resources you use. For example:
 
@@ -64,7 +64,7 @@ After you verify the migration, you can remove the old `tdc` binaries and local 
 
 If `~/.tdc/` and `~/.ti/` were created independently, or the migration marker is missing, invalid, or references a different source, `ti` stops without merging or overwriting either directory.
 
-Determine which directory is the intended source of truth, and move the other directory to a backup location. Then run the installer or `ti` command again. Do not combine credential or Filesystem registry directories manually.
+Determine which directory is the intended source of truth, and move the other directory to a backup location. Then run the installer or `ti` command again. Do not combine credential or file system registry directories manually.
 
 ## Update environment variables
 

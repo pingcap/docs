@@ -1,6 +1,6 @@
 ---
 title: Use TiDB Cloud Filesystem in an Agent Sandbox
-summary: Provision a Filesystem on a trusted machine and give a clean agent sandbox config-free access without TiDB Cloud API keys.
+summary: Provision a file system on a trusted machine and give a clean agent sandbox config-free access without TiDB Cloud API keys.
 ---
 
 # Use TiDB Cloud Filesystem in an Agent Sandbox
@@ -13,11 +13,11 @@ This workflow gives an ephemeral coding agent a durable, shared workspace withou
 
 > **Note:**
 >
-> For a hands-on version of this workflow, open the [TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901). This interactive Lab Guide walks you through using a persistent Filesystem in an agent sandbox.
+> For a hands-on version of this workflow, open the [TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901). This interactive Lab Guide walks you through using a persistent file system in an agent sandbox.
 
 ## How it works
 
-A trusted machine provisions the Filesystem once. The sandbox receives only the Filesystem owner token and region code, so it can use ordinary file operations and data-plane, mount, Git, journal, and vault workflows without `ti configure`, a copied `~/.ti/` directory, or TiDB Cloud API keys. This also avoids the application-specific upload and download logic required by generic object-storage APIs. The token identifies the Filesystem. When an agent needs only selected secrets, use a delegated vault token instead of the owner token.
+A trusted machine provisions the file system once. The sandbox receives only the file system owner token and region code, so it can use ordinary file operations and data-plane, mount, Git, journal, and vault workflows without `ti configure`, a copied `~/.ti/` directory, or TiDB Cloud API keys. This also avoids the application-specific upload and download logic required by generic object-storage APIs. The token identifies the file system. When an agent needs only selected secrets, use a delegated vault token instead of the owner token.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ export FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
 export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
-Store the token in a secret manager, record `FILE_SYSTEM_ID` for control-plane cleanup, and record the region code used to create the Filesystem. Delete `filesystem.json` after storing the token securely.
+Store the token in a secret manager, record `FILE_SYSTEM_ID` for control-plane cleanup, and record the region code used to create the file system. Delete `filesystem.json` after storing the token securely.
 
 ## Step 2. Inject the minimum sandbox environment
 
@@ -66,7 +66,7 @@ Expected output:
 sandbox ready
 ```
 
-## Step 4. Optionally mount the Filesystem
+## Step 4. Optionally mount the file system
 
 On Linux with FUSE:
 
@@ -79,7 +79,7 @@ ti fs mount-file-system \
 cat "$HOME/workspace/sandbox/status.txt"
 ```
 
-On macOS, omit `--driver fuse` to use WebDAV, which requires no FUSE installation. Install macFUSE and select FUSE when you need FUSE-specific capabilities such as Git workspaces, layers, or online drain. For platform requirements and mount-path restrictions, see [Mount a TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-mount.md).
+On macOS, omit `--driver fuse` to use WebDAV, which requires no FUSE installation. Install macFUSE and select FUSE when you need FUSE-specific capabilities such as Git workspaces, layers, or online drain. For platform requirements and mount-path restrictions, see [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md).
 
 After mounting, you can use `ti fs-git`, `ti fs-journal`, and owner-authorized `ti fs-vault` commands with the same FS environment. Give agents a delegated `TI_VAULT_TOKEN` instead of the owner token when they need only selected secret fields.
 
@@ -102,7 +102,7 @@ ti fs delete-file-system \
 
 - Treat `TI_FS_TOKEN` as an owner credential.
 - Do not place it in an image, repository, command flag, or operation log.
-- Deleting the sandbox does not delete the remote Filesystem.
+- Deleting the sandbox does not delete the remote file system.
 - Graceful unmount drains pending FUSE writes; deleting the sandbox without unmounting does not.
 
 ## What's next

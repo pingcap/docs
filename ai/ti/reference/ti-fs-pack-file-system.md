@@ -1,6 +1,6 @@
 ---
 title: ti fs pack-file-system
-summary: Pack local Filesystem overlay state.
+summary: Pack local file system overlay state.
 ---
 
 # ti fs pack-file-system
@@ -33,7 +33,7 @@ ti fs pack-file-system
 - `--archive-path <string>`: The path for the packed archive.
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--local-root <string>`: Local overlay root containing the overlay directory.
 - `--mount-path <string>`: The local mounted path.

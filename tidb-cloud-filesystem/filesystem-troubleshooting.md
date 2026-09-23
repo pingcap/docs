@@ -1,19 +1,19 @@
 ---
 title: Troubleshoot TiDB Cloud Filesystem
-summary: Learn how to diagnose TiDB Cloud Filesystem token, region, runtime, mount, and access failures and choose a safe recovery path.
+summary: Learn how to diagnose file system token, region, runtime, mount, and access failures and choose a safe recovery path.
 ---
 
 # Troubleshoot TiDB Cloud Filesystem
 
-Use the symptoms below to diagnose Filesystem access and mount failures. Add `--debug` only when needed, and review redacted output before sharing it. For CLI installation, API key authentication, Starter, or SQL failures, see [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md).
+Use the symptoms below to diagnose file system access and mount failures. Add `--debug` only when needed, and review redacted output before sharing it. For CLI installation, API key authentication, Starter, or SQL failures, see [Troubleshoot TiDB Cloud CLI](/ai/ti/reference/ti-troubleshooting.md).
 
 > **Note:**
 >
 > TiDB Cloud Filesystem is currently in public preview. Its features and interfaces are subject to change without notice.
 
-## Filesystem token is missing
+## File system token is missing
 
-For a clean sandbox, provide the token and region. `ti` derives the Filesystem ID from the token:
+For a clean sandbox, provide the token and region. `ti` derives the file system ID from the token:
 
 ```bash
 export TI_FS_TOKEN="<owner-token>"
@@ -21,7 +21,7 @@ export TI_REGION_CODE="<filesystem-region-code>"
 ti fs check-file-system
 ```
 
-The Filesystem token is not the TiDB Cloud API private key. `TI_FS_FILE_SYSTEM_ID` is optional when a token is supplied; set it only when you want `ti` to verify that a separately distributed ID matches the token.
+The file system token is not the TiDB Cloud API private key. `TI_FS_FILE_SYSTEM_ID` is optional when a token is supplied; set it only when you want `ti` to verify that a separately distributed ID matches the token.
 
 If the token is known but is not stored on the current machine, import it and then select the derived ID:
 
@@ -43,7 +43,7 @@ ti fs generate-file-system-token \
 
 The new plaintext appears once in the response. Store it securely or add `--store-locally` to select it on the current machine.
 
-## Filesystem token is rejected
+## File system token is rejected
 
 A data-plane HTTP 401 cannot distinguish a token that was disabled, expired, refreshed on another machine, or revoked. Inspect remote metadata with TiDB Cloud API keys:
 
@@ -67,7 +67,7 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
 
-## Filesystem selection is missing
+## File system selection is missing
 
 List remote resources in the configured region with TiDB Cloud API keys and select one explicitly:
 
@@ -76,21 +76,21 @@ ti fs list-file-systems --output text
 ti fs list-files --file-system-id <file-system-id> --path /
 ```
 
-Or select the Filesystem for subsequent commands in the current shell:
+Or select the file system for subsequent commands in the current shell:
 
 ```bash
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-The CLI intentionally does not infer a Filesystem from local credential count, including when only one credential exists. Supply its ID or a Filesystem token whose embedded ID can be derived.
+The CLI intentionally does not infer a file system from local credential count, including when only one credential exists. Supply its ID or a file system token whose embedded ID can be derived.
 
-## Filesystem region is unsupported
+## File system region is unsupported
 
-The configured TiDB Cloud region might not be one of the Filesystem endpoints built into the installed `ti` release. Compare it with [supported Filesystem regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
+The configured TiDB Cloud region might not be one of the file system endpoints built into the installed `ti` release. Compare it with [supported file system regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
 
-## Filesystem runtime is missing or incompatible
+## File system runtime is missing or incompatible
 
-The release installer places the bundled Filesystem runtime component next to `ti`. You do not invoke this runtime directly. Re-run the current installer when the CLI reports a missing runtime component:
+The release installer places the bundled file system runtime component next to `ti`. You do not invoke this runtime directly. Re-run the current installer when the CLI reports a missing runtime component:
 
 ```bash
 curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
@@ -105,15 +105,15 @@ ti --version
 
 Do not copy an arbitrary standalone runtime binary into place.
 
-## Filesystem creation reaches quota
+## File system creation reaches quota
 
-If creation returns a quota or capacity error, list existing Filesystems in the configured region before trying again:
+If creation returns a quota or capacity error, list existing file systems in the configured region before trying again:
 
 ```bash
 ti fs list-file-systems --output text
 ```
 
-Do not delete an unrelated Filesystem to make automation pass. If the error links to TiDB Cloud billing because a payment method is required, follow that guidance before retrying.
+Do not delete an unrelated file system to make automation pass. If the error links to TiDB Cloud billing because a payment method is required, follow that guidance before retrying.
 
 ## Mount does not become ready
 
@@ -121,7 +121,7 @@ Background mount success prints the CLI result without runtime startup messages.
 
 - the mount path exists and is writable;
 - no existing mount covers the path;
-- the Filesystem token and region are valid;
+- the file system token and region are valid;
 - FUSE prerequisites or the WebDAV helper are installed;
 - the remote region is reachable.
 
@@ -133,7 +133,7 @@ ti fs mount-file-system \
   --driver fuse
 ```
 
-Linux needs FUSE support, the `fuse3` package, and access to `/dev/fuse`. Filesystem and Vault mounts are not supported on Windows; use `ti fs` data-plane commands or non-mount Vault commands instead.
+Linux needs FUSE support, the `fuse3` package, and access to `/dev/fuse`. File system and Vault mounts are not supported on Windows; use `ti fs` data-plane commands or non-mount Vault commands instead.
 
 ## Ubuntu 26.04 rejects a FUSE mount under `/workspace`
 
@@ -183,4 +183,4 @@ Unmount performs the graceful FUSE drain automatically. Running `drain-file-syst
 
 ## Report a problem
 
-Include the `ti` version, OS and architecture, command name, stable error code, and redacted logs. Never include API keys, Filesystem or Vault tokens, DB passwords, SQL containing private data, or file contents. Report issues at [github.com/tidbcloud/ti-cli/issues](https://github.com/tidbcloud/ti-cli/issues).
+Include the `ti` version, OS and architecture, command name, stable error code, and redacted logs. Never include API keys, file system or Vault tokens, DB passwords, SQL containing private data, or file contents. Report issues at [github.com/tidbcloud/ti-cli/issues](https://github.com/tidbcloud/ti-cli/issues).

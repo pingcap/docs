@@ -1,11 +1,11 @@
 ---
 title: ti fs disable-file-system-token
-summary: Temporarily disable a TiDB Cloud Filesystem token.
+summary: Temporarily disable a file system token without deleting it.
 ---
 
 # ti fs disable-file-system-token
 
-Temporarily disables a Filesystem token without revoking it. You can re-enable the token later with [`ti fs enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md). A token used by a known local mount must be drained and unmounted first. With owner token authentication, only scoped tokens can be disabled; TiDB Cloud API keys can disable either token kind.
+Temporarily disables a file system token without revoking it. You can re-enable the token later with [`ti fs enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md). A token used by a known local mount must be drained and unmounted first. With owner token authentication, only scoped tokens can be disabled; TiDB Cloud API keys can disable either token kind.
 
 > **Note:**
 >
@@ -25,9 +25,9 @@ ti fs disable-file-system-token
 
 ## Options
 
-- `--file-system-id <string>`: Specify the Filesystem that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
+- `--file-system-id <string>`: Specify the file system that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
 - `--token-id <string>`: Specify the immutable token ID returned by the list command. This option is required.
-- `--fs-token <string>`: Authorize the request with a Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. If no Filesystem token is available, the command uses the configured TiDB Cloud API keys.
+- `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system. If no file system token is available, the command uses the configured TiDB Cloud API keys.
 - `--dry-run`: Validate credentials, identifiers, and known local mount conflicts without disabling the token.
 - `--help`: Display help information.
 - `--version`: Display version information.
@@ -50,7 +50,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Disable a scoped token by using an owner token:
 
     ```bash
-    # Inject TI_FS_TOKEN from a secret manager. The owner token identifies the Filesystem.
+    # Inject TI_FS_TOKEN from a secret manager. The owner token identifies the file system.
     # Drain any local mount that uses the target token first.
     ti fs disable-file-system-token \
       --token-id "<scoped-token-id>"

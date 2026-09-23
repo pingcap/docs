@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud CLI (`ti`) Overview
-summary: Learn when to use the TiDB Cloud CLI (`ti`) to manage TiDB Cloud Starter instances and TiDB Cloud Filesystems.
+summary: Learn when to use the TiDB Cloud CLI (`ti`) to manage TiDB Cloud Starter instances and file systems in TiDB Cloud Filesystem.
 ---
 
 # TiDB Cloud CLI (`ti`) Overview
 
-[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a CLI for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [TiDB Cloud Filesystems](#tidb-cloud-filesystem). It is designed for both interactive use and automation, with structured JSON output by default.
+[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is a CLI for managing [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) instances and [file systems in TiDB Cloud Filesystem](#tidb-cloud-filesystem). It is designed for both interactive use and automation, with structured JSON output by default.
 
 > **Note:**
 >
@@ -14,7 +14,7 @@ summary: Learn when to use the TiDB Cloud CLI (`ti`) to manage TiDB Cloud Starte
 
 ## TiDB Cloud Filesystem
 
-A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads. It provides a persistent, shareable file namespace that stays available independently of the local machine, sandbox, or CI runner that accesses it, making it useful for persistent storage, shared workspaces, and AI agent workflows.
+TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads. It provides a persistent, shareable file namespace that stays available independently of the local machine, sandbox, or CI runner that accesses it, making it useful for persistent storage, shared workspaces, and AI agent workflows.
 
 ## When to use TiDB Cloud CLI (`ti`)
 
@@ -25,7 +25,7 @@ Use the TiDB Cloud CLI (`ti`) when you want to manage TiDB Cloud from a terminal
 | Automate TiDB Cloud Starter lifecycle operations | Create and manage TiDB Cloud Starter instances and branches, wait until they are ready, inspect results as JSON, run SQL statements, and delete resources by ID. |
 | Separate SQL privileges by task | Use CLI-managed read-only, read-write, or admin identities for each task without handling database passwords in every command. |
 | Persist and share files across environments | Keep files available across local machines, CI jobs, sandboxes, and other ephemeral environments, and access the same remote namespace through direct file commands or supported FUSE and WebDAV mounts. |
-| Use Filesystems in ephemeral environments | Provision a Filesystem on a trusted machine, then give a sandbox its Filesystem token and region code without copying a CLI profile or providing TiDB Cloud API keys. |
+| Use file systems in ephemeral environments | Provision a file system on a trusted machine, then give a sandbox its file system token and region code without copying a CLI profile or providing TiDB Cloud API keys. |
 | Start large Git workspaces sooner | Expose a repository file tree while clean Git data continues hydrating in the background. |
 | Record and delegate agent work | Store append-only, hash-chained workflow events in journals and grant temporary, scoped access to selected vault fields. |
 
@@ -40,7 +40,7 @@ The TiDB Cloud CLI covers the following functional areas:
     - SQL users and connection information
     - SQL statement execution
 - **TiDB Cloud Filesystem**
-    - Filesystem lifecycle and file operations
+    - File system lifecycle and file operations
     - FUSE and WebDAV mounts
     - Layers, packs, and Git workspaces
     - Journals and vaults
@@ -63,23 +63,23 @@ You can also use the top-level `ti configure` and `ti update` commands to config
 
 TiDB Cloud currently provides two CLIs with different scopes: `ti` and [`ticloud`](/tidb-cloud/cli-reference.md).
 
-`ti` is designed for automation with TiDB Cloud Starter and for managing TiDB Cloud Filesystems, while `ticloud` continues to support TiDB Cloud Essential and additional TiDB Cloud operations that are not available in `ti`.
+`ti` is designed for automation with TiDB Cloud Starter and for managing TiDB Cloud Filesystem, while `ticloud` continues to support TiDB Cloud Essential and additional TiDB Cloud operations that are not available in `ti`.
 
 | CLI | Best for | Key characteristics |
 | --- | --- | --- |
-| `ti` | Supported TiDB Cloud Starter automation workflows and TiDB Cloud Filesystems | Designed for automation; outputs JSON by default; commands support non-interactive workflows, while `ti configure` can also prompt interactively |
+| `ti` | Supported TiDB Cloud Starter automation workflows and TiDB Cloud Filesystem | Designed for automation; outputs JSON by default; commands support non-interactive workflows, while `ti configure` can also prompt interactively |
 | `ticloud` | TiDB Cloud Essential, existing TiDB Cloud Starter workflows, and operations not available in `ti` (such as data import, data export, and audit log operations) | Supports additional TiDB Cloud operations that are not available in `ti`, and both interactive and non-interactive modes |
 
 `ti` does not replace `ticloud`. Choose the CLI based on the resource and operation you need:
 
 - For new automation workflows with TiDB Cloud Starter, use `ti` when it supports the operations you need.
-- For managing TiDB Cloud Filesystems, use `ti`.
+- For managing TiDB Cloud Filesystem, use `ti`.
 - If you have existing `ticloud` workflows for TiDB Cloud Starter or TiDB Cloud Essential, you can continue to use them.
 - For TiDB Cloud Essential or operations not available in `ti` (such as data import, data export, and audit log operations), use [`ticloud`](/tidb-cloud/cli-reference.md).
 
 ## Next steps
 
-If you are new to the TiDB Cloud CLI, start with the [Quick Start](/ai/ti/ti-quick-start.md) to install `ti`, configure a profile, and complete a basic TiDB Cloud Starter or Filesystem workflow.
+If you are new to the TiDB Cloud CLI, start with the [Quick Start](/ai/ti/ti-quick-start.md) to install `ti`, configure a profile, and complete a basic TiDB Cloud Starter or file system workflow.
 
 Then continue based on what you want to do:
 

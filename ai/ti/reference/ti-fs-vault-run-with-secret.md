@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault run-with-secret
-summary: Run a process with a Filesystem Vault secret.
+summary: Run a process with a file system Vault secret.
 ---
 
 # ti fs-vault run-with-secret
@@ -30,7 +30,7 @@ ti fs-vault run-with-secret
 
 - `--secret-path <string>`: Canonical Vault path in the form `/n/vault/<secret-name>`. For example, the secret created as `db-prod` has the path `/n/vault/db-prod`. \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem. For delegated authentication, use `--vault-token` or `TI_VAULT_TOKEN` instead.
+- `--fs-token <string>`: Set the file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system. For delegated authentication, use `--vault-token` or `TI_VAULT_TOKEN` instead.
 - `--help`: Display help information.
 - `--vault-token <string>`: Delegated `ti fs-vault` token; prefer `TI_VAULT_TOKEN`.
 - `--version`: Display version information.

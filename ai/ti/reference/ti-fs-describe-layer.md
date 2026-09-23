@@ -1,11 +1,11 @@
 ---
 title: ti fs describe-layer
-summary: Describe a layer in a TiDB Cloud Filesystem.
+summary: Describe a layer in a file system.
 ---
 
 # ti fs describe-layer
 
-Describes one Filesystem layer.
+Describes one file system layer.
 
 > **Note:**
 >
@@ -26,7 +26,7 @@ ti fs describe-layer
 
 - `--layer-id <string>`: The ID of the specified file system layer. \[required]
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--version`: Display version information.
 

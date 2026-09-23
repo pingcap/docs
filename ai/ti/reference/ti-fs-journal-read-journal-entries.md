@@ -1,6 +1,6 @@
 ---
 title: ti fs-journal read-journal-entries
-summary: Read entries from a Filesystem journal.
+summary: Read entries from a file system journal.
 ---
 
 # ti fs-journal read-journal-entries
@@ -29,7 +29,7 @@ ti fs-journal read-journal-entries
 - `--journal-id <string>`: Journal ID. \[required]
 - `--after-seq <int64>`: Read entries after this sequence. If omitted or set to `0`, reading starts with the earliest entry.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--limit <int32>`: Maximum entries to read. \[default: 100]
 - `--version`: Display version information.

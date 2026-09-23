@@ -1,10 +1,10 @@
 ---
-title: Configure TiDB Cloud Filesystem AI Providers
-summary: Configure AI providers for media extraction and embeddings in a TiDB Cloud Filesystem.
+title: Configure AI Providers for a File System
+summary: Configure AI providers for media extraction and embeddings in a file system.
 aliases: ['/ai/configure-filesystem-ai-providers']
 ---
 
-# Configure TiDB Cloud Filesystem AI Providers
+# Configure AI Providers for a File System
 
 Use this guide when you want TiDB Cloud Filesystem to extract searchable content from images, audio, or video, or when you want to configure a custom embedding provider for semantic search.
 
@@ -20,8 +20,8 @@ This guide shows you how to check the current configuration, configure providers
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to an existing TiDB Cloud Filesystem and obtain its Filesystem ID.
-- Configure TiDB Cloud API credentials. The commands in this guide require TiDB Cloud API credentials and an explicit Filesystem ID; they do not use a Filesystem token.
+- Have access to an existing file system and obtain its file system ID.
+- Configure TiDB Cloud API credentials. The commands in this guide require TiDB Cloud API credentials and an explicit file system ID; they do not use a file system token.
 - If you want to enable or replace a provider configuration, obtain the provider endpoint, model name, and API key.
 
 > **Note:**
@@ -41,13 +41,13 @@ printf '\n' >&2
 export TI_FS_AI_PROVIDER_API_KEY
 ```
 
-The TiDB Cloud CLI does not store the key locally. The Filesystem service stores it encrypted and returns only a masked value when you inspect the configuration later.
+The TiDB Cloud CLI does not store the key locally. The file system service stores it encrypted and returns only a masked value when you inspect the configuration later.
 
 In CI, provide `TI_FS_AI_PROVIDER_API_KEY` through your CI secret-management mechanism.
 
 > **Note:**
 >
-> When you enable, re-enable, or replace a provider configuration, the Filesystem service sends a small request to the provider to validate the credentials, connectivity, and model response. The provider might charge for this validation request. Disabling a provider or updating only an extraction prompt does not send a validation request.
+> When you enable, re-enable, or replace a provider configuration, the file system service sends a small request to the provider to validate the credentials, connectivity, and model response. The provider might charge for this validation request. Disabling a provider or updating only an extraction prompt does not send a validation request.
 
 ## Configure media extraction
 
@@ -149,9 +149,9 @@ When custom media extraction is enabled, TiDB Cloud Filesystem sends the relevan
 
 If an update fails because of a timeout, lost response, or another error where you cannot tell whether the update succeeded, do not immediately retry the command. Run the corresponding `describe-file-system-*-configuration` command first.
 
-The Filesystem service might already have saved the configuration and sent the provider validation request even if the CLI did not receive the response.
+The file system service might already have saved the configuration and sent the provider validation request even if the CLI did not receive the response.
 
 ## What's next
 
-- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) to search Filesystem content.
+- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) to search file system content.
 - [TiDB Cloud Filesystem CLI Command Reference](/ai/ti/reference/ti-filesystem.md) for complete command syntax and options.

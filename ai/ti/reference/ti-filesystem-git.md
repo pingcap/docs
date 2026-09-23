@@ -11,7 +11,7 @@ summary: Reference every `ti fs-git` command for cloning, hydrating, and managin
 
 | Command | Description |
 |---|---|
-| [`clone-git-workspace`](/ai/ti/reference/ti-fs-git-clone-git-workspace.md) | Clones a repository into a mounted Filesystem path. |
+| [`clone-git-workspace`](/ai/ti/reference/ti-fs-git-clone-git-workspace.md) | Clones a repository into a mounted file system path. |
 | [`hydrate-git-workspace`](/ai/ti/reference/ti-fs-git-hydrate-git-workspace.md) | Materializes clean Git data for an existing fast or blobless workspace. |
 | [`add-git-worktree`](/ai/ti/reference/ti-fs-git-add-git-worktree.md) | Creates a linked worktree from a base workspace. |
 | [`remove-git-worktree`](/ai/ti/reference/ti-fs-git-remove-git-worktree.md) | Removes a linked worktree. |

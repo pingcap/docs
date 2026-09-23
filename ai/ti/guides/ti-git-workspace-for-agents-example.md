@@ -17,7 +17,7 @@ This workflow removes a large repository clone from the critical path of startin
 
 ## Prerequisites
 
-- Select a Filesystem.
+- Select a file system.
 - Use Linux FUSE or macOS with macFUSE and explicit `--driver fuse`. Git workspaces rely on FUSE to combine the remote Git tree and workspace changes into the mounted path; WebDAV mounts do not provide this integration.
 - Install Git and configure repository authentication.
 
@@ -82,7 +82,7 @@ ti fs-git remove-git-worktree \
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-Use `--force` for worktree removal only when uncommitted changes can be discarded. Filesystem unmount performs a graceful drain automatically; use `ti fs drain-file-system` separately only when you need to flush remote work without unmounting.
+Use `--force` for worktree removal only when uncommitted changes can be discarded. File system unmount performs a graceful drain automatically; use `ti fs drain-file-system` separately only when you need to flush remote work without unmounting.
 
 ## Security and operational notes
 

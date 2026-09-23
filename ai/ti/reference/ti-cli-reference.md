@@ -52,10 +52,10 @@ Use the following table to find the reference for a top-level command or command
 | `configure` | Configure local profiles, API keys, and the default region. | [`ti configure`](/ai/ti/reference/ti-configure.md) |
 | `update` | Check for and install TiDB Cloud CLI updates. | [`ti update`](/ai/ti/reference/ti-update.md) |
 | `db` | Manage TiDB Cloud Starter instances, branches, SQL users, connections, and SQL statements. | [`ti db` commands](/ai/ti/reference/ti-starter-database.md) |
-| `fs` | Manage Filesystem resources, AI providers, tokens, data, layers, and mounts. | [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) |
-| `fs-git` | Manage Git workspaces on mounted Filesystems. | [`ti fs-git` commands](/ai/ti/reference/ti-filesystem-git.md) |
-| `fs-journal` | Manage verifiable Filesystem journals. | [`ti fs-journal` commands](/ai/ti/reference/ti-filesystem-journal.md) |
-| `fs-vault` | Manage Filesystem Vault secrets and delegated access. | [`ti fs-vault` commands](/ai/ti/reference/ti-filesystem-vault.md) |
+| `fs` | Manage file system resources, AI providers, tokens, data, layers, and mounts. | [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) |
+| `fs-git` | Manage Git workspaces on mounted file systems. | [`ti fs-git` commands](/ai/ti/reference/ti-filesystem-git.md) |
+| `fs-journal` | Manage verifiable file system journals. | [`ti fs-journal` commands](/ai/ti/reference/ti-filesystem-journal.md) |
+| `fs-vault` | Manage file system Vault secrets and delegated access. | [`ti fs-vault` commands](/ai/ti/reference/ti-filesystem-vault.md) |
 
 To list available commands in the terminal, run `ti help` or `ti <command-group> help`.
 
@@ -148,7 +148,7 @@ ti [ERROR]: <message>
 
 Errors are written to stderr and successful command output is written to stdout. Usage and configuration failures return a nonzero exit code before remote mutation. Runtime and remote API failures also return nonzero. An interrupted interactive configuration returns exit code `130`.
 
-`--debug` can show redacted request and resolution context. It must not show API keys, Filesystem tokens, DB passwords, SQL text, file contents, or connection strings.
+`--debug` can show redacted request and resolution context. It must not show API keys, file system tokens, DB passwords, SQL text, file contents, or connection strings.
 
 ## Related documentation
 

@@ -1,12 +1,12 @@
 ---
-title: Manage TiDB Cloud Filesystem Vault Secrets
+title: Manage Vault Secrets for a File System
 summary: Learn how to store and rotate secrets, delegate temporary access, inject secrets into processes, audit and revoke access, and optionally mount secrets as read-only files.
 aliases: ['/ai/manage-filesystem-vault-secrets']
 ---
 
-# Manage TiDB Cloud Filesystem Vault Secrets
+# Manage Vault Secrets for a File System
 
-Use TiDB Cloud Filesystem Vault when an application, automation, or agent needs credentials or other sensitive values, but you do not want to store those values in regular Filesystem files or give the workflow broad access to the Filesystem.
+In TiDB Cloud Filesystem, you can use the file system Vault when an application, automation, or agent needs credentials or other sensitive values, but you do not want to store those values in regular file system files or give the workflow broad access to the file system.
 
 With Vault, a trusted owner can store a secret once and grant access to only the secret or field that a user, application, or agent needs, for a limited time. The delegated workflow can then read the permitted value, inject it into a process, or access it through a read-only mount. The owner can audit the access and revoke the grant when it is no longer needed.
 
@@ -17,8 +17,8 @@ This guide shows you how to store and rotate secrets, delegate limited access, u
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to an existing TiDB Cloud Filesystem.
-- Make the Filesystem and its owner token available to `ti`. See [Access an Existing TiDB Cloud Filesystem](/tidb-cloud-filesystem/access-filesystem.md).
+- Have access to an existing file system in TiDB Cloud Filesystem.
+- Make the file system and its owner token available to `ti`. See [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
 An owner token is used to create and replace secrets, create and revoke grants, and view audit events. A delegated Vault token provides only the secret access allowed by its grant.
 
@@ -82,7 +82,7 @@ Keep these local files out of source control and remove them when they are no lo
 
 ## Delegate limited access
 
-Instead of sharing the Filesystem owner token, create a short-lived grant for only the secret fields that another user, application, or agent needs.
+Instead of sharing the file system owner token, create a short-lived grant for only the secret fields that another user, application, or agent needs.
 
 For example, the following grant allows `deploy-agent` to read only the `DB_URL` field for 10 minutes:
 
@@ -96,7 +96,7 @@ ti fs-vault create-grant \
 
 The command returns a delegated Vault token and a grant ID. Give the delegated token only to the workflow that needs the secret, and retain the grant ID so that you can revoke the grant before it expires if necessary.
 
-In the environment that uses the delegated secret, make the token available as `TI_VAULT_TOKEN`. Also set `TI_FS_FILE_SYSTEM_ID` to the Filesystem ID and `TI_REGION_CODE` to its region code. The delegated Vault token alone does not identify the Filesystem. Avoid putting the token directly in a command-line argument because command arguments can appear in shell history or process listings.
+In the environment that uses the delegated secret, make the token available as `TI_VAULT_TOKEN`. Also set `TI_FS_FILE_SYSTEM_ID` to the file system ID and `TI_REGION_CODE` to its region code. The delegated Vault token alone does not identify the file system. Avoid putting the token directly in a command-line argument because command arguments can appear in shell history or process listings.
 
 ## Inject a secret into a process
 
@@ -176,5 +176,5 @@ Vault mounts require FUSE and are not available on Windows. Direct secret reads 
 
 ## What's next
 
-- [Delegate TiDB Cloud Filesystem Vault Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)
+- [Delegate File System Vault Secrets to an Agent](/ai/ti/guides/ti-vault-agent-secrets-example.md)
 - [TiDB Cloud Filesystem Vault CLI Command Reference](/ai/ti/reference/ti-filesystem-vault.md)
