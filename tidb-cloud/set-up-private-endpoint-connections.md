@@ -229,7 +229,7 @@ After [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support
 
 The IP protocol type can only be changed after the cluster is created.
 
-### Step 2. Create an AWS interface endpoint with dual-stack support for IPv6
+### Step 2. Create a dual-stack AWS interface endpoint for IPv6
 
 Create an AWS interface endpoint as described in [Step 2. Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint), and note the following:
 
