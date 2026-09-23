@@ -108,17 +108,17 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 Proceed with either of the following workflows based on your needs:
 
-- [Option A: Create and use a file system](/ai/ti/ti-quick-start.md#option-a-create-and-use-a-file-system)
-- [Option B: Create a TiDB Cloud Starter instance and query the database](/ai/ti/ti-quick-start.md#option-b-create-a-tidb-cloud-starter-instance-and-query-the-database)
+- [Option A: TiDB Cloud Filesystem](/ai/ti/ti-quick-start.md#option-a-tidb-cloud-filesystem)
+- [Option B: TiDB Cloud Starter](/ai/ti/ti-quick-start.md#option-b-tidb-cloud-starter)
 
 ### Option A: Create and use a file system
 
 TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
 
-1. Create a file system and obtain the access token (typically performed outside the sandbox):
+1. Create a file system and obtain the default access token (typically performed outside the sandbox):
 
     ```bash
-    export TI_FS_TOKEN="$(ti fs create-file-system --file-system-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
+    export TI_FS_TOKEN="$(ti fs create-file-system --display-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
     ```
 
 2. Mount the file system to a local path and use it as a normal POSIX-compliant file system (typically performed within the sandbox):
@@ -172,7 +172,6 @@ TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can 
       --db-cluster-id "$TI_DB_CLUSTER_ID" \
       --read-write --query connection_string \
       --output text)
-    echo $DATABASE_URL
     ```
 
 ## What's next
