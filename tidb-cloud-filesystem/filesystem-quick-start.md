@@ -99,17 +99,7 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
     - Your TiDB Cloud API public key and private key.
 
-The CLI saves the configuration locally and prints a short confirmation:
-
-```json
-{
-  "profile": "default",
-  "region_code": "aws-us-east-1",
-  "credentials_stored": true
-}
-```
-
-`credentials_stored` confirms that the keys were written to this machine. It does not confirm that TiDB Cloud accepts them. The file system creation command in the next step makes the first authenticated call, and an invalid key pair fails there with `authentication failed: TiDB Cloud rejected the API key pair`.
+The CLI saves the configuration locally and returns `"credentials_stored": true`. This confirms that the keys were saved on this machine, not that TiDB Cloud accepts them. The file system creation command in the next step makes the first authenticated call, and an invalid key pair fails there.
 
 To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
@@ -125,7 +115,7 @@ The command returns information about the new file system. Copy the returned `fi
 
 > **Warning:**
 >
-> The output also contains a file system owner token in the `fs_token` field. This token grants full access to the file system, does not expire, and is returned only when it is issued. Treat it as a secret and keep it out of logs, issues, chat messages, and source control. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+> The output also contains a file system owner token in the `fs_token` field. This token grants full access to the file system and is returned only when it is issued. It does not expire, so revoke it when it is no longer needed. Treat it as a secret and keep it out of logs, issues, chat messages, and source control. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
 The CLI stores the file system owner token locally, so you do not need to provide it for subsequent file operations on this machine.
 
