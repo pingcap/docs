@@ -115,25 +115,25 @@ Proceed with either of the following workflows based on your needs:
 
 TiDB Cloud Filesystem is a persistent, shareable cloud file system that you can use across local machines, CI jobs, sandboxes, and other ephemeral environments.
 
-The following example uses a sandbox to demonstrate how you can create a file system in one environment and access its persistent files from an ephemeral environment without providing your TiDB Cloud API credentials to the sandbox.
+The following example uses an AI agent sandbox—a temporary environment that might be discarded after a task—to demonstrate how the same file system can be accessed across environments. If you do not use a sandbox, you can follow the same workflow on another machine or environment.
 
-1. On your local machine or another trusted environment, create a file system and obtain the owner token returned upon creation:
+1. On your local machine or another environment with your TiDB Cloud API credentials configured, create a file system and obtain its owner token:
 
     ```bash
     export TI_FS_TOKEN="$(ti fs create-file-system --display-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
     ```
 
-2. Pass the owner token to the sandbox as `TI_FS_TOKEN`, and then mount the file system to a local path:
+2. In the sandbox or in another environment, set the owner token from the previous step as `TI_FS_TOKEN`, and then mount the file system to a local path:
 
     ```bash
     export TI_FS_TOKEN="<owner-token>"
     mkdir ~/mnt-test
     ti fs mount-file-system --mount-path ~/mnt-test --region aws-us-west-2
-    echo 'Hello Sandbox Workspace' >> ~/mnt-test/hello.txt
+    echo 'Hello from TiDB Cloud Filesystem' >> ~/mnt-test/hello.txt
     ls -l ~/mnt-test/hello.txt
     ```
 
-3. Before ending the sandbox session, unmount the file system:
+3. When you are done, unmount the file system:
 
     ```bash
     ti fs unmount-file-system --mount-path ~/mnt-test --region aws-us-west-2
