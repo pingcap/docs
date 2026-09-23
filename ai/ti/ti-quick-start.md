@@ -172,7 +172,6 @@ A TiDB Cloud Filesystem is a persistent, shareable cloud file system that you ca
       --db-cluster-id "$TI_DB_CLUSTER_ID" \
       --read-write --query connection_string \
       --output text)
-    echo $DATABASE_URL
     ```
 
 ## What's next
