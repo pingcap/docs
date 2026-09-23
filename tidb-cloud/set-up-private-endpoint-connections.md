@@ -67,7 +67,7 @@ If you have multiple clusters, you need to repeat these steps for each cluster t
 
 > **Note:**
 >
-> - If you want to connect to your cluster over IPv6, see [Use IPv6 connectivity over a private endpoint](#use-ipv6-connectivity-over-a-private-endpoint) for the additional IPv6 configuration.
+> - If you want to connect to your cluster over IPv6, see [Use IPv6 connectivity over a private endpoint](#use-ipv6-connectivity-over-a-private-endpoint) for additional IPv6 configuration.
 > - For each TiDB Cloud Dedicated cluster created after March 28, 2023, the corresponding endpoint service is automatically created 3 to 4 minutes after the cluster creation.
 
 If you see the `TiDB Private Link Service is ready` message, the corresponding endpoint service is ready. You can provide the following information to create the endpoint.
@@ -225,11 +225,11 @@ After [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support
 
 > **Note:**
 >
-> To switch the IP protocol type back to **IPv4 Only**, you must first delete all private endpoints that use IPv6 connectivity. Private endpoints that use IPv4 only do not need to be deleted.
+> To switch the IP protocol type back to **IPv4 Only**, you must first delete all private endpoints that use IPv6. Private endpoints that use IPv4 only do not need to be deleted.
 
 The IP protocol type can only be changed after the cluster is created.
 
-### Step 2. Create an AWS interface endpoint for IPv6
+### Step 2. Create an AWS interface endpoint with dual-stack support for IPv6
 
 Create an AWS interface endpoint as described in [Step 2. Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint), and note the following:
 
