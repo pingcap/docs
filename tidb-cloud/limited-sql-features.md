@@ -125,10 +125,10 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 |:-|:-|:-|
 | `datadir` | No limitation | Not supported [^1] |
 | `interactive_timeout` | No limitation | Read-only [^10] |
-| `max_allowed_packet` | No limitation | Read-only [^10] |
+| `max_allowed_packet` | No limitation | Read-only; controlled by TiDB Cloud [^10] |
 | `plugin_dir` | No limitation | Not supported [^8] |
 | `plugin_load` | No limitation | Not supported [^8] |
-| `require_secure_transport` | Not supported [^12] | Read-only [^10] |
+| `require_secure_transport` | Not supported [^12] | Read-only and always `ON` [^10] |
 | `skip_name_resolve` | No limitation | Read-only [^10] |
 | `sql_log_bin` | No limitation | Read-only [^10] |
 | `tidb_analyze_skip_column_types` | No limitation | Read-only [^10] |

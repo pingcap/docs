@@ -14,6 +14,32 @@ When you start the TiDB cluster, you can use command-line options or environment
 - Default: `""`
 - This address must be accessible by the rest of the TiDB cluster and the user.
 
+## `--activation-timeout`
+
+- Specifies the maximum time that TiDB waits for activation to complete after receiving an activation request in standby mode.
+- Default: `0`, which means that there is no timeout.
+- Unit: seconds
+
+## `--cluster-ca`
+
+- Specifies the path to the CA certificate used for TLS connections between TiDB and other cluster components.
+- Default: `""`
+- This option takes effect only in Starter deployment mode, where it overrides [`security.cluster-ssl-ca`](/tidb-configuration-file.md#cluster-ssl-ca) in the configuration file.
+
+## `--cluster-cert`
+
+- Specifies the path to the certificate used for TLS connections between TiDB and other cluster components.
+- Default: `""`
+- This option takes effect only in Starter deployment mode, where it overrides [`security.cluster-ssl-cert`](/tidb-configuration-file.md#cluster-ssl-cert) in the configuration file.
+- You must specify `--cluster-cert` and [`--cluster-key`](#--cluster-key) together. If the effective cluster CA path is not empty, the effective certificate and private key paths must also be present.
+
+## `--cluster-key`
+
+- Specifies the path to the private key used for TLS connections between TiDB and other cluster components.
+- Default: `""`
+- This option takes effect only in Starter deployment mode, where it overrides [`security.cluster-ssl-key`](/tidb-configuration-file.md#cluster-ssl-key) in the configuration file.
+- You must specify `--cluster-key` and [`--cluster-cert`](#--cluster-cert) together.
+
 ## `--config`
 
 - The configuration file
@@ -57,6 +83,12 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The SQL script to be executed when the TiDB cluster is started for the first time. For details, see [configuration item `initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)
 - Default: `""`
 
+## `--keyspace-activate`
+
+- Controls whether TiDB exits after activating the specified keyspace.
+- Default: `false`
+- This option is supported only in Starter deployment mode and cannot be enabled together with [`--standby`](#--standby).
+
 ## `-L`
 
 - The log level
@@ -98,6 +130,12 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The Prometheus client push interval in seconds
 - Default: `15s`
 - Setting the value to 0 stops the Prometheus client from pushing.
+
+## `--max-idle-seconds`
+
+- Specifies the maximum idle time of an activated TiDB instance. When the instance remains idle for longer than this value and has no active transaction or query that prevents shutdown, TiDB exits.
+- Default: `0`, which means that the idle timeout is disabled.
+- Unit: seconds
 
 ## `-P`
 
@@ -163,6 +201,45 @@ When you start the TiDB cluster, you can use command-line options or environment
 - The TiDB services use the unix socket file for external connections.
 - Default: `""`
 - Use `/tmp/tidb.sock` to open the unix socket file.
+
+## `--sql-ca`
+
+- Specifies the path to the CA certificate used for TLS connections from SQL clients.
+- Default: `""`
+- This option takes effect only in Starter deployment mode, where it overrides [`security.ssl-ca`](/tidb-configuration-file.md#ssl-ca) in the configuration file.
+
+## `--sql-cert`
+
+- Specifies the path to the certificate used for TLS connections from SQL clients.
+- Default: `""`
+- This option takes effect only in Starter deployment mode, where it overrides [`security.ssl-cert`](/tidb-configuration-file.md#ssl-cert) in the configuration file.
+- You must specify `--sql-cert` and [`--sql-key`](#--sql-key) together. If the effective SQL CA path is not empty, the effective certificate and private key paths must also be present.
+
+## `--sql-key`
+
+- Specifies the path to the private key used for TLS connections from SQL clients.
+- Default: `""`
+- This option takes effect only in Starter deployment mode, where it overrides [`security.ssl-key`](/tidb-configuration-file.md#ssl-key) in the configuration file.
+- You must specify `--sql-key` and [`--sql-cert`](#--sql-cert) together.
+
+In Starter deployment mode, you can also override the TLS file paths by setting the following environment variables:
+
+| Environment variable | Corresponding configuration item |
+| --- | --- |
+| `CLUSTER_CA` | `security.cluster-ssl-ca` |
+| `CLUSTER_CERT` | `security.cluster-ssl-cert` |
+| `CLUSTER_KEY` | `security.cluster-ssl-key` |
+| `SQL_CA` | `security.ssl-ca` |
+| `SQL_CERT` | `security.ssl-cert` |
+| `SQL_KEY` | `security.ssl-key` |
+
+Non-empty environment variables take precedence over both the configuration file and the corresponding command-line options. `CLUSTER_CERT` and `CLUSTER_KEY` must be set together, as must `SQL_CERT` and `SQL_KEY`. If an effective CA path is not empty, the corresponding effective certificate and private key paths must also be present.
+
+## `--standby`
+
+- Controls whether TiDB starts in standby mode and waits for a keyspace activation request before starting SQL service.
+- Default: `false`
+- This option is supported only by NextGen TiDB. You cannot enable it together with [`--keyspace-activate`](#--keyspace-activate).
 
 ## `--status`
 
