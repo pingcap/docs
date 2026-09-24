@@ -1,11 +1,11 @@
 ---
 title: ti fs disable-file-system-token
-summary: TiDB Cloud Filesystem トークンを一時的に無効化します。
+summary: ファイルシステムトークンを削除せずに一時的に無効化します。
 ---
 
 # ti fs disable-file-system-token
 
-Filesystem トークンを取り消すことなく一時的に無効化します。トークンは後で [`ti fs enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) を使って再度有効化できます。既知のローカルマウントで使用されているトークンは、先に drain とアンマウントを実行する必要があります。オーナートークン認証では、無効化できるのはスコープ付きトークンのみです。TiDB Cloud API キーでは、どちらの種類のトークンも無効化できます。
+ファイルシステムトークンを取り消すことなく一時的に無効化します。トークンは後で [`ti fs enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) を使って再度有効化できます。既知のローカルマウントで使用されているトークンは、先に drain とアンマウントを実行する必要があります。オーナートークン認証では、無効化できるのはスコープ付きトークンのみです。TiDB Cloud API キーでは、どちらの種類のトークンも無効化できます。
 
 > **Note:**
 >
@@ -25,9 +25,9 @@ ti fs disable-file-system-token
 
 ## オプション {#options}
 
-- `--file-system-id <string>`: トークンを所有する Filesystem を指定します。TiDB Cloud API 認証情報を使用する場合は必須です。オーナートークンが ID を提供する場合は省略できます。
+- `--file-system-id <string>`: トークンを所有するファイルシステムを指定します。TiDB Cloud API 認証情報を使用する場合は必須です。オーナートークンが ID を提供する場合は省略できます。
 - `--token-id <string>`: list コマンドが返す変更不可のトークン ID を指定します。このオプションは必須です。
-- `--fs-token <string>`: オーナー Filesystem トークンを使用してリクエストを認証します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。利用可能な Filesystem トークンがない場合、コマンドは設定済みの TiDB Cloud API キーを使用します。
+- `--fs-token <string>`: ファイルシステムのオーナートークンを使用してリクエストを認証します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。利用可能なファイルシステムトークンがない場合、コマンドは設定済みの TiDB Cloud API キーを使用します。
 - `--dry-run`: トークンを無効化せずに、認証情報、識別子、および既知のローカルマウント競合を検証します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
@@ -50,7 +50,7 @@ ti fs disable-file-system-token
 - オーナートークンを使用してスコープ付きトークンを無効化する:
 
     ```bash
-    # Inject TI_FS_TOKEN from a secret manager. The owner token identifies the Filesystem.
+    # Inject TI_FS_TOKEN from a secret manager. The owner token identifies the file system.
     # Drain any local mount that uses the target token first.
     ti fs disable-file-system-token \
       --token-id "<scoped-token-id>"

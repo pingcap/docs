@@ -1,6 +1,6 @@
 ---
 title: ti fs-journal append-journal-entries
-summary: Filesystem ジャーナルにエントリを追加します。
+summary: ファイルシステムジャーナルにエントリを追加します。
 ---
 
 # ti fs-journal append-journal-entries
@@ -36,7 +36,7 @@ ti fs-journal append-journal-entries
 - `--entry-json <string>`: 1 つの JSON ジャーナルエントリオブジェクト。繰り返し指定できます。サポートされるフィールドについては、[エントリ JSON 形式](#entry-json-format) を参照してください。
 - `--entry-type <string>`: 入力オブジェクトで `type` が省略されている場合に使用するエントリタイプ。入力オブジェクト内で明示的に指定された `type` が優先されます。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--idempotency-key <string>`: 同じ追加リクエストの再試行を重複排除するために使用するキー。省略した場合、呼び出しごとに新しいキーが割り当てられます。
 - `--json-array`: JSONL の代わりに標準入力から JSON 配列を読み取ります。

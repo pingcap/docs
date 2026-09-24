@@ -37,6 +37,7 @@ TiProxy には 4つのパネルグループがあります。これらのパネ�
     - proxy error: その他の TiProxy エラー
     - backend network break: TiDBの読み取りまたは書き込みに失敗しました。これは、ネットワークの問題、またはTiDBサーバーのシャットダウンが原因である可能性があります。
     - backend handshake fail: TiProxy が TiDBサーバーとのハンドシェイクに失敗しました
+- Connection Lifetime: 接続存続時間の平均値と P99 値
 - Goroutine Count: 各 TiProxy インスタンス上の Goroutine の数
 - Owner: 様々なタスクを実行するTiProxyインスタンス。例えば、 `10.24.31.1:3080 - vip`は、 `10.24.31.1:3080`のTiProxyインスタンスが仮想IPにバインドされていることを示します。タスクには以下が含まれます。
     - vip: 仮想IPをバインドする

@@ -1,11 +1,11 @@
 ---
 title: ti fs list-layers
-summary: TiDB Cloud Filesystem 内のレイヤーを一覧表示します。
+summary: ファイルシステム内のレイヤーを一覧表示します。
 ---
 
 # ti fs list-layers
 
-選択した Filesystem のレイヤーを一覧表示します。
+選択した file system のレイヤーを一覧表示します。
 
 > **Note:**
 >
@@ -24,7 +24,7 @@ ti fs list-layers
 ## オプション {#options}
 
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 
@@ -32,10 +32,10 @@ ti fs list-layers
 
 ## 例 {#examples}
 
-- Filesystem レイヤーを一覧表示します。
+- file system レイヤーを一覧表示します。
 
     ```bash
-    # Return all layers available in the selected Filesystem.
+    # Return all layers available in the selected file system.
     ti fs list-layers --file-system-id <file-system-id>
     ```
 

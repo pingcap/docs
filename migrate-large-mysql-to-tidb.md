@@ -140,11 +140,13 @@ LIMIT
 
     S3 からデータをインポートする場合は、S3ストレージパスにアクセスできる SecretKey と AccessKey を環境変数としてTiDB Lightningノードに渡してください。また、 `~/.aws/credentials`から認証情報を読み取ることもできます。
 
+    ターゲット TiDB クラスターと同じバージョンの TiDB Lightning を使用することを推奨します。`<version>` をターゲット TiDB クラスターのバージョンに置き換えてください。
+
     ```shell
     #!/bin/bash
     export AWS_ACCESS_KEY_ID=${access_key}
     export AWS_SECRET_ACCESS_KEY=${secret_key}
-    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out 2>&1 &
+    nohup tiup tidb-lightning:<version> -config tidb-lightning.toml > nohup.out 2>&1 &
     ```
 
     次に、スクリプトを使用してTiDB Lightning を起動します。

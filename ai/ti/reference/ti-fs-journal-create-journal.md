@@ -1,6 +1,6 @@
 ---
 title: ti fs-journal create-journal
-summary: 追記専用の Filesystem ジャーナルを作成します。
+summary: 追記専用の file system ジャーナルを作成します。
 ---
 
 # ti fs-journal create-journal
@@ -32,7 +32,7 @@ ti fs-journal create-journal
 - `--actor <string>`: `type:id` 形式のアクターです。両方の部分はユーザー定義の空でない文字列であり、CLI は `type` を小文字に変換します。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合は、選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合は、選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--journal-id <string>`: ジャーナル ID です。省略した場合は生成されます。
 - `--journal-kind <string>`: ユーザー定義のジャーナルカテゴリです。1〜64 文字で、小文字で始まり、小文字、数字、アンダースコア (`_`)、ピリオド (`.`)、またはハイフン (`-`) のみを使用する必要があります。\[default: agent]

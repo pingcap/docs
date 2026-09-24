@@ -67,8 +67,8 @@ unzip \*-tripdata.zip
     password = "very_secret"
     ```
 
-4. 次のコマンドを実行します。
+4. 次のコマンドを実行します。ターゲット TiDB クラスターと同じバージョンの TiDB Lightning を使用することを推奨します。`<version>` をターゲット TiDB クラスターのバージョンに置き換えてください。
 
     ```shell
-    tiup tidb-lightning -c tidb-lightning.toml
+    tiup tidb-lightning:<version> -c tidb-lightning.toml
     ```

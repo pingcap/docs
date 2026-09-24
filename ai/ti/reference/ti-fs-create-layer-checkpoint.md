@@ -1,6 +1,6 @@
 ---
 title: ti fs create-layer-checkpoint
-summary: TiDB Cloud Filesystem のレイヤーにチェックポイントを作成します。
+summary: ファイルシステムのレイヤーにチェックポイントを作成します。
 ---
 
 # ti fs create-layer-checkpoint
@@ -31,7 +31,7 @@ ti fs create-layer-checkpoint
 - `--checkpoint-id <string>`: チェックポイント ID です。通常はサービスによって自動生成されます。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--label <string>`: チェックポイントのラベルです。
 - `--version`: バージョン情報を表示します。

@@ -20,17 +20,17 @@ summary: TiDB Lightningをデプロイ、大量の新しいデータを迅速に
 
     このコマンドは、 TiUP を環境変数`PATH`に自動的に追加します。 TiUP を使用するには、新しいターミナルセッションを開始するか、 `source ~/.bashrc`を実行する必要があります。（環境によっては`source ~/.profile`を実行する必要がある場合があります。具体的なコマンドについては、 TiUPの出力を確認してください。）
 
-2. TiUPを使用してTiDB Lightningをインストールします。
+2. TiUPを使用してTiDB Lightningをインストールします。ターゲットTiDBクラスターと同じバージョンのTiDB Lightningを使用することをお勧めします。`<version>` をターゲットTiDBクラスターのバージョン（たとえば、`v{{{ .tidb-version }}}`）に置き換えます。
 
     ```shell
-    tiup install tidb-lightning
+    tiup install tidb-lightning:<version>
     ```
 
 ## 手動デプロイ {#manual-deployment}
 
 ### TiDB Lightningバイナリをダウンロード {#download-tidb-lightning-binaries}
 
-[TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してTiDB Lightning のバイナリをダウンロードしてください。TiDB Lightning はTiDB の以前のバージョンと完全に互換性があります。最新バージョンのTiDB Lightning を使用することをお勧めします。
+[TiDBツールをダウンロード](/download-ecosystem-tools.md)を参照してTiDB Lightning のバイナリをダウンロードしてください。ターゲットTiDBクラスターと同じバージョンのTiDB Lightningを使用することをお勧めします。
 
 TiDB Lightningバイナリパッケージを解凍して、 `tidb-lightning`実行可能ファイルを取得します。
 

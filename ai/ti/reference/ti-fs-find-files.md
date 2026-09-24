@@ -1,6 +1,6 @@
 ---
 title: ti fs find-files
-summary: TiDB Cloud Filesystem 内のファイルを検索します。
+summary: ファイルシステム内のファイルを検索します。
 ---
 
 # ti fs find-files
@@ -35,7 +35,7 @@ ti fs find-files
 
 - `--file-name-pattern <string>`: `*.md` などのファイル名パターンでフィルタリングします。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、コマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--layer-id <string>`: 特定のファイルシステムレイヤー内のファイルとディレクトリを検索します。
 - `--limit <int32>`: 結果の最大件数です。0 を指定するとサービスのデフォルト値が使用されます。

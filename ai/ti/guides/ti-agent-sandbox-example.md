@@ -1,6 +1,6 @@
 ---
 title: エージェントサンドボックスで TiDB Cloud Filesystem を使う
-summary: 信頼できるマシン上で Filesystem をプロビジョニングし、TiDB Cloud API キーを使わずに、クリーンなエージェントサンドボックスへ設定不要でアクセスを提供します。
+summary: 信頼できるマシン上で file system をプロビジョニングし、TiDB Cloud API キーを使わずに、クリーンなエージェントサンドボックスへ設定不要でアクセスを提供します。
 ---
 
 # エージェントサンドボックスで TiDB Cloud Filesystem を使う
@@ -13,11 +13,11 @@ summary: 信頼できるマシン上で Filesystem をプロビジョニング�
 
 > **Note:**
 >
-> このワークフローを実際に試せる版として、[TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901) を開いてください。このインタラクティブな演習では、エージェントサンドボックスで永続的な Filesystem を使用する方法を案内します。
+> このワークフローを実際に試せる版として、[TiDB Cloud Filesystem for Agent Sandbox Lab](https://labs.tidb.io/labs/demo_901) を開いてください。このインタラクティブな演習では、エージェントサンドボックスで永続的な file system を使用する方法を案内します。
 
 ## 仕組み {#how-it-works}
 
-信頼できるマシンが一度だけ Filesystem をプロビジョニングします。サンドボックスには Filesystem のオーナートークンとリージョンコードだけが渡されるため、`ti configure`、コピーした `~/.ti/` ディレクトリ、または TiDB Cloud API キーなしで、通常のファイル操作やデータプレーン、マウント、Git、ジャーナル、vault のワークフローを利用できます。これにより、汎用オブジェクトストレージ API で必要となるアプリケーション固有のアップロードおよびダウンロードロジックも不要になります。このトークンは Filesystem を識別します。エージェントが一部のシークレットだけを必要とする場合は、オーナートークンの代わりに委任された vault トークンを使用してください。
+信頼できるマシンが一度だけ file system をプロビジョニングします。サンドボックスには file system のオーナートークンとリージョンコードだけが渡されるため、`ti configure`、コピーした `~/.ti/` ディレクトリ、または TiDB Cloud API キーなしで、通常のファイル操作やデータプレーン、マウント、Git、ジャーナル、vault のワークフローを利用できます。これにより、汎用オブジェクトストレージ API で必要となるアプリケーション固有のアップロードおよびダウンロードロジックも不要になります。このトークンは file system を識別します。エージェントが一部のシークレットだけを必要とする場合は、オーナートークンの代わりに委任された vault トークンを使用してください。
 
 ## 前提条件 {#prerequisites}
 
@@ -35,7 +35,7 @@ export FILE_SYSTEM_ID="$(jq -r '.file_system_id' ./filesystem.json)"
 export TI_FS_TOKEN="$(jq -r '.fs_token' ./filesystem.json)"
 ```
 
-トークンをシークレットマネージャーに保存し、コントロールプレーンのクリーンアップ用に `FILE_SYSTEM_ID` を記録し、Filesystem の作成に使用したリージョンコードも記録します。トークンを安全に保存した後、`filesystem.json` を削除してください。
+トークンをシークレットマネージャーに保存し、コントロールプレーンのクリーンアップ用に `FILE_SYSTEM_ID` を記録し、file system の作成に使用したリージョンコードも記録します。トークンを安全に保存した後、`filesystem.json` を削除してください。
 
 ## ステップ 2. サンドボックスに最小限の環境を注入する {#step-2-inject-the-minimum-sandbox-environment}
 
@@ -66,7 +66,7 @@ ti fs read-file --path /sandbox/status.txt
 sandbox ready
 ```
 
-## ステップ 4. 必要に応じて Filesystem をマウントする {#step-4-optionally-mount-the-filesystem}
+## ステップ 4. 必要に応じて Filesystem をマウントする {#step-4-optionally-mount-the-file-system}
 
 Linux で FUSE を使用する場合:
 
@@ -79,7 +79,7 @@ ti fs mount-file-system \
 cat "$HOME/workspace/sandbox/status.txt"
 ```
 
-macOS では、FUSE のインストールが不要な WebDAV を使用するため、`--driver fuse` を省略します。Git ワークスペース、レイヤー、online drain などの FUSE 固有の機能が必要な場合は、macFUSE をインストールして FUSE を選択してください。プラットフォーム要件とマウントパスの制限については、[TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md) を参照してください。
+macOS では、FUSE のインストールが不要な WebDAV を使用するため、`--driver fuse` を省略します。Git ワークスペース、レイヤー、online drain などの FUSE 固有の機能が必要な場合は、macFUSE をインストールして FUSE を選択してください。プラットフォーム要件とマウントパスの制限については、[File System をマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
 
 マウント後は、同じ FS 環境で `ti fs-git`、`ti fs-journal`、およびオーナーに認可された `ti fs-vault` コマンドを使用できます。エージェントが一部のシークレットフィールドだけを必要とする場合は、オーナートークンの代わりに委任された `TI_VAULT_TOKEN` を渡してください。
 
@@ -91,7 +91,7 @@ macOS では、FUSE のインストールが不要な WebDAV を使用するた�
 ti fs unmount-file-system --mount-path "$HOME/workspace"
 ```
 
-FUSE マウントでは、マウントを維持したままリモートへの永続化を確認したい場合、`ti fs drain-file-system --mount-path "$HOME/workspace"` を別途使用します。`drain-file-system` は WebDAV ではサポートされていません。詳細は [drain またはアンマウント](/ai/ti/guides/mount-filesystem.md#drain-or-unmount) を参照してください。信頼できるマシンに戻って、次を実行します。
+FUSE マウントでは、マウントを維持したままリモートへの永続化を確認したい場合、`ti fs drain-file-system --mount-path "$HOME/workspace"` を別途使用します。`drain-file-system` は WebDAV ではサポートされていません。詳細は [安全に終了する](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely) を参照してください。信頼できるマシンに戻って、次を実行します。
 
 ```bash
 ti fs delete-file-system \
@@ -102,7 +102,7 @@ ti fs delete-file-system \
 
 - `TI_FS_TOKEN` はオーナー認証情報として扱ってください。
 - イメージ、リポジトリ、コマンドフラグ、または操作ログに配置しないでください。
-- サンドボックスを削除しても、リモートの Filesystem は削除されません。
+- サンドボックスを削除しても、リモートの file system は削除されません。
 - 正常なアンマウントでは保留中の FUSE 書き込みが drain されますが、アンマウントせずにサンドボックスを削除しても drain されません。
 
 ## 次のステップ {#what-s-next}

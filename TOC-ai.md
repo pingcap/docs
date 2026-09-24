@@ -45,28 +45,18 @@
   - [概要](/ai/ti/ti-overview.md)
   - [TiDB Cloud CLI のインストール、設定、および更新](/ai/ti/reference/ti-install-configure-update.md)
   - [TiDB Cloud Starter インスタンスを管理する](/ai/ti/guides/manage-starter-instances.md)
-  - TiDB Cloud Filesystem を管理する
-    - [Filesystem リソースを管理する](/ai/ti/guides/manage-filesystem-resources.md)
-    - [Filesystem AI プロバイダーを設定する](/ai/ti/guides/configure-filesystem-ai-providers.md)
-    - [Filesystem トークンを管理する](/ai/ti/guides/manage-filesystem-tokens.md)
-    - [Filesystem データを操作する](/ai/ti/guides/work-with-filesystem-data.md)
-    - [Filesystem のレイヤーとチェックポイントを管理する](/ai/ti/guides/manage-filesystem-layers.md)
-    - [TiDB Cloud Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md)
-    - [Git ワークスペースを管理する](/ai/ti/guides/manage-git-workspaces.md)
-    - [Filesystem ジャーナルを使用する](/ai/ti/guides/use-filesystem-journals.md)
-    - [Filesystem Vault シークレットを管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md)
+  - [TiDB Cloud Filesystem を管理する](/ai/ti/guides/manage-filesystems-via-cli.md)
   - ユーザーと自動化のシナリオ
     - [日次の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md)
     - [明示的な SQL ロールを使用して TiDB Cloud Starter にクエリする](/ai/ti/guides/ti-query-sql-with-roles-example.md)
-    - [複数のマシン間で TiDB Cloud Filesystem を共有する](/ai/ti/guides/ti-share-filesystem-across-machines-example.md)
     - [TiDB Cloud Filesystem を使用して分離されたジョブ間で CI アーティファクトを受け渡す](/ai/ti/guides/ti-ci-artifact-handoff-example.md)
   - AI エージェントのシナリオ
     - [エージェントのサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md)
     - [TiDB Cloud Filesystem を使用して使い捨てサンドボックス間でエージェントの状態を永続化する](/ai/ti/guides/ti-persistent-agent-state-example.md)
     - [TiDB Cloud Filesystem を使用して並列エージェント間で読み取り専用データセットを共有する](/ai/ti/guides/ti-parallel-agent-dataset-example.md)
     - [TiDB Cloud Filesystem 上でエージェント用の Git ワークスペースを準備する](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
-    - [TiDB Cloud Filesystem ジャーナルにエージェントのワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md)
-    - [TiDB Cloud Filesystem Vault シークレットをエージェントに委任する](/ai/ti/guides/ti-vault-agent-secrets-example.md)
+    - [ファイルシステムジャーナルに Agent ワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md)
+    - [ファイルシステム Vault シークレットを Agent に委任する](/ai/ti/guides/ti-vault-agent-secrets-example.md)
   - コマンドリファレンス
     - [概要](/ai/ti/reference/ti-cli-reference.md)
     - [configure](/ai/ti/reference/ti-configure.md)
@@ -85,7 +75,7 @@
       - [create-db-sql-users](/ai/ti/reference/ti-db-create-db-sql-users.md)
       - [format-db-connection-string](/ai/ti/reference/ti-db-format-db-connection-string.md)
       - [execute-sql-statement](/ai/ti/reference/ti-db-execute-sql-statement.md)
-    - TiDB Cloud Filesystem を管理するための `ti fs` コマンド
+    - TiDB Cloud Filesystem 内のファイルシステムを管理するための `ti fs` コマンド
       - [概要](/ai/ti/reference/ti-filesystem.md)
       - [create-file-system](/ai/ti/reference/ti-fs-create-file-system.md)
       - [import-file-system-token](/ai/ti/reference/ti-fs-import-file-system-token.md)
@@ -131,20 +121,20 @@
       - [mount-file-system](/ai/ti/reference/ti-fs-mount-file-system.md)
       - [drain-file-system](/ai/ti/reference/ti-fs-drain-file-system.md)
       - [unmount-file-system](/ai/ti/reference/ti-fs-unmount-file-system.md)
-    - TiDB Cloud Filesystem Git ワークスペースを管理するための `ti fs-git` コマンド
+    - ファイルシステム Git ワークスペースを管理するための `ti fs-git` コマンド
       - [概要](/ai/ti/reference/ti-filesystem-git.md)
       - [clone-git-workspace](/ai/ti/reference/ti-fs-git-clone-git-workspace.md)
       - [hydrate-git-workspace](/ai/ti/reference/ti-fs-git-hydrate-git-workspace.md)
       - [add-git-worktree](/ai/ti/reference/ti-fs-git-add-git-worktree.md)
       - [remove-git-worktree](/ai/ti/reference/ti-fs-git-remove-git-worktree.md)
-    - TiDB Cloud Filesystem ジャーナルを管理するための `ti fs-journal` コマンド
+    - ファイルシステムジャーナルを管理するための `ti fs-journal` コマンド
       - [概要](/ai/ti/reference/ti-filesystem-journal.md)
       - [create-journal](/ai/ti/reference/ti-fs-journal-create-journal.md)
       - [append-journal-entries](/ai/ti/reference/ti-fs-journal-append-journal-entries.md)
       - [read-journal-entries](/ai/ti/reference/ti-fs-journal-read-journal-entries.md)
       - [search-journal-entries](/ai/ti/reference/ti-fs-journal-search-journal-entries.md)
       - [verify-journal](/ai/ti/reference/ti-fs-journal-verify-journal.md)
-    - TiDB Cloud Filesystem Vault シークレットを管理するための `ti fs-vault` コマンド
+    - ファイルシステム Vault シークレットを管理するための `ti fs-vault` コマンド
       - [概要](/ai/ti/reference/ti-filesystem-vault.md)
       - [create-secret](/ai/ti/reference/ti-fs-vault-create-secret.md)
       - [replace-secret](/ai/ti/reference/ti-fs-vault-replace-secret.md)

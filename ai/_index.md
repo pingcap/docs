@@ -1,6 +1,6 @@
 ---
 title: TiDB for AI
-summary: SQL、統合検索、TiDB Cloud Starter、および永続的な共有 Filesystems を使用して、TiDB で AI アプリケーションとエージェントワークフローを構築します。
+summary: SQL、統合検索、TiDB Cloud Starter、および永続的な共有 file systems を使用して、TiDB で AI アプリケーションとエージェントワークフローを構築します。
 ---
 
 # AI向けTiDB {#tidb-for-ai}
@@ -8,7 +8,7 @@ summary: SQL、統合検索、TiDB Cloud Starter、および永続的な共有 F
 TiDBは、AIアプリケーションの構築とAIエージェントワークフローの実行のためのデータ機能とワークスペース機能を提供します。
 
 - アプリケーション開発では、SQL または [TiDB AI 向け Python SDK (`pytidb`)](https://github.com/pingcap/pytidb) を使用して、構造化データ、ベクトル検索、全文検索、ハイブリッド検索、および AI を活用した検索取得を利用できます。
-- AI エージェントと自動化では、[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) を使用して TiDB Cloud Starter インスタンスと SQL ワークフローを管理し、TiDB Cloud Filesystems をローカルマシン、CI ジョブ、一時的なエージェントサンドボックス間で永続的な共有ストレージとして使用できます。Filesystems は、マウントされたワークスペース、Git ワークフロー、ジャーナル、および委任されたシークレットもサポートします。
+- AI エージェントと自動化では、[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) を使用して TiDB Cloud Starter インスタンスと SQL ワークフローを管理し、[TiDB Cloud Filesystem](/tidb-cloud-filesystem/_index.md) をローカルマシン、CI ジョブ、一時的なエージェントサンドボックス間で永続的な共有ストレージとして使用できます。TiDB Cloud Filesystem は、マウントされたワークスペース、Git ワークフロー、ジャーナル、および委任されたシークレットも提供します。
 
 ## はじめに {#get-started}
 
@@ -101,8 +101,8 @@ TiDB Cloud CLI (`ti`) を使用すると、ユーザー、スクリプト、CI�
 | `ti` が管理する対象と使用するタイミングを理解する | [TiDB Cloud CLI の概要](/ai/ti/ti-overview.md) |
 | `ti` をインストールして設定し、最初のワークフローを完了する | [TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) |
 | TiDB Cloud Starter インスタンス、ブランチ、SQL 操作を自動化する | [TiDB Cloud Starter インスタンスを管理する](/ai/ti/guides/manage-starter-instances.md) |
-| マシン、CIジョブ、サンドボックス間でファイルを永続化して共有する | [Filesystem リソースを管理する](/ai/ti/guides/manage-filesystem-resources.md) および [Filesystem データを操作する](/ai/ti/guides/work-with-filesystem-data.md) |
-| マウントされたワークスペース、Git ワークスペース、ジャーナル、または委任されたシークレットを使用する | [Filesystem をマウントする](/ai/ti/guides/mount-filesystem.md)、[Git ワークスペースを管理する](/ai/ti/guides/manage-git-workspaces.md)、[Filesystem ジャーナルを使用する](/ai/ti/guides/use-filesystem-journals.md)、および [Filesystem Vault シークレットを管理する](/ai/ti/guides/manage-filesystem-vault-secrets.md) |
+| マシン、CIジョブ、サンドボックス間でファイルを永続化して共有する | [TiDB Cloud CLI で TiDB Cloud Filesystem を使用する](/ai/ti/guides/manage-filesystems-via-cli.md) |
+| マウントされたワークスペース、Git ワークスペース、ジャーナル、または委任されたシークレットを使用する | [ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md)、[Git ワークスペースを管理する](/tidb-cloud-filesystem/manage-git-workspaces.md)、[ファイルシステム内のジャーナルを使用する](/tidb-cloud-filesystem/use-filesystem-journals.md)、および [ファイルシステムの Vault シークレットを管理する](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md) |
 | エンドツーエンドの自動化またはエージェントの例をたどる | [日次の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md) または [エージェントサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) |
 | コマンド、グローバルオプション、出力動作、エラーを調べる | [TiDB Cloud CLI コマンドリファレンス](/ai/ti/reference/ti-cli-reference.md) |
 

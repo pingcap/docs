@@ -50,10 +50,10 @@ TiDB クラスターのデプロイ手順については、 [TiDB Self-Managed�
 
 ## ステップ3： TiDB Lightningをインストールする {#step-3-install-tidb-lightning}
 
-最新バージョンのTiDB Lightningをインストールするには、以下のコマンドを実行してください。
+対象の TiDB クラスターと同じバージョンの TiDB Lightning を使用することをお勧めします。以下のコマンドを実行して TiDB Lightning をインストールします。`<version>` は対象の TiDB クラスターのバージョン（たとえば `v{{{ .tidb-version }}}`）に置き換えてください。
 
 ```shell
-tiup install tidb-lightning
+tiup install tidb-lightning:<version>
 ```
 
 ## ステップ4： TiDB Lightningを起動する {#step-4-start-tidb-lightning}
@@ -95,11 +95,11 @@ tiup install tidb-lightning
     pd-addr = "172.16.31.3:2379,56.78.90.12:3456"
     ```
 
-2. `tidb-lightning`を実行します。 `SIGHUP`を使用してコマンドラインから直接プログラムを起動したときに、 `nohup`シグナルによってプログラムが終了するのを避けるため、 `nohup`コマンドをスクリプトに記述することをお勧めします。例:
+2. `tidb-lightning`を実行します。 `SIGHUP`を使用してコマンドラインから直接プログラムを起動したときに、 `nohup`シグナルによってプログラムが終了するのを避けるため、 `nohup`コマンドをスクリプトに記述することをお勧めします。以下の例では、`<version>` を[ステップ3](#step-3-install-tidb-lightning)でインストールした TiDB Lightning のバージョンに置き換えてください。
 
     ```shell
     #!/bin/bash
-    nohup tiup tidb-lightning -config tidb-lightning.toml > nohup.out &
+    nohup tiup tidb-lightning:<version> -config tidb-lightning.toml > nohup.out &
     ```
 
 ## ステップ5：データの整合性を確認する {#step-5-check-data-integrity}

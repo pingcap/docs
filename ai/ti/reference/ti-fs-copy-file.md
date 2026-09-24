@@ -1,6 +1,6 @@
 ---
 title: ti fs copy-file
-summary: TiDB Cloud Filesystem との間、またはその内部でファイルをコピーします。
+summary: ファイルシステムとの間、またはその内部でファイルをコピーします。
 ---
 
 # ti fs copy-file
@@ -58,7 +58,7 @@ ti fs copy-file
 - `--from-local <string>`: ローカルのソースパスです。
 - `--from-remote <string>`: TiDB Cloud file system 内のソースパスです。
 - `--from-stdin`: 標準入力から読み取り、`--to-remote` に書き込みます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--layer-id <string>`: コピーした 1 つのファイルを、ベースファイルシステムではなくファイルシステムレイヤーに書き込みます。`--recursive` とは併用できません。
 - `--overwrite`: 既存の宛先ファイルを置き換えます。
@@ -77,7 +77,7 @@ ti fs copy-file
 - ローカルファイルをアップロードする:
 
     ```bash
-    # Copy a local report into the selected remote Filesystem.
+    # Copy a local report into the selected remote file system.
     ti fs copy-file --file-system-id <file-system-id> --from-local ./report.md --to-remote /reports/report.md
     ```
 
@@ -109,7 +109,7 @@ ti fs copy-file
     ti fs copy-file --file-system-id <file-system-id> --from-local ./tail.log --to-remote /logs/app.log --append
     ```
 
-- 標準入力を Filesystem にストリーミングする:
+- 標準入力を file system にストリーミングする:
 
     ```bash
     # Upload generated content without creating an intermediate local file.

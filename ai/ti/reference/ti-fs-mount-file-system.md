@@ -1,11 +1,11 @@
 ---
 title: ti fs mount-file-system
-summary: TiDB Cloud Filesystem をマウントします。
+summary: ファイルシステムをマウントします。
 ---
 
 # ti fs mount-file-system
 
-自動、FUSE、または WebDAV モードで Filesystem をマウントします。このコマンドのエイリアスは `ti fs mount` です。
+自動、FUSE、または WebDAV モードでファイルシステムをマウントします。このコマンドのエイリアスは `ti fs mount` です。
 
 このコマンドはバックグラウンドでマウント処理を開始し、マウントの準備が完了するまで待機してから、結果を出力します。起動に失敗した場合、エラーには診断用のログパスが含まれます。マウントを終了するには `ti fs unmount-file-system` を使用します。
 
@@ -53,7 +53,7 @@ ti fs mount-file-system
 - `--driver <string>`: マウントドライバー: `auto`、`fuse`、または `webdav`。\[default: auto]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--layer-ref <string>`: 書き込み可能なレイヤー ID、一意の名前、または [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references) を介してマウントします。FUSE が必要です。
 - `--local-root <string>`: ローカルオーバーレイルート。省略した場合は `~/.ti/local/fs/<mount-hash>` を使用します。
@@ -74,7 +74,7 @@ ti fs mount-file-system
 
 ## 例 {#examples}
 
-- デフォルトドライバーで Filesystem をマウントします:
+- デフォルトドライバーでファイルシステムをマウントします:
 
     ```bash
     # Let the CLI select the default driver for the current platform.

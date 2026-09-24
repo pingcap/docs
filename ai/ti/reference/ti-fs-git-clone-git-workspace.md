@@ -5,7 +5,7 @@ summary: Git リポジトリをマウントされた TiDB Cloud Filesystem に�
 
 # ti fs-git clone-git-workspace
 
-リポジトリをマウントされた Filesystem パスにクローンします。Hydration は同期的に実行することも、バックグラウンドで実行することもできます。
+リポジトリをマウントされた file system パスにクローンします。Hydration は同期的に実行することも、バックグラウンドで実行することもできます。
 
 > **Note:**
 >
@@ -33,7 +33,7 @@ ti fs-git clone-git-workspace
 - `--blobless`: blobless の部分的なローカル `.git` を作成し、クリーンな blob を別途 hydrate します。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: file system トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した file system 用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--hydrate <string>`: クリーンデータの hydration モード: `auto`、`background`、`sync`、または `off`。`auto` では、blobless クローンはバックグラウンドで hydrate され、blobless でないクローンでは別個の hydration ステップは実行されません。`background` と `sync` には `--blobless` が必要です。`off` は hydration をスキップします。\[default: auto]
 - `--version`: バージョン情報を表示します。
@@ -45,7 +45,7 @@ ti fs-git clone-git-workspace
 - 通常どおりにリポジトリをクローンする場合:
 
     ```bash
-    # Create a complete Git checkout in the mounted Filesystem path.
+    # Create a complete Git checkout in the mounted file system path.
     ti fs-git clone-git-workspace --file-system-id <file-system-id> --repo-url https://github.com/pingcap/tidb.git --target-path /path/to/workspace/tidb
     ```
 

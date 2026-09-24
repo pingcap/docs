@@ -36,7 +36,7 @@ strict-format = true
 
 **原因 4** : TiDB Lightning が古すぎます。
 
-最新バージョンをお試しください。速度が改善されているかもしれません。
+新しいバージョンの TiDB Lightning では、インポートパフォーマンスが向上する可能性があります。アップグレードする場合は、対象の TiDB クラスターのバージョンに一致する TiDB Lightning バージョンを使用することをお勧めします。
 
 ## `tidb-lightning`プロセスがバックグラウンドで実行中に突然終了する {#the-tidb-lightning-process-suddenly-quits-while-running-in-background}
 

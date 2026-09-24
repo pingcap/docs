@@ -1,6 +1,6 @@
 ---
 title: ti fs unmount-file-system
-summary: TiDB Cloud Filesystem をアンマウントします。
+summary: ファイルシステムをアンマウントします。
 ---
 
 # ti fs unmount-file-system
@@ -42,10 +42,10 @@ ti fs unmount-file-system
 
 ## 例 {#examples}
 
-- Filesystem をアンマウントします。
+- ファイルシステムをアンマウントします。
 
     ```bash
-    # Gracefully flush pending writes and detach the Filesystem mount.
+    # Gracefully flush pending writes and detach the file system mount.
     ti fs unmount-file-system --mount-path /path/to/workspace
     ```
 

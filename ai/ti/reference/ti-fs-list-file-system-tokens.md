@@ -5,7 +5,7 @@ summary: 1 つの TiDB Cloud Filesystem のトークンメタデータを一覧�
 
 # ti fs list-file-system-tokens
 
-Filesystem のトークンを一覧表示します。トークン値自体は出力に含まれません。
+file system のトークンを一覧表示します。トークン値自体は出力に含まれません。
 
 > **Note:**
 >
@@ -26,8 +26,8 @@ ti fs list-file-system-tokens
 
 ## オプション {#options}
 
-- `--file-system-id <string>`: トークンを一覧表示する Filesystem を指定します。TiDB Cloud API 認証情報を使用する場合は必須です。`--fs-token` または `TI_FS_TOKEN` で所有者トークンが指定されている場合は、`ti` がそのトークンから ID を導出するため、省略可能です。
-- `--fs-token <string>`: 所有者 Filesystem トークンを使用してリクエストを認可します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した Filesystem 用にローカルに保存されているトークンを使用します。利用可能な Filesystem トークンがない場合、このコマンドは設定済みの TiDB Cloud API キーを使用します。スコープ付きトークンではトークンメタデータを一覧表示できません。
+- `--file-system-id <string>`: トークンを一覧表示する file system を指定します。TiDB Cloud API 認証情報を使用する場合は必須です。`--fs-token` または `TI_FS_TOKEN` で所有者トークンが指定されている場合は、`ti` がそのトークンから ID を導出するため、省略可能です。
+- `--fs-token <string>`: file system 所有者トークンを使用してリクエストを認可します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した file system 用にローカルに保存されているトークンを使用します。利用可能な file system トークンがない場合、このコマンドは設定済みの TiDB Cloud API キーを使用します。スコープ付きトークンではトークンメタデータを一覧表示できません。
 - `--include-expired`: 期限切れのトークンメタデータを含めます。失効済みトークンはサービスから返されません。
 - `--help`: ヘルプ情報を表示します。
 - `--offset <int32>`: 0 ベースのトークンオフセットを設定します [default: 0]。
@@ -61,7 +61,7 @@ ti fs list-file-system-tokens
 - 所有者トークンを使用してトークンメタデータを一覧表示します。
 
     ```bash
-    # The owner token identifies the Filesystem, so --file-system-id is not needed.
+    # The owner token identifies the file system, so --file-system-id is not needed.
     TI_FS_TOKEN="<owner-fs-token>" ti fs list-file-system-tokens --output text
     ```
 

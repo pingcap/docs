@@ -1,6 +1,6 @@
 ---
 title: ti fs-journal search-journal-entries
-summary: Filesystem のジャーナルを検索し、必要に応じて一致するエントリを返します。
+summary: ファイルシステムのジャーナルとエントリを検索します。
 ---
 
 # ti fs-journal search-journal-entries
@@ -38,7 +38,7 @@ ti fs-journal search-journal-entries
 - `--cursor <string>`: 前のページで返されたカーソル。続きから取得する場合は、元のリクエストと同じフィルターを繰り返し指定します。
 - `--entry-type <string>`: エントリタイプのフィルター。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: Filesystem トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択した Filesystem 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--include-entries`: 一致結果に完全なエントリペイロードを含めます。
 - `--journal-kind <string>`: ジャーナル種別のフィルター。

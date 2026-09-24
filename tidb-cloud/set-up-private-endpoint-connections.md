@@ -67,7 +67,8 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 > **Note:**
 >
-> 2023 年 3月 28日以降に作成されたTiDB Cloud Dedicated クラスターごとに、クラスターの作成後 3 ～ 4分後に対応するエンドポイントサービスが自動的に作成されます。
+> - IPv6 経由でクラスターに接続する場合は、追加の IPv6 設定について[プライベートエンドポイント経由で IPv6 接続を使用する](#use-ipv6-connectivity-over-a-private-endpoint)を参照してください。
+> - 2023 年 3月 28日以降に作成されたTiDB Cloud Dedicated クラスターごとに、クラスターの作成後 3 ～ 4分後に対応するエンドポイントサービスが自動的に作成されます。
 
 `TiDB Private Link Service is ready`メッセージが表示された場合、対応するエンドポイントサービスは準備完了です。エンドポイントを作成するには、以下の情報を提供してください。
 
@@ -207,6 +208,45 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 - **Creating**: エンドポイントサービスを作成中です。これには 3 ～ 5分かかります。
 - **Active**: プライベートエンドポイントが作成されたかどうかに関係なく、エンドポイントサービスが作成されます。
 - **Deleting**: エンドポイントサービスまたはクラスターを削除中です。これには 3 ～ 5分かかります。
+
+## プライベートエンドポイント経由で IPv6 接続を使用する {#use-ipv6-connectivity-over-a-private-endpoint}
+
+TiDB Cloud Dedicated は、AWS PrivateLink 経由のインバウンド IPv6 接続をサポートしています。
+
+> **Note:**
+>
+> 現在、IPv6 接続機能はリクエストに応じて利用可能です。この機能を利用するには、[TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) に連絡し、組織 ID を提供してください。
+
+TiDB Cloud では、各 [TiDB node group](/tidb-cloud/tidb-node-group-management.md) の IP プロトコルタイプを個別に設定できます。IPv6 経由で TiDB Cloud Dedicated クラスターに接続するには、対象ノードグループの IP プロトコルタイプをデュアルスタックに切り替えてから、次のようにデュアルスタックの AWS インターフェースエンドポイントを作成します。
+
+### ステップ1. IP プロトコルタイプをデュアルスタックに切り替える {#step-1-switch-the-ip-protocol-type-to-dual-stack}
+
+[TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) が組織に対して IPv6 接続機能を有効にした後、[TiDB Cloud コンソール](https://tidbcloud.com/) で IP プロトコルタイプを切り替えることができます。
+
+1. 組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象クラスターの名前をクリックして概要ページを開き、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
+2. 各 TiDB Cloud Dedicated クラスターにはデフォルトの [TiDB node group](/tidb-cloud/tidb-node-group-management.md) があります。クラスターに複数のノードグループがある場合は、右上の **TiDB Node Group** リストから対象の TiDB ノードグループを選択します。
+3. **AWS Private Endpoints** セクションで、**Edit** をクリックします。
+4. **AWS Private Endpoints Connection Settings** ダイアログで、IP プロトコルタイプとして **Dual Stack (IPv4 + IPv6)** を選択し、**Save** をクリックします。
+
+> **Note:**
+>
+> IP プロトコルタイプを **IPv4 Only** に戻すには、まず IPv6 を使用するすべてのプライベートエンドポイントを削除する必要があります。IPv4 のみを使用するプライベートエンドポイントは削除する必要はありません。
+
+IP プロトコルタイプは、クラスターの作成後にのみ変更できます。
+
+### ステップ2. IPv6 用のデュアルスタック AWS インターフェースエンドポイントを作成する {#step-2-create-a-dual-stack-aws-interface-endpoint-for-ipv6}
+
+[ステップ2. AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint) の説明に従って AWS インターフェースエンドポイントを作成し、次の点に注意してください。
+
+- **IP address type** では、エンドポイントのネットワークインターフェースに IPv4 アドレスと IPv6 アドレスの両方を割り当てるために、**Dualstack** を選択します。
+- **Subnets** では、それぞれが IPv4 CIDR ブロックと IPv6 CIDR ブロックの両方を持つサブネットを選択します。
+- AWS CLI を使用する場合は、生成されたコマンドに `--ip-address-type dualstack` を追加します。
+
+    ```bash
+    aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids} --ip-address-type dualstack
+    ```
+
+その後、[ステップ3](#step-3-create-a-private-endpoint-connection) から [ステップ5](#step-5-connect-to-your-tidb-cluster) までを完了して、プライベートエンドポイント接続を作成し、IPv6 経由でクラスターに接続します。
 
 ## トラブルシューティング {#troubleshooting}
 
