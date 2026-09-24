@@ -33,7 +33,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
 
-- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability. To do this over a private endpoint, the source region must be an allowed region of the target cluster. For more information, see [Use cross-region connections over a private endpoint](#use-cross-region-connections-over-a-private-endpoint).
+- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability, and cross-region connections are not enabled for your organization. If cross-region connections are enabled and the source region is allowed for the target node group, you can use a private endpoint instead. For more information, see [Use cross-region connections over a private endpoint](#use-cross-region-connections-over-a-private-endpoint).
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
@@ -269,8 +269,9 @@ After the setting is saved, the allowed regions are displayed in the **Connectio
 
 > **Notes:**
 >
-> - Each additional supported region incurs an additional cross-region PrivateLink service fee.
-> - Removing a region or switching **Connection Scope** back to **Current Region Only** does not affect existing connections in that region. It only prevents new private endpoints from being created in that region. Connections in a region that is no longer allowed are marked with a warning in the **AWS Private Endpoints** list.
+> - Saving the setting only records the regions that you want to allow. TiDB Cloud applies the update asynchronously, and the allowed regions might still be reconciling even after they are displayed. Before you create the VPC endpoint in the next step, wait until the **Connection Scope** update completes successfully. Otherwise, the endpoint creation can fail even though the region is already displayed. If the update fails, retry it or contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+> - Cross-region connections are billable. AWS charges the service provider for each **active** remote region, that is, a region that has at least one connected interface endpoint, rather than for each region that you allow. As the owner of the VPC endpoint, you are also charged for the standard endpoint-hour and data processing usage and for the cross-region data transfer. In addition, TiDB Cloud charges a cross-region PrivateLink service fee. For details, see [AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/) and [TiDB Cloud Dedicated pricing details](https://www.pingcap.com/tidb-dedicated-pricing-details/).
+> - Removing a region or switching **Connection Scope** back to **Current Region Only** does not affect existing connections in that region. It only prevents new private endpoints from being created there, and it does not disconnect existing endpoints, so AWS charges can continue until those endpoints are deleted. Connections in a region that is no longer allowed are marked with a warning in the **AWS Private Endpoints** list.
 
 ### Step 2. Create a cross-region AWS interface endpoint
 
@@ -278,7 +279,7 @@ Create an AWS interface endpoint as described in [Step 2. Create an AWS interfac
 
 - Create the endpoint in the AWS region where your application runs, which is different from the region of your TiDB Cloud Dedicated cluster. In the AWS Management Console, select **Enable Cross Region endpoint**, then set **Service Region** to the region of your TiDB Cloud Dedicated cluster.
 - For **Subnets**, select subnets in availability zones that support cross-region access. Not all availability zones in a region support cross-region access. If a subnet is in an unsupported availability zone, the creation fails with an error that lists the supported availability zones, and you can select subnets in the listed availability zones instead.
-Before creating a cross-region endpoint, ensure that the caller’s identity policy and applicable Service Control Policy allow `vpce:AllowMultiRegion`.
+- Before creating a cross-region endpoint, ensure that the caller's identity policy and the applicable Service Control Policy allow `vpce:AllowMultiRegion`.
 - If you use the AWS CLI, pass the region of your cluster with `--service-region ${your_cluster_region}`:
 
     ```bash
