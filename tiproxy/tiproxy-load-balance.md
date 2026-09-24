@@ -200,9 +200,9 @@ TiProxyは、接続数の多いTiDBサーバーから接続数の少ないサー
 
 TiProxy では、 [`policy`](/tiproxy/tiproxy-configuration.md#policy)設定項目を通じて負荷分散ポリシーの組み合わせと優先順位を設定できます。
 
-- `resource`: リソース優先度ポリシーは、label、status、health、メモリ、CPU、location、connection count の優先順位に基づいて負荷分散を実行します。
-- `location`: location 優先度ポリシーは、label、status、location、health、メモリ、CPU、connection count の優先順位に基づいて負荷分散を実行します。
-- `connection`: 最小 connection count ポリシーは、label、status、connection count の優先順位に基づいて負荷分散を実行します。
+- `resource`: リソース優先度ポリシーは、ラベル、ステータス、ヘルス、メモリ、CPU、ロケーション、接続数の優先順位に基づいて負荷分散を実行します。
+- `location`: ロケーション優先度ポリシーは、ラベル、ステータス、ロケーション、ヘルス、メモリ、CPU、接続数の優先順位に基づいて負荷分散を実行します。
+- `connection`: 最小接続数ポリシーは、ラベル、ステータス、接続数の優先順位に基づいて負荷分散を実行します。
 
 負荷分散に関連するその他の設定項目については、[`balance`](/tiproxy/tiproxy-configuration.md#balance) を参照してください。
 
