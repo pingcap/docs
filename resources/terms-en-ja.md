@@ -17,9 +17,11 @@
 | block cache | ブロックキャッシュ |  |
 | bloom filter | ブルームフィルター |  |
 | BR | BR | Product name, keep in English. Do not translate to 「ブラジル」. |
+| bucket | バケット |  |
 | Candidate | Candidate | Raft role, keep in English. |
 | Chunk | Chunk | Technical term, keep in English. |
 | Cluster | クラスター | Use long vowel mark. |
+| cluster key | クラスターキー | A feature in TiDB Cloud Lake to improve query performance on large tables. |
 | collation | 照合順序 |  |
 | Column | カラム | Do not translate to 「桁」. |
 | column family | カラムファミリー |  |
@@ -28,6 +30,8 @@
 | Configuration | 設定 |  |
 | Coprocessor | コプロセッサー |  |
 | CTR | CTR | Encryption mode, keep in English. Do not translate to 「クリック率」. |
+| data integration | データ統合 |  |
+| data lineage | データ系譜 |  |
 | Dedicated | Dedicated | TiDB Cloud plan name, keep in English. |
 | Deploy | デプロイ | Do not translate to 「配備」. |
 | disaster recovery | ディザスタリカバリ | No long vowel mark at end. |
@@ -42,7 +46,9 @@
 | experimental | 実験的 |  |
 | Experimental | Experimental | When used as a feature label, keep in English. |
 | Expression index | 式インデックス | Do not translate to 「発見指数」. |
+| Fail-Safe | Fail-Safe | Keep in English. Do not translate to 「フェイルセーフ」. In TiDB Cloud Lake, it refers to mechanisms aimed at recovering lost or accidentally deleted data from object storage. |
 | FAQ | FAQ |  |
+| FeiShuBot | FeiShuBot | Keep in English. Do not translate. A notification-oriented data source in TiDB Cloud Lake for task failure notifications; it is not used to load business data. |
 | Follower | Follower | Raft role, keep in English. |
 | Follower Read | Follower Read | Feature name, keep in English. |
 | functions | 関数 | Do not translate to 「機能」 when referring to SQL/programming functions. |
@@ -59,12 +65,15 @@
 | Ingest | 取り込み |  |
 | Java | Java | Programming language name, keep in English. Do not translate to 「ジャワ」. |
 | Joins | テーブル結合 |  |
+| lakehouse | lakehouse | Keep in English. Do not translate to 「レイクハウス」. |
+| LakeSQL | LakeSQL | Keep in English. Do not translate to 「レイクSQL」. LakeSQL is a command line tool designed specifically for TiDB Cloud Lake. https://github.com/tidbcloud/lakesql |
 | latency | レイテンシー |  |
 | layer | レイヤー |  |
 | Leader | Leader | Raft role, keep in English. |
 | Learner | Learner | Raft role, keep in English. |
 | List COLUMNS partitioning | List COLUMNS パーティショニング |  |
 | List partitioning | List パーティショニング |  |
+| load | ロード | Keep both the English and Japanese terms "ロード (load)" when it first appears in a document. |
 | Maintain | 管理 |  |
 | memory | メモリ |  |
 | Multiple Data Centers in One City Deployment | 1 つの地域に配置された複数のデータセンター |  |
@@ -97,20 +106,25 @@
 | Reparo | Reparo | Tool name, keep in English. Do not translate to 「レパロ」. |
 | Scale in | スケールイン |  |
 | Scattering | Scattering | Technical term, keep in English. |
+| Schema Evolution | Schema Evolution | Feature name. Keep in English. Do not translate to 「スキーマ進化」. A feature that allows TiDB Cloud Lake to automatically add columns that exist in source files but are missing from the target table during `COPY INTO` file loads when `ENABLE_SCHEMA_EVOLUTION` is enabled. |
 | Secondary Cluster | セカンダリクラスター |  |
 | Sequence | シーケンス |  |
 | server | サーバー | Use long vowel mark. |
 | single point of failure | 単一障害点 |  |
 | Stability | 安定性 | Do not translate to 「安定」. |
+| stage | stage | Keep in English. Do not translate. A concept name in TiDB Cloud Lake. It refers to a virtual location where data files reside. |
 | Stale Read | ステイル読み取り | Do not translate to 「古い読み取り」. |
 | Starter | Starter | TiDB Cloud tier name, keep in English. |
+| task flow | タスクフロー | Keep both the English and Japanese terms "タスクフロー(task flow) when it first appears in a document." |
 | TEXT | TEXT | SQL data type, keep in English. |
 | TiCDC Canal | TiCDC Canal | Feature name, keep in English. Do not translate to 「TiCDC運河」. |
 | TiCDC Changefeed | TiCDC Changefeed | Keep space between TiCDC and Changefeed. |
 | TiDB Binlog | TiDB Binlog | Keep space between TiDB and Binlog. |
 | TiDB Cloud | TiDB Cloud | Product name, keep in English. Do not translate to 「TiDB クラウド」. |
+| TiDB Cloud BYOC | TiDB Cloud BYOC | Product plan name, keep in English. |
 | TiDB Cloud Dedicated | TiDB Cloud Dedicated | Product plan name, keep in English. |
 | TiDB Cloud Essential | TiDB Cloud Essential | Product plan name, keep in English. |
+| TiDB Cloud Lake | TiDB Cloud Lake | Product name, keep in English. Do not translate to 「TiDB クラウドレイク」. |
 | TiDB Cloud Premium | TiDB Cloud Premium | Product plan name, keep in English. |
 | TiDB Cloud Starter | TiDB Cloud Starter | Product plan name, keep in English. |
 | TiDB HTAP | TiDB HTAP | Keep in English. |
@@ -133,6 +147,9 @@
 | TiUP DM | TiUP DM | Product name, keep in English. |
 | Top SQL | Top SQL | Feature name, keep in English. |
 | Transaction | トランザクション | Do not translate to 「取引」. |
+| unload | アンロード | Keep both the English and Japanese terms "アンロード (unload)" when it first appears in a document. |
 | View | ビュー | Do not translate to 「意見」. |
+| Warehouse | Warehouse | Keep in English. Do not translate. A concept in TiDB Cloud Lake that represents a set of compute resources including CPU, memory, and local caches. |
 | **Warning:** | **Warning:** | Keep in English, do not translate. |
+| Worksheet | Worksheet | Keep in English. Do not translate. A concept name. Worksheets in TiDB Cloud Lake are used to organize, run, and save SQL statements.  |
 | write-ahead logging | write-ahead logging | Technical term, keep in English. |
