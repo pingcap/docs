@@ -95,15 +95,17 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
     - A default region for CLI operations, specified as a region code such as `aws-us-east-1`. Choose a region where you want to store the file system data. For the regions supported by TiDB Cloud Filesystem, see [Supported regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions).
 
+        The free tier allows one file system for each region. If your organization already has a file system in the region you choose, select a different supported region, add a payment method in the [TiDB Cloud console](https://tidbcloud.com/org-settings/billing/payments), or reuse the existing file system.
+
     - Your TiDB Cloud API public key and private key.
 
-The CLI saves the configuration locally. The file system creation command in the next step verifies that the CLI can access TiDB Cloud using the saved credentials.
+The CLI saves the configuration locally and returns `"credentials_stored": true`. This confirms that the keys were saved on this machine, not that they are valid. The file system creation command in the next step makes the first request that requires authentication and fails if the key pair is invalid.
 
 To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
 ## Step 3. Create a file system
 
-Create a file system and wait until it is ready:
+Create a file system. With the `--wait` option, the command returns only after the file system is usable, so you do not need to check its status:
 
 ```bash
 ti fs create-file-system --display-name my-workspace --wait
@@ -111,7 +113,11 @@ ti fs create-file-system --display-name my-workspace --wait
 
 The command returns information about the new file system. Copy the returned `file_system_id` for use in the next step.
 
-The CLI stores the file system credential locally, so you do not need to provide a file system token for subsequent file operations.
+> **Warning:**
+>
+> The output also contains a file system owner token in the `fs_token` field. This token grants full access to the file system and is returned only when it is issued. It does not expire, so revoke it when it is no longer needed. Treat it as a secret and keep it out of logs, issues, chat messages, and source control. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+
+The CLI stores the file system owner token locally, so you do not need to provide it for subsequent file operations on this machine.
 
 The display name helps you identify the file system, while the file system ID uniquely identifies the resource.
 
