@@ -187,7 +187,7 @@ TiProxy の負荷分散ポリシーの構成。
 + ホットリロードのサポート: yes
 + [ヘルスベースのロードバランシング](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing) を有効にするかどうかを制御します。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-1}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: yes
@@ -198,13 +198,13 @@ TiProxy の負荷分散ポリシーの構成。
 
 メモリベースのロードバランシングの設定です。この項目は、[`policy`](#policy) が `resource` または `location` の場合にのみ有効になります。
 
-##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133}
+##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133span-1}
 
 + デフォルト値: `true`
 + ホットリロードのサポート: yes
 + [メモリベースのロードバランシング](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing) を有効にするかどうかを制御します。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-2}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: yes
@@ -215,13 +215,13 @@ TiProxy の負荷分散ポリシーの構成。
 
 CPU ベースのロードバランシングの設定です。この項目は、[`policy`](#policy) が `resource` または `location` の場合にのみ有効になります。
 
-##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133}
+##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133span-2}
 
 + デフォルト値: `true`
 + ホットリロードのサポート: yes
 + [CPU ベースのロードバランシング](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing) を有効にするかどうかを制御します。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-3}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: yes
@@ -246,13 +246,13 @@ CPU ベースのロードバランシングの設定です。この項目は、[
 
 ロケーションベースのロードバランシングの設定です。この項目は [`policy`](#policy) が `resource` または `location` の場合にのみ有効です。
 
-##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133}
+##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133span-3}
 
 + デフォルト値: `true`
 + ホットリロードのサポート: yes
 + [ロケーションベースのロードバランシング](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing) を有効にするかどうかを制御します。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-4}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: yes
@@ -263,7 +263,7 @@ CPU ベースのロードバランシングの設定です。この項目は、[
 
 接続数ベースのロードバランシングの設定です。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-5}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: yes
