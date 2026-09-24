@@ -43,6 +43,10 @@ MViewAttributesOpt ::=
 
 The `START WITH` and `NEXT` expressions must return `DATETIME` or `TIMESTAMP` values.
 
+> **Important:**
+>
+> TiDB evaluates `START WITH` and `NEXT` expressions in UTC. TiDB also interprets their resulting values in UTC when calculating the schedule time, regardless of the current session `time_zone` setting.
+
 The clauses in `CREATE MATERIALIZED VIEW` must appear in the following order:
 
 1. The materialized view name and column list.
