@@ -53,7 +53,7 @@ The clauses must appear in the order shown in the syntax. `AS OF TIMESTAMP` is s
 
 `COMPLETE DELTA APPLY` recomputes the complete materialized view query. TiDB compares the recomputed result with the current materialized view by its grouping keys and applies only the rows that need to be inserted, deleted, or updated. It is not a fast refresh because it still computes the full query result.
 
-TiDB uses the primary key to locate existing rows when the materialized view has a primary key. Otherwise, TiDB uses the internal row ID. The materialized view query must have grouping keys so that TiDB can compare the current and recomputed results. The comparison and the resulting row changes run in one transaction.
+`COMPLETE DELTA APPLY` requires the materialized view to have an explicit `PRIMARY KEY` or `UNIQUE KEY` so that TiDB can uniquely locate existing rows. The materialized view query must have grouping keys so that TiDB can compare the current and recomputed results. The comparison and the resulting row changes run in one transaction.
 
 ### COMPLETE OUT OF PLACE
 
