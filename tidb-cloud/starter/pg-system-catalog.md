@@ -5,6 +5,7 @@ summary: Learn how to inspect database objects using system catalogs on PostgreS
 
 # PostgreSQL System Catalog
 
+PostgreSQL-compatible {{{ .starter }}} provides `pg_catalog` relations and `information_schema` views for inspecting databases, schemas, tables, columns, indexes, constraints, functions, roles, and other database objects.
 
 ## `pg_catalog` relations
 
