@@ -16,7 +16,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 现已支持通过 AWS PrivateLink 进行入站 IPv6 连接，因此你可以通过 IPv4 或 IPv6 连接到集群。
 
-        目前，此功能可按请求提供。要访问 IPv6 连接，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) 提出请求，然后创建一个双栈 AWS 接口端点。
+        目前，此功能仅按需提供。要访问 IPv6 连接，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) 提出请求，然后创建一个双栈 AWS 接口端点。
 
         更多信息，请参见[通过私有端点使用 IPv6 连接](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint)。
 
