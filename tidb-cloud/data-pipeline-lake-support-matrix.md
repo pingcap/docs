@@ -9,36 +9,36 @@ This document summarizes the DDL, DML, and column type support for TiDB Cloud Da
 
 > **Note:**
 >
-> This compatibility matrix is based on end-to-end testing and is not derived from the Data Pipeline implementation itself. The tested behaviors depend on the specific TiCDC and Lake versions deployed. If you observe different behavior, contact TiDB Cloud Support.
+> This compatibility matrix is based on end-to-end testing and is not derived from the Data Pipeline implementation itself. The tested behaviors depend on the TiCDC and TiDB Cloud Lake versions used in the testing. If you observe different behavior, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
 ## DDL support summary
 
-| DDL pattern                   | Status |
-| ----------------------------- | -----: |
-| `CREATE TABLE`                |      ✅ |
-| `ADD COLUMN`                  |      ✅ |
-| `ADD COLUMN NOT NULL DEFAULT` |      ✅ |
-| `MODIFY COLUMN (widen)`       |      ✅ |
-| `DROP COLUMN`                 |      ✅ |
-| `RENAME COLUMN`               |      ✅ |
+| DDL operation                     | Status |
+| ---------------------------------------- | -----: |
+| `CREATE TABLE`                           |      ✅ |
+| `ADD COLUMN`                             |      ✅ |
+| `ADD COLUMN ... NOT NULL DEFAULT ...`    |      ✅ |
+| `MODIFY COLUMN` (widening a column type) |      ✅ |
+| `DROP COLUMN`                            |      ✅ |
+| `RENAME COLUMN`                          |      ✅ |
 
-DDL operations not listed above are not processed by the pipeline and may block subsequent consumption for the affected table. In addition, combining multiple changes in a single `ALTER TABLE` statement is not supported.
+DDL operations not listed here are not processed by the pipeline and might block subsequent consumption for the affected table. In addition, combining multiple changes in a single `ALTER TABLE` statement is not supported.
 
 ## DML support summary
 
-| DML pattern         | Status |
-| ------------------- | -----: |
-| `INSERT`            |      ✅ |
-| `UPDATE`            |      ✅ |
-| `DELETE`            |      ✅ |
+| DML operation | Status |
+| -------------------- | -----: |
+| `INSERT`             |      ✅ |
+| `UPDATE`             |      ✅ |
+| `DELETE`             |      ✅ |
 
-DML events not listed above are not propagated to the destination.
+DML operations not listed here are not propagated to the destination.
 
 ## Type support summary
 
 | Type category                               | Status |
 | ------------------------------------------- | -----: |
-| `TINYINT` ~ `BIGINT` (including `UNSIGNED`) |      ✅ |
+| `TINYINT`, `SMALLINT`, `MEDIUMINT`, `INT`, and `BIGINT` (including `UNSIGNED` variants) |      ✅ |
 | `BOOLEAN`                                   |      ✅ |
 | `DECIMAL` / `NUMERIC`                       |      ✅ |
 | `FLOAT`                                     |      ✅ |
@@ -53,7 +53,7 @@ DML events not listed above are not propagated to the destination.
 | `BINARY` / `VARBINARY`                      |      ✅ |
 | `BLOB`                                      |      ✅ |
 | `BIT(1)`                                    |      ✅ |
-| `BIT(>1)`                                   |      ✅ |
+| `BIT(M)`, where `2 <= M <= 64`              |      ✅ |
 | `VECTOR`                                    |      ✅ |
 
-Column types not listed above are not tested and may not be supported.
+Column types not listed here have not been tested and might not be supported.
