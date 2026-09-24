@@ -99,7 +99,7 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
     - Your TiDB Cloud API public key and private key.
 
-The CLI saves the configuration locally and returns `"credentials_stored": true`. This confirms that the keys were saved on this machine, not that TiDB Cloud accepts them. The file system creation command in the next step makes the first authenticated call, and an invalid key pair fails there.
+The CLI saves the configuration locally and returns `"credentials_stored": true`. This confirms that the keys were saved on this machine, not that they are valid. The file system creation command in the next step makes the first request that requires authentication and fails if the key pair is invalid.
 
 To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
