@@ -69,6 +69,7 @@ Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
 ### PostgreSQL-compatible Starter
+
 > **Note:**
 >
 > PostgreSQL-compatible TiDB Cloud Starter is currently in limited public preview.

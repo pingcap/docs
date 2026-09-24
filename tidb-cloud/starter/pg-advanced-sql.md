@@ -5,7 +5,7 @@ summary: Learn about PL/pgSQL, triggers, sequences, custom types, and collations
 
 # PostgreSQL Advanced SQL
 
-PostgreSQL-compatible {{{ .starter }}} supports common advanced PostgreSQL SQL features, including PL/pgSQL functions, triggers, sequences, enum and composite types, and custom collations.
+PostgreSQL-compatible {{{ .starter }}} supports common advanced PostgreSQL features, including PL/pgSQL functions, triggers, sequences, enum and composite types, and custom collations.
 
 ## PL/pgSQL
 
@@ -21,7 +21,7 @@ Supported constructs include:
 - `EXIT` and `CONTINUE`
 - `PERFORM`
 - `SELECT ... INTO`
-- `INSERT`, `UPDATE`, and `DELETE ... RETURNING ... INTO`
+- `INSERT ... RETURNING ... INTO`, `UPDATE ... RETURNING ... INTO`, and `DELETE ... RETURNING ... INTO`
 - `RAISE`
 - `RETURN`
 - Dynamic `EXECUTE`, including `INTO` and `USING`
@@ -207,7 +207,6 @@ The following constructs are not supported:
 - Cursor operations
 - `REFCURSOR`
 
-
 ## Triggers
 
 Row-level `BEFORE` and `AFTER` triggers are supported for:
@@ -243,7 +242,7 @@ EXECUTE FUNCTION audit_trigger();
 
 ### Create a BEFORE trigger
 
-A `BEFORE` trigger can modify `NEW`, skip a row with `RETURN NULL`, or reject a row with `RAISE EXCEPTION`.
+A `BEFORE` trigger can modify `NEW` for `INSERT` or `UPDATE` events, skip a row with `RETURN NULL`, or reject a row with `RAISE EXCEPTION`.
 
 For example:
 

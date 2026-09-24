@@ -1,11 +1,11 @@
 ---
 title: PostgreSQL Authentication and Roles
-summary: Learn how to manage PostgreSQL-compatible database roles and privileges on PostgreSQL-compatible TiDB Cloud Starter.
+summary: Learn how to manage database roles and privileges on PostgreSQL-compatible TiDB Cloud Starter.
 ---
 
 # PostgreSQL Authentication and Roles
 
-PostgreSQL-compatible {{{ .starter }}} supports PostgreSQL-compatible database roles, role attributes, object privileges, and session role switching.
+PostgreSQL-compatible {{{ .starter }}} supports database roles, role attributes, object privileges, and session role switching.
 
 This page describes database-level authentication and authorization. TiDB Cloud organization, project, and instance access is managed separately through TiDB Cloud Identity and Access Management.
 
@@ -41,7 +41,7 @@ ALTER ROLE app_user
 PASSWORD 'NewSecurePass1';
 ```
 
-Grant or revoke selected role attributes:
+Set or unset selected role attributes:
 
 ```sql
 ALTER ROLE app_user CREATEDB;
@@ -59,7 +59,7 @@ The following common role attributes are supported:
 | `CREATEDB` / `NOCREATEDB` | Controls whether the role can create databases. |
 | `BYPASSRLS` / `NOBYPASSRLS` | Controls whether the role bypasses row-level security policies. |
 
-Grant `BYPASSRLS` only to trusted administrative or service roles.
+Set the `BYPASSRLS` attribute only to trusted administrative or service roles.
 
 
 ## Grant table privileges
@@ -172,7 +172,7 @@ TO app_user;
 
 ## Grant privileges on future objects
 
-Use `ALTER DEFAULT PRIVILEGES` to configure privileges for subsequently created objects.
+Use `ALTER DEFAULT PRIVILEGES` to configure privileges for objects subsequently created by the current role.
 
 For example, grant `SELECT` on future tables:
 
@@ -273,7 +273,7 @@ ORDER BY table_name, grantee, privilege_type;
 
 ## Drop a role
 
-Before dropping a role, revoke privileges and role memberships that depend on it.
+Before dropping a role, resolve dependencies such as objects owned by the role and privileges granted to it.
 
 For example:
 

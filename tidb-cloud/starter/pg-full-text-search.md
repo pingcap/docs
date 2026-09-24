@@ -1,6 +1,6 @@
 ---
 title: Full-Text Search
-summary: Learn how to use PostgreSQL-compatible full-text search on PostgreSQL-compatible TiDB Cloud Starter.
+summary: Learn how to use full-text search on PostgreSQL-compatible TiDB Cloud Starter.
 ---
 
 # Full-Text Search
@@ -69,11 +69,9 @@ When the expression used by the `@@` operator matches the indexed expression, th
 
 Use `simple` for exact token matching:
 
-```sql
-CREATE INDEX idx_documents_simple
-ON documents
-USING GIN (to_tsvector('simple', content));
+The following query can use the GIN expression index created in the previous section because it uses the same `to_tsvector('simple', content)` expression.
 
+```sql
 SELECT *
 FROM documents
 WHERE to_tsvector('simple', content)
@@ -175,8 +173,8 @@ For example:
 ```sql
 CREATE TABLE articles (
     id BIGSERIAL PRIMARY KEY,
-    title TEXT,
-    body TEXT,
+    title TEXT NOT NULL,
+    body TEXT NOT NULL,
     tsv TSVECTOR
 );
 

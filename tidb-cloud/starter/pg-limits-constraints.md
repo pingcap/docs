@@ -11,7 +11,7 @@ This document describes SQL engine limits and constraints that apply to PostgreS
 >
 > PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview. Limits and constraints might change during the preview.
 
-This page focuses on SQL engine behavior. For the monthly free quota and product-level limits of PostgreSQL-compatible {{{ .starter }}}, see the TiDB Cloud Starter plan documentation.
+This page focuses on SQL engine behavior. For the monthly free quota and product-level limits of PostgreSQL-compatible {{{ .starter }}}, see [TiDB Cloud Starter plan documentation](/tidb-cloud/select-cluster-tier.md#postgresql-compatible-starter).
 
 ## Engine limits
 
@@ -39,7 +39,6 @@ Set it to `0` to disable the timeout for the current session:
 ```sql
 SET statement_timeout = 0;
 ```
-
 
 ## Character encoding
 
@@ -91,7 +90,6 @@ SELECT *
 FROM numbers;
 ```
 
-
 ## Array constraints
 
 One-dimensional arrays are supported.
@@ -106,7 +104,6 @@ CREATE TABLE articles (
     tags TEXT[]
 );
 ```
-
 
 ## COPY constraints
 
@@ -150,7 +147,6 @@ The following PostgreSQL index access methods are not supported:
 - SP-GiST
 - BRIN
 
-
 ## HNSW constraints
 
 HNSW indexes have additional requirements.
@@ -159,12 +155,11 @@ In particular:
 
 - An HNSW index contains one vector column.
 - The indexed column must declare an explicit vector dimension, such as `VECTOR(1024)`.
-- The table must have a single-column primary key.
+- The table must have a single-column primary key. If the primary key is `INTEGER` or `BIGINT`, its values must be non-negative.
 - Partial HNSW indexes are not supported.
 - The query must use a compatible distance operator and query shape for the optimizer to use the HNSW index.
 
 Queries that do not meet the HNSW planning requirements fall back to an exact scan.
-
 
 ## Full-text search constraints
 
@@ -174,7 +169,6 @@ PostgreSQL-compatible full-text search has the following notable constraints:
 - Prefix matching with the `:*` flag is not supported.
 - `ts_headline()` does not highlight Chinese Han-script terms.
 - The maximum `TSVECTOR` value size is 1 MiB.
-
 
 ## PL/pgSQL constraints
 
@@ -206,7 +200,6 @@ Supported events:
 
 `FOR EACH STATEMENT` is accepted but currently executes with per-row behavior. Use `FOR EACH ROW` when you need predictable trigger semantics.
 
-
 ## Sequence constraints
 
 Sequence options such as the following can be specified when a sequence is created:
@@ -222,15 +215,13 @@ Sequence options such as the following can be specified when a sequence is creat
 
 Use `setval()` to reposition an existing sequence.
 
-
 ## Custom type constraints
 
-Enum and composite types are supported with compatibility differences.
+Enum and composite types are supported with compatibility differences. Composite types can be declared and written using text literals, but their fields cannot be read individually.
 
 For enum types, comparison and ordering use label text rather than declaration order.
 
 If application logic depends on enum order, use an explicit rank instead of relying on enum comparison order.
-
 
 ## Collation constraints
 
@@ -241,7 +232,6 @@ Custom collations are supported with the following limitations:
 - Aggregate and window `ORDER BY` expressions do not apply custom collation ordering.
 - Custom collations are not fully represented in the PostgreSQL system catalogs.
 
-
 ## System catalog constraints
 
 The PostgreSQL-compatible system catalog is intended for common introspection workflows but is not identical to upstream PostgreSQL.
@@ -249,10 +239,9 @@ The PostgreSQL-compatible system catalog is intended for common introspection wo
 In particular:
 
 - Not every upstream system catalog relation or view is available.
-- Some views expose a subset of upstream PostgreSQL columns.
+- Some system catalog relations expose a subset of upstream PostgreSQL columns.
 - Some catalog objects can exist for compatibility even when the corresponding PostgreSQL feature is unsupported.
 - `information_schema.views` is not available.
-
 
 ## Extension limits
 
@@ -262,6 +251,5 @@ For example:
 
 - Vector search has HNSW index and query-shape constraints.
 - Full-text search has tokenizer and query constraints.
-- Parquet import supports only documented source schemes and type mappings.
+- Parquet import supports only documented URL schemes and type mappings.
 - Only extensions explicitly provided by TiDB Cloud are supported.
-

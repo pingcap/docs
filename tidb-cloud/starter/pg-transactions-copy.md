@@ -172,12 +172,12 @@ BEGIN;
 INSERT INTO users (id, name)
 VALUES (1, 'Alice');
 
--- If the next statement fails, the transaction enters a failed state.
+-- If a statement fails here, the transaction enters a failed state.
 
 ROLLBACK;
 ```
 
-After a transaction enters the failed state, roll it back before continuing with normal SQL operations.
+After a transaction enters the failed state, either use `ROLLBACK` or roll back to a prior savepoint before continuing with normal SQL operations.
 
 ## COPY
 

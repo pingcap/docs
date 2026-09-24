@@ -1,11 +1,11 @@
 ---
 title: PostgreSQL Row-Level Security
-summary: Learn how to use PostgreSQL-compatible row-level security policies on PostgreSQL-compatible TiDB Cloud Starter.
+summary: Learn how to use row-level security policies on PostgreSQL-compatible TiDB Cloud Starter.
 ---
 
 # PostgreSQL Row-Level Security
 
-PostgreSQL-compatible {{{ .starter }}} supports PostgreSQL-compatible Row-Level Security (RLS). RLS lets you control which rows a database role can view, insert, update, or delete.
+PostgreSQL-compatible {{{ .starter }}} supports PostgreSQL-compatible Row-Level Security (RLS). RLS further restricts which rows a database role can view, insert, update, or delete, in addition to the role's table privileges.
 
 RLS policies are evaluated by the database for each applicable query. This makes RLS useful for multi-tenant applications and other workloads that require row-specific access controls.
 
@@ -144,7 +144,7 @@ USING (user_id = current_user);
 
 ## Example: public and private rows
 
-The following example allows all users to see published posts and authors to see their own unpublished posts.
+The following example allows roles that have SELECT privilege on the table to see published posts and authors to see their own unpublished posts.
 
 Create the table and enable RLS:
 
@@ -177,7 +177,7 @@ FOR SELECT
 USING (author = current_user);
 ```
 
-Because both policies are permissive by default, a row is visible if either policy allows it.
+Because both policies are permissive by default, a role with SELECT privilege can see a row if either applicable policy allows it.
 
 ## Permissive and restrictive policies
 

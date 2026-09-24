@@ -1,11 +1,10 @@
 ---
 title: PostgreSQL System Catalog
-summary: Learn how to inspect database objects using PostgreSQL-compatible system catalogs on PostgreSQL-compatible TiDB Cloud Starter.
+summary: Learn how to inspect database objects using system catalogs on PostgreSQL-compatible TiDB Cloud Starter.
 ---
 
 # PostgreSQL System Catalog
 
-PostgreSQL-compatible {{{ .starter }}} provides PostgreSQL-compatible `pg_catalog` relations and `information_schema` views for inspecting databases, schemas, tables, columns, indexes, constraints, functions, roles, and other database objects.
 
 ## `pg_catalog` relations
 
@@ -64,7 +63,7 @@ The following `information_schema` views are available:
 | `sequences` | Sequences. |
 | `routines` | Functions and procedures. |
 | `table_constraints` | Primary key, foreign key, check, and unique constraints. |
-| `key_column_usage` | Primary-key and foreign-key columns. |
+| `key_column_usage` | Columns in primary-key, unique, and foreign-key constraints. |
 | `referential_constraints` | Foreign-key relationships. |
 | `check_constraints` | Check constraints. |
 | `constraint_column_usage` | Columns referenced by constraints. |
@@ -188,7 +187,9 @@ SELECT
 FROM information_schema.table_constraints AS tc
 LEFT JOIN information_schema.key_column_usage AS kcu
     ON kcu.constraint_name = tc.constraint_name
+    AND kcu.constraint_schema = tc.constraint_schema
     AND kcu.table_schema = tc.table_schema
+    AND kcu.table_name = tc.table_name
 LEFT JOIN information_schema.check_constraints AS cc
     ON cc.constraint_name = tc.constraint_name
     AND cc.constraint_schema = tc.constraint_schema
@@ -219,19 +220,23 @@ Use `information_schema` to inspect outbound foreign keys:
 SELECT
     tc.constraint_name,
     kcu.column_name AS fk_column,
-    ccu.table_name AS referenced_table,
-    ccu.column_name AS referenced_column,
+    referenced_kcu.table_name AS referenced_table,
+    referenced_kcu.column_name AS referenced_column,
     rc.update_rule,
     rc.delete_rule
 FROM information_schema.table_constraints AS tc
 JOIN information_schema.key_column_usage AS kcu
     ON kcu.constraint_name = tc.constraint_name
+    AND kcu.constraint_schema = tc.constraint_schema
     AND kcu.table_schema = tc.table_schema
+    AND kcu.table_name = tc.table_name
 JOIN information_schema.referential_constraints AS rc
     ON rc.constraint_name = tc.constraint_name
     AND rc.constraint_schema = tc.constraint_schema
-JOIN information_schema.constraint_column_usage AS ccu
-    ON ccu.constraint_name = rc.unique_constraint_name
+JOIN information_schema.key_column_usage AS referenced_kcu
+    ON referenced_kcu.constraint_name = rc.unique_constraint_name
+    AND referenced_kcu.constraint_schema = rc.unique_constraint_schema
+    AND referenced_kcu.ordinal_position = kcu.position_in_unique_constraint
 WHERE tc.constraint_type = 'FOREIGN KEY'
   AND tc.table_schema = 'public'
   AND tc.table_name = 'my_table'
@@ -332,7 +337,6 @@ SELECT
 FROM pg_extension
 ORDER BY extname;
 ```
-
 
 ## System catalog compatibility
 

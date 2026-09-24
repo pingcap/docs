@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL Session Parameters
-summary: Learn how to view and configure PostgreSQL-compatible session parameters on PostgreSQL-compatible TiDB Cloud Starter.
+summary: Learn how to view and configure PostgreSQL session parameters on PostgreSQL-compatible TiDB Cloud Starter.
 ---
 
 # PostgreSQL Session Parameters
@@ -202,7 +202,7 @@ The following PostgreSQL-compatible parameters are also recognized:
 - `row_security`
 - `xmloption`
 
-The following server-state parameters are readable with `SHOW`:
+The following additional parameters are readable with `SHOW`:
 
 - `is_superuser`
 - `listen_addresses`
@@ -290,7 +290,7 @@ The default value is `40`. A higher value can improve recall at the cost of addi
 
 ## Embedding parameter
 
-The `embedding.dimensions` parameter controls the output dimension used by supported server-side embedding functions.
+After you enable the `embedding` extension, the `embedding.dimensions` parameter controls the output dimension used by supported server-side embedding functions.
 
 For example:
 
