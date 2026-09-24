@@ -165,7 +165,7 @@ grep -i "CREATE RULE" schema.sql
 
 Remove or rewrite unsupported statements before importing the schema.
 
-Also review the schema for unsupported data types, index access methods, PL/pgSQL constructs, and extensions. For details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+Also review the schema for unsupported data types, index access methods, PL/pgSQL constructs, and extensions. For more information, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 #### SERIAL and identity columns
 
@@ -277,7 +277,7 @@ SELECT max(id) FROM users;
 
 Connect your application to the PostgreSQL-compatible {{{ .starter }}} instance and run your application test suite.
 
-Pay particular attention to application logic that depends on PostgreSQL features that are unsupported or behave differently. For details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+Pay particular attention to application logic that depends on PostgreSQL features that are unsupported or behave differently. For more information, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## Limitations
 
