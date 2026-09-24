@@ -135,19 +135,6 @@ To learn more about installing, configuring, and updating TiDB Cloud CLI, see [I
 
     Unmounting removes the local mount, but the files remain in TiDB Cloud Filesystem and can be accessed again from the same or another environment.
 
-## (Optional) Clean up
-
-When you no longer need the file system created in this quick start, delete it:
-
-```bash
-ti fs delete-file-system \
-  --file-system-id "<file-system-id>"
-```
-
-Replace `<file-system-id>` with the file system ID returned in Step 3.
-
-Deleting the file system removes the remote resource and its data.
-
 ## What's next
 
 - [Manage File Systems in TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your file systems.
