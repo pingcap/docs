@@ -1,0 +1,342 @@
+---
+title: Explore PostgreSQL-compatible SQL with TiDB Cloud
+summary: Learn about the basic SQL statements supported by PostgreSQL-compatible TiDB Cloud Starter.
+---
+
+# Explore PostgreSQL-compatible SQL with TiDB Cloud
+
+PostgreSQL-compatible {{{ .starter }}} supports the PostgreSQL wire protocol and common PostgreSQL syntax. You can use most PostgreSQL clients, drivers, and ORMs to work with your instance.
+
+This page walks you through basic SQL operations, including DDL, DML, DQL, DCL, and transaction control.
+
+For PostgreSQL features that are unsupported or behave differently, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+
+## Categories
+
+SQL statements can be grouped into the following categories according to their functions:
+
+- **DDL (Data Definition Language)**: defines and manages database objects, including databases, schemas, tables, views, indexes, sequences, and types.
+- **DML (Data Manipulation Language)**: inserts, updates, and deletes table data.
+- **DQL (Data Query Language)**: queries data using `SELECT`, filtering, joins, aggregation, subqueries, common table expressions (CTEs), and other query features.
+- **DCL (Data Control Language)**: manages privileges and role membership.
+- **Transaction control**: manages transactions using statements such as `BEGIN`, `COMMIT`, `ROLLBACK`, and `SAVEPOINT`.
+
+Common DDL operations include creating, modifying, and dropping objects. The corresponding commands are `CREATE`, `ALTER`, and `DROP`.
+
+## List, create, and drop databases
+
+To list databases, query the `pg_database` system catalog:
+
+```sql
+SELECT datname
+FROM pg_database
+ORDER BY datname;
+```
+
+To create a database named `samp_db`, use the `CREATE DATABASE` statement:
+
+```sql
+CREATE DATABASE samp_db;
+```
+
+To connect to the database when using `psql`, use the `\connect` command:
+
+```text
+\connect samp_db
+```
+
+> **Note:**
+>
+> `\connect` is a `psql` client command, not a SQL statement.
+
+To drop a database, first connect to another database:
+
+```text
+\connect postgres
+```
+
+Then use the `DROP DATABASE` statement:
+
+```sql
+DROP DATABASE samp_db;
+```
+
+## Create, list, and drop tables
+
+To create a table, use the `CREATE TABLE` statement.
+
+For example, create a table named `person`:
+
+```sql
+CREATE TABLE person (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    birthday DATE
+);
+```
+
+To list tables in the `public` schema:
+
+```sql
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public'
+  AND table_type = 'BASE TABLE'
+ORDER BY table_name;
+```
+
+To view the columns of the `person` table:
+
+```sql
+SELECT
+    column_name,
+    data_type,
+    is_nullable,
+    column_default
+FROM information_schema.columns
+WHERE table_schema = 'public'
+  AND table_name = 'person'
+ORDER BY ordinal_position;
+```
+
+To drop the table, use the `DROP TABLE` statement:
+
+```sql
+DROP TABLE person;
+```
+
+## Create, list, and drop indexes
+
+Indexes can improve query performance on indexed columns.
+
+To create an index on the `name` column:
+
+```sql
+CREATE INDEX person_name_idx ON person (name);
+```
+
+To create a unique index:
+
+```sql
+CREATE UNIQUE INDEX person_name_unique_idx ON person (name);
+```
+
+To list the indexes on the `person` table:
+
+```sql
+SELECT
+    indexname,
+    indexdef
+FROM pg_indexes
+WHERE schemaname = 'public'
+  AND tablename = 'person'
+ORDER BY indexname;
+```
+
+To drop an index, use the `DROP INDEX` statement:
+
+```sql
+DROP INDEX person_name_idx;
+```
+
+For supported PostgreSQL index methods and compatibility differences, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+
+## Insert, update, and delete data
+
+Common DML operations use the `INSERT`, `UPDATE`, and `DELETE` statements.
+
+To insert a row into the `person` table:
+
+```sql
+INSERT INTO person (name, birthday)
+VALUES ('Tom', DATE '1990-09-12');
+```
+
+To insert multiple rows:
+
+```sql
+INSERT INTO person (name, birthday)
+VALUES
+    ('Alice', DATE '1992-05-01'),
+    ('Bob', DATE '1993-08-08');
+```
+
+PostgreSQL-compatible {{{ .starter }}} supports `RETURNING`. For example, return the generated ID after inserting a row:
+
+```sql
+INSERT INTO person (name, birthday)
+VALUES ('Carol', DATE '1994-03-15')
+RETURNING id, name;
+```
+
+To update a row:
+
+```sql
+UPDATE person
+SET birthday = DATE '1990-10-12'
+WHERE name = 'Tom';
+```
+
+To delete a row:
+
+```sql
+DELETE FROM person
+WHERE name = 'Bob';
+```
+
+> **Note:**
+>
+> `UPDATE` and `DELETE` statements without a `WHERE` clause operate on all rows in the table.
+
+### Upsert data
+
+Use `INSERT ... ON CONFLICT` to insert a row or handle a uniqueness conflict.
+
+For example:
+
+```sql
+CREATE TABLE account (
+    id BIGSERIAL PRIMARY KEY,
+    email TEXT UNIQUE,
+    name TEXT
+);
+
+INSERT INTO account (email, name)
+VALUES ('alice@example.com', 'Alice')
+ON CONFLICT (email)
+DO UPDATE SET name = excluded.name;
+```
+
+## Query data
+
+Use the `SELECT` statement to query data.
+
+To query all columns:
+
+```sql
+SELECT *
+FROM person;
+```
+
+To query specific columns:
+
+```sql
+SELECT id, name
+FROM person;
+```
+
+Use a `WHERE` clause to filter rows:
+
+```sql
+SELECT id, name, birthday
+FROM person
+WHERE birthday >= DATE '1992-01-01'
+ORDER BY birthday;
+```
+
+PostgreSQL-compatible {{{ .starter }}} also supports common PostgreSQL query features such as joins, subqueries, CTEs, recursive CTEs, window functions, and set operations.
+
+For example, use a CTE to filter data:
+
+```sql
+WITH recent_people AS (
+    SELECT id, name, birthday
+    FROM person
+    WHERE birthday >= DATE '1992-01-01'
+)
+SELECT *
+FROM recent_people
+ORDER BY birthday;
+```
+
+## Manage transactions
+
+Use `BEGIN` and `COMMIT` to execute multiple statements in a transaction:
+
+```sql
+BEGIN;
+
+UPDATE account
+SET name = 'Alice Chen'
+WHERE email = 'alice@example.com';
+
+COMMIT;
+```
+
+To discard changes in the current transaction, use `ROLLBACK`:
+
+```sql
+BEGIN;
+
+DELETE FROM account
+WHERE email = 'alice@example.com';
+
+ROLLBACK;
+```
+
+Savepoints are also supported:
+
+```sql
+BEGIN;
+
+UPDATE account
+SET name = 'Alice'
+WHERE email = 'alice@example.com';
+
+SAVEPOINT before_second_update;
+
+UPDATE account
+SET name = 'Alice Updated'
+WHERE email = 'alice@example.com';
+
+ROLLBACK TO SAVEPOINT before_second_update;
+
+COMMIT;
+```
+
+For supported transaction isolation levels and PostgreSQL compatibility differences, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+
+## Create, grant privileges to, and drop a role
+
+DCL statements are used to manage privileges and role membership.
+
+To create a role that can log in:
+
+```sql
+CREATE ROLE app_user
+LOGIN
+PASSWORD 'SecurePass1';
+```
+
+Grant the role access to the `public` schema and permission to query the `person` table:
+
+```sql
+GRANT USAGE ON SCHEMA public TO app_user;
+GRANT SELECT ON person TO app_user;
+```
+
+To check table privileges granted to the role:
+
+```sql
+SELECT
+    grantee,
+    table_schema,
+    table_name,
+    privilege_type
+FROM information_schema.table_privileges
+WHERE grantee = 'app_user'
+ORDER BY table_schema, table_name, privilege_type;
+```
+
+To revoke the privileges:
+
+```sql
+REVOKE SELECT ON person FROM app_user;
+REVOKE USAGE ON SCHEMA public FROM app_user;
+```
+
+To delete the role:
+
+```sql
+DROP ROLE app_user;
+```

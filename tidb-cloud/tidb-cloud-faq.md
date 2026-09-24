@@ -27,9 +27,17 @@ TiDB Cloud is a fully managed cloud Database as a Service of TiDB. It has an eas
 
 Currently, TiDB Cloud supports the majority of MySQL 5.7 and MySQL 8.0 syntax with the exception of triggers, stored procedures, and user-defined functions. For more details, see [Compatibility with MySQL](/mysql-compatibility.md).
 
+### Does TiDB Cloud support PostgreSQL?
+
+Yes. PostgreSQL-compatible TiDB Cloud Starter is currently available in limited public preview.
+
+PostgreSQL-compatible {{{ .starter }}} instances support the PostgreSQL wire protocol (pgwire v3) and common PostgreSQL SQL syntax. For details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+
 ### What programming languages can I use to work with TiDB Cloud?
 
-You can use any language supported by the MySQL client or driver.
+For MySQL-compatible TiDB Cloud resources, you can use any programming language supported by a MySQL client or driver.
+
+For PostgreSQL-compatible {{{ .starter }}} instances, you can use programming languages and frameworks that support standard PostgreSQL clients or drivers.
 
 ### Where can I run TiDB Cloud?
 
