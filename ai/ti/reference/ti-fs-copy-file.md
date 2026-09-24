@@ -50,13 +50,13 @@ ti fs copy-file
 
 ## Options
 
-- `--append`: Append the contents of a local file to a file in the TiDB Cloud file system.
-- `--create-parents`: Create missing local parent directories when copying from a TiDB Cloud file system.
+- `--append`: Append the contents of a local file to a file in the TiDB Cloud Filesystem.
+- `--create-parents`: Create missing local parent directories when copying from a TiDB Cloud Filesystem.
 - `--description <string>`: The file description for `--to-remote` operation.
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
 - `--from-local <string>`: The local source path.
-- `--from-remote <string>`: The source path in the TiDB Cloud file system.
+- `--from-remote <string>`: The source path in the TiDB Cloud Filesystem.
 - `--from-stdin`: Read from stdin and write to `--to-remote`.
 - `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
@@ -66,7 +66,7 @@ ti fs copy-file
 - `--resume`: Resume an active copy operation.
 - `--tag <string>`: Create tags `key=value` for `--to-remote` operation; repeatable.
 - `--to-local <string>`: The local destination path.
-- `--to-remote <string>`: The destination path in the TiDB Cloud file system.
+- `--to-remote <string>`: The destination path in the TiDB Cloud Filesystem.
 - `--to-stdout`: Write `--from-remote` to stdout.
 - `--version`: Display version information.
 

@@ -39,7 +39,7 @@ ti fs pack-file-system
 - `--mount-path <string>`: The local mounted path.
 - `--mount-profile <string>`: Select a [mount profile](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays): `coding-agent`, `portable`, or `none`. If omitted, uses `none`.
 - `--path <string>`: Local overlay path for packing; repeatable.
-- `--remote-root <string>`: The TiDB Cloud file system root represented by the local overlay. \[default: /]
+- `--remote-root <string>`: The TiDB Cloud Filesystem root represented by the local overlay. \[default: /]
 - `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
