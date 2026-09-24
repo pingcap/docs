@@ -63,11 +63,9 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
     <CustomContent plan="byoc">
 
-    > For BYOC, after the IAM role is created, add the following tag to the role before using the Role ARN for data import:
+    > **Note:**
     >
-    > `tidbcloud.com/allow-dataplane-access=true`
-    >
-    > This tag is required for TiDB Cloud to use the role to access the BYOC data plane.
+    > For {{{ .byoc }}}, after the IAM role is created, add the `tidbcloud.com/allow-dataplane-access=true` tag to the role before using the Role ARN for data import. This tag is required for TiDB Cloud to use the role to access the BYOC data plane.
 
     </CustomContent>
 
