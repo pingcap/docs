@@ -67,7 +67,8 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 
 > **Note:**
 >
-> 对于 2023 年 3 月 28 日之后创建的每个 TiDB Cloud 专属集群，系统会在集群创建后 3 到 4 分钟内自动创建对应的终端节点服务。
+> - 如果你想通过 IPv6 连接到集群，请参见[通过私有终端节点使用 IPv6 连接](#use-ipv6-connectivity-over-a-private-endpoint)了解额外的 IPv6 配置。
+> - 对于 2023 年 3 月 28 日之后创建的每个 TiDB Cloud 专属集群，系统会在集群创建后 3 到 4 分钟内自动创建对应的终端节点服务。
 
 如果你看到 `TiDB Private Link Service is ready` 消息，说明对应的终端节点服务已就绪。你可以使用以下信息创建终端节点。
 
@@ -202,6 +203,45 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-
 - **Creating**：终端节点服务正在创建中，通常需要 3 到 5 分钟。
 - **Active**：终端节点服务已创建，无论私有终端节点是否已创建。
 - **Deleting**：终端节点服务或集群正在删除中，通常需要 3 到 5 分钟。
+
+## 通过私有终端节点使用 IPv6 连接 {#use-ipv6-connectivity-over-a-private-endpoint}
+
+TiDB Cloud Dedicated 支持通过 AWS PrivateLink 进行入站 IPv6 连接。
+
+> **Note:**
+>
+> 当前，IPv6 连接功能需按需申请。如需使用此功能，请联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) 并提供你的组织 ID。
+
+在 TiDB Cloud 中，你可以为每个 [TiDB 节点组](/tidb-cloud/tidb-node-group-management.md)单独配置 IP 协议类型。要通过 IPv6 连接到 TiDB Cloud Dedicated 集群，请将目标节点组的 IP 协议类型切换为双栈，然后按如下方式创建双栈 AWS 接口终端节点：
+
+### Step 1. 将 IP 协议类型切换为双栈 {#step-1-switch-the-ip-protocol-type-to-dual-stack}
+
+在 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) 为你的组织启用 IPv6 连接功能后，你可以在 [TiDB Cloud console](https://tidbcloud.com/) 中切换 IP 协议类型。
+
+1. 进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标集群名称进入其概览页面，然后在左侧导航栏中点击 **Settings** > **Networking**。
+2. 每个 TiDB Cloud Dedicated 集群都有一个默认的 [TiDB 节点组](/tidb-cloud/tidb-node-group-management.md)。如果你的集群有多个节点组，请从右上角的 **TiDB Node Group** 列表中选择目标 TiDB 节点组。
+3. 在 **AWS Private Endpoints** 部分，点击 **Edit**。
+4. 在 **AWS Private Endpoints Connection Settings** 对话框中，选择 **Dual Stack (IPv4 + IPv6)** 作为 IP 协议类型，然后点击 **Save**。
+
+> **Note:**
+>
+> 若要将 IP 协议类型切换回 **IPv4 Only**，你必须先删除所有使用 IPv6 的私有终端节点。仅使用 IPv4 的私有终端节点无需删除。
+
+只有在集群创建完成后，才能更改 IP 协议类型。
+
+### Step 2. 为 IPv6 创建双栈 AWS 接口终端节点 {#step-2-create-a-dual-stack-aws-interface-endpoint-for-ipv6}
+
+按照[Step 2. Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint) 中的说明创建 AWS 接口终端节点，并注意以下事项：
+
+- 对于 **IP address type**，选择 **Dualstack**，以便为终端节点网络接口同时分配 IPv4 和 IPv6 地址。
+- 对于 **Subnets**，选择同时具有 IPv4 CIDR 块和 IPv6 CIDR 块的子网。
+- 如果你使用 AWS CLI，请在生成的命令后追加 `--ip-address-type dualstack`：
+
+    ```bash
+    aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids} --ip-address-type dualstack
+    ```
+
+然后完成[Step 3](#step-3-create-a-private-endpoint-connection)到[Step 5](#step-5-connect-to-your-tidb-cluster)，以创建私有终端节点连接并通过 IPv6 连接到你的集群。
 
 ## 故障排查
 
