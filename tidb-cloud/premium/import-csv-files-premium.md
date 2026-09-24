@@ -81,6 +81,12 @@ To allow {{{ .premium }}} to access the CSV files in Amazon S3 or Alibaba Cloud 
 
     You can use either an AWS access key or a Role ARN to access your bucket. Once finished, make a note of the access key (including the access key ID and secret access key) or the Role ARN value as you will need it in [Step 4](#step-4-import-csv-files).
 
+    <CustomContent plan="byoc">
+
+    For {{{ .byoc }}}, if you use an AWS Role ARN, make sure the IAM role has the tag `tidbcloud.com/allow-dataplane-access=true` before starting the import.
+
+    </CustomContent>
+
 - If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your {{{ .premium }}} instance.
 
 ## Step 4. Import CSV files
