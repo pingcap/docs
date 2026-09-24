@@ -53,6 +53,18 @@ For more information, see [Performance Optimization](/tidb-cloud-lake/guides/per
 
 Together, these capabilities support batch ingestion, change data capture (CDC), incremental ETL, scheduled transformations, and downstream analytical tables without requiring every pipeline to rely on separate orchestration tooling.
 
+### Replicate TiDB Cloud data continuously
+
+TiDB Cloud Data Pipeline replicates full and incremental data from a TiDB Cloud instance to {{{ .lake }}} without requiring a third-party ETL tool. It first exports a full snapshot of the selected tables, and then continuously replicates row changes, including inserts, updates, and deletes, so that analytical data stays current.
+
+You can use this integration to:
+
+- Replicate operational TiDB data to an analytical warehouse.
+- Keep dashboards and reports up to date.
+- Make continuously updated data available to analytics, search, vector, and AI workloads in {{{ .lake }}}.
+
+Data Pipeline uses TiCDC for incremental replication and an external stage to transfer data between TiDB Cloud and {{{ .lake }}}. Availability and restrictions depend on your TiDB Cloud plan. For details, see [Data Pipeline to TiDB Cloud Lake](/tidb-cloud/data-pipeline/data-pipeline-overview.md).
+
 ### Work with structured and semi-structured data
 
 You can use SQL to store, query, clean, and transform relational and semi-structured data in the same platform. The `VARIANT` data type preserves nested **JSON** structures, while JSON path expressions let you access nested fields, virtual columns accelerate frequently queried paths, and inverted indexes support text search.
