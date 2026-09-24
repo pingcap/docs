@@ -66,7 +66,7 @@
 | Java | Java | Programming language name, keep in English. Do not translate to 「ジャワ」. |
 | Joins | テーブル結合 |  |
 | lakehouse | lakehouse | Keep in English. Do not translate to 「レイクハウス」. |
-| LakeSQL | LakeSQL | Keep in English. Do not translate to 「レイクSQL」. LakeSQL is a command line tool designed specifically for TiDB Cloud Lake. https://github.com/tidbcloud/lakesql |
+| LakeSQL | LakeSQL | Keep in English. Do not translate to 「レイクSQL」. LakeSQL is a command line tool designed specifically for TiDB Cloud Lake. See <https://github.com/tidbcloud/lakesql>. |
 | latency | レイテンシー |  |
 | layer | レイヤー |  |
 | Leader | Leader | Raft role, keep in English. |
