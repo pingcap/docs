@@ -115,7 +115,7 @@
 | stage | stage | Keep in English. Do not translate. A concept name in TiDB Cloud Lake. It refers to a virtual location where data files reside. |
 | Stale Read | ステイル読み取り | Do not translate to 「古い読み取り」. |
 | Starter | Starter | TiDB Cloud tier name, keep in English. |
-| task flow | タスクフロー | Keep both the English and Japanese terms "タスクフロー(task flow) when it first appears in a document." |
+| task flow | タスクフロー | Keep both the English and Japanese terms "タスクフロー (task flow)" when it first appears in a document. |
 | TEXT | TEXT | SQL data type, keep in English. |
 | TiCDC Canal | TiCDC Canal | Feature name, keep in English. Do not translate to 「TiCDC運河」. |
 | TiCDC Changefeed | TiCDC Changefeed | Keep space between TiCDC and Changefeed. |
