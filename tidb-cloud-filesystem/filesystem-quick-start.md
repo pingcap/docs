@@ -105,7 +105,7 @@ To learn more about installing, configuring, and updating TiDB Cloud CLI, see [I
 
 ## Step 3. Create a file system
 
-Create a file system. The `--wait` option returns only after the file system is usable, so you do not need to check its status:
+Create a file system. With the `--wait` option, the command returns only after the file system is usable, so you do not need to check its status:
 
 ```bash
 ti fs create-file-system --display-name my-workspace --wait
