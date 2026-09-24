@@ -184,10 +184,5 @@ TiDB schema takes effect → Schema Manager sync (30s) → TiKV broadcast
 
 Test reference: 2.09 TB of logical data (including indexes) took approximately 3 hours 10 minutes (~1.61k regions/hour per TiKV), object storage GET throughput was approximately 1.6 GiB/s. During conversion, Standard partition QPS dropped by about 3.78%, P99 increased by about 18.63%, and single TiKV CPU increased by about 0.5c.
 
-```Plaintext
-Same chain as above + full object storage data download to local
-```
-
-> These figures are from test environments and do not represent real-world production scenarios. You should obtain accurate data based on your own business testing.
 
 To track a conversion in progress with `SHOW STORAGE_CLASS TRANSITIONS`, or to query the duration of past conversions in `mysql.tidb_storage_class_transition_history`, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
