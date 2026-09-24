@@ -153,7 +153,7 @@
   - Reference
     - [Set Up External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-lake-configure-external-stage.md)
     - [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-support-matrix.md)
-    - [Data Pipeline FAQ](/tidb-cloud/data-pipeline/data-pipeline-lake-faq.md)
+    - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
