@@ -156,7 +156,7 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 - When `enable-table-across-nodes` is enabled, there are two allocation modes:
 
     1. Allocate tables based on the number of Regions, so that each TiCDC node handles roughly the same number of Regions. If the number of Regions for a table exceeds the value of [`region-threshold`](#region-threshold), the table will be allocated to multiple nodes for replication. 
-    2. Allocate tables based on the write traffic, so that each TiCDC node handles roughly the same number of modified rows. Only when the number of modified rows per minute in a table exceeds the value of [`write-key-threshold`](#write-key-threshold), will this allocation take effect.
+    2. Allocate tables based on the write traffic, so that each TiCDC node handles a similar amount of write load. In the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md), this mode uses the upstream PD Region `written_keys` statistics. In the [TiCDC new architecture](/ticdc/ticdc-architecture.md), this mode uses the sink DML event size per second. Only when a table's write traffic exceeds the value of [`write-key-threshold`](#write-key-threshold), will this allocation take effect.
 
   You only need to configure one of the two modes. If both `region-threshold` and `write-key-threshold` are configured, TiCDC prioritizes the traffic allocation mode, namely `write-key-threshold`.
 
@@ -174,7 +174,9 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 
 #### `write-key-threshold`
 
-- Default value: `0`, which means that the traffic allocation mode is not used by default
+- Default value: `0`, which disables traffic-based allocation by default.
+- In the [TiCDC new architecture](/ticdc/ticdc-architecture.md), this value is measured in sink DML event bytes per second. When `scheduler.enable-table-across-nodes = true`, any positive value smaller than `10485760` (10 MiB) is automatically adjusted to `10485760`.
+- In the [TiCDC classic architecture](/ticdc/ticdc-classic-architecture.md), this value is the threshold for the upstream PD Region `written_keys` statistics used by classic table splitting.
 
 ### sink
 
@@ -182,9 +184,10 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 
 #### `dispatchers`
 
-- When the changefeed downstream is an MQ sink, you can use `dispatchers` to configure event dispatchers. Starting from v8.5.7, for the [new TiCDC architecture](/ticdc/ticdc-architecture.md), you can also use `dispatchers` to configure table routing, mapping upstream tables to specific downstream database or table names. For more information, see [TiCDC table routing](/ticdc/ticdc-table-routing.md).
+- For the sink of MQ type, you can use dispatchers to configure the event dispatcher.
 - Starting from v6.1.0, TiDB supports two types of event dispatchers: partition and topic.
 - The matching syntax of matcher is the same as the filter rule syntax.
+- This configuration item only takes effect if the downstream is MQ.
 - When the downstream MQ is Pulsar, if the routing rule for `partition` is not specified as any of `ts`, `index-value`, `table`, or `default`, each Pulsar message will be routed using the string you set as the key. For example, if you specify the routing rule for a matcher as the string `code`, then all Pulsar messages that match that matcher will be routed with `code` as the key.
 
 #### `column-selectors` <span class="version-mark">New in v7.5.0</span>

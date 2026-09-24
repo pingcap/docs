@@ -60,7 +60,7 @@ The new architecture supports **table-level task splitting** for all sinks. You 
 When this feature is enabled, TiCDC automatically splits and distributes tables across multiple nodes for parallel replication if those tables meet any of the following conditions. This improves replication efficiency and resource utilization:
 
 - The table Region count exceeds the configured threshold (`10000` by default, adjustable via `scheduler.region-threshold`).
-- The table write traffic exceeds the configured threshold (disabled by default, configurable via `scheduler.write-key-threshold`).
+- The table sink DML event throughput exceeds the configured threshold (disabled by default, configurable via `scheduler.write-key-threshold`, measured in bytes per second).
 
 > **Note:**
 >
@@ -74,7 +74,7 @@ In table split mode, pay attention to the following settings:
 
 - [`scheduler.region-threshold`](/ticdc/ticdc-changefeed-config.md#region-threshold): the default value is `10000`. When the number of Regions in a table exceeds this threshold, TiCDC splits the table. For tables with relatively few Regions but high overall write throughput, you can reduce this value appropriately. This parameter must be greater than or equal to `scheduler.region-count-per-span`. Otherwise, tasks might be rescheduled repeatedly, which increases replication latency.
 - [`scheduler.region-count-per-span`](/ticdc/ticdc-changefeed-config.md#region-count-per-span-new-in-v854): the default value is `100`. During changefeed initialization, TiCDC splits tables that meet the split conditions according to this parameter. After splitting, each sub-table contains at most `region-count-per-span` Regions.
-- [`scheduler.write-key-threshold`](/ticdc/ticdc-changefeed-config.md#write-key-threshold): the default value is `0` (disabled). When the sink write throughput of a table exceeds this threshold, TiCDC triggers table splitting. In most cases, keep this parameter at `0`.
+- [`scheduler.write-key-threshold`](/ticdc/ticdc-changefeed-config.md#write-key-threshold): the default value is `0` (disabled). In the new architecture, this value is measured in sink DML event bytes per second. If you set a positive value smaller than `10485760` (10 MiB), TiCDC automatically adjusts it to `10485760`. In most cases, keep this parameter at `0`.
 
 ## Compatibility
 
@@ -109,7 +109,14 @@ In the TiCDC classic architecture, DDL replication operations are strictly seria
 
 ## Limitations
 
-The new TiCDC architecture currently does not support splitting large transactions into multiple batches for downstream replication. As a result, there is still a risk of OOM when processing extremely large transactions. Make sure to evaluate and mitigate this risk appropriately before using the new architecture.
+The new TiCDC architecture incorporates all functionalities of the classic architecture. However, some features have not yet been fully tested. To ensure system stability, it is **NOT** recommended to use the following features in core production environments:
+
+- [Syncpoint](/ticdc/ticdc-upstream-downstream-check.md)
+- [Redo Log](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)
+- [Pulsar Sink](/ticdc/ticdc-sink-to-pulsar.md)
+- [Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md)
+
+In addition, the new TiCDC architecture currently does not support splitting large transactions into multiple batches for downstream replication. As a result, there is still a risk of OOM when processing extremely large transactions. Make sure to evaluate and mitigate this risk appropriately before using the new architecture.
 
 ## Upgrade guide
 
