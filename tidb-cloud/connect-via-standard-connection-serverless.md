@@ -38,6 +38,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
     >
     >     - [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     >     - [Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+
     </CustomContent>
 
     <CustomContent language="ja">
@@ -47,6 +48,7 @@ To connect to a {{{ .starter }}} or {{{ .essential }}} instance via public endpo
     > - Keeping the connection type as `Public` means the connection is via standard TLS connection. For more information, see [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md).
     > - PostgreSQL-compatible {{{ .starter }}} currently supports public endpoints only. Private endpoints are not supported.
     > - For MySQL-compatible {{{ .starter }}} and {{{ .essential }}} instances, you can also choose **Private Endpoint** in the **Connection Type** drop-down list. For more information, see [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md).
+
     </CustomContent>
 
 4. TiDB Cloud lets you create [branches](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter) for your MySQL-compatible {{{ .starter }}} instance. After a branch is created, you can choose to connect to the branch via the **Branch** drop-down list. `main` represents the {{{ .starter }}} instance itself.
