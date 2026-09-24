@@ -108,10 +108,10 @@ summary: TiDB Cloud CLI をインストールして設定し、その後ファ�
 
 ニーズに応じて、以下のいずれかのワークフローに進みます。
 
-- [Option A: TiDB Cloud Filesystem](/ai/ti/ti-quick-start.md#option-a-tidb-cloud-filesystem)
-- [Option B: TiDB Cloud Starter](/ai/ti/ti-quick-start.md#option-b-tidb-cloud-starter)
+- [オプション A: TiDB Cloud Filesystem](/ai/ti/ti-quick-start.md#option-a-tidb-cloud-filesystem)
+- [オプション B: TiDB Cloud Starter](/ai/ti/ti-quick-start.md#option-b-tidb-cloud-starter)
 
-### Option A: TiDB Cloud Filesystem {#option-a-tidb-cloud-filesystem}
+### オプション A: TiDB Cloud Filesystem {#option-a-tidb-cloud-filesystem}
 
 TiDB Cloud Filesystem は、ローカルマシン、CI ジョブ、サンドボックス、その他の一時的な環境で利用できる、永続的かつ共有可能なクラウドファイルシステムです。
 
@@ -147,7 +147,7 @@ TiDB Cloud Filesystem は、ローカルマシン、CI ジョブ、サンドボ�
 
     アンマウントするとローカルマウントは削除されますが、ファイルは TiDB Cloud Filesystem に残り、同じ環境または別の環境から再度アクセスできます。
 
-### Option B: TiDB Cloud Starter {#option-b-tidb-cloud-starter}
+### オプション B: TiDB Cloud Starter {#option-b-tidb-cloud-starter}
 
 1. TiDB Cloud Starter インスタンスを作成し、その ID を保存します。
 
