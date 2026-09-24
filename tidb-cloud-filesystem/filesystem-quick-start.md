@@ -7,10 +7,6 @@ summary: Create a file system, write and read a persistent file, and keep the wo
 
 [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md) is a persistent, shared cloud file system for applications, automation, and AI agents. Files remain available independently of the machine or process that creates them, so you can reuse the same workspace across sessions and environments.
 
-Currently, you can access and manage TiDB Cloud Filesystem using the [TiDB Cloud CLI (`ti`)](/ai/ti/ti-quick-start.md).
-
-This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), creating a file system, and writing and reading a file directly from the CLI without mounting the file system. You can mount the same file system afterward.
-
 > **Note:**
 >
 > TiDB Cloud Filesystem is currently in public preview. Its features and interfaces are subject to change without notice.
@@ -93,7 +89,7 @@ Depending on your operating system, take the following steps to install TiDB Clo
 
 2. Provide the following information:
 
-    - A default region for CLI operations, specified as a region code such as `aws-us-east-1`. Choose a region where you want to store the file system data. For the regions supported by TiDB Cloud Filesystem, see [Supported regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions).
+    - A default region for CLI operations, specified as a region code such as `aws-us-west-2`. Choose a region where you want to store the file system data. For the regions supported by TiDB Cloud Filesystem, see [Supported regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions).
 
         The free tier allows one file system for each region. If your organization already has a file system in the region you choose, select a different supported region, add a payment method in the [TiDB Cloud console](https://tidbcloud.com/org-settings/billing/payments), or reuse the existing file system.
 
@@ -103,57 +99,41 @@ The CLI saves the configuration locally and returns `"credentials_stored": true`
 
 To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
-## Step 3. Create a file system
+## Step 3. Create a new file system
 
-Create a file system. With the `--wait` option, the command returns only after the file system is usable, so you do not need to check its status:
+1. Create a file system and obtain its default file system token:
 
-```bash
-ti fs create-file-system --display-name my-workspace --wait
-```
+    ```bash
+    export TI_FS_TOKEN="$(ti fs create-file-system --display-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
+    ```
 
-The command returns information about the new file system. Copy the returned `file_system_id` for use in the next step.
+    > **Tip:**
+    >
+    > For simplicity, this quick start uses the token returned when the file system is created. For least-privilege access, you can generate a scoped token to restrict access to specific paths and operations. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
-> **Warning:**
->
-> The output also contains a file system owner token in the `fs_token` field. This token grants full access to the file system and is returned only when it is issued. It does not expire, so revoke it when it is no longer needed. Treat it as a secret and keep it out of logs, issues, chat messages, and source control. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+2. In the environment where you want to use the file system, set the file system token from the previous step as `TI_FS_TOKEN`, and then mount the file system to a local path as follows. This environment can be the same machine where you created the file system, another machine, or an AI agent sandbox.
 
-The CLI stores the file system owner token locally, so you do not need to provide it for subsequent file operations on this machine.
+    ```bash
+    export TI_FS_TOKEN="<owner-token>" # Skip this line if you are continuing in the same terminal as step 1, where TI_FS_TOKEN is already set.
+    mkdir ~/mnt-test
+    ti fs mount --mount-path ~/mnt-test --region aws-us-west-2
+    echo 'Hello from TiDB Cloud Filesystem' >> ~/mnt-test/hello.txt
+    ls -l ~/mnt-test/hello.txt
+    ```
 
-The display name helps you identify the file system, while the file system ID uniquely identifies the resource.
+    > **Tip:**
+    >
+    > The `mount` subcommand supports configuration-free execution, so you do not need to run `ti configure` beforehand. This is common when, for example, you create a file system on an admin node (where `ti-cli` is configured), but access the file system from another node or environment. In such cases, you can use the `ti fs mount` command by simply specifying the `TI_FS_TOKEN` environment variable, without any prior CLI configuration.
 
-## Step 4. Write and read a file
+    After mounting, you can work with the files using standard local file operations.
 
-Write a file to the file system as follows. You need to replace `<file-system-id>` with the file system ID returned in the previous step.
+3. After you finish using the mounted file system in that environment, unmount it:
 
-```bash
-echo "Hello from my workspace" | ti fs copy-file \
-  --file-system-id "<file-system-id>" \
-  --from-stdin \
-  --to-remote /hello.txt
-```
+    ```bash
+    ti fs unmount --mount-path ~/mnt-test --region aws-us-west-2
+    ```
 
-Then read the file:
-
-```bash
-ti fs read-file \
-  --file-system-id "<file-system-id>" \
-  --path /hello.txt
-```
-
-Expected output:
-
-```text
-Hello from my workspace
-```
-
-The file is stored in TiDB Cloud Filesystem rather than in the local terminal session. It remains available after you close the terminal, and you can access it again from another session or supported environment with access to the file system.
-
-> **Note:**
->
-> This example accesses files in the file system directly using `ti fs` commands, without mounting it to your machine.
->
-> - On macOS or Linux, in addition to [using `ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md), you can also [mount the file system](/tidb-cloud-filesystem/filesystem-mount.md) as a local directory and work with its files using standard local file operations.
-> - On Windows, native file system mounting is not supported. Use `ti fs` commands such as `ti fs copy-file`, `ti fs read-file`, and `ti fs list-files` to work with files. For more information, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md).
+    Unmounting removes the local mount, but the files remain in TiDB Cloud Filesystem and can be accessed again from the same or another environment.
 
 ## (Optional) Clean up
 
@@ -171,6 +151,7 @@ Deleting the file system removes the remote resource and its data.
 ## What's next
 
 - [Manage File Systems in TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your file systems.
+- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 - [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) to access its files through a local directory.
 - [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md) to make the same files available to another machine, user, application, or agent.
 - [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to isolate, review, and apply file changes.
