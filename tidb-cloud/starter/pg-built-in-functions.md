@@ -47,8 +47,6 @@ The following common string functions are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     UPPER('hello') AS upper_text,
@@ -79,8 +77,6 @@ The following common mathematical functions are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     ABS(-42),
@@ -110,8 +106,6 @@ The following common date and time functions and expressions are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     CURRENT_DATE,
@@ -121,8 +115,6 @@ SELECT
 ```
 
 Date and time arithmetic with `INTERVAL` is also supported:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT NOW() - INTERVAL '7 days';
@@ -152,8 +144,6 @@ The following common aggregate functions are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     department,
@@ -165,8 +155,6 @@ GROUP BY department;
 ```
 
 Aggregate `FILTER` is supported:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -190,8 +178,6 @@ PostgreSQL-compatible {{{ .starter }}} supports common ranking and value-access 
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     name,
@@ -214,8 +200,6 @@ FROM employees;
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     id,
@@ -236,8 +220,6 @@ The following aggregate functions can be used with an `OVER` clause:
 - `STRING_AGG`
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -273,8 +255,6 @@ The following common JSON and JSONB functions are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     JSONB_TYPEOF('{"a":1}'::jsonb),
@@ -299,8 +279,6 @@ Common PostgreSQL JSON and JSONB operators are supported, including:
 | `?&` | Checks whether all listed keys exist. |
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT settings->>'theme'
@@ -331,8 +309,6 @@ The following common array functions are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     ARRAY_LENGTH(ARRAY['a', 'b', 'c'], 1),
@@ -351,8 +327,6 @@ The following regular expression functions are supported:
 | `REGEXP_SPLIT_TO_TABLE(text, pattern [, flags])` | Splits text into multiple rows. |
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT REGEXP_REPLACE(
@@ -373,8 +347,6 @@ The following regular expression operators are supported:
 | `!~*` | Case-insensitive non-match. |
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT 'PostgreSQL' ~* 'postgres';
@@ -406,8 +378,6 @@ The following sequence functions are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE SEQUENCE order_seq START WITH 1000;
 
@@ -429,8 +399,6 @@ The following PostgreSQL conditional expressions are supported:
 - `LEAST`
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -457,8 +425,6 @@ Common PostgreSQL-compatible system functions include:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     CURRENT_USER,
@@ -473,16 +439,12 @@ Some functions return multiple rows.
 
 Use `GENERATE_SERIES()` in the `FROM` clause:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT value
 FROM generate_series(1, 5) AS t(value);
 ```
 
 `UNNEST()` can expand an array:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT value

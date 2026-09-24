@@ -30,15 +30,11 @@ The statement timeout can be changed for the current session.
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SET statement_timeout = '120s';
 ```
 
 Set it to `0` to disable the timeout for the current session:
-
-{{< copyable "sql" >}}
 
 ```sql
 SET statement_timeout = 0;
@@ -50,8 +46,6 @@ SET statement_timeout = 0;
 PostgreSQL-compatible {{{ .starter }}} stores text in UTF-8.
 
 The server encoding is reported as:
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW server_encoding;
@@ -71,8 +65,6 @@ PostgreSQL-compatible identifiers are limited to 63 bytes.
 
 You can view the limit using:
 
-{{< copyable "sql" >}}
-
 ```sql
 SHOW max_identifier_length;
 ```
@@ -84,8 +76,6 @@ For portability, keep schema, table, column, index, constraint, function, and ro
 Recursive common table expressions are limited to 1,000 iterations.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH RECURSIVE numbers AS (
@@ -109,8 +99,6 @@ One-dimensional arrays are supported.
 Multi-dimensional PostgreSQL arrays are not supported.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE articles (

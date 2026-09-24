@@ -11,8 +11,6 @@ PostgreSQL-compatible {{{ .starter }}} supports PostgreSQL transaction control, 
 
 Use `BEGIN` to start an explicit transaction and `COMMIT` to persist the changes:
 
-{{< copyable "sql" >}}
-
 ```sql
 BEGIN;
 
@@ -28,8 +26,6 @@ COMMIT;
 ```
 
 Use `ROLLBACK` to discard all changes in the current transaction:
-
-{{< copyable "sql" >}}
 
 ```sql
 BEGIN;
@@ -51,8 +47,6 @@ Each statement runs in its own transaction and is committed automatically if it 
 Use savepoints to roll back part of a transaction without discarding the entire transaction.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 BEGIN;
@@ -95,8 +89,6 @@ The following isolation levels can be requested:
 
 Start a transaction at a specific isolation level:
 
-{{< copyable "sql" >}}
-
 ```sql
 BEGIN ISOLATION LEVEL REPEATABLE READ;
 
@@ -107,8 +99,6 @@ COMMIT;
 ```
 
 You can check the effective isolation level:
-
-{{< copyable "sql" >}}
 
 ```sql
 SHOW transaction_isolation;
@@ -122,8 +112,6 @@ SHOW transaction_isolation;
 
 Use `BEGIN READ ONLY` to start a read-only transaction:
 
-{{< copyable "sql" >}}
-
 ```sql
 BEGIN READ ONLY;
 
@@ -134,8 +122,6 @@ COMMIT;
 ```
 
 You can also set a transaction to read-only after `BEGIN`:
-
-{{< copyable "sql" >}}
 
 ```sql
 BEGIN;
@@ -152,8 +138,6 @@ DML and DDL writes are rejected in a read-only transaction.
 
 You can also set the default mode for new transactions in the current session:
 
-{{< copyable "sql" >}}
-
 ```sql
 SET default_transaction_read_only = on;
 ```
@@ -165,8 +149,6 @@ Sequence operations such as `nextval()` are non-transactional, matching PostgreS
 If a transaction calls `nextval()` and later rolls back, the generated sequence value is not reused.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 BEGIN;
@@ -183,8 +165,6 @@ The sequence remains advanced after the rollback. Do not rely on sequences for g
 If a statement fails inside an explicit transaction, the transaction enters a failed state.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 BEGIN;
@@ -209,8 +189,6 @@ PostgreSQL-compatible {{{ .starter }}} supports the table form of `COPY` for tex
 
 Use `COPY ... FROM STDIN` to stream data from a PostgreSQL client:
 
-{{< copyable "sql" >}}
-
 ```sql
 COPY users (name, email)
 FROM STDIN
@@ -232,8 +210,6 @@ When using `psql`, you can use the `\copy` client command to read a local file a
 The table form of `COPY ... TO STDOUT` can be used to stream table data to the client.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 COPY users (id, name, email)

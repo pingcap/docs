@@ -13,8 +13,6 @@ RLS policies are evaluated by the database for each applicable query. This makes
 
 Use `ALTER TABLE ... ENABLE ROW LEVEL SECURITY`:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE todos ENABLE ROW LEVEL SECURITY;
 ```
@@ -22,8 +20,6 @@ ALTER TABLE todos ENABLE ROW LEVEL SECURITY;
 When RLS is enabled and no applicable policy exists, access is denied by default for roles that do not bypass RLS.
 
 To disable RLS:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE todos DISABLE ROW LEVEL SECURITY;
@@ -35,15 +31,11 @@ By default, the table owner bypasses RLS policies.
 
 Use `FORCE ROW LEVEL SECURITY` to make the table owner subject to the policies:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE todos FORCE ROW LEVEL SECURITY;
 ```
 
 To restore the default owner behavior:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER TABLE todos NO FORCE ROW LEVEL SECURITY;
@@ -98,8 +90,6 @@ The following example allows each role to access only rows where `user_id` match
 
 Create a table:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE todos (
     id BIGSERIAL PRIMARY KEY,
@@ -111,15 +101,11 @@ CREATE TABLE todos (
 
 Enable RLS:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER TABLE todos ENABLE ROW LEVEL SECURITY;
 ```
 
 Allow users to read their own rows:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE POLICY user_select
@@ -130,8 +116,6 @@ USING (user_id = current_user);
 
 Allow users to insert rows for themselves:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE POLICY user_insert
 ON todos
@@ -140,8 +124,6 @@ WITH CHECK (user_id = current_user);
 ```
 
 Allow users to update their own rows:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE POLICY user_update
@@ -152,8 +134,6 @@ WITH CHECK (user_id = current_user);
 ```
 
 Allow users to delete their own rows:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE POLICY user_delete
@@ -168,8 +148,6 @@ The following example allows all users to see published posts and authors to see
 
 Create the table and enable RLS:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE posts (
     id BIGSERIAL PRIMARY KEY,
@@ -183,8 +161,6 @@ ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
 
 Create a policy for published posts:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE POLICY see_published
 ON posts
@@ -193,8 +169,6 @@ USING (published = true);
 ```
 
 Create another policy for a user's own posts:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE POLICY see_own
@@ -223,8 +197,6 @@ At least one applicable permissive policy must allow a row.
 
 Use `AS RESTRICTIVE` when every matching restrictive policy must pass:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE POLICY must_be_published
 ON posts
@@ -250,8 +222,6 @@ Use `TO` to limit a policy to one or more roles.
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE POLICY support_read
 ON tickets
@@ -266,8 +236,6 @@ A policy without an explicit `TO` clause applies to `PUBLIC`.
 
 Use `ALTER POLICY` to change the roles or policy expressions:
 
-{{< copyable "sql" >}}
-
 ```sql
 ALTER POLICY see_own
 ON posts
@@ -278,15 +246,11 @@ USING (author = current_user OR published = true);
 
 Use `DROP POLICY`:
 
-{{< copyable "sql" >}}
-
 ```sql
 DROP POLICY see_own ON posts;
 ```
 
 To avoid an error when the policy does not exist:
-
-{{< copyable "sql" >}}
 
 ```sql
 DROP POLICY IF EXISTS see_own ON posts;
@@ -300,8 +264,6 @@ A role with `BYPASSRLS` bypasses RLS policies.
 
 Create a login role with this attribute:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE ROLE service_admin
 LOGIN
@@ -310,8 +272,6 @@ BYPASSRLS;
 ```
 
 Grant or revoke the attribute later:
-
-{{< copyable "sql" >}}
 
 ```sql
 ALTER ROLE service_admin BYPASSRLS;
@@ -329,8 +289,6 @@ A table owner bypasses RLS by default. Use `FORCE ROW LEVEL SECURITY` if the own
 A `SECURITY DEFINER` function executes with the privileges of its owner.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE FUNCTION list_all_posts()
@@ -352,8 +310,6 @@ If the function owner bypasses RLS, queries executed inside the function can als
 
 Use `pg_policies` to list policies on a table:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     policyname,
@@ -370,8 +326,6 @@ ORDER BY policyname;
 
 Check whether RLS is enabled or forced:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     relname,
@@ -382,8 +336,6 @@ WHERE oid = 'public.todos'::regclass;
 ```
 
 Check whether a role can bypass RLS:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT

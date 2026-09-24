@@ -27,8 +27,6 @@ Common DDL operations include creating, modifying, and deleting objects. The cor
 
 To list databases, query the `pg_database` system catalog:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT datname
 FROM pg_database
@@ -36,8 +34,6 @@ ORDER BY datname;
 ```
 
 To create a database named `samp_db`, use the `CREATE DATABASE` statement:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE DATABASE samp_db;
@@ -61,8 +57,6 @@ To delete a database, first connect to another database:
 
 Then use the `DROP DATABASE` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 DROP DATABASE samp_db;
 ```
@@ -72,8 +66,6 @@ DROP DATABASE samp_db;
 To create a table, use the `CREATE TABLE` statement.
 
 For example, create a table named `person`:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE person (
@@ -85,8 +77,6 @@ CREATE TABLE person (
 
 To list tables in the `public` schema:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT table_name
 FROM information_schema.tables
@@ -96,8 +86,6 @@ ORDER BY table_name;
 ```
 
 To view the columns of the `person` table:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -113,8 +101,6 @@ ORDER BY ordinal_position;
 
 To delete the table, use the `DROP TABLE` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 DROP TABLE person;
 ```
@@ -125,23 +111,17 @@ Indexes can improve query performance on indexed columns.
 
 To create an index on the `name` column:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE INDEX person_name_idx ON person (name);
 ```
 
 To create a unique index:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE UNIQUE INDEX person_name_unique_idx ON person (name);
 ```
 
 To list the indexes on the `person` table:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -155,8 +135,6 @@ ORDER BY indexname;
 
 To delete an index, use the `DROP INDEX` statement:
 
-{{< copyable "sql" >}}
-
 ```sql
 DROP INDEX person_name_idx;
 ```
@@ -169,16 +147,12 @@ Common DML operations use the `INSERT`, `UPDATE`, and `DELETE` statements.
 
 To insert a row into the `person` table:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO person (name, birthday)
 VALUES ('Tom', DATE '1990-09-12');
 ```
 
 To insert multiple rows:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO person (name, birthday)
@@ -189,8 +163,6 @@ VALUES
 
 PostgreSQL-compatible {{{ .starter }}} supports `RETURNING`. For example, return the generated ID after inserting a row:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO person (name, birthday)
 VALUES ('Carol', DATE '1994-03-15')
@@ -199,8 +171,6 @@ RETURNING id, name;
 
 To update a row:
 
-{{< copyable "sql" >}}
-
 ```sql
 UPDATE person
 SET birthday = DATE '1990-10-12'
@@ -208,8 +178,6 @@ WHERE name = 'Tom';
 ```
 
 To delete a row:
-
-{{< copyable "sql" >}}
 
 ```sql
 DELETE FROM person
@@ -225,8 +193,6 @@ WHERE name = 'Bob';
 Use `INSERT ... ON CONFLICT` to insert a row or handle a uniqueness conflict.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 CREATE TABLE account (
@@ -247,8 +213,6 @@ Use the `SELECT` statement to query data.
 
 To query all columns:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT *
 FROM person;
@@ -256,16 +220,12 @@ FROM person;
 
 To query specific columns:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT id, name
 FROM person;
 ```
 
 Use a `WHERE` clause to filter rows:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT id, name, birthday
@@ -277,8 +237,6 @@ ORDER BY birthday;
 PostgreSQL-compatible {{{ .starter }}} also supports common PostgreSQL query features such as joins, subqueries, CTEs, recursive CTEs, window functions, and set operations.
 
 For example, use a CTE to filter data:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH recent_people AS (
@@ -295,8 +253,6 @@ ORDER BY birthday;
 
 Use `BEGIN` and `COMMIT` to execute multiple statements in a transaction:
 
-{{< copyable "sql" >}}
-
 ```sql
 BEGIN;
 
@@ -309,8 +265,6 @@ COMMIT;
 
 To discard changes in the current transaction, use `ROLLBACK`:
 
-{{< copyable "sql" >}}
-
 ```sql
 BEGIN;
 
@@ -321,8 +275,6 @@ ROLLBACK;
 ```
 
 Savepoints are also supported:
-
-{{< copyable "sql" >}}
 
 ```sql
 BEGIN;
@@ -350,8 +302,6 @@ DCL statements are used to manage database roles and privileges.
 
 To create a role that can log in:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE ROLE app_user
 LOGIN
@@ -360,16 +310,12 @@ PASSWORD 'SecurePass1';
 
 Grant the role access to the `public` schema and permission to query the `person` table:
 
-{{< copyable "sql" >}}
-
 ```sql
 GRANT USAGE ON SCHEMA public TO app_user;
 GRANT SELECT ON person TO app_user;
 ```
 
 To check table privileges granted to the role:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -384,16 +330,12 @@ ORDER BY table_schema, table_name, privilege_type;
 
 To revoke the privileges:
 
-{{< copyable "sql" >}}
-
 ```sql
 REVOKE SELECT ON person FROM app_user;
 REVOKE USAGE ON SCHEMA public FROM app_user;
 ```
 
 To delete the role:
-
-{{< copyable "sql" >}}
 
 ```sql
 DROP ROLE app_user;

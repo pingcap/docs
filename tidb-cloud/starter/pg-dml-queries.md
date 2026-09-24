@@ -11,16 +11,12 @@ PostgreSQL-compatible {{{ .starter }}} supports common PostgreSQL Data Manipulat
 
 Insert a single row:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO users (name, email)
 VALUES ('Alice', 'alice@example.com');
 ```
 
 Insert multiple rows:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO users (name, email)
@@ -30,8 +26,6 @@ VALUES
 ```
 
 Insert rows from a query:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO archived_users (id, name, email)
@@ -46,8 +40,6 @@ WHERE active = false;
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO users (name, email)
 VALUES ('Carol', 'carol@example.com')
@@ -60,8 +52,6 @@ Use `INSERT ... ON CONFLICT` to handle unique-key conflicts.
 
 Skip a conflicting row:
 
-{{< copyable "sql" >}}
-
 ```sql
 INSERT INTO users (email, name)
 VALUES ('alice@example.com', 'Alice')
@@ -69,8 +59,6 @@ ON CONFLICT (email) DO NOTHING;
 ```
 
 Update the existing row on conflict:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO users (email, name)
@@ -80,8 +68,6 @@ DO UPDATE SET name = excluded.name;
 ```
 
 Use a named constraint as the conflict target:
-
-{{< copyable "sql" >}}
 
 ```sql
 INSERT INTO users (email, name)
@@ -96,8 +82,6 @@ The `excluded` pseudo-table represents the row proposed for insertion.
 
 Update rows matching a condition:
 
-{{< copyable "sql" >}}
-
 ```sql
 UPDATE users
 SET active = true
@@ -105,8 +89,6 @@ WHERE name = 'Charlie';
 ```
 
 Return the updated rows:
-
-{{< copyable "sql" >}}
 
 ```sql
 UPDATE users
@@ -119,16 +101,12 @@ RETURNING *;
 
 Delete rows matching a condition:
 
-{{< copyable "sql" >}}
-
 ```sql
 DELETE FROM users
 WHERE id = 1;
 ```
 
 Return the deleted rows:
-
-{{< copyable "sql" >}}
 
 ```sql
 DELETE FROM users
@@ -148,8 +126,6 @@ Foreign keys support the following `ON DELETE` and `ON UPDATE` actions:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 CREATE TABLE orders (
     id BIGSERIAL PRIMARY KEY,
@@ -162,8 +138,6 @@ PostgreSQL-compatible {{{ .starter }}} uses `MATCH SIMPLE` semantics by default.
 ## Query data
 
 Use `SELECT` to query data:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT id, name, email
@@ -190,8 +164,6 @@ The following join forms are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     u.id,
@@ -207,8 +179,6 @@ LEFT JOIN orders AS o
 `LATERAL` subqueries can reference columns from preceding `FROM` items.
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -237,8 +207,6 @@ The following aggregation features are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     department,
@@ -250,8 +218,6 @@ HAVING count(*) > 5;
 ```
 
 Use `FILTER` to apply a condition to an aggregate:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -281,8 +247,6 @@ The following value access functions are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     name,
@@ -306,8 +270,6 @@ The following aggregate functions can also be used as window functions:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     department,
@@ -321,8 +283,6 @@ FROM employees;
 
 Standard CTEs are supported:
 
-{{< copyable "sql" >}}
-
 ```sql
 WITH active_users AS (
     SELECT *
@@ -334,8 +294,6 @@ FROM active_users;
 ```
 
 Recursive CTEs are also supported:
-
-{{< copyable "sql" >}}
 
 ```sql
 WITH RECURSIVE category_tree AS (
@@ -368,8 +326,6 @@ Data-modifying CTEs using `INSERT`, `UPDATE`, or `DELETE` with `RETURNING` are s
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 WITH inserted AS (
     INSERT INTO users (name, email)
@@ -392,8 +348,6 @@ The following subquery forms are supported:
 - Correlated subqueries
 
 For example:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT u.id, u.name
@@ -420,8 +374,6 @@ The following set operations are supported:
 
 For example:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT email
 FROM customers
@@ -436,14 +388,10 @@ FROM leads;
 
 `SELECT DISTINCT` and `SELECT DISTINCT ON (...)` are supported:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT DISTINCT department
 FROM employees;
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT DISTINCT ON (department)
@@ -456,8 +404,6 @@ ORDER BY department, salary DESC;
 
 Ordering supports `ASC`, `DESC`, `NULLS FIRST`, and `NULLS LAST`:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT id, name
 FROM users
@@ -467,8 +413,6 @@ ORDER BY name ASC NULLS LAST;
 ## Limit and offset
 
 Use `LIMIT` and `OFFSET` to paginate query results:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT id, name
@@ -482,16 +426,12 @@ OFFSET 40;
 
 `EXPLAIN` and `EXPLAIN ANALYZE` are supported:
 
-{{< copyable "sql" >}}
-
 ```sql
 EXPLAIN
 SELECT *
 FROM users
 WHERE email = 'alice@example.com';
 ```
-
-{{< copyable "sql" >}}
 
 ```sql
 EXPLAIN ANALYZE
@@ -503,8 +443,6 @@ WHERE email = 'alice@example.com';
 ## Prepared statements
 
 Use `PREPARE`, `EXECUTE`, and `DEALLOCATE` for SQL-level prepared statements:
-
-{{< copyable "sql" >}}
 
 ```sql
 PREPARE find_user (TEXT) AS
@@ -520,8 +458,6 @@ DEALLOCATE find_user;
 ## Generate a series
 
 The `generate_series()` table function is supported:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT *

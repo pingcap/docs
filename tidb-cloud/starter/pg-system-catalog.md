@@ -81,8 +81,6 @@ For column nullability, use `information_schema.columns.is_nullable` or `pg_attr
 
 Use `pg_tables`:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     tablename AS table,
@@ -95,8 +93,6 @@ ORDER BY tablename;
 ```
 
 For a more portable query, use `information_schema.tables`:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -111,8 +107,6 @@ ORDER BY table_name;
 ## List columns of a table
 
 Use `information_schema.columns`:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -129,8 +123,6 @@ ORDER BY ordinal_position;
 ```
 
 For lower-level metadata, query `pg_attribute`:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -154,8 +146,6 @@ ORDER BY a.attnum;
 
 Use `pg_indexes`:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     indexname AS index_name,
@@ -167,8 +157,6 @@ ORDER BY indexname;
 ```
 
 For more detailed index metadata:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -191,8 +179,6 @@ ORDER BY i.relname;
 
 Use `information_schema` for common constraints:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     tc.constraint_name,
@@ -213,8 +199,6 @@ ORDER BY tc.constraint_type, tc.constraint_name;
 
 Use `pg_constraint` for a concise definition:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     conname AS constraint_name,
@@ -230,8 +214,6 @@ ORDER BY contype, conname;
 ## Find foreign keys
 
 Use `information_schema` to inspect outbound foreign keys:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -260,8 +242,6 @@ ORDER BY tc.constraint_name;
 
 Use `information_schema.routines`:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     routine_name,
@@ -273,8 +253,6 @@ ORDER BY routine_name;
 ```
 
 For additional metadata, query `pg_proc`:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -292,8 +270,6 @@ ORDER BY p.proname;
 
 List roles:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     rolname,
@@ -305,8 +281,6 @@ ORDER BY rolname;
 ```
 
 List table privileges:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
@@ -323,8 +297,6 @@ ORDER BY table_name, grantee, privilege_type;
 
 List policies for a table:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     policyname AS policy,
@@ -340,8 +312,6 @@ ORDER BY policyname;
 
 Check whether row-level security is enabled or forced:
 
-{{< copyable "sql" >}}
-
 ```sql
 SELECT
     relname,
@@ -354,8 +324,6 @@ WHERE oid = 'public.my_table'::regclass;
 ## Inspect extensions
 
 List extensions registered in the current database:
-
-{{< copyable "sql" >}}
 
 ```sql
 SELECT
