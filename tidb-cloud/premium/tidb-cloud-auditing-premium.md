@@ -82,6 +82,16 @@ For more information, see [Creating a general purpose bucket](https://docs.aws.a
     - If yes, record the matched role for later use.
     - If not, click **Create role**, select **Another AWS account** as the trust entity type, and then enter the TiDB Cloud Account ID value into the **Account ID** field. Then, choose the **Require External ID** option and enter the TiDB Cloud External ID value into the **External ID** field.
 
+<CustomContent plan="byoc">
+
+    For BYOC, verify that the customer-created `tidbx-byoc-auditlog-role` IAM role has the following tag:
+
+    `tidbcloud.com/allow-dataplane-access=true`
+
+    If the tag is missing, add it to the role before enabling audit logging. If audit logging was enabled before the tag was added, disable and re-enable audit logging after updating the tag.
+
+</CustomContent>
+
 4. In **IAM** > **Access Management** > **Roles**, click the role name from the previous step to go to the **Summary** page, and then take the following steps:
 
     1. Under the **Permissions** tab, check whether the recorded policy with the `s3:PutObject` write-only permission is attached to the role. If not, choose **Attach Policies**, search for the needed policy, and then click **Attach Policy**.
