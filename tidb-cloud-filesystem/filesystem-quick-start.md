@@ -19,8 +19,6 @@ This guide walks you through installing and configuring TiDB Cloud CLI (`ti`), c
 
 Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the [TiDB Cloud console](https://tidbcloud.com/). The keys must have the `Organization Owner` access to your organization.
 
-The free tier allows one file system for each region. If your organization already has a file system in the region you choose, select a different supported region, add a payment method in the [TiDB Cloud console](https://tidbcloud.com/org-settings/billing/payments), or reuse the existing file system.
-
 If someone has already provided you with a file system token, skip resource creation and follow [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
 ## Step 1. Install TiDB Cloud CLI
@@ -96,6 +94,8 @@ Depending on your operating system, take the following steps to install TiDB Clo
 2. Provide the following information:
 
     - A default region for CLI operations, specified as a region code such as `aws-us-east-1`. Choose a region where you want to store the file system data. For the regions supported by TiDB Cloud Filesystem, see [Supported regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions).
+
+        The free tier allows one file system for each region. If your organization already has a file system in the region you choose, select a different supported region, add a payment method in the [TiDB Cloud console](https://tidbcloud.com/org-settings/billing/payments), or reuse the existing file system.
 
     - Your TiDB Cloud API public key and private key.
 
