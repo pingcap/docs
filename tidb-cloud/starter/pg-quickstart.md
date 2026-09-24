@@ -4,7 +4,7 @@ summary: Learn how to create and connect to a PostgreSQL-compatible TiDB Cloud S
 category: quick start
 ---
 
-# TiDB Cloud Quick Start
+# Get Started with PostgreSQL-compatible TiDB Cloud Starter
 
 This tutorial guides you through creating and connecting to a PostgreSQL-compatible TiDB Cloud Starter instance.
 
@@ -39,10 +39,10 @@ To create a {{{ .starter }}} instance, follow these steps:
     >
     > PostgreSQL-compatible {{{ .starter }}} instances are currently free during the limited public preview.
     >
-    > The first 10 PostgreSQL-compatible {{{ .starter }}} instances in your account are eligible for the free quota. Each eligible instance includes the following monthly free quota:
+    > The first 10 PostgreSQL-compatible {{{ .starter }}} instances in your organization are eligible for the free quota. Each eligible instance includes the following monthly free quota:
     >
     > + 50 GiB of row-based storage
-    > + 500 M Request Units (RUs)
+    > + 500 million Request Units (RUs)
     >
     > When the free quota is exhausted, new connection attempts are rejected. Existing connections remain active but are throttled.
 
@@ -52,7 +52,7 @@ PostgreSQL-compatible {{{ .starter }}} instances support the PostgreSQL wire pro
 
 1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .starter }}} instance to go to its overview page.
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed with connection parameters.
-3. Ensure that the configurations in the connection dialog match your operating environment.
+3. Ensure that the settings in the connection dialog match your operating environment.
 4. Click **Generate Password** to create a random password.
 5. In the **Connect With** drop-down list, select **PostgreSQL CLI**.
 6. Copy the connection command, paste it into your terminal, and then press **Enter** to run it.
@@ -60,6 +60,7 @@ PostgreSQL-compatible {{{ .starter }}} instances support the PostgreSQL wire pro
 The PostgreSQL CLI client `psql` opens and connects to your {{{ .starter }}} instance.
 
 ## What's next
+
 - To learn how to connect to your PostgreSQL-compatible {{{ .starter }}} instance, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-via-standard-connection-serverless.md).
 - To learn about PostgreSQL compatibility, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 - To learn about the PostgreSQL extensions currently supported by TiDB Cloud, see [PostgreSQL extensions](/tidb-cloud/starter/pg-extensions-overview.md).

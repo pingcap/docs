@@ -10,7 +10,7 @@
   - [Features](/tidb-cloud/features.md)
   - [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md)
 - Get Started
-  - [Try Out TiDB Cloud](/tidb-cloud/starter/pg-quickstart.md)
+  - [Try Out TiDB Cloud Starter](/tidb-cloud/starter/pg-quickstart.md)
 
 ## GUIDES
 
