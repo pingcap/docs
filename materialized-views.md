@@ -48,7 +48,17 @@ When you submit `CREATE MATERIALIZED VIEW`, TiDB records the current values of t
 
 ### Refresh a materialized view
 
-This section will describe refresh behavior, supported refresh modes, and operational guidance. The `REFRESH` clause syntax is documented in [`CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-create-materialized-view.md) and [`ALTER MATERIALIZED VIEW`](/sql-statements/sql-statement-alter-materialized-view.md). <!-- TODO: fill in from the spec. -->
+Use [`REFRESH MATERIALIZED VIEW`](/sql-statements/sql-statement-refresh-materialized-view.md) to refresh a materialized view manually. You can use `FAST` refresh to apply changes from materialized view logs, or `COMPLETE` refresh to recompute the complete result of the materialized view query.
+
+`COMPLETE` refresh requires one of the following methods. Although `DELTA APPLY` only changes rows that differ, it is a complete refresh method because TiDB recomputes the full materialized view query before applying the differences.
+
+| Method | How it refreshes the materialized view | Transaction behavior |
+| --- | --- | --- |
+| `COMPLETE IN PLACE` | Deletes all existing rows from the materialized view and inserts the complete recomputed result. | Runs the delete and insert operations in one transaction. |
+| `COMPLETE DELTA APPLY` | Recomputes the complete result, compares it with the current materialized view by its grouping keys, and applies only inserted, deleted, and changed rows. The materialized view must have an explicit `PRIMARY KEY` or `UNIQUE KEY` so that TiDB can uniquely locate existing rows. | Runs the comparison and row changes in one transaction. |
+| `COMPLETE OUT OF PLACE` | Creates a shadow table, builds the complete recomputed result in that table, and then switches the materialized view to the replacement table. | Does not run as a single transaction. The existing materialized view remains available while TiDB builds the shadow table. If the build fails before cutover, the existing materialized view is not changed. |
+
+Use `DRY RUN` to view the planned refresh steps without refreshing the materialized view. Use `WITH PROFILE` to execute the refresh and return step-level runtime information. To cancel a running refresh, use [`CANCEL MATERIALIZED VIEW REFRESH JOB`](/sql-statements/sql-statement-cancel-materialized-view-refresh-job.md) with the job ID in [`mysql.tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md).
 
 ### Query a materialized view
 

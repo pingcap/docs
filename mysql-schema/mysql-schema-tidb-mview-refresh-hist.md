@@ -48,4 +48,6 @@ ORDER BY REFRESH_START_TIME DESC;
 ## See also
 
 - [Materialized Views](/materialized-views.md)
+- [`REFRESH MATERIALIZED VIEW`](/sql-statements/sql-statement-refresh-materialized-view.md)
+- [`CANCEL MATERIALIZED VIEW REFRESH JOB`](/sql-statements/sql-statement-cancel-materialized-view-refresh-job.md)
 - [`mysql.tidb_mlog_purge_hist`](/mysql-schema/mysql-schema-tidb-mlog-purge-hist.md)
