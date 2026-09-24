@@ -278,6 +278,7 @@ Create an AWS interface endpoint as described in [Step 2. Create an AWS interfac
 
 - Create the endpoint in the AWS region where your application runs, which is different from the region of your TiDB Cloud Dedicated cluster. In the AWS Management Console, select **Enable Cross Region endpoint**, then set **Service Region** to the region of your TiDB Cloud Dedicated cluster.
 - For **Subnets**, select subnets in availability zones that support cross-region access. Not all availability zones in a region support cross-region access. If a subnet is in an unsupported availability zone, the creation fails with an error that lists the supported availability zones, and you can select subnets in the listed availability zones instead.
+Before creating a cross-region endpoint, ensure that the caller’s identity policy and applicable Service Control Policy allow `vpce:AllowMultiRegion`.
 - If you use the AWS CLI, pass the region of your cluster with `--service-region ${your_cluster_region}`:
 
     ```bash
