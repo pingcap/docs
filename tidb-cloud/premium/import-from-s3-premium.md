@@ -46,7 +46,7 @@ The wizard includes a helper link labeled **Click here to create a new one with 
 
 <CustomContent plan="byoc">
 
-> If you use an AWS Role ARN for a BYOC instance, the IAM role must have the tag `tidbcloud.com/allow-dataplane-access=true`. If the tag is missing, add it to the role before starting the import.
+If you use an AWS Role ARN for a BYOC instance, the IAM role must have the `tidbcloud.com/allow-dataplane-access=true` tag. If the tag is missing, add it to the role before starting the import.
 
 </CustomContent>
 
