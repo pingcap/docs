@@ -1,29 +1,29 @@
 ---
-title: Explore PostgreSQL SQL with TiDB Cloud
-summary: Learn about the basic PostgreSQL SQL statements supported by PostgreSQL-compatible TiDB Cloud Starter.
+title: Explore PostgreSQL-compatible SQL with TiDB Cloud
+summary: Learn about the basic SQL statements supported by PostgreSQL-compatible TiDB Cloud Starter.
 ---
 
-# Explore PostgreSQL SQL with TiDB Cloud
+# Explore PostgreSQL-compatible SQL with TiDB Cloud
 
-PostgreSQL-compatible {{{ .starter }}} supports the PostgreSQL wire protocol and common PostgreSQL SQL syntax. You can use most PostgreSQL clients, drivers, and ORMs to work with your instance.
+PostgreSQL-compatible {{{ .starter }}} supports the PostgreSQL wire protocol and common PostgreSQL syntax. You can use most PostgreSQL clients, drivers, and ORMs to work with your instance.
 
-This page walks you through basic PostgreSQL SQL operations, including DDL, DML, DQL, DCL, and transaction control.
+This page walks you through basic SQL operations, including DDL, DML, DQL, DCL, and transaction control.
 
 For PostgreSQL features that are unsupported or behave differently, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
-## Category
+## Categories
 
 SQL statements can be grouped into the following categories according to their functions:
 
 - **DDL (Data Definition Language)**: defines and manages database objects, including databases, schemas, tables, views, indexes, sequences, and types.
 - **DML (Data Manipulation Language)**: inserts, updates, and deletes table data.
 - **DQL (Data Query Language)**: queries data using `SELECT`, filtering, joins, aggregation, subqueries, common table expressions (CTEs), and other query features.
-- **DCL (Data Control Language)**: manages database roles and privileges.
+- **DCL (Data Control Language)**: manages privileges and role membership.
 - **Transaction control**: manages transactions using statements such as `BEGIN`, `COMMIT`, `ROLLBACK`, and `SAVEPOINT`.
 
-Common DDL operations include creating, modifying, and deleting objects. The corresponding commands are `CREATE`, `ALTER`, and `DROP`.
+Common DDL operations include creating, modifying, and dropping objects. The corresponding commands are `CREATE`, `ALTER`, and `DROP`.
 
-## Show, create, and drop a database
+## List, create, and drop databases
 
 To list databases, query the `pg_database` system catalog:
 
@@ -49,7 +49,7 @@ To connect to the database when using `psql`, use the `\connect` command:
 >
 > `\connect` is a `psql` client command, not a SQL statement.
 
-To delete a database, first connect to another database:
+To drop a database, first connect to another database:
 
 ```text
 \connect postgres
@@ -61,7 +61,7 @@ Then use the `DROP DATABASE` statement:
 DROP DATABASE samp_db;
 ```
 
-## Create, show, and drop a table
+## Create, list, and drop tables
 
 To create a table, use the `CREATE TABLE` statement.
 
@@ -99,13 +99,13 @@ WHERE table_schema = 'public'
 ORDER BY ordinal_position;
 ```
 
-To delete the table, use the `DROP TABLE` statement:
+To drop the table, use the `DROP TABLE` statement:
 
 ```sql
 DROP TABLE person;
 ```
 
-## Create, show, and drop an index
+## Create, list, and drop indexes
 
 Indexes can improve query performance on indexed columns.
 
@@ -133,7 +133,7 @@ WHERE schemaname = 'public'
 ORDER BY indexname;
 ```
 
-To delete an index, use the `DROP INDEX` statement:
+To drop an index, use the `DROP INDEX` statement:
 
 ```sql
 DROP INDEX person_name_idx;
@@ -296,9 +296,9 @@ COMMIT;
 
 For supported transaction isolation levels and PostgreSQL compatibility differences, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
-## Create, authorize, and delete a database user
+## Create, grant privileges to, and drop a role
 
-DCL statements are used to manage database roles and privileges.
+DCL statements are used to manage privileges and role membership.
 
 To create a role that can log in:
 

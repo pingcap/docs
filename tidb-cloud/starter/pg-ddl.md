@@ -21,7 +21,7 @@ CREATE TABLE users (
 );
 ```
 
-The following common constraints are supported:
+The following common constraints and column properties are supported:
 
 - `NOT NULL`
 - `DEFAULT`
@@ -53,7 +53,7 @@ Foreign keys support the following common `ON DELETE` and `ON UPDATE` actions:
 `CREATE TABLE ... AS SELECT` and `SELECT ... INTO` are supported:
 
 ```sql
-CREATE TABLE active_users AS
+CREATE TABLE active_users_snapshot AS
 SELECT id, name, email
 FROM users
 WHERE active = true;
@@ -67,7 +67,7 @@ FROM users;
 
 > **Note:**
 >
-> Tables created using `CREATE TABLE ... AS SELECT` or `SELECT ... INTO` contain an additional `_rowid` primary key column. For more information, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+> Tables created using `CREATE TABLE ... AS SELECT` or `SELECT ... INTO` contain an additional `_rowid` primary key column. For other DDL compatibility differences, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ### Identity columns
 
@@ -87,7 +87,7 @@ CREATE TABLE tasks (
 );
 ```
 
-Identity sequence options have compatibility differences. If you need a custom starting value or increment, use an explicit sequence.
+Identity columns have compatibility differences for sequence options such as custom starting values and increments. If you need a custom starting value or increment, use an explicit sequence.
 
 For example:
 
@@ -256,13 +256,13 @@ DROP VIEW IF EXISTS active_users;
 DROP MATERIALIZED VIEW IF EXISTS user_summary;
 ```
 
-`CASCADE` can be used for dependent views and materialized views where applicable:
+`CASCADE` can be used to drop dependent objects such as views and materialized views, but foreign-key dependencies must be handled separately:
 
 ```sql
 DROP TABLE users CASCADE;
 ```
 
-Before dropping a table referenced by a foreign key, remove the referencing foreign-key constraints first. Foreign-key dependency handling differs from PostgreSQL. For more information, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+To avoid leaving dangling foreign-key constraints, remove any foreign-key constraints that reference a table before dropping the table. Foreign-key dependency handling differs from PostgreSQL. For more information, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
 ## Truncate a table
 

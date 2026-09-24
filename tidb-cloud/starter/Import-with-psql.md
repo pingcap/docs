@@ -1,6 +1,6 @@
 ---
 title: Migrate from PostgreSQL to PostgreSQL-compatible TiDB Cloud Starter
-summary: Learn how to migrate schema and data from PostgreSQL to a PostgreSQL-compatible TiDB Cloud Starter instance using psql and COPY.
+summary: Learn how to migrate schema and data from PostgreSQL to a PostgreSQL-compatible TiDB Cloud Starter instance using `psql` and `\copy`.
 ---
 
 # Migrate from PostgreSQL to PostgreSQL-compatible TiDB Cloud Starter
@@ -11,7 +11,7 @@ This document describes how to migrate an existing PostgreSQL database to a Post
 >
 > PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview.
 >
-> During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `COPY`. This guide uses `pg_dump` to export schema and data from the source PostgreSQL database, and uses `psql` and `COPY` to import them into the target instance.
+> During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `\copy`. This guide uses `pg_dump` to export schema and data from the source PostgreSQL database, and uses `psql` and `\copy` to import them into the target instance.
 
 The overall migration procedure is as follows:
 
@@ -19,7 +19,7 @@ The overall migration procedure is as follows:
 2. Check the source PostgreSQL database for compatibility.
 3. Export and review the source schema.
 4. Import the schema to the PostgreSQL-compatible {{{ .starter }}} instance.
-5. Migrate the data using `psql` and `COPY`.
+5. Migrate the data using `psql` and `\copy`.
 6. Verify the migrated schema and data.
 
 ## Prerequisites
@@ -40,7 +40,7 @@ Install the following PostgreSQL client tools on the machine where you perform t
 - `pg_dump`: exports schema and data from the source PostgreSQL database.
 - `psql`: imports schema and data into the PostgreSQL-compatible {{{ .starter }}} instance.
 
-It is recommended to use a `pg_dump` version that matches or is close to the version of the source PostgreSQL database.
+It is recommended to use a `pg_dump` version that is from the same major PostgreSQL release as the source PostgreSQL database.
 
 ## Check PostgreSQL compatibility
 
@@ -63,7 +63,7 @@ FROM pg_inherits;
 SELECT count(*) AS fdw_servers
 FROM pg_foreign_server;
 
--- Logical replication
+-- Logical replication publications
 SELECT count(*) AS publications
 FROM pg_publication;
 ```
@@ -82,7 +82,7 @@ FROM pg_extension
 ORDER BY extname;
 ```
 
-Compare the result with [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions.md).
+Compare the result with [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md).
 
 Custom or third-party PostgreSQL extensions cannot be installed on PostgreSQL-compatible {{{ .starter }}}. Remove or replace dependencies on unsupported extensions before migration.
 
@@ -90,7 +90,7 @@ Custom or third-party PostgreSQL extensions cannot be installed on PostgreSQL-co
 
 PostgreSQL-compatible {{{ .starter }}} supports common PL/pgSQL constructs, but some constructs are not supported.
 
-The following query can help identify functions that might require changes:
+The following query can help identify PL/pgSQL routines that might require changes:
 
 ```sql
 SELECT proname, prosrc
@@ -103,7 +103,7 @@ WHERE prolang = (SELECT oid FROM pg_language WHERE lanname = 'plpgsql')
   );
 ```
 
-Review any matching functions before migration. In particular:
+Review any matching routines before migration. In particular:
 
 - `WHILE` and `FOREACH` loops are not supported.
 - Cursor and `REFCURSOR` operations are not supported.
@@ -112,7 +112,7 @@ Review any matching functions before migration. In particular:
 
 For more compatibility details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 
-## Migrate full data
+## Migrate a full database
 
 For a PostgreSQL database migration, import the schema before importing the data.
 
@@ -181,7 +181,7 @@ DEFAULT nextval('public.users_id_seq'::regclass)
 DEFAULT nextval('public.users_id_seq')
 ```
 
-If the dump contains identity columns added through `ALTER TABLE ... ADD GENERATED ... AS IDENTITY`, rewrite them to use a sequence and a `DEFAULT nextval(...)` expression before importing the schema.
+If the dump contains identity columns added through `ALTER TABLE ... ALTER COLUMN ... ADD GENERATED ... AS IDENTITY`, rewrite them to use a sequence and a `DEFAULT nextval(...)` expression before importing the schema.
 
 ### Step 3: Import the schema
 
@@ -209,11 +209,11 @@ pg_dump \
   | psql "<TARGET_DATABASE_URL>" -v ON_ERROR_STOP=1
 ```
 
-By default, the plain `pg_dump` data stream uses PostgreSQL `COPY` statements. The data is imported into PostgreSQL-compatible {{{ .starter }}} through the PostgreSQL wire protocol.
+By default, the plain `pg_dump` data stream uses PostgreSQL `COPY` statements. When the stream is piped to `psql`, the `COPY ... FROM stdin` statements import data into PostgreSQL-compatible {{{ .starter }}} through the PostgreSQL wire protocol.
 
-PostgreSQL-compatible {{{ .starter }}} supports `COPY` in text and CSV formats. Binary `COPY` is not supported.
+PostgreSQL-compatible {{{ .starter }}} supports `COPY` data transfer in text and CSV formats. Binary `COPY` is not supported.
 
-### Migrate individual tables using `COPY`
+### Migrate individual tables using `\copy`
 
 You can also migrate individual tables using `psql` and `\copy`.
 
@@ -235,7 +235,7 @@ Make sure that the target table exists before importing the data.
 
 > **Note:**
 >
-> `COPY (SELECT ...) TO STDOUT` is not supported. Use the table form of `COPY`.
+> The SQL-level `COPY (SELECT ...) TO STDOUT` syntax is not supported. Use the table form of `\copy` instead.
 
 ## Verify the migrated data
 
@@ -283,9 +283,9 @@ Pay particular attention to application logic that depends on PostgreSQL feature
 
 Keep the following limitations in mind when planning a migration:
 
-- During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `COPY`.
+- During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` with `pg_dump` `COPY` data streams and table-form `\copy`.
 - PostgreSQL logical replication and streaming replication are not supported. If the source database continues to receive writes during migration, plan an appropriate maintenance window for the final cutover.
-- `COPY` supports text and CSV formats. Binary `COPY` is not supported.
-- `COPY (SELECT ...) TO STDOUT` is not supported.
+- The `COPY` protocol supports text and CSV formats. Binary `COPY` is not supported.
+- The SQL-level `COPY (SELECT ...) TO STDOUT` syntax is not supported. For individual-table migration, use the table form of `\copy`.
 - Some PostgreSQL schema objects, data types, index access methods, extensions, and PL/pgSQL constructs are unsupported or behave differently. Review [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) before migration.
 - Migrated text data must use valid UTF-8 encoding.
