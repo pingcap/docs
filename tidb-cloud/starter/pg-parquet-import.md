@@ -9,7 +9,7 @@ PostgreSQL-compatible {{{ .starter }}} supports the `parquet` extension for read
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} is currently in Limited Public Preview.
+> PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview.
 
 This document describes Parquet access through HTTP or HTTPS URLs. The source URL must be reachable from TiDB Cloud.
 
@@ -97,7 +97,7 @@ The following Parquet formats are supported:
 
 ## Limitations
 
-The following limitations apply during the Limited Public Preview:
+The following limitations apply during the limited public preview:
 
 - The target table must exist before you run `COPY ... WITH (FORMAT parquet)`.
 - Use an HTTP or HTTPS URL that is reachable from TiDB Cloud.

@@ -9,9 +9,9 @@ This document describes how to migrate an existing PostgreSQL database to a Post
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} is currently in Limited Public Preview.
+> PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview.
 >
-> During the Limited Public Preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `COPY`. This guide uses `pg_dump` to export schema and data from the source PostgreSQL database, and uses `psql` and `COPY` to import them into the target instance.
+> During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `COPY`. This guide uses `pg_dump` to export schema and data from the source PostgreSQL database, and uses `psql` and `COPY` to import them into the target instance.
 
 The overall migration procedure is as follows:
 
@@ -283,7 +283,7 @@ Pay particular attention to application logic that depends on PostgreSQL feature
 
 Keep the following limitations in mind when planning a migration:
 
-- During the Limited Public Preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `COPY`.
+- During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `COPY`.
 - PostgreSQL logical replication and streaming replication are not supported. If the source database continues to receive writes during migration, plan an appropriate maintenance window for the final cutover.
 - `COPY` supports text and CSV formats. Binary `COPY` is not supported.
 - `COPY (SELECT ...) TO STDOUT` is not supported.

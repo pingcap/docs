@@ -38,7 +38,7 @@ Automatic backup settings vary between {{{ .starter }}} instances and {{{ .essen
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} instances are currently free during the Limited Public Preview, but their automatic backup settings are the same as those of {{{ .starter }}} instances with a spending limit greater than 0:
+> PostgreSQL-compatible {{{ .starter }}} instances are currently free during the limited public preview, but their automatic backup settings are the same as those of {{{ .starter }}} instances with a spending limit greater than 0:
 >
 > - Backup retention is configurable from 1 to 30 days.
 > - Backup time is configurable.

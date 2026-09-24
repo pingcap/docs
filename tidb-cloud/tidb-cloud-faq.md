@@ -29,7 +29,7 @@ Currently, TiDB Cloud supports the majority of MySQL 5.7 and MySQL 8.0 syntax wi
 
 ### Does TiDB Cloud support PostgreSQL?
 
-Yes. PostgreSQL-compatible TiDB Cloud Starter is currently available in Limited Public Preview.
+Yes. PostgreSQL-compatible TiDB Cloud Starter is currently available in limited public preview.
 
 PostgreSQL-compatible {{{ .starter }}} instances support the PostgreSQL wire protocol (pgwire v3) and common PostgreSQL SQL syntax. For details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
 

@@ -9,7 +9,7 @@ PostgreSQL-compatible {{{ .starter }}} supports PostgreSQL-compatible full-text 
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} is currently in Limited Public Preview.
+> PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview.
 
 Full-text search is built in and does not require installing a separate extension. Chinese tokenization is also available through `zhparser`-compatible configurations.
 
@@ -198,7 +198,7 @@ ORDER BY rank DESC;
 
 ## Limitations
 
-The following limitations apply during the Limited Public Preview:
+The following limitations apply during the limited public preview:
 
 - Only the text search configurations listed in [Supported text search configurations](#supported-text-search-configurations) are supported.
 - The `english` configuration does not perform PostgreSQL-style stemming. Use `english_stem` for stemmed English search.

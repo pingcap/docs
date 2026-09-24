@@ -9,7 +9,7 @@ This document describes SQL engine limits and constraints that apply to PostgreS
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} is currently in Limited Public Preview. Limits and constraints might change during the preview.
+> PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview. Limits and constraints might change during the preview.
 
 This page focuses on SQL engine behavior. For the monthly free quota and product-level limits of PostgreSQL-compatible {{{ .starter }}}, see the TiDB Cloud Starter plan documentation.
 

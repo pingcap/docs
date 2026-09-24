@@ -36,7 +36,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 > **Note:**
 >
-> PostgreSQL-compatible TiDB Cloud Starter is currently available in Limited Public Preview. To request access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+> PostgreSQL-compatible TiDB Cloud Starter is currently available in limited public preview. To request access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 >
 > After preview access is enabled, the **Compatibility Mode** section is displayed when you create a Starter instance.
 
@@ -57,7 +57,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 4. If you select **Starter** and PostgreSQL preview access is enabled for your organization, the **Compatibility Mode** section is displayed. Choose one of the following compatibility modes:
 
     - **MySQL Compatible**: the default compatibility mode for TiDB Cloud Starter.
-    - **PostgreSQL Compatible**: provides PostgreSQL compatibility and is currently in Limited Public Preview. This compatibility mode is available for Starter only.
+    - **PostgreSQL Compatible**: provides PostgreSQL compatibility and is currently in limited public preview. This compatibility mode is available for Starter only.
 
 5. Enter a name for your instance, and then choose a cloud provider and a region where you want to host your instance.
 
@@ -76,7 +76,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
     - **PostgreSQL-compatible Starter**:
 
-        PostgreSQL-compatible Starter instances are currently free during the Limited Public Preview.
+        PostgreSQL-compatible Starter instances are currently free during the limited public preview.
 
         For the first 10 PostgreSQL-compatible Starter instances in your organization, each instance includes the following monthly free quota:
 

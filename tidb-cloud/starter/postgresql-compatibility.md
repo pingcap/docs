@@ -13,7 +13,7 @@ However, the implementation is not identical to PostgreSQL. Some PostgreSQL feat
 >
 > This page describes general PostgreSQL compatibility for PostgreSQL-compatible {{{ .starter }}} instances. It does not apply to MySQL-compatible TiDB clusters.
 >
-> During the Limited Public Preview, compatibility coverage and behavior might continue to evolve. Before migrating a production workload, validate the PostgreSQL features that your application depends on.
+> During the limited public preview, compatibility coverage and behavior might continue to evolve. Before migrating a production workload, validate the PostgreSQL features that your application depends on.
 
 ## Supported features
 
