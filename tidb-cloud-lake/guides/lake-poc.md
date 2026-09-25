@@ -1,40 +1,35 @@
 # TiDB Cloud Lake PoC guide
 
-This guide describes a repeatable proof of concept (PoC) for TiDB Cloud Lake.
-It focuses on the decisions that have the largest impact on a representative
-workload: object storage connectivity, schema compatibility, data layout,
-overlap maintenance, block size, and pre-aggregation.
-
-Run the PoC with a representative data sample and the real query shapes. Record
-query latency, bytes scanned, rows scanned, warehouse size, concurrency, and
-storage size before changing the layout. Keep the SQL, `EXPLAIN` output, and
-these measurements so that each optimization can be compared with the same
+This guide provides a repeatable proof of concept (PoC) for TiDB Cloud Lake.
+Use a representative data sample and the real query shapes. Record query
+latency, bytes scanned, rows scanned, warehouse size, concurrency, and storage
+size before changing the layout so that every optimization has a comparable
 baseline.
 
-## 1. Configure S3 or PrivateLink
+## 1. Configure an S3 bucket or PrivateLink
 
 Choose the connectivity model before loading data:
 
 - Use an S3 bucket when the source pipeline already writes Parquet, CSV, or
-  JSON objects to object storage. Configure the bucket in **Home > Connect**,
-  verify the region, and grant only the permissions required to read or write
-  the PoC prefix.
-- Use PrivateLink when traffic must stay on a private network path. Verify the
-  endpoint, security-group rules, DNS behavior, and the route from the client
-  or source cluster before starting the load.
+  JSON objects to object storage. In **Home > Connect**, obtain the Lake IAM
+  role ARN and follow [Authenticate with AWS IAM
+  Role](/tidb-cloud-lake/guides/aws-credentials.md) to configure the bucket,
+  stage, and data load. Grant the role only the permissions required for the
+  PoC prefix.
+- Use PrivateLink when traffic must stay on a private network path. In **Home
+  > Connect**, obtain the PrivateLink service and follow [Connect with AWS
+  PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md). Verify
+  the endpoint, security-group rules, DNS behavior, and route from the client
+  or source cluster.
 
-For either option, test connectivity with a small object first. Record the
-bucket/prefix, region, endpoint, IAM policy, and expected cross-region network
-cost. Do not put long-lived access keys in SQL or in benchmark scripts.
-
-If the source is TiDB Cloud Essential v2 or Premium, configure TiCDC to write
-to the S3 bucket, then configure Lake to read the incremental files. See the
-[TiCDC replication example](https://github.com/luyomo/cheatsheet/tree/main/tidb-lake/replication-from-tidb-to-lake).
+Test connectivity with a small object before starting the full load. Record
+the bucket or endpoint, region, IAM policy, and expected cross-region network
+cost. Do not put long-lived access keys in SQL or benchmark scripts.
 
 ## 2. Map the source schema before loading
 
-Create a source-to-Lake mapping before the first full load. Check the following
-fields explicitly:
+Create a source-to-Lake mapping before the first full load. Check these fields
+explicitly:
 
 - decimal precision and scale;
 - date, timestamp, and time-zone semantics;
@@ -44,21 +39,10 @@ fields explicitly:
 
 Load a small sample and compare row counts, null counts, min/max values, and
 aggregates with the source. For file loads, prefer compressed input when the
-pipeline permits it. For example:
-
-```sql
-INSERT INTO ops_apig.apig_access_logs
-FROM @~/_databend_load/1788852538417092000
-FILE_FORMAT = (
-  TYPE = NDJSON,
-  COMPRESSION = ZSTD,
-  MISSING_FIELD_AS = FIELD_DEFAULT
-);
-```
-
-See [Load from local file](https://docs.pingcap.com/tidbcloudlake/load-from-local-file/)
-and [input and output file formats](https://docs.pingcap.com/tidbcloudlake/input-output-file-formats/#compression)
-for supported formats and compression settings.
+pipeline permits it. See [Load from local
+file](/tidb-cloud-lake/guides/load-from-local-file.md) and [input and output
+file formats](/tidb-cloud-lake/guides/input-output-file-formats.md) for
+supported formats and compression settings.
 
 ## 3. Establish the performance baseline
 
@@ -69,7 +53,7 @@ The main factors affecting Lake query performance are:
 2. **Data layout.** Cluster-key order, overlap between blocks, block size, and
    partitioning determine how much data can be pruned.
 3. **Cache and network path.** Memory or local-disk cache reduces repeated S3
-   reads and network latency; measure both cold-cache and warm-cache runs.
+   reads and network latency. Measure both cold-cache and warm-cache runs.
 4. **Query shape.** Project only required columns and make selective predicates
    include the leading cluster-key columns where possible.
 
@@ -80,12 +64,13 @@ capacity before increasing concurrency.
 ## 4. Always choose a cluster key
 
 Choose a cluster key when creating every table. Use columns that occur often in
-filters, joins, or range scans, and put the most selective and commonly used
-prefix first. Keep key expressions narrow; for a long string, use a bounded
-prefix expression.
+filters, joins, or range scans, and put the most commonly used prefix first.
+Keep key expressions narrow; for a long string, use a bounded prefix
+expression. See the [cluster key guide](/tidb-cloud-lake/guides/cluster-key-performance.md)
+for key design details.
 
 ```sql
-CREATE TABLE lineitem_poc (
+CREATE TABLE lineitem (
   l_orderkey BIGINT NOT NULL,
   l_partkey INT NOT NULL,
   l_shipdate DATE NOT NULL,
@@ -104,12 +89,9 @@ predicates. If a table was created without one, add a key and recluster it
 before comparing query performance:
 
 ```sql
-ALTER TABLE lineitem_poc CLUSTER BY (DATE_TRUNC(MONTH, l_shipdate), l_orderkey);
-ALTER TABLE lineitem_poc RECLUSTER FINAL;
+ALTER TABLE lineitem CLUSTER BY (DATE_TRUNC(MONTH, l_shipdate), l_orderkey);
+ALTER TABLE lineitem RECLUSTER FINAL;
 ```
-
-See the [cluster key guide](/tidb-cloud-lake/guides/cluster-key-performance.md)
-for key design details.
 
 ## 5. Monitor overlap and run `RECLUSTER FINAL`
 
@@ -119,23 +101,18 @@ ingestion fast. Run the following after the initial load and after a major data
 change:
 
 ```sql
-ALTER TABLE lineitem_poc RECLUSTER FINAL;
+ALTER TABLE lineitem RECLUSTER FINAL;
 ```
 
 Inspect `CLUSTERING_INFORMATION` before and after reclustering. Track
 `average_depth`, `p95_depth`, and `average_overlaps` together with query bytes
 scanned and latency. A practical starting target is `p95_depth < 32`, but the
-acceptable value must be validated against the workload. If overlap repeatedly
-returns, revisit the key and partition design instead of only reclustering more
-often.
+acceptable value must be validated against the workload.
 
 For continuously changing tables, schedule reclustering from the observed
-overlap trend and measure its compute cost. A lower `recluster_depth` can improve
-pruning but generally requires more work:
-
-```sql
-ALTER TABLE lineitem_poc SET OPTIONS (recluster_depth = 8);
-```
+overlap trend and measure its compute cost. If overlap repeatedly returns,
+revisit the cluster key and partition design instead of only reclustering more
+often.
 
 ## 6. Choose an appropriate block size
 
@@ -160,23 +137,22 @@ query with the baseline query under the same warehouse and cache conditions.
 
 ```sql
 CREATE MATERIALIZED VIEW mv_account_daily
-CLUSTER BY (site_code, account)
+CLUSTER BY (tenant_id, account)
 AS
 SELECT
-  site_code,
+  tenant_id,
   account,
   category_id,
-  SUM(bet_total) AS bet_total,
-  SUM(valid_bet_total) AS valid_bet_total,
-  MAX(update_time) AS update_time
-FROM bet_overview_account_total_1d
-GROUP BY site_code, account, category_id;
+  SUM(amount) AS total_amount
+FROM fact_table
+GROUP BY tenant_id, account, category_id;
 ```
 
 Validate refresh latency, freshness, storage overhead, and query-result
 equivalence. Materialized views are best suited to single-table aggregation;
 check current feature limits before using window functions or a deduplication
-pattern. See the [TiDB Cloud Lake materialized view documentation](/tidb-cloud-lake/sql/materialized-view.md).
+pattern. See the [TiDB Cloud Lake materialized view
+documentation](/tidb-cloud-lake/sql/materialized-view.md).
 
 ## PoC acceptance checklist
 
