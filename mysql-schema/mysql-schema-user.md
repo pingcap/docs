@@ -83,7 +83,7 @@ The `mysql.user` table contains several fields that can be categorized into thre
     * `authentication_string` and `plugin`: `authentication_string` stores the credentials for the user account. The credentials are interpreted based on the authentication plugin specified in the `plugin` field.
     * `Account_locked`: indicates whether the user account is locked.
     * `Password_reuse_history` and `Password_reuse_time`: used for [Password reuse policy](/password-management.md#password-reuse-policy).
-    * `User_attributes`: provides information about user comments and user attributes.
+    * `User_attributes`: provides information about user comments and user attributes. It also stores the secondary password under `$.additional_password` when [dual passwords](/password-management.md#dual-password-policy) are used.
     * `Token_issuer`: used for the [`tidb_auth_token`](/security-compatibility-with-mysql.md#tidb_auth_token) authentication plugin.
     * `Password_expired`, `Password_last_changed`, and `Password_lifetime`: used for [Password expiration policy](/password-management.md#password-expiration-policy).
 
@@ -102,7 +102,7 @@ The `mysql.user` table contains several fields that can be categorized into thre
     * `authentication_string` and `plugin`: `authentication_string` stores the credentials for the user account. The credentials are interpreted based on the authentication plugin specified in the `plugin` field.
     * `Account_locked`: indicates whether the user account is locked.
     * `Password_reuse_history` and `Password_reuse_time`: used for [Password reuse policy](https://docs.pingcap.com/tidb/stable/password-management#password-reuse-policy).
-    * `User_attributes`: provides information about user comments and user attributes.
+    * `User_attributes`: provides information about user comments and user attributes. It also stores the secondary password under `$.additional_password` when [dual passwords](https://docs.pingcap.com/tidb/stable/password-management#dual-password-policy) are used.
     * `Token_issuer`: used for the [`tidb_auth_token`](https://docs.pingcap.com/tidb/stable/security-compatibility-with-mysql#tidb_auth_token) authentication plugin.
     * `Password_expired`, `Password_last_changed`, and `Password_lifetime`: used for [Password expiration policy](https://docs.pingcap.com/tidb/stable/password-management#password-expiration-policy).
 
