@@ -7,6 +7,10 @@ summary: Learn the `PARTITIONS` INFORMATION_SCHEMA table.
 
 The `PARTITIONS` table provides information about [partitioned tables](/partitioned-table.md).
 
+> **Note:**
+>
+> Computing `AVG_ROW_LENGTH`, `DATA_LENGTH`, or `INDEX_LENGTH` requires TiDB to read per-column size statistics from the `mysql.stats_histograms` system table, which holds one row for each column of every table. On clusters with a large number of tables, selecting any of these columns can consume noticeably more time and resources than selecting only `TABLE_ROWS`, which reads only the smaller `mysql.stats_meta` system table. If you need only the estimated row count, select `TABLE_ROWS` without the size columns to avoid this overhead.
+
 ```sql
 USE INFORMATION_SCHEMA;
 DESC partitions;
