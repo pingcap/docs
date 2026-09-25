@@ -42,6 +42,19 @@ Value:
 * The length and protocol version are the big-endian `int64` type.
 * The version of the current protocol is `1`.
 
+### Control the number and size of Events in a Message
+
+Open Protocol can encode one or more Row Changed Events into a single Message. The following Kafka sink parameters control the number of Row Changed Events in a Message and the Message size:
+
+| Parameter | Description |
+| --- | --- |
+| `max-batch-size` | The maximum number of Row Changed Events in a Message. The default value is `16`. |
+| `max-message-bytes` | The Message size threshold. |
+
+The Kafka sink compares the `max-message-bytes` value configured in the changefeed with the message size limit allowed by Kafka and uses the smaller value as the actual threshold. This prevents a Message encoded in a batch from exceeding the size allowed by Kafka. For how Kafka determines its message size limit, see [Kafka message size limit](/ticdc/ticdc-sink-to-kafka.md#kafka-message-size-limit).
+
+When the number of Row Changed Events in a Message reaches `max-batch-size`, or adding the next Row Changed Event would cause the Message to exceed the effective size threshold, subsequent Row Changed Events are written to a new Message.
+
 ## Event format
 
 This section introduces the formats of Row Changed Event, DDL Event, and Resolved Event.

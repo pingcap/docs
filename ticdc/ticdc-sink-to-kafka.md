@@ -77,13 +77,13 @@ The following are descriptions of sink URI parameters and values that can be con
 | `kafka-version`      | The version of the downstream Kafka. This value needs to be consistent with the actual version of the downstream Kafka.                      |
 | `kafka-client-id`    | Specifies the Kafka client ID of the replication task (optional. `TiCDC_sarama_producer_replication ID` by default). |
 | `partition-num`      | The number of the downstream Kafka partitions (optional. The value must be **no greater than** the actual number of partitions; otherwise, the replication task cannot be created successfully. `3` by default). |
-| `max-message-bytes`  | The maximum size of data that is sent to Kafka broker each time (optional, `10MB` by default, and the maximum value is `100MB`). From v5.0.6 and v4.0.6, the default value has changed from `64MB` and `256MB` to `10MB`. |
+| `max-message-bytes`  | The size threshold for an Open Protocol Message (optional, `10 MB` by default, and the maximum value is `100 MB`). For how the effective threshold is determined, see [Control the number and size of Events in a Message](/ticdc/ticdc-open-protocol.md#control-the-number-and-size-of-events-in-a-message). |
+| `max-batch-size` | The maximum number of Row Changed Events in an Open Protocol Message (optional, `16` by default). For more information, see [Control the number and size of Events in a Message](/ticdc/ticdc-open-protocol.md#control-the-number-and-size-of-events-in-a-message). |
 | `replication-factor` | The number of Kafka message replicas that can be saved (optional, `1` by default). This value must be greater than or equal to the value of [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) in Kafka. |
 | `required-acks` | A parameter used in the `Produce` request, which notifies the broker of the number of replica acknowledgements it needs to receive before responding. Value options are `0` (`NoResponse`: no response, only `TCP ACK` is provided), `1` (`WaitForLocal`: responds only after local commits are submitted successfully), and `-1` (`WaitForAll`: responds after all replicated replicas are committed successfully. You can configure the minimum number of replicated replicas using the [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas) configuration item of the broker). (Optional, the default value is `-1`).    |
 | `compression` | The compression algorithm used when sending messages (value options are `none`, `lz4`, `gzip`, `snappy`, and `zstd`; `none` by default). Note that the Snappy compressed file must be in the [official Snappy format](https://github.com/google/snappy). Other variants of Snappy compression are not supported.|
 | `auto-create-topic` | Determines whether TiCDC creates the topic automatically when the `topic-name` passed in does not exist in the Kafka cluster (optional, `true` by default). |
 | `enable-tidb-extension` | Optional. `false` by default. When the output protocol is `canal-json`, if the value is `true`, TiCDC sends [WATERMARK events](/ticdc/ticdc-canal-json.md#watermark-event) and adds the [TiDB extension field](/ticdc/ticdc-canal-json.md#tidb-extension-field) to Kafka messages. From v6.1.0, this parameter is also applicable to the `avro` protocol. If the value is `true`, TiCDC adds [three TiDB extension fields](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields) to the Kafka message. |
-| `max-batch-size` | New in v4.0.9. If the message protocol supports outputting multiple data changes to one Kafka message, this parameter specifies the maximum number of data changes in one Kafka message. It currently takes effect only when Kafka's `protocol` is `open-protocol` (optional, `16` by default). |
 | `enable-tls` | Whether to use TLS to connect to the downstream Kafka instance (optional, `false` by default). |
 | `ca` | The path of the CA certificate file needed to connect to the downstream Kafka instance (optional).  |
 | `cert` | The path of the certificate file needed to connect to the downstream Kafka instance (optional). |
@@ -108,15 +108,10 @@ The following are descriptions of sink URI parameters and values that can be con
 
 ### Best practices
 
-* It is recommended that you create your own Kafka Topic. At a minimum, you need to set the maximum amount of data of each message that the Topic can send to the Kafka broker, and the number of downstream Kafka partitions. When you create a changefeed, these two settings correspond to `max-message-bytes` and `partition-num`, respectively.
+* It is recommended that you create the Kafka topic yourself and configure its `max.message.bytes` value and number of partitions according to your business needs. When creating a changefeed, you can specify the number of partitions using `partition-num`.
 * If you create a changefeed with a Topic that does not yet exist, TiCDC will try to create the Topic using the `partition-num` and `replication-factor` parameters. It is recommended that you specify these parameters explicitly.
 * In most cases, it is recommended to use the `canal-json` protocol.
 * If the upstream data changes in TiCDC are infrequent, such as there might be no data changes for more than 10 minutes, it is recommended to increase the Kafka connection idle timeout in the Kafka broker configuration file. For more information, see [Why do TiCDC replication tasks to Kafka often fail with `broken pipe` errors](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors).
-
-> **Note:**
->
-> When `protocol` is `open-protocol`, TiCDC encodes multiple events into one Kafka message and avoids generating messages that exceed the length specified by `max-message-bytes`. 
-> If the encoded result of a single row change event exceeds the value of `max-message-bytes`, the changefeed reports an error and prints logs.
 
 ### TiCDC uses the authentication and authorization of Kafka
 
@@ -163,12 +158,12 @@ The following are examples when using Kafka SASL authentication:
 
   The usage scenarios for each permission are as follows:
 
-    | Resource type | Type of operation      |  Scenario                           |
-    | :-------------| :------------- | :--------------------------------|
-    | Cluster       | `DescribeConfig`| Gets the cluster metadata while the changefeed is running |
-    | Topic         | `Describe`      | Tries to create a topic when the changefeed starts |                
-    | Topic         | `Create`        | Tries to create a topic when the changefeed starts  |
-    | Topic         | `Write`         | Sends data to the topic                   | 
+    | Resource type | Type of operation | Scenario |
+    | :------------ | :---------------- | :------- |
+    | Cluster       | `DescribeConfig`  | Gets the cluster metadata while the changefeed is running |
+    | Topic         | `Describe`        | Tries to create a topic when the changefeed starts |
+    | Topic         | `Create`          | Tries to create a topic when the changefeed starts |
+    | Topic         | `Write`           | Sends data to the topic |
 
     When creating or starting a changefeed, you can disable the `Describe` and `Create` permissions if the specified Kafka topic already exists.
 
@@ -386,9 +381,24 @@ You can query the number of Regions a table contains by the following SQL statem
 SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="database1" AND TABLE_NAME="table1" AND IS_INDEX=0;
 ```
 
+## Kafka message size limit
+
+Kafka limits the message size that each topic can receive. The following configurations determine the effective limit for a target topic:
+
+| Configuration | Description |
+| --- | --- |
+| Kafka topic [`max.message.bytes`](https://kafka.apache.org/43/configuration/topic-configs/#topicconfigs_max.message.bytes) | Sets the message size limit for a specific topic and overrides the broker default. |
+| Kafka broker [`message.max.bytes`](https://kafka.apache.org/43/configuration/broker-configs/#brokerconfigs_message.max.bytes) | Specifies the default limit when the topic does not set `max.message.bytes`. |
+
+When the Kafka sink starts, it reads the effective message size limit for the target topic and uses the limit to determine whether a message is too large before sending it. If a single encoded message exceeds this limit and large-message handling is not configured, the Kafka sink returns `ErrMessageTooLarge`. For how to handle this error, see [How do I handle the `ErrMessageTooLarge` error returned by Kafka sink?](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-the-errmessagetoolarge-error-returned-by-kafka-sink).
+
+> **Note:**
+>
+> If the Kafka sink cannot read the message size configuration of the topic or broker because of Kafka ACL or other reasons, it uses the changefeed's `max-message-bytes` value as the local message size limit. If this value differs from the effective Kafka limit, the Kafka sink might not accurately determine whether a message can be sent and might not recover automatically after you increase the Kafka limit. Make sure that the Kafka account used by the changefeed has permission to read the topic and broker configurations. If you cannot grant this permission, set the changefeed's `max-message-bytes` value to the Kafka message size limit.
+
 ## Handle messages that exceed the Kafka topic limit
 
-Kafka topic sets a limit on the size of messages it can receive. This limit is controlled by the [`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes) parameter. If TiCDC Kafka sink sends data that exceeds this limit, the changefeed reports an error and cannot proceed to replicate data. To solve this problem, TiCDC adds a new configuration `large-message-handle-option` and provides the following solution.
+When a message exceeds the Kafka size limit, you can configure `large-message-handle-option` to prevent the replication task from failing because the message is too large.
 
 Currently, this feature supports two encoding protocols: Canal-JSON and Open Protocol. When using the Canal-JSON protocol, you must specify `enable-tidb-extension=true` in `sink-uri`.
 
