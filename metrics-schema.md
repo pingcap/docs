@@ -43,7 +43,7 @@ TABLE_NAME: uptime
 {{< copyable "sql" >}}
 
 ```sql
-SHOW TABLES;
+show tables;
 ```
 
 ```sql
