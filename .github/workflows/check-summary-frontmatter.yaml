@@ -1,0 +1,19 @@
+name: Summary Frontmatter
+
+on:
+  pull_request:
+    paths:
+      - "*.md"
+      - "**/*.md"
+      - "scripts/check-summary-frontmatter.py"
+      - ".github/workflows/check-summary-frontmatter.yaml"
+
+jobs:
+  check-summary-frontmatter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Check summary frontmatter
+        run: python3 scripts/check-summary-frontmatter.py .
