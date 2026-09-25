@@ -515,7 +515,7 @@ The following metrics are related to [TiKV MVCC In-Memory Engine](/tikv-in-memor
 
 > **Note:**
 >
-> The following monitoring metrics all use TiDB nodes as their data source, but they have some impact on the log backup process. Therefore, they are placed in the **TiKV Details** dashboard for ease of reference. TiKV actively pushes progress most of the time, but it is normal for some of the following monitoring metrics to occasionally not have sampled data.
+> The following monitoring metrics all use TiDB nodes as their data source, but they have some impact on the log backup process. Therefore, they are placed in the **TiKV-Details** dashboard for ease of reference. TiKV actively pushes progress most of the time, but it is normal for some of the following monitoring metrics to occasionally not have sampled data.
 
 - Request Checkpoint Batch Size: The request batch size when the log backup coordinator requests checkpoint information for each TiKV
 - Tick Duration \[P99|P90\]: The time taken by the tick inside the coordinator
