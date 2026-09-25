@@ -121,7 +121,21 @@ It specifies the storage location of the data file, which can be an Amazon S3 or
 >
 > If [SEM](/system-variables.md#tidb_enable_enhanced_security) is enabled in the target cluster, the `fileLocation` cannot be specified as a local file path.
 
-In the `fileLocation` parameter, you can specify a single file, or use the `*` and `[]` wildcards to match multiple files for import. Note that the wildcard can only be used in the file name, because it does not match directories or recursively match files in subdirectories. Taking files stored on Amazon S3 as examples, you can configure the parameter as follows:
+In the `fileLocation` parameter, you can specify a single file, or use the `*` and `[]` wildcards to match multiple files for import.
+
+<CustomContent platform="tidb">
+
+The wildcard can only be used in the file name, because it does not match directories or recursively match files in subdirectories.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Wildcards can appear in multiple path components, but each wildcard matches only within one `/`-separated component and never crosses `/`. Arbitrary-depth recursive matching is not supported.
+
+</CustomContent>
+
+Taking files stored on Amazon S3 as examples, you can configure the parameter as follows:
 
 - Import a single file: `s3://<bucket-name>/path/to/data/foo.csv`
 - Import all files in a specified path: `s3://<bucket-name>/path/to/data/*`
@@ -129,6 +143,12 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 - Import all files with the `foo` prefix in a specified path: `s3://<bucket-name>/path/to/data/foo*`
 - Import all files with the `foo` prefix and the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
 - Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`
+
+<CustomContent platform="tidb-cloud">
+
+- Import all `.csv` files from matching subdirectories at one fixed directory depth: `s3://<bucket-name>/dir/subdir*/*.csv`
+
+</CustomContent>
 
 ### Format
 
