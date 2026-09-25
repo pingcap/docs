@@ -497,3 +497,12 @@
 - FAQs
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
+
+## _BUILD_ALLOWLIST
+
+- Use Tiered Storage
+  - [Overview](/tidb-cloud/tiered-storage-overview.md)
+  - [Configure and Manage](/tidb-cloud/tiered-storage-guide.md)
+  - [Observability](/tidb-cloud/tiered-storage-observability.md)
+  - [Limitations](/tidb-cloud/tiered-storage-limitations.md)
+  - [FAQ](/tidb-cloud/tiered-storage-faq.md)
