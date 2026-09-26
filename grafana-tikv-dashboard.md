@@ -141,7 +141,7 @@ This section provides a detailed description of these key metrics on the **TiKV-
 
 ![TiKV Dashboard - Raft message metrics](/media/tikv-dashboard-raft-message.png)
 
-### Raft propose
+### Raft Propose
 
 - Raft apply proposals per ready: The histogram of the number of proposals that each ready operation contains in a batch while applying proposal.
 - Raft read/write proposals: The number of proposals per type per second
