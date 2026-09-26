@@ -99,9 +99,9 @@ The CLI saves the configuration locally and returns `"credentials_stored": true`
 
 To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
-## Step 3. Create a new file system
+## Step 3. Create a file system
 
-1. Create a file system and obtain its default file system token:
+1. Create a file system and obtain its token:
 
     ```bash
     export TI_FS_TOKEN="$(ti fs create-file-system --display-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
@@ -109,7 +109,7 @@ To learn more about installing, configuring, and updating TiDB Cloud CLI, see [I
 
     > **Tip:**
     >
-    > For simplicity, this quick start uses the token returned when the file system is created. For least-privilege access, you can generate a scoped token to restrict access to specific paths and operations. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+    > For simplicity, this quick start uses the default token returned when the file system is created, you can generate a scoped token to restrict access to specific paths and operations. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
 2. In the environment where you want to use the file system, set the file system token from the previous step as `TI_FS_TOKEN`, and then mount the file system to a local path as follows. This environment can be the same machine where you created the file system, another machine, or an AI agent sandbox.
 
@@ -123,7 +123,7 @@ To learn more about installing, configuring, and updating TiDB Cloud CLI, see [I
 
     > **Tip:**
     >
-    > The `mount` subcommand supports configuration-free execution, so you do not need to run `ti configure` beforehand. This is common when, for example, you create a file system on an admin node (where `ti-cli` is configured), but access the file system from another node or environment. In such cases, you can use the `ti fs mount` command by simply specifying the `TI_FS_TOKEN` environment variable, without any prior CLI configuration.
+    > The `mount` subcommand supports running without prior CLI configuration, so you do not need to run `ti configure` beforehand. This is common when, for example, you create a file system on an admin node (where `ti` is configured), but access the file system from another node or environment. In such cases, you can use the `ti fs mount` command by simply setting the `TI_FS_TOKEN` environment variable, without any prior CLI configuration.
 
     After mounting, you can work with the files using standard local file operations.
 
@@ -138,7 +138,7 @@ To learn more about installing, configuring, and updating TiDB Cloud CLI, see [I
 ## What's next
 
 - [Manage File Systems in TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your file systems.
-- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to create, inspect, and manage tokens for file system access.
 - [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) to access its files through a local directory.
 - [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md) to make the same files available to another machine, user, application, or agent.
 - [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md) to isolate, review, and apply file changes.
