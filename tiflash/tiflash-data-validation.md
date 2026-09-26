@@ -15,13 +15,15 @@ Starting from v5.4.0, TiFlash introduces more advanced data validation features.
 
 ## Validation mechanism
 
-The validation mechanism builds upon the DeltaTree File (DTFile). DTFile is the storage file that persists TiFlash data. DTFile has three formats:
+The validation mechanism builds upon the DeltaTree File (DTFile). The numeric values of `storage.format_version` are TiFlash storage format identifiers. They are not the same as the DTFile validation generations described in this document. The DTFile validation mechanism has three generations:
 
 | Version | State | Validation mechanism | Notes |
 | :-- | :-- | :-- |:-- |
 | V1 | Deprecated | Hashes are embedded in data files. | |
 | V2 | Default for versions < v6.0.0 | Hashes are embedded in data files. | Compared to V1, V2 adds statistics of column data. |
 | V3 | Default for versions >= v6.0.0 | V3 contains metadata and token data checksum, and supports multiple hash algorithms. | New in v5.4.0. |
+
+In current releases, `storage.format_version` supports values from `2` to `7`. Different `storage.format_version` values can share the same DTFile validation generation while changing other TiFlash storage components. For the current value options and defaults of `storage.format_version`, see [TiFlash configuration file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file).
 
 DTFile is stored in the `stable` folder in the data file directory. All formats currently enabled are in folder format, which means the data is stored in multiple files under a folder with a name like `dmf_<file id>`.
 
@@ -30,9 +32,8 @@ DTFile is stored in the `stable` folder in the data file directory. All formats 
 TiFlash supports both automatic and manual data validation:
 
 * Automatic data validation:
-    * v6.0.0 and later versions use the V3 validation mechanism by default.
-    * Versions earlier than v6.0.0 use the V2 validation mechanism by default.
-    * To manually switch the validation mechanism, refer to [TiFlash configuration file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). However, the default configuration is verified by tests and therefore recommended.
+    * The DTFile validation generations on this page are not a simple count of `storage.format_version` values.
+    * To view the current defaults and value options of `storage.format_version`, refer to [TiFlash configuration file](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file). However, the default configuration is verified by tests and therefore recommended.
 * Manual data validation. Refer to [`DTTool inspect`](/tiflash/tiflash-command-line-flags.md#dttool-inspect).
 
 > **Warning:**
