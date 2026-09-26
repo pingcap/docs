@@ -99,41 +99,142 @@ The CLI saves the configuration locally and returns `"credentials_stored": true`
 
 To learn more about installing, configuring, and updating TiDB Cloud CLI, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
-## Step 3. Create a file system
+## Step 3. Create and use a file system
 
-1. Create a file system and obtain its token:
+1. Create a file system:
 
     ```bash
-    export TI_FS_TOKEN="$(ti fs create-file-system --display-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
+    ti fs create-file-system --display-name agent-workspace --wait --region aws-us-west-2
     ```
 
-    > **Tip:**
-    >
-    > For simplicity, this quick start uses the default token returned when the file system is created, you can generate a scoped token to restrict access to specific paths and operations. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+    The command returns information about the new file system. Save the following values for later use:
 
-2. In the environment where you want to use the file system, set the file system token from the previous step as `TI_FS_TOKEN`, and then mount the file system to a local path as follows. This environment can be the same machine where you created the file system, another machine, or an AI agent sandbox.
+    - `file_system_id`: uniquely identifies the file system.
+    - `fs_token`: the owner token for the file system.
+
+    > **Note:**
+    >
+    > - The owner token grants full access to the file system and is returned only when it is issued. It does not expire, so revoke it when it is no longer needed. Treat it as a secret and keep it out of logs, issues, chat messages, and source control.
+    >
+    > - For least-privilege access, you can generate a scoped token to restrict access to specific paths and operations. For more information, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+
+2. Depending on your operating system, use one of the following methods to access and work with the file system.
+
+    The environment where you access the file system can be the same machine where you created it, another machine, or an AI agent sandbox.
+
+    <SimpleTab>
+
+    <div label="macOS or Linux">
+
+    On macOS or Linux, you can either mount the file system as a local directory or use `ti fs` commands to work with its files directly.
+
+    **Option 1: Mount the file system (recommended)**
+
+    Set the owner token returned in the previous step as the `TI_FS_TOKEN` environment variable:
 
     ```bash
-    export TI_FS_TOKEN="<owner-token>" # Skip this line if you are continuing in the same terminal as step 1, where TI_FS_TOKEN is already set.
+    export TI_FS_TOKEN="<owner-token>"
+    ```
+
+    Create a local directory and mount the file system to it:
+
+    ```bash
     mkdir ~/mnt-test
     ti fs mount --mount-path ~/mnt-test --region aws-us-west-2
-    echo 'Hello from TiDB Cloud Filesystem' >> ~/mnt-test/hello.txt
-    ls -l ~/mnt-test/hello.txt
     ```
 
     > **Tip:**
     >
-    > The `mount` subcommand supports running without prior CLI configuration, so you do not need to run `ti configure` beforehand. This is common when, for example, you create a file system on an admin node (where `ti` is configured), but access the file system from another node or environment. In such cases, you can use the `ti fs mount` command by simply setting the `TI_FS_TOKEN` environment variable, without any prior CLI configuration.
+    > The `mount` subcommand can run without prior CLI configuration, so you do not need to run `ti configure` beforehand. This is useful when, for example, you create a file system on an admin node where `ti` is configured, but mount the file system from another node or environment. In this case, set `TI_FS_TOKEN` before running `ti fs mount`.
 
-    After mounting, you can work with the files using standard local file operations.
-
-3. After you finish using the mounted file system in that environment, unmount it:
+    After mounting, you can work with the files using standard local file operations. For example, write and read a file:
 
     ```bash
-    ti fs unmount --mount-path ~/mnt-test --region aws-us-west-2
+    echo 'Hello from TiDB Cloud Filesystem' > ~/mnt-test/hello.txt
+    cat ~/mnt-test/hello.txt
+    ```
+
+    Expected output:
+
+    ```text
+    Hello from TiDB Cloud Filesystem
+    ```
+
+    When you finish using the mounted file system, unmount it:
+
+    ```bash
+    ti fs umount --mount-path ~/mnt-test --region aws-us-west-2
     ```
 
     Unmounting removes the local mount, but the files remain in TiDB Cloud Filesystem and can be accessed again from the same or another environment.
+
+    **Option 2: Use `ti fs` commands**
+
+    You can also work with files directly using `ti fs` commands without mounting the file system.
+
+    Write a file:
+
+    ```bash
+    echo "Hello from TiDB Cloud Filesystem" | ti fs copy-file \
+      --file-system-id "<file-system-id>" \
+      --from-stdin \
+      --to-remote /hello.txt
+    ```
+
+    Then read the file:
+
+    ```bash
+    ti fs read-file \
+      --file-system-id "<file-system-id>" \
+      --path /hello.txt
+    ```
+
+    Expected output:
+
+    ```text
+    Hello from TiDB Cloud Filesystem
+    ```
+
+    The file is stored in TiDB Cloud Filesystem rather than in the local terminal session. It remains available after you close the terminal, and you can access it again from another session or supported environment with access to the file system.
+
+    For more information about working with files using `ti fs` commands, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md).
+
+    </div>
+
+    <div label="Windows">
+
+    On Windows, you can use `ti fs` commands to work with files directly as follows. File system mounting is not supported on Windows.
+
+    Write a file:
+
+    ```powershell
+    "Hello from TiDB Cloud Filesystem" | ti fs copy-file `
+      --file-system-id "<file-system-id>" `
+      --from-stdin `
+      --to-remote /hello.txt
+    ```
+
+    Then read the file:
+
+    ```powershell
+    ti fs read-file `
+      --file-system-id "<file-system-id>" `
+      --path /hello.txt
+    ```
+
+    Expected output:
+
+    ```text
+    Hello from TiDB Cloud Filesystem
+    ```
+
+    The file is stored in TiDB Cloud Filesystem rather than in the local PowerShell session. It remains available after you close the session, and you can access it again from another session or supported environment with access to the file system.
+
+    For more information about working with files using `ti fs` commands, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md).
+
+    </div>
+
+    </SimpleTab>
 
 ## What's next
 
