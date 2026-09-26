@@ -130,7 +130,7 @@ The following example shows how you can create a file system in one environment 
 2. In the environment where you want to use the file system, set the owner token from the previous step as `TI_FS_TOKEN`, and then mount the file system to a local path as follows. This environment can be the same machine where you created the file system, another machine, or an AI agent sandbox.
 
     ```bash
-    export TI_FS_TOKEN="<owner-token>" # Skip this line if you are continuing in the same terminal as step 1, where TI_FS_TOKEN is already set.
+    # export TI_FS_TOKEN="<owner-token>" # If you are continuing on a different environment as step 1, pass in the TI_FS_TOKEN you get from step 1 here.
     mkdir ~/mnt-test
     ti fs mount-file-system --mount-path ~/mnt-test --region aws-us-west-2
     echo 'Hello from TiDB Cloud Filesystem' >> ~/mnt-test/hello.txt
