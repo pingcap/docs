@@ -167,6 +167,18 @@ ti fs-vault delete-grant \
 
 Revoking a grant prevents the delegated token from authorizing new operations. It cannot remove a secret value that a process has already read.
 
+Verify the revocation from the delegated environment before treating the grant as retired. In the shell where `TI_VAULT_TOKEN` is set to the delegated token, allow approximately 10 seconds for authentication caches to update, then retry a permitted operation with the same token:
+
+```shell
+ti fs-vault run-with-secret \
+  --secret-path /n/vault/db-prod \
+  -- printenv DB_URL
+```
+
+Expect an authentication or authorization error (for example, `unauthorized`, `permission denied`, or `grant revoked`). If the command still returns the secret value, verify that you passed the correct grant ID to `delete-grant`, wait longer than the cache interval, and retry. A network error, timeout, or missing-file-system error does not confirm revocation; only an explicit auth failure does.
+
+If the grant granted access through a Vault mount, first unmount the delegated Vault mount and remount with the same token. A live Vault mount holds its authorization on the delegated side and does not re-check the grant on every read.
+
 ## Clean up the example
 
 After unmounting and revoking the example grant, delete the test secret and the temporary files:

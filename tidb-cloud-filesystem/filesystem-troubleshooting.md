@@ -64,7 +64,7 @@ If token mutation reports `fs.token_mount_active`, stop applications using the m
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-A normal FUSE unmount drains pending writes automatically. WebDAV does not support `drain-file-system`; use normal unmount for WebDAV.
+A graceful FUSE unmount drains pending writes automatically. Verify the mount log for `reason=force_quit` before treating a `0` exit status as proof of drain; see [Unmount returns success but the mount process exits abnormally](#unmount-returns-success-but-the-mount-process-exits-abnormally). WebDAV does not support `drain-file-system`; use graceful unmount for WebDAV.
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
 
@@ -199,7 +199,7 @@ Close editors, shells whose working directory is inside the mount, and other ope
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-A successful FUSE unmount flushes pending writes automatically. Running `drain-file-system` separately does not close open files or resolve a busy mount. Use it to flush pending writes while keeping the mount running. WebDAV does not support drain.
+A graceful FUSE unmount flushes pending writes automatically, but only when the mount process exits normally. Check the mount log for `reason=force_quit` before relying on a `0` exit status from `unmount-file-system`; see [Unmount returns success but the mount process exits abnormally](#unmount-returns-success-but-the-mount-process-exits-abnormally). Running `drain-file-system` separately does not close open files or resolve a busy mount. Use it to flush pending writes while keeping the mount running. WebDAV does not support drain.
 
 ## Unmount returns success but the mount process exits abnormally
 
