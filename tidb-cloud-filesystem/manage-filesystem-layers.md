@@ -173,7 +173,7 @@ ti fs unmount-file-system \
   --mount-path "$layer_mount"
 ```
 
-A successful unmount flushes pending writes. If unmount fails, resolve the error before continuing; see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
+Normal unmount drains pending writes. If unmount fails or the mount log reports a forced exit, keep the local state and verify the layer's contents before continuing; see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
 
 Choose one outcome: **commit** applies the changes to the base file system; **rollback** discards them. To commit:
 

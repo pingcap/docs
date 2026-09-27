@@ -27,7 +27,7 @@ ti fs list-file-system-tokens
 ## Options
 
 - `--file-system-id <string>`: Specify the file system whose tokens are listed. Required when using TiDB Cloud API credentials; optional when `--fs-token` or `TI_FS_TOKEN` supplies an owner token, because `ti` derives the ID from that token.
-- `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system. If no file system token is available, the command uses the configured TiDB Cloud API keys. Scoped tokens cannot list token metadata.
+- `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses TiDB Cloud API credentials and requires an explicit `--file-system-id`. It does not automatically use a locally stored owner token. Scoped tokens cannot list token metadata.
 - `--include-expired`: Include expired token metadata. Revoked tokens are not returned by the service.
 - `--help`: Display help information.
 - `--offset <int32>`: Set the zero-based token offset [default: 0].

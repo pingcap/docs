@@ -45,7 +45,7 @@ The new plaintext appears once in the response. Store it securely or add `--stor
 
 ## File system token is rejected
 
-An HTTP 401 from a file operation does not tell you whether the token is disabled, expired, refreshed on another machine, or revoked. Inspect token metadata using TiDB Cloud API keys:
+An HTTP 401 or `invalid API key` error from a file operation can indicate that the file system token is disabled, expired, refreshed on another machine, or revoked. In this context, `API key` can refer to the file system token; it does not necessarily indicate a problem with your TiDB Cloud API keys. Inspect token metadata using TiDB Cloud API keys:
 
 ```bash
 ti fs list-file-system-tokens \
@@ -200,6 +200,12 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
 A successful FUSE unmount flushes pending writes automatically. Running `drain-file-system` separately does not close open files or resolve a busy mount. Use it to flush pending writes while keeping the mount running. WebDAV does not support drain.
+
+## Unmount returns success but the mount process exits abnormally
+
+In `ti v0.2.6`, a layer or checkpoint mount can return `unmounted` after approximately 30 seconds even when its background process reports `late pending drain` followed by `reason=force_quit` and exit code `1`. This behavior has been observed after reading a small file from a layer and after writing, fsyncing, and draining a layer mount.
+
+Treat this result as an abnormal shutdown. Keep the machine and local cache available, and verify required files with direct CLI reads. For a layer, supply its `--layer-id` when reading; for committed changes, read the base file system without selecting a layer. Do not delete local state or discard the layer until verification completes. Include the CLI version and redacted mount log when reporting the problem.
 
 ## Report a problem
 

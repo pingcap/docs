@@ -67,11 +67,11 @@ If a small-file check has not returned after 30 seconds, interrupt it and follow
 
 ### Unmount when you are finished
 
-Stop applications from writing to the mounted directory, close open files, and follow your platform guide to run `ti fs unmount-file-system`. A successful FUSE unmount flushes pending writes before stopping the mount. Unmounting removes the local mount but does not delete the file system or its data.
+Stop applications from writing to the mounted directory, close open files, and follow your platform guide to run `ti fs unmount-file-system`. Normal FUSE unmount drains pending writes before stopping the mount. Before removing the machine or its local cache, verify required files through direct CLI reads. Unmounting removes the local mount but does not delete the file system or its data.
 
 ### FUSE write behavior
 
-FUSE mounts can buffer writes locally before sending them to the service. A successful normal unmount flushes these writes, so you do not need to run `drain-file-system` first.
+FUSE mounts can buffer writes locally before sending them to the service. Normal unmount includes a drain, so you do not need to run `drain-file-system` first. If the mount log reports `force_quit` or pending writes after unmount, follow [Unmount returns success but the mount process exits abnormally](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally).
 
 Use `drain-file-system` only when you need pending writes to reach the file system while keeping the mount running, such as before creating a checkpoint or making updated files available to another environment.
 

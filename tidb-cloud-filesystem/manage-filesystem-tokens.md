@@ -99,6 +99,8 @@ The output does not include token plaintext. If you lose an owner token, generat
 
 Use [`disable-file-system-token`](/ai/ti/reference/ti-fs-disable-file-system-token.md) to temporarily suspend a token, and [`enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) to restore it.
 
+With owner token authentication, these two commands can change only scoped tokens. To enable or disable an owner token, use TiDB Cloud API credentials, specify `--file-system-id`, and unset `TI_FS_TOKEN` so it does not override the API credentials. Do not supply `--fs-token` for that request. Allow approximately 10 seconds for the change to take effect before verifying access.
+
 ## Rotate or revoke a token
 
 Use [`refresh-file-system-token`](/ai/ti/reference/ti-fs-refresh-file-system-token.md) to rotate a file system token.
