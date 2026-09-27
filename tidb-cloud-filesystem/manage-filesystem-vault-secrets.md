@@ -6,7 +6,9 @@ aliases: ['/ai/manage-filesystem-vault-secrets']
 
 # Manage Vault Secrets for a File System
 
-Use the file system Vault to store credentials and grant temporary access to the fields an application or agent needs. A delegated workflow can read those fields, inject them into a process, or access them through a read-only mount. The owner can audit and revoke access.
+In TiDB Cloud Filesystem, you can use the file system Vault to store credentials and other sensitive values instead of regular file system files. You can grant an application, automation, or agent temporary access to only the fields it needs, without giving it broad access to the file system.
+
+The delegated workflow can read those fields, inject them into a process, or access them through a read-only mount. The owner can audit and revoke access.
 
 ## Prerequisites
 

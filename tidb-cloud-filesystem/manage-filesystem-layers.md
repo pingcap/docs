@@ -6,7 +6,7 @@ aliases: ['/ai/manage-filesystem-layers']
 
 # Manage File System Layers and Checkpoints
 
-A layer isolates file changes from the base file system until you commit them. Use checkpoints to preserve intermediate states and forks to explore changes independently. For the underlying concepts, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
+In TiDB Cloud Filesystem, a layer isolates file changes from the base file system until you commit them. You can use checkpoints to preserve intermediate states and forks to explore changes independently. For the underlying concepts, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
 
 ## Prerequisites
 

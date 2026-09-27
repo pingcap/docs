@@ -1,12 +1,14 @@
 ---
 title: Share a File System Across Machines
-summary: Share a directory with another user or environment, verify read-only access, and revoke the token when sharing is complete.
+summary: Learn how to share files across machines with a separate scoped token for each recipient, verify permissions, and revoke access independently.
 aliases: ['/ai/ti-share-filesystem-across-machines-example']
 ---
 
 # Share a File System Across Machines
 
-Give another user, machine, or agent read-only access to a directory for 24 hours with a scoped token. Verify access with a sample file, then revoke the token when sharing is complete.
+In TiDB Cloud Filesystem, you can share files with another user, machine, CI job, or agent without copying them between environments. Give each recipient a separate scoped token to limit access by path and operation, and revoke one recipient's access without affecting others.
+
+This guide shows you how to grant read-only access to a directory for 24 hours, verify the recipient's permissions, and then revoke the token.
 
 > **Note:**
 >

@@ -6,7 +6,7 @@ aliases: ['/ai/use-filesystem-journals']
 
 # Use Journals in a File System
 
-Use a file system journal to keep an ordered, persistent record of agent and automation events, such as task starts, completions, and handoffs. Read or search the entries to trace what happened and which agent performed each action.
+In TiDB Cloud Filesystem, you can use a file system journal to keep an ordered, persistent record of agent and automation events, such as task starts, completions, and handoffs. You can read or search the entries to trace what happened and which agent performed each action.
 
 Entries are append-only: you can add events but cannot modify existing entries. A hash chain links the entries so you can verify their integrity and order.
 

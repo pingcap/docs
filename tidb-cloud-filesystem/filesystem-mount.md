@@ -6,7 +6,7 @@ aliases: ['/ai/mount-filesystem']
 
 # Mount a File System
 
-Mount a TiDB Cloud file system when an editor, application, or agent needs local file paths. The mount exposes remote files as a local directory that your tools can read and write.
+In TiDB Cloud Filesystem, you can mount a file system as a local directory when an editor, application, agent, or other tool needs local file paths. The mount lets these tools read and write remote files using local file operations.
 
 For CLI-only access, use [`ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md) to read, copy, organize, and search files without mounting.
 

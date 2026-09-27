@@ -5,7 +5,9 @@ summary: Learn how to mount a TiDB Cloud file system on macOS, choose WebDAV or 
 
 # Mount a File System on macOS
 
-Mount a TiDB Cloud file system on macOS to access its files with local applications and tools. WebDAV supports general file access without additional mount software. Use FUSE with macFUSE to mount layers or checkpoints, or to flush pending writes while keeping the mount running.
+On macOS, you can mount a file system in TiDB Cloud Filesystem as a local directory and access its files with your usual applications and tools.
+
+For general file access, WebDAV requires no additional mount software. Use FUSE with macFUSE to mount layers or checkpoints, or to flush pending writes while keeping the mount running.
 
 For automatic driver selection, TiDB Cloud CLI (`ti`) prefers FUSE when macFUSE is installed and uses WebDAV otherwise. The examples specify a driver explicitly to make the choice clear.
 
