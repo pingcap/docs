@@ -112,6 +112,8 @@ The commands use `TI_REGION_CODE` unless you specify `--region`. Configuration s
 
 ## Step 3. Create and use a file system
 
+For CI or agents, disable command tracing before handling tokens. Capture the creation command's JSON response in a protected variable or secret store, and exclude it from job logs. Save both `file_system_id` and `fs_token` from the captured response.
+
 1. Create a file system:
 
     ```bash
@@ -129,7 +131,7 @@ The commands use `TI_REGION_CODE` unless you specify `--region`. Configuration s
 
 2. Load the owner token. Paste the returned `fs_token` at the prompt and press Enter; input is hidden. These commands also clear any previous file system selection. Keep `TI_REGION_CODE` set.
 
-    In automation, assign the returned `fs_token` to `TI_FS_TOKEN` in the job environment instead of running the prompt. Also clear `TI_FS_FILE_SYSTEM_ID` if it was previously set.
+    In automation, set `TI_FS_TOKEN` from the captured `fs_token` and clear `TI_FS_FILE_SYSTEM_ID`. Skip the input prompts.
 
     <SimpleTab groupId="operating-systems">
 

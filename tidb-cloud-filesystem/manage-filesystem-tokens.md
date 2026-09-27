@@ -55,7 +55,7 @@ The CLI does not store the generated token locally by default. To store it local
 
 On a trusted machine, use an owner token to generate a scoped token. Supply the owner token through `--fs-token` or `TI_FS_TOKEN`, or use the owner token stored locally for the selected file system.
 
-The following example uses the locally stored owner token and creates a scoped token that allows an agent to read, list, and write files under `/workspace`:
+Before using this example, create the remote `/workspace` directory if it does not exist. Use the locally stored owner token to grant an agent permission to read, list, and write files in that directory:
 
 ```shell
 SCOPED_TOKEN="$(ti fs generate-file-system-scoped-token \
@@ -77,7 +77,7 @@ ti fs list-files --path /workspace
 
 The `--allow` value uses the format `<path>:<comma-separated-operations>`. Supported operations are `read`, `list`, `search`, `write`, and `delete`; `search` requires `read`. In this example, the token permits `read`, `list`, and `write` operations under `/workspace`.
 
-The remote `/workspace` directory must already exist. To use this token for a mount, specify `--remote-path /workspace`. A token restricted to `/workspace` cannot mount the file system root `/`.
+To mount the directory with this token, specify `--remote-path /workspace`. A token restricted to `/workspace` cannot mount the file system root `/`.
 
 For more information about scoped permissions and credential selection, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 
@@ -107,7 +107,7 @@ When you refresh a locally stored token, the CLI automatically updates the local
 
 > **Note:**
 >
-> Refresh is non-idempotent. For example, after a network timeout, the service might have rotated the token even though you did not receive the new value. Do not retry the refresh with the old token. Instead, generate a new owner token using TiDB Cloud API credentials.
+> If a refresh request times out, the service might have rotated the token without returning the new value to you. Do not retry with the old token. Generate a new owner token using TiDB Cloud API credentials.
 
 > **Warning:**
 >
