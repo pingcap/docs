@@ -54,9 +54,13 @@ ti fs list-file-system-tokens \
   --output text
 ```
 
-Token names are not unique. Use the immutable `token_id` from this output for enable, disable, or delete operations. Old credentials created or imported without token lifecycle metadata can remain valid, but `ti` cannot safely identify their list row and never guesses a match.
+Token names are not unique, so use the immutable `token_id` from this output for enable, disable, or delete operations. An older credential that was created or imported without token lifecycle metadata can still be valid, but it has no row in this list, and `ti` never guesses a match.
 
-After enable, disable, delete, or refresh, allow approximately 10 seconds for authentication caches to converge. If refresh reports `fs.token_refresh_ambiguous`, the server might have rotated the token even though the response was lost. The outcome is unknown: the old token might still work if the refresh did not commit, or it might already be invalid. The replacement token from a committed refresh cannot be recovered because its response was lost. Do not retry the refresh with the old token. Instead, use TiDB Cloud credentials to generate an independent owner token.
+After you enable, disable, delete, or refresh a token, allow about 10 seconds for authentication caches to converge.
+
+If refresh reports `fs.token_refresh_ambiguous`, the response was lost and the outcome is unknown. The old token might still work, if the rotation never committed, or it might already be invalid, and the replacement token cannot be recovered. Do not retry the refresh with the old token. Use TiDB Cloud credentials to generate an independent owner token instead.
+
+If a file command reports `invalid API key` and exit code 1 while you are passing a file system token, check the token status before you look at your API key pair. A deleted or disabled token produces this message even when the API key pair is correct.
 
 If token mutation reports `fs.token_mount_active`, use the exact mount path in the error:
 
@@ -66,6 +70,20 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
+
+## Scoped token is denied
+
+A scoped token that is used beyond its scope fails with exit code 1, and the message is one of two. Most commands report `fs access denied`. `ti fs copy-file` often reports an empty `HTTP 403:` instead.
+
+Both messages mean the same thing: the token does not allow this operation on this path. Neither one is a connectivity problem or a sign that the token is invalid. Check what the token allows before you change anything:
+
+```bash
+ti fs list-file-system-tokens \
+  --file-system-id "<file-system-id>" \
+  --output text
+```
+
+Compare the token scope with the path and the operation you used. `search` also requires `read`. A scoped token cannot list the file system root unless its allowed path is `/`. A scoped token cannot widen its own permissions, so generate a new one with the operations you need instead of trying to change the existing token.
 
 ## File system selection is missing
 
@@ -180,6 +198,21 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
 Unmount performs the graceful FUSE drain automatically. Running `drain-file-system` separately does not close file descriptors or resolve a busy mount; use it only when you need to flush pending work while leaving the mount online. Drain is not supported for WebDAV.
+
+## Exit codes
+
+`ti fs` uses the following exit codes. Automation can branch on them instead of matching error text.
+
+| Code | Meaning | What to do |
+| --- | --- | --- |
+| 0 | Success | Continue. |
+| 1 | The request was valid and the runtime or the service refused it | Read the message. A scoped token denial, a missing payment method, and a display name conflict all land here. |
+| 2 | The command or the profile configuration cannot be used | Fix the command or the profile. Unknown flag, missing required input, a region where `ti fs` is unavailable, or a token file with loose permissions. |
+| 3 | Authentication failed | Check the token or the API key pair. |
+| 4 | The account lacks permission for the operation | Ask an organization administrator. This is different from the data-path denial at 1. |
+| 5 | The file system, token, or other resource named in the request does not exist | Check the ID. A path that does not exist inside a file system returns 1, not 5. |
+
+One case does not follow the table. A deleted or disabled token is reported on the data path, so it exits 1 rather than 3. See [File system token is rejected](#file-system-token-is-rejected).
 
 ## Report a problem
 
