@@ -29,6 +29,7 @@
 - [Manage Vault Secrets for a File System](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
 - [Configure AI Providers for a File System](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
 - [Automation and AI Agent Workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
+- [Pricing & Billing](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)
 
 ## REFERENCES
 
