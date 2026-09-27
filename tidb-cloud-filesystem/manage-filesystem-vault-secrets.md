@@ -28,16 +28,34 @@ Treat both owner tokens and delegated Vault tokens as credentials. Do not expose
 
 A Vault secret can contain multiple named fields. For example, a database secret might contain a connection URL and a password.
 
+Write each field value to its own local file. Read the value into a variable first so that it does not enter your shell history, then write it with `printf '%s'`. Do not use `echo` or an editor, because a value that ends in a newline is stored without an error and is rejected later by [`run-with-secret`](#inject-a-secret-into-a-process) with `refusing to inject (EACCES)`:
+
+```shell
+umask 077
+
+printf 'DB_URL: ' >&2
+read -r -s DB_URL_VALUE
+printf '\n' >&2
+printf '%s' "$DB_URL_VALUE" > ./db-url.txt
+
+printf 'PASSWORD: ' >&2
+read -r -s PASSWORD_VALUE
+printf '\n' >&2
+printf '%s' "$PASSWORD_VALUE" > ./password.txt
+
+unset DB_URL_VALUE PASSWORD_VALUE
+```
+
 Create a secret named `db-prod`:
 
 ```shell
 ti fs-vault create-secret \
   --secret-name db-prod \
-  --field DB_URL=mysql://example \
+  --field DB_URL=@./db-url.txt \
   --field PASSWORD=@./password.txt
 ```
 
-In `PASSWORD=@./password.txt`, the `@` prefix tells `ti` to read the field value from the local file instead of treating the file path as the value.
+The `@` prefix tells `ti` to read the field value from the local file instead of treating the file path as the value. Prefer it for every field, because a value written directly as `--field DB_URL=mysql://example` appears in shell history and in process listings.
 
 Some Vault commands identify a secret by name, such as `db-prod`. Commands that operate on a specific secret path, such as `replace-secret` and `run-with-secret`, use its full Vault path instead. For example, the Vault path of `db-prod` is `/n/vault/db-prod`.
 
@@ -77,6 +95,8 @@ ti fs-vault replace-secret \
 ```
 
 Each file in the directory becomes a field in the replacement secret. Any existing field that is not included in the directory is not retained.
+
+Write each file the same way as in [Create a secret](#create-a-secret), reading the value into a variable and writing it with `printf '%s'`. `replace-secret` accepts a value that ends in a newline and reports success, and the failure appears later when `run-with-secret` refuses to inject it.
 
 Keep these local files out of source control and remove them when they are no longer needed. For details, see the [`replace-secret` reference](/ai/ti/reference/ti-fs-vault-replace-secret.md).
 
@@ -141,7 +161,7 @@ Revoking a grant prevents the delegated token from authorizing new operations. I
 
 If an application expects credentials as files instead of environment variables, you can optionally expose permitted Vault fields through a read-only FUSE mount on Linux or macOS.
 
-For delegated access, first make the delegated Vault token available as `TI_VAULT_TOKEN`. Then create a local mount directory and mount the Vault:
+`mount-vault` always requires a delegated Vault token, whether you hold the owner token or not. If you hold the owner token, create a grant for yourself first, as described in [Delegate limited access](#delegate-limited-access). Make the token available as `TI_VAULT_TOKEN`, then create a local mount directory and mount the Vault:
 
 ```shell
 mkdir -p /path/to/vault
