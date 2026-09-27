@@ -24,83 +24,78 @@ Before you begin:
 - [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Make the file system and its token available to `ti`. See [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
-The write examples below require a token with write permission.
+Use Bash or Zsh and keep the same shell open for each procedure.
 
 ## Mount with WebDAV
 
-For most workflows, you can use WebDAV without installing additional mount software.
+The following example uploads a small file, reads and updates it through WebDAV, and verifies the update after unmounting. It requires a token with read and write permissions.
 
-1. Create a local directory for the mount:
+WebDAV does not support `--read-only`. Use a scoped token with only `read` and `list` permissions to enforce read-only access at the service. For a local read-only mount, use macFUSE with `--driver fuse --read-only`. See [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional).
+
+1. Select the remote directory and create an empty local mount directory. For a token scoped to one directory, replace `/` with that directory's path:
 
     ```bash
-    mkdir -p "$HOME/workspace"
+    remote_path="/"
+    mount_dir="$(mktemp -d "$HOME/ti-fs-webdav.XXXXXX")"
     ```
 
-2. Mount the file system with WebDAV:
+2. Upload a unique sample file to that remote directory:
+
+    ```bash
+    test_file="mount-check-$(date +%s)-$$.txt"
+    printf 'Hello from the service\n' | ti fs copy-file \
+      --from-stdin --to-remote "${remote_path%/}/$test_file"
+    ```
+
+3. Mount the directory with WebDAV:
 
     ```bash
     ti fs mount-file-system \
-      --mount-path "$HOME/workspace" \
+      --remote-path "$remote_path" \
+      --mount-path "$mount_dir" \
       --driver webdav
     ```
 
-    The mount continues running in the background after the command returns, so closing the terminal does not unmount it.
+    The remote directory becomes the mount root. The mount runs in the background until you unmount it.
 
-    After the command succeeds, you can access the file system through `$HOME/workspace`.
-
-    If your file system token grants access only to a specific remote path, use the following command instead of the preceding mount command:
+4. Read the uploaded file:
 
     ```bash
-    ti fs mount-file-system \
-      --remote-path /workspace \
-      --mount-path "$HOME/workspace" \
-      --driver webdav
+    cat "$mount_dir/$test_file"
     ```
 
-    In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-file-system).
+    Expected output: `Hello from the service`. If a file operation takes longer than 30 seconds, interrupt it with Ctrl+C and follow [mount troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs) before continuing.
 
-    WebDAV does not support `--read-only`. For service-enforced read-only access, use a scoped token that permits only `read` and `list`. For a local read-only mount, use macFUSE with `--driver fuse --read-only`, or use direct `ti fs` commands. See [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional).
-
-3. Verify that you can access the mounted file system:
+5. Update the file through the mount:
 
     ```bash
-    ls "$HOME/workspace"
+    printf 'Hello from macOS\n' > "$mount_dir/$test_file"
     ```
 
-    A successful mount or `ls` does not verify file reads. Read a known small file first, and verify writes if your token permits them, using the [Quick Start checks](/tidb-cloud-filesystem/filesystem-quick-start.md#step-4-mount-and-verify-file-access-optional). If an operation has not returned after 30 seconds, interrupt it with Ctrl+C and follow [Mount succeeds but file access hangs](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs).
-
-    If your token has write permission, you can also create and read a test file:
+6. Close applications using the mount and unmount it normally:
 
     ```bash
-    TEST_FILE="mount-check-$(date +%s).txt"
-
-    printf 'Hello from macOS\n' > "$HOME/workspace/$TEST_FILE"
-    cat "$HOME/workspace/$TEST_FILE"
+    ti fs unmount-file-system --mount-path "$mount_dir"
     ```
 
-    Example output:
+    WebDAV does not support `drain-file-system`. If unmount fails, keep the machine and local mount data available and follow [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
 
-    ```text
-    Hello from macOS
-    ```
-
-4. When you are finished, close files that are open in applications and unmount the file system:
+7. After successful unmount, read the update directly from the service:
 
     ```bash
-    ti fs unmount-file-system --mount-path "$HOME/workspace"
+    ti fs read-file --path "${remote_path%/}/$test_file"
     ```
 
-    WebDAV does not support `drain-file-system`. Complete a normal unmount before shutting down the machine or handing updated files to another user or environment.
+    Expected output: `Hello from macOS`.
 
-    If you created the test file above, verify after successful unmounting that the file is available directly from the file system:
+8. Delete the sample file and empty mount directory:
 
     ```bash
-    ti fs read-file --path "/$TEST_FILE"
+    ti fs delete-file --path "${remote_path%/}/$test_file"
+    rmdir "$mount_dir"
     ```
 
-    When mounted with `--remote-path /workspace`, use `/workspace/$TEST_FILE` for the remote read instead. The output must be `Hello from macOS`.
-
-Unmounting removes the local mount but does not delete the file system or its data.
+The file system remains available for reuse.
 
 ## Use macFUSE when you need FUSE features
 

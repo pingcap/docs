@@ -71,7 +71,7 @@ The agent can now use ordinary tools:
 git -C /path/to/workspace/tidb-agent-task status
 ```
 
-Commit required changes before removing the worktree. Before discarding the machine, push those commits to a Git remote and verify them from another environment, or pack and verify restoration of the required local Git metadata. See [Preserve work before leaving a machine](/tidb-cloud-filesystem/manage-git-workspaces.md#preserve-work-before-leaving-a-machine).
+Commit required changes before removing the worktree. Before discarding the machine, [preserve and verify the Git history](/tidb-cloud-filesystem/manage-git-workspaces.md#preserve-work-before-leaving-a-machine) with a push or a verified backup of local Git metadata.
 
 ## Cleanup
 

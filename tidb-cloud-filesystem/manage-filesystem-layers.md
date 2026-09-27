@@ -19,21 +19,22 @@ Before you begin:
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Have access to an existing file system in TiDB Cloud Filesystem with a token that provides the required read or write permissions.
 - Select the file system and make its token available to `ti`. For available access options, see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
-- Choose the base path whose data the layer overlays.
+- Use Bash or Zsh and keep the same shell open throughout the examples.
 
 ## Create a layer
 
-Choose an existing base directory that you own and can use for the example. The commands below use `/workspace`; replace it consistently if you use another path. If it does not exist, create it first:
+Create a unique base directory for the example:
 
 ```shell
-ti fs create-directory --path /workspace
+base_path="/layer-example-$(date +%s)-$$"
+ti fs create-directory --path "$base_path"
 ```
 
 Then create a layer:
 
 ```shell
 ti fs create-layer \
-  --base-root-path /workspace \
+  --base-root-path "$base_path" \
   --layer-name agent-task \
   --durability-mode restore-safe \
   --tag task=review
@@ -47,13 +48,12 @@ The command returns a layer ID. Use the layer ID for subsequent operations, espe
 
 ## Work with and inspect layer changes
 
-Prepare the local sample file in an empty working directory, then write it to the layer by specifying the returned layer ID. Use a remote filename that does not already exist in the base directory so that you can verify isolation without overwriting existing data:
+Write a sample file to the layer using the returned layer ID:
 
 ```shell
-printf 'Layer review proposal\n' > ./proposal.md
-ti fs copy-file \
-  --from-local ./proposal.md \
-  --to-remote /workspace/proposal.md \
+printf 'Layer review proposal\n' | ti fs copy-file \
+  --from-stdin \
+  --to-remote "$base_path/proposal.md" \
   --layer-id "<layer-id>"
 ```
 
@@ -80,25 +80,31 @@ Changes that have not been committed remain in the layer. File operations that d
 
 ### Mount a writable layer
 
-To copy a directory tree or use local tools, first satisfy the [FUSE prerequisites](/tidb-cloud-filesystem/filesystem-mount.md#choose-a-mount-method), then mount the layer:
+To use local tools, complete the [FUSE prerequisites](/tidb-cloud-filesystem/filesystem-mount.md#choose-a-mount-method) and mount the layer. WebDAV does not support layers or checkpoints.
 
 ```shell
 layer_mount="$(mktemp -d "$HOME/ti-fs-layer.XXXXXX")"
 ti fs mount-file-system \
   --mount-path "$layer_mount" \
-  --remote-path /workspace \
+  --remote-path "$base_path" \
   --layer-ref "<layer-id>" \
   --driver fuse
 cat "$layer_mount/proposal.md"
 ```
 
-The read must print `Layer review proposal`. A direct `ti fs read-file --path /workspace/proposal.md` without a layer selection must still report that the file does not exist. Stop if this isolation check fails. WebDAV cannot mount layers or checkpoints. Keep the same shell open for subsequent commands that use `layer_mount`.
+Expected output: `Layer review proposal`. To verify isolation, read from the base file system without selecting a layer:
+
+```shell
+ti fs read-file --path "$base_path/proposal.md"
+```
+
+Expect a not-found error because the layer has not been committed. If the file is visible in the base, stop and inspect the layer selection before proceeding.
 
 ## Create a checkpoint
 
 A checkpoint preserves a point in the layer's durable history.
 
-If the layer has an active writable FUSE mount, drain pending writes before creating the checkpoint so that the checkpoint includes the changes that have reached the service:
+If the layer has a writable FUSE mount, stop writes, close open files, and drain the mount before creating the checkpoint:
 
 ```shell
 ti fs drain-file-system \
@@ -120,7 +126,7 @@ To verify the checkpoint's file contents, mount it at a separate local path:
 checkpoint_mount="$(mktemp -d "$HOME/ti-fs-checkpoint.XXXXXX")"
 ti fs mount-file-system \
   --mount-path "$checkpoint_mount" \
-  --remote-path /workspace \
+  --remote-path "$base_path" \
   --layer-ref "<layer-id>" \
   --checkpoint-id seed \
   --driver fuse
@@ -128,11 +134,11 @@ cat "$checkpoint_mount/proposal.md"
 ti fs unmount-file-system --mount-path "$checkpoint_mount"
 ```
 
-The read must print `Layer review proposal`. A checkpoint mount is read-only. To continue making changes from it, fork a new writable layer. If a read hangs, follow [mount troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs) rather than treating mount startup as verification.
+Expected output: `Layer review proposal`. Checkpoint mounts are read-only. If a read hangs, follow [mount troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs).
 
 ## Fork a layer
 
-Fork a new writable layer from the current layer or one of its checkpoints:
+If you want to continue working independently from the checkpoint, fork a new writable layer. Otherwise, skip to [Commit or discard layer changes](#commit-or-discard-layer-changes).
 
 ```shell
 ti fs fork-layer \
@@ -174,10 +180,10 @@ ti fs commit-layer --layer-id "<layer-id>"
 After a successful commit, verify the content through the base file system:
 
 ```shell
-ti fs read-file --path /workspace/proposal.md
+ti fs read-file --path "$base_path/proposal.md"
 ```
 
-The read must now print `Layer review proposal`.
+Expected output: `Layer review proposal`.
 
 A commit applies the layer's effective changes to the base file system. If the layer was created by forking another layer, committing it does not merge the changes back into its parent layer.
 
@@ -193,7 +199,13 @@ Rollback discards the current layer changes. It does not reset the layer to an e
 
 ## Delete a layer
 
-When you no longer need a layer, delete it by its layer ID:
+If you created a fork, delete it before its parent:
+
+```shell
+ti fs delete-layer --layer-ref "<forked-layer-id>"
+```
+
+Then delete the parent layer:
 
 ```shell
 ti fs delete-layer --layer-ref "<layer-id>"
@@ -201,7 +213,7 @@ ti fs delete-layer --layer-ref "<layer-id>"
 
 Deleting a layer abandons it without immediately erasing all of its history. If the layer has live descendants, the command fails by default.
 
-To abandon the layer and all of its live descendants, use `--cascade`:
+Alternatively, to abandon a layer and all of its live descendants together, use `--cascade`:
 
 ```shell
 ti fs delete-layer \
@@ -211,7 +223,14 @@ ti fs delete-layer \
 
 Use `--cascade` only when you intend to abandon the descendant layers as well.
 
-After the example, unmount any remaining example mounts. Abandon the fork, if created, before abandoning its parent; retain the IDs returned by each create operation. If you committed the sample, delete only `/workspace/proposal.md` after confirming it is the file created for this example. Do not recursively delete a shared `/workspace` directory. Remove the local `proposal.md` and empty mount directories when no longer needed. Abandoning layers retains historical metadata; it is not immediate history deletion.
+After unmounting the example mounts and deleting the example layers, remove the base directory:
+
+```shell
+ti fs delete-file --path "${base_path:?Set the example directory first}" --recursive
+ti fs describe-file --path "$base_path"
+```
+
+Expect a not-found error from `describe-file`. If you created local mount directories, remove them with `rmdir` after successful unmount. Deleting the example files does not erase the abandoned layers' history immediately.
 
 ## What's next
 

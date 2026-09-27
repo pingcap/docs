@@ -51,7 +51,7 @@ By default, a mount exposes the file system root `/`. Use `--remote-path` to exp
 
 ### Create a read-only mount
 
-For FUSE mounts, use `--driver fuse --read-only` to prevent writes through a particular mount. WebDAV does not support `--read-only`; use direct CLI access or a FUSE mount when you need this local mount restriction. This option does not change the permissions of the file system token. To enforce read-only access at the service level, use a scoped token with read-only permissions.
+Use `--driver fuse --read-only` to prevent writes through a FUSE mount. WebDAV does not support this option. To enforce read-only access across mounts and CLI commands, use a scoped token with only `read` and `list` permissions. The mount option does not change token permissions.
 
 ### Mount layers and checkpoints
 

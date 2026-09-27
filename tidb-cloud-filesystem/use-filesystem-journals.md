@@ -48,23 +48,19 @@ Append an event to the journal:
 ```shell
 ti fs-journal append-journal-entries \
   --journal-id "<journal-id>" \
+  --idempotency-key review-started \
   --entry-json '{"type":"review_started"}'
 ```
 
 Each entry needs a `type`, unless you provide one with `--entry-type`. You can also include fields such as `summary`, `actor`, and `occurred_at`.
 
-The example above omits `--idempotency-key` for brevity. If your workflow might retry the same append operation, provide an idempotency key and reuse the same key for every retry. This prevents the retry from recording the same event more than once:
-
-```shell
-ti fs-journal append-journal-entries \
-  --journal-id "<journal-id>" \
-  --idempotency-key review-started \
-  --entry-json '{"type":"review_started"}'
-```
+Reuse the same `--idempotency-key` when retrying this event to avoid duplicate entries. Use a new key for a different event.
 
 For all supported fields and input formats, see the [`append-journal-entries` reference](/ai/ti/reference/ti-fs-journal-append-journal-entries.md).
 
 ## Read and search entries
+
+### Read one journal
 
 To review the history of one journal, read its entries:
 
@@ -73,28 +69,20 @@ ti fs-journal read-journal-entries \
   --journal-id "<journal-id>"
 ```
 
-Entries are returned in sequence order. By default, one call returns at most 100 entries, not the complete history. To continue, pass the last returned entry's `seq` as `--after-seq`:
+Entries are returned in sequence order, with at most 100 entries per call by default. For the next page, replace `<last-seq>` with the last returned entry's `seq`:
 
 ```shell
 ti fs-journal read-journal-entries \
   --journal-id "<journal-id>" \
-  --after-seq 100 \
+  --after-seq "<last-seq>" \
   --limit 100
 ```
 
-Use `100` only if the last entry you actually received has `seq=100`. Continue from each page's last sequence until a successful response has an empty `entries` array. A failed request does not mean that the history is complete. For a journal that is still receiving entries, this reads through the currently available history, not a fixed snapshot.
+Continue from each page's last sequence until a successful response has an empty `entries` array. If a request fails, retry from the same sequence. An active journal can receive more entries while you read; pagination does not create a snapshot.
 
-To find events across journals in the selected file system, use `search-journal-entries`. For example, the following command finds `review_started` events and returns their entry contents:
+### Search across journals
 
-```shell
-ti fs-journal search-journal-entries \
-  --entry-type review_started \
-  --include-entries
-```
-
-Unlike `read-journal-entries`, the search command is not limited to one journal. Use filters such as journal kind, actor, entry type, labels, or time range to narrow the results.
-
-Search also defaults to at most 100 matches per call. For a paginated search, omit `--include-entries` so the response retains match metadata, including each match's `cursor`:
+Find `review_started` events across journals in the selected file system:
 
 ```shell
 ti fs-journal search-journal-entries \
@@ -102,7 +90,7 @@ ti fs-journal search-journal-entries \
   --limit 100
 ```
 
-Pass the last returned match's `cursor` to the next request and repeat the original filters:
+Search defaults to at most 100 matches per call. Pass the last match's `cursor` to the next request, keeping the same filters:
 
 ```shell
 ti fs-journal search-journal-entries \
@@ -111,7 +99,9 @@ ti fs-journal search-journal-entries \
   --cursor "<last-match-cursor>"
 ```
 
-Continue until a successful response has an empty `matches` array. Do not invent a sequence number or cursor. For reproducible time-bounded searches, use fixed RFC3339 `--since` and `--until` values and retain them across pages. To retrieve a matched entry's full contents, use its `journal_id` with `read-journal-entries --after-seq <seq-minus-one> --limit 1`.
+Continue until a successful response has an empty `matches` array. If a request fails, retry with the same cursor. To limit the search to a fixed time range, supply RFC3339 `--since` and `--until` values and keep them unchanged across pages.
+
+For a single page of full entry contents, add `--include-entries`. Omit it when paginating: that output does not retain match cursors. To retrieve a matched entry separately, use its `journal_id` with `read-journal-entries --after-seq <seq-minus-one> --limit 1`.
 
 ## Verify a journal
 
