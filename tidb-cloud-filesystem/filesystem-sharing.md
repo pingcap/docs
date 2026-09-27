@@ -22,6 +22,8 @@ Before you begin:
 
 Use Bash or Zsh. Keep two separate shells open throughout the tutorial: an **owner shell** on a trusted machine for creating and revoking the token, and a **recipient shell** for testing access. The recipient does not need your owner token or TiDB Cloud API keys.
 
+For CI or agents, inject the appropriate token into each environment's `TI_FS_TOKEN` instead of running the input prompts. Set the region and clear `TI_FS_FILE_SYSTEM_ID` as shown. Preserve `share_path` in both environments and `reviewer_token_id` in the owner environment through cleanup.
+
 In the owner shell, set the region and load the owner token at the prompt. Input is hidden:
 
 ```bash

@@ -6,11 +6,7 @@ aliases: ['/ai/manage-git-workspaces']
 
 # Manage Git Workspaces on TiDB Cloud Filesystem
 
-If you want to work with a Git repository directly on a mounted file system, you can follow this guide to set up and manage the Git workspace.
-
-This is especially useful for large repositories, where you can start working before all file contents finish downloading, or when you need separate working directories for different branches without cloning the repository multiple times. This guide covers cloning a repository, completing background downloads when needed, and creating and removing linked Git worktrees.
-
-After the workspace is set up, you can continue to use ordinary Git commands such as `git status`, `git add`, `git commit`, `git fetch`, and `git push` for your daily Git work.
+Clone a Git repository into a FUSE mount and use ordinary Git commands to work with it. For large repositories, blobless cloning lets you begin before all file contents finish downloading. Linked worktrees provide separate working directories for branches without cloning again.
 
 ## Prerequisites
 
@@ -122,7 +118,7 @@ Before deleting an ephemeral machine:
 
 1. Preserve the Git history using one of these methods:
     - Commit and push to a writable Git remote. From an independent clone or fetch, verify that the expected commit ID is available.
-    - If you cannot push, use [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) with explicit `--path` values for the required local Git metadata. Restore with [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) in a separate environment and compare the commit ID and working files. Linked worktrees also need the base repository's Git metadata.
+    - If you cannot push, use [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) with explicit `--path` values for the required local Git metadata, including the base repository's metadata for linked worktrees. Restore with [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) in a separate environment and compare the commit ID and working files. If paths change, first [repair the worktree connections with `git worktree repair`](https://git-scm.com/docs/git-worktree).
 2. Preserve any required untracked or ignored files separately; a push preserves only committed content.
 3. [Unmount safely](/tidb-cloud-filesystem/filesystem-mount.md#unmount-when-you-are-finished). Keep the original disk until recovery checks pass.
 

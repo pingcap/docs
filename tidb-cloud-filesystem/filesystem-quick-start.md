@@ -17,15 +17,15 @@ Before you begin, obtain a TiDB Cloud API public key and private key from the [T
 
 If someone has already provided you with a file system token, skip resource creation and follow [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
-Use Bash or Zsh on macOS and Linux, or PowerShell on Windows. Keep the same shell open throughout the tutorial to retain the variables you set.
+Use Bash or Zsh on macOS and Linux, or PowerShell on Windows. Keep the same shell open throughout the tutorial. If an agent starts a new shell for each command, pass the environment variables and saved path values to each shell.
 
 ## Step 1. Install TiDB Cloud CLI
 
 Choose your operating system:
 
-<SimpleTab>
+<SimpleTab groupId="operating-systems">
 
-<div label="macOS or Linux">
+<div label="macOS or Linux" value="macos-or-linux">
 
 1. Install TiDB Cloud CLI:
 
@@ -43,7 +43,7 @@ Choose your operating system:
 
 </div>
 
-<div label="Windows PowerShell">
+<div label="Windows PowerShell" value="windows-powershell">
 
 1. Install TiDB Cloud CLI:
 
@@ -69,6 +69,12 @@ To keep `ti` available in new terminals, [add it to your permanent `PATH`](/ai/t
 
 ## Step 2. Configure TiDB Cloud CLI
 
+Choose a [supported region](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions) where you want to store your files, such as `aws-us-west-2`. The free tier allows one file system per region. If your organization already has one, [reuse it](/tidb-cloud-filesystem/access-filesystem.md), choose another region, or [add a payment method](https://tidbcloud.com/org-settings/billing/payments).
+
+For CI or agents, inject `TIDB_CLOUD_PUBLIC_KEY` and `TIDB_CLOUD_PRIVATE_KEY` from a secret manager, set `TI_REGION_CODE`, and run `ti configure --non-interactive`. Continue to Step 3. See [Configure for automation](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) for details.
+
+For an interactive terminal:
+
 1. Run the interactive configuration:
 
     ```bash
@@ -77,16 +83,14 @@ To keep `ti` available in new terminals, [add it to your permanent `PATH`](/ai/t
 
 2. Provide the following information:
 
-    - A [supported region](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions) where you want to store your files, such as `aws-us-west-2`.
+    - The region you selected.
     - Your TiDB Cloud API public key and private key.
-
-    The free tier allows one file system per region. If your organization already has one, [reuse it](/tidb-cloud-filesystem/access-filesystem.md), choose another region, or [add a payment method](https://tidbcloud.com/org-settings/billing/payments).
 
 3. Set the region for this tutorial. Replace `<filesystem-region-code>` with the region you just selected:
 
-    <SimpleTab>
+    <SimpleTab groupId="operating-systems">
 
-    <div label="macOS or Linux">
+    <div label="macOS or Linux" value="macos-or-linux">
 
     ```bash
     export TI_REGION_CODE="<filesystem-region-code>"
@@ -94,7 +98,7 @@ To keep `ti` available in new terminals, [add it to your permanent `PATH`](/ai/t
 
     </div>
 
-    <div label="Windows PowerShell">
+    <div label="Windows PowerShell" value="windows-powershell">
 
     ```powershell
     $env:TI_REGION_CODE = "<filesystem-region-code>"
@@ -125,9 +129,11 @@ The commands use `TI_REGION_CODE`; an explicit `--region` overrides it. Configur
 
 2. Load the owner token. Paste the returned `fs_token` at the prompt and press Enter; input is hidden. These commands also clear any previous file system selection. Keep `TI_REGION_CODE` set.
 
-    <SimpleTab>
+    In automation, assign the returned `fs_token` to `TI_FS_TOKEN` in the job environment instead of running the prompt. Also clear `TI_FS_FILE_SYSTEM_ID` if it was previously set.
 
-    <div label="macOS or Linux">
+    <SimpleTab groupId="operating-systems">
+
+    <div label="macOS or Linux" value="macos-or-linux">
 
     ```bash
     unset TI_FS_FILE_SYSTEM_ID
@@ -137,7 +143,7 @@ The commands use `TI_REGION_CODE`; an explicit `--region` overrides it. Configur
 
     </div>
 
-    <div label="Windows PowerShell">
+    <div label="Windows PowerShell" value="windows-powershell">
 
     ```powershell
     Remove-Item Env:TI_FS_FILE_SYSTEM_ID -ErrorAction SilentlyContinue
@@ -152,9 +158,9 @@ The commands use `TI_REGION_CODE`; an explicit `--region` overrides it. Configur
 
 3. Create a unique directory, upload a sample file, and read it back:
 
-    <SimpleTab>
+    <SimpleTab groupId="operating-systems">
 
-    <div label="macOS or Linux">
+    <div label="macOS or Linux" value="macos-or-linux">
 
     ```bash
     example_dir="/quick-start-$(date +%s)-$$"
@@ -166,7 +172,7 @@ The commands use `TI_REGION_CODE`; an explicit `--region` overrides it. Configur
 
     </div>
 
-    <div label="Windows PowerShell">
+    <div label="Windows PowerShell" value="windows-powershell">
 
     ```powershell
     $exampleDir = "/quick-start-$([guid]::NewGuid().ToString('N'))"
@@ -260,9 +266,9 @@ A successful mount command confirms startup. Verify file access before using the
 
 After verification and, if applicable, successful unmount, delete only the example directory created in Step 3:
 
-<SimpleTab>
+<SimpleTab groupId="operating-systems">
 
-<div label="macOS or Linux">
+<div label="macOS or Linux" value="macos-or-linux">
 
 ```bash
 ti fs delete-file --path "${example_dir:?Set the example directory first}" --recursive
@@ -273,7 +279,7 @@ If you mounted the example, remove the now-empty local mount directory with `rmd
 
 </div>
 
-<div label="Windows PowerShell">
+<div label="Windows PowerShell" value="windows-powershell">
 
 ```powershell
 if (-not $exampleDir) { throw "Set the example directory first" }

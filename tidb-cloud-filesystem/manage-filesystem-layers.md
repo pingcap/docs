@@ -6,27 +6,24 @@ aliases: ['/ai/manage-filesystem-layers']
 
 # Manage File System Layers and Checkpoints
 
-In TiDB Cloud Filesystem, a layer gives you a separate workspace for changing files without immediately affecting the base file system. You can make and review changes in the layer, then decide whether to apply them to the base file system or discard them.
-
-You can also create a checkpoint to preserve a point in the layer's history, or fork a new layer from the current layer or a checkpoint to continue working independently.
-
-For an overview of how layers, checkpoints, forks, and the base file system relate to each other, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
+A layer isolates file changes from the base file system until you commit them. Use checkpoints to preserve intermediate states and forks to explore changes independently. For the underlying concepts, see [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md).
 
 ## Prerequisites
 
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to an existing file system in TiDB Cloud Filesystem with a token that provides the required read or write permissions.
+- Have an owner token or a scoped token with `read,list,write,delete` permissions on an existing directory. The example creates and deletes a child directory there.
 - Select the file system and make its token available to `ti`. For available access options, see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 - Use Bash or Zsh and keep the same shell open throughout the examples.
 
 ## Create a layer
 
-Create a unique base directory for the example:
+Choose an existing directory within your token's scope. Use `/` with an owner token, or replace it with the directory allowed by your scoped token, such as `/workspace`. Create a unique child directory for the example:
 
 ```shell
-base_path="/layer-example-$(date +%s)-$$"
+parent_path="/"
+base_path="${parent_path%/}/layer-example-$(date +%s)-$$"
 ti fs create-directory --path "$base_path"
 ```
 
@@ -44,7 +41,13 @@ ti fs create-layer \
 
 `restore-safe` is the only `--durability-mode` value accepted by the current CLI. For all available options, see the [`create-layer` command reference](/ai/ti/reference/ti-fs-create-layer.md).
 
-The command returns a layer ID. Use the layer ID for subsequent operations, especially in automation, because layer names are not guaranteed to be unique.
+Save the returned `layer_id` for the remaining commands:
+
+```shell
+layer_id="<returned-layer-id>"
+```
+
+Use the ID rather than the layer name, which might not be unique.
 
 ## Work with and inspect layer changes
 
@@ -54,14 +57,14 @@ Write a sample file to the layer using the returned layer ID:
 printf 'Layer review proposal\n' | ti fs copy-file \
   --from-stdin \
   --to-remote "$base_path/proposal.md" \
-  --layer-id "<layer-id>"
+  --layer-id "$layer_id"
 ```
 
 Inspect the layer and its changes:
 
 ```shell
-ti fs describe-layer --layer-id "<layer-id>"
-ti fs diff-layer --layer-id "<layer-id>"
+ti fs describe-layer --layer-id "$layer_id"
+ti fs diff-layer --layer-id "$layer_id"
 ```
 
 List all layers in the selected file system:
@@ -87,7 +90,7 @@ layer_mount="$(mktemp -d "$HOME/ti-fs-layer.XXXXXX")"
 ti fs mount-file-system \
   --mount-path "$layer_mount" \
   --remote-path "$base_path" \
-  --layer-ref "<layer-id>" \
+  --layer-ref "$layer_id" \
   --driver fuse
 cat "$layer_mount/proposal.md"
 ```
@@ -115,7 +118,7 @@ Then create the checkpoint:
 
 ```shell
 ti fs create-layer-checkpoint \
-  --layer-id "<layer-id>" \
+  --layer-id "$layer_id" \
   --checkpoint-id seed \
   --label "before review"
 ```
@@ -127,7 +130,7 @@ checkpoint_mount="$(mktemp -d "$HOME/ti-fs-checkpoint.XXXXXX")"
 ti fs mount-file-system \
   --mount-path "$checkpoint_mount" \
   --remote-path "$base_path" \
-  --layer-ref "<layer-id>" \
+  --layer-ref "$layer_id" \
   --checkpoint-id seed \
   --driver fuse
 cat "$checkpoint_mount/proposal.md"
@@ -142,39 +145,40 @@ If you want to continue working independently from the checkpoint, fork a new wr
 
 ```shell
 ti fs fork-layer \
-  --parent-layer-ref "<layer-id>" \
+  --parent-layer-ref "$layer_id" \
   --layer-name experiment \
   --checkpoint-id seed
 ```
 
-Use the layer ID returned for the fork when you perform subsequent operations on it.
+Save the fork's returned `layer_id` separately:
+
+```shell
+forked_layer_id="<returned-forked-layer-id>"
+```
 
 To inspect the fork's pinned ancestry:
 
 ```shell
-ti fs list-layer-chain --layer-ref "<forked-layer-id>"
+ti fs list-layer-chain --layer-ref "$forked_layer_id"
 ```
 
 After a fork is created, changes made to the parent and child layers are independent.
 
 ## Commit or discard layer changes
 
-Before committing or rolling back a layer with an active writable FUSE mount, stop applications that are writing to the mount, drain pending writes, and unmount it:
+If the layer has a writable FUSE mount, stop writers, close open files, and unmount it before choosing an outcome:
 
 ```shell
-ti fs drain-file-system \
-  --mount-path "$layer_mount"
-
 ti fs unmount-file-system \
   --mount-path "$layer_mount"
 ```
 
-For more information about safely finishing mount activity, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
+A successful unmount flushes pending writes. If unmount fails, resolve the error before continuing; see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
 
-To apply the layer's changes to the base file system:
+Choose one outcome: **commit** applies the changes to the base file system; **rollback** discards them. To commit:
 
 ```shell
-ti fs commit-layer --layer-id "<layer-id>"
+ti fs commit-layer --layer-id "$layer_id"
 ```
 
 After a successful commit, verify the content through the base file system:
@@ -189,10 +193,10 @@ A commit applies the layer's effective changes to the base file system. If the l
 
 If the base file system contains conflicting changes, the commit can fail instead of automatically merging them. Keep the layer and inspect its changes and the base file system before deciding how to proceed.
 
-To discard the layer's uncommitted changes instead:
+If you chose to discard the changes, run this command instead of committing:
 
 ```shell
-ti fs rollback-layer --layer-id "<layer-id>"
+ti fs rollback-layer --layer-id "$layer_id"
 ```
 
 Rollback discards the current layer changes. It does not reset the layer to an earlier checkpoint. To continue from a checkpoint, fork a new layer from that checkpoint.
@@ -202,13 +206,13 @@ Rollback discards the current layer changes. It does not reset the layer to an e
 If you created a fork, delete it before its parent:
 
 ```shell
-ti fs delete-layer --layer-ref "<forked-layer-id>"
+ti fs delete-layer --layer-ref "$forked_layer_id"
 ```
 
 Then delete the parent layer:
 
 ```shell
-ti fs delete-layer --layer-ref "<layer-id>"
+ti fs delete-layer --layer-ref "$layer_id"
 ```
 
 Deleting a layer abandons it without immediately erasing all of its history. If the layer has live descendants, the command fails by default.
@@ -217,7 +221,7 @@ Alternatively, to abandon a layer and all of its live descendants together, use 
 
 ```shell
 ti fs delete-layer \
-  --layer-ref "<layer-id>" \
+  --layer-ref "$layer_id" \
   --cascade
 ```
 
@@ -230,7 +234,7 @@ ti fs delete-file --path "${base_path:?Set the example directory first}" --recur
 ti fs describe-file --path "$base_path"
 ```
 
-Expect a not-found error from `describe-file`. If you created local mount directories, remove them with `rmdir` after successful unmount. Deleting the example files does not erase the abandoned layers' history immediately.
+Expect a not-found error from `describe-file`. After successful unmount, remove the local directories you created with `rmdir "$layer_mount"` and `rmdir "$checkpoint_mount"`. Deleting the example files does not erase the abandoned layers' history immediately.
 
 ## What's next
 

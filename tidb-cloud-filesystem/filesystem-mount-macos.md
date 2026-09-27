@@ -28,7 +28,7 @@ Use Bash or Zsh and keep the same shell open for each procedure.
 
 ## Mount with WebDAV
 
-The following example uploads a small file, reads and updates it through WebDAV, and verifies the update after unmounting. It requires a token with read and write permissions.
+Upload a small file, update it through WebDAV, and verify the update after unmounting. Use an owner token or a scoped token with `read,list,write,delete` permissions on the remote directory, including permission to delete the sample during cleanup.
 
 WebDAV does not support `--read-only`. Use a scoped token with only `read` and `list` permissions to enforce read-only access at the service. For a local read-only mount, use macFUSE with `--driver fuse --read-only`. See [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional).
 
