@@ -1,17 +1,17 @@
 ---
 title: ti fs mount-file-system
-summary: Mount a file system.
+summary: Learn how to configure local mounts of TiDB Cloud file systems, including FUSE, WebDAV, read-only access, layers, and checkpoints.
 ---
 
 # ti fs mount-file-system
 
-Mounts a file system through automatic, FUSE, or WebDAV mode. The command alias is `ti fs mount`.
+Mounts a file system using FUSE or WebDAV. By default, the CLI selects the driver automatically. The command alias is `ti fs mount`.
 
 The command starts the mount process in the background, waits for the mount to become ready, and then prints the result. If startup fails, the error includes a log path for diagnosis. Use `ti fs unmount-file-system` to end the mount.
 
 > **Important:**
 >
-> Layer and checkpoint mounts require FUSE. On macOS, where automatic selection normally uses WebDAV, install macFUSE and specify `--driver fuse`. Checkpoint mounts are always read-only.
+> Layer and checkpoint mounts require FUSE. On macOS, install macFUSE and specify `--driver fuse` to use these features. Checkpoint mounts are always read-only.
 
 > **Note:**
 >

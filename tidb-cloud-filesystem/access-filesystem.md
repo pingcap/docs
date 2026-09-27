@@ -5,11 +5,9 @@ summary: Learn how to access an existing file system from your current machine, 
 
 # Access an Existing File System
 
-If you already have access to a file system in TiDB Cloud Filesystem, you can connect to it from your current machine or another environment.
+Connect to an existing file system using a locally stored token or a token provided for another environment:
 
-How you connect depends on where you are working:
-
-- If you created or imported a file system on the current machine, TiDB Cloud CLI (`ti`) can use the token already stored locally.
+- If you created the file system or imported its token on the current machine, TiDB Cloud CLI (`ti`) can use the stored token.
 - If you are working from another machine, CI job, or agent environment, provide a file system token and region for that environment.
 
 ## Prerequisites
@@ -61,7 +59,7 @@ ti fs list-files --file-system-id "<file-system-id>" --path /
 
 ## Access a file system from another environment
 
-In another environment, provide the token and region. For CI or agents, inject `TI_FS_TOKEN` from a secret manager and set `TI_REGION_CODE` in each process; skip the input prompts. Clear `TI_FS_FILE_SYSTEM_ID` so it cannot select a different file system.
+In another environment, provide the token and region. For CI or agents, inject `TI_FS_TOKEN` from a secret manager and set `TI_REGION_CODE` in each process. Skip the input prompts and clear `TI_FS_FILE_SYSTEM_ID` to remove any previous file system selection.
 
 In an interactive terminal, enter the token at the prompt; input is hidden:
 

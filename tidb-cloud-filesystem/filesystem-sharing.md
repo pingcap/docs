@@ -6,7 +6,7 @@ aliases: ['/ai/ti-share-filesystem-across-machines-example']
 
 # Share a File System Across Machines
 
-Give another user, machine, or agent access to a directory with a scoped token. This tutorial creates a sample file, grants read-only access for 24 hours, and verifies that revocation removes access.
+Give another user, machine, or agent read-only access to a directory for 24 hours with a scoped token. Verify access with a sample file, then revoke the token when sharing is complete.
 
 > **Note:**
 >
@@ -33,7 +33,7 @@ printf 'Owner token: '
 read -rs TI_FS_TOKEN && export TI_FS_TOKEN && printf '\n'
 ```
 
-Keep this owner token set through revocation. Using `TI_FS_TOKEN` supplies authentication for the entire workflow, including token management. For other authentication methods, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md#inspect-and-change-token-status).
+Keep the owner token in `TI_FS_TOKEN` until you finish revoking access. It authenticates both file operations and token management. For other authentication methods, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md#inspect-and-change-token-status).
 
 ## Give access to specific files
 

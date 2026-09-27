@@ -1,11 +1,11 @@
 ---
 title: Prepare a Git Workspace for Agents on TiDB Cloud Filesystem
-summary: Make a large Git workspace visible quickly, hydrate clean objects in the background, and let an agent start work before the full download finishes.
+summary: Learn how to start agent tasks before a large Git repository finishes downloading and preserve work before removing the machine.
 ---
 
 # Prepare a Git Workspace for Agents on TiDB Cloud Filesystem
 
-This workflow removes a large repository clone from the critical path of starting an agent task. Use it when an ephemeral agent needs to inspect or change a large repository before a complete download would finish.
+Start an agent task before a large repository finishes downloading. Use a blobless Git workspace with background hydration when an agent on a temporary machine needs to inspect or edit files immediately.
 
 > **Note:**
 >
@@ -13,7 +13,9 @@ This workflow removes a large repository clone from the critical path of startin
 
 ## How it works
 
-`ti fs-git clone-git-workspace --blobless --hydrate background` registers a Git workspace that can be shared across replacement agent runtimes and exposes its file tree before all clean blobs finish downloading. The command returns so the agent can inspect paths and start working while `ti` hydrates the clean tree and local Git object database in the background. Unlike a normal clone, the initial object transfer does not block the complete workflow. Unlike a native blobless partial clone alone, background hydration reduces repeated on-demand fetches on the agent's critical path. Reads that arrive before hydration completes still fall back to Git's lazy fetch for correctness. Ordinary Git remains responsible for edits, commits, fetches, and pushes.
+`ti fs-git clone-git-workspace --blobless --hydrate background` registers a Git workspace and exposes its file tree before all clean blobs finish downloading. The agent can start working while `ti` downloads the remaining clean file contents and populates the local Git object database. This background process, called hydration, reduces repeated on-demand fetches. Reads before hydration completes use Git's lazy fetch to retrieve missing data.
+
+Replacement agent runtimes can access the registered workspace. Preserve local Git history before discarding the original machine, as described in the cleanup guidance below. Use your usual tools to edit files and Git commands to commit, fetch, and push.
 
 ## Prerequisites
 

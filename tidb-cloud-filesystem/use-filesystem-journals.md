@@ -1,18 +1,16 @@
 ---
 title: Use Journals in a File System
-summary: Learn how to record, read, search, and verify ordered events from agent and automation workflows in a file system.
+summary: Learn how to create file system journals, record workflow events, paginate read and search results, and verify the recorded history.
 aliases: ['/ai/use-filesystem-journals']
 ---
 
 # Use Journals in a File System
 
-In TiDB Cloud Filesystem, you can use a file system journal when you need an ordered, persistent record of events from an agent or automation workflow. For example, a journal can record when a task starts or finishes, which agent performed an action, and when work is handed off between agents or processes. You can later read or search these events to understand what happened during the workflow.
+Use a file system journal to keep an ordered, persistent record of agent and automation events, such as task starts, completions, and handoffs. Read or search the entries to trace what happened and which agent performed each action.
 
-Journal entries are append-only: new events are added as new entries, and existing entries cannot be modified. The entries are also linked through a hash chain, which lets you verify that the recorded history remains intact and in order.
+Entries are append-only: you can add events but cannot modify existing entries. A hash chain links the entries so you can verify their integrity and order.
 
-This guide shows you how to create a journal, record events, read and search recorded events, and verify the journal history.
-
-Journals are intended for workflow events and history. Store artifacts, working files, and other workflow outputs as regular files in the file system. A journal records what happened; it does not replay workflow actions or replace the files produced by the workflow.
+Store artifacts and working files as regular files in the file system. A journal records events; it does not replay actions or replace workflow outputs.
 
 > **Note:**
 >
@@ -37,7 +35,7 @@ ti fs-journal create-journal \
   --actor agent:reviewer
 ```
 
-Because no journal ID is specified, the service generates one. Save the returned journal ID—you will use it to append, read, and verify entries in this journal.
+The service generates a journal ID when you omit it. Save the returned ID for appending, reading, and verifying entries.
 
 The journal kind, title, and actor provide context that can also help you find related workflow records later.
 
@@ -112,9 +110,7 @@ ti fs-journal verify-journal \
   --journal-id "<journal-id>"
 ```
 
-A successful verification confirms that the stored sequence and hash chain are consistent.
-
-Hash-chain verification checks the integrity of the recorded journal history. It does not prove that the original event information recorded by an agent or application was accurate.
+A successful verification confirms that the stored sequence and hash chain are consistent. It does not confirm the accuracy of events reported by an agent or application.
 
 ## What's next
 

@@ -1,14 +1,14 @@
 ---
 title: Manage File System Tokens
-summary: Learn how to import, generate, scope, inspect, disable, refresh, and revoke access tokens for a file system.
+summary: Learn how to import, create, scope, inspect, rotate, and revoke file system tokens to control access for users and automation.
 aliases: ['/ai/manage-filesystem-tokens']
 ---
 
 # Manage File System Tokens
 
-In TiDB Cloud Filesystem, file system tokens let you give users, applications, and automation access to a file system without sharing your TiDB Cloud API credentials.
+Use file system tokens to give users, applications, and automation access to TiDB Cloud Filesystem without sharing your TiDB Cloud API credentials.
 
-You can use an [owner token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-tokens) for full access to a file system, or create [scoped tokens](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-tokens) that limit access to specific paths and operations. For more information about token types and permissions, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
+An [owner token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-tokens) grants full access to a file system. A [scoped token](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-tokens) limits access to specific paths and operations. For details, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 
 ## Prerequisites
 
@@ -17,11 +17,11 @@ Before you begin:
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Have access to an existing file system in TiDB Cloud Filesystem. If you do not have one, follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md) to create one.
 
-Some token management operations require TiDB Cloud API credentials or an existing owner token. The relevant requirements are described in each section of this guide.
+Some token management operations require TiDB Cloud API credentials or an existing owner token. Each section specifies the credentials to use.
 
 > **Note:**
 >
-> Treat file system tokens as secrets. When a command creates or refreshes a token, the token plaintext is returned only once and cannot be retrieved later.
+> Store file system tokens securely. Commands that create or refresh a token return its value only once; you cannot retrieve it later.
 
 ## Import an existing token
 
@@ -35,7 +35,7 @@ The CLI validates the token, extracts the file system ID from it, verifies conne
 
 ## Generate an owner token
 
-When you create a file system, TiDB Cloud creates an owner token for it and returns it to you. You can generate additional owner tokens when another trusted environment or workflow needs full access to the file system.
+Creating a file system returns an owner token. Generate an additional owner token when another trusted environment needs full access.
 
 To generate an additional owner token, configure TiDB Cloud API credentials and obtain the file system ID.
 
@@ -53,7 +53,7 @@ The CLI does not store the generated token locally by default. To store it local
 
 ## Generate and delegate a scoped token
 
-To generate a scoped token, use an existing owner token on a trusted machine. Provide the owner token through `--fs-token` or `TI_FS_TOKEN`, or use the token stored locally for the selected file system.
+On a trusted machine, use an owner token to generate a scoped token. Supply the owner token through `--fs-token` or `TI_FS_TOKEN`, or use the owner token stored locally for the selected file system.
 
 The following example uses the locally stored owner token and creates a scoped token that allows an agent to read, list, and write files under `/workspace`:
 

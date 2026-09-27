@@ -21,7 +21,7 @@ All Git workspaces in this guide are created inside the mounted file system path
 
 ## Clone a Git repository
 
-To clone a Git repository into your mounted file system directory, use the `ti fs-git clone-git-workspace` command and specify the repository URL and target path as follows:
+Specify the repository URL and a target path inside the mounted directory:
 
 ```shell
 ti fs-git clone-git-workspace \
@@ -31,7 +31,7 @@ ti fs-git clone-git-workspace \
 
 The repository is cloned to `/path/to/workspace/tidb`.
 
-For a large repository, you can start working before all file contents finish downloading by specifying `--blobless`:
+For a large repository, use `--blobless` to start working before all file contents finish downloading:
 
 ```shell
 ti fs-git clone-git-workspace \
@@ -40,7 +40,7 @@ ti fs-git clone-git-workspace \
   --blobless
 ```
 
-With `--blobless`, `ti` downloads the repository structure and Git metadata first. When `--hydrate` is `auto` (the default), `ti` then continues downloading the remaining file contents in the background. You can start working with the repository while this download continues. To disable background hydration, specify `--hydrate off`.
+With `--blobless`, `ti` downloads the repository structure and Git metadata first. By default, `--hydrate auto` downloads the remaining file contents in the background while you work. To disable background hydration, specify `--hydrate off`.
 
 If you need all file contents to finish downloading before the clone command returns, also specify `--hydrate sync`:
 
@@ -54,7 +54,7 @@ ti fs-git clone-git-workspace \
 
 ## Finish downloading a blobless workspace
 
-If you created a workspace with `--blobless`, you can later wait for any remaining file contents to finish downloading:
+Before a task that needs all repository file contents, wait for any remaining downloads in a blobless workspace:
 
 ```shell
 ti fs-git hydrate-git-workspace \
@@ -62,9 +62,7 @@ ti fs-git hydrate-git-workspace \
   --timeout 30m
 ```
 
-Run this command when you want to make sure the remaining Git file data has finished downloading before you continue. For example, you might do this before a task that needs repository file contents to be available.
-
-This process, called hydration, downloads the Git data that is still missing from the workspace without discarding changes you have already made to files.
+This process, called hydration, downloads missing Git data without discarding your file changes.
 
 If cloning or hydration fails, check the CLI error and diagnostic log before retrying. See [Troubleshoot TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-troubleshooting.md).
 

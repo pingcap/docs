@@ -45,7 +45,7 @@ The new plaintext appears once in the response. Store it securely or add `--stor
 
 ## File system token is rejected
 
-A data-plane HTTP 401 cannot distinguish a token that was disabled, expired, refreshed on another machine, or revoked. Inspect remote metadata with TiDB Cloud API keys:
+An HTTP 401 from a file operation does not tell you whether the token is disabled, expired, refreshed on another machine, or revoked. Inspect token metadata using TiDB Cloud API keys:
 
 ```bash
 ti fs list-file-system-tokens \
@@ -83,11 +83,11 @@ Or select the file system for subsequent commands in the current shell:
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-The CLI intentionally does not infer a file system from local credential count, including when only one credential exists. Supply its ID or a file system token whose embedded ID can be derived.
+Select a file system explicitly, even if only one token is stored locally. Supply its ID or a token that identifies it.
 
 ## File system region is unsupported
 
-The configured TiDB Cloud region might not be one of the file system endpoints built into the installed `ti` release. Compare it with [supported file system regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
+Your installed `ti` release might not support the configured region for file system access. Check the [supported file system regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions). Select a supported region in your profile or with `--region` for the command; do not configure a raw server URL.
 
 ## File system runtime is missing or incompatible
 
@@ -118,13 +118,13 @@ Do not delete an unrelated file system to make automation pass. If the error lin
 
 ## Mount does not become ready
 
-Background mount success prints the CLI result without runtime startup messages. If startup fails or times out, inspect the runtime log path in the error. Confirm:
+When a background mount starts successfully, the CLI prints the result without runtime startup messages. If startup fails or times out, inspect the log at the path reported in the error. Confirm that:
 
-- the mount path exists and is writable;
-- no existing mount covers the path;
-- the file system token and region are valid;
-- FUSE prerequisites or the WebDAV helper are installed;
-- the remote region is reachable.
+- The mount path exists and is writable.
+- No existing mount uses the path.
+- The file system token and region are valid.
+- The FUSE prerequisites or WebDAV helper are installed.
+- The remote region is reachable.
 
 On macOS without macFUSE, `ti` uses WebDAV. If macFUSE is installed, automatic driver selection prefers FUSE. To explicitly request FUSE:
 
@@ -199,7 +199,7 @@ Close editors, shells whose working directory is inside the mount, and other ope
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-Unmount performs the graceful FUSE drain automatically. Running `drain-file-system` separately does not close file descriptors or resolve a busy mount; use it only when you need to flush pending work while leaving the mount online. Drain is not supported for WebDAV.
+A successful FUSE unmount flushes pending writes automatically. Running `drain-file-system` separately does not close open files or resolve a busy mount. Use it to flush pending writes while keeping the mount running. WebDAV does not support drain.
 
 ## Report a problem
 

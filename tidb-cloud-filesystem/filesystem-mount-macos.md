@@ -1,17 +1,13 @@
 ---
 title: Mount a File System on macOS
-summary: Mount a file system as a local directory on macOS, and use macFUSE when you need FUSE-specific features.
+summary: Learn how to mount a TiDB Cloud file system on macOS, choose WebDAV or macFUSE, verify reads and writes, and unmount safely.
 ---
 
 # Mount a File System on macOS
 
-On macOS, you can mount a file system in TiDB Cloud Filesystem as a local directory and access its files with your usual applications and tools.
+Mount a TiDB Cloud file system on macOS to access its files with local applications and tools. WebDAV supports general file access without additional mount software. Use FUSE with macFUSE to mount layers or checkpoints, or to flush pending writes while keeping the mount running.
 
-For most workflows, you can mount a file system with WebDAV. It lets you access file system files through normal local file paths and does not require additional mount software.
-
-Use FUSE with macFUSE when you also need FUSE-specific features, such as mounting a layer or checkpoint, or making pending writes reach the file system without unmounting it.
-
-Without macFUSE, TiDB Cloud CLI (`ti`) uses WebDAV. If macFUSE is installed, `ti` prefers FUSE when the mount driver is selected automatically. The commands in this guide specify the driver explicitly so that you know which mount method is being used.
+For automatic driver selection, TiDB Cloud CLI (`ti`) prefers FUSE when macFUSE is installed and uses WebDAV otherwise. The examples specify a driver explicitly to make the choice clear.
 
 > **Note:**
 >
@@ -28,7 +24,7 @@ Use Bash or Zsh and keep the same shell open for each procedure.
 
 ## Mount with WebDAV
 
-Upload a small file, update it through WebDAV, and verify the update after unmounting. Use an owner token or a scoped token with `read,list,write,delete` permissions on the remote directory, including permission to delete the sample during cleanup.
+Use an owner token or a scoped token with `read,list,write,delete` permissions on the remote directory. These permissions cover both verification and cleanup. Upload a small file, update it through WebDAV, and verify the update after unmounting.
 
 WebDAV does not support `--read-only`. Use a scoped token with only `read` and `list` permissions to enforce read-only access at the service. For a local read-only mount, use macFUSE with `--driver fuse --read-only`. See [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional).
 
@@ -101,8 +97,8 @@ The file system remains available for reuse.
 
 Use FUSE instead of WebDAV when you need to:
 
-- mount a layer or checkpoint; or
-- make pending writes reach the file system while keeping the mount running with `drain-file-system`.
+- Mount a layer or checkpoint.
+- Flush pending writes with `drain-file-system` while keeping the mount running.
 
 To use FUSE on macOS:
 

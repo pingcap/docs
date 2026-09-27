@@ -1,6 +1,6 @@
 ---
 title: Manage File System Layers and Checkpoints
-summary: Learn how to create, inspect, checkpoint, fork, commit, roll back, and delete file system layers.
+summary: Learn how to create file system layers, checkpoint and fork changes, verify isolation, and commit or discard your work.
 aliases: ['/ai/manage-filesystem-layers']
 ---
 

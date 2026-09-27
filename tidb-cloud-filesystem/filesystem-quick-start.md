@@ -13,7 +13,7 @@ Create a [TiDB Cloud file system](/tidb-cloud-filesystem/filesystem-intro.md), w
 
 ## Prerequisites
 
-Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the [TiDB Cloud console](https://tidbcloud.com/). The keys must have the `Organization Owner` access to your organization.
+Before you begin, obtain a TiDB Cloud API public key and private key from the [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) page in the [TiDB Cloud console](https://tidbcloud.com/). The keys must grant `Organization Owner` access to your organization.
 
 If someone has already provided you with a file system token, skip resource creation and follow [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
@@ -71,7 +71,7 @@ To keep `ti` available in new terminals, [add it to your permanent `PATH`](/ai/t
 
 Choose a [supported region](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions) where you want to store your files, such as `aws-us-west-2`. The free tier allows one file system per region. If your organization already has one, [reuse it](/tidb-cloud-filesystem/access-filesystem.md), choose another region, or [add a payment method](https://tidbcloud.com/org-settings/billing/payments).
 
-For CI or agents, inject `TIDB_CLOUD_PUBLIC_KEY` and `TIDB_CLOUD_PRIVATE_KEY` from a secret manager, set `TI_REGION_CODE`, and run `ti configure --non-interactive`. Continue to Step 3. See [Configure for automation](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) for details.
+For CI or agents, inject `TIDB_CLOUD_PUBLIC_KEY` and `TIDB_CLOUD_PRIVATE_KEY` from a secret manager and set `TI_REGION_CODE`. Run `ti configure --non-interactive`, then continue to Step 3. See [Configure for automation](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) for details.
 
 For an interactive terminal:
 
@@ -108,7 +108,7 @@ For an interactive terminal:
 
     </SimpleTab>
 
-The commands use `TI_REGION_CODE`; an explicit `--region` overrides it. Configuration saves your credentials locally. The next step validates them when it creates the file system.
+The commands use `TI_REGION_CODE` unless you specify `--region`. Configuration saves your credentials locally; creating the file system in the next step validates them.
 
 ## Step 3. Create and use a file system
 
