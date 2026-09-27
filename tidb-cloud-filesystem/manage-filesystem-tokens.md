@@ -35,7 +35,9 @@ The CLI validates the token, extracts the file system ID from it, verifies conne
 
 ## Generate an owner token
 
-When you create a file system, TiDB Cloud creates an owner token for it and returns it to you. You can generate additional owner tokens when another trusted environment or workflow needs full access to the file system.
+When you create a file system, TiDB Cloud creates an owner token for it and returns it to you. That token does not expire, so revoke it when it is no longer needed. Tokens you generate later with `--ttl` expire on their own.
+
+You can generate additional owner tokens when another trusted environment or workflow needs full access to the file system.
 
 To generate an additional owner token, configure TiDB Cloud API credentials and obtain the file system ID.
 
@@ -46,8 +48,12 @@ umask 077
 ti fs generate-file-system-token \
   --file-system-id "<file-system-id>" \
   --token-name ci \
-  --ttl 24h > ./ci-token.json
+  --ttl 24h \
+  --query fs_token \
+  --output text > ./ci-token
 ```
+
+`--query fs_token --output text` writes the token on its own, which is the format that `import-file-system-token --from-file` expects. Without those options the command writes its full JSON response, and importing that file fails with `invalid FS token format`. The token ID that you need in order to revoke the token later is available at any time from `ti fs list-file-system-tokens`.
 
 The CLI does not store the generated token locally by default. To store it locally, add `--store-locally` to the preceding command. If a different token is already stored for this file system, also add `--replace`.
 
