@@ -58,12 +58,13 @@ Token names are not unique. Use the immutable `token_id` from this output for en
 
 After enable, disable, delete, or refresh, allow approximately 10 seconds for authentication caches to converge. If refresh reports `fs.token_refresh_ambiguous`, the server might have rotated the token even though the response was lost. The outcome is unknown: the old token might still work if the refresh did not commit, or it might already be invalid. The replacement token from a committed refresh cannot be recovered because its response was lost. Do not retry the refresh with the old token. Instead, use TiDB Cloud credentials to generate an independent owner token.
 
-If token mutation reports `fs.token_mount_active`, use the exact mount path in the error:
+If token mutation reports `fs.token_mount_active`, stop applications using the mount, close open files, and unmount using the exact path in the error:
 
 ```bash
-ti fs drain-file-system --mount-path /path/to/workspace
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
+
+A normal FUSE unmount drains pending writes automatically. WebDAV does not support `drain-file-system`; use normal unmount for WebDAV.
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
 
@@ -134,6 +135,25 @@ ti fs mount-file-system \
 ```
 
 Linux needs FUSE support, the `fuse3` package, and access to `/dev/fuse`. File system and Vault mounts are not supported on Windows; use `ti fs` data-plane commands or non-mount Vault commands instead.
+
+## Mount succeeds but file access hangs
+
+A `mounted` result confirms that mount startup completed. It does not prove that subsequent file reads or writes succeed. A directory listing can also succeed while reading a file hangs.
+
+For a known small test file, use the following procedure:
+
+1. If the mounted read or write has not returned after 30 seconds, interrupt the command with Ctrl+C. If it remains blocked, open another terminal outside the mount for diagnosis. Do not start additional workloads on the mount.
+2. Read the same file through `ti fs read-file --path "<remote-file-path>"`, using the same token and region. If the mount uses `--remote-path`, include that prefix in the remote file path. If this read also fails, resolve the reported authentication, region, or service error first. If it succeeds, focus diagnosis on the local mount path.
+3. Record `ti --version`, the OS version, the selected driver, elapsed time, and the mount diagnostic log when available. Do not include tokens or file contents. On macOS, automatic selection can choose WebDAV or FUSE; specify `--driver webdav` or `--driver fuse` when reproducing the problem.
+4. Stop applications using the mount, close open files, leave any shell working directory inside the mount, and try normal unmount:
+
+    ```bash
+    ti fs unmount-file-system --mount-path /path/to/workspace
+    ```
+
+5. After successful unmount, verify any required writes with direct CLI reads. Continue with direct `ti fs` commands while investigating the mount, and verify file I/O before using a replacement mount.
+
+Do not use `drain-file-system` for WebDAV. If unmount fails or remote data is missing, keep the machine and local mount data available for recovery. Do not delete the cache or force unmount as a routine retry: pending writes might still exist only locally. The 30-second cutoff above is a diagnostic limit for a small-file smoke test, not a service latency guarantee.
 
 ## Ubuntu 26.04 rejects a FUSE mount under `/workspace`
 

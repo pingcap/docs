@@ -59,16 +59,7 @@ For most workflows, you can use WebDAV without installing additional mount softw
 
     In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-file-system).
 
-    To prevent writes through the local mount, add `--read-only` to the mount command. For example, to mount the file system root as read-only:
-
-    ```bash
-    ti fs mount-file-system \
-      --mount-path "$HOME/workspace" \
-      --driver webdav \
-      --read-only
-    ```
-
-    The `--read-only` option affects this local mount only. Use a scoped token with read-only permissions to enforce read-only access at the file system service.
+    WebDAV does not support `--read-only`. For service-enforced read-only access, use a scoped token that permits only `read` and `list`. For a local read-only mount, use macFUSE with `--driver fuse --read-only`, or use direct `ti fs` commands. See [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional).
 
 3. Verify that you can access the mounted file system:
 
@@ -76,7 +67,9 @@ For most workflows, you can use WebDAV without installing additional mount softw
     ls "$HOME/workspace"
     ```
 
-    If you used a writable mount and your token has write permission, you can also create and read a test file:
+    A successful mount or `ls` does not verify file reads. Read a known small file first, and verify writes if your token permits them, using the [Quick Start checks](/tidb-cloud-filesystem/filesystem-quick-start.md#step-4-mount-and-verify-file-access-optional). If an operation has not returned after 30 seconds, interrupt it with Ctrl+C and follow [Mount succeeds but file access hangs](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs).
+
+    If your token has write permission, you can also create and read a test file:
 
     ```bash
     TEST_FILE="mount-check-$(date +%s).txt"
@@ -99,17 +92,13 @@ For most workflows, you can use WebDAV without installing additional mount softw
 
     WebDAV does not support `drain-file-system`. Complete a normal unmount before shutting down the machine or handing updated files to another user or environment.
 
-    If you created the test file above, you can optionally verify after unmounting that the file is available directly from the file system:
+    If you created the test file above, verify after successful unmounting that the file is available directly from the file system:
 
     ```bash
     ti fs read-file --path "/$TEST_FILE"
     ```
 
-    Example output:
-
-    ```text
-    Hello from macOS
-    ```
+    When mounted with `--remote-path /workspace`, use `/workspace/$TEST_FILE` for the remote read instead. The output must be `Hello from macOS`.
 
 Unmounting removes the local mount but does not delete the file system or its data.
 

@@ -129,6 +129,12 @@ ti fs find-files \
 
 For all available filters, see the [`find-files` reference](/ai/ti/reference/ti-fs-find-files.md).
 
+## Use command output in scripts
+
+Check the command's exit status before using its output. `read-file` and `copy-file --to-stdout` stream file contents; do not parse those bytes as CLI metadata JSON.
+
+The global default `--output json` does not guarantee that every file operation emits exactly one JSON document. For example, in `ti` v0.2.6, `create-directory` can print a `created ...` line before its JSON result. Do not pipe that output directly into a single-document JSON parser. Use the exit status and a separate `describe-file` or `list-files` call to verify the operation, and validate the output format of the installed version before automating it. Keep stderr separate from stdout when capturing file contents.
+
 ## What's next
 
 - [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) to work with file system data through a local directory and existing local tools.

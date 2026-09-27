@@ -73,7 +73,16 @@ ti fs-journal read-journal-entries \
   --journal-id "<journal-id>"
 ```
 
-Entries are returned in sequence order, so you can follow the workflow in the order it was recorded.
+Entries are returned in sequence order. By default, one call returns at most 100 entries, not the complete history. To continue, pass the last returned entry's `seq` as `--after-seq`:
+
+```shell
+ti fs-journal read-journal-entries \
+  --journal-id "<journal-id>" \
+  --after-seq 100 \
+  --limit 100
+```
+
+Use `100` only if the last entry you actually received has `seq=100`. Continue from each page's last sequence until a successful response has an empty `entries` array. A failed request does not mean that the history is complete. For a journal that is still receiving entries, this reads through the currently available history, not a fixed snapshot.
 
 To find events across journals in the selected file system, use `search-journal-entries`. For example, the following command finds `review_started` events and returns their entry contents:
 
@@ -84,6 +93,25 @@ ti fs-journal search-journal-entries \
 ```
 
 Unlike `read-journal-entries`, the search command is not limited to one journal. Use filters such as journal kind, actor, entry type, labels, or time range to narrow the results.
+
+Search also defaults to at most 100 matches per call. For a paginated search, omit `--include-entries` so the response retains match metadata, including each match's `cursor`:
+
+```shell
+ti fs-journal search-journal-entries \
+  --entry-type review_started \
+  --limit 100
+```
+
+Pass the last returned match's `cursor` to the next request and repeat the original filters:
+
+```shell
+ti fs-journal search-journal-entries \
+  --entry-type review_started \
+  --limit 100 \
+  --cursor "<last-match-cursor>"
+```
+
+Continue until a successful response has an empty `matches` array. Do not invent a sequence number or cursor. For reproducible time-bounded searches, use fixed RFC3339 `--since` and `--until` values and retain them across pages. To retrieve a matched entry's full contents, use its `journal_id` with `read-journal-entries --after-seq <seq-minus-one> --limit 1`.
 
 ## Verify a journal
 

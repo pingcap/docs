@@ -114,7 +114,18 @@ ti fs-git remove-git-worktree \
   --force
 ```
 
-When you are finished using the mounted file system, commit or push any Git changes you want to preserve and [unmount the file system safely](/tidb-cloud-filesystem/filesystem-mount.md#unmount-when-you-are-finished).
+## Preserve work before leaving a machine
+
+With `--mount-profile coding-agent`, Git metadata such as `.git` is kept on the local machine. A successful `git commit` records a commit there; it does not by itself make that commit recoverable on another machine. Draining or unmounting flushes remote file writes but is not a backup of local-only Git metadata.
+
+Before deleting an ephemeral machine:
+
+1. Commit the changes you need and push the branch to a Git remote you can write to. Verify from an independent clone or fetch that the remote contains the expected commit ID. A clean `git status` alone is not a persistence check.
+2. If you cannot push, preserve the required local overlay paths, including the repository's Git metadata, with [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md). Verify restoration with [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) in a separate environment and compare the commit ID and working files before discarding the original disk. Linked worktrees also depend on the base repository's Git metadata.
+3. Preserve untracked files and other local-only data that you need. A push preserves Git commits, not uncommitted changes, ignored files, or build artifacts.
+4. [Unmount the file system safely](/tidb-cloud-filesystem/filesystem-mount.md#unmount-when-you-are-finished). Keep the original machine available if preservation or verification fails.
+
+See [mount profiles and local overlays](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) for the data kept locally by each profile.
 
 ## What's next
 

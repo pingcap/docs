@@ -83,6 +83,10 @@ For more information about scoped permissions and credential selection, see [Aut
 
 ## Inspect and change token status
 
+Listing, enabling, disabling, and deleting tokens require either an owner token explicitly supplied through `TI_FS_TOKEN` or `--fs-token`, or TiDB Cloud API credentials with an explicit file system ID. These operations do not automatically use a locally stored owner token, although scoped-token generation can use one.
+
+For an owner-token-only environment, set `TI_FS_TOKEN` to the owner token and `TI_REGION_CODE` to the file system's region before running the commands below. Keep management credentials separate from the scoped token you give to the recipient. A scoped token cannot manage other tokens.
+
 List non-secret metadata for file system tokens:
 
 ```shell

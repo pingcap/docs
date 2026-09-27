@@ -71,7 +71,7 @@ The agent can now use ordinary tools:
 git -C /path/to/workspace/tidb-agent-task status
 ```
 
-Commit or push required changes before removing the worktree.
+Commit required changes before removing the worktree. Before discarding the machine, push those commits to a Git remote and verify them from another environment, or pack and verify restoration of the required local Git metadata. See [Preserve work before leaving a machine](/tidb-cloud-filesystem/manage-git-workspaces.md#preserve-work-before-leaving-a-machine).
 
 ## Cleanup
 
@@ -88,7 +88,7 @@ Use `--force` for worktree removal only when uncommitted changes can be discarde
 
 - Repository credentials are managed by Git, not `ti`.
 - The `coding-agent` mount profile keeps Git metadata, dependency directories, caches, build output, and other generated files on the local machine for performance.
-- Files kept locally by the `coding-agent` profile disappear with an ephemeral machine. Commit or push required Git changes, and use [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) with explicit `--path` values to preserve other local files that cannot be rebuilt.
+- Files kept locally by the `coding-agent` profile disappear with an ephemeral machine. A local commit alone does not preserve Git history across machines. Push and verify required commits, and use [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) with explicit `--path` values to preserve other local files that cannot be rebuilt.
 
 ## What's next
 

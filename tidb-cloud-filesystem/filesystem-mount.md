@@ -51,13 +51,19 @@ By default, a mount exposes the file system root `/`. Use `--remote-path` to exp
 
 ### Create a read-only mount
 
-Use `--read-only` to prevent writes through a particular mount. This option does not change the permissions of the file system token. To enforce read-only access at the service level, use a scoped token with read-only permissions.
+For FUSE mounts, use `--driver fuse --read-only` to prevent writes through a particular mount. WebDAV does not support `--read-only`; use direct CLI access or a FUSE mount when you need this local mount restriction. This option does not change the permissions of the file system token. To enforce read-only access at the service level, use a scoped token with read-only permissions.
 
 ### Mount layers and checkpoints
 
 Layers and checkpoints require FUSE. Checkpoint mounts are always read-only.
 
 For layer and checkpoint workflows, see [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
+
+## Verify a mount before using it
+
+Do not treat a successful mount command or directory listing as a file I/O check. Read a known small file uploaded through `ti fs copy-file`. For a writable mount, also write a new test file, close it, unmount successfully, and read it through `ti fs read-file` to verify remote persistence. Use the [Quick Start verification steps](/tidb-cloud-filesystem/filesystem-quick-start.md#step-4-mount-and-verify-file-access-optional) for a complete example.
+
+If a small-file check has not returned after 30 seconds, interrupt it and follow [Mount succeeds but file access hangs](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs). Do not start applications on the mount until verification passes.
 
 ## Finish safely
 
