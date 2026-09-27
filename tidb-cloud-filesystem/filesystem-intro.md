@@ -62,3 +62,4 @@ Choose the path that matches what you want to do:
 - **Create a new file system:** follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md).
 - **Use a file system that someone else has shared with you:** see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 - **Check supported regions, platforms, and current limitations:** see [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md).
+- **Integrate a client SDK into your application:** see [SDKs](/tidb-cloud-filesystem/filesystem-sdks.md).

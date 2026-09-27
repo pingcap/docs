@@ -33,5 +33,6 @@
 ## REFERENCES
 
 - [Command Reference](/tidb-cloud-filesystem/filesystem-command-reference.md)
+- [SDKs](/tidb-cloud-filesystem/filesystem-sdks.md)
 - [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 - [Troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md)
