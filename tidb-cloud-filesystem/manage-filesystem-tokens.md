@@ -35,7 +35,7 @@ The CLI validates the token, extracts the file system ID from it, verifies conne
 
 ## Generate an owner token
 
-When you create a file system, TiDB Cloud creates an owner token for it and returns it to you. That token does not expire, and the CLI stores it locally and uses it for later commands, so before you revoke it, generate and validate a replacement as described in Rotate or revoke a token. Tokens you generate later with --ttl expire on their own.
+When you create a file system, TiDB Cloud creates an owner token for it and returns it to you. That token does not expire, and the CLI stores it locally and uses it for later commands, so before you revoke it, generate and validate a replacement as described in [Rotate or revoke a token](#rotate-or-revoke-a-token). Tokens you generate later with `--ttl` expire on their own.
 
 You can generate additional owner tokens when another trusted environment or workflow needs full access to the file system.
 
