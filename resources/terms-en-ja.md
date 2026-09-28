@@ -31,7 +31,7 @@
 | Coprocessor | コプロセッサー |  |
 | CTR | CTR | Encryption mode, keep in English. Do not translate to 「クリック率」. |
 | data integration | データ統合 |  |
-| data lineage | データ系譜 |  |
+| data lineage | データリネージ |  |
 | Dedicated | Dedicated | TiDB Cloud plan name, keep in English. |
 | Deploy | デプロイ | Do not translate to 「配備」. |
 | disaster recovery | ディザスタリカバリ | No long vowel mark at end. |
