@@ -111,7 +111,7 @@ TiDB Cloud CLI は、プロジェクトセレクターを受け付けず、保�
 
 フラグはシェル履歴やプロセス一覧に残る可能性があるため、フラグよりも `TI_FS_TOKEN` を推奨します。
 
-## 設定不要のファイルシステム入力 {#config-free-filesystem-inputs}
+## 設定不要のファイルシステム入力 {#config-free-file-system-inputs}
 
 クリーンなサンドボックスで必要なのは次の内容だけです。
 

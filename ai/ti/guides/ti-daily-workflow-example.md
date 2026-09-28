@@ -58,7 +58,7 @@ ti db execute-sql-statement \
   --output text
 ```
 
-## ステップ 4. ファイルシステムを作成して使用する {#step-4-create-and-use-a-filesystem}
+## ステップ 4. ファイルシステムを作成して使用する {#step-4-create-and-use-a-file-system}
 
 ```bash
 export TI_FS_FILE_SYSTEM_ID="$(ti fs create-file-system \

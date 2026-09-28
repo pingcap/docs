@@ -66,7 +66,7 @@ ti fs read-file --path /sandbox/status.txt
 sandbox ready
 ```
 
-## ステップ 4. 必要に応じて Filesystem をマウントする {#step-4-optionally-mount-the-file-system}
+## ステップ 4. 必要に応じてファイルシステムをマウントする {#step-4-optionally-mount-the-file-system}
 
 Linux で FUSE を使用する場合:
 
