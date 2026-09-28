@@ -151,8 +151,8 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの接続エクスペリエンスを向上させます。
 
     - TiDB Cloud Dedicatedユーザーがよりスムーズで効率的な接続体験を得られるよう、**Connect**ダイアログのインターフェースを改訂します。
-    - クラスターのネットワーク設定を簡素化するために、新しいクラスターレベルの**ネットワーク設定**ページを導入しました。
-    - **セキュリティ設定**ページを新しい**パスワード設定**ページに置き換え、IPアクセスリストの設定を新しい**ネットワーク**ページに移動します。
+    - クラスターのネットワーク設定を簡素化するために、新しいクラスターレベルの**Networking**ページを導入しました。
+    - **Security Settings**ページを新しい**Password Settings**ページに置き換え、IPアクセスリストの設定を新しい**Networking**ページに移動します。
 
     詳細については、 [TiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
@@ -218,7 +218,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **コンソールの変更**
 
-- **VPC ピアリング**ページのレイアウトを調整して、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでの[VPCピアリング接続の作成](/tidb-cloud/set-up-vpc-peering-connections.md)のユーザーエクスペリエンスを向上させます。
+- **VPC Peering**ページのレイアウトを調整して、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでの[VPCピアリング接続の作成](/tidb-cloud/set-up-vpc-peering-connections.md)のユーザーエクスペリエンスを向上させます。
 
 ## 2024年7月2日 {#july-2-2024}
 
@@ -265,7 +265,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     以前はChat2Queryと呼ばれていたインターフェースは、SQL Editorに名称変更されました。この変更により、手動によるSQL編集とAIによるクエリ生成の区別が明確になり、使いやすさと全体的なユーザーエクスペリエンスが向上します。
 
-    - **SQLエディタ**： TiDB CloudコンソールでSQLクエリを手動で記述および実行するためのデフォルトインターフェース。
+    - **SQL Editor**： TiDB CloudコンソールでSQLクエリを手動で記述および実行するためのデフォルトインターフェース。
     - **Chat2Query** ：AIを活用したテキストクエリ機能で、自然言語を使ってデータベースと対話し、SQLクエリを生成、書き換え、最適化することができます。
 
     詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
@@ -392,7 +392,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     **制限**ラベルには、クラスター内の各コンポーネントにおけるCPU、メモリ、ストレージなどのリソースの最大使用量が表示されます。この機能強化により、クラスターのリソース使用率の監視が簡素化されます。
 
-    これらのメトリック制限にアクセスするには、クラスターの**監視**ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認してください。
+    これらのメトリック制限にアクセスするには、クラスターの**Monitoring**ページに移動し、**Metrics**タブの**Server**カテゴリを確認してください。
 
     詳細については、 [TiDB Cloud Dedicatedクラスターのメトリクス](/tidb-cloud/built-in-monitoring.md#server)を参照してください。
 

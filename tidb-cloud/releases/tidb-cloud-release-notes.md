@@ -451,7 +451,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         この機能はリクエストに応じて利用できるようになりました。詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)を参照してください。
 
-    - TiDB Cloud Premiumインスタンス向けに、**メトリクス**ページ（**インスタンス概要**タブ）に2つの新しいTTL監視メトリクスを追加します。
+    - TiDB Cloud Premiumインスタンス向けに、**Metrics**ページ（**Instance Overview**タブ）に2つの新しいTTL監視メトリクスを追加します。
 
         - TTLスケジュール遅延によるテーブル数
         - 日ごとのTTL挿入/削除行数
@@ -578,9 +578,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - 以下のリソースを自動的かつ効率的に管理するためのTiDB Cloud Premium API（v1beta2）をご紹介します。
 
-    - **TiDB Cloud Premiumインスタンス**：パスワード、CA証明書、クラウドプロバイダー情報など、 TiDB Cloud Premiumインスタンスのライフサイクルと構成を管理します。
-    - **バックアップ**： TiDB Cloud Premiumインスタンスのバックアップを管理します。バックアップベースのリストア機能も含まれます。
-    - **リージョン**： TiDB Cloud Premiumインスタンスを作成するために利用可能なリージョンを取得します。
+    - **TiDB Cloud Premium Instance**：パスワード、CA証明書、クラウドプロバイダー情報など、 TiDB Cloud Premiumインスタンスのライフサイクルと構成を管理します。
+    - **Backup**： TiDB Cloud Premiumインスタンスのバックアップを管理します。バックアップベースのリストア機能も含まれます。
+    - **Region**： TiDB Cloud Premiumインスタンスを作成するために利用可能なリージョンを取得します。
 
     詳細については、 [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/)を参照してください。
 
@@ -634,7 +634,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタにおけるクラウドストレージデータのインポートエクスペリエンスを向上させます。
 
-        インポートプロセスは、接続、宛先マッピング、事前チェックの3ステップウィザードに簡素化され、Amazon S3、Google Cloud Storage、Azure Blob Storageに対応した**クラウドストレージからのデータインポートの**エントリポイントが統一されました。新しいフローでは、単一ファイルURIとワイルドカードパターンによる手動ファイルマッピングがサポートされ、事前チェックステップではインポート実行前にソースファイルをスキャンしてマッピングをプレビューするため、構成上の問題を早期に発見し、インポートの失敗を減らすことができます。
+        インポートプロセスは、接続、宛先マッピング、事前チェックの3ステップウィザードに簡素化され、Amazon S3、Google Cloud Storage、Azure Blob Storageに対応した**Import data from Cloud Storage**のエントリポイントが統一されました。新しいフローでは、単一ファイルURIとワイルドカードパターンによる手動ファイルマッピングがサポートされ、事前チェックステップではインポート実行前にソースファイルをスキャンしてマッピングをプレビューするため、構成上の問題を早期に発見し、インポートの失敗を減らすことができます。
 
         詳細については、以下の資料を参照してください。
 
@@ -668,7 +668,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Dedicated**
 
-    - セキュリティ追跡を改善するために、 TiDB Cloudの [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)に**パブリックエンドポイント**ステータスを追加します。
+    - セキュリティ追跡を改善するために、 TiDB Cloudの [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)に**Public Endpoint**ステータスを追加します。
 
 **コンソールの変更**
 
@@ -794,7 +794,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     [TiDB Cloudコンソール](https://tidbcloud.com/)すべてのサブスクリプションプランにおいてサポート体験を向上させるため、プランに応じたサポートオプションを提供開始しました。これらのアップデートには以下が含まれます。
 
-    - **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、 **[アクション]**列の**[サポートを受ける]**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**Support Plan**パネルに、有料プランのユーザーは**Support Portal**に誘導されます。
+    - **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、**Actions**列の**Get Support**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**Support Plan**パネルに、有料プランのユーザーは**Support Portal**に誘導されます。
     - **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**Support Options**と**Support Tickets**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
     - **明確なコミュニティ サポート アクセス**:**Support Plan**オプション内では、Slack と Discord がBasic プラン ユーザーの主要なテクニカルサポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[Connected Careの概要](/tidb-cloud/connected-care-overview.md)、および[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)。
     - **アクション指向のSupport Plan UI** ：**Support Plan**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。

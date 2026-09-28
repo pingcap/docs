@@ -23,7 +23,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     PITRは、任意の時点のデータを新しいクラスターに復元することをサポートします。PITR機能を使用するには、TiDBクラスターのバージョンがv6.4.0以上であり、TiKVノードのサイズが8 vCPU以上、16 GiB以上であることを確認してください。
 
-    [TiDB Cloudコンソール](https://tidbcloud.com)の**バックアップ設定**で PITR 機能を有効または無効にすることができます。
+    [TiDB Cloudコンソール](https://tidbcloud.com)の**Backup Settings**で PITR 機能を有効または無効にすることができます。
 
     詳細については[TiDB クラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
@@ -81,7 +81,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     詳細については[チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
 
-- 組織の所有者は、**組織設定**で組織の名前を編集できます。
+- 組織の所有者は、**Organization Settings**で組織の名前を編集できます。
 
 **コンソールの変更**
 
@@ -146,7 +146,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     この機能はまだベータ版であり、リクエストに応じてのみ利用可能です。
 
-    - TiDB Cloudコンソールの右下隅にある**[ヘルプ]**をクリックします。
+    - TiDB Cloudコンソールの右下隅にある**Help**をクリックします。
     - ダイアログの**Description**フィールドに"Apply for PITR"と入力し、 **[Send]**をクリックします。
 
 - データベース監査ログ機能が GA になりました。
@@ -358,7 +358,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **コンソールの変更**
 
-- [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[接続する](/tidb-cloud/connect-to-tidb-cluster.md)ダイアログの**VPC ピアリング**タブと**プライベートエンドポイント**タブに、MySQL、MyCLI、JDBC、Python、Go、Node.js のサンプル接続文字列を提供します。
+- [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[接続する](/tidb-cloud/connect-to-tidb-cluster.md)ダイアログの**VPC Peering**タブと**Private Endpoint**タブに、MySQL、MyCLI、JDBC、Python、Go、Node.js のサンプル接続文字列を提供します。
 
     接続コードをコピーしてアプリに貼り付けるだけで、 Dedicated Tierクラスターに簡単に接続できます。
 
@@ -384,7 +384,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     現在、 TiDB Cloud APIはベータ版であり、リクエストに応じてのみご利用いただけます。APIアクセスを申請するには、リクエストを送信してください。
 
-    - [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)の右下にある**[ヘルプ]**をクリックします。
+    - [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)の右下にある**Help**をクリックします。
     - ダイアログの**Description**フィールドに"Apply for TiDB Cloud API"と入力し、 **[Send]**をクリックします。
 
 ## 2022年8月16日 {#august-16-2022}
@@ -418,13 +418,13 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
         - PoCおよびステージング環境
         - 開発環境
 
-- [Dedicated Tierクラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の**診断**タブに[監視ページ](/tidb-cloud/built-in-monitoring.md)を追加します。
+- [Dedicated Tierクラスター](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の**Diagnosis**タブに[監視ページ](/tidb-cloud/built-in-monitoring.md)を追加します。
 
     モニタリングページは、システム全体のパフォーマンス診断のためのシステムレベルのエントリを提供します。トップダウン型パフォーマンス分析手法に基づき、モニタリングページはTiDBのパフォーマンスメトリクスをデータベース時間の内訳に基づいて整理し、異なる色で表示します。これらの色を確認することで、システム全体のパフォーマンスボトルネックを一目で特定できるため、パフォーマンス診断時間を大幅に短縮し、パフォーマンス分析と診断を簡素化できます。
 
-- CSV および Parquet ソースファイルの**データインポート**ページで、**カスタムパターン**を有効または無効にするスイッチを追加します。
+- CSV および Parquet ソースファイルの**Data Import**ページで、**Custom Pattern**を有効または無効にするスイッチを追加します。
 
-    **カスタムパターン**機能はデフォルトで無効になっています。特定のパターンに一致するファイル名を持つCSVファイルまたはParquetファイルを単一のターゲットテーブルにインポートする場合は、この機能を有効にできます。
+    **Custom Pattern**機能はデフォルトで無効になっています。特定のパターンに一致するファイル名を持つCSVファイルまたはParquetファイルを単一のターゲットテーブルにインポートする場合は、この機能を有効にできます。
 
     詳細については、 [CSVファイルのインポート](/tidb-cloud/import-csv-files.md)および[Apache Parquet ファイルのインポート](/tidb-cloud/import-parquet-files.md)を参照してください。
 
@@ -432,8 +432,8 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - [クラスター](https://tidbcloud.com/project/clusters)ページとクラスターの詳細ページの UI を最適化します。
 
-    - **クラスター**ページに**[接続] ボタン**と**[データのインポート]**ボタンを追加します。
-    - **[接続] ボタン**と**[データのインポート]**ボタンをクラスターの詳細ページの右上隅に移動します。
+    - **Clusters**ページに**Connect**ボタンと**Import data**ボタンを追加します。
+    - **Connect**ボタンと**Import data**ボタンをクラスターの詳細ページの右上隅に移動します。
 
 ## 2022年7月28日 {#july-28-2022}
 
