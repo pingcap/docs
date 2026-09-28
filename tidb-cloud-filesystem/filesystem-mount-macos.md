@@ -105,6 +105,8 @@ For most workflows, you can use WebDAV without installing additional mount softw
     ti fs read-file --path "/$TEST_FILE"
     ```
 
+    If you mounted with `--remote-path /workspace`, the file is at `/workspace/$TEST_FILE` in the file system, because the remote path became the root of your mount.
+
     Example output:
 
     ```text
@@ -112,6 +114,15 @@ For most workflows, you can use WebDAV without installing additional mount softw
     ```
 
 Unmounting removes the local mount but does not delete the file system or its data.
+
+> **Note:**
+>
+> Browsing a mount in Finder, with either driver, writes `.DS_Store` files and `._` companion files into the file system. They stay there after you unmount, they consume storage and appear in the file count, and anyone holding a token for that path can see them. Delete both kinds if you do not want to share them:
+>
+> ```bash
+> ti fs delete-file --path /.DS_Store
+> ti fs delete-file --path /._.DS_Store
+> ```
 
 ## Use macFUSE when you need FUSE features
 
