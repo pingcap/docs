@@ -68,7 +68,7 @@ In the owner shell:
     reviewer_token_id="<returned-token-id>"
     ```
 
-3. Send the scoped token, region code, and exact value of `share_path` to the recipient through your secure channel. Keep the owner token private.
+3. Send the scoped token, region code, and exact value of `share_path` to the recipient through your secure channel. Keep the owner token private. If you updated files through a mount, [verify that the updates are ready](#make-sure-updates-are-ready-to-share) before sending access details.
 
 Create a separate scoped token for each recipient so you can revoke access independently. For other permission combinations, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
@@ -134,6 +134,12 @@ Expected output: `Shared review sample`. If the read takes longer than 30 second
 
 The scoped token enforces read-only access at the service. The FUSE `--read-only` option also blocks writes through this local mount.
 
+## Make sure updates are ready to share
+
+For later workflows that write through a mount, close the files and [finish the writes safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely) before handing them to another user. For FUSE, drain the mount or unmount it successfully. For WebDAV, unmount normally; drain is not supported. Verify the updated file with a direct `ti fs read-file` request.
+
+Avoid concurrent writes to the same file: changes are not automatically merged. Use [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) when users need isolated workspaces.
+
 ## Stop sharing access
 
 Complete these steps in order:
@@ -180,12 +186,6 @@ Complete these steps in order:
     Expect a not-found error from `describe-file`.
 
 Revocation leaves the file system and other tokens intact. It cannot erase files the recipient has already downloaded or cached. Clearing an environment variable alone does not revoke a token.
-
-## Make sure updates are ready to share
-
-For later workflows that write through a mount, close the files and [finish the writes safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely) before handing them to another user. For FUSE, drain the mount or unmount it successfully. For WebDAV, unmount normally; drain is not supported. Verify the updated file with a direct `ti fs read-file` request.
-
-Avoid concurrent writes to the same file: changes are not automatically merged. Use [Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) when users need isolated workspaces.
 
 ## What's next
 
