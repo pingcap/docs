@@ -241,7 +241,7 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
     - `--sink-uri` : ダウンストリームクラスタのURI
     - `--start-ts` : 変更フィードの開始タイムスタンプ。バックアップ時間 (または[ステップ2. 全データを移行する](#step-2-migrate-full-data))
 
-    チェンジフィード構成の詳細については、 [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
+    チェンジフィード構成の詳細については、 [TiCDC Changefeed設定](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 3. GCを有効にします。
 
