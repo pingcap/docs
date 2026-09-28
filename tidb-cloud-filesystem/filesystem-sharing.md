@@ -158,7 +158,7 @@ Complete these steps in order:
     ti fs delete-file-system-token --token-id "$reviewer_token_id"
     ```
 
-    This command uses the owner token in `TI_FS_TOKEN`. To inspect token metadata, use `ti fs list-file-system-tokens --output text`.
+    This command accepts either TiDB Cloud API credentials or an owner token, and the owner token must be passed in through `TI_FS_TOKEN` or `--fs-token`. An owner token that is only saved to local credentials by `import-file-system-token` is ignored here, and both `delete-file-system-token` and `list-file-system-tokens` then exit `3` asking for API credentials. To inspect token metadata, use `ti fs list-file-system-tokens --output text`.
 
 3. **Recipient:** allow approximately 10 seconds for authentication caches to update, then repeat the read with the same scoped token:
 

@@ -27,12 +27,23 @@ Treat both owner tokens and delegated Vault tokens as credentials. Do not expose
 
 A Vault secret can contain multiple named fields. For example, a database secret might contain a connection URL and a password.
 
-Prepare a temporary directory containing a sample password. Use test values for this walkthrough:
+Write each field value to its own local file first, then pass those files to `create-secret` with the `@` prefix. Read each value into a variable with `read -r -s` and write it with `printf '%s'` so that the value does not enter your shell history and does not gain a trailing newline. `create-secret` and `replace-secret` accept a value that ends in a newline and report success, but [`run-with-secret`](#inject-a-secret-into-a-process) later refuses to inject it with `refusing to inject (EACCES)`. Editors and `echo` add a trailing newline; `printf '%s'` does not.
 
 ```shell
 umask 077
 secret_dir="$(mktemp -d)"
-printf '%s' 'example-password' > "$secret_dir/PASSWORD"
+
+printf 'DB_URL: ' >&2
+read -r -s DB_URL_VALUE
+printf '\n' >&2
+printf '%s' "$DB_URL_VALUE" > "$secret_dir/DB_URL"
+
+printf 'PASSWORD: ' >&2
+read -r -s PASSWORD_VALUE
+printf '\n' >&2
+printf '%s' "$PASSWORD_VALUE" > "$secret_dir/PASSWORD"
+
+unset DB_URL_VALUE PASSWORD_VALUE
 ```
 
 Create a secret named `db-prod`:
@@ -40,11 +51,11 @@ Create a secret named `db-prod`:
 ```shell
 ti fs-vault create-secret \
   --secret-name db-prod \
-  --field DB_URL=mysql://example \
+  --field "DB_URL=@$secret_dir/DB_URL" \
   --field "PASSWORD=@$secret_dir/PASSWORD"
 ```
 
-The `@` prefix tells `ti` to read the field value from the local file.
+The `@` prefix tells `ti` to read the field value from the local file. Prefer it for every field, because a value written directly as `--field DB_URL=mysql://example` appears in shell history and in process listings.
 
 Some Vault commands identify a secret by name, such as `db-prod`. Commands that operate on a specific secret path, such as `replace-secret` and `run-with-secret`, use its full Vault path instead. For example, the Vault path of `db-prod` is `/n/vault/db-prod`.
 
@@ -67,16 +78,21 @@ When an application needs the secret, prefer [injecting it into the process](#in
 
 `replace-secret` replaces all fields in the secret, not just the field whose value changed.
 
-To rotate `DB_URL`, add its replacement value to the temporary directory. Keep the `PASSWORD` file so that the replacement retains that field:
+To rotate `DB_URL`, overwrite its file in the temporary directory using the same `read -r -s` and `printf '%s'` pattern as [Create a secret](#create-a-secret). Keep the `PASSWORD` file so that the replacement retains that field:
 
 ```shell
-printf '%s' 'mysql://example-new' > "$secret_dir/DB_URL"
+printf 'New DB_URL: ' >&2
+read -r -s DB_URL_VALUE
+printf '\n' >&2
+printf '%s' "$DB_URL_VALUE" > "$secret_dir/DB_URL"
+unset DB_URL_VALUE
+
 ti fs-vault replace-secret \
   --secret-path /n/vault/db-prod \
   --from-directory "$secret_dir"
 ```
 
-Each file in the directory becomes a field in the replacement secret. Any existing field that is not included in the directory is not retained.
+Each file in the directory becomes a field in the replacement secret. Any existing field that is not included in the directory is not retained. `replace-secret` accepts a value that ends in a newline and reports success; the failure appears later when `run-with-secret` refuses to inject the value, so keep using `printf '%s'` here rather than `echo` or an editor.
 
 Keep these local files out of source control and remove them when they are no longer needed. For details, see the [`replace-secret` reference](/ai/ti/reference/ti-fs-vault-replace-secret.md).
 
@@ -118,7 +134,7 @@ Field names used with `run-with-secret` must match `[A-Z_][A-Z0-9_]*`. Use upper
 
 If an application expects credentials as files instead of environment variables, you can optionally expose permitted Vault fields through a read-only FUSE mount on Linux or macOS.
 
-Use this option before revoking the grant and while its token is still valid. For delegated access, make the token available as `TI_VAULT_TOKEN`, with the file system ID and region set as described above. Then create a local mount directory and mount the Vault:
+Use this option before revoking the grant and while its token is still valid. `mount-vault` always requires a delegated Vault token, whether you hold the owner token or not. If you hold only the owner token, create a grant for yourself first, as described in [Delegate limited access](#delegate-limited-access). Make the delegated token available as `TI_VAULT_TOKEN`, with the file system ID and region set as described above. Then create a local mount directory and mount the Vault:
 
 ```shell
 mkdir -p /path/to/vault

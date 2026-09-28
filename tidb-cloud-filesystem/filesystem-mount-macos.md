@@ -97,6 +97,15 @@ For a local read-only mount, use macFUSE with `--driver fuse --read-only`.
 
 The file system remains available for reuse.
 
+> **Note:**
+>
+> Browsing a mount in Finder, with either driver, writes `.DS_Store` files and `._` companion files into the file system. They stay there after you unmount, they consume storage and appear in the file system's file count, and anyone holding a token for that path can see them. Delete both kinds if you do not want to share them:
+>
+> ```bash
+> ti fs delete-file --path "${remote_path%/}/.DS_Store"
+> ti fs delete-file --path "${remote_path%/}/._.DS_Store"
+> ```
+
 ## Use macFUSE when you need FUSE features
 
 Use FUSE instead of WebDAV when you need to:

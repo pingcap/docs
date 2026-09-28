@@ -75,11 +75,15 @@ ti fs list-layers --output text
 
 Changes that have not been committed remain in the layer. File operations that do not select the layer access the base file system and do not show its uncommitted changes.
 
+Only `copy-file`, `find-files`, and `search-file-content` take `--layer-id`. `read-file`, `list-files`, `describe-file`, `delete-file`, `move-file`, and `create-directory` always act on the base file system. To read the contents of a file in a layer, mount the layer as described in [Mount a writable layer](#mount-a-writable-layer) or [verify a checkpoint's file contents](#create-a-checkpoint).
+
 > **Note:**
 >
-> `copy-file` with `--layer-id` does not support recursive copy. To copy a directory tree into a layer, mount the layer as a writable FUSE mount and copy files through the mount path.
+> `copy-file` with `--layer-id` does not support recursive copy. To copy a directory tree into a layer, [mount the layer](#mount-a-writable-layer) as a writable FUSE mount and copy files through the mount path.
 >
 > Do not mount the same writable layer at multiple local paths concurrently. Reuse its existing mount, or unmount it before mounting the layer elsewhere.
+>
+> The mount command identifies the layer with `--layer-ref`, while the file commands above take `--layer-id`. Both accept the same layer identifier value.
 
 ### Mount a writable layer
 
