@@ -99,7 +99,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
-[Amazon AppFlow &gt; フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **[フローの作成]** をクリックします。
+[Amazon AppFlow > フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **フローの作成** をクリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 
@@ -153,9 +153,9 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
     );
     ```
 
-5. `sf_account`テーブルが作成されたら、 **[接続]**をクリックします。接続ダイアログが表示されます。
+5. `sf_account`テーブルが作成されたら、 **接続**をクリックします。接続ダイアログが表示されます。
 
-6. **TiDBコネクタへの接続**ダイアログで、 TiDB Cloud Starterインスタンスの接続プロパティを入力します。TiDB Cloud Starterの場合、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDBコネクタがTLS接続を使用できるようになります。次に、 **[接続]**をクリックします。
+6. **TiDBコネクタへの接続**ダイアログで、 TiDB Cloud Starterインスタンスの接続プロパティを入力します。TiDB Cloud Starterの場合、 **TLS**オプションを`Yes`に設定する必要があります。これにより、TiDBコネクタがTLS接続を使用できるようになります。次に、 **接続**をクリックします。
 
     ![tidb connection message](/media/develop/aws-appflow-step-tidb-connection-message.png)
 
@@ -173,7 +173,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### マッピングルールを設定する {#set-mapping-rules}
 
-Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_account`テーブルにマッピングし、 **[次へ]**をクリックします。
+Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_account`テーブルにマッピングし、 **次へ**をクリックします。
 
 - `sf_account`テーブルは TiDB に新しく作成されましたが、空です。
 

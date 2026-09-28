@@ -62,7 +62,7 @@ Prometheus をアップグレードするには、次のコマンドを実行し
 tiup cluster patch <cluster-name> prometheus-v{new-version}.tar.gz -R prometheus --overwrite
 ```
 
-アップグレード後、Prometheusサーバーのホームページ (通常は`http://<Prometheus-server-host-name>:9090` ) に移動し、上部のナビゲーション メニューで**[ステータス]**をクリックして、 **[ランタイムとビルド情報]**ページを開き、Prometheus のバージョンを確認し、アップグレードが成功したかどうかを確認できます。
+アップグレード後、Prometheusサーバーのホームページ (通常は`http://<Prometheus-server-host-name>:9090` ) に移動し、上部のナビゲーション メニューで**ステータス**をクリックして、 **ランタイムとビルド情報**ページを開き、Prometheus のバージョンを確認し、アップグレードが成功したかどうかを確認できます。
 
 ## Grafanaのアップグレード {#upgrade-grafana}
 
@@ -130,4 +130,4 @@ Alertmanager をアップグレードするには、次のコマンドを実行�
 tiup cluster patch <cluster-name> alertmanager-v{new-version}-linux-amd64.tar.gz -R alertmanager --overwrite
 ```
 
-アップグレード後、Alertmanagerサーバーのホームページ (通常は`http://<Alertmanager-server-host-name>:9093` ) に移動し、上部のナビゲーション メニューで**[ステータス]**をクリックして、Alertmanager のバージョンを確認し、アップグレードが成功したかどうかを確認できます。
+アップグレード後、Alertmanagerサーバーのホームページ (通常は`http://<Alertmanager-server-host-name>:9093` ) に移動し、上部のナビゲーション メニューで**ステータス**をクリックして、Alertmanager のバージョンを確認し、アップグレードが成功したかどうかを確認できます。

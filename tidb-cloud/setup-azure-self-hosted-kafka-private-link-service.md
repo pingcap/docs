@@ -66,14 +66,14 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 1. [Azureポータル](https://portal.azure.com/)にログインし、 [仮想ネットワーク](https://portal.azure.com/#browse/Microsoft.Network%2FvirtualNetworks)ページに移動して、 **+ Create**をクリックして仮想ネットワークを作成します。
 
-2. **Basic**タブで、 **Subscription** 、 **Resource group** 、および**Region**を選択し、 **[仮想ネットワーク名]**フィールドに名前 (たとえば、 `kafka-pls-vnet` ) を入力して、 **Next**をクリックします。
+2. **Basic**タブで、 **Subscription** 、 **Resource group** 、および**Region**を選択し、 **仮想ネットワーク名**フィールドに名前 (たとえば、 `kafka-pls-vnet` ) を入力して、 **Next**をクリックします。
 
 3. **Security**タブで、Azure Bastion を有効にし、 **Next**をクリックします。
 
 4. **IP addresses**タブで、次の操作を行います。
 
     1. 仮想ネットワークのアドレス空間を設定します (例: `10.0.0.0/16` )。
-    2. ブローカーのサブネットを作成するには、 **[サブネットの追加]**をクリックし、次の情報を入力して、 **[追加]**をクリックします。
+    2. ブローカーのサブネットを作成するには、 **サブネットの追加**をクリックし、次の情報を入力して、 **追加**をクリックします。
 
         - **Name**: `brokers-subnet`
         - **IPアドレス範囲**: `10.0.0.0/24`
@@ -89,8 +89,8 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 **2.1. ブローカーノードを作成する**
 
-1. [Azureポータル](https://portal.azure.com/)にログインし、 [仮想マシン](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse)ページに移動して**+ Create**をクリックし、 **[Azure 仮想マシン]**を選択します。
-2. **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次の情報を入力して、 **[次へ: ディスク]**をクリックします。
+1. [Azureポータル](https://portal.azure.com/)にログインし、 [仮想マシン](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse)ページに移動して**+ Create**をクリックし、 **Azure 仮想マシン**を選択します。
+2. **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次の情報を入力して、 **次へ: ディスク**をクリックします。
     - **仮想マシン名**: `broker-node`
     - **Availability options**: `Availability zone`
     - **Zone options**: `Self-selected zone`
@@ -428,14 +428,14 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1. [Azureポータル](https://portal.azure.com/)にログインし、 [負荷分散](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers)ページに移動して、 **+ Create**をクリックしてロードバランサーを作成します。
 
-2. **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次のインスタンス情報を入力して、 **[次へ: フロントエンド IP 構成 &gt;]**をクリックします。
+2. **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次のインスタンス情報を入力して、 **次へ: フロントエンド IP 構成 >**をクリックします。
 
     - **Name**: `kafka-lb`
     - **SKU** : `Standard`
     - **Type**: `Internal`
     - **Tier**: `Regional`
 
-3. **Frontend IP configuration**タブで、 **[+ フロントエンド IP 構成の追加]**をクリックし、次の情報を入力して**Save**をクリックし、 **[次へ: バックエンド プール &gt;]**をクリックします。
+3. **Frontend IP configuration**タブで、 **+ フロントエンド IP 構成の追加**をクリックし、次の情報を入力して**Save**をクリックし、 **次へ: バックエンド プール >**をクリックします。
 
     - **Name**: `kafka-lb-ip`
     - **IP version**: `IPv4`
@@ -494,7 +494,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
             - **Protocol**： `TCP`
             - **Port**: `39092`
 
-6. **Next : Outbound rule**をクリックし、 **Next : Tags >**をクリックしてから、 **[次へ: 確認と作成]**をクリックして情報を確認します。
+6. **Next : Outbound rule**をクリックし、 **Next : Tags >**をクリックしてから、 **次へ: 確認と作成**をクリックして情報を確認します。
 
 7. **Create**をクリックします。
 
@@ -502,7 +502,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1. [Azureポータル](https://portal.azure.com/)にログインし、 [プライベートリンクサービス](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices)ページに移動して、 **+ Create**をクリックし、Kafka ロードバランサーのプライベートリンクサービスを作成します。
 
-2. **Basic**タブで、 **Subscription** 、 **Resource group** 、 **Region**を選択し、 **Name**フィールドに`kafka-pls`と入力して、 **[次へ: 送信設定 &gt;]**をクリックします。
+2. **Basic**タブで、 **Subscription** 、 **Resource group** 、 **Region**を選択し、 **Name**フィールドに`kafka-pls`と入力して、 **次へ: 送信設定 >**をクリックします。
 
 3. **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security &gt;**をクリックします。
 

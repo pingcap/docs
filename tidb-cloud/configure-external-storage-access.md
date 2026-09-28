@@ -164,7 +164,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         - **Trusted entity type**で**AWS account**を選択します。
         - **An AWS account**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
-        - **[オプション]**で、 **[外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベストプラクティス)]**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
+        - **オプション**で、 **外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベストプラクティス)**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
 
     3. **Next**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**Next**をクリックします。
 
@@ -225,7 +225,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
     ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. デフォルトのキータイプ`JSON`を選択し、 **[作成]**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud StarterまたはEssentialインスタンスの GCS アクセスを設定する際に使用する必要のあるサービスアカウント キーが含まれています。
+3. デフォルトのキータイプ`JSON`を選択し、 **作成**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud StarterまたはEssentialインスタンスの GCS アクセスを設定する際に使用する必要のあるサービスアカウント キーが含まれています。
 
 </CustomContent>
 
@@ -292,7 +292,7 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
 
 1. [Azureストレージアカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するストレージアカウントをクリックします。
 
-2. **Storage account**ページで、**[セキュリティ + ネットワーク]**をクリックし、 **Shared access signature**をクリックします。
+2. **Storage account**ページで、**セキュリティ + ネットワーク**をクリックし、 **Shared access signature**をクリックします。
 
     ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
 

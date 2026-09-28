@@ -38,7 +38,7 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
     - **リージョン**： TiDB Cloud Premiumインスタンスと同じリージョンを選択してください。
     - **Endpoint Name**：エンドポイントの名前を入力してください。
     - **Endpoint Type**：**Interface Endpoint**を選択してください。
-    - **Endpoint Service**： **[その他のエンドポイントサービス]**を選択します。
+    - **Endpoint Service**： **その他のエンドポイントサービス**を選択します。
 5. **Endpoint Service Name**フィールドに、 TiDB Cloudからコピーしたサービス名を貼り付けます。
 6. **Verify**をクリックしてください。緑色のチェックマークが表示されれば、サービスが有効であることを示します。
 7. エンドポイントに関連付ける**VPC** 、**Security Group**、および**ゾーン**を選択してください。

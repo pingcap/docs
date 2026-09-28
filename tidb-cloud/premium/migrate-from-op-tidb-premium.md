@@ -208,7 +208,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     3. **Import data from Cloud Storage** &gt; **Amazon S3**を選択します。
     4. ウィザードに表示される**Account ID**と**External ID**をメモしておいてください。これらの値はCloudFormationテンプレートに埋め込まれています。
 
-2. **Source Connection**ダイアログで、 **AWS Role ARN**を選択し、 **[AWS CloudFormation で新しいものを作成するにはここをクリックしてください]**をクリックし、画面上のガイダンスに従います。組織が CloudFormation スタックを起動できない場合は、 [IAMロールを手動で作成する](#manually-create-the-iam-role-optional)を参照してください。
+2. **Source Connection**ダイアログで、 **AWS Role ARN**を選択し、 **Click here to create a new one with AWS CloudFormation**をクリックし、画面上のガイダンスに従います。組織が CloudFormation スタックを起動できない場合は、 [IAMロールを手動で作成する](#manually-create-the-iam-role-optional)を参照してください。
 
     1. AWSコンソールで、あらかじめ入力済みのCloudFormationテンプレートを開きます。
     2. 役割名を入力し、権限を確認し、 IAM警告を承認してください。
@@ -282,7 +282,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
     2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
     3. **Networking**ページで、 **Add IP Address**をクリックします。
-    4. 表示されたダイアログで、 **[IP アドレスを使用する]**を選択し、 [ **+** ] をクリックし、 **IP Address**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **Confirm**をクリックします。これで、TiCDC はTiDB Cloud Premium にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+    4. 表示されたダイアログで、 **Use IP addresses**を選択し、 **+**をクリックし、 **IP Address**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **Confirm**をクリックします。これで、TiCDC はTiDB Cloud Premium にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
 3. 下流のTiDB Cloud Premiumインスタンスの接続情報を取得します。
 

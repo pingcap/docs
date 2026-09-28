@@ -42,7 +42,7 @@ TiDB Cloud Premiumがバケットを読み取れるようにするには、以�
 - TiDB Cloudを信頼し、関連するパスに対して`s3:GetObject`および`s3:ListBucket`権限を付与するAWSロールARNを指定します。
 - 同等の権限を持つAWSアクセスキー（アクセスキーIDとシークレットアクセスキー）を提供してください。
 
-ウィザードには**[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する]**というラベルの付いたヘルプリンクが含まれています。TiDB Cloud Premium で CloudFormation スタックを事前に設定してロールを作成する必要がある場合は、このリンクをクリックしてください。
+ウィザードには**Click here to create a new one with AWS CloudFormation**というラベルの付いたヘルプリンクが含まれています。TiDB Cloud Premium で CloudFormation スタックを事前に設定してロールを作成する必要がある場合は、このリンクをクリックしてください。
 
 ## ステップ4. Amazon S3からCSVファイルをインポートする {#step-4-import-csv-files-from-amazon-s3}
 

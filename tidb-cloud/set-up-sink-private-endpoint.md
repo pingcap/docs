@@ -83,7 +83,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 <SimpleTab>
 <div label="AWS">
 
-1. **Networking**ページで、 **[外部サービス用 AWS プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
+1. **Networking**ページで、 **AWS Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
 
 2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 
@@ -106,7 +106,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 <div label="Google Cloud">
 
-1. **Networking**ページで、 **[外部サービス用 Google Cloud プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
+1. **Networking**ページで、 **Google Cloud Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
 
 2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 
@@ -127,7 +127,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 <div label="Azure">
 
-1. **Networking**ページで、 **[外部サービス用 Azure プライベートエンドポイント]**セクションの**[外部サービス用プライベートエンドポイントの作成]**をクリックします。
+1. **Networking**ページで、 **Azure Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
 
 2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 

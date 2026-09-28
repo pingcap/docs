@@ -95,7 +95,7 @@ TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部IDの値を�
 
 2. **Bucket Region**ドロップダウンリストから、バケットが配置されているAWSリージョンを選択します。
 
-3. **[Role ARN]**フィールドに、[ステップ2. Amazon S3へのアクセスを設定する](#step-2-configure-amazon-s3-access)。
+3. **Role ARN**フィールドに、[ステップ2. Amazon S3へのアクセスを設定する](#step-2-configure-amazon-s3-access)。
 
 4. **Test Connection and Next**をクリックして、 TiDB Cloudがバケットにアクセスして書き込みできるかどうかを確認します。
 
@@ -137,7 +137,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
     3. **DB Audit Logging**ページで、右上隅にある**Enable**をクリックします。
     4. **Database Audit Log Storage Configuration**ダイアログで、 **Alibaba Cloud RAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
-2. Alibaba Cloud コンソールで、 **[RAM]** &gt; **Permissions** &gt; **Policies**に移動し、監査ログ OSS バケットに対して`oss:PutObject`書き込み専用権限を持つポリシーが既に存在するかどうかを確認します。
+2. Alibaba Cloud コンソールで、 **RAM** > **Permissions** > **Policies**に移動し、監査ログ OSS バケットに対して`oss:PutObject`書き込み専用権限を持つポリシーが既に存在するかどうかを確認します。
 
     - はいの場合、後で使用するためにポリシー名を記録してください。
 
@@ -160,13 +160,13 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     `<Your-Bucket-Name>` TiDB Cloud が監査ログを書き込む OSS バケットの名前に置き換えてください。たとえば、バケット名が`auditlog-bucket`の場合は、 `"Resource": "acs:oss:*:*:auditlog-bucket/*"`を使用します。
 
-3. Alibaba Cloudコンソールで、 **[RAM]** &gt; **[ID]** &gt; **Roles**に移動し、**trusted entity**が以前に記録したTiDB CloudアカウントIDと外部IDに一致するロールが既に存在するかどうかを確認します。
+3. Alibaba Cloudコンソールで、 **RAM** > **ID** > **Roles**に移動し、**trusted entity**が以前に記録したTiDB CloudアカウントIDと外部IDに一致するロールが既に存在するかどうかを確認します。
 
     - はいの場合、後で使用するために役割名を記録してください。
 
     - そうでない場合は、以下の手順に従って**Create Role**をクリックしてください。
 
-        1. 役割作成ページで、 **[ポリシーエディターに切り替える]**をクリックします。
+        1. 役割作成ページで、 **ポリシーエディターに切り替える**をクリックします。
         2. **Principal**で**Cloud Account**を選択し、フィールドに**TiDB Cloud Account Id**を入力します。
         3. **Action**の下にあるドロップダウンリストから**sts:AssumeRole**を選択します。
         4. **Add condition**をクリックし、次のように条件を設定します。
@@ -239,7 +239,7 @@ TiDB Cloudコンソールで、 TiDB CloudアカウントIDを取得した**Data
 
 2. **Bucket Region**フィールドで、バケットが配置されているAlibaba Cloudリージョンを選択します（ TiDB Cloud Premiumインスタンスのリージョンと一致させることをお勧めします）。
 
-3. **[Role ARN]**フィールドに、[ステップ2. OSSアクセスを設定する](#step-2-configure-oss-access)。
+3. **Role ARN**フィールドに、[ステップ2. OSSアクセスを設定する](#step-2-configure-oss-access)。
 
 4. **Test Connection**をクリックして、 TiDB CloudがOSSバケットにアクセスして書き込みできるかどうかを確認してください。
 

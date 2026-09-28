@@ -221,7 +221,7 @@ Grafana サービスを開始します。
     - **URL**には、Prometheus アドレスを指定します。
     - 必要に応じて他のフィールドを指定します。
 
-5. 新しいデータソースを保存するには、 **[追加]**をクリックします。
+5. 新しいデータソースを保存するには、 **追加**をクリックします。
 
 ### ステップ2: Grafanaダッシュボードをインポートする {#step-2-import-a-grafana-dashboard}
 
@@ -229,7 +229,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 1. Grafana ロゴをクリックしてサイドバー メニューを開きます。
 
-2. サイドバー メニューで、 **[ダッシュボード]** -&gt; **[インポート]**をクリックして、 **[ダッシュボードのインポート]**ウィンドウを開きます。
+2. サイドバー メニューで、 **ダッシュボード** -> **インポート**をクリックして、 **ダッシュボードのインポート**ウィンドウを開きます。
 
 3. **Upload .json File**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 設定ファイルをダウンロードします)。
 
@@ -237,7 +237,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
     >
     > TiKV、PD、および TiDB Dashboardの場合、対応する JSON ファイルは`tikv_summary.json` 、 `tikv_details.json` 、 `tikv_trouble_shooting.json` 、 `pd.json` 、 `tidb.json` 、および`tidb_summary.json`です。
 
-4. **[ロード]**をクリックします。
+4. **ロード**をクリックします。
 
 5. Prometheus データソースを選択します。
 
@@ -245,7 +245,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 ## コンポーネントメトリックを表示する {#view-component-metrics}
 
-上部のメニューで**[新しいダッシュボード]**をクリックし、表示するダッシュボードを選択します。
+上部のメニューで**新しいダッシュボード**をクリックし、表示するダッシュボードを選択します。
 
 ![view dashboard](/media/view-dashboard.png)
 

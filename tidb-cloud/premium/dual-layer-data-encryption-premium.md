@@ -159,7 +159,7 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 暗号化を有効にした後、以下の場所でステータスを確認してください。
 
-- TiDB Cloud Premiumインスタンスの**Overview**ページでは、 **[暗号化]**フィールドにアクティブなキー管理方法が表示されます。これは、 **[顧客管理暗号化キー（CMEK）で有効]**または**[サービス管理暗号化キーで有効]**のいずれかです。
+- TiDB Cloud Premiumインスタンスの**Overview**ページでは、 **Encryption**フィールドにアクティブなキー管理方法が表示されます。これは、 **Enabled with Customer-Managed Encryption Key (CMEK)**または**Enabled with Service-Managed Encryption Key**のいずれかです。
 - **Security**ページでは、二重層データ暗号化の詳細な設定を確認できます。
 
 ## 暗号化されたバックアップから復元する {#restore-from-an-encrypted-backup}

@@ -121,7 +121,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
         - 1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].parquet`の形式で入力してください。例: `s3://mybucket/myfolder/TableName.01.parquet` 。
         - 複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://mybucket/myfolder/` 。
     - **Credentials**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を参照してください。
-        - **AWS Role ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロール ARN を作成する]**をクリックし、画面の指示に従うか、 **[問題が発生しましたか?] ダイアログでロール ARN を手動で作成して、**クラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得し、 IAMロールを手動で作成します。
+        - **AWS Role ARN** (推奨): AWS ロール ARN の値を入力します。まだロール ARN がない場合は、 **Click here to create new one with AWS CloudFormation**をクリックし、画面の指示に従うか、ダイアログで**Having trouble? Create Role ARN manually**を展開して、クラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得し、 IAMロールを手動で作成します。
         - **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
 
 4. **Next**をクリックしてください。
@@ -235,7 +235,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
             2. ストレージアカウントに移動し、 **Overview** &gt; **JSON View**をクリックします。
             3. `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`の形式です。
 
-    - **Credentials**: TiDB Cloud がAzure Blob Storage コンテナー内のソースファイルにアクセスできるようにするためのアカウント SAS トークンを入力します。まだお持ちでない場合は、 **[ここをクリックして Azure ARM テンプレートを使用して新しいものを作成する]**をクリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
+    - **Credentials**: TiDB Cloud がAzure Blob Storage コンテナー内のソースファイルにアクセスできるようにするためのアカウント SAS トークンを入力します。まだお持ちでない場合は、 **Click here to create a new one with Azure ARM template**をクリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
 
 4. **Next**をクリックしてください。
 

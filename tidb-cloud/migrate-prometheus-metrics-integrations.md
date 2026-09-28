@@ -27,7 +27,7 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 3. 左側のナビゲーションパネルで、 **Project Settings**の下にある**Project Settings**をクリックします。
 
-4. **Integrations** &gt; **Integration to Prometheus (BETA)**モジュールで、 **[Scrape_config Files]**を選択し、 **Delete**をクリックします。
+4. **Integrations** > **Integration to Prometheus (BETA)**モジュールで、 **Scrape_config Files**を選択し、 **Delete**をクリックします。
 
 5. 表示されたダイアログで、 `Delete`と入力して、従来の統合機能の削除を確認します。
 

@@ -63,7 +63,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Project Settings**をクリックします。
 
-4. **Integrations**ページで、 **[New Relic との統合 (ベータ版)]**をクリックします。
+4. **Integrations**ページで、 **Integration to New Relic (BETA)**をクリックします。
 
 5. New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
 
