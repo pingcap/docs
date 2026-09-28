@@ -5,13 +5,13 @@ summary: Optimizing a table in {{{ .lake }}} involves compacting or purging hist
 
 # OPTIMIZE TABLE
 
-Optimizing a table in {{{ .lake }}} involves compacting or purging historical data to save storage space and enhance query performance.
+`OPTIMIZE TABLE` compacts small segments and blocks to improve query performance. To reclaim storage occupied by eligible historical data after compaction, use [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md).
 
 <details>
   <summary>Why Optimize?</summary>
     <div>{{{ .lake }}} stores data in tables using the Parquet format, which is organized into blocks. Additionally, {{{ .lake }}} supports time travel functionality, where each operation that modifies a table generates a Parquet file that captures and reflects the changes made to the table.</div><br/>
 
-   <div>As a table accumulates more Parquet files over time, it can lead to performance issues and increased storage requirements. To optimize the table's performance, historical Parquet files can be deleted when they are no longer needed. This optimization can help to improve query performance and reduce the amount of storage space used by the table.</div>
+   <div>As a table accumulates small blocks and segments, queries may need to read more files and metadata. Compaction merges them into larger units to reduce this overhead. Historical files are retained until they become eligible for cleanup by VACUUM TABLE.</div>
 </details>
 
 ## {{{ .lake }}} Data Storage: Snapshot, Segment, and Block
@@ -156,7 +156,7 @@ OPTIMIZE TABLE [database.]table_name COMPACT [LIMIT <segment_count>]
 
 Compacts the table data by merging small blocks and segments into larger ones.
 
-- This command creates a new snapshot (along with compacted segments and blocks) of the most recent table data without affecting the existing storage files, so the storage space won't be released until you purge the historical data.
+- This command creates a new snapshot (along with compacted segments and blocks) of the most recent table data without affecting the existing storage files. To reclaim storage from eligible historical data, run [`VACUUM TABLE`](/tidb-cloud-lake/sql/vacuum-table.md) after compaction.
 
 - Depending on the size of the given table, it may take quite a while to complete the execution.
 
@@ -168,4 +168,11 @@ Compacts the table data by merging small blocks and segments into larger ones.
 
 ```sql
 OPTIMIZE TABLE my_database.my_table COMPACT LIMIT 50;
+```
+
+To compact and then clean up eligible historical files:
+
+```sql
+OPTIMIZE TABLE my_database.my_table COMPACT;
+VACUUM TABLE my_database.my_table;
 ```
