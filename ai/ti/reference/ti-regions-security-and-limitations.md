@@ -5,7 +5,7 @@ summary: サポートされるリージョン、認証の境界、セキュリ�
 
 # TiDB Cloud CLI のリージョン、セキュリティ、および制限事項
 
-このリファレンスでは、TiDB Cloud CLI の現在のリージョン、認証、プラットフォーム、およびプレビューに関する境界について説明します。ファイルシステムのリージョンと制限事項については、[TiDB Cloud Filesystem Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md) を参照してください。
+このリファレンスでは、TiDB Cloud CLI の現在のリージョン、認証、プラットフォーム、およびプレビューに関する境界について説明します。ファイルシステムのリージョンと制限事項については、[TiDB Cloud Filesystem のリージョンと制限事項](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md) を参照してください。
 
 > **Note:**
 >
@@ -55,7 +55,7 @@ TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS �
 - 破壊的なコントロールプレーン操作の前に `--dry-run` を使用してください。`~/.ti/credentials`、リソース認証情報、および DB SQL 認証情報は、所有者のみが読み取り可能にしてください。
 - 診断情報を共有する前に、ローカルの操作ログを確認してください。ログには SQL テキスト、パス、ペイロード、認証情報の値は含まれませんが、コマンド名、フラグ名、プロファイルおよびリージョンのメタデータ、ステータスコード、操作タイミングは依然として機微情報となる可能性があります。
 
-ファイルシステムトークン、マウント、Vault、および AI プロバイダーのセキュリティについては、[Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)、[Manage ファイルシステム Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)、および [Configure AI Providers for a ファイルシステム](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) を参照してください。
+ファイルシステムトークン、マウント、Vault、および AI プロバイダーのセキュリティについては、[認可](/tidb-cloud-filesystem/filesystem-authorization.md)、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md)、および [ファイルシステムの AI プロバイダーを設定する](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) を参照してください。
 
 ## 製品の制限事項 {#product-limitations}
 
@@ -67,6 +67,6 @@ TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS �
 
 ## 関連ドキュメント {#related-documentation}
 
-- [TiDB Cloud Filesystem Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
+- [TiDB Cloud Filesystem のリージョンと制限事項](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 - [TiDB Cloud CLI の設定と認証情報](/ai/ti/reference/ti-configuration-and-credentials.md)
 - [TiDB Cloud CLI のトラブルシューティング](/ai/ti/reference/ti-troubleshooting.md)

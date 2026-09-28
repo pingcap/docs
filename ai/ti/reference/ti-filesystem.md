@@ -124,12 +124,12 @@ summary: ファイルシステムリソース、ファイル、レイヤー、�
 
 ## 関連情報 {#see-also}
 
-- [Manage File Systems](/tidb-cloud-filesystem/manage-filesystem-resources.md)
-- [Configure AI Providers for a File System](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
-- [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
-- [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
-- [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
-- [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md)
-- [Manage Git Workspaces on TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-git-workspaces.md)
-- [Use Journals in a File System](/tidb-cloud-filesystem/use-filesystem-journals.md)
-- [Manage Vault Secrets for a File System](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
+- [ファイルシステムを管理する](/tidb-cloud-filesystem/manage-filesystem-resources.md)
+- [ファイルシステムの AI プロバイダーを設定する](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md)
+- [ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [ファイルとディレクトリを操作する](/tidb-cloud-filesystem/work-with-filesystem-data.md)
+- [ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md)
+- [ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md)
+- [TiDB Cloud Filesystem 上で Git ワークスペースを管理する](/tidb-cloud-filesystem/manage-git-workspaces.md)
+- [ファイルシステムでジャーナルを使用する](/tidb-cloud-filesystem/use-filesystem-journals.md)
+- [ファイルシステムの Vault シークレットを管理する](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)

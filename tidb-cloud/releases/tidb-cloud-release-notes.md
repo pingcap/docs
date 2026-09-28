@@ -16,9 +16,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) で、AWS PrivateLink 経由のインバウンド IPv6 接続がサポートされるようになり、IPv4 または IPv6 のいずれかを使用してクラスターに接続できるようになりました。
 
-        現在、この機能はリクエストに応じて利用可能です。IPv6 接続を利用するには、[TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) に連絡してリクエストし、その後デュアルスタックの AWS インターフェイスエンドポイントを作成してください。
+        現在、この機能はリクエストに応じて利用可能です。IPv6 接続を利用するには、[TiDB Cloud サポート](/tidb-cloud/tidb-cloud-support.md) に連絡してリクエストし、その後デュアルスタックの AWS インターフェイスエンドポイントを作成してください。
 
-        詳細は、[Use IPv6 connectivity over a private endpoint](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint) を参照してください。
+        詳細は、[プライベートエンドポイント経由で IPv6 接続を使用する](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint) を参照してください。
 
 ## 2026年9月15日 {#september-15-2026}
 
