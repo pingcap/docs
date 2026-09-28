@@ -109,5 +109,5 @@ TiDB version: 4.0.16
         - Fix the issue that some partitioned tables without valid indexes might be ignored when `force-replicate` is enabled [#2834](https://github.com/pingcap/tiflow/issues/2834)
         - Fix the memory leak issue when creating a new changefeed [#2389](https://github.com/pingcap/tiflow/issues/2389)
         - Fix the issue that might cause inconsistent data due to Sink components advancing resolved ts early [#3503](https://github.com/pingcap/tiflow/issues/3503)
-        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
+        - Fix the issue that a changefeed might fail when initialization takes too long and TiKV advances the GC safepoint [#2470](https://github.com/pingcap/tiflow/issues/2470)
         - Fix the issue that the changefeed update command does not recognize global command line parameters [#2803](https://github.com/pingcap/tiflow/issues/2803)
