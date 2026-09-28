@@ -89,32 +89,69 @@ ALTER TABLE lineitem RECLUSTER FINAL;
 ```
 
 Inspect `CLUSTERING_INFORMATION` before and after reclustering. Track
-`average_overlaps` and `average_depth`. A practical starting target is
-`average_depth < 32`, but validate the threshold against the workload.
+`average_overlaps`, `average_depth`, `p95_depth`, and `p99_depth` together with
+bytes scanned and query latency. Use these metrics to compare the same workload
+before and after reclustering. A practical starting target is `p95_depth < 32`,
+but validate the threshold against your workload and data distribution.
 
-```
-CREATE TABLE mytable(a int, b int) CLUSTER BY(a+1);
+```sql
+CREATE TABLE mytable(a INT, b INT) CLUSTER BY (a + 1);
 
-INSERT INTO mytable VALUES(1,1),(3,3);
-INSERT INTO mytable VALUES(2,2),(5,5);
-INSERT INTO mytable VALUES(4,4);
+INSERT INTO mytable VALUES (1, 1), (3, 3);
+INSERT INTO mytable VALUES (2, 2), (5, 5);
+INSERT INTO mytable VALUES (4, 4);
 
-SELECT * FROM CLUSTERING_INFORMATION('default','mytable')\G
+SELECT * FROM CLUSTERING_INFORMATION('default', 'mytable')\G
 *************************** 1. row ***************************
             cluster_key: ((a + 1))
       total_block_count: 3
    constant_block_count: 1
-unclustered_block_count: 0
+ unclustered_block_count: 0
        average_overlaps: 1.3333
           average_depth: 2.0
-  block_depth_histogram: {"00002":3}
+   block_depth_histogram: {"00002":3}
+```
 
-  ```
+The following is an illustrative result with relatively moderate overlap. The
+values are examples, not universal healthy thresholds:
+
+```json
+{
+  "cluster_key": "(yyyymm)",
+  "info": {
+    "average_depth": 40.6131,
+    "average_overlaps": 40.7653,
+    "p95_depth": 42,
+    "p99_depth": 42,
+    "total_block_count": 473
+  },
+  "type": "linear"
+}
+```
+
+The following result shows severe overlap. A `p95_depth` above 10,000 indicates
+that reclustering should be scheduled promptly and that the cluster-key design
+should be reviewed:
+
+```json
+{
+  "cluster_key": "(DATE_TRUNC(MONTH, l_shipdate), l_orderkey)",
+  "info": {
+    "average_depth": 10181.3357,
+    "average_overlaps": 10211.5616,
+    "p95_depth": 10182,
+    "p99_depth": 10182,
+    "total_block_count": 10214
+  },
+  "type": "linear"
+}
+```
 
 For continuously changing tables, create a task to recluster the table and
-maintain acceptable overlap.
+maintain acceptable overlap. Schedule it according to the observed overlap
+trend and measure its compute cost:
 
-```
+```sql
 CREATE OR REPLACE TASK lineitem_hourly
   WAREHOUSE = 'default'
   SCHEDULE = 60 MINUTE
