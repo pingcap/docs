@@ -73,7 +73,7 @@
 | Learner | Learner | Raft role, keep in English. |
 | List COLUMNS partitioning | List COLUMNS パーティショニング |  |
 | List partitioning | List パーティショニング |  |
-| load | ロード | Keep both the English and Japanese terms "ロード (load)" when it first appears in a document. |
+| load | ロード | In TiDB Cloud Lake docs, keep both the English and Japanese terms "ロード (load)" when it first appears in a document. |
 | Maintain | 管理 |  |
 | memory | メモリ |  |
 | Multiple Data Centers in One City Deployment | 1 つの地域に配置された複数のデータセンター |  |
@@ -112,7 +112,7 @@
 | server | サーバー | Use long vowel mark. |
 | single point of failure | 単一障害点 |  |
 | Stability | 安定性 | Do not translate to 「安定」. |
-| stage | stage | Keep in English. Do not translate. A concept name in TiDB Cloud Lake. It refers to a virtual location where data files reside. |
+| stage | stage | In TiDB Cloud Lake docs, keep in English and do not translate. A TiDB Cloud Lake concept that refers to a virtual location where data files reside. |
 | Stale Read | ステイル読み取り | Do not translate to 「古い読み取り」. |
 | Starter | Starter | TiDB Cloud tier name, keep in English. |
 | task flow | タスクフロー | Keep both the English and Japanese terms "タスクフロー (task flow)" when it first appears in a document. |
@@ -147,7 +147,7 @@
 | TiUP DM | TiUP DM | Product name, keep in English. |
 | Top SQL | Top SQL | Feature name, keep in English. |
 | Transaction | トランザクション | Do not translate to 「取引」. |
-| unload | アンロード | Keep both the English and Japanese terms "アンロード (unload)" when it first appears in a document. |
+| unload | アンロード | In TiDB Cloud Lake docs, keep both the English and Japanese terms "アンロード (unload)" when it first appears in a document. |
 | View | ビュー | Do not translate to 「意見」. |
 | Warehouse | Warehouse | Keep in English. Do not translate. A concept in TiDB Cloud Lake that represents a set of compute resources including CPU, memory, and local caches. |
 | **Warning:** | **Warning:** | Keep in English, do not translate. |
