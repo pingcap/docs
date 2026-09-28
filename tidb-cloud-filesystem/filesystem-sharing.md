@@ -111,7 +111,7 @@ In the owner shell, confirm that `ti fs describe-file --path "$share_path/denied
 
 ### Mount the shared directory (optional)
 
-This example requires Linux FUSE or macOS with macFUSE. WebDAV does not support `--read-only`; on a Mac without macFUSE, continue using the CLI commands in the previous section. See [mount prerequisites](/tidb-cloud-filesystem/filesystem-mount.md#choose-a-mount-method).
+The command below uses Linux FUSE or macOS with macFUSE. On a Mac without macFUSE, use `--driver webdav` and omit `--read-only` from this command: WebDAV rejects that option. The scoped token still enforces read-only access at the service. See [mount prerequisites](/tidb-cloud-filesystem/filesystem-mount.md#choose-a-mount-method).
 
 In the recipient shell, mount the shared directory:
 

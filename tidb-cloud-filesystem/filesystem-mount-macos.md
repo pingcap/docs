@@ -28,7 +28,9 @@ Use Bash or Zsh and keep the same shell open for each procedure.
 
 Use an owner token or a scoped token with `read,list,write,delete` permissions on the remote directory. These permissions cover both verification and cleanup. Upload a small file, update it through WebDAV, and verify the update after unmounting.
 
-WebDAV does not support `--read-only`. Use a scoped token with only `read` and `list` permissions to enforce read-only access at the service. For a local read-only mount, use macFUSE with `--driver fuse --read-only`. See [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional).
+For read-only access through WebDAV, use a scoped token with only `read` and `list` permissions and mount without `--read-only`; WebDAV rejects that option. The token enforces read-only access at the service. Follow the [read-only sharing example](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional) to mount, read an existing file, and unmount. The procedure below requires write permissions to upload, update, and clean up a sample file.
+
+For a local read-only mount, use macFUSE with `--driver fuse --read-only`.
 
 1. Select the remote directory and create an empty local mount directory. For a token scoped to one directory, replace `/` with that directory's path:
 
@@ -37,7 +39,7 @@ WebDAV does not support `--read-only`. Use a scoped token with only `read` and `
     mount_dir="$(mktemp -d "$HOME/ti-fs-webdav.XXXXXX")"
     ```
 
-2. Upload a unique sample file to that remote directory:
+2. Upload a unique sample file to that remote directory so you can verify that the mount can read an existing remote file:
 
     ```bash
     test_file="mount-check-$(date +%s)-$$.txt"
