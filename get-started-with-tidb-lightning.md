@@ -95,7 +95,7 @@ tiup install tidb-lightning:<version>
     pd-addr = "172.16.31.3:2379,56.78.90.12:3456"
     ```
 
-2. `tidb-lightning`を実行します。 `SIGHUP`を使用してコマンドラインから直接プログラムを起動したときに、 `nohup`シグナルによってプログラムが終了するのを避けるため、 `nohup`コマンドをスクリプトに記述することをお勧めします。以下の例では、`<version>` を[ステップ3](#step-3-install-tidb-lightning)でインストールした TiDB Lightning のバージョンに置き換えてください。
+2. `tidb-lightning`を実行します。 `nohup`を使用してコマンドラインから直接プログラムを起動したときに、 `SIGHUP`シグナルによってプログラムが終了するのを避けるため、 `nohup`コマンドをスクリプトに記述することをお勧めします。以下の例では、`<version>` を[ステップ3](#step-3-install-tidb-lightning)でインストールした TiDB Lightning のバージョンに置き換えてください。
 
     ```shell
     #!/bin/bash

@@ -117,7 +117,7 @@ TiDB Cloud Filesystem は、ローカルマシン、CI ジョブ、サンドボ�
 
 以下の例では、ある環境でファイルシステムを作成し、同じ環境または別の環境からそれにアクセスする方法を示します。たとえば、AI エージェントのサンドボックス（タスクの後に破棄される可能性がある一時的な環境）からアクセスできます。
 
-1. ローカルマシン、または TiDB Cloud API 認証情報が設定された別の環境で、ファイルシステムを作成し、その owner token を取得します。
+1. ローカルマシン、または TiDB Cloud API 認証情報が設定された別の環境で、ファイルシステムを作成し、そのオーナートークンを取得します。
 
     ```bash
     export TI_FS_TOKEN="$(ti fs create-file-system --display-name agent-workspace --wait --query fs_token --output text --region aws-us-west-2)"
@@ -125,9 +125,9 @@ TiDB Cloud Filesystem は、ローカルマシン、CI ジョブ、サンドボ�
 
     > **Tip:**
     >
-    > このクイックスタートでは、簡単にするために、ファイルシステムの作成時に返される owner token を使用します。最小権限アクセスを実現するには、スコープ付きトークンを生成して、特定のパスと操作へのアクセスを制限できます。詳細については、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
+    > このクイックスタートでは、簡単にするために、ファイルシステムの作成時に返されるオーナートークンを使用します。最小権限アクセスを実現するには、スコープ付きトークンを生成して、特定のパスと操作へのアクセスを制限できます。詳細については、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
 
-2. ファイルシステムを使用する環境で、前の手順の owner token を `TI_FS_TOKEN` として設定し、次のようにファイルシステムをローカルパスにマウントします。この環境は、ファイルシステムを作成した同じマシン、別のマシン、または AI エージェントのサンドボックスのいずれでもかまいません。
+2. ファイルシステムを使用する環境で、前の手順のオーナートークンを `TI_FS_TOKEN` として設定し、次のようにファイルシステムをローカルパスにマウントします。この環境は、ファイルシステムを作成した同じマシン、別のマシン、または AI エージェントのサンドボックスのいずれでもかまいません。
 
     ```bash
     export TI_FS_TOKEN="<owner-token>" # Skip this line if you are continuing in the same terminal as step 1, where TI_FS_TOKEN is already set.

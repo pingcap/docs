@@ -97,7 +97,7 @@ SQL ポートの設定。
 + デフォルト値: `0.9`
 + ホットリロードのサポート: はい
 + 範囲: `[0, 1]`
-+ TiProxy のメモリ使用率がこのしきい値に達するか、これを超えると、TiProxy は新規接続を拒否し、status ポートは異常ステータスを返します。既存の接続には影響しません。[`ha.virtual-ip`](#virtual-ip) が設定されている場合、インスタンスは仮想 IP も解放します。たとえば、`0.9` は、メモリ使用率が 90% に達したときに TiProxy が新規接続の拒否を開始することを意味します。
++ TiProxy のメモリ使用率がこのしきい値に達するか、これを超えると、TiProxy は新規接続を拒否し、ステータスポートは異常ステータスを返します。既存の接続には影響しません。[`ha.virtual-ip`](#virtual-ip) が設定されている場合、インスタンスは仮想 IP も解放します。たとえば、`0.9` は、メモリ使用率が 90% に達したときに TiProxy が新規接続の拒否を開始することを意味します。
 + `0` は、TiProxy がメモリ使用率に基づいて新規接続を拒否しないことを意味します。設定値が `0` より大きく `0.5` より小さい場合、TiProxy はそれを `0.5` に調整します。
 
 #### `conn-buffer-size` {#conn-buffer-size}
@@ -159,7 +159,7 @@ TiProxy の負荷分散ポリシーの構成。
 
 + デフォルト値: `prefer-idle`
 + ホットリロードのサポート: はい
-+ 取り得る値: `prefer-idle`, `random`, `idlest`
++ 値のオプション: `prefer-idle`, `random`, `idlest`
 + 新規接続のルーティングポリシーを指定します。
 
     - `prefer-idle`: 接続移行が必要なバックエンドを除外し、残りのルーティング可能なバックエンドからランダムに選択します。ほとんどのシナリオに適しています。
@@ -168,65 +168,65 @@ TiProxy の負荷分散ポリシーの構成。
 
 #### `status` <span class="version-mark">v1.3.3 の新機能</span> {#status-new-in-v133}
 
-ステータスベースのロードバランシング設定。
+ステータスベースの負荷分散設定。
 
 ##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: はい
 + 範囲: `>= 0`
-+ ステータスベースのロードバランシングで 1 秒あたりに移行する接続数を指定します。`0` は、TiProxy が現在の接続数に基づいて移行レートを自動計算することを意味します。TiDB サーバーのシャットダウン時には、接続移行を高速化するためにこの値を適切に増やすことができます。
++ ステータスベースの負荷分散で 1 秒あたりに移行する接続数を指定します。`0` は、TiProxy が現在の接続数に基づいて移行レートを自動計算することを意味します。TiDB サーバーのシャットダウン時には、接続移行を高速化するためにこの値を適切に増やすことができます。
 
 #### `health` <span class="version-mark">v1.3.3 の新機能</span> {#health-new-in-v133}
 
-ヘルスベースのロードバランシング設定。[`policy`](#policy) が `resource` または `location` の場合にのみ有効です。
+ヘルスベースの負荷分散設定。[`policy`](#policy) が `resource` または `location` の場合にのみ有効です。
 
 ##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133}
 
 + デフォルト値: `true`
 + ホットリロードのサポート: はい
-+ [ヘルスベースのロードバランシング](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing) を有効にするかどうかを制御します。
++ [ヘルスベースの負荷分散](/tiproxy/tiproxy-load-balance.md#health-based-load-balancing) を有効にするかどうかを制御します。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-1}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133-1}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: はい
 + 範囲: `>= 0`
-+ ヘルスベースのロードバランシングにおいて、1 秒あたりに移行される接続数を指定します。`0` は、TiProxy が移行レートを自動的に計算することを示します。
++ ヘルスベースの負荷分散において、1 秒あたりに移行される接続数を指定します。`0` は、TiProxy が移行レートを自動的に計算することを示します。
 
 #### `memory` <span class="version-mark">v1.3.3 の新機能</span> {#memory-new-in-v133}
 
-メモリベースのロードバランシングの設定です。この項目は、[`policy`](#policy) が `resource` または `location` の場合にのみ有効になります。
+メモリベースの負荷分散の設定です。この項目は、[`policy`](#policy) が `resource` または `location` の場合にのみ有効になります。
 
-##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133span-1}
+##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133-1}
 
 + デフォルト値: `true`
 + ホットリロードのサポート: はい
-+ [メモリベースのロードバランシング](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing) を有効にするかどうかを制御します。
++ [メモリベースの負荷分散](/tiproxy/tiproxy-load-balance.md#memory-based-load-balancing) を有効にするかどうかを制御します。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-2}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133-2}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: はい
 + 範囲: `>= 0`
-+ メモリベースのロードバランシングにおいて、1 秒あたりに移行される接続数を指定します。`0` は、TiProxy が移行レートを自動的に計算することを示します。
++ メモリベースの負荷分散において、1 秒あたりに移行される接続数を指定します。`0` は、TiProxy が移行レートを自動的に計算することを示します。
 
 #### `cpu` <span class="version-mark">v1.3.3 の新機能</span> {#cpu-new-in-v133}
 
-CPU ベースのロードバランシングの設定です。この項目は、[`policy`](#policy) が `resource` または `location` の場合にのみ有効になります。
+CPU ベースの負荷分散の設定です。この項目は、[`policy`](#policy) が `resource` または `location` の場合にのみ有効になります。
 
-##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133span-2}
+##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133-2}
 
 + デフォルト値: `true`
 + ホットリロードのサポート: はい
-+ [CPU ベースのロードバランシング](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing) を有効にするかどうかを制御します。
++ [CPU ベースの負荷分散](/tiproxy/tiproxy-load-balance.md#cpu-based-load-balancing) を有効にするかどうかを制御します。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-3}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133-3}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: はい
 + 範囲: `>= 0`
-+ CPU ベースのロードバランシングにおいて、1 秒あたりに移行される接続数を指定します。`0` は、TiProxy が移行レートを自動的に計算することを示します。CPU ホットスポットが頻繁に移動する場合は、接続の繰り返し移行を避けるため、この値を高く設定しすぎないことを推奨します。
++ CPU ベースの負荷分散において、1 秒あたりに移行される接続数を指定します。`0` は、TiProxy が移行レートを自動的に計算することを示します。CPU ホットスポットが頻繁に移動する場合は、接続の繰り返し移行を避けるため、この値を高く設定しすぎないことを推奨します。
 
 ##### `min-balance-usage` <span class="version-mark">v1.3.3 の新機能</span> {#min-balance-usage-new-in-v133}
 
@@ -244,31 +244,31 @@ CPU ベースのロードバランシングの設定です。この項目は、[
 
 #### `location` <span class="version-mark">v1.3.3 の新機能</span> {#location-new-in-v133}
 
-ロケーションベースのロードバランシングの設定です。この項目は [`policy`](#policy) が `resource` または `location` の場合にのみ有効です。
+ロケーションベースの負荷分散の設定です。この項目は [`policy`](#policy) が `resource` または `location` の場合にのみ有効です。
 
-##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133span-3}
+##### `enabled` <span class="version-mark">v1.3.3 の新機能</span> {#enabled-new-in-v133-3}
 
 + デフォルト値: `true`
 + ホットリロードのサポート: はい
-+ [ロケーションベースのロードバランシング](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing) を有効にするかどうかを制御します。
++ [ロケーションベースの負荷分散](/tiproxy/tiproxy-load-balance.md#location-based-load-balancing) を有効にするかどうかを制御します。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-4}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133-4}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: はい
 + 範囲: `>= 0`
-+ ロケーションベースのロードバランシングで 1 秒あたりに移行される接続数を指定します。`0` はデフォルトの移行レートが使用されることを意味します。
++ ロケーションベースの負荷分散で 1 秒あたりに移行される接続数を指定します。`0` はデフォルトの移行レートが使用されることを意味します。
 
 #### `conn-count` <span class="version-mark">v1.3.3 の新機能</span> {#conn-count-new-in-v133}
 
-接続数ベースのロードバランシングの設定です。
+接続数ベースの負荷分散の設定です。
 
-##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133span-5}
+##### `migrations-per-second` <span class="version-mark">v1.3.3 の新機能</span> {#migrations-per-second-new-in-v133-5}
 
 + デフォルト値: `0`
 + ホットリロードのサポート: はい
 + 範囲: `>= 0`
-+ 接続数ベースのロードバランシングで 1 秒あたりに移行される接続数を指定します。`0` は TiProxy が移行レートを自動的に計算することを意味します。接続が頻繁に行ったり来たりして移行されることが観察される場合は、この値を適切に小さくできます。
++ 接続数ベースの負荷分散で 1 秒あたりに移行される接続数を指定します。`0` は TiProxy が移行レートを自動的に計算することを意味します。接続が頻繁に行ったり来たりして移行されることが観察される場合は、この値を適切に小さくできます。
 
 ##### `count-ratio-threshold` <span class="version-mark">v1.3.3 の新機能</span> {#count-ratio-threshold-new-in-v133}
 

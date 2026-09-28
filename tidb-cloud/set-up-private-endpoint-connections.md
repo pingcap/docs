@@ -217,14 +217,14 @@ TiDB Cloud Dedicated は、AWS PrivateLink 経由のインバウンド IPv6 接�
 >
 > 現在、IPv6 接続機能はリクエストに応じて利用可能です。この機能を利用するには、[TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) に連絡し、組織 ID を提供してください。
 
-TiDB Cloud では、各 [TiDB node group](/tidb-cloud/tidb-node-group-management.md) の IP プロトコルタイプを個別に設定できます。IPv6 経由で TiDB Cloud Dedicated クラスターに接続するには、対象ノードグループの IP プロトコルタイプをデュアルスタックに切り替えてから、次のようにデュアルスタックの AWS インターフェースエンドポイントを作成します。
+TiDB Cloud では、各 [TiDB ノードグループ](/tidb-cloud/tidb-node-group-management.md) の IP プロトコルタイプを個別に設定できます。IPv6 経由で TiDB Cloud Dedicated クラスターに接続するには、対象ノードグループの IP プロトコルタイプをデュアルスタックに切り替えてから、次のようにデュアルスタックの AWS インターフェースエンドポイントを作成します。
 
 ### ステップ1. IP プロトコルタイプをデュアルスタックに切り替える {#step-1-switch-the-ip-protocol-type-to-dual-stack}
 
 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) が組織に対して IPv6 接続機能を有効にした後、[TiDB Cloud コンソール](https://tidbcloud.com/) で IP プロトコルタイプを切り替えることができます。
 
 1. 組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象クラスターの名前をクリックして概要ページを開き、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
-2. 各 TiDB Cloud Dedicated クラスターにはデフォルトの [TiDB node group](/tidb-cloud/tidb-node-group-management.md) があります。クラスターに複数のノードグループがある場合は、右上の **TiDB Node Group** リストから対象の TiDB ノードグループを選択します。
+2. 各 TiDB Cloud Dedicated クラスターにはデフォルトの [TiDB ノードグループ](/tidb-cloud/tidb-node-group-management.md) があります。クラスターに複数のノードグループがある場合は、右上の **TiDB Node Group** リストから対象の TiDB ノードグループを選択します。
 3. **AWS Private Endpoints** セクションで、**Edit** をクリックします。
 4. **AWS Private Endpoints Connection Settings** ダイアログで、IP プロトコルタイプとして **Dual Stack (IPv4 + IPv6)** を選択し、**Save** をクリックします。
 

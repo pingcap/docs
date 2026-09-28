@@ -11,7 +11,7 @@ summary: クローン、hydrate、リンクされた Git worktree の管理を�
 
 | コマンド | 説明 |
 |---|---|
-| [`clone-git-workspace`](/ai/ti/reference/ti-fs-git-clone-git-workspace.md) | リポジトリをマウントされた file system パスにクローンします。 |
+| [`clone-git-workspace`](/ai/ti/reference/ti-fs-git-clone-git-workspace.md) | リポジトリをマウントされたファイルシステムパスにクローンします。 |
 | [`hydrate-git-workspace`](/ai/ti/reference/ti-fs-git-hydrate-git-workspace.md) | 既存の fast または blobless ワークスペースに対して、クリーンな Git データを実体化します。 |
 | [`add-git-worktree`](/ai/ti/reference/ti-fs-git-add-git-worktree.md) | ベースワークスペースからリンクされた worktree を作成します。 |
 | [`remove-git-worktree`](/ai/ti/reference/ti-fs-git-remove-git-worktree.md) | リンクされた worktree を削除します。 |

@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault mount-vault
-summary: 読み取り専用の file system Vault ビューをマウントします。
+summary: 読み取り専用のファイルシステム Vault ビューをマウントします。
 ---
 
 # ti fs-vault mount-vault

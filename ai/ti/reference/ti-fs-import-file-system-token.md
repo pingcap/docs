@@ -27,11 +27,11 @@ ti fs import-file-system-token
 ## オプション {#options}
 
 - `--dry-run`: ローカル認証情報を書き込まずに、トークンと保存先を検証します。
-- `--file-system-id <string>`: トークンがこの file system ID に属していることを確認します。
+- `--file-system-id <string>`: トークンがこのファイルシステム ID に属していることを確認します。
 - `--from-file <string>`: オーナー専用ファイルからトークンを読み取ります。標準入力を使用する場合は `-` を指定します。
 - `--fs-token <string>`: トークンを直接指定します。プロセス引数への露出を避けるため、`TI_FS_TOKEN` または `--from-file` の使用を推奨します。
 - `--help`: ヘルプ情報を表示します。
-- `--replace`: 検証後、同じ file system に対してローカルに保存されている別のトークンを置き換えます。
+- `--replace`: 検証後、同じファイルシステムに対してローカルに保存されている別のトークンを置き換えます。
 - `--version`: バージョン情報を表示します。
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。

@@ -5,7 +5,7 @@ summary: マウントされた TiDB Cloud Filesystem をドレインします。
 
 # ti fs drain-file-system
 
-マウントをオンラインのまま維持しつつ、FUSE マウントからリモート file system へ保留中の書き込みをフラッシュします。このコマンドのエイリアスは `ti fs drain` です。WebDAV マウントの場合は、書き込み元を停止して `ti fs unmount-file-system` を使用してください。これに対して `drain-file-system` を実行するとエラーが返されます。
+マウントをオンラインのまま維持しつつ、FUSE マウントからリモートファイルシステムへ保留中の書き込みをフラッシュします。このコマンドのエイリアスは `ti fs drain` です。WebDAV マウントの場合は、書き込み元を停止して `ti fs unmount-file-system` を使用してください。これに対して `drain-file-system` を実行するとエラーが返されます。
 
 > **Note:**
 >

@@ -55,8 +55,8 @@
     - [TiDB Cloud Filesystem を使用して使い捨てサンドボックス間でエージェントの状態を永続化する](/ai/ti/guides/ti-persistent-agent-state-example.md)
     - [TiDB Cloud Filesystem を使用して並列エージェント間で読み取り専用データセットを共有する](/ai/ti/guides/ti-parallel-agent-dataset-example.md)
     - [TiDB Cloud Filesystem 上でエージェント用の Git ワークスペースを準備する](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
-    - [ファイルシステムジャーナルに Agent ワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md)
-    - [ファイルシステム Vault シークレットを Agent に委任する](/ai/ti/guides/ti-vault-agent-secrets-example.md)
+    - [ファイルシステムジャーナルにエージェントワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md)
+    - [ファイルシステム Vault シークレットをエージェントに委任する](/ai/ti/guides/ti-vault-agent-secrets-example.md)
   - コマンドリファレンス
     - [概要](/ai/ti/reference/ti-cli-reference.md)
     - [configure](/ai/ti/reference/ti-configure.md)

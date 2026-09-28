@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault unmount-vault
-summary: file system Vault ビューをアンマウントします。
+summary: ファイルシステム Vault ビューをアンマウントします。
 ---
 
 # ti fs-vault unmount-vault

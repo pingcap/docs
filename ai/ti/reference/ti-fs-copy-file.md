@@ -50,15 +50,15 @@ ti fs copy-file
 
 ## オプション {#options}
 
-- `--append`: ローカルファイルの内容を TiDB Cloud file system 内のファイルに追記します。
-- `--create-parents`: TiDB Cloud file system からコピーする際に、不足しているローカルの親ディレクトリを作成します。
+- `--append`: ローカルファイルの内容を TiDB Cloud ファイルシステム内のファイルに追記します。
+- `--create-parents`: TiDB Cloud ファイルシステムからコピーする際に、不足しているローカルの親ディレクトリを作成します。
 - `--description <string>`: `--to-remote` 操作のファイル説明です。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--from-local <string>`: ローカルのソースパスです。
-- `--from-remote <string>`: TiDB Cloud file system 内のソースパスです。
+- `--from-remote <string>`: TiDB Cloud ファイルシステム内のソースパスです。
 - `--from-stdin`: 標準入力から読み取り、`--to-remote` に書き込みます。
-- `--fs-token <string>`: file system トークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択した file system 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、コマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--layer-id <string>`: コピーした 1 つのファイルを、ベースファイルシステムではなくファイルシステムレイヤーに書き込みます。`--recursive` とは併用できません。
 - `--overwrite`: 既存の宛先ファイルを置き換えます。
@@ -66,7 +66,7 @@ ti fs copy-file
 - `--resume`: 実行中のコピー操作を再開します。
 - `--tag <string>`: `--to-remote` 操作用に `key=value` 形式のタグを作成します。複数回指定できます。
 - `--to-local <string>`: ローカルの宛先パスです。
-- `--to-remote <string>`: TiDB Cloud file system 内の宛先パスです。
+- `--to-remote <string>`: TiDB Cloud ファイルシステム内の宛先パスです。
 - `--to-stdout`: `--from-remote` を標準出力に書き込みます。
 - `--version`: バージョン情報を表示します。
 
@@ -109,7 +109,7 @@ ti fs copy-file
     ti fs copy-file --file-system-id <file-system-id> --from-local ./tail.log --to-remote /logs/app.log --append
     ```
 
-- 標準入力を file system にストリーミングする:
+- 標準入力をファイルシステムにストリーミングする:
 
     ```bash
     # Upload generated content without creating an intermediate local file.

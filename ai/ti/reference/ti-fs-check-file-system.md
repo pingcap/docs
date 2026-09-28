@@ -5,7 +5,7 @@ summary: TiDB Cloud Filesystem の接続性を確認します。
 
 # ti fs check-file-system
 
-選択した file system が正しく設定され、アクセス可能であることを、リージョン、認証情報、およびファイルアクセスを含めて検証します。
+選択したファイルシステムが正しく設定され、アクセス可能であることを、リージョン、認証情報、およびファイルアクセスを含めて検証します。
 
 > **Note:**
 >
@@ -24,7 +24,7 @@ ti fs check-file-system
 ## オプション {#options}
 
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--fs-token <string>`: file system トークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択した file system 用にローカルに保存されているトークンを使用します。
+- `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 
@@ -32,7 +32,7 @@ ti fs check-file-system
 
 ## 例 {#examples}
 
-- file system の接続性を確認します。
+- ファイルシステムの接続性を確認します。
 
     ```bash
     # Verify that the selected token can reach and read the file system root.

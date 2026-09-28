@@ -17,7 +17,7 @@ TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiD
 
 > **Note:**
 >
-> 以前に TiDB Cloud CLI `tdc` v0.1.x を使用していた場合は、`tdc` によって開始された file system または Vault のマウントをすべてアンマウントし、`ti` をインストールする前に [tdc から TiDB Cloud CLI への移行](/ai/ti/reference/ti-migrate-from-tdc.md) を確認してください。
+> 以前に TiDB Cloud CLI `tdc` v0.1.x を使用していた場合は、`tdc` によって開始されたファイルシステムまたは Vault のマウントをすべてアンマウントし、`ti` をインストールする前に [tdc から TiDB Cloud CLI への移行](/ai/ti/reference/ti-migrate-from-tdc.md) を確認してください。
 
 ## TiDB Cloud CLI をインストールする {#install-tidb-cloud-cli}
 
@@ -165,7 +165,7 @@ ti update --dry-run
 
 > **Note:**
 >
-> アクティブな file system または Vault のマウントがある場合は、`ti` と file system ランタイムが一緒に更新されるように、更新前にライターを停止してアンマウントしてください。例:
+> アクティブなファイルシステムまたは Vault のマウントがある場合は、`ti` とファイルシステムランタイムが一緒に更新されるように、更新前にライターを停止してアンマウントしてください。例:
 >
 > ```bash
 > ti fs unmount-file-system --mount-path <mount-path>
@@ -191,13 +191,13 @@ ti update --target-version <version>
 
 `tdc` v0.1.x を一度も使用したことがない場合は、このセクションをスキップしてください。
 
-以前に `tdc` v0.1.x を使用していた場合、`ti` は `~/.tdc/` から `~/.ti/` へ、サポートされているローカルプロファイル、認証情報、設定、および file system の状態を移行できます。`ti` をインストールする前に、`tdc` によって開始された file system または Vault のマウントをすべてアンマウントしてください。
+以前に `tdc` v0.1.x を使用していた場合、`ti` は `~/.tdc/` から `~/.ti/` へ、サポートされているローカルプロファイル、認証情報、設定、およびファイルシステムの状態を移行できます。`ti` をインストールする前に、`tdc` によって開始されたファイルシステムまたは Vault のマウントをすべてアンマウントしてください。
 
 移行される状態と除外される状態、ディレクトリ競合の解決、レガシー環境変数との互換性を含む完全な移行手順については、[tdc から TiDB Cloud CLI への移行](/ai/ti/reference/ti-migrate-from-tdc.md) を参照してください。
 
 ## TiDB Cloud CLI のアンインストール {#uninstall-tidb-cloud-cli}
 
-アンインストールする前に、writer を停止し、アクティブな file system または Vault のマウントをすべてアンマウントしてください。
+アンインストールする前に、writer を停止し、アクティブなファイルシステムまたは Vault のマウントをすべてアンマウントしてください。
 
 たとえば、マウントの種類に応じて次のコマンドを実行します。
 
@@ -247,11 +247,11 @@ ti fs-vault unmount-vault --mount-path <vault-mount-path>
 
 ### ローカル状態の削除 {#remove-local-state}
 
-バイナリを削除しても、プロファイル、認証情報、file system の登録、DB SQL 認証情報、ログ、およびマウントロケーターは保持されます。
+バイナリを削除しても、プロファイル、認証情報、ファイルシステムの登録、DB SQL 認証情報、ログ、およびマウントロケーターは保持されます。
 
 > **Note:**
 >
-> すべてのローカル TiDB Cloud CLI 状態を完全に削除する意図がある場合にのみ、`~/.ti/` を削除してください。ローカル状態を削除しても、リモートの TiDB Cloud Starter インスタンスや file system リソースは削除されません。
+> すべてのローカル TiDB Cloud CLI 状態を完全に削除する意図がある場合にのみ、`~/.ti/` を削除してください。ローカル状態を削除しても、リモートの TiDB Cloud Starter インスタンスやファイルシステムリソースは削除されません。
 
 <SimpleTab groupId="operating-systems">
 

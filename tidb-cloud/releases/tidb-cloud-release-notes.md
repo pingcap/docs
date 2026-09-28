@@ -16,9 +16,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) で、AWS PrivateLink 経由のインバウンド IPv6 接続がサポートされるようになり、IPv4 または IPv6 のいずれかを使用してクラスターに接続できるようになりました。
 
-        現在、この機能はリクエストに応じて利用可能です。IPv6 接続を利用するには、[TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) に連絡してリクエストし、その後デュアルスタックの AWS インターフェイスエンドポイントを作成してください。
+        現在、この機能はリクエストに応じて利用可能です。IPv6 接続を利用するには、[TiDB Cloud サポート](/tidb-cloud/tidb-cloud-support.md) に連絡してリクエストし、その後デュアルスタックの AWS インターフェイスエンドポイントを作成してください。
 
-        詳細は、[Use IPv6 connectivity over a private endpoint](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint) を参照してください。
+        詳細は、[プライベートエンドポイント経由で IPv6 接続を使用する](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint) を参照してください。
 
 ## 2026年9月15日 {#september-15-2026}
 
@@ -28,7 +28,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
   [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) は、[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) インスタンスと TiDB Cloud Filesystem 内のファイルシステムを管理するためのパブリックプレビューとして利用できるようになりました。TiDB Cloud Filesystem は、AI エージェントと自動化ワークロード向けに設計されたサーバーレスの分散ファイルシステムです。
 
-  `ti` を直接使用することも、スクリプト、CI ジョブ、AI エージェントに実行させて TiDB Cloud ワークフローを自動化することもできます。`ti` を使用すると、TiDB Cloud Starter インスタンスの作成と管理、SQL ステートメントの実行、ファイルコマンドまたはサポートされているマウントを通じた永続的な file system ワークスペースの作成とアクセスが可能です。デフォルトの JSON 出力、JMESPath 出力クエリ、および該当するコマンドでの `--wait` と `--dry-run` のサポートにより、自動化が簡素化されます。
+  `ti` を直接使用することも、スクリプト、CI ジョブ、AI エージェントに実行させて TiDB Cloud ワークフローを自動化することもできます。`ti` を使用すると、TiDB Cloud Starter インスタンスの作成と管理、SQL ステートメントの実行、ファイルコマンドまたはサポートされているマウントを通じた永続的なファイルシステムワークスペースの作成とアクセスが可能です。デフォルトの JSON 出力、JMESPath 出力クエリ、および該当するコマンドでの `--wait` と `--dry-run` のサポートにより、自動化が簡素化されます。
 
   詳細は、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) および [TiDB Cloud CLI (`ti`) の概要](/ai/ti/ti-overview.md) を参照してください。
 
