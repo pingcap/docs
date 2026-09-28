@@ -53,10 +53,12 @@ TiDB Cloud writes incremental data and snapshots to your OSS bucket, and TiDB Cl
         {
           "Effect": "Allow",
           "Action": [
+            "oss:HeadBucket",
             "oss:ListObjects",
             "oss:GetObject",
             "oss:PutObject",
-            "oss:DeleteObject"
+            "oss:DeleteObject",
+            "oss:GetBucketLocation"
           ],
           "Resource": [
             "acs:oss:*:*:YOUR_BUCKET_NAME",

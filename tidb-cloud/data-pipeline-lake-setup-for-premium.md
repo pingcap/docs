@@ -25,7 +25,7 @@ Before you begin, make sure that you have:
 
 - A {{{ .premium }}} instance. Note the region in which it is deployed.
 - A warehouse in TiDB Cloud Lake that is in the same region as your instance. If you do not have one yet, create it in the [TiDB Cloud Lake console](https://lake.tidbcloud.com/) first. Only warehouses in the same region as your instance can be selected when you create the data pipeline.
-- An S3 bucket for the external stage. Create it in the same region as your instance. Currently, only Amazon S3 is supported.
+- An external stage bucket: an Amazon S3 bucket or an Alibaba Cloud OSS bucket. Create it in the same region as your instance.
 - The user name and password of a TiDB database user that can read the source tables.
 
 ## Create a data pipeline
@@ -49,7 +49,10 @@ To create a data pipeline, you need to configure the destination, the external s
 
 An external stage is the object storage that bridges the two sides of a data pipeline: TiDB Cloud writes the exported snapshot and the captured row changes to the stage, and TiDB Cloud Lake loads the data from the stage into the target warehouse. For more information, see [Why does a data pipeline require an external stage?](/tidb-cloud/data-pipeline-lake-faq.md#why-does-a-data-pipeline-require-an-external-stage).
 
-Before you configure the external stage, create an Amazon S3 bucket in the same region as your {{{ .premium }}} instance. Currently, only Amazon S3 is supported as the external stage.
+TiDB Cloud Data Pipeline supports Amazon S3 and Alibaba Cloud OSS as the external stage. Create the bucket in the same region as your {{{ .premium }}} instance, and complete the provider-side setup first. The configuration steps vary depending on your cloud provider:
+
+<SimpleTab>
+<div label="Amazon S3">
 
 1. In the **External Stage** area, enter the **Bucket URI** of your S3 bucket in the `s3://<bucket-name>/<path-to-data>/` format.
 
@@ -72,6 +75,28 @@ Before you configure the external stage, create an Amazon S3 bucket in the same 
         For the complete AWS-side setup, including the IAM user, its permissions, and the optional SQS queue, see [Bucket Access with Access Key](/tidb-cloud/data-pipeline-lake-configure-external-stage-aws.md#option-3-bucket-access-with-access-key-not-recommended). Then, in the TiDB Cloud console, select **AWS Access Key**, and fill in **Access Key ID** and **Secret Access Key**.
 
     After you have filled in the required information for the method you selected, click **Test Connection** to verify that TiDB Cloud can access the bucket. If the check fails, verify the bucket region and the permissions granted to the role or the access key, and then test the connection again.
+
+</div>
+
+<div label="Alibaba Cloud OSS">
+
+For the complete OSS-side setup, including the RAM user, its permissions, and the access keys, see [Set Up an Alibaba Cloud OSS External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-lake-configure-external-stage-alibaba-cloud.md).
+
+1. In the **External Stage** area, enter the **Bucket URI** of your OSS bucket in the `oss://<bucket-name>/<path-to-data>/` format.
+2. Fill in the following fields:
+
+    - **Access Key ID**: the AccessKey ID of the RAM user.
+    - **Access Key Secret**: the AccessKey Secret of the RAM user.
+
+3. Click **Test Connection** to verify that TiDB Cloud can access the bucket. If the check fails, verify the bucket region and the permissions granted to the RAM user, and then test the connection again.
+
+> **Note:**
+>
+> For Alibaba Cloud OSS, only access key authentication is supported, and event-driven ingestion with SQS is not available.
+
+</div>
+
+</SimpleTab>
 
 ### Step 3. Configure replication
 
