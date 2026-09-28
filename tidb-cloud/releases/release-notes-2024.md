@@ -388,9 +388,9 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)を参照してください。
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) [ノードレベルのリソースメトリクス](/tidb-cloud/built-in-monitoring.md#server)の**制限**ラベルを表示します。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) [ノードレベルのリソースメトリクス](/tidb-cloud/built-in-monitoring.md#server)の**limit**ラベルを表示します。
 
-    **制限**ラベルには、クラスター内の各コンポーネントにおけるCPU、メモリ、ストレージなどのリソースの最大使用量が表示されます。この機能強化により、クラスターのリソース使用率の監視が簡素化されます。
+    **limit**ラベルには、クラスター内の各コンポーネントにおけるCPU、メモリ、ストレージなどのリソースの最大使用量が表示されます。この機能強化により、クラスターのリソース使用率の監視が簡素化されます。
 
     これらのメトリック制限にアクセスするには、クラスターの**Monitoring**ページに移動し、**Metrics**タブの**Server**カテゴリを確認してください。
 
