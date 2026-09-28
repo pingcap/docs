@@ -18,7 +18,9 @@ Before you begin, [install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-qui
 
 If you created the file system by using `ti` on the current machine, or previously imported its token, the CLI already has a token stored locally.
 
-Clear any token and region overrides, then select the file system whose token is stored locally:
+The environment variables `TI_FS_TOKEN` and `TI_REGION_CODE` override the locally stored token and region.
+
+Clear these overrides, then select the file system whose token is stored locally:
 
 <SimpleTab groupId="operating-systems">
 

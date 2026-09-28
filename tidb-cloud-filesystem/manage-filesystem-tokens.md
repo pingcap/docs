@@ -17,7 +17,7 @@ Before you begin:
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Have access to an existing file system in TiDB Cloud Filesystem. If you do not have one, follow [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md) to create one.
 
-Some token management operations require TiDB Cloud API credentials or an existing owner token. Each section specifies the credentials to use.
+Listing, enabling, disabling, and deleting tokens require either an owner token supplied through `TI_FS_TOKEN` or `--fs-token`, or TiDB Cloud API credentials with an explicit `--file-system-id`. These operations do not use a locally stored token automatically. Scoped-token generation can use a locally stored owner token. Each section below explains any additional requirements.
 
 > **Note:**
 >
@@ -82,8 +82,6 @@ To mount the directory with this token, specify `--remote-path /workspace`. A to
 For more information about scoped permissions and credential selection, see [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md).
 
 ## Inspect and change token status
-
-Listing, enabling, disabling, and deleting tokens require either an owner token explicitly supplied through `TI_FS_TOKEN` or `--fs-token`, or TiDB Cloud API credentials with an explicit file system ID. These operations do not automatically use a locally stored owner token, although scoped-token generation can use one.
 
 For an owner-token-only environment, set `TI_FS_TOKEN` to the owner token and `TI_REGION_CODE` to the file system's region before running the commands below. Keep management credentials separate from the scoped token you give to the recipient. A scoped token cannot manage other tokens.
 
