@@ -1,6 +1,6 @@
 ---
 title: TiDB for AI
-summary: SQL、統合検索、TiDB Cloud Starter、および永続的な共有 file systems を使用して、TiDB で AI アプリケーションとエージェントワークフローを構築します。
+summary: SQL、統合検索、TiDB Cloud Starter、および永続的な共有ファイルシステムを使用して、TiDB で AI アプリケーションとエージェントワークフローを構築します。
 ---
 
 # AI向けTiDB {#tidb-for-ai}

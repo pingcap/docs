@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud CLI (`ti`) の概要
-summary: TiDB Cloud Starter インスタンスと TiDB Cloud Filesystem 内の file system を管理するために、TiDB Cloud CLI (`ti`) をいつ使用するかを学びます。
+summary: TiDB Cloud Starter インスタンスと TiDB Cloud Filesystem 内のファイルシステムを管理するために、TiDB Cloud CLI (`ti`) をいつ使用するかを学びます。
 ---
 
 # TiDB Cloud CLI (`ti`) の概要
 
-[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) は、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) インスタンスと [TiDB Cloud Filesystem 内の file system](#tidb-cloud-filesystem) を管理するための CLI です。対話的な利用と自動化の両方を想定して設計されており、デフォルトで構造化された JSON 出力を提供します。
+[TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) は、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier/?plan=starter#starter) インスタンスと [TiDB Cloud Filesystem 内のファイルシステム](#tidb-cloud-filesystem) を管理するための CLI です。対話的な利用と自動化の両方を想定して設計されており、デフォルトで構造化された JSON 出力を提供します。
 
 > **Note:**
 >
@@ -25,7 +25,7 @@ TiDB Cloud Filesystem は、AI エージェントおよび自動化ワークロ�
 | TiDB Cloud Starter のライフサイクル操作を自動化する | TiDB Cloud Starter インスタンスとブランチを作成および管理し、準備完了まで待機し、結果を JSON として確認し、SQL ステートメントを実行し、ID によってリソースを削除できます。 |
 | タスクごとに SQL 権限を分離する | 各コマンドでデータベースパスワードを扱うことなく、タスクごとに CLI 管理の read-only、read-write、または admin ID を使用できます。 |
 | 環境をまたいでファイルを永続化して共有する | ローカルマシン、CI ジョブ、サンドボックス、その他の一時的な環境をまたいでファイルを利用可能な状態に保ち、直接のファイルコマンドまたはサポートされている FUSE および WebDAV マウントを通じて同じリモート名前空間にアクセスできます。 |
-| 一時的な環境で file system を使用する | 信頼できるマシン上で file system をプロビジョニングし、その後 CLI プロファイルをコピーしたり TiDB Cloud API キーを提供したりすることなく、サンドボックスに file system トークンとリージョンコードを渡せます。 |
+| 一時的な環境でファイルシステムを使用する | 信頼できるマシン上でファイルシステムをプロビジョニングし、その後 CLI プロファイルをコピーしたり TiDB Cloud API キーを提供したりすることなく、サンドボックスにファイルシステムトークンとリージョンコードを渡せます。 |
 | 大規模な Git ワークスペースをより早く開始する | クリーンな Git データの hydration がバックグラウンドで継続している間に、リポジトリのファイルツリーを公開できます。 |
 | エージェントの作業を記録して委任する | ジャーナルに追記専用かつハッシュチェーン化されたワークフローイベントを保存し、選択した vault フィールドへの一時的かつスコープ限定のアクセスを付与できます。 |
 
@@ -40,7 +40,7 @@ TiDB Cloud CLI は、次の機能領域をカバーします。
     - SQL ユーザーと接続情報
     - SQL ステートメントの実行
 - **TiDB Cloud Filesystem**
-    - file system のライフサイクルとファイル操作
+    - ファイルシステムのライフサイクルとファイル操作
     - FUSE および WebDAV マウント
     - レイヤー、パック、および Git ワークスペース
     - ジャーナルと vault
@@ -79,7 +79,7 @@ TiDB Cloud は現在、対象範囲の異なる 2 つの CLI を提供してい�
 
 ## 次のステップ {#next-steps}
 
-TiDB Cloud CLI を初めて使用する場合は、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) から始めて、`ti` をインストールし、プロファイルを設定し、基本的な TiDB Cloud Starter または file system のワークフローを完了してください。
+TiDB Cloud CLI を初めて使用する場合は、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) から始めて、`ti` をインストールし、プロファイルを設定し、基本的な TiDB Cloud Starter またはファイルシステムのワークフローを完了してください。
 
 その後は、実施したい内容に応じて次に進んでください。
 

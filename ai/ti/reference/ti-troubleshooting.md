@@ -5,7 +5,7 @@ summary: TiDB Cloud CLI の API 認証、Starter クォータ、SQL 認証情報
 
 # TiDB Cloud CLI のトラブルシューティング
 
-このリファレンスを使用して、CLI の認証、Starter、SQL、および中断されたコマンドの失敗を診断します。file system トークン、リージョン、companion プロセス、およびマウントについては、[TiDB Cloud Filesystem のトラブルシューティング](/tidb-cloud-filesystem/filesystem-troubleshooting.md) を参照してください。`--debug` は必要な場合にのみ追加し、共有する前にマスク済みの出力を確認してください。
+このリファレンスを使用して、CLI の認証、Starter、SQL、および中断されたコマンドの失敗を診断します。ファイルシステムトークン、リージョン、companion プロセス、およびマウントについては、[TiDB Cloud Filesystem のトラブルシューティング](/tidb-cloud-filesystem/filesystem-troubleshooting.md) を参照してください。`--debug` は必要な場合にのみ追加し、共有する前にマスク済みの出力を確認してください。
 
 > **Note:**
 >

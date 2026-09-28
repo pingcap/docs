@@ -26,9 +26,9 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | AWS | 東京 | `aws-ap-northeast-1` | サポート対象 | 非サポート |
 | Alibaba Cloud | シンガポール | `alicloud-ap-southeast-1` | サポート対象 | サポート対象 |
 
-設定したリージョンが TiDB Cloud Starter をサポートしていても TiDB Cloud Filesystem をサポートしていない場合、そのリージョンで Starter インスタンスを管理できます。File system コマンドは `unsupported endpoint` エラーで失敗します。
+設定したリージョンが TiDB Cloud Starter をサポートしていても TiDB Cloud Filesystem をサポートしていない場合、そのリージョンで Starter インスタンスを管理できます。ファイルシステムコマンドは `unsupported endpoint` エラーで失敗します。
 
-サポートされる file system リージョンは、各 `ti` リリースに組み込まれています。インストール済みバージョンのリリース後に追加されたリージョンで file system を使用するには、`ti` をアップグレードしてください。サービス URL を指定しても、非サポートのリージョンを有効にすることはできません。
+サポートされるファイルシステムリージョンは、各 `ti` リリースに組み込まれています。インストール済みバージョンのリリース後に追加されたリージョンでファイルシステムを使用するには、`ti` をアップグレードしてください。サービス URL を指定しても、非サポートのリージョンを有効にすることはできません。
 
 ## 認証情報の要件 {#credential-requirements}
 
@@ -36,10 +36,10 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | --- | --- |
 | `ti configure`、すべての `ti db` コントロールプレーン操作 | TiDB Cloud API public/private キー |
 | `ti fs create-file-system` | TiDB Cloud API キー |
-| `ti fs delete-file-system` | TiDB Cloud API キーと file system ID |
-| file system の抽出および埋め込み設定の表示または更新 | TiDB Cloud API キーと明示的な file system ID |
-| file system トークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API キーと明示的な file system ID |
-| file system トークンの更新 | 現在の FS bearer トークンのみ |
+| `ti fs delete-file-system` | TiDB Cloud API キーとファイルシステム ID |
+| ファイルシステムの抽出および埋め込み設定の表示または更新 | TiDB Cloud API キーと明示的なファイルシステム ID |
+| ファイルシステムトークンの生成、一覧表示、有効化、無効化、削除 | TiDB Cloud API キーと明示的なファイルシステム ID |
+| ファイルシステムトークンの更新 | 現在の FS bearer トークンのみ |
 | リモートの file、レイヤー、パック、マウント、Git、ジャーナル、およびオーナー vault 操作 | FS オーナートークンまたは登録済みリソース認証情報 |
 | 委任された vault の read、list、run、またはマウント | スコープに適した委任された vault トークン |
 | 成功したバックグラウンドマウント後の drain およびアンマウント | 同じ `HOME` 内の機密情報を含まないマウントロケーター |
@@ -50,12 +50,12 @@ TiDB Cloud API 呼び出しでは Digest 認証を使用します。SQL HTTPS �
 
 - TiDB Cloud API キーは、ワークフローに必要なアクセス権のみを持つように作成してください。無人自動化で個人の管理者キーを再利用しないでください。
 - 自動化用の認証情報は、CI のシークレットストアまたは実行時シークレットマネージャーから注入してください。認証情報をソース管理、コンテナイメージ、シェルスクリプト、またはプロセス一覧やシェル履歴に表示される可能性のあるコマンドライン引数に置かないでください。
-- 完全な `~/.ti/` ディレクトリをエージェントのサンドボックスにコピーしないでください。既存の file system には、`TI_FS_TOKEN` と `TI_REGION_CODE` のみを渡し、`TI_FS_FILE_SYSTEM_ID` は任意のアサーションとしてのみ使用してください。
+- 完全な `~/.ti/` ディレクトリをエージェントのサンドボックスにコピーしないでください。既存のファイルシステムには、`TI_FS_TOKEN` と `TI_REGION_CODE` のみを渡し、`TI_FS_FILE_SYSTEM_ID` は任意のアサーションとしてのみ使用してください。
 - 信頼できないエージェントや探索的なエージェントによる SQL 調査には `--read-only` を使用してください。DDL または権限管理には `--admin` のみを使用し、データ変更を意図する場合にのみ `--read-write` を使用してください。
 - 破壊的なコントロールプレーン操作の前に `--dry-run` を使用してください。`~/.ti/credentials`、リソース認証情報、および DB SQL 認証情報は、所有者のみが読み取り可能にしてください。
 - 診断情報を共有する前に、ローカルの操作ログを確認してください。ログには SQL テキスト、パス、ペイロード、認証情報の値は含まれませんが、コマンド名、フラグ名、プロファイルおよびリージョンのメタデータ、ステータスコード、操作タイミングは依然として機微情報となる可能性があります。
 
-file system トークン、マウント、Vault、および AI プロバイダーのセキュリティについては、[Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)、[Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)、および [Configure AI Providers for a File System](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) を参照してください。
+ファイルシステムトークン、マウント、Vault、および AI プロバイダーのセキュリティについては、[Authorization](/tidb-cloud-filesystem/filesystem-authorization.md)、[Manage ファイルシステム Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md)、および [Configure AI Providers for a ファイルシステム](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) を参照してください。
 
 ## 製品の制限事項 {#product-limitations}
 

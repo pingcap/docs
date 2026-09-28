@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Filesystem CLI コマンドリファレンス
-summary: file system リソース、ファイル、レイヤー、パック、マウント向けのすべての `ti fs` コマンドを参照します。
+summary: ファイルシステムリソース、ファイル、レイヤー、パック、マウント向けのすべての `ti fs` コマンドを参照します。
 ---
 
 # TiDB Cloud Filesystem CLI コマンドリファレンス
@@ -13,12 +13,12 @@ summary: file system リソース、ファイル、レイヤー、パック、�
 
 | コマンド | 説明 |
 | --- | --- |
-| [`create-file-system`](/ai/ti/reference/ti-fs-create-file-system.md) | file system とその初期オーナートークンを作成します。 |
-| [`list-file-systems`](/ai/ti/reference/ti-fs-list-file-systems.md) | 有効なリージョン内の file system を一覧表示します。 |
-| [`describe-file-system`](/ai/ti/reference/ti-fs-describe-file-system.md) | ID で 1 つの file system の詳細を表示します。 |
-| [`check-file-system`](/ai/ti/reference/ti-fs-check-file-system.md) | file system の選択、ルーティング、認証情報、およびデータプレーンアクセスを確認します。 |
-| [`delete-file-system`](/ai/ti/reference/ti-fs-delete-file-system.md) | file system を完全に削除します。 |
-| [`import-file-system-token`](/ai/ti/reference/ti-fs-import-file-system-token.md) | 既存の file system トークンをローカルにインポートして選択します。 |
+| [`create-file-system`](/ai/ti/reference/ti-fs-create-file-system.md) | ファイルシステムとその初期オーナートークンを作成します。 |
+| [`list-file-systems`](/ai/ti/reference/ti-fs-list-file-systems.md) | 有効なリージョン内のファイルシステムを一覧表示します。 |
+| [`describe-file-system`](/ai/ti/reference/ti-fs-describe-file-system.md) | ID で 1 つのファイルシステムの詳細を表示します。 |
+| [`check-file-system`](/ai/ti/reference/ti-fs-check-file-system.md) | ファイルシステムの選択、ルーティング、認証情報、およびデータプレーンアクセスを確認します。 |
+| [`delete-file-system`](/ai/ti/reference/ti-fs-delete-file-system.md) | ファイルシステムを完全に削除します。 |
+| [`import-file-system-token`](/ai/ti/reference/ti-fs-import-file-system-token.md) | 既存のファイルシステムトークンをローカルにインポートして選択します。 |
 | [`generate-file-system-token`](/ai/ti/reference/ti-fs-generate-file-system-token.md) | 追加のオーナートークンを生成します。 |
 | [`generate-file-system-scoped-token`](/ai/ti/reference/ti-fs-generate-file-system-scoped-token.md) | パス、操作、および有効期間で制限されたトークンを生成します。 |
 | [`list-file-system-tokens`](/ai/ti/reference/ti-fs-list-file-system-tokens.md) | シークレットを含まないトークンメタデータを一覧表示します。 |
@@ -33,7 +33,7 @@ summary: file system リソース、ファイル、レイヤー、パック、�
 
 ## AI プロバイダー設定コマンド {#ai-provider-configuration-commands}
 
-これらのコマンドは、メディアファイルからコンテンツを抽出し、埋め込みを生成するためのオプションのプロバイダーを設定します。通常の file system リソース操作およびファイル操作では、AI プロバイダー設定は不要です。
+これらのコマンドは、メディアファイルからコンテンツを抽出し、埋め込みを生成するためのオプションのプロバイダーを設定します。通常のファイルシステムリソース操作およびファイル操作では、AI プロバイダー設定は不要です。
 
 | コマンド | 説明 |
 | --- | --- |
@@ -46,7 +46,7 @@ summary: file system リソース、ファイル、レイヤー、パック、�
 
 | コマンド | 説明 |
 | --- | --- |
-| [`copy-file`](/ai/ti/reference/ti-fs-copy-file.md) | ローカルストレージと file system の間、または file system 内でファイルをコピーします。 |
+| [`copy-file`](/ai/ti/reference/ti-fs-copy-file.md) | ローカルストレージとファイルシステムの間、またはファイルシステム内でファイルをコピーします。 |
 | [`read-file`](/ai/ti/reference/ti-fs-read-file.md) | リモートファイルまたはバイト範囲を読み取ります。 |
 | [`list-files`](/ai/ti/reference/ti-fs-list-files.md) | リモートパス配下のエントリを一覧表示します。 |
 | [`describe-file`](/ai/ti/reference/ti-fs-describe-file.md) | リモートファイルまたはディレクトリの詳細を表示します。 |
@@ -64,7 +64,7 @@ summary: file system リソース、ファイル、レイヤー、パック、�
 | コマンド | 説明 |
 | --- | --- |
 | [`create-layer`](/ai/ti/reference/ti-fs-create-layer.md) | 分離された書き込み可能なレイヤーを作成します。 |
-| [`list-layers`](/ai/ti/reference/ti-fs-list-layers.md) | file system 内のレイヤーを一覧表示します。 |
+| [`list-layers`](/ai/ti/reference/ti-fs-list-layers.md) | ファイルシステム内のレイヤーを一覧表示します。 |
 | [`fork-layer`](/ai/ti/reference/ti-fs-fork-layer.md) | 親の tip またはチェックポイントから子レイヤーをフォークします。 |
 | [`list-layer-chain`](/ai/ti/reference/ti-fs-list-layer-chain.md) | レイヤーの固定された祖先チェーンを一覧表示します。 |
 | [`describe-layer`](/ai/ti/reference/ti-fs-describe-layer.md) | ID でレイヤーの詳細を表示します。 |
@@ -72,8 +72,8 @@ summary: file system リソース、ファイル、レイヤー、パック、�
 | [`create-layer-checkpoint`](/ai/ti/reference/ti-fs-create-layer-checkpoint.md) | レイヤー内に永続的なチェックポイントを作成します。 |
 | [`delete-layer`](/ai/ti/reference/ti-fs-delete-layer.md) | レイヤーを論理的に破棄します。 |
 | [`rollback-layer`](/ai/ti/reference/ti-fs-rollback-layer.md) | 変更をコミットせずにレイヤーをロールバックします。 |
-| [`commit-layer`](/ai/ti/reference/ti-fs-commit-layer.md) | レイヤーの変更をベース file system に適用します。 |
-| [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) | 選択したローカルオーバーレイ状態を file system にアーカイブします。 |
+| [`commit-layer`](/ai/ti/reference/ti-fs-commit-layer.md) | レイヤーの変更をベースファイルシステムに適用します。 |
+| [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) | 選択したローカルオーバーレイ状態をファイルシステムにアーカイブします。 |
 | [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) | アーカイブからローカルオーバーレイ状態を復元します。 |
 
 ### レイヤー参照 {#layer-references}
@@ -94,9 +94,9 @@ summary: file system リソース、ファイル、レイヤー、パック、�
 
 | コマンド | 説明 |
 | --- | --- |
-| [`mount-file-system`](/ai/ti/reference/ti-fs-mount-file-system.md) | ローカルパスに file system をマウントします。 |
+| [`mount-file-system`](/ai/ti/reference/ti-fs-mount-file-system.md) | ローカルパスにファイルシステムをマウントします。 |
 | [`drain-file-system`](/ai/ti/reference/ti-fs-drain-file-system.md) | 稼働中の FUSE マウントから保留中の書き込みをフラッシュします。 |
-| [`unmount-file-system`](/ai/ti/reference/ti-fs-unmount-file-system.md) | file system をフラッシュしてアンマウントします。 |
+| [`unmount-file-system`](/ai/ti/reference/ti-fs-unmount-file-system.md) | ファイルシステムをフラッシュしてアンマウントします。 |
 
 ## コマンドエイリアス {#command-aliases}
 

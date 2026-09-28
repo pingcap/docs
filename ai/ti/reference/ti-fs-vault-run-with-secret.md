@@ -1,6 +1,6 @@
 ---
 title: ti fs-vault run-with-secret
-summary: file system Vault シークレットを使用してプロセスを実行します。
+summary: ファイルシステム Vault シークレットを使用してプロセスを実行します。
 ---
 
 # ti fs-vault run-with-secret

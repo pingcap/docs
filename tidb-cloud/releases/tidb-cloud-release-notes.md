@@ -28,7 +28,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
   [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) は、[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) インスタンスと TiDB Cloud Filesystem 内のファイルシステムを管理するためのパブリックプレビューとして利用できるようになりました。TiDB Cloud Filesystem は、AI エージェントと自動化ワークロード向けに設計されたサーバーレスの分散ファイルシステムです。
 
-  `ti` を直接使用することも、スクリプト、CI ジョブ、AI エージェントに実行させて TiDB Cloud ワークフローを自動化することもできます。`ti` を使用すると、TiDB Cloud Starter インスタンスの作成と管理、SQL ステートメントの実行、ファイルコマンドまたはサポートされているマウントを通じた永続的な file system ワークスペースの作成とアクセスが可能です。デフォルトの JSON 出力、JMESPath 出力クエリ、および該当するコマンドでの `--wait` と `--dry-run` のサポートにより、自動化が簡素化されます。
+  `ti` を直接使用することも、スクリプト、CI ジョブ、AI エージェントに実行させて TiDB Cloud ワークフローを自動化することもできます。`ti` を使用すると、TiDB Cloud Starter インスタンスの作成と管理、SQL ステートメントの実行、ファイルコマンドまたはサポートされているマウントを通じた永続的なファイルシステムワークスペースの作成とアクセスが可能です。デフォルトの JSON 出力、JMESPath 出力クエリ、および該当するコマンドでの `--wait` と `--dry-run` のサポートにより、自動化が簡素化されます。
 
   詳細は、[TiDB Cloud CLI を使い始める](/ai/ti/ti-quick-start.md) および [TiDB Cloud CLI (`ti`) の概要](/ai/ti/ti-overview.md) を参照してください。
 

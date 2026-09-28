@@ -65,7 +65,7 @@ ti fs mount-file-system
 - `--read-cache-ttl <duration>`: FUSE 読み取りキャッシュの有効期間。\[default: `30s`]
 - `--read-only`: 読み取り専用マウントモード。
 - `--ready-timeout <duration>`: バックグラウンドマウントの準備完了を待機する時間。\[default: `30s`]
-- `--remote-path <string>`: マウントする TiDB Cloud file system のルートパス。\[default: /]
+- `--remote-path <string>`: マウントする TiDB Cloud ファイルシステムのルートパス。\[default: /]
 - `--unpack-archive-path <string>`: マウント前にパックされたアーカイブを復元します。
 - `--version`: バージョン情報を表示します。
 - `--write-back-cache`: フラッシュ時にファイルシステムへ書き込む前に、FUSE の書き込みをローカルに永続化します。この動作はデフォルトで有効です。無効にするには `--write-back-cache=false` を指定します。常に読み取り専用であるチェックポイントマウントでは使用できません。\[default: true]
