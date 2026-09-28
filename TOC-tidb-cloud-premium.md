@@ -151,8 +151,8 @@
   - [Data Pipeline Overview](/tidb-cloud/data-pipeline-overview.md)
   - [Setup Data Pipeline for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-setup-for-premium.md)
   - Reference
-    - [Set Up an Amazon S3 External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-lake-configure-external-stage-aws.md)
-    - [Set Up an Alibaba Cloud OSS External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-lake-configure-external-stage-alibaba-cloud.md)
+    - [Set Up an External Stage for TiDB Cloud Data Pipeline (AWS)](/tidb-cloud/data-pipeline-lake-configure-external-stage-aws.md)
+    - [Set Up an External Stage for TiDB Cloud Data Pipeline (Alibaba Cloud)](/tidb-cloud/data-pipeline-lake-configure-external-stage-alibaba-cloud.md)
     - [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-support-matrix.md)
     - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 

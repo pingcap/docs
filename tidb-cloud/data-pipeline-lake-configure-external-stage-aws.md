@@ -1,9 +1,9 @@
 ---
-title: Set Up an Amazon S3 External Stage for TiDB Cloud Data Pipeline
-summary: Learn how to configure an Amazon S3 bucket as the external stage for TiDB Cloud Data Pipeline, including bucket access and SQS ingestion.
+title: Set Up an External Stage for TiDB Cloud Data Pipeline (AWS)
+summary: Learn how to configure an Amazon S3 bucket as an external stage for TiDB Cloud Data Pipeline, including bucket access and SQS ingestion.
 ---
 
-# Set Up an Amazon S3 External Stage for TiDB Cloud Data Pipeline
+# Set Up an External Stage for TiDB Cloud Data Pipeline (AWS)
 
 This guide explains how to prepare an Amazon S3 bucket as the external stage for the [TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-overview.md). An external stage is the intermediate bucket where TiDB Cloud writes exported snapshots and row changes, and TiDB Cloud Lake reads from it to load data into the target warehouse.
 
