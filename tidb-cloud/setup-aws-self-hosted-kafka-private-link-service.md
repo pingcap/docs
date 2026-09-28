@@ -739,7 +739,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
         - プロトコル: `TCP` ; ポート: `9094` ; 転送先: `broker-target-group-2`
         - プロトコル: `TCP` ; ポート: `9095` ; 転送先: `broker-target-group-3`
 
-3. 要塞ノードでロードバランサーをテストします。この例では、Kafka ブートストラップのみをテストします。ロードバランサーは Kafka EXTERNAL リスナーをリッスンしているため、EXTERNAL アドバタイズされたリスナーのアドレスは要塞ノードでは解決できません。ロードバランサーの詳細ページから`kafka-lb` DNS 名（例： `kafka-lb-77405fa57191adcb.elb.us-west-2.amazonaws.com` ）をメモしておいてください。要塞ノードでスクリプトを実行してください。
+3. 要塞ノードでロードバランサーをテストします。この例では、Kafka ブートストラップのみをテストします。ロードバランサーは Kafka EXTERNAL リスナーをリッスンしているため、EXTERNAL アドバタイズリスナーのアドレスは要塞ノードでは解決できません。ロードバランサーの詳細ページから`kafka-lb` DNS 名（例： `kafka-lb-77405fa57191adcb.elb.us-west-2.amazonaws.com` ）をメモしておいてください。要塞ノードでスクリプトを実行してください。
 
     ```shell
     # Replace {lb_dns_name} to your actual value
@@ -800,5 +800,5 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 4. 次の情報を使用してTiDB Cloud接続を構成します。
 
     - 新しいブートストラップポート
-    - 新しい Kafka 広告リスナー グループ
+    - 新しい Kafka アドバタイズリスナーグループ
     - 同じエンドポイントサービス

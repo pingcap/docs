@@ -547,5 +547,5 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 4. 次の情報を使用してTiDB Cloud接続を構成します。
 
-    - 新しい Kafka 広告リスナー グループ
+    - 新しい Kafka アドバタイズリスナーグループ
     - 新しいプライベートリンクサービス
