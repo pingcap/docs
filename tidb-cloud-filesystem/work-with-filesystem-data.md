@@ -129,7 +129,7 @@ For all available filters, see the [`find-files` reference](/ai/ti/reference/ti-
 
 Check the exit status before using command output. `read-file` and `copy-file --to-stdout` stream file contents, not CLI metadata. Keep stderr separate when capturing those contents.
 
-In `ti` v0.2.6, `create-directory` can print a `created ...` line before its JSON result, even with `--output json`. Its output cannot be parsed as a single JSON document. Check the exit status, then verify the directory with `describe-file` or `list-files`. Check your installed version's output format before relying on it in scripts.
+In `ti` v0.2.6 and v0.2.7, `create-directory` can print a `created ...` line before its JSON result, even with `--output json`. Its output cannot be parsed as a single JSON document. Check the exit status, then verify the directory with `describe-file` or `list-files`. Check your installed version's output format before relying on it in scripts.
 
 ## What's next
 
