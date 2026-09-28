@@ -132,7 +132,7 @@ Segments organize only the local cache. In object storage, an SST file is stored
 
 **Read amplification path on a cache miss**:
 
-```Plaintext
+```
 User queries 1 record (100 Bytes)
 → Block cache miss
 → TiKV loads segments from 3 LSM levels from object storage
@@ -153,7 +153,7 @@ Therefore, tiered storage is best suited for **small, concentrated query pattern
 
 The write path remains the same as Standard tables:
 
-```Plaintext
+```
 INSERT/UPDATE/DELETE
 → Memtable (hot write, unaffected by IA)
 → L0 SST (hot write, unaffected by IA)
