@@ -43,6 +43,14 @@ Choose your operating system:
     ti --version
     ```
 
+3. To keep `ti` available in new terminals, add it to your shell profile. For Zsh:
+
+    ```bash
+    echo 'export PATH="$HOME/.ti/bin:$PATH"' >> ~/.zshrc
+    ```
+
+    For Bash, add the same `export` line to the startup file your terminal uses, commonly `~/.bashrc` on Linux or `~/.bash_profile` on macOS.
+
 </div>
 
 <div label="Windows PowerShell" value="windows-powershell">
@@ -67,7 +75,7 @@ Choose your operating system:
 
 </SimpleTab>
 
-To keep `ti` available in new terminals, [add it to your permanent `PATH`](/ai/ti/reference/ti-install-configure-update.md).
+For permanent `PATH` setup on Windows and other installation options, see [Install, Configure, and Update TiDB Cloud CLI](/ai/ti/reference/ti-install-configure-update.md).
 
 ## Step 2. Configure TiDB Cloud CLI
 
@@ -122,6 +130,8 @@ For CI or agents, disable command tracing before handling tokens. Capture the cr
     ti fs create-file-system --display-name agent-workspace --wait
     ```
 
+    This command uses the region set in `TI_REGION_CODE` in Step 2. If you open a new shell, set that variable again before continuing.
+
     Save these values from the response:
 
     - `file_system_id`: uniquely identifies the file system.
@@ -138,6 +148,8 @@ For CI or agents, disable command tracing before handling tokens. Capture the cr
     <SimpleTab groupId="operating-systems">
 
     <div label="macOS or Linux" value="macos-or-linux">
+
+    `read` captures your token without displaying it, and `export` makes it available to subsequent `ti` commands in this shell. The token you enter at the `read` prompt is not recorded in shell history.
 
     ```bash
     unset TI_FS_FILE_SYSTEM_ID
