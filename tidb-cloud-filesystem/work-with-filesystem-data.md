@@ -53,6 +53,8 @@ Read the complete contents of a file:
 ti fs read-file --path /reports/report.md
 ```
 
+The command prints the file contents as plain text, even though the default output format is JSON.
+
 To read only part of a file, use `--offset` and `--length`. For example, the following command reads the first 1024 bytes:
 
 ```shell
@@ -66,6 +68,14 @@ List the contents of a directory:
 
 ```shell
 ti fs list-files --path /reports --output text
+```
+
+Example output:
+
+```text
+NAME       TYPE  SIZE  MTIME
+archive    dir   0     0
+report.md  file  23    0
 ```
 
 Inspect metadata for a file or directory:
@@ -126,6 +136,10 @@ ti fs find-files \
   --file-name-pattern "*.md" \
   --tag stage=review
 ```
+
+Tags are set when you upload a file, with `copy-file --tag key=value`. Supplying `--tag` on a later upload of the same path replaces the previous tags instead of adding to them.
+
+The result lists matching paths. An empty table means that nothing matched, not that the command failed.
 
 For all available filters, see the [`find-files` reference](/ai/ti/reference/ti-fs-find-files.md).
 
