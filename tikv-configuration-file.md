@@ -856,7 +856,7 @@ Raftstoreに関連する設定項目。
 
 ### `hibernate-regions` {#hibernate-regions}
 
-- 休止リージョンを有効または無効にします。このオプションを有効にすると、長時間アイドル状態が続くリージョンは自動的に休止状態になります。これにより、アイドル状態のリージョンについて、 Raftリーダーとフォロワー間のハートビートメッセージによって発生する余分なオーバーヘッドが軽減されます。休止状態のリージョンのリーダーとフォロワー間のハートビート間隔は`peer-stale-state-check-interval`を使用して変更できます。
+- Hibernate Regionを有効または無効にします。このオプションを有効にすると、長時間アイドル状態が続くリージョンは自動的に休止状態になります。これにより、アイドル状態のリージョンについて、 Raftリーダーとフォロワー間のハートビートメッセージによって発生する余分なオーバーヘッドが軽減されます。休止状態のリージョンのリーダーとフォロワー間のハートビート間隔は`peer-stale-state-check-interval`を使用して変更できます。
 - デフォルト値: v5.0.2 以降のバージョンでは`true` 、v5.0.2 より前のバージョンでは`false`
 
 ### `split-region-check-tick-interval` {#split-region-check-tick-interval}
@@ -1016,7 +1016,7 @@ Raftstoreに関連する設定項目。
 
 - ピアに許容される最長の非アクティブ期間。タイムアウトしたピアは`down`とマークされ、PD は後でそれを削除しようとします。
 - デフォルト値: `"10m"`
-- 最小値: Hibernate リージョンが有効になっている場合、最小値は`peer-stale-state-check-interval * 2`です。Hibernate リージョンが無効になっている場合、最小値は`0`です。
+- 最小値: Hibernate Regionが有効になっている場合、最小値は`peer-stale-state-check-interval * 2`です。Hibernate Regionが無効になっている場合、最小値は`0`です。
 
 ### `max-leader-missing-duration` {#max-leader-missing-duration}
 

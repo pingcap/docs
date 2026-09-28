@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.0-rc.1
 
 - TiKV
 
-    - デフォルトで休止リージョン機能を無効にする[#7618](https://github.com/tikv/tikv/pull/7618)
+    - デフォルトでHibernate Region機能を無効にする[#7618](https://github.com/tikv/tikv/pull/7618)
 
 - TiDB Binlog
 

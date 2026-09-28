@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.0.2 Release Notes
-summary: TiDB 5.0.2は2021年6月10日にリリースされました。この新バージョンには、互換性の変更、新機能、改善、バグ修正、そしてTiKV、 TiFlash、PD、TiCDC、Backup & Restore（BR）、 TiDB Lightningなどの各種ツールのアップデートが含まれています。注目すべき変更点としては、TiCDCにおける--sort-dir`の廃止、TiKVにおけるHibernate リージョン機能の有効化、TiDB、TiKV、PD、 TiFlash、そしてTiCDC、 BR、 TiDB Lightningなどのツールにおける各種バグ修正などが挙げられます。
+summary: TiDB 5.0.2は2021年6月10日にリリースされました。この新バージョンには、互換性の変更、新機能、改善、バグ修正、そしてTiKV、 TiFlash、PD、TiCDC、Backup & Restore（BR）、 TiDB Lightningなどの各種ツールのアップデートが含まれています。注目すべき変更点としては、TiCDCにおける--sort-dir`の廃止、TiKVにおけるHibernate Region機能の有効化、TiDB、TiKV、PD、 TiFlash、そしてTiCDC、 BR、 TiDB Lightningなどのツールにおける各種バグ修正などが挙げられます。
 ---
 
 # TiDB 5.0.2 リリースノート {#tidb-5-0-2-release-notes}
@@ -21,7 +21,7 @@ TiDB バージョン: 5.0.2
 
 - TiKV
 
-    - Hibernate リージョン機能をデフォルトで有効にする[#10266](https://github.com/tikv/tikv/pull/10266)
+    - Hibernate Region機能をデフォルトで有効にする[#10266](https://github.com/tikv/tikv/pull/10266)
 
 ## 改善点 {#improvements}
 
