@@ -126,7 +126,7 @@ TiDB Cloud provides different alert rules for each [TiDB Cloud plan](/tidb-cloud
 
 <CustomContent plan="premium">
 
-### Performance overview alerts 
+### Performance overview alerts for {{{ .premium }}}
 
 | Condition | Recommended Action |
 |:--- |:--- |
@@ -151,7 +151,7 @@ TiDB Cloud provides different alert rules for each [TiDB Cloud plan](/tidb-cloud
 
 <CustomContent plan="essential">
 
-### Performance overview alerts 
+### Performance overview alerts for {{{ .essential }}}
 
 | Condition | Recommended Action |
 |:--- |:--- |
