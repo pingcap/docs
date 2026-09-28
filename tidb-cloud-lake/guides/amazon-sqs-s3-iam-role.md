@@ -1,9 +1,9 @@
 ---
-title: Amazon SQS (S3) - IAM Role (Beta)
+title: Amazon SQS (S3) - IAM Role (Preview)
 summary: Learn how to create an "Amazon SQS (S3) - IAM Role" data source in {{{ .lake }}}.
 ---
 
-# Amazon SQS (S3) - IAM Role (Beta)
+# Amazon SQS (S3) - IAM Role (Preview)
 
 This page describes how to create an `Amazon SQS (S3) - IAM Role` data source. This data source stores the configuration required to access an Amazon SQS queue and the corresponding S3 bucket, and is used for consuming S3 object creation events delivered from Amazon S3 to SQS.
 
