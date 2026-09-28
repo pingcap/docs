@@ -73,7 +73,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 
 ### 少数ショットの例 {#few-shot-example}
 
-少数のサンプルとは、Chat2Queryに提供されるQ&amp;A学習サンプルを指します。サンプルの質問とそれに対応する回答が含まれています。これらのサンプルは、Chat2Queryが新しいタスクをより効率的に処理するのに役立ちます。
+少数のサンプルとは、Chat2Queryに提供されるQ&A学習サンプルを指します。サンプルの質問とそれに対応する回答が含まれています。これらのサンプルは、Chat2Queryが新しいタスクをより効率的に処理するのに役立ちます。
 
 > **Note:**
 >

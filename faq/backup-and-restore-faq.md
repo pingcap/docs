@@ -5,7 +5,7 @@ summary: よくある質問 (FAQ) とバックアップおよび復元のソリ�
 
 # バックアップと復元に関するよくある質問 {#backup--restore-faqs}
 
-このドキュメントには、TiDB バックアップ &amp; 復元 (BR) に関するよくある質問 (FAQ) と解決策が記載されています。
+このドキュメントには、TiDB バックアップ & 復元 (BR) に関するよくある質問 (FAQ) と解決策が記載されています。
 
 ## 誤ってデータを削除または更新した後、データをすばやく回復するにはどうすればよいですか? {#what-should-i-do-to-quickly-recover-data-after-mistakenly-deleting-or-updating-data}
 

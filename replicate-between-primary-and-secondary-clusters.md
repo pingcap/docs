@@ -11,7 +11,7 @@ summary: プライマリクラスタからセカンダリクラスタへデー�
 2. プライマリクラスタからセカンダリクラスタへ、増分データを複製します。
 3. プライマリクラスタがダウンした場合でも、リドゥログを使用してデータの確実な復旧を実現します。
 
-実行中の TiDB クラスタからセカンダリ クラスタに増分データを複製するには、Backup &amp; Restore [BR](/br/backup-and-restore-overview.md)と[TiCDC](/ticdc/ticdc-overview.md)を使用できます。
+実行中の TiDB クラスタからセカンダリ クラスタに増分データを複製するには、Backup & Restore [BR](/br/backup-and-restore-overview.md)と[TiCDC](/ticdc/ticdc-overview.md)を使用できます。
 
 ## ステップ1. 環境をセットアップする {#step-1-set-up-the-environment}
 

@@ -31,7 +31,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 - パスワード コンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
 - TiDB LightningとDumplingは、圧縮されたSQLおよびCSVファイルの[インポート](/tidb-lightning/tidb-lightning-data-source.md)および[エクスポート](/dumpling-overview.md#improve-export-efficiency-through-concurrency)をサポートします。
 - TiDB Data Migration (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md) GA になります。
-- TiDB バックアップ &amp; リストアは、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)のリカバリ パフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を最短 5分に短縮します。
+- TiDB バックアップ & リストアは、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)のリカバリ パフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を最短 5分に短縮します。
 - [Kafkaへのデータの複製](/replicate-data-to-kafka.md)の TiCDC スループットを 4000 行/秒から 35000 行/秒に向上し、レプリケーションのレイテンシーを2秒に短縮します。
 - データのライフサイクルを管理するために行レベル[TTL (Time to Live)](/time-to-live.md)を提供します (実験的)。
 - TiCDC は、Amazon S3、Azure Blob Storage、NFS (実験的) など[変更ログをオブジェクトストレージに複製する](/ticdc/ticdc-sink-to-cloud-storage.md)サポートしています。
@@ -285,7 +285,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 ### バックアップと復元 {#backup-and-restore}
 
-- TiDB バックアップ &amp; リストアはスナップショット チェックポイント バックアップをサポートします [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth)
+- TiDB バックアップ & リストアはスナップショット チェックポイント バックアップをサポートします [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth)
 
     TiDBスナップショットバックアップは、チェックポイントからのバックアップ再開をサポートしています。バックアップ＆リストア（BR）は、回復可能なエラーが発生するとバックアップを再試行します。ただし、再試行が複数回失敗するとBRは終了します。チェックポイントバックアップ機能により、数十分のネットワーク障害など、回復可能なより長い障害の再試行が可能になります。
 

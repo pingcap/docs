@@ -29,7 +29,7 @@ TiDB Ansible バージョン: 2.1.9
 - 演算子によって返される行数を制御するサポート [#9166](https://github.com/pingcap/tidb/issues/9166)
     - 選択と投影[#10110](https://github.com/pingcap/tidb/pull/10110)
     - `StreamAgg`と`HashAgg` [#10133](https://github.com/pingcap/tidb/pull/10133)
-    - `TableReader` &amp; `IndexReader` &amp; `IndexLookup` [#10169](https://github.com/pingcap/tidb/pull/10169)
+    - `TableReader` & `IndexReader` & `IndexLookup` [#10169](https://github.com/pingcap/tidb/pull/10169)
 - スロークエリログの改善
     - 類似したSQL 区別するために`SQL Digest`加算する [#10093](https://github.com/pingcap/tidb/pull/10093)
     - スロークエリステートメントで使用される統計のバージョン情報を追加する[#10220](https://github.com/pingcap/tidb/pull/10220)
