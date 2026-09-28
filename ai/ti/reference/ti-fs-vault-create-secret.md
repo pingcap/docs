@@ -34,7 +34,7 @@ ti fs-vault create-secret
 - `--help`: ヘルプ情報を表示します。
 - `--version`: バージョン情報を表示します。
 
-すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください.
+すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
 ## 例 {#examples}
 

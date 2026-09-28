@@ -32,7 +32,7 @@ ti fs-git hydrate-git-workspace
 - `--timeout <duration>`: hydrate の最大実行時間です。\[default: `30m0s`]
 - `--version`: バージョン情報を表示します。
 
-すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください.
+すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
 ## 例 {#examples}
 
