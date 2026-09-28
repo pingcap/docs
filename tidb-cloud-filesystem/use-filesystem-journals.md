@@ -99,7 +99,9 @@ ti fs-journal search-journal-entries \
 
 Continue until a successful response has an empty `matches` array. If a request fails, retry with the same cursor. To limit the search to a fixed time range, supply RFC3339 `--since` and `--until` values and keep them unchanged across pages.
 
-For a single page of full entry contents, add `--include-entries`. Omit it when paginating: that output does not retain match cursors. To retrieve a matched entry separately, use its `journal_id` with `read-journal-entries --after-seq <seq-minus-one> --limit 1`.
+For a single page of full entry contents, add `--include-entries`. Omit it when paginating: that output does not retain match cursors.
+
+To retrieve a matched entry separately, use `read-journal-entries` with its `journal_id`, set `--after-seq` to one less than the entry's `seq`, and set `--limit 1`. For example, to read the entry at sequence `42`, use `--after-seq 41 --limit 1`.
 
 ## Verify a journal
 

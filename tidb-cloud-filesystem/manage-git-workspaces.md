@@ -110,7 +110,7 @@ ti fs-git remove-git-worktree \
 
 ## Preserve work before leaving a machine
 
-With `--mount-profile coding-agent`, Git metadata such as `.git` stays on the local machine. A local commit, drain, or unmount does not make that Git history recoverable on another machine.
+With `--mount-profile coding-agent`, Git metadata such as `.git` stays on the local machine. A local commit alone does not make that history recoverable on another machine. Draining or unmounting does not transfer this local Git metadata either. Preserve the history using a push to a Git remote or the metadata archive workflow below.
 
 Before deleting an ephemeral machine:
 

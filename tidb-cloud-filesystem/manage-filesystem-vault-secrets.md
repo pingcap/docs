@@ -15,7 +15,7 @@ The delegated workflow can read those fields, inject them into a process, or acc
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to a test file system without an existing `db-prod` secret.
+- Have access to a test file system. Run `ti fs-vault list-secrets` to check whether a `db-prod` secret already exists. If it does, choose a different name and replace `db-prod` consistently in the names, paths, and grant scopes below, or use another test file system.
 - Use Bash or Zsh. Keep the owner's shell open so that the cleanup steps can use the temporary directory created below.
 - Make the file system and its owner token available to `ti`. See [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
