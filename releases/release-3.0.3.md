@@ -35,7 +35,7 @@ TiDB Ansible バージョン: 3.0.3
     - `Explain`で表示される計画結果が実際に実行された計画と一致しない問題を修正 [#11186](https://github.com/pingcap/tidb/pull/11186)
     - ウィンドウ関数によって参照される重複メモリがクラッシュまたは誤った結果をもたらす可能性がある問題を修正[#11823](https://github.com/pingcap/tidb/pull/11823)
     - スローログの`Succ`フィールドの誤った情報を更新します [#11887](https://github.com/pingcap/tidb/pull/11887)
-- サーバ
+- サーバー
     - `tidb_back_off_wexight`変数の名前を`tidb_backoff_weight` に変更します [#11665](https://github.com/pingcap/tidb/pull/11665)
     - 現在のTiDBと互換性のある最小TiKVバージョンをv3.0.0 に更新します [#11618](https://github.com/pingcap/tidb/pull/11618)
     - テストのスイートが正しく使用されていることを確認するためのサポート`make testSuite` [#11685](https://github.com/pingcap/tidb/pull/11685)

@@ -24,7 +24,7 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
     - ヒストグラムが空の場合のpanic問題を修正[#7928](https://github.com/pingcap/tidb/pull/7928)
     - 統計情報のアップロード時にヒストグラムの境界が範囲外になる問題を修正[#7944](https://github.com/pingcap/tidb/pull/7944)
     - 統計サンプリングプロセスにおける値の最大長を制限する [#7982](https://github.com/pingcap/tidb/pull/7982)
-- サーバ
+- サーバー
     - ラッチをリファクタリングしてトランザクションの競合の誤判断を回避し、同時トランザクションの実行パフォーマンスを向上させる[#7711](https://github.com/pingcap/tidb/pull/7711)
     - 一部のケースでスロークエリを収集することによって発生するpanic問題を修正[#7874](https://github.com/pingcap/tidb/pull/7847)
     - `LOAD DATA`文で`ESCAPED BY`が空文字列の場合のpanic問題を修正 [#8005](https://github.com/pingcap/tidb/pull/8005)

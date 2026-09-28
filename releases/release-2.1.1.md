@@ -16,7 +16,7 @@ summary: TiDB 2.1.1は2018年12月12日にリリースされ、安定性、SQL�
     - パーティションテーブルの統計情報の自動収集をサポート [#8649](https://github.com/pingcap/tidb/pull/8649)
     - `abs`関数をプッシュダウンするときに誤って構成された整数型を修正します [#8628](https://github.com/pingcap/tidb/pull/8628)
     - JSON列のデータ競合を修正 [#8660](https://github.com/pingcap/tidb/pull/8660)
-- サーバ
+- サーバー
     - PDが故障したときにTSOで取得したトランザクションが正しくない問題を修正[#8567](https://github.com/pingcap/tidb/pull/8567)
     - ANSI標準に準拠していないステートメントによって発生するブートストラップエラーを修正 [#8576](https://github.com/pingcap/tidb/pull/8576)
     - トランザクションの再試行で誤ったパラメータが使用される問題を修正[#8638](https://github.com/pingcap/tidb/pull/8638)

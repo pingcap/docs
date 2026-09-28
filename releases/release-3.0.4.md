@@ -66,7 +66,7 @@ TiDB Ansible バージョン: 3.0.4
     - 時間の誤った丸めを修正します（たとえば、 `2019-09-11 11:17:47.999999666` `2019-09-11 11:17:48`に丸められる必要があります） [#12258](https://github.com/pingcap/tidb/pull/12258)
     - 表現ブロックリストの使い方を改良します（例えば、 `<` `It`に相当します） [#11975](https://github.com/pingcap/tidb/pull/11975)
     - 存在しない関数エラーのメッセージにデータベースプレフィックスを追加します（例： `[expression:1305]FUNCTION test.std_samp does not exist` ） [#12111](https://github.com/pingcap/tidb/pull/12111)
-- サーバ
+- サーバー
     - 最後のステートメントが`COMMIT` ときに前のステートメントを出力するために、スロークエリログに`Prev_stmt`フィールドを追加します。 [#12180](https://github.com/pingcap/tidb/pull/12180)
     - 冗長なフィールドを削除してスロークエリログの出力を最適化する[#12144](https://github.com/pingcap/tidb/pull/12144)
     - TiDB のローカルトランザクションの競合をチェックするデフォルトの動作を無効にするには、デフォルト値の`txn-local-latches.enable`を`false`に更新します。 [#12095](https://github.com/pingcap/tidb/pull/12095)
@@ -91,7 +91,7 @@ TiDB Ansible バージョン: 3.0.4
     - Raftstore が空のリージョンのキーの数を不正確にカウントする問題を修正しました [#5414](https://github.com/tikv/tikv/pull/5414)
     - RocksDB の二重リンクリストをサポートし、逆スキャンのパフォーマンスを向上しました。 [#5368](https://github.com/tikv/tikv/pull/5368)
     - 分割パフォーマンスを向上させるために、バッチリージョン分割コマンドと空分割コマンドをサポートします[#5470](https://github.com/tikv/tikv/pull/5470)
-- サーバ
+- サーバー
     - `-V`コマンドの出力形式が2.X の形式と一致しない問題を修正 [#5501](https://github.com/tikv/tikv/pull/5501)
     - Titanを3.0ブランチの最新バージョンにアップグレードします [#5517](https://github.com/tikv/tikv/pull/5517)
     - grpcio を v0.4.5 にアップグレード [#5523](https://github.com/tikv/tikv/pull/5523)

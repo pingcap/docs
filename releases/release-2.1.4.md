@@ -16,7 +16,7 @@ summary: TiDB 2.1.4およびTiDB Ansible 2.1.4は、2019年2月15日にリリー
     - Joinクエリの処理時に発生するpanic問題を修正[#9264](https://github.com/pingcap/tidb/pull/9264)
     - `VALUES`関数がENUM型を正しく処理しない問題を修正[#9280](https://github.com/pingcap/tidb/pull/9280)
     - 一部のケースで`DATE_ADD` `DATE_SUB`間違った結果の問題を修正[#9284](https://github.com/pingcap/tidb/pull/9284)
-- サーバ
+- サーバー
     - "reload privilege success"ログを最適化し、DEBUGレベルに変更します。 [#9274](https://github.com/pingcap/tidb/pull/9274)
 - DDL
     - `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`グローバル変数に変更する [#9134](https://github.com/pingcap/tidb/pull/9134)

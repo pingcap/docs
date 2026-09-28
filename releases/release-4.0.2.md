@@ -38,7 +38,7 @@ TiDB バージョン: 4.0.2
     - `IF()` / `BITXOR()` / `BITNEG()` / `JSON_LENGTH()`関数をTiFlashコプロセッサー にプッシュすることをサポート [#17592](https://github.com/pingcap/tidb/pull/17592) [#17651](https://github.com/pingcap/tidb/pull/17651)
     - `COUNT(DISTINCT)` のおおよその結果を計算する新しい集計関数`APPROX_COUNT_DISTINCT()`サポートします。 [#18120](https://github.com/pingcap/tidb/pull/18120)
     - TiFlashでの照合順序をサポートし、照合関連の関数をTiFlash にプッシュします。 [#17705](https://github.com/pingcap/tidb/pull/17705)
-    - `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバのステータス アドレスを示します。 [#17695](https://github.com/pingcap/tidb/pull/17695)
+    - `INFORMATION_SCHEMA.INSPECTION_RESULT`テーブルに`STATUS_ADDRESS`列を追加して、サーバーのステータス アドレスを示します。 [#17695](https://github.com/pingcap/tidb/pull/17695)
     - `MYSQL.BIND_INFO`表に`SOURCE`列を追加して、バインディングの作成方法を示します[#17587](https://github.com/pingcap/tidb/pull/17587)
     - SQL文のプランキャッシュの使用状況を示すために、 `PERFORMANCE_SCHEMA.EVENTS_STATEMENTS_SUMMARY_BY_DIGEST`表に`PLAN_IN_CACHE`と`PLAN_CACHE_HITS`列を追加します。 [#17493](https://github.com/pingcap/tidb/pull/17493)
     - `enable-collect-execution-info`設定項目と`tidb_enable_collect_execution_info`セッション変数を追加して、各オペレーターの実行情報を収集し、その情報をスロークエリログ に記録するかどうかを制御します。 [#18072](https://github.com/pingcap/tidb/pull/18072) [#18073](https://github.com/pingcap/tidb/pull/18073)

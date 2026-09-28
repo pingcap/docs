@@ -168,7 +168,7 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
 <SimpleTab groupId="language">
 <div label="Python" value="python">
 
-TiDBクライアントを使用して、Cohere埋め込みプロバイダのAPIキーを設定します。
+TiDBクライアントを使用して、Cohere埋め込みプロバイダーのAPIキーを設定します。
 
 ```python
 tidb_client.configure_embedding_provider(
@@ -180,7 +180,7 @@ tidb_client.configure_embedding_provider(
 </div>
 <div label="SQL" value="sql">
 
-SQLを使用して、Cohere埋め込みプロバイダのAPIキーを設定します。
+SQLを使用して、Cohere埋め込みプロバイダーのAPIキーを設定します。
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_COHERE_API_KEY = "{your-cohere-api-key}";

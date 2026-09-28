@@ -22,7 +22,7 @@ summary: TiDB 2.1ベータリリースには、安定性、SQLオプティマイ
     - 実行パフォーマンスを向上させるために、 `Hash Join`のテーブルのうち`Inner`のテーブルと`Outer`テーブルを同時に読み取ります。
     - いくつかのシナリオで`INSERT … ON DUPLICATE KEY UPDATE …`の誤った結果を修正しました
     - 組み込み関数`CONCAT_WS` 、 `FLOOR` 、 `CEIL` 、 `DIV`の誤った結果を修正しました
-- サーバ
+- サーバー
     - HTTP APIを追加して、TiKVクラスタ内のテーブルリージョンの分散を分散します。
     - 自動`Analyze`のしきい値を制御するための`auto_analyze_ratio`システム変数を追加します
     - 一般ログを開くかどうかを制御するHTTP APIを追加します

@@ -139,7 +139,7 @@ TiDB バージョン: 5.0.6
     - TiCDC
 
         - `force-replicate`が有効になっているときに、有効なインデックスのない一部のパーティションテーブルが無視される可能性がある問題を修正[#2834](https://github.com/pingcap/tiflow/issues/2834)
-        - `cdc cli`予期しないパラメータを受け取ったときにユーザパラメータを黙って切り捨て、ユーザ入力パラメータが失われる問題を修正[#2303](https://github.com/pingcap/tiflow/issues/2303)
+        - `cdc cli`予期しないパラメータを受け取ったときにユーザーパラメータを黙って切り捨て、ユーザー入力パラメータが失われる問題を修正[#2303](https://github.com/pingcap/tiflow/issues/2303)
         - Kafka メッセージの書き込み中にエラーが発生すると、TiCDC 同期タスクが一時停止する可能性がある問題を修正しました[#2978](https://github.com/pingcap/tiflow/issues/2978)
         - 一部のタイプの列を Open Protocol 形式にエンコードするときに発生する可能性のあるpanic問題を修正しました。 [#2758](https://github.com/pingcap/tiflow/issues/2758)
         - デフォルト値の`max-message-bytes`を`10M` に設定することで、Kafkaが過度に大きなメッセージを送信する可能性がある問題を修正しました。 [#3081](https://github.com/pingcap/tiflow/issues/3081)

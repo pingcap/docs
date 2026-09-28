@@ -55,7 +55,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - `USE`文権限チェックを追加する [#8414](https://github.com/pingcap/tidb/pull/8418)
     - `SET GLOBAL`文権限チェックを追加する [#8837](https://github.com/pingcap/tidb/pull/8837)
     - `SHOW PROCESSLIST`文権限チェックを追加する [#7858](https://github.com/pingcap/tidb/pull/7858)
-- サーバ
+- サーバー
     - `Trace`機能サポート [#9029](https://github.com/pingcap/tidb/pull/9029)
     - プラグインフレームワークサポート [#8788](https://github.com/pingcap/tidb/pull/8788)
     - `unix_socket`とTCPを同時に使用してデータベースに接続することをサポートします [#8836](https://github.com/pingcap/tidb/pull/8836)

@@ -33,7 +33,7 @@ TiDB Ansible バージョン: 2.1.16
     - `CONVERT_TZ`関数が無効な引数を受け入れたときに`NULL`が正しく返されない問題を修正しました [#11357](https://github.com/pingcap/tidb/pull/11357)
     - `PARTITION BY LIST`文でエラーが報告される問題を修正しました。(現在は構文のみがサポートされています。TiDBが文を実行すると、通常のテーブルが作成され、プロンプトメッセージが表示されます) [#11236](https://github.com/pingcap/tidb/pull/11236)
     - `Mod(%)` `Multiple(*)`演算で、 `Minus(-)`以下の桁数が多い場合（ `select 0.000 % 0.11234500000000000000`など）に MySQL の結果と矛盾する`0`結果が返される問題を修正しました[#11353](https://github.com/pingcap/tidb/pull/11353)
-- サーバ
+- サーバー
     - `OnInit` コールバックされたときにプラグインが`NULL`ドメインを取得する問題を修正 [#11426](https://github.com/pingcap/tidb/pull/11426)
     - スキーマを削除した後でも、スキーマ内のテーブル情報が HTTP インターフェース経由で取得できる問題を修正しました[#11586](https://github.com/pingcap/tidb/pull/11586)
 - DDL

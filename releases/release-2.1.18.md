@@ -30,7 +30,7 @@ TiDB Ansible バージョン: 2.1.18
     - `AutoIncrement`列が暗黙的に割り当てられた場合の動作を改善し、MySQLのAUTO_INCREMENTロックのデフォルトモード（ [「連続」ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ）との一貫性を保ちます。1行の`Insert`文で複数の`AutoIncrement` IDを暗黙的に割り当てる場合、TiDBは割り当てられた値の連続性を保証します。この改善により、JDBC `getGeneratedKeys()`メソッドはどのようなシナリオでも正しい結果を得ることができます[#12619](https://github.com/pingcap/tidb/pull/12619)
     - `HashAgg` `Apply` の子ノードとして機能するときにクエリがハングする問題を修正しました [#12769](https://github.com/pingcap/tidb/pull/12769)
     - 型変換に関して、 `AND`と`OR`論理式が誤った結果を返す問題を修正しました。 [#12813](https://github.com/pingcap/tidb/pull/12813)
-- サーバ
+- サーバー
     - `SLEEP()`関数が`KILL TIDB QUERY`ステートメントに対して無効であるという問題を修正 [#12159](https://github.com/pingcap/tidb/pull/12159)
     - `AUTO_INCREMENT` `MAX int64`と`MAX uint64`誤って割り当てた場合にエラーが報告されない問題を修正しました[#12210](https://github.com/pingcap/tidb/pull/12210)
     - ログレベルが`ERROR` ときにスロークエリログが記録されない問題を修正しました [#12373](https://github.com/pingcap/tidb/pull/12373)

@@ -89,7 +89,7 @@ TiDB Ansible バージョン: 3.0.0
 - 権限管理
     - `ANALYZE`、`USE`、`SET GLOBAL`、`SHOW PROCESSLIST`ステートメントに対して権限チェックを実行する
     - ロールベースのアクセス制御 (RBAC) をサポート (**Experimental**)
-- サーバ
+- サーバー
     - スロークエリログを最適化します。
         - ログ形式の再構築
         - ログの内容を最適化する
@@ -162,7 +162,7 @@ TiDB Ansible バージョン: 3.0.0
 - エンジン
     - メモリ管理を最適化してメモリ割り当てとコピーを削減`Iterator Key Bound Option`
     - 異なる列ファミリー間での`block cache`共有をサポート
-- サーバ
+- サーバー
     - コンテキストスイッチのオーバーヘッドを`batch commands`から削減
     - `txn scheduler`削除
     - `read index`と`GC worker`に関連する監視項目を追加する

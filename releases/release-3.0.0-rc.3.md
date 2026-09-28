@@ -42,7 +42,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     - `execdetails.ExecDetails`ポインタの結果としてコプロセッサーリソースを迅速に解放できないことによって引き起こされる、高同時実行シナリオでのOOM問題を修正しました。 [#10832](https://github.com/pingcap/tidb/pull/10832)
     - `kill`文によって発生するpanic問題を修正[#10876](https://github.com/pingcap/tidb/pull/10876)
 
-- サーバ
+- サーバー
     - GC を修復する際に goroutine がリークする可能性がある問題を修正しました [#10683](https://github.com/pingcap/tidb/pull/10683)
     - スロークエリで`host`情報を表示することをサポート [#10693](https://github.com/pingcap/tidb/pull/10693)
     - TiKV と相互作用するアイドルリンクの再利用をサポート [#10632](https://github.com/pingcap/tidb/pull/10632)
@@ -72,7 +72,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     - イテレータがステータスをチェックしないために、システム内に不完全なスナップショットが生成される問題を修正しました。 [#4936](https://github.com/tikv/tikv/pull/4936)
     - 異常な状況で電源障害が発生した後にスナップショットを受信するときに、ディスクへのデータのフラッシュが遅れることによって発生するデータ損失の問題を修正しました[#4850](https://github.com/tikv/tikv/pull/4850)
 
-- サーバ
+- サーバー
     - `block-size`構成の有効性をチェックする機能を追加する [#4928](https://github.com/tikv/tikv/pull/4928)
     - `READ_INDEX`関連の監視指標追加 [#4830](https://github.com/tikv/tikv/pull/4830)
     - GCワーカー関連の監視メトリックを追加する [#4922](https://github.com/tikv/tikv/pull/4922)

@@ -142,7 +142,7 @@ TiProxy は、TiProxy サーバーと TiDB サーバーの場所に基づいて�
 
 デフォルトでは、このポリシーの優先度は、ヘルスベース、メモリベース、CPUベースの負荷分散ポリシーよりも低くなっています。優先度を[`policy`](/tiproxy/tiproxy-configuration.md#policy)から`location`に設定することで、優先度を上げることができます。可用性とパフォーマンスを維持するには、少なくとも3台のTiDBサーバーを同じ場所に配置することを推奨します。
 
-TiProxyは、ラベル`zone`に基づいて自身とTiDBサーバの場所を決定します。以下の設定項目を設定する必要があります。
+TiProxyは、ラベル`zone`に基づいて自身とTiDBサーバーの場所を決定します。以下の設定項目を設定する必要があります。
 
 - TiDBサーバーの設定項目[`labels`](/tidb-configuration-file.md#labels)で、 `zone`現在のアベイラビリティゾーンに設定します。設定の詳細については、 [TiDBのラベルを構成する](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)を参照してください。
 - TiProxy の[`labels`](/tiproxy/tiproxy-configuration.md#labels)の設定項目で、 `zone`現在のアベイラビリティゾーンに設定します。

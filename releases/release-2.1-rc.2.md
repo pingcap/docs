@@ -32,7 +32,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - `ANALYZE TABLE WITH BUCKETS`文を使用してヒストグラム内のバケット数の設定をサポートします [#7619](https://github.com/pingcap/tidb/pull/7619)
     - 空のヒストグラムを更新するときにpanic問題を修正[#7640](https://github.com/pingcap/tidb/pull/7640)
     - 統計情報を使用して`information_schema.tables.data_length`を更新 [#7657](https://github.com/pingcap/tidb/pull/7657)
-- サーバ
+- サーバー
     - トレース関連の依存関係を追加する [#7532](https://github.com/pingcap/tidb/pull/7532)
     - Golang の`mutex profile`機能を有効にする [#7512](https://github.com/pingcap/tidb/pull/7512)
     - `Admin`文には`Super_priv`権限が必要です [#7486](https://github.com/pingcap/tidb/pull/7486)

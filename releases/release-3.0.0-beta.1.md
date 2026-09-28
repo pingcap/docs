@@ -54,7 +54,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     - `SET ROLE`と`CURRENT_ROLE`をサポート [#9581](https://github.com/pingcap/tidb/pull/9581)
     - `DROP ROLE`をサポート [#9616](https://github.com/pingcap/tidb/pull/9616)
     - `CREATE ROLE`をサポート [#9461](https://github.com/pingcap/tidb/pull/9461)
-- サーバ
+- サーバー
     - 現在のTiDBインスタンスの情報を取得するためのHTTPインターフェース`/debug/zip`を追加する [#9651](https://github.com/pingcap/tidb/pull/9651)
     - PumpまたはDrainerのステータスを確認するためのSQL文`show pump status`と`show drainer status`をサポートします[#9456](https://github.com/pingcap/tidb/pull/9456)
     - SQL文を使用してPumpまたはDrainerのステータスを変更する機能をサポート[#9789](https://github.com/pingcap/tidb/pull/9789)
