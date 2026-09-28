@@ -101,7 +101,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
     以下の変数が追加された場合、積分は完了です。
 
-    **一般的な**
+    **General**
 
     ```shell
     TIDB_HOST

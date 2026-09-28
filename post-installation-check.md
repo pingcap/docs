@@ -35,7 +35,7 @@ tiup cluster display tidb-test
 
 1. `${Grafana-ip}:3000`でGrafanaモニタリングにログインします。デフォルトのユーザー名とパスワードはどちらも`admin`です。
 
-2. TiDB ポートの状態と負荷監視情報を確認するには、 **[概要]**をクリックします。
+2. TiDB ポートの状態と負荷監視情報を確認するには、 **Overview**をクリックします。
 
     ![Grafana-overview](/media/tiup/grafana-overview.png)
 

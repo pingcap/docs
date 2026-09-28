@@ -279,7 +279,7 @@ access key を使用して認証するには、以下の手順に従ってくだ
     - 特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)からレプリケーションを開始する
     - 特定の時間からレプリケーションを開始する
 
-4. **Data Format**領域で、 **CSV形式**または**Canal-JSON**形式のいずれかを選択してください。
+4. **Data Format**領域で、 **CSV**または**Canal-JSON**形式のいずれかを選択してください。
 
      <SimpleTab>
      <div label="Configure CSV format">
@@ -288,8 +288,8 @@ access key を使用して認証するには、以下の手順に従ってくだ
 
     - **Binary Encode Method**：バイナリデータのエンコード方式。base64（デフォルト）または**hex**を選択できます。AWS DMSと連携する場合は、 **hex**を使用してください。
     - **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
-    - **区切り文字**：CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ（ `,` ）です。
-    - **引用符**：区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、引用符には二重引用符（ `"` ）が使用されます。
+    - **Delimiter**：CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ（ `,` ）です。
+    - **Quote**：区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、引用符には二重引用符（ `"` ）が使用されます。
     - **Null/Empty Values**：CSVファイル内でnull値または空値がどのように表現されるかを指定します。これは、データの適切な処理と解釈のために重要です。
     - **Include Commit Ts**：CSV行に[`commit-ts`](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-cloud-storage#replicate-change-data-to-storage-services)を含めるかどうかを制御します。
 

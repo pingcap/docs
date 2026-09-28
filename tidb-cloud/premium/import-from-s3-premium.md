@@ -48,7 +48,7 @@ TiDB Cloud Premiumがバケットを読み取れるようにするには、以�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックします。
 
-2. 左側のナビゲーションペインで、 **Data** &gt; **Import**をクリックし、 **[クラウドストレージからデータをインポート]**を選択します。
+2. 左側のナビゲーションペインで、 **Data** > **Import**をクリックし、 **Import data from Cloud Storage**を選択します。
 
 3. **Source Connection**ダイアログで：
     - **Storage Provider**を**Amazon S3**に設定します。

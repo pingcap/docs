@@ -58,7 +58,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
     - **Storage Provider**： **Google Cloud Storage**を選択してください。
     - **Source URI** ：サンプルデータURI `gs://tidbcloud-samples-us-west1/`を入力してください。
-    - **Google CloudサービスアカウントID** ： TiDB Cloudは、このページにGoogle CloudサービスアカウントIDを表示します。サンプルデータURIを使用する場合は、そのまま続行できます。
+    - **Google Cloud Service Account ID**： TiDB Cloudは、このページにGoogle CloudサービスアカウントIDを表示します。サンプルデータURIを使用する場合は、そのまま続行できます。
 
 4. **Next**をクリックしてください。
 

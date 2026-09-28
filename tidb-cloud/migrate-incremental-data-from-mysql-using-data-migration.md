@@ -169,7 +169,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 2. ソース接続プロファイルを入力してください。
 
     - **Data source**：データソースの種類。
-    - **リージョン**：データソースのリージョン。クラウドデータベースの場合のみ必要です。
+    - **Region**：データソースのリージョン。クラウドデータベースの場合のみ必要です。
     - **Connectivity method**: データソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
 
     <CustomContent plan="dedicated">
@@ -187,7 +187,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="premium">
 
     - **Hostname or IP address**（公開の場合）：データソースのホスト名またはIPアドレス。
-    - **Private Endpoint**(プライベートリンク用): TiDB Cloud Premium インスタンスの**Networking** &gt; **[外部サービス向け AWS プライベートエンドポイント]**で作成したプライベートエンドポイント。または、**ここで [プライベートエンドポイントの作成] をクリックしてプライベートエンドポイント**を作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
+    - **Private Endpoint**(プライベートリンク用): TiDB Cloud Premium インスタンスの**Networking** > **AWS Private Endpoints for External Services**で作成したプライベートエンドポイント。または、**Create a Private Endpoint here**をクリックして作成します。セットアップの詳細については、データ移行ガイドの[プライベートリンクまたはプライベートエンドポイント](/tidb-cloud/migrate-from-mysql-using-data-migration.md#private-link-or-private-endpoint)セクションを参照してください。
 
     </CustomContent>
 
@@ -222,7 +222,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     <CustomContent plan="premium">
 
-    - 接続方法として**パブリック**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    - 接続方法として**Public**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
     - **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**をクリックして、 TiDB Cloudからのエンドポイント接続リクエストを承認してください。
 
     </CustomContent>
