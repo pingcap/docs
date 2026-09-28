@@ -83,8 +83,8 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | リージョン                       | オレゴン州 ( `us-west-2` )                                                                                                                                                                                                                                                                                                                                                | 該当なし                                                                                                                                                                                                                                                                                                                                                                                             |
 | TiDB Cloud AWS アカウントのプリンシパル | `arn:aws:iam::<account_id>:root`                                                                                                                                                                                                                                                                                                                                     | 該当なし                                                                                                                                                                                                                                                                                                                                                                                             |
-| AZ ID                       | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>                                                                                                                                                                                                                                                                                                         | AZ ID を AWS アカウントの AZ 名に合わせます。<br/>例：<ul><li> `usw2-az1` =&gt; `us-west-2a`</li><li> `usw2-az2` =&gt; `us-west-2c`</li><li> `usw2-az3` =&gt; `us-west-2b`</li></ul>                                                                                                                                                                                                                              |
-| Kafka Advertised Listener Pattern       | 一意のランダム文字列: `abc`<br/> AZ 用に生成されたパターン:<ul><li> `usw2-az1` =&gt; &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `usw2-az2` =&gt; &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `usw2-az3` =&gt; &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li></ul> | AZ 名を AZ 指定のパターンにマッピングします。後で、特定の AZ のブローカーに適切なパターンを設定してください。<ul><li> `us-west-2a` =&gt; &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2c` =&gt; &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2b` =&gt; &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li></ul> |
+| AZ ID                       | <ul><li>`usw2-az1` </li><li>`usw2-az2` </li><li> `usw2-az3`</li></ul>                                                                                                                                                                                                                                                                                                         | AZ ID を AWS アカウントの AZ 名に合わせます。<br/>例：<ul><li> `usw2-az1` => `us-west-2a`</li><li> `usw2-az2` => `us-west-2c`</li><li> `usw2-az3` => `us-west-2b`</li></ul>                                                                                                                                                                                                                              |
+| Kafka Advertised Listener Pattern       | 一意のランダム文字列: `abc`<br/> AZ 用に生成されたパターン:<ul><li> `usw2-az1` => &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `usw2-az2` => &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `usw2-az3` => &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li></ul> | AZ 名を AZ 指定のパターンにマッピングします。後で、特定の AZ のブローカーに適切なパターンを設定してください。<ul><li> `us-west-2a` => &lt;broker_id&gt;.usw2-az1.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2c` => &lt;broker_id&gt;.usw2-az2.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li><li> `us-west-2b` => &lt;broker_id&gt;.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:&lt;port&gt;</li></ul> |
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 
@@ -103,9 +103,9 @@ Kafka VPC には次のものが必要です。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
 
-- `usw2-az1` =&gt; `us-west-2a`
-- `usw2-az2` =&gt; `us-west-2c`
-- `usw2-az3` =&gt; `us-west-2b`
+- `usw2-az1` => `us-west-2a`
+- `usw2-az2` => `us-west-2c`
+- `usw2-az3` => `us-west-2b`
 
 次の AZ にプライベートサブネットを作成します。
 
@@ -665,10 +665,10 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 異なるポートを持つ4つのターゲットグループを持つネットワークロードバランサーを作成します。1つのターゲットグループはブートストラップ用で、他のターゲットグループは異なるブローカーにマッピングされます。
 
-1. ブートストラップターゲットグループ =&gt; 9092 =&gt; broker-node1:39092、broker-node2:39092、broker-node3:39092
-2. ブローカーターゲットグループ1 =&gt; 9093 =&gt; broker-node1:39092
-3. ブローカーターゲットグループ2 =&gt; 9094 =&gt; broker-node2:39092
-4. ブローカーターゲットグループ3 =&gt; 9095 =&gt; broker-node3:39092
+1. ブートストラップターゲットグループ => 9092 => broker-node1:39092、broker-node2:39092、broker-node3:39092
+2. ブローカーターゲットグループ1 => 9093 => broker-node1:39092
+3. ブローカーターゲットグループ2 => 9094 => broker-node2:39092
+4. ブローカーターゲットグループ3 => 9095 => broker-node3:39092
 
 ブローカーロールノードが複数ある場合は、マッピングを追加する必要があります。ブートストラップターゲットグループに少なくとも1つのノードがあることを確認してください。耐障害性を確保するため、各AZに1つずつ、合計3つのノードを追加することをお勧めします。
 

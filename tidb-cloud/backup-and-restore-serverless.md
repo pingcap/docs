@@ -145,7 +145,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 2. **Recycle Bin**ページで、 **Essential**タブをクリックすると、 TiDB Cloud Essentialインスタンスのごみ箱に移動します。
 
-3. 復元したいTiDB Cloud Essentialインスタンスを見つけて、 ** > **ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
+3. 復元したいTiDB Cloud Essentialインスタンスを見つけて、 **>**ボタンをクリックして、そのインスタンスで使用可能なバックアップを展開します。
 
     > **Note:**
     >

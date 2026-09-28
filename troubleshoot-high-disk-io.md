@@ -67,7 +67,7 @@ TiDBクラスターのメインストレージコンポーネントはTiKVです
 
 - クライアントが`server is busy`や特に`raftstore is busy`などのエラーを報告する場合、エラーは I/O の問題に関連している可能性があります。
 
-    `busy`エラーの具体的な原因を確認するには、監視パネル（ **Grafana** -&gt; **TiKV** -&gt; **errors** ）を確認してください。`server is busy`はTiKVのフロー制御メカニズムです。これにより、TiKVは`tidb/ti-client` 、現在のTiKVの負荷が高すぎるため、クライアントは後で再試行する必要があることを通知します。
+    `busy`エラーの具体的な原因を確認するには、監視パネル（ **Grafana** -> **TiKV** -> **errors** ）を確認してください。`server is busy`はTiKVのフロー制御メカニズムです。これにより、TiKVは`tidb/ti-client` 、現在のTiKVの負荷が高すぎるため、クライアントは後で再試行する必要があることを通知します。
 
 - TiKV RocksDB ログに`Write stall`が表示されます。
 
