@@ -141,7 +141,7 @@ Expected output: `Layer review proposal`. Checkpoint mounts are read-only. If a 
 
 > **Warning:**
 >
-> In `ti v0.2.6`, this unmount command can return `unmounted` even when the background mount process exited abnormally with `reason=force_quit`. Do not assume the checkpoint was fully read. Before continuing, inspect the mount log printed by `ti fs mount-file-system` (its path is shown in the mount command output) and look for `late pending drain`, `reason=force_quit`, or a non-zero exit code. If any of these appear, keep the local cache and re-verify the checkpoint's contents on a fresh mount at a new local path before treating the checkpoint as verified. For details, see [Unmount returns success but the mount process exits abnormally](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally).
+> In `ti` v0.2.6, and in v0.2.7 installations using bundled runtime `60b63d6`, checkpoint unmount can return `unmounted` even when the background process exited abnormally. Check the mount log before continuing; if shutdown was abnormal, keep the cache and re-verify the checkpoint's contents. For log locations and recovery steps, see [Unmount returns success but the mount process exits abnormally](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally).
 
 ## Fork a layer
 
@@ -181,7 +181,7 @@ A graceful unmount drains pending writes automatically.
 
 > **Warning:**
 >
-> In `ti v0.2.6`, a layer unmount can return `unmounted` even when the background mount process exited abnormally with `reason=force_quit`. A `0` exit status from `unmount-file-system` is not by itself proof that pending writes were flushed. Before committing or discarding this layer, inspect the mount log printed by `ti fs mount-file-system` (its path is shown in the mount command output) and look for `late pending drain`, `reason=force_quit`, or a non-zero exit code. If any of these appear, treat the shutdown as abnormal: keep the local cache, remount the layer at a new local path to re-verify its contents, and do not commit or discard the layer until verification completes. For details, see [Unmount returns success but the mount process exits abnormally](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally). For general recovery, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
+> In `ti` v0.2.6, and in v0.2.7 installations using bundled runtime `60b63d6`, layer unmount can return `unmounted` even when the background process exited abnormally. Check the mount log before committing or discarding the layer; if shutdown was abnormal, keep the cache and verify required files first. For log locations and recovery steps, see [Unmount returns success but the mount process exits abnormally](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally).
 
 Choose one outcome: **commit** applies the changes to the base file system; **rollback** discards them. To commit:
 

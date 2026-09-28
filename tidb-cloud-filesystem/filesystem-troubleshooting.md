@@ -64,7 +64,7 @@ If token mutation reports `fs.token_mount_active`, stop applications using the m
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-A graceful FUSE unmount drains pending writes automatically. Verify the mount log for `reason=force_quit` before treating a `0` exit status as proof of drain; see [Unmount returns success but the mount process exits abnormally](#unmount-returns-success-but-the-mount-process-exits-abnormally). WebDAV does not support `drain-file-system`; use graceful unmount for WebDAV.
+The CLI error message suggests running `drain-file-system` first, but a graceful FUSE unmount already drains pending writes, so a separate drain is unnecessary. Verify the mount log for `reason=force_quit` before treating a `0` exit status as proof of drain; see [Unmount returns success but the mount process exits abnormally](#unmount-returns-success-but-the-mount-process-exits-abnormally). WebDAV does not support `drain-file-system`; use graceful unmount for WebDAV.
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
 
@@ -145,7 +145,7 @@ For a known small test file, use the following procedure:
 1. If the mounted read or write has not returned after 30 seconds, interrupt the command with Ctrl+C. If it remains blocked, open another terminal outside the mount for diagnosis. Do not start additional workloads on the mount.
 2. Read the same file through `ti fs read-file --path "<remote-file-path>"`, using the same token and region. If the mount uses `--remote-path`, include that prefix in the remote file path. If this read also fails, resolve the reported authentication, region, or service error first. If it succeeds, focus diagnosis on the local mount path.
 3. Record `ti --version`, the OS version, the selected driver, elapsed time, and the mount diagnostic log when available. Do not include tokens or file contents. On macOS, automatic selection can choose WebDAV or FUSE; specify `--driver webdav` or `--driver fuse` when reproducing the problem.
-4. Stop applications using the mount, close open files, leave any shell working directory inside the mount, and try normal unmount:
+4. Stop applications using the mount, close open files, and change the working directory of any shell inside the mount to a path outside it. Then try normal unmount:
 
     ```bash
     ti fs unmount-file-system --mount-path /path/to/workspace
@@ -205,7 +205,21 @@ A graceful FUSE unmount flushes pending writes automatically, but only when the 
 
 In `ti v0.2.6`, a layer or checkpoint mount can return `unmounted` after approximately 30 seconds even when its background process reports `late pending drain` followed by `reason=force_quit` and exit code `1`. This behavior has been observed after reading a small file from a layer and after writing, fsyncing, and draining a layer mount.
 
-Treat this result as an abnormal shutdown. Keep the machine and local cache available, and verify required files with direct CLI reads. For a layer, supply its `--layer-id` when reading; for committed changes, read the base file system without selecting a layer. Do not delete local state or discard the layer until verification completes. Include the CLI version and redacted mount log when reporting the problem.
+This issue is also present in bundled runtime `60b63d6`, used with `ti` v0.2.7. The CLI and bundled runtime have separate versions, so the CLI version alone does not determine whether a mount is affected. For the status of the fix, see [the bundled mount runtime fix (Drive9 #1002)](https://github.com/mem9-ai/drive9/pull/1002).
+
+Before relying on a layer or checkpoint unmount, inspect its background mount log. In `ti` v0.2.7, a successful `mount-file-system` command does not display the log path. By default, you can find the logs with:
+
+```bash
+find "$HOME/.ti/drive9-home" -type f -path '*/drive9/mount-logs/mount-*.log'
+```
+
+On Linux, if `XDG_CACHE_HOME` is set, check `$XDG_CACHE_HOME/drive9/mount-logs` instead. Match the log to your mount path and the time of the mount, then look for `late pending drain`, `reason=force_quit`, or a non-zero background process exit code.
+
+If any of these appear:
+
+1. Treat the result as an abnormal shutdown and keep the machine and local cache available.
+2. Verify required layer files with direct CLI reads using `--layer-id`. For committed changes, read the base file system without selecting a layer. To verify a checkpoint, mount it at a new local path with the same `--layer-ref` and `--checkpoint-id` and read its required files again. You can also remount a writable layer at a new path to verify its contents independently of the previous mount.
+3. Do not commit or discard the layer, or delete local state, until verification completes. Include the CLI version and redacted mount log when reporting the problem.
 
 ## Report a problem
 
