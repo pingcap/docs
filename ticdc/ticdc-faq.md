@@ -253,7 +253,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 
 はい。1つのメッセージに複数の`update`または`delete`が含まれる場合があり、 `update`と`delete`共存することもあります。
 
-## TiCDC がデータを Kafka に複製する場合、TiCDC オープンプロトコルの出力でタイムスタンプ、テーブル名、スキーマ名を表示するにはどうすればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-view-the-timestamp-table-name-and-schema-name-in-the-output-of-ticdc-open-protocol}
+## TiCDC がデータを Kafka に複製する場合、TiCDC Open Protocolの出力でタイムスタンプ、テーブル名、スキーマ名を表示するにはどうすればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-view-the-timestamp-table-name-and-schema-name-in-the-output-of-ticdc-open-protocol}
 
 情報はKafkaメッセージのキーに含まれます。例:
 
@@ -266,29 +266,29 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="kafka://127
 }
 ```
 
-詳細については[TiCDCオープンプロトコルイベントフォーマット](/ticdc/ticdc-open-protocol.md#event-format)を参照してください。
+詳細については[TiCDC Open Protocolイベントフォーマット](/ticdc/ticdc-open-protocol.md#event-format)を参照してください。
 
 ## TiCDC がデータを Kafka に複製する場合、メッセージ内のデータ変更のタイムスタンプをどのように確認すればよいですか? {#when-ticdc-replicates-data-to-kafka-how-do-i-know-the-timestamp-of-the-data-changes-in-a-message}
 
 Kafka メッセージのキーの`ts` 18 ビット右に移動すると、Unix タイムスタンプを取得できます。
 
-## TiCDC オープンプロトコルは`null`どのように表現しますか? {#how-does-ticdc-open-protocol-represent-null}
+## TiCDC Open Protocolは`null`をどのように表現しますか? {#how-does-ticdc-open-protocol-represent-null}
 
-TiCDC オープンプロトコルでは、タイプ コード`6`は`null`表します。
+TiCDC Open Protocolでは、タイプ コード`6`は`null`表します。
 
 | タイプ | コード | 出力例                | 注記 |
 | :-- | :-- | :----------------- | :- |
 | ヌル  | 6   | `{"t":6,"v":null}` |    |
 
-詳細については[TiCDCオープンプロトコル列タイプコード](/ticdc/ticdc-open-protocol.md#column-type-code)を参照してください。
+詳細については[TiCDC Open Protocol列タイプコード](/ticdc/ticdc-open-protocol.md#column-type-code)を参照してください。
 
-## TiCDC オープンプロトコルの行変更イベントが`INSERT`イベントなのか`UPDATE`イベントなのかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-insert-event-or-an-update-event}
+## TiCDC Open Protocolの行変更イベントが`INSERT`イベントなのか`UPDATE`イベントなのかをどのように判断すればよいですか? {#how-can-i-tell-if-a-row-changed-event-of-ticdc-open-protocol-is-an-insert-event-or-an-update-event}
 
 - `UPDATE`イベントには`"p"`と`"u"`両方のフィールドが含まれます
 - `INSERT`イベントには`"u"`フィールドのみが含まれます
 - `DELETE`イベントには`"d"`フィールドのみが含まれます
 
-詳細については[オープンプロトコル行変更イベント形式](/ticdc/ticdc-open-protocol.md#row-changed-event)を参照してください。
+詳細については[Open Protocol行変更イベント形式](/ticdc/ticdc-open-protocol.md#row-changed-event)を参照してください。
 
 ## TiCDC はどのくらいの PDストレージを使用しますか? {#how-much-pd-storage-does-ticdc-use}
 
@@ -468,7 +468,7 @@ TiDBにはトランザクションタイムアウト機構があります。ト�
 
 > **Note:**
 >
-> 保存生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`が発生する可能性があります。このエラーを回避するには、レプリケーションに[オープンプロトコル](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)を使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)が含まれており、列が生成列かどうかを区別できます。
+> 保存生成列をKafkaまたはストレージサービスにレプリケーションし、その後MySQLに書き戻すと、 `Error 3105 (HY000): The value specified for generated column 'xx' in table 'xxx' is not allowed`が発生する可能性があります。このエラーを回避するには、レプリケーションに[Open Protocol](/ticdc/ticdc-open-protocol.md#ticdc-open-protocol)を使用します。このプロトコルの出力には[列のビットフラグ](/ticdc/ticdc-open-protocol.md#bit-flags-of-columns)が含まれており、列が生成列かどうかを区別できます。
 
 ## 頻繁に発生する`CDC:ErrMySQLDuplicateEntryCDC`エラーを解決するにはどうすればよいですか? {#how-do-i-resolve-frequent-cdcerrmysqlduplicateentrycdc-errors}
 

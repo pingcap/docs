@@ -93,7 +93,7 @@
       - [TiCDC Canal- JSONプロトコル](/ticdc/ticdc-canal-json.md)
       - [TiCDC CSVプロトコル](/ticdc/ticdc-csv.md)
       - [TiCDCDebeziumプロトコル](/ticdc/ticdc-debezium.md)
-      - [TiCDCオープンプロトコル](/ticdc/ticdc-open-protocol.md)
+      - [TiCDC Open Protocol](/ticdc/ticdc-open-protocol.md)
       - [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)
     - [TiCDC OpenAPI v2](/ticdc/ticdc-open-api-v2.md)
     - [TiCDC OpenAPI v1](/ticdc/ticdc-open-api.md)

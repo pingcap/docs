@@ -146,7 +146,7 @@ TiDB バージョン: 5.1.2
         - OOMを回避するために gRPC ウィンドウ サイズを縮小する [#2673](https://github.com/pingcap/tiflow/issues/2673)
         - メモリ負荷が高い場合の gRPC `keepalive`エラーを修正[#2202](https://github.com/pingcap/tiflow/issues/2202)
         - 符号なし`tinyint`がTiCDCをpanicさせるバグを修正[#2648](https://github.com/pingcap/tiflow/issues/2648)
-        - TiCDCオープンプロトコルにおける空の値の問題を修正しました。1つのトランザクションに変更がない場合、空の値を出力することはなくなりました[#2612](https://github.com/pingcap/tiflow/issues/2612)
+        - TiCDC Open Protocolにおける空の値の問題を修正しました。1つのトランザクションに変更がない場合、空の値を出力することはなくなりました[#2612](https://github.com/pingcap/tiflow/issues/2612)
         - 手動再起動時の DDL 処理のバグを修正[#2603](https://github.com/pingcap/tiflow/issues/2603)
         - メタデータ管理する際に、 `EtcdWorker`のスナップショット分離が誤って違反される可能性がある問題を修正しました [#2559](https://github.com/pingcap/tiflow/pull/2559)
         - TiCDCがテーブルを再スケジュールしているときに、複数のプロセッサが同じテーブルにデータを書き込む可能性があるバグを修正しました。 [#2230](https://github.com/pingcap/tiflow/issues/2230)
