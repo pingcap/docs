@@ -90,9 +90,9 @@ You cannot resolve a stuck conversion yourself. Contact [TiDB Cloud Support](/ti
 If you issue a reverse conversion for a table or partition while the previous conversion is still in progress, the previous conversion is voided:
 
 - In `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS`, the row for that table or partition is replaced by the new conversion. `DIRECTION` shows the new direction, `START_TIME` is the start time of the new conversion, and the progress counts from the beginning again. Only one row remains for that table or partition.
-- The history record of the voided conversion in `mysql.tidb_storage_class_transition_history` is updated to `state = 'SUPERSEDED'`. Its `finish_time` is the start time of the new conversion. Its `total_replicas` and `completed_replicas` are always `NULL`, because these counts are written to the history table only when a conversion completes.
+- The history record of the voided conversion in `mysql.tidb_storage_class_transition_history` is updated to `state = 'SUPERSEDED'`. Its `finish_time` is the start time of the new conversion, and its `total_replicas` and `completed_replicas` are the last values observed before it was voided. If nothing had been observed yet, both columns are `NULL`.
 
-The history table does not record how far a voided conversion had progressed. To watch a conversion, check `SHOW STORAGE_CLASS TRANSITIONS` while it is still in progress.
+To find out how far a voided conversion had progressed, query the history table for records with `state = 'SUPERSEDED'`.
 
 ### Query transition history
 
@@ -107,8 +107,8 @@ Every conversion is recorded in the `mysql.tidb_storage_class_transition_history
 | `partition_id` | BIGINT | The internal ID of the partition. The value is `NULL` for a table-level conversion |
 | `direction` | VARCHAR(16) | The conversion direction: `TO_IA` or `TO_STANDARD` |
 | `state` | VARCHAR(16) | The state of the conversion: `RUNNING`, `COMPLETED`, or `SUPERSEDED` |
-| `total_replicas` | BIGINT UNSIGNED | The total number of replicas involved in the conversion. The value is `NULL` unless the conversion reached `COMPLETED` |
-| `completed_replicas` | BIGINT UNSIGNED | The number of replicas that were ready. For a `COMPLETED` record, this equals `total_replicas`. The value is `NULL` for `RUNNING` and `SUPERSEDED` records |
+| `total_replicas` | BIGINT UNSIGNED | The total number of replicas involved in the conversion. For a `SUPERSEDED` record, this is the last value observed before the conversion was voided, or `NULL` if nothing was observed. The value is `NULL` while the conversion is `RUNNING` |
+| `completed_replicas` | BIGINT UNSIGNED | The number of replicas that were ready. For a `COMPLETED` record, this equals `total_replicas`. For a `SUPERSEDED` record, this is the last value observed before the conversion was voided, or `NULL` if nothing was observed. The value is `NULL` while the conversion is `RUNNING` |
 | `schema_version` | BIGINT | The TiDB schema version that the conversion belongs to |
 | `start_ts` | BIGINT UNSIGNED | The start TSO of the conversion. It identifies the conversion together with `table_id` and `direction` |
 | `start_time` | DATETIME(6) | The time when the conversion started |
@@ -141,7 +141,7 @@ LIMIT 1;
 
 -- Conversions that were voided by a reverse conversion
 SELECT table_schema, table_name, partition_name, direction,
-       start_time, finish_time, duration
+       completed_replicas, total_replicas, start_time, finish_time, duration
 FROM mysql.tidb_storage_class_transition_history
 WHERE state = 'SUPERSEDED'
 ORDER BY finish_time DESC;

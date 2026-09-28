@@ -53,7 +53,7 @@ You cannot resolve a stuck conversion yourself. Contact [TiDB Cloud Support](/ti
 
 The previous conversion is voided. In `SHOW STORAGE_CLASS TRANSITIONS`, the row for that table or partition is replaced by the new conversion: the direction changes, and the progress counts from the beginning again.
 
-The history record of the voided conversion in `mysql.tidb_storage_class_transition_history` is updated to `state = 'SUPERSEDED'`. Its `finish_time` is the start time of the new conversion. Its `completed_replicas` and `total_replicas` are `NULL`, because these counts are recorded only when a conversion completes. Because the work already done is discarded, reversing mid-way takes longer overall than waiting for the first conversion to finish.
+The history record of the voided conversion in `mysql.tidb_storage_class_transition_history` is updated to `state = 'SUPERSEDED'`. Its `finish_time` is the start time of the new conversion, and its `completed_replicas` and `total_replicas` are the last values observed before it was voided. Because the work already done is discarded, reversing mid-way takes longer overall than waiting for the first conversion to finish.
 
 When you calculate conversion duration statistics, filter on `state = 'COMPLETED'`: the `duration` of a `SUPERSEDED` record covers only the time until it was voided, not a full conversion.
 
