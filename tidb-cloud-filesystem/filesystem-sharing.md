@@ -31,12 +31,17 @@ To share part of a file system with another user or environment:
 
 1. Decide which paths they need to access and what they need to do with those paths.
 
-2. If the path you want to share does not already exist, create it. The following example creates `/reports`:
+2. If the path you want to share does not already exist, create it, then put the files you want to share into it. The following example creates `/reports` and adds `summary.txt`:
 
     ```bash
     ti fs create-directory \
       --file-system-id "<file-system-id>" \
       --path /reports
+
+    echo "ready for review" | ti fs copy-file \
+      --file-system-id "<file-system-id>" \
+      --from-stdin \
+      --to-remote /reports/summary.txt
     ```
 
 3. Create a scoped token for the user or environment.
@@ -166,6 +171,8 @@ If different users or workflows need to make changes independently before applyi
 Removing the token from the local environment prevents that environment from using the saved value, but does not revoke the token itself. Anyone who still has the token can continue using it until it expires or is revoked.
 
 ### On the machine where you manage the file system
+
+These steps accept your TiDB Cloud API credentials, or an owner token that you pass with `TI_FS_TOKEN` or `--fs-token`. An owner token that is only saved in local credentials is not used here, and these commands then ask for API credentials instead.
 
 1. Find the token you want to revoke:
 
