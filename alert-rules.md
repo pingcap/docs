@@ -21,7 +21,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 
 このセクションでは、TiDBコンポーネントのアラートルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts-1}
+### 緊急レベルのアラート {#emergency-level-alerts-1}
 
 #### `TiDB_schema_error` {#tidb_schema_error}
 
@@ -174,7 +174,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 
 このセクションでは、PDコンポーネントのアラートルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts-2}
+### 緊急レベルのアラート {#emergency-level-alerts-2}
 
 #### `PD_cluster_down_store_nums` {#pd_cluster_down_store_nums}
 
@@ -419,7 +419,7 @@ summary: TiDB クラスターのアラートルールについて学習します
 
 このセクションでは、TiKVコンポーネントのアラートルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts-3}
+### 緊急レベルのアラート {#emergency-level-alerts-3}
 
 #### `TiKV_memory_used_too_fast` {#tikv_memory_used_too_fast}
 
@@ -782,7 +782,7 @@ TiCDC アラートルールの詳細な説明については、 [TiCDCアラー�
 
 このセクションでは、Node_exporter ホストのアラートルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts-4}
+### 緊急レベルのアラート {#emergency-level-alerts-4}
 
 #### `NODE_disk_used_more_than_80%` {#node_disk_used_more_than_80}
 
@@ -929,7 +929,7 @@ TiCDC アラートルールの詳細な説明については、 [TiCDCアラー�
 
 このセクションでは、Blackbox_exporter の TCP、ICMP、および HTTP のアラートルールについて説明します。
 
-### 緊急レベルの警報 {#emergency-level-alerts}
+### 緊急レベルのアラート {#emergency-level-alerts}
 
 #### `TiDB_server_is_down` {#tidb_server_is_down}
 
