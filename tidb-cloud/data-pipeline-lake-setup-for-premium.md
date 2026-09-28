@@ -61,7 +61,7 @@ Before you configure the external stage, create an Amazon S3 bucket in the same 
 
         One IAM role is shared by TiDB Cloud (which writes to the stage) and TiDB Cloud Lake (which reads from the stage), so that you configure the authorization only once and no long-lived access key is stored. You can create the role with the CloudFormation template provided by TiDB Cloud, or set it up manually in AWS.
 
-        For the complete AWS-side setup, see [Set Up External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-lake-configure-external-stage.md#aws). After the role is created, in the TiDB Cloud console, paste the `RoleARN` output value in the **Role ARN** field, and, if you also created an SQS queue, copy the queue URL into the **SQS Queue URL** field.
+        For the complete AWS-side setup, see [Set Up an Amazon S3 External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-lake-configure-external-stage-aws.md). After the role is created, in the TiDB Cloud console, paste the `RoleARN` output value in the **Role ARN** field, and, if you also created an SQS queue, copy the queue URL into the **SQS Queue URL** field.
 
     - Method 2: Use an AWS access key
 
@@ -69,7 +69,7 @@ Before you configure the external stage, create an Amazon S3 bucket in the same 
         >
         > Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For stronger security, use **AWS Role ARN** instead.
 
-        For the complete AWS-side setup, including the IAM user, its permissions, and the optional SQS queue, see [Bucket Access with Access Key](/tidb-cloud/data-pipeline-lake-configure-external-stage.md#option-3-bucket-access-with-access-key-not-recommended). Then, in the TiDB Cloud console, select **AWS Access Key**, and fill in **Access Key ID** and **Secret Access Key**.
+        For the complete AWS-side setup, including the IAM user, its permissions, and the optional SQS queue, see [Bucket Access with Access Key](/tidb-cloud/data-pipeline-lake-configure-external-stage-aws.md#option-3-bucket-access-with-access-key-not-recommended). Then, in the TiDB Cloud console, select **AWS Access Key**, and fill in **Access Key ID** and **Secret Access Key**.
 
     After you have filled in the required information for the method you selected, click **Test Connection** to verify that TiDB Cloud can access the bucket. If the check fails, verify the bucket region and the permissions granted to the role or the access key, and then test the connection again.
 
