@@ -107,7 +107,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 2. **Import data from Cloud Storage**をクリックします。
 
@@ -160,7 +160,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 2. **Import data from Cloud Storage**をクリックします。
 
@@ -211,7 +211,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 2. **Import data from Cloud Storage**をクリックします。
 
@@ -262,7 +262,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 2. **Import data from Cloud Storage**をクリックします。
 

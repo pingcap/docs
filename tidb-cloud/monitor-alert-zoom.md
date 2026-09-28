@@ -103,7 +103,7 @@ TiDB Cloud Essentialインスタンスのアラート通知を購読するには
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Alert Subscription**をクリックします。
 
 3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
@@ -132,7 +132,7 @@ TiDB Cloud Premiumインスタンスのアラート通知を購読するには�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Alert Subscription**をクリックします。
 
 3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 

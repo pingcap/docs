@@ -110,7 +110,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 2. **Import data from Cloud Storage**をクリックします。
 
@@ -163,7 +163,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 2. **Import data from Cloud Storage**をクリックします。
 
@@ -214,7 +214,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+    2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 2. **Import data from Cloud Storage**をクリックします。
 
@@ -232,7 +232,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
         - **Private Link**：Azure プライベートエンドポイント経由で接続し、ネットワークから隔離されたアクセスを実現します。ストレージアカウントがパブリックアクセスをブロックしている場合、またはセキュリティポリシーでプライベート接続が必要な場合にこのオプションを使用します。**Private Link**を選択した場合は、追加フィールド**Azure Blob Storage Resource ID**も入力する必要があります。リソース ID を確認するには：
 
             1. [Azureポータル](https://portal.azure.com/)にアクセスします。
-            2. ストレージアカウントに移動し、 **Overview** &gt; **JSON View**をクリックします。
+            2. ストレージアカウントに移動し、 **Overview** > **JSON View**をクリックします。
             3. `id`プロパティの値をコピーします。リソース ID は`/subscriptions/<subscription_id>/resourceGroups/<resource_group>/providers/Microsoft.Storage/storageAccounts/<account_name>`の形式です。
 
     - **Credentials**: TiDB Cloud がAzure Blob Storage コンテナー内のソースファイルにアクセスできるようにするためのアカウント SAS トークンを入力します。まだお持ちでない場合は、 **[ここをクリックして Azure ARM テンプレートを使用して新しいものを作成する]**をクリックし、画面の指示に従うか、アカウント SAS トークンを手動で作成します。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-azure-blob-storage-access)を参照してください。
@@ -243,7 +243,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     1. [Azureポータル](https://portal.azure.com/)に移動し、ストレージアカウントに移動します。
 
-    2. **Networking** &gt; **Private endpoint connections**をクリックします。
+    2. **Networking** > **Private endpoint connections**をクリックします。
 
     3. TiDB Cloudからの保留中の接続リクエストを見つけて、 **Approve**をクリックします。
 

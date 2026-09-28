@@ -40,7 +40,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 1. クラスター API キーを作成します。
 
-    [Confluent Cloud](https://confluent.cloud)にサインインします。**Data integration**&gt; **APIキー**&gt;**キーの作成 を**選択します。表示される**APIキーのスコープの選択**ページで、**グローバルアクセス**を選択します。
+    [Confluent Cloud](https://confluent.cloud)にサインインします。**Data integration** > **APIキー** > **キーの作成 を**選択します。表示される**APIキーのスコープの選択**ページで、**グローバルアクセス**を選択します。
 
     作成後、以下に示すようにキーペア ファイルが生成されます。
 
@@ -59,7 +59,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 2. スキーマレジストリ エンドポイントを記録します。
 
-    Confluent Cloud Console で、 **Schema Registry** &gt; **API endpoint**を選択します。スキーマレジストリエンドポイントを記録します。以下は例です。
+    Confluent Cloud Console で、 **Schema Registry** > **API endpoint**を選択します。スキーマレジストリエンドポイントを記録します。以下は例です。
 
     ```
     https://yyy-yyyyy.us-east-2.aws.confluent.cloud
@@ -67,7 +67,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 3. スキーマレジストリ API キーを作成します。
 
-    Confluent Cloud Console で、 **Schema Registry** &gt; **API credentials**を選択します。 **Edit**をクリックし、 **Create key**をクリックします。
+    Confluent Cloud Console で、 **Schema Registry** > **API credentials**を選択します。 **Edit**をクリックし、 **Create key**をクリックします。
 
     作成後、次に示すようにキーペア ファイルが生成されます。
 
@@ -171,9 +171,9 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 1. Snowflake でデータベースとスキーマを作成します。
 
-    Snowflakeコントロールコンソールで、 **Data** &gt; **Database**を選択します。`TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
+    Snowflakeコントロールコンソールで、 **Data** > **Database**を選択します。`TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
 
-2. Confluent Cloud Consoleで、 **Data integration** &gt; **Connectors** &gt; **Snowflake Sink**を選択します。以下のページが表示されます。
+2. Confluent Cloud Consoleで、 **Data integration** > **Connectors** > **Snowflake Sink**を選択します。以下のページが表示されます。
 
     ![Add snowflake sink connector](/media/integrate/add-snowflake-sink-connector.png)
 
@@ -189,7 +189,7 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
     ![Data preview](/media/integrate/data-preview.png)
 
-6. Snowflakeコンソールで、 **Data** &gt; **Database** &gt; **TPCC** &gt; **TiCDC**を選択します。TiDBの増分データがSnowflakeに複製されていることがわかります。Snowflakeとのデータ統合は完了しています（上図を参照）。ただし、Snowflakeのテーブル構造はTiDBとは異なり、データは増分的にSnowflakeに挿入されます。ほとんどのシナリオでは、SnowflakeのデータはTiDBの変更ログを保存するのではなく、TiDBのデータのレプリカであることが想定されます。この問題については、次のセクションで説明します。
+6. Snowflakeコンソールで、 **Data** > **Database** > **TPCC** > **TiCDC**を選択します。TiDBの増分データがSnowflakeに複製されていることがわかります。Snowflakeとのデータ統合は完了しています（上図を参照）。ただし、Snowflakeのテーブル構造はTiDBとは異なり、データは増分的にSnowflakeに挿入されます。ほとんどのシナリオでは、SnowflakeのデータはTiDBの変更ログを保存するのではなく、TiDBのデータのレプリカであることが想定されます。この問題については、次のセクションで説明します。
 
 ### SnowflakeでTiDBテーブルのデータレプリカを作成する {#create-data-replicas-of-tidb-tables-in-snowflake}
 
@@ -362,7 +362,7 @@ Microsoft SQL Server は、Microsoft が開発したリレーショナルデー�
     (6 rows affected)
     ```
 
-2. Confluent Cloud Console で、 **Data integration** &gt; **Connectors** &gt; **Microsoft SQL Server Sink**を選択します。以下のページが表示されます。
+2. Confluent Cloud Console で、 **Data integration** > **Connectors** > **Microsoft SQL Server Sink**を選択します。以下のページが表示されます。
 
     ![Topic selection](/media/integrate/topic-selection.png)
 

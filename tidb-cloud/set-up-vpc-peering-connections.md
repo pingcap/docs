@@ -90,9 +90,9 @@ VPC ピアリングリクエストは、TiDB Cloudコンソールのプロジェ
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
-6. **Create**をクリックしてVPCピアリングリクエストを送信し、 **VPC Peering** &gt; **AWS**タブでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
+6. **Create**をクリックしてVPCピアリングリクエストを送信し、 **VPC Peering** > **AWS**タブでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
 
-7. 新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** &gt; **View**をクリックします。 **VPC Peering Details**ページが表示されます。
+7. 新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** > **View**をクリックします。 **VPC Peering Details**ページが表示されます。
 
 </div>
 <div label="VPC peering setting on the cluster-level Networking page">
@@ -107,7 +107,7 @@ VPC ピアリングリクエストは、TiDB Cloudコンソールのプロジェ
 
     2. ターゲットクラスターの名前をクリックすると、概要ページに移動します。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
 3. **Networking**ページで**Create VPC Peering**をクリックし、既存の AWS VPC の必要な情報を入力します。
 
@@ -120,9 +120,9 @@ VPC ピアリングリクエストは、TiDB Cloudコンソールのプロジェ
 
     ![VPC peering](/media/tidb-cloud/vpc-peering/vpc-peering-creating-infos.png)
 
-4. **Create**をクリックしてVPCピアリングリクエストを送信し、 **Networking** &gt; **AWS VPC Peering**セクションでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
+4. **Create**をクリックしてVPCピアリングリクエストを送信し、 **Networking** > **AWS VPC Peering**セクションでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
 
-5. 新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** &gt; **View**をクリックします。 **AWS VPC Peering Details**ページが表示されます。
+5. 新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** > **View**をクリックします。 **AWS VPC Peering Details**ページが表示されます。
 
 </div>
 </SimpleTab>
@@ -271,9 +271,9 @@ VPC ピアリングリクエストは、TiDB Cloudコンソールのプロジェ
     - VPC Network Name
     - VPC CIDR
 
-6. **Create**をクリックしてVPCピアリングリクエストを送信し、 **VPC Peering** &gt; **Google Cloud**タブでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
+6. **Create**をクリックしてVPCピアリングリクエストを送信し、 **VPC Peering** > **Google Cloud**タブでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
 
-7. 新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** &gt; **View**をクリックします。 **VPC Peering Details**ページが表示されます。
+7. 新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** > **View**をクリックします。 **VPC Peering Details**ページが表示されます。
 
 </div>
 <div label="VPC peering setting on the cluster-level Networking page">
@@ -288,7 +288,7 @@ VPC ピアリングリクエストは、TiDB Cloudコンソールのプロジェ
 
     2. ターゲットクラスターの名前をクリックすると、概要ページに移動します。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
 3. **Networking**ページで**Create VPC Peering**をクリックし、既存の Google Cloud VPC の必要な情報を入力します。
 
@@ -300,9 +300,9 @@ VPC ピアリングリクエストは、TiDB Cloudコンソールのプロジェ
     - VPC Network Name
     - VPC CIDR
 
-4. **Create**をクリックしてVPCピアリングリクエストを送信し、 **Networking** &gt; **Google Cloud VPC Peering**セクションでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
+4. **Create**をクリックしてVPCピアリングリクエストを送信し、 **Networking** > **Google Cloud VPC Peering**セクションでVPCピアリング情報を確認します。新しく作成されたVPCピアリングのステータスは**System Checking**です。
 
-5. 新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** &gt; **View**をクリックします。 **Google Cloud VPC Peering Details**ページが表示されます。
+5. 新しく作成したVPCピアリングの詳細情報を表示するには、 **Action**列の**...** > **View**をクリックします。 **Google Cloud VPC Peering Details**ページが表示されます。
 
 </div>
 </SimpleTab>

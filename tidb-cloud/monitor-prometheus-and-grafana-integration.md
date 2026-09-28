@@ -44,7 +44,7 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 <div label="Cluster-level Prometheus integration">
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Integrations**をクリックします。
 3. **Integrations**ページで、 **Integration to Prometheus**をクリックします。
 4. **Add File**をクリックすると、現在のクラスター用の`scrape_config`ファイルが生成されて表示されます。
 5. `scrape_config`ファイルの内容のコピーを作成して、後で使用してください。

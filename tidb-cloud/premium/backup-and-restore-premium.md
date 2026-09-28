@@ -36,7 +36,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 左側のナビゲーションペインで、 **Data** &gt; **Backup**をクリックします。
+2. 左側のナビゲーションペインで、 **Data** > **Backup**をクリックします。
 
 ## 自動バックアップ {#automatic-backups}
 

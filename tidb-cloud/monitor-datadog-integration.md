@@ -49,7 +49,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Integrations**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Integrations**をクリックします。
 
 3. **Integrations**ページで、 **Integration to Datadog**をクリックします。
 

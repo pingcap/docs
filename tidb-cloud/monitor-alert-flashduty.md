@@ -83,7 +83,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Alert Subscription**をクリックします。
 
 3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
@@ -110,7 +110,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Alert Subscription**をクリックします。
 
 3. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 
@@ -140,7 +140,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
-4. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
+4. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** > **Unsubscribe**をクリックします。
 5. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
@@ -148,8 +148,8 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 <CustomContent plan="essential">
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
-3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Alert Subscription**をクリックします。
+3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** > **Unsubscribe**をクリックします。
 4. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>
@@ -157,8 +157,8 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 <CustomContent plan="premium">
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
-3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** &gt; **Unsubscribe**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Alert Subscription**をクリックします。
+3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** > **Unsubscribe**をクリックします。
 4. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
 </CustomContent>

@@ -504,7 +504,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 2. **Basic**タブで、 **Subscription** 、 **Resource group** 、 **Region**を選択し、 **Name**フィールドに`kafka-pls`と入力して、 **[次へ: 送信設定 &gt;]**をクリックします。
 
-3. **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security &gt;**をクリックします。
+3. **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security > **をクリックします。
 
     - **Load balancer**： `kafka-lb`
     - **ロードバランサのフロントエンド IP アドレス**: `kafka-lb-ip`
@@ -515,7 +515,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - **表示**については、 **Restricted by subscription**または**Anyone with your alias**を選択します。
     - **Subscription-level access and auto-approval**については、**Add subscriptions**をクリックして、 [前提条件](#prerequisites)で取得したTiDB Cloud Azure アカウントのサブスクリプションを追加します。
 
-5. **Next : Tags >**をクリックし、 **Next : Review + create &gt;**をクリックして情報を確認します。
+5. **Next : Tags >**をクリックし、 **Next : Review + create > **をクリックして情報を確認します。
 
 6. **Create**をクリックします。操作が完了したら、後で使用するためにプライベートリンクサービスのエイリアスを書き留めておきます。
 
@@ -523,7 +523,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)に戻り、クラスターが**Private Link**経由で Kafka クラスターに接続するための変更フィードを作成します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
-2. **Configure the changefeed target** &gt; **Connectivity Method** &gt; **Private Link**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
+2. **Configure the changefeed target** > **Connectivity Method** > **Private Link**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
     - **Kafka Advertised Listener Pattern**: [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列。
     - **プライベートリンクサービスのエイリアス**: [2. プライベートリンクサービスを設定する](#2-set-up-private-link-service)で取得したプライベートリンクサービスのエイリアス。

@@ -36,7 +36,7 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 
 AWS アカウント ID とアベイラビリティゾーンを表示するには、次の手順を実行します。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 2. **AWS Private Endpoints for External Services**領域で、 **Create Private Endpoint for External Services**をクリックします。
 3. 表示されたダイアログで、AWS アカウント ID とアベイラビリティゾーンを見つけることができます。
 

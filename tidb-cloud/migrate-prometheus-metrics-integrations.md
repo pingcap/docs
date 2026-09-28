@@ -37,7 +37,7 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
 
-2. 左側のナビゲーションパネルで、 **Settings** &gt; **Integrations**をクリックします。
+2. 左側のナビゲーションパネルで、 **Settings** > **Integrations**をクリックします。
 
 3. **Integrations**ページで、新しい Prometheus 統合を作成します。詳細については、 [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)を参照してください。
 

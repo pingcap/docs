@@ -39,7 +39,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3. TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
     2. 概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
     3. **Create Changefeed**をクリックします。
         1. **Destination**で、 **Kafka**を選択します。
@@ -67,7 +67,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3. TiDB Cloud Premium インスタンスから Kafka デプロイメント情報を取得します。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB インスタンスのインスタンス概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB インスタンスのインスタンス概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
     2. 概要ページで、TiDBインスタンスのリージョンを確認します。Kafkaクラスターが同じリージョンにデプロイされることを確認してください。
     3. チェンジフィードを作成するには、チュートリアルを参照してください。
 
@@ -731,7 +731,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
         - `usw2-az2`と`broker-usw2-az2 subnet`
         - `usw2-az3`と`broker-usw2-az3 subnet`
     - **Security groups**: 次のルールで新しいセキュリティグループを作成します。
-        - 受信ルールは、Kafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}` 。リージョン内のTiDB CloudのCIDRを取得するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の左上隅にあるコンボボックスを使用してターゲットプロジェクトに切り替え、左側のナビゲーションペインで**Project Settings** &gt; **Network Access**をクリックし、 **Project CIDR** &gt; **AWS**をクリックします。
+        - 受信ルールは、Kafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}` 。リージョン内のTiDB CloudのCIDRを取得するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の左上隅にあるコンボボックスを使用してターゲットプロジェクトに切り替え、左側のナビゲーションペインで**Project Settings** > **Network Access**をクリックし、 **Project CIDR** > **AWS**をクリックします。
         - アウトバウンドルールは、Kafka VPC へのすべての TCP を許可します: タイプ - `All TCP` 、宛先 - `Anywhere-IPv4`
     - リスナーとルーティング:
         - プロトコル: `TCP` ; ポート: `9092` ; 転送先: `bootstrap-target-group`

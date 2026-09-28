@@ -253,7 +253,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 <details><summary>Azure Database for MySQL の構成 - Flexible Server</summary>
 
-1. [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL servers**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーションペインで**Setting** &gt; **Server parameters**をクリックします。
+1. [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL servers**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーションペインで**Setting** > **Server parameters**をクリックします。
 
 2. 各パラメータを検索し、その値を更新します。
 
@@ -442,11 +442,11 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
 
 新しいプライベートエンドポイントを追加するには、以下の手順を実行してください。
 
-1. [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL servers**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーションペインで**Setting** &gt; **Networking**をクリックします。
+1. [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL servers**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーションペインで**Setting** > **Networking**をクリックします。
 
 2. **Networking**ページで、**Private endpoints**セクションまでスクロールダウンし、 **+ Create private endpoint**をクリックして、画面の指示に従ってプライベートエンドポイントを設定します。
 
-    セットアップ中に、**Virtual Network**タブでTiDB Cloud がアクセスできる仮想ネットワークとサブネットを選択し、 **DNS**タブで**Private DNS integration**を有効にします。プライベートエンドポイントが作成されてデプロイされたら、 **Go to resource**をクリックし、左側のナビゲーションペインで**Settings** &gt; **DNS configuration**をクリックして、**Customer Visible FQDNs**セクションでインスタンスへの接続に使用するホスト名を見つけます。通常、ホスト名は`<your-instance-name>.mysql.database.azure.com`形式です。
+    セットアップ中に、**Virtual Network**タブでTiDB Cloud がアクセスできる仮想ネットワークとサブネットを選択し、 **DNS**タブで**Private DNS integration**を有効にします。プライベートエンドポイントが作成されてデプロイされたら、 **Go to resource**をクリックし、左側のナビゲーションペインで**Settings** > **DNS configuration**をクリックして、**Customer Visible FQDNs**セクションでインスタンスへの接続に使用するホスト名を見つけます。通常、ホスト名は`<your-instance-name>.mysql.database.azure.com`形式です。
 
     詳細な手順については、Azure ドキュメントの[プライベートリンクセンターを使用してプライベートエンドポイントを作成します](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-networking-private-link-portal#create-a-private-endpoint-via-private-link-center)を参照してください。
 
@@ -527,7 +527,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 TiDB Cloud Premiumインスタンスの概要ページに移動してください。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
 3. **AWS Private Endpoints for External Services**セクションで、 **[Create Private Endpoint for External Services]**をクリックします。
 
@@ -658,7 +658,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Data Migration**をクリックします。
+2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
 
 3. **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
@@ -770,7 +770,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     - 接続方法として**Public IP**または**VPC Peering**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
     - 接続方法として**Private Link**を使用する場合、エンドポイントリクエストを承認するよう求められます。
         - AWSの場合： [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**をクリックし、 TiDB Cloudからのエンドポイントリクエストを承認します。
-        - Azure の場合: [Azureポータル](https://portal.azure.com)に移動し、MySQL Flexible Server を名前で検索し、左側のナビゲーションペインで**Setting** &gt; **Networking**をクリックし、右側の**Private endpoint**セクションを見つけて、 TiDB Cloudからの保留中の接続リクエストを承認します。
+        - Azure の場合: [Azureポータル](https://portal.azure.com)に移動し、MySQL Flexible Server を名前で検索し、左側のナビゲーションペインで**Setting** > **Networking**をクリックし、右側の**Private endpoint**セクションを見つけて、 TiDB Cloudからの保留中の接続リクエストを承認します。
 
     </CustomContent>
     <CustomContent plan="essential">
@@ -969,7 +969,7 @@ TiDB Cloud Dedicatedは、さまざまなシナリオにおけるパフォーマ
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2. 対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Data Migration**をクリックします。
+2. 対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
 
 3. **Data Migration**ページで、スケールアップする移行ジョブを探します。**Action**列で、 **[...]** &gt; **Scale Up/Down**をクリックします。
 

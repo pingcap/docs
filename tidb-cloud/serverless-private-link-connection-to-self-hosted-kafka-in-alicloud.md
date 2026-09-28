@@ -42,7 +42,7 @@ summary: Alibaba Cloud Endpoint Service のプライベートリンク接続を�
 
 Alibaba Cloud アカウント ID とアベイラビリティゾーンを表示するには、次の手順を実行します。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 2. **Alibaba Cloud Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 3. 表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティゾーンを見つけることができます。
 
