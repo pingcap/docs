@@ -3,13 +3,13 @@ title: TiDB 7.5.8 リリースノート
 summary: TiDB 7.5.8 の改善点とバグ修正について説明します。
 ---
 
-# TiDB 7.5.8 リリースノート
+# TiDB 7.5.8 リリースノート {#tidb-7-5-8-release-notes}
 
 リリース日: 2026年9月17日
 
-TiDB version: 7.5.8
+TiDB バージョン: 7.5.8
 
-Quick access: [クイックスタート](https://docs.pingcap.com/tidb/v7.5/quick-start-with-tidb) | [本番デプロイ](https://docs.pingcap.com/tidb/v7.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v7.5/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v7.5/production-deployment-using-tiup)
 
 ## 改善点 {#improvements}
 
