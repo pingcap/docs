@@ -36,7 +36,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
         1. **Import from S3**をクリックします。
         2. **File URI**欄に入力してください。
-        3. **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
+        3. **AWS Role ARN**を選択し、 **Click here to create new one with AWS CloudFormation**をクリックします。
 
     <CustomContent plan="starter,essential">
 
@@ -44,7 +44,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
         1. **Export data to...** &gt; **Amazon S3**をクリックします。TiDB Cloud StarterまたはEssentialインスタンスでこれまでデータのインポートまたはエクスポートが行われていない場合は、ページ下部の**Click here to export data to...** &gt; **Amazon S3**をクリックしてください。
         2. **Folder URI**欄に入力してください。
-        3. **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
+        3. **AWS Role ARN**を選択し、 **Click here to create new one with AWS CloudFormation**をクリックします。
 
     </CustomContent>
 
@@ -55,7 +55,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
         1. **Export Data**をクリックします。
         2. **Target Connection**で**Amazon S3**を選択してください。
         3. **Folder URI**欄に入力してください。
-        4. **AWS Role ARN**を選択し、[**ここをクリックして AWS CloudFormation を使用して新しいロールを作成します] をクリックします**。
+        4. **AWS Role ARN**を選択し、 **Click here to create new one with AWS CloudFormation**をクリックします。
 
     </CustomContent>
 
@@ -63,7 +63,7 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
     1. **Add New ARN**ダイアログで、 **AWS Console with CloudFormation Template**をクリックします。
 
-    2. [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールにログインすると、AWS CloudFormation の**Quick create stack**ページにリダイレクトされます。
+    2. [AWS マネジメントコンソール](https://console.aws.amazon.com)にログインすると、AWS CloudFormation の**Quick create stack**ページにリダイレクトされます。
 
     3. **Role Name**を入力してください。
 
@@ -81,7 +81,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
 2. AWS マネジメントコンソールで、Amazon S3 バケット用のマネージドポリシーを作成します。
 
-    1. [AWS マネジメントコンソール](https://console.aws.amazon.com/)コンソールにサインインし、 [Amazon S3コンソール](https://console.aws.amazon.com/s3/)を開きます。
+    1. [AWS マネジメントコンソール](https://console.aws.amazon.com/)にサインインし、 [Amazon S3コンソール](https://console.aws.amazon.com/s3/)を開きます。
 
     2. **バケット**一覧から対象バケットの名前を選択し、 **Copy ARN**をクリックしてS3バケットのARNを取得します（例： `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットのARNをメモしておいてください。
 
@@ -160,7 +160,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
-    2. 役割を作成するには、以下の情報を入力してください。
+    2. ロールを作成するには、以下の情報を入力してください。
 
         - **Trusted entity type**で**AWS account**を選択します。
         - **An AWS account**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
@@ -200,7 +200,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
 サービスアカウントキーを設定するには、以下の手順に従ってください。
 
-1. Google Cloud サービス[サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)ページで、 **CREATE SERVICE ACCOUNT**をクリックしてサービスアカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)を参照してください。
+1. Google Cloud の[サービスアカウントページ](https://console.cloud.google.com/iam-admin/serviceaccounts)で、 **CREATE SERVICE ACCOUNT**をクリックしてサービスアカウントを作成します。詳細については、 [サービスアカウントの作成](https://cloud.google.com/iam/docs/creating-managing-service-accounts)を参照してください。
 
     1. サービスアカウント名を入力してください。
 
@@ -337,7 +337,7 @@ TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにす�
 
     - **Action**セクションで、必要に応じて権限を選択してください。
 
-        TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjectsの**権限を付与してください。
+        TiDB Cloud Starter、 Essential、またはPremiumインスタンスにデータをインポートするには、 **oss:GetObject** 、 **oss:GetBucketInfo** 、および**oss:ListObjects**の権限を付与してください。
 
         TiDB Cloud Starter、 Essential、またはPremiumインスタンスからデータをエクスポートするには、 `oss:PutObject`と`oss:GetBucketInfo`の権限を付与してください。
 

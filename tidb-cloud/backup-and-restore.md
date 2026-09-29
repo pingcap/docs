@@ -34,7 +34,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ### 自動バックアップを有効にする {#turn-on-auto-backup}
 
-TiDB Cloud Dedicated は、 [スナップショットバックアップ](https://docs.pingcap.com/tidb/stable/br-snapshot-guide)と[ログバックアップ](https://docs.pingcap.com/tidb/stable/br-pitr-guide)両方をサポートしています。スナップショットバックアップを使用すると、データをバックアップポイントに復元できます。デフォルトでは、スナップショットバックアップは自動的に作成され、バックアップ保持ポリシーに従って保存されます。自動バックアップはいつでも無効にできます。
+TiDB Cloud Dedicated は、 [スナップショットバックアップ](https://docs.pingcap.com/tidb/stable/br-snapshot-guide)と[ログバックアップ](https://docs.pingcap.com/tidb/stable/br-pitr-guide)の両方をサポートしています。スナップショットバックアップを使用すると、データをバックアップポイントに復元できます。デフォルトでは、スナップショットバックアップは自動的に作成され、バックアップ保持ポリシーに従って保存されます。自動バックアップはいつでも無効にできます。
 
 #### ポイントインタイム復元を有効にする {#turn-on-point-in-time-restore}
 
@@ -68,7 +68,7 @@ TiDB Cloud Dedicatedクラスターでこの機能を有効にするには、以
 
 #### バックアップスケジュールを設定する {#configure-backup-schedule}
 
-TiDB Cloud Dedicatedは、日次および週次のバックアップスケジュールをサポートしています。デフォルトでは、バックアップスケジュールは日次に設定されています。スナップショットバックアップを開始する特定の日時（曜日または曜日）を選択することもできます。
+TiDB Cloud Dedicatedは、日次および週次のバックアップスケジュールをサポートしています。デフォルトでは、バックアップスケジュールは日次に設定されています。スナップショットバックアップを開始する、1日または1週間のうちの特定の時刻を選択することもできます。
 
 TiDB Cloud Dedicatedクラスターのバックアップ スケジュールを設定するには、次の手順を実行します。
 
@@ -108,7 +108,7 @@ TiDB Cloud Dedicatedクラスターのバックアップ スケジュールを�
 > **Note:**
 >
 > - 現在、デュアルリージョンバックアップ機能は、AWSおよびGoogle Cloud上でホストされているTiDB Cloud Dedicatedクラスターでのみ利用可能です。
-> - Google Cloud 上でホストされているTiDB Cloud Dedicatedクラスターは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage と同様に、 **TiDB Cloud Dedicated は、Google デュアルリージョンストレージと同じマルチリージョンコード内でのみデュアルリージョンペアリングをサポートします**。たとえば、アジアでは現在、デュアルリージョンストレージのために東京と大阪をペアリングする必要があります。詳細については、 [二重領域](https://cloud.google.com/storage/docs/locations#location-dr)を参照してください。
+> - Google Cloud 上でホストされているTiDB Cloud Dedicatedクラスターは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage と同様に、 **TiDB Cloud Dedicated は、Google デュアルリージョンストレージと同じマルチリージョンコード内でのみデュアルリージョンペアリングをサポートします**。たとえば、アジアでは現在、デュアルリージョンストレージのために東京と大阪をペアリングする必要があります。詳細については、 [デュアルリージョン](https://cloud.google.com/storage/docs/locations#location-dr)を参照してください。
 
 TiDB Cloud Dedicatedは、クラスタリージョンから別のリージョンにバックアップを複製することで、デュアルリージョンバックアップをサポートします。この機能を有効にすると、すべてのバックアップが指定されたリージョンに自動的に複製されます。これにより、リージョンをまたいだデータ保護とディザスタリカバリ機能が実現します。データの約99%は1時間以内にセカンダリリージョンに複製されると推定されます。
 
@@ -146,7 +146,7 @@ TiDB Cloud Dedicatedクラスターの自動バックアップを無効にする
 
 > **Tip**
 >
-> デュアル リージョンのバックアップを無効にしても、セカンダリ リージョンのバックアップはすぐには削除されません。これらのバックアップは、バックアップ保持スケジュールに従って後でクリーンアップされます。すぐに削除するには、手動で[バックアップを削除する](#delete-backups)。
+> デュアル リージョンのバックアップを無効にしても、セカンダリ リージョンのバックアップはすぐには削除されません。これらのバックアップは、バックアップ保持スケジュールに従って後でクリーンアップされます。すぐに削除するには、手動で[バックアップを削除](#delete-backups)できます。
 
 TiDB Cloud Dedicatedクラスターのデュアルリージョンバックアップを無効にするには、次の手順を実行します。
 

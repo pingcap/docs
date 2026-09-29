@@ -53,18 +53,18 @@ TiDB Cloudでは、メトリクスデータは7日間保持されます。
 | Parse Duration                          | avg、99              | SQL文の解析に要する平均時間、または99パーセンタイル値。                                                                                                     |
 | Compile Duration                       | avg、99              | 解析されたSQL抽象構文木（AST）を実行計画にコンパイルする際に要する平均時間、または99パーセンタイル値。                                                                            |
 | Execute Duration                          | avg、99              | SQL文の実行計画の実行に要する平均時間、または99パーセンタイル値。                                                                                         |
-| Average TiDB KV Request Duration           | {Request Type}         | `Get` 、 `Prewrite`などのリクエストタイプに基づいて、すべて`Commit`でKVリクエストを実行するのに要する平均時間。                                                              |
-| Average TiKV gRPC Duration              | {Request Type}         | `kv_get` 、 `kv_prewrite` `kv_commit`でgRPCリクエストを実行するのに要した平均時間。                                                                      |
+| Average TiDB KV Request Duration           | {Request Type}         | `Get` 、 `Prewrite` 、 `Commit`などのリクエストタイプに基づいて、すべてのTiDBノードでKVリクエストを実行するのに要する平均時間。                                                              |
+| Average TiKV gRPC Duration              | {Request Type}         | `kv_get` 、 `kv_prewrite` 、 `kv_commit`などのリクエストタイプに基づいて、すべてのTiKVインスタンスでgRPCリクエストを実行するのに要した平均時間。                                                                      |
 | Average / P99 PD TSO Wait/RPC Duration | wait-avg/99、rpc-avg/99 | 待機時間：すべてのTiDBノードにおいてPDがTSOを返すまでの待機時間の平均値、または99パーセンタイル値。<br/> RPC: PDにTSOリクエストを送信してから、すべてのTiDBノードでTSOを受信するまでの平均時間、または99パーセンタイル値。    |
 | Average / P99 Storage Async Write Duration       | avg、99              | 非同期書き込みで消費される平均時間、または99パーセンタイル値。平均ストレージ非同期書き込み時間 = 平均ストレージ時間 + 平均適用時間。                                                           |
 | Average / P99 Store Duration             | avg、99              | 非同期書き込み時のストレージループで消費される平均時間、または99パーセンタイル値。                                                                                         |
-| Average / P99 Apply Duration                 | avg、99              | 非同期書き込み中にループを適用する際に要する平均時間、または99パーセンタイル値。                                                                                          |
+| Average / P99 Apply Duration                 | avg、99              | 非同期書き込み中の適用ループ（apply loop）に要する平均時間、または99パーセンタイル値。                                                                                          |
 | Average / P99 Append Log Duration            | avg、99              | Raftがログを追加する際に要する平均時間、または99パーセンタイル値。                                                                                               |
 | Average / P99 Commit Log Duration             | avg、99              | Raftがログをコミットするのに要する平均時間、または99パーセンタイル値。                                                                                             |
 | Average / P99 Apply Log Duration               | avg、99              | Raftがログを適用するために要する平均時間、または99パーセンタイル値。                                                                                              |
 | Affected Rows                       | {SQL type}             | SQLタイプ別の1秒あたりの処理行数。                                                                                                                |
 | Leader Count                       | {instance}               | TiKVノードによってホストされているRaftリーダーリージョンの数。                                                                                                |
-| Region Count                        | {instance}               | TiKVノードによって管理されるデータ領域の総数。                                                                                                          |
+| Region Count                        | {instance}               | TiKVノードによって管理されるデータリージョンの総数。                                                                                                          |
 
 ### サーバ {#server}
 

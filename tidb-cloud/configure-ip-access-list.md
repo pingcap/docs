@@ -9,7 +9,7 @@ TiDB Cloudの各TiDB Cloud Dedicatedクラスターに対して、IPアクセス
 
 > **Note:**
 >
-> このドキュメントは[**TiDB Cloud Dedicated**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)に適用されます。**{{{ .starter }}}** または **{{{ .essential }}}** のIPアクセスリストを設定する手順については、[Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
+> このドキュメントは[**TiDB Cloud Dedicated**](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)に適用されます。**{{{ .starter }}}** または **{{{ .essential }}}** のIPアクセスリストを設定する手順については、[パブリックエンドポイント向けに{{{ .starter }}}またはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
 
 ## IP アドレスを追加する {#add-an-ip-address}
 
