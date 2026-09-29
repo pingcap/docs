@@ -1,20 +1,17 @@
 ---
 title: Sink to TiDB Cloud Lake
 summary: Manual setup guide for building a TiDB Cloud Lake data pipeline on TiDB Cloud Essential instances using export, a changefeed, and TiDB Cloud Lake integration.
-aliases: ['/tidb-cloud/data-pipeline-lake-setup-for-essential']
 ---
 
 # Sink to TiDB Cloud Lake
 
-TiDB Cloud Essential does not provide the native Data Pipeline setup experience in the TiDB Cloud console. To replicate data from a TiDB Cloud Essential instance to TiDB Cloud Lake, you need to configure the pipeline manually.
-
-This guide walks you through the end-to-end setup: export a full snapshot to Amazon S3, create a changefeed to continuously write incremental changes to the same S3 location, and configure TiDB Cloud Lake to load both the snapshot and incremental data.
+This guide walks you through the end-to-end setup of a data pipeline from a TiDB Cloud Essential instance to TiDB Cloud Lake: export a full snapshot to Amazon S3, create a [changefeed](/tidb-cloud/changefeed-overview.md) to continuously write incremental changes to the same S3 location, and configure TiDB Cloud Lake to load both the snapshot and incremental data.
 
 ## Restrictions
 
 - The TiDB Cloud Lake warehouse must be in the **same region** as your Essential instance.
 - Only tables with a **primary key** can be replicated incrementally.
-- The pipeline requires manual setup and maintenance of AWS IAM resources and credentials, changefeeds, and TiDB Cloud Lake integrations.
+- The pipeline requires manual setup and maintenance of AWS IAM resources and credentials, a changefeed, and TiDB Cloud Lake integrations.
 - For details on DDL, DML, and column type support, see [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md).
 
 ## Prerequisites
