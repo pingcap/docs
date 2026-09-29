@@ -157,7 +157,7 @@ aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --region $
 
 > **Note:**
 >
-> `${your_vpc_region}` is the region where your VPC endpoint is created. For a cross-region connection, it is your region, not the region of your cluster. If you run the command in the wrong region, it fails with `InvalidVpcEndpointId.NotFound`.
+> `${your_vpc_region}` is the region where your VPC endpoint is created. For a cross-region connection, it is the region of your VPC endpoint, not the region of your TiDB cluster. If you run the command in the wrong region, it fails with `InvalidVpcEndpointId.NotFound`.
 
 Alternatively, you can find the command on the **Networking** page of your cluster. Locate the private endpoint and click **...** > **Enable DNS** in the **Action** column.
 
