@@ -150,7 +150,7 @@ For a TiDB Cloud Dedicated private endpoint connection that is not managed by Te
 
 1. Add an import block for the new `tidbcloud_dedicated_private_endpoint_connection` resource.
 
-    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,dedicated_private_endpoint_connection_id`:
+    Add the following import block to your `.tf` file, replace `example` with a desired resource name, and replace `${id}` with the format of `cluster_id,node_group_id,private_endpoint_connection_id`:
 
     ```
     import {
