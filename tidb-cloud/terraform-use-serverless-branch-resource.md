@@ -100,9 +100,9 @@ summary: サーバーレス ブランチ リソースを使用して、 TiDB Clo
 
     - 構成と状態の違いを確認できます。
     - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    - `known after apply` `apply`後の対応する値が取得されることを示します。
+    - `known after apply`は、`apply`後の対応する値が取得されることを示します。
 
-4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4. 計画の内容がすべて問題ない場合は、`yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -166,7 +166,7 @@ Terraform によって管理されていないTiDB Cloud Starter またはTiDB C
 
 1. 新しい`tidbcloud_serverless_branch`リソースのインポート ブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` `cluster_id,branch_id`の形式に置き換えます。
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,branch_id`の形式に置き換えます。
 
     ```
     import {

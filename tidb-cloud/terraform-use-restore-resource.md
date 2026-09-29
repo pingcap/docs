@@ -14,7 +14,7 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
-- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter およびTiDB Cloud Essential クラスターではご利用いただけません`tidbcloud_restore`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
+- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter およびTiDB Cloud Essential クラスターではご利用いただけません。`tidbcloud_restore`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
 
 ## 復元タスクを作成する {#create-a-restore-task}
 
@@ -180,7 +180,7 @@ summary: tidbcloud_restore` リソースを使用して復元タスクを作成�
 
 5. 数分お待ちください。その後、 `terraform refersh`を使用してステータスを更新してください。
 
-6. クラスターのステータスが`AVAILABLE`に変わると、復元タスクは`RUNNING`なり、最終的に`SUCCESS`になります。
+6. クラスターのステータスが`AVAILABLE`に変わると、復元タスクは`RUNNING`になり、最終的に`SUCCESS`になります。
 
 復元されたクラスターはTerraformによって管理されないことに注意してください。これらは[インポートする](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)ことで管理できます。
 

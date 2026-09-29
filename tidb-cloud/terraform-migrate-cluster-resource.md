@@ -5,7 +5,7 @@ summary: クラスター リソースをサーバーレスまたは専用のク�
 
 # クラスタリソースをサーバーレスまたは専用クラスタリソースに移行する {#migrate-cluster-resource-to-serverless-or-dedicated-cluster-resource}
 
-TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソースが`tidbcloud_serverless_cluster`と`tidbcloud_dedicated_cluster` 2つの新しいリソースに置き換えられます。TiDB Cloud Terraform Provider v0.4.0 以降のバージョンをご利用の場合は、このドキュメントに従って`tidbcloud_cluster`リソースを`tidbcloud_serverless_cluster`または`tidbcloud_dedicated_cluster`リソースに移行できます。
+TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソースが`tidbcloud_serverless_cluster`と`tidbcloud_dedicated_cluster`の2つの新しいリソースに置き換えられます。TiDB Cloud Terraform Provider v0.4.0 以降のバージョンをご利用の場合は、このドキュメントに従って`tidbcloud_cluster`リソースを`tidbcloud_serverless_cluster`または`tidbcloud_dedicated_cluster`リソースに移行できます。
 
 > **Tip:**
 >
@@ -43,7 +43,7 @@ terraform state rm ${your_target_cluster_resource}
 
 ## ステップ4. 新しいクラスターリソースのインポートブロックを追加する {#step-4-add-an-import-block-for-the-new-cluster-resource}
 
-- ターゲットクラスターがTiDB Cloud Starter の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
+- ターゲットクラスターがTiDB Cloud Starter の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を[ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
     ```
     # TiDB Cloud Starter
@@ -53,7 +53,7 @@ terraform state rm ${your_target_cluster_resource}
     }
     ```
 
-- ターゲットクラスターがTiDB Cloud Dedicated の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}` [ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
+- ターゲットクラスターがTiDB Cloud Dedicated の場合は、次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を[ステップ1](#step-1-identify-the-tidbcloud_cluster-resource-to-migrate)から取得したクラスター ID に置き換えます。
 
     ```
     # TiDB Cloud Dedicated
@@ -71,7 +71,7 @@ terraform state rm ${your_target_cluster_resource}
 terraform plan -generate-config-out=generated.tf
 ```
 
-上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
+上記のコマンドでは、既存の`.tf`ファイル名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
 ## ステップ6. 生成された設定を確認して適用する {#step-6-review-and-apply-the-generated-configuration}
 
