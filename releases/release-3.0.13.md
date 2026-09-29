@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.13 Release Notes
-summary: TiDB 3.0.13 は 2020年 4月 22日にリリースされました。バグ修正には、INSERT ... ON DUPLICATE KEY UPDATE`文の問題の解決と、TiKV の `リージョン Merge` 中にシステムが停止して使用できなくなる問題の修正が含まれています。
+summary: "TiDB 3.0.13 は 2020年 4月 22日にリリースされました。バグ修正には、`INSERT ... ON DUPLICATE KEY UPDATE`文の問題の解決と、TiKV の `リージョン Merge` 中にシステムが停止して使用できなくなる問題の修正が含まれています。"
 ---
 
 # TiDB 3.0.13 リリースノート {#tidb-3-0-13-release-notes}

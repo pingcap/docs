@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.0 Release Notes
-summary: 2018年4月27日にリリースされたTiDB 2.0 GAでは、MySQLとの互換性、SQLオプティマイザ、エグゼキューター、そして安定性が向上しました。主なアップデートには、メモリ使用量を削減するコンパクトなデータ構造、空のGROUP BY句に対応するStream 集計オペレーター、そしてより多くのMySQL構文のサポートが含まれます。TiKV機能には、リージョン Merge`、`Raw DeleteRange` API、そして`ReadPool`を使用した読み取りパフォーマンスの向上が含まれます。TiSpark 1.0 GAは、Apache Sparkを使用したTiDBデータの分散コンピューティングを提供し、gRPC通信フレームワーク、計算プッシュダウン、インデックス関連のサポート、コストベースの最適化、そして複数のSparkインターフェースをサポートします。
+summary: "2018年4月27日にリリースされたTiDB 2.0 GAでは、MySQLとの互換性、SQLオプティマイザ、エグゼキューター、そして安定性が向上しました。主なアップデートには、メモリ使用量を削減するコンパクトなデータ構造、空のGROUP BY句に対応するStream 集計オペレーター、そしてより多くのMySQL構文のサポートが含まれます。TiKV機能には、`Region Merge`、`Raw DeleteRange` API、そして`ReadPool`を使用した読み取りパフォーマンスの向上が含まれます。TiSpark 1.0 GAは、Apache Sparkを使用したTiDBデータの分散コンピューティングを提供し、gRPC通信フレームワーク、計算プッシュダウン、インデックス関連のサポート、コストベースの最適化、そして複数のSparkインターフェースをサポートします。"
 ---
 
 # TiDB 2.0 リリースノート {#tidb-2-0-release-notes}

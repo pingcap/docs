@@ -1,6 +1,6 @@
 ---
 title: "`ANALYZE` Embedded in DDL Statements"
-summary: このドキュメントでは、新しく作成または再編成されたインデックスの DDL文に埋め込まれた ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。
+summary: "このドキュメントでは、新しく作成または再編成されたインデックスの DDL文に埋め込まれた `ANALYZE` 機能について説明します。この機能により、新しいインデックスの統計がすぐに更新されるようになります。"
 ---
 
 # DDL文に埋め込まれた`ANALYZE` <span class="version-mark">(v8.5.4 で導入)</span> {#analyze-embedded-in-ddl-statements-span-class-version-mark-introduced-in-v8-5-4-span}

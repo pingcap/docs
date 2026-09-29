@@ -1,6 +1,6 @@
 ---
 title: tiup cluster list
-summary: tiup-cluster は、同一の制御マシンを用いた複数のクラスタのデプロイをサポートします。tiup cluster list` コマンドは、現在ログインしているユーザーがデプロイしたすべてのクラスタを出力します。デプロイされたクラスタのデータは `~/.tiup/ storage/cluster/clusters/` ディレクトリに保存されます。ユーザーは、クラスタ名、デプロイユーザー、バージョン、パス、クラスタへの接続に使用された秘密鍵を確認できます。
+summary: "tiup-cluster は、同一の制御マシンを用いた複数のクラスタのデプロイをサポートします。`tiup cluster list` コマンドは、現在ログインしているユーザーがデプロイしたすべてのクラスタを出力します。デプロイされたクラスタのデータは `~/.tiup/ storage/cluster/clusters/` ディレクトリに保存されます。ユーザーは、クラスタ名、デプロイユーザー、バージョン、パス、クラスタへの接続に使用された秘密鍵を確認できます。"
 ---
 
 # tiup cluster list {#tiup-cluster-list}

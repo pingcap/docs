@@ -1,6 +1,6 @@
 ---
 title: TiCDC Behavior in Splitting UPDATE Events
-summary: TiCDC が UPDATE` イベントを分割するかどうかに関する動作の変更について、その理由と影響を含めて紹介します。
+summary: "TiCDC が `UPDATE` イベントを分割するかどうかに関する動作の変更について、その理由と影響を含めて紹介します。"
 ---
 
 # TiCDC の UPDATE イベントの分割動作 {#ticdc-behavior-in-splitting-update-events}

@@ -1,6 +1,6 @@
 ---
 title: tiup mirror publish
-summary: tiup mirror publish` コマンドは、新しいコンポーネントまたはバージョンを公開するために使用されます。公開できるのは、アクセス権を持つコンポーネント所有者のみです。
+summary: "`tiup mirror publish` コマンドは、新しいコンポーネントまたはバージョンを公開するために使用されます。公開できるのは、アクセス権を持つコンポーネント所有者のみです。"
 ---
 
 # tiup mirror publish {#tiup-mirror-publish}

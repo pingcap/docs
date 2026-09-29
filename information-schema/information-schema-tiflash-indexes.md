@@ -1,6 +1,6 @@
 ---
 title: TIFLASH_INDEXES
-summary: INFORMATION_SCHEMA` の `TIFLASH_INDEXES` テーブルについて学習します。
+summary: "`INFORMATION_SCHEMA` の `TIFLASH_INDEXES` テーブルについて学習します。"
 ---
 
 # TIFLASH_INDEXES {#tiflash-indexes}

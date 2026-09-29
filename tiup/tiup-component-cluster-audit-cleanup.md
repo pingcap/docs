@@ -1,6 +1,6 @@
 ---
 title: tiup cluster audit cleanup
-summary: tiup cluster audit cleanup` コマンドは、`tiup cluster` コマンドによって生成されたログをクリーンアップするために使用されます。ログの保持日数を指定したり、ヘルプ情報を表示したりするオプションがあります。出力結果から、ログのクリーンアップが正常に完了したことを確認できます。
+summary: "`tiup cluster audit cleanup` コマンドは、`tiup cluster` コマンドによって生成されたログをクリーンアップするために使用されます。ログの保持日数を指定したり、ヘルプ情報を表示したりするオプションがあります。出力結果から、ログのクリーンアップが正常に完了したことを確認できます。"
 ---
 
 # tiup cluster audit cleanup {#tiup-cluster-audit-cleanup}

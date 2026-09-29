@@ -1,6 +1,6 @@
 ---
 title: tiup completion
-summary: TiUPは、 tiup completionコマンドを使用して、bash`および`zsh`コマンドに対応したコマンドライン自動補完用の設定ファイルを生成します。`bash`コマンドを補完するには、`bash-completion`をインストールし、`tiup completion <shell>`構文を使用してシェルの種類を設定します。`bash`の場合は、コマンドをファイルに記述し、`.bash_profile`でsourceコマンドとして読み込みます。`zsh`の場合は、`tiup completion zsh`コマンドを使用します。
+summary: "TiUPは、 tiup completionコマンドを使用して、`bash`および`zsh`コマンドに対応したコマンドライン自動補完用の設定ファイルを生成します。`bash`コマンドを補完するには、`bash-completion`をインストールし、`tiup completion <shell>`構文を使用してシェルの種類を設定します。`bash`の場合は、コマンドをファイルに記述し、`.bash_profile`でsourceコマンドとして読み込みます。`zsh`の場合は、`tiup completion zsh`コマンドを使用します。"
 ---
 
 # tiup completion {#tiup-completion}

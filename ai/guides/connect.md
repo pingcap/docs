@@ -1,6 +1,6 @@
 ---
 title: Connect to TiDB
-summary: pytidb`クライアントを使用してTiDBデータベースに接続する方法を学びましょう。
+summary: "`pytidb`クライアントを使用してTiDBデータベースに接続する方法を学びましょう。"
 ---
 
 # TiDBに接続する {#connect-to-tidb}

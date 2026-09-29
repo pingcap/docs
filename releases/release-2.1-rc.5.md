@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1 RC5 Release Notes
-summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQLオプティマイザ、統計、実行エンジンが改善されました。修正には、IndexReader、IndexScan Prepared Statement、Union Statement、JSONデータ変換に関する問題が含まれます。サーバーの改善には、ログの可読性、テーブルデータの取得、環境変数の追加が含まれます。PDでは、リージョンキーの読み取り、regions/check` API、PD再起動結合、イベント損失に関する問題が修正されました。TiKVでは、エラーメッセージの改善、panicマークファイルの追加、grpcioのダウングレード、`kv_scan`インターフェースへの上限設定が追加されました。
+summary: "TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQLオプティマイザ、統計、実行エンジンが改善されました。修正には、IndexReader、IndexScan Prepared Statement、Union Statement、JSONデータ変換に関する問題が含まれます。サーバーの改善には、ログの可読性、テーブルデータの取得、環境変数の追加が含まれます。PDでは、リージョンキーの読み取り、`regions/check` API、PD再起動結合、イベント損失に関する問題が修正されました。TiKVでは、エラーメッセージの改善、panicマークファイルの追加、grpcioのダウングレード、`kv_scan`インターフェースへの上限設定が追加されました。"
 ---
 
 <!-- markdownlint-disable MD032 -->

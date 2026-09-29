@@ -1,6 +1,6 @@
 ---
 title: ADMIN ALTER DDL JOBS
-summary: TiDBデータベースにおけるADMIN ALTER DDL JOBS`の使用方法の概要。
+summary: "TiDBデータベースにおける`ADMIN ALTER DDL JOBS`の使用方法の概要。"
 ---
 
 # ADMIN ALTER DDL JOBS {#admin-alter-ddl-jobs}

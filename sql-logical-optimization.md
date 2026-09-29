@@ -1,6 +1,6 @@
 ---
 title: SQL Logical Optimization
-summary: SQL論理最適化の章では、TiDBクエリプラン生成における主要なロジック書き換えについて説明します。例えば、IN`サブクエリ「ta in (select t1.a from t1 where t1.b=tb)」はTiDB書き換えにより存在しません。主要な書き換えには、サブクエリ関連の最適化、カラムの剪定、相関サブクエリの非相関化、最大値/最小値の除去、Predicate Push Down、パーティションプルーニング、TopNオペレーターとLimitオペレーターのプッシュダウン、結合したテーブルの再配置などがあります。
+summary: "SQL論理最適化の章では、TiDBクエリプラン生成における主要なロジック書き換えについて説明します。例えば、`IN`サブクエリ「ta in (select t1.a from t1 where t1.b=tb)」はTiDB書き換えにより存在しません。主要な書き換えには、サブクエリ関連の最適化、カラムの剪定、相関サブクエリの非相関化、最大値/最小値の除去、Predicate Push Down、パーティションプルーニング、TopNオペレーターとLimitオペレーターのプッシュダウン、結合したテーブルの再配置などがあります。"
 ---
 
 # SQL論理最適化 {#sql-logical-optimization}

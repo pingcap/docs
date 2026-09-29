@@ -1,6 +1,6 @@
 ---
 title: Column-Level Privilege Management
-summary: TiDBは、MySQL互換の列レベルの権限管理メカニズムをサポートしています。GRANT`または`REVOKE`コマンドを使用することで、テーブルの特定の列に対する`SELECT`、`INSERT`、`UPDATE`、および`REFERENCES`権限を付与または取り消すことができ、よりきめ細かなアクセス制御を実現できます。
+summary: "TiDBは、MySQL互換の列レベルの権限管理メカニズムをサポートしています。`GRANT`または`REVOKE`コマンドを使用することで、テーブルの特定の列に対する`SELECT`、`INSERT`、`UPDATE`、および`REFERENCES`権限を付与または取り消すことができ、よりきめ細かなアクセス制御を実現できます。"
 ---
 
 # 列レベルの権限管理 {#column-level-privilege-management}

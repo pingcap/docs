@@ -1,6 +1,6 @@
 ---
 title: tiup cluster disable
-summary: tiup cluster disable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を無効にするために使用されます。指定されたノードで`systemctl disable <service>`を実行します。オプションには、ノードを指定するための-Nとロールを指定するための-Rがあります。出力はtiup-clusterの実行ログです。
+summary: "`tiup cluster disable`コマンドは、マシンの再起動後にクラスタサービスの自動有効化を無効にするために使用されます。指定されたノードで`systemctl disable <service>`を実行します。オプションには、ノードを指定するための-Nとロールを指定するための-Rがあります。出力はtiup-clusterの実行ログです。"
 ---
 
 # tiup cluster disable {#tiup-cluster-disable}

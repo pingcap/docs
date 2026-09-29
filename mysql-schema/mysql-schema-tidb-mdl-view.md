@@ -1,6 +1,6 @@
 ---
 title: mysql.tidb_mdl_view
-summary: mysql` スキーマの `tidb_mdl_view` テーブルについて学習します。
+summary: "`mysql` スキーマの `tidb_mdl_view` テーブルについて学習します。"
 ---
 
 # `mysql.tidb_mdl_view` {#mysql-tidb-mdl-view}

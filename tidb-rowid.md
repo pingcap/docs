@@ -1,6 +1,6 @@
 ---
 title: _tidb_rowid
-summary: _tidb_rowid`とは何か、いつ利用できるのか、そして安全に使用する方法について学びましょう。
+summary: "`_tidb_rowid`とは何か、いつ利用できるのか、そして安全に使用する方法について学びましょう。"
 ---
 
 # `_tidb_rowid` {#tidb-rowid}
