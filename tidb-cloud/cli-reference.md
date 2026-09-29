@@ -22,13 +22,13 @@ summary: TiDB Cloud StarterおよびEssential向けのticloud CLIの概要を説
 
 ## 始める前に {#before-you-begin}
 
-必ず最初に[TiDB Cloud CLI環境をセットアップする](/tidb-cloud/get-started-with-cli.md)。 `ticloud` CLI をインストールすると、それを使用してコマンドラインからTiDB Cloud StarterインスタンスとEssentialインスタンスを管理できるようになります。
+必ず最初に[TiDB Cloud CLI環境をセットアップ](/tidb-cloud/get-started-with-cli.md)してください。 `ticloud` CLI をインストールすると、それを使用してコマンドラインからTiDB Cloud StarterインスタンスとEssentialインスタンスを管理できるようになります。
 
 ## 使用可能なコマンド {#commands-available}
 
 以下の表は、TiDB Cloud CLIで使用できるコマンドの一覧です。
 
-ターミナルで`ticloud` CLIを使用するには、 `ticloud [command] [subcommand]`を実行してください。TiUP [TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)を使用している場合は、代わりに`tiup cloud [command] [subcommand]`を使用してください。
+ターミナルで`ticloud` CLIを使用するには、 `ticloud [command] [subcommand]`を実行してください。[TiUP](https://docs.pingcap.com/tidb/stable/tiup-overview)を使用している場合は、代わりに`tiup cloud [command] [subcommand]`を使用してください。
 
 | コマンド            | サブコマンド                             | 説明                                                               |
 | ------------- | ---------------------------------- | ---------------------------------------------------------------- |
@@ -88,7 +88,7 @@ staging
 
 この出力例では、ユーザープロファイル`default`が現在アクティブです。
 
-### ユーザープロファイルについて説明してください {#describe-a-user-profile}
+### ユーザープロファイルを表示する {#describe-a-user-profile}
 
 [`ticloud config describe`](/tidb-cloud/ticloud-config-describe.md)を使用して、ユーザープロファイルのプロパティを取得します。
 
@@ -135,4 +135,4 @@ Current profile has been changed to default
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI に関してご質問やご提案がありましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)ご報告ください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI に関してご質問やご提案がありましたら、お気軽に[issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

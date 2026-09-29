@@ -5,12 +5,12 @@ summary: TiDB Cloudブランチの管理方法を学びましょう。
 
 # TiDB Cloudブランチの管理 {#manage-tidb-cloud-branches}
 
-このドキュメントでは、TiDB Cloud コンソールを使用してTiDB Cloud Starterインスタンスのブランチを管理する方法について説明します。 TiDB Cloud CLI を使用してブランチを管理するには、[`ticloud branch`](/tidb-cloud/ticloud-branch-create.md)を参照してください。
+このドキュメントでは、[TiDB Cloud コンソール](https://tidbcloud.com)を使用してTiDB Cloud Starterインスタンスのブランチを管理する方法について説明します。 TiDB Cloud CLI を使用してブランチを管理するには、[`ticloud branch`](/tidb-cloud/ticloud-branch-create.md)を参照してください。
 
 ## 必要なアクセス {#required-access}
 
 - [ブランチを作成する](#create-a-branch)または[ブランチに接続する](#connect-to-a-branch)には、組織の`Organization Owner`ロール、またはターゲット プロジェクトの`Project Owner`ロールに属している必要があります。
-- プロジェクト内のブランチを表示する場合は、そのプロジェクトに属している必要があります。
+- プロジェクト内のクラスターの[ブランチを表示](#create-a-branch)するには、そのプロジェクトに属している必要があります。
 
 権限の詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 

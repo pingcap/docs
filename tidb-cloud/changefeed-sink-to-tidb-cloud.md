@@ -21,7 +21,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 - **Sink to TiDB Cloud**機能は、以下のAWSリージョンにあり、2022年11月9日以降に作成されたTiDB Cloud Dedicatedクラスターでのみ利用可能です。
 
-    - AWSオレゴン（米国西部2）
+    - AWSオレゴン (us-west-2)
     - AWS フランクフルト (eu-central-1)
     - AWSシンガポール (ap-southeast-1)
     - AWS東京 (ap-northeast-1)
@@ -36,7 +36,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 変更フィードを作成する前に、ソースのTiDB Cloud Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにロードする必要があります。
 
-1. [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)以下の2つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
+1. [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を以下の2つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
 
     - 既存データのエクスポートとインポートにかかる時間
     - **Sink to TiDB Cloud**を作成する時間
@@ -76,22 +76,22 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
     - はいの場合、次の設定手順に進みます。
     - そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、もう一度**Next**をクリックしてください。
 
-5. **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
+5. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
 
     - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
     - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
     - **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"`除外できます。
+    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`"!test.tbl1"`を使用して、テーブル`test.tbl1`を除外できます。
 
 6. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
     - **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
     - **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
         - **Ignore event**：指定されたイベントタイプを除外します。
-        - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
+        - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop`は`DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
         - **Ignore insert value expression**: 特定の条件を満たす`INSERT`文を除外します。たとえば、`id >= 100`は、`id`が 100 以上である`INSERT`文を除外します。
         - **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
-        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
+        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
         - **Ignore delete value expression**: 指定された条件を満たす`DELETE`文を除外します。たとえば、`name = 'john'`は`name`が`'john'`である`DELETE`文を除外します。
 
 7. **Start Replication Position**領域に、Dumplingでエクスポートしたメタデータファイルから取得したTSOを入力します。
@@ -111,7 +111,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
     変更フィード名をクリックすると、チェックポイント、レプリケーションレイテンシー、その他のメトリックなど、変更フィードに関する詳細情報が表示されます。
 
-11. シンクが作成された後、 [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)元の値（デフォルト値は`10m` ）に戻します。
+11. シンクが作成された後、 [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を元の値（デフォルト値は`10m` ）に戻します。
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';

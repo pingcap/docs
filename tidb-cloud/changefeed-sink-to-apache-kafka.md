@@ -47,7 +47,7 @@ Apache Kafkaにデータをストリーミングするためのチェンジフ�
 
 ### ネットワーク {#network}
 
-<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>Apache Kafka サービスに接続できることを確認します。次の接続方法のいずれかを選択できます。
+<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>が Apache Kafka サービスに接続できることを確認します。次の接続方法のいずれかを選択できます。
 
 - プライベート接続: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、 [プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)が発生します。
 - VPCピアリング：費用対効果の高い選択肢として適していますが、潜在的なVPC CIDRの競合やセキュリティ上の考慮事項を管理する必要があります。
@@ -109,7 +109,7 @@ Apache KafkaサービスにパブリックIPアクセスを提供する場合は
 
 TiDB Cloud Premium インスタンスでチェンジフィードのプライベートエンドポイントを作成するには、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)するに従ってください。
 
-TiDB Cloudは現在、セルフホスト型KafkaのみPrivate Connectをサポートしています。MSK、Confluent Kafka、その他のKafka SaaSサービスとの直接統合はサポートしていません。これらのKafka SaaSサービスにPrivate Connect経由で接続するには、 [kafka-proxy](https://github.com/grepplabs/kafka-proxy)中間サーバーとしてデプロイし、Kafkaサービスをセルフホスト型Kafkaとして公開する必要があります。
+TiDB Cloudは現在、セルフホスト型KafkaのみPrivate Connectをサポートしています。MSK、Confluent Kafka、その他のKafka SaaSサービスとの直接統合はサポートしていません。これらのKafka SaaSサービスにPrivate Connect経由で接続するには、 [kafka-proxy](https://github.com/grepplabs/kafka-proxy)を中間サーバーとしてデプロイし、Kafkaサービスをセルフホスト型Kafkaとして公開できます。
 
 Apache Kafka サービスが AWS でホストされている場合は、 [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従ってプライベートエンドポイントを作成します。
 
@@ -247,25 +247,25 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 ## ステップ3．チェンジフィードを設定する {#step-3-set-the-changefeed}
 
-1. **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
+1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
 
     - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
     - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
     - **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"`除外できます。
+    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`"!test.tbl1"`を使用して、テーブル`test.tbl1`を除外できます。
 
 2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
     - **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
     - **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
         - **Ignore event**：指定されたイベントタイプを除外します。
-        - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
+        - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop`は`DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
         - **Ignore insert value expression**: 特定の条件を満たす`INSERT`文を除外します。たとえば、`id >= 100`は、`id`が 100 以上である`INSERT`文を除外します。
         - **Ignore update new value expression**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
-        - **Ignore update old value expression**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
+        - **Ignore update old value expression**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
         - **Ignore delete value expression**: 指定された条件を満たす`DELETE`文を除外します。たとえば、`name = 'john'`は`name`が`'john'`である`DELETE`文を除外します。
 
-3. **Column Selector**カスタマイズして、イベントから列を選択し、選択した列に関連するデータ変更のみを下流に送信します。
+3. **Column Selector**をカスタマイズして、イベントから列を選択し、選択した列に関連するデータ変更のみを下流に送信します。
 
     - **Tables matching**：列セレクターを適用するテーブルを指定します。どのルールにも一致しないテーブルの場合、すべての列が送信されます。
     - **Column Selector**：一致したテーブルのどの列をダウンストリームに送信するかを指定します。
@@ -286,7 +286,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 6. データ形式として**Avro**を選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
     - **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型データ型をどのように処理するかを指定します。
-    - **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>のエンドポイントとパスワードが自動的に入力されます。TiDB <CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>。
+    - **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のエンドポイントとパスワードが自動的に入力されます。
 
 7. **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 
@@ -304,13 +304,13 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
         変更フィードでデータベースごとに専用のKafkaトピックを作成する場合は、このモードを選択してください。そうすると、データベースのすべてのKafkaメッセージが専用のKafkaトピックに送信されます。トピックのプレフィックスとサフィックスを設定することで、データベースのトピック名をカスタマイズできます。
 
-        解決済みTsイベントなど、行以外のイベントの変更ログについては、 **Default Topic Name**フィールドにトピック名を指定できます。変更フィードは、指定されたトピックに基づいて、これらの変更ログを収集するためのトピックを作成します。
+        Resolved Tsイベントなど、行以外のイベントの変更ログについては、 **Default Topic Name**フィールドにトピック名を指定できます。変更フィードは、指定されたトピックに基づいて、これらの変更ログを収集するためのトピックを作成します。
 
     - **Send all changelogs to one specified Kafka Topic**
 
         変更フィードで全ての変更ログに対して1つのKafkaトピックを作成する場合は、このモードを選択してください。そうすると、変更フィード内のすべてのKafkaメッセージが1つのKafkaトピックに送信されます。トピック名は**Topic Name**フィールドで指定できます。
 
-8. **Partition Distribution**領域では、Kafka メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャ**を定義することもできます。TiDB Cloud、次の4種類のディスパッチャが提供されています。
+8. **Partition Distribution**領域では、Kafka メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャ**を定義することもできます。TiDB Cloudでは、次の4種類のディスパッチャが提供されています。
 
     - **Distribute changelogs by primary key or index value to Kafka partition**
 
@@ -339,7 +339,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 ## ステップ4. 変更フィード仕様を設定します {#step-4-configure-your-changefeed-specification}
 
-1. **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">複製容量単位（RCU）</CustomContent>チェンジフィード<CustomContent plan="premium">チェンジフィード容量ユニット（CCU）</CustomContent>の数を指定します。
+1. **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">複製容量単位（RCU）</CustomContent><CustomContent plan="premium">チェンジフィード容量ユニット（CCU）</CustomContent>の数を指定します。
 2. **Changefeed Name**欄に、変更フィードの名前を指定します。
 3. **Next**をクリックして、設定した内容を確認し、次のページへ進んでください。
 

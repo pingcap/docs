@@ -5,7 +5,7 @@ summary: TiDB Cloud Dedicated クラスターの RU 容量を見積もり、リ�
 
 # リソースのキャリブレーション
 
-[Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) は、システムリソースの消費を表すリソース抽象化単位です。[resource groups](/tidb-resource-control-ru-groups.md) にリソースを割り当てる前に、まずクラスター全体の RU 容量を見積もることを推奨します。
+[Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) は、システムリソースの消費を表すリソース抽象化単位です。[リソースグループ](/tidb-resource-control-ru-groups.md) にリソースを割り当てる前に、まずクラスター全体の RU 容量を見積もることを推奨します。
 
 TiDB Cloud Dedicated クラスターでは、TiDB Cloud コンソールの **Monitoring** ページにある **Calibrate Resource** 機能を使用して RU 容量を見積もることができます。この機能は、すべての TiDB Cloud Dedicated クラスターで利用できます。
 
@@ -54,7 +54,7 @@ TiDB Cloud Dedicated クラスターでは、TiDB Cloud コンソールの **Mon
 ALTER RESOURCE GROUP <resource group name> RU_PER_SEC=<#ru> [BURSTABLE];
 ```
 
-リソースグループの詳細については、[Use Resource Control to Achieve Resource Group Limitation and Flow Control](/tidb-resource-control-ru-groups.md) を参照してください。
+リソースグループの詳細については、[リソース制御を使用してリソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md) を参照してください。
 
 ## 制限事項 {#limitations}
 

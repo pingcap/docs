@@ -43,7 +43,7 @@ TiDB Cloudは、高速かつシームレスなブランチ作成を実現する�
 
     > **Note:**
     >
-    > エージェント プラットフォームや多数のブランチを必要とするその他のサービスを構築している有料組織向けに、 TiDB Cloud は5つを超えるブランチを作成できる**Instance Capacity Plan**を提供します。詳細については、 [インスタンス容量計画](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan)を参照してください。
+    > エージェント プラットフォームや多数のブランチを必要とするその他のサービスを構築している有料組織向けに、 TiDB Cloud は5つを超えるブランチを作成できる**Instance Capacity Plan**を提供します。詳細については、 [Instance Capacity Plan](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan)を参照してください。
 
 - 無料のTiDB Cloud Starterインスタンスの各ブランチには、10 GiB のストレージが許可されます。利用制限が 0 より大きいTiDB Cloud Starterインスタンスの各ブランチには、100 GiB のストレージが許可されます。ストレージ容量が上限に達すると、ストレージを減らすまで、このブランチでの読み取りおよび書き込み操作が制限されます。
 
@@ -51,16 +51,16 @@ TiDB Cloudは、高速かつシームレスなブランチ作成を実現する�
 
 - TiDB Cloud StarterインスタンスにTiFlashレプリカを持つテーブルがある場合、 TiFlashがレプリカデータを再構築する必要があるため、新しいブランチを作成した後、これらのレプリカは一時的に新しいブランチでは利用できなくなります。
 
-- 特定の時点からいつ[ブランチを作成する](/tidb-cloud/branch-manage.md#create-a-branch)か:
+- 特定の時点から[ブランチを作成する](/tidb-cloud/branch-manage.md#create-a-branch)場合:
 
-    - 無料のTiDB Cloud Starterインスタンスの場合、過去24時間以内の任意の時間を選択できます。
-    - TiDB Cloud Starter （利用限度額が0より大きい場合）インスタンスの場合、過去14日間の任意の期間を選択できます。
+    - 無料のTiDB Cloud Starterインスタンスの場合、過去24時間以内の任意の時点を選択できます。
+    - TiDB Cloud Starter （利用限度額が0より大きい場合）インスタンスの場合、過去14日間の任意の時点を選択できます。
 
 さらに多くのクォータが必要な場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
 
 ## 次は？ {#what-s-next}
 
-- [支店の管理方法を学ぶ](/tidb-cloud/branch-manage.md)
+- [ブランチの管理方法を学ぶ](/tidb-cloud/branch-manage.md)
 
 ## 関連リソース {#related-resources}
 

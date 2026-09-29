@@ -46,7 +46,7 @@ TiDB Cloudはデータを自動的にバックアップするため、災害発�
 - **Backup Time**とは、バックアップのスケジュールが開始される時刻です。最終的なバックアップ時刻は、設定されたバックアップ時刻よりも遅れる場合があることにご注意ください。
 
     - 無料のTiDB Cloud Starterインスタンスの場合、バックアップ時間はランダムに固定された時間になります。
-    - TiDB Cloud Starter （利用限度額が0より大きい場合）またはTiDB Cloud Essentialインスタンスの場合、バックアップ間隔を30分ごとに設定できます。デフォルト値はランダムに固定された時間です。
+    - TiDB Cloud Starter （利用限度額が0より大きい場合）またはTiDB Cloud Essentialインスタンスの場合、バックアップ時刻を30分単位で設定できます。デフォルト値はランダムに固定された時間です。
 
 ### バックアップ設定を構成する {#configure-the-backup-setting}
 
@@ -85,7 +85,7 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 キャンセルされた復元後にデータが破損し、復旧できない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-### 新しいTiDB Cloud StarterまたはEssentialインスタンスに復元します {#restore-to-a-new-instance} {#restore-to-a-new-instance}
+### 新しいTiDB Cloud StarterまたはEssentialインスタンスに復元します {#restore-to-a-new-instance}
 
 > **Note:**
 >

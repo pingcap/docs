@@ -253,7 +253,7 @@ access key を使用して認証するには、以下の手順に従ってくだ
 
 ## ステップ2. レプリケーションの設定 {#step-2-configure-replication}
 
-1. **Table Filter**カスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters)を参照してください。
+1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/ticdc-filter#changefeed-log-filters)を参照してください。
 
     ![the table filter of changefeed](/media/tidb-cloud/changefeed/sink-to-s3-02-table-filter.jpg)
 
@@ -267,10 +267,10 @@ access key を使用して認証するには、以下の手順に従ってくだ
     - **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
     - **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
         - **Ignore event**：指定されたイベントタイプを除外します。
-        - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop` `DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
+        - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop`は`DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
         - **Ignore insert value expression**: 特定の条件を満たす`INSERT`文を除外します。たとえば、`id >= 100`は、`id`が 100 以上である`INSERT`文を除外します。
         - **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
-        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18` `age`の古い値が 18 未満である場合の更新を除外します。
+        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
         - **Ignore delete value expression**: 指定された条件を満たす`DELETE`文を除外します。たとえば、`name = 'john'`は`name`が`'john'`である`DELETE`文を除外します。
 
 3. **Start Replication Position**領域で、以下のいずれかのレプリケーション位置を選択します。
@@ -299,7 +299,7 @@ access key を使用して認証するには、以下の手順に従ってくだ
     Canal-JSONは、プレーンなJSONテキスト形式です。設定するには、以下のフィールドに入力してください。
 
     - **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
-    - **Enable TiDB Extension**: このオプションを有効にすると、TiCDC は[ウォーターマークイベント](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)を送信し、 [TiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)Canal-JSON メッセージに追加します。
+    - **Enable TiDB Extension**: このオプションを有効にすると、TiCDC は[ウォーターマークイベント](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#watermark-event)を送信し、 [TiDB拡張フィールド](https://docs.pingcap.com/tidb/stable/ticdc-canal-json#tidb-extension-field)を Canal-JSON メッセージに追加します。
 
     </div>
      </SimpleTab>
