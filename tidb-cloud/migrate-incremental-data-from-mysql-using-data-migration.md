@@ -156,7 +156,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Data Migration**をクリックします。
+2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
 
 3. **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 

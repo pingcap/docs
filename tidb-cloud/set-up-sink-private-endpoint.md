@@ -74,7 +74,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
     >
     > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
 
-3. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+3. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
 ## ステップ2. 変更フィードのプライベートエンドポイントを構成する {#step-2-configure-the-private-endpoint-for-changefeeds}
 

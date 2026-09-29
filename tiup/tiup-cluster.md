@@ -697,9 +697,9 @@ TiUPデータは、ユーザーのホームディレクトリ内の`.tiup`ディ
 >
 > 制御マシンのディスク破損などの異常な状況によってTiUPデータが失われないように、 `.tiup`ディレクトリを定期的にバックアップすることをお勧めします。
 
-## クラスタのデプロイとO&amp;Mのためのメタファイルのバックアップと復元 {#back-up-and-restore-meta-files-for-cluster-deployment-and-o-x26-m}
+## クラスタのデプロイとO&Mのためのメタファイルのバックアップと復元 {#back-up-and-restore-meta-files-for-cluster-deployment-and-o-x26-m}
 
-運用保守（O&amp;M）に使用するメタファイルが失われると、 TiUPを使用したクラスターの管理が失敗します。以下のコマンドを実行して、メタファイルを定期的にバックアップすることをお勧めします。
+運用保守（O&M）に使用するメタファイルが失われると、 TiUPを使用したクラスターの管理が失敗します。以下のコマンドを実行して、メタファイルを定期的にバックアップすることをお勧めします。
 
 ```bash
 tiup cluster meta backup ${cluster_name}

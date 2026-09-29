@@ -109,6 +109,6 @@ TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB C
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 左側のナビゲーションペインで、 **Monitoring** &gt; **Metrics**をクリックします。
+2. 左側のナビゲーションペインで、 **Monitoring** > **Metrics**をクリックします。
 
 詳細については、 [TiDB Cloud の組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)を参照してください。

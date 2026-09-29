@@ -36,7 +36,7 @@ summary: AWS エンドポイントサービスプライベートリンク接続�
 
 AWS アカウント ID とアベイラビリティゾーンを表示するには、次の手順を実行します。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **Networking**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 2. **AWS Private Endpoints for External Services**領域で、 **Create Private Endpoint for External Services**をクリックします。
 3. 表示されたダイアログで、AWS アカウント ID とアベイラビリティゾーンを見つけることができます。
 
@@ -66,9 +66,9 @@ Kafka VPC には次のものが必要です。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
 
-- `usw2-az1` =&gt; `us-west-2a`
-- `usw2-az2` =&gt; `us-west-2c`
-- `usw2-az3` =&gt; `us-west-2b`
+- `usw2-az1` => `us-west-2a`
+- `usw2-az2` => `us-west-2c`
+- `usw2-az3` => `us-west-2b`
 
 次の AZ にプライベートサブネットを作成します。
 
@@ -619,10 +619,10 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
 
 異なるポートを持つ4つのターゲットグループを持つネットワークロードバランサーを作成します。1つのターゲットグループはブートストラップ用で、他のターゲットグループは異なるブローカーにマッピングされます。
 
-1. ブートストラップターゲットグループ =&gt; 9092 =&gt; broker-node1:39092、broker-node2:39092、broker-node3:39092
-2. ブローカーターゲットグループ1 =&gt; 9093 =&gt; broker-node1:39092
-3. ブローカーターゲットグループ2 =&gt; 9094 =&gt; broker-node2:39092
-4. ブローカーターゲットグループ3 =&gt; 9095 =&gt; broker-node3:39092
+1. ブートストラップターゲットグループ => 9092 => broker-node1:39092、broker-node2:39092、broker-node3:39092
+2. ブローカーターゲットグループ1 => 9093 => broker-node1:39092
+3. ブローカーターゲットグループ2 => 9094 => broker-node2:39092
+4. ブローカーターゲットグループ3 => 9095 => broker-node3:39092
 
 ブローカーロールノードが複数ある場合は、マッピングを追加する必要があります。ブートストラップターゲットグループに少なくとも1つのノードがあることを確認してください。耐障害性を確保するため、各AZに1つずつ、合計3つのノードを追加することをお勧めします。
 

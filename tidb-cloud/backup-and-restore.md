@@ -30,7 +30,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. 左側のナビゲーションペインで、 **Data** &gt; **Backup**をクリックします。
+2. 左側のナビゲーションペインで、 **Data** > **Backup**をクリックします。
 
 ### 自動バックアップを有効にする {#turn-on-auto-backup}
 
@@ -171,7 +171,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 1. TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2. 右上隅で、 **…** &gt;**Manual Backup**をクリックします。
+2. 右上隅で、 **…** > **Manual Backup**をクリックします。
 
 3. 表示されたダイアログに**Name**を入力してください。
 
@@ -232,7 +232,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
     - `storage.objects.create`
     - `storage.objects.delete`
 
-5. **Cloud Storage**&gt;**バケット**に移動し、対象のバケットを選択してから、**Permissions**&gt;**Grant Access**をクリックします。
+5. **Cloud Storage** > **バケット**に移動し、対象のバケットを選択してから、**Permissions** > **Grant Access**をクリックします。
 
 6. **New principals**で、手順3の**Service Account ID**を入力し、手順4の役割を割り当ててから、 **Save**をクリックします。
 

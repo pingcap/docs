@@ -386,7 +386,7 @@ jstackを複数回使用することで、スタックしている問題（例�
 - `printf "%x\n" pid`を使用して、スレッド ID を 16 進数に変換します。
 - jstackの出力結果を確認すると、対応するスレッドのスタック情報が表示されます。
 
-#### jmap &amp; mat {#jmap--mat}
+#### jmap & mat {#jmap--mat}
 
 Go の pprof/heap とは異なり、 [jmap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)プロセス全体のメモリスナップショットをダンプし (Go ではディストリビュータのサンプリング)、その後、スナップ[Eclipse MAT](https://www.eclipse.org/mat/)を別のツールで分析できます。
 

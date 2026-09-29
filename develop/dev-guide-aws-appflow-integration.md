@@ -191,12 +191,12 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
 
 - このドキュメントでは、以下のマッピングルール（ソースフィールド名→宛先フィールド名）が必要です。
 
-    - アカウントID -&gt; id
-    - アカウント名 -&gt; 名前
-    - アカウントタイプ -&gt; タイプ
-    - 請求先州/都道府県 -&gt; billing_state
-    - アカウント評価 -&gt; 評価
-    - 産業 -&gt; 産業
+    - アカウントID -> id
+    - アカウント名 -> 名前
+    - アカウントタイプ -> タイプ
+    - 請求先州/都道府県 -> billing_state
+    - アカウント評価 -> 評価
+    - 産業 -> 産業
 
     ![mapping a rule](/media/develop/aws-appflow-step-mapping-a-rule.png)
 

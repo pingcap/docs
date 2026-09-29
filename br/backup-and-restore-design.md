@@ -5,7 +5,7 @@ summary: TiDBは、Backup & Restore（BR）とTiDB Operatorを使用したクラ
 
 # TiDB バックアップとリストアのアーキテクチャの概要 {#overview-of-tidb-backup-x26-restore-architecture}
 
-[TiDB バックアップと復元の概要](/br/backup-and-restore-overview.md)で説明したように、TiDB は複数の種類のクラスターデータのバックアップとリストアをサポートしています。Backup &amp; Restore (BR) とTiDB Operatorを使用してこれらの機能にアクセスし、TiKV ノードからデータをバックアップしたり、TiKV ノードにデータをリストアしたりするタスクを作成できます。
+[TiDB バックアップと復元の概要](/br/backup-and-restore-overview.md)で説明したように、TiDB は複数の種類のクラスターデータのバックアップとリストアをサポートしています。Backup & Restore (BR) とTiDB Operatorを使用してこれらの機能にアクセスし、TiKV ノードからデータをバックアップしたり、TiKV ノードにデータをリストアしたりするタスクを作成できます。
 
 各バックアップおよび復元機能のアーキテクチャの詳細については、次のドキュメントを参照してください。
 

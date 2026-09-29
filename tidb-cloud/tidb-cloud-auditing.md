@@ -75,10 +75,10 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
     4. **Database Audit Log Storage Configuration**ダイアログで、 **AWS IAM Policy Settings**セクションを見つけて、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録します。
 
-2. [AWS Management Console](https://console.aws.amazon.com/)で、 **IAM** &gt; **Access Management** &gt; **Policies**に移動し、書き込み専用権限`s3:PutObject`を持つIAMポリシーがあるかどうかを確認します。
+2. [AWS Management Console](https://console.aws.amazon.com/)で、 **IAM** > **Access Management** > **Policies**に移動し、書き込み専用権限`s3:PutObject`を持つIAMポリシーがあるかどうかを確認します。
 
     - はいの場合は、後で使用するために一致したポリシーを記録します。
-    - そうでない場合は、 **IAM** &gt; **Access Management** &gt; **Policies** &gt; **Create Policy**に移動し、次のポリシー テンプレートに従ってIAMポリシーを定義します。
+    - そうでない場合は、 **IAM** > **Access Management** > **Policies** > **Create Policy**に移動し、次のポリシー テンプレートに従ってIAMポリシーを定義します。
 
         ```json
         {
@@ -95,12 +95,12 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
         テンプレート内の`<Your S3 bucket ARN>`は、監査ログファイルが書き込まれるS3バケットのAmazonリソースネーム（ARN）です。S3バケットの**Properties**タブに移動し、 **Bucket Overview**エリアでARN値を確認できます。 `"Resource"`フィールドでは、ARNの後に`/*`を追加する必要があります。例えば、ARNが`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
 
-3. **IAM** &gt; **Access Management** &gt; **Roles**に移動し、前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールがすでに存在するかどうかを確認します。
+3. **IAM** > **Access Management** > **Roles**に移動し、前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールがすでに存在するかどうかを確認します。
 
     - はいの場合は、後で使用するために一致したロールを記録します。
     - そうでない場合は、 **Create role**をクリックし、信頼エンティティタイプとして**Another AWS account**を選択し、 **Account ID**フィールドにTiDB CloudのアカウントIDを入力します。次に、 **Require External ID**オプションを選択し、 **External ID**フィールドにTiDB Cloudの外部IDを入力します。
 
-4. **IAM** &gt; **Access Management** &gt; **Roles**で、前の手順のロール名をクリックして**Summary**ページに移動し、次の手順を実行します。
+4. **IAM** > **Access Management** > **Roles**で、前の手順のロール名をクリックして**Summary**ページに移動し、次の手順を実行します。
 
     1. **Permissions**タブで、書き込み専用権限`s3:PutObject`を持つ記録済みのポリシーがロールにアタッチされているかどうかを確認します。アタッチされていない場合は、 **Attach Policies**を選択し、必要なポリシーを検索して**Attach Policy**をクリックします。
     2. **Summary**ページに戻り、**Role ARN**値をクリップボードにコピーします。
@@ -148,12 +148,12 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 
     4. **Database Audit Log Storage Configuration**ダイアログで、 **Google Cloud Service Account ID**セクションを見つけて、後で使用するために**Service Account ID**を記録します。
 
-2. [Google Cloud console](https://console.cloud.google.com/)で、 **IAM & Admin** &gt; **Roles**に移動し、ストレージバケット内のオブジェクトに対する次の書き込み専用権限を持つロールが存在するかどうかを確認します。
+2. [Google Cloud console](https://console.cloud.google.com/)で、 **IAM & Admin** > **Roles**に移動し、ストレージバケット内のオブジェクトに対する次の書き込み専用権限を持つロールが存在するかどうかを確認します。
 
     - storage.objects.create
     - storage.objects.delete
 
-    はいの場合は、後で使用するためにTiDBクラスターの一致したロールを記録してください。いいえの場合は、 **IAM & Admin** &gt; **Roles** &gt; **CREATE ROLE**に移動して、TiDBクラスターのロールを定義してください。
+    はいの場合は、後で使用するためにTiDBクラスターの一致したロールを記録してください。いいえの場合は、 **IAM & Admin** > **Roles** > **CREATE ROLE**に移動して、TiDBクラスターのロールを定義してください。
 
 3. **[Cloud Storage]** &gt; **[ブラウザ]**に移動し、 TiDB Cloudがアクセスする GCS バケットを選択して、 **SHOW INFO PANEL**をクリックします。
 

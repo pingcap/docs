@@ -19,14 +19,14 @@ TiDB Cloudコンソールの**Data Import**ページで**Next**をクリック�
 
 TiDB Cloud Account IDとTiDB Cloud External IDは環境およびクラスターごとに異なるため、このドキュメントに記載されている値をそのままコピーしないでください。代わりに、TiDB Cloudコンソールから取得してください。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/)で対象のクラスターに移動し、左側のナビゲーションペインで**Data** &gt; **Import**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で対象のクラスターに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 2. **Import data from Cloud Storage**をクリックします。
 3. **Import Data from Cloud Storage**ページで、クラウドプロバイダーとして**Amazon S3**を選択します。
 4. **Credentials**セクションで**Click here to create new one with AWS CloudFormation**をクリックして**Add New Role ARN**ダイアログを開き、 **Having trouble? Create Role ARN manually**を展開して、このクラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を表示します。
 
 次に、IAMロールの信頼エンティティを確認します。
 
-1. AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Roles**に移動します。
+1. AWS マネジメントコンソールで、 **IAM** > **Access Management** > **Roles**に移動します。
 2. ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
 3. ロールの概要ページで、 **Trust relationships**タブをクリックすると、信頼されたエンティティが表示されます。
 
@@ -83,7 +83,7 @@ IAMユーザーの AWS アクセスキーを使用して Amazon S3 バケット�
 
 IAMユーザーのポリシーを確認するには、次の手順を実行します。
 
-1. AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Users**に移動します。
+1. AWS マネジメントコンソールで、 **IAM** > **Access Management** > **Users**に移動します。
 2. ユーザーリストで、 TiDB Cloudへのデータのインポートに使用したユーザーを見つけてクリックします。ユーザーの概要ページが表示されます。
 3. ユーザー概要ページの**Permission policies**領域に、ポリシーの一覧が表示されます。各ポリシーごとに以下の手順を実行してください。
     1. ポリシーをクリックすると、ポリシーの概要ページが表示されます。
@@ -119,7 +119,7 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 ### IAMロールのポリシーを確認する {#check-the-policy-of-the-iam-role}
 
-1. AWS マネジメントコンソールで、 **IAM** &gt;**Access Management**&gt;**Roles**に移動します。
+1. AWS マネジメントコンソールで、 **IAM** > **Access Management** > **Roles**に移動します。
 2. ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
 3. ロールの概要ページの**Permission policies**領域に、ポリシーの一覧が表示されます。各ポリシーごとに以下の手順を実行してください。
     1. ポリシーをクリックすると、ポリシーの概要ページが表示されます。
@@ -184,7 +184,7 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 
 > **Tip:**
 >
-> 権限ポリシーを複数回更新してもデータのインポート中にエラー`AccessDenied`が発生する場合は、アクティブなセッションを取り消してみてください。 **IAM** &gt; **Access Management** &gt; **Roles**に移動し、対象のロールをクリックしてロールの概要ページに進みます。ロールの概要ページで**Revoke active sessions**を見つけ、ボタンをクリックしてアクティブなセッションを取り消します。その後、データのインポートを再試行してください。
+> 権限ポリシーを複数回更新してもデータのインポート中にエラー`AccessDenied`が発生する場合は、アクティブなセッションを取り消してみてください。 **IAM** > **Access Management** > **Roles**に移動し、対象のロールをクリックしてロールの概要ページに進みます。ロールの概要ページで**Revoke active sessions**を見つけ、ボタンをクリックしてアクティブなセッションを取り消します。その後、データのインポートを再試行してください。
 >
 > 他のアプリケーションに影響する可能性があることに注意してください。
 

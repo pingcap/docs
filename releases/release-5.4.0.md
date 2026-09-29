@@ -203,7 +203,7 @@ TiDB バージョン: 5.4.0
 
 - **バックアップのターゲットストレージとしてAzure Blob Storageをサポートする**
 
-    Backup &amp; Restore (BR) は、リモートバックアップストレージとして Azure Blob Storage をサポートしています。Azure クラウドに TiDB をデプロイしている場合、クラスタデータを Azure Blob Storage サービスにバックアップできるようになりました。
+    Backup & Restore (BR) は、リモートバックアップストレージとして Azure Blob Storage をサポートしています。Azure クラウドに TiDB をデプロイしている場合、クラスタデータを Azure Blob Storage サービスにバックアップできるようになりました。
 
     [ユーザー向けドキュメント](/br/backup-and-restore-storages.md)
 

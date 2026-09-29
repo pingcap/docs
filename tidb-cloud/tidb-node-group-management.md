@@ -75,7 +75,7 @@ TiDBノードグループを作成しても、デフォルトグループのエ�
 
     IP アクセス リストをまだ設定していない場合は、 **Configure IP Access List**をクリックするか、手順[IPアクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)に従って、最初の接続の前に設定してください。
 
-4. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+4. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
 5. **Networking**ページで、右上隅の**TiDB Node Group**リストから TiDB ノードグループを選択します。
 
@@ -95,7 +95,7 @@ TiDBノードグループを作成しても、デフォルトグループのエ�
 
 3. **TiDB Node Group**リストから TiDB ノードグループを選択し、**Connection Type**リストから**Private Endpoint**を選択します。
 
-4. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+4. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
 5. **Networking**ページで、右上隅の**TiDB Node Group**リストから TiDB ノードグループを選択します。
 
@@ -117,7 +117,7 @@ TiDBノードグループを作成しても、デフォルトグループのエ�
 
 1. [VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)の手順に従って、このクラスターの VPC ピアリングを作成します。
 2. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動します。
-3. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+3. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 4. **Networking**ページの右上隅にある**Connect**をクリックして、接続文字列を取得します。
 
 ## TiDBノードグループを確認する {#view-tidb-node-groups}

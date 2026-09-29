@@ -131,7 +131,7 @@ TiDB Cloud PremiumインスタンスがMySQLサービスに接続できること
 
 前提条件を満たしたら、データをMySQLに取り込むことができます。
 
-1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。
+1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
 
 2. **Create Changefeed**をクリックし、**宛先**として**MySQL**を選択します。
 

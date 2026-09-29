@@ -74,7 +74,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 ## ステップ1. Apache Kafka の変更フィードを作成する {#step-1-create-a-changefeed-for-apache-kafka}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2. 対象のTiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**Data** &gt; **Changefeed**をクリックします。
+2. 対象のTiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
 3. **Create Changefeed**をクリックし、次に**Destination**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを設定する {#step-2-configure-the-changefeed-target}

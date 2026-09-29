@@ -43,7 +43,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにファイア
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Networking**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
 3. **Networking**ページで、**Public Endpoint**が無効になっている場合は有効にしてください。
 
