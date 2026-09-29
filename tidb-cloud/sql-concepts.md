@@ -5,7 +5,7 @@ summary: TiDBにおけるSQLの概念について学びましょう。
 
 # SQL {#sql}
 
-TiDBはMySQLプロトコルと高い互換性を持ち、 MySQL 5.7およびMySQL 8.0の共通機能と構文に対応しています。MySQLのエコシステムツール（PHPMyAdmin、Navicat、MySQL Workbench、DBeaver [もっと](/develop/dev-guide-third-party-support.md#gui)）およびMySQLクライアントはTiDBで使用できます。
+TiDBはMySQLプロトコルと高い互換性を持ち、 MySQL 5.7およびMySQL 8.0の共通機能と構文に対応しています。MySQLのエコシステムツール（PHPMyAdmin、Navicat、MySQL Workbench、DBeaver、[その他](/develop/dev-guide-third-party-support.md#gui)）およびMySQLクライアントはTiDBで使用できます。
 
 ただし、TiDBではMySQLの一部の機能はサポートされていません。これは、問題を解決するより良い方法（XML関数の代わりにJSONを使用するなど）が存在するため、または必要な労力に対して現在の需要が不足しているため（ストアドプロシージャや関数など）です。さらに、一部の機能は分散システムでの実装が難しい場合があります。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 
@@ -15,7 +15,7 @@ SQL文とは、SQL（構造化照会言語）におけるコマンドまたは�
 
 TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使用しており、必要に応じてMySQL用の拡張機能やTiDB固有の文が追加されています。
 
-SQLは、その関数に応じて以下の4種類に分類されます。
+SQLは、その機能に応じて以下の4種類に分類されます。
 
 - DDL (データ定義言語): データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。 TiDB の DDL文については、 [スキーマ管理／データ定義文（DDL）](/sql-statements/sql-statement-overview.md#schema-management--data-definition-statements-ddl)を参照してください。
 
@@ -35,7 +35,7 @@ TiDBサーバーは複数のSQLモードで動作し、クライアントごと�
 
 ## 行ID生成属性 {#row-id-generation-attributes}
 
-TiDBは、行IDの生成とデータ配信を最適化するための3つのSQL属性を提供します。
+TiDBは、行IDの生成とデータ分散を最適化するための3つのSQL属性を提供します。
 
 - AUTO_INCREMENT
 
@@ -47,7 +47,7 @@ TiDBは、行IDの生成とデータ配信を最適化するための3つのSQL�
 
 `AUTO_INCREMENT`は、列のデフォルト値を自動的に入力するために使用される列属性です。 `INSERT`文で`AUTO_INCREMENT`列の値が指定されていない場合、システムはこの列に値を自動的に割り当てます。
 
-パフォーマンス上の理由から、 `AUTO_INCREMENT`番号は、各 TiDBサーバーに値のバッチ (デフォルトでは 3 万) で割り当てられます。つまり、 `AUTO_INCREMENT`番号は一意であることが保証されますが、 `INSERT`文に割り当てられる値は、TiDBサーバーごとに単調増加になります。
+パフォーマンス上の理由から、 `AUTO_INCREMENT`番号は、各 TiDBサーバーに値のバッチ (デフォルトでは 3 万) で割り当てられます。つまり、 `AUTO_INCREMENT`番号は一意であることが保証されますが、 `INSERT`文に割り当てられる値は、TiDBサーバーごとにのみ単調増加になります。
 
 すべての TiDB サーバーで`AUTO_INCREMENT`の数値を単調増加にしたい場合、また TiDB のバージョンが v6.5.0 以降の場合は、[MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)を有効にすることをお勧めします。
 
@@ -81,7 +81,7 @@ TiDBは、行IDの生成とデータ配信を最適化するための3つのSQL�
 
 ## ユーザー定義変数 {#user-defined-variables}
 
-TiDB では、ユーザー定義変数を設定および読み取ることができます。ユーザー定義変数の形式は`@var_name`です。 `var_name`を構成する文字は、数字`0-9` 、文字`a-zA-Z` 、ドル記号`_` 、および UTF-8 文字など、識別子を構成できる任意の文字です。さらに、英語のピリオド`.` `$`含まれます。ユーザー定義変数は大文字と小文字を区別しません。
+TiDB では、ユーザー定義変数を設定および読み取ることができます。ユーザー定義変数の形式は`@var_name`です。 `var_name`を構成する文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ドル記号`$` 、および UTF-8 文字など、識別子を構成できる任意の文字です。さらに、英語のピリオド`.`も含まれます。ユーザー定義変数は大文字と小文字を区別しません。
 
 ユーザー定義変数はセッション固有のものであり、あるクライアント接続で定義されたユーザー変数は、他のクライアント接続からは参照または使用できません。
 

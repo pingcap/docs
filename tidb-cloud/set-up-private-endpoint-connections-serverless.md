@@ -13,7 +13,7 @@ summary: プライベートエンドポイントを介してTiDB Cloud Starter�
 > - Azure のプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する方法については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)D dedicated クラスターに接続する」を参照してください。
 > - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
-TiDB Cloudは、 AWS VPC内でホストされているTiDB Cloudサービスへの[AWSプライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc)を介した高度に安全な一方向アクセスをサポートしています。まるでサービスがお客様自身のVPC内にあるかのように動作します。お客様のVPC内にプライベートエンドポイントが公開され、権限があればそのエンドポイントを介してTiDB Cloudサービスへの接続を作成できます。
+TiDB Cloudは、 AWS VPC内でホストされているTiDB Cloudサービスへの[AWS PrivateLink](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc)を介した高度に安全な一方向アクセスをサポートしています。まるでサービスがお客様自身のVPC内にあるかのように動作します。お客様のVPC内にプライベートエンドポイントが公開され、権限があればそのエンドポイントを介してTiDB Cloudサービスへの接続を作成できます。
 
 AWS PrivateLink を利用したエンドポイント接続は、安全かつプライベートであり、お客様のデータをパブリックインターネットに公開することはありません。さらに、エンドポイント接続は CIDR オーバーラップをサポートしており、ネットワーク管理が容易です。
 
@@ -48,10 +48,10 @@ TiDB Cloudプランに応じて、適切なプライベートエンドポイン�
 
 1. [{{{ .starter }}} または Essential インスタンスを選択する](#step-1-choose-a-tidb-instance)
 2. [AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint)
-3. [TiDB Cloudでプライベートエンドポイントを認証する（オプション）](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
+3. [TiDB Cloudでプライベートエンドポイントを認可する（オプション）](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
 4. [{{{ .starter }}} または Essential インスタンスに接続する](#step-4-connect-to-your-tidb)
 
-### ステップ1. TiDB Cloud StarterまたはEssentialインスタンスを選択します {#step-1-choose-a-tidb-instance} {#step-1-choose-a-tidb-instance}
+### ステップ1. TiDB Cloud StarterまたはEssentialインスタンスを選択します {#step-1-choose-a-tidb-instance}
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの名前をクリックすると、その概要ページに移動します。
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
@@ -69,7 +69,7 @@ TiDB Cloudプランに応じて、適切なプライベートエンドポイン�
 
 AWS マネジメントコンソールを使用して VPC インターフェイス エンドポイントを作成するには、次の手順を実行します。
 
-1. [AWS マネジメントコンソール](https://aws.amazon.com/console/)コンソールにサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
+1. [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
 2. ナビゲーションペインの**Endpoints**をクリックし、右上隅の**Create Endpoint**をクリックします。
 
@@ -116,7 +116,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${region_id} --serv
 
 そうすれば、プライベートDNS名を使ってエンドポイントサービスに接続できます。
 
-### ステップ3．TiDB Cloudでプライベートエンドポイントを認証する（オプション） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
+### ステップ3．TiDB Cloudでプライベートエンドポイントを認可する（オプション） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
 
 > **Note:**
 >
@@ -145,7 +145,7 @@ AWSインターフェースエンドポイントを作成した後、対象のTi
 
 5. **Submit**をクリックしてください。
 
-### ステップ4. TiDB Cloud StarterまたはEssentialインスタンスに接続します {#step-4-connect-to-your-tidb} {#step-4-connect-to-your-tidb}
+### ステップ4. TiDB Cloud StarterまたはEssentialインスタンスに接続します {#step-4-connect-to-your-tidb}
 
 インターフェースエンドポイントを作成したら、 TiDB Cloudコンソールに戻り、以下の手順を実行してください。
 
@@ -157,7 +157,7 @@ AWSインターフェースエンドポイントを作成した後、対象のTi
 
 > **Tip:**
 >
-> TiDB Cloud StarterまたはEssentialインスタンスに接続できない場合、AWSのVPCエンドポイントのセキュリティグループが正しく設定されていないことが原因である可能性があります。解決策については、[このFAQ](#troubleshooting)ご覧ください。
+> TiDB Cloud StarterまたはEssentialインスタンスに接続できない場合、AWSのVPCエンドポイントのセキュリティグループが正しく設定されていないことが原因である可能性があります。解決策については、[このFAQ](#troubleshooting)をご覧ください。
 >
 > VPCエンドポイントを作成する際に、 `private-dns-enabled cannot be set because there is already a conflicting DNS domain for gatewayXX-privatelink.XX.prod.aws.tidbcloud.com in the VPC vpc-XXXXX`というエラーが発生した場合は、そのVPC内に既にプライベートエンドポイントが存在します。同じプライベートDNS名で別のエンドポイントを作成する必要はありません。
 
@@ -304,7 +304,7 @@ AWS Management Console でプライベートDNSを有効にするには、次の
 
 > **Tip:**
 >
-> インスタンスに接続できない場合、原因はAWS内のVPCエンドポイントのセキュリティグループが適切に設定されていないことかもしれません。解決策については [this FAQ](#troubleshooting) を参照してください。
+> インスタンスに接続できない場合、原因はAWS内のVPCエンドポイントのセキュリティグループが適切に設定されていないことかもしれません。解決策については [このFAQ](#troubleshooting) を参照してください。
 
 ## トラブルシューティング {#troubleshooting}
 
