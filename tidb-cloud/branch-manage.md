@@ -10,7 +10,7 @@ This document describes how to manage branches of your {{{ .starter }}} or {{{ .
 ## Required access
 
 - To [create a branch](#create-a-branch) or [connect to a branch](#connect-to-a-branch), you must be in the `Organization Owner` role of your organization or the `Project Owner` role of the target project.
-- To [view branches](#create-a-branch) for clusters in a project, you must belong to that project.
+- To [view branches](#view-branches) for clusters in a project, you must belong to that project.
 
 For more information about permissions, see [User roles](/tidb-cloud/manage-user-access.md#user-roles).
 
