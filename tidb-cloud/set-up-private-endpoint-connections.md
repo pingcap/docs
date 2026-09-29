@@ -286,7 +286,7 @@ Create an AWS interface endpoint as described in [Step 2. Create an AWS interfac
     aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_vpc_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids} --service-region ${your_cluster_region}
     ```
 
-Then complete [Step 3](#step-3-create-a-private-endpoint-connection) through [Step 5](#step-5-connect-to-your-tidb-cluster) to create the private endpoint connection and connect to your cluster from another region.
+Then complete [Step 3. Create a private endpoint connection](#step-3-create-a-private-endpoint-connection) through [Step 5. Connect to your TiDB cluster](#step-5-connect-to-your-tidb-cluster) to create the private endpoint connection and connect to your cluster from another region.
 
 > **Note:**
 >
