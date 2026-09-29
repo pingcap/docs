@@ -23,7 +23,7 @@ The `DISTRIBUTE TABLE` statement redistributes and reschedules Regions of a spec
 
 ```ebnf+diagram
 DistributeTableStmt ::=
-    "DISTRIBUTE" "TABLE" TableName PartitionNameListOpt "RULE" EqOrAssignmentEq Identifier "ENGINE" EqOrAssignmentEq Identifier "TIMEOUT" EqOrAssignmentEq Identifier
+    "DISTRIBUTE" "TABLE" TableName PartitionNameListOpt "RULE" EqOrAssignmentEq Identifier "ENGINE" EqOrAssignmentEq Identifier ("TIMEOUT" EqOrAssignmentEq Identifier)?
 
 TableName ::=
     (SchemaName ".")? Identifier
