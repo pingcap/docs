@@ -77,24 +77,11 @@ TiDB Cloud writes incremental data and snapshots to your OSS bucket, and TiDB Cl
     - **Access Key ID:** for example, `LTAI5t...`
     - **Access Key Secret:** saved at creation time
 
-## Step 3. Configure the External Stage in TiDB Cloud
-
-After the bucket, RAM user, and permissions are ready, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) before configuring an OSS external stage because the required OSS endpoint configuration is not yet finalized.
-
-- **Bucket URI**: the OSS URI from Step 1, such as `oss://tidb-cloud-lake-data/my-cluster/`
-- **Access Key ID**: the RAM user's AccessKey ID
-- **Access Key Secret**: the RAM user's AccessKey Secret
-
-After TiDB Cloud Support confirms the current OSS configuration requirements, enter the required values in the **External Stage** settings and test the connection.
-
 ## What's next?
 
-After completing the Alibaba Cloud setup, you have the following resources ready for the TiDB Cloud Lake **External Stage** configuration:
+After completing the Alibaba Cloud setup, you have all the values required by the External Stage configuration:
 
-| Resource | Where to find it |
-|----------|------------------|
-| **OSS URI** | From Step 1, for example, `oss://tidb-cloud-lake-data/my-cluster/` |
-| **Access Key ID** | From Step 2, for example, `LTAI5t...` |
-| **Access Key Secret** | From Step 2, saved at creation time |
+- **OSS URI**: from Step 1.
+- **Access Key ID** and **Access Key Secret**: from Step 2.
 
 In the [TiDB Cloud console](https://tidbcloud.com), navigate to the Data Pipeline configuration page for your TiDB Cloud instance, and enter these values in the **External Stage** settings to complete the data pipeline setup.
