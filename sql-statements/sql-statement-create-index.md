@@ -180,7 +180,7 @@ DROP INDEX idx1 ON t1;
 - [`UPPER()`](/functions-and-operators/string-functions.md#upper)
 - [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
 
-上記のリストに含まれていない関数は、十分にテストされておらず、本番環境での関数は推奨されません。これらは実験的とみなされます。演算子、 `CAST` 、 `CASE WHEN`などの他の式も実験的とみなされ、本番環境での使用は推奨されません。
+上記のリストに含まれていない関数は、十分にテストされておらず、本番環境での使用は推奨されません。これらは実験的とみなされます。演算子、 `CAST` 、 `CASE WHEN`などの他の式も実験的とみなされ、本番環境での使用は推奨されません。
 
 <CustomContent platform="tidb">
 
