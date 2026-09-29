@@ -29,7 +29,7 @@ ResourceGroupName ::=
 このステートメントを実行するには、以下の構成と権限が必要です。
 
 1. システム変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)は`ON`に設定されています。
-2. システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820) `ON`に設定されている場合、 `SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。 `OFF`に設定されている場合、これらの権限は不要です。
+2. システム変数[`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)が`ON`に設定されている場合、 `SUPER`または`RESOURCE_GROUP_ADMIN`または`RESOURCE_GROUP_USER`の権限が必要です。 `OFF`に設定されている場合、これらの権限は不要です。
 
 ## 例 {#examples}
 

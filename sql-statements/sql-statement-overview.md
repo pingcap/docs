@@ -88,17 +88,17 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一のDDLジョブのパラメータを変更します。                                              |
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)                 | DDLジョブをキャンセルします。                                                        |
-| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。                                              |
+| [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。                                              |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのチェックサムを計算します。                                                      |
-| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)                 | テーブルからインデックスを削除します。                                                     |
+| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)                 | テーブルからインデックスをクリーンアップします。                                                     |
 | [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)                   | DDL操作を一時停止します。                                                          |
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)                 | DDL操作を再開します。                                                            |
-| [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | DDLジョブまたはジョブクエリを表示します。                                                  |
-| [`ADMIN`](/sql-statements/sql-statement-admin.md)                                       | 様々な事務作業を行う。                                                             |
+| [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | DDLジョブまたはジョブクエリを表示します。                                                  |
+| [`ADMIN`](/sql-statements/sql-statement-admin.md)                                       | 様々な管理タスクを実行します。                                                             |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB では効果的な使用法がありません。 |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)                  | システム変数またはユーザー変数を変更します。                                                  |
-| [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | 文字セットと照合順序を設定します。                                                       |
-| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)                         | リージョンをより小さな領域に分割します。                                                    |
+| [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | 文字セットと照合順序を設定します。                                                       |
+| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)                         | リージョンをより小さなリージョンに分割します。                                                    |
 
 </CustomContent>
 
@@ -108,18 +108,18 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)              | 実行中の単一のDDLジョブのパラメータを変更します。                                              |
 | [`ADMIN CANCEL DDL`](/sql-statements/sql-statement-admin-cancel-ddl.md)                 | DDLジョブをキャンセルします。                                                        |
-| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。                                              |
+| [`ADMIN CHECK [TABLE\|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの整合性をチェックします。                                              |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのチェックサムを計算します。                                                      |
-| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)                 | テーブルからインデックスを削除します。                                                     |
+| [`ADMIN CLEANUP INDEX`](/sql-statements/sql-statement-admin-cleanup.md)                 | テーブルからインデックスをクリーンアップします。                                                     |
 | [`ADMIN PAUSE DDL`](/sql-statements/sql-statement-admin-pause-ddl.md)                   | DDL操作を一時停止します。                                                          |
 | [`ADMIN RECOVER INDEX`](/sql-statements/sql-statement-admin-recover.md)                 | 冗長なインデックスに基づいて一貫性を回復します。                                                |
 | [`ADMIN RESUME DDL`](/sql-statements/sql-statement-admin-resume-ddl.md)                 | DDL操作を再開します。                                                            |
-| [`ADMIN SHOW DDL [JOBS|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | DDLジョブまたはジョブクエリを表示します。                                                  |
-| [`ADMIN`](/sql-statements/sql-statement-admin.md)                                       | 様々な事務作業を行う。                                                             |
+| [`ADMIN SHOW DDL [JOBS\|JOB QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)  | DDLジョブまたはジョブクエリを表示します。                                                  |
+| [`ADMIN`](/sql-statements/sql-statement-admin.md)                                       | 様々な管理タスクを実行します。                                                             |
 | [`FLUSH TABLES`](/sql-statements/sql-statement-flush-tables.md)                         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB では効果的な使用法がありません。 |
 | [`SET <variable>`](/sql-statements/sql-statement-set-variable.md)                  | システム変数またはユーザー変数を変更します。                                                  |
-| [`SET [NAMES|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | 文字セットと照合順序を設定します。                                                       |
-| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)                         | リージョンをより小さな領域に分割します。                                                    |
+| [`SET [NAMES\|CHARACTER SET]`](/sql-statements/sql-statement-set-names.md)               | 文字セットと照合順序を設定します。                                                       |
+| [`SPLIT REGION`](/sql-statements/sql-statement-split-region.md)                         | リージョンをより小さなリージョンに分割します。                                                    |
 
 </CustomContent>
 
@@ -208,7 +208,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | [`SHOW CHARACTER SET`](/sql-statements/sql-statement-show-character-set.md) | 文字セットの一覧を表示します。                                                                                                                                                         |
 | [`SHOW COLLATIONS`](/sql-statements/sql-statement-show-collation.md)        | 照合順序を一覧表示します。                                                                                                                                                           |
 | [`SHOW ERRORS`](/sql-statements/sql-statement-show-errors.md)               | 以前に実行されたステートメントのエラーを表示します。                                                                                                                                              |
-| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)               | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB は、ほとんどのメトリックに対して`SHOW STATUS`の代わりにPrometheus[PrometheusとGrafana](/tidb-monitoring-framework.md)Grafanaを使用して一元的なメトリック収集を行います。 |
+| [`SHOW STATUS`](/sql-statements/sql-statement-show-status.md)               | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB は、ほとんどのメトリックに対して`SHOW STATUS`の代わりに[PrometheusとGrafana](/tidb-monitoring-framework.md)を使用して一元的なメトリック収集を行います。 |
 | [`SHOW VARIABLES`](/sql-statements/sql-statement-show-variables.md)         | システム変数を表示します。                                                                                                                                                           |
 | [`SHOW WARNINGS`](/sql-statements/sql-statement-show-warnings.md)           | 以前に実行されたステートメントに関する警告と注記を表示します。                                                                                                                                         |
 
@@ -235,7 +235,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | SQL文                                                              | 説明                                                                                                                                                                      |
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`ALTER INSTANCE`](/sql-statements/sql-statement-alter-instance.md)     | インスタンスを変更します。                                                                                                                                                           |
-| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB は、ほとんどのメトリックに対して`SHOW STATUS`の代わりにPrometheus[PrometheusとGrafana](/tidb-monitoring-framework.md)Grafanaを使用して一元的なメトリック収集を行います。 |
+| [`FLUSH STATUS`](/sql-statements/sql-statement-flush-status.md)         | [MySQLとの互換性](/mysql-compatibility.md)のために含まれています。 TiDB は、ほとんどのメトリックに対して`SHOW STATUS`の代わりに[PrometheusとGrafana](/tidb-monitoring-framework.md)を使用して一元的なメトリック収集を行います。 |
 | [`KILL`](/sql-statements/sql-statement-kill.md)                         | 現在の TiDB クラスタ内の任意の TiDB インスタンスの接続を切断します。                                                                                                                                |
 | [`SHOW CONFIG`](/sql-statements/sql-statement-show-config.md)           | TiDBの各種コンポーネントの設定を表示します。                                                                                                                                                |
 | [`SHOW ENGINES`](/sql-statements/sql-statement-show-engines.md)         | 利用可能なストレージエンジンを表示します。                                                                                                                                                 |
@@ -266,7 +266,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | --------------------------------------------------------------------------------- | ---------------------------------- |
 | [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)                       | テーブルまたはパーティションの統計情報をロックします。        |
 | [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)   | 現在のセッションのテーブルをロックします。              |
-| [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)                   | テーブルまたはパーティションの統計情報へのアクセス権限を解放します。 |
+| [`UNLOCK STATS`](/sql-statements/sql-statement-unlock-stats.md)                   | テーブルまたはパーティションの統計情報のロックを解除します。 |
 | [`UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) | テーブルのロックを解除します。                    |
 
 ## アカウント管理／データ制御言語 {#account-management--data-control-language}
@@ -297,7 +297,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 | SQL文                                                                           | 説明                       |
 | ------------------------------------------------------------------------------------ | ------------------------ |
-| [`ADMIN [SET|SHOW|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md) | BDR（ビジネス開発担当者）の役割を管理します。 |
+| [`ADMIN [SET\|SHOW\|UNSET] BDR ROLE`](/sql-statements/sql-statement-admin-bdr-role.md) | BDR ロールを管理します。 |
 | [`SHOW MASTER STATUS`](/sql-statements/sql-statement-show-master-status.md)          | クラスター内の最新のTSOを表示します。     |
 
 </CustomContent>
