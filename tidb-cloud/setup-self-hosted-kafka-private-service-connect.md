@@ -46,7 +46,7 @@ Google Cloud でセルフホスト型 Kafka に Private Service Connect を設�
     5. **Zones of TiDB Cluster**をメモしておいてください。これらのゾーンに TiDB クラスターをデプロイします。ゾーン間のトラフィックを削減するため、これらのゾーンに Kafka をデプロイすることをお勧めします。
     6. Kafka プライベートサービス接続サービスに固有の**Kafka Advertised Listener Pattern**を選択します。
         1. 一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
-        2. **Check usage and generate**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されるか、Kafka プロキシが構成されます。
+        2. **Check usage and generate**をクリックすると、ランダム文字列が一意であるかどうかを確認し、Kafka ブローカーの EXTERNAL アドバタイズリスナーを組み立てるため、または Kafka-proxy を構成するために使用される**Kafka Advertised Listener Pattern**を生成します。
 
 すべてのデプロイメント情報をメモしてください。後でKafka Private Service Connectサービスを設定する際に必要になります。
 
@@ -56,7 +56,7 @@ Google Cloud でセルフホスト型 Kafka に Private Service Connect を設�
 | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | リージョン                           | オレゴン州 ( `us-west1` )                                                                                   |
 | TiDB Cloudの Google Cloud プロジェクト | `tidbcloud-prod-000`                                                                                   |
-| ゾーン                             | <li> `us-west1-a` </li><li> `us-west1-b` </li><li> `us-west1-c` </li>                                  |
+| ゾーン                             | <ul><li> `us-west1-a` </li><li> `us-west1-b` </li><li> `us-west1-c` </li></ul>                                  |
 | Kafka アドバタイズド リスナー パターン         | 一意のランダム文字列: `abc`<br/>生成されたパターン: &lt;broker_id&gt;.abc.us-west1.gcp.3199745.tidbcloud.com:&lt;port&gt; |
 
 ## PSC ポートマッピングによるセルフホスト型 Kafka Private Service Connect サービスの設定 {#set-up-self-hosted-kafka-private-service-connect-service-by-psc-port-mapping}
@@ -526,7 +526,7 @@ b3.abc.us-west1.gcp.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - **Action on match**： `Allow`
     - **ターゲット**： `All instances in the network`
     - **Source filter**: `IPv4 ranges`
-    - **Source IPv4 ranges**: `10.128.0.0/18` -subnetの範囲。
+    - **Source IPv4 ranges**: `10.128.0.0/18` 。psc-subnetの範囲。
     - **Protocols and ports**: すべて許可
 
 ### ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
@@ -561,7 +561,7 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
         - **マシンタイプ**: `e2-medium`ワークロードに応じて独自のマシンタイプを選択できます。
         - **Network**: Kafka クラスターに接続できる VPC ネットワーク。
         - **サブネットワーク**: Kafka クラスターに接続できるサブネット。
-        - **External IPv4 address**： `Ephemeral` -proxyの設定を容易にするため、インターネットアクセスを有効にしてください。本番環境では**None**を選択し、任意の方法でノードにログインできます。
+        - **External IPv4 address**： `Ephemeral` 。Kafka-proxyの設定を容易にするため、インターネットアクセスを有効にしてください。本番環境では**None**を選択し、任意の方法でノードにログインできます。
     - **場所**： `Single zone`
     - **リージョン**: `us-west1`
     - **ゾーン**: ブローカーのゾーンの 1つを選択します。
@@ -639,7 +639,7 @@ TiDB クラスターと同じリージョンで既に Kafka クラスターが�
     - フロントエンド構成
         - **サブネットワーク**: サブネット
         - **Ports**: `All`
-        - 健康チェック:
+        - ヘルスチェック:
             - **Name**: `kafka-proxy-hc`
             - **Scope**： `Regional`
             - **Protocol**： `TCP`

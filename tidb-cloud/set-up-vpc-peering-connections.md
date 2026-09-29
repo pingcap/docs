@@ -9,7 +9,7 @@ summary: VPC ピアリング経由でTiDB Cloud Dedicated に接続する方法�
 >
 > VPC ピアリング接続は、AWS および Google Cloud でホストされているTiDB Cloud Dedicated クラスターでのみ利用できます。
 
-アプリケーションをVPCピアリング経由でTiDB Cloudに接続するには、 TiDB Cloudで[VPCピアリング](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)を設定する必要があります。このドキュメントでは、VPCピアリング接続[AWS上](#set-up-vpc-peering-on-aws)と[Google Cloudで](#set-up-vpc-peering-on-google-cloud)設定と、VPCピアリング経由でTiDB Cloudに接続する手順について説明します。
+アプリケーションをVPCピアリング経由でTiDB Cloudに接続するには、 TiDB Cloudで[VPCピアリング](/tidb-cloud/tidb-cloud-glossary.md#vpc-peering)を設定する必要があります。このドキュメントでは、[AWS上](#set-up-vpc-peering-on-aws)と[Google Cloud上](#set-up-vpc-peering-on-google-cloud)でのVPCピアリング接続の設定と、VPCピアリング経由でTiDB Cloudに接続する手順について説明します。
 
 VPCピアリングは、2つのVPC間のネットワーク接続であり、プライベートIPアドレスを使用してトラフィックをルーティングできます。どちらのVPC内のインスタンスも、同じネットワーク内にあるかのように相互に通信できます。
 
@@ -17,13 +17,13 @@ VPCピアリングは、2つのVPC間のネットワーク接続であり、プ�
 
 > **Tip:**
 >
-> アプリケーションをTiDB Cloudに接続するには、 TiDB Cloudで[プライベートエンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を設定することもできます。TiDB Cloudは安全でプライベートであり、データがパブリックインターネットに公開されることはありません。VPCピアリング接続ではなく、プライベートエンドポイントを使用することをお勧めします。
+> アプリケーションをTiDB Cloudに接続するには、 TiDB Cloudで[プライベートエンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を設定することもできます。プライベートエンドポイント接続は安全でプライベートであり、データがパブリックインターネットに公開されることはありません。VPCピアリング接続ではなく、プライベートエンドポイントを使用することをお勧めします。
 
 ## 前提条件: リージョンの CIDR を設定する {#prerequisite-set-a-cidr-for-a-region}
 
 CIDR (Classless Inter-Domain Routing) は、 TiDB Cloud Dedicated クラスターの VPC を作成するために使用される CIDR ブロックです。
 
-VPCピアリングリクエストをリージョンに追加するには、そのリージョンのCIDRを設定し、そのリージョンに最初のTiDB Cloud Dedicatedクラスターを作成する必要があります。最初の専用クラスターが作成されると、 TiDB CloudはクラスターのVPCを作成し、アプリケーションのVPCへのピアリングリンクを確立できるようになります。
+VPCピアリングリクエストをリージョンに追加するには、そのリージョンのCIDRを設定し、そのリージョンに最初のTiDB Cloud Dedicatedクラスターを作成する必要があります。最初のDedicatedクラスターが作成されると、 TiDB CloudはクラスターのVPCを作成し、アプリケーションのVPCへのピアリングリンクを確立できるようになります。
 
 最初のTiDB Cloud Dedicatedクラスタを作成する際にCIDRを設定できます。クラスタ作成前にCIDRを設定する場合は、以下の操作を実行してください。
 
@@ -42,7 +42,7 @@ VPCピアリングリクエストをリージョンに追加するには、そ�
     > **Note:**
     >
     > - アプリケーションが配置されている VPC の CIDR との競合を避けるには、このフィールドに別のプロジェクト CIDR を設定する必要があります。
-    > - AWSリージョンの場合、IP範囲のサイズを`/16` ～ `/23`範囲で設定することをお勧めします。サポートされているネットワークアドレスは次のとおりです。
+    > - AWSリージョンの場合、IP範囲のサイズを`/16` ～ `/23`の範囲で設定することをお勧めします。サポートされているネットワークアドレスは次のとおりです。
     >     - 10.250.0.0 - 10.251.255.255
     >     - 172.16.0.0 - 172.31.255.255
     >     - 192.168.0.0 - 192.168.255.255
@@ -317,7 +317,7 @@ gcloud beta compute networks peerings create <your-peer-name> --project <your-pr
 
 > **Note:**
 >
-> `<your-peer-name>`お好きな名前を付けていただけます。
+> `<your-peer-name>`にはお好きな名前を付けていただけます。
 
 これでVPCピアリング接続の設定が完了しました。次に、 [VPCピアリング経由でTiDBクラスターに接続する](#connect-to-the-tidb-cluster)。
 

@@ -177,7 +177,7 @@ multi-VPC connectivity は、MSK クラスターへの PrivateLink アクセス�
 
     > **Warning:**
     >
-    > ポリシー内の `Principal` には、TiDB Cloud Premium インスタンスの AWS アカウント ID（[prerequisites](#prerequisites) で取得）を指定する必要があります。自分の AWS アカウント ID ではありません。誤った principal を指定すると、接続は失敗します。
+    > ポリシー内の `Principal` には、TiDB Cloud Premium インスタンスの AWS アカウント ID（[前提条件](#prerequisites) で取得）を指定する必要があります。自分の AWS アカウント ID ではありません。誤った principal を指定すると、接続は失敗します。
 
     以下は参考用のポリシー例です。
 

@@ -5,15 +5,15 @@ summary: AWS を使用してプライベートエンドポイント経由でTiDB
 
 # AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスタに接続する {#connect-to-a-tidb-cloud-dedicated-cluster-via-aws-privatelink}
 
-このドキュメントでは、 [AWS プライベートリンク](https://aws.amazon.com/privatelink)経由でTiDB Cloud Dedicated クラスターに接続する方法について説明します。
+このドキュメントでは、 [AWS PrivateLink](https://aws.amazon.com/privatelink)経由でTiDB Cloud Dedicated クラスターに接続する方法について説明します。
 
 > **Tip:**
 >
 > - AWS PrivateLink 経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 > - Azure のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)を参照してください。
-> - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)ご覧ください。
+> - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)をご覧ください。
 
-TiDB Cloudは、 AWS VPCでホストされているTiDB Cloudサービスへの、 [AWS プライベートリンク](https://aws.amazon.com/privatelink)経由の高度に安全な一方向アクセスをサポートします。まるでお客様のVPC内にあるかのように機能します。VPC内にプライベートエンドポイントが公開されており、権限があればエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
+TiDB Cloudは、 AWS VPCでホストされているTiDB Cloudサービスへの、 [AWS PrivateLink](https://aws.amazon.com/privatelink)経由の高度に安全な一方向アクセスをサポートします。まるでお客様のVPC内にあるかのように機能します。VPC内にプライベートエンドポイントが公開されており、権限があればエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 
 AWS PrivateLink を利用することで、エンドポイント接続は安全かつプライベートであり、データがパブリックインターネットに公開されることはありません。さらに、エンドポイント接続は CIDR オーバーラップをサポートし、ネットワーク管理が容易になります。
 
@@ -28,7 +28,7 @@ AWS PrivateLink を利用することで、エンドポイント接続は安全�
 
 ## 制限 {#restrictions}
 
-- プライベートエンドポイントを作成できるのは、ロール`Organization Owner`または`Project Owner`持つユーザーのみです。
+- プライベートエンドポイントを作成できるのは、`Organization Owner`または`Project Owner`ロールを持つユーザーのみです。
 - プライベートエンドポイントと接続先の TiDB クラスターは同じリージョンに配置されている必要があります。
 
 ほとんどのシナリオでは、VPC ピアリングではなくプライベートエンドポイント接続を使用することをお勧めします。ただし、以下のシナリオでは、プライベートエンドポイント接続ではなく VPC ピアリングを使用する必要があります。
@@ -186,7 +186,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 > **Tip:**
 >
-> クラスターに接続できない場合は、AWS の VPC エンドポイントのセキュリティグループが正しく設定されていないことが原因である可能性があります。解決策については[このFAQ](#troubleshooting)ご覧ください。
+> クラスターに接続できない場合は、AWS の VPC エンドポイントのセキュリティグループが正しく設定されていないことが原因である可能性があります。解決策については[このFAQ](#troubleshooting)をご覧ください。
 
 ### プライベートエンドポイントのステータスリファレンス {#private-endpoint-status-reference}
 

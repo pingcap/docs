@@ -51,7 +51,7 @@ changefeed ダウンストリーム サービスが AWS でホストされてい
 
 changefeed ダウンストリーム サービスが Google Cloud でホストされている場合は、ダウンストリーム サービスのサービス アタッチメント情報を収集します。
 
-ダウンストリーム サービスでサービス アタッチメントが利用できない場合は、手順[ステップ2. Kafka-proxyをプライベートサービス接続サービスとして公開する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#step-2-expose-kafka-proxy-as-private-service-connect-service)に従ってサービス アタッチメント情報を取得します。
+ダウンストリーム サービスでサービス アタッチメントが利用できない場合は、[ステップ2. Kafka-proxyをプライベートサービス接続サービスとして公開する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#step-2-expose-kafka-proxy-as-private-service-connect-service)に従ってサービス アタッチメント情報を取得します。
 
 </div>
 
@@ -131,7 +131,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 2. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前を入力します。
 
-3. 変更フィードを作成する前に、リマインダーに従って、 TiDB Cloudの Azure サブスクリプションを承認するか、エイリアスを持つすべてのユーザーが Private Link サービスにアクセスできるようにしてください。Private Link サービスの可視性に関する詳細については、Azure ドキュメントの[制御サービスの公開](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure)を参照してください。
+3. 変更フィードを作成する前に、リマインダーに従って、 TiDB Cloudの Azure サブスクリプションを承認するか、エイリアスを持つすべてのユーザーが Private Link サービスにアクセスできるようにしてください。Private Link サービスの可視性に関する詳細については、Azure ドキュメントの[サービスの公開の制御](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure)を参照してください。
 
 4. セクション[ネットワーク](#network)で収集した**プライベートリンクサービスのエイリアス**を入力します。
 

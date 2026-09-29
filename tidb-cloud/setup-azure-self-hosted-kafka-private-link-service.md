@@ -30,7 +30,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     - プライベートリンクサービスを管理する
     - 仮想マシンに接続して Kafka ノードを構成する
 
-2. Azure をお持ちでない場合は[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+2. Azure 上に TiDB Cloud Dedicated クラスターがない場合は、[TiDB Cloud Dedicatedクラスタを作成](/tidb-cloud/create-tidb-cluster.md)します。
 
 3. [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
@@ -94,7 +94,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     - **仮想マシン名**: `broker-node`
     - **Availability options**: `Availability zone`
     - **Zone options**: `Self-selected zone`
-    - `Zone 3` `Zone 2`**Availability zone**: `Zone 1`
+    - **Availability zone**: `Zone 1` 、 `Zone 2` 、 `Zone 3`
     - **Image**： `Ubuntu Server 24.04 LTS - x64 Gen2`
     - **VM architecture:** `x64`
     - **Size**: `Standard_D2s_v3`
@@ -147,7 +147,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
     1. `listeners`を構成します。3つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
         1. すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。ブローカーロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーを省略できます。
-        2. 2 つのブローカー リスナーを構成します。内部 Kafka クライアント アクセス用の**INTERNAL**と、 TiDB Cloudからのアクセス用の**EXTERNAL です**。
+        2. 2 つのブローカー リスナーを構成します。内部 Kafka クライアント アクセス用の**INTERNAL**と、 TiDB Cloudからのアクセス用の**EXTERNAL**です。
 
     2. `advertised.listeners`については、次の操作を行います。
         1. ブローカーノードの内部 IP アドレスを使用して、各ブローカーの内部アドバタイズリスナーを構成します。これにより、内部 Kafka クライアントはアドバタイズ アドレスを介してブローカーに接続できるようになります。
@@ -541,7 +541,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1. このドキュメントの冒頭の指示に従ってください。
 
-2. [ステップ1. Kafkaクラスターをセットアップする](#step-1-set-up-a-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)に進み、EXTERNAL リスナーとアドバタイズリスナーの別のグループを作成します。このグループの名前は**EXTERNAL2**とします。EXTERNAL2**の**ポート範囲は**EXTERNAL**と重複する可能性があることに注意してください。
+2. [ステップ1. Kafkaクラスターをセットアップする](#step-1-set-up-a-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)に進み、EXTERNAL リスナーとアドバタイズリスナーの別のグループを作成します。このグループの名前は**EXTERNAL2**とします。**EXTERNAL2**のポート範囲は**EXTERNAL**と重複する可能性があることに注意してください。
 
 3. ブローカーを再構成した後、新しいロードバランサーと新しいプライベートリンクサービスを作成します。
 

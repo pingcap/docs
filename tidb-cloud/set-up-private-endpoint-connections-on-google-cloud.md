@@ -5,7 +5,7 @@ summary: Google Cloud Private Service Connectを使用してTiDB Cloudクラス�
 
 # Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します。 {#connect-to-a-tidb-cloud-dedicated-cluster-via-google-cloud-private-service-connect}
 
-このドキュメントでは[プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect)を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。 Google Cloud Private Service Connect は、Google Cloud が提供するプライベートエンドポイントサービスです。
+このドキュメントでは[Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。 Google Cloud Private Service Connect は、Google Cloud が提供するプライベートエンドポイントサービスです。
 
 <CustomContent language="en,zh">
 
@@ -55,7 +55,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
     - `/17` : 地域ごとに最大 119 の PSC 接続
     - `/16` : 地域ごとに最大 247 の PSC 接続
 - 接続するプライベートエンドポイントとTiDBクラスタは、同じリージョンに配置されている必要があります。
-- 送信ファイアウォールルールでは、エンドポイントの内部 IP アドレスへのトラフィックを許可する必要があります。 [暗黙の送信許可ファイアウォールルール](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules)任意の宛先 IP アドレスへの送信を許可します。
+- 送信ファイアウォールルールでは、エンドポイントの内部 IP アドレスへのトラフィックを許可する必要があります。 [暗黙の送信許可ファイアウォールルール](https://cloud.google.com/firewall/docs/firewalls#default_firewall_rules)は、任意の宛先 IP アドレスへの送信を許可します。
 - VPCネットワークで送信拒否ファイアウォールルールを作成している場合、または暗黙的に許可される送信動作を変更する階層型ファイアウォールポリシーを作成している場合、エンドポイントへのアクセスに影響が出る可能性があります。この場合、エンドポイントの内部宛先IPアドレスへのトラフィックを許可する、特定の送信許可ファイアウォールルールまたはポリシーを作成する必要があります。
 
 ほとんどのシナリオでは、VPCピアリングよりもプライベートエンドポイント接続を使用することをお勧めします。ただし、以下のシナリオでは、プライベートエンドポイント接続の代わりにVPCピアリングを使用する必要があります。
@@ -65,7 +65,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 
 ## Google Cloud Private Service Connect を使用してプライベートエンドポイントを設定します。 {#set-up-a-private-endpoint-with-google-cloud-private-service-connect}
 
-[前提条件](#prerequisites)エンドポイント経由でTiDB Cloud Dedicatedクラスターに接続するには、 を完了し、以下の手順に従ってください。
+プライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続するには、[前提条件](#prerequisites)を完了し、以下の手順に従ってください。
 
 1. [TiDBクラスタを選択してください](#step-1-select-a-tidb-cluster)
 2. [Google Cloudプライベートエンドポイントを作成する](#step-2-create-a-google-cloud-private-endpoint)
@@ -78,19 +78,19 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 
 エンドポイントの作成を開始する前に：
 
-- Google Cloud プロジェクトで次の API [有効にする](https://console.cloud.google.com/apis/library/compute.googleapis.com)。
-    - [Comput Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
-    - [サービスディレクトリAPI](https://cloud.google.com/service-directory/docs/reference/rest)
+- Google Cloud プロジェクトで次の API を[有効に](https://console.cloud.google.com/apis/library/compute.googleapis.com)します。
+    - [Compute Engine API](https://cloud.google.com/compute/docs/reference/rest/v1)
+    - [Service Directory API](https://cloud.google.com/service-directory/docs/reference/rest)
     - [クラウドDNS API](https://cloud.google.com/dns/docs/reference/v1)
 
 - エンドポイントを作成するために必要な権限を持つ以下の[IAMロール](https://cloud.google.com/iam/docs/understanding-roles)を準備してください。
 
     - タスク:
         - エンドポイントを作成する
-        - エンドポイントの[DNSエントリ](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint)自動または手動で構成する
+        - エンドポイントの[DNSエントリ](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#dns-endpoint)を自動または手動で構成する
     - 必須のIAMロール：
-        - コンピュータネットワーク[コンピュータネットワーク管理者](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin))
-        - サービスディレクトリエディター(roles/ [サービスディレクトリエディター](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor))
+        - [Compute Network Admin](https://cloud.google.com/iam/docs/understanding-roles#compute.networkAdmin) (roles/compute.networkAdmin)
+        - [Service Directory Editor](https://cloud.google.com/iam/docs/understanding-roles#servicedirectory.editor) (roles/servicedirectory.editor)
 
 ### ステップ1. TiDBクラスタを選択します {#step-1-select-a-tidb-cluster}
 
@@ -132,7 +132,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 2. **VPC network** > **Private Service Connect** > **Connected endpoints**に移動し、 **Connect endpoint**をクリックします。
 3. TiDB Cloudで生成されたコマンドの値を使用してエンドポイントを設定します。
     - **Endpoint name**：コマンドで指定した転送ルール名を使用します。
-    - **Target**: **Published service**を選択し、 `--target-service-attachment`からサービス添付ファイル URI を入力します。
+    - **Target**: **Published service**を選択し、 `--target-service-attachment`からサービスアタッチメント URI を入力します。
     - **Region**：コマンドから地域を選択してください。
     - **Network**: `--network`から VPC ネットワークを選択してください。
     - **Subnetwork**： `--subnet`からサブネットを選択してください。
@@ -158,7 +158,7 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 ### プライベートエンドポイントの状態参照 {#private-endpoint-status-reference}
 
-プライベートエンドポイント接続を使用すると、プライベートエンドポイントまたはプライベートエンドポイントサービスのステータスが[**Private Endpoint**ページ](#prerequisites)ページに表示されます。
+プライベートエンドポイント接続を使用すると、プライベートエンドポイントまたはプライベートエンドポイントサービスのステータスが[**Private Endpoint**ページ](#prerequisites)に表示されます。
 
 プライベートエンドポイントの可能なステータスは、以下のように説明されます。
 
@@ -176,7 +176,7 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 ### TiDB Cloudでエンドポイントサービスの作成に失敗しました。どうすればよいですか？ {#tidb-cloud-fails-to-create-an-endpoint-service-what-should-i-do}
 
-エンドポイントサービスは、 **Create Google Cloud Private Endpoint Connection**ページを開いて TiDB クラスターを選択すると自動的に作成されます。作成が失敗と表示される場合、または[サポートチケット](/tidb-cloud/tidb-cloud-support.md)**Creating**の状態が長時間続く場合は、サポートに問い合わせてください。
+エンドポイントサービスは、 **Create Google Cloud Private Endpoint Connection**ページを開いて TiDB クラスターを選択すると自動的に作成されます。作成が失敗と表示される場合、または**Creating**の状態が長時間続く場合は、[サポートチケット](/tidb-cloud/tidb-cloud-support.md)を送信してサポートを受けてください。
 
 ### Google Cloudでエンドポイントを作成できませんでした。どうすればよいですか？ {#fail-to-create-an-endpoint-in-google-cloud-what-should-i-do}
 
@@ -186,12 +186,12 @@ Google Cloudでエンドポイントを正常に作成したら、 TiDB Cloudコ
 
 キャンセルされたアクションの未保存の下書きは保持も表示もされません。次回TiDB Cloudコンソールで新しいプライベートエンドポイントを作成する際は、各手順を繰り返す必要があります。
 
-Google Cloud Shell でプライベートエンドポイントを作成するコマンドをすでに実行している場合は、Google Cloud コンソールで手動で[対応するエンドポイントを削除します](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#delete-endpoint)必要があります。
+Google Cloud Shell でプライベートエンドポイントを作成するコマンドをすでに実行している場合は、Google Cloud コンソールで手動で[対応するエンドポイントを削除する](https://cloud.google.com/vpc/docs/configure-private-service-connect-services#delete-endpoint)必要があります。
 
-### TiDB Cloudコンソールで、サービス添付ファイルを直接コピーして生成されたエンドポイントが表示されないのはなぜですか？ {#why-can-t-i-see-the-endpoints-generated-by-directly-copying-the-service-attachment-in-the-tidb-cloud-console}
+### TiDB Cloudコンソールで、サービスアタッチメントを直接コピーして生成されたエンドポイントが表示されないのはなぜですか？ {#why-can-t-i-see-the-endpoints-generated-by-directly-copying-the-service-attachment-in-the-tidb-cloud-console}
 
 TiDB Cloudコンソールでは、 **Create Google Cloud Private Endpoint Connection**ページで生成されたコマンドによって作成されたエンドポイントのみを表示できます。
 
-ただし、サービス添付ファイルを直接コピーして生成されたエンドポイント（つまり、 TiDB Cloudコンソールで生成されたコマンドを使用して作成されたものではないエンドポイント）は、 TiDB Cloudコンソールには表示されません。
+ただし、サービスアタッチメントを直接コピーして生成されたエンドポイント（つまり、 TiDB Cloudコンソールで生成されたコマンドを使用して作成されたものではないエンドポイント）は、 TiDB Cloudコンソールには表示されません。
 
 [^1]: Google Cloud Private Service Connectアーキテクチャの図は、クリエイティブ コモンズ表示 4.0 インターナショナルに基づいてライセンスされている、Google Cloud ドキュメントの[プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect)ドキュメントからのものです。

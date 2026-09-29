@@ -135,7 +135,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 3. 前にメモしておいた**VPC ID** (この例では`vpc-01f50b790fa01dffa` ) を選択します。
 
-4. 以下の情報を含む3つのサブネットを追加します。TiDB Cloud、ブローカー`advertised.listener`設定でAZ IDをエンコードする必要があるため、後でブローカーを設定する際に便利なように、サブネット名にAZ IDを含めることをお勧めします。
+4. 以下の情報を含む3つのサブネットを追加します。TiDB Cloudでは、ブローカーの`advertised.listener`設定でAZ IDをエンコードする必要があるため、後でブローカーを設定する際に便利なように、サブネット名にAZ IDを含めることをお勧めします。
 
     - サブネット1 in `us-west-2a`
         - **Subnet name**: `broker-usw2-az1`
@@ -167,7 +167,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 4. 要塞サブネットをパブリックサブネットに構成します。
 
-    1. [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
+    1. [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`という名前のインターネットゲートウェイを作成します。
 
     2. **Internet gateways Detail**ページの**Actions**で、 **Attach to VPC**をクリックして、インターネット ゲートウェイを Kafka VPC に接続します。
 
@@ -190,7 +190,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 - **Name**: `bastion-node`
 - **Amazon Machine Image**: `Amazon Linux`
 - **Instance Type**: `t2.small`
-- **Key pair**: `kafka-vpc-key-pair` 。 `kafka-vpc-key-pair`という名前の新しいキーペアを作成します。 `kafka-vpc-key-pair.pem`ローカルマシンにダウンロードして、後で設定します。
+- **Key pair**: `kafka-vpc-key-pair` 。 `kafka-vpc-key-pair`という名前の新しいキーペアを作成します。 `kafka-vpc-key-pair.pem`をローカルマシンにダウンロードして、後で設定します。
 - ネットワーク設定
 
     - **VPC** : `Kafka VPC`
@@ -207,7 +207,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     - **Name**: `broker-node1`
     - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
-    - **Key pair**：再利用`kafka-vpc-key-pair`
+    - **Key pair**： `kafka-vpc-key-pair`を再利用します
     - ネットワーク設定
 
         - **VPC** : `Kafka VPC`
@@ -223,7 +223,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     - **Name**: `broker-node2`
     - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
-    - **Key pair**：再利用`kafka-vpc-key-pair`
+    - **Key pair**： `kafka-vpc-key-pair`を再利用します
     - ネットワーク設定
 
         - **VPC** : `Kafka VPC`
@@ -239,7 +239,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     - **Name**: `broker-node3`
     - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
-    - **Key pair**：再利用`kafka-vpc-key-pair`
+    - **Key pair**： `kafka-vpc-key-pair`を再利用します
     - ネットワーク設定
 
         - **VPC** : `Kafka VPC`
@@ -772,7 +772,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 ## ステップ3. TiDB Cloudから接続する {#step-3-connect-from-tidb-cloud}
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)に戻って、<CustomContent plan="dedicated">クラスタ</CustomContent><CustomContent plan="premium">実例</CustomContent>**Private Link**を使用してKafkaクラスターに接続します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)に戻って、<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の変更フィードを作成し、**Private Link**を使用してKafkaクラスターに接続します。詳細については、 [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 
 2. **Configure the changefeed target > Connectivity Method > Private Link**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
