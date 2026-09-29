@@ -11,7 +11,7 @@ summary: TiDBにおけるALTER PLACEMENT POLICYの使用方法。
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-`ALTER PLACEMENT POLICY`以前のポリシーを新しい定義に*置き換えます*。古いポリシーと新しいポリシー*をマージするわけ*ではありません。次の例では、 `FOLLOWERS=4`が実行されると、 `ALTER PLACEMENT POLICY`は失われます。
+`ALTER PLACEMENT POLICY`は、以前のポリシーを新しい定義に*置き換えます*。古いポリシーと新しいポリシーを*マージする*わけではありません。次の例では、 `ALTER PLACEMENT POLICY`が実行されると、 `FOLLOWERS=4`は失われます。
 
 ```sql
 CREATE PLACEMENT POLICY p1 FOLLOWERS=4;

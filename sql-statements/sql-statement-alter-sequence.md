@@ -162,7 +162,7 @@ SELECT NEXTVAL(s1);
 
 出力からわかるように、 `ALTER SEQUENCE`文の後に値が 2 増加します。
 
-シーケンスの他のパラメータを変更することもできます。例えば、シーケンスの`MAXVALUE`次のように変更できます。
+シーケンスの他のパラメータを変更することもできます。例えば、シーケンスの`MAXVALUE`を次のように変更できます。
 
 ```sql
 CREATE SEQUENCE s2 MAXVALUE=10;

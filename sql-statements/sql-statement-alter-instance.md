@@ -9,9 +9,9 @@ summary: TiDBにおけるALTER INSTANCE`の使用方法の概要を学びまし�
 
 > **Note:**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) TLS証明書を自動的に更新できるため、この機能は[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスには適用されません。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)はTLS証明書を自動的に更新できるため、この機能は[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスには適用されません。
 
-## TLSを再読み込みする {#reload-tls}
+## RELOAD TLS {#reload-tls}
 
 <CustomContent platform="tidb">
 

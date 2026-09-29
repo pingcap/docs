@@ -5,7 +5,7 @@ summary: TiDB データベースの ADMIN RESUME DDL の使用法の概要。
 
 # ADMIN RESUME DDL JOBS {#admin-resume-ddl-jobs}
 
-`ADMIN RESUME DDL`を使用すると、一時停止中のDDLジョブを再開できます。`job_id` [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行すると確認できます。
+`ADMIN RESUME DDL`を使用すると、一時停止中のDDLジョブを再開できます。`job_id`は、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)を実行すると確認できます。
 
 このステートメントを使用すると、一時停止中のDDLジョブを再開できます。再開が完了した後も、DDLジョブを実行するSQL文は実行中として表示されます。すでに完了しているDDLジョブを再開しようとすると、列`RESULT`にエラー`DDL Job:90 not found`が表示されます。これは、ジョブがDDL待機キューから削除されたことを示します。
 
@@ -21,7 +21,7 @@ NumList ::=
 
 ## 例 {#examples}
 
-`ADMIN RESUME DDL JOBS`現在一時停止中の DDL ジョブを再開し、ジョブが正常に再開されたかどうかを返します。
+`ADMIN RESUME DDL JOBS`は、現在一時停止中の DDL ジョブを再開し、ジョブが正常に再開されたかどうかを返します。
 
 ```sql
 ADMIN RESUME DDL JOBS job_id [, job_id] ...;
@@ -33,20 +33,20 @@ ADMIN RESUME DDL JOBS job_id [, job_id] ...;
 
 > **Note:**
 >
-> - クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](/smooth-upgrade-tidb.md)ご覧ください。
+> - クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](/smooth-upgrade-tidb.md)をご覧ください。
 > - このステートメントは複数のDDLジョブを再開できます。[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`を取得できます。
 > - その他のステータス ( `paused`以外) の DDL ジョブは再開できず、再開操作は失敗します。
-> - ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`報告します。
+> - ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`を報告します。
 
 </CustomContent>
 <CustomContent platform="tidb-cloud">
 
 > **Note:**
 >
-> - クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb)ご覧ください。
+> - クラスタのアップグレード中は、実行中のDDLジョブが一時停止され、アップグレード中に開始されたDDLジョブも一時停止されます。アップグレード後、一時停止されていたすべてのDDLジョブは再開されます。アップグレード中の一時停止と再開の操作は自動的に実行されます。詳細は[TiDB スムーズアップグレード](https://docs.pingcap.com/tidb/stable/smooth-upgrade-tidb)をご覧ください。
 > - このステートメントは複数のDDLジョブを再開できます。[`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)ステートメントを使用して、DDLジョブの`job_id`を取得できます。
 > - その他のステータス ( `paused`以外) の DDL ジョブは再開できず、再開操作は失敗します。
-> - ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`報告します。
+> - ジョブを複数回再開しようとすると、TiDB はエラー`Error Number: 8261`を報告します。
 
 </CustomContent>
 

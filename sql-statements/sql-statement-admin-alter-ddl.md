@@ -50,9 +50,9 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 
 前述のパラメータの値の範囲は、対応するシステム変数の値の範囲と一致しています。
 
-`ADMIN ALTER DDL JOBS`実行中の DDL ジョブに対してのみ有効です。DDL ジョブが存在しない場合、または既に完了している場合は、このステートメントを実行すると`ddl job is not running`エラーが返されます。
+`ADMIN ALTER DDL JOBS`は、実行中の DDL ジョブに対してのみ有効です。DDL ジョブが存在しない場合、または既に完了している場合は、このステートメントを実行すると`ddl job is not running`エラーが返されます。
 
-以下に、この記述の例をいくつか示します。
+以下に、このステートメントの例をいくつか示します。
 
 ```sql
 ADMIN ALTER DDL JOBS 101 THREAD = 8;
