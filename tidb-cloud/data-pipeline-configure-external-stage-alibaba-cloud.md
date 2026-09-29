@@ -1,6 +1,7 @@
 ---
 title: Set Up an External Stage for TiDB Cloud Data Pipeline (Alibaba Cloud)
 summary: Learn how to configure an Alibaba Cloud OSS bucket as an external stage for TiDB Cloud Data Pipeline, including the RAM user and access keys.
+aliases: ['/tidb-cloud/data-pipeline-lake-configure-external-stage-alibaba-cloud']
 ---
 
 # Set Up an External Stage for TiDB Cloud Data Pipeline (Alibaba Cloud)

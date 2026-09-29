@@ -1,9 +1,10 @@
 ---
-title: Set Up Data Pipeline from TiDB Cloud Premium to TiDB Cloud Lake
+title: Sink to TiDB Cloud Lake
 summary: Learn how to create, monitor, and manage a data pipeline that replicates data from a TiDB Cloud Premium instance to TiDB Cloud Lake.
+aliases: ['/tidb-cloud/data-pipeline-lake-setup-for-premium']
 ---
 
-# Set Up Data Pipeline from TiDB Cloud Premium to TiDB Cloud Lake
+# Sink to TiDB Cloud Lake
 
 In TiDB Cloud, you can use Data Pipeline to replicate full data and incremental changes from your TiDB Cloud Premium instance to TiDB Cloud Lake, without requiring a third-party ETL tool. It first exports a full snapshot of the selected source data, and then can continuously replicate row changes so that the data in TiDB Cloud Lake stays up to date.
 
@@ -64,7 +65,7 @@ TiDB Cloud Data Pipeline supports Amazon S3 and Alibaba Cloud OSS as the externa
 
         One IAM role is shared by TiDB Cloud (which writes to the stage) and TiDB Cloud Lake (which reads from the stage), so that you configure the authorization only once and no long-lived access key is stored. You can create the role with the CloudFormation template provided by TiDB Cloud, or set it up manually in AWS.
 
-        For the complete AWS-side setup, see [Set Up an Amazon S3 External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-lake-configure-external-stage-aws.md). After the role is created, in the TiDB Cloud console, paste the `RoleARN` output value in the **Role ARN** field, and, if you also created an SQS queue, copy the queue URL into the **SQS Queue URL** field.
+        For the complete AWS-side setup, see [Set Up an Amazon S3 External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-configure-external-stage-aws.md). After the role is created, in the TiDB Cloud console, paste the `RoleARN` output value in the **Role ARN** field, and, if you also created an SQS queue, copy the queue URL into the **SQS Queue URL** field.
 
     - Method 2: Use an AWS access key
 
@@ -72,7 +73,7 @@ TiDB Cloud Data Pipeline supports Amazon S3 and Alibaba Cloud OSS as the externa
         >
         > Using an access key and secret key (AK/SK) requires manual credential management and rotation, which increases security risks. For stronger security, use **AWS Role ARN** instead.
 
-        For the complete AWS-side setup, including the IAM user, its permissions, and the optional SQS queue, see [Bucket Access with Access Key](/tidb-cloud/data-pipeline-lake-configure-external-stage-aws.md#option-3-bucket-access-with-access-key-not-recommended). Then, in the TiDB Cloud console, select **AWS Access Key**, and fill in **Access Key ID** and **Secret Access Key**.
+        For the complete AWS-side setup, including the IAM user, its permissions, and the optional SQS queue, see [Bucket Access with Access Key](/tidb-cloud/data-pipeline-configure-external-stage-aws.md#option-3-bucket-access-with-access-key-not-recommended). Then, in the TiDB Cloud console, select **AWS Access Key**, and fill in **Access Key ID** and **Secret Access Key**.
 
     After you have filled in the required information for the method you selected, click **Test Connection** to verify that TiDB Cloud can access the bucket. If the check fails, verify the bucket region and the permissions granted to the role or the access key, and then test the connection again.
 
@@ -80,7 +81,7 @@ TiDB Cloud Data Pipeline supports Amazon S3 and Alibaba Cloud OSS as the externa
 
 <div label="Alibaba Cloud OSS">
 
-For the complete OSS-side setup, including the RAM user, its permissions, and the access keys, see [Set Up an Alibaba Cloud OSS External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-lake-configure-external-stage-alibaba-cloud.md).
+For the complete OSS-side setup, including the RAM user, its permissions, and the access keys, see [Set Up an Alibaba Cloud OSS External Stage for TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md).
 
 1. In the **External Stage** area, enter the **Bucket URI** of your OSS bucket in the `oss://<bucket-name>/<path-to-data>/` format.
 2. Fill in the following fields:

@@ -1,9 +1,10 @@
 ---
-title: Set Up Data Pipeline from TiDB Cloud Essential to TiDB Cloud Lake
+title: Sink to TiDB Cloud Lake
 summary: Manual setup guide for building a TiDB Cloud Lake data pipeline on TiDB Cloud Essential instances using export, a changefeed, and TiDB Cloud Lake integration.
+aliases: ['/tidb-cloud/data-pipeline-lake-setup-for-essential']
 ---
 
-# Set Up Data Pipeline from TiDB Cloud Essential to TiDB Cloud Lake
+# Sink to TiDB Cloud Lake
 
 TiDB Cloud Essential does not provide the native Data Pipeline setup experience in the TiDB Cloud console. To replicate data from a TiDB Cloud Essential instance to TiDB Cloud Lake, you need to configure the pipeline manually.
 

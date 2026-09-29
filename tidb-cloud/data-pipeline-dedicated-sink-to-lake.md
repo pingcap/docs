@@ -1,9 +1,10 @@
 ---
-title: Set Up Data Pipeline from TiDB Cloud Dedicated to TiDB Cloud Lake
+title: Sink to TiDB Cloud Lake
 summary: Manual setup guide for building a TiDB Cloud Lake data pipeline on TiDB Cloud Dedicated clusters using Dumpling and a changefeed.
+aliases: ['/tidb-cloud/data-pipeline-lake-setup-for-dedicated']
 ---
 
-# Set Up Data Pipeline from TiDB Cloud Dedicated to TiDB Cloud Lake
+# Sink to TiDB Cloud Lake
 
 This guide walks you through the end-to-end setup of a data pipeline from a TiDB Cloud Dedicated cluster to TiDB Cloud Lake: export a full snapshot to Amazon S3 with [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview), create a changefeed to continuously write incremental changes to the same S3 location, and configure TiDB Cloud Lake to load both the snapshot and incremental data. TiDB Cloud Dedicated does not provide the native Data Pipeline setup experience in the TiDB Cloud console, so you need to configure the pipeline manually.
 
