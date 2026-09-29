@@ -33,7 +33,7 @@ TiDB Cloud は、ターミナルから数行のコマンドで TiDB Cloud Starte
 <SimpleTab>
 <div label="macOS/Linux">
 
-macOS または Linux の場合、 `ticloud`次のいずれかの方法を使用してインストールできます。
+macOS または Linux の場合、 `ticloud`は次のいずれかの方法を使用してインストールできます。
 
 - スクリプト経由でインストールする（推奨）
 
@@ -79,7 +79,7 @@ MySQLコマンドラインクライアントがインストールされていな
 
 <div label="Windows">
 
-Windowsの場合、 `ticloud`以下のいずれかの方法でインストールできます。
+Windowsの場合、 `ticloud`は以下のいずれかの方法でインストールできます。
 
 - 手動でインストール
 
@@ -89,7 +89,7 @@ Windowsの場合、 `ticloud`以下のいずれかの方法でインストール
 
     GitHub Actions で`ticloud`を設定するには、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
 
-MySQL コマンドライン クライアントがインストールされていない場合はインストールしてください。インストール方法については[Windows 用 MySQL インストーラー](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html)手順を参照してください。Windows で`ticloud connect`を起動するには、 `mysql.exe`を含むディレクトリが PATH 環境変数に含まれている必要があります。
+MySQL コマンドライン クライアントがインストールされていない場合はインストールしてください。インストール方法については[Windows 用 MySQL インストーラー](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html)の手順を参照してください。Windows で`ticloud connect`を起動するには、 `mysql.exe`を含むディレクトリが PATH 環境変数に含まれている必要があります。
 
 </div>
 </SimpleTab>
@@ -100,7 +100,7 @@ MySQL コマンドライン クライアントがインストールされてい�
 >
 > TiUPを使用する場合は、`ticloud`の代わりに`tiup cloud`を使用できます。
 
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 、 TiDB Cloudを始めるための最適な方法です。このセクションでは、 TiDB Cloud CLIを使用してTiDB Cloud Starterインスタンスを作成する方法を学びます。
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)は、 TiDB Cloudを始めるための最適な方法です。このセクションでは、 TiDB Cloud CLIを使用してTiDB Cloud Starterインスタンスを作成する方法を学びます。
 
 ### TiDB Cloudでユーザープロファイルを作成するか、ログインしてください。 {#create-a-user-profile-or-log-into-tidb-cloud}
 
@@ -184,4 +184,4 @@ TiDB Cloud CLI の機能をさらに詳しく調べるには、 [CLIリファレ
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI に関してご質問やご提案がありましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)ご報告ください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI に関してご質問やご提案がありましたら、お気軽に[issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

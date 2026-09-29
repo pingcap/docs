@@ -33,7 +33,7 @@ summary: Amazon S3またはAlibaba Cloud Object Storage Service（OSS）からCS
     > **Note:**
     >
     > - パフォーマンスを向上させるためには、各圧縮ファイルのサイズを100MiBに制限することをお勧めします。
-    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
     > - 非圧縮ファイルの場合、場合によっては前述のルールに従ってCSVファイル名を更新できない場合（たとえば、CSVファイルリンクが他のプログラムでも使用されている場合）、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files)の**Mapping Settings**を使用してソースデータを単一のターゲットテーブルにインポートできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}

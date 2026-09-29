@@ -5,7 +5,7 @@ summary: TiDB Cloudで Cloudflare Workers をデプロイする方法を学び�
 
 # TiDB CloudとCloudflare Workersを統合する {#integrate-tidb-cloud-with-cloudflare-workers}
 
-[Cloudflare Workers](https://workers.cloudflare.com/) 、HTTPリクエストやデータベースの変更といった特定のイベントに応じてコードを実行できるプラットフォームです。Cloudflare Workersは使いやすく、カスタムAPI、サーバーレス関数、マイクロサービスなど、さまざまなアプリケーションの構築に利用できます。特に、低遅延性能が求められるアプリケーションや、迅速なスケーリングが必要なアプリケーションに最適です。
+[Cloudflare Workers](https://workers.cloudflare.com/)は、HTTPリクエストやデータベースの変更といった特定のイベントに応じてコードを実行できるプラットフォームです。Cloudflare Workersは使いやすく、カスタムAPI、サーバーレス関数、マイクロサービスなど、さまざまなアプリケーションの構築に利用できます。特に、低遅延性能が求められるアプリケーションや、迅速なスケーリングが必要なアプリケーションに最適です。
 
 Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を確立できず、Cloudflare WorkersからTiDB Cloudへの接続が難しい場合があります。[TiDB Cloud Serverless Driver](/develop/serverless-driver.md)は、HTTP接続を介してCloudflare WorkersからTiDB Cloudに接続するのに役立ちます。
 
@@ -26,7 +26,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 
 ## ステップ1：Wranglerをセットアップする {#step-1-set-up-wrangler}
 
-[Wrangler](https://developers.cloudflare.com/workers/wrangler/)Cloudflare Worker の公式 CLI です。これを使用して、Worker の生成、構築、プレビュー、および公開を行うことができます。
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/)は、Cloudflare Worker の公式 CLI です。これを使用して、Worker の生成、構築、プレビュー、および公開を行うことができます。
 
 1. Wranglerをインストールする：
 
@@ -50,7 +50,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 
 ## ステップ2：TiDB Cloud Serverless Driverをインストールする {#step-2-install-the-serverless-driver}
 
-1. プロジェクトディレクトリを入力してください：
+1. プロジェクトディレクトリに移動します：
 
     ```
     cd tidb-cloud-cloudflare

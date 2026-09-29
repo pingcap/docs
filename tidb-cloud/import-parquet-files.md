@@ -15,7 +15,7 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
 
 - データの一貫性を確保するため、 TiDB Cloud では Parquet ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従ってTiDB Cloud を使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
 
-- TiDB Cloud Dedicatedクラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)があるか、 [特定時点への復元](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません ([**Import Data**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム リストアはインポートされたデータを検出できません。
+- TiDB Cloud Dedicatedクラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)があるか、 [特定時点への復元](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません (**Import Data**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム リストアはインポートされたデータを検出できません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
@@ -42,7 +42,7 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
     > **Note:**
     >
     > - 前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)の**Destination Mapping**サブステップで**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**の選択を解除して、ソースファイルを単一のターゲットテーブルに手動でマッピングできます。
-    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -128,7 +128,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
@@ -140,7 +140,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
         - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 
-            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data?.parquet` : `my-data`で始まり、その後に 1 文字が続くすべての Parquet ファイルに一致します。たとえば`my-data1.parquet`や`my-data2.parquet`などです。
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data10.parquet`や`my-data100.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。
@@ -179,7 +179,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
@@ -191,7 +191,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
         - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 
-            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data?.parquet` : `my-data`で始まり、その後に 1 文字が続くすべての Parquet ファイルに一致します。たとえば`my-data1.parquet`や`my-data2.parquet`などです。
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data10.parquet`や`my-data100.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。
@@ -251,11 +251,11 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     > **Note:**
     >
-    > エンドポイントがまだ承認されていない場合、 TiDB Cloud は接続が承認待ちであることを示すメッセージを表示します。Azure でリクエスト[Azureポータル](https://portal.azure.com/)承認してから、再試行してください。
+    > エンドポイントがまだ承認されていない場合、 TiDB Cloud は接続が承認待ちであることを示すメッセージを表示します。[Azureポータル](https://portal.azure.com/)でリクエストを承認してから、再試行してください。
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
@@ -267,7 +267,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
         - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 
-            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data?.parquet` : `my-data`で始まり、その後に 1 文字が続くすべての Parquet ファイルに一致します。たとえば`my-data1.parquet`や`my-data2.parquet`などです。
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data10.parquet`や`my-data100.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。
@@ -292,7 +292,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
 3. Parquetファイル内のデータ型を確認してください。
 
-    Parquet ファイルにサポートされていないデータ型 (たとえば、 `NEST STRUCT` 、 `ARRAY` 、または`MAP` ) が含まれている場合は、サポートされているデータ[サポートされているデータ型](#supported-data-types)(たとえば、 `STRING` )。
+    Parquet ファイルにサポートされていないデータ型 (たとえば、 `NEST STRUCT` 、 `ARRAY` 、または`MAP` ) が含まれている場合は、[サポートされているデータ型](#supported-data-types) (たとえば、 `STRING` ) を使用して Parquet ファイルを再生成する必要があります。
 
 4. インポートタスクをもう一度実行してみてください。
 

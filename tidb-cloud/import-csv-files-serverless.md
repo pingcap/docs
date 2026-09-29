@@ -27,12 +27,12 @@ summary: Amazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object St
 
     - 1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値サフィックスを追加してください。例えば、 `${db_name}.${table_name}.000001.csv`と`${db_name}.${table_name}.000002.csv`のようにです。数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
 
-    - TiDB Cloudは、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` `.snappy`の各形式の圧縮ファイルのインポートをサポートしています。圧縮 CSV ファイルをインポートする場合は、ファイル名を`${db_name}.${table_name}.${suffix}.csv.${compress}`形式で指定します。この形式では、 `${suffix}`は省略可能で、'000001'などの任意の整数を指定できます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
+    - TiDB Cloudは、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、 `.snappy`の各形式の圧縮ファイルのインポートをサポートしています。圧縮 CSV ファイルをインポートする場合は、ファイル名を`${db_name}.${table_name}.${suffix}.csv.${compress}`形式で指定します。この形式では、 `${suffix}`は省略可能で、'000001'などの任意の整数を指定できます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
 
     > **Note:**
     >
     > - パフォーマンスを向上させるためには、各圧縮ファイルのサイズを100MiBに制限することをお勧めします。
-    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
     > - 非圧縮ファイルの場合、場合によっては前述のルールに従ってCSVファイル名を更新できない場合（たとえば、CSVファイルリンクが他のプログラムでも使用されている場合）、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files)の**Mapping Settings**を使用してソースデータを単一のターゲットテーブルにインポートできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
@@ -86,7 +86,7 @@ TiDB CloudがAmazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Objec
 
 - CSV ファイルが Azure Blob Storage にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスに対して[Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)。
 
-- CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud StarterまたはEssentialインスタンス[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+- CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスに対して[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)します。
 
 ## ステップ4．CSVファイルをインポートする {#step-4-import-csv-files}
 
@@ -133,7 +133,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
         - **Source**: ファイル名のパターンを`[file_name].csv`の形式で入力してください。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
+            - `my-data?.csv` : `my-data`で始まり、その後に 1 文字が続くすべての CSV ファイルに一致します。たとえば`my-data1.csv`や`my-data2.csv`などです。
             - `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
@@ -184,7 +184,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
         - **Source**: ファイル名のパターンを`[file_name].csv`の形式で入力してください。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
+            - `my-data?.csv` : `my-data`で始まり、その後に 1 文字が続くすべての CSV ファイルに一致します。たとえば`my-data1.csv`や`my-data2.csv`などです。
             - `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
@@ -235,7 +235,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
         - **Source**: ファイル名のパターンを`[file_name].csv`の形式で入力してください。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
+            - `my-data?.csv` : `my-data`で始まり、その後に 1 文字が続くすべての CSV ファイルに一致します。たとえば`my-data1.csv`や`my-data2.csv`などです。
             - `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
@@ -286,7 +286,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
         - **Source**: ファイル名のパターンを`[file_name].csv`の形式で入力してください。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
+            - `my-data?.csv` : `my-data`で始まり、その後に 1 文字が続くすべての CSV ファイルに一致します。たとえば`my-data1.csv`や`my-data2.csv`などです。
             - `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。

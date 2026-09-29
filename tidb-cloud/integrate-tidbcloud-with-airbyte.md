@@ -5,7 +5,7 @@ summary: Airbyte TiDBコネクタの使い方を学びましょう。
 
 # TiDB CloudとAirbyteを統合する {#integrate-tidb-cloud-with-airbyte}
 
-[Airbyte](https://airbyte.com/)データウェアハウス、データレイク、データベース内のデータを統合し、抽出、ロード、変換（ELT）パイプラインを構築するためのオープンソースのデータ統合エンジンです。このドキュメントでは、Airbyteをソースまたは宛先としてTiDB Cloudに接続する方法について説明します。
+[Airbyte](https://airbyte.com/)は、データウェアハウス、データレイク、データベース内のデータを統合し、抽出、ロード、変換（ELT）パイプラインを構築するためのオープンソースのデータ統合エンジンです。このドキュメントでは、Airbyteをソースまたは宛先としてTiDB Cloudに接続する方法について説明します。
 
 ## Airbyteをデプロイ {#deploy-airbyte}
 
@@ -26,7 +26,7 @@ Airbyteは、わずか数ステップでローカル環境にデプロイでき�
     docker-compose up
     ```
 
-Airbyteのバナーが表示されたら、ユーザー名（ `airbyte` ）とパスワード（`password`）を使用して[http://localhost:8000](http://localhost:8000) `password`アクセスし、UIにアクセスできます。
+Airbyteのバナーが表示されたら、ユーザー名（ `airbyte` ）とパスワード（`password`）を使用して[http://localhost:8000](http://localhost:8000)にアクセスし、UIにアクセスできます。
 
 ```
 airbyte-server      |     ___    _      __          __
@@ -48,19 +48,19 @@ airbyte-server      | --------------------------------------
 
 2. 以下のパラメータを入力してください。
 
-    - ホスト: <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターのエンドポイント
+    - ホスト: <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>のエンドポイント
     - ポート: データベースのポート番号
     - データベース：データを同期したいデータベース
     - ユーザー名：データベースにアクセスするためのユーザー名
     - パスワード：ユーザー名のパスワード
 
-    TiDB Cloudコンソールの接続ダイアログからパラメーター値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
+    TiDB Cloudコンソールの接続ダイアログからパラメーター値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>の名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
 
 3. **SSL Connection**を有効にし、 **JDBC URLパラメータ**でTLSプロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
 
     > **Note:**
     >
-    > - TiDB Cloud はTLS 接続をサポートしています。TLSv1.2 および**TLSv1.3**から TLS プロトコルを選択できます。たとえば、 `enabledTLSProtocols=TLSv1.2`。
+    > - TiDB Cloud はTLS 接続をサポートしています。**TLSv1.2** および**TLSv1.3**から TLS プロトコルを選択できます。たとえば、 `enabledTLSProtocols=TLSv1.2`。
     > - JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
     > - TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
 

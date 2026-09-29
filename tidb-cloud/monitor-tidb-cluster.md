@@ -5,7 +5,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 # TiDBを監視する {#monitor-tidb}
 
-このドキュメントでは<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターを監視する方法について説明します。
+このドキュメントでは<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>を監視する方法について説明します。
 
 <CustomContent plan="dedicated">
 
@@ -78,7 +78,7 @@ summary: TiDB Cloudリソースの監視方法を学びましょう。
 
 ## モニタリング指標 {#monitoring-metrics}
 
-TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの一般的に使用されるメトリクスを表示できます。
+TiDB Cloudでは、次のページから、 <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>の一般的に使用されるメトリクスを表示できます。
 
 - **Overview**ページ
 - **Metrics**ページ
