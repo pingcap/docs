@@ -154,7 +154,7 @@
   - Reference
     - [Set Up an External Stage for TiDB Cloud Data Pipeline (AWS)](/tidb-cloud/data-pipeline-configure-external-stage-aws.md)
     - [Set Up an External Stage for TiDB Cloud Data Pipeline (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md)
-    - [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-support-matrix.md)
+    - [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
     - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 
 - Security

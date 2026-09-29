@@ -14,7 +14,7 @@ This guide walks you through the end-to-end setup of a data pipeline from a TiDB
 - Only tables with a **primary key** can be replicated incrementally.
 - To create the cloud storage changefeed, your {{{ .dedicated }}} cluster must run v7.1.1 or later. For details, see [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md).
 - The pipeline requires manual setup and maintenance of AWS IAM resources and credentials, the changefeed, and TiDB Cloud Lake integrations.
-- For details on DDL, DML, and column type support, see [Data Pipeline Support Matrix](/tidb-cloud/data-pipeline-lake-support-matrix.md).
+- For details on DDL, DML, and column type support, see [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md).
 
 ## Prerequisites
 
@@ -157,4 +157,4 @@ TiDB Cloud Dedicated supports creating a cloud storage changefeed in the console
 ## See also
 
 - For frequently asked questions about Data Pipeline, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md).
-- For details on DDL, DML, and column type support, see [Data Pipeline Support Matrix](/tidb-cloud/data-pipeline-lake-support-matrix.md).
+- For details on DDL, DML, and column type support, see [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md).

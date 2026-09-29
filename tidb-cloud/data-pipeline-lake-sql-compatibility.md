@@ -1,9 +1,10 @@
 ---
-title: Data Pipeline Support Matrix
+title: Data Pipeline SQL Compatibility for TiDB Cloud Lake
 summary: Reference for DDL, DML, and column type support in TiDB Cloud Data Pipeline to TiDB Cloud Lake.
+aliases: ['/tidb-cloud/data-pipeline-lake-support-matrix']
 ---
 
-# Data Pipeline Support Matrix
+# Data Pipeline SQL Compatibility for TiDB Cloud Lake
 
 This document summarizes the DDL, DML, and column type support for TiDB Cloud Data Pipeline based on tested behavior. Use it as a reference when planning your data pipeline setup or troubleshooting replication behavior.
 

@@ -15,7 +15,7 @@ This guide walks you through the end-to-end setup: export a full snapshot to Ama
 - The TiDB Cloud Lake warehouse must be in the **same region** as your Essential instance.
 - Only tables with a **primary key** can be replicated incrementally.
 - The pipeline requires manual setup and maintenance of AWS IAM resources and credentials, changefeeds, and TiDB Cloud Lake integrations.
-- For details on DDL, DML, and column type support, see [Data Pipeline Support Matrix](/tidb-cloud/data-pipeline-lake-support-matrix.md).
+- For details on DDL, DML, and column type support, see [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md).
 
 ## Prerequisites
 
@@ -344,4 +344,4 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
 ## See also
 
 - For frequently asked questions about Data Pipeline, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md).
-- For details on DDL, DML, and column type support, see [Data Pipeline Support Matrix](/tidb-cloud/data-pipeline-lake-support-matrix.md).
+- For details on DDL, DML, and column type support, see [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md).
