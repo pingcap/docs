@@ -45,7 +45,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md) Google Cloud にデプロイされた TiDB クラスタの高速物理モードをサポートします。
+- [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)は、Google Cloud にデプロイされた TiDB クラスタの高速物理モードをサポートします。
 
     AWSおよびGoogle CloudにデプロイされたTiDBクラスタで物理モードがご利用いただけるようになりました。物理モードの移行速度は最大110MiB/sに達し、論理モードの2.4倍の速度です。このパフォーマンス向上は、大規模なデータセットをTiDB Cloudに迅速に移行する場合に最適です。
 
@@ -106,7 +106,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- AWS にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのうち[デュアルリージョンバックアップ（ベータ版）](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)サポートします。
+- AWS にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[デュアルリージョンバックアップ（ベータ版）](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)をサポートします。
 
     クラウドプロバイダー内の地理的リージョン間でバックアップを複製できるようになりました。この機能により、データ保護と災害復旧機能がさらにレイヤーされます。
 
@@ -142,7 +142,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     2 vCPU オプションは、**Create Cluster**ページまたは**Modify Cluster**ページで使用できなくなりました。
 
-- JavaScript のリリース[TiDB Cloud Serverless Driver (ベータ版)](/develop/serverless-driver.md) 。
+- JavaScript 向けの[TiDB Cloud Serverless Driver (ベータ版)](/develop/serverless-driver.md)をリリースします。
 
     JavaScript用[TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用すると、HTTPS経由で[TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターに接続できます。特に、TCP接続数が[Vercelエッジ関数](https://vercel.com/docs/functions/edge-functions)や[Cloudflareワーカー](https://workers.cloudflare.com/)など制限されているエッジ環境で役立ちます。
 
@@ -156,15 +156,15 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [Data Service（ベータ版）](https://tidbcloud.com/project/data-service) 、さまざまな状況での特定のレート制限要件を満たすために、各 API キーのレート制限をカスタマイズすることがサポートされています。
+- [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)は、さまざまな状況での特定のレート制限要件を満たすために、各 API キーのレート制限をカスタマイズすることをサポートします。
 
-    キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)にすると、API キーのレート制限を調整できます。
+    キーを[作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)または[編集](/tidb-cloud/data-service-api-key.md#edit-an-api-key)するときに、API キーのレート制限を調整できます。
 
     詳細については[レート制限](/tidb-cloud/data-service-api-key.md#rate-limiting)を参照してください。
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい AWS リージョンをサポートします: サンパウロ (sa-east-1)。
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)つのクラスターごとに最大 100 個の IP アドレスを IP アクセス リストに追加することをサポートします。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターごとに最大 100 個の IP アドレスを IP アクセス リストに追加することをサポートします。
 
     詳細については[IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
@@ -178,7 +178,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **APIの変更**
 
-- [AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc)または[Google Cloud プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect) for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを管理するためのTiDB Cloud API エンドポイントをいくつかリリースします。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[AWS プライベートリンク](https://aws.amazon.com/privatelink/?privatelink-blogs.sort-by=item.additionalFields.createdDate&privatelink-blogs.sort-order=desc)または[Google Cloud プライベートサービス接続](https://cloud.google.com/vpc/docs/private-service-connect)を管理するためのTiDB Cloud API エンドポイントをいくつかリリースします。
 
     - クラスターのプライベートエンドポイントサービスを作成する
     - クラスターのプライベートエンドポイントサービス情報を取得する
@@ -241,7 +241,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
     - AWS でホストされている TiDB ノードをスケールアウトするときに、既存の接続を新しい TiDB ノードに自動的に移行することを無効にします。
     - AWS でホストされている TiDB ノードをスケールインするときに、利用可能な TiDB ノードへの既存の接続の自動移行を無効にします。
 
-    この変更により、ハイブリッドデプロイにおけるリソース競合が回避され、この改善が有効になっている既存のクラスターには影響しません。新しいクラスターで負荷分散の改善を有効にする場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)ご連絡ください。
+    この変更により、ハイブリッドデプロイにおけるリソース競合が回避され、この改善が有効になっている既存のクラスターには影響しません。新しいクラスターで負荷分散の改善を有効にする場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にご連絡ください。
 
 ## 2023年8月8日 {#august-8-2023}
 
@@ -333,7 +333,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     AWS KMS ベースの CMEK を作成し、 TiDB Cloudコンソールから直接 EBS および S3 に保存されているデータを暗号化できます。これにより、顧客データは顧客が管理するキーで暗号化されるため、セキュリティが強化されます。
 
-    この機能にはまだ制限があり、リクエストに応じてのみご利用いただけます。この機能を申請するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)ご連絡ください。
+    この機能にはまだ制限があり、リクエストに応じてのみご利用いただけます。この機能を申請するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にご連絡ください。
 
 - TiDB Cloudのインポート機能を最適化し、データのインポートエクスペリエンスを向上させました。以下の改善が行われました。
 
@@ -360,7 +360,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     TiDB Bot を使用するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、**Ask TiDB Bot**を選択してチャットを開始します。
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターに対して[分岐機能（ベータ版）](/tidb-cloud/branch-overview.md)サポートします。
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターに対して[分岐機能（ベータ版）](/tidb-cloud/branch-overview.md)をサポートします。
 
     TiDB Cloud、 TiDB Cloud Serverless クラスターのブランチを作成できます。クラスターのブランチとは、元のクラスターから分岐したデータのコピーを含む独立したインスタンスです。これにより分離された環境が提供され、元のクラスターへの影響を心配することなく、自由に接続して実験を行うことができます。
 
@@ -457,7 +457,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app) GitHub に接続することをサポートします。
+- [データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)を GitHub に接続することをサポートします。
 
     [データアプリをGitHubに接続する](/tidb-cloud/data-service-manage-github-connection.md)により、データアプリのすべての構成を GitHub 上の[コードファイル](/tidb-cloud/data-service-app-config-files.md)として管理できるようになり、 TiDB Cloud Data Service がシステムアーキテクチャおよび DevOps プロセスとシームレスに統合されます。
 
@@ -622,7 +622,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[データ移行ジョブの仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)スケールアップまたはスケールダウンをサポートします。
+- [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して[データ移行ジョブの仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)のスケールアップまたはスケールダウンをサポートします。
 
     この機能を使用すると、仕様をスケールアップして移行パフォーマンスを向上させたり、仕様をスケールダウンしてコストを削減したりできます。
 
@@ -662,7 +662,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
     - `tidbcloud_changefeed_latency`
     - `tidbcloud_changefeed_replica_rows`
 
-    [TiDB CloudとPrometheusを統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)お持ちの場合は、これらのメトリクスを使用して、変更フィードのパフォーマンスと健全性をリアルタイムで監視できます。さらに、Prometheus を使用してメトリクスを監視するためのアラートを簡単に作成できます。
+    [TiDB CloudとPrometheusを統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)している場合は、これらのメトリクスを使用して、変更フィードのパフォーマンスと健全性をリアルタイムで監視できます。さらに、Prometheus を使用してメトリクスを監視するためのアラートを簡単に作成できます。
 
 **コンソールの変更**
 
@@ -709,7 +709,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [Data Service（ベータ版）](/tidb-cloud/data-service-overview.md) 、データアプリに対するよりきめ細かいアクセス制御がサポートされます。
+- [Data Service（ベータ版）](/tidb-cloud/data-service-overview.md)は、データアプリに対するよりきめ細かいアクセス制御をサポートします。
 
     データアプリの詳細ページで、クラスタをデータアプリにリンクし、各APIキーのロールを指定できるようになりました。ロールは、APIキーがリンクされたクラスタへのデータの読み取りまたは書き込みを許可するかどうかを制御し、 `ReadOnly`または`ReadAndWrite`に設定できます。この機能により、データアプリに対してクラスタレベルおよび権限レベルのアクセス制御が可能になり、ビジネスニーズに応じてアクセス範囲をより柔軟に制御できるようになります。
 
@@ -723,7 +723,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     これらの新しい仕様を使用することで、以前は 16 個の RCU が必要だったシナリオと比較して、データ複製コストを最大 87.5% 削減できます。
 
-- 2023 年 3月 28日以降に作成された[チェンジフィード](/tidb-cloud/changefeed-overview.md)スケールアップまたはスケールダウン仕様をサポートします。
+- 2023 年 3月 28日以降に作成された[チェンジフィード](/tidb-cloud/changefeed-overview.md)の仕様のスケールアップまたはスケールダウンをサポートします。
 
     より高い仕様を選択するとレプリケーションのパフォーマンスが向上し、より低い仕様を選択するとレプリケーションのコストが削減されます。
 
@@ -749,7 +749,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [Data Service（ベータ版）](https://tidbcloud.com/project/data-service) for [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターを導入すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でデータにアクセスできるようになります。
+- [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスター向けに[Data Service（ベータ版）](https://tidbcloud.com/project/data-service)を導入します。これにより、カスタム API エンドポイントを使用して HTTPS リクエスト経由でデータにアクセスできるようになります。
 
     Data Service を使用すると、 TiDB Cloud をHTTPS 対応のあらゆるアプリケーションやサービスとシームレスに統合できます。以下に、一般的なシナリオをいくつか示します。
 
@@ -758,7 +758,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
     - Data Serviceをデータソースとして使用して、 TiDB Cloud をデータ視覚化プロジェクトと統合します。
     - MySQL インターフェースがサポートしていない環境からデータベースに接続します。
 
-    さらに、 TiDB Cloud は、AI を使用して SQL文を生成および実行できる RESTful インターフェースである[チャット2クエリAPI](/tidb-cloud/use-chat2query-api.md)提供します。
+    さらに、 TiDB Cloud は、AI を使用して SQL文を生成および実行できる RESTful インターフェースである[チャット2クエリAPI](/tidb-cloud/use-chat2query-api.md)を提供します。
 
     Data Serviceにアクセスするには、左側のナビゲーションペインの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。詳細については、以下のドキュメントをご覧ください。
 
@@ -768,7 +768,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - AWS でホストされ、2022年 12月 31日以降に作成される[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでスケールするために、TiDB、TiKV、およびTiFlashノードのサイズを縮小することをサポートします。
 
-    ノードサイズを[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)減らすことができます。
+    ノードサイズを[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らすことができます。
 
 - [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能に対して新しい GCP リージョンをサポートします: `Tokyo (asia-northeast1)` 。
 
@@ -898,7 +898,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでスケールするために TiKV ノードとTiFlashノードの数を減らすことをサポートします。
 
-    ノード番号を[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-node-number)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)減らすことができます。
+    ノード番号を[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-node-number)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らすことができます。
 
 **コンソールの変更**
 
@@ -914,7 +914,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloud CLI クライアント[`ticloud`](/tidb-cloud/cli-reference.md)を紹介します。
 
-    `ticloud`を使用すると、ターミナルやその他の自動ワークフローから数行のコマンドでTiDB Cloudリソースを簡単に管理できます。特にGitHub Actionsについては、 `ticloud`簡単に設定できるように[`setup-tidbcloud-cli`](https://github.com/marketplace/actions/set-up-tidbcloud-cli)提供しています。
+    `ticloud`を使用すると、ターミナルやその他の自動ワークフローから数行のコマンドでTiDB Cloudリソースを簡単に管理できます。特にGitHub Actionsについては、 `ticloud`を簡単に設定できるように[`setup-tidbcloud-cli`](https://github.com/marketplace/actions/set-up-tidbcloud-cli)を提供しています。
 
     詳細については、 [TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)および[TiDB Cloud CLI リファレンス](/tidb-cloud/cli-reference.md)を参照してください。
 
@@ -922,7 +922,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- Microsoft アカウントで[サインアップ](https://tidbcloud.com/free-trial) TiDB Cloudをサポートします。
+- Microsoft アカウントでのTiDB Cloudへの[サインアップ](https://tidbcloud.com/free-trial)をサポートします。
 
 ## 2023年1月17日 {#january-17-2023}
 
@@ -977,7 +977,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - AWS でホストされ、2022年 12月 31日以降に作成されたTiDB Cloud Dedicated クラスターの**ノードサイズ (vCPU + RAM)** を増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
 
-    ノードサイズを[TiDB Cloudコンソールを使用する](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）を使用する](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)増やすことができます。
+    ノードサイズを[TiDB Cloudコンソールを使用](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）を使用](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)して増やすことができます。
 
 - [**Monitoring**](/tidb-cloud/built-in-monitoring.md)ページのメトリックの保持期間を 2日間に延長します。
 
@@ -987,7 +987,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - Prometheus 統合のための Grafana ダッシュボード JSON のカスタマイズをサポートします。
 
-    [TiDB CloudとPrometheusを統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)お持ちの場合は、事前に構築されたGrafanaダッシュボードをインポートしてTiDB Cloudクラスターを監視し、ニーズに合わせてダッシュボードをカスタマイズできるようになりました。この機能により、 TiDB Cloudクラスターを簡単かつ迅速に監視し、パフォーマンスの問題を迅速に特定できるようになります。
+    [TiDB CloudとPrometheusを統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)している場合は、事前に構築されたGrafanaダッシュボードをインポートしてTiDB Cloudクラスターを監視し、ニーズに合わせてダッシュボードをカスタマイズできるようになりました。この機能により、 TiDB Cloudクラスターを簡単かつ迅速に監視し、パフォーマンスの問題を迅速に特定できるようになります。
 
     詳細については[Grafana GUIダッシュボードを使用してメトリックを視覚化する](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#step-3-use-grafana-gui-dashboards-to-visualize-the-metrics)を参照してください。
 
