@@ -25,11 +25,11 @@ TiDBは、 `CHAR` 、 `VARCHAR` 、 `BINARY` 、 `VARBINARY` 、 `BLOB` 、 `TEX
 
 | 文字セット   | 文字あたりのバイト数 | `VARCHAR`カラムの最大長の範囲 |
 | ------- | ---------- | ------------------- |
-| アスキー    | 1          | （0, 65535）          |
-| ラテン1    | 1          | （0, 65535）          |
-| バイナリ    | 1          | （0, 65535）          |
-| UTF8    | 3          | （0, 21845]          |
-| utf8mb4 | 4          | （0, 16383）          |
+| ascii   | 1          | (0, 65535]          |
+| latin1  | 1          | (0, 65535]          |
+| binary  | 1          | (0, 65535]          |
+| utf8    | 3          | (0, 21845]          |
+| utf8mb4 | 4          | (0, 16383]          |
 
 ```sql
 [NATIONAL] VARCHAR(M) [CHARACTER SET charset_name] [COLLATE collation_name]
