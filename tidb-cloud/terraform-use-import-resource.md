@@ -38,7 +38,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
    2;Bob;30
    ```
 
-2. ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
+2. ディレクトリ`import`を作成し、その中に`main.tf`ファイルを作成します。例:
 
     ```
     terraform {
@@ -193,7 +193,7 @@ summary: tidbcloud_import` リソースを使用してインポートタスク�
 >
 > TiDB Cloud がAmazon S3 バケット内のファイルにアクセスできるようにするには、まず[Amazon S3 アクセスを構成する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access)を実行する必要があります。
 
-1. ディレクトリ`import`を作成し、その中にディレクトリ`main.tf`を作成します。例:
+1. ディレクトリ`import`を作成し、その中に`main.tf`ファイルを作成します。例:
 
    ```
    terraform {
@@ -279,7 +279,7 @@ tidbcloud_import.example_local: Destroying... [id=781074]
 ╵
 ```
 
-ステータスが`IMPORTING`インポートタスクをキャンセルできます。例:
+ステータスが`IMPORTING`のインポートタスクをキャンセルできます。例:
 
 ```
 $ terraform destroy

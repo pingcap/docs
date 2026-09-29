@@ -213,7 +213,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Ess
 
     - 構成と状態の違いを確認できます。
     - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    - `known after apply` `apply`後の対応する値が取得されることを示します。
+    - `known after apply`は、`apply`後の対応する値が取得されることを示します。
 
 4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
@@ -429,7 +429,7 @@ Terraform によって管理されていないTiDB Cloud Essential クラスタ�
 
 1. 新しい`tidbcloud_serverless_cluster`リソースのインポート ブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}`クラスター ID に置き換えます。
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をクラスター ID に置き換えます。
 
     ```
     import {

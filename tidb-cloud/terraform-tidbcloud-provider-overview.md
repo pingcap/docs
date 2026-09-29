@@ -5,9 +5,9 @@ summary: Terraform を使用してTiDB Cloudリソースを作成、管理、更
 
 # Terraform 統合の概要 {#terraform-integration-overview}
 
-[Terraform](https://www.terraform.io/)は、人間が読める設定ファイルでクラウド リソースと自己ホスト リソースの両方を定義でき、バージョン管理、再利用、共有できるコード ツールとしてのインフラストラクチャです。
+[Terraform](https://www.terraform.io/)は、人間が読める設定ファイルでクラウド リソースと自己ホスト リソースの両方を定義でき、バージョン管理、再利用、共有できるInfrastructure as Codeツールです。
 
-[TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) 、Terraform を使用してクラスター、バックアップ、リストアなどのTiDB Cloudリソースを管理できるようにするプラグインです。
+[TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud)は、Terraform を使用してクラスター、バックアップ、リストアなどのTiDB Cloudリソースを管理できるようにするプラグインです。
 
 リソースのプロビジョニングとインフラストラクチャ ワークフローを自動化する簡単な方法を探している場合は、次の機能を提供するTiDB Cloud Terraform Provider を試してみてください。
 
@@ -21,11 +21,11 @@ summary: Terraform を使用してTiDB Cloudリソースを作成、管理、更
 
 - [TiDB Cloudアカウント](https://tidbcloud.com/free-trial)
 - [Terraformバージョン](https://www.terraform.io/downloads.html) &gt;= 1.0
-- [Goバージョン](https://golang.org/doc/install) &gt;= 1.18 (ローカルで[TiDB Cloud Terraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)ビルドする場合にのみ必要)
+- [Goバージョン](https://golang.org/doc/install) >= 1.18 (ローカルで[TiDB Cloud Terraform プロバイダー](https://github.com/tidbcloud/terraform-provider-tidbcloud)をビルドする場合にのみ必要)
 
 ## サポートされているリソースとデータソース {#supported-resources-and-data-sources}
 
-[リソース](https://www.terraform.io/language/resources)と[データソース](https://www.terraform.io/language/data-sources) 、Terraform 言語で最も重要な 2つの要素です。
+[リソース](https://www.terraform.io/language/resources)と[データソース](https://www.terraform.io/language/data-sources)は、Terraform 言語で最も重要な 2つの要素です。
 
 TiDB Cloud は次のリソースとデータソースをサポートしています。
 

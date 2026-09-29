@@ -7,7 +7,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 > **Warning:**
 >
-> [TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0以降、リソース`tidbcloud_cluster`非推奨となりました。代わりにリソース`tidbcloud_dedicated_cluster`またはリソース`tidbcloud_serverless_cluster`を使用することをお勧めします。詳細については、 [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)または[`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)をご覧ください。
+> [TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud) v0.4.0以降、リソース`tidbcloud_cluster`は非推奨となりました。代わりにリソース`tidbcloud_dedicated_cluster`またはリソース`tidbcloud_serverless_cluster`を使用することをお勧めします。詳細については、 [`tidbcloud_dedicated_cluster`リソースを使用する](/tidb-cloud/terraform-use-dedicated-cluster-resource.md)または[`tidbcloud_serverless_cluster`リソースを使用する](/tidb-cloud/terraform-use-serverless-cluster-resource.md)をご覧ください。
 
 このドキュメントでは、 `tidbcloud_cluster`リソースを使用してTiDB Cloudクラスターを管理する方法を学習できます。
 
@@ -264,9 +264,9 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 - `cloud_provider`は、TiDB クラスターをホストできるクラウドプロバイダーです。
 - `region`は`cloud_provider`の領域です。
-- `node_quantity_range`最小ノード数とノードをスケーリングするステップを示します。
+- `node_quantity_range`は、最小ノード数とノードをスケーリングするステップを示します。
 - `node_size`はノードのサイズです。
-- `storage_size_gib_range` 、ノードに設定できる最小および最大のストレージサイズを示します。
+- `storage_size_gib_range`は、ノードに設定できる最小および最大のストレージサイズを示します。
 
 ## クラスターリソースを使用してクラスターを作成する {#create-a-cluster-using-the-cluster-resource}
 
@@ -379,7 +379,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
     - 構成と状態の違いを確認できます。
     - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    - `known after apply` 、 `apply`後の値が取得されることを示します。
+    - `known after apply`は、`apply`後の値が取得されることを示します。
 
 4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
@@ -602,7 +602,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
     }
     ```
 
-ステータス`MODIFYING` 、クラスターが現在変更中であることを示します。しばらくお待ちください。ステータスは`AVAILABLE`に変更されます。
+ステータス`MODIFYING`は、クラスターが現在変更中であることを示します。しばらくお待ちください。ステータスは`AVAILABLE`に変更されます。
 
 ### TiDB クラスタをスケールする {#scale-a-tidb-cluster}
 
@@ -839,7 +839,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 Terraform で管理されていない TiDB クラスターの場合は、インポートするだけで Terraform を使用して管理できます。
 
-たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [`tidbcloud_restore`リソースで作成された](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)であるクラスターをインポートしたりできます。
+たとえば、Terraform によって作成されていないクラスターをインポートしたり、 [`tidbcloud_restore`リソースで作成された](/tidb-cloud/terraform-use-restore-resource.md#create-a-restore-task)クラスターをインポートしたりできます。
 
 1. 次のように`import_cluster.tf`ファイルを作成します。
 

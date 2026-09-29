@@ -100,7 +100,7 @@ provider "tidbcloud" {
 }
 ```
 
-`public_key`と`private_key` APIキーの公開鍵と秘密鍵です。環境変数を通して渡すこともできます。
+`public_key`と`private_key`は、APIキーの公開鍵と秘密鍵です。環境変数を通して渡すこともできます。
 
 ```
 export TIDBCLOUD_PUBLIC_KEY=${public_key}
@@ -111,7 +111,7 @@ export TIDBCLOUD_PRIVATE_KEY=${private_key}
 
 ## ステップ5. 同期構成でTiDB Cloud Terraform Providerを構成する {#step-5-configure-tidb-cloud-terraform-provider-with-sync-configuration}
 
-Terraform プロバイダー (&gt;= 0.3.0) は、オプションのパラメーター`sync`サポートします。
+Terraform プロバイダー (>= 0.3.0) は、オプションのパラメーター`sync`をサポートします。
 
 `sync`を`true`に設定すると、リソースを同期的に作成、更新、削除できます。以下に例を示します。
 

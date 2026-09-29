@@ -211,7 +211,7 @@ summary: tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Sta
 
     - 構成と状態の違いを確認できます。
     - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
-    - `known after apply` `apply`後の対応する値が取得されることを示します。
+    - `known after apply`は、`apply`後の対応する値が取得されることを示します。
 
 4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
 
@@ -297,7 +297,7 @@ TiDB Cloud Starterクラスタでは、Terraformを使用してリソースを�
 - `endpoints.public.disabled` : パブリックエンドポイントを無効にするかどうか。
 - `automated_backup_policy.start_time` : 自動バックアップが開始される時点の UTC 時刻 ( `HH:mm`形式)。
 
-TiDB Cloud Starterクラスターを変更するには、 `tidbcloud_serverless_cluster`のリソースの構成を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`spending_limit`次のように変更できます。
+TiDB Cloud Starterクラスターを変更するには、 `tidbcloud_serverless_cluster`のリソースの構成を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`spending_limit`を次のように変更できます。
 
 ```
 resource "tidbcloud_serverless_cluster" "example" {
@@ -423,7 +423,7 @@ Terraform によって管理されていないTiDB Cloud Starter クラスター
 
 1. 新しい`tidbcloud_serverless_cluster`リソースのインポート ブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`目的のリソース名に置き換え、 `${id}`クラスター ID に置き換えます。
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をクラスター ID に置き換えます。
 
     ```
     import {
