@@ -191,7 +191,7 @@
   - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Stream Data
-  - [Manage Changefeeds](/tidb-cloud/changefeed-overview.md)
+  - [Changefeed](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To Pulsar Sink](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)

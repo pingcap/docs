@@ -1,9 +1,9 @@
 ---
-title: Manage Data Pipeline
+title: Data Pipeline
 summary: Learn how to create and manage a data pipeline that replicates full and incremental data from TiDB Cloud to TiDB Cloud Lake.
 ---
 
-# Manage Data Pipeline
+# Data Pipeline
 
 TiDB Cloud Data Pipeline replicates full data and incremental changes from your TiDB Cloud instance to TiDB Cloud Lake, without requiring a third-party ETL tool. It first exports a full snapshot of the selected source data, and then continuously replicates row changes so that the data in TiDB Cloud Lake stays up to date.
 
@@ -45,7 +45,7 @@ For more information, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq
 
 Refer to the guide for your plan:
 
-- [TiDB Cloud Premium: Set Up a Data Pipeline to TiDB Cloud Lake](/tidb-cloud/data-pipeline-premium-sink-to-lake.md)
+- [TiDB Cloud Premium: Set Up a Data Pipeline to TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
 - [TiDB Cloud Dedicated: Manually Set Up to Replicate Data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
 - [TiDB Cloud Essential: Manually Set Up to Replicate Data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
 

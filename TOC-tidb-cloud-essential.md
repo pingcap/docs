@@ -144,7 +144,7 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Manage Changefeeds](/tidb-cloud/essential-changefeed-overview.md)
+  - [Changefeed](/tidb-cloud/essential-changefeed-overview.md)
   - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
   - [Sink to TiDB Cloud Lake](tidb-cloud/data-pipeline-essential-sink-to-lake.md)

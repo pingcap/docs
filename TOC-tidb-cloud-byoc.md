@@ -144,10 +144,12 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data
-  - [Stream Data Overview](/tidb-cloud/stream-data-overview.md)
-  - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
+  - [Overview](/tidb-cloud/stream-data-overview.md)
+  - [Changefeed](/tidb-cloud/changefeed-overview.md)
+  - [Data Pipeline](/tidb-cloud/data-pipeline.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [To TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)

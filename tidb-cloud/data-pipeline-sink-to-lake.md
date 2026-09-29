@@ -1,30 +1,29 @@
 ---
 title: Sink to TiDB Cloud Lake
-summary: Learn how to create, monitor, and manage a data pipeline that replicates data from a TiDB Cloud Premium instance to TiDB Cloud Lake.
-aliases: ['/tidb-cloud/data-pipeline-lake-setup-for-premium']
+summary: Learn how to create, monitor, and manage a data pipeline that replicates data from a TiDB Cloud instance to TiDB Cloud Lake.
 ---
 
 # Sink to TiDB Cloud Lake
 
-In TiDB Cloud, you can use Data Pipeline to replicate full data and incremental changes from your TiDB Cloud Premium instance to TiDB Cloud Lake, without requiring a third-party ETL tool. It first exports a full snapshot of the selected source data, and then can continuously replicate row changes so that the data in TiDB Cloud Lake stays up to date.
+In TiDB Cloud, you can use Data Pipeline to replicate full data and incremental changes from your <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> instance to TiDB Cloud Lake, without requiring a third-party ETL tool. It first exports a full snapshot of the selected source data, and then can continuously replicate row changes so that the data in TiDB Cloud Lake stays up to date.
 
 > **Note:**
 >
-> - Data Pipeline to TiDB Cloud Lake is currently in **private preview** for {{{ .premium }}} and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, enter "Apply for `Data Pipeline to TiDB Cloud Lake`" in the **Description** field, and then click **Submit**.
+> - Data Pipeline to TiDB Cloud Lake is currently in **private preview** for <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> and is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, enter "Apply for `Data Pipeline to TiDB Cloud Lake`" in the **Description** field, and then click **Submit**.
 > - The Data Pipeline feature is built on TiCDC, so it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 
 ## Restrictions
 
-- The TiDB Cloud Lake warehouse must be in the **same region** as your {{{ .premium }}} instance.
+- The TiDB Cloud Lake warehouse must be in the **same region** as your TiDB Cloud instance.
 - Only tables with a **primary key** can be replicated incrementally. Tables without a primary key are listed in the **Filter results** panel during pipeline creation. If included in the sync scope, their incremental replication is skipped.
-- You can create up to 100 changefeeds per {{{ .premium }}} instance. Each data pipeline with incremental replication consumes one changefeed slot.
+- You can create up to 100 changefeeds per <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> instance. Each data pipeline with incremental replication consumes one changefeed slot.
 - Deleting a data pipeline does **not** delete the data already written to TiDB Cloud Lake, nor the target databases and tables in your warehouse.
 
 ## Prerequisites
 
 Before you begin, make sure that you have:
 
-- A {{{ .premium }}} instance. Note the region in which it is deployed.
+- A <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> instance. Note the region in which it is deployed.
 - A warehouse in TiDB Cloud Lake that is in the same region as your instance. If you do not have one yet, create it in the [TiDB Cloud Lake console](https://lake.tidbcloud.com/) first. Only warehouses in the same region as your instance can be selected when you create the data pipeline.
 - An external stage bucket: an Amazon S3 bucket or an Alibaba Cloud OSS bucket. Create it in the same region as your instance.
 - The user name and password of a TiDB database user that can read the source tables.
@@ -35,7 +34,7 @@ To create a data pipeline, you need to configure the destination, the external s
 
 ### Step 1. Configure the destination
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the overview page of the target {{{ .premium }}} instance, click **Data** > **Data Pipeline** in the left navigation pane, and then click **Create Data Pipeline** in the upper-right corner.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the overview page of the target <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> instance, click **Data** > **Data Pipeline** in the left navigation pane, and then click **Create Data Pipeline** in the upper-right corner.
 2. In the **Destination** area, configure the following fields:
 
     - **Destination**: select **TiDB Cloud Lake**.
@@ -50,7 +49,7 @@ To create a data pipeline, you need to configure the destination, the external s
 
 An external stage is the object storage that bridges the two sides of a data pipeline: TiDB Cloud writes the exported snapshot and the captured row changes to the stage, and TiDB Cloud Lake loads the data from the stage into the target warehouse. For more information, see [Why does a data pipeline require an external stage?](/tidb-cloud/data-pipeline-lake-faq.md#why-does-a-data-pipeline-require-an-external-stage).
 
-TiDB Cloud Data Pipeline supports Amazon S3 and Alibaba Cloud OSS as the external stage. Create the bucket in the same region as your {{{ .premium }}} instance, and complete the provider-side setup first. The configuration steps vary depending on your cloud provider:
+TiDB Cloud Data Pipeline supports Amazon S3 and Alibaba Cloud OSS as the external stage. Create the bucket in the same region as your <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> instance, and complete the provider-side setup first. The configuration steps vary depending on your cloud provider:
 
 <SimpleTab>
 <div label="Amazon S3">
@@ -139,7 +138,7 @@ In the **Replication Data** area, configure how the data is replicated:
 
 ### Edit a data pipeline
 
-To edit a data pipeline, go to the **Data Pipeline** of your target {{{ .premium }}} instance, click **...** in the row of the pipeline, and then click **Edit**.
+To edit a data pipeline, go to the **Data Pipeline** of your target <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> instance, click **...** in the row of the pipeline, and then click **Edit**.
 
 Editing is disabled while a data pipeline is `Running`. Pause the pipeline first, then edit it, and resume it afterwards to apply the changes.
 
@@ -157,13 +156,13 @@ The destination type and the sync mode cannot be changed after the pipeline is c
 - **Pause**: stops data replication and marks the pipeline as `Paused`. No data is lost, and the replication progress is preserved. A pipeline cannot be paused while it is being created or while the full snapshot is being exported.
 - **Resume**: continues replication from where it was paused, including ingestion into TiDB Cloud Lake.
 
-To pause and resume a data pipeline, go to the **Data Pipeline** of your target {{{ .premium }}} instance, click **...** in the row of the pipeline, and then click **Pause** or **Resume**.
+To pause and resume a data pipeline, go to the **Data Pipeline** of your target <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent>instance, click **...** in the row of the pipeline, and then click **Pause** or **Resume**.
 
 ### Delete a data pipeline
 
 To delete a data pipeline, take the following steps:
 
-1. Go to the **Data Pipeline** of your target {{{ .premium }}} instance, click **...** in the row of the pipeline, and then click **Delete**.
+1. Go to the **Data Pipeline** of your target <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> instance, click **...** in the row of the pipeline, and then click **Delete**.
 2. Read the warning and confirm the operation. Deleting a data pipeline:
 
     - Immediately stops all data replication.
