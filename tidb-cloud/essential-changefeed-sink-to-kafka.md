@@ -35,7 +35,7 @@ Apache Kafkaにデータをストリーミングするためのチェンジフ�
 TiDB Cloud EssentialインスタンスがApache Kafkaサービスに接続できることを確認してください。接続方法は以下のいずれかを選択できます。
 
 - プライベートリンク接続：セキュリティコンプライアンスを満たし、ネットワーク品質を確保します。
-- 公共ネットワーク：迅速なセットアップに適しています。
+- パブリックネットワーク：迅速なセットアップに適しています。
 
 <SimpleTab>
 <div label="Private Link Connection">
@@ -106,7 +106,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 2. **Private Link Connection**で、[ネットワーク](#network)セクションで作成したプライベートリンク接続を選択します。プライベートリンク接続のアベイラビリティゾーンが、Kafkaデプロイメントのアベイラビリティゾーンと一致していることを確認してください。
 
-3. [ネットワーク](#network)セクションで取得した**Bootstrap Port**を入力してください。Amazon MSKプロビジョニング済みプライベートリンク接続を使用している場合は、このフィールドはスキップできます。
+3. [ネットワーク](#network)セクションで取得した**Bootstrap Port**を入力してください。Amazon MSK Provisioned のプライベートリンク接続を使用している場合は、このフィールドはスキップできます。
 
 4. Kafkaの認証設定に応じて、**Authentication**オプションを選択してください。
 
@@ -134,7 +134,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
     - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加して**Apply**をクリックすると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、**Filter results**の下にルールに一致するテーブルのみを表示します。
     - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
     - **有効なキーで結果をフィルタリングする**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    - **有効なキーのない結果をフィルタリングする**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`test.tbl1`を使用して、テーブル`"!test.tbl1"`を除外できます。
+    - **有効なキーのない結果をフィルタリングする**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`"!test.tbl1"`を使用して、テーブル`test.tbl1`を除外できます。
 
 2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
@@ -209,7 +209,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
     - **Replication Factor**：各KafkaメッセージがレプリケートされるKafkaサーバーの数を制御します。有効な値の範囲は、 [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)からKafkaブローカーの数までです。
     - **Partition Number**：トピックに存在するパーティションの数を制御します。有効な値の範囲は`[1, 10 * the number of Kafka brokers]`です。
 
-10. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
+10. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクで主キーまたは一意キーのUPDATEイベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
 11. **Next**をクリックしてください。
 

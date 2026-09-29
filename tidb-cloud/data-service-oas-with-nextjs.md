@@ -11,7 +11,7 @@ summary: データアプリのOpenAPI仕様を使用してクライアントコ�
 
 Next.jsでOpenAPI Specificationを使用する前に、以下のものが用意されていることを確認してください。
 
-- [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud Dedicatedクラスター](/tidb-cloud/create-tidb-cluster.md)クラスター。
+- [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud Dedicatedクラスター](/tidb-cloud/create-tidb-cluster.md)。
 - [Node.js](https://nodejs.org/en/download)
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - [yarn](https://yarnpkg.com/getting-started/install)
@@ -73,7 +73,7 @@ SELECT * FROM test.repository;
 
 2. 依存関係をインストールします。
 
-    このドキュメントでは[OpenAPIジェネレーター](https://github.com/OpenAPITools/openapi-generator)を使用して、OpenAPI 仕様から API クライアントライブラリを自動的に生成します。
+    このドキュメントでは[OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator)を使用して、OpenAPI 仕様から API クライアントライブラリを自動的に生成します。
 
     OpenAPI Generatorを開発依存関係としてインストールするには、次のコマンドを実行します。
 
@@ -192,7 +192,7 @@ SELECT * FROM test.repository;
     >   });
     > ```
     >
-    > `basePath`データアプリの実際のエンドポイントパスに置き換えてください。 `${YOUR_REGION}`と`{YOUR_DATA_APP_ID}`を取得するには、エンドポイントの**Properties**パネルで**Endpoint URL**を確認してください。
+    > `basePath`をデータアプリの実際のエンドポイントパスに置き換えてください。 `${YOUR_REGION}`と`{YOUR_DATA_APP_ID}`を取得するには、エンドポイントの**Properties**パネルで**Endpoint URL**を確認してください。
 
 ## ステップ5．Next.jsアプリケーションをプレビューする {#step-5-preview-your-next-js-application}
 

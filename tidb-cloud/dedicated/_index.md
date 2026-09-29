@@ -54,7 +54,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 [TiDBクラスタを一時停止または再開する](https://docs.pingcap.com/ja/tidbcloud/pause-or-resume-tidb-cluster)
 
-[ストリームデータ](http://docs.pingcap.com/ja/tidbcloud/changefeed-overview)
+[データをストリーミングする](http://docs.pingcap.com/ja/tidbcloud/changefeed-overview)
 
 [API を使用する（プレビュー）](https://docs.pingcap.com/ja/tidbcloud/api-overview)
 

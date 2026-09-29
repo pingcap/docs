@@ -5,7 +5,7 @@ summary: GitHubを使ってデータアプリを自動的にデプロイする�
 
 # GitHub を使用してデータアプリを自動的にデプロイ {#deploy-data-app-automatically-with-github}
 
-TiDB Cloudは、 JSON構文を使用してデータアプリの設定全体をコードとして表現する、設定コード（CaC）アプローチを提供します。
+TiDB Cloudは、 JSON構文を使用してデータアプリの設定全体をコードとして表現する、Configuration as Code（CaC）アプローチを提供します。
 
 データアプリをGitHubに接続することで、 TiDB CloudはCaC方式を使用し、データアプリの設定を[設定ファイル](/tidb-cloud/data-service-app-config-files.md)として、指定したGitHubリポジトリとブランチにプッシュできます。
 
@@ -22,7 +22,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 > **Note:**
 >
-> GitHub リポジトリは、データアプリを接続した後、データアプリ[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。設定ファイル内の情報 ( TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID、エンドポイント URL など) が機密である場合は、パブリック リポジトリではなくプライベートリポジトリを必ず使用してください。
+> GitHub リポジトリは、データアプリを接続した後、[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。設定ファイル内の情報 ( TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID、エンドポイント URL など) が機密である場合は、パブリック リポジトリではなくプライベートリポジトリを必ず使用してください。
 
 ## ステップ1：データアプリをGitHubに接続する {#step-1-connect-your-data-app-to-github}
 
@@ -59,7 +59,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 ## ステップ2. データアプリの設定をGitHubと同期する {#step-2-synchronize-data-app-configurations-with-github}
 
-データアプリ[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md)ときに GitHub 接続が有効になっている場合、 TiDB Cloud はアプリの作成直後にこのデータアプリの設定ファイルを GitHub にプッシュします。
+[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md)ときに GitHub 接続が有効になっている場合、 TiDB Cloud はアプリの作成直後にこのデータアプリの設定ファイルを GitHub にプッシュします。
 
 アプリ作成後にGitHub接続が有効になっている場合は、データアプリの設定をGitHubと同期するためにデプロイ操作を実行する必要があります。たとえば、 **[Deployments]**タブをクリックし、このデータアプリのデプロイを再デプロイすることができます。
 
@@ -98,7 +98,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 | `data_source/cluster.json`                      | このファイルを更新する際は、リンクされているTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにアクセスできることを確認してください。TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID は、その URL から取得できます。たとえば、URL が`https://tidbcloud.com/tidbs/1234567891234567890/overview?orgId=<organization-id>`の場合、ID は`1234567891234567890`です。 |
 | `http_endpoints/config.json`                    | エンドポイントを変更する場合は、 [HTTPエンドポイント構成](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration)で説明されているルールに従ってください。                                                                                                                                                                             |
 | `http_endpoints/sql/method-<endpoint-path>.sql` | `http_endpoints/sql`ディレクトリに SQL ファイルを追加または削除するには、対応するエンドポイント構成も更新する必要があります。                                                                                                                                                                                                                                |
-| `datapp_config.json`                            | `app_id`ファイルが別のデータアプリからコピーされたもので、現在のデータアプリの ID に更新したい場合を除き、このファイルの`dataapp_config.json`フィールドを変更しないでください。そうしないと、この変更によってトリガーされるデプロイが失敗します。                                                                                                                                                                |
+| `datapp_config.json`                            | `dataapp_config.json`ファイルが別のデータアプリからコピーされたもので、現在のデータアプリの ID に更新したい場合を除き、このファイルの`app_id`フィールドを変更しないでください。そうしないと、この変更によってトリガーされるデプロイが失敗します。                                                                                                                                                                |
 
 これらのファイルのフィールド構成の詳細については、 [データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を参照してください。
 
@@ -106,7 +106,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 ### オプション2： TiDB Cloudコンソールでデータアプリを変更する {#option-2-modify-your-data-app-in-the-tidb-cloud-console}
 
-TiDB Cloudコンソールでデータアプリのエンドポイント[データアプリのエンドポイントを変更する](/tidb-cloud/data-service-manage-endpoint.md)後 (エンドポイントの変更など)、次のように変更を確認して GitHub にデプロイできます。
+TiDB Cloudコンソールで[データアプリのエンドポイントを変更](/tidb-cloud/data-service-manage-endpoint.md)した後 (エンドポイントの変更など)、次のように変更を確認して GitHub にデプロイできます。
 
 1. 右上隅の**Deploy**をクリックしてください。変更内容を確認するためのダイアログが表示されます。
 2. レビュー内容に応じて、以下のいずれかを実行してください。
@@ -129,7 +129,7 @@ TiDB Cloudコンソールでデータアプリのエンドポイント[データ
 
 4. 新しいデータアプリのIDと名前を取得します。左側のペインで新しいデータアプリの名前をクリックすると、右側のペインの**Data App Properties**領域にアプリのIDと名前が表示されます。
 
-5. GitHub の新しいパスで、 `app_id`ファイル内の`app_name`と`datapp_config.json`を取得した ID と名前に更新し、変更をプッシュしてください。
+5. GitHub の新しいパスで、 `datapp_config.json`ファイル内の`app_id`と`app_name`を取得した ID と名前に更新し、変更をプッシュしてください。
 
     ファイルの変更がGitHubにプッシュされると、 TiDB Cloudは最新の変更内容を反映した新しいデータアプリを自動的にデプロイします。
 
@@ -145,7 +145,7 @@ TiDB Cloudコンソールでデータアプリのエンドポイント[データ
 
 2. 左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 
-3. **Connect to GitHub**エリアで、 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>接続設定用のダイアログボックスが表示されます。
+3. **Connect to GitHub**エリアで、 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="gray.1"><path d="M11 3.99998H6.8C5.11984 3.99998 4.27976 3.99998 3.63803 4.32696C3.07354 4.61458 2.6146 5.07353 2.32698 5.63801C2 6.27975 2 7.11983 2 8.79998V17.2C2 18.8801 2 19.7202 2.32698 20.362C2.6146 20.9264 3.07354 21.3854 3.63803 21.673C4.27976 22 5.11984 22 6.8 22H15.2C16.8802 22 17.7202 22 18.362 21.673C18.9265 21.3854 19.3854 20.9264 19.673 20.362C20 19.7202 20 18.8801 20 17.2V13M7.99997 16H9.67452C10.1637 16 10.4083 16 10.6385 15.9447C10.8425 15.8957 11.0376 15.8149 11.2166 15.7053C11.4184 15.5816 11.5914 15.4086 11.9373 15.0627L21.5 5.49998C22.3284 4.67156 22.3284 3.32841 21.5 2.49998C20.6716 1.67156 19.3284 1.67155 18.5 2.49998L8.93723 12.0627C8.59133 12.4086 8.41838 12.5816 8.29469 12.7834C8.18504 12.9624 8.10423 13.1574 8.05523 13.3615C7.99997 13.5917 7.99997 13.8363 7.99997 14.3255V16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>をクリックします。接続設定用のダイアログボックスが表示されます。
 
 4. ダイアログボックスで、データアプリのリポジトリ、ブランチ、およびディレクトリを変更します。
 

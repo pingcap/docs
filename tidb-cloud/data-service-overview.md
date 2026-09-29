@@ -5,7 +5,7 @@ summary: TiDB CloudのData Serviceとそのシナリオについて学習しま�
 
 # TiDB Cloud Data Service (PREVIEW) の概要 {#tidb-cloud-data-service-beta-overview}
 
-TiDB Cloud [Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードのバックエンド サービス ソリューションです。
+TiDB Cloud [Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードの Backend-as-a-Service ソリューションです。
 
 Data Service を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能はサーバーレスアーキテクチャを採用し、コンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 
@@ -19,7 +19,7 @@ Data Service のエンドポイントは、SQL 文を実行するためにカス
 
 > **Tip:**
 >
-> TiDB Cloudは、TiDBクラスタ用のChat2Query APIを提供します。有効にすると、 TiDB Cloudは自動的に**Chat2Query**と呼ばれるシステムデータアプリと、Data ServiceにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、AIが指示を与えるだけでSQL文を生成・実行できるようになります。
+> TiDB Cloudは、TiDBクラスタ用のChat2Query APIを提供します。有効にすると、 TiDB Cloudは自動的に**Chat2Query**と呼ばれるシステムデータアプリと、Data ServiceにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えるだけで、AIにSQL文を生成・実行させることができます。
 >
 > 詳細については[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
