@@ -191,7 +191,7 @@ For example, index `idx3 (a, b)` contains 2 columns, with column `a` of timestam
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
 ```
 
-Within the same range of time, if you want to do one more split according to column b column. Just specify the value for column b when splitting.
+Within the same range of time, if you want to do one more split according to column b, just specify the value for column b when splitting.
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00", "a") AND ("2010-01-01 00:00:00", "z") REGIONS 10;
