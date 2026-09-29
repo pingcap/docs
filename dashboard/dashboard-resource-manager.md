@@ -47,7 +47,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
     ![Calibrate by Hardware](/media/dashboard/dashboard-resource-manager-calibrate-by-hardware.png)
 
-    **ユーザーリソースグループの合計RU**は、 `default`リソースグループを除くすべてのユーザーリソースグループのRUの合計量を表します。この値が推定容量を超えると、システムはアラートをトリガーします。デフォルトでは、システムは定義済みの`default`リソースグループに無制限の使用量を割り当てます。すべてのユーザーが`default`リソースグループに属している場合、リソースはリソース制御が無効になっている場合と同じように割り当てられます。
+    **Total RU of user resource groups**は、 `default`リソースグループを除くすべてのユーザーリソースグループのRUの合計量を表します。この値が推定容量を超えると、システムはアラートをトリガーします。デフォルトでは、システムは定義済みの`default`リソースグループに無制限の使用量を割り当てます。すべてのユーザーが`default`リソースグループに属している場合、リソースはリソース制御が無効になっている場合と同じように割り当てられます。
 
 - [実際の作業負荷に基づいて容量を見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 

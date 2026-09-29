@@ -19,7 +19,7 @@ summary: ローカルファイルをTiDB Cloud Starter にインポートする�
 
 1. ターゲット TiDB Cloud Starter インスタンスの**Import**ページを開きます。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -80,7 +80,7 @@ summary: ローカルファイルをTiDB Cloud Starter にインポートする�
 
 9. インポートタスクが完了したら、 **Explore your data by SQL Editor**をクリックして、インポートしたデータに対してクエリを実行できます。SQLエディタの使用方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)をご覧ください。
 
-10. **Import**ページで、 **[アクション**] 列の**[...** ] &gt; **[ビュー]**をクリックして、インポートタスクの詳細を確認できます。
+10. **Import**ページで、 **Action**列の**...** > **View**をクリックして、インポートタスクの詳細を確認できます。
 
 ## FAQ {#faq}
 

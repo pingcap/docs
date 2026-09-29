@@ -128,7 +128,7 @@ systemctl start docker
 2. 後で使用するために、 TiDB Cloud Starterインスタンスのホスト名、ポート番号、およびユーザー名を取得してください。
 
     1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
-    2. 概要ページで、 **[接続]**ペインを見つけて、 `Endpoint` 、 `Port` 、および`User`フィールドをコピーします。ここで`Endpoint`はTiDB Cloud Starterインスタンスのホスト名です。
+    2. 概要ページで、 **Connection**ペインを見つけて、 `Endpoint` 、 `Port` 、および`User`フィールドをコピーします。ここで`Endpoint`はTiDB Cloud Starterインスタンスのホスト名です。
 
 #### ステップ2. ProxySQL設定ファイルを生成する {#step-2-generate-proxysql-configuration-files}
 

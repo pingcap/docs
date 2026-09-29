@@ -83,7 +83,7 @@ Jina AIのAPIキーを[Jina AI 埋め込み API](https://jina.ai/embeddings/)ペ
     >
     > プログラムがWindows Subsystem for Linux（WSL）上で実行されている場合は、対応するLinuxディストリビューションに切り替えてください。
 
-4. **PyMySQL**タブに切り替えて、**コピー**アイコンをクリックして接続文字列をコピーします。
+4. **PyMySQL**タブに切り替えて、**Copy**アイコンをクリックして接続文字列をコピーします。
 
     > **Tip:**
     >

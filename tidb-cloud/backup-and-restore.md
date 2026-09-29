@@ -193,7 +193,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 1. TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2. エクスポートしたいバックアップファイルを見つけて、 **[アクション]**列の**[...]** &gt; **[エクスポート]**をクリックします。
+2. エクスポートしたいバックアップファイルを見つけて、 **Action**列の**...** > **Export**をクリックします。
 
 3. **Export Backup to Amazon S3**ダイアログで、 **Folder URI**フィールドに入力し、バックアップ バケットのバケット リージョンを選択します。
 
@@ -221,7 +221,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 1. TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2. エクスポートしたいバックアップファイルを見つけて、 **[アクション]**列の**[...]** &gt; **[エクスポート]**をクリックします。
+2. エクスポートしたいバックアップファイルを見つけて、 **Action**列の**...** > **Export**をクリックします。
 
 3. **Export Backup to Google Cloud Storage**ダイアログで、 **Google Cloud Service Account ID**をメモしておいてください。これは後の手順で必要になります。
 
@@ -252,7 +252,7 @@ TiDB Cloud Dedicatedクラスターの既存のバックアップファイルを
 
 1. TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2. 削除したいバックアップファイルを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
+2. 削除したいバックアップファイルを見つけて、 **Action**列の**...** > **Delete**をクリックします。
 
 #### 実行中のバックアップジョブを削除します {#delete-a-running-backup-job}
 
@@ -260,7 +260,7 @@ TiDB Cloud Dedicatedクラスターの実行中のバックアップジョブを
 
 1. TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2. **保留中**または**Running**中のバックアップジョブを見つけて、 **[アクション]**列の**[...]** &gt; **[削除]**をクリックします。
+2. **Pending**または**Running**状態のバックアップジョブを見つけて、 **Action**列の**...** > **Delete**をクリックします。
 
 ## 復元する {#restore}
 

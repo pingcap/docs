@@ -170,7 +170,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
     - **Source URI** ：
         - 1 つのファイルをインポートする場合は、ソースファイルの URI を`gs://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `gs://mybucket/myfolder/TableName.01.csv` 。
         - 複数のファイルをインポートする場合は、ソースフォルダのURIを`gs://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `gs://mybucket/myfolder/` 。
-    - **Google Cloud サービスアカウント ID** : TiDB Cloud は、このページで一意の Google Cloud サービスアカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービスアカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
+    - **Google Cloud Service Account ID** : TiDB Cloud は、このページで一意の Google Cloud サービスアカウント ID ( `example-service-account@your-project.iam.gserviceaccount.com`など) を提供します。このサービスアカウント ID に、Google Cloud プロジェクト内の GCS バケットに対して必要なIAM権限（ `Storage Object Viewer`など）を付与します。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-gcs-access)を参照してください。
 
 4. **Next**をクリックしてください。
 

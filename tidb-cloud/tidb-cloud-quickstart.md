@@ -22,7 +22,7 @@ category: quick start
 
 2. TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)します。
 
-    デフォルトでは[**クラスター**](https://tidbcloud.com/project/clusters)ページが表示されます。
+    デフォルトでは[**My TiDB**](https://tidbcloud.com/tidbs)ページが表示されます。
 
 3. 新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
 
@@ -54,7 +54,7 @@ category: quick start
 
 AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB Cloudコンソールに組み込まれた AI 支援型 SQL エディタを使用して、データの価値を最大限に高めることができます。これにより、ローカル SQL クライアントを使用せずに、データベースに対して SQL クエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
 
-1. [**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーションペインで**SQL Editor**をクリックします。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーションペインで**SQL Editor**をクリックします。
 
 2. TiDB Cloudの AI 機能を試すには、画面上の指示に従って、PingCAP と AWS Bedrock が研究とサービスの改善のためにコードスニペットを使用することを許可し、 **[Save and Get Started]** をクリックします。
 
@@ -127,7 +127,7 @@ FROM
 
 TiDB Cloud は、 TiDB Cloudをすぐに使い始めるのに役立つ、丁寧に作成されたサンプルデータセットを含むインタラクティブなチュートリアルを提供しています。AWS でホストされているTiDB Cloud Starter クラスターの場合は、このチュートリアルを試して、 TiDB Cloud を高性能データ分析に使用する方法を学習できます。
 
-1. コンソールの右下隅にある**[?]**アイコンをクリックし、 **[SQL エディターのガイド ツアー]**を選択します。
+1. コンソールの右下隅にある**?**アイコンをクリックし、 **Guided tour of SQL Editor**を選択します。
 2. ツアーで使用するTiDB Cloud Starterクラスターを選択し、 **Import Dataset**をクリックします。インポート処理には約1分かかる場合があります。
 3. サンプルデータをインポートしたら、画面の指示に従ってツアーを完了します。
 

@@ -721,7 +721,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     - 選択した**Connectivity method**に基づいて、以下の手順を実行してください。
 
         - **Public**を選択した場合は、 **Hostname or IP address**フィールドにデータソースのホスト名またはIPアドレスを入力してください。
-        - **Private Link**が選択されている場合は、 **Private Endpoint**フィールドで既存のプライベートエンドポイントを選択するか、 **[ここでプライベートエンドポイントを作成] をクリックしてプライベートエンドポイント**を作成します。プライベートエンドポイントは、 TiDB Cloud Premium インスタンスの**Networking** &gt; **[AWS 外部サービス用プライベートエンドポイント]**で管理されます。プライベートエンドポイントは、複数のデータ移行ジョブおよび変更フィード間で再利用できます。設定の詳細については、[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)をご覧ください。
+        - **Private Link**が選択されている場合は、 **Private Endpoint**フィールドで既存のプライベートエンドポイントを選択するか、 **Create a Private Endpoint here**をクリックして作成します。プライベートエンドポイントは、 TiDB Cloud Premium インスタンスの**Networking** > **AWS Private Endpoints for External Services**で管理されます。プライベートエンドポイントは、複数のデータ移行ジョブおよび変更フィード間で再利用できます。設定の詳細については、[プライベートリンクまたはプライベートエンドポイント](#private-link-or-private-endpoint)をご覧ください。
 
     </CustomContent>
 
@@ -780,7 +780,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
     </CustomContent>
     <CustomContent plan="premium">
 
-    - 接続方法として**パブリック**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
+    - 接続方法として**Public**を使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
     - **Private Link**を使用しており、選択したプライベートエンドポイントがAWSでまだ承認されていない場合は、 [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)でエンドポイントサービスを作成したAWSリージョンに切り替え、 **Endpoint services**を選択し、 TiDB Cloudからのエンドポイント接続リクエストを承認してください。
 
     </CustomContent>

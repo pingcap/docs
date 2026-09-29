@@ -43,7 +43,7 @@ Before the smooth upgrade feature is introduced, there are the following limitat
 
 These limitations can be summarized as that you need to ensure that there are no user-initiated DDL operations during the upgrade process. After the smooth upgrade feature is introduced, TiDB is no longer subject to this limitation during the upgrade process.
 
-詳細については、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup)の**警告の**内容を参照してください。
+詳細については、 [TiUPを使用して TiDB をアップグレードする](/upgrade-tidb-using-tiup.md#upgrade-tidb-using-tiup)の**警告**の内容を参照してください。
 
 ### アップグレード手順 {#upgrade-steps}
 

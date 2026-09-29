@@ -63,7 +63,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
 1. 監査ログを有効にする TiDB クラスターのTiDB Cloudアカウント ID と外部 ID を取得します。
 
-    1. TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -107,7 +107,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
 #### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、 TiDB Cloudアカウント ID と外部 ID 値を取得した**[データベース監査ログストレージ設定]**ダイアログボックスに戻り、次の手順を実行します。
+TiDB Cloudコンソールで、 TiDB Cloudアカウント ID と外部 ID 値を取得した**Database Audit Log Storage Configuration**ダイアログボックスに戻り、次の手順を実行します。
 
 1. **Bucket URI**フィールドに、監査ログファイルが書き込まれる S3 バケットの URI を入力します。
 
@@ -136,7 +136,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 
 1. 監査ログを有効にする TiDB クラスタの Google Cloud サービスアカウント ID を取得します。
 
-    1. TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+    1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
         > **Tip:**
         >
@@ -146,7 +146,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 
     3. **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
-    4. **[データベース監査ログストレージ設定]**ダイアログで、 **[Google Cloud Service アカウント ID]**セクションを見つけて、後で使用するために**Service Account ID**を記録します。
+    4. **Database Audit Log Storage Configuration**ダイアログで、 **Google Cloud Service Account ID**セクションを見つけて、後で使用するために**Service Account ID**を記録します。
 
 2. [Google Cloud console](https://console.cloud.google.com/)で、 **IAM & Admin** &gt; **Roles**に移動し、ストレージバケット内のオブジェクトに対する次の書き込み専用権限を持つロールが存在するかどうかを確認します。
 
@@ -171,7 +171,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 
 #### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、 Google Cloud サービスアカウント ID を取得した**[データベース監査ログストレージ設定]**ダイアログボックスに戻り、次の手順を実行します。
+TiDB Cloudコンソールで、 Google Cloud サービスアカウント ID を取得した**Database Audit Log Storage Configuration**ダイアログボックスに戻り、次の手順を実行します。
 
 1. **Bucket URI**フィールドに、完全な GCS バケット名を入力します。
 
@@ -235,7 +235,7 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
 #### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
-1. TiDB Cloudコンソールで、プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動します。
+1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
     > **Tip:**
     >

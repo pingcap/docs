@@ -34,7 +34,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 3. [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com)で[**クラスター**](https://tidbcloud.com/project/clusters)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com)で[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動します。
     2. 左側のナビゲーションペインで、 **Data** &gt; **Changefeed**をクリックします。
     3. **Changefeed**ページで、右上隅の**Create Changefeed**をクリックし、次の情報を入力します。
         1. **Destination**で、 **Kafka**を選択します。
@@ -372,7 +372,7 @@ Kafka クラスターが TiDB クラスターと同じリージョンにデプ�
 1. 構成の変更を計画します。
 
     1. TiDB Cloudからの外部アクセス用に、各ブローカーに EXTERNAL**リスナー**を設定します。EXTERNAL ポートとして一意のポート（例： `39092` ）を選択します。
-    2. TiDB Cloudから取得した**advertised listener**に基づいて、各ブローカーノードにEXTERNAL**アドバタイズリスナー**を設定することで、TiDB Cloudが複数のブローカーを区別できるようになります。異なるEXTERNALアドバタイズリスナーを設定することで、 TiDB Cloud側のKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
+    2. TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードにEXTERNAL**アドバタイズリスナー**を設定することで、TiDB Cloudが複数のブローカーを区別できるようになります。異なるEXTERNALアドバタイズリスナーを設定することで、 TiDB Cloud側のKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
         - `<port>` 、ブローカーと Kafka Private Link サービスのアクセスポイントを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲（例： `range from 9093` ）を計画してください。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを別のブローカーに転送する Private Link サービスのロードバランサーがリッスンするポートです。
         - トラブルシューティングを容易にするために、ブローカーごとに異なるブローカー ID を構成することをお勧めします。
 

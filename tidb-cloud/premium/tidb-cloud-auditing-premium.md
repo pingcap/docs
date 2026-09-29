@@ -172,7 +172,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
         4. **Add condition**をクリックし、次のように条件を設定します。
             - **Key**を`sts:ExternalId`に設定します。
             - **Operator**を`StringEquals`に設定します。
-            - **TiDB Cloud外部ID**に**値**を設定します。
+            - **Value**に**TiDB Cloud External ID**を設定します。
         5. **OK**をクリックして**Create Role**ダイアログを開きます。
         6. **Role Name**フィールドに役割名を入力し、 **OK**をクリックして役割を作成します。
 
