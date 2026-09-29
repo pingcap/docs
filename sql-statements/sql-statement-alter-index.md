@@ -64,7 +64,7 @@ EXPLAIN SELECT c1 FROM t1 ORDER BY c1;
 3 rows in set (0.00 sec)
 ```
 
-比較すると、 `c2`**可視インデックス**であり、オプティマイザで使用できます。
+比較すると、 `c2`は**可視インデックス**であり、オプティマイザで使用できます。
 
 ```sql
 EXPLAIN SELECT c2 FROM t1 ORDER BY c2;

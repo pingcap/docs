@@ -24,8 +24,8 @@ summary: TiDBデータベースにおけるADMINの使用方法の概要。
 | [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)              | 現在実行中のDDLジョブを一時停止します。          |
 | [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)            | 一時停止していたDDLジョブを再開します。          |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行とインデックスのCRC64を計算します。 |
-| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの一貫性をチェックします。     |
-| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了したDDLジョブの詳細を表示します。 |
+| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの一貫性をチェックします。     |
+| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了したDDLジョブの詳細を表示します。 |
 
 </CustomContent>
 
@@ -35,8 +35,8 @@ summary: TiDBデータベースにおけるADMINの使用方法の概要。
 | --------------------------------------------------------------------------------------- | ------------------------------ |
 | [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)            | 現在実行中のDDLジョブをキャンセルします。         |
 | [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)         | テーブルのすべての行とインデックスのCRC64を計算します。 |
-| [`ADMIN CHECK [TABLE|INDEX]`](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの一貫性をチェックします。     |
-| [`ADMIN SHOW DDL [JOBS|QUERIES]`](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了したDDLジョブの詳細を表示します。 |
+| [<code>ADMIN CHECK [TABLE\|INDEX]</code>](/sql-statements/sql-statement-admin-check-table-index.md) | テーブルまたはインデックスの一貫性をチェックします。     |
+| [<code>ADMIN SHOW DDL [JOBS\|QUERIES]</code>](/sql-statements/sql-statement-admin-show-ddl.md)      | 現在実行中または最近完了したDDLジョブの詳細を表示します。 |
 
 </CustomContent>
 
@@ -46,7 +46,7 @@ summary: TiDBデータベースにおけるADMINの使用方法の概要。
 ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
-上記のステートメントは、式によってプッシュされたブロックリストを再読み込みするために使用されます。
+上記のステートメントは、式によってプッシュダウンされたブロックリストを再読み込みするために使用されます。
 
 ```sql
 ADMIN RELOAD opt_rule_blacklist;
@@ -64,7 +64,7 @@ ADMIN RELOAD opt_rule_blacklist;
 ADMIN PLUGINS ENABLE plugin_name [, plugin_name] ...;
 ```
 
-上記の記述は`plugin_name`プラグインを有効にするために使用されます。
+上記のステートメントは`plugin_name`プラグインを有効にするために使用されます。
 
 ```sql
 ADMIN PLUGINS DISABLE plugin_name [, plugin_name] ...;
@@ -90,7 +90,7 @@ ADMIN CAPTURE BINDINGS;
 ADMIN EVOLVE BINDINGS;
 ```
 
-自動バインディング機能が有効になると、SQL プランのバインディング情報の更新は`bind-info-leave`ごと（デフォルト値は`3s` ）にトリガーされます。上記のステートメントは、この更新を事前にトリガーするために使用されます。
+自動バインディング機能が有効になると、SQL プランのバインディング情報の進化は`bind-info-leave`ごと（デフォルト値は`3s` ）にトリガーされます。上記のステートメントは、この進化を事前にトリガーするために使用されます。
 
 ```sql
 ADMIN RELOAD BINDINGS;
@@ -104,7 +104,7 @@ ADMIN RELOAD BINDINGS;
 
 > **Note:**
 >
-> この TiDB の記述はTiDB Cloudには適用されません。
+> この TiDB ステートメントはTiDB Cloudには適用されません。
 
 </CustomContent>
 

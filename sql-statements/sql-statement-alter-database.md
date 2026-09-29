@@ -5,7 +5,7 @@ summary: TiDB データベースに対する ALTER DATABASE の使用法の概�
 
 # ALTER DATABASE {#alter-database}
 
-`ALTER DATABASE` 、現在のデータベースのデフォルトの文字セットと照合順序を指定または変更するために使用されます。 `ALTER SCHEMA` `ALTER DATABASE`と同じ効果があります。
+`ALTER DATABASE`は、現在のデータベースのデフォルトの文字セットと照合順序を指定または変更するために使用されます。 `ALTER SCHEMA`は`ALTER DATABASE`と同じ効果があります。
 
 ## 概要 {#synopsis}
 
@@ -29,7 +29,7 @@ ALTER DATABASE test DEFAULT CHARACTER SET = utf8mb4;
 Query OK, 0 rows affected (0.00 sec)
 ```
 
-現在、TiDBは一部の文字セットと照合順序のみをサポートしています。詳細は[文字セットと照合順序のサポート](/character-set-and-collation.md)ご覧ください。
+現在、TiDBは一部の文字セットと照合順序のみをサポートしています。詳細は[文字セットと照合順序のサポート](/character-set-and-collation.md)をご覧ください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
