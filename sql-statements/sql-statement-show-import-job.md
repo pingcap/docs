@@ -9,7 +9,7 @@ summary: TiDB での SHOW IMPORT の使用法の概要。
 
 ## 必要な権限 {#required-privileges}
 
-- `SHOW IMPORT JOBS` : ユーザーが権限`SUPER`持っている場合、このステートメントは TiDB 内のすべてのインポートジョブを表示します。それ以外の場合は、現在のユーザーが作成したジョブのみを表示します。
+- `SHOW IMPORT JOBS` : ユーザーが`SUPER`権限を持っている場合、このステートメントは TiDB 内のすべてのインポートジョブを表示します。それ以外の場合は、現在のユーザーが作成したジョブのみを表示します。
 - `SHOW IMPORT JOB <job-id>` : インポートジョブの作成者または`SUPER`権限を持つユーザーのみがこのステートメントを使用して特定のジョブを表示できます。
 
 ## 概要 {#synopsis}
@@ -30,7 +30,7 @@ ShowImportJobStmt ::=
 | Data_Source | データソースに関する情報                                                                     |
 | Target_Table | 対象テーブルの名前                                                                        |
 | Phase | ジョブの現在のフェーズ。`importing`、`validating`、`add-index` を含みます                                 |
-| Status | ジョブの現在`finished`ステータス`failed` `pending` （作成されたがまだ開始されていない）、 `running` `canceled` |
+| Status | `pending` （作成されたがまだ開始されていない）、 `running` 、 `canceled` 、 `failed` 、 `finished`を含むジョブの現在のステータス |
 | Source_File_Size | ソースファイルのサイズ                                                                      |
 | Imported_Rows | ターゲットテーブルに読み書きされたデータ行の数                                                          |
 | Result_Message | インポートに失敗した場合、このフィールドはエラーメッセージを返します。それ以外の場合は空になります。                               |

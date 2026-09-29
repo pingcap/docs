@@ -19,7 +19,7 @@ summary: TiDB データベースの SHOW STATS_HISTOGRAMS の使用法の概要�
 | `Update_time`     | 更新時刻                                               |
 | `Distinct_count`  | 個別カウント                                             |
 | `Null_count`      | NULLカウント                                           |
-| `Avg_col_size`    | 平均コルサイズ                                            |
+| `Avg_col_size`    | 平均列サイズ                                            |
 | `Correlation`     | この列と整数主キー列の間のピアソン相関係数。2つの列間の関連の度合いを示します。           |
 | `Load_status`     | 負荷ステータス（ `allEvicted`など`allLoaded`                 |
 | `Total_mem_usage` | 総メモリ使用量                                            |
