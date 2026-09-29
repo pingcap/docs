@@ -77,7 +77,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     - 悲観的ロックトランザクションをサポート[#4698](https://github.com/tikv/tikv/pull/4698)
 
 - Raftstore
-    - ラフトストアCPUの消費を減らすために休止状態リージョンをサポートする[#4591](https://github.com/tikv/tikv/pull/4591)
+    - ラフトストアCPUの消費を減らすためにHibernate Regionをサポートする[#4591](https://github.com/tikv/tikv/pull/4591)
     - リーダーがラーナーの`ReadIndex`リクエストに返信しない問題を修正 [#4653](https://github.com/tikv/tikv/pull/4653)
     - 一部のケースでリーダーの転送に失敗する問題を修正[#4684](https://github.com/tikv/tikv/pull/4684)
     - いくつかのケースでダーティリードの問題を修正[#4688](https://github.com/tikv/tikv/pull/4688)

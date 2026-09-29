@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Tuning TiKV Performance with Massive Regions
-summary: TiKVのパフォーマンスチューニングには、リージョンとメッセージ数の削減、 Raftstoreの同時実行性の向上、Hibernateリージョンとリージョンマージの有効化、 Raftベースのティック間隔の調整、TiKVインスタンスの増加、リージョンサイズの調整が含まれます。その他の問題としては、PDリーダーの切り替え速度の低下やPDルーティング情報の古さなどが挙げられます。
+summary: TiKVのパフォーマンスチューニングには、リージョンとメッセージ数の削減、 Raftstoreの同時実行性の向上、Hibernate Regionとリージョンマージの有効化、 Raftベースのティック間隔の調整、TiKVインスタンスの増加、リージョンサイズの調整が含まれます。その他の問題としては、PDリーダーの切り替え速度の低下やPDルーティング情報の古さなどが挙げられます。
 aliases: ['/ja/docs/dev/best-practices/massive-regions-best-practices/','/ja/docs/dev/reference/best-practices/massive-regions/','/ja/tidb/stable/massive-regions-best-practices/','/ja/tidb/dev/massive-regions-best-practices/']
 ---
 
@@ -76,11 +76,11 @@ Raftstore はTiDB v3.0 以降、マルチスレッド モジュールにアッ�
 
 TiKVでは、デフォルトで`raftstore.store-pool-size`は`2`に設定されています。Raftstoreでボトルネックが発生する場合は、実際の状況に応じてこの設定項目の値を適切に増やすことができます。ただし、不要なスレッド切り替えのオーバーヘッドを回避するため、この値を高くしすぎないことをお勧めします。
 
-### 方法2: Hibernateリージョンを有効にする {#method-2-enable-hibernate-region}
+### 方法2: Hibernate Regionを有効にする {#method-2-enable-hibernate-region}
 
-実際の状況では、読み取りおよび書き込みリクエストはすべてのリージョンに均等に分散されるわけではなく、一部のリージョンに集中します。そのため、一時的にアイドル状態のリージョンにおけるRaftリーダーとフォロワー間のメッセージ数を最小限に抑えることができます。これはHibernate リージョンの機能です。この機能により、 Raftstoreはアイドル状態のリージョンのRaftステートマシンに、必要がない限りティックメッセージを送信しません。そのため、これらのRaftステートマシンはハートビートメッセージを生成するためにトリガーされることがなくなり、 Raftstoreのワークロードを大幅に軽減できます。
+実際の状況では、読み取りおよび書き込みリクエストはすべてのリージョンに均等に分散されるわけではなく、一部のリージョンに集中します。そのため、一時的にアイドル状態のリージョンにおけるRaftリーダーとフォロワー間のメッセージ数を最小限に抑えることができます。これはHibernate Regionの機能です。この機能により、 Raftstoreはアイドル状態のリージョンのRaftステートマシンに、必要がない限りティックメッセージを送信しません。そのため、これらのRaftステートマシンはハートビートメッセージを生成するためにトリガーされることがなくなり、 Raftstoreのワークロードを大幅に軽減できます。
 
-[TiKVのmasterブランチ](https://github.com/tikv/tikv/tree/master)では、Hibernate リージョン がデフォルトで有効になっています。この機能は必要に応じて設定できます。詳細は[Hibernateリージョンを構成する](/tikv-configuration-file.md)を参照してください。
+[TiKVのmasterブランチ](https://github.com/tikv/tikv/tree/master)では、Hibernate Region がデフォルトで有効になっています。この機能は必要に応じて設定できます。詳細は[Hibernate Regionを構成する](/tikv-configuration-file.md)を参照してください。
 
 ### 方法3: `Region Merge`を有効にする {#method-3-enable-region-merge}
 

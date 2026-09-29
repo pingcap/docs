@@ -141,7 +141,7 @@ TiDB バージョン: 5.1.0
 
     [ユーザー向けドキュメント](/stale-read.md)、 [#21094](https://github.com/pingcap/tidb/issues/21094)
 
-- Hibernateリージョン機能をデフォルトで有効にします。
+- Hibernate Region機能をデフォルトで有効にします。
 
     リージョンが長時間非アクティブ状態にある場合、自動的にサイレント状態に設定され、LeaderとFollower間のハートビート情報のシステムオーバーヘッドが削減されます。
 
