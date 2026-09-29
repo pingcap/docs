@@ -15,8 +15,8 @@ TiDB Cloud Dedicated クラスタは、TiDB ノード、TiKV ノード、 TiFlas
 
 - **TiKVノード**
 
-    [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview) 、水平スケーラビリティを備えたTiDB Cloud Dedicatedクラスタの行ベースのストレージレイヤーです。TiDB Cloud DedicatedクラスタのTiKVノードの最小数は3です。TiDB Cloud Dedicatedは、選択したリージョン内のすべてのアベイラビリティゾーン（少なくとも3つ）にTiKVノードを均等にデプロイすることで、耐久性と高可用性を実現します。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンのTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。
+    [TiKV](https://docs.pingcap.com/tidb/stable/tikv-overview)は、水平スケーラビリティを備えたTiDB Cloud Dedicatedクラスタの行ベースのストレージレイヤーです。TiDB Cloud DedicatedクラスタのTiKVノードの最小数は3です。TiDB Cloud Dedicatedは、選択したリージョン内のすべてのアベイラビリティゾーン（少なくとも3つ）にTiKVノードを均等にデプロイすることで、耐久性と高可用性を実現します。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンのTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。
 
 - **TiFlashノード**
 
-    [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview) 、TiKV の列指向ストレージ拡張機能であり、TiDB を本質的にハイブリッドトランザクション/分析処理 (HTAP) データベースにする重要なコンポーネントです。TiFlash、列指向レプリカはRaft Learnerコンセンサスアルゴリズムに従って非同期的に複製されます。TiDB Cloud Dedicated は、 TiFlashノードをリージョン内の異なるアベイラビリティゾーンに均等にデプロイします。本番環境での高可用性を確保するため、各TiDB Cloud Dedicated クラスターに少なくとも 2つのTiFlashノードを設定し、少なくとも 2つのデータレプリカを作成本番ことをお勧めします。
+    [TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)は、TiKV の列指向ストレージ拡張機能であり、TiDB を本質的にハイブリッドトランザクション/分析処理 (HTAP) データベースにする重要なコンポーネントです。TiFlashでは、列指向レプリカはRaft Learnerコンセンサスアルゴリズムに従って非同期的に複製されます。TiDB Cloud Dedicated は、 TiFlashノードをリージョン内の異なるアベイラビリティゾーンに均等にデプロイします。本番環境での高可用性を確保するため、各TiDB Cloud Dedicated クラスターに少なくとも 2つのTiFlashノードを設定し、少なくとも 2つのデータレプリカを作成することをお勧めします。

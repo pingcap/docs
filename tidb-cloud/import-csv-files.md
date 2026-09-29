@@ -10,13 +10,13 @@ aliases: ['/ja/tidbcloud/migrate-from-amazon-s3-or-gcs','/ja/tidbcloud/migrate-f
 
 > **Tip:**
 >
-> TiDB Cloud StarterまたはTiDB Cloud Essentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)。
+> TiDB Cloud StarterまたはTiDB Cloud Essentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)を参照してください。
 
 ## 制限事項 {#limitations}
 
 - データの一貫性を確保するため、 TiDB Cloud では CSV ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従ってTiDB Cloud を使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
 
-- TiDB Cloud Dedicatedクラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)があるか、 [特定時点への復元](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません ([**Import Data**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム リストアはインポートされたデータを検出できません。
+- TiDB Cloud Dedicatedクラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)があるか、 [特定時点への復元](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません (**Import Data**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム リストアはインポートされたデータを検出できません。
 
 ## ステップ1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
@@ -36,7 +36,7 @@ aliases: ['/ja/tidbcloud/migrate-from-amazon-s3-or-gcs','/ja/tidbcloud/migrate-f
     >
     > - データファイルのみを圧縮すればよく、データベースファイルやテーブルスキーマファイルを圧縮する必要はありません。
     > - パフォーマンスを向上させるためには、各圧縮ファイルのサイズを100MiBに制限することをお勧めします。
-    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+    > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
     > - 圧縮されていないファイルの場合、前述のルールに従って CSV ファイル名を更新できない場合 (たとえば、CSV ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files-to-tidb-cloud)の**Destination Mapping**手順で**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**の選択を解除して、ソースファイルを単一のターゲットテーブルに手動でマッピングできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
@@ -123,7 +123,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
@@ -135,7 +135,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
         - **Source**: ファイル名のパターンを`[file_name].csv`の形式で入力してください。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 
-            - `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
+            - `my-data?.csv` : `my-data`で始まり、その後に 1 文字が続くすべての CSV ファイルに一致します。たとえば`my-data1.csv`や`my-data2.csv`などです。
             - `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。
@@ -176,7 +176,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
@@ -188,7 +188,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
         - **Source**: ファイル名のパターンを`[file_name].csv`の形式で入力してください。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 
-            - `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
+            - `my-data?.csv` : `my-data`で始まり、その後に 1 文字が続くすべての CSV ファイルに一致します。たとえば`my-data1.csv`や`my-data2.csv`などです。
             - `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。
@@ -250,11 +250,11 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
     > **Note:**
     >
-    > エンドポイントがまだ承認されていない場合、 TiDB Cloud は接続が承認待ちであることを示すメッセージを表示します。Azure でリクエスト[Azureポータル](https://portal.azure.com/)承認してから、再試行してください。
+    > エンドポイントがまだ承認されていない場合、 TiDB Cloud は接続が承認待ちであることを示すメッセージを表示します。[Azureポータル](https://portal.azure.com/)でリクエストを承認してから、再試行してください。
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則を</a>使用する**オプションを選択します。
+    **Source URI**でディレクトリを指定すると、 TiDB Cloudはデフォルトで**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを選択します。
 
     > **Note:**
     >
@@ -266,7 +266,7 @@ CSVファイルをTiDB Cloudにインポートするには、以下の手順に�
 
         - **Source**: ファイル名のパターンを`[file_name].csv`の形式で入力してください。例: `TableName.01.csv` 。ワイルドカードを使用して複数のファイルを照合することもできます。TiDB Cloud は`*`と`?`のワイルドカードのみをサポートしています。
 
-            - `my-data?.csv` : `my-data` `my-data1.csv`や`my-data2.csv`のような 1 文字が続くすべての CSV ファイルに一致します。
+            - `my-data?.csv` : `my-data`で始まり、その後に 1 文字が続くすべての CSV ファイルに一致します。たとえば`my-data1.csv`や`my-data2.csv`などです。
             - `my-data*.csv` : `my-data`で始まるすべての CSV ファイルに一致します。たとえば`my-data-2023.csv`や`my-data-final.csv`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを入力してください。

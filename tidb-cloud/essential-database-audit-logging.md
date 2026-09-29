@@ -10,7 +10,7 @@ TiDB Cloud Essentialは、実行されたSQL文など、データベースへの
 
 > **Note:**
 >
-> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**?**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「 TiDB Cloud Essentialデータベース監査ログの申請」と入力して、 **Submit**をクリックします。
+> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「 TiDB Cloud Essentialデータベース監査ログの申請」と入力して、 **Submit**をクリックします。
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
 
@@ -64,7 +64,7 @@ TiDB Cloud Essentialは、以下のいずれかの条件が満たされた場合
 監査ログをGoogle Cloud Storageに保存するには、以下の情報を提供する必要があります。
 
 - URI: `gs://<bucket-name>/<folder-path>/`
-- アクセス資格情報: `storage.objects.create`および`storage.objects.delete`権限を持つサービス[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。
+- アクセス資格情報: `storage.objects.create`および`storage.objects.delete`権限を持つ[サービスアカウントキー](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。
 
 詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
 
@@ -73,16 +73,16 @@ TiDB Cloud Essentialは、以下のいずれかの条件が満たされた場合
 Azure Blob Storage に監査ログを保存するには、以下の情報を提供する必要があります。
 
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
-- [共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)資格情報: `Read`および`Write`および { `Container` `Object`権限を持つ共有アクセス宣言（SAS） ブラウザ。
+- アクセス資格情報: `Container`および`Object`リソースに対する`Read`および`Write`権限を持つ[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。
 
 詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
-### アリババクラウドOSS {#alibaba-cloud-oss}
+### Alibaba Cloud OSS {#alibaba-cloud-oss}
 
 Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供する必要があります。
 
 - URI: `oss://<bucket-name>/<folder-path>/`
-- アクセス資格情報: OSS バケットへのデータのエクスポートを許可する`oss:PutObject`および`oss:GetBucketInfo`権限を持つ[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)キーペア。
+- アクセス資格情報: OSS バケットへのデータのエクスポートを許可する`oss:PutObject`および`oss:GetBucketInfo`権限を持つ[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)。
 
 詳細については、 [Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 
@@ -106,11 +106,11 @@ Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供
 | `CONNECTION`        | ハンドシェイク、接続、切断、接続リセット、ユーザー変更など、接続に関連するすべての操作を記録します。           | -            |
 | `CONNECT`           | 接続におけるハンドシェイクのすべての操作を記録します                                   | `CONNECTION` |
 | `DISCONNECT`        | 切断操作の全記録                                                     | `CONNECTION` |
-| `CHANGE_USER`       | 変更されたユーザーのすべての操作を記録します                                       | `CONNECTION` |
+| `CHANGE_USER`       | ユーザーを変更するすべての操作を記録します                                        | `CONNECTION` |
 | `QUERY`             | SQL文のすべての操作を記録します。これには、データのクエリと変更に関するすべてのエラーが含まれます。    | -            |
 | `TRANSACTION`       | `BEGIN` 、 `COMMIT` 、 `ROLLBACK`などのトランザクションに関連するすべての操作を記録します。 | `QUERY`      |
 | `EXECUTE`           | `EXECUTE`文のすべての操作を記録します。                               | `QUERY`      |
-| `QUERY_DML`         | `INSERT` 、 `REPLACE` 、 `UPDATE` 、および`DELETE` `LOAD DATA`     | `QUERY`      |
+| `QUERY_DML`         | `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE` 、および`LOAD DATA`を含む DML 文のすべての操作を記録します | `QUERY`      |
 | `INSERT`            | `INSERT`文のすべての操作を記録します。                                | `QUERY_DML`  |
 | `REPLACE`           | `REPLACE`文のすべての操作を記録します。                               | `QUERY_DML`  |
 | `UPDATE`            | `UPDATE`文のすべての操作を記録します。                                | `QUERY_DML`  |
@@ -119,7 +119,7 @@ Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供
 | `SELECT`            | `SELECT`文のすべての操作を記録します。                                | `QUERY`      |
 | `QUERY_DDL`         | DDL文のすべての操作を記録します                                      | `QUERY`      |
 | `AUDIT`             | TiDBデータベース監査の設定に関連するすべての操作（システム変数の設定やシステム関数の呼び出しなど）を記録します。   | -            |
-| `AUDIT_FUNC_CALL`   | TiDB Cloudデータベース監査に関連する呼び出しシステム関数のすべての操作を記録します。              | `AUDIT`      |
+| `AUDIT_FUNC_CALL`   | TiDB Cloudデータベース監査に関連するシステム関数を呼び出すすべての操作を記録します。              | `AUDIT`      |
 | `AUDIT_SET_SYS_VAR` | システム変数の設定操作をすべて記録します                                         | `AUDIT`      |
 
 > **Note:**
@@ -217,7 +217,7 @@ TiDB Cloud Essentialインスタンスの監査ログを無効にすることが
 
 2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** &gt; **DB Audit Logging**をクリックします。
 
-3. **DB Audit Logging**ページで、右上隅の**...**をクリックし、次に**Disable**にします。
+3. **DB Audit Logging**ページで、右上隅の**...**をクリックし、次に**Disable**をクリックします。
 
 4. **Disable DB Audit Logging**ダイアログで、 **Disable**をクリックします。
 
@@ -366,7 +366,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 
 | フィールド                      | 説明                                             |
 | ----------------------- | ---------------------------------------------- |
-| `ID`                    | 業務の監査記録を識別する固有の識別子。                            |
+| `ID`                    | 操作の監査記録を識別する固有の識別子。                            |
 | `TIME`                  | 監査記録のタイムスタンプ。                                  |
 | `EVENT`                 | 監査記録のイベントクラス。複数のイベントタイプはカンマで区切られます（ `,` ）。     |
 | `USER`                  | 監査記録のユーザー名。                                    |
@@ -398,7 +398,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | フィールド                | 説明                                                     |
 | ----------------- | ------------------------------------------------------ |
 | `CURRENT_DB`      | 現在のデータベースの名前。イベントクラスにDISCONNECTが含まれている場合、この情報は記録されません。 |
-| `CONNECTION_TYPE` | 接続の種類（ソケット、UnixSocket、SSL/TLSなど）。                      |
+| `CONNECTION_TYPE` | 接続の種類（Socket、UnixSocket、SSL/TLSなど）。                      |
 | `PID`             | 現在の接続のプロセスID。                                          |
 | `SERVER_VERSION`  | 接続されているTiDBサーバーの現在のバージョン。                              |
 | `SSL_VERSION`     | 現在使用されているSSLのバージョン。                                    |

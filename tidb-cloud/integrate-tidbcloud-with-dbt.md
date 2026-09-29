@@ -5,7 +5,7 @@ summary: TiDB Cloudにおけるdbtのユースケースについて学びまし�
 
 # TiDB Cloudとdbtを統合する {#integrate-tidb-cloud-with-dbt}
 
-データ[データ構築ツール（dbt）](https://www.getdbt.com/)は、分析エンジニアがSQL文を使用してデータウェアハウス内のデータを変換するのに役立つ、人気の高いオープンソースのデータ変換ツールです。dbt [dbt-tidb](https://github.com/pingcap/dbt-tidb)プラグインを使用すると、 TiDB Cloudを使用する分析エンジニアは、テーブルやビューの作成プロセスを気にすることなく、SQLを使用してフォームを直接作成し、データを照合できます。
+[Data build tool（dbt）](https://www.getdbt.com/)は、分析エンジニアがSQL文を使用してデータウェアハウス内のデータを変換するのに役立つ、人気の高いオープンソースのデータ変換ツールです。[dbt-tidb](https://github.com/pingcap/dbt-tidb)プラグインを使用すると、 TiDB Cloudを使用する分析エンジニアは、テーブルやビューの作成プロセスを気にすることなく、SQLを使用してフォームを直接作成し、データを照合できます。
 
 このドキュメントでは、dbtプロジェクトを例として、 TiDB Cloudでdbtを使用する方法を紹介します。
 
@@ -21,7 +21,7 @@ dbt を個別にインストールすることもできます。 dbt ドキュ�
 
 ## ステップ2：デモプロジェクトを作成する {#step-2-create-a-demo-project}
 
-dbt の機能を試すには、dbt-lab が提供するデモプロジェクト[Jaffle Shop](https://github.com/dbt-labs/jaffle_shop)を利用できます。 GitHub から直接プロジェクトのクローンを作成できます。
+dbt の機能を試すには、dbt-lab が提供するデモプロジェクト[jaffle_shop](https://github.com/dbt-labs/jaffle_shop)を利用できます。 GitHub から直接プロジェクトのクローンを作成できます。
 
 ```shell
 git clone https://github.com/dbt-labs/jaffle_shop && \
@@ -61,7 +61,7 @@ cd jaffle_shop
 
 - `models`ディレクトリには、プロジェクトの SQL モデルとテーブルスキーマが含まれています。このセクションはデータ アナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
-- `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポートする](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)できます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
+- `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポート](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)し、CSV ファイルにできます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
 
 ## ステップ3：プロジェクトの設定 {#step-3-configure-the-project}
 
@@ -69,7 +69,7 @@ cd jaffle_shop
 
 1. グローバル設定を完了してください。
 
-    [プロフィール項目の説明](#description-of-profile-fields)を参照し、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`編集して、 TiDB Cloudとの接続を構成できます。
+    [プロフィール項目の説明](#description-of-profile-fields)を参照し、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`を編集して、 TiDB Cloudとの接続を構成できます。
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
@@ -90,7 +90,7 @@ cd jaffle_shop
            password: "your_password"                                   # The password to use for authenticating to the TiDB Cloud clusters
     ```
 
-    TiDB Cloud コンソールの接続ダイアログから`server` 、 `port` 、および`username`の値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>クラスターの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
+    TiDB Cloud コンソールの接続ダイアログから`server` 、 `port` 、および`username`の値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>の名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
 
 2. プロジェクトの設定を完了してください。
 
@@ -170,7 +170,7 @@ cd jaffle_shop
     3 of 3 OK loaded seed file analytics.raw_payments............................... [INSERT 113 in 0.24s]
     ```
 
-    結果からわかるように、シードファイルが起動され、 `analytics.raw_customers` 、 `analytics.raw_orders` 、および`analytics.raw_payments` 。
+    結果からわかるように、シードファイルが起動され、 `analytics.raw_customers` 、 `analytics.raw_orders` 、および`analytics.raw_payments`の3つのテーブルにロードされました。
 
 2. TiDB Cloudで結果を確認してください。
 

@@ -5,13 +5,13 @@ summary: Amazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object St
 
 # クラウドストレージからTiDB Cloud StarterまたはEssentialにApache Parquetファイルをインポートする {#import-apache-parquet-files-from-cloud-storage-into-tidb-cloud-starter-or-essential}
 
-TiDB Cloud StarterまたはTiDB Cloud Essential[Apache Parquet](https://parquet.apache.org/)TiDB Cloud Starterファイルをインポートする方法についてTiDB Cloud Essential。
+非圧縮および Snappy 圧縮の[Apache Parquet](https://parquet.apache.org/)形式のデータファイルを、TiDB Cloud StarterまたはTiDB Cloud Essentialにインポートできます。このドキュメントでは、Amazon Simple Storage Service (Amazon S3)、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud Object Storage Service (OSS) から、TiDB Cloud StarterまたはTiDB Cloud Essentialに Parquet ファイルをインポートする方法について説明します。
 
 > **Note:**
 >
-> - TiDB Cloud Dedicatedについては、[クラウドストレージからParquetファイルをTiDB Cloud Dedicatedにインポートする](/tidb-cloud/import-parquet-files.md)。
+> - TiDB Cloud Dedicatedについては、[クラウドストレージからParquetファイルをTiDB Cloud Dedicatedにインポートする](/tidb-cloud/import-parquet-files.md)を参照してください。
 > - TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
-> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
@@ -137,7 +137,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
         - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data?.parquet` : `my-data`で始まり、その後に 1 文字が続くすべての Parquet ファイルに一致します。たとえば`my-data1.parquet`や`my-data2.parquet`などです。
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
@@ -188,7 +188,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
         - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data?.parquet` : `my-data`で始まり、その後に 1 文字が続くすべての Parquet ファイルに一致します。たとえば`my-data1.parquet`や`my-data2.parquet`などです。
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
@@ -239,7 +239,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
         - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data?.parquet` : `my-data`で始まり、その後に 1 文字が続くすべての Parquet ファイルに一致します。たとえば`my-data1.parquet`や`my-data2.parquet`などです。
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
@@ -290,7 +290,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
         - **Source**: ファイル名のパターンを`[file_name].parquet`の形式で入力してください。例: `TableName.01.parquet` 。ワイルドカードを使用して複数のファイルを照合することもできます。 `*`と`?`ワイルドカードのみがサポートされています。
 
-            - `my-data?.parquet` : `my-data` `my-data1.parquet`や`my-data2.parquet`のような 1 文字が続くすべての Parquet ファイルに一致します。
+            - `my-data?.parquet` : `my-data`で始まり、その後に 1 文字が続くすべての Parquet ファイルに一致します。たとえば`my-data1.parquet`や`my-data2.parquet`などです。
             - `my-data*.parquet` : `my-data`で始まるすべての Parquet ファイルに一致します。たとえば`my-data-2023.parquet`や`my-data-final.parquet`などです。
 
         - **Target Database**と**Target Table**：データをインポートする対象データベースとテーブルを選択します。
@@ -315,7 +315,7 @@ TiDB Cloud StarterまたはTiDB Cloud EssentialにParquetファイルをイン�
 
 3. Parquetファイル内のデータ型を確認してください。
 
-    Parquet ファイルにサポートされていないデータ型 (たとえば、 `NEST STRUCT` 、 `ARRAY` 、または`MAP` ) が含まれている場合は、サポートされているデータ[サポートされているデータ型](#supported-data-types)(たとえば、 `STRING` )。
+    Parquet ファイルにサポートされていないデータ型 (たとえば、 `NEST STRUCT` 、 `ARRAY` 、または`MAP` ) が含まれている場合は、[サポートされているデータ型](#supported-data-types) (たとえば、 `STRING` ) を使用して Parquet ファイルを再生成する必要があります。
 
 4. インポートタスクをもう一度実行してみてください。
 
