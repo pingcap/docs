@@ -56,7 +56,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         TiDB Cloud Starter は MCP をサポートし、 TiDB Cloud Starter クラスターを Cursor、Claude Code、VS Code、WindSurf などの一般的な AI ツールに統合的かつ安全に接続できるようになりました。一度接続を設定すれば、数分で AI ツールによるデータクエリを開始できます。
 
-        この機能にアクセスするには、 [クラスタ](https://tidbcloud.com/project/clusters)概要ページの右上隅にある**[AI ツールで使用]**をクリックします。
+        この機能にアクセスするには、 [クラスタ](https://tidbcloud.com/project/clusters)概要ページの右上隅にある**Use with AI Tools**をクリックします。
 
 ## 2025年12月9日 {#december-9-2025}
 
@@ -114,7 +114,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     - 完全な構成の詳細を含めるように変更フィードの概要を拡張します。
 
-        以前は、変更フィードを一時停止して設定を確認し、再開する必要がありました。**変更フィード**ページでは、サマリービューに完全な設定が直接表示されるようになりました。今回のアップデートでは、編集モードと表示モードの一貫性を維持し、レイアウトを再設計して読みやすさを向上させました。これにより、現在の設定をより効率的に確認できます。
+        以前は、変更フィードを一時停止して設定を確認し、再開する必要がありました。**Changefeed**ページでは、サマリービューに完全な設定が直接表示されるようになりました。今回のアップデートでは、編集モードと表示モードの一貫性を維持し、レイアウトを再設計して読みやすさを向上させました。これにより、現在の設定をより効率的に確認できます。
 
         詳細については[チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
 
@@ -202,7 +202,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         より安全で制御性と柔軟性に優れた復元および移行ワークフローを実現するには、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)使用を検討してください。
 
-    - [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)では、より迅速な診断と容量計画のために次のメトリックが追加されます。
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)の[**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページでは、より迅速な診断と容量計画のために次のメトリックが追加されます。
 
         - `Lock-wait (P95/P99)` : ロック待機時間のパーセンタイルを監視して競合ホットスポットを表面化させます。
         - `Idle Connection Duration (P99 incl. not/in txn)` : プーラーの制限とタイムアウトを調整するために、トランザクション中とトランザクション外での長時間アイドル状態の接続を識別します。
@@ -231,7 +231,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         イベントの詳細については、 [TiDB Cloudクラスタイベント](/tidb-cloud/tidb-cloud-events.md)を参照してください。
 
-    - [**メトリクス**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページ[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)では、より迅速な診断と容量計画のために次のメトリックが追加されます。
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の[**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページでは、より迅速な診断と容量計画のために次のメトリックが追加されます。
 
         - `Capacity vs Usage (RU/s)` : プロビジョニングされたリクエスト ユニット (RU) 容量と実際の RU 消費量を視覚化して、余裕を見つけて自動スケーリングを調整します。
         - `Lock-wait (P95/P99)` : ロック待機時間のパーセンタイルを監視して競合ホットスポットを表面化させます。
@@ -405,8 +405,8 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)指標を最適化:
 
-        - [**高度な**](/tidb-cloud/built-in-monitoring.md#advanced)カテゴリでは、**影響を受ける行**、**Leader数**、および**リージョン数の**メトリックを追加して診断を改善します。
-        - [**サーバ**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
+        - [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced)カテゴリでは、**Affected Rows**、**Leader Count**、および**Region Count**のメトリックを追加して診断を改善します。
+        - [**Server**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
 
         詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)を参照してください。
 
@@ -430,8 +430,8 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)指標を最適化:
 
-        - [**高度な**](/tidb-cloud/built-in-monitoring.md#advanced)カテゴリでは、**影響を受ける行**、**Leader数**、および**リージョン数の**メトリックを追加して診断を改善します。
-        - [**サーバ**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
+        - [**Advanced**](/tidb-cloud/built-in-monitoring.md#advanced)カテゴリでは、**Affected Rows**、**Leader Count**、および**Region Count**のメトリックを追加して診断を改善します。
+        - [**Server**](/tidb-cloud/built-in-monitoring.md#server)カテゴリでは、 **TiKV IO Bps**メトリックを改良して、精度と一貫性を向上させます。
 
         詳細については[TiDB Cloud組み込みメトリクス](/tidb-cloud/built-in-monitoring.md)を参照してください。
 
@@ -441,17 +441,17 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 - 以下のリソースを自動的かつ効率的に管理するためのTiDB Cloud Dedicated API (v1beta1) を導入します。
 
-    - **クラスタ**: TiDB Cloud Dedicated クラスターをより柔軟に管理します。
-    - **リージョン**: TiDB Cloud Dedicated クラスターをデプロイできるすべてのクラウド リージョンを表示します。
-    - **プライベートエンドポイント接続**: クラスターの安全でプライベートな接続を設定します。
+    - **Cluster**: TiDB Cloud Dedicated クラスターをより柔軟に管理します。
+    - **Region**: TiDB Cloud Dedicated クラスターをデプロイできるすべてのクラウド リージョンを表示します。
+    - **Private endpoint connection**: クラスターの安全でプライベートな接続を設定します。
     - **Import**: クラスターのデータインポートタスクを管理します。
 
     詳細については[TiDB Cloud Dedicated API](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/)を参照してください。
 
 - 以下のリソースを自動的かつ効率的に管理するためのTiDB Cloud Starter および Essential API (v1beta1) を導入します。
 
-    - **クラスタ**: TiDB Cloud Starter または Essential クラスターをより柔軟に管理します。
-    - **ブランチ**: クラスターのブランチを管理します。
+    - **Cluster**: TiDB Cloud Starter または Essential クラスターをより柔軟に管理します。
+    - **Branch**: クラスターのブランチを管理します。
     - **Export**: クラスターのデータエクスポート タスクを管理します。
     - **Import**: クラスターのデータインポートタスクを管理します。
 
@@ -564,7 +564,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     - 左側のナビゲーションペインに表示されるエントリは、コンボボックスの現在の選択内容に応じて動的に調整されるようになり、最も関連性の高い機能に集中できるようになります。
 
-    - すぐにアクセスできるように、**サポート**、**通知**、アカウント エントリが、すべてのコンソール ページの左側のナビゲーションペインの下部に常に表示されるようになりました。
+    - すぐにアクセスできるように、**Support**、**Notification**、アカウント エントリが、すべてのコンソール ページの左側のナビゲーションペインの下部に常に表示されるようになりました。
 
 ## 2025年6月4日 {#june-4-2025}
 
@@ -642,7 +642,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 **コンソールの変更**
 
-- **バックアップ設定**ページのレイアウトを調整して、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのバックアップ構成エクスペリエンスを向上させます。
+- **Backup Setting**ページのレイアウトを調整して、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでのバックアップ構成エクスペリエンスを向上させます。
 
     詳細については[TiDB Cloud Dedicated データのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 

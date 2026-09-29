@@ -37,7 +37,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter) SQL文の RU コストの監視をサポートします。
 
-    TiDB Cloud Serverless は、各 SQL文の詳細な分析情報を提供するようになり[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)た。SQL文ごとの**合計 RU**コストと**平均 RU**コストの両方を表示できます。この機能は RU コストの特定と分析に役立ち、運用における潜在的なコスト削減の機会を提供します。
+    TiDB Cloud Serverless は、各 SQL文の[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)に関する詳細な分析情報を提供するようになりました。SQL文ごとの**Total RU**コストと**Mean RU**コストの両方を表示できます。この機能は RU コストの特定と分析に役立ち、運用における潜在的なコスト削減の機会を提供します。
 
     SQL文の RU の詳細を確認するには、 [TiDB Cloud Serverlessクラスター](https://tidbcloud.com/project/clusters)の**Diagnosis**ページに移動し、 **SQL Statement**タブをクリックします。
 
@@ -140,7 +140,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから 2つの vCPU TiDB ノードと TiKV ノードを削除します。
 
-    2 vCPU オプションは、 **[クラスタの作成]**ページまたは**[クラスタの変更]**ページで使用できなくなりました。
+    2 vCPU オプションは、**Create Cluster**ページまたは**Modify Cluster**ページで使用できなくなりました。
 
 - JavaScript のリリース[TiDB Cloud Serverless Driver (ベータ版)](/develop/serverless-driver.md) 。
 
@@ -170,7 +170,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **コンソールの変更**
 
-- クラスターの主な変更の記録を提供する、 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターの**イベント**ページを紹介します。
+- クラスターの主な変更の記録を提供する、 [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターの**Events**ページを紹介します。
 
     このページでは、過去 7日間のイベント履歴を表示し、トリガー時間やアクションを開始したユーザーなどの重要な詳細を追跡できます。
 
@@ -217,7 +217,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)開発エクスペリエンスを向上させるために`GET`リクエストのページ分割をサポートします。
 
-    `GET`リクエストの場合、**アドバンスプロパティ**で**ページネーション**を有効にし、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`を指定することで、結果をページ分けできます。例えば、1 ページあたり 10 項目の 2 ページ目を取得するには、次のコマンドを使用します。
+    `GET`リクエストの場合、**Advance Properties**で**Pagination**を有効にし、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`を指定することで、結果をページ分けできます。例えば、1 ページあたり 10 項目の 2 ページ目を取得するには、次のコマンドを使用します。
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -232,7 +232,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     この機能により、データベースの負荷が軽減され、エンドポイントのレイテンシーが最適化されます。
 
-    `GET`リクエストメソッドを使用するエンドポイントの場合、**キャッシュ レスポンス**を有効にし、**詳細プロパティ**でキャッシュの TTL 期間を設定できます。
+    `GET`リクエストメソッドを使用するエンドポイントの場合、**Cache Response**を有効にし、**Advance Properties**でキャッシュの TTL 期間を設定できます。
 
     詳細については[高度なプロパティ](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties)を参照してください。
 
@@ -275,7 +275,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     TiDB Cloud Dedicated クラスターで**Pause**をクリックすると、クラスターはまず**Pausing**状態になります。一時停止操作が完了すると、クラスターのステータスは**Paused**に変わります。
 
-    クラスターは、ステータスが**[一時停止]**に遷移した後にのみ再開できます。これにより、 **[一時停止]**と**[再開]** を素早くクリックすることで発生する異常な再開の問題が解決されます。
+    クラスターは、ステータスが**Paused**に遷移した後にのみ再開できます。これにより、**Pause**と**Resume**を素早くクリックすることで発生する異常な再開の問題が解決されます。
 
     詳細については[TiDB Cloud Dedicated クラスターを一時停止または再開する](/tidb-cloud/pause-or-resume-tidb-cluster.md)を参照してください。
 
@@ -296,9 +296,9 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     詳細については[プロパティを構成する](/tidb-cloud/data-service-manage-endpoint.md#configure-properties)を参照してください。
 
-- TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)で`POST` `PUT`リクエストメソッドの**バッチ操作**を`DELETE`します。
+- TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)で`POST`、`PUT`、`DELETE`リクエストメソッドの**Batch Operation**をサポートします。
 
-    エンドポイントで**バッチ操作**を有効にすると、単一のリクエストで複数の行に対する操作を実行できるようになります。例えば、単一のリクエスト`POST`で複数行のデータを挿入できます。
+    エンドポイントで**Batch Operation**を有効にすると、単一のリクエストで複数の行に対する操作を実行できるようになります。例えば、単一のリクエスト`POST`で複数行のデータを挿入できます。
 
     詳細については[高度なプロパティ](/tidb-cloud/data-service-manage-endpoint.md#advanced-properties)を参照してください。
 
@@ -312,7 +312,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - サポート導線を最適化することで、 TiDB CloudユーザーのPingCAPサポートへのアクセスを簡素化します。改善点は以下のとおりです。
 
-    - 左下隅にある<MDSvgIcon name="icon-top-organization" />に**サポート**用の入り口を追加します。
+    - 左下隅にある<MDSvgIcon name="icon-top-organization" />に**Support**用の入り口を追加します。
     - [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**?**アイコンのメニューを改良して、より直感的に操作できるようにします。
 
     詳細については[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。
@@ -358,7 +358,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
     - 効率性の向上: 自動応答によりレイテンシーが短縮され、全体的な操作が改善されます。
     - シームレスなドキュメント アクセス: TiDB Cloudドキュメントに直接アクセスして、情報を簡単に取得し、問題を迅速に解決できます。
 
-    TiDB Bot を使用するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある [ **?]**をクリックし、 **[TiDB Bot に質問]**を選択してチャットを開始します。
+    TiDB Bot を使用するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、**Ask TiDB Bot**を選択してチャットを開始します。
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターに対して[分岐機能（ベータ版）](/tidb-cloud/branch-overview.md)サポートします。
 
@@ -386,9 +386,9 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - 次の変更を加えることで、全体的なナビゲーション エクスペリエンスが向上します。
 
-    - 右上隅にある<MDSvgIcon name="icon-top-organization" />**組織**と<MDSvgIcon name="icon-top-account-settings" />**アカウント**を左のナビゲーションバーに統合します。
-    - 左のナビゲーションバーの<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5H7.5C6.10444 14.5 5.40665 14.5 4.83886 14.6722C3.56045 15.06 2.56004 16.0605 2.17224 17.3389C2 17.9067 2 18.6044 2 20M14.5 6.5C14.5 8.98528 12.4853 11 10 11C7.51472 11 5.5 8.98528 5.5 6.5C5.5 4.01472 7.51472 2 10 2C12.4853 2 14.5 4.01472 14.5 6.5ZM22 16.516C22 18.7478 19.6576 20.3711 18.8054 20.8878C18.7085 20.9465 18.6601 20.9759 18.5917 20.9911C18.5387 21.003 18.4613 21.003 18.4083 20.9911C18.3399 20.9759 18.2915 20.9465 18.1946 20.8878C17.3424 20.3711 15 18.7478 15 16.516V14.3415C15 13.978 15 13.7962 15.0572 13.6399C15.1077 13.5019 15.1899 13.3788 15.2965 13.2811C15.4172 13.1706 15.5809 13.1068 15.9084 12.9791L18.2542 12C18.3452 11.9646 18.4374 11.8 18.4374 11.8H18.5626C18.5626 11.8 18.6548 11.9646 18.7458 12L21.0916 12.9791C21.4191 13.1068 21.5828 13.1706 21.7035 13.2811C21.8101 13.3788 21.8923 13.5019 21.9428 13.6399C22 13.7962 22 13.978 22 14.3415V16.516Z" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg>**管理者**を左のナビゲーションバーの<MDSvgIcon name="icon-left-projects" />**プロジェクト**に統合し、左上隅の☰ホバーメニューを削除します。これで、<MDSvgIcon name="icon-left-projects" />をクリックして、プロジェクトの切り替えやプロジェクト設定の変更を行うことができます。
-    - ドキュメント、対話型チュートリアル、自習型トレーニング、サポート導線など、 TiDB Cloudのすべてのヘルプとサポート情報を、右下隅の**[?]**アイコンのメニューに統合します。
+    - 右上隅にある<MDSvgIcon name="icon-top-organization" />**Organization**と<MDSvgIcon name="icon-top-account-settings" />**Account**を左のナビゲーションバーに統合します。
+    - 左のナビゲーションバーの<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5H7.5C6.10444 14.5 5.40665 14.5 4.83886 14.6722C3.56045 15.06 2.56004 16.0605 2.17224 17.3389C2 17.9067 2 18.6044 2 20M14.5 6.5C14.5 8.98528 12.4853 11 10 11C7.51472 11 5.5 8.98528 5.5 6.5C5.5 4.01472 7.51472 2 10 2C12.4853 2 14.5 4.01472 14.5 6.5ZM22 16.516C22 18.7478 19.6576 20.3711 18.8054 20.8878C18.7085 20.9465 18.6601 20.9759 18.5917 20.9911C18.5387 21.003 18.4613 21.003 18.4083 20.9911C18.3399 20.9759 18.2915 20.9465 18.1946 20.8878C17.3424 20.3711 15 18.7478 15 16.516V14.3415C15 13.978 15 13.7962 15.0572 13.6399C15.1077 13.5019 15.1899 13.3788 15.2965 13.2811C15.4172 13.1706 15.5809 13.1068 15.9084 12.9791L18.2542 12C18.3452 11.9646 18.4374 11.8 18.4374 11.8H18.5626C18.5626 11.8 18.6548 11.9646 18.7458 12L21.0916 12.9791C21.4191 13.1068 21.5828 13.1706 21.7035 13.2811C21.8101 13.3788 21.8923 13.5019 21.9428 13.6399C22 13.7962 22 13.978 22 14.3415V16.516Z" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg>**Admin**を左のナビゲーションバーの<MDSvgIcon name="icon-left-projects" />**Project**に統合し、左上隅の☰ホバーメニューを削除します。これで、<MDSvgIcon name="icon-left-projects" />をクリックして、プロジェクトの切り替えやプロジェクト設定の変更を行うことができます。
+    - ドキュメント、対話型チュートリアル、自習型トレーニング、サポート導線など、 TiDB Cloudのすべてのヘルプとサポート情報を、右下隅の**?**アイコンのメニューに統合します。
 
 - TiDB Cloudコンソールは、より快適で目に優しいダークモードをサポートするようになりました。左ナビゲーションバーの下部から、ライトモードとダークモードを切り替えることができます。
 
@@ -494,7 +494,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     詳細は[データ移行を使用して、MySQL 互換データベースからTiDB Cloudに増分データのみを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)を参照。
 
-- [**イベント**](/tidb-cloud/tidb-cloud-events.md)ページに新しいイベントタイプ（ `ImportData` ）を追加します。
+- [**Events**](/tidb-cloud/tidb-cloud-events.md)ページに新しいイベントタイプ（ `ImportData` ）を追加します。
 
 - TiDB Cloudコンソールから**Playground** を削除します。
 
@@ -636,7 +636,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     詳細については[クラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
-- **請求**ページに**割引**タブを導入し、組織の所有者と請求管理者向けの割引情報を表示します。
+- **Billing**ページに**Discounts**タブを導入し、組織の所有者と請求管理者向けの割引情報を表示します。
 
     詳細については[割引](/tidb-cloud/tidb-cloud-billing.md#discounts)を参照してください。
 
@@ -670,9 +670,9 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     ノード レベルのリソース メトリックを使用すると、リソース消費量をより正確に表示して、購入したサービスの実際の使用状況をよりよく理解できます。
 
-    これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、 **[メトリック]**タブの**[サーバー]**カテゴリを確認します。
+    これらのメトリックにアクセスするには、クラスターの[監視](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページに移動し、**Metrics**タブの**Server**カテゴリを確認します。
 
-- **プロジェクト別概要**と**サービス別概要の**請求項目を再編成して[請求](/tidb-cloud/tidb-cloud-billing.md#billing-details)ページを最適化し、請求情報をより明確にします。
+- **Summary by Project**と**Summary by Service**の請求項目を再編成して[請求](/tidb-cloud/tidb-cloud-billing.md#billing-details)ページを最適化し、請求情報をより明確にします。
 
 ## 2023年4月4日 {#april-4-2023}
 
@@ -687,7 +687,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - 各Dedicated Tierクラスターのアクティブなアラートとクローズされたアラートの両方を一覧表示する、 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[アラート](/tidb-cloud/monitor-built-in-alerting.md)ページを導入します。
 
-    **アラート**ページには次の内容が表示されます。
+    **Alerts**ページには次の内容が表示されます。
 
     - 直感的で使いやすいユーザーインターフェース。アラート通知メールを購読していない場合でも、このページでクラスターのアラートを確認できます。
     - 高度なフィルタリングオプションにより、アラートの重大度、ステータス、その他の属性に基づいて、アラートを素早く検索・並べ替えることができます。また、過去7日間の履歴データを表示できるため、アラート履歴の追跡が容易になります。
@@ -697,7 +697,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloudのヘルプ関連の情報とアクションを 1 か所に統合します。
 
-    これで、 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**[?]**をクリックして、 [TiDB Cloudヘルプ情報](/tidb-cloud/tidb-cloud-support.md)をすべて取得し、サポートに問い合わせることができます。
+    これで、 [TiDB Cloudコンソール](https://tidbcloud.com/)の右下隅にある**?**をクリックして、 [TiDB Cloudヘルプ情報](/tidb-cloud/tidb-cloud-support.md)をすべて取得し、サポートに問い合わせることができます。
 
 - TiDB Cloudについて理解を深めるのに役立つ[はじめる](https://tidbcloud.com/getting-started)ページを紹介します。
 
@@ -784,7 +784,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     詳細については[TiDB Cloudクラスター イベント](/tidb-cloud/tidb-cloud-events.md)を参照してください。
 
-- [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターの**[監視]**ページに**[データベース ステータス]**タブを追加します。ここには、次のデータベースレベルのメトリックが表示されます。
+- [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターの**Monitoring**ページに**Database Status**タブを追加します。ここには、次のデータベースレベルのメトリックが表示されます。
 
     - DBあたりのQPS
     - DBあたりの平均クエリ実行時間
@@ -820,7 +820,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     SQL診断を使用すると、SQL関連の実行時ステータスに関する詳細な分析情報を取得できるため、SQLパフォーマンスチューニングの効率が向上します。現在、Serverless TierのSQL診断機能は、スロークエリデータのみを提供しています。
 
-    SQL 診断を使用するには、 Serverless Tierクラスター ページの左側のナビゲーションバーで**[SQL 診断]** をクリックします。
+    SQL 診断を使用するには、 Serverless Tierクラスター ページの左側のナビゲーションバーで**SQL Diagnosis** をクリックします。
 
 **コンソールの変更**
 
@@ -954,12 +954,12 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **コンソールの変更**
 
-- 特定のクラスターに対するサポートをリクエストするプロセスを簡素化するために、各クラスターに**[サポートを受ける]**オプションを追加します。
+- 特定のクラスターに対するサポートをリクエストするプロセスを簡素化するために、各クラスターに**Get Support**オプションを追加します。
 
     クラスターのサポートは、次のいずれかの方法でリクエストできます。
 
-    - プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**[...]**をクリックし、 **[サポートを受ける]**を選択します。
-    - クラスターの概要ページで、右上隅の**[...]**をクリックし、 **[サポートを受ける]**を選択します。
+    - プロジェクトの[**クラスター**](https://tidbcloud.com/project/clusters)ページで、クラスターの行にある**...**をクリックし、 **Get Support**を選択します。
+    - クラスターの概要ページで、右上隅の**...**をクリックし、 **Get Support**を選択します。
 
 ## 2023年1月5日 {#january-5-2023}
 
