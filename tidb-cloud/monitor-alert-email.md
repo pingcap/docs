@@ -5,7 +5,7 @@ summary: メールによるアラート通知を受け取ることで、TiDBを�
 
 # メールで購読する {#subscribe-via-email}
 
-TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[FlashDuty](/tidb-cloud/monitor-alert-flashduty.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)経由でアラート通知を購読する簡単な方法が提供されます。このドキュメントでは、電子メールでアラート通知を購読する方法について説明します。
+TiDB Cloudでは、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[Flashduty](/tidb-cloud/monitor-alert-flashduty.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)経由でアラート通知を購読する簡単な方法が提供されます。このドキュメントでは、電子メールでアラート通知を購読する方法について説明します。
 
 > **Note:**
 >
@@ -43,7 +43,7 @@ TiDB Cloud、電子メール、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zo
 
 2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3. 左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
+3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
 
 4. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 

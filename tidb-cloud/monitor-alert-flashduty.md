@@ -5,7 +5,7 @@ summary: Flashduty経由でアラート通知を受け取ることで、 TiDB Cl
 
 # Flashduty経由で購読する {#subscribe-via-flashduty}
 
-TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)経由でアラート通知を購読する簡単な方法が提供されます。このドキュメントでは、Flashduty 経由でアラート通知を購読する方法について説明します。
+TiDB Cloudでは、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)経由でアラート通知を購読する簡単な方法が提供されます。このドキュメントでは、Flashduty 経由でアラート通知を購読する方法について説明します。
 
 > **Note:**
 >
@@ -54,7 +54,7 @@ TiDB Cloud、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メー�
 
 2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3. 左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
+3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
 
 4. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 

@@ -42,11 +42,11 @@ TiDB Cloudを使用すると、{{{ .premium }}}<CustomContent plan="byoc"> ま�
 Azure Blob Storage にデータをエクスポートするには、以下の情報を提供する必要があります。
 
 - URI: `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`または`https://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/`
-- アクセス資格情報: Azure Blob Storage コンテナーの[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。 SAS トークンに、 `Read`および`Write`リソースに対する`Container`および`Object`権限があることを確認してください。
+- アクセス資格情報: Azure Blob Storage コンテナーの[共有アクセス署名（SAS）トークン](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)。 SAS トークンに、 `Container`および`Object`リソースに対する`Read`および`Write`権限があることを確認してください。
 
 詳細については、 [外部ストレージへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
-### アリババクラウドOSS {#alibaba-cloud-oss}
+### Alibaba Cloud OSS {#alibaba-cloud-oss}
 
 Alibaba Cloud OSSにデータをエクスポートするには、以下の情報を提供する必要があります。
 
@@ -67,7 +67,7 @@ TiDB Cloudコンソールは、選択したデータベースとテーブルを�
 
 - `SQL` : データを SQL 形式でエクスポートします。
 - `CSV` : データをCSV形式でエクスポートします。以下のオプションを指定できます。
-    - `delimiter` : エクスポートされたデータで使用される区切り文字を指定します。デフォルトの区切り文字は`"`です。
+    - `delimiter` : エクスポートされたデータで使用されるデリミタを指定します。デフォルトのデリミタは`"`です。
     - `separator` : エクスポートされたデータ内のフィールドを区切るために使用される文字を指定します。デフォルトの区切り文字は`,`です。
     - `header` : エクスポートされたデータにヘッダー行を含めるかどうかを指定します。デフォルト値は`true`です。
     - `null-value` : エクスポートされたデータ内の NULL 値を表す文字列を指定します。デフォルト値は`\N`です。

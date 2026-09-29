@@ -5,7 +5,7 @@ summary: TiDB Cloud Premiumインスタンスの作成方法を学びましょ�
 
 # TiDB Cloud Premiumインスタンスを作成する {#create-a-tidb-cloud-premium-instance}
 
-このドキュメントでは[TiDB Cloudコンソール](https://tidbcloud.com/)でTiDB Cloud Premium インスタンスを作成する方法について説明します。 。
+このドキュメントでは[TiDB Cloudコンソール](https://tidbcloud.com/)でTiDB Cloud Premium インスタンスを作成する方法について説明します。
 
 > **Note:**
 >
@@ -61,7 +61,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 ## 次は？ {#what-s-next}
 
-インスタンスが作成されたら、 [パブリックエンドポイント経由でTiDB Cloudに接続します](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)手順に従ってインスタンスのパスワードを作成します。
+インスタンスが作成されたら、 [パブリックエンドポイント経由でTiDB Cloudに接続します](/tidb-cloud/premium/connect-to-premium-via-public-connection.md)の手順に従ってインスタンスのパスワードを作成します。
 
 > **Note:**
 >

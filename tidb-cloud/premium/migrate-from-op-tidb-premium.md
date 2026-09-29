@@ -63,7 +63,7 @@ tiup update --self && tiup update dumpling
 
 1. [ツールキットパッケージ](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools)をダウンロードします。
 
-2. 対象マシンに展開してください。TiUPを使用して`tiup install dumpling`を実行すると、 Dumpling を入手できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。 。
+2. 対象マシンに展開してください。TiUPを使用して`tiup install dumpling`を実行すると、 Dumpling を入手できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。
 
 #### Dumplingの権限を設定する {#configure-privileges-for-dumpling}
 
@@ -211,7 +211,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 2. **Source Connection**ダイアログで、 **AWS Role ARN**を選択し、 **[AWS CloudFormation で新しいものを作成するにはここをクリックしてください]**をクリックし、画面上のガイダンスに従います。組織が CloudFormation スタックを起動できない場合は、 [IAMロールを手動で作成する](#manually-create-the-iam-role-optional)を参照してください。
 
     1. AWSコンソールで、あらかじめ入力済みのCloudFormationテンプレートを開きます。
-    2. 役割名を入力し、権限を確認し、 IAM警告を承認してください。
+    2. ロール名を入力し、権限を確認し、 IAM警告を承認してください。
     3. スタックを作成し、ステータスが**CREATE_COMPLETE**に変わるまで待ちます。
     4. **Outputs**タブで、新しく生成されたロールARNをコピーします。
     5. TiDB Cloud Premiumに戻り、ロールARNを貼り付けて**Confirm**をクリックします。ウィザードは、以降のインポートジョブのためにARNを保存します。
@@ -267,7 +267,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 3. 生成されたロールARNをコピーし、 TiDB Cloud Premiumインポートウィザードに入力します。
 
-4. [Amazon S3からTiDB Cloud Premiumにデータをインポートする](/tidb-cloud/premium/import-from-s3-premium.md)からTiDB Cloud Premiumにデータをインポートします。
+4. [Amazon S3からTiDB Cloud Premiumにデータをインポートする](/tidb-cloud/premium/import-from-s3-premium.md)の手順に従って、TiDB Cloud Premiumにデータをインポートします。
 
 ## 増分データを複製する {#replicate-incremental-data}
 
@@ -289,7 +289,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
     2. 右上隅の**Connect**をクリックしてください。
     3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **Connect With**ドロップダウンリストから**General**を選択します。
-    4. 接続情報から、インスタンスのホスト IP アドレスとポートを取得できます。詳細については、 [公共回線経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+    4. 接続情報から、インスタンスのホスト IP アドレスとポートを取得できます。詳細については、 [パブリック接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 4. 増分レプリケーションタスクを作成して実行します。アップストリームクラスターで、以下を実行します。
 
@@ -369,7 +369,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
         SELECT @@global.time_zone;
         ```
 
-8. 上流クラスターでクエリ[クエリバインディング](/sql-plan-management.md)をバックアップし、下流インスタンスで復元します。クエリバインディングをバックアップするには、次のクエリを使用できます。
+8. 上流クラスターで[クエリバインディング](/sql-plan-management.md)をバックアップし、下流インスタンスで復元します。クエリバインディングをバックアップするには、次のクエリを使用できます。
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';

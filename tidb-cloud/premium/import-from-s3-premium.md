@@ -9,7 +9,7 @@ summary: コンソールウィザードを使用して、Amazon S3からTiDB Clo
 
 > **Tip:**
 >
-> - TiDB Cloud StarterまたはEssentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)。
+> - TiDB Cloud StarterまたはEssentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)を参照してください。
 > - TiDB Cloud Dedicatedについては、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ## 制限事項 {#limitations}
