@@ -191,13 +191,13 @@
   - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Stream Data
-  - [Stream Data Overview](/tidb-cloud/stream-data-overview.md)
-  - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
+  - [Manage Changefeeds](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To Pulsar Sink](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
   - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [To TiDB Cloud Lake](tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
@@ -622,6 +622,9 @@
   - [Batch Processing](/batch-processing.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
+  - Data Pipeline
+    - [SQL Compatibility for TiDB Cloud Lake Integration](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
+    - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 - Support Plan
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)

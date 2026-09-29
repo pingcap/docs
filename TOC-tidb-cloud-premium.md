@@ -140,23 +140,18 @@
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data
   - [Stream Data Overview](/tidb-cloud/stream-data-overview.md)
-  - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
+  - [Manage Changefeeds](/tidb-cloud/changefeed-overview.md)
+  - [Manage Data Pipeline](/tidb-cloud/data-pipeline-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [To TiDB Cloud Lake](/tidb-cloud/data-pipeline-premium-sink-to-lake.md)
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
     - [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
-- Data Pipeline
-  - [Manage Data Pipeline](/tidb-cloud/data-pipeline-overview.md)
-  - [Setup Data Pipeline for TiDB Cloud Lake](/tidb-cloud/data-pipeline-premium-sink-to-lake.md)
-  - Reference
     - [Set Up an External Stage for TiDB Cloud Data Pipeline (AWS)](/tidb-cloud/data-pipeline-configure-external-stage-aws.md)
     - [Set Up an External Stage for TiDB Cloud Data Pipeline (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md)
-    - [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
-    - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
-
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
@@ -492,6 +487,9 @@
   - [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
+  - Data Pipeline
+    - [SQL Compatibility for TiDB Cloud Lake Integration](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
+    - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 - Support Plan
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)
