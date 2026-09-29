@@ -5,7 +5,7 @@ summary: TiDB での SHOW BUILTINS の使用法。
 
 # SHOW BUILTINS {#show-builtins}
 
-`SHOW BUILTINS` 、TiDB でサポートされているすべての組み込み関数を一覧表示するために使用されます。
+`SHOW BUILTINS`は、TiDB でサポートされているすべての組み込み関数を一覧表示するために使用されます。
 
 ## 概要 {#synopsis}
 

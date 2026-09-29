@@ -114,9 +114,9 @@ SELECT @myvar, @myvar + 1;
 
 - TiDBは、いくつかの変数を読み取りと設定の両方が可能としています。これは、アプリケーションとコネクタの両方がMySQL変数を読み取るのが一般的であるため、MySQLとの互換性を保つために必要です。例えば、JDBCコネクタは、その動作に依存していないにもかかわらず、クエリキャッシュ設定の読み取りと設定の両方を行います。
 
-- `SET GLOBAL`で行われた変更は、TiDBサーバーの再起動後も保持されます。つまり、TiDB の`SET GLOBAL` 、MySQL 8.0 以降で利用可能な`SET PERSIST`に近い動作をすることになります。
+- `SET GLOBAL`で行われた変更は、TiDBサーバーの再起動後も保持されます。つまり、TiDB の`SET GLOBAL`は、MySQL 8.0 以降で利用可能な`SET PERSIST`に近い動作をすることになります。
 
-- TiDB はグローバル変数を永続化するため、 `SET PERSIST`と`SET PERSIST_ONLY`サポートしません。
+- TiDB はグローバル変数を永続化するため、 `SET PERSIST`と`SET PERSIST_ONLY`をサポートしません。
 
 ## 参照 {#see-also}
 

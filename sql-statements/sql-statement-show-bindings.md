@@ -20,7 +20,7 @@ ShowLikeOrWhere ::=
 
 ## 構文の説明 {#syntax-description}
 
-この文は、GLOBALまたはSESSIONレベルの実行プランバインディングを出力します。デフォルトのスコープはSESSIONです。現在、 `SHOW BINDINGS`以下に示すように8つの列を出力します。
+この文は、GLOBALまたはSESSIONレベルの実行プランバインディングを出力します。デフォルトのスコープはSESSIONです。現在、 `SHOW BINDINGS`は以下に示すように8つの列を出力します。
 
 | カラム名     | 説明                                                                                                                                                    |
 | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -32,7 +32,7 @@ ShowLikeOrWhere ::=
 | update_time | 更新時刻                                                                                                                                                  |
 | charset | 文字セット                                                                                                                                                 |
 | collation | ソートルール                                                                                                                                                |
-| source | バインディングが作成される方法には、 `manual` ( `create [global] binding` SQL文によって作成される)、 `capture` (TiDB によって自動的にキャプチャされる)、および`evolve` (TiDB によって自動的に展開される) が含まれます。 |
+| source | バインディングが作成される方法には、 `manual` ( `create [global] binding` SQL文によって作成される)、 `capture` (TiDB によって自動的にキャプチャされる)、および`evolve` (TiDB によって自動的に進化される) が含まれます。 |
 
 ## 例 {#examples}
 

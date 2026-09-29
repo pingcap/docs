@@ -5,7 +5,7 @@ summary: TiDB データベースの SHOW COLUMN_STATS_USAGE の使用法の概�
 
 # SHOW COLUMN_STATS_USAGE {#show-column-stats-usage}
 
-`SHOW COLUMN_STATS_USAGE`文は、列統計の最終使用時刻と収集時刻を表示します。また、統計が収集された`PREDICATE COLUMNS`列と列を特定するためにも使用できます。
+`SHOW COLUMN_STATS_USAGE`文は、列統計の最終使用時刻と収集時刻を表示します。また、 `PREDICATE COLUMNS`と、統計が収集された列を特定するためにも使用できます。
 
 現在、 `SHOW COLUMN_STATS_USAGE`ステートメントは次の列を返します。
 

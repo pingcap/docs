@@ -5,7 +5,7 @@ summary: TiDBデータベースにおけるSHOW DISTRIBUTION JOBSの使用方法
 
 # SHOW DISTRIBUTION JOBS <span class="version-mark">New in v8.5.4 and v9.0.0</span> {#show-distribution-jobs-new-in-v854}
 
-`SHOW DISTRIBUTION JOBS`ステートメントは、現在実行中のリージョン配布ジョブをすべて表示します。
+`SHOW DISTRIBUTION JOBS`ステートメントは、現在のリージョン配布ジョブをすべて表示します。
 
 > **Note:**
 >
@@ -20,7 +20,7 @@ ShowDistributionJobsStmt ::=
 
 ## 例 {#examples}
 
-現在実行中のリージョン配布ジョブをすべて表示します。
+現在のリージョン配布ジョブをすべて表示します。
 
 ```sql
 SHOW DISTRIBUTION JOBS;

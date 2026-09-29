@@ -14,7 +14,7 @@ ShowAffinityStmt ::=
     "SHOW" "AFFINITY" ShowLikeOrWhereOpt
 ```
 
-`SHOW AFFINITY` `LIKE`または`WHERE`句を使用してテーブル名をフィルタリングすることをサポートします。
+`SHOW AFFINITY`は、 `LIKE`または`WHERE`句を使用してテーブル名をフィルタリングすることをサポートします。
 
 ## 例 {#examples}
 
@@ -41,15 +41,15 @@ SHOW AFFINITY;
 
 各列の意味は次のとおりです。
 
-- `Leader_store_id` 、 `Voter_store_ids` : PDによって記録されたTiKVストアのID。テーブルまたはパーティションのターゲットLeaderとVoterレプリカをホストするストアを示します。アフィニティグループのターゲットレプリカの場所が決定されていない場合、または[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855) `0`に設定されている場合、値は`NULL`と表示されます。
+- `Leader_store_id` 、 `Voter_store_ids` : PDによって記録されたTiKVストアのID。テーブルまたはパーティションのターゲットLeaderとVoterレプリカをホストするストアを示します。アフィニティグループのターゲットレプリカの場所が決定されていない場合、または[`schedule.affinity-schedule-limit`](/pd-configuration-file.md#affinity-schedule-limit-new-in-v855)が`0`に設定されている場合、値は`NULL`と表示されます。
 - `Status` : アフィニティスケジューリングの現在の状態を示します。可能な値は次のとおりです。
-    - `Pending` : リーダーまたは投票者がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティスケジューリングを開始していません。
+    - `Pending` : Leader または Voter がまだ決定されていない場合など、PD はテーブルまたはパーティションのアフィニティスケジューリングを開始していません。
     - `Preparing` : PD はアフィニティ要件を満たすようにリージョンをスケジュールしています。
-    - `Stable` : すべてのリージョンが目標配布に到達しました。
+    - `Stable` : すべてのリージョンが目標の分散に到達しました。
 - `Region_count` : アフィニティグループ内の現在のリージョン数。
 - `Affinity_region_count` : 現在アフィニティレプリカ分散要件を満たしているリージョンの数。
-    - `Affinity_region_count` `Region_count`未満の場合、一部のリージョンがアフィニティに基づいてレプリカのスケジュールをまだ完了していないことを示します。
-    - `Affinity_region_count` `Region_count`に等しい場合、アフィニティに基づくレプリカのスケジューリングが完了していることを示します。つまり、関連するすべてのリージョンの分散がアフィニティ要件を満たしていることを意味します。ただし、これは関連するリージョンのマージ操作が完了したことを示すものではありません。
+    - `Affinity_region_count`が`Region_count`未満の場合、一部のリージョンがアフィニティに基づいてレプリカのスケジュールをまだ完了していないことを示します。
+    - `Affinity_region_count`が`Region_count`に等しい場合、アフィニティに基づくレプリカのスケジューリングが完了していることを示します。つまり、関連するすべてのリージョンの分散がアフィニティ要件を満たしていることを意味します。ただし、これは関連するリージョンのマージ操作が完了したことを示すものではありません。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
