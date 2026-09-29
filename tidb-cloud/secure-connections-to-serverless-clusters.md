@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 # TiDB Cloud Starter または Essential への TLS 接続 {#tls-connections-to-tidb-cloud-starter-or-essential}
 
-クライアントとTiDB Cloud StarterまたはTiDB Cloud Essentialクラスタ間の安全なTLS接続を確立することは、データベース接続における基本的なセキュリティ対策の一つです。TiDB Cloudのサーバー証明書は、独立したサードパーティの証明書プロバイダによって発行されます。サーバー側のデジタル証明書をダウンロードすることなく、 TiDB Cloudクラスタに簡単に接続できます。
+クライアントとTiDB Cloud StarterまたはTiDB Cloud Essentialクラスタ間の安全なTLS接続を確立することは、データベース接続における基本的なセキュリティ対策の一つです。TiDB Cloudのサーバー証明書は、独立したサードパーティの証明書プロバイダーによって発行されます。サーバー側のデジタル証明書をダウンロードすることなく、 TiDB Cloudクラスタに簡単に接続できます。
 
 > **Note:**
 >

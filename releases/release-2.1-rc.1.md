@@ -45,7 +45,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - 統計の動的更新プロセス中の書き込み競合を減らす[#7124](https://github.com/pingcap/tidb/pull/7124)
     - 統計情報が正しくない場合のコスト見積りを最適化する[#7175](https://github.com/pingcap/tidb/pull/7175)
     - `AccessPath`コスト見積もりの戦略を最適化する [#7233](https://github.com/pingcap/tidb/pull/7233)
-- サーバ
+- サーバー
     - 権限情報の読み込みに関するバグを修正[#6976](https://github.com/pingcap/tidb/pull/6976)
     - `Kill`コマンドの権限チェックが厳しすぎる問題を修正[#6954](https://github.com/pingcap/tidb/pull/6954)
     - いくつかのバイナリ数値型を削除する問題を修正[#6922](https://github.com/pingcap/tidb/pull/6922)
@@ -59,7 +59,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - 権限検証で複数のルールがヒットした場合の順序の問題を修正 [#7211](https://github.com/pingcap/tidb/pull/7211)
     - エンコーディング関連のシステム変数のデフォルト値の一部を UTF-8 に変更 [#7198](https://github.com/pingcap/tidb/pull/7198)
     - スロークエリログにさらに詳細な情報を表示する[#7302](https://github.com/pingcap/tidb/pull/7302)
-    - PDにtidbサーバ関連情報を登録し、HTTP API でこの情報を取得することをサポート [#7082](https://github.com/pingcap/tidb/pull/7082)
+    - PDにtidbサーバー関連情報を登録し、HTTP API でこの情報を取得することをサポート [#7082](https://github.com/pingcap/tidb/pull/7082)
 - 互換性
     - セッション変数`warning_count`と`error_count`をサポート[#6945](https://github.com/pingcap/tidb/pull/6945)
     - システム変数の読み取り時に`Scope`チェックを追加 [#6958](https://github.com/pingcap/tidb/pull/6958)

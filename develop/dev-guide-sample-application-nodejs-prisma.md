@@ -100,7 +100,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 7. `.env`ファイルを保存します。
 
-8. `prisma/schema.prisma`で、 `mysql`を接続プロバイダとして、 `env("DATABASE_URL")`接続 URL として設定します。
+8. `prisma/schema.prisma`で、 `mysql`を接続プロバイダーとして、 `env("DATABASE_URL")`接続 URL として設定します。
 
     ```prisma
     datasource db {
@@ -145,7 +145,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 9. `.env`ファイルを保存します。
 
-10. `prisma/schema.prisma`で、 `mysql`を接続プロバイダとして、 `env("DATABASE_URL")`接続 URL として設定します。
+10. `prisma/schema.prisma`で、 `mysql`を接続プロバイダーとして、 `env("DATABASE_URL")`接続 URL として設定します。
 
     ```prisma
     datasource db {
@@ -185,7 +185,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 6. `.env`ファイルを保存します。
 
-7. `prisma/schema.prisma`で、 `mysql`を接続プロバイダとして、 `env("DATABASE_URL")`接続 URL として設定します。
+7. `prisma/schema.prisma`で、 `mysql`を接続プロバイダーとして、 `env("DATABASE_URL")`接続 URL として設定します。
 
     ```prisma
     datasource db {
@@ -213,7 +213,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 3. `.env`ファイルを保存します。
 
-4. `prisma/schema.prisma`で、 `mysql`を接続プロバイダとして、 `env("DATABASE_URL")`接続 URL として設定します。
+4. `prisma/schema.prisma`で、 `mysql`を接続プロバイダーとして、 `env("DATABASE_URL")`接続 URL として設定します。
 
     ```prisma
     datasource db {

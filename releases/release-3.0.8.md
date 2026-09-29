@@ -34,7 +34,7 @@ TiDB Ansible バージョン: 3.0.8
     - インデックス作成時にインデックスの長さが正しくチェックされないため、インデックスの長さが3072バイトを超えてもエラーが報告されない問題を修正しました[#13779](https://github.com/pingcap/tidb/pull/13779)
     - パーティションテーブルにインデックスを追加するのに時間がかかりすぎるため、 `GC life time is shorter than transaction duration`エラーメッセージが報告される可能性がある問題を修正しました。 [#14132](https://github.com/pingcap/tidb/pull/14132)
     - `DROP COLUMN` / `MODIFY COLUMN` / `CHANGE COLUMN`実行時に外部キーがチェックされないため、 `SELECT * FROM information_schema.KEY_COLUMN_USAGE`実行時にpanicする問題を修正しました[#14105](https://github.com/pingcap/tidb/pull/14105)
-- サーバ
+- サーバー
     - ステートメントサマリーの改善:
         - SQL文をより詳細に分析できるように多数のSQLメトリックフィールドを追加します[#14151](https://github.com/pingcap/tidb/pull/14151) [#14168](https://github.com/pingcap/tidb/pull/14168)
         - `stmt-summary.refresh-interval`パラメータを追加して、古いデータを`events_statements_summary_by_digest`テーブルから`events_statements_summary_by_digest_history`テーブルに移動するかどうかを制御します (デフォルトの間隔: 30分) [#14161](https://github.com/pingcap/tidb/pull/14161)

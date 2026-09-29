@@ -33,7 +33,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
     - 同じ名前の関数を`Window`マージして実行効率を向上させる[#9866](https://github.com/pingcap/tidb/pull/9866)
     - `Window`関数の`RANGE`フレームに`OrderBy`節を含めないようにする [#10496](https://github.com/pingcap/tidb/pull/10496)
 
-- サーバ
+- サーバー
     - TiKV で障害が発生したときに TiDB が TiKV への新しい接続を継続的に作成する問題を修正しました [#10301](https://github.com/pingcap/tidb/pull/10301)
     - `tidb_disable_txn_auto_retry`書き込み競合エラーのみではなく、再試行可能なすべてのエラーに適用する [#10339](https://github.com/pingcap/tidb/pull/10339)
     - パラメータなしのDDL文の実行を許可する`prepare` / `execute` [#10144](https://github.com/pingcap/tidb/pull/10144)
@@ -72,7 +72,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 - エンジン
     - ブロックキャッシュを共有する複数の列ファミリをサポート[#4563](https://github.com/tikv/tikv/pull/4563)
 
-- サーバ
+- サーバー
     - `TxnScheduler` を削除 [#4098](https://github.com/tikv/tikv/pull/4098)
     - 悲観的ロックトランザクションをサポート[#4698](https://github.com/tikv/tikv/pull/4698)
 

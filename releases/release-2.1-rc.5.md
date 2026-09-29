@@ -24,7 +24,7 @@ summary: TiDB 2.1 RC5は2018年11月12日にリリースされ、安定性、SQL
     - ポイントクエリ中に一部のケースで統計情報が正しく表示されない問題を修正[#8035](https://github.com/pingcap/tidb/pull/8035)
     - いくつかのケースにおける主キーの統計の選択性推定を修正[#8149](https://github.com/pingcap/tidb/pull/8149)
     - 削除されたテーブルの統計が長期間クリアされない問題を修正[#8182](https://github.com/pingcap/tidb/pull/8182)
-- サーバ
+- サーバー
     - ログの読みやすさを改善し、ログをより良くする
         - [#8063](https://github.com/pingcap/tidb/pull/8063)
         - [#8053](https://github.com/pingcap/tidb/pull/8053)

@@ -51,7 +51,7 @@ TiDB Ansible バージョン: 2.1.19
     - `sum(distinct)`関数から返される誤った結果を修正します [#13041](https://github.com/pingcap/tidb/pull/13041)
     - 関数`jsonUnquoteFunction`戻り型の長さに不正な値が与えられているため、同じ場所の`CAST` `union`データをマージされた型に変換すると`data too long`が返される問題を修正しました[#13645](https://github.com/pingcap/tidb/pull/13645)
     - 権限チェックが厳しすぎるためパスワードを設定できない問題を修正[#13805](https://github.com/pingcap/tidb/pull/13805)
-- サーバ
+- サーバー
     - `KILL CONNECTION`ゴルーチンリークを引き起こす可能性がある問題を修正[#13252](https://github.com/pingcap/tidb/pull/13252)
     - HTTP API の`info/all`インターフェースを介してすべてのTiDBノードのbinlogステータスの取得をサポート [#13188](https://github.com/pingcap/tidb/pull/13188)
     - Windows で TiDB プロジェクトのビルドに失敗する問題を修正 [#13650](https://github.com/pingcap/tidb/pull/13650)

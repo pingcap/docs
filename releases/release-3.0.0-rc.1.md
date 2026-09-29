@@ -34,7 +34,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - コプロセッサのタスク数、実行時間/待機時間の平均/最長/90%、実行時間または待機時間が最も長い TiKV のアドレスなど、スローログ内のコプロセッサタスクに関する詳細情報の表示をサポートします[#10165](https://github.com/pingcap/tidb/pull/10165)
     - プレースホルダなしの準備済みDDL文をサポートする[#10144](https://github.com/pingcap/tidb/pull/10144)
 
-- サーバ
+- サーバー
     - TiDB の起動時にのみ DDL 所有者にブートストラップの実行を許可する[#10029](https://github.com/pingcap/tidb/pull/10029)
     - トランザクション分離レベルをSERIALIZABLE に設定するときにTiDBがエラーを報告しないようにするために、変数`tidb_skip_isolation_level_check`を追加します。 [#10065](https://github.com/pingcap/tidb/pull/10065)
     - 暗黙的なコミット時間とSQL実行時間をスローログにマージする [#10294](https://github.com/pingcap/tidb/pull/10294)
@@ -85,7 +85,7 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - ラーナーのログギャップを考慮しないと、場合によってはpanicが発生する可能性がある問題を修正しました[#4559](https://github.com/tikv/tikv/pull/4559)
     - 異なる`column families` 間での`block cache`共有をサポート [#4612](https://github.com/tikv/tikv/pull/4612)
 
-- サーバ
+- サーバー
     - コンテキストスイッチのオーバーヘッドを`batch commands` 削減 [#4473](https://github.com/tikv/tikv/pull/4473)
     - シークイテレータステータスの有効性をチェックする [#4470](https://github.com/tikv/tikv/pull/4470)
 

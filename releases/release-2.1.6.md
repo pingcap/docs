@@ -15,7 +15,7 @@ summary: TiDB 2.1.6およびTiDB Ansible 2.1.6は、2019年3月15日にリリー
     - サブクエリの`agg`関数のチェックにおけるMySQLとの非互換性を修正 [#9551](https://github.com/pingcap/tidb/pull/9551)
     - パニックを回避するために、 `show stats_histograms`が有効な列のみを出力する[#9502](https://github.com/pingcap/tidb/pull/9502)
 
-- サーバ
+- サーバー
     - Binlog 有効/無効にする`log_bin`変数をサポートします [#9634](https://github.com/pingcap/tidb/pull/9634)
     - 誤ったトランザクションコミットを回避するためにトランザクションの健全性チェックを追加する[#9559](https://github.com/pingcap/tidb/pull/9559)
     - 変数を設定するとpanicが発生する可能性がある問題を修正[#9539](https://github.com/pingcap/tidb/pull/9539)

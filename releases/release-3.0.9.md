@@ -19,7 +19,7 @@ TiDB Ansible バージョン: 3.0.9
 
 - 執行者
     - 集計関数を`ENUM`列とコレクション列に適用した場合の誤った結果を修正しました [#14364](https://github.com/pingcap/tidb/pull/14364)
-- サーバ
+- サーバー
     - システム変数`auto_increment_increment`と`auto_increment_offset`サポート[#14396](https://github.com/pingcap/tidb/pull/14396)
     - `tidb_tikvclient_ttl_lifetime_reach_total`監視メトリックを追加して、TTL が 10分の悲観的トランザクションの数を監視します[#14300](https://github.com/pingcap/tidb/pull/14300)
     - SQLクエリの実行中にpanicが発生した場合に、SQL情報をログに出力します[#14322](https://github.com/pingcap/tidb/pull/14322)

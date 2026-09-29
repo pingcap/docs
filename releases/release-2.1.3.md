@@ -21,7 +21,7 @@ summary: TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、シス�
     - 一部のケースで統計ワーカーがpanic後に再開できない問題を修正[#9085](https://github.com/pingcap/tidb/pull/9085)
     - `Sort Merge Join`で場合によっては間違った結果が返される問題を修正[#9046](https://github.com/pingcap/tidb/pull/9046)
     - `CASE`節で JSON 型を返すことをサポート [#8355](https://github.com/pingcap/tidb/pull/8355)
-- サーバ
+- サーバー
     - コメントに非TiDBヒントが存在する場合、エラーではなく警告を返します。 [#8766](https://github.com/pingcap/tidb/pull/8766)
     - 設定されたTIMEZONE値の有効性を確認する [#8879](https://github.com/pingcap/tidb/pull/8879)
     - `QueryDurationHistogram`メトリクス項目を最適化して、より多くのステートメント タイプを表示します[#8875](https://github.com/pingcap/tidb/pull/8875)

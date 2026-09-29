@@ -56,7 +56,7 @@ TiDB Cloud APIはHTTPダイジェスト認証を使用します。これによ�
    ```
 
     - `source`属性は、 [Terraform レジストリ](https://registry.terraform.io/)からダウンロードする対象の Terraform プロバイダーを指定します。
-    - `version`属性はオプションで、Terraformプロバイダのバージョンを指定します。指定されていない場合は、デフォルトで最新のプロバイダバージョンが使用されます。
+    - `version`属性はオプションで、Terraformプロバイダーのバージョンを指定します。指定されていない場合は、デフォルトで最新のプロバイダーバージョンが使用されます。
     - `required_version`はオプションで、Terraform のバージョンを指定します。指定されていない場合は、デフォルトで最新の Terraform バージョンが使用されます。
 
 2. `terraform init`コマンドを実行して、Terraform Registry からTiDB Cloud Terraform Provider をダウンロードします。

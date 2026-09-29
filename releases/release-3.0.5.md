@@ -29,7 +29,7 @@ TiDB Ansible バージョン: 3.0.5
     - `AutoIncrement`列が暗黙的に割り当てられた場合の動作を改善し、MySQLのAUTO_INCREMENTロックのデフォルトモード（ ["consecutive"ロックモード](https://dev.mysql.com/doc/refman/5.7/en/innodb-auto-increment-handling.html) ）との一貫性を保ちます。1行の`Insert`文で複数の`AutoIncrement` IDを暗黙的に割り当てる場合、TiDBは割り当てられた値の連続性を保証します。この改善により、JDBC `getGeneratedKeys()`メソッドはどのようなシナリオでも正しい結果を得ることができます[#12602](https://github.com/pingcap/tidb/pull/12602)
     - `HashAgg` `Apply` の子ノードとして機能するときにクエリがハングする問題を修正しました [#12766](https://github.com/pingcap/tidb/pull/12766)
     - 型変換に関して、 `AND`と`OR`論理式が誤った結果を返す問題を修正しました。 [#12811](https://github.com/pingcap/tidb/pull/12811)
-- サーバ
+- サーバー
     - 後で大規模なトランザクションをサポートするためにトランザクションTTLを変更するインターフェース関数を実装します[#12397](https://github.com/pingcap/tidb/pull/12397)
     - 悲観的トランザクションをサポートするために、必要に応じてトランザクション TTL を延長する（最大 10分）ことをサポートします[#12579](https://github.com/pingcap/tidb/pull/12579)
     - TiDBがスキーマの変更とそれに対応する変更されたテーブル情報をキャッシュする回数を100から1024に調整し、 `tidb_max_delta_schema_count`システム変数を使用して変更をサポートします。 [#12502](https://github.com/pingcap/tidb/pull/12502)
