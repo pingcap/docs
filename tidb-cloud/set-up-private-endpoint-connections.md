@@ -33,7 +33,7 @@ For more detailed definitions of the private endpoint and endpoint service, see 
 
 In most scenarios, you are recommended to use private endpoint connection over VPC peering. However, in the following scenarios, you should use VPC peering instead of private endpoint connection:
 
-- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions, to get high availability, and cross-region connections are not enabled for your organization. If cross-region connections are enabled and the source region is allowed for the target node group, you can use a private endpoint instead. For more information, see [Use cross-region connections over a private endpoint](#use-cross-region-connections-over-a-private-endpoint).
+- You are using a [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) cluster to replicate data from a source TiDB cluster to a target TiDB cluster across regions for high availability, but cross-region connections are not enabled for your organization. If cross-region connections are enabled and the source region is allowed for the target node group, you can use a private endpoint instead. For more information, see [Use cross-region connections over a private endpoint](#use-cross-region-connections-over-a-private-endpoint).
 - You are using a TiCDC cluster to replicate data to a downstream cluster (such as Amazon Aurora, MySQL, and Kafka) but you cannot maintain the endpoint service on your own.
 - You are connecting to PD or TiKV nodes directly.
 
