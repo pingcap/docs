@@ -27,7 +27,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
 
 2. topology.yaml ファイルで、カスタマイズされたルール設定ファイルのディレクトリに`rule_dir`を設定します。
 
-    以下は、topology.yaml ファイル内の monitored_servers の構成例です。
+    以下は、topology.yaml ファイル内の monitoring_servers の構成例です。
 
     ```
     # # Server configs are used to specify the configuration of Prometheus Server.
@@ -45,7 +45,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、 TiUP はProm
 
 2. `monitoring_servers`構成で、 `additional_scrape_conf`フィールドを追加します。
 
-    以下は、topology.yaml ファイル内の monitored_servers の構成例です。
+    以下は、topology.yaml ファイル内の monitoring_servers の構成例です。
 
     ```
     monitoring_servers:
@@ -159,4 +159,4 @@ alertmanager_servers:
     ssh_port: 22
 ```
 
-上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP はAlertmanager 起動パラメータの`listen_host`フィールドの内容を`--web.listen-address`に追加します。
+上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP は`listen_host`フィールドの内容を Alertmanager 起動パラメータの`--web.listen-address`に追加します。
