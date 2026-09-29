@@ -1,6 +1,6 @@
 ---
 title: Get Started with TiDB Cloud Filesystem
-summary: Learn how to create a persistent TiDB Cloud file system, verify CLI reads and writes, and optionally access its files through a local mount.
+summary: Learn how to create a persistent TiDB Cloud file system, read and write files, and optionally access them through a local mount.
 ---
 
 # Get Started with TiDB Cloud Filesystem
@@ -81,10 +81,6 @@ For permanent `PATH` setup on Windows and other installation options, see [Insta
 
 Choose a [supported region](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions) where you want to store your files, such as `aws-us-west-2`. The free tier allows one file system per region. If your organization already has one, [reuse it](/tidb-cloud-filesystem/access-filesystem.md), choose another region, or [add a payment method](https://tidbcloud.com/org-settings/billing/payments).
 
-For CI or agents, inject `TIDB_CLOUD_PUBLIC_KEY` and `TIDB_CLOUD_PRIVATE_KEY` from a secret manager and set `TI_REGION_CODE`. Run `ti configure --non-interactive`, then continue to Step 3. See [Configure for automation](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) for details.
-
-For an interactive terminal:
-
 1. Run the interactive configuration:
 
     ```bash
@@ -96,33 +92,13 @@ For an interactive terminal:
     - The region you selected.
     - Your TiDB Cloud API public key and private key.
 
-3. Set the region for this tutorial. Replace `<filesystem-region-code>` with the region you just selected:
+The CLI saves your credentials and default region locally. The creation command in the next step uses this region.
 
-    <SimpleTab groupId="operating-systems">
-
-    <div label="macOS or Linux" value="macos-or-linux">
-
-    ```bash
-    export TI_REGION_CODE="<filesystem-region-code>"
-    ```
-
-    </div>
-
-    <div label="Windows PowerShell" value="windows-powershell">
-
-    ```powershell
-    $env:TI_REGION_CODE = "<filesystem-region-code>"
-    ```
-
-    </div>
-
-    </SimpleTab>
-
-The commands use `TI_REGION_CODE` unless you specify `--region`. Configuration saves your credentials locally; creating the file system in the next step validates them.
+> **Tip:**
+>
+> For CI or agents, use non-interactive configuration instead. Inject `TIDB_CLOUD_PUBLIC_KEY` and `TIDB_CLOUD_PRIVATE_KEY` from a secret manager, set `TI_REGION_CODE`, and run `ti configure --non-interactive`. For more information, see [Configure for automation](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation).
 
 ## Step 3. Create and use a file system
-
-For CI or agents, disable command tracing before handling tokens. Capture the creation command's JSON response in a protected variable or secret store, and exclude it from job logs. Save both `file_system_id` and `fs_token` from the captured response.
 
 1. Create a file system:
 
@@ -130,31 +106,20 @@ For CI or agents, disable command tracing before handling tokens. Capture the cr
     ti fs create-file-system --display-name agent-workspace --wait
     ```
 
-    This command uses the region set in `TI_REGION_CODE` in Step 2. If you open a new shell, set that variable again before continuing.
-
-    Save these values from the response:
-
-    - `file_system_id`: uniquely identifies the file system.
-    - `fs_token`: the owner token for the file system.
+    Copy the returned `file_system_id` for the next step. The CLI stores the owner token and region for the file system locally, so you do not need to enter the token again on the same machine.
 
     > **Note:**
     >
-    > The owner token grants full access, does not expire, and is shown only when issued. Store it securely. For limited access or revocation, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
+    > If you need to access the file system from another machine, also save the returned `fs_token` and `region_code`. The owner token grants full access and does not expire, so store it securely. For limited access, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
-2. Load the owner token. Paste the returned `fs_token` at the prompt and press Enter; input is hidden. These commands also clear any previous file system selection. Keep `TI_REGION_CODE` set.
-
-    In automation, set `TI_FS_TOKEN` from the captured `fs_token` and clear `TI_FS_FILE_SYSTEM_ID`. Skip the input prompts.
+2. Select your new file system. Replace `<file-system-id>` with the returned `file_system_id`:
 
     <SimpleTab groupId="operating-systems">
 
     <div label="macOS or Linux" value="macos-or-linux">
 
-    `read` captures your token without displaying it, and `export` makes it available to subsequent `ti` commands in this shell. The token you enter at the `read` prompt is not recorded in shell history.
-
     ```bash
-    unset TI_FS_FILE_SYSTEM_ID
-    printf 'Owner token: '
-    read -rs TI_FS_TOKEN && export TI_FS_TOKEN && printf '\n'
+    export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
     ```
 
     </div>
@@ -162,28 +127,24 @@ For CI or agents, disable command tracing before handling tokens. Capture the cr
     <div label="Windows PowerShell" value="windows-powershell">
 
     ```powershell
-    Remove-Item Env:TI_FS_FILE_SYSTEM_ID -ErrorAction SilentlyContinue
-    $env:TI_FS_TOKEN = [System.Net.NetworkCredential]::new(
-      "", (Read-Host "Owner token" -AsSecureString)
-    ).Password
+    $env:TI_FS_FILE_SYSTEM_ID = "<file-system-id>"
     ```
 
     </div>
 
     </SimpleTab>
 
-3. Create a unique directory, upload a sample file, and read it back:
+3. Create a directory, upload a sample file, and read it back:
 
     <SimpleTab groupId="operating-systems">
 
     <div label="macOS or Linux" value="macos-or-linux">
 
     ```bash
-    example_dir="/quick-start-$(date +%s)-$$"
-    ti fs create-directory --path "$example_dir"
+    ti fs create-directory --path /quick-start
     printf 'Hello from TiDB Cloud Filesystem\n' | ti fs copy-file \
-      --from-stdin --to-remote "$example_dir/hello.txt"
-    ti fs read-file --path "$example_dir/hello.txt"
+      --from-stdin --to-remote /quick-start/hello.txt
+    ti fs read-file --path /quick-start/hello.txt
     ```
 
     </div>
@@ -191,11 +152,10 @@ For CI or agents, disable command tracing before handling tokens. Capture the cr
     <div label="Windows PowerShell" value="windows-powershell">
 
     ```powershell
-    $exampleDir = "/quick-start-$([guid]::NewGuid().ToString('N'))"
-    ti fs create-directory --path $exampleDir
+    ti fs create-directory --path /quick-start
     "Hello from TiDB Cloud Filesystem" | ti fs copy-file `
-      --from-stdin --to-remote "$exampleDir/hello.txt"
-    ti fs read-file --path "$exampleDir/hello.txt"
+      --from-stdin --to-remote /quick-start/hello.txt
+    ti fs read-file --path /quick-start/hello.txt
     ```
 
     </div>
@@ -208,111 +168,83 @@ For CI or agents, disable command tracing before handling tokens. Capture the cr
     Hello from TiDB Cloud Filesystem
     ```
 
-    Your file is now stored remotely. If a command fails, [resolve the error](/tidb-cloud-filesystem/filesystem-troubleshooting.md) before continuing. To access it from another environment, see [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md).
+    Your first file is now stored in TiDB Cloud Filesystem. To access it from another environment, see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md). To provide access to another user, application, or agent, see [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md).
 
-## Step 4. Mount and verify file access (optional)
+## Step 4. Mount the file system (optional)
 
-Mount the file system if your application needs local file paths. On Windows, or if you only need CLI access, skip to [Step 5](#step-5-clean-up-the-example).
+Mount the file system if your application needs local file paths. Mounting is not supported on Windows. If you are using Windows or only need CLI access, skip to [Step 5](#step-5-clean-up-the-example-optional).
 
-On macOS or Linux, first complete the [mount prerequisites for your platform](/tidb-cloud-filesystem/filesystem-mount.md#choose-a-mount-method). Create a new local directory:
+1. Create an empty local directory for the mount:
 
-```bash
-mount_dir="$(mktemp -d "$HOME/ti-fs-quick-start.XXXXXX")"
-```
+    ```bash
+    mount_dir="$(mktemp -d "$HOME/ti-fs-quick-start.XXXXXX")"
+    ```
 
-Choose **one** mount command:
+2. Mount the `/quick-start` directory using the command for your operating system:
 
-<SimpleTab>
+    <SimpleTab>
 
-<div label="Linux FUSE">
+    <div label="macOS WebDAV">
 
-```bash
-ti fs mount-file-system --remote-path "$example_dir" \
-  --mount-path "$mount_dir" --driver fuse
-```
+    This command uses macOS's built-in WebDAV support:
 
-</div>
+    ```bash
+    ti fs mount-file-system --remote-path /quick-start \
+      --mount-path "$mount_dir" --driver webdav
+    ```
 
-<div label="macOS WebDAV">
+    </div>
 
-```bash
-ti fs mount-file-system --remote-path "$example_dir" \
-  --mount-path "$mount_dir" --driver webdav
-```
+    <div label="Linux FUSE">
 
-For FUSE-specific features, see [Mount a File System on macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md).
+    Linux requires the `fuse3` package and access to `/dev/fuse`. If needed, follow [Install FUSE userspace tools](/tidb-cloud-filesystem/filesystem-mount-linux.md#install-fuse-userspace-tools) before running the mount command.
 
-</div>
+    ```bash
+    ti fs mount-file-system --remote-path /quick-start \
+      --mount-path "$mount_dir" --driver fuse
+    ```
 
-</SimpleTab>
+    </div>
 
-A successful mount command confirms startup. Verify file access before using the mount. If a check takes longer than 30 seconds, interrupt it with Ctrl+C and follow [mount troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs) before continuing.
+    </SimpleTab>
 
-1. Read the uploaded file through the mount:
+3. Read your file using its local path:
 
     ```bash
     cat "$mount_dir/hello.txt"
     ```
 
-    Expected output: `Hello from TiDB Cloud Filesystem`.
+    Expected output:
 
-2. Write a new file through the mount:
-
-    ```bash
-    printf 'Written through the mount\n' > "$mount_dir/mounted.txt"
+    ```text
+    Hello from TiDB Cloud Filesystem
     ```
 
-3. Close applications using the mount and unmount it:
+For write verification and troubleshooting, see [Verify a mount before using it](/tidb-cloud-filesystem/filesystem-mount.md#verify-a-mount-before-using-it).
 
-    ```bash
-    ti fs unmount-file-system --mount-path "$mount_dir"
-    ```
+## Step 5. Clean up the example (optional)
 
-    If unmount fails, keep the machine and local mount data available and follow [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
-
-4. After successful unmount, read the new file directly from the service:
-
-    ```bash
-    ti fs read-file --path "$example_dir/mounted.txt"
-    ```
-
-    Expected output: `Written through the mount`. This confirms that the write reached the service, independently of the mount's cache.
-
-## Step 5. Clean up the example
-
-After verification and, if applicable, successful unmount, delete only the example directory created in Step 3:
-
-<SimpleTab groupId="operating-systems">
-
-<div label="macOS or Linux" value="macos-or-linux">
+If you mounted the directory in Step 4, close applications using it, then unmount and remove the empty local mount directory:
 
 ```bash
-ti fs delete-file --path "${example_dir:?Set the example directory first}" --recursive
-ti fs describe-file --path "$example_dir"
+ti fs unmount-file-system --mount-path "$mount_dir"
+rmdir "$mount_dir"
 ```
 
-If you mounted the example, remove the now-empty local mount directory with `rmdir "$mount_dir"`.
+If unmount fails, follow [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely) before continuing.
 
-</div>
+Delete the example directory and its files. This command works on all supported operating systems:
 
-<div label="Windows PowerShell" value="windows-powershell">
-
-```powershell
-if (-not $exampleDir) { throw "Set the example directory first" }
-ti fs delete-file --path $exampleDir --recursive
-ti fs describe-file --path $exampleDir
+```shell
+ti fs delete-file --path /quick-start --recursive
 ```
-
-</div>
-
-</SimpleTab>
-
-Expect a not-found error from `describe-file`. Other errors do not confirm deletion.
 
 The file system and its token remain available for reuse. To remove the entire file system, see [Delete a file system](/tidb-cloud-filesystem/manage-filesystem-resources.md#delete-a-file-system).
 
 ## What's next
 
+- [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md) to reuse locally stored credentials or connect from another environment.
+- [Configure for automation](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) to set up CLI credentials for CI jobs or agents.
 - [Manage File Systems in TiDB Cloud Filesystem](/tidb-cloud-filesystem/manage-filesystem-resources.md) to inspect and manage your file systems.
 - [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md) to create, inspect, and manage tokens for file system access.
 - [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md) to access its files through a local directory.

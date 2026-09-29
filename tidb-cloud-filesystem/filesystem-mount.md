@@ -59,7 +59,7 @@ For layer and checkpoint workflows, see [Manage File System Layers and Checkpoin
 
 ## Verify a mount before using it
 
-A successful mount command or directory listing does not confirm that file reads and writes work. Read a known small file uploaded through `ti fs copy-file`. For a writable mount, write a new test file, close it, and unmount successfully. Then read the file through `ti fs read-file` to confirm that the write reached the service. For a complete example, follow the [Quick Start verification steps](/tidb-cloud-filesystem/filesystem-quick-start.md#step-4-mount-and-verify-file-access-optional).
+A successful mount command or directory listing does not confirm that file reads and writes work. Read a known small file uploaded through `ti fs copy-file`. For a writable mount, write a new test file, close it, and unmount successfully. Then read the file through `ti fs read-file` to confirm that the write reached the service. For complete examples, follow the [Linux verification steps](/tidb-cloud-filesystem/filesystem-mount-linux.md#mount-and-verify-the-file-system) or the [macOS WebDAV verification steps](/tidb-cloud-filesystem/filesystem-mount-macos.md#mount-with-webdav).
 
 If a small-file check has not returned after 30 seconds, interrupt it and follow [Mount succeeds but file access hangs](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs). Do not start applications on the mount until verification passes.
 
