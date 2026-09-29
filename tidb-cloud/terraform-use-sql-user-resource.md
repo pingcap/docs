@@ -94,7 +94,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
     - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
     - `known after apply`は、`apply`後の対応する値が取得されることを示します。
 
-4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4. 計画の内容がすべて問題ない場合は、`yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -171,7 +171,7 @@ summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザ
 
     上記の実行計画では、パスワードと組み込みロールが変更されます。
 
-3. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+3. 計画の内容がすべて問題ない場合は、`yes`と入力して続行します。
 
     ```shell
       Enter a value: yes

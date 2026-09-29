@@ -231,7 +231,7 @@ summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedi
     - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
     - `known after apply`は、`apply`後の値が取得されることを示します。
 
-4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4. 計画の内容がすべて問題ない場合は、`yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
@@ -481,7 +481,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
     上記の実行計画では、 TiFlashが追加され、1つのリソースが変更されます。
 
-3. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+3. 計画の内容がすべて問題ない場合は、`yes`と入力して続行します。
 
     ```shell
       Enter a value: yes

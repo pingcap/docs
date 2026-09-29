@@ -104,7 +104,7 @@ summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用�
     - `apply`の結果も確認できます。新しいリソースが追加されますが、リソースは変更または破棄されません。
     - `known after apply`は、`apply`後の対応する値が取得されることを示します。
 
-4. 計画の内容がすべて問題ない場合は、「 `yes`と入力して続行します。
+4. 計画の内容がすべて問題ない場合は、`yes`と入力して続行します。
 
     ```shell
     Do you want to perform these actions?
