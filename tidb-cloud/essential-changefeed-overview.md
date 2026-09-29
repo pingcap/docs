@@ -29,10 +29,10 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 | クラウドプロバイダー | 対応地域                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| AWS        | <li>`ap-east-1`</li><li>`ap-northeast-1`</li><li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li> |
-| アリババクラウド   | <li>`ap-southeast-1`</li><li>`ap-southeast-5`</li><li>`cn-hongkong`</li>                                                              |
+| AWS        | <ul><li>`ap-east-1`</li><li>`ap-northeast-1`</li><li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li></ul> |
+| Alibaba Cloud   | <ul><li>`ap-southeast-1`</li><li>`ap-southeast-5`</li><li>`cn-hongkong`</li></ul>                                                              |
 
-今後、対応地域は拡大していく予定です。特定の地域での緊急サポートについては、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。
+今後、対応地域は拡大していく予定です。特定の地域での即時サポートについては、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。
 
 ## Changefeedページを確認する {#view-the-changefeed-page}
 
@@ -112,7 +112,7 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
 > **Note:**
 >
-> TiDB Cloud現在、一時停止状態の変更フィードの編集のみが許可されています。
+> TiDB Cloudでは現在、一時停止状態の変更フィードの編集のみが許可されています。
 
 変更フィードは、 TiDB CloudコンソールまたはTiDB Cloud CLIを使用して編集できます。
 
@@ -125,7 +125,7 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
 3. 変更フィードのステータスが`Paused`に変更されたら、 **...** > **Edit**をクリックして、対応する変更フィードを編集します。
 
-    TiDB Cloudはデフォルトで変更フィードの設定を自動的に行います。以下の設定を変更できます。
+    TiDB Cloudは、変更フィードの設定にデフォルト値を入力します。以下の設定を変更できます。
 
     - Apache Kafkaシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
     - MySQLシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
@@ -197,5 +197,5 @@ ticloud serverless changefeed delete --cluster-id <cluster-id> --changefeed-id <
 - `CREATE_FAILED` : 変更フィードの作成に失敗しました。変更フィードを削除して、新しいものを作成する必要があります。
 - `RUNNING` : changefeed は正常に実行され、checkpoint-ts も正常に進行します。
 - `PAUSED` : 変更フィードが一時停止されています。
-- `WARNING` : 変更フィードが警告を返します。回復可能なエラーのため、変更フィードは続行できません。この状態の変更フィードは、状態が`RUNNING`に遷移するまで再開を試み続けます。この状態の変更フィードは[GCオペレーション](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)ブロックします 。
+- `WARNING` : 変更フィードが警告を返します。回復可能なエラーのため、変更フィードは続行できません。この状態の変更フィードは、状態が`RUNNING`に遷移するまで再開を試み続けます。この状態の変更フィードは[GCオペレーション](https://docs.pingcap.com/tidb/stable/garbage-collection-overview)をブロックします。
 - `RUNNING_FAILED` : 変更フィードが失敗しました。何らかのエラーにより、変更フィードを再開できず、自動的に復旧することもできません。増分データのガベージコレクション(GC) の前に問題が解決された場合は、失敗した変更フィードを手動で再開できます。増分データのデフォルトの有効期限 (TTL) は 24時間です。つまり、変更フィードが中断されてから 24時間以内に GC メカニズムによってデータが削除されることはありません。

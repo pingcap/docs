@@ -35,7 +35,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
     4. **Import Data from Cloud Storage**ページで、**Storage Provider**を**Amazon S3**に設定し、 **Credentials**で**AWS Role ARN**が選択されていることを確認してから、 **Role ARN**フィールドの下にある**Click here to create new one with AWS CloudFormation**をクリックします。 **Add New Role ARN**ダイアログが表示されます。
 
-    5. **問題が発生しましたか？ロールARNを手動で作成して**、このクラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得してください。これらのIDは後で使用するため、メモしておいてください。
+    5. **Having trouble? Create Role ARN manually**を展開して、このクラスターの**TiDB Cloud Account ID**と**TiDB Cloud External ID**を取得してください。これらのIDは後で使用するため、メモしておいてください。
 
 2. AWS マネジメントコンソールで、Amazon S3 バケット用のマネージドポリシーを作成します。
 
@@ -119,7 +119,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
         - **Trusted entity type**で**AWS account**を選択します。
         - **An AWS account**の下にある**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
-        - **オプション**で**Require external ID**をクリックして[混乱した副官の問題](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)回避し、 TiDB Cloud外部IDを**External ID**フィールドに貼り付けます。"Require external ID"を選択せずにロールを作成すると、S3バケットURIとIAMロールARNを持つユーザーであれば誰でもAmazon S3バケットにアクセスできる可能性があります。アカウントIDと外部IDの両方を使用してロールを作成すると、同じプロジェクトおよび同じリージョンで実行されているTiDBクラスタのみがバケットにアクセスできます。
+        - **オプション**で**Require external ID**をクリックして[混乱した代理問題](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)を回避し、 TiDB Cloud外部IDを**External ID**フィールドに貼り付けます。"Require external ID"を選択せずにロールを作成すると、S3バケットURIとIAMロールARNを持つユーザーであれば誰でもAmazon S3バケットにアクセスできる可能性があります。アカウントIDと外部IDの両方を使用してロールを作成すると、同じプロジェクトおよび同じリージョンで実行されているTiDBクラスタのみがバケットにアクセスできます。
 
     3. **Next**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**Next**をクリックします。
 
@@ -194,7 +194,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
         ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
 
-3. [バケツ](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットの名前をクリックします。
+3. [Bucket](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットの名前をクリックします。
 
 4. **Bucket details**ページで、 **[権限]**タブをクリックし、 **GRANT ACCESS**をクリックします。
 

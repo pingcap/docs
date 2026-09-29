@@ -1,19 +1,19 @@
 ---
 title: Integrate a Data App with Third-Party Tools
-summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDifyなどのサードパーティツールと統合する方法を学びましょう。
+summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTsやDifyなどのサードパーティツールと統合する方法を学びましょう。
 ---
 
 # データアプリをサードパーティツールと統合する {#integrate-a-data-app-with-third-party-tools}
 
 データアプリにサードパーティ製ツールを統合することで、サードパーティ製ツールが提供する高度な自然言語処理機能と人工知能（AI）機能をアプリケーションに組み込むことができます。この統合により、アプリケーションはより複雑なタスクを実行し、インテリジェントなソリューションを提供できるようになります。
 
-このドキュメントでは、TiDB CloudコンソールでデータアプリをGPTやDifyなどのサードパーティツールと統合する方法について説明します。
+このドキュメントでは、TiDB CloudコンソールでデータアプリをGPTsやDifyなどのサードパーティツールと統合する方法について説明します。
 
-## データアプリをGPTと統合する {#integrate-your-data-app-with-gpts}
+## データアプリをGPTsと統合する {#integrate-your-data-app-with-gpts}
 
-データアプリを[GPT](https://openai.com/blog/introducing-gpts)と統合することで、アプリケーションにインテリジェントな機能を追加できます。
+データアプリを[GPTs](https://openai.com/blog/introducing-gpts)と統合することで、アプリケーションにインテリジェントな機能を追加できます。
 
-データアプリをGPTと統合するには、以下の手順を実行してください。
+データアプリをGPTsと統合するには、以下の手順を実行してください。
 
 1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
@@ -33,10 +33,10 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTやDi
 
     ![GPTs Dialog Box](/media/tidb-cloud/data-service/GPTs2.png)
 
-5. コピーしたAPI仕様のURLとエンコードされたAPIキーをGPT構成で使用してください。
+5. コピーしたAPI仕様のURLとエンコードされたAPIキーをGPTs構成で使用してください。
 
 ## データアプリをDifyと連携させましょう {#integrate-your-data-app-with-dify}
 
 データアプリを[Dify](https://dify.ai/)と統合することで、ベクトル距離計算、高度な類似性検索、ベクトル解析などのインテリジェントな機能を追加し、アプリケーションを強化できます。
 
-データアプリをDifyと連携させるには、 [GPT統合](#integrate-your-data-app-with-gpts)の場合と同じ手順に従ってください。唯一の違いは、 **Integrations**タブの**Integrate with Dify**エリアで**Get Configuration**をクリックする必要がある点です。
+データアプリをDifyと連携させるには、 [GPTs統合](#integrate-your-data-app-with-gpts)の場合と同じ手順に従ってください。唯一の違いは、 **Integrations**タブの**Integrate with Dify**エリアで**Get Configuration**をクリックする必要がある点です。

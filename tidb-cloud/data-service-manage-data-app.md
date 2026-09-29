@@ -25,7 +25,7 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
     >
     > デフォルトでは、データアプリの種類は**Standard Data App**です。**Chat2Query Data App**を作成する場合は、このドキュメントではなく[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
 
-3. (オプション) データアプリのエンドポイントを優先 GitHub リポジトリとブランチに自動的にデプロイするには、 **Connect to GitHub**を有効にして、次の操作を行います。
+3. (オプション) データアプリのエンドポイントを任意の GitHub リポジトリとブランチに自動的にデプロイするには、 **Connect to GitHub**を有効にして、次の操作を行います。
 
     1. **Install on GitHub**をクリックし、画面の指示に従って、 **TiDB Cloud Data Service**をアプリケーションとしてターゲット リポジトリにインストールします。
     2. **Authorize**をクリックして、GitHub 上のアプリケーションへのアクセスを承認します。
@@ -41,9 +41,9 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
     新しく作成されたデータアプリがリストの一番上に追加されます。新しいデータアプリにはデフォルトで`untitled endpoint`が作成されます。
 
-5. データアプリをGitHubに接続するように設定している場合は、指定したGitHubディレクトリを確認してください`tidb-cloud-data-service`までに[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)ディレクトリにコミットされていることがわかります。これは、データアプリがGitHubに正常に接続されていることを意味します。
+5. データアプリをGitHubに接続するように設定している場合は、指定したGitHubディレクトリを確認してください。[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)が`tidb-cloud-data-service`によってディレクトリにコミットされていることがわかります。これは、データアプリがGitHubに正常に接続されていることを意味します。
 
-    新しいデータアプリでは、**Auto Sync & Deployment**、および**Review Draft**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub 間でデータアプリの変更を簡単に同期し、デプロイ前に変更を確認できます。GitHub との統合の詳細については、 [データアプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)ご覧ください。
+    新しいデータアプリでは、**Auto Sync & Deployment**、および**Review Draft**がデフォルトで有効になっているため、 TiDB Cloudコンソールと GitHub 間でデータアプリの変更を簡単に同期し、デプロイ前に変更を確認できます。GitHub との統合の詳細については、 [データアプリの変更を GitHub で自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)をご覧ください。
 
 ## データアプリを構成する {#configure-a-data-app}
 
@@ -107,7 +107,7 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
     - **Auto Sync & Deployment**
 
-        - このオプションは、データアプリがGitHubに接続されている場合にのみ有効にできます。詳細については、 [GitHubで自動デプロイ](/tidb-cloud/data-service-manage-github-connection.md)ご覧ください。
+        - このオプションは、データアプリがGitHubに接続されている場合にのみ有効にできます。詳細については、 [GitHubで自動デプロイ](/tidb-cloud/data-service-manage-github-connection.md)をご覧ください。
         - 有効にすると、指定したGitHubディレクトリに加えられた変更がTiDB Cloudに自動的にデプロイされ、 TiDB Cloudコンソールに加えられた変更もGitHubにプッシュされます。対応するデプロイ情報とコミット情報は、データアプリのデプロイ履歴で確認できます。
         - 無効にすると、指定した GitHub ディレクトリで行われた変更はTiDB Cloudにデプロイ**されず**、 TiDB Cloudコンソールで行われた変更も GitHub にプッシュされ**ません**。
 
@@ -163,7 +163,7 @@ OpenAPI ドキュメントにアクセスするには、次の手順を実行し
 
     2. ターゲットエンドポイントを見つけ、必要なパラメータを入力して**Try it out**をクリックします。レスポンスは**Response body**領域に表示されます。
 
-OpenAPI ドキュメントの使用方法の詳細については、 [スワッガーUI](https://swagger.io/tools/swagger-ui/)を参照してください。
+OpenAPI ドキュメントの使用方法の詳細については、 [Swagger UI](https://swagger.io/tools/swagger-ui/)を参照してください。
 
 ## データアプリを削除する {#delete-a-data-app}
 
