@@ -44,16 +44,16 @@ TiDB Cloudは、サポートされているすべてのプランで高い可用�
 
 ## 監視 {#monitoring}
 
-TiDB Cloudは、TiDB のパフォーマンスと健全性の包括的なモニタリング機能を提供します。モニタリング[モニタリングについて詳しくはこちらをご覧ください](/tidb-cloud/monitoring-concepts.md)。
+TiDB Cloudは、TiDB のパフォーマンスと健全性の包括的なモニタリング機能を提供します。[モニタリングについて詳しくはこちらをご覧ください](/tidb-cloud/monitoring-concepts.md)。
 
 ## データストリーミング {#data-streaming}
 
-TiDB Cloud を使用すると、データ変更を Kafka、MySQL、オブジェクトストレージなどの他のシステムにストリーミングできます。データ ストリーミング[データストリーミングについて詳しくはこちらをご覧ください](/tidb-cloud/data-streaming-concepts.md)。
+TiDB Cloud を使用すると、データ変更を Kafka、MySQL、オブジェクトストレージなどの他のシステムにストリーミングできます。[データストリーミングについて詳しくはこちらをご覧ください](/tidb-cloud/data-streaming-concepts.md)。
 
 ## バックアップと復元 {#backup-x26-restore}
 
-TiDB Cloudは [バックアップと復元について詳しくはこちらをご覧ください](/tidb-cloud/backup-and-restore-concepts.md)自動バックアップ ソリューションとポイントインタイムリカバリ(PITR) 機能を提供します。
+TiDB Cloudは、自動バックアップ ソリューションとポイントインタイムリカバリ(PITR) 機能を提供します。[バックアップと復元について詳しくはこちらをご覧ください](/tidb-cloud/backup-and-restore-concepts.md)。
 
-## Security {#security}
+## セキュリティ {#security}
 
-TiDB Cloudは、データを保護し、アクセス制御を実施し、最新のコンプライアンス基準を満たすように設計された、堅牢かつ柔軟なセキュリティ フレームワークを提供します。セキュリティ[セキュリティについて詳しくはこちらをご覧ください](/tidb-cloud/security-concepts.md)。
+TiDB Cloudは、データを保護し、アクセス制御を実施し、最新のコンプライアンス基準を満たすように設計された、堅牢かつ柔軟なセキュリティ フレームワークを提供します。[セキュリティについて詳しくはこちらをご覧ください](/tidb-cloud/security-concepts.md)。

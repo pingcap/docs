@@ -125,7 +125,7 @@ AWS Schema Conversion Tool を使用してスキーマを移行する場合は�
 
 ## ステップ8. データベース移行タスクを作成する {#step-8-create-a-database-migration-task}
 
-1. AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。お住まいの地域に切り替えてください。次に、ウィンドウの右上隅にある**Create task**をクリックします。
+1. AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。リージョンに切り替えてください。次に、ウィンドウの右上隅にある**Create task**をクリックします。
 
     ![Create task](/media/tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 

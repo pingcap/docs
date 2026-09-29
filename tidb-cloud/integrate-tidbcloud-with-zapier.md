@@ -5,7 +5,7 @@ summary: TiDB CloudをZapierを使って5000以上のアプリに接続する方
 
 # TiDB CloudとZapierを統合する {#integrate-tidb-cloud-with-zapier}
 
-[Zapier](https://zapier.com)数千ものアプリやサービスを含むワークフローを簡単に作成できる、ノーコードの自動化ツールです。
+[Zapier](https://zapier.com)は、数千ものアプリやサービスを含むワークフローを簡単に作成できる、ノーコードの自動化ツールです。
 
 Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)を使用すると、次のことが可能になります。
 
@@ -17,7 +17,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 ## テンプレートを使ったクイックスタート {#quick-start-with-template}
 
-[Zapテンプレート](https://docs.zapier.com/integrations/publish/zap-templates)、公開されているZapier連携機能向けに、アプリとコアフィールドが事前に選択された、すぐに使える連携機能またはZapです。
+[Zapテンプレート](https://docs.zapier.com/integrations/publish/zap-templates)は、公開されているZapier連携機能向けに、アプリとコアフィールドが事前に選択された、すぐに使える連携機能またはZapです。
 
 このセクションでは、 **Add new Github global events to TiDB rows**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
 
@@ -57,12 +57,12 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 1. アプリとイベントを選択
 
-    テンプレートで設定されているデフォルト値`Find Table`そのまま使用します。 **Continue**をクリックします。
+    テンプレートで設定されているデフォルト値`Find Table`をそのまま使用します。 **Continue**をクリックします。
 
 2. アカウントを選択
 
     1. **Sign in**ボタンをクリックすると、新しいログインページにリダイレクトされます。
-    2. ログインページで、公開キーと秘密キーを入力します。 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)ドキュメントの手順に従ってください。
+    2. ログインページで、公開キーと秘密キーを入力します。 TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)の手順に従ってください。
     3. **Continue**をクリックしてください。
 
     ![Account](/media/tidb-cloud/zapier/zapier-tidbcloud-account.png)
@@ -91,7 +91,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     **Test action**をクリックすると、Zapierがテーブルを作成します。テストをスキップすることも可能で、その場合はワークフローが初めて実行されるときにテーブルが作成されます。
 
-### ステップ4： `Create Row in TiDB Cloud`を設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
+### ステップ4： `Create Row in TiDB Cloud`アクションを設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
 
 1. アプリとイベントを選択
 
@@ -149,27 +149,27 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 | トリガー         | 説明                                        |
 | ------------ | ----------------------------------------- |
-| 新しいクラスタ      | 新しいクラスターが作成されたときにトリガーされます。                |
-| 新しいテーブル      | 新しいテーブルが作成されたときにトリガーされます。                 |
-| 新しい行         | 新しい行が作成されたときにトリガーされます。直近の10,000行のみを取得します。 |
-| 新規行（カスタムクエリ） | 指定したカスタムクエリから新しい行が返されたときにトリガーされます。        |
+| New Cluster  | 新しいクラスターが作成されたときにトリガーされます。                |
+| New Table    | 新しいテーブルが作成されたときにトリガーされます。                 |
+| New Row      | 新しい行が作成されたときにトリガーされます。直近の10,000行のみを取得します。 |
+| New Row (Custom Query) | 指定したカスタムクエリから新しい行が返されたときにトリガーされます。        |
 
-### 行動 {#actions}
+### アクション {#actions}
 
 以下の表は、 TiDB Cloud Appでサポートされているアクションの一覧です。一部のアクションは追加のリソースを必要とするため、アクションを使用する前に必要なリソースを準備する必要があります。
 
 | アクション         | 説明                                                            | リソース                                    |
 | ------------- | ------------------------------------------------------------- | --------------------------------------- |
-| クラスタの検索       | 既存のTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスタを検索します。 | なし                                      |
-| クラスタを作成する     | 新しいクラスタを作成します。TiDB Cloud Starterインスタンスの作成のみをサポートしています。  | なし                                      |
-| データベースの検索     | 既存のデータベースを検索します。                                              | TiDB Cloud Starterインスタンス                |
-| データベースを作成する   | 新しいデータベースを作成します。                                              | TiDB Cloud Starterインスタンス                |
-| テーブルを探す       | 既存のテーブルを検索します。                                                | TiDB Cloud Starterインスタンスとデータベース         |
-| テーブルを作成する     | 新しいテーブルを作成します。                                                | TiDB Cloud Starterインスタンスとデータベース         |
-| 行を作成する        | 新しい行を作成します。                                                   | TiDB Cloud Starterインスタンス、データベース、およびテーブル |
-| 行を更新する        | 既存の行を更新します。                                                   | TiDB Cloud Starterインスタンス、データベース、およびテーブル |
-| 行を検索          | 参照列を使用してテーブル内の行を検索します。                                        | TiDB Cloud Starterインスタンス、データベース、およびテーブル |
-| 行の検索（カスタムクエリ） | 指定したカスタムクエリを使用して、テーブル内の行を検索します。                               | TiDB Cloud Starterインスタンス、データベース、およびテーブル |
+| Find Cluster  | 既存のTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスタを検索します。 | なし                                      |
+| Create Cluster | 新しいクラスタを作成します。TiDB Cloud Starterインスタンスの作成のみをサポートしています。  | なし                                      |
+| Find Database | 既存のデータベースを検索します。                                              | TiDB Cloud Starterインスタンス                |
+| Create Database | 新しいデータベースを作成します。                                              | TiDB Cloud Starterインスタンス                |
+| Find Table    | 既存のテーブルを検索します。                                                | TiDB Cloud Starterインスタンスとデータベース         |
+| Create Table  | 新しいテーブルを作成します。                                                | TiDB Cloud Starterインスタンスとデータベース         |
+| Create Row    | 新しい行を作成します。                                                   | TiDB Cloud Starterインスタンス、データベース、およびテーブル |
+| Update Row    | 既存の行を更新します。                                                   | TiDB Cloud Starterインスタンス、データベース、およびテーブル |
+| Find Row      | 参照列を使用してテーブル内の行を検索します。                                        | TiDB Cloud Starterインスタンス、データベース、およびテーブル |
+| Find Row (Custom Query) | 指定したカスタムクエリを使用して、テーブル内の行を検索します。                               | TiDB Cloud Starterインスタンス、データベース、およびテーブル |
 
 ## TiDB Cloudアプリテンプレート {#tidb-cloud-app-templates}
 
@@ -181,7 +181,7 @@ TiDB Cloudには、Zapierで直接使用できるテンプレートがいくつ�
 - [新しいカスタムTiDBクエリからGmail経由でメールを送信する](https://zapier.com/apps/gmail/integrations/tidb-cloud/1134903/send-emails-via-gmail-from-new-custom-tidb-queries)。
 - [新たに捕捉したウェブフックからTiDB Cloudに行を追加する](https://zapier.com/apps/tidb-cloud/integrations/webhook/1134955/add-rows-to-tidb-cloud-from-newly-caught-webhooks)。
 - [新しいSalesforce連絡先をTiDB行に保存します](https://zapier.com/apps/salesforce/integrations/tidb-cloud/1134923/store-new-salesforce-contacts-on-tidb-rows)。
-- [再開機能付きの新しいGmailメール用にTiDB行を作成し、Slackに直接通知を送信する](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
+- [履歴書付きの新しいGmailメールに対してTiDB行を作成し、Slackに直接通知を送信する](https://zapier.com/apps/gmail/integrations/slack/1135456/create-tidb-rows-for-new-gmail-emails-with-resumes-and-send-direct-slack-notifications)
 
 ## FAQ {#faq}
 
@@ -201,7 +201,7 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 
 `New Cluster`および`New Table`トリガーは、 `cluster_id`または`table_id`を`id`フィールドとして使用して重複排除を行います。この2つのトリガーについては、何もする必要はありません。
 
-**新しい行のトリガー**
+**New Row トリガー**
 
 `New Row`トリガーは、フェッチごとに10,000件の結果を制限します。そのため、新しい行が10,000件の結果に含まれていない場合、Zapierはトリガーされません。
 
@@ -215,7 +215,7 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 4. テーブルに一意キーがある場合は、その一意キーを使用してください。
 5. 表の最初の列を使用してください。
 
-**新規行（カスタムクエリ）トリガー**
+**New Row (Custom Query) トリガー**
 
 `New Row (Custom Query)`トリガーは、フェッチごとに 1,000,000件の結果を制限します。1,000,000 は大きな数値であり、システム全体を保護するためにのみ設定されています。クエリには`ORDER BY`と`LIMIT`を含めることをお勧めします。
 
