@@ -134,7 +134,7 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
     TiDB Cloud Dedicatedは、ミッションクリティカルなビジネス向けに設計されており、複数のアベイラビリティゾーンにわたる高可用性、水平スケーリング、および完全な[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)機能を提供します。
 
-    現在、 TiDB Cloud DedicatedはAWS、Azure、Google Cloudで一般提供されています。詳細については、 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)ドキュメントを参照してください。
+    現在、 TiDB Cloud DedicatedはAWS、Azure、Google Cloudで一般提供されています。詳細については、 [TiDB Cloud Dedicated](https://www.pingcap.com/tidb-cloud-dedicated)を参照してください。
 
 - {{{ .lake }}}
 

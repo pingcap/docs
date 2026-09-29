@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/use-htap-cluster']
 
 # TiDB Cloud HTAP クイックスタート {#tidb-cloud-htap-quick-start}
 
-[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) は、ハイブリッドトランザクションおよび分析処理を意味します。TiDB Cloudの HTAP クラスターは、トランザクション処理用に設計された行ベースストレージエンジン[TiKV](https://tikv.org)と、分析処理用に設計された列指向ストレージエンジン[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーションデータはまず TiKV に保存され、その後Raftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ベースストレージから列指向ストレージへのリアルタイムレプリケーションです。
+[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing) は、ハイブリッドトランザクションおよび分析処理を意味します。TiDB Cloudの HTAP アーキテクチャは、トランザクション処理用に設計された行ベースストレージエンジン[TiKV](https://tikv.org)と、分析処理用に設計された列指向ストレージエンジン[TiFlash](https://docs.pingcap.com/tidb/stable/tiflash-overview)で構成されています。アプリケーションデータはまず TiKV に保存され、その後Raftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ベースストレージから列指向ストレージへのリアルタイムレプリケーションです。
 
 このチュートリアルでは、 TiDB Cloudのハイブリッドトランザクションおよび分析処理（HTAP）機能を簡単に体験する方法をご案内します。TiFlashへのテーブルのレプリケーション方法、 TiFlashを使用したクエリの実行方法、そしてパフォーマンス向上の体験方法などについて説明します。
 

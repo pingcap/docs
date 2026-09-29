@@ -12,7 +12,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 ## 前提条件 {#prerequisites}
 
-- [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を使用してTiDB Cloudにログインし、次に[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)。
+- [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)または[SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)を使用してTiDB Cloudにログインし、次に[TiDB Cloud Dedicatedクラスタを作成](/tidb-cloud/create-tidb-cluster.md)します。
 
 - 安全な設定でクラスターにアクセスするためのパスワードを設定します。
 
@@ -26,7 +26,7 @@ TiDB Cloudでは、TLS 接続の確立はTiDB Cloud Dedicated クラスタへの
 
 2. 右上隅の**Connect**をクリックします。ダイアログが表示されます。
 
-3. 接続ダイアログで、 **[接続タイプ]**ドロップダウンリストから**Connection Type**を選択します。
+3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     IPアクセスリストを設定していない場合は、初回接続前に**Configure IP Access List**をクリックして設定してください。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
@@ -60,7 +60,7 @@ mysql --connect-timeout 15 --ssl-mode=VERIFY_IDENTITY --ssl-ca=ca.pem --tls-vers
 
 <div label="MyCLI">
 
-[mycli](https://www.mycli.net/)を指定すると、TLS関連のパラメータを使用する際にTLSが自動的に有効になります。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
+[MyCLI](https://www.mycli.net/)は、TLS関連のパラメータを使用すると、TLSを自動的に有効にします。TiDB Cloud Dedicatedクラスタに接続する場合は、 `ssl-ca`と`ssl-verify-server-cert`を設定する必要があります。
 
 ```shell
 mycli --ssl-ca=ca.pem --ssl-verify-server-cert -u root -h tidb.eqlfbdgthh8.clusters.staging.tidb-cloud.com -P 4000 -D test
@@ -116,14 +116,14 @@ class Main {
 
 - TLS を有効にしてTiDB Cloud Dedicated クラスターを検証するには、 `sslMode=VERIFY_IDENTITY`を設定します。
 - TLSプロトコルのバージョンを制限するには、 `enabledTLSProtocols=TLSv1.2`を設定します。TLS 1.3を使用する場合は、バージョンを`TLSv1.3`に設定できます。
-- カスタム トラストストアのパスに`trustCertificateKeyStoreUrl`を設定します。
+- `trustCertificateKeyStoreUrl`をカスタム トラストストアのパスに設定します。
 - トラストストアのパスワードを`trustCertificateKeyStorePassword`に設定します。
 
 </div>
 
 <div label="Python">
 
-ここでは、 [mysqlクライアント](https://pypi.org/project/mysqlclient/)の TLS 接続構成が例として使用されています。
+ここでは、 [mysqlclient](https://pypi.org/project/mysqlclient/)の TLS 接続構成が例として使用されています。
 
 ```
 host="tidb.srgnqxji5bc.clusters.staging.tidb-cloud.com", user="root", password="<your_password>", port=4000, database="test", ssl_mode="VERIFY_IDENTITY", ssl={"ca": "ca.pem"}
@@ -152,7 +152,7 @@ with connection:
 
 <div label="Go">
 
-ここでは、 [Go-MySQL-ドライバー](https://github.com/go-sql-driver/mysql)の TLS 接続構成が例として使用されています。
+ここでは、 [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)の TLS 接続構成が例として使用されています。
 
 ```
 rootCertPool := x509.NewCertPool()

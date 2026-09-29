@@ -19,7 +19,7 @@ TiDB Cloudパートナーには 2つの種類があります。
 
 ### PingCAPの再販業者になる {#become-a-reseller-of-pingcap}
 
-リセラー プログラムに興味があり、パートナーとして参加したい場合は、登録して[営業担当者に問い合わせる](https://www.pingcap.com/partners/become-a-partner/) 。
+リセラー プログラムに興味があり、パートナーとして参加したい場合は、[営業担当者に問い合わせて](https://www.pingcap.com/partners/become-a-partner/)登録してください。
 
 ### 再販業者の日常業務を管理する {#manage-daily-tasks-for-a-reseller}
 
@@ -36,12 +36,12 @@ MSP は、 TiDB Cloudを再販し、 TiDB Cloud組織管理、課金サービス
 
 - 割引とインセンティブプログラム
 - エンパワーメントトレーニング
-- 認証による可視性の向上
+- 認定による可視性の向上
 - 共同マーケティングの機会
 
 ### PingCAPのMSPになる {#become-an-msp-of-pingcap}
 
-MSPプログラムにご興味があり、パートナーとしてご参加をご希望の場合は、登録[営業担当者に問い合わせる](https://www.pingcap.com/partners/become-a-partner/)にご記入ください。以下の情報をご提供ください。
+MSPプログラムにご興味があり、パートナーとしてご参加をご希望の場合は、[営業担当者に問い合わせて](https://www.pingcap.com/partners/become-a-partner/)登録してください。以下の情報をご提供ください。
 
 - 会社名
 - 会社の連絡先メールアドレス
@@ -64,8 +64,8 @@ TiDB Cloudパートナーとしての登録が完了すると、 TiDB Cloudパ�
 MSP 管理 API を使用して、次の日常的なタスクを管理できます。
 
 - 特定の月の MSP 月額料金を照会する
-- MSPに適用されるクエリクレジット
-- MSP に適用されるクエリ割引
+- MSPに適用されるクレジットを照会する
+- MSP に適用される割引を照会する
 - 特定の MSP 顧客の月額料金を照会する
 - MSP顧客用の新しいサインアップURLを作成する
 - すべてのMSP顧客を一覧表示する

@@ -9,7 +9,7 @@ summary: TiDB Cloudに関するよくある質問（FAQ）について学びま�
 
 このドキュメントでは、TiDB Cloudに関してよく寄せられる質問を一覧にしています。
 
-## よくある質問 {#general-faqs}
+## 一般的な FAQ {#general-faqs}
 
 ### TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
@@ -69,7 +69,7 @@ TiDB Cloudについて学ぶ最良の方法は、ステップバイステップ�
 - [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
 - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
-### クラスターを削除する際に、 `XXX's Org/default project/Cluster0`何を指しているのでしょうか？ {#what-does-xxx-s-org-default-project-cluster0-refer-to-when-deleting-a-cluster}
+### クラスターを削除する際に、 `XXX's Org/default project/Cluster0`は何を指しているのでしょうか？ {#what-does-xxx-s-org-default-project-cluster0-refer-to-when-deleting-a-cluster}
 
 TiDB Cloudでは、クラスターは組織名、プロジェクト名、クラスター名の組み合わせによって一意に識別されます。意図したクラスターを削除していることを確認するには、 `XXX's Org/default project/Cluster0`のように、そのクラスターの完全修飾名を指定する必要があります。
 
@@ -178,7 +178,7 @@ TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスの場合、 Ti
 
 TiDB Cloud Dedicatedクラスターの場合、クラスターへの接続手順は以下のように簡略化されています。
 
-1. ネットワークを認証してください。
+1. ネットワークを認可してください。
 2. データベースのユーザーとログイン認証情報を設定してください。
 3. クラスタサーバー用にTLSをダウンロードして設定してください。
 4. SQLクライアントを選択し、 TiDB Cloud UIに自動生成された接続文字列を表示させた後、その文字列を使用してSQLクライアント経由でクラスターに接続します。

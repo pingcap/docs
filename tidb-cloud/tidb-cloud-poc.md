@@ -89,7 +89,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
 
 新しく作成されたクラスターの場合は、次の構成に注意してください。
 
-- デフォルトのタイムゾーン（ダッシュボードの**Create Time**列）はUTCです。以下の手順[ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)で、ローカルタイムゾーンに変更できます。
+- デフォルトのタイムゾーン（ダッシュボードの**Create Time**列）はUTCです。[ローカルタイムゾーンを設定する](/tidb-cloud/manage-user-access.md#set-the-time-zone-for-your-organization)の手順に従って、ローカルタイムゾーンに変更できます。
 - 新しいクラスタのデフォルトのバックアップ設定は、毎日データベース全体のバックアップです。希望するバックアップ時間を指定するか、手動でデータをバックアップすることもできます。デフォルトのバックアップ時間および詳細については、 [TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を参照してください。
 
 ## ステップ4. スキーマとSQLを適応させる {#step-4-adapt-your-schemas-and-sql}
@@ -156,7 +156,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
     - ネットワークレイテンシーを監視し、最適化します。
     - SQL パフォーマンスを調査して調整します。
-    - モニターと[ホットスポットの問題を解決する](https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#troubleshoot-hotspot-issues) 。
+    - [ホットスポットの問題](https://docs.pingcap.com/tidb/dev/troubleshoot-hot-spot-issues#troubleshoot-hotspot-issues)を監視して解決します。
 
 - ストレージサイズとCPU使用率を評価し、それに応じてTiDBクラスターのスケールアウトまたはスケールインを実施してください。スケーリングの詳細については、セクション[FAQ](#faq)を参照してください。
 
@@ -227,8 +227,8 @@ PoC プロセスが完了した後も未使用のクレジットが残ってい�
 
 ### 4. PoC を完了するのに 2 週間以上かかることはありますか? {#4-can-i-take-more-than-2-weeks-to-complete-a-poc}
 
-PoC 試用期間を延長したい場合、またはクレジットが不足している場合は、 [PingCAPに連絡する](https://www.pingcap.com/contact-us/)お問い合わせください。
+PoC 試用期間を延長したい場合、またはクレジットが不足している場合は、 [PingCAPにお問い合わせ](https://www.pingcap.com/contact-us/)ください。
 
 ### 5. 技術的な問題で行き詰まっています。PoCのサポートを受けるにはどうすればいいですか？ {#5-i-m-stuck-with-a-technical-problem-how-do-i-get-help-for-my-poc}
 
-[TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)でも助けを求めることができます。
+いつでも[TiDB Cloudサポートに問い合わせて](/tidb-cloud/tidb-cloud-support.md)サポートを受けることができます。
