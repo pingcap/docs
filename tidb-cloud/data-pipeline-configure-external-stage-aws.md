@@ -147,7 +147,7 @@ Use this option if you cannot use CloudFormation, or if your organization requir
 
 #### 2.3 (Optional) Enable event-driven ingestion with SQS
 
-Skip this section if periodic scanning is acceptable for your workload. For details about when to use SQS, see the note in [Prerequisites](#prerequisites).
+Skip this section if periodic scanning is acceptable for your workload. For details about when to use SQS, see the Tip in [Step 2. Configure bucket access](#step-2-configure-bucket-access).
 
 ##### 2.3.1 Create the SQS queue and configure the queue policy
 

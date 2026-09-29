@@ -100,9 +100,9 @@ tiup dumpling \
 
 Parameter descriptions:
 
-- `--filetype csv` with `--csv-output-dialect snowflake`: export data in CSV format, equivalent to the **CSV** data format with the **Snowflake** dialect.
-- `--escape-backslash=false`: disable backslash escaping, equivalent to clearing **Escape backslash**.
-- Compression is disabled by default, which matches the **None** compression option.
+- `--filetype csv` with `--csv-output-dialect snowflake`: export data in CSV format the **Snowflake** dialect.
+- `--escape-backslash=false`: disable backslash escaping.
+- Compression is disabled by default.
 - `-o` and `--s3.region`: write the exported files to your S3 bucket. The `access-key` and `secret-access-key` parameters in the `-o` URI provide the credentials for the bucket.
 
 > **Note:**

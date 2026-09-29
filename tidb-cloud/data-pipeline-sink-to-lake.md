@@ -156,7 +156,7 @@ The destination type and the sync mode cannot be changed after the pipeline is c
 - **Pause**: stops data replication and marks the pipeline as `Paused`. No data is lost, and the replication progress is preserved. A pipeline cannot be paused while it is being created or while the full snapshot is being exported.
 - **Resume**: continues replication from where it was paused, including ingestion into TiDB Cloud Lake.
 
-To pause and resume a data pipeline, go to the **Data Pipeline** of your target <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent>instance, click **...** in the row of the pipeline, and then click **Pause** or **Resume**.
+To pause and resume a data pipeline, go to the **Data Pipeline** of your target <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> instance, click **...** in the row of the pipeline, and then click **Pause** or **Resume**.
 
 ### Delete a data pipeline
 

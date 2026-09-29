@@ -61,7 +61,7 @@ Collect the following values required for the additional trust relationships, an
     ```
 
     Record `tidbCloudAccountId` and `tidbCloudAccountExternalId` from the response.
-- **TiDB Cloud Lake**: in the TiDB Cloud Lake staging console, navigate to **Data > Data Sources > Create**. In the **Basic Info** section, select **Service: TiDB**, and then under **Trust Cloud Platform roles**, record the following values:
+- **TiDB Cloud Lake**: in the [TiDB Cloud Lake console](https://lake.tidbcloud.com/), navigate to **Data > Data Sources > Create**. In the **Basic Info** section, select **Service: TiDB**, and then under **Trust Cloud Platform roles**, record the following values:
     - Lake Setup & Validation Role ARN
     - Lake Data Loading Role ARN
     - Lake External ID
@@ -230,7 +230,7 @@ After the export task completes, open the task details and record the **Snapshot
 
 ## Step 3. Create a changefeed for incremental data
 
-Since the Essential console does not support creating a cloud-storage sink, you must use the TiDB Cloud API.
+Currently, TiDB Cloud Essential does not support creating a cloud-storage sink via TiDB Cloud console, so you need to use the TiDB Cloud API.
 
 Call the changefeed creation API with the following required fields:
 
