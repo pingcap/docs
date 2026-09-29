@@ -31,7 +31,7 @@ summary: 2023年 11月 14日のTiDB Cloud Dedicated Scale 機能メンテナン�
 ### TiDB Cloud API の影響を受ける機能 {#affected-features-of-tidb-cloud-api}
 
 - クラスタ管理
-    - [クラスターの更新](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
+    - [UpdateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
 
 ## 完了と再開 {#completion-and-resumption}
 
@@ -39,4 +39,4 @@ summary: 2023年 11月 14日のTiDB Cloud Dedicated Scale 機能メンテナン�
 
 ## サポートを受ける {#get-support}
 
-ご質問やサポートが必要な場合は、 [サポートチーム](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。お客様のご懸念にお答えし、必要なサポートを提供させていただきます。
+ご質問やサポートが必要な場合は、 [サポートチーム](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。お客様のご懸念にお答えし、必要なサポートを提供させていただきます。

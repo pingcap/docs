@@ -5,7 +5,7 @@ summary: 2024年4月16日に実施されるTiDB Cloud監視機能のメンテナ
 
 # [2024-04-16] TiDB Cloud監視機能メンテナンスのお知らせ {#2024-04-16-tidb-cloud-monitoring-features-maintenance-notification}
 
-この通知では、2024年4月16日に実施さTiDB Cloud[監視機能](/tidb-cloud/monitor-tidb-cluster.md)メンテナンスについて知っておくべき詳細を説明します。
+この通知では、2024年4月16日に実施されるTiDB Cloudの[監視機能](/tidb-cloud/monitor-tidb-cluster.md)のメンテナンスについて知っておくべき詳細を説明します。
 
 ## メンテナンスウィンドウ {#maintenance-window}
 

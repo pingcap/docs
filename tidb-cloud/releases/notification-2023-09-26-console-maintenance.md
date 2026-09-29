@@ -5,7 +5,7 @@ summary: 2023年 9月 26日のTiDB Cloud Console メンテナンスの詳細 (�
 
 # [2023-09-26] TiDB Cloudコンソールメンテナンスのお知らせ {#2023-09-26-tidb-cloud-console-maintenance-notification}
 
-この通知では、2023年 9月 26日の[TiDB Cloudコンソール](https://tidbcloud.com/)目のメンテナンスについて知っておく必要のある詳細について説明します。
+この通知では、2023年 9月 26日の[TiDB Cloudコンソール](https://tidbcloud.com/)のメンテナンスについて知っておく必要のある詳細について説明します。
 
 ## メンテナンスウィンドウ {#maintenance-window}
 
@@ -78,4 +78,4 @@ TiDB Cloud Starterの管理インフラストラクチャをアップグレー�
 
 ## サポートを受ける {#get-support}
 
-ご質問やサポートが必要な場合は、 [サポートチーム](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。お客様のご懸念にお答えし、必要なサポートを提供させていただきます。
+ご質問やサポートが必要な場合は、 [サポートチーム](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。お客様のご懸念にお答えし、必要なサポートを提供させていただきます。
