@@ -6,11 +6,9 @@ aliases: ['/ai/mount-filesystem']
 
 # Mount a File System
 
-In TiDB Cloud Filesystem, you can work with files either by [using `ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md) directly or by mounting the file system as a local directory.
+In TiDB Cloud Filesystem, you can mount a file system as a local directory when an editor, application, agent, or other tool needs local file paths. The mount lets these tools read and write remote files using local file operations.
 
-Mount your file system when an editor, application, agent, or other tool needs to access its files through local file paths. After mounting, the file system appears as a local directory, so the tool can read and write its files using normal filesystem operations.
-
-If you only need to perform file operations through the CLI, such as reading, copying, organizing, or searching files, use `ti fs` commands directly instead of mounting the file system.
+For CLI-only access, use [`ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md) to read, copy, organize, and search files without mounting.
 
 > **Note:**
 >
@@ -20,7 +18,7 @@ If you only need to perform file operations through the CLI, such as reading, co
 
 The available mount method depends on your environment:
 
-| Environment | Mount method | Detailed Guide |
+| Environment | Mount method | Guide |
 | --- | --- | --- |
 | Linux | FUSE | [Mount a File System on Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md) |
 | macOS | WebDAV for general file access, or FUSE with macFUSE for FUSE-specific features | [Mount a File System on macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md) |
@@ -32,7 +30,7 @@ On macOS, WebDAV is sufficient for general file access and does not require addi
 
 ## Use a token without configuring a profile
 
-If another user or system administrator gives you a file system token, you can use that token from the current machine without configuring a `ti` profile or using the creator's API keys:
+With a file system token and region, you can access files without configuring a `ti` profile or supplying TiDB Cloud API keys:
 
 ```bash
 export TI_FS_TOKEN="<filesystem-token>"
@@ -51,7 +49,7 @@ By default, a mount exposes the file system root `/`. Use `--remote-path` to exp
 
 ### Create a read-only mount
 
-Use `--read-only` to prevent writes through a particular mount. This option does not change the permissions of the file system token. To enforce read-only access at the service level, use a scoped token with read-only permissions.
+Use `--driver fuse --read-only` to prevent writes through a FUSE mount. WebDAV does not support this option. To enforce read-only access across mounts and CLI commands, use a scoped token with only `read` and `list` permissions. The mount option does not change token permissions.
 
 ### Mount layers and checkpoints
 
@@ -59,17 +57,21 @@ Layers and checkpoints require FUSE. Checkpoint mounts are always read-only.
 
 For layer and checkpoint workflows, see [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md).
 
+## Verify a mount before using it
+
+A successful mount command or directory listing does not confirm that file reads and writes work. Read a known small file uploaded through `ti fs copy-file`. For a writable mount, write a new test file, close it, and unmount successfully. Then read the file through `ti fs read-file` to confirm that the write reached the service. For complete examples, follow the [Linux verification steps](/tidb-cloud-filesystem/filesystem-mount-linux.md#mount-and-verify-the-file-system) or the [macOS WebDAV verification steps](/tidb-cloud-filesystem/filesystem-mount-macos.md#mount-with-webdav).
+
+If a small-file check has not returned after 30 seconds, interrupt it and follow [Mount succeeds but file access hangs](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs). Do not start applications on the mount until verification passes.
+
 ## Finish safely
 
 ### Unmount when you are finished
 
-Stop applications from writing to the mounted directory, close open files, and follow your platform guide to run `ti fs unmount-file-system`. A successful FUSE unmount flushes pending writes before stopping the mount. Unmounting removes the local mount but does not delete the file system or its data.
+Stop applications from writing to the mounted directory, close open files, and follow your platform guide to run `ti fs unmount-file-system`. Normal FUSE unmount drains pending writes before stopping the mount. Before removing the machine or its local cache, verify required files through direct CLI reads. Unmounting removes the local mount but does not delete the file system or its data.
 
 ### FUSE write behavior
 
-FUSE mounts can temporarily have writes that have not yet reached the remote file system.
-
-A normal successful unmount flushes pending writes, so you do not need to run `drain-file-system` before unmounting.
+FUSE mounts can buffer writes locally before sending them to the service. Normal unmount includes a drain, so you do not need to run `drain-file-system` first. If the mount log reports `force_quit` or pending writes after unmount, follow [Unmount returns success but the mount process exits abnormally](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally).
 
 Use `drain-file-system` only when you need pending writes to reach the file system while keeping the mount running, such as before creating a checkpoint or making updated files available to another environment.
 

@@ -1,17 +1,17 @@
 ---
 title: ti fs mount-file-system
-summary: Mount a file system.
+summary: Learn how to configure local mounts of TiDB Cloud file systems, including FUSE, WebDAV, read-only access, layers, and checkpoints.
 ---
 
 # ti fs mount-file-system
 
-Mounts a file system through automatic, FUSE, or WebDAV mode. The command alias is `ti fs mount`.
+Mounts a file system using FUSE or WebDAV. By default, the CLI selects the driver automatically. The command alias is `ti fs mount`.
 
 The command starts the mount process in the background, waits for the mount to become ready, and then prints the result. If startup fails, the error includes a log path for diagnosis. Use `ti fs unmount-file-system` to end the mount.
 
 > **Important:**
 >
-> Layer and checkpoint mounts require FUSE. On macOS, where automatic selection normally uses WebDAV, install macFUSE and specify `--driver fuse`. Checkpoint mounts are always read-only.
+> Layer and checkpoint mounts require FUSE. On macOS, install macFUSE and specify `--driver fuse` to use these features. Checkpoint mounts are always read-only.
 
 > **Note:**
 >
@@ -63,8 +63,8 @@ ti fs mount-file-system
 - `--read-cache-max-file-mb <int64>`: Maximum file size admitted to the FUSE read cache in MiB. 0 uses the default. \[default: 4]
 - `--read-cache-size-mb <int64>`: FUSE read cache size in MiB. 0 uses the default. \[default: 128]
 - `--read-cache-ttl <duration>`: FUSE read cache time to live. \[default: `30s`]
-- `--read-only`: Read-only mount mode.
-- `--ready-timeout <duration>`: Time to wait for a background mount to become ready. \[default: `30s`]
+- `--read-only`: Read-only mount mode. Requires FUSE; WebDAV rejects this option. Use `--driver fuse` explicitly, or use a scoped token to enforce read-only access at the service level.
+- `--ready-timeout <duration>`: Time to wait for a background mount to become ready. This is a startup timeout, not a timeout for subsequent file reads or writes. [Verify file I/O after mounting](/tidb-cloud-filesystem/filesystem-mount.md#verify-a-mount-before-using-it). \[default: `30s`]
 - `--remote-path <string>`: The TiDB Cloud file system root path to mount. \[default: /]
 - `--unpack-archive-path <string>`: Restore the pack archive before mounting.
 - `--version`: Display version information.

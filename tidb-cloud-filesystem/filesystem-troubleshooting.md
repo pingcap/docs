@@ -45,7 +45,7 @@ The new plaintext appears once in the response. Store it securely or add `--stor
 
 ## File system token is rejected
 
-A data-plane HTTP 401 cannot distinguish a token that was disabled, expired, refreshed on another machine, or revoked. Inspect remote metadata with TiDB Cloud API keys:
+An HTTP 401 or `invalid API key` error from a file operation can indicate that the file system token is disabled, expired, refreshed on another machine, or revoked. In this context, `API key` can refer to the file system token; it does not necessarily indicate a problem with your TiDB Cloud API keys. Inspect token metadata using TiDB Cloud API keys:
 
 ```bash
 ti fs list-file-system-tokens \
@@ -58,12 +58,13 @@ Token names are not unique. Use the immutable `token_id` from this output for en
 
 After enable, disable, delete, or refresh, allow approximately 10 seconds for authentication caches to converge. If refresh reports `fs.token_refresh_ambiguous`, the server might have rotated the token even though the response was lost. The outcome is unknown: the old token might still work if the refresh did not commit, or it might already be invalid. The replacement token from a committed refresh cannot be recovered because its response was lost. Do not retry the refresh with the old token. Instead, use TiDB Cloud credentials to generate an independent owner token.
 
-If token mutation reports `fs.token_mount_active`, use the exact mount path in the error:
+If token mutation reports `fs.token_mount_active`, stop applications using the mount, close open files, and unmount using the exact path in the error:
 
 ```bash
-ti fs drain-file-system --mount-path /path/to/workspace
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
+
+The CLI error message suggests running `drain-file-system` first, but a graceful FUSE unmount already drains pending writes, so a separate drain is unnecessary. Verify the mount log for `reason=force_quit` before treating a `0` exit status as proof of drain; see [Unmount returns success but the mount process exits abnormally](#unmount-returns-success-but-the-mount-process-exits-abnormally). WebDAV does not support `drain-file-system`; use graceful unmount for WebDAV.
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
 
@@ -82,11 +83,11 @@ Or select the file system for subsequent commands in the current shell:
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-The CLI intentionally does not infer a file system from local credential count, including when only one credential exists. Supply its ID or a file system token whose embedded ID can be derived.
+Select a file system explicitly, even if only one token is stored locally. Supply its ID or a token that identifies it.
 
 ## File system region is unsupported
 
-The configured TiDB Cloud region might not be one of the file system endpoints built into the installed `ti` release. Compare it with [supported file system regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions). Change placement with a valid profile or command-scoped `--region`; do not configure a raw server URL.
+Your installed `ti` release might not support the configured region for file system access. Check the [supported file system regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions). Select a supported region in your profile or with `--region` for the command; do not configure a raw server URL.
 
 ## File system runtime is missing or incompatible
 
@@ -117,13 +118,13 @@ Do not delete an unrelated file system to make automation pass. If the error lin
 
 ## Mount does not become ready
 
-Background mount success prints the CLI result without runtime startup messages. If startup fails or times out, inspect the runtime log path in the error. Confirm:
+When a background mount starts successfully, the CLI prints the result without runtime startup messages. If startup fails or times out, inspect the log at the path reported in the error. Confirm that:
 
-- the mount path exists and is writable;
-- no existing mount covers the path;
-- the file system token and region are valid;
-- FUSE prerequisites or the WebDAV helper are installed;
-- the remote region is reachable.
+- The mount path exists and is writable.
+- No existing mount uses the path.
+- The file system token and region are valid.
+- The FUSE prerequisites or WebDAV helper are installed.
+- The remote region is reachable.
 
 On macOS without macFUSE, `ti` uses WebDAV. If macFUSE is installed, automatic driver selection prefers FUSE. To explicitly request FUSE:
 
@@ -134,6 +135,25 @@ ti fs mount-file-system \
 ```
 
 Linux needs FUSE support, the `fuse3` package, and access to `/dev/fuse`. File system and Vault mounts are not supported on Windows; use `ti fs` data-plane commands or non-mount Vault commands instead.
+
+## Mount succeeds but file access hangs
+
+A `mounted` result confirms that mount startup completed. It does not prove that subsequent file reads or writes succeed. A directory listing can also succeed while reading a file hangs.
+
+For a known small test file, use the following procedure:
+
+1. If the mounted read or write has not returned after 30 seconds, interrupt the command with Ctrl+C. If it remains blocked, open another terminal outside the mount for diagnosis. Do not start additional workloads on the mount.
+2. Read the same file through `ti fs read-file --path "<remote-file-path>"`, using the same token and region. If the mount uses `--remote-path`, include that prefix in the remote file path. If this read also fails, resolve the reported authentication, region, or service error first. If it succeeds, focus diagnosis on the local mount path.
+3. Record `ti --version`, the OS version, the selected driver, elapsed time, and the mount diagnostic log when available. Do not include tokens or file contents. On macOS, automatic selection can choose WebDAV or FUSE; specify `--driver webdav` or `--driver fuse` when reproducing the problem.
+4. Stop applications using the mount, close open files, and change the working directory of any shell inside the mount to a path outside it. Then try normal unmount:
+
+    ```bash
+    ti fs unmount-file-system --mount-path /path/to/workspace
+    ```
+
+5. After successful unmount, verify any required writes with direct CLI reads. Continue with direct `ti fs` commands while investigating the mount, and verify file I/O before using a replacement mount.
+
+Do not use `drain-file-system` for WebDAV. If unmount fails or remote data is missing, keep the machine and local mount data available for recovery. Do not delete the cache or force unmount as a routine retry: pending writes might still exist only locally. The 30-second cutoff above is a diagnostic limit for a small-file smoke test, not a service latency guarantee.
 
 ## Ubuntu 26.04 rejects a FUSE mount under `/workspace`
 
@@ -179,7 +199,27 @@ Close editors, shells whose working directory is inside the mount, and other ope
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-Unmount performs the graceful FUSE drain automatically. Running `drain-file-system` separately does not close file descriptors or resolve a busy mount; use it only when you need to flush pending work while leaving the mount online. Drain is not supported for WebDAV.
+A graceful FUSE unmount flushes pending writes automatically, but only when the mount process exits normally. Check the mount log for `reason=force_quit` before relying on a `0` exit status from `unmount-file-system`; see [Unmount returns success but the mount process exits abnormally](#unmount-returns-success-but-the-mount-process-exits-abnormally). Running `drain-file-system` separately does not close open files or resolve a busy mount. Use it to flush pending writes while keeping the mount running. WebDAV does not support drain.
+
+## Unmount returns success but the mount process exits abnormally
+
+In `ti v0.2.6`, a layer or checkpoint mount can return `unmounted` after approximately 30 seconds even when its background process reports `late pending drain` followed by `reason=force_quit` and exit code `1`. This behavior has been observed after reading a small file from a layer and after writing, fsyncing, and draining a layer mount.
+
+This issue is also present in bundled runtime `60b63d6`, used with `ti` v0.2.7. The CLI and bundled runtime have separate versions, so the CLI version alone does not determine whether a mount is affected. For the status of the fix, see [the bundled mount runtime fix (Drive9 #1002)](https://github.com/mem9-ai/drive9/pull/1002).
+
+Before relying on a layer or checkpoint unmount, inspect its background mount log. In `ti` v0.2.7, a successful `mount-file-system` command does not display the log path. By default, you can find the logs with:
+
+```bash
+find "$HOME/.ti/drive9-home" -type f -path '*/drive9/mount-logs/mount-*.log'
+```
+
+On Linux, if `XDG_CACHE_HOME` is set, check `$XDG_CACHE_HOME/drive9/mount-logs` instead. Match the log to your mount path and the time of the mount, then look for `late pending drain`, `reason=force_quit`, or a non-zero background process exit code.
+
+If any of these appear:
+
+1. Treat the result as an abnormal shutdown and keep the machine and local cache available.
+2. Verify required layer files with direct CLI reads using `--layer-id`. For committed changes, read the base file system without selecting a layer. To verify a checkpoint, mount it at a new local path with the same `--layer-ref` and `--checkpoint-id` and read its required files again. You can also remount a writable layer at a new path to verify its contents independently of the previous mount.
+3. Do not commit or discard the layer, or delete local state, until verification completes. Include the CLI version and redacted mount log when reporting the problem.
 
 ## Report a problem
 

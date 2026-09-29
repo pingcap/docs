@@ -1,23 +1,22 @@
 ---
 title: Manage Vault Secrets for a File System
-summary: Learn how to store and rotate secrets, delegate temporary access, inject secrets into processes, audit and revoke access, and optionally mount secrets as read-only files.
+summary: Learn how to store and rotate Vault secrets, grant temporary access to specific fields, use them in processes, and revoke access.
 aliases: ['/ai/manage-filesystem-vault-secrets']
 ---
 
 # Manage Vault Secrets for a File System
 
-In TiDB Cloud Filesystem, you can use the file system Vault when an application, automation, or agent needs credentials or other sensitive values, but you do not want to store those values in regular file system files or give the workflow broad access to the file system.
+In TiDB Cloud Filesystem, you can use the file system Vault to store credentials and other sensitive values instead of regular file system files. You can grant an application, automation, or agent temporary access to only the fields it needs, without giving it broad access to the file system.
 
-With Vault, a trusted owner can store a secret once and grant access to only the secret or field that a user, application, or agent needs, for a limited time. The delegated workflow can then read the permitted value, inject it into a process, or access it through a read-only mount. The owner can audit the access and revoke the grant when it is no longer needed.
-
-This guide shows you how to store and rotate secrets, delegate limited access, use delegated secrets, audit and revoke access, and optionally mount secrets as files.
+The delegated workflow can read those fields, inject them into a process, or access them through a read-only mount. The owner can audit and revoke access.
 
 ## Prerequisites
 
 Before you begin:
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
-- Have access to an existing file system in TiDB Cloud Filesystem.
+- Have access to a test file system. Run `ti fs-vault list-secrets` to check whether a `db-prod` secret already exists. If it does, choose a different name and replace `db-prod` consistently in the names, paths, and grant scopes below, or use another test file system.
+- Use Bash or Zsh. Keep the owner's shell open so that the cleanup steps can use the temporary directory created below.
 - Make the file system and its owner token available to `ti`. See [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
 An owner token is used to create and replace secrets, create and revoke grants, and view audit events. A delegated Vault token provides only the secret access allowed by its grant.
@@ -28,16 +27,35 @@ Treat both owner tokens and delegated Vault tokens as credentials. Do not expose
 
 A Vault secret can contain multiple named fields. For example, a database secret might contain a connection URL and a password.
 
+Write each field value to its own local file first, then pass those files to `create-secret` with the `@` prefix. Read each value into a variable with `read -r -s` and write it with `printf '%s'` so that the value does not enter your shell history and does not gain a trailing newline. `create-secret` and `replace-secret` accept a value that ends in a newline and report success, but [`run-with-secret`](#inject-a-secret-into-a-process) later refuses to inject it with `refusing to inject (EACCES)`. Editors and `echo` add a trailing newline; `printf '%s'` does not.
+
+```shell
+umask 077
+secret_dir="$(mktemp -d)"
+
+printf 'DB_URL: ' >&2
+read -r -s DB_URL_VALUE
+printf '\n' >&2
+printf '%s' "$DB_URL_VALUE" > "$secret_dir/DB_URL"
+
+printf 'PASSWORD: ' >&2
+read -r -s PASSWORD_VALUE
+printf '\n' >&2
+printf '%s' "$PASSWORD_VALUE" > "$secret_dir/PASSWORD"
+
+unset DB_URL_VALUE PASSWORD_VALUE
+```
+
 Create a secret named `db-prod`:
 
 ```shell
 ti fs-vault create-secret \
   --secret-name db-prod \
-  --field DB_URL=mysql://example \
-  --field PASSWORD=@./password.txt
+  --field "DB_URL=@$secret_dir/DB_URL" \
+  --field "PASSWORD=@$secret_dir/PASSWORD"
 ```
 
-In `PASSWORD=@./password.txt`, the `@` prefix tells `ti` to read the field value from the local file instead of treating the file path as the value.
+The `@` prefix tells `ti` to read the field value from the local file. Prefer it for every field, because a value written directly as `--field DB_URL=mysql://example` appears in shell history and in process listings.
 
 Some Vault commands identify a secret by name, such as `db-prod`. Commands that operate on a specific secret path, such as `replace-secret` and `run-with-secret`, use its full Vault path instead. For example, the Vault path of `db-prod` is `/n/vault/db-prod`.
 
@@ -60,23 +78,21 @@ When an application needs the secret, prefer [injecting it into the process](#in
 
 `replace-secret` replaces all fields in the secret, not just the field whose value changed.
 
-To rotate `DB_URL`, create a local directory containing the new `DB_URL` value and the current `PASSWORD` value that you want to keep:
-
-```text
-./secret-fields/
-├── DB_URL
-└── PASSWORD
-```
-
-Then replace the secret:
+To rotate `DB_URL`, overwrite its file in the temporary directory using the same `read -r -s` and `printf '%s'` pattern as [Create a secret](#create-a-secret). Keep the `PASSWORD` file so that the replacement retains that field:
 
 ```shell
+printf 'New DB_URL: ' >&2
+read -r -s DB_URL_VALUE
+printf '\n' >&2
+printf '%s' "$DB_URL_VALUE" > "$secret_dir/DB_URL"
+unset DB_URL_VALUE
+
 ti fs-vault replace-secret \
   --secret-path /n/vault/db-prod \
-  --from-directory ./secret-fields
+  --from-directory "$secret_dir"
 ```
 
-Each file in the directory becomes a field in the replacement secret. Any existing field that is not included in the directory is not retained.
+Each file in the directory becomes a field in the replacement secret. Any existing field that is not included in the directory is not retained. `replace-secret` accepts a value that ends in a newline and reports success; the failure appears later when `run-with-secret` refuses to inject the value, so keep using `printf '%s'` here rather than `echo` or an editor.
 
 Keep these local files out of source control and remove them when they are no longer needed. For details, see the [`replace-secret` reference](/ai/ti/reference/ti-fs-vault-replace-secret.md).
 
@@ -96,7 +112,7 @@ ti fs-vault create-grant \
 
 The command returns a delegated Vault token and a grant ID. Give the delegated token only to the workflow that needs the secret, and retain the grant ID so that you can revoke the grant before it expires if necessary.
 
-In the environment that uses the delegated secret, make the token available as `TI_VAULT_TOKEN`. Also set `TI_FS_FILE_SYSTEM_ID` to the file system ID and `TI_REGION_CODE` to its region code. The delegated Vault token alone does not identify the file system. Avoid putting the token directly in a command-line argument because command arguments can appear in shell history or process listings.
+In a separate environment that uses the delegated secret, make the token available as `TI_VAULT_TOKEN`. Also set `TI_FS_FILE_SYSTEM_ID` to the file system ID and `TI_REGION_CODE` to its region code. The delegated Vault token alone does not identify the file system. Avoid putting the token directly in a command-line argument because command arguments can appear in shell history or process listings.
 
 ## Inject a secret into a process
 
@@ -114,34 +130,11 @@ The Vault credential used by `ti` is not passed to the child process. This lets 
 
 Field names used with `run-with-secret` must match `[A-Z_][A-Z0-9_]*`. Use uppercase environment-variable-style field names for secrets that you plan to inject into a process.
 
-## Audit and revoke access
-
-To review recent access to `db-prod` by `deploy-agent`, run:
-
-```shell
-ti fs-vault list-audit-events \
-  --secret-name db-prod \
-  --agent-id deploy-agent \
-  --since 24h \
-  --limit 20
-```
-
-When the delegated access is no longer needed, revoke the grant using the grant ID returned by `create-grant`:
-
-```shell
-ti fs-vault delete-grant \
-  --grant-id "<grant-id>" \
-  --revoked-by operator \
-  --reason task-complete
-```
-
-Revoking a grant prevents the delegated token from authorizing new operations. It cannot remove a secret value that a process has already read.
-
 ## Mount secrets as read-only files
 
 If an application expects credentials as files instead of environment variables, you can optionally expose permitted Vault fields through a read-only FUSE mount on Linux or macOS.
 
-For delegated access, first make the delegated Vault token available as `TI_VAULT_TOKEN`. Then create a local mount directory and mount the Vault:
+Use this option before revoking the grant and while its token is still valid. `mount-vault` always requires a delegated Vault token, whether you hold the owner token or not. If you hold only the owner token, create a grant for yourself first, as described in [Delegate limited access](#delegate-limited-access). Make the delegated token available as `TI_VAULT_TOKEN`, with the file system ID and region set as described above. Then create a local mount directory and mount the Vault:
 
 ```shell
 mkdir -p /path/to/vault
@@ -166,6 +159,51 @@ ti fs-vault unmount-vault \
 ```
 
 Vault mounts require FUSE and are not available on Windows. Direct secret reads and `run-with-secret` do not require a mount.
+
+## Audit and revoke access
+
+Back in the owner's environment, review recent access to `db-prod` by `deploy-agent`:
+
+```shell
+ti fs-vault list-audit-events \
+  --secret-name db-prod \
+  --agent-id deploy-agent \
+  --since 24h \
+  --limit 20
+```
+
+When the delegated access is no longer needed, revoke the grant using the grant ID returned by `create-grant`:
+
+```shell
+ti fs-vault delete-grant \
+  --grant-id "<grant-id>" \
+  --revoked-by operator \
+  --reason task-complete
+```
+
+Revoking a grant prevents the delegated token from authorizing new operations. It cannot remove a secret value that a process has already read.
+
+Verify the revocation from the delegated environment before treating the grant as retired. In the shell where `TI_VAULT_TOKEN` is set to the delegated token, allow approximately 10 seconds for authentication caches to update, then retry a permitted operation with the same token:
+
+```shell
+ti fs-vault run-with-secret \
+  --secret-path /n/vault/db-prod \
+  -- printenv DB_URL
+```
+
+Expect an authentication or authorization error (for example, `unauthorized`, `permission denied`, or `grant revoked`). If the command still returns the secret value, verify that you passed the correct grant ID to `delete-grant`, wait longer than the cache interval, and retry. A network error, timeout, or missing-file-system error does not confirm revocation; only an explicit auth failure does.
+
+If the grant granted access through a Vault mount, first unmount the delegated Vault mount and remount with the same token. A live Vault mount holds its authorization on the delegated side and does not re-check the grant on every read.
+
+## Clean up the example
+
+After unmounting and revoking the example grant, delete the test secret and the temporary files:
+
+```shell
+ti fs-vault delete-secret --secret-name db-prod
+rm "$secret_dir/DB_URL" "$secret_dir/PASSWORD"
+rmdir "$secret_dir"
+```
 
 ## Security recommendations
 

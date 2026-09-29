@@ -27,7 +27,7 @@ ti fs enable-file-system-token
 
 - `--file-system-id <string>`: Specify the file system that owns the token. Required when using TiDB Cloud API credentials; optional when an owner token supplies the ID.
 - `--token-id <string>`: Specify the immutable token ID returned by the list command. This option is required.
-- `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system. If no file system token is available, the command uses the configured TiDB Cloud API keys.
+- `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command requires TiDB Cloud API credentials and `--file-system-id`. It does not automatically use a locally stored owner token.
 - `--dry-run`: Validate the request without changing remote token state.
 - `--help`: Display help information.
 - `--version`: Display version information.

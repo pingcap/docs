@@ -5,11 +5,9 @@ summary: Learn how to access an existing file system from your current machine, 
 
 # Access an Existing File System
 
-If you already have access to a file system in TiDB Cloud Filesystem, you can connect to it from your current machine or another environment.
+In TiDB Cloud Filesystem, you can access an existing file system using either a locally stored token or a token provided for another machine or environment:
 
-How you connect depends on where you are working:
-
-- If you created or imported a file system on the current machine, TiDB Cloud CLI (`ti`) can use the token already stored locally.
+- If you created the file system or imported its token on the current machine, TiDB Cloud CLI (`ti`) can use the stored token.
 - If you are working from another machine, CI job, or agent environment, provide a file system token and region for that environment.
 
 ## Prerequisites
@@ -20,13 +18,34 @@ Before you begin, [install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-qui
 
 If you created the file system by using `ti` on the current machine, or previously imported its token, the CLI already has a token stored locally.
 
-Select the file system for the current shell:
+The environment variables `TI_FS_TOKEN` and `TI_REGION_CODE` override the locally stored token and region.
+
+Clear these overrides, then select the file system whose token is stored locally:
+
+<SimpleTab groupId="operating-systems">
+
+<div label="macOS or Linux" value="macos-or-linux">
 
 ```shell
+unset TI_FS_TOKEN TI_REGION_CODE
 export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 ```
 
-You can then run file system commands without providing the file system ID or token each time:
+</div>
+
+<div label="Windows PowerShell" value="windows-powershell">
+
+```powershell
+Remove-Item Env:TI_FS_TOKEN -ErrorAction SilentlyContinue
+Remove-Item Env:TI_REGION_CODE -ErrorAction SilentlyContinue
+$env:TI_FS_FILE_SYSTEM_ID = "<file-system-id>"
+```
+
+</div>
+
+</SimpleTab>
+
+List the file system root. If the stored token is scoped to a directory, replace `/` with that directory's path:
 
 ```shell
 ti fs list-files --path /
@@ -37,21 +56,43 @@ Setting `TI_FS_FILE_SYSTEM_ID` selects the file system for subsequent commands i
 Alternatively, you can select the file system for an individual command:
 
 ```shell
-ti fs list-files \
-  --file-system-id "<file-system-id>" \
-  --path /
+ti fs list-files --file-system-id "<file-system-id>" --path /
 ```
 
 ## Access a file system from another environment
 
-If you are accessing the file system from another machine, CI job, agent sandbox, or other environment without its locally stored credential, provide a file system token and the file system region:
+In another environment, provide the token and region. For CI or agents, inject `TI_FS_TOKEN` from a secret manager and set `TI_REGION_CODE` in each process. Skip the input prompts and clear `TI_FS_FILE_SYSTEM_ID` to remove any previous file system selection.
+
+In an interactive terminal, enter the token at the prompt; input is hidden:
+
+<SimpleTab groupId="operating-systems">
+
+<div label="macOS or Linux" value="macos-or-linux">
 
 ```shell
-export TI_FS_TOKEN="<filesystem-token>"
+unset TI_FS_FILE_SYSTEM_ID
 export TI_REGION_CODE="<filesystem-region-code>"
+printf 'File system token: '
+read -rs TI_FS_TOKEN && export TI_FS_TOKEN && printf '\n'
 ```
 
-The token identifies its file system, so you do not need to provide the file system ID separately.
+</div>
+
+<div label="Windows PowerShell" value="windows-powershell">
+
+```powershell
+Remove-Item Env:TI_FS_FILE_SYSTEM_ID -ErrorAction SilentlyContinue
+$env:TI_REGION_CODE = "<filesystem-region-code>"
+$env:TI_FS_TOKEN = [System.Net.NetworkCredential]::new(
+  "", (Read-Host "File system token" -AsSecureString)
+).Password
+```
+
+</div>
+
+</SimpleTab>
+
+The token identifies the file system. You do not need a separate file system ID, a configured CLI profile, or TiDB Cloud API keys for file access.
 
 You can then run commands that the token permits. For example:
 
@@ -61,19 +102,36 @@ ti fs list-files --path "<allowed-path>"
 
 A scoped token can access only the paths and operations included in its scope. If another user or administrator gave you the token, check which paths and operations you are allowed to use.
 
-Treat file system tokens as secrets. For CI jobs and agent environments, inject the token from a secret manager instead of storing it in source code, scripts, or container images.
-
 If you need to create a token for another environment, see [Manage File System Tokens](/tidb-cloud-filesystem/manage-filesystem-tokens.md).
 
 ## Switch between file systems
 
-If you have access to multiple file systems with locally stored tokens, change `TI_FS_FILE_SYSTEM_ID` to select the file system you want to use in the current shell:
+To switch between locally stored tokens, clear the token and region overrides and change the file system ID:
+
+<SimpleTab groupId="operating-systems">
+
+<div label="macOS or Linux" value="macos-or-linux">
 
 ```shell
+unset TI_FS_TOKEN TI_REGION_CODE
 export TI_FS_FILE_SYSTEM_ID="<another-file-system-id>"
 ```
 
-The CLI uses the locally stored token for the selected file system.
+</div>
+
+<div label="Windows PowerShell" value="windows-powershell">
+
+```powershell
+Remove-Item Env:TI_FS_TOKEN -ErrorAction SilentlyContinue
+Remove-Item Env:TI_REGION_CODE -ErrorAction SilentlyContinue
+$env:TI_FS_FILE_SYSTEM_ID = "<another-file-system-id>"
+```
+
+</div>
+
+</SimpleTab>
+
+The CLI uses the token and region stored for the selected file system. `TI_FS_TOKEN` and `TI_REGION_CODE` override those values; leaving either set for another file system or region causes a mismatch.
 
 A file system can have multiple remote tokens, while each CLI profile stores at most one selected local token for each file system. Changing which file system or local token the CLI uses does not disable or revoke other remote tokens.
 
