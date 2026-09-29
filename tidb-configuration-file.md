@@ -920,7 +920,7 @@ Configuration items related to read isolation.
 
 ### `tidb_general_log`
 
-- This configuration is used to control whether to log every query on the server at the info log level.
+- This configuration controls whether to record successfully executed SQL statements in the TiDB log. To see these records, set [`log.level`](#level) to `"info"` or `"debug"`.
 - Default value: `false`
 - Value options: `true` or `false`
 
