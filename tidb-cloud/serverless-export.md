@@ -15,7 +15,7 @@ TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialクラスタ
 
 > **Note:**
 >
-> 現在、最大エクスポートサイズは1 TiBです。より多くのデータをエクスポートする場合、またはより高速なエクスポートをご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+> 現在、最大エクスポートサイズは1 TiBです。より多くのデータをエクスポートする場合、またはより高速なエクスポートをご希望の場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## エクスポート場所 {#export-locations}
 
@@ -41,7 +41,7 @@ TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialクラスタ
 
 ### ローカルファイル {#a-local-file}
 
-{{{ .starter }}} インスタンスからローカルファイルにデータをエクスポートするには、データ[TiDB Cloudコンソールを使用する](#export-data-to-a-local-file)または[TiDB Cloud CLIを使用する](/tidb-cloud/ticloud-serverless-export-create.md)エクスポートし、エクスポートしたデータをTiDB Cloud CLI を使用してダウンロードする必要があります。
+{{{ .starter }}} インスタンスからローカルファイルにデータをエクスポートするには、[TiDB Cloudコンソールを使用](#export-data-to-a-local-file)するか[TiDB Cloud CLIを使用](/tidb-cloud/ticloud-serverless-export-create.md)してデータをエクスポートし、エクスポートしたデータをTiDB Cloud CLI を使用してダウンロードする必要があります。
 
 データをローカルファイルにエクスポートする場合、次の制限があります。
 
@@ -69,7 +69,7 @@ Google Cloud Storage にデータをエクスポートするには、次の情�
 
 詳細については[GCS アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
 
-### Azure BLOB ストレージ {#azure-blob-storage}
+### Azure Blob Storage {#azure-blob-storage}
 
 Azure Blob Storage にデータをエクスポートするには、次の情報を提供する必要があります。
 
@@ -78,12 +78,12 @@ Azure Blob Storage にデータをエクスポートするには、次の情報�
 
 詳細については[Azure Blob Storage アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
-### アリババクラウドOSS {#alibaba-cloud-oss}
+### Alibaba Cloud OSS {#alibaba-cloud-oss}
 
 Alibaba Cloud OSS にデータをエクスポートするには、次の情報を提供する必要があります。
 
 - URI: `oss://<bucket-name>/<folder-path>/`
-- アクセス資格情報：Alibaba Cloudアカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)ペアに`oss:PutObject`と`oss:GetBucketInfo`権限があることを確認してください。
+- アクセス資格情報：Alibaba Cloudアカウントの[アクセスキーペア](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)に`oss:PutObject`と`oss:GetBucketInfo`権限があることを確認してください。
 
 詳細については[Alibaba Cloud Object Storage Service (OSS) アクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 
@@ -112,7 +112,7 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 | -------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | データベーススキーマ | {database}-schema-create.sql                | {database}-schema-create.sql.{compression-type}                                                                  |
 | テーブルスキーマ     | {database}.{table}-schema.sql               | {database}.{table}-schema.sql.{compression-type}                                                                 |
-| データ               | {database}.{table}.{0001}.{csv|parquet|sql} | {database}.{table}.{0001}.{csv|sql}.{compression-type}<br/> {database}.{table}.{0001}.{compression-type}.parquet |
+| データ               | {database}.{table}.{0001}.{csv&#124;parquet&#124;sql} | {database}.{table}.{0001}.{csv&#124;sql}.{compression-type}<br/> {database}.{table}.{0001}.{compression-type}.parquet |
 
 ### データ圧縮 {#data-compression}
 
@@ -225,7 +225,7 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
     ticloud serverless export download -c <cluster-id> -e <export-id>
     ```
 
-    ダウンロード コマンドの詳細については、 [ticloud サーバーレスエクスポートのダウンロード](/tidb-cloud/ticloud-serverless-export-download.md)を参照してください。
+    ダウンロード コマンドの詳細については、 [ticloud serverless export download](/tidb-cloud/ticloud-serverless-export-download.md)を参照してください。
 
 </div>
 </SimpleTab>

@@ -180,7 +180,7 @@ TiDB Cloud CLI を使用してプライベートリンク接続を作成する�
 </div>
 </SimpleTab>
 
-## プライベートリンク接続にドメインを添付する {#attach-domains-to-a-private-link-connection}
+## プライベートリンク接続にドメインをアタッチする {#attach-domains-to-a-private-link-connection}
 
 プライベートリンク接続にドメインをアタッチできます。ドメインをプライベートリンク接続にアタッチすると、 TiDB Cloudデータフローサービスからこのドメインへのすべてのトラフィックがこのプライベートリンク接続にルーティングされます。これは、Kafka のアドバタイズリスナーなど、サービスが実行時にクライアントにカスタムドメインを提供する場合に便利です。
 
@@ -188,7 +188,7 @@ TiDB Cloud CLI を使用してプライベートリンク接続を作成する�
 
 | プライベートリンク接続タイプ            | サポートされているドメインタイプ                                                                               |
 | ------------------------- | ---------------------------------------------------------------------------------------------- |
-| AWS エンドポイントサービス           | <li>TiDB Cloud管理（ `aws.tidbcloud.com` ）</li><li>Confluent Dedicated( `aws.confluent.cloud` )</li> |
+| AWS エンドポイントサービス           | <ul><li>TiDB Cloud管理（ `aws.tidbcloud.com` ）</li><li>Confluent Dedicated( `aws.confluent.cloud` )</li></ul> |
 | Alibaba Cloud エンドポイントサービス | TiDB Cloud管理（ `alicloud.tidbcloud.com` ）                                                       |
 | Amazon MSK プロビジョニング       | ドメインの添付はサポートされていません。                                                                           |
 
@@ -230,7 +230,7 @@ TiDB Cloud CLI を使用してTiDB Cloud管理対象ドメインをアタッチ�
     ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --dry-run
     ```
 
-2. 前の手順で取得した一意の名前でドメインを添付します。
+2. 前の手順で取得した一意の名前でドメインをアタッチします。
 
     ```shell
     ticloud serverless private-link-connection attach-domains -c <cluster-id> --private-link-connection-id <private-link-connection-id> --type TIDBCLOUD_MANAGED --unique-name <unique-name>

@@ -20,11 +20,11 @@ summary: AWS Endpoint Serviceのプライベートリンク接続を使用して
 - お客様のTiDB Cloud EssentialはAWS上でホストされており、現在アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
 
     - AWSアカウントID
-    - 利用可能ゾーン（AZ）
+    - アベイラビリティゾーン（AZ）
 
 AWSアカウントIDとアベイラビリティゾーンを表示するには、以下の手順を実行してください。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)TiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
 2. **AWS Private Endpoints for External Services** 領域で、**Create Private Endpoint for External Services** をクリックします。
 3. 表示されたダイアログには、AWSアカウントIDとアベイラビリティゾーンが表示されます。
 
@@ -108,7 +108,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
 3. エンドポイントサービスの詳細ページで、 **Allow principals**タブをクリックし、[前提条件](#prerequisites)で取得したAWSアカウントIDを許可リストに追加します。例えば、 `arn:aws:iam::<account_id>:root`のように追加します。
 
-## ステップ3. TiDB CloudでAWSエンドポイントサービスのプライベートリンク接続を作成します。 {#step-3-create-an-aws-endpoint-service-private-link-connection-in-tidb-cloud}
+## ステップ3. TiDB CloudでAWSエンドポイントサービスのプライベートリンク接続を作成します {#step-3-create-an-aws-endpoint-service-private-link-connection-in-tidb-cloud}
 
 TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、プライベートリンク接続を作成できます。
 

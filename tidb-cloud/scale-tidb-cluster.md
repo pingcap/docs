@@ -12,9 +12,9 @@ summary: TiDB Cloudクラスターを拡張する方法を学びます。
 
 TiDB クラスターは次の次元で拡張できます。
 
-- TiDB、TiKV、 TiFlashのノード番号
+- TiDB、TiKV、 TiFlashのノード数
 - TiDB、TiKV、 TiFlashの vCPU と RAM
-- TiKVとTiFlashの保存
+- TiKVとTiFlashのストレージ
 
 TiDB クラスターのサイズを決定する方法については、 [TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
@@ -26,7 +26,7 @@ TiDB クラスターのサイズを決定する方法については、 [TiDBの
 > - 4 vCPU TiDB は 4 vCPU TiKV でのみ使用でき、4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
 > - TiFlashは利用できません。
 
-## ノード番号を変更する {#change-node-number}
+## ノード数を変更する {#change-node-number}
 
 TiDB、TiKV、またはTiFlashノードの数を増減できます。
 
@@ -38,7 +38,7 @@ TiDB、TiKV、またはTiFlashノードの数を変更するには、次の手�
 
 1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2. スケーリングするクラスターの行で、 **...**をクリックします。
+2. スケーリングするTiDB Cloud Dedicatedクラスターの行で、 **...**をクリックします。
 
     > **Tip:**
     >
@@ -69,7 +69,7 @@ TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更するには、
 
 1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2. スケーリングするクラスターの行で、 **...**をクリックします。
+2. スケーリングするTiDB Cloud Dedicatedクラスターの行で、 **...**をクリックします。
 
     > **Tip:**
     >
@@ -96,7 +96,7 @@ TiKV またはTiFlashのストレージを変更するには、次の手順を�
 
 1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2. スケーリングするクラスターの行で、 **...**をクリックします。
+2. スケーリングするTiDB Cloud Dedicatedクラスターの行で、 **...**をクリックします。
 
     > **Tip:**
     >
