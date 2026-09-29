@@ -12,14 +12,14 @@ TiDB Cloud can continuously stream data changes from your TiDB Cloud instance to
 
 ## Changefeed
 
-A changefeed streams incremental data changes from TiDB Cloud to a downstream system. Use it when you only need ongoing changes and the downstream system can consume incremental events.
+A changefeed streams incremental data changes from TiDB Cloud to a downstream system. Use it when you only need to continuously replicate incremental changes and the downstream system can consume incremental events.
 
-You can create and manage changefeeds on the **Changefeed** page in the TiDB Cloud console. For more information, see [Manage Changefeed](/tidb-cloud/changefeed-overview.md).
+You can create and manage changefeeds on the **Changefeed** page in the TiDB Cloud console. For more information, see [Changefeed](/tidb-cloud/changefeed-overview.md).
 
 ## Data Pipeline (PREVIEW)
 
-A data pipeline replicates full data and incremental changes from your TiDB Cloud instance to TiDB Cloud Lake. It uses an external stage, such as Amazon S3 or Alibaba Cloud OSS, to buffer data between the source and the destination, which improves reliability and gives you control over cost and latency. For more information, see [Manage Data Pipeline](/tidb-cloud/data-pipeline.md).
+A data pipeline replicates full data and incremental changes from your TiDB Cloud instance to TiDB Cloud Lake. It uses an external stage, such as Amazon S3 or Alibaba Cloud OSS, to buffer data between the source and the destination, which improves reliability and gives you control over cost and latency. For more information, see [Data Pipeline](/tidb-cloud/data-pipeline.md).
 
 > **Note:**
 >
-> Data Pipeline is currently in private preview and is available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, enter "Apply for `Data Pipeline to TiDB Cloud Lake`" in the **Description** field, and then click **Submit**.
+> The Data Pipeline feature in the TiDB Cloud console is currently in private preview and is available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, enter "Apply for `Data Pipeline to TiDB Cloud Lake`" in the **Description** field, and then click **Submit**.

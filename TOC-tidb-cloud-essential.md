@@ -148,6 +148,8 @@
   - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
   - [Sink to TiDB Cloud Lake](tidb-cloud/data-pipeline-essential-sink-to-lake.md)
+  - Reference
+    - [SQL Compatibility for TiDB Cloud Lake Integration](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
@@ -562,9 +564,6 @@
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
   - [Project API Migration Guide for {{{ .starter }}} and Essential](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)
-  - Data Pipeline
-    - [SQL Compatibility for TiDB Cloud Lake Integration](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
-    - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 - Support Plan
   - [Connected Care Overview](/tidb-cloud/connected-care-overview.md)
   - [Connected Care Details](/tidb-cloud/connected-care-detail.md)

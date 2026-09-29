@@ -27,7 +27,7 @@ Before you begin, make sure that you have:
 >
 > This guide assumes you already have data in the source TiDB database that you want to replicate. If you need sample data, prepare it before continuing.
 
-## Prepare S3 bucket access
+## Step 1. Prepare S3 bucket access
 
 The data pipeline components (export, changefeed, and TiDB Cloud Lake) all require access to the same S3 bucket. Choose one of the following methods to access the S3 bucket:
 
@@ -38,7 +38,7 @@ The data pipeline components (export, changefeed, and TiDB Cloud Lake) all requi
 
 In this method, you first use the CloudFormation stack provided by the Export feature in the TiDB Cloud console to create an IAM role configured for Export. Then, you extend the same role's trust policy and permissions so that the changefeed and TiDB Cloud Lake can also use it to access the S3 bucket.
 
-#### Step 1. Create the role with Export CloudFormation
+#### 1. Create the role with Export CloudFormation
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the overview page for your TiDB Cloud Essential instance.
 2. Click **Data > Import** in the left navigation pane, and then click **Export Data to** in the upper-right corner.
@@ -46,11 +46,11 @@ In this method, you first use the CloudFormation stack provided by the Export fe
 
 After the stack is created, record the **Role ARN** from the stack **Outputs** (for example, `arn:aws:iam::<account-id>:role/<role-name>`).
 
-#### Step 2. Consolidate trust relationships
+#### 2. Consolidate trust relationships
 
 The IAM role created in the previous step is initially configured for exporting data from TiDB Cloud Essential to S3. Because the same role is also used by the changefeed and TiDB Cloud Lake to access the S3 bucket, update its trust policy to allow these components to assume the role as well.
 
-Collect the following values required for the additional trust relationships, and then update the role's trust policy. In the AWS Console, navigate to the role created in [Step 1](#step-1-create-the-role-with-export-cloudformation), go to the **Trust relationships** tab, and click **Edit trust policy**.
+Collect the following values required for the additional trust relationships, and then update the role's trust policy. In the AWS Console, navigate to the role created in [1. Create the role with Export CloudFormation](#1-create-the-role-with-export-cloudformation), go to the **Trust relationships** tab, and click **Edit trust policy**.
 
 - **Export**: before replacing the trust policy, record the existing Export AWS account ID and external ID so that you can preserve this trust relationship in the consolidated policy.
 - **Changefeed**: call the TiDB Cloud API to get the required values:
@@ -128,7 +128,7 @@ Collect the following values required for the additional trust relationships, an
 }
 ```
 
-#### Step 3. Expand permissions to cover the full pipeline prefix
+#### 3. Expand permissions to cover the full pipeline prefix
 
 The CloudFormation-created permissions policy is scoped to the snapshot export path only. The changefeed writes to `{prefix}/incremental/`, and TiDB Cloud Lake reads from both `{prefix}/snapshot/` and `{prefix}/incremental/`, so the policy must cover the parent prefix.
 
@@ -210,7 +210,7 @@ If you prefer Access Key authentication, create an IAM user with the following p
 
 Record the **Access Key ID** and **Secret Access Key** for use in later steps.
 
-## Export full snapshot to S3
+## Step 2. Export full snapshot to Amazon S3
 
 In the TiDB Cloud console, navigate to **Data > Import**, click **Export Data to** in the upper-right corner, and choose **Amazon S3** to create a new export task.
 
@@ -228,11 +228,9 @@ In the TiDB Cloud console, navigate to **Data > Import**, click **Export Data to
 
 After the export task completes, open the task details and record the **Snapshot TSO** value. This TSO is required when creating the changefeed.
 
-## Create a changefeed for incremental data
+## Step 3. Create a changefeed for incremental data
 
 Since the Essential console does not support creating a cloud-storage sink, you must use the TiDB Cloud API.
-
-### Create the changefeed
 
 Call the changefeed creation API with the following required fields:
 
@@ -286,7 +284,7 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
 
 > **Note:**
 >
-> The changefeed URI must use the `incremental/` sub-path under the same prefix as the export snapshot. The IAM role's permissions (from [Step 3](#step-3-expand-permissions-to-cover-the-full-pipeline-prefix)) must cover this path.
+> The changefeed URI must use the `incremental/` sub-path under the same prefix as the export snapshot. The IAM role's permissions (from [3. Expand permissions to cover the full pipeline prefix](#3-expand-permissions-to-cover-the-full-pipeline-prefix)) must cover this path.
 >
 > If you are using **Access Key** instead of Role ARN, replace the `s3` block in the request body with:
 >
@@ -302,26 +300,24 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
 > ```
 >
 
-## Configure TiDB Cloud Lake
+## Step 4. Configure TiDB Cloud Lake
 
-> **Note:**
->
-> The TiDB Cloud Lake production environment does not yet support the TiDB data source. Use the **staging** environment for now.
+In TiDB Cloud Lake, you need to create a data source and an integration to load the data from the S3 bucket.
 
-### Create a data source
+### 1. Create a data source
 
-1. In the Lake staging console, navigate to **Data > Data Sources > Create**.
+1. In the [TiDB Cloud Lake console](https://lake.tidbcloud.com/), navigate to **Data > Data Sources > Create**.
 2. Select **Service: TiDB**.
 3. Choose **Role ARN** or **Access Key** authentication and fill in:
-    - **Role ARN**: the ARN from [Step 1](#step-1-create-the-role-with-export-cloudformation), or **Access Key ID** / **Secret Access Key** from [Method 2: Use an Access Key](#method-2-use-an-access-key).
+    - **Role ARN**: the ARN from [1. Create the role with Export CloudFormation](#1-create-the-role-with-export-cloudformation), or **Access Key ID** / **Secret Access Key** from [Method 2: Use an Access Key](#method-2-use-an-access-key).
     - **S3 Bucket Name**: the bucket name only (for example, `my-datapipeline-bucket`, not the full URI).
     - **S3 Region**: the same region as your Essential instance.
 4. **SQS Queue URL** is optional. If you want to enable event-driven ingestion, set up an SQS queue and configure the S3 bucket notification first. For details, see [Amazon SQS and S3 IAM Role for TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/amazon-sqs-s3-iam-role/).
-5. Under **Trust Cloud Platform roles**, verify the TiDB Cloud Lake platform roles and external ID match the values you added to the consolidated trust policy in [Step 2](#step-2-consolidate-trust-relationships).
+5. Under **Trust Cloud Platform roles**, verify the TiDB Cloud Lake platform roles and external ID match the values you added to the consolidated trust policy in [2. Consolidate trust relationships](#2-consolidate-trust-relationships).
 
-### Create an integration
+### 2. Create an integration
 
-1. In the Lake staging console, navigate to **Data > Integration > Create**.
+1. In the [TiDB Cloud Lake console](https://lake.tidbcloud.com/), navigate to **Data > Integration > Create**.
 2. Fill in the following fields:
     - **Data Source**: select the data source created above.
     - **Name**: a name for this integration task.
@@ -336,5 +332,4 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
 
 ## See also
 
-- For frequently asked questions about Data Pipeline, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md).
 - For details on DDL, DML, and column type support, see [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md).

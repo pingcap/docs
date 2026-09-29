@@ -122,13 +122,11 @@ In the TiDB Cloud console, you can create a cloud storage changefeed for your Ti
 
 ## Step 4. Configure TiDB Cloud Lake
 
-> **Note:**
->
-> The TiDB Cloud Lake production environment does not yet support the TiDB data source. Use the **staging** environment for now.
+In TiDB Cloud Lake, you need to create a data source and an integration to load the data from the S3 bucket.
 
 ### 1. Create a data source
 
-1. In the Lake staging console, navigate to **Data > Data Sources > Create**.
+1. In the [TiDB Cloud Lake console](https://lake.tidbcloud.com/), navigate to **Data > Data Sources > Create**.
 2. Select **Service: TiDB**.
 3. Select the access key authentication and fill in:
     - **Access Key ID** and **Secret Access Key**: the credentials from [Prepare S3 bucket access](#step-1-prepare-s3-bucket-access).
@@ -138,7 +136,7 @@ In the TiDB Cloud console, you can create a cloud storage changefeed for your Ti
 
 ### 2. Create an integration
 
-1. In the Lake staging console, navigate to **Data > Integration > Create**.
+1. In the [TiDB Cloud Lake console](https://lake.tidbcloud.com/), navigate to **Data > Integration > Create**.
 2. Fill in the following fields:
     - **Data Source**: select the data source created above.
     - **Name**: a name for this integration task.
@@ -154,5 +152,4 @@ In the TiDB Cloud console, you can create a cloud storage changefeed for your Ti
 
 ## See also
 
-- For frequently asked questions about Data Pipeline, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md).
 - For more information on DDL, DML, and column type support, see [Data Pipeline SQL Compatibility for TiDB Cloud Lake](/tidb-cloud/data-pipeline-lake-sql-compatibility.md).

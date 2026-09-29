@@ -1,10 +1,9 @@
 ---
-title: Manage Changefeeds
+title: Changefeed
 summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services.
-aliases: ['/tidb-cloud/changefeed-overview']
 ---
 
-# Manage Changefeeds
+# Changefeed
 
 <CustomContent plan="dedicated">
 

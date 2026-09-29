@@ -15,7 +15,7 @@ The external stage is required for reliability. Because both sides work through 
 - The stage buffers the write load and prevents temporary differences between the data production and ingestion rates from directly affecting TiDB Cloud Lake ingestion.
 - The ingestion frequency on the TiDB Cloud Lake side is decoupled from the write rate, which gives you a way to control the cost on the TiDB Cloud Lake side.
 
-## When should I enable event-driven ingestion with an SQS queue?
+## Do I need to enable event-driven ingestion with an SQS queue?
 
 Enable event-driven ingestion when you need **lower data latency** than the default polling mode provides.
 
@@ -29,6 +29,6 @@ In event-driven mode, the changefeed still flushes data to the external stage on
 
 A data pipeline does not introduce a separate billing category. The cost comes from the existing components involved in the pipeline:
 
-1. **Export** (one-time): billed for the full snapshot export.
-2. **Changefeed** (ongoing): if incremental replication is enabled, billed for the changefeed resources used for continuous replication.
-3. **TiDB Cloud Lake** (ongoing): billed for data storage and warehouse compute. For details, see [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/).
+- **Export** (one-time): billed for the full snapshot export.
+- **Changefeed** (ongoing): if incremental replication is enabled, billed for the changefeed resources used for continuous replication.
+- **TiDB Cloud Lake** (ongoing): billed for data storage and warehouse compute. For details, see [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/).
