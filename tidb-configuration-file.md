@@ -921,6 +921,7 @@ Configuration items related to read isolation.
 ### `tidb_general_log`
 
 - This configuration controls whether to record successfully executed SQL statements in the TiDB log. To see these records, set [`log.level`](#level) to `"info"` or `"debug"`.
+- This configuration item corresponds to the [`tidb_general_log`](/system-variables.md#tidb_general_log) system variable. The configuration file sets the startup value for the current TiDB instance, while the system variable can be used to dynamically change the setting for the current TiDB instance.
 - Default value: `false`
 - Value options: `true` or `false`
 
