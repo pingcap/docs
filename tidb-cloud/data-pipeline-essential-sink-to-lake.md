@@ -321,6 +321,7 @@ In TiDB Cloud Lake, you need to create a data source and an integration to load 
 2. Fill in the following fields:
     - **Data Source**: select the data source created above.
     - **Name**: a name for this integration task.
+    - **Sync Mode**: select `Snapshot + CDC` to load the full snapshot first and then continuously apply incremental changes.
     - **Table Rules**: `*.*` to sync all exported tables.
     - **Changefeed S3 Prefix**: `<prefix>/incremental/`.
     - **Dumpling S3 Prefix**: `<prefix>/snapshot/`.
