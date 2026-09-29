@@ -23,10 +23,14 @@ Currently, the `SHOW ANALYZE STATUS` statement returns the following columns:
 | `Job_info`       | The task information. If an index is analyzed, this information will include the index name. When `tidb_analyze_version =2`, this information will include configuration items such as sample rate. |
 | `Processed_rows` | The number of rows that have been analyzed |
 | `Start_time`     | The time at which the task starts |
+| `End_time`       | The time at which the task ends |
 | `State`          | The state of a task, including `pending`, `running`, `finished`, and `failed` |
 | `Fail_reason`    | The reason why the task fails. If the execution is successful, the value is `NULL`. |
 | `Instance`       | The TiDB instance that executes the task |
-| `Process_id`     | The process ID that executes the task |
+| `Process_ID`     | The process ID that executes the task |
+| `Remaining_seconds` | The estimated time (in seconds) remaining for the task to complete |
+| `Progress`       | The progress of the task |
+| `Estimated_total_rows` | The total rows that need to be analyzed by the task |
 
 ## Synopsis
 
