@@ -1,6 +1,6 @@
 ---
 title: tiup cluster tls
-summary: tiup cluster tls` コマンドは、クラスタコンポーネント間の TLS (Transport Layer Security) を有効または無効にするために使用されます。
+summary: "`tiup cluster tls` コマンドは、クラスタコンポーネント間の TLS (Transport Layer Security) を有効または無効にするために使用されます。"
 ---
 
 # TIUP クラスター TLS {#tiup-cluster-tls}

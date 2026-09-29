@@ -1,6 +1,6 @@
 ---
 title: mysql.user
-summary: mysql` スキーマの `user` テーブルについて学習します。
+summary: "`mysql` スキーマの `user` テーブルについて学習します。"
 ---
 
 # `mysql.user` {#mysql-user}

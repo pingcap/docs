@@ -1,6 +1,6 @@
 ---
 title: tiup cluster patch
-summary: tiup cluster patch` コマンドを使用すると、実行中のクラスター内でバイナリを動的に置き換えることができます。このコマンドは、バイナリパッケージをアップロードし、対象サービスを停止し、バイナリを置き換えて、サービスを起動します。準備として、バイナリパッケージをパックし、`--overwrite`、`--transfer-timeout`、`-N, --node `、`-R, --role `、`--offline` などのオプションを使用します。出力はtiup-clusterの実行ログです。
+summary: "`tiup cluster patch` コマンドを使用すると、実行中のクラスター内でバイナリを動的に置き換えることができます。このコマンドは、バイナリパッケージをアップロードし、対象サービスを停止し、バイナリを置き換えて、サービスを起動します。準備として、バイナリパッケージをパックし、`--overwrite`、`--transfer-timeout`、`-N, --node`、`-R, --role`、`--offline` などのオプションを使用します。出力はtiup-clusterの実行ログです。"
 ---
 
 # tiup cluster patch {#tiup-cluster-patch}

@@ -1,6 +1,6 @@
 ---
 title: AUTO_INCREMENT
-summary: TiDB の AUTO_INCREMENT` 列属性について学習します。
+summary: "TiDB の `AUTO_INCREMENT` 列属性について学習します。"
 ---
 
 # AUTO_INCREMENT {#auto_increment}

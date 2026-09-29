@@ -1,6 +1,6 @@
 ---
 title: Migrate from Databases that Use gh-ost/pt-osc
-summary: このドキュメントでは、DM の online-ddl/online-ddl-scheme` 機能について説明します。
+summary: "このドキュメントでは、DM の `online-ddl/online-ddl-scheme` 機能について説明します。"
 ---
 
 # gh-ost/pt-osc を使用するデータベースからの移行 {#migrate-from-databases-that-use-gh-ost-pt-osc}

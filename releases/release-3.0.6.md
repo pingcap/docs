@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.6 Release Notes
-summary: TiDB 3.0.6は、さまざまな修正と最適化を伴い、2019年11月28日にリリースされました。このリリースには、SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、TiKV、PD、TiDB Binlog、およびTiDB Lightningの改善が含まれています。修正には、ウィンドウ関数ASTの問題、STREAM AGG()`のプッシュダウン、SQLバインディングの引用符の処理などが含まれます。TiKVの改善には、正確な`lock_manager`、`innodb_lock_wait_timeout`のサポート、`tikv-ctl`を使用したGC I/O制限の動的な変更が含まれます。PDの機能強化には、クライアントログレベルの引き下げと、タイムスタンプ生成のための警告ログが含まれます。TiDB BinlogとTiDB Lightningにも修正と改善が加えられました。
+summary: "TiDB 3.0.6は、さまざまな修正と最適化を伴い、2019年11月28日にリリースされました。このリリースには、SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、TiKV、PD、TiDB Binlog、およびTiDB Lightningの改善が含まれています。修正には、ウィンドウ関数ASTの問題、`STREAM AGG()`のプッシュダウン、SQLバインディングの引用符の処理などが含まれます。TiKVの改善には、正確な`lock_manager`、`innodb_lock_wait_timeout`のサポート、`tikv-ctl`を使用したGC I/O制限の動的な変更が含まれます。PDの機能強化には、クライアントログレベルの引き下げと、タイムスタンプ生成のための警告ログが含まれます。TiDB BinlogとTiDB Lightningにも修正と改善が加えられました。"
 ---
 
 # TiDB 3.0.6 リリースノート {#tidb-3-0-6-release-notes}

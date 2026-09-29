@@ -1,6 +1,6 @@
 ---
 title: Batch Processing
-summary: パイプライン DML、非トランザクション DML、IMPORT INTO`文、非推奨の batch-dml 機能など、TiDB のバッチ処理機能を紹介します。
+summary: "パイプライン DML、非トランザクション DML、`IMPORT INTO`文、非推奨の batch-dml 機能など、TiDB のバッチ処理機能を紹介します。"
 ---
 
 # バッチ処理 {#batch-processing}

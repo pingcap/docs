@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.7 Release Notes
-summary: TiDB 2.1.7は2019年3月28日にリリースされました。様々なバグ修正、互換性向上に加え、DO`文でのサブクエリのサポート、プラグインフレームワーク、SQL文によるbinlogおよびPump/Drainerの状態確認といった新機能が追加されています。PDでは、balance-regionにおけるリーダーステップの転送に関する問題も修正されました。さらに、TiDB AnsibleにおけるPrometheus監視データのデフォルトの保持期間が30日に変更されました。
+summary: "TiDB 2.1.7は2019年3月28日にリリースされました。様々なバグ修正、互換性向上に加え、`DO`文でのサブクエリのサポート、プラグインフレームワーク、SQL文によるbinlogおよびPump/Drainerの状態確認といった新機能が追加されています。PDでは、balance-regionにおけるリーダーステップの転送に関する問題も修正されました。さらに、TiDB AnsibleにおけるPrometheus監視データのデフォルトの保持期間が30日に変更されました。"
 ---
 
 # TiDB 2.1.7 リリースノート {#tidb-2-1-7-release-notes}

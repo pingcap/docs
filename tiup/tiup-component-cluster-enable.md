@@ -1,6 +1,6 @@
 ---
 title: tiup cluster enable
-summary: tiup cluster enable` コマンドは、マシンの再起動後にクラスタサービスを自動的に有効化するために使用されます。このコマンドは、指定されたノードで `systemctl enable <service>` を実行します。オプションには、自動有効化するノードまたはロールの指定が含まれます。また、`-h, --help` オプションはヘルプ情報を出力。出力はtiup-clusterの実行ログです。
+summary: "`tiup cluster enable` コマンドは、マシンの再起動後にクラスタサービスを自動的に有効化するために使用されます。このコマンドは、指定されたノードで `systemctl enable <service>` を実行します。オプションには、自動有効化するノードまたはロールの指定が含まれます。また、`-h, --help` オプションはヘルプ情報を出力。出力はtiup-clusterの実行ログです。"
 ---
 
 # tiup cluster enable {#tiup-cluster-enable}

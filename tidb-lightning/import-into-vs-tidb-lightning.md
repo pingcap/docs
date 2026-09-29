@@ -1,6 +1,6 @@
 ---
 title: IMPORT INTO vs. TiDB Lightning
-summary: IMPORT INTO` とTiDB Lightningの違いについて説明します。
+summary: "`IMPORT INTO` とTiDB Lightningの違いについて説明します。"
 ---
 
 # IMPORT INTO とTiDB Lightning の比較 {#import-into-vs-tidb-lightning}

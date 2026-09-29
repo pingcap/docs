@@ -1,6 +1,6 @@
 ---
 title: ALTER INSTANCE
-summary: TiDBにおけるALTER INSTANCE`の使用方法の概要を学びましょう。
+summary: "TiDBにおける`ALTER INSTANCE`の使用方法の概要を学びましょう。"
 ---
 
 # ALTER INSTANCE {#alter-instance}

@@ -1,6 +1,6 @@
 ---
 title: EXPLAIN Statements Using Views
-summary: TiDB の EXPLAIN`文によって返される実行計画情報について学習します。
+summary: "TiDB の `EXPLAIN`文によって返される実行計画情報について学習します。"
 ---
 
 # ビューを使用したEXPLAIN文 {#explain-statements-using-views}

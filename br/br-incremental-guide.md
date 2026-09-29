@@ -1,6 +1,6 @@
 ---
 title: TiDB Incremental Backup and Restore Guide
-summary: 増分データは、開始スナップショットと終了スナップショット間の差分データとDDLです。これによりバックアップボリュームが削減され、増分バックアップにはtidb_gc_life_time`の設定が必要になります。増分バックアップには`tiup br backup`と`--lastbackupts`オプションを使用し、増分データを復元する前に以前のデータがすべて復元されていることを確認してください。
+summary: "増分データは、開始スナップショットと終了スナップショット間の差分データとDDLです。これによりバックアップボリュームが削減され、増分バックアップには`tidb_gc_life_time`の設定が必要になります。増分バックアップには`tiup br backup`と`--lastbackupts`オプションを使用し、増分データを復元する前に以前のデータがすべて復元されていることを確認してください。"
 ---
 
 # TiDB 増分バックアップとリストアガイド {#tidb-incremental-backup-and-restore-guide}

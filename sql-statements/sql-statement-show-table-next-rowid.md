@@ -1,6 +1,6 @@
 ---
 title: SHOW TABLE NEXT_ROW_ID
-summary: TiDBにおけるSHOW TABLE NEXT_ROW_ID`の使い方を学びましょう。
+summary: "TiDBにおける`SHOW TABLE NEXT_ROW_ID`の使い方を学びましょう。"
 ---
 
 # SHOW TABLE NEXT_ROW_ID {#show-table-next-row-id}

@@ -1,6 +1,6 @@
 ---
 title: DESC | TiDB SQL Statement Reference
-summary: TiDB データベースにおける DESC` の使用法の概要。
+summary: "TiDB データベースにおける `DESC` の使用法の概要。"
 ---
 
 # DESC {#desc}

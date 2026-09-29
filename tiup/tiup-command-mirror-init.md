@@ -1,6 +1,6 @@
 ---
 title: tiup mirror init
-summary: tiup mirror init` コマンドは空のミラーを初期化し、root.json、1.index.json、snapshot.json、および timestamp.json ファイルを生成します。ミラーファイルのローカルディレクトリを指定するには、`tiup mirror init <path>` を使用します。秘密鍵ファイルのディレクトリを指定するには、-k または --key-dir オプションを使用します。指定されたディレクトリが空でない場合は、エラーが報告されます。
+summary: "`tiup mirror init` コマンドは空のミラーを初期化し、root.json、1.index.json、snapshot.json、および timestamp.json ファイルを生成します。ミラーファイルのローカルディレクトリを指定するには、`tiup mirror init <path>` を使用します。秘密鍵ファイルのディレクトリを指定するには、-k または --key-dir オプションを使用します。指定されたディレクトリが空でない場合は、エラーが報告されます。"
 ---
 
 # tiup mirror init {#tiup-mirror-init}

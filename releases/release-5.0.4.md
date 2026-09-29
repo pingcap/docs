@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.0.4 Release Notes
-summary: 互換性の変更には、SHOW VARIABLES` の実行速度低下の修正、`tidb_stmt_summary_max_stmt_count` のデフォルト値の変更、およびアップグレード時の非互換性を引き起こす可能性のあるバグ修正が含まれます。機能強化には、`tidb_enforce_mpp=1` 設定のサポートと動的 TiCDC 構成が含まれます。改善点には、自動分析トリガー、MPP クエリ再試行のサポート、安定した結果モードが含まれます。バグ修正では、TiDB、TiKV、PD、 TiFlash、およびDumplingや TiCDC などのツールにおけるさまざまな問題が修正されています。
+summary: "互換性の変更には、`SHOW VARIABLES` の実行速度低下の修正、`tidb_stmt_summary_max_stmt_count` のデフォルト値の変更、およびアップグレード時の非互換性を引き起こす可能性のあるバグ修正が含まれます。機能強化には、`tidb_enforce_mpp=1` 設定のサポートと動的 TiCDC 構成が含まれます。改善点には、自動分析トリガー、MPP クエリ再試行のサポート、安定した結果モードが含まれます。バグ修正では、TiDB、TiKV、PD、 TiFlash、およびDumplingや TiCDC などのツールにおけるさまざまな問題が修正されています。"
 ---
 
 # TiDB 5.0.4 リリースノート {#tidb-5-0-4-release-notes}
