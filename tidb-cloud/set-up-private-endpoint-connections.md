@@ -254,7 +254,7 @@ By default, a private endpoint and the TiDB Cloud Dedicated cluster that it conn
 
 > **Note:**
 >
-> Currently, the cross-region connection feature is available upon request. To access this feature, contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) and provide your organization ID.
+> Currently, the cross-region connection feature is only available upon request. To access this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) and provide your organization ID.
 
 In TiDB Cloud, you can configure the connection scope for each [TiDB node group](/tidb-cloud/tidb-node-group-management.md) independently. To connect to a cluster from another region, allow that region for the target node group, and then create an AWS interface endpoint in your own region.
 
@@ -269,7 +269,7 @@ After the setting is saved, the allowed regions are displayed in the **Connectio
 
 > **Note:**
 >
-> - Saving the setting only records the regions that you want to allow. TiDB Cloud applies the update asynchronously, and the allowed regions might still be reconciling even after they are displayed. Before you create the VPC endpoint in the next step, wait until the **Connection Scope** update completes successfully. Otherwise, the endpoint creation can fail even though the region is already displayed. If the update fails, retry it or contact [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support).
+> - Saving the setting only records the regions you want to allow. TiDB Cloud applies the update asynchronously, and the allowed regions might still be reconciling even after they are displayed. Before you create the VPC endpoint in the next step, wait until the **Connection Scope** update completes successfully. Otherwise, endpoint creation can fail even though the region is already displayed. If the update fails, retry it or contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 > - Cross-region connections are billable. AWS charges the service provider for each **active** remote region, that is, a region that has at least one connected interface endpoint, rather than for each region that you allow. As the owner of the VPC endpoint, you are also charged for the standard endpoint-hour and data processing usage and for the cross-region data transfer. In addition, TiDB Cloud charges a cross-region PrivateLink service fee. For details, see [AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/) and [TiDB Cloud Dedicated pricing details](https://www.pingcap.com/tidb-dedicated-pricing-details/).
 > - Removing a region or switching **Connection Scope** back to **Current Region Only** does not affect existing connections in that region. It only prevents new private endpoints from being created there, and it does not disconnect existing endpoints, so AWS charges can continue until those endpoints are deleted. Connections in a region that is no longer allowed are marked with a warning in the **AWS Private Endpoints** list.
 
