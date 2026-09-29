@@ -3,13 +3,13 @@ title: Changefeed Billing for {{{ .essential }}} and Premium
 summary: "{{{ .essential }}} と Premium における変更フィードの課金について学びましょう。"
 ---
 
-# TiDB Cloud Premium の課金に関する変更履歴 {#changefeed-billing-for-tidb-cloud-premium}
+# {{{ .essential }}} と Premium の変更フィードの課金 {#changefeed-billing-for-tidb-cloud-premium}
 
 このドキュメントでは、{{{ .essential }}} と Premium における変更フィードの請求詳細について説明します。
 
 ## CCUコスト {#ccu-cost}
 
-{{{ .essential }}} と Premium は、TiCDC Changefeed Capacity Unit (CCU) の[変更フィード](/tidb-cloud/changefeed-overview.md)のキャパシティを測定します。インスタンスの[変更フィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)ときに、適切な仕様を選択できます。 CCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC CCU に対して料金が発生します。
+{{{ .essential }}} と Premium は、[変更フィード](/tidb-cloud/changefeed-overview.md)のキャパシティを TiCDC Changefeed Capacity Unit (CCU) 単位で測定します。インスタンスの[変更フィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)ときに、適切な仕様を選択できます。 CCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC CCU に対して料金が発生します。
 
 ### TiCDC CCUの数 {#number-of-ticdc-ccus}
 
@@ -17,20 +17,20 @@ summary: "{{{ .essential }}} と Premium における変更フィードの課金
 
 | 仕様            | 最大レプリケーション性能 |
 | ------------- | -------------- |
-| CCU 2室        | 5,000行/秒       |
-| CCU 4室        | 10,000行/秒      |
-| CCU 8室        | 20,000行/秒      |
-| 16のCCU        | 40,000行/秒      |
-| 24のCCU        | 60,000行/秒      |
-| 32のCCU        | 80,000行/秒      |
-| CCU（集中治療室）40室 | 10万行/秒         |
-| 64のCCU        | 16万行/秒         |
-| 96のCCU        | 24万行/秒         |
-| 128のCCU       | 32万行/秒         |
-| 192のCCU       | 48万行/秒         |
-| 256のCCU       | 64万行/秒         |
-| 320のCCU       | 80万行/秒         |
-| 384のCCU       | 96万行/秒         |
+| 2 CCU         | 5,000行/秒       |
+| 4 CCU         | 10,000行/秒      |
+| 8 CCU         | 20,000行/秒      |
+| 16 CCU        | 40,000行/秒      |
+| 24 CCU        | 60,000行/秒      |
+| 32 CCU        | 80,000行/秒      |
+| 40 CCU        | 10万行/秒         |
+| 64 CCU        | 16万行/秒         |
+| 96 CCU        | 24万行/秒         |
+| 128 CCU       | 32万行/秒         |
+| 192 CCU       | 48万行/秒         |
+| 256 CCU       | 64万行/秒         |
+| 320 CCU       | 80万行/秒         |
+| 384 CCU       | 96万行/秒         |
 
 > **Note:**
 >

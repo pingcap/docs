@@ -95,7 +95,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 4. この変更フィード内のデータの**Compression**タイプを選択してください。
 
-5. Kafkaで**TLS Encryption**オプションを有効にしてください。
+5. Kafkaで TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS Encryption**オプションを有効にしてください。
 
 6. **Next**をクリックしてネットワーク接続をテストしてください。テストが成功すると、次のページに移動します。
 
@@ -117,7 +117,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 6. この変更フィード内のデータの**Compression**タイプを選択してください。
 
-7. Kafkaで**TLS Encryption**オプションを有効にしてください。
+7. Kafkaで TLS 暗号化が有効になっていて、Kafka 接続に TLS 暗号化を使用する場合は、 **TLS Encryption**オプションを有効にしてください。
 
 8. KafkaでTLS SNI検証が必要な場合は、 **TLS Server Name**を入力してください。例： `Confluent Cloud Dedicated clusters` 。
 

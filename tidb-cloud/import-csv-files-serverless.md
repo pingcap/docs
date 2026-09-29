@@ -59,9 +59,9 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
         CSVファイルが保存されているAmazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object Storage Serviceディレクトリにテーブルスキーマファイルを含めない場合、 TiDB Cloudはデータのインポート時に対応するテーブルを作成しません。
 
-        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL文を含んでいる必要があります。このファイルを使用すると、 TiDB Cloudはデータのインポート時に`${db_table}`データベースに`${db_name}`テーブルを作成します。
+        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL文を含んでいる必要があります。このファイルを使用すると、 TiDB Cloudはデータのインポート時に`${db_name}`データベースに`${db_table}`テーブルを作成します。
 
-        例えば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートする際に`mytable`データベースに`mydb`テーブルを作成します。
+        例えば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートする際に`mydb`データベースに`mytable`テーブルを作成します。
 
         ```sql
         CREATE TABLE mytable (

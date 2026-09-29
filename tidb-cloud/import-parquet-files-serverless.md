@@ -17,7 +17,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essential[Apache Parquet](https://parquet.
 
 > **Note:**
 >
-> 現在、 TiDB Cloud、[サポートされているデータ型](#supported-data-types)のデータ型を含む Parquet ファイルのインポートはサポートされていません。インポートする Parquet ファイルにこれらのデータ型が含まれている場合は、まず (例: `STRING` ) を使用して Parquet ファイルを再生成する必要があります。または、AWS Glue などのサービスを使用してデータ型を簡単に変換することもできます。
+> 現在、 TiDB Cloudは、次のいずれかのデータ型を含む Parquet ファイルのインポートをサポートしていません。インポートする Parquet ファイルにこれらのデータ型が含まれている場合は、まず[サポートされているデータ型](#supported-data-types)（例: `STRING` ）を使用して Parquet ファイルを再生成する必要があります。または、AWS Glue などのサービスを使用してデータ型を簡単に変換することもできます。
 >
 > - `LIST`
 > - `NEST STRUCT`
@@ -63,9 +63,9 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
 
         Parquet ファイルが格納されている Amazon S3、GCS、Azure Blob Storage、または Alibaba Cloud Object Storage Service ディレクトリにテーブルスキーマファイルを含めない場合、 TiDB Cloud はデータのインポート時に対応するテーブルを作成しません。
 
-        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL文を含んでいる必要があります。このファイルを使用すると、 TiDB Cloudはデータのインポート時に`${db_table}`データベースに`${db_name}`テーブルを作成します。
+        各テーブルスキーマファイルは`${db_name}.${table_name}-schema.sql`形式で、 `CREATE TABLE` DDL文を含んでいる必要があります。このファイルを使用すると、 TiDB Cloudはデータのインポート時に`${db_name}`データベースに`${db_table}`テーブルを作成します。
 
-        例えば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートする際に`mytable`データベースに`mydb`テーブルを作成します。
+        例えば、次のステートメントを含む`mydb.mytable-schema.sql`ファイルを作成すると、 TiDB Cloud はデータをインポートする際に`mydb`データベースに`mytable`テーブルを作成します。
 
         ```sql
         CREATE TABLE mytable (

@@ -34,7 +34,7 @@ SQL プロキシアカウントの主な利点は次のとおりです。
 
 ## SQLプロキシアカウントの作成方法 {#how-the-sql-proxy-account-is-created}
 
-SQL プロキシアカウントは、クラスター内で権限を持つロールが付与されたTiDB Cloud クラスターの初期化中に自動的に作成されます。
+SQL プロキシアカウントは、TiDB Cloud クラスターの初期化中に、クラスター内で権限を持つロールが付与されたTiDB Cloudユーザーに対して自動的に作成されます。
 
 ## SQLプロキシアカウントを削除する方法 {#how-the-sql-proxy-account-is-deleted}
 
@@ -49,9 +49,9 @@ SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー
 | 環境               | メールの長さ | ユーザー名の形式                                                                             |
 | ---------------- | ------ | ------------------------------------------------------------------------------------ |
 | TiDB Cloud Dedicated     | 32文字以下 | 完全なメールアドレス                                                                           |
-| TiDB Cloud Dedicated     | 32文字   | `prefix($email, 23)_prefix(base58(sha1($email)), 8)`                                 |
+| TiDB Cloud Dedicated     | 32文字超 | `prefix($email, 23)_prefix(base58(sha1($email)), 8)`                                 |
 | TiDB Cloud Serverless | 15文字以下 | `serverless_unique_prefix + "." + email`                                             |
-| TiDB Cloud Serverless | 15文字   | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
+| TiDB Cloud Serverless | 15文字超 | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
 
 例:
 
