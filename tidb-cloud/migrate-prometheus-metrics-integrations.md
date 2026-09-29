@@ -5,7 +5,7 @@ summary: 従来のプロジェクトレベルのPrometheus統合から、新し�
 
 # Prometheus統合の移行 {#migrate-prometheus-integrations}
 
-TiDB Cloud は、 [Prometheusとの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)クラスタレベルで管理するようになり、よりきめ細かな制御と構成が可能になりました。従来のプロジェクトレベルの Prometheus 統合 (ベータ版) は、2026年 1月 9日に廃止されました。組織でこれらの従来の統合をまだ使用している場合は、このガイドに従って新しいクラスタレベルの Prometheus 統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
+TiDB Cloud は、 [Prometheusとの統合](/tidb-cloud/monitor-prometheus-and-grafana-integration.md)をクラスタレベルで管理するようになり、よりきめ細かな制御と構成が可能になりました。従来のプロジェクトレベルの Prometheus 統合 (ベータ版) は、2026年 1月 9日に廃止されました。組織でこれらの従来の統合をまだ使用している場合は、このガイドに従って新しいクラスタレベルの Prometheus 統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 
@@ -25,7 +25,7 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3. 左側のナビゲーションパネルで、 **Project Settings**の下にある**Project Settings**をクリックします。
+3. 左側のナビゲーションパネルで、 **Project Settings**の下にある**Integrations**をクリックします。
 
 4. **Integrations** &gt; **Integration to Prometheus (BETA)**モジュールで、 **[Scrape_config Files]**を選択し、 **Delete**をクリックします。
 
@@ -47,4 +47,4 @@ Prometheusとの連携を移行するには、以下の手順を実行してく�
 
 ## サポートにお問い合わせください {#contact-support}
 
-サポートが必要な場合は、 TiDB Cloudサポートまでお問い合わせください。<a href="mailto:support@pingcap.com"></a> [support@pingcap.com](mailto:support@pingcap.com)でお問い合わせいただくか、テクニカルアカウントマネージャー（TAM）までご連絡ください。
+サポートが必要な場合は、 TiDB Cloudサポート（<a href="mailto:support@pingcap.com">support@pingcap.com</a>）にお問い合わせいただくか、テクニカルアカウントマネージャー（TAM）までご連絡ください。

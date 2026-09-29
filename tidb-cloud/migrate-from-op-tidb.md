@@ -63,7 +63,7 @@ tiup update --self && tiup update dumpling
 
 1. [ツールキットパッケージ](https://docs.pingcap.com/tidb/stable/download-ecosystem-tools)をダウンロードします。
 
-2. 対象マシンに展開してください。TiUPを使用して`tiup install dumpling`を実行すると、 Dumpling を入手できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。 。
+2. 対象マシンに展開してください。TiUPを使用して`tiup install dumpling`を実行すると、 Dumpling を入手できます。その後、 `tiup dumpling ...`を使用してDumplingを実行できます。詳細については、 [Dumplingの紹介](https://docs.pingcap.com/tidb/stable/dumpling-overview#dumpling-introduction)を参照してください。
 
 #### Dumplingの権限を設定する {#configure-privileges-for-dumpling}
 
@@ -166,7 +166,7 @@ Dumplingを使用して、アップストリームのTiDBクラスタからAmazo
 
     ![Get the S3 URI](/media/tidb-cloud/op-to-cloud-copy-s3-uri.png)
 
-    以下のスクリーンショットは、地域情報を取得する方法を示しています。
+    以下のスクリーンショットは、リージョン情報を取得する方法を示しています。
 
     ![Get the region information](/media/tidb-cloud/op-to-cloud-copy-region-info.png)
 
@@ -201,7 +201,7 @@ Dumplingを使用して、アップストリームのTiDBクラスタからAmazo
 
 TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポートした後、データをTiDB Cloudに移行する必要があります。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/)以下のドキュメントに従って、対象のTiDBリソースのアカウントIDと外部IDを取得してください。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、以下のドキュメントに従って、対象のTiDBリソースのアカウントIDと外部IDを取得してください。
 
     - TiDB Cloud Dedicatedクラスターについては、 [ロールARNを使用してAmazon S3へのアクセスを設定する](/tidb-cloud/dedicated-external-storage.md#configure-amazon-s3-access-using-a-role-arn)を参照してください。
     - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスについては、 [ロールARNを使用してAmazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access-using-a-role-arn)を参照してください。
@@ -215,7 +215,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     S3バケットがサーバー側暗号化（SSE-KMS）を使用している場合は、KMS権限も追加する必要があります。
 
-    - kms:復号化
+    - kms:Decrypt
 
 3. アクセスポリシーを設定します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)してリージョンに切り替えて、 TiDB Cloudのアクセスポリシーが既に存在するかどうかを確認します。存在しない場合は、このドキュメントに従ってポリシーを作成します。 [JSONタブでポリシーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)。
 
@@ -266,7 +266,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 4. ロールを設定します。 [IAMロールの作成（コンソール）](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)を参照してください。 「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
 
-5. ロール ARN を取得します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)。お住まいの地域に切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
+5. ロール ARN を取得します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)。リージョンに切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
 
 6. TiDB Cloudにデータをインポートします。
 
@@ -375,7 +375,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
         SELECT @@global.time_zone;
         ```
 
-8. アップストリームの TiDB Self-Managed クラスターでクエリバインディングをバックアップし、ダウンストリームのTiDB Cloudリソースに復元します。クエリバインディングをバックアップするには、[クエリバインディング](/sql-plan-management.md)の次のクエリを使用できます。
+8. アップストリームの TiDB Self-Managed クラスターで[クエリバインディング](/sql-plan-management.md)をバックアップし、ダウンストリームのTiDB Cloudリソースに復元します。クエリバインディングをバックアップするには、次のクエリを使用できます。
 
     ```sql
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';

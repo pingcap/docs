@@ -5,7 +5,7 @@ summary: TiDB Cloud Dedicatedの制限された SQL 機能について説明し�
 
 # TiDB Cloud Dedicatedで制限されたSQL機能 {#limited-sql-features-on-tidb-cloud-dedicated}
 
-TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloud Dedicatedには機能面で若干の違いがあります。このドキュメントでは、TiDB Cloud Dedicatedにおける SQL 機能の制限事項について説明します。TiDB Self-Managed とTiDB Cloud Dedicatedの機能ギャップは継続的に埋められています。これらの機能やギャップを埋める必要がある場合は、機能リクエストを送信して[お問い合わせ](/tidb-cloud/tidb-cloud-support.md) 。
+TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロードで動作しますが、TiDB Self-Managed とTiDB Cloud Dedicatedには機能面で若干の違いがあります。このドキュメントでは、TiDB Cloud Dedicatedにおける SQL 機能の制限事項について説明します。TiDB Self-Managed とTiDB Cloud Dedicatedの機能ギャップは継続的に埋められています。これらの機能やギャップを埋める必要がある場合は、機能リクエストについて[お問い合わせ](/tidb-cloud/tidb-cloud-support.md)ください。
 
 > **Note:**
 >
@@ -52,7 +52,7 @@ TiDB Cloud Dedicated はTiDB がサポートするほぼすべてのワークロ
 | `ADMIN PLUGINS ENABLE`      | サポートされている                                                                            |
 | `ADMIN PLUGINS DISABLE`     | サポートされている                                                                            |
 | `ALTER INSTANCE RELOAD TLS` | サポートされている                                                                            |
-| `LOAD DATA INFILE`          | Amazon S3 または Google Cloud Storage から`LOAD DATA LOCAL INFILE` `LOAD DATA INFILE`サポート |
+| `LOAD DATA INFILE`          | `LOAD DATA LOCAL INFILE`と、Amazon S3 または Google Cloud Storage からの`LOAD DATA INFILE`をサポート |
 | `CHANGE DRAINER`            | サポートされていません[^2]                                                                      |
 | `CHANGE PUMP`               | サポートされていません[^2]                                                                      |
 | `FLASHBACK CLUSTER`         | サポートされている                                                                            |

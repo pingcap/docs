@@ -5,13 +5,13 @@ summary: TiDB CloudクラスターをNetlifyプロジェクトに接続する方
 
 # TiDB CloudとNetlifyを統合する {#integrate-tidb-cloud-with-netlify}
 
-[Netlify](https://netlify.com/) 、最新のWebプロジェクトを自動化するためのオールインワンプラットフォームです。ホスティングインフラストラクチャ、継続的インテグレーション、デプロイメントパイプラインを単一のワークフローに置き換え、プロジェクトの成長に合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
+[Netlify](https://netlify.com/)は、最新のWebプロジェクトを自動化するためのオールインワンプラットフォームです。ホスティングインフラストラクチャ、継続的インテグレーション、デプロイメントパイプラインを単一のワークフローに置き換え、プロジェクトの成長に合わせてサーバーレス関数、ユーザー認証、フォーム処理などの動的な機能を統合します。
 
 このドキュメントでは、データベースバックエンドとしてTiDB Cloudを使用してNetlify上にフルスタックアプリをデプロイする方法について説明します。また、 TiDB Cloud Serverless Driverを使用してNetlifyエッジ関数を利用する方法についても学ぶことができます。
 
 ## 前提条件 {#prerequisites}
 
-展開前に、以下の前提条件が満たされていることを確認してください。
+デプロイ前に、以下の前提条件が満たされていることを確認してください。
 
 ### NetlifyアカウントとCLI {#a-netlify-account-and-cli}
 
@@ -52,7 +52,7 @@ TiDB Cloudは、すぐに開発を始められるように、TypeScriptとNext.j
 
 ### TiDB Cloud接続文字列を取得します {#get-the-tidb-cloud-connection-string}
 
-TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの場合、接続文字列は[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。 。
+TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの場合、接続文字列は[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。
 
 TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコンソールからのみ取得できます。
 
@@ -94,7 +94,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     > 後で接続文字列を使用する際は、以下の点に注意してください。
     >
     > - 接続文字列内のパラメータを実際の値に置き換えてください。
-    > - このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`固有の新しい名前に置き換える必要があります。
+    > - このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`を固有の新しい名前に置き換える必要があります。
 
 </div>
 <div label="TiDB Cloud console">
@@ -117,7 +117,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     > 後で接続文字列を使用する際は、以下の点に注意してください。
     >
     > - 接続文字列内のパラメータを実際の値に置き換えてください。
-    > - このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`固有の新しい名前に置き換える必要があります。
+    > - このドキュメントのサンプルアプリでは新しいデータベースが必要なので、 `<Database>`を固有の新しい名前に置き換える必要があります。
 
 </div>
 </SimpleTab>
@@ -216,7 +216,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 
     次に、ブラウザで`http://localhost:3000/`にアクセスして、そのUIを探索してください。
 
-6. アプリを Netlify にデプロイ。ローカルプレビューで問題がなければ、次のコマンドを使用してサイトを Netlify にデプロイできます。 `--trigger`ローカルファイルをアップロードせずにデプロイすることを意味します。ローカルで変更を加えた場合は、GitHub リポジトリにコミットされていることを確認してください。
+6. アプリを Netlify にデプロイ。ローカルプレビューで問題がなければ、次のコマンドを使用してサイトを Netlify にデプロイできます。 `--trigger`は、ローカルファイルをアップロードせずにデプロイすることを意味します。ローカルで変更を加えた場合は、GitHub リポジトリにコミットされていることを確認してください。
 
     ```shell
     netlify deploy --prod --trigger
@@ -224,11 +224,11 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 
     Netlifyコンソールにアクセスして、デプロイ状況を確認してください。デプロイが完了すると、アプリのサイトにはNetlifyからパブリックIPアドレスが割り当てられ、誰でもアクセスできるようになります。
 
-## エッジ機能を使用する {#use-the-edge-function}
+## エッジ関数を使用する {#use-the-edge-function}
 
 上記のセクションで説明したサンプルアプリは、Netlifyのサーバーレス関数上で動作します。このセクションでは[TiDB Cloud Serverless Driver](/develop/serverless-driver.md)でエッジ関数を使用する方法を示します。エッジ関数はNetlifyが提供する機能で、Netlify CDNのエッジでサーバーレス関数を実行できます。
 
-エッジ機能を使用するには、以下の手順に従ってください。
+エッジ関数を使用するには、以下の手順に従ってください。
 
 1. プロジェクトのルートディレクトリに`netlify/edge-functions`という名前のディレクトリを作成します。
 
@@ -246,16 +246,16 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
     export const config = { path: "/api/hello" };
     ```
 
-3. `DATABASE_URL`環境変数を設定してください。接続情報は[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。 .
+3. `DATABASE_URL`環境変数を設定してください。接続情報は[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。
 
     ```shell
     netlify env:set DATABASE_URL 'mysql://<username>:<password>@<host>/<database>'
     ```
 
-4. Netlifyにエッジ機能をデプロイ。
+4. Netlifyにエッジ関数をデプロイ。
 
     ```shell
     netlify deploy --prod --trigger
     ```
 
-その後、Netlify コンソールにアクセスしてデプロイの状態を確認できます。デプロイが完了すると、 `https://<netlify-host>/api/hello` URL を介してエッジ機能にアクセスできます。
+その後、Netlify コンソールにアクセスしてデプロイの状態を確認できます。デプロイが完了すると、 `https://<netlify-host>/api/hello` URL を介してエッジ関数にアクセスできます。

@@ -7,15 +7,15 @@ summary: TiDB Cloudで ID アクセスを管理する方法を学びましょう
 
 このドキュメントでは、TiDB Cloudにおける組織、プロジェクト、リソース、役割、およびユーザープロファイルへのアクセスを管理する方法について説明します。
 
-TiDB Cloudにアクセスする前に、 [TiDB Cloudアカウントを作成する](https://tidbcloud.com/free-trial)。 [TiDB Cloudを使用してパスワードを管理する](/tidb-cloud/tidb-cloud-password-authentication.md)パスワードを管理できるように電子メールとパスワードでサインアップすることも、 TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択することもできます。
+TiDB Cloudにアクセスする前に、 [TiDB Cloudアカウントを作成](https://tidbcloud.com/free-trial)してください。 [TiDB Cloudを使用してパスワードを管理](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップすることも、 TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択することもできます。
 
 ## 組織、プロジェクト、およびリソース {#organizations-projects-and-resources}
 
 TiDB Cloudは、組織、プロジェクト、リソースに基づいた階層構造を採用しており、ユーザーとTiDBデプロイメントの管理を支援します。
 
-- TiDB Cloudの[リソース](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-resource)TiDB X インスタンスまたはTiDB Cloud Dedicatedクラスタのいずれかです。TiDB X インスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudオファリングです。TiDB Cloud Starter、 Essential、Premium インスタンスなどがあります。
+- TiDB Cloudの[リソース](/tidb-cloud/tidb-cloud-glossary.md#tidb-cloud-resource)は、TiDB X インスタンスまたはTiDB Cloud Dedicatedクラスタのいずれかです。TiDB X インスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudオファリングです。TiDB Cloud Starter、 Essential、Premium インスタンスなどがあります。
 
-- A [プロジェクト](/tidb-cloud/tidb-cloud-glossary.md#project)は、 TiDB Cloudリソースのコンテナです。
+- [プロジェクト](/tidb-cloud/tidb-cloud-glossary.md#project)は、 TiDB Cloudリソースのコンテナです。
 
     - TiDB Xインスタンスの場合、プロジェクトはオプションの論理コンテナです。つまり、これらのインスタンスをプロジェクトにグループ化することも、組織レベルで保持することもできます。
     - TiDB Cloud Dedicatedクラスターの場合、プロジェクトはインフラストラクチャに紐づいており必須です。つまり、管理上の目的で、 TiDB Cloud Dedicatedクラスターはプロジェクトにグループ化する必要があります。
@@ -75,7 +75,7 @@ TiDB Cloudには、3種類のプロジェクトがあります。
 
 - **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
 - **TiDB X project**: このプロジェクト タイプは、TiDB X インスタンス ( TiDB Cloud Starter、 Essential、Premium インスタンスを含む) でのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは[**My TiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクト タイプです。
-- **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用してTiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) 。
+- **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用してTiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)エンドポイントから取得できます。
 
 以下の表は、これらのプロジェクトタイプ間の違いを示しています。
 
@@ -123,7 +123,7 @@ TiDB Cloudは、組織、プロジェクト、インスタンスの各レベル�
 
 > **Note:**
 >
-> - `Organization Owner`すべてのプロジェクトに対して`Project Owner`のすべての権限を持っているため、 `Organization Owner`もプロジェクトメンバーを招待したり、メンバーにプロジェクトの役割を付与したりできます。
+> - `Organization Owner`は、すべてのプロジェクトに対して`Project Owner`のすべての権限を持っているため、 `Organization Owner`もプロジェクトメンバーを招待したり、メンバーにプロジェクトの役割を付与したりできます。
 > - 各プロジェクトロールには、デフォルトで`Organization Viewer`のすべての権限が付与されています。
 > - 組織内のユーザーがどのプロジェクトにも所属していない場合、そのユーザーにはプロジェクトに関する権限は一切ありません。
 > - TiDB XプロジェクトとTiDB Dedicatedプロジェクトの両方において、プロジェクトロールはプロジェクト内のリソースへのアクセスを制御します。TiDB Dedicatedプロジェクトの場合、プロジェクトロールはDedicated固有のプロジェクト設定も制御します。
@@ -154,7 +154,7 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 > **Note:**
 >
 > - インスタンスロールは、 TiDB Cloud Starter、 Essential、およびPremiumインスタンスにのみ適用されます。TiDB Cloud Dedicatedクラスターはインスタンスロールをサポートしていません。
-> - `Organization Owner`組織内のすべての TiDB X インスタンスに対するすべての権限を自動的に持っています。
+> - `Organization Owner`は、組織内のすべての TiDB X インスタンスに対するすべての権限を自動的に持っています。
 > - 各インスタンスロールは、デフォルトで`Organization Viewer`ロールのすべての権限を継承します。
 > - プロジェクトロールとインスタンスロールは加算式です。ユーザーはプロジェクトロールからアクセス権を継承できるだけでなく、個々のインスタンスに対してより具体的なロールを持つこともできます。
 
@@ -289,7 +289,7 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 プロジェクトにメンバーを招待するには、以下の手順に従ってください。
 
-1. TiDB Cloudコンソールで、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次にクリックします。 <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Folder" style="width: calc(1.125rem * var(--mantine-scale)); height: calc(1.125rem * var(--mantine-scale));"><path d="M8.66671 4.66667L7.92301 3.17928C7.70898 2.7512 7.60195 2.53715 7.44229 2.38078C7.30109 2.24249 7.13092 2.13732 6.94409 2.07287C6.73282 2 6.49351 2 6.0149 2H3.46671C2.71997 2 2.3466 2 2.06139 2.14532C1.8105 2.27316 1.60653 2.47713 1.4787 2.72801C1.33337 3.01323 1.33337 3.3866 1.33337 4.13333V4.66667M1.33337 4.66667H11.4667C12.5868 4.66667 13.1469 4.66667 13.5747 4.88465C13.951 5.0764 14.257 5.38236 14.4487 5.75869C14.6667 6.18651 14.6667 6.74656 14.6667 7.86667V10.8C14.6667 11.9201 14.6667 12.4802 14.4487 12.908C14.257 13.2843 13.951 13.5903 13.5747 13.782C13.1469 14 12.5868 14 11.4667 14H4.53337C3.41327 14 2.85322 14 2.42539 13.782C2.04907 13.5903 1.74311 13.2843 1.55136 12.908C1.33337 12.4802 1.33337 11.9201 1.33337 10.8V4.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg>プロジェクトビューに移動するためのアイコン。
+1. TiDB Cloudコンソールで、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Folder" style="width: calc(1.125rem * var(--mantine-scale)); height: calc(1.125rem * var(--mantine-scale));"><path d="M8.66671 4.66667L7.92301 3.17928C7.70898 2.7512 7.60195 2.53715 7.44229 2.38078C7.30109 2.24249 7.13092 2.13732 6.94409 2.07287C6.73282 2 6.49351 2 6.0149 2H3.46671C2.71997 2 2.3466 2 2.06139 2.14532C1.8105 2.27316 1.60653 2.47713 1.4787 2.72801C1.33337 3.01323 1.33337 3.3866 1.33337 4.13333V4.66667M1.33337 4.66667H11.4667C12.5868 4.66667 13.1469 4.66667 13.5747 4.88465C13.951 5.0764 14.257 5.38236 14.4487 5.75869C14.6667 6.18651 14.6667 6.74656 14.6667 7.86667V10.8C14.6667 11.9201 14.6667 12.4802 14.4487 12.908C14.257 13.2843 13.951 13.5903 13.5747 13.782C13.1469 14 12.5868 14 11.4667 14H4.53337C3.41327 14 2.85322 14 2.42539 13.782C2.04907 13.5903 1.74311 13.2843 1.55136 12.908C1.33337 12.4802 1.33337 11.9201 1.33337 10.8V4.66667Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg> アイコンをクリックしてプロジェクトビューに移動します。
 
     > **Tip:**
     >
@@ -325,13 +325,13 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 3. **Users**ページで、対象メンバーの行を見つけ、その行の**...**をクリックし、次に**Edit Role**をクリックします。
 
-4. **Edit Role**ダイアログで、対象のプロジェクトを見つけて、 <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Trash01" style="width: calc(1rem * var(--mantine-scale)); height: calc(1rem * var(--mantine-scale));"><path d="M10.6667 4.00004V3.46671C10.6667 2.71997 10.6667 2.3466 10.5213 2.06139C10.3935 1.8105 10.1895 1.60653 9.93865 1.4787C9.65344 1.33337 9.28007 1.33337 8.53333 1.33337H7.46667C6.71993 1.33337 6.34656 1.33337 6.06135 1.4787C5.81046 1.60653 5.60649 1.8105 5.47866 2.06139C5.33333 2.3466 5.33333 2.71997 5.33333 3.46671V4.00004M6.66667 7.66671V11M9.33333 7.66671V11M2 4.00004H14M12.6667 4.00004V11.4667C12.6667 12.5868 12.6667 13.1469 12.4487 13.5747C12.2569 13.951 11.951 14.257 11.5746 14.4487C11.1468 14.6667 10.5868 14.6667 9.46667 14.6667H6.53333C5.41323 14.6667 4.85318 14.6667 4.42535 14.4487C4.04903 14.257 3.74307 13.951 3.55132 13.5747C3.33333 13.1469 3.33333 12.5868 3.33333 11.4667V4.00004" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg>アイコン。
+4. **Edit Role**ダイアログで、対象のプロジェクトを見つけて、 <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Trash01" style="width: calc(1rem * var(--mantine-scale)); height: calc(1rem * var(--mantine-scale));"><path d="M10.6667 4.00004V3.46671C10.6667 2.71997 10.6667 2.3466 10.5213 2.06139C10.3935 1.8105 10.1895 1.60653 9.93865 1.4787C9.65344 1.33337 9.28007 1.33337 8.53333 1.33337H7.46667C6.71993 1.33337 6.34656 1.33337 6.06135 1.4787C5.81046 1.60653 5.60649 1.8105 5.47866 2.06139C5.33333 2.3466 5.33333 2.71997 5.33333 3.46671V4.00004M6.66667 7.66671V11M9.33333 7.66671V11M2 4.00004H14M12.6667 4.00004V11.4667C12.6667 12.5868 12.6667 13.1469 12.4487 13.5747C12.2569 13.951 11.951 14.257 11.5746 14.4487C11.1468 14.6667 10.5868 14.6667 9.46667 14.6667H6.53333C5.41323 14.6667 4.85318 14.6667 4.42535 14.4487C4.04903 14.257 3.74307 13.951 3.55132 13.5747C3.33333 13.1469 3.33333 12.5868 3.33333 11.4667V4.00004" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg> アイコンをクリックします。
 
 5. **Save**をクリックしてください。
 
 ## インスタンスへのアクセスを管理する {#manage-instance-access}
 
-### TiDB Xインスタンスへのアクセス権を付与する {#grant-access-to-a-tidb-x-instance} {#grant-access-to-a-tidb-x-instance}
+### TiDB Xインスタンスへのアクセス権を付与する {#grant-access-to-a-tidb-x-instance}
 
 `Organization Owner`または`Project Owner`ロールに属している場合は、特定の TiDB X インスタンスのインスタンスロールをユーザーに付与できます。
 
@@ -367,7 +367,7 @@ TiDB Xインスタンスへのアクセス権を付与するには、以下の�
 
 3. **Users**ページで、対象メンバーの行を見つけ、その行の**...**をクリックし、次に**Edit Role**をクリックします。
 
-4. **Edit Role**ダイアログで、対象のインスタンスを見つけて、 <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Trash01" style="width: calc(1rem * var(--mantine-scale)); height: calc(1rem * var(--mantine-scale));"><path d="M10.6667 4.00004V3.46671C10.6667 2.71997 10.6667 2.3466 10.5213 2.06139C10.3935 1.8105 10.1895 1.60653 9.93865 1.4787C9.65344 1.33337 9.28007 1.33337 8.53333 1.33337H7.46667C6.71993 1.33337 6.34656 1.33337 6.06135 1.4787C5.81046 1.60653 5.60649 1.8105 5.47866 2.06139C5.33333 2.3466 5.33333 2.71997 5.33333 3.46671V4.00004M6.66667 7.66671V11M9.33333 7.66671V11M2 4.00004H14M12.6667 4.00004V11.4667C12.6667 12.5868 12.6667 13.1469 12.4487 13.5747C12.2569 13.951 11.951 14.257 11.5746 14.4487C11.1468 14.6667 10.5868 14.6667 9.46667 14.6667H6.53333C5.41323 14.6667 4.85318 14.6667 4.42535 14.4487C4.04903 14.257 3.74307 13.951 3.55132 13.5747C3.33333 13.1469 3.33333 12.5868 3.33333 11.4667V4.00004" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg>アイコン。
+4. **Edit Role**ダイアログで、対象のインスタンスを見つけて、 <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="1.5" class="tiui-icon Trash01" style="width: calc(1rem * var(--mantine-scale)); height: calc(1rem * var(--mantine-scale));"><path d="M10.6667 4.00004V3.46671C10.6667 2.71997 10.6667 2.3466 10.5213 2.06139C10.3935 1.8105 10.1895 1.60653 9.93865 1.4787C9.65344 1.33337 9.28007 1.33337 8.53333 1.33337H7.46667C6.71993 1.33337 6.34656 1.33337 6.06135 1.4787C5.81046 1.60653 5.60649 1.8105 5.47866 2.06139C5.33333 2.3466 5.33333 2.71997 5.33333 3.46671V4.00004M6.66667 7.66671V11M9.33333 7.66671V11M2 4.00004H14M12.6667 4.00004V11.4667C12.6667 12.5868 12.6667 13.1469 12.4487 13.5747C12.2569 13.951 11.951 14.257 11.5746 14.4487C11.1468 14.6667 10.5868 14.6667 9.46667 14.6667H6.53333C5.41323 14.6667 4.85318 14.6667 4.42535 14.4487C4.04903 14.257 3.74307 13.951 3.55132 13.5747C3.33333 13.1469 3.33333 12.5868 3.33333 11.4667V4.00004" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="inherit"></path></svg> アイコンをクリックします。
 
 5. **Save**をクリックしてください。
 

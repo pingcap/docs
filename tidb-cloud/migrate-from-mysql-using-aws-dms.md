@@ -17,8 +17,8 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 移行を開始する前に、以下の内容を必ずお読みください。
 
-- ソースデータベースが Amazon RDS または Amazon Auroraの場合、 `binlog_format`パラメータを`ROW`に設定する必要があります。データベースがデフォルトのパラメータ グループを使用する場合、 `binlog_format`パラメータはデフォルトで`MIXED`となり、変更できません。この場合、 [新しいパラメータグループを作成する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params)必要があります (例: `newset` 。その`binlog_format`を`ROW`に設定します。次に、 [デフォルトパラメータグループを変更する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying)`newset`に変更します。パラメータ グループを変更するとデータベースが再起動されることに注意してください。
-- ソースデータベースが TiDB と互換性のある照合順序を使用していることを確認してください。TiDB の utf8mb4 文字セットのデフォルトの照合照合順序は`utf8mb4_bin`です。しかし、MySQL 8.0 では、デフォルトの照合照合順序は`utf8mb4_0900_ai_ci`です。アップストリームの MySQL がデフォルトの照合順序を使用している場合、TiDB は`utf8mb4_0900_ai_ci`と互換性がないため、AWS DMS は TiDB にターゲットテーブルを作成できず、データを移行できません。この問題を解決するには、移行前にソースデータベースの照合順序`utf8mb4_bin`に変更する必要があります。TiDB でサポートされている文字セットと照合順序の完全なリストについては、 [文字セットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
+- ソースデータベースが Amazon RDS または Amazon Auroraの場合、 `binlog_format`パラメータを`ROW`に設定する必要があります。データベースがデフォルトのパラメータ グループを使用する場合、 `binlog_format`パラメータはデフォルトで`MIXED`となり、変更できません。この場合、 [新しいパラメータグループを作成する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params)必要があります (例: `newset` )。その`binlog_format`を`ROW`に設定します。次に、 [デフォルトパラメータグループを変更する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying)`newset`に変更します。パラメータ グループを変更するとデータベースが再起動されることに注意してください。
+- ソースデータベースが TiDB と互換性のある照合順序を使用していることを確認してください。TiDB の utf8mb4 文字セットのデフォルトの照合順序は`utf8mb4_bin`です。しかし、MySQL 8.0 では、デフォルトの照合順序は`utf8mb4_0900_ai_ci`です。アップストリームの MySQL がデフォルトの照合順序を使用している場合、TiDB は`utf8mb4_0900_ai_ci`と互換性がないため、AWS DMS は TiDB にターゲットテーブルを作成できず、データを移行できません。この問題を解決するには、移行前にソースデータベースの照合順序を`utf8mb4_bin`に変更する必要があります。TiDB でサポートされている文字セットと照合順序の完全なリストについては、 [文字セットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
 - AWS DMS 移行タスクを作成するときは、データベースの選択にデフォルトの `%` ワイルドカードを使用しないでください。代わりに、移行するデータベースとテーブルのみを明示的に指定してください。そうしないと、AWS DMS が `INFORMATION_SCHEMA`、`PERFORMANCE_SCHEMA`、`mysql`、`sys` などのシステムデータベースをソース MySQL データベースから TiDB に移行しようとして、移行タスクが失敗する可能性があります。
 - AWS DMSのパブリックネットワークIPアドレスとプライベートネットワークIPアドレスを、ソースデータベースとターゲットデータベースの両方のIPアクセスリストに追加してください。そうしないと、状況によってはネットワーク接続が失敗する可能性があります。
 - [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-on-aws)または[プライベートエンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を使用して、AWS DMS と TiDB クラスターを接続します。
@@ -102,7 +102,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 3. ダイアログの**Step 1: Create traffic filter**で、 **Edit**をクリックし、AWS DMS コンソールからコピーしたパブリック IP アドレスとプライベート IP アドレスを入力して、 **Update Filter**をクリックします。AWS DMS レプリケーションインスタンスのパブリック IP アドレスとプライベート IP アドレスを TiDB クラスタのトラフィックフィルタに同時に追加することをお勧めします。そうしないと、状況によっては AWS DMS が TiDB クラスタに接続できない場合があります。
 
-4. **Download CA cert**をクリックします。ダイアログの**[ステップ3：SQLクライアントで接続する**]で、接続文字列内の`-u` 、 `-h` 、および`-P`情報を後で使用するためにメモしておきます。
+4. **Download CA cert**をクリックします。ダイアログの**Step 3: Connect with a SQL client**で、接続文字列内の`-u` 、 `-h` 、および`-P`情報を後で使用するためにメモしておきます。
 
 5. ダイアログの**VPC Peering**タブをクリックし、 **Step 1: Set up VPC**の下にある**Add**をクリックして、TiDBクラスターとAWS DMSのVPCピアリング接続を作成します。
 
@@ -140,7 +140,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 ## ステップ4. データベース移行タスクを作成する {#step-4-create-a-database-migration-task}
 
-1. AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。お住まいの地域に切り替えてください。次に、ウィンドウの右上隅にある**Create task**をクリックします。
+1. AWS DMS コンソールで、 [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに移動します。リージョンに切り替えてください。次に、ウィンドウの右上隅にある**Create task**をクリックします。
 
     ![Create task](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-create-task.png)
 
@@ -176,7 +176,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 5. 右下隅の**Create task**をクリックしてください。
 
-6. [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに戻ります。お住まいの地域に切り替えてください。タスクのステータスと進捗状況を確認できます。
+6. [データ移行タスク](https://console.aws.amazon.com/dms/v2/home#tasks)ページに戻ります。リージョンに切り替えてください。タスクのステータスと進捗状況を確認できます。
 
     ![Tasks status](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-task-status.png)
 

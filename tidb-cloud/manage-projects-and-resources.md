@@ -1,6 +1,6 @@
 ---
 title: Manage TiDB Cloud Resources and Projects
-summary: TiDB Cloudのリソースとプロジェクトの管理方法については、My TiDBページをご覧ください。
+summary: My TiDBページでTiDB Cloudのリソースとプロジェクトを管理する方法を学びます。
 ---
 
 # TiDB Cloudのリソースとプロジェクトを管理する {#manage-tidb-cloud-resources-and-projects}
@@ -61,7 +61,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 ### TiDB Cloudのリソースを管理する {#manage-tidb-cloud-resources}
 
-**My TiDB**ページでは、対象リソースの行にある**...**をクリックすることで、 TiDB Cloudリソースに対して、データの削除、名前変更、インポートなどのクイックアクションを実行できます。
+**My TiDB**ページでは、対象リソースの行にある**...**をクリックすることで、 TiDB Cloudリソースに対して、削除、名前変更、データのインポートなどのクイックアクションを実行できます。
 
 特定のTiDB Cloudリソースに対してより多くの操作を実行したり、設定を管理したりするには、対象のリソース名をクリックして概要ページに移動してください。
 
@@ -144,7 +144,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 ### TiDB Xインスタンスをプロジェクト間で移動する {#move-a-tidb-x-instance-between-projects}
 
-`Organization Owner`または`Project Owner`の役割を担っている場合、TiDB X インスタンスをプロジェクトに移動したり、任意のプロジェクトから移動したりできます。
+`Organization Owner`または`Project Owner`の役割を担っている場合、TiDB X インスタンスをプロジェクトに移動したり、プロジェクトの外に移動したりできます。
 
 > **Note:**
 >
@@ -163,6 +163,6 @@ TiDB Xインスタンスを移動するには、以下の手順を実行して�
 3. 表示されたダイアログで、次のいずれかの操作を行います。
 
     - TiDB Xインスタンスをプロジェクトに移動するには、 **To a project**を選択し、ドロップダウンリストから対象のプロジェクトを選択します。
-    - TiDB X インスタンスをどのプロジェクトからも移動するには、 **Outside any project**を選択します。
+    - TiDB X インスタンスをどのプロジェクトにも属さないように移動するには、 **Outside any project**を選択します。
 
 4. **Move**をクリックします。

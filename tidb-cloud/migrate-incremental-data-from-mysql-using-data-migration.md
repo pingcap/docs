@@ -5,7 +5,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 # データ移行を使用して、MySQL互換データベースからTiDB Cloudへ増分データのみを移行する {#migrate-only-incremental-data-from-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウドプロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、または Alibaba Cloud RDS) 上の MySQL 互換データベース、または自己ホスト型のソースデータベースから、 TiDB Cloudコンソールのデータ移行機能を使用して、増分データを<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>に移行する方法について説明します。
+このドキュメントでは、TiDB Cloud コンソールのデータ移行機能を使用して、クラウドプロバイダー (Amazon Aurora MySQL、Amazon Relational Database Service (RDS)、Google Cloud SQL for MySQL、Azure Database for MySQL、または Alibaba Cloud RDS) 上の MySQL 互換データベース、または自己ホスト型のソースデータベースから、増分データを<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>に移行する方法について説明します。
 
 <CustomContent plan="essential">
 
@@ -113,7 +113,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 SHOW VARIABLES LIKE 'binlog_row_image';
 ```
 
-結果が`FULL`でない場合は、 [RDSコンソール](https://rds.console.aliyun.com/)を使用して Alibaba Cloud RDS MySQL インスタンスのこのパラメータを設定する必要があります。 。
+結果が`FULL`でない場合は、 [RDSコンソール](https://rds.console.aliyun.com/)を使用して Alibaba Cloud RDS MySQL インスタンスのこのパラメータを設定する必要があります。
 
 ### 自己ホスト型のMySQLインスタンスの場合 {#for-a-self-hosted-mysql-instance}
 
@@ -164,7 +164,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 **Create Migration Job**ページで、ソースとターゲットの接続を設定します。
 
-1. 職名を入力してください。職名は文字で始まり、60文字以内である必要があります。文字（AZ、az）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
+1. ジョブ名を入力してください。ジョブ名は文字で始まり、60文字以内である必要があります。文字（AZ、az）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
 
 2. ソース接続プロファイルを入力してください。
 
@@ -211,7 +211,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     <CustomContent plan="dedicated">
 
     - パブリックIPまたはVPCピアリングを使用する場合は、データ移行サービスのIPアドレスを、ソースデータベースおよびファイアウォール（存在する場合）のIPアクセスリストに追加する必要があります。
-    - AWS Private Link を使用している場合、エンドポイントリクエストを承認するよう求められます。AWS [AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成した AWS リージョンに切り替え、 **Endpoint services**をクリックしてエンドポイントリクエストを承認してください。
+    - AWS Private Link を使用している場合、エンドポイントリクエストを承認するよう求められます。[AWS VPCコンソール](https://console.aws.amazon.com/vpc/home)で、エンドポイントサービスを作成した AWS リージョンに切り替え、 **Endpoint services**をクリックしてエンドポイントリクエストを承認してください。
 
     </CustomContent>
     <CustomContent plan="essential">

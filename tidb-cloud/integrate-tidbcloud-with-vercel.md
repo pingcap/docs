@@ -30,7 +30,7 @@ TiDB CloudとVercelを組み合わせることで、MySQL互換のリレーシ�
 Vercelにアカウントとプロジェクトをお持ちであることが前提となります。お持ちでない場合は、以下のVercelドキュメントを参照して作成してください。
 
 - [新しい個人アカウントを作成する](https://vercel.com/docs/teams-and-accounts#creating-a-personal-account)、 [新しいチームを作る](https://vercel.com/docs/teams-and-accounts/create-or-join-a-team#creating-a-team)。
-- Vercel で[プロジェクトの作成](https://vercel.com/docs/concepts/projects/overview#creating-a-project)か、デプロイするアプリケーションがない場合は、 [TiDB Cloud Starterテンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)を使用して試すことができます。
+- Vercel で[プロジェクトを作成](https://vercel.com/docs/concepts/projects/overview#creating-a-project)していること。デプロイするアプリケーションがない場合は、 [TiDB Cloud Starterテンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)を使用して試すことができます。
 
 Vercelプロジェクトは、1つのTiDB Cloudクラスターにしか接続できません。統合を変更するには、まず現在のクラスターとの接続を解除してから、新しいクラスターに接続する必要があります。
 
@@ -56,11 +56,11 @@ TiDB Cloudにアカウントとクラスターが既に作成されている必�
 
 ### データアプリとエンドポイント {#a-data-app-and-endpoints}
 
-データ[データアプリ](/tidb-cloud/data-service-manage-data-app.md)を介してTiDB Cloudクラスターに接続する場合は、事前にTiDB Cloudに対象のデータアプリとエンドポイントが設定されている必要があります。設定されていない場合は、以下の手順に従って作成してください。
+[データアプリ](/tidb-cloud/data-service-manage-data-app.md)を介してTiDB Cloudクラスターに接続する場合は、事前にTiDB Cloudに対象のデータアプリとエンドポイントが設定されている必要があります。設定されていない場合は、以下の手順に従って作成してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2. あなたのプロジェクトに合わせて[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)。
-3. [データアプリをリンクする](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)ターゲットのTiDB Cloudクラスターにリンクします。
+3. ターゲットのTiDB Cloudクラスターに[データアプリをリンク](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)します。
 4. [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)ことで、SQL文を実行するようにカスタマイズできます。
 
 Vercelプロジェクトは、1つのTiDB Cloudデータアプリにしか接続できません。Vercelプロジェクトのデータアプリを変更するには、まず現在のアプリとの接続を解除してから、新しいアプリに接続する必要があります。
@@ -167,9 +167,9 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
     接続を削除すると、統合ワークフローによって設定された環境変数もVercelプロジェクトから削除されます。ただし、この操作はTiDB Cloudクラスタのデータには影響しません。
 
-### TiDB Cloudのブランチ機能に接続します {#connect-with-branching} {#connect-with-branching}
+### TiDB Cloudのブランチ機能に接続します {#connect-with-branching}
 
-Vercel の[プレビューデプロイメント](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、変更を Git プロジェクトの本番ブランチにマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。TiDB [TiDB Cloud Branching](/tidb-cloud/branch-overview.md)を使用すると、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番データに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
+Vercel の[プレビューデプロイメント](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、変更を Git プロジェクトの本番ブランチにマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。[TiDB Cloud Branching](/tidb-cloud/branch-overview.md)を使用すると、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番データに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
 
 > **Note:**
 >
@@ -213,7 +213,7 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 
 > **Note:**
 >
-> TiDB Cloudの各組織では、デフォルトではTiDB Cloud Starterインスタンス用に最大 5つのブランチを作成できます。制限を超えないようにするには、不要になったTiDB Cloud Starterインスタンスのブランチを削除してください。詳細については、 [TiDB Cloudブランチを管理する](/tidb-cloud/branch-manage.md)を参照してください。 .
+> TiDB Cloudの各組織では、デフォルトではTiDB Cloud Starterインスタンス用に最大 5つのブランチを作成できます。制限を超えないようにするには、不要になったTiDB Cloud Starterインスタンスのブランチを削除してください。詳細については、 [TiDB Cloudブランチを管理する](/tidb-cloud/branch-manage.md)を参照してください。
 
 ## 環境変数を手動で設定して接続します {#connect-via-manually-setting-environment-variables}
 
@@ -242,7 +242,7 @@ Vercelでは、環境変数を次のように宣言できます。
 - **Key**= `DATABASE_URL`
 - **Value**= `mysql://<User>:<Password>@<Endpoint>:<Port>/<Database>?sslaccept=strict`
 
-TiDB Cloud コンソールでは、 `<User>` 、 `<Password>` 、 `<Endpoint>` 、 `<Port>` 、および`<Database>`TiDB Cloudを取得できます。
+TiDB Cloud コンソールでは、 `<User>` 、 `<Password>` 、 `<Endpoint>` 、 `<Port>` 、および`<Database>`の情報を取得できます。
 
 </div>
 <div label="Data App">

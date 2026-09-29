@@ -13,7 +13,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 >
 > このドキュメントは {{{ .starter }}}、Essential、Premium にのみ適用されます。TiDB Cloud Dedicated については、[Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md) を参照してください。
 
-## Statements {#statements}
+## ステートメント {#statements}
 
 ### Placement と range 管理 {#placement-and-range-management}
 
