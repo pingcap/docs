@@ -89,7 +89,7 @@ SHOW TABLES IN test;
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-ステートメント`SET DEFAULT ROLE` 、ロール`analyticsteam`を`jennifer`に関連付けるために使用できます。
+ステートメント`SET DEFAULT ROLE`は、ロール`analyticsteam`を`jennifer`に関連付けるために使用できます。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
@@ -130,7 +130,7 @@ SHOW TABLES IN test;
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-`analyticsteam`役割を削除します:
+`analyticsteam`のロールを削除します:
 
 ```sql
 DROP ROLE analyticsteam;

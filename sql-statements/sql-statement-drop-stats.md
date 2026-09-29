@@ -19,7 +19,7 @@ TableName ::=
 
 ## 使用法 {#usage}
 
-次の文は、 `TableName`のすべての統計情報を削除します。パーティションテーブルが指定されている場合、この文は[動的プルーニングモードで生成されたグローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)でなく、このテーブル内のすべてのパーティションの統計情報も削除します。
+次の文は、 `TableName`のすべての統計情報を削除します。パーティションテーブルが指定されている場合、この文は[動的プルーニングモードで生成されたグローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)に加えて、このテーブル内のすべてのパーティションの統計情報も削除します。
 
 ```sql
 DROP STATS TableName

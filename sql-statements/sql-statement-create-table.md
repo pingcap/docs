@@ -164,14 +164,14 @@ NextValueForSequence ::=
 | オプション                                        | 説明                                                                                                                                                                          | 例                                   |
 | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- |
 | `AUTO_INCREMENT`                             | 増分フィールドの初期値                                                                                                                                                                 | `AUTO_INCREMENT` = 5                |
-| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙の`_tidb_rowid`シャードのビット数を設定するには                                                                                                                                            | `SHARD_ROW_ID_BITS` = 4             |
-| `PRE_SPLIT_REGIONS`                          | テーブル作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割するには                                                                                                                                 | `PRE_SPLIT_REGIONS` = 4             |
+| [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md) | 暗黙の`_tidb_rowid`シャードのビット数を設定します                                                                                                                                            | `SHARD_ROW_ID_BITS` = 4             |
+| `PRE_SPLIT_REGIONS`                          | テーブル作成時に`2^(PRE_SPLIT_REGIONS)`リージョンを事前に分割します                                                                                                                                 | `PRE_SPLIT_REGIONS` = 4             |
 | `AUTO_ID_CACHE`                              | TiDBインスタンスで自動IDキャッシュサイズを設定します。デフォルトでは、TiDBは自動IDの割り当て速度に応じてこのサイズを自動的に変更します。                                                                                                  | `AUTO_ID_CACHE` = 200               |
 | `AUTO_RANDOM_BASE`                           | auto_randomの初期増分値を設定します。このオプションは内部インターフェースの一部とみなすことができます。ユーザーはこのパラメータを無視できます。                                                                                               | `AUTO_RANDOM_BASE` = 0              |
-| `CHARACTER SET`                              | テーブルの[文字セット](/character-set-and-collation.md)を指定するには                                                                                                                        | `CHARACTER SET` = 'utf8mb4' |
-| `COLLATE`                                    | テーブルの文字セット照合順序を指定するには                                                                                                                                                       | `COLLATE` = 'utf8mb4_bin'   |
+| `CHARACTER SET`                              | テーブルの[文字セット](/character-set-and-collation.md)を指定します                                                                                                                        | `CHARACTER SET` = 'utf8mb4' |
+| `COLLATE`                                    | テーブルの文字セット照合順序を指定します                                                                                                                                                       | `COLLATE` = 'utf8mb4_bin'   |
 | `COMMENT`                                    | コメント情報                                                                                                                                                                      | `COMMENT` = 'コメント情報'        |
-| `AFFINITY`                                   | テーブルまたはパーティションのアフィニティスケジューリングを有効にするには、この設定を使用します。パーティション化されていないテーブルの場合は`'table'`に、パーティション化されたテーブルの場合は`'partition'`に設定できます。 `'none'`に設定するか、空欄のままにすると、アフィニティスケジューリングが無効になります。 | `AFFINITY` = 'テーブル'         |
+| `AFFINITY`                                   | テーブルまたはパーティションのアフィニティスケジューリングを有効にするには、この設定を使用します。パーティション化されていないテーブルの場合は`'table'`に、パーティション化されたテーブルの場合は`'partition'`に設定できます。 `'none'`に設定するか、空欄のままにすると、アフィニティスケジューリングが無効になります。 | `AFFINITY` = 'table'         |
 
 <CustomContent platform="tidb">
 
@@ -298,7 +298,7 @@ mysql> DESC t1;
 - `[ASC | DESC]`内の`index_col_name`は現在解析されますが無視されます (MySQL 5.7互換の動作)。
 - `COMMENT`属性は`WITH PARSER`オプションをサポートしていません。
 - TiDBは、デフォルトでは1つのテーブルで1017列、最大4096列をサポートします。InnoDBにおける対応する列数の制限は1017列、MySQLにおけるハードリミットは4096列です。詳細は[TiDBの制限事項](/tidb-limitations.md)を参照してください。
-- TiDB は`HASH` 、 `RANGE` 、 `LIST` 、および`KEY`サポートしています[パーティショニングの種類](/partitioned-table.md#partitioning-types)されていないパーティションタイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`を返します。ここで、 `%s`はサポートされていない特定のパーティションタイプです。
+- TiDB は`HASH` 、 `RANGE` 、 `LIST` 、および`KEY`の[パーティショニングの種類](/partitioned-table.md#partitioning-types)をサポートしています。サポートされていないパーティションタイプの場合、TiDB は`Warning: Unsupported partition type %s, treat as normal table`を返します。ここで、 `%s`はサポートされていない特定のパーティションタイプです。
 
 ## 参照 {#see-also}
 
