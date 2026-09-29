@@ -49,10 +49,6 @@ In this method, you first use the CloudFormation stack provided by the Export fe
 
 After the stack is created, record the **Role ARN** from the stack **Outputs** (for example, `arn:aws:iam::<account-id>:role/<role-name>`).
 
-> **Note:**
->
-> The CloudFormation-created role includes an S3 permissions policy scoped to the **export snapshot path** only (for example, `arn:aws:s3:::bucket/prefix/snapshot/*`). You will expand this policy in Step 3 to cover the full data pipeline prefix (for example, `arn:aws:s3:::bucket/prefix/*`). To modify the policy in AWS Console, navigate to the newly created role, under the **Permissions** tab, click the policy name, and edit the policy.
-
 #### Step 2. Consolidate trust relationships
 
 The IAM role created in the previous step is initially configured for exporting data from TiDB Cloud Essential to S3. Because the same role is also used by the changefeed and TiDB Cloud Lake to access the S3 bucket, update its trust policy to allow these components to assume the role as well.
