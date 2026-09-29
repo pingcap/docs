@@ -886,7 +886,7 @@ TiDBサービスの状態に関する設定。
 - セッションレベルのシステム変数[`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800)が`"bulk"`に設定されている場合、セッションにおけるこの設定の効果は、それを`false`に設定することと同じです。
 - デフォルト値: `false`
 
-### constraint-check-in-place-pessimistic） <span class="version-mark">v6.4.0の新機能</span> {#constraint-check-in-place-pessimistic-new-in-v640}
+### constraint-check-in-place-pessimistic <span class="version-mark">v6.4.0の新機能</span> {#constraint-check-in-place-pessimistic-new-in-v640}
 
 - システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)のデフォルト値を制御します。
 - デフォルト値: `true`

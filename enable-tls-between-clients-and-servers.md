@@ -20,7 +20,7 @@ TLSで保護された接続を使用するには、まずTiDBサーバーでTLS�
 MySQLと同様に、TiDBは同じTCPポート上でTLS接続と非TLS接続の両方を許可します。TLSが有効になっているTiDBサーバーの場合、暗号化された接続を介してTiDBサーバーに安全に接続するか、暗号化されていない接続を使用するかを選択できます。安全な接続の使用を必須にするには、次の方法を使用できます。
 
 - システム変数[`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)を設定して、すべてのユーザーが TiDBサーバーへの安全な接続を必須とするようにします。
-- ユーザーを作成するとき（ `REQUIRE SSL` 、または既存のユーザーを変更するとき（ `CREATE USER` ）に`ALTER USER`を指定すると、指定されたユーザーはTiDBにアクセスするためにTLS接続を使用する必要があることが指定されます。以下は、ユーザーを作成する例です。
+- ユーザーを作成するとき（ `CREATE USER` ）、または既存のユーザーを変更するとき（ `ALTER USER` ）に`REQUIRE SSL`を指定すると、指定されたユーザーはTiDBにアクセスするためにTLS接続を使用する必要があることが指定されます。以下は、ユーザーを作成する例です。
 
     ```sql
     CREATE USER 'u1'@'%' IDENTIFIED BY 'my_random_password' REQUIRE SSL;

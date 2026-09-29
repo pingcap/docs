@@ -14,7 +14,7 @@ summary: TiDB データベースの SHOW STATS_LOCKED の使用法の概要。
 | `Db_name`        | データベース名             |
 | `Table_name`     | テーブル名               |
 | `Partition_name` | パーティション名            |
-| `Status`         | 統計ステータス（例： `locked` |
+| `Status`         | 統計ステータス（例： `locked`） |
 
 ## 概要 {#synopsis}
 

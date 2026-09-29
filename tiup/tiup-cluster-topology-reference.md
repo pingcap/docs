@@ -16,7 +16,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、Prometheus、
 TiUPを使用した TiDB デプロイメントのトポロジ設定ファイルには、次のセクションが含まれる場合があります。
 
 - [グローバル](#global) : クラスターのグローバル設定。一部の設定項目はデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
-- [監視](#monitored) : 監視サービス（blackbox_exporterと`node_exporter`の設定。各マシンに`node_exporter`と`blackbox_exporter`がデプロイされています。
+- [監視](#monitored) : 監視サービス（blackbox_exporterと`node_exporter`）の設定。各マシンに`node_exporter`と`blackbox_exporter`がデプロイされています。
 - [サーバー構成](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じ名前の設定項目がある場合は、インスタンスの設定項目が有効になります。
 - [コンポーネントバージョン](#component_versions) : コンポーネントバージョン。コンポーネントがクラスタバージョンを使用しない場合に設定します。このセクションはtiup-cluster v1.14.0で導入されました。
 - [pd_servers](#pd_servers) : PDインスタンスの構成。この構成では、PDコンポーネントがデプロイされるマシンを指定します。
@@ -438,7 +438,7 @@ tiflash_servers:
 
 - `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに基づいてディレクトリが生成されます。
 
-- `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。値は NUMA ノードの ID（例： `"0,1"`です。
+- `numa_node` : インスタンスにNUMAポリシーを割り当てます。このフィールドを指定する前に、対象マシンに[numactl](https://linux.die.net/man/8/numactl)インストールされていることを確認する必要があります。このフィールドを指定した場合、 cpubind および membind ポリシーは[numactl](https://linux.die.net/man/8/numactl)を使用して割り当てられます。このフィールドは文字列型です。値は NUMA ノードの ID（例： `"0,1"`）です。
 
 - `config` : このフィールドの設定ルールは、 `server_configs`の`tiproxy`設定ルールと同じです。このフィールドが設定されている場合、フィールドの内容は`server_configs`の`tiproxy`の内容とマージされます。これら2つのフィールドが重複している場合、このフィールドの内容が有効になります。その後、設定ファイルが生成され、 `host`で指定されたマシンに送信されます。
 

@@ -192,7 +192,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
 
 - **Tag**：エンドポイントのグループを識別するために使用されるタグ。
 
-- **Pagination**：このプロパティは、リクエストメソッドが`GET`で、エンドポイントの最後の SQL文が`SELECT`操作の場合にのみ使用できます。**Pagination**が有効になっている場合、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`を指定することで、結果をページネーションできます（例`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>` 。詳細については、[エンドポイントを呼び出す](#call-an-endpoint)を参照してください。
+- **Pagination**：このプロパティは、リクエストメソッドが`GET`で、エンドポイントの最後の SQL文が`SELECT`操作の場合にのみ使用できます。**Pagination**が有効になっている場合、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`を指定することで、結果をページネーションできます（例： `https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id?page=<Page Number>&page_size=<Page Size>`）。詳細については、[エンドポイントを呼び出す](#call-an-endpoint)を参照してください。
 
     > **Note:**
     >

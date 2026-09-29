@@ -33,7 +33,7 @@ summary: このドキュメントでは、ユーザー応答時間、スルー�
 データベースの時間を取得するには、次のいずれかの方法を使用できます。
 
 - 方法1：平均クエリレイテンシーにQPSとΔTを掛け合わせると、 `DB Time in ΔT = QPS × avg latency × ΔT`
-- 方法2: アクティブセッションの平均数にΔTを掛ける（つまり`DB Time in ΔT  = avg active connections × ΔT`
+- 方法2: アクティブセッションの平均数にΔTを掛ける（つまり`DB Time in ΔT  = avg active connections × ΔT`）
 - 方法3: TiDB内部のPrometheusメトリック`tidb_server_tokens`に基づいて時間を計算します`ΔT DB Time = rate(tidb_server_tokens) × ΔT`
 
 ## ユーザー応答時間とシステムスループットの関係 {#relationship-between-user-response-time-and-system-throughput}

@@ -315,7 +315,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - 読み取りレイテンシーに対するディスク パフォーマンス ジッターの影響を軽減 [#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - バックグラウンド GC タスクの読み取りおよび書き込みタスクのレイテンシーへの影響を軽減 [#8650](https://github.com/pingcap/tiflash/issues/8650) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - ストレージとコンピューティングを分離したアーキテクチャで同一のデータ読み取り操作をマージして、高並行処理下でのデータスキャン性能を向上させるサポート [#6834](https://github.com/pingcap/tiflash/issues/6834) @[JinheLin](https://github.com/JinheLin)
-    - `SEMI JOIN`と`LEFT OUTER SEMIJOIN`の実行パフォーマンスを最適化する`JOIN ON`に JOIN KEY 等価条件のみが含まれる場合） [#47424](https://github.com/pingcap/tidb/issues/47424) @[gengliqi](https://github.com/gengliqi)
+    - `SEMI JOIN`と`LEFT OUTER SEMIJOIN`の実行パフォーマンスを最適化する（`JOIN ON`に JOIN KEY 等価条件のみが含まれる場合） [#47424](https://github.com/pingcap/tidb/issues/47424) @[gengliqi](https://github.com/gengliqi)
 
 - ツール
 
@@ -475,7 +475,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
         - TiCDCサーバーがオブジェクトストレージサービスへのデータ複製時にpanicする可能性がある問題を修正しました [#10137](https://github.com/pingcap/tiflow/issues/10137) @[sdojjy](https://github.com/sdojjy)
         - `kv-client`の初期化中の潜在的なデータ競合の問題を修正 [#10095](https://github.com/pingcap/tiflow/issues/10095) @[3AceShowHand](https://github.com/3AceShowHand)
         - TiCDCが特定の特殊なシナリオで誤ってTiKVとの接続を閉じる問題を修正 [#10239](https://github.com/pingcap/tiflow/issues/10239) @[hicqu](https://github.com/hicqu)
-        - TiCDCサーバーが損失のあるDDL文を実行する際にpanicする可能性がある問題を修正しました（アップストリーム [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
+        - TiCDCサーバーがアップストリームの損失のあるDDL文を実行する際にpanicする可能性がある問題を修正しました [#9739](https://github.com/pingcap/tiflow/issues/9739) @[hicqu](https://github.com/hicqu)
         - TiCDCがデータを下流のMySQLに複製する際に`checkpoint-ts`が停止する可能性がある問題を修正しました [#10334](https://github.com/pingcap/tiflow/issues/10334) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
 
     - TiDB Data Migration (DM)

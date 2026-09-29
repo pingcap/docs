@@ -9,7 +9,7 @@ summary: DM（データ移行）データソースおよび移行タスク構成
 
 ## 使用法 {#usage}
 
-1. カスタムキーファイルを作成します。このファイルには、64文字の16進数AES-256秘密鍵が含まれている必要があります。この鍵を生成する方法の一つは、ランダムデータ（例えば`head -n 256 /dev/urandom | sha256sum`のSHA256チェックサムを計算することです。
+1. カスタムキーファイルを作成します。このファイルには、64文字の16進数AES-256秘密鍵が含まれている必要があります。この鍵を生成する方法の一つは、ランダムデータのSHA256チェックサムを計算することです（例えば`head -n 256 /dev/urandom | sha256sum`）。
 2. DM-master [コマンドラインフラグ](/dm/dm-command-line-flags.md)または[設定ファイル](/dm/dm-master-configuration-file.md)で、カスタム キー ファイルのパスとして`secret-key-path`を指定します。
 
 ## v8.0.0 より前のバージョンからアップグレードする {#upgrade-from-a-version-earlier-than-v8-0-0}

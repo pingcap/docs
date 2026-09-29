@@ -173,7 +173,7 @@ TiCDCサーバーの起動時に、GCセーフポイントのTime To Live（TTL�
 
 > **Note:**
 >
-> 一部のシナリオ、例えばDumpling/BRを使用した完全レプリケーション後に TiCDC による増分レプリケーションを実行する場合など、デフォルトの 24時間（ `gc-ttl`では不十分な場合があります。TiCDCサーバーを起動する際に、適切な値`gc-ttl`を指定する必要があります。
+> 一部のシナリオ、例えばDumpling/BRを使用した完全レプリケーション後に TiCDC による増分レプリケーションを実行する場合など、`gc-ttl`のデフォルト値である 24時間では不十分な場合があります。TiCDCサーバーを起動する際に、 `gc-ttl`に適切な値を指定する必要があります。
 
 ## TiCDCガベージコレクション(GC) セーフポイントの完全な動作は何ですか? {#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint}
 

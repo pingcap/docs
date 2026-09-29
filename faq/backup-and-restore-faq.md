@@ -270,7 +270,7 @@ br restore full -f 'mysql.usertable' -s $external_storage_url --with-sys-table
 [テーブルフィルター](/table-filter.md#syntax)を設定しても、 **BR は次のシステムテーブルを復元しないこと**に注意してください。
 
 - 統計表（ `mysql.stat_*` ）。ただし、統計は復元可能です。[統計のバックアップ](/br/br-snapshot-manual.md#back-up-statistics)を参照してください。
-- システム変数テーブル（ `mysql.tidb` `mysql.global_variables`
+- システム変数テーブル（ `mysql.tidb` 、 `mysql.global_variables`）
 - [その他のシステムテーブル](https://github.com/pingcap/tidb/blob/release-8.5/br/pkg/restore/snap_client/systable_restore.go#L31)
 
 ### 復元中に`cannot find rewrite rule`というエラーに対処するにはどうすればよいですか? {#how-to-deal-with-the-error-of-cannot-find-rewrite-rule-during-restoration}

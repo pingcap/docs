@@ -33,7 +33,7 @@ TiCDC は、次の種類のアップストリーム データの変更をサポ�
 - **サポート対象:**
 
     - DDL および DML文 (システムテーブルを除く)。
-    - インデックス操作（ `ADD INDEX` `CREATE INDEX` ：ダウンストリームがTiDB、TiCDC [`ADD INDEX`および`CREATE INDEX` DDL操作を非同期的に実行します](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)の場合、変更フィードレプリケーションのレイテンシーへの影響を軽減します。
+    - インデックス操作（ `ADD INDEX` 、 `CREATE INDEX`）: 変更フィードレプリケーションのレイテンシーへの影響を軽減するため、ダウンストリームがTiDBの場合、TiCDCは[`ADD INDEX`および`CREATE INDEX` DDL操作を非同期的に実行します](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)。
     - 外部キー制約DDL文（ `ADD FOREIGN KEY` ）：TiCDCは上流のシステム変数設定を複製し**ません**。下流の外部キー制約チェックを有効にするには、下流で[`foreign_key_checks`](/system-variables.md#foreign_key_checks)手動で設定する必要があります。また、下流にデータを書き込む際に、TiCDCはセッションレベルの設定`SET SESSION foreign_key_checks = OFF;`を自動的に有効にします。したがって、下流でグローバル外部キーチェックが有効になっている場合でも、TiCDCによって書き込まれたデータは外部キー制約の検証をトリガーしません。
 
 - **サポートされていません**:
