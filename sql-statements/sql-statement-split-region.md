@@ -269,7 +269,7 @@ Splitting Regions for partitioned tables is the same as splitting Regions for or
     split partition table t between (0) and (10000) regions 4;
     ```
 
-    In the above statement, `0` and `10000` respectively represent the `row_id` of the upper and lower boundaries corresponding to the hotspot data you want to scatter.
+    In the above statement, `0` and `10000` respectively represent the `row_id` of the lower and upper boundaries corresponding to the hotspot data you want to scatter.
 
     > **Note:**
     >
