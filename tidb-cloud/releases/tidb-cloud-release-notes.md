@@ -293,7 +293,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - Datadog 統合をサポートしました（パブリックプレビュー）。
 
-        TiDB Cloud Essential インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
 
         詳細については、[Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential) を参照してください。
 
@@ -301,7 +301,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - Datadog 統合をサポートしました（パブリックプレビュー）。
 
-        TiDB Cloud Premium インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
+        [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
 
         詳細については、[Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium) を参照してください。
 
@@ -370,7 +370,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - 以下の課金調整が [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) に対して適用されます。
 
-    - **最小 RCU 課金の更新**: **2026年8月1日**から、最小 RCU 値は設定された最大 RCU 値に基づいて自動的に決定されます（最小 RCU = 設定された最大 RCU の 0.1 ×、下限は 2,000 RCU）。実際の使用量が最小 RCU しきい値を下回る場合、TiDB Cloud は最小 RCU 値に基づいて料金を計算します。**2026年7月1日より前に作成された既存インスタンス**については、この最小 RCU 課金ポリシーの実施は延期され、正確な適用日は後日発表されます。
+    - **最小 RCU 課金の更新**: **2026年8月1日**から、最小 RCU 値は設定された最大 RCU 値に基づいて自動的に決定されます（最小 RCU = 0.1 × 設定された最大 RCU、下限は 2,000 RCU）。実際の使用量が最小 RCU しきい値を下回る場合、TiDB Cloud は最小 RCU 値に基づいて料金を計算します。**2026年7月1日より前に作成された既存インスタンス**については、この最小 RCU 課金ポリシーの実施は延期され、正確な適用日は後日発表されます。
     - **追加の課金対象機能**: バックアップ使用量およびネットワーク外向きトラフィックの料金は **2026年9月1日** に適用開始となります。詳細については、[TiDB Cloud Essential pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください。
 
 ## 2026年6月16日 {#june-16-2026}
@@ -445,7 +445,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Premium**
 
-    - [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンスの Alibaba Cloud で二層データ暗号化をサポートします。
+    - [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンスの Alibaba Cloud で二重層データ暗号化をサポートします。
 
         Alibaba Cloud Key Management Service (KMS) では、独自のキーを使用して保存データを暗号化できるため、データセキュリティとコンプライアンスをより詳細に管理できます。
 
@@ -453,8 +453,8 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - TiDB Cloud Premiumインスタンス向けに、**メトリクス**ページ（**インスタンス概要**タブ）に2つの新しいTTL監視メトリクスを追加します。
 
-        - TTLスケジュール遅延によるテーブル数
-        - 日ごとのTTL挿入/削除行数
+        - Table Count by TTL Schedule Delay
+        - TTL Insert/Delete Rows by Day
 
         これらのメトリクスは、TTL ジョブの健全性を観察し、データ保持の問題を検出するのに役立ちます。詳細については、 [TiDB Cloud Premium の組み込みメトリクス](/tidb-cloud/premium/built-in-monitoring-premium.md)を参照してください。
 
@@ -512,7 +512,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の Top RU が、以下のリージョンでパブリックプレビューとして利用可能になりました。
 
-        - アリババクラウド: `Mexico (na-south-1)`
+        - Alibaba Cloud: `Mexico (na-south-1)`
 
         この機能は、RUを最も多く消費しているSQL文を分単位の粒度で表示し、リソースを大量に消費するクエリを迅速に特定してコスト削減に役立てます。
 
@@ -524,15 +524,15 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Premium**
 
-    - `AVG RU/s`メトリクスを[TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)**Metrics**ページに追加します。
+    - `AVG RU/s`メトリクスを[TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)の**Metrics**ページに追加します。
 
-        `AVG RU/s` 、選択した時間範囲における1秒あたりの平均RU消費数を表示し、リソース消費をよりよく理解するのに役立ちます。
+        `AVG RU/s`は、選択した時間範囲における1秒あたりの平均RU消費数を表示し、リソース消費をよりよく理解するのに役立ちます。
 
 - **TiDB Cloud Dedicated**
 
-    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 、**日本東部**および**米国東部 2**の Microsoft Azure で一般提供 (GA) になりました。
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)は、**日本東部**および**米国東部 2**の Microsoft Azure で一般提供 (GA) になりました。
 
-        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとストレージのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。Azure [Azure Marketplace](https://azuremarketplace.microsoft.com/)ご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
+        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとストレージのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。[Azure Marketplace](https://azuremarketplace.microsoft.com/)をご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
 
         詳細については、 [プレビュー版から本番環境へ：Microsoft Azure 上のTiDB Cloud Dedicatedが一般提供開始](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/)を参照してください。
 
@@ -542,13 +542,13 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Premium**
 
-    - [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)は、現在AWS<CustomContent language="en,zh">アリババクラウド</CustomContent>でパブリックプレビュー中です。
+    - [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium)は、現在AWS<CustomContent language="en,zh">とAlibaba Cloud</CustomContent>でパブリックプレビュー中です。
 
         [TiDB X](/tidb-cloud/tidb-x-architecture.md)カーネルを搭載したTiDB Cloud Premiumは、ハイパースケール、妥協のないパフォーマンス、そしてクラウドネイティブな消費モデルによるコスト効率を必要とする、ミッションクリティカルなエンタープライズワークロード向けに特別に設計されています。
 
         TiDB Cloud Premium は[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の間のギャップを埋めるものです。
 
-        - TiDB Cloud Essentialと比較して、 TiDB Cloud Premiumはコンピューティング、storage、ネットワークの各レイヤーにおいて大幅に強化された分離性を提供し、重要なワークロードに対して予測可能なパフォーマンスを保証します。同時に、柔軟性の高いオンデマンドのスケーリングモデルを維持しており、運用上のオーバーヘッドなしにコンピューティング能力を個別に拡張できます。
+        - TiDB Cloud Essentialと比較して、 TiDB Cloud Premiumはコンピューティング、ストレージ、ネットワークの各レイヤーにおいて大幅に強化された分離性を提供し、重要なワークロードに対して予測可能なパフォーマンスを保証します。同時に、柔軟性の高いオンデマンドのスケーリングモデルを維持しており、運用上のオーバーヘッドなしにコンピューティング能力を個別に拡張できます。
         - TiDB Cloud Dedicatedと比較して、 TiDB Cloud Premiumはアイドル状態の余裕を排除することでコスト効率を向上させ、実際に使用したパフォーマンスに対してのみ料金を支払うことができます。
 
         TiDB Cloud Premium の詳細については、 [TiDB Cloud Premium: ミッションクリティカルなSQLのパブリックプレビュー](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/)を参照してください。
@@ -596,7 +596,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 **コンソールの変更**
 
-- [TiDB Cloudコンソール](https://tidbcloud.com)すべてのTiDB Cloudプラン ( TiDB Cloud Starter、 Essential、 Dedicatedなど) で統一します。以下の機能が利用可能になりました。
+- すべてのTiDB Cloudプラン ( TiDB Cloud Starter、 Essential、 Dedicatedなど) で[TiDB Cloudコンソール](https://tidbcloud.com)のエクスペリエンスを統一します。以下の機能が利用可能になりました。
 
     - **[My TiDB](https://tidbcloud.com/tidbs) ホームページ**：リソースビューとプロジェクトビューの両方を備えた、新しい組織レベルのホームページ。
 
@@ -619,7 +619,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - TiDB Cloud StarterおよびEssentialインスタンスの`project_id`の値は、 TiDB Cloudコンソールでプロジェクト間でインスタンスを移動できるため、**変更される可能性があります**。 `project_id`の値をハードコーディングしないでください。
 
-- `type`フィールド[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)に追加します。
+- [アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)エンドポイントに`type`フィールドを追加します。
 
     - アプリケーションがプロジェクト応答から`id`および`name`フィールドのみを読み取る場合は、変更は必要ありません。
     - [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターするため)、 `type`フィールドの読み取りを開始します。
@@ -658,7 +658,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - Prometheusメトリクス統合を有効にする（PREVIEW）。
 
-        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスターレベルでPrometheusとの連携を管理します。この機能により、 TiDB Cloud EssentialクラスターからPrometheusへメトリクスをシームレスに送信でき、統合プラットフォーム上で高度なアラート機能を実現できます。
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)は、クラスターレベルでPrometheusとの連携を管理します。この機能により、 TiDB Cloud EssentialクラスターからPrometheusへメトリクスをシームレスに送信でき、統合プラットフォーム上で高度なアラート機能を実現できます。
 
         統合手順については、 [TiDB CloudをPrometheusおよびGrafanaと統合する](/tidb-cloud/prometheus-grafana-integration.md)を参照してください。
 
@@ -682,7 +682,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - データフローシナリオにおけるプライベートリンク接続でのAmazon MSK Provisionedをサポートします。
 
-        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベートネットワーク接続が可能になります。
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)は、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベートネットワーク接続が可能になります。
 
         詳細については、 [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
 
@@ -738,7 +738,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - 変更フィードデータをAzure Blob Storageにシンクすることをサポートします。
 
-        [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 、変更フィードデータをAzure Blob Storageに直接保存する機能をサポートするようになりました。この機能により、Azureベースのユーザーは、変更データを効率的にアーカイブして、下流の分析や長期保存に活用できます。また、中間メッセージキューが不要になるためコスト削減にもつながり、既存のAmazon S3およびGoogle Cloud Storage（GCS）シンクとのフォーマット互換性も維持されます。
+        [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)は、変更フィードデータをAzure Blob Storageに直接保存する機能をサポートするようになりました。この機能により、Azureベースのユーザーは、変更データを効率的にアーカイブして、下流の分析や長期保存に活用できます。また、中間メッセージキューが不要になるためコスト削減にもつながり、既存のAmazon S3およびGoogle Cloud Storage（GCS）シンクとのフォーマット互換性も維持されます。
 
         詳細については、 [クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md)を参照してください。
 
@@ -748,7 +748,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Dedicated**
 
-    - FlashDutyとPagerDutyをアラート購読チャネルとしてサポートします。
+    - FlashdutyとPagerDutyをアラート購読チャネルとしてサポートします。
 
         これらの統合機能は、インシデント管理プロセスを効率化し、運用上の信頼性を向上させるように設計されています。
 
@@ -790,9 +790,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 **コンソールの変更**
 
-- プランに応じたサポートオプションで、サポート体験を向上させましょう。
+- プランに応じたサポートオプションにより、サポート体験を向上させます。
 
-    [TiDB Cloudコンソール](https://tidbcloud.com/)すべてのサブスクリプションプランにおいてサポート体験を向上させるため、プランに応じたサポートオプションを提供開始しました。これらのアップデートには以下が含まれます。
+    [TiDB Cloudコンソール](https://tidbcloud.com/)では、すべてのサブスクリプションプランにおいてサポート体験を向上させるため、プランに応じたサポートオプションを提供開始しました。これらのアップデートには以下が含まれます。
 
     - **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、 **[アクション]**列の**[サポートを受ける]**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**Support Plan**パネルに、有料プランのユーザーは**Support Portal**に誘導されます。
     - **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**Support Options**と**Support Tickets**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
