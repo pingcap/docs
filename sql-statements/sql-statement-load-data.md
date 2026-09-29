@@ -20,7 +20,7 @@ TiDB v7.0.0 以降、 `LOAD DATA` SQL文は次の機能をサポートします�
 
 > **Note:**
 >
-> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は Amazon S3 または Google Cloud Storage の`LOAD DATA LOCAL INFILE` 、 `LOAD DATA INFILE`サポートしますが、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) `LOAD DATA LOCAL INFILE`のみをサポートします。
+> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は`LOAD DATA LOCAL INFILE`と、Amazon S3 または Google Cloud Storage からの`LOAD DATA INFILE`をサポートしますが、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)は`LOAD DATA LOCAL INFILE`のみをサポートします。
 
 </CustomContent>
 
@@ -71,7 +71,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 
 デフォルトでは、重複したデータはエラーの原因となります。
 
-### S3とGCSstorage {#s3-and-gcs-storage}
+### S3とGCSストレージ {#s3-and-gcs-storage}
 
 <CustomContent platform="tidb">
 
@@ -91,7 +91,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 - 指定されたパス内のすべてのファイルをインポート: `s3://<bucket-name>/path/to/data/*`
 - 指定されたパスの下にある`.csv`で終わるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/*.csv`
 - 指定されたパスの下にある`foo`で始まるすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*`
-- 指定されたパスの下にある、先頭が`foo` 、末尾が`.csv`すべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
+- 指定されたパスの下にある、先頭が`foo` 、末尾が`.csv`のすべてのファイルをインポートします: `s3://<bucket-name>/path/to/data/foo*.csv`
 
 ### `Fields` 、 `Lines` 、 `Ignore Lines` {#fields-lines-and-ignore-lines}
 
@@ -116,7 +116,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 "alice","33","street 1"\r\n
 ```
 
-`bob` 、 `20` 、 `street 1`抽出する場合は、フィールド区切り文字を`','` 、囲み文字を`'\"'`に指定します。
+`bob` 、 `20` 、 `street 1`を抽出する場合は、フィールド区切り文字を`','` 、囲み文字を`'\"'`に指定します。
 
 ```sql
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
@@ -137,13 +137,13 @@ LINES TERMINATED BY '\n' STARTING BY ''
 
 <CustomContent platform="tidb">
 
-`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、トラブルシューティングについては[エラー 1148 (42000): 使用されたコマンドはこの TiDB バージョンでは許可されていません](/error-codes.md#mysql-native-error-messages)を参照してください。
+`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、トラブルシューティングについては[ERROR 1148 (42000): the used command is not allowed with this TiDB version](/error-codes.md#mysql-native-error-messages)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、トラブルシューティングについては[エラー 1148 (42000): 使用されたコマンドはこの TiDB バージョンでは許可されていません](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages)を参照してください。
+`ERROR 1148 (42000): the used command is not allowed with this TiDB version`が表示された場合は、トラブルシューティングについては[ERROR 1148 (42000): the used command is not allowed with this TiDB version](https://docs.pingcap.com/tidb/stable/error-codes#mysql-native-error-messages)を参照してください。
 
 </CustomContent>
 
@@ -162,7 +162,7 @@ Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY x'2c' ENCLOSED BY b'100010' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);
 ```
 
-上記の例では、 `x'2c'` `,`文字の 16 進表現であり、 `b'100010'` `"`文字の 2 進表現です。
+上記の例では、 `x'2c'`は`,`文字の 16 進表現であり、 `b'100010'`は`"`文字の 2 進表現です。
 
 <CustomContent platform="tidb-cloud">
 
@@ -189,11 +189,11 @@ IGNORE 1 LINES;
 >
 > - TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットが実行され、これは構成できません。
 > - TiDB v4.0.0 から v6.6.0 までのバージョンでは、TiDB はデフォルトですべての行を 1つのトランザクションでコミットします。ただし、 `LOAD DATA`文で一定数の行をコミットする必要がある場合は、必要な行数を[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)に設定できます。
-> - TiDB v7.0.0 以降では、 `tidb_dml_batch_size` `LOAD DATA`には影響しなくなり、TiDB は 1つのトランザクションですべての行をコミットします。
+> - TiDB v7.0.0 以降では、 `tidb_dml_batch_size`は`LOAD DATA`には影響しなくなり、TiDB は 1つのトランザクションですべての行をコミットします。
 > - TiDB v4.0.0 以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する場合があります。このエラーを解決するには、 `tidb.toml`ファイルの[`txn-total-size-limit`](/tidb-configuration-file.md#txn-total-size-limit)の値を増やすことをお勧めします。
-> - TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされることはありません。
+> - TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`がロールバックされることはありません。
 > - TiDB v7.6.0 より前のバージョンでは、TiDB トランザクションモードの構成に関係なく、 `LOAD DATA`文は常に楽観的トランザクションモードで実行されます。
-> - v7.6.0 以降、TiDB は他の DML文と同じ方法で`LOAD DATA` in トランザクションを処理します。
+> - v7.6.0 以降、TiDB は他の DML文と同じ方法でトランザクション内の`LOAD DATA`を処理します。
 >     - `LOAD DATA`文は、現在のトランザクションをコミットせず、新しいトランザクションを開始しません。
 >     - `LOAD DATA`文は、TiDB トランザクションモード設定 (楽観的または悲観的トランザクション) の影響を受けます。
 >     - トランザクション内の`LOAD DATA`のステートメントは、トランザクション内の[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)のステートメントによってロールバックできます。
@@ -206,11 +206,11 @@ IGNORE 1 LINES;
 >
 > - TiDB v4.0.0 より前のバージョンでは、20000 行ごとに`LOAD DATA`コミットが実行され、これは構成できません。
 > - TiDB v4.0.0 から v6.6.0 までのバージョンでは、TiDB はデフォルトですべての行を 1つのトランザクションでコミットします。ただし、 `LOAD DATA`文で一定数の行をコミットする必要がある場合は、必要な行数を[`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)に設定できます。
-> - v7.0.0 以降、 `tidb_dml_batch_size` `LOAD DATA`には影響しなくなり、 TiDB は 1つのトランザクションですべての行をコミットします。
+> - v7.0.0 以降、 `tidb_dml_batch_size`は`LOAD DATA`には影響しなくなり、 TiDB は 1つのトランザクションですべての行をコミットします。
 > - TiDB v4.0.0以前のバージョンからアップグレードすると、 `ERROR 8004 (HY000) at line 1: Transaction is too large, size: 100000058`が発生する場合があります。このエラーを解決するには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡して[`txn-total-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-total-size-limit)の値を増やすことができます。
-> - TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`ロールバックされることはありません。
+> - TiDB v7.6.0 より前のバージョンでは、トランザクションでコミットされる行数に関係なく、明示的なトランザクションの[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)ステートメントによって`LOAD DATA`がロールバックされることはありません。
 > - TiDB v7.6.0 より前のバージョンでは、TiDB トランザクションモードの構成に関係なく、 `LOAD DATA`文は常に楽観的トランザクションモードで実行されます。
-> - v7.6.0 以降、TiDB は他の DML文と同じ方法で`LOAD DATA` in トランザクションを処理します。
+> - v7.6.0 以降、TiDB は他の DML文と同じ方法でトランザクション内の`LOAD DATA`を処理します。
 >     - `LOAD DATA`文は、現在のトランザクションをコミットせず、新しいトランザクションを開始しません。
 >     - `LOAD DATA`文は、TiDB トランザクションモード設定 (楽観的または悲観的トランザクション) の影響を受けます。
 >     - トランザクション内の`LOAD DATA`のステートメントは、トランザクション内の[`ROLLBACK`](/sql-statements/sql-statement-rollback.md)のステートメントによってロールバックできます。

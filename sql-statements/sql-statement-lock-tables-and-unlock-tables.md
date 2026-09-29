@@ -7,11 +7,11 @@ summary: TiDB データベースの LOCK TABLES および UNLOCK TABLES の使�
 
 > **Warning:**
 >
-> `LOCK TABLES`と`UNLOCK TABLES`現在のバージョンにおける実験的機能です。本番環境での使用は推奨されません。
+> `LOCK TABLES`と`UNLOCK TABLES`は、現在のバージョンにおける実験的機能です。本番環境での使用は推奨されません。
 
 TiDBでは、クライアントセッションがテーブルロックを取得して、他のセッションと連携してテーブルにアクセスしたり、他のセッションによるテーブルの変更を防止したりできます。セッションは、自身のロックのみを取得または解放できます。あるセッションが別のセッションのロックを取得したり、別のセッションが保持しているロックを解放したりすることはできません。
 
-`LOCK TABLES` 、現在のクライアントセッションのテーブルロックを取得します。ロック対象となる各オブジェクトに対して`LOCK TABLES`および`SELECT`権限を持っている場合は、共通テーブルのテーブルロックを取得できます。
+`LOCK TABLES`は、現在のクライアントセッションのテーブルロックを取得します。ロック対象となる各オブジェクトに対して`LOCK TABLES`および`SELECT`権限を持っている場合は、共通テーブルのテーブルロックを取得できます。
 
 `UNLOCK TABLES`は、現在のセッションによって保持されているすべてのテーブルロックを明示的に解放します。`LOCK TABLES`は、新しいロックを取得する前に、現在のセッションによって保持されているすべてのテーブルロックを暗黙的に解放します。
 
@@ -22,8 +22,8 @@ TiDBでは、クライアントセッションがテーブルロックを取得�
 > テーブルロック機能はデフォルトで無効になっています。
 >
 > - TiDB Self-Managed の場合、テーブルロック機能を有効にするには、すべての TiDB インスタンスの設定ファイルで[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
-> - TiDB Cloud Dedicated の場合、テーブルロック機能を有効にするには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)連絡して[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
-> - [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)から`true`設定はサポートされていません。
+> - TiDB Cloud Dedicated の場合、テーブルロック機能を有効にするには、 [TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)に連絡して[`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定する必要があります。
+> - [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 [`enable-table-lock`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#enable-table-lock-new-in-v400)を`true`に設定することはサポートされていません。
 
 ## 概要 {#synopsis}
 
@@ -71,7 +71,7 @@ ERROR 8020 (HY000): Table 't1' was locked in WRITE by server: f4799bcb-cad7-4285
 
 上記のエラーメッセージは、TiDB `f4799bcb-cad7-4285-8a6d-23d3555173f1`の ID `2199023255959`のセッションが既にテーブル`t1`の`WRITE`ロックを保持していることを示しています。したがって、現在のセッションはテーブル`t1`の`READ`ロックを取得できません。
 
-`LOCK TABLES`つのステートメントで同じテーブルロックを複数回取得することはできません。
+1つの`LOCK TABLES`ステートメントで同じテーブルロックを複数回取得することはできません。
 
 ```sql
 > LOCK TABLES t WRITE, t READ;
