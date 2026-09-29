@@ -180,7 +180,7 @@ Skip this section if periodic scanning is acceptable for your workload. For deta
 
 ##### 2.3.2 Configure the S3 bucket notification
 
-Because the bucket already exists, the provided CloudFormation stack does not configure the bucket notification automatically. In this case, you need to configure the notification manually:
+Configure an S3 event notification to send object creation events from your bucket to the SQS queue:
 
 1. Open the [AWS S3 Console](https://console.aws.amazon.com/s3/) and navigate to your bucket.
 2. Go to **Properties > Event notifications > Create event notification**.
