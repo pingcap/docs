@@ -9,7 +9,7 @@ summary: TiDB データベースの WITH (共通テーブル式) の使用法の
 
 ## 概要 {#synopsis}
 
-**句:**
+**WithClause:**
 
 ```ebnf+diagram
 WithClause ::=
@@ -17,7 +17,7 @@ WithClause ::=
 |       "WITH" "RECURSIVE" WithList
 ```
 
-**リスト付き:**
+**WithList:**
 
 ```ebnf+diagram
 WithList ::=
@@ -25,14 +25,14 @@ WithList ::=
 |       CommonTableExpr
 ```
 
-**共通テーブル式:**
+**CommonTableExpr:**
 
 ```ebnf+diagram
 CommonTableExpr ::=
         Identifier IdentListWithParenOpt "AS" SubSelect
 ```
 
-**親オプション付き識別子リスト:**
+**IdentListWithParenOpt:**
 
 ```ebnf+diagram
 IdentListWithParenOpt ::=

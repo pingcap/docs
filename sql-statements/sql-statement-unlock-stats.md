@@ -5,7 +5,7 @@ summary: TiDB データベースの UNLOCK STATS の使用法の概要。
 
 # UNLOCK STATS {#unlock-stats}
 
-`UNLOCK STATS`は、テーブルまたはテーブルの統計のロックを解除するために使用されます。
+`UNLOCK STATS`は、テーブルまたは複数のテーブルの統計のロックを解除するために使用されます。
 
 ## 概要 {#synopsis}
 
@@ -27,7 +27,7 @@ PartitionNameList ::=
 
 [LOCK STATS](/sql-statements/sql-statement-lock-stats.md)の例を参照してテーブル`t`を作成し、その統計をロックします。
 
-表`t`の統計をロック解除すると、 `ANALYZE`正常に実行できます。
+表`t`の統計をロック解除すると、 `ANALYZE`が正常に実行できます。
 
 ```sql
 mysql> UNLOCK STATS t;
