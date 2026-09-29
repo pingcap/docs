@@ -918,6 +918,12 @@ Configuration items related to read isolation.
 - Default value: `true`
 - Before v6.1.0, this configuration is set by `enable-collect-execution-info`.
 
+### `tidb_general_log`
+
+- This configuration is used to control whether to log every query on the server at the info log level.
+- Default value: `false`
+- Value options: `true` or `false`
+
 ### `tidb_enable_slow_log`
 
 - This configuration is used to control whether to enable the slow log feature.
