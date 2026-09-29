@@ -18,7 +18,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         TiDB Cloud Premium now provides three built-in alert rules that notify you when more than 20 SQL statements exceed a latency threshold of 256 ms, 512 ms, or 4096 ms within one minute. These alerts help you detect periods with unusually high numbers of slow SQL statements.
 
-        For more information, see [TiDB Cloud Built-in Alerting](/tidb-cloud/monitor-built-in-alerting.md).
+        For more information, see [TiDB Cloud Built-in Alerting](https://docs.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium).
 
 - **TiDB Cloud Dedicated**
 
@@ -28,7 +28,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         Currently, this feature is available upon request. A cross-region PrivateLink service fee applies per added region, and removing a region does not affect existing connections. To request this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 
-        For more information, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md) *&lt;doc content will be updated after [https://github.com/pingcap/docs/pull/23940](https://github.com/pingcap/docs/pull/23940) is merged&gt;*.
+        For more information, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections/).
 
 ## September 22, 2026
 
