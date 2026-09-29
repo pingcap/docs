@@ -101,7 +101,7 @@ SHOW PLACEMENT LABELS;
     - `PRIMARY_REGION="us-east-1"`オプションは、 `region`ラベルのノードに`us-east-1`としてRaftリーダーを配置することを意味します。
     - `REGIONS="us-east-1,us-west-1"`オプションは、 `region`ラベルが`us-east-1`のノードと`region`ラベルが`us-west-1`のノードに Raft Followers を配置することを意味します。
 
-    構成可能な配置オプションとその意味の詳細については、「[配置オプション](#placement-option-reference)を参照してください。
+    構成可能な配置オプションとその意味の詳細については、[配置オプション](#placement-option-reference)を参照してください。
 
 2. テーブルまたはパーティションテーブルに配置ポリシーを適用するには、 `CREATE TABLE`または`ALTER TABLE`文を使用して、そのテーブルまたはパーティションテーブルの配置ポリシーを指定します。
 

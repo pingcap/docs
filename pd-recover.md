@@ -159,6 +159,6 @@ grep "idAllocator allocates a new id" {{/path/to}}/pd*.log |  awk -F'=' '{print 
 
 PDクラスタが作成されると、新しいクラスタIDが生成されます。古いクラスタのクラスタIDは、ログを確認することで確認できます。
 
-### `pd-recover`を実行すると、エラー「 `dial tcp 10.0.1.13:2379: connect: connection refused`が返されます。 {#the-error-dial-tcp-10-0-1-13-2379-connect-connection-refused-is-returned-when-executing-pd-recover}
+### `pd-recover`を実行すると、エラー`dial tcp 10.0.1.13:2379: connect: connection refused`が返されます。 {#the-error-dial-tcp-10-0-1-13-2379-connect-connection-refused-is-returned-when-executing-pd-recover}
 
 `pd-recover`を実行する際には、PDサービスが必要です。PDリカバリを使用する前に、PDクラスタをデプロイして起動してください。

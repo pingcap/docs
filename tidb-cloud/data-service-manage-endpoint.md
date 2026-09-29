@@ -84,7 +84,7 @@ TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数の�
 1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2. 左側のペインで、対象のデータアプリを見つけ、アプリ名の右側にある**+ を**クリックし、次に**Create Endpoint**をクリックします。
 3. 必要に応じてデフォルト名を更新してください。新しく作成されたエンドポイントは、エンドポイントリストの一番上に追加されます。
-4. [エンドポイントを開発する](#develop-an-endpoint)」の指示に従って、新しいエンドポイントを構成します。
+4. [エンドポイントを開発する](#develop-an-endpoint)の指示に従って、新しいエンドポイントを構成します。
 
 ### 定義済みのシステムエンドポイントを追加します {#add-a-predefined-system-endpoint}
 

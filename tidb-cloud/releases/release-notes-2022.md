@@ -235,7 +235,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloudサブスクリプションをカスタマイズし、コンプライアンス要件を満たすためにオンライン契約を導入します。
 
-    TiDB Cloudコンソールの**Billing**ページに「 [**Contract**タブ](/tidb-cloud/tidb-cloud-billing.md#contract)が追加されました。契約に関する当社の販売内容にご同意いただき、契約手続きをオンラインで進めるためのメールを受け取った場合は、 **Contract**タブで契約内容を確認し、同意することができます。契約について詳しくは、お気軽に[営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)までお問い合わせください。
+    TiDB Cloudコンソールの**Billing**ページに[**Contract**タブ](/tidb-cloud/tidb-cloud-billing.md#contract)が追加されました。契約に関する当社の販売内容にご同意いただき、契約手続きをオンラインで進めるためのメールを受け取った場合は、 **Contract**タブで契約内容を確認し、同意することができます。契約について詳しくは、お気軽に[営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)。
 
 **ドキュメントの変更**
 

@@ -58,7 +58,7 @@ VPC の作成方法については、 [VPCの作成](https://docs.aws.amazon.com
 
 先ほど作成したVPC内にOracle DBインスタンスを作成し、パスワードを控えてパブリックアクセス権限を付与してください。AWSスキーマ変換ツールを使用するには、パブリックアクセスを有効にする必要があります。なお、本番環境でパブリックアクセス権限を付与することは推奨されません。
 
-Oracle DB インスタンスの作成方法については、「Oracle DB インスタンス[Oracle DBインスタンスを作成し、Oracle DBインスタンス上のデータベースに接続する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)。
+Oracle DB インスタンスの作成方法については、[Oracle DBインスタンスを作成し、Oracle DBインスタンス上のデータベースに接続する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)を参照してください。
 
 ![Create Oracle RDS](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-2.png)
 

@@ -54,7 +54,7 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
 
 - TiDBクラスタとTiCDCクラスタを最新バージョンに更新してください。OOM問題は、**v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョン**で既に解決されています。
 
-## レプリケーションタスクを作成するとき、または MySQL にデータをレプリケートするときに、「 `Error 1298: Unknown or incorrect time zone: 'UTC'`エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-error-1298-unknown-or-incorrect-time-zone-utc-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
+## レプリケーションタスクを作成するとき、または MySQL にデータをレプリケートするときに、`Error 1298: Unknown or incorrect time zone: 'UTC'`エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-error-1298-unknown-or-incorrect-time-zone-utc-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
 このエラーは、下流のMySQLがタイムゾーンをロードしていない場合に返されます。[`mysql_tzinfo_to_sql`](https://dev.mysql.com/doc/refman/8.0/en/mysql-tzinfo-to-sql.html)を実行することでタイムゾーンをロードできます。タイムゾーンをロードした後は、タスクを作成し、通常どおりデータをレプリケートできます。
 
@@ -92,7 +92,7 @@ v4.0.9 以降では、レプリケーションタスクで統合ソーター機�
 4. changefeed 設定を変更し、上記の`start-ts` `ignore-txn-start-ts`設定項目に追加します。
 5. 一時停止された変更フィードを再開します。
 
-## TiCDCを使用してチェンジフィードを作成すると、「 `[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy`エラーが報告されます。どうすればよいでしょうか？ {#the-tikv-9006-gc-life-time-is-shorter-than-transaction-duration-transaction-starts-at-xx-gc-safe-point-is-yy-error-is-reported-when-i-use-ticdc-to-create-a-changefeed-what-should-i-do}
+## TiCDCを使用してチェンジフィードを作成すると、`[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy`エラーが報告されます。どうすればよいでしょうか？ {#the-tikv-9006-gc-life-time-is-shorter-than-transaction-duration-transaction-starts-at-xx-gc-safe-point-is-yy-error-is-reported-when-i-use-ticdc-to-create-a-changefeed-what-should-i-do}
 
 現在のGCセーフポイントとサービスGCセーフポイントを照会するには、コマンド`pd-ctl service-gc-safepoint --pd <pd-addrs>`を実行する必要があります。GCセーフポイントがTiCDCレプリケーションタスク（changefeed）の`start-ts`よりも小さい場合は、コマンド`cdc cli create changefeed`にオプション`--disable-gc-check`を直接追加してchangefeedを作成できます。
 
