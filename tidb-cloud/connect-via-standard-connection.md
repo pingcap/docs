@@ -13,7 +13,7 @@ summary: パブリック接続を使用してTiDB Cloudクラスターに接続�
 
 ## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
 
-パブリック接続の場合、 TiDB Cloud Dedicated はIP アクセス リスト内のアドレスからのクライアント接続のみを許可します。 IP アクセス リストを設定していない場合は、最初の接続の前に[IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)。
+パブリック接続の場合、 TiDB Cloud Dedicated はIP アクセス リスト内のアドレスからのクライアント接続のみを許可します。 IP アクセス リストを設定していない場合は、最初の接続の前に[IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)の手順に従って設定してください。
 
 ## クラスターに接続します {#connect-to-the-cluster}
 

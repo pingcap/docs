@@ -1,13 +1,13 @@
 ---
 title: CSV Configurations for Importing Data
-summary: TiDB Cloudのインポートデータサービスで CSV 構成を使用する方法を学習します。
+summary: TiDB Cloudの Import Data サービスで CSV 構成を使用する方法を学習します。
 ---
 
 # データのインポートのためのCSV構成 {#csv-configurations-for-importing-data}
 
 このドキュメントでは、 TiDB Cloudの Import Data サービスの CSV 構成について説明します。
 
-以下は、 TiDB Cloudのデータインポートサービスを使用してCSVファイルをインポートする際のCSV構成ウィンドウです。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
+以下は、 TiDB Cloudの Import Data サービスを使用してCSVファイルをインポートする際のCSV構成ウィンドウです。詳細については、 [クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/import-data-csv-config.png" width="500" />
 
@@ -15,9 +15,9 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
 - 定義: フィールドセパレーターを定義します。1文字または複数文字を指定できますが、空にすることはできません。
 
-- 共通の値:
+- 一般的な値:
 
-    - CSV（カンマ区切り値）の場合は`,`上記のスクリーンショットに示すように、"1"、"Michael"、"male"は3つのフィールドを表します。
+    - CSV（カンマ区切り値）の場合は`,`です。上記のスクリーンショットに示すように、"1"、"Michael"、"male"は3つのフィールドを表します。
     - TSV (タブ区切り値)の場合は`"\t"` 。
 
 - デフォルト: `,`
@@ -26,10 +26,10 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
 - 定義: 引用符で囲む際に使用する区切り文字を定義します。**Delimiter**が空の場合、すべてのフィールドは引用符で囲まれません。
 
-- 共通の値:
+- 一般的な値:
 
     - `'"'`はフィールドを二重引用符で囲みます。上のスクリーンショットに示すように、 `"Michael","male"`は2つのフィールドを表します。2つのフィールドの間には必ず`,`が必要です。データが`"Michael""male"` （ `,`なし）の場合、インポートタスクは解析に失敗します。データが`"Michael,male"` （二重引用符が1つだけ）の場合、1つのフィールドとして解析されます。
-    - `''`引用を無効にします。
+    - `''`は、引用を無効にします。
 
 - デフォルト: `"`
 
@@ -56,7 +56,7 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
     次のフィールドを例に挙げます。
 
-    - 値が`True`の場合、 `"nick name is \"Mike\""` `nick name is "Mike"`として解析され、ターゲットテーブルに書き込まれます。
+    - 値が`True`の場合、 `"nick name is \"Mike\""`は`nick name is "Mike"`として解析され、ターゲットテーブルに書き込まれます。
     - 値が`False`の場合、 `"nick name is \"` 、 `Mike\` 、 `""`の3つのフィールドとして解析されます。しかし、フィールドが互いに分離されていないため、正しく解析できません。
 
     標準CSVファイルの場合、記録するフィールドに二重引用符で囲まれた文字が含まれている場合は、エスケープ処理のために二重引用符を2つ使用する必要があります。この場合、`Backslash escape = True`を使用すると解析エラーが発生しますが、 `Backslash escape = False`を使用すると正しく解析されます。典型的なシナリオは、インポートされたフィールドにJSONコンテンツが含まれている場合です。標準CSVのJSONフィールドは通常、次のように保存されます。
@@ -67,7 +67,7 @@ summary: TiDB Cloudのインポートデータサービスで CSV 構成を使�
 
     `{"key1": "val1", "key2": "val2"}`
 
-    CSVソースファイルの内容が以下のようにJSON形式で保存されている場合は、 `Backslash escape = True`以下のように設定することを検討してください。ただし、これはCSVの標準形式ではありません。
+    CSVソースファイルの内容が以下のようにJSON形式で保存されている場合は、 以下のように`Backslash escape = True`を設定することを検討してください。ただし、これはCSVの標準形式ではありません。
 
     `"{\"key1\": \"val1\", \"key2\":\"val2\" }"`
 

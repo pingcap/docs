@@ -5,7 +5,7 @@ summary: TiDB Cloud Dedicatedクラスターの作成方法を学びましょう
 
 # TiDB Cloud Dedicatedクラスタを作成する {#create-a-tidb-cloud-dedicated-cluster}
 
-このチュートリアルでは、TiDB Cloud Dedicatedクラスターへのサインアップと作成の手順を説明します。
+このチュートリアルでは、TiDB Cloudへのサインアップと、TiDB Cloud Dedicatedクラスターの作成の手順を説明します。
 
 > **Tip:**
 >
@@ -46,7 +46,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
         > - [Azure Marketplace](https://azuremarketplace.microsoft.com)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは Azure Cloud となり、 TiDB Cloudで変更することはできません。
         > - [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudに登録した場合、クラウドプロバイダーは Google Cloud となり、 TiDB Cloudで変更することはできません。
 
-    4. TiDB、TiKV、 TiFlashの[クラスターサイズ](/tidb-cloud/size-your-cluster.md)をそれぞれ設定します (オプション)。
+    4. TiDB、TiKV、TiFlash (オプション) の[クラスターサイズ](/tidb-cloud/size-your-cluster.md)をそれぞれ設定します。
 
     5. 必要に応じて、デフォルトのポート番号を更新してください。
 

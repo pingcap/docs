@@ -10,7 +10,7 @@ summary: TiDB Cloudコンソールでデータベースユーザーとロール�
 > **Note:**
 >
 > - **SQL Users**ページはパブリックプレビューであり、リクエストがあった場合のみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**?**をクリックし、**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに"Apply for the SQL Users page"と入力して、 **Submit**をクリックします。
-> - データベースのユーザーと役割[組織およびプロジェクトのユーザーと役割](/tidb-cloud/manage-user-access.md)から独立しています。データベースユーザーは TiDB クラスター内のデータベースにアクセスするために使用され、組織およびプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織およびプロジェクトにアクセスするために使用されます。
+> - データベースのユーザーとロールは、[組織およびプロジェクトのユーザーとロール](/tidb-cloud/manage-user-access.md)から独立しています。データベースユーザーは TiDB クラスター内のデータベースにアクセスするために使用され、組織およびプロジェクト ユーザーは[TiDB Cloudコンソール](https://tidbcloud.com/)内の組織およびプロジェクトにアクセスするために使用されます。
 > - **SQL Users**ページに加えて、SQL クライアントを使用してクラスターに接続し、SQL文を作成することによって、データベースユーザーとロールを管理することもできます。詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/dev/user-account-management)を参照してください。
 
 ## データベースユーザーの役割 {#roles-of-database-users}
@@ -34,7 +34,7 @@ SQLユーザーに組み込みロールと複数のカスタムロールの両�
 ## 前提条件 {#prerequisites}
 
 - **SQL Users**ページを使用してデータベースユーザーとロールを管理するには、組織の`Organization Owner`ロール、またはプロジェクトの`Project Owner`ロールに属している必要があります。
-- プロジェクトの`Project Data Access Read-Write`または`Project Data Access Read-Only`ロールに属している場合、データベースユーザーはそのプロジェクトの**SQL Users**ページでのみ表示できます。
+- プロジェクトの`Project Data Access Read-Write`または`Project Data Access Read-Only`ロールに属している場合、そのプロジェクトの**SQL Users**ページではデータベースユーザーの表示のみが可能です。
 
 ## SQLユーザーを確認する {#view-sql-users}
 

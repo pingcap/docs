@@ -18,13 +18,13 @@ TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタン�
 
 - 直接接続
 
-    直接接続とは、TCP を介した MySQL ネイティブ接続システムのことです。MySQL 接続をサポートするツールであれば、MySQL などを使用してTiDB Cloud StarterまたはEssential [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)に接続できます。 。
+    直接接続とは、TCP を介した MySQL ネイティブ接続システムのことです。MySQL 接続をサポートするツールであれば、[MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)などを使用してTiDB Cloud StarterまたはEssentialインスタンスに接続できます。
 
 - [Data Service（PREVIEW）](/tidb-cloud/data-service-overview.md)
 
     TiDB CloudにはData Service機能があり、カスタムAPIエンドポイントを使用してHTTPSリクエスト経由でAWS上でホストされているTiDB Cloud Starterインスタンスに接続できます。直接接続とは異なり、Data Serviceは生のSQLではなくRESTful APIを介してTiDB Cloud StarterまたはEssentialインスタンスのデータにアクセスします。
 
-- [サーバーレスDriver（PREVIEW）](/develop/serverless-driver.md)
+- [Serverless Driver（PREVIEW）](/develop/serverless-driver.md)
 
     TiDB CloudはJavaScript用のサーバーレスドライバを提供しており、これにより、エッジ環境にあるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに、直接接続時と同様の操作感で接続できます。
 
@@ -34,7 +34,7 @@ TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタン�
 | ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | 直接接続         | SQL/ORM      | Java、Node.js、Pythonなどの長時間稼働環境。                                                                                                             |
 | Data Service      | RESTful API  | すべてのブラウザおよびアプリケーションとのやり取り。                                                                                                                 |
-| サーバーレスDriver | SQL/ORM      | [Vercel Edgeの機能](https://vercel.com/docs/functions/edge-functions)や[Cloudflare Workers](https://workers.cloudflare.com/)などのサーバーレスおよびエッジ環境。 |
+| Serverless Driver | SQL/ORM      | [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)や[Cloudflare Workers](https://workers.cloudflare.com/)などのサーバーレスおよびエッジ環境。 |
 
 ## ネットワーク {#network}
 
@@ -56,7 +56,7 @@ TiDB Cloud StarterとTiDB Cloud Essentialには、2種類のネットワーク�
 | ------------------ | --------------------- | --------------------------------------------------------------------------------- |
 | 直接接続               | パブリックまたはプライベートエンドポイント | 直接接続は、パブリックエンドポイントとプライベートエンドポイントの両方を介して行うことができます。                                 |
 | Data Service（PREVIEW）      | /                     | AWS上でホストされているTiDB Cloud StarterにData Service (PREVIEW)経由でアクセスする場合、ネットワークの種類を指定する必要はありません。 |
-| サーバーレスDriver（PREVIEW） | 公開エンドポイント             | Serverless Driverは、パブリックエンドポイント経由の接続のみをサポートしています。                                 |
+| Serverless Driver（PREVIEW） | 公開エンドポイント             | Serverless Driverは、パブリックエンドポイント経由の接続のみをサポートしています。                                 |
 
 ## 次は？ {#what-s-next}
 

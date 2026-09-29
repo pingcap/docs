@@ -8,9 +8,9 @@ aliases: ['/ja/tidbcloud/connected-care-announcement']
 
 あらゆる規模のお客様がTiDB Cloud上でユースケースと運用を拡大し続けていることを受け、 TiDB Cloud は、進化するニーズに対応するためにサポートサービスを再構築することに注力しています。さらに高い価値とシームレスなエクスペリエンスを提供するために、 TiDB Cloud は**2025年2月17日**に新しいサポートサービス**Connected Care**の提供を開始することを発表いたします。
 
-この移行の一環として、現在のサポートプランは**2025年2月17日**以降、購入できなくなり、レガシーサポートプランとして分類されます。ただし、 TiDB Cloudは、レガシープランにご加入のお客様には、それぞれの[退職日](#transition-to-connected-care)月間、引き続き完全なサポートを提供します。
+この移行の一環として、現在のサポートプランは**2025年2月17日**以降、購入できなくなり、レガシーサポートプランとして分類されます。ただし、 TiDB Cloudは、レガシープランにご加入のお客様には、それぞれの[提供終了日](#transition-to-connected-care)まで、引き続き完全なサポートを提供します。
 
-スムーズな移行と最新機能へのアクセスを確保するために、 TiDB Cloud、お客様に Connected Care サービスへの移行と導入を推奨しています。
+スムーズな移行と最新機能へのアクセスを確保するために、 TiDB Cloudは、お客様に Connected Care サービスへの移行と導入を推奨しています。
 
 ## Connected Care {#connected-care}
 
@@ -22,20 +22,20 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 >
 > **Basic** 、 **Enterprise** 、および**Premium**のサポートプランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なる異なるプランを指します。
 
-以下の表は、Connected Careサービスの各サポートプランの概要を示しています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)ご覧ください。
+以下の表は、Connected Careサービスの各サポートプランの概要を示しています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
 | サポートプラン                                                                                                                                           | Basic | Developer | Enterprise | Premium                 |
 | :------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------- | :--------- | :--------- | :-------------------- |
 | 推奨されるワークロード                                                                                                                                       | 個人または初心者向けプロジェクト | 開発中のワークロード | 本番中のワークロード | 本番中のビジネスクリティカルなワークロード |
 | 請求とアカウントサポート                                                                                                                                      | ✔                | ✔          | ✔          | ✔                     |
-| テクニカルサポート                                                                                                                                         | <li></li>        | ✔          | ✔          | ✔                     |
-| 初期応答時間                                                                                                                                            | <li></li>        | 営業時間       | 7x24       | 7x24                  |
-| [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)                                                                                              | <li></li>        | <li></li>  | ✔          | ✔                     |
-| [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)                                                                                           | <li></li>        | <li></li>  | ✔          | ✔                     |
-| Connected: TiDB Cloudアラートの IM サブスクリプション ( [Slack](/tidb-cloud/monitor-alert-slack.md) , [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md), [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md), [Webhook](/tidb-cloud/monitor-alert-webhook.md), [Lark](/tidb-cloud/monitor-alert-lark.md) )                      | <li></li>        | <li></li>  | ✔          | ✔                     |
-| Connected: IMチケットの作成とサブスクリプションの更新 ( [Slack](/tidb-cloud/connected-slack-ticket-creation.md) , [Lark](/tidb-cloud/connected-lark-ticket-creation.md) )    | <li></li>        | <li></li>  | ✔          | ✔                     |
-| Connected: サポートチケットのIMインタラクション ( [Slack](/tidb-cloud/connected-slack-ticket-interaction.md) , [Lark](/tidb-cloud/connected-lark-ticket-interaction.md) ) | <li></li>        | <li></li>  | <li></li>  | ✔                     |
-| テクニカルアカウントマネージャー                                                                                                                                  | <li></li>        | <li></li>  | <li></li>  | ✔                     |
+| テクニカルサポート                                                                                                                                         | -        | ✔          | ✔          | ✔                     |
+| 初期応答時間                                                                                                                                            | -        | 営業時間       | 7x24       | 7x24                  |
+| [Connected: Clinic Service](/tidb-cloud/tidb-cloud-clinic.md)                                                                                              | -        | -  | ✔          | ✔                     |
+| [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)                                                                                           | -        | -  | ✔          | ✔                     |
+| Connected: TiDB Cloudアラートの IM サブスクリプション ( [Slack](/tidb-cloud/monitor-alert-slack.md) , [Zoom](/tidb-cloud/monitor-alert-zoom.md), [Flashduty](/tidb-cloud/monitor-alert-flashduty.md), [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md), [Webhook](/tidb-cloud/monitor-alert-webhook.md), [Lark](/tidb-cloud/monitor-alert-lark.md) )                      | -        | -  | ✔          | ✔                     |
+| Connected: IMチケットの作成と更新のサブスクリプション ( [Slack](/tidb-cloud/connected-slack-ticket-creation.md) , [Lark](/tidb-cloud/connected-lark-ticket-creation.md) )    | -        | -  | ✔          | ✔                     |
+| Connected: サポートチケットのIMインタラクション ( [Slack](/tidb-cloud/connected-slack-ticket-interaction.md) , [Lark](/tidb-cloud/connected-lark-ticket-interaction.md) ) | -        | -  | -  | ✔                     |
+| テクニカルアカウントマネージャー                                                                                                                                  | -        | -  | -  | ✔                     |
 
 > **Note**
 >
@@ -57,13 +57,13 @@ Connected Care サービスのサポートプランでは、次のようなま�
 
     この機能を使用すると、IMツール経由でアラート通知を簡単に購読でき、重要な更新情報を常に把握できます。詳細については、 [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)、[Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)、[Flashdutyで登録する](/tidb-cloud/monitor-alert-flashduty.md)、[PagerDutyで登録する](/tidb-cloud/monitor-alert-pagerduty.md)、[Webhookで登録する](/tidb-cloud/monitor-alert-webhook.md)、および[Larkで登録する](/tidb-cloud/monitor-alert-lark.md)をご覧ください。
 
-- Connected: IMチケットの作成とサブスクリプションの更新
+- Connected: IMチケットの作成と更新のサブスクリプション
 
-    この機能を使用すると、IMツールを通じてサポートチケットを作成し、サポートチケットの更新情報を購読できます。詳細については、 [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)と[Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)ご覧ください。
+    この機能を使用すると、IMツールを通じてサポートチケットを作成し、サポートチケットの更新情報を購読できます。詳細については、 [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)と[Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)をご覧ください。
 
 - Connected: サポートチケットの IM によるやり取り
 
-    この機能により、IMツールを介してサポートチケットを迅速に作成し、やり取りすることで、効率的なコミュニケーションを実現できます。詳細については、 [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)と[Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)ご覧ください。
+    この機能により、IMツールを介してサポートチケットを迅速に作成し、やり取りすることで、効率的なコミュニケーションを実現できます。詳細については、 [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)と[Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)をご覧ください。
 
 これらの新機能により、Connected Care サービスは、より優れた接続性、よりパーソナライズされたサポート、さまざまな顧客ニーズに対応するコスト効率の高いソリューションを提供します。
 
@@ -83,7 +83,7 @@ Connected Care サービスのサポートプランでは、次のようなま�
 | レガシー**Standard**プラン              | 2025年2月17日 |
 | 従来の**Enterprise**および**Premium**プラン | 2026年1月15日 |
 
-レガシーサポートプランが終了すると、 TiDB Cloudサポートされなくなります。該当する終了日までに Connected Care のサポートプランに移行されない場合、Connected Care の**Basic**サポートプランに自動的に移行されます。
+レガシーサポートプランが終了すると、 TiDB Cloudではサポートされなくなります。該当する終了日までに Connected Care のサポートプランに移行されない場合、Connected Care の**Basic**サポートプランに自動的に移行されます。
 
 ## よくある質問 {#faqs}
 
