@@ -5,7 +5,7 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの作
 
 # TiDB Cloud StarterまたはEssentialインスタンスを作成します。 {#create-a-tidb-cloud-starter-or-essential-instance}
 
-このドキュメントでは、TiDB [TiDB Cloudコンソール](https://tidbcloud.com/)でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成する方法について説明します。
+このドキュメントでは、[TiDB Cloudコンソール](https://tidbcloud.com/)でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成する方法について説明します。
 
 > **Tip:**
 >
@@ -21,7 +21,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 - AWS Marketplace をご利用の方は、AWS Marketplace からサインアップすることもできます。サインアップするには、 [AWS Marketplace](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 - Azure Marketplace をご利用の方は、Azure Marketplace からサインアップすることもできます。サインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 - Google Cloud Marketplace をご利用の方は、Google Cloud Marketplace からサインアップすることもできます。サインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
-- Alibaba Cloud Marketplace ユーザーの場合は、Alibaba Cloud Marketplace を通じてサインアップすることもできます。これを行うには、[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブし、画面上の指示に従ってTiDB Cloudアカウントを設定します。
+- Alibaba Cloud Marketplace ユーザーの場合は、Alibaba Cloud Marketplace を通じてサインアップすることもできます。これを行うには、[Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブし、画面上の指示に従ってTiDB Cloudアカウントを設定します。
 
 </CustomContent>
 
@@ -44,7 +44,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 3. プランを選択してください。
 
-    **Starter**インスタンスから開始し、後でニーズの増大に応じて**Essential**インスタンスにアップグレードできます。詳細については、[プランを選択してください](/tidb-cloud/select-cluster-tier.md)ご覧ください。
+    **Starter**インスタンスから開始し、後でニーズの増大に応じて**Essential**インスタンスにアップグレードできます。詳細については、[プランを選択する](/tidb-cloud/select-cluster-tier.md)をご覧ください。
 
 4. インスタンスの名前を入力し、次にインスタンスをホストするクラウドプロバイダーとリージョンを選択してください。
 
@@ -56,7 +56,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
         - TiDB Cloud Starterインスタンスの利用限度額を更新できます。利用限度額を0に設定すると、インスタンスは無料のままです。利用限度額を0より大きい値に設定する場合は、 TiDB Cloud Starterインスタンスを作成する前にクレジットカードを追加する必要があります。
 
-        - デフォルトでは、各組織は最大 5つ [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。追加のTiDB Cloud Starterインスタンスを作成するには、クレジット カードを追加し、使用制限を指定する必要があります。
+        - デフォルトでは、各組織は最大 5つ [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。追加のTiDB Cloud Starterインスタンスを作成するには、クレジット カードを追加し、利用限度額を指定する必要があります。
 
     - **Essential**プラン：
 
@@ -70,7 +70,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 ## 次は？ {#what-s-next}
 
-- TiDB Cloud StarterまたはEssentialインスタンスが作成されたら、 [パブリックエンドポイント経由でTiDB Cloudに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)インスタンスのパスワードを作成します。
+- TiDB Cloud StarterまたはEssentialインスタンスが作成されたら、 [パブリックエンドポイント経由でTiDB Cloudに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)の手順に従って、インスタンスのパスワードを作成します。
 
     > **Note:**
     >

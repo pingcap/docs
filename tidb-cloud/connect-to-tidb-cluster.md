@@ -16,7 +16,7 @@ TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかの
 
 - 直接接続
 
-    直接接続では、TCP 上で MySQL のネイティブ接続システムを使用します。MySQL 接続をサポートするツールであれば、MySQL シェルなどを使用してTiDB Cloud Dedicated[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)に接続できます。 TiDB Cloud は[SQLシェル](/tidb-cloud/connect-via-sql-shell.md)も提供しており、 TiDB SQL を試用したり、TiDB と MySQL の互換性を迅速にテストしたり、ユーザー権限を管理したりできます。
+    直接接続では、TCP 上で MySQL のネイティブ接続システムを使用します。MySQL 接続をサポートするツールであれば、[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)などを使用してTiDB Cloud Dedicatedクラスターに接続できます。 TiDB Cloud は[SQLシェル](/tidb-cloud/connect-via-sql-shell.md)も提供しており、 TiDB SQL を試用したり、TiDB と MySQL の互換性を迅速にテストしたり、ユーザー権限を管理したりできます。
 
     TiDB Cloud Dedicatedは、3種類のネットワーク接続タイプを提供します。
 

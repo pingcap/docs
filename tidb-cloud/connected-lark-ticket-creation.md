@@ -13,7 +13,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## サポートチケットを作成する {#create-a-support-ticket}
 
-1. Larkの**PingCAP Support Group**で、 `@PingCAP Support Bot`メンションし、メッセージで問題を説明してください。そうすると、ボットがあなただけに閲覧可能な一時的なカードメッセージを送信します。
+1. Larkの**PingCAP Support Group**で、 `@PingCAP Support Bot`をメンションし、メッセージで問題を説明してください。そうすると、ボットがあなただけに閲覧可能な一時的なカードメッセージを送信します。
 
     ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 

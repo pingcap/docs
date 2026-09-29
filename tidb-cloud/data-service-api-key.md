@@ -8,7 +8,7 @@ summary: データアプリのAPIキーの作成、編集、削除方法を学�
 TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)と[ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)の両方をサポートしています。
 
 - [基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)は、暗号化されていない Base64 エンコーディングを使用して、公開キーと秘密キーを送信します。 HTTPS により通信のセキュリティが確保されます。詳細については、 [RFC 7617 - 'Basic'HTTP認証方式](https://datatracker.ietf.org/doc/html/rfc7617)を参照してください。
-- [ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)ネットワーク送信前に公開キー、秘密キー、サーバー提供のノンス値、HTTP メソッド、およびリクエストされた URI をハッシュすることにより、追加のセキュリティレイヤーを提供します。これにより、秘密キーが暗号化され、秘密キーが平文で送信されるのを防ぎます。詳細については、 [RFC 7616 - HTTPダイジェストアクセス認証](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
+- [ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)は、ネットワーク送信前に公開キー、秘密キー、サーバー提供のノンス値、HTTP メソッド、およびリクエストされた URI をハッシュすることにより、追加のセキュリティレイヤーを提供します。これにより、秘密キーが暗号化され、秘密キーが平文で送信されるのを防ぎます。詳細については、 [RFC 7616 - HTTPダイジェストアクセス認証](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
 
 > **Note:**
 >
@@ -20,7 +20,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
 - 各APIキーは1つのデータアプリにのみ属し、TiDB内のデータにアクセスするために使用されます。
 - すべてのリクエストで正しいAPIキーを指定する必要があります。そうでない場合、 TiDB Cloudは`401`エラーを返します。
 
-## 律速段階 {#rate-limiting}
+## レート制限 {#rate-limiting}
 
 リクエストの割り当て量には、以下のレート制限が適用されます。
 
@@ -71,7 +71,7 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
     {"data":{"result":{"start_ms":0,"end_ms":0,"latency":"","row_affect":0,"limit":0,"code":49900002,"message":"API Key is no longer valid","row_count":0},"columns":[],"rows":[]},"type":""}
     ```
 
-- API キーを手動で期限切れにすることもできます。詳細な手順については、 [APIキーの有効期限を切る](#expire-an-api-key)[すべてのAPIキーを期限切れにする](#expire-all-api-keys)を参照してください。 API キーを手動で期限切れにすると、期限切れはすぐに有効になります。
+- API キーを手動で期限切れにすることもできます。詳細な手順については、 [APIキーの有効期限を切る](#expire-an-api-key)と[すべてのAPIキーを期限切れにする](#expire-all-api-keys)を参照してください。 API キーを手動で期限切れにすると、期限切れはすぐに有効になります。
 
 - APIキーのステータスと有効期限は、対象のデータアプリの**Authentication**エリアで確認できます。
 
@@ -167,4 +167,4 @@ APIキーの説明またはレート制限を編集するには、以下の手�
 1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 2. 左側のペインで、対象のデータアプリの名前をクリックすると、その詳細が表示されます。
 3. **Authentication**エリアで、 **Expire All**をクリックします。
-4. 表示されたダイアログボックスで、有効期限を確認してください。
+4. 表示されたダイアログボックスで、期限切れにする操作を確定してください。
