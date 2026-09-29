@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless audit-log filter-rule create
-summary: ticloud serverless audit-log filter-rule create` のリファレンス。
+summary: "`ticloud serverless audit-log filter-rule create` のリファレンス。"
 ---
 
 # ticloud serverless audit-log filter-rule create {#ticloud-serverless-audit-log-filter-rule-create}
@@ -25,7 +25,7 @@ ticloud serverless audit-log filter-rule create
 ticloud serverless audit-log filter-rule create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
 ```
 
-非対話型モードで、テーブル`test.t` `QUERY`および`EXECUTE`イベントと、すべてのテーブルの`QUERY`イベントをキャプチャするフィルタールールを作成します。
+非対話型モードで、テーブル`test.t`の`QUERY`および`EXECUTE`イベントと、すべてのテーブルの`QUERY`イベントをキャプチャするフィルタールールを作成します。
 
 ```shell
 ticloud serverless audit-log filter-rule create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY","EXECUTE"],"tables":["test.t"]},{"classes":["QUERY"]}]}'

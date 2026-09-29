@@ -1,6 +1,6 @@
 ---
 title: ticloud auth whoami
-summary: ticloud auth whoami` のリファレンス。
+summary: "`ticloud auth whoami` のリファレンス。"
 ---
 
 # ticloud auth whoami {#ticloud-auth-whoami}

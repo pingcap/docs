@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless authorized-network delete
-summary: ticloud serverless authorized-network delete` のリファレンス。
+summary: "`ticloud serverless authorized-network delete` のリファレンス。"
 ---
 
 # ticloud serverless authorized-network delete {#ticloud-serverless-authorized-network-delete}

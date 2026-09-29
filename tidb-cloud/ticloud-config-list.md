@@ -1,11 +1,11 @@
 ---
 title: ticloud config list
-summary: ticloud config list` のリファレンス。
+summary: "`ticloud config list` のリファレンス。"
 ---
 
 # ticloud config list {#ticloud-config-list}
 
-すべてリスト[ユーザープロファイル](/tidb-cloud/cli-reference.md#user-profile) :
+すべての[ユーザープロファイル](/tidb-cloud/cli-reference.md#user-profile)を一覧表示します:
 
 ```shell
 ticloud config list [flags]

@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless cluster list
-summary: ticloud serverless list` のリファレンス。
+summary: "`ticloud serverless list` のリファレンス。"
 ---
 
 # ticloud serverless list {#ticloud-serverless-list}

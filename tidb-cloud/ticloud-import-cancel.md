@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless import cancel
-summary: ticloud serverless import cancel` の参照。
+summary: "`ticloud serverless import cancel` のリファレンス。"
 ---
 
 # ticloud serverless import cancel {#ticloud-serverless-import-cancel}

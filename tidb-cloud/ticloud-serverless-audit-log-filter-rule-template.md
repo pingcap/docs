@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless audit-log filter-rule template
-summary: ticloud serverless audit-log filter-rule template` のリファレンス。
+summary: "`ticloud serverless audit-log filter-rule template` のリファレンス。"
 ---
 
 # ticloud serverless audit-log filter-rule template {#ticloud-serverless-audit-log-filter-rule-template}

@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless sql-user delete
-summary: ticloud serverless sql-user delete` のリファレンス。
+summary: "`ticloud serverless sql-user delete` のリファレンス。"
 ---
 
 # ticloud serverless sql-user delete {#ticloud-serverless-sql-user-delete}

@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless audit-log filter-rule describe
-summary: ticloud serverless audit-log filter-rule describe` のリファレンス。
+summary: "`ticloud serverless audit-log filter-rule describe` のリファレンス。"
 ---
 
 # ticloud serverless audit-log filter-rule describe {#ticloud-serverless-audit-log-filter-rule-describe}

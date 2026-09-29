@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless authorized-network create
-summary: ticloud serverless authorized-network create` のリファレンス。
+summary: "`ticloud serverless authorized-network create` のリファレンス。"
 ---
 
 # ticloud serverless authorized-network create {#ticloud-serverless-authorized-network-create}

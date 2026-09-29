@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_dedicated_network_container` Resource
-summary: tidbcloud_dedicated_network_container` リソースを使用して、 TiDB Cloud Dedicated ネットワークコンテナを作成および変更する方法を学習します。
+summary: "`tidbcloud_dedicated_network_container` リソースを使用して、 TiDB Cloud Dedicated ネットワークコンテナを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_dedicated_network_container`リソースを使用する {#use-the-tidbcloud-dedicated-network-container-resource}

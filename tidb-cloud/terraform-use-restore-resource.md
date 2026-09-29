@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_restore` Resource
-summary: tidbcloud_restore` リソースを使用して復元タスクを作成および変更する方法を学習します。
+summary: "`tidbcloud_restore` リソースを使用して復元タスクを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_restore`リソースを使用する {#use-the-tidbcloud-restore-resource}

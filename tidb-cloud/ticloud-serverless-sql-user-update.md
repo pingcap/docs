@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless sql-user update
-summary: ticloud serverless sql-user update` のリファレンス。
+summary: "`ticloud serverless sql-user update` のリファレンス。"
 ---
 
 # ticloud serverless sql-user update {#ticloud-serverless-sql-user-update}

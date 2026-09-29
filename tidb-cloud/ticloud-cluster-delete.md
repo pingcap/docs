@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless cluster delete
-summary: ticloud serverless delete` のリファレンス。
+summary: "`ticloud serverless delete` のリファレンス。"
 ---
 
 # ticloud serverless delete {#ticloud-serverless-delete}

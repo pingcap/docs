@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless create
-summary: ticloud serverless create` のリファレンス。
+summary: "`ticloud serverless create` のリファレンス。"
 ---
 
 # ticloud serverless create {#ticloud-serverless-create}

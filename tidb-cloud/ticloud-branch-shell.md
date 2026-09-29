@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless branch shell
-summary: ticloud serverless branch shell` のリファレンス。
+summary: "`ticloud serverless branch shell` のリファレンス。"
 aliases: ['/ja/tidbcloud/ticloud-connect']
 ---
 
@@ -47,7 +47,7 @@ ticloud serverless branch shell -c <cluster-id> -b <branch-id> -u <user-name> --
 | -b, --branch-id 文字列  | ブランチの ID を指定します。    | はい  | 非対話型モードでのみ動作します。         |
 | -c, --cluster-id 文字列 | クラスターの ID を指定します。   | はい  | 非対話型モードでのみ動作します。         |
 | -h, --help           | このコマンドのヘルプ情報を表示します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
-| - パスワード              | ユーザーのパスワードを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
+| --password              | ユーザーのパスワードを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
 | -u, --user 文字列       | ログインするユーザーを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
 
 ## 継承されたフラグ {#inherited-flags}

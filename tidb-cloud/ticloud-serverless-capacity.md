@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless capacity
-summary: ticloud serverless capacity` のリファレンス。
+summary: "`ticloud serverless capacity` のリファレンス。"
 ---
 
 # ticloud serverless capacity {#ticloud-serverless-capacity}

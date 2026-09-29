@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless export list
-summary: ticloud serverless export list` のリファレンス。
+summary: "`ticloud serverless export list` のリファレンス。"
 ---
 
 # ticloud serverless export list {#ticloud-serverless-export-list}

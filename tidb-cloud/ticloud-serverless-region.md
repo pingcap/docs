@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless region
-summary: ticloud serverless region` のリファレンス。
+summary: "`ticloud serverless region` のリファレンス。"
 aliases: ['/ja/tidbcloud/ticloud-serverless-regions']
 ---
 

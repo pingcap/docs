@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless import list
-summary: ticloud serverless import list` のリファレンス。
+summary: "`ticloud serverless import list` のリファレンス。"
 ---
 
 # ticloud serverless import list {#ticloud-serverless-import-list}

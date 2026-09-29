@@ -31,9 +31,9 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 - Amazon RDS: [MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 - MySQL: `set global binlog_format=ROW;`を実行します。 [バイナリログフォーマットの設定](https://dev.mysql.com/doc/refman/8.0/en/binary-log-setting.html)を参照してください。
 
-### エラーメッセージ: mysql binlog_row_image が満杯かどうか確認してください {#error-message-check-whether-mysql-binlog-row-image-is-full}
+### エラーメッセージ: mysql binlog_row_image が FULL かどうか確認してください {#error-message-check-whether-mysql-binlog-row-image-is-full}
 
-- Amazon Aurora MySQL: `binlog_row_image`は設定できません。この事前チェック項目は、設定変更の対象外です。完全データ移行と増分データ移行の両方をサポートするために、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
+- Amazon Aurora MySQL: `binlog_row_image`は設定できません。この事前チェック項目は Amazon Aurora MySQL では失敗しません。完全データ移行と増分データ移行の両方をサポートするために、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
 - Amazon RDS: 手順は`binlog_format`パラメータの設定と似ています。唯一の違いは、変更する必要のあるパラメータが`binlog_format`ではなく`binlog_row_image`であることです。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 - MySQL: `set global binlog_row_image = FULL;` 。 [バイナリログのオプションと変数](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_row_image)を参照してください。
 

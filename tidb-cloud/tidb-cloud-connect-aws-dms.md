@@ -72,9 +72,9 @@ TiDB Cloud Dedicated の場合、クライアントはパブリックエンド�
 
     - レプリケーションインスタンスをプライベートサブネットにデプロイし、プライベートサブネット内のトラフィックをパブリックサブネットにルーティングします。この場合、少なくとも3つのサブネット（プライベートサブネット2つとパブリックサブネット1つ）が必要です。2つのプライベートサブネットは、レプリケーションインスタンスが存在するサブネットグループを形成します。次に、パブリックサブネットにNATゲートウェイを作成し、2つのプライベートサブネットのトラフィックをNATゲートウェイにルーティングする必要があります。詳細については、 [プライベートサブネットからインターネットにアクセスする](https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html#public-nat-internet-access)を参照してください。
 
-- プライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、 [プライベートエンドポイントを設定する](/tidb-cloud/set-up-private-endpoint-connections.md) 、プライベートサブネットにレプリケーションインスタンスをデプロイします。
+- プライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、 まず[プライベートエンドポイントを設定](/tidb-cloud/set-up-private-endpoint-connections.md)し、プライベートサブネットにレプリケーションインスタンスをデプロイします。
 
-- VPC ピアリング経由でTiDB Cloud Dedicated クラスターに接続するには、 [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md) 、プライベートサブネットにレプリケーションインスタンスをデプロイします。
+- VPC ピアリング経由でTiDB Cloud Dedicated クラスターに接続するには、 まず[VPCピアリング接続を設定](/tidb-cloud/set-up-vpc-peering-connections.md)し、プライベートサブネットにレプリケーションインスタンスをデプロイします。
 
 </div>
 </SimpleTab>

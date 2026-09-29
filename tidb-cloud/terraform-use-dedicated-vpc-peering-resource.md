@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_dedicated_vpc_peering` Resource
-summary: tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cloud Dedicated VPC ピアリングを作成および変更する方法を学習します。
+summary: "`tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB Cloud Dedicated VPC ピアリングを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_dedicated_vpc_peering`リソースを使用する {#use-the-tidbcloud-dedicated-vpc-peering-resource}

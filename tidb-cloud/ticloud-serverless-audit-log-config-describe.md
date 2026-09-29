@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless audit-log config describe
-summary: ticloud serverless audit-log config describe` のリファレンス。
+summary: "`ticloud serverless audit-log config describe` のリファレンス。"
 ---
 
 # ticloud serverless audit-log config describe {#ticloud-serverless-audit-log-config-describe}

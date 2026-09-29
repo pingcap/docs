@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_dedicated_cluster` Resource
-summary: tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedicated クラスターを作成および変更する方法を学習します。
+summary: "`tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud Dedicated クラスターを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_dedicated_cluster`リソースを使用する {#use-the-tidbcloud-dedicated-cluster-resource}

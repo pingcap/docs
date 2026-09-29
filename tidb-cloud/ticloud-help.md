@@ -1,6 +1,6 @@
 ---
 title: ticloud help
-summary: ticloud help` のリファレンス。
+summary: "`ticloud help` のリファレンス。"
 ---
 
 # ticloud help {#ticloud-help}

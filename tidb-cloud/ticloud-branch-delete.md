@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless branch delete
-summary: ticloud serverless branch delete` のリファレンス。
+summary: "`ticloud serverless branch delete` のリファレンス。"
 ---
 
 # ticloud serverless branch delete {#ticloud-serverless-branch-delete}

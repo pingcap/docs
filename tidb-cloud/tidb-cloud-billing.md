@@ -243,7 +243,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
     3. **Billing**ページで、 **Payment Method**タブをクリックし、 **Add a New Card**をクリックします。
     4. クレジットカード情報とクレジットカードの住所を入力し、 **Save Card**をクリックしてください。
 
-        主要事業所住所を指定しない場合 税金計算には、クレジットカードの住所が主要事業所住所として使用されます。主要事業所住所は[**Billing profile**](#billing-profile)**Billing profile**でいつでも更新できます。
+        [**Billing profile**](#billing-profile)で主要事業所住所を指定しない場合、税金計算には、クレジットカードの住所が主要事業所住所として使用されます。主要事業所住所は**Billing profile**でいつでも更新できます。
 
 > **Note:**
 >
@@ -292,7 +292,7 @@ TiDB Cloudを初めてご利用になる方で、 TiDB Cloudアカウントを�
 - [AWS Marketplace](https://aws.amazon.com/marketplace)からサインアップするには、 [AWS Marketplace](https://aws.amazon.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 - [Azure Marketplace](https://azuremarketplace.microsoft.com)からサインアップするには、 [Azure Marketplace](https://azuremarketplace.microsoft.com)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
 - [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)からサインアップするには、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)で`TiDB Cloud`を検索し、 TiDB Cloudを購読してから、画面の指示に従ってTiDB Cloudアカウントを設定してください。
-- [アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブし、画面上の指示に従ってTiDB Cloudアカウントを設定します。
+- [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/)からサインアップするには、[Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/)で`TiDB Cloud`を検索し、 TiDB Cloudにサブスクライブし、画面上の指示に従ってTiDB Cloudアカウントを設定します。
 
 既にTiDB Cloudアカウントをお持ちで、AWS、Azure、Google Cloud、またはAlibaba Cloudの請求アカウントを通じて利用料金を支払いたい場合は、 TiDB CloudアカウントをAWS、Azure、Google Cloud、またはAlibaba Cloudの請求アカウントにリンクできます。
 

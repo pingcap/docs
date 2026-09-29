@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless cluster describe
-summary: ticloud serverless describe` のリファレンス。
+summary: "`ticloud serverless describe` のリファレンス。"
 ---
 
 # ticloud serverless describe {#ticloud-serverless-describe}

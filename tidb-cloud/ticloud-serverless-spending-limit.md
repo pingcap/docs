@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless spending-limit
-summary: ticloud serverless spending-limit` のリファレンス。
+summary: "`ticloud serverless spending-limit` のリファレンス。"
 ---
 
 # ticloud serverless spending-limit {#ticloud-serverless-spending-limit}
