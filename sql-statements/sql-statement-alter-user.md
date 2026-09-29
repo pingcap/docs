@@ -5,7 +5,7 @@ summary: TiDB データベースの ALTER USER の使用法の概要。
 
 # ALTER USER {#alter-user}
 
-この文は、TiDB権限システム内の既存のユーザーを変更します。MySQL権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することが可能です。また、2人のユーザーに同じユーザー領域を持たせ、異なるホストからログインするユーザーに異なる権限を付与することも可能です。
+この文は、TiDB権限システム内の既存のユーザーを変更します。MySQL権限システムでは、ユーザーはユーザー名と接続元のホストの組み合わせです。したがって、IPアドレス`192.168.1.1`からのみ接続できるユーザー`'newuser2'@'192.168.1.1'`を作成することが可能です。また、2人のユーザーに同じユーザー部分を持たせ、異なるホストからログインするユーザーに異なる権限を付与することも可能です。
 
 ## 概要 {#synopsis}
 
@@ -131,7 +131,7 @@ SELECT * FROM information_schema.user_attributes;
 1 rows in set (0.00 sec)
 ```
 
-`ALTER USER ... PASSWORD EXPIRE NEVER`を実行して、 `newuser`自動パスワード有効期限ポリシーを無期限に変更します。
+`ALTER USER ... PASSWORD EXPIRE NEVER`を実行して、 `newuser`の自動パスワード有効期限ポリシーを無期限に変更します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
@@ -141,7 +141,7 @@ ALTER USER 'newuser' PASSWORD EXPIRE NEVER;
 Query OK, 0 rows affected (0.02 sec)
 ```
 
-`ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`を使用して、 `newuser`パスワード再利用ポリシーを変更し、過去 90日以内に使用されたパスワードの再利用を禁止します。
+`ALTER USER ... PASSWORD REUSE INTERVAL ... DAY`を使用して、 `newuser`のパスワード再利用ポリシーを変更し、過去 90日以内に使用されたパスワードの再利用を禁止します。
 
 ```sql
 ALTER USER 'newuser' PASSWORD REUSE INTERVAL 90 DAY;
@@ -169,7 +169,7 @@ SELECT User, Host, max_user_connections FROM mysql.user WHERE User='newuser';
 
 ### ユーザーにバインドされているリソースグループを変更する {#modify-the-resource-group-bound-to-the-user}
 
-`ALTER USER ... RESOURCE GROUP`を使用して、ユーザー`newuser` ～ `rg1`のリソースグループを変更します。
+`ALTER USER ... RESOURCE GROUP`を使用して、ユーザー`newuser`のリソースグループを`rg1`に変更します。
 
 ```sql
 ALTER USER 'newuser' RESOURCE GROUP rg1;

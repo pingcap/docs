@@ -11,7 +11,7 @@ summary: TiDBデータベースにおけるCREATE INDEXの使用方法の概要�
 
 > **Note:**
 >
-> 4 vCPUを搭載した[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの場合、インデックス作成中にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)手動で無効にすることをお勧めします。この設定を無効にすることで、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響を軽減できます。
+> 4 vCPUを搭載した[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの場合、インデックス作成中にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を手動で無効にすることをお勧めします。この設定を無効にすることで、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響を軽減できます。
 
 </CustomContent>
 
@@ -111,7 +111,7 @@ mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
-## 式インデックス or 関数インデックス {#expression-index}
+## 式インデックス {#expression-index}
 
 クエリのフィルタリング条件が特定の式に基づいている場合、通常のインデックスが効果を発揮せず、テーブル全体をスキャンしてクエリを実行するしかないため、クエリのパフォーマンスは比較的低くなります。式インデックスは、式に基づいて作成できる特殊なインデックスです。式インデックスが作成されると、TiDB はそのインデックスを式ベースのクエリに使用できるようになり、クエリのパフォーマンスが大幅に向上します。
 
@@ -147,7 +147,7 @@ CREATE TABLE t1 (
 DROP INDEX idx1 ON t1;
 ```
 
-式インデックス or 関数インデックスには、さまざまな種類の式が含まれます。正確性を確保するため、式インデックスの作成には、完全にテストされた一部の関数のみが許可されています。つまり、本番環境では、これらの関数のみが式で使用できます。これらの関数は、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)変数を照会することで取得できます。現在、許可されている関数は以下のとおりです。
+式インデックスには、さまざまな種類の式が含まれます。正確性を確保するため、式インデックスの作成には、完全にテストされた一部の関数のみが許可されています。つまり、本番環境では、これらの関数のみが式で使用できます。これらの関数は、 [`tidb_allow_function_for_expression_index`](/system-variables.md#tidb_allow_function_for_expression_index-new-in-v520)変数を照会することで取得できます。現在、許可されている関数は以下のとおりです。
 
 - [`JSON_ARRAY()`](/functions-and-operators/json-functions.md)
 - [`JSON_ARRAY_APPEND()`](/functions-and-operators/json-functions.md)
@@ -180,7 +180,7 @@ DROP INDEX idx1 ON t1;
 - [`UPPER()`](/functions-and-operators/string-functions.md#upper)
 - [`VITESS_HASH()`](/functions-and-operators/tidb-functions.md)
 
-上記のリストに含まれていない関数は、十分にテストされておらず、本番環境での関数は推奨されません。これらは実験的とみなされます。演算子、 `CAST` 、 `CASE WHEN`などの他の式も実験的とみなされ、本番環境での本番は推奨されません。
+上記のリストに含まれていない関数は、十分にテストされておらず、本番環境での使用は推奨されません。これらは実験的とみなされます。演算子、 `CAST` 、 `CASE WHEN`などの他の式も実験的とみなされ、本番環境での使用は推奨されません。
 
 <CustomContent platform="tidb">
 
@@ -201,7 +201,7 @@ allow-expression-index = true
 > - `RAND()`や`NOW()`などの揮発性関数。
 > - [システム変数](/system-variables.md)と[ユーザー変数](/user-defined-variables.md)。
 > - サブクエリ。
-> - [`AUTO_INCREMENT`](/auto-increment.md)列。tidb_enable_auto_increment_in_generated (システム変数) の値を`true`に設定することで[`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated)この制限を解除できます。
+> - [`AUTO_INCREMENT`](/auto-increment.md)列。[`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) (システム変数) の値を`true`に設定することで、この制限を解除できます。
 > - [ウィンドウ関数](/functions-and-operators/window-functions.md)。
 > - `CREATE TABLE t (j JSON, INDEX k (((j,j))));`のような ROW関数。
 > - [集計関数](/functions-and-operators/aggregate-group-by-functions.md)。
@@ -252,7 +252,7 @@ SELECT MIN(col1) FROM t GROUP BY LOWER(col1);
 
 したがって、クエリのパフォーマンスが挿入および更新のパフォーマンスを上回る場合は、式にインデックスを作成することを検討できます。
 
-式インデックスには、MySQL と同じ構文と制限があります。これらは、生成された非表示の仮想列にインデックスを作成することによって実装されるため、サポートされる式はすべての[仮想生成列の制限](/generated-columns.md#limitations)制限を継承します。
+式インデックスには、MySQL と同じ構文と制限があります。これらは、生成された非表示の仮想列にインデックスを作成することによって実装されるため、サポートされる式はすべての[仮想生成列の制限](/generated-columns.md#limitations)を継承します。
 
 ## 多値インデックス {#multi-valued-indexes}
 
@@ -356,7 +356,7 @@ Query OK, 1 row affected (0.00 sec)
 ### 制限事項 {#limitations}
 
 - 空のJSON配列の場合、対応するインデックスレコードは生成されません。
-- `CAST(... AS ... ARRAY)`のターゲットタイプは`BINARY` 、 `JSON` 、 `YEAR` 、 `FLOAT` 、および`DECIMAL`いずれにもなりません。ソースタイプは JSON である必要があります。
+- `CAST(... AS ... ARRAY)`のターゲットタイプは`BINARY` 、 `JSON` 、 `YEAR` 、 `FLOAT` 、および`DECIMAL`のいずれにもなりません。ソースタイプは JSON である必要があります。
 - 多値インデックスをソートに使用することはできません。
 - JSON配列に対してのみ、多値インデックスを作成できます。
 - 多値インデックスは、主キーまたは外部キーとして使用することはできません。
@@ -366,7 +366,7 @@ Query OK, 1 row affected (0.00 sec)
 - テーブルが多値インデックスを使用している場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0より前のTiDBクラスタにテーブルをバックアップ、レプリケート、またはインポートすることはできません。
 - 複雑な条件を含むクエリの場合、TiDB は多値インデックスを選択できない場合があります。多値インデックスでサポートされる条件パターンについては、 [多値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
 
-## Partial indexes <span class="version-mark">v8.5.7 の新機能</span> {#partial-indexes-new-in-v857}
+## 部分インデックス <span class="version-mark">v8.5.7 の新機能</span> {#partial-indexes-new-in-v857}
 
 部分インデックスは、テーブル内の行のサブセットに対して構築されるインデックスです。部分インデックスを作成する際には、その行のサブセットを定義するために、述語とも呼ばれる条件式を指定できます。インデックスには、その述語を満たす行に対するエントリのみが含まれます。
 

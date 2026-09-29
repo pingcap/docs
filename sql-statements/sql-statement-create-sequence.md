@@ -233,7 +233,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     Query OK, 0 rows affected (0.02 sec)
     ```
 
-- 次の例では、値が指定されていないため、デフォルト値の`seq2`が使用されます。
+- 次の例では、値が指定されていないため、`seq2`のデフォルト値が使用されます。
 
     ```sql
     INSERT into t values();
@@ -256,7 +256,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
-- 次の例では、値が指定されていないため、デフォルト値の`seq2`が使用されます。しかし、次の値`seq2`は上記の例で定義された範囲（ `CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;` ）外であるため、エラーが返されます。
+- 次の例では、値が指定されていないため、`seq2`のデフォルト値が使用されます。しかし、`seq2`の次の値は上記の例で定義された範囲（ `CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;` ）外であるため、エラーが返されます。
 
     ```sql
     INSERT into t values();

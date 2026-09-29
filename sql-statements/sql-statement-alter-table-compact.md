@@ -24,7 +24,7 @@ AlterTableCompactStmt ::=
 
 ## 例 {#examples}
 
-### テーブル内のコンパクトなTiFlashレプリカ {#compact-tiflash-replicas-in-a-table}
+### テーブル内のTiFlashレプリカをコンパクトにする {#compact-tiflash-replicas-in-a-table}
 
 以下は、2つのTiFlashレプリカを持つ 4つのパーティションを持つ`employees`テーブルを例として示します。
 
@@ -49,7 +49,7 @@ ALTER TABLE employees SET TIFLASH REPLICA 2;
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
 ```
 
-### テーブル内の指定されたパーティションのコンパクトTiFlashレプリカ {#compact-tiflash-replicas-of-specified-partitions-in-a-table}
+### テーブル内の指定されたパーティションのTiFlashレプリカをコンパクトにする {#compact-tiflash-replicas-of-specified-partitions-in-a-table}
 
 以下は、2つのTiFlashレプリカを持つ 4つのパーティションを持つ`employees`テーブルを例として示します。
 
@@ -91,7 +91,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 `INFORMATION_SCHEMA.TIFLASH_TABLES`テーブルの`TOTAL_DELTA_ROWS`列を確認することで、データ圧縮の進行状況を確認したり、テーブルの圧縮を開始するかどうかを判断したりできます。 `TOTAL_DELTA_ROWS`の値が大きいほど、圧縮できるデータ量が多くなります。 `TOTAL_DELTA_ROWS`が`0`の場合、テーブル内のすべてのデータは最適な状態であり、圧縮する必要はありません。
 
-<details><summary>例:パーティションテーブルの圧縮状態を確認する</summary>
+<details><summary>例:非パーティションテーブルの圧縮状態を確認する</summary>
 
 ```sql
 USE test;
@@ -191,7 +191,7 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 >
 > - 圧縮中にデータが更新された場合、圧縮完了後も`TOTAL_DELTA_ROWS`が0以外の値のままになることがあります。これは正常な動作であり、これらの更新が圧縮されていないことを示しています。これらの更新を圧縮するには、 `ALTER TABLE ... COMPACT`文を再度実行してください。
 >
-> - `TOTAL_DELTA_ROWS`は行数ではなくデータバージョンを示します。例えば、行を挿入してから削除した場合、 `TOTAL_DELTA_ROWS` 2ずつ増加します。
+> - `TOTAL_DELTA_ROWS`は行数ではなくデータバージョンを示します。例えば、行を挿入してから削除した場合、 `TOTAL_DELTA_ROWS`は2増加します。
 
 ## 互換性 {#compatibility}
 

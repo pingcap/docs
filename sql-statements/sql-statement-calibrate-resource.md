@@ -26,7 +26,7 @@ WorkloadOption ::=
 
 このコマンドを実行するには、次の要件が満たされていることを確認してください。
 
-- [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)有効にしました。
+- [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)を有効にしました。
 - ユーザーには`SUPER`または`RESOURCE_GROUP_ADMIN`権限があります。
 - [実際の作業量に基づいて容量を見積もる](#estimate-capacity-based-on-actual-workload)の場合、ユーザーは`METRICS_SCHEMA`スキーマ内のすべてのテーブルに対する`SELECT`権限を持っている必要があります。
 
@@ -59,7 +59,7 @@ TiDB は推定に 2つの方法を提供します。
 
 > **Note:**
 >
-> クラスタのRU容量は、クラスタのトポロジと各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスタが提供できる実際のRUは、実際のワークロードにも依存します。ハードウェア構成に基づく推定値は参考値であり、実際の最大値と異なる場合があります[実際の作業量に基づいて容量を見積もる](#estimate-capacity-based-on-actual-workload)を推奨します。
+> クラスタのRU容量は、クラスタのトポロジと各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスタが提供できる実際のRUは、実際のワークロードにも依存します。ハードウェア構成に基づく推定値は参考値であり、実際の最大値と異なる場合があります。[実際の作業量に基づいて容量を見積もる](#estimate-capacity-based-on-actual-workload)を推奨します。
 
 ## 例 {#examples}
 
@@ -87,7 +87,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' END_TIME '2023-04-18 08:20:0
 1 row in set (0.01 sec)
 ```
 
-時間ウィンドウ範囲`DURATION` 10分から 24時間の範囲にない場合は、エラーが発生します。
+時間ウィンドウ範囲`DURATION`が10分から 24時間の範囲にない場合は、エラーが発生します。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '25h';
@@ -103,7 +103,7 @@ CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';
 Error 1105 (HY000): There is no CPU quota metrics, metrics 'tikv_cpu_quota' is empty
 ```
 
-時間枠内のワークロードが低すぎる場合、または監視データ`resource_manager_resource_unit`と`process_cpu_usage`欠落している場合、以下のエラーが報告されます。また、TiKVはmacOSのCPU使用率を監視しないため、実際のワークロードに基づく容量推定をサポートしておらず、このエラーも報告されます。
+時間枠内のワークロードが低すぎる場合、または監視データ`resource_manager_resource_unit`と`process_cpu_usage`が欠落している場合、以下のエラーが報告されます。また、TiKVはmacOSのCPU使用率を監視しないため、実際のワークロードに基づく容量推定をサポートしておらず、このエラーも報告されます。
 
 ```sql
 CALIBRATE RESOURCE START_TIME '2023-04-18 08:00:00' DURATION '60m';

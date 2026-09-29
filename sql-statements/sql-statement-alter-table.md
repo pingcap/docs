@@ -8,7 +8,7 @@ summary: TiDB データベースの ALTER TABLE の使用法の概要。
 この文は、既存のテーブルを新しいテーブル構造に適合するように変更します。文`ALTER TABLE`は次の目的で使用できます。
 
 - [`ADD`](/sql-statements/sql-statement-add-index.md) 、 [`DROP`](/sql-statements/sql-statement-drop-index.md) 、または[`RENAME`](/sql-statements/sql-statement-rename-index.md)インデックス
-- [`ADD`](/sql-statements/sql-statement-add-column.md) [`DROP`](/sql-statements/sql-statement-drop-column.md)または[`MODIFY`](/sql-statements/sql-statement-modify-column.md) [`CHANGE`](/sql-statements/sql-statement-change-column.md)
+- 列の[`ADD`](/sql-statements/sql-statement-add-column.md)、[`DROP`](/sql-statements/sql-statement-drop-column.md)、[`MODIFY`](/sql-statements/sql-statement-modify-column.md)、または[`CHANGE`](/sql-statements/sql-statement-change-column.md)
 - [`COMPACT`](/sql-statements/sql-statement-alter-table-compact.md)テーブルデータ
 
 ## 概要 {#synopsis}
@@ -114,7 +114,7 @@ Query OK, 0 rows affected (0.30 sec)
 2 rows in set (0.00 sec)
 ```
 
-TiDBは、DDL変更が`ALTER`のアルゴリズムを使用していることをアサートする機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムは変更されないことに注意してください。
+TiDBは、DDL変更が特定の`ALTER`アルゴリズムを使用していることをアサートする機能をサポートしています。これは単なるアサーションであり、テーブルの変更に使用される実際のアルゴリズムは変更されないことに注意してください。
 
 ```sql
 ALTER TABLE t1 DROP INDEX c1, ALGORITHM=INSTANT;
@@ -156,10 +156,10 @@ Query OK, 0 rows affected, 1 warning (0.25 sec)
 
 TiDB の`ALTER TABLE`には次の主な制限が適用されます。
 
-- `ALTER TABLE`つのステートメントで複数のスキーマオブジェクトを変更する場合:
+- 1つの`ALTER TABLE`ステートメントで複数のスキーマオブジェクトを変更する場合:
 
     - 同じオブジェクトを複数回変更することはサポートされていません。
-    - TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行すると、列`c1`テーブルに存在しないためエラーが返されます。
+    - TiDBは**実行前に**テーブルスキーマに従ってステートメントを検証します。例えば、 `ALTER TABLE t ADD COLUMN c1 INT, ADD COLUMN c2 INT AFTER c1;`を実行すると、列`c1`がテーブルに存在しないためエラーが返されます。
     - `ALTER TABLE`文の場合、TiDB での実行順序は左から右への変更が 1つずつ順番に実行されるため、場合によっては MySQL と互換性がありません。
 
 - 主キー列の[再編成データ](/sql-statements/sql-statement-modify-column.md#reorg-data-change)種類の変更はサポートされていません。
