@@ -53,7 +53,7 @@ Read the complete contents of a file:
 ti fs read-file --path /reports/report.md
 ```
 
-The command prints the file contents as plain text, even though the default output format is JSON.
+The command writes file contents directly to standard output; it does not wrap them in JSON.
 
 To read only part of a file, use `--offset` and `--length`. For example, the following command reads the first 1024 bytes:
 
