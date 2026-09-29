@@ -27,4 +27,4 @@ summary: 2024年 4月 18日のTiDB Cloud Data Migration (DM) 機能メンテナ�
 
 ## サポートを受ける {#get-support}
 
-ご質問やサポートが必要な場合は、 [サポートチーム](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。お客様のご懸念にお答えし、必要なサポートを提供させていただきます。
+ご質問やサポートが必要な場合は、 [サポートチーム](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。お客様のご懸念にお答えし、必要なサポートを提供させていただきます。
