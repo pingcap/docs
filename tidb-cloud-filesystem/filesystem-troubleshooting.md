@@ -71,11 +71,11 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
 
-## Scoped token is denied
+## Scoped token access is denied
 
-A scoped token that is used beyond its scope fails with exit code 1, and the message is one of two. Most commands report `fs access denied`. `ti fs copy-file` often reports an empty `HTTP 403:` instead.
+A scoped token used outside its scope causes the command to exit with code 1 and report one of two messages. Most commands report `fs access denied`. `ti fs copy-file` can report an empty `HTTP 403:` instead.
 
-Both messages mean the same thing: the token does not allow this operation on this path. Neither one is a connectivity problem or a sign that the token is invalid. Check what the token allows before you change anything:
+In this context, both messages indicate that the token does not allow this operation on this path. Neither one is a connectivity problem or a sign that the token is invalid. Check what the token allows before you change anything:
 
 ```bash
 ti fs list-file-system-tokens \
@@ -83,7 +83,7 @@ ti fs list-file-system-tokens \
   --output text
 ```
 
-Compare the token scope with the path and the operation you used. `search` also requires `read`. A scoped token cannot list the file system root unless its allowed path is `/`. A scoped token cannot widen its own permissions, so generate a new one with the operations you need instead of trying to change the existing token.
+Compare the token scope with the path and the operation you used. `search` also requires `read`. A scoped token cannot list the file system root unless its allowed path is `/`. A scoped token cannot widen its own permissions, so use an owner token to generate a new scoped token with the operations you need instead of trying to change the existing token.
 
 ## File system selection is missing
 
@@ -206,13 +206,13 @@ Unmount performs the graceful FUSE drain automatically. Running `drain-file-syst
 | Code | Meaning | What to do |
 | --- | --- | --- |
 | 0 | Success | Continue. |
-| 1 | The request was valid and the runtime or the service refused it | Read the message. A scoped token denial, a missing payment method, and a display name conflict all land here. |
-| 2 | The command or the profile configuration cannot be used | Fix the command or the profile. Unknown flag, missing required input, a region where `ti fs` is unavailable, or a token file with loose permissions. |
+| 1 | Runtime or remote API error | Read the message and address the reported runtime, network, or service error. Scoped token denials and some other service errors also use this code. |
+| 2 | Local usage, validation, or configuration error | Fix the command or the profile. Examples include an unknown flag, missing required input, an unsupported region, or a token file with loose permissions. |
 | 3 | Authentication failed | Check the token or the API key pair. |
-| 4 | The account lacks permission for the operation | Ask an organization administrator. This is different from the data-path denial at 1. |
+| 4 | The account lacks permission for the operation | Ask an organization administrator. This is different from a scoped-token denial, which returns exit code 1. |
 | 5 | The file system, token, or other resource named in the request does not exist | Check the ID. A path that does not exist inside a file system returns 1, not 5. |
 
-One case does not follow the table. A deleted or disabled token is reported on the data path, so it exits 1 rather than 3. See [File system token is rejected](#file-system-token-is-rejected).
+A deleted or disabled file system token is an exception to the preceding table: file commands return exit code 1 rather than 3. See [File system token is rejected](#file-system-token-is-rejected).
 
 ## Report a problem
 
