@@ -12,7 +12,7 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 > - この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > - この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-`BACKUP`文は、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ処理は別のBRツールではなくBR自体によって実行されます。BR のすべての利点と警告は、この文にも適用されます。
+`BACKUP`文は、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、バックアップ処理は別のBRツールではなくTiDB自体によって実行されます。BR のすべての利点と警告は、この文にも適用されます。
 
 `BACKUP`を実行するには`BACKUP_ADMIN`または`SUPER`権限が必要です。さらに、バックアップを実行する TiDB ノードとクラスタ内のすべての TiKV ノードの両方が、宛先への読み取りまたは書き込み権限を持っている必要があります。 [セキュリティ強化モード](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、ローカルストレージ( `local://`で始まるストレージパス) は許可されません。
 
@@ -20,7 +20,7 @@ summary: TiDBデータベースにおけるBACKUPの使用方法の概要。
 
 `BACKUP`および[`RESTORE`](/sql-statements/sql-statement-restore.md)タスクは、一度に 1つしか実行できません。 `BACKUP`または`RESTORE`文が同じ TiDBサーバーで既に実行されている場合、新しい`BACKUP`の実行は、以前のすべてのタスクが完了するまで待機します。
 
-`BACKUP` "tikv"ストレージエンジンでのみ使用できます。"unistore"エンジンで`BACKUP`を使用すると失敗します。
+`BACKUP`は"tikv"ストレージエンジンでのみ使用できます。"unistore"エンジンで`BACKUP`を使用すると失敗します。
 
 ## 概要 {#synopsis}
 
@@ -127,7 +127,7 @@ BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-05/'
 
 デフォルトでは統計はバックアップされません。統計情報をバックアップするには、 `IGNORE_STATS`パラメーターを`FALSE`に設定する必要があります。
 
-デフォルトでは、バックアップによって生成される SST ファイルは`zstd`圧縮アルゴリズムを使用します。必要に応じて、 `COMPRESSION_TYPE`パラメータを使用して別の圧縮アルゴリズムを指定できます。サポートされているアルゴリズムには、 `lz4` 、 `zstd` 、および`snappy`あります。また`COMPRESSION_LEVEL`パラメータを使用して圧縮レベルを調整することもできます。レベル番号が大きいほど圧縮率は高くなりますが、CPU 消費量も高くなります。
+デフォルトでは、バックアップによって生成される SST ファイルは`zstd`圧縮アルゴリズムを使用します。必要に応じて、 `COMPRESSION_TYPE`パラメータを使用して別の圧縮アルゴリズムを指定できます。サポートされているアルゴリズムには、 `lz4` 、 `zstd` 、および`snappy`があります。また`COMPRESSION_LEVEL`パラメータを使用して圧縮レベルを調整することもできます。レベル番号が大きいほど圧縮率は高くなりますが、CPU 消費量も高くなります。
 
 ```sql
 BACKUP DATABASE `test` TO 's3://example-bucket-2020/backup-06/'
@@ -156,12 +156,12 @@ BACKUP DATABASE `test` TO 'local:///mnt/backup/hist03'
 
 相対時間でサポートされている単位は以下のとおりです。
 
-- マイクロ秒
-- 2番
-- 分
-- 時間
-- 日
-- 週
+- MICROSECOND
+- SECOND
+- MINUTE
+- HOUR
+- DAY
+- WEEK
 
 SQL標準に従い、単位は常に単数形であることに注意してください。
 

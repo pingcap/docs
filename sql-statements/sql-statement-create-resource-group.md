@@ -91,7 +91,7 @@ TiDB は、次の`DirectResourceGroupOption`をサポートします。ここで
 
 ## 例 {#examples}
 
-`rg1`と`rg2` 2つのリソースグループを作成します。
+`rg1`と`rg2`の2つのリソースグループを作成します。
 
 ```sql
 DROP RESOURCE GROUP IF EXISTS rg1;
@@ -143,5 +143,5 @@ MySQL は[CREATE RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/create-
 
 - [DROP RESOURCE GROUP](/sql-statements/sql-statement-drop-resource-group.md)
 - [ALTER RESOURCE GROUP](/sql-statements/sql-statement-alter-resource-group.md)
-- [ユーザーにバインドされているリソースグループを変更する](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
+- [ALTER USER RESOURCE GROUP](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)
 - [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)
