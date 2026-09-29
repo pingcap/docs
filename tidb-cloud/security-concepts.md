@@ -3,13 +3,13 @@ title: Security
 summary: TiDB Cloudのセキュリティ概念について学びましょう。
 ---
 
-# Security {#security}
+# セキュリティ {#security}
 
 TiDB Cloudは、データの保護、アクセス制御の徹底、最新のコンプライアンス基準への準拠を目的とした、堅牢かつ柔軟なセキュリティフレームワークを提供します。このフレームワークは、高度なセキュリティ機能と運用効率を組み合わせ、大規模な組織のニーズに対応します。
 
 **主要構成要素**
 
-- **IDおよびアクセス管理（IAM ）** ： TiDB Cloudコンソール環境とデータベース環境の両方において、セキュリティかつ柔軟な認証と権限管理を実現します。
+- **IDおよびアクセス管理（IAM ）** ： TiDB Cloudコンソール環境とデータベース環境の両方において、安全かつ柔軟な認証と権限管理を実現します。
 
 - **ネットワークアクセス制御**：プライベートエンドポイント、VPCピアリング、TLS暗号化、IPアクセスリストなど、設定可能な接続オプション。
 
@@ -95,7 +95,7 @@ TiDBの権限管理システムはMySQL 5.7をベースとしており、デー�
 
 - データベース管理権限の適切な分割をサポートし、システム管理権限のきめ細かな制御を実現します。
 
-- 例: より広範な管理権限を持たないデータベースバックアップを管理するアカウントに`BACKUP_ADMIN`を割り当てます。
+- 例: より広範な管理権限を付与せずに、データベースバックアップを管理するアカウントに`BACKUP_ADMIN`を割り当てます。
 
 **SQLロール（RBAC）**
 
@@ -122,7 +122,7 @@ TiDB Cloudは、組織、プロジェクト、リソースという階層構造�
 - TiDB Cloudには、3種類のプロジェクトがあります。
 
     - **TiDB Dedicatedプロジェクト**： TiDB Cloud Dedicatedクラスタ専用のプロジェクトタイプです。Dedicatedプロジェクトは、ネットワーク、メンテナンス、アラート購読、統合、暗号化関連のアクセスなど、プロジェクトスコープの設定を管理します。
-    - **TiDB Xプロジェクト**：TiDB Xインスタンス（ TiDB Cloud Starter、 Essential、Premiumインスタンスを含む）の論理コンテナです。TiDB Xプロジェクトは、リソースのグループ化やプロジェクトレベルのRBACの適用に使用されますが、専用環境専用のインフラストラクチャ設定は保持しません。
+    - **TiDB Xプロジェクト**：TiDB Xインスタンス（ TiDB Cloud Starter、 Essential、Premiumインスタンスを含む）の論理コンテナです。TiDB Xプロジェクトは、リソースのグループ化やプロジェクトレベルのRBACの適用に使用されますが、Dedicated専用のインフラストラクチャ設定は保持しません。
     - **TiDB X仮想プロジェクト**：どのTiDB Xプロジェクトにもグループ化されていないTiDB Xインスタンス用の仮想プロジェクトです。このプロジェクトタイプはAPI互換性のためだけに使用され、管理機能は提供されません。
 
 **リソース**
@@ -180,7 +180,7 @@ TiDB Cloudは、堅牢なネットワークアクセス制御により、安全�
 
 - 仮想プライベートクラウド（VPC）内のSQLクライアントとTiDB Cloud Dedicatedクラスター間の安全な接続を可能にします。
 
-- [AWSプライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)リンク、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 、 [Alibaba Cloudプライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)でサポートされています。
+- [AWSプライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 、 [Alibaba Cloudプライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)でサポートされています。
 
 </CustomContent>
 
@@ -188,13 +188,13 @@ TiDB Cloudは、堅牢なネットワークアクセス制御により、安全�
 
 - 仮想プライベートクラウド（VPC）内のSQLクライアントとTiDB Cloud Dedicatedクラスター間の安全な接続を可能にします。
 
-- [AWSプライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)リンク、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)でサポートされています。
+- [AWSプライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)でサポートされています。
 
 </CustomContent>
 
 **ベストプラクティス：**本番ではプライベートエンドポイントを使用して外部への露出を最小限に抑え、設定を定期的に見直してください。
 
-### TLS（トランスポート層Security） {#tls-transport-layer-security}
+### TLS（トランスポート層セキュリティ） {#tls-transport-layer-security}
 
 - クライアントとサーバー間の通信を暗号化し、データ送信の安全性を確保します。
 
@@ -297,4 +297,4 @@ TiDB Cloudコンソール上で行われた主要な操作（ユーザーの招�
 
 - ログは、コンプライアンス報告およびフォレンジック分析に活用してください。
 
-詳細については、 [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
+詳細については、 [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)と[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。

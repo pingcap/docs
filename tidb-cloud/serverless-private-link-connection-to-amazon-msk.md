@@ -1,13 +1,13 @@
 ---
 title: Connect to Amazon MSK Provisioned via a Private Link Connection
-summary: Amazon MSK プロビジョニングされたプライベートリンク接続を使用して Amazon MSK プロビジョニングされたクラスターに接続する方法を学習します。
+summary: Amazon MSK Provisioned のプライベートリンク接続を使用して Amazon MSK Provisioned クラスターに接続する方法を学習します。
 ---
 
-# プライベートリンク接続経由でプロビジョニングされた Amazon MSK に接続する {#connect-to-amazon-msk-provisioned-via-a-private-link-connection}
+# プライベートリンク接続経由で Amazon MSK Provisioned に接続する {#connect-to-amazon-msk-provisioned-via-a-private-link-connection}
 
-このドキュメントでは、 [Amazon MSK プロビジョニングされたプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を使用してTiDB Cloud Essentialクラスターを[Amazon MSK プロビジョニング](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターに接続する方法について説明します。
+このドキュメントでは、 [Amazon MSK Provisioned のプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を使用してTiDB Cloud Essentialクラスターを[Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターに接続する方法について説明します。
 
-## TiDB Cloud Essentialの前提条件 {#prerequisites-for-essential} {#prerequisites-for-essential}
+## TiDB Cloud Essentialの前提条件 {#prerequisites-for-essential}
 
 - TiDB Cloud Essentialクラスターは AWS でホストされており、アクティブです。後で使用するために、以下の情報を取得して保存してください。
 
@@ -20,17 +20,17 @@ AWS アカウント ID とアベイラビリティゾーンを表示するには
 2. **[外部サービス向け AWS プライベートエンドポイント]**領域で、**[外部サービス向けプライベートエンドポイントを作成]**をクリックします。
 3. ダイアログで、AWS アカウント ID とアベイラビリティゾーンをメモします。
 
-## Amazon MSK プロビジョニングクラスターの前提条件 {#prerequisites-for-the-amazon-msk-provisioned-cluster}
+## Amazon MSK Provisioned クラスターの前提条件 {#prerequisites-for-the-amazon-msk-provisioned-cluster}
 
-始める前に、Amazon MSK プロビジョニングされたクラスターについて次の点を確認してください。
+始める前に、Amazon MSK Provisioned クラスターについて次の点を確認してください。
 
-- **リージョンと AZ** : Amazon MSK プロビジョニングされたクラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティゾーンはTiDB Cloudクラスターと同じです。
-- MSK クラスターには**Authentication**: [SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
+- **リージョンと AZ** : Amazon MSK Provisioned クラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティゾーンはTiDB Cloudクラスターと同じです。
+- **Authentication**: MSK クラスターには[SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
 - **Broker type**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
 
 詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)を参照してください。
 
-Amazon MSK プロビジョニングされたクラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティゾーンに[1つ作成する](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html) 、作成されたクラスターに[SASL/SCRAM認証を設定する](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html) 。
+Amazon MSK Provisioned クラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティゾーンに[1つ作成する](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)し、作成されたクラスターに[SASL/SCRAM認証を設定](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)します。
 
 - **Secret name**: シークレット名は`AmazonMSK_`で始まる必要があります。
 - **暗号化**：デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
@@ -85,7 +85,7 @@ TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセス�
 
 <div label="IAM">
 
-SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同じ VPC 内に ACL を作成できますIAMユーザーまたはロールには、MSK 権限用の**Amazon MSK**および**Apache Kafka API**が必要です。
+SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同じ VPC 内に ACL を作成できます。IAMユーザーまたはロールには、**Amazon MSK**および**Apache Kafka APIs for MSK**の権限が必要です。
 
 1. MSK クラスターが配置されている VPC に EC2 インスタンス (Linux) を作成し、SSH で接続します。
 
@@ -134,9 +134,9 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 次のクラスター構成プロパティを更新します。
 
-- セット`auto.create.topics.enable=true` 。
+- `auto.create.topics.enable=true`を設定します。
 - `allow.everyone.if.no.acl.found=false`を追加します (SASL/SCRAM に必要)。
-- その他のプロパティは変更せず、必要に応じて調整します。
+- その他のプロパティは変更しないか、必要に応じて調整します。
 
 変更を適用し、クラスターのステータスが**Updating**から**Active**に変わるまで待ちます。
 
@@ -146,12 +146,12 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ4. マルチVPC接続を有効にする {#step-4-turn-on-multi-vpc-connectivity}
 
-クラスターがアクティブになった後、MSKクラスターの場合は[マルチVPC接続を有効にする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html) 。AWS PrivateLinkにはマルチVPC接続が必要です。TiDB Cloudから接続するには、SASL/SCRAM認証を有効にする必要があります。
+クラスターがアクティブになった後、MSKクラスターの[マルチVPC接続を有効に](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html)します。AWS PrivateLinkにはマルチVPC接続が必要です。TiDB Cloudから接続するには、SASL/SCRAM認証を有効にする必要があります。
 
 クラスターのステータスが**Updating**から**Active**に再度変わるまで待ちます。
 
-## ステップ 5. TiDB Cloudで Amazon MSK プロビジョニングされたプライベートリンク接続を作成する {#step-5-create-an-amazon-msk-provisioned-private-link-connection-in-tidb-cloud}
+## ステップ 5. TiDB Cloudで Amazon MSK Provisioned のプライベートリンク接続を作成する {#step-5-create-an-amazon-msk-provisioned-private-link-connection-in-tidb-cloud}
 
 MSK クラスターの`ARN`を使用して、 TiDB Cloudにプライベートリンク接続を作成します。
 
-詳細については[Amazon MSK プロビジョニングされたプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を参照してください。
+詳細については[Amazon MSK Provisioned のプライベートリンク接続を作成する](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を参照してください。

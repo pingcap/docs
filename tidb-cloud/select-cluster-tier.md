@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/developer-tier-cluster']
 
 プランによって、TiDBリソースのスループットとパフォーマンスが決まります。
 
-TiDB Cloud、以下のプランをご用意しています。新規導入の場合でも、アプリケーションの需要増加に合わせて拡張していく場合でも、これらのサービスプランは必要な柔軟性と機能を提供します。TiDBリソースを作成する前に、どのプランがお客様のニーズに最適かを検討する必要があります。
+TiDB Cloudでは、以下のプランをご用意しています。新規導入の場合でも、アプリケーションの需要増加に合わせて拡張していく場合でも、これらのサービスプランは必要な柔軟性と機能を提供します。TiDBリソースを作成する前に、どのプランがお客様のニーズに最適かを検討する必要があります。
 
 <CustomContent plan="starter,essential,premium,dedicated">
 
@@ -35,7 +35,7 @@ TiDB Cloud、以下のプランをご用意しています。新規導入の場�
 >
 > TiDB Cloudの一部の機能は、 TiDB Cloud StarterおよびTiDB Cloud Essentialでは部分的にサポートされているか、サポートされていません。詳細については[TiDB Cloud StarterとEssential制限事項](/tidb-cloud/serverless-limitations.md)を参照してください。
 
-## TiDB Cloud Starter {#starter} {#starter}
+## TiDB Cloud Starter {#starter}
 
 TiDB Cloud Starterは、フルマネージド型のマルチテナント対応TiDBサービスです。MySQL互換の自動スケーリング対応データベースを即座に提供し、十分な無料クォータと、無料制限を超えた場合の従量課金制を採用しています。
 
@@ -59,21 +59,21 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Star
 
 リクエストユニット（RU）とは、データベースへの単一のリクエストによって消費されるリソース量を表す単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。
 
-TiDB Cloud Starterインスタンスが使用クォータに達すると、ユーザーが または新しい月の開始時に使用がリセットさ[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)まで、新しい接続試行は即座に拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、無料のTiDB Cloud Starter TiDB Cloud Starterインスタンスの行ベースのストレージが5 GiB を超えると、インスタンスは自動的に新しい接続試行を制限します。
+TiDB Cloud Starterインスタンスが使用クォータに達すると、[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで、新しい接続試行は即座に拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、無料のTiDB Cloud Starterインスタンスの行ベースのストレージが5 GiB を超えると、インスタンスは自動的に新しい接続試行を制限します。
 
 さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク出力など）のRU消費量、価格の詳細、およびスロットリング情報の詳細については、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
 ### インスタンス容量計画 {#instance-capacity-plan}
 
-TiDB Cloudの各組織につき、最大 5[支店](/tidb-cloud/branch-overview.md)の を作成できます。デフォルトでは、すべてのTiDB Cloud StarterおよびEssentialインスタンスを合わせて作成できます。
+TiDB Cloudの各組織につき、デフォルトでは、すべてのTiDB Cloud StarterおよびEssentialインスタンスを合わせて最大 5つの[ブランチ](/tidb-cloud/branch-overview.md)を作成できます。
 
 TiDB Cloudの有料組織ごとに、合計で最大100個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。
 
-エージェントプラットフォームや、多数のインスタンスとブランチを必要とするその他のサービスを構築する有料組織向けに、 TiDB Cloud は**Instance Capacity Plan**を提供しています。このプランでは、有料のTiDB Cloud組織は 5つ以上のブランチを作成でき、 TiDB Cloud Starter のインスタンスとブランチの 100 個という制限を受けません。インスタンス容量プランの詳細と申し込みについては、 [申込書](https://www.pingcap.com/programs/agentic-ai-instance-capacity)にご記入ください。
+エージェントプラットフォームや、多数のインスタンスとブランチを必要とするその他のサービスを構築する有料組織向けに、 TiDB Cloud は**Instance Capacity Plan**を提供しています。このプランでは、有料のTiDB Cloud組織は 5つを超えるブランチを作成でき、 TiDB Cloud Starter のインスタンスとブランチの 100 個という制限を受けません。インスタンス容量プランの詳細と申し込みについては、 [申込書](https://www.pingcap.com/programs/agentic-ai-instance-capacity)にご記入ください。
 
 TiDB Cloudインスタンス容量プランの申請が承認されると、メールで通知が届きます。
 
-## TiDB Cloud Essential {#essential} {#essential}
+## TiDB Cloud Essential {#essential}
 
 ワークロードが増加し、リアルタイムでの拡張性を必要とするアプリケーション向けに、 Essentialプランは以下の機能を備え、ビジネスの成長に合わせて柔軟かつ高性能なソリューションを提供します。
 
@@ -112,7 +112,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィ
 2. 対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
 3. ダイアログで、接続文字列からプレフィックスを取得します。
 
-## TiDB Cloud Premium {#premium} {#premium}
+## TiDB Cloud Premium {#premium}
 
 大規模な容量と一貫した高いパフォーマンスを必要とするミッションクリティカルなエンタープライズワークロード向けに、Premiumプランは以下の機能を備えたクラウドネイティブなエクスペリエンスを提供します。
 
@@ -142,7 +142,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィ
 
 TiDB Cloud Dedicatedは、ゾーン間高可用性、水平スケーリング、 [HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)といったメリットを備えた、本番での利用を想定したサービスです。
 
-TiDB Cloud Dedicatedクラスターでは、ビジネスニーズに応じて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードおよびTiFlashノードでは、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)実現するために異なるアベイラビリティゾーンに分散されます。
+TiDB Cloud Dedicatedクラスターでは、ビジネスニーズに応じて TiDB、TiKV、 TiFlashのクラスターサイズを簡単にカスタマイズできます。各 TiKV ノードおよびTiFlashノードでは、ノード上のデータが複製され、 [高可用性](/tidb-cloud/high-availability-with-multi-az.md)を実現するために異なるアベイラビリティゾーンに分散されます。
 
 TiDB Cloud Dedicatedクラスターを作成するには、 [支払い方法を追加する](/tidb-cloud/tidb-cloud-billing.md#payment-method)か、[概念実証（PoC）トライアルに申し込む](/tidb-cloud/tidb-cloud-poc.md)必要があります。
 

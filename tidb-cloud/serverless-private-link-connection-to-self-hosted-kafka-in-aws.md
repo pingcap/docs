@@ -51,9 +51,9 @@ AWS アカウント ID とアベイラビリティゾーンを表示するには
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 
-新しいクラスターをデプロイする必要がある場合は、 [新しいKafkaクラスターをデプロイ](#deploy-a-new-kafka-cluster)手順に従ってください。
+新しいクラスターをデプロイする必要がある場合は、 [新しいKafkaクラスターをデプロイ](#deploy-a-new-kafka-cluster)の手順に従ってください。
 
-既存のクラスターを公開する必要がある場合は、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)手順に従ってください。
+既存のクラスターを公開する必要がある場合は、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)の手順に従ってください。
 
 ### 新しいKafkaクラスターをデプロイ {#deploy-a-new-kafka-cluster}
 
@@ -62,7 +62,7 @@ AWS アカウント ID とアベイラビリティゾーンを表示するには
 Kafka VPC には次のものが必要です。
 
 - ブローカー用のプライベートサブネットが 3つ (AZ ごとに 1つ)。
-- 任意の AZ に 1つのパブリックサブネットがあり、インターネットに接続できる要塞ノードと 3つのプライベートサブネットがあるため、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の要塞ノードが必要になる場合があります。
+- 任意の AZ に 1つのパブリックサブネットがあり、インターネットに接続できる要塞ノードと 3つのプライベートサブネットがあるため、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の要塞ノードがすでにある場合もあります。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
 
@@ -98,19 +98,19 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 3. 前にメモしておいた**VPC ID** (この例では`vpc-01f50b790fa01dffa` ) を選択します。
 
-4. 以下の情報を含む3つのサブネットを追加します。TiDB Cloud、ブローカー`advertised.listener`設定でAZ IDをエンコードする必要があるため、後でブローカーを設定する際に便利なように、サブネット名にAZ IDを含めることをお勧めします。
+4. 以下の情報を含む3つのサブネットを追加します。TiDB Cloudでは、ブローカーの`advertised.listener`設定でAZ IDをエンコードする必要があるため、後でブローカーを設定する際に便利なように、サブネット名にAZ IDを含めることをお勧めします。
 
-    - サブネット`us-west-2a`
+    - `us-west-2a`のサブネット1
         - **Subnet name**: `broker-usw2-az1`
         - **Availability Zone**: `us-west-2a`
         - **IPv4 subnet CIDR block**： `10.0.0.0/18`
 
-    - サブネット2 in `us-west-2c`
+    - `us-west-2c`のサブネット2
         - **Subnet name**: `broker-usw2-az2`
         - **Availability Zone**: `us-west-2c`
         - **IPv4 subnet CIDR block**： `10.0.64.0/18`
 
-    - サブネット`us-west-2b`
+    - `us-west-2b`のサブネット3
         - **Subnet name**: `broker-usw2-az3`
         - **Availability Zone**: `us-west-2b`
         - **IPv4 subnet CIDR block**： `10.0.128.0/18`
@@ -130,7 +130,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 4. 要塞サブネットをパブリックサブネットに構成します。
 
-    1. [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`名前のインターネットゲートウェイを作成します。
+    1. [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`という名前のインターネットゲートウェイを作成します。
 
     2. **Internet gateways Detail**ページの**Actions**で、 **Attach to VPC**をクリックして、インターネット ゲートウェイを Kafka VPC に接続します。
 
@@ -153,7 +153,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 - **Name**: `bastion-node`
 - **Amazon Machine Image**: `Amazon Linux`
 - **Instance Type**: `t2.small`
-- **Key pair**: `kafka-vpc-key-pair` 。 `kafka-vpc-key-pair`という名前の新しいキーペアを作成します。 `kafka-vpc-key-pair.pem`ローカルマシンにダウンロードして、後で設定します。
+- **Key pair**: `kafka-vpc-key-pair` 。 `kafka-vpc-key-pair`という名前の新しいキーペアを作成します。 `kafka-vpc-key-pair.pem`をローカルマシンにダウンロードして、後で設定します。
 - ネットワーク設定
 
     - **VPC** : `Kafka VPC`
@@ -170,7 +170,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     - **Name**: `broker-node1`
     - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
-    - **Key pair**：再利用`kafka-vpc-key-pair`
+    - **Key pair**： `kafka-vpc-key-pair`を再利用します
     - ネットワーク設定
 
         - **VPC** : `Kafka VPC`
@@ -186,7 +186,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     - **Name**: `broker-node2`
     - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
-    - **Key pair**：再利用`kafka-vpc-key-pair`
+    - **Key pair**： `kafka-vpc-key-pair`を再利用します
     - ネットワーク設定
 
         - **VPC** : `Kafka VPC`
@@ -202,7 +202,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     - **Name**: `broker-node3`
     - **Amazon Machine Image**: `Amazon Linux`
     - **Instance Type**: `t2.large`
-    - **Key pair**：再利用`kafka-vpc-key-pair`
+    - **Key pair**： `kafka-vpc-key-pair`を再利用します
     - ネットワーク設定
 
         - **VPC** : `Kafka VPC`
@@ -269,7 +269,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 2. `advertised.listeners`項目については、次の操作を行います。
 
     1. 各ブローカーに対して、ブローカーノードの内部IPアドレスを使用して、INTERNALアドバタイズリスナーを設定します。アドバタイズされた内部Kafkaクライアントは、このアドレスを使用してブローカーにアクセスします。
-    2. TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードに外部アドバタイズリスナーを設定することで、 TiDB Cloudが複数のブローカーを区別できるようになります。異なる外部アドバタイズリスナーを設定することで、 TiDB CloudのKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
+    2. TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードにEXTERNAL アドバタイズリスナーを設定することで、 TiDB Cloudが複数のブローカーを区別できるようになります。異なるEXTERNAL アドバタイズリスナーを設定することで、 TiDB CloudのKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
 
         - `<port>`は、Kafka プライベートリンクサービスのアクセスポイントでブローカーを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを異なるブローカーに転送するプライベートリンクサービスのロードバランサーがリッスンするポートです。
         - **Kafka Advertised Listener Pattern**の`AZ ID`は、ブローカーがデプロイされている場所を示します。TiDB Cloud は、 AZ ID に基づいてリクエストを異なるエンドポイント DNS 名にルーティングします。
@@ -624,7 +624,7 @@ b3.usw2-az3.unique_name.aws.plc.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: 
 3. ブローカーターゲットグループ2 => 9094 => broker-node2:39092
 4. ブローカーターゲットグループ3 => 9095 => broker-node3:39092
 
-ブローカーロールノードが複数ある場合は、マッピングを追加する必要があります。ブートストラップターゲットグループに少なくとも1つのノードがあることを確認してください。耐障害性を確保するため、各AZに1つずつ、合計3つのノードを追加することをお勧めします。
+ブローカーロールノードがさらにある場合は、さらにマッピングを追加する必要があります。ブートストラップターゲットグループに少なくとも1つのノードがあることを確認してください。耐障害性を確保するため、各AZに1つずつ、合計3つのノードを追加することをお勧めします。
 
 ロードバランサーを設定するには、次の手順を実行します。
 
@@ -734,7 +734,7 @@ TiDB Cloudでプライベートリンク接続を作成するには、次の手�
 
 2. TiDB Cloudのデータフロー サービスが Kafka クラスターにアクセスできるように、プライベートリンク接続にドメインをアタッチします。
 
-    詳細については、 [プライベートリンク接続にドメインを添付する](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。 **Attach Domains**ダイアログで、ドメインの種類として**TiDB Cloud Managed**を選択し、生成されたドメインの一意の名前を後で使用するためにコピーする必要があることに注意してください。
+    詳細については、 [プライベートリンク接続にドメインをアタッチする](/tidb-cloud/serverless-private-link-connection.md#attach-domains-to-a-private-link-connection)を参照してください。 **Attach Domains**ダイアログで、ドメインの種類として**TiDB Cloud Managed**を選択し、生成されたドメインの一意の名前を後で使用するためにコピーする必要があることに注意してください。
 
 ## ステップ4. Kafka設定内の一意の名前プレースホルダーを置き換える {#step-4-replace-the-unique-name-placeholder-in-kafka-configuration}
 

@@ -11,7 +11,7 @@ TiDB Cloudは、データライフサイクルのあらゆる段階を網羅す�
 
 TiDB Cloud は[メールアドレスとパスワードでログイン](/tidb-cloud/tidb-cloud-password-authentication.md)、 [標準SSO](/tidb-cloud/tidb-cloud-sso-authentication.md) 、 [組織レベルのSSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md)の複数の認証方法をサポートしています。
 
-TiDB Cloudは階層化された役割と権限管理を提供し、多要素認証（MFA）を有効にすることでアカウントのセキュリティを強化できます。柔軟な[IDとアクセス制御](/tidb-cloud/manage-user-access.md)プロジェクトとリソースへのアクセスをきめ細かな権限で管理でき、最小権限の原則を維持できます。
+TiDB Cloudは階層化された役割と権限管理を提供し、多要素認証（MFA）を有効にすることでアカウントのセキュリティを強化できます。柔軟な[IDとアクセス制御](/tidb-cloud/manage-user-access.md)により、プロジェクトとリソースへのアクセスをきめ細かな権限で管理でき、最小権限の原則を維持できます。
 
 ## ネットワークのセキュリティと分離 {#network-security-and-isolation}
 
@@ -43,7 +43,7 @@ AWS 上でホストされているTiDB Cloud Premium インスタンスでは、
 
 TiDB Cloudは、静的権限と動的権限を組み合わせた、ユーザーおよびロールベースのアクセス制御メカニズムを提供します。ユーザーにロールを割り当てることで、権限をよりきめ細かく管理および配布できます。
 
-[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの場合、 [ルートアカウントのパスワードを設定および管理する](/tidb-cloud/configure-security-settings.md)、 [IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)を通じてアクセスを制限して、機密性の高いアカウントを保護できます。
+[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの場合、 [ルートアカウントのパスワードを設定および管理](/tidb-cloud/configure-security-settings.md)し、 [IPアクセスリスト](/tidb-cloud/configure-ip-access-list.md)を通じてアクセスを制限して、機密性の高いアカウントを保護できます。
 
 ## 監査ログ {#audit-logging}
 

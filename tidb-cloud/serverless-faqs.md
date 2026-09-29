@@ -41,7 +41,7 @@ TiDB Cloudでは、組織ごとにデフォルトで最大5つの[TiDB Cloud Sta
 
 ### TiDB Cloud Starter ではすべてのTiDB Cloud機能が完全にサポートされていますか? {#are-all-tidb-cloud-features-fully-supported-on-tidb-cloud-starter}
 
-TiDB Cloudの一部の機能は、 TiDB Cloud Starterでは部分的にサポートされるか、サポートされていません。詳細については、 [TiDB Cloud Starter の制限とクォータ](/tidb-cloud/serverless-limitations.md)ご覧ください。
+TiDB Cloudの一部の機能は、 TiDB Cloud Starterでは部分的にサポートされるか、サポートされていません。詳細については、 [TiDB Cloud Starter の制限とクォータ](/tidb-cloud/serverless-limitations.md)をご覧ください。
 
 ### TiDB Cloud Starter は、Google Cloud や Azure など、AWS 以外のクラウド プラットフォームでいつ利用できるようになりますか? {#when-will-tidb-cloud-starter-be-available-on-cloud-platforms-other-than-aws-such-as-google-cloud-or-azure}
 
@@ -82,7 +82,7 @@ TiFlashレプリカの設定方法の詳細については、 [TiFlashレプリ�
 
 ### 数分間アイドル状態が続いた後に接続が切断されるのはなぜですか? {#why-is-my-connection-disconnected-after-being-idle-for-several-minutes}
 
-パブリックエンドポイント経由で接続する場合、接続は様々なネットワークプロバイダーや中間デバイスを経由します。これらのデバイスにはそれぞれ短いアイドルタイムアウトが設定されている場合があり、接続が途中で中断される可能性があります。詳しくは[接続制限](/tidb-cloud/serverless-limitations.md#connection)ご覧ください。
+パブリックエンドポイント経由で接続する場合、接続は様々なネットワークプロバイダーや中間デバイスを経由します。これらのデバイスにはそれぞれ短いアイドルタイムアウトが設定されている場合があり、接続が途中で中断される可能性があります。詳しくは[接続制限](/tidb-cloud/serverless-limitations.md#connection)をご覧ください。
 
 ### 「Connection limit exceeded」というエラーが表示されるのはなぜですか? {#why-did-i-receive-a-connection-limit-exceeded-error}
 
@@ -114,7 +114,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 個々のSQL文のRU消費量を取得するには、SQL文[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)を使用できます。ただし、 `EXPLAIN ANALYZE`で返されるRU使用量には、出力RUは含まれていないことに注意してください。出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないためです。
 
-クラスターで使用されているRUとストレージを確認するには、クラスターの概要ページの**Usage this month**ペインをご覧ください。このペインに表示される過去のリソース使用量データとリアルタイムのリソース使用量を参考に、クラスターのリソース消費量を追跡し、適切な使用制限を見積もることができます。無料割り当てで要件を満たせない場合は、追加リソースの使用制限を編集できます。詳細については、 [TiDB Cloud Starter の使用割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
+クラスターで使用されているRUとストレージを確認するには、クラスターの概要ページの**Usage this month**ペインをご覧ください。このペインに表示される過去のリソース使用量データとリアルタイムのリソース使用量を参考に、クラスターのリソース消費量を追跡し、適切な利用限度額を見積もることができます。無料割り当てで要件を満たせない場合は、追加リソースの利用限度額を編集できます。詳細については、 [TiDB Cloud Starter の使用割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
 
 ### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいでしょうか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 
@@ -126,7 +126,7 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 ### テーブルまたはデータベースをすぐに削除した後でも、ストレージ使用量のサイズが変更されないのはなぜですか? {#why-does-the-storage-usage-size-remain-unchanged-after-dropping-a-table-or-database-immediately}
 
-これは、TiDBが削除されたテーブルとデータベースを一定期間保持するためです。この保持期間により[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)これらのテーブルに依存するトランザクションは中断することなく実行を継続できます。さらに、この保持期間によって[`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)機能が実現可能となり、誤って削除されたテーブルやデータベースを回復できるようになります。
+これは、TiDBが削除されたテーブルとデータベースを一定期間保持するためです。この保持期間により、これらのテーブルに依存するトランザクションは中断することなく実行を継続できます。さらに、この保持期間によって[`FLASHBACK TABLE`](/sql-statements/sql-statement-flashback-table.md)/[`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)機能が実現可能となり、誤って削除されたテーブルやデータベースを回復できるようになります。
 
 ### アクティブにクエリを実行していないのに RU が消費されるのはなぜですか? {#why-are-there-ru-consumptions-when-i-m-not-actively-running-any-queries}
 

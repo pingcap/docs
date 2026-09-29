@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/serverless-tier-limitations']
 
 TiDB Cloud StarterおよびEssentialは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDB Self-ManagedまたはTiDB Cloud Dedicatedクラスタと比較して機能に若干の違いがあります。このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialの制限事項について説明します。
 
-TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを継続的に埋めています。ギャップを埋める機能や性能が必要な場合は、機能リクエストに[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)または[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)を使用してください。
+TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを継続的に埋めています。ギャップを埋める機能や性能が必要な場合は、[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)を使用するか、機能リクエストについて[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)ください。
 
 ## 制限事項 {#limitations}
 
@@ -18,7 +18,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 - [データベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)は現在、 TiDB Cloud Starter クラスターでは使用できません。
 
-### 繋がり {#connection}
+### 接続 {#connection}
 
 - [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。[VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)は TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
 - プライベートエンドポイントは[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)をサポートしていません。
@@ -32,7 +32,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 ### 暗号化 {#encryption}
 
 - TiDB Cloud Starter またはTiDB Cloud Essential クラスターに保存されるデータは、クラスターを管理するクラウドプロバイダーが提供する暗号化ツールを使用して暗号化されます。TiDB Cloud Starter（使用制限が 0 より大きい）およびTiDB Cloud Essential クラスターでは、クラスター作成プロセス中にオプションで第 2レイヤーの暗号化を利用できます。これにより、保存時のデフォルトの暗号化よりも高いレベルのセキュリティが確保されます。
-- [顧客管理暗号鍵（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)使用は現在利用できません。
+- [顧客管理暗号鍵（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)の使用は現在利用できません。
 
 ### メンテナンスウィンドウ {#maintenance-window}
 
@@ -62,7 +62,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 - トランザクションは30分以上継続することはできません。
 - SQL の制限の詳細については、 [制限されたSQL機能](/tidb-cloud/limited-sql-features.md)を参照してください。
 
-## 使用量制限 {#usage-quota}
+## 使用量クォータ {#usage-quota}
 
 TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルトでは[無料のTiDB Cloud Starterクラスター](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。TiDB Cloud Starterクラスターをさらに作成するには、クレジットカード情報と使用量に応じた[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)を追加する必要があります。
 
@@ -74,10 +74,10 @@ TiDB Cloudでは、組織ごとに最大5つのクラスター（デフォルト
 
 リクエストユニット（RU）は、クエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができる指標です。リクエストユニットは、 TiDB Cloud Starterサービスの課金単位でもあります。
 
-クラスターが使用量のクォータに達すると、新しい接続試行はすべて拒否されます。これは、新しい月の開始時に使用量がリセットされるか、 [割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)なるまで継続されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
+クラスターが使用量のクォータに達すると、新しい接続試行はすべて拒否されます。これは、 [クォータを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで継続されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
 
 さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
-追加のクォータを持つTiDB Cloud Starterクラスターを作成する場合は、クラスター作成ページで月間使用制限を設定できます。詳細については、 [TiDB Cloud Starter クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)ご覧ください。
+追加のクォータを持つTiDB Cloud Starterクラスターを作成する場合は、クラスター作成ページで月間利用限度額を設定できます。詳細については、 [TiDB Cloud Starter クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)をご覧ください。
 
-TiDB Cloud Starterクラスターを作成した後でも、クラスターの概要ページで使用制限を確認および編集できます。詳細については、 [TiDB Cloud Starter Clusters の支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)ご覧ください。
+TiDB Cloud Starterクラスターを作成した後でも、クラスターの概要ページで利用限度額を確認および編集できます。詳細については、 [TiDB Cloud Starter Clusters の支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)をご覧ください。
