@@ -19,11 +19,11 @@ The external stage is required for reliability. Because both sides work through 
 
 Enable event-driven ingestion when you need **lower data latency** than the default polling mode provides.
 
-In the default mode, the Data Pipeline relies on the interval at which the changefeed flushes incremental data to the external stage and the interval at which TiDB Cloud Lake scans the stage for new data. For {{{ .premium }}}, the configured **Sync Interval** is the end-to-end latency target across these stages. For the manual {{{ .essential }}} setup, the TiDB Cloud Lake polling interval is configured separately.
+In the default mode, the Data Pipeline relies on the interval at which the changefeed flushes incremental data to the external stage and the interval at which TiDB Cloud Lake scans the stage for new data. For {{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent>, the configured **Sync Interval** is the end-to-end latency target across these stages.
 
-In event-driven mode, the changefeed still flushes data to the external stage on its configured interval, but each flush also triggers an **S3 event notification** to an SQS queue. The SQS notification enables TiDB Cloud Lake to detect new data sooner instead of waiting for the next scheduled scan. For the manual {{{ .essential }}} setup, scheduled polling continues to run even when SQS is enabled.
+In event-driven mode, the changefeed still flushes data to the external stage on its configured interval, but each flush also triggers an **S3 event notification** to an SQS queue. The SQS notification enables TiDB Cloud Lake to detect new data sooner instead of waiting for the next scheduled scan.
 
-> **Tradeoff:** In event-driven mode, TiDB Cloud Lake can ingest new data more frequently, which can keep the warehouse in an **active** state for longer. This increases the warehouse hosting cost.
+**Tradeoff:** In event-driven mode, TiDB Cloud Lake can ingest new data more frequently, which can keep the warehouse in an **active** state for longer. This increases the warehouse hosting cost.
 
 ## Does a data pipeline incur additional TiDB Cloud Lake charges?
 
