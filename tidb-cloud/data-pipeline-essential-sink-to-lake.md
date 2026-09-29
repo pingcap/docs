@@ -61,6 +61,7 @@ Collect the following values required for the additional trust relationships, an
     ```
 
     Record `tidbCloudAccountId` and `tidbCloudAccountExternalId` from the response.
+
 - **TiDB Cloud Lake**: in the [TiDB Cloud Lake console](https://lake.tidbcloud.com/), navigate to **Data > Data Sources > Create**. In the **Basic Info** section, select **Service: TiDB**, and then under **Trust Cloud Platform roles**, record the following values:
     - Lake Setup & Validation Role ARN
     - Lake Data Loading Role ARN
