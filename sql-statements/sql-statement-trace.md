@@ -19,13 +19,13 @@ TracableStmt ::=
 
 | 形式   | 説明           |
 | ---- | ------------ |
-| 行    | ツリー形式で出力     |
-| JSON | JSON形式の構造化出力 |
-| ログ   | ログベースの出力     |
+| row  | ツリー形式で出力     |
+| json | JSON形式の構造化出力 |
+| log  | ログベースの出力     |
 
 ## 例 {#examples}
 
-### 行 {#row}
+### Row {#row}
 
 ```sql
 TRACE FORMAT='row' SELECT * FROM mysql.user;
@@ -64,7 +64,7 @@ JSON 形式のトレースは、TiDB ステータスポート経由でアクセ�
 
 ![TiDB Trace Viewer-2](/media/trace-view.png)
 
-### ログ {#log}
+### Log {#log}
 
 ```sql
 TRACE FORMAT='log' SELECT * FROM mysql.user;

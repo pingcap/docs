@@ -11,7 +11,7 @@ summary: TiDB データベースの START TRANSACTION の使用法の概要。
 
 ## 概要 {#synopsis}
 
-**トランザクション開始ステートメント:**
+**BeginTransactionStmt:**
 
 ```ebnf+diagram
 BeginTransactionStmt ::=
@@ -49,4 +49,4 @@ Query OK, 0 rows affected (0.01 sec)
 - [COMMIT](/sql-statements/sql-statement-commit.md)
 - [ROLLBACK](/sql-statements/sql-statement-rollback.md)
 - [BEGIN](/sql-statements/sql-statement-begin.md)
-- [因果関係の一貫性のみでトランザクションを開始する](/transaction-overview.md#causal-consistency)
+- [START TRANSACTION WITH CAUSAL CONSISTENCY ONLY](/transaction-overview.md#causal-consistency)
