@@ -21,7 +21,7 @@ summary: TiDB データベースの SHOW STATS_META の使用法の概要。
 
 > **Note:**
 >
-> `update_time` 、TiDBがDML文に従って`modify_count`と`row_count`フィールドを更新したときに更新されます。したがって、 `update_time` `ANALYZE`文の最終実行時刻ではありません。
+> `update_time`は、TiDBがDML文に従って`modify_count`と`row_count`フィールドを更新したときに更新されます。したがって、 `update_time`は`ANALYZE`文の最終実行時刻ではありません。
 
 ## 概要 {#synopsis}
 

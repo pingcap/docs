@@ -28,7 +28,7 @@ mysql> SHOW PROCESSLIST;
 
 ## 権限 {#permissions}
 
-現在のユーザーに`PROCESS`権限がない場合、 `SHOW PROCESSLIST`ユーザー自身のセッションからのリクエストのみを表示します。
+現在のユーザーに`PROCESS`権限がない場合、 `SHOW PROCESSLIST`はユーザー自身のセッションからのリクエストのみを表示します。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
