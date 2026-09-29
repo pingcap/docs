@@ -5,7 +5,7 @@ summary: 指示を提供することで、 TiDB Cloud Chat2Query API を使用�
 
 # Chat2Query APIを使い始める {#get-started-with-chat2query-api}
 
-TiDB Cloudは、RESTfulインターフェースであるChat2Query APIを提供しています。このAPIを使用すると、AIが指示を与えるだけでSQL文を生成・実行できます。そして、APIがクエリ結果を返します。
+TiDB Cloudは、RESTfulインターフェースであるChat2Query APIを提供しています。このAPIを使用すると、指示を与えるだけで、AIを使用してSQL文を生成・実行できます。そして、APIがクエリ結果を返します。
 
 Chat2Query API には HTTPS 経由でのみアクセスできるため、ネットワーク経由で送信されるすべてのデータは TLS を使用して暗号化されます。
 
@@ -97,7 +97,7 @@ TiDB Cloudは、Chat2Queryエンドポイントを素早く呼び出すための
     >
     > `/v2/jobs/{job_id}`などの一部のエンドポイントでは、認証方法を選択するだけで済みます。
 
-4. エンドポイントを呼び出すには、アプリケーションに例を貼り付け、例のパラメータを独自のものに置き換えて (プレースホルダー`${PUBLIC_KEY}`と`${PRIVATE_KEY}` API キーに置き換えるなど)、実行します。
+4. エンドポイントを呼び出すには、アプリケーションに例を貼り付け、例のパラメータを独自のものに置き換えて (プレースホルダー`${PUBLIC_KEY}`と`${PRIVATE_KEY}`を API キーに置き換えるなど)、実行します。
 
 ### Chat2Query v3エンドポイントまたはv2エンドポイントを呼び出す {#call-chat2query-v3-endpoints-or-v2-endpoints}
 
@@ -137,7 +137,7 @@ TiDB Cloud Data Serviceは、次の Chat2Query v3 エンドポイントと v2 �
 
 #### 1. `/v3/dataSummaries`を呼び出してデータサマリーを生成する {#1-generate-a-data-summary-by-calling-v3datasummaries}
 
-`/v3/chat2data`を呼び出す前に、まず`/v3/dataSummaries`を呼び出して AI にデータベースを分析してデータの概要を生成させます。そうすることで、後で`/v3/chat2data` SQL 生成でより優れたパフォーマンスを得ることができます。
+`/v3/chat2data`を呼び出す前に、まず`/v3/dataSummaries`を呼び出して AI にデータベースを分析してデータの概要を生成させます。そうすることで、後で`/v3/chat2data`が SQL 生成でより優れたパフォーマンスを得ることができます。
 
 以下は、 `/v3/dataSummaries`を呼び出して`sp500insight`データベースを分析し、データベースのデータ概要を生成するコード例です。
 
@@ -359,7 +359,7 @@ TiDB Cloudは、エンドポイントの呼び出しを支援するためのコ�
 
 `/v1/chat2data`を呼び出すときは、次のパラメータを置き換える必要があります。
 
-- プレースホルダー`${PUBLIC_KEY}`と`${PRIVATE_KEY}` API キーに置き換えます。
+- プレースホルダー`${PUBLIC_KEY}`と`${PRIVATE_KEY}`を API キーに置き換えます。
 - `<your table name, optional>`プレースホルダーをクエリ対象のテーブル名に置き換えます。テーブル名を指定しない場合、AI はデータベース内のすべてのテーブルをクエリします。
 - `<your instruction>`プレースホルダーを、AI に SQL文を生成して実行してほしい命令に置き換えます。
 

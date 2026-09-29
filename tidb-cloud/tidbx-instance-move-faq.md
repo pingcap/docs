@@ -7,7 +7,7 @@ summary: TiDB CloudがTiDB Cloud StarterおよびEssentialリソースの移動�
 
 TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloud製品であり、 TiDB Cloud StarterとTiDB Cloud Essentialインスタンスが含まれます。
 
-このFAQ[TiDB Cloudコンソール](https://tidbcloud.com/)TiDB Cloud StarterおよびEssentialインスタンスを TiDB X プロジェクトに移行するよう促す理由、移行プロセス中に発生する変更点、および必要なフォローアップアクションについて説明します。
+このFAQでは、[TiDB Cloudコンソール](https://tidbcloud.com/)がTiDB Cloud StarterおよびEssentialインスタンスを TiDB X プロジェクトに移行するよう促す理由、移行プロセス中に発生する変更点、および必要なフォローアップアクションについて説明します。
 
 ## TiDB Cloudコンソールで、TiDB Cloud StarterとEssentialインスタンスを移動するように促されるのはなぜですか？ {#why-does-the-tidb-cloud-console-prompt-me-to-move-my-tidb-cloud-starter-and-essential-instances}
 
@@ -47,7 +47,7 @@ TiDB Cloudは、異なるリソースタイプとユースケースに対応す�
 
     - これは、どのプロジェクトにも属さないTiDB Xインスタンスの論理コンテナとして機能するため、プロジェクトIDを使用することで、 TiDB Cloud APIを介してこれらのインスタンスにアクセスできます。
     - 各組織には固有の仮想プロジェクトIDが付与されています。
-    - この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)
+    - この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)エンドポイントから取得できます。
 
 以下の表は、これらのプロジェクトタイプ間の違いを示しています。
 

@@ -3,18 +3,18 @@ title: Top RU
 summary: Top RUを使用して、1分単位の粒度で最もリクエストユニット（RU）消費量が多いSQL文とデータベースユーザーを特定する方法を学びましょう。
 ---
 
-# トップRU {#top-ru}
+# Top RU {#top-ru}
 
-**Top RU** SQL文をリクエストユニット（RU）消費量に基づいてランク付けし、RU使用量を押し上げているクエリを迅速に特定するのに役立ちます。TiDB Cloud EssentialまたはTiDB Cloud Premiumインスタンスのメトリクスで予期せぬRUの急増に気づいた場合は、Top RUを使用して原因となっているSQL文を特定し、的を絞った対策を講じてください。
+**Top RU**は、SQL文をリクエストユニット（RU）消費量に基づいてランク付けし、RU使用量を押し上げているクエリを迅速に特定するのに役立ちます。TiDB Cloud EssentialまたはTiDB Cloud Premiumインスタンスのメトリクスで予期せぬRUの急増に気づいた場合は、Top RUを使用して原因となっているSQL文を特定し、的を絞った対策を講じてください。
 
 > **Note:**
 >
 > - Top RUは、 TiDB Cloud Premiumインスタンス向けにパブリックプレビュー版として提供されています。
-> - トップRUは、段階的な展開期間中に、一部のリージョンにおけるTiDB Cloud Essentialインスタンスで利用可能になります。
+> - Top RUは、段階的な展開期間中に、一部のリージョンにおけるTiDB Cloud Essentialインスタンスで利用可能になります。
 
 ## 製品プラン比較 {#product-plan-comparison}
 
-TiDB Cloudプランによって、RUの主要機能は異なります。
+TiDB Cloudプランによって、Top RUの機能は異なります。
 
 | 特徴                   | TiDB Cloud Premium | TiDB Cloud Essential |
 | -------------------- | --------------- | -------------------- |
@@ -24,7 +24,7 @@ TiDB Cloudプランによって、RUの主要機能は異なります。
 | 上位N個のオプション           | 5、10、20、100     | 5、10、20              |
 | データ保持                | 30日間            | 7日間                  |
 
-## オープントップRU {#open-top-ru}
+## Top RUを開く {#open-top-ru}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、 TiDB Cloud EssentialまたはTiDB Cloud Premiumインスタンスに移動してください。
 2. 左側のナビゲーションペインで、 **Monitoring** > **Top RU**をクリックします。
@@ -44,7 +44,7 @@ TiDB Cloudプランによって、RUの主要機能は異なります。
     カスタム時間範囲の場合：
 
     - 利用可能な開始日の最短日は、データ保持期間によって異なります。TiDB Cloud Premiumインスタンスの場合は**30 days ago**、 TiDB Cloud Essentialインスタンスの場合は**7 days ago**。
-    - 1回のクエリの最大有効期間は**24 hours**です。
+    - 1回のクエリの最大期間は**24 hours**です。
 
 - **Top N**：表示するSQL文の数を指定します。
 
@@ -111,7 +111,7 @@ Top RUは、SQL文が持つ実行計画の数と、プランデータが利用�
 
 #### プランは利用できません {#plans-not-available}
 
-プランデータが利用できない場合、Top RUには**Plan digest**、 **SQL RUトレンド（プラン**別）、**Execution Plan**表示されません。その他のフィールドは引き続き表示されます。
+プランデータが利用できない場合、Top RUには**Plan digest**、 **SQL RU Trend by Plan**、**Execution Plan**が表示されません。その他のフィールドは引き続き表示されます。
 
 #### 複数のプラン {#multiple-plans}
 
@@ -127,7 +127,7 @@ RUスパイクを調査するには、以下のワークフローを使用して
 1. TiDB Cloud EssentialまたはTiDB Cloud PremiumインスタンスのメトリクスにRUの急上昇が見られるか、アラートがトリガーされた場合は、その旨にご注意ください。
 2. **Monitoring** > **Top RU**に移動し、 **Overview**タブをクリックして、スパイクが発生した期間を選択します。
 3. **Total RU**が最も高いSQL文を特定します。各SQL文にカーソルを合わせると、RU値の推移が表示され、急上昇が始まった時期がわかります。
-4. 特定のユーザーがランキングの急上昇を引き起こしているかどうかを確認するには、 **Rank by Users**パネルを確認してください。
+4. 特定のユーザーがRUの急増を引き起こしているかどうかを確認するには、 **Rank by Users**パネルを確認してください。
 5. 必要に応じて、 **Sliced by Users**タブに移動し、ユーザーを選択して、そのユーザーが最も多くのRUを消費しているSQL文に注目してください。
 6. SQL文をクリックすると、詳細パネルが開きます。実行計画を確認して、インデックスの欠落など、最適化の機会を見つけてください。
 7. **Query Template ID**を使用して、実行コンテキストの詳細を確認するために、スロークエリまたはSQL文を相互参照してください。
@@ -145,7 +145,7 @@ RUスパイクを調査するには、以下のワークフローを使用して
 
 ### Top RUとTop SQLの違いは何ですか？ {#what-is-the-difference-between-top-ru-and-top-sql}
 
-[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql)特定のTiDBまたはTiKVノードにおけるCPU時間に基づいてSQL文をランク付けします。これはTiDB Cloud Dedicatedクラスタに適用されます。
+[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql)は、特定のTiDBまたはTiKVノードにおけるCPU時間に基づいてSQL文をランク付けします。これはTiDB Cloud Dedicatedクラスタに適用されます。
 
 Top RUは、インスタンスレベルでのリクエストユニット（RU）消費量に基づいてSQL文をランク付けし、ユーザーレベルでの内訳をサポートします。TiDB Cloud PremiumインスタンスとTiDB Cloud Essentialインスタンスに適用されます。
 
@@ -157,11 +157,11 @@ Top RUは、インスタンスレベルでのリクエストユニット（RU）
 
 問題が解決しない場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-### トップRUは請求RUと同じですか？ {#is-top-ru-the-same-as-billing-ru}
+### Top RUは請求RUと同じですか？ {#is-top-ru-the-same-as-billing-ru}
 
 いいえ。Top RUは、高負荷SQLの診断に役立つ、ほぼリアルタイムのRU統計情報を表示します。課金およびコスト管理については、 TiDB Cloud課金コンソールの課金RUを参照してください。
 
-### メトリクスにおけるRU使用状況とトップRUの違いは何ですか？ {#what-is-the-difference-between-the-ru-usage-in-metrics-and-top-ru}
+### メトリクスにおけるRU使用状況とTop RUの違いは何ですか？ {#what-is-the-difference-between-the-ru-usage-in-metrics-and-top-ru}
 
 - RU/s メトリックは、インスタンス全体レベルでの 1分間の平均 RU レート (RU/s) を示します。
-- トップRUは、選択した期間におけるSQL文ごとの累積RU（RU/秒×実行時間）を表示し、どのSQL文が合計で最も多くのリソースを消費しているかを特定するのに役立ちます。
+- Top RUは、選択した期間におけるSQL文ごとの累積RU（RU/秒×実行時間）を表示し、どのSQL文が合計で最も多くのリソースを消費しているかを特定するのに役立ちます。
