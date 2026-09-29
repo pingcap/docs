@@ -43,7 +43,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 
 ### データアプリ {#data-app}
 
-[Data Service（PREVIEW）](#data-service)のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントの集合です。APIキーを使用して認証設定を構成することで、データアプリ内のエンドポイントへのアクセスを制限できます。
+[Data Service（PREVIEW）](#data-service)のデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントの集合です。APIキーを使用して認可設定を構成することで、データアプリ内のエンドポイントへのアクセスを制限できます。
 
 詳細については、[データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)を参照してください。
 
@@ -134,9 +134,9 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 ## R {#r}
 
-### リサイクルボックス {#recycle-bin}
+### ごみ箱 {#recycle-bin}
 
-削除された[TiDB Cloudのリソース](#tidb-cloud-resource)のデータと有効なバックアップが保存される場所。
+有効なバックアップがある削除済み[TiDB Cloudリソース](#tidb-cloud-resource)のデータが保存される場所。
 
 バックアップされたTiDB Cloudリソースが削除されると、その既存のバックアップファイルはごみ箱に移動されます。自動バックアップからのバックアップファイルについては、ごみ箱に指定された期間保持されます。バックアップの保持期間は**Backup Setting**で設定でき、デフォルトは 7 日です。手動バックアップからのバックアップファイルには有効期限はありません。データ損失を防ぐため、新しいTiDB Cloudリソースにデータを速やかに復元してください。なお、 TiDB Cloudリソース**にバックアップがない**場合、削除されたリソースはごみ箱に表示されません。
 
@@ -146,7 +146,7 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 - TiDB Cloud Premiumインスタンス
 - TiDB Cloud Dedicatedクラスター
 
-### 地域 {#region}
+### リージョン {#region}
 
 - TiDB Cloudリージョン
 
@@ -162,14 +162,14 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 ### レプリケーション容量ユニット（RCU） {#replication-capacity-unit-rcu}
 
-TiDB Cloud は、TiCDC Replication Capacity Unit (RCU) の[変更フィード](/tidb-cloud/changefeed-overview.md)の容量を測定します。変更フィードを作成するときに、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。詳細については、 [変更フィードのコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)を参照してください。
+TiDB Cloud は、[変更フィード](/tidb-cloud/changefeed-overview.md)の容量を TiCDC Replication Capacity Unit (RCU) 単位で測定します。変更フィードを作成するときに、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。詳細については、 [変更フィードのコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)を参照してください。
 
 ### リクエストキャパシティユニット（RCU） {#request-capacity-unit-rcu}
 
 TiDB Cloud EssentialおよびTiDB Cloud Premium では、リクエストキャパシティユニット (RCU) は、 TiDB Cloud EssentialまたはTiDB Cloud Premium インスタンスにプロビジョニングされたコンピューティング容量を表す単位です。1 RCU は、1秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、インスタンスのベースラインパフォーマンスとスループット容量が決まります。ただし、RCU の管理方法は、 TiDB Cloud EssentialとTiDB Cloud Premium で異なります。
 
 - TiDB Cloud Essential は、ワークロードに基づいて RCU を自動的にプロビジョニングします。QPS が増加すると、 TiDB Cloud はプロビジョニングされた RCU を動的にスケールアップしてパフォーマンスを維持します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
-- TiDB Cloud Premium では、ワークロードの RCU の最大数 ( `RCU_max` ) を指定できます。 TiDB Cloudは、リアルタイムの需要に基づいて、 `0.25 * RCU_max`から`RCU_max`の範囲内で容量を自動的にスケーリングします。詳細については、 [TiDB Cloud Premiumでユニットと容量をリクエストする](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
+- TiDB Cloud Premium では、ワークロードの RCU の最大数 ( `RCU_max` ) を指定できます。 TiDB Cloudは、リアルタイムの需要に基づいて、 `0.25 * RCU_max`から`RCU_max`の範囲内で容量を自動的にスケーリングします。詳細については、 [TiDB Cloud Premiumのリクエストユニットと容量](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
 
 ### リクエストユニット（RU） {#request-unit-ru}
 
@@ -177,7 +177,8 @@ TiDB Cloud Starter、 Essential、およびPremiumプランでは、リクエス
 
 - TiDB Cloud Starter は、消費された RU の合計数に基づいて請求されます。詳細については、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 - TiDB Cloud Essentialは、プロビジョニングされた[リクエストキャパシティユニット（RCU）](#request-capacity-unit-rcu)の数に基づいて請求されます。 1つの RCU は、1秒あたり特定の数の RU を処理できる固定量のコンピューティングリソースを提供します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
-- TiDB Cloud Premium は、ワークロードによって消費された実際のリクエストキャパシティユニット (RCU) に基づいて請求されます。 TiDB Cloudは1秒あたりの平均 RU を毎分計算し、その平均値を[リクエストキャパシティユニット（RCU）](#request-capacity-unit-rcu)として請求に使用します。詳細については、 [TiDB Cloud Premiumでユニットと容量をリクエストする](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
+- TiDB Cloud Premium は、ワークロードによって消費された実際のリクエストキャパシティユニット (RCU) に基づいて請求されます。 TiDB Cloudは1秒あたりの平均 RU を毎分計算し、その平均値を[リクエストキャパシティユニット（RCU）](#request-capacity-unit-rcu)として請求に使用します。詳細については、 [TiDB Cloud Premiumのリクエストユニットと容量](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
+
 TiDB Cloud Dedicatedおよび TiDB Self-Managedの場合、リクエストユニット (RU) はシステムリソースの消費を表すリソース抽象化ユニットであり、これには現在 CPU、IOPS、および IO 帯域幅のメトリクスが含まれます。これは、**請求目的ではなく**、データベースリクエストによって消費されるリソースを制限、分離、管理するためにリソース制御機能によって使用されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)を参照してください。
 
 ## S {#s}
