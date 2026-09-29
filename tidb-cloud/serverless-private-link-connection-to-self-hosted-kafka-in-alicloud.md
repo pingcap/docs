@@ -53,7 +53,7 @@ Alibaba Cloud アカウント ID とアベイラビリティゾーンを表示�
 | リージョン                          | `ap-southeast-1`                                                                  | 該当なし                                                                                                                  |
 | TiDB Cloud Alibaba Cloud アカウント | `<account_id>`                                                                    | 該当なし                                                                                                                  |
 | AZ ID                          | <ul><li>`ap-southeast-1a` </li><li>`ap-southeast-1b` </li><li> `ap-southeast-1c`</li></ul> | 該当なし                                                                                                                  |
-| Kafka アドバタイズドリスナーパターン          | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;                | `unique_name`はプレースホルダーであり、 [ステップ4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration)の実際の値に置き換えられます。 |
+| Kafka Advertised Listener Pattern  | &lt;broker_id&gt;.unique_name.alicloud.plc.tidbcloud.com:&lt;port&gt;                | `unique_name`はプレースホルダーであり、 [ステップ4](#step-4-replace-the-unique-name-placeholder-in-kafka-configuration)の実際の値に置き換えられます。 |
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 
@@ -619,7 +619,7 @@ b3.ap-southeast-1c.unique_name.alicloud.plc.tidbcloud.com:9095 (id: 3 rack: null
         - **Listener Port**: `9095`
         - **Server Group**: 以前に作成したサーバーグループ`broker-server-group-3`を選択します。
 
-4. 要塞ノードでロードバランサーをテストします。この例では、Kafka ブートストラップのみをテストします。ロードバランサーは Kafka EXTERNAL リスナーをリッスンしているため、EXTERNAL アドバタイズされたリスナーのアドレスは要塞ノードでは解決できません。ロードバランサーの詳細ページから`kafka-lb` DNS 名（例： `nlb-o21d6wyjknamw8hjxb.ap-southeast-1.nlb.aliyuncsslbintl.com` ）をメモしておいてください。要塞ノードでスクリプトを実行してください。
+4. 要塞ノードでロードバランサーをテストします。この例では、Kafka ブートストラップのみをテストします。ロードバランサーは Kafka EXTERNAL リスナーをリッスンしているため、EXTERNAL アドバタイズリスナーのアドレスは要塞ノードでは解決できません。ロードバランサーの詳細ページから`kafka-lb` DNS 名（例： `nlb-o21d6wyjknamw8hjxb.ap-southeast-1.nlb.aliyuncsslbintl.com` ）をメモしておいてください。要塞ノードでスクリプトを実行してください。
 
     ```shell
     # Replace {lb_dns_name} to your actual value
