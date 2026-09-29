@@ -44,7 +44,7 @@ Query OK, 0 rows affected (0.00 sec)
 - MySQL の`KILL`文は現在接続されている MySQL インスタンス内の接続のみを終了できますが、TiDB の`KILL`文はクラスター全体の任意の TiDB インスタンス内の接続を終了できます。
 - v7.2.0 以前のバージョンでは、MySQL コマンドラインの<kbd>Control+C</kbd>を使用して TiDB 内のクエリまたは接続を終了することはサポートされていません。
 
-## 行動変化の説明 {#behavior-change-descriptions}
+## 動作変更の説明 {#behavior-change-descriptions}
 
 <CustomContent platform="tidb">
 
@@ -66,11 +66,11 @@ v6.1.0 以降、TiDB は Global Kill 機能をサポートしており、これ�
 
 </CustomContent>
 
-Global Kill機能を有効にすると、 `KILL`と`KILL TIDB`両方のステートメントでインスタンス間のクエリまたは接続を終了できるため、クエリや接続が誤って終了してしまう心配はありません。クライアントを使用して任意のTiDBインスタンスに接続し、 `KILL`または`KILL TIDB`文を実行すると、文は対象のTiDBインスタンスに転送されます。クライアントとTiDBクラスタの間にプロキシが存在する場合、 `KILL`と`KILL TIDB`文も対象のTiDBインスタンスに転送され、実行されます。
+Global Kill機能を有効にすると、 `KILL`と`KILL TIDB`の両方のステートメントでインスタンス間のクエリまたは接続を終了できるため、クエリや接続が誤って終了してしまう心配はありません。クライアントを使用して任意のTiDBインスタンスに接続し、 `KILL`または`KILL TIDB`文を実行すると、文は対象のTiDBインスタンスに転送されます。クライアントとTiDBクラスタの間にプロキシが存在する場合、 `KILL`と`KILL TIDB`文も対象のTiDBインスタンスに転送され、実行されます。
 
 Global Kill 機能が有効になっていない場合、または v6.1.0 より前のバージョンの TiDB を使用している場合は、次の点に注意してください。
 
-- デフォルトでは、 `KILL` MySQL と互換性がありません。これは、ロードバランサーの背後に複数の TiDB サーバーを配置することが一般的であるため、誤った TiDBサーバーによって接続が切断される事態を防ぐのに役立ちます。現在接続中の TiDB インスタンス上の他の接続を切断するには、 `KILL TIDB`文を実行して明示的に`TIDB`サフィックスを追加する必要があります。
+- デフォルトでは、 `KILL`は MySQL と互換性がありません。これは、ロードバランサーの背後に複数の TiDB サーバーを配置することが一般的であるため、誤った TiDBサーバーによって接続が切断される事態を防ぐのに役立ちます。現在接続中の TiDB インスタンス上の他の接続を切断するには、 `KILL TIDB`文を実行して明示的に`TIDB`サフィックスを追加する必要があります。
 
 <CustomContent platform="tidb">
 
@@ -78,9 +78,9 @@ Global Kill 機能が有効になっていない場合、または v6.1.0 より
 
 </CustomContent>
 
-- `KILL TIDB`文はTiDBの拡張機能です。この文の機能は、MySQL `KILL [CONNECTION|QUERY]`コマンドおよびMySQLコマンドラインの<kbd>Control+C</kbd>に似ています。同じTiDBインスタンスで`KILL TIDB`安全に使用できます。
+- `KILL TIDB`文はTiDBの拡張機能です。この文の機能は、MySQL `KILL [CONNECTION|QUERY]`コマンドおよびMySQLコマンドラインの<kbd>Control+C</kbd>に似ています。同じTiDBインスタンスで`KILL TIDB`を安全に使用できます。
 
 ## 参照 {#see-also}
 
-- [SHOW [FULL] PROCESSLIST](/sql-statements/sql-statement-show-processlist.md)
+- [SHOW \[FULL\] PROCESSLIST](/sql-statements/sql-statement-show-processlist.md)
 - [CLUSTER_PROCESSLIST](/information-schema/information-schema-processlist.md#cluster_processlist)

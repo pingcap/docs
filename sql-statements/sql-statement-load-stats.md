@@ -20,7 +20,7 @@ LoadStatsStmt ::=
 
 ## 例 {#examples}
 
-TiDBインスタンスの統計情報をダウンロードするには、アドレス`http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}`アクセスしてください。
+TiDBインスタンスの統計情報をダウンロードするには、アドレス`http://${tidb-server-ip}:${tidb-server-status-port}/stats/dump/${db_name}/${table_name}`にアクセスしてください。
 
 `LOAD STATS ${stats_path}`を使用して、特定の統計ファイルを読み込むこともできます。
 

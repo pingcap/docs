@@ -33,14 +33,14 @@ ExplainableStmt ::=
 
 ## EXPLAIN ANALYZE出力形式 {#explain-analyze-output-format}
 
-`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`対応するSQL文を実行し、その実行時情報を記録し、実行計画とともにその情報を返します。したがって、 `EXPLAIN ANALYZE` `EXPLAIN`の拡張版と見なすことができます。 `EXPLAIN` (クエリ実行のデバッグ用) と比較すると、 `EXPLAIN ANALYZE`の戻り値には`actRows` 、 `execution info` 、 `memory` 、 `disk`といった情報列も含まれます。これらの列の詳細は以下のとおりです。
+`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`は対応するSQL文を実行し、その実行時情報を記録し、実行計画とともにその情報を返します。したがって、 `EXPLAIN ANALYZE`は`EXPLAIN`の拡張版と見なすことができます。 `EXPLAIN` (クエリ実行のデバッグ用) と比較すると、 `EXPLAIN ANALYZE`の戻り値には`actRows` 、 `execution info` 、 `memory` 、 `disk`といった情報列も含まれます。これらの列の詳細は以下のとおりです。
 
 | 属性名    | 説明                                                                                                                                                                 |
 | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| アクトロウズ | オペレーターによって出力される行数。                                                                                                                                                    |
-| 実行情報   | オペレーターの実行情報。`time`はオペレーターに入ってからオペレーターを出るまでの合計`wall time`を表します。これには、すべてのサブオペレーターの合計実行時間が含まれます。オペレーターが親オペレーター（ループ内）によって何度も呼び出される場合は、その累積時間を参照します。`loops`は、現在のオペレーターが親オペレーターによって呼び出された回数です。 |
-| メモリ    | オペレーターによって占有されるメモリ領域。                                                                                                                                                 |
-| ディスク   | オペレーターが占有するディスク領域。                                                                                                                                                  |
+| actRows | オペレーターによって出力される行数。                                                                                                                                                    |
+| execution info | オペレーターの実行情報。`time`はオペレーターに入ってからオペレーターを出るまでの合計`wall time`を表します。これには、すべてのサブオペレーターの合計実行時間が含まれます。オペレーターが親オペレーター（ループ内）によって何度も呼び出される場合は、その累積時間を参照します。`loops`は、現在のオペレーターが親オペレーターによって呼び出された回数です。 |
+| memory | オペレーターによって占有されるメモリ領域。                                                                                                                                                 |
+| disk | オペレーターが占有するディスク領域。                                                                                                                                                  |
 
 ## 例 {#examples}
 
@@ -90,17 +90,17 @@ EXPLAIN ANALYZE SELECT * FROM t1;
 
 ## オペレーターの実行情報 {#execution-information-of-operators}
 
-基本的な`time`と`loop`実行情報に加えて、 `execution info`はオペレーター固有の実行情報も含まれます。これには主に、オペレーターが RPC リクエストを送信するのにかかった時間やその他のステップの実行時間が含まれます。
+基本的な`time`と`loop`実行情報に加えて、 `execution info`にはオペレーター固有の実行情報も含まれます。これには主に、オペレーターが RPC リクエストを送信するのにかかった時間やその他のステップの実行時間が含まれます。
 
-### PointGet {#point-get}
+### Point_Get {#point-get}
 
 `Point_Get`オペレーターからの実行情報には通常、次の情報が含まれます。
 
 - `Get:{num_rpc:1, total_time:697.051µs}` ：TiKVに送信された`Get` RPCリクエストの数（ `num_rpc` ）とすべてのRPCリクエストの合計期間（ `total_time` ）。
 - `ResolveLock:{num_rpc:1, total_time:12.117495ms}` ：TiDBはデータの読み取り時にロックに遭遇した場合、まずロックを解決する必要があります。これは通常、読み取り/書き込み競合のシナリオで発生します。この情報は、ロック解決にかかる時間を示します。
-- `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}` : RPCリクエストが失敗した場合、TiDBはリクエストを再試行する前にバックオフ時間だけ待機します。バックオフ統計には、バックオフの種類（ `regionMiss` `tikvRPC` ）、合計待機時間（ `total_time` ）、バックオフの合計回数（ `num` ）が含まれます。
+- `regionMiss_backoff:{num:11, total_time:2010 ms},tikvRPC_backoff:{num:11, total_time:10691 ms}` : RPCリクエストが失敗した場合、TiDBはリクエストを再試行する前にバックオフ時間だけ待機します。バックオフ統計には、バックオフの種類（ `regionMiss`や`tikvRPC`など）、合計待機時間（ `total_time` ）、バックオフの合計回数（ `num` ）が含まれます。
 
-### Batch PointGet {#batch-point-get}
+### Batch_Point_Get {#batch-point-get}
 
 `Batch_Point_Get`オペレーターの実行情報は`Point_Get`オペレーターと似ていますが、 `Batch_Point_Get`は通常、データを読み取るために`BatchGet` RPC リクエストを TiKV に送信します。
 
@@ -131,11 +131,11 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 ```
 
 - `prepare` : 式、デフォルト値、AUTO_INCREMENT値の計算など、書き込みの準備にかかる時間。
-- `check_insert` ：この情報は通常、 `insert ignore`文目と`insert on duplicate`文目で表示されます。これには、競合チェックやTiDBトランザクションキャッシュへのデータ書き込みに要した時間などが含まれます。この時間消費には、トランザクションのコミットに要した時間は含まれないことに注意してください。この情報には以下の情報が含まれます。
+- `check_insert` ：この情報は通常、 `insert ignore`文と`insert on duplicate`文で表示されます。これには、競合チェックやTiDBトランザクションキャッシュへのデータ書き込みに要した時間などが含まれます。この時間消費には、トランザクションのコミットに要した時間は含まれないことに注意してください。この情報には以下の情報が含まれます。
     - `total_time` : ステップ`check_insert`に費やされた合計時間。
     - `mem_insert_time` : TiDB トランザクション キャッシュにデータを書き込むのにかかる時間。
     - `prefetch` : TiKVから競合チェックが必要なデータを取得する時間。このステップでは、データを取得するために`Batch_Get` RPCリクエストをTiKVに送信します。
-    - `rpc` : TiKV への RPC リクエストの送信に費やされた合計時間。これには通常、 `BatchGet`と`Get` 2種類の RPC 時間が含まれます。
+    - `rpc` : TiKV への RPC リクエストの送信に費やされた合計時間。これには通常、 `BatchGet`と`Get`の2種類の RPC 時間が含まれます。
         - `prefetch`ステップで`BatchGet` RPC リクエストが送信されます。
         - `insert on duplicate`ステートメントが`duplicate update`を実行すると、 `Get` RPC リクエストが送信されます。
 - `backoff` : さまざまなタイプのバックオフとバックオフの合計待機時間が含まれます。
@@ -232,7 +232,7 @@ tiflash_scan: {
 }
 ```
 
-- `dtfile` : テーブルスキャン中の DTFile (DeltaTree ファイル) 関連情報。TiFlashレイヤーのデータスキャン ステータスを反映します。
+- `dtfile` : テーブルスキャン中の DTFile (DeltaTree ファイル) 関連情報。TiFlash Stableレイヤーのデータスキャン ステータスを反映します。
     - `total_scanned_packs` : DTFileでスキャンされたパックの総数。パックとは、 TiFlash DTFileで読み取ることができる最小単位です。デフォルトでは、8192行ごとに1パックが構成されます。
     - `total_skipped_packs` : DTFile 内のスキャンでスキップされたパックの総数。`WHERE`が粗集合インデックスにヒットするか、主キーの範囲フィルタリングに一致する場合、無関係なパックはスキップされます。
     - `total_scanned_rows` : DTFile でスキャンされた行の総数。MVCC により更新または削除のバージョンが複数ある場合、各バージョンは個別にカウントされます。
@@ -250,9 +250,9 @@ lock_keys: {time:94.096168ms, region:6, keys:8, lock_rpc:274.503214ms, rpc_count
 ```
 
 - `time` : `lock_keys`操作を実行する合計時間。
-- `region` : `lock_keys`操作の実行に関係する領域の数。
-- `keys` : `Lock`必要な`Key`の数。
-- `lock_rpc` ：タイプ`Lock`のRPCリクエストをTiKVに送信するのに費やされた合計時間。複数のRPCリクエストが並行して送信される可能性があるため、RPCの合計消費時間はタイプ`lock_keys`操作の合計消費時間よりも長くなる可能性があります。
+- `region` : `lock_keys`操作の実行に関係するリージョンの数。
+- `keys` : `Lock`が必要な`Key`の数。
+- `lock_rpc` ：タイプ`Lock`のRPCリクエストをTiKVに送信するのに費やされた合計時間。複数のRPCリクエストが並行して送信される可能性があるため、RPCの合計消費時間は`lock_keys`操作の合計消費時間よりも長くなる可能性があります。
 - `rpc_count` : TiKV に送信された`Lock`タイプの RPC リクエストの合計数。
 
 ### commit_txn実行情報 {#commit-txn-execution-information}
@@ -268,11 +268,11 @@ commit_txn: {prewrite:48.564544ms, wait_prewrite_binlog:47.821579, get_commit_ts
 - `get_commit_ts` : トランザクションコミットタイムスタンプを取得するのに費やされた時間。
 - `commit` : トランザクションの 2PC コミット中に`commit`フェーズで消費された時間。
 - `write_keys` : トランザクションに書き込まれた合計`keys` 。
-- `write_byte` : トランザクションで書き込まれた合計バイト数`key-value`単位はバイトです。
+- `write_byte` : トランザクションで書き込まれた`key-value`の合計バイト数。単位はバイトです。
 
 ### RU（リクエストユニット）消費量 {#ru-request-unit-consumption}
 
-[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 、TiDB リソース制御で定義されているシステムリソースの統一された抽象単位です。最上位オペレーターの`execution info`この特定の SQL 文の全体的な RU 消費量を示します。
+[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)は、TiDB リソース制御で定義されているシステムリソースの統一された抽象単位です。最上位オペレーターの`execution info`は、この特定の SQL 文の全体的な RU 消費量を示します。
 
 ```
 RU:273.842670
@@ -314,7 +314,7 @@ RUは、 `EXPLAIN ANALYZE` 、特に`execution info`列の他の値から計算�
 
 基本コストは[`tikv/pd`ソースコード](https://github.com/tikv/pd/blob/aeb259335644d65a97285d7e62b38e7e43c6ddca/client/resource_group/controller/config.go#L58C19-L67)ファイルで定義され、計算は[`model.go`](https://github.com/tikv/pd/blob/54219d649fb4c8834cd94362a63988f3c074d33e/client/resource_group/controller/model.go#L107)ファイルで実行されます。
 
-TiDB v7.1 を使用している場合、計算は`pd/pd-client/model.go`の`BeforeKVRequest()`と`AfterKVRequest()`合計になります。つまり、次のようになります。
+TiDB v7.1 を使用している場合、計算は`pd/pd-client/model.go`の`BeforeKVRequest()`と`AfterKVRequest()`の合計になります。つまり、次のようになります。
 
 ```
 before key/value request is processed:
