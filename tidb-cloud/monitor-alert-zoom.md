@@ -3,9 +3,9 @@ title: Subscribe via Zoom
 summary: Zoom経由でアラート通知を受け取ることで、TiDBクラスタを監視する方法を学びましょう。
 ---
 
-# Zoom経由で登録する {#subscribe-via-zoom}
+# Zoom経由で購読する {#subscribe-via-zoom}
 
-TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[FlashDuty](/tidb-cloud/monitor-alert-flashduty.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)を介してアラート通知を購読する簡単な方法を提供します。このドキュメントでは、Zoom 経由でアラート通知を購読する方法について説明します。
+TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[Flashduty](/tidb-cloud/monitor-alert-flashduty.md)、 [PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)を介してアラート通知を購読する簡単な方法を提供します。このドキュメントでは、Zoom 経由でアラート通知を購読する方法について説明します。
 
 > **Note:**
 >
@@ -13,7 +13,7 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 
 ## 前提条件 {#prerequisites}
 
-- Zoom経由での登録機能は、**Enterprise**または**Premium**サポートプランに加入している組織のみが利用できます。
+- Zoom経由での購読機能は、**Enterprise**または**Premium**サポートプランに加入している組織のみが利用できます。
 
 - Zoomで受信Webhookチャットボットを追加および設定するには、Zoomアカウントの管理者権限が必要です。
 
@@ -72,7 +72,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 2. プロジェクトビューで、対象のプロジェクトを見つけて、そのプロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックします。
 
-3. 左側のナビゲーションペインで、 **Alert Subscription**の下にある**Project Settings**をクリックします。
+3. 左側のナビゲーションペインで、 **Project Settings**の下にある**Alert Subscription**をクリックします。
 
 4. **Alert Subscription**ページで、右上隅にある**Add Subscriber**をクリックします。
 

@@ -51,7 +51,7 @@ TiDB Cloudでは、イベントはTiDB Cloudリソースの変更を示します
 
 ## サードパーティ製メトリクスの統合 {#third-party-metrics-integrations}
 
-TiDB Cloud、以下のサードパーティ製メトリクスサービスのいずれかを統合して、 TiDB Cloudアラートを受信したり、 TiDB Cloud Dedicatedクラスタのパフォーマンスメトリクスを表示したりできます。
+TiDB Cloudでは、以下のサードパーティ製メトリクスサービスのいずれかを統合して、 TiDB Cloudアラートを受信したり、 TiDB Cloud Dedicatedクラスタのパフォーマンスメトリクスを表示したりできます。
 
 - [Datadogとの連携](/tidb-cloud/monitor-datadog-integration.md)
 

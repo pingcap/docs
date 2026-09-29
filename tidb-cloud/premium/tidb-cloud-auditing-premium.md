@@ -79,7 +79,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 3. **IAM** &gt; **Access Management** &gt; **Roles**に移動し、以前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールが既に存在するかどうかを確認します。
 
-    - はいの場合、後で使用するために一致した役割を記録してください。
+    - はいの場合、後で使用するために一致したロールを記録してください。
     - そうでない場合は、 **Create role**をクリックし、信頼エンティティタイプとして**Another AWS account**を選択してから、 **Account ID**フィールドにTiDB CloudアカウントIDの値を入力します。次に、 **Require External ID**オプションを選択し、**External ID**フィールドにTiDB Cloud外部IDの値を入力します。
 
 4. **IAM** &gt; **Access Management** &gt; **Roles**で、前の手順で確認したロール名をクリックして**Summary**ページに移動し、以下の手順を実行します。
@@ -114,7 +114,7 @@ TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部IDの値を�
 
 ### Alibaba Cloud 上の TiDB の監査ログを有効にする {#enable-audit-logging-for-tidb-on-alibaba-cloud}
 
-Alibaba Cloud 上の TiDB クラウドでデータベース監査ログを有効にするには、以下の手順を実行してください。
+Alibaba Cloud 上の TiDB Cloud でデータベース監査ログを有効にするには、以下の手順を実行してください。
 
 #### ステップ1. OSSバケットを作成する {#step-1-create-an-oss-bucket}
 
@@ -158,11 +158,11 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
         }
         ```
 
-    `<Your-Bucket-Name>` TiDB Cloud が監査ログを書き込む OSS バケットの名前に置き換えてください。たとえば、バケット名が`auditlog-bucket`の場合は、 `"Resource": "acs:oss:*:*:auditlog-bucket/*"`を使用します。
+    `<Your-Bucket-Name>`を、TiDB Cloud が監査ログを書き込む OSS バケットの名前に置き換えてください。たとえば、バケット名が`auditlog-bucket`の場合は、 `"Resource": "acs:oss:*:*:auditlog-bucket/*"`を使用します。
 
 3. Alibaba Cloudコンソールで、 **[RAM]** &gt; **[ID]** &gt; **Roles**に移動し、**trusted entity**が以前に記録したTiDB CloudアカウントIDと外部IDに一致するロールが既に存在するかどうかを確認します。
 
-    - はいの場合、後で使用するために役割名を記録してください。
+    - はいの場合、後で使用するためにロール名を記録してください。
 
     - そうでない場合は、以下の手順に従って**Create Role**をクリックしてください。
 
@@ -174,9 +174,9 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
             - **Operator**を`StringEquals`に設定します。
             - **TiDB Cloud外部ID**に**値**を設定します。
         5. **OK**をクリックして**Create Role**ダイアログを開きます。
-        6. **Role Name**フィールドに役割名を入力し、 **OK**をクリックして役割を作成します。
+        6. **Role Name**フィールドにロール名を入力し、 **OK**をクリックしてロールを作成します。
 
-4. 役割が作成されたら、 **Permissions**タブに移動して、 **Grant Permission**をクリックします。
+4. ロールが作成されたら、 **Permissions**タブに移動して、 **Grant Permission**をクリックします。
 
     ダイアログで、以下の設定を構成してください。
 
@@ -363,7 +363,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | ---------------- | -------------------------------------------------------------------------- |
 | `CURRENT_DB`     | 現在使用しているデータベースの名前。                                                         |
 | `SQL_TEXT`       | 実行されたSQL文。監査ログのマスキングが有効になっている場合は、マスキングされた文が記録されます。                         |
-| `EXECUTE_PARAMS` | `EXECUTE`文に渡されるパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ編集が無効になっている場合にのみ記録されます。 |
+| `EXECUTE_PARAMS` | `EXECUTE`文に渡されるパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ秘匿化が無効になっている場合にのみ記録されます。 |
 | `AFFECTED_ROWS`  | SQL文によって影響を受けた行数。イベントクラスに`QUERY_DML`が含まれている場合にのみ記録されます。            |
 
 ### 接続情報 {#connection-information}
@@ -373,7 +373,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | フィールド                | 説明                                                  |
 | ----------------- | --------------------------------------------------- |
 | `CURRENT_DB`      | 現在のデータベースの名前。イベントクラスに`DISCONNECT`が含まれている場合は記録されません。 |
-| `CONNECTION_TYPE` | 接続タイプ（ソケット、Unixソケット、SSL/TLSなど）。                     |
+| `CONNECTION_TYPE` | 接続タイプ（Socket、UnixSocket、SSL/TLSなど）。                     |
 | `PID`             | 現在の接続のプロセスID。                                       |
 | `SERVER_VERSION`  | 接続されているTiDBサーバーのバージョン。                              |
 | `SSL_VERSION`     | 使用されているSSLのバージョン。                                   |
@@ -384,7 +384,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 
 > **Note:**
 >
-> トラフィックの可視性を向上させるため、 `CLIENT_IP` 、ロードバランサーの IP アドレスではなく、AWS PrivateLink を経由する接続の実際のクライアント IP アドレスが表示されます。この機能はパブリックプレビューであり、AWS リージョン`Frankfurt (eu-central-1)`でのみ利用可能です。
+> トラフィックの可視性を向上させるため、 `CLIENT_IP`には、ロードバランサーの IP アドレスではなく、AWS PrivateLink を経由する接続の実際のクライアント IP アドレスが表示されます。この機能はパブリックプレビューであり、AWS リージョン`Frankfurt (eu-central-1)`でのみ利用可能です。
 
 ### 監査操作情報 {#audit-operation-information}
 
@@ -393,7 +393,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | フィールド                | 説明                                   |
 | ----------------- | ------------------------------------ |
 | `AUDIT_OP_TARGET` | TiDB Cloudデータベース監査設定変更の対象オブジェクト。     |
-| `AUDIT_OP_ARGS`   | TiDB Cloudデータベース監査設定で使用される引数が変更されます。 |
+| `AUDIT_OP_ARGS`   | TiDB Cloudデータベース監査設定の変更で使用される引数。 |
 
 ## 監査ログの制限 {#audit-logging-limitations}
 

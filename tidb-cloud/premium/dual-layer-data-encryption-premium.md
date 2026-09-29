@@ -9,7 +9,7 @@ summary: TiDB Cloud Premiumインスタンスでデュアルレイヤーデー�
 
 > **Note:**
 >
-> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)**？**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに"Apply for Dual-Layer Data Encryption"と入力して、 **Submit**をクリックします。
+> 現在、デュアルレイヤーデータ暗号化機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに"Apply for Dual-Layer Data Encryption"と入力して、 **Submit**をクリックします。
 
 ## 概要 {#overview}
 
@@ -21,7 +21,7 @@ TiDB Cloud Premiumは、より高いレベルのデータセキュリティを�
 
 - **ストレージ層暗号化**
 
-    - 基盤となるクラウドサービスプロバイダーは、ストレージストラクチャ上でストレージ層暗号化を提供します。例えば、AWSでは、Amazon Elastic Block Store（EBS）ボリュームの暗号化とAmazon Simple Storage Service（S3）バケットの暗号化が含まれます。
+    - 基盤となるクラウドサービスプロバイダーは、ストレージインフラストラクチャ上でストレージ層暗号化を提供します。例えば、AWSでは、Amazon Elastic Block Store（EBS）ボリュームの暗号化とAmazon Simple Storage Service（S3）バケットの暗号化が含まれます。
     - このレイヤーは、すべてのTiDB Cloud Premiumインスタンスでデフォルトで有効になっており、無効にすることはできません。これは、保存データに対する基本的なセキュリティ基準を提供します。
 
 - **データベース層の暗号化**
@@ -37,9 +37,9 @@ TiDB Cloud Premiumは、より高いレベルのデータセキュリティを�
 バックアップデータへのアクセスには元のKMSマスターキーが必要となるため、以下の要件を満たしていることを確認してください。
 
 - **キーの可用性を管理**：元のTiDB Cloud Premium インスタンスを削除した場合でも、バックアップデータを復元できるように、関連付けられた KMS マスターキーをアクティブな状態に保ってください。
-- **適切な認証を確保する**：復元操作中は、バックアップに関連付けられているものと全く同じKMSマスターキーを設定し、そのキーにデータアクセスに必要な権限が付与されていることを確認してください。
+- **適切な認可を確保する**：復元操作中は、バックアップに関連付けられているものと全く同じKMSマスターキーを設定し、そのキーにデータアクセスに必要な権限が付与されていることを確認してください。
 
-### 主要管理オプション {#key-management-options}
+### キー管理オプション {#key-management-options}
 
 デュアルレイヤーデータ暗号化では、クラウドプロバイダーのKMSを使用して、保存データの暗号化用マスターキーを管理します。キー管理オプションは2種類から選択できます。
 
@@ -55,7 +55,7 @@ TiDB Cloud Premiumは、より高いレベルのデータセキュリティを�
 
     TiDB Cloud Premiumは、お客様に代わってKMSマスターキーを自動的に作成および管理します。このオプションは、セキュリティと利便性のバランスが取れており、メンテナンスの手間もかかりません。
 
-    - 鍵となるのは対称暗号鍵です。
+    - キーは対称暗号鍵です。
     - キーは、指定されたリージョンで最初の暗号化されたTiDB Cloud Premiumインスタンスを作成する際に自動的に生成されます。
     - 組織ごと、地域ごとに1つのキーが作成され、その地域内のすべてのTiDB Cloud Premiumインスタンスで共有されます。
     - キーは、そのキーで暗号化されたすべてのデータが組織から削除された後にのみ、自動的に削除されます。
@@ -101,7 +101,7 @@ TiDB Cloud Premiumインスタンスを作成する際に、二重層データ�
 
     6. クラウドプロバイダーのKMSコンソールで、このポリシーステートメントをキーポリシーに追加してください。
 
-        - AWS については、 [AWS KMS の主要ポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
+        - AWS については、 [AWS KMS のキーポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
         - Alibaba Cloud については、 [キーの管理](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2)を参照してください。
 
     7. TiDB Cloudコンソールに戻り、キー作成ページの一番下までスクロールして、クラウドプロバイダーのKMSから取得した**KMS Key ARN**を入力します。
@@ -140,7 +140,7 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 4. クラウドプロバイダーのKMSコンソールで、このポリシーステートメントをキーポリシーに追加してください。
 
-    - AWS については、 [AWS KMS の主要ポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
+    - AWS については、 [AWS KMS のキーポリシー](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)を参照してください。
     - Alibaba Cloud については、 [キーの管理](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/manage-keys-2)を参照してください。
 
 5. TiDB Cloudコンソールに戻り、ページの一番下までスクロールして、クラウドプロバイダーのKMSから取得した**KMS Key ARN**を入力します。
@@ -178,7 +178,7 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 アクセスを確認するには、 **Check**をクリックして信頼ポリシーの検証を開始します。TiDB Cloudは、キーポリシーで承認されたTiDB Cloudアカウントが、元のバックアップに関連付けられているアカウントと一致するかどうかを確認します。
 
 - アカウントが一致する場合、それ以上の承認は必要ありません。
-- アカウントが一致しない場合は、提供されたキーポリシーをコピーし、クラウドプロバイダーのKMSで更新してください。この更新によりキーが再認証され、新しいインスタンスがキーにアクセスできるようになります。
+- アカウントが一致しない場合は、提供されたキーポリシーをコピーし、クラウドプロバイダーのKMSで更新してください。この更新によりキーが再認可され、新しいインスタンスがキーにアクセスできるようになります。
 
 ### サービス管理暗号化キーで暗号化されたバックアップを復元する {#restore-a-backup-encrypted-with-a-service-managed-encryption-key}
 
@@ -188,5 +188,5 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 クラウドプロバイダーのKMSでCMEKの自動ローテーションを設定できます。TiDB Cloudでは設定の更新は不要です。
 
-- AWS については、 [CMEK自動回転](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)を参照してください。
+- AWS については、 [CMEKの自動ローテーション](https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html)を参照してください。
 - Alibaba Cloud については、 [キーローテーション](https://www.alibabacloud.com/help/en/kms/key-management-service/user-guide/configure-key-rotation)を参照してください。

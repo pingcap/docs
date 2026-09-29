@@ -9,7 +9,7 @@ summary: Amazon S3またはAlibaba Cloud Object Storage Service（OSS）からCS
 
 > **Tip:**
 >
-> - TiDB Cloud StarterまたはEssentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)。
+> - TiDB Cloud StarterまたはEssentialについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)を参照してください。
 > - TiDB Cloud Dedicatedについては、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ## 制限事項 {#limitations}
@@ -28,7 +28,7 @@ summary: Amazon S3またはAlibaba Cloud Object Storage Service（OSS）からCS
 
     - 1つのテーブルのデータが複数のCSVファイルに分割されている場合は、これらのCSVファイルに数値サフィックスを追加してください。例えば、 `${db_name}.${table_name}.000001.csv`や`${db_name}.${table_name}.000002.csv`のようにです。数値サフィックスは連続していなくても構いませんが、昇順である必要があります。また、すべてのサフィックスの長さが同じになるように、数値の前にゼロを追加する必要があります。
 
-    - TiDB Cloud Premium は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、および`.snappy`の形式で圧縮ファイルをインポートできます。圧縮 CSV ファイルをインポートする場合は、ファイル名を`${db_name}.${table_name}.${suffix}.csv.${compress}`形式で指定します。ここで`${suffix}`省略可能で、'000001'などの任意の整数を指定できます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
+    - TiDB Cloud Premium は、 `.gzip` 、 `.gz` 、 `.zstd` 、 `.zst` 、および`.snappy`の形式で圧縮ファイルをインポートできます。圧縮 CSV ファイルをインポートする場合は、ファイル名を`${db_name}.${table_name}.${suffix}.csv.${compress}`形式で指定します。ここで`${suffix}`は省略可能で、'000001'などの任意の整数を指定できます。例えば、 `trips.000001.csv.gz`ファイルを`bikeshare.trips`テーブルにインポートする場合は、ファイル名を`bikeshare.trips.000001.csv.gz`に変更する必要があります。
 
     > **Note:**
     >
@@ -111,7 +111,7 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
         - 1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `s3://sampledata/ingest/TableName.01.csv` 。
         - 複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
     - **Credential**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
-        - **AWS Role ARN** : AWS ロール ARN の値を入力してください。新しいロールを作成する必要がある場合は、 **[ここをクリックして AWS CloudFormation を使用して新しいロールを作成] をクリックし**、ガイド付き手順に従って、提供されているテンプレートを起動し、 IAM警告を確認し、スタックを作成し、生成された ARN をTiDB Cloud Premium にコピーしてください。
+        - **AWS Role ARN** : AWS ロール ARN の値を入力してください。新しいロールを作成する必要がある場合は、 **Click here to create a new one with AWS CloudFormation**をクリックし、ガイド付き手順に従って、提供されているテンプレートを起動し、 IAM警告を確認し、スタックを作成し、生成された ARN をTiDB Cloud Premium にコピーしてください。
         - **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
     - **Test Bucket Access**：認証情報が正しく入力された後、このボタンをクリックして、 TiDB Cloud Premiumがバケットにアクセスできることを確認してください。
     - **Target Connection**：インポートを実行するTiDBのユーザー名とパスワードを入力してください。必要に応じて、 **Test Connection**をクリックして認証情報を検証してください。
@@ -120,13 +120,13 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 
 5. **Source Files Mapping**セクションでは、 TiDB Cloud Premiumがバケットをスキャンし、ソースファイルと宛先テーブル間のマッピングを提案します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloud Premiumは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションは表示されず、 TiDB Cloud Premiumは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    - [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソースファイルとターゲットテーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
+    - [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)をソースファイルとターゲットテーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
 
     - **Advanced options**：パネルを展開して`Ignore compatibility checks (advanced)`の切り替えボタンを表示します。スキーマ互換性検証を意図的にバイパスしたい場合を除き、無効のままにしておいてください。
 
@@ -173,13 +173,13 @@ CSVファイルをTiDB Cloud Premiumにインポートするには、以下の�
 
 5. **Source Files Mapping**セクションでは、 TiDB Cloud Premiumがバケットをスキャンし、ソースファイルと宛先テーブル間のマッピングを提案します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloud Premiumは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションは表示されず、 TiDB Cloud Premiumは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    - [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)ソースファイルとターゲットテーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
+    - [ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)をソースファイルとターゲットテーブルに適用するには、自動マッピングを有効のままにしておきます。データ形式として**CSV**を選択したままにしておきます。
 
     - **Advanced options**：パネルを展開して`Ignore compatibility checks (advanced)`の切り替えボタンを表示します。スキーマ互換性検証を意図的にバイパスしたい場合を除き、無効のままにしておいてください。
 

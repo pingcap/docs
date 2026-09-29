@@ -37,7 +37,7 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 - **AWS Endpoint Service**: ダウンストリームサービスのエンドポイントサービス名と、ダウンストリームサービスがデプロイされているアベイラビリティゾーン（AZ）。
 
-    ダウンストリーム サービスでプライベートエンドポイントサービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスを設定します。
+    ダウンストリーム サービスでプライベートエンドポイントサービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)の手順に従って、ロードバランサーとプライベートリンクサービスを設定します。
 
 - **Amazon MSK Provisioned**: Amazon MSK ProvisionedクラスターのARN。変更フィード用のAmazon MSK Provisionedクラスターの作成方法については、[AWS PrivateLink 経由で Amazon MSK Provisioned クラスターを設定する](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)を参照してください。
 
@@ -54,7 +54,7 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 
 TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサービスの許可リストにTiDB CloudのAlibaba CloudアカウントIDを追加する必要があります。
 
-ダウンストリーム サービスでプライベートエンドポイントサービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)プライベートリンクサービスとして公開することで、ロードバランサーとプライベートリンクサービスをセットアップします。
+ダウンストリーム サービスでプライベートエンドポイントサービスを利用できない場合は、 [ステップ2. Kafkaクラスタをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)の手順に従って、ロードバランサーとプライベートリンクサービスをセットアップします。
 
 </div>
 </CustomContent>

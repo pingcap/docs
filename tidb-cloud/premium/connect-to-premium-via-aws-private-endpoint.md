@@ -11,7 +11,7 @@ summary: AWSのプライベートエンドポイントを使用して、 TiDB Cl
 >
 > AWS PrivateLink 経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
-TiDB Cloudは、 AWS VPC内でホストされているTiDB Cloudサービスへの高度に安全な一方向アクセスを[AWSプライベートリンク](https://aws.amazon.com/privatelink)経由でサポートしており、まるでサービスがお客様自身のVPC内にあるかのように動作します。お客様のVPC内にプライベートエンドポイントが公開され、権限があればそのエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
+TiDB Cloudは、 AWS VPC内でホストされているTiDB Cloudサービスへの高度に安全な一方向アクセスを[AWS PrivateLink](https://aws.amazon.com/privatelink)経由でサポートしており、まるでサービスがお客様自身のVPC内にあるかのように動作します。お客様のVPC内にプライベートエンドポイントが公開され、権限があればそのエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 
 AWS PrivateLink を利用したエンドポイント接続は、安全かつプライベートであり、お客様のデータをパブリックインターネットに公開することはありません。さらに、エンドポイント接続は CIDR オーバーラップをサポートしており、ネットワーク管理が容易です。
 
@@ -172,7 +172,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 </div>
 </SimpleTab>
 
-### ステップ5．TiDB Cloud Premiumインスタンスに接続します {#step-5-connect-to-your-premium-instance} {#step-5-connect-to-your-premium-instance}
+### ステップ5．TiDB Cloud Premiumインスタンスに接続します {#step-5-connect-to-your-premium-instance}
 
 プライベートエンドポイント接続が作成されると、接続ダイアログにリダイレクトされます。
 
@@ -208,7 +208,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 プライベートエンドポイントサービスの可能なステータスは、以下のように説明されます。
 
 - **Creating**：エンドポイントサービスを作成中です。これには3～5分かかります。
-- **Active**：プライベートエンドポイントが作成されるかどうかに関わらず、エンドポイントサービスが作成されます。
+- **Active**：プライベートエンドポイントが作成されているかどうかに関わらず、エンドポイントサービスは作成済みです。
 - **Deleting**：エンドポイントサービスまたはインスタンスが削除されています。これには3～5分かかります。
 
 ## トラブルシューティング {#troubleshooting}
