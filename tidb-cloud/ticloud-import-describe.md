@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless import describe
-summary: ticloud serverless import describe` のリファレンス。
+summary: "`ticloud serverless import describe` のリファレンス。"
 ---
 
 # ticloud serverless import describe {#ticloud-serverless-import-describe}

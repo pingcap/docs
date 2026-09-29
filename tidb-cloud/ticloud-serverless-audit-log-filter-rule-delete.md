@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless audit-log filter-rule delete
-summary: ticloud serverless audit-log filter-rule delete` のリファレンス。
+summary: "`ticloud serverless audit-log filter-rule delete` のリファレンス。"
 ---
 
 # ticloud serverless audit-log filter-rule delete {#ticloud-serverless-audit-log-filter-rule-delete}

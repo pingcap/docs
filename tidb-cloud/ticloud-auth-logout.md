@@ -1,6 +1,6 @@
 ---
 title: ticloud auth logout
-summary: ticloud auth logout` のリファレンス。
+summary: "`ticloud auth logout` のリファレンス。"
 ---
 
 # ticloud auth logout {#ticloud-auth-logout}

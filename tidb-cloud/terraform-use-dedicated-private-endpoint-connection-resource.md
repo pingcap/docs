@@ -1,6 +1,6 @@
 ---
 title: Use `tidbcloud_dedicated_private_endpoint_connection` Resource
-summary: tidbcloud_dedicated_private_endpoint_connection` リソースを使用して、 TiDB Cloud Dedicated プライベートエンドポイント接続を作成および変更する方法を学習します。
+summary: "`tidbcloud_dedicated_private_endpoint_connection` リソースを使用して、 TiDB Cloud Dedicated プライベートエンドポイント接続を作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_dedicated_private_endpoint_connection`リソースを使用する {#use-the-tidbcloud-dedicated-private-endpoint-connection-resource}

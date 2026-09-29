@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless import start
-summary: ticloud serverless import start` のリファレンス。
+summary: "`ticloud serverless import start` のリファレンス。"
 aliases: ['/ja/tidbcloud/ticloud-import-start-local','/ja/tidbcloud/ticloud-import-start-mysql','/ja/tidbcloud/ticloud-import-start-s3']
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: ticloud config create
-summary: ticloud config create` のリファレンス。
+summary: "`ticloud config create` のリファレンス。"
 ---
 
 # ticloud config create {#ticloud-config-create}

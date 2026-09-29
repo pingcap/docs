@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless audit-log download
-summary: ticloud serverless audit-log download` のリファレンス。
+summary: "`ticloud serverless audit-log download` のリファレンス。"
 ---
 
 # ticloud serverless audit-log download {#ticloud-serverless-audit-log-download}
@@ -30,9 +30,9 @@ ticloud serverless audit-log download -c <cluster-id> --start-date <start-date> 
 | フラグ                  | 説明                                                   | 必須  | 注記                                   |
 | -------------------- | ---------------------------------------------------- | --- | ------------------------------------ |
 | -c, --cluster-id 文字列 | クラスターの ID。                                           | はい  | 非対話型モードでのみ動作します。                     |
-| --start-date             | ダウンロードする監査ログの開始日（ `YYYY-MM-DD`の形式、例： `2025-01-01` ）。 | はい  | 非対話型モードでのみ動作します。                     |
-| --end-date             | ダウンロードする監査ログの終了日（ `YYYY-MM-DD`の形式、例： `2025-01-01` ）。 | はい  | 非対話型モードでのみ動作します。                     |
-| --output-path            | 監査ログをダウンロードするパス。指定しない場合は、ログは現在のディレクトリにダウンロードされます。    | いいえ | 非対話型モードでのみ動作します。                     |
+| --start-date string      | ダウンロードする監査ログの開始日（ `YYYY-MM-DD`の形式、例： `2025-01-01` ）。 | はい  | 非対話型モードでのみ動作します。                     |
+| --end-date string        | ダウンロードする監査ログの終了日（ `YYYY-MM-DD`の形式、例： `2025-01-01` ）。 | はい  | 非対話型モードでのみ動作します。                     |
+| --output-path string     | 監査ログをダウンロードするパス。指定しない場合は、ログは現在のディレクトリにダウンロードされます。    | いいえ | 非対話型モードでのみ動作します。                     |
 | --concurrency int          | 同時ダウンロード数。デフォルト値は`3`です。                              | いいえ | 対話モードと非対話モードの両方で動作します。 |
 |  --force             | 確認なしで監査ログをダウンロードします。                                 | いいえ | 対話モードと非対話モードの両方で動作します。 |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                                  | いいえ | 対話モードと非対話モードの両方で動作します。 |

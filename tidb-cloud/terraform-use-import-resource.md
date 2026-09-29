@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_import` Resource
-summary: tidbcloud_import` リソースを使用してインポートタスクを管理する方法を学習します。
+summary: "`tidbcloud_import` リソースを使用してインポートタスクを管理する方法を学習します。"
 ---
 
 # `tidbcloud_import`リソースを使用する {#use-the-tidbcloud-import-resource}

@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless sql-user create
-summary: ticloud serverless sql-user create` のリファレンス。
+summary: "`ticloud serverless sql-user create` のリファレンス。"
 ---
 
 # ticloud serverless sql-user create {#ticloud-serverless-sql-user-create}

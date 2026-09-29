@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless branch list
-summary: ticloud serverless branch list` のリファレンス。
+summary: "`ticloud serverless branch list` のリファレンス。"
 ---
 
 # ticloud serverless branch list {#ticloud-serverless-branch-list}

@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless export download
-summary: ticloud serverless export download` のリファレンス。
+summary: "`ticloud serverless export download` のリファレンス。"
 ---
 
 # ticloud serverless export download {#ticloud-serverless-export-download}

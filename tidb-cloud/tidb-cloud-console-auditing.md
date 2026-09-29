@@ -5,7 +5,7 @@ summary: TiDB Cloudコンソールの監査ログ機能について学習しま�
 
 # コンソール監査ログ {#console-audit-logging}
 
-TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユーザーのさまざまな行動や操作を追跡するのに役立つコンソール監査ログ機能を提供します。例えば、ユーザーを組織に招待したり、クラスターを作成したりするなどの操作を追跡できます。
+TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユーザーのさまざまな行動や操作を追跡するのに役立つコンソール監査ログ機能を提供します。例えば、ユーザーを組織に招待したり、データをインポートしたりするなどの操作を追跡できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -97,7 +97,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | DeleteAPIKey | APIキーを削除する                                                           |
 | UpdateTimezone | 組織のタイムゾーンを更新する                                                       |
 | ShowBill | 組織の請求書を表示                                                            |
-| DownloadBill | 組織法案をダウンロード                                                          |
+| DownloadBill | 組織の請求書をダウンロード                                                          |
 | ShowCredits | 組織のクレジットを表示                                                          |
 | AddPaymentCard | 支払いカードを追加する                                                          |
 | UpdatePaymentCard | 支払いカードを更新する                                                          |
@@ -184,7 +184,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | operator_id   | uint64    | オペレーターID                                                       |
 | operator_name | string    | オペレーター名                                                        |
 | operator_ip   | string    | オペレーターのIPアドレス                                                  |
-| operator_login_method | enum      | `microsoft`のログイン`github` : `google` `email`または`api_key`        |
+| operator_login_method | enum      | オペレーターのログイン方法: `google` 、 `github` 、 `microsoft` 、 `email` 、または`api_key` |
 | org_id        | uint64    | イベントが属する組織ID                                                   |
 | org_name      | string    | イベントが属する組織名                                                    |
 | project_id    | uint64    | イベントが属するプロジェクトID                                               |

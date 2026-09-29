@@ -1,6 +1,6 @@
 ---
 title: Use `tidbcloud_serverless_export` Resource
-summary: tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを作成および変更する方法を学習します。
+summary: "`tidbcloud_serverless_export` リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターのデータエクスポート タスクを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_serverless_export`リソースを使用する {#use-tidbcloud-serverless-export-resource}

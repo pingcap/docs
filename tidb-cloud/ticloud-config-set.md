@@ -1,6 +1,6 @@
 ---
 title: ticloud config set
-summary: ticloud config set` のリファレンス。
+summary: "`ticloud config set` のリファレンス。"
 ---
 
 # ticloud config set {#ticloud-config-set}
@@ -15,8 +15,8 @@ ticloud config set <property-name> <value> [flags]
 
 | プロパティ   | 説明                                                                 | 必須  |
 | ------- | ------------------------------------------------------------------ | --- |
-| 公開鍵     | TiDB Cloud API の公開キーを指定します。                                        | はい  |
-| 秘密鍵     | TiDB Cloud API の秘密キーを指定します。                                        | はい  |
+| public-key  | TiDB Cloud API の公開キーを指定します。                                        | はい  |
+| private-key | TiDB Cloud API の秘密キーを指定します。                                        | はい  |
 | API URL | TiDB Cloudの基本 API URL を指定します (デフォルトは`https://api.tidbcloud.com` )。 | いいえ |
 
 > **Note:**

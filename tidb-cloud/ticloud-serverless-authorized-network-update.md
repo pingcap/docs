@@ -1,6 +1,6 @@
 ---
 title: ticloud serverless authorized-network update
-summary: ticloud serverless authorized-network update` のリファレンス。
+summary: "`ticloud serverless authorized-network update` のリファレンス。"
 ---
 
 # ticloud serverless authorized-network update {#ticloud-serverless-authorized-network-update}

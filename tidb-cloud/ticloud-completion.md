@@ -1,6 +1,6 @@
 ---
 title: ticloud completion
-summary: ticloud 補完` のリファレンス。
+summary: "`ticloud completion` のリファレンス。"
 ---
 
 # ticloud completion {#ticloud-completion}

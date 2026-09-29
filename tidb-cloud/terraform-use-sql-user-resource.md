@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_sql_user` Resource
-summary: tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザーを作成および変更する方法を学習します。
+summary: "`tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユーザーを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_sql_user`リソースを使用する {#use-the-tidbcloud-sql-user-resource}

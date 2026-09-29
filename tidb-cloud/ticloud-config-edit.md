@@ -1,6 +1,6 @@
 ---
 title: ticloud config edit
-summary: ticloud config edit` のリファレンス。
+summary: "`ticloud config edit` のリファレンス。"
 ---
 
 # ticloud config edit {#ticloud-config-edit}

@@ -1,6 +1,6 @@
 ---
 title: ticloud auth login
-summary: ticloud auth login` のリファレンス。
+summary: "`ticloud auth login` のリファレンス。"
 ---
 
 # ticloud auth login {#ticloud-auth-login}
