@@ -23,8 +23,8 @@ TiDB v7.3.0 以降では、システムテーブル`mysql.analyze_jobs`または
 | `Job_info`       | タスク情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。`tidb_analyze_version =2`の場合、この情報にはサンプルレートなどの設定項目が含まれます。 |
 | `Processed_rows` | 分析された行数                                                                                            |
 | `Start_time`     | タスクが開始される時間                                                                                        |
-| `State`          | タスクの状態`failed` `pending` `finished`含む`running`                                                     |
-| `Fail_reason`    | タスクが失敗した理由。実行が成功した場合、値は`NULL`なります。                                                                 |
+| `State`          | `pending` 、 `running` 、 `finished` 、 `failed`を含むタスクの状態                                                     |
+| `Fail_reason`    | タスクが失敗した理由。実行が成功した場合、値は`NULL`になります。                                                                 |
 | `Instance`       | タスクを実行するTiDBインスタンス                                                                                 |
 | `Process_id`     | タスクを実行するプロセスID                                                                                     |
 

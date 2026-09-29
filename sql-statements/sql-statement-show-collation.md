@@ -26,7 +26,7 @@ ShowLikeOrWhere ::=
 
 <CustomContent platform="tidb">
 
-[新しい照合順序ワーク](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が有効になっている場合 (デフォルト)、出力例は次のようになります。
+[新しい照合順序フレームワーク](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)が有効になっている場合 (デフォルト)、出力例は次のようになります。
 
 </CustomContent>
 
