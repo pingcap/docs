@@ -5,7 +5,7 @@ summary: TiDB データベースの RECOVER TABLE の使用法の概要。
 
 # RECOVER TABLE {#recover-table}
 
-`RECOVER TABLE` 、 `DROP TABLE`文が実行された後、GC (ガベージコレクション) の有効期間内に削除されたテーブルとその上のデータを回復するために使用されます。
+`RECOVER TABLE`は、 `DROP TABLE`文が実行された後、GC (ガベージコレクション) の有効期間内に削除されたテーブルとその上のデータを回復するために使用されます。
 
 ## 構文 {#syntax}
 
@@ -33,7 +33,7 @@ NUM ::= intLit
 
 > **Note:**
 >
-> テーブルが削除され、GCの有効期間が過ぎた場合、 `RECOVER TABLE`ではテーブルを回復できません。このシナリオで`RECOVER TABLE`を実行すると、 `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`ようなエラーが返されます。
+> テーブルが削除され、GCの有効期間が過ぎた場合、 `RECOVER TABLE`ではテーブルを回復できません。このシナリオで`RECOVER TABLE`を実行すると、 `snapshot is older than GC safe point 2019-07-10 13:45:57 +0800 CST`のようなエラーが返されます。
 
 ## 例 {#examples}
 

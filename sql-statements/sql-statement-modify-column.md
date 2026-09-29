@@ -23,7 +23,7 @@ v8.5.5以降、TiDBは、以前はReorg-Dataを必要としていた一部の列
 
 この最適化は、次の型変更シナリオにのみ適用されます。
 
-- `BIGINT`から`INT`ような整数型間の変換
+- `BIGINT`から`INT`のような整数型間の変換
 - `VARCHAR(200)`から`VARCHAR(100)`など、文字セットが変更されない文字列型間の変換
 
 > **Note:**
@@ -110,7 +110,7 @@ Create Table: CREATE TABLE `t1` (
 1 row in set (0.00 sec)
 ```
 
-### 再編成 - データ変更 {#reorg-data-change}
+### Reorg-Data の変更 {#reorg-data-change}
 
 ```sql
 CREATE TABLE t1 (id int not null primary key AUTO_INCREMENT, col1 INT);

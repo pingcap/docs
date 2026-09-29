@@ -86,7 +86,7 @@ SHOW TABLES IN test;
 mysql -h 127.0.0.1 -P 4000 -u root
 ```
 
-ステートメント`SET DEFAULT ROLE` 、ロール`analyticsteam`を`jennifer`に関連付けるために使用できます。
+ステートメント`SET DEFAULT ROLE`は、ロール`analyticsteam`を`jennifer`に関連付けるために使用できます。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;
@@ -121,7 +121,7 @@ SHOW TABLES IN test;
 1 row in set (0.00 sec)
 ```
 
-`SET DEFAULT ROLE` 、ユーザーに関連付けられたロールを自動的に`GRANT`付与しません。 `jennifer`れていないロールに対して`SET DEFAULT ROLE`を付与しようとすると、次のエラーが発生します。
+`SET DEFAULT ROLE`は、関連付けられたロールをユーザーに自動的に`GRANT`しません。 `jennifer`に付与されていないロールに対して`SET DEFAULT ROLE`を実行しようとすると、次のエラーが発生します。
 
 ```sql
 SET DEFAULT ROLE analyticsteam TO jennifer;

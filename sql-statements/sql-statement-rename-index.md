@@ -5,7 +5,7 @@ summary: TiDB データベースの RENAME INDEX の使用法の概要。
 
 # RENAME INDEX {#rename-index}
 
-ステートメント`ALTER TABLE .. RENAME INDEX` 、既存のインデックスの名前を新しい名前に変更します。この操作はTiDBでは即座に実行され、メタデータの変更のみが必要です。
+ステートメント`ALTER TABLE .. RENAME INDEX`は、既存のインデックスの名前を新しい名前に変更します。この操作はTiDBでは即座に実行され、メタデータの変更のみが必要です。
 
 ## 概要 {#synopsis}
 

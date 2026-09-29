@@ -7,7 +7,7 @@ summary: TiDBデータベースにおけるREVOKE <権限>の使用方法の概�
 
 このステートメントは、既存のユーザーから権限を削除します。このステートメントを実行するには`GRANT OPTION`権限と、取り消すすべての権限が必要です。
 
-v8.5.6 以降、TiDB は MySQL と互換性のあるカラムレベルの権限管理メカニズムをサポートします。 `REVOKE`で列名のリストを指定できます (例: `REVOKE SELECT(col2) ON test.tbl FROM 'user'@'host';` 。詳細については、[列レベルの権限管理](/column-privilege-management.md)を参照してください。
+v8.5.6 以降、TiDB は MySQL と互換性のあるカラムレベルの権限管理メカニズムをサポートします。 `REVOKE`で列名のリストを指定できます (例: `REVOKE SELECT(col2) ON test.tbl FROM 'user'@'host';` )。詳細については、[列レベルの権限管理](/column-privilege-management.md)を参照してください。
 
 ## 概要 {#synopsis}
 

@@ -79,7 +79,7 @@ RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 | `Queue Time`     | `RESTORE`タスクがキューに登録されたときのタイムスタンプ（現在のタイムゾーン）。 |
 | `Execution Time` | `RESTORE`タスクの実行が開始されたときのタイムスタンプ（現在のタイムゾーン）。  |
 
-### 部分的な修復 {#partial-restore}
+### 部分的な復元 {#partial-restore}
 
 復元するデータベースまたはテーブルを指定できます。バックアップ アーカイブに一部のデータベースまたはテーブルが存在しない場合でも、それらは無視されるため、 `RESTORE`は何もせずに完了します。
 
@@ -118,13 +118,13 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 <CustomContent platform="tidb">
 
-システムテーブルはデフォルトで復元されます。システム[権限テーブル](/privilege-management.md#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
+システム[権限テーブル](/privilege-management.md#privilege-table)はデフォルトで復元されます。システム権限テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-システムテーブルはデフォルトで復元されます。システム[権限テーブル](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table)テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
+システム[権限テーブル](https://docs.pingcap.com/tidb/stable/privilege-management#privilege-table)はデフォルトで復元されます。システム権限テーブルを復元する必要がない場合は、 `WITH_SYS_TABLE`パラメーターを`FALSE`に設定できます。
 
 </CustomContent>
 
@@ -137,7 +137,7 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-06/'
     CHECKSUM = FALSE;
 ```
 
-### 段階的復元 {#incremental-restore}
+### 増分復元 {#incremental-restore}
 
 増分復元を実行するための特別な構文はありません。TiDBはバックアップアーカイブがフルバックアップか増分バックアップかを自動的に認識し、適切な処理を実行します。必要なのは、各増分復元を正しい順序で適用することだけです。
 
