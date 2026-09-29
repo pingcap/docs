@@ -115,7 +115,7 @@ BRの基本は次のとおりです。
 
 ### 増分データレプリケーション - TiCDC {#incremental-data-replication-ticdc}
 
-[TiCDC](/ticdc/ticdc-overview.md)は、TiKVから変更ログを取得することでTiDBの増分データを複製するためのツールです。上流のTSOと整合性のある状態にデータを復元できます。TiCDCは、他のシステムがデータ変更をサブスクライブできるように、TiCDCオープンプロトコルも提供しています。
+[TiCDC](/ticdc/ticdc-overview.md)は、TiKVから変更ログを取得することでTiDBの増分データを複製するためのツールです。上流のTSOと整合性のある状態にデータを復元できます。TiCDCは、他のシステムがデータ変更をサブスクライブできるように、TiCDC Open Protocolも提供しています。
 
 TiCDC の基本は次のとおりです。
 

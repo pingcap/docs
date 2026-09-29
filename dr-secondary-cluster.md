@@ -234,7 +234,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
     tiup cdc cli changefeed create --server=http://10.1.1.9:8300 --sink-uri="mysql://{username}:{password}@10.1.1.4:4000" --changefeed-id="dr-primary-to-secondary" --start-ts="431434047157698561" --config changefeed.toml
     ```
 
-    変更フィードの設定の詳細については、 [TiCDC Changefeedフィード構成](/ticdc/ticdc-changefeed-config.md)を参照してください。
+    変更フィードの設定の詳細については、 [TiCDC Changefeed設定](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 2. 変更フィードタスクが正しく実行されているかどうかを確認するには、コマンド`changefeed query`を実行します。クエリ結果には、タスク情報とタスクの状態が含まれます。引数`--simple`または`-s`を指定すると、基本的なレプリケーション状態とチェックポイント情報のみが表示されます。この引数を指定しない場合、出力には詳細なタスク構成、レプリケーション状態、およびレプリケーションテーブル情報が含まれます。
 

@@ -136,7 +136,7 @@ TiDB バージョン: 7.3.0
 
     - KafkaシンクがAvroプロトコルを使用している場合、 `force-replicate`パラメータが`true`に設定されている場合、TiCDCはchangefeedを作成する際にエラーを報告します。
     - `delete-only-output-handle-key-columns`と`force-replicate`パラメータ間に互換性がないため、両方のパラメータが有効になっている場合、TiCDC は変更フィードを作成する際にエラーを報告します。
-    - 出力プロトコルがオープンプロトコルの場合、 `UPDATE`イベントは変更された列のみを出力します。
+    - 出力プロトコルがOpen Protocolの場合、 `UPDATE`イベントは変更された列のみを出力します。
 
 ### システム変数 {#system-variables}
 

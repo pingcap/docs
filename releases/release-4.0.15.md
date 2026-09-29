@@ -135,7 +135,7 @@ TiDB バージョン: 4.0.15
         - このテーブルが再スケジュールされているときに複数のプロセッサが同じテーブルにデータを書き込む可能性があるために発生するデータの不整合の問題を修正しました[#2230](https://github.com/pingcap/tiflow/issues/2230)
         - メタデータ管理で`EtcdWorker`ショット分離が違反されるバグを修正 [#2557](https://github.com/pingcap/tiflow/pull/2557)
         - DDLシンクエラーによりチェンジフィードを停止できない問題を修正 [#2552](https://github.com/pingcap/tiflow/issues/2552)
-        - TiCDC オープンプロトコルの問題を修正: トランザクションに変更がない場合、TiCDC は空の値を出力します [#2612](https://github.com/pingcap/tiflow/issues/2612)
+        - TiCDC Open Protocolの問題を修正: トランザクションに変更がない場合、TiCDC は空の値を出力します [#2612](https://github.com/pingcap/tiflow/issues/2612)
         - 符号なし`TINYINT`型でTiCDCがpanicを起こすバグを修正 [#2648](https://github.com/pingcap/tiflow/issues/2648)
         - TiCDC があまりにも多くのリージョンをキャプチャしたときに発生する OOM を回避するために、gRPC ウィンドウのサイズを小さくします[#2202](https://github.com/pingcap/tiflow/issues/2202)
         - TiCDC がリージョンを過剰にキャプチャした場合に発生する OOM 問題を修正しました。 [#2673](https://github.com/pingcap/tiflow/issues/2673)

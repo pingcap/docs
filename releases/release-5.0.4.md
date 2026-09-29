@@ -184,7 +184,7 @@ TiDB バージョン: 5.0.4
         - TiCDC があまりにも多くのリージョンをキャプチャしたときに発生する OOM を回避するために、gRPC ウィンドウのサイズを小さくします[#2724](https://github.com/pingcap/tiflow/pull/2724)
         - メモリ負荷が高いときにgRPC接続が頻繁に切断されるエラーを修正[#2202](https://github.com/pingcap/tiflow/issues/2202)
         - 符号なし`TINYINT`型でTiCDCがpanicを起こすバグを修正 [#2648](https://github.com/pingcap/tiflow/issues/2648)
-        - TiCDCオープンプロトコルがトランザクションを挿入し、アップストリームで同じ行のデータを削除すると空の値を出力する問題を修正しました。 [#2612](https://github.com/pingcap/tiflow/issues/2612)
+        - TiCDC Open Protocolがトランザクションを挿入し、アップストリームで同じ行のデータを削除すると空の値を出力する問題を修正しました。 [#2612](https://github.com/pingcap/tiflow/issues/2612)
         - スキーマ変更の終了 TS で変更フィードが開始されると DDL 処理が失敗するバグを修正しました。 [#2603](https://github.com/pingcap/tiflow/issues/2603)
         - 応答しないダウンストリームが、タスクがタイムアウトするまで古い所有者のレプリケーションタスクを中断する問題を修正しました[#2295](https://github.com/pingcap/tiflow/issues/2295)
         - メタデータ管理のバグを修正 [#2558](https://github.com/pingcap/tiflow/pull/2558)

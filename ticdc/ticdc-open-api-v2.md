@@ -315,7 +315,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `transaction_atomicity`       | `STRING`型。トランザクションのアトミック性レベル。（オプション）                                                                                         |
 | `only_output_updated_columns` | `BOOLEAN`型。`canal-json`または`open-protocol`プロトコルを使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
 | `cloud_storage_config`        | ストレージシンクの構成。(オプション)                                                                                                        |
-| `open`                        | オープンプロトコルの構成。(オプション)                                                                                                         |
+| `open`                        | Open Protocolの構成。(オプション)                                                                                                         |
 | `debezium`                    | Debezium プロトコルの設定。(オプション)                                                                                                    |
 
 `sink.column_selectors`は配列です。パラメータは以下のとおりです。

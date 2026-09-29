@@ -3,7 +3,7 @@ title: TiCDC Canal-JSON Protocol
 summary: TiCDC Canal-JSON プロトコルの概念とその使用方法を学びます。
 ---
 
-# TiCDC Canal- JSON プロトコル {#ticdc-canal-json-protocol}
+# TiCDC Canal-JSONプロトコル {#ticdc-canal-json-protocol}
 
 Canal-JSONは、 [アリババCanal](https://github.com/alibaba/canal)で定義されたデータ交換形式プロトコルです。このドキュメントでは、TiDB拡張フィールド、Canal-JSONデータ形式の定義、公式Canalとの比較など、TiCDCにおけるCanal-JSONデータ形式の実装方法について説明します。
 

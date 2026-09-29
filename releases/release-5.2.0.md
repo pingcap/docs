@@ -180,7 +180,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
 
     - TiCDC
 
-        - TiDB向けに設計されたバイナリMQフォーマットを追加します。これはJSONベースのオープンプロトコルよりもコンパクトです。 [#1621](https://github.com/pingcap/tiflow/pull/1621)
+        - TiDB向けに設計されたバイナリMQフォーマットを追加します。これはJSONベースのOpen Protocolよりもコンパクトです。 [#1621](https://github.com/pingcap/tiflow/pull/1621)
         - ファイルソーターのサポートを削除 [#2114](https://github.com/pingcap/tiflow/pull/2114)
         - ログローテーション構成のサポート [#2182](https://github.com/pingcap/tiflow/pull/2182)
 

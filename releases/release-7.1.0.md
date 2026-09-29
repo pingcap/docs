@@ -344,7 +344,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
         - オブジェクトストレージにデータを複製するシナリオでDDLイベントが発生したときにディレクトリ構造を最適化する[#8890](https://github.com/pingcap/tiflow/issues/8890) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiCDC レプリケーションタスクが失敗したときにアップストリームの GC TLS を設定する方法を最適化します[#8403](https://github.com/pingcap/tiflow/issues/8403) @[charleszheng44](https://github.com/charleszheng44)
         - Kafka-on-Pulsar ダウンストリームへのデータ複製をサポート[#8892](https://github.com/pingcap/tiflow/issues/8892) @[Rustin170506](https://github.com/Rustin170506)
-        - Kafka にデータを複製する際に更新が発生した後に変更された列のみを複製するためのオープンプロトコルプロトコルの使用をサポートします。 [#8706](https://github.com/pingcap/tiflow/issues/8706) @[sdojjy](https://github.com/sdojjy)
+        - Kafka にデータを複製する際に更新が発生した後に変更された列のみを複製するためのopen-protocol プロトコルの使用をサポートします。 [#8706](https://github.com/pingcap/tiflow/issues/8706) @[sdojjy](https://github.com/sdojjy)
         - 下流の障害やその他のシナリオにおける TiCDC のエラー処理を最適化する[#8657](https://github.com/pingcap/tiflow/issues/8657) @[hicqu](https://github.com/hicqu)
         - TLS を有効にするシナリオで認証アルゴリズムを設定するかどうかを制御する設定項目`insecure-skip-verify`を追加します。 [#8867](https://github.com/pingcap/tiflow/issues/8867) @[Rustin170506](https://github.com/Rustin170506)
 
