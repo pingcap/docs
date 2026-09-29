@@ -7,7 +7,7 @@ summary: TiDB データベースでの DROP BINDING の使用。
 
 この文は、特定のSQL文からバインディングを削除します。バインディングを使用すると、基になるクエリを変更することなく、文にヒントを挿入できます。
 
-`BINDING` `GLOBAL`または`SESSION`基準で表されます。デフォルトは`SESSION`です。
+`BINDING`は、`GLOBAL`または`SESSION`のいずれかを基準に作成できます。デフォルトは`SESSION`です。
 
 ## 概要 {#synopsis}
 

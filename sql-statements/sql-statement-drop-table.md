@@ -64,7 +64,7 @@ Query OK, 0 rows affected (0.23 sec)
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-現在、 `RESTRICT`と`CASCADE`構文的にのみサポートされています。
+現在、 `RESTRICT`と`CASCADE`は構文的にのみサポートされています。
 
 ## 参照 {#see-also}
 

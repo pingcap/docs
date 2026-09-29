@@ -30,15 +30,15 @@ PartitionNameList ::=
 
 ## パラメータの説明 {#parameter-description}
 
-`DISTRIBUTE TABLE`文を使用してテーブル内のリージョンを再分配する場合、バランスの取れた分配のために、ストレージエンジン ( TiFlashや TiKV など) とさまざまなRaftロール (Leader、Learner、投票者など) を指定できます。
+`DISTRIBUTE TABLE`文を使用してテーブル内のリージョンを再分配する場合、バランスの取れた分配のために、ストレージエンジン ( TiFlashや TiKV など) とさまざまなRaftロール (Leader、Learner、Voterなど) を指定できます。
 
-- `RULE` : バランス調整とスケジュールを行うRaftロールのリージョンを指定します。オプションの値は`"leader-scatter"` 、 `"peer-scatter"` 、および`"learner-scatter"` 。
-- `ENGINE` :ストレージエンジンを指定します。オプションの値は`"tikv"`と`"tiflash"` 。
-- `TIMEOUT` : 散布操作のタイムアウト制限を指定します。PD がこの時間内に散布を完了しない場合、散布タスクは自動的に終了します。このパラメーターが指定されていない場合、デフォルト値は`"30m"`です。
+- `RULE` : バランス調整とスケジュールを行うRaftロールのリージョンを指定します。オプションの値は`"leader-scatter"` 、 `"peer-scatter"` 、および`"learner-scatter"`です。
+- `ENGINE` :ストレージエンジンを指定します。オプションの値は`"tikv"`と`"tiflash"`です。
+- `TIMEOUT` : スキャッタ操作のタイムアウト制限を指定します。PD がこの時間内にスキャッタを完了しない場合、スキャッタタスクは自動的に終了します。このパラメーターが指定されていない場合、デフォルト値は`"30m"`です。
 
 ## 例 {#examples}
 
-TiKV 上の表`t1`のリーダーの領域を再分配します。
+TiKV 上のテーブル`t1`のLeaderのリージョンを再分配します。
 
 ```sql
 CREATE TABLE t1 (a INT);
@@ -89,7 +89,7 @@ DISTRIBUTE TABLE t3 PARTITION (p1, p2) RULE = "peer-scatter" ENGINE = "tikv";
 +--------+
 ```
 
-TiFlash 上のテーブル`t4`の`p1`および`p2`TiFlashでLearnerの領域を再分配します。
+TiFlash 上のテーブル`t4`のパーティション`p1`および`p2`で、Learnerのリージョンを再分配します。
 
 ```sql
 CREATE TABLE t4 ( a INT, b INT, INDEX idx(b)) PARTITION BY RANGE( a ) (
