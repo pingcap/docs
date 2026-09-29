@@ -224,7 +224,7 @@ In the TiDB Cloud console, navigate to **Data > Import**, click **Export Data to
 - **Compression**: `None`
 - **Amazon S3 Settings**:
     - **Bucket URI**: `s3://<bucket>/<prefix>/snapshot/` (use the recommended snapshot sub-path)
-    - **Role ARN** or **Access Key**: use the credentials from [Prepare Bucket Access](#prepare-bucket-access).
+    - **Role ARN** or **Access Key**: use the credentials from [Prepare Bucket Access](#step-1-prepare-s3-bucket-access).
 
 After the export task completes, open the task details and record the **Snapshot TSO** value. This TSO is required when creating the changefeed.
 
