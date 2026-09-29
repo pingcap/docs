@@ -56,7 +56,7 @@ Refer to the guide for your plan:
 
 - TiDB Cloud Premium<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent>: [Set Up a Data Pipeline to TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
 - TiDB Cloud Dedicated: [Manually set up a data pipeline to replicate data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
-- TiDB Cloud Essential: [Manually set up a data pipeline to replicate data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
+<!-- - TiDB Cloud Essential: [Manually set up a data pipeline to replicate data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md) -->
 
 ## View the Data Pipeline page
 

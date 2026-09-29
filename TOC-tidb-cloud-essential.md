@@ -147,9 +147,6 @@
   - [Changefeed](/tidb-cloud/essential-changefeed-overview.md)
   - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
-  - [Sink to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
-  - Reference
-    - [SQL Compatibility for TiDB Cloud Lake Integration](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
