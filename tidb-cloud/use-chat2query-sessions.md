@@ -5,15 +5,15 @@ summary: Chat2Query セッション関連 API を使用して、マルチラウ�
 
 # マルチラウンドChat2Queryを開始する {#start-multi-round-chat2query}
 
-Chat2Query API v3以降では、セッション関連のエンドポイントを呼び出すことで、複数ラウンドのチャットを開始できます`/v3/chat2data`エンドポイントから返される`session_id`を使用して、次のラウンドで会話を続行できます。
+Chat2Query API v3以降では、セッション関連のエンドポイントを呼び出すことで、複数ラウンドのチャットを開始できます。`/v3/chat2data`エンドポイントから返される`session_id`を使用して、次のラウンドで会話を続行できます。
 
 ## 始める前に {#before-you-begin}
 
 マルチラウンド Chat2Query を開始する前に、次のものを用意してください。
 
-- A [Chat2Queryデータアプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app) 。
+- [Chat2Queryデータアプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app) 。
 - [Chat2QueryデータアプリのAPIキー](/tidb-cloud/use-chat2query-api.md#create-an-api-key)です。
-- A [ターゲットデータベースのデータサマリー](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries) 。
+- [ターゲットデータベースのデータサマリー](/tidb-cloud/use-chat2query-api.md#1-generate-a-data-summary-by-calling-v3datasummaries) 。
 
 ## ステップ1. セッションを開始する {#step-1-start-a-session}
 

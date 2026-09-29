@@ -17,7 +17,7 @@ v3 以降、Chat2Query API を使用すると、Chat2Query データアプリの
 
 データベースのナレッジベースを作成する前に、次のものを用意してください。
 
-- A [Chat2Queryデータアプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app)
+- [Chat2Queryデータアプリ](/tidb-cloud/use-chat2query-api.md#create-a-chat2query-data-app)
 - [Chat2QueryデータアプリのAPIキー](/tidb-cloud/use-chat2query-api.md#create-an-api-key)
 
 ## ステップ1. リンクされたデータベースのナレッジベースを作成する {#step-1-create-a-knowledge-base-for-the-linked-database}
