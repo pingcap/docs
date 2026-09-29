@@ -185,4 +185,4 @@ Azure Private Link のアーキテクチャは次のとおりです: [^1]
 
 Azure プライベートエンドポイント接続機能は、プライベートエンドポイントを自動的に検出できます。つまり、Azure ポータルで[Azureプライベートエンドポイントを作成](#step-2-create-an-azure-private-endpoint)した後、TiDB Cloudコンソールの**Create Azure Private Endpoint Connection**ダイアログで**Cancel**をクリックしても、作成されたエンドポイントを**Networking**ページで表示できます。キャンセルが意図的でない場合は、エンドポイントの設定を続行してセットアップを完了できます。キャンセルが意図的な場合は、TiDB Cloudコンソールでエンドポイントを直接削除できます。
 
-[^1]: Azure Private Linkアーキテクチャの図は、Creative Commons Attribution 4.0 International に基づいてライセンスされている、Azure ドキュメントの「Azureプライベートリンクサービス[Azureプライベートリンクサービスとは何ですか？](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview)ドキュメント ( [ソースファイルはGitHubにあります](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/private-link/private-link-service-overview.md)) からのものです。
+[^1]: Azure Private Linkアーキテクチャの図は、Creative Commons Attribution 4.0 International に基づいてライセンスされている、Azure ドキュメントの[Azureプライベートリンクサービスとは何ですか？](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview)ドキュメント ( [ソースファイルはGitHubにあります](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/private-link/private-link-service-overview.md)) からのものです。

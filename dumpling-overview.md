@@ -5,7 +5,7 @@ summary: TiDBからデータをエクスポートするには、Dumplingツー�
 
 # Dumplingを使用してデータをエクスポートする {#use-dumpling-to-export-data}
 
-このドキュメントでは、データエクスポートツール「 [Dumpling](https://github.com/pingcap/tidb/tree/release-8.5/dumpling)について説明します。Dumplingは、TiDB/MySQLに保存されているデータをSQLまたはCSVデータファイルとしてエクスポートし、論理的なフルバックアップやエクスポートに使用できます。また、 DumplingはAmazon S3へのデータエクスポートもサポートしています。
+このドキュメントでは、データエクスポートツール[Dumpling](https://github.com/pingcap/tidb/tree/release-8.5/dumpling)について説明します。Dumplingは、TiDB/MySQLに保存されているデータをSQLまたはCSVデータファイルとしてエクスポートし、論理的なフルバックアップやエクスポートに使用できます。また、 DumplingはAmazon S3へのデータエクスポートもサポートしています。
 
 <CustomContent platform="tidb">
 

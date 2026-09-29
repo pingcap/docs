@@ -85,4 +85,4 @@ TiDB Cloud Dedicatedクラスターの作成が完了したら、以下の手順
 
 ## 次は？ {#what-s-next}
 
-TiDB Cloud DedicatedクラスターがTiDB Cloud上に作成されたら、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)に接続します」で提供されている方法を介してそれに接続できます。
+TiDB Cloud DedicatedクラスターがTiDB Cloud上に作成されたら、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)で提供されている方法を介してそれに接続できます。
