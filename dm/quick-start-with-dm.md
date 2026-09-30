@@ -177,7 +177,7 @@ macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をロー�
 
 CentOS などのEnterprise Linux ディストリビューションでは、MySQL Yum リポジトリから MySQL 8.0 をインストールできます。
 
-1. [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリ パッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`そのままにする必要があります。
+1. [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリ パッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`をそのままにする必要があります。
 
     ```shell
     sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm
@@ -477,7 +477,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
 テスト環境でソース MySQL データベースからターゲット TiDB データベースにデータを移行するタスクを正常に作成したので、次の操作を実行できます。
 
-- 探索[TiDB DM の機能](/dm/dm-overview.md)
+- [TiDB DM の機能](/dm/dm-overview.md)を確認する
 - [TiDB DMアーキテクチャ](/dm/dm-arch.md)について学ぶ
-- セットアップ[概念実証または本番環境用の TiDB DM](/dm/deploy-a-dm-cluster-using-tiup.md)
-- 高度な設定[DMタスク](/dm/dm-task-configuration-guide.md)
+- [概念実証または本番環境用の TiDB DM](/dm/deploy-a-dm-cluster-using-tiup.md)をセットアップする
+- 高度な[DMタスク](/dm/dm-task-configuration-guide.md)を設定する

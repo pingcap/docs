@@ -19,11 +19,11 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 [シャードテーブルからのデータのマージと移行](/dm/feature-shard-merge-pessimistic.md#principles)から、DM のシャーディング DDL ロックは、複数の上流シャードテーブルから下流への DDL 操作の実行を調整するためのメカニズムであることが簡単にわかります。
 
-したがって、 `DM-master`の`shard-ddl-lock`コマンドでシャーディング DDL ロックが見つかった場合、または`query-status`コマンドで一部の DM-workerに`unresolvedGroups`または`blockingDDLs`ロックが見つかった場合は、 `shard-ddl-lock unlock`コマンドでシャーディング DDL ロックを手動で解除しようとしないでください。
+したがって、 `DM-master`の`shard-ddl-lock`コマンドでシャーディング DDL ロックが見つかった場合、または`query-status`コマンドで一部の DM-workerに`unresolvedGroups`または`blockingDDLs`ロックが見つかった場合は、 `shard-ddl-lock unlock`コマンドでシャーディング DDL ロックを急いで手動で解除しないでください。
 
 代わりに、次のことができます。
 
-- シャーディング DDL ロックの自動解放の失敗が[異常なシナリオを列挙した](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)の 1つである場合は、対応する手動ソリューションに従ってシナリオを処理します。
+- シャーディング DDL ロックの自動解放の失敗が[列挙されている異常なシナリオ](/dm/manually-handling-sharding-ddl-locks.md#supported-scenarios)の 1つである場合は、対応する手動ソリューションに従ってシナリオを処理します。
 - サポートされていないシナリオの場合は、データ移行タスク全体をやり直します。まず、ダウンストリームデータベースのデータと移行タスクに関連付けられた`dm_meta`情報を空にし、次に、完全および増分データレプリケーションを再実行します。
 
 ## 複数のシャードテーブル間の主キーまたは一意インデックス間の競合を処理する {#handle-conflicts-between-primary-keys-or-unique-indexes-across-multiple-sharded-tables}

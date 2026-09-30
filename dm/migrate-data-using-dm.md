@@ -66,7 +66,7 @@ MySQL ホストで必要な権限のリストは[事前チェック](/dm/dm-prec
 
 ## ステップ4：データ移行タスクの設定 {#step-4-configure-the-data-migration-task}
 
-次の例では、上流の MySQL-1 および MySQL-2 インスタンスの`test_table`データベースにある`test_db`テーブルのすべてのデータを、TiDB の`test_table`データベースにある下流の`test_db`テーブルに、フルデータと増分データの両方のモードで移行する必要があることを想定しています。
+次の例では、上流の MySQL-1 および MySQL-2 インスタンスの`test_db`データベースにある`test_table`テーブルのすべてのデータを、TiDB の`test_db`データベースにある下流の`test_table`テーブルに、フルデータと増分データの両方のモードで移行する必要があることを想定しています。
 
 `task.yaml`タスク設定ファイルを以下のように編集します。
 
@@ -172,7 +172,7 @@ tiup dmctl --master-addr 172.16.10.71:8261 query-status
 tiup dmctl --master-addr 172.16.10.71:8261 stop-task test
 ```
 
-`test`は`name`設定ファイルの`task.yaml`設定項目で設定したタスク名です。
+`test`は`task.yaml`設定ファイルの`name`設定項目で設定したタスク名です。
 
 ## ステップ8：タスクを監視し、ログを確認する {#step-8-monitor-the-task-and-check-logs}
 
