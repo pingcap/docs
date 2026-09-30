@@ -202,7 +202,7 @@ A result similar to the following is returned:
 
 Take the following points into consideration when you use `schema_unused_indexes`.
 
-#### Indexes are considered unused only since each TiDB instance's last restart
+#### Index usage data is reset when a TiDB instance restarts
 
 - If a TiDB node restarts, the usage tracking data is reset.
 - Ensure the system has been running long enough to capture a representative workload before relying on this data.
