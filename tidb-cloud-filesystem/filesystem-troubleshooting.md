@@ -54,9 +54,13 @@ ti fs list-file-system-tokens \
   --output text
 ```
 
-Token names are not unique. Use the immutable `token_id` from this output for enable, disable, or delete operations. Old credentials created or imported without token lifecycle metadata can remain valid, but `ti` cannot safely identify their list row and never guesses a match.
+Token names are not unique, so use the immutable `token_id` from this output for enable, disable, or delete operations. An older credential that was created or imported without token lifecycle metadata can still be valid, but it has no row in this list, and `ti` never guesses a match.
 
-After enable, disable, delete, or refresh, allow approximately 10 seconds for authentication caches to converge. If refresh reports `fs.token_refresh_ambiguous`, the server might have rotated the token even though the response was lost. The outcome is unknown: the old token might still work if the refresh did not commit, or it might already be invalid. The replacement token from a committed refresh cannot be recovered because its response was lost. Do not retry the refresh with the old token. Instead, use TiDB Cloud credentials to generate an independent owner token.
+After you enable, disable, delete, or refresh a token, allow about 10 seconds for authentication caches to converge.
+
+If refresh reports `fs.token_refresh_ambiguous`, the response was lost and the outcome is unknown. The old token might still work, if the rotation never committed, or it might already be invalid, and the replacement token cannot be recovered. Do not retry the refresh with the old token. Use TiDB Cloud credentials to generate an independent owner token instead.
+
+If a file command reports `invalid API key` and exit code 1 while you are passing a file system token, check the token status before you look at your API key pair. A deleted or disabled token produces this message even when the API key pair is correct.
 
 If token mutation reports `fs.token_mount_active`, stop applications using the mount, close open files, and unmount using the exact path in the error:
 
@@ -67,6 +71,20 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 The CLI error message suggests running `drain-file-system` first, but a graceful FUSE unmount already drains pending writes, so a separate drain is unnecessary. Verify the mount log for `reason=force_quit` before treating a `0` exit status as proof of drain; see [Unmount returns success but the mount process exits abnormally](#unmount-returns-success-but-the-mount-process-exits-abnormally). WebDAV does not support `drain-file-system`; use graceful unmount for WebDAV.
 
 Then retry the token operation. A mount on another machine is not visible locally; coordinate rotation with that machine separately.
+
+## Scoped token access is denied
+
+A scoped token used outside its scope causes the command to exit with code 1 and report one of two messages. Most commands report `fs access denied`. `ti fs copy-file` can report an empty `HTTP 403:` instead.
+
+In this context, both messages indicate that the token does not allow this operation on this path. Neither one is a connectivity problem or a sign that the token is invalid. Check what the token allows before you change anything:
+
+```bash
+ti fs list-file-system-tokens \
+  --file-system-id "<file-system-id>" \
+  --output text
+```
+
+Compare the token scope with the path and the operation you used. `search` also requires `read`. A scoped token cannot list the file system root unless its allowed path is `/`. A scoped token cannot widen its own permissions, so use an owner token to generate a new scoped token with the operations you need instead of trying to change the existing token.
 
 ## File system selection is missing
 
@@ -220,6 +238,21 @@ If any of these appear:
 1. Treat the result as an abnormal shutdown and keep the machine and local cache available.
 2. Verify required layer files with direct CLI reads using `--layer-id`. For committed changes, read the base file system without selecting a layer. To verify a checkpoint, mount it at a new local path with the same `--layer-ref` and `--checkpoint-id` and read its required files again. You can also remount a writable layer at a new path to verify its contents independently of the previous mount.
 3. Do not commit or discard the layer, or delete local state, until verification completes. Include the CLI version and redacted mount log when reporting the problem.
+
+## Exit codes
+
+`ti fs` uses the following exit codes. Automation can branch on them instead of matching error text.
+
+| Code | Meaning | What to do |
+| --- | --- | --- |
+| 0 | Success | Continue. |
+| 1 | Runtime or remote API error | Read the message and address the reported runtime, network, or service error. Scoped token denials and some other service errors also use this code. |
+| 2 | Local usage, validation, or configuration error | Fix the command or the profile. Examples include an unknown flag, missing required input, an unsupported region, or a token file with loose permissions. |
+| 3 | Authentication failed | Check the token or the API key pair. |
+| 4 | The account lacks permission for the operation | Ask an organization administrator. This is different from a scoped-token denial, which returns exit code 1. |
+| 5 | The file system, token, or other resource named in the request does not exist | Check the ID. A path that does not exist inside a file system returns 1, not 5. |
+
+A deleted or disabled file system token is an exception to the preceding table: file commands return exit code 1 rather than 3. See [File system token is rejected](#file-system-token-is-rejected).
 
 ## Report a problem
 
