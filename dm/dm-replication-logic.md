@@ -22,7 +22,7 @@ summary: DM のコア処理ユニット Sync が DML文を複製する方法に�
 3. DML 実行計画を最適化します。
 
     1. [Compactor](#compactor) : 同じレコード（同じ主キーを持つ）に対する複数の操作を1つの操作に統合します。この機能は`syncer.compact`で有効になります。
-    2. [因果関係](#causality) : レプリケーションの同時実行性を向上させるために、異なるレコード (異なる主キーを持つ) に対して競合検出を実行します。
+    2. [Causality](#causality) : レプリケーションの同時実行性を向上させるために、異なるレコード (異なる主キーを持つ) に対して競合検出を実行します。
     3. [Merger](#merger) : 複数のbinlogイベントを 1つの DML文にマージします。この機能は`syncer.multiple-rows`で有効になります。
 
 4. DML をダウンストリームに実行します。
@@ -56,7 +56,7 @@ syncers:                            # The configuration parameters of the sync p
     compact: true
 ```
 
-### 因果関係 {#causality}
+### Causality {#causality}
 
 MySQL binlogのシーケンシャルレプリケーションモデルでは、 binlogイベントはbinlogの順序に従って複製される必要があります。このレプリケーションモデルは、高い QPS と低いレプリケーションレイテンシーという要件を満たすことができません。また、 binlogに関連するすべての操作で競合が発生するわけではないため、競合が発生しない場合はシーケンシャルレプリケーションは不要です。
 
