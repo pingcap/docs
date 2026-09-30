@@ -8,6 +8,28 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## September 29, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium adds query latency count threshold alerts.
+
+        TiDB Cloud Premium now provides three built-in alert rules that notify you when more than 20 SQL statements exceed a latency threshold of 256 ms, 512 ms, or 4096 ms within one minute. These alerts help you detect periods with unusually high numbers of slow SQL statements.
+
+        For more information, see [TiDB Cloud Built-in Alerting](https://docs.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium).
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated supports cross-region AWS PrivateLink connections.
+
+        With this feature, you can create an AWS interface endpoint in one region and privately connect it to a TiDB Cloud Dedicated cluster in another region. Cross-region connections use the same connection string.
+
+        Currently, this feature is available upon request. A cross-region PrivateLink service fee applies per added region, and removing a region does not affect existing connections. To request this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+        For more information, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections/).
+
 ## September 22, 2026
 
 **General changes**
