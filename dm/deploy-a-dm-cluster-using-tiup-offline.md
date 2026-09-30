@@ -29,7 +29,7 @@ summary: TiUPを使用して DM クラスターをオフラインでデプロイ
         which tiup
         ```
 
-- TiUPを使ってミラーを引き出す
+- TiUPを使ってミラーをプルする
 
     1. インターネットにアクセスできるマシンで必要なコンポーネントを取得します。
 
@@ -171,7 +171,7 @@ dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/
 tiup dm display dm-test
 ```
 
-予想される出力には、インスタンス ID、ロール、ホスト、リスニングポート、ステータス (クラスターはまだ起動されていないため、ステータス`inactive` `Down`です)、および`dm-test`クラスターのディレクトリ情報が含まれます。
+予想される出力には、インスタンス ID、ロール、ホスト、リスニングポート、ステータス (クラスターはまだ起動されていないため、ステータスは`Down`/`inactive`です)、および`dm-test`クラスターのディレクトリ情報が含まれます。
 
 ## ステップ7: クラスターを起動する {#step-7-start-the-cluster}
 

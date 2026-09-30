@@ -5,7 +5,7 @@ summary: DM ブロックおよび許可リスト機能の使用方法を学習�
 
 # TiDB データ移行のブロックリストと許可リスト {#tidb-data-migration-block-and-allow-lists}
 
-TiDB Data Migration (DM) を使用してデータを移行する場合、ブロックリストと許可リストを構成して、一部のデータベースまたは一部のテーブルのすべての操作をフィルター処理したり、一部の操作のみを移行したりできます。
+TiDB Data Migration (DM) を使用してデータを移行する場合、ブロックリストと許可リストを構成して、一部のデータベースまたは一部のテーブルのすべての操作をフィルタリングしたり、それらのみを移行したりできます。
 
 ## ブロックリストと許可リストを設定する {#configure-the-block-and-allow-lists}
 
@@ -42,9 +42,9 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 ## パラメータの説明 {#parameter-descriptions}
 
-- `do-dbs` : MySQL の[`replicate-do-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様に、移行するスキーマのリストを許可します。
+- `do-dbs` : MySQL の[`replicate-do-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様に、移行するスキーマの許可リストです。
 - `ignore-dbs` : 移行するスキーマのブロックリスト (MySQL の[`replicate-ignore-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-db)に類似)。
-- `do-tables` : 移行するテーブルのリストを許可します（MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
+- `do-tables` : 移行するテーブルの許可リストです（MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
 - `ignore-tables` : 移行対象テーブルのブロックリスト（MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
 
 上記のパラメータの値が`~`文字で始まる場合、その値の以降の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメータは、スキーマ名またはテーブル名を一致させるために使用できます。
@@ -58,39 +58,39 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 >
 > DM と MySQL では、ブロックリストと許可リストのフィルタリング ルールが次の点で異なります。
 >
-> - MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)ワイルドカード文字をサポートしています。DMでは、一部のパラメータ値は`~`で始まる正規表現を直接サポートしています。
+> - MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)はワイルドカード文字をサポートしています。DMでは、一部のパラメータ値は`~`で始まる正規表現を直接サポートしています。
 > - DMは現在、 `ROW`形式のバイナリログのみをサポートしており、 `STATEMENT`形式と`MIXED`形式のバイナリログはサポートしていません。そのため、DMのフィルタリングルールはMySQLの`ROW`形式のフィルタリングルールに対応しています。
 > - MySQLは、DDL文の`USE`のセクションに明示的に指定されたデータベース名のみに基づいてDDL文を判別します。DMは、まずDDL文のデータベース名セクションに基づいて文を判別します。DDL文にそのようなセクションが含まれていない場合、DMは`USE`セクションに基づいて文を判別します。判別対象のSQL文が`USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`で、MySQLに`replicate-do-db=test_db_1`が設定され、DMに`do-dbs: ["test_db_1"]`が設定されているとします。この場合、このルールはDMにのみ適用され、MySQLには適用されません。
 
-`test`テーブルのフィルタリング プロセス`t`は次のとおりです。
+`test`.`t`テーブルのフィルタリング プロセスは次のとおりです。
 
 1. **スキーマ**レベルでフィルターします。
 
     - `do-dbs`が空でない場合は、 `do-dbs`に一致するスキーマが存在するかどうかを確認します。
 
         - はいの場合は、**テーブル**レベルでフィルタリングを続行します。
-        - そうでない場合は、 `test` 。 `t` 。
+        - そうでない場合は、 `test`.`t`をフィルタリングします。
 
     - `do-dbs`が空で`ignore-dbs`が空でない場合は、 `ignore-dbs`に一致するスキーマが存在するかどうかを確認します。
 
-        - はいの場合は、フィルター`test` 。 `t` 。
+        - はいの場合は、 `test`.`t`をフィルタリングします。
         - そうでない場合は、**テーブル**レベルでフィルタリングを続行します。
 
-    - `do-dbs`と`ignore-dbs`両方が空の場合は、**テーブル**レベルでフィルタリングを続行します。
+    - `do-dbs`と`ignore-dbs`の両方が空の場合は、**テーブル**レベルでフィルタリングを続行します。
 
 2. **テーブル**レベルでフィルターします。
 
     1. `do-tables`が空でない場合は、 `do-tables`に一致するテーブルが存在するかどうかを確認します。
 
-        - はいの場合は、 `test` . `t`移行します。
-        - そうでない場合は、 `test` 。 `t` 。
+        - はいの場合は、 `test`.`t`を移行します。
+        - そうでない場合は、 `test`.`t`をフィルタリングします。
 
     2. `ignore-tables`が空でない場合は、 `ignore-tables`に一致するテーブルが存在するかどうかを確認します。
 
-        - はいの場合は、フィルター`test` 。 `t` 。
-        - そうでない場合は、 `test` 。 `t` 。 を移行します。
+        - はいの場合は、 `test`.`t`をフィルタリングします。
+        - そうでない場合は、 `test`.`t`を移行します。
 
-    3. `do-tables`と`ignore-tables`両方が空の場合は、 `test` 。 `t` 。
+    3. `do-tables`と`ignore-tables`の両方が空の場合は、 `test`.`t`を移行します。
 
 > **Note:**
 >
@@ -132,11 +132,11 @@ block-allow-list:  # Use black-white-list if the DM version is earlier than or e
 
 | テーブル                           | フィルタリングするかどうか | なぜフィルタリングするのか                                                                                                                                         |
 | :----------------------------- | :------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `logs` `messages_2016`         | はい            | スキーマ`logs`がいずれの`do-dbs`にも一致しません。                                                                                                                       |
-| `logs` `messages_2017`         | はい            | スキーマ`logs`がいずれの`do-dbs`にも一致しません。                                                                                                                       |
-| `logs` `messages_2018`         | はい            | スキーマ`logs`がいずれの`do-dbs`にも一致しません。                                                                                                                       |
-| `forum_backup_2016` `messages` | はい            | スキーマ`forum_backup_2016`がいずれの`do-dbs`にも一致しません。                                                                                                          |
-| `forum_backup_2017` `messages` | はい            | スキーマ`forum_backup_2017`がいずれの`do-dbs`にも一致しません。                                                                                                          |
-| `forum` `users`                | はい            | <li>スキーマ`forum`が `do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2. スキーマとテーブルが`do-tables`と`ignore-tables`いずれにも一致せず、 `do-tables`が空ではありません。</li>                |
-| `forum` `messages`             | いいえ           | <li>スキーマ`forum`が `do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2. 表`messages` `do-tables`の`db-name: "~^forum.*",tbl-name: "messages"`にあります。</li>           |
-| `forum_backup_2018` `messages` | いいえ           | <li>スキーマ`forum_backup_2018`が `do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2. スキーマとテーブルは`do-tables`中`db-name: "~^forum.*",tbl-name: "messages"`一致します。</li> |
+| `logs`.`messages_2016`         | はい            | スキーマ`logs`がいずれの`do-dbs`にも一致しません。                                                                                                                       |
+| `logs`.`messages_2017`         | はい            | スキーマ`logs`がいずれの`do-dbs`にも一致しません。                                                                                                                       |
+| `logs`.`messages_2018`         | はい            | スキーマ`logs`がいずれの`do-dbs`にも一致しません。                                                                                                                       |
+| `forum_backup_2016`.`messages` | はい            | スキーマ`forum_backup_2016`がいずれの`do-dbs`にも一致しません。                                                                                                          |
+| `forum_backup_2017`.`messages` | はい            | スキーマ`forum_backup_2017`がいずれの`do-dbs`にも一致しません。                                                                                                          |
+| `forum`.`users`                | はい            | 1. スキーマ`forum`が `do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2. スキーマとテーブルが`do-tables`と`ignore-tables`のいずれにも一致せず、 `do-tables`が空ではありません。                 |
+| `forum`.`messages`             | いいえ           | 1. スキーマ`forum`が `do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2. テーブル`messages`は`do-tables`の`db-name: "~^forum.*",tbl-name: "messages"`にあります。            |
+| `forum_backup_2018`.`messages` | いいえ           | 1. スキーマ`forum_backup_2018`が `do-dbs`と一致し、テーブルレベルでフィルタリングを続行します。<br/> 2. スキーマとテーブルは`do-tables`の`db-name: "~^forum.*",tbl-name: "messages"`と一致します。 |

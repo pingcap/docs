@@ -44,7 +44,7 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 
 外部キーのレプリケーションには、以下の制限事項が適用されます。
 
-- セーフモードで`foreign_key_checks=1`を有効にすると、DM は主キーまたは一意キーの値を変更する`UPDATE`文をサポートしていません。DM はエラー`safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`でタスクを一時停止します。このようなステートメントを再現するには、 `safe-mode`を`false`に設定してください。
+- セーフモードで`foreign_key_checks=1`を有効にすると、DM は主キーまたは一意キーの値を変更する`UPDATE`文をサポートしていません。DM はエラー`safe-mode update with foreign_key_checks=1 and PK/UK changes is not supported`でタスクを一時停止します。このようなステートメントをレプリケートするには、 `safe-mode`を`false`に設定してください。
 - `foreign_key_checks=1`の場合、DM はレプリケーション中に外部キー制約を作成、変更、または削除する DDL文をサポートしません。
 - v8.5.7 以降、`foreign_key_checks=1`かつ`worker-count > 1`の場合、DM は外部キーを持つテーブルに対して静的な 1 対 1 のルーティングルールのみをサポートします。このモードでは、DM はタスク内の複数のソーステーブルを同じターゲットテーブルにマッピングするルーティングルールを引き続き拒否します。1 対 1 でないルーティングの場合は、`worker-count`を`1`に設定するか、ルーティングルールを変更してください。
 - `foreign_key_checks=1`の場合、これらのオプションは DML文の境界と外部キー実行のセマンティクスを変更する可能性があるため、DM は`syncer.compact`または`syncer.multiple-rows`をサポートしません。

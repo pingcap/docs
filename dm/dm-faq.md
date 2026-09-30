@@ -63,7 +63,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 ただし、メモリ内の DDL 情報は、次の2つの方法のいずれかで取得されます。
 
-- DM [`alter ghost_table`操作中に gh-ost テーブルを処理する](/dm/feature-online-ddl.md#online-schema-change-gh-ost)および`ghost_table`の DDL 情報を記録します。
+- DM は[`alter ghost_table`操作中に gh-ost テーブルを処理し](/dm/feature-online-ddl.md#online-schema-change-gh-ost)、 `ghost_table`の DDL 情報を記録します。
 - DM-workerが再起動されてタスクが開始されると、DM は`dm_meta.{task_name}_onlineddl`から DDL を読み取ります。
 
 そのため、増分レプリケーションのプロセスにおいて、指定されたPosが`alter ghost_table` DDLをスキップしたにもかかわらず、そのPosがgh-ostのオンラインDDLプロセス中である場合、ghost_tableはメモリまたは`dm_meta.{task_name}_onlineddl`に正しく書き込まれません。このような場合、上記のエラーが返されます。
@@ -118,9 +118,9 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 4. `start-task`を使用してタスクを開始します。
 
-5. `query-status`までタスクの状態を観察します。`syncerBinlog`が `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`を元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
+5. `query-status`でタスクの状態を観察します。`syncerBinlog`が `checkpoint-T`と`checkpoint-S`のうち大きい方の値を超えた場合、 `safe-mode`を元の値に戻し、タスクを再開します。この例では`(mysql-bin.000100, 1234)`です。
 
-## `packet for query is too large. Try adjusting the 'max_allowed_packet' variable` ？ {#how-to-handle-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable-that-occurs-during-the-full-import}
+## フルインポート中に発生するエラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`をどのように処理すればよいですか? {#how-to-handle-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable-that-occurs-during-the-full-import}
 
 以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
 
@@ -179,7 +179,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 
 一部のパネルにデータが表示されないのは正常です。例えば、エラーが報告されていない場合、DDLロックがない場合、またはリレーログ機能が有効になっていない場合、対応するパネルには`No data point`が表示されます。各パネルの詳細については、 [DM モニタリングメトリック](/dm/monitor-a-dm-cluster.md)を参照してください。
 
-## DM v1.0 では、タスクにエラーがある場合にコマンド`sql-skip`一部のステートメントをスキップできないのはなぜですか? {#in-dm-v10-why-does-the-command-sql-skip-fail-to-skip-some-statements-when-the-task-is-in-error}
+## DM v1.0 では、タスクにエラーがある場合にコマンド`sql-skip`が一部のステートメントをスキップできないのはなぜですか? {#in-dm-v10-why-does-the-command-sql-skip-fail-to-skip-some-statements-when-the-task-is-in-error}
 
 まず、 `sql-skip`を実行した後もbinlogの位置が進んでいるかどうかを確認する必要があります。進んでいる場合は、 `sql-skip`が有効になっていることを意味します。このエラーが繰り返し発生する理由は、アップストリームがサポートされていない複数の DDL 文を送信しているためです。`sql-skip -s <sql-pattern>`を使用して、これらの文に一致するパターンを設定できます。
 
@@ -193,7 +193,7 @@ if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to
 
 DM v6.0以降、 `sql-skip`と`handle-error`が`binlog`に置き換えられました。この問題を回避するには、代わりに`binlog`コマンドを使用してください。
 
-## DM がレプリケートされているときに、ダウンストリームに`REPLACE`文が表示され続けるのはなぜですか? {#why-do-replace-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
+## DM がレプリケーションしているときに、ダウンストリームに`REPLACE`文が表示され続けるのはなぜですか? {#why-do-replace-statements-keep-appearing-in-the-downstream-when-dm-is-replicating}
 
 タスクに対して[セーフモード](/dm/dm-glossary.md#safe-mode)が自動的に有効になっているかどうかを確認する必要があります。エラー発生後にタスクが自動的に再開される場合、または高可用性スケジュールが設定されている場合は、タスクの開始または再開から1分以内であるため、セーフモードが有効になっています。
 
@@ -222,7 +222,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
         - `task-mode`を`incremental`に変更します。
         - ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
 
-## 増分タスク中に再起動すると、DM がエラー`ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`はなぜですか? {#why-does-dm-report-the-error-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master_auto_position--1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-if-it-restarts-during-an-incremental-task}
+## 増分タスク中に再起動すると、DM がエラー`ERROR 1236 (HY000): The slave is connecting using CHANGE MASTER TO MASTER_AUTO_POSITION = 1, but the master has purged binary logs containing GTIDs that the slave requires.`を報告するのはなぜですか? {#why-does-dm-report-the-error-error-1236-hy000-the-slave-is-connecting-using-change-master-to-master_auto_position--1-but-the-master-has-purged-binary-logs-containing-gtids-that-the-slave-requires-if-it-restarts-during-an-incremental-task}
 
 このエラーは、ダンプユニットによって出力されたメタデータファイルに記録されたアップストリームbinlogの位置が、完全な移行中に消去されたことを示します。
 
@@ -230,7 +230,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 
 次の方法で設定することで、この問題を事前に回避できます。
 
-1. 移行タスクが完了する前に必要なbinlogファイルが誤って削除されるのを防ぐため、上流のMySQLデータベースの値を`expire_logs_days`に増やしてください。データ量が多い場合は、タスクを高速化するために、DumplingとTiDB Lightningを同時に使用することをお勧めします。
+1. 移行タスクが完了する前に必要なbinlogファイルが誤って削除されるのを防ぐため、上流のMySQLデータベースで`expire_logs_days`の値を増やしてください。データ量が多い場合は、タスクを高速化するために、DumplingとTiDB Lightningを同時に使用することをお勧めします。
 2. このタスクのリレーログ機能を有効にすると、binlogの位置が消去されていても DM がリレーログからデータを読み取ることができます。
 
 ## クラスターがTiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスターの Grafana ダッシュボードに`failed to fetch dashboard`と表示されるのはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-failed-to-fetch-dashboard-if-the-cluster-is-deployed-using-tiup-v130-or-v131}
@@ -352,11 +352,11 @@ query-status test
 
 上記の 1 番目と 2 番目のソリューションで正常にレプリケートできるデータソース (上記の例の`mysql2`など) の場合は、増分タスクを設定するときに、 `subTaskStatus.sync`の`syncerBinlog`と`syncerBinlogGtid`情報を使用して関連する`mysql-instances.meta`を構成します。
 
-## DM v2.0 では、 `heartbeat`機能が有効になっている仮想 IP 環境で DM-workerと MySQL インスタンス間の接続を切り替えるときに、「ハートビート構成が以前使用したものと異なります: serverID が等しくありません」というエラーをどのように処理すればよいですか? {#in-dm-v20-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-heartbeat-feature-enabled}
+## DM v2.0 では、 `heartbeat`機能が有効になっている仮想 IP 環境で DM-workerと MySQL インスタンス間の接続を切り替えるときに、「heartbeat config is different from previous used: serverID not equal」というエラーをどのように処理すればよいですか? {#in-dm-v20-how-do-i-handle-the-error-heartbeat-config-is-different-from-previous-used-serverid-not-equal-when-switching-the-connection-between-dm-workers-and-mysql-instances-in-a-virtual-ip-environment-with-the-heartbeat-feature-enabled}
 
 DM v2.0以降のバージョンでは、 `heartbeat`機能はデフォルトで無効になっています。タスク設定ファイルでこの機能を有効にすると、高可用性機能に支障をきたします。この問題を解決するには、タスク設定ファイルで`enable-heartbeat`を`false`に設定して`heartbeat`機能を無効にし、その後タスク設定ファイルをリロードしてください。DMは、以降のリリースで`heartbeat`機能を強制的に無効にします。
 
-## DM-masterが再起動後にクラスターに参加できず、DM が「埋め込み etcd の開始に失敗しました。RawCause: メンバー xxx はすでにブートストラップされています」というエラーを報告するのはなぜですか? {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
+## DM-masterが再起動後にクラスターに参加できず、DM が「fail to start embed etcd, RawCause: member xxx has already been bootstrapped」というエラーを報告するのはなぜですか? {#why-does-a-dm-master-fail-to-join-the-cluster-after-it-restarts-and-dm-reports-the-error-fail-to-start-embed-etcd-rawcause-member-xxx-has-already-been-bootstrapped}
 
 DM-masterが起動すると、DMはetcd情報をカレントディレクトリに記録します。DM-masterの再起動後にディレクトリが変更されると、DMはetcd情報にアクセスできなくなり、再起動に失敗します。
 
