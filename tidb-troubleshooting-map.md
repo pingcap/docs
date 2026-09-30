@@ -89,7 +89,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     - 原因1：DML文を実行しているTiDBサーバーが`graceful kill`によって停止され、終了準備状態になります。DML文を含むトランザクションの実行時間が1つのDDLリースを超えています。トランザクションのコミット時にエラーが報告されます。
 
-    - 原因2：TiDBサーバーがDML文の実行中にPDまたはTiKVに接続できません。その結果、TiDBサーバーは1つのDDLリース（デフォルトでは`45s`内に新しいスキーマをロードできなかったか、TiDBサーバーが`keep alive`設定でPDから切断されました。
+    - 原因2：TiDBサーバーがDML文の実行中にPDまたはTiKVに接続できません。その結果、TiDBサーバーは1つのDDLリース（デフォルトでは`45s`）内に新しいスキーマをロードできなかったか、TiDBサーバーが`keep alive`設定でPDから切断されました。
 
     - 原因3：TiKVの負荷が高いか、ネットワークがタイムアウトしました。Grafana -> **TiDB**と**TiKV**でノードの負荷を確認してください。
 
@@ -418,7 +418,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
         - 増分レプリケーション処理中に`invalid connection`エラーのみが発生した場合、DM はタスクを自動的に再試行します。
         - DM がリトライしない、またはバージョン問題のために自動的にリトライできない場合 (自動リトライは v1.0.0-rc.1 で導入されました)、 `stop-task`を使用してタスクを停止し、 `start-task`を使用してタスクを再起動します。
 
-- 6.1.5 リレーユニットがエラー`event from * in * diff from passed-in event *`を報告するか、レプリケーションタスクがbinlogの取得または解析に失敗するエラー（例: `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`で中断される。
+- 6.1.5 リレーユニットがエラー`event from * in * diff from passed-in event *`を報告するか、レプリケーションタスクがbinlogの取得または解析に失敗するエラー（例: `get binlog error ERROR 1236 (HY000) and binlog checksum mismatch, data may be corrupted returned`）で中断される。
 
     - DMがリレーログを取得するプロセス、または増分レプリケーションのプロセス中に、アップストリームのbinlogファイルのサイズが4GBを超えると、次の2つのエラーが発生する可能性があります。
 

@@ -593,7 +593,7 @@ TiCDC は、キーと値の両方を Debezium 形式でエンコードして、D
 | `payload.source.table` | String      | イベントが発生するテーブルの名前。                                                                                                                |
 | `schema.fields`        | JSON   | ペイロード内の各フィールドの型情報。変更前後の行データのスキーマ情報を含みます。 |
 | `schema.fields[1].fields[n].tidb_type` | String | `payload.after` 内の各カラムの TiDB 型。このフィールドは `enable-tidb-extension = true` の場合にのみ存在します。 |
-| `schema.name`              | String      | スキーマの名前（形式は`"{cluster-name}.{schema-name}.{table-name}.Envelope"` 。                                                              |
+| `schema.name`              | String      | スキーマの名前（形式は`"{cluster-name}.{schema-name}.{table-name}.Envelope"`）。                                                              |
 | `schema.optional`          | Boolean   | フィールドがオプションかどうかを示します。 `true`の場合、フィールドはオプションです。                                                                                   |
 | `schema.type`              | String      | フィールドのデータ型。                                                                                                                      |
 

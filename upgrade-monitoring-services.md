@@ -36,7 +36,7 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
 
     > **Tip:**
     >
-    > リンク内の`{version}` TiDBのバージョン番号を示し、 `{arch}`システムのアーキテクチャ（ `amd64`または`arm64`を示します。例えば、 `amd64`アーキテクチャの`v8.5.4`のダウンロードリンクは`https://download.pingcap.com/tidb-community-toolkit-v8.5.4-linux-amd64.tar.gz`です。
+    > リンク内の`{version}`はTiDBのバージョン番号を示し、 `{arch}`はシステムのアーキテクチャ（ `amd64`または`arm64`）を示します。例えば、 `amd64`アーキテクチャの`v8.5.4`のダウンロードリンクは`https://download.pingcap.com/tidb-community-toolkit-v8.5.4-linux-amd64.tar.gz`です。
 
 2. 抽出したファイルで、 `prometheus-v{version}-linux-amd64.tar.gz`を見つけて抽出します。
 
@@ -85,7 +85,7 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
 
     > **Tip:**
     >
-    > リンク内の`{version}` TiDBのバージョン番号を示し、 `{arch}`システムのアーキテクチャ（ `amd64`または`arm64`を示します。例えば、 `amd64`アーキテクチャの`v8.5.4`のダウンロードリンクは`https://download.pingcap.com/tidb-community-toolkit-v8.5.4-linux-amd64.tar.gz`です。
+    > リンク内の`{version}`はTiDBのバージョン番号を示し、 `{arch}`はシステムのアーキテクチャ（ `amd64`または`arm64`）を示します。例えば、 `amd64`アーキテクチャの`v8.5.4`のダウンロードリンクは`https://download.pingcap.com/tidb-community-toolkit-v8.5.4-linux-amd64.tar.gz`です。
 
 2. 抽出したファイルで、 `grafana-v{version}-linux-amd64.tar.gz`を見つけて抽出します。
 

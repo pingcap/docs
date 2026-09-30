@@ -15,7 +15,7 @@ tiup mirror sign <manifest-file> [flags]
 
 `<manifest-file>`は署名するファイルのアドレスであり、次の2つの形式があります。
 
-- HTTPまたはHTTPSで始まるネットワークアドレス（例： `http://172.16.5.5:8080/rotate/root.json`
+- HTTPまたはHTTPSで始まるネットワークアドレス（例： `http://172.16.5.5:8080/rotate/root.json`）
 - ローカルファイルパス（相対パスまたは絶対パス）
 
 ネットワークアドレスの場合、このアドレスは次の機能を提供する必要があります。

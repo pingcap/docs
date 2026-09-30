@@ -170,7 +170,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 - デフォルト値: `false`
 
-#### `region-count-per-span` <span class="version-mark">v8.5.4の新機能）</span> {#region-count-per-span-new-in-v854}
+#### `region-count-per-span` <span class="version-mark">v8.5.4の新機能</span> {#region-count-per-span-new-in-v854}
 
 - [TiCDCの新アーキテクチャ](/ticdc/ticdc-architecture.md)で紹介されました。チェンジフィードの初期化中に、TiCDC はこのパラメーターに従って分割条件を満たすテーブルを分割します。分割後、各サブテーブルには最大で`region-count-per-span`個のリージョンが含まれます。
 - デフォルト値: `100`
@@ -194,7 +194,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 - マッチャーのマッチング構文は、フィルタルールの構文と同じです。
 - ダウンストリーム MQ が Pulsar の場合、 `partition`のルーティングルールが`ts` 、 `index-value` 、 `table` 、または`default`にも指定されていない場合、各 Pulsar メッセージは、キーとして設定した文字列を使用してルーティングされます。たとえば、マッチャーのルーティングルールを文字列`code`として指定した場合、そのマッチャーに一致するすべての Pulsar メッセージは`code`をキーとしてルーティングされます。
 
-#### `column-selectors` <span class="version-mark">v7.5.0の新機能）</span> {#column-selectors-new-in-v750}
+#### `column-selectors` <span class="version-mark">v7.5.0の新機能</span> {#column-selectors-new-in-v750}
 
 - レプリケーション対象とする特定の列を選択します。この設定は、ダウンストリームがKafkaの場合にのみ有効です。
 

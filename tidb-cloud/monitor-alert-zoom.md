@@ -45,7 +45,7 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 
 3. **Apps**の下にある**Incoming Webhook**を見つけて選択するか、上記からメッセージを受信したいチャットチャネルを選択してください。
 
-4. 新しい接続を作成するには、次のコマンドを入力してください。 `${connectionName}`部分を、接続したい名前（例： `tidbcloud-alerts`に置き換えてください。
+4. 新しい接続を作成するには、次のコマンドを入力してください。 `${connectionName}`部分を、接続したい名前（例： `tidbcloud-alerts`）に置き換えてください。
 
     ```shell
     /inc connect ${connectionName}

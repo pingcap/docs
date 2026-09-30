@@ -550,7 +550,7 @@ Kafkaコンシューマーは、外部ストレージ内の大きなメッセー
 
 #### `value`フィールドを外部ストレージにのみ送信する {#send-the-value-field-to-external-storage-only}
 
-バージョン8.4.0以降、TiCDCはKafkaメッセージの`value`フィールドのみを外部ストレージに送信できるようになりました。この機能は、Open Protocol以外のシナリオにのみ適用されます。この機能は、 `claim-check-raw-value`パラメータ（デフォルトは`false`を設定することで制御できます。
+バージョン8.4.0以降、TiCDCはKafkaメッセージの`value`フィールドのみを外部ストレージに送信できるようになりました。この機能は、Open Protocol以外のシナリオにのみ適用されます。この機能は、 `claim-check-raw-value`パラメータ（デフォルトは`false`）を設定することで制御できます。
 
 > **Note:**
 >

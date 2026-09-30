@@ -154,7 +154,7 @@ Titanを無効にするには、オプション`rocksdb.defaultcf.titan.blob-run
 
     > **Note:**
     >
-    > TitanとRocksDBの両方のデータを収容するのに十分なディスク容量がない場合は、デフォルト値の`0.5` （ [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)を使用することをお勧めします。一般的に、使用可能なディスク容量が50%未満の場合は、デフォルト値を使用することをお勧めします。これは、 `discardable-ratio = 1.0`を設定するとRocksDBデータが増加し続けるためです。同時に、Titan内の既存のBLOBファイルをリサイクルするには、そのファイル内のすべてのデータをRocksDBに変換する必要があり、これは時間のかかるプロセスです。ただし、ディスクサイズが十分に大きい場合は、 `discardable-ratio = 1.0`を設定すると、圧縮時にBLOBファイル自体のGCを削減できるため、帯域幅を節約できます。
+    > TitanとRocksDBの両方のデータを収容するのに十分なディスク容量がない場合は、[`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)にデフォルト値の`0.5`を使用することをお勧めします。一般的に、使用可能なディスク容量が50%未満の場合は、デフォルト値を使用することをお勧めします。これは、 `discardable-ratio = 1.0`を設定するとRocksDBデータが増加し続けるためです。同時に、Titan内の既存のBLOBファイルをリサイクルするには、そのファイル内のすべてのデータをRocksDBに変換する必要があり、これは時間のかかるプロセスです。ただし、ディスクサイズが十分に大きい場合は、 `discardable-ratio = 1.0`を設定すると、圧縮時にBLOBファイル自体のGCを削減できるため、帯域幅を節約できます。
 
 2. （オプション）tikv-ctlを使用してフルコンパクションを実行します。このプロセスは大量のI/OとCPUリソースを消費します。
 

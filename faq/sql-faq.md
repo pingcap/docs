@@ -251,7 +251,7 @@ DDL操作がブロックされておらず、各TiDBサーバーがスキーマ�
 
 | DDL操作タイプ                                                                                                                                                   | 推定所要時間                            |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- |
-| 再編成DDL（ `ADD INDEX`など`MODIFY COLUMN` （再編成タイプのデータ変更）                                                                                                        | データ量、システム負荷、DDL パラメータ設定によって異なります。 |
+| 再編成DDL（ `ADD INDEX` 、 `MODIFY COLUMN`など、再編成タイプのデータ変更）                                                                                                        | データ量、システム負荷、DDL パラメータ設定によって異なります。 |
 | 一般DDL（Reorg以外のDDLタイプ）（ `CREATE DATABASE`、 `CREATE TABLE`、 `DROP DATABASE`、 `DROP TABLE`、 `TRUNCATE TABLE`、 `ALTER TABLE ADD`、 `ALTER TABLE DROP`、 `MODIFY COLUMN` （メタデータのみ変更）、 `DROP INDEX`など） | 約1秒                               |
 
 > **Note:**
