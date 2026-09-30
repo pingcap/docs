@@ -172,8 +172,8 @@ For example, you can import a network container that is not created by Terraform
     Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
     ```shell
-    tidbcloud_dedicated_network_container.example: Importing... [id=10423692645683000000,example]
-    tidbcloud_dedicated_network_container.example: Import complete [id=10423692645683000000,example]
+    tidbcloud_dedicated_network_container.example: Importing... [id=1934235512696000000]
+    tidbcloud_dedicated_network_container.example: Import complete [id=1934235512696000000]
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
