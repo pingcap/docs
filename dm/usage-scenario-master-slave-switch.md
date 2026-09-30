@@ -26,21 +26,21 @@ DM-worker が仮想 IP (VIP) を介してアップストリーム MySQL イン�
 
 あるアップストリーム MySQL インスタンス (DM-workerが VIP 経由で接続している場合) を別のアップストリーム MySQL インスタンスに切り替えるには、次の手順を実行します。
 
-1. `query-status`コマンドを使用して、binlogレプリケーションの現在の処理単位が下流に複製したbinlogに対応するGTIDセット（ `syncerBinlogGtid` ）を取得します。これらのセットを`gtid-S`としてマークします。
+1. `query-status`コマンドを使用して、binlogレプリケーションの現在の処理ユニットが下流に複製したbinlogに対応するGTIDセット（ `syncerBinlogGtid` ）を取得します。これらのセットを`gtid-S`としてマークします。
 2. 新しいMySQLインスタンスで`SELECT @@GLOBAL.gtid_purged;`コマンドを使用して、削除されたバイナリログに対応するGTIDセットを取得します。これらのセットを`gtid-P`としてマークします。
 3. 新しいMySQLインスタンスで`SELECT @@GLOBAL.gtid_executed;`コマンドを使用して、正常に実行されたすべてのトランザクションに対応するGTIDセットを取得します。これらのセットに`gtid-E`とマークを付けます。
 4. 以下の条件が満たされていることを確認してください。満たされていない場合、DM-work 接続を新しい MySQL インスタンスに切り替えることはできません。
     - `gtid-S`には`gtid-P`が含まれます。`gtid-P`は空になる場合があります。
     - `gtid-E`には`gtid-S`が含まれます。
 5. `pause-task`を使用すると、データ移行の実行中のすべてのタスクが一時停止されます。
-6. 新しい MySQL インスタンスに直接送信されるように VIP を変更します。
+6. 新しい MySQL インスタンスを指すように VIP を変更します。
 7. 前の移行タスクを再開するには、 `resume-task`を使用します。
 
 ## DM-workerが接続する上流のMySQLインスタンスのアドレスを変更する {#change-the-address-of-the-upstream-mysql-instance-that-dm-worker-connects-to}
 
 DM-worker 設定を変更して、DM-worker をアップストリーム内の新しい MySQL インスタンスに接続するには、次の手順を実行します。
 
-1. `query-status`コマンドを使用して、binlogレプリケーションの現在の処理単位が下流に複製したbinlogに対応するGTIDセット（ `syncerBinlogGtid` ）を取得します。このセットを`gtid-S`としてマークします。
+1. `query-status`コマンドを使用して、binlogレプリケーションの現在の処理ユニットが下流に複製したbinlogに対応するGTIDセット（ `syncerBinlogGtid` ）を取得します。このセットを`gtid-S`としてマークします。
 2. 新しいMySQLインスタンスで`SELECT @@GLOBAL.gtid_purged;`コマンドを使用して、削除されたバイナリログに対応するGTIDセットを取得します。このセットを`gtid-P`としてマークします。
 3. 新しいMySQLインスタンスで`SELECT @@GLOBAL.gtid_executed;`コマンドを使用して、正常に実行されたすべてのトランザクションに対応するGTIDセットを取得します。これらのセットを`gtid-E`としてマークします。
 4. 以下の条件が満たされていることを確認してください。満たされていない場合、DM-work 接続を新しい MySQL インスタンスに切り替えることはできません。

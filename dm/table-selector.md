@@ -9,22 +9,22 @@ summary: データ移行のテーブルルーティング、 binlogイベント�
 
 ## ワイルドカード文字 {#wildcard-character}
 
-テーブルセレクターは`schema-pattern`で次の2つのワイルドカード文字`table-pattern`を使用します。
+テーブルセレクターは、 `schema-pattern` / `table-pattern`で次の2つのワイルドカード文字を使用します。
 
 - アスタリスク文字（ `*` 、"star"とも呼ばれる）
 
-    - `*` 0文字以上の文字に一致します。例えば、 `doc*` `doc`と`document`に一致しますが、 `dodo`は一致しません。
-    - `*`単語の末尾にのみ配置できます。例えば、 `doc*`がサポートされていますが、 `do*c`はサポートされていません。
+    - `*`は0文字以上の文字に一致します。例えば、 `doc*`は`doc`と`document`に一致しますが、 `dodo`は一致しません。
+    - `*`は単語の末尾にのみ配置できます。例えば、 `doc*`がサポートされていますが、 `do*c`はサポートされていません。
 
 - 疑問符（ `?` ）
 
-    `?` 、空文字を除く 1つの文字と一致します。
+    `?`は、空文字を除く 1つの文字と一致します。
 
-## 試合ルール {#match-rules}
+## マッチングルール {#match-rules}
 
 - `schema-pattern`を空にすることはできません。
-- `table-pattern`空でも構いません。空に設定すると、 `schema-pattern`に従って`schema`のみが一致します。
-- `table-pattern`が空でない場合、 `schema` `schema-pattern`に従ってマッチングされ、 `table` `table-pattern`に従ってマッチングされます。 `schema`と`table`両方が正常にマッチングされた場合にのみ、マッチング結果を取得できます。
+- `table-pattern`は空でも構いません。空に設定すると、 `schema-pattern`に従って`schema`のみが一致します。
+- `table-pattern`が空でない場合、 `schema`は`schema-pattern`に従ってマッチングされ、 `table`は`table-pattern`に従ってマッチングされます。 `schema`と`table`の両方が正常にマッチングされた場合にのみ、マッチング結果を取得できます。
 
 ## 使用例 {#usage-examples}
 

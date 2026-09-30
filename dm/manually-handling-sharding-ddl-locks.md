@@ -153,7 +153,7 @@ shard-ddl-lock unlock test-`shard_db`.`shard_table`
 
 #### 異常なロックの理由 {#the-reason-for-the-abnormal-lock}
 
-`DM-master`シャーディングDDLロックを自動的に解除しようとする前に、すべてのMySQLソースがシャーディングDDLイベントを受信する必要があります（詳細は[シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照）。シャーディングDDLイベントが既に移行プロセス中であり、一部のMySQLソースが削除されて再ロードされない場合（これらのMySQLソースはアプリケーションの要求に応じて削除されています）、すべてのDM-workerがDDLイベントを受信できないため、シャーディングDDLロックを自動的に移行して解除することはできません。
+`DM-master`がシャーディングDDLロックを自動的に解除しようとする前に、すべてのMySQLソースがシャーディングDDLイベントを受信する必要があります（詳細は[シャードマージの原則](/dm/feature-shard-merge-pessimistic.md#principles)を参照）。シャーディングDDLイベントが既に移行プロセス中であり、一部のMySQLソースが削除されて再ロードされない場合（これらのMySQLソースはアプリケーションの要求に応じて削除されています）、すべてのDM-workerがDDLイベントを受信できないため、シャーディングDDLロックを自動的に移行して解除することはできません。
 
 > **Note:**
 >
@@ -226,9 +226,9 @@ MySQLとDMの操作プロセスは次のとおりです。
 
 4. アプリケーションの要求により、 `mysql-replica-02`に対応するデータは下流の TiDB に移行する必要がなくなり、 `mysql-replica-02`が削除されます。
 
-5. `DM-master`の ID が``test-`shard_db`.`shard_table` ``ロックは`mysql-replica-02`の DDL 情報を受信できません。
+5. `DM-master`上の ID が``test-`shard_db`.`shard_table` ``のロックは`mysql-replica-02`の DDL 情報を受信できません。
 
-    - 返される結果`unsynced` by `shard-ddl-lock`には常に`mysql-replica-02`の情報が含まれています。
+    - `shard-ddl-lock`によって返される結果`unsynced`には常に`mysql-replica-02`の情報が含まれています。
 
 6. `shard-ddl-lock unlock`を使用して`DM-master`にリクエストし、DDL ロックをアクティブにロック解除します。
 
@@ -307,7 +307,7 @@ MySQLとDMの操作プロセスは次のとおりです。
 
 ここで、上流と下流のテーブル構造が同じであり、テーブルのマージと移行に対する要求も[一部のMySQLソースが削除されました](#scenario-1-some-mysql-sources-are-removed)の手動ソリューションと同じであるとします。
 
-`DM-master`自動的にロック解除処理を実行すると、オーナー（ `mysql-replica-01` ）はDDLを正常に実行し、移行処理を継続します。しかし、非オーナー（ `mysql-replica-02` ）にDDL操作のスキップをリクエストする処理において、対応するDM-workerが再起動されたため、DM-workerがDDL操作をスキップした後にチェックポイントの更新に失敗します。
+`DM-master`が自動的にロック解除処理を実行すると、オーナー（ `mysql-replica-01` ）はDDLを正常に実行し、移行処理を継続します。しかし、非オーナー（ `mysql-replica-02` ）にDDL操作のスキップをリクエストする処理において、対応するDM-workerが再起動されたため、DM-workerがDDL操作をスキップした後にチェックポイントの更新に失敗します。
 
 `mysql-replica-02`に対応するデータ移行サブタスクが復元された後、DM-masterに新しいロックが作成されますが、他の MySQL ソースは DDL 操作を実行またはスキップし、後続の移行を実行しています。
 
