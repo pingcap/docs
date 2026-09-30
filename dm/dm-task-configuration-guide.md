@@ -15,7 +15,7 @@ summary: Data Migration (DM) でデータ移行タスクを構成する方法を
 - データソースを作成するには、 [データソースを作成する](/dm/migrate-data-using-dm.md#step-3-create-data-source)を参照してください。
 - データソース設定ファイルを生成するには、 [ソース設定ファイルの紹介](/dm/dm-source-configuration-file.md)を参照してください。
 
-次の例`mysql-instances`は、データ移行タスクで移行する必要があるデータソースを構成する方法を示しています。
+次の`mysql-instances`の例は、データ移行タスクで移行する必要があるデータソースを構成する方法を示しています。
 
 ```yaml
 ---
@@ -31,7 +31,7 @@ mysql-instances:
 
 ## ダウンストリームTiDBクラスタを構成する {#configure-the-downstream-tidb-cluster}
 
-次の例`target-database`は、データ移行タスクの移行先となるターゲット TiDB クラスターを構成する方法を示しています。
+次の`target-database`の例は、データ移行タスクの移行先となるターゲット TiDB クラスターを構成する方法を示しています。
 
 ```yaml
 ---

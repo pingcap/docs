@@ -24,17 +24,17 @@ DM-worker は、TiDB Data Migration (DM) のコンポーネントであり、DM-
 
 リレーログはオプションであり、デフォルトでは無効になっています。有効にすると、DM-worker は上流 Binlog イベントをローカルディスクに保存してから、Binlog replication 処理ユニットがそれらを読み取ります。長時間実行されるフル移行やブロックされたタスクが上流 Binlog の保持期間を超える可能性がある場合、または同じソースに対する複数のタスクで単一の Binlog ストリームを共有する必要がある場合は、リレーログを有効にしてください。リレーログはディスク、I/O、CPU リソースを消費し、レプリケーションレイテンシーを増加させる可能性があります。設定および運用の詳細については、[データ移行リレーログ](/dm/relay-log.md) を参照してください。
 
-### ダンプ処理装置 {#dump-processing-unit}
+### ダンプ処理ユニット {#dump-processing-unit}
 
 ダンプ処理ユニットは、アップストリームの MySQL/MariaDB から完全なデータをローカルディスクにダンプします。
 
-### ロード処理装置 {#load-processing-unit}
+### ロード処理ユニット {#load-processing-unit}
 
 ロード処理ユニットは、ダンプ処理ユニットのダンプされたファイルを読み取り、これらのファイルを下流の TiDB にロードします。
 
 ### Binlog複製/同期処理ユニット {#binlog-replication-sync-processing-unit}
 
-Binlogログレプリケーション/同期処理ユニットは、上流の MySQL/MariaDB のbinlogイベントまたはリレーログのbinlogイベントを読み取り、これらのイベントを SQL文に変換し、下流の TiDB にこれらの文を適用します。
+Binlogレプリケーション/同期処理ユニットは、上流の MySQL/MariaDB のbinlogイベントまたはリレーログのbinlogイベントを読み取り、これらのイベントを SQL文に変換し、下流の TiDB にこれらの文を適用します。
 
 ## DM-workerに必要な権限 {#privileges-required-by-dm-worker}
 
@@ -159,9 +159,9 @@ GRANT ALL ON dm_meta.* TO 'your_user'@'your_wildcard_of_host';
 
 次の表は、MySQL および 10.5.2 より前の MariaDB バージョンについて、各処理ユニットに必要な最小限の権限を示しています。MariaDB 10.5.2 以降については、前のセクションの権限表を参照してください。
 
-| 処理装置           | 最小限のアップストリーム（MySQL/MariaDB）権限                                                                              | 最小限のダウンストリーム (TiDB) 権限                                                                                                                                                                                | 最小限のシステム権限         |
+| 処理ユニット           | 最小限のアップストリーム（MySQL/MariaDB）権限                                                                              | 最小限のダウンストリーム (TiDB) 権限                                                                                                                                                                                | 最小限のシステム権限         |
 | :------------- | :--------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------- |
-| リレーログ          | `REPLICATION SLAVE` (binlogを読み取る)<br/> `REPLICATION CLIENT` ( `SHOW MASTER STATUS` , `SHOW SLAVE STATUS` ) | ヌル                                                                                                                                                                                                    | ローカルファイルの読み取り/書き込み |
-| ダンプ             | `SELECT`<br/> `RELOAD` (`FLUSH TABLES WITH READ LOCK`)<br/>`PROCESS` (MariaDB のみ、InnoDB メタデータクエリ用)                                            | ヌル                                                                                                                                                                                                    | ローカルファイルを書き込む      |
-| ロード             | ヌル                                                                                                         | `SELECT` (チェックポイント履歴を照会する)<br/> `CREATE` (データベース/テーブルを作成する)<br/> `DELETE` （チェックポイントを削除）<br/> `INSERT` (ダンプデータを挿入)                                                                                     | ローカルファイルの読み取り/書き込み |
+| リレーログ          | `REPLICATION SLAVE` (binlogを読み取る)<br/> `REPLICATION CLIENT` ( `SHOW MASTER STATUS` , `SHOW SLAVE STATUS` ) | NULL                                                                                                                                                                                                    | ローカルファイルの読み取り/書き込み |
+| ダンプ             | `SELECT`<br/> `RELOAD` (`FLUSH TABLES WITH READ LOCK`)<br/>`PROCESS` (MariaDB のみ、InnoDB メタデータクエリ用)                                            | NULL                                                                                                                                                                                                    | ローカルファイルを書き込む      |
+| ロード             | NULL                                                                                                         | `SELECT` (チェックポイント履歴を照会する)<br/> `CREATE` (データベース/テーブルを作成する)<br/> `DELETE` （チェックポイントを削除）<br/> `INSERT` (ダンプデータを挿入)                                                                                     | ローカルファイルの読み取り/書き込み |
 | Binlogレプリケーション | `REPLICATION SLAVE` (binlogを読み取る)<br/> `REPLICATION CLIENT` ( `SHOW MASTER STATUS` , `SHOW SLAVE STATUS` ) | `SELECT` (インデックスと列を表示)<br/> `INSERT` （DML）<br/> `UPDATE` (DML)<br/> `DELETE` （DML）<br/> `CREATE` (データベース/テーブルを作成する)<br/> `DROP` (データベース/テーブルを削除)<br/> `ALTER` （テーブルを変更する）<br/> `INDEX` (インデックスの作成/削除) | ローカルファイルの読み取り/書き込み |

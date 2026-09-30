@@ -46,7 +46,7 @@ cert-allowed-cn = ["dm"]
 
 - ログレベルを指定します。
 - デフォルト値: `info`
-- `fatal` `warn` `info` `error` `debug`
+- 値のオプション: `debug` 、 `info` 、 `warn` 、 `error` 、 `fatal`
 
 #### `log-file` {#log-file}
 

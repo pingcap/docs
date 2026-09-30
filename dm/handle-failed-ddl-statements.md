@@ -31,7 +31,7 @@ summary: TiDB データ移行ツールを使用してデータを移行すると
 
 dmctl を使用して失敗した DDL文を手動で処理する場合、よく使用されるコマンドには`query-status`と`binlog`が含まれます。
 
-### クエリステータス {#query-status}
+### query-status {#query-status}
 
 `query-status`コマンドは、各 MySQL インスタンス内のサブタスクやリレーユニットなどの現在の状態を問い合わせるために使用されます。詳細については、 [クエリステータス](/dm/dm-query-status.md)を参照してください。
 
@@ -73,7 +73,7 @@ Use "dmctl binlog [command] --help" for more information about a command.
 - `inject` : 現在のエラーイベントまたは特定のbinlog位置にDDL文を挿入します。binlog位置の指定については、 `-b, --binlog-pos`を参照してください。
 - `list` : 現在のbinlog位置、または現在のbinlog位置以降の有効な`inject` 、 `skip` 、 `replace`各操作をすべてリストします。binlog位置を指定するには、 `-b, --binlog-pos`を参照してください。
 - `replace` : 特定のbinlog位置にあるDDL文を別のDDL文に置き換えます。binlog位置の指定については、 `-b, --binlog-pos`を参照してください。
-- `revert` : 指定されたbinlog操作において、前の操作が無効であった場合にのみ、 `inject` 、または`replace` `skip`を元に戻します。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
+- `revert` : 指定されたbinlog操作において、前の操作が無効であった場合にのみ、 `inject` 、 `skip` 、または`replace`操作を元に戻します。binlogの位置を指定するには、 `-b, --binlog-pos`を参照してください。
 - `skip` : 特定のbinlog位置にあるDDL文をスキップします。binlog位置の指定については、 `-b, --binlog-pos`を参照してください。
 
 `binlog`は次のフラグをサポートします:
@@ -571,8 +571,8 @@ ALTER TABLE `db1`.`tbl1` ADD COLUMN new_col INT UNIQUE;
 
 アップストリームにある以下の4つのテーブルを、ダウンストリームにある同じテーブル`` `shard_db`.`shard_table` ``にマージして移行する必要があると仮定します。タスクモードは"pessimistic"です。
 
-- MySQL インスタンス 1 にはスキーマ`shard_db_1`があり、そこには`shard_table_1`と`shard_table_2` 2つのテーブルがあります。
-- MySQL インスタンス 2 にはスキーマ`shard_db_2`があり、そこには`shard_table_1`と`shard_table_2` 2つのテーブルがあります。
+- MySQL インスタンス 1 にはスキーマ`shard_db_1`があり、そこには`shard_table_1`と`shard_table_2`の 2つのテーブルがあります。
+- MySQL インスタンス 2 にはスキーマ`shard_db_2`があり、そこには`shard_table_1`と`shard_table_2`の 2つのテーブルがあります。
 
 初期のテーブルスキーマは次のとおりです。
 
@@ -808,4 +808,4 @@ ALTER TABLE `shard_db_*`.`shard_table_*` ADD COLUMN new_col INT UNIQUE;
 
 ### その他のコマンド {#other-commands}
 
-`binlog`の他のコマンドの使用方法については、上記の`binlog skip`と`binlog replace`例を参照してください。
+`binlog`の他のコマンドの使用方法については、上記の`binlog skip`と`binlog replace`の例を参照してください。
