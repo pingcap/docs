@@ -149,7 +149,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 <CustomContent plan="essential">
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Essentialインスタンスの名前をクリックして、その概要ページに移動します。
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Alert Subscription**をクリックします。
 3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** > **Unsubscribe**をクリックします。
 4. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 
@@ -158,7 +158,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 <CustomContent plan="premium">
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
-2. 左側のナビゲーションペインで、 **Settings** &gt; **Alert Subscription**をクリックします。
+2. 左側のナビゲーションペインで、 **Settings** > **Alert Subscription**をクリックします。
 3. **Alert Subscription**ページで、削除する対象の購読者の行を見つけて、 **...** > **Unsubscribe**をクリックします。
 4. 購読解除を確定するには、 **Unsubscribe**をクリックしてください。
 

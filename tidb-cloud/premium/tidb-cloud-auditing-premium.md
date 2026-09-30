@@ -95,7 +95,7 @@ TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部IDの値を�
 
 2. **Bucket Region**ドロップダウンリストから、バケットが配置されているAWSリージョンを選択します。
 
-3. **Role ARN**フィールドに、[ステップ2. Amazon S3へのアクセスを設定する](#step-2-configure-amazon-s3-access)。
+3. **Role ARN**フィールドに、[ステップ2. Amazon S3へのアクセスを設定する](#step-2-configure-amazon-s3-access)でコピーした Role ARN の値を入力します。
 
 4. **Test Connection and Next**をクリックして、 TiDB Cloudがバケットにアクセスして書き込みできるかどうかを確認します。
 
@@ -166,7 +166,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     - そうでない場合は、以下の手順に従って**Create Role**をクリックしてください。
 
-        1. 役割作成ページで、 **ポリシーエディターに切り替える**をクリックします。
+        1. ロール作成ページで、 **ポリシーエディターに切り替える**をクリックします。
         2. **Principal**で**Cloud Account**を選択し、フィールドに**TiDB Cloud Account Id**を入力します。
         3. **Action**の下にあるドロップダウンリストから**sts:AssumeRole**を選択します。
         4. **Add condition**をクリックし、次のように条件を設定します。
@@ -239,7 +239,7 @@ TiDB Cloudコンソールで、 TiDB CloudアカウントIDを取得した**Data
 
 2. **Bucket Region**フィールドで、バケットが配置されているAlibaba Cloudリージョンを選択します（ TiDB Cloud Premiumインスタンスのリージョンと一致させることをお勧めします）。
 
-3. **Role ARN**フィールドに、[ステップ2. OSSアクセスを設定する](#step-2-configure-oss-access)。
+3. **Role ARN**フィールドに、[ステップ2. OSSアクセスを設定する](#step-2-configure-oss-access)でコピーした Role ARN の値を貼り付けます。
 
 4. **Test Connection**をクリックして、 TiDB CloudがOSSバケットにアクセスして書き込みできるかどうかを確認してください。
 
