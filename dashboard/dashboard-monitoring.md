@@ -140,7 +140,7 @@ Connection Idle Duration indicates the duration of a connection being idle.
 
 - `Parse Duration`: Time consumed in parsing SQL statements
 - `Compile Duration`: Time consumed in compiling the parsed SQL AST to execution plans
-- `Execution Duration`: Time consumed in executing execution plans of SQL statements
+- `Execute Duration`: Time consumed in executing execution plans of SQL statements
 
 All these three metrics include the average duration and the 99th percentile duration in all TiDB instances.
 
