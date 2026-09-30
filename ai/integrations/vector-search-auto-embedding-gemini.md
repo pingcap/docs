@@ -16,15 +16,15 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-gemini/']
 
 Gemini APIキー（BYOK）をお持ちの場合は、 `gemini/`プレフィックスを使用してすべてのGeminiモデルをご利用いただけます。例：
 
-**Gemini埋め込み-001**
+**gemini-embedding-001**
 
 - 名前: `gemini/gemini-embedding-001`
-- 寸法：128～3072（デフォルト：3072）
-- 距離指標：コサイン類似度、L2
+- 次元数：128～3072（デフォルト：3072）
+- 距離指標：コサイン、L2
 - 入力可能なテキストトークンの最大数：2,048
 - 価格：Googleが課金
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 
 利用可能なモデルの完全なリストについては、 [Geminiのドキュメント](https://ai.google.dev/gemini-api/docs/embeddings)を参照してください。
 
@@ -200,7 +200,7 @@ LIMIT 2;
 </div>
 </SimpleTab>
 
-## カスタム埋め込み寸法 {#custom-embedding-dimensions}
+## カスタム埋め込み次元 {#custom-embedding-dimensions}
 
 `gemini-embedding-001`モデルは、マトリョーシカ表現学習 (MRL) を通じて柔軟な次元をサポートしています。埋め込み関数で必要な次元を指定できます。
 

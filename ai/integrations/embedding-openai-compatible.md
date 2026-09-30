@@ -9,7 +9,7 @@ summary: TiDBベクトル検索をOpenAI互換の埋め込みモデルと統合�
 
 > **Note:**
 >
-> 現在、 [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
+> 現在、 [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
 
 ## OpenAI互換の埋め込みサービス {#openai-compatible-embedding-services}
 
@@ -18,7 +18,7 @@ OpenAI Embedding APIは広く利用されているため、多くのプロバイ
 - [Ollama](https://ollama.com/)
 - [vLLM](https://vllm.ai/)
 
-TiDB Python SDK [pytidb](https://github.com/pingcap/pytidb) 、OpenAI 互換の埋め込みサービスと統合するための`EmbeddingFunction`クラスを提供します。
+TiDB Python SDK [pytidb](https://github.com/pingcap/pytidb)は、OpenAI 互換の埋め込みサービスと統合するための`EmbeddingFunction`クラスを提供します。
 
 ## 使用例 {#usage-example}
 

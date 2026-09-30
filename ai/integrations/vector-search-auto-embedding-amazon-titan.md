@@ -14,20 +14,20 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-amazon-titan/']
 
 ## 利用可能なモデル {#available-models}
 
-TiDB Cloud は、次の[Amazon Titan埋め込みモデル](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)ネイティブで提供します。 API キーは必要ありません。
+TiDB Cloud は、次の[Amazon Titan埋め込みモデル](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)をネイティブで提供します。 API キーは必要ありません。
 
 **Amazon Titan テキスト埋め込み V2 モデル**
 
 - 名前: `tidbcloud_free/amazon/titan-embed-text-v2`
-- 寸法: 1024 (デフォルト)、512、256
-- 距離指標：コサイン類似度、L2
+- 次元数: 1024 (デフォルト)、512、256
+- 距離指標：コサイン、L2
 - 対応言語：英語（プレビュー版では100以上の言語に対応）
 - 典型的な使用例：RAG、文書検索、再ランキング、分類
 - 入力可能なテキストトークンの最大数：8,192
 - 入力可能なテキスト文字数：最大50,000文字
 - 価格：無料
 - TiDB Cloudがホストしています: ✅
-- 鍵をご持参ください：❌
+- Bring Your Own Key：❌
 
 このモデルの詳細については、 [Amazon Bedrock のドキュメント](https://docs.aws.amazon.com/bedrock/latest/userguide/titan-embedding-models.html)を参照してください。
 

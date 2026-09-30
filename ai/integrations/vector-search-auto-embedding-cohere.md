@@ -19,38 +19,38 @@ TiDB Cloud は、次の[Cohere](https://cohere.com/)埋め込みモデルをネ�
 **Cohere Embed v3 モデル**
 
 - 名前: `tidbcloud_free/cohere/embed-english-v3`
-- 寸法: 1024
-- 距離指標：コサイン類似度、L2
+- 次元数: 1024
+- 距離指標：コサイン、L2
 - 言語：英語
 - 入力可能なテキストトークンの最大数：512個（1トークンあたり約4文字）
 - 入力可能なテキスト文字数：最大2,048文字
 - 価格：無料
 - TiDB Cloudがホストしています: ✅ `tidbcloud_free/cohere/embed-english-v3`
-- 鍵をご持参ください：✅ `cohere/embed-english-v3.0`
+- Bring Your Own Key：✅ `cohere/embed-english-v3.0`
 
 **Cohere Multilingual Embed v3 モデル**
 
 - 名前: `tidbcloud_free/cohere/embed-multilingual-v3`
-- 寸法: 1024
-- 距離指標：コサイン類似度、L2
+- 次元数: 1024
+- 距離指標：コサイン、L2
 - 対応言語：100以上の言語
 - 入力可能なテキストトークンの最大数：512個（1トークンあたり約4文字）
 - 入力可能なテキスト文字数：最大2,048文字
 - 価格：無料
 - TiDB Cloudがホストしています: ✅ `tidbcloud_free/cohere/embed-multilingual-v3`
-- 鍵をご持参ください：✅ `cohere/embed-multilingual-v3.0`
+- Bring Your Own Key：✅ `cohere/embed-multilingual-v3.0`
 
 あるいは、独自のCohere APIキー（BYOK）をお持ちの場合は`cohere/`プレフィックスを使用してすべてのCohereモデルをご利用いただけます。例：
 
 **Cohere Embed v4 モデル**
 
 - 名前: `cohere/embed-v4.0`
-- 寸法：256、512、1024、1536（デフォルト）
-- 距離指標：コサイン類似度、L2
+- 次元数：256、512、1024、1536（デフォルト）
+- 距離指標：コサイン、L2
 - 入力可能なテキストトークンの最大数：128,000
 - 価格：Cohereが請求
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 
 Cohere モデルの完全なリストについては、 [Cohereのドキュメント](https://docs.cohere.com/docs/cohere-embed)を参照してください。
 
@@ -299,7 +299,7 @@ LIMIT 2;
 
 ## オプション（BYOK） {#options-byok}
 
-[Cohereの埋め込みオプション](https://docs.cohere.com/v2/reference/embed)は`EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
+すべての[Cohereの埋め込みオプション](https://docs.cohere.com/v2/reference/embed)は`EMBED_TEXT()`関数の`additional_json_options`パラメータを介してサポートされます。
 
 **例：検索操作と挿入操作で異なる`input_type`を指定する**
 

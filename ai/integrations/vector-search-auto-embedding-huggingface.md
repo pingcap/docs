@@ -18,14 +18,14 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-huggingface/']
 
 便宜上、以下のセクションではいくつかの人気モデルを例として使用します。利用可能なモデルの全リストについては、 [Hugging Face モデル](https://huggingface.co/models?library=sentence-transformers&inference_provider=hf-inference&sort=trending)を参照してください。なお、すべてのモデルがHugging Face Inference APIで利用できるわけではなく、また正常に動作するとは限りません。
 
-## 多言語対応E5ラージ {#multilingual-e5-large}
+## multilingual-e5-large {#multilingual-e5-large}
 
 - 名前: `huggingface/intfloat/multilingual-e5-large`
-- 寸法: 1024
-- 距離指標：コサイン類似度、L2
+- 次元数: 1024
+- 距離指標：コサイン、L2
 - 価格：Hugging Faceによる課金
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 - プロジェクトホームページ： [https://huggingface.co/intfloat/multilingual-e5-large](https://huggingface.co/intfloat/multilingual-e5-large)
 
 例：
@@ -65,11 +65,11 @@ LIMIT 2;
 ## bge-m3 {#bge-m3}
 
 - 名前: `huggingface/BAAI/bge-m3`
-- 寸法: 1024
-- 距離指標：コサイン類似度、L2
+- 次元数: 1024
+- 距離指標：コサイン、L2
 - 価格：Hugging Faceによる課金
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 - プロジェクトホームページ： [https://huggingface.co/BAAI/bge-m3](https://huggingface.co/BAAI/bge-m3)
 
 ```sql
@@ -107,11 +107,11 @@ LIMIT 2;
 ## all-MiniLM-L6-v2 {#all-minilm-l6-v2}
 
 - 名前: `huggingface/sentence-transformers/all-MiniLM-L6-v2`
-- 寸法: 384
-- 距離指標：コサイン類似度、L2
+- 次元数: 384
+- 距離指標：コサイン、L2
 - 価格：Hugging Faceによる課金
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 - プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
 
 例：
@@ -151,11 +151,11 @@ LIMIT 2;
 ## all-mpnet-base-v2 {#all-mpnet-base-v2}
 
 - 名前: `huggingface/sentence-transformers/all-mpnet-base-v2`
-- 寸法: 768
-- 距離指標：コサイン類似度、L2
+- 次元数: 768
+- 距離指標：コサイン、L2
 - 価格：Hugging Faceによる課金
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 - プロジェクトホームページ： [https://huggingface.co/sentence-transformers/all-mpnet-base-v2](https://huggingface.co/sentence-transformers/all-mpnet-base-v2)
 
 ```sql
@@ -197,12 +197,12 @@ LIMIT 2;
 > このモデルでは、Hugging Face Inference APIが不安定になる可能性があります。
 
 - 名前: `huggingface/Qwen/Qwen3-Embedding-0.6B`
-- 寸法: 1024
-- 距離指標：コサイン類似度、L2
+- 次元数: 1024
+- 距離指標：コサイン、L2
 - 入力可能なテキストトークンの最大数：512
 - 価格：Hugging Faceによる課金
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 - プロジェクトホームページ： [https://huggingface.co/Qwen/Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B)
 
 ```sql
