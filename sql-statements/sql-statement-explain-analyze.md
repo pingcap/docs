@@ -154,7 +154,7 @@ prepare:109.616µs, check_insert:{total_time:1.431678ms, mem_insert_time:667.878
 The `IndexJoin` operator has 1 outer worker and N inner workers for concurrent execution. The join result preserves the order of the outer table. The detailed execution process is as follows:
 
 1. The outer worker reads N outer rows, then wraps it into a task, and sends it to the result channel and the inner worker channel.
-2. The inner worker receives the task, build key ranges from the task, and fetches inner rows according to the key ranges. It then builds the inner row hash table.
+2. The inner worker receives the task, builds key ranges from the task, and fetches inner rows according to the key ranges. It then builds the inner row hash table.
 3. The main `IndexJoin` thread receives the task from the result channel and waits for the inner worker to finish handling the task.
 4. The main `IndexJoin` thread joins each outer row by looking up to the inner rows' hash table.
 
@@ -169,8 +169,8 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
     - `concurrency`: The number of concurrent inner workers.
     - `task`: The total number of tasks processed by the inner worker.
     - `construct`: The preparation time before the inner worker reads the inner table rows corresponding to the task.
-    - `fetch`: The total time consumed for it takes for the inner worker to read inner table rows.
-    - `Build`: The total time consumed for it takes for the inner worker to construct the hash table of the corresponding inner table rows.
+    - `fetch`: The total time it takes for the inner worker to read inner table rows.
+    - `Build`: The total time it takes for the inner worker to construct the hash table of the corresponding inner table rows.
 - `probe`: The total time consumed by the main `IndexJoin` thread to perform join operations with the hash table of the outer table rows and the inner table rows.
 
 ### IndexHashJoin
