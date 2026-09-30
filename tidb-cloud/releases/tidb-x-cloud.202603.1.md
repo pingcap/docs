@@ -11,7 +11,7 @@ summary: Learn about the features for the TiDB-X-CLOUD.202603.1 kernel.
 
 **TiDB X kernel version**: `TiDB-X-CLOUD.202603.1`
 
-Starting from July 16, 2026, the default kernel version of newly created {{{ .premium }}} instances is `TiDB-X-CLOUD.202603.1`.
+Starting from July 16, 2026, the default kernel version of newly created {{{ .essential }}} and {{{ .premium }}} instances is `TiDB-X-CLOUD.202603.1`.
 
 In `TiDB-X-CLOUD.202603.1`:
 
