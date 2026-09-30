@@ -196,7 +196,7 @@ cd tidb-java-hibernate-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL` `false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
 
 3. `env.sh`ファイルを保存します。
 
@@ -260,7 +260,7 @@ public SessionFactory getSessionFactory() {
 }
 ```
 
-この関数を使用する際は、 `${your_entity_class}`独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスを使用する場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の 1つにすぎません。設定で問題が発生した場合、または Hibernate についてさらに詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
+この関数を使用する際は、 `${your_entity_class}`を独自のデータエンティティクラスに置き換える必要があります。複数のエンティティクラスを使用する場合は、それぞれに`.addAnnotatedClass(${your_entity_class})`ステートメントを追加する必要があります。上記の関数は、Hibernate を設定する方法の 1つにすぎません。設定で問題が発生した場合、または Hibernate についてさらに詳しく知りたい場合は、 [Hibernateの公式ドキュメント](https://hibernate.org/orm/documentation)を参照してください。
 
 ### データを挿入または更新する {#insert-or-update-data}
 
@@ -270,7 +270,7 @@ try (Session session = sessionFactory.openSession()) {
 }
 ```
 
-詳細については、[データを挿入する](/develop/dev-guide-insert-data.md)[データの更新](/develop/dev-guide-update-data.md)を参照してください。
+詳細については、[データを挿入する](/develop/dev-guide-insert-data.md)と[データの更新](/develop/dev-guide-update-data.md)を参照してください。
 
 ### クエリデータ {#query-data}
 
@@ -315,7 +315,7 @@ SET GLOBAL tidb_skip_isolation_level_check=1;
 
 > **Note:**
 >
-> コミュニティが管理する`TiDBDialect` `SERIALIZABLE`分離レベルを必要とする機能をスキップすることで、この動作を自動的に処理します。
+> コミュニティが管理する`TiDBDialect`は、 `SERIALIZABLE`分離レベルを必要とする機能をスキップすることで、この動作を自動的に処理します。
 
 ### `CHECK`制約 {#check-constraints}
 
@@ -333,11 +333,11 @@ SET GLOBAL tidb_enable_check_constraint=ON;
 
 - Hibernate の使用法の詳細については[Hibernateのドキュメント](https://hibernate.org/orm/documentation)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 - Java開発者向けのコース[JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212)を通じて学習します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

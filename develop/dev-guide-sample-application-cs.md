@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-cs/','/ja/tidb/dev/dev-g
 
 # C#を使用してTiDBに接続する {#connect-to-tidb-with-c}
 
-C#（「シーシャープ」と発音）は、Microsoftが開発した.NETファミリーのプログラミング言語の1つです。他の.NET言語には、VB.NETとF#があります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、MySQLプロトコルを使用してC#アプリケーションをTiDBに接続します。これは、TiDBが[MySQLと互換性あり](/mysql-compatibility.md)高いためです。 ありがとうございます。
+C#（「シーシャープ」と発音）は、Microsoftが開発した.NETファミリーのプログラミング言語の1つです。他の.NET言語には、VB.NETとF#があります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、MySQLプロトコルを使用してC#アプリケーションをTiDBに接続します。これは、TiDBが[MySQLとの互換性](/mysql-compatibility.md)が高いためです。
 
 .NETはWindowsで広く利用されていますが、macOSやLinuxでも利用可能です。どのプラットフォームでもコマンドやコードはほぼ同じで、プロンプトやファイルパスにわずかな違いがあるだけです。
 
@@ -14,7 +14,7 @@ C#（「シーシャープ」と発音）は、Microsoftが開発した.NETフ�
 
 - [.NET 9.0 SDK](https://dotnet.microsoft.com/en-us/download)をダウンロードしてください。
 - このチュートリアルでは`dotnet`コマンドラインツールを使用します。あるいは、Visual Studio Code IDE を使用して C# コードを操作することもできます。
-- このチュートリアルを完了するには、TiDB インスタンスへのアクセスが必要です。TiDB Cloud上の[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)インスタンスまたは[TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`を使用して起動した TiDB Self-Managed クラスターを使用できます。
+- このチュートリアルを完了するには、TiDB インスタンスへのアクセスが必要です。TiDB Cloud上の[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)インスタンスまたは[TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier/#tidb-cloud-dedicated)クラスター、あるいは`tiup playground`を使用して起動したものなどの TiDB Self-Managed クラスターを使用できます。
 
 ## ステップ1. コンソールプロジェクトを設定する {#step-1-set-up-a-console-project}
 
@@ -98,7 +98,7 @@ public class Tutorial1
 }
 ```
 
-これは、指定されたIPアドレスとポート番号のTiDBインスタンスに接続します。TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート番号、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)で提供されている詳細情報に置き換えてください。 。
+これは、指定されたIPアドレスとポート番号のTiDBインスタンスに接続します。TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート番号、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)で提供されている詳細情報に置き換えてください。
 
 このコードはデータベースに接続し、そのバージョンを出力後、 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)を使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にその結果を出力。
 

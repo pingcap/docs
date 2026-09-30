@@ -195,11 +195,11 @@ npm install
     {"statusCode":200,"body":"{\"results\":[{\"Hello World\":\"Hello World\"}]}"}
     ```
 
-接続が成功したことを確認したら、[次のセクション](#deploy-the-aws-lambda-function)セクションに従って AWS Lambda 関数をデプロイできます。
+接続が成功したことを確認したら、[次のセクション](#deploy-the-aws-lambda-function)に従って AWS Lambda 関数をデプロイできます。
 
 ## AWS Lambda関数をデプロイ {#deploy-the-aws-lambda-function}
 
-AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS Lambdaコンソール](#web-console-deployment)プラグインのいずれかを使用してデプロイできます。
+AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS Lambdaコンソール](#web-console-deployment)のいずれかを使用してデプロイできます。
 
 ### SAM CLIの導入（推奨） {#sam-cli-deployment-recommended}
 
@@ -222,7 +222,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
         TIDB_PASSWORD: {password}
     ```
 
-4. AWS 環境変数を設定します ( [短期資格](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-short-term.html)を参照)。
+4. AWS 環境変数を設定します ( [短期認証情報](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-short-term.html)を参照)。
 
     ```bash
     export AWS_ACCESS_KEY_ID={your_access_key_id}
@@ -277,7 +277,7 @@ AWS Lambda関数は、 [SAM CLI](#sam-cli-deployment-recommended)または[AWS L
     # dist/index.zip
     ```
 
-2. [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home#/functions)コンソールにアクセスしてください。
+2. [AWS Lambdaコンソール](https://console.aws.amazon.com/lambda/home#/functions)にアクセスしてください。
 
 3. [Lambda関数の作成](https://docs.aws.amazon.com/lambda/latest/dg/lambda-nodejs.html)の手順に従って、Node.js Lambda 関数を作成します。
 
@@ -359,7 +359,7 @@ console.log(rows[0]);
 
 ### データの更新 {#update-data}
 
-以下のクエリは、 `50`の ID を持つ`50`に`Player`コインと`1`の商品を追加します。
+以下のクエリは、 ID が`1`の`Player`に`50`コインと`50`商品を追加します。
 
 ```typescript
 const [rsh] = await pool.query(
@@ -373,7 +373,7 @@ console.log(rsh.affectedRows);
 
 ### データを削除する {#delete-data}
 
-以下のクエリは、IDが`Player`である`1`レコードを削除します。
+以下のクエリは、IDが`1`である`Player`レコードを削除します。
 
 ```typescript
 const [rsh] = await pool.query('DELETE FROM players WHERE id = ?;', [1]);
@@ -387,19 +387,19 @@ console.log(rsh.affectedRows);
 - [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理することで、接続の頻繁な確立と切断によって発生するパフォーマンスのオーバーヘッドを削減できます。
 - SQL インジェクションを回避するには、 [プリペアドステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
 - 複雑な SQL文があまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
-- アプリケーション用の RESTful API を構築するには、 [AWS LambdaをAPI Gatewayで使用する](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)お勧めします。
+- アプリケーション用の RESTful API を構築するには、 [AWS LambdaをAPI Gatewayで使用する](https://docs.aws.amazon.com/lambda/latest/dg/services-apigateway.html)ことをお勧めします。
 - TiDB Cloud Starterと AWS Lambda を使用した高性能アプリケーションの設計については、 [このブログ](https://aws.amazon.com/blogs/apn/designing-high-performance-applications-using-serverless-tidb-cloud-and-aws-lambda/)を参照してください。
 
 ## 次のステップ {#next-steps}
 
-- AWS Lambda関数でTiDBを使用する方法の詳細については、 [TiDB-Lambda統合/aws-lambda-bookstoreデモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)ご覧ください。また、AWS API Gatewayを使用して、アプリケーション用のRESTful APIを構築することもできます。
-- `mysql2`の使用法について詳しくは、 [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)ご覧ください。
-- AWS Lambda の使用方法の詳細については[AWS `Lambda`の開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)ご覧ください。
+- AWS Lambda関数でTiDBを使用する方法の詳細については、 [TiDB-Lambda統合/aws-lambda-bookstoreデモ](https://github.com/pingcap/TiDB-Lambda-integration/blob/main/aws-lambda-bookstore/README.md)をご覧ください。また、AWS API Gatewayを使用して、アプリケーション用のRESTful APIを構築することもできます。
+- `mysql2`の使用法について詳しくは、 [`mysql2`のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)をご覧ください。
+- AWS Lambda の使用方法の詳細については[AWS `Lambda`の開発者ガイド](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)をご覧ください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

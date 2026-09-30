@@ -6,9 +6,9 @@ aliases: ['/ja/tidb/stable/dev-guide-playground-gitpod/','/ja/tidbcloud/dev-guid
 
 <!-- markdownlint-disable MD029 -->
 
-# GitPod {#gitpod}
+# Gitpod {#gitpod}
 
-[GitPod](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけでブラウザ内で完全な開発環境が得られ、すぐにコードを記述できます。
+[Gitpod](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけでブラウザ内で完全な開発環境が得られ、すぐにコードを記述できます。
 
 Gitpodは、コードを直接記述する開発環境向けのオープンソースKubernetesアプリケーション（GitHubリポジトリアドレス： [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ）です。クラウド上で、タスクごとに最新の自動化開発環境を数秒で構築します。開発環境をコードとして記述し、ブラウザまたはデスクトップIDEから直接、リモートおよびクラウドベースの開発環境を即座に開始できます。
 
@@ -16,7 +16,7 @@ Gitpodは、コードを直接記述する開発環境向けのオープンソ�
 
 1. TiDB アプリケーション開発用のサンプルコード リポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)をフォークします。
 
-2. ブラウザのアドレスバーでサンプルコード リポジトリの URL の前に`https://gitpod.io/#`付けて、Gitpod ワークスペースを起動します。
+2. ブラウザのアドレスバーでサンプルコード リポジトリの URL の前に`https://gitpod.io/#`を付けて、Gitpod ワークスペースを起動します。
 
     - たとえば、 `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java` 。
 
@@ -158,7 +158,7 @@ ports:
 
 `.gitpod.yml`ファイルの設定が完了したら、対応する GitHub リポジトリで最新のコードが利用可能であることを確認します。
 
-`https://gitpod.io/#<YOUR_REPO_URL>`アクセスして、最新のコードが適用された新しい Gitpod ワークスペースを作成します。
+`https://gitpod.io/#<YOUR_REPO_URL>`にアクセスして、最新のコードが適用された新しい Gitpod ワークスペースを作成します。
 
 確立されたすべてのワークスペースについては、 `https://gitpod.io/workspaces`を参照してください。
 

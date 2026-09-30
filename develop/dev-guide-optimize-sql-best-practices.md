@@ -129,7 +129,7 @@ DELETE FROM t;
 
 [インデックスのベストプラクティス](/develop/dev-guide-index-best-practice.md)参照。
 
-### インデックスのベストプラクティスを追加する {#add-index-best-practices}
+### インデックス追加のベストプラクティス {#add-index-best-practices}
 
 TiDBはオンラインのインデックス追加操作をサポートしています。[ADD INDEX](/sql-statements/sql-statement-add-index.md)または[CREATE INDEX](/sql-statements/sql-statement-create-index.md)文でインデックスを追加できます。テーブルへのデータの読み取りと書き込みはブロックされません。以下のシステム変数を変更することで、インデックス追加操作のフェーズ`re-organize`における同時実行性とバッチサイズを調整できます。
 
@@ -143,7 +143,7 @@ SET @@global.tidb_ddl_reorg_worker_cnt = 16;
 SET @@global.tidb_ddl_reorg_batch_size = 4096;
 ```
 
-インデックス追加操作の対象列が頻繁に更新される場合（ `UPDATE` `DELETE` ）、上記の変数の値を増やすと書き込み競合が増加し、オンラインワークロードに影響を与えます。そのため、再試行`INSERT`頻繁に発生するため、インデックス追加操作の完了に時間がかかる可能性があります。このような場合は、オンラインアプリケーションとの書き込み競合を回避するために、上記の変数の値を減らすことをお勧めします。
+インデックス追加操作の対象列が頻繁に更新される場合（ `UPDATE` 、 `INSERT` 、 `DELETE`を含む）、上記の変数の値を増やすと書き込み競合が増加し、オンラインワークロードに影響を与えます。そのため、再試行が繰り返し発生するため、インデックス追加操作の完了に時間がかかる可能性があります。このような場合は、オンラインアプリケーションとの書き込み競合を回避するために、上記の変数の値を減らすことをお勧めします。
 
 ```sql
 SET @@global.tidb_ddl_reorg_worker_cnt = 4;
