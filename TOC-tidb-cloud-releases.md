@@ -14,15 +14,6 @@
   - [2021](/tidb-cloud/releases/release-notes-2021.md)
   - [2020](/tidb-cloud/releases/release-notes-2020.md)
 
-<<<<<<< HEAD
-=======
-## TiDB X KERNEL RELEASE NOTES
-
-- [Kernel Versioning for TiDB Cloud Premium](/tidb-cloud/releases/tidb-cloud-kernel-versioning.md)
-- [TiDB-X-CLOUD.202603.1 Release Notes](/tidb-cloud/releases/tidb-x-cloud.202603.1.md)
-- [TiDB-X-CLOUD.202510.1 Release Notes](/tidb-cloud/releases/tidb-x-cloud.202510.1.md)
-
->>>>>>> 6696674461 (cloud: add tidb-x-cloud.202603.1.md (#23458))
 ## MAINTENANCE NOTIFICATIONS
 
 - [[2024-09-15] TiDB Cloud Console Maintenance Notification](/tidb-cloud/releases/notification-2024-09-15-console-maintenance.md)
