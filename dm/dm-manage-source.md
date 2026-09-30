@@ -63,7 +63,7 @@ Global Flags:
 
 ### Usage example
 
-Use the following `operate-source` command to create a data source:
+Use the following `operate-source` command to create a data source in the DM cluster based on the configuration in `source.yaml`:
 
 {{< copyable "" >}}
 
