@@ -23,7 +23,7 @@ Currently, the `SHOW STATS_HISTOGRAMS` statement returns the following columns:
 | `Correlation` | Pearson correlation coefficient between this column and the integer primary key column, indicating the degree of association between the two columns |
 | `Load_status` | Load status, such as `allEvicted` and `allLoaded` |
 | `Total_mem_usage` | The total memory usage |
-| `Hist_mem_usage` | The historical memory usage |
+| `Hist_mem_usage` | The histogram memory usage |
 | `Topn_mem_usage` | The TopN memory usage |
 | `Cms_mem_usage` | The CMS memory usage |
 
