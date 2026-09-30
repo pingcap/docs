@@ -1,6 +1,11 @@
 ---
 title: Literal Values
+<<<<<<< HEAD
 summary: This article introduces the literal values ​​of TiDB SQL statements.
+=======
+summary: This article introduces the literal values of TiDB SQL statements.
+aliases: ['/docs/dev/literal-values/','/docs/dev/reference/sql/language-structure/literal-values/']
+>>>>>>> 1f191e15a1 (docs: remove stray zero-width-space characters from prose (#23793))
 ---
 
 # Literal Values
@@ -104,7 +109,7 @@ The year value containing only two digits is ambiguous. It is recommended to use
 * If the year value is in the range of `70-99`, it is converted to `1970-1999`.
 * If the year value is in the range of `00-69`, it is converted to `2000-2069`.
 
-For month or day values ​​less than 10, `'2017-8-4'` is the same as `'2017-08-04'`. The same is true for Time. For example, `'2017-08-24 1:2:3'` is the same as `'2017-08-24 01:02:03'`.
+For month or day values less than 10, `'2017-8-4'` is the same as `'2017-08-04'`. The same is true for Time. For example, `'2017-08-24 1:2:3'` is the same as `'2017-08-24 01:02:03'`.
 
 When the date or time value is required, TiDB selects the specified format according to the length of the value:
 
