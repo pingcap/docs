@@ -160,8 +160,8 @@ inner:{total:4.297515932s, concurrency:5, task:17, construct:97.96291ms, fetch:4
     - `concurrency`：内部工作线程数。
     - `task`：内部工作线程处理的任务总数。
     - `construct`：内部工作线程读取对应内部表行之前的准备时间。
-    - `fetch`：内部工作线程读取内部表行的总耗时。
-    - `build`：内部工作线程构建对应内部表行哈希表的总耗时。
+    - `fetch`：内部工作线程读取内部表行所花费的总时间。
+    - `build`：内部工作线程构建对应内部表行哈希表所花费的总时间。
 - `probe`：主线程与内部表行哈希表进行连接的总耗时。
 
 ### IndexHashJoin

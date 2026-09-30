@@ -46,7 +46,7 @@ summary: TiDB 数据库中 ADMIN 的用法概述。
 ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
-上述语句用于重新加载表达式下推黑名单。
+上述语句用于重新加载表达式下推的黑名单。
 
 ```sql
 ADMIN RELOAD opt_rule_blacklist;
@@ -90,7 +90,7 @@ ADMIN CAPTURE BINDINGS;
 ADMIN EVOLVE BINDINGS;
 ```
 
-开启自动绑定功能后，每隔 `bind-info-leave`（默认值为 `3s`）会触发一次 SQL Plan 绑定信息的进化。上述语句用于主动触发该进化过程。
+开启自动绑定功能后，每隔 `bind-info-lease`（默认值为 `3s`）会触发一次 SQL Plan 绑定信息的进化。上述语句用于主动触发该进化过程。
 
 ```sql
 ADMIN RELOAD BINDINGS;
@@ -295,7 +295,7 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
     * `rollback done`：表示操作失败且已完成回滚。
     * `rollingback`：表示操作失败，正在回滚中。
     * `cancelling`：表示操作正在被取消。该状态仅在你使用 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务时出现。
-    * `paused`：表示操作已被暂停。该状态仅在你使用 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 命令暂停 DDL 任务时出现。你可以使用 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 命令恢复 DDL 任务。
+    * `paused`：表示操作已被暂停。该状态仅在你使用 [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 命令暂停 DDL 任务时出现。你可以使用 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 命令恢复 DDL 任务。
 
 ## MySQL 兼容性
 

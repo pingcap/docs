@@ -47,7 +47,7 @@ create_specification:
   | [DEFAULT] COLLATE [=] collation_name
 ```
 
-如果你创建的数据库已存在且未指定 `IF NOT EXISTS`，则会显示错误。
+如果你创建已存在的数据库而未指定 `IF NOT EXISTS`，则会显示错误。
 
 `create_specification` 选项用于指定数据库中的具体 `CHARACTER SET` 和 `COLLATE`。目前，TiDB 仅支持部分字符集和排序规则。详情请参见 [字符集和排序规则支持](/character-set-and-collation.md)。
 

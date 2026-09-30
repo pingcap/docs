@@ -82,6 +82,14 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
     - 如果存在，记录匹配的角色以供后续使用。
     - 如果不存在，点击 **Create role**，选择 **Another AWS account** 作为信任实体类型，然后在 **Account ID** 字段中输入 TiDB Cloud Account ID 的值。接着，选择 **Require External ID** 选项，并在 **External ID** 字段中输入 TiDB Cloud External ID 的值。
 
+    <CustomContent plan="byoc">
+
+    对于 {{{ .byoc }}}，请验证客户创建的 `tidbx-byoc-auditlog-role` IAM 角色是否具有 `tidbcloud.com/allow-dataplane-access=true` 标签。
+
+    如果缺少该标签，请先将其添加到该角色，然后再启用审计日志。如果在添加该标签之前已启用审计日志，请在更新标签后先禁用审计日志，再重新启用。
+
+    </CustomContent>
+
 4. 在 **IAM** > **Access Management** > **Roles** 中，点击上一步中的角色名称进入 **Summary** 页面，然后执行以下步骤：
 
     1. 在 **Permissions** 标签页下，检查之前记录的具有 `s3:PutObject` 只写权限的 policy 是否已附加到该角色。如果没有，选择 **Attach Policies**，搜索所需 policy，然后点击 **Attach Policy**。

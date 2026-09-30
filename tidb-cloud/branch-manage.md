@@ -10,7 +10,7 @@ summary: 了解如何管理 TiDB Cloud 分支。
 ## 所需权限
 
 - 若要[创建分支](#create-a-branch)或[连接到分支](#connect-to-a-branch)，你必须是组织的 `Organization Owner` 角色或目标项目的 `Project Owner` 角色。
-- 若要[查看项目中集群的分支](#create-a-branch)，你必须属于该项目。
+- 若要[查看项目中集群的分支](#view-branches)，你必须属于该项目。
 
 关于权限的更多信息，请参见 [用户角色](/tidb-cloud/manage-user-access.md#user-roles)。
 

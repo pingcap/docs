@@ -44,7 +44,7 @@ Query OK, 0 rows affected (0.00 sec)
 | DATABASE test | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
 | TABLE test.t1 | PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-west-1" FOLLOWERS=4 | INPROGRESS       |
 +---------------+----------------------------------------------------------------------+------------------+
-4 rows in set (0.00 sec)
+3 rows in set (0.00 sec)
 ```
 
 ## MySQL 兼容性

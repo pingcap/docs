@@ -23,7 +23,7 @@ summary: 关于 TiDB 数据库中 SHOW STATS_HISTOGRAMS 的使用概述。
 | `Correlation` | 该列与整数主键列之间的 Pearson 相关系数，表示两列之间的关联程度 |
 | `Load_status` | 加载状态，例如 `allEvicted` 和 `allLoaded` |
 | `Total_mem_usage` | 总内存使用量 |
-| `Hist_mem_usage` | 历史内存使用量 |
+| `Hist_mem_usage` | 直方图内存使用量 |
 | `Topn_mem_usage` | TopN 内存使用量 |
 | `Cms_mem_usage` | CMS 内存使用量 |
 

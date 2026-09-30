@@ -40,7 +40,7 @@ TiDB 启动后，你可以使用 `SET [ SESSION | GLOBAL ] sql_mode='modes'` 语
 | `STRICT_ALL_TABLES` | 对于事务表，在插入无效值后回滚整个事务语句。（完全支持） |
 | `NO_ZERO_IN_DATE` | 严格模式，不接受月份或日期部分为 `0` 的日期。如果使用 `IGNORE` 选项，TiDB 会为类似日期插入 '0000-00-00'。在非严格模式下，接受此类日期但会返回警告。（完全支持）|
 | `NO_ZERO_DATE` | 在严格模式下，不将 '0000-00-00' 作为合法日期使用。你仍然可以通过 `IGNORE` 选项插入零日期。在非严格模式下，接受此类日期但会返回警告。（完全支持）|
-| `ALLOW_INVALID_DATES` | 启用该模式后，系统不会校验所有日期的合法性。只校验月份值在 `1` 到 `12` 之间，日期值在 `1` 到 `31` 之间。该模式仅适用于 `DATE` 和 `DATATIME` 列。所有 `TIMESTAMP` 列都需要完整的合法性校验。（完全支持） |
+| `ALLOW_INVALID_DATES` | 启用该模式后，系统不会校验所有日期的合法性。只校验月份值在 `1` 到 `12` 之间，日期值在 `1` 到 `31` 之间。该模式仅适用于 `DATE` 和 `DATETIME` 列。所有 `TIMESTAMP` 列都需要完整的合法性校验。（完全支持） |
 | `ERROR_FOR_DIVISION_BY_ZERO` | 启用该模式后，在数据变更操作（`INSERT` 或 `UPDATE`）中遇到除以 `0` 时，系统返回错误。<br/> 如果未启用该模式，系统返回警告并使用 `NULL` 代替。（完全支持） |
 | `NO_AUTO_CREATE_USER` | 阻止 `GRANT` 自动创建新用户，除非指定了密码（完全支持）|
 | `HIGH_NOT_PRECEDENCE` | NOT 运算符的优先级使得诸如 `NOT a BETWEEN b AND c` 的表达式被解析为 `NOT (a BETWEEN b AND c)`。在某些旧版本 MySQL 中，该表达式被解析为 `(NOT a) BETWEEN b AND c`。（完全支持） |

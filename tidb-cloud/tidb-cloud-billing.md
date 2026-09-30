@@ -103,19 +103,12 @@ TiDB Cloud 根据你所消耗的资源进行收费。
 
 > **注意：**
 >
-> 你的 **Bills** 数据以及 **Cost Explorer** 或 **Usage Details** CSV 下载中的数据会以不同的粒度进行处理和展示。**Bills** 数据按月结算计算，而 **Cost Explorer** 和 **Usage Details** CSV 下载则提供更细粒度的明细，例如按天、服务、项目、集群或资源划分。因此，由于不同聚合级别的舍入，总金额可能会略有差异。
->
-> **Cost Explorer** 和 **Usage Details** CSV 下载用于使用量和成本分析。如果这些数据源之间存在差异，发票上显示的金额是你最终应支付的金额。
+> - 你的 **Bills** 数据以及 **Cost Explorer** 或 **Usage Details** CSV 下载中的数据会以不同的粒度进行处理和展示。**Bills** 数据按月结算计算，而 **Cost Explorer** 和 **Usage Details** CSV 下载则提供更细粒度的明细，例如按天、服务、项目、集群或资源划分。因此，由于不同聚合级别的舍入，总金额可能会略有差异。
+> - **Cost Explorer** 和 **Usage Details** CSV 下载用于使用量和成本分析。如果这些数据源之间存在差异，发票上显示的金额是你最终应支付的金额。
 
 以下是与存储相关的计费说明：
 
 - **Row-based storage**：TiDB 表默认使用行存储，数据存储在 **TiKV** 中。 <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
-
-- **Row-based storage with IA**：带 Infrequent Access (IA) 的行存储将数据存储在**远程对象存储**中，适用于很少访问但仍需可用于在线查询的数据。 <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
-
-    > **注意：**
-    >
-    > Infrequent Access 目前处于私有预览阶段，仅可按请求提供。
 
 - **Columnar storage**：列存储由 **TiFlash** 引擎提供支持。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 

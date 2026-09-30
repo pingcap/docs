@@ -380,7 +380,7 @@ TiDB Cloud Data Service 会生成代码示例，帮助你调用 endpoint。获�
     - 环境：根据需要选择 **Test Environment** 或 **Online Environment**。**Online Environment** 仅在你部署 endpoint 后可用。
     - 认证方式：选择 **Basic Authentication** 或 **Digest Authentication**。
         - **Basic Authentication** 以 base64 编码文本形式传输 API key。
-        - **Digest Authentication** 以加密形式传输 API key，更加安全。
+        - **Digest Authentication** 不会以明文发送 API key。相反，它会发送根据该 key 和服务器提供的 nonce 计算出的哈希值，因此更加安全。
 
       与 **Basic Authentication** 相比，**Digest Authentication** 的 curl 代码多了一个 `--digest` 选项。
 

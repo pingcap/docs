@@ -93,7 +93,7 @@ TiDB Cloud 提供了一种配置即代码（Configuration as Code，CaC）的方
 | `data_source/cluster.json`     | 更新此文件时，请确保你有权访问链接的 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群。你可以从 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群的 URL 获取其 ID。例如，如果 URL 是 `https://tidbcloud.com/tidbs/1234567891234567890/overview?orgId=<organization-id>`，则该 ID 是 `1234567891234567890`。 |
 | `http_endpoints/config.json`     | 修改端点时，请确保遵循[HTTP 端点配置](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration)中描述的规则。   |
 | `http_endpoints/sql/method-<endpoint-path>.sql`| 要在 `http_endpoints/sql` 目录中添加或删除 SQL 文件，你还需要更新相应的端点配置。 |
-| `datapp_config.json` | 除非你的 `dataapp_config.json` 文件是从另一个 Data App 复制的，并且你想将其更新为当前 Data App 的 ID，否则不要更改此文件中的 `app_id` 字段。否则，由此修改触发的部署将失败。 |
+| `dataapp_config.json` | 除非你的 `dataapp_config.json` 文件是从另一个 Data App 复制的，并且你想将其更新为当前 Data App 的 ID，否则不要更改此文件中的 `app_id` 字段。否则，由此修改触发的部署将失败。 |
 
 有关这些文件中字段配置的更多信息，请参见 [Data App 配置文件](/tidb-cloud/data-service-app-config-files.md)。
 
@@ -120,7 +120,7 @@ TiDB Cloud 提供了一种配置即代码（Configuration as Code，CaC）的方
 2. 在项目的 [**Data Service**](https://tidbcloud.com/project/data-service) 页面上，[创建一个新的 Data App](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)，不要连接到 GitHub。
 3. 启用**自动同步和部署**，[将新的 Data App 连接到 GitHub](#步骤-1-将-data-app-连接到-github)。为新的 Data App 指定目标仓库、分支和目录时，使用包含复制的配置文件的新路径。
 4. 获取新 Data App 的 ID 和名称。你可以在左侧窗格中点击新 Data App 的名称，在右侧窗格的 **Data App 属性**区域中获取 App ID 和名称。
-5. 在 GitHub 上的新路径中，将 `datapp_config.json` 文件中的 `app_id` 和 `app_name` 更新为你获取的 ID 和名称，然后推送更改。
+5. 在 GitHub 上的新路径中，将 `dataapp_config.json` 文件中的 `app_id` 和 `app_name` 更新为你获取的 ID 和名称，然后推送更改。
 
     将文件更改推送到 GitHub 后，TiDB Cloud 将自动使用最新更改部署新的 Data App。
 

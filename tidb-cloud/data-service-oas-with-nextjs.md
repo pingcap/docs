@@ -192,7 +192,7 @@ SELECT * FROM test.repository;
     >    });
     >  ```
     >
-    > 请确保将 `basePath` 替换为你的 Data App 实际的 endpoint 路径。要获取 `${YOUR_REGION}` 和 `{YOUR_DATA_APP_ID}`，请在 endpoint 的 **Properties** 面板中查看 **Endpoint URL**。
+    > 请确保将 `basePath` 替换为你的 Data App 实际的 endpoint 路径。要获取 `${YOUR_REGION}` 和 `${YOUR_DATA_APP_ID}`，请在 endpoint 的 **Properties** 面板中查看 **Endpoint URL**。
 
 ## 步骤 5. 预览你的 Next.js 应用
 

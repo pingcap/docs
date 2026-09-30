@@ -191,17 +191,19 @@
   - [数据应用配置文件](/tidb-cloud/data-service-app-config-files.md)
   - [响应和状态代码](/tidb-cloud/data-service-response-and-status-code.md)
 - 同步数据
-  - [Changefeed 概述](/tidb-cloud/changefeed-overview.md)
+  - [Changefeed](/tidb-cloud/changefeed-overview.md)
   - [到 MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [到 Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [到 Pulsar Sink](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
   - [到 TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
   - [到云存储](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [到 TiDB Cloud Lake](/tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
   - 参考
     - [在 AWS 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [在 Azure 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [在 Google Cloud 中设置自托管 Kafka Private Service Connect](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
     - [为 Changefeed 设置 Private Endpoint](/tidb-cloud/set-up-sink-private-endpoint.md)
+    - [TiDB Cloud Lake 的 Data Pipeline SQL 兼容性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
 - 安全
   - [安全概览](/tidb-cloud/security-overview.md)
   - 身份访问控制
@@ -625,7 +627,7 @@
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
-    - [Connected: Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
+    - [已连接：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)

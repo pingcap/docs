@@ -29,11 +29,11 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 ## 限制
 
 - 只有拥有 `Organization Owner` 或 `Project Owner` 角色的用户才能创建私有终端节点。
-- 私有终端节点和你要连接的 TiDB 集群必须位于同一区域。
+- 默认情况下，私有终端节点和你要连接的 TiDB 集群必须位于同一区域。若要从其他区域进行连接，请为目标节点组允许该区域。更多信息，请参见[通过私有终端节点使用跨区域连接](#use-cross-region-connections-over-a-private-endpoint)。
 
 在大多数场景下，建议优先使用私有终端节点连接而不是 VPC 对等连接。但在以下场景下，你应使用 VPC 对等连接而不是私有终端节点连接：
 
-- 你正在使用 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) 集群在跨区域的源 TiDB 集群和目标 TiDB 集群之间同步数据，以实现高可用。目前，私有终端节点不支持跨区域连接。
+- 你正在使用 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview) 集群在跨区域的源 TiDB 集群和目标 TiDB 集群之间同步数据，以实现高可用，但你的组织尚未启用跨区域连接。如果已启用跨区域连接，且已为目标节点组允许源区域，则可以改用私有终端节点。更多信息，请参见[通过私有终端节点使用跨区域连接](#use-cross-region-connections-over-a-private-endpoint)。
 - 你正在使用 TiCDC 集群将数据同步到下游集群（如 Amazon Aurora、MySQL 和 Kafka），但无法自行维护终端节点服务。
 - 你需要直接连接到 PD 或 TiKV 节点。
 
@@ -69,6 +69,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 >
 > - 如果你想通过 IPv6 连接到集群，请参见[通过私有终端节点使用 IPv6 连接](#use-ipv6-connectivity-over-a-private-endpoint)了解额外的 IPv6 配置。
 > - 对于 2023 年 3 月 28 日之后创建的每个 TiDB Cloud 专属集群，系统会在集群创建后 3 到 4 分钟内自动创建对应的终端节点服务。
+> - 对于跨区域连接，生成命令中的 `${your_region}` 必须是你的 VPC 所在的区域，而不是集群所在的区域。如果你使用 AWS CLI，还需要传入 `--service-region ${your_cluster_region}`。更多信息，请参见[通过私有终端节点使用跨区域连接](#use-cross-region-connections-over-a-private-endpoint)。
 
 如果你看到 `TiDB Private Link Service is ready` 消息，说明对应的终端节点服务已就绪。你可以使用以下信息创建终端节点。
 
@@ -151,8 +152,12 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 如需使用 AWS CLI 启用私有 DNS，请从 **Create Private Endpoint Connection** 页面复制以下 `aws ec2 modify-vpc-endpoint` 命令，并在 AWS CLI 中运行。
 
 ```bash
-aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --private-dns-enabled
+aws ec2 modify-vpc-endpoint --vpc-endpoint-id ${your_vpc_endpoint_id} --region ${your_vpc_region} --private-dns-enabled
 ```
+
+> **Note:**
+>
+> `${your_vpc_region}` 是创建 VPC 终端节点时所在的区域。对于跨区域连接，它指的是 VPC 终端节点所在的区域，而不是 TiDB 集群所在的区域。如果你在错误的区域运行该命令，会因 `InvalidVpcEndpointId.NotFound` 而失败。
 
 或者，你也可以在集群的 **Networking** 页面找到该命令。定位到私有终端节点，在 **Action** 列点击 **...** > **Enable DNS**。
 
@@ -242,6 +247,50 @@ TiDB Cloud Dedicated 支持通过 AWS PrivateLink 进行入站 IPv6 连接。
     ```
 
 然后完成[Step 3](#step-3-create-a-private-endpoint-connection)到[Step 5](#step-5-connect-to-your-tidb-cluster)，以创建私有终端节点连接并通过 IPv6 连接到你的集群。
+
+## 通过私有终端节点使用跨区域连接 {#use-cross-region-connections-over-a-private-endpoint}
+
+默认情况下，私有终端节点及其连接的 TiDB Cloud Dedicated 集群必须位于同一个 AWS 区域。TiDB Cloud Dedicated 也支持跨区域连接，这使你可以在一个区域中创建 VPC 终端节点，并将其连接到另一个区域中的集群。连接字符串和 DNS 的使用方式与同区域连接相同。
+
+> **Note:**
+>
+> 目前，跨区域连接功能仅可按需申请。如需使用此功能，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 并提供你的组织 ID。
+
+在 TiDB Cloud 中，你可以为每个 [TiDB 节点组](/tidb-cloud/tidb-node-group-management.md) 单独配置连接作用域。要从其他区域连接到集群，请为目标节点组允许该区域，然后在你自己的区域中创建 AWS 接口终端节点。
+
+### Step 1. 允许你的 VPC 终端节点所在区域 {#step-1-allow-the-region-of-your-vpc-endpoint}
+
+1. 进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，点击目标集群名称进入其概览页面，然后在左侧导航栏中点击 **Settings** > **Networking**。
+2. 每个 TiDB Cloud Dedicated 集群都有一个默认的 [TiDB 节点组](/tidb-cloud/tidb-node-group-management.md)。如果你的集群有多个节点组，请从右上角的 **TiDB Node Group** 列表中选择目标 TiDB 节点组。
+3. 在 **AWS Private Endpoints** 部分，点击 **Edit**。
+4. 在 **AWS Private Endpoints Connection Settings** 对话框中，为 **Connection Scope** 选择 **Cross-Region**，选择你要允许的区域，然后点击 **Save**。
+
+设置保存后，允许的区域会显示在 **AWS Private Endpoints** 部分的 **Connection Scope** 区域中。
+
+> **Note:**
+>
+> - 保存该设置只会记录你想要允许的区域。TiDB Cloud 会异步应用该修改，因此即使这些区域已经显示出来，也可能仍处于协调中。在下一步创建 VPC 终端节点之前，请等待 **Connection Scope** 修改成功完成。否则，即使该区域已经显示，终端节点创建也可能失败。如果修改失败，请重试或联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
+> - 跨区域连接会产生费用。AWS 向服务提供方按每个**活跃**远程区域收费，也就是至少有一个已连接接口终端节点的区域，而不是按你允许的每个区域收费。作为 VPC 终端节点的所有者，你还需要支付标准的终端节点小时费、数据处理使用费以及跨区域数据传输费用。此外，TiDB Cloud 还会收取跨区域 PrivateLink 服务费。详情请参见 [AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/) 和 [TiDB Cloud Dedicated pricing details](https://www.pingcap.com/tidb-dedicated-pricing-details/)。
+> - 移除某个区域或将 **Connection Scope** 切换回 **Current Region Only**，不会影响该区域中的现有连接。它只会阻止在该区域创建新的私有终端节点，并且不会断开现有终端节点，因此在这些终端节点被删除之前，AWS 费用仍可能继续产生。不再被允许的区域中的连接会在 **AWS Private Endpoints** 列表中标记警告。
+
+### Step 2. 创建跨区域 AWS 接口终端节点 {#step-2-create-a-cross-region-aws-interface-endpoint}
+
+按照 [Step 2. 创建 AWS 接口终端节点](#step-2-create-an-aws-interface-endpoint) 中的说明创建 AWS 接口终端节点，并注意以下事项：
+
+- 在应用程序运行所在的 AWS 区域中创建终端节点，该区域不同于 TiDB Cloud Dedicated 集群所在的区域。在 AWS 管理控制台中，选择 **Enable Cross Region endpoint**，然后将 **Service Region** 设置为 TiDB Cloud Dedicated 集群所在的区域。
+- 对于 **Subnets**，请选择支持跨区域访问的可用区中的子网。并非一个区域中的所有可用区都支持跨区域访问。如果子网位于不受支持的可用区中，创建会失败，并显示列出受支持可用区的错误信息，此时你可以改为选择这些列出的可用区中的子网。
+- 在创建跨区域终端节点之前，请确保调用方的身份策略和适用的服务控制策略允许 `vpce:AllowMultiRegion`。
+- 如果你使用 AWS CLI，请通过 `--service-region ${your_cluster_region}` 传入集群所在区域：
+
+    ```bash
+    aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_vpc_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids} --service-region ${your_cluster_region}
+    ```
+
+然后，完成从 [Step 3. 创建私有终端节点连接](#step-3-create-a-private-endpoint-connection) 到 [Step 5. 连接到 TiDB 集群](#step-5-connect-to-your-tidb-cluster) 的操作，以创建私有终端节点连接并从其他区域连接到集群。
+
+> **Note:**
+>
+> 如果你创建 VPC 终端节点所在的区域不在目标节点组允许的区域中，则无法创建私有终端节点连接，并且 TiDB Cloud 会报告错误。
 
 ## 故障排查
 

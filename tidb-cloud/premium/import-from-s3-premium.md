@@ -44,6 +44,12 @@ These naming conventions are identical to the TiDB Cloud Serverless workflow. Up
 
 向导中包含一个标记为 **Click here to create a new one with AWS CloudFormation** 的帮助链接。如果你需要 {{{ .premium }}} 预填充一个为你创建该角色的 CloudFormation stack，请使用此链接。
 
+<CustomContent plan="byoc">
+
+如果你为 {{{ .byoc }}} 实例使用 AWS Role ARN，则该 IAM role 必须带有 `tidbcloud.com/allow-dataplane-access=true` 标签。如果缺少该标签，请在开始导入前将其添加到该角色。
+
+</CustomContent>
+
 ## 步骤 4：从 Amazon S3 导入 CSV 文件 {#step-4-import-csv-files-from-amazon-s3}
 
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击你的 {{{ .premium }}} 实例名称。

@@ -61,6 +61,14 @@ aliases: ['/tidbcloud/serverless-external-storage']
 
 3. 使用 AWS CloudFormation 模板创建 Role ARN。
 
+    <CustomContent plan="byoc">
+
+    > **注意：**
+    >
+    > 对于 {{{ .byoc }}}，在创建 IAM 角色后，使用 Role ARN 导入数据之前，请先为该角色添加 `tidbcloud.com/allow-dataplane-access=true` 标签。TiDB Cloud 需要此标签才能使用该角色访问 BYOC 数据面。
+
+    </CustomContent>
+
     1. 在 **Add New ARN** 对话框中，点击 **AWS Console with CloudFormation Template**。
 
     2. 登录 [AWS 管理控制台](https://console.aws.amazon.com)，你将被重定向到 AWS CloudFormation 的 **Quick create stack** 页面。

@@ -134,7 +134,7 @@ t22_i5abc
 
 同一张表的同一个索引数据具有相同的 `table_id` 和 `index_id`。拆分索引 Region 时，需要根据 `index_value` 进行拆分。
 
-#### 均匀拆分
+#### 均匀切分 {#even-split}
 
 索引均匀拆分的方式与数据均匀拆分类似。但由于 `index_value` 可能不是整数，步长的计算更为复杂。
 
@@ -154,7 +154,7 @@ SPLIT TABLE t INDEX idx BETWEEN (-9223372036854775808) AND (9223372036854775807)
 SPLIT TABLE t INDEX idx1 BETWEEN ("a") AND ("z") REGIONS 25;
 ```
 
-该语句会将 idx1 索引在 a~z 之间拆分为 25 个 Region。Region 1 的范围为 `[minIndexValue, b)`，Region 2 的范围为 `[b, c)`，……，Region 25 的范围为 `[y, minIndexValue]`。对于 idx 索引，前缀为 a 的数据写入 Region 1，前缀为 b 的数据写入 Region 2。
+该语句会将 idx1 索引在 a~z 之间拆分为 25 个 Region。Region 1 的范围为 `[minIndexValue, b)`，Region 2 的范围为 `[b, c)`，……，Region 25 的范围为 `[y, maxIndexValue]`。对于 idx 索引，前缀为 a 的数据写入 Region 1，前缀为 b 的数据写入 Region 2。
 
 在上述拆分方式中，前缀为 y 和 z 的数据都会写入 Region 25，因为上界不是 z，而是 `{`（ASCII 中 z 的下一个字符）。因此，更精确的拆分方式如下：
 
@@ -268,7 +268,7 @@ region4  [("c", "")                    , maxIndexValue               )
     split partition table t between (0) and (10000) regions 4;
     ```
 
-    上述语句中，`0` 和 `10000` 分别代表你想要分散的热点数据的上下边界 `row_id`。
+    上述语句中，`0` 和 `10000` 分别代表你想要分散的热点数据的下边界和上边界 `row_id`。
 
     > **Note:**
     >

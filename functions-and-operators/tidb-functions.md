@@ -17,7 +17,7 @@ summary: 了解 TiDB 专有函数的用法。
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | 解码二进制执行计划。 |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | 将 TiDB 编码的 key 条目解码为包含 `_tidb_rowid` 和 `table_id` 的 JSON 结构体。这些编码 key 可在部分系统表和日志输出中找到。 |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | 解码 TiDB 执行计划。 |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | 查询集群中一组 SQL digest 对应的标准化 SQL 语句（无格式和参数的形式）。 |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | 查询集群中一组 SQL digest 对应的标准化 SQL 语句（其中字面值会被替换为 `?` 或 `...` 等占位符）。 |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | 编码索引 key。 |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | 编码记录 key。 |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | 获取查询字符串的 digest。 |
@@ -42,7 +42,7 @@ summary: 了解 TiDB 专有函数的用法。
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | 解码二进制执行计划。 |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key) | 将 TiDB 编码的 key 条目解码为包含 `_tidb_rowid` 和 `table_id` 的 JSON 结构体。这些编码 key 可在部分系统表和日志输出中找到。 |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan) | 解码 TiDB 执行计划。 |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | 查询集群中一组 SQL digest 对应的标准化 SQL 语句（无格式和参数的形式）。 |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | 查询集群中一组 SQL digest 对应的标准化 SQL 语句（其中字面值会被替换为 `?` 或 `...` 等占位符）。 |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key) | 编码索引 key。 |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key) | 编码记录 key。 |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest) | 获取查询字符串的 digest。 |
@@ -294,12 +294,12 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 
 ## TIDB_DECODE_SQL_DIGESTS
 
-`TIDB_DECODE_SQL_DIGESTS()` 函数用于查询集群中一组 SQL digest 对应的标准化 SQL 语句（无格式和参数的形式）。该函数接受 1 个或 2 个参数：
+`TIDB_DECODE_SQL_DIGESTS()` 函数用于查询集群中一组 SQL digest 对应的标准化 SQL 语句（其中字面值会被替换为 `?` 或 `...` 等占位符）。该函数接受 1 个或 2 个参数：
 
 * `digests`：字符串。该参数为 JSON 字符串数组格式，数组中的每个字符串为一个 SQL digest。
 * `stmtTruncateLength`：整数（可选）。用于限制返回结果中每条 SQL 语句的长度。如果某条 SQL 语句超过指定长度，则会被截断。`0` 表示不限制长度。
 
-该函数返回一个字符串，格式为 JSON 字符串数组。数组中的第 *i* 项为 `digests` 参数中第 *i* 个元素对应的标准化 SQL 语句。如果 `digests` 参数中的某个元素不是有效的 SQL digest，或系统无法找到对应的 SQL 语句，则返回结果中对应项为 `null`。如果指定了截断长度（`stmtTruncateLength > 0`），则返回结果中每条超出该长度的语句只保留前 `stmtTruncateLength` 个字符，并在末尾加上 `"..."` 表示被截断。如果 `digests` 参数为 `NULL`，则函数返回值为 `NULL`。
+该函数返回一个字符串，格式为 JSON 字符串数组。数组中的第 *i* 项为 `digests` 参数中第 *i* 个元素对应的标准化 SQL 语句。如果 `digests` 参数中的某个元素不是有效的 SQL digest，或系统无法找到对应的 SQL 语句，则返回结果中对应项为 `null`。如果指定了截断长度（`stmtTruncateLength > 0`），则返回结果中每条超出该长度的语句只保留前 `stmtTruncateLength` 个字符，并在末尾加上 `\"...\"` 表示被截断。如果 `digests` 参数为 `NULL`，则函数返回值为 `NULL`。
 
 > **注意：**
 >
@@ -309,7 +309,7 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 >     * 该函数开销较大是因为每次调用时，内部会查询 `STATEMENTS_SUMMARY`、`STATEMENTS_SUMMARY_HISTORY`、`CLUSTER_STATEMENTS_SUMMARY` 和 `CLUSTER_STATEMENTS_SUMMARY_HISTORY` 表，且查询涉及 `UNION` 操作。该函数目前不支持向量化，即对多行数据调用时，每行都会单独执行上述查询。
 
 ```sql
-SET @digests = '["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02ad5","38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821","e5796985ccafe2f71126ed6c0ac939ffa015a8c0744a24b7aee6d587103fd2f7"]';
+SET @digests = '[\"e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02ad5\",\"38b03afa5debbdf0326a014dbe5012a62c51957f1982b3093e748460f8b00821\",\"e5796985ccafe2f71126ed6c0ac939ffa015a8c0744a24b7aee6d587103fd2f7\"]';
 
 SELECT TIDB_DECODE_SQL_DIGESTS(@digests);
 ```
@@ -318,7 +318,7 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests);
 +------------------------------------+
 | TIDB_DECODE_SQL_DIGESTS(@digests)  |
 +------------------------------------+
-| ["begin",null,"select * from `t`"] |
+| [\"begin\",null,\"select * from `t`\"] |
 +------------------------------------+
 1 row in set (0.00 sec)
 ```
@@ -333,12 +333,12 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
 +---------------------------------------+
 | TIDB_DECODE_SQL_DIGESTS(@digests, 10) |
 +---------------------------------------+
-| ["begin",null,"select * f..."]        |
+| [\"begin\",null,\"select * f...\"]        |
 +---------------------------------------+
 1 row in set (0.01 sec)
 ```
 
-上述调用指定了第二个参数（即截断长度）为 10，查询结果中第三条语句长度大于 10，因此只保留前 10 个字符，并在末尾加上 `"..."`，表示被截断。
+上述调用指定了第二个参数（即截断长度）为 10，查询结果中第三条语句长度大于 10，因此只保留前 10 个字符，并在末尾加上 `\"...\"`，表示被截断。
 
 参见：
 
