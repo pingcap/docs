@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-tidb-crud-sql/','/ja/tidb/dev/dev-guide-tid
 
 ## 始める前に {#before-you-start}
 
-TiDB に接続していることを確認してください。そうでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)して、最初に接続します。
+TiDB に接続していることを確認してください。そうでない場合は、まず[TiDB Cloud Starterインスタンスを作成](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)し、接続してください。
 
 ## TiDBでSQLを探求しよう {#explore-sql-with-tidb}
 

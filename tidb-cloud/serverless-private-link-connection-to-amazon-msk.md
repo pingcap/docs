@@ -30,7 +30,7 @@ AWS アカウント ID とアベイラビリティゾーンを表示するには
 
 詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)を参照してください。
 
-Amazon MSK Provisioned クラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティゾーンに[1つ作成する](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)し、作成されたクラスターに[SASL/SCRAM認証を設定](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)します。
+Amazon MSK Provisioned クラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティゾーンに[1つ作成](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)し、作成されたクラスターに[SASL/SCRAM認証を設定](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)します。
 
 - **Secret name**: シークレット名は`AmazonMSK_`で始まる必要があります。
 - **暗号化**：デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
@@ -142,7 +142,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ3. クラスターポリシーをアタッチする {#step-3-attach-the-cluster-policy}
 
-[クラスタポリシーをアタッチする](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html)して、 TiDB Cloud がMSK クラスターに接続できるようにします。[前提条件](#prerequisites-for-essential)で取得したTiDB Cloud AWS アカウント ID を使用してください。
+[クラスタポリシーをアタッチ](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html)して、 TiDB Cloud がMSK クラスターに接続できるようにします。[前提条件](#prerequisites-for-essential)で取得したTiDB Cloud AWS アカウント ID を使用してください。
 
 ## ステップ4. マルチVPC接続を有効にする {#step-4-turn-on-multi-vpc-connectivity}
 
