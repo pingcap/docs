@@ -537,7 +537,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     - TiCDC
 
-        - `transaction_atomicity`と`protocol`が設定ファイル経由で更新できない問題を修正しました [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - `transaction-atomicity`と`protocol`が設定ファイル経由で更新できない問題を修正しました [#7935](https://github.com/pingcap/tiflow/issues/7935) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - リドゥログのストレージパスで事前チェックが実行されない問題を修正 [#6335](https://github.com/pingcap/tiflow/issues/6335) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - S3ストレージ障害時にリドゥログが許容できる期間が不十分であるという問題を修正 [#8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiKVまたはTiCDCノードのスケールインまたはスケールアウト時などの特殊なシナリオでchangefeedが停止する可能性がある問題を修正しました [#8174](https://github.com/pingcap/tiflow/issues/8174) @[hicqu](https://github.com/hicqu)

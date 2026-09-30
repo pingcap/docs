@@ -61,6 +61,14 @@ TiDB Cloud Starter、 Essential、またはPremiumインスタンスがAmazon S3
 
 3. AWS CloudFormationテンプレートを使用してロールARNを作成します。
 
+    <CustomContent plan="byoc">
+
+    > **Note:**
+    >
+    > {{{ .byoc }}} の場合、IAM ロールを作成した後、データのインポートに Role ARN を使用する前に、ロールに `tidbcloud.com/allow-dataplane-access=true` タグを追加してください。このタグは、TiDB Cloud がそのロールを使用して BYOC データプレーンにアクセスするために必要です。
+
+    </CustomContent>
+
     1. **Add New ARN**ダイアログで、 **AWS Console with CloudFormation Template**をクリックします。
 
     2. [AWS マネジメントコンソール](https://console.aws.amazon.com)にログインすると、AWS CloudFormation の**Quick create stack**ページにリダイレクトされます。

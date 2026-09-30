@@ -23,10 +23,14 @@ TiDB v7.3.0 以降では、システムテーブル`mysql.analyze_jobs`または
 | `Job_info`       | タスク情報。インデックスが分析される場合、この情報にはインデックス名が含まれます。`tidb_analyze_version =2`の場合、この情報にはサンプルレートなどの設定項目が含まれます。 |
 | `Processed_rows` | 分析された行数                                                                                            |
 | `Start_time`     | タスクが開始される時間                                                                                        |
+| `End_time`       | タスクが終了する時間                                                                                        |
 | `State`          | `pending` 、 `running` 、 `finished` 、 `failed`を含むタスクの状態                                                     |
 | `Fail_reason`    | タスクが失敗した理由。実行が成功した場合、値は`NULL`になります。                                                                 |
 | `Instance`       | タスクを実行するTiDBインスタンス                                                                                 |
-| `Process_id`     | タスクを実行するプロセスID                                                                                     |
+| `Process_ID`     | タスクを実行するプロセスID                                                                                     |
+| `Remaining_seconds` | タスク完了までの推定残り時間（秒）                                                                                |
+| `Progress`       | タスクの進行状況                                                                                           |
+| `Estimated_total_rows` | タスクで分析する必要がある総行数                                                                                 |
 
 ## 概要 {#synopsis}
 
@@ -58,7 +62,7 @@ mysql> show analyze status;
 | test         | t          | p0             | analyze columns   |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
 | test         | t1         | p0             | analyze columns   |       28523259 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | running  | NULL        | 127.0.0.1:4000 | 690208308  | 0s               | 0.9843   | 28978290            |
 +--------------+------------+----------------+-------------------+----------------+---------------------+---------------------+----------+-------------+----------------+------------+------------------+----------+---------------------+
-4 rows in set (0.01 sec)
+5 rows in set (0.01 sec)
 
 mysql> set @@tidb_analyze_version = 2;
 Query OK, 0 rows affected (0.00 sec)

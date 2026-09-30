@@ -47,7 +47,7 @@ create_specification:
   | [DEFAULT] COLLATE [=] collation_name
 ```
 
-既存のデータベースを作成し、 `IF NOT EXISTS`を指定しないと、エラーが表示されます。
+既存のデータベースを作成する際に、 `IF NOT EXISTS`を指定しないと、エラーが表示されます。
 
 `create_specification`オプションは、データベース内の特定の`CHARACTER SET`と`COLLATE`を指定するために使用されます。現在、TiDB は一部の文字セットと照合順序のみをサポートしています。詳細については、 [文字セットと照合順序のサポート](/character-set-and-collation.md)を参照してください。
 

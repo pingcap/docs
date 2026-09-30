@@ -69,7 +69,7 @@ TiDBバージョン：5.1.5
 
 - PD
 
-    - PDリーダーの移籍後に削除されたtombstoneストアが再び表示される問題を修正しました[#4941](https://github.com/tikv/pd/issues/4941)
+    - PDリーダーの移籍後に削除されたtombstoneストアが再び表示される問題を修正しました [#4941](https://github.com/tikv/pd/issues/4941)
     - PDリーダーの転送後すぐにスケジューリングを開始できない問題を修正します [#4769](https://github.com/tikv/pd/issues/4769)
     - `not leader` の誤ったステータスコードを修正します。 [#4797](https://github.com/tikv/pd/issues/4797)
     - PDがダッシュボードプロキシリクエストを正しく処理できない問題を修正 [#5321](https://github.com/tikv/pd/issues/5321)

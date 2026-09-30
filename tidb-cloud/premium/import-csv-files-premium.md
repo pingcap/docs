@@ -83,6 +83,12 @@ TiDB Cloud PremiumがAmazon S3またはAlibaba Cloud Object Storage Service（OS
 
     バケットにアクセスするには、AWS アクセスキーまたはロール ARN のいずれかを使用できます。完了したら、[ステップ4](#step-4-import-csv-files)で必要となるため、アクセスキー (アクセスキー ID とシークレットアクセスキーを含む) またはロール ARN の値をメモしておいてください。
 
+    <CustomContent plan="byoc">
+
+    {{{ .byoc }}} の場合、AWS Role ARN を使用する場合は、インポートを開始する前に、IAM ロールにタグ `tidbcloud.com/allow-dataplane-access=true` が設定されていることを確認してください。
+
+    </CustomContent>
+
 - CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud Premium インスタンスの[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
 
 ## ステップ4．CSVファイルをインポートする {#step-4-import-csv-files}

@@ -14,7 +14,7 @@ summary: データを移行するときにbinlogイベントをフィルター�
 
 ## 設定 {#configuration}
 
-binlogイベントフィルターを使用するには、以下に示すように、DM のタスク設定ファイルに`filter`を追加します。
+binlogイベントフィルターを使用するには、以下に示すように、DM のタスク設定ファイルに`filters`フィールドを追加します。
 
 ```yaml
 filters:

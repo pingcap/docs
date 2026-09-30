@@ -225,7 +225,7 @@
   - 診断方法
     - [SQL診断](/information-schema/information-schema-sql-diagnostics.md)
     - [ステートメントサマリーテーブル](/statement-summary-tables.md)
-    - [Top SQL を使用して高コストクエリを特定する](/dashboard/top-sql.md)
+    - [Top SQL を使用して高コストのクエリを特定する](/dashboard/top-sql.md)
     - [ログを使用して高負荷なクエリを特定する](/identify-expensive-queries.md)
     - [クラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
     - [TiKVにおけるステイル読み取りとsafe-tsの理解](/troubleshoot-stale-read.md)
@@ -456,7 +456,7 @@
         - [楽観的モード](/dm/feature-shard-merge-optimistic.md)
         - [シャーディングDDLロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)
       - [gh-ost/pt-osc を使用する MySQL データベースから移行する](/dm/feature-online-ddl.md)
-      - [より多くのカラムを持つ下流の TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
+      - [より多くのカラムを持つダウンストリーム TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)
       - [継続的なデータ検証](/dm/dm-continuous-data-validation.md)
     - 管理
       - クラスタのアップグレード
@@ -816,7 +816,7 @@
       - [日付と時刻の種類](/data-type-date-and-time.md)
       - [文字列型](/data-type-string.md)
       - [JSONタイプ](/data-type-json.md)
-      - [ベクトルタイプ](/ai/reference/vector-search-data-types.md)
+      - [ベクトル型](https://docs.pingcap.com/ai/vector-search-data-types/)
     - 関数と演算子
       - [概要](/functions-and-operators/functions-and-operators-overview.md)
       - [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -830,7 +830,7 @@
       - [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
       - [ロック機能](/functions-and-operators/locking-functions.md)
       - [情報関数](/functions-and-operators/information-functions.md)
-      - [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+      - [ベクトル関数と演算子](https://docs.pingcap.com/ai/vector-search-functions-and-operators/)
       - JSON関数
         - [概要](/functions-and-operators/json-functions.md)
         - [JSONを作成する関数](/functions-and-operators/json-functions/json-functions-create.md)
@@ -853,7 +853,7 @@
       - [OracleとTiDBの関数と構文の比較](/oracle-functions-to-tidb.md)
     - [クラスター化インデックス](/clustered-indexes.md)
     - [グローバルインデックス](/global-indexes.md)
-    - [ベクトルインデックス](/ai/reference/vector-search-index.md)
+    - [ベクトルインデックス](https://docs.pingcap.com/ai/vector-search-index/)
     - [制約](/constraints.md)
     - [生成列](/generated-columns.md)
     - [SQLモード](/sql-mode.md)

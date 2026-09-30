@@ -59,7 +59,7 @@ mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.04 sec)
 ```
 
-`192.168.1.1`のみにログインできるユーザーを作成します。
+`192.168.1.1`からのみログインできるユーザーを作成します。
 
 ```sql
 mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';

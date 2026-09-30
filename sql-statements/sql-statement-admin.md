@@ -46,7 +46,7 @@ summary: TiDBデータベースにおけるADMINの使用方法の概要。
 ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
-上記のステートメントは、式によってプッシュダウンされたブロックリストを再読み込みするために使用されます。
+上記のステートメントは、式プッシュダウンのブロックリストを再読み込みするために使用されます。
 
 ```sql
 ADMIN RELOAD opt_rule_blacklist;
@@ -90,7 +90,7 @@ ADMIN CAPTURE BINDINGS;
 ADMIN EVOLVE BINDINGS;
 ```
 
-自動バインディング機能が有効になると、SQL プランのバインディング情報の進化は`bind-info-leave`ごと（デフォルト値は`3s` ）にトリガーされます。上記のステートメントは、この進化を事前にトリガーするために使用されます。
+自動バインディング機能が有効になると、SQL プランのバインディング情報の進化は`bind-info-lease`ごと（デフォルト値は`3s` ）にトリガーされます。上記のステートメントは、この進化を事前にトリガーするために使用されます。
 
 ```sql
 ADMIN RELOAD BINDINGS;
@@ -295,7 +295,7 @@ ADMIN SHOW DDL JOBS 5 WHERE state != 'synced' AND db_name = 'test';
     - `rollback done` : 操作が失敗し、ロールバックが完了したことを示します。
     - `rollingback` : 操作が失敗し、ロールバックされていることを示します。
     - `cancelling` : これは、操作がキャンセルされていることを示します。この状態は、 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルした場合にのみ発生します。
-    - `paused` : 操作が一時停止されていることを示します。この状態は[`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。[`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
+    - `paused` : 操作が一時停止されていることを示します。この状態は[`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。[`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

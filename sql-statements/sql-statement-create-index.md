@@ -366,7 +366,9 @@ Query OK, 1 row affected (0.00 sec)
 - テーブルが多値インデックスを使用している場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0より前のTiDBクラスタにテーブルをバックアップ、レプリケート、またはインポートすることはできません。
 - 複雑な条件を含むクエリの場合、TiDB は多値インデックスを選択できない場合があります。多値インデックスでサポートされる条件パターンについては、 [多値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
 
-## 部分インデックス <span class="version-mark">v8.5.7 の新機能</span> {#partial-indexes-new-in-v857}
+## 部分インデックス {#partial-indexes}
+
+<span class="version-mark">TiDB Self-Managed と TiDB Cloud Dedicated では v8.5.7 の新機能であり、TiDB Cloud Essential と Premium では CLOUD.202603.1 の新機能です</span>
 
 部分インデックスは、テーブル内の行のサブセットに対して構築されるインデックスです。部分インデックスを作成する際には、その行のサブセットを定義するために、述語とも呼ばれる条件式を指定できます。インデックスには、その述語を満たす行に対するエントリのみが含まれます。
 

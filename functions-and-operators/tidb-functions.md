@@ -17,7 +17,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリ プランをデコードします。                                                                                                                                                                                                                                |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                           |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan)               | TiDB 実行計画をデコードします。                                                                                                                                                                                                                              |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文 (形式と引数のない形式) を照会します。                                                                                                                                                                                |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会します。                                                                                                                                                                                |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックスキーをエンコードします。                                                                                                                                                                                                                              |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコード キーをエンコードします。                                                                                                                                                                                                                                |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest)   | クエリ文字列のダイジェストを取得します。                                                                                                                                                                                                                             |
@@ -42,7 +42,7 @@ summary: TiDB 固有の関数の使用法について学習します。
 | [`TIDB_DECODE_BINARY_PLAN()`](#tidb_decode_binary_plan) | バイナリ プランをデコードします。                                                                                                                                                                                                                                                           |
 | [`TIDB_DECODE_KEY()`](#tidb_decode_key)                 | TiDBエンコードされたキーエントリを、 `_tidb_rowid`と`table_id`含むJSON構造にデコードします。これらのエンコードされたキーは、一部のシステムテーブルやログ出力で確認できます。                                                                                                                                                                      |
 | [`TIDB_DECODE_PLAN()`](#tidb_decode_plan)               | TiDB 実行計画をデコードします。                                                                                                                                                                                                                                                         |
-| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文 (形式と引数のない形式) を照会します。                                                                                                                                                                                                           |
+| [`TIDB_DECODE_SQL_DIGESTS()`](#tidb_decode_sql_digests) | クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会します。                                                                                                                                                                                                           |
 | [`TIDB_ENCODE_INDEX_KEY()`](#tidb_encode_index_key)     | インデックスキーをエンコードします。                                                                                                                                                                                                                                                         |
 | [`TIDB_ENCODE_RECORD_KEY()`](#tidb_encode_record_key)   | レコード キーをエンコードします。                                                                                                                                                                                                                                                           |
 | [`TIDB_ENCODE_SQL_DIGEST()`](#tidb_encode_sql_digest)   | クエリ文字列のダイジェストを取得します。                                                                                                                                                                                                                                                        |
@@ -294,12 +294,12 @@ SELECT tidb_decode_plan('8QIYMAkzMV83CQEH8E85LjA0CWRhdGE6U2VsZWN0aW9uXzYJOTYwCXR
 
 ## TIDB_DECODE_SQL_DIGESTS {#tidb_decode_sql_digests}
 
-`TIDB_DECODE_SQL_DIGESTS()`関数は、クラスタ内のSQLダイジェストセットに対応する正規化されたSQL文（フォーマットと引数のない形式）を照会するために使用されます。この関数は1つまたは2つの引数を取ります。
+`TIDB_DECODE_SQL_DIGESTS()`関数は、クラスタ内のSQLダイジェストセットに対応する正規化されたSQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会するために使用されます。この関数は1つまたは2つの引数を取ります。
 
 - `digests` : 文字列。このパラメータはJSON文字列配列の形式であり、配列内の各文字列はSQLダイジェストです。
 - `stmtTruncateLength` : 整数（オプション）。返される結果内の各SQL文の長さを制限するために使用されます。SQL文が指定された長さを超えた場合、文は切り捨てられます。`0`は長さが無制限であることを意味します。
 
-この関数は、JSON文字列配列形式の文字列を返します。配列の*i*番目の項目は、 `digests`パラメータの*i*番目の要素に対応する正規化されたSQL文です。 `digests`パラメータの要素が有効なSQLダイジェストでないか、システムが対応するSQL文を見つけられない場合、返される結果の対応する項目は`null`なります。切り捨て長が指定されている場合（ `stmtTruncateLength > 0` ）、返される結果のこの長さを超える各文については、最初の`stmtTruncateLength`文字が保持され、切り捨てを示すために末尾にサフィックス`"..."`が追加されます。 `digests`パラメータが`NULL`の場合、関数の戻り値は`NULL`なります。
+この関数は、JSON文字列配列形式の文字列を返します。配列の*i*番目の項目は、 `digests`パラメータの*i*番目の要素に対応する正規化されたSQL文です。 `digests`パラメータの要素が有効なSQLダイジェストでないか、システムが対応するSQL文を見つけられない場合、返される結果の対応する項目は`null`なります。切り捨て長が指定されている場合（ `stmtTruncateLength > 0` ）、返される結果のこの長さを超える各文については、最初の`stmtTruncateLength`文字が保持され、切り捨てを示すために末尾にサフィックス`\"...\"`が追加されます。 `digests`パラメータが`NULL`の場合、関数の戻り値は`NULL`なります。
 
 > **Note:**
 >
@@ -338,7 +338,7 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
 1 row in set (0.01 sec)
 ```
 
-上記の呼び出しでは、2 番目のパラメーター (つまり、切り捨ての長さ) を10に指定していますが、クエリ結果の 3 番目のステートメントの長さは 10 を超えています。したがって、最初の 10 文字のみが保持され、最後に切り捨てを示す`"..."`が追加されます。
+上記の呼び出しでは、2 番目のパラメーター (つまり、切り捨ての長さ) を10に指定していますが、クエリ結果の 3 番目のステートメントの長さは 10 を超えています。したがって、最初の 10 文字のみが保持され、最後に切り捨てを示す`\"...\"`が追加されます。
 
 参照:
 

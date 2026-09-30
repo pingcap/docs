@@ -82,6 +82,14 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
     - はいの場合、後で使用するために一致したロールを記録してください。
     - そうでない場合は、 **Create role**をクリックし、信頼エンティティタイプとして**Another AWS account**を選択してから、 **Account ID**フィールドにTiDB CloudアカウントIDの値を入力します。次に、 **Require External ID**オプションを選択し、**External ID**フィールドにTiDB Cloud外部IDの値を入力します。
 
+    <CustomContent plan="byoc">
+
+    {{{ .byoc }}} の場合、顧客が作成した `tidbx-byoc-auditlog-role` IAM ロールに `tidbcloud.com/allow-dataplane-access=true` タグが付いていることを確認してください。
+
+    タグがない場合は、監査ログを有効にする前にそのタグをロールに追加してください。タグを追加する前に監査ログを有効にしていた場合は、タグを更新した後で監査ログを無効化してから再度有効にしてください。
+
+    </CustomContent>
+
 4. **IAM** > **Access Management** > **Roles**で、前の手順で確認したロール名をクリックして**Summary**ページに移動し、以下の手順を実行します。
 
     1. **Permissions**タブで、 `s3:PutObject`書き込み専用アクセス許可を持つ記録済みポリシーがロールに添付されているかどうかを確認します。添付されていない場合は、 **Attach Policies**を選択し、必要なポリシーを検索して、 **Attach Policy**をクリックします。

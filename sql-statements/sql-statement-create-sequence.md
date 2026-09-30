@@ -59,7 +59,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 | `MAXVALUE`  | `9223372036854775806`または`-1` | シーケンスの最大値を指定します。`INCREMENT` &gt; `0`の場合、デフォルト値は`9223372036854775806`です。`INCREMENT` &lt; `0`の場合、デフォルト値は`-1`です。                     |
 | `START`     | `MINVALUE`または`MAXVALUE`      | シーケンスの初期値を指定します。`INCREMENT` &gt; `0`の場合、デフォルト値は`MINVALUE`です。`INCREMENT` &lt; `0`の場合、デフォルト値は`MAXVALUE`です。                          |
 | `CACHE`     | `1000`                       | TiDB 内のシーケンスのローカルキャッシュサイズを指定します。                                                                                                  |
-| `CYCLE`     | `NO CYCLE`                   | シーケンスを最小値（降順シーケンスの場合は最大値）から再開するかどうかを指定します。`INCREMENT` &gt; `0`の場合、デフォルト値は`MINVALUE`です。`INCREMENT` &lt; `0`の場合、デフォルト値は`MAXVALUE`です。 |
+| `CYCLE`     | `NO CYCLE`                   | シーケンスが使い果たされた後に最小値（降順シーケンスの場合は最大値）から再開するかどうかを指定します。`CYCLE`モードでは、`INCREMENT` &gt; `0`の場合、シーケンスは使い果たされた後に`MINVALUE`から再開します。`INCREMENT` &lt; `0`の場合、`MAXVALUE`から再開します。 |
 
 ## `SEQUENCE`関数 {#sequence-function}
 

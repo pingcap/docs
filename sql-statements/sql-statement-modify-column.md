@@ -15,7 +15,7 @@ TiDB v5.1.0以降、Reorg-Dataを必要とする列型の変更がサポート�
 - `DECIMAL`精度の変更
 - `VARCHAR(10)`の長さを`VARCHAR(5)`に短縮する
 
-v8.5.5以降、TiDBは、以前はReorg-Dataを必要としていた一部の列型変更を最適化します。以下の条件が満たされた場合、TiDBはテーブル全体ではなく、影響を受けるインデックスのみを再構築するため、実行効率が向上します。
+TiDB Self-Managed および TiDB Cloud Dedicated では v8.5.5 以降、TiDB Cloud Essential および Premium では CLOUD.202603.1 以降、TiDBは、以前はReorg-Dataを必要としていた一部の列型変更を最適化します。以下の条件が満たされた場合、TiDBはテーブル全体ではなく、影響を受けるインデックスのみを再構築するため、実行効率が向上します。
 
 - 現在のセッションでは、厳密な[SQLモード](/sql-mode.md) ( `sql_mode`は`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`が含まれます ) が使用されます。
 - テーブルにはTiFlashレプリカがありません。
