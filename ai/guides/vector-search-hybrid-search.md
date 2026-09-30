@@ -11,7 +11,7 @@ aliases: ['/ja/tidb/stable/vector-search-hybrid-search/','/ja/tidbcloud/vector-s
 TiDBにおけるハイブリッド検索の一般的なワークフローは以下のとおりです。
 
 1. **全文検索**と**ベクトル検索**にはTiDBを使用してください。
-2. 両方の検索結果を統合するには、**リランカーを**使用してください。
+2. 両方の検索結果を統合するには、**リランカー**を使用してください。
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
@@ -23,7 +23,7 @@ TiDBにおけるハイブリッド検索の一般的なワークフローは以�
 
 - AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
-このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterインスタンスがあることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+このチュートリアルを完了するには、サポートされているリージョンにTiDB Cloud Starterインスタンスがあることを確認してください。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 ## さあ始めましょう {#get-started}
 
@@ -89,8 +89,8 @@ db = TiDBClient.connect(
 例として、 `chunks`という名前のテーブルを作成し、以下の列を追加します。
 
 - `id` (int): チャンクのID。
-- `text` (テキスト): チャンクのテキストコンテンツ。
-- `text_vec` (ベクトル): テキストのベクトル表現。pytidb の埋め込みモデルによって自動的に生成されます。
+- `text` (text): チャンクのテキストコンテンツ。
+- `text_vec` (vector): テキストのベクトル表現。pytidb の埋め込みモデルによって自動的に生成されます。
 - `user_id` (int): チャンクを作成したユーザーのID。
 
 ```python
@@ -147,7 +147,7 @@ df = (
 
 融合手法は、ベクトル（意味）検索と全文（キーワード）検索の結果を統合し、単一の統一されたランキングを作成します。これにより、最終結果が意味的な関連性とキーワードの一致の両方を活用できるようになります。
 
-`pytidb` 2つの融合方法をサポートしています。
+`pytidb`は2つの融合方法をサポートしています。
 
 - `rrf` : 相互ランク融合 (デフォルト)
 - `weighted` : 加重スコア融合
