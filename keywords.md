@@ -70,6 +70,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - AFFINITY
 - AGAINST
 - AGO
+- ALERT
 - ALGORITHM
 - ALL (R)
 - ALTER (R)
@@ -84,6 +85,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ASCII
 - ATTRIBUTE
 - ATTRIBUTES
+- AUTO
 - AUTO_ID_CACHE
 - AUTO_INCREMENT
 - AUTO_RANDOM
@@ -281,6 +283,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 
 - FAILED_LOGIN_ATTEMPTS
 - FALSE (R)
+- FAST
 - FAULTS
 - FETCH (R)
 - FIELDS
@@ -338,6 +341,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - IGNORE (R)
 - IGNORE_STATS
 - ILIKE (R)
+- IMMEDIATE
 - IMPORT
 - IMPORTS
 - IN (R)
@@ -425,6 +429,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - MASKING
 - MASTER
 - MATCH (R)
+- MATERIALIZED
 - MAXVALUE (R)
 - MAX_CONNECTIONS_PER_HOUR
 - MAX_IDXNUM
@@ -497,6 +502,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ONLINE
 - ONLY
 - OPEN
+- OPERATE
 - OPTIMISTIC
 - OPTIMIZE (R)
 - OPTION (R)
@@ -743,6 +749,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - TRAILING (R)
 - TRANSACTION
 - TRANSACTIONAL
+- TRANSITIONS
 - TRIGGER (R)
 - TRIGGERS
 - TRUE (R)
