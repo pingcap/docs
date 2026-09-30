@@ -22,7 +22,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
 ### Performance
 
-* Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016), @[tangenta](https://github.com/tangenta), @[fzzf678](https://github.com/fzzf678) <!-- pr: https://github.com/pingcap/tidb/pull/64834, https://github.com/pingcap/tidb/pull/64337, https://github.com/pingcap/tidb/pull/64188, https://github.com/pingcap/tidb/pull/64111, https://github.com/pingcap/tidb/pull/63465, https://github.com/pingcap/tidb/pull/63970, https://github.com/pingcap/tidb/pull/63965 -->
+* Introduce significant performance improvements for certain lossy DDL operations (such as `BIGINT → INT` and `CHAR(120) → VARCHAR(60)`): when no data truncation occurs, the execution time of these operations can be reduced from hours to minutes, seconds, or even milliseconds, delivering performance gains ranging from tens to hundreds of thousands of times [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016) @[tangenta](https://github.com/tangenta) @[fzzf678](https://github.com/fzzf678) <!-- pr: https://github.com/pingcap/tidb/pull/64834, https://github.com/pingcap/tidb/pull/64337, https://github.com/pingcap/tidb/pull/64188, https://github.com/pingcap/tidb/pull/64111, https://github.com/pingcap/tidb/pull/63465, https://github.com/pingcap/tidb/pull/63970, https://github.com/pingcap/tidb/pull/63965 -->
 
     The optimization strategies are as follows:
 
@@ -44,11 +44,11 @@ In `TiDB-X-CLOUD.202603.1`:
 
 ### Observability
 
-* Support defining multi-dimensional, fine-grained trigger rules for slow queries [#62959](https://github.com/pingcap/tidb/issues/62959), [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) <!-- pr: https://github.com/pingcap/tidb/pull/66132, https://github.com/pingcap/tidb/pull/66064, https://github.com/pingcap/tidb/pull/65086 -->
+* Support defining multi-dimensional, fine-grained trigger rules for slow queries [#62959](https://github.com/pingcap/tidb/issues/62959) [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) <!-- pr: https://github.com/pingcap/tidb/pull/66132, https://github.com/pingcap/tidb/pull/66064, https://github.com/pingcap/tidb/pull/65086 -->
 
     In TiDB Cloud, SQL queries that take more than 300 milliseconds are considered slow queries by default. You can view slow queries on the [**Slow Query**](/tidb-cloud/tune-performance.md#slow-query) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page in the [TiDB Cloud console](https://tidbcloud.com/).
 
-    TiDB Cloud now provides more flexible control over slow query logging. You can use the [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules-new-in-v856) system variable to define multi-dimensional slow query log output rules at the instance, session, and SQL levels, based on conditions such as `Query_time`, `Digest`, `Mem_max`, and `KV_total`. You can use the [`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) hint to force slow query logging for specific SQL statements. This enables more flexible and fine-grained control over slow query logs.
+    TiDB Cloud now provides more flexible control over slow query logging. You can use the [`tidb_slow_log_rules`](https://docs.pingcap.com/tidbcloud/system-variables/?plan=premium#tidb_slow_log_rules) system variable to define multi-dimensional slow query log output rules at the instance, session, and SQL levels, based on conditions such as `Query_time`, `Digest`, `Mem_max`, and `KV_total`. You can use the `WRITE_SLOW_LOG` hint to force slow query logging for specific SQL statements. This enables more flexible and fine-grained control over slow query logs.
 
     For more information, see [documentation](https://docs.pingcap.com/tidbcloud/config-slow-query-trigger-rules/?plan=premium).
 
@@ -58,7 +58,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
     Before this release, when a `SELECT ... FOR UPDATE OF <table>` statement references a table alias in the locking clause, TiDB might fail to resolve the alias correctly and return the `table not exists` error even if the alias is valid.
 
-    Now TiDB supports using table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve locking targets from the `FROM` clause, including aliased tables, ensuring that row locks take effect as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more stable and reliable in queries that use table aliases.
+    TiDB supports using table aliases in the `FOR UPDATE OF` clause. TiDB can now correctly resolve locking targets from the `FROM` clause, including aliased tables, ensuring that row locks take effect as expected. This improves MySQL compatibility and makes `SELECT ... FOR UPDATE OF` statements more stable and reliable in queries that use table aliases.
 
     For more information, see [documentation](https://docs.pingcap.com/tidbcloud/sql-statement-select/?plan=premium).
 
@@ -70,7 +70,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
     To use partial indexes effectively, define a predicate that matches the filters in your common queries. TiDB selects a partial index only when the query predicates match or imply the partial index predicate. Currently, partial index predicates support basic comparison operators (`=`, `!=`, `<`, `<=`, `>`, `>=`), `IS NULL`, `IS NOT NULL`, and `IN` predicates with constant values.
 
-    For more information, see [documentation](https://docs.pingcap.com/tidbcloud/sql-statement-create-index/?plan=premium#partial-indexes-new-in-v857).
+    For more information, see [documentation](https://docs.pingcap.com/tidbcloud/sql-statement-create-index/?plan=premium#partial-indexes).
 
 ## Compatibility changes
 

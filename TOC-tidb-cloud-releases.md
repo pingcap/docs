@@ -21,6 +21,7 @@
 ## TiDB X KERNEL RELEASE NOTES
 
 - [Kernel Versioning for TiDB Cloud Premium](/tidb-cloud/releases/tidb-cloud-kernel-versioning.md)
+- [TiDB-X-CLOUD.202603.1 Release Notes](/tidb-cloud/releases/tidb-x-cloud.202603.1.md)
 - [TiDB-X-CLOUD.202510.1 Release Notes](/tidb-cloud/releases/tidb-x-cloud.202510.1.md)
 
 ## MAINTENANCE NOTIFICATIONS
