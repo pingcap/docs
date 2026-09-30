@@ -99,7 +99,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ## ステップ2. フローを作成する {#step-2-create-a-flow}
 
-[Amazon AppFlow > フロー](https://console.aws.amazon.com/appflow/home#/list)し、 **Create flow** をクリックします。
+[Amazon AppFlow > フロー](https://console.aws.amazon.com/appflow/home#/list)に移動し、 **Create flow** をクリックします。
 
 ![create flow](/media/develop/aws-appflow-step-create-flow.png)
 

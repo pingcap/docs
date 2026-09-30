@@ -21,7 +21,7 @@ summary: TiDB データベースの SHOW STATS_HISTOGRAMS の使用法の概要�
 | `Null_count`      | NULLカウント                                           |
 | `Avg_col_size`    | 平均列サイズ                                            |
 | `Correlation`     | この列と整数主キー列の間のピアソン相関係数。2つの列間の関連の度合いを示します。           |
-| `Load_status`     | 負荷ステータス（ `allEvicted` 、 `allLoaded`など）                 |
+| `Load_status`     | 読み込みステータス（ `allEvicted` 、 `allLoaded`など）                 |
 | `Total_mem_usage` | 総メモリ使用量                                            |
 | `Hist_mem_usage`  | 過去のメモリ使用量                                          |
 | `Topn_mem_usage`  | TopNのメモリ使用量                                        |

@@ -456,7 +456,7 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. [Azureポータル](https://portal.azure.com/)の で、MySQL Flexible Server インスタンスの概要ページ (プライベートエンドポイント オブジェクトではありません) に戻り、 **Essentials**セクションで**JSON ビュー**をクリックして、後で使用するためにリソース ID をコピーします。リソース ID は`/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`形式です。このリソース ID (プライベートエンドポイント ID ではありません) を使用して、 TiDB Cloud DM を構成します。
+4. [Azureポータル](https://portal.azure.com/)で、MySQL Flexible Server インスタンスの概要ページ (プライベートエンドポイント オブジェクトではありません) に戻り、 **Essentials**セクションで**JSON ビュー**をクリックして、後で使用するためにリソース ID をコピーします。リソース ID は`/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`形式です。このリソース ID (プライベートエンドポイント ID ではありません) を使用して、 TiDB Cloud DM を構成します。
 
 5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように構成する際には、Azureポータルに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続リクエストを承認する必要があります。
 

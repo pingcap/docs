@@ -203,7 +203,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
     この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
     - TiDB モニタリング ダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエスト コマンド タイプを確認します。
-    - リクエストで`COM_QUERY` `COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられている場合、この設定は既に有効になっていることを意味します。
+    - リクエストで`COM_QUERY`が`COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられている場合、この設定は既に有効になっていることを意味します。
 
 - **`cachePrepStmts`**
 
