@@ -18,7 +18,7 @@ TiDBベクトル検索を開始するには、次のチュートリアルを参�
 
 自動埋め込み機能を使用すると、独自のベクトルを用意することなく、プレーンテキストで直接ベクトル検索を実行できます。この機能を使用すると、テキストデータを直接挿入し、テキストクエリを使用してセマンティック検索を実行できます。TiDBはバックグラウンドでテキストを自動的にベクトルに変換します。
 
-現在、TiDBはAmazon Titan、Cohere、Jina AI、OpenAI、Gemini、Hugging Face、NVIDIA NIMなど、様々な埋め込みモデルをサポートしています。ニーズに最適なモデルをお選びいただけます。詳細については、 [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)ご覧ください。
+現在、TiDBはAmazon Titan、Cohere、Jina AI、OpenAI、Gemini、Hugging Face、NVIDIA NIMなど、様々な埋め込みモデルをサポートしています。ニーズに最適なモデルをお選びいただけます。詳細については、 [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md)をご覧ください。
 
 ## 統合 {#integrations}
 

@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-follower-read/','/ja/tidbcloud/dev-guid
 
 ## 導入 {#introduction}
 
-TiDBは、 [リージョン](/tidb-storage.md#region)基本単位として、クラスター内のすべてのノードにデータを分散します。リージョンには複数のレプリカを配置でき、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDBはフォロワーのデータも同期的に更新します。
+TiDBは、 [リージョン](/tidb-storage.md#region)を基本単位として、クラスター内のすべてのノードにデータを分散します。リージョンには複数のレプリカを配置でき、レプリカはリーダーと複数のフォロワーに分割されます。リーダーのデータが変更されると、TiDBはフォロワーのデータも同期的に更新します。
 
 デフォルトでは、TiDB は同じリージョンのリーダーに対してのみデータの読み取りと書き込みを行います。リージョン内で読み取りホットスポットが発生すると、リージョンリーダーがシステム全体の読み取りボトルネックになる可能性があります。このような状況では、Follower Read機能を有効にすると、リーダーの負荷を大幅に軽減し、複数のフォロワー間で負荷を分散することでシステム全体のスループットを向上させることができます。
 
@@ -42,7 +42,7 @@ Follower Readを有効にするには、変数`tidb_replica_read` (デフォル�
 SET [GLOBAL] tidb_replica_read = 'follower';
 ```
 
-この変数の詳細については、 [Follower Read使用状況](/follower-read.md#usage)を参照してください。
+この変数の詳細については、 [Follower Readの使用方法](/follower-read.md#usage)を参照してください。
 
 </div>
 <div label="Java" value="java">

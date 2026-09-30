@@ -12,7 +12,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 
 サブクエリとは、別のSQLクエリ内に含まれるクエリです。サブクエリを使用すると、クエリの結果を別のクエリで使用できます。
 
-以下では、サブクエリを紹介するために、アプリケーション[書店](/develop/dev-guide-bookshop-schema-design.md)を例に挙げます。
+以下では、サブクエリを紹介するために、アプリケーション[Bookshop](/develop/dev-guide-bookshop-schema-design.md)を例に挙げます。
 
 ## サブクエリステートメント {#subquery-statement}
 
@@ -22,7 +22,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-subqueries/','/ja/tidbcloud/dev-guide-u
 - 派生テーブル (例: `SELECT t1.s1 FROM (SELECT s1 FROM t2) t1` )。
 - 存在判定、例: `WHERE NOT EXISTS(SELECT ... FROM t2)` 、 `WHERE t1.a IN (SELECT ... FROM t2)` 。
 - 量化比較、例: `WHERE t1.a = ANY(SELECT ... FROM t2)` 、 `WHERE t1.a = ANY(SELECT ... FROM t2)` 。
-- 比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` 。
+- 比較演算子のオペランドとしてのサブクエリ (例: `WHERE t1.a > (SELECT ... FROM t2)` )。
 
 ## サブクエリのカテゴリ {#category-of-subquery}
 

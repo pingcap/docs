@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-stale-read/','/ja/tidbcloud/dev-guide-u
 
 # ステイル読み取り {#stale-read}
 
-ステイル読み取りは、TiDBがTiDBに保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。このメカニズムを使用すると、特定の時刻または指定された時間範囲内で対応する履歴データを読み取ることができ、ストレージノード間のデータレプリケーションによって発生するレイテンシーを削減できます。Stale ステイル読み取りを使用する場合、TiDBはデータ読み取り用のレプリカをランダムに選択します。つまり、すべてのレプリカがデータ読み取りに利用可能になります。
+ステイル読み取りは、TiDBがTiDBに保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。このメカニズムを使用すると、特定の時刻または指定された時間範囲内で対応する履歴データを読み取ることができ、ストレージノード間のデータレプリケーションによって発生するレイテンシーを削減できます。ステイル読み取りを使用する場合、TiDBはデータ読み取り用のレプリカをランダムに選択します。つまり、すべてのレプリカがデータ読み取りに利用可能になります。
 
 実際には、 [使用シナリオ](/stale-read.md#usage-scenarios-of-stale-read)に基づいて、TiDB でステイル読み取り を有効にすることが適切かどうかを慎重に検討してください。アプリケーションが非リアルタイム データの読み取りを許容できない場合は、 ステイル読み取りを有効にしないでください。
 
@@ -14,7 +14,7 @@ TiDB は、ステートメントレベル、トランザクションレベル、
 
 ## 導入 {#introduction}
 
-[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションでは、次の SQL文を使用して、最近出版された書籍とその価格を照会できます。
+[Bookshop](/develop/dev-guide-bookshop-schema-design.md)アプリケーションでは、次の SQL文を使用して、最近出版された書籍とその価格を照会できます。
 
 ```sql
 SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
@@ -67,7 +67,7 @@ Rows matched: 1  Changed: 1  Warnings: 0
 
 最新のデータを使用する必要がない場合は、古いデータを返す可能性のあるステイル読み取りを使用してクエリを実行し、強力な一貫性のある読み取り中にデータ複製によって発生するレイテンシーを回避できます。
 
-Bookshopアプリケーションでは、書籍のリアルタイム価格の表示は書籍一覧ページでは必須ではなく、書籍詳細ページと注文ページでのみ必要だと仮定します。Stale ステイル読み取りは、アプリケーション全体の改善に役立ちます。
+Bookshopアプリケーションでは、書籍のリアルタイム価格の表示は書籍一覧ページでは必須ではなく、書籍詳細ページと注文ページでのみ必要だと仮定します。ステイル読み取りは、アプリケーションのスループットの向上に役立ちます。
 
 ## ステートメントレベル {#statement-level}
 
@@ -97,13 +97,13 @@ SELECT id, title, type, price FROM books AS OF TIMESTAMP '2022-04-20 15:20:00' O
 
 正確な時間を指定することに加えて、次のことも指定できます。
 
-- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND` 10秒前の最新データを照会します。
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')` `2016-10-08 16:45:26`から`2016-10-08 16:45:29`の間の最新データを照会します。
-- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())` 20秒以内に最新のデータを照会します。
+- `AS OF TIMESTAMP NOW() - INTERVAL 10 SECOND`は10秒前の最新データを照会します。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS('2016-10-08 16:45:26', '2016-10-08 16:45:29')`は`2016-10-08 16:45:26`から`2016-10-08 16:45:29`の間の最新データを照会します。
+- `AS OF TIMESTAMP TIDB_BOUNDED_STALENESS(NOW() -INTERVAL 20 SECOND, NOW())`は20秒以内の最新データを照会します。
 
 指定するタイムスタンプまたは間隔は、現在の時刻より早すぎたり遅すぎたりしないようにしてください。また、 `NOW()`はデフォルトで秒精度となります。より高い精度を実現するには、パラメータを追加することができます。例えば、 `NOW(3)`ではミリ秒精度となります。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_now)を参照してください。
 
-期限切れのデータはTiDBで[ガベージコレクション](/garbage-collection-overview.md)リサイクルされ、クリアされるまでの短い期間保持されます。この期間は[GC の有効期間 (デフォルト 10分)](/system-variables.md#tidb_gc_life_time-new-in-v50)呼ばれます。GCが開始されると、現在の時刻からこの期間を差し引いた値が**GCセーフポイント**として使用されます。GCセーフポイントより前にデータを読み取ろうとすると、TiDBは次のエラーを報告します。
+期限切れのデータはTiDBで[ガベージコレクション](/garbage-collection-overview.md)によってリサイクルされ、クリアされるまでの短い期間保持されます。この期間は[GC の有効期間 (デフォルト 10分)](/system-variables.md#tidb_gc_life_time-new-in-v50)と呼ばれます。GCが開始されると、現在の時刻からこの期間を差し引いた値が**GCセーフポイント**として使用されます。GCセーフポイントより前にデータを読み取ろうとすると、TiDBは次のエラーを報告します。
 
 ```
 ERROR 9006 (HY000): GC life time is shorter than transaction duration...
@@ -257,7 +257,7 @@ SELECT id, title, type, price FROM books ORDER BY published_at DESC LIMIT 5;
 5 rows in set (0.01 sec)
 ```
 
-`COMMIT;`文目のトランザクションがコミットされた後、最新のデータを読み取ることができます。
+`COMMIT;`文のトランザクションがコミットされた後、最新のデータを読み取ることができます。
 
 ```
 +------------+------------------------------+-----------------------+--------+

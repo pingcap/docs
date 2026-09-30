@@ -36,7 +36,7 @@ SELECT ... FROM <query_name>;
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-[一時テーブル](/develop/dev-guide-use-temporary-tables.md)文を次のように変更します。
+[一時テーブル](/develop/dev-guide-use-temporary-tables.md)の文を次のように変更します。
 
 ```sql
 WITH top_50_eldest_authors_cte AS (
@@ -110,7 +110,7 @@ public List<Author> getTop50EldestAuthorInfoByCTE() throws SQLException {
 </div>
 </SimpleTab>
 
-著者"Ray Macejkovic"は4冊の本を執筆していることがわかります。CTEクエリを使用すると、これらの4冊の本の順序と評価情報を次のように取得できます。
+著者"Ray Macejkovic"は4冊の本を執筆していることがわかります。CTEクエリを使用すると、これらの4冊の本の注文と評価情報を次のように取得できます。
 
 ```sql
 WITH books_authored_by_rm AS (
@@ -161,7 +161,7 @@ FROM
 
 この SQL文では、 `,`で区切られた 3つの CTE ブロックが定義されています。
 
-まず、CTEブロック`books_authored_by_rm`で著者（ID `2299112019` ）が執筆した書籍を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でこれらの書籍の平均評価と順位をそれぞれ求めます。最後に、 `JOIN`ステートメントで結果を集計します。
+まず、CTEブロック`books_authored_by_rm`で著者（ID `2299112019` ）が執筆した書籍を調べます。次に、 `books_with_average_ratings`と`books_with_orders`でこれらの書籍の平均評価と注文をそれぞれ求めます。最後に、 `JOIN`ステートメントで結果を集計します。
 
 `books_authored_by_rm`のクエリは一度だけ実行され、その後 TiDB は結果をキャッシュするための一時領域を作成することに注意してください。`books_with_average_ratings`と`books_with_orders`のクエリが`books_authored_by_rm`を参照する場合、TiDB はこの一時領域から直接結果を取得します。
 
@@ -214,7 +214,7 @@ SELECT * FROM fibonacci;
 
 ## 続きを読む {#read-more}
 
-- [と](/sql-statements/sql-statement-with.md)
+- [WITH](/sql-statements/sql-statement-with.md)
 
 ## ヘルプが必要ですか? {#need-help}
 

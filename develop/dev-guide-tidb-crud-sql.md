@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-tidb-crud-sql/','/ja/tidb/dev/dev-guide-tid
 
 ## 始める前に {#before-you-start}
 
-TiDB に接続していることを確認してください。そうでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)、最初に接続します。
+TiDB に接続していることを確認してください。そうでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md#step-1-create-a-starter-instance)して、最初に接続します。
 
 ## TiDBでSQLを探求しよう {#explore-sql-with-tidb}
 
@@ -26,7 +26,7 @@ SQL を試して、MySQL クエリと TiDB の互換性をテストするには�
 
 ## カテゴリ {#category}
 
-SQLは、その関数に応じて以下の4種類に分類されます。
+SQLは、その機能に応じて以下の4種類に分類されます。
 
 - **DDL（データ定義言語）** ：データベース、テーブル、ビュー、インデックスなどのデータベースオブジェクトを定義するために使用されます。
 
@@ -40,7 +40,7 @@ SQLは、その関数に応じて以下の4種類に分類されます。
 
 ## データ操作言語 {#data-manipulation-language}
 
-一般的な DML 機能には、テーブル レコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE` 。
+一般的な DML 機能には、テーブル レコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE`です。
 
 テーブルにデータを挿入するには、 `INSERT`文を使用します。
 
@@ -74,7 +74,7 @@ DELETE FROM person WHERE id=2;
 
 DQLは、テーブルまたは複数のテーブルから目的のデータ行を取得するために使用されます。
 
-データを表形式で表示するには、 `SELECT`文を使用します。
+テーブル内のデータを表示するには、 `SELECT`文を使用します。
 
 ```sql
 SELECT * FROM person;
@@ -105,6 +105,6 @@ SELECT * FROM person WHERE id < 5;
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

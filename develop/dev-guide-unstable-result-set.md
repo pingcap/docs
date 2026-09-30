@@ -8,14 +8,14 @@ aliases: ['/ja/tidb/stable/dev-guide-unstable-result-set/','/ja/tidbcloud/dev-gu
 
 このドキュメントでは、不安定な結果セットのエラーを解決する方法について説明します。
 
-## グループ化 {#group-by}
+## GROUP BY {#group-by}
 
 便宜上、MySQLは`GROUP BY`構文を「拡張」し、 `SELECT`句で`GROUP BY`句で宣言されていない非集約フィールドを参照できるようにしています。つまり、 `NON-FULL GROUP BY`構文です。他のデータベースでは、これは不安定な結果セットを引き起こすため、構文***エラー***とみなされます。
 
 たとえば、次の2つのテーブルがあるとします。
 
-- `stu_info`学生情報を保存します
-- `stu_score`生徒のテストのスコアが格納されます。
+- `stu_info`は学生情報を保存します
+- `stu_score`には生徒のテストのスコアが格納されます。
 
 次に、次のような SQL クエリステートメントを記述します。
 
@@ -50,7 +50,7 @@ ORDER BY
 
 `a` . `class`および`a` . `stuname`フィールドは`GROUP BY`文で指定されており、選択された列は`a` . `class` 、 `a` . `stuname` 、 `b` . `courscore`です。`GROUP BY`条件に含まれない唯一の列である`b` . `courscore`も、 `max()`関数を使用して一意の値で指定されています。このSQL文を曖昧さなく満たす結果は***1つだけ***あり、これを`FULL GROUP BY`構文と呼びます。
 
-反例として、構文`NON-FULL GROUP BY`があります。例えば、この2つのテーブルに次のSQLクエリを記述します (delete `a` . `stuname` in `GROUP BY` )。
+反例として、構文`NON-FULL GROUP BY`があります。例えば、この2つのテーブルに次のSQLクエリを記述します ( `GROUP BY`から`a`.`stuname`を削除)。
 
 ```sql
 SELECT
@@ -91,9 +91,9 @@ ORDER BY
 +------------+--------------+------------------+
 ```
 
-結果が2つあるのは`stuname` SQLで`a`フィールドの値を取得する方法を指定しておら***ず***、2つの結果がどちらもSQLセマンティクスを満たしているためです。そのため、結果セットは不安定になります。したがって、 `GROUP BY`文の結果セットの安定性を保証したい場合は、 `FULL GROUP BY`構文を使用してください。
+結果が2つあるのはSQLで`a`.`stuname`フィールドの値を取得する方法を指定しておら***ず***、2つの結果がどちらもSQLセマンティクスを満たしているためです。そのため、結果セットは不安定になります。したがって、 `GROUP BY`文の結果セットの安定性を保証したい場合は、 `FULL GROUP BY`構文を使用してください。
 
-MySQLは、 `FULL GROUP BY`チェックを行うかどうかを制御するスイッチ`sql_mode`スイッチ`ONLY_FULL_GROUP_BY`を提供しています。TiDBもこのスイッチ`sql_mode`と互換性があります。
+MySQLは、 `FULL GROUP BY`チェックを行うかどうかを制御する`sql_mode`スイッチ`ONLY_FULL_GROUP_BY`を提供しています。TiDBもこの`sql_mode`スイッチと互換性があります。
 
 ```sql
 mysql> select a.class, a.stuname, max(b.courscore) from stu_info a join stu_score b on a.stuno=b.stuno group by a.class order by a.class, a.stuname;
@@ -114,7 +114,7 @@ ERROR 1055 (42000): Expression #2 of ORDER BY is not in GROUP BY clause and cont
 
 **実行結果**: 上記の例は、 `sql_mode`に`ONLY_FULL_GROUP_BY`を設定した場合の効果を示しています。
 
-## 注文方法 {#order-by}
+## ORDER BY {#order-by}
 
 SQLセマンティクスでは、 `ORDER BY`構文が使用されている場合にのみ結果セットが順序通りに出力されます。単一インスタンスのデータベースでは、データが1つのサーバーに保存されるため、複数回実行してもデータの再編成なしで結果が安定することがよくあります。一部のデータベース（特にMySQL InnoDBストレージエンジン）では、主キーまたはインデックスの順序で結果セットを出力することも可能です。
 
@@ -174,7 +174,7 @@ mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu
 
 TiDB はストレージレイヤーからデータを並列に読み取るため、結果セットは不安定になります。そのため、 `ORDER BY`なしで`GROUP_CONCAT()`によって返される結果セットの順序は不安定であると簡単に認識されます。
 
-`GROUP_CONCAT()`結果セットの出力を順序通りにするには、SQLセマンティクスに準拠した`ORDER BY`句にソートフィールドを追加する必要があります。次の例では、 `ORDER BY`を除いた`customer_id`を連結する`GROUP_CONCAT()`によって、結果セットが不安定になります。
+`GROUP_CONCAT()`で結果セットの出力を順序通りにするには、SQLセマンティクスに準拠した`ORDER BY`句にソートフィールドを追加する必要があります。次の例では、 `ORDER BY`を除いた`customer_id`を連結する`GROUP_CONCAT()`によって、結果セットが不安定になります。
 
 1. 除外`ORDER BY`
 
@@ -200,7 +200,7 @@ TiDB はストレージレイヤーからデータを並列に読み取るため
     +-------------------------------------------------------------------------+
     ```
 
-2. `ORDER BY`含む
+2. `ORDER BY`を含む
 
     最初のクエリ:
 

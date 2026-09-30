@@ -14,9 +14,9 @@ JavaアプリケーションでTiDBデータベースと連携する一般的な
 
 - ネットワーク プロトコル: クライアントは、標準の[MySQLプロトコル](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)を介して TiDBサーバーと対話します。
 - JDBC APIとJDBCドライバ： Javaアプリケーションは通常、標準の[JDBC（Javaデータベース接続）](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) APIを使用してデータベースにアクセスします。TiDBに接続するには、JDBC APIを介してMySQLプロトコルを実装するJDBCドライバを使用できます。MySQL用の一般的なJDBCドライバには[MySQL Connector/J](https://github.com/mysql/mysql-connector-j)や[MariaDB Connector/J](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#about-mariadb-connectorj)などがあります。
-- データベース接続プール：アプリケーションは通常、接続リクエストのたびに接続を作成するオーバーヘッドを削減するために、接続プールを使用して接続をキャッシュし、再利用します。JDBCData [データソース](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)接続プールAPIを定義しています。必要に応じて、さまざまなオープンソースの接続プール実装から選択できます。
+- データベース接続プール：アプリケーションは通常、接続リクエストのたびに接続を作成するオーバーヘッドを削減するために、接続プールを使用して接続をキャッシュし、再利用します。JDBC [DataSource](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)は接続プールAPIを定義しています。必要に応じて、さまざまなオープンソースの接続プール実装から選択できます。
 - データアクセスフレームワーク: アプリケーションは通常、 [MyBatis](https://mybatis.org/mybatis-3/index.html)や[Hibernate](https://hibernate.org/)などのデータアクセスフレームワークを使用して、データベースアクセス操作をさらに簡素化および管理します。
-- アプリケーションの実装: アプリケーションロジックは、いつどのコマンドをデータベースに送信するかを制御します。一部のアプリケーションは[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)アスペクトを使用して、トランザクションの開始およびコミットのロジックを管理します。
+- アプリケーションの実装: アプリケーションロジックは、いつどのコマンドをデータベースに送信するかを制御します。一部のアプリケーションは[Spring Transaction](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)アスペクトを使用して、トランザクションの開始およびコミットのロジックを管理します。
 
 ![Java application components](/media/best-practices/java-practice-1.png)
 
@@ -31,7 +31,7 @@ JavaアプリケーションでTiDBデータベースと連携する一般的な
 
 ## JDBC {#jdbc}
 
-Javaアプリケーションは、さまざまなフレームワークでカプセル化されたできます。ほとんどのフレームワークでは、データベースサーバーとのやり取りを行うために、最下層でJDBC APIが呼び出されます。JDBCに関しては、以下の点に重点を置くことをお勧めします。
+Javaアプリケーションは、さまざまなフレームワークでカプセル化できます。ほとんどのフレームワークでは、データベースサーバーとのやり取りを行うために、最下層でJDBC APIが呼び出されます。JDBCに関しては、以下の点に重点を置くことをお勧めします。
 
 - JDBC APIの使用方法の選択
 - API実装者のパラメータ設定
@@ -42,11 +42,11 @@ JDBC APIの使用方法については、 [JDBC公式チュートリアル](http
 
 #### Prepare APIを使用する {#use-prepare-api}
 
-OLTP (オンライントランザクション処理) シナリオの場合、プログラムによってデータベースに送信される SQL 文は、パラメーターの変更を削除した後に枯渇する可能性があるいくつかのタイプです。したがって、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)の代わりに[プリペアド文](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアド文を再利用して直接実行することをお勧めします。これにより、TiDB で SQL 実行計画を繰り返し解析して生成するオーバーヘッドが回避されます。
+OLTP (オンライントランザクション処理) シナリオの場合、プログラムによってデータベースに送信される SQL 文は、パラメーターの変更を除くと、数種類に限られます。したがって、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)の代わりに[プリペアド文](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアド文を再利用して直接実行することをお勧めします。これにより、TiDB で SQL 実行計画を繰り返し解析して生成するオーバーヘッドが回避されます。
 
 現在、ほとんどの上位フレームワークはSQL実行のためにPrepare APIを呼び出しています。開発でJDBC APIを直接使用する場合は、Prepare APIを選択するように注意してください。
 
-さらに、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、 `?`がクライアント側で置換された後、ステートメントはテキストファイルとしてサーバーに送信されます。そのため、Prepare API を使用するだけでなく、TiDB サーバーでステートメントの前処理を実行する前に、JDBC 接続サーバーで`useServerPrepStmts = true`を設定する必要があります。パラメータ設定の詳細については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)ドキュメントを参照してください。
+さらに、MySQL Connector/J のデフォルト実装では、クライアント側のステートメントのみが前処理され、 `?`がクライアント側で置換された後、ステートメントはテキストファイルとしてサーバーに送信されます。そのため、Prepare API を使用するだけでなく、TiDB サーバーでステートメントの前処理を実行する前に、JDBC 接続パラメータで`useServerPrepStmts = true`を設定する必要があります。パラメータ設定の詳細については、 [MySQL JDBC パラメータ](#mysql-jdbc-parameters)ドキュメントを参照してください。
 
 #### バッチAPIを使用する {#use-batch-api}
 
@@ -64,13 +64,13 @@ OLTP (オンライントランザクション処理) シナリオの場合、プ
 
 JDBCでは通常、以下の2つの処理方法が使用されます。
 
-- 最初のメソッド: [`FetchSize` `Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+- 最初のメソッド: [`FetchSize`を`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)ことで、クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
     クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントの使用を続行する前に、読み取りを完了するか`resultset`を閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
-    クライアントが`resultset`読み取りを完了または閉じる前にクエリでこのようなエラーが発生するのを回避するには、URL に`clobberStreamingResults=true`パラメータを追加します。そうすると、 `resultset`は自動的に閉じられますが、前のストリーミング クエリで読み取られる結果セットは失われます。
+    クライアントが読み取りを完了するか`resultset`を閉じる前にクエリでこのようなエラーが発生するのを回避するには、URL に`clobberStreamingResults=true`パラメータを追加します。そうすると、 `resultset`は自動的に閉じられますが、前のストリーミング クエリで読み取られる結果セットは失われます。
 
-- 2番目の方法：まず[`FetchSize`設定](https://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
+- 2番目の方法：まず[`FetchSize`を正の整数に設定](https://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)し、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
 
 TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`を`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 
@@ -119,7 +119,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 ##### `prepStmtCacheSize` {#prepstmtcachesize}
 
-`prepStmtCacheSize`キャッシュされるプリペアドステートメントの数を制御します (デフォルト値は`25`です)。アプリケーションで多くの種類の SQL文を「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
+`prepStmtCacheSize`は、キャッシュされるプリペアドステートメントの数を制御します (デフォルト値は`25`です)。アプリケーションで多くの種類の SQL文を「準備」する必要があり、プリペアドステートメントを再利用したい場合は、この値を増やすことができます。
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
@@ -229,7 +229,7 @@ TiDB（MySQL）接続の構築は、（少なくともOLTPシナリオにおい�
 TiDBは以下のJava接続プールをサポートしています。
 
 - [HikariCP](https://github.com/brettwooldridge/HikariCP)
-- [トムキャットJDBC](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool)
+- [tomcat-jdbc](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool)
 - [druid](https://github.com/alibaba/druid)
 - [c3p0](https://www.mchange.com/projects/c3p0/)
 - [dbcp](https://commons.apache.org/proper/commons-dbcp/)
@@ -272,7 +272,7 @@ Javaアプリケーションで以下のエラーが頻繁に発生する場合�
 The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 ```
 
-`n`内の`n milliseconds ago`の値が`0`または非常に小さい値である場合、通常は実行された SQL 操作によって TiDB が異常終了したことが原因です。原因を特定するには、TiDB の標準エラーログを確認することをお勧めします。
+`n milliseconds ago`の`n`の値が`0`または非常に小さい値である場合、通常は実行された SQL 操作によって TiDB が異常終了したことが原因です。原因を特定するには、TiDB の標準エラーログを確認することをお勧めします。
 
 `n`の値が非常に大きい場合 (上記の例の`3600000`など)、この接続が長時間アイドル状態になり、中間プロキシによって閉じられた可能性が高いです。通常の解決策は、プロキシのアイドル設定の値を増やし、接続プールが次の操作を実行できるようにすることです。
 
@@ -288,7 +288,7 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 ### MyBatis {#mybatis}
 
-[MyBatis](http://www.mybatis.org/mybatis-3/) 、人気の高いJavaデータアクセスフレームワークです。主にSQLクエリの管理や、結果セットとJavaオブジェクト間のマッピングに使用されます。MyBatisはTiDBとの互換性が非常に高く、過去の事例に基づくと、問題が発生することは稀です。
+[MyBatis](http://www.mybatis.org/mybatis-3/)は、人気の高いJavaデータアクセスフレームワークです。主にSQLクエリの管理や、結果セットとJavaオブジェクト間のマッピングに使用されます。MyBatisはTiDBとの互換性が非常に高く、過去の事例に基づくと、問題が発生することは稀です。
 
 この文書では、主に以下の構成に焦点を当てています。
 
@@ -296,7 +296,7 @@ The last packet sent successfully to the server was 3600000 milliseconds ago. Th
 
 MyBatis Mapperは2つのパラメータをサポートしています。
 
-- `select 1 from t where id = #{param1}` 、プリペアドステートメントとして`select 1 from t where id =?`に変換され、「準備済み」の状態になります。実際のパラメータは再利用されます。このパラメータを前述の接続準備パラメータと併用すると、最高のパフォーマンスが得られます。
+- `select 1 from t where id = #{param1}`は、プリペアドステートメントとして`select 1 from t where id =?`に変換され、「準備済み」の状態になります。実際のパラメータは再利用されます。このパラメータを前述の接続準備パラメータと併用すると、最高のパフォーマンスが得られます。
 - `select 1 from t where id = ${param2}`はテキストファイル`select 1 from t where id = 1`に置き換えられ、実行されます。このステートメントが異なるパラメータに置き換えられて実行されると、MyBatis はステートメントの「準備」のために TiDB に異なるリクエストを送信します。これにより、TiDB が多数のプリペアドステートメントをキャッシュする可能性があり、この方法で SQL 操作を実行すると、インジェクションのセキュリティリスクが発生します。
 
 #### 動的SQLバッチ {#dynamic-sql-batch}
@@ -319,13 +319,13 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 </insert>
 ```
 
-このマッパーは`insert on duplicate key update`文を生成します。 `(?,?,?)`に続く"values"の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
+このマッパーは`insert on duplicate key update`文を生成します。 "values"に続く`(?,?,?)`の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
 
 前述のとおり、プリペアドステートメントの最大長が`prepStmtCacheSqlLimit`の値を超えると、キャッシュされないことにも注意する必要があります。
 
 #### ストリーミング結果 {#streaming-result}
 
-[前のセクション](#use-streamingresult-to-get-the-execution-result)JDBC で読み取り実行結果をストリーミングする方法を紹介します。 MyBatis で超大規模な結果セットを読み込む場合は、JDBC の対応する設定に加えて、次の点にも注意する必要があります。
+[前のセクション](#use-streamingresult-to-get-the-execution-result)では、JDBC で読み取り実行結果をストリーミングする方法を紹介します。 MyBatis で超大規模な結果セットを読み込む場合は、JDBC の対応する設定に加えて、次の点にも注意する必要があります。
 
 - マッパー構成で単一の SQL文に対して`fetchSize`を設定できます (前のコードブロックを参照)。その効果は、JDBC で`setFetchSize`を呼び出すのと同等です。
 - `ResultHandler`を使用したクエリ インターフェースを使用すると、結果セット全体を一度に取得することを避けることができます。
@@ -357,9 +357,9 @@ Cursor<Post> queryAllPost();
 
 通常、 `ExecutorType`のデフォルト値は`Simple`です。 `openSession`を呼び出すときは`ExecutorType`を変更する必要があります。バッチ実行の場合、トランザクション内で`UPDATE`または`INSERT`文の実行は非常に高速ですが、データの読み取りやトランザクションのコミットは遅くなる場合があります。これは正常な動作ですので、SQL クエリの遅延をトラブルシューティングする際には、この点に注意してください。
 
-## 春のトランザクション {#spring-transaction}
+## Spring Transaction {#spring-transaction}
 
-現実の世界では、アプリケーションは[春のトランザクション](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)と AOP のアスペクトを使用してトランザクションを開始および停止する場合があります。
+現実の世界では、アプリケーションは[Spring Transaction](https://docs.spring.io/spring/docs/4.2.x/spring-framework-reference/html/transaction.html)と AOP のアスペクトを使用してトランザクションを開始および停止する場合があります。
 
 メソッド定義に`@Transactional`アノテーションを追加することで、AOP はメソッドが呼び出される前にトランザクションを開始し、メソッドが結果を返す前にトランザクションをコミットします。アプリケーションで同様の要件がある場合は、コード内で`@Transactional`を見つけることで、トランザクションの開始と終了のタイミングを判断できます。
 
@@ -375,7 +375,7 @@ Javaアプリケーションで問題が発生し、そのアプリケーショ�
 
 #### jstack {#jstack}
 
-[jstack](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jstack.html) Go言語のpprof/goroutineに似ており、プロセスが停止する問題を容易にトラブルシューティングできます。
+[jstack](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jstack.html)は Go言語のpprof/goroutineに似ており、プロセスが停止する問題を容易にトラブルシューティングできます。
 
 `jstack pid`を実行すると、対象プロセス内のすべてのスレッドの ID とスタック情報を出力できます。デフォルトでは、 Javaスタックのみが出力されます。JVM 内の C++ スタックも同時に出力する場合は、 `-m`オプションを追加してください。
 
@@ -388,7 +388,7 @@ jstackを複数回使用することで、スタックしている問題（例�
 
 #### jmap & mat {#jmap--mat}
 
-Go の pprof/heap とは異なり、 [jmap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)プロセス全体のメモリスナップショットをダンプし (Go ではディストリビュータのサンプリング)、その後、スナップ[Eclipse MAT](https://www.eclipse.org/mat/)を別のツールで分析できます。
+Go の pprof/heap とは異なり、 [jmap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)はプロセス全体のメモリスナップショットをダンプし (Go ではディストリビュータのサンプリング)、その後、そのスナップショットを別のツール[Eclipse MAT](https://www.eclipse.org/mat/)で分析できます。
 
 mat を使用すると、プロセス内のすべてのオブジェクトに関連付けられた情報と属性を確認できるほか、スレッドの実行状態も監視できます。たとえば、mat を使用して、現在のアプリケーションに存在する MySQL 接続オブジェクトの数、および各接続オブジェクトのアドレスと状態情報を調べることができます。
 
@@ -398,7 +398,7 @@ matはデフォルトでは到達可能なオブジェクトのみを処理す�
 
 オンラインアプリケーションは通常、コードの変更をサポートしていませんが、 Javaで動的な計測を実行して問題箇所を特定することが求められる場合がよくあります。そのため、btraceやarthas traceを使用するのが良い選択肢となります。これらのツールは、アプリケーションプロセスを再起動することなく、トレースコードを動的に挿入できます。
 
-#### 炎のグラフ {#flame-graph}
+#### フレームグラフ {#flame-graph}
 
 Javaアプリケーションでフレームグラフを取得するのは面倒です。詳細については、 [Java Flame Graphs入門：みんなのための炎！](http://psy-lob-saw.blogspot.com/2017/02/flamegraphs-intro-fire-for-everyone.html)を参照してください。
 
@@ -408,4 +408,4 @@ Javaアプリケーションでフレームグラフを取得するのは面倒�
 
 ## お困りですか？ {#need-help}
 
-[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](/support.md)。
+[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](/support.md)。
