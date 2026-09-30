@@ -5,7 +5,7 @@ summary: "`CHECK_CONSTRAINTS` INFORMATION_SCHEMA テーブルについて学習�
 
 # CHECK_CONSTRAINTS {#check-constraints}
 
-`CHECK_CONSTRAINTS`表には、 [`CHECK`制約](/constraints.md#check)表に関する情報が示されています。
+`CHECK_CONSTRAINTS`表には、 テーブルの[`CHECK`制約](/constraints.md#check)に関する情報が示されています。
 
 ```sql
 USE INFORMATION_SCHEMA;

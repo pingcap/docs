@@ -28,7 +28,7 @@ summary: TiDBは、システムメタデータを表示するためのANSI標準
 | `GLOBAL_STATUS`                                                                                                            | TiDBでは実装されていません。0行を返します。                                                             |
 | `GLOBAL_VARIABLES`                                                                                                         | TiDBでは実装されていません。0行を返します。                                                             |
 | [`KEYWORDS`](/information-schema/information-schema-keywords.md)                                                           | キーワードの完全なリストを提供します。                                                                  |
-| [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)                                           | 列の重要な制約（主キー制約など）について説明します。                                                           |
+| [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)                                           | 列のキー制約（主キー制約など）について説明します。                                                           |
 | `OPTIMIZER_TRACE`                                                                                                          | TiDBでは実装されていません。0行を返します。                                                             |
 | `PARAMETERS`                                                                                                               | TiDBでは実装されていません。0行を返します。                                                             |
 | [`PARTITIONS`](/information-schema/information-schema-partitions.md)                                                       | テーブルパーティションの一覧を提供します。                                                                |
@@ -70,7 +70,7 @@ summary: TiDBは、システムメタデータを表示するためのANSI標準
 | `FILES`                                                                                                                    | TiDBでは実装されていません。0行を返します。                                                             |
 | `GLOBAL_STATUS`                                                                                                            | TiDBでは実装されていません。0行を返します。                                                             |
 | `GLOBAL_VARIABLES`                                                                                                         | TiDBでは実装されていません。0行を返します。                                                             |
-| [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)                                           | 列の重要な制約（主キー制約など）について説明します。                                                           |
+| [`KEY_COLUMN_USAGE`](/information-schema/information-schema-key-column-usage.md)                                           | 列のキー制約（主キー制約など）について説明します。                                                           |
 | `OPTIMIZER_TRACE`                                                                                                          | TiDBでは実装されていません。0行を返します。                                                             |
 | `PARAMETERS`                                                                                                               | TiDBでは実装されていません。0行を返します。                                                             |
 | [`PARTITIONS`](/information-schema/information-schema-partitions.md)                                                       | テーブルパーティションの一覧を提供します。                                                                |

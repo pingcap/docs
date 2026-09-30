@@ -35,7 +35,7 @@ DESC keywords;
 SELECT * FROM INFORMATION_SCHEMA.KEYWORDS WHERE WORD IN ('ADD','USER');
 ```
 
-出力から、 `ADD`予約済みキーワードであり、 `USER`非予約済みキーワードであることがわかります。
+出力から、 `ADD`は予約済みキーワードであり、 `USER`は非予約済みキーワードであることがわかります。
 
 ```
 +------+----------+

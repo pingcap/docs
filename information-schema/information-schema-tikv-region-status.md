@@ -69,7 +69,7 @@ DESC TIKV_REGION_STATUS;
 - `REPLICATIONSTATUS_STATE` :リージョンの現在のレプリケーション状態。状態は`UNKNOWN` 、 `SIMPLE_MAJORITY` 、または`INTEGRITY_OVER_LABEL`のいずれかになります。
 - `REPLICATIONSTATUS_STATEID` : `REPLICATIONSTATUS_STATE`に対応する識別子。
 
-また、 `top confver` 、 `top read` 、 `top write`操作を、 `ORDER BY X LIMIT Y` `EPOCH_CONF_VER`列に対する`WRITTEN_BYTES`操作によって`READ_BYTES` 。
+また、 `EPOCH_CONF_VER` 、 `WRITTEN_BYTES` 、 `READ_BYTES`列に対する`ORDER BY X LIMIT Y`操作によって、pd-ctl の`top confver` 、 `top read` 、 `top write`操作を実装できます。
 
 以下のSQL文を使用すると、書き込みデータが最も多い上位3つのリージョンを照会できます。
 

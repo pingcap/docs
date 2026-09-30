@@ -50,7 +50,7 @@ DESC TIKV_STORE_STATUS;
 - `STORE_ID` : ストアのID。
 - `ADDRESS` : ストアのアドレス。
 - `STORE_STATE` : ストア状態の識別子。これは`STORE_STATE_NAME`に対応します。
-- `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone` 。
+- `STORE_STATE_NAME` : ストア状態の名前。名前は`Up` 、 `Offline` 、または`Tombstone`です。
 - `LABEL` : ストアのラベルセット。
 - `VERSION` : ストアのバージョン番号。
 - `CAPACITY` : ストアのストレージ容量。

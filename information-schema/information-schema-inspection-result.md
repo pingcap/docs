@@ -214,7 +214,7 @@ select * from information_schema.inspection_rules where type='inspection';
 
 - 以下の設定項目の値が期待どおりであるかどうかを確認します。
 
-    | コンポーネント   | 設定項目       | しきい値      |
+    | コンポーネント   | 設定項目       | 期待値      |
     | ---- | ------------------ | -------- |
     | TiDB | log.slow-threshold | `0`より大きい |
 
@@ -259,7 +259,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 `threshold-check`診断ルールは、メトリックスキーマ内の関連する監視システムテーブルを照会して、クラスター内の次のメトリックがしきい値を超えているかどうかを確認します。
 
-| コンポーネント   | 監視メトリック              | 監視テーブル                              | しきい値       | 説明                                                                                                               |
+| コンポーネント   | 監視メトリック              | 監視テーブル                              | 期待値       | 説明                                                                                                               |
 | :--- | :------------------- | :---------------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
 | TiDB | tso-duration              | pd_tso_wait_duration                | 50ミリ秒未満   | トランザクションの TSO を取得するまでの待機時間。                                                                                      |
 | TiDB | get-token-duration        | tidb_get_token_duration             | 1ミリ秒未満    | トークンの取得にかかる時間を照会します。関連するTiDB設定項目は[`token-limit`](/command-line-flags-for-tidb-configuration.md#--token-limit)です。 |
@@ -270,11 +270,11 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 | TiKV | storage-snapshot-duration | tikv_storage_async_request_duration | 50ミリ秒未満   | TiKV がスナップショットを取得するのにかかる時間。                                                                                      |
 | TiKV | rocksdb-write-duration    | tikv_engine_write_duration          | 100ミリ秒未満  | TiKV RocksDB の書き込みレイテンシー。                                                                                        |
 | TiKV | rocksdb-get-duration | tikv_engine_max_get_duration        | 50ミリ秒未満   | TiKV RocksDB の読み取りレイテンシー。                                                                                        |
-| TiKV | rocksdb-seek-duration     | tikv_engine_max_seek_duration       | 50ミリ秒未満   | TiKV RocksDB の実行レイテンシーは`seek` 。                                                                                  |
+| TiKV | rocksdb-seek-duration     | tikv_engine_max_seek_duration       | 50ミリ秒未満   | TiKV RocksDB が`seek`を実行するレイテンシー。                                                                                  |
 | TiKV | scheduler-pending-cmd-coun | tikv_scheduler_pending_commands     | 1000未満    | TiKV で停止したコマンドの数。                                                                                                |
-| TiKV | index-block-cache-hit     | tikv_block_index_cache_hit          | 0.95      | TiKV のインデックスブロックキャッシュのヒット率。                                                                                      |
-| TiKV | filter-block-cache-hit    | tikv_block_filter_cache_hit         | 0.95      | TiKV のフィルターブロックキャッシュのヒット率。                                                                                       |
-| TiKV | data-block-cache-hit      | tikv_block_data_cache_hit           | 0.80      | TiKV のデータブロックキャッシュのヒット率。                                                                                         |
+| TiKV | index-block-cache-hit     | tikv_block_index_cache_hit          | > 0.95   | TiKV のインデックスブロックキャッシュのヒット率。                                                                                      |
+| TiKV | filter-block-cache-hit    | tikv_block_filter_cache_hit         | > 0.95   | TiKV のフィルターブロックキャッシュのヒット率。                                                                                       |
+| TiKV | data-block-cache-hit      | tikv_block_data_cache_hit           | > 0.80   | TiKV のデータブロックキャッシュのヒット率。                                                                                         |
 | TiKV | leader-score-balance      | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリーダースコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                      |
 | TiKV | region-score-balance      | pd_scheduler_store_status           | &lt; 0.05 | 各TiKVインスタンスのリージョンスコアが均衡しているかどうかを確認します。インスタンス間の期待される差は5%未満です。                                                     |
 | TiKV | store-available-balance   | pd_scheduler_store_status           | &lt; 0.2  | 各TiKVインスタンスの利用可能なストレージのバランスを確認します。インスタンス間の差は20%未満であることが想定されています。                                                 |
@@ -283,16 +283,16 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
 
 さらに、このルールは、TiKV インスタンス内の次のスレッドの CPU 使用率が高すぎるかどうかもチェックします。
 
-- スケジューラワーカーCPU
-- コプロセッサ-通常のCPU
-- コプロセッサ-高CPU
-- コプロセッサ-低CPU
+- scheduler-worker-cpu
+- coprocessor-normal-cpu
+- coprocessor-high-cpu
+- coprocessor-low-cpu
 - grpc-cpu
-- ラフトストアCPU
-- CPU適用
-- ストレージ読み取りプール - 通常 - CPU
-- ストレージ読み取りプールの高CPU
-- ストレージ読み取りプールの低CPU
-- スプリットチェックCPU
+- raftstore-cpu
+- apply-cpu
+- storage-readpool-normal-cpu
+- storage-readpool-high-cpu
+- storage-readpool-low-cpu
+- split-check-cpu
 
 組み込みの診断ルールは常に改善されています。さらに診断ルールをお持ちの場合は、 [`tidb`リポジトリ](https://github.com/pingcap/tidb)に PR または Issue を作成してください。

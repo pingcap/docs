@@ -53,4 +53,4 @@ TiDB クラスターには多くの監視メトリックがあるため、TiDB �
 上記のクラスタ情報テーブルおよびクラスタ監視テーブルでは、クラスタのトラブルシューティングを行うために手動でSQL文を実行する必要があります。TiDB v4.0は自動診断をサポートしています。既存の基本情報テーブルをベースにした診断関連のシステムテーブルを使用することで、診断を自動実行できます。自動診断に関連するシステムテーブルは以下のとおりです。
 
 - 診断結果テーブル[`information_schema.inspection_result`](/information-schema/information-schema-inspection-result.md)には、システムの診断結果が表示されます。診断は受動的にトリガーされます。`select * from inspection_result`を実行すると、すべての診断ルールがトリガーされ、システムが診断され、システム内の障害またはリスクが結果に表示されます。
-- 診断サマリーテーブル[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md) 、特定のリンクまたはモジュールの監視情報を要約したものです。モジュールまたはリンク全体のコンテキストに基づいて、トラブルシューティングを行い、問題を特定することができます。
+- 診断サマリーテーブル[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md)は、特定のリンクまたはモジュールの監視情報を要約したものです。モジュールまたはリンク全体のコンテキストに基づいて、トラブルシューティングを行い、問題を特定することができます。

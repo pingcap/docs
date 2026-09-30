@@ -137,7 +137,7 @@ RESOURCE_GROUP: default
 
 </CustomContent>
 
-## クラスタープロセスリスト {#cluster_processlist}
+## CLUSTER_PROCESSLIST {#cluster_processlist}
 
 `CLUSTER_PROCESSLIST`は`PROCESSLIST`に対応するクラスタシステムテーブルです。これは、クラスタ内のすべての TiDB ノードの`PROCESSLIST`情報を照会するために使用されます。 `CLUSTER_PROCESSLIST`のテーブルスキーマには`PROCESSLIST`よりも1つ多い列、つまり`INSTANCE`列があり、このデータ行の元となる TiDB ノードのアドレスが格納されます。
 
@@ -155,4 +155,4 @@ SELECT * FROM information_schema.cluster_processlist;
 
 ## 権限 {#permissions}
 
-現在のユーザーに`PROCESS`権限がない場合、 `PROCESSLIST`ユーザー自身のセッションからのリクエストのみを表示します。
+現在のユーザーに`PROCESS`権限がない場合、 `PROCESSLIST`はユーザー自身のセッションからのリクエストのみを表示します。

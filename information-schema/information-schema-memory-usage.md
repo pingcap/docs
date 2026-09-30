@@ -49,7 +49,7 @@ SELECT * FROM information_schema.memory_usage;
 - MEMORY_TOTAL: TiDB の使用可能なメモリの合計 (バイト単位)。
 - MEMORY_LIMIT: TiDBのメモリ使用量の制限（バイト単位）。この値はシステム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)の値と同じです。
 - MEMORY_CURRENT: TiDB の現在のメモリ使用量 (バイト単位)。
-- MEMORY_MAX_USED: TiDB の起動時から現在までのメモリ使用量 (バイト単位)。
+- MEMORY_MAX_USED: TiDB の起動時から現在までの最大メモリ使用量 (バイト単位)。
 - CURRENT_OPS: "shrinking" | null。"shrinking" は、TiDB がメモリ使用量を削減する操作を実行していることを意味します。
 - SESSION_KILL_LAST: セッションが最後に終了した時刻のタイムスタンプ。
 - SESSION_KILL_TOTAL: TiDB の開始時から現在までに終了したセッションの回数。

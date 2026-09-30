@@ -59,7 +59,7 @@ DESC TIDB_TRX;
 >
 > - [PROCESS](https://dev.mysql.com/doc/refman/8.0/en/privileges-provided.html#priv_process)権限を持つユーザーのみがこのテーブルの完全な情報を取得できます。PROCESS権限を持たないユーザーは、現在のユーザーが実行したトランザクションの情報のみを照会できます。
 > - `CURRENT_SQL_DIGEST`列と`ALL_SQL_DIGESTS`列の情報（SQLダイジェスト）は、正規化されたSQL文から計算されたハッシュ値です。`CURRENT_SQL_DIGEST_TEXT`列の情報と`TIDB_DECODE_SQL_DIGESTS`関数から返される結果は、内部的にステートメントサマリーテーブルから照会されるため、対応するステートメントが内部的に見つからない可能性があります。SQLダイジェストとステートメントサマリーテーブルの詳細については、 [ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
-> - [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数呼び出しは大きなオーバーヘッドを伴います。この関数を多数のトランザクションの履歴SQL文のクエリに使用した場合、クエリに長時間かかる可能性があります。クラスターが大きく、同時トランザクション数が多い場合は、 `TIDB_TRX`のテーブル全体をクエリする際に、 `ALL_SQL_DIGEST`列に対してこの関数を直接使用することは避けてください。つまり、 `SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX`ようなSQL文は避けてください。
+> - [`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)関数呼び出しは大きなオーバーヘッドを伴います。この関数を多数のトランザクションの履歴SQL文のクエリに使用した場合、クエリに長時間かかる可能性があります。クラスターが大きく、同時トランザクション数が多い場合は、 `TIDB_TRX`のテーブル全体をクエリする際に、 `ALL_SQL_DIGEST`列に対してこの関数を直接使用することは避けてください。つまり、 `SELECT *, tidb_decode_sql_digests(all_sql_digests) FROM TIDB_TRX`のようなSQL文は避けてください。
 > - 現在、 `TIDB_TRX`テーブルは TiDB 内部トランザクションの情報の表示をサポートしていません。
 
 ## 例 {#example}
@@ -102,7 +102,7 @@ CURRENT_SQL_DIGEST_TEXT: update `t` set `v` = `v` + ? where `id` = ?
 2 rows in set (0.01 sec)
 ```
 
-この例のクエリ結果から、現在のノードには2つの実行中のトランザクションがあることがわかります。1つのトランザクションはアイドル状態（ `STATE`は`Idle` 、 `CURRENT_SQL_DIGEST`は`NULL` ）で、このトランザクションは3つの文を実行しました（ `ALL_SQL_DIGESTS`リストには3つのレコードがあり、これは実行された3つのSQL文のダイジェストです）。もう1つのトランザクションは文を実行し、ロックを待機しています（ `STATE`は`LockWaiting` 、 `WAITING_START_TIME`待機中のロックの開始時刻を示しています）。トランザクションは2つの文を実行し、現在実行中の文は``"update `t` set `v` = `v` + ? where `id` = ?"``の形式になっています。
+この例のクエリ結果から、現在のノードには2つの実行中のトランザクションがあることがわかります。1つのトランザクションはアイドル状態（ `STATE`は`Idle` 、 `CURRENT_SQL_DIGEST`は`NULL` ）で、このトランザクションは3つの文を実行しました（ `ALL_SQL_DIGESTS`リストには3つのレコードがあり、これは実行された3つのSQL文のダイジェストです）。もう1つのトランザクションは文を実行し、ロックを待機しています（ `STATE`は`LockWaiting` 、 `WAITING_START_TIME`は待機中のロックの開始時刻を示しています）。トランザクションは2つの文を実行し、現在実行中の文は``"update `t` set `v` = `v` + ? where `id` = ?"``の形式になっています。
 
 ```sql
 SELECT id, all_sql_digests, tidb_decode_sql_digests(all_sql_digests) AS all_sqls FROM INFORMATION_SCHEMA.TIDB_TRX\G
@@ -121,7 +121,7 @@ all_sql_digests: ["e6f07d43b5c21db0fbb9a31feac2dc599787763393dd5acbfad80e247eb02
        all_sqls: ["begin","update `t` set `v` = `v` + ? where `id` = ?"]
 ```
 
-このクエリは、テーブル`TIDB_TRX`の列`ALL_SQL_DIGESTS`に対して関数[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)呼び出し、システム内部クエリを通じてSQLダイジェスト配列を正規化されたSQL文の配列に変換します。これにより、トランザクションによって実行された過去のSQL文の情報を視覚的に取得できます。ただし、上記のクエリはテーブル`TIDB_TRX`全体をスキャンし、各行に対して関数`TIDB_DECODE_SQL_DIGESTS`呼び出すことに注意してください。関数`TIDB_DECODE_SQL_DIGESTS`呼び出しには大きなオーバーヘッドがかかります。したがって、クラスター内に多数の同時トランザクションが存在する場合は、このタイプのクエリの使用を避けてください。
+このクエリは、テーブル`TIDB_TRX`の列`ALL_SQL_DIGESTS`に対して関数[`TIDB_DECODE_SQL_DIGESTS`](/functions-and-operators/tidb-functions.md#tidb_decode_sql_digests)を呼び出し、システム内部クエリを通じてSQLダイジェスト配列を正規化されたSQL文の配列に変換します。これにより、トランザクションによって実行された過去のSQL文の情報を視覚的に取得できます。ただし、上記のクエリはテーブル`TIDB_TRX`全体をスキャンし、各行に対して関数`TIDB_DECODE_SQL_DIGESTS`を呼び出すことに注意してください。関数`TIDB_DECODE_SQL_DIGESTS`呼び出しには大きなオーバーヘッドがかかります。したがって、クラスター内に多数の同時トランザクションが存在する場合は、このタイプのクエリの使用を避けてください。
 
 ## CLUSTER_TIDB_TRX {#cluster_tidb_trx}
 

@@ -5,7 +5,7 @@ summary: "`TABLE_CONSTRAINTS` information_schema テーブルについて学習�
 
 # TABLE_CONSTRAINTS {#table-constraints}
 
-`TABLE_CONSTRAINTS`表は、どの表に[制約](/constraints.md)あるかを説明します。
+`TABLE_CONSTRAINTS`表は、どの表に[制約](/constraints.md)があるかを説明します。
 
 ```sql
 USE information_schema;

@@ -58,7 +58,7 @@ COLLATION_CONNECTION: utf8mb4_0900_ai_ci
 
 `VIEWS`テーブル内のフィールドは次のように説明されます。
 
-- `TABLE_CATALOG` : ビューが属するカタログの名前。この値は常に`def` 。
+- `TABLE_CATALOG` : ビューが属するカタログの名前。この値は常に`def`です。
 - `TABLE_SCHEMA` : ビューが属するスキーマの名前。
 - `TABLE_NAME` : ビュー名。
 - `VIEW_DEFINITION` : ビューの定義。ビューが作成されるときに`SELECT`文によって作成されます。

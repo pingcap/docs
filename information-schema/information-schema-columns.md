@@ -85,8 +85,8 @@ CHARACTER_MAXIMUM_LENGTH: NULL
 - `TABLE_NAME` : 列を含むテーブルの名前。
 - `COLUMN_NAME` : 列の名前。
 - `ORDINAL_POSITION` : テーブル内の列の位置。
-- `COLUMN_DEFAULT` : 列のデフォルト値。明示的なデフォルト値が`NULL`の場合、または列定義に`default`句が含まれていない場合、この値は`NULL`なります。
-- `IS_NULLABLE` : 列がNULL値可能かどうか。列がNULL値を格納できる場合、この値は`YES` 、そうでない場合は`NO`なります。
+- `COLUMN_DEFAULT` : 列のデフォルト値。明示的なデフォルト値が`NULL`の場合、または列定義に`default`句が含まれていない場合、この値は`NULL`になります。
+- `IS_NULLABLE` : 列がNULL値可能かどうか。列がNULL値を格納できる場合、この値は`YES` 、そうでない場合は`NO`になります。
 - `DATA_TYPE` : 列内のデータのタイプ。
 - `CHARACTER_MAXIMUM_LENGTH` : 文字列列の場合、文字の最大長。
 - `CHARACTER_OCTET_LENGTH` : 文字列列の場合、最大長（バイト単位）。

@@ -105,10 +105,10 @@ SHOW TABLES
 - `VERSION` : バージョン。デフォルトの値は`10`です。
 - `ROW_FORMAT` : 行形式。現在の値は`Compact`です。
 - `TABLE_ROWS` : 統計におけるテーブル内の行数。
-- `AVG_ROW_LENGTH` : 表の平均行の長さ`AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS` 。
+- `AVG_ROW_LENGTH` : 表の平均行の長さ。 `AVG_ROW_LENGTH` = `DATA_LENGTH` / `TABLE_ROWS` 。
 - `DATA_LENGTH` : データ長。`DATA_LENGTH` = `TABLE_ROWS` * タプル内の列のストレージ長の合計。TiKVのレプリカは考慮されません。
-- `MAX_DATA_LENGTH` : 最大データ長。現在の値は`0` 、データ長に上限がないことを意味します。
-- `INDEX_LENGTH` : インデックスの長さ`INDEX_LENGTH` = `TABLE_ROWS` * インデックスタプル内の列の長さの合計。TiKVのレプリカは考慮されません。
+- `MAX_DATA_LENGTH` : 最大データ長。現在の値は`0`で、データ長に上限がないことを意味します。
+- `INDEX_LENGTH` : インデックスの長さ。 `INDEX_LENGTH` = `TABLE_ROWS` * インデックスタプル内の列の長さの合計。TiKVのレプリカは考慮されません。
 - `DATA_FREE` : データフラグメント。現在の値は`0`です。
 - `AUTO_INCREMENT` : 現在のAUTO_INCREMENT主キーの値。
 - `CREATE_TIME` : テーブルが作成された時刻。
@@ -131,4 +131,4 @@ SHOW TABLES
 - `TIDB_PK_TYPE` : テーブルの主キーの種類。可能な値は`CLUSTERED` (クラスター化主キー) と`NONCLUSTERED` (非クラスター化主キー) です。
 - `TIDB_PLACEMENT_POLICY_NAME` : テーブルに適用された配置ポリシーの名前。
 - `TIDB_TABLE_MODE` : テーブルのモード。たとえば、 `Normal` 、 `Import` 、 `Restore` 。
-- `TIDB_AFFINITY` : テーブルのアフィニティレベル。パーティション化されていないテーブルの場合は`table` 、パーティション化されたテーブルの場合は`partition` 、アフィニティが有効化されていない場合は`NULL`なります。
+- `TIDB_AFFINITY` : テーブルのアフィニティレベル。パーティション化されていないテーブルの場合は`table` 、パーティション化されたテーブルの場合は`partition` 、アフィニティが有効化されていない場合は`NULL`になります。
