@@ -103,19 +103,12 @@ The **Bills** tab shows the billing summary by projects & instances and the bill
 
 > **Note:**
 >
-> Your **Bills** data and the data in **Cost Explorer** or **Usage Details** CSV download are processed and presented at different levels of granularity. **Bills** data is calculated for monthly settlement, while **Cost Explorer** and **Usage Details** CSV download provide more granular breakdowns, such as by day, service, project, cluster, or resource. As a result, the totals might vary slightly due to rounding at different aggregation levels.
->
-> **Cost Explorer** and **Usage Details** CSV download are intended for usage and cost analysis. If these data sources differ, the amount shown on your invoice is the final amount you owe.
+> - Your **Bills** data and the data in **Cost Explorer** or **Usage Details** CSV download are processed and presented at different levels of granularity. **Bills** data is calculated for monthly settlement, while **Cost Explorer** and **Usage Details** CSV download provide more granular breakdowns, such as by day, service, project, cluster, or resource. As a result, the totals might vary slightly due to rounding at different aggregation levels.
+> - **Cost Explorer** and **Usage Details** CSV download are intended for usage and cost analysis. If these data sources differ, the amount shown on your invoice is the final amount you owe.
 
 The following are billing explanations related to storage:
 
 - **Row-based storage**: TiDB tables use row-based storage by default, with data stored in **TiKV**. <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
-
-- **Row-based storage with IA**: Row-based storage with Infrequent Access (IA) stores data in **remote object storage**, designed for data that is rarely accessed but still needs to be available for online queries. <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
-
-    > **Note:**
-    >
-    > Infrequent Access is currently in private preview and is only available upon request.
 
 - **Columnar storage**: Columnar storage is powered by the **TiFlash** engine. <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
