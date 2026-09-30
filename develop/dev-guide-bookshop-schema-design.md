@@ -1,6 +1,6 @@
 ---
 title: Bookshop Example Application
-summary: "Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。TiUPまたはTiDB Cloudを使用して、テーブル構造とデータをインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成してインポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、書籍、著者、ユーザー、評価、書籍著者、注文が含まれます。データベース初期化スクリプト`dbinit.sql`は、Bookshopアプリケーションのテーブル構造を作成します。"
+summary: "Bookshopは、書籍の購入と評価を行うオンライン書店アプリです。TiUPまたはTiDB Cloudを使用して、テーブル構造とデータをインポートできます。方法1ではTiUPを使用してサンプルデータを迅速に生成してインポートし、方法2ではAmazon S3からTiDB Cloudにデータをインポートします。データベーステーブルには、books、authors、users、ratings、book_authors、orders が含まれます。データベース初期化スクリプト`dbinit.sql`は、Bookshopアプリケーションのテーブル構造を作成します。"
 aliases: ['/ja/tidb/stable/dev-guide-bookshop-schema-design/','/ja/tidb/dev/dev-guide-bookshop-schema-design/','/ja/tidbcloud/dev-guide-bookshop-schema-design/']
 ---
 
@@ -25,7 +25,7 @@ Bookshopアプリケーションのテーブル構造とデータをインポー
 tiup demo bookshop prepare
 ```
 
-デフォルトでは、このコマンドは、アプリケーションがアドレス`4000`のポート`127.0.0.1`に接続できるようにし、パスワードなしで`root`ユーザーとしてログインできるようにし、データベースに`bookshop`という名前の[テーブル構造](#description-of-the-tables)を作成します。
+デフォルトでは、このコマンドは、アプリケーションがアドレス`127.0.0.1`のポート`4000`に接続できるようにし、パスワードなしで`root`ユーザーとしてログインできるようにし、データベースに`bookshop`という名前の[テーブル構造](#description-of-the-tables)を作成します。
 
 #### 接続情報を設定する {#configure-connection-information}
 
@@ -89,7 +89,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
 
     - **Import File Count**： TiDB Cloud Starterの場合は、 **Multiple files**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
     - **Included Schema Files**：**Yes**を選択してください。
-    - **Data Format**: SELECT **SQL** 。
+    - **Data Format**: **SQL**を選択します。
     - **Folder URI** : `s3://developer.pingcap.com/bookshop/`を入力してください。
     - **Bucket Access**: **AWS Role ARN**を選択します。
     - **Role ARN** : `arn:aws:iam::494090988690:role/s3-tidb-cloud-developer-access`を入力してください。
@@ -102,7 +102,7 @@ tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --rati
     - 1,000,000行の評価記録
     - 1,000,000行の注文記録
 
-4. **Connect** ＞ **Start Import**をクリックしてインポート処理を開始し、 TiDB Cloudインポート完了をお待ちください。
+4. **Connect** ＞ **Start Import**をクリックしてインポート処理を開始し、 TiDB Cloudがインポートを完了するまでお待ちください。
 
 データをTiDB Cloudにインポートまたは移行する方法の詳細については、 [TiDB Cloud移行の概要](https://docs.pingcap.com/tidbcloud/tidb-cloud-migration-overview)を参照してください。
 
@@ -155,7 +155,7 @@ WHERE table_schema LIKE 'bookshop';
 | price      | DECIMAL(15,2)  | 価格                       |
 | published_at | DATETIME     | 発行日                      |
 
-### `authors`一覧 {#authors-table}
+### `authors`テーブル {#authors-table}
 
 この表には著者の基本情報が格納されています。
 
@@ -174,7 +174,7 @@ WHERE table_schema LIKE 'bookshop';
 | フィールド名 | 型             | 説明        |
 | ---------- | -------------- | --------- |
 | id         | BIGINT         | ユーザーの固有ID |
-| balance    | DECIMAL(15,2)  | バランス      |
+| balance    | DECIMAL(15,2)  | 残高      |
 | nickname   | VARCHAR(100)   | ニックネーム    |
 
 ### `ratings`表 {#ratings-table}
@@ -183,8 +183,8 @@ WHERE table_schema LIKE 'bookshop';
 
 | フィールド名 | 型       | 説明                                     |
 | ---------- | -------- | -------------------------------------- |
-| book_id    | BIGINT   | 書籍の固有ID（[本](#books-table)にリンク）         |
-| user_id    | BIGINT   | ユーザーの一意の識別子 ([ユーザー](#users-table)にリンク) |
+| book_id    | BIGINT   | 書籍の固有ID（[books](#books-table)にリンク）         |
+| user_id    | BIGINT   | ユーザーの一意の識別子 ([users](#users-table)にリンク) |
 | score      | TINYINT  | ユーザー評価（1～5）                            |
 | rated_at   | DATETIME | 評価時間                                   |
 
@@ -194,8 +194,8 @@ WHERE table_schema LIKE 'bookshop';
 
 | フィールド名 | 型      | 説明                                 |
 | ---------- | ------- | ---------------------------------- |
-| book_id    | BIGINT  | 書籍の固有ID（[本](#books-table)にリンク）     |
-| author_id  | BIGINT  | 著者の固有ID（[著者](#authors-table)へのリンク） |
+| book_id    | BIGINT  | 書籍の固有ID（[books](#books-table)にリンク）     |
+| author_id  | BIGINT  | 著者の固有ID（[authors](#authors-table)へのリンク） |
 
 ### `orders`テーブル {#orders-table}
 
@@ -204,8 +204,8 @@ WHERE table_schema LIKE 'bookshop';
 | フィールド名 | 型       | 説明                                           |
 | ---------- | -------- | -------------------------------------------- |
 | id         | BIGINT   | 注文の固有ID                                      |
-| book_id    | BIGINT   | 書籍の固有ID（[本](#books-table)にリンク）               |
-| user_id    | BIGINT   | ユーザーの一意の識別子 ([ユーザー](#users-table)に関連付けられている) |
+| book_id    | BIGINT   | 書籍の固有ID（[books](#books-table)にリンク）               |
+| user_id    | BIGINT   | ユーザーの一意の識別子 ([users](#users-table)に関連付けられている) |
 | quantity   | TINYINT  | 購入数量                                         |
 | ordered_at | DATETIME | 購入時間                                         |
 
@@ -277,6 +277,6 @@ CREATE TABLE `bookshop`.`orders` (
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

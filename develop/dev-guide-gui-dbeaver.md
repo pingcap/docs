@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-dbeaver/','/ja/tidb/dev/dev-guide-gui-d
 
 # DBeaverを使用してTiDBに接続する {#connect-to-tidb-with-dbeaver}
 
-TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](https://dbeaver.io/download/)開発者、データベース管理者、アナリスト、およびデータを扱うすべての人向けの無料のクロスプラットフォームデータベースツールです。
+TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbeaver.io/download/)は、開発者、データベース管理者、アナリスト、およびデータを扱うすべての人向けの無料のクロスプラットフォームデータベースツールです。
 
 このチュートリアルでは、DBeaver Communityを使用してTiDBに接続する方法を学ぶことができます。
 
@@ -114,10 +114,10 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
     | DBeaverフィールド | TiDB Cloud Premium接続文字列 |
     | ------------ | ----------------------- |
-    | サーバーホスト      | `{host}`                |
-    | ポート          | `{port}`                |
-    | ユーザー名        | `{user}`                |
-    | パスワード        | `{password}`            |
+    | Server Host      | `{host}`                |
+    | Port          | `{port}`                |
+    | Username        | `{user}`                |
+    | Password        | `{password}`            |
 
     SSL設定は無効のままにしてください。
 
@@ -204,10 +204,10 @@ TiDBはMySQL互換データベースであり、 [DBeaverコミュニティ](htt
 
 - DBeaver の使用法の詳細については[DBeaverのドキュメント](https://github.com/dbeaver/dbeaver/wiki)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

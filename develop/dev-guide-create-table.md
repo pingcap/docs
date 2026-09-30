@@ -6,21 +6,21 @@ aliases: ['/ja/tidb/stable/dev-guide-create-table/','/ja/tidb/dev/dev-guide-crea
 
 # テーブルを作成する {#create-a-table}
 
-このドキュメントでは、SQL文を使用してテーブルを作成する方法と、関連するベストプラクティスについて説明します。ベストプラクティスを説明するために、TiDBベースの[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションの例を示します。
+このドキュメントでは、SQL文を使用してテーブルを作成する方法と、関連するベストプラクティスについて説明します。ベストプラクティスを説明するために、TiDBベースの[Bookshop](/develop/dev-guide-bookshop-schema-design.md)アプリケーションの例を示します。
 
 ## 始める前に {#before-you-start}
 
 この文書を読む前に、以下の作業が完了していることを確認してください。
 
 - [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)お読みください。
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)をお読みください。
 - [データベースを作成する](/develop/dev-guide-create-database.md)。
 
 ## テーブルとは何ですか {#what-is-a-table}
 
-[テーブル](/develop/dev-guide-schema-design-overview.md#table)、TiDB の論理オブジェクトであり、 の[データベース](/develop/dev-guide-schema-design-overview.md#database)オブジェクトです。SQL文から送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータレコードを保存します。テーブルには少なくとも 1つの列があります。 `n`列を定義した場合、各データ行には`n`列とまったく同じフィールドが含まれます。
+[テーブル](/develop/dev-guide-schema-design-overview.md#table)は、[データベース](/develop/dev-guide-schema-design-overview.md#database)に従属する TiDB の論理オブジェクトです。SQL文から送信されたデータを格納するために使用されます。テーブルは、行と列の形式でデータレコードを保存します。テーブルには少なくとも 1つの列があります。 `n`列を定義した場合、各データ行には`n`列とまったく同じフィールドが含まれます。
 
-## テーブルの名前を挙げてください {#name-a-table}
+## テーブルに名前を付ける {#name-a-table}
 
 テーブルを作成する最初のステップは、テーブルに名前を付けることです。将来、自分や同僚に大きな負担をかけるような、意味のない名前は使用しないでください。会社や組織のテーブル命名規則に従うことをお勧めします。
 
@@ -57,7 +57,7 @@ CREATE TABLE `bookshop`.`users` (
 **パラメータの説明**
 
 - `{column_name}` : 列名。
-- `{data_type}` : 列[データ型](/data-type-overview.md)。
+- `{data_type}` : 列の[データ型](/data-type-overview.md)。
 - `{column_qualification}` :**列レベルの制約**や[生成列](/generated-columns.md)句などのカラム修飾。
 
 `users`テーブルに、一意の識別子`id` 、 `balance` 、 `nickname`などの列を追加できます。
@@ -70,15 +70,15 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-上記の記述では、 `id`という名前とタイプ[ビギント](/data-type-numeric.md#bigint-type)を持つフィールドが定義されています。これは、一意のユーザー識別子を表すために使用されます。つまり、すべてのユーザー識別子は`bigint`タイプである必要があります。
+上記の記述では、 `id`という名前とタイプ[bigint](/data-type-numeric.md#bigint-type)を持つフィールドが定義されています。これは、一意のユーザー識別子を表すために使用されます。つまり、すべてのユーザー識別子は`bigint`タイプである必要があります。
 
 次に、 `nickname`という名前のフィールドが定義されます。これは[varchar](/data-type-string.md#varchar-type)型で、長さの制限は 100 文字です。つまり、ユーザーの`nicknames`は`varchar`型を使用し、100 文字を超えないということです。
 
-最後に、 `balance`という名前のフィールドが追加されます。これは[小数](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2` 。**精度**はフィールド内の桁数の合計を表し、**スケール**は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5` 、スケールが`2`で、範囲は`-999.99`から`999.99`となります。 `decimal(6,1)`は、精度が`6` 、スケールが`1`で、範囲が`-99999.9`から`99999.9`であることを意味します。decimal**は**[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (たとえば、ユーザー プロパティ関連) では、 **decimal**型を使用するようにしてください。
+最後に、 `balance`という名前のフィールドが追加されます。これは[decimal](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2` 。**精度**はフィールド内の桁数の合計を表し、**スケール**は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5` 、スケールが`2`で、範囲は`-999.99`から`999.99`となります。 `decimal(6,1)`は、精度が`6` 、スケールが`1`で、範囲が`-99999.9`から`99999.9`であることを意味します。**decimal**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (たとえば、ユーザー プロパティ関連) では、 **decimal**型を使用するようにしてください。
 
-TiDB は、[整数型](/data-type-numeric.md#integer-types)、 [浮動小数点型](/data-type-numeric.md#floating-point-types)、[固定小数点型](/data-type-numeric.md#fixed-point-types)小数点型、[日付と時刻の種類](/data-type-date-and-time.md)、[列挙型](/data-type-string.md#enum-type)など、他の多くの列データ型をサポートしています。サポートされている列の[データ型](/data-type-overview.md)を参照し、データベースに保存したいデータに一致する**データ型**を使用できます。
+TiDB は、[整数型](/data-type-numeric.md#integer-types)、 [浮動小数点型](/data-type-numeric.md#floating-point-types)、[固定小数点型](/data-type-numeric.md#fixed-point-types)、[日付と時刻の種類](/data-type-date-and-time.md)、[列挙型](/data-type-string.md#enum-type)など、他の多くの列データ型をサポートしています。サポートされている列の[データ型](/data-type-overview.md)を参照し、データベースに保存したいデータに一致する**データ型**を使用できます。
 
-もう少し複雑にするには、 `books`データの核となる`bookshop`テーブルを定義できます。 `books`テーブルには、書籍の ID、タイトル、種類 (雑誌、小説、ライフ、芸術など)、在庫、価格、出版日などのフィールドが含まれます。
+もう少し複雑にするには、 `bookshop`データの核となる`books`テーブルを定義できます。 `books`テーブルには、書籍の ID、タイトル、種類 (雑誌、小説、ライフ、芸術など)、在庫、価格、出版日などのフィールドが含まれます。
 
 ```sql
 CREATE TABLE `bookshop`.`books` (
@@ -93,9 +93,9 @@ CREATE TABLE `bookshop`.`books` (
 
 このテーブルには`users`テーブルよりも多くのデータ型が含まれています。
 
-- [整数](/data-type-numeric.md#integer-types): ディスク使用量の過剰使用やパフォーマンスへの影響（型範囲が大きすぎる場合）またはデータオーバーフロー（データ型範囲が小さすぎる場合）を避けるため、適切なサイズの型を使用することをお勧めします。
-- [日時](/data-type-date-and-time.md)型は、時間値を格納できます。
-- [列挙型](/data-type-string.md#enum-type): enum型は、限られた値の選択を格納するために使用できます。
+- [int](/data-type-numeric.md#integer-types): ディスク使用量の過剰使用やパフォーマンスへの影響（型範囲が大きすぎる場合）またはデータオーバーフロー（データ型範囲が小さすぎる場合）を避けるため、適切なサイズの型を使用することをお勧めします。
+- [datetime](/data-type-date-and-time.md)型は、時間値を格納できます。
+- [enum](/data-type-string.md#enum-type): enum型は、限られた値の選択を格納するために使用できます。
 
 ## 主キーを選択 {#select-primary-key}
 
@@ -146,7 +146,7 @@ TiDB は v5.0 以降、[クラスター化インデックス](/clustered-indexes
 
 > **Note:**
 >
-> TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートしています。クラスター化インデックスが有効になっている場合、 *{* `PRIMARY KEY`と*クラスター化インデックス*という用語は同じ意味で使用されることがあります。 `PRIMARY KEY`は制約 (論理プロパティ) を指し、クラスター化インデックスはデータの格納方法の物理的な実装を表します。
+> TiDB は、テーブルの`PRIMARY KEY`によるクラスタリングのみをサポートしています。クラスター化インデックスが有効になっている場合、 `PRIMARY KEY`と*クラスター化インデックス*という用語は同じ意味で使用されることがあります。 `PRIMARY KEY`は制約 (論理プロパティ) を指し、クラスター化インデックスはデータの格納方法の物理的な実装を表します。
 
 [クラスター化インデックスを選択するためのガイドライン](#guidelines-to-follow-when-selecting-clustered-index)に従って、次の例では、 `books`と`users`の間の関連付けを持つテーブルを作成します。これは、 `users`による`book`の`ratings`を表します。この例では、テーブルを作成し、 `book_id`と`user_id`を使用して複合主キーを構築し、その**主キー**に**クラスター化インデックス**を作成します。
 
@@ -168,7 +168,7 @@ CREATE TABLE `bookshop`.`ratings` (
 
 列にデフォルト値を設定するには、 `DEFAULT`制約を使用します。デフォルト値を使用すると、各列の値を指定せずにデータを挿入できます。
 
-`DEFAULT` [サポートされているSQL関数](/functions-and-operators/functions-and-operators-overview.md)と組み合わせて使用できます。これにより、デフォルト値の計算をアプリケーションレイヤーから外すことで、アプリケーションレイヤーのリソースを節約できます。計算によって消費されたリソースは消滅せず、データベースによって処理されます。通常、デフォルト値を使用してデータを挿入できます。以下は`ratings`テーブルにデフォルト値を設定する例です。
+`DEFAULT`は[サポートされているSQL関数](/functions-and-operators/functions-and-operators-overview.md)と組み合わせて使用できます。これにより、デフォルト値の計算をアプリケーションレイヤーから外すことで、アプリケーションレイヤーのリソースを節約できます。計算によって消費されたリソースは消滅せず、データベースによって処理されます。通常、デフォルト値を使用してデータを挿入できます。以下は`ratings`テーブルにデフォルト値を設定する例です。
 
 ```sql
 CREATE TABLE `bookshop`.`ratings` (
@@ -209,7 +209,7 @@ CREATE TABLE `bookshop`.`users` (
 );
 ```
 
-`nickname`を`users`テーブルに挿入しようとすると、エラーが返されます。
+同じ`nickname`を`users`テーブルに挿入しようとすると、エラーが返されます。
 
 ### null値を防止する {#prevent-null-values}
 
@@ -295,7 +295,7 @@ EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` 
 
 ## `CREATE TABLE`文を実行します。 {#execute-the-create-table-statement}
 
-上記のルールに従ってすべてのテーブルを作成した後、データベース[データベースの初期化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql)スクリプトは次のようになります。テーブル情報を詳しく見たい場合は、 [表の説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
+上記のルールに従ってすべてのテーブルを作成した後、[データベースの初期化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql)スクリプトは次のようになります。テーブル情報を詳しく見たい場合は、 [表の説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
 
 データベース初期化スクリプトに`init.sql`という名前を付けて保存するには、次のステートメントを実行してデータベースを初期化します。
 
@@ -344,15 +344,15 @@ SHOW TABLES IN `bookshop`;
 
 - 列のサポート[データ型](/data-type-overview.md)を確認し、データ型の制約に従ってデータを整理してください。列に格納するデータに適した型を選択してください。
 - 主キーの選択に関する[従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)を確認し、主キー列を使用するかどうかを決定します。
-- クラスター化インデックスを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-clustered-index)ガイドラインを確認し、**クラスター化インデックス**を指定するかどうかを決定してください。
-- [列制約を追加する](#add-column-constraints)チェックし、列に制約を追加するかどうかを決定します。
+- クラスター化インデックスを選択するための[従うべきガイドライン](#guidelines-to-follow-when-selecting-clustered-index)を確認し、**クラスター化インデックス**を指定するかどうかを決定してください。
+- [列制約を追加する](#add-column-constraints)をチェックし、列に制約を追加するかどうかを決定します。
 - 意味のある列名を使用してください。会社または組織のテーブル命名規則に従うことをお勧めします。会社または組織に対応する命名規則がない場合は、 [列名の命名規則](/develop/dev-guide-object-naming-guidelines.md#column-naming-convention)を参照してください。
 
 ### 主キーを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-primary-key}
 
 - テーブル内に**主キー**または**一意インデックス**を定義します。
 - 意味のある**列**を**主キー**として選択するようにしてください。
-- パフォーマンス上の理由から、幅の広いテーブルを保存することは避けてください。テーブルフィールドの数が`60`を超え、1行のデータの合計サイズが`64K`超えることは推奨されません。データ長が長すぎるフィールドは、別のテーブルに分割することをお勧めします。
+- パフォーマンス上の理由から、幅の広いテーブルを保存することは避けてください。テーブルフィールドの数が`60`を超え、1行のデータの合計サイズが`64K`を超えることは推奨されません。データ長が長すぎるフィールドは、別のテーブルに分割することをお勧めします。
 - 複雑なデータ型を使用することは推奨されません。
 - 結合するフィールドについては、データ型が一致していることを確認し、暗黙的な型変換を避けてください。
 - 単一の単調データ列に**主キー**を定義することは避けてください。単一の単調データ列（たとえば、 `AUTO_INCREMENT`属性を持つ列）を使用して**主キー**を定義すると、書き込みパフォーマンスに影響が出る可能性があります。可能であれば、 `AUTO_INCREMENT`ではなく`AUTO_RANDOM`を使用してください。これにより、主キーの連続性および増分属性が破棄されます。
@@ -369,7 +369,7 @@ SHOW TABLES IN `bookshop`;
     - 同等条件または範囲条件を含むクエリが主キーのプレフィックスのみに関係する場合、クラスター化インデックスはネットワークからのインデックスデータの複数回の読み取りを削減します。
 
 - 一方、クラスター化インデックスを持つテーブルには、次のような問題が発生する可能性があります。
-    - 近い値を持つ主キーを多数挿入すると、書き込みホットスポットの問題が発生する可能性があります。 [主キーを選択する際に従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)てください。
+    - 近い値を持つ主キーを多数挿入すると、書き込みホットスポットの問題が発生する可能性があります。 [主キーを選択する際に従うべきガイドライン](#guidelines-to-follow-when-selecting-primary-key)に従ってくださいください。
     - 主キーのデータ型が64ビットより大きい場合、特にセカンダリインデックスが複数存在する場合は、テーブルデータがより多くのストレージ容量を消費します。
 
 - [クラスター化インデックスを使用するかどうかのデフォルトの動作](/clustered-indexes.md#create-a-table-with-clustered-indexes)を制御するには、システム変数`@@global.tidb_enable_clustered_index`と構成`alter-primary-key`を使用する代わりに、クラスター化インデックスを使用するかどうかを明示的に指定できます。
@@ -377,7 +377,7 @@ SHOW TABLES IN `bookshop`;
 ### `CREATE TABLE`文を実行する際に従うべきガイドライン {#guidelines-to-follow-when-executing-the-create-table-statement}
 
 - データベーススキーマの変更にクライアント側のDriverやORMを使用することは推奨されません。データベーススキーマの変更には[MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。このドキュメントでは、ほとんどのシナリオでSQLファイルを渡してデータベーススキーマを変更するために**MySQLクライアント**を使用します。
-- SQL 開発[テーブルの作成と削除に関する仕様](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables)従ってください。ビジネスアプリケーション内にbuild文とdelete文をラップして判定ロジックを追加することを推奨します。
+- SQL 開発[テーブルの作成と削除に関する仕様](/develop/dev-guide-sql-development-specification.md#create-and-delete-tables)に従ってください。ビジネスアプリケーション内にテーブルの作成文と削除文をラップして判定ロジックを追加することを推奨します。
 
 ## あと一歩 {#one-more-step}
 
@@ -385,6 +385,6 @@ SHOW TABLES IN `bookshop`;
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -29,7 +29,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、 [TiDB Clou
     - ユーザーは[アクセスキー](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)を使用して AWS にアクセスできます。
     - ユーザーには以下の権限が付与されています。
 
-        - `AWSCertificateManagerFullAccess` : [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)読み書きに使用されます。
+        - `AWSCertificateManagerFullAccess` : [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/)の読み書きに使用されます。
         - `AWSCloudFormationFullAccess` : SAM CLI は[AWS CloudFormation](https://aws.amazon.com/cloudformation/)を使用して AWS リソースを宣言します。
         - `AmazonS3FullAccess` : AWS CloudFormation は[Amazon S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)を使用して公開します。
         - `AWSLambda_FullAccess` : 現在、Amazon AppFlow 用の新しいコネクタを実装する方法は[AWS Lambda](https://aws.amazon.com/lambda/?nc2=h_ql_prod_fs_lbd)のみです。
@@ -41,7 +41,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、 [TiDB Clou
 
 ### コードを複製する {#clone-the-code}
 
-TiDB と Amazon AppFlow の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-appflow-integration)クローンを作成します。
+TiDB と Amazon AppFlow の[統合例のコードリポジトリ](https://github.com/pingcap-inc/tidb-appflow-integration)のクローンを作成します。
 
 ```bash
 git clone https://github.com/pingcap-inc/tidb-appflow-integration
@@ -87,7 +87,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ### Lambdaを使用してコネクタを登録します {#use-lambda-to-register-a-connector}
 
-1. [AWS マネジメントコンソール](https://console.aws.amazon.com)コンソールで、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)クリックし、 **Register a new connector**をクリックします。
+1. [AWS マネジメントコンソール](https://console.aws.amazon.com)で、 [Amazon AppFlow &gt; コネクタ](https://console.aws.amazon.com/appflow/home#/gallery)に移動し、 **Register a new connector**をクリックします。
 
     ![register connector](/media/develop/aws-appflow-step-register-connector.png)
 
@@ -192,11 +192,11 @@ Salesforce の**Account**オブジェクトのフィールドを TiDB の`sf_acc
 - このドキュメントでは、以下のマッピングルール（ソースフィールド名→宛先フィールド名）が必要です。
 
     - アカウントID -> id
-    - アカウント名 -> 名前
-    - アカウントタイプ -> タイプ
+    - アカウント名 -> name
+    - アカウントタイプ -> type
     - 請求先州/都道府県 -> billing_state
-    - アカウント評価 -> 評価
-    - 産業 -> 産業
+    - アカウント評価 -> rating
+    - 産業 -> industry
 
     ![mapping a rule](/media/develop/aws-appflow-step-mapping-a-rule.png)
 
@@ -256,6 +256,6 @@ test> SELECT * FROM sf_account;
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

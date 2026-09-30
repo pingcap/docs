@@ -20,7 +20,7 @@ aliases: ['/ja/tidb/stable/dev-guide-connection-parameters/','/ja/tidb/dev/dev-g
 
 TiDB（MySQL）接続の構築は、（少なくともOLTPシナリオにおいては）比較的コストがかかります。これは、TCP接続の確立に加えて、接続認証も必要となるためです。そのため、クライアントは通常、TiDB（MySQL）接続を接続プールに保存して再利用します。
 
-Javaには[Tomcat JDBC](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html) [HikariCP](https://github.com/brettwooldridge/HikariCP) [dbcp](https://commons.apache.org/proper/commons-dbcp/)多くの接続プール実装があります。TiDBは使用できる接続プール[druid](https://github.com/alibaba/druid)制限しないため、アプリケーションに合わせて好きなもの[c3p0](https://www.mchange.com/projects/c3p0/)を選択できます。
+Javaには、 [HikariCP](https://github.com/brettwooldridge/HikariCP)、 [tomcat-jdbc](https://tomcat.apache.org/tomcat-10.1-doc/jdbc-pool.html)、 [druid](https://github.com/alibaba/druid)、 [c3p0](https://www.mchange.com/projects/c3p0/)、 [dbcp](https://commons.apache.org/proper/commons-dbcp/)など、多くの接続プール実装があります。TiDBは使用する接続プールを制限しないため、アプリケーションに合わせて好きなものを選択できます。
 
 ### 接続数を設定する {#configure-the-number-of-connections}
 
@@ -70,7 +70,7 @@ TiDBサーバーがシャットダウン、メンテナンスのために再起�
 - バージョン5.4より前のTiDBでは、デフォルトでは（エラーが報告されない限り）クライアント接続を積極的に閉じることはありません。
 - バージョン5.4以降、TiDBはデフォルトで`28800`秒間（つまり`8`時間）の非アクティブ状態が続くとクライアント接続を自動的に閉じます。このタイムアウト設定は、TiDBとMySQL互換の`wait_timeout`変数を使用して制御できます。詳細については、 [JDBCクエリタイムアウト](/develop/dev-guide-timeouts-in-tidb.md#jdbc-query-timeout)を参照してください。
 
-さらに、クライアントとTiDBの間には、 [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server)や[HAProxy](https://en.wikipedia.org/wiki/HAProxy)ようなネットワークプロキシが存在する場合があります。これらのプロキシは通常、特定のアイドル期間（プロキシのアイドル設定によって決定されます）が経過すると、接続を自動的にクリーンアップします。接続プールは、プロキシのアイドル設定を監視するだけでなく、キープアライブのために接続を維持またはプローブする必要もあります。
+さらに、クライアントとTiDBの間には、 [LVS](https://en.wikipedia.org/wiki/Linux_Virtual_Server)や[HAProxy](https://en.wikipedia.org/wiki/HAProxy)のようなネットワークプロキシが存在する場合があります。これらのプロキシは通常、特定のアイドル期間（プロキシのアイドル設定によって決定されます）が経過すると、接続を自動的にクリーンアップします。接続プールは、プロキシのアイドル設定を監視するだけでなく、キープアライブのために接続を維持またはプローブする必要もあります。
 
 Javaアプリケーションで以下のエラーが頻繁に発生する場合：
 
@@ -78,7 +78,7 @@ Javaアプリケーションで以下のエラーが頻繁に発生する場合�
 The last packet sent successfully to the server was 3600000 milliseconds ago. The driver has not received any packets from the server. com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
 ```
 
-`n`が`n milliseconds ago`または非常に`0`値の場合、通常は実行されたSQL操作によってTiDBが異常終了したことが原因です。原因を特定するには、TiDBの標準エラーログを確認することをお勧めします。
+`n milliseconds ago`の`n`が`0`または非常に小さい値の場合、通常は実行されたSQL操作によってTiDBが異常終了したことが原因です。原因を特定するには、TiDBの標準エラーログを確認することをお勧めします。
 
 `n`が非常に大きな値 (上記の例の`3600000`など) の場合、この接続は長時間アイドル状態になり、その後プロキシによって閉じられた可能性が高いです。通常の解決策は、プロキシのアイドル設定の値を増やし、接続プールが次のことを実行できるようにすることです。
 
@@ -100,11 +100,11 @@ connections = ((core_count * 2) + effective_spindle_count)
 
 式中の各パラメータの説明は以下のとおりです。
 
-- **接続数**：取得された接続のサイズ。
+- **connections**：取得された接続のサイズ。
 - **core_count** ：CPUコアの数。
-- **effective_spindle_count** ：ハードドライブの数（ [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません）。回転するハードディスクはそれぞれスピンドルと呼ばれるためです。たとえば、16台のディスクで構成されたRAIDサーバーを使用している場合、 **effective_spindle_count**は16になります。HDD**は**通常、一度に1つのリクエストしか処理できないため、この式は実際にはサーバーが同時に処理できるI/Oリクエストの数を測定しています。
+- **effective_spindle_count** ：ハードドライブの数（ [SSD](https://en.wikipedia.org/wiki/Solid-state_drive)ではありません）。回転するハードディスクはそれぞれスピンドルと呼ばれるためです。たとえば、16台のディスクで構成されたRAIDサーバーを使用している場合、 **effective_spindle_count**は16になります。**HDD**は通常、一度に1つのリクエストしか処理できないため、この式は実際にはサーバーが同時に処理できるI/Oリクエストの数を測定しています。
 
-特に、 [式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)下の次の注記に注意してください。
+特に、 [式](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing#the-formula)の下にある次の注記に注意してください。
 
 > ```
 > A formula which has held up pretty well across a lot of benchmarks for years is
@@ -119,7 +119,7 @@ connections = ((core_count * 2) + effective_spindle_count)
 このメモは以下を示しています。
 
 - **core_count**は、 [ハイパースレッディング](https://en.wikipedia.org/wiki/Hyper-threading)を有効にするかどうかに関わらず、物理コアの数です。
-- データが完全にキャッシュされると、 **effective_spindle_count**を`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは実際の数値である`HDD`に近づきます。
+- データが完全にキャッシュされると、 **effective_spindle_count**を`0`に設定する必要があります。キャッシュのヒット率が低下すると、カウントは`HDD`の実際の数に近づきます。
 - **この計算式が*SSD*にも有効かどうかは検証されておらず、不明です。**
 
 SSDを使用する場合は、経験に基づき、以下の式を使用することをお勧めします。
@@ -141,7 +141,7 @@ connections = (number of cores * 4)
 
 ## 接続パラメータ {#connection-parameters}
 
-Javaアプリケーションは、さまざまなフレームワークでカプセル化されたできます。ほとんどのフレームワークでは、データベースサーバーとのやり取りを行うために、最下層でJDBC APIが呼び出されます。JDBCに関しては、以下の点に重点を置くことをお勧めします。
+Javaアプリケーションは、さまざまなフレームワークでカプセル化できます。ほとんどのフレームワークでは、データベースサーバーとのやり取りを行うために、最下層でJDBC APIが呼び出されます。JDBCに関しては、以下の点に重点を置くことをお勧めします。
 
 - JDBC APIの使用方法の選択
 - API実装者のパラメータ設定
@@ -152,7 +152,7 @@ JDBC API の使用方法については、 [JDBC公式チュートリアル](htt
 
 #### Prepare APIを使用する {#use-prepare-api}
 
-OLTP（オンライントランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は、パラメータ変更を除けば、複数のタイプが存在します。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行計画を繰り返し解析および生成するオーバーヘッドを回避できます。
+OLTP（オンライントランザクション処理）シナリオでは、プログラムからデータベースに送信されるSQL文は、パラメータの変更を除くと、数種類に限られます。そのため、通常の[テキストファイルからの実行](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html#executing_queries)ではなく[プリペアドステートメント](https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)を使用し、プリペアドステートメントを再利用して直接実行することをお勧めします。これにより、TiDBでSQL実行計画を繰り返し解析および生成するオーバーヘッドを回避できます。
 
 現在、ほとんどの上位フレームワークはSQL実行のためにPrepare APIを呼び出しています。開発でJDBC APIを直接使用する場合は、Prepare APIを選択するように注意してください。
 
@@ -174,19 +174,19 @@ OLTP（オンライントランザクション処理）シナリオでは、プ�
 
 JDBCでは通常、以下の2つの処理方法が使用されます。
 
-- 最初の方法: [**FetchSize**を`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
+- 最初の方法: [**FetchSize**を`Integer.MIN_VALUE`に設定します](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-implementation-notes.html#ResultSet)ことで、クライアントがキャッシュしないようにします。クライアントは`StreamingResult`を介してネットワーク接続から実行結果を読み取ります。
 
-    クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントを引き続き使用する前に、読み取りを完了するか、 `resultset`閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
+    クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントを引き続き使用する前に、読み取りを完了するか、 `resultset`を閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
-    クライアントが読み取りを完了するか、 `resultset`閉じる前にクエリでこのようなエラーが発生するのを回避するには、URLに`clobberStreamingResults=true`パラメータを追加できます。そうすると、 `resultset`自動的に閉じられますが、前のストリーミングクエリで読み取られる結果セットは失われます。
+    クライアントが読み取りを完了するか、 `resultset`を閉じる前にクエリでこのようなエラーが発生するのを回避するには、URLに`clobberStreamingResults=true`パラメータを追加できます。そうすると、 `resultset`自動的に閉じられますが、前のストリーミングクエリで読み取られる結果セットは失われます。
 
-- 2つ目の方法：まず正の整数として[`FetchSize`設定](https://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)設定し、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
+- 2つ目の方法：まず[`FetchSize`を正の整数に設定](https://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)し、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
 
-TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`から`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
+TiDBは両方の方法をサポートしていますが、実装がよりシンプルで実行効率も優れているため、 `FetchSize`を`Integer.MIN_VALUE`に設定する最初の方法を使用することをお勧めします。
 
 2番目の方法では、TiDBはまずすべてのデータをTiDBノードにロードし、次に`FetchSize`に従ってクライアントにデータを返します。そのため、通常は最初の方法よりも多くのメモリを消費します。[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom)が`ON`に設定されている場合、TiDBは結果を一時的にハードディスクに書き込む可能性があります。
 
-システム変数[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) `ON`に設定されている場合、TiDB はクライアントがデータを取得するときにのみデータの一部を読み取ろうとします。これによりメモリ使用量が削減されます。詳細および制限事項については、 [`tidb_enable_lazy_cursor_fetch`システム変数の完全な説明](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)を参照してください。
+システム変数[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)が`ON`に設定されている場合、TiDB はクライアントがデータを取得するときにのみデータの一部を読み取ろうとします。これによりメモリ使用量が削減されます。詳細および制限事項については、 [`tidb_enable_lazy_cursor_fetch`システム変数の完全な説明](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)を参照してください。
 
 ### MySQL JDBC パラメータ {#mysql-jdbc-parameters}
 
@@ -214,7 +214,7 @@ JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提�
     - TiDB モニタリング ダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエスト コマンド タイプを確認します。
     - リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定は既に有効になっていることを意味します。
 
-    さらに、 `useConfigs=maxPerformance`を設定すると、 `cachePrepStmts=true`含む複数のパラメータが同時に設定されます。
+    さらに、 `useConfigs=maxPerformance`を設定すると、 `cachePrepStmts=true`を含む複数のパラメータが同時に設定されます。
 
 - **prepStmtCacheSqlLimit**
 
@@ -272,7 +272,7 @@ INSERT INTO `t` (`a`) VALUES (11) ON DUPLICATE KEY UPDATE `a` = 11;
 INSERT INTO `t` (`a`) VALUES (12) ON DUPLICATE KEY UPDATE `a` = 12;
 ```
 
-上記の`INSERT`つの文は1つの文に書き換えることはできません。しかし、3つの文を次のように変更すると次のようになります。
+上記の`INSERT`文は1つの文に書き換えることはできません。しかし、3つの文を次のように変更すると次のようになります。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
@@ -280,7 +280,7 @@ INSERT INTO `t` (`a`) VALUES (11) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
 INSERT INTO `t` (`a`) VALUES (12) ON DUPLICATE KEY UPDATE `a` = VALUES(`a`);
 ```
 
-すると、書き換え要件を満たします。上記の`INSERT`つの文は、次の1つの文に書き換えられます。
+すると、書き換え要件を満たします。上記の`INSERT`文は、次の1つの文に書き換えられます。
 
 ```sql
 INSERT INTO `t` (`a`) VALUES (10), (11), (12) ON DUPLICATE KEY UPDATE a = VALUES(`a`);
@@ -312,6 +312,6 @@ TiDB はタイムアウトを制御するために 2つの MySQL 互換パラメ
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)か[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)についてコミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

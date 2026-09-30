@@ -15,7 +15,7 @@ TiDBはMySQLプロトコルとの互換性が非常に高いため、ほとん�
     - [JetBrains DataGrip](/develop/dev-guide-gui-datagrip.md)
     - [DBeaver](/develop/dev-guide-gui-dbeaver.md)
     - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
-    - [MySQL Workchen](/develop/dev-guide-gui-mysql-workbench.md)
+    - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
     - [Navicat](/develop/dev-guide-gui-navicat.md)
 
 - TiDB 上でアプリケーションを構築するには、プログラミング言語とフレームワークに基づいて [ドライバーまたはORMを選択してください](/develop/dev-guide-choose-driver-or-orm.md)。
@@ -24,6 +24,6 @@ TiDBはMySQLプロトコルとの互換性が非常に高いため、ほとん�
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

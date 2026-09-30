@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-mysql-workbench/','/ja/tidb/dev/dev-gui
 
 # MySQL Workbenchを使用してTiDBに接続する {#connect-to-tidb-with-mysql-workbench}
 
-TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.mysql.com/products/workbench/)はMySQLデータベースユーザー向けのGUIツールセットです。
+TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.mysql.com/products/workbench/)はMySQLデータベースユーザー向けのGUIツールセットです。
 
 > **Warning:**
 >
@@ -23,7 +23,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 このチュートリアルを完了するには、以下が必要です。
 
-- [MySQL Workchen](https://dev.mysql.com/downloads/workbench/) **8.0.31**以降のバージョン。
+- [MySQL Workbench](https://dev.mysql.com/downloads/workbench/) **8.0.31**以降のバージョン。
 - TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
@@ -178,7 +178,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 ## よくある質問 {#faqs}
 
-### 接続タイムアウトエラー「エラーコード：2013。クエリ実行中にMySQLサーバーへの接続が失われました」への対処方法を教えてください。 {#how-to-handle-the-connection-timeout-error-error-code-2013-lost-connection-to-mysql-server-during-query}
+### 接続タイムアウトエラー「Error Code: 2013. Lost connection to MySQL server during query」への対処方法を教えてください。 {#how-to-handle-the-connection-timeout-error-error-code-2013-lost-connection-to-mysql-server-during-query}
 
 このエラーは、クエリの実行時間がタイムアウト制限を超えたことを示しています。この問題を解決するには、以下の手順でタイムアウト設定を調整してください。
 
@@ -193,10 +193,10 @@ TiDBはMySQL互換データベースであり、 [MySQL Workchen](https://www.my
 
 - MySQL Workbench の使用法の詳細については[MySQL Workbenchのドキュメント](https://dev.mysql.com/doc/workbench/en/)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

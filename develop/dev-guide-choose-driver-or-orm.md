@@ -4,13 +4,13 @@ summary: TiDB に接続するためのドライバーまたは ORM フレーム�
 aliases: ['/ja/tidb/stable/dev-guide-choose-driver-or-orm/','/ja/tidbcloud/dev-guide-choose-driver-or-orm/']
 ---
 
-# DriverまたはORMを選択 {#choose-a-driver-or-orm}
+# ドライバーまたはORMを選択 {#choose-a-driver-or-orm}
 
 > **Note:**
 >
 > TiDB は、ドライバーと ORM に対して次の2つのサポート レベルを提供します。
 >
-> - **完全**: TiDB がツールのほとんどの機能と互換性があり、最新バージョンとの互換性を維持していることを示します。PingCAP は、最新バージョン[TiDB でサポートされているサードパーティツール](/develop/dev-guide-third-party-support.md)との互換性テストを定期的に実施します。
+> - **フル**: TiDB がツールのほとんどの機能と互換性があり、最新バージョンとの互換性を維持していることを示します。PingCAP は、[TiDB でサポートされているサードパーティツール](/develop/dev-guide-third-party-support.md)との互換性テストを定期的に実施します。
 > - **互換**：対応するサードパーティ製ツールがMySQLに適合しており、TiDBはMySQLプロトコルと高い互換性があるため、TiDBはツールのほとんどの機能を使用できることを示します。ただし、PingCAPはツールのすべての機能について完全なテストを完了していないため、予期しない動作が発生する可能性があります。
 >
 > 詳細については[TiDB でサポートされているサードパーティツール](/develop/dev-guide-third-party-support.md)を参照してください。
@@ -41,7 +41,7 @@ TiDBはMySQLプロトコルと高い互換性がありますが、一部の機�
 
 サポートレベル:**フル**
 
-TiDB-JDBC [TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29をベースにカスタマイズされたJavaドライバです。MySQL公式バージョン8.0.29をベースにコンパイルされたTiDB-JDBCは、元のJDBCにおける準備モードにおける複数パラメータおよび複数フィールドのEOFのバグを修正し、TiCDCスナップショットの自動メンテナンスやSM3認証プラグインなどの機能を追加しています。
+[TiDB-JDBC](https://github.com/pingcap/mysql-connector-j)は、MySQL 8.0.29をベースにカスタマイズされたJavaドライバです。MySQL公式バージョン8.0.29をベースにコンパイルされたTiDB-JDBCは、元のJDBCにおける準備モードにおける複数パラメータおよび複数フィールドのEOFのバグを修正し、TiCDCスナップショットの自動メンテナンスやSM3認証プラグインなどの機能を追加しています。
 
 SM3 に基づく認証は、TiDB の TiDB-JDBC でのみサポートされます。
 
@@ -172,17 +172,17 @@ MyBatis を使用して TiDB アプリケーションを構築する例につい
 
 ### Javaクライアント負荷分散 {#java-client-load-balancing}
 
-**tidb-ロードバランス**
+**tidb-loadbalance**
 
 サポートレベル:**フル**
 
-[tidb-ロードバランス](https://github.com/pingcap/tidb-loadbalance)はアプリケーション側の負荷分散コンポーネントです。tidb-loadbalanceを使用すると、TiDBサーバーのノード情報を自動的に維持し、tidb-loadbalanceポリシーに基づいてクライアント側のJDBC接続を分散できます。クライアントアプリケーションとTiDBサーバー間の直接JDBC接続を使用すると、負荷分散コンポーネントを使用する場合よりもパフォーマンスが向上します。
+[tidb-loadbalance](https://github.com/pingcap/tidb-loadbalance)はアプリケーション側の負荷分散コンポーネントです。tidb-loadbalanceを使用すると、TiDBサーバーのノード情報を自動的に維持し、tidb-loadbalanceポリシーに基づいてクライアント側のJDBC接続を分散できます。クライアントアプリケーションとTiDBサーバー間の直接JDBC接続を使用すると、負荷分散コンポーネントを使用する場合よりもパフォーマンスが向上します。
 
 現在、tidb-loadbalance は、ラウンドロビン、ランダム、重み付けのポリシーをサポートしています。
 
 > **Note:**
 >
-> tidb-loadbalance は[mysql-コネクタ-j](https://github.com/pingcap/mysql-connector-j)で使用する必要があります。
+> tidb-loadbalance は[mysql-connector-j](https://github.com/pingcap/mysql-connector-j)で使用する必要があります。
 
 Maven を使用している場合は、 `pom.xml`ファイルの`<dependencies></dependencies>`の要素本体に次のコンテンツを追加します。
 
