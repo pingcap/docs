@@ -15,7 +15,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 `<cluster-name>` : 操作対象のクラスターの名前。クラスター名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md)このトポロジファイルには、現在のクラスターに追加される新しいノードのみを含める必要があります。
+`<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md)。このトポロジファイルには、現在のクラスターに追加される新しいノードのみを含める必要があります。
 
 ## オプション {#options}
 
@@ -33,7 +33,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 ### -p, --password {#p-password}
 
-- ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`同時に使用しないでください。
+- ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`を同時に使用しないでください。
 - データ型: `BOOLEAN`
 - デフォルト: false
 

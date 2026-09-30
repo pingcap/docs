@@ -19,7 +19,7 @@ TiUPはミラーサーバーから最新のコンポーネントリストを毎�
 
 ### コンポーネントのダウンロードプロセスが中断されました {#component-downloading-process-is-interrupted}
 
-ネットワークが不安定な場合、コンポーネントのダウンロードプロセスが中断される可能性があります。コンポーネントのダウンロードを再度お試しください。複数回試してもダウンロードできない場合は、CDNサーバーに問題がある可能性がありますので、問題を報告してください[ここ](https://github.com/pingcap/tiup/issues) 。
+ネットワークが不安定な場合、コンポーネントのダウンロードプロセスが中断される可能性があります。コンポーネントのダウンロードを再度お試しください。複数回試してもダウンロードできない場合は、CDNサーバーに問題がある可能性がありますので、[こちら](https://github.com/pingcap/tiup/issues)から問題を報告してください。
 
 ### コンポーネントのダウンロードプロセス中にチェックサムエラーが発生しました {#a-checksum-error-occurs-during-component-downloading-process}
 
@@ -27,7 +27,7 @@ CDNサーバーのキャッシュ時間が短いため、新しいチェック�
 
 ## TiUPクラスタコンポーネントのトラブルシューティング {#troubleshoot-tiup-cluster-component}
 
-### `unable to authenticate, attempted methods [none publickey]`プロンプト表示されます。 {#unable-to-authenticate-attempted-methods-none-publickey-is-prompted-during-deployment}
+### デプロイ中に`unable to authenticate, attempted methods [none publickey]`が表示されます {#unable-to-authenticate-attempted-methods-none-publickey-is-prompted-during-deployment}
 
 デプロイメント中に、コンポーネントパッケージがリモートホストにアップロードされ、初期化が実行されます。このプロセスではリモートホストへの接続が必要です。このエラーは、リモートホストに接続するためのSSH秘密鍵が見つからないために発生します。
 

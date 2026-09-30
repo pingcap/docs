@@ -70,7 +70,7 @@ TiUPには複数のコマンドがあり、これらのコマンドには複数�
 - [clean](/tiup/tiup-command-clean.md) :コンポーネントのデータディレクトリをクリーンアップします。
 - [mirror](/tiup/tiup-command-mirror.md) : ミラーを管理します。
 - [telemetry](/tiup/tiup-command-telemetry.md) : テレメトリを有効または無効にします。
-- [completion](/tiup/tiup-command-completion.md) : TiUPコマンドを完了します。
+- [completion](/tiup/tiup-command-completion.md) : TiUPコマンドを補完します。
 - [env](/tiup/tiup-command-env.md) : TiUP関連の環境変数を表示します。
 - [help](/tiup/tiup-command-help.md) : コマンドまたはコンポーネントのヘルプ情報を表示します。
 

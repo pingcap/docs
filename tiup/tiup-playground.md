@@ -53,7 +53,7 @@ tiup playground ${version}
 tiup playground nightly
 ```
 
-上記のコマンドにおいて、 `nightly` TiDBの最新開発バージョンを示します。
+上記のコマンドにおいて、 `nightly`はTiDBの最新開発バージョンを示します。
 
 ### PDのデフォルト設定を上書きする {#override-pd-s-default-configuration}
 
@@ -81,7 +81,7 @@ tiup playground --db 3 --pd 3 --kv 3
 
 ### TiDBクラスタの起動時に、データを保存するタグを指定します。 {#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data}
 
-TiUP playground を使用して起動した TiDB クラスタを停止すると、クラスタデータもすべてクリーンアップされます。TiUP playground を使用してTiUPクラスタを起動し、クラスタデータが自動的にクリーンアップされないようにするには、クラスタ起動時にタグを指定できます。タグを指定すると、クラスタデータは`~/.tiup/data`ディレクトリに保存されます。タグを指定するには、次のコマンドを実行します。
+TiUP playground を使用して起動した TiDB クラスタを停止すると、クラスタデータもすべてクリーンアップされます。TiUP playground を使用してTiDBクラスタを起動し、クラスタデータが自動的にクリーンアップされないようにするには、クラスタ起動時にタグを指定できます。タグを指定すると、クラスタデータは`~/.tiup/data`ディレクトリに保存されます。タグを指定するには、次のコマンドを実行します。
 
 ```shell
 tiup playground --tag ${tag_name}
@@ -96,7 +96,7 @@ TiUP playgroundを使用してTiDBクラスタを起動すると、ブラウザ�
 - TiDB Dashboard： `http://127.0.0.1:2379/dashboard`
 
     - デフォルトのユーザー名: `root`
-    - デフォルトパスワード: `` (空欄の場合は、直接`Enter`を押してください)
+    - デフォルトパスワード: `` (空欄です。直接`Enter`を押してください)
 
 - Grafana： `http://127.0.0.1:3000`
 
@@ -115,7 +115,7 @@ TiUPは、playgroundによって起動されたローカルTiDBクラスタを�
 tiup client
 ```
 
-このコマンドを実行すると、コンソールに、現在のマシン上でplaygroundによって起動されたTiDBクラスタの一覧が表示されます。接続するTiDBクラスタを選択してください。Enter<kbd>キー</kbd>を押すと、TiDBに接続するための組み込みのMySQLクライアントが開きます。
+このコマンドを実行すると、コンソールに、現在のマシン上でplaygroundによって起動されたTiDBクラスタの一覧が表示されます。接続するTiDBクラスタを選択してください。<kbd>Enter</kbd>キーを押すと、TiDBに接続するための組み込みのMySQLクライアントが開きます。
 
 ## 起動したクラスターの情報を表示する {#view-information-of-the-started-cluster}
 
@@ -144,7 +144,7 @@ tiup playground scale-out --db 2
 
 ## クラスタースケールイン {#scale-in-a-cluster}
 
-対応するインスタンスでスケールするには、 `tiup playground scale-in`コマンドで`pid`を指定できます。`pid`を表示するには、 `tiup playground display`を実行します。
+対応するインスタンスをスケールインするには、 `tiup playground scale-in`コマンドで`pid`を指定できます。`pid`を表示するには、 `tiup playground display`を実行します。
 
 ```shell
 tiup playground scale-in --pid 86526
@@ -196,6 +196,6 @@ tiup playground v8.5.4 --pd.mode ms --pd 3 --tso 2 --scheduling 2
 ```
 
 - `--pd.mode` ：これを`ms`に設定すると、PDのマイクロサービスモードが有効になります。
-- `--pd <num>` : PDマイクロサービスのAPIの数を指定します。少なくとも`1`ある必要があります。
+- `--pd <num>` : PDマイクロサービスのAPIの数を指定します。少なくとも`1`である必要があります。
 - `--tso <num>` ： `tso`マイクロサービスにデプロイするインスタンスの数を指定します。
 - `--scheduling <num>` ： `scheduling`マイクロサービスにデプロイするインスタンスの数を指定します。

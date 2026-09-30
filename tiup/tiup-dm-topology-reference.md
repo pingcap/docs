@@ -13,13 +13,13 @@ TiDB Data Migration (DM)クラスターをデプロイまたは拡張するに�
 
 TiUPを使用した DM クラスターのデプロイメントのトポロジ設定ファイルには、次のセクションが含まれる場合があります。
 
-- [グローバル](#global) : クラスターのグローバル設定。一部の設定項目はクラスターのデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
-- [サーバー構成](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じキーの設定項目がある場合、そのインスタンスの設定項目が有効になります。
-- [マスターサーバー](#master_servers) : DM-masterインスタンスの構成。この構成では、DMコンポーネントのマスターサービスがデプロイされるマシンを指定します。
-- [ワーカーサーバー](#worker_servers) : DM-workerインスタンスの設定。この設定では、DMコンポーネントのワーカーサービスがデプロイされるマシンを指定します。
-- [監視サーバー](#monitoring_servers) : Prometheusインスタンスがデプロイされるマシンを指定します。TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
+- [global](#global) : クラスターのグローバル設定。一部の設定項目はクラスターのデフォルト値を使用しますが、インスタンスごとに個別に設定できます。
+- [server_configs](#server_configs) : コンポーネントのグローバル設定。各コンポーネントを個別に設定できます。インスタンスに同じキーの設定項目がある場合、そのインスタンスの設定項目が有効になります。
+- [master_servers](#master_servers) : DM-masterインスタンスの構成。この構成では、DMコンポーネントのマスターサービスがデプロイされるマシンを指定します。
+- [worker_servers](#worker_servers) : DM-workerインスタンスの設定。この設定では、DMコンポーネントのワーカーサービスがデプロイされるマシンを指定します。
+- [monitoring_servers](#monitoring_servers) : Prometheusインスタンスがデプロイされるマシンを指定します。TiUPは複数のPrometheusインスタンスのデプロイをサポートしていますが、最初のインスタンスのみが使用されます。
 - [grafana_servers](#grafana_servers) : Grafanaインスタンスの設定。この設定では、Grafanaインスタンスがデプロイされるマシンを指定します。
-- [Alertmanagerサーバー](#alertmanager_servers) : Alertmanagerインスタンスの設定。この設定では、Alertmanagerインスタンスがデプロイされるマシンを指定します。
+- [alertmanager_servers](#alertmanager_servers) : Alertmanagerインスタンスの設定。この設定では、Alertmanagerインスタンスがデプロイされるマシンを指定します。
 
 ### `global` {#global}
 
@@ -29,17 +29,17 @@ TiUPを使用した DM クラスターのデプロイメントのトポロジ設
 - `group` : ユーザーが自動作成された際に所属するユーザーグループ。デフォルト値は`<user>`フィールドと同じです。指定されたグループが存在しない場合は、自動的に作成されます。
 - `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポート。デフォルト値は"22"です。
 - `deploy_dir` : 各コンポーネントのデプロイメントディレクトリ。デフォルト値は"deploy"です。構築ルールは以下のとおりです。
-    - 絶対パス`deploy_dir`インスタンスレベルで構成されている場合、実際のデプロイメントディレクトリはインスタンスに対して構成されている`deploy_dir`なります。
-    - 各インスタンスに対して`deploy_dir`設定しない場合、デフォルト値は相対パス`<component-name>-<component-port>`なります。
-    - `global.deploy_dir`絶対パスに設定すると、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
-    - `global.deploy_dir`相対パスに設定すると、コンポーネントは`/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
+    - 絶対パス`deploy_dir`がインスタンスレベルで構成されている場合、実際のデプロイメントディレクトリはインスタンスに対して構成されている`deploy_dir`になります。
+    - 各インスタンスに対して`deploy_dir`を設定しない場合、デフォルト値は相対パス`<component-name>-<component-port>`になります。
+    - `global.deploy_dir`を絶対パスに設定すると、コンポーネントは`<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
+    - `global.deploy_dir`を相対パスに設定すると、コンポーネントは`/home/<global.user>/<global.deploy_dir>/<instance.deploy_dir>`ディレクトリにデプロイされます。
 - `data_dir` : データディレクトリ。デフォルト値は"data"です。構築ルールは以下のとおりです。
-    - 絶対パス`data_dir`インスタンスレベルで構成されている場合、実際のデータディレクトリはインスタンスに構成されている`data_dir`なります。
-    - 各インスタンスに対して`data_dir`が設定されていない場合、デフォルト値は`<global.data_dir>`なります。
-    - `data_dir`相対パスに設定されている場合、コンポーネントデータは`<deploy_dir>/<data_dir>`に保存されます。 `<deploy_dir>`の構築規則については、 `deploy_dir`フィールドの構築規則を参照してください。
+    - 絶対パス`data_dir`がインスタンスレベルで構成されている場合、実際のデータディレクトリはインスタンスに構成されている`data_dir`になります。
+    - 各インスタンスに対して`data_dir`が設定されていない場合、デフォルト値は`<global.data_dir>`になります。
+    - `data_dir`が相対パスに設定されている場合、コンポーネントデータは`<deploy_dir>/<data_dir>`に保存されます。 `<deploy_dir>`の構築規則については、 `deploy_dir`フィールドの構築規則を参照してください。
 - `log_dir` : データディレクトリ。デフォルト値は"log"です。構築ルールは以下のとおりです。
-    - インスタンスレベルで絶対パス`log_dir`が設定されている場合、実際のログディレクトリはインスタンスに設定されている`log_dir`なります。
-    - 各インスタンスについて、ユーザーが`log_dir`設定しない場合、デフォルト値は`<global.log_dir>`なります。
+    - インスタンスレベルで絶対パス`log_dir`が設定されている場合、実際のログディレクトリはインスタンスに設定されている`log_dir`になります。
+    - 各インスタンスについて、ユーザーが`log_dir`を設定しない場合、デフォルト値は`<global.log_dir>`になります。
     - `log_dir`が相対パスの場合、コンポーネントログは`<deploy_dir>/<log_dir>`に保存されます。 `<deploy_dir>`の構築ルールについては、 `deploy_dir`フィールドの構築ルールを参照してください。
 - `os` : ターゲットマシンのオペレーティングシステム。このフィールドは、ターゲットマシンにプッシュされるコンポーネントをどのオペレーティングシステムに適応させるかを制御します。デフォルト値は"linux"です。
 - `arch` : ターゲットマシンのCPUアーキテクチャ。このフィールドは、ターゲットマシンにプッシュされるバイナリパッケージをどのプラットフォームに適合させるかを制御します。サポートされている値は"amd64"と"arm64"です。デフォルト値は"amd64"です。
@@ -83,7 +83,7 @@ server_configs:
 
 ## `master_servers` {#master_servers}
 
-`master_servers` 、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`master_servers`は配列です。各配列要素には以下のフィールドが含まれます。
+`master_servers`は、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`master_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 - `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 - `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。
@@ -140,7 +140,7 @@ master_servers:
 
 ## `worker_servers` {#worker_servers}
 
-`worker_servers` 、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`worker_servers`は配列です。各配列要素には以下のフィールドが含まれます。
+`worker_servers`は、DMコンポーネントのマスターノードがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`worker_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 - `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 - `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。
@@ -184,7 +184,7 @@ worker_servers:
 
 ### `monitoring_servers` {#monitoring_servers}
 
-`monitoring_servers` 、Prometheus サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます。`monitoring_servers`は配列です。各配列要素には以下のフィールドが含まれます。
+`monitoring_servers`は、Prometheus サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます。`monitoring_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 - `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 - `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。
@@ -242,7 +242,7 @@ monitoring_servers:
 
 ### `grafana_servers` {#grafana_servers}
 
-`grafana_servers` 、Grafana サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます。`grafana_servers`は配列です。各配列要素には以下のフィールドが含まれます。
+`grafana_servers`は、Grafana サービスがデプロイされるマシンを指定します。また、マシン上のサービス設定も指定できます。`grafana_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 - `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 - `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。
@@ -257,9 +257,9 @@ monitoring_servers:
 
 > **Note:**
 >
-> `dashboard_dir`フィールドが`grafana_servers`設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
+> `grafana_servers`の`dashboard_dir`フィールドが設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
 >
-> 1. ローカルの`dashboards`ディレクトリで、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`クラスター名に基づいて名前が付けられます)。
+> 1. ローカルの`dashboards`ディレクトリで、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`はクラスター名に基づいて名前が付けられます)。
 > 2. `tiup cluster reload -R grafana`コマンドを実行します。
 
 `grafana_servers`では、デプロイメントが完了した後は、次のフィールドを変更できません。
@@ -280,7 +280,7 @@ grafana_servers:
 
 ### `alertmanager_servers` {#alertmanager_servers}
 
-`alertmanager_servers` 、Alertmanagerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`alertmanager_servers`は配列です。各配列要素には以下のフィールドが含まれます。
+`alertmanager_servers`は、Alertmanagerサービスがデプロイされるマシンを指定します。また、各マシンのサービス構成を指定することもできます。`alertmanager_servers`は配列です。各配列要素には以下のフィールドが含まれます。
 
 - `host` : デプロイ先のマシンを指定します。このフィールド値はIPアドレスで、必須です。
 - `ssh_port` : 操作のためにターゲットマシンに接続するためのSSHポートを指定します。このフィールドが指定されていない場合は、セクション`global`の`ssh_port`が使用されます。

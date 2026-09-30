@@ -5,7 +5,7 @@ summary: TiUPツールとそのエコシステムを紹介します。
 
 # TiUPの概要 {#tiup-overview}
 
-TiDB 4.0以降、パッケージマネージャーであるTiUPにより、 TiUPエコシステム内のさまざまなクラスタコンポーネントの管理が大幅に容易になります。TiUPコマンドを1行実行するだけで、あらゆるコンポーネントを実行できます。
+TiDB 4.0以降、パッケージマネージャーであるTiUPにより、 TiDBエコシステム内のさまざまなクラスタコンポーネントの管理が大幅に容易になります。TiUPコマンドを1行実行するだけで、あらゆるコンポーネントを実行できます。
 
 ## TiUPをインストールする {#install-tiup}
 
@@ -32,7 +32,7 @@ GitHash: c3e9fc518aea0da66a37f82ee5a516171de9c372
 
 > **Note:**
 >
-> TiUPバージョン1.11.3以降では、新規TiUP時にテレメトリがデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。共有される情報と共有を無効にする方法については、 [テレメトリー](/telemetry.md)を参照してください。
+> TiUPバージョン1.11.3以降では、新規にデプロイされたTiUPではテレメトリがデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。共有される情報と共有を無効にする方法については、 [テレメトリー](/telemetry.md)を参照してください。
 
 ## TiUPエコシステムの紹介 {#tiup-ecosystem-introduction}
 
@@ -115,7 +115,7 @@ Use "tiup [command] --help" for more information about a command.
     - help: ヘルプ情報を出力するために使用されます
     - completion: 指定されたシェル (bash、zsh、fish、powershell を含む) のコマンドライン自動補完スクリプトを生成するために使用されます。
 - 利用可能なコンポーネント
-    - Playground: TiDB クラスターをローカルで起動するために使用されます
+    - playground: TiDB クラスターをローカルで起動するために使用されます
     - client: TiUP Playground への接続に使用するクライアント
     - cluster:本番環境用の TiDB クラスターをデプロイするために使用されます
     - bench: データベースのストレステストに使用
