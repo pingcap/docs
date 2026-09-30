@@ -25,7 +25,7 @@ tiup cluster disable <cluster-name> [flags]
 
 > **Note:**
 >
-> `-R, --role`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`両方の指定に一致するサービスの自動有効化は無効になります。
+> `-R, --role`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスの自動有効化は無効になります。
 
 ### -R, --role {#r-role}
 
@@ -35,7 +35,7 @@ tiup cluster disable <cluster-name> [flags]
 
 > **Note:**
 >
-> `-N, --node`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`両方の指定に一致するサービスの自動有効化は無効になります。
+> `-N, --node`オプションを同時に指定した場合、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスの自動有効化は無効になります。
 
 ### -h, --help {#h-help}
 

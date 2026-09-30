@@ -18,7 +18,7 @@ TiUPでは、 [ミラー](/tiup/tiup-mirror-reference.md)は重要な概念で�
 tiup mirror <command> [flags]
 ```
 
-`<command>`サブコマンドを表します。サポートされているサブコマンドのリストについては、以下の[コマンドリスト](#command-list)を参照してください。
+`<command>`はサブコマンドを表します。サポートされているサブコマンドのリストについては、以下の[コマンドリスト](#command-list)を参照してください。
 
 ## オプション {#option}
 
@@ -28,7 +28,7 @@ tiup mirror <command> [flags]
 
 - [genkey](/tiup/tiup-command-mirror-genkey.md) : 秘密鍵ファイルを生成する
 - [sign](/tiup/tiup-command-mirror-sign.md) : 秘密鍵ファイルを使用して特定のファイルに署名します
-- [init](/tiup/tiup-command-mirror-init.md) : 空のミラーを開始する
+- [init](/tiup/tiup-command-mirror-init.md) : 空のミラーを初期化する
 - [set](/tiup/tiup-command-mirror-set.md) : 現在のミラーを設定する
 - [grant](/tiup/tiup-command-mirror-grant.md) : 現在のミラーに新しいコンポーネント所有者を付与します
 - [publish](/tiup/tiup-command-mirror-publish.md) : 新しいコンポーネントを現在のミラーに公開します

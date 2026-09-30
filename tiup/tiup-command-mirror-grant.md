@@ -19,7 +19,7 @@ summary: "`tiup mirror grant` コマンドは、現在のミラーにコンポ�
 tiup mirror grant <id> [flags]
 ```
 
-`<id>`コンポーネント所有者のIDを表し、ミラー全体で一意である必要があります。正規表現`^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`に一致するIDを使用することをお勧めします。
+`<id>`はコンポーネント所有者のIDを表し、ミラー全体で一意である必要があります。正規表現`^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`に一致するIDを使用することをお勧めします。
 
 ## オプション {#options}
 
@@ -39,7 +39,7 @@ tiup mirror grant <id> [flags]
 ### 出力 {#outputs}
 
 - コマンドが正常に実行された場合、出力はありません。
-- コンポーネント所有者の ID が重複している場合、 TiUP はエラー`Error: owner %s exists`報告します。
-- キーが別のコンポーネント所有者によって使用されている場合、 TiUP はエラー`Error: key %s exists`報告します。
+- コンポーネント所有者の ID が重複している場合、 TiUP はエラー`Error: owner %s exists`を報告します。
+- キーが別のコンポーネント所有者によって使用されている場合、 TiUP はエラー`Error: key %s exists`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

@@ -39,7 +39,7 @@ tiup update [component1][:version] [component2..N] [flags]
 - データ型: `BOOLEAN`
 - このオプションはデフォルトで無効になっており、デフォルト値は`false`です。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-### - 自己 {#self}
+### --self {#self}
 
 - TiUP自体を更新します。
 - データ型: `BOOLEAN`

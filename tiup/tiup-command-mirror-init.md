@@ -5,7 +5,7 @@ summary: "`tiup mirror init` コマンドは空のミラーを初期化し、roo
 
 # tiup mirror init {#tiup-mirror-init}
 
-コマンド`tiup mirror init`空のミラーを初期化するために使用されます。初期化されたミラーには、コンポーネントやコンポーネントの所有者は含まれません。このコマンドは、初期化されたミラーに対して以下のファイルのみを生成します。
+コマンド`tiup mirror init`は空のミラーを初期化するために使用されます。初期化されたミラーには、コンポーネントやコンポーネントの所有者は含まれません。このコマンドは、初期化されたミラーに対して以下のファイルのみを生成します。
 
 ```
 + <mirror-dir>                                  # Mirror's root directory
@@ -41,7 +41,7 @@ tiup mirror init <path> [flags]
 ### 出力 {#outputs}
 
 - コマンドが正常に実行された場合、出力はありません。
-- 指定された`<path>`空でない場合、 TiUP はエラー`Error: the target path '%s' is not an empty directory`報告します。
-- 指定された`<path>`ディレクトリでない場合、 TiUP はエラー`Error: fdopendir: not a directory`報告します。
+- 指定された`<path>`が空でない場合、 TiUP はエラー`Error: the target path '%s' is not an empty directory`を報告します。
+- 指定された`<path>`がディレクトリでない場合、 TiUP はエラー`Error: fdopendir: not a directory`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

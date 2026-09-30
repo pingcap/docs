@@ -31,22 +31,22 @@ tiup telemetry <command>
 
 ## コマンド {#commands}
 
-### 状態 {#status}
+### status {#status}
 
 `tiup telemetry status`コマンドは、現在のテレメトリ設定を表示し、次の情報を出力するために使用します。
 
-- `status` : テレメトリ`(enable|disable)`有効化または無効化を指定します。
+- `status` : テレメトリの有効化または無効化`(enable|disable)`を指定します。
 - `uuid` : ランダムに生成されたテレメトリ識別子を指定します。
 
-### リセット {#reset}
+### reset {#reset}
 
 `tiup telemetry reset`コマンドは、現在のテレメトリ識別子をリセットし、新しいランダム識別子に置き換えるために使用されます。
 
-### 有効にする {#enable}
+### enable {#enable}
 
 `tiup telemetry enable`コマンドはテレメトリを有効にするために使用されます。
 
-### 無効にする {#disable}
+### disable {#disable}
 
 `tiup telemetry disable`コマンドはテレメトリを無効にするために使用されます。
 
