@@ -51,7 +51,7 @@ summary: データ複製タスクのステータスを照会する方法を学�
 - `msg` : クエリが失敗したときに返されるエラーメッセージ。
 - `tasks` : 移行タスクのリスト。各タスクには以下のフィールドが含まれます。
     - `taskName` : タスクの名前。
-    - `taskStatus` : タスクのステータス`taskStatus`の詳細については[タスクのステータス](#task-status)を参照してください。
+    - `taskStatus` : タスクのステータス。 `taskStatus`の詳細については[タスクのステータス](#task-status)を参照してください。
     - `sources` : アップストリーム MySQL データベースのリスト。
 
 ## タスクのステータス {#task-status}
@@ -61,7 +61,7 @@ DM移行タスクのステータスは、DM-workerに割り当てられた各サ
 | タスク内のサブタスクのステータス                                             | タスクのステータス                                      |
 | :----------------------------------------------------------- | :--------------------------------------------- |
 | 1つのサブタスクが`paused`状態にあり、エラー情報が返されます。                         | `Error - Some error occurred in subtask`       |
-| 同期フェーズの 1つのサブタスクは`Running`状態ですが`Paused` `Stopped` `Error` 。 | `Error - Relay status is Error/Paused/Stopped` |
+| 同期フェーズの 1つのサブタスクは`Running`状態ですが、そのリレー処理ユニットは実行されていません（ `Error` / `Paused` / `Stopped`状態）。 | `Error - Relay status is Error/Paused/Stopped` |
 | 1つのサブタスクが`Paused`状態にあり、エラー情報は返されません。                        | `Paused`                                       |
 | すべてのサブタスクは`New`状態にあります。                                      | `New`                                          |
 | すべてのサブタスクは`Finished`状態にあります。                                 | `Finished`                                     |
@@ -228,22 +228,22 @@ DM移行タスクのステータスは、DM-workerに割り当てられた各サ
     - `subTaskStatus` : アップストリーム MySQL データベースのすべてのサブタスクの情報。各サブタスクには以下のフィールドが含まれる場合があります。
         - `name` : サブタスクの名前。
         - `stage` : サブタスクのステータス。"sources"の"subTaskStatus"の"stage"のステータスの説明とステータスの切り替え関係については、 [サブタスクのステータス](#subtask-status)を参照してください。
-        - `unit` : "Check"、"Dump"、"Load"、"Sync"を含む DM の処理単位。
+        - `unit` : "Check"、"Dump"、"Load"、"Sync"を含む DM の処理ユニット。
         - `result` : サブタスクが失敗した場合にエラー情報を表示します。
         - `unresolvedDDLLockID` : シャーディングDDLロックID。異常状態におけるシャーディングDDLロックを手動で処理するために使用されます。"sources"の"subTaskStatus"の"unresolvedDDLLockID"の動作の詳細については、 [シャーディング DDL ロックを手動で処理する](/dm/manually-handling-sharding-ddl-locks.md)を参照してください。
         - `sync` ： `Sync`処理ユニットの複製情報。この情報は、現在の処理ユニットと同じコンポーネントに関するものです。
             - `masterBinlog` : アップストリーム データベース内のbinlog の位置。
             - `masterBinlogGtid` : アップストリーム データベース内の GTID 情報。
-            - `syncerBinlog` : `Sync`処理単位で複製されたbinlogの位置。
+            - `syncerBinlog` : `Sync`処理ユニットで複製されたbinlogの位置。
             - `syncerBinlogGtid` : GTID を使用して複製されたbinlogの位置。
-            - `blockingDDLs` : 現在ブロックされているDDLリスト。このDM-workerのすべての上流テーブルが"synced"ステータスにある場合にのみ空になります。この場合、実行されるかスキップされるシャーディングDDL文を示します。
+            - `blockingDDLs` : 現在ブロックされているDDLリスト。このDM-workerのすべての上流テーブルが"synced"ステータスにある場合にのみ空ではなくなります。この場合、実行されるかスキップされるシャーディングDDL文を示します。
             - `unresolvedGroups` : 解決されていないシャーディンググループ。各グループには以下のフィールドが含まれます。
                 - `target` : 複製されるダウンストリームデータベーステーブル。
                 - `DDLs` : DDL文のリスト。
                 - `firstPos` : シャーディング DDL文の開始位置。
                 - `synced` : 実行されたシャーディング DDL文が`Sync`ユニットによって読み取られた上流のシャーディングされたテーブル。
                 - `unsynced` : このシャーディングDDL文を実行していない上流テーブル。上流テーブルのいずれかがレプリケーションを完了していない場合、 `blockingDDLs`が空になります。
-            - `synced` : 増分レプリケーションがアップストリームに追いつき、アップストリームと同じbinlog位置にあるかどうか。セーブポイントは`Sync`グラウンドでリアルタイムに更新されないため、 `synced`のうち`false`は必ずしもレプリケーション遅延が発生することを意味するわけではありません。
+            - `synced` : 増分レプリケーションがアップストリームに追いつき、アップストリームと同じbinlog位置にあるかどうか。セーブポイントは`Sync`バックグラウンドでリアルタイムに更新されないため、 `synced`のうち`false`は必ずしもレプリケーション遅延が発生することを意味するわけではありません。
             - `totalRows` : このサブタスクで複製される行の合計数。
             - `totalRps` : このサブタスクで 1秒あたりに複製される行数。
             - `recentRps` : このサブタスクで最後の 1秒間に複製された行の数。

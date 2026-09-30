@@ -55,7 +55,7 @@ Global Flags:
 
 - `config-file` : `source.yaml`のファイルパスを指定し、複数のファイルパスを渡すことができます。
 
-- `--print-sample-config` : サンプル設定ファイルを印刷します。このパラメータは他のパラメータを無視します。
+- `--print-sample-config` : サンプル設定ファイルを出力します。このパラメータは他のパラメータを無視します。
 
 ### 使用例 {#usage-example}
 

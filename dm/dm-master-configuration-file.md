@@ -52,7 +52,7 @@ secret-key-path = "/path/to/secret/key"
 
 - ログレベルを指定します。
 - デフォルト値: `info`
-- `fatal` `warn` `info` `error` `debug`
+- 値のオプション: `debug` 、 `info` 、 `warn` 、 `error` 、 `fatal`
 
 #### `log-file` {#log-file}
 
@@ -72,7 +72,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `advertise-peer-urls` {#advertise-peer-urls}
 
-- DM-masterが外部にアドバタイズするピアURLを指定します。デフォルト値は`advertise-peer-urls`で、 [`peer-urls`](#peer-urls)と同じです。
+- DM-masterが外部にアドバタイズするピアURLを指定します。`advertise-peer-urls`の値は、デフォルトで[`peer-urls`](#peer-urls)の値と同じです。
 
 #### `initial-cluster` {#initial-cluster}
 
@@ -80,7 +80,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `join` {#join}
 
-- `join`の値は、クラスター内の既存の DM-masterノードの[`advertise-peer-urls`](#advertise-peer-urls)値を組み合わせたものです。DM-masterノードを新たに追加する場合は、 `initial-cluster` `join`に置き換えてください。
+- `join`の値は、クラスター内の既存の DM-masterノードの[`advertise-peer-urls`](#advertise-peer-urls)値を組み合わせたものです。DM-masterノードを新たに追加する場合は、 `initial-cluster`を`join`に置き換えてください。
 
 #### `ssl-ca` {#ssl-ca}
 
@@ -96,7 +96,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `cert-allowed-cn` {#cert-allowed-cn}
 
-- 一般名リスト。
+- コモンネーム（CN）のリスト。
 
 #### `secret-key-path` {#secret-key-path}
 
