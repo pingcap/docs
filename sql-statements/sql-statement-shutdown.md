@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-shutdown/']
 
 # SHUTDOWN
 
-The `SHUTDOWN` statement is used to perform a shutdown operation in TiDB. Execution of the `SHUTDOWN` statement requires the user to have `SHUTDOWN privilege`.
+The `SHUTDOWN` statement is used to perform a shutdown operation in TiDB. Execution of the `SHUTDOWN` statement requires the user to have the `SHUTDOWN` privilege.
 
 > **Note:**
 >
