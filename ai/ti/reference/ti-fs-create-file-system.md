@@ -1,13 +1,13 @@
 ---
 title: ti fs create-file-system
-summary: Create a TiDB Cloud Filesystem.
+summary: Create a file system.
 ---
 
 # ti fs create-file-system
 
-Creates a Filesystem and returns its ID and owner token. The CLI stores and selects the token in the current profile. Use `--wait` to wait until the Filesystem is ready for use.
+Creates a file system and returns its ID and owner token. The CLI stores and selects the token in the current profile. Use `--wait` to wait until the file system is ready for use.
 
-You can optionally set a display name and labels. These values appear in `list-file-systems` and `describe-file-system` output but do not select the Filesystem in later commands.
+You can optionally set a display name and labels. These values appear in `list-file-systems` and `describe-file-system` output but do not select the file system in later commands.
 
 > **Important:**
 >
@@ -31,7 +31,7 @@ ti fs create-file-system
 
 ## Options
 
-- `--display-name <string>`: Set a display name between 4 and 64 characters shown by Filesystem inventory commands. The value does not select the Filesystem in later commands.
+- `--display-name <string>`: Set a display name between 4 and 64 characters shown by file system inventory commands. The value does not select the file system in later commands.
 - `--dry-run`: Validate the request without applying changes.
 - `--help`: Display help information.
 - `--label <string>`: Add an organization-visible `key=value` label. Repeat this option to add up to 30 labels. Do not put secrets or personal data in labels.
@@ -42,10 +42,10 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- Create a Filesystem and wait until it is ready:
+- Create a file system and wait until it is ready:
 
     ```bash
-    # Wait until the new Filesystem root is readable before returning.
+    # Wait until the new file system root is readable before returning.
     ti fs create-file-system \
       --display-name agent-workspace \
       --label environment=development \
@@ -53,14 +53,14 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
       --wait
     ```
 
-- Create a Filesystem asynchronously:
+- Create a file system asynchronously:
 
     ```bash
     # Return after provisioning is accepted so work can continue in parallel.
     ti fs create-file-system
     ```
 
-- Preview Filesystem creation:
+- Preview file system creation:
 
     ```bash
     # Validate credentials, placement, and the request without provisioning storage.

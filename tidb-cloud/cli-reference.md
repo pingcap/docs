@@ -9,7 +9,7 @@ summary: Provides an overview of the ticloud CLI for TiDB Cloud Starter and Esse
 >
 > TiDB Cloud currently provides two CLIs with different scopes: [`ti`](https://github.com/tidbcloud/ti-cli) and [`ticloud`](https://github.com/tidbcloud/tidbcloud-cli).
 >
-> - `ti` is recommended for new automation workflows with TiDB Cloud Starter when it supports the operations you need. You can also use `ti` to manage TiDB Cloud Filesystems. To get started, see [TiDB Cloud CLI (`ti`) Quick Start](/ai/ti/ti-quick-start.md).
+> - `ti` is recommended for new automation workflows with TiDB Cloud Starter when it supports the operations you need. You can also use `ti` to manage file systems in TiDB Cloud Filesystem. To get started, see [TiDB Cloud CLI (`ti`) Quick Start](/ai/ti/ti-quick-start.md).
 > - `ticloud` remains the CLI for TiDB Cloud Essential and for operations that [`ti`](/ai/ti/ti-overview.md) does not yet support, such as data import, data export, and audit log operations.
 >
 > For more information about when to use `ti` or `ticloud`, see [Differences between `ti` and `ticloud`](/ai/ti/ti-overview.md#differences-between-ti-and-ticloud).

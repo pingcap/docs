@@ -144,9 +144,12 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Stream Data ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Changefeed Overview](/tidb-cloud/essential-changefeed-overview.md)
+  - [Changefeed](/tidb-cloud/essential-changefeed-overview.md)
   - [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
+  - [Sink to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
+  - Reference
+    - [SQL Compatibility for TiDB Cloud Lake Integration](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control
@@ -557,6 +560,7 @@
   - [Server Status Variables](/status-variables.md)
   - [Table Filter](/table-filter.md)
   - [URI Formats of External Storage Services](/external-storage-uri.md)
+  - [Configure Trigger Rules for Slow Queries](/config-slow-query-trigger-rules.md)
   - [Troubleshoot Inconsistency Between Data and Indexes](/troubleshoot-data-inconsistency-errors.md)
   - [Notifications](/tidb-cloud/notifications.md)
   - [Project API Migration Guide for {{{ .starter }}} and Essential](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)

@@ -43,7 +43,7 @@ TiDB version: 5.0.6
 
     + TiCDC
 
-        - Optimize rate limiting control on TiKV reloads to reduce gPRC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
+        - Optimize rate-limiting control on TiKV reloads to reduce gRPC congestion during changefeed initialization [#3110](https://github.com/pingcap/ticdc/issues/3110)
         - Add a tick frequency limit to EtcdWorker to prevent frequent etcd writes from affecting PD services [#3112](https://github.com/pingcap/ticdc/issues/3112)
         - Add the default configuration for `config.Metadata.Timeout` in Kafka sink [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - Set the default value of `max-message-bytes` to `10M`, to reduce the probability that Kafka messages cannot be sent [#3081](https://github.com/pingcap/tiflow/issues/3081)
@@ -158,7 +158,7 @@ TiDB version: 5.0.6
         - Fix the issue that `tikv_cdc_min_resolved_ts_no_change_for_1m` keeps alerting when there is no changefeed [#11017](https://github.com/tikv/tikv/issues/11017)
         - Fix the TiCDC panic issue that occurs when manually cleaning the task status in etcd [#2980](https://github.com/pingcap/tiflow/issues/2980)
         - Fix the issue that changefeed does not fail fast enough when the ErrGCTTLExceeded error occurs [#3111](https://github.com/pingcap/ticdc/issues/3111)
-        - Fix the issue that scanning stock data might fail due to TiKV performing GC when scanning stock data takes too long [#2470](https://github.com/pingcap/tiflow/issues/2470)
+        - Fix the issue that a changefeed might fail when initialization takes too long and TiKV advances the GC safepoint [#2470](https://github.com/pingcap/tiflow/issues/2470)
         - Fix OOM in container environments [#1798](https://github.com/pingcap/ticdc/issues/1798)
 
     + Backup & Restore (BR)

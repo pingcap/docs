@@ -44,6 +44,12 @@ To allow {{{ .premium }}} to read your bucket, use either of the following metho
 
 The wizard includes a helper link labeled **Click here to create a new one with AWS CloudFormation**. Follow this link if you need {{{ .premium }}} to pre-fill a CloudFormation stack that creates the role for you.
 
+<CustomContent plan="byoc">
+
+If you use an AWS Role ARN for a {{{ .byoc }}} instance, the IAM role must have the `tidbcloud.com/allow-dataplane-access=true` tag. If the tag is missing, add it to the role before starting the import.
+
+</CustomContent>
+
 ## Step 4. Import CSV files from Amazon S3
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your {{{ .premium }}} instance.

@@ -17,7 +17,7 @@ In the following example, `JSON_DEPTH()` returns `3` because there are three lev
 
 - root (`$`)
 - weather (`$.weather`)
-- weather current (`$.weather.sunny`)
+- weather current (`$.weather.current`)
 
 ```sql
 SELECT JSON_DEPTH('{"weather": {"current": "sunny"}}');

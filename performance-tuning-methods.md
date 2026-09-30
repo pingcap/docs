@@ -409,7 +409,7 @@ The TSO wait time is recorded as `TSO WAIT` and the network time of the TSO requ
 The indicators in this section correspond to the following three panels.
 
 - Avg TiDB KV Request Duration: The average latency of KV requests measured by TiDB
-- Avg TiKV GRPC Duration: The average latency in processing gPRC messages in TiKV
+- Avg TiKV GRPC Duration: The average latency in processing gRPC messages in TiKV
 - PD TSO Wait/RPC Duration: TiDB executor TSO wait time and network latency for TSO requests (RPC)
 
 The relationship between `Avg TiDB KV Request Duration` and `Avg TiKV GRPC Duration` is as follows:
@@ -474,7 +474,7 @@ According to the preceding formula, the QPS of a write-heavy OLTP workload in v5
 - v5.3.0: 24.4 ms ~= 17.7 ms + 6.59 ms
 - v5.4.0: 21.4 ms ~= 14.0 ms + 7.33 ms
 
-In v5.4.0, the gPRC module has been optimized to accelerate Raft log replication, which reduces `Store Duration` compared with v5.3.0.
+In v5.4.0, the gRPC module has been optimized to accelerate Raft log replication, which reduces `Store Duration` compared with v5.3.0.
 
 v5.3.0:
 
@@ -521,7 +521,7 @@ The QPS of a write-heavy OLTP workload in v5.4.0 is improved by 14% compared wit
 | Commit Log Duration | 13 | 8.68 |
 | Apply Log Duration | 0.457|0.514 |
 
-In v5.4.0, the gPRC module has been optimized to accelerate Raft log replication, which reduces `Commit Log Duration` and `Store Duration` compared with v5.3.0.
+In v5.4.0, the gRPC module has been optimized to accelerate Raft log replication, which reduces `Commit Log Duration` and `Store Duration` compared with v5.3.0.
 
 v5.3.0:
 

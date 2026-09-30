@@ -1,11 +1,11 @@
 ---
 title: ti fs list-layers
-summary: List layers in a TiDB Cloud Filesystem.
+summary: List layers in a file system.
 ---
 
 # ti fs list-layers
 
-Lists layers for the selected Filesystem.
+Lists layers for the selected file system.
 
 > **Note:**
 >
@@ -24,7 +24,7 @@ ti fs list-layers
 ## Options
 
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--version`: Display version information.
 
@@ -32,10 +32,10 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- List Filesystem layers:
+- List file system layers:
 
     ```bash
-    # Return all layers available in the selected Filesystem.
+    # Return all layers available in the selected file system.
     ti fs list-layers --file-system-id <file-system-id>
     ```
 

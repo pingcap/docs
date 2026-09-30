@@ -7,9 +7,9 @@ summary: Learn about the frequently asked questions (FAQs) and answers about TiD
 
 This document lists the frequently asked questions (FAQs) and answers about TiDB Lightning.
 
-## What is the minimum TiDB/TiKV/PD cluster version supported by TiDB Lightning?
+## Which TiDB Lightning version should I use?
 
-The version of TiDB Lightning should be the same as the cluster. If you use the Local-backend mode, the earliest available version is 4.0.0. If you use the Importer-backend mode or the TiDB-backend mode, the earliest available version is 2.0.9, but it is recommended to use the 3.0 stable version.
+It is recommended to use the same version of TiDB Lightning as the target TiDB cluster.
 
 ## Does TiDB Lightning support importing multiple schemas (databases)?
 
@@ -26,7 +26,7 @@ If only one table has an error encountered, the rest will still be processed nor
 ## How to properly restart TiDB Lightning?
 
 1. [Stop the `tidb-lightning` process](#how-to-stop-the-tidb-lightning-process).
-2. Start a new `tidb-lightning` task: execute the previous start command, such as `nohup tiup tidb-lightning -config tidb-lightning.toml`.
+2. Start a new `tidb-lightning` task by rerunning the command used to start the original task, such as `nohup tiup tidb-lightning:<version> -config tidb-lightning.toml`. Replace `<version>` with the TiDB Lightning version used by the original task.
 
 ## How to ensure the integrity of the imported data?
 

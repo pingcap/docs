@@ -7,12 +7,12 @@ summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other da
 
 <CustomContent plan="dedicated">
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud Dedicated supports streaming data to Apache Kafka, MySQL, TiDB Cloud, and cloud storage.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud Dedicated supports streaming data to Apache Kafka, MySQL, TiDB Cloud, and cloud storage via changefeeds.
 
 </CustomContent>
 <CustomContent plan="premium">
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud Premium supports streaming data to Apache Kafka and MySQL.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud Premium supports streaming data to Apache Kafka and MySQL via changefeeds.
 
 </CustomContent>
 

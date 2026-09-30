@@ -8,15 +8,49 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## September 29, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium adds query latency count threshold alerts.
+
+        TiDB Cloud Premium now provides three built-in alert rules that notify you when more than 20 SQL statements exceed a latency threshold of 256 ms, 512 ms, or 4096 ms within one minute. These alerts help you detect periods with unusually high numbers of slow SQL statements.
+
+        For more information, see [TiDB Cloud Built-in Alerting](https://docs.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium).
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated supports cross-region AWS PrivateLink connections.
+
+        With this feature, you can create an AWS interface endpoint in one region and privately connect it to a TiDB Cloud Dedicated cluster in another region. Cross-region connections use the same connection string.
+
+        Currently, this feature is available upon request. A cross-region PrivateLink service fee applies per added region, and removing a region does not affect existing connections. To request this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+        For more information, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections/).
+
+## September 22, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) now supports inbound IPv6 connectivity over AWS PrivateLink, so you can connect to your cluster over either IPv4 or IPv6.
+
+        Currently, this feature is available upon request. To access IPv6 connectivity, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request it, and then create a dual-stack AWS interface endpoint.
+
+        For more information, see [Use IPv6 connectivity over a private endpoint](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint).
+
 ## September 15, 2026
 
 **General changes**
 
 * **TiDB Cloud CLI**
 
-  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is now available in public preview for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and TiDB Cloud Filesystems. A TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads.
+  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is now available in public preview for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and file systems in TiDB Cloud Filesystem. TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads.
 
-  You can use `ti` directly or let your scripts, CI jobs, and AI agents run it to automate TiDB Cloud workflows. With `ti`, you can create and manage TiDB Cloud Starter instances, execute SQL statements, and create and access persistent Filesystem workspaces through file commands or supported mounts. JSON output by default, JMESPath output queries, and support for `--wait` and `--dry-run` on applicable commands simplify automation.
+  You can use `ti` directly or let your scripts, CI jobs, and AI agents run it to automate TiDB Cloud workflows. With `ti`, you can create and manage TiDB Cloud Starter instances, execute SQL statements, and create and access persistent file system workspaces through file commands or supported mounts. JSON output by default, JMESPath output queries, and support for `--wait` and `--dry-run` on applicable commands simplify automation.
 
   For more information, see [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) and [TiDB Cloud CLI (`ti`) Overview](/ai/ti/ti-overview.md).
 

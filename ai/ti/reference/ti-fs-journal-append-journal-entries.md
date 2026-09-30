@@ -1,6 +1,6 @@
 ---
 title: ti fs-journal append-journal-entries
-summary: Append entries to a Filesystem journal.
+summary: Append entries to a file system journal.
 ---
 
 # ti fs-journal append-journal-entries
@@ -36,7 +36,7 @@ ti fs-journal append-journal-entries
 - `--entry-json <string>`: One JSON journal entry object; repeatable. For the supported fields, see [Entry JSON format](#entry-json-format).
 - `--entry-type <string>`: Entry type to use when an input object omits `type`. An explicit `type` in an input object takes precedence.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--idempotency-key <string>`: Key used to deduplicate retries of the same append request. If omitted, each invocation receives a new key.
 - `--json-array`: Read a JSON array from stdin instead of JSONL.

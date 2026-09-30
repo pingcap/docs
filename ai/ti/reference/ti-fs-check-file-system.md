@@ -5,7 +5,7 @@ summary: Check TiDB Cloud Filesystem connectivity.
 
 # ti fs check-file-system
 
-Verifies that the selected Filesystem is correctly configured and accessible, including its region, credentials, and file access.
+Verifies that the selected file system is correctly configured and accessible, including its region, credentials, and file access.
 
 > **Note:**
 >
@@ -24,7 +24,7 @@ ti fs check-file-system
 ## Options
 
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--version`: Display version information.
 
@@ -32,10 +32,10 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 
 ## Examples
 
-- Check Filesystem connectivity:
+- Check file system connectivity:
 
     ```bash
-    # Verify that the selected token can reach and read the Filesystem root.
+    # Verify that the selected token can reach and read the file system root.
     ti fs check-file-system --file-system-id <file-system-id>
     ```
 
