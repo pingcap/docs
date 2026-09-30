@@ -50,7 +50,7 @@ ti fs copy-file
 
 ## Options
 
-- `--append`: Append the contents of a local file to a file in the TiDB Cloud Filesystem.
+- `--append`: Append the contents of a local file to a file in the file system.
 - `--create-parents`: Create missing local parent directories when copying from a file system.
 - `--description <string>`: The file description for `--to-remote` operation.
 - `--dry-run`: Validate the request without applying changes.
