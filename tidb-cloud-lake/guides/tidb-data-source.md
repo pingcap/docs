@@ -42,7 +42,7 @@ When the storage provider is **Amazon S3**, choose one of the following authenti
 
 Role ARN uses the AssumeRole model. TiDB Cloud Lake assumes an IAM Role in your AWS account and obtains temporary credentials, so you never hand static keys to TiDB Cloud Lake.
 
-Before you can save the data source, your IAM Role's trust policy must trust the two platform roles (setup/validation and data loading) with the corresponding External ID as the `sts:ExternalId` condition. See [Authenticate with AWS IAM Role](https://docs.pingcap.com/tidbcloudlake/authenticate-with-aws-iam-role/) for the full trust policy setup.
+Before you can save the data source, your IAM Role's trust policy must trust the two platform roles (the TiDB Cloud Lake setup and validation role, and the TiDB Cloud Lake data loading role) and specify the corresponding External ID in the `sts:ExternalId` condition. For the complete trust policy configuration, see [Authenticate with AWS IAM Role](https://docs.pingcap.com/tidbcloudlake/authenticate-with-aws-iam-role/).
 
 | Field                     | Required | Description                                                                                                                                  |
 | ------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
