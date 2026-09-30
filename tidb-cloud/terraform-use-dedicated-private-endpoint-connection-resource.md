@@ -178,8 +178,8 @@ For a TiDB Cloud Dedicated private endpoint connection that is not managed by Te
     Then, run `terraform apply` to import your infrastructure. After applying, the example output is as follows: 
 
     ```shell
-    tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=aws-1934187953894000000,example]
-    tidbcloud_dedicated_private_endpoint_connection.example: Import complete [id=aws-19341879538940000000,example]
+    tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=10757937805044000000,1934178998036000000,1934214559409000000]
+    tidbcloud_dedicated_private_endpoint_connection.example: Import complete [id=10757937805044000000,1934178998036000000,1934214559409000000]
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
