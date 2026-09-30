@@ -355,7 +355,7 @@ mysql> SELECT * FROM doctors;
 +----+-------+---------+----------+
 ```
 
-どちらのトランザクションでも、アプリケーションはまず 2人以上の医師が待機しているかどうかを確認します。待機している場合は、1人の医師が安全に休暇を取れると想定します。データベースはスナップショット分離を使用しているため、どちらのチェックも`2`を返すため、両方のトランザクションは次のステージに進みます。 `Alice`自分のレコードを非番に更新し、 `Bob`も同様に更新します。両方のトランザクションは正常にコミットされます。これで、待機中の医師がいなくなり、少なくとも 1人の医師が待機している必要があるという要件に違反します。次の図 ( ***Designing Data-Intensive Applications***から引用) は、実際に何が起こるかを示しています。
+どちらのトランザクションでも、アプリケーションはまず 2人以上の医師が待機しているかどうかを確認します。待機している場合は、1人の医師が安全に休暇を取れると想定します。データベースはスナップショット分離を使用しているため、どちらのチェックも`2`を返すため、両方のトランザクションは次のステージに進みます。 `Alice`は自分のレコードを非番に更新し、 `Bob`も同様に更新します。両方のトランザクションは正常にコミットされます。これで、待機中の医師がいなくなり、少なくとも 1人の医師が待機している必要があるという要件に違反します。次の図 ( ***Designing Data-Intensive Applications***から引用) は、実際に何が起こるかを示しています。
 
 ![Write Skew](/media/develop/write-skew.png)
 
@@ -712,7 +712,7 @@ mysql> SELECT * FROM T2;
 
 - 1行あたりのレコードの最大サイズは120MiBです。
 
-    - TiDB v4.0.10 以降、v4.0.x バージョン、および TiDB v5.0.0 以降のバージョンでは、tidb-server の[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)設定パラメータを使用して調整できます。v4.0.10 より前のバージョンでは、値は`6 MB`です。
+    - TiDB v4.0.10 以降の v4.0.x バージョン、および TiDB v5.0.0 以降のバージョンでは、tidb-server の[`performance.txn-entry-size-limit`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#txn-entry-size-limit-new-in-v4010-and-v500)設定パラメータを使用して調整できます。v4.0.10 より前のバージョンでは、値は`6 MB`です。
     - バージョン7.6.0以降では、 [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)システム変数を使用して、この設定項目の値を動的に変更できます。
     - TiKV も単一の書き込みリクエストのデータサイズを制限していることに注意してください。単一の書き込みリクエストのデータサイズが [`raftstore.raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)(デフォルトは `8 MiB`)を超えると、TiKV はそのリクエストを拒否します。単一行が大きい場合は、TiDB の `tidb_txn_entry_size_limit` と TiKV の `raftstore.raft-entry-max-size` の両方を調整する必要があります。
 
@@ -733,6 +733,6 @@ mysql> SELECT * FROM T2;
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

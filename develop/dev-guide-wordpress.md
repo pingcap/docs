@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/dev-guide-wordpress/']
 
 # WordPressとTiDB Cloud Starterを統合する {#integrate-wordpress-with-tidb-cloud-starter}
 
-TiDBはMySQL互換データベースであり、 TiDB Cloud Starterはフルマネージド型のTiDBサービスです。WordPress [WordPress](https://github.com/WordPress) 、ユーザーがウェブサイトを作成・管理できる無料のオープンソースコンテンツ管理システム（CMS）です。WordPressはPHPで記述されており、MySQLデータベースを使用しています。
+TiDBはMySQL互換データベースであり、 TiDB Cloud Starterはフルマネージド型のTiDBサービスです。[WordPress](https://github.com/WordPress)は、ユーザーがウェブサイトを作成・管理できる無料のオープンソースコンテンツ管理システム（CMS）です。WordPressはPHPで記述されており、MySQLデータベースを使用しています。
 
 このチュートリアルでは、 TiDB Cloud Starterを使用してWordPressを無料で実行する方法を学ぶことができます。
 
@@ -84,7 +84,7 @@ TiDB Cloud StarterへのWordPressデータベース接続を設定します。
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。デフォルトでは、 TiDB Cloud Starterには`test`データベースが付属しています。TiDB Cloud Starterインスタンスで既に別のデータベースを作成している場合は、 `test`データベース名に置き換えてください。
+    プレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。デフォルトでは、 TiDB Cloud Starterには`test`データベースが付属しています。TiDB Cloud Starterインスタンスで既に別のデータベースを作成している場合は、 `test`をデータベース名に置き換えてください。
 
 7. `.env`ファイルを保存します。
 
@@ -106,4 +106,4 @@ TiDB Cloud StarterへのWordPressデータベース接続を設定します。
 
 ## お困りですか？ {#need-help}
 
-[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](https://tidb.support.pingcap.com/)。
+[Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問するか、[サポートチケットを送信してください](https://tidb.support.pingcap.com/)。

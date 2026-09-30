@@ -25,7 +25,7 @@ CREATE VIEW view_name AS query;
 
 既存のビューまたはテーブルと同じ名前のビューを作成することはできないことに注意してください。
 
-たとえば、 [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md) 、 `JOIN`ステートメントを介して`books`テーブルと`ratings`テーブルを結合し、平均評価を持つ書籍のリストを取得します。
+たとえば、 [複数テーブル結合クエリ](/develop/dev-guide-join-tables.md)は、 `JOIN`ステートメントを介して`books`テーブルと`ratings`テーブルを結合し、平均評価を持つ書籍のリストを取得します。
 
 後続のクエリの便宜を図るため、次のステートメントを使用してクエリをビューとして定義できます。
 
@@ -37,7 +37,7 @@ LEFT JOIN ratings r ON b.id = r.book_id
 GROUP BY b.id;
 ```
 
-## クエリビュー {#query-views}
+## ビューをクエリする {#query-views}
 
 ビューが作成されると、通常のテーブルと同じように`SELECT`文を使用してビューをクエリできます。
 

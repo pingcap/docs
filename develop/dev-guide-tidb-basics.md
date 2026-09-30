@@ -13,7 +13,7 @@ TiDB を使い始める前に、TiDB がどのように動作するかに関す�
 
 ## TiDBトランザクションメカニズム {#tidb-transaction-mechanisms}
 
-TiDBは分散トランザクションをサポートし、モード[楽観的トランザクション](/optimistic-transaction.md)とモード[悲観的トランザクション](/pessimistic-transaction.md)の両方を提供しています。現在のバージョンのTiDBでは、デフォルトで**悲観的トランザクション**モードが採用されており、従来のモノリシックデータベース（MySQLなど）と同様にTiDBでトランザクションを実行できます。
+TiDBは分散トランザクションをサポートし、[楽観的トランザクション](/optimistic-transaction.md)モードと[悲観的トランザクション](/pessimistic-transaction.md)モードの両方を提供しています。現在のバージョンのTiDBでは、デフォルトで**悲観的トランザクション**モードが採用されており、従来のモノリシックデータベース（MySQLなど）と同様にTiDBでトランザクションを実行できます。
 
 [`BEGIN`](/sql-statements/sql-statement-begin.md)でトランザクションを開始するか、 `BEGIN PESSIMISTIC`で**悲観的トランザクション**を明示的に指定するか、 `BEGIN OPTIMISTIC`で**楽観的トランザクション**を明示的に指定することができます。その後、トランザクションをコミット（ [`COMMIT`](/sql-statements/sql-statement-commit.md) ）またはロールバック（ [`ROLLBACK`](/sql-statements/sql-statement-rollback.md) ）することができます。
 
@@ -23,7 +23,7 @@ TiDBは、 `BEGIN`の開始から`COMMIT`または`ROLLBACK`の終了までの�
 
 ## アプリケーションがTiDBと対話する方法 {#the-way-applications-interact-with-tidb}
 
-TiDBはMySQLプロトコルとの互換性が高く、 [ほとんどのMySQL構文と機能](/mysql-compatibility.md)サポートしているため、ほとんどのMySQL接続ライブラリはTiDBと互換性があります。アプリケーションフレームワークまたは言語にPingCAPからの公式な対応がない場合は、MySQLのクライアントライブラリを使用することをお勧めします。ますます多くのサードパーティ製ライブラリがTiDBの様々な機能を積極的にサポートしています。
+TiDBはMySQLプロトコルとの互換性が高く、 [ほとんどのMySQL構文と機能](/mysql-compatibility.md)をサポートしているため、ほとんどのMySQL接続ライブラリはTiDBと互換性があります。アプリケーションフレームワークまたは言語にPingCAPからの公式な対応がない場合は、MySQLのクライアントライブラリを使用することをお勧めします。ますます多くのサードパーティ製ライブラリがTiDBの様々な機能を積極的にサポートしています。
 
 TiDB は MySQL プロトコルおよび MySQL 構文と互換性があるため、MySQL をサポートするほとんどの ORM も TiDB と互換性があります。
 

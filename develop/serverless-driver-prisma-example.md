@@ -137,7 +137,7 @@ const prisma = new PrismaClient({ adapter });
 
     > **Note:**
     >
-    > `@tidbcloud/prisma-adapter` 、HTTPS 経由の Prisma Clientの使用のみをサポートします。 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)および[Prisma Introspect](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL`を`mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
+    > `@tidbcloud/prisma-adapter`は、HTTPS 経由の Prisma Clientの使用のみをサポートします。 [Prisma Migrate](https://www.prisma.io/docs/concepts/components/prisma-migrate)および[Prisma Introspect](https://www.prisma.io/docs/concepts/components/introspection)では、従来の TCP 接続が引き続き使用されます。 Prisma Client のみを使用する必要がある場合は、 `DATABASE_URL`を`mysql://[username]:[password]@[host]/[database]`形式に簡素化できます。
 
 3. `.env`ファイルから環境変数を読み込むには、 `dotenv`をインストールしてください。
 
@@ -190,7 +190,7 @@ const prisma = new PrismaClient({ adapter });
     npx prisma db push
     ```
 
-    このコマンドは、 `user`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じてTiDB Cloud Starterインスタンスに`@tidbcloud/prisma-adapter`します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
+    このコマンドは、 `@tidbcloud/prisma-adapter`を使用した HTTPS 接続ではなく、従来の TCP 接続を通じてTiDB Cloud Starterインスタンスに`user`テーブルを作成します。これは、Prisma Migrate と同じエンジンを使用しているためです。このコマンドの詳細については、 [スキーマのプロトタイプを作成します](https://www.prisma.io/docs/concepts/components/prisma-migrate/db-push)を参照してください。
 
 4. Prisma Clientを生成する：
 

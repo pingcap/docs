@@ -16,8 +16,8 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 この文書を読む前に、以下のものを準備してください。
 
 - [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)読んでください。
-- `UPDATE`データを取得したい場合は、最初に[データを挿入する](/develop/dev-guide-insert-data.md)必要があります。
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)読んでください。
+- データを`UPDATE`したい場合は、最初に[データを挿入する](/develop/dev-guide-insert-data.md)必要があります。
 
 ## `UPDATE`を使用する {#use-update}
 
@@ -25,7 +25,7 @@ aliases: ['/ja/tidb/stable/dev-guide-update-data/','/ja/tidb/dev/dev-guide-updat
 
 > **Note:**
 >
-> 多数の行（例えば1万行以上）を更新する必要がある場合は、一度にすべてを更新するのではなく、すべての行が更新されるまで、一部ずつ繰り返し更新することをお***勧め***します。この操作をループさせるスクリプトやプログラムを作成できます。詳しくは[一括更新](#bulk-update)ご覧ください。
+> 多数の行（例えば1万行以上）を更新する必要がある場合は、一度にすべてを更新する***のではなく***、すべての行が更新されるまで、一部ずつ繰り返し更新することをお勧めします。この操作をループさせるスクリプトやプログラムを作成できます。詳しくは[一括更新](#bulk-update)をご覧ください。
 
 ### `UPDATE` SQL構文 {#update-sql-syntax}
 
@@ -50,11 +50,11 @@ UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {fil
 データ更新に関するベストプラクティスを以下に示します。
 
 - `UPDATE`文には、必ず`WHERE`句を指定してください。 `UPDATE`文に`WHERE`句がない場合、TiDB はテーブル内の***すべての行***を更新します。
-- 大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)を使用します。 TiDB は 1つのトランザクションのサイズを制限しているため ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されすぎたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。
+- 大量の行 (たとえば、1 万行以上) を更新する必要がある場合は[一括更新](#bulk-update)を使用します。 TiDB は 1つのトランザクションのサイズを制限しているため ( [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)、一度にあまりにも多くのデータ更新が行われると、長時間ロックが保持されたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) します。
 
 ### `UPDATE`例 {#update-example}
 
-[authors](/develop/dev-guide-bookshop-schema-design.md#authors-table)テーブルの著者が名前を**Helen Haruki**に変更したとします。[authors]テーブルを変更する必要があります。彼女の固有の`id`が**1**であると仮定すると、フィルターは`id = 1`になります。
+[authors](/develop/dev-guide-bookshop-schema-design.md#authors-table)テーブルの著者が名前を**Helen Haruki**に変更したとします。[authors](/develop/dev-guide-bookshop-schema-design.md#authors-table)テーブルを変更する必要があります。彼女の固有の`id`が**1**であると仮定すると、フィルターは`id = 1`になります。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -110,9 +110,9 @@ INSERT INTO {table} ({columns}) VALUES ({values})
 
 ### `INSERT ON DUPLICATE KEY UPDATE`例 {#insert-on-duplicate-key-update-example}
 
-例えば、 [評価](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新して、ユーザーが書籍に付けた評価を含める必要があるとします。ユーザーがまだ書籍を評価していない場合は、新しい評価が作成されます。ユーザーが既に評価している場合は、以前の評価が更新されます。
+例えば、 [ratings](/develop/dev-guide-bookshop-schema-design.md#ratings-table)テーブルを更新して、ユーザーが書籍に付けた評価を含める必要があるとします。ユーザーがまだ書籍を評価していない場合は、新しい評価が作成されます。ユーザーが既に評価している場合は、以前の評価が更新されます。
 
-次の例では、主キーは`book_id`と`user_id`の結合主キーです。ユーザー`user_id = 1`書籍`5`に`book_id = 1000`という評価を与えます。
+次の例では、主キーは`book_id`と`user_id`の結合主キーです。ユーザー`user_id = 1`が書籍`book_id = 1000`に`5`という評価を与えます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -150,13 +150,13 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 ## 一括更新 {#bulk-update}
 
-テーブル内の複数のデータ行を更新する必要がある場合は、 [`INSERT ON DUPLICATE KEY UPDATE`を使用する](#use-insert-on-duplicate-key-update)を、 `WHERE`句を使用して、更新する必要のあるデータをフィルタリングできます。
+テーブル内の複数のデータ行を更新する必要がある場合は、 [`INSERT ON DUPLICATE KEY UPDATE`を使用する](#use-insert-on-duplicate-key-update)と`WHERE`句を使用して、更新する必要のあるデータをフィルタリングできます。
 
-ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新すること、つまり、更新が完了するまで各繰り返しでデータの一部のみを更新することをお勧めします。これは、TiDB が単一トランザクションのサイズを制限しているためです ( [トランザクションの合計サイズ制限](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。一度にあまりに多くのデータ更新を行うと、長時間ロックが保持されたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) されます。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
+ただし、多数の行 (たとえば、1 万行以上) を更新する必要がある場合は、データを繰り返し更新すること、つまり、更新が完了するまで各繰り返しでデータの一部のみを更新することをお勧めします。これは、TiDB が単一トランザクションのサイズを制限しているためです ( [txn-total-size-limit](/tidb-configuration-file.md#txn-total-size-limit)、デフォルトでは 100 MB)。一度にあまりに多くのデータ更新を行うと、長時間ロックが保持されたり ([悲観的トランザクション](/pessimistic-transaction.md))、競合が発生したり ([楽観的トランザクション](/optimistic-transaction.md)) します。プログラムまたはスクリプトでループを使用すると、操作を完了できます。
 
 このセクションでは、反復的な更新を処理するスクリプトの記述例を示します。この例では`SELECT`と`UPDATE`を組み合わせて一括更新を完了する方法を示します。
 
-### 一括更新ループを書き込む {#write-bulk-update-loop}
+### 一括更新ループを記述する {#write-bulk-update-loop}
 
 まず、アプリケーションまたはスクリプトのループ内に`SELECT`クエリを記述してください。このクエリの戻り値は、更新が必要な行の主キーとして使用できます。この`SELECT`クエリを定義する際には、更新が必要な行をフィルタリングするために`WHERE`句を使用する必要があることに注意してください。
 
@@ -164,9 +164,9 @@ VALUES (?, ?, ?, NOW()) ON DUPLICATE KEY UPDATE `score` = ?, `rated_at` = NOW()"
 
 過去 1年間`bookshop`ウェブサイトでユーザーから多くの書籍評価が寄せられたとします。しかし、当初の 5 段階評価では書籍評価の区別がつきにくく、ほとんどの書籍が`3`と評価されています。そこで、評価を区別するために、5 段階評価から 10 段階評価に変更することにしました。
 
-前の5段階評価の`2`テーブルのデータに`ratings`を乗算し、評価テーブルに行が更新されたかどうかを示す新しい列を追加する必要があります。この列を使用すると、 `SELECT`で更新された行を除外できるため、スクリプトがクラッシュして行が複数回更新され、不合理なデータが生成されることを防ぐことができます。
+`ratings`テーブルの前の5段階評価のデータに`2`を乗算し、評価テーブルに行が更新されたかどうかを示す新しい列を追加する必要があります。この列を使用すると、 `SELECT`で更新された行を除外できるため、スクリプトがクラッシュして行が複数回更新され、不合理なデータが生成されることを防ぐことができます。
 
-例えば、データ型が[ブール](/data-type-numeric.md#boolean-type)である列を`ten_point`として作成し、それが10点スケールであるかどうかの識別子とします。
+例えば、データ型が[BOOL](/data-type-numeric.md#boolean-type)である列を`ten_point`として作成し、それが10点スケールであるかどうかの識別子とします。
 
 ```sql
 ALTER TABLE `bookshop`.`ratings` ADD COLUMN `ten_point` BOOL NOT NULL DEFAULT FALSE;
@@ -429,6 +429,6 @@ public class BatchUpdateExample {
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

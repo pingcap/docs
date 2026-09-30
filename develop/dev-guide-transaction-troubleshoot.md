@@ -30,10 +30,10 @@ TiDB悲観的トランザクションモードでは、2つのクライアント
 
 | クライアントA                                                   | クライアントB                                                       |
 | --------------------------------------------------------- | ------------------------------------------------------------- |
-| 始める;                                                      |                                                               |
-|                                                           | 始める;                                                          |
-| 本を更新します。SET stock=stock-1 WHERE id=1;                     |                                                               |
-|                                                           | 本を更新します。set stock=stock-1 WHERE id=2;                         |
+| BEGIN;                                                      |                                                               |
+|                                                           | BEGIN;                                                          |
+| UPDATE books SET stock=stock-1 WHERE id=1;                     |                                                               |
+|                                                           | UPDATE books SET stock=stock-1 WHERE id=2;                         |
 | UPDATE books SET stock=stock-1 WHERE id=2; -- 実行はブロックされます |                                                               |
 |                                                           | UPDATE books SET stock=stock-1 WHERE id=1; -- デッドロックエラーが発生します |
 
@@ -47,9 +47,9 @@ TiDB悲観的トランザクションモードでは、2つのクライアント
 | ------------------------------------- | ------------------------------------------------------ |
 | BEGIN;                                  |                                                        |
 |                                       | BEGIN;                                                   |
-| 本を更新します。SET stock=stock-1 WHERE id=1; |                                                        |
+| UPDATE books SET stock=stock-1 WHERE id=1; |                                                        |
 |                                       | UPDATE books SET stock=stock-1 WHERE id=1; -- ブロックされます |
-| 本を更新します。set stock=stock-1 WHERE id=2; |                                                        |
+| UPDATE books SET stock=stock-1 WHERE id=2; |                                                        |
 | COMMIT;                                   |                                                        |
 |                                       | UPDATE books SET stock=stock-1 WHERE id=2;                  |
 |                                       | COMMIT;                                                    |
@@ -90,7 +90,7 @@ MySQL などの従来のデータベースとは異なり、TiDB では、楽観
     - `Error 8022: Error: KV error safe to retry` : トランザクションのコミットに失敗したエラー。
     - `Error 8028: Information schema is changed during the execution of the statement` : DDL 操作によってテーブルスキーマが変更され、トランザクションのコミットでエラーが発生しました。
     - `Error 9007: Write conflict` : 書き込み競合エラー。通常、楽観的トランザクションモードが使用されているときに、複数のトランザクションが同じデータ行を変更することによって発生します。
-- try ブロックの最後にあるトランザクションを`COMMIT` 。
+- try ブロックの最後でトランザクションを`COMMIT`します。
 
 エラーコードの詳細については、 [エラーコードとトラブルシューティング](/error-codes.md)を参照してください。
 
@@ -118,7 +118,7 @@ while True:
 
 > **Note:**
 >
-> `Error 9007: Write conflict`頻繁に発生する場合は、スキーマ設計とワークロードのデータアクセス パターンを確認して競合の根本原因を特定し、設計を改善して競合を回避する必要があります。
+> `Error 9007: Write conflict`が頻繁に発生する場合は、スキーマ設計とワークロードのデータアクセス パターンを確認して競合の根本原因を特定し、設計を改善して競合を回避する必要があります。
 
 トランザクションの競合のトラブルシューティングと解決方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 

@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-troubleshoot-overview/','/ja/tidbcloud/dev-
 
 ## SQLクエリの問題のトラブルシューティング {#troubleshoot-sql-query-problems}
 
-SQL クエリのパフォーマンスを向上させる場合は、 [SQL性能チューニング](/develop/dev-guide-optimize-sql-overview.md)手順に従って、完全なテーブルスキャンやインデックスの欠落などのパフォーマンスの問題を解決してください。
+SQL クエリのパフォーマンスを向上させる場合は、 [SQL性能チューニング](/develop/dev-guide-optimize-sql-overview.md)の手順に従って、完全なテーブルスキャンやインデックスの欠落などのパフォーマンスの問題を解決してください。
 
 それでもパフォーマンスの問題が発生する場合は、次のドキュメントを参照してください。
 
@@ -36,7 +36,7 @@ SQL 操作について質問がある場合は、 [SQLに関するよくある�
 
 ## トランザクションに関する問題のトラブルシューティング {#troubleshoot-transaction-issues}
 
-[トランザクションエラーを処理する](/develop/dev-guide-transaction-troubleshoot.md)参照。
+[トランザクションエラーを処理する](/develop/dev-guide-transaction-troubleshoot.md)を参照してください。
 
 ## 参照 {#see-also}
 

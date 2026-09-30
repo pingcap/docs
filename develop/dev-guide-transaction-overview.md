@@ -17,9 +17,9 @@ BobはAliceに20ドルを送金したいと考えています。このトラン�
 - Bobの口座残高は 20 ドル減少します。
 - Aliceの口座残高は 20 ドル増加しました。
 
-トランザクションにより、上記の操作の両方が正常に実行されるか、または両方とも失敗するかを確認できます。
+トランザクションにより、上記の操作の両方が正常に実行されるか、または両方とも失敗するかのどちらかであることを保証できます。
 
-[書店](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、テーブルにいくつかのサンプルデータを挿入します。
+[bookshop](/develop/dev-guide-bookshop-schema-design.md)データベースの`users`テーブルを使用して、テーブルにいくつかのサンプルデータを挿入します。
 
 ```sql
 INSERT INTO users (id, nickname, balance)
@@ -93,7 +93,7 @@ COMMIT;
 ROLLBACK;
 ```
 
-前の転送の例では、トランザクション全体をロールバックすると、AliceとBobの残高は変更されず、現在のトランザクションのすべての変更がキャンセルされます。
+前の送金の例では、トランザクション全体をロールバックすると、AliceとBobの残高は変更されず、現在のトランザクションのすべての変更がキャンセルされます。
 
 ```sql
 TRUNCATE TABLE `users`;
@@ -159,7 +159,7 @@ mysql> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 ERROR 8048 (HY000): The isolation level 'SERIALIZABLE' is not supported. Set tidb_skip_isolation_level_check=1 to skip this error
 ```
 
-TiDBは、MySQLとの整合性を確保するために、スナップショット分離（SI）レベルの整合性（"repeatable read"とも呼ばれます）を実装しています。この分離レベルは[ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
+TiDBは、スナップショット分離（SI）レベルの整合性を実装しています。これは、MySQLとの一貫性のために"repeatable read"とも呼ばれます。この分離レベルは[ANSI Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-ansi-repeatable-read)および[MySQL Repeatable Read Isolation Level](/transaction-isolation-levels.md#difference-between-tidb-and-mysql-repeatable-read)とは異なります。詳細については、 [TiDBトランザクション分離レベル](/transaction-isolation-levels.md)を参照してください。
 
 ## ヘルプが必要ですか? {#need-help}
 

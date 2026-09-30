@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-use-temporary-tables/','/ja/tidbcloud/dev-g
 
 一時テーブルは、クエリ結果を再利用するための手法と考えることができます。
 
-[書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションにおける最年長の著者について何かを知りたい場合は、最年長の著者のリストを使用する複数のクエリを記述する場合があります。
+[Bookshop](/develop/dev-guide-bookshop-schema-design.md)アプリケーションにおける最年長の著者について何かを知りたい場合は、最年長の著者のリストを使用する複数のクエリを記述する場合があります。
 
 たとえば、次のステートメントを使用して、 `authors`テーブルから上位 50人の最年長著者を取得できます。
 
@@ -150,7 +150,7 @@ CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
 </div>
 <div label="Java" value="java">
 
-グローバル一時テーブルを使用する場合は、まず自動コミットモードをオフにする必要があります。JavaJava、 `conn.setAutoCommit(false);`文でこれを行うことができ、 `conn.commit();`でトランザクションを明示的にコミットできます。トランザクション中にグローバル一時テーブルに追加されたデータは、トランザクションがコミットまたはキャンセルされた後にクリアされます。
+グローバル一時テーブルを使用する場合は、まず自動コミットモードをオフにする必要があります。Java では、 `conn.setAutoCommit(false);`文でこれを行うことができ、 `conn.commit();`でトランザクションを明示的にコミットできます。トランザクション中にグローバル一時テーブルに追加されたデータは、トランザクションがコミットまたはキャンセルされた後にクリアされます。
 
 ```java
 public List<Author> getTop50EldestAuthorInfo() throws SQLException {
