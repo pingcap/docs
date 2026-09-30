@@ -48,6 +48,7 @@
     - [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md)
     - [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md)
     - [Kafka - Credentials](/tidb-cloud-lake/guides/kafka-credentials.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB Data Source](/tidb-cloud-lake/guides/tidb-data-source.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - Integration Tasks
     - [Overview](/tidb-cloud-lake/guides/integration-tasks.md)
     - [Task Management](/tidb-cloud-lake/guides/task-management.md)
@@ -56,6 +57,7 @@
     - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
     - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
     - [Kafka Consumer Integration Task](/tidb-cloud-lake/guides/integrate-with-kafka.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB Integration Task](/tidb-cloud-lake/guides/integrate-with-tidb.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
 - Load Data
   - Work with Stages
     - [Stage Overview](/tidb-cloud-lake/guides/stage-overview.md)
