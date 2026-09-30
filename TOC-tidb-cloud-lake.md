@@ -6,6 +6,7 @@
 ## Get Started
 
 - [Overview](/tidb-cloud-lake/lake-overview.md)
+- [Why TiDB Cloud Lake](/tidb-cloud-lake/lake-overview.md#why-lake)
 - [Quick Start](/tidb-cloud-lake/lake-quick-start.md)
 
 ## Guides
