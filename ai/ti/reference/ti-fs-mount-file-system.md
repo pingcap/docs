@@ -65,7 +65,7 @@ ti fs mount-file-system
 - `--read-cache-ttl <duration>`: FUSE read cache time to live. \[default: `30s`]
 - `--read-only`: Read-only mount mode. Requires FUSE; WebDAV rejects this option. Use `--driver fuse` explicitly, or use a scoped token to enforce read-only access at the service level.
 - `--ready-timeout <duration>`: Time to wait for a background mount to become ready. This is a startup timeout, not a timeout for subsequent file reads or writes. [Verify file I/O after mounting](/tidb-cloud-filesystem/filesystem-mount.md#verify-a-mount-before-using-it). \[default: `30s`]
-- `--remote-path <string>`: The TiDB Cloud file system root path to mount. \[default: /]
+- `--remote-path <string>`: The file system root path to mount. \[default: /]
 - `--unpack-archive-path <string>`: Restore the pack archive before mounting.
 - `--version`: Display version information.
 - `--write-back-cache`: Persist FUSE writes locally before writing them to the file system on flush. This behavior is enabled by default; specify `--write-back-cache=false` to disable it. Unavailable for checkpoint mounts, which are always read-only. \[default: true]
