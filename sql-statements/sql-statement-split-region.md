@@ -48,7 +48,7 @@ There are two types of Split Region syntax:
     SPLIT TABLE table_name [INDEX index_name] BETWEEN (lower_value) AND (upper_value) REGIONS region_num
     ```
 
-    `BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly spilt into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
+    `BETWEEN lower_value AND upper_value REGIONS region_num` defines the upper boundary, the lower boundary, and the Region amount. Then the current region will be evenly split into the number of regions (as specified in `region_num`) between the upper and lower boundaries.
 
 - The syntax of uneven split:
 
@@ -56,7 +56,7 @@ There are two types of Split Region syntax:
     SPLIT TABLE table_name [INDEX index_name] BY (value_list) [, (value_list)] ...
     ```
 
-    `BY value_list…` specifies a series of points manually, based on which the current Region is spilt. It is suitable for scenarios with unevenly distributed data.
+    `BY value_list…` specifies a series of points manually, based on which the current Region is split. It is suitable for scenarios with unevenly distributed data.
 
 The following example shows the result of the `SPLIT` statement:
 
@@ -134,7 +134,7 @@ t22_i5abc
 
 The `table_id` and `index_id` of the same index data in one table is the same. To split index Regions, you need to split Regions based on `index_value`.
 
-#### Even Spilt
+#### Even Split
 
 The way to split index evenly works the same as splitting data evenly. However, calculating the value of step is more complicated, because `index_value` might not be an integer.
 
@@ -178,13 +178,13 @@ If you want to split the index Region by day, see the following example:
 SPLIT TABLE t INDEX idx2 BETWEEN ("2020-06-01 00:00:00") AND ("2020-07-01 00:00:00") REGIONS 30;
 ```
 
-This statement splits the data of June 2020 of index `idex2` in table `t` into 30 Regions, each Region representing 1 day.
+This statement splits the data of June 2020 of index `idx2` in table `t` into 30 Regions, each Region representing 1 day.
 
 Region split methods for other types of index columns are similar.
 
 For data Region split of joint indexes, the only difference is that you can specify multiple columns values.
 
-For example, index `idx3 (a, b)` contains 2 columns, with column `a` of timestamp type and column `b` int. If you just want to do a time range split according to column `a`, you can use the SQL statement for splitting time index of a single column. In this case, do not specify the value of column `b` in `lower_value` and `upper_velue`.
+For example, index `idx3 (a, b)` contains 2 columns, with column `a` of timestamp type and column `b` int. If you just want to do a time range split according to column `a`, you can use the SQL statement for splitting time index of a single column. In this case, do not specify the value of column `b` in `lower_value` and `upper_value`.
 
 ```sql
 SPLIT TABLE t INDEX idx3 BETWEEN ("2010-01-01 00:00:00") AND ("2020-01-01 00:00:00") REGIONS 10;
