@@ -9,10 +9,6 @@ TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads
 
 TiDB Cloud Lake supports ANSI SQL, semi-structured data processing, vector search, and AI-oriented workflows in one platform. It is designed for teams that want a managed analytics experience without operating the underlying infrastructure themselves.
 
-> **Warning:**
->
-> TiDB Cloud Lake is currently in **public preview**. Feature availability and service limits might change as we continue to improve the product.
-
 ## Why {{{ .lake }}}?
 
 {{{ .lake }}} brings analytics, vector, search, and geo workloads together in one cloud-native platform. With storage-compute separation, ANSI SQL support, and managed infrastructure, teams can work on multi-modal data with better flexibility, performance, and cost efficiency.
