@@ -87,7 +87,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 | [`CASE`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#operator_case)       | ケース演算子                    |
 | [`IF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_if)         | if/else構文                 |
 | [`IFNULL()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_ifnull) | null if/else 構文           |
-| [`NULLIF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) | expr1 = expr2の場合は`NULL`返す |
+| [`NULLIF()`](https://dev.mysql.com/doc/refman/8.0/en/flow-control-functions.html#function_nullif) | expr1 = expr2の場合は`NULL`を返す |
 
 **キャスト関数:**
 
@@ -96,7 +96,7 @@ aliases: ['/ja/tidb/stable/vector-search-functions-and-operators/','/ja/tidbclou
 | [`CAST()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_cast)       | 値を文字列またはベクトルとしてキャストする |
 | [`CONVERT()`](https://dev.mysql.com/doc/refman/8.0/en/cast-functions.html#function_convert) | 値を文字列としてキャストする        |
 
-`CAST()`使用方法の詳細については、 [ベクトルデータ型 | キャスト](/ai/reference/vector-search-data-types.md#cast)を参照してください。
+`CAST()`の使用方法の詳細については、 [ベクトルデータ型 | キャスト](/ai/reference/vector-search-data-types.md#cast)を参照してください。
 
 ## 完全なリファレンス {#full-references}
 
@@ -108,7 +108,7 @@ VEC_L2_DISTANCE(vector1, vector2)
 
 次の式を使用して、2つのベクトル間の[L2距離](https://en.wikipedia.org/wiki/Euclidean_distance) (ユークリッド距離) を計算します。
 
-$距離(p,q)=\sqrt {\sum \limits _{i=1}^{n}{(p_{i}-q_{i})^{2}}}$
+$DISTANCE(p,q)=\sqrt {\sum \limits _{i=1}^{n}{(p_{i}-q_{i})^{2}}}$
 
 2つのベクトルの次元数は同じである必要があります。そうでない場合はエラーが返されます。
 
@@ -134,7 +134,7 @@ VEC_COSINE_DISTANCE(vector1, vector2)
 
 次の式を使用して 2つのベクトル間の[コサイン距離](https://en.wikipedia.org/wiki/Cosine_similarity)を計算します。
 
-$距離(p,q)=1.0 - {\frac {\sum \limits _{i=1}^{n}{p_{i}q_{i}}}{{\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}}\cdot {\sqrt {\sum \limits _{i=1}^{n}{q_{i}^{2}}}}}}$
+$DISTANCE(p,q)=1.0 - {\frac {\sum \limits _{i=1}^{n}{p_{i}q_{i}}}{{\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}}\cdot {\sqrt {\sum \limits _{i=1}^{n}{q_{i}^{2}}}}}}$
 
 2つのベクトルの次元数は同じである必要があります。そうでない場合はエラーが返されます。
 
@@ -162,7 +162,7 @@ VEC_NEGATIVE_INNER_PRODUCT(vector1, vector2)
 
 次の数式を使用して、2つのベクトル間の[内積](https://en.wikipedia.org/wiki/Dot_product)の負の値を使用して距離を計算します。
 
-$距離(p,q)=- INNER\_PROD(p,q)=-\sum \limits _{i=1}^{n}{p_{i}q_{i}}$
+$DISTANCE(p,q)=- INNER\_PROD(p,q)=-\sum \limits _{i=1}^{n}{p_{i}q_{i}}$
 
 2つのベクトルの次元数は同じである必要があります。そうでない場合はエラーが返されます。
 
@@ -188,7 +188,7 @@ VEC_L1_DISTANCE(vector1, vector2)
 
 次の式を使用して、2つのベクトル間の[L1距離](https://en.wikipedia.org/wiki/Taxicab_geometry) (マンハッタン距離) を計算します。
 
-$距離(p,q)=\sum \limits _{i=1}^{n}{|p_{i}-q_{i}|}$
+$DISTANCE(p,q)=\sum \limits _{i=1}^{n}{|p_{i}-q_{i}|}$
 
 2つのベクトルの次元数は同じである必要があります。そうでない場合はエラーが返されます。
 

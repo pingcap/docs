@@ -81,7 +81,7 @@ INSERT INTO vector_table VALUES (2, '[0.3, 0.5]');       -- 2 dimensions vector,
 
 ## 比較 {#comparison}
 
-[比較演算子](/functions-and-operators/operators.md)を使用して、 `=` 、 `!=` 、 `<` 、 `>` 、 `<=` 、 `>=`などのベクトルデータ型を比較できます。ベクトルデータ型の比較演算子と関数の完全なリストについては、 [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)を参照してください。
+`=` 、 `!=` 、 `<` 、 `>` 、 `<=` 、 `>=`などの[比較演算子](/functions-and-operators/operators.md)を使用して、ベクトルデータ型を比較できます。ベクトルデータ型の比較演算子と関数の完全なリストについては、 [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)を参照してください。
 
 ベクトルデータ型は要素ごとに数値的に比較されます。例:
 

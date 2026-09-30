@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 
 > **Tip**
 >
-> 完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)Jupyter Notebook で表示することも、 [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行することもできます。
+> 完全な[サンプルコード](https://github.com/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)を Jupyter Notebook で表示することも、 [Colab](https://colab.research.google.com/github/run-llama/llama_index/blob/main/docs/examples/vector_stores/TiDBVector.ipynb)オンライン環境で直接実行することもできます。
 
 ## 前提条件 {#prerequisites}
 
@@ -214,7 +214,7 @@ print(textwrap.fill(str(response), 100))
 
 > **Note**
 >
-> `TiDBVectorStore` [`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode)クエリ モードのみをサポートしています。
+> `TiDBVectorStore`は[`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode)クエリ モードのみをサポートしています。
 
 期待される出力は以下のとおりです。
 
@@ -226,9 +226,9 @@ a building for office use.
 
 ### ステップ7．メタデータフィルターを使用して検索する {#step-7-search-with-metadata-filters}
 
-検索結果を絞り込むには、メタデータフィルターを使用して、適用したフィルターに一致する特定の近隣検索結果を取得できます。
+検索結果を絞り込むには、メタデータフィルターを使用して、適用したフィルターに一致する特定の最近傍検索結果を取得できます。
 
-#### `book != "paul_graham"`フィルターと異なるクエリ {#query-with-book-paul-graham-filter}
+#### `book != "paul_graham"`フィルターを含むクエリ {#query-with-book-paul-graham-filter}
 
 次の例では`book`メタデータ フィールドが`"paul_graham"`である結果を除外しています。
 

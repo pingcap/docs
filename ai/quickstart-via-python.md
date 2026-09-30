@@ -146,8 +146,8 @@ text_embed = EmbeddingFunction(
 例として、 `chunks`という名前のテーブルを作成し、以下の列を追加します。
 
 - `id` (int): チャンクのID。
-- `text` (テキスト): チャンクのテキストコンテンツ。
-- `text_vec` (ベクトル): テキストのベクトル埋め込み。
+- `text` (text): チャンクのテキストコンテンツ。
+- `text_vec` (vector): テキストのベクトル埋め込み。
 - `user_id` (int): チャンクを作成したユーザーのID。
 
 ```python hl_lines="6"
@@ -232,7 +232,7 @@ table.delete({
 })
 ```
 
-## ドロップテーブル {#drop-table}
+## テーブルを削除する {#drop-table}
 
 テーブルが不要になった場合は、 `client.drop_table()`メソッドを使用して削除できます。
 

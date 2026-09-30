@@ -26,7 +26,7 @@ aliases: ['/ja/tidb/stable/vector-search-index/','/ja/tidbcloud/vector-search-in
 - 同じ列に対して、同じ距離関数を使用して複数のベクトル検索インデックスを作成することはサポートされていません。
 - ベクトル検索インデックスが設定された列を直接削除することはサポートされていません。このような列を削除するには、まずその列のベクトル検索インデックスを削除し、次に列自体を削除します。
 - ベクトルインデックスを持つ列の型の変更はサポートされていません。
-- ベクトル検索インデックスを[見えない](/sql-statements/sql-statement-alter-index.md)に設定することはサポートされていません。
+- ベクトル検索インデックスを[不可視](/sql-statements/sql-statement-alter-index.md)に設定することはサポートされていません。
 - [保存時の暗号化](/encryption-at-rest.md)が有効になっているTiFlashノード上でベクトル検索インデックスを構築することはサポートされていません。
 
 ## HNSWベクトルインデックスを作成する {#create-the-hnsw-vector-index}
