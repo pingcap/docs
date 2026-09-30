@@ -27,8 +27,31 @@ PrivateLink](https://docs.pingcap.com/tidbcloudlake/connect-with-aws-privatelink
 to configure the connection. Verify the endpoint, security-group rules, DNS
 behavior, and route from the client or source cluster before starting the load.
 
+## 3. Use Data Pipeline to replicate data from a TiDB Cloud Premium instance to TiDB Cloud Lake
 
-## 3. Establish the performance baseline
+Use TiDB Cloud Data Pipeline to replicate data from a TiDB Cloud Premium
+instance to TiDB Cloud Lake without introducing a third-party ETL tool. Data
+Pipeline first exports a full snapshot of the selected source data and then
+continuously replicates row-level changes so that the data in TiDB Cloud Lake
+stays up to date.
+
+Data Pipeline uses TiCDC for incremental replication and an external stage to
+transfer data between TiDB Cloud and TiDB Cloud Lake. Before starting the PoC,
+verify that the required feature is available for your TiDB Cloud plan and that
+the external stage and access policy are configured. For current availability
+and configuration requirements, see [Data Pipeline to TiDB Cloud
+Lake](https://docs.pingcap.com/tidb-cloud/data-pipeline/data-pipeline-overview.md).
+
+For the PoC, select representative tables and record their schemas, expected
+row counts, and freshness targets. After the initial snapshot completes,
+compare row counts, null counts, sample aggregates, and minimum and maximum
+values with the source. Then generate representative inserts, updates, and
+deletes in the source and verify that TiDB Cloud Lake reflects them within the
+expected replication latency. Record snapshot duration, replication lag,
+rejected records, and schema-mapping errors before using the replicated tables
+for query-performance tests.
+
+## 4. Establish the performance baseline
 
 The main factors affecting Lake query performance are:
 
@@ -43,7 +66,7 @@ Capture `EXPLAIN` output for each baseline query. If `TableScan` dominates,
 inspect cluster-key pruning, overlap metrics, block size, cache hit rate, and
 warehouse capacity before increasing concurrency.
 
-## 4. Always choose a cluster key
+## 5. Always choose a cluster key
 
 Choose a cluster key when creating every table. Use columns that frequently
 appear in filters, joins, or range scans, and put the most commonly filtered
@@ -77,7 +100,7 @@ ALTER TABLE lineitem RECLUSTER FINAL;
 See the [cluster key guide](/tidb-cloud-lake/guides/cluster-key-performance.md)
 for key design details.
 
-## 5. Monitor overlap and run `RECLUSTER FINAL`
+## 6. Monitor overlap and run `RECLUSTER FINAL`
 
 A cluster key does not impose one globally sorted file. Bulk loads and large
 mutations can leave many blocks overlapping, reducing pruning while keeping
@@ -162,7 +185,7 @@ AS
 ALTER TASK lineitem_hourly RESUME;
 ```
 
-## 6. Choose an appropriate block size
+## 7. Choose an appropriate block size
 
 Start with a block size that matches the write pattern:
 
@@ -174,7 +197,7 @@ Start with a block size that matches the write pattern:
 As a starting point, choose a larger block of approximately 512 MB for large
 append workloads.
 
-## 7. Use materialized views for repeated aggregation
+## 8. Use materialized views for repeated aggregation
 
 When the workload repeatedly aggregates one table at the same granularity, use
 a materialized view to pre-aggregate the frequently queried dimensions. Keep
