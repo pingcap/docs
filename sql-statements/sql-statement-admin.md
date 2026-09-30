@@ -48,7 +48,7 @@ This statement is a TiDB extension syntax, used to view the status of TiDB and c
 ADMIN RELOAD expr_pushdown_blacklist;
 ```
 
-The above statement is used to reload the blocklist pushed down by the expression.
+The above statement is used to reload the blocklist of expression pushdown.
 
 ```sql
 ADMIN RELOAD opt_rule_blacklist;
