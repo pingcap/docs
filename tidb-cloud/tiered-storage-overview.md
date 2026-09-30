@@ -62,7 +62,7 @@ Before setting IA, verify each item:
 - [ ] The data access frequency of the table/partition has been confirmed to be declining from a business perspective
 - [ ] The table can be changed to a partitioned table, because cold/hot data separation is easier to manage with partitioned tables
 - [ ] For regular table cold/hot separation, hot data accounts for less than 10% of the table
-- [ ] Cold data access frequency is very low, e.g., query QPS does not exceed 10 concurrent (to avoid saturating object storage bandwidth)
+- [ ] Cold data access frequency is very low; for example, query QPS does not exceed 10, to avoid saturating object storage bandwidth
 - [ ] No need for frequent large-range AP scans on IA tables
 - [ ] Cold-read latency is acceptable: a SQL execution may issue multiple remote requests, and latency varies with cache state, request parallelism, and the amount of cold data accessed
 - [ ] Awareness that cold reads have read amplification: a single 100-byte record can exhibit up to 30,000× amplification (approximately 3 MiB of cold data)
@@ -132,7 +132,7 @@ Segments organize only the local cache. In object storage, an SST file is stored
 
 **Read amplification path on a cache miss**:
 
-```Plaintext
+```
 User queries 1 record (100 Bytes)
 → Block cache miss
 → TiKV loads segments from 3 LSM levels from object storage
@@ -153,7 +153,7 @@ Therefore, tiered storage is best suited for **small, concentrated query pattern
 
 The write path remains the same as Standard tables:
 
-```Plaintext
+```
 INSERT/UPDATE/DELETE
 → Memtable (hot write, unaffected by IA)
 → L0 SST (hot write, unaffected by IA)
