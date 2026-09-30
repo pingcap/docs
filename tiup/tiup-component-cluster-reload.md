@@ -1,6 +1,6 @@
 ---
 title: tiup cluster reload
-summary: tiup cluster reload` コマンドは、変更されたクラスタ構成を適用し、サービスを再起動するために使用されます。`--force` で強制実行、`--transfer-timeout` で転送タイムアウトを設定、` --ignore-config-check で設定チェックを無視、` -N 、 --node でノードを指定、` -R 、 --role でロールを指定、`--skip-restart` で再起動をスキップできます。出力はtiup-clusterの実行ログです。
+summary: "`tiup cluster reload` コマンドは、変更されたクラスタ構成を適用し、サービスを再起動するために使用されます。`--force` で強制実行、`--transfer-timeout` で転送タイムアウトを設定、`--ignore-config-check` で設定チェックを無視、`-N, --node` でノードを指定、`-R, --role` でロールを指定、`--skip-restart` で再起動をスキップできます。出力はtiup-clusterの実行ログです。"
 ---
 
 # tiup cluster reload {#tiup-cluster-reload}
@@ -17,7 +17,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ## オプション {#options}
 
-### &#x20;--force {#--force}
+### --force {#--force}
 
 - 再ロード プロセス中のエラーを無視し、強制的に再ロードします。
 - データ型: `BOOLEAN`

@@ -13,7 +13,7 @@ summary: tiup dm scale-inコマンドは、サービスをオフラインにし�
 tiup dm scale-in <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作対象のクラスターの名前。クラスター名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作対象のクラスターの名前。クラスター名を忘れた場合は、 [cluster list](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
@@ -23,7 +23,7 @@ tiup dm scale-in <cluster-name> [flags]
 - データ型: `STRINGS`
 - デフォルト: no。このオプションは必須であり、値は null であってはなりません。
 
-### &#x20;--force {#force}
+### --force {#force}
 
 - 場合によっては、クラスタ内の一部のスケールインノードがダウンし、SSH経由でノードに接続して操作できなくなることがあります。このような場合は、 `--force`オプションを使用してこれらのノードをクラスタから削除できます。
 - データ型: `BOOLEAN`
