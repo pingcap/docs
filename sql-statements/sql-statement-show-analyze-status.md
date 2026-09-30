@@ -51,6 +51,30 @@ ShowLikeOrWhereOpt ::= 'LIKE' SimpleExpr | 'WHERE' Expression
 mysql> create table t(x int, index idx(x)) partition by hash(x) partitions 2;
 Query OK, 0 rows affected (0.69 sec)
 
+<<<<<<< HEAD
+=======
+mysql> set @@tidb_analyze_version = 1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> analyze table t;
+Query OK, 0 rows affected (0.20 sec)
+
+mysql> show analyze status;
++--------------+------------+----------------+-------------------+----------------+---------------------+---------------------+----------+-------------+----------------+------------+------------------+----------+---------------------+
+| Table_schema | Table_name | Partition_name | Job_info          | Processed_rows | Start_time          | End_time            | State    | Fail_reason | Instance       | Process_ID | Remaining_seconds| Progress | Estimated_total_rows|
++--------------+------------+----------------+-------------------+----------------+---------------------+---------------------+----------+-------------+----------------+------------+------------------+----------+---------------------+
+| test         | t          | p1             | analyze index idx |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
+| test         | t          | p0             | analyze index idx |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
+| test         | t          | p1             | analyze columns   |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
+| test         | t          | p0             | analyze columns   |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
+| test         | t1         | p0             | analyze columns   |       28523259 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | running  | NULL        | 127.0.0.1:4000 | 690208308  | 0s               | 0.9843   | 28978290            |
++--------------+------------+----------------+-------------------+----------------+---------------------+---------------------+----------+-------------+----------------+------------+------------------+----------+---------------------+
+5 rows in set (0.01 sec)
+
+mysql> set @@tidb_analyze_version = 2;
+Query OK, 0 rows affected (0.00 sec)
+
+>>>>>>> 43829857d8 (sql-statements: fix the row count in the SHOW ANALYZE STATUS example output (#24050))
 mysql> analyze table t;
 Query OK, 0 rows affected, 2 warnings (0.03 sec)
 
