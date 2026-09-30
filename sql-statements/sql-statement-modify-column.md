@@ -16,7 +16,11 @@ The following are some common examples of column type changes that require Reorg
 - Modifying the `DECIMAL` precision
 - Reducing the length of `VARCHAR(10)` to `VARCHAR(5)`
 
+<<<<<<< HEAD
 Starting from v8.5.5 and v9.0.0, TiDB optimizes some column type changes that previously required Reorg-Data. When the following conditions are met, TiDB rebuilds only the affected indexes instead of the entire table, thereby improving execution efficiency:
+=======
+Starting from v8.5.5 for TiDB Self-Managed and TiDB Cloud Dedicated, and from CLOUD.202603.1 for TiDB Cloud Essential and Premium, TiDB optimizes some column type changes that previously required Reorg-Data. When the following conditions are met, TiDB rebuilds only the affected indexes instead of the entire table, thereby improving execution efficiency:
+>>>>>>> 6696674461 (cloud: add tidb-x-cloud.202603.1.md (#23458))
 
 - The current session uses a strict [SQL mode](/sql-mode.md) (`sql_mode` includes `STRICT_TRANS_TABLES` or `STRICT_ALL_TABLES`).
 - The table has no TiFlash replicas.
