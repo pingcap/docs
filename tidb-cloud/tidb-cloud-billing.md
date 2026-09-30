@@ -210,6 +210,10 @@ To view the discount information, perform the following steps:
 
 ## Payment method
 
+> **Note:**
+>
+> New TiDB Cloud accounts include a free trial by default. You do not need to subscribe to an AWS Marketplace free trial or link an AWS billing account to access this trial.
+
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the payment information of TiDB Cloud. Otherwise, skip this section.
 
 <CustomContent language="en,zh">
@@ -310,6 +314,10 @@ If you already have a TiDB Cloud account and you want to pay for the usage via y
 
 <SimpleTab>
 <div label="AWS Marketplace">
+
+> **Note:**
+>
+> Subscribing to a free trial through AWS Marketplace requires creating a new TiDB Cloud account; the trial subscription cannot be linked to an existing account. If you already have a TiDB Cloud account and want to pay through AWS, follow the billing account linking steps below.
 
 To link your TiDB Cloud account to an AWS billing account, take the following steps:
 
