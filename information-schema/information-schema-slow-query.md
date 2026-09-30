@@ -130,7 +130,7 @@ DESC SLOW_QUERY;
 
 ## CLUSTER_SLOW_QUERY テーブル {#cluster_slow_query-table}
 
-`CLUSTER_SLOW_QUERY`テーブルは、クラスター内のすべてのノードのスロークエリ情報を提供します。これは、TiDB スローログファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは、 `SLOW_QUERY`と同様に使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは`SLOW_QUERY`テーブルとは異なり`INSTANCE`に`CLUSTER_SLOW_QUERY`列が追加されています。 `INSTANCE`列は、スロークエリの行情報の TiDB ノードアドレスを表します。
+`CLUSTER_SLOW_QUERY`テーブルは、クラスター内のすべてのノードのスロークエリ情報を提供します。これは、TiDB スローログファイルの解析結果です。 `CLUSTER_SLOW_QUERY`テーブルは、 `SLOW_QUERY`と同様に使用できます。 `CLUSTER_SLOW_QUERY`テーブルのテーブルスキーマは`SLOW_QUERY`テーブルとは異なり`CLUSTER_SLOW_QUERY`に`INSTANCE`列が追加されています。 `INSTANCE`列は、スロークエリの行情報の TiDB ノードアドレスを表します。
 
 > **Note:**
 >
@@ -318,9 +318,9 @@ read_size: 4.06 MB
 | フィールド                      | 説明                                                                                                              |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------- |
 | `initialize`            | 初期化に費やした時間                                                                                                      |
-| `read_file`             | 遅いログファイルの読み取りに費やした時間                                                                                            |
-| `parse_log.time`        | 遅いログファイルの解析に費やした時間                                                                                              |
-| `parse_log.concurrency` | 低速ログファイルの解析における同時実行数（ [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)で設定） |
+| `read_file`             | スローログファイルの読み取りに費やした時間                                                                                            |
+| `parse_log.time`        | スローログファイルの解析に費やした時間                                                                                              |
+| `parse_log.concurrency` | スローログファイルの解析における同時実行数（ [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)で設定） |
 | `total_file`            | スローログファイルの総数                                                                                                    |
-| `read_file`             | 読み取られた低速ログファイルの数                                                                                                |
+| `read_file`             | 読み取られたスローログファイルの数                                                                                                |
 | `read_size`             | ログファイルから読み取ったバイト数                                                                                               |

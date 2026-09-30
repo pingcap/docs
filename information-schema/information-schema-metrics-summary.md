@@ -12,9 +12,9 @@ TiDB クラスタには多くの監視メトリックがあります。異常な
 
 > **Note:**
 >
-> 上記の2つの監視概要テーブルは、TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
+> 上記の2つの監視サマリーテーブルは、TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-2つの表は、すべての監視データを要約したもので、各監視メトリックを効率的に確認できます。 `information_schema.metrics_summary`と比較して、表`information_schema.metrics_summary_by_label`には`label`列が追加され、異なるラベルに応じて区別された統計情報が表示されます。
+2つのテーブルは、すべての監視データを要約したもので、各監視メトリックを効率的に確認できます。 `information_schema.metrics_summary`と比較して、`information_schema.metrics_summary_by_label`テーブルには`label`列が追加され、異なるラベルに応じて区別された統計情報が表示されます。
 
 ```sql
 USE information_schema;
@@ -40,9 +40,9 @@ DESC metrics_summary;
 
 - `METRICS_NAME` : 監視テーブル名。
 - `QUANTILE` : パーセンタイル。SQL文を使用して`QUANTILE`を指定することもできます。例:
-    - `select * from metrics_summary where quantile=0.99` 0.99 パーセンタイルのデータを表示することを指定します。
-    - `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)` 、0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
-- `SUM_VALUE` 、 `AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`それぞれ合計、平均値、最小値、最大値を意味します。
+    - `select * from metrics_summary where quantile=0.99`は、0.99 パーセンタイルのデータを表示することを指定します。
+    - `select * from metrics_summary where quantile in (0.80, 0.90, 0.99, 0.999)`は、0.8、0.90、0.99、0.999 パーセンタイルのデータを同時に表示することを指定します。
+- `SUM_VALUE` 、 `AVG_VALUE` 、 `MIN_VALUE` 、 `MAX_VALUE`はそれぞれ合計、平均値、最小値、最大値を意味します。
 - `COMMENT` : 対応する監視テーブルのコメント。
 
 例えば：
@@ -181,6 +181,6 @@ ORDER BY ratio DESC LIMIT 10;
 - 期間 t2 の`tikv_cop_total_response_size` (TiKVコプロセッサーリクエスト結果のサイズ) は、期間 t1 の 192 倍になります。
 - 期間 t2 (TiKVコプロセッサーによってリクエストされたスキャン) の`tikv_cop_scan_details`は、期間 t1 の 105 倍になります。
 
-上記の結果から、期間t2のコプロセッサーリクエストが期間t1よりもはるかに多いことがわかります。これによりTiKVコプロセッサーが過負荷になり、 `cop task`待機状態になります。期間t2に大規模なクエリが発生し、負荷がさらに増加している可能性があります。
+上記の結果から、期間t2のコプロセッサーリクエストが期間t1よりもはるかに多いことがわかります。これによりTiKVコプロセッサーが過負荷になり、 `cop task`が待機状態になります。期間t2に大規模なクエリが発生し、負荷がさらに増加している可能性があります。
 
 実際、t1からt2までの期間全体を通して、 `go-ycsb`ストレステストが実行されています。その後、t2の期間には`tpch`クエリが20回実行されています。つまり、多くのコプロセッサーリクエストを引き起こしているのは、この`tpch`クエリです。

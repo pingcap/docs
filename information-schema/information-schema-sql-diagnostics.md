@@ -45,12 +45,12 @@ TiDB v4.0より前のシステムテーブルでは、現在のインスタン�
 
 TiDB クラスターには多くの監視メトリックがあるため、TiDB は v4.0 で次の監視サマリー テーブルを提供します。
 
-- 監視概要表[`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md)は、すべての監視データがまとめられており、各監視メトリックをより効率的に確認できます。
-- [`information_schema.metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md)はすべての監視データを要約します。特に、この表は各監視メトリックの異なるラベルを使用して統計情報を集計します。
+- 監視サマリーテーブル[`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md)は、すべての監視データがまとめられており、各監視メトリックをより効率的に確認できます。
+- [`information_schema.metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md)もすべての監視データを要約します。特に、このテーブルは各監視メトリックの異なるラベルを使用して統計情報を集計します。
 
 ## 自動診断 {#automatic-diagnostics}
 
 上記のクラスタ情報テーブルおよびクラスタ監視テーブルでは、クラスタのトラブルシューティングを行うために手動でSQL文を実行する必要があります。TiDB v4.0は自動診断をサポートしています。既存の基本情報テーブルをベースにした診断関連のシステムテーブルを使用することで、診断を自動実行できます。自動診断に関連するシステムテーブルは以下のとおりです。
 
 - 診断結果テーブル[`information_schema.inspection_result`](/information-schema/information-schema-inspection-result.md)には、システムの診断結果が表示されます。診断は受動的にトリガーされます。`select * from inspection_result`を実行すると、すべての診断ルールがトリガーされ、システムが診断され、システム内の障害またはリスクが結果に表示されます。
-- 診断サマリーテーブル[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md) 、特定のリンクまたはモジュールの監視情報を要約したものです。モジュールまたはリンク全体のコンテキストに基づいて、トラブルシューティングを行い、問題を特定することができます。
+- 診断サマリーテーブル[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md)は、特定のリンクまたはモジュールの監視情報を要約したものです。モジュールまたはリンク全体のコンテキストに基づいて、トラブルシューティングを行い、問題を特定することができます。
