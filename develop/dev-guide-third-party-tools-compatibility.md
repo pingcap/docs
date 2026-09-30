@@ -37,7 +37,7 @@ TiDBアプリケーションでは、データオーバーフローを回避す�
 
 **説明**
 
-MySQLは、データベースに対して実行された操作の合計数を追跡するために、 [`Com_`で始まるサーバーステータス変数](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx)という一連の変数を保持しています。例えば、 `Com_select` MySQLが最後に起動されてから開始された`SELECT`のステートメントの合計数を記録します（ステートメントが正常に実行されなかった場合でも記録されます）。TiDBはこれらの変数を保持していません。TiDBとMySQLの違いを確認するには、 [`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md)ステートメントを使用してください。
+MySQLは、データベースに対して実行された操作の合計数を追跡するために、 [`Com_`で始まるサーバーステータス変数](https://dev.mysql.com/doc/refman/8.0/en/server-status-variables.html#statvar_Com_xxx)という一連の変数を保持しています。例えば、 `Com_select`は MySQLが最後に起動されてから開始された`SELECT`のステートメントの合計数を記録します（ステートメントが正常に実行されなかった場合でも記録されます）。TiDBはこれらの変数を保持していません。TiDBとMySQLの違いを確認するには、 [`SHOW GLOBAL STATUS LIKE 'Com_%'`](/sql-statements/sql-statement-show-status.md)ステートメントを使用してください。
 
 **回避方法**
 
@@ -78,7 +78,7 @@ MySQL Connector/J の照合順序はクライアント側に保存され、サ�
 
 次の表は、文字セットにおけるクライアント側とサーバー側の既知の照合順序の不一致を示しています。
 
-| キャラクター    | クライアント側の照合順序         | サーバー側のデフォルトの照合順序 |
+| 文字セット    | クライアント側のデフォルトの照合順序         | サーバー側のデフォルトの照合順序 |
 | --------- | -------------------- | ---------------- |
 | `ascii`   | `ascii_general_ci`   | `ascii_bin`      |
 | `latin1`  | `latin1_swedish_ci`  | `latin1_bin`     |
@@ -137,7 +137,7 @@ TiDB は`UpdatableResultSet`をサポートしていません。`ResultSet.CONCU
 
 **説明**
 
-MySQL Connector/J 8.0.32 以前のバージョンを使用している場合、パラメータ`useLocalTransactionState`と`rewriteBatchedStatements`を同時に`true`に設定すると、トランザクションのコミットに失敗する可能性があります。 [このコード](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error)に設定すると再現します。
+MySQL Connector/J 8.0.32 以前のバージョンを使用している場合、パラメータ`useLocalTransactionState`と`rewriteBatchedStatements`を同時に`true`に設定すると、トランザクションのコミットに失敗する可能性があります。 [このコード](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error)で再現できます。
 
 **回避方法**
 
@@ -196,7 +196,7 @@ TiDBは分離レベル`READ-UNCOMMITTED`と`SERIALIZABLE`をサポートして�
 
 TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITTED`のみを使用します。
 
-分離レベル`SERIALIZABLE`を設定し、分離レベル`SERIALIZABLE`に依存しない他のアプリケーションと TiDB の互換性を確保したい場合は、分離レベル[`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check)を`1`に設定してください。この場合、TiDB はサポートされていない分離レベルエラーを無視します。
+分離レベル`SERIALIZABLE`を設定し、分離レベル`SERIALIZABLE`に依存しない他のアプリケーションと TiDB の互換性を確保したい場合は、[`tidb_skip_isolation_level_check`](/system-variables.md#tidb_skip_isolation_level_check)を`1`に設定してください。この場合、TiDB はサポートされていない分離レベルエラーを無視します。
 
 ### 列の`AUTO_INCREMENT`属性の変更はデフォルトでは許可されていません {#modification-of-a-column-s-auto-increment-attribute-is-not-allowed-by-default}
 

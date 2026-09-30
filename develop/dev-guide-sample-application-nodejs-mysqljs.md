@@ -88,7 +88,7 @@ npm install mysql dotenv --save
     cp .env.example .env
     ```
 
-6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -165,7 +165,7 @@ npm install mysql dotenv --save
     cp .env.example .env
     ```
 
-5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -194,7 +194,7 @@ npm install mysql dotenv --save
     cp .env.example .env
     ```
 
-2. `.env`ファイルを編集し、対応するプレースホルダー`{}` TiDB の接続パラメータに置き換えてください。設定例は以下のとおりです。
+2. `.env`ファイルを編集し、対応するプレースホルダー`{}`を TiDB の接続パラメータに置き換えてください。設定例は以下のとおりです。
 
     ```dotenv
     TIDB_HOST={host}
@@ -309,7 +309,7 @@ conn.query('SELECT id, coins, goods FROM players WHERE id = ?;', [1], (err, rows
 
 ### データの更新 {#update-data}
 
-以下のクエリは、 `50`の ID を持つ`50`に`Player`コインと`1`の商品を追加します。
+以下のクエリは、 ID が`1`の`Player`に`50`コインと`50`商品を追加します。
 
 ```javascript
 conn.query(
@@ -329,7 +329,7 @@ conn.query(
 
 ### データを削除する {#delete-data}
 
-以下のクエリは、IDが`Player`である`1`レコードを削除します。
+以下のクエリは、IDが`1`である`Player`レコードを削除します。
 
 ```javascript
 conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
@@ -357,16 +357,16 @@ conn.query('DELETE FROM players WHERE id = ?;', [1], (err, ok) => {
 
 - ORM フレームワークを使用して、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、 [Prisma](/develop/dev-guide-sample-application-nodejs-prisma.md)など、多数の複雑な SQL文を使用しないシナリオでの開発効率を向上させます。
 
-- データベースで大きな数値（ `supportBigNumbers: true`列と`BIGINT`列）を扱う場合は、 `DECIMAL`オプションを有効にすることをお勧めします。
+- データベースで大きな数値（ `BIGINT`列と`DECIMAL`列）を扱う場合は、 `supportBigNumbers: true`オプションを有効にすることをお勧めします。
 
 ## 次のステップ {#next-steps}
 
 - mysql.js ドライバーの使用方法の詳細については[mysql.jsのドキュメント](https://github.com/mysqljs/mysql#readme)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベストプラクティスを学びましょう。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

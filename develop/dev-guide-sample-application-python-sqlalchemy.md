@@ -67,7 +67,7 @@ SQLAlchemyは、複数のデータベースを扱うORMライブラリです。�
 
 > **Note:**
 >
-> 現在、 TiDB Cloud Starterインスタンスには制限があります。5分間アクティブな接続がない場合、インスタンスはシャットダウンし、すべての接続が閉じられます。そのため、 TiDB Cloud Starterインスタンスで SQLAlchemy を使用する場合、プールされた接続で`OperationalError`のような`Lost connection to MySQL server during query`や`MySQL Connection not available`が発生する可能性があります。このエラーを回避するには、 `pool_recycle`パラメータを`300`に設定してください。詳細については、SQLAlchemy ドキュメントの[接続切れへの対処](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)を参照してください。
+> 現在、 TiDB Cloud Starterインスタンスには制限があります。5分間アクティブな接続がない場合、インスタンスはシャットダウンし、すべての接続が閉じられます。そのため、 TiDB Cloud Starterインスタンスで SQLAlchemy を使用する場合、プールされた接続で`Lost connection to MySQL server during query`や`MySQL Connection not available`などの`OperationalError`が発生する可能性があります。このエラーを回避するには、 `pool_recycle`パラメータを`300`に設定してください。詳細については、SQLAlchemy ドキュメントの[接続切れへの対処](https://docs.sqlalchemy.org/en/20/core/pooling.html#dealing-with-disconnects)を参照してください。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
@@ -186,7 +186,7 @@ SQLAlchemyは、複数のデータベースを扱うORMライブラリです。�
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`前の手順でダウンロードした証明書のパスに設定してください。
+    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`を前の手順でダウンロードした証明書のパスに設定してください。
 
 6. `.env`ファイルを保存します。
 
@@ -262,7 +262,7 @@ engine = get_db_engine()
 Session = sessionmaker(bind=engine)
 ```
 
-この機能を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` 、 `${ca_path}` TiDB の実際の値に置き換える必要があります。
+この機能を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` 、 `${ca_path}`をTiDB の実際の値に置き換える必要があります。
 
 ### テーブルを定義する {#define-a-table}
 
@@ -281,7 +281,7 @@ class Player(Base):
     __tablename__ = "players"
 ```
 
-詳細については、 [SQLAlchemy ドキュメント: 宣言型によるクラスのマッピング](https://docs.sqlalchemy.org/en/20/orm/declarative_mapping.html)検討を参照してください。
+詳細については、 [SQLAlchemy ドキュメント: 宣言型によるクラスのマッピング](https://docs.sqlalchemy.org/en/20/orm/declarative_mapping.html)を参照してください。
 
 ### データを挿入する {#insert-data}
 
@@ -330,10 +330,10 @@ with Session() as session:
 
 - SQLAlchemy の使用法の詳細については[SQLAlchemyのドキュメント](https://www.sqlalchemy.org/)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

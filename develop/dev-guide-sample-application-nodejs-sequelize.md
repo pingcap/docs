@@ -94,7 +94,7 @@ npm install
     cp .env.example .env
     ```
 
-6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST='{host}'
@@ -169,7 +169,7 @@ npm install
     cp .env.example .env
     ```
 
-5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```shell
     TIDB_HOST='{host}'
@@ -193,7 +193,7 @@ npm install
     cp .env.example .env
     ```
 
-2. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+2. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```shell
     TIDB_HOST='{host}'
@@ -306,7 +306,7 @@ logger.info(newPlayer.toJSON());
 
 ### クエリデータ {#query-data}
 
-次のクエリは`Players`より大きいコインの単一の`300`レコードを返します。
+次のクエリは、コインが`300`より大きい単一の`Players`レコードを返します。
 
 ```typescript
 logger.info('Reading all players with coins > 300...');
@@ -325,7 +325,7 @@ logger.info(allPlayersWithCoinsGreaterThan300.map((p) => p.toJSON()));
 
 ### データの更新 {#update-data}
 
-以下のクエリは、データで作成されたID `700`を持つ`700` `Players`コインと`6`商品を[データを挿入する](#insert-data)セクション:
+以下のクエリは、[データを挿入する](#insert-data)セクションで作成された ID が`6`の`Players`に、`700`コインと`700`商品を設定します。
 
 ```typescript
 logger.info('Updating the new player...');
@@ -338,7 +338,7 @@ logger.info(newPlayer.toJSON());
 
 ### データを削除する {#delete-data}
 
-次のクエリは、データを挿入[データを挿入する](#insert-data)で作成された ID { `Player`の`6`レコードを削除します。
+次のクエリは、[データを挿入する](#insert-data)セクションで作成された ID が`6`の`Player`レコードを削除します。
 
 ```typescript
 logger.info('Deleting the new player...');
@@ -354,10 +354,10 @@ logger.info(deletedNewPlayer?.toJSON());
 
 - ORM フレームワーク Sequelize ドライバーの使用法の詳細については[Sequelizeのドキュメント](https://sequelize.org/)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一テーブルの読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベストプラクティスを学びましょう。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

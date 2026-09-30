@@ -57,7 +57,7 @@ npm install
 既存のプロジェクトの場合、以下のコマンドを実行してパッケージをインストールしてください。
 
 - `typeorm` : Node.js 用の ORM フレームワーク。
-- `mysql2` : Node.js 用の MySQL ドライバーです`mysql`ドライバーも使用できます。
+- `mysql2` : Node.js 用の MySQL ドライバーです。`mysql`ドライバーも使用できます。
 - `dotenv` : `.env`ファイルから環境変数を読み込みます。
 - `typescript` : TypeScript コードを JavaScript にコンパイルします。
 - `ts-node` : TypeScript コードをコンパイルせずに直接実行します。
@@ -96,7 +96,7 @@ npm install @types/node ts-node typescript --save-dev
     cp .env.example .env
     ```
 
-6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -173,7 +173,7 @@ npm install @types/node ts-node typescript --save-dev
     cp .env.example .env
     ```
 
-5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -200,7 +200,7 @@ npm install @types/node ts-node typescript --save-dev
     cp .env.example .env
     ```
 
-2. `.env`ファイルを編集し、環境変数を以下のように設定し、対応するプレースホルダー`{}` TiDB の接続パラメータに置き換えてください。
+2. `.env`ファイルを編集し、環境変数を以下のように設定し、対応するプレースホルダー`{}`を TiDB の接続パラメータに置き換えてください。
 
     ```dotenv
     TIDB_HOST={host}
@@ -312,7 +312,7 @@ export const AppDataSource = new DataSource({
 
 ### データを挿入する {#insert-data}
 
-次のクエリは、単一の`Player`レコードを作成し、TiDB によって生成された`Player`フィールドを含む、作成された`id`オブジェクトを返します。
+次のクエリは、単一の`Player`レコードを作成し、TiDB によって生成された`id`フィールドを含む、作成された`Player`オブジェクトを返します。
 
 ```typescript
 const player = new Player('Alice', 100, 100);
@@ -335,7 +335,7 @@ const player: Player | null = await this.dataSource.manager.findOneBy(Player, {
 
 ### データの更新 {#update-data}
 
-次のクエリは`50`の商品`Player`に`101`を追加します。
+次のクエリは、 ID が`101`の`Player`に`50`商品を追加します。
 
 ```typescript
 const player = await this.dataSource.manager.findOneBy(Player, {
@@ -397,10 +397,10 @@ export class ActionLog {
 
 - TypeORM の使用法の詳細については[TypeORMのドキュメント](https://typeorm.io/)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベストプラクティスを学びましょう。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -8,9 +8,9 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-support/','/ja/tidb/dev/dev-gui
 
 > **Note:**
 >
-> このドキュメントでは、TiDBでサポートされている一般的な[サードパーティツール](https://en.wikipedia.org/wiki/Third-party_source)をリストしています。その他のサードパーティ製ツールはリストされていませんが、これはサポートされていないからではなく、PingCAPがそれらのツールがTiDBと互換性のない機能を使用しているかどうかを確認できないためです。
+> このドキュメントでは、TiDBでサポートされている一般的な[サードパーティツール](https://en.wikipedia.org/wiki/Third-party_source)のみをリストしています。その他のサードパーティ製ツールはリストされていませんが、これはサポートされていないからではなく、PingCAPがそれらのツールがTiDBと互換性のない機能を使用しているかどうかを確認できないためです。
 
-TiDB は[MySQLプロトコルとの高い互換性](/mysql-compatibility.md)あるため、MySQL ドライバ、ORM フレームワーク、および MySQL に対応するその他のツールのほとんどは TiDB と互換性があります。このドキュメントでは、これらのツールと TiDB のサポートレベルに焦点を当てます。
+TiDB は[MySQLプロトコルとの高い互換性](/mysql-compatibility.md)があるため、MySQL ドライバ、ORM フレームワーク、および MySQL に対応するその他のツールのほとんどは TiDB と互換性があります。このドキュメントでは、これらのツールと TiDB のサポートレベルに焦点を当てます。
 
 ## サポートレベル {#support-level}
 
@@ -56,7 +56,7 @@ PingCAP はコミュニティと連携し、サードパーティツールに対
 | GUI                                                      | 最新のテスト済みバージョン | サポートレベル | チュートリアル                                                                      |
 | -------------------------------------------------------- | ------------- | ------- | ---------------------------------------------------------------------------- |
 | [Beekeeper Studio](https://www.beekeeperstudio.io/)               | 4.3.0         | 完全      | 該当なし                                                                         |
-| [JetBrains DataGrip](https://www.jetbrains.com/datagrip/) | 2023年2月1日     | 完全      | [JetBrains DataGrip で TiDB に接続する](/develop/dev-guide-gui-datagrip.md)        |
+| [JetBrains DataGrip](https://www.jetbrains.com/datagrip/) | 2023.2.1     | 完全      | [JetBrains DataGrip で TiDB に接続する](/develop/dev-guide-gui-datagrip.md)        |
 | [DBeaver](https://dbeaver.io/)                           | 23.0.3        | 完全      | [DBeaverでTiDBに接続する](/develop/dev-guide-gui-dbeaver.md)                       |
 | [Visual Studio Code](https://code.visualstudio.com/)           | 1.72.0        | 完全      | [Visual Studio Code で TiDB に接続する](/develop/dev-guide-gui-vscode-sqltools.md) |
 | [Navicat](https://www.navicat.com)                        | 17.1.6        | 完全      | [NavicatでTiDBに接続する](/develop/dev-guide-gui-navicat.md)                       |
