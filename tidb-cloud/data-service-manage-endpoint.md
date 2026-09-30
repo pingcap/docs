@@ -379,7 +379,7 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
 
     - Environment: choose **Test Environment** or **Online Environment** depending on your need. **Online Environment** is available only after you deploy the endpoint.
     - Authentication method: choose **Basic Authentication** or **Digest Authentication**.
-        - **Basic Authentication** transmits your API key as based64 encoded text.
+        - **Basic Authentication** transmits your API key as base64 encoded text.
         - **Digest Authentication** does not send your API key in plain text. Instead, it sends a hash computed from the key and a server-supplied nonce, which is more secure.
 
       Compared with **Basic Authentication**, the curl code of **Digest Authentication** includes an additional `--digest` option.
