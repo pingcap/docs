@@ -15,7 +15,7 @@ summary: DM を使用する際のエラー システムと一般的なエラー�
 
     DMでは、同じエラータイプに対して同じエラーコードが使用されます。DMのバージョンが変更されても、エラーコードは変更されません。
 
-    DM 反復処理中に一部のエラーが削除される可能性がありますが、エラーコードは削除されません。DM は、新しいエラーに対して既存のエラーコードではなく新しいエラーコードを使用します。
+    DM の開発の繰り返し（イテレーション）の中で一部のエラーが削除される可能性がありますが、エラーコードは削除されません。DM は、新しいエラーに対して既存のエラーコードではなく新しいエラーコードを使用します。
 
 - `class` : エラータイプ。
 
@@ -32,9 +32,9 @@ summary: DM を使用する際のエラー システムと一般的なエラー�
     | `checkpoint`      | チェックポイント操作                          | `[code=24002:class=checkpoint:scope=internal:level=high] save point bin.1234 is older than current pos bin.1371`                                                                                                                                                                                 |
     | `task-check`      | タスクチェックを実行しています                     | `[code=26003:class=task-check:scope=internal:level=medium] new table router error`                                                                                                                                                                                                               |
     | `relay-event-lib` | リレーモジュールの基本関数を実行する                  | `[code=28001:class=relay-event-lib:scope=internal:level=high] parse server-uuid.index`                                                                                                                                                                                                           |
-    | `relay-unit`      | リレー処理装置                             | `[code=30015:class=relay-unit:scope=upstream:level=high] TCPReader get event: ERROR 1236 (HY000): Could not open log file`                                                                                                                                                                       |
-    | `dump-unit`       | ダンプ処理装置                             | `[code=32001:class=dump-unit:scope=internal:level=high] mydumper runs with error: CRITICAL **: 15:12:17.559: Error connecting to database: Access denied for user 'root'@'172.17.0.1' (using password: NO)`                                                                                      |
-    | `load-unit`       | 負荷処理装置                              | `[code=34002:class=load-unit:scope=internal:level=high] corresponding ending of sql: ')' not found`                                                                                                                                                                                              |
+    | `relay-unit`      | リレー処理ユニット                             | `[code=30015:class=relay-unit:scope=upstream:level=high] TCPReader get event: ERROR 1236 (HY000): Could not open log file`                                                                                                                                                                       |
+    | `dump-unit`       | ダンプ処理ユニット                             | `[code=32001:class=dump-unit:scope=internal:level=high] mydumper runs with error: CRITICAL **: 15:12:17.559: Error connecting to database: Access denied for user 'root'@'172.17.0.1' (using password: NO)`                                                                                      |
+    | `load-unit`       | ロード処理ユニット                              | `[code=34002:class=load-unit:scope=internal:level=high] corresponding ending of sql: ')' not found`                                                                                                                                                                                              |
     | `sync-unit`       | 同期処理ユニット                            | `[code=36027:class=sync-unit:scope=internal:level=high] Column count doesn't match value count: 9 (columns) vs 10 (values)`                                                                                                                                                                      |
     | `dm-master`       | DM-masterサービス                          | `[code=38008:class=dm-master:scope=internal:level=high] grpc request error: rpc error: code = Unavailable desc = all SubConns are in TransientFailure, latest connection error: connection error: desc = "transport: Error while dialing dial tcp 172.17.0.2:8262: connect: connection refused"` |
     | `dm-worker`       | DM-workerサービス                          | `[code=40066:class=dm-worker:scope=internal:level=high] ExecuteDDL timeout, try use query-status to query whether the DDL is still blocking`                                                                                                                                                     |
@@ -45,13 +45,13 @@ summary: DM を使用する際のエラー システムと一般的なエラー�
 
 - `scope` : エラー範囲。
 
-    エラーが発生したときに、 DM オブジェクトのスコープとソースをマークするために使用されます。 `scope`は、 `not-set` 、 `upstream` 、 `downstream` 、 `internal` 4つのタイプが含まれます。
+    エラーが発生したときに、 DM オブジェクトのスコープとソースをマークするために使用されます。 `scope`は、 `not-set` 、 `upstream` 、 `downstream` 、 `internal`の 4つのタイプが含まれます。
 
     エラーのロジックが上流データベースと下流データベース間のリクエストに直接関係する場合、スコープは`upstream`または`downstream`に設定されます。それ以外の場合、現在は`internal`に設定されています。
 
 - `level` : エラーレベル。
 
-    エラーの重大度レベル ( `low` 、 `medium` 、 `high` 。
+    エラーの重大度レベル ( `low` 、 `medium` 、 `high` )。
 
     - レベル`low`エラーは通常、ユーザー操作や誤った入力に関連します。移行タスクには影響しません。
     - レベル`medium`エラーは通常、ユーザー設定に関連しています。これは新しく開始された一部のサービスに影響しますが、既存のDM移行ステータスには影響しません。
@@ -59,7 +59,7 @@ summary: DM を使用する際のエラー システムと一般的なエラー�
 
 - `message` : エラーの説明。
 
-    エラーの詳細な説明。エラー呼び出しチェーン上のエラーメッセージの各追加レイヤーをラップして保存するために、[errors.Wrap](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error)が採用されています。レイヤーにラップされたメッセージ記述はDM内のエラーを示し、最も内側のレイヤーにラップされたメッセージ記述はエラーの原因を示します。
+    エラーの詳細な説明。エラー呼び出しチェーン上のエラーメッセージの各追加レイヤーをラップして保存するために、[errors.Wrap](https://godoc.org/github.com/pkg/errors#hdr-Adding_context_to_an_error)が採用されています。最も外側のレイヤーにラップされたメッセージ記述はDM内のエラーを示し、最も内側のレイヤーにラップされたメッセージ記述はエラーの原因を示します。
 
 - `workaround` : エラー処理方法（オプション）
 
@@ -97,13 +97,13 @@ DM の実行中にエラーが発生した場合は、次の手順に従って�
 | `code=10002` | 基盤データベースからのエラー`bad connection`です。これは通常、DMと下流のTiDBインスタンス間の接続に異常があり（ネットワーク障害またはTiDBの再起動が原因と考えられます）、現在リクエストされているデータがTiDBに送信されていないことを示します。          | DMはこのようなエラーに対して自動リカバリを提供します。長時間リカバリが成功しない場合は、ネットワークまたはTiDBのステータスを確認してください。                                                                                                                                                                                        |
 | `code=10003` | 基盤データベースからのエラー`invalid connection`です。これは通常、DMと下流のTiDBインスタンス間の接続に異常があり（ネットワーク障害またはTiDBの再起動が原因と考えられます）、現在リクエストされているデータの一部がTiDBに送信されていることを示します。    | DMはこのようなエラーに対して自動回復機能を提供します。長時間回復できない場合は、エラーメッセージをさらに確認し、実際の状況に基づいて情報を分析してください。                                                                                                                                                                                   |
 | `code=10005` | `QUERY`タイプのSQL文の実行時に発生します。                                                                                                         |                                                                                                                                                                                                                                                                   |
-| `code=10006` | `EXECUTE`タイプのSQL文（ `INSERT` `UPDATE`または`DELETE`タイプのDDL文およびDML文を含む）の実行時に発生します。詳細なエラー情報については、通常、データベース操作で返されるエラーコードとエラー情報を含むエラーメッセージを確認してください。 |                                                                                                                                                                                                                                                                   |
+| `code=10006` | `EXECUTE`タイプのSQL文（ `INSERT` 、 `UPDATE` 、または`DELETE`タイプのDDL文およびDML文を含む）の実行時に発生します。詳細なエラー情報については、通常、データベース操作で返されるエラーコードとエラー情報を含むエラーメッセージを確認してください。 |                                                                                                                                                                                                                                                                   |
 |              |                                                                                                                                              |                                                                                                                                                                                                                                                                   |
 | `code=11006` | DM の組み込みパーサーが互換性のない DDL 文を解析するときに発生します。                                                                                                | 解決策については[データ移行 - 互換性のない DDL 文](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements)を参照してください。                                                                                                                                                           |
-| `code=20010` | タスク構成で指定されたデータベースパスワードを復号化するときに発生します。                                                                                                       | 構成タスクで指定されたダウンストリームデータベースパスワードが[dmctlを使用して正しく暗号化されました](/dm/dm-manage-source.md#encrypt-the-database-password)あるかどうかを確認します。                                                                                                                                      |
+| `code=20010` | タスク構成で指定されたデータベースパスワードを復号化するときに発生します。                                                                                                       | 構成タスクで指定されたダウンストリームデータベースパスワードが[dmctlを使用して正しく暗号化されている](/dm/dm-manage-source.md#encrypt-the-database-password)かどうかを確認します。                                                                                                                                      |
 | `code=26002` | タスクチェックでデータベース接続を確立できませんでした。詳細なエラー情報については、エラーメッセージを確認してください。エラーメッセージには通常、データベース操作で返されたエラーコードとエラー情報が含まれています。                                  | DM-masterが配置されているマシンにアップストリームにアクセスする権限があるかどうかを確認します。                                                                                                                                                                                                                |
-| `code=32001` | 異常ダンプ処理装置                                                                                                                                    | エラーメッセージに`mydumper: argument list too long.`が含まれている場合は、ブロック/許可リストに従って、 `task.yaml`ファイルの Mydumper 引数`extra-args`に`--regex`正規表現を手動で追加して、エクスポートするテーブルを設定します。例えば、 `hello`という名前のテーブルをすべてエクスポートするには`--regex '.*\\.hello$'`を追加し、すべてのテーブルをエクスポートするには`--regex '.*'`を追加します。 |
-| `code=38008` | DM コンポーネント間の gRPC 通信でエラーが発生します。                                                                                                              | チェック`class` ：どのコンポーネントの相互作用でエラーが発生しているかを確認します。通信エラーの種類を特定します。gRPC接続の確立時にエラーが発生する場合は、通信サーバーが正常に動作しているかどうかを確認します。                                                                                                                                                   |
+| `code=32001` | 異常ダンプ処理ユニット                                                                                                                                    | エラーメッセージに`mydumper: argument list too long.`が含まれている場合は、ブロック/許可リストに従って、 `task.yaml`ファイルの Mydumper 引数`extra-args`に`--regex`正規表現を手動で追加して、エクスポートするテーブルを設定します。例えば、 `hello`という名前のテーブルをすべてエクスポートするには`--regex '.*\\.hello$'`を追加し、すべてのテーブルをエクスポートするには`--regex '.*'`を追加します。 |
+| `code=38008` | DM コンポーネント間の gRPC 通信でエラーが発生します。                                                                                                              | `class`を確認し、どのコンポーネント間の相互作用でエラーが発生しているかを特定します。通信エラーの種類を特定します。gRPC接続の確立時にエラーが発生する場合は、通信サーバーが正常に動作しているかどうかを確認します。                                                                                                                                                   |
 
 ### `invalid connection`エラーが返され、移行タスクが中断された場合、どうすればよいですか? {#what-can-i-do-when-a-migration-task-is-interrupted-with-the-invalid-connection-error-returned}
 
@@ -118,7 +118,7 @@ DMは移行タスクにおいてデータを下流へ並行して移行する機
 - 増分レプリケーションプロセス中に`invalid connection`エラーのみが発生した場合、DM はタスクを自動的に再試行します。
 - バージョンの問題により DM が自動的に再試行されない場合、または再試行に失敗した場合は、 `stop-task`を使用してタスクを停止し、 `start-task`を使用してタスクを再起動します。
 
-### 移行タスクが`driver: bad connection`エラーが返されました {#a-migration-task-is-interrupted-with-the-driver-bad-connection-error-returned}
+### `driver: bad connection`エラーが返されて移行タスクが中断される {#a-migration-task-is-interrupted-with-the-driver-bad-connection-error-returned}
 
 #### 理由 {#reason-2}
 
@@ -128,7 +128,7 @@ DMは移行タスクにおいてデータを下流へ並行して移行する機
 
 現在のバージョンのDMは、エラー発生時に自動的に再試行します。自動再試行をサポートしていない以前のバージョンをご利用の場合は、コマンド`stop-task`を実行してタスクを停止し、その後コマンド`start-task`を実行してタスクを再開してください。
 
-### リレーユニットは`event from * in * diff from passed-in event *`スローするか、または、 binlogエラーの取得または解析に失敗して移行タスクが中断され、binlog `get binlog error ERROR 1236 (HY000)`や`binlog checksum mismatch, data may be corrupted` 。 {#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned}
+### リレーユニットは`event from * in * diff from passed-in event *`エラーをスローするか、binlog の取得または解析に失敗して移行タスクが中断され、 `get binlog error ERROR 1236 (HY000)`や`binlog checksum mismatch, data may be corrupted`などのエラーが返される {#the-relay-unit-throws-error-event-from--in--diff-from-passed-in-event--or-a-migration-task-is-interrupted-with-failing-to-get-or-parse-binlog-errors-like-get-binlog-error-error-1236-hy000-and-binlog-checksum-mismatch-data-may-be-corrupted-returned}
 
 #### 理由 {#reason}
 
@@ -170,15 +170,15 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
 
 5. `start-task`を使用して移行タスクを開始します。
 
-6. `query-status`を使用して移行タスクのステータスを確認します。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`元の値に戻して移行タスクを再開できます。
+6. `query-status`を使用して移行タスクのステータスを確認します。元のエラーの原因となったリレーログファイルの移行が完了したら、 `safe-mode`を元の値に戻して移行タスクを再開できます。
 
 ### タスクをクエリするかログを確認すると、 `Access denied for user 'root'@'172.31.43.27' (using password: YES)`が表示されます。 {#access-denied-for-user-root172314327-using-password-yes-shows-when-you-query-the-task-or-check-the-log}
 
 すべてのDM設定ファイルにおけるデータベース関連のパスワードについては、 `dmctl`で暗号化したパスワードを使用することをお勧めします。データベースパスワードが空の場合は、暗号化する必要はありません。プレーンテキストパスワードの暗号化方法については、 [dmctlを使用してデータベースパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)を参照してください。
 
-さらに、上流データベースと下流データベースのユーザーには、対応する読み取り権限と書き込み権限が必要です。データ移行タスクを開始する際には、データ移行も[対応する権限を自動的に事前チェックします](/dm/dm-precheck.md)必要です。
+さらに、上流データベースと下流データベースのユーザーには、対応する読み取り権限と書き込み権限が必要です。データ移行タスクを開始する際には、データ移行は[対応する権限を自動的に事前チェックします](/dm/dm-precheck.md)。
 
-### `load`処理ユニットから`packet for query is too large. Try adjusting the 'max_allowed_packet' variable` {#the-load-processing-unit-reports-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable}
+### `load`処理ユニットがエラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`を報告する {#the-load-processing-unit-reports-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable}
 
 #### 理由 {#reasons}
 
@@ -198,7 +198,7 @@ binlogレプリケーション処理ユニットの場合は、次のソリュ�
     Row bigger than statement_size for xxx
     ```
 
-- ワイドテーブルの単一行が`64M`超える場合は、次の設定を変更し、設定が有効になっていることを確認する必要があります。
+- ワイドテーブルの単一行が`64M`を超える場合は、次の設定を変更し、設定が有効になっていることを確認する必要があります。
 
     - TiDBサーバーで`set @@global.max_allowed_packet=134217728` （ `134217728` =128MB）を実行します。
 

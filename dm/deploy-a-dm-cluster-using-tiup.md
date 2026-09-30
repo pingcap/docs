@@ -19,7 +19,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 - DM クラスターをデプロイする場合は、 [ハードウェアとソフトウェアの要件](/dm/dm-hardware-and-software-requirements.md)を満たす必要があります。
 
-- v8.0.0 以降、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)必要な場合は、事前に[データベースのパスワードを暗号化および復号化するために使用されるキーファイル](/dm/dm-customized-secret-key.md)を DM-masterに保存し、 `dmctl encrypt`コマンドを使用する前に[`secret-key-path`](/dm/dm-master-configuration-file.md)を DM-masterに設定する必要があります。
+- v8.0.0 以降、 [データベースのパスワードを暗号化する](/dm/dm-manage-source.md#encrypt-the-database-password)必要がある場合は、事前に[データベースのパスワードを暗号化および復号化するために使用されるキーファイル](/dm/dm-customized-secret-key.md)を DM-masterに保存し、 `dmctl encrypt`コマンドを使用する前に[`secret-key-path`](/dm/dm-master-configuration-file.md)を DM-masterに設定する必要があります。
 
 ## ステップ1: 制御マシンにTiUPをインストールする {#step-1-install-tiup-on-the-control-machine}
 
@@ -162,7 +162,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 | パラメータ                    | 説明                                                                              |
 | ------------------------ | ------------------------------------------------------------------------------- |
 | `${name}`                | DM クラスターの名前 (例: dm-test)                                                        |
-| `${version}`             | DM クラスターのバージョン`tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。               |
+| `${version}`             | DM クラスターのバージョン。 `tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。               |
 | `./topology.yaml`        | トポロジ設定ファイルのパス。                                                                  |
 | `-u`または`--user`          | クラスターのデプロイを完了するには、root ユーザーまたは ssh および sudo権限を持つ他のユーザーアカウントとしてターゲットマシンにログインします。 |
 | `-p`または`--password`      | 対象ホストのパスワード。指定すると、パスワード認証が使用されます。                                               |
@@ -192,7 +192,7 @@ dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/
 tiup dm display dm-test
 ```
 
-予想される出力には`inactive`インスタンス ID、ロール、ホスト、リスニングポート、ステータス (クラスターはまだ起動されていないため、ステータスは`Down`です)、およびディレクトリ情報が含まれます。
+予想される出力には、インスタンス ID、ロール、ホスト、リスニングポート、ステータス (クラスターはまだ起動されていないため、ステータスは`Down`/`inactive`です)、およびディレクトリ情報が含まれます。
 
 ## ステップ6: DMクラスターを起動する {#step-6-start-the-dm-cluster}
 
@@ -214,7 +214,7 @@ tiup dm display dm-test
 
 ## ステップ8: dmctlを使用して移行タスクを管理する {#step-8-managing-migration-tasks-using-dmctl}
 
-dmctl は、DM クラスタを制御するためのコマンドラインツールです[TiUP経由でdmctlを使用する](/dm/maintain-dm-using-tiup.md#dmctl)を使用することをお勧めします。
+dmctl は、DM クラスタを制御するためのコマンドラインツールです。 [TiUP経由でdmctlを使用する](/dm/maintain-dm-using-tiup.md#dmctl)ことをお勧めします。
 
 dmctlはコマンドモードと対話モードの両方をサポートしています。詳細については[dmctl を使用して DM クラスターを管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。
 

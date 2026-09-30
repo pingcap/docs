@@ -32,7 +32,7 @@ summary: "`openssl` を使用して自己署名証明書を生成します。"
     yum install openssl
     ```
 
-インストールについては OpenSSL の公式[ドキュメントをダウンロード](https://www.openssl.org/source/)も参照してください。
+インストールについては OpenSSL の公式の[ダウンロードドキュメント](https://www.openssl.org/source/)も参照してください。
 
 ## CA証明書を生成する {#generate-the-ca-certificate}
 

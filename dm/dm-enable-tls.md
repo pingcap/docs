@@ -81,7 +81,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 証明書とキーを再ロードするために、DM-master、DM-worker、および dmctl は、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み取りします。
 
-`ssl-ca` `ssl-cert`または`ssl-key`で指定されたファイルが更新された場合は、DM コンポーネントを再起動して証明書とキー ファイルを再読み込みし、相互に再接続します。
+`ssl-ca` 、 `ssl-cert` 、または`ssl-key`で指定されたファイルが更新された場合は、DM コンポーネントを再起動して証明書とキー ファイルを再読み込みし、相互に再接続します。
 
 ## DMコンポーネントと上流または下流のデータベース間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-components-and-the-upstream-or-downstream-database}
 

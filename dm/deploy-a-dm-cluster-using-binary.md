@@ -193,6 +193,6 @@ Usage of worker:
       ./dm-worker -config conf/dm-worker1.toml
       ```
 
-3. DM-worker2 の場合、設定ファイルの`name` `worker2`に変更します。その後、手順 2 を繰り返します。
+3. DM-worker2 の場合、設定ファイルの`name`を`worker2`に変更します。その後、手順 2 を繰り返します。
 
 これで、DM クラスターが正常にデプロイされました。
