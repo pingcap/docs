@@ -156,7 +156,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
+2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
 
 3. **Data Migration**ページで、右上隅にある**Create Migration Job**をクリックします。**Create Migration Job**ページが表示されます。
 
@@ -170,7 +170,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     - **Data source**：データソースの種類。
     - **Region**：データソースのリージョン。クラウドデータベースの場合のみ必要です。
-    - **Connectivity method**: データソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックリンクまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
+    - **Connectivity method**: データソースの接続方法。<CustomContent plan="dedicated">現在、接続方法に応じて、パブリックIP、VPCピアリング、またはプライベートリンクを選択できます。</CustomContent><CustomContent plan="essential">接続方法に応じて、パブリックIPまたはプライベートリンクを選択できます。</CustomContent><CustomContent plan="premium">接続方法に応じて、パブリックまたはプライベートリンク（AWSのみ）を選択できます。</CustomContent>
 
     <CustomContent plan="dedicated">
 
