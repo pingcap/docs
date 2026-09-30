@@ -167,7 +167,7 @@ By using `CLUSTER_TIDB_INDEX_USAGE`, you can gain a global perspective on index 
 
 ## Identify unused indexes using `schema_unused_indexes`
 
-Manually analyzing index usage data can be time-consuming. To simplify this process, TiDB provides [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md), a system view that lists indexes that have not been accessed on any TiDB instance since that instance's last restart.
+Manually analyzing index usage data can be time-consuming. To simplify this process, TiDB provides [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md), a system view that lists an index when none of the TiDB instances currently has an access record for that index. Index usage is tracked separately on each TiDB instance and is reset when that instance restarts.
 
 This provides a quick way for you to do the following:
 
