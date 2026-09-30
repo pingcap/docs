@@ -25,9 +25,9 @@ OpenAPI を有効にするには、次のいずれかの操作を実行します
 
 > **Note:**
 >
-> - DMはOpenAPI 3.0.0標準に準拠した[仕様書](https://github.com/pingcap/tiflow/blob/release-8.5/dm/openapi/spec/dm.yaml)提供します。このドキュメントには、すべてのリクエストパラメータと戻り値が含まれています。このドキュメントのyamlをコピーして、 [Swaggerエディター](https://editor.swagger.io/)でプレビューできます。
+> - DMはOpenAPI 3.0.0標準に準拠した[仕様書](https://github.com/pingcap/tiflow/blob/release-8.5/dm/openapi/spec/dm.yaml)を提供します。このドキュメントには、すべてのリクエストパラメータと戻り値が含まれています。このドキュメントのyamlをコピーして、 [Swaggerエディター](https://editor.swagger.io/)でプレビューできます。
 >
-> - DM-masterノードをデプロイした後、 `http://{master-addr}/api/v1/docs`アクセスしてドキュメントをオンラインでプレビューできます。
+> - DM-masterノードをデプロイした後、 `http://{master-addr}/api/v1/docs`にアクセスしてドキュメントをオンラインでプレビューできます。
 >
 > - 設定ファイルでサポートされている一部の機能は、OpenAPIではサポートされていません。これらの機能は完全には連携されていません。本番環境では、 [設定ファイル](/dm/dm-config-overview.md)を使用することをお勧めします。
 
@@ -87,7 +87,7 @@ API リクエストの送信後にエラーが発生した場合、返される�
 }
 ```
 
-上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラーコードを示します。
+上記の JSON 出力では、 `error_msg`はエラーメッセージを示し、 `error_code`は対応するエラーコードを示します。
 
 ## DM-masterノードの情報を取得する {#get-the-information-of-a-dm-master-node}
 
@@ -1028,7 +1028,7 @@ curl -X 'DELETE' \
 
 > **Note:**
 >
-> この API を使用してタスク構成を更新する場合は、タスクが停止され、増分同期が実行されていること、および一部のフィールドのみを更新できることを確認してください。
+> この API を使用してタスク構成を更新する場合は、タスクが停止されていて、増分同期の段階に入っていること、および一部のフィールドのみを更新できることを確認してください。
 
 ### リクエストURI {#request-uri}
 

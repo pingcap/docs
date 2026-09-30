@@ -67,7 +67,7 @@ tiup dmctl check-task ./task.yaml
 
 - 上流データベースのダンプ権限（必須）
 
-    - `INFORMATION_SCHEMA`に対する`SELECT`権限とダンプテーブル
+    - `INFORMATION_SCHEMA`とダンプテーブルに対する`SELECT`権限
     - `consistency=flush`の場合、`RELOAD`権限
     - `consistency=lock`の場合、ダンプ テーブルに対する `LOCK TABLES` 権限
 
@@ -90,7 +90,7 @@ tiup dmctl check-task ./task.yaml
 
     - `start-task`コマンドによって移行タスクが正常に開始された場合、このタスクの事前チェックでは整合性チェックがスキップされます。
 
-- シャーディングされたテーブルで主キーをAUTO_INCREMENTする
+- シャーディングされたテーブルの自動インクリメント主キー
 
     - シャードテーブルにAUTO_INCREMENT主キーがある場合、事前チェックにより警告が返されます。AUTO_INCREMENT主キーに競合がある場合の解決策については、 [AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照してください。
 
@@ -112,7 +112,7 @@ tiup dmctl check-task ./task.yaml
 
 - 下流データベースの空き容量
 
-    - 上流データベース ( `source_size` ) の許可リストにあるすべてのテーブルの合計サイズを推定します。下流データベースの空き容量が`source_size`より少ない場合、事前チェックはエラーを返します。下流データベースの空き容量が TiKV レプリカの数 *`source_size`* 2 より少ない場合、事前チェックは警告を返します。
+    - 上流データベース ( `source_size` ) の許可リストにあるすべてのテーブルの合計サイズを推定します。下流データベースの空き容量が`source_size`より少ない場合、事前チェックはエラーを返します。下流データベースの空き容量が TiKV レプリカの数 \* `source_size` \* 2 より少ない場合、事前チェックは警告を返します。
 
 - 下流のデータベースが物理インポートと互換性のないタスクを実行しているかどうか
 
@@ -124,8 +124,8 @@ tiup dmctl check-task ./task.yaml
 
 - （必須）上流データベースのレプリケーション権限
 
-    - レプリケーションクライアントの権限
-    - レプリケーションスレーブのアクセス許可
+    - REPLICATION CLIENT 権限
+    - REPLICATION SLAVE 権限
 
 - データベースのプライマリ/セカンダリ構成
 
@@ -197,4 +197,4 @@ mydumpers:                           # Configuration arguments of the dump proce
 
 > **Note:**
 >
-> `threads`の値は、アップストリームデータベースと DM 間の物理接続数を決定します。 `threads`値が大きすぎると、アップストリームの負荷が増加する可能性があります。そのため、 `threads`適切な値に設定する必要があります。
+> `threads`の値は、アップストリームデータベースと DM 間の物理接続数を決定します。 `threads`の値が大きすぎると、アップストリームの負荷が増加する可能性があります。そのため、 `threads`適切な値に設定する必要があります。
