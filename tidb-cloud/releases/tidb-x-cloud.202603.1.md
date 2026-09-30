@@ -77,6 +77,7 @@ In `TiDB-X-CLOUD.202603.1`:
 ### MySQL compatibility
 
 * Dumpling supports exporting data from MySQL 8.4 by adapting to the updated MySQL binary log naming. [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden) <!-- (dup): release-8.5.6.md > Compatibility changes > MySQL compatibility --> <!-- pr: https://github.com/pingcap/tidb/pull/66704 -->
+
 ## Improvements
 
 - Enhance the parsing mechanism for Parquet files to improve the import performance of Parquet-formatted data [#62906](https://github.com/pingcap/tidb/issues/62906) @[joechenrh](https://github.com/joechenrh) <!-- (dup): release-8.5.5.md > Improvements > TiDB --> <!-- pr: https://github.com/pingcap/tidb/pull/66564, https://github.com/pingcap/tidb/pull/63979 -->
