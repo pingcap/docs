@@ -24,7 +24,7 @@ TiDBの導入タイプに基づいて手順を選択してください。
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-[TiDB Cloud Starterインスタンスを作成する](https://tidbcloud.com/free-trial/)、次のように Web コンソールから接続パラメータを取得できます。
+[TiDB Cloud Starterインスタンスを作成](https://tidbcloud.com/free-trial/)し、次のように Web コンソールから接続パラメータを取得できます。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
@@ -46,7 +46,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> TiDB Cloud Starterの場合、パブリックエンドポイントを使用する場合はデータベース[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/)が必要です。 `pytidb`クライアントは、 TiDB Cloud Starterインスタンスの TLS を**自動的に**有効にします。
+> TiDB Cloud Starterの場合、パブリックエンドポイントを使用する場合は[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/)が必要です。 `pytidb`クライアントは、 TiDB Cloud Starterインスタンスの TLS を**自動的に**有効にします。
 
 </div>
 <div label="TiDB Self-Managed">
@@ -83,7 +83,7 @@ db = TiDBClient.connect(
 <SimpleTab>
 <div label="TiDB Cloud Starter">
 
-[TiDB Cloud Starterインスタンスを作成する](https://tidbcloud.com/free-trial/)、次のように Web コンソールから接続パラメータを取得できます。
+[TiDB Cloud Starterインスタンスを作成](https://tidbcloud.com/free-trial/)し、次のように Web コンソールから接続パラメータを取得できます。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
 2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが一覧表示されます。
@@ -99,7 +99,7 @@ db = TiDBClient.connect(
 
 > **Note:**
 >
-> TiDB Cloud Starterの場合、パブリックエンドポイントを使用する場合はデータベース[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/)が必要となるため、接続文字列に`ssl_verify_cert=true&ssl_verify_identity=true`を設定する必要があります。
+> TiDB Cloud Starterの場合、パブリックエンドポイントを使用する場合は[データベースへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/)が必要となるため、接続文字列に`ssl_verify_cert=true&ssl_verify_identity=true`を設定する必要があります。
 
 </div>
 <div label="TiDB Self-Managed">
@@ -125,7 +125,7 @@ db = TiDBClient.connect(
 </div>
 </SimpleTab>
 
-## SQLAlchemy DBエンジンに接続する {#connect-with-sqlalchemy-db-engine}
+## SQLAlchemy DBエンジンを使用して接続する {#connect-with-sqlalchemy-db-engine}
 
 アプリケーションに既に SQLAlchemy データベース エンジンが搭載されている場合は、 `db_engine`パラメータを使用してそれを再利用できます。
 

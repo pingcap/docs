@@ -30,7 +30,7 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 - AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
-このチュートリアルを完了するには、サポートされているリージョンに{{{ .starter }}}インスタンスがあることを確認してください。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+このチュートリアルを完了するには、サポートされているリージョンに{{{ .starter }}}インスタンスがあることを確認してください。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 ## さあ始めましょう {#get-started}
 
@@ -100,7 +100,7 @@ db = TiDBClient.connect(
 例として、 `chunks`という名前のテーブルを作成し、以下の列を追加します。
 
 - `id` (int): チャンクのID。
-- `text` (テキスト): チャンクのテキストコンテンツ。
+- `text` (text): チャンクのテキストコンテンツ。
 - `user_id` (int): チャンクを作成したユーザーのID。
 
 ```python

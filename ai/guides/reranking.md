@@ -16,11 +16,11 @@ summary: アプリケーションで再ランキングを使用する方法を�
 
 ## 基本的な使い方 {#basic-usage}
 
-[`pytidb`](https://github.com/pingcap/pytidb)は、開発者が AI アプリケーションを効率的に構築できるように設計されています。
+[`pytidb`](https://github.com/pingcap/pytidb)は TiDB の公式 Python SDK で、開発者が AI アプリケーションを効率的に構築できるように設計されています。
 
-`pytidb`複数のサードパーティ プロバイダーの再ランキング モデルを使用できる`Reranker`クラスを提供します。
+`pytidb`は、複数のサードパーティ プロバイダーの再ランキング モデルを使用できる`Reranker`クラスを提供します。
 
-1. 再ランク付けインスタンスを作成します。
+1. リランカーインスタンスを作成します。
 
     ```python
     from pytidb.rerankers import Reranker
@@ -28,7 +28,7 @@ summary: アプリケーションで再ランキングを使用する方法を�
     reranker = Reranker(model_name="{provider}/{model_name}")
     ```
 
-2. `.rerank()`の方法を使用してリランカーを適用します。
+2. `.rerank()`メソッドを使用してリランカーを適用します。
 
     ```python
     table.search("{query}").rerank(reranker, "{field_to_rerank}").limit(3)
