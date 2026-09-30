@@ -341,6 +341,6 @@ Keep the storage class setting stable and avoid frequent switching between IA an
 
 The cumulative cost of these operations is not negligible.
 
-If you issue a reverse conversion while the previous conversion is still running, the previous conversion is voided and the progress it had made is discarded. The new conversion starts over from the beginning, so reversing mid-way takes longer overall than waiting for the first conversion to finish. For how to identify a voided conversion, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
+If you issue a reverse conversion while the previous conversion is still running, the previous conversion is voided and the progress it had made is discarded. Reversing an ongoing conversion can trigger additional Region reloads and data downloads. Some existing local files can be reused, so the extra work depends on how far the conversion has progressed and what data remains locally available. Avoid frequent switching between IA and Standard to reduce unnecessary I/O and resource usage. For how to identify a voided conversion, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
 
 This applies to the storage class of a table or partition. Adjusting the IA cache level is a different operation: it is a hot update, does not move data between storage classes, and can be changed as often as your cost and performance targets require.
