@@ -120,7 +120,7 @@ TiDBをローカルマシンで実行している場合、 `<HOST>`はデフォ�
 
 ### ステップ4．埋め込みモデルを初期化する {#step-4-initialize-the-embedding-model}
 
-[埋め込みモデル](/ai/guides/vector-search-overview.md#embedding-model)データを[ベクトル埋め込み](/ai/guides/vector-search-overview.md#vector-embedding)に変換します。この例では、テキスト埋め込みに事前トレーニング済みモデル[**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)を使用します。 `sentence-transformers`ライブラリによって提供されるこの軽量モデルは、テキストデータを 384 次元のベクトル埋め込みに変換します。
+[埋め込みモデル](/ai/guides/vector-search-overview.md#embedding-model)は、データを[ベクトル埋め込み](/ai/guides/vector-search-overview.md#vector-embedding)に変換します。この例では、テキスト埋め込みに事前トレーニング済みモデル[**msmarco-MiniLM-L12-cos-v5**](https://huggingface.co/sentence-transformers/msmarco-MiniLM-L12-cos-v5)を使用します。 `sentence-transformers`ライブラリによって提供されるこの軽量モデルは、テキストデータを 384 次元のベクトル埋め込みに変換します。
 
 モデルを設定するには、次のコードを`example.py`ファイルにコピーしてください。このコードは`SentenceTransformer`インスタンスを初期化し、後で使用するために`text_to_embedding()`関数を定義します。
 
@@ -228,7 +228,7 @@ Search result ("a swimming animal"):
 
 検索結果の 3つの用語は、クエリされたベクトルからのそれぞれの距離によってソートされます。距離が小さいほど、対応する`document`の関連性が高くなります。
 
-したがって、出力結果から判断すると、泳いでいる動物は魚か、泳ぎの才能に恵まれた犬である可能性が最も高い。
+したがって、出力結果から判断すると、泳いでいる動物は魚か、泳ぎの才能に恵まれた犬である可能性が最も高いです。
 
 ## 関連項目 {#see-also}
 
