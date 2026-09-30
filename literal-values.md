@@ -1,11 +1,6 @@
 ---
 title: Literal Values
-<<<<<<< HEAD
-summary: This article introduces the literal values ​​of TiDB SQL statements.
-=======
 summary: This article introduces the literal values of TiDB SQL statements.
-aliases: ['/docs/dev/literal-values/','/docs/dev/reference/sql/language-structure/literal-values/']
->>>>>>> 1f191e15a1 (docs: remove stray zero-width-space characters from prose (#23793))
 ---
 
 # Literal Values
