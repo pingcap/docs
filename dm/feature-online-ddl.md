@@ -23,8 +23,8 @@ gh-ost がオンラインスキーマ変更を実装すると、次の3種類の
 
 移行プロセスでは、DM は上記のテーブルを 3つのカテゴリに分割します。
 
-- ゴーストテーブル: `_*_gho`
-- ゴミ箱テーブル: `_*_ghc` , `_*_del`
+- ghostTable: `_*_gho`
+- trashTable: `_*_ghc` , `_*_del`
 - realTable: online-ddl を実行する元のテーブル。
 
 gh-ost で主に使用される SQL文とそれに対応する DM の操作は次のとおりです。
@@ -50,7 +50,7 @@ gh-ost で主に使用される SQL文とそれに対応する DM の操作は�
     Create /* gh-ost */ table `test`.`_test4_gho` like `test`.`test4` ;
     ```
 
-    DMは`_test4_gho`テーブルを作成しません。DMは`ghost_schema` 、および`dm_worker` `ghost_table` `server_id`に従って下流の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
+    DMは`_test4_gho`テーブルを作成しません。DMは`ghost_schema` 、 `ghost_table` 、および`dm_worker`の`server_id`に従って下流の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
 
     ```
     DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};
@@ -117,12 +117,12 @@ pt-osc がオンラインスキーマ変更を実装すると、次の2種類の
 
 - `new` : DDLの適用に使用されます。データが完全に複製され、 `new`テーブルが元のテーブルと整合性が取れている場合、元のテーブルは名前変更によって置き換えられます。
 - `old` : 元のテーブルの名前を変更して作成されました。
-- 3種類`pt_osc_*_del`トリガー： `pt_osc_*_ins`のプロセスでは、元のテーブルで生成された新しいデータ`pt_osc_*_upd`トリガーによって`new`に複製されます。
+- 3種類のトリガー： `pt_osc_*_ins` 、 `pt_osc_*_upd` 、 `pt_osc_*_del` 。pt_osc のプロセスでは、元のテーブルで生成された新しいデータがトリガーによって`new`に複製されます。
 
 移行プロセスでは、DM は上記のテーブルを 3つのカテゴリに分割します。
 
-- ゴーストテーブル: `_*_new`
-- ゴミ箱テーブル: `_*_old`
+- ghostTable: `_*_new`
+- trashTable: `_*_old`
 - realTable: online-ddl を実行する元のテーブル。
 
 pt-osc で主に使用される SQL 文とそれに対応する DM の操作は次のとおりです。
@@ -134,7 +134,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
     date date DEFAULT NULL, account_id bigint DEFAULT NULL, conversion_price decimal(20,3) DEFAULT NULL, ocpc_matched_conversions bigint DEFAULT NULL, ad_cost decimal(20,3) DEFAULT NULL,cl2 varchar(20) COLLATE utf8mb4_bin NOT NULL,cl1 varchar(20) COLLATE utf8mb4_bin NOT NULL,PRIMARY KEY (id) ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ;
     ```
 
-    DMは`_test4_new`テーブルを作成しません。DMは`ghost_schema` 、および`dm_worker` `ghost_table` `server_id`に従って下流の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
+    DMは`_test4_new`テーブルを作成しません。DMは`ghost_schema` 、 `ghost_table` 、および`dm_worker`の`server_id`に従って下流の`dm_meta.{task_name}_onlineddl`レコードを削除し、メモリ内の関連情報をクリアします。
 
     ```sql
     DELETE FROM dm_meta.{task_name}_onlineddl WHERE id = {server_id} and ghost_schema = {ghost_schema} and ghost_table = {ghost_table};

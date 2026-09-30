@@ -24,7 +24,7 @@ summary: DMセーフモードについて、その目的、動作原理、およ
 - `INSERT`文は`REPLACE`文に書き換えられます。
 - `UPDATE`文が分析され、更新された行の主キーまたは一意インデックスの値を取得します。次に`UPDATE`文が、次の2つのステップで`DELETE` + `REPLACE`文に書き換えられます。DM は、主キーまたは一意インデックスを使用して古いレコードを削除し、 `REPLACE`を使用して新しいレコードを挿入します。
 
-    バージョン8.5.6以降、タスクセッションで`foreign_key_checks=1`を設定すると、DMは主キーまたは一意インデックス値を変更しない`DELETE` `UPDATE`ステップをスキップします。詳細については、[外部キーの処理](#foreign-key-handling-new-in-v856)キー を参照してください。
+    バージョン8.5.6以降、タスクセッションで`foreign_key_checks=1`を設定すると、DMは主キーまたは一意インデックス値を変更しない`UPDATE`文について`DELETE`ステップをスキップします。詳細については、[外部キーの処理](#foreign-key-handling-new-in-v856)を参照してください。
 
 `REPLACE`は、MySQL でデータを挿入するための固有の構文です。 `REPLACE`を使用してデータを挿入し、新しいデータと既存のデータに主キーまたは一意制約の競合がある場合、MySQL は競合するすべてのレコードを削除し、挿入操作を実行します。これは「強制挿入」と同等です。詳細については、MySQL ドキュメントの[`REPLACE`文](https://dev.mysql.com/doc/refman/8.0/en/replace.html)を参照してください。
 
@@ -99,7 +99,7 @@ mysql-instances:
 >
 > この機能は実験的です。本番環境での使用は推奨されません。予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tiflow/issues)を報告してください。
 
-セーフモードを有効にしてダウンストリーム タスク セッションで`foreign_key_checks=1`を設定すると、 `DELETE`文のデフォルトの`REPLACE` + `UPDATE`書き換えにより、子行に意図しない`ON DELETE CASCADE`の影響が発生する可能性があります。v8.5.6 以降、DM ではこの問題に対処するために以下の改善が導入されています。
+セーフモードを有効にしてダウンストリーム タスク セッションで`foreign_key_checks=1`を設定すると、 `UPDATE`文のデフォルトの`DELETE` + `REPLACE`書き換えにより、子行に意図しない`ON DELETE CASCADE`の影響が発生する可能性があります。v8.5.6 以降、DM ではこの問題に対処するために以下の改善が導入されています。
 
 ### 非キー`UPDATE`最適化 {#non-key-update-optimization}
 
@@ -130,9 +130,9 @@ REPLACE INTO dummydb.dummytbl (id, int_value, ...) VALUES (123, 888999, ...);  -
 
 ### セッションレベルの`foreign_key_checks` {#session-level-foreign_key_checks}
 
-セーフモードでのバッチ実行中、DM は`SET SESSION foreign_key_checks=0`および`INSERT`バッチを実行する前に`UPDATE`を実行し、その後`foreign_key_checks`の元の値を復元します。これにより`REPLACE INTO` (内部で`DELETE` + `INSERT`を実行) が下流で外部キーのカスケード操作をトリガーするのを防ぎます。
+セーフモードでのバッチ実行中、DM は`INSERT`バッチと`UPDATE`バッチを実行する前に`SET SESSION foreign_key_checks=0`を実行し、その後`foreign_key_checks`の元の値を復元します。これにより`REPLACE INTO` (内部で`DELETE` + `INSERT`を実行) が下流で外部キーのカスケード操作をトリガーするのを防ぎます。
 
-このセッションレベルの設定では`SET SESSION`バッチごとにわずかなオーバーヘッド（2回の往復）が発生します。ほとんどのワークロードでは、このオーバーヘッドは無視できる程度です。
+このセッションレベルの設定では、バッチごとにわずかなオーバーヘッド（ `SET SESSION`の 2回の往復）が発生します。ほとんどのワークロードでは、このオーバーヘッドは無視できる程度です。
 
 ### 複数ワーカーの外部キー因果関係 {#multi-worker-foreign-key-causality}
 

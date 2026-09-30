@@ -63,8 +63,8 @@ routes:
 
 アップストリームインスタンスをダウンストリーム`test`.`t`に移行するには、次のルーティングルールを作成する必要があります。
 
-- `rule-1` 、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL文をダウンストリーム`test`.`t`に移行するために使用されます。
-- `rule-2` 、 `CREATE/DROP SCHEMA xx`など、 `schema-pattern: "test_*"`に一致するスキーマの DDL文を移行するために使用されます。
+- `rule-1`は、 `schema-pattern: "test_*"`および`table-pattern: "t_*"`に一致するテーブルの DML または DDL文をダウンストリーム`test`.`t`に移行するために使用されます。
+- `rule-2`は、 `CREATE/DROP SCHEMA xx`など、 `schema-pattern: "test_*"`に一致するスキーマの DDL文を移行するために使用されます。
 
 > **Note:**
 >
@@ -82,7 +82,7 @@ routes:
     target-schema: "test"
 ```
 
-### テーブル、スキーマ、ソース情報を抽出し、結合されたテーブルに書き込みます {#extract-table-schema-and-source-information-and-write-into-the-merged-table}
+### テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます {#extract-table-schema-and-source-information-and-write-into-the-merged-table}
 
 シャーディングされたスキーマとテーブルのシナリオを想定し、2つの上流MySQLインスタンスの`test_{1,2,3...}`.`t_{1,2,3...}`テーブルを下流TiDBインスタンスの`test`.`t`テーブルに移行します。同時に、シャーディングされたテーブルのソース情報を抽出し、下流のマージされたテーブルに書き込みます。
 
@@ -112,7 +112,7 @@ routes:
     target-schema: "test"
 ```
 
-上流のシャードテーブルのソース情報を下流のマージテーブルに抽出するには、**移行を開始する前に、下流にマージテーブルを手動で作成する必要があります**。マージテーブルには、ソース情報を指定するために使用する3つの`target-columns` （ `c_table` 、 `c_schema` 、 `c_source` ）が含まれている必要があります。また、これらの列は**最後の列であり、<a href="/data-type-string.md">文字列型</a>である必要があります**。
+上流のシャードテーブルのソース情報を下流のマージテーブルに抽出するには、**移行を開始する前に、下流にマージテーブルを手動で作成する必要があります**。マージテーブルには、ソース情報を指定するために使用する3つの`target-columns` （ `c_table` 、 `c_schema` 、 `c_source` ）が含まれている必要があります。また、これらの列は**最後の列であり、[文字列型](/data-type-string.md)である必要があります**。
 
 ```sql
 CREATE TABLE `test`.`t` (
@@ -173,7 +173,7 @@ mysql> select * from test.t;
 +---+---------+----------+----------+
 ```
 
-#### 結合テーブルの作成の誤った例 {#incorrect-examples-of-creating-merged-tables}
+#### マージされたテーブルの作成の誤った例 {#incorrect-examples-of-creating-merged-tables}
 
 > **Note:**
 >
