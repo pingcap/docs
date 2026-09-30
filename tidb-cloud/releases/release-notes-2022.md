@@ -471,7 +471,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 ## 2022年7月12日 {#july-12-2022}
 
 - Amazon S3 の[**データインポートタスク**](/tidb-cloud/import-sample-data.md)ページに**Validate**ボタンを追加します。これにより、データのインポートが開始される前にデータアクセスの問題を検出できるようになります。
-- [**支払方法**](/tidb-cloud/tidb-cloud-billing.md#payment-method)タブで**請求プロファイル**を追加してください。**請求プロファイル**に税務登録番号を入力すると、請求書から特定の税金が免除される場合があります。詳しくは[請求プロファイル情報を編集する](/tidb-cloud/tidb-cloud-billing.md#billing-profile)ご覧ください。
+- [**支払方法**](/tidb-cloud/tidb-cloud-billing.md#payment-method)タブで**請求プロファイル**を追加してください。**請求プロファイル**に税務登録番号を入力すると、請求書から特定の税金が免除される場合があります。詳しくは[請求プロファイル情報を編集する](/tidb-cloud/tidb-cloud-billing.md#billing-profile)をご覧ください。
 
 ## 2022年7月5日 {#july-05-2022}
 
