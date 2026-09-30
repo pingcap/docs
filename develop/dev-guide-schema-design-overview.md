@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-schema-design-overview/','/ja/tidb/dev/dev-
 
 このドキュメントでは、TiDBのオブジェクト、アクセス制御、データベーススキーマの変更、オブジェクトの制限など、TiDBデータベーススキーマ設計の基本について説明します。
 
-以降の[書店](/develop/dev-guide-bookshop-schema-design.md)では、を例として、データベースの設計方法、およびデータベース内でのデータ読み書き操作の実行方法を示します。
+以降のドキュメントでは、 [Bookshop](/develop/dev-guide-bookshop-schema-design.md)を例として、データベースの設計方法、およびデータベース内でのデータ読み書き操作の実行方法を示します。
 
 ## TiDB内のオブジェクト {#objects-in-tidb}
 
@@ -16,7 +16,7 @@ aliases: ['/ja/tidb/stable/dev-guide-schema-design-overview/','/ja/tidb/dev/dev-
 
 - 一般的な用語[データベース](https://en.wikipedia.org/wiki/Database)との混同を避けるため、本ドキュメントでは、**データベース**とは論理オブジェクトを指し、**TiDB**とはTiDB自体を指し、**クラスター**とは実行中のTiDBデプロイメントを指します。
 
-- TiDB は MySQL 互換の構文を使用します。この**構文**では、スキーマはデータベース内の論理オブジェクトの代わりに一般用語[スキーマ](https://en.wiktionary.org/wiki/schema)を意味します。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)を参照してください。スキーマを論理オブジェクトとして持つデータベース (たとえば、 [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html) 、 [オラクル](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html)、 [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15) ) から移行する場合は、この違いに必ず注意してください。
+- TiDB は MySQL 互換の構文を使用します。この構文では、**スキーマ**はデータベース内の論理オブジェクトの代わりに一般用語[スキーマ](https://en.wiktionary.org/wiki/schema)を意味します。詳細については、 [MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/create-database.html)を参照してください。スキーマを論理オブジェクトとして持つデータベース (たとえば、 [PostgreSQL](https://www.postgresql.org/docs/current/ddl-schemas.html) 、 [オラクル](https://docs.oracle.com/en/database/oracle/oracle-database/21/tdddg/creating-managing-schema-objects.html)、 [Microsoft SQL Server](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/create-a-database-schema?view=sql-server-ver15) ) から移行する場合は、この違いに必ず注意してください。
 
 ### データベース {#database}
 
@@ -30,7 +30,7 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 
 各テーブルは**行**と**列**で構成されます。行の各値は特定の**列**に属します。各列は単一のデータ型のみを許可します。列をさらに絞り込むには、いくつかの[制約](/constraints.md)を追加できます。計算を高速化するには、[生成列](/generated-columns.md)を追加できます。
 
-### 索引 {#index}
+### インデックス {#index}
 
 インデックスとは、テーブル内の選択された列のコピーです。[テーブル](#table)の1つまたは複数の列を使用してインデックスを作成できます。インデックスを使用すると、TiDBはテーブル内のすべての行を毎回検索することなくデータを迅速に検索できるため、クエリのパフォーマンスが大幅に向上します。
 
@@ -46,7 +46,7 @@ TiDBには`test`という名前のデフォルトデータベースが付属し�
 > - InnoDBでは、**主キー**の定義は一意であり、nullではなく、**クラスター化されたインデックス**です。
 > - TiDB では、**プライマリ キー**の定義は一意であり、NULL ではありません。ただし、プライマリ キーが**クラスター化インデックス**であるとは限りません。プライマリ キーがクラスター化インデックスであるかどうかを指定するには、`CREATE TABLE`ステートメントの`PRIMARY KEY`の後に、予約されていないキーワード`CLUSTERED`または`NONCLUSTERED`を追加します。ステートメントでこれらのキーワードが明示的に指定されていない場合、デフォルトの動作はシステム変数`@@global.tidb_enable_clustered_index`によって制御されます。詳細については、[クラスター化インデックス](/clustered-indexes.md)を参照してください。
 
-#### 専門索引 {#specialized-indexes}
+#### 特殊なインデックス {#specialized-indexes}
 
 さまざまなユーザーシナリオのクエリパフォーマンスを向上させるために、TiDB はいくつかの特殊なタイプのインデックスを提供します。各タイプの詳細については、[インデックスと制約](/basic-features.md#indexing-and-constraints)を参照してください。
 
@@ -60,18 +60,18 @@ TiDBは、**テーブル**と同じレベルで以下の論理オブジェクト
 
 ## アクセス制御 {#access-control}
 
-TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートします。ユーザーがデータオブジェクトおよびデータ スキーマを表示、変更、または削除できるようにするには、[ユーザー](/user-account-management.md)に直接[権限](/privilege-management.md)付与するか、[役割](/role-based-access-control.md)を通じて[権限](/privilege-management.md)ユーザーに付与します。
+TiDB は、ユーザーベースとロールベースの両方のアクセス制御をサポートします。ユーザーがデータオブジェクトおよびデータ スキーマを表示、変更、または削除できるようにするには、[ユーザー](/user-account-management.md)に直接[権限](/privilege-management.md)を付与するか、[ロール](/role-based-access-control.md)を通じて[権限](/privilege-management.md)をユーザーに付与します。
 
 ## データベーススキーマの変更 {#database-schema-changes}
 
 ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバやORMではなく、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。
 
-## 対象物の制限 {#object-limitations}
+## オブジェクトの制限 {#object-limitations}
 
 詳細については、 [TiDBの制限事項](/tidb-limitations.md)を参照してください。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

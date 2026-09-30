@@ -88,7 +88,7 @@ npm install mysql2 dotenv --save
     cp .env.example .env
     ```
 
-6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+6. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -165,7 +165,7 @@ npm install mysql2 dotenv --save
     cp .env.example .env
     ```
 
-5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+5. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -194,7 +194,7 @@ npm install mysql2 dotenv --save
     cp .env.example .env
     ```
 
-2. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`接続パラメータに置き換えます。
+2. `.env`ファイルを編集し、環境変数を以下のように設定し、接続ダイアログ上の対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     TIDB_HOST={host}
@@ -303,7 +303,7 @@ console.log(rows[0]);
 
 ### データの更新 {#update-data}
 
-以下のクエリは、 `50`の ID を持つ`50`に`Player`コインと`1`の商品を追加します。
+以下のクエリは、 ID が`1`の`Player`に`50`コインと`50`商品を追加します。
 
 ```javascript
 const [rsh] = await conn.query(
@@ -317,7 +317,7 @@ console.log(rsh.affectedRows);
 
 ### データを削除する {#delete-data}
 
-以下のクエリは、IDが`Player`である`1`レコードを削除します。
+以下のクエリは、IDが`1`である`Player`レコードを削除します。
 
 ```javascript
 const [rsh] = await conn.query('DELETE FROM players WHERE id = ?;', [1]);
@@ -331,17 +331,17 @@ console.log(rsh.affectedRows);
 - [接続プール](https://github.com/sidorares/node-mysql2#using-connection-pools)を使用してデータベース接続を管理することで、接続の頻繁な確立と切断によって発生するパフォーマンスのオーバーヘッドを削減できます。
 - SQL インジェクションを回避するには、 [プリペアドステートメント](https://github.com/sidorares/node-mysql2#using-prepared-statements)を使用することをお勧めします。
 - 複雑な SQL文があまり含まれないシナリオでは、[Sequelize](https://sequelize.org/)、 [TypeORM](https://typeorm.io/) 、または[Prisma](https://www.prisma.io/)などの ORM フレームワークを使用すると、開発効率が大幅に向上します。
-- データベースで大きな数値（ `supportBigNumbers: true`列と`BIGINT`列）を扱う場合は、 `DECIMAL`オプションを有効にすることをお勧めします。
-- ネットワークの問題によるソケットエラー`enableKeepAlive: true`回避するために、{ `read ECONNRESET`オプションを有効にすることをお勧めします。（関連する問題： [sidorares/node-mysql2#683](https://github.com/sidorares/node-mysql2/issues/683) ）
+- データベースで大きな数値（ `BIGINT`列と`DECIMAL`列）を扱う場合は、 `supportBigNumbers: true`オプションを有効にすることをお勧めします。
+- ネットワークの問題によるソケットエラー`read ECONNRESET`を回避するために、 `enableKeepAlive: true`オプションを有効にすることをお勧めします。（関連する問題： [sidorares/node-mysql2#683](https://github.com/sidorares/node-mysql2/issues/683) ）
 
 ## 次のステップ {#next-steps}
 
 - node-mysql2 ドライバーの使用方法の詳細については[node-mysql2 のドキュメント](https://github.com/sidorares/node-mysql2#readme)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベストプラクティスを学びましょう。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

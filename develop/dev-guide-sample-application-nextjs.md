@@ -289,7 +289,7 @@ console.log(rows[0]);
 
 ### データの更新 {#update-data}
 
-以下のクエリは、 `50`の ID を持つ`50`に`Player`コインと`1`の商品を追加します。
+以下のクエリは、 ID が`1`の`Player`に`50`コインと`50`商品を追加します。
 
 ```javascript
 const [rsh] = await pool.query(
@@ -303,7 +303,7 @@ console.log(rsh.affectedRows);
 
 ### データを削除する {#delete-data}
 
-以下のクエリは、IDが`Player`である`1`レコードを削除します。
+以下のクエリは、IDが`1`である`Player`レコードを削除します。
 
 ```javascript
 const [rsh] = await pool.query('DELETE FROM players WHERE id = ?;', [1]);
@@ -323,10 +323,10 @@ console.log(rsh.affectedRows);
 - ORM と Next.js を使用して複雑なアプリケーションを構築する方法の詳細については、 [書店デモ](https://github.com/pingcap/tidb-prisma-vercel-demo)を参照してください。
 - node-mysql2 ドライバーの使用方法の詳細については[node-mysql2 のドキュメント](https://sidorares.github.io/node-mysql2/docs/documentation)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/dev/dev-guide-outdated-for-django','/ja/tidb/stable/dev-guid
 
 # DjangoでTiDBに接続する {#connect-to-tidb-with-django}
 
-TiDBはMySQL互換のデータベースであり、[Django](https://www.djangoproject.com)強力なオブジェクトリレーショナルマッパー（ORM）ライブラリを含む、Python向けの人気の高いWebフレームワークです。
+TiDBはMySQL互換のデータベースであり、[Django](https://www.djangoproject.com)は、強力なオブジェクトリレーショナルマッパー（ORM）ライブラリを含む、Python向けの人気の高いWebフレームワークです。
 
 このチュートリアルでは、TiDBとDjangoを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -112,7 +112,7 @@ mysqlclient でインストールの問題が発生した場合は、 [mysqlclie
 
     必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
 
-    TiDB Cloud Starter は安全な接続を必要とします。mysqlclient の`ssl_mode`はデフォルトで`PREFERRED`になっているため、 `CA_PATH`手動で指定する必要はありません。空欄のままにしてください。ただし、 `CA_PATH`手動で指定する必要がある特別な理由がある場合は、 [TiDB Cloud StarterへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティングシステムの証明書パスを取得してください。
+    TiDB Cloud Starter は安全な接続を必要とします。mysqlclient の`ssl_mode`はデフォルトで`PREFERRED`になっているため、 `CA_PATH`を手動で指定する必要はありません。空欄のままにしてください。ただし、 `CA_PATH`を手動で指定する必要がある特別な理由がある場合は、 [TiDB Cloud StarterへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティングシステムの証明書パスを取得してください。
 
 7. `.env`ファイルを保存します。
 
@@ -188,7 +188,7 @@ mysqlclient でインストールの問題が発生した場合は、 [mysqlclie
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`前の手順でダウンロードした証明書のパスに設定してください。
+    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`を前の手順でダウンロードした証明書のパスに設定してください。
 
 6. `.env`ファイルを保存します。
 
@@ -282,7 +282,7 @@ if TIDB_CA_PATH:
     }
 ```
 
-`${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` 、および`${ca_path}` 、TiDBの実際の値に置き換える必要があります。
+`${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、 `${tidb_db_name}` 、および`${ca_path}`をTiDBの実際の値に置き換える必要があります。
 
 ### データモデルを定義する {#define-the-data-model}
 
@@ -361,10 +361,10 @@ Player.objects.filter(coins=100).delete()
 
 - Django の使用法の詳細については[Djangoのドキュメント](https://www.djangoproject.com/)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

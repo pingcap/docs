@@ -331,7 +331,7 @@ end
 1. Debian、Ubuntu、Gentoo、Arch、またはSlackwareの場合`/etc/ssl/certs/ca-certificates.crt`
 2. `/etc/pki/tls/certs/ca-bundle.crt`は RedHat、Fedora、CentOS、Mageia、Vercel、または Netlify 用です。
 3. OpenSUSE 用`/etc/ssl/ca-bundle.pem`
-4. `/etc/ssl/cert.pem` macOS または Alpine (Docker コンテナ)
+4. `/etc/ssl/cert.pem` : macOS または Alpine (Docker コンテナ)
 
 CA証明書のパスを手動で指定することも可能ですが、異なるマシンや環境によってCA証明書の保存場所が異なる可能性があるため、複数の環境にデプロイするシナリオでは大きな不便が生じる可能性があります。そのため、柔軟性と異なる環境へのデプロイの容易性を考慮して、 `sslca`を`nil`に設定することをお勧めします。
 
@@ -339,10 +339,10 @@ CA証明書のパスを手動で指定することも可能ですが、異なる
 
 - mysql2 ドライバーの使用方法の詳細については[mysql2のドキュメント](https://github.com/brianmario/mysql2#readme)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベストプラクティスを学びましょう。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

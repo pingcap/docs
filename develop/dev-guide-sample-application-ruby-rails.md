@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-ruby-rails/','/ja/tidb/d
 
 # RailsフレームワークとActiveRecord ORMを使用してTiDBに接続する {#connect-to-tidb-with-rails-framework-and-activerecord-orm}
 
-TiDBはMySQL互換のデータベースであり、 [Rails](https://github.com/rails/rails) Rubyで書かれた人気のWebアプリケーションフレームワークであり、 [ActiveRecord ORM](https://github.com/rails/rails/tree/main/activerecord)はRailsにおけるオブジェクトリレーショナルマッピングです。
+TiDBはMySQL互換のデータベースであり、 [Rails](https://github.com/rails/rails)は Rubyで書かれた人気のWebアプリケーションフレームワークであり、 [ActiveRecord ORM](https://github.com/rails/rails/tree/main/activerecord)はRailsにおけるオブジェクトリレーショナルマッピングです。
 
 このチュートリアルでは、TiDBとRailsを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -124,7 +124,7 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-8. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`接続パラメータに置き換えます。
+8. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を以下のように設定し、接続ダイアログで対応するプレースホルダー`{}`を接続パラメータに置き換えます。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database_name}'
@@ -174,7 +174,7 @@ bundle add mysql2 dotenv
     cp .env.example .env
     ```
 
-2. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、 `{user}` 、 `{password}` 、 `{host}` 、 `{port}` 、および`{database}`独自の TiDB 接続情報に置き換えてください。
+2. `.env`ファイルを編集し、 `DATABASE_URL`環境変数を次のように設定し、 `{user}` 、 `{password}` 、 `{host}` 、 `{port}` 、および`{database}`を独自の TiDB 接続情報に置き換えてください。
 
     ```dotenv
     DATABASE_URL='mysql2://{user}:{password}@{host}:{port}/{database}'
@@ -251,7 +251,7 @@ production:
 
 > **Note**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には、`ssl_mode`の`verify_identity`クエリパラメータを`DATABASE_URL`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要は**ありません**。
+> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、パブリックエンドポイントを使用する際には、`DATABASE_URL`で`ssl_mode`クエリパラメータを`verify_identity`に設定して TLS 接続を有効にする必要がありますが、mysql2 gem が特定の順序で既存の CA 証明書を検索してファイルが見つかるまで検索するため、 `DATABASE_URL`を介して SSL CA 証明書を指定する必要は**ありません**。
 
 ### データを挿入する {#insert-data}
 
@@ -306,12 +306,12 @@ CA証明書のパスを手動で指定することも可能ですが、異なる
 
 ## 次のステップ {#next-steps}
 
-- ActiveRecord ORM の使用法について詳しくは[ActiveRecordのドキュメント](https://guides.rubyonrails.org/active_record_basics.html)ご覧ください。
+- ActiveRecord ORM の使用法について詳しくは[ActiveRecordのドキュメント](https://guides.rubyonrails.org/active_record_basics.html)をご覧ください。
 - [開発者ガイド](https://docs.pingcap.com/developer/)の[データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[クエリデータ](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md)などの章を読んで、TiDB アプリケーション開発のベストプラクティスを学びましょう。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
