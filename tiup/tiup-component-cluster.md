@@ -1,11 +1,11 @@
 ---
 title: TiUP Cluster
-summary: TiUP クラスタは、 Golangで記述されたTiUPのクラスタ管理コンポーネントです。TiDBクラスタのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、 TiUPクラスタパラメータの管理など、日常的な運用とメンテナンスに使用されます。TiUP クラスタを使用するための構文は「tiup cluster [コマンド] [フラグ]」です。サポートされているコマンドには、import、template、check、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、rename、clean、destroy、audit、replay、enable、disable、meta backup、meta restore、helpなどがあります。
+summary: TiUP クラスタは、 Golangで記述されたTiUPのクラスタ管理コンポーネントです。TiDBクラスタのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、 TiDBクラスタパラメータの管理など、日常的な運用とメンテナンスに使用されます。TiUP クラスタを使用するための構文は「tiup cluster [コマンド] [フラグ]」です。サポートされているコマンドには、import、template、check、deploy、list、display、start、stop、restart、scale-in、scale-out、upgrade、prune、edit-config、reload、patch、rename、clean、destroy、audit、replay、enable、disable、meta backup、meta restore、helpなどがあります。
 ---
 
 # TiUPクラスタ {#tiup-cluster}
 
-TiUP クラスタは、 Golangで記述されたTiUPのクラスタ管理コンポーネントです。TiUP クラスタコンポーネントを使用すると、 TiUPクラスタのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、TiDBクラスタパラメータの管理など、日常的な運用とメンテナンスを実行できます。
+TiUP クラスタは、 Golangで記述されたTiUPのクラスタ管理コンポーネントです。TiUP クラスタコンポーネントを使用すると、 TiDBクラスタのデプロイ、起動、シャットダウン、破棄、エラスティックスケーリング、アップグレード、TiDBクラスタパラメータの管理など、日常的な運用とメンテナンスを実行できます。
 
 ## 構文 {#syntax}
 
@@ -31,7 +31,7 @@ tiup cluster [command] [flags]
 
 - コマンドでこのオプションを指定しない場合は、デフォルト値として`builtin`が使用されます。
 
-### --sshタイムアウト {#--ssh-timeout}
+### --ssh-timeout {#--ssh-timeout}
 
 - SSH 接続のタイムアウトを秒単位で指定します。
 - データ型: `UINT`
@@ -46,19 +46,19 @@ tiup cluster [command] [flags]
 ### -y, --yes {#-y---yes}
 
 - すべてのリスクのある操作の2次確認をスキップします。スクリプトを使用してTiUPを呼び出す場合を除き、このオプションの使用は推奨されません。
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### -v, --version {#-v---version}
 
 - TiUP クラスタの現在のバージョンを出力します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### -h, --help {#-h---help}
 
 - 関連するコマンドのヘルプ情報を出力します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ## コマンドリスト {#command-list}
 
@@ -71,7 +71,7 @@ tiup cluster [command] [flags]
 - [start](/tiup/tiup-component-cluster-start.md) : 指定されたクラスターを起動します
 - [stop](/tiup/tiup-component-cluster-stop.md) : 指定されたクラスターを停止します
 - [restart](/tiup/tiup-component-cluster-restart.md) : 指定されたクラスターを再起動します
-- [scale-in](/tiup/tiup-component-cluster-scale-in.md) : 指定されたクラスター内でスケールする
+- [scale-in](/tiup/tiup-component-cluster-scale-in.md) : 指定されたクラスターをスケールインする
 - [scale-out](/tiup/tiup-component-cluster-scale-out.md) : 指定されたクラスターをスケールアウトする
 - [upgrade](/tiup/tiup-component-cluster-upgrade.md) : 指定されたクラスターをアップグレードします
 - [prune](/tiup/tiup-component-cluster-prune.md) : 指定されたクラスターの Tombstone ステータスのインスタンスをクリーンアップします

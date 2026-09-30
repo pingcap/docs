@@ -13,12 +13,12 @@ summary: tiup cluster upgradeコマンドは、指定したクラスターを特
 tiup cluster upgrade <cluster-name> <version> [flags]
 ```
 
-- `<cluster-name>` : 操作対象のクラスタ名。クラスタ名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+- `<cluster-name>` : 操作対象のクラスタ名。クラスタ名を忘れた場合は、 [cluster list](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 - `<version>` : アップグレード先のバージョン（例： `v8.5.3` ）。現在、現在のクラスターよりも上位のバージョンへのアップグレードのみが許可されており、ダウングレードは許可されていません。また、ナイトリーバージョンへのアップグレードも許可されていません。
 
 ## オプション {#options}
 
-### &#x20;--force {#--force}
+### --force {#--force}
 
 - クラスターをアップグレードするには、クラスターが現在起動していることを確認する必要があります。場合によっては、クラスターが起動していない状態でアップグレードを実行したい場合があります。その場合は、 `--force`を使用すると、アップグレード中のエラーを無視し、バイナリファイルを強制的に置き換えてクラスターを起動できます。
 - データ型: `BOOLEAN`
@@ -48,27 +48,27 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 - アップグレード前に、 TiUP はターゲットバージョンが現在のバージョン以上であるかどうかを確認します。このチェックを省略するには、オプション`--ignore-version-check`を使用します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-### &#x20;--offline {#--offline}
+### --offline {#--offline}
 
 - 現在のクラスターが実行中でないことを宣言します。このオプションが指定されると、 TiUP はサービスリーダーを別のノードに移動させたり、サービスを再起動したりせず、クラスターコンポーネントのバイナリファイルのみを置き換えます。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
-### --pdバージョン {#--pd-version}
+### --pd-version {#--pd-version}
 
 - PDのバージョンを指定します。このオプションを設定すると、PDのバージョンとクラスターのバージョンが一致しなくなります。
 - データ型: `STRINGS`
 - このオプションが設定されていない場合、PD のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tikv バージョン {#--tikv-version}
+### --tikv-version {#--tikv-version}
 
 - TiKVのバージョンを指定します。このオプションを設定すると、TiKVのバージョンはクラスターのバージョンと一致しなくなります。
 - データ型: `STRINGS`
 - このオプションが設定されていない場合、TiKV のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tikv-cdc-バージョン {#--tikv-cdc-version}
+### --tikv-cdc-version {#--tikv-cdc-version}
 
 - TiKV CDCのバージョンを指定します。このオプションを設定すると、TiKV CDCのバージョンはクラスタのバージョンと一致しなくなります。
 - データ型: `STRINGS`
@@ -80,25 +80,25 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 - データ型: `STRINGS`
 - このオプションが設定されていない場合、 TiFlashのバージョンはクラスターのバージョンと一致したままになります。
 
-### --cdc バージョン {#--cdc-version}
+### --cdc-version {#--cdc-version}
 
 - TiCDCのバージョンを指定します。このオプションを設定すると、TiCDCのバージョンはクラスターのバージョンと一致しなくなります。
 - データ型: `STRINGS`
 - このオプションが設定されていない場合、TiCDC のバージョンはクラスターのバージョンと一致し続けます。
 
-### --tiproxy バージョン {#--tiproxy-version}
+### --tiproxy-version {#--tiproxy-version}
 
 - TiProxyのバージョンを指定します。このオプションを設定すると、TiProxyのバージョンはクラスタのバージョンと一致しなくなります。
 - データ型: `STRINGS`
 - このオプションが設定されていない場合、TiProxy のバージョンはクラスターのバージョンと一致したままになります。
 
-### --tidb-ダッシュボードバージョン {#--tidb-dashboard-version}
+### --tidb-dashboard-version {#--tidb-dashboard-version}
 
 - TiDB Dashboardのバージョンを指定します。このオプションを設定すると、TiDB Dashboardのバージョンはクラスターのバージョンと一致しなくなります。
 - データ型: `STRINGS`
 - このオプションが設定されていない場合、TiDB Dashboardのバージョンはクラスターのバージョンと一致したままになります。
 
-### --alertmanager-バージョン {#--alertmanager-version}
+### --alertmanager-version {#--alertmanager-version}
 
 - Alertmanagerのバージョンを指定します。このオプションを設定すると、Alertmanagerのバージョンはクラスターのバージョンと一致しなくなります。
 - データ型: `STRINGS`
@@ -127,7 +127,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 - ヘルプ情報を出力します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### ---pre-upgrade-script {#---pre-upgrade-script}
 

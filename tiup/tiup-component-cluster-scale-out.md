@@ -5,7 +5,7 @@ summary: tiup cluster scale-outコマンドは、クラスタに新しいノー�
 
 # tiup cluster scale-out {#tiup-cluster-scale-out}
 
-`tiup cluster scale-out`コマンドはクラスタのスケールアウトに使用されます。クラスタのスケールアウトの内部ロジックは、クラスタのデプロイメントと同様です。tiup tiup-clusterコンポーネントは、まず新しいノードへの SSH 接続を確立し、ターゲットノードに必要なディレクトリを作成し、その後デプロイメントを実行してサービスを起動します。
+`tiup cluster scale-out`コマンドはクラスタのスケールアウトに使用されます。クラスタのスケールアウトの内部ロジックは、クラスタのデプロイメントと同様です。tiup-clusterコンポーネントは、まず新しいノードへの SSH 接続を確立し、ターゲットノードに必要なディレクトリを作成し、その後デプロイメントを実行してサービスを起動します。
 
 PD がスケールアウトされると、参加操作によって新しい PD ノードがクラスターに追加され、PD に関連付けられているサービスの構成が更新され、他のサービスは直接開始されてクラスターに追加されます。
 
@@ -17,7 +17,7 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 
 `<cluster-name>` : 操作対象のクラスターの名前。クラスター名を忘れた場合は、 [`cluster list`](/tiup/tiup-component-dm-list.md)コマンドで確認できます。
 
-`<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md)このトポロジファイルには、現在のクラスターに追加される新しいノードのみを含める必要があります。
+`<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md)。このトポロジファイルには、現在のクラスターに追加される新しいノードのみを含める必要があります。
 
 ## オプション {#options}
 
@@ -35,7 +35,7 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 
 ### -p, --password {#p-password}
 
-- ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`同時に使用しないでください。
+- ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`を同時に使用しないでください。
 - データ型: `BOOLEAN`
 - デフォルト: false
 

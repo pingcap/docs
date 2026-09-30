@@ -5,7 +5,7 @@ summary: "`tiup cluster restart` コマンドは、指定されたクラスタ�
 
 # tiup cluster restart {#tiup-cluster-restart}
 
-コマンド`tiup cluster restart` 、指定されたクラスターのすべてまたは一部のサービスを再起動するために使用されます。
+コマンド`tiup cluster restart`は、指定されたクラスターのすべてまたは一部のサービスを再起動するために使用されます。
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ summary: "`tiup cluster restart` コマンドは、指定されたクラスタ�
 tiup cluster restart <cluster-name> [flags]
 ```
 
-`<cluster-name>` : 操作対象のクラスターの名前。クラスター名を忘れた場合は、 [クラスターリスト](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
+`<cluster-name>` : 操作対象のクラスターの名前。クラスター名を忘れた場合は、 [cluster list](/tiup/tiup-component-cluster-list.md)コマンドで確認できます。
 
 ## オプション {#options}
 
@@ -29,7 +29,7 @@ tiup cluster restart <cluster-name> [flags]
 
 > **Note:**
 >
-> オプション`-R, --role`同時に指定すると、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを再起動します。
+> オプション`-R, --role`を同時に指定すると、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを再起動します。
 
 ### -R, --role {#r-role}
 
@@ -39,13 +39,13 @@ tiup cluster restart <cluster-name> [flags]
 
 > **Note:**
 >
-> オプション`-N, --node`同時に指定すると、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを再起動します。
+> オプション`-N, --node`を同時に指定すると、 TiUP は`-N, --node`と`-R, --role`の両方の要件に一致するサービス ノードを再起動します。
 
 ### -h, --help {#h-help}
 
 - ヘルプ情報を出力します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ## 出力 {#outputs}
 

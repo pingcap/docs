@@ -33,7 +33,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 
 ### -p, --password {#p-password}
 
-- ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`同時に使用しないでください。
+- ターゲットマシンへの接続に使用するパスワードを指定します。このオプションと`-i/--identity_file`を同時に使用しないでください。
 - データ型: `BOOLEAN`
 - デフォルト: false
 
