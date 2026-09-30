@@ -5,6 +5,8 @@ hide_commit: true
 summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings everything great about TiDB to your cloud. It offers guides, samples, and references for learning, trying, developing, maintaining, migrating, monitoring, tuning, securing, billing, integrating, and referencing.
 ---
 
+<CustomContent plan="starter" compatibility="mysql">
+
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.">
 
 <LearningPath label="Learn" icon="cloud1">
@@ -138,3 +140,75 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 </LearningPath>
 
 </LearningPathContainer>
+
+</CustomContent>
+
+<CustomContent plan="starter" compatibility="postgresql">
+
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling database with PostgreSQL compatibility (Public Preview). It offers a generous free quota and consumption based billing once free limits are exceeded.">
+
+<LearningPath label="Learn" icon="cloud1">
+
+[Why TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro/?plan=starter&compatibility=postgresql)
+
+[PostgreSQL Compatibility](https://docs.pingcap.com/tidbcloud/starter/postgresql-compatibility/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="Try" icon="cloud5">
+
+[Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/starter/pg-quickstart/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="Maintain" icon="cloud7">
+
+[Create a Cluster](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=starter&compatibility=postgresql)
+
+[Connect via Public Endpoint](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection-serverless/?plan=starter&compatibility=postgresql)
+
+[Back Up and Restore Data](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="Migrate" icon="cloud3">
+
+[Migrate from PostgreSQL](https://docs.pingcap.com/tidbcloud/starter/Import-with-psql/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="Monitor" icon="cloud6">
+
+[Status and Metrics](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster/?plan=starter&compatibility=postgresql)
+
+[Built-in Metrics](https://docs.pingcap.com/tidbcloud/starter/built-in-monitoring-pg/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="Security" icon="users">
+
+[Password Authentication](https://docs.pingcap.com/tidbcloud/tidb-cloud-password-authentication/?plan=starter&compatibility=postgresql)
+
+[User Roles](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter&compatibility=postgresql#user-roles)
+
+[Manage Organization Access](https://docs.pingcap.com/tidbcloud/manage-user-access/?plan=starter&compatibility=postgresql#manage-organization-access)
+
+[TLS Connections](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="Reference" icon="cloud-dev">
+
+[PostgreSQL Extensions](https://docs.pingcap.com/tidbcloud/starter/pg-extensions-overview/?plan=starter&compatibility=postgresql)
+
+[SQL Reference](https://docs.pingcap.com/tidbcloud/starter/pg-sql-reference-overview/?plan=starter&compatibility=postgresql)
+
+[Limits and Constraints](https://docs.pingcap.com/tidbcloud/starter/pg-limits-constraints/?plan=starter&compatibility=postgresql)
+
+[System Variables](https://docs.pingcap.com/tidbcloud/system-variables/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+</LearningPathContainer>
+
+</CustomContent>
