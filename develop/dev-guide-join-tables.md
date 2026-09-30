@@ -98,7 +98,7 @@ public List<Author> getTop10AuthorsOrderByBooks() throws SQLException {
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-次の SQL文では、キーワード`LEFT JOIN`を使用して、左側のテーブル`books`右側のテーブル`ratings`に左外部結合で結合されることを宣言し、 `books`テーブルのすべての行が返されるようにします。
+次の SQL文では、キーワード`LEFT JOIN`を使用して、左側のテーブル`books`が右側のテーブル`ratings`に左外部結合で結合されることを宣言し、 `books`テーブルのすべての行が返されるようにします。
 
 ```sql
 SELECT b.id AS book_id, ANY_VALUE(b.title) AS book_title, AVG(r.score) AS average_score
@@ -200,13 +200,13 @@ public List<Book> getLatestBooksWithAverageScore() throws SQLException {
 
 ### 左セミ結合 {#left-semi-join}
 
-TiDBはSQL構文レベルでは`LEFT SEMI JOIN table_name`サポートしていません。ただし、実行計画レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)書き換えられた同等のJOINクエリに対して`semi join`デフォルトの結合方法として使用します。
+TiDBはSQL構文レベルでは`LEFT SEMI JOIN table_name`をサポートしていません。ただし、実行計画レベルでは、 [サブクエリ関連の最適化](/subquery-optimization.md)により、書き換えられた同等のJOINクエリに対して`semi join`がデフォルトの結合方法として使用します。
 
 ## 暗黙的な結合 {#implicit-join}
 
 明示的に結合を宣言する`JOIN`文がSQL標準に追加される前は、 `FROM t1, t2`句を用いてSQL文で2つ以上のテーブルを結合し、 `WHERE t1.id = t2.id`句を用いて結合条件を指定することができました。これは、内部結合を用いてテーブルを結合する暗黙的な結合と理解できます。
 
-## 関連するアルゴリズムを結合する {#join-related-algorithms}
+## 結合関連のアルゴリズム {#join-related-algorithms}
 
 TiDB は、次の一般的なテーブル結合アルゴリズムをサポートしています。
 
@@ -236,7 +236,7 @@ LIMIT 10;
 - [INL_HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#inl_hash_join)
 - [HASH_JOIN(t1_name [, tl_name ...])](/optimizer-hints.md#hash_joint1_name--tl_name-)
 
-## 注文を結合する {#join-orders}
+## 結合順序 {#join-orders}
 
 実際のビジネスシナリオでは、複数のテーブルを結合する文が非常に一般的です。結合の実行効率は、結合する各テーブルの順序に左右されます。TiDBは、結合したテーブルの再配置アルゴリズムを使用して、複数のテーブルを結合する順序を決定します。
 

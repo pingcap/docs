@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-datagrip/','/ja/tidb/dev/dev-guide-gui-
 
 # JetBrains DataGripを使用してTiDBに接続する {#connect-to-tidb-with-jetbrains-datagrip}
 
-TiDBはMySQL互換のデータベースであり、 [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html)データベースとSQLのための強力な統合開発環境（IDE）です。このチュートリアルでは、DataGripを使用してTiDBクラスタに接続する手順を説明します。
+TiDBはMySQL互換のデータベースであり、 [JetBrains DataGrip](https://www.jetbrains.com/help/datagrip/getting-started.html)はデータベースとSQLのための強力な統合開発環境（IDE）です。このチュートリアルでは、DataGripを使用してTiDBクラスタに接続する手順を説明します。
 
 > **Note:**
 >
@@ -14,8 +14,8 @@ TiDBはMySQL互換のデータベースであり、 [JetBrains DataGrip](https:/
 
 DataGripは2つの方法で使用できます。
 
-- [DataGrip IDE](https://www.jetbrains.com/datagrip/download)スタンドアロンツールとして。
-- IntelliJ、PhpStorm、PyCharm などの JetBrains IDE のデータベース[データベースツールとSQLプラグイン](https://www.jetbrains.com/help/idea/relational-databases.html)として。
+- [DataGrip IDE](https://www.jetbrains.com/datagrip/download)のスタンドアロンツールとして。
+- IntelliJ、PhpStorm、PyCharm などの JetBrains IDE の[データベースツールとSQLプラグイン](https://www.jetbrains.com/help/idea/relational-databases.html)として。
 
 このチュートリアルは主にスタンドアロン版のDataGrip IDEに焦点を当てています。JetBrains IDEのJetBrains Database ToolsおよびSQLプラグインを使用してTiDBに接続する手順も同様です。また、どのJetBrains IDEからTiDBに接続する場合でも、このドキュメントの手順を参考にすることができます。
 
@@ -202,12 +202,12 @@ DataGripは2つの方法で使用できます。
 
 ## 次のステップ {#next-steps}
 
-- DataGrip の使用法の詳細については[DataGripのドキュメント](https://www.jetbrains.com/help/datagrip/getting-started.html)ご覧ください。
+- DataGrip の使用法の詳細については[DataGripのドキュメント](https://www.jetbrains.com/help/datagrip/getting-started.html)をご覧ください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

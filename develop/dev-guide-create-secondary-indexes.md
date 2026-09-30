@@ -6,14 +6,14 @@ aliases: ['/ja/tidb/stable/dev-guide-create-secondary-indexes/','/ja/tidb/dev/de
 
 # セカンダリーインデックスを作成する {#create-a-secondary-index}
 
-このドキュメントでは、SQLと各種プログラミング言語を使用してセカンダリインデックスを作成する方法と、インデックス作成のルールについて説明します。このドキュメントでは、 [書店](/develop/dev-guide-bookshop-schema-design.md)を例として、セカンダリインデックス作成の手順を順を追って説明します。
+このドキュメントでは、SQLと各種プログラミング言語を使用してセカンダリインデックスを作成する方法と、インデックス作成のルールについて説明します。このドキュメントでは、 [Bookshop](/develop/dev-guide-bookshop-schema-design.md)を例として、セカンダリインデックス作成の手順を順を追って説明します。
 
 ## 始める前に {#before-you-start}
 
 セカンダリインデックスを作成する前に、以下の手順を実行してください。
 
 - [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)お読みください。
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)をお読みください。
 - [データベースを作成する](/develop/dev-guide-create-database.md)。
 - [テーブルを作成する](/develop/dev-guide-create-table.md)。
 
@@ -28,6 +28,7 @@ TiDB では、[既存のテーブルにセカンダリインデックスを追�
 ## 既存のテーブルにセカンダリインデックスを追加する {#add-a-secondary-index-to-an-existing-table}
 
 既存のテーブルにセカンダリインデックスを追加するには、次のように[CREATE INDEX](/sql-statements/sql-statement-create-index.md)ステートメントを使用できます。
+
 ```sql
 CREATE INDEX {index_name} ON {table_name} ({column_names});
 ```
@@ -41,6 +42,7 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 ## 新しいテーブルを作成する際にセカンダリインデックスを作成する {#create-a-secondary-index-when-creating-a-new-table}
 
 テーブルの作成と同時にセカンダリインデックスを作成するには、[CREATE TABLE](/sql-statements/sql-statement-create-table.md)の末尾に`KEY`キーワードを含む句を追加します。
+
 ```sql
 KEY `{index_name}` (`{column_names}`)
 ```
@@ -110,7 +112,7 @@ EXPLAIN SELECT * FROM `bookshop`.`books` WHERE `published_at` >= '2022-01-01 00:
 
 出力例において、 `id`列に**TableFullScan**と表示されています。これは、TiDB がこのクエリの`books`テーブルに対してフルテーブルスキャンを実行する準備ができていることを意味します。ただし、データ量が多い場合、フルテーブルスキャンは非常に時間がかかり、致命的な影響を与える可能性があります。
 
-このような影響を回避するには、次のように`published_at`テーブルの`books`列にインデックスを追加できます。
+このような影響を回避するには、次のように`books`テーブルの`published_at`列にインデックスを追加できます。
 
 ```sql
 CREATE INDEX `idx_book_published_at` ON `bookshop`.`books` (`bookshop`.`books`.`published_at`);
@@ -166,10 +168,10 @@ SHOW INDEXES FROM `bookshop`.`books`;
 
 ## 次のステップ {#next-step}
 
-データベースを作成し、テーブルとセカンダリインデックスを追加したら、アプリケーションにデータ[書く](/develop/dev-guide-insert-data.md)機能と[読む](/develop/dev-guide-get-data-from-single-table.md)機能を追加できます。
+データベースを作成し、テーブルとセカンダリインデックスを追加したら、アプリケーションにデータの[書く](/develop/dev-guide-insert-data.md)機能と[読む](/develop/dev-guide-get-data-from-single-table.md)機能を追加できます。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -13,7 +13,7 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 > **Note:**
 >
 > - このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
-> - このチュートリアルは、 [GitHub Codespaces](https://github.com/features/codespaces) 、Visual Studio [Visual Studio Code 開発コンテナ](https://code.visualstudio.com/docs/devcontainers/containers)[Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl) Code リモート開発環境でも動作します。
+> - このチュートリアルは、 [GitHub Codespaces](https://github.com/features/codespaces)、 [Visual Studio Code 開発コンテナ](https://code.visualstudio.com/docs/devcontainers/containers)、 [Visual Studio Code WSL](https://code.visualstudio.com/docs/remote/wsl)などの Visual Studio Code リモート開発環境でも動作します。
 
 ## 前提条件 {#prerequisites}
 
@@ -231,12 +231,12 @@ TiDB は MySQL 互換データベースであり、 [Visual Studio Code (VS Code
 ## 次のステップ {#next-steps}
 
 - Visual Studio Code の使用法の詳細については[Visual Studio Code のドキュメント](https://code.visualstudio.com/docs)を参照してください。
-- VS Code SQLTools 拡張機能の使用法について詳しくは、SQLTools の[ドキュメント](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)および[GitHubリポジトリ](https://github.com/mtxr/vscode-sqltools)ご覧ください。
+- VS Code SQLTools 拡張機能の使用法について詳しくは、SQLTools の[ドキュメント](https://marketplace.visualstudio.com/items?itemName=mtxr.sqltools)および[GitHubリポジトリ](https://github.com/mtxr/vscode-sqltools)をご覧ください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

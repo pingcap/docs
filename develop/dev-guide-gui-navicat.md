@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-navicat/','/ja/tidb/dev/dev-guide-gui-n
 
 # Navicatを使用してTiDBに接続する {#connect-to-tidb-with-navicat}
 
-TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.com)データベースユーザー向けのGUIツールセットです。このチュートリアルでは、 [Navicat Premium](https://www.navicat.com/en/products/navicat-premium)ツールを使用してTiDBに接続します。
+TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.com)はデータベースユーザー向けのGUIツールセットです。このチュートリアルでは、 [Navicat Premium](https://www.navicat.com/en/products/navicat-premium)ツールを使用してTiDBに接続します。
 
 このチュートリアルでは、Navicatを使用してTiDBに接続する方法を学ぶことができます。
 
@@ -175,10 +175,10 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 ## 次のステップ {#next-steps}
 
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

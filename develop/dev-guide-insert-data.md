@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/dev-guide-insert-data/','/ja/tidb/dev/dev-guide-inser
 この文書を読む前に、以下のものを準備してください。
 
 - [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、データベース[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)を読む
+- [スキーマ設計の概要](/develop/dev-guide-schema-design-overview.md)、[データベースを作成する](/develop/dev-guide-create-database.md)、[テーブルを作成する](/develop/dev-guide-create-table.md)、 [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)を読む
 
 ## 行を挿入する {#insert-rows}
 
@@ -79,7 +79,7 @@ try (Connection connection = ds.getConnection()) {
 
 MySQL JDBCDriverのデフォルト設定では、一括挿入のパフォーマンスを向上させるために、いくつかのパラメータを変更する必要があります。
 
-|            パラメータ           |                手段                |                                                                    推奨シナリオ                                                                   |          推奨設定         |
+|            パラメータ           |                意味                |                                                                    推奨シナリオ                                                                   |          推奨設定         |
 | :------------------------: | :------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------: |
 |    `useServerPrepStmts`    | サーバー側を使用してプリペアドステートメントを有効にするかどうか |                                                         プリペアドステートメントを複数回使用する必要がある場合                                                         |             `true`            |
 |      `cachePrepStmts`      |  クライアントがプリペアドステートメントをキャッシュするかどうか  |                                                          `useServerPrepStmts=true`                                                          |             `true`            |
@@ -244,7 +244,7 @@ TiDBに大量のデータを迅速にインポートする必要がある場合�
 
 - データエクスポート： [Dumpling](/dumpling-overview.md) 。MySQLまたはTiDBのデータをローカルまたはAmazon S3にエクスポートできます。
 - データインポート: [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) 。 **Dumpling**でエクスポートされたデータ、 **CSV**ファイル、 [Amazon AuroraからTiDBへのデータ移行](/migrate-aurora-to-tidb.md)をインポートできます。ローカルディスクまたは Amazon S3 クラウドディスクからのデータの読み取りもサポートします。
-- データレプリケーション： [TiDB Data Migration](/dm/dm-overview.md)MySQL、MariaDB、Amazon AuroraデータベースをTiDBにレプリケートできます。また、ソースデータベースからのシャーディングされたインスタンスとテーブルのマージおよび移行もサポートしています。
+- データレプリケーション： [TiDB Data Migration](/dm/dm-overview.md)。MySQL、MariaDB、Amazon AuroraデータベースをTiDBにレプリケートできます。また、ソースデータベースからのシャーディングされたインスタンスとテーブルのマージおよび移行もサポートしています。
 - データのバックアップと復元:[Backup & Restore (BR)](/br/backup-and-restore-overview.md) 。 **Dumpling**と比較して、 **BR**は***ビッグデータの***シナリオにより適しています。
 
 </div>
@@ -254,7 +254,7 @@ TiDBに大量のデータを迅速にインポートする必要がある場合�
 
 テーブルを設計するときは、多数の挿入操作があるかどうかを考慮する必要があります。その場合、テーブルの設計中にホットスポットを回避する必要があります。 [主キーを選択](/develop/dev-guide-create-table.md#select-primary-key)セクションを参照し、 [主キーを選択する際のルール](/develop/dev-guide-create-table.md#guidelines-to-follow-when-selecting-primary-key)に従ってください。
 
-TiDB Self-Managedでホットスポットの問題を処理する方法の詳細については、[ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md)。
+TiDB Self-Managedでホットスポットの問題を処理する方法の詳細については、[ホットスポットの問題をトラブルシューティングする](/troubleshoot-hot-spot-issues.md)を参照してください。
 
 ## `AUTO_RANDOM`を主キーとするテーブルにデータを挿入する {#insert-data-to-a-table-with-the-auto-random-primary-key}
 
@@ -291,10 +291,10 @@ ERROR 8216 (HY000): Invalid auto random: Explicit insertion on auto_random colum
 
 ## HTAPを使用する {#use-htap}
 
-TiDB では、HTAP 機能により、データの挿入時に追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。 TiDB はデータの一貫性を自動的に保証します。必要なのは、テーブルの作成後に[列指向レプリカ同期を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)、列指向レプリカを使用してクエリを直接高速化することだけです。
+TiDB では、HTAP 機能により、データの挿入時に追加の操作を実行する必要がなくなります。追加の挿入ロジックはありません。 TiDB はデータの一貫性を自動的に保証します。必要なのは、テーブルの作成後に[列指向レプリカ同期を有効にする](/develop/dev-guide-create-table.md#use-htap-capabilities)し、列指向レプリカを使用してクエリを直接高速化することだけです。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -14,7 +14,7 @@ aliases: ['/ja/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/
 
 悲観的トランザクションモデルはより直感的で、アプリケーション側での実装が容易です。一方、楽観的トランザクションモデルでは、アプリケーション側で複雑な再試行メカニズムが必要になります。
 
-以下は[書店](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に挙げ、楽観的トランザクションと悲観的トランザクションの長所と短所を示しています。本の購入プロセスは主に以下の流れで構成されます。
+以下は[bookshop](/develop/dev-guide-bookshop-schema-design.md)の例です。本の購入を例に挙げ、楽観的トランザクションと悲観的トランザクションの長所と短所を示しています。本の購入プロセスは主に以下の流れで構成されます。
 
 1. 在庫数量を更新する
 2. 注文を作成する
@@ -38,7 +38,7 @@ aliases: ['/ja/tidb/stable/dev-guide-optimistic-and-pessimistic-transaction/','/
 
 Golangの`sql.DB`は並行処理が安全であるため、サードパーティのパッケージをインポートする必要はありません。
 
-TiDB トランザクションを適応させるには、次のコードに従ってツールキット[ユーティリティ](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
+TiDB トランザクションを適応させるには、次のコードに従ってツールキット[util](https://github.com/pingcap-inc/tidb-example-golang/tree/main/util)を作成します。
 
 ```go
 package util
@@ -108,7 +108,7 @@ func (tx *TiDBSqlTx) Rollback() error {
 
 **設定ファイル**
 
-Mavenを使用してパッケージを管理する場合は、 `pom.xml`の`<dependencies>`ノードに以下の依存関係を追加して`HikariCP`インポートし、パッケージ化ターゲットとJARパッケージのメインクラスを起動するように設定します。以下は`pom.xml`の例です。
+Mavenを使用してパッケージを管理する場合は、 `pom.xml`の`<dependencies>`ノードに以下の依存関係を追加して`HikariCP`をインポートし、パッケージ化ターゲットとJARパッケージのメインクラスを起動するように設定します。以下は`pom.xml`の例です。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -966,7 +966,7 @@ OPTIMISTIC=False ALICE=4 BOB=7 python3 txn_example.py
 /* txn 1 */ ROLLBACK
 ```
 
-`txn 2`先行してロックリソースを取得し、ストックを更新するため、 `txn 1`の`affected_rows`の戻り値は0となり、 `rollback`処理に入ります。
+`txn 2`が先行してロックリソースを取得し、ストックを更新するため、 `txn 1`の`affected_rows`の戻り値は0となり、 `rollback`処理に入ります。
 
 注文の作成、ユーザー残高の減額、書籍在庫の減額を確認しましょう。Aliceは4冊の注文に成功し、Bobは7冊の注文に失敗しました。残りの6冊は予想通り在庫があります。
 
@@ -1252,7 +1252,7 @@ retry 1 times for 9007 Write conflict, txnStartTS=432618733006225412, conflictSt
 /* txn 1 */ COMMIT
 ```
 
-楽観的トランザクションモードでは、中間状態が必ずしも正しいとは限らないため、悲観的トランザクションモードのように`affected_rows`文目まで正常に実行されたかどうかを判断できません。トランザクション全体を考慮に入れ、最後の`COMMIT`文目が例外を返すかどうかで、現在のトランザクションに書き込み競合があるかどうかを判断する必要があります。
+楽観的トランザクションモードでは、中間状態が必ずしも正しいとは限らないため、悲観的トランザクションモードのように`affected_rows`で文が正常に実行されたかどうかを判断できません。トランザクション全体を考慮に入れ、最後の`COMMIT`文が例外を返すかどうかで、現在のトランザクションに書き込み競合があるかどうかを判断する必要があります。
 
 上記のSQLログからわかるように、2つのトランザクションが同時に実行され、同じレコードが変更されたため、 `txn 1` COMMIT後に`9007 Write conflict`例外がスローされています。楽観的トランザクションモードにおける書き込み競合については、アプリケーション側で安全に再試行できます。1回の再試行後、データは正常にコミットされます。最終的な実行結果は期待どおりです。
 
@@ -1339,7 +1339,7 @@ Fail -> out of stock
 /* txn 1 */ ROLLBACK
 ```
 
-上記のSQLログから、最初の実行時に書き込み競合が発生したため、アプリケーション側で`txn 1`再試行されていることがわかります。最新のスナップショットを比較すると、在庫が不足していることがわかります。アプリケーション側は`out of stock`スローし、異常終了します。
+上記のSQLログから、最初の実行時に書き込み競合が発生したため、アプリケーション側で`txn 1`が再試行されていることがわかります。最新のスナップショットを比較すると、在庫が不足していることがわかります。アプリケーション側は`out of stock`をスローし、異常終了します。
 
 ```sql
 mysql> SELECT * FROM books;

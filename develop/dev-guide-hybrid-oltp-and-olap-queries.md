@@ -14,7 +14,7 @@ TiDBは、オンライントランザクション処理（OLTP）には行ベー
 
 ## データ準備 {#data-preparation}
 
-始める前に、さらにサンプルデータ[`tiup demo`コマンド経由](/develop/dev-guide-bookshop-schema-design.md#tidb-self-managed-via-tiup-demo)をインポートすることができます。例えば：
+始める前に、[`tiup demo`コマンド経由](/develop/dev-guide-bookshop-schema-design.md#tidb-self-managed-via-tiup-demo)でさらにサンプルデータをインポートできます。例えば：
 
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --host 127.0.0.1 --port 4000 --drop-tables

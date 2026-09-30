@@ -143,7 +143,7 @@ mysql2 ドライバーを使用して TiDB に接続します。
 </DevToolCard>
 </DevLangAccordion>
 
-これらのガイドに加えて、PingCAP はコミュニティと協力して[サードパーティのMySQLドライバ、ORM、ツール](/develop/dev-guide-third-party-support.md)サポートします。
+これらのガイドに加えて、PingCAP はコミュニティと協力して[サードパーティのMySQLドライバ、ORM、ツール](/develop/dev-guide-third-party-support.md)をサポートします。
 
 ## MySQLクライアントソフトウェアを使用する {#use-mysql-client-software}
 
@@ -178,4 +178,4 @@ TiDB を使用した開発に関するその他のトピックを学習します
 
 - [TiDB データベース開発リファレンス](/develop/dev-guide-schema-design-overview.md)に従って、データとスキーマを設計、操作、最適化、およびトラブルシューティングします。
 - 無料のオンラインコース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を受講してください。
-- TiDB Cloudで人気の[サービス統合](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)探索します。
+- TiDB Cloudで人気の[サービス統合](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)を探索します。

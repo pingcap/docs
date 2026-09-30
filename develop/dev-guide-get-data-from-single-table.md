@@ -12,7 +12,7 @@ aliases: ['/ja/tidb/stable/dev-guide-get-data-from-single-table/','/ja/tidb/dev/
 
 ## 始める前に {#before-you-begin}
 
-以下の内容は、TiDB の単一テーブルからデータをクエリする方法を示すために、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として使用します。
+以下の内容は、TiDB の単一テーブルからデータをクエリする方法を示すために、 [Bookshop](/develop/dev-guide-bookshop-schema-design.md)アプリケーションを例として使用します。
 
 データを照会する前に、以下の手順を完了していることを確認してください。
 
@@ -70,12 +70,12 @@ SELECT id, name FROM authors;
 </div>
 <div label="Java" value="java">
 
-Javaでは、著者の基本情報を格納するために、クラス`Author`[価格帯](/data-type-numeric.md)[データ型](/data-type-overview.md)応じて適切なJavaデータ型を選択する必要があります。例：
+Javaでは、著者の基本情報を格納するために、クラス`Author`を宣言できます。データベースの[データ型](/data-type-overview.md)と[値の範囲](/data-type-numeric.md)に応じて、適切なJavaデータ型を選択する必要があります。例：
 
-- `Int`型のデータを格納するには、 `int`型の変数を使用します。
-- `Long`型のデータを格納するには、 `bigint`型の変数を使用します。
-- `Short`型のデータを格納するには、 `tinyint`型の変数を使用します。
-- `String`型のデータを格納するには、 `varchar`型の変数を使用します。
+- `int`型のデータを格納するには、 `Int`型の変数を使用します。
+- `bigint`型のデータを格納するには、 `Long`型の変数を使用します。
+- `tinyint`型のデータを格納するには、 `Short`型の変数を使用します。
+- `varchar`型のデータを格納するには、 `String`型の変数を使用します。
 
 ```java
 public class Author {
@@ -114,7 +114,7 @@ public class AuthorDAO {
 }
 ```
 
-[JDBCドライバを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `Statement`を使用して`conn.createStatement()`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベース クエリ リクエストを開始できます。
+[JDBCドライバを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `conn.createStatement()`を使用して`Statement`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベース クエリ リクエストを開始できます。
 
 クエリ結果は`ResultSet`オブジェクトに格納されます。 `ResultSet`を走査することで、返された結果を`Author`オブジェクトにマッピングできます。
 
@@ -141,7 +141,7 @@ SELECT * FROM authors WHERE birth_year = 1998;
 
 Javaでは、同じSQLを使用して、動的なパラメータを持つデータクエリリクエストを処理できます。
 
-これは、パラメータを SQL文に連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)インジェクションの潜在的なリスクが生じます。
+これは、パラメータを SQL文に連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)の潜在的なリスクが生じます。
 
 このようなクエリに対処するには、通常のステートメントの代わりに[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
 
@@ -172,7 +172,7 @@ public List<Author> getAuthorsByBirthYear(Short birthYear) throws SQLException {
 
 クエリ結果を並べ替えるには、 `ORDER BY`ステートメントを使用できます。
 
-例えば、次の SQL文は、 `authors`テーブルを降順 ( `DESC` ) にソートすることにより、 `birth_year`リストを取得します。
+例えば、次の SQL文は、 `authors`テーブルを`birth_year`列で降順 ( `DESC` ) にソートすることにより、最も若い著者のリストを取得します。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
@@ -380,6 +380,6 @@ public List<AuthorCount> getAuthorCountsByBirthYear() throws SQLException {
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

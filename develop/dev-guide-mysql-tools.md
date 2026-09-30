@@ -41,13 +41,13 @@ brew link mysql-client@8.0
 /opt/homebrew/opt/mysql-client@8.0/bin/mysql --comments --host ${YOUR_IP_ADDRESS} --port ${YOUR_PORT_NUMBER} -u ${your_user_name} -p
 ```
 
-上記のコマンドの`/opt/homebrew/opt/mysql-client@8.0/bin/mysql` 、実際の環境の MySQL v8.0 クライアントのインストール パスに置き換えます。
+上記のコマンドの`/opt/homebrew/opt/mysql-client@8.0/bin/mysql`を、実際の環境の MySQL v8.0 クライアントのインストール パスに置き換えます。
 
 </div>
 
 <div label="MySQL Shell">
 
-TiDBへの接続には、MySQL Shellを使用します。MySQL Shellは、TiDBのコマンドラインツールとして使用できます。MySQL Shellをインストールするには、 [MySQL Shell ドキュメント](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)手順に従ってください。インストール後、以下のコマンドでTiDBに接続できます。
+TiDBへの接続には、MySQL Shellを使用します。MySQL Shellは、TiDBのコマンドラインツールとして使用できます。MySQL Shellをインストールするには、 [MySQL Shell ドキュメント](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-install.html)の手順に従ってください。インストール後、以下のコマンドでTiDBに接続できます。
 
 ```shell
 mysqlsh --sql mysql://root@<tidb_server_host>:4000

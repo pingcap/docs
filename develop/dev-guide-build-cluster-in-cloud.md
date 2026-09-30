@@ -8,15 +8,15 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 
 # TiDB Cloud Starterインスタンスを作成する {#create-a-tidb-cloud-starter-instance}
 
-このドキュメントでは、TiDB を使い始めるための最も簡単な方法を説明します。TiDB [TiDB Cloud](https://www.pingcap.com/tidb-cloud)を使用してTiDB Cloud Starterインスタンスを作成し、それに接続して、サンプル アプリケーションを実行します。
+このドキュメントでは、TiDB を使い始めるための最も簡単な方法を説明します。[TiDB Cloud](https://www.pingcap.com/tidb-cloud)を使用してTiDB Cloud Starterインスタンスを作成し、それに接続して、サンプル アプリケーションを実行します。
 
 ローカルマシンで TiDB を実行する必要がある場合は、 [TiDBをローカルで起動する](/quick-start-with-tidb.md)を参照してください。
 
-## ステップ1. TiDB Cloud Starterインスタンスを作成します {#step-1-create-a-starter-instance} {#step-1-create-a-starter-instance}
+## ステップ1. TiDB Cloud Starterインスタンスを作成します {#step-1-create-a-starter-instance}
 
 1. TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbcloud.com/free-trial)をクリックしてアカウントを作成してください。
 
-2. TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)。
+2. TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)します。
 
 3. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、 **Create Resource**をクリックします。
 
@@ -36,7 +36,7 @@ aliases: ['/ja/tidb/stable/dev-guide-build-cluster-in-cloud/','/ja/tidb/dev/dev-
 >
 > TiDB Cloud Starterインスタンスに接続するときは、ユーザー名にインスタンスのプレフィックスを含め、名前を引用符で囲む必要があります。詳細については、 [ユーザー名の接頭辞](https://docs.pingcap.com/tidbcloud/select-cluster-tier#user-name-prefix)を参照してください。
 
-## ステップ2. TiDB Cloud Starterインスタンスに接続します {#step-2-connect-to-a-starter-instance} {#step-2-connect-to-a-starter-instance}
+## ステップ2. TiDB Cloud Starterインスタンスに接続します {#step-2-connect-to-a-starter-instance}
 
 1. MySQLクライアントがインストールされていない場合は、お使いのオペレーティングシステムを選択し、以下の手順に従ってインストールしてください。
 
@@ -144,6 +144,6 @@ SELECT 'Hello TiDB Cloud!';
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)
