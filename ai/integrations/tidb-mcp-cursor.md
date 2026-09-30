@@ -64,6 +64,6 @@ TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンス
 
 TiDB MCPサーバーのインストールで問題が発生した場合は、CursorのMCPログを確認してください。
 
-1. エディタ上部のメインメニューで、 **[ビュー]** &gt; **[出力]**をクリックします。
+1. エディタ上部のメインメニューで、 **ビュー** > **出力**をクリックします。
 2. **出力**パネルのドロップダウンメニューから**MCP**を選択してください。
 3. `[error] Could not start MCP server tidb-mcp-server: Error: spawn uvx ENOENT`のようなエラーが表示される場合は、 `uvx`コマンドがシステム環境変数`$PATH`に存在しない可能性があります。macOS ユーザーの場合は、 `uvx`を実行して`brew install uv` 。

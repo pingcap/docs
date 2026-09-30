@@ -325,7 +325,7 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
 
 ごみ箱から削除されたTiDB Cloud Dedicatedクラスターを復元するには、次の手順を実行します。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**[...]**をクリックして、 **Recycle Bin**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**...**をクリックして、 **Recycle Bin**をクリックします。
 
     > **Tip:**
     >
@@ -333,7 +333,7 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
 
 2. **Recycle Bin**ページで、 **Dedicated**タブをクリックすると、 TiDB Cloud Dedicatedクラスターのごみ箱に移動します。
 
-3. 復元したいクラスターを見つけてから、 **[&gt;]**ボタンをクリックして、そのクラスターで使用可能なバックアップを展開します。
+3. 復元したいクラスターを見つけてから、 **>**ボタンをクリックして、そのクラスターで使用可能なバックアップを展開します。
 
 4. 復元したいバックアップの行で、 **...**をクリックし、次に**Restore**を選択します。
 

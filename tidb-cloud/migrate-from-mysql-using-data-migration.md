@@ -456,7 +456,7 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. [Azureポータル](https://portal.azure.com/)の で、MySQL Flexible Server インスタンスの概要ページ (プライベートエンドポイント オブジェクトではありません) に戻り、 **[Essentials]**セクションで**[JSON ビュー]**をクリックして、後で使用するためにリソース ID をコピーします。リソース ID は`/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`形式です。このリソース ID (プライベートエンドポイント ID ではありません) を使用して、 TiDB Cloud DM を構成します。
+4. [Azureポータル](https://portal.azure.com/)の で、MySQL Flexible Server インスタンスの概要ページ (プライベートエンドポイント オブジェクトではありません) に戻り、 **Essentials**セクションで**JSON ビュー**をクリックして、後で使用するためにリソース ID をコピーします。リソース ID は`/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`形式です。このリソース ID (プライベートエンドポイント ID ではありません) を使用して、 TiDB Cloud DM を構成します。
 
 5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように構成する際には、Azureポータルに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続リクエストを承認する必要があります。
 
@@ -529,7 +529,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
-3. **AWS Private Endpoints for External Services**セクションで、 **[Create Private Endpoint for External Services]**をクリックします。
+3. **AWS Private Endpoints for External Services**セクションで、 **Create Private Endpoint for External Services**をクリックします。
 
 4. **Create Private Endpoint for External Services**ダイアログで、プライベートエンドポイントの名前と、MySQLソースデータベース用にAWS PrivateLinkをセットアップした際にコピーした**Endpoint Service Name**を入力します。
 
@@ -971,7 +971,7 @@ TiDB Cloud Dedicatedは、さまざまなシナリオにおけるパフォーマ
 
 2. 対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
 
-3. **Data Migration**ページで、スケールアップする移行ジョブを探します。**Action**列で、 **[...]** &gt; **Scale Up/Down**をクリックします。
+3. **Data Migration**ページで、スケールアップする移行ジョブを探します。**Action**列で、 **...** > **Scale Up/Down**をクリックします。
 
 4. **Scale Up/Down**ウィンドウで、使用する新しい仕様を選択し、 **Submit**をクリックします。ウィンドウの下部に、その仕様の新しい価格が表示されます。
 

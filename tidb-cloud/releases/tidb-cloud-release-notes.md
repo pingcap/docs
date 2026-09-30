@@ -553,7 +553,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         TiDB Cloud Premium の詳細については、 [TiDB Cloud Premium: ミッションクリティカルなSQLのパブリックプレビュー](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/)を参照してください。
 
-        TiDB Cloud Premium を試すには、 [TiDB Cloudコンソール](https://tidbcloud.com/)に移動し、 **[Create Resource]**をクリックして、プランとして**[Premium]**を選択します。詳細については、 [TiDB Cloud Premiumインスタンスを作成します](/tidb-cloud/premium/create-tidb-instance-premium.md)を参照してください。
+        TiDB Cloud Premium を試すには、 [TiDB Cloudコンソール](https://tidbcloud.com/)に移動し、 **Create Resource**をクリックして、プランとして**Premium**を選択します。詳細については、 [TiDB Cloud Premiumインスタンスを作成します](/tidb-cloud/premium/create-tidb-instance-premium.md)を参照してください。
 
 - **TiDB Cloud Dedicated**
 
