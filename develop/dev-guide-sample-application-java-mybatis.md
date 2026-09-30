@@ -196,7 +196,7 @@ cd tidb-java-mybatis-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL` `false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
 
 3. `env.sh`ファイルを保存します。
 
@@ -255,7 +255,7 @@ MyBatis設定ファイル`mybatis-config.xml`を編集します。
 </configuration>
 ```
 
-`${tidb_jdbc_url}` 、 `${tidb_user}` 、および`${tidb_password}`を、ご使用のTiDBの実際の値に置き換えてください。また、 `${mapper_location}`マッパーXML設定ファイルのパスに置き換えてください。複数のマッパーXML設定ファイルがある場合は、それぞれに`<mapper/>`タグを追加する必要があります。次に、次の関数を定義します。
+`${tidb_jdbc_url}` 、 `${tidb_user}` 、および`${tidb_password}`を、ご使用のTiDBの実際の値に置き換えてください。また、 `${mapper_location}`をマッパーXML設定ファイルのパスに置き換えてください。複数のマッパーXML設定ファイルがある場合は、それぞれに`<mapper/>`タグを追加する必要があります。次に、次の関数を定義します。
 
 ```java
 public SqlSessionFactory getSessionFactory() {
@@ -345,13 +345,13 @@ public SqlSessionFactory getSessionFactory() {
 
 ## 次のステップ {#next-steps}
 
-- MyBatis の使用法について詳しくは[MyBatisのドキュメント](http://www.mybatis.org/mybatis-3/)ご覧ください。
+- MyBatis の使用法について詳しくは[MyBatisのドキュメント](http://www.mybatis.org/mybatis-3/)をご覧ください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 - Java開発者向けのコース[JavaからTiDBを操作する](https://eng.edu.pingcap.com/catalog/info/id:212)を通じて学習します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

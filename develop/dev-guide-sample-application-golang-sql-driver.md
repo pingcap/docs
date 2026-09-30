@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/dev/dev-guide-outdated-for-go-sql-driver-mysql','/ja/tidb/de
 
 # Go-MySQL-Driverを使用してTiDBに接続する {#connect-to-tidb-with-go-mysql-driver}
 
-TiDBはMySQL互換データベースであり、 [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)[データベース/SQL](https://pkg.go.dev/database/sql)インターフェース用のMySQL実装です。
+TiDBはMySQL互換データベースであり、 [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)は[database/sql](https://pkg.go.dev/database/sql)インターフェース用のMySQL実装です。
 
 このチュートリアルでは、TiDBとGo-MySQL-Driverを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -195,7 +195,7 @@ cd tidb-golang-sql-driver-quickstart
     USE_SSL='false'
     ```
 
-    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL` `false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空です。
 
 3. `.env`ファイルを保存します。
 
@@ -234,7 +234,7 @@ func openDB(driverName string, runnable func(db *sql.DB)) {
 }
 ```
 
-この機能を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、および`${tidb_db_name}` TiDBの実際の値に置き換える必要があります。TiDB Cloud StarterとTiDB Cloud Essentialはセキュアな接続を必要とします。そのため、 `${use_ssl}`の値を`true`に設定する必要があります。
+この機能を使用する場合は、 `${tidb_host}` 、 `${tidb_port}` 、 `${tidb_user}` 、 `${tidb_password}` 、および`${tidb_db_name}`をTiDBの実際の値に置き換える必要があります。TiDB Cloud StarterとTiDB Cloud Essentialはセキュアな接続を必要とします。そのため、 `${use_ssl}`の値を`true`に設定する必要があります。
 
 ### データを挿入する {#insert-data}
 
@@ -325,10 +325,10 @@ Golangドライバはデータベースへの低レベルアクセスを提供�
 
 - Go-MySQL-Driver の使用法の詳細については[Go-MySQL-Driverのドキュメント](https://github.com/go-sql-driver/mysql/blob/master/README.md)を参照してください。
 - [開発者ガイド](https://docs.pingcap.com/developer/) の [データを挿入する](/develop/dev-guide-insert-data.md)、[データの更新](/develop/dev-guide-update-data.md)、[データを削除する](/develop/dev-guide-delete-data.md)、[単一表の読み取り](/develop/dev-guide-get-data-from-single-table.md)、[トランザクション](/develop/dev-guide-transaction-overview.md)、[SQLパフォーマンス最適化](/develop/dev-guide-optimize-sql-overview.md) などの章を参考に、TiDB アプリケーション開発のベストプラクティスを学びます。
-- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)コースを通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
+- プロフェッショナルな[TiDB開発者向けコース](https://www.pingcap.com/education/)を通じて学習し、試験に合格すると[TiDB認定資格](https://www.pingcap.com/education/certification/)を取得します。
 
 ## お困りですか？ {#need-help}
 
-- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)or [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
+- [Discord](https://discord.gg/DQZ2dy3cuc?utm_source=doc)または[Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap-docs)コミュニティに質問してください。
 - [TiDB Cloudのサポートチケットを送信してください](https://tidb.support.pingcap.com/servicedesk/customer/portals)
 - [TiDB Self-Managedのサポートチケットを送信してください](/support.md)

@@ -16,14 +16,14 @@ TiDBでは、 `LIMIT`文を使ってクエリ結果をページ区切りする�
 SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
 ```
 
-`offset`はレコードの開始番号、 `row_count`ページあたりのレコード数を示します。TiDBは`LIMIT row_count OFFSET offset`構文もサポートしています。
+`offset`はレコードの開始番号、 `row_count`はページあたりのレコード数を示します。TiDBは`LIMIT row_count OFFSET offset`構文もサポートしています。
 
 ページ区切りを使用する場合、データをランダムに表示する必要がない限り、 `ORDER BY`ステートメントを使用してクエリ結果を並べ替えることをお勧めします。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-例えば、 [書店](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーに最新刊行書籍をページ分けして表示させるには、 `LIMIT 0, 10`ステートメントを使用します。このステートメントは、結果リストの最初のページを返します。1ページあたりのレコード数は最大10件です。2ページ目を取得するには、ステートメントを`LIMIT 10, 10`に変更します。
+例えば、 [Bookshop](/develop/dev-guide-bookshop-schema-design.md)アプリケーションのユーザーに最新刊行書籍をページ分けして表示させるには、 `LIMIT 0, 10`ステートメントを使用します。このステートメントは、結果リストの最初のページを返します。1ページあたりのレコード数は最大10件です。2ページ目を取得するには、ステートメントを`LIMIT 10, 10`に変更します。
 
 ```sql
 SELECT *
@@ -214,7 +214,7 @@ pageMetaList.forEach((pageMeta) -> {
 
 ### 非クラスター化インデックステーブル {#non-clustered-index-table}
 
-非クラスター化インデックステーブル (「非インデックス構成テーブル」とも呼ばれます) の場合、内部フィールド`_tidb_rowid`ページ区切りキーとして使用でき、ページ区切りの方法は単一フィールドの主キー テーブルの場合と同じです。
+非クラスター化インデックステーブル (「非インデックス構成テーブル」とも呼ばれます) の場合、内部フィールド`_tidb_rowid`をページ区切りキーとして使用でき、ページ区切りの方法は単一フィールドの主キー テーブルの場合と同じです。
 
 > **Tip:**
 >
@@ -304,7 +304,7 @@ ORDER BY page_num;
 30 rows in set (0.28 sec)
 ```
 
-ページ 1 のすべての評価レコードを削除するには、上記の結果の`start_key`と`end_key`ページ 1 の値に置き換えます。
+ページ 1 のすべての評価レコードを削除するには、上記の結果の`start_key`と`end_key`をページ 1 の値に置き換えます。
 
 ```sql
 SELECT *

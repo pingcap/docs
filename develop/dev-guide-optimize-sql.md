@@ -22,7 +22,7 @@ tiup demo bookshop prepare --host 127.0.0.1 --port 4000 --books 1000000
 
 SQL クエリが遅くなる最も一般的な理由は、 `SELECT`文が完全なテーブルスキャンを実行するか、間違ったインデックスを使用することです。
 
-TiDB が主キーではない列またはセカンダリインデックス内の列に基づいて大規模なテーブルから少数の行を取得する場合、通常はパフォーマンスが低下します。
+TiDB が主キーでもセカンダリインデックス内の列でもない列に基づいて大規模なテーブルから少数の行を取得する場合、通常はパフォーマンスが低下します。
 
 ```sql
 SELECT * FROM books WHERE title = 'Marian Yost';
@@ -116,7 +116,7 @@ TiDB 実行計画の詳細については、 [TiDB クエリ実行計画の概�
 
 インデックスが、SQL文によってクエリされるすべての列を含むカバリングインデックスである場合は、インデックスデータをスキャンするだけでクエリに十分です。
 
-たとえば、次のクエリでは、 `title`に基づいて対応する`price`クエリするだけで済みます。
+たとえば、次のクエリでは、 `title`に基づいて対応する`price`をクエリするだけで済みます。
 
 ```sql
 SELECT title, price FROM books WHERE title = 'Marian Yost';
@@ -243,7 +243,7 @@ EXPLAIN SELECT * FROM books WHERE id = 896;
 
 ### 参照 {#see-also}
 
-- [EXPLAIN コマンド](/explain-walkthrough.md)
+- [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
 - [インデックスを使用するステートメントを説明する](/explain-indexes.md)
 
 ## ヘルプが必要ですか? {#need-help}
