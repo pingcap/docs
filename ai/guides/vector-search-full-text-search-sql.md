@@ -30,7 +30,7 @@ TiDBの全文検索機能は、以下の機能を提供します。
 
 - AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
-全文検索を使用する前に、 {{{ .starter }}}インスタンスがサポートされているリージョンで作成されていることを確認してください。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+全文検索を使用する前に、 {{{ .starter }}}インスタンスがサポートされているリージョンで作成されていることを確認してください。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)に従って作成してください。
 
 全文検索を実行するには、以下の手順に従ってください。
 
@@ -202,7 +202,7 @@ SELECT COUNT(*) FROM stock_items
 +----------+
 ```
 
-#### 複数語検索: トークン化とクエリのセマンティクス
+#### 複数語検索: トークン化とクエリのセマンティクス {#multi-word-search-tokenization-and-query-semantics}
 
 `fts_match_word()` を使用すると、クエリ文字列はパーサーのルールに従ってトークン化され、各トークンが独立して照合されます。
 
@@ -227,11 +227,11 @@ SELECT * FROM users WHERE fts_match_word('Alice Smith', name);
 >
 > TiDB 全文検索は、すべてのクエリトークンが連続して指定された順序で出現する必要がある完全なフレーズ一致をサポートしていません。
 
-#### プレフィックス検索
+#### プレフィックス検索 {#prefix-search}
 
 **サポートされていません。**
 
-#### 繰り返し語が関連性スコアに与える影響
+#### 繰り返し語が関連性スコアに与える影響 {#effect-of-repeated-terms-on-relevance-scores}
 
 `fts_match_word()` が返す関連性スコアは、**BM25** アルゴリズムに基づいています。クエリ文字列に繰り返し語が含まれる場合、その語の単語頻度はスコアリングで 2 倍になります。
 
@@ -242,17 +242,17 @@ SELECT * FROM users WHERE fts_match_word('Alice alice bob', name);
 
 この例では、`Alice` に一致するドキュメントは、`bob` と比べて 2 倍の重みが与えられます。これは、単語頻度 (TF) に基づいて関連性を評価する BM25 アルゴリズムの想定どおりの動作です。
 
-#### 関連性スコアリングアルゴリズム
+#### 関連性スコアリングアルゴリズム {#relevance-scoring-algorithm}
 
 TiDB 全文検索では、関連性スコアの計算に **BM25Tantivy** アルゴリズムを使用します。このアルゴリズムは、パフォーマンス向上のために Count-Min Sketch を使用して文書頻度 (DF) を近似する、古典的な BM25 (Okapi BM25) アルゴリズムの変種です。
 
-**BM25 formula (standard form):**
+**BM25の式（標準形）：**
 
 ```
 score(D, Q) = sum_{t in Q} IDF(t) * TF(t, D) * (k1 + 1) / (TF(t, D) + k1 * (1 - b + b * |D| / avgdl))
 ```
 
-Where:
+ここで：
 
 - `t`: クエリ語
 - `Q`: クエリ文字列（トークン化後のすべてのトークン）

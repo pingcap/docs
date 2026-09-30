@@ -31,7 +31,7 @@ embed_func = EmbeddingFunction(
 
 テーブルスキーマにベクトルフィールドを作成するには、 `embed_func.VectorField()`を使用します。
 
-自動埋め込みを有効にするには、埋め込みたいフィールドに`source_field`を設定します。
+自動埋め込みを有効にするには、`source_field`に埋め込みたいフィールドを設定します。
 
 ```python hl_lines="7"
 from pytidb.schema import TableModel, Field
@@ -47,7 +47,7 @@ table = client.create_table(schema=Chunk, if_exists="overwrite")
 
 埋め込みモデルによって自動的に決定されるため、 `dimensions`パラメータを指定する必要はありません。
 
-ただし、 `dimensions`パラメータを設定してデフォルトのディメンションを上書きすることができます。
+ただし、 `dimensions`パラメータを設定してデフォルトの次元を上書きすることができます。
 
 ### ステップ3. サンプルデータを挿入する {#step-3-insert-some-sample-data}
 

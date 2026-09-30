@@ -444,7 +444,7 @@ SHOW TABLES;
 </div>
 </SimpleTab>
 
-## 完全な `pytidb` CRUD の例を実行する
+## 完全な `pytidb` CRUD の例を実行する {#run-the-complete-pytidb-crud-example}
 
 `pytidb` リポジトリには、TiDB に接続し、テキスト、ベクトル、JSON のカラムを持つテーブルを作成して、CRUD 操作を実行する完全なサンプルが用意されています。
 
@@ -490,4 +490,4 @@ SHOW TABLES;
     python main.py
     ```
 
-このサンプルは、各 CRUD 操作の結果を出力し、終了時にサンプルテーブルを削除します。実装を確認するには、 [`pytidb` basic example](https://github.com/pingcap/pytidb/tree/main/examples/basic) を参照してください。
+このサンプルは、各 CRUD 操作の結果を出力し、終了時にサンプルテーブルを削除します。実装を確認するには、 [`pytidb`の基本的な例](https://github.com/pingcap/pytidb/tree/main/examples/basic) を参照してください。

@@ -115,8 +115,8 @@ TiDBを、埋め込みプロバイダー、AIフレームワーク、アプリ�
 | すべての統合 | [TiDB 向け AI 統合](/ai/integrations/vector-search-integration-overview.md) |
 | 自動埋め込みプロバイダー | [自動埋め込みの概要](/ai/integrations/vector-search-auto-embedding-overview.md) |
 | AIフレームワーク | [LlamaIndex](/ai/integrations/vector-search-integrate-with-llamaindex.md) |
-| ORMライブラリ | [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md), [Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md), and [Peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
-| クラウド埋め込みサービス | [Jina AI Embedding](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md) and [Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md) |
+| ORMライブラリ | [SQLAlchemy](/ai/integrations/vector-search-integrate-with-sqlalchemy.md)、[Django ORM](/ai/integrations/vector-search-integrate-with-django-orm.md)、[Peewee](/ai/integrations/vector-search-integrate-with-peewee.md) |
+| クラウド埋め込みサービス | [Jina AI Embedding](/ai/integrations/vector-search-integrate-with-jinaai-embedding.md)、[Amazon Bedrock](/ai/integrations/vector-search-integrate-with-amazon-bedrock.md) |
 | MCPクライアントとAI開発ツール | [TiDB MCP Server](/ai/integrations/tidb-mcp-server.md) |
 
 ## 参照 {#reference}
