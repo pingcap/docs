@@ -5,7 +5,7 @@ summary: TiUP DMは、DMクラスタの管理（デプロイ、起動、停止�
 
 # TiUP DM {#tiup-dm}
 
-TiDBクラスタの管理に使用される[TiUPクラスタ](/tiup/tiup-component-cluster.md)と同様に、 TiUP DMはDMクラスタの管理に使用されます。TiUP TiUP DMコンポーネントを使用すると、DMクラスタのデプロイ、起動、停止、破棄、エラスティックスケーリング、DMクラスタのアップグレード、DMクラスタの設定パラメータの管理など、DMクラスタの日常的な運用および保守タスクを実行できます。
+TiDBクラスタの管理に使用される[TiUPクラスタ](/tiup/tiup-component-cluster.md)と同様に、 TiUP DMはDMクラスタの管理に使用されます。TiUP DMコンポーネントを使用すると、DMクラスタのデプロイ、起動、停止、破棄、エラスティックスケーリング、DMクラスタのアップグレード、DMクラスタの設定パラメータの管理など、DMクラスタの日常的な運用および保守タスクを実行できます。
 
 ## 構文 {#syntax}
 
@@ -13,7 +13,7 @@ TiDBクラスタの管理に使用される[TiUPクラスタ](/tiup/tiup-compone
 tiup dm [command] [flags]
 ```
 
-`[command]`コマンド名を渡すために使用されます。サポートされているコマンドについては[コマンドリスト](#command-list)を参照してください。
+`[command]`はコマンド名を渡すために使用されます。サポートされているコマンドについては[コマンドリスト](#command-list)を参照してください。
 
 ## オプション {#options}
 
@@ -31,7 +31,7 @@ tiup dm [command] [flags]
 
 - コマンドでこのオプションを指定しない場合は、デフォルト値として`builtin`が使用されます。
 
-### --sshタイムアウト {#ssh-timeout}
+### --ssh-timeout {#ssh-timeout}
 
 - SSH 接続のタイムアウトを秒単位で指定します。
 - データ型: `UINT`
@@ -47,19 +47,19 @@ tiup dm [command] [flags]
 
 - すべてのリスクのある操作の2次確認をスキップします。スクリプトを使用してTiUPを呼び出す場合を除き、このオプションの使用は推奨されません。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### -v, --version {#v-version}
 
-- TiUP DMの現在のバージョンを印刷します。
+- TiUP DMの現在のバージョンを出力します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### -h, --help {#h-help}
 
 - 指定されたコマンドに関するヘルプ情報を出力します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ## コマンドリスト {#command-list}
 
@@ -71,7 +71,7 @@ tiup dm [command] [flags]
 - [start](/tiup/tiup-component-dm-start.md) : 指定されたクラスターを起動します。
 - [stop](/tiup/tiup-component-dm-stop.md) : 指定されたクラスターを停止します。
 - [restart](/tiup/tiup-component-dm-restart.md) : 指定されたクラスターを再起動します。
-- [scale-in](/tiup/tiup-component-dm-scale-in.md) : 指定されたクラスター内でスケールします。
+- [scale-in](/tiup/tiup-component-dm-scale-in.md) : 指定されたクラスターをスケールインします。
 - [scale-out](/tiup/tiup-component-dm-scale-out.md) : 指定されたクラスターをスケールアウトします。
 - [upgrade](/tiup/tiup-component-dm-upgrade.md) : 指定されたクラスターをアップグレードします。
 - [prune](/tiup/tiup-component-dm-prune.md) : 指定されたクラスターの Tombstone ステータスのインスタンスをクリーンアップします。
@@ -84,4 +84,5 @@ tiup dm [command] [flags]
 - [enable](/tiup/tiup-component-dm-enable.md) : マシンの再起動後にクラスター サービスを自動的に有効化します。
 - [disable](/tiup/tiup-component-dm-disable.md) : マシンの再起動後にクラスター サービスの自動有効化を無効にします。
 - [help](/tiup/tiup-component-dm-help.md) : ヘルプ情報を出力します。
+
 [&lt;&lt; 前のページに戻る - TiUP参照コンポーネントリスト](/tiup/tiup-reference.md#component-list)

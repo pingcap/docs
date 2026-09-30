@@ -68,11 +68,11 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
     > **Note:**
     >
-    > フラグ`--full` 、およびコンポーネントバージョン`global-version`が指定されていない場合は、一部のメタ情報のみが複製されます。
+    > `--full`フラグと`global-version`フラグ、およびコンポーネントバージョンが指定されていない場合は、一部のメタ情報のみが複製されます。
 
 - 特定のプラットフォームからパッケージをクローンするかどうかを決定します
 
-    特定のプラットフォーム用のパッケージのみをクローンしたい場合は、 `-os`と`-arch`使ってプラットフォームを指定します。例：
+    特定のプラットフォーム用のパッケージのみをクローンしたい場合は、 `-os`と`-arch`を使ってプラットフォームを指定します。例：
 
     - Linux のクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --os=linux`コマンドを実行します。
     - amd64 のクローンを作成するには、 `tiup mirror clone <target-dir> [global-version] --arch=amd64`コマンドを実行します。
@@ -90,7 +90,7 @@ tiup mirror clone <target-dir> [global-version] [flags]
 
 ### プライベートリポジトリを管理する {#manage-the-private-repository}
 
-`tiup mirror clone`でクローンしたリポジトリは、SCP、NFS経由でファイルを共有するか、HTTPまたはHTTPSプロトコル経由でリポジトリを公開することで、 `tiup mirror clone`のホスト間で共有できます。`tiup mirror set <location>`でリポジトリの場所を指定します。
+`tiup mirror clone`でクローンしたリポジトリは、SCP、NFS経由でファイルを共有するか、HTTPまたはHTTPSプロトコル経由でリポジトリを公開することで、ホスト間で共有できます。`tiup mirror set <location>`でリポジトリの場所を指定します。
 
 ```bash
 tiup mirror set /shared_data/tiup
@@ -143,7 +143,7 @@ tiup mirror init /data/mirror
 tiup mirror genkey
 ```
 
-秘密鍵`jdoe`に`~/.tiup/keys/private.json` `/data/mirror`の所有権を付与する:
+秘密鍵`~/.tiup/keys/private.json`を使用して、 `jdoe`に`/data/mirror`の所有権を付与する:
 
 ```bash
 tiup mirror set /data/mirror
