@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-cs/','/ja/tidb/dev/dev-g
 
 # C#を使用してTiDBに接続する {#connect-to-tidb-with-c}
 
-C#（「シーシャープ」と発音）は、Microsoftが開発した.NETファミリーのプログラミング言語の1つです。他の.NET言語には、VB.NETとF#があります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、MySQLプロトコルを使用してC#アプリケーションをTiDBに接続します。これは、TiDBが[MySQLとの互換性](/mysql-compatibility.md)が高いためです。
+C#（「シーシャープ」と発音）は、Microsoftが開発した.NETファミリーのプログラミング言語の1つです。他の.NET言語には、VB.NETとF#があります。このチュートリアルでは、C#とMySQL Connector/NETを使用して、MySQLプロトコルを使用してC#アプリケーションをTiDBに接続します。これは、TiDBは[MySQLとの互換性](/mysql-compatibility.md)が高いためです。
 
 .NETはWindowsで広く利用されていますが、macOSやLinuxでも利用可能です。どのプラットフォームでもコマンドやコードはほぼ同じで、プロンプトやファイルパスにわずかな違いがあるだけです。
 
