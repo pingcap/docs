@@ -11,7 +11,7 @@ summary: "`INSPECTION_SUMMARY` 検査概要テーブルについて説明しま�
 >
 > このテーブルは TiDB Self-Managed にのみ適用され、 [TiDB Cloud](https://docs.pingcap.com/tidbcloud/)では使用できません。
 
-`information_schema.inspection_summary`検査概要表の構造は次のとおりです。
+`information_schema.inspection_summary`検査概要テーブルの構造は次のとおりです。
 
 ```sql
 USE information_schema;
@@ -49,7 +49,7 @@ DESC inspection_summary;
 
 使用例:
 
-診断結果表と診断監視サマリー表はどちらも、 `hint`を使用して診断時間範囲を指定できます。`select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary`は、 `2020-03-07 12:00:00` ～ `2020-03-07 13:00:00`の期間の監視サマリーです。監視サマリー表と同様に、 `inspection_summary`表を使用すると、異なる2期間のデータを比較することで、差異の大きい監視項目を素早く見つけることができます。
+診断結果テーブルと診断監視サマリーテーブルはどちらも、 `hint`を使用して診断時間範囲を指定できます。`select /*+ time_range('2020-03-07 12:00:00','2020-03-07 13:00:00') */* from inspection_summary`は、 `2020-03-07 12:00:00` ～ `2020-03-07 13:00:00`の期間の監視サマリーです。監視サマリーテーブルと同様に、 `inspection_summary`テーブルを使用すると、異なる2期間のデータを比較することで、差異の大きい監視項目を素早く見つけることができます。
 
 次の例では、2つの期間における読み取りリンクの監視メトリックを比較します。
 
