@@ -5,7 +5,7 @@ summary: "`tiup mirror publish` コマンドは、新しいコンポーネント
 
 # tiup mirror publish {#tiup-mirror-publish}
 
-コマンド`tiup mirror publish` 、新しいコンポーネントまたは既存のコンポーネントの新しいバージョンを公開するために使用されます。対象コンポーネントへのアクセス権を持つコンポーネントオーナーのみが公開できます。新しいコンポーネントオーナーを追加するには、コマンド[`grant`コマンド](/tiup/tiup-command-mirror-grant.md)の使用方法を参照してください。
+コマンド`tiup mirror publish`は、新しいコンポーネントまたは既存のコンポーネントの新しいバージョンを公開するために使用されます。対象コンポーネントへのアクセス権を持つコンポーネントオーナーのみが公開できます。新しいコンポーネントオーナーを追加するには、[`grant`コマンド](/tiup/tiup-command-mirror-grant.md)の使用方法を参照してください。
 
 ## 構文 {#syntax}
 
@@ -28,7 +28,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 - データ型: `STRING`
 - デフォルト: "${TIUP_HOME}/keys/private.json"
 
-### - アーチ {#arch}
+### --arch {#arch}
 
 - `<tarball>`のバイナリファイルが実行できるプラットフォームを指定します。単一の`<tarball>`パッケージの場合、プラットフォームは以下のオプションからのみ選択できます。
 
@@ -42,11 +42,11 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 > **Note:**
 >
-> `--arch` `any`に設定する場合は、 `--os` `any`に設定する必要があります。
+> `--arch`を`any`に設定する場合は、 `--os`も`any`に設定する必要があります。
 
 ### --os {#os}
 
-- `<tarball>`のバイナリファイルが実行できるオペレーティングシステムを指定します。`<tarball>`パッケージの場合、オペレーティングシステムは以下のオプションからのみ選択できます。
+- `<tarball>`のバイナリファイルが実行できるオペレーティングシステムを指定します。単一の`<tarball>`パッケージの場合、オペレーティングシステムは以下のオプションからのみ選択できます。
 
     - `linux` : ファイルが Linux オペレーティングシステムで実行されることを示します。
     - `darwin` : ファイルが Darwin オペレーティングシステムで実行されることを示します。
@@ -58,7 +58,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 > **Note:**
 >
-> `--os` `any`に設定する場合は、 `--arch` `any`に設定する必要があります。
+> `--os`を`any`に設定する場合は、 `--arch`も`any`に設定する必要があります。
 
 ### --desc {#desc}
 
@@ -66,7 +66,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 - データ型: `String`
 - デフォルト: NULL
 
-### - 隠れる {#hide}
+### --hide {#hide}
 
 - コンポーネントが非表示かどうかを指定します。非表示のコンポーネントの場合、 `tiup list -all`の結果リストには表示されますが、 `tiup list`の結果リストには表示されません。
 - データ型: `STRING`
@@ -82,7 +82,7 @@ tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 
 - コマンドが正常に実行された場合、出力はありません。
 - コンポーネント所有者にターゲットコンポーネントを変更する権限がない場合:
-    - ミラーがリモート ミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`報告します。
-    - ミラーがローカル ミラーの場合、 TiUP はエラー`Error: the signature is not correct`報告します。
+    - ミラーがリモート ミラーの場合、 TiUP はエラー`Error: The server refused, make sure you have access to this component`を報告します。
+    - ミラーがローカル ミラーの場合、 TiUP はエラー`Error: the signature is not correct`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

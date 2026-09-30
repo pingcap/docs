@@ -19,7 +19,7 @@ summary: TiUP クラスタは、ハードウェアとソフトウェア環境が
 
 ### numactl {#numactl}
 
-ターゲットマシンに`numactl`がインストールされているかどうかを確認してください。ターゲットマシンに複数のコアが紐付けられている場合は、 `numactl`をインストールする必要があります。
+ターゲットマシンに`numactl`がインストールされているかどうかを確認してください。ターゲットマシンでコアのバインド（tied cores）が設定されている場合は、 `numactl`をインストールする必要があります。
 
 ### システム時間 {#system-time}
 
@@ -86,7 +86,7 @@ SELinuxが無効になっていない場合は、 `/etc/selinux/config`ファイ
 
 FirewallD サービスが有効になっているかどうかを確認してください。FirewallD サービスを無効にするか、TiDB クラスター内の各サービスに権限ルールを追加することをお勧めします。
 
-### irqバランス {#irqbalance}
+### irqbalance {#irqbalance}
 
 irqbalanceサービスが有効になっているかどうかを確認してください。irqbalanceサービスを有効にすることをお勧めします。
 
@@ -138,7 +138,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 - クラスターがまだデプロイされていない場合は、クラスターのデプロイに使用する[topology.yml](/tiup/tiup-cluster-topology-reference.md)ファイルを渡す必要があります。このファイルの内容に従って、 tiup-clusterは対応するマシンに接続し、チェックを実行します。
 - クラスターがすでにデプロイされている場合は、チェック オブジェクトとして`<cluster-name>`を使用できます。
-- 既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`両方を使用できます。
+- 既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`の両方を使用できます。
 
 > **Note:**
 >
@@ -146,17 +146,17 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ## オプション {#options}
 
-### - 適用する {#apply}
+### --apply {#apply}
 
 - 失敗したチェック項目の自動修復を試みます。現在、 tiup-cluster は以下のチェック項目のみを修復しようとします。
     - SELinux
     - ファイアウォール
-    - irqバランス
+    - irqbalance
     - カーネルパラメータ
     - システム制限
     - THP (透過的巨大ページ)
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 > **Note:**
 >
@@ -166,11 +166,11 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 > tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
 > ```
 
-### - クラスタ {#cluster}
+### --cluster {#cluster}
 
 - チェックがデプロイ済みのクラスターを対象としていることを示します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 - コマンド形式:
 
     ```shell
@@ -179,7 +179,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> - `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプション`tiup cluster check <cluster-name> --cluster`を追加する必要があります。
+> - `tiup cluster check <cluster-name>`コマンドを使用する場合は、 `--cluster`オプションを追加する必要があります: `tiup cluster check <cluster-name> --cluster`
 > - `tiup cluster check`では、次のコマンド形式を使用して、既存のクラスターの`scale-out.yml`ファイルを確認することもサポートされています。
 >
 >     ```shell
@@ -194,7 +194,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみがチェックされます。
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがチェックされます。
 
 ### -R, --role {#r-role}
 
@@ -204,25 +204,25 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみがチェックされます。
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがチェックされます。
 
-### --enable-CPU {#enable-cpu}
+### --enable-cpu {#enable-cpu}
 
 - CPUコア数のチェックを有効にします。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### --enable-disk {#enable-disk}
 
 - fio ディスク パフォーマンス テストを有効にします。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### --enable-mem {#enable-mem}
 
 - メモリサイズのチェックを有効にします。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### --u, --user {#u-user}
 
@@ -250,13 +250,13 @@ tiup cluster check <topology.yml | cluster-name> [flags]
     - クラスターに`--cluster`オプションが追加された場合、パスワードはクラスターのデプロイ時にトポロジファイルに指定されたユーザーのパスワードになります。
     - クラスターにオプション`--cluster`が追加されていない場合、パスワードはオプション`-u/--user`で指定されたユーザーのパスワードになります。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ### -h, --help {#h-help}
 
 - 関連するコマンドのヘルプ情報を出力します。
 - データ型: `BOOLEAN`
-- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないでください。
+- このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
 ## 出力 {#output}
 
@@ -264,7 +264,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 - `Node` : ターゲットノード
 - `Check` : チェック項目
-- `Result` : チェック結果（合格、警告、不合格）
+- `Result` : チェック結果（Pass、Warn、Fail）
 - `Message` : 結果の説明
 
 [&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)

@@ -1,6 +1,6 @@
 ---
 title: tiup mirror modify
-summary: tiup mirror modifyコマンドは、公開済みコンポーネントを変更するために使用されます。有効なコンポーネント所有者のみが、公開済みコンポーネントを変更できます。構文は「tiup mirror modify <コンポーネント>[バージョン] [フラグ]」です。オプションには、-k、--yank、--hide、--standaloneがあります。コマンドが正常に実行された場合、出力はありません。コンポーネント所有者に対象コンポーネントを変更する権限がない場合、 TiUPはエラーを報告します。
+summary: tiup mirror modifyコマンドは、公開済みコンポーネントを変更するために使用されます。有効なコンポーネント所有者のみが、公開済みコンポーネントを変更できます。構文は「tiup mirror modify <component>[version] [flags]」です。オプションには、-k、--yank、--hide、--standaloneがあります。コマンドが正常に実行された場合、出力はありません。コンポーネント所有者に対象コンポーネントを変更する権限がない場合、 TiUPはエラーを報告します。
 ---
 
 # tiup mirror modify {#tiup-mirror-modify}

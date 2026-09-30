@@ -9,7 +9,7 @@ summary: "`tiup cluster edit-config` コマンドを使用すると、デプロ�
 
 > **Note:**
 >
-> - 設定を変更すると、マシンの追加や削除はできなくなります。マシンの追加方法については[クラスターをスケールアウトする](/tiup/tiup-component-cluster-scale-out.md)を参照してください。マシンの削除方法については[クラスターのスケールイン](/tiup/tiup-component-cluster-scale-in.md)を参照してください。
+> - 設定を変更する際に、マシンの追加や削除はできません。マシンの追加方法については[クラスターをスケールアウトする](/tiup/tiup-component-cluster-scale-out.md)を参照してください。マシンの削除方法については[クラスターのスケールイン](/tiup/tiup-component-cluster-scale-in.md)を参照してください。
 > - `tiup cluster edit-config`コマンドを実行すると、コントロールマシン上でのみ設定が変更されます。その後、 `tiup cluster reload`コマンドを実行して設定を再読み込みする必要があります。
 
 ## 構文 {#syntax}

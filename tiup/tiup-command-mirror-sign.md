@@ -31,7 +31,7 @@ tiup mirror sign <manifest-file> [flags]
 - データ型: `STRING`
 - - このオプションがコマンドで指定されていない場合は、デフォルトで`"${TIUP_HOME}/keys/private.json"`が使用されます。
 
-### - タイムアウト {#timeout}
+### --timeout {#timeout}
 
 - ネットワーク経由での署名のアクセスタイムアウト時間を指定します。単位は秒です。
 - データ型: `INT`
@@ -44,7 +44,7 @@ tiup mirror sign <manifest-file> [flags]
 ## 出力 {#output}
 
 - コマンドが正常に実行された場合、出力はありません。
-- ファイルが指定されたキーで署名されている場合、 TiUP はエラー`Error: this manifest file has already been signed by specified key`報告します。
-- ファイルが有効なマニフェストでない場合、 TiUP はエラー`Error: unmarshal manifest: %s`報告します。
+- ファイルが指定されたキーで署名されている場合、 TiUP はエラー`Error: this manifest file has already been signed by specified key`を報告します。
+- ファイルが有効なマニフェストでない場合、 TiUP はエラー`Error: unmarshal manifest: %s`を報告します。
 
 [&lt;&lt; 前のページに戻る - TiUPミラーコマンドリスト](/tiup/tiup-command-mirror.md#command-list)

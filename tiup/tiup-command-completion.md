@@ -7,7 +7,7 @@ summary: "TiUPは、 tiup completionコマンドを使用して、`bash`およ�
 
 ユーザーの負担を軽減するため、 TiUP はコマンドラインの自動補完用の設定ファイルを生成するコマンド`tiup completion`を提供しています。現在、 TiUP はコマンド`bash`と`zsh`補完をサポートしています。
 
-`bash`コマンドを実行するには、まず`bash-completion`をインストールする必要があります。以下の手順をご覧ください。
+`bash`コマンドを補完するには、まず`bash-completion`をインストールする必要があります。以下の手順をご覧ください。
 
 - macOS の場合: bash バージョンが 4.1 より前の場合は`brew install bash-completion`を実行し、それ以外の場合は`brew install bash-completion@2`を実行します。
 - Linuxの場合：パッケージマネージャーを使用して`bash-completion`をインストールします。たとえば、 `yum install bash-completion`または`apt install bash-completion`を実行します。
@@ -22,9 +22,9 @@ tiup completion <shell>
 
 ## 使用法 {#usage}
 
-### バッシュ {#bash}
+### bash {#bash}
 
-`tiup completion bash`コマンドをファイルに書き込み、 `.bash_profile`でそのファイルをソースコードとして読み込みます。次の例をご覧ください。
+`tiup completion bash`コマンドをファイルに書き込み、 `.bash_profile`でそのファイルを`source`で読み込みます。次の例をご覧ください。
 
 ```shell
 tiup completion bash > ~/.tiup.completion.bash
