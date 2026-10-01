@@ -34,7 +34,7 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
     <SimpleTab groupId="clinicServer">
     <div label="Clinic Server for international users" value="clinic-us">
 
-    [国際ユーザー向けClinic Server](https://clinic.pingcap.com)に進み、**Continue with TiDB Account**を選択してTiDB Cloudのログインページに進みます。TiDB Cloudアカウントをお持ちでない場合は、このページでアカウントを作成してください。
+    [国際ユーザー向けClinic Server](https://clinic.pingcap.com)にアクセスし、**Continue with TiDB Account**を選択してTiDB Cloudのログインページを開きます。TiDB Cloudアカウントをお持ちでない場合は、そのページでアカウントを作成してください。
 
     > **Note:**
     >
@@ -44,7 +44,7 @@ PingCAP Clinicを使用する前に、Diag をインストールし、データ�
 
     <div label="Clinic Server for users in the Chinese mainland" value="clinic-cn">
 
-    [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn)に進み、 **Continue with AskTUG**を選択してAskTUGコミュニティのログインページに進みます。AskTUGアカウントをお持ちでない場合は、このページでアカウントを作成してください。
+    [中国本土のユーザー向けClinic Server](https://clinic.pingcap.com.cn)にアクセスし、 **Continue with AskTUG**を選択してAskTUGコミュニティのログインページを開きます。AskTUGアカウントをお持ちでない場合は、そのページでアカウントを作成してください。
 
     </div>
     </SimpleTab>
