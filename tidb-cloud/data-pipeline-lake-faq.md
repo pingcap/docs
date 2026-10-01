@@ -30,5 +30,5 @@ summary: 关于 TiDB Cloud Data Pipeline 到 TiDB Cloud Lake 的常见问题，�
 Data Pipeline 不会引入单独的计费类别。成本来自管道中涉及的现有组件：
 
 - **Export**（一次性）：按完整快照导出的费用计费。
-- **Changefeed**（持续）：如果启用了增量复制，则按用于持续复制的 changefeed 资源计费。
+- **Changefeed**（持续）：如果启用了增量同步，则按用于持续同步的 changefeed 资源计费。
 - **TiDB Cloud Lake**（持续）：按数据存储和计算集群计算资源计费。详情请参见 [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/)。

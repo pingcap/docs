@@ -10,7 +10,7 @@ summary: 在 TiDB Cloud Essential 实例上使用 export、changefeed 和 TiDB C
 ## 限制 {#restrictions}
 
 - TiDB Cloud Lake 的计算集群 (Warehouse) 必须与您的 Essential 实例位于**同一 region**。
-- 只有带有**主键**的表才能进行增量复制。
+- 只有带有**主键**的表才能进行增量同步。
 - 该管道需要手动设置和维护 AWS IAM 资源与凭证、changefeed 以及 TiDB Cloud Lake 集成。
 - 关于 DDL、DML 和列类型支持的详细信息，请参见 [TiDB Cloud Lake 的 Data Pipeline SQL 兼容性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)。
 
@@ -25,7 +25,7 @@ summary: 在 TiDB Cloud Essential 实例上使用 export、changefeed 和 TiDB C
 
 > **Note:**
 >
-> 本指南假设源 TiDB 数据库中已经存在您希望复制的数据。如果您需要示例数据，请先准备好再继续。
+> 本指南假设源 TiDB 数据库中已经存在您希望同步的数据。如果您需要示例数据，请先准备好再继续。
 
 ## 步骤 1：准备 S3 存储桶访问 {#step-1-prepare-s3-bucket-access}
 

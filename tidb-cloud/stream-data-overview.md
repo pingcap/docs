@@ -1,11 +1,11 @@
 ---
-title: 流式传输数据
-summary: 了解将数据变更从 TiDB Cloud 流式传输到下游系统的选项，包括 Changefeed 和 Data Pipeline。
+title: 同步数据
+summary: 了解将数据变更从 TiDB Cloud 同步到下游系统的选项，包括 Changefeed 和 Data Pipeline。
 ---
 
-# 流式传输数据
+# 同步数据
 
-TiDB Cloud 可以持续将数据变更从你的 TiDB Cloud 实例流式传输到下游系统。它提供以下数据流式传输选项：
+TiDB Cloud 可以持续将数据变更从你的 TiDB Cloud 实例同步到下游系统。它提供以下数据同步选项：
 
 - **Changefeed**：将增量行变更流式传输到下游系统，例如 Apache Kafka、MySQL、TiDB Cloud 和云存储。
 - **Data Pipeline**：导出所选数据的完整快照，然后持续将行变更复制到 TiDB Cloud Lake。

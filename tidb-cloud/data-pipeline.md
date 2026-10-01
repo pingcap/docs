@@ -1,11 +1,11 @@
 ---
 title: Data Pipeline
-summary: 了解如何创建和管理 Data Pipeline，将全量和增量数据从 TiDB Cloud 复制到 TiDB Cloud Lake。
+summary: 了解如何创建和管理 Data Pipeline，将全量和增量数据从 TiDB Cloud 同步到 TiDB Cloud Lake。
 ---
 
 # Data Pipeline
 
-TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Cloud 实例复制到 TiDB Cloud Lake，而无需借助第三方 ETL 工具。对于持续复制，它会先导出所选源数据的完整快照，然后持续复制行变更，以便 TiDB Cloud Lake 中的数据保持最新。
+TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Cloud 实例同步到 TiDB Cloud Lake，而无需借助第三方 ETL 工具。对于持续同步，它会先导出所选源数据的完整快照，然后持续同步行变更，以便 TiDB Cloud Lake 中的数据保持最新。
 
 你可以在以下场景中使用 Data Pipeline：
 
@@ -14,12 +14,12 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
 
 ## 工作原理 {#how-it-works}
 
-启用持续复制的 Data Pipeline 分两个阶段运行：
+启用持续同步的 Data Pipeline 分两个阶段运行：
 
 1. **完整快照导出**：将所选源表一次性导出到外部 stage，TiDB Cloud Lake 再从该 stage 加载快照。
-2. **增量复制**：持续捕获并复制行变更（插入、修改和删除），使 TiDB Cloud Lake 与源端保持一致。
+2. **增量同步**：持续捕获并同步行变更（插入、修改和删除），使 TiDB Cloud Lake 与源端保持一致。
 
-你也可以将管道配置为仅导出完整快照，而不进行持续复制。
+你也可以将管道配置为仅导出完整快照，而不进行持续同步。
 
 **外部 stage**（Amazon S3 或 Alibaba Cloud OSS）用作 TiDB Cloud 实例与 TiDB Cloud Lake 之间的中间存储。TiDB Cloud 会将导出的快照和捕获到的行变更写入 stage，而 TiDB Cloud Lake 会将 stage 中的数据加载到目标计算集群 (Warehouse)。这种方式将写入速率与消费速率解耦，从而提高可靠性，并让你能够控制成本和延时。
 
@@ -80,8 +80,8 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
 
 ### 暂停和恢复 Data Pipeline {#pause-and-resume-a-data-pipeline}
 
-- **Pause**：停止数据复制，并将管道标记为 `Paused`。不会丢失数据，复制进度也会被保留。管道在创建过程中或导出完整快照期间无法暂停。
-- **Resume**：从暂停的位置继续复制，包括继续将数据导入 TiDB Cloud Lake。
+- **Pause**：停止数据同步，并将管道标记为 `Paused`。不会丢失数据，同步进度也会被保留。管道在创建过程中或导出完整快照期间无法暂停。
+- **Resume**：从暂停的位置继续同步，包括继续将数据导入 TiDB Cloud Lake。
 
 要暂停或恢复 Data Pipeline，请进入目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击管道所在行中的 **...**，然后点击 **Pause** 或 **Resume**。
 
@@ -107,7 +107,7 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
 1. 进入目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击管道所在行中的 **...**，然后点击 **Delete**。
 2. 阅读警告并确认操作。删除 Data Pipeline 会：
 
-    - 立即停止所有数据复制。
+    - 立即停止所有数据同步。
     - 尝试移除与该管道关联的 TiDB Cloud Lake 数据源和集成任务。如果移除失败，这些资源可能会保留，并需要手动清理。
     - **不会** 删除已经写入 TiDB Cloud Lake 的数据。
     - **不会** 删除计算集群中的目标数据库或表。

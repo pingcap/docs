@@ -5,7 +5,7 @@ summary: TiDB Cloud Data Pipeline 中 DDL、DML 以及 TiDB 到 TiDB Cloud Lake 
 
 # TiDB Cloud Lake 的 Data Pipeline SQL 兼容性
 
-本文档介绍了 TiDB Cloud Data Pipeline 在将数据复制到 TiDB Cloud Lake 时，对 DDL、DML 和列类型的支持情况。你可以使用本文档来规划 pipeline、验证 schema 兼容性，或排查类型转换问题。
+本文档介绍了 TiDB Cloud Data Pipeline 在将数据同步到 TiDB Cloud Lake 时，对 DDL、DML 和列类型的支持情况。你可以使用本文档来规划 pipeline、验证 schema 兼容性，或排查类型转换问题。
 
 > **注意：**
 >

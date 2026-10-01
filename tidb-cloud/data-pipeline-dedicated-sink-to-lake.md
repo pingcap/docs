@@ -10,7 +10,7 @@ summary: 在 TiDB Cloud Dedicated 集群上使用 Dumpling 和 changefeed 构建
 ## 限制 {#restrictions}
 
 - TiDB Cloud Lake 的计算集群必须与 {{{ .dedicated }}} 集群位于**同一 Region**。
-- 只有带有**主键**的表才能进行增量复制。
+- 只有带有**主键**的表才能进行增量同步。
 - 要创建云存储 changefeed，你的 {{{ .dedicated }}} 集群必须运行 v7.1.1 或更高版本。更多信息，参见[Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)。
 - 该 Data Pipeline 需要手动配置和维护 AWS IAM 资源与凭证、changefeed 以及 TiDB Cloud Lake 集成。
 - 有关 DDL、DML 和列类型支持的更多信息，参见 [TiDB Cloud Lake 的 Data Pipeline SQL 兼容性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)。
@@ -27,7 +27,7 @@ summary: 在 TiDB Cloud Dedicated 集群上使用 Dumpling 和 changefeed 构建
 
 > **Note:**
 >
-> 本文假设你的源 TiDB 数据库中已经有需要复制的数据。如果你需要示例数据，请先准备好再继续。
+> 本文假设你的源 TiDB 数据库中已经有需要同步的数据。如果你需要示例数据，请先准备好再继续。
 
 ## 第 1 步：准备 S3 存储桶访问 {#step-1-prepare-s3-bucket-access}
 
@@ -109,7 +109,7 @@ tiup dumpling \
 >
 > 如果你的 secret access key 包含 URI 特殊字符，例如 `+`、`/` 或 `=`，请先对其进行 URL 编码。或者，你也可以设置 `AWS_ACCESS_KEY_ID` 和 `AWS_SECRET_ACCESS_KEY` 环境变量，或使用 `~/.aws/credentials` 文件，并从 `-o` URI 中省略 `access-key` 和 `secret-access-key` 参数。
 
-导出成功完成后，命令输出中会包含一个 JSON 摘要。请在输出中找到 `SessionParams.tidb_snapshot` 字段，并记录其值。该值就是**快照 TSO**，创建 changefeed 时需要使用它，以便增量复制从已导出的快照位置继续进行。
+导出成功完成后，命令输出中会包含一个 JSON 摘要。请在输出中找到 `SessionParams.tidb_snapshot` 字段，并记录其值。该值就是**快照 TSO**，创建 changefeed 时需要使用它，以便增量同步从已导出的快照位置继续进行。
 
 ## 第 3 步：为增量数据创建 changefeed {#step-3-create-a-changefeed-for-incremental-data}
 
