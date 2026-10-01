@@ -39,7 +39,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
         cdc cli changefeed list --cert client.crt --key client.key --ca ca.crt
         ```
 
-    2. 環境変数`TICDC_CERT_PATH` 、および`TICDC_CA_PATH` `TICDC_KEY_PATH`して、証明書、秘密キー、および CA 証明書へのパスを指定します。
+    2. 環境変数`TICDC_CERT_PATH`、`TICDC_KEY_PATH`、および`TICDC_CA_PATH`を使用して、証明書、秘密キー、および CA 証明書へのパスを指定します。
 
         ```bash
         export TICDC_CERT_PATH=client.crt
@@ -64,7 +64,7 @@ v8.1.0 以降、TiCDC は Mutual Transport Layer Security (mTLS) または TiDB 
 
 ## クライアント認証にTiDBのユーザー名とパスワードを使用する {#use-tidb-username-and-password-for-client-authentication}
 
-1. [ユーザーを作成する](/sql-statements/sql-statement-create-user.md) TiDB に追加し、ユーザーに TiCDC ノードからログインする権限を付与します。
+1. TiDB で[ユーザーを作成し](/sql-statements/sql-statement-create-user.md)、ユーザーに TiCDC ノードからログインする権限を付与します。
 
     ```sql
     CREATE USER 'test'@'ticdc_ip_address' IDENTIFIED BY 'password';
