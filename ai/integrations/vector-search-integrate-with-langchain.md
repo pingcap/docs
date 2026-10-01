@@ -15,7 +15,7 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-langchain/','/ja/tidb/de
 
 > **Tip**
 >
-> 完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)Jupyter Notebook で表示することも、 [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行することもできます。
+> 完全な[サンプルコード](https://github.com/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)を Jupyter Notebook で表示することも、 [Colab](https://colab.research.google.com/github/langchain-ai/langchain/blob/master/docs/docs/integrations/vectorstores/tidb_vector.ipynb)オンライン環境で直接実行することもできます。
 
 ## 前提条件 {#prerequisites}
 
@@ -187,7 +187,7 @@ vector_store = TiDBVectorStore.from_documents(
 
 ### ステップ6. ベクトル検索を実行する {#step-6-perform-a-vector-search}
 
-この手順では、ドキュメント`state_of_the_union.txt`から「大統領はケタンジ・ブラウン・ジャクソンについて何と言ったか」をクエリする方法を示します。
+この手順では、ドキュメント`state_of_the_union.txt`から"What did the president say about Ketanji Brown Jackson"をクエリする方法を示します。
 
 ```python
 query = "What did the president say about Ketanji Brown Jackson"
