@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Lake へのシンク
-summary: export、changefeed、および TiDB Cloud Lake integration を使用して、TiDB Cloud Essential インスタンス上に TiDB Cloud Lake データパイプラインを構築するための手動セットアップガイドです。
+summary: エクスポート、changefeed、および TiDB Cloud Lake integration を使用して、TiDB Cloud Essential インスタンス上に TiDB Cloud Lake データパイプラインを構築するための手動セットアップガイドです。
 ---
 
 # TiDB Cloud Lake へのシンク
 
-このガイドでは、TiDB Cloud Essential インスタンスから TiDB Cloud Lake へのデータパイプラインをエンドツーエンドで設定する方法を説明します。Amazon S3 に完全スナップショットを export し、同じ S3 ロケーションに増分変更を継続的に書き込むための [変更フィード](/tidb-cloud/changefeed-overview.md) を作成し、スナップショットデータと増分データの両方をロード (load) するように TiDB Cloud Lake を設定します。
+このガイドでは、TiDB Cloud Essential インスタンスから TiDB Cloud Lake へのデータパイプラインをエンドツーエンドで設定する方法を説明します。Amazon S3 に完全スナップショットをエクスポートし、同じ S3 ロケーションに増分変更を継続的に書き込むための [変更フィード](/tidb-cloud/changefeed-overview.md) を作成し、スナップショットデータと増分データの両方をロード (load) するように TiDB Cloud Lake を設定します。
 
 ## 制限事項 {#restrictions}
 
@@ -29,7 +29,7 @@ summary: export、changefeed、および TiDB Cloud Lake integration を使用�
 
 ## ステップ 1. S3 バケットアクセスを準備する {#step-1-prepare-s3-bucket-access}
 
-データパイプラインのコンポーネント（export、changefeed、TiDB Cloud Lake）はすべて、同じ S3 バケットへのアクセスを必要とします。S3 バケットにアクセスするには、次のいずれかの方法を選択してください。
+データパイプラインのコンポーネント（エクスポート、changefeed、TiDB Cloud Lake）はすべて、同じ S3 バケットへのアクセスを必要とします。S3 バケットにアクセスするには、次のいずれかの方法を選択してください。
 
 - **Role ARN**（AWS でホストされている TiDB Cloud Essential インスタンス向け）: 3 つのコンポーネントすべてで共有する単一の IAM ロールです。この方法では長期的な認証情報を避けられ、より高いセキュリティを提供します。
 - **Access Key**: セットアップがより簡単で、Role ARN を利用できない場合に必要です。ただし、認証情報の手動管理とローテーションが必要になります。
@@ -48,7 +48,7 @@ summary: export、changefeed、および TiDB Cloud Lake integration を使用�
 
 #### 2. 信頼関係を統合する {#2-consolidate-trust-relationships}
 
-前の手順で作成した IAM ロールは、最初は TiDB Cloud Essential から S3 へデータを export するために設定されています。同じロールは changefeed と TiDB Cloud Lake による S3 バケットアクセスにも使用されるため、これらのコンポーネントもロールを引き受けられるように信頼ポリシーを更新します。
+前の手順で作成した IAM ロールは、最初は TiDB Cloud Essential から S3 へデータをエクスポートするために設定されています。同じロールは changefeed と TiDB Cloud Lake による S3 バケットアクセスにも使用されるため、これらのコンポーネントもロールを引き受けられるように信頼ポリシーを更新します。
 
 追加の信頼関係に必要な以下の値を収集し、その後ロールの信頼ポリシーを更新します。AWS Console で [1. Export CloudFormation でロールを作成する](#1-create-the-role-with-export-cloudformation) で作成したロールに移動し、**Trust relationships** タブを開いて **Edit trust policy** をクリックします。
 
@@ -131,7 +131,7 @@ summary: export、changefeed、および TiDB Cloud Lake integration を使用�
 
 #### 3. パイプライン全体のプレフィックスをカバーするように権限を拡張する {#3-expand-permissions-to-cover-the-full-pipeline-prefix}
 
-CloudFormation で作成された権限ポリシーは、スナップショット export パスのみにスコープされています。changefeed は `{prefix}/incremental/` に書き込み、TiDB Cloud Lake は `{prefix}/snapshot/` と `{prefix}/incremental/` の両方から読み取るため、ポリシーは親プレフィックスをカバーする必要があります。
+CloudFormation で作成された権限ポリシーは、スナップショットのエクスポート先パスのみにスコープされています。changefeed は `{prefix}/incremental/` に書き込み、TiDB Cloud Lake は `{prefix}/snapshot/` と `{prefix}/incremental/` の両方から読み取るため、ポリシーは親プレフィックスをカバーする必要があります。
 
 AWS Console でステップ 1 で作成したロールに移動し、**Permissions** タブでポリシー名をクリックして、リソーススコープを置き換えるようにポリシーを編集します。
 
