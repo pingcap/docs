@@ -20,7 +20,7 @@ ShowLikeOrWhere ::=
 
 ## Syntax description
 
-This statement outputs the execution plan bindings at the GLOBAL or SESSION level. The default scope is SESSION. Currently `SHOW BINDINGS` outputs eight columns, as shown below:
+This statement outputs the execution plan bindings at the GLOBAL or SESSION level. The default scope is SESSION. Currently `SHOW BINDINGS` outputs 11 columns, as shown below:
 
 | Column Name | Description |
 | :---------- | :------------- |
@@ -33,6 +33,8 @@ This statement outputs the execution plan bindings at the GLOBAL or SESSION leve
 | charset | Character set |
 | collation | Sorting rule |
 | source | The way in which a binding is created, including `manual` (created by the `create [global] binding` SQL statement), `capture` (captured automatically by TiDB), and `evolve` (evolved automatically by TiDB) |
+| sql_digest | 规范化 SQL 语句的摘要 |
+| plan_digest | 执行计划的摘要 |
 
 ## Examples
 

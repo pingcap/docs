@@ -139,14 +139,21 @@
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - 同步数据
-  - [Changefeed 概述](/tidb-cloud/changefeed-overview.md)
+  - [概述](/tidb-cloud/stream-data-overview.md)
+  - [Changefeed](/tidb-cloud/changefeed-overview.md)
+  - [Data Pipeline](/tidb-cloud/data-pipeline.md)
   - [到 MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [到 Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [到 Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [到 TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
   - 参考
     - [在 AWS 中设置自托管 Kafka Private Link 服务](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [为 Changefeed 设置 Private Endpoint](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
     - [通过 AWS PrivateLink 设置 Amazon MSK Provisioned 集群](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
+    - [为 TiDB Cloud Data Pipeline 设置外部 stage（AWS）](/tidb-cloud/data-pipeline-configure-external-stage-aws.md)
+    - [为 TiDB Cloud Data Pipeline 设置外部 stage（Alibaba Cloud）](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md)
+    - [TiDB Cloud Lake 的 Data Pipeline SQL 兼容性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
+    - [Data Pipeline 常见问题](/tidb-cloud/data-pipeline-lake-faq.md)
 - 安全
   - [安全概览](/tidb-cloud/security-overview.md)
   - 身份访问控制
@@ -504,3 +511,12 @@
 - 常见问题
   - [TiDB Cloud 常见问题](/tidb-cloud/tidb-cloud-faq.md)
 - [术语表](/tidb-cloud/tidb-cloud-glossary.md)
+
+## _BUILD_ALLOWLIST
+
+- 使用分层存储
+  - [分层存储概览](/tidb-cloud/tiered-storage-overview.md)
+  - [配置和管理分层存储](/tidb-cloud/tiered-storage-guide.md)
+  - [分层存储可观测性](/tidb-cloud/tiered-storage-observability.md)
+  - [分层存储限制](/tidb-cloud/tiered-storage-limitations.md)
+  - [分层存储常见问题](/tidb-cloud/tiered-storage-faq.md)

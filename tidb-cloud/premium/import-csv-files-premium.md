@@ -81,7 +81,14 @@ summary: 了解如何将 Amazon S3 或 Alibaba Cloud Object Storage Service (OSS
 
     你可以使用 AWS access key 或 Role ARN 来访问你的 bucket。完成后，请记下 access key（包括 access key ID 和 secret access key）或 Role ARN 的值，因为你将在[步骤 4](#step-4-import-csv-files)中用到它。
 
+    <CustomContent plan="byoc">
+
+    对于 {{{ .byoc }}}，如果你使用 AWS Role ARN，请确保在开始导入之前，IAM role 已具有标签 `tidbcloud.com/allow-dataplane-access=true`。
+
+    </CustomContent>
+
 - 如果你的 CSV 文件位于 Alibaba Cloud Object Storage Service (OSS)，请为你的 {{{ .premium }}} 实例[配置 Alibaba Cloud Object Storage Service (OSS) 访问](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)。
+
 ## 第 4 步：导入 CSV 文件 {#step-4-import-csv-files}
 
 要将 CSV 文件导入到 {{{ .premium }}}，请执行以下步骤：

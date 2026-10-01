@@ -8,7 +8,7 @@ summary: 了解如何为 Data App 创建、编辑和删除 API 密钥。
 TiDB Cloud Data API 支持[基本认证](https://en.wikipedia.org/wiki/Basic_access_authentication)和[摘要认证](https://en.wikipedia.org/wiki/Digest_access_authentication)。
 
 - [基本认证](https://en.wikipedia.org/wiki/Basic_access_authentication)使用非加密的 base64 编码来传输你的公钥和私钥。HTTPS 确保传输安全。更多信息，请参见 [RFC 7617 - The 'Basic' HTTP Authentication Scheme](https://datatracker.ietf.org/doc/html/rfc7617)。
-- [摘要认证](https://en.wikipedia.org/wiki/Digest_access_authentication)通过在网络传输前对你的公钥、私钥、服务器提供的 nonce 值、HTTP 方法和请求的 URI 进行哈希处理，提供了额外的安全层。这样可以加密私钥，防止其以明文形式传输。更多信息，请参见 [RFC 7616 - HTTP Digest Access Authentication](https://datatracker.ietf.org/doc/html/rfc7616)。
+- [摘要认证](https://en.wikipedia.org/wiki/Digest_access_authentication)通过在网络传输前对你的公钥、私钥、服务器提供的 nonce 值、HTTP 方法和请求的 URI 进行哈希处理，提供了额外的安全层。这样一来，私钥本身绝不会以明文形式传输。更多信息，请参见 [RFC 7616 - HTTP Digest Access Authentication](https://datatracker.ietf.org/doc/html/rfc7616)。
 
 > **注意：**
 >

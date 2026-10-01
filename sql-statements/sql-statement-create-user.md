@@ -59,7 +59,7 @@ mysql> CREATE USER 'newuser' IDENTIFIED BY 'newuserpassword';
 Query OK, 1 row affected (0.04 sec)
 ```
 
-创建一个只能登录到 `192.168.1.1` 的用户。
+创建一个只能从 `192.168.1.1` 登录的用户。
 
 ```sql
 mysql> CREATE USER 'newuser2'@'192.168.1.1' IDENTIFIED BY 'newuserpassword';

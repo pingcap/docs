@@ -91,7 +91,7 @@ TableSample ::=
 | `HIGH_PRIORITY` | `HIGH_PRIORITY` 赋予当前语句比其他语句更高的优先级。 |
 | `SQL_CALC_FOUND_ROWS` | TiDB 不支持此功能，除非设置 [`tidb_enable_noop_functions=1`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)，否则会返回错误。 |
 | `SQL_CACHE`, `SQL_NO_CACHE` | `SQL_CACHE` 和 `SQL_NO_CACHE` 用于控制是否将请求结果缓存到 TiKV（RocksDB）的 BlockCache 中。对于一次性查询大量数据（如 `count(*)` 查询），建议填写 `SQL_NO_CACHE`，以避免冲刷热点用户数据到 BlockCache。 |
-| `STRAIGHT_JOIN` | `STRAIGHT_JOIN` 强制优化器按照 `FROM` 子句中表的顺序进行联合查询。当优化器选择的连接顺序不佳时，可以使用此语法加快查询执行速度。 |
+| `STRAIGHT_JOIN` | `STRAIGHT_JOIN` 强制优化器按照 `FROM` 子句中表的顺序进行连接查询。当优化器选择的连接顺序不佳时，可以使用此语法加快查询执行速度。 |
 | `select_expr` | 每个 `select_expr` 表示要检索的列，包括列名和表达式。`*` 表示所有列。 |
 | `FROM table_references` | `FROM table_references` 子句指示要从中检索行的表（如 `select * from t;`）、表的组合（如 `select * from t1 join t2;`）或甚至没有表（如 `select 1+1 from dual;`，等同于 `select 1+1;`）。 |
 | `WHERE where_condition` | `WHERE` 子句（如果存在）指示行必须满足的条件。结果只包含满足条件的行。 |
@@ -101,7 +101,7 @@ TableSample ::=
 | `LIMIT` | `LIMIT` 子句用于限制返回的行数。`LIMIT` 接受一个或两个数字参数。一个参数时，表示最大返回行数，默认从第一行开始；两个参数时，第一个表示偏移量，第二表示最大返回行数。TiDB 还支持 `FETCH FIRST/NEXT n ROW/ROWS ONLY` 语法，效果与 `LIMIT n` 相同。可以省略 `n`，效果等同于 `LIMIT 1`。 |
 | `Window window_definition` | 这是窗口函数的语法，通常用于进行一些分析性计算。更多信息请参考 [Window Function](/functions-and-operators/window-functions.md)。 |
 | `FOR UPDATE` | `SELECT FOR UPDATE` 子句锁定结果集中的所有数据，以检测其他事务的并发更新。匹配查询条件但不存在于结果集中的数据（如其他事务在当前事务开始后写入的行）不会被读锁定。当 TiDB 使用 [Optimistic Transaction Mode](/optimistic-transaction.md) 时，事务冲突不会在语句执行阶段检测，因此当前事务不会像其他数据库（如 PostgreSQL）那样阻塞执行 `UPDATE`、`DELETE` 或 `SELECT FOR UPDATE`。在提交阶段，`SELECT FOR UPDATE` 所读行会在两阶段中提交，也就是说它们也会加入冲突检测。如果发生写冲突，所有包含 `SELECT FOR UPDATE` 的事务提交失败；如果没有冲突，提交成功。被锁定的行会生成新版本，以便在其他未提交事务提交时检测写冲突。当 TiDB 使用 [Pessimistic Transaction Mode](/pessimistic-transaction.md) 时，行为基本与其他数据库相同。详情请参见 [Differences from MySQL InnoDB](/pessimistic-transaction.md#differences-from-mysql-innodb)。TiDB 支持 `NOWAIT` 修饰符，详见 [TiDB Pessimistic Transaction Mode](/pessimistic-transaction.md#behaviors)。 |
-| `LOCK IN SHARE MODE` | 为了保证兼容性，TiDB 解析这三个修饰符，但会忽略它们。 |
+| `LOCK IN SHARE MODE` | 为了保证兼容性，TiDB 解析这个修饰符，但会忽略它。 |
 | `TABLESAMPLE` | 用于从表中抽取样本行。 |
 
 > **注意：**

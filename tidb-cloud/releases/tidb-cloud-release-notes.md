@@ -8,6 +8,28 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 9 月 29 日 {#september-29-2026}
+
+**常规变更**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium 新增查询延时计数阈值告警。
+
+        TiDB Cloud Premium 现提供三条内置告警规则：当一分钟内超过 20 条 SQL 语句的延时超过 256 ms、512 ms 或 4096 ms 的阈值时，会向你发送通知。这些告警可帮助你检测慢 SQL 语句数量异常增多的时段。
+
+        更多信息，请参见 [TiDB Cloud 内置告警](https://docs.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium)。
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated 支持跨 Region 的 AWS PrivateLink 连接。
+
+        借助此功能，你可以在一个 Region 中创建 AWS 接口端点，并将其私有连接到另一个 Region 中的 TiDB Cloud Dedicated 集群。跨 Region 连接使用相同的连接字符串。
+
+        目前，此功能可按请求提供。每增加一个 Region，都会收取跨 Region PrivateLink 服务费用；移除 Region 不会影响现有连接。如需申请此功能，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
+
+        更多信息，请参见 [通过 AWS PrivateLink 连接到 TiDB Cloud Dedicated 集群](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections/).
+
 ## 2026 年 9 月 22 日 {#september-22-2026}
 
 **常规变更**
@@ -26,9 +48,9 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 * **TiDB Cloud CLI**
 
-  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) 现已进入公开预览版，可用于管理 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 实例和 TiDB Cloud Filesystem。TiDB Cloud Filesystem 是一种无服务器分布式文件系统，专为 AI 代理和自动化工作负载而设计。
+  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) 现已进入公开预览版，可用于管理 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) 实例和 TiDB Cloud Filesystem 中的文件系统。TiDB Cloud Filesystem 是一种无服务器分布式文件系统，专为 AI 代理和自动化工作负载而设计。
 
-  你可以直接使用 `ti`，也可以让脚本、CI 作业和 AI 代理运行它，以自动化 TiDB Cloud 工作流。借助 `ti`，你可以创建和管理 TiDB Cloud Starter 实例、执行 SQL 语句，以及通过文件命令或支持的挂载创建和访问持久化的 Filesystem 工作区。默认 JSON 输出、JMESPath 输出查询，以及在适用命令上支持 `--wait` 和 `--dry-run`，可简化自动化流程。
+  你可以直接使用 `ti`，也可以让脚本、CI 作业和 AI 代理运行它，以自动化 TiDB Cloud 工作流。借助 `ti`，你可以创建和管理 TiDB Cloud Starter 实例、执行 SQL 语句，以及通过文件命令或支持的挂载创建和访问持久化的文件系统工作区。默认 JSON 输出、JMESPath 输出查询，以及在适用命令上支持 `--wait` 和 `--dry-run`，可简化自动化流程。
 
   更多信息，请参见 [开始使用 TiDB Cloud CLI](/ai/ti/ti-quick-start.md) 和 [TiDB Cloud CLI (`ti`) 概览](/ai/ti/ti-overview.md)。
 

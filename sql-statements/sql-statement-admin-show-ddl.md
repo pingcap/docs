@@ -87,7 +87,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
     - `cancelling`：表示操作正在被取消。该状态仅在使用 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务时出现。
     - `cancelled`：表示操作已被取消。
     - `pausing`：表示操作正在被暂停。
-    - `paused`：表示操作已被暂停。该状态仅在使用 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 命令暂停 DDL 任务时出现。你可以使用 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 命令恢复 DDL 任务。
+    - `paused`：表示操作已被暂停。该状态仅在使用 [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 命令暂停 DDL 任务时出现。你可以使用 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 命令恢复 DDL 任务。
     - `done`：表示操作已在 TiDB owner 节点成功执行，但其他 TiDB 节点尚未同步该 DDL 任务的变更。
 - `COMMENTS`：包含用于诊断的附加信息。
     - `ingest`：通过 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) 配置的加速添加索引回填的 ingest 任务。
@@ -122,7 +122,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
     - `rollback done`：表示操作失败且回滚已完成。
     - `rollingback`：表示操作失败，正在回滚。
     - `cancelling`：表示操作正在被取消。该状态仅在使用 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md) 命令取消 DDL 任务时出现。
-    - `paused`：表示操作已被暂停。该状态仅在使用 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 命令暂停 DDL 任务时出现。你可以使用 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 命令恢复 DDL 任务。
+    - `paused`：表示操作已被暂停。该状态仅在使用 [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md) 命令暂停 DDL 任务时出现。你可以使用 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md) 命令恢复 DDL 任务。
 
 </CustomContent>
 

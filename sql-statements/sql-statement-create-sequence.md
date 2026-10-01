@@ -59,7 +59,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 | `MAXVALUE` | `9223372036854775806` 或 `-1` | 指定序列的最大值。当 `INCREMENT` > `0` 时，默认值为 `9223372036854775806`。当 `INCREMENT` < `0` 时，默认值为 `-1`。 |
 | `START` | `MINVALUE` 或 `MAXVALUE` | 指定序列的起始值。当 `INCREMENT` > `0` 时，默认值为 `MINVALUE`。当 `INCREMENT` < `0` 时，默认值为 `MAXVALUE`。 |
 | `CACHE` | `1000` | 指定 TiDB 中序列的本地缓存大小。 |
-| `CYCLE` | `NO CYCLE` | 指定序列是否在达到最大值（或最小值，递减序列时）后重新循环。当 `INCREMENT` > `0` 时，默认值为 `MINVALUE`。当 `INCREMENT` < `0` 时，默认值为 `MAXVALUE`。 |
+| `CYCLE` | `NO CYCLE` | 指定序列在耗尽后是否从最小值重新开始（对于递减序列则从最大值重新开始）。在 `CYCLE` 模式下，当 `INCREMENT` > `0` 时，序列在耗尽后从 `MINVALUE` 重新开始。当 `INCREMENT` < `0` 时，则从 `MAXVALUE` 重新开始。 |
 
 ## `SEQUENCE` 函数
 

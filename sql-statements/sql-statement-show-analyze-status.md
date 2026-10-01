@@ -23,10 +23,14 @@ summary: 关于 TiDB 数据库中 SHOW ANALYZE STATUS 使用情况的概述。
 | `Job_info`       | 任务信息。如果分析的是索引，此信息将包含索引名。当 `tidb_analyze_version =2` 时，此信息还会包括采样率等配置项。 |
 | `Processed_rows` | 已分析的行数 |
 | `Start_time`     | 任务开始时间 |
+| `End_time`       | 任务结束时间 |
 | `State`          | 任务状态，包括 `pending`、`running`、`finished` 和 `failed` |
 | `Fail_reason`    | 任务失败原因。如果执行成功，值为 `NULL`。 |
 | `Instance`       | 执行任务的 TiDB 实例 |
-| `Process_id`     | 执行任务的进程 ID |
+| `Process_ID`     | 执行任务的进程 ID |
+| `Remaining_seconds` | 任务完成前预计剩余的时间（秒） |
+| `Progress`       | 任务进度 |
+| `Estimated_total_rows` | 任务需要分析的总行数 |
 
 ## 概要
 
@@ -58,7 +62,7 @@ mysql> show analyze status;
 | test         | t          | p0             | analyze columns   |              0 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | finished | NULL        | 127.0.0.1:4000 | NULL       | NULL             | NULL     | NULL                |
 | test         | t1         | p0             | analyze columns   |       28523259 | 2022-05-27 11:29:46 | 2022-05-27 11:29:46 | running  | NULL        | 127.0.0.1:4000 | 690208308  | 0s               | 0.9843   | 28978290            |
 +--------------+------------+----------------+-------------------+----------------+---------------------+---------------------+----------+-------------+----------------+------------+------------------+----------+---------------------+
-4 rows in set (0.01 sec)
+5 rows in set (0.01 sec)
 
 mysql> set @@tidb_analyze_version = 2;
 Query OK, 0 rows affected (0.00 sec)

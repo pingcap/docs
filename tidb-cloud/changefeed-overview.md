@@ -7,12 +7,12 @@ summary: TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到�
 
 <CustomContent plan="dedicated">
 
-TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，TiDB Cloud Dedicated 支持将数据流式传输到 Apache Kafka、MySQL、TiDB Cloud 以及云存储。
+TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，TiDB Cloud Dedicated 支持通过 changefeed 将数据流式传输到 Apache Kafka、MySQL、TiDB Cloud 以及云存储。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，TiDB Cloud Premium 支持将数据流式传输到 Apache Kafka 和 MySQL。
+TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，TiDB Cloud Premium 支持通过 changefeed 将数据流式传输到 Apache Kafka 和 MySQL。
 
 </CustomContent>
 

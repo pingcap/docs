@@ -144,9 +144,12 @@
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - 同步数据 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-  - [Changefeed 概述](/tidb-cloud/essential-changefeed-overview.md)
+  - [Changefeed](/tidb-cloud/essential-changefeed-overview.md)
   - [同步到 MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [同步到 Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
+  - [Sink to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
+  - 参考
+    - [TiDB Cloud Lake 的 Data Pipeline SQL 兼容性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
 - 安全
   - [安全概览](/tidb-cloud/security-overview.md)
   - 身份访问控制

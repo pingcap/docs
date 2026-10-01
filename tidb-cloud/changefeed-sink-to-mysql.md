@@ -152,7 +152,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
     - **Case Sensitive**：你可以设置 filter 规则中数据库和表名的匹配是否大小写敏感。默认情况下，匹配不区分大小写。
     - **Filter Rules**：你可以在此列设置 filter 规则。默认有一条规则 `*.*`，表示同步所有表。添加新规则时，TiDB Cloud 会查询 TiDB 中的所有表，并在右侧仅显示符合规则的表。最多可添加 100 条 filter 规则。
     - **Tables with valid keys**：此列显示具有有效键（包括主键或唯一索引）的表。
-    - **Tables without valid keys**：此列显示缺少主键或唯一键的表。这些表在同步时存在挑战，因为缺少唯一标识，可能导致下游处理重复事件时数据不一致。为保证数据一致性，建议在同步前为这些表添加唯一键或主键，或者通过添加 filter 规则排除这些表。例如，可以通过规则 `"!test.tbl1"` 排除表 `test.tbl1`。
+    - **Tables without valid keys**：此列显示缺少主键或唯一键的表。这些表在同步时存在挑战，因为缺少唯一标识，可能导致下游处理重复事件时数据不一致。为保证数据一致性，建议在同步前为这些表添加唯一键或主键，或者通过添加 filter 规则排除这些表。例如，可以通过规则 `!test.tbl1` 排除表 `test.tbl1`。
 
 7. 自定义 **Event Filter**，筛选你希望同步的事件。
 
