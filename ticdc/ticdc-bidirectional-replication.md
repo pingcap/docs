@@ -44,7 +44,7 @@ v7.6.0 以降、双方向レプリケーションで DDL レプリケーショ�
 
 レプリケート可能な DDL には次のものが含まれます。
 
-- [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md) : 列は`null`になるか、 `not null`と`default value`同時に存在する
+- [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-add-column.md) : 列は`null`になるか、 `not null`と`default value`が同時に存在する
 - [`ALTER TABLE ... ADD INDEX`](/sql-statements/sql-statement-add-index.md) （一意ではない）
 - [`ALTER TABLE ... ADD PARTITION`](/sql-statements/sql-statement-alter-table.md)
 - [`ALTER TABLE ... ALTER COLUMN DROP DEFAULT`](/sql-statements/sql-statement-alter-table.md)
@@ -71,7 +71,7 @@ v7.6.0 以降、双方向レプリケーションで DDL レプリケーショ�
 レプリケートできない DDL には次のものが含まれます。
 
 - [`ALTER DATABASE CHARACTER SET`](/sql-statements/sql-statement-alter-table.md)
-- [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-alter-table.md) : 列は`not null`で`default value`ありません
+- [`ALTER TABLE ... ADD COLUMN`](/sql-statements/sql-statement-alter-table.md) : 列は`not null`で、`default value`がありません
 - [`ALTER TABLE ... ADD PRIMARY KEY`](/sql-statements/sql-statement-alter-table.md)
 - [`ALTER TABLE ... ADD UNIQUE INDEX`](/sql-statements/sql-statement-alter-table.md)
 - [`ALTER TABLE ... AUTO_INCREMENT=...`](/sql-statements/sql-statement-alter-table.md)
@@ -80,7 +80,7 @@ v7.6.0 以降、双方向レプリケーションで DDL レプリケーショ�
 - [`ALTER TABLE ... DROP COLUMN`](/sql-statements/sql-statement-alter-table.md)
 - [`ALTER TABLE ... DROP PARTITION`](/sql-statements/sql-statement-alter-table.md)
 - [`ALTER TABLE ... EXCHANGE PARTITION`](/sql-statements/sql-statement-alter-table.md)
-- [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) : `default value`と`comment`除く列の属性を変更できます
+- [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md) : `default value`と`comment`を除く列の属性を変更できます
 - [`ALTER TABLE ... REORGANIZE PARTITION`](/sql-statements/sql-statement-alter-table.md)
 - [`ALTER TABLE ... TRUNCATE PARTITION`](/sql-statements/sql-statement-alter-table.md)
 - [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)
@@ -128,8 +128,8 @@ BDRロールが設定されていない場合、任意のDDLを実行できま�
 >
 > 不正使用を防ぐために:
 >
-> - プライマリクラスターで**レプリケートできない DDL を**実行しようとすると、 [エラー8263](/error-codes.md)が返されます。
-> - セカンダリクラスターで**レプリケート可能な DDL**または**レプリケート不可能な DDL を**実行しようとすると、 [エラー8263](/error-codes.md)が返されます。
+> - プライマリクラスターで**レプリケートできない DDL**を実行しようとすると、 [エラー8263](/error-codes.md)が返されます。
+> - セカンダリクラスターで**レプリケート可能な DDL**または**レプリケート不可能な DDL**を実行しようとすると、 [エラー8263](/error-codes.md)が返されます。
 
 ### 複製不可能なDDLのレプリケーションシナリオ {#replication-scenarios-of-non-replicable-ddls}
 
@@ -159,7 +159,7 @@ BDRロールが設定されていない場合、任意のDDLを実行できま�
 
     > **Note:**
     >
-    > 他のシナリオではBDRロールを設定しないでください。例えば、BDRロールを`PRIMARY` 、 `SECONDARY` 、そして0つを同時に設定しないでください。BDRロールを誤って設定すると、TiDBはデータレプリケーション中にデータの正確性と一貫性を保証できません。
+    > 他のシナリオではBDRロールを設定しないでください。例えば、`PRIMARY`、`SECONDARY`、BDRロールなしを同時に設定しないでください。BDRロールを誤って設定すると、TiDBはデータレプリケーション中にデータの正確性と一貫性を保証できません。
 
 - 通常、レプリケートされたテーブルでのデータ競合を避けるため、 [`AUTO_INCREMENT`](/auto-increment.md)または[`AUTO_RANDOM`](/auto-random.md)を使用しないでください。`AUTO_INCREMENT`または`AUTO_RANDOM`を使用する必要がある場合は、異なるクラスタに異なる主キーを割り当てることができるように、異なるクラスタに異なる`auto_increment_increment`と`auto_increment_offset`を設定できます。例えば、双方向レプリケーションに3つのTiDBクラスタ（A、B、C）がある場合、次のように設定します。
 
@@ -167,7 +167,7 @@ BDRロールが設定されていない場合、任意のDDLを実行できま�
     - クラスタBでは、 `auto_increment_increment=3`と`auto_increment_offset=2001`を設定します
     - クラスタCでは、 `auto_increment_increment=3`と`auto_increment_offset=2002`を設定します
 
-    これにより、A、B、Cは暗黙的に割り当てられた`AUTO_INCREMENT`と`AUTO_RANDOM`で互いに競合することがなくなります。BDRモードでクラスターを追加する必要がある場合は、関連アプリケーションのデータ書き込みを一時的に停止し、すべてのクラスターの`auto_increment_increment`と`auto_increment_offset`に適切な値を設定してから、関連アプリケーションのデータ書き込みを再開する必要があります。
+    これにより、A、B、Cは暗黙的に割り当てられた`AUTO_INCREMENT`の ID と`AUTO_RANDOM`の ID で互いに競合することがなくなります。BDRモードでクラスターを追加する必要がある場合は、関連アプリケーションのデータ書き込みを一時的に停止し、すべてのクラスターの`auto_increment_increment`と`auto_increment_offset`に適切な値を設定してから、関連アプリケーションのデータ書き込みを再開する必要があります。
 
 - 双方向レプリケーションクラスタは書き込み競合を検出できないため、未定義の動作が発生する可能性があります。そのため、アプリケーション側で書き込み競合がないことを確認する必要があります。
 

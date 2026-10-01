@@ -21,11 +21,11 @@ summary: TiCDC アラートルールとアラートの処理方法について�
 
 - 説明：
 
-    レプリケーションタスクが 10分以上遅延します。
+    レプリケーションタスクが 10分を超えて遅延しています。
 
 - 解決：
 
-    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)参照。
+    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ### `cdc_resolvedts_high_delay` {#cdc-resolvedts-high-delay}
 
@@ -35,11 +35,11 @@ summary: TiCDC アラートルールとアラートの処理方法について�
 
 - 説明：
 
-    レプリケーションタスクの解決された TS が 5分以上遅延します。
+    レプリケーションタスクの Resolved TS が 5分を超えて遅延しています。
 
 - 解決：
 
-    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)参照。
+    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ### `ticdc_changefeed_failed` {#ticdc-changefeed-failed}
 
@@ -81,7 +81,7 @@ summary: TiCDC アラートルールとアラートの処理方法について�
 
 - 説明：
 
-    TiCDC クラスターに 10分以上所有者が存在しません。
+    TiCDC クラスターに所有者が存在しない状態が 10分を超えて続いています。
 
 - 解決：
 
@@ -99,7 +99,7 @@ summary: TiCDC アラートルールとアラートの処理方法について�
 
 - 解決：
 
-    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)参照。
+    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ### `ticdc_processor_exit_with_error_count` {#ticdc-processor-exit-with-error-count}
 
@@ -113,7 +113,7 @@ summary: TiCDC アラートルールとアラートの処理方法について�
 
 - 解決：
 
-    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)参照。
+    [TiCDC はレプリケーションの中断を処理します](/ticdc/troubleshoot-ticdc.md#how-do-i-handle-replication-interruptions)を参照してください。
 
 ### `tikv_cdc_min_resolved_ts_no_change_for_1m` {#tikv-cdc-min-resolved-ts-no-change-for-1m}
 
@@ -123,7 +123,7 @@ summary: TiCDC アラートルールとアラートの処理方法について�
 
 - 説明：
 
-    TiKV CDC の最小解決 TS 1 は 1分間進んでいません。
+    TiKV CDC の最小 Resolved TS 1 が 1分間進んでいません。
 
 - 解決：
 
@@ -137,7 +137,7 @@ summary: TiCDC アラートルールとアラートの処理方法について�
 
 - 説明：
 
-    TiKV CDC モジュールは、増分レプリケーションを 10分以上スキャンしました。
+    TiKV CDC モジュールが、増分レプリケーションのために 10分を超えてスキャンを行っています。
 
 - 解決：
 

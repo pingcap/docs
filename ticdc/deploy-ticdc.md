@@ -19,7 +19,7 @@ summary: TiCDCの導入と実行に関するハードウェアおよびソフト
 
 ## TiUPを使用してTiCDCを含む新しいTiDBクラスタをデプロイ {#deploy-a-new-tidb-cluster-that-includes-ticdc-using-tiup}
 
-TiUPを使用して新しい TiDB クラスタをデプロイする場合、同時に TiCDC もデプロイできます。TiUPが TiUPクラスタの起動に使用する設定ファイルに`cdc_servers`セクションを追加するだけで済みます。以下に例を示します。
+TiUPを使用して新しい TiDB クラスタをデプロイする場合、同時に TiCDC もデプロイできます。TiUPが TiDB クラスタの起動に使用する設定ファイルに`cdc_servers`セクションを追加するだけで済みます。以下に例を示します。
 
 ```shell
 cdc_servers:
@@ -33,13 +33,13 @@ cdc_servers:
 
 その他の参考文献：
 
-- 詳しい操作については、 [初期化設定ファイルを編集します](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)ご覧ください。
+- 詳しい操作については、 [初期化設定ファイルを編集します](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file)をご覧ください。
 - 設定可能なフィールドの詳細については、 [TiUPを使用して`cdc_servers`を設定する](/tiup/tiup-cluster-topology-reference.md#cdc_servers)を参照してください。
 - TiDB クラスターをデプロイする詳細な手順については、 [TiUPを使用してTiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
 
 > **Note:**
 >
-> TiCDC をインストールする前に、 TiUPコントロールマシンと TiCDC ホストの間に[SSH相互信頼とパスワードなしのsudoを手動で設定](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)いることを確認してください。
+> TiCDC をインストールする前に、 TiUPコントロールマシンと TiCDC ホストの間に[SSH相互信頼とパスワードなしのsudoを手動で設定](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)していることを確認してください。
 
 ## TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします。 {#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup}
 
@@ -68,9 +68,9 @@ TiCDCクラスタのスケールアウト方法は、新規デプロイ方法と
 
 その他の使用例については、 [TiCDCクラスターをスケールアウトする](/scale-tidb-using-tiup.md#scale-out-a-ticdc-cluster)を参照してください。
 
-## TiUPを使用して既存のTiDBクラスタからTiCDCを削除またはスケーリングする {#delete-or-scale-in-ticdc-from-an-existing-tidb-cluster-using-tiup}
+## TiUPを使用して既存のTiDBクラスタからTiCDCを削除またはスケールインする {#delete-or-scale-in-ticdc-from-an-existing-tidb-cluster-using-tiup}
 
-TiCDCノードの拡張にはTiUPを使用することをお勧めします。拡張コマンドは以下のとおりです。
+TiCDCノードのスケールインにはTiUPを使用することをお勧めします。スケールインのコマンドは以下のとおりです。
 
 ```shell
 tiup cluster scale-in <cluster-name> --node 10.0.1.4:8300
@@ -90,7 +90,7 @@ tiup cluster upgrade <cluster-name> <version> --transfer-timeout 600
 
 > **Note:**
 >
-> 上記のコマンドでは、 `<cluster-name>`と`<version>`実際のクラスタ名とクラスタバージョンに置き換える必要があります。たとえば、バージョンは v8.5.4 です。
+> 上記のコマンドでは、 `<cluster-name>`と`<version>`を実際のクラスタ名とクラスタバージョンに置き換える必要があります。たとえば、バージョンは v8.5.4 です。
 
 ### アップグレードに関する注意事項 {#upgrade-cautions}
 
@@ -108,7 +108,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
 
 このセクションでは[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して TiCDC の設定を変更する方法について説明します。次の例では、 `gc-ttl`のデフォルト値を`86400`から`172800` (48時間) に変更する必要があると想定しています。
 
-1. `tiup cluster edit-config`コマンドを実行します。 `<cluster-name>`実際のクラスター名に置き換えてください。
+1. `tiup cluster edit-config`コマンドを実行します。 `<cluster-name>`を実際のクラスター名に置き換えてください。
 
     ```shell
     tiup cluster edit-config <cluster-name>

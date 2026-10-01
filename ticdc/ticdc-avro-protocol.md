@@ -21,7 +21,7 @@ TiCDC Avroプロトコルは、 [Confluent プラットフォーム](https://doc
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-avro" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=avro" --schema-registry=http://127.0.0.1:8081 --config changefeed_config.toml
 ```
 
-値`--schema-registry`は、プロトコル`https`と認証`username:password`サポートします。ユーザー名とパスワードはURLエンコードされている必要があります。例： `--schema-registry=https://username:password@schema-registry-uri.com` 。
+値`--schema-registry`は、プロトコル`https`と`username:password`認証をサポートします。ユーザー名とパスワードはURLエンコードされている必要があります。例： `--schema-registry=https://username:password@schema-registry-uri.com` 。
 
 > **Note:**
 >
@@ -52,9 +52,9 @@ TiCDC は DML イベントを Kafka イベントに変換し、イベントの�
 }
 ```
 
-- `{{TableName}}`イベントが発生したテーブルの名前を示します。
+- `{{TableName}}`は、イベントが発生したテーブルの名前を示します。
 - `{{Namespace}}`は Avro の名前空間です。
-- `{{ColumnValueBlock}}`データの各列の形式を定義します。
+- `{{ColumnValueBlock}}`は、データの各列の形式を定義します。
 
 キーの`fields`には、主キー列または一意インデックス列のみが含まれます。
 
@@ -167,18 +167,18 @@ dispatchers = [
 }
 ```
 
-- `{{ColumnName}}`列名を示します。
+- `{{ColumnName}}`は、列名を示します。
 - `{{TIDB_TYPE}}`は TiDB 内の型を示します。これは SQL 型との 1 対 1 のマッピングではありません。
-- `{{AVRO_TYPE}}` [Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
+- `{{AVRO_TYPE}}`は、[Avro仕様](https://avro.apache.org/docs/++version++/specification)内のタイプを示します。
 
-| SQLの型             | TiDBの型             | AVRO_TYPE | 説明                                                                                                |
+| SQLの型             | TIDB_TYPE            | AVRO_TYPE | 説明                                                                                                |
 | ----------------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------- |
 | BOOL               | INT               | int       |                                                                                                   |
 | TINYINT            | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
 | SMALLINT           | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
 | MEDIUMINT          | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になります。                                                           |
 | INT                | INT               | int       | 符号なしの場合、TIDB_TYPE は INT UNSIGNED になり、AVRO_TYPE は long になります。                                      |
-| BIGINT             | BIGINT            | long      | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。`avro-bigint-unsigned-handling-mode`が文字列の場合、AVRO_TYPEは文字列です。 |
+| BIGINT             | BIGINT            | long      | 符号なしの場合、TIDB_TYPEはBIGINT UNSIGNEDです。`avro-bigint-unsigned-handling-mode`が string の場合、AVRO_TYPEは string です。 |
 | TINYBLOB           | BLOB              | bytes     |  -                                                                                                                         |
 | BLOB               | BLOB              | bytes     |  -                                                                                                                         |
 | MEDIUMBLOB         | BLOB              | bytes     |  -                                                                                                                         |
@@ -202,19 +202,19 @@ dispatchers = [
 | JSON               | JSON              | string    |  -                                                                                                                         |
 | ENUM               | ENUM              | string    |  -                                                                                                                         |
 | SET                | SET               | string    |  -                                                                                                                         |
-| DECIMAL            | DECIMAL           | bytes     | `avro-decimal-handling-mode`文字列の場合、AVRO_TYPE は文字列です。                                              |
+| DECIMAL            | DECIMAL           | bytes     | `avro-decimal-handling-mode`が string の場合、AVRO_TYPE は string です。                                              |
 | TiDBVECTORFloat32  | TiDBVECTORFloat32 | string    |  -                                                                                                                         |
 
 Avro プロトコルでは、他の 2つの`sink-uri`パラメータ`avro-decimal-handling-mode`と`avro-bigint-unsigned-handling-mode`もカラムデータ形式に影響する可能性があります。
 
 - `avro-decimal-handling-mode` 、Avro が小数フィールドを処理する方法を制御します。これには以下が含まれます。
 
-    - 文字列: Avro は小数フィールドを文字列として処理します。
+    - string: Avro は小数フィールドを文字列として処理します。
     - precise: Avro は 10 進フィールドをバイトとして処理します。
 
 - `avro-bigint-unsigned-handling-mode` 、Avro が BIGINT UNSIGNED フィールドを処理する方法を制御します。これには以下が含まれます。
 
-    - 文字列: Avro は BIGINT UNSIGNED フィールドを文字列として処理します。
+    - string: Avro は BIGINT UNSIGNED フィールドを文字列として処理します。
     - long: AvroはBIGINT UNSIGNEDフィールドを64ビット符号付き整数として扱います。値が`9223372036854775807`より大きい場合、オーバーフローが発生します。
 
 以下は設定例です。
@@ -232,7 +232,7 @@ dispatchers = [
 
 ほとんどのSQL型は基本のカラムデータ形式にマッピングされます。他のSQL型の中には、基本データ形式を拡張してより多くの情報を提供するものもあります。
 
-ビット(64)
+BIT(64)
 
 ```
 {
@@ -247,7 +247,7 @@ dispatchers = [
 }
 ```
 
-列挙型/セット(a,b,c)
+ENUM/SET(a,b,c)
 
 ```
 {
@@ -262,7 +262,7 @@ dispatchers = [
 }
 ```
 
-10進数(10, 4)
+DECIMAL(10, 4)
 
 ```
 {
@@ -283,13 +283,13 @@ dispatchers = [
 
 AvroはDDLイベントとウォーターマークイベントを下流に送信しません。DMLイベントが発生するたびに、スキーマが変更されているかどうかを確認します。スキーマが変更された場合、Avroは新しいスキーマを生成し、スキーマレジストリに登録します。スキーマ変更が互換性チェックに合格しない場合、登録は失敗します。TiCDCはスキーマ互換性の問題を解決しません。
 
-例えば、Confluent Schema Registry のデフォルトの[互換性ポリシー](https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html#compatibility-types) `BACKWARD`設定されており、ソーステーブルに空でない列を追加したとします。この場合、Avro は新しいスキーマを生成しますが、互換性の問題により Schema Registry への登録に失敗します。このとき、changefeed はエラー状態になります。
+例えば、Confluent Schema Registry のデフォルトの[互換性ポリシー](https://docs.confluent.io/platform/current/schema-registry/fundamentals/schema-evolution.html#compatibility-types) `BACKWARD`に設定されており、ソーステーブルに空でない列を追加したとします。この場合、Avro は新しいスキーマを生成しますが、互換性の問題により Schema Registry への登録に失敗します。このとき、changefeed はエラー状態になります。
 
 スキーマの変更が互換性チェックに合格し、新しいバージョンが登録された場合でも、データのプロデューサーとコンシューマーはデータのエンコードとデコードのために新しいスキーマを取得する必要があることに注意してください。
 
 スキーマの詳細については、 [スキーマレジストリ関連ドキュメント](https://docs.confluent.io/platform/current/schema-registry/avro.html)を参照してください。
 
-## 消費者実装 {#consumer-implementation}
+## コンシューマーの実装 {#consumer-implementation}
 
 TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer)で逆シリアル化できます。
 
@@ -304,7 +304,7 @@ TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeseriali
 
 ## トピックの分布 {#topic-distribution}
 
-スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、TopicRecordNameStrategyの3つの[件名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)サポートしています。現在、TiCDC AvroはTopicNameStrategyのみをサポートしており、Kafkaトピックは1つのデータ形式でのみデータを受信できます。そのため、TiCDC Avroでは複数のテーブルを同じトピックにマッピングすることは禁止されています。変更フィードを作成する際、トピックルールに設定された分散ルールの`{schema}`と`{table}`プレースホルダーが含まれていない場合、エラーが報告されます。
+スキーマレジストリは、TopicNameStrategy、RecordNameStrategy、TopicRecordNameStrategyの3つの[サブジェクト名戦略](https://docs.confluent.io/platform/current/schema-registry/serdes-develop/index.html#subject-name-strategy)をサポートしています。現在、TiCDC AvroはTopicNameStrategyのみをサポートしており、Kafkaトピックは1つのデータ形式でのみデータを受信できます。そのため、TiCDC Avroでは複数のテーブルを同じトピックにマッピングすることは禁止されています。変更フィードを作成する際、トピックルールに設定された分散ルールの`{schema}`と`{table}`プレースホルダーが含まれていない場合、エラーが報告されます。
 
 ## 互換性 {#compatibility}
 
