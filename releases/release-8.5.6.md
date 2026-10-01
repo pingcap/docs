@@ -81,7 +81,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
-- バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。テーブルレベルで特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`の権限または取り消すことができます。詳細については、 [列レベルの権限管理](https://docs.pingcap.com/tidb/v8.5/column-privilege-management)を参照してください。
+- バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。テーブルレベルで特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`の権限を付与または取り消すことができます。詳細については、 [列レベルの権限管理](https://docs.pingcap.com/tidb/v8.5/column-privilege-management)を参照してください。
 - バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブルエイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベース テーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。詳細については、 [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select)を参照してください。
 - バージョン8.5.6以降、 Dumplingは更新されたMySQLバイナリログの命名に対応することで、MySQL 8.4からのデータエクスポートをサポートしています。 [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
 - バージョン8.5.6以降、TiDB Data Migration (DM) は、このバージョンで導入された新しい用語とバージョン検出ロジックに対応することで、アップストリームデータソースとしてMySQL 8.4をサポートします。 [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
@@ -96,9 +96,9 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 | [`InPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#inpacketbytes-new-in-v856)                                                     | 新しく追加された | この変数は内部統計のみに使用され、ユーザーには表示されません。                                                                                                                                                                                                   |
 | [`OutPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#outpacketbytes-new-in-v856)                                                   | 新しく追加された | この変数は内部統計のみに使用され、ユーザーには表示されません。                                                                                                                                                                                                   |
 | [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856)     | 新しく追加された | 悲観的トランザクションにおける外部キーチェックで、親テーブルの行に対して排他ロックではなく共有ロックを使用するかどうかを制御します。デフォルト値は`OFF`で、これは TiDB がデフォルトで排他ロックを使用することを意味します。                                                                                                               |
-| [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856)                               | 新しく追加された | 分散実行フレームワーク (DXF) タスクが使用できる TiDB ノードの最大数を定義します。デフォルト値は`-1`で、これは自動モードが有効になっていることを示します。自動モードでは、TiDB は`min(3, tikv_nodes / 3)`という値を動的に計算します。ここで、 `tikv_nodes`クラスタ内の TiKV ノードの数を表します。                                                 |
+| [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856)                               | 新しく追加された | 分散実行フレームワーク (DXF) タスクが使用できる TiDB ノードの最大数を定義します。デフォルト値は`-1`で、これは自動モードが有効になっていることを示します。自動モードでは、TiDB は`min(3, tikv_nodes / 3)`という値を動的に計算します。ここで、 `tikv_nodes`はクラスタ内の TiKV ノードの数を表します。                                                 |
 | [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856)             | 新しく追加された | 特定の複数テーブル結合クエリの結合順序最適化を改善します。これを`ON`に設定し、安全条件が満たされている場合、オプティマイザは、連続する結合オペレーター間の`Selection`条件と結合順序候補を評価します。結合ツリーの再構築中、オプティマイザは可能な限りこれらの条件をより適切な位置にプッシュダウンし、より多くのテーブルが結合順序最適化に参加できるようにします。                                                 |
-| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec)                             | 新しく追加された | TiDBノードごとに1秒あたりに書き込める、スロークエリログエントリの最大数を制御します。<ul><li> `0` （デフォルト値）という値は、1秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。</li><li> `0`より大きい値を指定すると、TiDBは1秒あたりに指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。</li></ul> |
+| [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec)                             | 新しく追加された | TiDBノードごとに1秒あたりに書き込める、スロークエリログエントリの最大数を制御します。<ul><li> `0` （デフォルト値）という値は、1秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。</li><li> `0`より大きい値を指定すると、TiDBは1秒あたり最大で指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。</li></ul> |
 | [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules)                                         | 新しく追加された | スロークエリログのトリガールールを定義します。多次元メトリクスを組み合わせることで、より柔軟で詳細なログ記録を実現します。                                                                                                                                                                     |
 
 ### 設定パラメータ {#configuration-parameters}
@@ -118,7 +118,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 ## 非推奨機能 {#deprecated-features}
 
-- v8.5.6 以降、統計バージョン 1 ( `tidb_analyze_version = 1` ) は非推奨となり、将来のリリースでは削除される予定です。より正確な統計を得るには、統計バージョン 2 ( `tidb_analyze_version = 2` ) および[統計情報を使用する既存のオブジェクトをバージョン1からバージョン2に移行する](https://docs.pingcap.com/tidb/v8.5/statistics#switch-between-statistics-versions)ことをお勧めします。
+- v8.5.6 以降、統計バージョン 1 ( `tidb_analyze_version = 1` ) は非推奨となり、将来のリリースでは削除される予定です。より正確な統計を得るには、統計バージョン 2 ( `tidb_analyze_version = 2` ) を使用し、[統計情報を使用する既存のオブジェクトをバージョン1からバージョン2に移行する](https://docs.pingcap.com/tidb/v8.5/statistics#switch-between-statistics-versions)ことをお勧めします。
 - バージョン8.5.6以降、 TiDB Lightning Webインターフェースは非推奨となり、バージョン8.5.7で削除されます。Web UIビルドはバージョン8.4.0以降、不具合が発生しています。代わりに[CLI](/tidb-lightning/tidb-lightning-overview.md)または[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメントを使用してください。この変更がワークフローに影響する場合は、 [#67697](https://github.com/pingcap/tidb/issues/67697)にコメントしてください。
 
 ## 改善点 {#improvements}
@@ -160,7 +160,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 - TiKV
 
-    - クロスビームスキップリストのメモリリーク問題を修正 [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
+    - crossbeam skiplist のメモリリーク問題を修正 [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
     - パーティションテーブルの一意でない列のグローバルインデックスが、場合によっては不整合になり、誤った結果を返す可能性がある問題を修正しました [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)
     - コプロセッサのスナップショット取得が停止すると、リクエストの期限が切れるまで統合リードプールワーカーが占有され、他のリードリクエストが遅延する問題を修正しました [#18491](https://github.com/tikv/tikv/issues/18491) @[AndreMouche](https://github.com/AndreMouche)
     - ディスクがいっぱいの TiKV ノードでフォロワーの読み取りがブロックされたままになる可能性がある問題を修正するため、ディスクがいっぱいのフォロワーで読み取りインデックスリクエストを拒否します [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
@@ -185,12 +185,12 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
         - ログバックアップで`flush_ts`が`0`になる可能性がある問題を修正 [#19406](https://github.com/tikv/tikv/issues/19406) @[YuJuncen](https://github.com/YuJuncen)
         - Amazon S3互換APIを介してS3スタイルの認証情報を使用してGoogle Cloud Storageにアクセスする際、Content-Lengthヘッダーが欠落しているため、マルチパートアップロード中にBRが失敗する可能性がある問題を修正しました。 [#19352](https://github.com/tikv/tikv/issues/19352) @[Leavrth](https://github.com/Leavrth)
-        - BR `restore point` `waiting for schema info finishes reloading`の状態に長時間留まり、15分後にタイムアウトで失敗する問題を修正しました [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
-        - `SHARD_ROW_ID_BITS` 、 `PRE_SPLIT_REGIONS`BRを持つテーブルを復元する際に、 `merge_option`問題を修正します。 [#65060](https://github.com/pingcap/tidb/issues/65060) @[JoyC-dev](https://github.com/JoyC-dev)
+        - BR の`restore point`が`waiting for schema info finishes reloading`の状態に長時間留まり、15分後にタイムアウトで失敗する問題を修正しました [#66110](https://github.com/pingcap/tidb/issues/66110) @[kennytm](https://github.com/kennytm)
+        - `SHARD_ROW_ID_BITS`、`PRE_SPLIT_REGIONS`、`merge_option`属性を持つテーブルを復元する際に、BR がリージョンを正しく事前分割できない問題を修正します。 [#65060](https://github.com/pingcap/tidb/issues/65060) @[JoyC-dev](https://github.com/JoyC-dev)
 
     - TiCDC
 
-        - changefeedsがサーバー再起動後に無効なディスパッチャーを繰り返し作成する可能性がある問題を修正 [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
+        - changefeed がサーバー再起動後に無効なディスパッチャーを繰り返し作成する可能性がある問題を修正 [#4452](https://github.com/pingcap/ticdc/issues/4452) @[wlwilliamx](https://github.com/wlwilliamx)
         - TiCDCが、上流のTiDBバージョンがv8.1.x以前の場合にテーブル名変更操作を正しく複製できない問題を修正 [#4392](https://github.com/pingcap/ticdc/issues/4392) @[lidezhu](https://github.com/lidezhu)
         - TiCDCが有効になっている場合に、データスキャン中にTiKVがクラッシュする可能性がある問題を修正しました [#19404](https://github.com/tikv/tikv/issues/19404) @[wk989898](https://github.com/wk989898)
         - Azure Blob Storage の Azure Managed Identity 認証をサポートし、クラウドストレージへのアップロードが停止する可能性がある問題を修正します [#3093](https://github.com/pingcap/ticdc/issues/3093) @[wlwilliamx](https://github.com/wlwilliamx)

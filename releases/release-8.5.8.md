@@ -9,7 +9,7 @@ summary: TiDB 8.5.8 の改善点とバグ修正について説明します。
 
 TiDB バージョン: 8.5.8
 
-クイックアクセス: [Quick start](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [Production deployment](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
 ## 改善点 {#improvements}
 

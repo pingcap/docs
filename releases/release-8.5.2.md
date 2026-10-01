@@ -59,7 +59,7 @@ TiDBバージョン：8.5.2
     - `IMPORT INTO`機能がグローバルソートが有効になっている場合に一意キーの競合を適切に処理できない問題を修正します [#59650](https://github.com/pingcap/tidb/issues/59650) @[lance6716](https://github.com/lance6716)
     - グローバルソートデータパスにネットワークレイテンシーエラーを注入すると、 `IMPORT INTO`操作が失敗する問題を修正 [#50451](https://github.com/pingcap/tidb/issues/50451) @[D3Hunter](https://github.com/D3Hunter)
     - `ADD UNIQUE INDEX`の実行時にデータ不整合が発生する可能性がある問題を修正 [#60339](https://github.com/pingcap/tidb/issues/60339) @[tangenta](https://github.com/tangenta)
-    - `LABELS`をクエリした際に`BINLOG_STATUS`列の値が誤って表示される問題を修正しました`INFORMATION_SCHEMA.TIDB_SERVERS_INFO` [#59245](https://github.com/pingcap/tidb/issues/59245) @[lance6716](https://github.com/lance6716)
+    - `INFORMATION_SCHEMA.TIDB_SERVERS_INFO`をクエリした際に、`LABELS`列の値が`BINLOG_STATUS`列に誤って表示される問題を修正しました [#59245](https://github.com/pingcap/tidb/issues/59245) @[lance6716](https://github.com/lance6716)
     - インデックス作成中にPD Leaderの強制終了エラーを注入するとデータ不整合が発生する可能性がある問題を修正 [#59701](https://github.com/pingcap/tidb/issues/59701) @[tangenta](https://github.com/tangenta)
     - TiDBが約650万個のテーブルを作成した後にメモリ不足（OOM）になる問題を修正 [#58368](https://github.com/pingcap/tidb/issues/58368) @[lance6716](https://github.com/lance6716)
     - グローバルソート機能を有効にして大量のデータをインポートする際に、一意キーの追加が失敗する可能性がある問題を修正しました [#59725](https://github.com/pingcap/tidb/issues/59725) @[CbcWestwolf](https://github.com/CbcWestwolf)
@@ -80,14 +80,14 @@ TiDBバージョン：8.5.2
     - CDC接続で例外が発生した際にリソースリークが発生する可能性がある問題を修正 [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
     - リージョン分割後にリーダーが迅速に選出されない問題を修正 [#17602](https://github.com/tikv/tikv/issues/17602) @[LykxSassinator](https://github.com/LykxSassinator)
     - 1フェーズコミット（1PC）のみが有効で非同期コミットが有効になっていない場合に、最新の書き込みデータが読み取れない可能性がある問題を修正しました [#18117](https://github.com/tikv/tikv/issues/18117) @[zyguan](https://github.com/zyguan)
-    - GCワーカーが予期せずエラーログを出力問題を修正 [#18213](https://github.com/tikv/tikv/issues/18213) @[ekexium](https://github.com/ekexium)
+    - GCワーカーが予期せずエラーログを出力する問題を修正 [#18213](https://github.com/tikv/tikv/issues/18213) @[ekexium](https://github.com/ekexium)
 
 - PD
 
     - マイクロサービスシナリオでTSOを転送する際に発生する可能性のある同時実行性の問題を修正します [#9091](https://github.com/tikv/pd/issues/9091) @[lhy1024](https://github.com/lhy1024)
     - `BatchScanRegions`によって返される結果が適切に制限されない問題を修正します [#9216](https://github.com/tikv/pd/issues/9216) @[lhy1024](https://github.com/lhy1024)
-    - フォロワーの1人がリーダーからネットワーク分断を受けた際に予期しない選挙が発生する問題を修正します [#9020](https://github.com/tikv/pd/issues/9020) @[lhy1024](https://github.com/lhy1024)
-    - リソース制御で`COOLDOWN`が設定されている場合、 `SWITCH_GROUP`または`QUERY_LIMIT`がトリガーされない問題を修正します [#60404](https://github.com/pingcap/tidb/issues/60404) @[JmPotato](https://github.com/JmPotato)
+    - フォロワーの1つがリーダーからネットワーク分断を受けた際に予期しない選挙が発生する問題を修正します [#9020](https://github.com/tikv/pd/issues/9020) @[lhy1024](https://github.com/lhy1024)
+    - リソース制御で`QUERY_LIMIT`が設定されている場合、 `COOLDOWN`または`SWITCH_GROUP`がトリガーされない問題を修正します [#60404](https://github.com/pingcap/tidb/issues/60404) @[JmPotato](https://github.com/JmPotato)
     - `StoreInfo`が誤って上書きされる可能性がある問題を修正 [#9185](https://github.com/tikv/pd/issues/9185) @[okJiang](https://github.com/okJiang)
     - PDネットワークの不安定さにより、データインポートまたはインデックス追加シナリオでの操作が失敗する可能性がある問題を修正しました [#8962](https://github.com/tikv/pd/issues/8962) @[okJiang](https://github.com/okJiang)
     - 単一のログファイルに対する`max-size`のデフォルト値が正しく設定されていない問題を修正 [#9037](https://github.com/tikv/pd/issues/9037) @[rleungx](https://github.com/rleungx)
@@ -100,7 +100,7 @@ TiDBバージョン：8.5.2
 
 - TiFlash
 
-    - ソート中にデータが流出してTiFlashがクラッシュする可能性がある問題を修正 [#9999](https://github.com/pingcap/tiflash/issues/9999) @[windtalker](https://github.com/windtalker)
+    - ソート中のデータスピルによってTiFlashがクラッシュする可能性がある問題を修正 [#9999](https://github.com/pingcap/tiflash/issues/9999) @[windtalker](https://github.com/windtalker)
     - TiFlashが`GROUP BY ... WITH ROLLUP`を含むSQL文を実行する際に`Exception: Block schema mismatch`エラーを返す可能性がある問題を修正しました。 [#10110](https://github.com/pingcap/tiflash/issues/10110) @[gengliqi](https://github.com/gengliqi)
     - 分散ストレージとコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するターゲットノードとして誤って選択される可能性がある問題を修正 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 特定の状況でTiFlash が予期せず終了した場合に、エラースタック トレースの出力に失敗することがある問題を修正 [#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -149,7 +149,7 @@ TiDBバージョン：8.5.2
         - 外部アカウントを使用してGCSストレージ操作を実行する際に、認証が`context canceled`エラーで失敗する問題を修正しました [#60155](https://github.com/pingcap/tidb/issues/60155) @[lance6716](https://github.com/lance6716)
         - TiDB LightningがクラウドストレージからParquetファイルをTiDBにインポートする際に数時間停止する問題を修正します [#60224](https://github.com/pingcap/tidb/issues/60224) @[joechenrh](https://github.com/joechenrh)
         - TiDB Lightningが大量のデータをインポートする際に、SSTファイルをTiKVクラスターに書き込んだり取り込んだりする際にメモリ不足（OOM）になる可能性がある問題を修正しました。 [#59947](https://github.com/pingcap/tidb/issues/59947) @[OliverS929](https://github.com/OliverS929)
-        - テーブル作成時の最大QPSが低いことと`information_schema.tables`へのアクセスが遅いことが原因で、数百万のテーブルが存在するシナリオでTiDB Lightningがスキーマジョブのディスパッチが遅くなる問題を修正しました [#58141](https://github.com/pingcap/tidb/issues/58141) @[D3Hunter](https://github.com/D3Hunter)
+        - テーブル作成時の最大QPSが低いことと`information_schema.tables`へのアクセスが遅いことが原因で、数百万のテーブルが存在するシナリオでTiDB Lightningのスキーマジョブのディスパッチが遅くなる問題を修正しました [#58141](https://github.com/pingcap/tidb/issues/58141) @[D3Hunter](https://github.com/D3Hunter)
 
     - NG Monitoring
 
