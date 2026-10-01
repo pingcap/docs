@@ -21,6 +21,7 @@
 ## TiDB X KERNEL リリースノート
 
 - [TiDB Cloud Premium 向けカーネルバージョニング](/tidb-cloud/releases/tidb-cloud-kernel-versioning.md)
+- [TiDB-X-CLOUD.202603.1 リリースノート](/tidb-cloud/releases/tidb-x-cloud.202603.1.md)
 - [TiDB-X-CLOUD.202510.1 リリースノート](/tidb-cloud/releases/tidb-x-cloud.202510.1.md)
 
 ## メンテナンス通知

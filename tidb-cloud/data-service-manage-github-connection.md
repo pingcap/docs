@@ -98,7 +98,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 | `data_source/cluster.json`                      | このファイルを更新する際は、リンクされているTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにアクセスできることを確認してください。TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID は、その URL から取得できます。たとえば、URL が`https://tidbcloud.com/tidbs/1234567891234567890/overview?orgId=<organization-id>`の場合、ID は`1234567891234567890`です。 |
 | `http_endpoints/config.json`                    | エンドポイントを変更する場合は、 [HTTPエンドポイント構成](/tidb-cloud/data-service-app-config-files.md#http-endpoint-configuration)で説明されているルールに従ってください。                                                                                                                                                                             |
 | `http_endpoints/sql/method-<endpoint-path>.sql` | `http_endpoints/sql`ディレクトリに SQL ファイルを追加または削除するには、対応するエンドポイント構成も更新する必要があります。                                                                                                                                                                                                                                |
-| `datapp_config.json`                            | `dataapp_config.json`ファイルが別のデータアプリからコピーされたもので、現在のデータアプリの ID に更新したい場合を除き、このファイルの`app_id`フィールドを変更しないでください。そうしないと、この変更によってトリガーされるデプロイが失敗します。                                                                                                                                                                |
+| `dataapp_config.json`                            | `dataapp_config.json`ファイルが別のデータアプリからコピーされたもので、現在のデータアプリの ID に更新したい場合を除き、このファイルの`app_id`フィールドを変更しないでください。そうしないと、この変更によってトリガーされるデプロイが失敗します。                                                                                                                                                                |
 
 これらのファイルのフィールド構成の詳細については、 [データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を参照してください。
 
@@ -129,7 +129,7 @@ TiDB Cloudコンソールで[データアプリのエンドポイントを変更
 
 4. 新しいデータアプリのIDと名前を取得します。左側のペインで新しいデータアプリの名前をクリックすると、右側のペインの**Data App Properties**領域にアプリのIDと名前が表示されます。
 
-5. GitHub の新しいパスで、 `datapp_config.json`ファイル内の`app_id`と`app_name`を取得した ID と名前に更新し、変更をプッシュしてください。
+5. GitHub の新しいパスで、 `dataapp_config.json`ファイル内の`app_id`と`app_name`を取得した ID と名前に更新し、変更をプッシュしてください。
 
     ファイルの変更がGitHubにプッシュされると、 TiDB Cloudは最新の変更内容を反映した新しいデータアプリを自動的にデプロイします。
 

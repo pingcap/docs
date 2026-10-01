@@ -139,14 +139,21 @@
     - [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - ストリームデータ
-  - [変更フィードの概要](/tidb-cloud/changefeed-overview.md)
+  - [概要](/tidb-cloud/stream-data-overview.md)
+  - [変更フィード](/tidb-cloud/changefeed-overview.md)
+  - [Data Pipeline](/tidb-cloud/data-pipeline.md)
   - [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [Kafkaシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [Cloud Storage へ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [TiDB Cloud Lake へ](/tidb-cloud/data-pipeline-sink-to-lake.md)
   - 参照
     - [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
     - [AWS PrivateLink 経由で Amazon MSK Provisioned クラスターをセットアップする](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
+    - [TiDB Cloud Data Pipeline 用の外部 stage を設定する (AWS)](/tidb-cloud/data-pipeline-configure-external-stage-aws.md)
+    - [TiDB Cloud Data Pipeline 用の外部 stage を設定する (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md)
+    - [TiDB Cloud Lake 向け Data Pipeline SQL 互換性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
+    - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 - セキュリティ
   - [セキュリティ概要](/tidb-cloud/security-overview.md)
   - IDアクセス制御
@@ -503,3 +510,12 @@
 - よくある質問
   - [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
 - [用語集](/tidb-cloud/tidb-cloud-glossary.md)
+
+## _BUILD_ALLOWLIST
+
+- 階層型ストレージを使用する
+  - [階層型ストレージの概要](/tidb-cloud/tiered-storage-overview.md)
+  - [階層型ストレージの設定と管理](/tidb-cloud/tiered-storage-guide.md)
+  - [階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md)
+  - [階層型ストレージの制限事項](/tidb-cloud/tiered-storage-limitations.md)
+  - [階層型ストレージに関する FAQ](/tidb-cloud/tiered-storage-faq.md)

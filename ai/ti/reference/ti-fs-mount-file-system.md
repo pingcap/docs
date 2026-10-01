@@ -1,17 +1,17 @@
 ---
 title: ti fs mount-file-system
-summary: ファイルシステムをマウントします。
+summary: FUSE、WebDAV、読み取り専用アクセス、レイヤー、チェックポイントなど、TiDB Cloud ファイルシステムのローカルマウントを設定する方法を学びます。
 ---
 
 # ti fs mount-file-system
 
-自動、FUSE、または WebDAV モードでファイルシステムをマウントします。このコマンドのエイリアスは `ti fs mount` です。
+FUSE または WebDAV を使用してファイルシステムをマウントします。デフォルトでは、CLI がドライバーを自動的に選択します。このコマンドのエイリアスは `ti fs mount` です。
 
 このコマンドはバックグラウンドでマウント処理を開始し、マウントの準備が完了するまで待機してから、結果を出力します。起動に失敗した場合、エラーには診断用のログパスが含まれます。マウントを終了するには `ti fs unmount-file-system` を使用します。
 
 > **Important:**
 >
-> レイヤーおよびチェックポイントのマウントには FUSE が必要です。通常自動選択で WebDAV が使用される macOS では、macFUSE をインストールし、`--driver fuse` を指定してください。チェックポイントのマウントは常に読み取り専用です。
+> レイヤーおよびチェックポイントのマウントには FUSE が必要です。macOS では、これらの機能を使用するために macFUSE をインストールし、`--driver fuse` を指定してください。チェックポイントのマウントは常に読み取り専用です。
 
 > **Note:**
 >
@@ -63,9 +63,9 @@ ti fs mount-file-system
 - `--read-cache-max-file-mb <int64>`: FUSE 読み取りキャッシュに格納できる最大ファイルサイズ（MiB）。0 を指定するとデフォルト値を使用します。\[default: 4]
 - `--read-cache-size-mb <int64>`: FUSE 読み取りキャッシュサイズ（MiB）。0 を指定するとデフォルト値を使用します。\[default: 128]
 - `--read-cache-ttl <duration>`: FUSE 読み取りキャッシュの有効期間。\[default: `30s`]
-- `--read-only`: 読み取り専用マウントモード。
-- `--ready-timeout <duration>`: バックグラウンドマウントの準備完了を待機する時間。\[default: `30s`]
-- `--remote-path <string>`: マウントする TiDB Cloud ファイルシステムのルートパス。\[default: /]
+- `--read-only`: 読み取り専用マウントモード。FUSE が必要です。WebDAV ではこのオプションは拒否されます。`--driver fuse` を明示的に使用するか、スコープ付きトークンを使用してサービスレベルで読み取り専用アクセスを強制してください。
+- `--ready-timeout <duration>`: バックグラウンドマウントの準備完了を待機する時間。これは起動時のタイムアウトであり、その後のファイルの読み取りや書き込みのタイムアウトではありません。[マウント後にファイル I/O を確認する](/tidb-cloud-filesystem/filesystem-mount.md#verify-a-mount-before-using-it)。\[default: `30s`]
+- `--remote-path <string>`: マウントするファイルシステムのルートパス。\[default: /]
 - `--unpack-archive-path <string>`: マウント前にパックされたアーカイブを復元します。
 - `--version`: バージョン情報を表示します。
 - `--write-back-cache`: フラッシュ時にファイルシステムへ書き込む前に、FUSE の書き込みをローカルに永続化します。この動作はデフォルトで有効です。無効にするには `--write-back-cache=false` を指定します。常に読み取り専用であるチェックポイントマウントでは使用できません。\[default: true]

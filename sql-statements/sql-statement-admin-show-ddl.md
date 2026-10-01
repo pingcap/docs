@@ -87,7 +87,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
     - `cancelling` : 操作がキャンセルされていることを示します。この状態は、 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルした場合にのみ表示されます。
     - `cancelled` : 操作がキャンセルされたことを示します。
     - `pausing` : 操作を一時停止中であることを示します。
-    - `paused` : 操作が一時停止されていることを示します。この状態は、 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
+    - `paused` : 操作が一時停止されていることを示します。この状態は、 [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
     - `done` : 操作は TiDB 所有者ノードで正常に実行されたが、他の TiDB ノードではこの DDL ジョブによって実行された変更がまだ同期されていないことを示します。
 - `COMMENTS` : 診断目的の追加情報が含まれます。
     - `ingest` : [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)で構成された、高速化されたインデックス追加バックフィルのための取り込み（ingest）タスク。
@@ -122,7 +122,7 @@ OWNER_ADDRESS: 0.0.0.0:4000
     - `rollback done` : 操作が失敗し、ロールバックが完了したことを示します。
     - `rollingback` : 操作が失敗し、ロールバック中であることを示します。
     - `cancelling` : 操作がキャンセルされていることを示します。この状態は、 [`ADMIN CANCEL DDL JOBS`](/sql-statements/sql-statement-admin-cancel-ddl.md)コマンドを使用して DDL ジョブをキャンセルした場合にのみ表示されます。
-    - `paused` : 操作が一時停止されていることを示します。この状態は、 [`ADMIN PAUSED DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
+    - `paused` : 操作が一時停止されていることを示します。この状態は、 [`ADMIN PAUSE DDL JOBS`](/sql-statements/sql-statement-admin-pause-ddl.md)コマンドを使用して DDL ジョブを一時停止した場合にのみ表示されます。 [`ADMIN RESUME DDL JOBS`](/sql-statements/sql-statement-admin-resume-ddl.md)コマンドを使用して DDL ジョブを再開できます。
 
 </CustomContent>
 

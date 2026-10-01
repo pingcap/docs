@@ -10,7 +10,7 @@ summary: TiDB Cloudブランチの管理方法を学びましょう。
 ## 必要なアクセス {#required-access}
 
 - [ブランチを作成する](#create-a-branch)または[ブランチに接続する](#connect-to-a-branch)には、組織の`Organization Owner`ロール、またはターゲット プロジェクトの`Project Owner`ロールに属している必要があります。
-- プロジェクト内のクラスターの[ブランチを表示](#create-a-branch)するには、そのプロジェクトに属している必要があります。
+- プロジェクト内のクラスターの[ブランチを表示](#view-branches)するには、そのプロジェクトに属している必要があります。
 
 権限の詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)を参照してください。
 

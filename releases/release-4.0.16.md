@@ -109,5 +109,5 @@ TiDBバージョン: 4.0.16
         - `force-replicate`が有効になっているときに、有効なインデックスのない一部のパーティションテーブルが無視される可能性がある問題を修正[#2834](https://github.com/pingcap/tiflow/issues/2834)
         - 新しい変更フィードを作成するときに発生するメモリリークの問題を修正しました [#2389](https://github.com/pingcap/tiflow/issues/2389)
         - シンクコンポーネントの前進によりデータの不整合が発生する可能性がある問題を修正しました[#3503](https://github.com/pingcap/tiflow/issues/3503)
-        - 株価データのスキャンに時間がかかりすぎると、TiKV が GC を実行するため株価データのスキャンが失敗する可能性がある問題を修正しました[#2470](https://github.com/pingcap/tiflow/issues/2470)
+        - changefeed の初期化に時間がかかりすぎて TiKV が GC safepoint を進めた場合に、changefeed が失敗する可能性がある問題を修正しました[#2470](https://github.com/pingcap/tiflow/issues/2470)
         - changefeed update コマンドがグローバルコマンドラインパラメータを認識しない問題を修正[#2803](https://github.com/pingcap/tiflow/issues/2803)

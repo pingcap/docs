@@ -816,7 +816,7 @@
       - [日付と時刻の種類](/data-type-date-and-time.md)
       - [文字列型](/data-type-string.md)
       - [JSONタイプ](/data-type-json.md)
-      - [ベクトルタイプ](/ai/reference/vector-search-data-types.md)
+      - [ベクトル型](https://docs.pingcap.com/ai/vector-search-data-types/)
     - 関数と演算子
       - [概要](/functions-and-operators/functions-and-operators-overview.md)
       - [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -830,7 +830,7 @@
       - [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
       - [ロック機能](/functions-and-operators/locking-functions.md)
       - [情報関数](/functions-and-operators/information-functions.md)
-      - [ベクトル関数と演算子](/ai/reference/vector-search-functions-and-operators.md)
+      - [ベクトル関数と演算子](https://docs.pingcap.com/ai/vector-search-functions-and-operators/)
       - JSON関数
         - [概要](/functions-and-operators/json-functions.md)
         - [JSONを作成する関数](/functions-and-operators/json-functions/json-functions-create.md)
@@ -853,7 +853,7 @@
       - [OracleとTiDBの関数と構文の比較](/oracle-functions-to-tidb.md)
     - [クラスター化インデックス](/clustered-indexes.md)
     - [グローバルインデックス](/global-indexes.md)
-    - [ベクトルインデックス](/ai/reference/vector-search-index.md)
+    - [ベクトルインデックス](https://docs.pingcap.com/ai/vector-search-index/)
     - [制約](/constraints.md)
     - [生成列](/generated-columns.md)
     - [SQLモード](/sql-mode.md)

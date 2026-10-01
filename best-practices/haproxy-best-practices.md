@@ -35,7 +35,7 @@ HAProxy をデプロイする前に、ハードウェアとソフトウェアの
 
 ### ハードウェア要件 {#hardware-requirements}
 
-[HAProxyドキュメント](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/)によると、HAProxyの最小ハードウェア構成は以下の表の通りです。Sysbench `oltp_read_write`ワークロードでは、この構成での最大QPSは約50Kです。負荷分散環境に応じてサーバー構成を増やすことができます。
+[HAProxyドキュメント](https://www.haproxy.com/documentation/haproxy-enterprise/getting-started/installation/linux/)によると、HAProxyの最小ハードウェア構成は以下の表の通りです。Sysbench `oltp_read_write`ワークロードでは、この構成での最大QPSは約50Kです。負荷分散環境に応じてサーバー構成をアップグレードできます。
 
 | ハードウェアリソース        | 最小仕様           |
 | :---------------- | :------------- |

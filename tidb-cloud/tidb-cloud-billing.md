@@ -103,19 +103,12 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
 
 > **Note:**
 >
-> **Bills** データと **Cost Explorer** または **Usage Details** の CSV ダウンロード内のデータは、異なる粒度レベルで処理および表示されます。**Bills** データは月次精算用に計算される一方、**Cost Explorer** と **Usage Details** の CSV ダウンロードでは、日、サービス、プロジェクト、クラスター、またはリソースごとのような、より細かい内訳が提供されます。その結果、異なる集計レベルでの丸めにより、合計値がわずかに異なる場合があります。
->
-> **Cost Explorer** と **Usage Details** の CSV ダウンロードは、使用量とコストの分析を目的としています。これらのデータソースに差異がある場合、請求書に表示される金額が最終的に支払うべき金額です。
+> - **Bills** データと **Cost Explorer** または **Usage Details** の CSV ダウンロード内のデータは、異なる粒度レベルで処理および表示されます。**Bills** データは月次精算用に計算される一方、**Cost Explorer** と **Usage Details** の CSV ダウンロードでは、日、サービス、プロジェクト、クラスター、またはリソースごとのような、より細かい内訳が提供されます。その結果、異なる集計レベルでの丸めにより、合計値がわずかに異なる場合があります。
+> - **Cost Explorer** と **Usage Details** の CSV ダウンロードは、使用量とコストの分析を目的としています。これらのデータソースに差異がある場合、請求書に表示される金額が最終的に支払うべき金額です。
 
 ストレージに関連する請求の説明は次のとおりです。
 
 - **Row-based storage**: TiDB テーブルはデフォルトで行ベースのストレージを使用し、データは **TiKV** に保存されます。 <!--**Use case:** Core online transactional processing (OLTP) workloads that require low-latency reads and writes.-->
-
-- **Row-based storage with IA**: Infrequent Access (IA) を使用する行ベースのストレージでは、データは **外部オブジェクトストレージ** に保存され、アクセス頻度は低いもののオンラインクエリで利用可能である必要があるデータ向けに設計されています。 <!--**Use case:** Historical or archival data that is accessed infrequently but still needs to remain queryable while reducing storage costs.-->
-
-    > **Note:**
-    >
-    > Infrequent Access は現在プライベートプレビューであり、リクエストがあった場合にのみ利用できます。
 
 - **Columnar storage**: 列指向ストレージは **TiFlash** エンジンによって提供されます。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 

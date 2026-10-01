@@ -306,7 +306,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 
 > **Note:**
 >
-> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)は、TiDB Self-ManagedのTiDBデータをアップストリームに複製するためのツールです。TiCDCのほとんどのSQL文はTiDB Cloudには適用できません。TiDB Cloudの場合は、代わりに[TiDB Cloudコンソール](https://tidbcloud.com)の[変更フィード](/tidb-cloud/changefeed-overview.md)機能を使用してデータをストリーミングできます。
+> [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)は、TiDB Self-ManagedのTiDBデータをダウンストリームに複製するためのツールです。TiCDCのほとんどのSQL文はTiDB Cloudには適用できません。TiDB Cloudの場合は、代わりに[TiDB Cloudコンソール](https://tidbcloud.com)の[変更フィード](/tidb-cloud/changefeed-overview.md)機能を使用してデータをストリーミングできます。
 
 | SQL文                                                                  | 説明                   |
 | --------------------------------------------------------------------------- | -------------------- |

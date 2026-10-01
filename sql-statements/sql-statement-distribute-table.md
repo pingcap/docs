@@ -19,7 +19,7 @@ summary: TiDBデータベースにおけるDISTRIBUTE TABLEの使用方法の概
 
 ```ebnf+diagram
 DistributeTableStmt ::=
-    "DISTRIBUTE" "TABLE" TableName PartitionNameListOpt "RULE" EqOrAssignmentEq Identifier "ENGINE" EqOrAssignmentEq Identifier "TIMEOUT" EqOrAssignmentEq Identifier
+    "DISTRIBUTE" "TABLE" TableName PartitionNameListOpt "RULE" EqOrAssignmentEq Identifier "ENGINE" EqOrAssignmentEq Identifier ("TIMEOUT" EqOrAssignmentEq Identifier)?
 
 TableName ::=
     (SchemaName ".")? Identifier

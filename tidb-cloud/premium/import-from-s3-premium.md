@@ -44,6 +44,12 @@ TiDB Cloud Premiumがバケットを読み取れるようにするには、以�
 
 ウィザードには**Click here to create a new one with AWS CloudFormation**というラベルの付いたヘルプリンクが含まれています。TiDB Cloud Premium で CloudFormation スタックを事前に設定してロールを作成する必要がある場合は、このリンクをクリックしてください。
 
+<CustomContent plan="byoc">
+
+{{{ .byoc }}} インスタンスで AWS Role ARN を使用する場合、IAM ロールには `tidbcloud.com/allow-dataplane-access=true` タグが必要です。このタグがない場合は、インポートを開始する前にロールに追加してください。
+
+</CustomContent>
+
 ## ステップ4. Amazon S3からCSVファイルをインポートする {#step-4-import-csv-files-from-amazon-s3}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックします。
