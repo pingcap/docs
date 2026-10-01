@@ -23,8 +23,8 @@ summary: TiDB Cloud Premium または BYOC で、DDL、パーティションセ�
 
 | 値 | 意味 | デフォルト |
 |-|-|-|
-| `Standard` | ローカルのホットストレージ。すべてのデータがローカルディスク上に存在 | Yes |
-| `IA` | リモートのコールドストレージ。すべてのデータはオブジェクトストレージにあり、ローカルではオンデマンドキャッシュされる | No |
+| `Standard` | ローカルのホットストレージ。すべてのデータがローカルディスク上に存在 | はい |
+| `IA` | リモートのコールドストレージ。すべてのデータはオブジェクトストレージにあり、ローカルではオンデマンドキャッシュされる | いいえ |
 
 値では大文字と小文字は区別されません。
 
@@ -32,13 +32,13 @@ summary: TiDB Cloud Premium または BYOC で、DDL、パーティションセ�
 
 | テーブルタイプ | IA サポート | 注記 |
 |-|-|-|
-| 通常の非パーティションテーブル | Supported | `STORAGE_CLASS` の糖衣構文または `ENGINE_ATTRIBUTE` を使用 |
-| Range partition | Supported | `ENGINE_ATTRIBUTE` を使用する必要があります |
-| Range Columns partition | Supported | `ENGINE_ATTRIBUTE` を使用する必要があります |
-| List partition | Supported | `ENGINE_ATTRIBUTE` を使用する必要があります |
-| List Columns partitions | Supported | `ENGINE_ATTRIBUTE` を使用する必要があります |
-| Hash partitions | **Not supported** | — |
-| Key partitions | **Not supported** | — |
+| 通常の非パーティションテーブル | サポート対象 | `STORAGE_CLASS` の糖衣構文または `ENGINE_ATTRIBUTE` を使用 |
+| Range パーティション | サポート対象 | `ENGINE_ATTRIBUTE` を使用する必要があります |
+| Range Columns パーティション | サポート対象 | `ENGINE_ATTRIBUTE` を使用する必要があります |
+| List パーティション | サポート対象 | `ENGINE_ATTRIBUTE` を使用する必要があります |
+| List Columns パーティション | サポート対象 | `ENGINE_ATTRIBUTE` を使用する必要があります |
+| Hash パーティション | **サポート対象外** | — |
+| Key パーティション | **サポート対象外** | — |
 
 #### インデックスおよび関連オブジェクトのストレージタイプ継承ルール {#storage-type-inheritance-rules-for-indexes-and-related-objects}
 
@@ -65,7 +65,7 @@ CREATE TABLE t_ia (
 ) ENGINE=InnoDB STORAGE_CLASS='IA';
 ```
 
-`ENGINE_ATTRIBUTE` メソッド:
+`ENGINE_ATTRIBUTE` を使用する方法:
 
 ```sql
 CREATE TABLE t_ia (
@@ -87,7 +87,7 @@ ALTER TABLE t1 STORAGE_CLASS='STANDARD';
 ALTER TABLE t1 ENGINE_ATTRIBUTE='{"storage_class":"STANDARD"}';
 ```
 
-`ALTER` 操作中もすべてのデータアクセスは維持され、変換中も SQL の読み取りおよび書き込みがサポートされます。
+`ALTER` 操作ではすべてのデータへのアクセスが維持され、変換中も SQL による読み取りと書き込みを実行できます。
 
 ### パーティションテーブルの DDL {#partitioned-table-ddl}
 
@@ -254,7 +254,7 @@ IA キャッシュレベルは、どれだけの IA データをローカルデ�
 
 セグメントは、TiKV がオブジェクトストレージから読み取り、ローカルキャッシュへ書き込む最小単位です。デフォルトサイズは 1 MiB です。
 
-{{{ .byoc }}} では、TiKV 設定パラメーター `kvengine.ia.segment-size` を `128 KiB`, `256 KiB`, `512 KiB`, `1 MiB`, または `2 MiB` に設定できます。このパラメーターは {{{ .premium }}} では使用できません。
+{{{ .byoc }}} では、TiKV 設定パラメーター `kvengine.ia.segment-size` を `128 KiB`、`256 KiB`、`512 KiB`、`1 MiB`、または `2 MiB` に設定できます。このパラメーターは {{{ .premium }}} では使用できません。
 
 `kvengine.ia.segment-size` は起動時にのみ有効になります。変更後は、できればオフピーク時間帯に TiKV ノードのローリング再起動を実行してください。
 
@@ -262,13 +262,13 @@ IA キャッシュレベルは、どれだけの IA データをローカルデ�
 
 ## 可観測性 {#observability}
 
-ストレージクラス移行の進行状況、`EXPLAIN ANALYZE` フィールド、statement summary と slow query のメトリクス、クラスター レベルの IA キャッシュ性能パネルを含む IA の可観測性については、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
+ストレージクラス移行の進行状況、`EXPLAIN ANALYZE` フィールド、ステートメントサマリーとスロークエリのメトリクス、クラスターレベルの IA キャッシュ性能パネルを含む IA の可観測性については、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
 
 ## ベストプラクティス {#best-practices}
 
-このセクションでは、tiering 戦略、ロールアウト戦略、書き込み最適化、クエリ最適化、キャッシュレベルのチューニング、セグメントサイズの選択、切り戻し時の考慮事項、設定の安定性など、IA ストレージに関する推奨運用プラクティスを説明します。
+このセクションでは、階層化戦略、ロールアウト戦略、書き込み最適化、クエリ最適化、キャッシュレベルのチューニング、セグメントサイズの選択、切り戻し時の考慮事項、設定の安定性など、IA ストレージに関する推奨運用プラクティスを説明します。
 
-### Tiering 戦略: パーティションレベル IA を優先する {#tiering-strategy-prefer-partition-level-ia}
+### 階層化戦略: パーティションレベル IA を優先する {#tiering-strategy-prefer-partition-level-ia}
 
 パーティションテーブルでは、テーブルレベル IA よりも **常にパーティションレベル IA を優先** してください。これにより、コールド/ホット境界を正確に制御できます。
 
@@ -299,7 +299,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 
 - IA パーティションにまたがるクエリは、**3 パーティション以下** に抑えることを推奨します。これを超えると、応答時間が大幅に悪化する可能性があります
 - IA テーブルに対する並行 `SELECT *` フルテーブルスキャンを同時に実行することは避けてください
-- `EXPLAIN ANALYZE` と slow query を通じて IA リモート読み取り量を監視し、必要に応じて調整してください
+- `EXPLAIN ANALYZE` とスロークエリを通じて IA リモート読み取り量を監視し、必要に応じて調整してください
 
 ### IA キャッシュレベルをチューニングする {#tune-the-ia-cache-level}
 
@@ -309,7 +309,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 - 変更のたびに、再度変更する前に少なくとも 1 営業日分の期間、ヒット率を観察してください。
 - ヒット率が一貫して高く、コストを下げたい場合は、キャッシュレベルを **Economy** に下げてください。
 
-このチューニングループで使用するパネルと statement レベルのメトリクスについては、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
+このチューニングループで使用するパネルと ステートメントレベルのメトリクスについては、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
 
 ### セグメントサイズを選択する（BYOC のみ） {#choose-the-segment-size-byoc-only}
 
@@ -318,7 +318,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 | セグメントサイズ | キャッシュミスごとの読み取り増幅 | オブジェクトストレージリクエスト | 適した用途 |
 |-|-|-|-|
 | 1 MiB 未満 | 低い | 多い | リクエストコストが問題にならない場合の、低レイテンシーなオブジェクトストレージに対するポイントクエリ |
-| 1 MiB (default) | 中程度 | 中程度 | 一般的なワークロード |
+| 1 MiB (デフォルト) | 中程度 | 中程度 | 一般的なワークロード |
 | 1 MiB より大きい | 高い | 少ない | 十分なネットワーク帯域幅がある大規模範囲スキャン |
 
 このパラメーターを変更する前に、お客様自身のワークロードでベンチマークを行い、ローリング再起動はオフピーク時間帯に実施してください。
@@ -327,20 +327,20 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 
 - IA → Standard への変換では、すべてのデータをオブジェクトストレージからダウンロードするため、大量のコールドストレージ帯域幅を消費します
 - 帯域幅使用量を監視してスムーズな運用を確保してください。必要に応じて、**事前に TiDB Cloud チームへ連絡し**、共同で監視を行ってください
-- 変換中も業務 SQL の読み書きには影響しませんが、性能（例: QPS/TPS）にはわずかな影響が出る可能性があります — テスト環境では 5% 未満でした
-- 開始前に、クラスター上で過去に行われた類似変換の所要時間を見積もるため、`mysql.tidb_storage_class_transition_history` を `state = 'COMPLETED'` で絞り込んで問い合わせてください
+- 変換中も業務 SQL の読み書きには影響しませんが、性能（例: QPS/TPS）にはわずかな影響が出る可能性があります (テスト環境では 5% 未満)
+- 開始前に、変更作業に必要な時間枠を見積もるため、`mysql.tidb_storage_class_transition_history` を `state = 'COMPLETED'` で絞り込んで、クラスター上で過去に行われた類似変換の所要時間を確認してください
 - 変換中は、`SHOW STORAGE_CLASS TRANSITIONS` を実行して進行状況を追跡し、変換の停止を検出してください
 
 ### 設定の安定性 {#configuration-stability}
 
 ストレージクラス設定は安定した状態に保ち、IA と Standard の間で頻繁に切り替えないでください。切り替えのたびに、次の処理が発生します。
 
-- Region reload
+- リージョンの再ロード
 - オブジェクトストレージデータのダウンロード、またはメタデータの再構築
 - IA キャッシュデータのフラッシュ
 
 これらの処理の累積コストは無視できません。
 
-前回の変換がまだ実行中の間に逆方向の変換を発行すると、前回の変換は無効になり、それまでの進捗は破棄されます。進行中の変換を反転すると、追加の Region reload やデータダウンロードが発生する可能性があります。既存のローカルファイルの一部は再利用できるため、追加作業の量は、変換がどこまで進んでいたか、およびどのデータがローカルで引き続き利用可能かによって異なります。不要な I/O とリソース使用量を減らすため、IA と Standard の間で頻繁に切り替えることは避けてください。無効化された変換を識別する方法については、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
+前回の変換がまだ実行中の間に逆方向の変換を発行すると、前回の変換は無効になり、それまでの進捗は破棄されます。進行中の変換を反転すると、追加のリージョンの再ロード やデータダウンロードが発生する可能性があります。既存のローカルファイルの一部は再利用できるため、追加作業の量は、変換がどこまで進んでいたか、およびどのデータがローカルで引き続き利用可能かによって異なります。不要な I/O とリソース使用量を減らすため、IA と Standard の間で頻繁に切り替えることは避けてください。無効化された変換を識別する方法については、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
 
 これは、テーブルまたはパーティションのストレージクラスに適用されます。IA キャッシュレベルの調整は別の操作です。これはホットアップデートであり、ストレージクラス間でデータを移動せず、コストと性能の目標に応じて必要な頻度で変更できます。

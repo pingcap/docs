@@ -5,7 +5,7 @@ summary: TiDB Cloud Premium または BYOC で階層型ストレージを監視�
 
 # 階層型ストレージの可観測性
 
-このドキュメントでは、Infrequent Access (IA) ストレージを監視する方法について説明します。これには、ストレージクラス移行の進行状況、SQL レベルでの IA 読み取りメトリクス、クラスター レベルでの IA キャッシュ性能が含まれます。
+このドキュメントでは、Infrequent Access (IA) ストレージを監視する方法について説明します。これには、ストレージクラス移行の進行状況、SQL レベルでの IA 読み取りメトリクス、クラスターレベルでの IA キャッシュ性能が含まれます。
 
 > **Note:**
 >
@@ -19,11 +19,11 @@ summary: TiDB Cloud Premium または BYOC で階層型ストレージを監視�
 
 - `STORAGE_CLASS` 構文シュガー。例: `ALTER TABLE t1 STORAGE_CLASS='IA'`
 - `ENGINE_ATTRIBUTE` 形式。例: `ALTER TABLE t1 ENGINE_ATTRIBUTE='{"storage_class":"IA"}'`
-- `ENGINE_ATTRIBUTE` を使用したパーティション レベルの変更
+- `ENGINE_ATTRIBUTE` を使用したパーティションレベルの変更
 
-パーティションテーブルは `ENGINE_ATTRIBUTE` のみをサポートするため、パーティション変換はテーブル レベルの変換と同じビューに表示されます。テーブルまたはパーティションが最初から IA ストレージクラスで作成された場合、移行するデータがないため、これらのビューには表示されません。
+パーティションテーブルは `ENGINE_ATTRIBUTE` のみをサポートするため、パーティション変換はテーブルレベルの変換と同じビューに表示されます。テーブルまたはパーティションが最初から IA ストレージクラスで作成された場合、移行するデータがないため、これらのビューには表示されません。
 
-`ALTER TABLE` 文自体は、数秒以内にスキーマ メタデータを更新します。その後のリージョン レベルのデータ移行は TiKV 内で非同期に実行され、DDL ライフサイクルとは分離されているため、`ADMIN SHOW DDL JOBS` では進行状況は報告されません。進行中の変換を追跡するには `SHOW STORAGE_CLASS TRANSITIONS` を使用し、過去および進行中の変換を確認するには `mysql.tidb_storage_class_transition_history` をクエリします。履歴テーブルには、変換開始時に `state = 'RUNNING'` のレコードが挿入され、変換が最終状態に達するとその場で更新されます。
+`ALTER TABLE` 文自体は、数秒以内にスキーマメタデータを更新します。その後のリージョンレベルのデータ移行は TiKV 内で非同期に実行され、DDL ライフサイクルとは分離されているため、`ADMIN SHOW DDL JOBS` では進行状況は報告されません。進行中の変換を追跡するには `SHOW STORAGE_CLASS TRANSITIONS` を使用し、過去および進行中の変換を確認するには `mysql.tidb_storage_class_transition_history` をクエリします。履歴テーブルには、変換開始時に `state = 'RUNNING'` のレコードが挿入され、変換が最終状態に達するとその場で更新されます。
 
 ### 進行中の移行を表示する {#view-in-progress-transitions}
 
@@ -42,13 +42,13 @@ SHOW STORAGE_CLASS TRANSITIONS WHERE DIRECTION = 'TO_STANDARD';
 | `TABLE_SCHEMA` | VARCHAR(64) | データベース名 |
 | `TABLE_NAME` | VARCHAR(64) | テーブル名 |
 | `TABLE_ID` | BIGINT(21) | テーブルの内部 ID |
-| `PARTITION_NAME` | VARCHAR(64) | パーティション名。テーブル レベルの変換では値は `NULL` |
-| `PARTITION_ID` | BIGINT(21) | パーティションの内部 ID。テーブル レベルの変換では値は `NULL` |
+| `PARTITION_NAME` | VARCHAR(64) | パーティション名。テーブルレベルの変換では値は `NULL` |
+| `PARTITION_ID` | BIGINT(21) | パーティションの内部 ID。テーブルレベルの変換では値は `NULL` |
 | `DIRECTION` | VARCHAR(16) | 変換方向: `TO_IA` または `TO_STANDARD` |
 | `TOTAL_REPLICAS` | BIGINT(21) UNSIGNED | 変換に関与するレプリカの総数。最初の観測が成功する前は値は `NULL` |
 | `COMPLETED_REPLICAS` | BIGINT(21) UNSIGNED | 準備完了となったレプリカ数。最初の観測が成功する前は値は `NULL` |
 | `PROGRESS` | DOUBLE | `COMPLETED_REPLICAS` を `TOTAL_REPLICAS` で割った比率。`0` から `1` の範囲です。百分率にするには 100 を掛けます。有効な進捗率が観測されるまでは値は `NULL` です。これは `TOTAL_REPLICAS` と `COMPLETED_REPLICAS` が最初に埋まる観測より後になる場合があります |
-| `START_TIME` | DATETIME(6) | 変換開始時刻（セッション タイムゾーン） |
+| `START_TIME` | DATETIME(6) | 変換開始時刻（セッションタイムゾーン） |
 | `DURATION` | BIGINT(21) UNSIGNED | 変換開始から現在までの経過時間（秒） |
 | `LAST_UPDATE_TIME` | DATETIME(6) | 直近で成功した進捗観測の時刻 |
 
@@ -69,9 +69,9 @@ WHERE TABLE_SCHEMA = 'db_name' AND TABLE_NAME = 'table_name';
 
 変換は 1 つの進行中状態を経て、2 つの最終状態のいずれかで終了します。各状態は `mysql.tidb_storage_class_transition_history` にも記録されます。
 
-| State | 記録場所 | 説明 |
+| 状態 | 記録場所 | 説明 |
 |-|-|-|
-| `RUNNING` | `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` および `mysql.tidb_storage_class_transition_history` の `state` カラム | リージョン レベルの変換が進行中です。`INFORMATION_SCHEMA` テーブルにはこの変換のみが一覧表示され、state カラムはありません。変換が `RUNNING` の間、履歴レコードの `finish_time`、`duration`、`total_replicas`、`completed_replicas` は `NULL` です。進捗は `PROGRESS`、`COMPLETED_REPLICAS`、`TOTAL_REPLICAS` で、経過時間は `DURATION` で追跡します |
+| `RUNNING` | `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` および `mysql.tidb_storage_class_transition_history` の `state` カラム | リージョンレベルの変換が進行中です。`INFORMATION_SCHEMA` テーブルにはこの変換のみが一覧表示され、state カラムはありません。変換が `RUNNING` の間、履歴レコードの `finish_time`、`duration`、`total_replicas`、`completed_replicas` は `NULL` です。進捗は `PROGRESS`、`COMPLETED_REPLICAS`、`TOTAL_REPLICAS` で、経過時間は `DURATION` で追跡します |
 | `COMPLETED` | `mysql.tidb_storage_class_transition_history` の `state` カラム | すべてのレプリカの準備が完了しています。変換は `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` から削除され、履歴レコードは `COMPLETED` に更新されます |
 | `SUPERSEDED` | `mysql.tidb_storage_class_transition_history` の `state` カラム | 完了前に逆方向の変換が発行されたため、この変換は無効化されました。履歴レコードは `SUPERSEDED` に更新されます |
 
@@ -103,13 +103,13 @@ WHERE TABLE_SCHEMA = 'db_name' AND TABLE_NAME = 'table_name';
 | `table_schema` | VARCHAR(64) | データベース名 |
 | `table_name` | VARCHAR(64) | テーブル名 |
 | `table_id` | BIGINT | テーブルの内部 ID。`start_ts` および `direction` とあわせて、このテーブルの主キーを構成します |
-| `partition_name` | VARCHAR(64) | パーティション名。テーブル レベルの変換では値は `NULL` |
-| `partition_id` | BIGINT | パーティションの内部 ID。テーブル レベルの変換では値は `NULL` |
+| `partition_name` | VARCHAR(64) | パーティション名。テーブルレベルの変換では値は `NULL` |
+| `partition_id` | BIGINT | パーティションの内部 ID。テーブルレベルの変換では値は `NULL` |
 | `direction` | VARCHAR(16) | 変換方向: `TO_IA` または `TO_STANDARD` |
 | `state` | VARCHAR(16) | 変換状態: `RUNNING`、`COMPLETED`、または `SUPERSEDED` |
 | `total_replicas` | BIGINT UNSIGNED | 変換に関与するレプリカの総数。`SUPERSEDED` レコードでは、変換が無効化される前に最後に観測された値、または何も観測されていなければ `NULL` です。変換が `RUNNING` の間は値は `NULL` です |
 | `completed_replicas` | BIGINT UNSIGNED | 準備完了だったレプリカ数。`COMPLETED` レコードでは、これは `total_replicas` と等しくなります。`SUPERSEDED` レコードでは、変換が無効化される前に最後に観測された値、または何も観測されていなければ `NULL` です。変換が `RUNNING` の間は値は `NULL` です |
-| `schema_version` | BIGINT | この変換が属する TiDB スキーマ バージョン |
+| `schema_version` | BIGINT | この変換が属する TiDB スキーマバージョン |
 | `start_ts` | BIGINT UNSIGNED | 変換の開始 TSO。`table_id` および `direction` とあわせて変換を識別します |
 | `start_time` | DATETIME(6) | 変換開始時刻 |
 | `finish_time` | DATETIME(6) | 変換が最終状態に達した時刻。`COMPLETED` レコードでは、すべてのレプリカの準備が完了した時刻です。`SUPERSEDED` レコードでは、新しい変換の開始時刻です。変換が最終状態に達するまでは値は `NULL` です |
@@ -171,11 +171,11 @@ SET GLOBAL tidb_storage_class_transition_history_size = 500;
 
 ## SQL レベルで IA 読み取りを監視する {#monitor-ia-reads-at-the-sql-level}
 
-このセクションでは、`EXPLAIN ANALYZE`、statement summary テーブル、slow query ログ、および TiDB Cloud コンソールで利用できる IA メトリクスについて説明します。
+このセクションでは、`EXPLAIN ANALYZE`、ステートメントサマリーテーブル、スロークエリログ、および TiDB Cloud コンソールで利用できる IA メトリクスについて説明します。
 
 ### EXPLAIN ANALYZE {#explain-analyze}
 
-クエリにリモート データ ロードが含まれる場合、`scan_detail` には次のフィールドが含まれます。
+クエリにリモートデータロードが含まれる場合、`scan_detail` には次のフィールドが含まれます。
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM t_ia WHERE id BETWEEN 1 AND 50000;
@@ -187,15 +187,15 @@ EXPLAIN ANALYZE SELECT * FROM t_ia WHERE id BETWEEN 1 AND 50000;
 
 > **Note:**
 >
-> IA シグナルは、テーブル レベルで安定したフラグではなく、リクエスト単位の読み取りパスの証拠です。同じクエリでも、初回実行では IA 情報が表示されても、キャッシュヒット後には表示されないことがあります。
+> IA シグナルは、テーブルレベルで安定したフラグではなく、リクエスト単位の読み取りパスの証拠です。同じクエリでも、初回実行では IA 情報が表示されても、キャッシュヒット後には表示されないことがあります。
 >
-> また、`ia_remote_read_segment_wait_time` はすべてのリモート リクエスト時間の合計です。TiKV の基盤となる並列読み取りメカニズムにより、この値は SQL の実際の実行時間を上回る場合があります。
+> また、`ia_remote_read_segment_wait_time` はすべてのリモートリクエスト時間の合計です。TiKV の基盤となる並列読み取りメカニズムにより、この値は SQL の実際の実行時間を上回る場合があります。
 
-### Statement summary {#statement-summary}
+### ステートメントサマリー {#statement-summary}
 
-`STATEMENTS_SUMMARY`, `STATEMENTS_SUMMARY_HISTORY` およびそれらの `CLUSTER_` 対応ビューには、次の IA カラムが含まれます。
+`STATEMENTS_SUMMARY`、`STATEMENTS_SUMMARY_HISTORY`、およびそれらの `CLUSTER_` 対応ビューには、次の IA カラムが含まれます。
 
-| Column | 説明 |
+| カラム | 説明 |
 |-|-|
 | `IA_EXEC_COUNT` | 少なくとも 1 回の IA リモート読み取りを発生させた実行回数。`EXEC_COUNT` と比較することで、IA データにアクセスした実行の割合を把握できます。たとえば、`IA_EXEC_COUNT = 2` かつ `EXEC_COUNT = 1000` は、実行のうち IA データにアクセスしたのが 0.2% のみであることを意味します |
 | `AVG_IA_REMOTE_READ_SEGMENT_COUNT` | 実行ごとのリモート読み取りセグメント数の平均 |
@@ -221,7 +221,7 @@ ORDER BY ia_exec_pct DESC
 LIMIT 10;
 ```
 
-### Slow queries {#slow-queries}
+### スロークエリ {#slow-queries}
 
 `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` には、次の IA カラムが含まれます。
 
@@ -239,7 +239,7 @@ ADMIN SHOW SLOW TOP ALL 10;
 
 フィールドの意味と単位は、`SLOW_QUERY` テーブルと同じです。IA テーブルを含まないクエリでは、値は `NULL` または `0` になります。対応するフィールドは、TiDB Cloud コンソールのスロークエリ詳細にも表示されます。
 
-### SQL statement list in the console {#sql-statement-list-in-the-console}
+### コンソールの SQL ステートメントリスト {#sql-statement-list-in-the-console}
 
 `IA_EXEC_COUNT` カラムは、SQL ステートメント診断リストにも表示されます。
 
@@ -248,15 +248,15 @@ ADMIN SHOW SLOW TOP ALL 10;
 
 このカラム名は **Exec Count of IA** で、**Executions Count** の直後に配置されるため、2 つの値を直接比較できます。他のカラムと同様に、昇順および降順のソートをサポートします。IA テーブルを含まないステートメントでは、値は `0` です。
 
-## クラスター レベルで IA キャッシュ性能を監視する {#monitor-ia-cache-performance-at-the-cluster-level}
+## クラスターレベルで IA キャッシュ性能を監視する {#monitor-ia-cache-performance-at-the-cluster-level}
 
-このセクションでは、TiDB Cloud コンソールで IA キャッシュの挙動を確認するためのクラスター レベルのパネルについて説明します。
+このセクションでは、TiDB Cloud コンソールで IA キャッシュの挙動を確認するためのクラスターレベルのパネルについて説明します。
 
-### IA Cache Performance panels {#ia-cache-performance-panels}
+### IA Cache Performance パネル {#ia-cache-performance-panels}
 
 パス: **Monitoring** > **Metrics** > **Instance Overview** > **IA Cache Performance**。
 
-| Panel | 説明 |
+| パネル | 説明 |
 |-|-|
 | **IA Cache Hit Rate (%)** | クラスター全体の IA キャッシュヒット率。値が 85% を下回ると黄色のインジケーターが表示されます |
 | **IA Cache Miss Rate (ops/s)** | IA キャッシュミスの発生頻度。通常、この値は低く保たれます。急増した場合は、大量のコールドリードまたはキャッシュへの負荷を示します |
@@ -296,7 +296,7 @@ ADMIN SHOW SLOW TOP ALL 10;
 2. ほとんどのステートメントでコールドリード比率が高いままであれば、IA に対してキャッシュヒット率が低すぎます。テーブルを Standard に戻すことを検討してください。
 3. コールドリード比率が低くても、一部のステートメントが毎回大量のデータを読み取る場合は、テーブル全体を戻すのではなく、それらのステートメントを最適化してください。
 
-## See also {#see-also}
+## 参照 {#see-also}
 
 - [階層型ストレージの概要](/tidb-cloud/tiered-storage-overview.md)
 - [ティアードストレージの設定と管理](/tidb-cloud/tiered-storage-guide.md)
