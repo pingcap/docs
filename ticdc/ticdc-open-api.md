@@ -23,7 +23,7 @@ API を使用して、TiCDC クラスターで次のメンテナンス操作を�
 - [レプリケーションタスクリストをクエリする](#query-the-replication-task-list)
 - [特定のレプリケーションタスクをクエリする](#query-a-specific-replication-task)
 - [レプリケーションタスクを一時停止する](#pause-a-replication-task)
-- [Resume a replication task](#resume-a-replication-task)
+- [レプリケーションタスクを再開する](#resume-a-replication-task)
 - [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
 - [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
 - [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
@@ -38,7 +38,7 @@ API を使用して、TiCDC クラスターで次のメンテナンス操作を�
 
 ## APIエラーメッセージテンプレート {#api-error-message-template}
 
-After sending an API request, if an error occurs, the returned error message is in the following format:
+API リクエストの送信後にエラーが発生した場合、返されるエラーメッセージは次の形式になります。
 
 ```json
 {
@@ -47,7 +47,7 @@ After sending an API request, if an error occurs, the returned error message is 
 }
 ```
 
-上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラーコードを示します。
+上記の JSON 出力では、 `error_msg`はエラーメッセージを示し、`error_code`は対応するエラーコードを示します。
 
 ## TiCDCノードのステータス情報を取得する {#get-the-status-information-of-a-ticdc-node}
 
@@ -59,7 +59,7 @@ After sending an API request, if an error occurs, the returned error message is 
 
 ### 例 {#example}
 
-次のリクエストは、IP アドレスが`127.0.0.1`でポート番号が`8300`ある TiCDC ノードのステータス情報を取得します。
+次のリクエストは、IP アドレスが`127.0.0.1`でポート番号が`8300`である TiCDC ノードのステータス情報を取得します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/status
@@ -113,18 +113,18 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 | パラメータ名 | 説明 |
 | :------------------------ | :---------------------- ------------------------------- |
-| `changefeed_id` | `STRING` type。レプリケーションタスクの ID。(オプション) |
-| `start_ts` | `UINT64` type。changefeed の開始 TSO を指定します。(オプション) |
-| `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) |
-| **`sink_uri`** | `STRING` type。レプリケーションタスクのダウンストリーム アドレス。(**必須**) |
-| `force_replicate` | `BOOLEAN` type。一意インデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) |
-| `ignore_ineligible_table` | `BOOLEAN` type。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) |
-| `filter_rules` | `STRING` type 配列。テーブルスキーマのフィルタリングのルール。(オプション) |
-| `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) |
-| `mounter_worker_num` | `INT` type。マウンタのスレッド番号。(オプション) |
+| `changefeed_id` | `STRING`型。レプリケーションタスクの ID。(オプション) |
+| `start_ts` | `UINT64`型。changefeed の開始 TSO を指定します。(オプション) |
+| `target_ts` | `UINT64`型。changefeed のターゲット TSO を指定します。(オプション) |
+| **`sink_uri`** | `STRING`型。レプリケーションタスクのダウンストリーム アドレス。(**必須**) |
+| `force_replicate` | `BOOLEAN`型。一意インデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) |
+| `ignore_ineligible_table` | `BOOLEAN`型。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) |
+| `filter_rules` | `STRING`型の配列。テーブルスキーマのフィルタリングのルール。(オプション) |
+| `ignore_txn_start_ts` | `UINT64`型の配列。指定された start_ts のトランザクションを無視します。(オプション) |
+| `mounter_worker_num` | `INT`型。Mounter のスレッド数。(オプション) |
 | `sink_config` | シンクの設定パラメータ。(オプション) |
 
-`changefeed_id` `target_ts`意味と形式は、 [`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。 `sink_uri` `start_ts`パラメータの詳細については、こちらのドキュメントを参照してください`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
+`changefeed_id`、`start_ts`、`target_ts`、`sink_uri`の意味と形式は、[`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これらのパラメータの詳細については、このドキュメントを参照してください。なお、`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
 
 上記の表のその他のパラメータについては、次のようにさらに詳しく説明します。
 
@@ -136,7 +136,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 `ignore_txn_start_ts` : このパラメータが指定されると、指定された start_ts は無視されます。例: `ignore-txn-start-ts = [1, 2]` 。
 
-`mounter_worker_num` : マウンタのスレッド番号。マウンタはTiKVから出力されたデータをデコードするために使用されます。デフォルト値は`16`です。
+`mounter_worker_num` : Mounter のスレッド数。Mounter は TiKV から出力されたデータをデコードするために使用されます。デフォルト値は`16`です。
 
 シンクの設定パラメータは以下のとおりです。
 
@@ -150,16 +150,16 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 }
 ```
 
-`dispatchers` : MQタイプのシンクでは、ディスパッチャを使用してイベントディスパッチャを設定できます。サポートされるディスパッチャは`default` 、 `ts` 、 `index-value` 、 `table` 4つです。ディスパッチャのルールは以下のとおりです。
+`dispatchers` : MQタイプのシンクでは、ディスパッチャを使用してイベントディスパッチャを設定できます。サポートされるディスパッチャは`default` 、 `ts` 、 `index-value` 、 `table`の4つです。ディスパッチャのルールは以下のとおりです。
 
 - `default` : `table`モードでイベントを送信します。
 - `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
-- `index-value`: uses the name and value of the selected HandleKey column to create the hash value and dispatch events.
+- `index-value` : 選択した HandleKey 列の名前と値を使用してハッシュ値を作成し、イベントをディスパッチします。
 - `table` : テーブルのスキーマ名とテーブル名を使用してハッシュ値を作成し、イベントをディスパッチします。
 
 `matcher` : マッチャーの一致構文はフィルタールール構文と同じです。
 
-`protocol` : MQタイプのシンクの場合、メッセージのプロトコル形式を指定できます。現在、 `canal-json` `debezium`プロトコル`open-protocol`サポート`simple`れています`avro`
+`protocol` : MQタイプのシンクの場合、メッセージのプロトコル形式を指定できます。現在、`canal-json`、`open-protocol`、`avro`、`debezium`、`simple`のプロトコルがサポートされています。
 
 ### 例 {#example}
 
@@ -221,18 +221,18 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 | パラメータ名 | 説明 |
 | :--------------------- | :-------------------------- --------------------------- |
-| `target_ts` | `UINT64` type。changefeed のターゲット TSO を指定します。(オプション) |
-| `sink_uri` | `STRING` type。レプリケーションタスクのダウンストリーム アドレス。(オプション) |
-| `filter_rules` | `STRING` type 配列。テーブルスキーマフィルタリングのルール。(オプション) |
-| `ignore_txn_start_ts` | `UINT64` type 配列。指定された start_ts のトランザクションを無視します。(オプション) |
-| `mounter_worker_num` | `INT` type。マウント元スレッド番号。(オプション) |
+| `target_ts` | `UINT64`型。changefeed のターゲット TSO を指定します。(オプション) |
+| `sink_uri` | `STRING`型。レプリケーションタスクのダウンストリーム アドレス。(オプション) |
+| `filter_rules` | `STRING`型の配列。テーブルスキーマフィルタリングのルール。(オプション) |
+| `ignore_txn_start_ts` | `UINT64`型の配列。指定された start_ts のトランザクションを無視します。(オプション) |
+| `mounter_worker_num` | `INT`型。Mounter のスレッド数。(オプション) |
 | `sink_config` | シンクの設定パラメータ。(オプション) |
 
-上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、セクション1を参照してください。
+上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、そのセクションを参照してください。
 
 ### 例 {#example}
 
-次のリクエストは、ID `test1`のレプリケーションタスクの`mounter_worker_num` `32`に更新します。
+次のリクエストは、ID `test1`のレプリケーションタスクの`mounter_worker_num`を`32`に更新します。
 
 ```shell
  curl -X PUT -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1/changefeeds/test1 -d '{"mounter_worker_num":32}'
@@ -240,7 +240,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 リクエストが成功した場合は`202 Accepted`が返されます。リクエストが失敗した場合は、エラーメッセージとエラーコードが返されます。
 
-## Query the replication task list {#query-the-replication-task-list}
+## レプリケーションタスクリストをクエリする {#query-the-replication-task-list}
 
 このAPIは同期インターフェースです。リクエストが成功すると、TiCDCクラスター内のすべてのノードの基本情報が返されます。
 
@@ -258,11 +258,11 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 `state`の値のオプションは`all` 、 `normal` 、 `stopped` 、 `error` 、 `failed` 、 `finished`です。
 
-このパラメータを指定しない場合は、状態が正常、停止、または失敗であるレプリケーションタスクの基本情報がデフォルトで返されます。
+このパラメータを指定しない場合は、状態が normal、stopped、または failed であるレプリケーションタスクの基本情報がデフォルトで返されます。
 
 ### 例 {#example}
 
-次のリクエストは、状態が`normal`あるすべてのレプリケーションタスクの基本情報を照会します。
+次のリクエストは、状態が`normal`であるすべてのレプリケーションタスクの基本情報を照会します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
@@ -290,7 +290,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
 上記の返された結果のフィールドは次のように説明されます。
 
 - id: レプリケーションタスクの ID。
-- 状態: レプリケーションタスクの現在の[状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)。
+- state: レプリケーションタスクの現在の[状態](/ticdc/ticdc-changefeed-overview.md#changefeed-state-transfer)。
 - checkpoint_tso: レプリケーションタスクの現在のチェックポイントの TSO 表現。
 - checkpoint_time: レプリケーションタスクの現在のチェックポイントのフォーマットされた時間表現。
 - error: レプリケーションタスクのエラー情報。
@@ -440,7 +440,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/processors
 
 ### 例 {#example}
 
-次のリクエストは、 `changefeed_id`が`test` `capture_id` `561c3784-77f0-4863-ad52-65a3436db6af`であるサブタスクの詳細情報を取得します。サブタスクは`changefeed_id`と`capture_id`で識別できます。
+次のリクエストは、 `changefeed_id`が`test`、`capture_id`が`561c3784-77f0-4863-ad52-65a3436db6af`であるサブタスクの詳細情報を取得します。サブタスクは`changefeed_id`と`capture_id`で識別できます。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v1/processors/test1/561c3784-77f0-4863-ad52-65a3436db6af
@@ -536,11 +536,11 @@ curl -X POST http://127.0.0.1:8300/api/v1/owner/resign
 
 ### パラメータの説明 {#parameter-description}
 
-#### Path parameters {#path-parameters}
+#### パスパラメータ {#path-parameters}
 
 | パラメータ名          | 説明                                                           |
 | :-------------- | :----------------------------------------------------------- |
-| `changefeed_id` | The ID of the replication task (changefeed) to be scheduled. |
+| `changefeed_id` | スケジュールするレプリケーションタスク (changefeed) の ID。 |
 
 #### リクエスト本体のパラメータ {#parameters-for-the-request-body}
 
@@ -568,7 +568,7 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 
 `POST /api/v1/log`
 
-### Request parameters {#request-parameters}
+### リクエストパラメータ {#request-parameters}
 
 #### リクエスト本体のパラメータ {#parameters-for-the-request-body}
 
