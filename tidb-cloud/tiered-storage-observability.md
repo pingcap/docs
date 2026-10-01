@@ -9,7 +9,7 @@ summary: TiDB Cloud Premium または BYOC で階層型ストレージを監視�
 
 > **Note:**
 >
-> 階層型ストレージは、{{{ .premium }}} および {{{ .byoc }}} 向けに **private preview** として提供されており、デフォルトでは無効です。利用するには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡して、インスタンスで有効化してもらう必要があります。このページで説明している動作は現在のプレビュー実装に基づいており、一般提供 (GA) 前に変更される可能性があります。
+> 階層型ストレージは、{{{ .premium }}} および {{{ .byoc }}} 向けに **プライベートプレビュー** として提供されており、デフォルトでは無効です。利用するには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡して、インスタンスで有効化してもらう必要があります。このページで説明している動作は現在のプレビュー実装に基づいており、一般提供 (GA) 前に変更される可能性があります。
 
 ## ストレージクラス移行を監視する {#monitor-storage-class-transitions}
 

@@ -9,7 +9,7 @@ summary: TiDB Cloud Premium と BYOC における階層型ストレージの概�
 
 > **Note:**
 >
-> 階層型ストレージは、{{{ .premium }}} と {{{ .byoc }}} 向けに **private preview** として提供されており、デフォルトでは無効です。使用するには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡して、インスタンスで有効化してもらう必要があります。このページで説明する動作は、現在の preview 実装に基づいており、一般提供 (GA) 前に変更される可能性があります。
+> 階層型ストレージは、{{{ .premium }}} と {{{ .byoc }}} 向けに **プライベートプレビュー** として提供されており、デフォルトでは無効です。使用するには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡して、インスタンスで有効化してもらう必要があります。このページで説明する動作は、現在のプレビュー実装に基づいており、一般提供 (GA) 前に変更される可能性があります。
 
 ## はじめに {#introduction}
 

@@ -9,7 +9,7 @@ summary: TiDB Cloud Premium と BYOC における階層型ストレージの一�
 
 > **Note:**
 >
-> 階層型ストレージは、{{{ .premium }}} と {{{ .byoc }}} で **private preview** として提供されており、デフォルトでは無効です。利用するには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡して、インスタンスで有効化してもらう必要があります。このページで説明している動作は、現在の preview 実装に基づくものであり、一般提供 (GA) 前に変更される可能性があります。
+> 階層型ストレージは、{{{ .premium }}} と {{{ .byoc }}} で **プライベートプレビュー** として提供されており、デフォルトでは無効です。利用するには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡して、インスタンスで有効化してもらう必要があります。このページで説明している動作は、現在のプレビュー実装に基づくものであり、一般提供 (GA) 前に変更される可能性があります。
 
 ## IA テーブルで `UPDATE`/`DELETE` を実行できますか？ {#can-ia-tables-execute-update-delete}
 
@@ -59,7 +59,7 @@ Amazon S3 に保存されるのは 1 コピーだけで、3 つのレプリカ�
 
 ## IA データのローカルキャッシュを増やせますか？ また、その場合コストは増えますか？ {#can-i-increase-the-local-cache-for-ia-data-and-does-it-cost-more}
 
-はい。ただし、キャッシュレベルの調整には、階層型ストレージ preview に加えて別途許可リストへの登録が必要です。まず [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡して有効化してください。その後、**Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration** で、より高い IA キャッシュレベルを選択できます。利用可能なレベルは **Economy**、**Default**、**Balanced**、**Deep** です。高いレベルほど、より多くの IA データをローカルディスクにキャッシュするため、コールドリード性能が向上します。
+はい。ただし、キャッシュレベルの調整には、階層型ストレージのプライベートプレビュー有効化に加えて別途許可リストへの登録が必要です。まず [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡して有効化してください。その後、**Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration** で、より高い IA キャッシュレベルを選択できます。利用可能なレベルは **Economy**、**Default**、**Balanced**、**Deep** です。高いレベルほど、より多くの IA データをローカルディスクにキャッシュするため、コールドリード性能が向上します。
 
 コストは増えます。{{{ .premium }}} では、各キャッシュレベルに IA ストレージ換算係数があり、**Economy** の 0.9x から **Deep** の 1.8x まで設定されています。この係数は、請求額計算時に報告される IA ストレージ使用量に適用されます。{{{ .byoc }}} では係数は適用されません。追加リソースは自身のクラウドアカウント内でプロビジョニングされ、クラウドプロバイダーから課金されます。この変更はホットアップデートであり、再起動は不要です。各レベルの係数については、[TiDB Cloud課金](/tidb-cloud/tidb-cloud-billing.md) を参照してください。
 
