@@ -84,7 +84,7 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 - Region Request Finish Scan Duration:リージョン増分スキャンにかかる時間
 - Subscribed Region Count: 登録済みリージョンの総数
 - Memory Quota: Log Puller のメモリクォータと使用量。過剰な使用はスロットリングを引き起こす可能性があります。
-- Resolved Ts Batch Size (Regions): 1つの解決済みTsイベントに含まれるリージョンの数
+- Resolved Ts Batch Size (Regions): 1つの Resolved Ts イベントに含まれるリージョンの数
 
 ### Event Store {#event-store}
 
@@ -127,7 +127,7 @@ TiCDC の新しいアーキテクチャの監視ダッシュボードには、�
 
 ## クラシックアーキテクチャにおける TiCDC のメトリクス {#metrics-for-ticdc-in-the-classic-architecture}
 
-TiUPを使用して TiDB クラスターをデプロイすると、TiDB と同時にデプロイされる TiCDC のサブダッシュボードが Grafana の[クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)に表示されます。
+TiUPを使用して TiDB クラスターをデプロイすると、Grafana で、TiDB と同時にデプロイされた[クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)の TiCDC 用サブダッシュボードを確認できます。
 
 各パネルの説明は次のとおりです。
 

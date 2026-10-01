@@ -40,7 +40,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
 1. クラスター API キーを作成します。
 
-    [Confluent Cloud](https://confluent.cloud)にサインインします。**Data integration** > **APIキー** > **キーの作成 を**選択します。表示される**APIキーのスコープの選択**ページで、**グローバルアクセス**を選択します。
+    [Confluent Cloud](https://confluent.cloud)にサインインします。**Data integration** > **APIキー** > **キーの作成**を選択します。表示される**APIキーのスコープの選択**ページで、**グローバルアクセス**を選択します。
 
     作成後、以下に示すようにキーペア ファイルが生成されます。
 
@@ -171,7 +171,7 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 1. Snowflake でデータベースとスキーマを作成します。
 
-    Snowflakeコントロールコンソールで、 **Data** > **Database**を選択します。`TPCC`名前のデータベースと`TiCDC`という名前のスキーマを作成します。
+    Snowflakeコントロールコンソールで、 **Data** > **Database**を選択します。`TPCC`という名前のデータベースと`TiCDC`という名前のスキーマを作成します。
 
 2. Confluent Cloud Consoleで、 **Data integration** > **Connectors** > **Snowflake Sink**を選択します。以下のページが表示されます。
 
@@ -193,7 +193,7 @@ Snowflakeはクラウドネイティブなデータウェアハウスです。Co
 
 ### SnowflakeでTiDBテーブルのデータレプリカを作成する {#create-data-replicas-of-tidb-tables-in-snowflake}
 
-前のセクションでは、TiDB増分データの変更ログがSnowflakeに複製されました。本セクションでは`UPDATE` `INSERT`応じて処理し、上流と同じ構造のテーブルに書き込むことで、SnowflakeにTiDBテーブルのデータレプリカを作成する方法について説明します。以下では`DELETE`イベントタイプ`ITEM`のテーブルを例に説明します。
+前のセクションでは、TiDB増分データの変更ログがSnowflakeに複製されました。本セクションでは、Snowflake の TASK 機能と STREAM 機能を使用して、これらの変更ログを`INSERT`、`UPDATE`、`DELETE`のイベントタイプに応じて処理し、上流と同じ構造のテーブルに書き込むことで、SnowflakeにTiDBテーブルのデータレプリカを作成する方法について説明します。以下では`ITEM`テーブルを例に説明します。
 
 `ITEM`テーブルの構造は次のとおりです。
 
@@ -229,13 +229,13 @@ create or replace TABLE TIDB_TEST_ITEM (
     );
     ```
 
-2. `TIDB_TEST_ITEM`ストリームを作成し、 `append_only`から`true`を次のように設定します。
+2. `TIDB_TEST_ITEM`のストリームを作成し、次のように`append_only`を`true`に設定します。
 
     ```
     create or replace stream TEST_ITEM_STREAM on table TIDB_TEST_ITEM append_only=true;
     ```
 
-    このようにして作成されたストリームは、リアルタイムで`INSERT`イベントのみをキャプチャします。具体的には、TiDBで`ITEM`新しい変更ログが生成されると、その変更ログが`TIDB_TEST_ITEM`に挿入され、ストリームによってキャプチャされます。
+    このようにして作成されたストリームは、リアルタイムで`INSERT`イベントのみをキャプチャします。具体的には、TiDBで`ITEM`の新しい変更ログが生成されると、その変更ログが`TIDB_TEST_ITEM`に挿入され、ストリームによってキャプチャされます。
 
 3. ストリーム内のデータを処理します。イベントの種類に応じて、 `TEST_ITEM`テーブル内のストリームデータを挿入、更新、または削除します。
 
@@ -328,7 +328,7 @@ ksqlDBは、ストリーム処理アプリケーション向けに特別に構�
     CREATE STREAM orders (o_id INTEGER, o_d_id INTEGER, o_w_id INTEGER, o_c_id INTEGER, o_entry_d STRING, o_carrier_id INTEGER, o_ol_cnt INTEGER, o_all_local INTEGER) WITH (kafka_topic='tidb_tpcc_orders', partitions=3, value_format='AVRO');
     ```
 
-3. 注文の STREAM データを確認するには、次のコマンドを実行します。
+3. orders の STREAM データを確認するには、次のコマンドを実行します。
 
     ```sql
     SELECT * FROM ORDERS EMIT CHANGES;
@@ -376,12 +376,12 @@ Microsoft SQL Server は、Microsoft が開発したリレーショナルデー�
 
     | フィールド              | 値     |
     | :-------------- | :----- |
-    | 入力Kafkaレコード値の形式 | Avro    |
-    | 挿入モード           | アップサート |
+    | 入力Kafkaレコード値の形式 | AVRO    |
+    | 挿入モード           | UPSERT |
     | テーブルの自動作成       | true     |
     | 列の自動追加          | true     |
-    | PKモード           | レコードキー |
-    | 入力Kafkaレコードキー形式 | Avro    |
+    | PKモード           | record_key |
+    | 入力Kafkaレコードキー形式 | AVRO    |
     | null の場合に削除     | true     |
 
 6. 設定後、 **Continue**をクリックします。コネクタのステータスが**Running**になるまで待ちます。これには数分かかる場合があります。

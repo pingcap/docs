@@ -52,7 +52,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ### `force-replicate` {#force-replicate}
 
-- [有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)かどうかを指定します。
+- [有効なインデックスのないテーブルを複製する](/ticdc/ticdc-manage-changefeed.md#replicate-tables-without-a-valid-index)処理を強制的に行うかどうかを指定します。
 - デフォルト値: `false`
 
 ### `enable-sync-point` <span class="version-mark">v6.3.0で追加</span> {#enable-sync-point-new-in-v630}
@@ -122,7 +122,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ##### `matcher` {#matcher}
 
-- `matcher`は許可リストです。 `matcher = ["test.worker"]`は、このルールが`worker`データベース内の`test`テーブルにのみ適用されることを意味します。
+- `matcher`は許可リストです。 `matcher = ["test.worker"]`は、このルールが`test`データベース内の`worker`テーブルにのみ適用されることを意味します。
 
 ##### `ignore-event` {#ignore-event}
 
@@ -131,23 +131,23 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ##### `ignore-sql` {#ignore-sql}
 
-- `ignore-sql = ["^drop", "add column"]` `DROP`で始まる、または`ADD COLUMN`を含む DDL を無視します。
+- `ignore-sql = ["^drop", "add column"]`は、`DROP`で始まる、または`ADD COLUMN`を含む DDL を無視します。
 
 ##### `ignore-delete-value-expr` {#ignore-delete-value-expr}
 
-- `ignore-delete-value-expr = "name = 'john'"`は、条件`DELETE`を含む`name = 'john'` DML を無視します。
+- `ignore-delete-value-expr = "name = 'john'"`は、条件`name = 'john'`を含む`DELETE` DML を無視します。
 
 ##### `ignore-insert-value-expr` {#ignore-insert-value-expr}
 
-- `ignore-insert-value-expr = "id >= 100"`は、条件`INSERT`を含む`id >= 100` DML を無視します。
+- `ignore-insert-value-expr = "id >= 100"`は、条件`id >= 100`を含む`INSERT` DML を無視します。
 
 ##### `ignore-update-old-value-expr` {#ignore-update-old-value-expr}
 
-- `ignore-update-old-value-expr = "age < 18"`は、古い値に`UPDATE`が含まれる`age < 18` DML を無視します。
+- `ignore-update-old-value-expr = "age < 18"`は、古い値に`age < 18`が含まれる`UPDATE` DML を無視します。
 
 ##### `ignore-update-new-value-expr` {#ignore-update-new-value-expr}
 
-- `ignore-update-new-value-expr = "gender = 'male'"`は、新しい値に`UPDATE`が含まれる`gender = 'male'` DML を無視します。
+- `ignore-update-new-value-expr = "gender = 'male'"`は、新しい値に`gender = 'male'`が含まれる`UPDATE` DML を無視します。
 
 ### scheduler {#scheduler}
 
@@ -266,7 +266,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 - パーティションを区切り文字として使用するかどうかを制御します。
 - この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 - デフォルト値： `true` 。これは、テーブル内のパーティションが別々のディレクトリに保存されることを意味します。
-- この設定は将来のバージョンで非推奨となり、 `true`に強制的に設定されますのでご注意ください。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については、 [第11979号](https://github.com/pingcap/tiflow/issues/11979)を参照してください。使用例については、データ[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)を参照してください。
+- この設定は将来のバージョンで非推奨となり、 `true`に強制的に設定されますのでご注意ください。下流のパーティションテーブルでのデータ損失を防ぐため、この設定はデフォルト値のままにしておくことをお勧めします。詳細については、 [Issue #11979](https://github.com/pingcap/tiflow/issues/11979)を参照してください。使用例については、[データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)を参照してください。
 
 #### `debezium-disable-schema` {#debezium-disable-schema}
 
@@ -295,7 +295,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 ##### `include-commit-ts` {#include-commit-ts}
 
-- CSV行にコミットTを含めるかどうかを制御します。
+- CSV行に commit-ts を含めるかどうかを制御します。
 - デフォルト値: `false`
 
 ##### `binary-encoding-method` {#binary-encoding-method}
@@ -350,7 +350,7 @@ v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロ�
 
 ##### `output-old-value` {#output-old-value}
 
-- 行データが変更される前に値を出力するかどうかを制御します。デフォルト値は true です。無効にすると、 `UPDATE`イベントは"p"フィールドを出力しません。
+- 行データが変更される前の値を出力するかどうかを制御します。デフォルト値は true です。無効にすると、 `UPDATE`イベントは"p"フィールドを出力しません。
 - デフォルト値: `true`
 
 #### sink.debezium {#sink-debezium}
@@ -401,7 +401,7 @@ REDO ログを使用する場合の変更フィードのレプリケーション
 
 #### `flush-worker-num` {#flush-worker-num}
 
-- 再実行モジュール内のフラッシングワーカーの数。
+- リドゥモジュール内のフラッシングワーカーの数。
 - デフォルト値: `8`
 
 #### `compression` <span class="version-mark">v6.5.6、v7.1.3、v7.5.1、および v7.6.0 で追加</span> {#compression-new-in-v656-v713-v751-and-v760}
@@ -593,17 +593,17 @@ token="xxxx"
 
 #### `worker-count` {#worker-count}
 
-- ダウンストリームのクラウドストレージの同時実行性が変更されます。
+- データ変更をダウンストリームのクラウドストレージに保存する際の同時実行数。
 - デフォルト値: `16`
 
 #### `flush-interval` {#flush-interval}
 
-- 下流のクラウドストレージにデータを保存する間隔が変更されます。
+- データ変更を下流のクラウドストレージに保存する間隔。
 - デフォルト値: `"2s"`
 
 #### `file-size` {#file-size}
 
-- このファイルのバイト数`file-size`を超えると、データ変更ファイルがクラウドストレージに保存されます。
+- このファイルのバイト数が`file-size`を超えると、データ変更ファイルがクラウドストレージに保存されます。
 - デフォルト値： `67108864` 、つまり64MiB
 
 #### `file-expiration-days` {#file-expiration-days}

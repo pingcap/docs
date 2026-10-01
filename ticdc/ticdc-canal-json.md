@@ -25,9 +25,9 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 ## TiDB拡張フィールド {#tidb-extension-field}
 
-Canal-JSONプロトコルは元々MySQL用に設計されており、CommitTSトランザクションのTiDB固有の一意の識別子などの重要なフィールドが含まれていません。この問題を解決するために、TiCDCはCanal-JSONプロトコル形式にTiDB拡張フィールドを追加します`sink-uri`で`enable-tidb-extension`を`true` （デフォルトは`false` ）に設定すると、TiCDCはCanal-JSONメッセージを生成する際に次のように動作します。
+Canal-JSONプロトコルは元々MySQL用に設計されており、CommitTSトランザクションのTiDB固有の一意の識別子などの重要なフィールドが含まれていません。この問題を解決するために、TiCDCはCanal-JSONプロトコル形式にTiDB拡張フィールドを追加します。`sink-uri`で`enable-tidb-extension`を`true` （デフォルトは`false` ）に設定すると、TiCDCはCanal-JSONメッセージを生成する際に次のように動作します。
 
-- TiCDC は、 `_tidb`名前のフィールドを含む DML イベントメッセージと DDL イベントメッセージを送信します。
+- TiCDC は、 `_tidb`という名前のフィールドを含む DML イベントメッセージと DDL イベントメッセージを送信します。
 - TiCDC は WATERMARK イベントメッセージを送信します。
 
 次に例を示します。
@@ -163,7 +163,7 @@ TiCDCは、 `enable-tidb-extension`を`true`に設定した場合のみ、WATERM
 }
 ```
 
-### 消費者側でのデータ解析 {#data-parsing-on-the-consumer-side}
+### コンシューマー側でのデータ解析 {#data-parsing-on-the-consumer-side}
 
 上記の例からわかるように、Canal-JSON は統一されたデータ形式を持ち、イベントの種類ごとに異なるフィールドの入力ルールを備えています。コンシューマーは、統一された方法でこの JSON 形式のデータを解析し、フィールド値をチェックすることでイベントの種類を判別できます。
 
@@ -213,7 +213,7 @@ Canal-JSON形式の`sqlType`のフィールドには、各列のJava SQL型が�
 
 ## 整数型 {#integer-types}
 
-次の表に示すように、それぞれ異なるJava SQL 型コードに対応する[整数型](/data-type-numeric.md#integer-types) `Unsigned`制約と値のサイズがあるかどうかを考慮する必要があります。
+次の表に示すように、[整数型](/data-type-numeric.md#integer-types)に`Unsigned`制約があるかどうかと値のサイズを考慮する必要があります。これらはそれぞれ異なる Java SQL 型コードに対応します。
 
 | MySQL 型文字列         | 値の範囲                                        | Java SQL 型コード |
 | :----------------- | :------------------------------------------ | :------------ |
@@ -257,29 +257,29 @@ Java SQL 型の詳細については、 [Java SQL クラス型](https://docs.ora
 
 ## バイナリ型とBlob型 {#binary-and-blob-types}
 
-TiCDC は、次のように各バイトを文字表現に変換して、 [バイナリ型](/data-type-string.md#binary-type) Canal-JSON 形式でエンコードします。
+TiCDC は、次のように各バイトを文字表現に変換して、 [バイナリ型](/data-type-string.md#binary-type)を Canal-JSON 形式でエンコードします。
 
 - 印刷可能な文字は、ISO/IEC 8859-1 文字エンコーディングを使用して表されます。
 - 印刷できない文字および HTML で特別な意味を持つ特定の文字は、UTF-8 エスケープ シーケンスを使用して表されます。
 
 次の表に詳細な表現情報を示します。
 
-| 文字の種類            | 値の範囲      | キャラクター表現                          |
+| 文字の種類            | 値の範囲      | 文字表現                          |
 | :--------------- | :-------- | :-------------------------------- |
-| 制御文字             | [0、31]    | UTF-8エスケープ（ `\u0000`から`\u001F`など） |
+| 制御文字             | [0, 31]    | UTF-8エスケープ（ `\u0000`から`\u001F`など） |
 | 水平タブ             | [9]       | `\t`                              |
 | 改行               | [10]      | `\n`                              |
 | キャリッジリターン        | [13]      | `\r`                              |
-| 印刷可能な文字          | [32、127]  | リテラル文字（ `A`など）                    |
+| 印刷可能な文字          | [32, 127]  | リテラル文字（ `A`など）                    |
 | アンパサンド           | [38]      | `\u0026`                          |
 | 小なり記号            | [60]      | `\u0038`                          |
 | 大なり記号            | [62]      | `\u003E`                          |
-| 拡張制御文字           | [128、159] | リテラル文字                            |
-| ISO 8859-1（ラテン1） | [160、255] | リテラル文字                            |
+| 拡張制御文字           | [128, 159] | リテラル文字                            |
+| ISO 8859-1（ラテン1） | [160, 255] | リテラル文字                            |
 
 ### エンコードの例 {#example-of-the-encoding}
 
-たとえば、 `c_varbinary`という`VARBINARY`列に格納されている次の 16 バイト`[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]` 、Canal-JSON `Update`イベントで次のようにエンコードされます。
+たとえば、 `c_varbinary`という`VARBINARY`列に格納されている次の 16 バイト`[5 7 10 15 36 50 43 99 120 60 38 255 254 45 55 70]`は、Canal-JSON `Update`イベントで次のようにエンコードされます。
 
 ```json
 {
@@ -338,7 +338,7 @@ values (127, 32767, 8388607, 2147483647, 9223372036854775807);
 update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 ```
 
-`update`文では、TiCDCは以下に示すように、 `type`を`UPDATE`としてイベントメッセージを出力します。`update`文は、列番号`c_int`と`c_tinyint`のみを変更します。出力イベントメッセージの`old`フィールドには、すべての列データが含まれます。
+`update`文では、TiCDCは以下に示すように、 `type`を`UPDATE`としてイベントメッセージを出力します。`update`文は、`c_int`列と`c_tinyint`列のみを変更します。出力イベントメッセージの`old`フィールドには、すべての列データが含まれます。
 
 ```json
 {
@@ -495,13 +495,13 @@ TiCDC の出力は次のとおりです。
 }
 ```
 
-## TiCDC Canalの変更 -JSON {#changes-in-ticdc-canal-json}
+## TiCDC Canal-JSON の変更 {#changes-in-ticdc-canal-json}
 
 ### `Delete`イベントの`Old`フィールドの変更 {#changes-in-the-old-field-of-the-delete-events}
 
 v5.4.0 から、 `Delete`イベントのうち`old`フィールドが変更されました。
 
-以下はイベントメッセージ`Delete`です。v5.4.0より前のバージョンでは、フィールド`old`は「data」フィールドと同じ内容です。v5.4.0以降のバージョンでは、フィールド`old` nullに設定されます。「data」フィールドを使用することで、削除されたデータを取得できます。
+以下はイベントメッセージ`Delete`です。v5.4.0より前のバージョンでは、フィールド`old`は「data」フィールドと同じ内容です。v5.4.0以降のバージョンでは、フィールド`old`は null に設定されます。「data」フィールドを使用することで、削除されたデータを取得できます。
 
 ```
 {
