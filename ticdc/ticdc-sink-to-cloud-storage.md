@@ -29,7 +29,7 @@ Info: {"upstream_id":7171388873935111376,"namespace":"default","id":"simple-repl
 
 - `--server` : TiCDC クラスター内の任意の TiCDCサーバーのアドレス。
 - `--changefeed-id` : チェンジフィードのID。形式は正規表現`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
-- `--sink-uri` : チェンジフィードのダウンストリームアドレス。詳細は[シンクURIを構成する](#configure-sink-uri)参照。
+- `--sink-uri` : チェンジフィードのダウンストリームアドレス。詳細は[シンクURIを構成する](#configure-sink-uri)を参照してください。
 - `--start-ts` : チェンジフィードの開始TSO。TiCDCはこのTSOからデータのプルを開始します。デフォルト値は現在時刻です。
 - `--target-ts` : チェンジフィードの終了TSO。TiCDCはこのTSOまでデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
 - `--config` : チェンジフィードの設定ファイル。詳細は[TiCDC チェンジフィード設定パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
@@ -50,7 +50,7 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 | `flush-interval`        | ダウンストリームのクラウドストレージにデータの変更を保存する間隔。                                                                                                                                                                                                  | `5s`       | `[2s, 10m]`            |
 | `file-size`             | バイト数がこのパラメータの値を超えると、データ変更ファイルはクラウドストレージに保存されます。                                                                                                                                                                                    | `67108864` | `[1048576, 536870912]` |
 | `protocol`              | ダウンストリームに送信されるメッセージのプロトコル形式。                                                                                                                                                                                                         | 該当なし       | `canal-json`と`csv`     |
-| `enable-tidb-extension` | `protocol` `canal-json`に設定され、 `enable-tidb-extension` `true`に設定されている場合、 TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)送信し、 [TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field) Canal-JSON メッセージに追加します。 | `false`    | `false`と`true`         |
+| `enable-tidb-extension` | `protocol`が`canal-json`に設定され、`enable-tidb-extension`が`true`に設定されている場合、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)を送信し、[TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を Canal-JSON メッセージに追加します。 | `false`    | `false`と`true`         |
 
 > **Note:**
 >
@@ -58,7 +58,7 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 
 ### 外部ストレージのシンクURIを構成する {#configure-sink-uri-for-external-storage}
 
-クラウドストレージシステムにデータを保存する場合、クラウドサービスプロバイダーに応じて異なる認証パラメータを設定する必要があります。このセクションでは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage を使用する場合の認証方法と、それぞれのストレージストレージにアクセスするためのアカウントの設定方法について説明します。
+クラウドストレージシステムにデータを保存する場合、クラウドサービスプロバイダーに応じて異なる認証パラメータを設定する必要があります。このセクションでは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage を使用する場合の認証方法と、それぞれのストレージサービスにアクセスするためのアカウントの設定方法について説明します。
 
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
@@ -71,8 +71,8 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 
 データを複製する前に、Amazon S3 のディレクトリに適切なアクセス権限を設定する必要があります。
 
-- TiCDC に必要な最小限`s3:PutObject`権限: `s3:ListBucket` 、および`s3:GetObject` 。
-- changefeed 設定項目`sink.cloud-storage-config.flush-concurrency` 1 より大きい場合、つまり単一ファイルの並列アップロードが有効になっている場合は、 [リストパーツ](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)に関連する権限を追加する必要があります。
+- TiCDC に必要な最小限の権限: `s3:ListBucket`、`s3:PutObject`、および`s3:GetObject`。
+- changefeed 設定項目`sink.cloud-storage-config.flush-concurrency`が 1 より大きい場合、つまり単一ファイルの並列アップロードが有効になっている場合は、 [ListParts](https://docs.aws.amazon.com/AmazonS3/latest/API/API_ListParts.html)に関連する権限を追加する必要があります。
     - `s3:AbortMultipartUpload`
     - `s3:ListMultipartUploadParts`
     - `s3:ListBucketMultipartUploads`
@@ -85,14 +85,14 @@ URI の`[query_parameters]`には、次のパラメータを設定できます�
 
     アクセスキーとシークレットアクセスキーを指定した場合、それらに基づいて認証が行われます。URIでキーを指定する方法に加えて、以下の方法がサポートされています。
 
-    - TiCDC は環境変数`$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`読み取ります。
-    - TiCDC は環境変数`$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`読み取ります。
+    - TiCDC は環境変数`$AWS_ACCESS_KEY_ID`と`$AWS_SECRET_ACCESS_KEY`を読み取ります。
+    - TiCDC は環境変数`$AWS_ACCESS_KEY`と`$AWS_SECRET_KEY`を読み取ります。
     - TiCDC は、 `$AWS_SHARED_CREDENTIALS_FILE`環境変数で指定されたパスにある共有資格情報ファイルを読み取ります。
     - TiCDC は`~/.aws/credentials`パスにある共有資格情報ファイルを読み取ります。
 
 - 方法2: IAMロールに基づくアクセス
 
-    TiCDCサーバーを実行している EC2 インスタンスに[Amazon S3 にアクセスするための権限が設定されたIAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)関連付けます。セットアップが成功すると、TiCDC は追加設定なしで Amazon S3 内の対応するディレクトリに直接アクセスできるようになります。
+    TiCDCサーバーを実行している EC2 インスタンスに[Amazon S3 にアクセスするための権限が設定されたIAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)を関連付けます。セットアップが成功すると、TiCDC は追加設定なしで Amazon S3 内の対応するディレクトリに直接アクセスできるようになります。
 
 </div>
 <div label="GCS" value="gcs">
@@ -130,7 +130,7 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 
 - 方法3: Azure ADを使用してバックアップを復元する
 
-    環境変数`$AZURE_CLIENT_ID` `$AZURE_TENANT_ID`設定し`$AZURE_CLIENT_SECRET` 。
+    環境変数`$AZURE_CLIENT_ID`、`$AZURE_TENANT_ID`、`$AZURE_CLIENT_SECRET`を設定します。
 
 </div>
 </SimpleTab>
@@ -159,18 +159,18 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC{num}.{extension}
 ```
 
-- `scheme` :ストレージタイプを指定します (例: `s3` 、 `gcs` 、 `azure` 、 `file` 。
-- `prefix` : ユーザー定義の親ディレクトリを指定します (例: `s3:// **bucket/bbb/ccc**` 。
-- `schema` : スキーマ名を指定します (例: `s3://bucket/bbb/ccc/ **test**` 。
-- `table` : テーブル名を指定します (例: `s3://bucket/bbb/ccc/test/ **table1**` 。
-- `table-version-separator` : テーブルバージョンでパスを区切る区切り文字を指定します (例: `s3://bucket/bbb/ccc/test/table1/ **9999**` )。
-- `partition-separator` : テーブルパーティションによってパスを区切るセパレーターを指定します (例: `s3://bucket/bbb/ccc/test/table1/9999/ **20**` 。
+- `scheme` :ストレージタイプを指定します (例: `s3`、`gcs`、`azure`、または`file`)。
+- `prefix` : ユーザー定義の親ディレクトリを指定します (例: <code>s3://**bucket/bbb/ccc**</code>)。
+- `schema` : スキーマ名を指定します (例: <code>s3://bucket/bbb/ccc/**test**</code>)。
+- `table` : テーブル名を指定します (例: <code>s3://bucket/bbb/ccc/test/**table1**</code>)。
+- `table-version-separator` : テーブルバージョンでパスを区切る区切り文字を指定します (例: <code>s3://bucket/bbb/ccc/test/table1/**9999**</code>)。
+- `partition-separator` : テーブルパーティションによってパスを区切るセパレーターを指定します (例: <code>s3://bucket/bbb/ccc/test/table1/9999/**20**</code>)。
 - `date-separator` : トランザクションのコミット日に基づいてファイルを分類します。デフォルト値は`day`です。値のオプションは次のとおりです。
     - `none` : `date-separator`なし。たとえば、バージョン`test.table1`が`9999`であるすべてのファイルは`s3://bucket/bbb/ccc/test/table1/9999`に保存されます。
-    - `year` : 区切り文字はトランザクションのコミット日の年です (例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022**` 。
-    - `month` : 区切り文字はトランザクションコミット日の年と月です。例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022-01**` 。
-    - `day` : 区切り文字はトランザクションコミット日の年、月、日です。例: `s3://bucket/bbb/ccc/test/table1/9999/ **2022-01-02**` 。
-- `num` : データの変更を記録したファイルのシリアル番号を保存します (例: `s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC **000005** .csv` 。
+    - `year` : 区切り文字はトランザクションのコミット日の年です (例: <code>s3://bucket/bbb/ccc/test/table1/9999/**2022**</code>)。
+    - `month` : 区切り文字はトランザクションコミット日の年と月です。例: <code>s3://bucket/bbb/ccc/test/table1/9999/**2022-01**</code>。
+    - `day` : 区切り文字はトランザクションコミット日の年、月、日です。例: <code>s3://bucket/bbb/ccc/test/table1/9999/**2022-01-02**</code>。
+- `num` : データの変更を記録したファイルのシリアル番号を保存します (例: <code>s3://bucket/bbb/ccc/test/table1/9999/2022-01-02/CDC**000005**.csv</code>)。
 - `extension` : ファイルの拡張子を指定します。TiDB v6.5.0 は CSV および Canal-JSON 形式をサポートしています。
 
 > **Note:**
@@ -197,7 +197,7 @@ GCSへのアクセスに使用するアカウントは、アクセスキーを�
 CDC000005.csv
 ```
 
-この例では、このディレクトリ内のファイル`CDC000001.csv`から`CDC000004.csv`使用中です。TiCDC クラスターでテーブルスケジューリングまたはノードの再起動が発生すると、新しいノードはインデックスファイルを読み取り、 `CDC000005.csv`使用中かどうかを判断します。使用中でない場合、新しいノードは`CDC000005.csv`からファイルに書き込みます。使用中の場合は`CDC000006.csv`から書き込みを開始し、他のノードによって書き込まれたデータの上書きを防ぎます。
+この例では、このディレクトリ内のファイル`CDC000001.csv`から`CDC000004.csv`が使用中です。TiCDC クラスターでテーブルスケジューリングまたはノードの再起動が発生すると、新しいノードはインデックスファイルを読み取り、 `CDC000005.csv`が使用中かどうかを判断します。使用中でない場合、新しいノードは`CDC000005.csv`からファイルに書き込みます。使用中の場合は`CDC000006.csv`から書き込みを開始し、他のノードによって書き込まれたデータの上書きを防ぎます。
 
 ### メタデータ {#metadata}
 
@@ -280,9 +280,9 @@ CDC000005.csv
 - `TableColumns` : 1つ以上のマップの配列。各マップはソーステーブル内の列を表します。
     - `ColumnName` :カラム名。
     - `ColumnType` :カラムの種類。詳細は[データ型](#data-type)を参照してください。
-    - `ColumnLength` :カラムの長さ。詳細は[データ型](#data-type)参照。
+    - `ColumnLength` :カラムの長さ。詳細は[データ型](#data-type)を参照してください。
     - `ColumnPrecision` :カラムの精度。詳細は[データ型](#data-type)を参照してください。
-    - `ColumnScale` : 小数点以下の桁数（スケール）。詳細は[データ型](#data-type)参照。
+    - `ColumnScale` : 小数点以下の桁数（スケール）。詳細は[データ型](#data-type)を参照してください。
     - `ColumnNullable` : このオプションの値が`true`の場合、列は NULL になることができます。
     - `ColumnIsPk` : このオプションの値が`true`の場合、列は主キーの一部になります。
 - `TableColumnsTotal` : `TableColumns`配列のサイズ。

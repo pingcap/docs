@@ -15,9 +15,9 @@ TiCDC は、コンシューマーを実装するための標準的な方法を�
 
 [Golangで書かれたコンシューマープログラム](https://github.com/pingcap/tiflow/tree/release-8.5/cmd/storage-consumer)
 
-## 消費者をデザインする {#design-a-consumer}
+## コンシューマーを設計する {#design-a-consumer}
 
-次の図は、消費者の全体的な消費プロセスを示しています。
+次の図は、コンシューマーの全体的な消費プロセスを示しています。
 
 ![TiCDC storage consumer overview](/media/ticdc/ticdc-storage-consumer-overview.png)
 
