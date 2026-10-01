@@ -308,7 +308,7 @@ DDL statements such as `CREATE DATABASE` and `DROP DATABASE` that are not relate
 
 DDL statements such as `ALTER TABLE` and `CREATE TABLE` that are related to a specific table are called table-level DDL statements. Events corresponding to table-level DDL statements are dispatched to an appropriate topic according to the configuration of `dispatchers`.
 
-For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = {schema}_{table}`, the DDL events are despatched as follows:
+For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = "{schema}_{table}"`, the DDL events are despatched as follows:
 
 - If a DDL event only involves a single table, the DDL event is dispatched to the appropriate topic as it is. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
 
