@@ -67,7 +67,7 @@ DML:
 - `UPDATE` : 更新イベント。
 - `DELETE` : 削除イベント。
 
-他の：
+その他：
 
 - `WATERMARK` : 上流 TiDB クラスターの TSO（64 ビットタイムスタンプ）を含み、テーブルレプリケーションの進行状況を示します。ウォーターマークより前のすべてのイベントは下流に送信されています。
 - `BOOTSTRAP` : ダウンストリームのテーブルスキーマを構築するために使用されるテーブルのスキーマ情報が含まれます。
@@ -232,7 +232,7 @@ TiCDC は、DDL イベントを次の JSON 形式でエンコードします。
 | フィールド名               | 型 | 説明                                                                                                    |
 | ---------------- | --- | ----------------------------------------------------------------------------------------------------- |
 | `version`        | number  | プロトコルのバージョン番号。現在は`1`です。                                                                               |
-| `type`           | string   | DDL イベントタイプ ( `CREATE` 、 `RENAME` 、 `CINDEX` 、 `DINDEX` 、 `ERASE` 、 `TRUNCATE` 、 `ALTER` 、 `QUERY` 。 |
+| `type`           | string   | DDL イベントタイプ（ `CREATE` 、 `RENAME` 、 `CINDEX` 、 `DINDEX` 、 `ERASE` 、 `TRUNCATE` 、 `ALTER` 、 `QUERY`を含む）。 |
 | `sql`            | string   | DDL文。                                                                                          |
 | `commitTs`       | number  | DDL文の実行がアップストリームで完了したときのコミット タイムスタンプ。                                                          |
 | `buildTs`        | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                                            |
@@ -241,7 +241,7 @@ TiCDC は、DDL イベントを次の JSON 形式でエンコードします。
 
 ### DML {#dml}
 
-#### 入れる {#insert}
+#### INSERT {#insert}
 
 TiCDC は`INSERT`イベントを次の JSON 形式でエンコードします。
 
@@ -272,7 +272,7 @@ TiCDC は`INSERT`イベントを次の JSON 形式でエンコードします。
 | `database`      | string   | データベースの名前。                                      |
 | `table`         | string   | テーブルの名前。                                        |
 | `tableID`       | number  | テーブルの ID。                                       |
-| `type`          | string   | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `type`          | string   | DML イベントタイプ（`INSERT` 、 `UPDATE` 、 `DELETE`を含む）。 |
 | `commitTs`      | number  | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
@@ -280,7 +280,7 @@ TiCDC は`INSERT`イベントを次の JSON 形式でエンコードします。
 
 `INSERT`イベントには`data`フィールドが含まれ、 `old`フィールドは含まれません。
 
-#### アップデート {#update}
+#### UPDATE {#update}
 
 TiCDC は`UPDATE`イベントを次の JSON 形式でエンコードします。
 
@@ -317,7 +317,7 @@ TiCDC は`UPDATE`イベントを次の JSON 形式でエンコードします。
 | `database`      | string    | データベースの名前。                                      |
 | `table`         | string    | テーブルの名前。                                        |
 | `tableID`       | number   | テーブルの ID。                                       |
-| `type`          | string    | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `type`          | string    | DML イベントタイプ（`INSERT` 、 `UPDATE` 、 `DELETE`を含む）。 |
 | `commitTs`      | number   | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number   | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number   | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
@@ -357,7 +357,7 @@ TiCDC は`DELETE`イベントを次の JSON 形式でエンコードします。
 | `database`      | string   | データベースの名前。                                      |
 | `table`         | string   | テーブルの名前。                                        |
 | `tableID`       | number  | テーブルの ID。                                       |
-| `type`          | string   | DML イベントタイプ`INSERT` 、 `UPDATE` 、 `DELETE`を含む)。 |
+| `type`          | string   | DML イベントタイプ（`INSERT` 、 `UPDATE` 、 `DELETE`を含む）。 |
 | `commitTs`      | number  | DML文の実行がアップストリームで完了したときのコミット タイムスタンプ。    |
 | `buildTs`       | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。      |
 | `schemaVersion` | number  | DML メッセージがエンコードされるときのテーブルのスキーマバージョン番号。         |
@@ -469,7 +469,7 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
 | ------------- | --- | ----------------------------------------------------------------------------- |
 | `version`     | number  | プロトコルのバージョン番号。現在は`1`です。                                                       |
 | `type`        | string   | `BOOTSTRAP`のイベントタイプ。                                                          |
-| `commitTs`    | number  | `BOOTSTRAP`のうちの`commitTs` `0`です。これはTiCDCによって内部的に生成されるため、 `commitTs`は意味を持ちません。 |
+| `commitTs`    | number  | `BOOTSTRAP`の`commitTs`は`0`です。これはTiCDCによって内部的に生成されるため、 `commitTs`は意味を持ちません。 |
 | `buildTs`     | number  | TiCDC 内でメッセージが正常にエンコードされたときの UNIX タイムスタンプ。                                    |
 | `tableSchema` | object  | テーブルのスキーマ情報。詳細については、 [TableSchemaの定義](#tableschema-definition)を参照してください。       |
 
@@ -494,13 +494,13 @@ TiCDC は`BOOTSTRAP`イベントを次の JSON 形式でエンコードします
 
 - 生成時間:
     - 新しい変更フィードを作成した後、テーブルの最初の DML イベントが送信される前に、TiCDC はテーブルスキーマを構築するために`BOOTSTRAP`イベントをダウンストリームに送信します。
-    - さらに、TiCDCは、新しく参加したコンシューマーがテーブルスキーマを構築できるように、定期的にイベントを`BOOTSTRAP`送信します。デフォルトの送信間隔は120秒または10000メッセージごとです。送信間隔は、 `sink`設定でパラメータ`send-bootstrap-interval-in-sec`と`send-bootstrap-in-msg-count`を設定することで調整できます。
+    - さらに、TiCDCは、新しく参加したコンシューマーがテーブルスキーマを構築できるように、定期的に`BOOTSTRAP`イベントを送信します。デフォルトの送信間隔は120秒または10000メッセージごとです。送信間隔は、 `sink`設定でパラメータ`send-bootstrap-interval-in-sec`と`send-bootstrap-in-msg-count`を設定することで調整できます。
     - テーブルが30分以内に新しいDMLメッセージを受信しない場合、そのテーブルは非アクティブとみなされます。TiCDCは、新しいDMLイベントを受信するまで、そのテーブルへの`BOOTSTRAP`の送信を停止します。
 - 送信先: デフォルトでは、TiCDC は対応するトピックのすべてのパーティションに`BOOTSTRAP`イベントを送信します。シンク設定の`send-bootstrap-to-all-partition`パラメータを設定することで、送信戦略を調整できます。
 
 ## メッセージの消費方法 {#message-consumption-methods}
 
-TiCDC SimpleプロトコルはDMLメッセージの送信時にテーブルのスキーマ情報を含まないため、ダウンストリームはDMLメッセージを使用する前にDDLまたはBOOTSTRAPメッセージを受信し、テーブルのスキーマ情報をキャッシュする必要があります。ダウンストリームはDMLメッセージを受信すると、DMLメッセージの`table`名前と`schemaVersion`フィールドを検索することで、キャッシュから対応するテーブルスキーマ情報を取得し、DMLメッセージを正しく使用します。
+TiCDC SimpleプロトコルはDMLメッセージの送信時にテーブルのスキーマ情報を含まないため、ダウンストリームはDMLメッセージを使用する前にDDLまたはBOOTSTRAPメッセージを受信し、テーブルのスキーマ情報をキャッシュする必要があります。ダウンストリームはDMLメッセージを受信すると、DMLメッセージの`table`の名前と`schemaVersion`フィールドを検索することで、キャッシュから対応するテーブルスキーマ情報を取得し、DMLメッセージを正しく使用します。
 
 以下では、ダウンストリームがDDLまたはBOOTSTRAPメッセージに基づいてDMLメッセージをどのように処理するかについて説明します。これまでの説明から、以下の情報が判明しています。
 
@@ -516,7 +516,7 @@ TiCDC SimpleプロトコルはDMLメッセージの送信時にテーブルの�
 
 ![TiCDC Simple Protocol consumer scene 1](/media/ticdc/ticdc-simple-consumer-1.png)
 
-### シナリオ2: コンシューマーは中間層から消費を始める {#scenario-2-the-consumer-starts-consuming-from-the-middle}
+### シナリオ2: コンシューマーは途中から消費を始める {#scenario-2-the-consumer-starts-consuming-from-the-middle}
 
 新しいコンシューマーがコンシューマーグループに参加すると、途中から消費を開始する可能性があるため、テーブルの以前のDDLメッセージやBOOTSTRAPメッセージを見逃してしまう可能性があります。この場合、コンシューマーはテーブルのスキーマ情報を取得する前に、いくつかのDMLメッセージを受信する可能性があります。そのため、コンシューマーはテーブルのスキーマ情報を取得するために、DDLメッセージまたはBOOTSTRAPメッセージを受信するまで、一定時間待機する必要があります。TiCDCは定期的にBOOTSTRAPメッセージを送信するため、コンシューマーは常に一定時間内にテーブルのスキーマ情報を取得できます。詳細なプロセスは次のとおりです。
 
@@ -668,46 +668,46 @@ TableSchemaは、テーブル名、テーブルID、テーブルバージョン�
 
 以下の表は、TiCDC Simpleプロトコルの`mysqlType`のフィールドの値の範囲と、TiDB（Golang）およびAvro（Java）におけるその型を示しています。DMLメッセージを解析する必要がある場合は、使用するプロトコルと言語に応じて、この表とDMLメッセージの`mysqlType`のフィールドに従ってデータを正しく解析できます。
 
-**TiDB型（Golang）は、** TiDBおよびTiCDC（Golang）で処理された際の対応する`mysqlType`の型を表します。Avro**型（Java）は、** Avro形式のメッセージにエンコードされた際の対応する`mysqlType`の型を表します。
+**TiDB型（Golang）**は、TiDBおよびTiCDC（Golang）で処理された際の対応する`mysqlType`の型を表します。**Avro型（Java）**は、Avro形式のメッセージにエンコードされた際の対応する`mysqlType`の型を表します。
 
 | mysqlType              | Value range                                  | TiDB type (Golang) | Avro type (Java) |
 | ---------------------- | ------------------------------------------- | ------------------ | ---------------- |
-| TINYINT                | [-128, 127]                                 | int64              | long             |
-| TINYINT UNSIGNED       | [0, 255]                                    | uint64             | long             |
-| SMALLINT               | [-32768, 32767]                             | int64              | long             |
-| SMALLINT UNSIGNED      | [0, 65535]                                  | uint64             | long             |
-| MEDIUMINT              | [-8388608, 8388607]                         | int64              | long             |
-| MEDIUMINT UNSIGNED     | [0, 16777215]                               | uint64             | long             |
-| INT                    | [-2147483648, 2147483647]                   | int64              | long             |
-| INT UNSIGNED           | [0, 4294967295]                             | uint64             | long             |
-| BIGINT                 | [-9223372036854775808, 9223372036854775807] | int64              | long             |
-| BIGINT UNSIGNED        | [0, 9223372036854775807]                    | uint64             | long             |
-| BIGINT UNSIGNED        | [9223372036854775808, 18446744073709551615] | uint64             | string           |
-| FLOAT                  | /                                           | float32            | float            |
-| DOUBLE                 | /                                           | float64            | double           |
-| DECIMAL                | /                                           | string             | string           |
-| VARCHAR                | /                                           | []uint8            | string           |
-| CHAR                   | /                                           | []uint8            | string           |
-| VARBINARY              | /                                           | []uint8            | bytes            |
-| BINARY                 | /                                           | []uint8            | bytes            |
-| TINYTEXT               | /                                           | []uint8            | string           |
-| TEXT                   | /                                           | []uint8            | string           |
-| MEDIUMTEXT             | /                                           | []uint8            | string           |
-| LONGTEXT               | /                                           | []uint8            | string           |
-| TINYBLOB               | /                                           | []uint8            | bytes            |
-| BLOB                   | /                                           | []uint8            | bytes            |
-| MEDIUMBLOB             | /                                           | []uint8            | bytes            |
-| LONGBLOB               | /                                           | []uint8            | bytes            |
-| DATE                   | /                                           | string             | string           |
-| DATETIME               | /                                           | string             | string           |
-| TIMESTAMP              | /                                           | string             | string           |
-| TIME                   | /                                           | string             | string           |
-| YEAR                   | /                                           | int64              | long             |
-| ENUM                   | /                                           | uint64             | long             |
-| SET                    | /                                           | uint64             | long             |
-| BIT                | /                                           | uint64        | long          |
-| JSON               | /                                           | string        | string        |
-| BOOL               | /                                           | int64         | long          |
+| tinyint | [-128, 127]                                 | int64              | long             |
+| tinyint unsigned | [0, 255]                                    | uint64             | long             |
+| smallint | [-32768, 32767]                             | int64              | long             |
+| smallint unsigned | [0, 65535]                                  | uint64             | long             |
+| mediumint | [-8388608, 8388607]                         | int64              | long             |
+| mediumint unsigned | [0, 16777215]                               | uint64             | long             |
+| int | [-2147483648, 2147483647]                   | int64              | long             |
+| int unsigned | [0, 4294967295]                             | uint64             | long             |
+| bigint | [-9223372036854775808, 9223372036854775807] | int64              | long             |
+| bigint unsigned | [0, 9223372036854775807]                    | uint64             | long             |
+| bigint unsigned | [9223372036854775808, 18446744073709551615] | uint64             | string           |
+| float | /                                           | float32            | float            |
+| double | /                                           | float64            | double           |
+| decimal | /                                           | string             | string           |
+| varchar | /                                           | []uint8            | string           |
+| char | /                                           | []uint8            | string           |
+| varbinary | /                                           | []uint8            | bytes            |
+| binary | /                                           | []uint8            | bytes            |
+| tinytext | /                                           | []uint8            | string           |
+| text | /                                           | []uint8            | string           |
+| mediumtext | /                                           | []uint8            | string           |
+| longtext | /                                           | []uint8            | string           |
+| tinyblob | /                                           | []uint8            | bytes            |
+| blob | /                                           | []uint8            | bytes            |
+| mediumblob | /                                           | []uint8            | bytes            |
+| longblob | /                                           | []uint8            | bytes            |
+| date | /                                           | string             | string           |
+| datetime | /                                           | string             | string           |
+| timestamp | /                                           | string             | string           |
+| time | /                                           | string             | string           |
+| year | /                                           | int64              | long             |
+| enum | /                                           | uint64             | long             |
+| set | /                                           | uint64             | long             |
+| bit | /                                           | uint64        | long          |
+| json | /                                           | string        | string        |
+| bool | /                                           | int64         | long          |
 | TiDBVectorFloat32  | /                                           | string        | string        |
 
 ### Avroスキーマ定義 {#avro-schema-definition}

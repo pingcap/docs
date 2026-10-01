@@ -45,7 +45,7 @@ API リクエストの送信後にエラーが発生した場合、返される�
 }
 ```
 
-上記の JSON 出力では、 `error_msg`エラーメッセージを示し、 `error_code`対応するエラーコードを示します。
+上記の JSON 出力では、 `error_msg`はエラーメッセージを示し、`error_code`は対応するエラーコードを示します。
 
 ## APIリストインターフェースの戻り形式 {#return-format-of-the-api-list-interface}
 
@@ -84,7 +84,7 @@ API リクエストがリソースのリスト (たとえば、すべての`Capt
 
 ### 例 {#example}
 
-次のリクエストは、IP アドレスが`127.0.0.1`でポート番号が`8300`ある TiCDC ノードのステータス情報を取得します。
+次のリクエストは、IP アドレスが`127.0.0.1`でポート番号が`8300`である TiCDC ノードのステータス情報を取得します。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/status
@@ -252,8 +252,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `consistent`              | REDOログの設定パラメータ。(オプション)                                                                                                                                            |
 | `enable_sync_point`       | `BOOLEAN`型。`sync point`を有効にするかどうかを決定します。（オプション）                                                                                                                  |
 | `filter`                  | `filter`の設定パラメータ。(オプション)                                                                                                                                          |
-| `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクは一意インデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
-| `ignore_ineligible_table` | `BOOLEAN`型。デフォルト値は`false`です`true`に設定すると、レプリケーションタスクはレプリケートできないテーブルを無視します。（オプション）                                                                                  |
+| `force_replicate`         | `BOOLEAN`型。デフォルト値は`false`です。`true`に設定すると、レプリケーションタスクは一意インデックスを持たないテーブルを強制的にレプリケートします。（オプション）                                                                      |
+| `ignore_ineligible_table` | `BOOLEAN`型。デフォルト値は`false`です。`true`に設定すると、レプリケーションタスクはレプリケートできないテーブルを無視します。（オプション）                                                                                  |
 | `memory_quota`            | `UINT64`型。レプリケーションタスクのメモリクォータ。（オプション）                                                                                                                             |
 | `mounter`                 | `mounter`の設定パラメータ。(オプション)                                                                                                                                         |
 | `sink`                    | `sink`の設定パラメータ。(オプション)                                                                                                                                            |
@@ -286,19 +286,19 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 | パラメータ名                         | 説明                                                                                                                 |
 | :----------------------------- | :----------------------------------------------------------------------------------------------------------------- |
-| `ignore_delete_value_expr`     | `STRING ARRAY`型。例えば、 `"name = 'john'"` `name = 'john'`条件を含む DELETE DML 文を除外することを意味します。(オプション)                      |
-| `ignore_event`                 | `STRING ARRAY`型。例えば、 `["insert"]` INSERTイベントが除外されることを示します。（オプション）                                                  |
-| `ignore_insert_value_expr`     | `STRING ARRAY`型。例えば、 `"id >= 100"` `id >= 100`条件に一致する INSERT DML 文を除外することを意味します。(オプション)                            |
-| `ignore_sql`                   | `STRING ARRAY`型。例えば、 `["^drop", "add column"]` `DROP`で始まるか`ADD COLUMN`含むDDL文を除外することを意味します。（オプション）                  |
+| `ignore_delete_value_expr`     | `STRING ARRAY`型。例えば、 `"name = 'john'"`は、`name = 'john'`条件を含む DELETE DML 文を除外することを意味します。(オプション)                      |
+| `ignore_event`                 | `STRING ARRAY`型。例えば、 `["insert"]`は、INSERTイベントが除外されることを示します。（オプション）                                                  |
+| `ignore_insert_value_expr`     | `STRING ARRAY`型。例えば、 `"id >= 100"`は、`id >= 100`条件に一致する INSERT DML 文を除外することを意味します。(オプション)                            |
+| `ignore_sql`                   | `STRING ARRAY`型。例えば、 `["^drop", "add column"]`は、`DROP`で始まるか`ADD COLUMN`を含むDDL文を除外することを意味します。（オプション）                  |
 | `ignore_update_new_value_expr` | `STRING ARRAY`型。例えば、 `"gender = 'male'"` 、新しい値`gender = 'male'`を持つ UPDATE DML 文を除外することを意味します。（オプション）               |
-| `ignore_update_old_value_expr` | `STRING ARRAY`型。例えば、 `"age < 18"`古い値`age < 18`を持つ UPDATE DML 文を除外することを意味します。（オプション）                                |
+| `ignore_update_old_value_expr` | `STRING ARRAY`型。例えば、 `"age < 18"`は、古い値`age < 18`を持つ UPDATE DML 文を除外することを意味します。（オプション）                                |
 | `matcher`                      | `STRING ARRAY`型。ホワイトリストとして機能します。例えば、 `["test.worker"]` 、フィルタールールが`test`データベースの`worker`テーブルにのみ適用されることを意味します。(オプション) |
 
 `mounter`パラメータは次のように記述されます。
 
 | パラメータ名       | 説明                                                                          |
 | :----------- | :-------------------------------------------------------------------------- |
-| `worker_num` | `INT`型。マウントスレッドの数。マウントはTiKVから出力されたデータをデコードするために使用されます。デフォルト値は`16`です。（オプション） |
+| `worker_num` | `INT`型。Mounter スレッドの数。Mounter は TiKV から出力されたデータをデコードするために使用されます。デフォルト値は`16`です。（オプション） |
 
 `sink`パラメータは次のように記述されます。
 
@@ -309,9 +309,9 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `date_separator`              | `STRING`型。ファイルディレクトリの日付区切り文字の種類を示します。値の選択肢は`none` 、 `year` 、 `month` 、 `day`です。`none`がデフォルト値で、日付が区切られないことを意味します。(オプション)    |
 | `dispatchers`                 | イベントディスパッチ用の構成配列。(オプション)                                                                                                     |
 | `encoder_concurrency`         | `INT`型。MQシンク内のエンコーダスレッドの数。デフォルト値は`16`です。（オプション）                                                                              |
-| `protocol`                    | `STRING`型。MQシンクの場合、メッセージのプロトコル形式を指定できます。現在サポートされているプロトコルは、 `canal-json` 、 `open-protocol` 、 `avro` 、 `debezium` 、 `simple` 。 |
+| `protocol`                    | `STRING`型。MQシンクの場合、メッセージのプロトコル形式を指定できます。現在サポートされているプロトコルは、 `canal-json` 、 `open-protocol` 、 `avro` 、 `debezium` 、 `simple`です。 |
 | `schema_registry`             | `STRING`型。スキーマレジストリアドレス。（オプション）                                                                                              |
-| `terminator`                  | `STRING`型。ターミネータは、2つのデータ変更イベントを区切るために使用されます。デフォルト値はnullで、 `"\r\n"`ターミネータとして使用されます。（オプション）                                    |
+| `terminator`                  | `STRING`型。ターミネータは、2つのデータ変更イベントを区切るために使用されます。デフォルト値はnullで、 `"\r\n"`がターミネータとして使用されます。（オプション）                                    |
 | `transaction_atomicity`       | `STRING`型。トランザクションのアトミック性レベル。（オプション）                                                                                         |
 | `only_output_updated_columns` | `BOOLEAN`型。`canal-json`または`open-protocol`プロトコルを使用するMQシンクの場合、変更された列のみを出力するかどうかを指定できます。デフォルト値は`false`です。（オプション）               |
 | `cloud_storage_config`        | ストレージシンクの構成。(オプション)                                                                                                        |
@@ -330,7 +330,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | パラメータ名                   | 説明                                                                           |
 | :----------------------- | :--------------------------------------------------------------------------- |
 | `delimiter`              | `STRING`型。CSVファイル内のフィールドを区切るために使用される文字。値はASCII文字でなければならず、デフォルトは`,`です。        |
-| `include_commit_ts`      | `BOOLEAN`型。CSV行にコミット情報を含めるかどうか。デフォルト値は`false`です。                             |
+| `include_commit_ts`      | `BOOLEAN`型。CSV行に commit-ts を含めるかどうか。デフォルト値は`false`です。                             |
 | `null`                   | `STRING`型。CSV列がnullの場合に表示される文字。デフォルト値は`\N`です。                                |
 | `quote`                  | `STRING`型。CSVファイル内のフィールドを囲むために使用される引用符文字。値が空の場合、引用符は使用されません。デフォルト値は`"`です。    |
 | `binary_encoding_method` | `STRING`型。バイナリデータのエンコード方式。`"base64"`または`"hex"`を指定できます。デフォルト値は`"base64"`です。 |
@@ -354,8 +354,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 | パラメータ名                    | 説明                                                                                                                                              |
 | :------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `worker_count`            | `INT`型。下流のクラウドストレージへのデータストレージの同時実行性が変更されます。                                                                                                   |
-| `flush_interval`          | `STRING`型。下流のクラウドストレージへのデータ保存間隔が変更されます。                                                                                                       |
+| `worker_count`            | `INT`型。データ変更を下流のクラウドストレージに保存する際の同時実行数。                                                                                                   |
+| `flush_interval`          | `STRING`型。データ変更を下流のクラウドストレージに保存する間隔。                                                                                                       |
 | `file_size`               | `INT`型。このファイル内のバイト数がこのパラメータの値を超えると、データ変更ファイルがクラウドストレージに保存されます。                                                                                |
 | `file_expiration_days`    | `INT`タイプ。ファイルを保持する期間。`date-separator`が`day`に設定されている場合にのみ有効になります。                                                                              |
 | `file_cleanup_cron_spec`  | `STRING`型。crontab 設定と互換性のある、スケジュールされたクリーンアップタスクの実行サイクル。形式は`<Second> <Minute> <Hour> <Day of the month> <Month> <Day of the week (Optional)>`です。 |
@@ -366,7 +366,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 | パラメータ名             | 説明                                                                                                      |
 | :----------------- | :------------------------------------------------------------------------------------------------------ |
-| `output_old_value` | `BOOLEAN`型。行データが変更される前に値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、UPDATE イベントは "p" フィールドを出力しません。 |
+| `output_old_value` | `BOOLEAN`型。行データが変更される前の値を出力するかどうかを制御します。デフォルト値は`true`です。無効にすると、UPDATE イベントは "p" フィールドを出力しません。 |
 
 `sink.debezium`パラメータは次のように記述されます。
 
@@ -376,7 +376,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 ### 例 {#example}
 
-次のリクエストは、ID が`test5`で`blackhome://` `sink_uri`あるレプリケーションタスクを作成します。
+次のリクエストは、ID が`test5`で、`sink_uri`が`blackhome://`であるレプリケーションタスクを作成します。
 
 ```shell
 curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
@@ -506,9 +506,9 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 | `creator_version` | `STRING`タイプ。レプリケーションタスク作成時の TiCDC バージョン。                                            |
 | `error`           | レプリケーションタスク エラー。                                                                   |
 | `id`              | `STRING`タイプ。レプリケーションタスク ID。                                                        |
-| `resolved_ts`     | `UINT64`タイプ。レプリケーションタスクは ts を解決しました。                                               |
+| `resolved_ts`     | `UINT64`タイプ。レプリケーションタスクの resolved ts。                                               |
 | `sink_uri`        | `STRING`タイプ。レプリケーションタスク シンクの URI。                                                  |
-| `start_ts`        | `UINT64`タイプ。レプリケーションタスクが開始されます。                                                     |
+| `start_ts`        | `UINT64`タイプ。レプリケーションタスクの start ts。                                                     |
 | `state`           | `STRING`型。レプリケーションタスクのステータス。`normal` 、 `stopped` 、 `error` 、 `failed` 、または`finished`になります。 |
 | `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                   |
 | `task_status`     | レプリケーションタスクのディスパッチの詳細なステータス。                                                       |
@@ -672,7 +672,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 ### 例 {#example}
 
-次のリクエストは、ID `test1`のレプリケーションタスクの`target_ts` `32`に更新します。
+次のリクエストは、ID `test1`のレプリケーションタスクの`target_ts`を`32`に更新します。
 
 ```shell
 curl -X PUT -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds/test1 -d '{"target_ts":32}'
@@ -823,7 +823,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 }
 ```
 
-この例は、進行中のレプリケーションタスクの応答を示しています。フィールド`synced`と`info`両方を確認することで、レプリケーションタスクがまだ完了しておらず、さらに待機する必要があることがわかります。
+この例は、進行中のレプリケーションタスクの応答を示しています。フィールド`synced`と`info`の両方を確認することで、レプリケーションタスクがまだ完了しておらず、さらに待機する必要があることがわかります。
 
 **例3: 同期ステータスをさらに確認する必要がある**
 
@@ -840,7 +840,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 
 このAPIを使用すると、上流クラスタで災害が発生した場合でも同期ステータスを照会できます。状況によっては、TiCDCの現在のデータレプリケーションタスクが完了しているかどうかを直接確認できない場合があります。そのような場合は、このAPIをリクエストし、レスポンスの`info`フィールドと上流クラスタの現在のステータスの両方を確認することで、具体的なステータスを確認できます。
 
-この例では、 `sink_checkpoint_ts` `now_ts`より遅れていますが、これは TiCDC がまだデータレプリケーションに追いついていないか、PD または TiKV に障害が発生しているためです。TiCDC がまだデータレプリケーションに追いついていない場合は、レプリケーションタスクがまだ完了していないことを意味します。PD または TiKV に障害が発生した場合は、レプリケーションタスクが完了していることを意味します。したがって、クラスターのステータスを確認するには、 `info`フィールドを確認する必要があります。
+この例では、 `sink_checkpoint_ts`が`now_ts`より遅れていますが、これは TiCDC がまだデータレプリケーションに追いついていないか、PD または TiKV に障害が発生しているためです。TiCDC がまだデータレプリケーションに追いついていない場合は、レプリケーションタスクがまだ完了していないことを意味します。PD または TiKV に障害が発生した場合は、レプリケーションタスクが完了していることを意味します。したがって、クラスターのステータスを確認するには、 `info`フィールドを確認する必要があります。
 
 **例4: クエリエラー**
 
@@ -975,7 +975,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors
 
 ### 例 {#example}
 
-次のリクエストは、 `changefeed_id`が`test` 、 `capture_id`が`561c3784-77f0-4863-ad52-65a3436db6af`あるサブタスクの詳細情報を取得します。サブタスクは`changefeed_id`と`capture_id`で識別できます。
+次のリクエストは、 `changefeed_id`が`test` 、 `capture_id`が`561c3784-77f0-4863-ad52-65a3436db6af`であるサブタスクの詳細情報を取得します。サブタスクは`changefeed_id`と`capture_id`で識別できます。
 
 ```shell
 curl -X GET http://127.0.0.1:8300/api/v2/processors/test/561c3784-77f0-4863-ad52-65a3436db6af
