@@ -31,7 +31,7 @@ Data Pipeline は、次のシナリオで使用できます。
 
 | プラン | ステータス |
 | ---- | ------ |
-| {{{ .premium }}} | Data Pipeline は [TiDB Cloud console](https://tidbcloud.com) でプライベートプレビューとして利用可能で、リクエストに応じて使用できます。 |
+| {{{ .premium }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
 | {{{ .dedicated }}} | Data Pipeline はまだ TiDB Cloud console では利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
 | {{{ .essential }}} | Data Pipeline はまだ TiDB Cloud console では利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
 </CustomContent>
@@ -40,8 +40,8 @@ Data Pipeline は、次のシナリオで使用できます。
 
 | プラン | ステータス |
 | ---- | ------ |
-| {{{ .premium }}} | Data Pipeline は [TiDB Cloud console](https://tidbcloud.com) でプライベートプレビューとして利用可能で、リクエストに応じて使用できます。 |
-| {{{ .byoc }}} | Data Pipeline は [TiDB Cloud console](https://tidbcloud.com) でプライベートプレビューとして利用可能で、リクエストに応じて使用できます。 |
+| {{{ .premium }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
+| {{{ .byoc }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
 | {{{ .dedicated }}} | Data Pipeline はまだ TiDB Cloud console では利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
 | {{{ .essential }}} | Data Pipeline はまだ TiDB Cloud console では利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
 </CustomContent>
@@ -54,15 +54,15 @@ Data Pipeline は、次のシナリオで使用できます。
 
 ご利用のプランに応じたガイドを参照してください。
 
-- TiDB Cloud Premium<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent>: [TiDB Cloud Lake への Data Pipeline をセットアップする](/tidb-cloud/data-pipeline-sink-to-lake.md)
+- TiDB Cloud Premium<CustomContent plan="byoc"> および {{{ .byoc }}}</CustomContent>: [TiDB Cloud Lake への Data Pipeline をセットアップする](/tidb-cloud/data-pipeline-sink-to-lake.md)
 - TiDB Cloud Dedicated: [TiDB Cloud Lake にデータをレプリケートするデータパイプラインを手動でセットアップする](/tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
-- TiDB Cloud Essential: [TiDB Cloud Lake へのシンク](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
+- TiDB Cloud Essential: [TiDB Cloud Lake にデータをレプリケートするデータパイプラインを手動でセットアップする](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
 
 ## Data Pipeline ページを表示する {#view-the-data-pipeline-page}
 
 > **Note:**
 >
-> **Data Pipeline** ページおよびこのセクションの管理操作は、{{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent> でのみ利用できます。{{{ .dedicated }}} と {{{ .essential }}} では、データパイプラインを手動で設定および管理します。
+> **Data Pipeline** ページおよびこのセクションの管理操作は、{{{ .premium }}}<CustomContent plan="byoc"> および {{{ .byoc }}}</CustomContent> でのみ利用できます。{{{ .dedicated }}} と {{{ .essential }}} では、データパイプラインを手動で設定および管理します。
 
 データパイプラインを表示および管理するには、次の手順を実行します。
 

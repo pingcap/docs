@@ -31,7 +31,7 @@ summary: Dumpling と changefeed を使用して、TiDB Cloud Dedicated クラ�
 
 ## ステップ 1. S3 バケットへのアクセスを準備する {#step-1-prepare-s3-bucket-access}
 
-データパイプラインの各コンポーネント（Dumpling、changefeed、TiDB Cloud Lake）は、すべて同じ S3 バケットへのアクセスが必要です。対象の S3 バケットに必要な権限を持つ IAM ユーザーを作成し、そのユーザーの access key を作成して、3 つのコンポーネントすべてで同じ access key を使用します。
+データパイプラインの各コンポーネント（Dumpling、changefeed、TiDB Cloud Lake）は、すべて同じ S3 バケットへのアクセスが必要です。対象の S3 バケットに必要な権限を持つ IAM ユーザーを作成し、そのユーザーのアクセスキーを作成して、3 つのコンポーネントすべてで同じアクセスキーを使用します。
 
 1. [IAM Console](https://console.aws.amazon.com/iam/) を開き、IAM ユーザー（例: `tidb-cloud-datapipeline-user`）を作成します。
 2. 次の権限ポリシーをユーザーにアタッチします。`<your-bucket-name>` と `<your-prefix>` は実際の値に置き換えてください。
@@ -65,11 +65,11 @@ summary: Dumpling と changefeed を使用して、TiDB Cloud Dedicated クラ�
     }
     ```
 
-3. ユーザーの access key を作成し、**Access Key ID** と **Secret Access Key** を記録します。これらは、スナップショットのエクスポート、changefeed の作成、TiDB Cloud Lake の設定時に必要です。
+3. ユーザーのアクセスキーを作成し、**Access Key ID** と **Secret Access Key** を記録します。これらは、スナップショットのエクスポート、changefeed の作成、TiDB Cloud Lake の設定時に必要です。
 
 > **Note:**
 >
-> このガイドでは、S3 バケットへのアクセスに access key を使用します。changefeed は Role ARN もサポートしています。詳細は、[クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md#step-1-configure-destination) を参照してください。
+> このガイドでは、S3 バケットへのアクセスにアクセスキーを使用します。changefeed は Role ARN もサポートしています。詳細は、[クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md#step-1-configure-destination) を参照してください。
 
 ## ステップ 2. Dumpling で完全スナップショットをエクスポートする {#step-2-export-a-full-snapshot-with-dumpling}
 
@@ -77,13 +77,13 @@ TiDB Cloud Dedicated では TiDB Cloud コンソールでエクスポート機�
 
 ### 1. ネットワークと SQL ユーザーを準備する {#1-prepare-the-network-and-sql-user}
 
-1. {{{ .dedicated }}} クラスターに、Dumpling を実行するマシンから到達できることを確認します。このガイドではパブリック接続を使用します。パブリック接続を使用する場合は、そのマシンの IP アドレスをクラスターの IP access list に追加してください。詳細は、[パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md) および [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md) を参照してください。
-2. [TiDB Cloud console](https://tidbcloud.com/) で、クラスターの概要ページにある **Connect** をクリックし、接続先の host と port を記録します。これらは Dumpling コマンドで必要です。
+1. {{{ .dedicated }}} クラスターに、Dumpling を実行するマシンから到達できることを確認します。このガイドではパブリック接続を使用します。パブリック接続を使用する場合は、そのマシンの IP アドレスをクラスターの IP アクセスリストに追加してください。詳細は、[パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md) および [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md) を参照してください。
+2. [TiDB Cloud コンソール](https://tidbcloud.com/) で、クラスターの概要ページにある **Connect** をクリックし、接続先のホストとポートを記録します。これらは Dumpling コマンドで必要です。
 3. Dumpling に必要な権限を持つ SQL ユーザーを準備します。このガイドでは例として `root` を使用します。専用ユーザーを使用する場合は、そのユーザーに [Dumpling に必要な権限](https://docs.pingcap.com/tidb/stable/dumpling-overview#required-privileges) を付与してください。
 
 ### 2. Dumpling でスナップショットをエクスポートする {#2-export-the-snapshot-with-dumpling}
 
-{{{ .dedicated }}} クラスターに接続できるマシンで Dumpling を実行します。AWS access key は、`access-key` および `secret-access-key` パラメータを使って `-o` URI に渡します。
+{{{ .dedicated }}} クラスターに接続できるマシンで Dumpling を実行します。AWS アクセスキーは、`access-key` および `secret-access-key` パラメータを使って `-o` URI に渡します。
 
 ```shell
 tiup dumpling \
@@ -109,14 +109,14 @@ tiup dumpling \
 >
 > Secret Access Key に `+`、`/`、`=` などの URI 特殊文字が含まれている場合は、先に URL エンコードしてください。あるいは、`AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` 環境変数を設定するか、`~/.aws/credentials` ファイルを使用し、`-o` URI から `access-key` と `secret-access-key` パラメータを省略することもできます。
 
-エクスポートが正常に完了すると、コマンド出力に JSON サマリーが含まれます。出力内の `SessionParams.tidb_snapshot` フィールドを見つけ、その値を記録してください。この値が **snapshot TSO** であり、changefeed 作成時に、エクスポートしたスナップショットから増分レプリケーションを継続するために必要です。
+エクスポートが正常に完了すると、コマンド出力に JSON サマリーが含まれます。出力内の `SessionParams.tidb_snapshot` フィールドを見つけ、その値を記録してください。この値は **snapshot TSO** です。エクスポートしたスナップショットの続きから増分レプリケーションを開始するため、changefeed の作成時に必要になります。
 
 ## ステップ 3. 増分データ用の changefeed を作成する {#step-3-create-a-changefeed-for-incremental-data}
 
 TiDB Cloud コンソールでは、TiDB Cloud Dedicated クラスター用のクラウドストレージ changefeed を作成できます。完全な手順については、[クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md) を参照してください。changefeed を設定する際は、次の設定に注意してください。
 
-- **S3 URI**: スナップショットと同じ prefix 配下の `incremental/` サブパスを使用します。たとえば `s3://<bucket>/<prefix>/incremental/` です。
-- **Bucket Access**: **AWS Access Key** を選択し、[ステップ 1. S3 バケットへのアクセスを準備する](#step-1-prepare-s3-bucket-access) の access key を入力します。権限が `incremental/` パスをカバーしていることを確認してください。
+- **S3 URI**: スナップショットと同じプレフィックス配下の `incremental/` サブパスを使用します。たとえば `s3://<bucket>/<prefix>/incremental/` です。
+- **Bucket Access**: **AWS Access Key** を選択し、[ステップ 1. S3 バケットへのアクセスを準備する](#step-1-prepare-s3-bucket-access) のアクセスキーを入力します。権限の対象に `incremental/` パスが含まれていることを確認してください。
 - **Start Replication Position**: **Start replication from a specific TSO** を選択し、[ステップ 2. Dumpling で完全スナップショットをエクスポートする](#step-2-export-a-full-snapshot-with-dumpling) で記録した snapshot TSO を入力します。
 - **Data Format**: **Canal-JSON** を選択し、**Enable TiDB Extension** と **Enable Canal Content Compatibility** の両方を有効にします。これらの設定により、TiDB Cloud Lake 統合と互換性のある形式でデータが生成されます。
 
@@ -128,7 +128,7 @@ TiDB Cloud Lake では、S3 バケットからデータをロードするため�
 
 1. [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で、**Data > Data Sources > Create** に移動します。
 2. **Service: TiDB** を選択します。
-3. access key 認証を選択し、以下を入力します。
+3. アクセスキー認証を選択し、以下を入力します。
     - **Access Key ID** と **Secret Access Key**: [ステップ 1. S3 バケットへのアクセスを準備する](#step-1-prepare-s3-bucket-access) の認証情報。
     - **S3 Bucket Name**: バケット名のみ（例: `my-datapipeline-bucket`。完全な URI ではありません）。
     - **S3 Region**: {{{ .dedicated }}} クラスターと同じリージョン。
