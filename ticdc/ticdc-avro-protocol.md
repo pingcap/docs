@@ -291,9 +291,9 @@ AvroはDDLイベントとウォーターマークイベントを下流に送信�
 
 ## コンシューマーの実装 {#consumer-implementation}
 
-TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer)で逆シリアル化できます。
+TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer)でデシリアライズできます。
 
-コンシューマー プログラムは[スキーマレジストリAPI](https://docs.confluent.io/platform/current/schema-registry/develop/api.html)を介して最新のスキーマを取得し、そのスキーマを使用して TiCDC Avro プロトコルによってエンコードされたデータを逆シリアル化できます。
+コンシューマー プログラムは[スキーマレジストリAPI](https://docs.confluent.io/platform/current/schema-registry/develop/api.html)を介して最新のスキーマを取得し、そのスキーマを使用して TiCDC Avro プロトコルによってエンコードされたデータをデシリアライズできます。
 
 ### イベントの種類を区別する {#distinguish-event-types}
 
