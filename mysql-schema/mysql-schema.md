@@ -11,7 +11,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 >
 > ほとんどのシナリオでは、 `INSERT` 、 `UPDATE` 、または`DELETE`を使用してシステムテーブルの内容を直接変更することは推奨されません。代わりに、 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 、[`ALTER USER`](/sql-statements/sql-statement-alter-user.md) 、 [`DROP USER`](/sql-statements/sql-statement-drop-user.md) 、 [`GRANT`](/sql-statements/sql-statement-grant-privileges.md) 、 [`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md) 、および[`SHOW CREATE USER`](/sql-statements/sql-statement-show-create-user.md)などのステートメントを使用して、ユーザーと権限を管理してください。システムテーブルの直接変更が避けられない場合は、 [`FLUSH PRIVILEGES`](/sql-statements/sql-statement-flush-privileges.md)を使用して変更を有効にしてください。
 
-## 助成金システムテーブル {#grant-system-tables}
+## 権限付与システムテーブル {#grant-system-tables}
 
 これらのシステムテーブルには、ユーザーアカウントとその権限に関する許可情報が含まれています。
 
@@ -23,7 +23,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 - `default_roles` : ユーザーのデフォルトロール
 - `global_grants` : 動的権限
 - `global_priv` : 証明書に基づく認証情報
-- `role_edges` : 役割間の関係
+- `role_edges` : ロール間の関係
 
 ## クラスタステータスシステムテーブル {#cluster-status-system-tables}
 
@@ -76,7 +76,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
 ## キャッシュされたテーブルに関連するシステムテーブル {#system-tables-related-to-cached-tables}
 
-- `table_cache_meta`キャッシュされたテーブルのメタデータを保存します。
+- `table_cache_meta`は、キャッシュされたテーブルのメタデータを保存します。
 
 ## TTL関連のシステムテーブル {#ttl-related-system-tables}
 
