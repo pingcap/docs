@@ -191,17 +191,19 @@
   - [Data App Configuration Files](/tidb-cloud/data-service-app-config-files.md)
   - [Response and Status Code](/tidb-cloud/data-service-response-and-status-code.md)
 - Stream Data
-  - [Changefeed Overview](/tidb-cloud/changefeed-overview.md)
+  - [Changefeed](/tidb-cloud/changefeed-overview.md)
   - [To MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [To Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [To Pulsar Sink](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)
   - [To TiDB Cloud Sink](/tidb-cloud/changefeed-sink-to-tidb-cloud.md)
   - [To Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [To TiDB Cloud Lake](/tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
   - Reference
     - [Set Up Self-Hosted Kafka Private Link Service in AWS](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Link Service in Azure](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [Set Up Self-Hosted Kafka Private Service Connect in Google Cloud](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
     - [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md)
+    - [SQL Compatibility for TiDB Cloud Lake Integration](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
 - Security
   - [Security Overview](/tidb-cloud/security-overview.md)
   - Identity Access Control

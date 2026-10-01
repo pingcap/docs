@@ -1,17 +1,15 @@
 ---
 title: Mount a File System on macOS
-summary: Mount a file system as a local directory on macOS, and use macFUSE when you need FUSE-specific features.
+summary: Learn how to mount a TiDB Cloud file system on macOS, choose WebDAV or macFUSE, verify reads and writes, and unmount safely.
 ---
 
 # Mount a File System on macOS
 
 On macOS, you can mount a file system in TiDB Cloud Filesystem as a local directory and access its files with your usual applications and tools.
 
-For most workflows, you can mount a file system with WebDAV. It lets you access file system files through normal local file paths and does not require additional mount software.
+For general file access, WebDAV requires no additional mount software. Use FUSE with macFUSE to mount layers or checkpoints, or to flush pending writes while keeping the mount running.
 
-Use FUSE with macFUSE when you also need FUSE-specific features, such as mounting a layer or checkpoint, or making pending writes reach the file system without unmounting it.
-
-Without macFUSE, TiDB Cloud CLI (`ti`) uses WebDAV. If macFUSE is installed, `ti` prefers FUSE when the mount driver is selected automatically. The commands in this guide specify the driver explicitly so that you know which mount method is being used.
+For automatic driver selection, TiDB Cloud CLI (`ti`) prefers FUSE when macFUSE is installed and uses WebDAV otherwise. The examples specify a driver explicitly to make the choice clear.
 
 > **Note:**
 >
@@ -24,101 +22,96 @@ Before you begin:
 - [Install TiDB Cloud CLI (`ti`)](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - Make the file system and its token available to `ti`. See [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
 
-The write examples below require a token with write permission.
+Use Bash or Zsh and keep the same shell open for each procedure.
 
 ## Mount with WebDAV
 
-For most workflows, you can use WebDAV without installing additional mount software.
+Use an owner token or a scoped token with `read,list,write,delete` permissions on the remote directory. These permissions cover both verification and cleanup. Upload a small file, update it through WebDAV, and verify the update after unmounting.
 
-1. Create a local directory for the mount:
+For read-only access through WebDAV, use a scoped token with only `read` and `list` permissions and mount without `--read-only`; WebDAV rejects that option. The token enforces read-only access at the service. Follow the [read-only sharing example](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional) to mount, read an existing file, and unmount. The procedure below requires write permissions to upload, update, and clean up a sample file.
+
+For a local read-only mount, use macFUSE with `--driver fuse --read-only`.
+
+1. Select the remote directory and create an empty local mount directory. For a token scoped to one directory, replace `/` with that directory's path:
 
     ```bash
-    mkdir -p "$HOME/workspace"
+    remote_path="/"
+    mount_dir="$(mktemp -d "$HOME/ti-fs-webdav.XXXXXX")"
     ```
 
-2. Mount the file system with WebDAV:
+2. Upload a unique sample file to that remote directory so you can verify that the mount can read an existing remote file:
+
+    ```bash
+    test_file="mount-check-$(date +%s)-$$.txt"
+    printf 'Hello from the service\n' | ti fs copy-file \
+      --from-stdin --to-remote "${remote_path%/}/$test_file"
+    ```
+
+3. Mount the directory with WebDAV:
 
     ```bash
     ti fs mount-file-system \
-      --mount-path "$HOME/workspace" \
+      --remote-path "$remote_path" \
+      --mount-path "$mount_dir" \
       --driver webdav
     ```
 
-    The mount continues running in the background after the command returns, so closing the terminal does not unmount it.
+    The remote directory becomes the mount root. The mount runs in the background until you unmount it.
 
-    After the command succeeds, you can access the file system through `$HOME/workspace`.
-
-    If your file system token grants access only to a specific remote path, use the following command instead of the preceding mount command:
+4. Read the uploaded file:
 
     ```bash
-    ti fs mount-file-system \
-      --remote-path /workspace \
-      --mount-path "$HOME/workspace" \
-      --driver webdav
+    cat "$mount_dir/$test_file"
     ```
 
-    In this example, the remote `/workspace` directory becomes the root of the local mount. For more information, see [Mount only part of the file system](/tidb-cloud-filesystem/filesystem-mount.md#mount-only-part-of-the-file-system).
+    Expected output: `Hello from the service`. If a file operation takes longer than 30 seconds, interrupt it with Ctrl+C and follow [mount troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md#mount-succeeds-but-file-access-hangs) before continuing.
 
-    To prevent writes through the local mount, add `--read-only` to the mount command. For example, to mount the file system root as read-only:
+5. Update the file through the mount:
 
     ```bash
-    ti fs mount-file-system \
-      --mount-path "$HOME/workspace" \
-      --driver webdav \
-      --read-only
+    printf 'Hello from macOS\n' > "$mount_dir/$test_file"
     ```
 
-    The `--read-only` option affects this local mount only. Use a scoped token with read-only permissions to enforce read-only access at the file system service.
-
-3. Verify that you can access the mounted file system:
+6. Close applications using the mount and unmount it normally:
 
     ```bash
-    ls "$HOME/workspace"
+    ti fs unmount-file-system --mount-path "$mount_dir"
     ```
 
-    If you used a writable mount and your token has write permission, you can also create and read a test file:
+    WebDAV does not support `drain-file-system`. If unmount fails, keep the machine and local mount data available and follow [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
+
+7. After successful unmount, read the update directly from the service:
 
     ```bash
-    TEST_FILE="mount-check-$(date +%s).txt"
-
-    printf 'Hello from macOS\n' > "$HOME/workspace/$TEST_FILE"
-    cat "$HOME/workspace/$TEST_FILE"
+    ti fs read-file --path "${remote_path%/}/$test_file"
     ```
 
-    Example output:
+    Expected output: `Hello from macOS`.
 
-    ```text
-    Hello from macOS
-    ```
-
-4. When you are finished, close files that are open in applications and unmount the file system:
+8. Delete the sample file and empty mount directory:
 
     ```bash
-    ti fs unmount-file-system --mount-path "$HOME/workspace"
+    ti fs delete-file --path "${remote_path%/}/$test_file"
+    rmdir "$mount_dir"
     ```
 
-    WebDAV does not support `drain-file-system`. Complete a normal unmount before shutting down the machine or handing updated files to another user or environment.
+The file system remains available for reuse.
 
-    If you created the test file above, you can optionally verify after unmounting that the file is available directly from the file system:
-
-    ```bash
-    ti fs read-file --path "/$TEST_FILE"
-    ```
-
-    Example output:
-
-    ```text
-    Hello from macOS
-    ```
-
-Unmounting removes the local mount but does not delete the file system or its data.
+> **Note:**
+>
+> Browsing a mount in Finder, with either driver, writes `.DS_Store` files and `._` companion files into the file system. They stay there after you unmount, they consume storage and appear in the file system's file count, and anyone holding a token for that path can see them. Delete both kinds if you do not want to share them:
+>
+> ```bash
+> ti fs delete-file --path "${remote_path%/}/.DS_Store"
+> ti fs delete-file --path "${remote_path%/}/._.DS_Store"
+> ```
 
 ## Use macFUSE when you need FUSE features
 
 Use FUSE instead of WebDAV when you need to:
 
-- mount a layer or checkpoint; or
-- make pending writes reach the file system while keeping the mount running with `drain-file-system`.
+- Mount a layer or checkpoint.
+- Flush pending writes with `drain-file-system` while keeping the mount running.
 
 To use FUSE on macOS:
 

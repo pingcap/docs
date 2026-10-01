@@ -20,7 +20,7 @@ TiDB Cloud Filesystem is available only in the regions and environments listed b
 | AWS | Singapore | `aws-ap-southeast-1` |
 | Alibaba Cloud | Singapore | `alicloud-ap-southeast-1` |
 
-TiDB Cloud Starter also supports some regions where TiDB Cloud Filesystem is not available. File system commands in those regions fail with an `unsupported endpoint` error. Supported file system regions are built into each `ti` release. If a region was added after your installed version was released, upgrade `ti`; specifying a service URL cannot enable it.
+TiDB Cloud Starter also supports some regions where TiDB Cloud Filesystem is not available. A file system command in one of those regions fails and displays an error indicating that the service is not available for that region, and lists the regions that are supported. Supported file system regions are built into each `ti` release. If support for a region was added after your installed version was released, upgrade `ti`; specifying a service URL cannot enable support for that region.
 
 The `list` and `describe` file system commands query only the selected region. They do not aggregate resources across regions. For CLI-wide region selection and Starter availability, see [TiDB Cloud CLI Regions, Security, and Limitations](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions).
 

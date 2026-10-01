@@ -1,18 +1,16 @@
 ---
 title: Use Journals in a File System
-summary: Learn how to record, read, search, and verify ordered events from agent and automation workflows in a file system.
+summary: Learn how to create file system journals, record workflow events, paginate read and search results, and verify the recorded history.
 aliases: ['/ai/use-filesystem-journals']
 ---
 
 # Use Journals in a File System
 
-In TiDB Cloud Filesystem, you can use a file system journal when you need an ordered, persistent record of events from an agent or automation workflow. For example, a journal can record when a task starts or finishes, which agent performed an action, and when work is handed off between agents or processes. You can later read or search these events to understand what happened during the workflow.
+In TiDB Cloud Filesystem, you can use a file system journal to keep an ordered, persistent record of agent and automation events, such as task starts, completions, and handoffs. You can read or search the entries to trace what happened and which agent performed each action.
 
-Journal entries are append-only: new events are added as new entries, and existing entries cannot be modified. The entries are also linked through a hash chain, which lets you verify that the recorded history remains intact and in order.
+Entries are append-only: you can add events but cannot modify existing entries. A hash chain links the entries so you can verify their integrity and order.
 
-This guide shows you how to create a journal, record events, read and search recorded events, and verify the journal history.
-
-Journals are intended for workflow events and history. Store artifacts, working files, and other workflow outputs as regular files in the file system. A journal records what happened; it does not replay workflow actions or replace the files produced by the workflow.
+Store artifacts and working files as regular files in the file system. A journal records events; it does not replay actions or replace workflow outputs.
 
 > **Note:**
 >
@@ -37,7 +35,7 @@ ti fs-journal create-journal \
   --actor agent:reviewer
 ```
 
-Because no journal ID is specified, the service generates one. Save the returned journal ID—you will use it to append, read, and verify entries in this journal.
+The service generates a journal ID when you omit it. Save the returned ID for appending, reading, and verifying entries.
 
 The journal kind, title, and actor provide context that can also help you find related workflow records later.
 
@@ -48,23 +46,19 @@ Append an event to the journal:
 ```shell
 ti fs-journal append-journal-entries \
   --journal-id "<journal-id>" \
+  --idempotency-key review-started \
   --entry-json '{"type":"review_started"}'
 ```
 
 Each entry needs a `type`, unless you provide one with `--entry-type`. You can also include fields such as `summary`, `actor`, and `occurred_at`.
 
-The example above omits `--idempotency-key` for brevity. If your workflow might retry the same append operation, provide an idempotency key and reuse the same key for every retry. This prevents the retry from recording the same event more than once:
-
-```shell
-ti fs-journal append-journal-entries \
-  --journal-id "<journal-id>" \
-  --idempotency-key review-started \
-  --entry-json '{"type":"review_started"}'
-```
+Reuse the same `--idempotency-key` when retrying this event to avoid duplicate entries. Use a new key for a different event.
 
 For all supported fields and input formats, see the [`append-journal-entries` reference](/ai/ti/reference/ti-fs-journal-append-journal-entries.md).
 
 ## Read and search entries
+
+### Read one journal
 
 To review the history of one journal, read its entries:
 
@@ -73,17 +67,41 @@ ti fs-journal read-journal-entries \
   --journal-id "<journal-id>"
 ```
 
-Entries are returned in sequence order, so you can follow the workflow in the order it was recorded.
+Entries are returned in sequence order, with at most 100 entries per call by default. For the next page, replace `<last-seq>` with the last returned entry's `seq`:
 
-To find events across journals in the selected file system, use `search-journal-entries`. For example, the following command finds `review_started` events and returns their entry contents:
+```shell
+ti fs-journal read-journal-entries \
+  --journal-id "<journal-id>" \
+  --after-seq "<last-seq>" \
+  --limit 100
+```
+
+Continue from each page's last sequence until a successful response has an empty `entries` array. If a request fails, retry from the same sequence. An active journal can receive more entries while you read; pagination does not create a snapshot.
+
+### Search across journals
+
+Find `review_started` events across journals in the selected file system:
 
 ```shell
 ti fs-journal search-journal-entries \
   --entry-type review_started \
-  --include-entries
+  --limit 100
 ```
 
-Unlike `read-journal-entries`, the search command is not limited to one journal. Use filters such as journal kind, actor, entry type, labels, or time range to narrow the results.
+Search defaults to at most 100 matches per call. Pass the last match's `cursor` to the next request, keeping the same filters:
+
+```shell
+ti fs-journal search-journal-entries \
+  --entry-type review_started \
+  --limit 100 \
+  --cursor "<last-match-cursor>"
+```
+
+Continue until a successful response has an empty `matches` array. If a request fails, retry with the same cursor. To limit the search to a fixed time range, supply RFC3339 `--since` and `--until` values and keep them unchanged across pages.
+
+For a single page of full entry contents, add `--include-entries`. Omit it when paginating: that output does not retain match cursors.
+
+To retrieve a matched entry separately, use `read-journal-entries` with its `journal_id`, set `--after-seq` to one less than the entry's `seq`, and set `--limit 1`. For example, to read the entry at sequence `42`, use `--after-seq 41 --limit 1`.
 
 ## Verify a journal
 
@@ -94,9 +112,7 @@ ti fs-journal verify-journal \
   --journal-id "<journal-id>"
 ```
 
-A successful verification confirms that the stored sequence and hash chain are consistent.
-
-Hash-chain verification checks the integrity of the recorded journal history. It does not prove that the original event information recorded by an agent or application was accurate.
+A successful verification confirms that the stored sequence and hash chain are consistent. It does not confirm the accuracy of events reported by an agent or application.
 
 ## What's next
 

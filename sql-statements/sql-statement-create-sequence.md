@@ -61,7 +61,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 | `MAXVALUE` | `9223372036854775806` or `-1` | Specifies the maximum value of a sequence. When `INCREMENT` > `0`, the default value is `9223372036854775806`. When `INCREMENT` < `0`, the default value is `-1`. |
 | `START` | `MINVALUE` or `MAXVALUE`| Specifies the initial value of a sequence. When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
 | `CACHE` | `1000` | Specifies the local cache size of a sequence in TiDB. |
-| `CYCLE` | `NO CYCLE` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence). When `INCREMENT` > `0`, the default value is `MINVALUE`. When `INCREMENT` < `0`, the default value is `MAXVALUE`. |
+| `CYCLE` | `NO CYCLE` | Specifies whether a sequence restarts from the minimum value (or maximum for the descending sequence) after it is exhausted. In the `CYCLE` mode, when `INCREMENT` > `0`, the sequence restarts from `MINVALUE` after it is exhausted. When `INCREMENT` < `0`, it restarts from `MAXVALUE`. |
 
 ## `SEQUENCE` function
 
