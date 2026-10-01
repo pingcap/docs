@@ -17,7 +17,7 @@ summary: TiDB Cloud Premium または BYOC で階層型ストレージを監視�
 
 変換の進行状況は、ストレージクラスを変更する方法にかかわらず、同じ方法で追跡されます。
 
-- `STORAGE_CLASS` 構文シュガー。例: `ALTER TABLE t1 STORAGE_CLASS='IA'`
+- `STORAGE_CLASS` の糖衣構文。例: `ALTER TABLE t1 STORAGE_CLASS='IA'`
 - `ENGINE_ATTRIBUTE` 形式。例: `ALTER TABLE t1 ENGINE_ATTRIBUTE='{"storage_class":"IA"}'`
 - `ENGINE_ATTRIBUTE` を使用したパーティションレベルの変更
 
