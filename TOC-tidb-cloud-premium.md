@@ -151,7 +151,7 @@
     - [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)
     - [AWS PrivateLink 経由で Amazon MSK Provisioned クラスターをセットアップする](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)
     - [TiDB Cloud Data Pipeline 用の外部 stage を設定する (AWS)](/tidb-cloud/data-pipeline-configure-external-stage-aws.md)
-    - [TiDB Cloud Data Pipeline の External Stage を設定する (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md)
+    - [TiDB Cloud Data Pipeline 用の外部 stage を設定する (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md)
     - [TiDB Cloud Lake 向け Data Pipeline SQL 互換性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
     - [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq.md)
 - セキュリティ

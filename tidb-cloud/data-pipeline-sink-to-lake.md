@@ -80,7 +80,7 @@ TiDB Cloud Data Pipeline は、外部 stage として Amazon S3 および Alibab
 
 <div label="Alibaba Cloud OSS">
 
-RAM ユーザー、その権限、およびアクセスキーを含む OSS 側の完全な設定については、[TiDB Cloud Data Pipeline の External Stage を設定する (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md) を参照してください。
+RAM ユーザー、その権限、およびアクセスキーを含む OSS 側の完全な設定については、[TiDB Cloud Data Pipeline 用の外部 stage を設定する (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md) を参照してください。
 
 1. **External Stage** エリアで、OSS バケットの **Bucket URI** を `oss://<bucket-name>/<path-to-data>/` 形式で入力します。
 2. 以下のフィールドを入力します。
