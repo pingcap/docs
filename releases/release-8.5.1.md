@@ -15,7 +15,7 @@ TiDBバージョン：8.5.1
 
 バージョン8.5.1以降、TiDBはCentOS Linux 7のテストを再開し、互換性を確保しています。TiDB v8.5をデプロイする場合、またはクラスタをv8.5にアップグレードする場合は、TiDB v8.5.1以降のバージョンを使用してください。
 
-- CentOS Linux 7 は[2024年6月30日をもってサポート終了となります](https://www.redhat.com/en/topics/linux/centos-linux-eol)。そのため、TiDB v8.4.0 DMR および v8.5.0 リリースでは、CentOS Linux 7 のサポートとテストを終了しました。CentOS 7 上の TiDB クラスターを v8.4.0 または v8.5.0 にアップグレードすると、クラスターが使用できなくなるリスクが発生します。
+- CentOS Linux 7 は[2024年6月30日にサポート終了（EOL）となった](https://www.redhat.com/en/topics/linux/centos-linux-eol)。そのため、TiDB v8.4.0 DMR および v8.5.0 リリースでは、CentOS Linux 7 のサポートとテストを終了しました。CentOS 7 上の TiDB クラスターを v8.4.0 または v8.5.0 にアップグレードすると、クラスターが使用できなくなるリスクが発生します。
 
 - 現在も CentOS Linux 7 を使用しているユーザーを支援するために、TiDB は v8.5.1 から CentOS Linux 7 のテストを再開します。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)を確認し、Rocky Linux 9.1 以降などの本番使用向けの[TiDBがサポートするオペレーティングシステム](/hardware-and-software-requirements.md#os-and-platform-requirements)に移行することを強くお勧めします。
 
@@ -25,7 +25,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
 
 - TiDB統計キャッシュによるメモリ使用量を削減するため、 [`tidb_stats_cache_mem_quota`](/system-variables.md#tidb_stats_cache_mem_quota-new-in-v610)システム変数のデフォルト値`0`の意味が変更されました。
 
-    - v8.5.1より前では、 `0`統計キャッシュのメモリクォータがTiDBインスタンスの総メモリの50%であることを意味します。
+    - v8.5.1より前では、 `0`は、統計キャッシュのメモリクォータがTiDBインスタンスの総メモリの50%であることを意味します。
     - v8.5.1以降、 `0`は、統計キャッシュのメモリ割り当てがTiDBインスタンスの総メモリの20%であることを意味します。
 
 ## 改善点 {#improvements}
@@ -65,7 +65,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
     - `IndexMerge`を構築する際に一部の述語が失われる可能性がある問題を修正しました [#58476](https://github.com/pingcap/tidb/issues/58476) @[hawkingrei](https://github.com/hawkingrei)
     - 3000次元を超える列にベクトル検索インデックスを作成すると`KeyTooLong`エラーが発生する問題を修正 [#58836](https://github.com/pingcap/tidb/issues/58836) @[breezewish](https://github.com/breezewish)
     - `REORGANIZE PARTITION`操作が置換されたグローバルインデックスを正しくクリーンアップせず、非クラスター化テーブルの一意インデックスを処理する問題を修正しました [#56822](https://github.com/pingcap/tidb/issues/56822) @[mjonss](https://github.com/mjonss)
-    - パーティションテーブルのレンジ INTERVAL 構文糖衣が`MINUTE`間隔として使用できない問題を修正 [#57698](https://github.com/pingcap/tidb/issues/57698) @[mjonss](https://github.com/mjonss)
+    - パーティションテーブルのレンジ INTERVAL 構文糖衣で`MINUTE`を間隔として使用できない問題を修正 [#57698](https://github.com/pingcap/tidb/issues/57698) @[mjonss](https://github.com/mjonss)
     - タイムゾーンを変更すると、スローログのクエリ時にクエリ結果が正しくなくなる問題を修正しました [#58452](https://github.com/pingcap/tidb/issues/58452) @[lcwangchao](https://github.com/lcwangchao)
     - スキャンタスクのTTLワーカーを縮小する際に、タスクキャンセルの失敗によってタスクがリークする可能性がある問題を修正しました [#57708](https://github.com/pingcap/tidb/issues/57708) @[YangKeao](https://github.com/YangKeao)
     - ハートビートが失われ、TTLテーブルが削除または無効化された後もTTLジョブが実行され続ける問題を修正 [#57702](https://github.com/pingcap/tidb/issues/57702) @[YangKeao](https://github.com/YangKeao)
