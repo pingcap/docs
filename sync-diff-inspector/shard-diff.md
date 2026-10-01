@@ -133,4 +133,4 @@ target-table = "table-0"     # The name of the target table
 
 ## 注記 {#note}
 
-上流データベースに`test.table-0`存在する場合、下流データベースもこのテーブルを比較します。
+上流データベースに`test.table-0`が存在する場合、下流データベースもこのテーブルを比較します。

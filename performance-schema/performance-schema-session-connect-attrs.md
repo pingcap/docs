@@ -3,7 +3,7 @@ title: SESSION_CONNECT_ATTRS
 summary: "`SESSION_CONNECT_ATTRS` パフォーマンス スキーマ テーブルについて学習します。"
 ---
 
-# セッション接続属性 {#session-connect-attrs}
+# SESSION_CONNECT_ATTRS {#session-connect-attrs}
 
 表`SESSION_CONNECT_ATTRS`は接続属性に関する情報を提供します。セッション属性は、接続を確立する際にクライアントから送信されるキーと値のペアです。
 

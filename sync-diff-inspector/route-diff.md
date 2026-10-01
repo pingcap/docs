@@ -31,7 +31,7 @@ target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-この構成は、ダウンストリームで`test_2.t_2`チェックし、インスタンス`mysql1`で`test_1.t_1`チェックするために使用できます。
+この構成は、ダウンストリームで`test_2.t_2`を、インスタンス`mysql1`で`test_1.t_1`をチェックするために使用できます。
 
 スキーマ名またはテーブル名が異なる多数のテーブルをチェックする場合、 `rules`を使用してマッピング関係を設定することで設定を簡素化できます。スキーマまたはテーブルのいずれか、あるいは両方のマッピング関係を設定できます。例えば、上流データベース`test_1`のすべてのテーブルが下流データベース`test_2`に複製され、以下の設定でチェックできます。
 
@@ -66,7 +66,7 @@ target-table = "t_2"           # The name of the target table
     - `schema.table`から`schema.table`に一致するルールがある場合、sync-diff-inspector は何も行いません。
     - `schema.table`から`schema.table`に一致するルールがない場合、sync-diff-inspector はテーブルルーターに新しいルール`schema.table -> _no__exists__db_._no__exists__table_`を追加します。その後、sync-diff-inspector はテーブル`schema.table`をテーブル`_no__exists__db_._no__exists__table_`として扱います。
 
-- `target-schema`ルール内にのみ存在する場合、次のようになります。
+- `target-schema`がルール内にのみ存在する場合、次のようになります。
 
     ```toml
     [routes.rule1]
