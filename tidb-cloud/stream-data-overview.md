@@ -18,7 +18,7 @@ Changefeed 会将增量数据变更从 TiDB Cloud 流式传输到下游系统。
 
 ## Data Pipeline (PREVIEW) {#data-pipeline-preview}
 
-Data Pipeline 会将完整数据和增量变更从你的 TiDB Cloud 实例复制到 TiDB Cloud Lake。它使用外部 stage（例如 Amazon S3 或 Alibaba Cloud OSS）在源端和目标端之间缓冲数据，从而提高可靠性，并让你能够控制成本和延时。更多信息，参见 [数据管道](/tidb-cloud/data-pipeline.md)。
+Data Pipeline 会将完整数据和增量变更从你的 TiDB Cloud 实例复制到 TiDB Cloud Lake。它使用外部 stage（例如 Amazon S3 或 Alibaba Cloud OSS）在源端和目标端之间缓冲数据，从而提高可靠性，并让你能够控制成本和延时。更多信息，参见 [Data Pipeline](/tidb-cloud/data-pipeline.md)。
 
 > **注意：**
 >

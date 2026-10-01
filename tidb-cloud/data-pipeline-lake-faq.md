@@ -7,7 +7,7 @@ summary: 关于 TiDB Cloud Data Pipeline 到 TiDB Cloud Lake 的常见问题，�
 
 本文档解答了关于 TiDB Cloud Data Pipeline 到 TiDB Cloud Lake 的常见问题。
 
-## 为什么数据管道需要外部 stage？ {#why-does-a-data-pipeline-require-an-external-stage}
+## 为什么 Data Pipeline 需要外部 stage？ {#why-does-a-data-pipeline-require-an-external-stage}
 
 出于可靠性考虑，需要使用外部 stage。由于两端都通过 stage 工作，而不是直接传输数据，因此 TiDB Cloud 侧的写入速率与 TiDB Cloud Lake 的消费速率实现了解耦：
 
@@ -25,9 +25,9 @@ summary: 关于 TiDB Cloud Data Pipeline 到 TiDB Cloud Lake 的常见问题，�
 
 **权衡：** 在事件驱动模式下，TiDB Cloud Lake 可以更频繁地摄取新数据，这可能会使计算集群 (Warehouse) 更长时间保持在 **active** 状态。这会增加计算集群托管成本。
 
-## 数据管道是否会产生额外的 TiDB Cloud Lake 费用？ {#does-a-data-pipeline-incur-additional-tidb-cloud-lake-charges}
+## Data Pipeline 是否会产生额外的 TiDB Cloud Lake 费用？ {#does-a-data-pipeline-incur-additional-tidb-cloud-lake-charges}
 
-数据管道不会引入单独的计费类别。成本来自管道中涉及的现有组件：
+Data Pipeline 不会引入单独的计费类别。成本来自管道中涉及的现有组件：
 
 - **Export**（一次性）：按完整快照导出的费用计费。
 - **Changefeed**（持续）：如果启用了增量复制，则按用于持续复制的 changefeed 资源计费。

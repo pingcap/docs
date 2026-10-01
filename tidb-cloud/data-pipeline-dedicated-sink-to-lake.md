@@ -1,18 +1,18 @@
 ---
 title: Sink to TiDB Cloud Lake
-summary: 在 TiDB Cloud Dedicated 集群上使用 Dumpling 和 changefeed 构建 TiDB Cloud Lake 数据管道的手动配置指南。
+summary: 在 TiDB Cloud Dedicated 集群上使用 Dumpling 和 changefeed 构建 TiDB Cloud Lake Data Pipeline 的手动配置指南。
 ---
 
 # Sink to TiDB Cloud Lake
 
-本文档将指导你完成从 TiDB Cloud Dedicated 集群到 TiDB Cloud Lake 的端到端数据管道配置：使用 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 将完整快照导出到 Amazon S3，创建一个 [Changefeed](/tidb-cloud/changefeed-overview.md) 持续将增量变更写入同一 S3 位置，并配置 TiDB Cloud Lake 以加载快照和增量数据。
+本文档将指导你完成从 TiDB Cloud Dedicated 集群到 TiDB Cloud Lake 的端到端 Data Pipeline 配置：使用 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 将完整快照导出到 Amazon S3，创建一个 [Changefeed](/tidb-cloud/changefeed-overview.md) 持续将增量变更写入同一 S3 位置，并配置 TiDB Cloud Lake 以加载快照和增量数据。
 
 ## 限制 {#restrictions}
 
 - TiDB Cloud Lake 的计算集群必须与 {{{ .dedicated }}} 集群位于**同一 Region**。
 - 只有带有**主键**的表才能进行增量复制。
 - 要创建云存储 changefeed，你的 {{{ .dedicated }}} 集群必须运行 v7.1.1 或更高版本。更多信息，参见[Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)。
-- 该数据管道需要手动配置和维护 AWS IAM 资源与凭证、changefeed 以及 TiDB Cloud Lake 集成。
+- 该 Data Pipeline 需要手动配置和维护 AWS IAM 资源与凭证、changefeed 以及 TiDB Cloud Lake 集成。
 - 有关 DDL、DML 和列类型支持的更多信息，参见 [TiDB Cloud Lake 的 Data Pipeline SQL 兼容性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)。
 
 ## 前提条件 {#prerequisites}
@@ -31,7 +31,7 @@ summary: 在 TiDB Cloud Dedicated 集群上使用 Dumpling 和 changefeed 构建
 
 ## 第 1 步：准备 S3 存储桶访问 {#step-1-prepare-s3-bucket-access}
 
-数据管道的各个组件（Dumpling、changefeed 和 TiDB Cloud Lake）都需要访问同一个 S3 存储桶。请为目标 S3 存储桶创建一个具有所需权限的 IAM 用户，为该用户创建 access key，并在这三个组件中使用同一个 access key。
+Data Pipeline 的各个组件（Dumpling、changefeed 和 TiDB Cloud Lake）都需要访问同一个 S3 存储桶。请为目标 S3 存储桶创建一个具有所需权限的 IAM 用户，为该用户创建 access key，并在这三个组件中使用同一个 access key。
 
 1. 打开 [IAM Console](https://console.aws.amazon.com/iam/)，创建一个 IAM 用户（例如 `tidb-cloud-datapipeline-user`）。
 2. 为该用户附加以下权限策略。将 `<your-bucket-name>` 和 `<your-prefix>` 替换为你的实际值：

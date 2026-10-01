@@ -1,11 +1,11 @@
 ---
 title: Sink to TiDB Cloud Lake
-summary: 在 TiDB Cloud Essential 实例上使用 export、changefeed 和 TiDB Cloud Lake 集成构建 TiDB Cloud Lake 数据管道的手动设置指南。
+summary: 在 TiDB Cloud Essential 实例上使用 export、changefeed 和 TiDB Cloud Lake 集成构建 TiDB Cloud Lake Data Pipeline 的手动设置指南。
 ---
 
 # Sink to TiDB Cloud Lake
 
-本指南将带你完成从 TiDB Cloud Essential 实例到 TiDB Cloud Lake 的端到端数据管道设置：将完整快照导出到 Amazon S3，创建一个 [Changefeed](/tidb-cloud/changefeed-overview.md) 持续将增量地变化写入同一个 S3 位置，并配置 TiDB Cloud Lake 同时加载快照和增量数据。
+本指南将带你完成从 TiDB Cloud Essential 实例到 TiDB Cloud Lake 的端到端 Data Pipeline 设置：将完整快照导出到 Amazon S3，创建一个 [Changefeed](/tidb-cloud/changefeed-overview.md) 持续将增量地变化写入同一个 S3 位置，并配置 TiDB Cloud Lake 同时加载快照和增量数据。
 
 ## 限制 {#restrictions}
 
@@ -29,7 +29,7 @@ summary: 在 TiDB Cloud Essential 实例上使用 export、changefeed 和 TiDB C
 
 ## 步骤 1：准备 S3 存储桶访问 {#step-1-prepare-s3-bucket-access}
 
-数据管道组件（export、changefeed 和 TiDB Cloud Lake）都需要访问同一个 S3 存储桶。请选择以下任一方法来访问 S3 存储桶：
+Data Pipeline 组件（export、changefeed 和 TiDB Cloud Lake）都需要访问同一个 S3 存储桶。请选择以下任一方法来访问 S3 存储桶：
 
 - **Role ARN**（适用于托管在 AWS 上的 TiDB Cloud Essential 实例）：三个组件共用一个 IAM role。此方法可避免长期凭证，并提供更强的安全性。
 - **Access Key**：设置更简单，并且在 Role ARN 不可用时必须使用；但需要手动管理和轮换凭证。

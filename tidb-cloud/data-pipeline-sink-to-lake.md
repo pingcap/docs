@@ -1,6 +1,6 @@
 ---
 title: 同步到 TiDB Cloud Lake
-summary: 了解如何创建、监控和管理一个数据管道，将数据从 TiDB Cloud 实例复制到 TiDB Cloud Lake。
+summary: 了解如何创建、监控和管理一个 Data Pipeline，将数据从 TiDB Cloud 实例复制到 TiDB Cloud Lake。
 ---
 
 # 同步到 TiDB Cloud Lake
@@ -16,21 +16,21 @@ summary: 了解如何创建、监控和管理一个数据管道，将数据从 T
 
 - TiDB Cloud Lake 的计算集群 (Warehouse) 必须与你的 TiDB Cloud 实例位于**同一 Region**。
 - 只有带有**主键**的表才能进行增量复制。没有主键的表会在创建管道时显示在 **Filter results** 面板中。如果这些表被包含在同步范围内，其增量复制会被跳过。
-- 每个 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例最多可以创建 100 个 changefeed。每个启用增量复制的数据管道会占用一个 changefeed 配额。
-- 删除数据管道**不会**删除已经写入 TiDB Cloud Lake 的数据，也不会删除计算集群中的目标数据库和表。
+- 每个 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例最多可以创建 100 个 changefeed。每个启用增量复制的 Data Pipeline 会占用一个 changefeed 配额。
+- 删除 Data Pipeline**不会**删除已经写入 TiDB Cloud Lake 的数据，也不会删除计算集群中的目标数据库和表。
 
 ## 前提条件 {#prerequisites}
 
 开始之前，请确保你已具备以下条件：
 
 - 一个 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例。请记下其部署所在的 Region。
-- 一个位于 TiDB Cloud Lake 中、且与该实例处于同一 Region 的计算集群。如果你还没有，请先在 [TiDB Cloud Lake 控制台](https://lake.tidbcloud.com/) 中创建。创建数据管道时，只能选择与实例位于同一 Region 的计算集群。
+- 一个位于 TiDB Cloud Lake 中、且与该实例处于同一 Region 的计算集群。如果你还没有，请先在 [TiDB Cloud Lake 控制台](https://lake.tidbcloud.com/) 中创建。创建 Data Pipeline 时，只能选择与实例位于同一 Region 的计算集群。
 - 一个外部 stage 存储桶：Amazon S3 存储桶或 Alibaba Cloud OSS 存储桶。请在与你的实例相同的 Region 中创建它。
 - 一个可读取源表的 TiDB 数据库用户的用户名和密码。
 
-## 创建数据管道 {#create-a-data-pipeline}
+## 创建 Data Pipeline {#create-a-data-pipeline}
 
-要创建数据管道，你需要配置目标端、外部 stage 和复制设置。
+要创建 Data Pipeline，你需要配置目标端、外部 stage 和复制设置。
 
 ### 步骤 1. 配置目标端 {#step-1-configure-the-destination}
 
@@ -47,7 +47,7 @@ summary: 了解如何创建、监控和管理一个数据管道，将数据从 T
 
 ### 步骤 2. 配置外部 stage {#step-2-configure-the-external-stage}
 
-外部 stage 是连接数据管道两端的对象存储：TiDB Cloud 将导出的快照和捕获到的行变更写入 stage，TiDB Cloud Lake 再从 stage 中将数据加载到目标计算集群。更多信息，请参阅[为什么数据管道需要外部 stage？](/tidb-cloud/data-pipeline-lake-faq.md#why-does-a-data-pipeline-require-an-external-stage)。
+外部 stage 是连接 Data Pipeline 两端的对象存储：TiDB Cloud 将导出的快照和捕获到的行变更写入 stage，TiDB Cloud Lake 再从 stage 中将数据加载到目标计算集群。更多信息，请参阅[为什么 Data Pipeline 需要外部 stage？](/tidb-cloud/data-pipeline-lake-faq.md#why-does-a-data-pipeline-require-an-external-stage)。
 
 TiDB Cloud Data Pipeline 支持使用 Amazon S3 和 Alibaba Cloud OSS 作为外部 stage。请在与你的 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例相同的 Region 中创建存储桶，并先完成云服务提供方侧的配置。具体配置步骤因云服务提供方而异：
 
@@ -107,7 +107,7 @@ TiDB Cloud Data Pipeline 支持使用 Amazon S3 和 Alibaba Cloud OSS 作为外�
     - **Full Data + Incremental Data**（默认）：导出所选源数据的完整快照，然后持续复制行变更。这是持续同步的推荐模式。
     - **Full Data**：仅一次性导出所选源数据的完整快照。不复制增量数据，快照生成后源端发生的变更将被忽略。
 
-2. **Sync Interval**：数据管道的端到端延时目标。changefeed 的 flush 周期和 TiDB Cloud Lake 的轮询周期都会影响端到端延时。更短的间隔可以降低数据延时，但会增加对云存储的 API 调用次数。默认值会显示在控制台中。
+2. **Sync Interval**：Data Pipeline 的端到端延时目标。changefeed 的 flush 周期和 TiDB Cloud Lake 的轮询周期都会影响端到端延时。更短的间隔可以降低数据延时，但会增加对云存储的 API 调用次数。默认值会显示在控制台中。
 
 3. **Changefeed Capacity Units**：为增量复制分配的处理能力，并同时显示其支持的最大复制吞吐。例如，`2 CCUs (the maximum replication throughput is 5,000 rows/s)`。
 
@@ -115,7 +115,7 @@ TiDB Cloud Data Pipeline 支持使用 Amazon S3 和 Alibaba Cloud OSS 作为外�
     >
     > Changefeed Capacity Units 用于衡量分配给数据流处理的能力。此设置用于配置增量复制的性能。如果你选择 **Full Data** 作为同步模式，则不会消耗 CCU，因为不会执行增量复制。
 
-4. **TiDB Username** 和 **TiDB Password**：填写 TiDB 数据库用户的用户名和密码。数据管道使用该账户导出完整快照，因此该账户必须具有对源表的读访问权限。增量行变更由 changefeed 单独捕获。
+4. **TiDB Username** 和 **TiDB Password**：填写 TiDB 数据库用户的用户名和密码。Data Pipeline 使用该账户导出完整快照，因此该账户必须具有对源表的读访问权限。增量行变更由 changefeed 单独捕获。
 
 5. **Sync Objects**：选择要复制的对象。
 
@@ -126,21 +126,21 @@ TiDB Cloud Data Pipeline 支持使用 Amazon S3 和 Alibaba Cloud OSS 作为外�
 
     > **注意：**
     >
-    > 只有带有主键的表才能进行增量复制。没有主键的表会单独列在 **Filter results** 面板中，并在增量复制时被跳过。请在创建数据管道前为这些表添加主键，或使用如 `"!test.tbl1"` 之类的过滤规则将其排除。
+    > 只有带有主键的表才能进行增量复制。没有主键的表会单独列在 **Filter results** 面板中，并在增量复制时被跳过。请在创建 Data Pipeline 前为这些表添加主键，或使用如 `"!test.tbl1"` 之类的过滤规则将其排除。
 
-6. **Pipeline Name**：输入数据管道名称。
+6. **Pipeline Name**：输入 Data Pipeline 名称。
 
 7. 点击 **Create**。
 
     在导出完整快照期间，管道会进入 **Creating** 状态。对于 **Full Data + Incremental Data**，当增量复制开始时，状态会变为 **Running**。
 
-## 管理数据管道 {#manage-the-data-pipeline}
+## 管理 Data Pipeline {#manage-the-data-pipeline}
 
-### 编辑数据管道 {#edit-a-data-pipeline}
+### 编辑 Data Pipeline {#edit-a-data-pipeline}
 
-要编辑数据管道，请进入目标 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击该管道所在行中的 **...**，然后点击 **Edit**。
+要编辑 Data Pipeline，请进入目标 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击该管道所在行中的 **...**，然后点击 **Edit**。
 
-当数据管道处于 `Running` 状态时，无法进行编辑。请先暂停管道，完成编辑后再恢复运行以应用更改。
+当 Data Pipeline 处于 `Running` 状态时，无法进行编辑。请先暂停管道，完成编辑后再恢复运行以应用更改。
 
 管道创建后，目标类型和同步模式都不能更改。
 
@@ -151,19 +151,19 @@ TiDB Cloud Data Pipeline 支持使用 Amazon S3 和 Alibaba Cloud OSS 作为外�
 > - 被新规则排除的表将不再接收增量数据。已经写入的数据会被保留。
 > - 被新规则新增纳入的表只会接收增量数据。不会为这些表回填历史数据。
 
-### 暂停和恢复数据管道 {#pause-and-resume-a-data-pipeline}
+### 暂停和恢复 Data Pipeline {#pause-and-resume-a-data-pipeline}
 
 - **Pause**：停止数据复制，并将管道标记为 `Paused`。不会丢失数据，复制进度也会被保留。管道在创建过程中或导出完整快照期间不能暂停。
 - **Resume**：从暂停的位置继续复制，包括继续向 TiDB Cloud Lake 摄取数据。
 
-要暂停和恢复数据管道，请进入目标 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击该管道所在行中的 **...**，然后点击 **Pause** 或 **Resume**。
+要暂停和恢复 Data Pipeline，请进入目标 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击该管道所在行中的 **...**，然后点击 **Pause** 或 **Resume**。
 
-### 删除数据管道 {#delete-a-data-pipeline}
+### 删除 Data Pipeline {#delete-a-data-pipeline}
 
-要删除数据管道，请执行以下步骤：
+要删除 Data Pipeline，请执行以下步骤：
 
 1. 进入目标 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击该管道所在行中的 **...**，然后点击 **Delete**。
-2. 阅读警告并确认操作。删除数据管道会：
+2. 阅读警告并确认操作。删除 Data Pipeline 会：
 
     - 立即停止所有数据复制。
     - 尝试移除与该管道关联的 TiDB Cloud Lake 数据源和集成任务。如果移除失败，这些资源可能会保留，并需要手动清理。

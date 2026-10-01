@@ -5,14 +5,14 @@ summary: 了解如何将 Alibaba Cloud OSS 存储桶配置为 TiDB Cloud Data Pi
 
 # 为 TiDB Cloud Data Pipeline 设置外部 stage（Alibaba Cloud）
 
-本文档介绍如何将 Alibaba Cloud Object Storage Service (OSS) 存储桶准备为 [数据管道](/tidb-cloud/data-pipeline.md) 的外部 stage。外部 stage 是一个中间存储桶，TiDB Cloud 会将导出的快照和行变更写入其中，而 TiDB Cloud Lake 会从中读取数据，并将数据加载到目标计算集群 (Warehouse) 中。
+本文档介绍如何将 Alibaba Cloud Object Storage Service (OSS) 存储桶准备为 [Data Pipeline](/tidb-cloud/data-pipeline.md) 的外部 stage。外部 stage 是一个中间存储桶，TiDB Cloud 会将导出的快照和行变更写入其中，而 TiDB Cloud Lake 会从中读取数据，并将数据加载到目标计算集群 (Warehouse) 中。
 
 TiDB Cloud 会将增量数据和快照写入你的 OSS 存储桶，TiDB Cloud Lake 会从中读取这些数据。
 
 > **限制：**
 >
 > - 仅支持 **Access Key** 身份验证。不支持用于 OSS 的 Role ARN。
-> - 不支持使用 SQS 的事件驱动摄取。该数据管道仅使用轮询。
+> - 不支持使用 SQS 的事件驱动摄取。该 Data Pipeline 仅使用轮询。
 
 ## 前提条件 {#prerequisites}
 
@@ -84,4 +84,4 @@ TiDB Cloud 会将增量数据和快照写入你的 OSS 存储桶，TiDB Cloud La
 - **OSS URI**：来自步骤 1。
 - **Access Key ID** 和 **Access Key Secret**：来自步骤 2。
 
-在 [TiDB Cloud console](https://tidbcloud.com) 中，进入你的 TiDB Cloud 实例的 Data Pipeline 配置页面，并在 **External Stage** 设置中填写这些值，以完成数据管道设置。
+在 [TiDB Cloud console](https://tidbcloud.com) 中，进入你的 TiDB Cloud 实例的 Data Pipeline 配置页面，并在 **External Stage** 设置中填写这些值，以完成 Data Pipeline 设置。

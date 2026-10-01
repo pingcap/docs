@@ -141,7 +141,7 @@
 - 同步数据
   - [概述](/tidb-cloud/stream-data-overview.md)
   - [Changefeed](/tidb-cloud/changefeed-overview.md)
-  - [数据管道](/tidb-cloud/data-pipeline.md)
+  - [Data Pipeline](/tidb-cloud/data-pipeline.md)
   - [到 MySQL Sink](/tidb-cloud/changefeed-sink-to-mysql.md)
   - [到 Kafka Sink](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
   - [到 Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)

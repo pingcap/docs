@@ -5,7 +5,7 @@ summary: 了解如何将 Amazon S3 存储桶配置为 TiDB Cloud Data Pipeline �
 
 # 为 TiDB Cloud Data Pipeline 设置外部 stage（AWS）
 
-本指南介绍如何将 Amazon S3 存储桶准备为 [数据管道](/tidb-cloud/data-pipeline.md) 的外部 stage。外部 stage 是一个中间存储桶，TiDB Cloud 会将导出的快照和行变更写入其中，而 TiDB Cloud Lake 会从中读取数据，并将数据加载到目标计算集群 (Warehouse) 中。
+本指南介绍如何将 Amazon S3 存储桶准备为 [Data Pipeline](/tidb-cloud/data-pipeline.md) 的外部 stage。外部 stage 是一个中间存储桶，TiDB Cloud 会将导出的快照和行变更写入其中，而 TiDB Cloud Lake 会从中读取数据，并将数据加载到目标计算集群 (Warehouse) 中。
 
 TiDB Cloud 会将数据写入你的 S3 存储桶，TiDB Cloud Lake 会从中读取数据。
 
@@ -290,4 +290,4 @@ TiDB Cloud（向存储桶写入数据）和 TiDB Cloud Lake（从存储桶读取
 - **Bucket access**：Role ARN（选项 1 和 2），或 Access Key ID 和 Secret Access Key（选项 3）。
 - **SQS queue URL**（可选）。
 
-在 [TiDB Cloud console](https://tidbcloud.com) 中，进入你的 TiDB Cloud 实例的 Data Pipeline 配置页面，并在 **External Stage** 设置中填写这些值，以完成数据管道设置。
+在 [TiDB Cloud console](https://tidbcloud.com) 中，进入你的 TiDB Cloud 实例的 Data Pipeline 配置页面，并在 **External Stage** 设置中填写这些值，以完成 Data Pipeline 设置。
