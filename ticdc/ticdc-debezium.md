@@ -5,7 +5,7 @@ summary: TiCDC Debezium プロトコルの概念とその使用方法を学び�
 
 # TiCDC Debeziumプロトコル {#ticdc-debezium-protocol}
 
-TiCDCの[Debezium](https://debezium.io/)は、データベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更はそれぞれ「イベント」と呼ばれるメッセージに変換され、Kafka に送信されます。v8.0.0以降、TiCDCはDebezium形式でTiDBの行データ変更（DMLイベント）をKafkaに直接送信することをサポートしているため、これまでDebeziumのMySQL統合を使用していたユーザーにとって、MySQLデータベースからの移行が簡素化されます。[TiCDC v8.5.4-release.1](https://github.com/pingcap/ticdc/releases/tag/v8.5.4-release.1)（[新しい TiCDC アーキテクチャ](/ticdc/ticdc-architecture.md)）以降、TiCDC は Debezium 形式で DDL イベントと WATERMARK イベントを送信することもサポートしています。
+[Debezium](https://debezium.io/)は、データベースの変更をキャプチャするためのツールです。キャプチャされたデータベースの変更はそれぞれ「イベント」と呼ばれるメッセージに変換され、Kafka に送信されます。v8.0.0以降、TiCDCはDebezium形式でTiDBの行データ変更（DMLイベント）をKafkaに直接送信することをサポートしているため、これまでDebeziumのMySQL統合を使用していたユーザーにとって、MySQLデータベースからの移行が簡素化されます。[TiCDC v8.5.4-release.1](https://github.com/pingcap/ticdc/releases/tag/v8.5.4-release.1)（[新しい TiCDC アーキテクチャ](/ticdc/ticdc-architecture.md)）以降、TiCDC は Debezium 形式で DDL イベントと WATERMARK イベントを送信することもサポートしています。
 
 ## Debeziumメッセージ形式を使用する {#use-the-debezium-message-format}
 
@@ -38,7 +38,7 @@ Debezium メッセージ形式を使用するための構成例は次のとお�
 cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-debezium" --sink-uri="kafka://127.0.0.1:9092/topic-name?kafka-version=2.4.0&protocol=debezium"
 ```
 
-Debeziumの出力形式には、下流のコンシューマーが現在の行のデータ構造をより適切に理解できるように、現在の行のスキーマ情報が含まれています。スキーマ情報が不要なシナリオでは、changefeed設定ファイルで`debezium-disable-schema`パラメータを`true`または`sink-uri`に設定することで、スキーマ出力を無効にすることもできます。
+Debeziumの出力形式には、下流のコンシューマーが現在の行のデータ構造をより適切に理解できるように、現在の行のスキーマ情報が含まれています。スキーマ情報が不要なシナリオでは、changefeed設定ファイルまたは`sink-uri`で`debezium-disable-schema`パラメータを`true`に設定することで、スキーマ出力を無効にすることもできます。
 
 さらに、元の Debezium 形式には、TiDB の `CommitTS` の一意なトランザクション識別子などの重要なフィールドが含まれていません。データの整合性を確保するために、TiCDC は Debezium 形式に `CommitTs` と `ClusterID` の 2つのフィールドを追加し、TiDB データ変更の関連情報を識別します。
 
@@ -800,7 +800,7 @@ TiCDC は WATERMARK イベントを Kafka メッセージにエンコードし�
 | `schema.optional` | Boolean | フィールドがオプションかどうかを示します。`true` の場合、そのフィールドはオプションです。  |
 | `schema.type`    | String  | フィールドのデータ型。          |
 
-### Data type mapping {#data-type-mapping}
+### データ型マッピング {#data-type-mapping}
 
 TiCDC Debeziumメッセージのデータ形式マッピングは基本的に[Debeziumデータ型マッピングルール](https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-data-types)に準拠しており、これはMySQL用Debeziumコネクタのネイティブメッセージと概ね一致しています。ただし、一部のデータ型については、TiCDC DebeziumメッセージとDebeziumコネクタメッセージの間に以下の違いがあります。
 
@@ -808,7 +808,7 @@ TiCDC Debeziumメッセージのデータ形式マッピングは基本的に[De
 
 - Varchar、String、VarString、TinyBlob、MediumBlob、BLOB、LongBlobなどの文字列型データ型の場合、列にBINARYフラグが付いている場合、TiCDCはBase64でエンコードした後、String型としてエンコードします。列にBINARYフラグが付いていない場合は、TiCDCは直接String型としてエンコードします。ネイティブDebeziumコネクタは、 `binary.handling.mode`に従って異なる方法でエンコードします。
 
-- TiCDCは、 DECIMALとNUMERIC含むDecimalデータ型をfloat64型で表現します。ネイティブのDebeziumコネクタは、データ型の精度に応じて、float32またはfloat64でエンコードします。
+- TiCDCは、 DECIMALとNUMERICを含むDecimalデータ型をfloat64型で表現します。ネイティブのDebeziumコネクタは、データ型の精度に応じて、float32またはfloat64でエンコードします。
 
 - TiCDC は REAL を DOUBLE に変換し、長さが 1 の場合は BOOLEAN を TINYINT(1) に変換します。
 

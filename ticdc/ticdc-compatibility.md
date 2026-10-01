@@ -9,7 +9,7 @@ summary: TiCDCの互換性に関する問題とその対処方法について学
 
 ## TiCDCの新アーキテクチャとTiDBクラスタ間の互換性 {#compatibility-between-ticdc-new-architecture-and-tidb-clusters}
 
-TiCDCの新しいアーキテクチャは、TiDBクラスタv7.5.0以降をサポートしています。 [互換性](/ticdc/ticdc-architecture.md#compatibility)に関する特別な注意事項については、を参照してください。 。
+TiCDCの新しいアーキテクチャは、TiDBクラスタv7.5.0以降をサポートしています。互換性に関する特別な注意事項については、[互換性](/ticdc/ticdc-architecture.md#compatibility)を参照してください。
 
 ## TiDB Lightningとの互換性 {#compatibility-with-tidb-lightning}
 
@@ -117,7 +117,7 @@ TiCDCクラスタのバージョンに対応する`cdc`実行可能ファイル�
 | v4.0.11 またはそれ以前の v4.0 バージョン、v5.0.0-rc                 | これはチェンジフィード設定項目であり、 `file`ソーターと`unified`ソーターの一時ファイルディレクトリを指定します。 | これらのバージョンでは、 `file`ソーターと`unified`ソーターは**実験的機能**であり、本番環境での使用は推奨され**ません**。<br/><br/>複数のチェンジフィードが`unified`ソーターを`sort-engine`として使用する場合、実際の一時ファイルディレクトリは、いずれかのチェンジフィードの`sort-dir`構成になる可能性があり、各TiCDCノードで使用されるディレクトリは異なる可能性があります。                                                                                                                                                      | `unified`ソーターを本番環境で使用することは推奨されません。                              |
 | v4.0.12、v4.0.13、v5.0.0、および v5.0.1                     | これは、changefeed または`cdc server`の設定項目です。                           | デフォルトでは、変更フィードの`sort-dir`設定は有効にならず、 `sort-dir`の`cdc server`設定は`/tmp/cdc_sort`にデフォルト設定されます。本番環境では`cdc server`のみを設定することをお勧めします。<br/><br/> TiUPを使用してTiCDCをデプロイする場合は、最新のTiUPバージョンを使用し、TiCDCサーバー構成で`sorter.sort-dir`を設定することをお勧めします。<br/><br/> `unified`ソーターは、v4.0.13、v5.0.0、v5.0.1 でデフォルトで有効になっています。クラスターをこれらのバージョンにアップグレードする場合は、TiCDCサーバー構成で`sorter.sort-dir`が正しく構成されていることを確認してください。 | `sort-dir`を`cdc server`コマンドラインパラメータ (またはTiUP) を使用して設定する必要があります。 |
 | v4.0.14以降のv4.0バージョン、v5.0.3以降のv5.0バージョン、それ以降のTiDBバージョン | `sort-dir`は非推奨です。 `data-dir`を設定することをお勧めします。                      | 最新バージョンのTiUPを使用して`data-dir`を構成できます。これらの TiDB バージョンでは、 `unified`ソーターがデフォルトで有効になっています。クラスターをアップグレードする際は、 `data-dir`が正しく構成されていることを確認してください。そうでない場合、 `/tmp/cdc_data`はデフォルトで一時ファイル ディレクトリとして使用されます。<br/><br/>ディレクトリが配置されているデバイスのストレージ容量が不足している場合、ハードディスクの空き容量不足の問題が発生する可能性があります。この場合、changefeed の以前の`sort-dir`設定は無効になります。                                                            | `data-dir`を`cdc server`コマンドラインパラメータ (またはTiUP) を使用して設定する必要があります。 |
-| v6.0.0以降のバージョン                                        | `data-dir` TiCDC によって生成された一時ファイルを保存するために使用されます。                  | バージョン6.0.0以降、TiCDCはデフォルトで`db sorter`ソートエンジンとして使用します。 `data-dir`はこのエンジンのディスクディレクトリです。                                                                                                                                                                                                                                                                                            | `data-dir` `cdc server`コマンドラインパラメータ (またはTiUP) を使用して設定する必要があります。 |
+| v6.0.0以降のバージョン                                        | `data-dir`は、TiCDC によって生成された一時ファイルを保存するために使用されます。                  | バージョン6.0.0以降、TiCDCはデフォルトで`db sorter`をソートエンジンとして使用します。 `data-dir`はこのエンジンのディスクディレクトリです。                                                                                                                                                                                                                                                                                            | `data-dir`は、`cdc server`コマンドラインパラメータ (またはTiUP) を使用して設定する必要があります。 |
 
 ### 一時テーブルとの互換性 {#compatibility-with-temporary-tables}
 
@@ -127,8 +127,8 @@ TiCDC は v5.3.0 以降、 [グローバル一時テーブル](/temporary-tables
 
 ### ベクトルデータ型との互換性 {#compatibility-with-vector-data-types}
 
-v8.4.0 以降、TiCDC は、自動 [ベクトルデータ型](/ai/reference/vector-search-data-types.md)ストリームへのテーブルの複製をサポートします (実験的)。
+v8.4.0 以降、TiCDC は、[ベクトルデータ型](/ai/reference/vector-search-data-types.md)を含むテーブルのダウンストリームへの複製をサポートします (実験的)。
 
 ダウンストリームがKafkaまたはストレージサービス（Amazon S3、GCS、Azure Blob Storage、NFSなど）の場合、TiCDCはダウンストリームに書き込む前にベクトルデータ型を文字列型に変換します。
 
-ダウンストリームがベクトルデータ型をサポートしないMySQL互換データベースである場合、TiCDCはベクトル型を含むDDLイベントをダウンストリームに書き込むことができません。この場合、 `has-vector-type=true`に`sink-url`パラメータを追加してください。これにより、TiCDCは書き込み前にベクトルデータ型を`LONGTEXT`型に変換できます。
+ダウンストリームがベクトルデータ型をサポートしないMySQL互換データベースである場合、TiCDCはベクトル型を含むDDLイベントをダウンストリームに書き込むことができません。この場合、 `sink-url`に`has-vector-type=true`パラメータを追加してください。これにより、TiCDCは書き込み前にベクトルデータ型を`LONGTEXT`型に変換できます。

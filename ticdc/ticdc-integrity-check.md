@@ -19,7 +19,7 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
     この構成は新しく作成されたセッションに対してのみ有効になるため、TiDB に再接続する必要があります。
 
-2. In the [設定ファイル](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) specified by the `--config` parameter when you create a changefeed, add the following configurations:
+2. changefeed の作成時に`--config`パラメータで指定する[設定ファイル](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)に、次の設定を追加します。
 
     ```toml
     [integrity]
@@ -41,9 +41,9 @@ TiCDCはデフォルトでデータ整合性検証を無効にしています。
 
 ## 機能を無効にする {#disable-the-feature}
 
-TiCDC disables data integrity validation by default. To disable this feature after enabling it, perform the following steps:
+TiCDC ではデータ整合性の検証はデフォルトで無効になっています。この機能を有効にした後に無効にするには、次の手順を実行します。
 
-1. [Update task configuration](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、changefeed の`--config`パラメータで指定された設定ファイル内の`[integrity]`構成をすべて削除します。
+1. [タスク構成の更新](/ticdc/ticdc-manage-changefeed.md#update-task-configuration)で説明した`Pause Task -> Modify Configuration -> Resume Task`プロセスに従い、changefeed の`--config`パラメータで指定された設定ファイル内の`[integrity]`構成をすべて削除します。
 
     ```toml
     [integrity]
@@ -73,7 +73,7 @@ TiCDCはデータを特定の形式にエンコードし、Kafkaに送信しま�
 
 v8.4.0 以降、TiDB および TiCDC では、 `ADD COLUMN`または`DROP COLUMN`操作後に更新イベントまたは削除イベントで古い値を検証する際の Checksum V1 の問題に対処するために Checksum V2 が導入されています。
 
-For clusters created in v8.4.0 or later, or clusters upgraded to v8.4.0 or later, TiDB uses Checksum V2 by default when single-row data checksum verification is enabled. TiCDC supports handling both Checksum V1 and V2. This change only affects TiDB and TiCDC internal implementation and does not affect checksum calculation methods for downstream Kafka consumers.
+v8.4.0 以降で作成されたクラスター、または v8.4.0 以降にアップグレードされたクラスターでは、単一行データのチェックサム検証が有効な場合、TiDB はデフォルトで Checksum V2 を使用します。TiCDC は Checksum V1 と V2 の両方を処理できます。この変更は TiDB と TiCDC の内部実装にのみ影響し、下流の Kafka コンシューマーにおけるチェックサムの計算方法には影響しません。
 
 ## チェックサム計算アルゴリズム {#algorithm-for-checksum-calculation}
 
@@ -89,15 +89,15 @@ fn checksum(columns) {
 }
 ```
 
-- `columns`列IDでソートする必要があります。Avroスキーマでは、フィールドは既に列IDでソートされているため、 `columns`の順序をそのまま使用できます。
+- `columns`は列IDでソートする必要があります。Avroスキーマでは、フィールドは既に列IDでソートされているため、 `columns`の順序をそのまま使用できます。
 
 - `encode(column)`関数は列の値をバイト列にエンコードします。エンコードのルールは列のデータ型によって異なります。具体的なルールは以下のとおりです。
 
-    - TINYINT, SMALLINT, INT, BIGINT, MEDIUMINT, and YEAR types are converted to UINT64 and encoded in little-endian. For example, the number `0x0123456789abcdef` is encoded as `hex'0x0123456789abcdef'`.
+    - TINYINT、SMALLINT、INT、BIGINT、MEDIUMINT、YEAR 型は UINT64 に変換され、リトルエンディアンでエンコードされます。たとえば、数値`0x0123456789abcdef`は`hex'0x0123456789abcdef'`としてエンコードされます。
 
     - FLOAT および DOUBLE 型は DOUBLE に変換され、その後 IEEE754 形式の UINT64 としてエンコードされます。
 
-    - BIT, ENUM, and SET types are converted to UINT64.
+    - BIT、ENUM、SET 型は UINT64 に変換されます。
 
         - BIT 型はバイナリ形式の UINT64 に変換されます。
         - ENUM型とSET型は、UINT64の対応するINT値に変換されます。例えば、 `SET('a','b','c')`型の列のデータ値が`'a,c'`の場合、その値は`0b101` （10進数では`5`）としてエンコードされます。

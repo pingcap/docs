@@ -9,9 +9,9 @@ summary: TiCDC のデータ複製機能について学びます。
 
 ## TiCDCの仕組み {#how-ticdc-works}
 
-- TiCDCはTiKV変更ログ（Raftログ）をリッスンし、行レベルのデータ変更（ `INSERT` `DELETE`操作）を下流と互換性のあるSQL文に変換します。TiCDCは上流データベースで実行された元のSQL文に依存しません。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes) `UPDATE`してください。
+- TiCDCはTiKV変更ログ（Raftログ）をリッスンし、行レベルのデータ変更（`INSERT`、`UPDATE`、`DELETE`操作）を下流と互換性のあるSQL文に変換します。TiCDCは上流データベースで実行された元のSQL文に依存しません。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes)を参照してください。
 
-- TiCDCは`UPDATE` `INSERT` `DELETE`を生成します。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes)を参照してください。
+- TiCDCは、上流データベースで実行された元のSQL文を1つずつ復元するのではなく、SQLのセマンティクスと同等の論理操作（`INSERT`、`UPDATE`、`DELETE`など）を生成します。詳細については[TiCDCがデータ変更を処理する方法](/ticdc/ticdc-overview.md#implementation-of-processing-data-changes)を参照してください。
 
 - TiCDCはトランザクションの最終的な一貫性を保証します。[再実行ログ](/ticdc/ticdc-sink-to-mysql.md#eventually-consistent-replication-in-disaster-scenarios)を有効にすると、TiCDCは災害復旧シナリオにおいて最終的な一貫性を保証できます。[同期ポイント](/ticdc/ticdc-upstream-downstream-check.md#enable-syncpoint)を有効にすると、TiCDCは一貫性のあるスナップショット読み取りとデータ整合性の検証をサポートします。
 
@@ -34,7 +34,7 @@ TiCDC は、次の種類のアップストリーム データの変更をサポ�
 
     - DDL および DML文 (システムテーブルを除く)。
     - インデックス操作（ `ADD INDEX` 、 `CREATE INDEX`）: 変更フィードレプリケーションのレイテンシーへの影響を軽減するため、ダウンストリームがTiDBの場合、TiCDCは[`ADD INDEX`および`CREATE INDEX` DDL操作を非同期的に実行します](/ticdc/ticdc-ddl.md#asynchronous-execution-of-add-index-and-create-index-ddls)。
-    - 外部キー制約DDL文（ `ADD FOREIGN KEY` ）：TiCDCは上流のシステム変数設定を複製し**ません**。下流の外部キー制約チェックを有効にするには、下流で[`foreign_key_checks`](/system-variables.md#foreign_key_checks)手動で設定する必要があります。また、下流にデータを書き込む際に、TiCDCはセッションレベルの設定`SET SESSION foreign_key_checks = OFF;`を自動的に有効にします。したがって、下流でグローバル外部キーチェックが有効になっている場合でも、TiCDCによって書き込まれたデータは外部キー制約の検証をトリガーしません。
+    - 外部キー制約DDL文（ `ADD FOREIGN KEY` ）：TiCDCは上流のシステム変数設定を複製し**ません**。下流の外部キー制約チェックを有効にするかどうかを決めるには、下流で[`foreign_key_checks`](/system-variables.md#foreign_key_checks)を手動で設定する必要があります。また、下流にデータを書き込む際に、TiCDCはセッションレベルの設定`SET SESSION foreign_key_checks = OFF;`を自動的に有効にします。したがって、下流でグローバル外部キーチェックが有効になっている場合でも、TiCDCによって書き込まれたデータは外部キー制約の検証をトリガーしません。
 
 - **サポートされていません**:
 

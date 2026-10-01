@@ -58,7 +58,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 
     > **Note:**
     >
-    > `matcher`データベース名と一致するため、設定時には特に注意が必要です。例えば、 `event-filters`設定が以下の場合：
+    > `matcher`はデータベース名と一致するため、設定時には特に注意が必要です。例えば、 `event-filters`設定が以下の場合：
     >
     > ```toml
     > [filter]
@@ -67,7 +67,7 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
     > ignore-sql = ["^drop"]
     > ```
     >
-    > `ignore-sql = ["^drop"]` `DROP TABLE test.t1`除外するだけでなく`DROP DATABASE test`も除外します。これは、 `matcher`データベース名`test`が含まれているためです。
+    > `ignore-sql = ["^drop"]`は、`DROP TABLE test.t1`を除外するだけでなく`DROP DATABASE test`も除外します。これは、`matcher`にデータベース名`test`が含まれているためです。
     >
     > データベース全体ではなく、指定されたテーブルのみをフィルター処理する場合は、 `ignore-sql`値を`["drop table"]`に変更します。
 
@@ -75,43 +75,43 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 
     | イベント                | タイプ | エイリアス       | 説明                                                                      |
     | ------------------- | --- | ----------- | ----------------------------------------------------------------------- |
-    | すべてのDML             |     |             | すべてのDMLイベントに一致します                                                       |
-    | すべてのDDL             |     |             | すべてのDDLイベントに一致します                                                       |
-    | 入れる                 | DML |             | `insert` DML イベントに一致                                                    |
-    | アップデート              | DML |             | `update` DML イベントに一致                                                    |
-    | 消去                  | DML |             | `delete` DML イベントに一致                                                    |
-    | スキーマを作成する           | DDL | データベースを作成する | `create database`イベントに一致                                                |
-    | ドロップスキーマ            | DDL | データベースを削除   | `drop database`イベントに一致                                                  |
-    | テーブルを作成する           | DDL |             | `create table`イベントに一致                                                   |
-    | ドロップテーブル            | DDL |             | `drop table`イベントに一致                                                     |
-    | テーブルの名前を変更する        | DDL |             | `rename table`イベントに一致                                                   |
-    | テーブルを切り捨てる          | DDL |             | `truncate table`イベントに一致                                                 |
-    | テーブルを変更する           | DDL |             | `alter table` `drop index`すべての条項を`create index` `alter table`イベントに一致します |
-    | テーブルパーティションを追加する    | DDL |             | `add table partition`イベントに一致                                            |
-    | テーブルパーティションの削除      | DDL |             | `drop table partition`イベントに一致                                           |
-    | テーブルパーティションを切り捨てる   | DDL |             | `truncate table partition`イベントに一致                                       |
-    | ビューを作成              | DDL |             | `create view`イベントに一致                                                    |
-    | ドロップビュー             | DDL |             | `drop view`イベントに一致                                                      |
-    | スキーマの文字セットと照合順序を変更する | DDL |             | `modify schema charset and collate`イベントに一致                              |
-    | テーブルを回復する           | DDL |             | `recover table`イベントに一致                                                  |
-    | 自動IDをリベースする         | DDL |             | `rebase auto id`イベントに一致                                                 |
-    | テーブルコメントの変更         | DDL |             | `modify table comment`イベントに一致                                           |
-    | テーブルの文字セットと照合順序を変更する  | DDL |             | `modify table charset and collate`イベントに一致                               |
-    | 交換テーブルパーティション       | DDL |             | `exchange table partition`イベントに一致                                       |
-    | テーブルパーティションの再編成     | DDL |             | `reorganize table partition`イベントに一致                                     |
-    | テーブルパーティションの変更      | DDL |             | `alter table partitioning`イベントに一致                                       |
-    | テーブルパーティションを削除する    | DDL |             | `remove table partitioning`イベントに一致                                      |
-    | 列を追加                | DDL |             | `add column`イベントに一致                                                     |
-    | ドロップ列               | DDL |             | `drop column`イベントに一致                                                    |
-    | 列を変更する              | DDL |             | `modify column`イベントに一致                                                  |
-    | デフォルト値を設定する         | DDL |             | `set default value`イベントに一致                                              |
-    | 主キーを追加する            | DDL |             | `add primary key`イベントに一致                                                |
-    | 主キーを削除する            | DDL |             | `drop primary key`イベントに一致                                               |
-    | インデックスの名前を変更する      | DDL |             | `rename index`イベントに一致                                                   |
-    | インデックスの可視性を変更する     | DDL |             | `alter index visibility`イベントに一致                                         |
-    | TTL情報を変更する          | DDL |             | `alter ttl info`イベントに一致                                                 |
-    | TTLの変更と削除           | DDL |             | テーブルのすべてのTTL属性を削除するDDLイベントに一致します                                        |
-    | 複数のスキーマの変更          | DDL |             | 同じDDL文内でテーブルの複数の属性を変更するDDLイベントに一致します。                                   |
+    | all dml |  |  | すべてのDMLイベントに一致します |
+    | all ddl |  |  | すべてのDDLイベントに一致します |
+    | insert | DML |  | `insert` DML イベントに一致 |
+    | update | DML |  | `update` DML イベントに一致 |
+    | delete | DML |  | `delete` DML イベントに一致 |
+    | create schema | DDL | create database | `create database`イベントに一致 |
+    | drop schema | DDL | drop database | `drop database`イベントに一致 |
+    | create table | DDL |  | `create table`イベントに一致 |
+    | drop table | DDL |  | `drop table`イベントに一致 |
+    | rename table | DDL |  | `rename table`イベントに一致 |
+    | truncate table | DDL |  | `truncate table`イベントに一致 |
+    | alter table | DDL |  | `alter table`、`create index`、`drop index` のすべての句を含む `alter table` イベントに一致します |
+    | add table partition | DDL |  | `add table partition`イベントに一致 |
+    | drop table partition | DDL |  | `drop table partition`イベントに一致 |
+    | truncate table partition | DDL |  | `truncate table partition`イベントに一致 |
+    | create view | DDL |  | `create view`イベントに一致 |
+    | drop view | DDL |  | `drop view`イベントに一致 |
+    | modify schema charset and collate | DDL |  | `modify schema charset and collate`イベントに一致 |
+    | recover table | DDL |  | `recover table`イベントに一致 |
+    | rebase auto id | DDL |  | `rebase auto id`イベントに一致 |
+    | modify table comment | DDL |  | `modify table comment`イベントに一致 |
+    | modify table charset and collate | DDL |  | `modify table charset and collate`イベントに一致 |
+    | exchange table partition | DDL |  | `exchange table partition`イベントに一致 |
+    | reorganize table partition | DDL |  | `reorganize table partition`イベントに一致 |
+    | alter table partitioning | DDL |  | `alter table partitioning`イベントに一致 |
+    | remove table partitioning | DDL |  | `remove table partitioning`イベントに一致 |
+    | add column | DDL |  | `add column`イベントに一致 |
+    | drop column | DDL |  | `drop column`イベントに一致 |
+    | modify column | DDL |  | `modify column`イベントに一致 |
+    | set default value | DDL |  | `set default value`イベントに一致 |
+    | add primary key | DDL |  | `add primary key`イベントに一致 |
+    | drop primary key | DDL |  | `drop primary key`イベントに一致 |
+    | rename index | DDL |  | `rename index`イベントに一致 |
+    | alter index visibility | DDL |  | `alter index visibility`イベントに一致 |
+    | alter ttl info | DDL |  | `alter ttl info`イベントに一致 |
+    | alter ttl remove | DDL |  | テーブルのすべてのTTL属性を削除するDDLイベントに一致します |
+    | multi schema change | DDL |  | 同じDDL文内でテーブルの複数の属性を変更するDDLイベントに一致します。 |
 
     > **Note:**
     >
@@ -130,4 +130,4 @@ ignore-update-new-value-expr = "gender = 'male' and age > 18" # Ignore update DM
 > **Note:**
 >
 > - TiDB がクラスター化インデックスの列の値を更新すると、イベント`UPDATE`がイベント`DELETE`とイベント`INSERT`に分割されます。TiCDC はこれらのイベントをイベント`UPDATE`として識別しないため、正しくフィルタリングできません。
-> - SQL式を設定する際は、 `matcher`一致するすべてのテーブルに、SQL式で指定されたすべての列が含まれていることを確認してください。そうでない場合、レプリケーションタスクを作成できません。また、レプリケーション中にテーブルスキーマが変更され、必要な列がテーブルに含まれなくなった場合、レプリケーションタスクは失敗し、自動的に再開できません。このような場合は、手動で設定を変更してタスクを再開する必要があります。
+> - SQL式を設定する際は、 `matcher`に一致するすべてのテーブルに、SQL式で指定されたすべての列が含まれていることを確認してください。そうでない場合、レプリケーションタスクを作成できません。また、レプリケーション中にテーブルスキーマが変更され、必要な列がテーブルに含まれなくなった場合、レプリケーションタスクは失敗し、自動的に再開できません。このような場合は、手動で設定を変更してタスクを再開する必要があります。

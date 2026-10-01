@@ -24,14 +24,14 @@ summary: チェンジフィードの基本的な概念、状態の定義、お�
 > **Note:**
 >
 > - GCがchangefeedによってブロックされた場合、changefeedは`gc-ttl`で指定された時間までGCの進行をブロックします。その後、changefeedはエラータイプが`ErrGCTTLExceeded`である状態`failed`に設定され、GCの進行をブロックしなくなります。
-> - 変更フィードでエラーコード`ErrGCTTLExceeded` 、または`ErrStartTsBeforeGC` `ErrSnapshotLostByGC`が発生した場合、GC 操作はブロックされません。
+> - 変更フィードでエラーコード`ErrGCTTLExceeded`、`ErrSnapshotLostByGC`、または`ErrStartTsBeforeGC`のエラーが発生した場合、GC 操作はブロックされません。
 
 上記の状態遷移図の数字は以下のように表されます。
 
 - ① コマンド`changefeed pause`を実行します。
 - ② `changefeed resume`コマンドを実行してレプリケーションタスクを再開します。
 - ③ `changefeed`操作中に回復可能なエラーが発生し、操作が自動的に再試行されます。
-- ④ チェンジフィード自動リトライが成功し、 `checkpoint-ts`進み続けます。
+- ④ チェンジフィード自動リトライが成功し、 `checkpoint-ts`が進み続けます。
 - ⑤ changefeedの自動リトライが30分を超えて失敗し、changefeedは失敗状態になります。このとき、changefeedは`gc-ttl`で指定された期間、上流GCをブロックし続けます。
 - ⑥ changefeed は回復不能なエラーに遭遇し、直接 failed 状態に移行します。このとき、changefeed は`gc-ttl`で指定された期間、上流の GC をブロックし続けます。
 - ⑦ changefeedのレプリケーション進行状況が`target-ts`で設定した値に到達し、レプリケーションが完了します。
