@@ -15,10 +15,10 @@ summary: TiCDC の使用時に発生する可能性のある問題のトラブ�
 
 ### TiCDC レプリケーションタスクが中断されたかどうかはどうすればわかりますか? {#how-do-i-know-whether-a-ticdc-replication-task-is-interrupted}
 
-- Grafanaダッシュボードで、レプリケーションタスクの監視メトリック`changefeed checkpoint` （適切な`changefeed id`選択）を確認してください。メトリック値が変化しない場合、またはメトリック`checkpoint lag`が増加し続ける場合、レプリケーションタスクが中断されている可能性があります。
+- Grafanaダッシュボードで、レプリケーションタスクの監視メトリック`changefeed checkpoint` （適切な`changefeed id`を選択）を確認してください。メトリック値が変化しない場合、またはメトリック`checkpoint lag`が増加し続ける場合、レプリケーションタスクが中断されている可能性があります。
 - 監視メトリック`exit error count`を確認してください。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しました。
 - `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。`stopped`はタスクが停止したことを意味し、 `error`は詳細なエラーメッセージを示します。エラー発生後、TiCDCサーバーログで`error on running processor`を検索してエラースタックを確認し、トラブルシューティングを行うことができます。
-- 極端なケースでは、TiCDC サービスが再起動されることがあります。トラブルシューティングのために、TiCDCサーバーログの`FATAL`レベル目のログを検索できます。
+- 極端なケースでは、TiCDC サービスが再起動されることがあります。トラブルシューティングのために、TiCDCサーバーログの`FATAL`レベルのログを検索できます。
 
 ### レプリケーションタスクが手動で停止されたかどうかを確認するにはどうすればよいですか? {#how-do-i-know-whether-the-replication-task-is-stopped-manually}
 
@@ -72,7 +72,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone. Skipping it
 Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skipping it.
 ```
 
-ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`を空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。`time-zone` `mysql`と`tidb`シンクにのみ有効であることに注意してください。
+ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`を空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。`time-zone`は`mysql`と`tidb`シンクにのみ有効であることに注意してください。
 
 `mysql`と`tidb`シンクを使用する場合は、タイムゾーンを明示的に指定することをお勧めします（例： `time-zone="Asia/Shanghai"`）。また、TiCDCサーバー構成で指定する`tz`とシンクURIで指定する`time-zone`が、下流データベースのタイムゾーン設定と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合を防ぐことができます。
 
@@ -88,22 +88,22 @@ v4.0.9 以降では、レプリケーションタスクで統合ソーター機�
 
 1. 時間のかかるDDL文を含む変更フィードの実行を一時停止します。すると、他の変更フィードがブロックされなくなったことがわかります。
 2. TiCDC ログで`apply job`フィールドを検索し、時間のかかる DDL文の`start-ts`を確認します。
-3. 下流のDDL文を手動で実行します。実行が完了したら、以下の操作を続行します。
-4. changefeed 設定を変更し、上記の`start-ts` `ignore-txn-start-ts`設定項目に追加します。
+3. 下流でDDL文を手動で実行します。実行が完了したら、以下の操作を続行します。
+4. changefeed 設定を変更し、上記の`start-ts`を`ignore-txn-start-ts`設定項目に追加します。
 5. 一時停止された変更フィードを再開します。
 
 ## TiCDCを使用してチェンジフィードを作成すると、`[tikv:9006]GC life time is shorter than transaction duration, transaction starts at xx, GC safe point is yy`エラーが報告されます。どうすればよいでしょうか？ {#the-tikv-9006-gc-life-time-is-shorter-than-transaction-duration-transaction-starts-at-xx-gc-safe-point-is-yy-error-is-reported-when-i-use-ticdc-to-create-a-changefeed-what-should-i-do}
 
 現在のGCセーフポイントとサービスGCセーフポイントを照会するには、コマンド`pd-ctl service-gc-safepoint --pd <pd-addrs>`を実行する必要があります。GCセーフポイントがTiCDCレプリケーションタスク（changefeed）の`start-ts`よりも小さい場合は、コマンド`cdc cli create changefeed`にオプション`--disable-gc-check`を直接追加してchangefeedを作成できます。
 
-`pd-ctl service-gc-safepoint --pd <pd-addrs>`の結果に`gc_worker service_id`ない場合:
+`pd-ctl service-gc-safepoint --pd <pd-addrs>`の結果に`gc_worker service_id`がない場合:
 
-- PD バージョンが v4.0.8 以前の場合、詳細については[PD号 #3128](https://github.com/tikv/pd/issues/3128)を参照してください。
-- PD を v4.0.8 以前のバージョンからそれ以降のバージョンにアップグレードする場合は、詳細については[PD号 #3366](https://github.com/tikv/pd/issues/3366)を参照してください。
+- PD バージョンが v4.0.8 以前の場合、詳細については[PD issue #3128](https://github.com/tikv/pd/issues/3128)を参照してください。
+- PD を v4.0.8 以前のバージョンからそれ以降のバージョンにアップグレードする場合は、詳細については[PD issue #3366](https://github.com/tikv/pd/issues/3366)を参照してください。
 
 ## TiCDCを使用してメッセージをKafkaに複製すると、Kafkaから`Message was too large`エラーが返されます。なぜでしょうか？ {#when-i-use-ticdc-to-replicate-messages-to-kafka-kafka-returns-the-message-was-too-large-error-why}
 
-TiCDC が Kafka に送信するメッセージのサイズを制御するには、Sink URI で`max-message-bytes`パラメータを設定します。ただし、Kafkaサーバーがそのサイズのメッセージを受け入れるように設定されていることも確認する必要があります。TiCDC からのメッセージが Kafka サーバーの制限を超えた場合、Kafka は`Message was too large`エラーを返します。Kafkaサーバーの設定ファイルに追加してください。
+TiCDC が Kafka に送信するメッセージのサイズを制御するには、Sink URI で`max-message-bytes`パラメータを設定します。ただし、Kafkaサーバーがそのサイズのメッセージを受け入れるように設定されていることも確認する必要があります。TiCDC からのメッセージが Kafka サーバーの制限を超えた場合、Kafka は`Message was too large`エラーを返します。Kafka サーバーのメッセージサイズの上限を引き上げるには、その設定ファイルに次の設定を追加してください。
 
 ```
 # The maximum byte number of a message that the broker receives
@@ -126,13 +126,13 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 
 この問題のあるDDL文をスキップするには、 `ignore-txn-start-ts`パラメータを設定して、指定された`start-ts`に対応するトランザクションをスキップします。例:
 
-1. TiCDC ログで`apply job`フィールドを検索し、時間がかかっている`start-ts`の DDL を特定します。
+1. TiCDC ログで`apply job`フィールドを検索し、時間がかかっている DDL の`start-ts`を特定します。
 2. changefeed の設定を変更します。設定項目`ignore-txn-start-ts`に上記の`start-ts`を追加します。
 3. 中断された変更フィードを再開します。
 
 > **Note:**
 >
-> changefeed の`start-ts`をエラー発生時の`checkpoint-ts`に 1 を加えた値に設定してタスクを再作成すると、DDL 文をスキップできますが、TiCDC が`checkpointTs+1`の時点での DML データ変更を失う可能性があります。したがって、この操作は実本番環境では厳禁です。
+> changefeed の`start-ts`をエラー発生時の`checkpoint-ts`に 1 を加えた値に設定してタスクを再作成すると、DDL 文をスキップできますが、TiCDC が`checkpointTs+1`の時点での DML データ変更を失う可能性があります。したがって、この操作は本番環境では厳禁です。
 
 ```shell
 cdc cli changefeed remove --server=http://127.0.0.1:8300 --changefeed-id simple-replication-task
