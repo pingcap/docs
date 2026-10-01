@@ -187,7 +187,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 
 7. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
-8. **Next**をクリックしてください.
+8. **Next**をクリックしてください。
 
 ## ステップ4．仕様の設定とレビュー {#step-4-configure-specification-and-review}
 

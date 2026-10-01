@@ -159,7 +159,7 @@ SELECT @@tidb_storage_class_transition_history_size;
 SET GLOBAL tidb_storage_class_transition_history_size = 500;
 ```
 
-#### tidb_storage_class_transition_history_size {#tidb-storage-class-transition-history-size}
+#### tidb_storage_class_transition_history_size {#tidb_storage_class_transition_history_size}
 
 - Scope: GLOBAL
 - Persists to cluster: Yes

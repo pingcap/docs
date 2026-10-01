@@ -156,6 +156,7 @@ TiDB バージョン: 5.0.6
         - Kafka シンクの不正確な`txn_batch_size`監視メトリックの問題を修正しました [#3431](https://github.com/pingcap/tiflow/issues/3431)
         - `tikv_cdc_min_resolved_ts_no_change_for_1m`チェンジフィードがないときに警告が続く問題を修正[#11017](https://github.com/tikv/tikv/issues/11017)
         - etcd でタスクステータスを手動でクリーンアップするときに発生する TiCDC panicの問題を修正しました [#2980](https://github.com/pingcap/tiflow/issues/2980)
+        - ErrGCTTLExceeded エラーが発生したときに changefeed が十分に速く失敗しない問題を修正しました[#3111](https://github.com/pingcap/ticdc/issues/3111)
         - 初期化に時間がかかりすぎて TiKV が GC safepoint を進めた場合に、changefeed が失敗する可能性がある問題を修正しました[#2470](https://github.com/pingcap/tiflow/issues/2470)
         - コンテナ環境におけるOOMの修正[#1798](https://github.com/pingcap/ticdc/issues/1798)
 

@@ -261,7 +261,7 @@ IP プロトコルタイプは、クラスターの作成後にのみ変更で�
 >
 > 現在、リージョン間接続機能はリクエストベースでのみ利用できます。この機能を利用するには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡し、組織 ID を提供してください。
 
-TiDB Cloud では、各 [TiDB node group](/tidb-cloud/tidb-node-group-management.md) ごとに接続スコープを個別に設定できます。別のリージョンからクラスターに接続するには、対象のノードグループにそのリージョンを許可してから、自分のリージョンに AWS インターフェイスエンドポイントを作成します.
+TiDB Cloud では、各 [TiDB node group](/tidb-cloud/tidb-node-group-management.md) ごとに接続スコープを個別に設定できます。別のリージョンからクラスターに接続するには、対象のノードグループにそのリージョンを許可してから、自分のリージョンに AWS インターフェイスエンドポイントを作成します。
 
 ### ステップ1. VPC エンドポイントのリージョンを許可する {#step-1-allow-the-region-of-your-vpc-endpoint}
 
@@ -277,8 +277,6 @@ TiDB Cloud では、各 [TiDB node group](/tidb-cloud/tidb-node-group-management
 > - 設定を保存しても、許可するリージョンが記録されるだけです。TiDB Cloud は更新を非同期に適用するため、表示された後でも許可されたリージョンの調整がまだ進行中である場合があります。次のステップで VPC エンドポイントを作成する前に、**Connection Scope** の更新が正常に完了するまで待ってください。そうしないと、リージョンがすでに表示されていても、エンドポイントの作成が失敗する可能性があります。更新が失敗した場合は、再試行するか、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡してください。
 > - リージョン間接続には料金が発生します。AWS は、許可した各リージョンごとではなく、少なくとも 1 つの接続済みインターフェイスエンドポイントがある **active** なリモートリージョンごとに、サービスプロバイダーに課金します。VPC エンドポイントの所有者として、標準のエンドポイント時間料金とデータ処理使用量、およびリージョン間データ転送料金も課金されます。さらに、TiDB Cloud はリージョン間 PrivateLink サービス料金を請求します。詳細については、[AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/) と [TiDB Cloud Dedicated pricing details](https://www.pingcap.com/tidb-dedicated-pricing-details/) を参照してください。
 > - リージョンを削除したり、**Connection Scope** を **Current Region Only** に戻したりしても、そのリージョン内の既存の接続には影響しません。そこで新しいプライベートエンドポイントを作成できなくなるだけで、既存のエンドポイントは切断されないため、それらのエンドポイントが削除されるまで AWS の課金が継続する可能性があります。許可されなくなったリージョン内の接続には、**AWS Private Endpoints** リストで警告が表示されます。
-
-## トラブルシューティング {#troubleshooting}
 
 ### ステップ2. リージョン間 AWS インターフェイスエンドポイントを作成する {#step-2-create-a-cross-region-aws-interface-endpoint}
 
@@ -298,6 +296,8 @@ TiDB Cloud では、各 [TiDB node group](/tidb-cloud/tidb-node-group-management
 > **Note:**
 >
 > VPC エンドポイントを作成するリージョンが対象ノードグループの許可リージョンでない場合、プライベートエンドポイント接続を作成できず、TiDB Cloud はエラーを報告します。
+
+## トラブルシューティング {#troubleshooting}
 
 ### プライベートDNSを有効にした後、プライベートエンドポイント経由でTiDBクラスターに接続できません。なぜですか？ {#i-cannot-connect-to-a-tidb-cluster-via-a-private-endpoint-after-enabling-private-dns-why}
 

@@ -13,7 +13,7 @@ summary: TiDB Cloud Premium のカーネルのバージョニング規則と形�
 >
 > - TiDB Cloud Starter インスタンスは、従来の TiDB v8.5.3 カーネルをベースにしたカスタマイズ済みの TiDB X エンジン上で動作します。このカーネルは、TiDB Cloud Premium のカーネルとは若干異なります。
 > - 2026 年 6 月 30 日以降、新しく作成された TiDB Cloud Essential インスタンスは、TiDB Cloud Premium と同じ [TiDB X](/tidb-cloud/tidb-x-architecture.md) カーネル上で動作します。
-> - TiDB Cloud Dedicated クラスターは、従来の TiDB カーネル上で動作し、そのカーネルバージョンは TiDB Self-Managed のバージョンに直接対応します.
+> - TiDB Cloud Dedicated クラスターは、従来の TiDB カーネル上で動作し、そのカーネルバージョンは TiDB Self-Managed のバージョンに直接対応します。
 
 ## カーネルバージョニング {#kernel-versioning}
 
@@ -38,7 +38,7 @@ TiDB-X-CLOUD.202510.1
 
 カーネルの開発スケジュールとリリーススケジュールは独立しているため、カーネルバージョンはベースラインブランチの作成から数か月後にリリースされる場合があります。
 
-TiDB Cloud Premium は独自のカーネルリリースサイクルに従うため、[TiDB-X-CLOUD.202603.1 リリースノート](/tidb-cloud/releases/tidb-x-cloud.202603.1.md) は [TiDB Self-Managed リリースノート](https://docs.pingcap.com/releases/tidb-self-managed/) とは別に公開されます。
+TiDB Cloud Premium は独自のカーネルリリースサイクルに従うため、[TiDB Cloud Premium リリースノート](/tidb-cloud/releases/tidb-x-cloud.202603.1.md) は [TiDB Self-Managed リリースノート](https://docs.pingcap.com/releases/tidb-self-managed/) とは別に公開されます。
 
 ## FAQ {#faq}
 
