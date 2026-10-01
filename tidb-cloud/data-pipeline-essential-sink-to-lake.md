@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Lake へのシンク
-summary: エクスポート、changefeed、および TiDB Cloud Lake integration を使用して、TiDB Cloud Essential インスタンス上に TiDB Cloud Lake データパイプラインを構築するための手動セットアップガイドです。
+summary: エクスポート、changefeed、および TiDB Cloud Lake 統合を使用して、TiDB Cloud Essential インスタンス上に TiDB Cloud Lake データパイプラインを構築するための手動セットアップガイドです。
 ---
 
 # TiDB Cloud Lake へのシンク
@@ -11,7 +11,7 @@ summary: エクスポート、changefeed、および TiDB Cloud Lake integration
 
 - TiDB Cloud Lake の Warehouse は、Essential インスタンスと **同じリージョン**に存在する必要があります。
 - 増分レプリケーションできるのは、**主キー**を持つテーブルのみです。
-- このパイプラインでは、AWS IAM リソースと認証情報、changefeed、および TiDB Cloud Lake integration の手動セットアップと保守が必要です。
+- このパイプラインでは、AWS IAM リソースと認証情報、changefeed、および TiDB Cloud Lake 統合の手動セットアップと保守が必要です。
 - DDL、DML、およびカラム型のサポートの詳細については、[TiDB Cloud Lake 向け Data Pipeline SQL 互換性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md) を参照してください。
 
 ## 前提条件 {#prerequisites}
@@ -303,7 +303,7 @@ curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/cha
 
 ## ステップ 4. TiDB Cloud Lake を設定する {#step-4-configure-tidb-cloud-lake}
 
-TiDB Cloud Lake では、S3 バケットからデータをロード (load) するために、データソースと integration を作成する必要があります。
+TiDB Cloud Lake では、S3 バケットからデータをロード (load) するために、データソースと統合を作成する必要があります。
 
 ### 1. データソースを作成する {#1-create-a-data-source}
 
@@ -316,12 +316,12 @@ TiDB Cloud Lake では、S3 バケットからデータをロード (load) す�
 4. **SQS Queue URL** は任意です。イベント駆動の取り込みを有効にする場合は、先に SQS キューをセットアップし、S3 バケット通知を設定してください。詳細は [TiDB Cloud Lake 用の Amazon SQS および S3 IAM Role](https://docs.pingcap.com/tidbcloudlake/amazon-sqs-s3-iam-role/) を参照してください。
 5. **Trust Cloud Platform roles** で、TiDB Cloud Lake のプラットフォームロールと外部 ID が、[2. 信頼関係を統合する](#2-consolidate-trust-relationships) の統合済み信頼ポリシーに追加した値と一致していることを確認します。
 
-### 2. integration を作成する {#2-create-an-integration}
+### 2. 統合を作成する {#2-create-an-integration}
 
 1. [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で **Data > Integration > Create** に移動します。
 2. 以下のフィールドを入力します。
     - **Data Source**: 上で作成したデータソースを選択します。
-    - **Name**: この integration タスクの名前。
+    - **Name**: この統合タスクの名前。
     - **Sync Mode**: `Snapshot + CDC` を選択して、最初に完全スナップショットをロードし、その後増分変更を継続的に適用します。
     - **Table Rules**: エクスポートしたすべてのテーブルを同期するには `*.*` を指定します。
     - **Changefeed S3 Prefix**: `<prefix>/incremental/`。
@@ -330,7 +330,7 @@ TiDB Cloud Lake では、S3 バケットからデータをロード (load) す�
     - **Merge Interval**: TiDB Cloud Lake が増分データを Warehouse にマージする間隔です。デフォルト値は 30 秒です。間隔を短くするとデータレイテンシーは減少しますが、TiDB Cloud Lake のホスティングコストは増加します。
     - **Warehouse**: 対象の Warehouse を選択します。
 3. **Create** をクリックします。
-4. 作成後、integration はデフォルトで **Stopped** です。integration のアクションボタンをクリックし、**Start** を選択してデータロードを開始します。
+4. 作成後、統合はデフォルトで **Stopped** です。統合のアクションボタンをクリックし、**Start** を選択してデータロードを開始します。
 
 ## See also {#see-also}
 
