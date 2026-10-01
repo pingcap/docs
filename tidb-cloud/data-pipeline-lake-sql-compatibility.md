@@ -20,11 +20,11 @@ summary: TiDB Cloud Data Pipeline における DDL、DML、および TiDB から
 | `ADD COLUMN ... NOT NULL DEFAULT ...` | ✅ |  |
 | `DROP COLUMN` | ✅ |  |
 | `RENAME COLUMN` | ✅ |  |
-| `MODIFY COLUMN` | ⚠️ 部分サポート | 以下に示す schema-evolution のケースのみサポートされます。その他の変換は保証されず、下流での取り込みをブロックする可能性があります。 |
+| `MODIFY COLUMN` | ⚠️ 部分サポート | 以下に示す Schema Evolution のケースのみサポートされます。その他の変換は保証されず、下流での取り込みをブロックする可能性があります。 |
 
 ### サポートされる `MODIFY COLUMN` 変換 {#supported-modify-column-conversions}
 
-| From | To | Notes |
+| 変換元 | 変換先 | 注記 |
 | ---- | -- | ----- |
 | `VARCHAR` | `TEXT` | Schema Evolution 中によくある拡張変換です。 |
 | `TINYINT` | `INT` | 整数の格納幅を拡張します。 |
@@ -35,7 +35,7 @@ summary: TiDB Cloud Data Pipeline における DDL、DML、および TiDB から
 
 ## DML サポートの概要 {#dml-support-summary}
 
-| DML operation | Status |
+| DML 操作 | ステータス |
 | ------------ | -----: |
 | `INSERT` | ✅ |
 | `UPDATE` | ✅ |
@@ -43,7 +43,7 @@ summary: TiDB Cloud Data Pipeline における DDL、DML、および TiDB から
 
 ここに記載されていない DML 操作は宛先に伝播されません。
 
-## 型マッピング リファレンス {#type-mapping-reference}
+## 型マッピングリファレンス {#type-mapping-reference}
 
 ### 整数型 {#integer-types}
 
@@ -61,18 +61,18 @@ summary: TiDB Cloud Data Pipeline における DDL、DML、および TiDB から
 
 ### 浮動小数点型 {#floating-point-types}
 
-| TiDB の型 | TiDB Cloud Lake の型 |
+| TiDB 型 | TiDB Cloud Lake 型 |
 | --------- | -------------------- |
 | `FLOAT` | `FLOAT32` |
 | `DOUBLE` / `REAL` | `FLOAT64` |
 
-### 正確な数値型 {#exact-numeric-types}
+### 固定小数点型 {#exact-numeric-types}
 
-| TiDB の型 | TiDB Cloud Lake の型 | 注記 |
+| TiDB 型 | TiDB Cloud Lake 型 | 注記 |
 | --------- | -------------------- | ----- |
 | `DECIMAL(P,S)` | `DECIMAL(P,S)` | 精度とスケールはそのまま正確に保持されます。これは `NUMERIC(P,S)` にも同様に適用されます。 |
-| `DECIMAL` (no precision) | `DECIMAL(76,30)` | 暗黙の切り捨てを避けるため、有効な最大精度まで自動的に拡張されます。 |
-| `NUMERIC` (no precision) | `DECIMAL(76,30)` | 上記と同じです。 |
+| `DECIMAL` (精度指定なし) | `DECIMAL(76,30)` | 暗黙の切り捨てを避けるため、有効な最大精度まで自動的に拡張されます。 |
+| `NUMERIC` (精度指定なし) | `DECIMAL(76,30)` | 上記と同じです。 |
 
 ### 日付と時刻の型 {#date-and-time-types}
 
@@ -82,7 +82,7 @@ summary: TiDB Cloud Data Pipeline における DDL、DML、および TiDB から
 | `DATETIME` / `DATETIME(n)` | `TIMESTAMP` | 秒未満の精度がサポートされます。 |
 | `TIMESTAMP` / `TIMESTAMP(n)` | `TIMESTAMP` | 秒未満の精度がサポートされます。 |
 | `TIME` | `VARCHAR` | TiDB Cloud Lake には独立した `TIME` 型がないため、テキストとして保存されます。 |
-| `YEAR` | `INT16` | 時刻型ではなく整数としてマッピングされます。 |
+| `YEAR` | `INT16` | 日付/時刻型ではなく整数としてマッピングされます。 |
 
 ### 文字列型 {#string-types}
 
@@ -102,9 +102,9 @@ summary: TiDB Cloud Data Pipeline における DDL、DML、および TiDB から
 
 ### その他の型 {#other-types}
 
-| TiDB type | TiDB Cloud Lake type | Notes |
+| TiDB 型 | TiDB Cloud Lake 型 | 注記 |
 | --------- | -------------------- | ----- |
 | `BOOLEAN` / `BOOL` | `BOOLEAN` |  |
 | `BIT` | `UINT64` | 常に符号なしとしてマッピングされます。すべて 1 の `BIT(64)` は、符号付き `INT64` の範囲を超えます。 |
 | `JSON` | `VARIANT` |  |
-| Unknown / unlisted type | `VARCHAR` | フォールバック マッピングです。型付きの意味論は失われます。 |
+| 不明な型 / 記載のない型 | `VARCHAR` | フォールバックマッピングです。型としてのセマンティクスは失われます。 |

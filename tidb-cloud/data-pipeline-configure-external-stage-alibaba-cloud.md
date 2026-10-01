@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud Data Pipeline の External Stage を設定する (Alibaba Cloud)
-summary: RAM ユーザーと access key を含め、Alibaba Cloud OSS バケットを TiDB Cloud Data Pipeline の external stage として設定する方法を説明します。
+summary: RAM ユーザーとアクセスキーを含め、Alibaba Cloud OSS バケットを TiDB Cloud Data Pipeline の external stage として設定する方法を説明します。
 ---
 
 # TiDB Cloud Data Pipeline の External Stage を設定する (Alibaba Cloud)
 
-このガイドでは、[Data Pipeline](/tidb-cloud/data-pipeline.md) の external stage として Alibaba Cloud Object Storage Service (OSS) バケットを準備する方法を説明します。external stage は、TiDB Cloud がエクスポートしたスナップショットと行変更を書き込み、TiDB Cloud Lake がそこから読み取って対象の Warehouse にデータをロード (load) するための中間バケットです。
+このガイドでは、[TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline.md) の external stage として Alibaba Cloud Object Storage Service (OSS) バケットを準備する方法を説明します。external stage は、TiDB Cloud がエクスポートしたスナップショットと行変更を書き込み、TiDB Cloud Lake がそこから読み取って対象の Warehouse にデータをロード (load) するための中間バケットです。
 
 TiDB Cloud は増分データとスナップショットを OSS バケットに書き込み、TiDB Cloud Lake はそのバケットからデータを読み取ります。
 
@@ -19,7 +19,7 @@ TiDB Cloud は増分データとスナップショットを OSS バケットに�
 - OSS と RAM リソースを管理する権限を持つ Alibaba Cloud アカウント
 - TiDB Cloud Lake の Warehouse を持つ TiDB Cloud アカウント
 
-## Step 1. OSS バケットを作成する {#step-1-create-an-oss-bucket}
+## ステップ 1. OSS バケットを作成する {#step-1-create-an-oss-bucket}
 
 > **Tip:**
 >
@@ -27,13 +27,13 @@ TiDB Cloud は増分データとスナップショットを OSS バケットに�
 
 1. [OSS Console](https://oss.console.aliyun.com/) を開き、新しいバケットを作成します。
 2. リージョンを選択します。TiDB Cloud インスタンスと同じリージョンを使用することを推奨します。
-3. 必要に応じて、バケット内にフォルダー (prefix) を作成し、TiDB Cloud データを整理します (例: `oss://tidb-cloud-lake-data/my-cluster/`)。
+3. 必要に応じて、バケット内にフォルダー (プレフィックス) を作成し、TiDB Cloud データを整理します (例: `oss://tidb-cloud-lake-data/my-cluster/`)。
 4. 後続の手順で必要になるため、次の値を記録しておきます。
 
     - **Bucket Name:** 例: `tidb-cloud-lake-data`
     - **OSS URI (with prefix):** 例: `oss://tidb-cloud-lake-data/my-cluster/`
 
-## Step 2. RAM ユーザーと AccessKey ペアを作成する {#step-2-create-a-ram-user-and-accesskey-pair}
+## ステップ 2. RAM ユーザーと AccessKey ペアを作成する {#step-2-create-a-ram-user-and-accesskey-pair}
 
 1. [RAM Console](https://ram.console.aliyun.com/) を開き、**Users > Create user** に移動します。
 2. 表示名 (例: `tidb-cloud-lake-user`) を入力し、アクセス方法として **OpenAPI calling** を選択します。
@@ -81,7 +81,7 @@ TiDB Cloud は増分データとスナップショットを OSS バケットに�
 
 Alibaba Cloud の設定が完了すると、External Stage の設定に必要な値がすべてそろいます。
 
-- **OSS URI**: Step 1 で取得
-- **Access Key ID** と **Access Key Secret**: Step 2 で取得
+- **OSS URI**: [ステップ 1](#step-1-create-an-oss-bucket) で取得
+- **Access Key ID** と **Access Key Secret**: [ステップ 2](#step-2-create-a-ram-user-and-accesskey-pair) で取得
 
-[TiDB Cloud console](https://tidbcloud.com) で、対象の TiDB Cloud インスタンスの Data Pipeline 設定ページに移動し、**External Stage** 設定にこれらの値を入力して、データパイプラインの設定を完了してください。
+[TiDB Cloud コンソール](https://tidbcloud.com) で、対象の TiDB Cloud インスタンスの Data Pipeline 設定ページに移動し、**External Stage** 設定にこれらの値を入力して、データパイプラインの設定を完了してください。

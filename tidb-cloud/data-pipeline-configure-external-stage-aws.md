@@ -5,7 +5,7 @@ summary: Amazon S3 バケットを TiDB Cloud Data Pipeline の外部 stage と�
 
 # TiDB Cloud Data Pipeline 用の外部 stage を設定する (AWS)
 
-このガイドでは、[Data Pipeline](/tidb-cloud/data-pipeline.md) の外部 stage として Amazon S3 バケットを準備する方法を説明します。外部 stage は、TiDB Cloud がエクスポートしたスナップショットと行変更を書き込む中間バケットであり、TiDB Cloud Lake はそこからデータを読み取って対象の Warehouse にロードします。
+このガイドでは、[TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline.md) の外部 stage として Amazon S3 バケットを準備する方法を説明します。外部 stage は、TiDB Cloud がエクスポートしたスナップショットと行変更を書き込む中間バケットであり、TiDB Cloud Lake はそこからデータを読み取って対象の Warehouse にロードします。
 
 TiDB Cloud はデータをお使いの S3 バケットに書き込み、TiDB Cloud Lake はそこからデータを読み取ります。
 
@@ -29,9 +29,9 @@ TiDB Cloud はデータをお使いの S3 バケットに書き込み、TiDB Clo
 
 以下のいずれかのバケットアクセス方法を選択し、対応するセクションの手順を完了してください。
 
-* **オプション 1: role ARN によるバケットアクセス (CloudFormation)**（推奨）
-* **オプション 2: role ARN によるバケットアクセス (手動設定)**
-* **オプション 3: access key によるバケットアクセス (非推奨)**
+* **オプション 1: ロール ARN によるバケットアクセス (CloudFormation)**（推奨）
+* **オプション 2: ロール ARN によるバケットアクセス (手動設定)**
+* **オプション 3: アクセスキーによるバケットアクセス (非推奨)**
 
 > **Tip:**
 >
@@ -42,9 +42,9 @@ TiDB Cloud はデータをお使いの S3 バケットに書き込み、TiDB Clo
 > - **オプション 1** では、イベント駆動の取り込みを有効にする場合、スタック作成時に CloudFormation スタックで SQS キューを作成することも、後から手動で SQS キューを追加することもできます。
 > - **オプション 2 と 3** では、イベント駆動の取り込みを有効にする場合、SQS キューを手動で作成して設定する必要があります。
 
-### オプション 1. role ARN によるバケットアクセス (CloudFormation) {#option-1-bucket-access-with-role-arn-cloudformation}
+### オプション 1. ロール ARN によるバケットアクセス (CloudFormation) {#option-1-bucket-access-with-role-arn-cloudformation}
 
-1 つの IAM ロールを TiDB Cloud（バケットへの書き込み）と TiDB Cloud Lake（バケットからの読み取り）で共有します。このロールの信頼ポリシーでは、両者がそれぞれ独自の external ID によって保護された形でロールを引き受けられるようになっており、長期間有効な認証情報を保存する必要がありません。CloudFormation スタックがロール、その信頼関係、その権限、さらに必要に応じて SQS キューとそのポリシーを一括で作成するため、これが推奨される方法です。
+1 つの IAM ロールを TiDB Cloud（バケットへの書き込み）と TiDB Cloud Lake（バケットからの読み取り）で共有します。このロールの信頼ポリシーにより、両者はそれぞれ独自の外部 ID で保護された状態でロールを引き受けられるため、長期間有効な認証情報を保存する必要がありません。CloudFormation スタックがロール、その信頼関係、その権限、さらに必要に応じて SQS キューとそのポリシーを一括で作成するため、これが推奨される方法です。
 
 #### 1.1 CloudFormation でロールを作成する {#11-create-the-role-with-cloudformation}
 
@@ -62,7 +62,7 @@ TiDB Cloud はデータをお使いの S3 バケットに書き込み、TiDB Clo
 
 [1.1](#11-create-the-role-with-cloudformation) で SQS を有効にした場合、キューとそのポリシーはすでにスタックによって作成されています。残る手順は、既存のバケットに対する通知設定のみです。提供されている CloudFormation スタックは、バケットがすでに存在するためこの設定は行いません。[2.3.2](#232-configure-the-s3-bucket-notification) の手動通知設定手順に従ってください。
 
-### オプション 2. role ARN によるバケットアクセス (手動設定) {#option-2-bucket-access-with-role-arn-manual-setup}
+### オプション 2. ロール ARN によるバケットアクセス (手動設定) {#option-2-bucket-access-with-role-arn-manual-setup}
 
 CloudFormation を使用できない場合、または組織の要件によりすべての IAM リソースを手動で作成・レビューする必要がある場合は、この方法を使用します。IAM ロール自体はオプション 1 と同じで、異なるのは作成方法だけです。
 
@@ -147,7 +147,7 @@ CloudFormation を使用できない場合、または組織の要件により�
 
 #### 2.3 （任意）SQS でイベント駆動の取り込みを有効にする {#23-optional-enable-event-driven-ingestion-with-sqs}
 
-ワークロードに対して定期スキャンで十分な場合は、このセクションをスキップしてください。SQS を使用するタイミングの詳細については、[ステップ 2. バケットアクセスを設定する](#step-2-configure-bucket-access) の Tip を参照してください。
+ワークロードで定期スキャンを許容できる場合は、このセクションをスキップしてください。SQS を使用するタイミングの詳細については、[ステップ 2. バケットアクセスを設定する](#step-2-configure-bucket-access) の Tip を参照してください。
 
 ##### 2.3.1 SQS キューを作成し、キューポリシーを設定する {#231-create-the-sqs-queue-and-configure-the-queue-policy}
 
@@ -189,15 +189,15 @@ S3 イベント通知を設定して、バケットからのオブジェクト�
     - **Destination:** **SQS queue** を選択し、先ほど作成したキューを選びます。
 4. **Save changes** をクリックします。
 
-### オプション 3. access key によるバケットアクセス (非推奨) {#option-3-bucket-access-with-access-key-not-recommended}
+### オプション 3. アクセスキーによるバケットアクセス (非推奨) {#option-3-bucket-access-with-access-key-not-recommended}
 
 > **Note:**
 >
-> Access Key/Secret Key (AK/SK) を使用する場合、認証情報を手動で管理およびローテーションする必要があり、誤って漏洩するリスクも高くなります。より簡単な管理と高いセキュリティのため、[オプション 1](#option-1-bucket-access-with-role-arn-cloudformation) または [オプション 2](#option-2-bucket-access-with-role-arn-manual-setup) の手順に従って Role ARN を作成することを推奨します。
+> Access Key/Secret Key (AK/SK) を使用する場合、認証情報を手動で管理およびローテーションする必要があり、誤って漏洩するリスクも高くなります。管理を簡素化し、セキュリティを高めるため、[オプション 1](#option-1-bucket-access-with-role-arn-cloudformation) または [オプション 2](#option-2-bucket-access-with-role-arn-manual-setup) の手順に従って Role ARN を作成することを推奨します。
 
 この方法では、IAM ユーザーを作成し、その **Access Key ID** と **Secret Access Key** を TiDB Cloud に提供します。TiDB Cloud はこれらの認証情報を使用して、お使いの S3 バケットに直接アクセスします。
 
-#### 3.1 IAM user と access key を作成する {#31-create-an-iam-user-and-access-key}
+#### 3.1 IAM ユーザーとアクセスキーを作成する {#31-create-an-iam-user-and-access-key}
 
 1. [IAM Console](https://console.aws.amazon.com/iam/) を開き、**Users > Create user** に移動します。
 2. ユーザー名（例: `tidb-cloud-lake-user`）を入力し、**Next** をクリックします。
@@ -238,7 +238,7 @@ S3 イベント通知を設定して、バケットからのオブジェクト�
 
 4. **Next** をクリックします。**Review and create** ページでユーザー設定を確認し、**Create user** をクリックします。
 5. **Users** ページで、作成したユーザー名をクリックし、**Security credentials** タブに移動します。
-6. **Access keys** セクションで **Create access key** をクリックします。**Access key best practices & alternatives** ページで **Other** を選択し、**Next** をクリックして access key を作成します。
+6. **Access keys** セクションで **Create access key** をクリックします。**Access key best practices & alternatives** ページで **Other** を選択し、**Next** をクリックしてアクセスキーを作成します。
 7. **Access Key ID** と **Secret Access Key** を保存します。これらは TiDB Cloud コンソールで External Stage を設定するときに必要です。
 
     > **Note:**
@@ -286,8 +286,8 @@ S3 イベント通知を設定して、バケットからのオブジェクト�
 
 AWS の設定が完了すると、External Stage の設定に必要な値がすべてそろいます。
 
-- **S3 URI**: **Create an S3 bucket** で取得します。
+- **S3 URI**: [ステップ 1. S3 バケットを作成する](#step-1-create-an-s3-bucket) で取得します。
 - **Bucket access**: Role ARN（オプション 1 と 2）、または Access Key ID と Secret Access Key（オプション 3）。
 - **SQS queue URL**（任意）。
 
-[TiDB Cloud console](https://tidbcloud.com) で TiDB Cloud インスタンスの Data Pipeline 設定ページに移動し、**External Stage** 設定にこれらの値を入力して、データパイプラインのセットアップを完了してください。
+[TiDB Cloud コンソール](https://tidbcloud.com) で TiDB Cloud インスタンスの Data Pipeline 設定ページに移動し、**External Stage** 設定にこれらの値を入力して、データパイプラインのセットアップを完了してください。

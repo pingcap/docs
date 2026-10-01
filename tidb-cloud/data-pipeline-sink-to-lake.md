@@ -9,7 +9,7 @@ TiDB Cloud では、サードパーティの ETL ツールを使わずに、Data
 
 > **Note:**
 >
-> - TiDB Cloud Lake への Data Pipeline は現在、<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 向けに**プライベートプレビュー**として提供されており、リクエストベースでのみ利用できます。この機能をリクエストするには、[TiDB Cloud コンソール](https://tidbcloud.com)の右下にある **?** をクリックし、**Support Tickets** をクリックして [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for `Data Pipeline to TiDB Cloud Lake`" と入力して、**Submit** をクリックします。
+> - TiDB Cloud Lake への Data Pipeline は現在、<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 向けに**プライベートプレビュー**として提供されており、リクエストに応じてのみ利用できます。この機能をリクエストするには、[TiDB Cloud コンソール](https://tidbcloud.com)の右下にある **?** をクリックし、**Support Tickets** をクリックして [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for `Data Pipeline to TiDB Cloud Lake`" と入力して、**Submit** をクリックします。
 > - Data Pipeline 機能は TiCDC をベースに構築されているため、[TiCDC と同じ制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
 
 ## 制限事項 {#restrictions}
@@ -30,7 +30,7 @@ TiDB Cloud では、サードパーティの ETL ツールを使わずに、Data
 
 ## データパイプラインを作成する {#create-a-data-pipeline}
 
-データパイプラインを作成するには、送信先、外部 stage、およびレプリケーション設定を構成する必要があります。
+データパイプラインを作成するには、送信先、外部 stage、およびレプリケーションを設定する必要があります。
 
 ### ステップ 1. 送信先を設定する {#step-1-configure-the-destination}
 
@@ -40,7 +40,7 @@ TiDB Cloud では、サードパーティの ETL ツールを使わずに、Data
     - **Destination**: **TiDB Cloud Lake** を選択します。
     - **Warehouse**: ターゲットの Warehouse を選択します。表示されるのは、インスタンスと同じリージョンにある Warehouse のみです。利用可能な Warehouse がない場合は、まず [TiDB Cloud Lake](https://lake.tidbcloud.com/) で作成し、その後リストを更新してください。
 
-3. （任意）**Database Prefix**、**Database Suffix**、**Table Prefix**、**Table Suffix** フィールドでターゲットの命名規則を設定します。デフォルトでは 4 つのフィールドはすべて空であり、この場合 TiDB Cloud Lake に作成されるデータベース名とテーブル名はソースと同じ名前を保持します。
+3. （任意）**Database Prefix**、**Database Suffix**、**Table Prefix**、**Table Suffix** フィールドでターゲットの命名規則を設定します。デフォルトでは 4 つのフィールドはすべて空であり、この場合 TiDB Cloud Lake に作成されるデータベース名とテーブル名はソースと同じ名前になります。
 
     - データベース名: `<database prefix><source database name><database suffix>`
     - テーブル名: `<table prefix><source table name><table suffix>`
@@ -64,23 +64,23 @@ TiDB Cloud Data Pipeline は、外部 stage として Amazon S3 および Alibab
 
         1 つの IAM ロールを TiDB Cloud（stage への書き込み）と TiDB Cloud Lake（stage からの読み取り）で共有するため、認可設定は 1 回で済み、長期有効なアクセスキーを保存する必要もありません。TiDB Cloud が提供する CloudFormation テンプレートを使ってロールを作成することも、AWS で手動設定することもできます。
 
-        AWS 側の完全な設定については、[TiDB Cloud Data Pipeline 用の外部 stage を設定する (AWS)](/tidb-cloud/data-pipeline-configure-external-stage-aws.md) を参照してください。ロールを作成したら、TiDB Cloud コンソールで `RoleARN` の出力値を **Role ARN** フィールドに貼り付け、SQS キューも作成した場合は、そのキュー URL を **SQS Queue URL** フィールドにコピーします。
+        AWS 側の完全な設定については、[TiDB Cloud Data Pipeline 用の外部 stage を設定する (AWS)](/tidb-cloud/data-pipeline-configure-external-stage-aws.md) を参照してください。ロールを作成したら、TiDB Cloud コンソールで `RoleARN` の出力値を **Role ARN** フィールドに貼り付け、SQS キューも作成した場合は、そのキュー URL を **SQS Queue URL** フィールドに貼り付けます。
 
-    - 方法 2: AWS access key を使用する
+    - 方法 2: AWS アクセスキーを使用する
 
         > **Note:**
         >
-        > access key と secret key（AK/SK）を使用する場合、認証情報の管理とローテーションを手動で行う必要があり、セキュリティリスクが高まります。より強固なセキュリティのため、代わりに **AWS Role ARN** を使用してください。
+        > アクセスキーとシークレットキー（AK/SK）を使用する場合、認証情報の管理とローテーションを手動で行う必要があり、セキュリティリスクが高まります。より強固なセキュリティのため、代わりに **AWS Role ARN** を使用してください。
 
-        IAM ユーザー、その権限、および任意の SQS キューを含む AWS 側の完全な設定については、[Bucket Access with Access Key](/tidb-cloud/data-pipeline-configure-external-stage-aws.md#option-3-bucket-access-with-access-key-not-recommended) を参照してください。その後、TiDB Cloud コンソールで **AWS Access Key** を選択し、**Access Key ID** と **Secret Access Key** を入力します。
+        IAM ユーザー、その権限、および任意の SQS キューを含む AWS 側の完全な設定については、[アクセスキーによるバケットアクセス](/tidb-cloud/data-pipeline-configure-external-stage-aws.md#option-3-bucket-access-with-access-key-not-recommended) を参照してください。その後、TiDB Cloud コンソールで **AWS Access Key** を選択し、**Access Key ID** と **Secret Access Key** を入力します。
 
-    選択した方法に必要な情報を入力したら、**Test Connection** をクリックして TiDB Cloud がバケットにアクセスできることを確認します。チェックに失敗した場合は、バケットのリージョンと、ロールまたは access key に付与した権限を確認してから、再度接続をテストしてください。
+    選択した方法に必要な情報を入力したら、**Test Connection** をクリックして TiDB Cloud がバケットにアクセスできることを確認します。チェックに失敗した場合は、バケットのリージョンと、ロールまたはアクセスキーに付与した権限を確認してから、再度接続をテストしてください。
 
 </div>
 
 <div label="Alibaba Cloud OSS">
 
-RAM ユーザー、その権限、および access key を含む OSS 側の完全な設定については、[TiDB Cloud Data Pipeline の External Stage を設定する (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md) を参照してください。
+RAM ユーザー、その権限、およびアクセスキーを含む OSS 側の完全な設定については、[TiDB Cloud Data Pipeline の External Stage を設定する (Alibaba Cloud)](/tidb-cloud/data-pipeline-configure-external-stage-alibaba-cloud.md) を参照してください。
 
 1. **External Stage** エリアで、OSS バケットの **Bucket URI** を `oss://<bucket-name>/<path-to-data>/` 形式で入力します。
 2. 以下のフィールドを入力します。
@@ -92,7 +92,7 @@ RAM ユーザー、その権限、および access key を含む OSS 側の完�
 
 > **Note:**
 >
-> Alibaba Cloud OSS では、access key 認証のみがサポートされており、SQS を使用したイベント駆動の取り込みは利用できません。
+> Alibaba Cloud OSS では、アクセスキー認証のみがサポートされており、SQS を使用したイベント駆動の取り込みは利用できません。
 
 </div>
 
@@ -107,13 +107,13 @@ RAM ユーザー、その権限、および access key を含む OSS 側の完�
     - **Full Data + Incremental Data**（デフォルト）: 選択したソースデータの完全スナップショットをエクスポートし、その後、行変更を継続的にレプリケートします。継続的な同期にはこのモードを推奨します。
     - **Full Data**: 選択したソースデータの完全スナップショットを 1 回だけエクスポートします。増分データはレプリケートされず、スナップショット取得後にソースで行われた変更は無視されます。
 
-2. **Sync Interval**: データパイプラインのエンドツーエンドのレイテンシー目標です。changefeed の flush サイクルと TiDB Cloud Lake の polling サイクルの両方が、エンドツーエンドのレイテンシーに影響します。間隔を短くするとデータレイテンシーは減少しますが、クラウドストレージへの API 呼び出し回数は増加します。デフォルト値はコンソールに表示されます。
+2. **Sync Interval**: データパイプラインのエンドツーエンドのレイテンシー目標です。changefeed のフラッシュサイクルと TiDB Cloud Lake のポーリングサイクルの両方が、エンドツーエンドのレイテンシーに影響します。間隔を短くするとデータレイテンシーは減少しますが、クラウドストレージへの API 呼び出し回数は増加します。デフォルト値はコンソールに表示されます。
 
 3. **Changefeed Capacity Units**: 増分レプリケーションに割り当てる処理能力で、サポートされる最大レプリケーションスループットとともに表示されます。たとえば、`2 CCUs (the maximum replication throughput is 5,000 rows/s)` のように表示されます。
 
     > **Note:**
     >
-    > Changefeed Capacity Units は、データストリーミングに割り当てられる処理能力を表します。この設定は増分レプリケーションのパフォーマンスを構成します。同期モードとして **Full Data** を選択した場合、増分レプリケーションは実行されないため、CCU は消費されません。
+    > Changefeed Capacity Units は、データストリーミングに割り当てられる処理能力を表します。この設定によって増分レプリケーションの性能が決まります。同期モードとして **Full Data** を選択した場合、増分レプリケーションは実行されないため、CCU は消費されません。
 
 4. **TiDB Username** と **TiDB Password**: TiDB データベースユーザーのユーザー名とパスワードを入力します。データパイプラインはこのアカウントを使用して完全スナップショットをエクスポートするため、このアカウントにはソーステーブルへの読み取り権限が必要です。増分の行変更は、changefeed によって別途キャプチャされます。
 
@@ -163,7 +163,7 @@ RAM ユーザー、その権限、および access key を含む OSS 側の完�
 データパイプラインを削除するには、次の手順を実行します。
 
 1. 対象の <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> インスタンスの **Data Pipeline** に移動し、対象パイプラインの行にある **...** をクリックして、**Delete** をクリックします。
-2. 警告を読み、操作を確認します。データパイプラインを削除すると、次のことが行われます。
+2. 警告を読み、操作を確認します。データパイプラインを削除すると、次のようになります。
 
     - すべてのデータレプリケーションが即座に停止します。
     - パイプラインに関連付けられた TiDB Cloud Lake のデータソースと統合タスクの削除を試みます。削除に失敗した場合、これらのリソースが残り、手動でのクリーンアップが必要になることがあります。
