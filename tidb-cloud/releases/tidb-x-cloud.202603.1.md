@@ -13,20 +13,20 @@ summary: TiDB-X-CLOUD.202603.1 カーネルの機能について説明します�
 
 2026年7月16日以降、新しく作成される {{{ .essential }}} および {{{ .premium }}} インスタンスのデフォルトのカーネルバージョンは `TiDB-X-CLOUD.202603.1` です。
 
-`TiDB-X-CLOUD.202603.1` において:
+`TiDB-X-CLOUD.202603.1` では、次のようになります。
 
-- `202603` は、このカーネルバージョンのベースラインコードブランチが 2026 年 3 月に作成されたことを示しており、リリース日とは異なります。
+- `202603` は、このカーネルバージョンのベースラインコードブランチが 2026年3月に作成されたことを示しており、リリース日とは異なります。
 - `1` は、`TiDB-X-CLOUD.202603` ベースラインブランチからビルドされた最初のパッチリリースであることを示します。
 
 ## 機能 {#features}
 
 ### パフォーマンス {#performance}
 
-* 特定の lossy DDL 操作（`BIGINT → INT` や `CHAR(120) → VARCHAR(60)` など）に対して大幅なパフォーマンス改善を導入しました。データ切り捨てが発生しない場合、これらの操作の実行時間を数時間から数分、数秒、さらには数ミリ秒まで短縮でき、数十倍から数十万倍の性能向上を実現します [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016) @[tangenta](https://github.com/tangenta) @[fzzf678](https://github.com/fzzf678) <!-- pr: https://github.com/pingcap/tidb/pull/64834, https://github.com/pingcap/tidb/pull/64337, https://github.com/pingcap/tidb/pull/64188, https://github.com/pingcap/tidb/pull/64111, https://github.com/pingcap/tidb/pull/63465, https://github.com/pingcap/tidb/pull/63970, https://github.com/pingcap/tidb/pull/63965 -->
+* 特定の損失のある DDL 操作（`BIGINT → INT` や `CHAR(120) → VARCHAR(60)` など）に対して大幅なパフォーマンス改善を導入しました。データ切り捨てが発生しない場合、これらの操作の実行時間を数時間から数分、数秒、さらには数ミリ秒まで短縮でき、数十倍から数十万倍の性能向上を実現します [#63366](https://github.com/pingcap/tidb/issues/63366) @[wjhuang2016](https://github.com/wjhuang2016) @[tangenta](https://github.com/tangenta) @[fzzf678](https://github.com/fzzf678) <!-- pr: https://github.com/pingcap/tidb/pull/64834, https://github.com/pingcap/tidb/pull/64337, https://github.com/pingcap/tidb/pull/64188, https://github.com/pingcap/tidb/pull/64111, https://github.com/pingcap/tidb/pull/63465, https://github.com/pingcap/tidb/pull/63970, https://github.com/pingcap/tidb/pull/63965 -->
 
     最適化戦略は次のとおりです。
 
-    - strict SQL モードでは、TiDB は型変換時の潜在的なデータ切り捨てリスクを事前チェックします。
+    - 厳密な SQL モードでは、TiDB は型変換時の潜在的なデータ切り捨てリスクを事前チェックします。
     - データ切り捨てリスクが検出されない場合、TiDB はメタデータのみを更新し、可能な限りインデックスの再構築を回避します。
     - インデックスの再構築が必要な場合、TiDB はより効率的な取り込みプロセスを使用して、インデックス再構築のパフォーマンスを大幅に向上させます。
 

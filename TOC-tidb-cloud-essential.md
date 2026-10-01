@@ -148,7 +148,7 @@
   - [MySQLへのシンク](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
   - [Apache Kafkaへのシンク](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
   - [TiDB Cloud Lake へのシンク](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
-  - リファレンス
+  - 参照
     - [TiDB Cloud Lake 向け Data Pipeline SQL 互換性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
 - セキュリティ
   - [セキュリティ概要](/tidb-cloud/security-overview.md)

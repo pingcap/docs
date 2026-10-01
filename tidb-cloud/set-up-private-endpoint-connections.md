@@ -261,12 +261,12 @@ IP プロトコルタイプは、クラスターの作成後にのみ変更で�
 >
 > 現在、リージョン間接続機能はリクエストベースでのみ利用できます。この機能を利用するには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡し、組織 ID を提供してください。
 
-TiDB Cloud では、各 [TiDB node group](/tidb-cloud/tidb-node-group-management.md) ごとに接続スコープを個別に設定できます。別のリージョンからクラスターに接続するには、対象のノードグループにそのリージョンを許可してから、自分のリージョンに AWS インターフェイスエンドポイントを作成します。
+TiDB Cloud では、[TiDB ノードグループ](/tidb-cloud/tidb-node-group-management.md)ごとに接続スコープを個別に設定できます。別のリージョンからクラスターに接続するには、対象のノードグループにそのリージョンを許可してから、自分のリージョンに AWS インターフェースエンドポイントを作成します。
 
 ### ステップ1. VPC エンドポイントのリージョンを許可する {#step-1-allow-the-region-of-your-vpc-endpoint}
 
 1. 組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象クラスターの名前をクリックして概要ページに移動してから、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
-2. 各 TiDB Cloud Dedicated クラスターには、デフォルトの [TiDB node group](/tidb-cloud/tidb-node-group-management.md) があります。クラスターに複数のノードグループがある場合は、右上隅の **TiDB Node Group** リストから対象の TiDB ノードグループを選択します。
+2. 各 TiDB Cloud Dedicated クラスターには、デフォルトの [TiDB ノードグループ](/tidb-cloud/tidb-node-group-management.md) があります。クラスターに複数のノードグループがある場合は、右上隅の **TiDB Node Group** リストから対象の TiDB ノードグループを選択します。
 3. **AWS Private Endpoints** セクションで、**Edit** をクリックします。
 4. **AWS Private Endpoints Connection Settings** ダイアログで、**Connection Scope** に **Cross-Region** を選択し、許可するリージョンを選択して、**Save** をクリックします。
 
@@ -275,12 +275,12 @@ TiDB Cloud では、各 [TiDB node group](/tidb-cloud/tidb-node-group-management
 > **Note:**
 >
 > - 設定を保存しても、許可するリージョンが記録されるだけです。TiDB Cloud は更新を非同期に適用するため、表示された後でも許可されたリージョンの調整がまだ進行中である場合があります。次のステップで VPC エンドポイントを作成する前に、**Connection Scope** の更新が正常に完了するまで待ってください。そうしないと、リージョンがすでに表示されていても、エンドポイントの作成が失敗する可能性があります。更新が失敗した場合は、再試行するか、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡してください。
-> - リージョン間接続には料金が発生します。AWS は、許可した各リージョンごとではなく、少なくとも 1 つの接続済みインターフェイスエンドポイントがある **active** なリモートリージョンごとに、サービスプロバイダーに課金します。VPC エンドポイントの所有者として、標準のエンドポイント時間料金とデータ処理使用量、およびリージョン間データ転送料金も課金されます。さらに、TiDB Cloud はリージョン間 PrivateLink サービス料金を請求します。詳細については、[AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/) と [TiDB Cloud Dedicated pricing details](https://www.pingcap.com/tidb-dedicated-pricing-details/) を参照してください。
+> - リージョン間接続には料金が発生します。AWS は、許可した各リージョンごとではなく、少なくとも 1 つの接続済みインターフェースエンドポイントがある **active** なリモートリージョンごとに、サービスプロバイダーに課金します。VPC エンドポイントの所有者として、標準のエンドポイント時間料金とデータ処理使用量、およびリージョン間データ転送料金も課金されます。さらに、TiDB Cloud はリージョン間 PrivateLink サービス料金を請求します。詳細については、[AWS PrivateLink pricing](https://aws.amazon.com/privatelink/pricing/) と [TiDB Cloud Dedicated pricing details](https://www.pingcap.com/tidb-dedicated-pricing-details/) を参照してください。
 > - リージョンを削除したり、**Connection Scope** を **Current Region Only** に戻したりしても、そのリージョン内の既存の接続には影響しません。そこで新しいプライベートエンドポイントを作成できなくなるだけで、既存のエンドポイントは切断されないため、それらのエンドポイントが削除されるまで AWS の課金が継続する可能性があります。許可されなくなったリージョン内の接続には、**AWS Private Endpoints** リストで警告が表示されます。
 
-### ステップ2. リージョン間 AWS インターフェイスエンドポイントを作成する {#step-2-create-a-cross-region-aws-interface-endpoint}
+### ステップ2. リージョン間 AWS インターフェースエンドポイントを作成する {#step-2-create-a-cross-region-aws-interface-endpoint}
 
-[ステップ2. AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint) の説明に従って AWS インターフェイスエンドポイントを作成し、次の点に注意してください。
+[ステップ2. AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint) の説明に従って AWS インターフェースエンドポイントを作成し、次の点に注意してください。
 
 - エンドポイントは、TiDB Cloud Dedicated クラスターのリージョンとは異なる、アプリケーションが実行される AWS リージョンに作成します。AWS マネジメントコンソールでは、**Enable Cross Region endpoint** を選択し、**Service Region** を TiDB Cloud Dedicated クラスターのリージョンに設定します。
 - **Subnets** では、リージョン間アクセスをサポートするアベイラビリティゾーン内のサブネットを選択します。リージョン内のすべてのアベイラビリティゾーンがリージョン間アクセスをサポートしているわけではありません。サブネットがサポートされていないアベイラビリティゾーンにある場合、作成は失敗し、サポートされているアベイラビリティゾーンを一覧表示するエラーが表示されるため、代わりに一覧に表示されたアベイラビリティゾーン内のサブネットを選択できます。

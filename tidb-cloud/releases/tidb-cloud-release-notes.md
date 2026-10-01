@@ -18,13 +18,13 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         TiDB Cloud Premium では、1 分以内に 20 件を超える SQL ステートメントが 256 ms、512 ms、または 4096 ms のレイテンシーしきい値を超えた場合に通知する、3 つの組み込みアラートルールが提供されるようになりました。これらのアラートは、低速な SQL ステートメントの数が異常に多い期間を検出するのに役立ちます。
 
-        詳細は、[TiDB Cloud Built-in Alerting](https://docs.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium) を参照してください。
+        詳細は、[TiDB Cloudの組み込みアラート機能](https://docs.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium) を参照してください。
 
 - **TiDB Cloud Dedicated**
 
     - TiDB Cloud Dedicated が、リージョン間の AWS PrivateLink 接続をサポートしました。
 
-        この機能により、あるリージョンで AWS インターフェイスエンドポイントを作成し、別のリージョンにある TiDB Cloud Dedicated クラスターにプライベート接続できます。リージョン間接続では、同じ接続文字列を使用します。
+        この機能により、あるリージョンで AWS インターフェースエンドポイントを作成し、別のリージョンにある TiDB Cloud Dedicated クラスターにプライベート接続できます。リージョン間接続では、同じ接続文字列を使用します。
 
         現在、この機能はリクエストに応じて利用可能です。リージョン間 PrivateLink サービス料金は追加されたリージョンごとに適用され、リージョンを削除しても既存の接続には影響しません。この機能をリクエストするには、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
 

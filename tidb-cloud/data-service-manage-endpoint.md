@@ -402,7 +402,7 @@ TiDB Cloud Data Serviceは、エンドポイントを呼び出すのに役立つ
     - 認証方法：**Basic Authentication**または**Digest Authentication**を選択してください。
 
         - **Basic Authentication**では、APIキーがbase64エンコードされたテキストとして送信されます。
-        - **Digest Authentication**では、APIキーはプレーンテキストでは送信されません。代わりに、キーとサーバーから提供されるnonceから計算されたハッシュが送信されるため、より安全です。
+        - **Digest Authentication**では、APIキーは平文では送信されません。代わりに、キーとサーバーから提供されるノンス値から計算されたハッシュが送信されるため、より安全です。
 
         **Basic Authentication**と比較して、**Digest Authentication**のcurlコードには`--digest`オプションが追加されています。
 

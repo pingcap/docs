@@ -22,4 +22,4 @@ Data Pipeline は、TiDB Cloud インスタンスから TiDB Cloud Lake に完�
 
 > **Note:**
 >
-> TiDB Cloud コンソールの Data Pipeline 機能は現在プライベートプレビュー中で、リクエストに応じて利用できます。この機能をリクエストするには、[TiDB Cloud console](https://tidbcloud.com) の右下にある **?** をクリックし、**Support Tickets** をクリックして [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for `Data Pipeline to TiDB Cloud Lake`" と入力して、**Submit** をクリックします。
+> TiDB Cloud コンソールの Data Pipeline 機能は現在プライベートプレビュー中で、リクエストに応じて利用できます。この機能をリクエストするには、[TiDB Cloud コンソール](https://tidbcloud.com) の右下にある **?** をクリックし、**Support Tickets** をクリックして [ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for `Data Pipeline to TiDB Cloud Lake`" と入力して、**Submit** をクリックします。
