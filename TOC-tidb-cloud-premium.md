@@ -515,7 +515,7 @@
 
 - 階層型ストレージを使用する
   - [階層型ストレージの概要](/tidb-cloud/tiered-storage-overview.md)
-  - [ティアードストレージの設定と管理](/tidb-cloud/tiered-storage-guide.md)
+  - [階層型ストレージの設定と管理](/tidb-cloud/tiered-storage-guide.md)
   - [階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md)
-  - [Tiered Storage の制限事項](/tidb-cloud/tiered-storage-limitations.md)
-  - [Tiered Storage FAQ](/tidb-cloud/tiered-storage-faq.md)
+  - [階層型ストレージの制限事項](/tidb-cloud/tiered-storage-limitations.md)
+  - [階層型ストレージに関する FAQ](/tidb-cloud/tiered-storage-faq.md)

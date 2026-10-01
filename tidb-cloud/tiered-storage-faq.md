@@ -1,9 +1,9 @@
 ---
-title: Tiered Storage FAQ
+title: 階層型ストレージに関する FAQ
 summary: TiDB Cloud Premium と BYOC における階層型ストレージの一般的な質問について、DML、レプリカ、オブジェクトストレージ障害などを含めて説明します。
 ---
 
-# Tiered Storage FAQ
+# 階層型ストレージに関する FAQ
 
 このドキュメントでは、Infrequent Access (IA) ストレージに関する一般的な質問に回答します。内容には、DML の動作、レプリカの扱い、変換の進行状況、キャッシュ設定、オブジェクトストレージ障害などの運用上の影響が含まれます。
 

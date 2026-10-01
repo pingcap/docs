@@ -272,7 +272,7 @@ ADMIN SHOW SLOW TOP ALL 10;
 キャッシュヒット率は、実際のアクセスパターンに依存します。アクセスが集中していれば 95% を超えることもありますが、アクセスが分散している場合は 95% を下回ることがあります。
 
 - **ヒット率の急低下**: 同時に **IA Cache Miss Rate** が上昇しているか確認してください。同時に上昇していれば、収集上の問題ではなく、コールドリードが実際に増加していることを示します。その後、ステートメントサマリーテーブルの `IA_EXEC_COUNT` を使って、どのステートメントがコールドリードを引き起こしたかを特定します。
-- **ヒット率が継続的に低い**: キャッシュがコールドデータによって圧迫されています。IA キャッシュレベルを引き上げるか、IA に設定するデータ量を減らすことを検討してください。[ティアードストレージの設定と管理](/tidb-cloud/tiered-storage-guide.md) を参照してください。
+- **ヒット率が継続的に低い**: キャッシュがコールドデータによって圧迫されています。IA キャッシュレベルを引き上げるか、IA に設定するデータ量を減らすことを検討してください。[階層型ストレージの設定と管理](/tidb-cloud/tiered-storage-guide.md) を参照してください。
 - **テーブルが IA に適しているかの評価**: パーティションを IA に設定した後、少なくとも 1 営業日分は **IA Cache Hit Rate** を観察してください。ヒット率が安定していれば、そのアクセスパターンは IA に適しています。大きな変動や低い平均値は、そのデータへのアクセスが IA に対して分散しすぎていることを意味します。
 
 ## 診断ワークフロー {#diagnostic-workflows}
@@ -299,6 +299,6 @@ ADMIN SHOW SLOW TOP ALL 10;
 ## 参照 {#see-also}
 
 - [階層型ストレージの概要](/tidb-cloud/tiered-storage-overview.md)
-- [ティアードストレージの設定と管理](/tidb-cloud/tiered-storage-guide.md)
-- [Tiered Storage の制限事項](/tidb-cloud/tiered-storage-limitations.md)
-- [Tiered Storage FAQ](/tidb-cloud/tiered-storage-faq.md)
+- [階層型ストレージの設定と管理](/tidb-cloud/tiered-storage-guide.md)
+- [階層型ストレージの制限事項](/tidb-cloud/tiered-storage-limitations.md)
+- [階層型ストレージに関する FAQ](/tidb-cloud/tiered-storage-faq.md)
