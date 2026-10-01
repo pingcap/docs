@@ -81,7 +81,7 @@ TiDB Cloud は増分データとスナップショットを OSS バケットに�
 
 Alibaba Cloud の設定が完了すると、External Stage の設定に必要な値がすべてそろいます。
 
-- **OSS URI**: [ステップ 1](#step-1-create-an-oss-bucket) で取得
-- **Access Key ID** と **Access Key Secret**: [ステップ 2](#step-2-create-a-ram-user-and-accesskey-pair) で取得
+- **OSS URI**: ステップ 1 で取得
+- **Access Key ID** と **Access Key Secret**: ステップ 2 で取得
 
 [TiDB Cloud コンソール](https://tidbcloud.com) で、対象の TiDB Cloud インスタンスの Data Pipeline 設定ページに移動し、**External Stage** 設定にこれらの値を入力して、データパイプラインの設定を完了してください。

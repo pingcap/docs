@@ -36,7 +36,7 @@ summary: エクスポート、changefeed、および TiDB Cloud Lake 統合を�
 
 ### 方法 1: Role ARN を使用する {#method-1-use-a-role-arn}
 
-この方法では、まず TiDB Cloud console の Export 機能が提供する CloudFormation スタックを使用して、Export 用に設定された IAM ロールを作成します。次に、その同じロールの信頼ポリシーと権限を拡張し、changefeed と TiDB Cloud Lake もそのロールを使用して S3 バケットにアクセスできるようにします。
+この方法では、まず TiDB Cloud コンソールの Export 機能が提供する CloudFormation スタックを使用して、Export 用に設定された IAM ロールを作成します。次に、その同じロールの信頼ポリシーと権限を拡張し、changefeed と TiDB Cloud Lake もそのロールを使用して S3 バケットにアクセスできるようにします。
 
 #### 1. Export CloudFormation でロールを作成する {#1-create-the-role-with-export-cloudformation}
 

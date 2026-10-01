@@ -32,8 +32,8 @@ Data Pipeline は、次のシナリオで使用できます。
 | プラン | ステータス |
 | ---- | ------ |
 | {{{ .premium }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
-| {{{ .dedicated }}} | Data Pipeline はまだ TiDB Cloud console では利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
-| {{{ .essential }}} | Data Pipeline はまだ TiDB Cloud console では利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
+| {{{ .dedicated }}} | Data Pipeline はまだ TiDB Cloud コンソールでは利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
+| {{{ .essential }}} | Data Pipeline はまだ TiDB Cloud コンソールでは利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
 </CustomContent>
 
 <CustomContent plan="byoc">
@@ -42,8 +42,8 @@ Data Pipeline は、次のシナリオで使用できます。
 | ---- | ------ |
 | {{{ .premium }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
 | {{{ .byoc }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
-| {{{ .dedicated }}} | Data Pipeline はまだ TiDB Cloud console では利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
-| {{{ .essential }}} | Data Pipeline はまだ TiDB Cloud console では利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
+| {{{ .dedicated }}} | Data Pipeline はまだ TiDB Cloud コンソールでは利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
+| {{{ .essential }}} | Data Pipeline はまだ TiDB Cloud コンソールでは利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
 </CustomContent>
 
 > **Note:**
@@ -66,7 +66,7 @@ Data Pipeline は、次のシナリオで使用できます。
 
 データパイプラインを表示および管理するには、次の手順を実行します。
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、[**My TiDB**](https://tidbcloud.com/tidbs) ページに移動します。
+1. [TiDB Cloud コンソール](https://tidbcloud.com) で、[**My TiDB**](https://tidbcloud.com/tidbs) ページに移動します。
 
     > **Tip:**
     >

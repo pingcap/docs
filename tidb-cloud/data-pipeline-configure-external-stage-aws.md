@@ -143,7 +143,7 @@ CloudFormation を使用できない場合、または組織の要件により�
     ```
 
 6. ポリシー名を入力し（例: `tidb-cloud-lake-access`）、**Create policy** をクリックします。
-7. ロール詳細ページから role ARN をコピーします。これは TiDB Cloud コンソールで External Stage を設定する際に必要です。例: `arn:aws:iam::123456789012:role/tidb-cloud-lake-role`
+7. ロール詳細ページから ロール ARN をコピーします。これは TiDB Cloud コンソールで External Stage を設定する際に必要です。例: `arn:aws:iam::123456789012:role/tidb-cloud-lake-role`
 
 #### 2.3 （任意）SQS でイベント駆動の取り込みを有効にする {#23-optional-enable-event-driven-ingestion-with-sqs}
 
@@ -286,7 +286,7 @@ S3 イベント通知を設定して、バケットからのオブジェクト�
 
 AWS の設定が完了すると、External Stage の設定に必要な値がすべてそろいます。
 
-- **S3 URI**: [ステップ 1. S3 バケットを作成する](#step-1-create-an-s3-bucket) で取得します。
+- **S3 URI**: **ステップ 1. S3 バケットを作成する** で取得します。
 - **Bucket access**: Role ARN（オプション 1 と 2）、または Access Key ID と Secret Access Key（オプション 3）。
 - **SQS queue URL**（任意）。
 

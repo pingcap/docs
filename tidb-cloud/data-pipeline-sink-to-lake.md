@@ -9,7 +9,7 @@ TiDB Cloud では、サードパーティの ETL ツールを使わずに、Data
 
 > **Note:**
 >
-> - TiDB Cloud Lake への Data Pipeline は現在、<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 向けに**プライベートプレビュー**として提供されており、リクエストに応じてのみ利用できます。この機能をリクエストするには、[TiDB Cloud コンソール](https://tidbcloud.com)の右下にある **?** をクリックし、**Support Tickets** をクリックして [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for `Data Pipeline to TiDB Cloud Lake`" と入力して、**Submit** をクリックします。
+> - TiDB Cloud Lake への Data Pipeline は現在、<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> 向けに**プライベートプレビュー**として提供されており、リクエストに応じてのみ利用できます。この機能をリクエストするには、[TiDB Cloud コンソール](https://tidbcloud.com)の右下にある **?** をクリックし、**Support Tickets** をクリックして [ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for `Data Pipeline to TiDB Cloud Lake`" と入力して、**Submit** をクリックします。
 > - Data Pipeline 機能は TiCDC をベースに構築されているため、[TiCDC と同じ制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
 
 ## 制限事項 {#restrictions}

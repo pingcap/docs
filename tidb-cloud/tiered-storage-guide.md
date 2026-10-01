@@ -309,7 +309,7 @@ Step 5: Repeat Steps 2-4 until all target partitions are covered
 - 変更のたびに、再度変更する前に少なくとも 1 営業日分の期間、ヒット率を観察してください。
 - ヒット率が一貫して高く、コストを下げたい場合は、キャッシュレベルを **Economy** に下げてください。
 
-このチューニングループで使用するパネルと ステートメントレベルのメトリクスについては、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
+このチューニングループで使用するパネルとステートメントレベルのメトリクスについては、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
 
 ### セグメントサイズを選択する（BYOC のみ） {#choose-the-segment-size-byoc-only}
 

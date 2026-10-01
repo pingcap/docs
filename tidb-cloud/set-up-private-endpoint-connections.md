@@ -80,12 +80,12 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
     aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --service-name ${your_endpoint_service_name} --vpc-endpoint-type Interface --subnet-ids ${your_application_subnet_ids}
     ```
 
-次に、AWS CLI または[AWS マネジメントコンソール](https://aws.amazon.com/console/)を使用して AWS インターフェイスエンドポイントを作成できます。
+次に、AWS CLI または[AWS マネジメントコンソール](https://aws.amazon.com/console/)を使用して AWS インターフェースエンドポイントを作成できます。
 
 <SimpleTab>
 <div label="Use AWS CLI">
 
-AWS CLI を使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+AWS CLI を使用して VPC インターフェースエンドポイントを作成するには、次の手順を実行します。
 
 1. 生成されたコマンドをコピーしてターミナルで実行します。
 2. 作成した VPC エンドポイント ID を記録します。
@@ -99,7 +99,7 @@ AWS CLI を使用して VPC インターフェイスエンドポイントを作�
 </div>
 <div label="Use AWS Console">
 
-AWS マネジメントコンソールを使用して VPC インターフェイスエンドポイントを作成するには、次の手順を実行します。
+AWS マネジメントコンソールを使用して VPC インターフェースエンドポイントを作成するには、次の手順を実行します。
 
 1. [AWS マネジメントコンソール](https://aws.amazon.com/console/)にサインインし、 [https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/)で Amazon VPC コンソールを開きます。
 
