@@ -332,6 +332,6 @@ TiDB Cloud Lake では、S3 バケットからデータをロード (load) す�
 3. **Create** をクリックします。
 4. 作成後、統合はデフォルトで **Stopped** です。統合のアクションボタンをクリックし、**Start** を選択してデータロードを開始します。
 
-## See also {#see-also}
+## 関連情報 {#see-also}
 
 - DDL、DML、およびカラム型のサポートの詳細については、[TiDB Cloud Lake 向け Data Pipeline SQL 互換性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md) を参照してください。
