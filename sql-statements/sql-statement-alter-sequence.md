@@ -5,7 +5,7 @@ summary: TiDB データベースの ALTER SEQUENCE の使用法の概要。
 
 # ALTER SEQUENCE {#alter-sequence}
 
-`ALTER SEQUENCE`文は、TiDB内のシーケンスオブジェクトを変更します。シーケンスは、 `Table`および`View`のオブジェクトと同等のデータベースオブジェクトです。シーケンスは、カスタマイズされた方法でシリアル化されたIDを生成するために使用されます。
+`ALTER SEQUENCE`文は、TiDB内のシーケンスオブジェクトを変更します。シーケンスは、 `Table`および`View`のオブジェクトと同等のデータベースオブジェクトです。シーケンスは、カスタマイズされた方法で連番の ID を生成するために使用されます。
 
 ## 概要 {#synopsis}
 
