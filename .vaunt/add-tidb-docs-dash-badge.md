@@ -56,15 +56,15 @@ You can use additional Vaunt features to showcase your contributions to other op
     </p>
     ```
 
-- Integrate your community boards
+- Add a community board badge
 
     The community boards provide community statistics, repository insights, and a view into repository achievements.
 
-    [![VauntCommunity](https://api.vaunt.dev/v1/github/entities/pingcap/badges/community)](https://community.vaunt.dev/board/pingcap)
+    [![Vaunt community board documentation](https://api.vaunt.dev/v1/github/entities/pingcap/badges/community)](https://docs.vaunt.dev/developers/vaunt_open_source_community/)
 
-    - Explore [your own community boards](https://community.vaunt.dev/).
-    - Add the following code to your README file and replace `{{github_username}}` with your username:
+    - Read the [Vaunt community board documentation](https://docs.vaunt.dev/developers/vaunt_open_source_community/).
+    - Add the following code to your README file and replace `{{github_username}}` with your username. The documentation link is a fallback destination. If your community board is available, replace it with your board URL.
 
     ```Markdown
-    [![VauntCommunity](https://api.vaunt.dev/v1/github/entities/{{github_username}}/badges/community)](https://community.vaunt.dev/board/{{github_username}})
+    [![Vaunt community board documentation](https://api.vaunt.dev/v1/github/entities/{{github_username}}/badges/community)](https://docs.vaunt.dev/developers/vaunt_open_source_community/)
     ```
