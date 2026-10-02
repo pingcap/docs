@@ -26,7 +26,7 @@ TiDB バージョン: 8.1.2
 
 - TiKV
 
-    - 空のテーブルと小さなリージョンのシナリオでのリージョン結合の速度を向上 [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
+    - 空のテーブルと小さなリージョンのシナリオでのリージョンマージの速度を向上 [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が一貫して動作することを保証します。 [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
     - RocksDB 圧縮のトリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - `import.num-threads`設定項目を動的に変更することをサポート[#17807](https://github.com/tikv/tikv/issues/17807) @[RidRisR](https://github.com/RidRisR)
@@ -59,8 +59,8 @@ TiDB バージョン: 8.1.2
 
     - v6.5からv7.5以降にアップグレードされたクラスターで、既存のTTLタスクが予期せず頻繁に実行される問題を修正[#56539](https://github.com/pingcap/tidb/issues/56539) @[lcwangchao](https://github.com/lcwangchao)
     - 特定の状況下でプランキャッシュを使用する際に、メタデータロックの不適切な使用によって異常なデータが書き込まれる可能性がある問題を修正しました[#53634](https://github.com/pingcap/tidb/issues/53634) @[zimulala](https://github.com/zimulala)
-    - グローバルソートが有効でリージョンサイズが96 MiB を超えると`IMPORT INTO`実行が停止する問題を修正 [#55374](https://github.com/pingcap/tidb/issues/55374) @[lance6716](https://github.com/lance6716)
-    - `DUMP STATS`統計を JSON に変換するときにヒストグラムの上限と下限が壊れる問題を修正 [#56083](https://github.com/pingcap/tidb/issues/56083) @[hawkingrei](https://github.com/hawkingrei)
+    - グローバルソートが有効でリージョンサイズが96 MiB を超えると`IMPORT INTO`の実行が停止する問題を修正 [#55374](https://github.com/pingcap/tidb/issues/55374) @[lance6716](https://github.com/lance6716)
+    - `DUMP STATS`が統計を JSON に変換するときにヒストグラムの上限と下限が壊れる問題を修正 [#56083](https://github.com/pingcap/tidb/issues/56083) @[hawkingrei](https://github.com/hawkingrei)
     - エイリアスを持つマルチテーブル`DELETE`文に対して実行プランバインディングを作成できない問題を修正しました。 [#56726](https://github.com/pingcap/tidb/issues/56726) @[hawkingrei](https://github.com/hawkingrei)
     - TTLテーブルのメモリリークの問題を修正 [#56934](https://github.com/pingcap/tidb/issues/56934) @[lcwangchao](https://github.com/lcwangchao)
     - パーティション式が`EXTRACT(YEAR FROM col)` の場合にパーティションプルーニングが機能しない問題を修正しました [#54210](https://github.com/pingcap/tidb/issues/54210) @[mjonss](https://github.com/mjonss)
@@ -81,7 +81,7 @@ TiDB バージョン: 8.1.2
     - TTLタスクをキャンセルした際に、対応するSQLが強制終了されない問題を修正[#56511](https://github.com/pingcap/tidb/issues/56511) @[lcwangchao](https://github.com/lcwangchao)
     - `IMPORT INTO`文を使用して一時テーブルをインポートするときに TiDB がパニックになる問題を修正しました [#55970](https://github.com/pingcap/tidb/issues/55970) @[D3Hunter](https://github.com/D3Hunter)
     - クエリ条件`column IS NULL` で一意インデックスにアクセスするときに、オプティマイザが行数を誤って 1 と推定する問題を修正しました。 [#56116](https://github.com/pingcap/tidb/issues/56116) @[hawkingrei](https://github.com/hawkingrei)
-    - 情報スキーマキャッシュミスにより、古い読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
+    - 情報スキーマキャッシュミスにより、ステイル読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
     - `UPDATE`文が`ENUM`型の値を誤って更新する問題を修正しました [#56832](https://github.com/pingcap/tidb/issues/56832) @[xhebox](https://github.com/xhebox)
     - 外部キーを含むテーブル構造をインポートするときに Plan Replayer がエラーを報告する可能性がある問題を修正しました。 [#56456](https://github.com/pingcap/tidb/issues/56456) @[hawkingrei](https://github.com/hawkingrei)
     - `tidb_ttl_job_enable`変数が無効になった後、TTL タスクがキャンセルされない問題を修正[#57404](https://github.com/pingcap/tidb/issues/57404) @[YangKeao](https://github.com/YangKeao)
@@ -95,7 +95,7 @@ TiDB バージョン: 8.1.2
 
 - TiKV
 
-    - 構成`resolved-ts.advance-ts-interval`が有効にならないため、TiKV が再起動すると、TiCDC のレプリケーションレイテンシーと Point-in-time Recovery (PITR) が大幅に増加する問題を修正しました。 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
+    - 構成`resolved-ts.advance-ts-interval`が有効にならないため、TiKV が再起動すると、TiCDC と Point-in-time Recovery (PITR) のレプリケーションレイテンシーが大幅に増加する問題を修正しました。 [#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
     - リソース制御をトリガーするときに一部のタスクで高いテールレイテンシーが発生する問題を修正しました [#17589](https://github.com/tikv/tikv/issues/17589) @[glorv](https://github.com/glorv)
     - リージョンをマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[#17840](https://github.com/tikv/tikv/issues/17840) @[glorv](https://github.com/glorv)
     - ディスクがスタックしているときに TiKV が PD にハートビートを報告できない問題を修正しました [#17939](https://github.com/tikv/tikv/issues/17939) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -130,7 +130,7 @@ TiDB バージョン: 8.1.2
     - テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - TiFlashでサポートされていない一部の JSON関数がTiFlash にプッシュダウンされる問題を修正しました [#9444](https://github.com/pingcap/tiflash/issues/9444) @[windtalker](https://github.com/windtalker)
     - 特定のケースで関数`CAST AS DECIMAL`の結果の符号が正しくない問題を修正[#9301](https://github.com/pingcap/tiflash/issues/9301) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。 [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
+    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正しました。 [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
     - `SUBSTRING()`関数が特定の整数型に対して`pos`と`len`引数をサポートせず、クエリエラーが発生する問題を修正しました [#9473](https://github.com/pingcap/tiflash/issues/9473) @[gengliqi](https://github.com/gengliqi)
     - `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
     - `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[#9465](https://github.com/pingcap/tiflash/issues/9465) @[guo-shaoge](https://github.com/guo-shaoge)
@@ -143,14 +143,14 @@ TiDB バージョン: 8.1.2
         - ログに暗号化された情報が出力される問題を修正 [#57585](https://github.com/pingcap/tidb/issues/57585) @[kennytm](https://github.com/kennytm)
         - AWS EBS に基づくスナップショットバックアップが準備フェーズで失敗し、バックアップが停止する可能性がある問題を修正しました。 [#52049](https://github.com/pingcap/tidb/issues/52049) @[YuJuncen](https://github.com/YuJuncen)
         - バックアップと復元のチェックポイントパスが一部の外部ストレージと互換性がない問題を修正[#55265](https://github.com/pingcap/tidb/issues/55265) @[Leavrth](https://github.com/Leavrth)
-        - `k8s.io/api`ライブラリバージョンにアップグレードして潜在的なセキュリティ脆弱性を修正します [#57790](https://github.com/pingcap/tidb/issues/57790) @[BornChanger](https://github.com/BornChanger)
+        - `k8s.io/api`ライブラリのバージョンをアップグレードして潜在的なセキュリティ脆弱性を修正します [#57790](https://github.com/pingcap/tidb/issues/57790) @[BornChanger](https://github.com/BornChanger)
         - クラスター内に多数のテーブルがあるが、実際のデータサイズが小さい場合に PITR タスクが`Information schema is out of date`エラーを返す可能性がある問題を修正しました[#57743](https://github.com/pingcap/tidb/issues/57743) @[Tristan1900](https://github.com/Tristan1900)
 
     - TiCDC
 
         - PullerモジュールのResolved TSレイテンシーモニタリングで誤った値が表示される問題を修正しました [#11561](https://github.com/pingcap/tiflow/issues/11561) @[wlwilliamx](https://github.com/wlwilliamx)
         - `enable-table-across-nodes`を有効にすると、リージョン分割中にテーブルの一部のスパン レプリケーションタスクが失われる可能性がある問題を修正しました。 [#11675](https://github.com/pingcap/tiflow/issues/11675) @[wk989898](https://github.com/wk989898)
-        - やり直しモジュールがエラーを正しく報告できない問題を修正しました [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - REDOモジュールがエラーを正しく報告できない問題を修正しました [#11744](https://github.com/pingcap/tiflow/issues/11744) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiDB DDL 所有者の変更中に DDL タスクのスキーマバージョンが非増分になったときに、TiCDC が誤って DDL タスクを破棄する問題を修正[#11714](https://github.com/pingcap/tiflow/issues/11714) @[wlwilliamx](https://github.com/wlwilliamx)
         - チェンジフィードチェックポイントの**barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[#11553](https://github.com/pingcap/tiflow/issues/11553) @[3AceShowHand](https://github.com/3AceShowHand)
 
