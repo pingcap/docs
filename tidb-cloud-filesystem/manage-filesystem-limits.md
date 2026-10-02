@@ -1,5 +1,5 @@
 ---
-title: Manage TiDB Cloud Filesystem Limits
+title: Manage TiDB Cloud Filesystem Usage Limits
 summary: Learn which TiDB Cloud Filesystem capacity limits apply without a credit card on your organization and what happens when a file system reaches a limit.
 ---
 
