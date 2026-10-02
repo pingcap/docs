@@ -5,7 +5,7 @@ summary: クローン、hydrate、リンクされた Git worktree の管理を�
 
 # TiDB Cloud Filesystem Git CLI コマンドリファレンス
 
-`ti fs-git` は、マウントされた TiDB Cloud Filesystem パス上での Git ワークスペースのセットアップを高速化します。status、edit、add、commit、fetch、push には、引き続き通常の `git` コマンドを使用してください。
+`ti fs-git` は、マウントされた TiDB Cloud Filesystem パス上での Git ワークスペースのセットアップを高速化します。ステータスの確認、編集、追加、コミット、フェッチ、プッシュには、引き続き通常の `git` コマンドを使用してください。
 
 ## コマンド {#commands}
 
