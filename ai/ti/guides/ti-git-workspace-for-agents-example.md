@@ -15,7 +15,7 @@ summary: 大規模な Git リポジトリのダウンロードが完了する前
 
 `ti fs-git clone-git-workspace --blobless --hydrate background` は Git ワークスペースを登録し、すべてのクリーンブロブのダウンロードが完了する前にそのファイルツリーを公開します。`ti` が残りのクリーンなファイル内容をダウンロードしてローカル Git オブジェクトデータベースにデータを格納している間に、エージェントは作業を開始できます。hydration と呼ばれるこのバックグラウンドプロセスにより、繰り返し発生するオンデマンドフェッチが減ります。hydration が完了する前の読み取りでは、不足しているデータを取得するために Git の lazy fetch が使用されます。
 
-置き換え後のエージェントランタイムは、登録済みのワークスペースにアクセスできます。元のマシンを破棄する前に、以下のクリーンアップガイダンスで説明されているように、ローカル Git 履歴を保持してください。ファイルの編集には通常のツールを使用し、commit、fetch、push には Git コマンドを使用します。
+置き換え後のエージェントランタイムは、登録済みのワークスペースにアクセスできます。元のマシンを破棄する前に、以下のクリーンアップガイダンスで説明されているように、ローカル Git 履歴を保持してください。ファイルの編集には通常のツールを使用し、コミット、フェッチ、プッシュには Git コマンドを使用します。
 
 ## 前提条件 {#prerequisites}
 
@@ -73,7 +73,7 @@ ti fs-git add-git-worktree \
 git -C /path/to/workspace/tidb-agent-task status
 ```
 
-worktree を削除する前に、必要な変更を commit してください。マシンを破棄する前に、push またはローカル Git メタデータの検証済みバックアップを使用して、[Git 履歴を保持して検証](/tidb-cloud-filesystem/manage-git-workspaces.md#preserve-work-before-leaving-a-machine)してください。
+worktree を削除する前に、必要な変更をコミットしてください。マシンを破棄する前に、プッシュまたはローカル Git メタデータの検証済みバックアップを使用して、[Git 履歴を保持して検証](/tidb-cloud-filesystem/manage-git-workspaces.md#preserve-work-before-leaving-a-machine)してください。
 
 ## クリーンアップ {#cleanup}
 
@@ -90,7 +90,7 @@ ti fs unmount-file-system --mount-path /path/to/workspace
 
 - リポジトリ認証情報は `ti` ではなく Git によって管理されます。
 - `coding-agent` マウントプロファイルは、パフォーマンスのために Git メタデータ、依存関係ディレクトリ、キャッシュ、ビルド出力、およびその他の生成ファイルをローカルマシン上に保持します。
-- `coding-agent` プロファイルによってローカルに保持されるファイルは、一時的なマシンとともに消えます。ローカル commit だけでは、マシン間で Git 履歴は保持されません。必要な commit は push して検証し、再構築できないその他のローカルファイルを保持するには、明示的な `--path` 値を指定して [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) を使用してください。
+- `coding-agent` プロファイルによってローカルに保持されるファイルは、一時的なマシンとともに消えます。ローカルコミットだけでは、マシン間で Git 履歴は保持されません。必要なコミットはプッシュして検証し、再構築できないその他のローカルファイルを保持するには、明示的な `--path` 値を指定して [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) を使用してください。
 
 ## 次のステップ {#what-s-next}
 
