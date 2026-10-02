@@ -5,7 +5,7 @@ summary: TiDBバージョン4.0.0-betaとTiDB Ansibleバージョン4.0.0-beta�
 
 # TiDB 4.0 ベータ版リリースノート {#tidb-4-0-beta-release-notes}
 
-発売日：2020年1月17日
+リリース日：2020年1月17日
 
 TiDB バージョン: 4.0.0-beta
 
