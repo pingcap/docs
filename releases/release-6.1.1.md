@@ -5,7 +5,7 @@ summary: "TiDB 6.1.1は2022年9月1日にリリースされました。変更点
 
 # TiDB 6.1.1 Release Notes {#tidb-6-1-1-release-notes}
 
-発売日：2022年9月1日
+リリース日：2022年9月1日
 
 TiDB バージョン: 6.1.1
 

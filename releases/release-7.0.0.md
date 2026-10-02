@@ -5,7 +5,7 @@ summary: TiDB 7.0.0 の新機能、互換性の変更点、改善点、および
 
 # TiDB 7.0.0 リリースノート {#tidb-7-0-0-release-notes}
 
-発売日：2023年3月30日
+リリース日：2023年3月30日
 
 TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone-releases)
 

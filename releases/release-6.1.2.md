@@ -5,7 +5,7 @@ summary: TiDB 6.1.2は2022年10月24日にリリースされました。この�
 
 # TiDB 6.1.2 Release Notes {#tidb-6-1-2-release-notes}
 
-発売日：2022年10月24日
+リリース日：2022年10月24日
 
 TiDB バージョン: 6.1.2
 

@@ -5,7 +5,7 @@ summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGION
 
 # TiDB 2.1.17 リリースノート {#tidb-2-1-17-release-notes}
 
-発売日：2019年9月11日
+リリース日：2019年9月11日
 
 TiDB バージョン: 2.1.17
 

@@ -5,7 +5,7 @@ summary: TiDB v5.0.0-rcはTiDB v5.0の前身バージョンです。クラスタ
 
 # TiDB 5.0 RC リリースノート {#tidb-5-0-rc-release-notes}
 
-発売日：2021年1月12日
+リリース日：2021年1月12日
 
 TiDB バージョン: 5.0.0-rc
 

@@ -7,7 +7,7 @@ summary: TiDB 8.5.0 の新機能、互換性の変更点、改善点、および
 
 <EmailSubscriptionWrapper />
 
-発売日：2024年12月19日
+リリース日：2024年12月19日
 
 TiDB バージョン: 8.5.0
 
