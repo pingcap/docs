@@ -22,10 +22,12 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`ALTER TABLE ... MODIFY COLUMN`](/sql-statements/sql-statement-modify-column.md)  | Modifies a column definition.                                                                          |
 | [`ALTER TABLE ... RENAME INDEX`](/sql-statements/sql-statement-rename-index.md)    | Renames an index.                                                                                      |
 | [`ALTER TABLE`](/sql-statements/sql-statement-alter-table.md)                      | Changes a table definition.                                                                            |
+| [`ALTER TABLE ... ADD/DROP/ENABLE/DISABLE/MODIFY MASKING POLICY`](/sql-statements/sql-statement-alter-table.md) | Manages column-level masking policies on a table. |
 | [`CREATE DATABASE`](/sql-statements/sql-statement-create-database.md)              | Creates a new database.                                                                                |
 | [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md)                    | Creates a new index on a table.                                                                        |
 | [`CREATE SEQUENCE`](/sql-statements/sql-statement-create-sequence.md)              | Creates a new sequence object.                                                                         |
 | [`CREATE TABLE LIKE`](/sql-statements/sql-statement-create-table-like.md)          | Copies the definition of an existing table, without copying any data.                                  |
+| [`CREATE MASKING POLICY`](/sql-statements/sql-statement-create-masking-policy.md) | Creates a data masking policy for columns in a table. |
 | [`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)                    | Creates a new table.                                                                                   |
 | [`CREATE VIEW`](/sql-statements/sql-statement-create-view.md)                      | Creates a new view.                                                                                    |
 | [`DROP DATABASE`](/sql-statements/sql-statement-drop-database.md)                  | Drops an existing database.                                                                            |
@@ -41,6 +43,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)                | Shows a list of databases that the current user has privileges to.                                     |
 | [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)            | Shows columns of a table.                                                                              |
 | [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md)                    | Shows indexes of a table.                                                                              |
+| [`SHOW MASKING POLICIES`](/sql-statements/sql-statement-show-masking-policies.md) | Shows the masking policies defined on a table. |
 | [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)                    | An alias to `SHOW DATABASES`, which shows a list of databases that the current user has privileges to. |
 | [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) | Shows the next row ID for a table.                                                                     |
 | [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)        | Shows the Region information of a table in TiDB.                                                       |
