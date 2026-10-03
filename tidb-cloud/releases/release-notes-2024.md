@@ -72,8 +72,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - [Datadog integration (beta)](/tidb-cloud/monitor-datadog-integration.md) adds support for a new region: `AP1` (Japan).
 
-- Support a new AWS region for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters: `Mumbai (ap-south-1)`.
-
 - Remove support for the AWS `São Paulo (sa-east-1)` region for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## October 29, 2024
