@@ -19,7 +19,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 - Transaction Sink: ダウンストリーム MySQL または TiDB の書き込みレイテンシー。
 - MQ Sink: ダウンストリーム MQ システムの書き込みレイテンシー。
 - Cloud Storage Sink: ダウンストリーム クラウドストレージの書き込み速度。
-- Redo: やり直し機能が有効な場合の書き込みレイテンシー。
+- Redo: Redo 機能が有効な場合の書き込みレイテンシー。
 
 ## Server panel {#server-panel}
 
@@ -95,7 +95,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 
 ## Redo panel {#redo-panel}
 
-**Redo**パネルには、やり直しログ機能が有効な場合にのみデータが表示されます。
+**Redo**パネルには、Redo Log 機能が有効な場合にのみデータが表示されます。
 
 ![TiCDC Summary Dashboard - Transaction Sink metrics](/media/ticdc/ticdc-summary-monitor-redo.png)
 
