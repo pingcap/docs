@@ -93,9 +93,9 @@ TiDBバージョン：8.5.5
 
 ### SQL {#sql}
 
-- 分散ジョブ`ADD INDEX`の同時実行性とスループットを動的に変更するサポート [#64947](https://github.com/pingcap/tidb/issues/64947) @[joechenrh](https://github.com/joechenrh)
+- 分散`ADD INDEX`ジョブの同時実行性とスループットを動的に変更するサポート [#64947](https://github.com/pingcap/tidb/issues/64947) @[joechenrh](https://github.com/joechenrh)
 
-    TiDB バージョン v8.5.5 より前のバージョンでは、分散実行フレームワーク (DXF) [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、実行中の`THREAD`ジョブの`BATCH_SIZE` 、 `MAX_WRITE_SPEED` 、または`ADD INDEX`パラメータの変更はサポートされていません。これらのパラメータを変更するには、実行中の`ADD INDEX`ジョブをキャンセルし、パラメータを再構成してからジョブを再送信する必要がありますが、これは非効率的です。
+    TiDB バージョン v8.5.5 より前のバージョンでは、分散実行フレームワーク (DXF) [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、実行中の`ADD INDEX`ジョブの`THREAD` 、 `BATCH_SIZE` 、または`MAX_WRITE_SPEED`パラメータの変更はサポートされていません。これらのパラメータを変更するには、実行中の`ADD INDEX`ジョブをキャンセルし、パラメータを再構成してからジョブを再送信する必要がありますが、これは非効率的です。
 
     バージョン8.5.5以降では、 `ADMIN ALTER DDL JOBS`文を使用して、実行中の分散`ADD INDEX`ジョブのこれらのパラメータを、ジョブを中断することなく、現在のワークロードとパフォーマンス要件に基づいて動的に調整できます。
 
@@ -127,7 +127,7 @@ TiDBバージョン：8.5.5
 
     TiKVとTiFlashの両方がクラスタにデプロイされている場合、データベースの診断やパフォーマンス最適化の際に、ストレージエンジンごとにSQL文をフィルタリングする必要が生じることがよくあります。たとえば、 TiFlashに高負荷がかかっている場合、潜在的な原因を特定するために、 TiFlash上で実行されているSQL文を識別する必要があるかもしれません。このニーズに応えるため、TiDBはv8.5.5以降、ステートメントサマリーテーブルとスロークエリログにストレージエンジン識別子フィールドを追加しました。
 
-    [ステートメントサマリーテーブル](/statement-summary-tables.md)表の新しいフィールド:
+    [ステートメントサマリーテーブル](/statement-summary-tables.md)の新しいフィールド:
 
     - `STORAGE_KV` : `1`は、SQL文が TiKV にアクセスすることを示します。
     - `STORAGE_MPP` : `1`は、SQL文がTiFlashにアクセスすることを示します。
@@ -160,7 +160,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 ### 動作の変更 {#behavior-changes}
 
 - バージョン8.5.5以降、TiDBはデータ復元時に対象テーブルを自動的に`restore`モードに設定します。 `restore`モードのテーブルでは、ユーザーによる読み取りまたは書き込み操作が禁止されます。復元が完了すると、TiDBはこれらのテーブルのモードを自動的に`normal`に戻し、ユーザーが通常どおりテーブルを読み書きできるようにします。この動作により、復元プロセス中のタスクの安定性とデータの一貫性が確保されます。
-- バージョン8.5.5以降、 `--load-stats`パラメータが`false`に設定されている場合、 BRは復元されたテーブルの統計情報を`mysql.stats_meta`テーブルに書き込まなくなりました。関連する統計情報を更新するには、復元後に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)手動で実行してください。
+- バージョン8.5.5以降、 `--load-stats`パラメータが`false`に設定されている場合、 BRは復元されたテーブルの統計情報を`mysql.stats_meta`テーブルに書き込まなくなりました。関連する統計情報を更新するには、復元後に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を手動で実行してください。
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
@@ -181,8 +181,8 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 | 設定ファイルまたはコンポーネント | 設定パラメータ                                                                                                                                      | 変更の種類  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB                     | [`performance.enable-async-batch-get`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#enable-async-batch-get-new-in-v855)                | 新しく追加された | TiDB がバッチ Get オペレーターを実行する際に非同期モードを使用するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| TiKV                     | [`rocksdb.(defaultcf|writecf|lockcf|raftcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)             | 変更     | v8.5.5 以降では、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`に設定されている場合)、この設定項目は、その値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合、この設定項目は`storage.flow-control.l0-files-threshold`によって直接上書きされます。                                                                     |
-| TiKV                     | [`rocksdb.(defaultcf|writecf|lockcf|raftcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1) | 変更     | v8.5.5 以降では、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`に設定されている場合)、この設定項目は、その値が`storage.flow-control.soft-pending-compaction-bytes-limit`より大きい場合にのみ[`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合、この設定項目は`storage.flow-control.soft-pending-compaction-bytes-limit`によって直接上書きされます。 |
+| TiKV                     | [<code>rocksdb.\(defaultcf\|writecf\|lockcf\|raftcf\).level0-slowdown-writes-trigger</code>](/tikv-configuration-file.md#level0-slowdown-writes-trigger)             | 変更     | v8.5.5 以降では、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`に設定されている場合)、この設定項目は、その値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合、この設定項目は`storage.flow-control.l0-files-threshold`によって直接上書きされます。                                                                     |
+| TiKV                     | [<code>rocksdb.\(defaultcf\|writecf\|lockcf\|raftcf\).soft-pending-compaction-bytes-limit</code>](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1) | 変更     | v8.5.5 以降では、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`に設定されている場合)、この設定項目は、その値が`storage.flow-control.soft-pending-compaction-bytes-limit`より大きい場合にのみ[`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合、この設定項目は`storage.flow-control.soft-pending-compaction-bytes-limit`によって直接上書きされます。 |
 | TiKV                     | [`readpool.cpu-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#cpu-threshold-new-in-v855)                                     | 新しく追加された | 統合リードプールのCPU使用率のしきい値を指定します。デフォルト値は`0.0`で、これは統合リードプールのCPU使用率に制限がないことを意味します。スレッドプールのサイズは、ビジースレッドスケーリングアルゴリズムによってのみ決定され、現在のタスクを処理するスレッド数に基づいてサイズが動的に調整されます。                                                                                                                                                                                                                                                                                                                                                                         |
 | TiKV                     | [`server.graceful-shutdown-timeout`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#graceful-shutdown-timeout-new-in-v855)               | 新しく追加された | TiKV の正常なシャットダウンのタイムアウト時間を制御します。デフォルト値は`20s`です。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | TiKV                     | [`server.inspect-network-interval`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#inspect-network-interval-new-in-v855)                 | 新しく追加された | TiKV HealthChecker が PD や他の TiKV ノードに対してネットワーク検出をアクティブに実行する間隔を制御します。デフォルト値は`100ms`です。                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -198,7 +198,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 
 ### その他の変更点 {#other-changes}
 
-- TiDBのパフォーマンスを向上させるため、TiDBのGoコンパイラバージョンをgo1.23.6からgo1.25.5にアップグレードしてください。TiDB開発者の方は、スムーズなコンパイルを保証するために、Goコンパイラバージョンをアップグレードすることをお勧めします。
+- TiDBのパフォーマンスを向上させるため、TiDBのGoコンパイラバージョンをgo1.23.6からgo1.25.5にアップグレードしました。TiDB開発者の方は、スムーズなコンパイルを保証するために、Goコンパイラバージョンをアップグレードすることをお勧めします。
 
 - BR v8.5.5を使用して以前のTiDBバージョン（v8.5.4やv8.1.2など）でPITRリカバリを実行すると、ログリカバリ段階で失敗し、エラーが返される場合があります。
 
@@ -229,7 +229,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     - PDメモリ使用量を削減し、監視システムへの負荷を軽減するために、カーディナリティの高いメトリクスを最適化します [#9357](https://github.com/tikv/pd/issues/9357) @[rleungx](https://github.com/rleungx)
     - タイムスタンプの前進とリーダー選出のロジックを最適化 [#9981](https://github.com/tikv/pd/issues/9981) @[bufferflies](https://github.com/bufferflies)
     - ストレージエンジン (TiKV またはTiFlash) による TiKV ストア制限のバッチ構成をサポート [#9970](https://github.com/tikv/pd/issues/9970) @[bufferflies](https://github.com/bufferflies)
-    - `store`メトリックに`pd_cluster_status`ラベルを追加します [#9855](https://github.com/tikv/pd/issues/9855) @[SerjKol80](https://github.com/SerjKol80)
+    - `pd_cluster_status`メトリックに`store`ラベルを追加します [#9855](https://github.com/tikv/pd/issues/9855) @[SerjKol80](https://github.com/SerjKol80)
 
 - ツール
 
@@ -244,23 +244,23 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     - TiDBが起動時に初期化バインディングを実行するために`tidb_mem_quota_binding_cache`変数の最新値を読み取れない問題を修正しました [#65381](https://github.com/pingcap/tidb/issues/65381) @[qw4990](https://github.com/qw4990)
     - `extractBestCNFItemRanges`で候補アイテムが誤ってスキップされ、クエリ範囲の計算が不正確になる問題を修正しました [#62547](https://github.com/pingcap/tidb/issues/62547) @[hawkingrei](https://github.com/hawkingrei)
     - `plan replayer`がバインディングをロードできない問題を修正 [#64811](https://github.com/pingcap/tidb/issues/64811) @[hawkingrei](https://github.com/hawkingrei)
-    - `PointGet`メモリが十分な場合でもチャンクを再利用できず、不要なメモリ割り当てが発生する問題を修正しました [#63920](https://github.com/pingcap/tidb/issues/63920) @[hawkingrei](https://github.com/hawkingrei)
+    - `PointGet`が、メモリが十分な場合でもチャンクを再利用できず、不要なメモリ割り当てが発生する問題を修正しました [#63920](https://github.com/pingcap/tidb/issues/63920) @[hawkingrei](https://github.com/hawkingrei)
     - `LogicalProjection.DeriveStats`がメモリを過剰に割り当てる問題を修正 [#63810](https://github.com/pingcap/tidb/issues/63810) @[hawkingrei](https://github.com/hawkingrei)
     - `plan replayer`がクエリのパニック時にダンプに失敗する問題を修正 [#64835](https://github.com/pingcap/tidb/issues/64835) @[hawkingrei](https://github.com/hawkingrei)
     - TTLテーブルの`SHOW CREATE TABLE`出力における属性の順序が特定のシナリオで誤って表示される問題を修正しました [#64876](https://github.com/pingcap/tidb/issues/64876) @[YangKeao](https://github.com/YangKeao)
     - TTLジョブの実行サマリー情報が、ジョブのタイムアウト時に空になる問題を修正 [#61509](https://github.com/pingcap/tidb/issues/61509) @[YangKeao](https://github.com/YangKeao)
     - プランキャッシュが有効になっている場合に、相関サブクエリが予期しないフルテーブルスキャンを引き起こす可能性がある問題を修正 [#64645](https://github.com/pingcap/tidb/issues/64645) @[winoros](https://github.com/winoros)
     - システムテーブルがテーブルヘルスモニタリング結果の誤りを引き起こす問題を修正[#57176](https://github.com/pingcap/tidb/issues/57176) 、 [#64080](https://github.com/pingcap/tidb/issues/64080) @[0xPoe](https://github.com/0xPoe)
-    - 自動統計更新を無効にした後、 `mysql.tidb_ddl_notifier`テーブルをクリーンアップできない問題を修正します ( `tidb_enable_auto_analyze = OFF` ) [#64038](https://github.com/pingcap/tidb/issues/64038) @[0xPoe](https://github.com/0xPoe)
+    - 自動統計更新を無効にした後（ `tidb_enable_auto_analyze = OFF` ）、 `mysql.tidb_ddl_notifier`テーブルをクリーンアップできない問題を修正します [#64038](https://github.com/pingcap/tidb/issues/64038) @[0xPoe](https://github.com/0xPoe)
     - `newLocalColumnPool`で列が繰り返し割り当てられる問題を修正 [#63809](https://github.com/pingcap/tidb/issues/63809) @[hawkingrei](https://github.com/hawkingrei)
     - `syncload`の失敗に関する無効な警告ログが生成される問題を修正 [#63880](https://github.com/pingcap/tidb/issues/63880) @[0xPoe](https://github.com/0xPoe)
-    - トランザクションを実行中の接続を手動で終了すると、TiDBがpanicて異常終了する可能性がある問題を修正しました [#63956](https://github.com/pingcap/tidb/issues/63956) @[wshwsh12](https://github.com/wshwsh12)
+    - トランザクションを実行中の接続を手動で終了すると、TiDBがpanicして異常終了する可能性がある問題を修正しました [#63956](https://github.com/pingcap/tidb/issues/63956) @[wshwsh12](https://github.com/wshwsh12)
     - TiFlashレプリカからキャッシュされたテーブルを読み取る際に、ゴルーチンとメモリリークが発生する可能性がある問題を修正しました [#63329](https://github.com/pingcap/tidb/issues/63329) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `ALTER TABLE child CHANGE COLUMN`を実行して列を変更した後、外部キーが更新されない問題を修正しました [#59705](https://github.com/pingcap/tidb/issues/59705) @[fzzf678](https://github.com/fzzf678)
     - 以前の TiDB バージョンから`RENAME TABLE`ジョブ引数が正しくデコードされない問題を修正しました [#64413](https://github.com/pingcap/tidb/issues/64413) @[joechenrh](https://github.com/joechenrh)
     - BR復元が失敗した場合にAUTO_INCREMENT IDがリベースされない問題を修正 [#60804](https://github.com/pingcap/tidb/issues/60804) @[joechenrh](https://github.com/joechenrh)
     - アップグレード中に TiDB ノードがスタックする可能性がある問題を修正 [#64539](https://github.com/pingcap/tidb/issues/64539) @[joechenrh](https://github.com/joechenrh)
-    - インデックスレコードが欠落している場合に管理者チェックでエラーが報告されない問題を修正 [#63698](https://github.com/pingcap/tidb/issues/63698) @[wjhuang2016](https://github.com/wjhuang2016)
+    - インデックスレコードが欠落している場合にadmin check でエラーが報告されない問題を修正 [#63698](https://github.com/pingcap/tidb/issues/63698) @[wjhuang2016](https://github.com/wjhuang2016)
     - `MODIFY COLUMN`を介して照合順序を変更するとデータインデックスの不整合が発生する問題を修正 [#61668](https://github.com/pingcap/tidb/issues/61668) @[tangenta](https://github.com/tangenta)
     - DDL に埋め込まれた`ANALYZE`機能が、複数のスキーマ変更を実行する際にトリガーされない可能性がある問題を修正します [#65040](https://github.com/pingcap/tidb/issues/65040) @[joechenrh](https://github.com/joechenrh)
     - 分散実行フレームワーク（DXF）タスクが`ADD INDEX`ジョブのキャンセル後にキャンセルされない問題を修正 [#64129](https://github.com/pingcap/tidb/issues/64129) @[tangenta](https://github.com/tangenta)
@@ -296,9 +296,9 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 
 - TiFlash
 
-    - BRがデータを復元しているときにTiFlash がpanicになる問題を修正 [#10606](https://github.com/pingcap/tiflash/issues/10606) @[CalvinNeo](https://github.com/CalvinNeo)
+    - BRがデータを復元しているときにTiFlash がpanicになる可能性がある問題を修正 [#10606](https://github.com/pingcap/tiflash/issues/10606) @[CalvinNeo](https://github.com/CalvinNeo)
     - BRがデータを復元するときにTiFlash が16 を超える CPU コアを完全に利用できない問題を修正 [#10605](https://github.com/pingcap/tiflash/issues/10605) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - `GROUP_CONCAT`がディスク流出をトリガーしたときにTiFlash が予期せず終了する可能性がある問題を修正 [#10553](https://github.com/pingcap/tiflash/issues/10553) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
+    - `GROUP_CONCAT`がディスクスピルをトリガーしたときにTiFlash が予期せず終了する可能性がある問題を修正 [#10553](https://github.com/pingcap/tiflash/issues/10553) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 
 - ツール
 
@@ -308,7 +308,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
         - Azure SDK が環境から適切なキーを見つけられない問題を修正 [#18206](https://github.com/tikv/tikv/issues/18206) @[YuJuncen](https://github.com/YuJuncen)
         - `restore point` の期間中に外部キーが正しく復元されない問題を修正します。 [#61642](https://github.com/pingcap/tidb/issues/61642) @[Leavrth](https://github.com/Leavrth)
         - バックアップとターゲットクラスタ間でシステムテーブルの照合順序に互換性がない場合にリストアが失敗する問題を修正するため、v6.5 から v7.5 への特権テーブルのリストアをサポートする`--sys-check-collation`パラメータを追加しました。 [#64667](https://github.com/pingcap/tidb/issues/64667) @[Leavrth](https://github.com/Leavrth)
-        - `restore log`が失敗した後に`restore point`を実行できない問題を修正します（操作が安全な場合でも）。 [#64908](https://github.com/pingcap/tidb/issues/64908) @[RidRisR](https://github.com/RidRisR)
+        - `restore point`が失敗した後に`restore log`を実行できない問題を修正します（操作が安全な場合でも）。 [#64908](https://github.com/pingcap/tidb/issues/64908) @[RidRisR](https://github.com/RidRisR)
         - チェックポイントの`restore point`が、ログバックアップデータがフルバックアップと混在している場合にpanicする可能性がある問題を修正 [#58685](https://github.com/pingcap/tidb/issues/58685) @[YuJuncen](https://github.com/YuJuncen)
 
     - TiCDC

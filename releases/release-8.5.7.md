@@ -7,7 +7,7 @@ summary: TiDB 8.5.7 の機能、互換性の変更、改善、およびバグ修
 
 リリース日: 2026年7月9日
 
-TiDB version: 8.5.7
+TiDBバージョン：8.5.7
 
 クイックアクセス: [クイックスタート](https://docs.pingcap.com/tidb/v8.5/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs.pingcap.com/tidb/v8.5/production-deployment-using-tiup)
 
@@ -201,7 +201,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 + PD
 
     - PD のメンテナンス用エンドポイントと `pd-ctl` コマンドを追加し、TiKV のメンテナンスタスクを直列化できるようにしました。これにより、一度に 1つのメンテナンスタスクのみを有効にして Raft クォーラム喪失を防ぎます。[#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30)
-    -リージョン分割後の予期しないスケジューリングを避けるため、PD で split scatter をデフォルトで無効にしました。引き続き `schedule.split-scatter-schedule-limit` を正の値に設定することで有効化できます。[#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024)
+    - リージョン分割後の予期しないスケジューリングを避けるため、PD で split scatter をデフォルトで無効にしました。引き続き `schedule.split-scatter-schedule-limit` を正の値に設定することで有効化できます。[#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024)
     - unsafe recovery の empty-region プラン生成を最適化し、多数のリージョンとギャップを持つ大規模クラスターでパフォーマンスを向上し、タイムアウトリスクを低減しました。[#10638](https://github.com/tikv/pd/issues/10638) @[Connor1996](https://github.com/Connor1996)
     - PD のトランザクション継続時間メトリクスを改善し、本番環境のレイテンシー分布をより適切に反映できるようにして、ダッシュボードとアラートでの可観測性を向上しました。[#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies)
 
@@ -256,7 +256,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
     - 負の値を符号なし数値カラムへ代入したり、整数値を `SET` カラムへ代入したりする際に、point `UPDATE` 文が通常の `UPDATE` 文と異なる代入変換セマンティクスを使用し、不整合な結果、範囲外エラー、または MySQL 互換性の問題を引き起こす可能性がある問題を修正しました。[#63455](https://github.com/pingcap/tidb/issues/63455) [#67534](https://github.com/pingcap/tidb/issues/67534) @[fzzf678](https://github.com/fzzf678)
     - まれなケースで、クエリの並行実行中に TiDB が `SIGSEGV` でクラッシュする可能性がある問題を修正しました。[#66391](https://github.com/pingcap/tidb/issues/66391) @[bb7133](https://github.com/bb7133)
     - 大文字小文字の異なるユーザー変数を使用するクエリで、最適でない実行計画が生成され、インデックス範囲スキャンを使用できない場合がある問題を修正しました。[#66339](https://github.com/pingcap/tidb/issues/66339) @[qw4990](https://github.com/qw4990)
-    - 複数セッションが同時にグローバルバインディングにヒットした際に、TiDB がメモリ不足になり、グローバルバインディングキャッシュが破損する可能性がある問題を修正しました。[#68015](https://github.com/pingcap/tidb/issues/68015) @[qw4990](https://github.com/qw4990)
+    - 複数セッションが同時にグローバルバインディングにヒットしてグローバルバインディングキャッシュが破損し、TiDB がメモリ不足になる可能性がある問題を修正しました。[#68015](https://github.com/pingcap/tidb/issues/68015) @[qw4990](https://github.com/qw4990)
     - `NULL` 値に敏感な条件を伴う outer join を使用するクエリで、TiDB が誤った結果を返す可能性がある問題を修正しました。この問題は、オプティマイザが outer join を inner join に簡略化できるかどうかを誤って判断することが原因で発生します。影響を受けるシナリオには、`OR`、`IS NULL`、`COALESCE()`、`NULLIF()`、`CAST()`、`IN (NULL, ...)` などの述語や式を含む `WHERE` 句、および派生テーブルや `UNION ALL` を含む outer join クエリが含まれます。この問題により、誤った結果、欠落行、空結果、または `NULL` 値を含む予期しない行が発生する可能性があります。[#58793](https://github.com/pingcap/tidb/issues/58793) [#59162](https://github.com/pingcap/tidb/issues/59162) [#60080](https://github.com/pingcap/tidb/issues/60080) [#60081](https://github.com/pingcap/tidb/issues/60081) [#60370](https://github.com/pingcap/tidb/issues/60370) [#61327](https://github.com/pingcap/tidb/issues/61327) [#66824](https://github.com/pingcap/tidb/issues/66824) [#66825](https://github.com/pingcap/tidb/issues/66825) [#67330](https://github.com/pingcap/tidb/issues/67330) [#67373](https://github.com/pingcap/tidb/issues/67373) @[winoros](https://github.com/winoros)
     - null-reject チェックがパラメーター値に依存しない場合に、outer join 上のプリペアドステートメントがプリペアドプランキャッシュをスキップする可能性がある問題を修正しました。[#67048](https://github.com/pingcap/tidb/issues/67048) @[winoros](https://github.com/winoros)
     - 全範囲インデックススキャンのクエリ計画時に、非同期インデックスヒストグラム読み込みに関する不要な警告を TiDB が記録する可能性がある問題を修正しました。[#64791](https://github.com/pingcap/tidb/issues/64791) @[terry1purcell](https://github.com/terry1purcell)
@@ -285,7 +285,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 
 + TiKV
 
-    -リージョン数が多い場合に、resolved_ts モジュールが過剰なメモリを消費する問題を修正しました。[#19535](https://github.com/tikv/tikv/issues/19535) @[glorv](https://github.com/glorv)
+    - リージョン数が多い場合に、resolved_ts モジュールが過剰なメモリを消費する問題を修正しました。[#19535](https://github.com/tikv/tikv/issues/19535) @[glorv](https://github.com/glorv)
     - MVCC read-aware compaction が有効な場合に、長時間実行された compaction ラウンドの直後に TiKV が次の compaction ラウンドを即座に開始し、負荷ベース compaction のための統計収集が不十分になる問題を修正しました。[#19362](https://github.com/tikv/tikv/issues/19362) @[mittalrishabh](https://github.com/mittalrishabh)
     - raft-engine 使用時に、安定したワークロードでも TiKV のメモリ使用量が時間とともに増加する問題を修正しました。[#19544](https://github.com/tikv/tikv/issues/19544) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKV in-memory engine からリージョンを手動で退避させると、リージョンが `Evicting` 状態のままになり、自動的に再ロードされなくなる問題を修正しました。[#19584](https://github.com/tikv/tikv/issues/19584) @[overvenus](https://github.com/overvenus)
