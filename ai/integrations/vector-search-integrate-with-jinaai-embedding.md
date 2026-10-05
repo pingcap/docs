@@ -153,7 +153,7 @@ python jina-ai-embeddings-demo.py
 
 ### Jina AIから埋め込みデータを取得する {#get-embeddings-from-jina-ai}
 
-`generate_embeddings` AI埋め込みAPIを呼び出すためのヘルパー関数を定義します。
+Jina AI埋め込みAPIを呼び出すための`generate_embeddings`ヘルパー関数を定義します。
 
 ```python
 import os

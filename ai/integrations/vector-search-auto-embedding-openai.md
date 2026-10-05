@@ -16,23 +16,23 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-openai/']
 
 OpenAI APIキー（BYOK）をお持ちの場合は、 `openai/`というプレフィックスを付けて、すべてのOpenAIモデルをご利用いただけます。例：
 
-**テキスト埋め込み3（小）**
+**text-embedding-3-small**
 
 - 名前: `openai/text-embedding-3-small`
-- 寸法：512～1536（デフォルト：1536）
-- 距離指標：コサイン類似度、L2
+- 次元数：512～1536（デフォルト：1536）
+- 距離指標：コサイン、L2
 - 価格：OpenAIが課金
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 
-**テキスト埋め込み3（大）**
+**text-embedding-3-large**
 
 - 名前: `openai/text-embedding-3-large`
-- 寸法：256～3072（デフォルト：3072）
-- 距離指標：コサイン類似度、L2
+- 次元数：256～3072（デフォルト：3072）
+- 距離指標：コサイン、L2
 - 価格：OpenAIが課金
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 
 利用可能なモデルの完全なリストについては、 [OpenAIドキュメント](https://platform.openai.com/docs/guides/embeddings)を参照してください。
 
@@ -223,7 +223,7 @@ LIMIT 2;
 
 ## Azure OpenAIを使用する {#use-azure-openai}
 
-Azure で OpenAI 埋め込みモデルを使用するには、グローバル変数`TIDB_EXP_EMBED_OPENAI_API_BASE` Azure リソースの URL に設定します。例:
+Azure で OpenAI 埋め込みモデルを使用するには、グローバル変数`TIDB_EXP_EMBED_OPENAI_API_BASE`を Azure リソースの URL に設定します。例:
 
 ```sql
 SET @@GLOBAL.TIDB_EXP_EMBED_OPENAI_API_KEY = 'your-openai-api-key-here';

@@ -21,12 +21,12 @@ NVIDIA NIM 上でホストされている埋め込みモデルは、独自の[NV
 ## bge-m3 {#bge-m3}
 
 - 名前: `nvidia_nim/baai/bge-m3`
-- 寸法: 1024
-- 距離指標：コサイン類似度、L2
+- 次元数: 1024
+- 距離指標：コサイン、L2
 - 入力可能なテキストトークンの最大数：8,192
 - 価格：NVIDIAが請求
 - TiDB Cloudでホストされています: ❌
-- 鍵をご持参ください：✅
+- Bring Your Own Key：✅
 - ドキュメント： [https://docs.api.nvidia.com/nim/reference/baai-bge-m3](https://docs.api.nvidia.com/nim/reference/baai-bge-m3)
 
 例：
@@ -111,7 +111,7 @@ mysql -h {gateway-region}.prod.aws.tidbcloud.com \
 
 ### ステップ2：APIキーを設定する {#step-2-configure-the-api-key}
 
-認証が必要な NVIDIA NIM モデルを使用している場合は、API キーを構成できます。 [NVIDIA開発者プログラム](https://developer.nvidia.com/nim)を通じて NIM API エンドポイントに無料でアクセスすることも、 [NVIDIAビルドプラットフォーム](https://build.nvidia.com/settings/api-keys)プラットフォームから API キーを作成することもできます。
+認証が必要な NVIDIA NIM モデルを使用している場合は、API キーを構成できます。 [NVIDIA開発者プログラム](https://developer.nvidia.com/nim)を通じて NIM API エンドポイントに無料でアクセスすることも、 [NVIDIAビルドプラットフォーム](https://build.nvidia.com/settings/api-keys)から API キーを作成することもできます。
 
 <SimpleTab groupId="language">
 <div label="Python" value="python">

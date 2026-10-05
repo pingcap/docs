@@ -165,7 +165,7 @@ VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")
 VEC_EMBED_L2_DISTANCE(vector_column, "query_text")
 ```
 
-`ORDER BY`句でこの関数を使用すると、L2 距離に基づいて結果をランク付けできます。VEC_L2_DISTANCE [`VEC_L2_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_l2_distance)と同じ計算方法を使用しますが、クエリ テキストの埋め込みを自動的に生成します。
+`ORDER BY`句でこの関数を使用すると、L2 距離に基づいて結果をランク付けできます。[`VEC_L2_DISTANCE()`](/ai/reference/vector-search-functions-and-operators.md#vec_l2_distance)と同じ計算方法を使用しますが、クエリ テキストの埋め込みを自動的に生成します。
 
 ## Pythonで自動埋め込みを使用する {#use-auto-embedding-in-python}
 

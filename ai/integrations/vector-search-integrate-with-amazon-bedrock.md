@@ -19,7 +19,7 @@ aliases: ['/ja/tidbcloud/vector-search-integrate-with-amazon-bedrock/']
 
 > **Tip**
 >
-> 完全な[サンプルコード](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb)Notebook 形式で表示できます。
+> 完全な[サンプルコード](https://github.com/aws-samples/aws-generativeai-partner-samples/blob/main/tidb/samples/tidb-bedrock-boto3-rag.ipynb)を Notebook 形式で表示できます。
 
 ## 前提条件 {#prerequisites}
 
