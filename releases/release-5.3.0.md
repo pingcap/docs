@@ -5,7 +5,7 @@ summary: TiDB 5.3.0では、TiDB Dashboardに一時テーブル、テーブル�
 
 # TiDB 5.3 リリースノート {#tidb-5-3-release-notes}
 
-発売日：2021年11月30日
+リリース日：2021年11月30日
 
 TiDB バージョン: 5.3.0
 

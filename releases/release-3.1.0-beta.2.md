@@ -5,7 +5,7 @@ summary: TiDB 3.1 Beta.2は2020年3月9日にリリースされました。TiDB�
 
 # TiDB 3.1 ベータ 2 リリースノート {#tidb-3-1-beta-2-release-notes}
 
-発売日：2020年3月9日
+リリース日：2020年3月9日
 
 TiDB バージョン: 3.1.0-beta.2
 

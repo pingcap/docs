@@ -5,7 +5,7 @@ summary: TiDB 6.6.0 の新機能、互換性の変更点、改善点、および
 
 # TiDB 6.6.0 リリースノート {#tidb-6-6-0-release-notes}
 
-発売日：2023年2月20日
+リリース日：2023年2月20日
 
 TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone-releases)
 
