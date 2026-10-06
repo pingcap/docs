@@ -80,7 +80,7 @@ On September 14, 2018, TiDB 2.1 RC2 is released. Compared with TiDB 2.1 RC1, thi
     * Fix the issue that the default value of the `Bit` type exceeds 128 [#7249](https://github.com/pingcap/tidb/pull/7249)
     * Fix the issue that the default value of the `Bit` type cannot be `NULL` [#7604](https://github.com/pingcap/tidb/pull/7604)
     * Reduce the interval of checking `CREATE TABLE/DATABASE` in the DDL queue [#7608](https://github.com/pingcap/tidb/pull/7608)
-    * Use the `ddl/owner/resign` HTTP interface ro release the DDL owner and start electing a new owner [#7649](https://github.com/pingcap/tidb/pull/7649)
+    * Use the `ddl/owner/resign` HTTP interface to release the DDL owner and start electing a new owner [#7649](https://github.com/pingcap/tidb/pull/7649)
 * TiKV Go Client
     * Support the issue that the `Seek` operation only obtains `Key` [#7419](https://github.com/pingcap/tidb/pull/7419)
 * [Table Partition](https://github.com/pingcap/tidb/projects/6) (Experimental)
