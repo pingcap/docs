@@ -35,9 +35,9 @@ TiDB Ansible バージョン: 3.0.12
 ## バグ修正 {#bug-fixes}
 
 - TiDB
-    - `GRANT`複数のユーザー`REVOKE`変更するときに原子性を保証する[#15092](https://github.com/pingcap/tidb/pull/15092)
-    - パーティションテーブルに対する悲観的ロックのロックが正しい行ロックできなかった問題を修正しました [#15114](https://github.com/pingcap/tidb/pull/15114)
-    - インデックスの長さが制限超えたときに、構成の値`max-index-length`に応じてエラーメッセージを表示するようにします。 [#15130](https://github.com/pingcap/tidb/pull/15130)
+    - 複数のユーザーを変更するときに`GRANT` 、 `REVOKE`が原子性を保証するようにする[#15092](https://github.com/pingcap/tidb/pull/15092)
+    - パーティションテーブルに対する悲観的ロックのロックが正しい行をロックできなかった問題を修正しました [#15114](https://github.com/pingcap/tidb/pull/15114)
+    - インデックスの長さが制限を超えたときに、構成の値`max-index-length`に応じてエラーメッセージを表示するようにします。 [#15130](https://github.com/pingcap/tidb/pull/15130)
     - `FROM_UNIXTIME`関数の小数点の誤りの問題を修正 [#15270](https://github.com/pingcap/tidb/pull/15270)
     - トランザクションで自分自身が書き込んだレコードを削除することで発生する競合検出の失敗やデータインデックスの不整合の問題を修正 [#15176](https://github.com/pingcap/tidb/pull/15176)
 
@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.0.12
     - Raftstoreにフロー制御メカニズムを導入して、フロー制御がないと追跡が遅くなりすぎてクラスターがスタックする可能性があり、トランザクションのサイズによって TiKV 接続が頻繁に再接続される可能性があるという問題を解決します[#7072](https://github.com/tikv/tikv/pull/7072) [#6993](https://github.com/tikv/tikv/pull/6993)
 
 - PD
-    - PD がリージョンハートビート処理するときにデータ競合によって発生するリージョン情報の誤りの問題を修正しました。 [#2233](https://github.com/pingcap/pd/pull/2233)
+    - PD がリージョンハートビートを処理するときにデータ競合によって発生するリージョン情報の誤りの問題を修正しました。 [#2233](https://github.com/pingcap/pd/pull/2233)
 
 - TiDB Ansible
     - クラスター内で複数の Grafana/Prometheus/Alertmanager のデプロイをサポート [#1198](https://github.com/pingcap/tidb-ansible/pull/1198)

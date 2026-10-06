@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.0-rc.3 Release Notes
-summary: TiDB 3.0.0-rc.3は2019年6月21日にリリースされ、安定性、ユーザビリティ、機能、SQLオプティマイザ、統計、実行エンジンが改善されました。TiDB、PD、TiKV、TiDB Ansibleに修正と新機能が追加されました。主な改善点としては、統計情報の自動読み込み、テーブルとインデックス領域の手動分割、TiKVにおける悲観的トランザクションのサポートなどが挙げられます。
+summary: TiDB 3.0.0-rc.3は2019年6月21日にリリースされ、安定性、ユーザビリティ、機能、SQLオプティマイザ、統計、実行エンジンが改善されました。TiDB、PD、TiKV、TiDB Ansibleに修正と新機能が追加されました。主な改善点としては、統計情報の自動読み込み、テーブルとインデックスのリージョンの手動分割、TiKVにおける悲観的トランザクションのサポートなどが挙げられます。
 ---
 
 # TiDB 3.0.0-rc.3 リリースノート {#tidb-3-0-0-rc-3-release-notes}
@@ -24,7 +24,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     - `prepare`を使用して`create view`文を実行すると、間違った列情報のためにpanicが発生する問題を修正しました [#10713](https://github.com/pingcap/tidb/pull/10713)
     - ウィンドウ関数処理時に列情報が複製されない問題を修正 [#10720](https://github.com/pingcap/tidb/pull/10720)
     - インデックス結合における内部テーブル選択の選択率の誤った推定を修正 [#10854](https://github.com/pingcap/tidb/pull/10854)
-    - `stats-lease`変数値が0の場合の自動読み込み統計をサポート[#10811](https://github.com/pingcap/tidb/pull/10811)
+    - `stats-lease`変数値が0の場合の統計の自動読み込みをサポート[#10811](https://github.com/pingcap/tidb/pull/10811)
 
 - 実行エンジン
     - `StreamAggExec` の`Close`関数を呼び出すときにリソースが正しく解放されない問題を修正しました [#10636](https://github.com/pingcap/tidb/pull/10636)
@@ -59,7 +59,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 
 ## PD {#pd}
 
-- 一方向のマージのみを許可するには、 `enable-two-way-merge`設定項目を追加します[#1583](https://github.com/pingcap/pd/pull/1583)
+- 一方向のマージのみを許可する`enable-two-way-merge`設定項目を追加します[#1583](https://github.com/pingcap/pd/pull/1583)
 - `AddLightLearner`と`AddLightPeer`スケジューリング操作を追加して、 リージョン Scatterスケジューリングを制限メカニズムによって制限されないようにします。 [#1563](https://github.com/pingcap/pd/pull/1563)
 - システムの起動時にデータのレプリカレプリケーションが 1つしか存在しないため信頼性が不十分になる問題を修正しました[#1581](https://github.com/pingcap/pd/pull/1581)
 - 構成チェックロジックを最適化して設定項目エラーを回避する[#1585](https://github.com/pingcap/pd/pull/1585)
@@ -74,7 +74,7 @@ TiDB Ansible バージョン: 3.0.0-rc.3
 
 - サーバー
     - `block-size`構成の有効性をチェックする機能を追加する [#4928](https://github.com/tikv/tikv/pull/4928)
-    - `READ_INDEX`関連の監視指標追加 [#4830](https://github.com/tikv/tikv/pull/4830)
+    - `READ_INDEX`関連の監視指標を追加 [#4830](https://github.com/tikv/tikv/pull/4830)
     - GCワーカー関連の監視メトリックを追加する [#4922](https://github.com/tikv/tikv/pull/4922)
 
 - Raftstore
@@ -90,22 +90,22 @@ TiDB Ansible バージョン: 3.0.0-rc.3
     - ベクトル計算における`AVG`集計関数をサポート [#4777](https://github.com/tikv/tikv/pull/4777)
     - ベクトル計算における`First`集計関数をサポート [#4771](https://github.com/tikv/tikv/pull/4771)
     - ベクトル計算における`SUM`集計関数をサポート [#4797](https://github.com/tikv/tikv/pull/4797)
-    - ベクトル計算における`MAX`集計関数`MIN`サポート [#4837](https://github.com/tikv/tikv/pull/4837)
+    - ベクトル計算における`MAX`/`MIN`集計関数をサポート [#4837](https://github.com/tikv/tikv/pull/4837)
     - ベクトル計算における`Like`式のサポート [#4747](https://github.com/tikv/tikv/pull/4747)
     - ベクトル計算における`MultiplyDecimal`式のサポート [#4849](https://github.com/tikv/tikv/pull/4849)
-    - ベクトル計算における`BitAnd` `BitXor` `BitOr`サポート [#4724](https://github.com/tikv/tikv/pull/4724)
+    - ベクトル計算における`BitAnd`/`BitOr`/`BitXor`式をサポート [#4724](https://github.com/tikv/tikv/pull/4724)
     - ベクトル計算における`UnaryNot`式のサポート [#4808](https://github.com/tikv/tikv/pull/4808)
 
 - トランザクション
     - 悲観的トランザクションで非悲観的ロック競合によりエラー発生する問題を修正 [#4801](https://github.com/tikv/tikv/pull/4801) [#4883](https://github.com/tikv/tikv/pull/4883)
-    - 悲観的トランザクションを有効にした後、楽観的的トランザクションの不要な計算を削減してパフォーマンスを向上させる[#4813](https://github.com/tikv/tikv/pull/4813)
+    - 悲観的トランザクションを有効にした後、楽観的トランザクションの不要な計算を削減してパフォーマンスを向上させる[#4813](https://github.com/tikv/tikv/pull/4813)
     - デッドロック状況でトランザクション全体のロールバック操作が必要ないことを保証するために、単一ステートメントのロールバック機能を追加します[#4848](https://github.com/tikv/tikv/pull/4848)
-    - 悲観的トランザクション関連の監視項目追加 [#4852](https://github.com/tikv/tikv/pull/4852)
+    - 悲観的トランザクション関連の監視項目を追加 [#4852](https://github.com/tikv/tikv/pull/4852)
     - 深刻な競合が存在する場合のパフォーマンスを向上させるために、 `ResolveLockLite`コマンドを使用して軽量ロックを解決することをサポートします[#4882](https://github.com/tikv/tikv/pull/4882)
 
 - tikv-ctl
     - より多くの異常状態をチェックするためのコマンド`bad-regions`を追加[#4862](https://github.com/tikv/tikv/pull/4862)
-    - `tombstone`コマンド強制的に実行する機能を追加 [#4862](https://github.com/tikv/tikv/pull/4862)
+    - `tombstone`コマンドを強制的に実行する機能を追加 [#4862](https://github.com/tikv/tikv/pull/4862)
 
 - その他
     - `dist_release`コンパイルコマンドを追加する [#4841](https://github.com/tikv/tikv/pull/4841)

@@ -39,17 +39,17 @@ TiDB Ansible バージョン: 3.0.11
 - TiDB
     - `Union`を使用するクエリが読み取り専用としてマークされていないため、楽観的トランザクションを再試行するときに Goroutine リークが発生する問題を修正しました[#15076](https://github.com/pingcap/tidb/pull/15076)
     - `SET SESSION tidb_snapshot = 'xxx';`ステートメント実行時に`tidb_snapshot`パラメータの値が正しく使用されていないため、スナップショット時に`SHOW TABLE STATUS`でテーブルの状態を正しく出力できない問題を修正しました [#14391](https://github.com/pingcap/tidb/pull/14391)
-    - `Sort Merge Join`と`ORDER BY DESC`同時に含まれるSQL文によって発生する誤った結果を修正する[#14664](https://github.com/pingcap/tidb/pull/14664)
-    - サポートされていない式を使用してパーティションテーブルを作成する際にTiDBサーバーがpanicを修正しました。このpanicを修正すると、エラー情報`This partition function is not allowed`が返されます[#14769](https://github.com/pingcap/tidb/pull/14769)
+    - `Sort Merge Join`と`ORDER BY DESC`が同時に含まれるSQL文によって発生する誤った結果を修正する[#14664](https://github.com/pingcap/tidb/pull/14664)
+    - サポートされていない式を使用してパーティションテーブルを作成する際にTiDBサーバーのpanicを修正しました。このpanicを修正すると、エラー情報`This partition function is not allowed`が返されます[#14769](https://github.com/pingcap/tidb/pull/14769)
     - `Union` を含むサブクエリで`select max() from subquery`文を実行したときに発生した誤った結果を修正しました [#14944](https://github.com/pingcap/tidb/pull/14944)
     - 実行バインディングを削除する`DROP BINDING`を実行した後に`SHOW BINDINGS`ステートメントを実行するとエラーメッセージが返される問題を修正しました [#14865](https://github.com/pingcap/tidb/pull/14865)
     - MySQLプロトコルではクエリのエイリアスの最大長が256文字であるにもかかわらず、TiDBがこのプロトコルに従ってクエリ結果の[エイリアスを切り詰め](https://dev.mysql.com/doc/refman/8.0/en/identifier-length.html)ないため、接続が切断される問題を修正しました。 [#14940](https://github.com/pingcap/tidb/pull/14940)
-    - `DIV`で文字列型を使用した際に発生する可能性のある誤ったクエリ結果を修正しました。例えば、 `select 1 / '2007' div 1`文正しく実行できるようになりました。 [#14098](https://github.com/pingcap/tidb/pull/14098)
+    - `DIV`で文字列型を使用した際に発生する可能性のある誤ったクエリ結果を修正しました。例えば、 `select 1 / '2007' div 1`文を正しく実行できるようになりました。 [#14098](https://github.com/pingcap/tidb/pull/14098)
 
 - TiKV
     - 不要なログを削除してログ出力を最適化する[#6657](https://github.com/tikv/tikv/pull/6657)
     - 高負荷時にピアが削除されたときに発生する可能性のあるpanicを修正[#6704](https://github.com/tikv/tikv/pull/6704)
-    - 一部のケースで休止状態領域が起動しない問題を修正[#6732](https://github.com/tikv/tikv/pull/6732) [#6738](https://github.com/tikv/tikv/pull/6738)
+    - 一部のケースで休止状態のリージョンが復帰しない問題を修正[#6732](https://github.com/tikv/tikv/pull/6732) [#6738](https://github.com/tikv/tikv/pull/6738)
 
 - TiDB Ansible
     - `tidb-ansible` の古いドキュメントリンクを更新 [#1169](https://github.com/pingcap/tidb-ansible/pull/1169)

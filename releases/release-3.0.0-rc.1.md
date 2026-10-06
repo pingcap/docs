@@ -23,14 +23,14 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - 結合に含まれるテーブルの数が`tidb_opt_join_reorder_threshold`未満の場合に、結合操作の実行順序を指定するには、動的計画法アルゴリズムを使用します[#8816](https://github.com/pingcap/tidb/pull/8816)
     - アクセス条件として複合インデックスを使用する場合、インデックス結合を構築する内部テーブル内のインデックスのプレフィックス列をさらに一致させる[#8471](https://github.com/pingcap/tidb/pull/8471)
     - NULL値を持つ単一列インデックスの行数推定の精度を向上[#9474](https://github.com/pingcap/tidb/pull/9474)
-    - 論理最適化フェーズで集計関数を削除するときに、誤った実行を防ぐために`GROUP_CONCAT`特別に処理します[#9967](https://github.com/pingcap/tidb/pull/9967)
+    - 論理最適化フェーズで集計関数を削除するときに、誤った実行を防ぐために`GROUP_CONCAT`を特別に処理します[#9967](https://github.com/pingcap/tidb/pull/9967)
     - フィルタが定数の場合、結合オペレーターの子ノードにフィルタを適切にプッシュダウンします。 [#9848](https://github.com/pingcap/tidb/pull/9848)
     - MySQL との非互換性を防ぐために、論理最適化フェーズで列をプルーニングするときに`RAND()`などのいくつかの関数を特別に処理します。 [#10064](https://github.com/pingcap/tidb/pull/10064)
-    - `FAST ANALYZE`をサポートします。これは、領域全体をスキャンするのではなく、領域をサンプリングすることで統計収集を高速化します。この機能は変数`tidb_enable_fast_analyze`によって制御されます[#10258](https://github.com/pingcap/tidb/pull/10258)
+    - `FAST ANALYZE`をサポートします。これは、リージョン全体をスキャンするのではなく、リージョンをサンプリングすることで統計収集を高速化します。この機能は変数`tidb_enable_fast_analyze`によって制御されます[#10258](https://github.com/pingcap/tidb/pull/10258)
     - SQL文の実行計画のバインドを実行することで実行の安定性を確保するSQL計画管理をサポートします。この機能は現在ベータ版であり、SELECT文のバインド実行計画のみをサポートします。本番環境での使用は推奨されません[#10284](https://github.com/pingcap/tidb/pull/10284)
 
 - 実行エンジン
-    - 3つの演算子`TableReader` `IndexLookupReader` メモリ使用量の追跡と制御をサポートします`IndexReader` [#10003](https://github.com/pingcap/tidb/pull/10003)
+    - 3つの演算子（ `TableReader` 、 `IndexReader` 、 `IndexLookupReader` ）でメモリ使用量の追跡と制御をサポートします [#10003](https://github.com/pingcap/tidb/pull/10003)
     - コプロセッサのタスク数、実行時間/待機時間の平均/最長/90%、実行時間または待機時間が最も長い TiKV のアドレスなど、スローログ内のコプロセッサタスクに関する詳細情報の表示をサポートします[#10165](https://github.com/pingcap/tidb/pull/10165)
     - プレースホルダなしの準備済みDDL文をサポートする[#10144](https://github.com/pingcap/tidb/pull/10144)
 
@@ -56,24 +56,24 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - 表の`shard_row_id_bits`の潜在的なバグを修正 [#9868](https://github.com/pingcap/tidb/pull/9868)
     - テーブルの文字セットを変更しても列の文字セットが変更されないバグを修正[#9790](https://github.com/pingcap/tidb/pull/9790)
     - 列のデフォルト値として`BINARY` / `BIT`を使用する場合の`SHOW COLUMN`の潜在的なバグを修正[#9897](https://github.com/pingcap/tidb/pull/9897)
-    - `SHOW FULL COLUMNS`文で`CHARSET` `COLLATION`説明を表示する際の互換性の問題を修正 [#10007](https://github.com/pingcap/tidb/pull/10007)
+    - `SHOW FULL COLUMNS`文で`CHARSET`/`COLLATION`の説明を表示する際の互換性の問題を修正 [#10007](https://github.com/pingcap/tidb/pull/10007)
     - `SHOW COLLATIONS`文が TiDB でサポートされている照合順序のみをリストする問題を修正しました [#10186](https://github.com/pingcap/tidb/pull/10186)
 
 ## PD {#pd}
 
-- ETCD アップグレード [#1452](https://github.com/pingcap/pd/pull/1452)
+- ETCD をアップグレード [#1452](https://github.com/pingcap/pd/pull/1452)
     - etcdとPDサーバーのログ形式を統一する
     - 事前投票でLeaderを選出できない問題を修正
     - 後続のリクエストをブロックしないように、失敗する可能性のある"propose"および"read"リクエストを迅速にドロップすることをサポートします。
     - リースのデッドロック問題を修正
 - ホットストアがキーの統計情報を正しく生成しない問題を修正 [#1487](https://github.com/pingcap/pd/pull/1487)
-- 単一のPDノードからPDクラスターを強制的に再構築をサポート [#1485](https://github.com/pingcap/pd/pull/1485)
+- 単一のPDノードからPDクラスターを強制的に再構築することをサポート [#1485](https://github.com/pingcap/pd/pull/1485)
 - `regionScatterer`が無効な`OperatorStep` を生成する可能性がある問題を修正 [#1482](https://github.com/pingcap/pd/pull/1482)
 - `MergeRegion`オペレーターの短すぎるタイムアウト問題を修正 [#1495](https://github.com/pingcap/pd/pull/1495)
-- ホットリージョンのスケジュールに高い優先度を与えるサポート[#1492](https://github.com/pingcap/pd/pull/1492)
+- ホットリージョンのスケジュールに高い優先度を与えることをサポート[#1492](https://github.com/pingcap/pd/pull/1492)
 - PDサーバー側でTSOリクエストの処理時間を記録するためのメトリックを追加します [#1502](https://github.com/pingcap/pd/pull/1502)
 - 対応するストアIDとアドレスをストア関連の指標に追加します。 [#1506](https://github.com/pingcap/pd/pull/1506)
-- `GetOperator`サービスサポートする [#1477](https://github.com/pingcap/pd/pull/1477)
+- `GetOperator`サービスをサポートする [#1477](https://github.com/pingcap/pd/pull/1477)
 - ストアが見つからないため、ハートビートストリームでエラーを送信できない問題を修正しました[#1521](https://github.com/pingcap/pd/pull/1521)
 
 ## TiKV {#tikv}
@@ -81,15 +81,15 @@ TiDB Ansible バージョン: 3.0.0-rc.1
 - エンジン
     - 読み取りトラフィックの統計情報が不正確になる可能性がある問題を修正[#4436](https://github.com/tikv/tikv/pull/4436)
     - 範囲を削除するときにプレフィックス抽出プログラムがpanicを起こす可能性がある問題を修正しました [#4503](https://github.com/tikv/tikv/pull/4503)
-    - メモリ管理を最適化してメモリ割り当てとコピーを削減`Iterator Key Bound Option` [#4537](https://github.com/tikv/tikv/pull/4537)
+    - メモリ管理を最適化して`Iterator Key Bound Option`のメモリ割り当てとコピーを削減 [#4537](https://github.com/tikv/tikv/pull/4537)
     - ラーナーのログギャップを考慮しないと、場合によってはpanicが発生する可能性がある問題を修正しました[#4559](https://github.com/tikv/tikv/pull/4559)
     - 異なる`column families` 間での`block cache`共有をサポート [#4612](https://github.com/tikv/tikv/pull/4612)
 
 - サーバー
-    - コンテキストスイッチのオーバーヘッドを`batch commands` 削減 [#4473](https://github.com/tikv/tikv/pull/4473)
+    - `batch commands`のコンテキストスイッチのオーバーヘッドを削減 [#4473](https://github.com/tikv/tikv/pull/4473)
     - シークイテレータステータスの有効性をチェックする [#4470](https://github.com/tikv/tikv/pull/4470)
 
-- ラフトストア
+- RaftStore
     - 構成可能な`properties index distance` をサポート [#4517](https://github.com/tikv/tikv/pull/4517)
 
 - コプロセッサー
@@ -101,11 +101,11 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - ReadPoolの元の`futures-cpupool`を`tokio-threadpool`に置き換えてコンテキストスイッチを減らす [#4486](https://github.com/tikv/tikv/pull/4486)
     - バッチ集計フレームワークを追加 [#4533](https://github.com/tikv/tikv/pull/4533)
     - `BatchSelectionExecutor` を加える [#4562](https://github.com/tikv/tikv/pull/4562)
-    - バッチ攻撃機能の追加`AVG` [#4570](https://github.com/tikv/tikv/pull/4570)
+    - バッチ集計関数`AVG`を追加 [#4570](https://github.com/tikv/tikv/pull/4570)
     - RPN関数`LogicalAnd` を追加 [#4575](https://github.com/tikv/tikv/pull/4575)
 
 - その他
-    - メモリアロケータとしてのサポート`tcmalloc` [#4370](https://github.com/tikv/tikv/pull/4370)
+    - メモリアロケータとして`tcmalloc`をサポート [#4370](https://github.com/tikv/tikv/pull/4370)
 
 ## ツール {#tools}
 
@@ -115,13 +115,13 @@ TiDB Ansible バージョン: 3.0.0-rc.1
     - Pumpにローカルストレージへの非同期フラッシュを許可する`storage.sync-log`設定項目を追加する [#509](https://github.com/pingcap/tidb-binlog/pull/509)
     - PumpとDrainer間の通信のトラフィック圧縮をサポート [#495](https://github.com/pingcap/tidb-binlog/pull/495)
     - 異なるSQLモードでのDDLクエリの解析をサポートするために、 Drainerに`syncer.sql-mode`設定項目を追加します。 [#511](https://github.com/pingcap/tidb-binlog/pull/511)
-    - レプリケーションを必要としないテーブルを除外するための設定項目を`syncer.ignore-table`追加します[#520](https://github.com/pingcap/tidb-binlog/pull/520)
+    - レプリケーションを必要としないテーブルを除外するための設定項目`syncer.ignore-table`を追加します[#520](https://github.com/pingcap/tidb-binlog/pull/520)
 
 - Lightning
     - 行IDまたはデフォルトの列値を使用して、ダンプファイルで欠落した列データを入力します。 [#170](https://github.com/pingcap/tidb-lightning/pull/170)
     - SST の一部がインポートに失敗した場合でも、インポート成功が返される可能性があるインポーターのバグを修正しました[#4566](https://github.com/tikv/tikv/pull/4566)
     - SST を TiKV にアップロードする際のインポーターの速度制限をサポート [#4412](https://github.com/tikv/tikv/pull/4412)
-    - 大きなテーブルに対するチェックサムと分析によるクラスターへの影響を軽減し、チェックサムと分析成功率を向上させるために、サイズによるテーブルインポートをサポートします。 [#156](https://github.com/pingcap/tidb-lightning/pull/156)
+    - 大きなテーブルに対するチェックサムと分析によるクラスターへの影響を軽減し、チェックサムと分析の成功率を向上させるために、サイズによるテーブルインポートをサポートします。 [#156](https://github.com/pingcap/tidb-lightning/pull/156)
     - データソースファイルをTiDBのtypes.Datumとして直接解析し、KVエンコーダからの余分な解析オーバーヘッドを削減することで、LightningのSQLエンコードパフォーマンスを50％向上しました。 [#145](https://github.com/pingcap/tidb-lightning/pull/145)
     - ログ形式を[統合ログ形式](https://github.com/tikv/rfcs/blob/master/text/0018-unified-log-format.md) に変更 [#162](https://github.com/pingcap/tidb-lightning/pull/162)
     - 設定ファイルが見つからない場合に使用するコマンドラインオプションをいくつか追加します[#157](https://github.com/pingcap/tidb-lightning/pull/157)
