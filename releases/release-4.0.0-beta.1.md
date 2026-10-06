@@ -3,7 +3,7 @@ title: TiDB 4.0.0 Beta.1 Release Notes
 summary: TiDB 4.0.0 Beta.1は2020年2月28日にリリースされました。互換性の変更、新機能、バグ修正が含まれています。主な変更点としては、SQLパフォーマンス診断のサポート、シーケンス関数、コンポーネント間のTLSサポートなどが挙げられます。さらに、 TiDB LightningのWebインターフェースのバグ修正も行われました。
 ---
 
-# TiDB 4.0.0 ベータ.1 リリースノート {#tidb-4-0-0-beta-1-release-notes}
+# TiDB 4.0.0 Beta.1 リリースノート {#tidb-4-0-0-beta-1-release-notes}
 
 リリース日：2020年2月28日
 
@@ -60,7 +60,7 @@ TiDB Ansible バージョン: 4.0.0-beta.1
 
 - PD
     - ダッシュボード UI を通じてクラスター内のホットスポットの分布へのアクセスをサポート [#2086](https://github.com/pingcap/pd/pull/2086)
-    - クラスターコンポーネントの`START_TIME`と`UPTIME`キャプチャと表示をサポート [#2116](https://github.com/pingcap/pd/pull/2116)
+    - クラスターコンポーネントの`START_TIME`と`UPTIME`のキャプチャと表示をサポート [#2116](https://github.com/pingcap/pd/pull/2116)
     - `member` API の返されたメッセージにデプロイメントパスとコンポーネントバージョンの情報を追加します。 [#2130](https://github.com/pingcap/pd/pull/2130)
     - pd-ctlに`component`サブコマンドを追加して、他のコンポーネントの構成を変更および確認します（実験的） [#2092](https://github.com/pingcap/pd/pull/2092)
 

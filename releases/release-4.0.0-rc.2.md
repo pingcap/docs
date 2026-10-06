@@ -14,12 +14,12 @@ TiDB バージョン: 4.0.0-rc.2
 - TiDB
 
     - TiDB Binlogが有効な場合、単一トランザクションのサイズ制限（100 MB）が削除されました。現在、トランザクションのサイズ制限は 10 GB です。ただし、TiDB Binlogが有効で、ダウンストリームが Kafka の場合は、Kafka のメッセージサイズ制限である 1 GB に合わせて`txn-total-size-limit`パラメータを設定してください。 [#16941](https://github.com/pingcap/tidb/pull/16941)
-    - `CLUSTER_LOG`テーブル照会するときに時間範囲が指定されていない場合は、デフォルトの時間範囲を照会するのではなく、エラーを返して時間範囲の指定をリクエストするように動作を変更します。 [#17003](https://github.com/pingcap/tidb/pull/17003)
+    - `CLUSTER_LOG`テーブルを照会するときに時間範囲が指定されていない場合は、デフォルトの時間範囲を照会するのではなく、エラーを返して時間範囲の指定をリクエストするように動作を変更します。 [#17003](https://github.com/pingcap/tidb/pull/17003)
     - `CREATE TABLE`文を使用してパーティションテーブルを作成するときに、サポートされていない`sub-partition`または`linear hash`オプションが指定された場合、オプションが無視されたパーティションテーブルではなく、通常のテーブルが作成されます[#17197](https://github.com/pingcap/tidb/pull/17197)
 
 - TiKV
 
-    - 暗号化関連の設定をセキュリティ関連の設定に移動します。つまり、TiKV設定ファイルの`[encryption]` `[security.encryption]` に変更します。 [#7810](https://github.com/tikv/tikv/pull/7810)
+    - 暗号化関連の設定をセキュリティ関連の設定に移動します。つまり、TiKV設定ファイルの`[encryption]`を`[security.encryption]` に変更します。 [#7810](https://github.com/tikv/tikv/pull/7810)
 
 - ツール
 
@@ -33,7 +33,7 @@ TiDB バージョン: 4.0.0-rc.2
 
 - TiDB
 
-    - `WHERE`句に同等の条件が 1つしかない場合に間違ったパーティションが選択される問題を修正[#17054](https://github.com/pingcap/tidb/pull/17054)
+    - `WHERE`句に等値条件が 1つしかない場合に間違ったパーティションが選択される問題を修正[#17054](https://github.com/pingcap/tidb/pull/17054)
     - `WHERE`句に文字列列のみが含まれている場合に誤ったインデックス範囲を構築することで誤った結果が発生する問題を修正しました。 [#16660](https://github.com/pingcap/tidb/pull/16660)
     - `DELETE`操作後にトランザクション内の`PointGet`クエリを実行するときに発生するpanic問題を修正しました [#16991](https://github.com/pingcap/tidb/pull/16991)
     - エラーが発生したときにGCワーカーがデッドロックに遭遇する可能性がある問題を修正しました[#16915](https://github.com/pingcap/tidb/pull/16915)
@@ -53,10 +53,10 @@ TiDB バージョン: 4.0.0-rc.2
 
 - TiDB
 
-    - データのバックアップと復元のためのコマンド`BACKUP`と`RESTORE`サポートを追加[#16960](https://github.com/pingcap/tidb/pull/16960)
+    - データのバックアップと復元のための`BACKUP`と`RESTORE`コマンドのサポートを追加[#16960](https://github.com/pingcap/tidb/pull/16960)
     - コミット前に単一リージョン内のデータ量を事前チェックし、データ量がしきい値を超えた場合にリージョンを事前分割する機能をサポートします。 [#16959](https://github.com/pingcap/tidb/pull/16959)
     - 最後に実行されたステートメントがプランキャッシュにヒットしたかどうかを示す、スコープ`Session`を持つ新しい`LAST_PLAN_FROM_CACHE`変数を追加します。 [#16830](https://github.com/pingcap/tidb/pull/16830)
-    - スローログと`SLOW_LOG` の`Cop_time`情報を記録することをサポート [#16904](https://github.com/pingcap/tidb/pull/16904)
+    - スローログと`SLOW_LOG`テーブルに`Cop_time`情報を記録することをサポート [#16904](https://github.com/pingcap/tidb/pull/16904)
     - Grafana に Go Runtime のメモリ状態を監視するメトリクスを追加します [#16928](https://github.com/pingcap/tidb/pull/16928)
     - 一般ログに`forUpdateTS`および`Read Consistency`分離レベル情報を出力することをサポート [#16946](https://github.com/pingcap/tidb/pull/16946)
     - TiKVリージョンでのロック解決の重複リクエストの折りたたみをサポート [#16925](https://github.com/pingcap/tidb/pull/16925)
@@ -75,8 +75,8 @@ TiDB バージョン: 4.0.0-rc.2
     - スナップショットのロックカラムファミリーの暗号化をサポート [#7712](https://github.com/tikv/tikv/pull/7712)
     - Grafanaダッシュボードのヒートマップを使用して、 Raftstoreのレイテンシーサマリーを表示し、ジッターの問題をより適切に診断します[#7717](https://github.com/tikv/tikv/pull/7717)
     - gRPC メッセージのサイズの上限設定をサポート[#7824](https://github.com/tikv/tikv/pull/7824)
-    - Grafanaダッシュボードに暗号化関連の監視メトリクス追加する [#7827](https://github.com/tikv/tikv/pull/7827)
-    - アプリケーション層プロトコルネゴシエーション（ALPN） サポート [#7825](https://github.com/tikv/tikv/pull/7825)
+    - Grafanaダッシュボードに暗号化関連の監視メトリクスを追加する [#7827](https://github.com/tikv/tikv/pull/7827)
+    - アプリケーション層プロトコルネゴシエーション（ALPN）をサポート [#7825](https://github.com/tikv/tikv/pull/7825)
     - Titan に関する統計情報を追加する [#7818](https://github.com/tikv/tikv/pull/7818)
     - 同じトランザクション内の別のタスクによってタスクの優先度が下げられるのを回避するために、クライアントによって提供されたタスクIDを統合読み取りプールの識別子として使用することをサポートします[#7814](https://github.com/tikv/tikv/pull/7814)
     - `batch insert`リクエストのパフォーマンスを向上させる [#7718](https://github.com/tikv/tikv/pull/7718)
@@ -95,7 +95,7 @@ TiDB バージョン: 4.0.0-rc.2
 
     - TiDB Lightning
 
-        - tidb-lightning-ctlに`fetch-mode`サブコマンドを追加して、TiKVクラスタモード印刷します。 [#287](https://github.com/pingcap/tidb-lightning/pull/287)
+        - tidb-lightning-ctlに`fetch-mode`サブコマンドを追加して、TiKVクラスタモードを出力します。 [#287](https://github.com/pingcap/tidb-lightning/pull/287)
 
     - TiCDC
 
@@ -112,14 +112,14 @@ TiDB バージョン: 4.0.0-rc.2
 
     - 複数のオペレーターでの式実行にベクトル化を使用するかどうかを決定するロジックを改善 [#16383](https://github.com/pingcap/tidb/pull/16383)
     - `IndexMerge`ヒントがデータベース名を正しくチェックできない問題を修正[#16932](https://github.com/pingcap/tidb/pull/16932)
-    - シーケンスオブジェクト切り捨てを禁止する [#17037](https://github.com/pingcap/tidb/pull/17037)
+    - シーケンスオブジェクトの切り捨てを禁止する [#17037](https://github.com/pingcap/tidb/pull/17037)
     - `INSERT` / `UPDATE` / `ANALYZE` / `DELETE`文がシーケンスオブジェクトで実行できる問題を修正しました [#16957](https://github.com/pingcap/tidb/pull/16957)
     - ブートストラップフェーズの内部SQL文がステートメントサマリーテーブルで内部クエリとして正しくマークされない問題を修正しました。 [#17062](https://github.com/pingcap/tidb/pull/17062)
     - TiFlashではサポートされているがTiKVではサポートされていないフィルタ条件が`IndexLookupJoin`オペレーターにプッシュダウンされたときに発生するエラーを修正しました [#17036](https://github.com/pingcap/tidb/pull/17036)
     - 照合順序が有効になった後に発生する可能性のある`LIKE`の同時実行の問題を修正[#16997](https://github.com/pingcap/tidb/pull/16997)
     - 照合順序が有効になった後、 `LIKE`関数が`Range`クエリインデックスを正しく構築できない問題を修正しました[#16783](https://github.com/pingcap/tidb/pull/16783)
     - `Plan Cache`文がトリガーされた後に`@@LAST_PLAN_FROM_CACHE`を実行すると間違った値が返される問題を修正[#16831](https://github.com/pingcap/tidb/pull/16831)
-    - `IndexMerge` の候補パスを計算するときにインデックスの`TableFilter`失われる問題を修正しました [#16947](https://github.com/pingcap/tidb/pull/16947)
+    - `IndexMerge` の候補パスを計算するときにインデックスの`TableFilter`が失われる問題を修正しました [#16947](https://github.com/pingcap/tidb/pull/16947)
     - `MergeJoin`ヒントを使用し、 `TableDual`演算子が存在する場合に物理クエリプランを生成できない問題を修正しました[#17016](https://github.com/pingcap/tidb/pull/17016)
     - ステートメントサマリーテーブルの`Stmt_Type`列の値の大文字と小文字の誤りを修正しました。 [#17018](https://github.com/pingcap/tidb/pull/17018)
     - 異なるユーザーが同じ`tmp-storage-path` を使用するとサービスを開始できないため、 `Permission Denied`エラーが報告される問題を修正しました。 [#16996](https://github.com/pingcap/tidb/pull/16996)
@@ -128,30 +128,30 @@ TiDB バージョン: 4.0.0-rc.2
     - 複数の異なるロックを持つ単一のキーに遭遇したときに、グリーンGCが未解決のロックを残す可能性がある問題を修正しました[#16948](https://github.com/pingcap/tidb/pull/16948)
     - サブクエリが親クエリ列を参照しているため、 `INSERT VALUE`ステートメントに間違った値が挿入される問題を修正しました。 [#16952](https://github.com/pingcap/tidb/pull/16952)
     - `Float`値に`AND`演算子を使用したときに誤った結果が出る問題を修正しました [#16666](https://github.com/pingcap/tidb/pull/16666)
-    - 高価なログの`WAIT_TIME`フィールドの誤った情報を修正 [#16907](https://github.com/pingcap/tidb/pull/16907)
+    - 高負荷クエリログの`WAIT_TIME`フィールドの誤った情報を修正 [#16907](https://github.com/pingcap/tidb/pull/16907)
     - 悲観的トランザクションモードで`SELECT FOR UPDATE`文がスローログに記録できない問題を修正 [#16897](https://github.com/pingcap/tidb/pull/16897)
     - `Enum`または`Set`タイプの列で`SELECT DISTINCT`を実行したときに発生する誤った結果を修正[#16892](https://github.com/pingcap/tidb/pull/16892)
     - `SHOW CREATE TABLE`文の`auto_random_base`の表示エラーを修正 [#16864](https://github.com/pingcap/tidb/pull/16864)
     - `WHERE`句の`string_value`の誤った値を修正する [#16559](https://github.com/pingcap/tidb/pull/16559)
     - `GROUP BY`ウィンドウ関数のエラーメッセージがMySQL と一致しない問題を修正しました [#16165](https://github.com/pingcap/tidb/pull/16165)
     - データベース名に大文字の含まれている場合に`FLASH TABLE`文の実行が失敗する問題を修正しました [#17167](https://github.com/pingcap/tidb/pull/17167)
-    - 投影実行プログラムの不正確なメモリトレースを修正しました [#17118](https://github.com/pingcap/tidb/pull/17118)
+    - Projection エグゼキュータの不正確なメモリトレースを修正しました [#17118](https://github.com/pingcap/tidb/pull/17118)
     - 異なるタイムゾーンの`SLOW_QUERY`テーブルで時間フィルタリングが正しく行われない問題を修正しました[#17164](https://github.com/pingcap/tidb/pull/17164)
     - 仮想生成列で`IndexMerge`が使用された場合に発生するpanic問題を修正 [#17126](https://github.com/pingcap/tidb/pull/17126)
     - `INSTR`と`LOCATE`関数の大文字化の問題を修正 [#17068](https://github.com/pingcap/tidb/pull/17068)
     - `tidb_allow_batch_cop`構成を有効にした後に`tikv server timeout`エラーが頻繁に報告される問題を修正[#17161](https://github.com/pingcap/tidb/pull/17161)
     - Float型に対して`XOR`演算を実行した結果がMySQL 8.0 と一致しない問題を修正 [#16978](https://github.com/pingcap/tidb/pull/16978)
     - サポートされていない`ALTER TABLE REORGANIZE PARTITION`文が実行されてもエラーが報告されない問題を修正[#17178](https://github.com/pingcap/tidb/pull/17178)
-    - `EXPLAIN FORMAT="dot"  FOR CONNECTION ID`サポートされていないプランに遭遇したときにエラーが報告される問題を修正[#17160](https://github.com/pingcap/tidb/pull/17160)
+    - `EXPLAIN FORMAT="dot"  FOR CONNECTION ID`がサポートされていないプランに遭遇したときにエラーが報告される問題を修正[#17160](https://github.com/pingcap/tidb/pull/17160)
     - ステートメントサマリーテーブルの`EXEC_COUNT`列にあるプリペアドステートメントのレコードの問題を修正しました。 [#17086](https://github.com/pingcap/tidb/pull/17086)
     - ステートメントサマリーシステム変数を設定するときに値が検証されない問題を修正しました [#17129](https://github.com/pingcap/tidb/pull/17129)
     - プランキャッシュが有効な場合に、オーバーフロー値を使用して`UNSIGNED BIGINT`主キーをクエリするとエラーが報告される問題を修正しました[#17120](https://github.com/pingcap/tidb/pull/17120)
-    - Grafana **TiDB サマリーダッシュ**ボードで、マシンインスタンスとリクエストタイプによる QPS 表示が誤っていた問題を修正しました。 [#17105](https://github.com/pingcap/tidb/pull/17105)
+    - Grafana の**TiDB Summary**ダッシュボードで、マシンインスタンスとリクエストタイプによる QPS 表示が誤っていた問題を修正しました。 [#17105](https://github.com/pingcap/tidb/pull/17105)
 
 - TiKV
 
     - 復元後に多くの空のリージョンが生成される問題を修正[#7632](https://github.com/tikv/tikv/pull/7632)
-    - 順序がずれたインデックス読み取り応答を受け取ったときにRaftstoreがpanic問題を修正[#7370](https://github.com/tikv/tikv/pull/7370)
+    - 順序がずれた read index 応答を受け取ったときにRaftstoreがpanicする問題を修正[#7370](https://github.com/tikv/tikv/pull/7370)
     - 統合スレッドプールが有効な場合に、無効なストレージまたはコプロセッサ読み取りプール構成が拒否されない可能性がある問題を修正しました[#7513](https://github.com/tikv/tikv/pull/7513)
     - TiKVサーバーがシャットダウンされたときの`join`操作のpanic問題を修正しました[#7713](https://github.com/tikv/tikv/pull/7713)
     - 診断API 経由でTiKVスローログを検索しても結果が返されない問題を修正 [#7776](https://github.com/tikv/tikv/pull/7776)
@@ -181,14 +181,14 @@ TiDB バージョン: 4.0.0-rc.2
 
     - TiDB Binlog
 
-        - ダウンストリームがKafka 場合に`mediumint`型のデータが処理されない問題を修正 [#962](https://github.com/pingcap/tidb-binlog/pull/962)
-        - DDL内のデータベース名がキーワード場合にreparoがDDL文の解析に失敗する問題を修正しました [#961](https://github.com/pingcap/tidb-binlog/pull/961)
+        - ダウンストリームがKafka の場合に`mediumint`型のデータが処理されない問題を修正 [#962](https://github.com/pingcap/tidb-binlog/pull/962)
+        - DDL内のデータベース名がキーワードの場合にreparoがDDL文の解析に失敗する問題を修正しました [#961](https://github.com/pingcap/tidb-binlog/pull/961)
 
     - TiCDC
 
         - `TZ`環境変数が設定されていない場合に間違ったタイムゾーンが使用される問題を修正[#512](https://github.com/pingcap/tiflow/pull/512)
 
-        - いくつかのエラーが正しく処理されないため、サーバーが終了したときに所有者がリソースをクリーンアップしない問題を修正しました[#528](https://github.com/pingcap/tiflow/pull/528)
+        - いくつかのエラーが正しく処理されないため、サーバーが終了したときにオーナーがリソースをクリーンアップしない問題を修正しました[#528](https://github.com/pingcap/tiflow/pull/528)
 
         - TiKV に再接続するときにTiCDCが停止する可能性がある問題を修正しました [#531](https://github.com/pingcap/tiflow/pull/531)
 

@@ -3,7 +3,7 @@ title: TiDB 4.0.0 Beta.2 Release Notes
 summary: TiDB 4.0.0 Beta.2は2020年3月18日にリリースされました。新機能には、動的に更新される設定の永続化、双方向データレプリケーション、TLS設定、変更データキャプチャ、増分バックアップなどの実験的な機能のサポートが含まれます。バグ修正では、panic、Hibernate Region、レプリケーション遅延、互換性に関する問題が修正されました。TiDB Ansibleは、etcdへのノード情報の注入とARMプラットフォームへのサービスのデプロイをサポートするようになりました。
 ---
 
-# TiDB 4.0.0 ベータ2 リリースノート {#tidb-4-0-0-beta-2-release-notes}
+# TiDB 4.0.0 Beta.2 リリースノート {#tidb-4-0-0-beta-2-release-notes}
 
 リリース日：2020年3月18日
 
@@ -46,8 +46,8 @@ TiDB Ansible バージョン: 4.0.0-beta.2
 ## バグ修正 {#bug-fixes}
 
 - TiKV
-    - バックアップ中に空の短い値に遭遇したときに発生する可能性のpanic問題を修正しました[#6718](https://github.com/tikv/tikv/pull/6718)
-    - 一部のケースで休止状態領域が正しく起動されない可能性がある問題を修正[#6772](https://github.com/tikv/tikv/pull/6672) [#6648](https://github.com/tikv/tikv/pull/6648) [#6376](https://github.com/tikv/tikv/pull/6736)
+    - バックアップ中に空の短い値に遭遇したときに発生する可能性のあるpanic問題を修正しました[#6718](https://github.com/tikv/tikv/pull/6718)
+    - 一部のケースでHibernate Region が正しくウェイクアップされない可能性がある問題を修正[#6772](https://github.com/tikv/tikv/pull/6672) [#6648](https://github.com/tikv/tikv/pull/6648) [#6376](https://github.com/tikv/tikv/pull/6736)
 
 - PD
     - ルールチェッカーがリージョンにストアを割り当てられないというpanic問題を修正しました [#2160](https://github.com/pingcap/pd/pull/2160)

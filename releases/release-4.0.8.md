@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.8 Release Notes
-summary: TiDB 4.0.8は2020年10月30日にリリースされました。新機能には、新しい集計関数`APPROX_PERCENTILE`のサポートと、 TiFlashにおける`CAST`関数のプッシュダウンが含まれます。TiDB、TiKV、PD、 TiFlashの機能強化に加え、TiDB、TiKV、PD、 TiFlash、バックアップとリストア（BR）、TiCDC、 TiDB Lightningのバグ修正も実装されました。
+summary: TiDB 4.0.8は2020年10月30日にリリースされました。新機能には、新しい集計関数`APPROX_PERCENTILE`のサポートと、 TiFlashにおける`CAST`関数のプッシュダウンが含まれます。TiDB、TiKV、PD、 TiFlashの機能強化に加え、TiDB、TiKV、PD、 TiFlash、Backup and Restore（BR）、TiCDC、 TiDB Lightningのバグ修正も実装されました。
 ---
 
 # TiDB 4.0.8 リリースノート {#tidb-4-0-8-release-notes}
@@ -40,7 +40,7 @@ TiDB バージョン: 4.0.8
     - クライアントの接続/切断アクティビティのTiDBエラーログを`DEBUG`レベルに調整します。 [#20321](https://github.com/pingcap/tidb/pull/20321)
     - コプロセッサーキャッシュの監視メトリックを追加します。 [#20293](https://github.com/pingcap/tidb/pull/20293)
     - 悲観的ロックキーのランタイム情報を追加 [#20199](https://github.com/pingcap/tidb/pull/20199)
-    - 実行時間情報と`trace`スパンに時間消費情報のセクションを2つ追加します [#20187](https://github.com/pingcap/tidb/pull/20187)
+    - 実行時情報と`trace`スパンに時間消費情報のセクションを2つ追加します [#20187](https://github.com/pingcap/tidb/pull/20187)
     - スローログにトランザクションコミットの実行時情報を追加する [#20185](https://github.com/pingcap/tidb/pull/20185)
     - インデックスマージ結合を無効にする [#20599](https://github.com/pingcap/tidb/pull/20599)
     - 時間文字列リテラルに ISO 8601 とタイムゾーンのサポートを追加[#20670](https://github.com/pingcap/tidb/pull/20670)
@@ -56,13 +56,13 @@ TiDB バージョン: 4.0.8
 - PD
 
     - エラーのメタファイルを生成する[#3090](https://github.com/pingcap/pd/pull/3090)
-    - オペレーター追加情報を追加します [#3009](https://github.com/pingcap/pd/pull/3009)
+    - オペレーターの追加情報を追加します [#3009](https://github.com/pingcap/pd/pull/3009)
 
 - TiFlash
 
     - Raftログの監視メトリックを追加する
     - `cop`タスクのメモリ使用量の監視メトリックを追加します
-    - データが削除されたときに`min`インデックス`max`より正確にする
+    - データが削除されたときに`min`/`max`インデックスをより正確にする
     - データ量が少ない場合のクエリパフォーマンスを向上
     - 標準エラーコードをサポートするために`errors.toml`ファイルを追加します
 
@@ -76,12 +76,12 @@ TiDB バージョン: 4.0.8
 
     - TiCDC
 
-        - MySQLシンクの統計情報を定期的に印刷する[#1023](https://github.com/pingcap/tiflow/pull/1023)
+        - MySQLシンクの統計情報を定期的に出力する[#1023](https://github.com/pingcap/tiflow/pull/1023)
 
     - Dumpling
 
-        - S3ストレージへのDumplingデータの直接サポート[#155](https://github.com/pingcap/dumpling/pull/155)
-        - ダンプビューのサポート[#158](https://github.com/pingcap/dumpling/pull/158)
+        - S3ストレージへのデータの直接ダンプをサポート[#155](https://github.com/pingcap/dumpling/pull/155)
+        - ビューのダンプをサポート[#158](https://github.com/pingcap/dumpling/pull/158)
         - 生成列のみを含むテーブルのダンプをサポート[#166](https://github.com/pingcap/dumpling/pull/166)
 
     - TiDB Lightning
@@ -95,25 +95,25 @@ TiDB バージョン: 4.0.8
 - TiDB
 
     - パーティションテーブルの使用時に発生する予期しないpanicを修正[#20565](https://github.com/pingcap/tidb/pull/20565)
-    - インデックスマージ結合を使用して外側をフィルタリングする際の外側結合の誤った結果を修正しました [#20427](https://github.com/pingcap/tidb/pull/20427)
+    - インデックスマージ結合を使用して外側をフィルタリングする際の外部結合の誤った結果を修正しました [#20427](https://github.com/pingcap/tidb/pull/20427)
     - データが長すぎる場合、データを`BIT`型に変換するときに`NULL`値が返される問題を修正しました[#20363](https://github.com/pingcap/tidb/pull/20363)
     - `BIT`型列の破損したデフォルト値を修正 [#20340](https://github.com/pingcap/tidb/pull/20340)
     - `BIT`型を`INT64`型に変換するときに発生する可能性のあるオーバーフローエラーを修正しました[#20312](https://github.com/pingcap/tidb/pull/20312)
     - ハイブリッド型列の列伝播最適化で誤った結果が発生する可能性があった問題を修正しました。 [#20297](https://github.com/pingcap/tidb/pull/20297)
     - プランキャッシュから古いプランを保存するときに発生する可能性のあるpanicを修正しました [#20246](https://github.com/pingcap/tidb/pull/20246)
-    - `FROM_UNIXTIME`と`UNION ALL`一緒に使用すると返される結果が誤って切り捨てられるバグを修正しました[#20240](https://github.com/pingcap/tidb/pull/20240)
+    - `FROM_UNIXTIME`と`UNION ALL`を一緒に使用すると返される結果が誤って切り捨てられるバグを修正しました[#20240](https://github.com/pingcap/tidb/pull/20240)
     - `Enum`型の値を`Float`型に変換すると間違った結果が返される可能性がある問題を修正しました[#20235](https://github.com/pingcap/tidb/pull/20235)
     - `RegionStore.accessStore` の可能性のある panic を修正 [#20210](https://github.com/pingcap/tidb/pull/20210)
     - `BatchPointGet` で最大の符号なし整数をソートしたときに返される誤った結果を修正しました [#20205](https://github.com/pingcap/tidb/pull/20205)
     - `Enum`と`Set`の強制力が間違っているバグを修正[#20364](https://github.com/pingcap/tidb/pull/20364)
     - 曖昧な`YEAR`変換の問題を修正 [#20292](https://github.com/pingcap/tidb/pull/20292)
-    - **KV期間**パネルに`store0` が含まれている場合に発生する誤った報告結果の問題を修正しました [#20260](https://github.com/pingcap/tidb/pull/20260)
+    - **KV duration**パネルに`store0` が含まれている場合に発生する誤った報告結果の問題を修正しました [#20260](https://github.com/pingcap/tidb/pull/20260)
     - `out of range`エラーに関係なく`Float`タイプのデータが誤って挿入される問題を修正 [#20252](https://github.com/pingcap/tidb/pull/20252)
     - 生成列が不正な`NULL`値を処理できないバグを修正しました[#20216](https://github.com/pingcap/tidb/pull/20216)
     - 範囲外の`YEAR`型データの不正確なエラー情報を修正 [#20170](https://github.com/pingcap/tidb/pull/20170)
     - 悲観的トランザクション再試行中に発生する可能性のある予期しないエラー`invalid auto-id`を修正[#20134](https://github.com/pingcap/tidb/pull/20134)
     - `ALTER TABLE`を使用して`Enum`/`Set`タイプを変更するときに制約がチェックされない問題を修正[#20046](https://github.com/pingcap/tidb/pull/20046)
-    - 複数の演算子を並行処理に使用した場合に記録される`cop`タスクの誤った実行時間情報を修正[#19947](https://github.com/pingcap/tidb/pull/19947)
+    - 複数の演算子を並行処理に使用した場合に記録される`cop`タスクの誤った実行時情報を修正[#19947](https://github.com/pingcap/tidb/pull/19947)
     - 読み取り専用システム変数をセッション変数として明示的に選択できない問題を修正[#19944](https://github.com/pingcap/tidb/pull/19944)
     - 重複した`ORDER BY`条件により、最適ではない実行計画が発生する可能性がある問題を修正しました。 [#20333](https://github.com/pingcap/tidb/pull/20333)
     - フォントサイズが最大許容値を超えると、生成されたメトリックプロファイルが失敗する可能性がある問題を修正しました。 [#20637](https://github.com/pingcap/tidb/pull/20637)
@@ -143,7 +143,7 @@ TiDB バージョン: 4.0.8
 
     - Backup & Restore (BR)
 
-        - 復元中に発生し`send on closed channel`panicを修正[#559](https://github.com/pingcap/br/pull/559)
+        - 復元中に発生する`send on closed channel`のpanicを修正[#559](https://github.com/pingcap/br/pull/559)
 
     - TiCDC
 
