@@ -18,11 +18,11 @@ TiDB バージョン: 4.0.15
     <!---->
 
     - 次のバグ修正により実行結果が変わり、アップグレードの非互換性が発生する可能性があります。
-        - `greatest(datetime) union null`空の文字列を返す問題を修正[#26532](https://github.com/pingcap/tidb/issues/26532)
+        - `greatest(datetime) union null`が空の文字列を返す問題を修正[#26532](https://github.com/pingcap/tidb/issues/26532)
         - `having`節が正しく動作しない可能性がある問題を修正[#26496](https://github.com/pingcap/tidb/issues/26496)
-        - `between`前後の照合順序が異なる場合に発生する誤った実行結果を修正[#27146](https://github.com/pingcap/tidb/issues/27146)
-        - `extract`関数の引数が負の期間場合に発生する結果の誤りを修正 [#27236](https://github.com/pingcap/tidb/issues/27236)
-        - `group_concat`関数の列に非ビン照合順序ある場合に発生する誤った実行結果を修正しました [#27429](https://github.com/pingcap/tidb/issues/27429)
+        - `between`式の前後の照合順序が異なる場合に発生する誤った実行結果を修正[#27146](https://github.com/pingcap/tidb/issues/27146)
+        - `extract`関数の引数が負の期間の場合に発生する結果の誤りを修正 [#27236](https://github.com/pingcap/tidb/issues/27236)
+        - `group_concat`関数の列に非バイナリ（non-bin）照合順序がある場合に発生する誤った実行結果を修正しました [#27429](https://github.com/pingcap/tidb/issues/27429)
         - `Apply`オペレーターを`Join` に変換するときに列情報が失われる問題を修正しました [#27233](https://github.com/pingcap/tidb/issues/27233)
         - 無効な文字列を`DATE` にキャストする際の予期しない動作の問題を修正しました [#26762](https://github.com/pingcap/tidb/issues/26762)
         - 新しい照合順序が有効になっているときに、複数の列の`count distinct`結果が間違っているというバグを修正しました[#27091](https://github.com/pingcap/tidb/issues/27091)
@@ -37,11 +37,11 @@ TiDB バージョン: 4.0.15
 
 - TiDB
 
-    - ヒストグラムの行数に基づいて自動分析をトリガーする[#24237](https://github.com/pingcap/tidb/issues/24237)
+    - ヒストグラムの行数に基づいて auto analyze をトリガーする[#24237](https://github.com/pingcap/tidb/issues/24237)
 
 - TiKV
 
-    - 読み取り準備と書き込み準備は別々に処理して読み取りレイテンシーを削減する[#10475](https://github.com/tikv/tikv/issues/10475)
+    - read ready と write ready を別々に処理して読み取りレイテンシーを削減する[#10475](https://github.com/tikv/tikv/issues/10475)
     - TiKVコプロセッサのスローログは、リクエストの処理に費やされた時間のみを考慮します[#10841](https://github.com/tikv/tikv/issues/10841)
     - スロガースレッドが過負荷になりキューがいっぱいになったときに、スレッドをブロックする代わりにログをドロップする[#10841](https://github.com/tikv/tikv/issues/10841)
     - ネットワーク帯域幅を節約するために、Resolved TSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
@@ -54,7 +54,7 @@ TiDB バージョン: 4.0.15
 
     - Backup & Restore (BR)
 
-        - 領域を同時に分割して分散させることで、復元速度が向上します[#1363](https://github.com/pingcap/br/pull/1363)
+        - リージョンを同時に分割して分散させることで、復元速度が向上します[#1363](https://github.com/pingcap/br/pull/1363)
         - PD リクエストエラーまたは TiKV I/O タイムアウトエラーが発生した場合は、 BRタスクを再試行します[#27787](https://github.com/pingcap/tidb/issues/27787)
         - 多数の小さなテーブルをリストアするときに空のリージョンを減らして、リストア後のクラスタ操作に影響を与えないようにします[#1374](https://github.com/pingcap/br/issues/1374)
         - テーブルの作成中に`rebase auto id`操作を実行すると、別の`rebase auto id` DDL操作が節約され、 復元が高速化されます。 [#1424](https://github.com/pingcap/br/pull/1424)
@@ -77,7 +77,7 @@ TiDB バージョン: 4.0.15
         - 同時実行性が高い場合は、ワーカープールを最適化してゴルーチンの数を減らす[#2211](https://github.com/pingcap/tiflow/issues/2211)
         - 他の変更フィードに影響を与えないように、DDL文を非同期で実行します[#2295](https://github.com/pingcap/tiflow/issues/2295)
         - グローバル gRPC 接続プールを追加し、KV クライアント間で gRPC 接続を共有する[#2531](https://github.com/pingcap/tiflow/pull/2531)
-        - 回復不可能なDMLエラーに対して迅速に対処[#1724](https://github.com/pingcap/tiflow/issues/1724)
+        - 回復不可能なDMLエラーが発生した場合はすぐに失敗するようにする[#1724](https://github.com/pingcap/tiflow/issues/1724)
         - 統合ソーターがメモリを使用してデータをソートする場合のメモリ管理を最適化します[#2553](https://github.com/pingcap/tiflow/issues/2553)
         - DDL実行のPrometheusメトリックを追加する[#2595](https://github.com/pingcap/tiflow/issues/2595) [#2669](https://github.com/pingcap/tiflow/issues/2669)
         - メジャーバージョンまたはマイナーバージョン間での TiCDC クラスターの操作を禁止[#2601](https://github.com/pingcap/tiflow/pull/2601)
@@ -89,7 +89,7 @@ TiDB バージョン: 4.0.15
 
 - TiDB
 
-    - 範囲構築するときにバイナリリテラルの照合順序順序が誤って設定されるバグを修正しました [#23672](https://github.com/pingcap/tidb/issues/23672)
+    - 範囲を構築するときにバイナリリテラルの照合順序が誤って設定されるバグを修正しました [#23672](https://github.com/pingcap/tidb/issues/23672)
 
     - クエリに`GROUP BY`と`UNION`の両方が含まれている場合に発生する"index out of range"というエラーを修正しました。 [#26553](https://github.com/pingcap/tidb/pull/26553)
 
@@ -133,7 +133,7 @@ TiDB バージョン: 4.0.15
         - `capture list`コマンドの出力に古いキャプチャが表示される可能性がある問題を修正しました [#2388](https://github.com/pingcap/tiflow/issues/2388)
         - TiCDC プロセッサのデッドロック問題を修正 [#2017](https://github.com/pingcap/tiflow/pull/2017)
         - このテーブルが再スケジュールされているときに複数のプロセッサが同じテーブルにデータを書き込む可能性があるために発生するデータの不整合の問題を修正しました[#2230](https://github.com/pingcap/tiflow/issues/2230)
-        - メタデータ管理で`EtcdWorker`ショット分離が違反されるバグを修正 [#2557](https://github.com/pingcap/tiflow/pull/2557)
+        - メタデータ管理で`EtcdWorker`のスナップショット分離が破られるバグを修正 [#2557](https://github.com/pingcap/tiflow/pull/2557)
         - DDLシンクエラーによりチェンジフィードを停止できない問題を修正 [#2552](https://github.com/pingcap/tiflow/issues/2552)
         - TiCDC Open Protocolの問題を修正: トランザクションに変更がない場合、TiCDC は空の値を出力します [#2612](https://github.com/pingcap/tiflow/issues/2612)
         - 符号なし`TINYINT`型でTiCDCがpanicを起こすバグを修正 [#2648](https://github.com/pingcap/tiflow/issues/2648)

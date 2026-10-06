@@ -64,17 +64,17 @@ TiDB バージョン: 4.0.13
     - `insert ignore on duplicate`文が予期せずテーブルレコードを削除する可能性がある問題を修正しました [#23825](https://github.com/pingcap/tidb/pull/23825)
     - 監査プラグインが TiDB panicを引き起こす問題を修正[#23819](https://github.com/pingcap/tidb/pull/23819)
     - `HashJoin`オペレーターが照合順序を誤って処理する問題を修正しました [#23812](https://github.com/pingcap/tidb/pull/23812)
-    - `batch_point_get`悲観的トランザクションで異常値を誤って処理した場合に発生する切断の問題を修正 [#23778](https://github.com/pingcap/tidb/pull/23778)
+    - `batch_point_get`が悲観的トランザクションで異常値を誤って処理した場合に発生する切断の問題を修正 [#23778](https://github.com/pingcap/tidb/pull/23778)
     - `tidb_row_format_version`設定値が`1`に設定され、 `enable_new_collation`値が`true` に設定されている場合に発生する不整合なインデックスの問題を修正しました。 [#23772](https://github.com/pingcap/tidb/pull/23772)
-    - `INTEGER`型の列と`STRING`定数値比較する際に発生するバグを修正 [#23705](https://github.com/pingcap/tidb/pull/23705)
+    - `INTEGER`型の列と`STRING`定数値と比較する際に発生するバグを修正 [#23705](https://github.com/pingcap/tidb/pull/23705)
     - `BIT`型の列が`approx_percent`関数に渡されるときに発生するエラーを修正 [#23702](https://github.com/pingcap/tidb/pull/23702)
     - TiFlashバッチリクエストを実行する際にTiDBが誤って`TiKV server timeout`エラーを報告するバグを修正しました [#23700](https://github.com/pingcap/tidb/pull/23700)
-    - プレフィックス列インデックスで演算子`IndexJoin`間違った結果を返す問題を修正しました [#23691](https://github.com/pingcap/tidb/pull/23691)
+    - プレフィックス列インデックスで`IndexJoin`演算子が間違った結果を返す問題を修正しました [#23691](https://github.com/pingcap/tidb/pull/23691)
     - `BINARY`型列の照合順序が適切に処理されないため、間違ったクエリ結果が発生する問題を修正しました[#23598](https://github.com/pingcap/tidb/pull/23598)
     - `UPDATE`文に`HAVING`句を含む結合クエリが含まれている場合に発生するクエリpanicの問題を修正しました[#23575](https://github.com/pingcap/tidb/pull/23575)
     - 比較式で定数`NULL`を使用するとTiFlashが誤った結果を返す問題を修正しました [#23474](https://github.com/pingcap/tidb/pull/23474)
-    - `YEAR`型の列と`STRING`定数比較したときに誤った結果が出る問題を修正しました [#23335](https://github.com/pingcap/tidb/pull/23335)
-    - `session.group_concat_max_len`小さすぎると`group_concat`パニックになる問題を修正[#23257](https://github.com/pingcap/tidb/pull/23257)
+    - `YEAR`型の列と`STRING`定数と比較したときに誤った結果が出る問題を修正しました [#23335](https://github.com/pingcap/tidb/pull/23335)
+    - `session.group_concat_max_len`が小さすぎると`group_concat`がパニックになる問題を修正[#23257](https://github.com/pingcap/tidb/pull/23257)
     - `TIME`型の列に`BETWEEN`式を使用したときに間違ったクエリ結果が発生する問題を修正しました [#23233](https://github.com/pingcap/tidb/pull/23233)
     - `DELETE`文の権限チェックの問題を修正 [#23215](https://github.com/pingcap/tidb/pull/23215)
     - `DECIMAL`型列に無効な文字列を挿入してもエラーが報告されない問題を修正 [#23196](https://github.com/pingcap/tidb/pull/23196)
@@ -85,7 +85,7 @@ TiDB バージョン: 4.0.13
     - `enable_new_collation`を有効にした状態で`ANALYZE`を実行した際に発生するpanicを修正[#21299](https://github.com/pingcap/tidb/pull/21299)
     - SQLビューがSQL DEFINER に関連付けられたデフォルトのロールを正しく処理しない問題を修正しました。 [#24531](https://github.com/pingcap/tidb/pull/24531)
     - DDLジョブのキャンセルがスタックする問題を修正[#24445](https://github.com/pingcap/tidb/pull/24445)
-    - `concat`関数が照合順序誤って処理する問題を修正しました [#24300](https://github.com/pingcap/tidb/pull/24300)
+    - `concat`関数が照合順序を誤って処理する問題を修正しました [#24300](https://github.com/pingcap/tidb/pull/24300)
     - `SELECT`のフィールドに`IN`サブクエリがあり、そのサブクエリの外側に`NULL` タプルが含まれている場合にクエリが間違った結果を返すバグを修正しました。 [#24022](https://github.com/pingcap/tidb/pull/24022)
     - `TableScan`が降順の場合にオプティマイザによってTiFlashが誤って選択されるバグを修正[#23974](https://github.com/pingcap/tidb/pull/23974)
     - `point_get`プランがMySQL と一致しない列名を返すバグを修正しました [#23970](https://github.com/pingcap/tidb/pull/23970)
@@ -93,18 +93,18 @@ TiDB バージョン: 4.0.13
     - テーブルに対して同時に`INSERT`と`DELETE`権限を持たないユーザーが`REPLACE`操作を実行できるバグを修正しました。 [#23938](https://github.com/pingcap/tidb/pull/23938)
     - 照合順序が正しく処理されていないため、 `concat` / `make_set` / `insert`式の結果が間違っている問題を修正しました[#23878](https://github.com/pingcap/tidb/pull/23878)
     - `RANGE`パーティションを持つテーブルでクエリを実行するときに発生するpanicを修正しました [#23689](https://github.com/pingcap/tidb/pull/23689)
-    - 問題を修正: 以前のバージョンのクラスターで、変数`tidb_enable_table_partition` `false`に設定されている場合、パーティションを含むテーブルは非パーティションテーブルとして扱われます。クラスターを新しいバージョンにアップグレードした後、このテーブルに対して`batch point get`クエリを実行すると、接続panicが発生します[#23682](https://github.com/pingcap/tidb/pull/23682)
+    - 問題を修正: 以前のバージョンのクラスターで、変数`tidb_enable_table_partition`が`false`に設定されている場合、パーティションを含むテーブルは非パーティションテーブルとして扱われます。クラスターを新しいバージョンにアップグレードした後、このテーブルに対して`batch point get`クエリを実行すると、接続panicが発生します[#23682](https://github.com/pingcap/tidb/pull/23682)
     - TiDB が TCP および UNIX ソケットを listen するように構成されている場合、TCP 接続経由のリモートホストが接続に対して正しく検証されない問題を修正しました。 [#23513](https://github.com/pingcap/tidb/pull/23513)
     - デフォルト以外の照合順序で間違ったクエリ結果が発生するバグを修正[#22923](https://github.com/pingcap/tidb/pull/22923)
     - Grafanaの**Coprocessor Cache**パネルが動作しないバグを修正[#22617](https://github.com/pingcap/tidb/pull/22617)
-    - オプティマイザが統計キャッシュアクセスする際に発生するエラーを修正 [#22565](https://github.com/pingcap/tidb/pull/22565)
+    - オプティマイザが統計キャッシュにアクセスする際に発生するエラーを修正 [#22565](https://github.com/pingcap/tidb/pull/22565)
 
 - TiKV
 
-    - `file_dict`ファイルが完全に書き込まれていないディスクがある場合、TiKVが起動できないバグを修正しました。 [#9963](https://github.com/tikv/tikv/pull/9963)
+    - 満杯になったディスクに`file_dict`ファイルが完全に書き込まれていない場合、TiKVが起動できないバグを修正しました。 [#9963](https://github.com/tikv/tikv/pull/9963)
     - TiCDCのスキャン速度をデフォルトで128MB/秒に制限する[#9983](https://github.com/tikv/tikv/pull/9983)
     - TiCDCの初期スキャンのメモリ使用量を削減 [#10133](https://github.com/tikv/tikv/pull/10133)
-    - TiCDCのスキャン速度バックプレッシャーをサポート [#10142](https://github.com/tikv/tikv/pull/10142)
+    - TiCDCのスキャン速度に対するバックプレッシャーをサポート [#10142](https://github.com/tikv/tikv/pull/10142)
     - TiCDC の古い値を取得するための不要な読み取りを回避することで、潜在的な OOM 問題を修正しました[#10031](https://github.com/tikv/tikv/pull/10031)
     - 古い値の読み取りによって引き起こされる TiCDC OOM 問題を修正[#10197](https://github.com/tikv/tikv/pull/10197)
     - S3 ストレージにタイムアウトメカニズムを追加して、クライアントが応答なしでハングするのを防ぎます[#10132](https://github.com/tikv/tikv/pull/10132)
@@ -122,13 +122,13 @@ TiDB バージョン: 4.0.13
     - テーブルGC中にヌルポインタの例外が発生する可能性がある問題を修正しました
     - ドロップされたテーブルにデータを書き込むときに発生するTiFlash panic問題を修正しました
     - BR復元中に発生するTiFlash panic問題を修正
-    - 一般的なCI照合順序を使用したときに一部の文字の重みが間違っているというバグを修正しました
-    - 廃棄されたテーブルでデータが失われる可能性がある問題を修正
+    - general CI 照合順序を使用したときに一部の文字の重みが間違っているというバグを修正しました
+    - tombstone 状態のテーブルでデータが失われる可能性がある問題を修正
     - ゼロバイトを含む文字列を比較するときに誤った結果が出る問題を修正しました
     - 入力列にNULL定数が含まれている場合に論理関数が間違った結果を返す問題を修正しました
     - 論理関数が数値型のみを受け入れる問題を修正
     - タイムスタンプ値が`1970-01-01`でタイムゾーン オフセットが負の場合に誤った結果が発生する問題を修正しました
-    - ハッシュ値`Decimal256`が安定しない問題を修正
+    - `Decimal256`のハッシュ値が安定しない問題を修正
 
 - ツール
 
