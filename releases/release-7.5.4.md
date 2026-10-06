@@ -26,7 +26,7 @@ TiDB バージョン: 7.5.4
 
     - RocksDB 圧縮のトリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - ピアメッセージチャネルのメモリ使用量を減らす [#16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
-    - ログの適用を待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
+    - TiKV の再起動時にログの適用を待つことで発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKVの`DiskFull`検出を最適化してRaftEngineの`spill-dir`構成と互換性を持たせ、この機能が一貫して動作することを保証します。 [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - TiFlash
@@ -52,10 +52,10 @@ TiDB バージョン: 7.5.4
     - データベースに多くのテーブルが存在する場合に`FLASHBACK DATABASE`が失敗する問題を修正[#54415](https://github.com/pingcap/tidb/issues/54415) @[lance6716](https://github.com/lance6716)
     - 厳密に自己増分ではないRANGEパーティションテーブルが作成できる問題を修正 [#54829](https://github.com/pingcap/tidb/issues/54829) @[Defined2014](https://github.com/Defined2014)
     - `UNION`を含むクエリステートメントが誤った結果を返す可能性がある問題を修正しました [#52985](https://github.com/pingcap/tidb/issues/52985) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - SQLが異常中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[#54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
+    - SQLが異常中断されたときに`INDEX_HASH_JOIN`が正常に終了できない問題を修正[#54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
     - `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに、繰り返しの開閉操作によって発生した以前のパラメータ値の再利用により発生する予期しないエラーを修正します。 [#53600](https://github.com/pingcap/tidb/issues/53600) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - 情報スキーマキャッシュミスにより、古い読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
-    - `Sort`オペレーターがスピルした後にディスクファイルが削除されず、クエリエラーが発生する可能性がある問題を修正[#55061](https://github.com/pingcap/tidb/issues/55061) @[wshwsh12](https://github.com/wshwsh12)
+    - 情報スキーマキャッシュミスにより、ステイル読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
+    - `Sort`オペレーターがスピルしてクエリエラーが発生した後に、ディスクファイルが削除されない可能性がある問題を修正[#55061](https://github.com/pingcap/tidb/issues/55061) @[wshwsh12](https://github.com/wshwsh12)
     - クエリが強制終了された後にエラーではなく誤った結果を返す可能性がある問題を修正[#50089](https://github.com/pingcap/tidb/issues/50089) @[D3Hunter](https://github.com/D3Hunter)
     - DMから複製されたテーブルのインデックスの長さが`max-index-length` で指定された最大長を超えるとテーブル複製が失敗する問題を修正しました [#55138](https://github.com/pingcap/tidb/issues/55138) @[lance6716](https://github.com/lance6716)
     - `INFORMATION_SCHEMA.STATISTICS`表の`SUB_PART`値が`NULL` である問題を修正しました [#55812](https://github.com/pingcap/tidb/issues/55812) @[Defined2014](https://github.com/Defined2014)
@@ -63,7 +63,7 @@ TiDB バージョン: 7.5.4
     - `mysql.stats_histograms`表の`tot_col_size`列が負の数になる可能性がある問題を修正しました [#55126](https://github.com/pingcap/tidb/issues/55126) @[qw4990](https://github.com/qw4990)
     - `IndexNestedLoopHashJoin` のデータ競合問題を修正 [#49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
     - メモリ使用量が`tidb_mem_quota_query` で設定された制限を超えたためにクエリが終了したときに停止する可能性がある問題を修正しました [#55042](https://github.com/pingcap/tidb/issues/55042) @[yibin87](https://github.com/yibin87)
-    - `columnEvaluator`は入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
+    - `columnEvaluator`が入力チャンク内の列参照を識別できず、SQL 文を実行すると`runtime error: index out of range`が発生する問題を修正しました。 [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
     - `SELECT ... WHERE ... ORDER BY ...`文の実行パフォーマンスが場合によっては低下する問題を修正[#54969](https://github.com/pingcap/tidb/issues/54969) @[tiancaiamao](https://github.com/tiancaiamao)
     - `StreamAggExec`の`groupOffset`が空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [#53867](https://github.com/pingcap/tidb/issues/53867) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - copタスク構築中にTiDBクエリをキャンセルできない問題を修正[#55957](https://github.com/pingcap/tidb/issues/55957) @[yibin87](https://github.com/yibin87)
@@ -78,7 +78,7 @@ TiDB バージョン: 7.5.4
     - 大きなテーブルやパーティションを削除した後に発生する可能性のあるフロー制御の問題を修正しました [#17304](https://github.com/tikv/tikv/issues/17304) @[Connor1996](https://github.com/Connor1996)
     - ブルームフィルタが以前のバージョン（v7.1より前）とそれ以降のバージョンの間で互換性がない問題を修正しました [#17272](https://github.com/tikv/tikv/issues/17272) @[v01dstar](https://github.com/v01dstar)
     - マスターキーがキー管理サービス (KMS) に保存されているときにマスターキーのローテーションが妨げられる問題を修正しました [#17410](https://github.com/tikv/tikv/issues/17410) @[hhwyt](https://github.com/hhwyt)
-    - Grafana の TiKV パネルの**ストレージ非同期書き込み期間の**監視メトリックが不正確であるという問題を修正しました[#17579](https://github.com/tikv/tikv/issues/17579) @[overvenus](https://github.com/overvenus)
+    - Grafana の TiKV パネルの**Storage async write duration**監視メトリックが不正確であるという問題を修正しました[#17579](https://github.com/tikv/tikv/issues/17579) @[overvenus](https://github.com/overvenus)
     - 同じキーのロック解除のために多数のトランザクションがキューイングされ、キーが頻繁に更新される場合、デッドロック検出への過度の圧力によって TiKV OOM 問題が発生する可能性がある問題を修正しました。 [#17394](https://github.com/tikv/tikv/issues/17394) @[MyonKeminta](https://github.com/MyonKeminta)
 
 - PD
@@ -112,7 +112,7 @@ TiDB バージョン: 7.5.4
 
     - TiCDC
 
-        - 変更フィードチェックポイントの**Barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[#11553](https://github.com/pingcap/tiflow/issues/11553) @[3AceShowHand](https://github.com/3AceShowHand)
+        - 変更フィードチェックポイントの**barrier-ts**監視メトリックが不正確になる可能性がある問題を修正しました[#11553](https://github.com/pingcap/tiflow/issues/11553) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Data Migration (DM)
 

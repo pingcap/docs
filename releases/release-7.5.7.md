@@ -13,11 +13,11 @@ TiDB バージョン: 7.5.7
 
 ## 互換性の変更 {#compatibility-changes}
 
-- デフォルト値の[`tidb_enable_historical_stats`](https://docs.pingcap.com/tidb/v7.5/system-variables/#tidb_enable_historical_stats)を`ON`から`OFF`に変更します。これにより、潜在的な安定性の問題を回避するために履歴統計がオフになります[#53048](https://github.com/pingcap/tidb/issues/53048) @[hawkingrei](https://github.com/hawkingrei)
+- [`tidb_enable_historical_stats`](https://docs.pingcap.com/tidb/v7.5/system-variables/#tidb_enable_historical_stats)のデフォルト値を`ON`から`OFF`に変更します。これにより、潜在的な安定性の問題を回避するために履歴統計がオフになります[#53048](https://github.com/pingcap/tidb/issues/53048) @[hawkingrei](https://github.com/hawkingrei)
 - TiKV は以下の設定項目を廃止し、自動圧縮動作を制御する新しい[`gc.auto-compaction`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#gcauto-compaction)設定グループに置き換えます。 [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
 
     - 非推奨の設定項目: [`region-compact-check-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-check-interval) 、 [`region-compact-check-step`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-check-step) 、 [`region-compact-min-tombstones`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-min-tombstones) 、 [`region-compact-tombstones-percent`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-tombstones-percent) 、 [`region-compact-min-redundant-rows`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-min-redundant-rows-new-in-v710) 、および[`region-compact-redundant-rows-percent`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-redundant-rows-percent-new-in-v710) 。
-    - 新しい[`gc.auto-compaction.tombstone-percent-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#tombstone-percent-threshold-new-in-v757) [`gc.auto-compaction.redundant-rows-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#redundant-rows-threshold-new-in-v757) : [`gc.auto-compaction.check-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#check-interval-new-in-v757) [`gc.auto-compaction.redundant-rows-percent-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#redundant-rows-percent-threshold-new-in-v757)および[`gc.auto-compaction.bottommost-level-force`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#bottommost-level-force-new-in-v757) [`gc.auto-compaction.tombstone-num-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#tombstone-num-threshold-new-in-v757)
+    - 新しい設定項目: [`gc.auto-compaction.check-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#check-interval-new-in-v757)、 [`gc.auto-compaction.tombstone-num-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#tombstone-num-threshold-new-in-v757)、 [`gc.auto-compaction.tombstone-percent-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#tombstone-percent-threshold-new-in-v757)、 [`gc.auto-compaction.redundant-rows-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#redundant-rows-threshold-new-in-v757)、 [`gc.auto-compaction.redundant-rows-percent-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#redundant-rows-percent-threshold-new-in-v757)、および[`gc.auto-compaction.bottommost-level-force`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#bottommost-level-force-new-in-v757)
 
 ## 改善点 {#improvements}
 
@@ -27,7 +27,7 @@ TiDB バージョン: 7.5.7
     - 大容量データを持つテーブルに対して単純なクエリを実行する際に、データ分布情報を取得するパフォーマンスを最適化します[#53850](https://github.com/pingcap/tidb/issues/53850) @[you06](https://github.com/you06)
     - インデックス追加中の TiKV への書き込み速度を観察するための監視メトリックを追加します。 [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - DDL実行中のDMLのロックロジックを最適化し、DMLとDDL間のロック競合を軽減することで、一部のシナリオでDDLのパフォーマンスが向上します。ただし、セカンダリインデックスのロック操作が追加されるため、DMLのパフォーマンスがわずかに低下する可能性があります[#62337](https://github.com/pingcap/tidb/issues/62337) @[lcwangchao](https://github.com/lcwangchao)
-    - システム変数[`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700) `1`に設定されている場合の動作を改善し、この変数の制御機能を強化します。 [#60242](https://github.com/pingcap/tidb/issues/60242) @[time-and-fate](https://github.com/time-and-fate)
+    - システム変数[`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700)が`1`に設定されている場合の動作を改善し、この変数の制御機能を強化します。 [#60242](https://github.com/pingcap/tidb/issues/60242) @[time-and-fate](https://github.com/time-and-fate)
     - `ANALYZE`文実行後にクラスタ全体の統計を更新することを回避し、`ANALYZE`の実行時間を短縮します。 [#57631](https://github.com/pingcap/tidb/issues/57631) @[0xPoe](https://github.com/0xPoe)
     - `NOT NULL`制約を持つ列の定数畳み込みをサポートし、 `IS NULL`評価を`FALSE` に畳み込みます。 [#62050](https://github.com/pingcap/tidb/issues/62050) @[hawkingrei](https://github.com/hawkingrei)
     - オプティマイザは、より多くの種類の`JOIN`操作で定数伝播をサポートします。 [#51700](https://github.com/pingcap/tidb/issues/51700) @[hawkingrei](https://github.com/hawkingrei)
@@ -41,13 +41,13 @@ TiDB バージョン: 7.5.7
     - Raftstoreの`CompactedEvent`処理を`split-check`ワーカーに移動して最適化し、メインのRaftstoreスレッドのブロッキングを削減します。 [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
     - スレッドごとのメモリ使用量のメトリックを追加します。 [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
     - SST の取り込みが遅すぎる場合は`SST ingest is experiencing slowdowns`のみをログに記録し、パフォーマンスのジッターを回避するために`get_sst_key_ranges`呼び出しをスキップします[#18549](https://github.com/tikv/tikv/issues/18549) @[LykxSassinator](https://github.com/LykxSassinator)
-    - ログの適用を待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
+    - TiKV の再起動時にログの適用を待つことで発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
     - 残留データのクリーンアップメカニズムを最適化して、リクエストのレイテンシーへの影響を軽減します。 [#18107](https://github.com/tikv/tikv/issues/18107) @[LykxSassinator](https://github.com/LykxSassinator)
     - Raft Engineの`fetch_entries_to`のパフォーマンスを最適化して競合を減らし、混合ワークロードでのパフォーマンスを向上します。 [#18605](https://github.com/tikv/tikv/issues/18605) @[LykxSassinator](https://github.com/LykxSassinator)
     - 書き込み操作のフロー制御構成の動的な変更をサポート[#17395](https://github.com/tikv/tikv/issues/17395) @[glorv](https://github.com/glorv)
     - フォアグラウンド書き込みをブロックせずにSSTファイルの取り込みをサポートし、レイテンシーの影響を軽減します。 [#18081](https://github.com/tikv/tikv/issues/18081) @[hhwyt](https://github.com/hhwyt)
     - KvDB と RaftDB が別々のマウント パスを使用する場合の KvDB ディスクの I/O ジッターの検出メカニズムを最適化します。 [#18463](https://github.com/tikv/tikv/issues/18463) @[LykxSassinator](https://github.com/LykxSassinator)
-    - ピアのスローログを追加し、メッセージを保存します [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
+    - ピアおよびストアのメッセージのスローログを追加します [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
 
 - PD
 
@@ -72,7 +72,7 @@ TiDB バージョン: 7.5.7
 
     - `IndexMerge`および`IndexLookUp`オペレーターの共有 KV リクエストがクエリをプッシュダウンするときにデータ競合を引き起こす問題を修正しました。 [#60175](https://github.com/pingcap/tidb/issues/60175) @[you06](https://github.com/you06)
     - ハッシュ集計オペレーターにおける潜在的な goroutine リークの問題を修正しました。 [#58004](https://github.com/pingcap/tidb/issues/58004) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - 生成列のインデックスが表示に設定されている場合、MPP プランが選択されない可能性がある問題を修正しました。 [#47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
+    - 生成列のインデックスが可視に設定されている場合、MPP プランが選択されない可能性がある問題を修正しました。 [#47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
     - `_charset(xxx), _charset(xxx2), ...`を含む SQL 文が異なるダイジェストを生成する問題を修正しました [#58447](https://github.com/pingcap/tidb/issues/58447) @[xhebox](https://github.com/xhebox)
     - 頻繁なリージョンのマージにより TTL ジョブが開始できなくなる問題を修正しました [#61512](https://github.com/pingcap/tidb/issues/61512) @[YangKeao](https://github.com/YangKeao)
     - 損失のあるDDL文を実行した後にTiFlashクエリ結果が矛盾する問題を修正しました [#61455](https://github.com/pingcap/tidb/issues/61455) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
@@ -101,7 +101,7 @@ TiDB バージョン: 7.5.7
     - `ANALYZE`サブタスクの同時実行数が設定された制限を大幅に超える問題を修正しました [#61785](https://github.com/pingcap/tidb/issues/61785) @[hawkingrei](https://github.com/hawkingrei)
     - TopNプッシュダウン中に式ベースのTopNソート項目が誤って生成される問題を修正しました [#60655](https://github.com/pingcap/tidb/issues/60655) @[hawkingrei](https://github.com/hawkingrei)
     - 列またはインデックスの統計情報が欠落している場合に、TiDB がバックグラウンドでpanicログを出力する可能性がある問題を修正しました[#61733](https://github.com/pingcap/tidb/issues/61733) @[winoros](https://github.com/winoros)
-    - 列またはインデックスの統計情報が欠落している場合、 `JOIN`行数推定が非常に不正確になる可能性がある問題を修正しました[#61602](https://github.com/pingcap/tidb/issues/61602) @[qw4990](https://github.com/qw4990)
+    - 列またはインデックスの統計情報が欠落している場合、 `JOIN`の行数推定が非常に不正確になる可能性がある問題を修正しました[#61602](https://github.com/pingcap/tidb/issues/61602) @[qw4990](https://github.com/qw4990)
     - システム変数`tidb_cost_model_version`のデフォルト値が誤って設定されている問題を修正[#61565](https://github.com/pingcap/tidb/issues/61565) @[hawkingrei](https://github.com/hawkingrei)
     - テーブルの最初の列が仮想生成列の場合に統計が正しくない可能性がある問題を修正しました [#61606](https://github.com/pingcap/tidb/issues/61606) @[winoros](https://github.com/winoros)
     - 述語の簡素化でプランキャッシュが誤ってスキップされる問題を修正しました [#61513](https://github.com/pingcap/tidb/issues/61513) @[hawkingrei](https://github.com/hawkingrei)
@@ -155,7 +155,7 @@ TiDB バージョン: 7.5.7
         - `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが停止する可能性がある問題を修正しました。 [#12055](https://github.com/pingcap/tiflow/issues/12055) @[hongyunyan](https://github.com/hongyunyan)
         - 仮想列を含むテーブルでイベントフィルタ式を評価するとpanicが発生する可能性がある問題を修正[#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
         - ディスパッチャ構成における列名とインデックス名の大文字と小文字を区別するマッチングの問題を修正しました [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
-        - 古いストア ID が原因で、同じ IP アドレス上の TiKV ノードをスケールインまたはスケールアウトした後に、解決された ts ラグが増加し続ける問題を修正しました。 [#12162](https://github.com/pingcap/tiflow/issues/12162) @[3AceShowHand](https://github.com/3AceShowHand)
+        - 古いストア ID が原因で、同じ IP アドレス上の TiKV ノードをスケールインまたはスケールアウトした後に、Resolved TS のラグが増加し続ける問題を修正しました。 [#12162](https://github.com/pingcap/tiflow/issues/12162) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Lightning
 
