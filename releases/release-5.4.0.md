@@ -326,7 +326,7 @@ In v5.4, the key new features or improvements are as follows:
 
 - **Top SQL (experimental feature)**
 
-    A new experimental feature, Top SQL (disabled by default), is introduced to help you easily find source-consuming queries.
+    A new experimental feature, Top SQL (disabled by default), is introduced to help you easily find resource-consuming queries.
 
     [User document](/dashboard/top-sql.md)
 
