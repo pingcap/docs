@@ -13,7 +13,7 @@ TiDB バージョン: 7.3.0
 
 7.3.0では、以下の主要機能が導入されています。さらに、7.3.0には、TiDBサーバーおよびTiFlashにおけるクエリの安定性を向上させるための一連の機能強化（[機能の詳細](#feature-details)セクションで説明）も含まれています。これらの機能強化は、より細かなものであり、ユーザーに直接影響を与えるものではないため、以下の表には含まれていません。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td>拡張性とパフォーマンス</td><td>TiDB Lightningは<a href="https://docs-archive.pingcap.com/tidb/v7.3/partitioned-raft-kv">パーティション化されたRaft KV</a>をサポートしています（実験的）。</td><td> TiDB Lightningは、アーキテクチャの近々の一般提供開始の一環として、新しいパーティション化されたRaft KVアーキテクチャをサポートするようになりました。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/tidb-lightning-physical-import-mode-usage#conflict-detection">データインポート時に自動的な競合検出と解決機能を追加する</a></td><td>TiDB Lightningの物理インポートモードでは、競合検出の新しいバージョンがサポートされています。このバージョンでは、競合が発生した場合に、競合データを置換（ <code>replace</code> ）または無視（ <code>ignore</code> ）するセマンティクスが実装されています。競合データを自動的に処理し、競合解決のパフォーマンスを向上させます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.3/tidb-resource-control#query-watch-parameters">暴走クエリの手動管理</a>（実験的）</td><td>クエリの実行に予想以上に時間がかかる場合があります。新しいリソースグループの監視リストを使用すると、クエリをより効果的に管理し、優先順位を下げたり、強制終了したりできます。この機能により、オペレーターは対象のクエリを正確な SQL テキスト、SQL ダイジェスト、またはプランダイジェストでマークし、リソースグループ レベルでクエリを処理できるため、予期しない大規模なクエリがクラスターに及ぼす潜在的な影響をより詳細に制御できます。</td></tr><tr><td> SQL</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/optimizer-hints">クエリプランナーにオプティマイザヒントを追加することで、クエリの安定性に対するオペレーターの制御を強化します。</a></td><td>追加されたヒント: <code>NO_INDEX_JOIN()</code> 、 <code>NO_MERGE_JOIN()</code> 、 <code>NO_INDEX_MERGE_JOIN()</code> 、 <code>NO_HASH_JOIN()</code> 、 <code>NO_INDEX_HASH_JOIN()</code></td></tr><tr><td>データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/sql-statement-show-analyze-status">統計収集タスクの進捗状況を表示します。</a></td><td> <code>SHOW ANALYZE STATUS</code>ステートメントまたは<code>mysql.analyze_jobs</code>システムテーブルを使用して、 <code>ANALYZE</code>タスクの進行状況を表示することをサポートします。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能</th><th>説明</th></tr></thead><tbody><tr><td>拡張性とパフォーマンス</td><td>TiDB Lightningは<a href="https://docs-archive.pingcap.com/tidb/v7.3/partitioned-raft-kv">パーティション化されたRaft KV</a>をサポートしています（実験的）。</td><td> TiDB Lightningは、アーキテクチャの近々の一般提供開始の一環として、新しいパーティション化されたRaft KVアーキテクチャをサポートするようになりました。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/tidb-lightning-physical-import-mode-usage#conflict-detection">データインポート時に自動的な競合検出と解決機能を追加する</a></td><td>TiDB Lightningの物理インポートモードでは、競合検出の新しいバージョンがサポートされています。このバージョンでは、競合が発生した場合に、競合データを置換（ <code>replace</code> ）または無視（ <code>ignore</code> ）するセマンティクスが実装されています。競合データを自動的に処理し、競合解決のパフォーマンスを向上させます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.3/tidb-resource-control#query-watch-parameters">暴走クエリの手動管理</a>（実験的）</td><td>クエリの実行に予想以上に時間がかかる場合があります。新しいリソースグループの監視リストを使用すると、クエリをより効果的に管理し、優先順位を下げたり、強制終了したりできます。この機能により、オペレーターは対象のクエリを正確な SQL テキスト、SQL ダイジェスト、またはプランダイジェストでマークし、リソースグループ レベルでクエリを処理できるため、予期しない大規模なクエリがクラスターに及ぼす潜在的な影響をより詳細に制御できます。</td></tr><tr><td> SQL</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/optimizer-hints">クエリプランナーにオプティマイザヒントを追加することで、クエリの安定性に対するオペレーターの制御を強化します。</a></td><td>追加されたヒント: <code>NO_INDEX_JOIN()</code> 、 <code>NO_MERGE_JOIN()</code> 、 <code>NO_INDEX_MERGE_JOIN()</code> 、 <code>NO_HASH_JOIN()</code> 、 <code>NO_INDEX_HASH_JOIN()</code></td></tr><tr><td>データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.3/sql-statement-show-analyze-status">統計収集タスクの進捗状況を表示します。</a></td><td> <code>SHOW ANALYZE STATUS</code>ステートメントまたは<code>mysql.analyze_jobs</code>システムテーブルを使用して、 <code>ANALYZE</code>タスクの進行状況を表示することをサポートします。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -31,7 +31,7 @@ TiDB バージョン: 7.3.0
 
     ランタイムフィルタは、クエリプランニングフェーズ中に生成される**動的な述語**です。テーブル結合処理において、これらの動的な述語は結合条件を満たさない行を効果的にフィルタリングし、スキャン時間とネットワークオーバーヘッドを削減し、テーブル結合の効率を向上させます。TiFlashはv7.3.0以降、ノード内でランタイムフィルタをサポートし、分析クエリの全体的なパフォーマンスを向上させています。一部のTPC-DSワークロードでは、パフォーマンスが10%から50%向上する可能性があります。
 
-    この機能はv7.3.0ではデフォルトで無効になっています。この機能を有効にするには、システム変数[`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720) `LOCAL`に設定してください。
+    この機能はv7.3.0ではデフォルトで無効になっています。この機能を有効にするには、システム変数[`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)を`LOCAL`に設定してください。
 
     詳細については、[ドキュメント](/runtime-filter.md)を参照してください。
 
@@ -69,7 +69,7 @@ TiDB バージョン: 7.3.0
 
 - リストとリストCOLUMNSのパーティションテーブルはデフォルトのパーティションをサポートします [#20679](https://github.com/pingcap/tidb/issues/20679) @[mjonss](https://github.com/mjonss)@[bb7133](https://github.com/bb7133)
 
-    バージョン 7.3.0 より前では、 `INSERT`文を使用してリストまたはリストCOLUMNSパーティションテーブルにデータを挿入する場合、データはテーブルの指定されたパーティション条件を満たす必要があります。挿入するデータがこれらの条件のいずれにも満たない場合、ステートメントの実行が失敗するか、条件を満たさないデータは無視されます。
+    バージョン 7.3.0 より前では、 `INSERT`文を使用してリストまたはリストCOLUMNSパーティションテーブルにデータを挿入する場合、データはテーブルの指定されたパーティション条件を満たす必要があります。挿入するデータがこれらの条件のいずれも満たさない場合、ステートメントの実行が失敗するか、条件を満たさないデータは無視されます。
 
     バージョン7.3.0以降、リストおよびリストCOLUMNSパーティションテーブルはデフォルトパーティションをサポートします。デフォルトパーティションが作成された後、挿入するデータがパーティション条件を満たさない場合、そのデータはデフォルトパーティションに書き込まれます。この機能により、リストおよびリストCOLUMNSパーティショニングの使いやすさが向上し、 `INSERT`文の実行失敗や、パーティション条件を満たさないデータによるデータの無視を防ぐことができます。
 
@@ -87,7 +87,7 @@ TiDB バージョン: 7.3.0
 
 - Plan Replayer は履歴統計のエクスポートをサポート [#45038](https://github.com/pingcap/tidb/issues/45038) @[time-and-fate](https://github.com/time-and-fate)
 
-    バージョン7.3.0以降、 [`dump with stats as of timestamp`](/sql-plan-replayer.md)が新たに追加されたため、Plan Replayerを使用して、指定した時点におけるSQL関連オブジェクトの統計情報をエクスポートできます。実行計画の問題を診断する際に、履歴統計情報を正確に取得することで、問題発生時に実行計画がどのように生成されたかをより詳細に分析できます。これにより、問題の根本原因を特定しやすくなり、実行計画の問題診断の効率が大幅に向上します。
+    バージョン7.3.0以降、 [`dump with stats as of timestamp`](/sql-plan-replayer.md)句が新たに追加されたため、Plan Replayerを使用して、指定した時点におけるSQL関連オブジェクトの統計情報をエクスポートできます。実行計画の問題を診断する際に、履歴統計情報を正確に取得することで、問題発生時に実行計画がどのように生成されたかをより詳細に分析できます。これにより、問題の根本原因を特定しやすくなり、実行計画の問題診断の効率が大幅に向上します。
 
     詳細については、[ドキュメント](/sql-plan-replayer.md)を参照してください。
 
@@ -97,7 +97,7 @@ TiDB バージョン: 7.3.0
 
     以前のバージョンでは、 TiDB Lightning は論理インポートモードと物理インポートモードに対して異なる競合検出および処理方法を使用しており、設定が複雑でユーザーが理解しにくいものでした。さらに、物理インポートモードでは`replace`または`ignore`戦略を使用して競合を処理することができませんでした。v7.3.0 以降、 TiDB Lightning は論理インポートモードと物理インポートモードの両方に対して統一された競合検出および処理戦略を導入しました。競合が発生した場合、競合するデータをエラーとして報告 ( `error` )、置換 ( `replace` )、または無視 ( `ignore` ) するかを選択できます。競合レコードの数を制限することもでき、たとえば、指定した数の競合レコードを処理した後、タスクが中断されて終了します。さらに、このシステムはトラブルシューティングのために矛盾するデータを記録することもできます。
 
-    競合が多数含まれるインポートデータの場合、パフォーマンス向上のため、競合検出および処理戦略の新しいバージョンを使用することをお勧めします。ラボ環境では、新しいバージョンの戦略は、競合検出および処理のパフォーマンスを旧バージョンよりも最大3倍高速化できます。このパフォーマンス値は参考値です。実際のパフォーマンスは、構成、テーブル構造、および競合データの割合によって異なる場合があります。なお、競合戦略の新バージョンと旧バージョンは同時に使用できません。旧バージョンの競合検出および処理戦略は、将来的に廃止される予定です。
+    競合が多数含まれるインポートデータの場合、パフォーマンス向上のため、競合検出および処理戦略の新しいバージョンを使用することをお勧めします。ラボ環境では、新しいバージョンの戦略は、競合検出および処理のパフォーマンスを旧バージョンよりも最大3倍高速化できます。このパフォーマンス値は参考値です。実際のパフォーマンスは、構成、テーブル構造、および競合データの割合によって異なる場合があります。なお、競合戦略の新バージョンと旧バージョンは同時に使用できません。旧バージョンの競合検出および処理戦略は、将来的に非推奨になる予定です。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)を参照してください。
 
@@ -107,7 +107,7 @@ TiDB バージョン: 7.3.0
 
 - TiDB Lightning は、より多くの診断ログを出力することでトラブルシューティングを強化する新しいパラメータ`enable-diagnose-log`を導入しました [#45497](https://github.com/pingcap/tidb/issues/45497) @[D3Hunter](https://github.com/D3Hunter)
 
-    デフォルトでは、この機能は無効になっており、 TiDB Lightning は`lightning/main`を含むログのみを出力。有効にすると、 TiDB Lightning は`client-go`および`tidb`に関連する問題の診断に役立つように、すべてのパッケージ`client-go`および`tidb`を含む) のログを出力します。
+    デフォルトでは、この機能は無効になっており、 TiDB Lightning は`lightning/main`を含むログのみを出力します。有効にすると、 TiDB Lightning は`client-go`および`tidb`に関連する問題の診断に役立つように、すべてのパッケージ（`client-go`および`tidb`を含む）のログを出力します。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-global)を参照してください。
 
@@ -159,11 +159,11 @@ TiDB バージョン: 7.3.0
 | TiKV           | [`coprocessor.region-bucket-size`](/tikv-configuration-file.md#region-bucket-size-new-in-v610)                                                  | 変更     | デフォルト値を`96MiB`から`50MiB`に変更します。                                                                                                                                                                                                                                                                                                                              |
 | TiKV           | [`raft-engine.format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                                                          | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、リボンフィルタが使用されます。そのため、TiKV はデフォルト値を`2`から`5`に変更します。                                                                                                                                                                                                                                      |
 | TiKV           | [`raftdb.max-total-wal-size`](/tikv-configuration-file.md#max-total-wal-size-1)                                                                 | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、TiKV は WAL の書き込みをスキップします。そのため、TiKV はデフォルト値を`"4GB"`から`1`に変更し、WAL が無効になるようにします。                                                                                                                                                                                                         |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].compaction-guard-min-output-file-size`](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | 変更     | デフォルト値を`"1MB"`から`"8MB"`に変更し、大容量データ書き込み時に圧縮速度が書き込み速度に追いつかない問題を解決します。                                                                                                                                                                                                                                                                                         |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].format-version`](/tikv-configuration-file.md#format-version-new-in-v620)                                   | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、リボンフィルタが使用されます。そのため、TiKV はデフォルト値を`2`から`5`に変更します。                                                                                                                                                                                                                                      |
+| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].compaction-guard-min-output-file-size</code>](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | 変更     | デフォルト値を`"1MB"`から`"8MB"`に変更し、大容量データ書き込み時に圧縮速度が書き込み速度に追いつかない問題を解決します。                                                                                                                                                                                                                                                                                         |
+| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].format-version</code>](/tikv-configuration-file.md#format-version-new-in-v620)                                   | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、リボンフィルタが使用されます。そのため、TiKV はデフォルト値を`2`から`5`に変更します。                                                                                                                                                                                                                                      |
 | TiKV           | [`rocksdb.lockcf.write-buffer-size`](/tikv-configuration-file.md#write-buffer-size)                                                             | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、lockcf の圧縮を高速化するために、TiKV はデフォルト値を`"32MB"`から`"4MB"`に変更します。                                                                                                                                                                                                                             |
 | TiKV           | [`rocksdb.max-total-wal-size`](/tikv-configuration-file.md#max-total-wal-size)                                                                  | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、TiKV は WAL の書き込みをスキップします。そのため、TiKV はデフォルト値を`"4GB"`から`1`に変更し、WAL が無効になるようにします。                                                                                                                                                                                                         |
-| TiKV           | [`rocksdb.stats-dump-period`](/tikv-configuration-file.md#stats-dump-period)                                                                    | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、冗長なログ印刷を無効にするには、デフォルト値を`"10m"`から`"0"`に変更します。                                                                                                                                                                                                                                          |
+| TiKV           | [`rocksdb.stats-dump-period`](/tikv-configuration-file.md#stats-dump-period)                                                                    | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、冗長なログ出力を無効にするには、デフォルト値を`"10m"`から`"0"`に変更します。                                                                                                                                                                                                                                          |
 | TiKV           | [`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660)                                                      | 変更     | memtable のメモリオーバーヘッドを削減するため、 `storage.engine="raft-kv"`の場合、TiKV はデフォルト値をマシンのメモリの 25% から`0`に変更します。これは制限がないことを意味します。パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、TiKV はデフォルト値をマシンのメモリの 25% から 20% に変更します。                                                                                                                            |
 | TiKV           | [`storage.block-cache.capacity`](/tikv-configuration-file.md#capacity)                                                                          | 変更     | パーティション化されたRaft KV ( `storage.engine="partitioned-raft-kv"` ) を使用する場合、memtable のメモリオーバーヘッドを補償するために、TiKV はデフォルト値をシステムメモリ全体のサイズの 45% から 30% に変更します。                                                                                                                                                                                                           |
 | TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md)                                                                                   | 変更     | より小さなファイルをマージすることで物理ファイルの数を削減する新しいDTFileフォーマット`format_version = 5`を導入します。このフォーマットは実験的であり、デフォルトでは有効になっていません。                                                                                                                                                                                                                                                 |
@@ -187,7 +187,7 @@ TiDB バージョン: 7.3.0
 
 - TiDB
 
-    - 統計情報用の[`Fast Analyze`](/system-variables.md#tidb_enable_fast_analyze)機能（実験的）は、バージョン7.5.0で廃止されます。
+    - 統計情報用の[`Fast Analyze`](/system-variables.md#tidb_enable_fast_analyze)機能（実験的）は、バージョン7.5.0で非推奨になります。
     - 統計の[増分収集](https://docs-archive.pingcap.com/tidb/v7.3/statistics#incremental-collection)機能は v7.5.0 で非推奨になります。
 
 ## 改善点 {#improvements}
@@ -195,7 +195,7 @@ TiDB バージョン: 7.3.0
 - TiDB
 
     - `EXPLAIN`文が最適化フェーズ中にサブクエリを事前に実行するかどうかを制御するための新しいシステム変数[`tidb_opt_enable_non_eval_scalar_subquery`](/system-variables.md#tidb_opt_enable_non_eval_scalar_subquery-new-in-v730)を導入します [#22076](https://github.com/pingcap/tidb/issues/22076) @[winoros](https://github.com/winoros)
-    - [グローバルキル](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が有効な場合、 <kbd>Ctrl+C</kbd>を押すと現在のセッションを終了できます [#8854](https://github.com/pingcap/tidb/issues/8854) @[pingyu](https://github.com/pingyu)
+    - [グローバルキル](/tidb-configuration-file.md#enable-global-kill-new-in-v610)が有効な場合、 <kbd>Control+C</kbd>を押すと現在のセッションを終了できます [#8854](https://github.com/pingcap/tidb/issues/8854) @[pingyu](https://github.com/pingyu)
     - `IS_FREE_LOCK()`および`IS_USED_LOCK()`のロック関数をサポートする [#44493](https://github.com/pingcap/tidb/issues/44493) @[dveeden](https://github.com/dveeden)
     - ディスクからダンプされたチャンクを読み取るパフォーマンスを最適化 [#45125](https://github.com/pingcap/tidb/issues/45125) @[YangKeao](https://github.com/YangKeao)
     - オプティマイザ修正コントロールを使用して、インデックス結合の内部テーブルの過大評価を改善する [#44855](https://github.com/pingcap/tidb/issues/44855) @[time-and-fate](https://github.com/time-and-fate)
@@ -234,7 +234,7 @@ TiDB バージョン: 7.3.0
     - データ競合によって引き起こされる TiDBのpanic問題を修正 [#45561](https://github.com/pingcap/tidb/issues/45561) @[gengliqi](https://github.com/gengliqi)
     - `indexMerge`を含むクエリが強制終了されたときに発生するハングアップ問題を修正 [#45279](https://github.com/pingcap/tidb/issues/45279) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `tidb_enable_parallel_apply`が有効な場合、MPP モードでのクエリ結果が正しくない問題を修正 [#45299](https://github.com/pingcap/tidb/issues/45299) @[windtalker](https://github.com/windtalker)
-    - `resolve lock` PD時間の急激な変化時にハングアップする可能性がある問題を修正 [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
+    - PD の時刻が急変した場合に`resolve lock`がハングアップする可能性がある問題を修正 [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
     - GC Resolve Locks ステップで一部の悲観的ロックが見落とされる可能性がある問題を修正 [#45134](https://github.com/pingcap/tidb/issues/45134) @[MyonKeminta](https://github.com/MyonKeminta)
     - `ORDER BY`を含むクエリが動的プルーニングモードで誤った結果を返す問題を修正 [#45007](https://github.com/pingcap/tidb/issues/45007) @[Defined2014](https://github.com/Defined2014)
     - `AUTO_INCREMENT`が`DEFAULT`列の値と同じ列に指定できてしまう問題を修正しました [#45136](https://github.com/pingcap/tidb/issues/45136) @[Defined2014](https://github.com/Defined2014)
@@ -246,7 +246,7 @@ TiDB バージョン: 7.3.0
     - パーティションテーブルにデータを挿入する際の不正確なエラーメッセージの問題を修正 [#44966](https://github.com/pingcap/tidb/issues/44966) @[lilinghai](https://github.com/lilinghai)
     - `INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの読み取り権限の問題を修正 [#7795](https://github.com/pingcap/tiflash/issues/7795) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - パーティションテーブル名が間違っている場合にエラーが発生する問題を修正 [#44967](https://github.com/pingcap/tidb/issues/44967) @[River2000i](https://github.com/River2000i)
-    - `tidb_enable_dist_task`が有効になっている場合にインデックス作成が停止する問題を修正 [#44440](https://github.com/pingcap/tidb/issues/44440) @[tangenta](https://github.com/tangenta)
+    - 場合によっては、 `tidb_enable_dist_task`が有効になっている場合にインデックス作成が停止する問題を修正 [#44440](https://github.com/pingcap/tidb/issues/44440) @[tangenta](https://github.com/tangenta)
     - BR を使用して `AUTO_ID_CACHE=1` を含むテーブルを復元する際に発生する `duplicate entry` エラーを修正します。 [#44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
     - `TRUNCATE TABLE`の実行に要した時間が`ADMIN SHOW DDL JOBS`に表示されるタスク実行時間と一致しない問題を修正しました。 [#44785](https://github.com/pingcap/tidb/issues/44785) @[tangenta](https://github.com/tangenta)
     - TiDBのアップグレード時にメタデータの読み取りに1つのDDLリースよりも時間がかかると、アップグレードが停止する問題を修正しました [#45176](https://github.com/pingcap/tidb/issues/45176) @[zimulala](https://github.com/zimulala)

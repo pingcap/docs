@@ -13,13 +13,13 @@ TiDB バージョン: 7.2.0
 
 バージョン7.2.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">拡張性とパフォーマンス</td><td>リソースグループは<a href="https://docs-archive.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">暴走クエリの管理を</a>サポートします（実験的）</td><td>クエリのタイムアウトをより細かく管理できるようになり、クエリの分類に基づいて異なる動作を設定できるようになりました。指定したしきい値に達したクエリは、優先度を下げたり、終了させたりすることができます。</td></tr><tr><td> TiFlashは<a href="https://docs-archive.pingcap.com/tidb/v7.2/tiflash-pipeline-model">パイプライン実行モデル</a>をサポートしています（実験的）。</td><td> TiFlashは、スレッドリソース制御を最適化するために、パイプライン実行モデルをサポートしています。</td></tr><tr><td rowspan="1"> SQL</td><td>データインポート用の新しいSQL文<a href="https://docs-archive.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>をサポート（実験的）</td><td> TiDB Lightningの導入とメンテナンスを簡素化するために、TiDB は新しい SQL文<code>IMPORT INTO</code>導入しました。これにより、Amazon S3 や Google Cloud Storage (GCS) からのリモートインポートを含むTiDB Lightningの物理インポートモードが TiDB に直接統合されます。</td></tr><tr><td rowspan="2">データベースの運用と可観測性</td><td>DDLは<a href="https://docs-archive.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">一時停止および再開操作</a>をサポートします（実験的）。</td><td>この新機能により、インデックス作成などのリソースを大量に消費するDDL操作を一時的に中断し、リソースを節約してオンライントラフィックへの影響を最小限に抑えることができます。準備が整い次第、キャンセルや再起動の必要なく、これらの操作をシームレスに再開できます。この機能は、リソース利用効率の向上、ユーザーエクスペリエンスの改善、スキーマ変更の効率化に貢献します。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能</th><th>説明</th></tr></thead><tbody><tr><td rowspan="2">拡張性とパフォーマンス</td><td>リソースグループは<a href="https://docs-archive.pingcap.com/tidb/v7.2/tidb-resource-control#manage-queries-that-consume-more-resources-than-expected-runaway-queries">暴走クエリの管理</a>をサポートします（実験的）</td><td>クエリのタイムアウトをより細かく管理できるようになり、クエリの分類に基づいて異なる動作を設定できるようになりました。指定したしきい値に達したクエリは、優先度を下げたり、終了させたりすることができます。</td></tr><tr><td> TiFlashは<a href="https://docs-archive.pingcap.com/tidb/v7.2/tiflash-pipeline-model">パイプライン実行モデル</a>をサポートしています（実験的）。</td><td> TiFlashは、スレッドリソース制御を最適化するために、パイプライン実行モデルをサポートしています。</td></tr><tr><td rowspan="1"> SQL</td><td>データインポート用の新しいSQL文<a href="https://docs-archive.pingcap.com/tidb/v7.2/sql-statement-import-into">IMPORT INTO</a>をサポート（実験的）</td><td> TiDB Lightningの導入とメンテナンスを簡素化するために、TiDB は新しい SQL文<code>IMPORT INTO</code>を導入しました。これにより、Amazon S3 や Google Cloud Storage (GCS) からのリモートインポートを含むTiDB Lightningの物理インポートモードが TiDB に直接統合されます。</td></tr><tr><td rowspan="2">データベースの運用と可観測性</td><td>DDLは<a href="https://docs-archive.pingcap.com/tidb/v7.2/ddl-introduction#ddl-related-commands">一時停止および再開操作</a>をサポートします（実験的）。</td><td>この新機能により、インデックス作成などのリソースを大量に消費するDDL操作を一時的に中断し、リソースを節約してオンライントラフィックへの影響を最小限に抑えることができます。準備が整い次第、キャンセルや再起動の必要なく、これらの操作をシームレスに再開できます。この機能は、リソース利用効率の向上、ユーザーエクスペリエンスの改善、スキーマ変更の効率化に貢献します。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
 ### パフォーマンス {#performance}
 
-- TiFlash への次の2つの[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)プッシュダウンをサポートします。 [#7427](https://github.com/pingcap/tiflash/issues/7427) @[xzhangxian1008](https://github.com/xzhangxian1008)
+- 次の2つの[ウィンドウ関数](/tiflash/tiflash-supported-pushdown-calculations.md)の TiFlash へのプッシュダウンをサポートします。 [#7427](https://github.com/pingcap/tiflash/issues/7427) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
     - `FIRST_VALUE`
     - `LAST_VALUE`
@@ -79,7 +79,7 @@ TiDB バージョン: 7.2.0
 
     より適切な実行計画を生成するため、TiDB オプティマイザの動作は製品のバージョンアップごとに進化しています。しかし、特定のシナリオでは、変更によってパフォーマンスが低下する場合があります。TiDB v7.2.0 では、オプティマイザの細かい動作を制御できるオプティマイザ修正コントロールが導入されました。これにより、一部の新しい変更をロールバックしたり、制御したりすることが可能になります。
 
-    制御可能な各動作は、修正番号に対応する GitHub の問題によって説明されます。制御可能な動作はすべて[オプティマイザ修正コントロール](/optimizer-fix-controls.md)にリストされています。動作制御を実現するために[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数を設定することにより、1つ以上の動作の目標値を設定できます。
+    制御可能な各動作は、修正番号に対応する GitHub issue で説明されています。制御可能な動作はすべて[オプティマイザ修正コントロール](/optimizer-fix-controls.md)にリストされています。動作制御を実現するために[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)システム変数を設定することにより、1つ以上の動作の目標値を設定できます。
 
     オプティマイザ修正コントロールメカニズムを使用すると、TiDBオプティマイザをきめ細かく制御できます。これにより、アップグレードプロセスによって発生するパフォーマンスの問題を修正する新しい手段が提供され、TiDBの安定性が向上します。
 
@@ -155,8 +155,8 @@ TiDB バージョン: 7.2.0
 | [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)                                                | 新しく追加された | `ANALYZE`コマンドを実行して統計情報を収集する際に、どのタイプの列を統計収集から除外するかを制御します。この変数は、 [`tidb_analyze_version = 2`](/system-variables.md#tidb_analyze_version-new-in-v510)の場合にのみ適用されます。 `ANALYZE TABLE t COLUMNS c1, ..., cn`の構文を使用する場合、指定された列のタイプが`tidb_analyze_skip_column_types`に含まれている場合、この列の統計情報は収集されません。 |
 | [`tidb_enable_check_constraint`](/system-variables.md#tidb_enable_check_constraint-new-in-v720)                                                    | 新しく追加された | `CHECK`制約を有効にするかどうかを制御します。デフォルト値は`OFF`で、これはこの機能が無効になっていることを意味します。                                                                                                                                                                                                                      |
 | [`tidb_enable_fast_table_check`](/system-variables.md#tidb_enable_fast_table_check-new-in-v720)                                                    | 新しく追加された | テーブル内のデータとインデックスの一貫性を迅速にチェックするために、チェックサムベースのアプローチを使用するかどうかを制御します。デフォルト値は`ON`で、これはこの機能が有効になっていることを意味します。                                                                                                                                                                                |
-| [`tidb_enable_tiflash_pipeline_model`](https://docs-archive.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-new-in-v720) | 新しく追加された | TiFlashの新しい実行モデルで[パイプラインモデル](/tiflash/tiflash-pipeline-model.md)モデルを有効にするかどうかを制御します。デフォルト値は`OFF`で、パイプライン モデルが無効であることを意味します。                                                                                                                                                            |
-| [`tidb_expensive_txn_time_threshold`](/system-variables.md#tidb_expensive_txn_time_threshold-new-in-v720)                                          | 新しく追加された | 高額トランザクションをログに記録するしきい値を制御します。デフォルト値は600秒です。トランザクションの所要時間がこのしきい値を超え、かつコミットもロールバックもされない場合、そのトランザクションは高額トランザクションとみなされ、ログに記録されます。                                                                                                                                                          |
+| [`tidb_enable_tiflash_pipeline_model`](https://docs-archive.pingcap.com/tidb/v7.2/system-variables#tidb_enable_tiflash_pipeline_model-new-in-v720) | 新しく追加された | TiFlashの新しい実行モデルである[パイプラインモデル](/tiflash/tiflash-pipeline-model.md)を有効にするかどうかを制御します。デフォルト値は`OFF`で、パイプライン モデルが無効であることを意味します。                                                                                                                                                            |
+| [`tidb_expensive_txn_time_threshold`](/system-variables.md#tidb_expensive_txn_time_threshold-new-in-v720)                                          | 新しく追加された | 高コストトランザクションをログに記録するしきい値を制御します。デフォルト値は600秒です。トランザクションの所要時間がこのしきい値を超え、かつコミットもロールバックもされない場合、そのトランザクションは高コストトランザクションとみなされ、ログに記録されます。                                                                                                                                                          |
 
 ### 設定ファイルパラメータ {#configuration-file-parameters}
 
@@ -164,11 +164,11 @@ TiDB バージョン: 7.2.0
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                                                    | 変更     | さらなるテストの結果、デフォルト値が`false`から`true`に変更されました。これは、TiDB の起動時にデフォルトで軽量統計初期化を使用して初期化効率を向上させることを意味します。                                                                                                                                                                                                 |
 | TiDB           | [`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                                                         | 変更     | [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)に合わせて、デフォルト値を`false`から`true`に変更します。これにより、TiDB の起動時に、TiDB は統計情報の初期化が完了するまでサービスの提供を待ちます。                                                                                                                             |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].compaction-guard-min-output-file-size`](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | 変更     | RocksDB の圧縮タスクのデータ量を削減するために、デフォルト値を`"8MB"`から`"1MB"`に変更します。                                                                                                                                                                                                                                     |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].optimize-filters-for-memory`](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v720)         | 新しく追加された | メモリ内部の断片化を最小限に抑えるブルーム/リボンフィルタを生成するかどうかを制御します。                                                                                                                                                                                                                                                  |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720)         | 新しく追加された | 定期的な圧縮の間隔を制御します。この値よりも古い更新履歴を持つSSTファイルが圧縮対象として選択され、元のSSTファイルと同じ階層に書き換えられます。                                                                                                                                                                                                                    |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ribbon-filter-above-level`](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v720)             | 新しく追加された | この値以上のレベルではリボンフィルターを使用し、この値未満のレベルではブロックベースではないブルームフィルターを使用するかどうかを制御します。                                                                                                                                                                                                                        |
-| TiKV           | [`rocksdb.[defaultcf|writecf|lockcf].ttl`](/tikv-configuration-file.md#ttl-new-in-v720)                                                         | 新しく追加された | TTLよりも古い更新情報を持つSSTファイルは、自動的に圧縮対象として選択されます。                                                                                                                                                                                                                                                     |
+| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].compaction-guard-min-output-file-size</code>](/tikv-configuration-file.md#compaction-guard-min-output-file-size) | 変更     | RocksDB の圧縮タスクのデータ量を削減するために、デフォルト値を`"8MB"`から`"1MB"`に変更します。                                                                                                                                                                                                                                     |
+| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].optimize-filters-for-memory</code>](/tikv-configuration-file.md#optimize-filters-for-memory-new-in-v720)         | 新しく追加された | メモリ内部の断片化を最小限に抑えるブルーム/リボンフィルタを生成するかどうかを制御します。                                                                                                                                                                                                                                                  |
+| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].periodic-compaction-seconds</code>](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720)         | 新しく追加された | 定期的な圧縮の間隔を制御します。この値よりも古い更新履歴を持つSSTファイルが圧縮対象として選択され、元のSSTファイルと同じ階層に書き換えられます。                                                                                                                                                                                                                    |
+| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].ribbon-filter-above-level</code>](/tikv-configuration-file.md#ribbon-filter-above-level-new-in-v720)             | 新しく追加された | この値以上のレベルではリボンフィルターを使用し、この値未満のレベルではブロックベースではないブルームフィルターを使用するかどうかを制御します。                                                                                                                                                                                                                        |
+| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].ttl</code>](/tikv-configuration-file.md#ttl-new-in-v720)                                                         | 新しく追加された | TTLよりも古い更新情報を持つSSTファイルは、自動的に圧縮対象として選択されます。                                                                                                                                                                                                                                                     |
 | TiDB Lightning | `send-kv-pairs`                                                                                                                                 | 非推奨      | バージョン7.2.0以降、パラメータ`send-kv-pairs`は非推奨となりました。物理インポートモードでTiKVにデータを送信する際の1リクエストの最大サイズを制御するには、 [`send-kv-size`](/tidb-lightning/tidb-lightning-configuration.md)を使用してください。                                                                                                                          |
 | TiDB Lightning | [`character-set`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                                          | 変更     | データインポートでサポートされる文字セットに、新しい値オプション`latin1`が追加されました。このオプションを使用すると、Latin-1 文字セットのソースファイルをインポートできます。                                                                                                                                                                                                |
 | TiDB Lightning | [`send-kv-size`](/tidb-lightning/tidb-lightning-configuration.md)                                                                               | 新しく追加された | 物理インポートモードでTiKVにデータを送信する際の、1リクエストあたりの最大サイズを指定します。キーと値のペアのサイズが指定されたしきい値に達すると、 TiDB Lightningは直ちにそれらをTiKVに送信します。これにより、大規模なワイドテーブルをインポートする際に、 TiDB Lightningノードがメモリ内に大量のキーと値のペアを蓄積することによって発生するメモリ不足（OOM）の問題を回避できます。このパラメータを調整することで、メモリ使用量とインポート速度のバランスを取り、インポートプロセスの安定性と効率性を向上させることができます。         |
@@ -182,16 +182,16 @@ TiDB バージョン: 7.2.0
 
     - インデックススキャン範囲の構築ロジックを最適化し、複雑な条件をインデックススキャン範囲に変換することをサポートする[#41572](https://github.com/pingcap/tidb/issues/41572) [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - 新しい監視メトリクス`Stale Read OPS`と`Stale Read Traffic`を追加 [#43325](https://github.com/pingcap/tidb/issues/43325) @[you06](https://github.com/you06)
-    - 古い読み取りの再試行リーダーがロックに遭遇した場合、TiDB はロックを解決した後、リーダーで強制的に再試行します。これにより、不要なオーバーヘッドが回避されます。 [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
-    - 推定時間を使用して古い読み取りtsを計算し、古い読み取りのオーバーヘッドを削減します [#44215](https://github.com/pingcap/tidb/issues/44215) @[you06](https://github.com/you06)
+    - ステイル読み取りの再試行リーダーがロックに遭遇した場合、TiDB はロックを解決した後、リーダーで強制的に再試行します。これにより、不要なオーバーヘッドが回避されます。 [#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
+    - 推定時間を使用してステイル読み取りの ts を計算し、ステイル読み取りのオーバーヘッドを削減します [#44215](https://github.com/pingcap/tidb/issues/44215) @[you06](https://github.com/you06)
     - 長時間実行されるトランザクションのログとシステム変数を追加する [#41471](https://github.com/pingcap/tidb/issues/41471) @[crazycs520](https://github.com/crazycs520)
     - 圧縮されたMySQLプロトコルを介したTiDBへの接続をサポートします。これにより、低帯域幅ネットワーク下でのデータ集約型クエリのパフォーマンスが向上し、帯域幅コストが削減されます。これは`zlib`と`zstd`ベースの圧縮の両方をサポートします。 [#22605](https://github.com/pingcap/tidb/issues/22605) @[dveeden](https://github.com/dveeden)
     - `utf8`と`utf8bm3`の両方を従来の 3 バイト UTF-8 文字セットエンコーディングとして認識することで、従来の UTF-8 エンコーディングを持つテーブルを MySQL 8.0 から TiDB に移行しやすくなります。 [#26226](https://github.com/pingcap/tidb/issues/26226) @[dveeden](https://github.com/dveeden)
-    - `:=`ステートメントでの代入に`UPDATE`を使用するサポート [#44751](https://github.com/pingcap/tidb/issues/44751) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - `UPDATE`ステートメントでの代入に`:=`を使用することをサポート [#44751](https://github.com/pingcap/tidb/issues/44751) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
 - TiKV
 
-    - `pd.retry-interval`を使用した接続リクエスト失敗などのシナリオで PD 接続の再試行間隔を設定することをサポートします [#14964](https://github.com/tikv/tikv/issues/14964) @[rleungx](https://github.com/rleungx)
+    - 接続リクエストの失敗などのシナリオにおける PD 接続の再試行間隔を`pd.retry-interval`で設定することをサポートします [#14964](https://github.com/tikv/tikv/issues/14964) @[rleungx](https://github.com/rleungx)
     - グローバルなリソース使用状況を組み込むことで、リソース制御スケジューリングアルゴリズムを最適化する [#14604](https://github.com/tikv/tikv/issues/14604) @[Connor1996](https://github.com/Connor1996)
     - `check_leader`リクエストに gzip 圧縮を使用してトラフィックを削減します [#14553](https://github.com/tikv/tikv/issues/14553) @[you06](https://github.com/you06)
     - `check_leader`リクエストに関連するメトリクスを追加 [#14658](https://github.com/tikv/tikv/issues/14658) @[you06](https://github.com/you06)
@@ -211,7 +211,7 @@ TiDB バージョン: 7.2.0
     - TiCDC
 
         - オブジェクトストレージサービスへのレプリケーションシナリオでDDL操作が発生した場合に、データファイルが格納されるディレクトリの構造を最適化する [#8891](https://github.com/pingcap/tiflow/issues/8891) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - KafkaへのレプリケーションシナリオにおけるOAUTHBEARER認証のサポート [#8865](https://github.com/pingcap/tiflow/issues/8865) @[Rustin170506](https://github.com/Rustin170506)
+        - KafkaへのレプリケーションシナリオにおけるOAUTHBEARER認証のサポート [#8865](https://github.com/pingcap/tiflow/issues/8865) @[hi-rustin](https://github.com/Rustin170506)
         - Kafkaへのレプリケーションシナリオの`DELETE`オペレーションのハンドルキーのみを出力するオプションを追加 [#9143](https://github.com/pingcap/tiflow/issues/9143) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Data Migration (DM)
@@ -231,7 +231,7 @@ TiDB バージョン: 7.2.0
     - CTE を使用したクエリによって TiDB がハングする問題を修正[#43749](https://github.com/pingcap/tidb/issues/43749) [#36896](https://github.com/pingcap/tidb/issues/36896) @[guo-shaoge](https://github.com/guo-shaoge)
     - `min, max`クエリ結果が正しくない問題を修正 [#43805](https://github.com/pingcap/tidb/issues/43805) @[wshwsh12](https://github.com/wshwsh12)
     - `SHOW PROCESSLIST`ステートメントで、サブクエリ時間が長いステートメントのトランザクションの TxnStart が表示されない問題を修正します [#40851](https://github.com/pingcap/tidb/issues/40851) @[crazycs520](https://github.com/crazycs520)
-    - コプロセッサータスクに`TxnScope`がないため、古いデータの読み取りグローバル最適化が有効にならない問題を修正します [#43365](https://github.com/pingcap/tidb/issues/43365) @[you06](https://github.com/you06)
+    - コプロセッサータスクに`TxnScope`がないため、ステイル読み取りのグローバル最適化が有効にならない問題を修正します [#43365](https://github.com/pingcap/tidb/issues/43365) @[you06](https://github.com/you06)
     - フォロワー読み取りが再試行前にフラッシュバックエラーを処理しないためクエリエラーが発生する問題を修正します [#43673](https://github.com/pingcap/tidb/issues/43673) @[you06](https://github.com/you06)
     - `ON UPDATE`文が主キーを正しく更新しない場合にデータとインデックスが不整合になる問題を修正 [#44565](https://github.com/pingcap/tidb/issues/44565) @[zyguan](https://github.com/zyguan)
     - 権限テーブルの一部の列における大文字小文字の区別に関する問題を修正しました [#41048](https://github.com/pingcap/tidb/issues/41048) @[bb7133](https://github.com/bb7133)
@@ -246,7 +246,7 @@ TiDB バージョン: 7.2.0
     - `LEADING`ヒントがブロックエイリアスのクエリをサポートしていない問題を修正 [#44645](https://github.com/pingcap/tidb/issues/44645) @[qw4990](https://github.com/qw4990)
     - `LAST_INSERT_ID()`関数の戻り値の型を VARCHAR から LONGLONG に変更し、MySQL の戻り値の型と一致させます [#44574](https://github.com/pingcap/tidb/issues/44574) @[Defined2014](https://github.com/Defined2014)
     - 相関のないサブクエリを含むステートメントで共通テーブル式（CTE）を使用すると、誤った結果が返される可能性がある問題を修正しました [#44051](https://github.com/pingcap/tidb/issues/44051) @[winoros](https://github.com/winoros)
-    - 結合したテーブルの再配置によって不正な外部結合結果が生じる可能性がある問題を修正 [#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid)
+    - Join Reorder によって不正な外部結合結果が生じる可能性がある問題を修正 [#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid)
     - `PREPARE stmt FROM "ANALYZE TABLE xxx"`が`tidb_mem_quota_query`によって強制終了される可能性がある問題を修正 [#44320](https://github.com/pingcap/tidb/issues/44320) @[chrysan](https://github.com/chrysan)
 
 - TiKV
@@ -276,10 +276,10 @@ TiDB バージョン: 7.2.0
 
         - Resolved TSが一部のケースで正しく進まない問題を修正 [#8963](https://github.com/pingcap/tiflow/issues/8963) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - Avro または CSV プロトコルが使用されている場合、 `UPDATE`オペレーションが古い値を出力できない問題を修正 [#9086](https://github.com/pingcap/tiflow/issues/9086) @[3AceShowHand](https://github.com/3AceShowHand)
-        - Kafkaへのデータ複製時にダウンストリームメタデータを頻繁に読み取ることで発生する、ダウンストリームへの過剰な負荷の問題を修正します [#8959](https://github.com/pingcap/tiflow/issues/8959) @[Rustin170506](https://github.com/Rustin170506)
+        - Kafkaへのデータ複製時にダウンストリームメタデータを頻繁に読み取ることで発生する、ダウンストリームへの過剰な負荷の問題を修正します [#8959](https://github.com/pingcap/tiflow/issues/8959) @[hi-rustin](https://github.com/Rustin170506)
         - TiDBまたはMySQLへのデータ複製時に、下流の双方向レプリケーション関連変数を頻繁に設定することで発生する、下流ログが多すぎる問題を修正しました [#9180](https://github.com/pingcap/tiflow/issues/9180) @[asddongmen](https://github.com/asddongmen)
         - PDノードのクラッシュによってTiCDCノードが再起動する問題を修正 [#8868](https://github.com/pingcap/tiflow/issues/8868) @[asddongmen](https://github.com/asddongmen)
-        - TiCDCが下流のKafka-on-Pulsarで変更フィードを作成できない問題を修正 [#8892](https://github.com/pingcap/tiflow/issues/8892) @[Rustin170506](https://github.com/Rustin170506)
+        - TiCDCが下流のKafka-on-Pulsarで変更フィードを作成できない問題を修正 [#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/Rustin170506)
 
     - TiDB Lightning
 

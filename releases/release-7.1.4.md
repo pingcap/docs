@@ -13,7 +13,7 @@ TiDBバージョン: 7.1.4
 
 ## 互換性の変更 {#compatibility-changes}
 
-- ログ印刷のオーバーヘッドを減らすために、 TiFlashはデフォルト値の`logger.level` `"debug"`から`"info"` に変更します。 [#8641](https://github.com/pingcap/tiflash/issues/8641) @[JaySon-Huang](https://github.com/JaySon-Huang)
+- ログ出力のオーバーヘッドを減らすために、 TiFlashは`logger.level`のデフォルト値を`"debug"`から`"info"` に変更します。 [#8641](https://github.com/pingcap/tiflash/issues/8641) @[JaySon-Huang](https://github.com/JaySon-Huang)
 - TiKV設定項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#num-threads-new-in-v658)を導入して、 `enable-compaction-filter`が`false` の場合のGCスレッド数を設定します。 [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 ## 改善点 {#improvements}
@@ -50,7 +50,7 @@ TiDBバージョン: 7.1.4
 
     - TiCDC
 
-        - ダウンストリームがKafkaの場合、トピック式は`schema`オプションとして許可し、トピック名を直接指定することをサポートします[#9763](https://github.com/pingcap/tiflow/issues/9763) @[3AceShowHand](https://github.com/3AceShowHand)
+        - ダウンストリームがKafkaの場合、トピック式で`schema`を省略可能にし、トピック名を直接指定することをサポートします[#9763](https://github.com/pingcap/tiflow/issues/9763) @[3AceShowHand](https://github.com/3AceShowHand)
         - [チェンジフィードの下流同期ステータスの照会](https://docs.pingcap.com/tidb/v7.1/ticdc-open-api-v2#query-whether-a-specific-replication-task-is-completed)をサポートし、TiCDC が受信した上流データの変更が下流システムに完全に同期されているかどうかを判断するのに役立ちます[#10289](https://github.com/pingcap/tiflow/issues/10289) @[hongyunyan](https://github.com/hongyunyan)
         - TiDB DashboardでのTiCDCログの検索をサポート [#10263](https://github.com/pingcap/tiflow/issues/10263) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
@@ -72,7 +72,7 @@ TiDBバージョン: 7.1.4
     - `AUTO_ID_CACHE=1` のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。 [#50519](https://github.com/pingcap/tidb/issues/50519) @[tiancaiamao](https://github.com/tiancaiamao)
     - クエリで`NATURAL JOIN` が使用される場合に発生する可能性のある`Column ... in from clause is ambiguous`エラーを修正します [#32044](https://github.com/pingcap/tidb/issues/32044) @[AilinKid](https://github.com/AilinKid)
     - クエリがソートを強制するオプティマイザヒント（ `STREAM_AGG()`など）を使用し、その実行計画に`IndexMerge` が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
-    - `STREAM_AGG()` CI を誤って処理したためにクエリ結果が正しくない問題を修正しました [#49902](https://github.com/pingcap/tidb/issues/49902) @[wshwsh12](https://github.com/wshwsh12)
+    - `STREAM_AGG()`が CI を誤って処理したためにクエリ結果が正しくない問題を修正しました [#49902](https://github.com/pingcap/tidb/issues/49902) @[wshwsh12](https://github.com/wshwsh12)
     - `HashJoin`オペレーターがディスクにスピルできない場合に発生する可能性のある goroutine リークの問題を修正しました。 [#50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
     - `REPLACE INTO`文でヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
     - `GROUP_CONCAT(ORDER BY)`構文を含むクエリを実行するとエラーが返される可能性がある問題を修正しました [#49986](https://github.com/pingcap/tidb/issues/49986) @[AilinKid](https://github.com/AilinKid)
@@ -87,11 +87,11 @@ TiDBバージョン: 7.1.4
     - クエリに Apply オペレーターが含まれており、 `fatal error: concurrent map writes`エラーが発生すると TiDB がpanicになる可能性がある問題を修正しました。 [#50347](https://github.com/pingcap/tidb/issues/50347) @[SeaRise](https://github.com/SeaRise)
     - 集計関数をグループ計算に使用すると発生する可能性のある`Can't find column ...`エラーを修正[#50926](https://github.com/pingcap/tidb/issues/50926) @[qw4990](https://github.com/qw4990)
     - 定数伝播で`ENUM`または`SET`型を処理するときに TiDB が間違ったクエリ結果を返す問題を修正しました [#49440](https://github.com/pingcap/tidb/issues/49440) @[winoros](https://github.com/winoros)
-    - 依存関係のある 2つの DDL タスクの完了時間がと誤って順序付けられる問題を修正しました。 [#49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
+    - 依存関係のある 2つの DDL タスクの完了時間が誤って順序付けられる問題を修正しました。 [#49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
     - `tidb_enable_prepared_plan_cache`システム変数が有効になってから無効になった後に`EXECUTE`文を使用して`PREPARE STMT`を実行すると、TiDB がpanicになる可能性がある問題を修正しました[#49344](https://github.com/pingcap/tidb/issues/49344) @[qw4990](https://github.com/qw4990)
     - ネストされた`UNION`のクエリで`LIMIT`と`ORDER BY`が無効になる可能性がある問題を修正しました [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
     - `LEADING`ヒントが`UNION ALL`ステートメントで有効にならない問題を修正しました [#50067](https://github.com/pingcap/tidb/issues/50067) @[hawkingrei](https://github.com/hawkingrei)
-    - `COM_STMT_EXECUTE`まで実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションを終了できない問題を修正しました。 [#49151](https://github.com/pingcap/tidb/issues/49151) @[zyguan](https://github.com/zyguan)
+    - `COM_STMT_EXECUTE`を介して実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションを終了できない問題を修正しました。 [#49151](https://github.com/pingcap/tidb/issues/49151) @[zyguan](https://github.com/zyguan)
     - 無効なオプティマイザヒントによって有効なヒントが無効になる可能性がある問題を修正[#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
     - 一部のタイムゾーンで夏時間が正しく表示されない問題を修正 [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     - `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [#49166](https://github.com/pingcap/tidb/issues/49166) @[qw4990](https://github.com/qw4990)
@@ -105,20 +105,20 @@ TiDBバージョン: 7.1.4
     - `CREATE TABLE`文に特定のパーティションまたは制約が含まれている場合に、テーブル名の変更などの DDL 操作が停止する問題を修正しました[#50972](https://github.com/pingcap/tidb/issues/50972) @[lcwangchao](https://github.com/lcwangchao)
     - 列のデフォルト値が削除されている場合に列のデフォルト値を取得するとエラーが返される問題を修正[#50043](https://github.com/pingcap/tidb/issues/50043) [#51324](https://github.com/pingcap/tidb/issues/51324) @[crazycs520](https://github.com/crazycs520)
     - Grafana の監視メトリック`tidb_statistics_auto_analyze_total`が整数として表示されない問題を修正しました [#51051](https://github.com/pingcap/tidb/issues/51051) @[hawkingrei](https://github.com/hawkingrei)
-    - `auto analyze`パーティションテーブルを処理しているときに`tidb_merge_partition_stats_concurrency`変数が有効にならない問題を修正しました [#47594](https://github.com/pingcap/tidb/issues/47594) @[hawkingrei](https://github.com/hawkingrei)
+    - `auto analyze`がパーティションテーブルを処理しているときに`tidb_merge_partition_stats_concurrency`変数が有効にならない問題を修正しました [#47594](https://github.com/pingcap/tidb/issues/47594) @[hawkingrei](https://github.com/hawkingrei)
     - クエリにJOIN操作が含まれる場合に`index out of range`エラーが発生する可能性がある問題を修正しました [#42588](https://github.com/pingcap/tidb/issues/42588) @[AilinKid](https://github.com/AilinKid)
     - TiFlash の遅延マテリアライゼーションが関連列 を処理するときに間違った結果が返される可能性がある問題を修正しました [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) [#49241](https://github.com/pingcap/tidb/issues/49241)
     - テーブルにクラスター化インデックスがある場合に並列`Apply`で誤った結果が生成される可能性がある問題を修正しました。 [#51372](https://github.com/pingcap/tidb/issues/51372) @[guo-shaoge](https://github.com/guo-shaoge)
 
 - TiKV
 
-    - 例外的な状況で休止状態の領域がすぐに起動しない問題を修正[#16368](https://github.com/tikv/tikv/issues/16368) @[LykxSassinator](https://github.com/LykxSassinator)
+    - 例外的な状況で休止状態のリージョンがすぐに起動しない問題を修正[#16368](https://github.com/tikv/tikv/issues/16368) @[LykxSassinator](https://github.com/LykxSassinator)
     - ノードをオフラインにする前に、リージョン内のすべてのレプリカの最後のハートビート時間をチェックすることで、1 つのレプリカがオフラインになるとリージョン全体が使用できなくなる問題を修正しました[#16465](https://github.com/tikv/tikv/issues/16465) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - Titan が有効になっているときに RocksDB に保存されるテーブルプロパティが不正確になる可能性がある問題を修正[#16319](https://github.com/tikv/tikv/issues/16319) @[hicqu](https://github.com/hicqu)
-    - クラスターにTiFlashノードがある場合に`tikv-ctl compact-cluster`実行が失敗する問題を修正しました [#16189](https://github.com/tikv/tikv/issues/16189) @[frew](https://github.com/frew)
+    - クラスターにTiFlashノードがある場合に`tikv-ctl compact-cluster`の実行が失敗する問題を修正しました [#16189](https://github.com/tikv/tikv/issues/16189) @[frew](https://github.com/frew)
     - gRPC スレッドが`is_shutdown` をチェックしているときに TiKV がpanicする可能性がある問題を修正しました [#16236](https://github.com/tikv/tikv/issues/16236) @[pingyu](https://github.com/pingyu)
     - `DECIMAL`算術乗算切り捨てを処理するときに TiDB と TiKV が矛盾した結果を生成する可能性がある問題を修正しました [#16268](https://github.com/tikv/tikv/issues/16268) @[solotzg](https://github.com/solotzg)
-    - `cast_duration_as_time`誤った結果を返す可能性がある問題を修正[#16211](https://github.com/tikv/tikv/issues/16211) @[gengliqi](https://github.com/gengliqi)
+    - `cast_duration_as_time`が誤った結果を返す可能性がある問題を修正[#16211](https://github.com/tikv/tikv/issues/16211) @[gengliqi](https://github.com/gengliqi)
     - TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
     - JSON の整数が最大値`INT64`より大きく最大値`UINT64`より小さい場合、TiKV によって`FLOAT64`として解析され、TiDB との不整合が発生する問題を修正しました。 [#16512](https://github.com/tikv/tikv/issues/16512) @[YangKeao](https://github.com/YangKeao)
 
@@ -132,12 +132,12 @@ TiDBバージョン: 7.1.4
     - `MergeLabels`関数が呼び出されたときにデータ競合が発生する問題を修正しました [#7535](https://github.com/tikv/pd/issues/7535) @[lhy1024](https://github.com/lhy1024)
     - TLS が有効な場合に TiDB Dashboardが TiKV プロファイルを取得できない問題を修正[#7561](https://github.com/tikv/pd/issues/7561) @[Connor1996](https://github.com/Connor1996)
     - レプリカ数が要件を満たしていない場合に孤立ピアが削除される問題を修正しました [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
-    - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`誤って計算される問題を修正[#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
-    - 配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`誤って計算される可能性がある問題を修正しました[#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
+    - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`が誤って計算される問題を修正[#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
+    - 配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`が誤って計算される可能性がある問題を修正しました[#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
     - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで、セカンダリAZがダウンしているときにプライマリAZがTiKVノードを追加できない問題を修正しました。 [#7218](https://github.com/tikv/pd/issues/7218) @[disksing](https://github.com/disksing)
     - リソースグループをバッチでクエリすると PD がpanicになる可能性がある問題を修正しました [#7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
     - `pd-ctl`を使用してリーダーのないリージョンを照会すると、PD がpanicになる可能性がある問題を修正しました。 [#7630](https://github.com/tikv/pd/issues/7630) @[rleungx](https://github.com/rleungx)
-    - リーダースイッチ後にPD監視項目`learner-peer-count`古い値を同期しない問題を修正 [#7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
+    - リーダースイッチ後にPD監視項目`learner-peer-count`が古い値を同期しない問題を修正 [#7728](https://github.com/tikv/pd/issues/7728) @[CabinfeverB](https://github.com/CabinfeverB)
     - PDが`systemd` で起動したときにリソース制限を読み取れない問題を修正 [#7628](https://github.com/tikv/pd/issues/7628) @[bufferflies](https://github.com/bufferflies)
 
 - TiFlash
@@ -172,12 +172,12 @@ TiDBバージョン: 7.1.4
         - ストレージシンクの使用時に、ストレージサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。 [#10352](https://github.com/pingcap/tiflow/issues/10352) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - 複数のチェンジフィードを同時に作成すると TiCDC が`ErrChangeFeedAlreadyExists`エラーを返す問題を修正しました [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - 変更フィードを再開するときに`snapshot lost caused by GC`が時間内に報告されず、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントよりも小さい問題を修正しました。 [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
-        - 単一行データのデータ整合性検証が有効になった後、タイムゾーンの不一致により TiCDC が`TIMESTAMP`種類のチェックサムの検証に失敗する問題を修正[#10573](https://github.com/pingcap/tiflow/issues/10573) @[3AceShowHand](https://github.com/3AceShowHand)
+        - 単一行データのデータ整合性検証が有効になった後、タイムゾーンの不一致により TiCDC が`TIMESTAMP`型のチェックサムの検証に失敗する問題を修正[#10573](https://github.com/pingcap/tiflow/issues/10573) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Data Migration (DM)
 
         - タスク構成で間違ったbinlogイベントタイプがアップグレード失敗の原因となる問題を修正[#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
-        - `shard_row_id_bits`テーブルでスキーマ トラッカーがの初期化に失敗する問題を修正しました。 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
+        - `shard_row_id_bits`を持つテーブルが原因でスキーマ トラッカーの初期化に失敗する問題を修正しました。 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
 
     - TiDB Lightning
 
