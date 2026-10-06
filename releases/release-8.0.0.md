@@ -194,7 +194,7 @@ Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v8.0/quick-sta
 
     By default, the optimizer does not select [invisible indexes](/sql-statements/sql-statement-create-index.md#invisible-index). This mechanism is usually used to evaluate whether to delete an index. If there is uncertainty about the potential performance impact of deleting an index, you have the option to set the index to invisible temporarily and promptly restore it to visible when needed.
 
-    Starting from v8.0.0, you can set the session-level system variable [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) to `ON` to make the current session aware of invisible indexes. With this feature, you can create a new index and test its performance by making the index visible first, and then modifying the system variable in the current session for testing without affecting other sessions. This improvement enhances the safety of SQL tuning and helps to improve the stability of production databases.
+    Starting from v8.0.0, you can set the session-level system variable [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800) to `ON` to make the current session aware of invisible indexes. With this feature, you can create a new index as an invisible index first, and then test its performance by modifying the system variable in the current session without affecting other sessions. This improvement enhances the safety of SQL tuning and helps to improve the stability of production databases.
 
     For more information, see [documentation](/sql-statements/sql-statement-create-index.md#invisible-index).
 
