@@ -47,7 +47,7 @@ TiDBバージョン: 6.5.11
     - `PipelinedWindow`の`Open`メソッドのパラメータをリセットして、 `PipelinedWindow`が`Apply`の子ノードとして使用されたときに、繰り返しの開閉操作によって発生した以前のパラメータ値の再利用により発生する予期しないエラーを修正します。 [#53600](https://github.com/pingcap/tidb/issues/53600) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正[#53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
     - `HashJoin`または`IndexLookUp`オペレーターが`Apply`オペレーターの駆動側サブノードである場合に`memTracker`が切り離されないことで発生する異常に高いメモリ使用量の問題を修正しました。 [#54005](https://github.com/pingcap/tidb/issues/54005) @[XuHuaiyu](https://github.com/XuHuaiyu)
-    - SQLが異常に中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正[#54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
+    - SQLが異常に中断されたときに`INDEX_HASH_JOIN`が正常に終了できない問題を修正[#54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
     - DMから複製されたテーブルのインデックスの長さが`max-index-length` で指定された最大長を超えるとテーブル複製が失敗する問題を修正しました [#55138](https://github.com/pingcap/tidb/issues/55138) @[lance6716](https://github.com/lance6716)
     - `GROUP BY`ステートメント内の間接プレースホルダ`?`参照が列を見つけられない問題を修正しました [#53872](https://github.com/pingcap/tidb/issues/53872) @[qw4990](https://github.com/qw4990)
     - 場合によっては無効な列タイプ`DECIMAL(0,0)`が作成される可能性がある問題を修正[#53779](https://github.com/pingcap/tidb/issues/53779) @[tangenta](https://github.com/tangenta)
@@ -69,7 +69,7 @@ TiDBバージョン: 6.5.11
     - クエリが強制終了された後にエラーではなく誤った結果を返す可能性がある問題を修正[#50089](https://github.com/pingcap/tidb/issues/50089) @[D3Hunter](https://github.com/D3Hunter)
     - `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY`テーブルをクエリすると TiDB がpanicを起こす可能性がある問題を修正[#54324](https://github.com/pingcap/tidb/issues/54324) @[tiancaiamao](https://github.com/tiancaiamao)
     - `StreamAggExec`の`groupOffset`が空の場合に TiDB がpanicを起こす可能性がある問題を修正しました [#53867](https://github.com/pingcap/tidb/issues/53867) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - `Sort`オペレーターがスピルした後にディスクファイルが削除されず、クエリエラーが発生する可能性がある問題を修正[#55061](https://github.com/pingcap/tidb/issues/55061) @[wshwsh12](https://github.com/wshwsh12)
+    - `Sort`オペレーターがスピルしてクエリエラーが発生した後に、ディスクファイルが削除されない可能性がある問題を修正[#55061](https://github.com/pingcap/tidb/issues/55061) @[wshwsh12](https://github.com/wshwsh12)
     - `IndexNestedLoopHashJoin` のデータ競合問題を修正 [#49692](https://github.com/pingcap/tidb/issues/49692) @[solotzg](https://github.com/solotzg)
     - `SHOW COLUMNS`を使用してビューの列を表示するとエラーが発生する問題を修正しました [#54964](https://github.com/pingcap/tidb/issues/54964) @[lance6716](https://github.com/lance6716)
     - DML文にネストされた生成列が含まれている場合にエラーが発生する問題を修正しました [#53967](https://github.com/pingcap/tidb/issues/53967) @[wjhuang2016](https://github.com/wjhuang2016)
@@ -82,21 +82,21 @@ TiDBバージョン: 6.5.11
     - 古いレプリカがRaftスナップショットを処理するときに、遅い分割操作と新しいレプリカの即時削除によってトリガーされ、TiKV がpanicになる可能性がある問題を修正しました。 [#17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
     - 破損したRaftデータスナップショットを適用すると TiKV が繰り返しpanicする可能性がある問題を修正しました。 [#15292](https://github.com/tikv/tikv/issues/15292) @[LykxSassinator](https://github.com/LykxSassinator)
     - gRPC メッセージ圧縮方式を`grpc-compression-type`で設定しても、TiKV から TiDB に送信されるメッセージには反映されない問題を修正しました。 [#17176](https://github.com/tikv/tikv/issues/17176) @[ekexium](https://github.com/ekexium)
-    - CDC とログバックアップが`advance-ts-interval`構成を使用して`check_leader`のタイムアウトを制限しないため、TiKV が正常に再起動したときに`resolved_ts`遅延が大きくなる場合がある問題を修正しました[#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
+    - CDC とログバックアップが`advance-ts-interval`構成を使用して`check_leader`のタイムアウトを制限しないため、TiKV が正常に再起動したときに`resolved_ts`の遅延が大きくなる場合がある問題を修正しました[#17107](https://github.com/tikv/tikv/issues/17107) @[MyonKeminta](https://github.com/MyonKeminta)
 
 - PD
 
     - 一部のログが秘匿化されない問題を修正[#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [#8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
-    - `replication.strictly-match-label`から`true`に設定するとTiFlash が起動しなくなる問題を修正 [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
+    - `replication.strictly-match-label`を`true`に設定するとTiFlash が起動しなくなる問題を修正 [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
     - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
 
 - TiFlash
 
-    - `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
+    - `CAST()`関数を使用してタイムゾーンまたは無効な文字を含む文字列を日付時刻に変換すると、結果が正しくなくなる問題を修正しました[#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
     - データベースが作成直後に削除されるとTiFlash がpanicする可能性がある問題を修正[#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取りリクエストタイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - TiFlashと任意のPD間のネットワークパーティション（ネットワーク切断）により、読み取りリクエストタイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - 外部結合を含むクエリの実行中にエラーが発生した場合にTiFlashがクラッシュする可能性がある問題を修正しました。 [#9190](https://github.com/pingcap/tiflash/issues/9190) @[windtalker](https://github.com/windtalker)
     - データ型を`DECIMAL`に変換すると、一部のコーナーケースで誤ったクエリ結果が発生する可能性がある問題を修正しました[#53892](https://github.com/pingcap/tidb/issues/53892) @[guo-shaoge](https://github.com/guo-shaoge)
     - クラスタ内で長期間にわたって頻繁に`EXCHANGE PARTITION`と`DROP TABLE`操作を行うと、 TiFlashテーブルメタデータのレプリケーションが遅くなり、クエリパフォーマンスが低下する可能性がある問題を修正しました[#9227](https://github.com/pingcap/tiflash/issues/9227) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -120,7 +120,7 @@ TiDBバージョン: 6.5.11
 
     - TiDB Data Migration (DM)
 
-        - インデックスの長さがデフォルト値の`max-index-length` を超えるとデータレプリケーションが中断される問題を修正しました [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
+        - インデックスの長さが`max-index-length`のデフォルト値を超えるとデータレプリケーションが中断される問題を修正しました [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
         - スキーマ トラッカーが LIST パーティションテーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
         - LISTパーティションテーブルの`ALTER TABLE ... DROP PARTITION`文を複製するときにDMがエラーを返す問題を修正しました。 [#54760](https://github.com/pingcap/tidb/issues/54760) @[lance6716](https://github.com/lance6716)
         - DMが`ALTER DATABASE`文を処理するときにデフォルトのデータベースを設定せず、レプリケーションエラーが発生する問題を修正しました。 [#11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)

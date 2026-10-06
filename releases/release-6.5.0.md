@@ -26,15 +26,15 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 - TiDB グローバルメモリ制御が GA になり、 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を介してメモリ消費しきい値を制御できるようになりました。
 - 高性能かつグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode)列属性が、MySQLと互換性のあるGAになります。
 - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)は TiCDC および PITR と互換性があり、GA になります。
-- より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)一般に公開し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザを強化します。
+- より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)を一般提供し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザを強化します。
 - `JSON_EXTRACT()`関数をTiFlashにプッシュダウンすることをサポートします。
 - パスワード コンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
 - TiDB LightningとDumplingは、圧縮されたSQLおよびCSVファイルの[インポート](/tidb-lightning/tidb-lightning-data-source.md)および[エクスポート](/dumpling-overview.md#improve-export-efficiency-through-concurrency)をサポートします。
-- TiDB Data Migration (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md) GA になります。
+- TiDB Data Migration (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md)が GA になります。
 - TiDB バックアップ & リストアは、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)のリカバリ パフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を最短 5分に短縮します。
 - [Kafkaへのデータの複製](/replicate-data-to-kafka.md)の TiCDC スループットを 4000 行/秒から 35000 行/秒に向上し、レプリケーションのレイテンシーを2秒に短縮します。
 - データのライフサイクルを管理するために行レベル[TTL (Time to Live)](/time-to-live.md)を提供します (実験的)。
-- TiCDC は、Amazon S3、Azure Blob Storage、NFS (実験的) など[変更ログをオブジェクトストレージに複製する](/ticdc/ticdc-sink-to-cloud-storage.md)サポートしています。
+- TiCDC は、Amazon S3、Azure Blob Storage、NFS (実験的) など[変更ログをオブジェクトストレージに複製する](/ticdc/ticdc-sink-to-cloud-storage.md)ことをサポートしています。
 
 ## 新機能 {#new-features}
 
@@ -42,7 +42,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - TiDBのインデックス追加のパフォーマンスは約10倍向上します（GA） [#35983](https://github.com/pingcap/tidb/issues/35983) @[benjamin2037](https://github.com/benjamin2037) @[tangenta](https://github.com/tangenta)
 
-    TiDB v6.3.0では、インデックス作成時のバックフィル速度を向上させる実験的機能として[インデックス加速を追加](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が導入されました。v6.5.0ではこの機能がGAとなり、デフォルトで有効化されます。大規模テーブルにおけるパフォーマンスはv6.1.0と比較して約10倍向上すると予想されます。この高速化機能は、単一のSQL文がインデックスを逐次追加するシナリオに適しています。複数のSQL文が並列でインデックスを追加する場合は、そのうちの1つのSQL文のみが高速化されます。
+    TiDB v6.3.0では、インデックス作成時のバックフィル速度を向上させる実験的機能として[インデックス追加の高速化](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)が導入されました。v6.5.0ではこの機能がGAとなり、デフォルトで有効化されます。大規模テーブルにおけるパフォーマンスはv6.1.0と比較して約10倍向上すると予想されます。この高速化機能は、単一のSQL文がインデックスを逐次追加するシナリオに適しています。複数のSQL文が並列でインデックスを追加する場合は、そのうちの1つのSQL文のみが高速化されます。
 
 - DDL 変更時の DML 成功率を向上させる軽量メタデータロックを提供する (GA) [#37275](https://github.com/pingcap/tidb/issues/37275) @[wjhuang2016](https://github.com/wjhuang2016)
 
@@ -70,7 +70,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - `INSERT INTO SELECT`文を使用したTiFlashクエリ結果の保存をサポート (実験的) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi)
 
-    TiDB v6.5.0以降、 `INSERT INTO SELECT`文の`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`TiDBテーブルに簡単に保存して、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。例えば、次のようになります。
+    TiDB v6.5.0以降、 `INSERT INTO SELECT`文の`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`で指定したTiDBテーブルに簡単に保存して、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。例えば、次のようになります。
 
     ```sql
     INSERT INTO t2 SELECT Mod(x,y) FROM t1;
@@ -151,7 +151,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     v6.5.0より前のTiDBでは、 `OR`で連結されたフィルタ条件に対してのみインデックスマージがサポートされていました。v6.5.0以降、TiDBは`WHERE`句の`AND`で連結されたフィルタ条件に対してもインデックスマージがサポートされるようになりました。これにより、TiDBのインデックスマージは、より一般的なクエリフィルタ条件の組み合わせをカバーできるようになり、union( `OR` )関係に限定されなくなりました。現在のv6.5.0バージョンでは、オプティマイザによって自動的に選択された`OR`の条件でのインデックスマージのみがサポートされています。`AND`条件でインデックスマージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
 
-    インデックスマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)と[インデックスのマージについて説明する](/explain-index-merge.md)を参照してください。
+    インデックスマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)と[インデックスマージを使用したステートメントの説明](/explain-index-merge.md)を参照してください。
 
 - 以下のJSON関数をTiFlash にプッシュダウンすることをサポートします [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87)
 
@@ -219,7 +219,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - 高性能かつグローバルに単調な`AUTO_INCREMENT`列属性 (GA) をサポート [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao)
 
-    TiDBはv6.4.0以降、実験的機能としてMySQL互換モード`AUTO_INCREMENT`を導入しました。このモードでは、すべてのTiDBインスタンスでIDが単調に増加するようにする、集中型のAUTO_INCREMENT ID割り当てサービスが導入されます。この機能により、AUTO_INCREMENT IDによるクエリ結果のソートが容易になります。v6.5.0では、この機能がGAになります。この機能を使用したテーブルの挿入TPSは20,000を超えると予想されており、この機能は単一のテーブルとクラスタ全体の書き込みスループットを向上させるためのエラスティックスケーリングをサポートしています。MySQL互換モードを使用するには、テーブル作成時に`AUTO_ID_CACHE` `1`を設定する必要があります。以下は例です。
+    TiDBはv6.4.0以降、実験的機能としてMySQL互換モード`AUTO_INCREMENT`を導入しました。このモードでは、すべてのTiDBインスタンスでIDが単調に増加するようにする、集中型のAUTO_INCREMENT ID割り当てサービスが導入されます。この機能により、AUTO_INCREMENT IDによるクエリ結果のソートが容易になります。v6.5.0では、この機能がGAになります。この機能を使用したテーブルの挿入TPSは20,000を超えると予想されており、この機能は単一のテーブルとクラスタ全体の書き込みスループットを向上させるためのエラスティックスケーリングをサポートしています。MySQL互換モードを使用するには、テーブル作成時に`AUTO_ID_CACHE`を`1`に設定する必要があります。以下は例です。
 
     ```sql
     CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
@@ -269,7 +269,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - TiCDCは2つのクラスタ間の双方向レプリケーションをサポートします[#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen)
 
-    TiCDCは、2つのTiDBクラスタ間の双方向レプリケーションをサポートしています。アプリケーションのために地理的に分散された複数のアクティブデータセンターを構築する必要がある場合、この機能をソリューションとして利用できます。TiCDCの変更フィードに`bdr-mode = true`パラメータを設定することで、あるTiDBクラスタから別のTiDBクラスタへのデータレプリケーションを実現できます。
+    TiCDCは、2つのTiDBクラスタ間の双方向レプリケーションをサポートしています。アプリケーションのために地理的に分散された複数のアクティブデータセンターを構築する必要がある場合、この機能をソリューションとして利用できます。あるTiDBクラスタから別のTiDBクラスタへのTiCDCの変更フィードに`bdr-mode = true`パラメータを設定することで、2つのTiDBクラスタ間の双方向データレプリケーションを実現できます。
 
     詳細については[ドキュメント](/ticdc/ticdc-bidirectional-replication.md)を参照してください。
 
@@ -295,9 +295,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     ログリストア段階では、1つのTiKVのリストア速度が9MiB/sに達し、従来比50%の高速化を実現しました。リストア速度はスケーラブルで、DRシナリオにおけるRTO（目標復旧時間）は大幅に短縮されます。DRシナリオにおけるRPO（目標復旧時点）は最短5分です。通常のクラスター運用保守（OM）では、例えばローリングアップグレードの実行時や、1つのTiKVのみがダウンしている場合でも、RPOは5分です。
 
-- TiKV- BR GA: RawKVのバックアップと復元をサポート [#67](https://github.com/tikv/migration/issues/67) @[pingyu](https://github.com/pingyu) @[haojinming](https://github.com/haojinming)
+- TiKV-BR GA: RawKVのバックアップと復元をサポート [#67](https://github.com/tikv/migration/issues/67) @[pingyu](https://github.com/pingyu) @[haojinming](https://github.com/haojinming)
 
-    TiKV- BRは、TiKVクラスターで使用されるバックアップおよびリストアツールです。TiKVとPDは、TiDBを使用せずにRawKVと呼ばれるKVデータベースを構成できます。TiKV- BRは、RawKVを使用する製品のデータバックアップとリストアをサポートします。また、 TiKVクラスターの[`api-version`](/tikv-configuration-file.md#api-version-new-in-v610) `API V1`から`API V2`にアップグレードすることもできます。
+    TiKV-BRは、TiKVクラスターで使用されるバックアップおよびリストアツールです。TiKVとPDは、TiDBを使用せずにRawKVと呼ばれるKVデータベースを構成できます。TiKV-BRは、RawKVを使用する製品のデータバックアップとリストアをサポートします。また、 TiKVクラスターの[`api-version`](/tikv-configuration-file.md#api-version-new-in-v610)を`API V1`から`API V2`にアップグレードすることもできます。
 
     詳細については[ドキュメント](https://tikv.org/docs/latest/concepts/explore-tikv-features/backup-restore/)を参照してください。
 
@@ -305,7 +305,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                                       | タイプを変更   | 説明                                                                                                                                                                                                                                                                                                                                                     |
+| 変数名                                                                                                                       | 変更の種類   | 説明                                                                                                                                                                                                                                                                                                                                                     |
 | ------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `tidb_enable_amend_pessimistic_txn`                                                                                       | 非推奨      | v6.5.0 以降、この変数は非推奨となり、TiDB は`Information schema is changed`エラーを回避するためにデフォルトで[メタデータロック](/metadata-lock.md)機能を使用します。                                                                                                                                                                                                                                     |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                       | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。つまり、 [結合したテーブルの再配置](/join-reorder.md)アルゴリズムの Outer Join のサポートがデフォルトで有効になります。                                                                                                                                                                                                                                      |
@@ -317,11 +317,11 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)                                                       | 変更     | TiDB v6.5.0より前のバージョンでは、この変数はクエリのメモリクォータのしきい値を設定するために使用されます。TiDB v6.5.0以降のバージョンでは、DML文のメモリをより正確に制御するために、この変数はセッションのメモリクォータのしきい値を設定するために使用されます。                                                                                                                                                                                                    |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                  | 変更     | v6.5.0 以降では、 TiDB ノード間の負荷分散を最適化するために、この変数が`closest-adaptive`に設定され、読み取りリクエストの推定結果が[`tidb_adaptive_closest_read_threshold`](/system-variables.md#tidb_adaptive_closest_read_threshold-new-in-v630)以上の場合、 `closest-adaptive`構成が有効になる TiDB ノードの数が各アベイラビリティゾーンで制限されます。これは常に、 TiDB ノードが最も少ないアベイラビリティゾーンの TiDB ノードの数と同じになり、その他の TiDB ノードは自動的にリーダーレプリカから読み取ります。 |
 | [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)                                   | 変更     | デフォルト値を`0`から`80%`に変更します。TiDB グローバルメモリ制御が GA になったため、このデフォルト値の変更により、メモリ制御がデフォルトで有効になり、TiDB インスタンスのメモリ制限がデフォルトで合計メモリの 80% に設定されます。                                                                                                                                                                                                                        |
-| [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650)                                 | 新しく追加された | パスワードの自動有効期限に関するグローバルポリシーを設定し、ユーザーに定期的なパスワード変更を義務付けます。デフォルト値`0` 、パスワードの有効期限が切れないことを示します。                                                                                                                                                                                                                                                               |
+| [`default_password_lifetime`](/system-variables.md#default_password_lifetime-new-in-v650)                                 | 新しく追加された | パスワードの自動有効期限に関するグローバルポリシーを設定し、ユーザーに定期的なパスワード変更を義務付けます。デフォルト値`0`は、パスワードの有効期限が切れないことを示します。                                                                                                                                                                                                                                                               |
 | [`disconnect_on_expired_password`](/system-variables.md#disconnect_on_expired_password-new-in-v650)                       | 新しく追加された | パスワードの有効期限が切れたときにTiDBがクライアント接続を切断するかどうかを示します。この変数は読み取り専用です。                                                                                                                                                                                                                                                                                            |
 | [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                     | 新しく追加された | この変数はデフォルトで無効になっており、これによって制御される機能はまだ安定していません。本番環境ではこの変数を変更することは推奨されません。                                                                                                                                                                                                                                                                                |
-| [`password_history`](/system-variables.md#password_history-new-in-v650)                                                   | 新しく追加された | この変数は、パスワード変更回数に基づいてTiDBがパスワードの再利用を制限するためのパスワード再利用ポリシーを設定するために使用されます。デフォルト値の`0` 、パスワード変更回数に基づくパスワード再利用ポリシーを無効にすることを意味します。                                                                                                                                                                                                                              |
-| [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)                                     | 新しく追加された | この変数は、TiDBが経過時間に基づいてパスワードの再利用を制限するためのパスワード再利用ポリシーを設定するために使用されます。デフォルト値の`0` 、経過時間に基づくパスワード再利用ポリシーを無効にすることを意味します。                                                                                                                                                                                                                                        |
+| [`password_history`](/system-variables.md#password_history-new-in-v650)                                                   | 新しく追加された | この変数は、パスワード変更回数に基づいてTiDBがパスワードの再利用を制限するためのパスワード再利用ポリシーを設定するために使用されます。デフォルト値の`0`は、パスワード変更回数に基づくパスワード再利用ポリシーを無効にすることを意味します。                                                                                                                                                                                                                              |
+| [`password_reuse_interval`](/system-variables.md#password_reuse_interval-new-in-v650)                                     | 新しく追加された | この変数は、TiDBが経過時間に基づいてパスワードの再利用を制限するためのパスワード再利用ポリシーを設定するために使用されます。デフォルト値の`0`は、経過時間に基づくパスワード再利用ポリシーを無効にすることを意味します。                                                                                                                                                                                                                                        |
 | [`tidb_auto_build_stats_concurrency`](/system-variables.md#tidb_auto_build_stats_concurrency-new-in-v650)                 | 新しく追加された | この変数は、統計の自動更新の同時実行数を設定するために使用されます。デフォルト値は`1`です。                                                                                                                                                                                                                                                                                                        |
 | [`tidb_cdc_write_source`](/system-variables.md#tidb_cdc_write_source-new-in-v650)                                         | 新しく追加された | この変数が0以外の値に設定されている場合、このセッションで書き込まれたデータはTiCDCによって書き込まれたものとみなされます。この変数はTiCDCによってのみ変更できます。いかなる場合でも、この変数を手動で変更しないでください。                                                                                                                                                                                                                                    |
 | [`tidb_enable_plan_replayer_capture`](/system-variables.md#tidb_enable_plan_replayer_capture)                             | 新しく追加された | この変数で制御される機能は、TiDB v6.5.0では完全には機能しません。デフォルト値を変更しないでください。                                                                                                                                                                                                                                                                                               |
@@ -338,17 +338,17 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | [`tidb_ttl_scan_batch_size`](/system-variables.md#tidb_ttl_scan_batch_size-new-in-v650)                                   | 新しく追加された | この変数は、TTL ジョブで期限切れのデータをスキャンするために使用される`SELECT`文ごとに`LIMIT`値を設定するために使用されます。                                                                                                                                                                                                                                                                         |
 | [`tidb_ttl_scan_worker_count`](/system-variables.md#tidb_ttl_scan_worker_count-new-in-v650)                               | 新しく追加された | この変数は、各 TiDB ノード上の TTL スキャン ジョブの最大同時実行数を設定するために使用されます。                                                                                                                                                                                                                                                                                                 |
 | [`validate_password.check_user_name`](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)                  | 新しく追加された | パスワード複雑度チェックにおけるチェック項目。パスワードがユーザー名と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効になっている場合にのみ有効になります。デフォルト値は`ON`です。                                                                                                                                                                   |
-| [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650)                            | 新しく追加された | パスワード複雑度チェックにおけるチェック項目です。パスワードが辞書内の単語と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) `2` （STRONG）に設定されている場合にのみ有効になります。デフォルト値は`""`です。                                                       |
+| [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650)                            | 新しく追加された | パスワード複雑度チェックにおけるチェック項目です。パスワードが辞書内の単語と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)が`2` （STRONG）に設定されている場合にのみ有効になります。デフォルト値は`""`です。                                                       |
 | [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)                                    | 新しく追加された | この変数は、パスワードの複雑さのチェックを実行するかどうかを制御します。この変数を`ON`に設定すると、TiDBはパスワード設定時にパスワードの複雑さのチェックを実行します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                 |
 | [`validate_password.length`](/system-variables.md#validate_passwordlength-new-in-v650)                                    | 新しく追加された | パスワードの複雑さチェックにおけるチェック項目です。パスワードの長さが十分かどうかをチェックします。デフォルトでは、パスワードの最小長は`8`です。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効になっている場合にのみ有効になります。                                                                                                                                                           |
-| [`validate_password.mixed_case_count`](/system-variables.md#validate_passwordmixed_case_count-new-in-v650)                | 新しく追加された | パスワード複雑度チェックにおけるチェック項目です。パスワードに十分な大文字と小文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) `1` （中）以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                     |
-| [`validate_password.number_count`](/system-variables.md#validate_passwordnumber_count-new-in-v650)                        | 新しく追加された | パスワード複雑度チェックにおけるチェック項目。パスワードに十分な数の数字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) `1` (MEDIUM) 以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                    |
+| [`validate_password.mixed_case_count`](/system-variables.md#validate_passwordmixed_case_count-new-in-v650)                | 新しく追加された | パスワード複雑度チェックにおけるチェック項目です。パスワードに十分な大文字と小文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)が`1` （MEDIUM）以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                     |
+| [`validate_password.number_count`](/system-variables.md#validate_passwordnumber_count-new-in-v650)                        | 新しく追加された | パスワード複雑度チェックにおけるチェック項目。パスワードに十分な数の数字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)が`1` (MEDIUM) 以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                    |
 | [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)                                    | 新しく追加された | この変数は、パスワードの複雑さチェックのポリシーを制御します。値は`0` 、 `1` 、または`2` （それぞれLOW、MEDIUM、STRONGに対応）です。この変数は、 [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650)が有効な場合にのみ有効になります。デフォルト値は`1`です。                                                                                                                                            |
-| [`validate_password.special_char_count`](/system-variables.md#validate_passwordspecial_char_count-new-in-v650)            | 新しく追加された | パスワード複雑度チェックにおけるチェック項目。パスワードに十分な特殊文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650) `1` （中）以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                          |
+| [`validate_password.special_char_count`](/system-variables.md#validate_passwordspecial_char_count-new-in-v650)            | 新しく追加された | パスワード複雑度チェックにおけるチェック項目。パスワードに十分な特殊文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#password_reuse_interval-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)が`1` （MEDIUM）以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                          |
 
 ### 設定ファイルのパラメータ {#configuration-file-parameters}
 
-| 設定ファイル | 設定パラメータ                                                                                            | タイプを変更   | 説明                                                                                                                                                       |
+| 設定ファイル | 設定パラメータ                                                                                            | 変更の種類   | 説明                                                                                                                                                       |
 | -------------- | ---------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)                       | 非推奨      | バージョン6.5.0以降、この設定項目は非推奨となりました。代わりに、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してメモリをグローバルに管理してください。 |
 | TiDB           | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | 新しく追加された | パスワードの有効期限が切れたときに、TiDBがクライアント接続を切断するかどうかを決定します。デフォルト値は`true`で、パスワードの有効期限が切れるとクライアント接続が切断されます。                                                            |
@@ -362,11 +362,11 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | TiCDC          | [`sink.csv.delimiter`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)              | 新しく追加された | フィールド間の区切り文字を示します。値はASCII文字でなければならず、デフォルトは`,`です。                                                                                                         |
 | TiCDC          | [`sink.csv.quote`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                  | 新しく追加された | フィールドを囲む引用符。デフォルト値は`"`です。値が空の場合、引用符は使用されません。                                                                                                             |
 | TiCDC          | [`sink.csv.null`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                   | 新しく追加された | CSV列がnullの場合に表示される文字を指定します。デフォルト値は`\N`です。                                                                                                                |
-| TiCDC          | [`sink.csv.include-commit-ts`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)      | 新しく追加された | CSV行にコミット情報を含めるかどうかを指定します。デフォルト値は`false`です。                                                                                                              |
+| TiCDC          | [`sink.csv.include-commit-ts`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)      | 新しく追加された | CSV行に commit-ts を含めるかどうかを指定します。デフォルト値は`false`です。                                                                                                              |
 
 ### その他 {#others}
 
-- v6.5.0 以降、 `mysql.user`テーブルに`Password_reuse_history`と`Password_reuse_time` 2つの新しい列が追加されます。
+- v6.5.0 以降、 `mysql.user`テーブルに`Password_reuse_history`と`Password_reuse_time`の2つの新しい列が追加されます。
 - バージョン6.5.0以降、 [インデックス加速](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)機能がデフォルトで有効になっています。この機能は[1つの`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)と完全には互換性がありません。インデックスアクセラレーションを使用して一意インデックスを追加する場合、同じステートメント内で他の列やインデックスを変更しないようにする必要があります。この機能は[PITR（ポイントインタイムリカバリ）](/br/br-pitr-guide.md)とも互換性がありません。インデックスアクセラレーション機能を使用する場合は、バックグラウンドでPITRバックアップタスクが実行されていないことを確認する必要があります。そうしないと、予期しない結果が発生する可能性があります。詳細については、 [ドキュメント](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を参照してください。
 
 ## 非推奨の機能 {#deprecated-feature}
@@ -390,8 +390,8 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     - 外部ストレージオブジェクトをキャッシュすることでリカバリパフォーマンスを向上 [#13798](https://github.com/tikv/tikv/issues/13798) @[YuJuncen](https://github.com/YuJuncen)
     - 専用スレッドで CheckLeader を実行して、TiCDC レプリケーションのレイテンシーを削減します。 [#13774](https://github.com/tikv/tikv/issues/13774) @[overvenus](https://github.com/overvenus)
     - チェックポイントのプル モデルをサポート [#13824](https://github.com/tikv/tikv/issues/13824) @[YuJuncen](https://github.com/YuJuncen)
-    - クロスビームチャネルに更新することで、送信側での回転の問題を回避します。 [#13815](https://github.com/tikv/tikv/issues/13815) @[sticnarf](https://github.com/sticnarf)
-    - TiKV でのバッチココプロセッサータスク処理をサポート [#13849](https://github.com/tikv/tikv/issues/13849) @[cfzjywxk](https://github.com/cfzjywxk)
+    - crossbeam-channel を更新することで、送信側でのスピンの問題を回避します。 [#13815](https://github.com/tikv/tikv/issues/13815) @[sticnarf](https://github.com/sticnarf)
+    - TiKV でのバッチコプロセッサータスク処理をサポート [#13849](https://github.com/tikv/tikv/issues/13849) @[cfzjywxk](https://github.com/cfzjywxk)
     - TiKVにリージョンを起動するように通知することで、障害回復の待ち時間を短縮します。 [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
     - コード最適化によりメモリ使用量のリクエストサイズを削減 [#13827](https://github.com/tikv/tikv/issues/13827) @[BusyJay](https://github.com/BusyJay)
     - コードの拡張性を向上させるためにRaft拡張機能を導入する[#13827](https://github.com/tikv/tikv/issues/13827) @[BusyJay](https://github.com/BusyJay)
@@ -401,7 +401,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 - PD
 
     - ロックの粒度を最適化してロックの競合を減らし、高同時実行時のハートビートの処理能力を向上させる[#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
-    - 大規模クラスタのスケジューラパフォーマンスを最適化し、スケジューリングポリシーの本番を高速化します。 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
+    - 大規模クラスタのスケジューラパフォーマンスを最適化し、スケジューリングポリシーの生成を高速化します。 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
     - リージョンの読み込み速度を向上 [#5606](https://github.com/tikv/pd/issues/5606) @[rleungx](https://github.com/rleungx)
     - リージョンハートビートの最適化された処理により不要なオーバーヘッドを削減 [#5648](https://github.com/tikv/pd/issues/5648) @[rleungx](https://github.com/rleungx)
     - tombstoneストアの自動ガベージコレクション機能を追加 [#5348](https://github.com/tikv/pd/issues/5348) @[nolouch](https://github.com/nolouch)
@@ -448,7 +448,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     - `tidb_decode_key`関数がパーティションテーブルのエンコーディングを正しく解析できない問題を修正しました [#39304](https://github.com/pingcap/tidb/issues/39304) @[Defined2014](https://github.com/Defined2014)
     - ログローテーション中に gRPC エラーログが正しいログファイルにリダイレクトされない問題を修正しました [#38941](https://github.com/pingcap/tidb/issues/38941) @[xhebox](https://github.com/xhebox)
     - TiKV が読み取りエンジンとして設定されていない場合に、TiDB が`BEGIN; SELECT... FOR UPDATE;`ポイントクエリに対して予期しない実行計画を生成する問題を修正しました[#39344](https://github.com/pingcap/tidb/issues/39344) @[Yisaer](https://github.com/Yisaer)
-    - 誤って`StreamAgg` TiFlashにプッシュダウンすると、間違った結果が発生する問題を修正しました。 [#39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
+    - 誤って`StreamAgg`をTiFlashにプッシュダウンすると、間違った結果が発生する問題を修正しました。 [#39266](https://github.com/pingcap/tidb/issues/39266) @[fixdb](https://github.com/fixdb)
 
 - TiKV
 
@@ -456,13 +456,13 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     - tikv-ctl で`compact raft`コマンドを実行するときに発生する`Get raft db is not allowed`エラーを修正します [#13515](https://github.com/tikv/tikv/issues/13515) @[guoxiangCN](https://github.com/guoxiangCN)
     - TLS が有効な場合にログバックアップが機能しない問題を修正[#13867](https://github.com/tikv/tikv/issues/13867) @[YuJuncen](https://github.com/YuJuncen)
     - ジオメトリフィールドタイプのサポート問題を修正しました [#13651](https://github.com/tikv/tikv/issues/13651) @[dveeden](https://github.com/dveeden)
-    - 新しい照合順序が有効になっていない場合、 `LIKE`演算子の`_`非 ASCII 文字と一致しない問題を修正[#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao)
+    - 新しい照合順序が有効になっていない場合、 `LIKE`演算子の`_`が非 ASCII 文字と一致しない問題を修正[#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao)
     - `reset-to-version`コマンドを実行すると tikv-ctl が予期せず終了する問題を修正しました [#13829](https://github.com/tikv/tikv/issues/13829) @[tabokie](https://github.com/tabokie)
 
 - PD
 
     - `balance-hot-region-scheduler`構成が変更されていない場合は保持されない問題を修正しました [#5701](https://github.com/tikv/pd/issues/5701) @[HunDunDM](https://github.com/HunDunDM)
-    - `rank-formula-version`アップグレードプロセス中にアップグレード前の構成が保持されない問題を修正[#5698](https://github.com/tikv/pd/issues/5698) @[HunDunDM](https://github.com/HunDunDM)
+    - `rank-formula-version`がアップグレードプロセス中にアップグレード前の構成が保持されない問題を修正[#5698](https://github.com/tikv/pd/issues/5698) @[HunDunDM](https://github.com/HunDunDM)
 
 - TiFlash
 
@@ -481,7 +481,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 
         - PDリーダーがクラッシュするとTiCDCが停止する問題を修正 [#7470](https://github.com/pingcap/tiflow/issues/7470) @[zeminzhou](https://github.com/zeminzhou)
         - 最初にDDL文を実行し、次に変更フィードを一時停止して再開するシナリオで発生したデータ損失を修正しました [#7682](https://github.com/pingcap/tiflow/issues/7682) @[asddongmen](https://github.com/asddongmen)
-        - TiFlash 以降のバージョンがある場合に TiCDC が誤ってエラーを報告する問題を修正しました [#7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
+        - より新しいバージョンの TiFlash がある場合に TiCDC が誤ってエラーを報告する問題を修正しました [#7744](https://github.com/pingcap/tiflow/issues/7744) @[overvenus](https://github.com/overvenus)
         - 下流ネットワークが利用できない場合にシンクコンポーネントがスタックする問題を修正[#7706](https://github.com/pingcap/tiflow/issues/7706) @[hicqu](https://github.com/hicqu)
         - ユーザーがレプリケーションタスクを素早く削除し、同じタスク名で別のタスクを作成するとデータが失われる問題を修正[#7657](https://github.com/pingcap/tiflow/issues/7657) @[overvenus](https://github.com/overvenus)
 

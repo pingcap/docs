@@ -16,7 +16,7 @@ TiDB バージョン: 6.5.6
 - セキュリティ強化モード（SEM）で[`require_secure_transport`](https://docs.pingcap.com/tidb/v6.5/system-variables#require_secure_transport-new-in-v610)を`ON`に設定することを禁止し、ユーザーの潜在的な接続問題を防ぎます。 [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
 - オプティマイザがテーブルに対してハッシュ結合を選択するかどうかを制御する[`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_opt_enable_hash_join-new-in-v656)システム変数を導入します。 [#46695](https://github.com/pingcap/tidb/issues/46695) @[coderplay](https://github.com/coderplay)
 - さらなるテストの結果、 TiCDC Changefeed設定項目[`case-sensitive`](/ticdc/ticdc-changefeed-config.md)のデフォルト値が`true`から`false`に変更されました。これは、デフォルトでは TiCDC 設定ファイル内のテーブル名とデータベース名が大文字と小文字を区別しないことを意味します[#10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
-- TiCDC Changefeed、次の新しい設定項目が導入されています。
+- TiCDC Changefeed では、次の新しい設定項目が導入されています。
     - [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL文を解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v6.5/ticdc-ddl#sql-mode)を設定できます[#9876](https://github.com/pingcap/tiflow/issues/9876) @[asddongmen](https://github.com/asddongmen)
     - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
@@ -33,7 +33,7 @@ TiDB バージョン: 6.5.6
 
     - OOM を防ぐためにリゾルバのメモリ使用量を最適化します [#15458](https://github.com/tikv/tikv/issues/15458) @[overvenus](https://github.com/overvenus)
     - ルータオブジェクトのLRUCacheを排除してメモリ使用量を削減し、OOM を防止します。 [#15430](https://github.com/tikv/tikv/issues/15430) @[Connor1996](https://github.com/Connor1996)
-    - `apply_router`と`raft_router`指標に`alive`と`leak`監視ディメンションを追加します @[tonyxuqqi](https://github.com/tonyxuqqi) [#15357](https://github.com/tikv/tikv/issues/15357)
+    - `apply_router`と`raft_router`メトリックに`alive`と`leak`監視ディメンションを追加します @[tonyxuqqi](https://github.com/tonyxuqqi) [#15357](https://github.com/tikv/tikv/issues/15357)
 
 - PD
 
@@ -50,7 +50,7 @@ TiDB バージョン: 6.5.6
 
     - TiCDC
 
-        - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツ フォーマット[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)作成をサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
+        - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツ フォーマットを[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)ようにすることをサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
         - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDML文をブロックしないようにします。 [#9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
         - TiCDC 増分スキャンによる上流 TiKV への影響を軽減 [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
 
@@ -66,17 +66,17 @@ TiDB バージョン: 6.5.6
     - `MERGE_JOIN`の結果が間違っている問題を修正[#46580](https://github.com/pingcap/tidb/issues/46580) @[qw4990](https://github.com/qw4990)
     - ソート演算子がスピルプロセス中に TiDB をクラッシュさせる可能性がある問題を修正[#47538](https://github.com/pingcap/tidb/issues/47538) @[windtalker](https://github.com/windtalker)
     - CAST に精度損失がないのに条件`cast(col)=range`で FullScan が発生する問題を修正[#45199](https://github.com/pingcap/tidb/issues/45199) @[AilinKid](https://github.com/AilinKid)
-    - `batch-client` in `client-go` のpanic問題を修正 [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
+    - `client-go`の`batch-client`のpanic問題を修正 [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
     - 非整数クラスター化インデックスでのテーブル分割操作を禁止する [#47350](https://github.com/pingcap/tidb/issues/47350) @[tangenta](https://github.com/tangenta)
     - 時間変換中に準備済みプランキャッシュと準備されていないプランキャッシュの動作間の非互換性の問題を修正しました [#42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
     - 取り込みモードを使用して空のテーブルにインデックスを作成できないことがある問題を修正しました [#39641](https://github.com/pingcap/tidb/issues/39641) @[tangenta](https://github.com/tangenta)
     - パーティション交換中にパーティション定義に準拠していないデータを検出できない問題を修正 [#46492](https://github.com/pingcap/tidb/issues/46492) @[mjonss](https://github.com/mjonss)
-    - `GROUP_CONCAT` `ORDER BY`列を解析できない問題を修正 [#41986](https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
+    - `GROUP_CONCAT`が`ORDER BY`列を解析できない問題を修正 [#41986](https://github.com/pingcap/tidb/issues/41986) @[AilinKid](https://github.com/AilinKid)
     - 深くネストされた式に対してハッシュコードが繰り返し計算され、メモリ使用量が増加し、OOM が発生する問題を修正しました。 [#42788](https://github.com/pingcap/tidb/issues/42788) @[AilinKid](https://github.com/AilinKid)
     - MPP実行計画で集計がユニオンを介してプッシュダウンされると、結果が正しくなくなる問題を修正[#45850](https://github.com/pingcap/tidb/issues/45850) @[AilinKid](https://github.com/AilinKid)
     - `INDEX_LOOKUP_HASH_JOIN` でのメモリ使用量の見積もりが間違っている問題を修正 [#47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)
     - `plan replayer`で生成された zip ファイルを TiDB にインポートできない問題を修正しました [#46474](https://github.com/pingcap/tidb/issues/46474) @[YangKeao](https://github.com/YangKeao)
-    - `N` in `LIMIT N` という大きすぎる数値による誤ったコスト見積りを修正 [#43285](https://github.com/pingcap/tidb/issues/43285) @[qw4990](https://github.com/qw4990)
+    - `LIMIT N`の`N`が大きすぎることによる誤ったコスト見積りを修正 [#43285](https://github.com/pingcap/tidb/issues/43285) @[qw4990](https://github.com/qw4990)
     - 統計 TopN 構造を構築するときに発生する可能性のあるpanic問題を修正しました。 [#35948](https://github.com/pingcap/tidb/issues/35948) @[Rustin170506](https://github.com/Rustin170506)
     - MPPで計算された`COUNT(INT)`の結果が正しくない可能性がある問題を修正[#48643](https://github.com/pingcap/tidb/issues/48643) @[AilinKid](https://github.com/AilinKid)
     - `tidb_enable_ordered_result_mode`が有効になっているときにpanicが発生する可能性がある問題を修正[#45044](https://github.com/pingcap/tidb/issues/45044) @[qw4990](https://github.com/qw4990)
@@ -91,7 +91,7 @@ TiDB バージョン: 6.5.6
     - TiDBスキーマキャッシュからスキーマ差分コミットバージョンを読み取るときにMVCCインターフェースでロックを処理しない問題を修正しました [#48281](https://github.com/pingcap/tidb/issues/48281) @[cfzjywxk](https://github.com/cfzjywxk)
     - テーブルの名前変更によって発生する`information_schema.columns`の重複行の問題を修正 [#47064](https://github.com/pingcap/tidb/issues/47064) @[jiyfhust](https://github.com/jiyfhust)
     - `LOAD DATA REPLACE INTO`文のバグを修正 [#47995](https://github.com/pingcap/tidb/issues/47995) @[lance6716](https://github.com/lance6716)
-    - PDリーダーの故障により1分間に`IMPORT INTO`タスクが失敗する問題を修正[#48307](https://github.com/pingcap/tidb/issues/48307) @[D3Hunter](https://github.com/D3Hunter)
+    - PDリーダーが1分間故障したことにより`IMPORT INTO`タスクが失敗する問題を修正[#48307](https://github.com/pingcap/tidb/issues/48307) @[D3Hunter](https://github.com/D3Hunter)
     - 日付型フィールドにインデックスを作成することによって発生する`ADMIN CHECK`の失敗の問題を修正しました [#47426](https://github.com/pingcap/tidb/issues/47426) @[tangenta](https://github.com/tangenta)
     - `TABLESAMPLE` によって返されるソートされていない行データの問題を修正しました [#48253](https://github.com/pingcap/tidb/issues/48253) @[tangenta](https://github.com/tangenta)
     - DDL `jobID`が 0 に復元されたときに発生する TiDB ノードpanicの問題を修正しました [#46296](https://github.com/pingcap/tidb/issues/46296) @[jiyfhust](https://github.com/jiyfhust)
@@ -102,16 +102,16 @@ TiDB バージョン: 6.5.6
     - raftstore-applys が継続的に増加するデータエラーを修正しました [#15371](https://github.com/tikv/tikv/issues/15371) @[Connor1996](https://github.com/Connor1996)
     - オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサのリクエストがタイムアウトする問題を修正しました [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
     - `lz4-sys`のバージョンを 1.9.4 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - バージョン`tokio`を 6.5 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[LykxSassinator](https://github.com/LykxSassinator)
+    - `tokio`のバージョンを 6.5 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[LykxSassinator](https://github.com/LykxSassinator)
     - `flatbuffer` を削除してセキュリティ問題を修正 [#15621](https://github.com/tikv/tikv/issues/15621) @[tonyxuqqi](https://github.com/tonyxuqqi)
-    - TiKVストアが分割されているときにresolved-tsの遅延が増加する問題を修正しました [#15679](https://github.com/tikv/tikv/issues/15679) @[hicqu](https://github.com/hicqu)
-    - TiKV を再起動したときに発生する TiKV OOM 問題を修正し、適用されていないRaftログが多数存在するようになりました[#15770](https://github.com/tikv/tikv/issues/15770) @[overvenus](https://github.com/overvenus)
+    - TiKVストアがネットワーク分断されているときにresolved-tsの遅延が増加する問題を修正しました [#15679](https://github.com/tikv/tikv/issues/15679) @[hicqu](https://github.com/hicqu)
+    - TiKV を再起動したときに、適用されていないRaftログが多数存在すると TiKV OOM が発生する問題を修正しました[#15770](https://github.com/tikv/tikv/issues/15770) @[overvenus](https://github.com/overvenus)
     - リージョンをマージした後、古いピアが保持され、resolved-tsがブロックされる問題を修正しました。 [#15919](https://github.com/tikv/tikv/issues/15919) @[overvenus](https://github.com/overvenus)
     - クラウド環境のGrafanaでスケジューラコマンド変数が正しくない問題を修正[#15832](https://github.com/tikv/tikv/issues/15832) @[Connor1996](https://github.com/Connor1996)
     - Titanの`blob-run-mode`がオンラインに更新できない問題を修正 [#15978](https://github.com/tikv/tikv/issues/15978) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - リージョン間でメタデータが一致しないためにTiKVがパニックを起こす問題を修正しました [#13311](https://github.com/tikv/tikv/issues/13311) @[cfzjywxk](https://github.com/cfzjywxk)
     - オンラインアンセーフリカバリ中にリーダーが強制終了するとTiKVがパニックになる問題を修正 [#15629](https://github.com/tikv/tikv/issues/15629) @[Connor1996](https://github.com/Connor1996)
-    - にスケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
+    - スケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
     - Raftピアを削除するときに TiKV コプロセッサが古いデータを返す可能性がある問題を修正しました [#16069](https://github.com/tikv/tikv/issues/16069) @[overvenus](https://github.com/overvenus)
     - resolved-tsが2時間ブロックされる可能性がある問題を修正[#39130](https://github.com/pingcap/tidb/issues/39130) @[overvenus](https://github.com/overvenus)
     - `notLeader`または`regionNotFound` に遭遇するとフラッシュバックが停止する可能性がある問題を修正しました [#15712](https://github.com/tikv/tikv/issues/15712) @[HuSharp](https://github.com/HuSharp)

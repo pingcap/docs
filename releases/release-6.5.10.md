@@ -47,23 +47,23 @@ TiDB バージョン: 6.5.10
 - TiDB
 
     - 統計の初期化中にメタデータをクエリすると、OOM が発生する可能性がある問題を修正しました。 [#52219](https://github.com/pingcap/tidb/issues/52219) @[hawkingrei](https://github.com/hawkingrei)
-    - `AUTO_ID_CACHE=1`AUTO_INCREMENT列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正なAUTO_INCREMENT ID 割り当てが発生する可能性がある問題を修正しました。 [#52622](https://github.com/pingcap/tidb/issues/52622) @[tiancaiamao](https://github.com/tiancaiamao)
+    - `AUTO_ID_CACHE=1`の AUTO_INCREMENT 列を含むテーブルで、 `auto_increment_increment`と`auto_increment_offset`システム変数をデフォルト以外の値に設定すると、不正なAUTO_INCREMENT ID 割り当てが発生する可能性がある問題を修正しました。 [#52622](https://github.com/pingcap/tidb/issues/52622) @[tiancaiamao](https://github.com/tiancaiamao)
     - `RESTORE`文を使用して`AUTO_ID_CACHE=1`のテーブルを復元すると`Duplicate entry`エラーが発生する可能性がある問題を修正しました [#52680](https://github.com/pingcap/tidb/issues/52680) @[tiancaiamao](https://github.com/tiancaiamao)
-    - `STATE`のフィールドのうち`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`のテーブルの`STATE`フィールドが空になる問題を修正しました[#53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
+    - `STATE`フィールドの`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`のテーブルの`STATE`フィールドが空になる問題を修正しました[#53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
     - 外部キーを持つテーブルを作成するときに、TiDBが対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正しました。 [#53652](https://github.com/pingcap/tidb/issues/53652) @[hawkingrei](https://github.com/hawkingrei)
     - クエリの同時実行数が多い場合に統計同期読み込みメカニズムが予期せず失敗する可能性がある問題を修正しました[#52294](https://github.com/pingcap/tidb/issues/52294) @[hawkingrei](https://github.com/hawkingrei)
     - グローバル統計の`Distinct_count`情報が間違っている可能性がある問題を修正しました[#53752](https://github.com/pingcap/tidb/issues/53752) @[hawkingrei](https://github.com/hawkingrei)
     - TiDB を再起動した後、主キー列統計のヒストグラムと TopN がロードされない問題を修正しました [#37548](https://github.com/pingcap/tidb/issues/37548) @[hawkingrei](https://github.com/hawkingrei)
     - クエリ内の特定のフィルター条件により、プランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました [#53582](https://github.com/pingcap/tidb/issues/53582) [#53580](https://github.com/pingcap/tidb/issues/53580) [#53594](https://github.com/pingcap/tidb/issues/53594) [#53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
-    - `?`引数を含む`CONV` `EXECUTE` `PREPARE`を複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[#53505](https://github.com/pingcap/tidb/issues/53505) @[qw4990](https://github.com/qw4990)
+    - `?`引数を含む`CONV`式を使用した`PREPARE`/`EXECUTE`文を複数回実行すると、誤ったクエリ結果が返される可能性がある問題を修正しました[#53505](https://github.com/pingcap/tidb/issues/53505) @[qw4990](https://github.com/qw4990)
     - オプティマイザヒント使用時に誤った警告情報が表示される問題を修正しました [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
-    - 情報スキーマキャッシュミスにより、古い読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
+    - 情報スキーマキャッシュミスにより、ステイル読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
     - DDL文が etcd を誤って使用し、タスクがキューに入れられる問題を修正しました。 [#52335](https://github.com/pingcap/tidb/issues/52335) @[wjhuang2016](https://github.com/wjhuang2016)
     - 式インデックスの名前を変更する`RENAME INDEX`を実行したときに内部列の名前が変更されない問題を修正しました [#51431](https://github.com/pingcap/tidb/issues/51431) @[ywqzzy](https://github.com/ywqzzy)
-    - `CREATE OR REPLACE VIEW`同時に実行すると`table doesn't exist`エラーが発生する可能性がある問題を修正 [#53673](https://github.com/pingcap/tidb/issues/53673) @[tangenta](https://github.com/tangenta)
+    - `CREATE OR REPLACE VIEW`を同時に実行すると`table doesn't exist`エラーが発生する可能性がある問題を修正 [#53673](https://github.com/pingcap/tidb/issues/53673) @[tangenta](https://github.com/tangenta)
     - JOIN条件に暗黙的な型変換が含まれている場合にTiDBがpanicする可能性がある問題を修正しました [#46556](https://github.com/pingcap/tidb/issues/46556) @[qw4990](https://github.com/qw4990)
     - ネットワークの問題によりDDL操作が停止する問題を修正[#47060](https://github.com/pingcap/tidb/issues/47060) @[wjhuang2016](https://github.com/wjhuang2016)
-    - IndexJoin が Left Outer Anti Semi type のハッシュ値を計算するときに重複行を生成する問題を修正しました。 [#52902](https://github.com/pingcap/tidb/issues/52902) @[yibin87](https://github.com/yibin87)
+    - IndexJoin が Left Outer Anti Semi 型のハッシュ値を計算するときに重複行を生成する問題を修正しました。 [#52902](https://github.com/pingcap/tidb/issues/52902) @[yibin87](https://github.com/yibin87)
     - `ALL`関数に含まれるサブクエリが誤った結果を引き起こす可能性がある問題を修正[#52755](https://github.com/pingcap/tidb/issues/52755) @[hawkingrei](https://github.com/hawkingrei)
     - `TIMESTAMPADD()`関数が誤った結果を返す問題を修正[#41052](https://github.com/pingcap/tidb/issues/41052) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `tidb_mem_quota_analyze`が有効になっていて、統計の更新に使用されるメモリが制限を超えると TiDB がクラッシュする可能性がある問題を修正しました。 [#52601](https://github.com/pingcap/tidb/issues/52601) @[hawkingrei](https://github.com/hawkingrei)
@@ -79,19 +79,19 @@ TiDB バージョン: 6.5.10
     - TiDBがオフラインになっているTiFlashノードにプローブリクエストを送信し続ける問題を修正[#46602](https://github.com/pingcap/tidb/issues/46602) @[zyguan](https://github.com/zyguan)
     - `YEAR`型の列を範囲外の符号なし整数と比較すると誤った結果が発生する問題を修正[#50235](https://github.com/pingcap/tidb/issues/50235) @[qw4990](https://github.com/qw4990)
     - AutoIDLeaderの変更により、 `AUTO_ID_CACHE=1` の場合にAUTO_INCREMENT列の値が減少する可能性がある問題を修正しました。 [#52600](https://github.com/pingcap/tidb/issues/52600) @[tiancaiamao](https://github.com/tiancaiamao)
-    - BIGINT 以外の符号なし整数が文字列/小数点と比較されたときに誤った結果を生成する可能性がある問題を修正しました [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
+    - BIGINT 以外の符号なし整数が文字列/DECIMAL 値と比較されたときに誤った結果を生成する可能性がある問題を修正しました [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     - `FLOAT`型から`UNSIGNED`型へのデータ変換で誤った結果が返される問題を修正[#41736](https://github.com/pingcap/tidb/issues/41736) @[guo-shaoge](https://github.com/guo-shaoge)
-    - `VAR_SAMP()`ウィンドウ関数として使用できない問題を修正 [#52933](https://github.com/pingcap/tidb/issues/52933) @[Rustin170506](https://github.com/Rustin170506)
+    - `VAR_SAMP()`をウィンドウ関数として使用できない問題を修正 [#52933](https://github.com/pingcap/tidb/issues/52933) @[hi-rustin](https://github.com/Rustin170506)
     - 間違った TableDual プランにより空のクエリ結果が発生する問題を修正しました [#50051](https://github.com/pingcap/tidb/issues/50051) @[onlyacat](https://github.com/onlyacat)
-    - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram` log を出力する問題を修正しました。 [#52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
-    - 空の投影により TiDB がpanicを引き起こす問題を修正しました [#49109](https://github.com/pingcap/tidb/issues/49109) @[winoros](https://github.com/winoros)
+    - TiDBの同期的な統計読み込みメカニズムが空の統計の読み込みを無期限に再試行し、 `fail to get stats version for this histogram`ログを出力する問題を修正しました。 [#52657](https://github.com/pingcap/tidb/issues/52657) @[hawkingrei](https://github.com/hawkingrei)
+    - 空の投影により TiDB がpanicする問題を修正しました [#49109](https://github.com/pingcap/tidb/issues/49109) @[winoros](https://github.com/winoros)
     - TopNオペレーターが誤ってプッシュダウンされる可能性がある問題を修正しました [#37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
     - 常に`true` となる述語を持つ`SHOW ERRORS`文を実行すると TiDB がパニックを起こす問題を修正しました。 [#46962](https://github.com/pingcap/tidb/issues/46962) @[elsa0520](https://github.com/elsa0520)
     - プランキャッシュシナリオでメタデータロックがDDL操作の実行を阻止できない問題を修正 [#51407](https://github.com/pingcap/tidb/issues/51407) @[wjhuang2016](https://github.com/wjhuang2016)
 
 - TiKV
 
-    - 1 つの TiKV ノードで遅い`check-leader`操作により、他の TiKV ノードの`resolved-ts`が正常に進まなくなる問題を修正しました。 [`#15999`](https://github.com/tikv/tikv/issues/15999) @[crazycs520](https://github.com/crazycs520)
+    - 1 つの TiKV ノードで遅い`check-leader`操作により、他の TiKV ノードの`resolved-ts`が正常に進まなくなる問題を修正しました。 [#15999](https://github.com/tikv/tikv/issues/15999) @[crazycs520](https://github.com/crazycs520)
     - クエリ内の`CONV()`関数が数値システム変換中にオーバーフローし、TiKV panicが発生する問題を修正しました。 [#16969](https://github.com/tikv/tikv/issues/16969) @[gengliqi](https://github.com/gengliqi)
     - 不安定なテストケースの問題を修正し、各テストが独立した一時ディレクトリを使用するようにして、オンライン構成の変更が他のテストケースに影響しないようにします。 [#16871](https://github.com/tikv/tikv/issues/16871) @[glorv](https://github.com/glorv)
     - `DECIMAL`型の小数点以下の桁が、場合によっては正しくない問題を修正しました [#16913](https://github.com/tikv/tikv/issues/16913) @[gengliqi](https://github.com/gengliqi)
@@ -99,7 +99,7 @@ TiDB バージョン: 6.5.10
 
 - PD
 
-    - デプロイされた2つのデータセンター間でリーダーを切り替えるとLeaderが失敗する問題を修正[#7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
+    - デプロイされた2つのデータセンター間でLeader を切り替えると Leader の転送に失敗する問題を修正[#7992](https://github.com/tikv/pd/issues/7992) @[TonsnakeLin](https://github.com/TonsnakeLin)
     - 配置ルールを使用しているときに、ダウンしたピアが回復しない可能性がある問題を修正しました。 [#7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)
     - PDの`Filter target`監視メトリックが散布範囲情報を提供しない問題を修正[#8125](https://github.com/tikv/pd/issues/8125) @[HuSharp](https://github.com/HuSharp)
 
@@ -115,7 +115,7 @@ TiDB バージョン: 6.5.10
 
     - Backup & Restore (BR)
 
-        - テストケース`TestGetTSWithRetry`実行に時間がかかりすぎる問題を修正[#52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
+        - テストケース`TestGetTSWithRetry`の実行に時間がかかりすぎる問題を修正[#52547](https://github.com/pingcap/tidb/issues/52547) @[Leavrth](https://github.com/Leavrth)
         - BRを使用してデータを復元する場合、または物理インポートモードでTiDB Lightningを使用してデータをインポートする場合に、PD から取得されたリージョンにLeaderがない問題を修正しました[#51124](https://github.com/pingcap/tidb/issues/51124) [#50501](https://github.com/pingcap/tidb/issues/50501) @[Leavrth](https://github.com/Leavrth)
         - PD接続障害により、ログバックアップアドバンサ所有者が配置されているTiDBインスタンスがpanicになる可能性がある問題を修正しました。 [#52597](https://github.com/pingcap/tidb/issues/52597) @[YuJuncen](https://github.com/YuJuncen)
         - ログバックアップタスクを一時停止、停止、再構築した後、タスクの状態は正常であるが、チェックポイントが進まない問題を修正しました。 [#53047](https://github.com/pingcap/tidb/issues/53047) @[RidRisR](https://github.com/RidRisR)
@@ -130,7 +130,7 @@ TiDB バージョン: 6.5.10
 
         - 下流データベースのパスワードがBase64でエンコードされている場合、TiCDCが同期ポイントを有効にして変更フィードを作成できない問題を修正しました[#10516](https://github.com/pingcap/tiflow/issues/10516) @[asddongmen](https://github.com/asddongmen)
         - `DROP PRIMARY KEY`と`DROP UNIQUE KEY`文が正しく複製されない問題を修正[#10890](https://github.com/pingcap/tiflow/issues/10890) @[asddongmen](https://github.com/asddongmen)
-        - `TIMEZONE`種類のデフォルト値が正しいタイムゾーンに従って設定されない問題を修正 [#10931](https://github.com/pingcap/tiflow/issues/10931) @[3AceShowHand](https://github.com/3AceShowHand)
+        - `TIMEZONE`型のデフォルト値が正しいタイムゾーンに従って設定されない問題を修正 [#10931](https://github.com/pingcap/tiflow/issues/10931) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Lightning
 

@@ -24,7 +24,7 @@ TiDB バージョン: 6.5.2
 - TiDB
 
     - プリペアドプランキャッシュで`BatchPointGet`実行計画のキャッシュをサポート [#42125](https://github.com/pingcap/tidb/issues/42125) @[qw4990](https://github.com/qw4990)
-    - インデックス結合より多くの SQL 形式をサポート [#40505](https://github.com/pingcap/tidb/issues/40505) @[Yisaer](https://github.com/Yisaer)
+    - インデックス結合でより多くの SQL 形式をサポート [#40505](https://github.com/pingcap/tidb/issues/40505) @[Yisaer](https://github.com/Yisaer)
     - 一部のインデックスマージリーダーのログレベルを`"info"`から`"debug"` に変更します [#41949](https://github.com/pingcap/tidb/issues/41949) @[yibin87](https://github.com/yibin87)
     - レンジパーティションテーブルに Limit を設定した`distsql_concurrency`設定を最適化して、クエリのレイテンシーを削減します。 [#41480](https://github.com/pingcap/tidb/issues/41480) @[you06](https://github.com/you06)
 
@@ -41,7 +41,7 @@ TiDB バージョン: 6.5.2
         - TiCDC の OOM 問題を防ぐために`gomemlimit`を導入する[#8675](https://github.com/pingcap/tiflow/issues/8675) @[amyangfei](https://github.com/amyangfei)
         - `UPDATE`文をバッチ実行するシナリオでは、マルチステートメントアプローチを使用してレプリケーションのパフォーマンスを最適化します。 [#8057](https://github.com/pingcap/tiflow/issues/8057) @[amyangfei](https://github.com/amyangfei)
         - 災害復旧シナリオにおけるスループットの向上とRTOの短縮のために、REDOアプライヤでのトランザクション分割をサポートする[#8318](https://github.com/pingcap/tiflow/issues/8318) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - REDOログへのDDLイベントの適用をサポート [#8361](https://github.com/pingcap/tiflow/issues/8361) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - REDOログ内のDDLイベントの適用をサポート [#8361](https://github.com/pingcap/tiflow/issues/8361) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     - TiDB Lightning
 
@@ -50,7 +50,7 @@ TiDB バージョン: 6.5.2
 ## バグ修正 {#bug-fixes}
 
 - TiDB
-    - キャッシュテーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`なる問題を修正しました。 [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
+    - キャッシュテーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`になる問題を修正しました。 [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
     - 多数のパーティションとTiFlashレプリカを持つパーティションテーブルに対して`TRUNCATE TABLE`を実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。 [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
     - `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[#42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
     - cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラーメッセージは「can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory」です[#42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
@@ -58,7 +58,7 @@ TiDB バージョン: 6.5.2
     - 実行計画を生成する際に不整合な InfoSchema が取得され、TiDB panicが発生する問題を修正しました。 [#41622](https://github.com/pingcap/tidb/issues/41622) @[tiancaiamao](https://github.com/tiancaiamao)
     - DDLを使用して浮動小数点型を変更し、長さを変更せずに小数点以下の桁数を減らしても、古いデータが同じままになる問題を修正しました[#41281](https://github.com/pingcap/tidb/issues/41281) @[zimulala](https://github.com/zimulala)
     - トランザクション内で`PointUpdate`を実行した後、TiDB が`SELECT`文に対して誤った結果を返す問題を修正しました。 [#28011](https://github.com/pingcap/tidb/issues/28011) @[zyguan](https://github.com/zyguan)
-    - カーソルフェッチを使用し、実行、フェッチ、およびクローズの間に他のステートメントを実行すると、フェッチおよびクローズコマンドが誤った結果を返したり、TiDB がpanicたりする可能性がある問題を修正しました[#40094](https://github.com/pingcap/tidb/issues/40094) @[YangKeao](https://github.com/YangKeao)
+    - カーソルフェッチを使用し、実行、フェッチ、およびクローズの間に他のステートメントを実行すると、フェッチおよびクローズコマンドが誤った結果を返したり、TiDB がpanicしたりする可能性がある問題を修正しました[#40094](https://github.com/pingcap/tidb/issues/40094) @[YangKeao](https://github.com/YangKeao)
     - `INSERT IGNORE`と`REPLACE`文が値を変更しないキーをロックしない問題を修正しました [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
     - 実行中にTiFlash が生成列に対してエラーを報告する問題を修正[#40663](https://github.com/pingcap/tidb/issues/40663) @[guo-shaoge](https://github.com/guo-shaoge)
     - 単一のSQL文に異なるパーティションテーブルが出現した場合にTiDBが誤った結果を生成する可能性がある問題を修正[#42135](https://github.com/pingcap/tidb/issues/42135) @[mjonss](https://github.com/mjonss)
@@ -74,14 +74,14 @@ TiDB バージョン: 6.5.2
 
 - PD
 
-    - PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
+    - PD が予期せず複数の Learner をリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
     - 配置ルールの切り替えにより、リーダーの分布が不均等になる可能性がある問題を修正しました。 [#6195](https://github.com/tikv/pd/issues/6195) @[bufferflies](https://github.com/bufferflies)
 
 - TiFlash
 
     - TiFlashが生成列を認識できない問題を修正 [#6801](https://github.com/pingcap/tiflash/issues/6801) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 特定のケースで小数点以下の桁が切り上げられない問題を修正[#7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
-    - 特定のケースで 10 進キャストが誤って切り上げられる問題を修正しました [#6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
+    - 特定のケースで Decimal の除算で最後の桁が切り上げられない問題を修正[#7022](https://github.com/pingcap/tiflash/issues/7022) @[LittleFall](https://github.com/LittleFall)
+    - 特定のケースで Decimal キャストが誤って切り上げられる問題を修正しました [#6994](https://github.com/pingcap/tiflash/issues/6994) @[windtalker](https://github.com/windtalker)
     - 新しい照合順序を有効にした後に TopN/Sort オペレーターが誤った結果を生成する問題を修正しました [#6807](https://github.com/pingcap/tiflash/issues/6807) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - TiCDC の非互換性によるTiFlashプロセス障害の問題を修正[#7212](https://github.com/pingcap/tiflash/issues/7212) @[hongyunyan](https://github.com/hongyunyan)
 
@@ -89,7 +89,7 @@ TiDB バージョン: 6.5.2
 
     - Backup & Restore (BR)
 
-        - TiDBクラスタにPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正 [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
+        - TiDBクラスタにPITRバックアップタスクがない場合に`resolve lock`の頻度が高すぎる問題を修正 [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
         - PITRリカバリプロセス中に分割リージョンの再試行の待機時間が不十分になる問題を修正 [#42001](https://github.com/pingcap/tidb/issues/42001) @[joccau](https://github.com/joccau)
 
     - TiCDC
