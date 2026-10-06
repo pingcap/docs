@@ -23,7 +23,7 @@ summary: "TiDB 2.0.5は2018年7月6日にリリースされ、システムの互
 - バグ修正
     - `KILL QUERY`が常に SUPER 権限を必要とする問題を修正 [#7003](https://github.com/pingcap/tidb/pull/7003)
     - ユーザー数が1024を超えるとログインに失敗する可能性がある問題を修正しました[#6986](https://github.com/pingcap/tidb/pull/6986)
-    - 符号なし`float`データ`double`挿入に関する問題を修正[#6940](https://github.com/pingcap/tidb/pull/6940)
+    - 符号なし`float`/`double`データの挿入に関する問題を修正[#6940](https://github.com/pingcap/tidb/pull/6940)
     - 一部のMariaDBクライアントのpanic問題を解決するために`COM_FIELD_LIST`コマンドの互換性を修正しました [#6929](https://github.com/pingcap/tidb/pull/6929)
     - `CREATE TABLE IF NOT EXISTS LIKE`の動作を修正する [#6928](https://github.com/pingcap/tidb/pull/6928)
     - TopNプッシュダウンのプロセスにおける問題を修正 [#6923](https://github.com/pingcap/tidb/pull/6923)
@@ -31,10 +31,10 @@ summary: "TiDB 2.0.5は2018年7月6日にリリースされ、システムの互
 
 ## PD {#pd}
 
-- 一部のシナリオでレプリカの移行によって TiKV ディスク領域が消費される問題を修正しました
+- 一部のシナリオでレプリカの移行によって TiKV のディスク容量を使い切る問題を修正しました
 - `AdjacentRegionScheduler`によって引き起こされたクラッシュの問題を修正
 
 ## TiKV {#tikv}
 
-- 小数点演算における潜在的なオーバーフローの問題を修正
+- Decimal 演算における潜在的なオーバーフローの問題を修正
 - マージのプロセスで発生する可能性のあるダーティリードの問題を修正しました

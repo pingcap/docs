@@ -17,8 +17,8 @@ summary: TiDB 2.0 RC5は2018年4月17日にリリースされ、MySQLとの互�
 - `insert on duplicate key update`文を最適化し、パフォーマンスを10倍向上させました
 - `UNIX_TIMESTAMP`関数によって返される結果の型に関する問題を修正しました
 - NOT NULL列を追加するときにNULL値が挿入される問題を修正しました
-- `Show Process List`文目の実行文のメモリ使用量の表示をサポート
-- 極端な状況で`Alter Table Modify Column`を報告する問題を修正
+- `Show Process List`文で実行中の文のメモリ使用量の表示をサポート
+- 極端な状況で`Alter Table Modify Column`がエラーを報告する問題を修正
 - `Alter`文を使用してテーブルコメントの設定をサポートします
 
 ## PD {#pd}
@@ -31,16 +31,16 @@ summary: TiDB 2.0 RC5は2018年4月17日にリリースされ、MySQLとの互�
 
 ## TiKV {#tikv}
 
-- `tikv-ctl`分の`compact`で指定されたリージョンをサポート
+- `tikv-ctl`の`compact`で指定されたリージョンをサポート
 - RawKVClient でバッチ Put、バッチ Get、バッチ Delete、バッチ Scan をサポート
 - スナップショットが多すぎることによるOOM問題を修正
 - コプロセッサーでより詳細なエラー情報を返す
-- TiKVの`block-cache-size`から`tikv-ctl`の動的な変更をサポート
-- さらに改善`importer`
+- `tikv-ctl`を使用してTiKVの`block-cache-size`を動的に変更することをサポート
+- `importer`をさらに改善
 - `ImportSST::Upload`インターフェースを簡素化
 - gRPCの`keepalive`プロパティを設定する
-- TiKVから`tikv-importer`独立したバイナリとして分割する
-- コプロセッサーごとにスキャンされた行`scan range`に関する統計情報を提供します
+- `tikv-importer`をTiKVから独立したバイナリとして分割する
+- コプロセッサーで各`scan range`によってスキャンされた行数に関する統計情報を提供します
 - macOSシステムでのコンパイル問題を修正
 - RocksDB メトリックの誤用問題を修正
 - コプロセッサーの`overflow as warning`オプションをサポート

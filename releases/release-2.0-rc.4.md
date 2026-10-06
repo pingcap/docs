@@ -10,21 +10,21 @@ summary: 2018年3月30日にリリースされたTiDB 2.0 RC4では、MySQLと�
 ## TiDB {#tidb}
 
 - `SHOW GRANTS FOR CURRENT_USER();`をサポート
-- `Expression` in `UnionScan`がクローンされない問題を修正
+- `UnionScan`内の`Expression`がクローンされない問題を修正
 - `SET TRANSACTION`構文をサポートする
 - `copIterator`の潜在的な goroutine リーク問題を修正
-- `admin check table` null を含む一意インデックスを誤って判断する問題を修正
+- `admin check table`が null を含む一意インデックスを誤って判断する問題を修正
 - 浮動小数点数を科学的記数法で表示することをサポートします
 - バイナリリテラル計算中の型推論の問題を修正
 - `CREATE VIEW`文の解析の問題を修正
-- 1つの文に`ORDER BY`と`LIMIT 0`両方が含まれている場合にpanic問題を修正しました
+- 1つの文に`ORDER BY`と`LIMIT 0`の両方が含まれている場合にpanic問題を修正しました
 - `DecodeBytes`の実行パフォーマンスを向上させる
-- 無駄な実行計画の作成を避けるために、 `LIMIT 0` ～ `TableDual`を最適化します。
+- 無駄な実行計画の作成を避けるために、 `LIMIT 0`を`TableDual`に最適化します。
 
 ## PD {#pd}
 
 - 単一リージョン内のホットスポットを処理するために、リージョンを手動で分割することをサポートします。
-- `pdctl` `config show all`を実行するとラベルプロパティが表示されない問題を修正しました
+- `pdctl`が`config show all`を実行するとラベルプロパティが表示されない問題を修正しました
 - メトリクスとコード構造を最適化する
 
 ## TiKV {#tikv}
@@ -34,5 +34,5 @@ summary: 2018年3月30日にリリースされたTiDB 2.0 RC4では、MySQLと�
 - TiKVでのデータパターンのインポートをサポート
 - 中央でのリージョン分割をサポート
 - CIテストの速度を上げる
-- `crossbeam channel`使用
+- `crossbeam channel`を使用
 - TiKVが分離されているときにリーダーが見つからないためにログが大量に出力される問題を修正しました
