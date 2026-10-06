@@ -5,7 +5,7 @@ summary: TiFlash のストレージとコンピューティングの分離アー
 
 # TiFlash のストレージとコンピューティングの分離アーキテクチャと S3 サポート {#tiflash-disaggregated-storage-and-compute-architecture-and-s3-support}
 
-デフォルトでは、 TiFlashはストレージとコンピューティングを組み合わせたアーキテクチャを使用してデプロイされ、各TiFlashノードはストレージとコンピューティングノードの両方として機能します。TiDB v7.0.0以降、 TiFlashはストレージとコンピューティングの分離アーキテクチャをサポートし、Amazon S3またはS3互換オブジェクトストレージ（MinIOなど）にデータを保存できるようになりました。
+デフォルトでは、 TiFlashはストレージとコンピューティングの結合アーキテクチャを使用してデプロイされ、各TiFlashノードはストレージとコンピューティングノードの両方として機能します。TiDB v7.0.0以降、 TiFlashはストレージとコンピューティングの分離アーキテクチャをサポートし、Amazon S3またはS3互換オブジェクトストレージ（MinIOなど）にデータを保存できるようになりました。
 
 ## アーキテクチャの概要 {#architecture-overview}
 
@@ -56,7 +56,7 @@ TiFlash のストレージとコンピューティングの分離アーキテク
     - GetObjectTagging
     - PutBucketLifecycle
 
-2. TiDBクラスターに、ストレージとコンピューティングを組み合わせたアーキテクチャを使用してデプロイされたTiFlashノードがないことを確認してください。もしある場合は、すべてのテーブルのTiFlashレプリカ数を`0`に設定し、すべてのTiFlashノードを削除してください。例：
+2. TiDBクラスターに、ストレージとコンピューティングの結合アーキテクチャを使用してデプロイされたTiFlashノードがないことを確認してください。もしある場合は、すべてのテーブルのTiFlashレプリカ数を`0`に設定し、すべてのTiFlashノードを削除してください。例：
 
     ```sql
     SELECT * FROM INFORMATION_SCHEMA.TIFLASH_REPLICA; # Query all tables with TiFlash replicas
