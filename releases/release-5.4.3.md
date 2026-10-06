@@ -20,7 +20,7 @@ TiDB バージョン: 5.4.3
 
     - TiDB Lightning
 
-        - 散布リージョンをバッチモードに最適化して、散布リージョンプロセスの安定性を向上させます[#33618](https://github.com/pingcap/tidb/issues/33618)
+        - Scatter Region をバッチモードに最適化して、 Scatter Region プロセスの安定性を向上させます[#33618](https://github.com/pingcap/tidb/issues/33618)
 
     - TiCDC
 
@@ -32,7 +32,7 @@ TiDB バージョン: 5.4.3
 
     - `SHOW CREATE PLACEMENT POLICY`の誤った出力を修正[#37526](https://github.com/pingcap/tidb/issues/37526)
     - クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[#33908](https://github.com/pingcap/tidb/issues/33908)
-    - `KILL TIDB`アイドル接続時にすぐに効果を発揮できない問題を修正[#24031](https://github.com/pingcap/tidb/issues/24031)
+    - `KILL TIDB`がアイドル接続に対してすぐに効果を発揮できない問題を修正[#24031](https://github.com/pingcap/tidb/issues/24031)
     - `INFORMATION_SCHEMA.COLUMNS`システムテーブルをクエリするときに`DATA_TYPE`と`COLUMN_TYPE`列に誤った結果が返される問題を修正しました[#36496](https://github.com/pingcap/tidb/issues/36496)
     - TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータバージョンが間違って発生し、 Drainerが終了する可能性がある問題を修正しました[#36276](https://github.com/pingcap/tidb/issues/36276)
     - `UNION`演算子が予期しない空の結果を返す可能性がある問題を修正しました[#36903](https://github.com/pingcap/tidb/issues/36903)
@@ -47,8 +47,8 @@ TiDB バージョン: 5.4.3
     - `UnionScan`オペレーターが順序を維持できないために間違ったクエリ結果が発生する問題を修正[#33175](https://github.com/pingcap/tidb/issues/33175)
     - UPDATE文が場合によっては投影を誤って削除し、 `Can't find column`エラーが発生する問題を修正しました[#37568](https://github.com/pingcap/tidb/issues/37568)
     - パーティションテーブルがインデックスを完全に使用してデータをスキャンできない場合がある問題を修正[#33966](https://github.com/pingcap/tidb/issues/33966)
-    - 特定のシナリオで`EXECUTE`が予期しないエラーが発生する可能性がある問題を修正しました[#37187](https://github.com/pingcap/tidb/issues/37187)
-    - プリペアドプランキャッシュが有効になっている`BIT`タイプのインデックスを使用すると、TiDBが間違った結果を返す可能性がある問題を修正しました[#33067](https://github.com/pingcap/tidb/issues/33067)
+    - 特定のシナリオで`EXECUTE`が予期しないエラーをスローする可能性がある問題を修正しました[#37187](https://github.com/pingcap/tidb/issues/37187)
+    - プリペアドプランキャッシュが有効な状態で`BIT`タイプのインデックスを使用すると、TiDBが間違った結果を返す可能性がある問題を修正しました[#33067](https://github.com/pingcap/tidb/issues/33067)
 
 - TiKV
 
@@ -64,7 +64,7 @@ TiDB バージョン: 5.4.3
 
     - PDがダッシュボードプロキシリクエストを正しく処理できない問題を修正[#5321](https://github.com/tikv/pd/issues/5321)
     - PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[#4941](https://github.com/tikv/pd/issues/4941)
-    - TiFlashラーナーレプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401)
+    - TiFlash Learner レプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401)
 
 - TiFlash
 

@@ -33,7 +33,7 @@ TiDB バージョン: 5.4.2
 
     - TiDB Lightning
 
-        - 散布リージョンをバッチモードに最適化して、散布リージョンプロセスの安定性を向上させます[#33618](https://github.com/pingcap/tidb/issues/33618)
+        - Scatter Region をバッチモードに最適化して、 Scatter Region プロセスの安定性を向上させます[#33618](https://github.com/pingcap/tidb/issues/33618)
 
 ## バグ修正 {#bug-fixes}
 
@@ -54,9 +54,9 @@ TiDB バージョン: 5.4.2
 
 - TiKV
 
-    - `max_sample_size` `0` に設定されている場合に統計を分析することによって発生するpanicの問題を修正しました [#11192](https://github.com/tikv/tikv/issues/11192)
+    - `max_sample_size`が`0` に設定されている場合に統計を分析することによって発生するpanicの問題を修正しました [#11192](https://github.com/tikv/tikv/issues/11192)
     - TiKV を終了するときに誤って TiKV パニックを報告する潜在的な問題を修正しました [#12231](https://github.com/tikv/tikv/issues/12231)
-    - リージョンマージプロセスでソースピアがスナップショットによってログをキャッチアップするときに発生する可能性のpanic問題を修正しました。 [#12663](https://github.com/tikv/tikv/issues/12663)
+    - リージョンマージプロセスでソースピアがスナップショットによってログをキャッチアップするときに発生する可能性のあるpanic問題を修正しました。 [#12663](https://github.com/tikv/tikv/issues/12663)
     - ピアが同時に分割され、破棄されたときに発生する可能性のあるpanic問題を修正しました[#12825](https://github.com/tikv/tikv/issues/12825)
     - PDクライアントがエラーに遭遇したときに発生するPDクライアントの頻繁な再接続の問題を修正しました [#12345](https://github.com/tikv/tikv/issues/12345)
     - `DATETIME`値に小数点と`Z` が含まれている場合に発生する時間解析エラーの問題を修正しました [#12739](https://github.com/tikv/tikv/issues/12739)
@@ -84,7 +84,7 @@ TiDB バージョン: 5.4.2
 
     - Backup & Restore (BR)
 
-        - RawKVモードでBRが`ErrRestoreTableIDMismatch`報告するバグを修正 [#35279](https://github.com/pingcap/tidb/issues/35279)
+        - RawKVモードでBRが`ErrRestoreTableIDMismatch`を報告するバグを修正 [#35279](https://github.com/pingcap/tidb/issues/35279)
         - ファイルの保存時にエラーが発生したときにBRが再試行しないバグを修正[#34865](https://github.com/pingcap/tidb/issues/34865)
         - BR実行中のpanic問題を修正[#34956](https://github.com/pingcap/tidb/issues/34956)
         - BRがS3内部エラーを処理できない問題を修正[#34350](https://github.com/pingcap/tidb/issues/34350)
@@ -97,7 +97,7 @@ TiDB バージョン: 5.4.2
         - 一部のテーブルがREDOライターによってメンテナンスされていない場合に、resolved tsが速すぎる動きをするバグを修正しました[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - ファイル名の競合によりデータ損失が発生する可能性がある問題を修正[#5486](https://github.com/pingcap/tiflow/issues/5486)
         - リージョンリーダーが見つからず、再試行が制限を超えた場合に発生するレプリケーション中断を修正[#5230](https://github.com/pingcap/tiflow/issues/5230)
-        - MySQL Sink が間違ったチェックポイントを保存する可能性があるバグを修正しました[#5107](https://github.com/pingcap/tiflow/issues/5107)
+        - MySQL Sink が間違った checkpointTs を保存する可能性があるバグを修正しました[#5107](https://github.com/pingcap/tiflow/issues/5107)
         - HTTPサーバーでゴルーチンリークを引き起こす可能性のあるバグを修正 [#5303](https://github.com/pingcap/tiflow/issues/5303)
         - メタリージョンの変更によりレイテンシーが増加する可能性がある問題を修正[#4756](https://github.com/pingcap/tiflow/issues/4756) [#4762](https://github.com/pingcap/tiflow/issues/4762)
 
