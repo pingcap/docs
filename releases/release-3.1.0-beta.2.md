@@ -53,7 +53,7 @@ TiDB Ansible バージョン: 3.1.0-beta.2
     - Raftstore
         - Hibernate Regions からデータが正しく読み込まれないため、読み取りリクエストを処理できない問題を修正しました。 [#6450](https://github.com/tikv/tikv/pull/6450)
         - リーダー移行プロセス中の`ReadIndex`リクエストによって引き起こされるpanic問題を修正しました[#6613](https://github.com/tikv/tikv/pull/6613)
-        - 一部の特殊な状況で休止状態領域が正しく起動しない問題を修正[#6730](https://github.com/tikv/tikv/pull/6730) [#6737](https://github.com/tikv/tikv/pull/6737) [#6972](https://github.com/tikv/tikv/pull/6972)
+        - 一部の特殊な状況で休止状態のリージョンが正しく起動しない問題を修正[#6730](https://github.com/tikv/tikv/pull/6730) [#6737](https://github.com/tikv/tikv/pull/6737) [#6972](https://github.com/tikv/tikv/pull/6972)
     - バックアップ
         - 追加データのバックアップによって復元中に発生した不整合なデータインデックスを修正 [#6659](https://github.com/tikv/tikv/pull/6659)
         - バックアップ中に削除された値を誤って処理することによって発生するpanicを修正[#6726](https://github.com/tikv/tikv/pull/6726)

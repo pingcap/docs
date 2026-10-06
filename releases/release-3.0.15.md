@@ -22,23 +22,23 @@ TiDB バージョン: 3.0.15
 
 - PD
 
-    - PDがリーダーの数に基づいてスケジュールを実行するポリシーを追加します。 [#2479](https://github.com/pingcap/pd/pull/2479)
+    - PDがLeaderの数に基づいてスケジュールを実行するポリシーを追加します。 [#2479](https://github.com/pingcap/pd/pull/2479)
 
 ## バグ修正 {#bug-fixes}
 
 - TiDB
 
     - ディープコピーを使用して、 `Hash`集計関数の`enum`と`set`型のデータをコピーします。正確性の問題を修正しました[#16890](https://github.com/pingcap/tidb/pull/16890)
-    - 整数オーバーフローの処理ロジックが間違っているため、 `PointGet`誤った結果を返す問題を修正しました [#16753](https://github.com/pingcap/tidb/pull/16753)
+    - 整数オーバーフローの処理ロジックが間違っているため、 `PointGet`が誤った結果を返す問題を修正しました [#16753](https://github.com/pingcap/tidb/pull/16753)
     - クエリ述語で関数`CHAR()`が使用されている場合に、誤った処理ロジックによって誤った結果が発生する問題を修正しました。 [#16557](https://github.com/pingcap/tidb/pull/16557)
     - `IsTrue`と`IsFalse`関数のストレージレイヤーと計算レイヤーで結果が一致しない問題を修正 [#16627](https://github.com/pingcap/tidb/pull/16627)
     - いくつかの式における誤った`NotNull`フラグ（ `case when` など）を修正します。 [#16993](https://github.com/pingcap/tidb/pull/16993)
-    - 一部のシナリオでオプティマイザが`TableDual`物理プランを見つけられない問題を修正[#17014](https://github.com/pingcap/tidb/pull/17014)
+    - 一部のシナリオでオプティマイザが`TableDual`の物理プランを見つけられない問題を修正[#17014](https://github.com/pingcap/tidb/pull/17014)
     - ハッシュパーティションテーブルでパーティション選択の構文が正しく反映されない問題を修正しました。 [#17051](https://github.com/pingcap/tidb/pull/17051)
     - 浮動小数点数に対して XOR 演算を実行すると TiDB と MySQL の間で結果が一致しない問題を修正しました。 [#16976](https://github.com/pingcap/tidb/pull/16976)
-    - 準備された方法でDDL文を実行するときに発生するエラーを修正[#17415](https://github.com/pingcap/tidb/pull/17415)
+    - プリペアド方式でDDL文を実行するときに発生するエラーを修正[#17415](https://github.com/pingcap/tidb/pull/17415)
     - IDアロケータのバッチサイズ計算の誤った処理ロジックを修正 [#17548](https://github.com/pingcap/tidb/pull/17548)
-    - 実行時間が大きいしきい値を超えたときに`MAX_EXEC_TIME`ヒントが有効にならない問題を修正 [#17534](https://github.com/pingcap/tidb/pull/17534)
+    - 実行時間が expensive しきい値を超えたときに`MAX_EXEC_TIME` SQL ヒントが有効にならない問題を修正 [#17534](https://github.com/pingcap/tidb/pull/17534)
 
 - TiKV
 
