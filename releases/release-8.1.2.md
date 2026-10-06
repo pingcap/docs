@@ -36,10 +36,10 @@ TiDB バージョン: 8.1.2
 
     - クラスター化インデックスを持つテーブルで、バックグラウンドでの古いデータのガベージコレクションの速度が向上しました。 [#9529](https://github.com/pingcap/tiflash/issues/9529) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[#8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
-    - 分散ストレージリクエストとコンピューティングリクエストを処理するときにTiFlash が作成する必要があるスレッドの数を減らし、大量のそのようなリクエストを処理するときにTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます[#9334](https://github.com/pingcap/tiflash/issues/9334) @[JinheLin](https://github.com/JinheLin)
+    - ストレージとコンピューティングの分離アーキテクチャにおけるリクエストを処理するときにTiFlash が作成する必要があるスレッドの数を減らし、大量のそのようなリクエストを処理するときにTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます[#9334](https://github.com/pingcap/tiflash/issues/9334) @[JinheLin](https://github.com/JinheLin)
     - JOIN演算子のキャンセルメカニズムを改善し、JOIN演算子がキャンセルリクエストにタイムリーに応答できるようにします[#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
     - `LENGTH()`と`ASCII()`関数の実行効率を最適化 [#9344](https://github.com/pingcap/tiflash/issues/9344) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - 分散ストレージおよびコンピューティングアーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 からファイルをダウンロードする際の例外を処理します。 [#9695](https://github.com/pingcap/tiflash/issues/9695) @[JinheLin](https://github.com/JinheLin)
+    - ストレージとコンピューティングの分離アーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 からファイルをダウンロードする際の例外を処理します。 [#9695](https://github.com/pingcap/tiflash/issues/9695) @[JinheLin](https://github.com/JinheLin)
 
 - ツール
 
@@ -130,11 +130,11 @@ TiDB バージョン: 8.1.2
     - テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - TiFlashでサポートされていない一部の JSON関数がTiFlash にプッシュダウンされる問題を修正しました [#9444](https://github.com/pingcap/tiflash/issues/9444) @[windtalker](https://github.com/windtalker)
     - 特定のケースで関数`CAST AS DECIMAL`の結果の符号が正しくない問題を修正[#9301](https://github.com/pingcap/tiflash/issues/9301) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正しました。 [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
+    - ストレージとコンピューティングの分離アーキテクチャで、 TiFlash書き込みノードの読み取りスナップショットがタイムリーに解放されない問題を修正しました。 [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
     - `SUBSTRING()`関数が特定の整数型に対して`pos`と`len`引数をサポートせず、クエリエラーが発生する問題を修正しました [#9473](https://github.com/pingcap/tiflash/issues/9473) @[gengliqi](https://github.com/gengliqi)
     - `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
     - `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[#9465](https://github.com/pingcap/tiflash/issues/9465) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 分散ストレージおよびコンピューティングアーキテクチャで新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
+    - ストレージとコンピューティングの分離アーキテクチャで新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
 
 - ツール
 

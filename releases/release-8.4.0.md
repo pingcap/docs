@@ -339,7 +339,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 - TiFlash
 
     - `LENGTH()`および`ASCII()`関数の実行効率を最適化する [#9344](https://github.com/pingcap/tiflash/issues/9344) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - TiFlashが分散ストレージとコンピューティングリクエストを処理する際に作成する必要のあるスレッド数を減らし、そのようなリクエストを多数処理する際のTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます [#9334](https://github.com/pingcap/tiflash/issues/9334) @[JinheLin](https://github.com/JinheLin)
+    - TiFlashがストレージとコンピューティングの分離アーキテクチャにおけるリクエストを処理する際に作成する必要のあるスレッド数を減らし、そのようなリクエストを多数処理する際のTiFlashコンピューティングノードのクラッシュを回避するのに役立ちます [#9334](https://github.com/pingcap/tiflash/issues/9334) @[JinheLin](https://github.com/JinheLin)
     - パイプライン実行モデルにおけるタスク待機メカニズムの強化 [#8869](https://github.com/pingcap/tiflash/issues/8869) @[SeaRise](https://github.com/SeaRise)
     - JOIN オペレーターがキャンセルリクエストにタイムリーに応答できるように、JOIN オペレーターのキャンセル メカニズムを改善 [#9430](https://github.com/pingcap/tiflash/issues/9430) @[windtalker](https://github.com/windtalker)
 

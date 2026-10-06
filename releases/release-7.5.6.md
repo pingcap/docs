@@ -67,7 +67,7 @@ TiDB バージョン: 7.5.6
     - 仮想生成列の依存関係に属性`ON UPDATE`を持つ列が含まれている場合、更新された行のデータとそのインデックスデータが不整合になる可能性がある問題を修正しました[#56829](https://github.com/pingcap/tidb/issues/56829) @[joechenrh](https://github.com/joechenrh)
     - TiDBハートビートが失われた場合に TTL ジョブをキャンセルできない問題を修正[#57784](https://github.com/pingcap/tidb/issues/57784) @[YangKeao](https://github.com/YangKeao)
     - パラメータが`Enum` 、または`Set`型の場合、 `Conv()`関数はTiKV にプッシュダウンされなくなりました`Bit` [#51877](https://github.com/pingcap/tidb/issues/51877) @[yibin87](https://github.com/yibin87)
-    - 分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ストレージとコンピューティングの分離アーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - DDL所有者が変更されるとジョブステータスが上書きされる問題を修正 [#52747](https://github.com/pingcap/tidb/issues/52747) @[D3Hunter](https://github.com/D3Hunter)
     - ハッシュパーティションテーブルで条件`is null`クエリを実行するとpanicが発生する問題を修正 [#58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014)
     - 生成列を含むパーティションテーブルをクエリするときにエラーが発生する問題を修正しました。 [#58475](https://github.com/pingcap/tidb/issues/58475) @[joechenrh](https://github.com/joechenrh)
@@ -109,7 +109,7 @@ TiDB バージョン: 7.5.6
     - 特定の状況でTiFlash が予期せず終了したときにエラースタック トレースを印刷できないことがある問題を修正[#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `profiles.default.init_thread_count_scale` `0` に設定するとTiFlash の起動がブロックされる可能性がある問題を修正しました [#9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - クエリに仮想列が含まれており、リモート読み取りをトリガーするときに`Not found column`エラーが発生する可能性がある問題を修正しました。 [#9561](https://github.com/pingcap/tiflash/issues/9561) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するためのターゲットノードとして誤って選択される可能性がある問題を修正しました。 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ストレージとコンピューティングの分離アーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するためのターゲットノードとして誤って選択される可能性がある問題を修正しました。 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 - ツール
 
