@@ -87,10 +87,14 @@ To use an index in a vector search, make sure that the `ORDER BY ... LIMIT` clau
 
 ## Use the vector index with filters
 
-Queries that contain a pre-filter (using the `WHERE` clause) cannot utilize the vector index because they are not querying for K-Nearest neighbors according to the SQL semantics. For example:
+Where you put a `WHERE` filter decides whether a vector search can use the vector index. There are two patterns, and they trade accuracy for speed in opposite directions.
+
+### Filter before the vector search
+
+A query that filters with `WHERE` and then sorts by distance asks for the K nearest neighbors among the matching rows only. The vector index cannot answer that question, so TiDB scans the table, applies the filter, and computes the distance for every matching row:
 
 ```sql
--- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
+-- The WHERE filter is applied before the K-nearest-neighbor search, so the vector index is not used:
 
 SELECT * FROM vec_table
 WHERE category = "document"
@@ -98,10 +102,14 @@ ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-To use the vector index with filters, query for the K-Nearest neighbors first using vector search, and then filter out unwanted results:
+The result is exact: you always get the 5 closest matching rows, or every matching row if fewer than 5 match. The cost grows with the number of rows that pass the filter, so this pattern suits selective filters.
+
+### Filter after the vector search
+
+To use the vector index, find the K nearest neighbors first in a subquery, and then filter the result:
 
 ```sql
--- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
+-- The WHERE filter is applied after the K-nearest-neighbor search, so the vector index is used:
 
 SELECT * FROM
 (
@@ -110,9 +118,30 @@ SELECT * FROM
   LIMIT 5
 ) t
 WHERE category = "document";
-
--- Note that this query might return fewer than 5 results if some are filtered out.
 ```
+
+This query can return fewer than 5 rows, or none, because the filter removes neighbors after they are found. To make that less likely, fetch more neighbors than you need in the subquery and limit the final result:
+
+```sql
+SELECT * FROM
+(
+  SELECT *, VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]') AS distance
+  FROM vec_table
+  ORDER BY distance
+  LIMIT 50
+) t
+WHERE category = "document"
+ORDER BY distance
+LIMIT 5;
+```
+
+Fetching more neighbors raises the chance of getting 5 rows but does not guarantee it. Choose the inner `LIMIT` based on how many rows the filter typically removes.
+
+To confirm which pattern a query uses, run `EXPLAIN` on it and look for `annIndex:` in the `operator info` column. For details, see [Check whether the vector index is used](#check-whether-the-vector-index-is-used).
+
+> **Note:**
+>
+> You cannot create a vector index on a partitioned table. Both `CREATE TABLE ... PARTITION BY` with a vector index and `ALTER TABLE ... ADD VECTOR INDEX` on a partitioned table return `ERROR 8200 (HY000): Unsupported add columnar index: partition table is currently not supported`. If you partition a table, for example by tenant, vector searches on it scan the selected partitions without a vector index.
 
 ## View index build progress
 
