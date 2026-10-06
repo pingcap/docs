@@ -37,13 +37,13 @@ TiDBバージョン：8.3.0
 
     詳細については、 [ドキュメント](/system-variables.md#tiflash_hashagg_preaggregation_mode-new-in-v830)を参照してください。
 
-- 統計を収集するときに不要な列を無視する [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)
+- 統計を収集するときに不要な列を無視する [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/Rustin170506)
 
     オプティマイザが実行計画を生成する際、フィルタ条件の列、結合キーの列、集計に使用される列など、一部の列の統計情報のみが必要となります。TiDBはv8.3.0以降、SQL文で使用される列の履歴レコードを継続的に監視します。デフォルトでは、TiDBはインデックスを持つ列と、統計情報の収集が必要であると判断された列の統計情報のみを収集します。これにより、統計情報の収集が高速化され、不要なリソース消費が回避されます。
 
-    クラスターをv8.3.0より前のバージョンからv8.3.0以降にアップグレードすると、TiDBはデフォルトで元の動作、つまりすべての列の統計情報を収集する動作を維持します。この機能を有効にするには、システム変数[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830) `PREDICATE`に手動で設定する必要があります。新しくデプロイされたクラスターでは、この機能はデフォルトで有効になっています。
+    クラスターをv8.3.0より前のバージョンからv8.3.0以降にアップグレードすると、TiDBはデフォルトで元の動作、つまりすべての列の統計情報を収集する動作を維持します。この機能を有効にするには、システム変数[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を`PREDICATE`に手動で設定する必要があります。新しくデプロイされたクラスターでは、この機能はデフォルトで有効になっています。
 
-    ランダムクエリを多数実行する分析システムの場合、ランダムクエリのパフォーマンスを確保するために、システム変数[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830) `ALL`に設定して、すべての列の統計情報を収集することができます。その他のタイプのシステムでは、tidb_analyze_column_options のデフォルト設定 ( `PREDICATE` ) を維持して、必要な列のみの統計情報を収集することを[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830) 。
+    ランダムクエリを多数実行する分析システムの場合、ランダムクエリのパフォーマンスを確保するために、システム変数[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を`ALL`に設定して、すべての列の統計情報を収集することができます。その他のタイプのシステムでは、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)のデフォルト設定（`PREDICATE`）を維持して、必要な列のみの統計情報を収集することをお勧めします。
 
     詳細については、 [ドキュメント](/statistics.md#collect-statistics-on-some-columns)を参照してください。
 
@@ -71,7 +71,7 @@ TiDBバージョン：8.3.0
     - `INFORMATION_SCHEMA.TIDB_INDEX_USAGE`
     - `INFORMATION_SCHEMA.VIEWS`
 
-- パーティション式`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティションプルーニングをサポートしてクエリのパフォーマンスを向上させる [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss)
+- パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティションプルーニングをサポートしてクエリのパフォーマンスを向上させる [#54209](https://github.com/pingcap/tidb/pull/54209) @[mjonss](https://github.com/mjonss)
 
     以前のバージョンでは、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合、パーティションプルーニングがサポートされておらず、クエリのパフォーマンスが低下していました。v8.3.0 以降では、パーティション式で`EXTRACT(YEAR_MONTH...)`関数を使用する場合にパーティションプルーニングがサポートされ、クエリのパフォーマンスが向上します。
 
@@ -99,7 +99,7 @@ TiDBバージョン：8.3.0
 
     アプリケーションコードが[カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)を使用して結果セットを取得する場合、TiDBは通常、まず結果セット全体をメモリに格納し、その後データをバッチ処理でクライアントに返します。結果セットが大きすぎる場合は、TiDBは一時的に結果をハードディスクに書き込むことがあります。
 
-    バージョン8.3.0以降では、システム変数[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830) `ON`に設定すると、TiDBはすべてのデータをTiDBノードに読み込むのではなく、クライアントが読み込むにつれて徐々にデータをTiDBノードに読み込むようになります。TiDBが大規模な結果セットを処理する場合、この機能によりTiDBノードのメモリ使用量が削減され、クラスタの安定性が向上します。
+    バージョン8.3.0以降では、システム変数[`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)を`ON`に設定すると、TiDBはすべてのデータをTiDBノードに読み込むのではなく、クライアントが読み込むにつれて徐々にデータをTiDBノードに読み込むようになります。TiDBが大規模な結果セットを処理する場合、この機能によりTiDBノードのメモリ使用量が削減され、クラスタの安定性が向上します。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)を参照してください。
 
@@ -126,7 +126,7 @@ TiDBバージョン：8.3.0
 
 - `SELECT LOCK IN SHARE MODE`を排他ロックにアップグレードするサポート [#54999](https://github.com/pingcap/tidb/issues/54999) @[cfzjywxk](https://github.com/cfzjywxk)
 
-    TiDB はまだ`SELECT LOCK IN SHARE MODE`をサポートしていません。v8.3.0 以降、TiDB は`SELECT LOCK IN SHARE MODE`排他ロックにアップグレードして`SELECT LOCK IN SHARE MODE`のサポートを有効にすることをサポートしています。この機能を有効にするかどうかは、新しいシステム変数[`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)を使用して制御できます。
+    TiDB はまだ`SELECT LOCK IN SHARE MODE`をサポートしていません。v8.3.0 以降、TiDB は`SELECT LOCK IN SHARE MODE`を排他ロックにアップグレードして`SELECT LOCK IN SHARE MODE`のサポートを有効にすることをサポートしています。この機能を有効にするかどうかは、新しいシステム変数[`tidb_enable_shared_lock_promotion`](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)を使用して制御できます。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)を参照してください。
 
@@ -136,7 +136,7 @@ TiDBバージョン：8.3.0
 
     TiDB は起動時に基本統計情報をロードします。テーブルやパーティションが多いシナリオでは、この処理に時間がかかる場合があります。設定項目[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)が`ON`に設定されている場合、TiDB は初期統計情報がロードされるまでサービスを提供しません。この場合、ロード処理を監視してサービスの開始時刻を推定する必要があります。
 
-    バージョン8.3.0以降、TiDBは初期統計情報の読み込み状況を段階的にログに出力ようになり、実行状況を把握しやすくなりました。外部ツールにフォーマット済みの結果を提供するために、TiDBは[監視API](/tidb-monitoring-api.md)を追加しました。これにより、起動フェーズ中の任意の時点で初期統計情報の読み込み状況を取得できます。
+    バージョン8.3.0以降、TiDBは初期統計情報の読み込み状況を段階的にログに出力するようになり、実行状況を把握しやすくなりました。外部ツールにフォーマット済みの結果を提供するために、TiDBは[監視API](/tidb-monitoring-api.md)を追加しました。これにより、起動フェーズ中の任意の時点で初期統計情報の読み込み状況を取得できます。
 
 - リクエストユニット（RU）設定に関するメトリクスを追加 [#8444](https://github.com/tikv/pd/issues/8444) @[nolouch](https://github.com/nolouch)
 
@@ -144,7 +144,7 @@ TiDBバージョン：8.3.0
 
 - PDログの秘匿化機能強化 [#8305](https://github.com/tikv/pd/issues/8305) @[JmPotato](https://github.com/JmPotato)
 
-    TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlash同様のログマスキング機能強化を実装しています。
+    TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlashも同様のログマスキング機能強化を実装しています。
 
     バージョン8.3.0では、PDは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、PD設定項目`security.redact-info-log`の値を`"marker"`に設定します。
 
@@ -152,7 +152,7 @@ TiDBバージョン：8.3.0
 
 - TiKV ログの秘匿化の強化 [#17206](https://github.com/tikv/tikv/issues/17206) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlash同様のログマスキング機能強化を実装しています。
+    TiDB v8.0.0 では、ログのマスキング機能が強化され、TiDB ログ内のユーザーデータを`‹ ›`でマークできるようになりました。マークされたログに基づいて、ログを表示する際にマークされた情報をマスキングするかどうかを決定できるため、ログのマスキングの柔軟性が向上します。v8.2.0 では、 TiFlashも同様のログマスキング機能強化を実装しています。
 
     バージョン8.3.0では、TiKVは同様のログの秘匿化機能強化を実装しています。この機能を使用するには、TiKV設定項目`security.redact-info-log`の値を`"marker"`に設定します。
 
@@ -176,7 +176,7 @@ TiDBバージョン：8.3.0
 
 ### 動作の変更 {#behavior-changes}
 
-- コマンドの誤用を防ぐため、 `pd-ctl`はプレフィックスマッチングメカニズムを無効にします。たとえば、 `store remove-tombstone` `store remove`を介して呼び出すことはできません。 [#8413](https://github.com/tikv/pd/issues/8413) @[lhy1024](https://github.com/lhy1024)
+- コマンドの誤用を防ぐため、 `pd-ctl`はプレフィックスマッチングメカニズムを無効にします。たとえば、 `store remove-tombstone`は`store remove`を介して呼び出すことはできません。 [#8413](https://github.com/tikv/pd/issues/8413) @[lhy1024](https://github.com/lhy1024)
 
 ### システム変数 {#system-variables}
 
@@ -185,9 +185,9 @@ TiDBバージョン：8.3.0
 | [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)                                 | 変更     | SESSIONスコープを追加します。                                                                                                                                                                                                                                                                                       |
 | [`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)                                 | 変更     | SESSIONスコープを追加します。                                                                                                                                                                                                                                                                                       |
 | [`tidb_enable_column_tracking`](/system-variables.md#tidb_enable_column_tracking-new-in-v540)                 | 変更     | さらなるテストの結果、デフォルト値が`OFF`から`ON`に変更されます。これは、TiDB がデフォルトで`PREDICATE COLUMNS`を収集することを意味します。                                                                                                                                                                                                                   |
-| [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)                                  | 変更     | v8.3.0 以降、この変数は[ごみ収集（GC）](/garbage-collection-overview.md)プロセスの[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップと[範囲を削除](/garbage-collection-overview.md#delete-ranges)ステップ中の同時スレッドの数を制御します。 v8.3.0 より前では、この変数は[ロックを解除する](/garbage-collection-overview.md#resolve-locks)ステップ中のスレッド数のみを制御します。 |
-| [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)                                     | 変更     | グローバルスコープを追加します。                                                                                                                                                                                                                                                                                         |
-| [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)             | 変更     | GLOBAL スコープを追加し、変数の値をクラスタに永続化します。さらにテストを行った結果、デフォルト値を`OFF`から`ON`に変更します。これは、オプティマイザが`Projection` TiKV コプロセッサにプッシュできることを意味します。                                                                                                                                                                             |
+| [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)                                  | 変更     | v8.3.0 以降、この変数は[ガベージコレクション（GC）](/garbage-collection-overview.md)プロセスの[ロックを解決する](/garbage-collection-overview.md#resolve-locks)ステップと[範囲を削除](/garbage-collection-overview.md#delete-ranges)ステップ中の同時スレッドの数を制御します。 v8.3.0 より前では、この変数は[ロックを解決する](/garbage-collection-overview.md#resolve-locks)ステップ中のスレッド数のみを制御します。 |
+| [`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)                                     | 変更     | GLOBAL スコープを追加します。                                                                                                                                                                                                                                                                                         |
+| [`tidb_opt_projection_push_down`](/system-variables.md#tidb_opt_projection_push_down-new-in-v610)             | 変更     | GLOBAL スコープを追加し、変数の値をクラスタに永続化します。さらにテストを行った結果、デフォルト値を`OFF`から`ON`に変更します。これは、オプティマイザが`Projection`を TiKV コプロセッサにプッシュダウンできることを意味します。                                                                                                                                                                             |
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                           | 変更     | 値の範囲は`0`または`[536870912, 9223372036854775807]`に変更されました。キャッシュサイズが小さすぎてパフォーマンスが低下するのを避けるため、最小値は`536870912`バイト (つまり 512 MiB) です。                                                                                                                                                                             |
 | [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                 | 新しく追加された | `ANALYZE TABLE`文の動作を制御します。デフォルト値の`PREDICATE`に設定すると、 [述語列](/statistics.md#collect-statistics-on-some-columns)の統計情報のみが収集されます。 `ALL`に設定すると、すべての列の統計情報が収集されます。                                                                                                                                         |
 | [`tidb_enable_lazy_cursor_fetch`](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)             | 新しく追加された | [カーソルフェッチ](/develop/dev-guide-connection-parameters.md#use-streamingresult-to-get-the-execution-result)機能の動作を制御します。                                                                                                                                                                                      |
@@ -202,7 +202,7 @@ TiDBバージョン：8.3.0
 | PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 変更     | PD設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
 | TiKV           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 変更     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
 | TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 変更     | TiFlash Learnerの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークすることができます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
-| BR             | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)                             | 新しく追加された | 増分バックアップが後続のログバックアップと互換性があるかどうかを制御します。デフォルト値は`true`で、これは増分バックアップが後続のログバックアップと互換性があることを意味します。デフォルト値`true`ままにすると、増分リストアが開始される前に、再生が必要な DDL が厳密にチェックされます。  |
+| BR             | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)                             | 新しく追加された | 増分バックアップが後続のログバックアップと互換性があるかどうかを制御します。デフォルト値は`true`で、これは増分バックアップが後続のログバックアップと互換性があることを意味します。デフォルト値`true`のままにすると、増分リストアが開始される前に、再生が必要な DDL が厳密にチェックされます。  |
 
 ### システムテーブル {#system-tables}
 
@@ -222,7 +222,7 @@ TiDBバージョン：8.3.0
     - TiDBはv7.5.0でシステム変数[`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750)を導入しました。この変数を使用すると、TiDBがパーティション統計の非同期マージを使用するように設定し、メモリ不足の問題を回避できます。今後のリリースでは、パーティション統計は非同期でマージされるため、このシステム変数は非推奨となります。
     - 今後のリリースでは [実行プランバインディングの自動進化](/sql-plan-management.md#baseline-evolution)が再設計される予定であり、関連する変数と動作が変更されます。
     - バージョン8.0.0では、TiDBが並列ハッシュアグリゲーションアルゴリズムのディスクスピルをサポートするかどうかを制御するシステム変数[`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)が導入されました。今後のバージョンでは、 [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数は非推奨となります。
-    - TiDB Lightning のパラメータ[`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task) 、今後のリリースで非推奨となり、その後削除されます。このパラメータは[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)に置き換えられます。これは、競合するレコードの最大数が、単一のインポートタスクで許容できる競合レコードの最大数と一致することを意味します。
+    - TiDB Lightning のパラメータ[`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)は、今後のリリースで非推奨となり、その後削除されます。このパラメータは[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)に置き換えられます。これは、競合するレコードの最大数が、単一のインポートタスクで許容できる競合レコードの最大数と一致することを意味します。
 
 - 今後のバージョンでは、以下の機能が削除される予定です。
 
@@ -235,17 +235,17 @@ TiDBバージョン：8.3.0
     - `SELECT ... STRAIGHT_JOIN ... USING ( ... )` ステートメントをサポートします [#54162](https://github.com/pingcap/tidb/issues/54162) @[dveeden](https://github.com/dveeden)
     - `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))`のようなフィルター条件のより正確なインデックス アクセス範囲を構築します [#54337](https://github.com/pingcap/tidb/issues/54337) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     - インデックス順序を使用して、 `WHERE idx_col_1 IS NULL ORDER BY idx_col_2`のような SQL クエリの余分なソート操作を回避します [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
-    - `mysql.analyze_jobs`システムテーブルに分析済みインデックスを表示します [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)。
+    - `mysql.analyze_jobs`システムテーブルに分析済みインデックスを表示します [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/Rustin170506)
     - `EXPLAIN`ステートメントの出力に`tidb_redact_log`設定を適用することをサポートし、ログ処理ロジックをさらに最適化します [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
-    - クエリ効率を向上させるため、多値インデックスに対して`Selection` `IndexRangeScan`オペレーターを生成するサポート [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
+    - クエリ効率を向上させるため、多値インデックスに対して`IndexRangeScan`上で`Selection`オペレーターを生成することをサポート [#54876](https://github.com/pingcap/tidb/issues/54876) @[time-and-fate](https://github.com/time-and-fate)
     - 設定された時間枠外で実行されている自動タスク`ANALYZE`の強制終了をサポート [#55283](https://github.com/pingcap/tidb/issues/55283) @[hawkingrei](https://github.com/hawkingrei)
     - 統計情報が完全に TopN で構成され、対応するテーブル統計情報の変更された行数がゼロでない場合、TopN に到達しない等価条件の推定結果を 0 から 1 に調整します。 [#47400](https://github.com/pingcap/tidb/issues/47400) @[terry1purcell](https://github.com/terry1purcell)
     - TopNオペレーターはディスクスピルをサポートします [#47733](https://github.com/pingcap/tidb/issues/47733) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - TiDB ノードは`WITH ROLLUP`修飾子と`GROUPING`関数を使用したクエリの実行をサポートしています [#42631](https://github.com/pingcap/tidb/issues/42631) @[Arenatlx](https://github.com/Arenatlx)
-    - システム変数[`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso) `GLOBAL`スコープをサポートしています [#55022](https://github.com/pingcap/tidb/issues/55022) @[cfzjywxk](https://github.com/cfzjywxk)
-    - 同時範囲削除をサポートすることで、GC（ガベージコレクション）の効率を向上させます。同時実行スレッド数は、 [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)を使用して制御できます [#54570](https://github.com/pingcap/tidb/issues/54570) @[ekexium](https://github.com/ekexium)。
+    - システム変数[`tidb_low_resolution_tso`](/system-variables.md#tidb_low_resolution_tso)は`GLOBAL`スコープをサポートしています [#55022](https://github.com/pingcap/tidb/issues/55022) @[cfzjywxk](https://github.com/cfzjywxk)
+    - 同時範囲削除をサポートすることで、GC（ガベージコレクション）の効率を向上させます。同時実行スレッド数は、 [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)を使用して制御できます [#54570](https://github.com/pingcap/tidb/issues/54570) @[ekexium](https://github.com/ekexium)
     - 一括DML実行モードのパフォーマンスを改善（ `tidb_dml_type = "bulk"` ） [#50215](https://github.com/pingcap/tidb/issues/50215) @[ekexium](https://github.com/ekexium)
-    - スキーマ情報キャッシュ関連インターフェースのパフォーマンスを改善`SchemaByID` [#54074](https://github.com/pingcap/tidb/issues/54074) @[ywqzzy](https://github.com/ywqzzy)
+    - スキーマ情報キャッシュ関連のインターフェース`SchemaByID`のパフォーマンスを改善 [#54074](https://github.com/pingcap/tidb/issues/54074) @[ywqzzy](https://github.com/ywqzzy)
     - スキーマ情報キャッシュが有効になっている場合、特定のシステムテーブルのクエリパフォーマンスを改善します [#50305](https://github.com/pingcap/tidb/issues/50305) @[tangenta](https://github.com/tangenta)
     - 一意インデックスを追加する際の競合キーに関するエラーメッセージを最適化 [#53004](https://github.com/pingcap/tidb/issues/53004) @[lance6716](https://github.com/lance6716)
 
@@ -259,14 +259,14 @@ TiDBバージョン：8.3.0
     - 大規模クエリ読み取りリクエストのRU消費動作を最適化し、他のリクエストへの影響を軽減する [#8457](https://github.com/tikv/pd/issues/8457) @[nolouch](https://github.com/nolouch)
     - PDマイクロサービスの設定ミス時に返されるエラーメッセージを最適化する [#52912](https://github.com/pingcap/tidb/issues/52912) @[rleungx](https://github.com/rleungx)
     - PDマイクロサービスに`--name`起動パラメータを追加して、デプロイ中にサービス名をより正確に表示します [#7995](https://github.com/tikv/pd/issues/7995) @[HuSharp](https://github.com/HuSharp)
-    - 領域数に基づいて`PatrolRegionScanLimit`を動的に調整してリージョンスキャン時間を短縮する機能をサポート [#7963](https://github.com/tikv/pd/issues/7963) @[lhy1024](https://github.com/lhy1024)
+    - リージョン数に基づいて`PatrolRegionScanLimit`を動的に調整してリージョンスキャン時間を短縮する機能をサポート [#7963](https://github.com/tikv/pd/issues/7963) @[lhy1024](https://github.com/lhy1024)
 
 - TiKV
 
     - `async-io`が有効になっている場合、 Raftログの書き込みバッチ処理ポリシーを最適化して、ディスク I/O 帯域幅リソースの消費を削減します [#16907](https://github.com/tikv/tikv/issues/16907) @[LykxSassinator](https://github.com/LykxSassinator)
     - リージョン部分購読をより適切にサポートするために、TiCDCデリゲートとダウンストリームモジュールを再設計します [#16362](https://github.com/tikv/tikv/issues/16362) @[hicqu](https://github.com/hicqu)
     - 単一のスロークエリログのサイズを削減 [#17294](https://github.com/tikv/tikv/issues/17294) @[Connor1996](https://github.com/Connor1996)
-    - 新しいモニタリング指標を追加`min safe ts` [#17307](https://github.com/tikv/tikv/issues/17307) @[mittalrishabh](https://github.com/mittalrishabh)
+    - 新しいモニタリング指標`min safe ts`を追加 [#17307](https://github.com/tikv/tikv/issues/17307) @[mittalrishabh](https://github.com/mittalrishabh)
     - ピアメッセージチャネルのメモリ使用量を削減します [#16229](https://github.com/tikv/tikv/issues/16229) @[Connor1996](https://github.com/Connor1996)
 
 - TiFlash
@@ -282,8 +282,8 @@ TiDBバージョン：8.3.0
         - TiKVが各SSTファイルをダウンロードする前に、TiKVのディスク容量が十分かどうかを確認する機能をサポートします。容量が不足している場合、 BRはリストアを終了し、エラーを返します。[#17224](https://github.com/tikv/tikv/issues/17224) @[RidRisR](https://github.com/RidRisR)
         - Alibaba Cloudへのアクセス認証情報を環境変数で設定するサポート [#45551](https://github.com/pingcap/tidb/issues/45551) @[RidRisR](https://github.com/RidRisR)
         - BR をバックアップおよびリストアに使用する際に OOM を回避するため、 BRプロセスの利用可能なメモリに基づいて環境変数`GOMEMLIMIT`を自動的に設定します [#53777](https://github.com/pingcap/tidb/issues/53777) @[Leavrth](https://github.com/Leavrth)
-        - ポイントインタイムリカバリ(PITR) と互換性のある増分バックアップを作成する [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
-        - `mysql.column_stats_usage`テーブルのバックアップと復元をサポートします [#53567](https://github.com/pingcap/tidb/issues/53567) @[Rustin170506](https://github.com/Rustin170506)。
+        - 増分バックアップをポイントインタイムリカバリ（PITR）と互換にする [#54474](https://github.com/pingcap/tidb/issues/54474) @[3pointer](https://github.com/3pointer)
+        - `mysql.column_stats_usage`テーブルのバックアップと復元をサポートします [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/Rustin170506)
 
 ## バグ修正 {#bug-fixes}
 
@@ -292,19 +292,19 @@ TiDBバージョン：8.3.0
     - `PipelinedWindow`の`Open`メソッドのパラメータをリセットし、 `PipelinedWindow`を`Apply`の子ノードとして使用した際に、繰り返し開閉操作によって以前のパラメータ値が再利用されることで発生する予期しないエラーを修正します。 [#53600](https://github.com/pingcap/tidb/issues/53600) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - `tidb_mem_quota_query`で設定された制限を超えるメモリ使用量のため、クエリ終了時に処理が停止する可能性がある問題を修正しました。 [#55042](https://github.com/pingcap/tidb/issues/55042) @[yibin87](https://github.com/yibin87)
     - HashAggオペレーターのディスクスピルによって並列計算中にクエリ結果が不正になる問題を修正しました [#55290](https://github.com/pingcap/tidb/issues/55290) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - `JSON_TYPE` JSON 形式にキャストした際に`YEAR`が間違って表示される問題を修正 [#54494](https://github.com/pingcap/tidb/issues/54494) @[YangKeao](https://github.com/YangKeao)
+    - `YEAR`を JSON 形式にキャストした際に`JSON_TYPE`が誤っている問題を修正 [#54494](https://github.com/pingcap/tidb/issues/54494) @[YangKeao](https://github.com/YangKeao)
     - `tidb_schema_cache_size`システム変数の値の範囲が間違っている問題を修正 [#54034](https://github.com/pingcap/tidb/issues/54034) @[lilinghai](https://github.com/lilinghai)
     - パーティション式が`EXTRACT(YEAR FROM col)`の場合にパーティションプルーニングが機能しない問題を修正 [#54210](https://github.com/pingcap/tidb/issues/54210) @[mjonss](https://github.com/mjonss)
     - データベースに多数のテーブルが存在する場合に`FLASHBACK DATABASE`が失敗する問題を修正 [#54415](https://github.com/pingcap/tidb/issues/54415) @[lance6716](https://github.com/lance6716)
-    - `FLASHBACK DATABASE`多数のデータベースを処理する際に無限ループに陥る問題を修正しました [#54915](https://github.com/pingcap/tidb/issues/54915) @[lance6716](https://github.com/lance6716)
+    - `FLASHBACK DATABASE`が多数のデータベースを処理する際に無限ループに陥る問題を修正しました [#54915](https://github.com/pingcap/tidb/issues/54915) @[lance6716](https://github.com/lance6716)
     - インデックス加速モードでインデックスを追加すると失敗する可能性がある問題を修正 [#54568](https://github.com/pingcap/tidb/issues/54568) @[lance6716](https://github.com/lance6716)
     - `ADMIN CANCEL DDL JOBS`が原因で DDL が失敗する可能性がある問題を修正しました [#54687](https://github.com/pingcap/tidb/issues/54687) @[lance6716](https://github.com/lance6716)
     - DMからレプリケートされたテーブルのインデックス長が`max-index-length`で指定された最大長を超えると、テーブルのレプリケーションが失敗する問題を修正します。 [#55138](https://github.com/pingcap/tidb/issues/55138) @[lance6716](https://github.com/lance6716)
-    - `runtime error: index out of range` `tidb_enable_inl_join_inner_multi_pattern`が発生する可能性がある問題を修正します [#54535](https://github.com/pingcap/tidb/issues/54535) @[joechenrh](https://github.com/joechenrh)
+    - `tidb_enable_inl_join_inner_multi_pattern`を有効にして SQL ステートメントを実行すると、エラー`runtime error: index out of range`が発生する可能性がある問題を修正します [#54535](https://github.com/pingcap/tidb/issues/54535) @[joechenrh](https://github.com/joechenrh)
     - 統計情報の初期化処理中に<kbd>Control</kbd> + <kbd>C</kbd>を使用してTiDBを終了できない問題を修正しました [#54589](https://github.com/pingcap/tidb/issues/54589) @[tiancaiamao](https://github.com/tiancaiamao)
     - `WITH ROLLUP`を含む相関サブクエリによって TiDB がpanicを起こし、エラー`runtime error: index out of range`を返す可能性がある問題を修正しました。 [#54983](https://github.com/pingcap/tidb/issues/54983) @[AilinKid](https://github.com/AilinKid)
     - SQLクエリのフィルタ条件に仮想列が含まれ、実行条件に`UnionScan`が含まれている場合に、述語が正しくプッシュダウンされない問題を修正します [#54870](https://github.com/pingcap/tidb/issues/54870) @[qw4990](https://github.com/qw4990)
-    - `runtime error: invalid memory address or nil pointer dereference` `tidb_enable_inl_join_inner_multi_pattern`が発生する可能性がある問題を修正しました [#55169](https://github.com/pingcap/tidb/issues/55169) @[hawkingrei](https://github.com/hawkingrei)
+    - `tidb_enable_inl_join_inner_multi_pattern`を有効にして SQL ステートメントを実行すると、エラー`runtime error: invalid memory address or nil pointer dereference`が発生する可能性がある問題を修正しました [#55169](https://github.com/pingcap/tidb/issues/55169) @[hawkingrei](https://github.com/hawkingrei)
     - `UNION`を含むクエリステートメントが誤った結果を返す可能性がある問題を修正しました [#52985](https://github.com/pingcap/tidb/issues/52985) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - `mysql.stats_histograms`テーブルの`tot_col_size`列が負の数になる可能性がある問題を修正しました [#55126](https://github.com/pingcap/tidb/issues/55126) @[qw4990](https://github.com/qw4990)
     - `columnEvaluator`は入力チャンク内の列参照を識別できず、SQL文の実行時に`runtime error: index out of range`が発生する問題を修正しました。 [#53713](https://github.com/pingcap/tidb/issues/53713) @[AilinKid](https://github.com/AilinKid)
@@ -313,12 +313,12 @@ TiDBバージョン：8.3.0
     - `tidb_redact_log`が有効になっている場合に、内部SQLクエリがスロークエリログに表示されない問題を修正しました [#54190](https://github.com/pingcap/tidb/issues/54190) @[lcwangchao](https://github.com/lcwangchao)
     - トランザクションで使用されるメモリが複数回追跡される可能性がある問題を修正 [#53984](https://github.com/pingcap/tidb/issues/53984) @[ekexium](https://github.com/ekexium)
     - `SHOW WARNINGS;`を使用して警告を取得するとpanicが発生する可能性がある問題を修正しました [#48756](https://github.com/pingcap/tidb/issues/48756) @[xhebox](https://github.com/xhebox)
-    - インデックス統計情報の読み込み時にメモリリークが発生する可能性がある問題を修正 [#54022](https://github.com/pingcap/tidb/issues/54022) @[Rustin170506](https://github.com/Rustin170506)
+    - インデックス統計情報の読み込み時にメモリリークが発生する可能性がある問題を修正 [#54022](https://github.com/pingcap/tidb/issues/54022) @[hi-rustin](https://github.com/Rustin170506)
     - 照合順序が`utf8_bin`または`utf8mb4_bin`の場合に`LENGTH()`条件が予期せず削除される問題を修正しました [#53730](https://github.com/pingcap/tidb/issues/53730) @[elsa0520](https://github.com/elsa0520)
     - 重複する主キーに遭遇した場合に統計収集が`stats_history`テーブルを更新しない問題を修正 [#47539](https://github.com/pingcap/tidb/issues/47539) @[Defined2014](https://github.com/Defined2014)
     - 再帰的なCTEクエリによって無効なポインタが生成される可能性がある問題を修正 [#54449](https://github.com/pingcap/tidb/issues/54449) @[hawkingrei](https://github.com/hawkingrei)
-    - Grafana の接続数監視メトリックが、ハンドシェイクが完了する前に一部の接続が切断された場合に正しく表示されない問題を修正しました [#54428](https://github.com/pingcap/tidb/issues/54428) @[YangKeao](https://github.com/YangKeao)
-    - TiProxyとリソースグループを使用している際に、各リソースグループの接続数が正しく表示されない問題を修正しました [#54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
+    - Grafana の Connection Count 監視メトリックが、ハンドシェイクが完了する前に一部の接続が切断された場合に正しく表示されない問題を修正しました [#54428](https://github.com/pingcap/tidb/issues/54428) @[YangKeao](https://github.com/YangKeao)
+    - TiProxyとリソースグループを使用している際に、各リソースグループの Connection Countが正しく表示されない問題を修正しました [#54545](https://github.com/pingcap/tidb/issues/54545) @[YangKeao](https://github.com/YangKeao)
     - クエリに相関のないサブクエリと`LIMIT`句が含まれている場合、列のプルーニングが不完全になり、最適ではない実行計画が生成される可能性がある問題を修正しました。 [#54213](https://github.com/pingcap/tidb/issues/54213) @[qw4990](https://github.com/qw4990)
     - `SELECT ... FOR UPDATE`の誤ったPointGetプランを再利用してしまう問題を修正します [#54652](https://github.com/pingcap/tidb/issues/54652) @[qw4990](https://github.com/qw4990)
     - `TIMESTAMPADD()`関数の最初の引数が`month`で、2 番目の引数が負の値の場合に無限ループに陥る問題を修正しました。 [#54908](https://github.com/pingcap/tidb/issues/54908) @[xzhangxian1008](https://github.com/xzhangxian1008)
@@ -326,8 +326,8 @@ TiDBバージョン：8.3.0
     - `PointGet`の実行計画が`_tidb_rowid`に対して生成されてしまう問題を修正します [#54583](https://github.com/pingcap/tidb/issues/54583) @[Defined2014](https://github.com/Defined2014)
     - `SHOW IMPORT JOBS`が v7.1 からアップグレード後にエラー`Unknown column 'summary'`を報告する問題を修正 [#54241](https://github.com/pingcap/tidb/issues/54241) @[tangenta](https://github.com/tangenta)
     - ビュー定義で列定義としてサブクエリが使用されている場合、 `information_schema.columns`を使用して列情報を取得すると警告 1356 が返される問題を修正しました [#54343](https://github.com/pingcap/tidb/issues/54343) @[lance6716](https://github.com/lance6716)
-    - 厳密に自己インクリメントではないRANGEパーティションテーブルが作成できてしまう問題を修正 [#54829](https://github.com/pingcap/tidb/issues/54829) @[Defined2014](https://github.com/Defined2014)
-    - SQLが異常中断されたときに`INDEX_HASH_JOIN`正常に終了できない問題を修正 [#54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
+    - 厳密に単調増加していないRANGEパーティションテーブルが作成できてしまう問題を修正 [#54829](https://github.com/pingcap/tidb/issues/54829) @[Defined2014](https://github.com/Defined2014)
+    - SQLが異常中断されたときに`INDEX_HASH_JOIN`が正常に終了できない問題を修正 [#54688](https://github.com/pingcap/tidb/issues/54688) @[wshwsh12](https://github.com/wshwsh12)
     - 分散実行フレームワーク（DXF）を使用してインデックスを追加する際のネットワーク分断により、データインデックスに不整合が生じる可能性がある問題を修正しました [#54897](https://github.com/pingcap/tidb/issues/54897) @[tangenta](https://github.com/tangenta)
 
 - PD
@@ -350,7 +350,7 @@ TiDBバージョン：8.3.0
 - TiFlash
 
     - `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む datetime に変換すると、結果が正しくない問題を修正しました [#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
-    - データベースにまたがる空のパーティションがあるパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanicする可能性がある問題を修正 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - 空のパーティションを持つパーティションテーブルに対してデータベースをまたいで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanicする可能性がある問題を修正 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 遅延マテリアライゼーションが有効になった後、一部のクエリで列型の不一致エラーが報告される可能性がある問題を修正 [#9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)
     - 仮想生成列を含むクエリが遅延マテリアライゼーション有効後に誤った結果を返す可能性がある問題を修正 [#9188](https://github.com/pingcap/tiflash/issues/9188) @[JinheLin](https://github.com/JinheLin)
     - TiFlashでSSL証明書の設定を空文字列に設定するとTLSが誤って有効になり、 TiFlashが起動に失敗する問題を修正しました [#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
