@@ -34,7 +34,7 @@ TiDB バージョン: 6.1.4
 
         - 事前チェック項目`clusterResourceCheckItem`と`emptyRegionCheckItem`の重大度を`Critical`から`Warning`に変更します[#37654](https://github.com/pingcap/tidb/issues/37654) @[niubell](https://github.com/niubell)
 
-## Bug fixes {#bug-fixes}
+## バグ修正 {#bug-fixes}
 
 - TiDB
 
@@ -50,7 +50,7 @@ TiDB バージョン: 6.1.4
 
 - PD
 
-    - PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
+    - PD が予期せず複数の Learner をリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
 
 <!---->
 
@@ -61,7 +61,7 @@ TiDB バージョン: 6.1.4
     - TiKVが誤って`PessimisticLockNotFound`エラーを報告する問題を修正 [#13425](https://github.com/tikv/tikv/issues/13425) @[sticnarf](https://github.com/sticnarf)
     - 1回の書き込みサイズが2 GiB を超えるとTiKVがpanicになる問題を修正 [#13848](https://github.com/tikv/tikv/issues/13848) @[YuJuncen](https://github.com/YuJuncen)
     - 失敗した悲観的DMLの後にDMLを実行する際、TiDBとTiKV間のネットワーク障害によって発生するデータ不整合の問題を修正しました [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta)
-    - 新しい照合順序が有効になっていない場合、 `LIKE`演算子の`_`非 ASCII 文字と一致しない問題を修正[#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - 新しい照合順序が有効になっていない場合、 `LIKE`演算子の`_`が非 ASCII 文字と一致しない問題を修正[#13769](https://github.com/tikv/tikv/issues/13769) @[YangKeao](https://github.com/YangKeao) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 - TiFlash
 
@@ -87,9 +87,9 @@ TiDB バージョン: 6.1.4
 
     - TiDB Data Migration (DM)
 
-        - `SHOW GRANTS`の下流データベース名にワイルドカード ("*") が含まれている場合に、DM が事前チェック中にエラーを発生させる可能性があるバグを修正しました[`#7645`](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
-        - binlogログクエリイベントの"COMMIT"によって DM がログを過剰に出力する問題を修正しました [`#7525`](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
-        - SSL が`ssl-ca`しか設定されていない場合に DM タスクが起動に失敗する問題を修正しました [#7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94](https://github.com/liumengya94)
+        - `SHOW GRANTS`の下流データベース名にワイルドカード ("*") が含まれている場合に、DM が事前チェック中にエラーを発生させる可能性があるバグを修正しました[#7645](https://github.com/pingcap/tiflow/issues/7645) @[lance6716](https://github.com/lance6716)
+        - binlogクエリイベント内の"COMMIT"によって DM がログを過剰に出力する問題を修正しました [#7525](https://github.com/pingcap/tiflow/issues/7525) @[liumengya94](https://github.com/liumengya94)
+        - SSL に`ssl-ca`のみが設定されている場合に DM タスクが起動に失敗する問題を修正しました [#7941](https://github.com/pingcap/tiflow/issues/7941) @[liumengya94](https://github.com/liumengya94)
         - 1つのテーブルに"update"と"non-update"の両方の式フィルタが指定されている場合、すべての`UPDATE`文がスキップされるバグを修正しました[#7831](https://github.com/pingcap/tiflow/issues/7831) @[lance6716](https://github.com/lance6716)
         - テーブルに`update-old-value-expr`または`update-new-value-expr`のいずれか一方のみが設定されている場合に、フィルタルールが有効にならないか、DM がパニックになるバグを修正しました。 [#7774](https://github.com/pingcap/tiflow/issues/7774) @[lance6716](https://github.com/lance6716)
 

@@ -3,28 +3,28 @@ title: TiDB 6.1.1 Release Notes
 summary: "TiDB 6.1.1は2022年9月1日にリリースされました。変更点には、大文字と小文字を区別しない`SHOW DATABASES LIKE`ステートメント、`tidb_enable_outer_join_reorder`のデフォルト値の変更、オプティマイザとメトリクスレスポンスの圧縮の改善が含まれます。バグ修正では、`INL_HASH_JOIN`のハング、`UPDATE`文実行中のパニック、クエリ結果の誤りなどの問題が修正されています。その他の変更点には、異なる品質基準に対するマルチレベルサポートと、`TiDB-community-toolkit`バイナリパッケージへの追加が含まれます。"
 ---
 
-# TiDB 6.1.1 Release Notes {#tidb-6-1-1-release-notes}
+# TiDB 6.1.1 リリースノート {#tidb-6-1-1-release-notes}
 
 リリース日：2022年9月1日
 
 TiDB バージョン: 6.1.1
 
-Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## 互換性の変更 {#compatibility-changes}
 
 - TiDB
 
-    - `SHOW DATABASES LIKE …`文を大文字と小文字を区別しない[#34766](https://github.com/pingcap/tidb/issues/34766) @[e1ijah1](https://github.com/e1ijah1)
-    - デフォルト値[`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)を`1`から`0`に変更します。これにより、結合順序変更の外部結合のサポートがデフォルトで無効になります。
+    - `SHOW DATABASES LIKE …`文で大文字と小文字を区別しないようにする[#34766](https://github.com/pingcap/tidb/issues/34766) @[e1ijah1](https://github.com/e1ijah1)
+    - [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)のデフォルト値を`1`から`0`に変更します。これにより、結合順序変更の外部結合のサポートがデフォルトで無効になります。
 
 - 診断
 
-    - 継続的プロファイリング機能はデフォルトで無効になっています。これにより、この機能が有効になっている場合に発生する可能性のあるTiFlashのクラッシュ問題を回避できます。詳細については、 [#5687](https://github.com/pingcap/tiflash/issues/5687) をご覧ください。 @[mornyx](https://github.com/mornyx)
+    - 継続的プロファイリング機能をデフォルトで無効にします。これにより、この機能が有効になっている場合に発生する可能性のあるTiFlashのクラッシュ問題を回避できます。詳細については、 [#5687](https://github.com/pingcap/tiflash/issues/5687) をご覧ください。 @[mornyx](https://github.com/mornyx)
 
-## Other changes {#other-changes}
+## その他の変更 {#other-changes}
 
-- `TiDB-community-toolkit`バイナリパッケージに以下の内容を追加します。詳細は[TiDB Installation Packages](/binary-package.md)を参照してください。
+- `TiDB-community-toolkit`バイナリパッケージに以下の内容を追加します。詳細は[TiDB インストールパッケージ](/binary-package.md)を参照してください。
 
     - `server-{version}-linux-amd64.tar.gz`
     - `grafana-{version}-linux-amd64.tar.gz`
@@ -86,7 +86,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     - 集計がプッシュダウンされた後に部分集計に間違ったデフォルト値が設定された場合の間違ったクエリ結果の問題を修正しました [#35295](https://github.com/pingcap/tidb/issues/35295) @[tiancaiamao](https://github.com/tiancaiamao)
     - パーティションテーブルをクエリすると、場合によっては`index-out-of-range`エラーが発生する可能性がある問題を修正しました。 [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
     - クエリ条件でパーティションキーが使用され、照合順序がクエリパーティションテーブルの照合順序と異なる場合にパーティションが誤ってプルーニングされる問題を修正しました。 [#32749](https://github.com/pingcap/tidb/issues/32749) @[mjonss](https://github.com/mjonss)
-    - TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行するとメタデータバージョンが間違って発生し、 Drainer が終了する可能性がある問題を修正しました。 [#36276](https://github.com/pingcap/tidb/issues/36276) @[AilinKid](https://github.com/AilinKid)
+    - TiDB Binlogが有効な場合、 `ALTER SEQUENCE`文を実行すると誤ったメタデータバージョンが発生し、 Drainer が終了する可能性がある問題を修正しました。 [#36276](https://github.com/pingcap/tidb/issues/36276) @[AilinKid](https://github.com/AilinKid)
     - 極端なケースで起動時に誤った TiDB ステータスが表示される問題を修正[#36791](https://github.com/pingcap/tidb/issues/36791) @[xhebox](https://github.com/xhebox)
     - TiDB Dashboardでパーティションテーブルの実行計画をクエリするときに発生する可能性のある`UnknownPlanID`問題を修正しました。 [#35153](https://github.com/pingcap/tidb/issues/35153) @[time-and-fate](https://github.com/time-and-fate)
     - LOAD DATA文でカラムリストが機能しない問題を修正しました [#35198](https://github.com/pingcap/tidb/issues/35198) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
@@ -99,18 +99,18 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - Raftstoreがビジー状態の場合にリージョンが重複する可能性があるバグを修正[#13160](https://github.com/tikv/tikv/issues/13160) @[5kbpers](https://github.com/5kbpers)
     - リージョンハートビートが中断された後にPDがTiKVに再接続しない問題を修正[#12934](https://github.com/tikv/tikv/issues/12934) @[bufferflies](https://github.com/bufferflies)
-    - 空の文字列型変換を実行するときに TiKV がパニックになる問題を修正しました [#12673](https://github.com/tikv/tikv/issues/12673) @[wshwsh12](https://github.com/wshwsh12)
+    - 空の文字列に対して型変換を実行するときに TiKV がパニックになる問題を修正しました [#12673](https://github.com/tikv/tikv/issues/12673) @[wshwsh12](https://github.com/wshwsh12)
     - TiKVとPD間のリージョンサイズ設定が一致しない問題を修正 [#12518](https://github.com/tikv/tikv/issues/12518) @[5kbpers](https://github.com/5kbpers)
     - Raft Engineが有効になっているときに暗号化キーがクリーンアップされない問題を修正[#12890](https://github.com/tikv/tikv/issues/12890) @[tabokie](https://github.com/tabokie)
     - ピアが分割と破棄を同時に行っている場合に発生する可能性があるpanicの問題を修正しました [#12825](https://github.com/tikv/tikv/issues/12825) @[BusyJay](https://github.com/BusyJay)
     - リージョンマージプロセスでソースピアがスナップショットによってログをキャッチアップするときに発生する可能性のあるpanic問題を修正しました。 [#12663](https://github.com/tikv/tikv/issues/12663) @[BusyJay](https://github.com/BusyJay)
     - PDクライアントがエラーに遭遇したときに発生するPDクライアントの頻繁な再接続の問題を修正しました [#12345](https://github.com/tikv/tikv/issues/12345) @[Connor1996](https://github.com/Connor1996)
     - Raft Engine で並列リカバリが有効になっている場合に発生する可能性のあるpanicを修正しました [#13123](https://github.com/tikv/tikv/issues/13123) @[tabokie](https://github.com/tabokie)
-    - 新しいリージョンのコミットログ期間が長すぎるため、QPS が低下する問題を修正しました。 [#13077](https://github.com/tikv/tikv/issues/13077) @[Connor1996](https://github.com/Connor1996)
+    - 新しいリージョンの Commit Log Duration が長すぎるため、QPS が低下する問題を修正しました。 [#13077](https://github.com/tikv/tikv/issues/13077) @[Connor1996](https://github.com/Connor1996)
     - Raft Engineが有効になっているときに稀に発生するパニックを修正[#12698](https://github.com/tikv/tikv/issues/12698) @[tabokie](https://github.com/tabokie)
     - proc ファイルシステム (procfs) が見つからない場合に冗長なログ警告を回避する[#13116](https://github.com/tikv/tikv/issues/13116) @[tabokie](https://github.com/tabokie)
     - ダッシュボードの`Unified Read Pool CPU`の誤った表現を修正 [#13086](https://github.com/tikv/tikv/issues/13086) @[glorv](https://github.com/glorv)
-    - リージョンが大きい場合、デフォルトの[`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff)バケット サイズよりも大きくなる可能性がある問題を修正しました。 [#12598](https://github.com/tikv/tikv/issues/12598) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - リージョンが大きい場合、デフォルトの[`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff)がバケット サイズよりも大きくなる可能性がある問題を修正しました。 [#12598](https://github.com/tikv/tikv/issues/12598) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - スナップショットの適用が中止され、 Raft Engineが有効になっている場合に TiKV がpanicする可能性がある問題を修正[#12470](https://github.com/tikv/tikv/issues/12470) @[tabokie](https://github.com/tabokie)
     - PD クライアントがデッドロックを引き起こす可能性がある問題を修正しました [#13191](https://github.com/tikv/tikv/issues/13191) @[bufferflies](https://github.com/bufferflies) [#12933](https://github.com/tikv/tikv/issues/12933) @[BurtonQin](https://github.com/BurtonQin)
 
@@ -118,7 +118,7 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - クラスタノードのラベル構成が無効な場合にオンラインの進行状況が不正確になる問題を修正[#5234](https://github.com/tikv/pd/issues/5234) @[rleungx](https://github.com/rleungx)
     - `enable-forwarding`が有効になっているときに gRPC がエラーを不適切に処理する問題によって発生する PD パニックを修正[#5373](https://github.com/tikv/pd/issues/5373) @[bufferflies](https://github.com/bufferflies)
-    - `/regions/replicated`間違ったステータスを返す可能性がある問題を修正しました [#5095](https://github.com/tikv/pd/issues/5095) @[rleungx](https://github.com/rleungx)
+    - `/regions/replicated`が間違ったステータスを返す可能性がある問題を修正しました [#5095](https://github.com/tikv/pd/issues/5095) @[rleungx](https://github.com/rleungx)
 
 - TiFlash
 
@@ -152,20 +152,20 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - TiCDC
 
-        - 互換性のある最大バージョン番号の誤りを修正 [#6039](https://github.com/pingcap/tiflow/issues/6039) @[Rustin170506](https://github.com/Rustin170506)
+        - 互換性のある最大バージョン番号の誤りを修正 [#6039](https://github.com/pingcap/tiflow/issues/6039) @[hi-rustin](https://github.com/Rustin170506)
         - cdc サーバーが完全に起動する前に HTTP リクエストを受信した場合にpanicを引き起こす可能性があるバグを修正しました [#5639](https://github.com/pingcap/tiflow/issues/5639) @[asddongmen](https://github.com/asddongmen)
         - チェンジフィード同期ポイントが有効な場合の DDL シンクpanic問題を修正[#4934](https://github.com/pingcap/tiflow/issues/4934) @[asddongmen](https://github.com/asddongmen)
         - 同期ポイントが有効な場合に、一部のシナリオでチェンジフィードがスタックする問題を修正[#6827](https://github.com/pingcap/tiflow/issues/6827) @[hicqu](https://github.com/hicqu)
         - CDCサーバーの再起動後にchangefeed APIが正常に動作しないバグを修正[#5837](https://github.com/pingcap/tiflow/issues/5837) @[asddongmen](https://github.com/asddongmen)
         - ブラックホールシンクのデータ競合問題を修正 [#6206](https://github.com/pingcap/tiflow/issues/6206) @[asddongmen](https://github.com/asddongmen)
-        - `enable-old-value = false`を設定すると TiCDC panic問題を修正しました [#6198](https://github.com/pingcap/tiflow/issues/6198) @[Rustin170506](https://github.com/Rustin170506)
+        - `enable-old-value = false`を設定した場合に発生する TiCDC の panic の問題を修正しました [#6198](https://github.com/pingcap/tiflow/issues/6198) @[hi-rustin](https://github.com/Rustin170506)
         - 再実行ログ機能が有効になっている場合のデータ一貫性の問題を修正[#6189](https://github.com/pingcap/tiflow/issues/6189) [#6368](https://github.com/pingcap/tiflow/issues/6368) [#6277](https://github.com/pingcap/tiflow/issues/6277) [#6456](https://github.com/pingcap/tiflow/issues/6456) [#6695](https://github.com/pingcap/tiflow/issues/6695) [#6764](https://github.com/pingcap/tiflow/issues/6764) [#6859](https://github.com/pingcap/tiflow/issues/6859) @[asddongmen](https://github.com/asddongmen)
         - 非同期的に再実行イベントを書き込むことで、再実行ログのパフォーマンス低下を修正[#6011](https://github.com/pingcap/tiflow/issues/6011) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - MySQLシンクがIPv6アドレスに接続できない問題を修正 [#6135](https://github.com/pingcap/tiflow/issues/6135) @[Rustin170506](https://github.com/Rustin170506)
+        - MySQLシンクがIPv6アドレスに接続できない問題を修正 [#6135](https://github.com/pingcap/tiflow/issues/6135) @[hi-rustin](https://github.com/Rustin170506)
 
     - Backup & Restore (BR)
 
-        - RawKVモードでBRが`ErrRestoreTableIDMismatch`報告するバグを修正 [#35279](https://github.com/pingcap/tidb/issues/35279) @[3pointer](https://github.com/3pointer)
+        - RawKVモードでBRが`ErrRestoreTableIDMismatch`を報告するバグを修正 [#35279](https://github.com/pingcap/tidb/issues/35279) @[3pointer](https://github.com/3pointer)
         - 大規模クラスタバックアップでの S3 レート制限によるバックアップ失敗を修正するために、バックアップデータディレクトリ構造を調整します。 [#30087](https://github.com/pingcap/tidb/issues/30087) @[MoCuishle28](https://github.com/MoCuishle28)
         - サマリーログのバックアップ時間の誤りを修正 [#35553](https://github.com/pingcap/tidb/issues/35553) @[ixuh12](https://github.com/ixuh12)
 
@@ -175,4 +175,4 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
 
     - TiDB Binlog
 
-        - `compressor` `gzip` に設定されている場合に、 Drainer がPumpにリクエストを正しく送信できないバグを修正しました。 [#1152](https://github.com/pingcap/tidb-binlog/issues/1152) @[lichunzhu](https://github.com/lichunzhu)
+        - `compressor`が`gzip` に設定されている場合に、 Drainer がPumpにリクエストを正しく送信できないバグを修正しました。 [#1152](https://github.com/pingcap/tidb-binlog/issues/1152) @[lichunzhu](https://github.com/lichunzhu)

@@ -38,7 +38,7 @@ TiDB バージョン: 6.1.5
 
 - PD
 
-    - `ReportMinResolvedTS`の呼び出しが頻繁に発生する PD OOM 問題を修正しました [#5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)
+    - `ReportMinResolvedTS`の呼び出しが頻繁すぎる場合に発生する PD OOM 問題を修正しました [#5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)
 
 <!---->
 
@@ -47,7 +47,7 @@ TiDB バージョン: 6.1.5
     - TiCDC
 
         - レプリケーション遅延が過度に高い場合に、REDOログを適用するとOOMが発生する可能性がある問題を修正[#8085](https://github.com/pingcap/tiflow/issues/8085) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - REDOログがメタへの書き込みを有効にするとパフォーマンスが低下する問題を修正しました [#8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - メタを書き込むためにREDOログが有効になっている場合にパフォーマンスが低下する問題を修正しました [#8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
     - TiDB Data Migration (DM)
 

@@ -20,14 +20,14 @@ TiDBバージョン: 6.4.0-DMR
 - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md) (実験的) を使用して、クラスターを特定の時点に復元することをサポートします。
 - TiDB インスタンスの[グローバルメモリ使用量の追跡](/configure-memory-usage.md)をサポートします (実験的)。
 - [線形ハッシュのパーティショニング構文](/partitioned-table.md#how-tidb-handles-linear-hash-partitions)と互換性があります。
-- 高性能かつグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode)サポートします (実験的)。
+- 高性能かつグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode)をサポートします (実験的)。
 - [JSON型](/data-type-json.md)の配列データの範囲選択をサポートします。
 - ディスク障害やI/Oスタックなどの極端な状況下での障害リカバリを加速します。
 - [動的計画アルゴリズム](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder)を追加して、テーブルの結合順序を決定します。
 - [新しいオプティマイザヒント`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate)を導入して、相関サブクエリの非相関化を実行するかどうかを制御します。
 - [クラスター診断](/dashboard/dashboard-diagnostics-access.md)機能が GA になります。
 - TiFlash は[保存時の暗号化](/encryption-at-rest.md#tiflash)のための SM4 アルゴリズムをサポートしています。
-- SQL文を使用して[テーブル内の指定されたパーティションのコンパクトなTiFlashレプリカを即座に](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)サポートします。
+- SQL文を使用して[テーブル内の指定されたパーティションのTiFlashレプリカを即座にコンパクションする](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)ことをサポートします。
 - [EBSボリュームスナップショットを使用したTiDBクラスタのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)サポートします。
 - DM は[上流のデータソース情報を下流のマージ済みテーブルの拡張列に書き込む](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)サポートしています。
 
@@ -69,7 +69,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - クラスタ診断が GA になります [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee)
 
-    TiDB Dashboardの [クラスター診断](/dashboard/dashboard-diagnostics-access.md)は、指定された時間範囲内でクラスタに存在する可能性のある問題を診断し、診断結果とクラスタ関連の負荷監視情報を レポートにまとめます。この診断レポートはWeb [診断レポート](/dashboard/dashboard-diagnostics-report.md)形式です。ブラウザからページを保存した後、オフラインでページを閲覧したり、このページのリンクを共有したりできます。
+    TiDB Dashboardの [クラスター診断](/dashboard/dashboard-diagnostics-access.md)は、指定された時間範囲内でクラスタに存在する可能性のある問題を診断し、診断結果とクラスタ関連の負荷監視情報を[診断レポート](/dashboard/dashboard-diagnostics-report.md)にまとめます。この診断レポートはWebページ形式です。ブラウザからページを保存した後、オフラインでページを閲覧したり、このページのリンクを共有したりできます。
 
     診断レポートを使用すると、負荷、コンポーネントの状態、処理時間、構成など、クラスタの基本的な状態情報をすばやく把握できます。クラスタに一般的な問題がある場合は、 [診断情報](/dashboard/dashboard-diagnostics-report.md#diagnostic-information)セクションにある組み込みの自動診断結果から原因を特定できます。
 
@@ -81,9 +81,9 @@ TiDBバージョン: 6.4.0-DMR
 
 - テーブル結合順序を決定するための動的計画アルゴリズムを追加 [#37825](https://github.com/pingcap/tidb/issues/37825) @[winoros](https://github.com/winoros)
 
-    以前のバージョンでは、TiDB はテーブルの結合順序を決定するために貪欲アルゴリズムを使用していました。v6.4.0 では、TiDB オプティマイザに 計画 が導入されました。 [動的計画アルゴリズム](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder)計画アルゴリズムは、貪欲アルゴリズムよりも多くの可能な結合順序を列挙できるため、より良い実行計画を見つける可能性が高まり、一部のシナリオでは SQL 実行効率が向上します。
+    以前のバージョンでは、TiDB はテーブルの結合順序を決定するために貪欲アルゴリズムを使用していました。v6.4.0 では、TiDB オプティマイザに[動的計画アルゴリズム](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder)が導入されました。動的計画アルゴリズムは、貪欲アルゴリズムよりも多くの可能な結合順序を列挙できるため、より良い実行計画を見つける可能性が高まり、一部のシナリオでは SQL 実行効率が向上します。
 
-    動的計画法アルゴリズムは処理に時間がかかるため、TiDBの結合したテーブルの再配置アルゴリズムの選択は、 [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)変数によって制御されます。Join 結合したテーブルの再配置に参加するノード数がこの閾値を超えると、TiDBは貪欲法アルゴリズムを使用します。そうでない場合は、動的計画法アルゴリズムを使用します。
+    動的計画法アルゴリズムは処理に時間がかかるため、TiDBの結合したテーブルの再配置アルゴリズムの選択は、 [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)変数によって制御されます。結合したテーブルの再配置に参加するノード数がこの閾値を超えると、TiDBは貪欲法アルゴリズムを使用します。そうでない場合は、動的計画法アルゴリズムを使用します。
 
     詳細については、[ユーザー向けドキュメント](/join-reorder.md)を参照してください。
 
@@ -151,15 +151,15 @@ TiDBバージョン: 6.4.0-DMR
 
     - MVCCにデータを保存する際に、記録されたデータの変更タイムスタンプを付加します。このタイムスタンプに基づいて変更データキャプチャ（CDC）が実装されます。この機能は実験的であり、詳細は[TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md)に記載されています。
     - データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスタ内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。
-    - マルチテナントなどの機能をサポートするために、キースペースフィールドを予約してください。
+    - マルチテナントなどの機能をサポートするために、キースペースフィールドを予約します。
 
-    TiKV API V2を有効にするには、TiKV設定ファイルの`api-version = 2`セクションに`[storage]` を設定します。
+    TiKV API V2を有効にするには、TiKV設定ファイルの`[storage]`セクションで`api-version = 2`を設定します。
 
     詳細については、 [ユーザー向けドキュメント](/tikv-configuration-file.md#api-version-new-in-v610)を参照してください。
 
 - TiFlashデータ複製進捗状況の精度向上 [#4902](https://github.com/pingcap/tiflash/issues/4902) @[hehechen](https://github.com/hehechen)
 
-    TiDBでは、 `PROGRESS`テーブルの`INFORMATION_SCHEMA.TIFLASH_REPLICA`フィールドは、TiKVの対応するテーブルからTiFlashレプリカへのデータレプリケーションの進行状況をTiFlashために使用されます。以前のTiDBバージョンでは、 `PROCESS`フィールドは、 TiFlashレプリカの作成中のデータレプリケーションの進行状況のみを提供していました。TiFlashレプリカが作成された後、TiKVの対応するテーブルに新しいデータがインポートされた場合、このフィールドは更新されず、新しいデータのTiKVからTiFlashへのレプリケーションの進行状況は表示されません。
+    TiDBでは、 `INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの`PROGRESS`フィールドは、TiKVの対応するテーブルからTiFlashレプリカへのデータレプリケーションの進行状況を示すために使用されます。以前のTiDBバージョンでは、 `PROCESS`フィールドは、 TiFlashレプリカの作成中のデータレプリケーションの進行状況のみを提供していました。TiFlashレプリカが作成された後、TiKVの対応するテーブルに新しいデータがインポートされた場合、このフィールドは更新されず、新しいデータのTiKVからTiFlashへのレプリケーションの進行状況は表示されません。
 
     バージョン6.4.0では、TiDBはTiFlashレプリカのデータレプリケーション進捗状況の更新メカニズムを改善しました。TiFlashレプリカが作成された後、TiKVの対応するテーブルに新しいデータがインポートされると、 [`INFORMATION_SCHEMA.TIFLASH_REPLICA`](/information-schema/information-schema-tiflash-replica.md)テーブルの`PROGRESS`値が更新され、新しいデータに対するTiKVからTiFlashへの実際のレプリケーション進捗状況が表示されます。この改善により、 TiFlashデータレプリケーションの実際の進捗状況を簡単に確認できます。
 
@@ -238,11 +238,11 @@ TiDBバージョン: 6.4.0-DMR
 
     上流から TiDB へシャーディングされたスキーマとテーブルをマージする際、ターゲットテーブルに複数のフィールド (拡張列) を手動で追加し、DM タスクの設定時にその値を指定できます。たとえば、拡張列に上流のシャーディングされたスキーマとテーブルの名前を指定すると、DM によって下流に書き込まれるデータにはスキーマ名とテーブル名が含まれます。下流のデータが通常と異なる場合、この機能を使用して、スキーマ名やテーブル名など、ターゲットテーブル内のデータソース情報をすばやく特定できます。
 
-    詳細については、 [テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)
+    詳細については、 [テーブル、スキーマ、ソース情報を抽出し、マージされたテーブルに書き込みます](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)を参照してください。
 
 - DMは、必須チェック項目の一部をオプションに変更することで、事前チェックメカニズムを最適化します [#7333](https://github.com/pingcap/tiflow/issues/7333) @[lichunzhu](https://github.com/lichunzhu)
 
-    データ移行タスクをスムーズに実行するために、DMはタスク開始時に自動的に[事前チェック](/dm/dm-precheck.md)トリガーし、チェック結果を返します。DMは事前チェックに合格した後にのみ移行を開始します。
+    データ移行タスクをスムーズに実行するために、DMはタスク開始時に自動的に[事前チェック](/dm/dm-precheck.md)をトリガーし、チェック結果を返します。DMは事前チェックに合格した後にのみ移行を開始します。
 
     バージョン6.4.0では、DMは以下の3つのチェック項目を必須から任意に変更し、事前チェックの合格率を向上させました。
 
@@ -270,7 +270,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - TiCDC は`3.2.0`バージョンの Kafka へのデータのレプリケーションをサポートします。 [#7191](https://github.com/pingcap/tiflow/issues/7191) @[3AceShowHand](https://github.com/3AceShowHand)
 
-    v6.4.0 以降、TiCDC は`3.2.0`バージョン以前のデータを[データをKafkaに複製する](/replicate-data-to-kafka.md)をサポートします。
+    v6.4.0 以降、TiCDC は`3.2.0`以前のバージョンの Kafka への[データのレプリケーション](/replicate-data-to-kafka.md)をサポートします。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -290,12 +290,12 @@ TiDBバージョン: 6.4.0-DMR
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)                                           | 変更     | デフォルト値を`0`から`100`に変更します。これは、SQL 実行がデフォルトで最大 100 ミリ秒待機して、完全な列統計を同期的にロードできることを意味します。                                                                                                                                                  |
 | [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)                                 | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、完全な列統計を同期的に読み込むタイムアウトに達した後、SQL 最適化が擬似統計を使用するように戻ることを意味します。                                                                                                                                             |
 | [`last_sql_use_alloc`](/system-variables.md#last_sql_use_alloc-new-in-v640)                                                         | 新しく追加された | 前のステートメントがキャッシュされたチャンク オブジェクト (チャンク割り当て) を使用しているかどうかを示します。この変数は読み取り専用で、デフォルト値は`OFF`です。                                                                                                                                              |
-| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640)                 | 新しく追加された | パーティションテーブルを分析するときに TiDB が一度に[自動的に分析します](/statistics.md#automatic-update)できるパーティションの数を指定します (つまり、パーティションテーブルに関する統計を自動的に収集します)。デフォルト値は`1`です。                                                                                         |
+| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640)                 | 新しく追加された | パーティションテーブルを分析するときに TiDB が一度に[自動的に分析](/statistics.md#automatic-update)できるパーティションの数を指定します (つまり、パーティションテーブルに関する統計を自動的に収集します)。デフォルト値は`1`です。                                                                                         |
 | [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)                                     | 新しく追加された | TiDB が[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)で指定されたタイムスタンプを持つデータを読み取るかどうかを制御します。デフォルト値は`OFF`です。                                                                                                     |
 | [`tidb_enable_gogc_tuner`](/system-variables.md#tidb_enable_gogc_tuner-new-in-v640)                                                 | 新しく追加された | GOGC Tuner を有効にするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                                                                                          |
 | [`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)                                               | 新しく追加された | TiDB がチャンク オブジェクトのキャッシュを有効にするかどうかを制御します。デフォルト値は`ON`で、これは TiDB がキャッシュされたチャンク オブジェクトの使用を優先し、リクエストされたオブジェクトがキャッシュにない場合にのみシステムにリクエストすることを意味します。値が`OFF`の場合、TiDB はシステムから直接チャンク オブジェクトをリクエストします。                                                    |
 | [`tidb_enable_prepared_plan_cache_memory_monitor`](/system-variables.md#tidb_enable_prepared_plan_cache_memory_monitor-new-in-v640) | 新しく追加された | プリペアドプランキャッシュにキャッシュされた実行計画によって消費されたメモリをカウントするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                                                             |
-| [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)                                                             | 新しく追加された | デフォルト値は`0`です。tidb_enable_external_ts_read [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) `ON`に設定されている場合、TiDB はこの変数で指定されたタイムスタンプを持つデータを読み取ります。                                      |
+| [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)                                                             | 新しく追加された | デフォルト値は`0`です。[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640) `ON`に設定されている場合、TiDB はこの変数で指定されたタイムスタンプを持つデータを読み取ります。                                      |
 | [`tidb_gogc_tuner_threshold`](/system-variables.md#tidb_gogc_tuner_threshold-new-in-v640)                                           | 新しく追加された | GOGC のチューニングにおける最大メモリしきい値を指定します。メモリがこのしきい値を超えると、GOGC Tuner は動作を停止します。デフォルト値は`0.6`です。                                                                                                                                                |
 | [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640)               | 新しく追加された | tidb-serverのメモリ使用量がメモリアラームのしきい値を超えてアラームが発生した場合、TiDBはデフォルトでは直近5件のアラーム発生時に生成されたステータスファイルのみを保持します。この件数は、この変数で調整できます。                                                                                                                   |
 | [`tidb_opt_prefix_index_single_scan`](/system-variables.md#tidb_opt_prefix_index_single_scan-new-in-v640)                           | 新しく追加された | TiDB オプティマイザが不要なテーブル検索を回避し、クエリのパフォーマンスを向上させるために、一部のフィルタ条件をプレフィックスインデックスにプッシュダウンするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                         |
@@ -326,7 +326,7 @@ TiDBバージョン: 6.4.0-DMR
 
 ### その他 {#others}
 
-- v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2つの新しい列が追加されています。以前の TiDB バージョンのバックアップデータから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元します](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`column count mismatch`テーブルの`mysql.user`エラーを報告します。 `mysql`スキーマ内のシステムテーブルを復元しない場合、このエラーは報告されません。
+- v6.4.0 以降、 `mysql.user`テーブルには、 `User_attributes`と`Token_issuer`という 2つの新しい列が追加されています。以前の TiDB バージョンのバックアップデータから TiDB v6.4.0 に[`mysql`スキーマ内のシステムテーブルを復元する](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)と、 BR は`mysql.user`テーブルの`column count mismatch`エラーを報告します。 `mysql`スキーマ内のシステムテーブルを復元しない場合、このエラーは報告されません。
 - 名前が[Dumplingのエクスポートファイルの形式](/dumpling-overview.md#format-of-exported-files)と一致するものの、末尾が非圧縮形式（例`test-schema-create.sql.origin`および`test.table-schema.sql.origin` ）で終わるファイルについては、 TiDB Lightning の処理方法が変更されました。v6.4.0 より前は、インポート対象ファイルにこのようなファイルが含まれている場合、TiDB Lightning はこれらのファイルのインポートをスキップしていました。v6.4.0 以降では、 TiDB Lightning はこれらのファイルがサポートされていない圧縮形式を使用しているとみなすため、インポート処理は失敗します。
 - バージョン6.4.0以降、 `SYSTEM_VARIABLES_ADMIN`または`SUPER`の権限を持つチェンジフィードのみがTiCDC Syncpoint機能を使用できます。
 
@@ -396,20 +396,20 @@ TiDBバージョン: 6.4.0-DMR
     - `mysql.tables_priv`テーブルに`grantor`フィールドが欠落している問題を修正します [#38293](https://github.com/pingcap/tidb/issues/38293) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 共通テーブル式の結合結果が間違っている可能性がある問題を修正 [#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
     - 共通テーブル式の和集合の結果が間違っている可能性がある問題を修正 [#37928](https://github.com/pingcap/tidb/issues/37928) @[YangKeao](https://github.com/YangKeao)
-    - **トランザクション領域番号**監視パネルの情報が正しくない問題を修正 [#38139](https://github.com/pingcap/tidb/issues/38139) @[jackysp](https://github.com/jackysp)
+    - **transaction region num**監視パネルの情報が正しくない問題を修正 [#38139](https://github.com/pingcap/tidb/issues/38139) @[jackysp](https://github.com/jackysp)
     - システム変数[`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)内部トランザクションに影響を与える可能性がある問題を修正しました。変数のスコープを SESSION に変更しました。 [#38766](https://github.com/pingcap/tidb/issues/38766) @[ekexium](https://github.com/ekexium)
     - クエリ内の条件が誤ってプロジェクションにプッシュダウンされる問題を修正 [#35623](https://github.com/pingcap/tidb/issues/35623) @[Reminiscent](https://github.com/Reminiscent)
-    - `isNullRejected`および`OR` `AND`のチェック結果が間違っていたためにクエリ結果が間違っていた問題を修正しました [#38304](https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
+    - `AND`と`OR`に対する`isNullRejected`のチェック結果が間違っていたためにクエリ結果が間違っていた問題を修正しました [#38304](https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
     - 外部結合が削除された際に`ORDER BY`内の`GROUP_CONCAT`が考慮されず、クエリ結果が誤る問題を修正しました [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
     - 結合したテーブルの再配置により誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
 
 - TiKV
 
     - 複数の`cgroup`および`mountinfo`が存在する場合に Gitpod で TiDB が起動に失敗する問題を修正 [#13660](https://github.com/tikv/tikv/issues/13660) @[tabokie](https://github.com/tabokie)
-    - TiKV メトリクスの間違った式を修正`tikv_gc_compaction_filtered` [#13537](https://github.com/tikv/tikv/issues/13537) @[Defined2014](https://github.com/Defined2014)
+    - TiKV メトリクス`tikv_gc_compaction_filtered`の間違った式を修正 [#13537](https://github.com/tikv/tikv/issues/13537) @[Defined2014](https://github.com/Defined2014)
     - 異常な`delete_files_in_range` によって引き起こされたパフォーマンスの問題を修正します [#13534](https://github.com/tikv/tikv/issues/13534) @[tabokie](https://github.com/tabokie)
     - スナップショット取得中のリース期限切れによって引き起こされる異常なリージョン競合を修正 [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - `FLASHBACK`最初のバッチで失敗したときに発生したエラーを修正します[#13672](https://github.com/tikv/tikv/issues/13672) [#13704](https://github.com/tikv/tikv/issues/13704) [#13723](https://github.com/tikv/tikv/issues/13723) @[HuSharp](https://github.com/HuSharp)
+    - `FLASHBACK`が最初のバッチで失敗したときに発生したエラーを修正します[#13672](https://github.com/tikv/tikv/issues/13672) [#13704](https://github.com/tikv/tikv/issues/13704) [#13723](https://github.com/tikv/tikv/issues/13723) @[HuSharp](https://github.com/HuSharp)
 
 - PD
 
@@ -448,7 +448,7 @@ TiDBバージョン: 6.4.0-DMR
         - DM WebUI が間違った`allow-list`パラメータを生成する問題を修正 [#7096](https://github.com/pingcap/tiflow/issues/7096) @[zoubingwu](https://github.com/zoubingwu)
         - DM-workerが起動または停止時にデータ競合を引き起こす確率がある問題を修正します [#6401](https://github.com/pingcap/tiflow/issues/6401) @[liumengya94](https://github.com/liumengya94)
         - DM が`UPDATE`または`DELETE`文を複製する際に、対応する行データが存在しない場合、DM がイベントをサイレントに無視する問題を修正します。 [#6383](https://github.com/pingcap/tiflow/issues/6383) @[GMHDBJD](https://github.com/GMHDBJD)
-        - `secondsBehindMaster`コマンドを実行した後、 `query-status`フィールドが表示されない問題を修正しました [#7189](https://github.com/pingcap/tiflow/issues/7189) @[GMHDBJD](https://github.com/GMHDBJD)
+        - `query-status`コマンドを実行した後、 `secondsBehindMaster`フィールドが表示されない問題を修正しました [#7189](https://github.com/pingcap/tiflow/issues/7189) @[GMHDBJD](https://github.com/GMHDBJD)
         - チェックポイントの更新時に大きなトランザクションが発生する可能性がある問題を修正しました [#5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
         - フルタスクモードで、タスクが同期段階に入ってすぐに失敗した場合、DMがアップストリームのテーブルスキーマ情報を失う可能性がある問題を修正します [#7159](https://github.com/pingcap/tiflow/issues/7159) @[lance6716](https://github.com/lance6716)
         - 整合性チェックが有効になっている場合にデッドロックが発生する可能性がある問題を修正 [#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
@@ -459,7 +459,7 @@ TiDBバージョン: 6.4.0-DMR
 
         - `binary`エンコード形式の文字列型列を含むターゲットテーブルに Apache Parquet ファイルをインポートする際のインポートパフォーマンスの低下を修正 [#38351](https://github.com/pingcap/tidb/issues/38351) @[dsdashun](https://github.com/dsdashun)
 
-    - TiDBDumpling
+    - TiDB Dumpling
 
         - 多数のテーブルをエクスポートする際にDumpling がタイムアウトする可能性がある問題を修正しました [#36549](https://github.com/pingcap/tidb/issues/36549) @[lance6716](https://github.com/lance6716)
         - 整合性ロックが有効になっているが、アップストリームにターゲットテーブルがない場合に報告されるロックエラーを修正 [#38683](https://github.com/pingcap/tidb/issues/38683) @[lance6716](https://github.com/lance6716)
