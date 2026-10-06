@@ -25,8 +25,8 @@ TiDB バージョン: 5.0.1
 
 - PD
 
-    - 異性体ストアより適切に満たすようにリージョンスコア計算機を修正する [#3605](https://github.com/pingcap/pd/pull/3605)
-    - `scatter region`スケジューラ追加した後の予期しない統計を回避する [#3602](https://github.com/pingcap/pd/pull/3602)
+    - 異種ストアをより適切に満たすようにリージョンスコア計算機を変更する [#3605](https://github.com/pingcap/pd/pull/3605)
+    - `scatter region`スケジューラを追加した後の予期しない統計を回避する [#3602](https://github.com/pingcap/pd/pull/3602)
 
 - ツール
 
@@ -38,11 +38,11 @@ TiDB バージョン: 5.0.1
 
 - TiDB
 
-    - 投影結果が空の場合にプロジェクト除去の実行結果が間違っている可能性がある問題を修正[#24093](https://github.com/pingcap/tidb/pull/24093)
+    - 投影結果が空の場合に射影除去の実行結果が間違っている可能性がある問題を修正[#24093](https://github.com/pingcap/tidb/pull/24093)
     - 列に`NULL`値が含まれている場合に間違ったクエリ結果が表示される問題を修正しました[#24063](https://github.com/pingcap/tidb/pull/24063)
     - スキャンに仮想列が含まれている場合、MPP プランの生成を禁止します。 [#24058](https://github.com/pingcap/tidb/pull/24058)
     - プランキャッシュの`PointGet`と`TableDual`の誤った再利用を修正 [#24043](https://github.com/pingcap/tidb/pull/24043)
-    - オプティマイザがクラスター化インデックス[#24042](https://github.com/pingcap/tidb/pull/24042) `IndexMerge`プランを構築するときに発生するエラーを修正します
+    - オプティマイザがクラスター化インデックスの`IndexMerge`プランを構築するときに発生するエラーを修正します [#24042](https://github.com/pingcap/tidb/pull/24042)
     - BIT型エラーの型推論を修正[#24027](https://github.com/pingcap/tidb/pull/24027)
     - `PointGet`オペレーターが存在する場合に一部のオプティマイザヒントが有効にならない問題を修正[#23685](https://github.com/pingcap/tidb/pull/23685)
     - エラーによりロールバック時にDDL操作が失敗する可能性がある問題を修正 [#24080](https://github.com/pingcap/tidb/pull/24080)
@@ -64,7 +64,7 @@ TiDB バージョン: 5.0.1
 
     - ストレージエンジンが一部の範囲のデータの削除に失敗する問題を修正しました
     - 時間型を整数型にキャストしたときに誤った結果が返される問題を修正しました
-    - `receiver`秒以内に対応するタスクが見つからないバグを修正
+    - `receiver`が10秒以内に対応するタスクを見つけられないバグを修正
     - `cancelMPPQuery`に無効なイテレータが存在する可能性がある問題を修正
     - `bitwise`演算子の動作がTiDBと異なるバグを修正
     - `prefix key`を使用する際に範囲が重複することで発生するアラートの問題を修正
@@ -95,4 +95,4 @@ TiDB バージョン: 5.0.1
         - MySQL 5.7ダウンストリームがアップストリーム TiDB と同じ動作を維持するように、 `explicit_defaults_for_timestamp`セッション変数のデフォルト値を`ON`に設定します。 [#1659](https://github.com/pingcap/tiflow/pull/1659)
         - `io.EOF`の誤った処理によりレプリケーションが中断される可能性がある問題を修正[#1648](https://github.com/pingcap/tiflow/pull/1648)
         - TiCDCダッシュボードのTiKV CDCエンドポイントCPUメトリックを修正 [#1645](https://github.com/pingcap/tiflow/pull/1645)
-        - 場合によってはレプリケーションのブロックを回避するために`defaultBufferChanSize`増やす[#1632](https://github.com/pingcap/tiflow/pull/1632)
+        - 場合によってはレプリケーションのブロックを回避するために`defaultBufferChanSize`を増やす[#1632](https://github.com/pingcap/tiflow/pull/1632)

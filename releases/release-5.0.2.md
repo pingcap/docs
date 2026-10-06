@@ -15,7 +15,7 @@ TiDB バージョン: 5.0.2
 
     - TiCDC
 
-        - `cdc cli changefeed`コマンドの`--sort-dir`非推奨です。代わりに、 `cdc server`コマンドの`--sort-dir`を設定できます[#1795](https://github.com/pingcap/tiflow/pull/1795)
+        - `cdc cli changefeed`コマンドの`--sort-dir`は非推奨です。代わりに、 `cdc server`コマンドの`--sort-dir`を設定できます[#1795](https://github.com/pingcap/tiflow/pull/1795)
 
 ## 新機能 {#new-features}
 
@@ -68,16 +68,16 @@ TiDB バージョン: 5.0.2
     - `point get`のプリペアドプランキャッシュがトランザクションの`point get`文によって誤って使用される問題を修正しました[#24741](https://github.com/pingcap/tidb/issues/24741)。
     - 照合順序が`ascii_bin`または`latin1_bin`の場合に間違ったプレフィックスインデックス値を書き込む問題を修正しました[#24569](https://github.com/pingcap/tidb/issues/24569)
     - GCワーカーによって進行中のトランザクションが中断される可能性がある問題を修正[#24591](https://github.com/pingcap/tidb/issues/24591)
-    - `new-collation`が有効で`new-row-format`無効の場合、クラスター化インデックスでポイントクエリが間違って実行される可能性があるバグを修正しました[#24541](https://github.com/pingcap/tidb/issues/24541)
+    - `new-collation`が有効で`new-row-format`が無効の場合、クラスター化インデックスでポイントクエリが間違って実行される可能性があるバグを修正しました[#24541](https://github.com/pingcap/tidb/issues/24541)
     - シャッフルハッシュ結合のパーティションキーの変換をリファクタリングする[#24490](https://github.com/pingcap/tidb/pull/24490)
     - `HAVING`句を含むクエリのプランを構築するときに発生するpanic問題を修正しました[#24045](https://github.com/pingcap/tidb/issues/24045)
-    - 列プルーニングの改善により、演算子`Apply`と`Join`結果が間違ってしまう問題を修正しました[#23887](https://github.com/pingcap/tidb/issues/23887)
+    - 列プルーニングの改善により、`Apply`演算子と`Join`演算子の結果が間違ってしまう問題を修正しました[#23887](https://github.com/pingcap/tidb/issues/23887)
     - 非同期コミットからフォールバックしたプライマリロックが解決できないバグを修正[#24384](https://github.com/pingcap/tidb/issues/24384)
     - fm-sketch レコードの重複を引き起こす可能性のある統計の GC 問題を修正しました[#24357](https://github.com/pingcap/tidb/pull/24357)
     - 悲観的ロックが`ErrKeyExists`エラーを受け取ったときに不要な悲観的ロールバックを回避する[#23799](https://github.com/pingcap/tidb/issues/23799)
     - sql_modeに`ANSI_QUOTES`が含まれている場合に数値リテラルが認識されない問題を修正しました[#24429](https://github.com/pingcap/tidb/issues/24429)
-    - `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`ような文は、リストされていないパーティションからデータを読み取ることを禁止します[#24746](https://github.com/pingcap/tidb/issues/24746)
-    - SQL文に`GROUP BY`と`UNION`両方が含まれている場合に発生する可能性のある`index out of range`エラーを修正します[#24281](https://github.com/pingcap/tidb/issues/24281)
+    - `INSERT INTO table PARTITION (<partitions>) ... ON DUPLICATE KEY UPDATE`のような文は、リストされていないパーティションからデータを読み取ることを禁止します[#24746](https://github.com/pingcap/tidb/issues/24746)
+    - SQL文に`GROUP BY`と`UNION`の両方が含まれている場合に発生する可能性のある`index out of range`エラーを修正します[#24281](https://github.com/pingcap/tidb/issues/24281)
     - `CONCAT`関数が照合順序を誤って処理する問題を修正しました[#24296](https://github.com/pingcap/tidb/issues/24296)
     - `collation_server`グローバル変数が新しいセッションで有効にならない問題を修正しました[#24156](https://github.com/pingcap/tidb/pull/24156)
 
@@ -90,7 +90,7 @@ TiDB バージョン: 5.0.2
 
 - PD
 
-    - ストア数が多い場合にPDリーダーの再選出が遅くなる問題を修正[#3697](https://github.com/tikv/pd/issues/3697)
+    - ストア数が多い場合にPD Leaderの再選出が遅くなる問題を修正[#3697](https://github.com/tikv/pd/issues/3697)
     - 存在しないストアからエビクト リーダー スケジューラを削除するときに発生するpanic問題を修正しました[#3660](https://github.com/tikv/pd/issues/3660)
     - オフラインピアがマージされた後に統計が更新されない問題を修正[#3611](https://github.com/tikv/pd/issues/3611)
 
@@ -100,7 +100,7 @@ TiDB バージョン: 5.0.2
     - TiFlashが不完全なデータで再起動に失敗する潜在的な問題を修正
     - 古いdmファイルが自動的に削除されない問題を修正
     - 圧縮フィルタ機能が有効になっているときに発生する可能性のあるpanicを修正しました
-    - `ExchangeSender`重複したデータを送信する潜在的な問題を修正
+    - `ExchangeSender`が重複したデータを送信する潜在的な問題を修正
     - TiFlash が非同期コミットからフォールバックしたロックを解決できない問題を修正しました
     - `TIMEZONE`型のキャスト結果に`TIMESTAMP`型が含まれている場合に誤った結果が返される問題を修正しました
     - セグメント分割中に発生するTiFlash panic問題を修正
@@ -129,4 +129,4 @@ TiDB バージョン: 5.0.2
 
         - KVデータ生成時に発生するTiDB Lightning panicの問題を修正[#1127](https://github.com/pingcap/br/pull/1127)
         - 自動コミットが無効になっていると、TiDB バックエンド モードのTiDB Lightningでデータをロードできない問題を修正しました[#1104](https://github.com/pingcap/br/issues/1104)
-        - データインポート中にキーの合計サイズがラフトエントリ制限を超えたためにバッチ分割リージョンが失敗するバグを修正[#969](https://github.com/pingcap/br/issues/969)
+        - データインポート中にキーの合計サイズがRaftエントリ制限を超えたためにバッチ分割リージョンが失敗するバグを修正[#969](https://github.com/pingcap/br/issues/969)

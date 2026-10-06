@@ -41,9 +41,9 @@ TiDB バージョン: 5.1.4
 
 - TiFlash
 
-    - `ADDDATE()`と`DATE_ADD()` TiFlashにプッシュダウンする機能をサポート
-    - `INET6_ATON()`と`INET6_NTOA()` TiFlashにプッシュダウンする機能をサポート
-    - `INET_ATON()`と`INET_NTOA()` TiFlashにプッシュダウンする機能をサポート
+    - `ADDDATE()`と`DATE_ADD()`をTiFlashにプッシュダウンする機能をサポート
+    - `INET6_ATON()`と`INET6_NTOA()`をTiFlashにプッシュダウンする機能をサポート
+    - `INET_ATON()`と`INET_NTOA()`をTiFlashにプッシュダウンする機能をサポート
     - DAG リクエスト内の式またはプラン ツリーの最大サポート深度を`100`から`200`に増やします。
 
 - ツール
@@ -65,7 +65,7 @@ TiDB バージョン: 5.1.4
     - システム変数`tidb_analyze_version`が`2`に設定されている場合に発生するメモリリークのバグを修正しました [#32499](https://github.com/pingcap/tidb/issues/32499)
     - `MaxDays`と`MaxBackups`設定がスローログに反映されない問題を修正 [#25716](https://github.com/pingcap/tidb/issues/25716)
     - `INSERT ... SELECT ... ON DUPLICATE KEY UPDATE`文を実行するとpanicが発生する問題を修正しました [#28078](https://github.com/pingcap/tidb/issues/28078)
-    - `ENUM`種類の列に対して`JOIN`を実行するときに発生する可能性のある誤った結果を修正 [#27831](https://github.com/pingcap/tidb/issues/27831)
+    - `ENUM`型の列に対して`JOIN`を実行するときに発生する可能性のある誤った結果を修正 [#27831](https://github.com/pingcap/tidb/issues/27831)
     - INDEX HASH JOINが`send on closed channel`エラーを返す問題を修正しました[#31129](https://github.com/pingcap/tidb/issues/31129)
     - [`BatchCommands`](/tidb-configuration-file.md#max-batch-size) APIを使用すると、まれにTiKVへのTiDBリクエストの送信がブロックされる可能性がある問題を修正しました[#32500](https://github.com/pingcap/tidb/issues/32500)
     - 楽観的トランザクションモードで潜在的なデータインデックスの不整合が発生する問題を修正 [#30410](https://github.com/pingcap/tidb/issues/30410)
@@ -80,15 +80,15 @@ TiDB バージョン: 5.1.4
     - 空の`dual table` を削除した後のMPPクエリの`INDEX OUT OF RANGE`エラーを修正 [#28250](https://github.com/pingcap/tidb/issues/28250)
     - MPPクエリの誤検知エラーログ`invalid cop task execution summaries length`の問題を修正 [#1791](https://github.com/pingcap/tics/issues/1791)
     - SET GLOBAL tidb_skip_isolation_level_check=1 が新しいセッション設定に影響しない問題を修正しました [#27897](https://github.com/pingcap/tidb/issues/27897)
-    - `tiup bench`長時間実行した場合に発生する`index out of range`問題を修正[#26832](https://github.com/pingcap/tidb/issues/26832)
+    - `tiup bench`を長時間実行した場合に発生する`index out of range`問題を修正[#26832](https://github.com/pingcap/tidb/issues/26832)
 
 - TiKV
 
     - GCワーカーがビジー状態のときにTiKVがデータ範囲を削除できない（ `unsafe_destroy_range`を実行できない）というバグを修正[#11903](https://github.com/tikv/tikv/issues/11903)
     - ピアを破棄するとレイテンシーが大きくなる可能性がある問題を修正[#10210](https://github.com/tikv/tikv/issues/10210)
-    - 領域が空の場合に関数`any_value`が誤った結果を返すバグを修正しました[#11735](https://github.com/tikv/tikv/issues/11735)
+    - リージョンが空の場合に関数`any_value`が誤った結果を返すバグを修正しました[#11735](https://github.com/tikv/tikv/issues/11735)
     - 初期化されていないレプリカを削除すると古いレプリカが再作成される可能性がある問題を修正[#10533](https://github.com/tikv/tikv/issues/10533)
-    - 新しい選出が終了した後に`Prepare Merge`トリガーされたが、分離されたピアに通知されない場合のメタデータ破損の問題を修正しました[#11526](https://github.com/tikv/tikv/issues/11526)
+    - 新しい選出が終了した後に`Prepare Merge`がトリガーされたが、分離されたピアに通知されない場合のメタデータ破損の問題を修正しました[#11526](https://github.com/tikv/tikv/issues/11526)
     - コルーチンの実行速度が速すぎる場合に時々発生するデッドロックの問題を修正しました[#11549](https://github.com/tikv/tikv/issues/11549)
     - フレームグラフのプロファイリング時に発生する可能性のあるデッドロックとメモリリークの問題を修正[#11108](https://github.com/tikv/tikv/issues/11108)
     - 悲観的トランザクションで事前書き込みリクエストを再試行するときにまれに発生するデータの不整合の問題を修正[#11187](https://github.com/tikv/tikv/issues/11187)
@@ -121,15 +121,15 @@ TiDB バージョン: 5.1.4
     - `str_to_date()`関数がマイクロ秒を解析する際に先頭のゼロを誤って処理する問題を修正しました
     - メモリ制限が有効になっているときにTiFlash がクラッシュする問題を修正しました
     - 入力時間が1970-01-01 00:00:01 UTCより前の場合、 `unix_timestamp`の動作がTiDBまたはMySQLの動作と一致しない問題を修正しました。
-    - 主キーがハンドルされているときに主キー列を拡張することによって発生する可能性のあるデータの不整合を修正しました。
+    - 主キーがハンドルである場合に主キー列の幅を広げることによって発生する可能性のあるデータの不整合を修正しました。
     - オーバーフローバグと、 `DECIMAL`データ型でデータを比較するときに`Can't compare`エラーを報告する問題を修正しました。
     - `3rd arguments of function substringUTF8 must be constants.`の予期しないエラーを修正
     - `nsl`ライブラリのないプラットフォームでTiFlashが起動しない問題を修正しました
     - データを`DECIMAL`データ型にキャストする際のオーバーフローバグを修正
-    - `castStringAsReal` TiFlashとTiDB/TiKVの動作が一致しない問題を修正
+    - TiFlashとTiDB/TiKVで`castStringAsReal`の動作が一致しない問題を修正
     - TiFlash が再起動後に`EstablishMPPConnection`エラーを返す可能性がある問題を修正しました
-    - TiFlashレプリカの数を0に設定した後に古いデータを再利用できない問題を修正しました
-    - `CastStringAsDecimal` TiFlashとTiDB/TiKVの動作が一致しない問題を修正
+    - TiFlashレプリカの数を0に設定した後に古いデータを回収できない問題を修正しました
+    - TiFlashとTiDB/TiKVで`CastStringAsDecimal`の動作が一致しない問題を修正
     - `where <string>`句を含むクエリが間違った結果を返す問題を修正しました
     - MPPクエリが停止したときにTiFlashがpanicになる可能性がある問題を修正しました
     - `Unexpected type of column: Nullable(Nothing)`の予期しないエラーを修正
@@ -140,7 +140,7 @@ TiDB バージョン: 5.1.4
 
         - `batch-replace-enable`が無効になっている場合、MySQLシンクが重複した`replace` SQL文を生成するバグを修正[#4501](https://github.com/pingcap/tiflow/issues/4501)
         - `cached region`監視メトリックがマイナスになる問題を修正 [#4300](https://github.com/pingcap/tiflow/issues/4300)
-        - `min.insync.replicas` `replication-factor`より小さい場合にレプリケーションを実行できない問題を修正しました[#3994](https://github.com/pingcap/tiflow/issues/3994)
+        - `min.insync.replicas`が`replication-factor`より小さい場合にレプリケーションを実行できない問題を修正しました[#3994](https://github.com/pingcap/tiflow/issues/3994)
         - レプリケーションタスクが削除されたときに発生する可能性のあるpanic問題を修正しました[#3128](https://github.com/pingcap/tiflow/issues/3128)
         - 不正確なチェックポイントによって発生する潜在的なデータ損失の問題を修正しました [#3545](https://github.com/pingcap/tiflow/issues/3545)
         - デッドロックによりレプリケーションタスクが停止する可能性がある問題を修正しました[#4055](https://github.com/pingcap/tiflow/issues/4055)
@@ -171,7 +171,7 @@ TiDB バージョン: 5.1.4
 
     - TiDB Binlog
 
-        - CSVファイルのサイズが約256MBで`strict-format`が`true` 場合、DBaaSのCSVインポートがInvalidRangeで失敗する問題を修正しました。 [#27763](https://github.com/pingcap/tidb/issues/27763)
+        - CSVファイルのサイズが約256MBで`strict-format`が`true`の場合、DBaaSのCSVインポートがInvalidRangeで失敗する問題を修正しました。 [#27763](https://github.com/pingcap/tidb/issues/27763)
 
     - TiDB Lightning
 

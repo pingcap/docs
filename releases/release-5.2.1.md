@@ -13,7 +13,7 @@ TiDB バージョン: 5.2.1
 
 - TiDB
 
-    - 実行中に発生するエラーを修正しました。これは、パーティションテーブルで集計オペレーターをプッシュダウンする際に、スキーマ列の浅いコピーが行われることが原因で発生します[#27797](https://github.com/pingcap/tidb/issues/27797) [#26554](https://github.com/pingcap/tidb/issues/26554)
+    - 誤った実行計画が原因で実行中に発生するエラーを修正しました。この誤った実行計画は、パーティションテーブルで集計オペレーターをプッシュダウンする際に、スキーマ列の浅いコピーが行われることが原因で発生します[#27797](https://github.com/pingcap/tidb/issues/27797) [#26554](https://github.com/pingcap/tidb/issues/26554)
 
 - TiKV
 

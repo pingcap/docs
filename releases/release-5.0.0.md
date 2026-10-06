@@ -18,10 +18,10 @@ TiDB バージョン: 5.0.0
 - 非同期コミット機能を有効にすると、書き込みレイテンシーを削減できます。例えば、64スレッドのSysbenchテストでは、非同期コミットを有効にした場合、インデックス更新の平均レイテンシーは12.04msから7.01msへと41.7%削減されます。
 - ジッターを低減します。これは、オプティマイザの安定性を向上させ、システムタスクによるI/O、ネットワーク、CPU、メモリリソースの使用を制限することによって実現されます。例えば、8時間のパフォーマンステストでは、TPC-C tpmCの標準偏差は2%を超えません。
 - スケジューリングを改善し、実行計画を可能な限り安定させることで、システムの安定性を向上させる。
-- リージョンメンバーシップの変更時にもシステムの可用性を保証するRaft共同合意アルゴリズムを導入します。
+- リージョンメンバーシップの変更時にもシステムの可用性を保証するRaft Joint Consensus アルゴリズムを導入します。
 - `EXPLAIN`機能と不可視インデックスを最適化することで、データベース管理者 (DBA) が SQL文をより効率的にデバッグできるようになります。
 - 企業データの信頼性を保証します。TiDBからAmazon S3ストレージやGoogle Cloud GCSにデータをバックアップしたり、これらのクラウドストレージプラットフォームからデータを復元したりできます。
-- Amazon S3ストレージまたはTiDB/MySQLへのデータインポートおよびデータエクスポートのパフォーマンスが向上し、企業がクラウド上でアプリケーションを迅速に構築できるようになります。例えば、TPC-Cテストでは、1 TiBのデータをインポートする際のパフォーマンスが40%向上し、254 GiB/hから366 GiB/hになりました。
+- Amazon S3ストレージまたはTiDB/MySQLからのデータインポートおよびそれらへのデータエクスポートのパフォーマンスが向上し、企業がクラウド上でアプリケーションを迅速に構築できるようになります。例えば、TPC-Cテストでは、1 TiBのデータをインポートする際のパフォーマンスが40%向上し、254 GiB/hから366 GiB/hになりました。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -41,7 +41,7 @@ TiDB バージョン: 5.0.0
 
 - 一時テーブルの構文互換性は、システム変数[`tidb_enable_noop_functions`](/system-variables.md#tidb_enable_noop_functions-new-in-v40)を使用して制御します。この変数の値が`OFF`の場合、 `CREATE TEMPORARY TABLE`構文はエラーを返します。
 
-- ガベージコレクション関連のパラメータを直接制御するには、以下のシステム変数を追加してください。
+- ガベージコレクション関連のパラメータを直接制御するには、以下のシステム変数を追加します。
     - [`tidb_gc_concurrency`](/system-variables.md#tidb_gc_concurrency-new-in-v50)
     - [`tidb_gc_enable`](/system-variables.md#tidb_gc_enable-new-in-v50)
     - [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)
@@ -58,6 +58,7 @@ TiDB バージョン: 5.0.0
     - `OFF` : クラスター化インデックスは無効になっています。非クラスター化インデックスの追加または削除はサポートされています。
 
     - `INT_ONLY` : デフォルト値。動作はv5.0以前と同じです。 `alter-primary-key = false`と併せて、INT型のクラスター化インデックスを有効にするかどうかを制御できます。
+
     > **Note:**
     >
     > 5.0 GA の`tidb_enable_clustered_index`の`INT_ONLY`値は、5.0 RC の`OFF`値と同じ意味です。 `OFF`設定の 5.0 RC クラスターから 5.0 GA にアップグレードすると、 `INT_ONLY`と表示されます。
@@ -65,12 +66,12 @@ TiDB バージョン: 5.0.0
 ### 設定ファイルパラメータ {#configuration-file-parameters}
 
 - TiDB の[`index-limit`](/tidb-configuration-file.md#index-limit-new-in-v50)設定項目を追加します。デフォルト値は`64`で、範囲は`[64,512]`です。MySQL テーブルは最大 64 個のインデックスをサポートします。この値がデフォルト設定を超え、テーブルに 64 個を超えるインデックスが作成された場合、テーブルスキーマが MySQL に再インポートされるとエラーが報告されます。
-- TiDB が MySQL の ENUM/SET の長さ (ENUM の長さ &lt; 255) と互換性があり、一貫性を保つように、 [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50)設定項目を追加します。デフォルト値は`true`です。
-- `pessimistic-txn.enable`設定項目を[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)環境変数に置き換えてください。
+- TiDB が MySQL の ENUM/SET の長さ (ENUM の長さ < 255) と互換性があり、一貫性を保つように、 [`enable-enum-length-limit`](/tidb-configuration-file.md#enable-enum-length-limit-new-in-v50)設定項目を追加します。デフォルト値は`true`です。
+- `pessimistic-txn.enable`設定項目を[`tidb_txn_mode`](/system-variables.md#tidb_txn_mode)環境変数に置き換えます。
 - `performance.max-memory`設定項目を[`performance.server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)に置き換えます。
 - `tikv-client.copr-cache.enable`設定項目を[`tikv-client.copr-cache.capacity-mb`](/tidb-configuration-file.md#capacity-mb)に置き換えます。項目の値が`0.0`の場合、この機能は無効になります。項目の値が`0.0`より大きい場合、この機能は有効になります。デフォルト値は`1000.0`です。
 - `rocksdb.auto-tuned`設定項目を[`rocksdb.rate-limiter-auto-tuned`](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)に置き換えます。
-- `raftstore.sync-log`設定項目を削除します。デフォルトでは、書き込まれたデータは強制的にディスクに書き込まれます。v5.0 より前は、 `raftstore.sync-log`明示的に無効にできます。v5.0 以降では、設定値は`true`に強制的に設定されます。
+- `raftstore.sync-log`設定項目を削除します。デフォルトでは、書き込まれたデータは強制的にディスクに書き込まれます。v5.0 より前は、 `raftstore.sync-log`を明示的に無効にできます。v5.0 以降では、設定値は`true`に強制的に設定されます。
 - `gc.enable-compaction-filter`設定項目のデフォルト値を`false`から`true`に変更します。
 - `enable-cross-table-merge`設定項目のデフォルト値を`false`から`true`に変更します。
 - [`rate-limiter-auto-tuned`](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)設定項目のデフォルト値を`false`から`true`に変更します。
@@ -92,7 +93,7 @@ TiDB バージョン: 5.0.0
 
 この機能を有効にすると、 `PARTITION BY LIST(expr) PARTITION part_name VALUES IN (...)`式に従ってパーティションとパーティション間のデータの分散方法が定義されます。パーティション化されたテーブルのデータセットは、最大 1024 個の異なる整数値をサポートします。これらの値は`PARTITION ... VALUES IN (...)`句を使用して定義できます。
 
-リストパーティショニングを有効にするには、セッション変数[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) `ON`に設定します。
+リストパーティショニングを有効にするには、セッション変数[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)を`ON`に設定します。
 
 #### リストCOLUMNSパーティショニング（**Experimental**） {#list-columns-partitioning-experimental}
 
@@ -100,7 +101,7 @@ TiDB バージョン: 5.0.0
 
 リストCOLUMNSパーティショニングは、リストパーティショニングの一種です。複数の列をパーティションキーとして使用できます。整数データ型の他に、文字列、 `DATE` 、および`DATETIME`データ型の列もパーティション列として使用できます。
 
-リストCOLUMNSパーティショニングを有効にするには、セッション変数[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) `ON`に設定します。
+リストCOLUMNSパーティショニングを有効にするには、セッション変数[`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50)を`ON`に設定します。
 
 #### 不可視インデックス {#invisible-indexes}
 
@@ -122,7 +123,7 @@ TiDB バージョン: 5.0.0
 
 [#18005](https://github.com/pingcap/tidb/issues/18005)
 
-悲観的トランザクションモードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`変更が含まれている場合、トランザクションのコミットが成功するように、またトランザクションが DDL 操作または`SCHEMA VERSION`変更によって中断されたときにクライアントが`Information schema is changed`エラーを受け取るのを避けるために、システムはトランザクションの`SCHEMA VERSION`最新の状態に自動的に更新します。
+悲観的トランザクションモードでは、トランザクションに関係するテーブルに同時 DDL 操作または`SCHEMA VERSION`変更が含まれている場合、トランザクションのコミットが成功するように、またトランザクションが DDL 操作または`SCHEMA VERSION`変更によって中断されたときにクライアントが`Information schema is changed`エラーを受け取るのを避けるために、システムはトランザクションの`SCHEMA VERSION`を最新の状態に自動的に更新します。
 
 この機能はデフォルトでは無効になっています。機能を有効にするには、システム変数`tidb_enable_amend_pessimistic_txn`の値を変更してください。この機能はバージョン 4.0.7 で導入され、バージョン 5.0 で以下の問題が修正されています。
 
@@ -171,13 +172,13 @@ TPC-H 100ベンチマークテストにおいて、 TiFlash MPPは従来の分�
 現在、MPP モードがサポートしていない主な機能は次のとおりです (詳細については、 [TiFlashを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください)。
 
 - テーブルパーティショニング
-- ウィンドウ機能
+- ウィンドウ関数
 - 照合順序
 - 組み込み関数
 - TiKVからデータを読み取る
-- OOM流出
+- OOMスピル
 - 連合
-- フルアウタージョイント
+- Full Outer Join
 
 ### クラスター化インデックス {#clustered-index}
 
@@ -248,7 +249,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 非同期コミット機能を有効にした後、同じハードウェアと構成で、Sysbenchを64スレッドで更新インデックスをテストするように設定すると、平均レイテンシーが12.04msから7.01msに41.7%減少します。
 
-非同期コミット機能が有効になっている場合、ネットワークインタラクションのレイテンシーを1回減らし、データ書き込みのパフォーマンスを向上させるために、データベースアプリケーション開発者は、トランザクションの一貫性を線形一貫性から[因果関係の一貫性](/transaction-overview.md#causal-consistency)の に下げることを検討することをお勧めします。因果一貫性を有効にするSQL文は`START TRANSACTION WITH CAUSAL CONSISTENCY`です。
+非同期コミット機能が有効になっている場合、ネットワークインタラクションのレイテンシーを1回減らし、データ書き込みのパフォーマンスを向上させるために、データベースアプリケーション開発者は、トランザクションの一貫性を線形一貫性から[因果関係の一貫性](/transaction-overview.md#causal-consistency)に下げることを検討することをお勧めします。因果一貫性を有効にするSQL文は`START TRANSACTION WITH CAUSAL CONSISTENCY`です。
 
 因果的一貫性を有効にした後、同じハードウェアと構成で、Sysbenchをoltp_write_onlyを64スレッドでテストするように設定すると、平均レイテンシーが11.86msから11.19msに5.6%減少しました。
 
@@ -268,9 +269,9 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 5.0 GAでは、コプロセッサーキャッシュ機能がデフォルトで有効になっています。この機能が有効になると、データ読み取りのレイテンシーを削減するために、TiDBはtikv-serverにプッシュダウンされた演算子の計算結果をtidb-serverにキャッシュします。
 
-コプロセッサーキャッシュ機能を無効にするには、 `capacity-mb`の設定項目`tikv-client.copr-cache`を`0.0`に変更します。
+コプロセッサーキャッシュ機能を無効にするには、 `tikv-client.copr-cache`の設定項目`capacity-mb`を`0.0`に変更します。
 
-### `delete from table where id &lt;? Limit ?`ステートメントの実行パフォーマンスを改善します。 {#improve-the-execution-performance-of-delete-from-table-where-id-x3c-limit-statement}
+### `delete from table where id <? Limit ?`ステートメントの実行パフォーマンスを改善します。 {#improve-the-execution-performance-of-delete-from-table-where-id-x3c-limit-statement}
 
 [#18028](https://github.com/pingcap/tidb/issues/18028)
 
@@ -286,7 +287,7 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 [#18005](https://github.com/pingcap/tidb/issues/18005)
 
-TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを消費します。TiDBがスケジュールされたタスクを制御しない場合、リソースの優先実行により、QPS（1秒あたりの処理数）や遅延が発生し、パフォーマンスの変動が生じる可能性があります。
+TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを消費します。TiDBがスケジュールされたタスクを制御しない場合、リソースのプリエンプションにより、QPS（1秒あたりの処理数）と遅延にパフォーマンスの変動が生じる可能性があります。
 
 以下の最適化後、8時間の性能試験において、TPC-C tpmCの標準偏差は2%を超えません。
 
@@ -361,7 +362,7 @@ Unified Sorterは、以前のバージョンの`memory` / `file`ソートエン�
 
 制限事項：
 
-- 追加データ量に応じて、十分なディスク容量を確保する必要があります。128GB以上の空き容量を持つSSDの使用をお勧めします。
+- 増分データ量に応じて、十分なディスク容量を確保する必要があります。128GB以上の空き容量を持つSSDの使用をお勧めします。
 
 ## 高可用性とディザスタリカバリ {#high-availability-and-disaster-recovery}
 
@@ -371,13 +372,13 @@ Unified Sorterは、以前のバージョンの`memory` / `file`ソートエン�
 
 リージョンメンバーシップの変更処理では、「メンバーの追加」と「メンバーの削除」という2つの操作が2つのステップで実行されます。メンバーシップ変更処理の完了時にエラーが発生した場合、リージョンは利用できなくなり、フォアグラウンドアプリケーションのエラーが返されます。
 
-導入されたRaft共同合意アルゴリズムは、リージョンメンバーシップ変更時のシステム可用性を向上させることができます。メンバーシップ変更時の「メンバーの追加」と「メンバーの削除」操作は1つの操作に統合され、すべてのメンバーに送信されます。変更処理中、リージョンは中間状態になります。変更されたメンバーのいずれかが故障した場合でも、システムは引き続き利用可能です。
+導入されたRaft Joint Consensus アルゴリズムは、リージョンメンバーシップ変更時のシステム可用性を向上させることができます。メンバーシップ変更時の「メンバーの追加」と「メンバーの削除」操作は1つの操作に統合され、すべてのメンバーに送信されます。変更処理中、リージョンは中間状態になります。変更されたメンバーのいずれかが故障した場合でも、システムは引き続き利用可能です。
 
 この機能はデフォルトで有効になっています。 `pd-ctl config set enable-joint-consensus`コマンドを実行して`enable-joint-consensus`の値を`false`に設定することで無効にできます。
 
 ### メモリ管理モジュールを最適化して、システムOOMリスクを低減する {#optimize-the-memory-management-module-to-reduce-system-oom-risks}
 
-集計関数のメモリ使用量を追跡します。この機能はデフォルトで有効になっています。集計関数を含む SQL文が実行されると、現在のクエリの合計メモリ使用量`mem-quota-query`で設定されたしきい値を超えた場合、システムは`oom-action`で定義された操作を自動的に実行します。
+集計関数のメモリ使用量を追跡します。この機能はデフォルトで有効になっています。集計関数を含む SQL文が実行されると、現在のクエリの合計メモリ使用量が`mem-quota-query`で設定されたしきい値を超えた場合、システムは`oom-action`で定義された操作を自動的に実行します。
 
 ### ネットワーク分断時のシステム可用性を向上させる {#improve-the-system-availability-during-network-partition}
 
@@ -430,8 +431,8 @@ TiDB v5.0では、パフォーマンスの問題をより効率的にトラブ�
 - TiUP クラスタは、より包括的なワンクリック環境チェックを実行し、修復に関する推奨事項を提供する`check topo.yaml`コマンドをサポートしています。
 - TiUP クラスタは、環境チェック中に検出された環境問題を自動的に修復する`check topo.yaml --apply`コマンドをサポートしています。
 - TiUP クラスタ は、DBA が編集するためのクラスタトポロジテンプレート ファイルを取得し、グローバルノード パラメータの変更をサポートする`template`コマンドをサポートしています。
-- TiUPは`remote_config`コマンドを使用して`edit-config`パラメータを編集し、リモートPrometheusを設定することをサポートしています。
-- TiUPは`external_alertmanagers`コマンドを使用して異なるAlertManagerを設定するために、 `edit-config`パラメーターの編集をサポートしています。
+- TiUPは`edit-config`コマンドを使用して`remote_config`パラメータを編集し、リモートPrometheusを設定することをサポートしています。
+- TiUPは、 `edit-config`コマンドを使用して`external_alertmanagers`パラメーターを編集し、異なるAlertManagerを設定することをサポートしています。
 - tiup-clusterの`edit-config`サブコマンドを使用してトポロジファイルを編集する場合、設定項目の値のデータ型を変更できます。
 
 ### アップグレードの安定性を向上させる {#improve-upgrade-stability}
@@ -464,7 +465,7 @@ TiUP v1.4.0 では、 tiup-cluster `replay`サブコマンドを使用して、�
 TiUP v1.4.0では、TiDBクラスタの運用と保守に関する機能がさらに強化されています。
 
 - TiDBおよびDMクラスタのダウンタイム中のアップグレードまたはパッチ適用操作をサポートし、より多くの利用シナリオに対応できるようにします。
-- tiup-clusterの`--version`サブコマンドに`display`パラメータを追加して、クラスタバージョンを取得します。
+- tiup-clusterの`display`サブコマンドに`--version`パラメータを追加して、クラスタバージョンを取得します。
 - スケールアウト対象のノードにPrometheusのみが含まれている場合、Prometheusノードの不在によるスケールアウトの失敗を回避するため、監視設定の更新操作は実行されません。
 - TiUPコマンドの入力結果が正しくない場合に、エラーメッセージにユーザー入力を追加することで、問題の原因をより迅速に特定できるようにします。
 
