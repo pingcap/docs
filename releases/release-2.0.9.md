@@ -20,7 +20,7 @@ summary: TiDB 2.0.9は2018年11月19日にリリースされ、システムの�
 - `Session`変数を追加して、 `_tidb_rowid` に書き込むことができるかどうかを制御します。 [#8126](https://github.com/pingcap/tidb/pull/8126)
 - `PhysicalProjection`で場合によってはpanic問題を修正[#8154](https://github.com/pingcap/tidb/pull/8154)
 - いくつかのケースで`Union`文の不安定な結果を修正[#8168](https://github.com/pingcap/tidb/pull/8168)
-- `Insert`以外の文で`NULL`が`values`を返さない問題を修正 [#8179](https://github.com/pingcap/tidb/pull/8179)
+- `Insert`以外の文で`values`が`NULL`を返さない問題を修正 [#8179](https://github.com/pingcap/tidb/pull/8179)
 - 統計モジュールが古いデータをクリアできないことがある問題を修正[#8184](https://github.com/pingcap/tidb/pull/8184)
 - トランザクションの最大許容実行時間を構成可能なオプションにする[#8209](https://github.com/pingcap/tidb/pull/8209)
 - `expression rewriter`のいくつかのケースでの誤った比較アルゴリズムを修正[#8288](https://github.com/pingcap/tidb/pull/8288)
@@ -35,7 +35,7 @@ summary: TiDB 2.0.9は2018年11月19日にリリースされ、システムの�
 ## PD {#pd}
 
 - etcdの起動失敗によりPDサーバーが停止する問題を修正[#1267](https://github.com/pingcap/pd/pull/1267)
-- リージョンキーの読み取りに関連する問題を修正`pd-ctl` [#1298](https://github.com/pingcap/pd/pull/1298) [#1299](https://github.com/pingcap/pd/pull/1299) [#1308](https://github.com/pingcap/pd/pull/1308)
+- `pd-ctl`によるリージョンキーの読み取りに関連する問題を修正 [#1298](https://github.com/pingcap/pd/pull/1298) [#1299](https://github.com/pingcap/pd/pull/1299) [#1308](https://github.com/pingcap/pd/pull/1308)
 - `regions/check` APIが間違った結果を返す問題を修正[#1311](https://github.com/pingcap/pd/pull/1311)
 - PD参加失敗後にPDが参加を再開できない問題を修正[#1279](https://github.com/pingcap/pd/pull/1279)
 

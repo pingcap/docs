@@ -27,10 +27,10 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
 - 互換性
     - `information_schema.schemata` で`charset/collation`の結果が正しくない問題を修正 [#7751](https://github.com/pingcap/tidb/pull/7751)
     - `hostname`システム変数の値が空になる問題を修正[#7750](https://github.com/pingcap/tidb/pull/7750)
-- 表現
+- 式
     - `AES_ENCRYPT` `AES_DECRYPT`関数の`init_vecter`引数をサポート [#7425](https://github.com/pingcap/tidb/pull/7425)
     - `Format`の結果が一部の式で正しくない問題を修正[#7770](https://github.com/pingcap/tidb/pull/7770)
-    - `JSON_LENGTH`組み込み関数サポート [#7739](https://github.com/pingcap/tidb/pull/7739)
+    - `JSON_LENGTH`組み込み関数をサポート [#7739](https://github.com/pingcap/tidb/pull/7739)
     - 符号なし整数型を小数型にキャストする際の誤った結果の問題を修正 [#7792](https://github.com/pingcap/tidb/pull/7792)
 - DML
     - 一意キーを更新する際に`INSERT … ON DUPLICATE KEY UPDATE`文の結果が正しくない問題を修正 [#7675](https://github.com/pingcap/tidb/pull/7675)
@@ -54,10 +54,10 @@ summary: TiDB 2.1 RC3は2018年9月29日にリリースされ、安定性、互�
     - コプロセッサリクエストの同時実行を最適化する[#3515](https://github.com/tikv/tikv/pull/3515)
 - 新機能
     - ログ関数のサポートを追加[#3603](https://github.com/tikv/tikv/pull/3603)
-    - `sha1`関数サポートを追加 [#3612](https://github.com/tikv/tikv/pull/3612)
-    - `truncate_int`関数サポートを追加 [#3532](https://github.com/tikv/tikv/pull/3532)
-    - `year`関数サポートを追加 [#3622](https://github.com/tikv/tikv/pull/3622)
-    - `truncate_real`関数サポートを追加 [#3633](https://github.com/tikv/tikv/pull/3633)
+    - `sha1`関数のサポートを追加 [#3612](https://github.com/tikv/tikv/pull/3612)
+    - `truncate_int`関数のサポートを追加 [#3532](https://github.com/tikv/tikv/pull/3532)
+    - `year`関数のサポートを追加 [#3622](https://github.com/tikv/tikv/pull/3622)
+    - `truncate_real`関数のサポートを追加 [#3633](https://github.com/tikv/tikv/pull/3633)
 - バグ修正
-    - 時間関数に関連するレポートエラーの動作修正しました [#3487](https://github.com/tikv/tikv/pull/3487) [#3615](https://github.com/tikv/tikv/pull/3615)
+    - 時間関数に関連するエラー報告の動作を修正しました [#3487](https://github.com/tikv/tikv/pull/3487) [#3615](https://github.com/tikv/tikv/pull/3615)
     - 文字列から解析した時間が TiDB 時間と一致しない問題を修正しました [#3589](https://github.com/tikv/tikv/pull/3589)

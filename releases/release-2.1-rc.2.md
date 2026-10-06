@@ -59,7 +59,7 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - 戻り値のエイリアスの互換性の問題を修正 [#7600](https://github.com/pingcap/tidb/pull/7600)
     - `information_schema.COLUMNS`表の float 型の`NUMERIC_SCALE`の値が正しくない問題を修正しました [#7602](https://github.com/pingcap/tidb/pull/7602)
     - 1行コメントが空の場合にパーサーがエラーを報告する問題を修正しました[#7612](https://github.com/pingcap/tidb/pull/7612)
-- 表現
+- 式
     - `insert`関数の`max_allowed_packet`の値を確認する [#7528](https://github.com/pingcap/tidb/pull/7528)
     - 組み込み関数`json_contains` をサポート [#7443](https://github.com/pingcap/tidb/pull/7443)
     - 組み込み関数`json_contains_path` をサポート [#7596](https://github.com/pingcap/tidb/pull/7596)
@@ -68,17 +68,17 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
     - 文字列の時刻型データの解析に関する互換性の問題を修正しました [#7654](https://github.com/pingcap/tidb/pull/7654)
     - `DateTime`データのデフォルト値を計算するときにタイムゾーンが考慮されない問題を修正しました [#7655](https://github.com/pingcap/tidb/pull/7655)
 - DML
-    - `InsertOnDuplicateUpdate`文の`last_insert_id`正しく設定する [#7534](https://github.com/pingcap/tidb/pull/7534)
-    - `auto_increment_id`カウンタ更新するケースを減らす [#7515](https://github.com/pingcap/tidb/pull/7515)
+    - `InsertOnDuplicateUpdate`文の`last_insert_id`を正しく設定する [#7534](https://github.com/pingcap/tidb/pull/7534)
+    - `auto_increment_id`カウンタを更新するケースを減らす [#7515](https://github.com/pingcap/tidb/pull/7515)
     - `Duplicate Key` のエラーメッセージを最適化 [#7495](https://github.com/pingcap/tidb/pull/7495)
     - `insert...select...on duplicate key update`問題を修正[#7406](https://github.com/pingcap/tidb/pull/7406)
-    - `LOAD DATA IGNORE LINES`文サポートする [#7576](https://github.com/pingcap/tidb/pull/7576)
+    - `LOAD DATA IGNORE LINES`文をサポートする [#7576](https://github.com/pingcap/tidb/pull/7576)
 - DDL
     - モニターにDDLジョブタイプと現在のスキーマバージョン情報を追加します。 [#7472](https://github.com/pingcap/tidb/pull/7472)
     - `Admin Restore Table`機能の設計を完了する [#7383](https://github.com/pingcap/tidb/pull/7383)
     - `Bit`型のデフォルト値が128を超える問題を修正[#7249](https://github.com/pingcap/tidb/pull/7249)
     - `Bit`型のデフォルト値が`NULL` にできない問題を修正 [#7604](https://github.com/pingcap/tidb/pull/7604)
-    - DDLキューのチェック間隔`CREATE TABLE/DATABASE`を減らす [#7608](https://github.com/pingcap/tidb/pull/7608)
+    - DDLキュー内の`CREATE TABLE/DATABASE`をチェックする間隔を短縮する [#7608](https://github.com/pingcap/tidb/pull/7608)
     - `ddl/owner/resign` HTTPインターフェースを使用してDDL所有者を解放し、新しい所有者選出を開始します。 [#7649](https://github.com/pingcap/tidb/pull/7649)
 - TiKV Goクライアント
     - `Seek`操作で`Key` しか取得できないという問題をサポートします [#7419](https://github.com/pingcap/tidb/pull/7419)
@@ -88,8 +88,8 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
 
 ## PD {#pd}
 
-- 特徴
-    - `GetAllStores`インターフェースサポート [#1228](https://github.com/pingcap/pd/pull/1228)
+- 新機能
+    - `GetAllStores`インターフェースをサポート [#1228](https://github.com/pingcap/pd/pull/1228)
     - シミュレータにスケジュール見積もりの統計を追加する [#1218](https://github.com/pingcap/pd/pull/1218)
 - 改善点
     - ダウンストアの処理プロセスを最適化して、できるだけ早くレプリカを作成します[#1222](https://github.com/pingcap/pd/pull/1222)
@@ -106,11 +106,11 @@ summary: TiDB 2.1 RC2は2018年9月14日にリリースされ、安定性、SQL�
 
 - パフォーマンス
     - I/Oコストを削減するために統計推定に基づいてリージョンを分割する機能をサポート[#3511](https://github.com/tikv/tikv/pull/3511)
-    - トランザクションスケジューラクローンを削減 [#3530](https://github.com/tikv/tikv/pull/3530)
+    - トランザクションスケジューラ内のクローンを削減 [#3530](https://github.com/tikv/tikv/pull/3530)
 - 改善点
     - 多数の組み込み関数にプッシュダウンのサポートを追加
     - 特定のシナリオにおけるリーダースケジューリングの失敗の問題を修正するために`leader-transfer-max-log-lag`構成を追加します[#3507](https://github.com/tikv/tikv/pull/3507)
-    - `max-open-engines`構成を追加して、同時に`tikv-importer`のエンジンが開く数を制限します[#3496](https://github.com/tikv/tikv/pull/3496)
+    - `max-open-engines`構成を追加して、`tikv-importer`が同時に開くエンジンの数を制限します[#3496](https://github.com/tikv/tikv/pull/3496)
     - ゴミデータのクリーンアップ速度を制限して、 `snapshot apply` への影響を軽減します。 [#3547](https://github.com/tikv/tikv/pull/3547)
     - 重要なRaftメッセージのコミットメッセージをブロードキャストして、不要な遅延を回避する[#3592](https://github.com/tikv/tikv/pull/3592)
 - バグ修正

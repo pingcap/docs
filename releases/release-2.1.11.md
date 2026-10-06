@@ -14,12 +14,12 @@ TiDB Ansible バージョン: 2.1.11
 ## TiDB {#tidb}
 
 - `delete from join` に誤ったスキーマが使用される問題を修正 [#10595](https://github.com/pingcap/tidb/pull/10595)
-- 組み込み`CONVERT()`不正なフィールドタイプを返す可能性がある問題を修正 [#10263](https://github.com/pingcap/tidb/pull/10263)
+- 組み込み関数`CONVERT()`が不正なフィールドタイプを返す可能性がある問題を修正 [#10263](https://github.com/pingcap/tidb/pull/10263)
 - バケット数を更新するときに重複していないフィードバックをマージする [#10569](https://github.com/pingcap/tidb/pull/10569)
 - `unix_timestamp()-unix_timestamp(now())` の計算エラーを修正 [#10491](https://github.com/pingcap/tidb/pull/10491)
 - MySQL 8.0 との`period_diff`互換性の問題を修正 [#10501](https://github.com/pingcap/tidb/pull/10501)
 - 例外を回避するために統計を収集するときに`Virtual Column`をスキップする[#10628](https://github.com/pingcap/tidb/pull/10628)
-- `SHOW OPEN TABLES`ステートメントサポートする [#10374](https://github.com/pingcap/tidb/pull/10374)
+- `SHOW OPEN TABLES`ステートメントをサポートする [#10374](https://github.com/pingcap/tidb/pull/10374)
 - 場合によっては goroutine リークが発生する可能性がある問題を修正[#10656](https://github.com/pingcap/tidb/pull/10656)
 - `tidb_snapshot`変数を設定すると、場合によっては時間形式の解析が正しく行われない可能性がある問題を修正しました。 [#10637](https://github.com/pingcap/tidb/pull/10637)
 
@@ -34,7 +34,7 @@ TiDB Ansible バージョン: 2.1.11
 ## TiKV {#tikv}
 
 - リーダーとラーナーが1つずつしかない場合にラーナーが空のインデックスを読み取る問題を修正しました。 [#4751](https://github.com/tikv/tikv/pull/4751)
-- スレッドプール内のプロセス`ScanLock`と`ResolveLock`高優先度に設定し、通常優先度コマンドへの影響を軽減します。 [#4791](https://github.com/tikv/tikv/pull/4791)
+- `ScanLock`と`ResolveLock`を高優先度のスレッドプールで処理し、通常優先度コマンドへの影響を軽減します。 [#4791](https://github.com/tikv/tikv/pull/4791)
 - 受信したスナップショットのすべてのファイルを同期する [#4811](https://github.com/tikv/tikv/pull/4811)
 
 ## ツール {#tools}

@@ -11,7 +11,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
 - SQLオプティマイザ
 
-    - 実行パフォーマンスを向上させるために、選択範囲`Index Join`を最適化します。
+    - 実行パフォーマンスを向上させるために、`Index Join`の選択範囲を最適化します。
 
     - `Index Join`の外部テーブルの選択を最適化し、行数の推定値がより小さいテーブルを外部テーブルとして使用します。
 
@@ -25,7 +25,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - より多くの関数のプッシュダウンをサポート: `ABS` / `CEIL` / `FLOOR` / `IS TRUE` / `IS FALSE`
 
-    - 組み込み関数`IF`と`IFNULL`定数畳み込みアルゴリズムを最適化する
+    - 組み込み関数`IF`と`IFNULL`の定数畳み込みアルゴリズムを最適化する
 
     - `EXPLAIN`文の出力を最適化し、階層構造を使用してオペレーター間の関係を表示します。
 
@@ -63,7 +63,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - 等価クエリと範囲クエリの混合クエリのヒストグラムを使用して行数推定アルゴリズムを最適化します
 
-- 表現
+- 式
 
     - 次の組み込み関数をサポートします:
 
@@ -81,11 +81,11 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     <!---->
 
-    - [HTTP API](https://github.com/pingcap/tidb/blob/release-2.1/docs/tidb_http_api.md)を足す
+    - [HTTP API](https://github.com/pingcap/tidb/blob/release-2.1/docs/tidb_http_api.md)を追加
 
-        - TiKVクラスタ内のテーブル領域の分布を散布する
+        - TiKVクラスタ内のテーブルのリージョンを分散させる
 
-        - `general log`開くかどうかを制御します
+        - `general log`を開くかどうかを制御します
 
         - ログレベルのオンライン変更をサポート
 
@@ -111,7 +111,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - `ADD INDEX`の実行速度を最適化し、いくつかのシナリオで大幅に改善しました
 
-    - TiDBが`DDL Owner`あるかどうかの判断を容易にするために`select tidb_is_ddl_owner()`ステートメントをサポートする
+    - TiDBが`DDL Owner`であるかどうかの判断を容易にするために`select tidb_is_ddl_owner()`ステートメントをサポートする
 
     - `ALTER TABLE FORCE`構文をサポートする
 
@@ -194,7 +194,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     <!---->
 
-    - [pd-回復](/pd-recover.md) `max-replica`パラメータを提供する必要がない
+    - [pd-recover](/pd-recover.md)では`max-replica`パラメータを指定する必要がない
 
 - メトリクス
 
@@ -240,11 +240,11 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - [読み取りリクエストを処理するための`LocalReader`スレッドを追加し、読み取りリクエストの遅延を削減します](https://github.com/tikv/rfcs/pull/17)
 
-    - [大量の書き込みによる大きなリージョンを回避するために、 `BatchSplit`サポートします](https://github.com/tikv/rfcs/pull/6)
+    - [大量の書き込みによる大きなリージョンを回避するために、 `BatchSplit`をサポートします](https://github.com/tikv/rfcs/pull/6)
 
-    - I/Oオーバーヘッドを削減するために統計に従って`Region Split`サポートします
+    - I/Oオーバーヘッドを削減するために統計に従って`Region Split`をサポートします
 
-    - インデックススキャンの同時実行性を向上させるためにキーの数に応じて`Region Split`サポートします
+    - インデックススキャンの同時実行性を向上させるためにキーの数に応じて`Region Split`をサポートします
 
     - `Region Split`によってもたらされる不要な遅延を回避するためにRaftメッセージプロセスを改善します
 
@@ -254,9 +254,9 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - RocksDBの`CompactFiles`バグを修正し、Lightningを使用したデータのインポートへの影響を軽減しました。
 
-    - スナップショットファイルの破損の可能性を修正するために、RocksDBをv5.15にアップグレードしてください。
+    - スナップショットファイルの破損の可能性を修正するために、RocksDBをv5.15にアップグレードします。
 
-    - フラッシュが書き込みをブロックする問題を回避するために`IngestExternalFile`改善しました
+    - フラッシュが書き込みをブロックする問題を回避するために`IngestExternalFile`を改善しました
 
 - tikv-ctl
 
