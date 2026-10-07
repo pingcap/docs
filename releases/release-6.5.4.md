@@ -135,7 +135,7 @@ TiDB バージョン: 6.5.4
     - 配置ルールが`LOCATION_LABELS`を使用する場合、SQL とルールチェッカーに互換性がない問題を修正しました [#38605](https://github.com/pingcap/tidb/issues/38605) @[nolouch](https://github.com/nolouch)
     - PD が予期せず複数の Learner をリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
     - ルールチェッカーがピアを選択した場合に、不健全なピアを削除できない問題を修正しました [#6559](https://github.com/tikv/pd/issues/6559) @[nolouch](https://github.com/nolouch)
-    - `unsafe recovery`で失敗した Learner ピアが`auto-detect`モードで無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
+    - `unsafe recovery`で失敗したラーナーのピアが`auto-detect`モードで無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
 
 - TiFlash
 

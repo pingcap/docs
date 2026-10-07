@@ -462,7 +462,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 - PD
 
     - `balance-hot-region-scheduler`構成が変更されていない場合は保持されない問題を修正しました [#5701](https://github.com/tikv/pd/issues/5701) @[HunDunDM](https://github.com/HunDunDM)
-    - `rank-formula-version`がアップグレードプロセス中にアップグレード前の構成が保持されない問題を修正[#5698](https://github.com/tikv/pd/issues/5698) @[HunDunDM](https://github.com/HunDunDM)
+    - `rank-formula-version`がアップグレードプロセス中にアップグレード前の構成を保持しない問題を修正[#5698](https://github.com/tikv/pd/issues/5698) @[HunDunDM](https://github.com/HunDunDM)
 
 - TiFlash
 
