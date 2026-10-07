@@ -329,8 +329,8 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - WAL sync operations：1秒あたりのWAL同期操作の回数
 - Write WAL duration：WALの書き込みに要した時間
 - WAL sync duration：WAL同期操作の実行に要する時間
-- Compaction operations：1秒あたりのコンパクションおよび洗浄作業の回数
-- Compaction duration：コンパクションおよび洗浄作業の実行に要する時間
+- Compaction operations：1秒あたりのコンパクションおよびフラッシュ作業の回数
+- Compaction duration：コンパクションおよびフラッシュ作業の実行に要する時間
 - SST read duration：SSTファイルの読み込みに要する時間
 - Write stall duration: 停止時間を書き込む。通常の場合は`0`となるはずです。
 - Memtable size：各カラムファミリーのmemtableサイズ
