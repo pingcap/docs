@@ -23,6 +23,7 @@
     - [Full-Text Search Example](/ai/guides/fulltext-search-with-pytidb.md)
   - Hybrid Search
     - [Hybrid Search Guide](/ai/guides/vector-search-hybrid-search.md)
+    - [Hybrid Search via SQL](/ai/guides/vector-search-hybrid-search-sql.md)
     - [Hybrid Search Example](/ai/guides/hybrid-search-with-pytidb.md)
   - Auto Embeddings
     - [Auto Embedding Guide](/ai/guides/auto-embedding.md)
