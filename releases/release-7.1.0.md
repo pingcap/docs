@@ -421,7 +421,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - PDリーダースイッチ後にリージョンヘルス監視データが削除される問題を修正 [#6366](https://github.com/tikv/pd/issues/6366) @[iosmanthus](https://github.com/iosmanthus)
     - ルールチェッカーが`schedule=deny`ラベルの不健全なリージョンを修復できない問題を修正しました [#6426](https://github.com/tikv/pd/issues/6426) @[nolouch](https://github.com/nolouch)
     - TiKVまたはTiFlashの再起動後に既存のラベルの一部が失われる問題を修正[#6467](https://github.com/tikv/pd/issues/6467) @[JmPotato](https://github.com/JmPotato)
-    - レプリケーションモードのLearner ノードがある場合、レプリケーションステータスを切り替えることができない問題を修正しました。 [#14704](https://github.com/tikv/tikv/issues/14704) @[nolouch](https://github.com/nolouch)
+    - レプリケーションモードのラーナーノードがある場合、レプリケーションステータスを切り替えることができない問題を修正しました。 [#14704](https://github.com/tikv/tikv/issues/14704) @[nolouch](https://github.com/nolouch)
 
 - TiFlash
 

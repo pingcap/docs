@@ -68,7 +68,7 @@ TiDB バージョン: 7.1.3
     - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`が発生する可能性がある問題を修正しました [#46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
     - 監査ログ用のEnterpriseプラグインを使用すると、TiDBサーバーが大量のリソースを消費する可能性がある問題を修正[#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
     - 正常なシャットダウン中に TiDBサーバーがpanicする可能性がある問題を修正[#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
-    - テーブルが多数ある場合に、 `AUTO_ID_CACHE=1`のテーブルが gRPC クライアント リークが発生する可能性がある問題を修正しました。 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
+    - テーブルが多数ある場合に、 `AUTO_ID_CACHE=1`のテーブルによって gRPC クライアント リークが発生する可能性がある問題を修正しました。 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
     - `ErrLoadDataInvalidURI`の誤ったエラーメッセージを修正 (無効な S3 URI エラー) [#48164](https://github.com/pingcap/tidb/issues/48164) @[lance6716](https://github.com/lance6716)
     - パーティション列タイプが`DATETIME` の場合に`ALTER TABLE ... LAST PARTITION`の実行が失敗する問題を修正しました [#48814](https://github.com/pingcap/tidb/issues/48814) @[crazycs520](https://github.com/crazycs520)
     - `IMPORT INTO`実行中に実際のエラーメッセージが他のエラーメッセージによって上書きされる可能性がある問題を修正[#47992](https://github.com/pingcap/tidb/issues/47992) [#47781](https://github.com/pingcap/tidb/issues/47781) @[D3Hunter](https://github.com/D3Hunter)

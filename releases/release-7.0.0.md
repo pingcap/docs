@@ -39,7 +39,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - TiFlashは、null対応セミジョイン演算子とnull対応アンチセミジョイン演算子をサポートしています [#6674](https://github.com/pingcap/tiflash/issues/6674) @[gengliqi](https://github.com/gengliqi)
 
-    相関サブクエリで`IN` 、 `NOT IN` 、 `= ANY` 、または`!= ALL`演算子を使用する場合、TiDB はそれらをセミジョインまたはアンチセミジョインに変換することでコンピューティング パフォーマンスを最適化します。結合キー列が`NULL`の場合は、 [NULL値対応セミジョイン](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries)や[ヌル値対応アンチセミジョイン](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)などの、null 対応結合アルゴリズムが必要です。
+    相関サブクエリで`IN` 、 `NOT IN` 、 `= ANY` 、または`!= ALL`演算子を使用する場合、TiDB はそれらをセミジョインまたはアンチセミジョインに変換することでコンピューティング パフォーマンスを最適化します。結合キー列が`NULL`になる可能性がある場合は、 [NULL値対応セミジョイン](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries)や[ヌル値対応アンチセミジョイン](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)などの、null 対応結合アルゴリズムが必要です。
 
     バージョン 7.0.0 より前のTiFlashでは、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターがサポートされていなかったため、これらのサブクエリをTiFlashに直接プッシュダウンすることができませんでした。バージョン 7.0.0 以降では、 TiFlash はNULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをサポートしています。SQL 文にこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、かつ[MPPモード](/tiflash/use-tiflash-mpp-mode.md)が有効になっている場合、オプティマイザは全体的なパフォーマンスを向上させるために、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをTiFlashにプッシュダウンするかどうかを自動的に判断します。
 

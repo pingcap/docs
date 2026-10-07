@@ -107,7 +107,7 @@ TiDB バージョン: 7.1.5
     - TiCDC
 
         - `Exchange Partition ... With Validation` DDL が上流に書き込まれた後、 TiCDC が下流でその DDL の実行に失敗し、変更フィードが停止する問題を修正しました。 [#10859](https://github.com/pingcap/tiflow/issues/10859) @[hongyunyan](https://github.com/hongyunyan)
-        - 変更フィードを再開するときに`snapshot lost caused by GC`が時間内に報告されず、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントよりも小さい問題を修正しました。 [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
+        - 変更フィードを再開する際に、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントより小さいと、 `snapshot lost caused by GC`が時間内に報告されない問題を修正しました。 [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
         - テーブルレプリケーションタスクをスケジュールするときに TiCDC がパニックになる問題を修正しました [#10613](https://github.com/pingcap/tiflow/issues/10613) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - DDL文が頻繁に実行されるシナリオで、間違ったBarrierTSが原因でデータが間違ったCSVファイルに書き込まれる問題を修正[#10668](https://github.com/pingcap/tiflow/issues/10668) @[lidezhu](https://github.com/lidezhu)
         - オブジェクトストレージシンクに一時的な障害が発生した場合に、結果整合性が有効になっている変更フィードが失敗する可能性がある問題を修正しました[#10710](https://github.com/pingcap/tiflow/issues/10710) @[CharlesCheung96](https://github.com/CharlesCheung96)
