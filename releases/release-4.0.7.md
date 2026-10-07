@@ -27,7 +27,7 @@ TiDB バージョン: 4.0.7
     - `EXPLAIN ANALYZE` にコプロセッサキャッシュのヒット率情報を追加 [#19972](https://github.com/pingcap/tidb/pull/19972)
     - `ROUND`関数のTiFlashへのプッシュダウンをサポート [#19967](https://github.com/pingcap/tidb/pull/19967)
     - `ANALYZE`の`CMSketch`のデフォルト値を追加します [#19927](https://github.com/pingcap/tidb/pull/19927)
-    - エラーメッセージの秘匿化[#20004](https://github.com/pingcap/tidb/pull/20004)
+    - エラーメッセージの秘匿化を改善[#20004](https://github.com/pingcap/tidb/pull/20004)
     - MySQL 8.0 のコネクタを使用してクライアントからの接続を受け入れる [#19959](https://github.com/pingcap/tidb/pull/19959)
 
 - TiKV
