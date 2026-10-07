@@ -177,7 +177,7 @@ TPC-H 100ベンチマークテストにおいて、 TiFlash MPPは従来の分�
 - 組み込み関数
 - TiKVからデータを読み取る
 - OOMスピル
-- 連合
+- Union
 - Full Outer Join
 
 ### クラスター化インデックス {#clustered-index}
