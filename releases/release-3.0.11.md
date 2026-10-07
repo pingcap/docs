@@ -49,7 +49,7 @@ TiDB Ansible バージョン: 3.0.11
 - TiKV
     - 不要なログを削除してログ出力を最適化する[#6657](https://github.com/tikv/tikv/pull/6657)
     - 高負荷時にピアが削除されたときに発生する可能性のあるpanicを修正[#6704](https://github.com/tikv/tikv/pull/6704)
-    - 一部のケースで休止状態のリージョンが復帰しない問題を修正[#6732](https://github.com/tikv/tikv/pull/6732) [#6738](https://github.com/tikv/tikv/pull/6738)
+    - 一部のケースでHibernate Region がウェイクアップされない問題を修正[#6732](https://github.com/tikv/tikv/pull/6732) [#6738](https://github.com/tikv/tikv/pull/6738)
 
 - TiDB Ansible
     - `tidb-ansible` の古いドキュメントリンクを更新 [#1169](https://github.com/pingcap/tidb-ansible/pull/1169)
