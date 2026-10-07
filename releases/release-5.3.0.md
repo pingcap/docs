@@ -146,7 +146,7 @@ v5.3 の主な新機能または改善点は次のとおりです。
 
     TiDBは、PD Follower Proxyを有効にし、PDクライアントがTSOをバッチでリクエストする際に必要なバッチ待機時間を変更することで、タイムスタンプ処理フローを最適化し、PDのタイムスタンプ処理負荷を軽減します。これにより、システム全体のスケーラビリティが向上します。
 
-    - システム変数[`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)を介して PD Follower Proxyの有効化/無効化をサポートします。PD の TSO リクエスト負荷が高すぎる場合、PD フォロワープロキシを有効にすると、フォロワーのリクエストサイクル中に収集された TSO リクエストをリーダーノードに一括転送できます。このソリューションにより、クライアントとリーダー間の直接的なインタラクション数を効果的に削減し、リーダーへの負荷を軽減し、TiDB 全体のパフォーマンスを向上させることができます。
+    - システム変数[`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530)を介して PD Follower Proxyの有効化/無効化をサポートします。PD の TSO リクエスト負荷が高すぎる場合、PD Follower Proxyを有効にすると、フォロワーのリクエストサイクル中に収集された TSO リクエストをリーダーノードに一括転送できます。このソリューションにより、クライアントとリーダー間の直接的なインタラクション数を効果的に削減し、リーダーへの負荷を軽減し、TiDB 全体のパフォーマンスを向上させることができます。
 
     > **Note:**
     >

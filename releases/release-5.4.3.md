@@ -64,7 +64,7 @@ TiDB バージョン: 5.4.3
 
     - PDがダッシュボードプロキシリクエストを正しく処理できない問題を修正[#5321](https://github.com/tikv/pd/issues/5321)
     - PDリーダー移転後に削除したtombstoneストアが再び表示される問題を修正[#4941](https://github.com/tikv/pd/issues/4941)
-    - TiFlash Learner レプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401)
+    - TiFlashラーナーレプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401)
 
 - TiFlash
 
