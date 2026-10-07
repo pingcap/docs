@@ -129,8 +129,8 @@ show warnings;
 | `raftstore.pd-store-heartbeat-tick-interval`              | ストアのPDへのハートビートがトリガーされる時間間隔                                                                                                                  |
 | `raftstore.snap-mgr-gc-tick-interval`                     | 期限切れのスナップショットファイルのリサイクルがトリガーされる時間間隔                                                                                                        |
 | `raftstore.snap-gc-timeout`                               | スナップショットファイルが保存される最長時間                                                                                                                     |
-| `raftstore.lock-cf-compact-interval`                      | TiKVがロックカラムファミリーの手動圧縮をトリガーする時間間隔                                                                                                           |
-| `raftstore.lock-cf-compact-bytes-threshold`               | TiKVがロックカラムファミリーの手動圧縮をトリガーするサイズ                                                                                                            |
+| `raftstore.lock-cf-compact-interval`                      | TiKVがロックカラムファミリーの手動コンパクションをトリガーする時間間隔                                                                                                           |
+| `raftstore.lock-cf-compact-bytes-threshold`               | TiKVがロックカラムファミリーの手動コンパクションをトリガーするサイズ                                                                                                            |
 | `raftstore.messages-per-tick`                             | バッチごとに処理されるメッセージの最大数                                                                                                                       |
 | `raftstore.max-peer-down-duration`                        | ピアに許可される最長の非アクティブ期間                                                                                                                        |
 | `raftstore.max-leader-missing-duration`                   | ピアがリーダーなしでいられる最長時間。この値を超えると、ピアはPDを使用して、自身が削除されたかどうかを確認します。                                                                                 |
@@ -148,7 +148,7 @@ show warnings;
 | `raftstore.apply-max-batch-size`                          | Raftステートマシンは、BatchSystemによってデータ書き込みリクエストをバッチ処理します。この設定項目は、1バッチでリクエストを実行できるRaftステートマシンの最大数を指定します。                                           |
 | `raftstore.store-max-batch-size`                          | Raftステートマシンは、BatchSystemによってログをディスクにフラッシュするリクエストをバッチ処理します。この設定項目は、1回のバッチでリクエストを処理できるRaftステートマシンの最大数を指定します。                                 |
 | `raftstore.store-io-pool-size`                            | Raft I/Oタスクを処理するスレッドの数。これは StoreWriter スレッドプールのサイズでもあります (この値を 0 以外の値から 0 に、または 0 から 0 以外の値に変更**しないでください**)                               |
-| `raftstore.periodic-full-compact-start-max-cpu`           | 完全圧縮が有効な場合に TiKV が定期的に完全圧縮を実行する CPU 使用率のしきい値                                                                                               |
+| `raftstore.periodic-full-compact-start-max-cpu`           | 完全コンパクションが有効な場合に TiKV が定期的に完全コンパクションを実行する CPU 使用率のしきい値                                                                                               |
 | `readpool.unified.max-thread-count`                       | 読み取りリクエストを均一に処理するスレッドプール内のスレッドの最大数。これは UnifyReadPool スレッドプールのサイズです。                                                                         |
 | `readpool.unified.max-tasks-per-worker`                   | 統合読み取りプール内の 1つのスレッドに許可されるタスクの最大数。値を超えると`Server Is Busy`エラーが返されます。                                                                         |
 | `readpool.unified.auto-adjust-pool-size`                  | UnifyReadPool スレッドプールのサイズを自動的に調整するかどうかを決定します                                                                                              |
@@ -176,19 +176,19 @@ show warnings;
 | `gc.ratio-threshold`                                      | リージョンGCをスキップするしきい値（GCのバージョン数/キーの数）                                                                                                   |
 | `gc.batch-keys`                                           | 1バッチで処理されるキーの数                                                                                                                             |
 | `gc.max-write-bytes-per-sec`                              | RocksDBに1秒あたり書き込める最大バイト数                                                                                                                   |
-| `gc.enable-compaction-filter`                             | 圧縮フィルタを有効にするかどうか                                                                                                                           |
-| `gc.compaction-filter-skip-version-check`                 | 圧縮フィルタのクラスタバージョンチェックをスキップするかどうか（未リリース）                                                                                                     |
-| `gc.auto-compaction.check-interval`                       | TiKVが自動（RocksDB）圧縮をトリガーするかどうかを確認する間隔                                                                                                       |
-| `gc.auto-compaction.tombstone-num-threshold`              | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBのtombstoneの数                                                                                            |
-| `gc.auto-compaction.tombstone-percent-threshold`          | TiKV自動（RocksDB）圧縮をトリガーするために必要なRocksDBのtombstoneの割合                                                                                           |
-| `gc.auto-compaction.redundant-rows-threshold`             | TiKV自動（RocksDB）圧縮をトリガーするために必要な冗長MVCC行の数                                                                                                    |
-| `gc.auto-compaction.redundant-rows-percent-threshold`     | TiKV自動（RocksDB）圧縮をトリガーするために必要な冗長MVCC行の割合                                                                                                   |
-| `gc.auto-compaction.bottommost-level-force`               | RocksDBの最下層ファイルの圧縮を強制するかどうか                                                                                                                |
+| `gc.enable-compaction-filter`                             | コンパクションフィルタを有効にするかどうか                                                                                                                           |
+| `gc.compaction-filter-skip-version-check`                 | コンパクションフィルタのクラスタバージョンチェックをスキップするかどうか（未リリース）                                                                                                     |
+| `gc.auto-compaction.check-interval`                       | TiKVが自動（RocksDB）コンパクションをトリガーするかどうかを確認する間隔                                                                                                       |
+| `gc.auto-compaction.tombstone-num-threshold`              | TiKV自動（RocksDB）コンパクションをトリガーするために必要なRocksDBのtombstoneの数                                                                                            |
+| `gc.auto-compaction.tombstone-percent-threshold`          | TiKV自動（RocksDB）コンパクションをトリガーするために必要なRocksDBのtombstoneの割合                                                                                           |
+| `gc.auto-compaction.redundant-rows-threshold`             | TiKV自動（RocksDB）コンパクションをトリガーするために必要な冗長MVCC行の数                                                                                                    |
+| `gc.auto-compaction.redundant-rows-percent-threshold`     | TiKV自動（RocksDB）コンパクションをトリガーするために必要な冗長MVCC行の割合                                                                                                   |
+| `gc.auto-compaction.bottommost-level-force`               | RocksDBの最下層ファイルのコンパクションを強制するかどうか                                                                                                                |
 | `{db-name}.max-total-wal-size`                            | 合計WALの最大サイズ                                                                                                                                |
 | `{db-name}.max-background-jobs`                           | RocksDBのバックグラウンドスレッドの数                                                                                                                     |
 | `{db-name}.max-background-flushes`                        | RocksDBのフラッシュスレッドの最大数                                                                                                                      |
 | `{db-name}.max-open-files`                                | RocksDBが開くことができるファイルの総数                                                                                                                    |
-| `{db-name}.compaction-readahead-size`                     | 圧縮時のサイズ`readahead`                                                                                                                         |
+| `{db-name}.compaction-readahead-size`                     | コンパクション時のサイズ`readahead`                                                                                                                         |
 | `{db-name}.bytes-per-sync`                                | ファイルが非同期的に書き込まれている間に、OSがファイルをディスクに増分的に同期する速度                                                                                               |
 | `{db-name}.wal-bytes-per-sync`                            | WAL ファイルが書き込まれている間に OS が WAL ファイルをディスクに増分的に同期する速度                                                                                          |
 | `{db-name}.writable-file-max-buffer-size`                 | WritableFileWriteで使用される最大バッファサイズ                                                                                                           |
@@ -197,14 +197,14 @@ show warnings;
 | `{db-name}.{cf-name}.max-write-buffer-number`             | メンバーテーブルの最大数                                                                                                                               |
 | `{db-name}.{cf-name}.max-bytes-for-level-base`            | ベースレベル（L1）の最大バイト数                                                                                                                          |
 | `{db-name}.{cf-name}.target-file-size-base`               | ベースレベルのターゲットファイルのサイズ                                                                                                                       |
-| `{db-name}.{cf-name}.level0-file-num-compaction-trigger`  | 圧縮をトリガーするL0のファイルの最大数                                                                                                                       |
+| `{db-name}.{cf-name}.level0-file-num-compaction-trigger`  | コンパクションをトリガーするL0のファイルの最大数                                                                                                                       |
 | `{db-name}.{cf-name}.level0-slowdown-writes-trigger`      | 書き込み停止を引き起こすL0のファイルの最大数                                                                                                                    |
 | `{db-name}.{cf-name}.level0-stop-writes-trigger`          | 書き込みを完全にブロックするL0のファイルの最大数                                                                                                                  |
-| `{db-name}.{cf-name}.max-compaction-bytes`                | 圧縮ごとにディスクに書き込まれる最大バイト数                                                                                                                     |
+| `{db-name}.{cf-name}.max-compaction-bytes`                | コンパクションごとにディスクに書き込まれる最大バイト数                                                                                                                     |
 | `{db-name}.{cf-name}.max-bytes-for-level-multiplier`      | 各レイヤーのデフォルトの増幅倍数                                                                                                                           |
-| `{db-name}.{cf-name}.disable-auto-compactions`            | 自動圧縮を有効または無効にする                                                                                                                            |
-| `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | 保留中の圧縮バイトのソフト制限                                                                                                                            |
-| `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | 保留中の圧縮バイトのハード制限                                                                                                                            |
+| `{db-name}.{cf-name}.disable-auto-compactions`            | 自動コンパクションを有効または無効にする                                                                                                                            |
+| `{db-name}.{cf-name}.soft-pending-compaction-bytes-limit` | 保留中のコンパクションバイトのソフト制限                                                                                                                            |
+| `{db-name}.{cf-name}.hard-pending-compaction-bytes-limit` | 保留中のコンパクションバイトのハード制限                                                                                                                            |
 | `{db-name}.{cf-name}.titan.blob-run-mode`                 | BLOBファイルの処理モード                                                                                                                             |
 | `{db-name}.{cf-name}.titan.min-blob-size`                 | Titan にデータを保存するしきい値。このしきい値に達すると、データは Titan BLOB ファイルに保存されます。                                                                               |
 | `{db-name}.{cf-name}.titan.blob-file-compression`         | Titan BLOBファイルで使用される圧縮アルゴリズム                                                                                                               |
@@ -220,8 +220,8 @@ show warnings;
 | storage.flow-control.enable                                          | フロー制御メカニズムを有効にするかどうかを決定します                                                                                                                 |
 | storage.flow-control.memtables-threshold                         | フロー制御をトリガーするkvDB memtablesの最大数                                                                                                             |
 | storage.flow-control.l0-files-threshold                   | フロー制御をトリガーするkvDB L0ファイルの最大数                                                                                                                |
-| storage.flow-control.soft-pending-compaction-bytes-limit  | フロー制御メカニズムが一部の書き込みリクエストを拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                          |
-| storage.flow-control.hard-pending-compaction-bytes-limit                                | フロー制御メカニズムがすべての書き込みリクエストを拒否するトリガーとなる、kvDB保留圧縮バイトのしきい値                                                                                         |
+| storage.flow-control.soft-pending-compaction-bytes-limit  | フロー制御メカニズムが一部の書き込みリクエストを拒否するトリガーとなる、kvDB保留コンパクションバイトのしきい値                                                                                          |
+| storage.flow-control.hard-pending-compaction-bytes-limit                                | フロー制御メカニズムがすべての書き込みリクエストを拒否するトリガーとなる、kvDB保留コンパクションバイトのしきい値                                                                                         |
 | `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
 | `import.num-threads`                                      | 復元またはインポート RPC リクエストを処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
 | `backup.num-threads`                                      | バックアップ スレッドの数 (v4.0.3 以降でサポート)                                                                                                             |

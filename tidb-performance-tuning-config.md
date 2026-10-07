@@ -29,7 +29,7 @@ TiDBのパフォーマンスを最適化するために、一般的に以下の�
 - [SQLプリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)、[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)、[インスタンスレベルの実行プランキャッシュ](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)など、実行プランキャッシュを強化します。
 - [オプティマイザ修正コントロール](/optimizer-fix-controls.md)を使用して TiDB オプティマイザの動作を最適化します。
 - ストレージエンジン[Titan](/storage-engine/titan-overview.md)をより積極的に活用する。
-- 書き込み負荷の高いワークロード下でも最適かつ安定したパフォーマンスを確保するために、TiKVの圧縮およびフロー制御の設定を微調整します。
+- 書き込み負荷の高いワークロード下でも最適かつ安定したパフォーマンスを確保するために、TiKVのコンパクションおよびフロー制御の設定を微調整します。
 
 これらの設定は、多くのワークロードのパフォーマンスを大幅に向上させることができます。ただし、他の最適化と同様に、本番にデプロイする前に、必ずご自身の環境で十分にテストしてください。
 
@@ -120,13 +120,13 @@ soft-pending-compaction-bytes-limit = "192GiB"
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit) [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit) [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec)                   | TiKVのスケーリング操作中に、同時スナップショット転送量とI/O帯域幅の制限を設定します。制限値を高く設定すると、データ移行が高速化され、スケーリング時間が短縮されます。                                                                                       | これらの制限を調整すると、スケーリング速度とオンライントランザクションパフォーマンスのトレードオフに影響します。                                                                                                                       |
 | [`rocksdb.max-manifest-file-size`](/tikv-configuration-file.md#max-manifest-file-size)                                                                                                                                                                                               | RocksDB マニフェストファイルの最大サイズを設定します。このファイルには、SST ファイルとデータベースの状態変更に関するメタデータが記録されます。このサイズを大きくすると、マニフェストファイルの書き換え頻度が減り、フォアグラウンド書き込みパフォーマンスへの影響を最小限に抑えることができます。                       | デフォルト値は`128MiB`です。SSTファイルが多数存在する環境（例えば、数十万個）では、マニフェストファイルの書き換えが頻繁に行われると、書き込みパフォーマンスが低下する可能性があります。このパラメータを`256MiB`以上の値に調整することで、最適なパフォーマンスを維持できます。                         |
-| [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan) [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan) [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Titanストレージエンジンを有効にすることで、書き込み増幅を低減し、ディスクI/Oのボトルネックを緩和できます。特に、RocksDBの圧縮処理が書き込みワークロードに追いつかず、圧縮待ちバイトが蓄積される場合に有効です。                                                            | 書き込み増幅が主なボトルネックである場合に有効にします。トレードオフは以下のとおりです。<ul><li>主キー範囲スキャンにおけるパフォーマンスへの影響の可能性。</li><li>空間増幅率の向上（最悪の場合、最大2倍）。</li><li>ブロブキャッシュのための追加メモリ使用量。</li></ul>              |
+| [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan) [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan) [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Titanストレージエンジンを有効にすることで、書き込み増幅を低減し、ディスクI/Oのボトルネックを緩和できます。特に、RocksDBのコンパクション処理が書き込みワークロードに追いつかず、コンパクション待ちバイトが蓄積される場合に有効です。                                                            | 書き込み増幅が主なボトルネックである場合に有効にします。トレードオフは以下のとおりです。<ul><li>主キー範囲スキャンにおけるパフォーマンスへの影響の可能性。</li><li>空間増幅率の向上（最悪の場合、最大2倍）。</li><li>ブロブキャッシュのための追加メモリ使用量。</li></ul>              |
 | [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold)                                                                                                                                                                         | TiKVスケジューラで書き込みキューの最大サイズを設定します。保留中の書き込みタスクの合計サイズがこのしきい値を超えると、TiKVは新規書き込みリクエストに対してエラーコード`Server Is Busy`を返します。                                                                   | デフォルト値は`100MiB`です。書き込み同時実行数が多い場合や、一時的な書き込みスパイクが発生する場合は、このしきい値を上げる（例えば`512MiB`にする）ことで負荷に対応できます。ただし、書き込みキューが継続的に蓄積され、このしきい値を超える場合は、根本的なパフォーマンスの問題が発生している可能性があり、さらに調査が必要です。 |
-| [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                                                                                                                                                                          | kvDB L0ファイルの数に基づいて、書き込みフロー制御がトリガーされるタイミングを制御します。しきい値を上げると、書き込み負荷が高い場合の書き込み停止が減少します。                                                                                          | しきい値を高く設定すると、L0ファイルが多数存在する場合に、より積極的な圧縮処理が行われる可能性があります。                                                                                                                   |
-| [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)                                                                                                                                                        | 書き込みフロー制御を管理するために、保留中の圧縮バイトのしきい値を制御します。ソフトリミットを設定すると、部分的な書き込み拒否が発生します。                                                                                                       | デフォルトのソフトリミットは`192GiB`です。書き込み負荷の高いシナリオでは、圧縮処理が追いつかない場合、保留中の圧縮バイトが蓄積され、フロー制御がトリガーされる可能性があります。リミットを調整することでバッファ領域を増やすことができますが、蓄積が続く場合は、さらなる調査が必要な根本的な問題があることを示しています。        |
-| [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)と[`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)      | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`デフォルト値に手動で設定する必要があります。こうすることで、フロー制御パラメータの影響を受けなくなります。さらに、Rocksdbパラメータを設定して、デフォルトパラメータと同じ圧縮効率を維持してください。 | 詳細については、 [第18708号](https://github.com/tikv/tikv/issues/18708)を参照してください。                                                                                                   |
+| [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                                                                                                                                                                          | kvDB L0ファイルの数に基づいて、書き込みフロー制御がトリガーされるタイミングを制御します。しきい値を上げると、書き込み負荷が高い場合の書き込み停止が減少します。                                                                                          | しきい値を高く設定すると、L0ファイルが多数存在する場合に、より積極的なコンパクション処理が行われる可能性があります。                                                                                                                   |
+| [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)                                                                                                                                                        | 書き込みフロー制御を管理するために、保留中のコンパクションバイトのしきい値を制御します。ソフトリミットを設定すると、部分的な書き込み拒否が発生します。                                                                                                       | デフォルトのソフトリミットは`192GiB`です。書き込み負荷の高いシナリオでは、コンパクション処理が追いつかない場合、保留中のコンパクションバイトが蓄積され、フロー制御がトリガーされる可能性があります。リミットを調整することでバッファ領域を増やすことができますが、蓄積が続く場合は、さらなる調査が必要な根本的な問題があることを示しています。        |
+| [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)と[`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)      | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`デフォルト値に手動で設定する必要があります。こうすることで、フロー制御パラメータの影響を受けなくなります。さらに、Rocksdbパラメータを設定して、デフォルトパラメータと同じコンパクション効率を維持してください。 | 詳細については、 [第18708号](https://github.com/tikv/tikv/issues/18708)を参照してください。                                                                                                   |
 
-前述の表に示されている圧縮およびフロー制御構成の調整は、以下の仕様を持つインスタンスへの TiKV デプロイメントに合わせて調整されていることに注意してください。
+前述の表に示されているコンパクションおよびフロー制御構成の調整は、以下の仕様を持つインスタンスへの TiKV デプロイメントに合わせて調整されていることに注意してください。
 
 - CPU: 32コア
 - メモリ: 128 GiB
@@ -135,17 +135,17 @@ soft-pending-compaction-bytes-limit = "192GiB"
 
 #### 書き込み負荷の高いワークロードに対する推奨構成調整 {#recommended-configuration-adjustments-for-write-intensive-workloads}
 
-書き込み負荷の高いワークロードにおける TiKV のパフォーマンスと安定性を最適化するには、インスタンスのハードウェア仕様に基づいて、特定の圧縮およびフロー制御パラメータを調整することをお勧めします。例:
+書き込み負荷の高いワークロードにおける TiKV のパフォーマンスと安定性を最適化するには、インスタンスのハードウェア仕様に基づいて、特定のコンパクションおよびフロー制御パラメータを調整することをお勧めします。例:
 
-- [`rocksdb.rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec) : 通常はデフォルト値を使用します。圧縮 I/O がディスク帯域幅のかなりの割合を消費していることに気づいた場合は、レートをディスクの最大スループットの約 60% に制限することを検討してください。これにより、圧縮作業のバランスが取れ、ディスクが飽和状態にならないようになります。たとえば、 **1 GiB/s**の定格のディスクでは、これを約`600MiB`に設定します。
+- [`rocksdb.rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec) : 通常はデフォルト値を使用します。コンパクション I/O がディスク帯域幅のかなりの割合を消費していることに気づいた場合は、レートをディスクの最大スループットの約 60% に制限することを検討してください。これにより、コンパクション作業のバランスが取れ、ディスクが飽和状態にならないようになります。たとえば、 **1 GiB/s**の定格のディスクでは、これを約`600MiB`に設定します。
 
-- [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)と[`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1) ：これらの制限を、利用可能なディスク容量に比例して増やします（例えば、それぞれ1 TiBと2 TiB）。これにより、圧縮処理のためのバッファが増えます。
+- [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)と[`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1) ：これらの制限を、利用可能なディスク容量に比例して増やします（例えば、それぞれ1 TiBと2 TiB）。これにより、コンパクション処理のためのバッファが増えます。
 
 これらの設定は、リソースの効率的な利用を確保し、書き込み負荷がピークに達した際の潜在的なボトルネックを最小限に抑えるのに役立ちます。
 
 > **Note:**
 >
-> TiKVは、システムの安定性を確保するために、スケジューラレイヤーでフロー制御を実装しています。保留中の圧縮バイト数や書き込みキューサイズなどの重要なしきい値を超えると、TiKVは書き込みリクエストを拒否し、ServerIsBusyエラーを返します。このエラーは、バックグラウンドの圧縮プロセスがフォアグラウンドの書き込み操作の現在の速度に追いつけないことを示しています。フロー制御が有効になると、通常、レイテンシーの急増とクエリスループットの低下（QPSの低下）が発生します。これらのパフォーマンス低下を防ぐには、包括的なキャパシティプランニングと、圧縮パラメータおよびストレージ設定の適切な構成が不可欠です。
+> TiKVは、システムの安定性を確保するために、スケジューラレイヤーでフロー制御を実装しています。保留中のコンパクションバイト数や書き込みキューサイズなどの重要なしきい値を超えると、TiKVは書き込みリクエストを拒否し、ServerIsBusyエラーを返します。このエラーは、バックグラウンドのコンパクションプロセスがフォアグラウンドの書き込み操作の現在の速度に追いつけないことを示しています。フロー制御が有効になると、通常、レイテンシーの急増とクエリスループットの低下（QPSの低下）が発生します。これらのパフォーマンス低下を防ぐには、包括的なキャパシティプランニングと、コンパクションパラメータおよびストレージ設定の適切な構成が不可欠です。
 
 ### TiFlash -ラーナー向け設定 {#tiflash-learner-configurations}
 
@@ -274,12 +274,12 @@ sysbench oltp_read_only run --mysql-host={host} --mysql-port={port} --mysql-user
 
 バージョン7.6.0以降、Titanはデフォルトで有効になっています。TiDB v8.4.0では、Titanの`min-blob-size`のデフォルト値は`32KiB`です。ベースライン構成では、レコードサイズを`31KiB`に設定することで、データがRocksDBに保存されるようにしています。一方、キー設定構成では、 `min-blob-size`を`1KiB`に設定すると、データがTitanに保存されます。
 
-主要設定で確認されたパフォーマンスの向上は、主にTitanがRocksDBの圧縮を削減する能力によるものです。以下の図に示すように、
+主要設定で確認されたパフォーマンスの向上は、主にTitanがRocksDBのコンパクションを削減する能力によるものです。以下の図に示すように、
 
-- ベースライン：RocksDBの圧縮処理の総スループットは1 GiB/sを超え、ピーク時には3 GiB/sを超える。
-- 主な設定：RocksDBの圧縮処理のピークスループットは100 MiB/sを下回っています。
+- ベースライン：RocksDBのコンパクション処理の総スループットは1 GiB/sを超え、ピーク時には3 GiB/sを超える。
+- 主な設定：RocksDBのコンパクション処理のピークスループットは100 MiB/sを下回っています。
 
-この圧縮処理オーバーヘッドの大幅な削減は、主要設定構成で見られる全体的なスループットの向上に貢献しています。
+このコンパクション処理オーバーヘッドの大幅な削減は、主要設定構成で見られる全体的なスループットの向上に貢献しています。
 
 ![Titan RocksDB compaction:](/media/performance/titan-rocksdb-compactions.png)
 
@@ -493,7 +493,7 @@ SET GLOBAL tidb_opt_distinct_agg_push_down = ON;
 
 ### インメモリエンジンを使用してMVCCバージョンの蓄積を軽減する {#mitigate-mvcc-version-accumulation-using-in-memory-engine}
 
-MVCC のバージョンが多すぎると、特に読み書き頻度の高い領域や、ガベージコレクションと圧縮の問題により、パフォーマンスのボトルネックが発生する可能性があります。この問題を軽減するには、v8.5.0 で導入されたバージョン[TiKV MVCC インメモリエンジン (IME)](/tikv-in-memory-engine.md)を使用できます。これを有効にするには、TiKV 設定ファイルに次の設定を追加してください。
+MVCC のバージョンが多すぎると、特に読み書き頻度の高い領域や、ガベージコレクションとコンパクションの問題により、パフォーマンスのボトルネックが発生する可能性があります。この問題を軽減するには、v8.5.0 で導入されたバージョン[TiKV MVCC インメモリエンジン (IME)](/tikv-in-memory-engine.md)を使用できます。これを有効にするには、TiKV 設定ファイルに次の設定を追加してください。
 
 > **Note:**
 >

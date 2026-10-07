@@ -5,13 +5,13 @@ summary: TiDB データベースの ALTER TABLE ... COMPACT の使用法の概�
 
 # ALTER TABLE ... COMPACT {#alter-table--compact}
 
-読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDB はストレージノード上でバックグラウンドでデータ圧縮を自動的にスケジュールします。圧縮中、ストレージノードは物理データを書き換えます。これには、削除された行のクリーンアップや、更新によって発生した複数のデータバージョンのマージなどが含まれます。 `ALTER TABLE ... COMPACT`文を使用すると、バックグラウンドで圧縮がトリガーされるまで待たずに、特定のテーブルの圧縮を即座に開始できます。
+読み取りパフォーマンスを向上させ、ディスク使用量を削減するために、TiDB はストレージノード上でバックグラウンドでデータコンパクションを自動的にスケジュールします。コンパクション中、ストレージノードは物理データを書き換えます。これには、削除された行のクリーンアップや、更新によって発生した複数のデータバージョンのマージなどが含まれます。 `ALTER TABLE ... COMPACT`文を使用すると、バックグラウンドでコンパクションがトリガーされるまで待たずに、特定のテーブルのコンパクションを即座に開始できます。
 
 この文を実行しても、既存のSQL文はブロックされず、トランザクション、DDL、GCといったTiDBの機能にも影響はありません。SQL文で選択可能なデータも変更されません。この文の実行は、IOリソースとCPUリソースを消費します。業務への悪影響を避けるため、リソースに余裕があるタイミングなど、適切なタイミングで実行するようご注意ください。
 
-テーブルのすべてのレプリカが圧縮されると、圧縮ステートメントは終了し、結果が返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することで、圧縮を安全に中断できます。圧縮を中断しても、データの整合性が損なわれたり、データが失われたりすることはありません。また、後続の手動圧縮やバックグラウンド圧縮にも影響はありません。
+テーブルのすべてのレプリカがコンパクションされると、コンパクションステートメントは終了し、結果が返されます。実行プロセス中に、 [`KILL`](/sql-statements/sql-statement-kill.md)ステートメントを実行することで、コンパクションを安全に中断できます。コンパクションを中断しても、データの整合性が損なわれたり、データが失われたりすることはありません。また、後続の手動コンパクションやバックグラウンドコンパクションにも影響はありません。
 
-このデータ圧縮ステートメントは現在、 TiFlashレプリカに対してのみサポートされており、TiKV レプリカに対してはサポートされていません。
+このデータコンパクションステートメントは現在、 TiFlashレプリカに対してのみサポートされており、TiKV レプリカに対してはサポートされていません。
 
 ## 概要 {#synopsis}
 
@@ -43,7 +43,7 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-次のステートメントを実行すると、 `employees`テーブル内のすべてのパーティションの 2つのTiFlashレプリカの圧縮を直ちに開始できます。
+次のステートメントを実行すると、 `employees`テーブル内のすべてのパーティションの 2つのTiFlashレプリカのコンパクションを直ちに開始できます。
 
 ```sql
 ALTER TABLE employees COMPACT TIFLASH REPLICA;
@@ -69,7 +69,7 @@ PARTITION BY LIST (store_id) (
 ALTER TABLE employees SET TIFLASH REPLICA 2;
 ```
 
-次のステートメントを実行すると、テーブル`employees`のパーティション`pNorth`と`pEast`の 2つのTiFlashレプリカの圧縮を直ちに開始できます。
+次のステートメントを実行すると、テーブル`employees`のパーティション`pNorth`と`pEast`の 2つのTiFlashレプリカのコンパクションを直ちに開始できます。
 
 ```sql
 ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
@@ -77,9 +77,9 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 ## 同時実行性 {#concurrency}
 
-`ALTER TABLE ... COMPACT`文は、テーブル内のすべてのレプリカを同時に圧縮します。
+`ALTER TABLE ... COMPACT`文は、テーブル内のすべてのレプリカを同時にコンパクションします。
 
-オンラインビジネスへの重大な影響を避けるため、各TiFlashインスタンスは、デフォルトで一度に1つのテーブルのみのデータを圧縮します（バックグラウンドでトリガーされる圧縮を除く）。つまり、 `ALTER TABLE ... COMPACT`文を複数のテーブルに対して同時に実行した場合、それらの実行は同時に実行されるのではなく、同じTiFlashインスタンス上でキューに入れられます。
+オンラインビジネスへの重大な影響を避けるため、各TiFlashインスタンスは、デフォルトで一度に1つのテーブルのみのデータをコンパクションします（バックグラウンドでトリガーされるコンパクションを除く）。つまり、 `ALTER TABLE ... COMPACT`文を複数のテーブルに対して同時に実行した場合、それらの実行は同時に実行されるのではなく、同じTiFlashインスタンス上でキューに入れられます。
 
 <CustomContent platform="tidb">
 
@@ -87,11 +87,11 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 </CustomContent>
 
-## データ圧縮の進行状況を観察する {#observe-data-compaction-progress}
+## データコンパクションの進行状況を観察する {#observe-data-compaction-progress}
 
-`INFORMATION_SCHEMA.TIFLASH_TABLES`テーブルの`TOTAL_DELTA_ROWS`列を確認することで、データ圧縮の進行状況を確認したり、テーブルの圧縮を開始するかどうかを判断したりできます。 `TOTAL_DELTA_ROWS`の値が大きいほど、圧縮できるデータ量が多くなります。 `TOTAL_DELTA_ROWS`が`0`の場合、テーブル内のすべてのデータは最適な状態であり、圧縮する必要はありません。
+`INFORMATION_SCHEMA.TIFLASH_TABLES`テーブルの`TOTAL_DELTA_ROWS`列を確認することで、データコンパクションの進行状況を確認したり、テーブルのコンパクションを開始するかどうかを判断したりできます。 `TOTAL_DELTA_ROWS`の値が大きいほど、コンパクションできるデータ量が多くなります。 `TOTAL_DELTA_ROWS`が`0`の場合、テーブル内のすべてのデータは最適な状態であり、コンパクションする必要はありません。
 
-<details><summary>例:非パーティションテーブルの圧縮状態を確認する</summary>
+<details><summary>例:非パーティションテーブルのコンパクション状態を確認する</summary>
 
 ```sql
 USE test;
@@ -136,7 +136,7 @@ SELECT TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS FROM INFORMATION_SCHEMA.TIFLASH_TABLE
 
 </details>
 
-<details><summary>例:パーティションテーブルの圧縮状態を確認する</summary>
+<details><summary>例:パーティションテーブルのコンパクション状態を確認する</summary>
 
 ```sql
 USE test;
@@ -189,7 +189,7 @@ SELECT PARTITION_NAME, TOTAL_DELTA_ROWS, TOTAL_STABLE_ROWS
 
 > **Note:**
 >
-> - 圧縮中にデータが更新された場合、圧縮完了後も`TOTAL_DELTA_ROWS`が0以外の値のままになることがあります。これは正常な動作であり、これらの更新が圧縮されていないことを示しています。これらの更新を圧縮するには、 `ALTER TABLE ... COMPACT`文を再度実行してください。
+> - コンパクション中にデータが更新された場合、コンパクション完了後も`TOTAL_DELTA_ROWS`が0以外の値のままになることがあります。これは正常な動作であり、これらの更新がコンパクションされていないことを示しています。これらの更新をコンパクションするには、 `ALTER TABLE ... COMPACT`文を再度実行してください。
 >
 > - `TOTAL_DELTA_ROWS`は行数ではなくデータバージョンを示します。例えば、行を挿入してから削除した場合、 `TOTAL_DELTA_ROWS`は2増加します。
 

@@ -87,11 +87,11 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 ## Storage Write Stall {#storage-write-stall}
 
-- Write & Delta Management Throughput: すべてのインスタンスの書き込みとデータ圧縮のスループット。
+- Write & Delta Management Throughput: すべてのインスタンスの書き込みとデータコンパクションのスループット。
     - `throughput_write` Raftを介したデータ同期のスループットを意味します。
-    - `throughput_delta-management`データ圧縮のスループットを意味します。
+    - `throughput_delta-management`データコンパクションのスループットを意味します。
     - `total_write` 、前回の開始以降に書き込まれた合計バイト数を意味します。
-    - `total_delta-management` 、前回の開始以降に圧縮されたデータの合計バイト数を意味します。
+    - `total_delta-management` 、前回の開始以降にコンパクションされたデータの合計バイト数を意味します。
 - Write Stall Duration: インスタンスごとの書き込みおよびリージョンデータの削除 (範囲の削除) の停止期間。
 - Write Throughput By Instance：インスタンスごとの書き込みスループット。Raft書き込みコマンドとRaftスナップショットを適用した場合のスループットも含まれます。
 - Write Command OPS By Instance: インスタンスによって受信されたさまざまな種類のコマンドの合計数。

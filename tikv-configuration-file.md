@@ -617,7 +617,7 @@ TiKVにおけるフロー制御メカニズムに関連する設定項目。こ�
 
 ### `soft-pending-compaction-bytes-limit` {#soft-pending-compaction-bytes-limit-1}
 
-- KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し始め、 `ServerIsBusy`エラーを報告します。
+- KvDB の保留中のコンパクションバイトがこのしきい値に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し始め、 `ServerIsBusy`エラーを報告します。
 
     > **Note:**
     >
@@ -627,7 +627,7 @@ TiKVにおけるフロー制御メカニズムに関連する設定項目。こ�
 
 ### `hard-pending-compaction-bytes-limit` {#hard-pending-compaction-bytes-limit-1}
 
-- KvDB の保留中の圧縮バイトがこのしきい値に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。 `enable`が`true`に設定されている場合、この設定項目は`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`を上書きします。
+- KvDB の保留中のコンパクションバイトがこのしきい値に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。 `enable`が`true`に設定されている場合、この設定項目は`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`を上書きします。
 - デフォルト値: `"1024GiB"`
 
 ## storage.io-rate-limit {#storageio-rate-limit}
@@ -798,7 +798,7 @@ Raftstoreに関連する設定項目。
 
 ### `raft-log-compact-sync-interval` <span class="version-mark">v5.3で追加</span> {#raft-log-compact-sync-interval-new-in-v53}
 
-- 不要なRaftログを圧縮する時間間隔
+- 不要なRaftログをコンパクションする時間間隔
 - デフォルト値: `"2s"`
 - 最小値: `"0s"`
 
@@ -877,7 +877,7 @@ Raftstoreに関連する設定項目。
 >
 > v7.5.7およびv8.5.4以降、この設定項目は非推奨となり、 [`gc.auto-compaction.check-interval`](#check-interval-new-in-v757-and-v854)に置き換えられました。
 
-- RocksDB の圧縮を手動でトリガーする必要があるかどうかを確認する時間間隔。 `0`はこの機能が無効になっていることを意味します。
+- RocksDB のコンパクションを手動でトリガーする必要があるかどうかを確認する時間間隔。 `0`はこの機能が無効になっていることを意味します。
 - デフォルト値: `"5m"`
 - 最小値: `0`
 
@@ -887,7 +887,7 @@ Raftstoreに関連する設定項目。
 >
 > バージョン7.5.7および8.5.4以降、この設定項目は非推奨となりました。
 
-- 手動圧縮の各ラウンドで一度にチェックされるリージョンの数
+- 手動コンパクションの各ラウンドで一度にチェックされるリージョンの数
 - デフォルト値:
 
     - `storage.engine="raft-kv"`の場合、デフォルト値は`100`です。
@@ -900,7 +900,7 @@ Raftstoreに関連する設定項目。
 >
 > バージョン7.5.7および8.5.4以降、この設定項目は非推奨となり、 [`gc.auto-compaction.tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854)に置き換えられました。
 
-- RocksDBの圧縮をトリガーするために必要なtombstoneの数
+- RocksDBのコンパクションをトリガーするために必要なtombstoneの数
 - デフォルト値: `10000`
 - 最小値: `0`
 
@@ -910,7 +910,7 @@ Raftstoreに関連する設定項目。
 >
 > バージョン7.5.7および8.5.4以降、この設定項目は非推奨となり、 [`gc.auto-compaction.tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に置き換えられました。
 
-- RocksDBの圧縮をトリガーするために必要なtombstoneの割合
+- RocksDBのコンパクションをトリガーするために必要なtombstoneの割合
 - デフォルト値: `30`
 - 最小値: `1`
 - 最大値: `100`
@@ -989,13 +989,13 @@ Raftstoreに関連する設定項目。
 
 ### `lock-cf-compact-interval` {#lock-cf-compact-interval}
 
-- TiKVがロックカラムファミリーの手動圧縮をトリガーする時間間隔
+- TiKVがロックカラムファミリーの手動コンパクションをトリガーする時間間隔
 - デフォルト値: `"10m"`
 - 最小値: `0`
 
 ### `lock-cf-compact-bytes-threshold` {#lock-cf-compact-bytes-threshold}
 
-- TiKVがロックカラムファミリーの手動圧縮をトリガーするサイズ
+- TiKVがロックカラムファミリーの手動コンパクションをトリガーするサイズ
 - デフォルト値: `"256MiB"`
 - 最小値: `0`
 - 単位: MiB
@@ -1179,18 +1179,18 @@ Raftstoreに関連する設定項目。
 
 > **Warning:**
 >
-> 定期的な完全圧縮は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> 定期的な完全コンパクションは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
-- TiKVが定期的な完全圧縮を開始する具体的な時刻を設定します。配列で複数の時刻スケジュールを指定できます。例：
-    - `periodic-full-compact-start-times = ["03:00", "23:00"]`は、TiKVノードの現地時間に基づいて、TiKVが毎日午前3時と午後11時に完全な圧縮を実行することを示しています。
-    - `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]`は、TiKVがUTCタイムゾーンで毎日午前3時と午後11時に完全な圧縮を実行することを示しています。
-    - `periodic-full-compact-start-times = ["03:00 +0800", "23:00 +0800"]`は、TiKVがUTC+08:00タイムゾーンで毎日午前3時と午後11時に完全な圧縮を実行することを示しています。
-- デフォルト値: `[]`は、定期的な完全圧縮がデフォルトで無効になっていることを意味します。
+- TiKVが定期的な完全コンパクションを開始する具体的な時刻を設定します。配列で複数の時刻スケジュールを指定できます。例：
+    - `periodic-full-compact-start-times = ["03:00", "23:00"]`は、TiKVノードの現地時間に基づいて、TiKVが毎日午前3時と午後11時に完全なコンパクションを実行することを示しています。
+    - `periodic-full-compact-start-times = ["03:00 +0000", "23:00 +0000"]`は、TiKVがUTCタイムゾーンで毎日午前3時と午後11時に完全なコンパクションを実行することを示しています。
+    - `periodic-full-compact-start-times = ["03:00 +0800", "23:00 +0800"]`は、TiKVがUTC+08:00タイムゾーンで毎日午前3時と午後11時に完全なコンパクションを実行することを示しています。
+- デフォルト値: `[]`は、定期的な完全コンパクションがデフォルトで無効になっていることを意味します。
 
 ### `periodic-full-compact-start-max-cpu` <span class="version-mark">v7.6.0で追加</span> {#periodic-full-compact-start-max-cpu-new-in-v760}
 
-- TiKVの定期的な完全圧縮におけるCPU使用率の上限を制限します。
-- デフォルト値: `0.1` 、定期的な圧縮処理の最大 CPU 使用率が 10% であることを意味します。
+- TiKVの定期的な完全コンパクションにおけるCPU使用率の上限を制限します。
+- デフォルト値: `0.1` 、定期的なコンパクション処理の最大 CPU 使用率が 10% であることを意味します。
 
 ### `follower-read-max-log-gap` <span class="version-mark">v7.4.0の新機能</span> {#follower-read-max-log-gap-new-in-v740}
 
@@ -1392,7 +1392,7 @@ RocksDBに関連する設定項目
 
 ### `compaction-readahead-size` {#compaction-readahead-size-1}
 
-- RocksDBの圧縮処理中に先読み機能を有効にし、先読みデータのサイズを指定します。機械式ディスクを使用している場合は、少なくとも2MiBに設定することをお勧めします。
+- RocksDBのコンパクション処理中に先読み機能を有効にし、先読みデータのサイズを指定します。機械式ディスクを使用している場合は、少なくとも2MiBに設定することをお勧めします。
 - デフォルト値: `2MiB` (v8.5.7 より前のデフォルト値は `0`)
 - 最小値: `0`
 - 単位: B|KiB|MiB|GiB
@@ -1406,12 +1406,12 @@ RocksDBに関連する設定項目
 
 ### `use-direct-io-for-flush-and-compaction` {#use-direct-io-for-flush-and-compaction-1}
 
-- バックグラウンドのフラッシュと圧縮における読み取りと書き込みの両方で`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`を有効にすると、OS バッファ キャッシュの汚染がバイパスされ防止されますが、後続のファイル読み取りではバッファ キャッシュの内容を再読み込みする必要があります。
+- バックグラウンドのフラッシュとコンパクションにおける読み取りと書き込みの両方で`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`を有効にすると、OS バッファ キャッシュの汚染がバイパスされ防止されますが、後続のファイル読み取りではバッファ キャッシュの内容を再読み込みする必要があります。
 - デフォルト値: `false`
 
 ### `rate-bytes-per-sec` {#rate-bytes-per-sec}
 
-- Titanが無効になっている場合、この設定項目はRocksDB圧縮のI/Oレートを制限し、トラフィックのピーク時にRocksDB圧縮がフォアグラウンドの読み取りおよび書き込みパフォーマンスに与える影響を軽減します。Titanが有効になっている場合、この設定項目はRocksDB圧縮とTitan GCの合計I/Oレートを制限します。RocksDB圧縮とTitan GCのI/OまたはCPU消費量が大きすぎる場合は、ディスクI/O帯域幅と実際の書き込みトラフィックに応じて、この設定項目を適切な値に設定してください。
+- Titanが無効になっている場合、この設定項目はRocksDBコンパクションのI/Oレートを制限し、トラフィックのピーク時にRocksDBコンパクションがフォアグラウンドの読み取りおよび書き込みパフォーマンスに与える影響を軽減します。Titanが有効になっている場合、この設定項目はRocksDBコンパクションとTitan GCの合計I/Oレートを制限します。RocksDBコンパクションとTitan GCのI/OまたはCPU消費量が大きすぎる場合は、ディスクI/O帯域幅と実際の書き込みトラフィックに応じて、この設定項目を適切な値に設定してください。
 - デフォルト値: `10GiB`
 - 最小値: `0`
 - 単位: B|KiB|MiB|GiB
@@ -1423,13 +1423,13 @@ RocksDBに関連する設定項目
 
 ### `rate-limiter-mode` {#rate-limiter-mode}
 
-- RocksDBの圧縮速度制限モード
+- RocksDBのコンパクション速度制限モード
 - オプション値: `"read-only"` 、 `"write-only"` 、 `"all-io"`
 - デフォルト値: `"write-only"`
 
 ### `rate-limiter-auto-tuned` <span class="version-mark">v5.0の新機能</span> {#rate-limiter-auto-tuned-new-in-v50}
 
-- 最近のワークロードに基づいて、RocksDBの圧縮レート制限設定を自動的に最適化するかどうかを決定します。この設定を有効にすると、圧縮待ちバイト数が通常よりも若干多くなります。
+- 最近のワークロードに基づいて、RocksDBのコンパクションレート制限設定を自動的に最適化するかどうかを決定します。この設定を有効にすると、コンパクション待ちバイト数が通常よりも若干多くなります。
 - デフォルト値: `true`
 
 ### `enable-pipelined-write` {#enable-pipelined-write-1}
@@ -1692,12 +1692,12 @@ Titanに関連する設定項目。
 
 ### `max-bytes-for-level-base` {#max-bytes-for-level-base}
 
-- ベースレベル（レベル1）における最大バイト数。一般的には、memtableのサイズの4倍に設定されます。レベル1のデータサイズ`max-bytes-for-level-base`の制限値に達すると、レベル1のSSTファイルと、それと重複するレベル2のSSTファイルが圧縮されます。
+- ベースレベル（レベル1）における最大バイト数。一般的には、memtableのサイズの4倍に設定されます。レベル1のデータサイズ`max-bytes-for-level-base`の制限値に達すると、レベル1のSSTファイルと、それと重複するレベル2のSSTファイルがコンパクションされます。
 - `defaultcf`および`writecf`のデフォルト値: `"512MiB"`
 - `lockcf`のデフォルト値: `"128MiB"`
 - 最小値: `0`
 - 単位：KiB｜MiB｜GiB
-- 不要な圧縮を減らすため、 `max-bytes-for-level-base`の値は L0 のデータ量とほぼ等しく設定することをお勧めします。たとえば、圧縮方法が "no:no:lz4:lz4:lz4:lz4:lz4" の場合、L0 と L1 は圧縮されず、L0 の圧縮のトリガー条件は SST ファイルの数が 4 (デフォルト値) に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にすることを推奨します。L0 と L1 の両方で圧縮を採用する場合は、RocksDB ログを分析して、memtable から圧縮された SST ファイルのサイズを把握する必要があります。例えば、ファイルサイズが 32 MiB の場合、 `max-bytes-for-level-base`の値を 128 MiB ( `32 MiB * 4` ) に設定することをお勧めします。
+- 不要なコンパクションを減らすため、 `max-bytes-for-level-base`の値は L0 のデータ量とほぼ等しく設定することをお勧めします。たとえば、圧縮方法が "no:no:lz4:lz4:lz4:lz4:lz4" の場合、L0 と L1 は圧縮されず、L0 のコンパクションのトリガー条件は SST ファイルの数が 4 (デフォルト値) に達することであるため、 `max-bytes-for-level-base`の値は`write-buffer-size * 4`にすることを推奨します。L0 と L1 の両方で圧縮を採用する場合は、RocksDB ログを分析して、memtable から圧縮された SST ファイルのサイズを把握する必要があります。例えば、ファイルサイズが 32 MiB の場合、 `max-bytes-for-level-base`の値を 128 MiB ( `32 MiB * 4` ) に設定することをお勧めします。
 
 ### `target-file-size-base` {#target-file-size-base}
 
@@ -1708,7 +1708,7 @@ Titanに関連する設定項目。
 
 ### `level0-file-num-compaction-trigger` {#level0-file-num-compaction-trigger}
 
-- L0 で圧縮をトリガーするファイルの最大数
+- L0 でコンパクションをトリガーするファイルの最大数
 - `defaultcf`および`writecf`のデフォルト値: `4`
 - `lockcf`のデフォルト値: `1`
 - 最小値: `0`
@@ -1717,7 +1717,7 @@ Titanに関連する設定項目。
 
 - L0 で書き込み停止を引き起こすファイルの最大数。
 - v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目の値は[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって直接上書きされます。
-- バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目の値は、その値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ、 [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。
+- バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目の値は、その値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ、 [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB のコンパクション高速化メカニズムが弱まるのを防ぎます。
 - デフォルト値: `20`
 - 最小値: `0`
 
@@ -1729,19 +1729,19 @@ Titanに関連する設定項目。
 
 ### `max-compaction-bytes` {#max-compaction-bytes}
 
-- 圧縮ごとにディスクに書き込まれる最大バイト数
+- コンパクションごとにディスクに書き込まれる最大バイト数
 - デフォルト値: `"2GiB"`
 - 最小値: `0`
 - 単位：KiB｜MiB｜GiB
 
 ### `compaction-pri` {#compaction-pri}
 
-- 優先される圧縮の種類
+- 優先されるコンパクションの種類
 - オプション値:
-    - `"by-compensated-size"` : ファイルサイズ順にファイルを圧縮し、大きなファイルはより高い優先度で圧縮されます。
-    - `"oldest-largest-seq-first"` : 更新日時が最も古いファイルの圧縮を優先します。この値は、ホットキーを狭い範囲で更新する場合に**のみ**使用してください。
-    - `"oldest-smallest-seq-first"` : 長期間次のレベルに圧縮されていない範囲を持つファイルの圧縮を優先します。キー空間全体でホットキーをランダムに更新する場合、この値は書き込み増幅をわずかに低減できます。
-    - `"min-overlapping-ratio"` : 重複率の高いファイルの圧縮を優先します。ファイルの各レベルが小さい場合（ `the file size in the next level` ÷ `the file size in this level`の結果が小さい場合）、TiKV はこのファイルを最初に圧縮します。多くの場合、この値によって書き込み増幅を効果的に削減できます。
+    - `"by-compensated-size"` : ファイルサイズ順にファイルをコンパクションし、大きなファイルはより高い優先度でコンパクションされます。
+    - `"oldest-largest-seq-first"` : 更新日時が最も古いファイルのコンパクションを優先します。この値は、ホットキーを狭い範囲で更新する場合に**のみ**使用してください。
+    - `"oldest-smallest-seq-first"` : 長期間次のレベルにコンパクションされていない範囲を持つファイルのコンパクションを優先します。キー空間全体でホットキーをランダムに更新する場合、この値は書き込み増幅をわずかに低減できます。
+    - `"min-overlapping-ratio"` : 重複率の高いファイルのコンパクションを優先します。ファイルの各レベルが小さい場合（ `the file size in the next level` ÷ `the file size in this level`の結果が小さい場合）、TiKV はこのファイルを最初にコンパクションします。多くの場合、この値によって書き込み増幅を効果的に削減できます。
 - `defaultcf`および`writecf`のデフォルト値: `"min-overlapping-ratio"`
 - `lockcf`のデフォルト値: `"by-compensated-size"`
 
@@ -1762,38 +1762,38 @@ Titanに関連する設定項目。
 
 ### `compaction-style` {#compaction-style}
 
-- 圧縮方法
+- コンパクション方法
 - オプション値: `"level"` 、 `"universal"` 、 `"fifo"`
 - デフォルト値: `"level"`
 
 ### `disable-auto-compactions` {#disable-auto-compactions}
 
-- 自動圧縮を無効にするかどうかを決定します。
+- 自動コンパクションを無効にするかどうかを決定します。
 - デフォルト値: `false`
 
 ### `soft-pending-compaction-bytes-limit` {#soft-pending-compaction-bytes-limit}
 
-- 保留中の圧縮バイト数のソフトリミット。
+- 保留中のコンパクションバイト数のソフトリミット。
 - v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目は[`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって直接上書きされます。
-- バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目は、その値が`storage.flow-control.soft-pending-compaction-bytes-limit`より大きい場合にのみ、 [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB の圧縮高速化メカニズムが弱まるのを防ぎます。
+- バージョン 8.5.5 以降: フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`の場合)、この設定項目は、その値が`storage.flow-control.soft-pending-compaction-bytes-limit`より大きい場合にのみ、 [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB のコンパクション高速化メカニズムが弱まるのを防ぎます。
 - デフォルト値: `"192GiB"`
 - 単位：KiB｜MiB｜GiB
 
 ### `hard-pending-compaction-bytes-limit` {#hard-pending-compaction-bytes-limit}
 
-- 保留中の圧縮バイト数の上限値。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.hard-pending-compaction-bytes-limit`がこの設定項目を上書きします。
+- 保留中のコンパクションバイト数の上限値。 `storage.flow-control.enable`が`true`に設定されている場合、 `storage.flow-control.hard-pending-compaction-bytes-limit`がこの設定項目を上書きします。
 - デフォルト値: `"256GiB"`
 - 単位：KiB｜MiB｜GiB
 
 ### `enable-compaction-guard` {#enable-compaction-guard}
 
-- TiKVリージョン境界でSSTファイルを分割する最適化機能である圧縮ガードを有効または無効にします。この最適化により、圧縮I/Oを削減し、TiKVがより大きなSSTファイルサイズ（つまり、SSTファイルの総数）を使用できるようにすると同時に、リージョン移行時に古いデータを効率的にクリーンアップできます。
+- TiKVリージョン境界でSSTファイルを分割する最適化機能であるコンパクションガードを有効または無効にします。この最適化により、コンパクションI/Oを削減し、TiKVがより大きなSSTファイルサイズ（つまり、SSTファイルの総数）を使用できるようにすると同時に、リージョン移行時に古いデータを効率的にクリーンアップできます。
 - `defaultcf`および`writecf`のデフォルト値: `true`
 - `lockcf`のデフォルト値: None。これは、デフォルトで無効になっていることを意味します。
 
 ### `compaction-guard-min-output-file-size` {#compaction-guard-min-output-file-size}
 
-- 圧縮ガードが有効になっている場合の、SSTファイルの最小サイズ。この設定により、圧縮ガードが有効になっている場合にSSTファイルが小さくなりすぎるのを防ぎます。
+- コンパクションガードが有効になっている場合の、SSTファイルの最小サイズ。この設定により、コンパクションガードが有効になっている場合にSSTファイルが小さくなりすぎるのを防ぎます。
 - デフォルト値: `"8MiB"`
 - 単位：KiB｜MiB｜GiB
 
@@ -1820,19 +1820,19 @@ Titanに関連する設定項目。
 
 ### `ttl` <span class="version-mark">v7.2.0の新機能</span> {#ttl-new-in-v720}
 
-- TTLよりも古い更新情報を持つSSTファイルは、自動的に圧縮対象として選択されます。これらのSSTファイルは、最下位レベルまたは最下位ファイルまで圧縮されるように、段階的に圧縮処理が行われます。
+- TTLよりも古い更新情報を持つSSTファイルは、自動的にコンパクション対象として選択されます。これらのSSTファイルは、最下位レベルまたは最下位ファイルまでコンパクションされるように、段階的にコンパクション処理が行われます。
 - デフォルト値：なし。これは、デフォルトではSSTファイルが選択されていないことを意味します。
 - 単位：s（秒）｜h（時間）｜d（日）
 
 ### `periodic-compaction-seconds` <span class="version-mark">v7.2.0 の新機能</span> {#periodic-compaction-seconds-new-in-v720}
 
-- 定期的な圧縮の間隔。この値よりも古い更新履歴を持つSSTファイルが圧縮対象として選択され、元のSSTファイルと同じ階層に書き換えられます。
-- デフォルト値：None。これは、定期的な圧縮がデフォルトで無効になっていることを意味します。
+- 定期的なコンパクションの間隔。この値よりも古い更新履歴を持つSSTファイルがコンパクション対象として選択され、元のSSTファイルと同じ階層に書き換えられます。
+- デフォルト値：None。これは、定期的なコンパクションがデフォルトで無効になっていることを意味します。
 - 単位：s（秒）｜h（時間）｜d（日）
 
 ### `max-compactions` <span class="version-mark">（v6.6.0の新機能）</span> {#max-compactions-new-in-v660}
 
-- 同時実行可能な圧縮タスクの最大数。値`0`は制限なしを意味します。
+- 同時実行可能なコンパクションタスクの最大数。値`0`は制限なしを意味します。
 - デフォルト値: `0`
 
 ## rocksdb.defaultcf.titan {#rocksdbdefaultcftitan}
@@ -2013,7 +2013,7 @@ Titanに関連する設定項目。
 
 ### `compaction-readahead-size` {#compaction-readahead-size}
 
-- RocksDBの圧縮中に先読み機能を有効にするかどうか、および先読みデータのサイズを指定するかどうかを制御します。
+- RocksDBのコンパクション中に先読み機能を有効にするかどうか、および先読みデータのサイズを指定するかどうかを制御します。
 - 機械式ディスクを使用する場合は、値を少なくとも`2MiB`に設定することをお勧めします。
 - デフォルト値: `2MiB` (v8.5.7 より前のデフォルト値は `0`)
 - 最小値: `0`
@@ -2028,7 +2028,7 @@ Titanに関連する設定項目。
 
 ### `use-direct-io-for-flush-and-compaction` {#use-direct-io-for-flush-and-compaction}
 
-- バックグラウンドのフラッシュと圧縮における読み取りと書き込みの両方で`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`を有効にすると、OS バッファ キャッシュの汚染がバイパスされ防止されますが、後続のファイル読み取りではバッファ キャッシュの内容を再読み込みする必要があります。
+- バックグラウンドのフラッシュとコンパクションにおける読み取りと書き込みの両方で`O_DIRECT`を使用するかどうかを決定します。このオプションのパフォーマンスへの影響: `O_DIRECT`を有効にすると、OS バッファ キャッシュの汚染がバイパスされ防止されますが、後続のファイル読み取りではバッファ キャッシュの内容を再読み込みする必要があります。
 - デフォルト値: `false`
 
 ### `enable-pipelined-write` {#enable-pipelined-write}
@@ -2344,62 +2344,62 @@ TiDB LightningのインポートおよびBR復元に関連する設定項目。
 
 ## gc.auto-compaction {#gcauto-compaction}
 
-TiKVの自動圧縮の動作を設定します。
+TiKVの自動コンパクションの動作を設定します。
 
 ### `check-interval` <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#check-interval-new-in-v757-and-v854}
 
-- TiKVが自動圧縮をトリガーするかどうかを確認する間隔。この間隔内では、自動圧縮条件を満たすリージョンが優先度に基づいて処理されます。間隔が経過すると、TiKVはリージョン情報を再スキャンし、優先度を再計算します。
+- TiKVが自動コンパクションをトリガーするかどうかを確認する間隔。この間隔内では、自動コンパクション条件を満たすリージョンが優先度に基づいて処理されます。間隔が経過すると、TiKVはリージョン情報を再スキャンし、優先度を再計算します。
 - デフォルト値: `"300s"`
 
 ### `tombstone-num-threshold` <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#tombstone-num-threshold-new-in-v757-and-v854}
 
-- TiKVの自動圧縮をトリガーするために必要なRocksDBのtombstoneの数。tombstoneの数がこのしきい値に達するか、tombstoneの割合が[`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
-- この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が無効な場合にのみ有効になります。
+- TiKVの自動コンパクションをトリガーするために必要なRocksDBのtombstoneの数。tombstoneの数がこのしきい値に達するか、tombstoneの割合が[`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動コンパクションをトリガーします。
+- この設定項目は[コンパクションフィルター](/garbage-collection-configuration.md)が無効な場合にのみ有効になります。
 - デフォルト値: `10000`
 - 最小値: `0`
 
 ### `tombstone-percent-threshold` <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#tombstone-percent-threshold-new-in-v757-and-v854}
 
-- TiKVによる自動圧縮をトリガーするために必要なRocksDBのtombstoneの割合。tombstoneの割合がこのしきい値に達するか、tombstoneの数が[`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
-- この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が無効な場合にのみ有効になります。
+- TiKVによる自動コンパクションをトリガーするために必要なRocksDBのtombstoneの割合。tombstoneの割合がこのしきい値に達するか、tombstoneの数が[`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-and-v854)に達すると、TiKVは自動コンパクションをトリガーします。
+- この設定項目は[コンパクションフィルター](/garbage-collection-configuration.md)が無効な場合にのみ有効になります。
 - デフォルト値: `30`
 - 最小値: `0`
 - 最大値: `100`
 
 ### `redundant-rows-threshold` <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#redundant-rows-threshold-new-in-v757-and-v854}
 
-- TiKVの自動圧縮をトリガーするために必要な冗長MVCC行の数。冗長行には、RocksDBのtombstone、TiKVの古いバージョン、およびTiKVの削除tombstoneが含まれます。冗長MVCC行の数がこのしきい値に達するか、これらの行の割合が[`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動圧縮をトリガーします。
-- この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が有効な場合にのみ有効になります。
+- TiKVの自動コンパクションをトリガーするために必要な冗長MVCC行の数。冗長行には、RocksDBのtombstone、TiKVの古いバージョン、およびTiKVの削除tombstoneが含まれます。冗長MVCC行の数がこのしきい値に達するか、これらの行の割合が[`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動コンパクションをトリガーします。
+- この設定項目は[コンパクションフィルター](/garbage-collection-configuration.md)が有効な場合にのみ有効になります。
 - デフォルト値: `50000`
 - 最小値: `0`
 
 ### `redundant-rows-percent-threshold` <span class="version-mark">（v7.5.7およびv8.5.4で追加）</span> {#redundant-rows-percent-threshold-new-in-v757-and-v854}
 
-- TiKV の自動圧縮をトリガーするために必要な冗長 MVCC 行の割合。冗長行には、RocksDB のtombstone、TiKV の古いバージョン、および TiKV の削除tombstoneが含まれます。冗長 MVCC 行の数が[`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854)に達するか、これらの行の割合が`redundant-rows-percent-threshold`に達すると、TiKV は自動圧縮をトリガーします。
-- この設定項目は[圧縮フィルター](/garbage-collection-configuration.md)が有効な場合にのみ有効になります。
+- TiKV の自動コンパクションをトリガーするために必要な冗長 MVCC 行の割合。冗長行には、RocksDB のtombstone、TiKV の古いバージョン、および TiKV の削除tombstoneが含まれます。冗長 MVCC 行の数が[`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854)に達するか、これらの行の割合が`redundant-rows-percent-threshold`に達すると、TiKV は自動コンパクションをトリガーします。
+- この設定項目は[コンパクションフィルター](/garbage-collection-configuration.md)が有効な場合にのみ有効になります。
 - デフォルト値: `20`
 - 最小値: `0`
 - 最大値: `100`
 
 ### `bottommost-level-force` <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#bottommost-level-force-new-in-v757-and-v854}
 
-- RocksDBの最下位ファイルに対して強制的に圧縮を実行するかどうかを制御します。
+- RocksDBの最下位ファイルに対して強制的にコンパクションを実行するかどうかを制御します。
 - デフォルト値: `true`
 
 ### `mvcc-read-aware-enabled` <span class="version-mark">v8.5.6の新機能</span> {#mvcc-read-aware-enabled-new-in-v856}
 
-- MVCC読み取り対応の圧縮を有効にするかどうかを制御します。有効にすると、TiKVは読み取りリクエスト中にスキャンされたMVCCバージョンの数を追跡し、この情報を使用して、MVCC読み取り増幅率の高いリージョンに対して圧縮を優先します。これにより、スキャン中に多くの古いバージョンに遭遇するホットリージョンの読み取りレイテンシーが削減されます。
+- MVCC読み取り対応のコンパクションを有効にするかどうかを制御します。有効にすると、TiKVは読み取りリクエスト中にスキャンされたMVCCバージョンの数を追跡し、この情報を使用して、MVCC読み取り増幅率の高いリージョンに対してコンパクションを優先します。これにより、スキャン中に多くの古いバージョンに遭遇するホットリージョンの読み取りレイテンシーが削減されます。
 - デフォルト値: `false`
 
 ### `mvcc-scan-threshold` <span class="version-mark">v8.5.6で追加</span> {#mvcc-scan-threshold-new-in-v856}
 
-- リージョンを圧縮候補としてマークするために、読み取りリクエストごとにスキャンされる MVCC バージョンの最小数。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856)が`true`に設定されている場合にのみ有効になります。
+- リージョンをコンパクション候補としてマークするために、読み取りリクエストごとにスキャンされる MVCC バージョンの最小数。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856)が`true`に設定されている場合にのみ有効になります。
 - デフォルト値: `1000`
 - 最小値: `0`
 
 ### `mvcc-read-weight` <span class="version-mark">v8.5.6で追加</span> {#mvcc-read-weight-new-in-v856}
 
-- リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。値が大きいほど、tombstone密度などの他の圧縮トリガーと比較して、MVCC 読み取り増幅に重みが高くなります。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856)が`true`に設定されている場合にのみ有効になります。
+- リージョンのコンパクション優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。値が大きいほど、tombstone密度などの他のコンパクショントリガーと比較して、MVCC 読み取り増幅に重みが高くなります。この設定項目は、 [`mvcc-read-aware-enabled`](#mvcc-read-aware-enabled-new-in-v856)が`true`に設定されている場合にのみ有効になります。
 - デフォルト値: `3.0`
 - 最小値: `0.0`
 

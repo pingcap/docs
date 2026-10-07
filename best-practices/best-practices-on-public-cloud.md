@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/best-practices-on-public-cloud/']
 
 このドキュメントでは、KV RocksDB におけるコンパクション I/O フローの削減、 Raft Engine専用ディスクの使用、AZ 間トラフィックのコスト最適化、Google Cloud ライブマイグレーションイベントの軽減、大規模クラスタにおける PDサーバーの微調整など、パブリッククラウドへの TiDB の導入に関する様々な重要なベストプラクティスを解説します。これらのベストプラクティスに従うことで、パブリッククラウドにおける TiDB 導入のパフォーマンス、コスト効率、信頼性、スケーラビリティを最大限に高めることができます。
 
-## KV RocksDB の圧縮 I/O フローを削減 {#reduce-compaction-i-o-flow-in-kv-rocksdb}
+## KV RocksDB のコンパクション I/O フローを削減 {#reduce-compaction-i-o-flow-in-kv-rocksdb}
 
 TiKVのストレージエンジンである[RocksDB](https://rocksdb.org/)は、ユーザーデータの保存に使用されます。クラウドEBSのプロビジョニングされたIOスループットは通常、コスト上の理由から制限されているため、RocksDBは書き込み増幅率が高くなり、ディスクスループットがワークロードのボトルネックになる可能性があります。その結果、保留中のコンパクションバイトの総数は時間の経過とともに増加し、フロー制御がトリガーされます。これは、TiKVがフォアグラウンド書き込みフローに対応するための十分なディスク帯域幅を欠いていることを示しています。
 
@@ -20,7 +20,7 @@ TiKVのストレージエンジンである[RocksDB](https://rocksdb.org/)は、
 
 [Titan](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[RocksDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らすことができます。
 
-平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size`を`"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan による圧縮 I/O フローの削減を有効にすることができます。
+平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size`を`"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan によるコンパクション I/O フローの削減を有効にすることができます。
 
 ```toml
 [rocksdb.titan]

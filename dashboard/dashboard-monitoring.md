@@ -114,7 +114,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 - `TiDB -> TiKV: general` : フォアグラウンドトランザクションが TiDB から TiKV に書き込まれる速度
 - `TiDB -> TiKV: internal` : 内部トランザクションが TiDB から TiKV に書き込まれる速度
 - `TiKV -> Rocksdb` : TiKVからRocksDBへの書き込み操作の流れ
-- `RocksDB Compaction` : RocksDBの圧縮操作によって生成された合計読み取りおよび書き込みI/Oフロー
+- `RocksDB Compaction` : RocksDBのコンパクション操作によって生成された合計読み取りおよび書き込みI/Oフロー
 
 ### Duration {#duration}
 

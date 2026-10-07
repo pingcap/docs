@@ -87,13 +87,13 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### `auto-compaction-mod` {#auto-compaction-mod}
 
-- メタ情報データベースの自動圧縮モード
+- メタ情報データベースの自動コンパクションモード
 - 使用可能なオプション: `periodic` (サイクル別) および`revision` (バージョン番号別)。
 - デフォルト値: `periodic`
 
 ### `auto-compaction-retention` {#auto-compaction-retention}
 
-- `auto-compaction-retention`が`periodic`の場合、メタ情報データベースの自動圧縮の間隔。圧縮モードが`revision`に設定されている場合、このパラメータは自動圧縮のバージョン番号を示します。
+- `auto-compaction-retention`が`periodic`の場合、メタ情報データベースの自動コンパクションの間隔。コンパクションモードが`revision`に設定されている場合、このパラメータは自動コンパクションのバージョン番号を示します。
 - デフォルト値: 1時間
 
 ### `tick-interval` {#tick-interval}
