@@ -332,7 +332,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Compaction operations：1秒あたりのコンパクションおよびフラッシュ作業の回数
 - Compaction duration：コンパクションおよびフラッシュ作業の実行に要する時間
 - SST read duration：SSTファイルの読み込みに要する時間
-- Write stall duration: 停止時間を書き込む。通常の場合は`0`となるはずです。
+- Write stall duration: 書き込みストールの時間。通常の場合は`0`となるはずです。
 - Memtable size：各カラムファミリーのmemtableサイズ
 - Memtable hit：memtableのヒット率
 - Block cache size：ブロックキャッシュのサイズ。共有ブロックキャッシュが無効になっている場合は、カラムファミリーごとに内訳が表示されます。
