@@ -58,7 +58,7 @@ TiDB バージョン: 6.1.2
 - PD
 
     - リージョンツリーの統計が不正確になる可能性がある問題を修正[#5318](https://github.com/tikv/pd/issues/5318) @[rleungx](https://github.com/rleungx)
-    - TiFlash Learner レプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
+    - TiFlashラーナーレプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
     - PD がダッシュボード プロキシ リクエストを正しく処理できない問題を修正しました [#5321](https://github.com/tikv/pd/issues/5321) @[HunDunDM](https://github.com/HunDunDM)
     - 不健全なリージョンがPD panicを引き起こす可能性がある問題を修正 [#5491](https://github.com/tikv/pd/issues/5491) @[nolouch](https://github.com/nolouch)
 
