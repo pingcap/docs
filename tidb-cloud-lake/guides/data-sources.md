@@ -14,13 +14,14 @@ summary: "{{{ .lake }}} 中的数据源表示与外部系统的连接。它存�
 | 类型 | 用途 |
 |------|---------|
 | [Amazon S3 - 凭证](/tidb-cloud-lake/guides/aws-credentials.md) | 存储访问 Amazon S3 所需的 Access Key 和 Secret Key。这些凭证可在多个 S3 导入任务中复用。 |
-| [Amazon SQS (S3) - IAM Role (Beta)](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) | 存储 SQS (S3) 摄取所需的 queue URL、Region、IAM Role 和 S3 path scope。它可用于消费 S3 对象创建事件。 |
+| [Amazon SQS (S3) - IAM Role (Preview)](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) | 存储 SQS (S3) 摄取所需的 queue URL、Region、IAM Role 和 S3 path scope。它可用于消费 S3 对象创建事件。 |
 | [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md) | 存储访问 MySQL 所需的主机、端口、用户名、密码和数据库信息。这些设置可在多个 MySQL 同步任务中复用。 |
 | [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md) | 存储访问 PostgreSQL 所需的主机、端口、用户名、密码和数据库信息。这些设置可在多个 PostgreSQL 同步任务中复用。 |
 | [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md) | 存储用于任务失败通知及类似场景的飞书机器人 webhook 和消息模板。 |
-| [Kafka - 凭证（Beta）](/tidb-cloud-lake/guides/kafka-credentials.md) | 存储访问 Kafka 所需的 broker 地址、认证方法和连接凭证。这些设置可供 Kafka Consumer 任务复用。 |
+| [Kafka - Credentials（Preview）](/tidb-cloud-lake/guides/kafka-credentials.md) | 存储访问 Kafka 所需的 broker 地址、认证方法和连接凭证。这些设置可供 Kafka Consumer 任务复用。 |
+| [TiDB 集成任务（预览版）](/tidb-cloud-lake/guides/integrate-with-tidb.md) | 存储 TiDB Cloud Lake 用于读 TiDB 集群 stage 的数据所需的对象存储位置、凭证以及可选的事件队列。这些设置可在多个 TiDB 同步任务中复用。 |
 
-并非每个数据源都对应一个集成任务。例如，`FeiShuBot` 用于通知配置，而 `Amazon S3 - Credentials`、`Amazon SQS (S3) - IAM Role`、`MySQL - Credentials`、`PostgreSQL - Credentials` 和 `Kafka - Credentials` 则由实际的导入、同步或事件消费任务引用。
+并非每个数据源都对应一个集成任务。例如，`FeiShuBot` 用于通知配置，而 `Amazon S3 - Credentials`、`Amazon SQS (S3) - IAM Role`、`MySQL - Credentials`、`PostgreSQL - Credentials`、`TiDB - Credentials` 和 `Kafka - Credentials` 则由实际的导入、同步或事件消费任务引用。
 
 ## 管理数据源 {#managing-data-sources}
 

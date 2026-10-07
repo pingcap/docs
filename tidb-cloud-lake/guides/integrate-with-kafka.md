@@ -1,15 +1,15 @@
 ---
-title: Kafka Consumer Integration Task (Beta)
+title: Kafka Consumer Integration Task (Preview)
 summary: 创建 Kafka Consumer 任务，持续消费 Kafka topic 中的消息，并将消息内容保存到内部对象存储（租户 Stage）。
 ---
 
-# Kafka Consumer Integration Task (Beta)
+# Kafka Consumer Integration Task (Preview)
 
 本文介绍如何创建 Kafka Consumer 任务，以持续消费 Kafka topic 中的消息，并将消息内容保存到内部对象存储（租户 Stage）。
 
 与 S3、MySQL 或 PostgreSQL 数据集成任务不同，Kafka Consumer 任务不会直接写入常规目标表。任务创建并启动后，你可以使用 `@kafka_consumer/<task_name>/` stage 路径查看已保存的消息对象，并通过 SQL 查询其内容。
 
-如果你需要先创建可复用的 Kafka 连接设置，请参见 [Kafka - 凭证（Beta）](/tidb-cloud-lake/guides/kafka-credentials.md)。
+如果你需要先创建可复用的 Kafka 连接设置，请参见 [Kafka - Credentials（Preview）](/tidb-cloud-lake/guides/kafka-credentials.md)。
 
 ## 使用场景 {#use-cases}
 

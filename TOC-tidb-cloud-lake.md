@@ -48,6 +48,7 @@
     - [PostgreSQL - 凭证](/tidb-cloud-lake/guides/postgresql-credentials.md)
     - [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md)
     - [Kafka - 凭证](/tidb-cloud-lake/guides/kafka-credentials.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB 数据源](/tidb-cloud-lake/guides/tidb-data-source.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - 集成任务
     - [概览](/tidb-cloud-lake/guides/integration-tasks.md)
     - [任务管理](/tidb-cloud-lake/guides/task-management.md)
@@ -56,6 +57,7 @@
     - [MySQL 集成任务](/tidb-cloud-lake/guides/integrate-with-mysql.md)
     - [PostgreSQL 集成任务](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
     - [Kafka Consumer 集成任务](/tidb-cloud-lake/guides/integrate-with-kafka.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB 集成任务（预览版）](/tidb-cloud-lake/guides/integrate-with-tidb.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
 - 加载数据
   - 使用 Stage
     - [Stage 概述](/tidb-cloud-lake/guides/stage-overview.md)

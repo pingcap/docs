@@ -12,7 +12,7 @@ summary: 了解 TiDB Cloud Premium 的数据库内核版本规则和格式。
 > 本文档中介绍的内核版本管理规则仅适用于 TiDB Cloud Premium。其他 TiDB Cloud 方案使用不同的内核版本模型：
 >
 > - TiDB Cloud Starter 实例运行在基于经典 TiDB v8.5.3 内核定制的 TiDB X engine 上。该内核与 TiDB Cloud Premium 的内核略有不同。
-> - TiDB Cloud Essential 实例默认运行在基于经典 TiDB v8.5.3 内核定制的 TiDB X engine 上。如果你希望 TiDB Cloud Essential 实例运行与 TiDB Cloud Premium 相同的内核，请联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
+> - 从 2026 年 6 月 30 日起，新创建的 TiDB Cloud Essential 实例运行在与 TiDB Cloud Premium 相同的 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 内核上。
 > - TiDB Cloud Dedicated 集群运行在经典 TiDB 内核上，其内核版本与 TiDB Self-Managed 版本直接对应。
 
 ## 内核版本管理 {#kernel-versioning}
@@ -38,7 +38,7 @@ TiDB-X-CLOUD.202510.1
 
 由于内核开发与发布时间表彼此独立，因此某个内核版本可能会在其基线分支创建数月后才发布。
 
-由于 TiDB Cloud Premium 遵循自身的内核发布节奏，[TiDB Cloud Premium release notes](/tidb-cloud/releases/tidb-x-cloud.202510.1.md) 与 [TiDB Self-Managed release notes](https://docs.pingcap.com/releases/tidb-self-managed/) 分开发布。
+由于 TiDB Cloud Premium 遵循自身的内核发布节奏，[TiDB-X-CLOUD.202603.1 Release Notes](/tidb-cloud/releases/tidb-x-cloud.202603.1.md) 与 [TiDB Self-Managed release notes](https://docs.pingcap.com/releases/tidb-self-managed/) 分开发布。
 
 ## FAQ {#faq}
 

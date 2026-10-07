@@ -53,7 +53,7 @@ summary: 本页介绍数据集成任务的常见操作，包括任务创建流�
 有关字段级配置和详细行为，请继续阅读相应的任务指南：
 
 - [Amazon S3 集成任务](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
-- [Amazon SQS (S3) 集成任务（Beta）](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md)
+- [Amazon SQS (S3) 集成任务（Preview）](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md)
 - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
 - [PostgreSQL 集成任务](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
-- [Kafka Consumer Integration Task (Beta)](/tidb-cloud-lake/guides/integrate-with-kafka.md)
+- [Kafka Consumer Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md)

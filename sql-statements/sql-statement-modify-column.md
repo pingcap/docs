@@ -15,7 +15,7 @@ summary: TiDB 数据库中 MODIFY COLUMN 的用法概述。
 - 修改 `DECIMAL` 精度
 - 将 `VARCHAR(10)` 的长度缩短为 `VARCHAR(5)`
 
-从 v8.5.5 开始，TiDB 对部分原本需要 Reorg-Data 的列类型变更进行了优化。当满足以下条件时，TiDB 只会重建受影响的索引，而不是整个表，从而提升执行效率：
+从 v8.5.5 开始，对于 TiDB Self-Managed 和 TiDB Cloud Dedicated，以及从 CLOUD.202603.1 开始，对于 TiDB Cloud Essential 和 Premium，TiDB 对部分原本需要 Reorg-Data 的列类型变更进行了优化。当满足以下条件时，TiDB 只会重建受影响的索引，而不是整个表，从而提升执行效率：
 
 - 当前会话使用严格的 [SQL 模式](/sql-mode.md)（`sql_mode` 包含 `STRICT_TRANS_TABLES` 或 `STRICT_ALL_TABLES`）。
 - 表没有 TiFlash 副本。

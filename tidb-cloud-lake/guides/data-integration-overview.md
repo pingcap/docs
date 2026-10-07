@@ -27,10 +27,11 @@ summary: "{{{ .lake }}} 中的数据集成功能提供了一个可视化、无�
 | 任务类型 | 说明 |
 |-----------|-------------|
 | [Amazon S3](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md) | 从 Amazon S3 导入 CSV、Parquet 或 NDJSON 文件，支持一次性或持续摄取。 |
-| [Amazon SQS (S3) (Beta)](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) | 从 SQS 队列中消费 S3 对象创建事件，并将相应的对象数据写入 {{{ .lake }}}。 |
+| [Amazon SQS (S3) 集成任务（Preview）](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) | 从 SQS 队列中消费 S3 对象创建事件，并将相应的对象数据写入 {{{ .lake }}}。 |
 | [MySQL](/tidb-cloud-lake/guides/integrate-with-mysql.md) | 使用 `Snapshot`、`CDC Only` 或 `Snapshot + CDC` 模式同步 MySQL 中的表数据。 |
 | [PostgreSQL](/tidb-cloud-lake/guides/integrate-with-postgresql.md) | 使用 `Snapshot`、`CDC Only` 或 `Snapshot + CDC` 模式同步 PostgreSQL 中的表数据。 |
-| [Kafka Consumer Integration Task (Beta)](/tidb-cloud-lake/guides/integrate-with-kafka.md) | 持续消费 Kafka topic 中的消息，并将消息内容保存到内部对象存储中。 |
+| [Kafka Consumer Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md) | 持续消费 Kafka topic 中的消息，并将消息内容保存到内部对象存储中。 |
+| [TiDB 集成任务（预览版）](/tidb-cloud-lake/guides/integrate-with-tidb.md) | 使用 `Snapshot`、`CDC Only` 或 `Snapshot + CDC` 模式同步 TiDB 中的表数据。 |
 
 ## 推荐流程 {#recommended-flow}
 
