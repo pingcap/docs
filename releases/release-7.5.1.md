@@ -14,7 +14,7 @@ TiDB バージョン: 7.5.1
 ## 互換性の変更 {#compatibility-changes}
 
 - セキュリティ強化モード（SEM）で[`require_secure_transport`](https://docs.pingcap.com/tidb/v7.5/system-variables#require_secure_transport-new-in-v610)を`ON`に設定することを禁止し、ユーザーの潜在的な接続問題を防ぎます。 [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
-- ログ印刷のオーバーヘッドを減らすために、 TiFlashは`logger.level`のデフォルト値を`"debug"`から`"info"` に変更します。 [#8641](https://github.com/pingcap/tiflash/issues/8641) @[JaySon-Huang](https://github.com/JaySon-Huang)
+- ログ出力のオーバーヘッドを減らすために、 TiFlashは`logger.level`のデフォルト値を`"debug"`から`"info"` に変更します。 [#8641](https://github.com/pingcap/tiflash/issues/8641) @[JaySon-Huang](https://github.com/JaySon-Huang)
 - TiKV設定項目[`gc.num-threads`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#num-threads-new-in-v658-and-v751)を導入して、 `enable-compaction-filter`が`false` の場合のGCスレッド数を設定します。 [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 - TiCDC Changefeed では、次の新しい設定項目が導入されています。
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
@@ -198,7 +198,7 @@ TiDB バージョン: 7.5.1
     - ストリーム読み取り中に複数のパーティションテーブルをスキャンするときに発生する可能性のある OOM 問題を修正しました。 [#8505](https://github.com/pingcap/tiflash/issues/8505) @[gengliqi](https://github.com/gengliqi)
     - クエリ中にTiFlash がメモリ制限に遭遇した場合のメモリリークの問題を修正しました [#8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
     - TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlash panic問題を修正[#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後にnull 許容列を非 null 許容に変更する`ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後に TiFlash がパニックを起こす問題を修正しました。 [#8419](https://github.com/pingcap/tiflash/issues/8419) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - null 許容列を非 null 許容に変更する`ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後に TiFlash がパニックを起こす問題を修正しました。 [#8419](https://github.com/pingcap/tiflash/issues/8419) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `ColumnRef in (Literal, Func...)` のようなフィルタリング条件でクエリを実行したときにクエリ結果が正しくない問題を修正しました [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `FLASHBACK DATABASE` を実行した後もTiFlashレプリカのデータがガベージコレクションされる問題を修正しました [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlash がオブジェクトストレージデータの GC 所有者を選択できない可能性がある問題を修正しました。 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
