@@ -2368,14 +2368,14 @@ TiKVの自動コンパクションの動作を設定します。
 
 ### `redundant-rows-threshold` <span class="version-mark">v7.5.7 および v8.5.4 で追加</span> {#redundant-rows-threshold-new-in-v757-and-v854}
 
-- TiKVの自動コンパクションをトリガーするために必要な冗長MVCC行の数。冗長行には、RocksDBのtombstone、TiKVの古いバージョン、およびTiKVの削除tombstoneが含まれます。冗長MVCC行の数がこのしきい値に達するか、これらの行の割合が[`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動コンパクションをトリガーします。
+- TiKVの自動コンパクションをトリガーするために必要な冗長MVCC行の数。冗長行には、RocksDBのtombstone、TiKVの古いバージョン、およびTiKVの削除を示すtombstoneが含まれます。冗長MVCC行の数がこのしきい値に達するか、これらの行の割合が[`redundant-rows-percent-threshold`](#redundant-rows-percent-threshold-new-in-v757-and-v854)に達すると、TiKVは自動コンパクションをトリガーします。
 - この設定項目は[コンパクションフィルター](/garbage-collection-configuration.md)が有効な場合にのみ有効になります。
 - デフォルト値: `50000`
 - 最小値: `0`
 
 ### `redundant-rows-percent-threshold` <span class="version-mark">（v7.5.7およびv8.5.4で追加）</span> {#redundant-rows-percent-threshold-new-in-v757-and-v854}
 
-- TiKV の自動コンパクションをトリガーするために必要な冗長 MVCC 行の割合。冗長行には、RocksDB のtombstone、TiKV の古いバージョン、および TiKV の削除tombstoneが含まれます。冗長 MVCC 行の数が[`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854)に達するか、これらの行の割合が`redundant-rows-percent-threshold`に達すると、TiKV は自動コンパクションをトリガーします。
+- TiKV の自動コンパクションをトリガーするために必要な冗長 MVCC 行の割合。冗長行には、RocksDB のtombstone、TiKV の古いバージョン、および TiKV の削除を示すtombstoneが含まれます。冗長 MVCC 行の数が[`redundant-rows-threshold`](#redundant-rows-threshold-new-in-v757-and-v854)に達するか、これらの行の割合が`redundant-rows-percent-threshold`に達すると、TiKV は自動コンパクションをトリガーします。
 - この設定項目は[コンパクションフィルター](/garbage-collection-configuration.md)が有効な場合にのみ有効になります。
 - デフォルト値: `20`
 - 最小値: `0`
