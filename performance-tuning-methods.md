@@ -251,7 +251,7 @@ TiDB、TiKV、PDのCPU/メモリパネルでは、平均CPU、最大CPU、デル
     - `TiDB -> TiKV: general` : フォアグラウンドトランザクションが TiDB から TiKV に書き込まれる速度
     - `TiDB -> TiKV: internal` : 内部トランザクションが TiDB から TiKV に書き込まれる速度
     - `TiKV -> Rocksdb` : TiKVからRocksDBへの書き込み操作の流れ
-    - `RocksDB Compaction` : RocksDBの圧縮操作によって生成される読み取りおよび書き込みI/Oフローの合計。`RocksDB Compaction`が`TiKV -> Rocksdb`よりも大幅に大きく、平均行サイズが512バイトを超える場合は、min-blob-sizeを`"512B"`または`"1KB"`に設定し、blob-file-compressionを`"zstd"`に設定することで、Titanによる圧縮I/Oフローを削減できます。
+    - `RocksDB Compaction` : RocksDBのコンパクション操作によって生成される読み取りおよび書き込みI/Oフローの合計。`RocksDB Compaction`が`TiKV -> Rocksdb`よりも大幅に大きく、平均行サイズが512バイトを超える場合は、min-blob-sizeを`"512B"`または`"1KB"`に設定し、blob-file-compressionを`"zstd"`に設定することで、TitanによるコンパクションI/Oフローを削減できます。
 
         ```toml
         [rocksdb.titan]

@@ -418,7 +418,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `dt_page_gc_threshold` <span class="version-mark">v6.2.0 の新機能</span> {#dt_page_gc_threshold-new-in-v620}
 
-- PageStorageデータファイル内の有効データの最小比率を指定します。PageStorageデータファイル内の有効データの比率がこの設定値を下回ると、GCがトリガーされ、ファイル内のデータが圧縮されます。
+- PageStorageデータファイル内の有効データの最小比率を指定します。PageStorageデータファイル内の有効データの比率がこの設定値を下回ると、GCがトリガーされ、ファイル内のデータがコンパクションされます。
 - デフォルト値: `0.5`
 
 ##### `max_bytes_before_external_group_by` <span class="version-mark">v7.0.0 の新機能</span> {#max_bytes_before_external_group_by-new-in-v700}

@@ -61,15 +61,15 @@ TiDB Lightning [インポートされたデータを検証する](/tidb-lightnin
 
 ファイルが大きすぎる場合、 TiDB Lightning はファイルを複数のチャンクに分割することがあります。
 
-### 圧縮 {#compaction}
+### コンパクション {#compaction}
 
-複数の小さなSSTファイルを1つの大きなSSTファイルに結合し、削除されたエントリをクリーンアップする操作です。TiKVは、 TiDB Lightningによるインポート中にバックグラウンドで自動的にデータを圧縮します。
+複数の小さなSSTファイルを1つの大きなSSTファイルに結合し、削除されたエントリをクリーンアップする操作です。TiKVは、 TiDB Lightningによるインポート中にバックグラウンドで自動的にデータをコンパクションします。
 
 > **Note:**
 >
 > レガシーシステムへの対応のため、 TiDB Lightning、テーブルのインポートごとに明示的にコンパクションを実行するように設定できます。ただし、これは推奨されず、対応する設定はデフォルトで無効になっています。
 
-技術的な詳細については[RocksDBの圧縮に関するWikiページ](https://github.com/facebook/rocksdb/wiki/Compaction)を参照してください。
+技術的な詳細については[RocksDBのコンパクションに関するWikiページ](https://github.com/facebook/rocksdb/wiki/Compaction)を参照してください。
 
 <!-- D -->
 

@@ -191,7 +191,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Throttle duration：L0ファイルが多すぎるためにフロー制御がトリガーされた場合に、スケジューラリクエストの実行がブロックされる期間。このメトリックに値がある場合、フロー制御が存在していることを示します。
 - Scheduler throttled CF：フロー制御のしきい値に達したときにRocksDBのスロットリングをトリガーするCF。
 - Flow controller actions：フロー制御のしきい値に達したときにRocksDBのスロットリングをトリガーするアクション。
-- Flush/L0 flow：各TiKVインスタンス上のRocksDBの異なるCFにおけるフラッシュとL0圧縮のトラフィック。
+- Flush/L0 flow：各TiKVインスタンス上のRocksDBの異なるCFにおけるフラッシュとL0コンパクションのトラフィック。
 - Flow control factors：RocksDBのスロットリングをトリガーする要因。
 - Compaction pending bytes：各TiKVインスタンスでリアルタイムにコンパクション待ち状態にあるRocksDBデータのサイズ。
 - Txn command throttled duration：スロットリングによりトランザクションに関連するコマンドがブロックされた期間。通常、このメトリックは0です。
@@ -329,10 +329,10 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - WAL sync operations：1秒あたりのWAL同期操作の回数
 - Write WAL duration：WALの書き込みに要した時間
 - WAL sync duration：WAL同期操作の実行に要する時間
-- Compaction operations：1秒あたりの圧縮および洗浄作業の回数
-- Compaction duration：圧縮および洗浄作業の実行に要する時間
+- Compaction operations：1秒あたりのコンパクションおよびフラッシュ作業の回数
+- Compaction duration：コンパクションおよびフラッシュ作業の実行に要する時間
 - SST read duration：SSTファイルの読み込みに要する時間
-- Write stall duration: 停止時間を書き込む。通常の場合は`0`となるはずです。
+- Write stall duration: 書き込みストールの時間。通常の場合は`0`となるはずです。
 - Memtable size：各カラムファミリーのmemtableサイズ
 - Memtable hit：memtableのヒット率
 - Block cache size：ブロックキャッシュのサイズ。共有ブロックキャッシュが無効になっている場合は、カラムファミリーごとに内訳が表示されます。
@@ -345,9 +345,9 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Bytes / Read：読み取り操作1回あたりのバイト数
 - Write flow：タイプごとの書き込み操作のフローレート
 - Bytes / Write: 書き込み操作あたりのバイト数
-- Compaction flow：タイプ別の圧縮作業のフローレート
-- Compaction pending bytes：圧縮対象となる保留バイト数
-- Compaction Job Size(files)：単一の圧縮ジョブに関係するSSTファイルの数
+- Compaction flow：タイプ別のコンパクション作業のフローレート
+- Compaction pending bytes：コンパクション対象となる保留バイト数
+- Compaction Job Size(files)：単一のコンパクションジョブに関係するSSTファイルの数
 - Read amplification: TiKVインスタンスごとのリード増幅率
 - Compression ratio：各レベルの圧縮率
 - Number of snapshots：TiKVインスタンスごとのスナップショット数
@@ -375,7 +375,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - WAL Duration Breakdown (P99%): Raft Engine WAL 作成の各段階に要した時間
 - File Count
     - append: Raft Engineがデータ追加に使用するファイルの数
-    - rewrite: Raft Engineによるデータ書き換えに使用されるファイルの数（rewriteはRocksDBの圧縮に類似しています）
+    - rewrite: Raft Engineによるデータ書き換えに使用されるファイルの数（rewriteはRocksDBのコンパクションに類似しています）
 - Entry Count
     - rewrite: Raft Engineによって書き換えられたエントリの数
     - append: Raft Engineによって追加されたエントリの数
