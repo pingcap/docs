@@ -11,13 +11,13 @@ summary: TiDB 2.1.1は2018年12月12日にリリースされ、安定性、SQL�
 
 - SQL オプティマイザ/エグゼキューター
     - 負の日付の丸め誤差を修正 [#8574](https://github.com/pingcap/tidb/pull/8574)
-    - `uncompress`関数がデータ長チェックしない問題を修正 [#8606](https://github.com/pingcap/tidb/pull/8606)
+    - `uncompress`関数がデータ長をチェックしない問題を修正 [#8606](https://github.com/pingcap/tidb/pull/8606)
     - `execute`コマンドが実行された後に`prepare`のバインド引数をリセットする[#8652](https://github.com/pingcap/tidb/pull/8652)
     - パーティションテーブルの統計情報の自動収集をサポート [#8649](https://github.com/pingcap/tidb/pull/8649)
     - `abs`関数をプッシュダウンするときに誤って構成された整数型を修正します [#8628](https://github.com/pingcap/tidb/pull/8628)
     - JSON列のデータ競合を修正 [#8660](https://github.com/pingcap/tidb/pull/8660)
 - サーバー
-    - PDが故障したときにTSOで取得したトランザクションが正しくない問題を修正[#8567](https://github.com/pingcap/tidb/pull/8567)
+    - PDが故障したときにトランザクションが取得したTSOが正しくない問題を修正[#8567](https://github.com/pingcap/tidb/pull/8567)
     - ANSI標準に準拠していないステートメントによって発生するブートストラップエラーを修正 [#8576](https://github.com/pingcap/tidb/pull/8576)
     - トランザクションの再試行で誤ったパラメータが使用される問題を修正[#8638](https://github.com/pingcap/tidb/pull/8638)
 - DDL
@@ -29,9 +29,9 @@ summary: TiDB 2.1.1は2018年12月12日にリリースされ、安定性、SQL�
 ## PD {#pd}
 
 - 設定ファイルで一部の設定項目を`0`に設定できない問題を修正 [#1334](https://github.com/pingcap/pd/pull/1334)
-- PD 起動するときに未定義の構成を確認します [#1362](https://github.com/pingcap/pd/pull/1362)
+- PD を起動するときに未定義の構成を確認します [#1362](https://github.com/pingcap/pd/pull/1362)
 - 遅延を最適化するために、リーダーを新しく作成されたピアに転送しないようにします[#1339](https://github.com/pingcap/pd/pull/1339)
-- デッド`RaftCluster` により停止できない問題を修正 [#1370](https://github.com/pingcap/pd/pull/1370)
+- デッドロックにより`RaftCluster`が停止できない問題を修正 [#1370](https://github.com/pingcap/pd/pull/1370)
 
 ## TiKV {#tikv}
 

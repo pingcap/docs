@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 2.1.12
 - `ORDER BY`一部のケースでNULLをフィルタリングしないことによって発生するpanic問題を修正[#10488](https://github.com/pingcap/tidb/pull/10488)
 - 複数のノードが存在する場合、 `UUID`関数によって返される値が重複する可能性がある問題を修正しました[#10711](https://github.com/pingcap/tidb/pull/10711)
 - `CAST(-num as datetime)`によって返される値を`error`から NULL に変更します [#10703](https://github.com/pingcap/tidb/pull/10703)
-- 符号なしヒストグラムが符号付き範囲と一致する場合がある問題を修正[#10695](https://github.com/pingcap/tidb/pull/10695)
+- 符号なしヒストグラムが符号付き範囲に遭遇する場合がある問題を修正[#10695](https://github.com/pingcap/tidb/pull/10695)
 - 統計フィードバックがbigint unsigned primary key に一致すると、データの読み取りで誤ってエラーが報告される問題を修正しました。 [#10307](https://github.com/pingcap/tidb/pull/10307)
 - パーティションテーブルの場合の`Show Create Table`の結果が、場合によっては正しく表示されない問題を修正しました[#10690](https://github.com/pingcap/tidb/pull/10690)
 - `GROUP_CONCAT`集計関数の計算結果が一部の相関サブクエリに対して正しくない問題を修正[#10670](https://github.com/pingcap/tidb/pull/10670)

@@ -19,10 +19,10 @@ TiDB Ansible バージョン: 2.1.13
 - 統計情報を更新するかどうかを制御する`update-stats`設定項目を追加します[#10772](https://github.com/pingcap/tidb/pull/10772)
 - ホットスポット問題を解決するために、リージョンプリスプリットをサポートする次の TiDB 固有の構文を追加します。
 - `PRE_SPLIT_REGIONS`テーブルオプションを追加する [#10863](https://github.com/pingcap/tidb/pull/10863)
-- `SPLIT TABLE table_name INDEX index_name`構文追加する [#10865](https://github.com/pingcap/tidb/pull/10865)
-- `SPLIT TABLE [table_name] BETWEEN (min_value...) AND (max_value...) REGIONS [region_num]`構文追加する [#10882](https://github.com/pingcap/tidb/pull/10882)
-- `KILL`構文によって発生するpanic問題を修正[#10879](https://github.com/pingcap/tidb/pull/10879)
-- MySQLとの互換性を`ADD_DATE`の場合改善 [#10718](https://github.com/pingcap/tidb/pull/10718)
+- `SPLIT TABLE table_name INDEX index_name`構文を追加する [#10865](https://github.com/pingcap/tidb/pull/10865)
+- `SPLIT TABLE [table_name] BETWEEN (min_value...) AND (max_value...) REGIONS [region_num]`構文を追加する [#10882](https://github.com/pingcap/tidb/pull/10882)
+- 一部のケースで`KILL`構文によって発生するpanic問題を修正[#10879](https://github.com/pingcap/tidb/pull/10879)
+- 一部のケースで`ADD_DATE`のMySQLとの互換性を改善 [#10718](https://github.com/pingcap/tidb/pull/10718)
 - インデックス結合における内部テーブル選択の選択率の誤った推定を修正 [#10856](https://github.com/pingcap/tidb/pull/10856)
 
 ## TiKV {#tikv}

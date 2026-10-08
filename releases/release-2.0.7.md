@@ -20,9 +20,9 @@ summary: "TiDB 2.0.7は2018年9月7日にリリースされ、システムの互
 - バグ修正
     - 主キーが整数であるテーブルでは`USE INDEX(PRIMARY)`を使用できない問題を修正 [#7298](https://github.com/pingcap/tidb/pull/7298)
     - 内側の行が`NULL` の場合に`Merge Join`と`Index Join`が誤った結果を出力する問題を修正しました [#7301](https://github.com/pingcap/tidb/pull/7301)
-    - チャンク`Join`が小さすぎると誤った結果が出力される問題を修正しました[#7315](https://github.com/pingcap/tidb/pull/7315)
+    - チャンクサイズが小さすぎる場合に`Join`が誤った結果を出力する問題を修正しました[#7315](https://github.com/pingcap/tidb/pull/7315)
     - `range column` を含むテーブルを作成するステートメントによって発生するpanic問題を修正しました [#7379](https://github.com/pingcap/tidb/pull/7379)
-    - `admin check table`時刻型列のエラーを誤って報告する問題を修正[#7457](https://github.com/pingcap/tidb/pull/7457)
+    - `admin check table`が時刻型列のエラーを誤って報告する問題を修正[#7457](https://github.com/pingcap/tidb/pull/7457)
     - デフォルト値`current_timestamp`のデータが条件`=`を使用してクエリできない問題を修正しました。 [#7467](https://github.com/pingcap/tidb/pull/7467)
     - `ComStmtSendLongData`コマンドを使用して挿入された長さゼロのパラメータが誤って NULL として解析される問題を修正しました [#7508](https://github.com/pingcap/tidb/pull/7508)
     - 特定のシナリオで`auto analyze`が繰り返し実行される問題を修正[#7556](https://github.com/pingcap/tidb/pull/7556)
@@ -33,4 +33,4 @@ summary: "TiDB 2.0.7は2018年9月7日にリリースされ、システムの互
 - 改善
     - スペース増幅を減らすために、デフォルトで空のクラスター内の`dynamic-level-bytes`パラメータを開きます。
 - バグ修正
-    - リージョン統合後のリージョンの更新`approximate size`と`approximate keys count`
+    - リージョンのマージ後に、リージョンの`approximate size`と`approximate keys count`を更新

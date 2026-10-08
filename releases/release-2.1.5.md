@@ -32,18 +32,18 @@ summary: TiDB 2.1.5とTiDB Ansible 2.1.5は、2019年2月28日にリリースさ
 - DDL
     - `DROP COLUMN`操作をキャンセルする際のいくつかの問題を修正 [#9352](https://github.com/pingcap/tidb/pull/9352)
     - `DROP`または`ADD`パーティションテーブル操作をキャンセルする際のいくつかの問題を修正しました[#9376](https://github.com/pingcap/tidb/pull/9376)
-    - `ADMIN CHECK TABLE`一部のケースでデータインデックスの不整合を誤って報告する問題を修正[#9399](https://github.com/pingcap/tidb/pull/9399)
+    - `ADMIN CHECK TABLE`が一部のケースでデータインデックスの不整合を誤って報告する問題を修正[#9399](https://github.com/pingcap/tidb/pull/9399)
     - `TIMESTAMP`デフォルト値のタイムゾーン問題を修正 [#9108](https://github.com/pingcap/tidb/pull/9108)
 
 ## PD {#pd}
 
-- 返される結果からTombstoneストアを削除するには、 `GetAllStores`インターフェイスに`exclude_tombstone_stores`オプションを提供します[#1444](https://github.com/pingcap/pd/pull/1444)
+- 返される結果からTombstoneストアを除外するために、 `GetAllStores`インターフェイスに`exclude_tombstone_stores`オプションを提供します[#1444](https://github.com/pingcap/pd/pull/1444)
 
 ## TiKV {#tikv}
 
 - インポーターが一部のケースでデータのインポートに失敗する問題を修正[#4223](https://github.com/tikv/tikv/pull/4223)
 - いくつかのケースで`KeyNotInRegion`エラーを修正[#4125](https://github.com/tikv/tikv/pull/4125)
-- 一部のケースでリージョン結合によって発生するpanic問題を修正[#4235](https://github.com/tikv/tikv/pull/4235)
+- 一部のケースでリージョンマージによって発生するpanic問題を修正[#4235](https://github.com/tikv/tikv/pull/4235)
 - 詳細な`StoreNotMatch`エラーメッセージを追加 [#3885](https://github.com/tikv/tikv/pull/3885)
 
 ## ツール {#tools}

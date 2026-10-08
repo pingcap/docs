@@ -15,7 +15,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - `IndexJoin` の外側のテーブルの選択戦略を最適化する [#7019](https://github.com/pingcap/tidb/pull/7019)
     - `PREPARE`以外のステートメントのプランキャッシュを削除します [#7040](https://github.com/pingcap/tidb/pull/7040)
     - `INSERT`文が解析されず、場合によっては正しく実行されない問題を修正[#7068](https://github.com/pingcap/tidb/pull/7068)
-    - `IndexJoin`結果が場合によっては正しくない問題を修正[#7150](https://github.com/pingcap/tidb/pull/7150)
+    - `IndexJoin`の結果が場合によっては正しくない問題を修正[#7150](https://github.com/pingcap/tidb/pull/7150)
     - 一部のケースで一意インデックスを使用して`NULL`値が見つからない問題を修正 [#7163](https://github.com/pingcap/tidb/pull/7163)
     - UTF-8 のプレフィックスインデックスの範囲計算の問題を修正 [#7194](https://github.com/pingcap/tidb/pull/7194)
     - 場合によっては`Project`演算子を削除することによって結果が正しくなくなる問題を修正しました[#7257](https://github.com/pingcap/tidb/pull/7257)
@@ -25,7 +25,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - 一部のケースで夏時間が正しく計算されない問題を修正[#6823](https://github.com/pingcap/tidb/pull/6823)
     - 集計関数フレームワークをリファクタリングして、 `Stream`と`Hash`集計オペレーターの実行効率を向上させる [#6852](https://github.com/pingcap/tidb/pull/6852)
     - `Hash`集計オペレーターが場合によっては正常に終了できない問題を修正[#6982](https://github.com/pingcap/tidb/pull/6982)
-    - `BIT_AND` / `BIT_OR` / `BIT_XOR`非整数データを正しく処理しない問題を修正[#6994](https://github.com/pingcap/tidb/pull/6994)
+    - `BIT_AND` / `BIT_OR` / `BIT_XOR`が非整数データを正しく処理しない問題を修正[#6994](https://github.com/pingcap/tidb/pull/6994)
     - `REPLACE INTO`文の実行速度を最適化し、パフォーマンスを約10倍向上させます[#7027](https://github.com/pingcap/tidb/pull/7027)
     - 時間型データのメモリ使用量を最適化し、時間型データのメモリ使用量を50％削減します[#7043](https://github.com/pingcap/tidb/pull/7043)
     - `UNION`文で返される結果に符号付き整数と符号なし整数が混在する問題を修正しました。これは MySQL と互換性がありません。 [#7112](https://github.com/pingcap/tidb/pull/7112)
@@ -59,13 +59,13 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - 権限検証で複数のルールがヒットした場合の順序の問題を修正 [#7211](https://github.com/pingcap/tidb/pull/7211)
     - エンコーディング関連のシステム変数のデフォルト値の一部を UTF-8 に変更 [#7198](https://github.com/pingcap/tidb/pull/7198)
     - スロークエリログにさらに詳細な情報を表示する[#7302](https://github.com/pingcap/tidb/pull/7302)
-    - PDにtidbサーバー関連情報を登録し、HTTP API でこの情報を取得することをサポート [#7082](https://github.com/pingcap/tidb/pull/7082)
+    - PDに`tidb-server`関連情報を登録し、HTTP API でこの情報を取得することをサポート [#7082](https://github.com/pingcap/tidb/pull/7082)
 - 互換性
     - セッション変数`warning_count`と`error_count`をサポート[#6945](https://github.com/pingcap/tidb/pull/6945)
     - システム変数の読み取り時に`Scope`チェックを追加 [#6958](https://github.com/pingcap/tidb/pull/6958)
     - `MAX_EXECUTION_TIME`構文をサポートする [#7012](https://github.com/pingcap/tidb/pull/7012)
     - `SET`構文のより多くのステートメントをサポート [#7020](https://github.com/pingcap/tidb/pull/7020)
-    - システム変数設定する際に有効性チェックを追加する [#7117](https://github.com/pingcap/tidb/pull/7117)
+    - システム変数を設定する際に有効性チェックを追加する [#7117](https://github.com/pingcap/tidb/pull/7117)
     - `Prepare`文の`PlaceHolder`の数の検証を追加する [#7162](https://github.com/pingcap/tidb/pull/7162)
     - `set character_set_results = null`をサポート [#7353](https://github.com/pingcap/tidb/pull/7353)
     - `flush status`構文をサポートする [#7369](https://github.com/pingcap/tidb/pull/7369)
@@ -75,15 +75,15 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - `SET`と`ENUM`タイプの列情報を修正[#7417](https://github.com/pingcap/tidb/pull/7417)
     - `CREATE USER`文の`IDENTIFIED WITH`構文をサポートする [#7402](https://github.com/pingcap/tidb/pull/7402)
     - `TIMESTAMP`計算プロセス中に精度が失われる問題を修正 [#7418](https://github.com/pingcap/tidb/pull/7418)
-    - `SYSTEM`以上の変数の妥当性検証をサポート[#7196](https://github.com/pingcap/tidb/pull/7196)
+    - より多くの`SYSTEM`変数の妥当性検証をサポート[#7196](https://github.com/pingcap/tidb/pull/7196)
     - `CHAR_LENGTH`関数がバイナリ文字列を計算するときに誤った結果が発生する問題を修正しました [#7410](https://github.com/pingcap/tidb/pull/7410)
-    - `GROUP BY` を含む文の誤った結果`CONCAT`を修正します [#7448](https://github.com/pingcap/tidb/pull/7448)
+    - `GROUP BY`を含む文における`CONCAT`の誤った結果を修正します [#7448](https://github.com/pingcap/tidb/pull/7448)
     - `DECIMAL`型を`STRING`型にキャストする際の不正確な型長の問題を修正しました [#7451](https://github.com/pingcap/tidb/pull/7451)
 - DML
     - `Load Data`文の安定性の問題を修正 [#6927](https://github.com/pingcap/tidb/pull/6927)
-    - いくつかの操作を実行する際のメモリ使用量の問題を修正しました`Batch` [#7086](https://github.com/pingcap/tidb/pull/7086)
+    - 一部の`Batch`操作を実行する際のメモリ使用量の問題を修正しました [#7086](https://github.com/pingcap/tidb/pull/7086)
     - `Replace Into`文のパフォーマンスを向上させる [#7027](https://github.com/pingcap/tidb/pull/7027)
-    - `CURRENT_TIMESTAMP` 書き込む際の不一致な精度の問題を修正 [#7355](https://github.com/pingcap/tidb/pull/7355)
+    - `CURRENT_TIMESTAMP`を書き込む際の不一致な精度の問題を修正 [#7355](https://github.com/pingcap/tidb/pull/7355)
 - DDL
     - `Schema`が複製されているかどうかをDDLで判断する方法を改善し、場合によっては誤判断を回避する[#7319](https://github.com/pingcap/tidb/pull/7319)
     - インデックス追加プロセスで`SHOW CREATE TABLE`結果を修正 [#6993](https://github.com/pingcap/tidb/pull/6993)
@@ -101,7 +101,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
 
 ## PD {#pd}
 
-- 特徴
+- 新機能
     - バージョン管理メカニズムを導入し、互換性を保ちながらクラスタのローリングアップデートをサポートする
     - `region merge`機能を有効にする
     - `GetPrevRegion`インターフェースをサポート
@@ -114,10 +114,10 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - ホットスポット統計の計算パフォーマンスを最適化
     - APIインターフェースのエラーコードを返すことを最適化
     - スケジュール戦略を制御するオプションを追加する
-    - `label`特殊文字の使用を禁止する
+    - `label`での特殊文字の使用を禁止する
     - スケジュールシミュレーターの改善
     - pd-ctl の統計情報を使用してリージョンを分割する機能をサポート
-    - pd-ctl で`jq`呼び出すことで JSON 出力のフォーマットをサポートします。
+    - pd-ctl で`jq`を呼び出すことで JSON 出力のフォーマットをサポートします。
     - etcd Raftステートマシンに関するメトリクスを追加する
 - バグ修正
     - Leaderを切り替えた後に名前空間が再ロードされない問題を修正しました
@@ -128,7 +128,7 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
 
 ## TiKV {#tikv}
 
-- 特徴
+- 新機能
     - ホットリージョンへの書き込み操作によってリージョンが大きくなりすぎるのを避けるために`batch split`をサポートします
     - インデックススキャンの効率を向上させるために、行数に基づいてリージョンを分割することをサポートします。
 - パフォーマンス
@@ -150,6 +150,6 @@ summary: TiDB 2.1 RC1は2018年8月24日にリリースされ、安定性、SQL�
     - tikv-fail を tikv-ctl に統合する
     - スレッドのI/Oメトリックを追加する
 - バグ修正
-    - 小数点関連の問題を修正
+    - decimal関連の問題を修正
     - `gRPC max_send_message_len`が誤って設定される問題を修正
     - `region_size`の設定ミスによる問題を修正

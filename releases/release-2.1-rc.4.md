@@ -16,7 +16,7 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
     - `AVG`関数の精度の問題を修正 [#7874](https://github.com/pingcap/tidb/pull/7874)
     - `EXPLAIN ANALYZE`文を使用して、クエリ実行プロセス中の各オペレーターの実行時間と返された行数を含む実行時統計をチェックする機能をサポートします[#7925](https://github.com/pingcap/tidb/pull/7925)
     - テーブルの列が結果セットに複数回出現する場合の`PointGet`オペレーターのpanic問題を修正しました [#7943](https://github.com/pingcap/tidb/pull/7943)
-    - `Limit`節値が大きすぎるために発生するpanic問題を修正しました [#8002](https://github.com/pingcap/tidb/pull/8002)
+    - `Limit`句の値が大きすぎるために発生するpanic問題を修正しました [#8002](https://github.com/pingcap/tidb/pull/8002)
     - いくつかのケースで`AddDate`/`SubDate`文の実行中にpanic問題を修正しました[#8009](https://github.com/pingcap/tidb/pull/8009)
 - 統計
     - 結合インデックスのヒストグラム下限の接頭辞が範囲外であると判断される問題を修正[#7856](https://github.com/pingcap/tidb/pull/7856)
@@ -31,11 +31,11 @@ summary: TiDB 2.1 RC4は2018年10月23日にリリースされ、安定性、SQL
     - "coprocessor error"ログの情報を拡充する [#8006](https://github.com/pingcap/tidb/pull/8006)
 - 互換性
     - クエリが空の場合、 `SHOW PROCESSLIST`結果の`Command`フィールドを`Sleep`に設定します[#7839](https://github.com/pingcap/tidb/pull/7839)
-- 表現
+- 式
     - `SYSDATE`関数の定数の折り畳みの問題を修正 [#7895](https://github.com/pingcap/tidb/pull/7895)
     - `SUBSTRING_INDEX`が場合によってはパニックになる問題を修正[#7897](https://github.com/pingcap/tidb/pull/7897)
 - DDL
-    - `invalid ddl job type`エラースローすることによって発生するスタックオーバーフローの問題を修正しました [#7958](https://github.com/pingcap/tidb/pull/7958)
+    - `invalid ddl job type`エラーをスローすることによって発生するスタックオーバーフローの問題を修正しました [#7958](https://github.com/pingcap/tidb/pull/7958)
     - `ADMIN CHECK TABLE`の結果が場合によっては正しくない問題を修正[#7975](https://github.com/pingcap/tidb/pull/7975)
 
 ## PD {#pd}

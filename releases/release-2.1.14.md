@@ -17,7 +17,7 @@ TiDB Ansible バージョン: 2.1.14
 - `show processlist` の`db`列と`info`列に誤って表示された情報を修正 [#11000](https://github.com/pingcap/tidb/pull/11000)
 - `MAX_EXECUTION_TIME` SQLヒントとグローバル変数が場合によっては機能しない問題を修正[#10999](https://github.com/pingcap/tidb/pull/10999)
 - 負荷に基づいてAUTO_INCREMENT IDによって割り当てられた増分ギャップを自動的に調整する機能をサポート [#10997](https://github.com/pingcap/tidb/pull/10997)
-- クエリ終了時にメモリ情報`Distsql` `MemTracker`正しく消去されない問題を修正[#10971](https://github.com/pingcap/tidb/pull/10971)
+- クエリ終了時に`MemTracker`の`Distsql`メモリ情報が正しく消去されない問題を修正[#10971](https://github.com/pingcap/tidb/pull/10971)
 - クエリのメモリ使用量を説明するために、 `information_schema.processlist`表に`MEM`列を追加します。 [#10896](https://github.com/pingcap/tidb/pull/10896)
 - クエリの最大実行時間を制御する`max_execution_time`グローバルシステム変数を追加する[#10940](https://github.com/pingcap/tidb/pull/10940)
 - サポートされていない集計関数の使用によって発生するpanicを修正[#10911](https://github.com/pingcap/tidb/pull/10911)
@@ -44,12 +44,12 @@ TiDB Binlog
     - `safe-mode`設定項目を追加し、この項目を有効にした後に重複したデータのインポートをサポートします[#662](https://github.com/pingcap/tidb-binlog/pull/662)
 - Pump
     - 利用可能なbinlogスペースを制限するための`stop-write-at-available-space`設定項目を追加します[#659](https://github.com/pingcap/tidb-binlog/pull/659)
-    - LevelDB L0ファイルの数が多い場合にガベージコレクターが動作しないことがある問題を修正しました。 [#648](https://github.com/pingcap/tidb-binlog/pull/648)
+    - LevelDB L0ファイルの数が0の場合にガベージコレクターが動作しないことがある問題を修正しました。 [#648](https://github.com/pingcap/tidb-binlog/pull/648)
     - ログファイルを削除するアルゴリズムを最適化して、スペースの解放を高速化します[#648](https://github.com/pingcap/tidb-binlog/pull/648)
 - Drainer
     - 下流の`BIT`列の更新の失敗を修正 [#655](https://github.com/pingcap/tidb-binlog/pull/655)
 
 ## TiDB Ansible {#tidb-ansible}
 
-- `ansible`コマンドとその`jmespath`および`jinja2`依存パッケージ事前チェック機能を追加します。 [#807](https://github.com/pingcap/tidb-ansible/pull/807)
+- `ansible`コマンドとその`jmespath`および`jinja2`依存パッケージの事前チェック機能を追加します。 [#807](https://github.com/pingcap/tidb-ansible/pull/807)
 - Pumpに`stop-write-at-available-space`パラメータ（デフォルトでは 10 GiB）を追加し、使用可能なディスク容量がパラメータ値より小さい場合にPumpでのbinlogファイルの書き込みを停止します。 [#807](https://github.com/pingcap/tidb-ansible/pull/807)
