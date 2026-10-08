@@ -13,7 +13,7 @@ Table-level data affinity is a PD mechanism for scheduling data distribution at 
 
 When you enable PD affinity scheduling and set the `AFFINITY` option of a table to `table` or `partition`, PD groups Regions belonging to the same table or partition into the same affinity group. During scheduling, PD prioritizes placing the Leader and Voter replicas of these Regions on the same subset of a few TiKV nodes. This reduces network latency caused by cross-node access during queries, thereby improving query performance.
 
-Starting from v8.5.6, table-level data affinity supports scheduling by the scheduling microservice in [PD Microservices Mode](/pd-microservices.md).
+Table-level data affinity is available in PD's classic deployment mode starting from v8.5.5. Starting from v8.5.6, it is also available when scheduling is handled by the scheduling microservice in [PD Microservices Mode](/pd-microservices.md).
 
 ## Limitations
 
