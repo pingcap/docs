@@ -7,7 +7,7 @@ summary: 了解 TiDB-X-CLOUD.202603.1 内核的功能特性。
 
 **发布日期**：2026 年 7 月 16 日
 
-**适用的 TiDB Cloud 套餐**：{{{ .essential }}} 和 {{{ .premium }}}
+**适用的 TiDB Cloud 计划**：{{{ .essential }}} 和 {{{ .premium }}}
 
 **TiDB X 内核版本**：`TiDB-X-CLOUD.202603.1`
 
