@@ -20,6 +20,7 @@
     - [VS Code](/develop/dev-guide-gui-vscode-sqltools.md)
     - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
     - [Navicat](/develop/dev-guide-gui-navicat.md)
+    - [LibreDB Studio](/develop/dev-guide-gui-libredb-studio.md)
   - Drivers & ORMs
     - [Choose a Driver or ORM](/develop/dev-guide-choose-driver-or-orm.md)
     - Java
