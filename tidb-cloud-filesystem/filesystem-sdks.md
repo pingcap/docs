@@ -25,7 +25,7 @@ Available server URL for Drive9 SDK/API server URL to TiDB Cloud Filesystem regi
 |`aws-us-east-1`|`https://aws-us-east-1.drive9.ai`| FS token|
 |`aws-us-west-2`|`https://aws-us-west-2.drive9.ai`| FS token|
 |`aws-ap-southeast-1`|`https://aws-ap-southeast-1.drive9.ai`| FS token|
-|`gcp-us-east1`|`https://gcp-us-east-1.drive9.ai`| FS token|
+|`gcp-us-east1`|`https://gcp-us-east1.drive9.ai`| FS token|
 |`azure-centralus`|`https://azure-centralus.drive9.ai`|FS token|
 |`alicloud-ap-southeast-1`|`https://alicloud-ap-southeast-1.drive9.ai`|FS token|
 
