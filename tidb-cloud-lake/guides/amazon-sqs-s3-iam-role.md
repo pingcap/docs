@@ -1,9 +1,9 @@
 ---
-title: Amazon SQS (S3) - IAM Role (Beta)
+title: Amazon SQS (S3) - IAM Role (Preview)
 summary: 了解如何在 {{{ .lake }}} 中创建 `Amazon SQS (S3) - IAM Role` 数据源。
 ---
 
-# Amazon SQS (S3) - IAM Role (Beta)
+# Amazon SQS (S3) - IAM Role (Preview)
 
 本页介绍如何创建 `Amazon SQS (S3) - IAM Role` 数据源。该数据源存储访问 Amazon SQS 队列及其对应 S3 存储桶所需的配置，用于消费从 Amazon S3 投递到 SQS 的 S3 对象创建事件。
 

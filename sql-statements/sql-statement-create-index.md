@@ -366,7 +366,9 @@ Query OK, 1 row affected (0.00 sec)
 - 如果表使用了多值索引，不能通过 BR、TiCDC 或 TiDB Lightning 将该表备份、同步或导入到 v6.6.0 之前的 TiDB 集群。
 - 对于包含复杂条件的查询，TiDB 可能无法选择多值索引。关于多值索引支持的条件模式，参见 [使用多值索引](/choose-index.md#use-multi-valued-indexes)。
 
-## 部分索引 <span class="version-mark">从 v8.5.7 版本开始引入</span> {#partial-indexes-new-in-v857}
+## 部分索引 {#partial-indexes}
+
+<span class="version-mark">TiDB Self-Managed 和 TiDB Cloud Dedicated 从 v8.5.7 版本开始引入，TiDB Cloud Essential 和 Premium 从 CLOUD.202603.1 开始引入</span>
 
 部分索引是建立在表中部分行子集上的索引。创建部分索引时，你可以指定一个条件表达式，也称为谓词，用于定义这个行子集。索引中仅包含满足该谓词的行的条目。
 

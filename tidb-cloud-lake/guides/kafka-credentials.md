@@ -1,13 +1,13 @@
 ---
-title: Kafka - Credentials（Beta）
+title: Kafka - Credentials（Preview）
 summary: 创建一个 “Kafka - Credentials” 数据源，用于存储 Kafka 连接信息，以便在 Kafka Consumer 集成任务中复用。
 ---
 
-# Kafka - Credentials（Beta）
+# Kafka - Credentials（Preview）
 
 本页介绍如何创建 `Kafka - Credentials` 数据源。该数据源用于存储访问 Kafka 集群所需的 broker 地址、认证方法和连接凭据。你可以在多个 Kafka Consumer 集成任务中复用这些设置。
 
-`Kafka - Credentials` 仅存储 Kafka 连接信息。它本身不会消费消息。实际读取 Kafka topic 消息并将其写入内部对象存储的过程，由 [Kafka Consumer Integration Task (Beta)](/tidb-cloud-lake/guides/integrate-with-kafka.md) 执行。
+`Kafka - Credentials` 仅存储 Kafka 连接信息。它本身不会消费消息。实际读取 Kafka topic 消息并将其写入内部对象存储的过程，由 [Kafka Consumer Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md) 执行。
 
 ## 使用场景 {#use-cases}
 
@@ -40,4 +40,4 @@ summary: 创建一个 “Kafka - Credentials” 数据源，用于存储 Kafka �
 
 ## 后续步骤 {#next-steps}
 
-创建数据源后，你可以使用它来创建 [Kafka Consumer Integration Task (Beta)](/tidb-cloud-lake/guides/integrate-with-kafka.md)。
+创建数据源后，你可以使用它来创建 [Kafka Consumer Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md)。

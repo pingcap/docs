@@ -19,16 +19,12 @@ TiDB Cloud 提供两类发布：[云平台发布](#cloud-platform-release-notes)
 
 数据库内核是处理 SQL 查询和管理数据的核心引擎。根据你的 TiDB Cloud 方案，你的资源运行在不同的内核上，每种内核都有各自的发布节奏。
 
-| 方案 | 内核信息和发布说明 |
-| --- | --- |
-| TiDB Cloud **Starter** | 运行在基于经典 [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) 内核定制的 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 引擎上。 |
-| TiDB Cloud **Essential** | 默认运行在基于经典 [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) 内核定制的 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 引擎上。 |
-| TiDB Cloud **Premium** | 运行在 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 内核的 [`TiDB-X-CLOUD.202510.1`](/tidb-cloud/releases/tidb-x-cloud.202510.1.md) 版本上。 |
-| TiDB Cloud **Dedicated** | 运行在经典 TiDB 内核上，其内核版本与 TiDB Self-Managed 版本直接对应。目前，新创建的 TiDB Cloud Dedicated 集群默认 TiDB 版本为 [v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/)。 |
-
-> **注意：**
->
-> 如果你希望 TiDB Cloud Essential 实例运行在与 TiDB Cloud Premium 相同的内核上，请联系 [TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
+| 方案 | 内核 | 新创建实例或集群的默认内核版本 |
+| --- | --- | --- |
+| TiDB Cloud **Starter** | 运行在基于经典 TiDB 内核定制的 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 引擎上。 | [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) |
+| TiDB Cloud **Essential** | 于 2026 年 6 月 30 日及之后创建的 TiDB Cloud Essential 实例运行在 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 内核上。 | [TiDB-X-CLOUD.202603.1 Release Notes](/tidb-cloud/releases/tidb-x-cloud.202603.1.md) |
+| TiDB Cloud **Premium** | 运行在 [TiDB X](/tidb-cloud/tidb-x-architecture.md) 内核上。 | [TiDB-X-CLOUD.202603.1 Release Notes](/tidb-cloud/releases/tidb-x-cloud.202603.1.md) |
+| TiDB Cloud **Dedicated** | 运行在经典 TiDB 内核上。 | [TiDB v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/) |
 
 ## 维护通知
 

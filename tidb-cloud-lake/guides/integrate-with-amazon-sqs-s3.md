@@ -1,15 +1,15 @@
 ---
-title: Amazon SQS (S3) 集成任务（Beta）
+title: Amazon SQS (S3) 集成任务（Preview）
 summary: 了解如何创建 Amazon SQS (S3) 集成任务，该任务从 SQS 队列消费 S3 对象创建事件，并将对应的对象数据写入 {{{ .lake }}}。
 ---
 
-# Amazon SQS (S3) 集成任务（Beta）
+# Amazon SQS (S3) 集成任务（Preview）
 
 本文介绍如何创建 Amazon SQS (S3) 集成任务。该任务从 SQS 队列消费 S3 对象创建事件，并将对应的对象数据写入 {{{ .lake }}}。
 
 该任务专为 S3 事件驱动的数据摄取而设计。上游系统将对象写入 S3 后，S3 会向 SQS 发送 `ObjectCreated` 事件。{{{ .lake }}} 通过 AssumeRole 消费 SQS 消息，并根据事件中的 bucket 和对象键将数据写入 {{{ .lake }}}。
 
-如果你需要先创建可复用的 SQS (S3) 连接设置，请参见 [Amazon SQS (S3) - IAM Role (Beta)](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md)。
+如果你需要先创建可复用的 SQS (S3) 连接设置，请参见 [Amazon SQS (S3) - IAM Role (Preview)](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md)。
 
 ## 使用场景 {#use-cases}
 

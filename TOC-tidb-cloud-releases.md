@@ -21,6 +21,7 @@
 ## TiDB X 内核发布说明
 
 - [TiDB Cloud Premium 的内核版本管理](/tidb-cloud/releases/tidb-cloud-kernel-versioning.md)
+- [TiDB-X-CLOUD.202603.1 Release Notes](/tidb-cloud/releases/tidb-x-cloud.202603.1.md)
 - [TiDB-X-CLOUD.202510.1 发布说明](/tidb-cloud/releases/tidb-x-cloud.202510.1.md)
 
 ## 维护通知
