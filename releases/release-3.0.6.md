@@ -15,20 +15,20 @@ TiDB Ansible バージョン: 3.0.6
 
 - SQLオプティマイザ
     - ウィンドウ関数 AST が SQL テキストを復元した後に結果が正しくない (たとえば、 `over w`が誤って`over (w)` に復元される) 問題を修正しました。 [#12933](https://github.com/pingcap/tidb/pull/12933)
-    - `STREAM AGG()`から`doubleRead` プッシュダウンする問題を修正 [#12690](https://github.com/pingcap/tidb/pull/12690)
+    - `STREAM AGG()`を`doubleRead`にプッシュダウンする問題を修正 [#12690](https://github.com/pingcap/tidb/pull/12690)
     - SQLバインディングで引用符が正しく処理されない問題を修正 [#13117](https://github.com/pingcap/tidb/pull/13117)
     - `select max(_tidb_rowid) from t`シナリオを最適化してテーブル全体のスキャンを回避する[#13095](https://github.com/pingcap/tidb/pull/13095)
     - クエリステートメントに変数代入式が含まれている場合にクエリ結果が正しくない問題を修正しました[#13231](https://github.com/pingcap/tidb/pull/13231)
     - `UPDATE`文にサブクエリと生成列の両方が含まれている場合に結果が正しくない問題を修正しました。`UPDATE`文に異なるソースデータベースからの同じ名前のテーブルが 2つ含まれている場合に発生する文の実行エラーを修正しました[#13350](https://github.com/pingcap/tidb/pull/13350)
-    - ポイントクエリのサポート`_tidb_rowid` [#13416](https://github.com/pingcap/tidb/pull/13416)
+    - ポイントクエリで`_tidb_rowid`をサポート [#13416](https://github.com/pingcap/tidb/pull/13416)
     - パーティションテーブル統計の不適切な使用により、生成されたクエリ実行計画が正しくない問題を修正しました[#13628](https://github.com/pingcap/tidb/pull/13628)
 - SQL実行エンジン
     - 年型の無効な値を処理するときにTiDBがMySQLと互換性がない問題を修正しました [#12745](https://github.com/pingcap/tidb/pull/12745)
-    - `INSERT ON DUPLICATE UPDATE`文で`Chunk`再利用してメモリオーバーヘッドを削減する [#12998](https://github.com/pingcap/tidb/pull/12998)
+    - `INSERT ON DUPLICATE UPDATE`文で`Chunk`を再利用してメモリオーバーヘッドを削減する [#12998](https://github.com/pingcap/tidb/pull/12998)
     - `JSON_VALID`組み込み関数のサポートを追加 [#13133](https://github.com/pingcap/tidb/pull/13133)
     - パーティションテーブルで`ADMIN CHECK TABLE`実行をサポート [#13140](https://github.com/pingcap/tidb/pull/13140)
     - 空のテーブルで`FAST ANALYZE`を実行したときに発生するpanic問題を修正 [#13343](https://github.com/pingcap/tidb/pull/13343)
-    - 複数列のインデックスを含む空のテーブルで`FAST ANALYZE`を実行するとpanic問題を修正[#13394](https://github.com/pingcap/tidb/pull/13394)
+    - 複数列のインデックスを含む空のテーブルで`FAST ANALYZE`を実行したときに発生するpanicの問題を修正[#13394](https://github.com/pingcap/tidb/pull/13394)
     - `WHERE`句に一意キー等号条件が含まれている場合に推定行数が 1 より大きくなる問題を修正しました [#13382](https://github.com/pingcap/tidb/pull/13382)
     - TiDB で`Streaming`が有効になっている場合に返されるデータが重複する可能性がある問題を修正しました [#13254](https://github.com/pingcap/tidb/pull/13254)
     - 推定精度を向上させるために、count-minスケッチから上位N個の値を抽出します[#13429](https://github.com/pingcap/tidb/pull/13429)
@@ -41,9 +41,9 @@ TiDB Ansible バージョン: 3.0.6
         - `performance_schema.tidb_profile_goroutines`
     - クエリが悲観的ロックを待機しているときにコマンド`kill`が機能しない問題を修正[#12989](https://github.com/pingcap/tidb/pull/12989)
     - 悲観的ロックの取得に失敗し、トランザクションが単一のキー変更のみを伴う場合は、非同期ロールバックを実行しないようにします。 [#12707](https://github.com/pingcap/tidb/pull/12707)
-    - 領域分割のリクエストに対する応答が空の場合にpanicする問題を修正[#13092](https://github.com/pingcap/tidb/pull/13092)
-    - `PessimisticLock`ロックエラーを返したときに不要なバックオフを回避する[#13116](https://github.com/pingcap/tidb/pull/13116)
-    - 認識されない設定オプション警告ログを出力して構成をチェックする TiDB の動作を変更します。 [#13272](https://github.com/pingcap/tidb/pull/13272)
+    - リージョン分割のリクエストに対する応答が空の場合にpanicする問題を修正[#13092](https://github.com/pingcap/tidb/pull/13092)
+    - `PessimisticLock`がロックエラーを返したときに不要なバックオフを回避する[#13116](https://github.com/pingcap/tidb/pull/13116)
+    - 認識されない設定オプションに対して警告ログを出力して構成をチェックする TiDB の動作を変更します。 [#13272](https://github.com/pingcap/tidb/pull/13272)
     - `/info/all`インターフェースを介してすべての TiDB ノードのbinlogステータスの取得をサポート [#13187](https://github.com/pingcap/tidb/pull/13187)
     - TiDB が接続を切断したときに goroutine がリークする可能性がある問題を修正[#13251](https://github.com/pingcap/tidb/pull/13251)
     - 悲観的トランザクションで`innodb_lock_wait_timeout`パラメータを動作させて、悲観的ロックのロック待機タイムアウトを制御する [#13165](https://github.com/pingcap/tidb/pull/13165)
@@ -72,14 +72,14 @@ TiDB Ansible バージョン: 3.0.6
 
 - `acquire_pessimistic_lock`インターフェースが間違った`txn_size` を返す問題を修正 [#5740](https://github.com/tikv/tikv/pull/5740)
 - GCワーカーの1秒あたりの書き込み回数を制限して、パフォーマンスへの影響を軽減します[#5735](https://github.com/tikv/tikv/pull/5735)
-- `lock_manager`正確にする [#5845](https://github.com/tikv/tikv/pull/5845)
-- 悲観的ロックのサポート`innodb_lock_wait_timeout` [#5848](https://github.com/tikv/tikv/pull/5848)
+- `lock_manager`を正確にする [#5845](https://github.com/tikv/tikv/pull/5845)
+- 悲観的ロックで`innodb_lock_wait_timeout`をサポート [#5848](https://github.com/tikv/tikv/pull/5848)
 - Titan の構成チェックを追加 [#5720](https://github.com/tikv/tikv/pull/5720)
 - tikv-ctl を使用して GC I/O 制限を動的に変更するサポート: `tikv-ctl --host=ip:port modify-tikv-config -m server -n gc.max_write_bytes_per_sec -v 10MB` [#5957](https://github.com/tikv/tikv/pull/5957)
 - デッドロック検出器への負荷を軽減するために、無駄な`clean up`リクエストを削減します。 [#5965](https://github.com/tikv/tikv/pull/5965)
 - 悲観的ロックの事前書き込みリクエストでTTLを減らさないようにする[#6056](https://github.com/tikv/tikv/pull/6056)
 - Titan でBLOBファイルが見つからない問題を修正 [#5968](https://github.com/tikv/tikv/pull/5968)
-- Titan で`RocksDBOptions`効力を発揮しない問題を修正 [#6009](https://github.com/tikv/tikv/pull/6009)
+- Titan で`RocksDBOptions`が有効にならない可能性がある問題を修正 [#6009](https://github.com/tikv/tikv/pull/6009)
 
 ## PD {#pd}
 

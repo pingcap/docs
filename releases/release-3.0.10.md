@@ -17,20 +17,20 @@ TiDB Ansible バージョン: 3.0.10
 
 ## TiDB {#tidb}
 
-- `IndexLookUpJoin` `OtherCondition`を使用して`InnerRange` を構築したときに間違った`Join`結果を修正します [#14599](https://github.com/pingcap/tidb/pull/14599)
+- `IndexLookUpJoin`が`OtherCondition`を使用して`InnerRange` を構築したときに間違った`Join`結果を修正します [#14599](https://github.com/pingcap/tidb/pull/14599)
 - `tidb_pprof_sql_cpu`設定項目を削除し、 `tidb_pprof_sql_cpu`変数を追加します。 [#14416](https://github.com/pingcap/tidb/pull/14416)
 - ユーザーがグローバル権限を持っている場合にのみすべてのデータベースをクエリできる問題を修正[#14386](https://github.com/pingcap/tidb/pull/14386)
 - `PointGet`操作を実行するときにトランザクション タイムアウトによりデータの可視性が期待どおりに機能しない問題を修正しました [#14480](https://github.com/pingcap/tidb/pull/14480)
 - 楽観的トランザクションモードと一致するように、悲観的トランザクションのアクティブ化のタイミングを遅延アクティブ化に変更します。 [#14474](https://github.com/pingcap/tidb/pull/14474)
 - `unixtimestamp`式がテーブルパーティションのタイムゾーンを計算するときに誤ったタイムゾーン結果が返される問題を修正しました。 [#14476](https://github.com/pingcap/tidb/pull/14476)
-- デッドロック検出期間を監視するための監視項目を`tidb_session_statement_deadlock_detect_duration_seconds`追加します[#14484](https://github.com/pingcap/tidb/pull/14484)
+- デッドロック検出期間を監視するための`tidb_session_statement_deadlock_detect_duration_seconds`監視項目を追加します[#14484](https://github.com/pingcap/tidb/pull/14484)
 - GCワーカーのいくつかのロジックエラーによって引き起こされるシステムpanicの問題を修正しました [#14439](https://github.com/pingcap/tidb/pull/14439)
 - `IsTrue`関数の式名を修正します [#14516](https://github.com/pingcap/tidb/pull/14516)
 - 一部のメモリ使用量が不正確にカウントされる問題を修正[#14533](https://github.com/pingcap/tidb/pull/14533)
 - CM-Sketch統計初期化中の誤った処理ロジックによって引き起こされるシステムpanicの問題を修正[#14470](https://github.com/pingcap/tidb/pull/14470)
 - パーティションテーブルをクエリする際の不正確なパーティションプルーニングの問題を修正[#14546](https://github.com/pingcap/tidb/pull/14546)
 - SQLバインディング内のSQL文のデフォルトのデータベース名が正しく設定されていない問題を修正しました[#14548](https://github.com/pingcap/tidb/pull/14548)
-- `json_key` MySQL と互換性がない問題を修正 [#14561](https://github.com/pingcap/tidb/pull/14561)
+- `json_key`が MySQL と互換性がない問題を修正 [#14561](https://github.com/pingcap/tidb/pull/14561)
 - パーティションテーブルの統計情報を自動更新する機能を追加[#14566](https://github.com/pingcap/tidb/pull/14566)
 - `PointGet`操作が実行されるとプラン ID が変わる問題を修正 (プラン ID は常に`1`になることが期待されます) [#14595](https://github.com/pingcap/tidb/pull/14595)
 - SQLバインディングが正確に一致しない場合に誤った処理ロジックによって発生するシステムpanicの問題を修正しました[#14263](https://github.com/pingcap/tidb/pull/14263)
@@ -44,14 +44,14 @@ TiDB Ansible バージョン: 3.0.10
 - JSON内の`&`、`<`、`>`などの文字が誤ってエスケープされる問題を修正しました [#14637](https://github.com/pingcap/tidb/pull/14637)
 - `HashJoin`操作でハッシュテーブルを構築する際に過剰なメモリ使用によって発生するシステムpanicの問題を修正しました [#14642](https://github.com/pingcap/tidb/pull/14642)
 - SQLバインディングが無効なレコードを処理するときに、誤った処理ロジックによって発生するpanicの問題を修正しました[#14645](https://github.com/pingcap/tidb/pull/14645)
-- ix MySQLの非互換性の問題を修正するために、小数点割り算の計算に切り捨てエラー検出を追加しました[#14673](https://github.com/pingcap/tidb/pull/14673)
+- MySQLの非互換性の問題を修正するために、小数点割り算の計算に切り捨てエラー検出を追加しました[#14673](https://github.com/pingcap/tidb/pull/14673)
 - 存在しないテーブルに対する権限をユーザーに付与してしまう問題を修正[#14611](https://github.com/pingcap/tidb/pull/14611)
 
 ## TiKV {#tikv}
 
 - Raftstore
     - リージョンマージの失敗によって発生するシステムpanicの問題#6460またはデータ損失の問題#598を修正しました [#6481](https://github.com/tikv/tikv/pull/6481)
-    - スケジューリングの公平性を最適化するためのサポート`yield`と、リーダーのスケジューリングの安定性を向上させるためのリーダーの事前転送のサポート[#6563](https://github.com/tikv/tikv/pull/6563)
+    - スケジューリングの公平性を最適化するために`yield`をサポートし、リーダーのスケジューリングの安定性を向上させるためにリーダーの事前転送をサポート[#6563](https://github.com/tikv/tikv/pull/6563)
 
 ## PD {#pd}
 
@@ -61,7 +61,7 @@ TiDB Ansible バージョン: 3.0.10
 ## ツール {#tools}
 
 - TiDB Binlog
-    - Drainerのサポートリレーログ [#893](https://github.com/pingcap/tidb-binlog/pull/893)
+    - Drainer でリレーログをサポート [#893](https://github.com/pingcap/tidb-binlog/pull/893)
 - TiDB Lightning
     - 設定ファイルが見つからない場合に、一部の設定項目でデフォルト値を使用するようにする[#255](https://github.com/pingcap/tidb-lightning/pull/255)
     - 非サーバーモードでWebインターフェースを開けない問題を修正[#259](https://github.com/pingcap/tidb-lightning/pull/259)

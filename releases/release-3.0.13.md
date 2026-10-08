@@ -17,4 +17,4 @@ TiDB バージョン: 3.0.13
 
 - TiKV
 
-    - `Region Merge`繰り返し実行するとシステムが停止し、サービスが利用できなくなる問題を修正[#7612](https://github.com/tikv/tikv/pull/7612)
+    - `Region Merge`を繰り返し実行するとシステムが停止する可能性があり、サービスが利用できなくなる問題を修正[#7612](https://github.com/tikv/tikv/pull/7612)
