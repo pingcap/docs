@@ -32,7 +32,7 @@ USE INFORMATION_SCHEMA;
 DESC SLOW_QUERY;
 ```
 
-The output is as follows:
+The following output is an excerpt. Some columns before `Query` are omitted:
 
 ```sql
 +--------------------------------------------+-----------------+------+------+---------+-------+
@@ -132,7 +132,6 @@ The output is as follows:
 | Commit_Backoff_types                       | varchar(1024)   | YES  |      | NULL    |       |
 | Cop_backoff_types                          | varchar(1024)   | YES  |      | NULL    |       |
 +--------------------------------------------+-----------------+------+------+---------+-------+
-93 rows in set (0.00 sec)
 ```
 
 The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
@@ -179,7 +178,7 @@ During a rolling upgrade across the version that adds the backoff type columns, 
 DESC CLUSTER_SLOW_QUERY;
 ```
 
-The output is as follows:
+The following output is an excerpt. Some columns before `Query` are omitted:
 
 ```sql
 +--------------------------------------------+-----------------+------+------+---------+-------+
@@ -280,7 +279,6 @@ The output is as follows:
 | Commit_Backoff_types                       | varchar(1024)   | YES  |      | NULL    |       |
 | Cop_backoff_types                          | varchar(1024)   | YES  |      | NULL    |       |
 +--------------------------------------------+-----------------+------+------+---------+-------+
-94 rows in set (0.00 sec)
 ```
 
 When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
