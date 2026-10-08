@@ -13,7 +13,7 @@ TiDB バージョン: 8.4.0
 
 バージョン8.4.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_enable_instance_plan_cache-new-in-v840">インスタンスレベルの実行プランキャッシュ</a>（実験的）</td><td>インスタンスレベルのプランキャッシュを使用すると、同じ TiDB インスタンス内のすべてのセッションでプランキャッシュを共有できます。セッションレベルのプランキャッシュと比較して、この機能はメモリに多くの実行計画をキャッシュすることで SQL コンパイル時間を短縮し、SQL 全体の実行時間を短縮します。これにより、OLTP のパフォーマンスとスループットが向上するとともに、メモリ使用量をより適切に制御し、データベースの安定性を高めることができます。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/partitioned-table#global-indexes">パーティションテーブルのグローバルインデックス</a>（GA）</td><td>グローバルインデックスを使用すると、パーティション化されていない列の取得効率を効果的に向上させることができ、一意キーにパーティションキーを含める必要があるという制約を取り除くことができます。この機能により、TiDBパーティションテーブルの使用シナリオが拡張され、データ移行に必要なアプリケーションの変更作業の一部が不要になります。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">TSOリクエストの並列モード</a></td><td>高並行処理環境では、この機能を使用することでTSOの取得待ち時間を短縮し、クラスタのスループットを向上させることができます。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/cached-tables">キャッシュされたテーブル</a>のクエリパフォーマンスを向上させる</td><td>キャッシュされたテーブルに対するインデックススキャンのクエリパフォーマンスが向上し、場合によっては最大5.4倍の改善が見られます。小規模なテーブルに対する高速クエリの場合、キャッシュされたテーブルを使用することで、全体的なパフォーマンスを大幅に向上させることができます。</td></tr><tr><td rowspan="4">信頼性と可用性</td><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/tidb-resource-control#query_limit-parameters">暴走クエリに対するトリガーの追加と、リソースグループの切り替えのサポート</a></td><td>暴走クエリは、予期しないSQLパフォーマンスの問題がシステムに与える影響を軽減する効果的な手段です。TiDB v8.4.0では、識別条件としてコプロセッサーによって処理されたキーの数（ <code>PROCESSED_KEYS</code> ）とリクエストユニット（ <code>RU</code> ）が導入され、識別されたクエリを指定されたリソースグループに配置することで、暴走クエリのより正確な識別と制御が可能になりました。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/tidb-resource-control#background-parameters">リソース制御のバックグラウンドタスクにおけるリソース使用量の上限設定をサポートする</a></td><td>リソース制御のバックグラウンドタスクに最大パーセンテージ制限を設定することで、さまざまなアプリケーションシステムのニーズに基づいてリソース消費を制御できます。これにより、バックグラウンドタスクの消費量を低く抑え、オンラインサービスの品質を確保できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/tiproxy-traffic-replay">TiProxyはトラフィックのキャプチャと再生をサポートします</a>（実験的）。</td><td> TiProxyを使用して、クラスターのアップグレード、移行、デプロイメントの変更などの主要な操作を行う前に、TiDB本番クラスターから実際のワークロードをキャプチャします。これらのワークロードをターゲットのテストクラスターで再生することで、パフォーマンスを検証し、変更が確実に成功することを確認します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_auto_analyze_concurrency-new-in-v840">同時自動統計収集</a></td><td>TiDBクラスタ内での同時実行自動分析操作の数を制御するために、システム変数<code>tidb_auto_analyze_concurrency</code>を導入します。TiDBは、ノードの規模とハードウェア仕様に基づいて、スキャンタスクの同時実行数を自動的に決定します。これにより、システムリソースを最大限に活用して統計情報の収集効率が向上し、手動による調整が削減され、クラスタの安定したパフォーマンスが確保されます。</td></tr><tr><td rowspan="1"> SQL</td><td><a href="https://docs.pingcap.com/ai/vector-search-overview">ベクトル検索</a>（実験的）</td><td>ベクトル検索は、データの意味論に基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核関数の一つとして、ベクトル検索は、検索拡張生成（RAG）、セマンティック検索、推薦システムなど、さまざまなシナリオで活用できます。</td></tr><tr><td rowspan="3">データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/information-schema-processlist">TiKVとTiDBのCPU時間をメモリテーブルに表示する</a></td><td>CPU時間はシステムテーブルに統合され、セッションやSQLなどの他のメトリックと並べて表示されるようになりました。これにより、CPU使用率の高い操作を複数の視点から把握し、診断効率を向上させることができます。これは、インスタンスにおけるCPUスパイクやクラスタにおける読み書きホットスポットなどのシナリオを診断する際に特に役立ちます。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/top-sql#use-top-sql">テーブルまたはデータベースごとに集計されたTiKV CPU時間を表示する機能をサポートします。</a></td><td>ホットスポットの問題が個々のSQL文によって引き起こされていない場合、 Top SQLでテーブルまたはデータベースレベルごとに集計されたCPU時間を使用することで、ホットスポットの原因となっているテーブルやアプリケーションを迅速に特定でき、ホットスポットやCPU消費の問題の診断効率を大幅に向上させることができます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/backup-and-restore-storages#authentication">IMDSv2サービスが有効になっているTiKVインスタンスのバックアップをサポートします。</a></td><td> <a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 では、デフォルトのメタデータサービスとして IMDSv2 が使用されるようになりました</a>。TiDB は、IMDSv2 が有効になっている TiKV インスタンスからのデータバックアップをサポートしており、パブリッククラウド サービスで TiDB クラスターをより効率的に実行するのに役立ちます。</td></tr><tr><td rowspan="1">Security</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">ログバックアップデータのクライアント側暗号化</a>（実験的）</td><td>ログバックアップデータをバックアップストレージにアップロードする前に、バックアップデータを暗号化することで、保管中および転送中のセキュリティを確保できます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_enable_instance_plan_cache-new-in-v840">インスタンスレベルの実行プランキャッシュ</a>（実験的）</td><td>インスタンスレベルのプランキャッシュを使用すると、同じ TiDB インスタンス内のすべてのセッションでプランキャッシュを共有できます。セッションレベルのプランキャッシュと比較して、この機能はメモリに多くの実行計画をキャッシュすることで SQL コンパイル時間を短縮し、SQL 全体の実行時間を短縮します。これにより、OLTP のパフォーマンスとスループットが向上するとともに、メモリ使用量をより適切に制御し、データベースの安定性を高めることができます。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/partitioned-table#global-indexes">パーティションテーブルのグローバルインデックス</a>（GA）</td><td>グローバルインデックスを使用すると、パーティション化されていない列の取得効率を効果的に向上させることができ、一意キーにパーティションキーを含める必要があるという制約を取り除くことができます。この機能により、TiDBパーティションテーブルの使用シナリオが拡張され、データ移行に必要なアプリケーションの変更作業の一部が不要になります。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_tso_client_rpc_mode-new-in-v840">TSOリクエストの並列モード</a></td><td>高並行処理環境では、この機能を使用することでTSOの取得待ち時間を短縮し、クラスタのスループットを向上させることができます。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/cached-tables">キャッシュされたテーブル</a>のクエリパフォーマンスを向上させる</td><td>キャッシュされたテーブルに対するインデックススキャンのクエリパフォーマンスが向上し、場合によっては最大5.4倍の改善が見られます。小規模なテーブルに対する高速クエリの場合、キャッシュされたテーブルを使用することで、全体的なパフォーマンスを大幅に向上させることができます。</td></tr><tr><td rowspan="4">信頼性と可用性</td><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/tidb-resource-control#query_limit-parameters">暴走クエリに対するトリガーの追加と、リソースグループの切り替えのサポート</a></td><td>暴走クエリは、予期しないSQLパフォーマンスの問題がシステムに与える影響を軽減する効果的な手段です。TiDB v8.4.0では、識別条件としてコプロセッサーによって処理されたキーの数（ <code>PROCESSED_KEYS</code> ）とリクエストユニット（ <code>RU</code> ）が導入され、識別されたクエリを指定されたリソースグループに配置することで、暴走クエリのより正確な識別と制御が可能になりました。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/tidb-resource-control#background-parameters">リソース制御のバックグラウンドタスクにおけるリソース使用量の上限設定をサポートする</a></td><td>リソース制御のバックグラウンドタスクに最大パーセンテージ制限を設定することで、さまざまなアプリケーションシステムのニーズに基づいてリソース消費を制御できます。これにより、バックグラウンドタスクの消費量を低く抑え、オンラインサービスの品質を確保できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/tiproxy-traffic-replay">TiProxyはトラフィックのキャプチャと再生をサポートします</a>（実験的）</td><td> TiProxyを使用して、クラスターのアップグレード、移行、デプロイメントの変更などの主要な操作を行う前に、TiDB本番クラスターから実際のワークロードをキャプチャします。これらのワークロードをターゲットのテストクラスターで再生することで、パフォーマンスを検証し、変更が確実に成功することを確認します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/system-variables#tidb_auto_analyze_concurrency-new-in-v840">同時自動統計収集</a></td><td>TiDBクラスタ内での同時実行自動分析操作の数を制御するために、システム変数<code>tidb_auto_analyze_concurrency</code>を導入します。TiDBは、ノードの規模とハードウェア仕様に基づいて、スキャンタスクの同時実行数を自動的に決定します。これにより、システムリソースを最大限に活用して統計情報の収集効率が向上し、手動による調整が削減され、クラスタの安定したパフォーマンスが確保されます。</td></tr><tr><td rowspan="1"> SQL</td><td><a href="https://docs.pingcap.com/ai/vector-search-overview">ベクトル検索</a>（実験的）</td><td>ベクトル検索は、データの意味論に基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核機能の一つとして、ベクトル検索は、検索拡張生成（RAG）、セマンティック検索、推薦システムなど、さまざまなシナリオで活用できます。</td></tr><tr><td rowspan="3">データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/information-schema-processlist">TiKVとTiDBのCPU時間をメモリテーブルに表示する</a></td><td>CPU時間はシステムテーブルに統合され、セッションやSQLなどの他のメトリックと並べて表示されるようになりました。これにより、CPU使用率の高い操作を複数の視点から把握し、診断効率を向上させることができます。これは、インスタンスにおけるCPUスパイクやクラスタにおける読み書きホットスポットなどのシナリオを診断する際に特に役立ちます。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/top-sql#use-top-sql">テーブルまたはデータベースごとに集計されたTiKV CPU時間を表示する機能をサポートします。</a></td><td>ホットスポットの問題が個々のSQL文によって引き起こされていない場合、 Top SQLでテーブルまたはデータベースレベルごとに集計されたCPU時間を使用することで、ホットスポットの原因となっているテーブルやアプリケーションを迅速に特定でき、ホットスポットやCPU消費の問題の診断効率を大幅に向上させることができます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.4/backup-and-restore-storages#authentication">IMDSv2サービスが有効になっているTiKVインスタンスのバックアップをサポートします</a></td><td> <a href="https://aws.amazon.com/cn/blogs/security/get-the-full-benefits-of-imdsv2-and-disable-imdsv1-across-your-aws-infrastructure/">AWS EC2 では、デフォルトのメタデータサービスとして IMDSv2 が使用されるようになりました</a>。TiDB は、IMDSv2 が有効になっている TiKV インスタンスからのデータバックアップをサポートしており、パブリッククラウド サービスで TiDB クラスターをより効率的に実行するのに役立ちます。</td></tr><tr><td rowspan="1">セキュリティ</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.4/br-pitr-manual#encrypt-log-backup-data">ログバックアップデータのクライアント側暗号化</a>（実験的）</td><td>ログバックアップデータをバックアップストレージにアップロードする前に、バックアップデータを暗号化することで、保管中および転送中のセキュリティを確保できます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -71,7 +71,7 @@ TiDB バージョン: 8.4.0
 
 - 一部のシナリオでキャッシュされたテーブルのクエリパフォーマンスを改善 [#43249](https://github.com/pingcap/tidb/issues/43249) @[tiancaiamao](https://github.com/tiancaiamao)
 
-    バージョン8.4.0では、TiDBは`SELECT ... LIMIT 1` `IndexLookup`と共に実行する際に、キャッシュされたテーブルのクエリパフォーマンスを最大5.4倍向上させます。さらに、TiDBはフルテーブルスキャンと主キークエリのシナリオにおいて、 `IndexLookupReader`のパフォーマンスを向上させます。
+    バージョン8.4.0では、TiDBは`IndexLookup`で`SELECT ... LIMIT 1`を実行する際に、キャッシュされたテーブルのクエリパフォーマンスを最大5.4倍向上させます。さらに、TiDBはフルテーブルスキャンと主キークエリのシナリオにおいて、 `IndexLookupReader`のパフォーマンスを向上させます。
 
 ### 信頼性 {#reliability}
 
@@ -81,7 +81,7 @@ TiDB バージョン: 8.4.0
 
     複数の条件を同時に設定することができ、いずれかの条件が満たされた場合、そのクエリは暴走クエリとして識別されます。
 
-    履歴実行に基づいて条件値を決定するには、 概要表で対応するフィールド（ `RESOURCE_GROUP` `MAX_REQUEST_UNIT_WRITE` `MAX_REQUEST_UNIT_READ` 、 `MAX_PROCESSED_KEYS` ）[ステートメントサマリーテーブル](/statement-summary-tables.md)を確認できます。
+    履歴実行に基づいて条件値を決定するには、 [ステートメントサマリーテーブル](/statement-summary-tables.md)で対応するフィールド（`RESOURCE_GROUP`、`MAX_REQUEST_UNIT_WRITE`、`MAX_REQUEST_UNIT_READ`、`MAX_PROCESSED_KEYS`）を確認できます。
 
     詳細については、 [ドキュメント](/tidb-resource-control-runaway-queries.md)を参照してください。
 
@@ -91,7 +91,7 @@ TiDB バージョン: 8.4.0
 
     詳細については、 [ドキュメント](/tidb-resource-control-runaway-queries.md#query_limit-parameters)を参照してください。
 
-- `tidb_scatter_region` システム変数を使用してクラスターレベルのリージョン散乱戦略を設定することをサポートします [#55184](https://github.com/pingcap/tidb/issues/55184) @[D3Hunter](https://github.com/D3Hunter)
+- `tidb_scatter_region` システム変数を使用してクラスターレベルのリージョン分散戦略を設定することをサポートします [#55184](https://github.com/pingcap/tidb/issues/55184) @[D3Hunter](https://github.com/D3Hunter)
 
     バージョン8.4.0より前では、 `tidb_scatter_region`システム変数は有効化または無効化のみが可能でした。有効化すると、TiDBはバッチテーブル作成時にテーブルレベルの分散戦略を適用します。しかし、バッチで数十万ものテーブルを作成する場合、この戦略によってリージョンが少数のTiKVノードに集中し、それらのノードでOOM（メモリ不足）の問題が発生します。
 
@@ -118,12 +118,12 @@ TiDB バージョン: 8.4.0
 
     TiProxy v1.3.0以降では、 `tiproxyctl`を使用してTiProxyインスタンスに接続し、TiDB本番クラスタのアクセストラフィックをキャプチャして、指定したレートでテストクラスタに再生できます。この機能により、本番クラスタの実際のワークロードをテスト環境で再現し、SQL文の実行結果とパフォーマンスを検証できます。
 
-    交通状況のリプレイは、次のような状況で役立ちます。
+    トラフィック再生は、次のようなシナリオで役立ちます。
 
     - TiDBのバージョンアップグレードを確認する
     - 変更の影響を評価する
     - TiDBを拡張する前にパフォーマンスを検証する
-    - 試験性能限界
+    - パフォーマンスの限界をテストする
 
     詳細については、[ドキュメント](/tiproxy/tiproxy-traffic-replay.md)を参照してください。
 
@@ -131,7 +131,7 @@ TiDB バージョン: 8.4.0
 
 - ベクトル検索のサポート (実験的) [#54245](https://github.com/pingcap/tidb/issues/54245) [#17290](https://github.com/tikv/tikv/issues/17290) [#9032](https://github.com/pingcap/tiflash/issues/9032) @[breezewish](https://github.com/breezewish)@[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)@[zimulala](https://github.com/zimulala)@[EricZequan](https://github.com/EricZequan)@[JaySon-Huang](https://github.com/JaySon-Huang)@[winoros](https://github.com/winoros)@[wk989898](https://github.com/wk989898)
 
-    ベクトル検索は、データの意味論に基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核関数の一つとして、ベクトル検索は、検索拡張生成（RAG）、セマンティック検索、推薦システムなど、さまざまなシナリオで活用できます。
+    ベクトル検索は、データの意味論に基づいた検索手法であり、より関連性の高い検索結果を提供します。AIや大規模言語モデル（LLM）の中核機能の一つとして、ベクトル検索は、検索拡張生成（RAG）、セマンティック検索、推薦システムなど、さまざまなシナリオで活用できます。
 
     v8.4.0 以降、TiDB は [ベクトルデータ型](/ai/reference/vector-search-data-types.md)と[ベクトル検索インデックス](/ai/reference/vector-search-index.md)をサポートし、強力なベクトル検索機能を提供します。 TiDB ベクトルデータ型は、最大 16,383 次元をサポートし、L2 距離 (ユークリッド距離)、コサイン距離、負の内積、L1 距離 (マンハッタン距離) を含むさまざまな[距離関数](/ai/reference/vector-search-functions-and-operators.md#vector-functions)をサポートします。
 
@@ -145,7 +145,7 @@ TiDB バージョン: 8.4.0
 
 - BRはログバックアップデータのクライアント側暗号化をサポートします (実験的) [#55834](https://github.com/pingcap/tidb/issues/55834) @[Tristan1900](https://github.com/Tristan1900)
 
-    以前のTiDBバージョンでは、スナップショットバックアップデータのみがクライアント側で暗号化されていました。v8.4.0以降では、ログバックアップデータもクライアント側で暗号化できるようになりました。ログバックアップデータをバックアップストレージにアップロードする前に、以下のいずれかの方法でバックアップデータを暗号化してセキュリティを確保できます。
+    以前のTiDBバージョンでは、スナップショットバックアップデータのみをクライアント側で暗号化できました。v8.4.0以降では、ログバックアップデータもクライアント側で暗号化できるようになりました。ログバックアップデータをバックアップストレージにアップロードする前に、以下のいずれかの方法でバックアップデータを暗号化してセキュリティを確保できます。
 
     - カスタム固定キーを使用して暗号化する
     - ローカルディスクに保存されているマスターキーを使用して暗号化します。
@@ -163,7 +163,7 @@ TiDB バージョン: 8.4.0
 
 - TiDBとTiKVが消費したCPU時間をシステムテーブルに表示する [#55542](https://github.com/pingcap/tidb/issues/55542) @[yibin87](https://github.com/yibin87)
 
-    [TiDB Dashboard](/dashboard/dashboard-intro.md)の[Top SQLページ](/dashboard/top-sql.md)CPU 使用率の高い SQL文を表示します。バージョン 8.4.0 以降、TiDB はシステムテーブルに CPU 使用時間情報を追加し、セッションや SQL の他のメトリックと並べて表示することで、CPU 使用率の高い操作をさまざまな視点から簡単に把握できるようにしました。この情報は、インスタンスの CPU スパイクやクラスタ内の読み書きホットスポットなどのシナリオで、問題の原因を迅速に特定するのに役立ちます。
+    [TiDB Dashboard](/dashboard/dashboard-intro.md)の[Top SQLページ](/dashboard/top-sql.md)では、CPU 使用率の高い SQL文が表示されます。バージョン 8.4.0 以降、TiDB はシステムテーブルに CPU 使用時間情報を追加し、セッションや SQL の他のメトリックと並べて表示することで、CPU 使用率の高い操作をさまざまな視点から簡単に把握できるようにしました。この情報は、インスタンスの CPU スパイクやクラスタ内の読み書きホットスポットなどのシナリオで、問題の原因を迅速に特定するのに役立ちます。
 
     - [ステートメントサマリーテーブル](/statement-summary-tables.md)には`AVG_TIDB_CPU_TIME`と`AVG_TIKV_CPU_TIME`が追加され、過去の個々の SQL文によって消費された平均 CPU 時間が表示されます。
     - [INFORMATION_SCHEMA.PROCESSLIST](/information-schema/information-schema-processlist.md)テーブルには、 `TIDB_CPU`と`TIKV_CPU`が追加され、現在セッションで実行されている SQL文の累積 CPU 消費量が表示されます。
@@ -175,7 +175,7 @@ TiDB バージョン: 8.4.0
 
 - Top SQLは、テーブルまたはデータベースごとに集計されたCPU時間結果を表示する機能をサポートしています [#55540](https://github.com/pingcap/tidb/issues/55540) @[nolouch](https://github.com/nolouch)
 
-    バージョン8.4.0より前は、 [Top SQL](/dashboard/top-sql.md) SQLごとにCPU時間を集計していました。CPU時間が少数のSQL文によって消費されていない場合、SQLによる集計では問題を効果的に特定できませんでした。バージョン8.4.0以降では、CPU時間を**テーブル**別または**データベース**別に集計できるようになりました。複数のシステムが存在するシナリオでは、この新しい集計方法により、特定のシステムからの負荷変動をより効果的に特定でき、診断効率が向上します。
+    バージョン8.4.0より前は、 [Top SQL](/dashboard/top-sql.md)は SQLごとにCPU時間を集計していました。CPU時間が少数のSQL文によって消費されていない場合、SQLによる集計では問題を効果的に特定できませんでした。バージョン8.4.0以降では、CPU時間を**By TABLE**または**By DB**で集計できるようになりました。複数のシステムが存在するシナリオでは、この新しい集計方法により、特定のシステムからの負荷変動をより効果的に特定でき、診断効率が向上します。
 
     詳細については、[ドキュメント](/dashboard/top-sql.md#use-top-sql)を参照してください。
 
@@ -189,9 +189,9 @@ TiDB バージョン: 8.4.0
 
 ### データ移行 {#data-migration}
 
-- TiCDC Claim-Check は、Kafka メッセージの`value`フィールドの外部ストレージへの送信のみをサポートします [#11396](https://github.com/pingcap/tiflow/issues/11396) @[3AceShowHand](https://github.com/3AceShowHand)
+- TiCDC Claim-Check は、Kafka メッセージの`value`フィールドのみを外部ストレージに送信することをサポートします [#11396](https://github.com/pingcap/tiflow/issues/11396) @[3AceShowHand](https://github.com/3AceShowHand)
 
-    バージョン 8.4.0 より前では、クレームチェック機能が有効になっている場合 ( `large-message-handle-option`を`claim-check`に設定した場合)、TiCDC は大きなメッセージを処理する際に、 `key`と`value`フィールドの両方をエンコードして外部ストレージシステムに保存します。
+    バージョン 8.4.0 より前では、Claim-Check 機能が有効になっている場合 ( `large-message-handle-option`を`claim-check`に設定した場合)、TiCDC は大きなメッセージを処理する際に、 `key`と`value`フィールドの両方をエンコードして外部ストレージシステムに保存します。
 
     バージョン8.4.0以降、TiCDCはKafkaメッセージの`value`フィールドのみを外部ストレージに送信する機能をサポートしています。この機能は、Open Protocol以外のプロトコルにのみ適用されます。 `claim-check-raw-value`パラメータを設定することで、この機能を制御できます。
 
@@ -251,14 +251,14 @@ TiDB バージョン: 8.4.0
 | PD                       | [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)                                               | 変更     | デフォルト値を`200000`から`540000`に変更します。                                                                                                                                                        |
 | PD                       | [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)                                               | 変更     | デフォルト値を`20`から`54`に変更します。                                                                                                                                                                |
 | TiFlash                  | [`storage.format_version`](/tiflash/tiflash-configuration.md)                                                            | 変更     | ベクトルインデックスの作成とストレージをサポートするため、デフォルトのTiFlashストレージフォーマットバージョンを`5`から`7`に変更します。このフォーマット変更により、v8.4.0以降のバージョンにアップグレードされたTiFlashクラスタでは、以前のバージョンへのインプレースダウングレードはサポートされません。                   |
-| TiDB Binlog               | `--enable-binlog`                                                                                                        | 削除済み     | バージョン8.4.0では、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)が削除されました。このパラメータは、TiDBbinlogの生成を有効にするかどうかを制御するもので、バージョン8.4.0以降は削除されます。                      |
+| TiDB Binlog               | `--enable-binlog`                                                                                                        | 削除済み     | バージョン8.4.0では、 [TiDB Binlog](https://docs-archive.pingcap.com/tidb/v8.3/tidb-binlog-overview/)が削除されました。このパラメータは、TiDB Binlogの生成を有効にするかどうかを制御するもので、バージョン8.4.0以降は削除されます。                      |
 | TiCDC                    | [`claim-check-raw-value`](/ticdc/ticdc-sink-to-kafka.md#send-the-value-field-to-external-storage-only)                   | 新しく追加された | TiCDCがKafkaメッセージの`value`フィールドのみを外部ストレージに送信するかどうかを制御します。この機能は、Open Protocolを使用しないシナリオでのみ適用されます。                                                                                            |
 | TiDB Lightning           | [`logical-import-prep-stmt`](/tidb-lightning/tidb-lightning-configuration.md)                                            | 新しく追加された | 論理インポートモードでは、このパラメーターは、パフォーマンスを向上させるためにプリペアドステートメントとステートメントキャッシュを使用するかどうかを制御します。デフォルト値は`false`です。                                                                                       |
-| BR                       | [`--log.crypter.key`](/br/br-pitr-manual.md#encrypt-the-log-backup-data)                                                 | 新しく追加された | ログバックアップデータの暗号化キーを16進数文字列形式で指定します。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）のキー、アルゴリズム`aes192-ctr` `aes256-ctr`の場合は32バイトのキーです。                                                                 |
+| BR                       | [`--log.crypter.key`](/br/br-pitr-manual.md#encrypt-the-log-backup-data)                                                 | 新しく追加された | ログバックアップデータの暗号化キーを16進数文字列形式で指定します。アルゴリズム`aes128-ctr`の場合は128ビット（16バイト）のキー、アルゴリズム`aes192-ctr`の場合は24バイトのキー、アルゴリズム`aes256-ctr`の場合は32バイトのキーです。                                                                 |
 | BR                       | [`--log.crypter.key-file`](/br/br-pitr-manual.md#encrypt-the-log-backup-data)                                            | 新しく追加された | ログバックアップデータのキーファイルを指定します。 `crypter.key`を渡さずに、キーが格納されているファイルパスをパラメータとして直接渡すことができます。                                                                                                      |
 | BR                       | [`--log.crypter.method`](/br/br-pitr-manual.md#encrypt-the-log-backup-data)                                              | 新しく追加された | ログバックアップデータの暗号化アルゴリズムを指定します。指定できる値は、 `aes128-ctr` 、 `aes192-ctr` 、または`aes256-ctr`です。デフォルト値は`plaintext`で、データが暗号化されないことを示します。                                                             |
 | BR                       | [`--master-key`](/br/br-pitr-manual.md#encrypt-the-log-backup-data)                                                      | 新しく追加された | ログバックアップデータのマスターキーを指定します。ローカルディスクに保存されているマスターキー、またはクラウドキー管理サービス（KMS）によって管理されているマスターキーを指定できます。                                                                                           |
-| BR                       | [`--master-key-crypter-method`](/br/br-pitr-manual.md#encrypt-the-log-backup-data)                                       | 新しく追加された | ログバックアップデータのマスターキーに基づく暗号化アルゴリズムを指定します。マスターキーは、 `aes128-ctr` 、 `aes192-ctr` 、または`aes256-ctr`のいずれかです。デフォルト値は`plaintext`で、データが暗号化されないことを示します。                                              |
+| BR                       | [`--master-key-crypter-method`](/br/br-pitr-manual.md#encrypt-the-log-backup-data)                                       | 新しく追加された | ログバックアップデータのマスターキーに基づく暗号化アルゴリズムを指定します。指定できる値は、 `aes128-ctr` 、 `aes192-ctr` 、または`aes256-ctr`です。デフォルト値は`plaintext`で、データが暗号化されないことを示します。                                              |
 
 ### オフラインパッケージの変更 {#offline-package-changes}
 
@@ -310,7 +310,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - 特定のシナリオにおける`DELETE`操作のために TiKV から取得する列の詳細の数を減らし、これらの操作のリソースオーバーヘッドを削減します [#38911](https://github.com/pingcap/tidb/issues/38911) @[winoros](https://github.com/winoros)
     - TiDBクラスタ内での自動分析操作の同時実行設定をシステム変数`tidb_auto_analyze_concurrency`を使用してサポートする [#53460](https://github.com/pingcap/tidb/issues/53460) @[hawkingrei](https://github.com/hawkingrei)
     - 多数の列を持つテーブルをクエリする際のパフォーマンスを向上させるため、内部関数のロジックを最適化します [#52112](https://github.com/pingcap/tidb/issues/52112) @[Rustin170506](https://github.com/Rustin170506)
-    - `a = 1 AND (a > 1 OR (a = 1 AND b = 2))`から`a = 1 AND b = 2`のようなフィルター条件を簡素化 [#56005](https://github.com/pingcap/tidb/issues/56005) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
+    - `a = 1 AND (a > 1 OR (a = 1 AND b = 2))`のようなフィルター条件を`a = 1 AND b = 2`に簡素化 [#56005](https://github.com/pingcap/tidb/issues/56005) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     - 最適ではない実行計画のリスクが高いシナリオでは、コストモデルでテーブルスキャンのコストを増やし、オプティマイザがインデックスを優先するようにします [#56012](https://github.com/pingcap/tidb/issues/56012) @[terry1purcell](https://github.com/terry1purcell)
     - TiDB は 2つの引数を持つバリアント`MID(str, pos)`をサポートしています [#52420](https://github.com/pingcap/tidb/issues/52420) @[dveeden](https://github.com/dveeden)
     - バイナリ型以外の主キーを持つテーブルのTTLタスクの分割をサポート [#55660](https://github.com/pingcap/tidb/issues/55660) @[lcwangchao](https://github.com/lcwangchao)
@@ -318,22 +318,22 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - 自動分析操作に新しい優先度キューを実装して、分析パフォーマンスを向上させ、キューの再構築コストを削減します [#55906](https://github.com/pingcap/tidb/issues/55906) @[Rustin170506](https://github.com/Rustin170506)
     - 統計モジュールがDDLイベントを購読できるように、DDL通知機能を導入する [#55722](https://github.com/pingcap/tidb/issues/55722) @[fzzf678](https://github.com/fzzf678) @[lance6716](https://github.com/lance6716) @[Rustin170506](https://github.com/Rustin170506)
     - TiDB のアップグレード中に、新しい TiDB ノードが DDL の所有権を引き継ぐように強制することで、古い TiDB ノードが所有権を引き継ぐことによる互換性の問題を回避する [#51285](https://github.com/pingcap/tidb/pull/51285) @[wjhuang2016](https://github.com/wjhuang2016)
-    - クラスターレベルの散乱リージョンをサポート [#8424](https://github.com/tikv/pd/issues/8424) @[River2000i](https://github.com/River2000i)
+    - クラスターレベルの Scatter Region をサポート [#8424](https://github.com/tikv/pd/issues/8424) @[River2000i](https://github.com/River2000i)
 
 - TiKV
 
-    - リージョンのデフォルト値を 96 MiB から 256 MiB に増やして、Region が多すぎることによる余分なオーバーヘッドを回避します [#17309](https://github.com/tikv/tikv/issues/17309) @[LykxSassinator](https://github.com/LykxSassinator)
+    - リージョンのデフォルト値を 96 MiB から 256 MiB に増やして、リージョンが多すぎることによる余分なオーバーヘッドを回避します [#17309](https://github.com/tikv/tikv/issues/17309) @[LykxSassinator](https://github.com/LykxSassinator)
     - リージョンまたはTiKVインスタンスにおけるインメモリ悲観的ロックのメモリ使用量制限の設定をサポートします。ホットライトシナリオで多数の悲観的ロックが発生する場合、構成によってメモリ制限を増やすことができます。これにより、悲観的ロックがディスクに書き込まれることによって発生するCPUおよびI/Oオーバーヘッドを回避できます。 [#17542](https://github.com/tikv/tikv/issues/17542) @[cfzjywxk](https://github.com/cfzjywxk)
-    - Raft Engineに新しい設定項目`spill-dir`を導入し、 Raftログのマルチディスクストレージをサポートします。ホームディレクトリ ( `dir`が配置されているディスクの空き容量がなくなると、 Raft Engine は新しいログを自動的に`spill-dir`に書き込み、システムの継続的な動作を保証します [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
+    - Raft Engineに新しい設定項目`spill-dir`を導入し、 Raftログのマルチディスクストレージをサポートします。ホームディレクトリ（`dir`）が配置されているディスクの空き容量がなくなると、 Raft Engine は新しいログを自動的に`spill-dir`に書き込み、システムの継続的な動作を保証します [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
     - RocksDB の圧縮トリガー メカニズムを最適化し、多数の DELETE バージョンを処理する際のディスク領域の再利用を加速します [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - 書き込み操作のフロー制御構成を動的に変更するサポート [#17395](https://github.com/tikv/tikv/issues/17395) @[glorv](https://github.com/glorv)
     - 空のテーブルと小さなリージョンを含むシナリオでのリージョンマージの速度を改善 [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
-    - [パイプラインDML](https://github.com/pingcap/tidb/blob/release-8.4/docs/design/2024-01-09-pipelined-DML.md)resolved-ts を長期間ブロックしないようにします [#17459](https://github.com/tikv/tikv/issues/17459) @[ekexium](https://github.com/ekexium)
+    - [パイプラインDML](https://github.com/pingcap/tidb/blob/release-8.4/docs/design/2024-01-09-pipelined-DML.md)が resolved-ts を長期間ブロックしないようにします [#17459](https://github.com/tikv/tikv/issues/17459) @[ekexium](https://github.com/ekexium)
 
 - PD
 
     - TiDB Lightningによるデータインポート中のTiKVノードのグレースフルオフラインをサポート [#7853](https://github.com/tikv/pd/issues/7853) @[okJiang](https://github.com/okJiang)
-    - `scatter-range`コマンドで`scatter-range-scheduler`を`pd-ctl`に名前変更する [#8379](https://github.com/tikv/pd/issues/8379) @[okJiang](https://github.com/okJiang)
+    - `pd-ctl`コマンドで`scatter-range`を`scatter-range-scheduler`に名前変更する [#8379](https://github.com/tikv/pd/issues/8379) @[okJiang](https://github.com/okJiang)
     - `grant-hot-leader-scheduler`の競合検出機能を追加 [#4903](https://github.com/tikv/pd/issues/4903) @[lhy1024](https://github.com/lhy1024)
 
 - TiFlash
@@ -357,7 +357,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - `tidb_restricted_read_only`変数が`true`に設定されている場合にデッドロックが発生する可能性がある問題を修正します。 [#53822](https://github.com/pingcap/tidb/issues/53822) [#55373](https://github.com/pingcap/tidb/issues/55373) @[Defined2014](https://github.com/Defined2014)
     - TiDBが正常シャットダウン中に自動コミットトランザクションの完了を待たない問題を修正 [#55464](https://github.com/pingcap/tidb/issues/55464) @[YangKeao](https://github.com/YangKeao)
     - TTLジョブ実行中に`tidb_ttl_delete_worker_count`の値を減らすとジョブが完了しない問題を修正 [#55561](https://github.com/pingcap/tidb/issues/55561) @[lcwangchao](https://github.com/lcwangchao)
-    - テーブルのインデックスに生成列が含まれている場合、 `Unknown column 'column_name' in 'expression'`ステートメントを使用してテーブルの統計情報を収集する際に`ANALYZE`エラーが発生する可能性がある問題を修正しました。 [#55438](https://github.com/pingcap/tidb/issues/55438) @[hawkingrei](https://github.com/hawkingrei)
+    - テーブルのインデックスに生成列が含まれている場合、 `ANALYZE`ステートメントを使用してテーブルの統計情報を収集する際に`Unknown column 'column_name' in 'expression'`エラーが発生する可能性がある問題を修正しました。 [#55438](https://github.com/pingcap/tidb/issues/55438) @[hawkingrei](https://github.com/hawkingrei)
     - 統計関連の不要な設定を非推奨にして、冗長なコードを削減する [#55043](https://github.com/pingcap/tidb/issues/55043) @[Rustin170506](https://github.com/Rustin170506)
     - 相関サブクエリとCTEを含むクエリを実行するとTiDBがハングアップしたり、誤った結果を返す可能性がある問題を修正しました [#55551](https://github.com/pingcap/tidb/issues/55551) @[guo-shaoge](https://github.com/guo-shaoge)
     - `lite-init-stats`を無効にすると統計情報が同期的に読み込まれない可能性がある問題を修正しました [#54532](https://github.com/pingcap/tidb/issues/54532) @[hawkingrei](https://github.com/hawkingrei)
@@ -388,7 +388,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 
     - マスターキーがキー管理サービス（KMS）に保存されている場合にマスターキーのローテーションが妨げられる問題を修正しました [#17410](https://github.com/tikv/tikv/issues/17410) @[hhwyt](https://github.com/hhwyt)
     - 大きなテーブルやパーティションを削除した後に発生する可能性のあるトラフィック制御の問題を修正 [#17304](https://github.com/tikv/tikv/issues/17304) @[Connor1996](https://github.com/Connor1996)
-    - TiKVが、遅い分割操作と新しいレプリカの即時削除によってトリガーされる、古いレプリカがRaftスナップショットを処理する際にpanicする可能性がある問題を修正しました [#17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
+    - 遅い分割操作と新しいレプリカの即時削除をきっかけに、古いレプリカがRaftスナップショットを処理する際にTiKVがpanicする可能性がある問題を修正しました [#17469](https://github.com/tikv/tikv/issues/17469) @[hbisheng](https://github.com/hbisheng)
 
 - TiFlash
 
@@ -403,7 +403,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
         - TiDBノードが停止した際に、監視中のPITRチェックポイント間隔が異常に増加し、実際の状況を反映しない問題を修正しました [#42419](https://github.com/pingcap/tidb/issues/42419) @[YuJuncen](https://github.com/YuJuncen)
         - バックアップ処理中にTiKVが応答しなくなった場合にバックアップタスクが停止する可能性がある問題を修正 [#53480](https://github.com/pingcap/tidb/issues/53480) @[Leavrth](https://github.com/Leavrth)
         - ログバックアップが有効になっている場合に、 BRログに機密の認証情報が出力される可能性がある問題を修正 [#55273](https://github.com/pingcap/tidb/issues/55273) @[RidRisR](https://github.com/RidRisR)
-        - ログバックアップPITRタスクが失敗して停止した後、そのタスクに関連するセーフポイントが正しくクリアされない問題を修正しました（PD） [#17316](https://github.com/tikv/tikv/issues/17316) @[Leavrth](https://github.com/Leavrth)
+        - ログバックアップPITRタスクが失敗して停止した後、そのタスクに関連するセーフポイントがPD内で正しくクリアされない問題を修正しました [#17316](https://github.com/tikv/tikv/issues/17316) @[Leavrth](https://github.com/Leavrth)
 
     - TiDB Data Migration (DM)
 
