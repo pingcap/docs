@@ -43,7 +43,7 @@ TiDB バージョン: 4.0.0
 
 - TiFlash
     - Learnerがデータを読み取る際に、 `Lock CF`の`min commit ts`から`TSO`の条件を満たすデータをフィルタリングすることをサポートします。
-    - `TIMESTAMP`種類の値が`1970-01-01 00:00:00`未満の場合に誤った計算結果を回避するために、システムが明示的にエラーを報告する機能を追加します。
+    - `TIMESTAMP`型の値が`1970-01-01 00:00:00`未満の場合に誤った計算結果を回避するために、システムが明示的にエラーを報告する機能を追加します。
     - ログ検索時に正規表現でフラグの使用をサポート
 
 - TiKV
@@ -73,12 +73,12 @@ TiDB バージョン: 4.0.0
     - `update`文でパーティションの選択が誤っている問題を修正 [#17305](https://github.com/pingcap/tidb/pull/17305)
     - TiKV から不明なエラーメッセージを受信したときにシステムパニックが発生する問題を修正 [#17380](https://github.com/pingcap/tidb/pull/17380)
     - `key`パーティションテーブルを作成するときに誤った処理ロジックによって発生するシステムパニックを修正しました。 [#17242](https://github.com/pingcap/tidb/pull/17242)
-    - オプティマイザ処理ロジック誤りにより間違った`Index Merge Join`プランが選択される問題を修正 [#17365](https://github.com/pingcap/tidb/pull/17365)
+    - オプティマイザの処理ロジックの誤りにより間違った`Index Merge Join`プランが選択される問題を修正 [#17365](https://github.com/pingcap/tidb/pull/17365)
     - Grafana の`SELECT`文の`duration`監視メトリックが不正確であるという問題を修正しました [#16561](https://github.com/pingcap/tidb/pull/16561)
     - システムエラーが発生したときにGCワーカーがブロックされる問題を修正[#16915](https://github.com/pingcap/tidb/pull/16915)
     - ブール列の制約`UNIQUE`が比較で誤った結果をもたらす問題を修正 [#17306](https://github.com/pingcap/tidb/pull/17306)
     - `tidb_opt_agg_push_down`が有効になっていて、集計関数がパーティションテーブルをプッシュダウンしたときに、誤った処理ロジックによって発生するシステムパニックを修正しました。 [#17328](https://github.com/pingcap/tidb/pull/17328)
-    - 一部のケースで障害が発生した TiKV ノードにアクセスできない問題を修正[#17342](https://github.com/pingcap/tidb/pull/17342)
+    - 一部のケースで障害が発生した TiKV ノードにアクセスしてしまう問題を修正[#17342](https://github.com/pingcap/tidb/pull/17342)
     - `tidb.toml`の`isolation-read`設定項目が有効にならない問題を修正[#17322](https://github.com/pingcap/tidb/pull/17322)
     - `hint`を使用してストリーム集約を強制する場合に、処理ロジックが間違っているために出力結果の順序が間違っている問題を修正しました。 [#17347](https://github.com/pingcap/tidb/pull/17347)
     - `insert`が異なる`SQL_MODE` の下で DIV を処理する動作を修正 [#17314](https://github.com/pingcap/tidb/pull/17314)
@@ -98,7 +98,7 @@ TiDB バージョン: 4.0.0
     - 順序が乱れた`ReadIndex`パケットによるシステムパニックを修正 [#7930](https://github.com/tikv/tikv/pull/7930)
     - 読み取りリクエストコールバック関数が呼び出されないために予期しないエラーが返される問題を修正[#7921](https://github.com/tikv/tikv/pull/7921)
     - TiKV の再起動時にスナップショットファイルを誤って削除することで発生するシステムパニックを修正[#7927](https://github.com/tikv/tikv/pull/7927)
-    - ストレージ暗号化処理ロジックが正しくないため、 `master key`が回転できない問題を修正しました [#7898](https://github.com/tikv/tikv/pull/7898)
+    - ストレージ暗号化処理ロジックが正しくないため、 `master key`をローテーションできない問題を修正しました [#7898](https://github.com/tikv/tikv/pull/7898)
     - ストレージ暗号化が有効になっているときに、スナップショットの受信ファイル`lock cf`が暗号化されない問題を修正しました[#7922](https://github.com/tikv/tikv/pull/7922)
 
 - PD

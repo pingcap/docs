@@ -26,13 +26,13 @@ TiDB バージョン: 4.0.7
     - `join`演算子の実行時情報を追加します [#20093](https://github.com/pingcap/tidb/pull/20093)
     - `EXPLAIN ANALYZE` にコプロセッサキャッシュのヒット率情報を追加 [#19972](https://github.com/pingcap/tidb/pull/19972)
     - `ROUND`関数のTiFlashへのプッシュダウンをサポート [#19967](https://github.com/pingcap/tidb/pull/19967)
-    - `ANALYZE` にデフォルト値`CMSketch`を追加します [#19927](https://github.com/pingcap/tidb/pull/19927)
-    - エラーメッセージの感度調整[#20004](https://github.com/pingcap/tidb/pull/20004)
+    - `ANALYZE`の`CMSketch`のデフォルト値を追加します [#19927](https://github.com/pingcap/tidb/pull/19927)
+    - エラーメッセージの秘匿化を改善[#20004](https://github.com/pingcap/tidb/pull/20004)
     - MySQL 8.0 のコネクタを使用してクライアントからの接続を受け入れる [#19959](https://github.com/pingcap/tidb/pull/19959)
 
 - TiKV
 
-    - JSONログ形式サポート [#8382](https://github.com/tikv/tikv/pull/8382)
+    - JSONログ形式をサポート [#8382](https://github.com/tikv/tikv/pull/8382)
 
 - PD
 
@@ -61,7 +61,7 @@ TiDB バージョン: 4.0.7
 
 - TiDB
 
-    - `COALESCE`のショートカットおよび`AND`/`OR`化のバグを修正しました [#20092](https://github.com/pingcap/tidb/pull/20092)
+    - ショートカット（短絡評価）が原因で発生する`and`/`or`/`COALESCE`のベクトル化のバグを修正しました [#20092](https://github.com/pingcap/tidb/pull/20092)
     - copタスクストアが異なるタイプであってもプランダイジェストが同じになる問題を修正[#20076](https://github.com/pingcap/tidb/pull/20076)
     - `!= any()`関数の誤った動作を修正 [#20062](https://github.com/pingcap/tidb/pull/20062)
     - `slow-log`ファイルが存在しない場合に発生するクエリエラーを修正[#20051](https://github.com/pingcap/tidb/pull/20051)

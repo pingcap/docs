@@ -37,7 +37,7 @@ TiDB バージョン: 4.0.0-rc.1
     - 複数のデータパスが構成されている場合に`rename table`操作によって発生するデータ損失の問題を修正しました
     - マージされたリージョンからデータを読み取るときにエラーが発生する問題を修正しました
     - 異常状態にあるリージョンからデータを読み取る際にエラーが発生する問題を修正しました
-    - TiFlashのテーブル名のマッピングを修正して、 `recover table` / `flashback table`正しくサポートする
+    - TiFlashのテーブル名のマッピングを修正して、 `recover table` / `flashback table`を正しくサポートする
     - テーブル名を変更する際に発生する可能性のあるデータ損失の問題を修正するためにストレージパスを変更します。
     - スーパーバッチが有効な場合の TiDB の潜在的なpanicを修正
     - オンライン更新シナリオの読み取りモードを変更して読み取りパフォーマンスを向上させる
@@ -68,7 +68,7 @@ TiDB バージョン: 4.0.0-rc.1
 
     - S3 にデータをバックアップする際のサーバー側暗号化にユーザー所有の KMS キーの使用をサポート[#7630](https://github.com/tikv/tikv/pull/7630)
     - 負荷ベースの`split region`操作を有効にする [#7623](https://github.com/tikv/tikv/pull/7623)
-    - 共通名の検証をサポート[#7468](https://github.com/tikv/tikv/pull/7468)
+    - コモンネーム（CN）の検証をサポート[#7468](https://github.com/tikv/tikv/pull/7468)
     - 同じアドレスにバインドされた複数の TiKV インスタンスの起動を回避するためにファイルロックチェックを追加します[#7447](https://github.com/tikv/tikv/pull/7447)
     - 保存時の暗号化で AWS KMS をサポート[#7465](https://github.com/tikv/tikv/pull/7465)
 
@@ -80,7 +80,7 @@ TiDB バージョン: 4.0.0-rc.1
 
     - DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するメトリックレポートを追加します
     - `handle`列と`version`列をキャッシュして、単一の読み取りまたは書き込みリクエストのディスクI/Oを削減します。
-    - `fromUnixTime`と`dateFormat`プッシュダウン関数をサポート
+    - `fromUnixTime`関数と`dateFormat`関数のプッシュダウンをサポート
     - 最初のディスクに従ってグローバル状態を評価し、この評価を報告する
     - DeltaTreeエンジンの読み取りおよび書き込みワークロードに関連するグラフィックスをGrafanaに追加します
     - `Chunk`コーデックの 10 進データエンコードを最適化します
@@ -90,13 +90,13 @@ TiDB バージョン: 4.0.0-rc.1
 
     - Kafka シンクモジュールでのメッセージのバッチ送信をサポート [#426](https://github.com/pingcap/tiflow/pull/426)
     - プロセッサでのファイルソートをサポート [#477](https://github.com/pingcap/tiflow/pull/477)
-    - 自動`resolve lock` サポート [#459](https://github.com/pingcap/tiflow/pull/459)
+    - 自動`resolve lock`をサポート [#459](https://github.com/pingcap/tiflow/pull/459)
     - TiCDC サービスの GC セーフポイントを PD に自動的に更新する機能を追加します。 [#487](https://github.com/pingcap/tiflow/pull/487)
-    - データ複製タイムゾーン設定を追加する [#498](https://github.com/pingcap/tiflow/pull/498)
+    - データ複製のタイムゾーン設定を追加する [#498](https://github.com/pingcap/tiflow/pull/498)
 
 - Backup & Restore (BR)
 
-    - storageURL での S3/GCS の設定をサポート [#246](https://github.com/pingcap/br/pull/246)
+    - ストレージURL での S3/GCS の設定をサポート [#246](https://github.com/pingcap/br/pull/246)
 
 ## バグ修正 {#bug-fixes}
 
@@ -117,9 +117,9 @@ TiDB バージョン: 4.0.0-rc.1
 - `show create table`文のデフォルトシーケンス値の誤った表示を修正 [#16526](https://github.com/pingcap/tidb/pull/16526)
 - シーケンスが主キーのデフォルト値として使用されるために`not-null`エラーが返される問題を修正しました [#16510](https://github.com/pingcap/tidb/pull/16510)
 - TiKVが`StaleCommand`エラーを返し続けているときに、ブロックされたSQL実行に対してエラーが報告されない問題を修正しました。 [#16530](https://github.com/pingcap/tidb/pull/16530)
-- データベースの作成時に`COLLATE`を指定するとエラーが報告される問題を修正しました。`SHOW CREATE DATABASE`の結果に不足している`COLLATE`部分を追加します[#16540](https://github.com/pingcap/tidb/pull/16540)
+- データベースの作成時に`COLLATE`のみを指定するとエラーが報告される問題を修正しました。`SHOW CREATE DATABASE`の結果に不足している`COLLATE`部分を追加します[#16540](https://github.com/pingcap/tidb/pull/16540)
 - プランキャッシュが有効な場合のパーティションプルーニングの失敗を修正[#16723](https://github.com/pingcap/tidb/pull/16723)
-- オーバーフロー処理時に誤った結果を返すバグ`PointGet`修正 [#16755](https://github.com/pingcap/tidb/pull/16755)
+- オーバーフロー処理時に`PointGet`が誤った結果を返すバグを修正 [#16755](https://github.com/pingcap/tidb/pull/16755)
 - 同じ時間値を持つ`slow_query`システムテーブルをクエリすると間違った結果が返される問題を修正しました[#16806](https://github.com/pingcap/tidb/pull/16806)
 
 <!---->
@@ -145,7 +145,7 @@ TiDB バージョン: 4.0.0-rc.1
 - TiFlash
 
     - ストレージエンジンの粗粒度インデックス最適化を無効にする
-    - リージョンのロックを解決するときに例外がスローされ、一部のロックをスキップする必要があるというバグを修正しました。
+    - リージョンのロックを解決する際に一部のロックをスキップする必要がある場合に、例外がスローされるバグを修正しました。
     - コプロセッサー統計の収集時に発生するヌルポインタ例外 (NPE) を修正しました
     - リージョン分割/リージョン結合のプロセスが正しいことを確認するために、リージョンメタのチェックを修正しました。
     - コプロセッサー応答のサイズが予測されないため、メッセージサイズが gRPC の制限を超える問題を修正しました

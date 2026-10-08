@@ -18,7 +18,7 @@ TiDB バージョン: 4.0.6
 - TiDB Dashboard
 
     - クエリエディタと実行UIの追加（実験的） [#713](https://github.com/pingcap-incubator/tidb-dashboard/pull/713)
-    - ストアロケーショントポロジ可視化サポート [#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
+    - ストアロケーショントポロジの可視化をサポート [#719](https://github.com/pingcap-incubator/tidb-dashboard/pull/719)
     - クラスタ構成UIの追加（実験的） [#733](https://github.com/pingcap-incubator/tidb-dashboard/pull/733)
     - 現在のセッション共有をサポート [#741](https://github.com/pingcap-incubator/tidb-dashboard/pull/741)
     - SQL Statementsリストで実行計画の数を表示する機能をサポート [#746](https://github.com/pingcap-incubator/tidb-dashboard/pull/746)
@@ -36,14 +36,14 @@ TiDB バージョン: 4.0.6
     - `Cop Runtime`統計でより多くのRPC実行時情報を記録 [#19264](https://github.com/pingcap/tidb/pull/19264)
     - `metrics_schema`と`performance_schema` でのテーブル作成を禁止する [#19792](https://github.com/pingcap/tidb/pull/19792)
     - ユニオンエグゼキュータの同時実行の調整をサポート [#19886](https://github.com/pingcap/tidb/pull/19886)
-    - 外部結合とブロードキャスト結合をサポート[#19664](https://github.com/pingcap/tidb/pull/19664)
+    - ブロードキャスト結合で外部結合をサポート[#19664](https://github.com/pingcap/tidb/pull/19664)
     - プロセスリストのSQLダイジェストを追加する [#19829](https://github.com/pingcap/tidb/pull/19829)
     - 自動コミット文を再試行するために悲観的トランザクションモードに切り替える [#19796](https://github.com/pingcap/tidb/pull/19796)
     - `Str_to_date()` の`%r`と`%T`データ形式をサポート [#19693](https://github.com/pingcap/tidb/pull/19693)
-    - `SELECT INTO OUTFILE`を有効にするとファイル権限が必要になります [#19577](https://github.com/pingcap/tidb/pull/19577)
+    - `SELECT INTO OUTFILE`の実行にFILE権限を必要とするようにします [#19577](https://github.com/pingcap/tidb/pull/19577)
     - `stddev_pop`関数をサポートする [#19541](https://github.com/pingcap/tidb/pull/19541)
     - `TiDB-Runtime`ダッシュボードを追加する [#19396](https://github.com/pingcap/tidb/pull/19396)
-    - `ALTER TABLE`アルゴリズム互換性を向上 [#19364](https://github.com/pingcap/tidb/pull/19364)
+    - `ALTER TABLE`アルゴリズムの互換性を向上 [#19364](https://github.com/pingcap/tidb/pull/19364)
     - スローログの`plan`フィールドに`insert`、`delete`、`update`プランをエンコードします [#19269](https://github.com/pingcap/tidb/pull/19269)
 
 - TiKV
@@ -66,8 +66,8 @@ TiDB バージョン: 4.0.6
 
     - データ複製用のGrafanaパネルを追加する（ `apply Region snapshots`と`ingest SST files` ）
     - `write stall`のGrafanaパネルを追加
-    - `dt_segment_force_merge_delta_rows`と`dt_segment_force_merge_delta_deletes`加算して`write stall`のしきい値を調整する
-    - TiFlash-Proxy で設定`raftstore.snap-handle-pool-size` ～ `0`サポートし、マルチスレッドによるリージョンスナップショットの適用を無効にして、データ複製時のメモリ消費を削減します。
+    - `dt_segment_force_merge_delta_rows`と`dt_segment_force_merge_delta_deletes`を追加して`write stall`のしきい値を調整する
+    - TiFlash-Proxy で`raftstore.snap-handle-pool-size`を`0`に設定することをサポートし、マルチスレッドによるリージョンスナップショットの適用を無効にして、データ複製時のメモリ消費を削減します。
     - `https_port`と`metrics_port`のCNチェックをサポート
 
 - ツール
@@ -79,12 +79,12 @@ TiDB バージョン: 4.0.6
 
     - Backup & Restore (BR)
 
-        - 概要ログにリアルタイムコストを追加 [#486](https://github.com/pingcap/br/issues/486)
+        - 概要ログに実際の所要時間を追加 [#486](https://github.com/pingcap/br/issues/486)
 
     - Dumpling
 
         - 列名付き`INSERT`出力をサポート [#135](https://github.com/pingcap/dumpling/pull/135)
-        - `--filesize`と`--statement-size`定義をmydumper の定義と統合する [#142](https://github.com/pingcap/dumpling/pull/142)
+        - `--filesize`と`--statement-size`定義をmydumper の定義と統一する [#142](https://github.com/pingcap/dumpling/pull/142)
 
     - TiDB Lightning
 
@@ -102,27 +102,27 @@ TiDB バージョン: 4.0.6
     - `SHOW GRANTS` の間違った結果を修正 [#19834](https://github.com/pingcap/tidb/pull/19834)
     - `!= ALL (subq)` の誤ったクエリ結果を修正 [#19831](https://github.com/pingcap/tidb/pull/19831)
     - `enum`と`set`型の変換のバグを修正 [#19778](https://github.com/pingcap/tidb/pull/19778)
-    - `SHOW STATS_META`と`SHOW STATS_BUCKET`権限チェックを追加する[#19760](https://github.com/pingcap/tidb/pull/19760)
+    - `SHOW STATS_META`と`SHOW STATS_BUCKET`の権限チェックを追加する[#19760](https://github.com/pingcap/tidb/pull/19760)
     - `builtinGreatestStringSig`と`builtinLeastStringSig` によって発生する列の長さの不一致のエラーを修正 [#19758](https://github.com/pingcap/tidb/pull/19758)
     - 不要なエラーや警告が発生した場合、ベクトル化された制御式はスカラー実行にフォールバックします[#19749](https://github.com/pingcap/tidb/pull/19749)
     - 相関列の型が`Bit` の場合の`Apply`オペレーターのエラーを修正 [#19692](https://github.com/pingcap/tidb/pull/19692)
-    - MySQL 8.0クライアントでユーザーが`processlist`と`cluster_log`クエリするときに発生する問題を修正しました [#19690](https://github.com/pingcap/tidb/pull/19690)
+    - MySQL 8.0クライアントでユーザーが`processlist`と`cluster_log`をクエリするときに発生する問題を修正しました [#19690](https://github.com/pingcap/tidb/pull/19690)
     - 同じタイプのプランが異なるプランダイジェストを持つ問題を修正[#19684](https://github.com/pingcap/tidb/pull/19684)
     - 列タイプを`Decimal`から`Int` に変更することを禁止する [#19682](https://github.com/pingcap/tidb/pull/19682)
-    - `SELECT ... INTO OUTFILE`ランタイムエラーを返す問題を修正 [#19672](https://github.com/pingcap/tidb/pull/19672)
+    - `SELECT ... INTO OUTFILE`がランタイムエラーを返す問題を修正 [#19672](https://github.com/pingcap/tidb/pull/19672)
     - `builtinRealIsFalseSig` の誤った実装を修正 [#19670](https://github.com/pingcap/tidb/pull/19670)
     - パーティション式のチェックで括弧式が欠落する問題を修正しました [#19614](https://github.com/pingcap/tidb/pull/19614)
     - `HashJoin` に`Apply`オペレーターがある場合のクエリエラーを修正しました [#19611](https://github.com/pingcap/tidb/pull/19611)
-    - `Real` `Time` に変換するベクトル化の誤った結果を修正 [#19594](https://github.com/pingcap/tidb/pull/19594)
-    - `SHOW GRANTS`文で存在しないユーザー権限が表示されるバグを修正 [#19588](https://github.com/pingcap/tidb/pull/19588)
-    - `IndexLookupJoin` に`Apply`実行者が存在する場合のクエリエラーを修正 [#19566](https://github.com/pingcap/tidb/pull/19566)
+    - `Real`を`Time` に変換するベクトル化の誤った結果を修正 [#19594](https://github.com/pingcap/tidb/pull/19594)
+    - `SHOW GRANTS`文で存在しないユーザーの権限が表示されるバグを修正 [#19588](https://github.com/pingcap/tidb/pull/19588)
+    - `IndexLookupJoin` に`Apply`エグゼキュータが存在する場合のクエリエラーを修正 [#19566](https://github.com/pingcap/tidb/pull/19566)
     - パーティションテーブルで`Apply`を`HashJoin`に変換するときに誤った結果が発生する問題を修正しました [#19546](https://github.com/pingcap/tidb/pull/19546)
     - `Apply` の内側に`IndexLookUp`エグゼキュータがある場合の誤った結果を修正しました [#19508](https://github.com/pingcap/tidb/pull/19508)
     - ビュー使用時に予期しないpanicが発生する問題を修正しました [#19491](https://github.com/pingcap/tidb/pull/19491)
     - `anti-semi-join`クエリの誤った結果を修正 [#19477](https://github.com/pingcap/tidb/pull/19477)
     - 統計を削除しても統計`TopN`が削除されないバグを修正[#19465](https://github.com/pingcap/tidb/pull/19465)
     - バッチPointGetの誤った使用によって発生した誤った結果を修正 [#19460](https://github.com/pingcap/tidb/pull/19460)
-    - 仮想生成列で`indexLookupJoin`が見つからないバグを修正 [#19439](https://github.com/pingcap/tidb/pull/19439)
+    - 仮想生成列を含む`indexLookupJoin`で列が見つからないバグを修正 [#19439](https://github.com/pingcap/tidb/pull/19439)
     - `select`と`update`クエリの異なるプランがデータを比較するエラーを修正しました [#19403](https://github.com/pingcap/tidb/pull/19403)
     - リージョンキャッシュのTiFlash作業インデックスのデータ競合を修正 [#19362](https://github.com/pingcap/tidb/pull/19362)
     - `logarithm`関数が警告を表示しないバグを修正[#19291](https://github.com/pingcap/tidb/pull/19291)
@@ -139,7 +139,7 @@ TiDB バージョン: 4.0.6
     - `PREPARE statement FROM @Var`が`Var`に大文字が含まれていると失敗する問題を修正[#19378](https://github.com/pingcap/tidb/pull/19378)
     - 大文字スキーマでスキーマ文字セットを変更するとpanicが発生するバグを修正[#19302](https://github.com/pingcap/tidb/pull/19302)
     - 情報に`tikv/tiflash`が含まれている場合の`information_schema.statements_summary`と`explain`間の計画の不一致を修正します [#19159](https://github.com/pingcap/tidb/pull/19159)
-    - `select into outfile` ファイルが存在しないというテストのエラーを修正 [#19725](https://github.com/pingcap/tidb/pull/19725)
+    - `select into outfile`でファイルが存在しないというテストのエラーを修正 [#19725](https://github.com/pingcap/tidb/pull/19725)
     - `INFORMATION_SCHEMA.CLUSTER_HARDWARE`にRAIDデバイス情報がない問題を修正[#19457](https://github.com/pingcap/tidb/pull/19457)
     - `case-when`で生成列を持つ`add index`操作が解析エラーに遭遇したときに正常に終了できるようにします。 [#19395](https://github.com/pingcap/tidb/pull/19395)
     - DDL操作の再試行に時間がかかりすぎるバグを修正[#19488](https://github.com/pingcap/tidb/pull/19488)
@@ -169,7 +169,7 @@ TiDB バージョン: 4.0.6
     - テーブルのレプリケーションステータスの計算によって発生するクラッシュを修正
     - ユーザーがサポートされていないDDL操作を適用した後に、 TiFlashがデータ読み取りに使用できなくなる問題を修正しました。
     - `utf8mb4_bin`として扱われるサポートされていない照合順序によって発生する例外を修正しました
-    - TiFlashコプロセッサエグゼキュータのQPSパネルがGrafanaで常に`0`が表示される問題を修正
+    - TiFlashコプロセッサエグゼキュータのQPSパネルにGrafanaで常に`0`が表示される問題を修正
     - 入力が`NULL`の場合の`FROM_UNIXTIME`関数の誤った結果を修正
 
 - ツール
@@ -179,13 +179,13 @@ TiDB バージョン: 4.0.6
         - TiCDC がメモリリークを起こす場合がある問題を修正しました [#942](https://github.com/pingcap/tiflow/pull/942)
         - Kafka シンクで TiCDC がpanicする可能性がある問題を修正しました [#912](https://github.com/pingcap/tiflow/pull/912)
         - プルラーでCommitTsまたはResolvedTs（CRTs）が`resolvedTs`未満になる可能性がある問題を修正しました [#927](https://github.com/pingcap/tiflow/pull/927)
-        - `changefeed` MySQL ドライバによってブロックされる可能性がある問題を修正しました [#936](https://github.com/pingcap/tiflow/pull/936)
+        - `changefeed`が MySQL ドライバによってブロックされる可能性がある問題を修正しました [#936](https://github.com/pingcap/tiflow/pull/936)
         - TiCDC の誤ったResolved Ts間隔を修正 [#8573](https://github.com/tikv/tikv/pull/8573)
 
     - Backup & Restore (BR)
 
         - チェックサム中に発生する可能性のあるpanicを修正 [#479](https://github.com/pingcap/br/pull/479)
-        - PDリーダーの変更後に発生する可能性のあるpanicを修正 [#496](https://github.com/pingcap/br/pull/496)
+        - PD Leaderの変更後に発生する可能性のあるpanicを修正 [#496](https://github.com/pingcap/br/pull/496)
 
     - Dumpling
 

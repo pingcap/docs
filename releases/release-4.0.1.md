@@ -17,7 +17,7 @@ TiDB バージョン: 4.0.1
 
 - PD
 
-    - 組み込みの TiDB Dashboard内部プロキシをサポート [#2511](https://github.com/pingcap/pd/pull/2511)
+    - 組み込みの TiDB Dashboardの内部プロキシをサポート [#2511](https://github.com/pingcap/pd/pull/2511)
     - PDクライアントのカスタムタイムアウト設定をサポート [#2509](https://github.com/pingcap/pd/pull/2509)
 
 - TiFlash
@@ -36,11 +36,11 @@ TiDB バージョン: 4.0.1
 
 - TiKV
 
-    - 起動ログの`use-unified-pool`構成が誤って印刷される問題を修正[#7946](https://github.com/tikv/tikv/pull/7946)
+    - 起動ログの`use-unified-pool`構成が誤って出力される問題を修正[#7946](https://github.com/tikv/tikv/pull/7946)
     - tikv-ctlが相対パスをサポートしない問題を修正 [#7963](https://github.com/tikv/tikv/pull/7963)
     - ポイントセレクトのモニタリングメトリックが不正確になるバグを修正[#8033](https://github.com/tikv/tikv/pull/8033)
     - ネットワーク分離が消えた後にピアが破棄されない可能性がある問題を修正[#8006](https://github.com/tikv/tikv/pull/8006)
-    - 読み取りインデックスのリクエストで古いコミットインデックスが取得される可能性がある問題を修正しました [#8043](https://github.com/tikv/tikv/pull/8043)
+    - read index リクエストで古い commit index が取得される可能性がある問題を修正しました [#8043](https://github.com/tikv/tikv/pull/8043)
     - S3とGCSストレージによるバックアップとリストアの信頼性の向上[#7917](https://github.com/tikv/tikv/pull/7917)
 
 - PD
