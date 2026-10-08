@@ -12,6 +12,8 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 - **Not tested**: DM aims to be compatible with the MySQL protocol and binlog. However, not all MySQL forks or versions are included in the DM test matrix. If a fork or version uses MySQL-compatible protocols and binlog formats, it is expected to work, but you must verify compatibility in your own environment before use.
 - **Incompatible**: DM has known blocking issues, so production use is not recommended.
 
+These compatibility levels describe validation maturity. They do not specify support response times or bug-fix commitments. If you encounter an issue, you can report it on [GitHub](https://github.com/pingcap/tiflow/issues).
+
 ## Data sources
 
 | Data source              | Compatibility level | Note |
@@ -21,11 +23,18 @@ DM supports migrating data from different sources to TiDB clusters. Based on the
 | MySQL 5.7                | GA                  |      |
 | MySQL 8.0                | GA                  | Does not support [binlog transaction compression (`Transaction_payload_event`)](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html). |
 | MySQL 8.1 ~ 8.3          | Not tested          | Does not support [binlog transaction compression (`Transaction_payload_event`)](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html). |
-| MySQL 8.4                | Experimental (supported starting from TiDB v8.5.6) | Does not support [binlog transaction compression (`Transaction_payload_event`)](https://dev.mysql.com/doc/refman/8.4/en/binary-log-transaction-compression.html). |
+| MySQL 8.4                | Experimental (supported starting from TiDB v8.5.6) | Does not support [binlog transaction compression (`Transaction_payload_event`)](https://dev.mysql.com/doc/refman/8.4/en/binary-log-transaction-compression.html). See [MySQL 8.4 notes](#mysql-84-notes). |
 | MySQL 9.x                | Not tested          |      |
 | MariaDB < 10.1.2         | Incompatible        | Incompatible with binlog of the time type. |
 | MariaDB 10.1.2 ~ 10.5.10 | Experimental        |      |
 | MariaDB > 10.5.10        | Not tested          | Expected to work in most cases after bypassing the [precheck](/dm/dm-precheck.md). See [MariaDB notes](#mariadb-notes). |
+
+### MySQL 8.4 notes
+
+MySQL 8.4 source support is Experimental, not GA. Before production use, verify compatibility with your exact source version, DM version, and migration configuration. Validate the migration modes you plan to use and check data consistency.
+
+- For incremental replication, set `binlog_transaction_compression=OFF`. DM does not support compressed binlog transaction events.
+- If your source uses tagged GTIDs, verify compatibility with your DM version before migration. Tagged GTIDs require further compatibility testing. For details, see [the tagged GTID issue](https://github.com/pingcap/tiflow/issues/12629) and [the compatibility testing tracker](https://github.com/pingcap/tiflow/issues/12412).
 
 ### Foreign key `CASCADE` operations
 
