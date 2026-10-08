@@ -5,7 +5,7 @@ summary: "`sys` スキーマの `schema_unused_indexes` テーブルについて
 
 # `schema_unused_indexes` {#schema_unused_indexes}
 
-`schema_unused_indexes` 、TiDB の前回の起動以降使用されていないインデックスを記録します。以下の列が含まれます。
+`schema_unused_indexes`は、TiDB の前回の起動以降使用されていないインデックスを記録します。以下の列が含まれます。
 
 - `OBJECT_SCHEMA` : インデックスを含むテーブルが属するデータベースの名前。
 - `OBJECT_NAME` : インデックスを含むテーブルの名前。
