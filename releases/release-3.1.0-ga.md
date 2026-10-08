@@ -53,20 +53,20 @@ TiDB Ansible バージョン: 3.1.0 GA
     - 一部のシナリオでマージ結合操作によって発生するpanic問題を修正[#15920](https://github.com/pingcap/tidb/pull/15920)
     - 選択性計算で一部の式が繰り返しカウントされる問題を修正 [#16052](https://github.com/pingcap/tidb/pull/16052)
     - 極端なケースで統計情報をロードするときに発生するpanic問題を修正[#15710](https://github.com/pingcap/tidb/pull/15710)
-    - SQLクエリで同等の式を認識できない場合にエラーが返される問題を修正 [#16015](https://github.com/pingcap/tidb/pull/16015)
+    - SQLクエリで同等の式を認識できない場合に、一部のケースでエラーが返される問題を修正 [#16015](https://github.com/pingcap/tidb/pull/16015)
     - あるデータベースの`view`を別のデータベースからクエリするとエラーが返される問題を修正しました [#15867](https://github.com/pingcap/tidb/pull/15867)
     - `fast analyze` を使用して列を処理するときに発生するpanic問題を修正しました [#16080](https://github.com/pingcap/tidb/pull/16080)
-    - `current_role`印刷結果の誤った文字セットを修正 [#16084](https://github.com/pingcap/tidb/pull/16084)
-    - MySQL接続ハンドシェイクエラーのログを精査する [#15799](https://github.com/pingcap/tidb/pull/15799)
+    - `current_role`の出力結果の誤った文字セットを修正 [#16084](https://github.com/pingcap/tidb/pull/16084)
+    - MySQL接続ハンドシェイクエラーのログを改善する [#15799](https://github.com/pingcap/tidb/pull/15799)
     - 監査プラグインのロード後にポートプローブによって発生するpanic問題を修正[#16065](https://github.com/pingcap/tidb/pull/16065)
-    - `TypeNull`クラスが可変長型と誤認されるために左結合の`sort`演算子がpanic問題を修正 [#15739](https://github.com/pingcap/tidb/pull/15739)
+    - `TypeNull`クラスが可変長型と誤認されるために左結合の`sort`演算子でpanicが発生する問題を修正 [#15739](https://github.com/pingcap/tidb/pull/15739)
     - 監視セッション再試行エラーの数が不正確になる問題を修正[#16120](https://github.com/pingcap/tidb/pull/16120)
     - `ALLOW_INVALID_DATES`モードで`weekday`の間違った結果の問題を修正 [#16171](https://github.com/pingcap/tidb/pull/16171)
     - クラスタにTiFlashノードがある場合にガベージコレクション（GC）が正常に動作しない可能性がある問題を修正しました [#15761](https://github.com/pingcap/tidb/pull/15761)
-    - ハッシュパーティションテーブルを作成する際にユーザーが大きなパーティション数を設定すると、TiDBがメモリ（OOM）になる問題を修正しました。 [#16219](https://github.com/pingcap/tidb/pull/16219)
+    - ハッシュパーティションテーブルを作成する際にユーザーが大きなパーティション数を設定すると、TiDBがメモリ不足（OOM）になる問題を修正しました。 [#16219](https://github.com/pingcap/tidb/pull/16219)
     - 警告がエラーと誤認される問題を修正し、 `UNION`文が`SELECT`文と同じ動作になるようにします[#16138](https://github.com/pingcap/tidb/pull/16138)
-    - `TopN` mocktikv にプッシュダウンしたときの実行エラーを修正しました [#16200](https://github.com/pingcap/tidb/pull/16200)
-    - 不要なオーバーヘッド`runtime.growslice` を避けるために、初期の長さを`chunk.column.nullBitMap`に増やします。 [#16142](https://github.com/pingcap/tidb/pull/16142)
+    - `TopN`が mocktikv にプッシュダウンされたときの実行エラーを修正しました [#16200](https://github.com/pingcap/tidb/pull/16200)
+    - `runtime.growslice`の不要なオーバーヘッドを避けるために、 `chunk.column.nullBitMap`の初期の長さを増やします。 [#16142](https://github.com/pingcap/tidb/pull/16142)
 
 - TiKV
 
@@ -79,7 +79,7 @@ TiDB Ansible バージョン: 3.1.0 GA
     - TiDBからスキーマを複製する際の`rename table`操作の潜在的な問題を修正
     - 複数のデータパス構成で`rename table`操作によって発生するデータ損失の問題を修正しました
     - 一部のシナリオでTiFlash が誤ったストレージ容量を報告する問題を修正しました
-    - リージョン結合が有効なときにTiFlashから読み取ることによって発生する可能性のある問題を修正しました
+    - リージョンマージが有効なときにTiFlashから読み取ることによって発生する可能性のある問題を修正しました
 
 - ツール
 

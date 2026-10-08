@@ -19,11 +19,11 @@ TiDB バージョン: 3.0.20
 
 - TiDB
 
-    - `LOAD DATA`文を準備するときにエラーが発生する [#21222](https://github.com/pingcap/tidb/pull/21222)
+    - `LOAD DATA`文をプリペアするときにエラーを返すようにする [#21222](https://github.com/pingcap/tidb/pull/21222)
 
 - TiKV
 
-    - `end_point_slow_log_threshold`設定項目追加する [#9145](https://github.com/tikv/tikv/pull/9145)
+    - `end_point_slow_log_threshold`設定項目を追加する [#9145](https://github.com/tikv/tikv/pull/9145)
 
 ## バグ修正 {#bug-fixes}
 
@@ -37,7 +37,7 @@ TiDB バージョン: 3.0.20
     - `year`型の誤ったデフォルトのゼロ値を修正 [#20828](https://github.com/pingcap/tidb/pull/20828)
     - インデックス検索結合におけるゴルーチンリークの問題を修正 [#20791](https://github.com/pingcap/tidb/pull/20791)
     - `INSERT SELECT FOR UPDATE`を実行すると悲観的トランザクションで不正なパケットが返される問題を修正 [#20681](https://github.com/pingcap/tidb/pull/20681)
-    - 不明なタイムゾーンを修正`'posixrules'` [#20605](https://github.com/pingcap/tidb/pull/20605)
+    - 不明なタイムゾーン`'posixrules'`を修正 [#20605](https://github.com/pingcap/tidb/pull/20605)
     - 符号なし整数型をビット型に変換するときに発生する問題を修正しました [#20362](https://github.com/pingcap/tidb/pull/20362)
     - ビット型列の破損したデフォルト値を修正 [#20339](https://github.com/pingcap/tidb/pull/20339)
     - 等価条件の1つが`Enum`または`Set`タイプである場合に、潜在的に誤った結果を修正します。 [#20296](https://github.com/pingcap/tidb/pull/20296)
@@ -45,7 +45,7 @@ TiDB バージョン: 3.0.20
     - `BETWEEN...AND...`型変換で無効な結果が返される問題を修正[#21503](https://github.com/pingcap/tidb/pull/21503)
     - `ADDDATE`関数の互換性の問題を修正 [#21008](https://github.com/pingcap/tidb/pull/21008)
     - 新しく追加された`Enum`列の正しいデフォルト値を設定する [#20999](https://github.com/pingcap/tidb/pull/20999)
-    - `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)`ようなSQL文の結果をMySQL と互換性があるように修正します [#20627](https://github.com/pingcap/tidb/pull/20627)
+    - `SELECT DATE_ADD('2007-03-28 22:08:28',INTERVAL "-2.-2" SECOND)`のようなSQL文の結果をMySQL と互換性があるように修正します [#20627](https://github.com/pingcap/tidb/pull/20627)
     - 列タイプを変更するときに誤ったデフォルト値を修正 [#20532](https://github.com/pingcap/tidb/pull/20532)
     - 入力引数が`float`または`decimal`型の場合に`timestamp`関数が間違った結果を取得する問題を修正しました[#20469](https://github.com/pingcap/tidb/pull/20469)
     - 統計における潜在的なデッドロック問題を修正 [#20424](https://github.com/pingcap/tidb/pull/20424)
