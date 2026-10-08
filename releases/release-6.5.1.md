@@ -70,7 +70,7 @@ TiDB バージョン: 6.5.1
 
     - TiCDC
 
-        - プルベースのシンクを有効にしてシステムスループットを最適化します[#8232](https://github.com/pingcap/tiflow/issues/8232) @[Rustin170506](https://github.com/Rustin170506)
+        - プルベースのシンクを有効にしてシステムスループットを最適化します[#8232](https://github.com/pingcap/tiflow/issues/8232) @[hi-rustin](https://github.com/Rustin170506)
         - GCS 互換または Azure 互換のオブジェクトストレージへの REDO ログの保存をサポート [#7987](https://github.com/pingcap/tiflow/issues/7987) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - シンクのスループットを向上させるために、非同期モードでMQシンクとMySQLシンクを実装します[#5928](https://github.com/pingcap/tiflow/issues/5928) @[amyangfei](https://github.com/amyangfei) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
@@ -80,7 +80,7 @@ TiDB バージョン: 6.5.1
 
     - [`pessimistic-auto-commit`](/tidb-configuration-file.md#pessimistic-auto-commit-new-in-v600)設定項目がPointGetクエリで有効にならない問題を修正しました [#39928](https://github.com/pingcap/tidb/issues/39928) @[zyguan](https://github.com/zyguan)
     - 長いセッション接続で`INSERT`または`REPLACE`文がpanicする可能性がある問題を修正しました [#40351](https://github.com/pingcap/tidb/issues/40351) @[winoros](https://github.com/winoros)
-    - `auto analyze`が正常なシャットダウンに長い時間がかかる問題を修正[#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+    - `auto analyze`によってグレースフルシャットダウンに長い時間がかかる問題を修正[#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - DDL取り込み中にデータ競合が発生する可能性がある問題を修正 [#40970](https://github.com/pingcap/tidb/issues/40970) @[tangenta](https://github.com/tangenta)
     - インデックスを追加するとデータ競合が発生する可能性がある問題を修正しました [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
     - テーブルに多数のリージョンがある場合に無効なリージョンキャッシュが原因でインデックスの追加操作が非効率になる問題を修正しました。 [#38436](https://github.com/pingcap/tidb/issues/38436) @[tangenta](https://github.com/tangenta)
@@ -93,8 +93,8 @@ TiDB バージョン: 6.5.1
     - 動的トリミングモードでパーティションテーブルにグローバルバインディングが作成された後にTiDBが再起動できない問題を修正しました [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
     - "cursor read"メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [#39447](https://github.com/pingcap/tidb/issues/39447) @[zyguan](https://github.com/zyguan)
     - `SHOW PROCESSLIST` の結果で`EXECUTE`情報が null になる問題を修正しました [#41156](https://github.com/pingcap/tidb/issues/41156) @[YangKeao](https://github.com/YangKeao)
-    - `globalMemoryControl`クエリを強制終了しているときに、 `KILL`操作が終了しない可能性がある問題を修正しました [#41057](https://github.com/pingcap/tidb/issues/41057) @[wshwsh12](https://github.com/wshwsh12)
-    - `indexMerge`エラーに遭遇した後に TiDB がpanicする可能性がある問題を修正[#41047](https://github.com/pingcap/tidb/issues/41047) [#40877](https://github.com/pingcap/tidb/issues/40877) @[guo-shaoge](https://github.com/guo-shaoge) @[windtalker](https://github.com/windtalker)
+    - `globalMemoryControl`がクエリを強制終了しているときに、 `KILL`操作が終了しない可能性がある問題を修正しました [#41057](https://github.com/pingcap/tidb/issues/41057) @[wshwsh12](https://github.com/wshwsh12)
+    - `indexMerge`がエラーに遭遇した後に TiDB がpanicする可能性がある問題を修正[#41047](https://github.com/pingcap/tidb/issues/41047) [#40877](https://github.com/pingcap/tidb/issues/40877) @[guo-shaoge](https://github.com/guo-shaoge) @[windtalker](https://github.com/windtalker)
     - `ANALYZE`文が`KILL` で終了する可能性がある問題を修正しました [#41825](https://github.com/pingcap/tidb/issues/41825) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - `indexMerge` で goroutine リークが発生する可能性がある問題を修正しました [#41605](https://github.com/pingcap/tidb/issues/41605) @[guo-shaoge](https://github.com/guo-shaoge) [#41545](https://github.com/pingcap/tidb/issues/41545)
     - 符号なしの`TINYINT` / `SMALLINT` / `INT`値を`0` より小さい`DECIMAL` / `FLOAT` / `DOUBLE`値と比較するときに誤った結果になる可能性がある問題を修正しました。 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
@@ -102,9 +102,9 @@ TiDB バージョン: 6.5.1
     - タイムゾーンでのデータ競合によりデータインデックスの不整合が発生する可能性がある問題を修正[#40710](https://github.com/pingcap/tidb/issues/40710) @[wjhuang2016](https://github.com/wjhuang2016)
     - `batch cop`実行中のスキャン詳細情報が不正確になる可能性がある問題を修正[#41582](https://github.com/pingcap/tidb/issues/41582) @[you06](https://github.com/you06)
     - `cop`の上限同時実行数が制限されない問題を修正 [#41134](https://github.com/pingcap/tidb/issues/41134) @[you06](https://github.com/you06)
-    - `cursor read`分の`statement context`が誤ってキャッシュされる問題を修正 [#39998](https://github.com/pingcap/tidb/issues/39998) @[zyguan](https://github.com/zyguan)
+    - `cursor read`の`statement context`が誤ってキャッシュされる問題を修正 [#39998](https://github.com/pingcap/tidb/issues/39998) @[zyguan](https://github.com/zyguan)
     - メモリリークとパフォーマンスの低下を防ぐため、古くなったリージョンキャッシュを定期的にクリーンアップします[#40355](https://github.com/pingcap/tidb/issues/40355) @[sticnarf](https://github.com/sticnarf)
-    - `year <cmp> const`含むクエリでプランキャッシュを使用すると間違った結果が返される可能性がある問題を修正しました [#41626](https://github.com/pingcap/tidb/issues/41626) @[qw4990](https://github.com/qw4990)
+    - `year <cmp> const`を含むクエリでプランキャッシュを使用すると間違った結果が返される可能性がある問題を修正しました [#41626](https://github.com/pingcap/tidb/issues/41626) @[qw4990](https://github.com/qw4990)
     - 大きな範囲と大量のデータ変更を伴うクエリを実行するときに大きな推定エラーが発生する問題を修正[#39593](https://github.com/pingcap/tidb/issues/39593) @[time-and-fate](https://github.com/time-and-fate)
     - Plan Cache の使用時に、一部の条件が Join 演算子を通じてプッシュダウンできない問題を修正しました。 [#38205](https://github.com/pingcap/tidb/issues/38205) @[qw4990](https://github.com/qw4990) [#40093](https://github.com/pingcap/tidb/issues/40093)
     - IndexMerge プランが SET 型の列 に誤った範囲を生成する可能性がある問題を修正しました [#41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate) [#41273](https://github.com/pingcap/tidb/issues/41273)
@@ -129,14 +129,14 @@ TiDB バージョン: 6.5.1
     - `const Enum`型を他の型にキャストするときに発生するエラーを修正しました [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
     - Cop タスクのページングが不正確になる問題を修正[#14254](https://github.com/tikv/tikv/issues/14254) @[you06](https://github.com/you06)
     - `batch_cop`モードで`scan_detail`フィールドが不正確になる問題を修正 [#14109](https://github.com/tikv/tikv/issues/14109) @[you06](https://github.com/you06)
-    - Raft Engineの潜在的なエラーを修正しました。このエラーにより、TiKV がRaftデータの破損を検出し、TiKV の再起動に失敗する可能性があります。 [`#14338`](https://github.com/tikv/tikv/issues/14338) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - Raft Engineの潜在的なエラーを修正しました。このエラーにより、TiKV がRaftデータの破損を検出し、TiKV の再起動に失敗する可能性があります。 [#14338](https://github.com/tikv/tikv/issues/14338) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 - PD
 
     - 特定の条件下で`replace-down-peer`の実行が遅くなる問題を修正[#5788](https://github.com/tikv/pd/issues/5788) @[HunDunDM](https://github.com/HunDunDM)
-    - PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
+    - PD が予期せず複数の Learner をリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
     - リージョンスキャッタタスクが予期せず冗長レプリカを生成する問題を修正[#5909](https://github.com/tikv/pd/issues/5909) @[HunDunDM](https://github.com/HunDunDM)
-    - `ReportMinResolvedTS`の呼び出しが頻繁に発生する PD OOM 問題を修正しました [#5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)
+    - `ReportMinResolvedTS`の呼び出しが頻繁すぎる場合に発生する PD OOM 問題を修正しました [#5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)
     - リージョン散布により、リーダーの分布が不均一になる可能性がある問題を修正しました。 [#6017](https://github.com/tikv/pd/issues/6017) @[HunDunDM](https://github.com/HunDunDM)
 
 - TiFlash
@@ -158,11 +158,11 @@ TiDB バージョン: 6.5.1
         - PITRバックアップタスクを削除すると、残りのバックアップデータによって新しいタスクでデータの不整合が発生する問題を修正しました。 [#40403](https://github.com/pingcap/tidb/issues/40403) @[joccau](https://github.com/joccau)
         - BRが`backupmeta`ファイルを解析するときにpanicを引き起こす問題を修正しました [#40878](https://github.com/pingcap/tidb/issues/40878) @[MoCuishle28](https://github.com/MoCuishle28)
         - リージョンサイズ取得に失敗したために復元が中断される問題を修正しました [#36053](https://github.com/pingcap/tidb/issues/36053) @[YuJuncen](https://github.com/YuJuncen)
-        - TiDBクラスタにPITRバックアップタスクがない場合に頻度`resolve lock`が高すぎる問題を修正 [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
+        - TiDBクラスタにPITRバックアップタスクがない場合に`resolve lock`の頻度が高すぎる問題を修正 [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
         - ログバックアップが実行中のクラスタにデータを復元すると、ログバックアップファイルが復元できなくなる問題を修正[#40797](https://github.com/pingcap/tidb/issues/40797) @[Leavrth](https://github.com/Leavrth)
         - 完全バックアップの失敗後にチェックポイントからバックアップを再開しようとしたときに発生するpanicの問題を修正[#40704](https://github.com/pingcap/tidb/issues/40704) @[Leavrth](https://github.com/Leavrth)
         - PITRエラーが上書きされる問題を修正 [#40576](https://github.com/pingcap/tidb/issues/40576) @[Leavrth](https://github.com/Leavrth)
-        - PITR バックアップタスクで、先行所有者と GC 所有者が異なる場合にチェックポイントが進まない問題を修正しました[#41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
+        - PITR バックアップタスクで、advance owner と GC owner が異なる場合にチェックポイントが進まない問題を修正しました[#41806](https://github.com/pingcap/tidb/issues/41806) @[joccau](https://github.com/joccau)
 
     - TiCDC
 
@@ -187,7 +187,7 @@ TiDB バージョン: 6.5.1
     - TiDB Lightning
 
         - TiDB Lightningの事前チェックで、以前に失敗したインポートによって残されたダーティデータを見つけられない問題を修正[#39477](https://github.com/pingcap/tidb/issues/39477) @[dsdashun](https://github.com/dsdashun)
-        - TiDB Lightningが分割領域フェーズでパニックになる問題を修正 [#40934](https://github.com/pingcap/tidb/issues/40934) @[lance6716](https://github.com/lance6716)
+        - TiDB Lightningがリージョン分割フェーズでパニックになる問題を修正 [#40934](https://github.com/pingcap/tidb/issues/40934) @[lance6716](https://github.com/lance6716)
         - 競合解決ロジック（ `duplicate-resolution` ）によってチェックサムの不一致が発生する可能性がある問題を修正しました。 [#40657](https://github.com/pingcap/tidb/issues/40657) @[sleepymole](https://github.com/sleepymole)
         - 並列インポート中に、最後のTiDB Lightningインスタンスを除くすべてのインスタンスがローカル重複レコードに遭遇した場合に、 TiDB Lightning が競合解決を誤ってスキップする可能性がある問題を修正しました[#40923](https://github.com/pingcap/tidb/issues/40923) @[lichunzhu](https://github.com/lichunzhu)
         - ローカルバックエンドモードでデータをインポートする際に、インポートされたターゲットテーブルの複合主キーに`auto_random`列があり、ソースデータでその列の値が指定されていない場合、ターゲット列が自動的にデータを生成しない問題を修正しました。 [#41454](https://github.com/pingcap/tidb/issues/41454) @[D3Hunter](https://github.com/D3Hunter)

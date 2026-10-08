@@ -47,22 +47,22 @@ TiDB バージョン: 6.5.5
 - PD
 
     - スケジューラの起動に時間がかかる問題を修正[#6920](https://github.com/tikv/pd/issues/6920) @[HuSharp](https://github.com/HuSharp)
-    - スキャッターリージョンにおけるリーダーとピアの処理ロジックが矛盾している問題を修正しました [#6962](https://github.com/tikv/pd/issues/6962) @[bufferflies](https://github.com/bufferflies)
-    - クラスタが再起動されたとき、またはPDLeaderが切り替えられたときに、 `empty-region-count`監視メトリックが異常になる問題を修正しました。 [#7008](https://github.com/tikv/pd/issues/7008) @[CabinfeverB](https://github.com/CabinfeverB)
+    - Scatter Region における Leader と Peerの処理ロジックが矛盾している問題を修正しました [#6962](https://github.com/tikv/pd/issues/6962) @[bufferflies](https://github.com/bufferflies)
+    - クラスタが再起動されたとき、またはPD Leader が切り替えられたときに、 `empty-region-count`監視メトリックが異常になる問題を修正しました。 [#7008](https://github.com/tikv/pd/issues/7008) @[CabinfeverB](https://github.com/CabinfeverB)
 
 - ツール
 
     - Backup & Restore (BR)
 
         - PITRによる暗黙の主キーの復元が競合を引き起こす可能性がある問題を修正 [#46520](https://github.com/pingcap/tidb/issues/46520) @[3pointer](https://github.com/3pointer)
-        - PITRがメタkv を回復するときにエラーが発生する問題を修正しました [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
+        - PITRがmeta-kv を回復するときにエラーが発生する問題を修正しました [#46578](https://github.com/pingcap/tidb/issues/46578) @[Leavrth](https://github.com/Leavrth)
         - BR統合テストケースのエラーを修正 [#46561](https://github.com/pingcap/tidb/issues/46561) @[purelind](https://github.com/purelind)
         - PITRがGCS からデータを復元できない問題を修正 [#47022](https://github.com/pingcap/tidb/issues/47022) @[Leavrth](https://github.com/Leavrth)
 
     - TiCDC
 
         - PDノードのネットワーク分離によって発生するTiCDCレプリケーションのレイテンシーが大きくなる問題を修正 [#9565](https://github.com/pingcap/tiflow/issues/9565) @[asddongmen](https://github.com/asddongmen)
-        - CSV形式を使用するとTiCDCが誤って`UPDATE`演算を`INSERT`に変更する問題を修正 [#9658](https://github.com/pingcap/tiflow/issues/9658) @[3AceShowHand](https://github.com/3AceShowHand)
+        - CSV形式を使用するとTiCDCが誤って`UPDATE`操作を`INSERT`に変更する問題を修正 [#9658](https://github.com/pingcap/tiflow/issues/9658) @[3AceShowHand](https://github.com/3AceShowHand)
         - 一部のログにユーザーパスワードが記録される問題を修正[#9690](https://github.com/pingcap/tiflow/issues/9690) @[sdojjy](https://github.com/sdojjy)
         - SASL認証を使用するとTiCDCがpanicする可能性がある問題を修正[#9669](https://github.com/pingcap/tiflow/issues/9669) @[sdojjy](https://github.com/sdojjy)
         - 一部のコーナーケースで TiCDC レプリケーションタスクが失敗する可能性がある問題を修正[#9685](https://github.com/pingcap/tiflow/issues/9685) [#9697](https://github.com/pingcap/tiflow/issues/9697) [#9695](https://github.com/pingcap/tiflow/issues/9695) [#9736](https://github.com/pingcap/tiflow/issues/9736) @[hicqu](https://github.com/hicqu) @[CharlesCheung96](https://github.com/CharlesCheung96)
@@ -72,5 +72,5 @@ TiDB バージョン: 6.5.5
 
         - ターゲットサーバーにTiCDCがデプロイされているときにTiDB Lightningが起動に失敗する問題を修正 [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)
         - PDトポロジが変更されるとTiDB Lightningが起動に失敗する問題を修正[#46688](https://github.com/pingcap/tidb/issues/46688) @[lance6716](https://github.com/lance6716)
-        - PD のリーダーを切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました [#46540](https://github.com/pingcap/tidb/issues/46540) @[lance6716](https://github.com/lance6716)
+        - PD の Leader を切り替えた後にTiDB Lightning がデータのインポートを続行できない問題を修正しました [#46540](https://github.com/pingcap/tidb/issues/46540) @[lance6716](https://github.com/lance6716)
         - 事前チェックがターゲットクラスターで実行中の TiCDC の存在を正確に検出できない問題を修正しました。 [#41040](https://github.com/pingcap/tidb/issues/41040) @[lance6716](https://github.com/lance6716)

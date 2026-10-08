@@ -72,7 +72,7 @@ TiDB バージョン: 6.5.3
     - PDメンバーのアドレスが変更されると、 `AUTO_INCREMENT`列のIDの割り当てが長時間ブロックされる問題を修正[#42643](https://github.com/pingcap/tidb/issues/42643) @[tiancaiamao](https://github.com/tiancaiamao)
     - 配置ルールのリサイクル中に TiDB が PD に重複したリクエストを送信し、PD ログに多数の`full config reset`エントリが発生する問題を修正しました。 [#33069](https://github.com/pingcap/tidb/issues/33069) @[tiancaiamao](https://github.com/tiancaiamao)
     - `SHOW PRIVILEGES`文が不完全な権限リストを返す問題を修正しました [#40591](https://github.com/pingcap/tidb/issues/40591) @[CbcWestwolf](https://github.com/CbcWestwolf)
-    - `ADMIN SHOW DDL JOBS LIMIT`誤った結果を返す問題を修正[#42298](https://github.com/pingcap/tidb/issues/42298) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - `ADMIN SHOW DDL JOBS LIMIT`が誤った結果を返す問題を修正[#42298](https://github.com/pingcap/tidb/issues/42298) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - パスワードの複雑さのチェックが有効になっているときに`tidb_auth_token`ユーザーの作成に失敗する問題を修正[#44098](https://github.com/pingcap/tidb/issues/44098) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 動的プルーニングモードで内部結合中にパーティションが見つからない問題を修正 [#43686](https://github.com/pingcap/tidb/issues/43686) @[mjonss](https://github.com/mjonss)
     - パーティションテーブルで`MODIFY COLUMN`を実行すると`Data Truncated`警告が発生する問題を修正しました [#41118](https://github.com/pingcap/tidb/issues/41118) @[mjonss](https://github.com/mjonss)
@@ -96,13 +96,13 @@ TiDB バージョン: 6.5.3
     - 自動コミットとPointGetレプリカ読み取りによって線形化可能性が破壊される可能性がある問題を修正しました [#14715](https://github.com/tikv/tikv/issues/14715) @[cfzjywxk](https://github.com/cfzjywxk)
     - クラスタを以前のバージョンからv6.5以降のバージョンにアップグレードしたときに、蓄積されたロックレコードによって引き起こされるパフォーマンス低下の問題を修正しました。 [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
     - TiDB Lightning がSST ファイルの漏洩を引き起こす可能性がある問題を修正[#14745](https://github.com/tikv/tikv/issues/14745) @[YuJuncen](https://github.com/YuJuncen)
-    - 暗号化キーとラフトログファイルの削除の間の潜在的な競合を修正しました。これにより、TiKV が起動しなくなる可能性があります。 [#14761](https://github.com/tikv/tikv/issues/14761) @[Connor1996](https://github.com/Connor1996)
+    - 暗号化キーとRaft ログファイルの削除の間の潜在的な競合を修正しました。これにより、TiKV が起動しなくなる可能性があります。 [#14761](https://github.com/tikv/tikv/issues/14761) @[Connor1996](https://github.com/Connor1996)
 
 - TiFlash
 
     - リージョン転送中のパーティション TableScan オペレーターのパフォーマンス低下の問題を修正しました [#7519](https://github.com/pingcap/tiflash/issues/7519) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `GENERATED`型フィールドが`TIMESTAMP`型または`TIME`型と一緒に存在する場合、 TiFlashクエリでエラーが報告される可能性がある問題を修正しました。 [#7468](https://github.com/pingcap/tiflash/issues/7468) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 大規模な更新トランザクションにより、 TiFlash が繰り返しエラーを報告し、 を再起動する可能性がある問題を修正しました。 [#7316](https://github.com/pingcap/tiflash/issues/7316) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - 大規模な更新トランザクションにより、 TiFlash が繰り返しエラーを報告して再起動する可能性がある問題を修正しました。 [#7316](https://github.com/pingcap/tiflash/issues/7316) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `INSERT SELECT`文でTiFlashからデータを読み取るときに「Truncate error cast decimal as decimal」というエラーが発生する問題を修正しました。 [#7348](https://github.com/pingcap/tiflash/issues/7348) @[windtalker](https://github.com/windtalker)
     - Joinビルド側のデータが非常に大きく、多くの小さな文字列型の列が含まれている場合に、クエリが必要以上にメモリを消費する可能性がある問題を修正しました。 [#7416](https://github.com/pingcap/tiflash/issues/7416) @[yibin87](https://github.com/yibin87)
 

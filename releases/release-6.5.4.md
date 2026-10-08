@@ -31,7 +31,7 @@ TiDB バージョン: 6.5.4
 - TiKV
 
     - `check_leader`リクエストに gzip 圧縮を使用してトラフィックを削減します [#14553](https://github.com/tikv/tikv/issues/14553) @[you06](https://github.com/you06)
-    - `Max gap of safe-ts`と`Min safe ts region`メトリックを追加し、 `tikv-ctl get-region-read-progress`コマンドを導入して、resolved-tsと安全な ts の状態をより適切に観察および診断します[#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
+    - `Max gap of safe-ts`と`Min safe ts region`メトリックを追加し、 `tikv-ctl get-region-read-progress`コマンドを導入して、resolved-tsとsafe-ts の状態をより適切に観察および診断します[#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
     - TiKV で RocksDB の設定を公開し、ユーザーが TTL や定期的な圧縮などの機能を無効にできるようにします[#14873](https://github.com/tikv/tikv/issues/14873) @[LykxSassinator](https://github.com/LykxSassinator)
     - Titan マニフェストファイルを書き込むときにミューテックスを保持しないようにして、他のスレッドに影響を与えないようにします[#15351](https://github.com/tikv/tikv/issues/15351) @[Connor1996](https://github.com/Connor1996)
     - 圧縮メカニズムを最適化します。リージョンが分割されるときに、分割するキーがない場合、圧縮がトリガーされ、過剰な MVCC バージョンが排除されます。 [#15282](https://github.com/tikv/tikv/issues/15282) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
@@ -47,7 +47,7 @@ TiDB バージョン: 6.5.4
 
     - IOバッチ最適化によるTiFlash書き込みパフォーマンスの向上 [#7735](https://github.com/pingcap/tiflash/issues/7735) @[lidezhu](https://github.com/lidezhu)
     - 不要なfsync操作を削除することでTiFlashの書き込みパフォーマンスを向上[#7736](https://github.com/pingcap/tiflash/issues/7736) @[lidezhu](https://github.com/lidezhu)
-    - TiFlashコプロセッサタスクキューの最大長を制限して、コプロセッサタスクの過剰なキューイングを回避します。これは TiFlash のサービス可用性に影響を及ぼします[#7747](https://github.com/pingcap/tiflash/issues/7747) @[LittleFall](https://github.com/LittleFall)
+    - TiFlashコプロセッサタスクキューの最大長を制限して、TiFlash のサービス可用性に影響するコプロセッサタスクの過剰なキューイングを回避します[#7747](https://github.com/pingcap/tiflash/issues/7747) @[LittleFall](https://github.com/LittleFall)
 
 - ツール
 
@@ -82,7 +82,7 @@ TiDB バージョン: 6.5.4
     - バッチクライアントがタイムリーに再接続しない問題を修正[#44431](https://github.com/pingcap/tidb/issues/44431) @[crazycs520](https://github.com/crazycs520)
     - SQLコンパイルエラーログが秘匿化されない問題を修正[#41831](https://github.com/pingcap/tidb/issues/41831) @[lance6716](https://github.com/lance6716)
     - CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったり、panicが発生する可能性がある問題を修正[#44649](https://github.com/pingcap/tidb/issues/44649) [#38170](https://github.com/pingcap/tidb/issues/38170) [#44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
-    - TTLタスクが時間で統計更新をトリガーできない問題を修正 [#40109](https://github.com/pingcap/tidb/issues/40109) @[YangKeao](https://github.com/YangKeao)
+    - TTLタスクが適時に統計更新をトリガーできない問題を修正 [#40109](https://github.com/pingcap/tidb/issues/40109) @[YangKeao](https://github.com/YangKeao)
     - GC ロック解決ステップで一部の悲観的ロックが見逃される可能性がある問題を修正しました [#45134](https://github.com/pingcap/tidb/issues/45134) @[MyonKeminta](https://github.com/MyonKeminta)
     - バイナリプロトコルを使用してTiDBに接続し、多数の`PREPARE`と`EXECUTE`文を実行すると、メモリリークと実行時間が増加し続ける問題を修正しました。 [#44612](https://github.com/pingcap/tidb/issues/44612) @[wshwsh12](https://github.com/wshwsh12)
     - `INFORMATION_SCHEMA.DDL_JOBS`テーブルの`QUERY`列のデータ長が列定義を超える可能性がある問題を修正しました [#42440](https://github.com/pingcap/tidb/issues/42440) @[tiancaiamao](https://github.com/tiancaiamao)
@@ -103,17 +103,17 @@ TiDB バージョン: 6.5.4
     - 同時ビューによって DDL 操作がブロックされる可能性がある問題を修正[#40352](https://github.com/pingcap/tidb/issues/40352) @[zeminzhou](https://github.com/zeminzhou)
     - `datetime`値が正しくないために統計収集タスクが失敗する問題を修正しました [#39336](https://github.com/pingcap/tidb/issues/39336) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - クラスターのPDノードが交換された後、一部のDDL文が一定期間スタックする可能性がある問題を修正しました[#33908](https://github.com/pingcap/tidb/issues/33908)
-    - PD時間に突然の変化があったときに`resolve lock`ハングする可能性がある問題を修正しました [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
+    - PD時間に突然の変化があったときに`resolve lock`がハングする可能性がある問題を修正しました [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
     - インデックススキャンにおける潜在的なデータ競合問題を修正 [#45126](https://github.com/pingcap/tidb/issues/45126) @[wshwsh12](https://github.com/wshwsh12)
     - `FormatSQL()`メソッドが入力の非常に長い SQL 文を適切に切り捨てることができない問題を修正しました。 [#44542](https://github.com/pingcap/tidb/issues/44542) @[hawkingrei](https://github.com/hawkingrei)
     - 権限がなくてもユーザーが`INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの情報を表示できる問題を修正 [#45320](https://github.com/pingcap/tidb/issues/45320) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `DATETIME`または`TIMESTAMP`列を数値定数と比較するときに、MySQL と動作が一致しない問題を修正しました。 [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
     - インデックス結合のエラーによりクエリが停止する可能性がある問題を修正[#45716](https://github.com/pingcap/tidb/issues/45716) @[wshwsh12](https://github.com/wshwsh12)
     - 接続を切断すると go コルーチン リークが発生する可能性がある問題を修正[#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
-    - `tmp-storage-quota`設定が で有効にならない問題を修正 [#26806](https://github.com/pingcap/tidb/issues/26806) @[wshwsh12](https://github.com/wshwsh12) [#45161](https://github.com/pingcap/tidb/issues/45161)
+    - `tmp-storage-quota`設定が有効にならない問題を修正 [#26806](https://github.com/pingcap/tidb/issues/26806) @[wshwsh12](https://github.com/wshwsh12) [#45161](https://github.com/pingcap/tidb/issues/45161)
     - クラスターでTiFlashノードがダウンした場合にTiFlashレプリカが利用できなくなる問題を修正しました。 [#38484](https://github.com/pingcap/tidb/issues/38484) @[hehechen](https://github.com/hehechen)
-    - `Config.Labels`同時に読み書きする場合に、データ競合により TiDB がクラッシュする問題を修正[#45561](https://github.com/pingcap/tidb/issues/45561) @[gengliqi](https://github.com/gengliqi)
-    - クラスタが大きい場合、クライアントが定期的に更新される`min-resolved-ts` PD OOMを引き起こす可能性がある問題を修正しました[#46664](https://github.com/pingcap/tidb/issues/46664) @[HuSharp](https://github.com/HuSharp)
+    - `Config.Labels`を同時に読み書きする場合に、データ競合により TiDB がクラッシュする問題を修正[#45561](https://github.com/pingcap/tidb/issues/45561) @[gengliqi](https://github.com/gengliqi)
+    - クラスタが大きい場合、client-go が`min-resolved-ts`を定期的に更新することで PD OOMを引き起こす可能性がある問題を修正しました[#46664](https://github.com/pingcap/tidb/issues/46664) @[HuSharp](https://github.com/HuSharp)
 
 - TiKV
 
@@ -133,14 +133,14 @@ TiDB バージョン: 6.5.4
     - etcd がすでに起動しているがクライアントがまだ接続していない場合、クライアントを呼び出すと PD がpanicになる可能性がある問題を修正しました。 [#6860](https://github.com/tikv/pd/issues/6860) @[HuSharp](https://github.com/HuSharp)
     - リーダーが長時間退出できない問題を修正[#6918](https://github.com/tikv/pd/issues/6918) @[bufferflies](https://github.com/bufferflies)
     - 配置ルールが`LOCATION_LABELS`を使用する場合、SQL とルールチェッカーに互換性がない問題を修正しました [#38605](https://github.com/pingcap/tidb/issues/38605) @[nolouch](https://github.com/nolouch)
-    - PD が予期せず複数のラーナーをリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
+    - PD が予期せず複数の Learner をリージョンに追加する可能性がある問題を修正しました。 [#5786](https://github.com/tikv/pd/issues/5786) @[HunDunDM](https://github.com/HunDunDM)
     - ルールチェッカーがピアを選択した場合に、不健全なピアを削除できない問題を修正しました [#6559](https://github.com/tikv/pd/issues/6559) @[nolouch](https://github.com/nolouch)
-    - `unsafe recovery`で不合格になったラーナーのピアが`auto-detect`モードで無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
+    - `unsafe recovery`で失敗したラーナーのピアが`auto-detect`モードで無視される問題を修正 [#6690](https://github.com/tikv/pd/issues/6690) @[v01dstar](https://github.com/v01dstar)
 
 - TiFlash
 
-    - `fsp` `DATETIME` 、 `TIMESTAMP` 、または`TIME`データ型に変更した後にクエリが失敗する問題を修正しました [#7809](https://github.com/pingcap/tiflash/issues/7809) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 領域の無効な範囲キーによりTiFlashデータが不整合になる問題を修正しました [#7762](https://github.com/pingcap/tiflash/issues/7762) @[lidezhu](https://github.com/lidezhu)
+    - `DATETIME` 、 `TIMESTAMP` 、または`TIME`データ型の`fsp`を変更した後にクエリが失敗する問題を修正しました [#7809](https://github.com/pingcap/tiflash/issues/7809) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - リージョンの無効な範囲キーによりTiFlashデータが不整合になる問題を修正しました [#7762](https://github.com/pingcap/tiflash/issues/7762) @[lidezhu](https://github.com/lidezhu)
     - 同じ MPP タスク内に複数の HashAgg オペレーターがある場合、MPP タスクのコンパイルに非常に長い時間がかかり、クエリのパフォーマンスに重大な影響を与える可能性がある問題を修正しました[#7810](https://github.com/pingcap/tiflash/issues/7810) @[SeaRise](https://github.com/SeaRise)
     - オンラインアンセーフリカバリを使用した後、 TiFlashの再起動に時間がかかりすぎる問題を修正しました [#7671](https://github.com/pingcap/tiflash/issues/7671) @[hongyunyan](https://github.com/hongyunyan)
     - TiFlash が割り算を行うときに`DECIMAL`結果を誤って丸める問題を修正しました [#6462](https://github.com/pingcap/tiflash/issues/6462) @[LittleFall](https://github.com/LittleFall)
@@ -149,7 +149,7 @@ TiDB バージョン: 6.5.4
 
     - Backup & Restore (BR)
 
-        - BRで使用されるグローバルパラメータ`TableColumnCountLimit`と`IndexLimit`デフォルト値を最大値に増やすことで、復元が失敗する問題を修正しました。 [#45793](https://github.com/pingcap/tidb/issues/45793) @[Leavrth](https://github.com/Leavrth)
+        - BRで使用されるグローバルパラメータ`TableColumnCountLimit`と`IndexLimit`のデフォルト値を最大値に増やすことで、復元が失敗する問題を修正しました。 [#45793](https://github.com/pingcap/tidb/issues/45793) @[Leavrth](https://github.com/Leavrth)
         - PITR で DDL メタ情報を処理するときに書き換えが失敗する問題を修正しました [#43184](https://github.com/pingcap/tidb/issues/43184) @[Leavrth](https://github.com/Leavrth)
         - PITR実行中に関数の戻り値をチェックしないことで発生するpanicの問題を修正[#45853](https://github.com/pingcap/tidb/issues/45853) @[Leavrth](https://github.com/Leavrth)
         - Amazon S3 以外の S3 互換ストレージ使用時に無効なリージョン ID が取得される問題を修正 [#42033](https://github.com/pingcap/tidb/issues/42033) @[3pointer](https://github.com/3pointer) [#41916](https://github.com/pingcap/tidb/issues/41916)
@@ -187,7 +187,7 @@ TiDB バージョン: 6.5.4
         - CSVデータをインポートする際にルートがpanicになる可能性がある問題を修正 [#43284](https://github.com/pingcap/tidb/issues/43284) @[lyzx2001](https://github.com/lyzx2001)
         - 論理インポートモードでテーブル A をインポートすると、テーブル B が存在しないと誤って報告される可能性がある問題を修正しました[#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
         - `NEXT_GLOBAL_ROW_ID` を保存するときにデータ型が間違っている問題を修正しました [#45427](https://github.com/pingcap/tidb/issues/45427) @[lyzx2001](https://github.com/lyzx2001)
-        - `checksum = "optional"` のときにチェックサムがエラーを報告する問題を修正しました [#45382](https://github.com/pingcap/tidb/issues/45382) @[lyzx2001](https://github.com/lyzx2001)
+        - `checksum = "optional"` のときでもチェックサムがエラーを報告する問題を修正しました [#45382](https://github.com/pingcap/tidb/issues/45382) @[lyzx2001](https://github.com/lyzx2001)
         - PDクラスタアドレスが変更されるとデータのインポートが失敗する問題を修正しました [#43436](https://github.com/pingcap/tidb/issues/43436) @[lichunzhu](https://github.com/lichunzhu)
         - 一部のPDノードが失敗した場合にデータのインポートが失敗する問題を修正しました [#43400](https://github.com/pingcap/tidb/issues/43400) @[lichunzhu](https://github.com/lichunzhu)
         - AUTO_INCREMENT列を持つテーブルが`AUTO_ID_CACHE=1`を設定すると、ID アロケータのベース値が正しくなくなるという問題を修正しました [#46100](https://github.com/pingcap/tidb/issues/46100) @[D3Hunter](https://github.com/D3Hunter)

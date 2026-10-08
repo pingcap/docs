@@ -7,7 +7,7 @@ summary: TiDB 6.6.0 の新機能、互換性の変更点、改善点、および
 
 リリース日：2023年2月20日
 
-TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone-releases)
+TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-releases)
 
 > **Note:**
 >
@@ -17,13 +17,13 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 バージョン6.6.0-DMRの主な新機能と改善点は以下のとおりです。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス<br /></td><td>TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/partitioned-raft-kv" target="_blank">パーティション化されたRaft KVストレージエンジン</a>をサポートしています（実験的）。</td><td> TiKVはパーティション化されたRaft KVストレージエンジンを導入しており、各リージョンは独立したRocksDBインスタンスを使用するため、クラスターのストレージ容量をテラバイトからペタバイトまで容易に拡張でき、より安定した書き込みレイテンシーと強力なスケーラビリティを実現します。</td></tr><tr><td> TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">データリクエストのバッチ集計</a>をサポートしています</td><td>この機能強化により、TiKVのバッチ取得操作におけるRPCの総数が大幅に削減されます。データが高度に分散しており、gRPCスレッドプールのリソースが不足している状況では、コプロセッサリクエストをバッチ処理することで、パフォーマンスを50%以上向上させることができます。</td></tr><tr><td> TiFlashは、 <a href="https://docs-archive.pingcap.com/tidb/v6.6/stale-read" target="_blank">ステイル読み取り</a>と<a href="https://docs-archive.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">圧縮交換</a>をサポートしています。</td><td> TiFlashは、リアルタイム要件に制約がないシナリオにおいてクエリ性能を向上させることができる、古いデータの読み取り機能をサポートしています。また、 TiFlashはデータ圧縮をサポートしており、並列データ交換の効率を向上させ、TPC-H全体のパフォーマンスを10%向上させ、ネットワーク使用量を50%以上削減できます。</td></tr><tr><td rowspan="2">信頼性と可用性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/tidb-resource-control" target="_blank">リソース制御</a>（実験的）</td><td>リソースグループに基づいたリソース管理をサポートします。これにより、データベースユーザーを対応するリソースグループにマッピングし、実際のニーズに基づいて各リソースグループの割り当て量を設定します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">履歴SQLバインディング</a></td><td>TiDB Dashboard上で、過去の実行計画のバインドと、実行計画の迅速なバインドをサポートします。</td></tr><tr><td rowspan="2"> SQLの機能<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/foreign-key" target="_blank">外部キー</a>（実験的）</td><td>データの一貫性を維持し、データ品質を向上させるために、MySQL互換の外部キー制約をサポートします。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">多値インデックス</a>（実験的）</td><td> MySQL互換の多値インデックスを導入し、JSON型を拡張することで、TiDBのMySQL 8.0との互換性を向上させます。</td></tr><tr><td> DB操作と可観測性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DMは物理的なインポートをサポートします</a>（実験的）</td><td> TiDBデータ移行（DM）は、TiDB Lightningの物理インポートモードを統合することで、フルデータ移行のパフォーマンスを向上させ、最大10倍高速化します。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス<br /></td><td>TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/partitioned-raft-kv" target="_blank">パーティション化されたRaft KVストレージエンジン</a>をサポートしています（実験的）。</td><td> TiKVはパーティション化されたRaft KVストレージエンジンを導入しており、各リージョンは独立したRocksDBインスタンスを使用するため、クラスターのストレージ容量をテラバイトからペタバイトまで容易に拡張でき、より安定した書き込みレイテンシーと強力なスケーラビリティを実現します。</td></tr><tr><td> TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">データリクエストのバッチ集計</a>をサポートしています</td><td>この機能強化により、TiKVのバッチ取得操作におけるRPCの総数が大幅に削減されます。データが高度に分散しており、gRPCスレッドプールのリソースが不足している状況では、コプロセッサリクエストをバッチ処理することで、パフォーマンスを50%以上向上させることができます。</td></tr><tr><td> TiFlashは、 <a href="https://docs-archive.pingcap.com/tidb/v6.6/stale-read" target="_blank">ステイル読み取り</a>と<a href="https://docs-archive.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">圧縮交換</a>をサポートしています。</td><td> TiFlashは、リアルタイム要件に制約がないシナリオにおいてクエリ性能を向上させることができる、ステイル読み取り機能をサポートしています。また、 TiFlashはデータ圧縮をサポートしており、並列データ交換の効率を向上させ、TPC-H全体のパフォーマンスを10%向上させ、ネットワーク使用量を50%以上削減できます。</td></tr><tr><td rowspan="2">信頼性と可用性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/tidb-resource-control" target="_blank">リソース制御</a>（実験的）</td><td>リソースグループに基づいたリソース管理をサポートします。これにより、データベースユーザーを対応するリソースグループにマッピングし、実際のニーズに基づいて各リソースグループの割り当て量を設定します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">履歴SQLバインディング</a></td><td>TiDB Dashboard上で、過去の実行計画のバインドと、実行計画の迅速なバインドをサポートします。</td></tr><tr><td rowspan="2"> SQLの機能<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/foreign-key" target="_blank">外部キー</a>（実験的）</td><td>データの一貫性を維持し、データ品質を向上させるために、MySQL互換の外部キー制約をサポートします。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">多値インデックス</a>（実験的）</td><td> MySQL互換の多値インデックスを導入し、JSON型を拡張することで、TiDBのMySQL 8.0との互換性を向上させます。</td></tr><tr><td> DB操作と可観測性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DMは物理的なインポートをサポートします</a>（実験的）</td><td> TiDBデータ移行（DM）は、TiDB Lightningの物理インポートモードを統合することで、フルデータ移行のパフォーマンスを向上させ、最大10倍高速化します。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
 ### 拡張性 {#scalability}
 
-- パーティションRaft KVストレージエンジンをサポート (実験的) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay)@[tonyxuqqi](https://github.com/tonyxuqqi)@[tabokie](https://github.com/tabokie)@[bufferflies](https://github.com/bufferflies)[5kb](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang)@[nolouch](https://github.com/nolouch)
+- パーティションRaft KVストレージエンジンをサポート (実験的) [#11515](https://github.com/tikv/tikv/issues/11515) [#12842](https://github.com/tikv/tikv/issues/12842) @[busyjay](https://github.com/busyjay)@[tonyxuqqi](https://github.com/tonyxuqqi)@[tabokie](https://github.com/tabokie)@[bufferflies](https://github.com/bufferflies)@[5kbpers](https://github.com/5kbpers) @[SpadeA-Tang](https://github.com/SpadeA-Tang)@[nolouch](https://github.com/nolouch)
 
     TiDB v6.6.0 より前は、TiKV の Raft ベースのストレージエンジンは、単一の RocksDB インスタンスを使用して、TiKV インスタンスのすべての「リージョン」のデータを保存していました。より大規模なクラスタをより安定してサポートするために、TiDB v6.6.0 以降では、複数の RocksDB インスタンスを使用して TiKVリージョンデータを保存する新しい TiKVストレージエンジンが導入され、各リージョンのデータは個別の RocksDB インスタンスに独立して保存されます。この新しいエンジンは、RocksDB インスタンス内のファイルの数とレベルをより適切に制御し、リージョン間のデータ操作の物理的な分離を実現し、より多くのデータを安定して管理できます。これは、TiKV がパーティショニングによって複数の RocksDB インスタンスを管理していると考えることができます。そのため、この機能は Partitioned-Raft-KV と呼ばれています。この機能の主な利点は、書き込みパフォーマンスの向上、スケーリングの高速化、および同じハードウェアでサポートできるデータ量の拡大です。また、より大規模なクラスタにも対応できます。
 
@@ -51,9 +51,9 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     この機能はデフォルトで有効になっています。システム変数[`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)を使用して、リクエストのバッチサイズを設定できます。
 
-- `LIMIT`条項の制限を解除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
+- `LIMIT`句の制限を解除 [#40219](https://github.com/pingcap/tidb/issues/40219) @[fzzf678](https://github.com/fzzf678)
 
-    バージョン 6.6.0 以降、TiDB プランキャッシュは`LIMIT`や`LIMIT ?`などの変数を`LIMIT 10, ?`パラメータとして指定した実行計画のキャッシュをサポートします。この機能により、より多くの SQL文がプランキャッシュの恩恵を受けられるようになり、実行効率が向上します。現在、セキュリティ上の理由から、TiDB は`?`が 10000 を超えない実行計画のみをキャッシュできます。
+    バージョン 6.6.0 以降、TiDB プランキャッシュは、 `LIMIT ?`や`LIMIT 10, ?`など、 `LIMIT`パラメータとして変数を指定した実行計画のキャッシュをサポートします。この機能により、より多くの SQL文がプランキャッシュの恩恵を受けられるようになり、実行効率が向上します。現在、セキュリティ上の理由から、TiDB は`?`が 10000 を超えない実行計画のみをキャッシュできます。
 
     詳細については、[ドキュメント](/sql-prepared-plan-cache.md)を参照してください。
 
@@ -65,7 +65,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 - TiFlash は、 ステイル読み取り機能をサポートしています [#4483](https://github.com/pingcap/tiflash/issues/4483) @[hehechen](https://github.com/hehechen)
 
-    ステイル読み取り機能はv5.1.1以降、一般提供（GA）されており、特定のタイムスタンプまたは指定された時間範囲内の履歴データを読み取ることができます。Stale Readは、ローカルのTiKVレプリカからデータを直接読み取ることで、読み取りレイテンシーを削減し、クエリのパフォーマンスを向上させることができます。v6.6.0より前のTiFlashでは、 ステイル読み取りはサポートされていません。テーブルにTiFlashレプリカが存在する場合でも、 ステイル読み取りはTiKVレプリカのみを読み取ることができます。
+    ステイル読み取り機能はv5.1.1以降、一般提供（GA）されており、特定のタイムスタンプまたは指定された時間範囲内の履歴データを読み取ることができます。ステイル読み取りは、ローカルのTiKVレプリカからデータを直接読み取ることで、読み取りレイテンシーを削減し、クエリのパフォーマンスを向上させることができます。v6.6.0より前のTiFlashでは、 ステイル読み取りはサポートされていません。テーブルにTiFlashレプリカが存在する場合でも、 ステイル読み取りはTiKVレプリカのみを読み取ることができます。
 
     バージョン6.6.0以降、 TiFlashはステイル読み取り機能をサポートしています。[`AS OF TIMESTAMP`](/as-of-timestamp.md)構文または[`tidb_read_staleness`](/tidb-read-staleness.md)システム変数を使用してテーブルの履歴データをクエリする場合、テーブルにTiFlashレプリカが存在すると、オプティマイザは対応するデータをTiFlashレプリカから読み込むことを選択できるようになり、クエリのパフォーマンスがさらに向上します。
 
@@ -88,11 +88,11 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     さらに、リソース制御機能を合理的に活用することで、クラスタ数を削減し、運用・保守の難易度を下げ、管理コストを削減することができます。
 
-    v6.6 では、リソース制御を有効にするには、TiDB のグローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)と TiKV 設定項目[`resource-control.enabled`](/tikv-configuration-file.md#resource-control)両方を有効にする必要があります。現在サポートされているクォータ方式は「 [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 」に基づいています。RU は、CPU や IO などのシステムリソースに対する TiDB の統一抽象化ユニットです。
+    v6.6 では、リソース制御を有効にするには、TiDB のグローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)と TiKV 設定項目[`resource-control.enabled`](/tikv-configuration-file.md#resource-control)の両方を有効にする必要があります。現在サポートされているクォータ方式は「 [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 」に基づいています。RU は、CPU や IO などのシステムリソースに対する TiDB の統一抽象化ユニットです。
 
     詳細については、[ドキュメント](/tidb-resource-control-ru-groups.md)を参照してください。
 
-- 過去の実行計画を拘束することは、GAです。 [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
+- 過去の実行計画のバインドが一般提供（GA）になりました。 [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
 
     バージョン6.5.0では、TiDBは[`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)文のバインディングターゲットを拡張し、過去の実行計画に基づいてバインディングを作成する機能をサポートしています。バージョン6.6.0では、この機能は一般提供（GA）となります。実行計画の選択は、現在のTiDBノードに限定されません。任意のTiDBノードによって生成された過去の実行計画を[SQLバインディング](/sql-statements/sql-statement-create-binding.md)のターゲットとして選択できるため、機能の使いやすさがさらに向上します。
 
@@ -115,7 +115,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 - [SQLにおける配置ルール](/placement-rules-in-sql.md)の`SURVIVAL_PREFERENCE`の構成のサポート [#38605](https://github.com/pingcap/tidb/issues/38605) @[nolouch](https://github.com/nolouch)
 
-    `SURVIVAL_PREFERENCES` 、データの災害時における耐障害性を高めるためのデータ耐障害性設定を提供します。 `SURVIVAL_PREFERENCE`を指定することで、以下の項目を制御できます。
+    `SURVIVAL_PREFERENCES`は、データの災害時における耐障害性を高めるためのデータ耐障害性設定を提供します。 `SURVIVAL_PREFERENCE`を指定することで、以下の項目を制御できます。
 
     - クラウドリージョンをまたいでデプロイされたTiDBクラスタの場合、あるクラウドリージョンで障害が発生しても、指定されたデータベースまたはテーブルは別のクラウドリージョンで存続できます。
     - 単一のクラウドリージョンにデプロイされたTiDBクラスタの場合、アベイラビリティゾーンに障害が発生した場合でも、指定されたデータベースまたはテーブルは別のアベイラビリティゾーンで存続できます。
@@ -148,13 +148,13 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 - リソースを大量に消費するタスク向けに読み取り専用ストレージノードを構成する機能をサポート @[v01dstar](https://github.com/v01dstar)
 
-    本番環境では、バックアップや大規模なデータ読み取りと分析など、読み取り専用操作が定期的に大量のリソースを消費し、クラスタ全体のパフォーマンスに影響を与える場合があります。TiDB v6.6.0 では、リソースを消費する読み取り専用タスク用に読み取り専用ストレージノードを構成して、オンラインアプリケーションへの影響を軽減できます。現在、TiDB、TiSpark、およびBR は、読み取り専用ストレージノードからのデータ読み取りをサポートしています。 [手順](/best-practices/readonly-nodes.md#procedures)のパフォーマンスの安定性を確保するため、システム変数`tidb_replica_read` 、TiSpark 設定項目`spark.tispark.replica_read` 、または br コマンドライン引数`--replica-read-label` 、読み取り先を指定して、読み取り専用ストレージ ノードを次のように構成できます。
+    本番環境では、バックアップや大規模なデータ読み取りと分析など、読み取り専用操作が定期的に大量のリソースを消費し、クラスタ全体のパフォーマンスに影響を与える場合があります。TiDB v6.6.0 では、リソースを消費する読み取り専用タスク用に読み取り専用ストレージノードを構成して、オンラインアプリケーションへの影響を軽減できます。現在、TiDB、TiSpark、およびBR は、読み取り専用ストレージノードからのデータ読み取りをサポートしています。 [手順](/best-practices/readonly-nodes.md#procedures)に従って読み取り専用ストレージ ノードを構成し、システム変数`tidb_replica_read` 、TiSpark 設定項目`spark.tispark.replica_read` 、または br コマンドライン引数`--replica-read-label`で読み取り先を指定することで、クラスターのパフォーマンスの安定性を確保できます。
 
     詳細については、[ドキュメント](/best-practices/readonly-nodes.md)を参照してください。
 
 - `store-io-pool-size`の動的な変更をサポート [#13964](https://github.com/tikv/tikv/issues/13964) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    TiKV の設定項目[`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530) 、 Raft I/O タスクを処理するスレッドの許容数を指定します。この値は、TiKV のパフォーマンスをチューニングする際に調整できます。バージョン 6.6.0 より前のバージョンでは、この設定項目を動的に変更することはできませんでした。バージョン 6.6.0 以降では、サーバーを再起動せずにこの設定を変更できるため、より柔軟なパフォーマンス調整が可能になります。
+    TiKV の設定項目[`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)は、 Raft I/O タスクを処理するスレッドの許容数を指定します。この値は、TiKV のパフォーマンスをチューニングする際に調整できます。バージョン 6.6.0 より前のバージョンでは、この設定項目を動的に変更することはできませんでした。バージョン 6.6.0 以降では、サーバーを再起動せずにこの設定を変更できるため、より柔軟なパフォーマンス調整が可能になります。
 
     詳細については、[ドキュメント](/dynamic-config.md)を参照してください。
 
@@ -250,7 +250,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 - SQL実行計画の生成を自動的にキャプチャする [#38779](https://github.com/pingcap/tidb/issues/38779) @[Yisaer](https://github.com/Yisaer)
 
-    実行計画の問題をトラブルシューティングする過程で、 `PLAN REPLAYER`現場を保存し、診断の効率を向上させるのに役立ちます。しかし、シナリオによっては、一部の実行計画の生成を自由に再現できないため、診断作業がより困難になります。
+    実行計画の問題をトラブルシューティングする過程で、 `PLAN REPLAYER`は問題発生時の情報を保存し、診断の効率を向上させるのに役立ちます。しかし、シナリオによっては、一部の実行計画の生成を自由に再現できないため、診断作業がより困難になります。
 
     このような問題に対処するため、TiDB v6.6.0 では`PLAN REPLAYER`により自動キャプチャ機能が拡張されました。 `PLAN REPLAYER CAPTURE`コマンドを使用すると、対象の SQL文を事前に登録し、同時に対象の実行計画を指定できます。TiDB は、登録された対象に一致する SQL文または実行計画を検出すると、 `PLAN REPLAYER`情報を自動的に生成してパッケージ化します。実行計画が不安定な場合、この機能により診断効率が向上します。
 
@@ -258,7 +258,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
     詳細については、 [ドキュメント](/sql-plan-replayer.md#use-plan-replayer-capture)を参照してください。
 
-- 永続化ステートメントのサポート概要（実験的） [#40812](https://github.com/pingcap/tidb/issues/40812) @[mornyx](https://github.com/mornyx)
+- ステートメントサマリーの永続化をサポート（実験的） [#40812](https://github.com/pingcap/tidb/issues/40812) @[mornyx](https://github.com/mornyx)
 
     バージョン6.6.0より前は、ステートメントサマリーデータはメモリに保持されていたため、TiDBサーバーの再起動時に失われていました。バージョン6.6.0以降、TiDBはステートメントサマリーの永続化をサポートするようになり、履歴データを定期的にディスクに書き込むことが可能になりました。これにより、システムテーブルに対するクエリの結果は、メモリではなくディスクから取得されます。TiDBの再起動後も、すべての履歴データは保持されます。
 
@@ -280,7 +280,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ### テレメトリー {#telemetry}
 
-- 2023 年 2月 20日以降、TiDB および TiDB Dashboard (v6.6.0 を含む) の新しいバージョンでは[テレメトリ機能](/telemetry.md)デフォルトで無効になります。デフォルトのテレメトリ構成を使用する以前のバージョンからアップグレードする場合、アップグレード後にテレメトリ機能は無効になります。特定のバージョンについては、 [TiDBのリリーススケジュール](/releases/release-timeline.md)を参照してください。
+- 2023 年 2月 20日以降、TiDB および TiDB Dashboard (v6.6.0 を含む) の新しいバージョンでは[テレメトリ機能](/telemetry.md)がデフォルトで無効になります。デフォルトのテレメトリ構成を使用する以前のバージョンからアップグレードする場合、アップグレード後にテレメトリ機能は無効になります。特定のバージョンについては、 [TiDBのリリーススケジュール](/releases/release-timeline.md)を参照してください。
 - バージョン1.11.3以降、新規にデプロイされたTiUPでは、テレメトリ機能はデフォルトで無効になっています。以前のバージョンのTiUPからバージョン1.11.3以降にアップグレードした場合、テレメトリ機能はアップグレード前と同じ状態を維持します。
 
 ## 互換性の変更 {#compatibility-changes}
@@ -293,11 +293,11 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 - MySQL互換の外部キー制約をサポート（実験的） [#18209](https://github.com/pingcap/tidb/issues/18209) @[crazycs520](https://github.com/crazycs520)
 
-    詳細については、このドキュメントおよび[ドキュメント](/foreign-key.md)の[SQL](#sql)セクションを参照してください。
+    詳細については、このドキュメントの[SQL](#sql)セクションおよび[ドキュメント](/foreign-key.md)を参照してください。
 
 - MySQL互換の多値インデックスのサポート（実験的） [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei)@[qw4990](https://github.com/qw4990)
 
-    詳細については、このドキュメントおよび[ドキュメント](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)の[SQL](#sql)セクションを参照してください。
+    詳細については、このドキュメントの[SQL](#sql)セクションおよび[ドキュメント](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)を参照してください。
 
 ### システム変数 {#system-variables}
 
@@ -305,7 +305,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `tidb_enable_amend_pessimistic_txn`                                                                                                                          | 削除済み     | バージョン6.5.0以降、この変数は非推奨です。バージョン6.6.0以降、この変数と`AMEND TRANSACTION`機能は削除されます。TiDBは[メタロック](/metadata-lock.md)を使用して`Information schema is changed`エラーを回避します。                                                                                                         |
 | `tidb_enable_concurrent_ddl`                                                                                                                                 | 削除済み     | この変数は、TiDB が同時 DDL文を使用することを許可するかどうかを制御します。この変数が無効になっている場合、TiDB は古い DDL 実行フレームワークを使用します。このフレームワークは、同時 DDL 実行を限定的にサポートします。バージョン 6.6.0 以降、この変数は削除され、TiDB は古い DDL 実行フレームワークをサポートしなくなりました。                                                                 |
-| `tidb_ttl_job_run_interval`                                                                                                                                  | 削除済み     | この変数は、バックグラウンドでの TTL ジョブのスケジュール間隔を制御するために使用されます。v6.6.0 以降、この変数は削除されました。TiDB は、 `TTL_JOB_INTERVAL`よりも柔軟な、TTL ランタイムを制御するための`tidb_ttl_job_run_interval`属性をすべてのテーブルに提供しているためです。                                                                                  |
+| `tidb_ttl_job_run_interval`                                                                                                                                  | 削除済み     | この変数は、バックグラウンドでの TTL ジョブのスケジュール間隔を制御するために使用されます。v6.6.0 以降、この変数は削除されました。TiDB は、 `tidb_ttl_job_run_interval`よりも柔軟に TTL ランタイムを制御できる`TTL_JOB_INTERVAL`属性をすべてのテーブルに提供しているためです。                                                                                  |
 | [`foreign_key_checks`](/system-variables.md#foreign_key_checks)                                                                                              | 変更     | この変数は、外部キー制約チェックを有効にするかどうかを制御します。デフォルト値は`OFF`から`ON`に変更され、これはデフォルトで外部キーチェックが有効になることを意味します。                                                                                                                                                                    |
 | [`tidb_enable_foreign_key`](/system-variables.md#tidb_enable_foreign_key-new-in-v630)                                                                        | 変更     | この変数は、外部キー機能を有効にするかどうかを制御します。デフォルト値は`OFF`から`ON`に変更され、これはデフォルトで外部キーが有効になることを意味します。                                                                                                                                                                            |
 | `tidb_enable_general_plan_cache`                                                                                                                             | 変更     | この変数は、一般プランキャッシュを有効にするかどうかを制御します。v6.6.0以降、この変数は[`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)に名前が変更されました。                                                                                                 |
@@ -315,9 +315,9 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | `tidb_general_plan_cache_size`                                                                                                                               | 変更     | この変数は、General Plan Cache によってキャッシュできる実行計画の最大数を制御します。v6.6.0 以降、この変数は[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)に名前が変更されました。                                                                                |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | この変数に新しい値オプション`learner`が追加され、TiDB が読み取り専用ノードからデータを読み取る際に使用するラーナーレプリカを指定できます。                                                                                                                                                                                  |
 | [`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)                                                                                     | 変更     | TiDBクラスタの読み取り可用性を向上させるため、この変数に新しい値オプション`prefer-leader`が追加されました。このオプションを設定すると、TiDBはリーダーレプリカからの読み取りを優先します。リーダーレプリカのパフォーマンスが著しく低下した場合、TiDBは自動的にフォロワーレプリカからの読み取りに切り替わります。                                                                                        |
-| [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                                                        | 変更     | この変数は`IndexLookUp`オペレーターのコプロセッサータスクのバッチサイズを制御します。 `0`バッチを無効にすることを意味します。v6.6.0 以降、デフォルト値は`0`から`4`に変更され、リクエストのバッチごとに4つのコプロセッサータスクが1つのタスクにまとめられます。                                                                                                          |
+| [`tidb_store_batch_size`](/system-variables.md#tidb_store_batch_size)                                                                                        | 変更     | この変数は`IndexLookUp`オペレーターのコプロセッサータスクのバッチサイズを制御します。 `0`はバッチを無効にすることを意味します。v6.6.0 以降、デフォルト値は`0`から`4`に変更され、リクエストのバッチごとに4つのコプロセッサータスクが1つのタスクにまとめられます。                                                                                                          |
 | [`mpp_exchange_compression_mode`](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)                                                            | 新しく追加された | この変数は、MPP Exchange オペレーターのデータ圧縮モードを指定します。この変数は、TiDB がバージョン番号`1`の MPP 実行計画を選択した場合に有効になります。デフォルト値`UNSPECIFIED`は、TiDB が自動的に`FAST`圧縮モードを選択することを意味します。                                                                                                            |
-| [`mpp_version`](/system-variables.md#mpp_version-new-in-v660)                                                                                                | 新しく追加された | この変数は、MPP実行計画のバージョンを指定します。バージョンを指定すると、TiDBは指定されたバージョンのMPP実行計画を選択します。デフォルト値`UNSPECIFIED` 、TiDBが最新バージョン`1`自動的に選択することを意味します。                                                                                                                                  |
+| [`mpp_version`](/system-variables.md#mpp_version-new-in-v660)                                                                                                | 新しく追加された | この変数は、MPP実行計画のバージョンを指定します。バージョンを指定すると、TiDBは指定されたバージョンのMPP実行計画を選択します。デフォルト値`UNSPECIFIED`は、TiDBが最新バージョン`1`を自動的に選択することを意味します。                                                                                                                                  |
 | [`tidb_ddl_distribute_reorg`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_ddl_distribute_reorg-new-in-v660)                             | 新しく追加された | この変数は、DDL 再編成フェーズの分散実行を有効にしてこのフェーズを高速化するかどうかを制御します。デフォルト値`OFF`は、デフォルトでは DDL 再編成フェーズの分散実行を有効にしないことを意味します。現在、この変数は`ADD INDEX`に対してのみ有効です。                                                                                                                       |
 | [`tidb_enable_historical_stats_for_capture`](/system-variables.md#tidb_enable_historical_stats_for_capture)                                                  | 新しく追加された | この変数は`PLAN REPLAYER CAPTURE`で取得される情報に、デフォルトで履歴統計が含まれるかどうかを制御します。デフォルト値の`OFF`は、デフォルトでは履歴統計が含まれないことを意味します。                                                                                                                                                     |
 | [`tidb_enable_plan_cache_for_param_limit`](/system-variables.md#tidb_enable_plan_cache_for_param_limit-new-in-v660)                                          | 新しく追加された | この変数は`Limit`の後に`COUNT`が含まれる実行計画をプリペアドプランキャッシュがキャッシュするかどうかを制御します。デフォルト値は`ON`で、これはプリペアドプランキャッシュ がそのような実行計画のキャッシュをサポートすることを意味します。ただし、 プリペアドプランキャッシュ は、 10000 を超える数値をカウントする`COUNT`条件を含む実行計画のキャッシュをサポートしていないことに注意してください。                      |
@@ -338,31 +338,31 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 | TiKV           | `rocksdb.enable-statistics`                                                                                                                                                                                                                                   | 削除済み     | この設定項目は、RocksDB の統計情報を有効にするかどうかを指定します。v6.6.0 以降、この項目は削除されました。RocksDB の統計情報は、診断を支援するために、デフォルトですべてのクラスタで有効になっています。詳細については、 [#13942](https://github.com/tikv/tikv/pull/13942)を参照してください。            |
 | TiKV           | `raftdb.enable-statistics`                                                                                                                                                                                                                                    | 削除済み     | この設定項目は、 Raft RocksDB の統計情報を有効にするかどうかを指定します。v6.6.0 以降、この項目は削除されました。Raft RocksDBの統計情報は、診断を支援するために、デフォルトですべてのクラスターで有効になっています。詳細については、 [#13942](https://github.com/tikv/tikv/pull/13942)を参照してください。 |
 | TiKV           | `storage.block-cache.shared`                                                                                                                                                                                                                                  | 削除済み     | バージョン6.6.0以降、この設定項目は削除され、ブロックキャッシュはデフォルトで有効になり、無効にすることはできません。詳細は[#12936](https://github.com/tikv/tikv/issues/12936)を参照してください。                                                                   |
-| DM             | `on-duplicate`                                                                                                                                                                                                                                                | 削除済み     | この設定項目は、完全インポートフェーズ中に競合を解決する方法を制御します。v6.6.0 では、 `on-duplicate-logical` `on-duplicate-physical`と`on-duplicate`が導入されました。                                                                          |
+| DM             | `on-duplicate`                                                                                                                                                                                                                                                | 削除済み     | この設定項目は、完全インポートフェーズ中に競合を解決する方法を制御します。v6.6.0 では、 `on-duplicate`に代わる新しい設定項目`on-duplicate-logical`と`on-duplicate-physical`が導入されました。                                                                          |
 | TiDB           | [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)                                                                                                                                                                                | 変更     | バージョン6.6.0以降、デフォルト値が`true`から`false`に変更され、TiDBではデフォルトでテレメトリが無効になります。                                                                                                                             |
 | TiKV           | [`rocksdb.defaultcf.block-size`](/tikv-configuration-file.md#block-size)および[`rocksdb.writecf.block-size`](/tikv-configuration-file.md#block-size)                                                                                                             | 変更     | デフォルト値が`64K`から`32K`に変更されます。                                                                                                                                                                     |
 | TiKV           | [`rocksdb.defaultcf.block-cache-size`](/tikv-configuration-file.md#block-cache-size) 、 [`rocksdb.writecf.block-cache-size`](/tikv-configuration-file.md#block-cache-size) 、 [`rocksdb.lockcf.block-cache-size`](/tikv-configuration-file.md#block-cache-size) | 非推奨      | バージョン6.6.0以降、これらの設定項目は非推奨となりました。詳細は[#12936](https://github.com/tikv/tikv/issues/12936)を参照してください。                                                                                                |
 | PD             | [`enable-telemetry`](/pd-configuration-file.md#enable-telemetry)                                                                                                                                                                                              | 変更     | バージョン6.6.0以降、デフォルト値が`true`から`false`に変更され、TiDB Dashboardではテレメトリがデフォルトで無効になります。                                                                                                                      |
 | DM             | [`import-mode`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                          | 変更     | この設定項目の指定可能な値は、 `"sql"`および`"loader"`から`"logical"`および`"physical"`に変更されます。デフォルト値は`"logical"`で、これは TiDB Lightning の論理インポートモードを使用してデータをインポートすることを意味します。                                             |
 | TiFlash        | [`profile.default.max_memory_usage_for_all_queries`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                                                                                                                                        | 変更     | すべてのクエリで生成される中間データのメモリ使用量制限を指定します。v6.6.0以降、デフォルト値は`0`から`0.8`に変更され、制限は総メモリの80%になります。                                                                                                             |
-| TiCDC          | [`consistent.storage`](/ticdc/ticdc-sink-to-mysql.md#prerequisites)                                                                                                                                                                                           | 変更     | この設定項目は、リドゥログのバックアップが保存されるパスを指定します。 `scheme` 、GCS、およびAzure用に、さらに2つの値オプションが追加されました。                                                                                                              |
+| TiCDC          | [`consistent.storage`](/ticdc/ticdc-sink-to-mysql.md#prerequisites)                                                                                                                                                                                           | 変更     | この設定項目は、リドゥログのバックアップが保存されるパスを指定します。 `scheme`に GCS と Azure の2つの値オプションが追加されました。                                                                                                              |
 | TiDB           | [`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)                                                                                                                                                                          | 新しく追加された | この設定項目は、TiDBクラスタが初めて起動されたときに実行されるSQLスクリプトを指定します。デフォルト値は空です。                                                                                                                                     |
 | TiDB           | [`tidb_stmt_summary_enable_persistent`](/tidb-configuration-file.md#tidb_stmt_summary_enable_persistent-new-in-v660)                                                                                                                                          | 新しく追加された | この設定項目は、ステートメントサマリーを永続化するかどうかを制御します。デフォルト値は`false`で、これはこの機能がデフォルトでは無効になっていることを意味します。                                                                                                                 |
-| TiDB           | [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)                                                                                                                                            | 新しく追加された | ステートメントサマリーの永続化が有効になっている場合、この設定では永続化できるデータファイルの最大数を指定します。 `0`ファイル数に制限がないことを意味します。                                                                                                               |
+| TiDB           | [`tidb_stmt_summary_file_max_backups`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_backups-new-in-v660)                                                                                                                                            | 新しく追加された | ステートメントサマリーの永続化が有効になっている場合、この設定では永続化できるデータファイルの最大数を指定します。 `0`はファイル数に制限がないことを意味します。                                                                                                               |
 | TiDB           | [`tidb_stmt_summary_file_max_days`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_days-new-in-v660)                                                                                                                                                  | 新しく追加された | ステートメントサマリーデータの永続化が有効になっている場合、この設定では永続データファイルを保持する最大日数を指定します。                                                                                                                                        |
 | TiDB           | [`tidb_stmt_summary_file_max_size`](/tidb-configuration-file.md#tidb_stmt_summary_file_max_size-new-in-v660)                                                                                                                                                  | 新しく追加された | ステートメントサマリーの永続化が有効になっている場合、この設定では永続データファイルの最大サイズ（MiB単位）を指定します。                                                                                                                                  |
 | TiDB           | [`tidb_stmt_summary_filename`](/tidb-configuration-file.md#tidb_stmt_summary_filename-new-in-v660)                                                                                                                                                            | 新しく追加された | ステートメントサマリーデータの永続化が有効になっている場合、この設定では永続データが書き込まれるファイルを指定します。                                                                                                                                          |
 | TiKV           | [`resource-control.enabled`](/tikv-configuration-file.md#resource-control)                                                                                                                                                                                    | 新しく追加された | 対応するリソースグループのリクエストユニット (RU) に基づいて、ユーザーのフォアグラウンド読み取り/書き込みリクエストのスケジューリングを有効にするかどうか。デフォルト値は`false`で、これは対応するリソースグループの RU に基づくスケジューリングを無効にすることを意味します。                                                      |
 | TiKV           | [`storage.engine`](/tikv-configuration-file.md#engine-new-in-v660)                                                                                                                                                                                            | 新しく追加された | この設定項目は、ストレージエンジンのタイプを指定します。値のオプションは`"raft-kv"`と`"partitioned-raft-kv"`です。この設定項目は、クラスタ作成時にのみ指定でき、一度指定すると変更できません。                                                                              |
 | TiKV           | [`rocksdb.write-buffer-flush-oldest-first`](/tikv-configuration-file.md#write-buffer-flush-oldest-first-new-in-v660)                                                                                                                                          | 新しく追加された | この設定項目は、現在の RocksDB の`memtable`のメモリ使用量がしきい値に達したときに使用されるフラッシュ戦略を指定します。                                                                                                                           |
-| TiKV           | [`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660)                                                                                                                                                                    | 新しく追加された | この設定項目は、単一の TiKV 内のすべての RocksDB インスタンス`memtable`が使用する合計メモリの制限を指定します。デフォルト値は、マシン全体のメモリの 25% です。                                                                                                  |
+| TiKV           | [`rocksdb.write-buffer-limit`](/tikv-configuration-file.md#write-buffer-limit-new-in-v660)                                                                                                                                                                    | 新しく追加された | この設定項目は、単一の TiKV 内のすべての RocksDB インスタンスの`memtable`が使用する合計メモリの制限を指定します。デフォルト値は、マシン全体のメモリの 25% です。                                                                                                  |
 | PD             | [`pd-server.enable-gogc-tuner`](/pd-configuration-file.md#enable-gogc-tuner-new-in-v660)                                                                                                                                                                      | 新しく追加された | この設定項目は、GOGCチューナーを有効にするかどうかを制御します。デフォルトでは無効になっています。                                                                                                                                             |
 | PD             | [`pd-server.gc-tuner-threshold`](/pd-configuration-file.md#gc-tuner-threshold-new-in-v660)                                                                                                                                                                    | 新しく追加された | この設定項目は、GOGC のチューニングにおける最大メモリしきい値比率を指定します。デフォルト値は`0.6`です。                                                                                                                                       |
 | PD             | [`pd-server.server-memory-limit-gc-trigger`](/pd-configuration-file.md#server-memory-limit-gc-trigger-new-in-v660)                                                                                                                                            | 新しく追加された | この設定項目は、PD が GC をトリガーしようとするしきい値比率を指定します。デフォルト値は`0.7`です。                                                                                                                                         |
 | PD             | [`pd-server.server-memory-limit`](/pd-configuration-file.md#server-memory-limit-new-in-v660)                                                                                                                                                                  | 新しく追加された | この設定項目は、PDインスタンスのメモリ制限比率を指定します。値`0`は、メモリ制限なしを意味します。                                                                                                                                             |
 | TiCDC          | [`scheduler.region-per-span`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                                                                                                                                                          | 新しく追加された | この設定項目は、リージョンの数に基づいてテーブルを複数のレプリケーション範囲に分割するかどうかを制御し、これらの範囲は複数の TiCDC ノードによってレプリケートできます。デフォルト値は`50000`です。                                                                                        |
 | TiDB Lightning | [`compress-kv-pairs`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                                                                                                                                                    | 新しく追加された | この設定項目は、物理インポートモードでKVペアをTiKVに送信する際に圧縮を有効にするかどうかを制御します。デフォルト値は空欄で、これは圧縮が無効になっていることを意味します。                                                                                                        |
-| DM             | [`checksum-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                    | 新しく追加された | この設定項目は、インポート後にデータ整合性を検証するために、DM が各テーブルに対して`ADMIN CHECKSUM TABLE <table>`を実行するかどうかを制御します。デフォルト値は`"required"`で、インポート後に管理者チェックサムを実行します。チェックサムが失敗した場合、DM はタスクを一時停止し、手動でエラーを処理する必要があります。            |
+| DM             | [`checksum-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                    | 新しく追加された | この設定項目は、インポート後にデータ整合性を検証するために、DM が各テーブルに対して`ADMIN CHECKSUM TABLE <table>`を実行するかどうかを制御します。デフォルト値は`"required"`で、インポート後に`ADMIN CHECKSUM`を実行します。チェックサムが失敗した場合、DM はタスクを一時停止し、手動でエラーを処理する必要があります。            |
 | DM             | [`disk-quota-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                  | 新しく追加された | この設定項目はディスククォータを設定します。これは、 TiDB Lightningの[`disk-quota`設定](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620)に対応します。                                |
 | DM             | [`on-duplicate-logical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                 | 新しく追加された | この設定項目は、論理インポートモードで DM が競合するデータをどのように解決するかを制御します。デフォルト値は`"replace"`で、これは新しいデータを使用して既存のデータを置き換えることを意味します。                                                                                        |
 | DM             | [`on-duplicate-physical`](/dm/task-configuration-file-full.md)                                                                                                                                                                                                | 新しく追加された | この設定項目は、物理インポートモードで DM が競合データをどのように解決するかを制御します。デフォルト値は`"none"`で、これは競合データを解決しないことを意味します。 `"none"`は最高のパフォーマンスを発揮しますが、下流のデータベースでデータの不整合が発生する可能性があります。                                              |
@@ -373,7 +373,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 
 ### その他 {#others}
 
-- [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)動的に変更できるようにサポートします。これにより、TiKVのパフォーマンスチューニングがより柔軟になります。
+- [`store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)を動的に変更できるようにサポートします。これにより、TiKVのパフォーマンスチューニングがより柔軟になります。
 - `LIMIT`句の制限を解除することで、実行パフォーマンスを向上させます。
 - バージョン6.6.0以降、 BRはバージョン6.1.0より前のクラスターへのデータ復元をサポートしていません。
 - バージョン6.6.0以降、TiDBは潜在的な正確性の問題のため、パーティション化されたテーブルの列型の変更をサポートしなくなりました。
@@ -390,7 +390,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - `partial order prop push down`が LIST 型のパーティションテーブルをサポートするようになりました [#40273](https://github.com/pingcap/tidb/issues/40273) @[winoros](https://github.com/winoros)
     - オプティマイザのヒントと実行計画のバインディング間の競合に関するエラーメッセージを追加 [#40910](https://github.com/pingcap/tidb/issues/40910) @[Reminiscent](https://github.com/Reminiscent)
     - プランキャッシュ戦略を最適化し、一部のシナリオでプランキャッシュを使用する際に最適でないプランを回避する[#40312](https://github.com/pingcap/tidb/pull/40312) [#40218](https://github.com/pingcap/tidb/pull/40218) [#40280](https://github.com/pingcap/tidb/pull/40280) [#41136](https://github.com/pingcap/tidb/pull/41136) [#40686](https://github.com/pingcap/tidb/pull/40686) @[qw4990](https://github.com/qw4990)
-    - メモリリークとパフォーマンスの低下を避けるために、期限切れの領域キャッシュを定期的にクリアします [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
+    - メモリリークとパフォーマンスの低下を避けるために、期限切れのリージョンキャッシュを定期的にクリアします [#40461](https://github.com/pingcap/tidb/issues/40461) @[sticnarf](https://github.com/sticnarf)
     - `MODIFY COLUMN`はパーティションテーブルではサポートされていません [#39915](https://github.com/pingcap/tidb/issues/39915) @[wjhuang2016](https://github.com/wjhuang2016)
     - パーティションテーブルが依存する列の名前変更を無効にする [#40150](https://github.com/pingcap/tidb/issues/40150) @[mjonss](https://github.com/mjonss)
     - パーティションテーブルが依存する列が削除されたときに報告されるエラーメッセージを改善する [#38739](https://github.com/pingcap/tidb/issues/38739) @[jiyfhust](https://github.com/jiyfhust)
@@ -402,7 +402,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - Raftstoreの非同期書き込みにおける優先度スケジューリングのサポート [#13730](https://github.com/tikv/tikv/issues/13730) @[Connor1996](https://github.com/Connor1996)
     - コア数が1未満のCPUでTiKVを起動するサポート[#13586](https://github.com/tikv/tikv/issues/13586) [#13752](https://github.com/tikv/tikv/issues/13752) [#14017](https://github.com/tikv/tikv/issues/14017) @[andreid-db](https://github.com/andreid-db)
     - Raftstoreのスロースコアの新しい検出メカニズムを最適化し、 `evict-slow-trend-scheduler`を追加しました [#14131](https://github.com/tikv/tikv/issues/14131) @[innerr](https://github.com/innerr)
-    - RocksDB のブロックキャッシュを共有し、CF に従ってブロックキャッシュを個別に設定することをサポートしなくなりました。 [#12936](https://github.com/tikv/tikv/issues/12936) @[busyjay](https://github.com/busyjay)
+    - RocksDB のブロックキャッシュの共有を強制し、CF に従ってブロックキャッシュを個別に設定することをサポートしなくなりました。 [#12936](https://github.com/tikv/tikv/issues/12936) @[busyjay](https://github.com/busyjay)
 
 - PD
 
@@ -425,7 +425,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - TiCDC
 
         - TiCDCレプリケーションのパフォーマンスを向上させるためのバッチ`UPDATE` DML文のサポート [#8084](https://github.com/pingcap/tiflow/issues/8084) @[amyangfei](https://github.com/amyangfei)
-        - MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
+        - MQ シンクと MySQL シンクを非同期モードで実装して、シンクのスループットを向上させます [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[hi-rustin](https://github.com/Rustin170506)
 
     - TiDB Data Migration (DM)
 
@@ -443,7 +443,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         - 物理インポートモードはキースペースをサポートします [#40531](https://github.com/pingcap/tidb/issues/40531) @[iosmanthus](https://github.com/iosmanthus)
         - `lightning.max-error`による競合の最大数設定のサポート [#40743](https://github.com/pingcap/tidb/issues/40743) @[dsdashun](https://github.com/dsdashun)
         - BOMヘッダー付きCSVデータファイルのインポートをサポート [#40744](https://github.com/pingcap/tidb/issues/40744) @[dsdashun](https://github.com/dsdashun)
-        - TiKVフロー制限エラーが発生した場合の処理ロジックを最適化し、代わりに他の利用可能な領域を試す [#40205](https://github.com/pingcap/tidb/issues/40205) @[lance6716](https://github.com/lance6716)
+        - TiKVフロー制限エラーが発生した場合の処理ロジックを最適化し、代わりに他の利用可能なリージョンを試す [#40205](https://github.com/pingcap/tidb/issues/40205) @[lance6716](https://github.com/lance6716)
         - インポート中のテーブル外部キーのチェックを無効にする [#40027](https://github.com/pingcap/tidb/issues/40027) @[sleepymole](https://github.com/sleepymole)
 
     - Dumpling
@@ -488,12 +488,12 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
     - メモリ再利用によりシステム変数の値が場合によっては誤って変更される可能性がある問題を修正 [#40979](https://github.com/pingcap/tidb/issues/40979) @[lcwangchao](https://github.com/lcwangchao)
     - 取り込みモードで一意インデックスを作成すると、データがインデックスと矛盾する可能性がある問題を修正します [#40464](https://github.com/pingcap/tidb/issues/40464) @[tangenta](https://github.com/tangenta)
     - 同じテーブルを同時に切り捨てる際に、一部の切り捨て操作がMDLによってブロックされない問題を修正しました [#40484](https://github.com/pingcap/tidb/issues/40484) @[wjhuang2016](https://github.com/wjhuang2016)
-    - `SHOW PRIVILEGES`文が不完全な特権リストを返す問題を修正 [#40591](https://github.com/pingcap/tidb/issues/40591) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - `SHOW PRIVILEGES`文が不完全な権限リストを返す問題を修正 [#40591](https://github.com/pingcap/tidb/issues/40591) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 一意インデックスを追加するときに TiDB がパニックになる問題を修正 [#40592](https://github.com/pingcap/tidb/issues/40592) @[tangenta](https://github.com/tangenta)
     - `ADMIN RECOVER`ステートメントを実行するとインデックスデータが破損する可能性がある問題を修正しました [#40430](https://github.com/pingcap/tidb/issues/40430) @[xiongjiwei](https://github.com/xiongjiwei)
     - クエリ対象のテーブルに式インデックスに`CAST`式が含まれている場合にクエリが失敗する可能性がある問題を修正しました [#40130](https://github.com/pingcap/tidb/issues/40130) @[xiongjiwei](https://github.com/xiongjiwei)
     - 一意インデックスが場合によっては重複データを生成する可能性がある問題を修正 [#40217](https://github.com/pingcap/tidb/issues/40217) @[tangenta](https://github.com/tangenta)
-    - `Prepare`または`Execute` [#39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
+    - `Prepare`または`Execute`を使用して一部の仮想テーブルをクエリする際に、リージョンが多数存在するのにテーブル ID をプッシュダウンできない場合に PD OOM が発生する問題を修正 [#39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
     - インデックス追加時にデータ競合が発生する可能性がある問題を修正 [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
     - 仮想列によって引き起こされる`can't find proper physical plan`の問題を修正します [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)
     - 動的トリミングモードでパーティションテーブルのグローバルバインディングが作成された後、TiDBが再起動できない問題を修正 [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
@@ -504,14 +504,14 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
 - TiKV
 
     - `const Enum`型を他の型にキャストする際に発生するエラーを修正します [#14156](https://github.com/tikv/tikv/issues/14156) @[wshwsh12](https://github.com/wshwsh12)
-    - 解決された TS によりネットワークトラフィックが増加する問題を修正 [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
-    - TiDBとTiKV間のネットワーク障害によって発生するデータ不整合の問題を修正。DML実行中に悲観的DMLが失敗した後に発生するデータ不整合の問題を修正 [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta)
+    - Resolved TS によりネットワークトラフィックが増加する問題を修正 [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
+    - 悲観的DMLが失敗した後のDML実行中に、TiDBとTiKV間のネットワーク障害によって発生するデータ不整合の問題を修正 [#14038](https://github.com/tikv/tikv/issues/14038) @[MyonKeminta](https://github.com/MyonKeminta)
 
 - PD
 
     - リージョン Scatterタスクが予期せず冗長なレプリカを生成する問題を修正 [#5909](https://github.com/tikv/pd/issues/5909) @[HunDunDM](https://github.com/HunDunDM)
-    - オンラインの安全でない回復機能が`auto-detect`モードで停止してタイムアウトする問題を修正しました [#5753](https://github.com/tikv/pd/issues/5753) @[Connor1996](https://github.com/Connor1996)
-    - 特定の条件下で`replace-down-peer`実行が遅くなる問題を修正 [#5788](https://github.com/tikv/pd/issues/5788) @[HunDunDM](https://github.com/HunDunDM)
+    - オンラインアンセーフリカバリ機能が`auto-detect`モードで停止してタイムアウトする問題を修正しました [#5753](https://github.com/tikv/pd/issues/5753) @[Connor1996](https://github.com/Connor1996)
+    - 特定の条件下で`replace-down-peer`の実行が遅くなる問題を修正 [#5788](https://github.com/tikv/pd/issues/5788) @[HunDunDM](https://github.com/HunDunDM)
     - `ReportMinResolvedTS`の呼び出しが頻繁すぎる場合に発生する PD OOM 問題を修正します [#5965](https://github.com/tikv/pd/issues/5965) @[HunDunDM](https://github.com/HunDunDM)
 
 - TiFlash
@@ -542,7 +542,7 @@ TiDB バージョン: 6.6.0- [DMR](/releases/versioning.md#development-milestone
         - S3ストレージ障害時にリドゥログが許容できる期間が不十分であるという問題を修正 [#8089](https://github.com/pingcap/tiflow/issues/8089) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiKVまたはTiCDCノードのスケールインまたはスケールアウト時などの特殊なシナリオでchangefeedが停止する可能性がある問題を修正しました [#8174](https://github.com/pingcap/tiflow/issues/8174) @[hicqu](https://github.com/hicqu)
         - TiKV ノード間のトラフィックが多すぎる問題を修正 [#14092](https://github.com/tikv/tikv/issues/14092) @[overvenus](https://github.com/overvenus)
-        - プルベースのシンクが有効になっている場合の CPU 使用率、メモリ制御、スループットに関する TiCDC のパフォーマンスの問題を修正[#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[Rustin170506](https://github.com/Rustin170506)
+        - プルベースのシンクが有効になっている場合の CPU 使用率、メモリ制御、スループットに関する TiCDC のパフォーマンスの問題を修正[#8142](https://github.com/pingcap/tiflow/issues/8142) [#8157](https://github.com/pingcap/tiflow/issues/8157) [#8001](https://github.com/pingcap/tiflow/issues/8001) [#5928](https://github.com/pingcap/tiflow/issues/5928) @[hicqu](https://github.com/hicqu)@[hi-rustin](https://github.com/Rustin170506)
 
     - TiDB Data Migration (DM)
 

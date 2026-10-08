@@ -13,15 +13,15 @@ TiDB バージョン: 6.5.7
 
 ## 互換性の変更 {#compatibility-changes}
 
-- TiDB 設定項目[`performance.force-init-stats`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#force-init-stats-new-in-v657)導入して、TiDB の起動時にサービスを提供する前に統計の初期化が完了するまで TiDB が待機する必要があるかどうかを制御します[#43385](https://github.com/pingcap/tidb/issues/43385) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
-- ログ印刷のオーバーヘッドを減らすために、 TiFlashはデフォルト値の`logger.level`を`"debug"`から`"info"` に変更します。 [#8568](https://github.com/pingcap/tiflash/issues/8568) @[xzhangxian1008](https://github.com/xzhangxian1008)
+- TiDB 設定項目[`performance.force-init-stats`](https://docs.pingcap.com/tidb/v6.5/tidb-configuration-file#force-init-stats-new-in-v657)を導入して、TiDB の起動時にサービスを提供する前に統計の初期化が完了するまで TiDB が待機する必要があるかどうかを制御します[#43385](https://github.com/pingcap/tidb/issues/43385) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+- ログ印刷のオーバーヘッドを減らすために、 TiFlashは`logger.level`のデフォルト値を`"debug"`から`"info"` に変更します。 [#8568](https://github.com/pingcap/tiflash/issues/8568) @[xzhangxian1008](https://github.com/xzhangxian1008)
 
 ## 改善点 {#improvements}
 
 - TiDB
 
     - パーティションテーブルでの`ANALYZE`操作のメモリ使用量とパフォーマンスを最適化します [#47071](https://github.com/pingcap/tidb/issues/47071) [#47104](https://github.com/pingcap/tidb/issues/47104) [#46804](https://github.com/pingcap/tidb/issues/46804) @[hawkingrei](https://github.com/hawkingrei)
-    - プランキャッシュをサポートして、オプティマイザ修正コントロールを使用して物理的な最適化中に生成された`PointGet`オペレーターを含む実行計画をキャッシュします。 [#44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
+    - オプティマイザ修正コントロールを使用して、物理的な最適化中に生成された`PointGet`オペレーターを含む実行計画をプランキャッシュでキャッシュできるようにします。 [#44830](https://github.com/pingcap/tidb/issues/44830) @[qw4990](https://github.com/qw4990)
     - 特定のシナリオで`OUTER JOIN`を`INNER JOIN`に変換する能力を強化する[#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
 
 - TiFlash
@@ -38,7 +38,7 @@ TiDB バージョン: 6.5.7
 
     - TiCDC
 
-        - ダウンストリームがKafkaの場合、トピック式では`schema`オプションとして指定でき、トピック名を直接指定できます[#9763](https://github.com/pingcap/tiflow/issues/9763) @[3AceShowHand](https://github.com/3AceShowHand)
+        - ダウンストリームがKafkaの場合、トピック式で`schema`を省略可能にし、トピック名を直接指定できます[#9763](https://github.com/pingcap/tiflow/issues/9763) @[3AceShowHand](https://github.com/3AceShowHand)
 
 ## バグ修正 {#bug-fixes}
 
@@ -50,7 +50,7 @@ TiDB バージョン: 6.5.7
     - `tidb_server_memory_limit` による長期メモリ圧迫により TiDB の CPU 使用率が上昇する問題を修正 [#48741](https://github.com/pingcap/tidb/issues/48741) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 共通テーブル式 (CTE) を含むクエリがメモリ制限を超えたときに予期せず停止する問題を修正[#49096](https://github.com/pingcap/tidb/issues/49096) @[AilinKid](https://github.com/AilinKid)
     - 同じクエリプランで、場合によっては異なる`PLAN_DIGEST`値が発生する問題を修正しました [#47634](https://github.com/pingcap/tidb/issues/47634) @[King-Dylan](https://github.com/King-Dylan)
-    - CTE を含むクエリが、 `tidb_max_chunk_size`小さい値に設定されている場合に`runtime error: index out of range [32] with length 32`報告する問題を修正しました。 [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
+    - CTE を含むクエリが、 `tidb_max_chunk_size`が小さい値に設定されている場合に`runtime error: index out of range [32] with length 32`を報告する問題を修正しました。 [#48808](https://github.com/pingcap/tidb/issues/48808) @[guo-shaoge](https://github.com/guo-shaoge)
     - 正常なシャットダウン中に TiDBサーバーがpanicする可能性がある問題を修正[#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
     - TiDB の初期バージョンからエクスポートされた統計をインポートするときに統計データエラーが発生する可能性がある問題を修正しました。 [#42931](https://github.com/pingcap/tidb/issues/42931) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Golang の暗黙的な変換アルゴリズムによって発生する統計情報の構築における過剰な統計エラーの問題を修正しました [#49801](https://github.com/pingcap/tidb/issues/49801) @[qw4990](https://github.com/qw4990)
@@ -61,15 +61,15 @@ TiDB バージョン: 6.5.7
     - メモリが`tidb_mem_quota_query` を超えると IndexHashJoin オペレーターを含むクエリが停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - ネストされた`UNION`クエリで`LIMIT`と`ORDER BY`が無効になる可能性がある問題を修正しました [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
     - 非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われてもエラーが報告される問題を修正しました。 [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
-    - TiDBがパニックを起こしてエラーを報告する問題を修正`invalid memory address or nil pointer dereference` [#42739](https://github.com/pingcap/tidb/issues/42739) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - TiDBがパニックを起こし、エラー`invalid memory address or nil pointer dereference`を報告する問題を修正 [#42739](https://github.com/pingcap/tidb/issues/42739) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - CTEクエリが再試行プロセス中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正しました [#46522](https://github.com/pingcap/tidb/issues/46522) @[tiancaiamao](https://github.com/tiancaiamao)
     - 一部のタイムゾーンで夏時間が正しく表示されない問題を修正 [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
-    - 依存関係のある 2つの DDL タスクの完了時間がと誤って順序付けられる問題を修正しました。 [#49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
+    - 依存関係のある 2つの DDL タスクの完了時間が誤って順序付けられる問題を修正しました。 [#49498](https://github.com/pingcap/tidb/issues/49498) @[tangenta](https://github.com/tangenta)
 
 - TiKV
 
     - 破損したSSTファイルが他のTiKVノードに広がる可能性がある問題を修正 [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
-    - 大規模なトランザクションを追跡するときに、古い読み取りの解決済み TS が TiKV OOM 問題を引き起こす可能性がある問題を修正しました [#14864](https://github.com/tikv/tikv/issues/14864) @[overvenus](https://github.com/overvenus)
+    - 大規模なトランザクションを追跡するときに、ステイル読み取りの Resolved TS が TiKV OOM 問題を引き起こす可能性がある問題を修正しました [#14864](https://github.com/tikv/tikv/issues/14864) @[overvenus](https://github.com/overvenus)
     - TiKVがraft log を追加できないため`ServerIsBusy`エラーを報告する問題を修正しました。 [#15800](https://github.com/tikv/tikv/issues/15800) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 - PD
@@ -92,5 +92,5 @@ TiDB バージョン: 6.5.7
 
     - TiCDC
 
-        - TiCDC が下流の MySQL にデータを複製するときに`checkpoint-ts`スタックする可能性がある問題を修正しました [#10334](https://github.com/pingcap/tiflow/issues/10334) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
+        - TiCDC が下流の MySQL にデータを複製するときに`checkpoint-ts`がスタックする可能性がある問題を修正しました [#10334](https://github.com/pingcap/tiflow/issues/10334) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
         - `kv-client`初期化中に発生する可能性のあるデータ競合問題を修正 [#10095](https://github.com/pingcap/tiflow/issues/10095) @[3AceShowHand](https://github.com/3AceShowHand)
