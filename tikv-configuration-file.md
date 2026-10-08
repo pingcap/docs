@@ -889,7 +889,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-v854-and-v900).
+> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.tombstones-num-threshold`](#tombstones-num-threshold-new-in-v757-v854-and-v900).
 
 + The number of tombstones required to trigger RocksDB compaction
 + Default value: `10000`
@@ -899,7 +899,7 @@ Configuration items related to Raftstore.
 
 > **Warning:**
 >
-> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-v854-and-v900).
+> Starting from v7.5.7, v8.5.4, and v9.0.0, this configuration item is deprecated and replaced by [`gc.auto-compaction.tombstones-percent-threshold`](#tombstones-percent-threshold-new-in-v757-v854-and-v900).
 
 + The proportion of tombstone required to trigger RocksDB compaction
 + Default value: `30`
@@ -2339,16 +2339,16 @@ Configures the behavior of TiKV automatic compaction.
 + The interval at which TiKV checks whether to trigger automatic compaction. Within this interval, Regions that meet the automatic compaction conditions are processed based on priority. When the interval elapses, TiKV rescans Region information and recalculates priorities.
 + Default value: `"300s"`
 
-### `tombstone-num-threshold` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
+### `tombstones-num-threshold` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
 
-+ The number of RocksDB tombstones required to trigger TiKV automatic compaction. When the number of tombstones reaches this threshold, or when the percentage of tombstones reaches [`tombstone-percent-threshold`](#tombstone-percent-threshold-new-in-v757-v854-and-v900), TiKV triggers automatic compaction.
++ The number of RocksDB tombstones required to trigger TiKV automatic compaction. When the number of tombstones reaches this threshold, or when the percentage of tombstones reaches [`tombstones-percent-threshold`](#tombstones-percent-threshold-new-in-v757-v854-and-v900), TiKV triggers automatic compaction.
 + This configuration item takes effect only when [Compaction Filter](/garbage-collection-configuration.md) is disabled.
 + Default value: `10000`
 + Minimum value: `0`
 
-### `tombstone-percent-threshold` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
+### `tombstones-percent-threshold` <span class="version-mark">New in v7.5.7, v8.5.4, and v9.0.0</span>
 
-+ The percentage of RocksDB tombstones required to trigger TiKV automatic compaction. When the percentage of tombstones reaches this threshold, or when the number of tombstones reaches [`tombstone-num-threshold`](#tombstone-num-threshold-new-in-v757-v854-and-v900), TiKV triggers automatic compaction.
++ The percentage of RocksDB tombstones required to trigger TiKV automatic compaction. When the percentage of tombstones reaches this threshold, or when the number of tombstones reaches [`tombstones-num-threshold`](#tombstones-num-threshold-new-in-v757-v854-and-v900), TiKV triggers automatic compaction.
 + This configuration item takes effect only when [Compaction Filter](/garbage-collection-configuration.md) is disabled.
 + Default value: `30`
 + Minimum value: `0`
