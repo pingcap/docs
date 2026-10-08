@@ -418,19 +418,18 @@ When you query the `CLUSTER_SLOW_QUERY` table, TiDB pushes the computation and t
 
 ## `SLOW_QUERY` / `CLUSTER_SLOW_QUERY` usage examples
 
-### Filter by coprocessor backoff type
+### Filter by transaction backoff type
 
-To find slow queries with `txnLockFast` coprocessor backoff in the past hour, query the [`Cop_backoff_types` column](/information-schema/information-schema-slow-query.md#backoff-type-columns):
+To find slow queries whose transaction commit hit `txnLock` backoff in the past hour, query the [`Prewrite_Backoff_types` and `Commit_Backoff_types` columns](/information-schema/information-schema-slow-query.md#backoff-type-columns):
 
 ```sql
-SELECT time, query, cop_backoff_types
+SELECT time, query, prewrite_backoff_types, commit_backoff_types
 FROM information_schema.slow_query
 WHERE time >= NOW() - INTERVAL 1 HOUR
-  AND CONCAT(' ', REPLACE(REPLACE(cop_backoff_types, '[', ''), ']', ''), ' ')
-      LIKE '% txnLockFast %';
+  AND commit_backoff_types LIKE '%txnLock%';
 ```
 
-The spaces in the pattern match a complete backoff type in the bracketed string. An empty type column does not rule out backoff in other execution paths. `Cop_backoff_types` is derived when TiDB parses the log; it is not a separate field written to the slow log. To query all nodes with `CLUSTER_SLOW_QUERY`, first check the [rolling upgrade requirements](/information-schema/information-schema-slow-query.md#cluster_slow_query-table).
+An empty type column does not rule out backoff in other phases or paths: coprocessor backoff types remain visible in the `Backoff_Detail` column of the same row, and backoff of `Point_Get` requests is only reflected in `Backoff_total`. To query all nodes with `CLUSTER_SLOW_QUERY`, first check the [rolling upgrade requirements](/information-schema/information-schema-slow-query.md#cluster_slow_query-table).
 
 ### Top-N slow queries
 
