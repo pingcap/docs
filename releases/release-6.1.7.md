@@ -25,17 +25,17 @@ TiDB バージョン: 6.1.7
 
     - TiDB Lightning
 
-        - インポート後にSQLでチェックサムを検証し、検証の安定性を向上させます。 [`#41941`](https://github.com/pingcap/tidb/issues/41941) @[GMHDBJD](https://github.com/GMHDBJD)
+        - インポート後にSQLでチェックサムを検証し、検証の安定性を向上させます。 [#41941](https://github.com/pingcap/tidb/issues/41941) @[GMHDBJD](https://github.com/GMHDBJD)
 
 ## バグ修正 {#bug-fixes}
 
 - TiDB
 
     - 空の`processInfo` によって引き起こされるpanic問題を修正 [#43829](https://github.com/pingcap/tidb/issues/43829) @[zimulala](https://github.com/zimulala)
-    - PD時間に突然の変化があったときに`resolve lock`ハングする可能性がある問題を修正しました [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
+    - PD時間に突然の変化があったときに`resolve lock`がハングする可能性がある問題を修正しました [#44822](https://github.com/pingcap/tidb/issues/44822) @[zyguan](https://github.com/zyguan)
     - 共通テーブル式（CTE）を含むクエリによってディスク容量不足が発生する可能性がある問題を修正[#44477](https://github.com/pingcap/tidb/issues/44477) @[guo-shaoge](https://github.com/guo-shaoge)
     - CTEと相関サブクエリを同時に使用すると、クエリ結果が不正確になったり、panicが発生する可能性がある問題を修正[#44649](https://github.com/pingcap/tidb/issues/44649) [#38170](https://github.com/pingcap/tidb/issues/38170) [#44774](https://github.com/pingcap/tidb/issues/44774) @[winoros](https://github.com/winoros) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 文中の`n`負の数の場合に文`SELECT CAST(n AS CHAR)`のクエリ結果が正しくない問題を修正しました [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
+    - 文中の`n`が負の数の場合に文`SELECT CAST(n AS CHAR)`のクエリ結果が正しくない問題を修正しました [#44786](https://github.com/pingcap/tidb/issues/44786) @[xhebox](https://github.com/xhebox)
     - 特定のケースにおける TiDB のpanic問題を修正[#40857](https://github.com/pingcap/tidb/issues/40857) @[Dousir9](https://github.com/Dousir9)
     - SQLコンパイルエラーログが秘匿化されない問題を修正[#41831](https://github.com/pingcap/tidb/issues/41831) @[lance6716](https://github.com/lance6716)
     - テーブルパーティション定義で`FLOOR()`関数を使用してパーティション列を丸めた場合、 `SELECT`文がパーティションテーブルに対してエラーを返す問題を修正しました。 [#42323](https://github.com/pingcap/tidb/issues/42323) @[jiyfhust](https://github.com/jiyfhust)
@@ -45,12 +45,12 @@ TiDB バージョン: 6.1.7
     - `tidb_opt_agg_push_down`が有効になっている場合にクエリが誤った結果を返す可能性がある問題を修正[#44795](https://github.com/pingcap/tidb/issues/44795) @[AilinKid](https://github.com/AilinKid)
     - 共通テーブル式の結合結果が間違っている可能性がある問題を修正[#38170](https://github.com/pingcap/tidb/issues/38170) @[wjhuang2016](https://github.com/wjhuang2016)
     - GC がロックを解決するときに、まれに悲観的トランザクションの残余悲観的ロックがデータの正確性に影響を与える可能性がある問題を修正しました。 [#43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
-    - キャッシュテーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`なる問題を修正しました。 [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
+    - キャッシュテーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`になる問題を修正しました。 [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
     - インデックス結合のプローブフェーズでパーティションテーブル内の対応する行が見つからない場合に TiDB がエラーを返す問題を修正しました。 [#43686](https://github.com/pingcap/tidb/issues/43686) @[AilinKid](https://github.com/AilinKid) @[mjonss](https://github.com/mjonss)
     - データベースを削除するとGCの進行が遅くなる問題を修正[#33069](https://github.com/pingcap/tidb/issues/33069) @[tiancaiamao](https://github.com/tiancaiamao)
     - `ON UPDATE`文が主キーを正しく更新しない場合にデータとインデックスが不整合になる問題を修正しました [#44565](https://github.com/pingcap/tidb/issues/44565) @[zyguan](https://github.com/zyguan)
     - テーブル名の変更中に TiCDC が行の変更の一部を失う可能性がある問題を修正[#43338](https://github.com/pingcap/tidb/issues/43338) @[tangenta](https://github.com/tangenta)
-    - パーティション化されたテーブルにおける配置ルールの動作の問題を修正し、削除されたパーティションにおける配置ルールが正しく設定され、再利用されるようになりました[#44116](https://github.com/pingcap/tidb/issues/44116) @[lcwangchao](https://github.com/lcwangchao)
+    - パーティション化されたテーブルにおける配置ルールの動作の問題を修正し、削除されたパーティションにおける配置ルールが正しく設定され、回収されるようになりました[#44116](https://github.com/pingcap/tidb/issues/44116) @[lcwangchao](https://github.com/lcwangchao)
     - `tidb_scatter_region`を有効にすると、パーティションが切り捨てられた後にリージョンが自動的に分割されない問題を修正しました[#43174](https://github.com/pingcap/tidb/issues/43174) [#43028](https://github.com/pingcap/tidb/issues/43028)
     - 多数のパーティションとTiFlashレプリカを持つパーティションテーブルに対して`TRUNCATE TABLE`を実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。 [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
     - ウィンドウ関数をTiFlash にプッシュダウンする際の実行計画が正しくない問題を修正しました [#43922](https://github.com/pingcap/tidb/issues/43922) @[gengliqi](https://github.com/gengliqi)
@@ -95,7 +95,7 @@ TiDB バージョン: 6.1.7
 
     - TiDB Lightning
 
-        - 論理インポートモードで、インポート中に下流のテーブルを削除すると、 TiDB Lightningメタデータが時間で更新されない可能性がある問題を修正しました。 [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
+        - 論理インポートモードで、インポート中に下流のテーブルを削除すると、 TiDB Lightningメタデータが適時に更新されない可能性がある問題を修正しました。 [#44614](https://github.com/pingcap/tidb/issues/44614) @[dsdashun](https://github.com/dsdashun)
         - 競合条件によりディスククォータが不正確になる可能性がある問題を修正 [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
         - 大量のデータをインポートする際の`write to tikv with no leader returned`の問題を修正[#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
         - データファイルに閉じられていない区切り文字がある場合に発生する可能性のある OOM 問題を修正しました。 [#40400](https://github.com/pingcap/tidb/issues/40400) @[buchuitoudegou](https://github.com/buchuitoudegou)

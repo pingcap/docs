@@ -3,13 +3,13 @@ title: TiDB 6.1.2 Release Notes
 summary: TiDB 6.1.2は2022年10月24日にリリースされました。このリリースには、TiDB、TiKV、ツール、PD、 TiFlashの改善と、各コンポーネントにおける様々な問題に対するバグ修正が含まれています。改善点には、配置ルールとTiFlashレプリカの同時設定、各種設定のサポート、パフォーマンスの向上が含まれます。バグ修正では、権限の不適切なクリーンアップ、出力の誤り、クエリの失敗、パフォーマンスの問題などが修正されています。
 ---
 
-# TiDB 6.1.2 Release Notes {#tidb-6-1-2-release-notes}
+# TiDB 6.1.2 リリースノート {#tidb-6-1-2-release-notes}
 
 リリース日：2022年10月24日
 
 TiDB バージョン: 6.1.2
 
-Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
+クイックアクセス: [クイックスタート](https://docs-archive.pingcap.com/tidb/v6.1/quick-start-with-tidb) | [本番環境へのデプロイ](https://docs-archive.pingcap.com/tidb/v6.1/production-deployment-using-tiup)
 
 ## 改善点 {#improvements}
 
@@ -44,14 +44,14 @@ Quick access: [クイックスタート](https://docs-archive.pingcap.com/tidb/v
     - リージョンがマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正しました [#37141](https://github.com/pingcap/tidb/issues/37141) @[sticnarf](https://github.com/sticnarf)
     - KVクライアントが不要なpingメッセージを送信する問題を修正しました [#36861](https://github.com/pingcap/tidb/issues/36861) @[jackysp](https://github.com/jackysp)
     - DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
-    - `ORDER BY`句に相関サブクエリが含まれている場合に`GROUP CONCAT` with `ORDER BY`が失敗する可能性がある問題を修正しました。 [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
-    - `UPDATE`文に共通テーブル式 (CTE) が含まれている場合に`Can't find column`報告される問題を修正しました [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
-    - 特定のシナリオで予期しないエラーが発生[#37187](https://github.com/pingcap/tidb/issues/37187) `EXECUTE` [思い出させる](https://github.com/Reminiscent)
+    - `ORDER BY`句に相関サブクエリが含まれている場合に`ORDER BY`付きの`GROUP CONCAT`が失敗する可能性がある問題を修正しました。 [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
+    - `UPDATE`文に共通テーブル式 (CTE) が含まれている場合に`Can't find column`が報告される問題を修正しました [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
+    - 特定のシナリオで`EXECUTE`が予期しないエラーを返す可能性がある問題を修正 [#37187](https://github.com/pingcap/tidb/issues/37187) @[Reminiscent](https://github.com/Reminiscent)
 
 - TiKV
 
-    - リージョンのバッチスナップショットによってスナップショットデータが不完全になる可能性がある問題を修正しました [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - フロー制御が有効で、 `level0_slowdown_trigger`明示的に設定されている場合に QPS が低下する問題を修正しました [#11424](https://github.com/tikv/tikv/issues/11424) @[Connor1996](https://github.com/Connor1996)
+    - リージョンをまたぐバッチスナップショットによってスナップショットデータが不完全になる可能性がある問題を修正しました [#13553](https://github.com/tikv/tikv/issues/13553) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定されている場合に QPS が低下する問題を修正しました [#11424](https://github.com/tikv/tikv/issues/11424) @[Connor1996](https://github.com/Connor1996)
     - TiKV が Web ID プロバイダーからエラーを取得し、デフォルトのプロバイダーにフェイルバックしたときに、権限拒否エラーが発生する問題を修正しました。 [#13122](https://github.com/tikv/tikv/issues/13122) @[3pointer](https://github.com/3pointer)
     - TiKVインスタンスが隔離されたネットワーク環境にある場合、TiKVサービスが数分間利用できなくなる問題を修正[#12966](https://github.com/tikv/tikv/issues/12966) @[cosven](https://github.com/cosven)
 

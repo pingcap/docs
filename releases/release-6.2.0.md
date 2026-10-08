@@ -19,7 +19,7 @@ TiDBバージョン: 6.2.0-DMR
 - パフォーマンス分析とチューニングをより効率的に行うために、TiDB Dashboardに[監視ページ](/dashboard/dashboard-monitoring.md)を追加します。
 - TiDB の[ロックビュー](/information-schema/information-schema-data-lock-waits.md)機能は、楽観的トランザクションの待機情報の表示をサポートし、ロック競合の迅速な特定を容易にします。
 - TiFlash は[ストレージフォーマットの新しいバージョン](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)をサポートし、安定性とパフォーマンスを強化します。
-- [きめ細かいシャッフル機能](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)ウィンドウ関数を複数のスレッドで並列実行できます。
+- [きめ細かいシャッフル機能](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)により、ウィンドウ関数を複数のスレッドで並列実行できます。
 - 新しい並行DDLフレームワーク：DDL文のブロックが減り、実行効率が向上します。
 - TiKV は[CPU使用率を自動的に調整する](/tikv-configuration-file.md#background-quota-limiter)をサポートしており、安定した効率的なデータベース運用を保証します。
 - [特定時点リカバリ（PITR）](/br/backup-and-restore-overview.md)は、過去の任意の時点から TiDB クラスターのスナップショットを新しいクラスターに復元するために導入されました。
@@ -80,7 +80,7 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/optimizer-hints.md#leadingt1_name--tl_name-) [#29932](https://github.com/pingcap/tidb/issues/29932) @[Reminiscent](https://github.com/Reminiscent)
 
-- `SEMI_JOIN_REWRITE`クエリのパフォーマンスを向上させるために、新しいオプティマイザ`EXISTS` を追加します。
+- `EXISTS`クエリのパフォーマンスを向上させるために、新しいオプティマイザヒント`SEMI_JOIN_REWRITE`を追加します。
 
     場合によっては、 `EXISTS`を含むクエリは最適な実行計画を取得できず、実行時間が長くなる可能性があります。v6.2.0 では、このようなシナリオに対応するためにオプティマイザに書き換えルールが追加され、クエリ内で`SEMI_JOIN_REWRITE`を使用することで、オプティマイザにクエリを強制的に書き換えさせ、クエリのパフォーマンスを向上させることができます。
 
@@ -106,7 +106,7 @@ TiDBバージョン: 6.2.0-DMR
 
 - オプティマイザは文字列マッチングの推定精度を向上させます
 
-    文字列マッチングのシナリオでは、オプティマイザが行数を正確に推定できない場合、最適な実行計画の生成に影響します。たとえば、条件が`like '%xyz'`または正規表現`regex ()`の場合です。このようなシナリオでの推定精度を向上させるため、TiDB v6.2.0 では推定方法を強化しました。新しい方法では、統計情報とシステム変数の TopN 情報を組み合わせて精度を向上させ、マッチングの選択性を手動で変更できるようにすることで、SQL のパフォーマンスを向上させています。
+    文字列マッチングのシナリオでは、オプティマイザが行数を正確に推定できない場合、最適な実行計画の生成に影響します。たとえば、条件が`like '%xyz'`または正規表現`regex ()`の場合です。このようなシナリオでの推定精度を向上させるため、TiDB v6.2.0 では推定方法を強化しました。新しい方法では、統計情報の TopN 情報とシステム変数を組み合わせて精度を向上させ、マッチングの選択性を手動で変更できるようにすることで、SQL のパフォーマンスを向上させています。
 
     [ユーザー向けドキュメント](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620) [#36209](https://github.com/pingcap/tidb/issues/36209) @[time-and-fate](https://github.com/time-and-fate)
 
@@ -224,10 +224,10 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [#35148](https://github.com/pingcap/tidb/issues/35148) @[sleepymole](https://github.com/sleepymole)
 
-- [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)ドキュメントをリファクタリングして、その構造をより合理的かつ明確にします。 「バックエンド」の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
+- [TiDB Lightningのユーザー向けドキュメント](/tidb-lightning/tidb-lightning-overview.md)をリファクタリングして、その構造をより合理的かつ明確にします。 「バックエンド」の用語も、新規ユーザーの理解の障壁を下げるために変更されています。
 
-    - "local backend"を"physical import mode"に置き換えてください。
-    - "tidb backend"を"logical import mode"に置き換えてください。
+    - "local backend"を"physical import mode"に置き換えました。
+    - "tidb backend"を"logical import mode"に置き換えました。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 
@@ -249,27 +249,27 @@ TiDBバージョン: 6.2.0-DMR
 
 | 変数名                                                                                                                     | 変更の種類  | 説明                                                                                                                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [tidb_enable_new_cost_interface](/system-variables.md#tidb_enable_new_cost_interface-new-in-v620)                       | 新しく追加された | この変数は[コストモデルの実装をリファクタリングしました](/cost-model.md#cost-model-version-2)を有効にするかどうかを制御します。                                                                                                                          |
+| [tidb_enable_new_cost_interface](/system-variables.md#tidb_enable_new_cost_interface-new-in-v620)                       | 新しく追加された | この変数は[リファクタリングされたコストモデルの実装](/cost-model.md#cost-model-version-2)を有効にするかどうかを制御します。                                                                                                                          |
 | [tidb_cost_model_version](/system-variables.md#tidb_cost_model_version-new-in-v620)                                     | 新しく追加された | TiDBは、物理最適化の際にインデックスと演算子を選択するためにコストモデルを使用します。この変数は、コストモデルのバージョンを選択するために使用されます。TiDB v6.2.0では、内部テストで以前のバージョンよりも精度が向上したコストモデルバージョン2が導入されました。                                                                    |
 | tidb_enable_concurrent_ddl                                                                                              | 新しく追加された | この変数は、TiDBが同時DDL文を使用することを許可するかどうかを制御します。この変数は変更しないでください。この変数を無効にすると、リスクは不明であり、クラスタのメタデータが破損する可能性があります。                                                                                                 |
 | [tiflash_fine_grained_shuffle_stream_count](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620) | 新しく追加された | この変数は、ウィンドウ関数が実行のためにTiFlashにプッシュダウンされる際の、ウィンドウ関数実行の並行レベルを制御します。                                                                                                                                              |
 | [tiflash_fine_grained_shuffle_batch_size](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)     | 新しく追加された | 細粒度シャッフルが有効になっている場合、 TiFlashにプッシュダウンされるウィンドウ関数を並列実行できます。この変数は、送信側から送信されるデータのバッチサイズを制御します。送信側は、累積行数がこの値を超えた時点でデータを送信します。                                                                                      |
-| [tidb_default_string_match_selectivity](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620)         | 新しく追加された | この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために関数。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。                                                                               |
+| [tidb_default_string_match_selectivity](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620)         | 新しく追加された | この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために使用されます。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。                                                                               |
 | [tidb_enable_analyze_snapshot](/system-variables.md#tidb_enable_analyze_snapshot-new-in-v620)                           | 新しく追加された | この変数は`ANALYZE`を実行する際に、履歴データまたは最新データを読み込むかどうかを制御します。                                                                                                                                                          |
 | [tidb_generate_binary_plan](/system-variables.md#tidb_generate_binary_plan-new-in-v620)                                 | 新しく追加された | この変数は、スローログとステートメントサマリーにバイナリエンコードされた実行計画を生成するかどうかを制御します。                                                                                                                                                    |
 | [tidb_opt_skew_distinct_agg](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620)                               | 新しく追加された | この変数は、オプティマイザが`DISTINCT`を含む集計関数を2レベルの集計関数に書き換えるかどうかを設定します。たとえば`SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b`を`SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`に書き換えます。              |
-| [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620)                               | 新しく追加された | この変数は`noop`の結果に`SHOW [GLOBAL] VARIABLES` 変数を表示するかどうかを制御します。                                                                                                                                                |
+| [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620)                               | 新しく追加された | この変数は`SHOW [GLOBAL] VARIABLES`の結果に`noop`変数を表示するかどうかを制御します。                                                                                                                                                |
 | [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620)                                           | 新しく追加された | この変数は、コプロセッサのページングリクエスト処理中に処理される行の最大数を設定するために使用されます。                                                                                                                                                            |
 | [tidb_txn_commit_batch_size](/system-variables.md#tidb_txn_commit_batch_size-new-in-v620)                               | 新しく追加された | この変数は、TiDBがTiKVに送信するトランザクションコミットリクエストのバッチサイズを制御するために使用されます。                                                                                                                                                     |
 | tidb_enable_change_multi_schema                                                                                         | 削除済み     | この変数は、v6.2.0 以降では、デフォルトで 1つの`ALTER TABLE`文で複数の列またはインデックスを変更できるため、削除されます。                                                                                                                              |
-| [tidb_enable_outer_join_reorder](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                       | 変更     | この変数は、TiDB の結合したテーブルの再配置アルゴリズムが Outer Join をサポートするかどうかを制御します。v6.1.0 では、デフォルト値は`ON`であり、これは Join Reorder の Outer Join のサポートがデフォルトで有効になっていることを意味します。v6.2.0 以降では、デフォルト値は`OFF`であり、これはサポートがデフォルトで無効になっていることを意味します。 |
+| [tidb_enable_outer_join_reorder](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                       | 変更     | この変数は、TiDB の Join Reorder アルゴリズムが Outer Join をサポートするかどうかを制御します。v6.1.0 では、デフォルト値は`ON`であり、これは Join Reorder の Outer Join のサポートがデフォルトで有効になっていることを意味します。v6.2.0 以降では、デフォルト値は`OFF`であり、これはサポートがデフォルトで無効になっていることを意味します。 |
 
 ### 設定ファイルパラメータ {#configuration-file-parameters}
 
 | 設定ファイル | 設定                                                                                                                | 変更の種類  | 説明                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------- |
-| TiDB           | フィードバック確率                                                                                                                 | 削除済み     | この設定はもはや有効ではなく、推奨されません。                                                                             |
-| TiDB           | クエリフィードバック制限                                                                                                              | 削除済み     | この設定はもはや有効ではなく、推奨されません。                                                                             |
+| TiDB           | feedback-probability                                                                                                                 | 削除済み     | この設定はもはや有効ではなく、推奨されません。                                                                             |
+| TiDB           | query-feedback-limit                                                                                                              | 削除済み     | この設定はもはや有効ではなく、推奨されません。                                                                             |
 | TiKV           | [server.simplify-metrics](/tikv-configuration-file.md#simplify-metrics-new-in-v620)                                         | 新しく追加された | この設定では、返される監視メトリクスを簡略化するかどうかを指定します。                                                                 |
 | TiKV           | [quota.background-cpu-time](/tikv-configuration-file.md#background-cpu-time-new-in-v620)                                  | 新しく追加された | この設定では、TiKVのバックグラウンド処理で読み取りおよび書き込みリクエストを処理するために使用されるCPUリソースのソフトリミットを指定します。                             |
 | TiKV           | [quota.background-write-bandwidth](/tikv-configuration-file.md#background-write-bandwidth-new-in-v620)                    | 新しく追加された | この設定では、バックグラウンド トランザクションがデータを書き込む際の帯域幅のソフト リミットを指定します (現在は有効ではありません)。                               |
@@ -277,11 +277,11 @@ TiDBバージョン: 6.2.0-DMR
 | TiKV           | [quota.enable-auto-tune](/tikv-configuration-file.md#enable-auto-tune-new-in-v620)                                        | 新しく追加された | この設定では、クォータの自動調整を有効にするかどうかを指定します。この設定項目を有効にすると、TiKVはTiKVインスタンスの負荷に基づいて、バックグラウンドリクエストのクォータを動的に調整します。 |
 | TiKV           | rocksdb.enable-pipelined-commit                                                                                           | 削除済み     | この設定はもはや有効ではありません。                                                                                  |
 | TiKV           | gc-merge-rewrite                                                                                                          | 削除済み     | この設定はもはや有効ではありません。                                                                                  |
-| TiKV           | [ログバックアップを有効にする](/tikv-configuration-file.md#enable-new-in-v620)                                                          | 新しく追加された | この設定は、TiKV 上でログバックアップを有効にするかどうかを制御します。                                                              |
+| TiKV           | [log-backup.enable](/tikv-configuration-file.md#enable-new-in-v620)                                                          | 新しく追加された | この設定は、TiKV 上でログバックアップを有効にするかどうかを制御します。                                                              |
 | TiKV           | [log-backup.file-size-limit](/tikv-configuration-file.md#file-size-limit-new-in-v620)                                             | 新しく追加された | この設定では、ログバックアップデータのサイズ制限を指定します。この制限に達すると、データは自動的に外部ストレージに書き込まれます。                                 |
 | TiKV           | [log-backup.initial-scan-pending-memory-quota](/tikv-configuration-file.md#initial-scan-pending-memory-quota-new-in-v620)                   | 新しく追加された | この設定では、増分スキャンデータを保存するために使用されるキャッシュのクォータを指定します。                                                      |
 | TiKV           | [log-backup.max-flush-interval](/tikv-configuration-file.md#max-flush-interval-new-in-v620)                               | 新しく追加された | この設定では、ログバックアップにおいてバックアップデータを外部ストレージに書き込む最大間隔を指定します。                                              |
-| TiKV           | [ログバックアップの初期スキャンレート制限](/tikv-configuration-file.md#initial-scan-rate-limit-new-in-v620)                                   | 新しく追加された | この設定では、ログバックアップにおける増分データスキャンのスループットのレート制限を指定します。                                                    |
+| TiKV           | [log-backup.initial-scan-rate-limit](/tikv-configuration-file.md#initial-scan-rate-limit-new-in-v620)                                   | 新しく追加された | この設定では、ログバックアップにおける増分データスキャンのスループットのレート制限を指定します。                                                    |
 | TiKV           | [log-backup.num-threads](/tikv-configuration-file.md#num-threads-new-in-v620)                                             | 新しく追加された | この設定では、ログバックアップで使用されるスレッド数を指定します。                                                                   |
 | TiKV           | [log-backup.temp-path](/tikv-configuration-file.md#temp-path-new-in-v620)                                                 | 新しく追加された | この設定では、ログファイルが外部ストレージに書き込まれる前に一時的に保存されるパスを指定します。                                                  |
 | TiKV           | [rocksdb.defaultcf.format-version](/tikv-configuration-file.md#format-version-new-in-v620)                                | 新しく追加された | SSTファイルのフォーマットバージョン。                                                                                |
@@ -293,24 +293,24 @@ TiDBバージョン: 6.2.0-DMR
 | TiFlash        | [profiles.default.dt_enable_read_thread](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                | 新しく追加された | この設定は、ストレージエンジンからの読み取りリクエストを処理するためにスレッドプールを使用するかどうかを制御します。デフォルト値は`false`です。                         |
 | TiFlash        | [profiles.default.dt_page_gc_threshold](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                 | 新しく追加された | この設定では、PageStorageデータファイル内の有効データの最小比率を指定します。                                                        |
 | TiCDC          | [--overwrite-checkpoint-ts](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)                                  | 新しく追加された | この設定は`cdc cli changefeed resume`サブコマンドに追加されます。                                                      |
-| TiCDC          | [--確認しない](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)                                                    | 新しく追加された | この設定は`cdc cli changefeed resume`サブコマンドに追加されます。                                                      |
-| DM             | [モード](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                      | 新しく追加された | この設定はバリデーターパラメータです。オプションの値は`full` 、 `fast` 、および`none`です。デフォルト値は`none`で、これはデータの検証を行いません。             |
-| DM             | [ワーカー数](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                     | 新しく追加された | この設定はバリデーターパラメータであり、バックグラウンドで実行される検証ワーカーの数を指定します。デフォルト値は`4`です。                                      |
-| DM             | [行エラー遅延](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                   | 新しく追加された | この設定はバリデーターパラメータです。指定された時間内に検証が行われなかった場合、その行はエラー行としてマークされます。デフォルト値は30mで、これは30分を意味します。               |
+| TiCDC          | [--no-confirm](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)                                                    | 新しく追加された | この設定は`cdc cli changefeed resume`サブコマンドに追加されます。                                                      |
+| DM             | [mode](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                      | 新しく追加された | この設定はバリデーターパラメータです。オプションの値は`full` 、 `fast` 、および`none`です。デフォルト値は`none`で、これはデータの検証を行いません。             |
+| DM             | [worker-count](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                     | 新しく追加された | この設定はバリデーターパラメータであり、バックグラウンドで実行される検証ワーカーの数を指定します。デフォルト値は`4`です。                                      |
+| DM             | [row-error-delay](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                   | 新しく追加された | この設定はバリデーターパラメータです。指定された時間内に検証が行われなかった場合、その行はエラー行としてマークされます。デフォルト値は30mで、これは30分を意味します。               |
 | TiDB Lightning | [tikv-importer.store-write-bwlimit](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                  | 新しく追加された | この設定は、TiDB Lightning が各 TiKV ストアにデータを書き込む際の書き込み帯域幅を決定します。デフォルト値は`0`で、帯域幅に制限がないことを示します。              |
 | TiDB Lightning | [tikv-importer.disk-quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) | 新しく追加された | この構成により、TiDB Lightningが使用するストレージ容量が制限されます。                                                        |
 
 ### その他 {#others}
 
-- TiFlash `format_version` `4`から`3`にダウングレードすることはできません。詳細については、 [TiFlashアップグレードガイド](/tiflash-upgrade-guide.md)を参照してください。
-- バージョン6.2.0以降では、デフォルト値の`false`を`dt_enable_logical_split`のままにして、 `true`に変更しないことを強くお勧めします。詳細は、既知の問題[#5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
+- TiFlash の`format_version`は`4`から`3`にダウングレードできません。詳細については、 [TiFlashアップグレードガイド](/tiflash-upgrade-guide.md)を参照してください。
+- バージョン6.2.0以降では、`dt_enable_logical_split`のデフォルト値`false`をそのまま維持し、 `true`に変更しないことを強くお勧めします。詳細は、既知の問題[#5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
 - バックアップクラスタにTiFlashレプリカがある場合、PITR を実行すると、リストアクラスタにはTiFlashレプリカ内のデータが含まれません。TiFlash レプリカからデータをリストアするには、 TiFlashレプリカを手動で構成する必要があります。 `exchange partition` DDL 文を実行すると、PITR が失敗する可能性があります。アップストリームデータベースが TiDB Lightning の物理インポートモードを使用してデータをインポートする場合、ログバックアップでデータをバックアップできません。データインポート後にフルバックアップを実行することをお勧めします。PITR のその他の互換性の問題については、 [PITRの制限](/br/backup-and-restore-overview.md#before-you-use)を参照してください。
-- TiDB v6.2.0以降では、データ復元時に`mysql`パラメータを指定することで`--with-sys-table=true`スキーマのテーブルを復元できます。
+- TiDB v6.2.0以降では、データ復元時に`--with-sys-table=true`パラメータを指定することで`mysql`スキーマのテーブルを復元できます。
 - `ALTER TABLE`文を実行して複数の列またはインデックスを追加、削除、または変更する場合、TiDB は同じ DDL文の変更内容に関わらず、ステートメント実行前後のテーブルを比較してテーブルの一貫性をチェックします。DDL の実行順序は、シナリオによっては MySQL と完全には互換性がない場合があります。
 - TiDBコンポーネントがv6.2.0以降の場合、TiKVコンポーネントはv6.2.0より前のバージョンであってはなりません。
 - TiKV は[動的構成](/dynamic-config.md#modify-tikv-configuration-dynamically)をサポートする構成アイテム`split.region-cpu-overload-threshold-ratio`を追加します。
 - スロークエリログ、 `information_schema.statements_summary` 、および`information_schema.slow_query`は`binary_plan` 、またはバイナリ形式でエンコードされた実行計画をエクスポートできます。
-- `SHOW TABLE ... REGIONS`ステートメントに、 `SCHEDULING_CONSTRAINTS`と`SCHEDULING_STATE` 2つの列が追加されます。これらはそれぞれ、SQL の配置におけるリージョンスケジューリング制約と現在のスケジューリング状態を示します。
+- `SHOW TABLE ... REGIONS`ステートメントに、 `SCHEDULING_CONSTRAINTS`と`SCHEDULING_STATE` 2つの列が追加されます。これらはそれぞれ、Placement Rules in SQL におけるリージョンスケジューリング制約と現在のスケジューリング状態を示します。
 - TiDB v6.2.0以降では、 [TiKV-CDC](https://github.com/tikv/migration/tree/main/cdc)を介してRawKVのデータ変更をキャプチャできます。
 - `ROLLBACK TO SAVEPOINT`を使用してトランザクションを特定のセーブポイントまでロールバックする場合、MySQL は指定されたセーブポイント以降に保持されているロックのみを解放しますが、TiDB の悲観的トランザクションでは、TiDB は指定されたセーブポイント以降に保持されているロックをすぐには解放しません。代わりに、TiDB はトランザクションがコミットまたはロールバックされたときにすべてのロックを解放します。
 - TiDB v6.2.0以降、 `SELECT tidb_version()`ステートメントはストアタイプ（tikvまたはunistore）も返します。
@@ -335,7 +335,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
     - `KILL`コマンドが DDL 操作をサポートするようになりました [#24144](https://github.com/pingcap/tidb/issues/24144) @[morgo](https://github.com/morgo)
 
-    - `SHOW TABLES/DATABASES LIKE …`の出力を MySQL とより互換性のあるものにしてください。出力の列名には`LIKE`の値が含まれています [#35116](https://github.com/pingcap/tidb/issues/35116) @[likzn](https://github.com/likzn)
+    - `SHOW TABLES/DATABASES LIKE …`の出力を MySQL とより互換性のあるものにしました。出力の列名には`LIKE`の値が含まれています [#35116](https://github.com/pingcap/tidb/issues/35116) @[likzn](https://github.com/likzn)
 
     - JSON関連関数のパフォーマンスを改善する [#35859](https://github.com/pingcap/tidb/issues/35859) @[wjhuang2016](https://github.com/wjhuang2016)
 
@@ -382,7 +382,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
     - TiDB Lightning
 
-        - EOF、読み取りインデックスが準備できていない、コプロセッサータイムアウトなど、再試行可能なエラーをさらに追加[#36674](https://github.com/pingcap/tidb/issues/36674) 、 [#36566](https://github.com/pingcap/tidb/issues/36566) @[D3Hunter](https://github.com/D3Hunter)
+        - EOF、Read index not ready、コプロセッサータイムアウトなど、再試行可能なエラーをさらに追加[#36674](https://github.com/pingcap/tidb/issues/36674) 、 [#36566](https://github.com/pingcap/tidb/issues/36566) @[D3Hunter](https://github.com/D3Hunter)
 
     - TiUP
 
@@ -392,23 +392,23 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
 - TiDB
 
-    - クエリ条件でパーティションキーが使用され、照合順序がクエリパーティションテーブルのものと異なる場合に、パーティションが正しく削除されない問題を修正します [#32749](https://github.com/pingcap/tidb/issues/32749) @[mjonss](https://github.com/mjonss)
-    - `SET ROLE`ホストに大文字が含まれている場合に付与されたロールと一致しない問題を修正 [#33061](https://github.com/pingcap/tidb/issues/33061) @[morgo](https://github.com/morgo)
+    - クエリ条件でパーティションキーが使用され、照合順序がクエリパーティションテーブルのものと異なる場合に、パーティションが誤ってプルーニングされる問題を修正します [#32749](https://github.com/pingcap/tidb/issues/32749) @[mjonss](https://github.com/mjonss)
+    - ホストに大文字が含まれている場合に`SET ROLE`が付与されたロールと一致しない問題を修正 [#33061](https://github.com/pingcap/tidb/issues/33061) @[morgo](https://github.com/morgo)
     - `auto_increment`を持つ列を削除できない問題を修正 [#34891](https://github.com/pingcap/tidb/issues/34891) @[Defined2014](https://github.com/Defined2014)
     - `SHOW CONFIG`に削除された設定項目が表示される問題を修正 [#34867](https://github.com/pingcap/tidb/issues/34867) @[morgo](https://github.com/morgo)
     - `SHOW DATABASES LIKE …`が大文字と小文字を区別する問題を修正 [#34766](https://github.com/pingcap/tidb/issues/34766) @[e1ijah1](https://github.com/e1ijah1)
     - `SHOW TABLE STATUS LIKE ...`が大文字小文字を区別する問題を修正 [#7518](https://github.com/pingcap/tidb/issues/7518) @[likzn](https://github.com/likzn)
-    - `max-index-length`非厳格モードでエラーを報告する問題を修正 [#34931](https://github.com/pingcap/tidb/issues/34931) @[e1ijah1](https://github.com/e1ijah1)
+    - `max-index-length`が非厳格モードでもエラーを報告する問題を修正 [#34931](https://github.com/pingcap/tidb/issues/34931) @[e1ijah1](https://github.com/e1ijah1)
     - `ALTER COLUMN ... DROP DEFAULT`が機能しない問題を修正 [#35018](https://github.com/pingcap/tidb/issues/35018) @[Defined2014](https://github.com/Defined2014)
     - テーブル作成時に、デフォルト値と列の型が一致せず、自動的に修正されない問題を修正しました [#34881](https://github.com/pingcap/tidb/issues/34881) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - `mysql.columns_priv`を実行した後、 `DROP USER`テーブルのデータが同期的に削除されない問題を修正しました [#35059](https://github.com/pingcap/tidb/issues/35059) @[lcwangchao](https://github.com/lcwangchao)
+    - `DROP USER`を実行した後、 `mysql.columns_priv`テーブルのデータが同期的に削除されない問題を修正しました [#35059](https://github.com/pingcap/tidb/issues/35059) @[lcwangchao](https://github.com/lcwangchao)
     - 一部のシステムのスキーマ内でテーブルを作成することを禁止することで、DDL ジャムの問題を修正します [#35205](https://github.com/pingcap/tidb/issues/35205) @[tangenta](https://github.com/tangenta)
     - パーティション化されたテーブルをクエリした際に、場合によっては"index-out-of-range"および"non used index"エラーが報告される問題を修正しました [#35181](https://github.com/pingcap/tidb/issues/35181) @[mjonss](https://github.com/mjonss)
     - `INTERVAL expr unit + expr`がエラーを報告する可能性がある問題を修正 [#30253](https://github.com/pingcap/tidb/issues/30253) @[mjonss](https://github.com/mjonss)
     - トランザクション内で作成された一時テーブルが見つからないバグを修正 [#35644](https://github.com/pingcap/tidb/issues/35644) @[djshow832](https://github.com/djshow832)
     - `ENUM`列に照合順序を設定する際に発生するpanic問題を修正しました [#31637](https://github.com/pingcap/tidb/issues/31637) @[wjhuang2016](https://github.com/wjhuang2016)
     - PDノードが1つダウンした際に、他のPDノードを再試行しないために`information_schema.TIKV_REGION_STATUS`のクエリが失敗する問題を修正しました [#35708](https://github.com/pingcap/tidb/issues/35708) @[tangenta](https://github.com/tangenta)
-    - `SHOW CREATE TABLE …`が`ENUM`の後にセットまたは`SET character_set_results = GBK`列を正しく表示できない問題 [#31338](https://github.com/pingcap/tidb/issues/31338) @[tangenta](https://github.com/tangenta)
+    - `SET character_set_results = GBK`の後に`SHOW CREATE TABLE …`がSETまたは`ENUM`列を正しく表示できない問題を修正 [#31338](https://github.com/pingcap/tidb/issues/31338) @[tangenta](https://github.com/tangenta)
     - システム変数`tidb_log_file_max_days`と`tidb_config`のスコープの誤りを修正 [#35190](https://github.com/pingcap/tidb/issues/35190) @[morgo](https://github.com/morgo)
     - `SHOW CREATE TABLE`の出力が、 `ENUM`または`SET`列の MySQL と互換性がない問題を修正します [#36317](https://github.com/pingcap/tidb/issues/36317) @[Defined2014](https://github.com/Defined2014)
     - テーブル作成時に`LONG BYTE`列の動作が MySQL と互換性がない問題を修正しました [#36239](https://github.com/pingcap/tidb/issues/36239) @[Defined2014](https://github.com/Defined2014)
@@ -422,19 +422,19 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
     - 悲観的トランザクションで`WriteConflict`エラーを報告しないようにします [#11612](https://github.com/tikv/tikv/issues/11612) @[sticnarf](https://github.com/sticnarf)
     - 非同期コミットが有効になっている場合に、悲観的トランザクションで発生する可能性のある重複コミット レコードを修正 [#12615](https://github.com/tikv/tikv/issues/12615) @[sticnarf](https://github.com/sticnarf)
-    - `storage.api-version`を`1`から`2`に変更した際に TiKV がパニック [#12600](https://github.com/tikv/tikv/issues/12600) @[pingyu](https://github.com/pingyu)
+    - `storage.api-version`を`1`から`2`に変更した際に TiKV がパニックする問題を修正 [#12600](https://github.com/tikv/tikv/issues/12600) @[pingyu](https://github.com/pingyu)
     - TiKVとPD間のリージョンサイズ構成の不整合の問題を修正 [#12518](https://github.com/tikv/tikv/issues/12518) @[5kbpers](https://github.com/5kbpers)
     - TiKV が PD クライアントに再接続し続ける問題を修正[#12506](https://github.com/tikv/tikv/issues/12506) 、 [#12827](https://github.com/tikv/tikv/issues/12827) @[Connor1996](https://github.com/Connor1996)
     - TiKVが空文字列の型変換時にパニックを起こす問題を修正 [#12673](https://github.com/tikv/tikv/issues/12673) @[wshwsh12](https://github.com/wshwsh12)
-    - `DATETIME`の値に小数が含まれている場合と`Z`の値が含まれている場合に発生する時間解析エラーの問題を修正しました [#12739](https://github.com/tikv/tikv/issues/12739) @[gengliqi](https://github.com/gengliqi)
+    - `DATETIME`の値に小数部と`Z`が含まれている場合に発生する時間解析エラーの問題を修正しました [#12739](https://github.com/tikv/tikv/issues/12739) @[gengliqi](https://github.com/gengliqi)
     - Apply オペレーターが TiKV RocksDB に書き込む perf コンテキストが粗粒度である問題を修正 [#11044](https://github.com/tikv/tikv/issues/11044) @[LykxSassinator](https://github.com/LykxSassinator)
-    - [バックアップ](/tikv-configuration-file.md#backup)/[インポート](/tikv-configuration-file.md#import)/ [CDC](/tikv-configuration-file.md#cdc)の設定が無効な場合にTiKVが起動できない問題を修正 [#12771](https://github.com/tikv/tikv/issues/12771) @[3pointer](https://github.com/3pointer)
+    - [backup](/tikv-configuration-file.md#backup)/[import](/tikv-configuration-file.md#import)/[cdc](/tikv-configuration-file.md#cdc)の設定が無効な場合にTiKVが起動できない問題を修正 [#12771](https://github.com/tikv/tikv/issues/12771) @[3pointer](https://github.com/3pointer)
     - ピアが分割され、同時に破棄される際に発生する可能性のあるpanic問題を修正 [#12825](https://github.com/tikv/tikv/issues/12825) @[BusyJay](https://github.com/BusyJay)
-    - リージョンマージプロセスでソースピアがスナップショットによってログを追いついたときに発生する可能性のpanic問題を修正 [#12663](https://github.com/tikv/tikv/issues/12663) @[BusyJay](https://github.com/BusyJay)
+    - リージョンマージプロセスでソースピアがスナップショットによってログに追いついたときに発生する可能性のあるpanic問題を修正 [#12663](https://github.com/tikv/tikv/issues/12663) @[BusyJay](https://github.com/BusyJay)
     - `max_sample_size`が`0`に設定されている場合に統計分析で発生するpanic問題を修正 [#11192](https://github.com/tikv/tikv/issues/11192) @[LykxSassinator](https://github.com/LykxSassinator)
     - Raft Engineが有効になっているときに暗号化キーがクリーンアップされない問題を修正 [#12890](https://github.com/tikv/tikv/issues/12890) @[tabokie](https://github.com/tabokie)
     - `get_valid_int_prefix`関数が TiDB と互換性がない問題を修正します。例えば、 `FLOAT`型が`INT`に誤って変換されていました [#13045](https://github.com/tikv/tikv/issues/13045) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 新しいリージョンのコミットログ期間が長すぎるためにQPSが低下する問題を修正しました [#13077](https://github.com/tikv/tikv/issues/13077) @[Connor1996](https://github.com/Connor1996)
+    - 新しいリージョンの Commit Log Duration が長すぎるためにQPSが低下する問題を修正しました [#13077](https://github.com/tikv/tikv/issues/13077) @[Connor1996](https://github.com/Connor1996)
     - リージョンのハートビートが中断された後、PD が TiKV に再接続しない問題を修正 [#12934](https://github.com/tikv/tikv/issues/12934) @[bufferflies](https://github.com/bufferflies)
 
 - ツール
