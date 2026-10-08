@@ -88,7 +88,7 @@ In v5.3, the key new features or improvements are as follows:
 
     - Merge multiple databases of different applications to reduce the cost on database maintenance, and achieve application resource isolation through the rule configuration
     - Increase replica count for important data to improve the application availability and data reliability
-    - Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
+    - Store new data into SSDs and store old data into HDDs to lower the cost on data archiving and storage
     - Schedule the leaders of hotspot data to high-performance TiKV instances
     - Separate cold data to lower-cost storage mediums to improve cost efficiency
 
