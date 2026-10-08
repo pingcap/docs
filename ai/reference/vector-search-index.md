@@ -109,7 +109,7 @@ The result is exact: you always get the 5 closest matching rows, or every matchi
 To use the vector index, find the K nearest neighbors first in a subquery, and then filter the result:
 
 ```sql
--- The WHERE filter is applied after the K-nearest-neighbor search, so the vector index is used:
+-- The WHERE filter is applied after the K-nearest-neighbor search, so the query can use the vector index:
 
 SELECT * FROM
 (
