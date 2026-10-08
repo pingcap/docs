@@ -26,8 +26,8 @@ TiDB バージョン: 7.5.6
 - TiKV
 
     - 無効な`max_ts`更新の検出メカニズムを追加[#17916](https://github.com/tikv/tikv/issues/17916) @[ekexium](https://github.com/ekexium)
-    - ピアのスローログを追加し、メッセージを保存します [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
-    - ログの適用を待つために TiKV を再起動するときに発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
+    - ピアおよびストアのメッセージのスローログを追加します [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
+    - TiKV の再起動時にログの適用を待つことで発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - TiFlash
 
@@ -87,18 +87,18 @@ TiDB バージョン: 7.5.6
     - GBK/GB18030エンコードデータ処理時にエンコードが失敗する可能性がある問題を修正 [#17618](https://github.com/tikv/tikv/issues/17618) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - 例外が発生したときに CDC 接続でリソース漏洩が発生する可能性がある問題を修正しました [#18245](https://github.com/tikv/tikv/issues/18245) @[wlwilliamx](https://github.com/wlwilliamx)
     - リージョンマージでRaftインデックスの不一致により TiKV 異常終了が発生する可能性がある問題を修正しました [#18129](https://github.com/tikv/tikv/issues/18129) @[glorv](https://github.com/glorv)
-    - 解決済み-TSの監視とログが異常になる可能性がある問題を修正[#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)
+    - Resolved-TS の監視とログが異常になる可能性がある問題を修正[#17989](https://github.com/tikv/tikv/issues/17989) @[ekexium](https://github.com/ekexium)
     - Titanコンポーネントとの非互換性によりアップグレードが失敗する問題を修正[#18263](https://github.com/tikv/tikv/issues/18263) @[v01dstar](https://github.com/v01dstar) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - PD
 
-    - 単一のログファイルのデフォルト値`max-size`が正しく設定されていない問題を修正しました[#9037](https://github.com/tikv/pd/issues/9037) @[rleungx](https://github.com/rleungx)
+    - 単一のログファイルの`max-size`のデフォルト値が正しく設定されていない問題を修正しました[#9037](https://github.com/tikv/pd/issues/9037) @[rleungx](https://github.com/rleungx)
     - `flow-round-by-digit`設定項目の値が再起動後に上書きされる可能性がある問題を修正[#8980](https://github.com/tikv/pd/issues/8980) @[nolouch](https://github.com/nolouch)
-    - PDネットワークの不安定さにより、データのインポートやインデックスシナリオの追加操作が失敗する可能性がある問題を修正しました。 [#8962](https://github.com/tikv/pd/issues/8962) @[okJiang](https://github.com/okJiang)
+    - PDネットワークの不安定さにより、データのインポートやインデックス追加のシナリオでの操作が失敗する可能性がある問題を修正しました。 [#8962](https://github.com/tikv/pd/issues/8962) @[okJiang](https://github.com/okJiang)
     - `tidb_enable_tso_follower_proxy`システム変数が有効になっているときに PD がpanicする可能性がある問題を修正[#8950](https://github.com/tikv/pd/issues/8950) @[okJiang](https://github.com/okJiang)
     - `tidb_enable_tso_follower_proxy`システム変数が有効にならない可能性がある問題を修正しました [#8947](https://github.com/tikv/pd/issues/8947) @[JmPotato](https://github.com/JmPotato)
     - TSO を割り当てるときにメモリリークが発生する可能性がある問題を修正しました [#9004](https://github.com/tikv/pd/issues/9004) @[rleungx](https://github.com/rleungx)
-    - PDリーダーの切り替え時にリージョン同期が間に合わない可能性がある問題を修正しました [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
+    - PD Leaderの切り替え時にRegion syncer が時間内に終了しない可能性がある問題を修正しました [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
     - PDノードがLeaderでない場合でもTSOを生成する可能性がある問題を修正しました [#9051](https://github.com/tikv/pd/issues/9051) @[rleungx](https://github.com/rleungx)
 
 - TiFlash
@@ -106,8 +106,8 @@ TiDB バージョン: 7.5.6
     - メモリ使用量が少ないときにTiFlash が予期せずRaftメッセージの処理を拒否する可能性がある問題を修正[#9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
     - 大量のデータをインポートした後にTiFlash のメモリ使用量が高くなる可能性がある問題を修正[#9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
     - パーティションテーブルに対するクエリが、パーティションテーブルで`ALTER TABLE ... RENAME COLUMN`を実行した後にエラーを返す可能性がある問題を修正しました。 [#9787](https://github.com/pingcap/tiflash/issues/9787) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 特定の状況でTiFlash が予期せず終了したときにエラースタック トレースを印刷できないことがある問題を修正[#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - `profiles.default.init_thread_count_scale` `0` に設定するとTiFlash の起動がブロックされる可能性がある問題を修正しました [#9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - 特定の状況でTiFlash が予期せず終了したときにエラースタック トレースを出力できないことがある問題を修正[#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - `profiles.default.init_thread_count_scale`を`0` に設定するとTiFlash の起動がブロックされる可能性がある問題を修正しました [#9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - クエリに仮想列が含まれており、リモート読み取りをトリガーするときに`Not found column`エラーが発生する可能性がある問題を修正しました。 [#9561](https://github.com/pingcap/tiflash/issues/9561) @[guo-shaoge](https://github.com/guo-shaoge)
     - ストレージとコンピューティングの分離アーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するためのターゲットノードとして誤って選択される可能性がある問題を修正しました。 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
@@ -134,4 +134,4 @@ TiDB バージョン: 7.5.6
 
     - TiDB Lightning
 
-        - ログが適切に感度調整されない問題を修正[#59086](https://github.com/pingcap/tidb/issues/59086) @[GMHDBJD](https://github.com/GMHDBJD)
+        - ログが適切に秘匿化されない問題を修正[#59086](https://github.com/pingcap/tidb/issues/59086) @[GMHDBJD](https://github.com/GMHDBJD)

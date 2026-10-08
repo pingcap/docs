@@ -13,7 +13,7 @@ TiDB バージョン: 7.6.0
 
 バージョン7.6.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.6/sql-plan-management/#cross-database-binding">クロスデータベースSQLバインディング</a></td><td>同じスキーマを持つ数百ものデータベースを管理する場合、これらのデータベース間でSQLバインディングを適用する必要が生じることがよくあります。例えば、SaaSやPaaSのデータプラットフォームでは、通常、各ユーザーが同じスキーマを持つ個別のデータベースを操作し、それらに対して同様のSQLクエリを実行します。このような場合、各データベースごとにSQLを個別にバインドするのは現実的ではありません。TiDB v7.6.0では、スキーマが同等のすべてのデータベース間でバインディングを一致させることができる、データベース間SQLバインディングが導入されました。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.6/br-snapshot-guide/#restore-cluster-snapshots">スナップショット復元速度を最大10倍向上（実験的）</a></td><td> BR v7.6.0では、クラスターのスナップショット復元を高速化するための、実験的粗粒度リージョン分散アルゴリズムが導入されました。TiKVノードが多数存在するクラスターでは、このアルゴリズムにより、ノード間で負荷がより均等に分散され、ノードごとのネットワーク帯域幅がより有効に活用されるため、クラスターのリソース効率が大幅に向上します。実際のいくつかの事例では、この改善により復元プロセスが最大約10倍高速化されています。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/">テーブル作成をバッチ処理で行う際の処理速度を最大10倍向上（実験的）</a></td><td>バージョン7.6.0で新しいDDLアーキテクチャが導入されたことで、バッチテーブル作成のパフォーマンスが最大10倍高速化され、目覚ましい改善が見られました。この大幅な機能強化により、多数のテーブルを作成するのに必要な時間が大幅に短縮されます。この高速化は、数十万から数十万ものテーブルが頻繁に発生するSaaS環境において特に顕著です。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.6/tune-region-performance/#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">アクティブなPDフォロワーを使用してPDのリージョン情報クエリサービスを強化する（実験的）</a></td><td> TiDB v7.6.0では、実験的機能"Active PD Follower"が導入されました。これにより、PDフォロワーがリージョン情報クエリサービスを提供できるようになります。この機能は、多数のTiDBノードとリージョンを持つクラスターにおいて、PDクラスターが<code>GetRegion</code>および<code>ScanRegions</code>リクエストを処理する能力を向上させ、PDリーダーのCPU負荷を軽減します。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.6/tiproxy-overview/">TiProxyのサポート（実験的）</a></td><td> TiProxyサービスを完全にサポートし、デプロイツールを介して簡単にデプロイできます。これにより、TiDBへの接続を管理および維持し、ローリング再起動、アップグレード、またはスケーリングイベント後も接続が維持されます。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v7.6/dm-compatibility-catalog/">データ移行（DM）は、MySQL 8.0（GA）を正式にサポートします。</a></td><td>これまで、DMを使用してMySQL 8.0からデータを移行する機能は実験的機能であり、本番環境では利用できませんでした。TiDB v7.6.0では、この機能の安定性と互換性が向上し、本番環境においてMySQL 8.0からTiDBへのデータ移行をスムーズかつ迅速に行えるようになりました。v7.6.0では、この機能が一般提供（GA）となります。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.6/sql-plan-management/#cross-database-binding">クロスデータベースSQLバインディング</a></td><td>同じスキーマを持つ数百ものデータベースを管理する場合、これらのデータベース間でSQLバインディングを適用する必要が生じることがよくあります。例えば、SaaSやPaaSのデータプラットフォームでは、通常、各ユーザーが同じスキーマを持つ個別のデータベースを操作し、それらに対して同様のSQLクエリを実行します。このような場合、各データベースごとにSQLを個別にバインドするのは現実的ではありません。TiDB v7.6.0では、スキーマが同等のすべてのデータベース間でバインディングを一致させることができる、データベース間SQLバインディングが導入されました。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.6/br-snapshot-guide/#restore-cluster-snapshots">スナップショット復元速度を最大10倍向上（実験的）</a></td><td> BR v7.6.0では、クラスターのスナップショット復元を高速化するための、実験的粗粒度リージョン分散アルゴリズムが導入されました。TiKVノードが多数存在するクラスターでは、このアルゴリズムにより、ノード間で負荷がより均等に分散され、ノードごとのネットワーク帯域幅がより有効に活用されるため、クラスターのリソース効率が大幅に向上します。実際のいくつかの事例では、この改善により復元プロセスが最大約10倍高速化されています。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/">テーブル作成をバッチ処理で行う際の処理速度を最大10倍向上（実験的）</a></td><td>バージョン7.6.0で新しいDDLアーキテクチャが導入されたことで、バッチテーブル作成のパフォーマンスが最大10倍高速化され、目覚ましい改善が見られました。この大幅な機能強化により、多数のテーブルを作成するのに必要な時間が大幅に短縮されます。この高速化は、数万から数十万ものテーブルが頻繁に発生するSaaS環境において特に顕著です。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v7.6/tune-region-performance/#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service">Active PD Follower を使用してPDのリージョン情報クエリサービスを強化する（実験的）</a></td><td> TiDB v7.6.0では、実験的機能"Active PD Follower"が導入されました。これにより、PDフォロワーがリージョン情報クエリサービスを提供できるようになります。この機能は、多数のTiDBノードとリージョンを持つクラスターにおいて、PDクラスターが<code>GetRegion</code>および<code>ScanRegions</code>リクエストを処理する能力を向上させ、PDリーダーのCPU負荷を軽減します。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v7.6/tiproxy-overview/">TiProxyのサポート（実験的）</a></td><td> TiProxyサービスを完全にサポートし、デプロイツールを介して簡単にデプロイできます。これにより、TiDBへの接続を管理および維持し、ローリング再起動、アップグレード、またはスケーリングイベント後も接続が維持されます。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v7.6/dm-compatibility-catalog/">データ移行（DM）は、MySQL 8.0（GA）を正式にサポートします。</a></td><td>これまで、DMを使用してMySQL 8.0からデータを移行する機能は実験的機能であり、本番環境では利用できませんでした。TiDB v7.6.0では、この機能の安定性と互換性が向上し、本番環境においてMySQL 8.0からTiDBへのデータ移行をスムーズかつ迅速に行えるようになりました。v7.6.0では、この機能が一般提供（GA）となります。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -33,7 +33,7 @@ TiDB バージョン: 7.6.0
 
     TiDBクラスタの規模が拡大するにつれて、業務停止時間を最小限に抑えるために、障害発生時にクラスタを迅速に復旧することがますます重要になります。v7.6.0より前は、リージョン分散アルゴリズムがパフォーマンス復旧における主要なボトルネックとなっていました。v7.6.0では、 BRがリージョン分散アルゴリズムを最適化し、復旧タスクを多数の小さなタスクに迅速に分割し、バッチ処理で全てのTiKVノードに分散させます。新しい並列リカバリアルゴリズムは、各TiKVノードのリソースを最大限に活用し、高速な並列リカバリを実現します。実際の運用事例では、大規模なリージョン環境において、クラスタのスナップショット復旧速度が約10倍向上しています。
 
-    新しい粗粒度リージョン散布アルゴリズムは実験的です。これを使用するには、 `--granularity="coarse-grained"`コマンドの`br`パラメータを設定します。例:
+    新しい粗粒度リージョン散布アルゴリズムは実験的です。これを使用するには、 `br`コマンドで`--granularity="coarse-grained"`パラメータを設定します。例:
 
     ```bash
     br restore full \
@@ -79,7 +79,7 @@ TiDB バージョン: 7.6.0
 
     詳細については、 [ドキュメント](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/)を参照してください。
 
-- 定期的な完全圧縮をサポート (実験的) [#12729](https://github.com/tikv/tikv/issues/12729) @@[afeinberg](https://github.com/afeinberg)
+- 定期的な完全圧縮をサポート (実験的) [#12729](https://github.com/tikv/tikv/issues/12729) @[afeinberg](https://github.com/afeinberg)
 
     TiDBはv7.6.0以降、TiKVの定期的なフルコンパクションをサポートしています。この機能は、ガベージコレクション（GC）を拡張し、冗長なデータバージョンを排除するものです。アプリケーションのアクティビティに明らかなピークと谷が見られるシナリオでは、この機能を使用してアイドル期間中にデータコンパクションを実行することで、ピーク時のパフォーマンスを向上させることができます。
 
@@ -103,7 +103,7 @@ TiDB バージョン: 7.6.0
         WHERE t1.id = t2.id;
     ```
 
-    さらに、クロスデータベースバインディングは、ユーザーデータとワークロードの不均一な分布や急激な変化によって引き起こされるSQLパフォーマンスの問題を効果的に軽減できます。SaaSプロバイダーは、クロスデータベースバインディングを使用して、大量のデータを持つユーザーによって検証された実行計画を修正することで、すべてのユーザーの実行計画を固定できます。SaaSプロバイダーにとって、この機能は利便性とユーザーエクスペリエンスを大幅に向上させます。
+    さらに、クロスデータベースバインディングは、ユーザーデータとワークロードの不均一な分布や急激な変化によって引き起こされるSQLパフォーマンスの問題を効果的に軽減できます。SaaSプロバイダーは、クロスデータベースバインディングを使用して、大量のデータを持つユーザーによって検証された実行計画を固定することで、すべてのユーザーの実行計画を固定できます。SaaSプロバイダーにとって、この機能は利便性とユーザーエクスペリエンスを大幅に向上させます。
 
     クロスデータベースバインディングによって発生するシステムオーバーヘッド（1%未満）のため、TiDBはこの機能をデフォルトで無効にしています。クロスデータベースバインディングを使用するには、まずシステム変数[`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)を有効にする必要があります。
 
@@ -111,9 +111,9 @@ TiDB バージョン: 7.6.0
 
 ### 可用性 {#availability}
 
-- プロキシコンポーネントTiProxyのサポート（実験的） [#413](https://github.com/pingcap/tiproxy/issues/413) @[djshow832](https://github.com/djshow832) [xhebox](https://github.com/xhebox)
+- プロキシコンポーネントTiProxyのサポート（実験的） [#413](https://github.com/pingcap/tiproxy/issues/413) @[djshow832](https://github.com/djshow832) @[xhebox](https://github.com/xhebox)
 
-    TiProxyはTiDBの公式プロキシコンポーネントであり、クライアントとTiDBサーバーの間に配置されます。TiProxyはTiDBの負荷分散と接続維持関数を提供し、TiDBクラスタのワークロードをよりバランス良く分散させ、メンテナンス作業中もデータベースへのユーザーアクセスに影響を与えないようにします。
+    TiProxyはTiDBの公式プロキシコンポーネントであり、クライアントとTiDBサーバーの間に配置されます。TiProxyはTiDBの負荷分散と接続維持の機能を提供し、TiDBクラスタのワークロードをよりバランス良く分散させ、メンテナンス作業中もデータベースへのユーザーアクセスに影響を与えないようにします。
 
     - TiDBクラスタにおけるローリング再起動、ローリングアップグレード、スケールインなどのメンテナンス作業中、TiDBサーバーに変更が発生すると、クライアントとTiDBサーバー間の接続が中断されます。TiProxyを使用することで、これらのメンテナンス作業中に接続を他のTiDBサーバーにスムーズに移行できるため、クライアントへの影響を最小限に抑えることができます。
     - TiDBサーバーへのクライアント接続を、他のTiDBサーバーに動的に移行することはできません。複数のTiDBサーバーのワークロードが不均衡になると、クラスタ全体のリソースは十分であっても、特定のTiDBサーバーでリソース枯渇が発生し、レイテンシーが大幅に増加する可能性があります。この問題を解決するために、TiProxyは接続の動的移行機能を提供します。これにより、クライアントに影響を与えることなく、接続をあるTiDBサーバーから別のTiDBサーバーに移行できるため、TiDBクラスタの負荷分散が実現されます。
@@ -126,9 +126,9 @@ TiDB バージョン: 7.6.0
 
 - `LOAD DATA`は明示的なトランザクションとロールバックをサポートします [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
 
-    MySQLと比較すると、v7.6.0より前のTiDBバージョンでは`LOAD DATA`文のトランザクション動作が異なるため、このステートメントを使用する際には追加の調整が必要になる場合があります。具体的には、v4.0.0より前では、 `LOAD DATA`は20000行ごとにコミットされます。v4.0.0からv6.6.0までは、TiDBはデフォルトで1つのトランザクションですべての行をコミットし、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)システム変数を設定することで固定行数ごとにコミットすることもサポートしています。v7.0.0以降では、 `tidb_dml_batch_size` `LOAD DATA`には適用されなくなり、TiDBは1つのトランザクションですべての行をコミットします。
+    MySQLと比較すると、v7.6.0より前のTiDBバージョンでは`LOAD DATA`文のトランザクション動作が異なるため、このステートメントを使用する際には追加の調整が必要になる場合があります。具体的には、v4.0.0より前では、 `LOAD DATA`は20000行ごとにコミットされます。v4.0.0からv6.6.0までは、TiDBはデフォルトで1つのトランザクションですべての行をコミットし、 [`tidb_dml_batch_size`](/system-variables.md#tidb_dml_batch_size)システム変数を設定することで固定行数ごとにコミットすることもサポートしています。v7.0.0以降では、 `tidb_dml_batch_size`は`LOAD DATA`には適用されなくなり、TiDBは1つのトランザクションですべての行をコミットします。
 
-    バージョン7.6.0以降、TiDBはトランザクション内で`LOAD DATA`他のDML文と同様に、特にMySQLと同様に処理します。トランザクション内の`LOAD DATA`文は、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`文を明示的にコミットまたはロールバックできます。また、 `LOAD DATA`文は、TiDBトランザクションモード設定（楽観的トランザクションまたは悲観的トランザクション）の影響を受けます。これらの改善により、MySQLからTiDBへの移行プロセスが簡素化され、データインポートにおいてより統一的で制御しやすいエクスペリエンスが提供されます。
+    バージョン7.6.0以降、TiDBはトランザクション内の`LOAD DATA`を他のDML文と同様に、特にMySQLと同様に処理します。トランザクション内の`LOAD DATA`文は、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`文を明示的にコミットまたはロールバックできます。また、 `LOAD DATA`文は、TiDBトランザクションモード設定（楽観的トランザクションまたは悲観的トランザクション）の影響を受けます。これらの改善により、MySQLからTiDBへの移行プロセスが簡素化され、データインポートにおいてより統一的で制御しやすいエクスペリエンスが提供されます。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-load-data.md)を参照してください。
 
@@ -185,7 +185,7 @@ TiDB バージョン: 7.6.0
     - [スロークエリ](/identify-slow-queries.md): リソースグループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
     - [ステートメントサマリーテーブル](/statement-summary-tables.md): リソースグループ名、RU 消費量、リソースの待機時間を追加します。
     - システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL文によって消費された[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後のステートメントのリソース消費量を取得できます。
-    - リソースグループに基づいてデータベースのメトリックを追加します。具体的には、QPS/TPS、実行時間（P999/P99/P95）、障害発生回数、接続数などです。
+    - リソースグループに基づいてデータベースのメトリックを追加します。具体的には、QPS/TPS、実行時間（P999/P99/P95）、失敗回数、接続数などです。
     - すべてのリソースグループの1日あたりのRU消費量の履歴レコードを記録するために、システムテーブル[`request_unit_by_group`](/mysql-schema/mysql-schema.md#system-tables-related-to-resource-control)を追加します。
 
     詳細については、[スロークエリを特定する](/identify-slow-queries.md)、[ステートメントサマリーテーブル](/statement-summary-tables.md)、および[リソース制御の主要監視指標](/grafana-resource-control-dashboard.md)を参照してください。
@@ -224,7 +224,7 @@ TiDB バージョン: 7.6.0
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
-- TiDB v7.6.0 より前は、 `LOAD DATA`操作は、単一のトランザクションですべての行をコミットするか、トランザクションをバッチでコミットしていました。これは MySQL の動作とは若干異なります。v7.6.0 以降、TiDB は`LOAD DATA` MySQL と同様にトランザクションで処理します。トランザクション内の`LOAD DATA`文は、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`文を明示的にコミットまたはロールバックできます。また、 `LOAD DATA`文は、TiDB のトランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
+- TiDB v7.6.0 より前は、 `LOAD DATA`操作は、単一のトランザクションですべての行をコミットするか、トランザクションをバッチでコミットしていました。これは MySQL の動作とは若干異なります。v7.6.0 以降、TiDB は`LOAD DATA`を MySQL と同様にトランザクションで処理します。トランザクション内の`LOAD DATA`文は、現在のトランザクションを自動的にコミットしたり、新しいトランザクションを開始したりしなくなりました。さらに、トランザクション内の`LOAD DATA`文を明示的にコミットまたはロールバックできます。また、 `LOAD DATA`文は、TiDB のトランザクションモード設定 (楽観的トランザクションまたは悲観的トランザクション) の影響を受けます。 [#49079](https://github.com/pingcap/tidb/pull/49079) @[ekexium](https://github.com/ekexium)
 
 ### システム変数 {#system-variables}
 
@@ -232,14 +232,14 @@ TiDB バージョン: 7.6.0
 | ------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | 変更     | さらなるテストの結果、デフォルト値を`1`から`128`に変更します。                                                                                                                                                                                                                                                                                     |
 | [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 変更     | 大規模クラスタでは、 `scan`操作の同時実行数を`ANALYZE`のニーズに合わせて高く調整できます。したがって、最大値を`256`から`4294967295`に変更します。                                                                                                                                                                                                                               |
-| [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)   | 新しく追加された | `scan`操作を実行する際の`ANALYZE`操作の同時実行数を設定します。デフォルト値は`4`です。                                                                                                                                                                                                                                                                    |
+| [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)   | 新しく追加された | `ANALYZE`操作を実行する際の`scan`操作の同時実行数を設定します。デフォルト値は`4`です。                                                                                                                                                                                                                                                                    |
 | [`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables/#tidb_ddl_version-new-in-v760)     | 新しく追加された | [TiDB DDL V2](https://docs-archive.pingcap.com/tidb/v7.6/ddl-v2/)を有効にするかどうかを制御します。有効にするには`2`に、無効にするには`1`に値を設定します。デフォルト値は`1`です。TiDB DDL V2 が有効になっている場合、DDL文は TiDB DDL V2 を使用して実行されます。テーブルを作成する DDL文の実行速度は、TiDB DDL V1 と比較して 10 倍向上します。                                                                     |
 | [`tidb_enable_global_index`](/system-variables.md#tidb_enable_global_index-new-in-v760)                             | 新しく追加された | パーティションテーブルに対して`Global indexes`を作成するかどうかを制御します。デフォルト値は`OFF`です。 `Global index`は現在開発段階です。**このシステム変数の値を変更することは推奨されません**。                                                                                                                                                                                                   |
 | [`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)                   | 新しく追加された | ユーザーセッションにおけるトランザクションのアイドルタイムアウトを制御します。ユーザーセッションがトランザクション状態にあり、この変数の値を超える時間アイドル状態が続くと、TiDB はセッションを終了します。デフォルト値`0`は無制限を意味します。                                                                                                                                                                                            |
 | [`tidb_ignore_inlist_plan_digest`](/system-variables.md#tidb_ignore_inlist_plan_digest-new-in-v760)                 | 新しく追加された | プランダイジェストを生成する際に、TiDB が異なるクエリ間で`IN`リスト内の要素の差異を無視するかどうかを制御します。デフォルト値`OFF`は、差異を無視しないことを意味します。                                                                                                                                                                                                                             |
 | [`tidb_opt_enable_fuzzy_binding`](/system-variables.md#tidb_opt_enable_fuzzy_binding-new-in-v760)                   | 新しく追加された | クロスデータベースバインディング機能を有効にするかどうかを制御します。デフォルト値`OFF`は、クロスデータベースバインディングが無効であることを意味します。                                                                                                                                                                                                                                         |
 | [`tidb_txn_entry_size_limit`](/system-variables.md#tidb_txn_entry_size_limit-new-in-v760)                           | 新しく追加された | TiDB 設定項目[`performance.txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)を動的に変更します。これは、TiDB 内の単一行のデータのサイズを制限します。この変数のデフォルト値は`0`です。これは、TiDB がデフォルトで設定項目`txn-entry-size-limit`の値を使用することを意味します。この変数がゼロ以外の値に設定されている場合、 `txn-entry-size-limit`も同じ値に設定されます。                       |
-| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)             | 新しく追加された | 有効にするかどうかを制御します[アクティブなPDFollower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)機能 (実験的)。値が`OFF`の場合、TiDB は PD リーダーからのみリージョン情報を取得します。値が`ON`の場合、TiDB はリージョン情報のリクエストをすべての PD サーバーに均等に分散し、PD フォロワーもリージョンリクエストを処理できるため、PD リーダーの CPU 負荷が軽減されます。 |
+| [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)             | 新しく追加された | [Active PD Follower](/tune-region-performance.md#use-the-active-pd-follower-feature-to-enhance-the-scalability-of-pds-region-information-query-service)機能 (実験的) を有効にするかどうかを制御します。値が`OFF`の場合、TiDB は PD リーダーからのみリージョン情報を取得します。値が`ON`の場合、TiDB はリージョン情報のリクエストをすべての PD サーバーに均等に分散し、PD フォロワーもリージョンリクエストを処理できるため、PD リーダーの CPU 負荷が軽減されます。 |
 
 ### 設定ファイルパラメータ {#configuration-file-parameters}
 
@@ -251,10 +251,10 @@ TiDB バージョン: 7.6.0
 | TiKV           | [`rocksdb.defaultcf.titan.min-blob-size`](/tikv-configuration-file.md#min-blob-size)                                                                   | 変更     | TiDB v7.6.0以降、新規クラスタのデフォルト値は`32KB`となります。v7.6.0にアップグレードする既存クラスタの場合、デフォルト値`1KB`は変更されません。                                                                                                                                    |
 | TiKV           | [`rocksdb.titan.enabled`](/tikv-configuration-file.md#enabled)                                                                                         | 変更     | Titan を有効または無効にします。v7.5.0 以前のバージョンでは、デフォルト値は`false`です。v7.6.0 以降では、新規クラスターの場合のみデフォルト値は`true`になります。v7.6.0 以降のバージョンにアップグレードされた既存のクラスターは、元の構成を維持します。                                                                          |
 | TiKV           | [`cdc.incremental-scan-concurrency-limit`](/tikv-configuration-file.md#incremental-scan-concurrency-limit-new-in-v760)                                 | 新しく追加された | 履歴データを増分スキャンするタスクの実行待ちキューの最大長を設定します。デフォルト値は`10000`で、これは最大 10000 個のタスクを実行待ちキューに入れることができることを意味します。                                                                                                                          |
-| TiKV           | [`gc.num-threads`](/tikv-configuration-file.md#num-threads-new-in-v658-v714-v751-and-v760)                                                             | 新しく追加された | `enable-compaction-filter` `false`に設定すると、このパラメータは GC スレッドの数を制御します。デフォルト値は`1`です。                                                                                                                                           |
+| TiKV           | [`gc.num-threads`](/tikv-configuration-file.md#num-threads-new-in-v658-v714-v751-and-v760)                                                             | 新しく追加された | `enable-compaction-filter`を`false`に設定すると、このパラメータは GC スレッドの数を制御します。デフォルト値は`1`です。                                                                                                                                           |
 | TiKV           | [`raftstore.periodic-full-compact-start-times`](/tikv-configuration-file.md#periodic-full-compact-start-times-new-in-v760)                             | 新しく追加された | TiKVが定期的な完全圧縮を開始する具体的な時間を設定します。デフォルト値`[]`は、定期的な完全圧縮が無効になっていることを意味します。                                                                                                                                                     |
 | TiKV           | [`raftstore.periodic-full-compact-start-max-cpu`](/tikv-configuration-file.md#periodic-full-compact-start-max-cpu-new-in-v760)                         | 新しく追加された | TiKVの定期的な完全圧縮における最大CPU使用率を制限します。デフォルト値は`0.1`です。                                                                                                                                                                           |
-| TiKV           | [`raftstore.pd-report-min-resolved-ts-interval`](/tikv-configuration-file.md#pd-report-min-resolved-ts-interval-new-in-v760)                           | 新しく追加された | [`raftstore.report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#report-min-resolved-ts-interval-new-in-v600)から名前が変更されました。TiKV が解決済み TS を PD リーダーに報告する最小間隔を指定します。デフォルト値は`"1s"`です。 |
+| TiKV           | [`raftstore.pd-report-min-resolved-ts-interval`](/tikv-configuration-file.md#pd-report-min-resolved-ts-interval-new-in-v760)                           | 新しく追加された | [`raftstore.report-min-resolved-ts-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#report-min-resolved-ts-interval-new-in-v600)から名前が変更されました。TiKV が Resolved TS を PD リーダーに報告する最小間隔を指定します。デフォルト値は`"1s"`です。 |
 | TiKV           | [`zstd-dict-size`](/tikv-configuration-file.md#zstd-dict-size)                                                                                         | 新しく追加された | `zstd`辞書の圧縮サイズを指定します。デフォルト値は`"0KB"`で、これは`zstd`辞書の圧縮を無効にすることを意味します。                                                                                                                                                        |
 | TiFlash        | [`logger.level`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                                                                     | 変更     | ログ記録のコストを削減するために、デフォルト値を`"debug"`から`"INFO"`に変更します。                                                                                                                                                                        |
 | TiDB Lightning | [`tidb.pd-addr`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                                                  | 変更     | PDサーバーのアドレスを設定します。バージョン7.6.0以降、TiDBは複数のPDアドレスの設定をサポートしています。                                                                                                                                                               |
@@ -274,7 +274,7 @@ TiDB バージョン: 7.6.0
 
 ## オフラインパッケージの変更 {#offline-package-changes}
 
-v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-package.md)には、プロキシ コンポーネント[TiProxy](/tiproxy/tiproxy-overview.md)のインストールパッケージである`tiproxy-{version}-linux-{arch}.tar.gz`含まれるようになりました。
+v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-package.md)には、プロキシ コンポーネント[TiProxy](/tiproxy/tiproxy-overview.md)のインストールパッケージである`tiproxy-{version}-linux-{arch}.tar.gz`が含まれるようになりました。
 
 ## 非推奨機能 {#deprecated-features}
 
@@ -289,7 +289,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - 非バイナリ照合順序が設定され、クエリに`LIKE`が含まれる場合、オプティマイザは実行効率を向上させるために`IndexRangeScan`を生成します[#48181](https://github.com/pingcap/tidb/issues/48181) [#49138](https://github.com/pingcap/tidb/issues/49138) @[time-and-fate](https://github.com/time-and-fate)
     - 特定のシナリオにおいて`OUTER JOIN`を`INNER JOIN`に変換する機能を強化する [#49616](https://github.com/pingcap/tidb/issues/49616) @[qw4990](https://github.com/qw4990)
     - ノードが再起動されるシナリオにおける分散実行フレームワーク（DXF）タスクのバランスを改善する [#47298](https://github.com/pingcap/tidb/issues/47298) @[ywqzzy](https://github.com/ywqzzy)
-    - 複数の高速化された`ADD INDEX` DDL タスクをキューに入れて実行できるようにサポートします。通常の`ADD INDEX`タスクにフォールバックするのではなく、実行します。 [#47758](https://github.com/pingcap/tidb/issues/47758) @[tangenta](https://github.com/tangenta)
+    - 通常の`ADD INDEX`タスクにフォールバックせずに、複数の高速化された`ADD INDEX` DDL タスクをキューに入れて実行できるようにサポートします。 [#47758](https://github.com/pingcap/tidb/issues/47758) @[tangenta](https://github.com/tangenta)
     - `ALTER TABLE ... ROW_FORMAT`の互換性を改善 [#48754](https://github.com/pingcap/tidb/issues/48754) @[hawkingrei](https://github.com/hawkingrei)
     - `CANCEL IMPORT JOB`ステートメントを同期ステートメントに変更します [#48736](https://github.com/pingcap/tidb/issues/48736) @[D3Hunter](https://github.com/D3Hunter)
     - 空のテーブルへのインデックス追加速度の改善 [#49682](https://github.com/pingcap/tidb/issues/49682) @[zimulala](https://github.com/zimulala)
@@ -303,7 +303,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
     - 非同期タスクを照会するためのAPIエンドポイント`/async_tasks`を追加 [#15759](https://github.com/tikv/tikv/issues/15759) @[YuJuncen](https://github.com/YuJuncen)
     - gRPC モニタリングに優先度ラベルを追加して、異なる優先度のリソースグループ データを表示します [#49318](https://github.com/pingcap/tidb/issues/49318) @[bufferflies](https://github.com/bufferflies)
-    - `readpool.unified.max-tasks-per-worker`の値を動的に調整することで、優先度に基づいて実行中のタスク数を個別に計算できます [#16026](https://github.com/tikv/tikv/issues/16026) @[glorv](https://github.com/glorv)
+    - `readpool.unified.max-tasks-per-worker`の値の動的な調整をサポートします。この設定により、優先度に基づいて実行中のタスク数を個別に計算できます [#16026](https://github.com/tikv/tikv/issues/16026) @[glorv](https://github.com/glorv)
     - GCスレッド数を動的に調整する機能をサポート。デフォルト値は`1` [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
 - PD
@@ -359,7 +359,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - TiDBサーバーが監査ログ用のEnterpriseプラグイン使用時に大量のリソースを消費する可能性がある問題を修正 [#49273](https://github.com/pingcap/tidb/issues/49273) @[lcwangchao](https://github.com/lcwangchao)
     - 特定のシナリオでオプティマイザがTiFlash選択パスを DUAL テーブルに誤って変換する問題を修正 [#49285](https://github.com/pingcap/tidb/issues/49285) @[AilinKid](https://github.com/AilinKid)
     - `UPDATE`または`DELETE`文に`WITH RECURSIVE` CTE が含まれている場合、誤った結果が生じる可能性がある問題を修正しました [#48969](https://github.com/pingcap/tidb/issues/48969) @[winoros](https://github.com/winoros)
-    - IndexHashJoinオペレーターを含むクエリがメモリ使用量`tidb_mem_quota_query`超えると停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
+    - メモリ使用量が`tidb_mem_quota_query`を超えると、IndexHashJoinオペレーターを含むクエリが停止する問題を修正しました [#49033](https://github.com/pingcap/tidb/issues/49033) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - 非厳格モード ( `sql_mode = ''` ) で`INSERT`実行中に切り捨てが発生し、エラーが報告される問題を修正しました [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     - CTEクエリが再試行処理中にエラー`type assertion for CTEStorageMap failed`を報告する可能性がある問題を修正 [#46522](https://github.com/pingcap/tidb/issues/46522) @[tiancaiamao](https://github.com/tiancaiamao)
     - `LIMIT`と`ORDER BY`がネストされた`UNION`クエリで無効になる可能性がある問題を修正 [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
@@ -368,11 +368,11 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - 一部のタイムゾーンでサマータイムが正しく表示されない問題を修正 [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     - `AUTO_ID_CACHE=1`を含むテーブルが多数存在する場合に gRPC クライアントのリークを引き起こす可能性がある問題を修正しました [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
     - TiDBサーバーが正常なシャットダウン中にpanicする可能性がある問題を修正しました [#36793](https://github.com/pingcap/tidb/issues/36793) @[bb7133](https://github.com/bb7133)
-    - `ADMIN RECOVER INDEX`が`ERROR 1105`を報告する問題を、 `CommonHandle`を含むテーブルを処理する際に修正します。 [#47687](https://github.com/pingcap/tidb/issues/47687) @[Defined2014](https://github.com/Defined2014)
+    - `CommonHandle`を含むテーブルを処理する際に`ADMIN RECOVER INDEX`が`ERROR 1105`を報告する問題を修正します。 [#47687](https://github.com/pingcap/tidb/issues/47687) @[Defined2014](https://github.com/Defined2014)
     - `ALTER TABLE t PARTITION BY`を実行する際に配置ルールを指定すると`ERROR 8239`というエラーが報告される問題を修正しました。 [#48630](https://github.com/pingcap/tidb/issues/48630) @[mjonss](https://github.com/mjonss)
     - `INFORMATION_SCHEMA.CLUSTER_INFO`の`START_TIME`列タイプが無効であるという問題を修正します [#45221](https://github.com/pingcap/tidb/issues/45221) @[dveeden](https://github.com/dveeden)
-    - `EXTRA`の列タイプが無効であるために`INFORMATION_SCHEMA.COLUMNS`エラー`Data Too Long, field len 30, data len 45`が発生する問題を修正しました。 [#42030](https://github.com/pingcap/tidb/issues/42030) @[tangenta](https://github.com/tangenta)
-    - `IN (...)`で`INFORMATION_SCHEMA.STATEMENTS_SUMMARY`で異なるプランダイジェストが発生する問題を修正 [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
+    - `INFORMATION_SCHEMA.COLUMNS`の`EXTRA`列のタイプが無効であるために、エラー`Data Too Long, field len 30, data len 45`が発生する問題を修正しました。 [#42030](https://github.com/pingcap/tidb/issues/42030) @[tangenta](https://github.com/tangenta)
+    - `IN (...)`によって`INFORMATION_SCHEMA.STATEMENTS_SUMMARY`で異なるプランダイジェストが生成される問題を修正 [#33559](https://github.com/pingcap/tidb/issues/33559) @[King-Dylan](https://github.com/King-Dylan)
     - `TIME`型を`YEAR`型に変換する際に、返される結果に`TIME`と年が混在する問題を修正しました。 [#48557](https://github.com/pingcap/tidb/issues/48557) @[YangKeao](https://github.com/YangKeao)
     - `tidb_enable_collect_execution_info`を無効にするとコプロセッサキャッシュがpanicを起こす問題を修正 [#48212](https://github.com/pingcap/tidb/issues/48212) @[you06](https://github.com/you06)
     - `shuffleExec`が予期せず終了した際にTiDBがクラッシュする問題を修正 [#48230](https://github.com/pingcap/tidb/issues/48230) @[wshwsh12](https://github.com/wshwsh12)
@@ -382,30 +382,30 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - `ILIKE`関数が一部のシナリオでデータ競合を引き起こす可能性がある問題を修正しました [#49677](https://github.com/pingcap/tidb/issues/49677) @[lcwangchao](https://github.com/lcwangchao)
     - `STREAM_AGG()` が CI を正しく処理しないためにクエリ結果が正しくない問題を修正します [#49902](https://github.com/pingcap/tidb/issues/49902) @[wshwsh12](https://github.com/wshwsh12)
     - `TIME`への変換時にエンコードが失敗する問題を修正 [#47346](https://github.com/pingcap/tidb/issues/47346) @[wshwsh12](https://github.com/wshwsh12)
-    - `ENFORCED`制約内の`CHECK`オプションの動作がMySQL 8.0と矛盾する問題を修正しました。 [#47567](https://github.com/pingcap/tidb/issues/47567) [#47631](https://github.com/pingcap/tidb/issues/47631) @[jiyfhust](https://github.com/jiyfhust)
+    - `CHECK`制約内の`ENFORCED`オプションの動作がMySQL 8.0と矛盾する問題を修正しました。 [#47567](https://github.com/pingcap/tidb/issues/47567) [#47631](https://github.com/pingcap/tidb/issues/47631) @[jiyfhust](https://github.com/jiyfhust)
     - `CHECK`制約を持つDDL文が停止する問題を修正 [#47632](https://github.com/pingcap/tidb/issues/47632) @[jiyfhust](https://github.com/jiyfhust)
     - メモリ不足が原因でDDL文のインデックス追加が失敗する問題を修正 [#47862](https://github.com/pingcap/tidb/issues/47862) @[GMHDBJD](https://github.com/GMHDBJD)
     - `ADD INDEX`の実行中にクラスターをアップグレードすると、データがインデックスと不整合になる可能性がある問題を修正しました [#46306](https://github.com/pingcap/tidb/issues/46306) @[zimulala](https://github.com/zimulala)
     - `tidb_mem_quota_query`システム変数を更新した後に`ADMIN CHECK`を実行すると`ERROR 8175`が返される問題を修正 [#49258](https://github.com/pingcap/tidb/issues/49258) @[tangenta](https://github.com/tangenta)
-    - `ALTER TABLE`外部キーで参照される列の型を変更した際に、 `DECIMAL`の精度変更がエラーとして報告されない問題を修正しました。 [#49836](https://github.com/pingcap/tidb/issues/49836) @[yoshikipom](https://github.com/yoshikipom)
-    - `ALTER TABLE`外部キーで参照される列の型を変更する際に、 `INTEGER`の長さの変更が誤ってエラーとして報告される問題を修正しました。 [#47702](https://github.com/pingcap/tidb/issues/47702) @[yoshikipom](https://github.com/yoshikipom)
+    - `ALTER TABLE`が外部キーで参照される列の型を変更した際に、 `DECIMAL`の精度変更がエラーとして報告されない問題を修正しました。 [#49836](https://github.com/pingcap/tidb/issues/49836) @[yoshikipom](https://github.com/yoshikipom)
+    - `ALTER TABLE`が外部キーで参照される列の型を変更する際に、 `INTEGER`の長さの変更が誤ってエラーとして報告される問題を修正しました。 [#47702](https://github.com/pingcap/tidb/issues/47702) @[yoshikipom](https://github.com/yoshikipom)
     - 一部のシナリオで式のインデックスが除数が0であることを検出しない問題を修正しました [#50053](https://github.com/pingcap/tidb/issues/50053) @[lcwangchao](https://github.com/lcwangchao)
     - TiDBノードが多数のテーブルを処理する際にOOMエラーが発生する可能性がある問題を軽減する [#50077](https://github.com/pingcap/tidb/issues/50077) @[zimulala](https://github.com/zimulala)
     - クラスターのローリング再起動中にDDLが実行状態のままになる問題を修正 [#50073](https://github.com/pingcap/tidb/issues/50073) @[tangenta](https://github.com/tangenta)
     - `PointGet`または`BatchPointGet`を使用してパーティションテーブルのグローバルインデックスにアクセスした際に、結果が正しくない可能性がある問題を修正しました [#47539](https://github.com/pingcap/tidb/issues/47539) @[L-maple](https://github.com/L-maple)
-    - 生成列のインデックスが表示されるように設定されている場合、MPP プランが選択されない可能性がある問題を修正 [#47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
-    - `LIMIT`が`OR`型`Index Merge`にプッシュされない可能性がある [#48588](https://github.com/pingcap/tidb/issues/48588) @[AilinKid](https://github.com/AilinKid)
+    - 生成列のインデックスが可視に設定されている場合、MPP プランが選択されない可能性がある問題を修正 [#47766](https://github.com/pingcap/tidb/issues/47766) @[AilinKid](https://github.com/AilinKid)
+    - `LIMIT`が`OR`型`Index Merge`にプッシュダウンされない可能性がある問題を修正 [#48588](https://github.com/pingcap/tidb/issues/48588) @[AilinKid](https://github.com/AilinKid)
     - BRインポート後に`mysql.bind_info`テーブルに重複した組み込み行が存在する可能性がある問題を修正します [#46527](https://github.com/pingcap/tidb/issues/46527) @[qw4990](https://github.com/qw4990)
     - パーティションが削除された後、パーティションテーブルの統計情報が期待どおりに更新されない問題を修正 [#48182](https://github.com/pingcap/tidb/issues/48182) @[Rustin170506](https://github.com/Rustin170506)
     - パーティションテーブルのグローバル統計情報の同時マージ中にエラーが返される可能性がある問題を修正 [#48713](https://github.com/pingcap/tidb/issues/48713) @[hawkingrei](https://github.com/hawkingrei)
     - PADDING SPACE を持つ列のインデックス範囲スキャンに`LIKE`演算子が使用されている場合、クエリ結果が正しくないことがある問題を修正します [#48821](https://github.com/pingcap/tidb/issues/48821) @[time-and-fate](https://github.com/time-and-fate)
     - 生成列がメモリ上で同時読み取りと書き込みを引き起こし、データ競合が発生する可能性がある問題を修正しました [#44919](https://github.com/pingcap/tidb/issues/44919) @[tangenta](https://github.com/tangenta)
-    - `ANALYZE TABLE` （トップN統計を収集しないことを示す）が指定されている場合でも、 `WITH 0 TOPN`がトップ1統計を収集してしまう問題を修正しました。 [#49080](https://github.com/pingcap/tidb/issues/49080) @[hawkingrei](https://github.com/hawkingrei)
+    - `WITH 0 TOPN` （トップN統計を収集しないことを示す）が指定されている場合でも、 `ANALYZE TABLE`がトップ1統計を収集してしまう問題を修正しました。 [#49080](https://github.com/pingcap/tidb/issues/49080) @[hawkingrei](https://github.com/hawkingrei)
     - 無効なオプティマイザヒントによって有効なヒントが無効になる可能性がある問題を修正 [#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
     - ハッシュパーティションテーブルの統計情報が、パーティションの追加、削除、再編成、または`TRUNCATE`を行った際に適切に更新されない問題を修正します。 [#48235](https://github.com/pingcap/tidb/issues/48235) [#48233](https://github.com/pingcap/tidb/issues/48233) [#48226](https://github.com/pingcap/tidb/issues/48226) [#48231](https://github.com/pingcap/tidb/issues/48231) @[Rustin170506](https://github.com/Rustin170506)
     - 自動統計更新の時間枠を設定した後でも、その時間枠外で統計が更新される可能性がある問題を修正しました [#49552](https://github.com/pingcap/tidb/issues/49552) @[hawkingrei](https://github.com/hawkingrei)
     - パーティションテーブルを非パーティションテーブルに変換した際に、古い統計情報が自動的に削除されない問題を修正します [#49547](https://github.com/pingcap/tidb/issues/49547) @[Rustin170506](https://github.com/Rustin170506)
-    - `TRUNCATE TABLE`を使用してパーティションテーブルからデータをクリアしたときに、古い統計情報が自動的に削除されない問題を修正します [#49663](https://github.com/pingcap/tidb/issues/49663) @[Rustin170506](https://github.com/Rustin170506)
+    - `TRUNCATE TABLE`を使用して非パーティションテーブルからデータをクリアしたときに、古い統計情報が自動的に削除されない問題を修正します [#49663](https://github.com/pingcap/tidb/issues/49663) @[hi-rustin](https://github.com/Rustin170506)
     - クエリが強制ソートを行うオプティマイザヒント（ `STREAM_AGG()`など）を使用し、かつ実行計画に`IndexMerge`が含まれている場合に、強制ソートが無効になる可能性がある問題を修正します。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
     - ヒストグラムの境界に`NULL`が含まれる場合、ヒストグラム統計が読み取り可能な文字列に解析されない可能性がある問題を修正 [#49823](https://github.com/pingcap/tidb/issues/49823) @[AilinKid](https://github.com/AilinKid)
     - `GROUP_CONCAT(ORDER BY)`構文を含むクエリを実行するとエラーが返される可能性がある問題を修正 [#49986](https://github.com/pingcap/tidb/issues/49986) @[AilinKid](https://github.com/AilinKid)
@@ -422,7 +422,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - 破損したSSTファイルが他のTiKVノードに拡散し、TiKVがpanicする可能性がある問題を修正しました [#15986](https://github.com/tikv/tikv/issues/15986) @[Connor1996](https://github.com/Connor1996)
     - オンラインの安全でない回復がマージ中止を処理できない問題を修正 [#15580](https://github.com/tikv/tikv/issues/15580) @[v01dstar](https://github.com/v01dstar)
     - スケールアウト時に DR Auto-Sync のジョイント状態がタイムアウトする可能性がある問題を修正します [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
-    - Titan の`blob-run-mode`オンラインで更新できない問題を修正 [#15978](https://github.com/tikv/tikv/issues/15978) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - Titan の`blob-run-mode`をオンラインで更新できない問題を修正 [#15978](https://github.com/tikv/tikv/issues/15978) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - Resolved TSが2時間ブロックされる可能性がある問題を修正[#11847](https://github.com/tikv/tikv/issues/11847) [#15520](https://github.com/tikv/tikv/issues/15520) [#39130](https://github.com/pingcap/tidb/issues/39130) @[overvenus](https://github.com/overvenus)
     - `notLeader`または`regionNotFound`に遭遇した際に Flashback が停止する可能性がある問題を修正しました [#15712](https://github.com/tikv/tikv/issues/15712) @[HuSharp](https://github.com/HuSharp)
     - TiKV の実行が非常に遅い場合、リージョンのマージ後にpanicする可能性がある問題を修正 [#16111](https://github.com/tikv/tikv/issues/16111) @[overvenus](https://github.com/overvenus)
@@ -445,8 +445,8 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
     - TiFlashがクエリ中にメモリ制限に遭遇した際のメモリリークの問題を修正 [#8447](https://github.com/pingcap/tiflash/issues/8447) @[JinheLin](https://github.com/JinheLin)
     - `FLASHBACK DATABASE`を実行後もTiFlashレプリカのデータがガベージコレクションされてしまう問題を修正 [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - クエリの遅延によりメモリ使用量が大幅に増加する問題を修正 [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
-    - `RECOVER TABLE`および`FLASHBACK TABLE`TiFlash`CREATE TABLE` `DROP TABLE`を介して一部の TiFlash レプリカデータを復元できない問題 [#1664](https://github.com/pingcap/tiflash/issues/1664) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - スロークエリによりメモリ使用量が大幅に増加する問題を修正 [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)
+    - `CREATE TABLE`と`DROP TABLE`が頻繁に実行されるシナリオで、 `RECOVER TABLE`または`FLASHBACK TABLE`を介して一部の TiFlash レプリカデータを復元できない問題を修正 [#1664](https://github.com/pingcap/tiflash/issues/1664) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `ColumnRef in (Literal, Func...)`のようなフィルタリング条件を指定してクエリを実行すると、クエリ結果が正しくなくなる問題を修正 [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - DDL の同時実行中にTiFlash で競合が発生した場合のTiFlash panic問題を修正 [#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TiFlash がストレージとコンピューティングの分離アーキテクチャの下でオブジェクトストレージデータの GC 所有者を選択できない場合がある問題を修正 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -454,7 +454,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
     - TiFlashが`ENUM`の値が0の場合に`ENUM`を正しく処理しない問題を修正 [#8311](https://github.com/pingcap/tiflash/issues/8311) @[solotzg](https://github.com/solotzg)
     - `INET_NTOA()`式の互換性の問題を修正 [#8211](https://github.com/pingcap/tiflash/issues/8211) @[solotzg](https://github.com/solotzg)
     - ストリーム読み取り中に複数のパーティションテーブルをスキャンする際に発生する可能性のあるメモリ不足（OOM）問題を修正 [#8505](https://github.com/pingcap/tiflash/issues/8505) @[gengliqi](https://github.com/gengliqi)
-    - 短いクエリを実行すると過剰な情報ログが正常に出力される問題を修正 [#8592](https://github.com/pingcap/tiflash/issues/8592) @[windtalker](https://github.com/windtalker)
+    - 正常に実行された短いクエリが過剰な情報ログを出力する問題を修正 [#8592](https://github.com/pingcap/tiflash/issues/8592) @[windtalker](https://github.com/windtalker)
     - TiFlashが停止時にクラッシュする可能性がある問題を修正 [#8550](https://github.com/pingcap/tiflash/issues/8550) @[guo-shaoge](https://github.com/guo-shaoge)
     - 定数文字列パラメーターを含む`GREATEST`または`LEAST`関数で発生する可能性のあるランダムな無効なメモリアクセスの問題を修正します [#8604](https://github.com/pingcap/tiflash/issues/8604) @[windtalker](https://github.com/windtalker)
 
@@ -480,7 +480,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
     - TiDB Data Migration (DM)
 
-        - DM で「イベントタイプ truncate が無効です」というエラーが発生し、アップグレードが失敗する問題を修正します [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
+        - DM で`event type truncate not valid`エラーが発生し、アップグレードが失敗する問題を修正します [#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
         - GTID モードでデータをレプリケートする際のパフォーマンス低下の問題を修正 [#9676](https://github.com/pingcap/tiflow/issues/9676) @[feran-morgan-pingcap](https://github.com/feran-morgan-pingcap)
         - 下流テーブル構造に`shard_row_id_bits`が含まれている場合にマイグレーションタスクエラーが発生する問題を修正 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
 
