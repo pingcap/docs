@@ -543,7 +543,7 @@ In v6.6.0-DMR, the key new features and improvements are as follows:
     - Fix the PD OOM issue when there is a large number of Regions but the table ID cannot be pushed down when querying some virtual tables using `Prepare` or `Execute` [#39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
     - Fix the issue that data race might occur when an index is added [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
     - Fix the `can't find proper physical plan` issue caused by virtual columns [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)
-    - Fix the issue that TiDB cannot restart after global bindings are created for partition tables in dynamic trimming mode [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
+    - Fix the issue that TiDB cannot restart after global bindings are created for partition tables in dynamic pruning mode [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
     - Fix the issue that `auto analyze` causes graceful shutdown to take a long time [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - Fix the panic of the TiDB server when the IndexMerge operator triggers memory limiting behaviors [#41036](https://github.com/pingcap/tidb/pull/41036) @[guo-shaoge](https://github.com/guo-shaoge)
     - Fix the issue that the `SELECT * FROM table_name LIMIT 1` query on partitioned tables is slow [#40741](https://github.com/pingcap/tidb/pull/40741) @[solotzg](https://github.com/solotzg)
