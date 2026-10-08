@@ -128,8 +128,8 @@ The output is as follows:
 | Prev_stmt                                  | longtext        | YES  |      | NULL    |       |
 | Session_connect_attrs                      | json            | YES  |      | NULL    |       |
 | Query                                      | longtext        | YES  |      | NULL    |       |
-| Prewrite_backoff_types                     | varchar(1024)   | YES  |      | NULL    |       |
-| Commit_backoff_types                       | varchar(1024)   | YES  |      | NULL    |       |
+| Prewrite_Backoff_types                     | varchar(1024)   | YES  |      | NULL    |       |
+| Commit_Backoff_types                       | varchar(1024)   | YES  |      | NULL    |       |
 | Cop_backoff_types                          | varchar(1024)   | YES  |      | NULL    |       |
 +--------------------------------------------+-----------------+------+------+---------+-------+
 93 rows in set (0.00 sec)
@@ -147,11 +147,11 @@ The following columns expose the backoff types recorded for different execution 
 
 | Column | Source and scope |
 | --- | --- |
-| `Prewrite_backoff_types` | The `Prewrite_Backoff_types` slow log field. It records types from the prewrite batch with the longest cumulative backoff time, rather than all prewrite batches. |
-| `Commit_backoff_types` | The `Commit_Backoff_types` slow log field. It records backoff types in the commit phase. |
+| `Prewrite_Backoff_types` | The `Prewrite_Backoff_types` slow log field. It records types from the prewrite batch with the longest cumulative backoff time, rather than all prewrite batches. |
+| `Commit_Backoff_types` | The `Commit_Backoff_types` slow log field. It records backoff types in the commit phase. |
 | `Cop_backoff_types` | Derived from `Cop_backoff_{type}_total_times` fields in the slow log. TiDB deduplicates and sorts the types across these fields. |
 
-These values are strings with space-separated types enclosed in brackets, such as `[txnLock]` or `[regionMiss txnLockFast]`. They are not JSON arrays. `Prewrite_backoff_types` and `Commit_backoff_types` preserve the order and duplicates from the corresponding log fields.
+These values are strings with space-separated types enclosed in brackets, such as `[txnLock]` or `[regionMiss txnLockFast]`. They are not JSON arrays. `Prewrite_Backoff_types` and `Commit_Backoff_types` preserve the order and duplicates from the corresponding log fields.
 
 If the corresponding fields are absent from a log entry, these columns return an empty string (`''`), rather than SQL `NULL`. An empty string does not prove that the statement had no backoff. These columns do not provide backoff types for `Point_Get` requests or independent pessimistic `LockKeys` requests.
 
@@ -276,8 +276,8 @@ The output is as follows:
 | Prev_stmt                                  | longtext        | YES  |      | NULL    |       |
 | Session_connect_attrs                      | json            | YES  |      | NULL    |       |
 | Query                                      | longtext        | YES  |      | NULL    |       |
-| Prewrite_backoff_types                     | varchar(1024)   | YES  |      | NULL    |       |
-| Commit_backoff_types                       | varchar(1024)   | YES  |      | NULL    |       |
+| Prewrite_Backoff_types                     | varchar(1024)   | YES  |      | NULL    |       |
+| Commit_Backoff_types                       | varchar(1024)   | YES  |      | NULL    |       |
 | Cop_backoff_types                          | varchar(1024)   | YES  |      | NULL    |       |
 +--------------------------------------------+-----------------+------+------+---------+-------+
 94 rows in set (0.00 sec)
