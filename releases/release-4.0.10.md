@@ -50,7 +50,7 @@ TiDB バージョン: 4.0.10
 
     - バッチクライアントのタイムアウトを引き起こす可能性のある同時実行バグを修正[#22336](https://github.com/pingcap/tidb/pull/22336)
     - 同時ベースラインキャプチャによって発生する重複バインディングの問題を修正[#22295](https://github.com/pingcap/tidb/pull/22295)
-    - ログレベルが`'debug'` ときにSQL文にバインドされたベースラインキャプチャを機能させる [#22293](https://github.com/pingcap/tidb/pull/22293)
+    - ログレベルが`'debug'`のときにSQL文にバインドされたベースラインキャプチャを機能させる [#22293](https://github.com/pingcap/tidb/pull/22293)
     - リージョンマージが発生したときにGCロックを正しく解放する[#22267](https://github.com/pingcap/tidb/pull/22267)
     - `datetime`型のユーザー変数に正しい値を返す [#22143](https://github.com/pingcap/tidb/pull/22143)
     - 複数のテーブルフィルターがある場合のインデックスマージの使用に関する問題を修正[#22124](https://github.com/pingcap/tidb/pull/22124)
@@ -58,12 +58,12 @@ TiDB バージョン: 4.0.10
     - スキーマ変更によって発生する誤った結果の問題を修正しました [#21596](https://github.com/pingcap/tidb/pull/21596)
     - `ALTER TABLE` の不要な列フラグの変更を避ける [#21474](https://github.com/pingcap/tidb/pull/21474)
     - オプティマイザヒントで使用されるクエリブロックのテーブルエイリアスのデータベース名を設定します [#21380](https://github.com/pingcap/tidb/pull/21380)
-    - `IndexHashJoin`と`IndexMergeJoin`適切なオプティマイザヒントを生成する[#21020](https://github.com/pingcap/tidb/pull/21020)
+    - `IndexHashJoin`と`IndexMergeJoin`の適切なオプティマイザヒントを生成する[#21020](https://github.com/pingcap/tidb/pull/21020)
 
 - TiKV
 
-    - 準備完了とピア間の誤ったマッピングを修正 [#9409](https://github.com/tikv/tikv/pull/9409)
-    - `security.redact-info-log`が`true`に設定すると一部のログが秘匿化されない問題を修正しました [#9314](https://github.com/tikv/tikv/pull/9314)
+    - ready とピア間の誤ったマッピングを修正 [#9409](https://github.com/tikv/tikv/pull/9409)
+    - `security.redact-info-log`が`true`に設定されている場合一部のログが秘匿化されない問題を修正しました [#9314](https://github.com/tikv/tikv/pull/9314)
 
 - PD
 
@@ -74,7 +74,7 @@ TiDB バージョン: 4.0.10
 
     - TiFlashが古いバージョンの TiDB スキーマを処理できないために起動に失敗する問題を修正しました
     - RedHatシステムで`cpu_time`が正しく処理されないためTiFlashが起動に失敗する問題を修正
-    - `path_realtime_mode` `true`に設定するとTiFlash が起動に失敗する問題を修正しました
+    - `path_realtime_mode`を`true`に設定するとTiFlash が起動に失敗する問題を修正しました
     - 3つのパラメータを持つ`substr`関数を呼び出すときに誤った結果が返される問題を修正しました
     - TiFlashがロスレスの変更であっても`Enum`タイプの変更をサポートしない問題を修正
 
@@ -83,7 +83,7 @@ TiDB バージョン: 4.0.10
     - TiCDC
 
         - 古いメタデータにより、新しく作成された変更フィードが異常になる可能性があるバグを修正しました[#1184](https://github.com/pingcap/tiflow/pull/1184)
-        - クローズド通知で受信者を作成する問題を修正しました [#1199](https://github.com/pingcap/tiflow/pull/1199)
+        - クローズされた notifier 上で receiver を作成する問題を修正しました [#1199](https://github.com/pingcap/tiflow/pull/1199)
         - TiCDC 所有者が etcd ウォッチクライアントでメモリを過剰に消費する可能性があるバグを修正しました [#1227](https://github.com/pingcap/tiflow/pull/1227)
         - `max-batch-size`が有効にならない問題を修正[#1253](https://github.com/pingcap/tiflow/pull/1253)
         - キャプチャ情報が構築される前に古いタスクをクリーンアップする問題を修正[#1280](https://github.com/pingcap/tiflow/pull/1280)
@@ -91,13 +91,13 @@ TiDB バージョン: 4.0.10
 
     - Dumpling
 
-        - デフォルトの動作を[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) に設定して、TiDBのメモリ不足（OOM）を回避します。 [#233](https://github.com/pingcap/dumpling/pull/233)
+        - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)のデフォルトの動作を設定して、TiDBのメモリ不足（OOM）を回避します。 [#233](https://github.com/pingcap/dumpling/pull/233)
 
     - Backup & Restore (BR)
 
         - GCS でBR v4.0.8を使用してバックアップされたファイルをBR v4.0.9で復元できない問題を修正しました。 [#688](https://github.com/pingcap/br/pull/688)
-        - GCSstorageURL にプレフィックスがない場合にBR がパニックになる問題を修正しました [#673](https://github.com/pingcap/br/pull/673)
-        - BR OOM 回避するために、デフォルトでバックアップ統計を無効にする [#693](https://github.com/pingcap/br/pull/693)
+        - GCS ストレージ URL にプレフィックスがない場合にBR がパニックになる問題を修正しました [#673](https://github.com/pingcap/br/pull/673)
+        - BR の OOM を回避するために、デフォルトでバックアップ統計を無効にする [#693](https://github.com/pingcap/br/pull/693)
 
     - TiDB Binlog
 
