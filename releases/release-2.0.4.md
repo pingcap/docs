@@ -29,13 +29,13 @@ summary: "TiDB 2.0.4は2018年6月15日にリリースされ、システムの�
 
 ## PD {#pd}
 
-- 未設定のスケジュール引数`max-pending-peer-count`の動作を、最大`PendingPeer`秒の制限なしに変更して改善しました。
+- 未設定のスケジュール引数`max-pending-peer-count`の動作を、`PendingPeer`の最大数を無制限に変更して改善しました。
 
 ## TiKV {#tikv}
 
 - デバッグ用のRocksDB `PerfContext`インターフェースを追加する
 - `import-mode`パラメータを削除します
 - `tikv-ctl`に`region-properties`コマンドを追加
-- RocksDBのtombstoneが多数存在する場合に`reverse-seek`遅くなる問題を修正
+- RocksDBのtombstoneが多数存在する場合に`reverse-seek`が遅くなる問題を修正
 - `do_sub`によって引き起こされたクラッシュの問題を修正
 - GC がデータの複数のバージョンに遭遇したときにログを記録するようにする

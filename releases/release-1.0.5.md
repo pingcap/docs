@@ -14,7 +14,7 @@ summary: TiDB 1.0.5は2017年12月26日にリリースされました。アッ�
 - [スロークエリを別のファイルに出力することをサポートします](https://github.com/pingcap/tidb/pull/5484)
 - [新しいセッションを作成するときに、TiKV から`TimeZone`変数を読み込みます](https://github.com/pingcap/tidb/pull/5479)
 - [スキーマ状態チェックをサポートし、 `Show Create Table`および`Analyze`文がパブリック テーブル/インデックスのみを処理するようにします](https://github.com/pingcap/tidb/pull/5474)
-- [`set transaction read only` `tx_read_only`変数に影響します](https://github.com/pingcap/tidb/pull/5491)
+- [`set transaction read only`は`tx_read_only`変数に影響する必要があります](https://github.com/pingcap/tidb/pull/5491)
 - [ロールバック時に増分統計データをクリーンアップします](https://github.com/pingcap/tidb/pull/5391)
 - [`Show Create Table`文でインデックスの長さが欠落している問題を修正しました](https://github.com/pingcap/tidb/pull/5421)
 

@@ -11,7 +11,7 @@ summary: TiDB 1.0は、MySQLとの互換性、SQLの最適化、安定性、そ�
 
 - SQL クエリ オプティマイザ:
     - コストモデルを調整する
-    - プッシュダウンを分析する
+    - `ANALYZE` のプッシュダウン
     - 関数シグネチャプッシュダウン
 - 内部データ形式を最適化して中間データのサイズを削減します
 - MySQLとの互換性を強化する
@@ -35,7 +35,7 @@ summary: TiDB 1.0は、MySQLとの互換性、SQLの最適化、安定性、そ�
 - 構成フレームワークをサポート
 - ThriftSever/JDBCおよびSpark SQLをサポート
 
-## 了承 {#acknowledgement}
+## 謝辞 {#acknowledgement}
 
 ### 以下の企業およびチームに特別な感謝を申し上げます {#special-thanks-to-the-following-enterprises-and-teams}
 

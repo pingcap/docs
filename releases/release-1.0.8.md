@@ -17,7 +17,7 @@ summary: TiDB 1.0.8がリリースされました。このアップデートに�
 - [統計差分の更新に関する問題を修正](https://github.com/pingcap/tidb/pull/5787)
 - [`Drop Column`ステートメントのpanicエラーを修正しました](https://github.com/pingcap/tidb/pull/5805)
 - [`Add Column After`ステートメントを実行する際の DML の問題を修正しました](https://github.com/pingcap/tidb/pull/5818)
-- [GCエラーのある領域を無視することでGCプロセスの安定性を向上](https://github.com/pingcap/tidb/pull/5815)
+- [GCエラーのあるリージョンを無視することでGCプロセスの安定性を向上](https://github.com/pingcap/tidb/pull/5815)
 - [GC を並行して実行して GC プロセスを高速化する](https://github.com/pingcap/tidb/pull/5850)
 - [`CREATE INDEX`文の構文サポートを提供する](https://github.com/pingcap/tidb/pull/5853)
 
