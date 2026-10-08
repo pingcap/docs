@@ -1,7 +1,12 @@
 ---
 title: Pre-GA release notes
+<<<<<<< HEAD
 summary: TiDB Pre-GA release on August 30, 2017, focuses on MySQL compatibility, SQL optimization, stability, and performance. TiDB introduces SQL query optimizer enhancements, MySQL compatibility, JSON type support, and memory consumption reduction. Placement Driver (PD) now supports manual leader change, while TiKV uses dedicated Rocksdb for Raft log storage and improves performance. TiDB Connector for Spark Beta Release implements predicates pushdown, aggregation pushdown, and range pruning, capable of running TPC+H queries.
 aliases: ['/tidb/dev/release-pre-ga/','/docs/dev/releases/release-pre-ga/','/docs/dev/releases/prega/','/tidb/v5.4/release-pre-ga','/tidb/v6.1/release-pre-ga','/tidb/v6.5/release-pre-ga','/tidb/v7.1/release-pre-ga','/tidb/v7.5/release-pre-ga','/tidb/v8.1/release-pre-ga']
+=======
+aliases: ['/docs/dev/releases/release-pre-ga/','/docs/dev/releases/prega/']
+summary: TiDB Pre-GA release on August 30, 2017, focuses on MySQL compatibility, SQL optimization, stability, and performance. TiDB introduces SQL query optimizer enhancements, MySQL compatibility, JSON type support, and memory consumption reduction. Placement Driver (PD) now supports manual leader change, while TiKV uses dedicated Rocksdb for Raft log storage and improves performance. TiDB Connector for Spark Beta Release implements predicates pushdown, aggregation pushdown, and range pruning, capable of running TPC-H queries.
+>>>>>>> e49e9581e0 (releases: fix the TPC-H benchmark name in the pre-GA release notes (#24187))
 ---
 
 # Pre-GA Release Notes
@@ -37,4 +42,4 @@ On August 30, 2017, TiDB Pre-GA is released! This release is focused on MySQL co
 + Implement the predicates pushdown
 + Implement the aggregation pushdown
 + Implement range pruning
-+ Capable of running full set of TPC+H except for one query that needs view support
++ Capable of running full set of TPC-H except for one query that needs view support
