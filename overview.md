@@ -52,7 +52,7 @@ The following video introduces key features of TiDB.
 
 - **Massive data and high concurrency scenarios**
 
-    Traditional standalone databases cannot meet the data capacity requirements of rapidly growing applications. TiDB is a cost-effective solution that adopts a separate computing and storage architecture, enabling easy scaling of computing or storage capacity separately. The computing layer supports a maximum of 512 nodes, each node supports a maximum of 1,000 concurrencies, and the maximum cluster capacity is at the PB (petabytes) level.
+    Traditional standalone databases cannot meet the data capacity requirements of rapidly growing applications. TiDB is a cost-effective solution that adopts a separate computing and storage architecture, enabling easy scaling of computing or storage capacity separately. The computing layer supports a maximum of 512 nodes. By default, each TiDB node supports 1,000 concurrent sessions, and you can adjust this limit up to 1,048,576 by configuring [`token-limit`](/tidb-configuration-file.md#token-limit). The maximum cluster capacity is at the PB (petabytes) level.
 
 - **Real-time HTAP scenarios**
 
