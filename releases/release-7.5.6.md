@@ -66,7 +66,7 @@ TiDB バージョン: 7.5.6
     - `cluster_slow_query table`をクエリするときに`ORDER BY`を使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [#51723](https://github.com/pingcap/tidb/issues/51723) @[Defined2014](https://github.com/Defined2014)
     - 仮想生成列の依存関係に属性`ON UPDATE`を持つ列が含まれている場合、更新された行のデータとそのインデックスデータが不整合になる可能性がある問題を修正しました[#56829](https://github.com/pingcap/tidb/issues/56829) @[joechenrh](https://github.com/joechenrh)
     - TiDBハートビートが失われた場合に TTL ジョブをキャンセルできない問題を修正[#57784](https://github.com/pingcap/tidb/issues/57784) @[YangKeao](https://github.com/YangKeao)
-    - パラメータが`Enum` 、または`Set`型の場合、 `Conv()`関数はTiKV にプッシュダウンされなくなりました`Bit` [#51877](https://github.com/pingcap/tidb/issues/51877) @[yibin87](https://github.com/yibin87)
+    - パラメータが`Enum` 、 `Bit` 、または`Set`型の場合、 `Conv()`関数はTiKV にプッシュダウンされなくなりました [#51877](https://github.com/pingcap/tidb/issues/51877) @[yibin87](https://github.com/yibin87)
     - ストレージとコンピューティングの分離アーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - DDL所有者が変更されるとジョブステータスが上書きされる問題を修正 [#52747](https://github.com/pingcap/tidb/issues/52747) @[D3Hunter](https://github.com/D3Hunter)
     - ハッシュパーティションテーブルで条件`is null`クエリを実行するとpanicが発生する問題を修正 [#58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014)
