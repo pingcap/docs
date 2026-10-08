@@ -43,7 +43,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiFlash MPPモードは複数の結合アルゴリズムをサポートしています。v7.1.0より前のバージョンでは、TiDBは[`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)変数と実際のデータ量に基づいて、MPPモードでブロードキャストハッシュ結合アルゴリズムを使用するかどうかを判断します。
 
-    v7.1.0 では、TiDB に[`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710)変数が導入されました。この変数は、ネットワーク伝送の最小オーバーヘッドに基づいて MPP Join アルゴリズムを選択するかどうかを制御し、この変数はデフォルトで無効になっています。この変数を`ON`に設定すると、デフォルトのアルゴリズム選択方法が v7.1.0 以前と同じままであることを示します。この変数を有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)変数を手動で調整する必要がなくなります（この時点では両方の変数は有効になりません）。TiDB は、異なる Join アルゴリズムによるネットワーク伝送のしきい値を自動的に推定し、全体的なオーバーヘッドが最小のアルゴリズムを選択します。これにより、ネットワークトラフィックが削減され、MPP クエリのパフォーマンスが向上します。
+    v7.1.0 では、TiDB に[`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710)変数が導入されました。この変数は、ネットワーク伝送の最小オーバーヘッドに基づいて MPP Join アルゴリズムを選択するかどうかを制御し、この変数はデフォルトで無効になっており、デフォルトのアルゴリズム選択方法が v7.1.0 より前と同じままであることを示します。有効にするには、この変数を`ON`に設定します。この変数を有効にすると、 [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)と[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)変数を手動で調整する必要がなくなります（この時点では両方の変数は有効になりません）。TiDB は、異なる Join アルゴリズムによるネットワーク伝送のしきい値を自動的に推定し、全体的なオーバーヘッドが最小のアルゴリズムを選択します。これにより、ネットワークトラフィックが削減され、MPP クエリのパフォーマンスが向上します。
 
     詳細については[ドキュメント](/tiflash/use-tiflash-mpp-mode.md#algorithm-support-for-the-mpp-mode)を参照してください。
 
@@ -59,7 +59,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     メモリ使用率を向上させるため、TiDB v7.1.0 では、非プリペアドプランキャッシュとプリペアドプランキャッシュのキャッシュプールを統合します。キャッシュサイズはシステム変数[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を使用して制御できます。システム変数[`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)と[`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)は非推奨です。
 
-    前方互換性を維持するため、以前のバージョンからv7.1.0以降のバージョンにアップグレードする場合、キャッシュサイズ`tidb_session_plan_cache_size`は`tidb_prepared_plan_cache_size`と同じ値のままになり、 [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)アップグレード前の設定のままになります。十分なパフォーマンステストを行った後、 `tidb_enable_non_prepared_plan_cache`を使用して非プリペアドプランキャッシュを有効化できます。新規に作成されたクラスターでは、非プリペアドプランキャッシュはデフォルトで有効化されています。
+    前方互換性を維持するため、以前のバージョンからv7.1.0以降のバージョンにアップグレードする場合、キャッシュサイズ`tidb_session_plan_cache_size`は`tidb_prepared_plan_cache_size`と同じ値のままになり、 [`tidb_enable_non_prepared_plan_cache`](/system-variables.md#tidb_enable_non_prepared_plan_cache)は、アップグレード前の設定のままになります。十分なパフォーマンステストを行った後、 `tidb_enable_non_prepared_plan_cache`を使用して非プリペアドプランキャッシュを有効化できます。新規に作成されたクラスターでは、非プリペアドプランキャッシュはデフォルトで有効化されています。
 
     非プリペアドプランキャッシュは、デフォルトではDML文をサポートしません。この制限を解除するには、システム変数[`tidb_enable_non_prepared_plan_cache_for_dml`](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710)を`ON`に設定してください。
 
@@ -107,7 +107,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - 統計のロード戦略を最適化する [#42160](https://github.com/pingcap/tidb/issues/42160) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
-    TiDB v7.1.0では、軽量統計初期化機能が実験的機能として導入されました。軽量統計初期化により、起動時にロードする必要がある統計情報の数が大幅に削減され、統計情報のロード速度が向上します。この機能により、複雑なランタイム環境におけるTiDBの安定性が向上し、TiDBノードの再起動時にサービス全体への影響が軽減されます。この機能を有効にするには、パラメータ[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710) ～ `true`を設定します。
+    TiDB v7.1.0では、軽量統計初期化機能が実験的機能として導入されました。軽量統計初期化により、起動時にロードする必要がある統計情報の数が大幅に削減され、統計情報のロード速度が向上します。この機能により、複雑なランタイム環境におけるTiDBの安定性が向上し、TiDBノードの再起動時にサービス全体への影響が軽減されます。この機能を有効にするには、パラメータ[`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)を`true`に設定します。
 
     TiDBの起動時、初期統計情報が完全にロードされる前に実行されるSQL文は、最適ではない実行計画を持つ可能性があり、パフォーマンスの問題を引き起こす可能性があります。このような問題を回避するために、TiDB v7.1.0では設定パラメータ[`force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)が導入されました。このオプションを使用すると、起動時に統計情報の初期化が完了した後にのみTiDBがサービスを提供するかどうかを制御できます。このパラメータはデフォルトで無効になっています。
 
@@ -129,10 +129,10 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     v7.1.0 以降、 TiDB Lightning には、TiB レベルのデータをインポートする際の安定性を向上させるために 4つの設定項目が追加されました。
 
-    - `tikv-importer.region-split-batch-size`バッチでリージョンを分割する際のリージョンの数を制御します。デフォルト値は`4096`です。
-    - `tikv-importer.region-split-concurrency`リージョン分割時の同時実行を制御します。デフォルト値は CPU コアの数です。
+    - `tikv-importer.region-split-batch-size`は、バッチでリージョンを分割する際のリージョンの数を制御します。デフォルト値は`4096`です。
+    - `tikv-importer.region-split-concurrency`は、リージョン分割時の同時実行を制御します。デフォルト値は CPU コアの数です。
     - `tikv-importer.region-check-backoff-limit` 、分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`で、最大再試行間隔は 2秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。
-    - `tikv-importer.pause-pd-scheduler-scope` TiDB Lightning がPD スケジューリングを一時停止する範囲を制御します。値のオプションは`"table"`と`"global"`です。デフォルト値は`"table"`です。v6.1.0 より前のバージョンの TiDB では、データインポート中にグローバルスケジューリングを一時停止する`"global"`オプションのみを設定できます。v6.1.0 以降では、ターゲットテーブルデータが格納されているリージョンのスケジューリングのみを一時停止する`"table"`オプションがサポートされています。データ量が多いシナリオでは、安定性を向上させるために、この設定項目を`"global"`に設定することをお勧めします。
+    - `tikv-importer.pause-pd-scheduler-scope`は、 TiDB Lightning がPD スケジューリングを一時停止する範囲を制御します。値のオプションは`"table"`と`"global"`です。デフォルト値は`"table"`です。v6.1.0 より前のバージョンの TiDB では、データインポート中にグローバルスケジューリングを一時停止する`"global"`オプションのみを設定できます。v6.1.0 以降では、ターゲットテーブルデータが格納されているリージョンのスケジューリングのみを一時停止する`"table"`オプションがサポートされています。データ量が多いシナリオでは、安定性を向上させるために、この設定項目を`"global"`に設定することをお勧めします。
 
     詳細については[ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
@@ -190,8 +190,8 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     SQLパフォーマンス診断では、十分な情報を取得することが鍵となります。TiDB v7.1.0では、様々な診断ツールにオプティマイザ実行時情報が追加され、実行計画の選択方法に関するより詳細な情報を提供し、SQLパフォーマンスの問題のトラブルシューティングを支援します。新しい情報には以下が含まれます。
 
-    - [`PLAN REPLAYER`](/sql-plan-replayer.md)の出力は`debug_trace.json` 。
-    - [`EXPLAIN`](/explain-walkthrough.md)の出力における`operator info`部分的な統計詳細。
+    - [`PLAN REPLAYER`](/sql-plan-replayer.md)の出力に含まれる`debug_trace.json`。
+    - [`EXPLAIN`](/explain-walkthrough.md)の出力における`operator info`の部分的な統計詳細。
     - [スロークエリ](/identify-slow-queries.md)の`Stats`フィールドの部分的な統計詳細。
 
     詳細については、 [`PLAN REPLAYER`を使用してクラスターの現場情報を保存および復元します](/sql-plan-replayer.md) 、 [`EXPLAIN`ウォークスルー](/explain-walkthrough.md) 、 [スロークエリを特定する](/identify-slow-queries.md)を参照してください。
@@ -204,7 +204,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - LDAP認証をサポート [#43580](https://github.com/pingcap/tidb/issues/43580) @[YangKeao](https://github.com/YangKeao)
 
-    v7.1.0 以降、TiDB は LDAP 認証をサポートし、 `authentication_ldap_sasl`と`authentication_ldap_simple` 2つの認証プラグインを提供します。
+    v7.1.0 以降、TiDB は LDAP 認証をサポートし、 `authentication_ldap_sasl`と`authentication_ldap_simple`の2つの認証プラグインを提供します。
 
     詳細については[ドキュメント](/security-compatibility-with-mysql.md)を参照してください。
 
@@ -214,13 +214,13 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     - より詳細な監査イベント定義とよりきめ細かな監査設定のために、「フィルター」と「ルール」の概念を導入します。
     - JSON 形式でのルールの定義をサポートし、よりユーザーフレンドリーな構成方法を提供します。
-    - 自動ログローテーションとスペース管理関数を追加し、保持時間とログサイズの 2つの次元でのログローテーションの構成をサポートします。
+    - 自動ログローテーションとスペース管理機能を追加し、保持時間とログサイズの 2つの次元でのログローテーションの構成をサポートします。
     - 監査ログをTEXTと JSON 形式の両方で出力できるようにすることで、サードパーティツールとの統合が容易になります。
     - 監査ログの秘匿化をサポートします。セキュリティ強化のため、すべてのリテラルを置き換えることができます。
 
     データベース監査は、TiDB Enterprise Editionの重要な機能です。この機能は、企業のデータセキュリティとコンプライアンスを確保するための強力な監視・監査ツールを提供します。企業の管理者は、データベース操作の発生源と影響を追跡し、不正なデータ盗難や改ざんを防止することができます。さらに、データベース監査は、企業が様々な規制やコンプライアンス要件を満たし、法的および倫理的コンプライアンスを確保するのにも役立ちます。この機能は、企業の情報セキュリティにとって重要なアプリケーション価値を持っています。
 
-    詳細については、 [ユーザーガイド](https://static.pingcap.com/files/2023/09/18204824/TiDB-Database-Auditing-User-Guide1.pdf)ご覧ください。この機能はTiDB Enterprise Editionに含まれています。この機能を使用するには、 [TiDB Enterprise](https://www.pingcap.com/tidb-enterprise)ページに移動してTiDB Enterprise Editionを入手してください。
+    詳細については、 [ユーザーガイド](https://static.pingcap.com/files/2023/09/18204824/TiDB-Database-Auditing-User-Guide1.pdf)をご覧ください。この機能はTiDB Enterprise Editionに含まれています。この機能を使用するには、 [TiDB Enterprise](https://www.pingcap.com/tidb-enterprise)ページに移動してTiDB Enterprise Editionを入手してください。
 
 ## 互換性の変更 {#compatibility-changes}
 
@@ -234,13 +234,13 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステムテーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取ることができません。
 
-- TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン &gt;= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
+- TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン >= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
-- TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)を使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、問題を参照してください。この問題が発生した場合は、機能[TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)を使用してデータを復元できます。 [#44292](https://github.com/pingcap/tidb/issues/44292)
+- TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)を使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、 issue [#44292](https://github.com/pingcap/tidb/issues/44292)を参照してください。この問題が発生した場合は、 [TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)機能を使用してデータを復元できます。
 
 ### システム変数 {#system-variables}
 
-| 変数名                                                                                                                                     | タイプを変更   | 説明                                                                                                                                                                                                                                                                                                                                                                                              |
+| 変数名                                                                                                                                     | 変更の種類   | 説明                                                                                                                                                                                                                                                                                                                                                                                              |
 | --------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)                   | 非推奨      | デフォルト値を`OFF`から`ON`に変更します。 [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)の場合、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。                                                                                                                                                                                         |
 | [`tidb_non_prepared_plan_cache_size`](/system-variables.md#tidb_non_prepared_plan_cache_size)                                           | 非推奨      | バージョン7.1.0以降、このシステム変数は非推奨となりました。[`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710)を指定することで、キャッシュ可能なプランの最大数を制御できます。                                                                                                                                                                                                                                |
@@ -250,7 +250,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)                     | 変更     | バージョン7.1.0以降で有効となり、負荷ベースのレプリカ読み取りをトリガーするためのしきい値を制御します。追加のテストを経て、デフォルト値を`"0s"`から`"1s"`に変更します。                                                                                                                                                                                                                                                                                                    |
 | [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700)                         | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、 TiFlash の遅延マテリアライゼーション機能がデフォルトで有効になっていることを意味します。                                                                                                                                                                                                                                                                                                                  |
 | [`authentication_ldap_sasl_auth_method_name`](/system-variables.md#authentication_ldap_sasl_auth_method_name-new-in-v710)               | 新しく追加された | LDAP SASL 認証における認証方法名を指定します。                                                                                                                                                                                                                                                                                                                                                                    |
-| [`authentication_ldap_sasl_bind_base_dn`](/system-variables.md#authentication_ldap_sasl_bind_base_dn-new-in-v710)                       | 新しく追加された | LDAP SASL認証における検索ツリー内の検索範囲を制限します。`AS ...`の句を指定せずにユーザーが作成された場合、TiDBはユーザー名に基づいてLDAPサーバー内の`dn`の句を自動的に検索します。                                                                                                                                                                                                                                                                                      |
+| [`authentication_ldap_sasl_bind_base_dn`](/system-variables.md#authentication_ldap_sasl_bind_base_dn-new-in-v710)                       | 新しく追加された | LDAP SASL認証における検索ツリー内の検索範囲を制限します。`AS ...`の句を指定せずにユーザーが作成された場合、TiDBはユーザー名に基づいてLDAPサーバー内の`dn`を自動的に検索します。                                                                                                                                                                                                                                                                                      |
 | [`authentication_ldap_sasl_bind_root_dn`](/system-variables.md#authentication_ldap_sasl_bind_root_dn-new-in-v710)                       | 新しく追加された | LDAP SASL 認証でユーザーを検索するために LDAPサーバーにログインするために使用される`dn`を指定します。                                                                                                                                                                                                                                                                                                                                     |
 | [`authentication_ldap_sasl_bind_root_pwd`](/system-variables.md#authentication_ldap_sasl_bind_root_pwd-new-in-v710)                     | 新しく追加された | LDAP SASL 認証でユーザーを検索するために LDAPサーバーにログインするために使用されるパスワードを指定します。                                                                                                                                                                                                                                                                                                                                   |
 | [`authentication_ldap_sasl_ca_path`](/system-variables.md#authentication_ldap_sasl_ca_path-new-in-v710)                                 | 新しく追加された | LDAP SASL 認証における StartTLS 接続用の証明機関ファイルの絶対パスを指定します。                                                                                                                                                                                                                                                                                                                                              |
@@ -260,7 +260,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | [`authentication_ldap_sasl_server_port`](/system-variables.md#authentication_ldap_sasl_server_port-new-in-v710)                         | 新しく追加された | LDAP SASL 認証における LDAPサーバーのTCP/IP ポート番号を指定します。                                                                                                                                                                                                                                                                                                                                                   |
 | [`authentication_ldap_sasl_tls`](/system-variables.md#authentication_ldap_sasl_tls-new-in-v710)                                         | 新しく追加された | プラグインによる LDAPサーバーへの接続が LDAP SASL 認証の StartTLS で保護されるかどうかを指定します。                                                                                                                                                                                                                                                                                                                                 |
 | [`authentication_ldap_simple_auth_method_name`](/system-variables.md#authentication_ldap_simple_auth_method_name-new-in-v710)           | 新しく追加された | LDAP簡易認証における認証方式名を指定します。`SIMPLE`のみがサポートされます。                                                                                                                                                                                                                                                                                                                                                     |
-| [`authentication_ldap_simple_bind_base_dn`](/system-variables.md#authentication_ldap_simple_bind_base_dn-new-in-v710)                   | 新しく追加された | LDAP簡易認証における検索ツリー内の検索範囲を制限します。`AS ...`の句を指定せずにユーザーが作成された場合、TiDBはユーザー名に基づいてLDAPサーバー内の`dn`の句を自動的に検索します。                                                                                                                                                                                                                                                                                         |
+| [`authentication_ldap_simple_bind_base_dn`](/system-variables.md#authentication_ldap_simple_bind_base_dn-new-in-v710)                   | 新しく追加された | LDAP簡易認証における検索ツリー内の検索範囲を制限します。`AS ...`の句を指定せずにユーザーが作成された場合、TiDBはユーザー名に基づいてLDAPサーバー内の`dn`を自動的に検索します。                                                                                                                                                                                                                                                                                         |
 | [`authentication_ldap_simple_bind_root_dn`](/system-variables.md#authentication_ldap_simple_bind_root_dn-new-in-v710)                   | 新しく追加された | LDAP 簡易認証でユーザーを検索するために LDAPサーバーにログインするために使用される`dn`を指定します。                                                                                                                                                                                                                                                                                                                                        |
 | [`authentication_ldap_simple_bind_root_pwd`](/system-variables.md#authentication_ldap_simple_bind_root_pwd-new-in-v710)                 | 新しく追加された | LDAP 簡易認証でユーザーを検索するために LDAPサーバーにログインするために使用されるパスワードを指定します。                                                                                                                                                                                                                                                                                                                                      |
 | [`authentication_ldap_simple_ca_path`](/system-variables.md#authentication_ldap_simple_ca_path-new-in-v710)                             | 新しく追加された | LDAP 簡易認証での StartTLS 接続用の証明機関ファイルの絶対パスを指定します。                                                                                                                                                                                                                                                                                                                                                   |
@@ -271,7 +271,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | [`authentication_ldap_simple_tls`](/system-variables.md#authentication_ldap_simple_tls-new-in-v710)                                     | 新しく追加された | プラグインによる LDAPサーバーへの接続が LDAP 簡易認証で StartTLS を使用して保護されるかどうかを指定します。                                                                                                                                                                                                                                                                                                                                |
 | [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)                                                       | 新しく追加された | 分散実行フレームワーク（DXF）を有効にするかどうかを制御します。DXFを有効にすると、DDL、インポート、およびその他のサポートされているDXFタスクは、クラスター内の複数のTiDBノードによって共同で実行されます。この変数は`tidb_ddl_distribute_reorg`から名前が変更されました。                                                                                                                                                                                                                                      |
 | [`tidb_enable_non_prepared_plan_cache_for_dml`](/system-variables.md#tidb_enable_non_prepared_plan_cache_for_dml-new-in-v710)           | 新しく追加された | DML文に対して[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)機能を有効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                           |
-| [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)                                     | 新しく追加された | 単一行データ機能に対して TiCDC データ整合性検証を有効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                                                                    |
+| [`tidb_enable_row_level_checksum`](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)                                     | 新しく追加された | 単一行データに対する TiCDC データ整合性検証機能を有効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                                                                    |
 | [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)                                                | 新しく追加された | この変数は、オプティマイザをより細かく制御し、オプティマイザの動作の変更によって引き起こされるアップグレード後のパフォーマンスの低下を防ぐのに役立ちます。                                                                                                                                                                                                                                                                                                                   |
 | [`tidb_plan_cache_invalidation_on_fresh_stats`](/system-variables.md#tidb_plan_cache_invalidation_on_fresh_stats-new-in-v710)           | 新しく追加された | 関連テーブルの統計が更新されたときにプランキャッシュを自動的に無効にするかどうかを制御します。                                                                                                                                                                                                                                                                                                                                                |
 | [`tidb_plan_cache_max_plan_size`](/system-variables.md#tidb_plan_cache_max_plan_size-new-in-v710)                                       | 新しく追加された | プリペアドプランキャッシュまたは非プリペアドプランキャッシュにキャッシュできるプランの最大サイズを制御します。                                                                                                                                                                                                                                                                                                                                      |
@@ -280,7 +280,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 ### 設定ファイルのパラメータ {#configuration-file-parameters}
 
-| 設定ファイル | 設定パラメータ                                                                                                                | タイプを変更   | 説明                                                                                                                                                                                 |
+| 設定ファイル | 設定パラメータ                                                                                                                | 変更の種類   | 説明                                                                                                                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)                            | 新しく追加された | TiDB の起動中にサービスを提供する前に、統計の初期化が完了するまで待機するかどうかを制御します。                                                                                                                                 |
 | TiDB           | [`performance.lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)                                       | 新しく追加された | TiDB の起動時に軽量統計初期化を使用するかどうかを制御します。                                                                                                                                                  |
@@ -312,7 +312,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - TTLスキャンクエリがTiKVブロックキャッシュに影響を与えないようにするには`SQL_NO_CACHE`を使用します。 [#43206](https://github.com/pingcap/tidb/issues/43206) @[lcwangchao](https://github.com/lcwangchao)
     - `MAX_EXECUTION_TIME`に関連するエラーメッセージを改善し、MySQL と互換性を持たせます [#43031](https://github.com/pingcap/tidb/issues/43031) @[dveeden](https://github.com/dveeden)
     - IndexLookUp のパーティションテーブルでの MergeSort オペレーターの使用をサポート [#26166](https://github.com/pingcap/tidb/issues/26166) @[Defined2014](https://github.com/Defined2014)
-    - MySQL と互換性を持たせるために`caching_sha2_password`拡張します [#43576](https://github.com/pingcap/tidb/issues/43576) @[asjdf](https://github.com/asjdf)
+    - MySQL と互換性を持たせるために`caching_sha2_password`を拡張します [#43576](https://github.com/pingcap/tidb/issues/43576) @[asjdf](https://github.com/asjdf)
 
 - TiKV
 
@@ -343,14 +343,14 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
         - オブジェクトストレージにデータを複製するシナリオでDDLイベントが発生したときにディレクトリ構造を最適化する[#8890](https://github.com/pingcap/tiflow/issues/8890) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiCDC レプリケーションタスクが失敗したときにアップストリームの GC TLS を設定する方法を最適化します[#8403](https://github.com/pingcap/tiflow/issues/8403) @[charleszheng44](https://github.com/charleszheng44)
-        - Kafka-on-Pulsar ダウンストリームへのデータ複製をサポート[#8892](https://github.com/pingcap/tiflow/issues/8892) @[Rustin170506](https://github.com/Rustin170506)
+        - Kafka-on-Pulsar ダウンストリームへのデータ複製をサポート[#8892](https://github.com/pingcap/tiflow/issues/8892) @[hi-rustin](https://github.com/Rustin170506)
         - Kafka にデータを複製する際に更新が発生した後に変更された列のみを複製するためのopen-protocol プロトコルの使用をサポートします。 [#8706](https://github.com/pingcap/tiflow/issues/8706) @[sdojjy](https://github.com/sdojjy)
         - 下流の障害やその他のシナリオにおける TiCDC のエラー処理を最適化する[#8657](https://github.com/pingcap/tiflow/issues/8657) @[hicqu](https://github.com/hicqu)
-        - TLS を有効にするシナリオで認証アルゴリズムを設定するかどうかを制御する設定項目`insecure-skip-verify`を追加します。 [#8867](https://github.com/pingcap/tiflow/issues/8867) @[Rustin170506](https://github.com/Rustin170506)
+        - TLS を有効にするシナリオで認証アルゴリズムを設定するかどうかを制御する設定項目`insecure-skip-verify`を追加します。 [#8867](https://github.com/pingcap/tiflow/issues/8867) @[hi-rustin](https://github.com/Rustin170506)
 
     - TiDB Lightning
 
-        - 不均一なリージョン分布に関連する事前チェック項目の重大度レベルを`Critical`から`Warn`に変更して、ユーザーがデータをインポートできないようにします[#42836](https://github.com/pingcap/tidb/issues/42836) @[okJiang](https://github.com/okJiang)
+        - 不均一なリージョン分布に関連する事前チェック項目の重大度レベルを`Critical`から`Warn`に変更して、ユーザーのデータインポートがブロックされないようにします[#42836](https://github.com/pingcap/tidb/issues/42836) @[okJiang](https://github.com/okJiang)
         - データのインポート中に`unknown RPC`エラーが発生した場合に再試行メカニズムを追加しました [#43291](https://github.com/pingcap/tidb/issues/43291) @[D3Hunter](https://github.com/D3Hunter)
         - リージョンジョブの再試行メカニズムを強化 [#43682](https://github.com/pingcap/tidb/issues/43682) @[lance6716](https://github.com/lance6716)
 
@@ -367,7 +367,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - 多数のパーティションとTiFlashレプリカを持つパーティションテーブルに対して`TRUNCATE TABLE`を実行するときに書き込み競合によって発生する DDL 再試行の問題を修正しました。 [#42940](https://github.com/pingcap/tidb/issues/42940) @[mjonss](https://github.com/mjonss)
     - パーティションテーブル の作成時に`SUBPARTITION`を使用すると警告が表示されない問題を修正 [#41200](https://github.com/pingcap/tidb/issues/41200) @[mjonss](https://github.com/mjonss) [#41198](https://github.com/pingcap/tidb/issues/41198)
     - 生成列の値オーバーフローの問題を処理する際の MySQL との非互換性の問題を修正しました [#40066](https://github.com/pingcap/tidb/issues/40066) @[jiyfhust](https://github.com/jiyfhust)
-    - `REORGANIZE PARTITION`他の DDL 操作と同時に実行できない問題を修正 [#42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
+    - `REORGANIZE PARTITION`が他の DDL 操作と同時に実行できない問題を修正 [#42442](https://github.com/pingcap/tidb/issues/42442) @[bb7133](https://github.com/bb7133)
     - DDL でパーティション再編成タスクをキャンセルすると、後続の DDL 操作が失敗する可能性がある問題を修正しました[#42448](https://github.com/pingcap/tidb/issues/42448) @[lcwangchao](https://github.com/lcwangchao)
     - 特定の条件下で削除操作のアサーションが正しくない問題を修正[#42426](https://github.com/pingcap/tidb/issues/42426) @[tiancaiamao](https://github.com/tiancaiamao)
     - cgroup 情報の読み取りエラーにより、TiDBサーバーが起動できない問題を修正しました。エラーメッセージは「can't read file memory.stat from cgroup v1: open /sys/memory.stat no such file or directory」です[#42659](https://github.com/pingcap/tidb/issues/42659) @[hawkingrei](https://github.com/hawkingrei)
@@ -394,7 +394,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - TiDBがテーブルを分析するときに構文エラーを報告する問題を修正しました [#43392](https://github.com/pingcap/tidb/issues/43392) @[guo-shaoge](https://github.com/guo-shaoge)
     - TiCDC がテーブル名の変更中に一部の行の変更を失う可能性がある問題を修正しました [#43338](https://github.com/pingcap/tidb/issues/43338) @[tangenta](https://github.com/tangenta)
     - クライアントがカーソル読み取りを使用すると TiDBサーバーがクラッシュする問題を修正しました [#38116](https://github.com/pingcap/tidb/issues/38116) @[YangKeao](https://github.com/YangKeao)
-    - `ADMIN SHOW DDL JOBS LIMIT`誤った結果を返す問題を修正[#42298](https://github.com/pingcap/tidb/issues/42298) @[CbcWestwolf](https://github.com/CbcWestwolf)
+    - `ADMIN SHOW DDL JOBS LIMIT`が誤った結果を返す問題を修正[#42298](https://github.com/pingcap/tidb/issues/42298) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - `UNION` でユニオンビューと一時テーブルをクエリするときに発生する TiDBのpanic問題を修正しました。 [#42563](https://github.com/pingcap/tidb/issues/42563) @[lcwangchao](https://github.com/lcwangchao)
     - トランザクションで複数のステートメントをコミットするときにテーブル名の変更が有効にならない問題を修正しました [#39664](https://github.com/pingcap/tidb/issues/39664) @[tiancaiamao](https://github.com/tiancaiamao)
     - 時間変換中に準備済みプランキャッシュと非プリペアドプランキャッシュの動作間の非互換性の問題を修正しました [#42439](https://github.com/pingcap/tidb/issues/42439) @[qw4990](https://github.com/qw4990)
@@ -413,20 +413,20 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - 暗号化キーIDの競合により古いキーが削除される可能性がある問題を修正しました [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
     - クラスタを以前のバージョンから v6.5 以降のバージョンにアップグレードしたときに、累積したロック レコードによって発生するパフォーマンス低下の問題を修正しました。 [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
     - PITRリカバリプロセス中に`raft entry is too large`エラーが発生する問題を修正 [#14313](https://github.com/tikv/tikv/issues/14313) @[YuJuncen](https://github.com/YuJuncen)
-    - PITRリカバリプロセス中に`log_batch` 2GBを超えるによりTiKVがパニックになる問題を修正 [#13848](https://github.com/tikv/tikv/issues/13848) @[YuJuncen](https://github.com/YuJuncen)
+    - PITRリカバリプロセス中に`log_batch`が2GBを超えることによりTiKVがパニックになる問題を修正 [#13848](https://github.com/tikv/tikv/issues/13848) @[YuJuncen](https://github.com/YuJuncen)
 
 - PD
 
     - TiKVパニック後にPD監視パネルの`low space store`の数が異常になる問題を修正 [#6252](https://github.com/tikv/pd/issues/6252) @[HuSharp](https://github.com/HuSharp)
     - PDリーダースイッチ後にリージョンヘルス監視データが削除される問題を修正 [#6366](https://github.com/tikv/pd/issues/6366) @[iosmanthus](https://github.com/iosmanthus)
-    - ルールチェッカーが`schedule=deny`ラベルの不健全な領域を修復できない問題を修正しました [#6426](https://github.com/tikv/pd/issues/6426) @[nolouch](https://github.com/nolouch)
+    - ルールチェッカーが`schedule=deny`ラベルの不健全なリージョンを修復できない問題を修正しました [#6426](https://github.com/tikv/pd/issues/6426) @[nolouch](https://github.com/nolouch)
     - TiKVまたはTiFlashの再起動後に既存のラベルの一部が失われる問題を修正[#6467](https://github.com/tikv/pd/issues/6467) @[JmPotato](https://github.com/JmPotato)
-    - レプリケーションモードの学習ノードがある場合、レプリケーションステータスを切り替えることができない問題を修正しました。 [#14704](https://github.com/tikv/tikv/issues/14704) @[nolouch](https://github.com/nolouch)
+    - レプリケーションモードのラーナーノードがある場合、レプリケーションステータスを切り替えることができない問題を修正しました。 [#14704](https://github.com/tikv/tikv/issues/14704) @[nolouch](https://github.com/nolouch)
 
 - TiFlash
 
     - 遅延マテリアライゼーションを有効にした後に、 `TIMESTAMP`または`TIME`タイプのデータをクエリするとエラーが返される問題を修正しました。 [#7455](https://github.com/pingcap/tiflash/issues/7455) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 大規模な更新トランザクションにより、 TiFlash が繰り返しエラーを報告し、 を再起動する可能性がある問題を修正しました。 [#7316](https://github.com/pingcap/tiflash/issues/7316) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - 大規模な更新トランザクションにより、 TiFlash が繰り返しエラーを報告して再起動する可能性がある問題を修正しました。 [#7316](https://github.com/pingcap/tiflash/issues/7316) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 - ツール
 
@@ -448,10 +448,10 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
         - レプリケーション中に latin1 データが破損する可能性がある問題を修正しました [#7028](https://github.com/pingcap/tiflow/issues/7028) @[lance6716](https://github.com/lance6716)
 
-    - TiDBDumpling
+    - TiDB Dumpling
 
         - `UNSIGNED INTEGER`型の主キーがチャンクの分割に使用できない問題を修正しました [#42620](https://github.com/pingcap/tidb/issues/42620) @[lichunzhu](https://github.com/lichunzhu)
-        - `--output-file-template`誤って設定されている場合に TiDB Dumpling がpanicする可能性がある問題を修正しました [#42391](https://github.com/pingcap/tidb/issues/42391) @[lichunzhu](https://github.com/lichunzhu)
+        - `--output-file-template`が誤って設定されている場合に TiDB Dumpling がpanicする可能性がある問題を修正しました [#42391](https://github.com/pingcap/tidb/issues/42391) @[lichunzhu](https://github.com/lichunzhu)
 
     - TiDB Binlog
 
@@ -460,13 +460,13 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - TiDB Lightning
 
         - データインポート中のパフォーマンス低下の問題を修正 [#42456](https://github.com/pingcap/tidb/issues/42456) @[lance6716](https://github.com/lance6716)
-        - `write to tikv with no leader returned`大量データインポート時の問題を修正[#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
-        - データインポート中にログが`keys within region is empty, skip doIngest`過剰になる問題を修正 [#43197](https://github.com/pingcap/tidb/issues/43197) @[D3Hunter](https://github.com/D3Hunter)
+        - 大量データのインポート時に`write to tikv with no leader returned`が発生する問題を修正[#43055](https://github.com/pingcap/tidb/issues/43055) @[lance6716](https://github.com/lance6716)
+        - データインポート中に`keys within region is empty, skip doIngest`ログが過剰に出力される問題を修正 [#43197](https://github.com/pingcap/tidb/issues/43197) @[D3Hunter](https://github.com/D3Hunter)
         - 部分書き込み中にpanicが発生する可能性がある問題を修正 [#43363](https://github.com/pingcap/tidb/issues/43363) @[lance6716](https://github.com/lance6716)
         - 幅の広いテーブルをインポートするときに OOM が発生する可能性がある問題を修正しました [#43728](https://github.com/pingcap/tidb/issues/43728) @[D3Hunter](https://github.com/D3Hunter)
         - TiDB Lightning Grafanaダッシュボードでデータが欠落する問題を修正 [#43357](https://github.com/pingcap/tidb/issues/43357) @[lichunzhu](https://github.com/lichunzhu)
         - `keyspace-name` の設定が間違っているためにインポートに失敗する問題を修正しました [#43684](https://github.com/pingcap/tidb/issues/43684) @[zeminzhou](https://github.com/zeminzhou)
-        - 範囲部分書き込み中にデータのインポートがスキップされる可能性がある問題を修正[#43768](https://github.com/pingcap/tidb/issues/43768) @[lance6716](https://github.com/lance6716)
+        - 場合によっては、範囲部分書き込み中にデータのインポートがスキップされる可能性がある問題を修正[#43768](https://github.com/pingcap/tidb/issues/43768) @[lance6716](https://github.com/lance6716)
 
 ## パフォーマンステスト {#performance-test}
 
