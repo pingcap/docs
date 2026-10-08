@@ -7,13 +7,13 @@ summary: Learn the `SLOW_QUERY` INFORMATION_SCHEMA table.
 
 <CustomContent platform="tidb">
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](/tidb-configuration-file.md#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
+The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](/tidb-configuration-file.md#slow-query-file). Most column names correspond to field names in the slow log. Some columns, such as `Cop_backoff_types`, are derived from multiple log fields.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file). The column names in the table are corresponding to the field names in the slow log.
+The `SLOW_QUERY` table provides the slow query information of the current node, which is the parsing result of the TiDB [slow log file](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#slow-query-file). Most column names correspond to field names in the slow log. Some columns, such as `Cop_backoff_types`, are derived from multiple log fields.
 
 </CustomContent>
 
@@ -128,13 +128,36 @@ The output is as follows:
 | Prev_stmt                                  | longtext        | YES  |      | NULL    |       |
 | Session_connect_attrs                      | json            | YES  |      | NULL    |       |
 | Query                                      | longtext        | YES  |      | NULL    |       |
+| Prewrite_backoff_types                     | varchar(1024)   | YES  |      | NULL    |       |
+| Commit_backoff_types                       | varchar(1024)   | YES  |      | NULL    |       |
+| Cop_backoff_types                          | varchar(1024)   | YES  |      | NULL    |       |
 +--------------------------------------------+-----------------+------+------+---------+-------+
-90 rows in set (0.00 sec)
+93 rows in set (0.00 sec)
 ```
 
 The maximum statement length of the `Query` column is limited by the [`tidb_stmt_summary_max_sql_length`](/system-variables.md#tidb_stmt_summary_max_sql_length-new-in-v40) system variable.
 
 The `Session_connect_attrs` column stores session connection attributes in JSON format parsed from the slow log. TiDB controls the maximum payload size written to this field using [`performance_schema_session_connect_attrs_size`](/system-variables.md#performance_schema_session_connect_attrs_size-new-in-v857-and-v900).
+
+## Backoff type columns
+
+<!-- TODO: confirm the first release containing pingcap/tidb#70833 before publishing to a release branch. -->
+
+The following columns expose the backoff types recorded for different execution phases. Each column has the `VARCHAR(1024)` type and is appended after `Query` in both `SLOW_QUERY` and `CLUSTER_SLOW_QUERY`.
+
+| Column | Source and scope |
+| --- | --- |
+| `Prewrite_backoff_types` | The `Prewrite_Backoff_types` slow log field. It records types from the prewrite batch with the longest cumulative backoff time, rather than all prewrite batches. |
+| `Commit_backoff_types` | The `Commit_Backoff_types` slow log field. It records backoff types in the commit phase. |
+| `Cop_backoff_types` | Derived from `Cop_backoff_{type}_total_times` fields in the slow log. TiDB deduplicates and sorts the types across these fields. |
+
+These values are strings with space-separated types enclosed in brackets, such as `[txnLock]` or `[regionMiss txnLockFast]`. They are not JSON arrays. `Prewrite_backoff_types` and `Commit_backoff_types` preserve the order and duplicates from the corresponding log fields.
+
+If the corresponding fields are absent from a log entry, these columns return an empty string (`''`), rather than SQL `NULL`. An empty string does not prove that the statement had no backoff. These columns do not provide backoff types for `Point_Get` requests or independent pessimistic `LockKeys` requests.
+
+The existing `Backoff_types` column continues to parse the historical `Backoff_types` log field. TiDB does not combine the new columns into it. Logs that contain only the phase-specific fields can therefore have an empty `Backoff_types` value. Existing log files that contain the relevant fields can populate the new columns without being rewritten.
+
+Adding these columns increases the number of columns returned by `SELECT *`; `Query` is no longer the last column. If your client depends on column positions or a fixed number of columns, use an explicit column list. For a filtering example, see [Filter by coprocessor backoff type](/identify-slow-queries.md#filter-by-coprocessor-backoff-type).
 
 ## CLUSTER_SLOW_QUERY table
 
@@ -149,6 +172,8 @@ The `CLUSTER_SLOW_QUERY` table provides the slow query information of all nodes 
 For how to use this table to identify problematic statements and improve query performance, see [Slow Query Log Document](/identify-slow-queries.md).
 
 </CustomContent>
+
+During a rolling upgrade across the version that adds the backoff type columns, avoid selecting the new columns from `CLUSTER_SLOW_QUERY` until all TiDB nodes support them. A newer node querying an older node with these columns, including through `SELECT *`, can fail with `Column ID <id> of table <table> not found`. Use an explicit list of columns supported by every node during this period. Querying the local `SLOW_QUERY` table on a newer node does not require other nodes to support the new columns.
 
 ```sql
 DESC CLUSTER_SLOW_QUERY;
@@ -251,8 +276,11 @@ The output is as follows:
 | Prev_stmt                                  | longtext        | YES  |      | NULL    |       |
 | Session_connect_attrs                      | json            | YES  |      | NULL    |       |
 | Query                                      | longtext        | YES  |      | NULL    |       |
+| Prewrite_backoff_types                     | varchar(1024)   | YES  |      | NULL    |       |
+| Commit_backoff_types                       | varchar(1024)   | YES  |      | NULL    |       |
+| Cop_backoff_types                          | varchar(1024)   | YES  |      | NULL    |       |
 +--------------------------------------------+-----------------+------+------+---------+-------+
-91 rows in set (0.00 sec)
+94 rows in set (0.00 sec)
 ```
 
 When the cluster system table is queried, TiDB does not obtain data from all nodes, but pushes down the related calculation to other nodes. The execution plan is as follows:
