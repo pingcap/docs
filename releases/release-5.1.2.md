@@ -44,7 +44,7 @@ TiDB バージョン: 5.1.2
 
 - PD
 
-    - 空のリージョンをスケジュールできるようにし、散布範囲スケジューラで別の許容範囲設定を使用します。 [#4117](https://github.com/tikv/pd/pull/4117)
+    - 空のリージョンをスケジュールできるようにし、scatter range スケジューラで別の許容範囲設定を使用します。 [#4117](https://github.com/tikv/pd/pull/4117)
     - PD間のリージョン情報の同期パフォーマンスを向上[#3933](https://github.com/tikv/pd/pull/3933)
     - 生成された演算子に基づいてストアの再試行制限を動的に調整する機能をサポート [#3744](https://github.com/tikv/pd/issues/3744)
 
@@ -59,7 +59,7 @@ TiDB バージョン: 5.1.2
 
     - TiCDC
 
-        - 統合ソーターがメモリを使用してデータをソートする場合のメモリ管理を最適化します[#2553](https://github.com/pingcap/tiflow/issues/2553)
+        - Unified Sorterがメモリを使用してデータをソートする場合のメモリ管理を最適化します[#2553](https://github.com/pingcap/tiflow/issues/2553)
         - 同時実行性が高い場合は、ワーカープールを最適化してゴルーチンの数を減らす[#2211](https://github.com/pingcap/tiflow/issues/2211)
         - テーブルのリージョンがTiKV ノードから転送されるときに goroutine の使用を減らす [#2284](https://github.com/pingcap/tiflow/issues/2284)
         - グローバル gRPC 接続プールを追加し、KV クライアント間で gRPC 接続を共有する[#2534](https://github.com/pingcap/tiflow/pull/2534)
@@ -86,14 +86,14 @@ TiDB バージョン: 5.1.2
     - パーティションテーブルからの`TABLESAMPLE`結果が期待どおりにソートされない問題を修正[#27349](https://github.com/pingcap/tidb/issues/27349)
     - 未使用の`/debug/sub-optimal-plan` HTTP API を削除します [#27265](https://github.com/pingcap/tidb/pull/27265)
     - ハッシュパーティションテーブルが符号なしデータを扱うときにクエリが間違った結果を返す可能性があるバグを修正[#26569](https://github.com/pingcap/tidb/issues/26569)
-    - `NO_UNSIGNED_SUBTRACTION` 設定されている場合にパーティションの作成が失敗するバグを修正 [#26765](https://github.com/pingcap/tidb/issues/26765)
-    - `Apply` `Join`に変換すると`distinct`フラグが消える問題を修正しました[#26958](https://github.com/pingcap/tidb/issues/26958)
+    - `NO_UNSIGNED_SUBTRACTION`が設定されている場合にパーティションの作成が失敗するバグを修正 [#26765](https://github.com/pingcap/tidb/issues/26765)
+    - `Apply`が`Join`に変換されると`distinct`フラグが消える問題を修正しました[#26958](https://github.com/pingcap/tidb/issues/26958)
     - 新しく回復したTiFlashノードのブロック期間を設定して、この期間中にクエリがブロックされるのを回避します[#26897](https://github.com/pingcap/tidb/pull/26897)
     - CTE が複数回参照されたときに発生する可能性のあるバグを修正[#26212](https://github.com/pingcap/tidb/issues/26212)
     - MergeJoin 使用時の CTE バグを修正[#25474](https://github.com/pingcap/tidb/issues/25474)
     - 通常のテーブルがパーティションテーブルに結合するときに、 `SELECT FOR UPDATE`文がデータを正しくロックしないバグを修正しました。 [#26251](https://github.com/pingcap/tidb/issues/26251)
     - 通常のテーブルがパーティションテーブルに結合すると`SELECT FOR UPDATE`文がエラーを返す問題を修正 [#26250](https://github.com/pingcap/tidb/issues/26250)
-    - `PointGet`ロックを解決するライト バージョンを使用しない問題を修正しました [#26562](https://github.com/pingcap/tidb/pull/26562)
+    - `PointGet`がロックを解決するライト バージョンを使用しない問題を修正しました [#26562](https://github.com/pingcap/tidb/pull/26562)
 
 - TiKV
 
@@ -105,7 +105,7 @@ TiDB バージョン: 5.1.2
     - Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKV panic問題を修正しました[#10842](https://github.com/tikv/tikv/pull/10842)
     - 新しいバージョンのTiKVをv5.0.xにロールバックできない問題を修正しました[#10842](https://github.com/tikv/tikv/pull/10842)
     - TiKV が RocksDB にデータを取り込む前にファイルを削除する可能性がある問題を修正しました [#10438](https://github.com/tikv/tikv/issues/10438)
-    - 左悲観的ロックによる解析エラーを修正[#26404](https://github.com/pingcap/tidb/issues/26404)
+    - 残存する悲観的ロックによる解析エラーを修正[#26404](https://github.com/pingcap/tidb/issues/26404)
 
 - PD
 
@@ -120,9 +120,9 @@ TiDB バージョン: 5.1.2
     - TiFlash を複数のディスクにデプロイした場合に発生する可能性のあるデータの不整合の問題を修正しました。
     - TiFlashサーバーの負荷が高いときに MPP クエリが間違った結果を返すバグを修正しました
     - MPPクエリが永久にハングする潜在的なバグを修正
-    - ストアの初期化とDDLを同時に操作するとpanic問題を修正しました
+    - ストアの初期化とDDLを同時に操作すると発生するpanic問題を修正しました
     - クエリに`CONSTANT` 、 `<` 、 `<=` 、 `>` 、 `>=` 、 `COLUMN`などのフィルターが含まれている場合に誤った結果が発生するバグを修正しました。
-    - 複数のDDL操作に`Snapshot`同時に適用された場合に発生する可能性のあるpanic問題を修正しました
+    - `Snapshot`が複数のDDL操作と同時に適用された場合に発生する可能性のあるpanic問題を修正しました
     - 書き込みが集中するとメトリクスのストアサイズが不正確になる問題を修正しました
     - TiFlash が長時間実行した後にデルタデータをガベージコレクションできない潜在的な問題を修正しました
     - 新しい照合順序が有効になっているときに間違った結果が出る問題を修正しました
@@ -137,7 +137,7 @@ TiDB バージョン: 5.1.2
 
     - Dumpling
 
-        - 一部のMySQLバージョン（8.0.3および8.0.23）で`show table status`誤った結果を返すときにDumplingが保留になる問題を修正しました[#322](https://github.com/pingcap/dumpling/issues/322)
+        - 一部のMySQLバージョン（8.0.3および8.0.23）で`show table status`が誤った結果を返すときにDumplingがハングする問題を修正しました[#322](https://github.com/pingcap/dumpling/issues/322)
         - デフォルト`sort-engine`オプションの 4.0.x クラスタでの CLI 互換性の問題を修正しました [#2373](https://github.com/pingcap/tiflow/issues/2373)
 
     - TiCDC

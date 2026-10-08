@@ -39,16 +39,16 @@ TiDB バージョン: 5.1.1
 - TiDB
 
     - ステイル読み取り機能の一般提供 (GA) を発表
-    - データ挿入を高速化するために`paramMarker`割り当てを避ける[#26076](https://github.com/pingcap/tidb/pull/26076)
+    - データ挿入を高速化するために`paramMarker`の割り当てを避ける[#26076](https://github.com/pingcap/tidb/pull/26076)
     - クエリ結果をより安定させるために、安定した結果モードをサポートします[#25995](https://github.com/pingcap/tidb/pull/25995)
     - 組み込み関数`json_unquote()`をTiKV にプッシュダウンする機能をサポート [#26265](https://github.com/pingcap/tidb/pull/26265)
     - MPPクエリの再試行をサポート[#26480](https://github.com/pingcap/tidb/pull/26480)
-    - `UPDATE`の読み取りで`point get`または`batch point get`を使用して、インデックスキーの`LOCK`レコードを`PUT`レコードに変更します[#26225](https://github.com/pingcap/tidb/pull/26225)
-    - 古いクエリからのビューの作成を禁止する[#26200](https://github.com/pingcap/tidb/pull/26200)
-    - MPPモードで`COUNT(DISTINCT)`集約機能を徹底的にプッシュダウンする [#26194](https://github.com/pingcap/tidb/pull/26194)
+    - `UPDATE`の読み取りで`point get`または`batch point get`を使用するインデックスキーについて、 `LOCK`レコードを`PUT`レコードに変更します[#26225](https://github.com/pingcap/tidb/pull/26225)
+    - ステイル読み取りクエリからのビューの作成を禁止する[#26200](https://github.com/pingcap/tidb/pull/26200)
+    - MPPモードで`COUNT(DISTINCT)`集計関数を徹底的にプッシュダウンする [#26194](https://github.com/pingcap/tidb/pull/26194)
     - MPPクエリを起動する前にTiFlashの可用性を確認するようにします [#26192](https://github.com/pingcap/tidb/pull/26192)
     - 読み取りタイムスタンプを将来の時刻に設定することを許可しない[#25763](https://github.com/pingcap/tidb/pull/25763)
-    - 集計関数を`EXPLAIN`文にプッシュダウンできない場合にログ警告を出力する [#25737](https://github.com/pingcap/tidb/pull/25737)
+    - `EXPLAIN`文で集計関数をプッシュダウンできない場合にログ警告を出力する [#25737](https://github.com/pingcap/tidb/pull/25737)
     - クラスターの立ち退きカウント情報を記録するためのテーブル`statements_summary_evicted`を追加します。 [#25587](https://github.com/pingcap/tidb/pull/25587)
     - フォーマット指定子`%b/%M/%r/%T` の組み込み関数`str_to_date`の MySQL 互換性を改善しました [#25768](https://github.com/pingcap/tidb/pull/25768)
 
@@ -83,14 +83,14 @@ TiDB バージョン: 5.1.1
 
     - `tidb_enable_amend_pessimistic_txn=on` で列タイプを変更するときに発生する可能性のあるデータ損失の問題を修正しました [#26203](https://github.com/pingcap/tidb/issues/26203)
     - `last_day`関数の動作がSQLモードで互換性がない問題を修正 [#26001](https://github.com/pingcap/tidb/pull/26001)
-    - `LIMIT`がウィンドウ関数の上にある場合に発生する可能性のあるpanic問題を修正しました [`#25344`](https://github.com/pingcap/tidb/issues/25344)
+    - `LIMIT`がウィンドウ関数の上にある場合に発生する可能性のあるpanic問題を修正しました [#25344](https://github.com/pingcap/tidb/issues/25344)
     - 悲観的トランザクションをコミットすると書き込み競合が発生する可能性がある問題を修正[#25964](https://github.com/pingcap/tidb/issues/25964)
     - 相関サブクエリのインデックス結合の結果が間違っている問題を修正[#25799](https://github.com/pingcap/tidb/issues/25799)
     - 正常にコミットされた楽観的トランザクションがコミットエラーを報告する可能性があるバグを修正[#10468](https://github.com/tikv/tikv/issues/10468)
     - `SET`型列でマージ結合を使用すると誤った結果が返される問題を修正しました [#25669](https://github.com/pingcap/tidb/issues/25669)
     - 悲観的トランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正[#26359](https://github.com/pingcap/tidb/issues/26359)
     - オプティマイザがパーティション検索する際の整数オーバーフローのリスクを修正 [#26227](https://github.com/pingcap/tidb/issues/26227)
-    - `DATE`タイムスタンプにキャストするときに無効な値が書き込まれる可能性がある問題を修正しました [#26292](https://github.com/pingcap/tidb/issues/26292)
+    - `DATE`をタイムスタンプにキャストするときに無効な値が書き込まれる可能性がある問題を修正しました [#26292](https://github.com/pingcap/tidb/issues/26292)
     - Grafana でコプロセッサーキャッシュ メトリックが表示されない問題を修正しました [#26338](https://github.com/pingcap/tidb/issues/26338)
     - テレメトリ による迷惑なログの問題を修正 [#25785](https://github.com/pingcap/tidb/issues/25785) [#25760](https://github.com/pingcap/tidb/issues/25760)
     - プレフィックスインデックスのクエリ範囲に関するバグを修正 [#26029](https://github.com/pingcap/tidb/issues/26029)
@@ -109,7 +109,7 @@ TiDB バージョン: 5.1.1
     - 特定のプラットフォームで期間計算がpanicになる可能性がある問題を修正[#10569](https://github.com/tikv/tikv/pull/10569)
     - Load Base Splitが誤って`batch_get_command` のエンコードされていないキーを使用する問題を修正しました [#10542](https://github.com/tikv/tikv/issues/10542)
     - `resolved-ts.advance-ts-interval`構成を動的に変更してもすぐには反映されない問題を修正[#10426](https://github.com/tikv/tikv/issues/10426)
-    - レプリカが 4 つ以上ある場合に稀に発生するフォロワー メタデータ破損の問題を修正[#10225](https://github.com/tikv/tikv/issues/10225)
+    - レプリカが 4 つを超える場合に稀に発生するフォロワー メタデータ破損の問題を修正[#10225](https://github.com/tikv/tikv/issues/10225)
     - 暗号化が有効になっている場合にスナップショットを2回構築すると発生するpanic問題を修正[#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
     - 間違った`tikv_raftstore_hibernated_peer_state`指標を修正する[#10330](https://github.com/tikv/tikv/issues/10330)
     - コプロセッサの関数`json_unquote()`の間違った引数の型を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
@@ -124,7 +124,7 @@ TiDB バージョン: 5.1.1
 - TiFlash
 
     - テーブルスキャンタスクの実行時に発生する可能性のあるpanic問題を修正しました
-    - TiFlashがDAQリクエストを処理する際に約`duplicated region`エラーを発生させるバグを修正しました
+    - TiFlashがDAQリクエストを処理する際に`duplicated region`に関するエラーを発生させるバグを修正しました
     - 読み取り負荷が大きい場合に発生するpanic問題を修正しました
     - `DateFormat`関数の実行時に発生する可能性のあるpanic問題を修正
     - MPPタスク実行時に発生する可能性のあるメモリリークの問題を修正
@@ -140,11 +140,11 @@ TiDB バージョン: 5.1.1
     - TiCDC
 
         - 新しい照合順序機能のサポートを修正[#2301](https://github.com/pingcap/tiflow/issues/2301)
-        - 実行時に共有マップへの非同期アクセスによりpanicが発生する可能性がある問題を修正[#2300](https://github.com/pingcap/tiflow/pull/2300)
+        - 実行時に共有マップへの同期されていないアクセスによりpanicが発生する可能性がある問題を修正[#2300](https://github.com/pingcap/tiflow/pull/2300)
         - DDL文実行中にオーナーがクラッシュした場合に発生する可能性のある DDL 損失の問題を修正しました。 [#2290](https://github.com/pingcap/tiflow/pull/2290)
         - TiDB のロックを早期に解決しようとする問題を修正[#2188](https://github.com/pingcap/tiflow/issues/2188)
         - テーブル移行直後に TiCDC ノードが強制終了した場合にデータ損失が発生する可能性があるバグを修正[#2033](https://github.com/pingcap/tiflow/pull/2033)
-        - `changefeed update` on `--sort-dir`と`--start-ts` の処理ロジックを修正 [#1921](https://github.com/pingcap/tiflow/pull/1921)
+        - `--sort-dir`と`--start-ts`に対する`changefeed update`の処理ロジックを修正 [#1921](https://github.com/pingcap/tiflow/pull/1921)
 
     - Backup & Restore (BR)
 
@@ -153,5 +153,5 @@ TiDB バージョン: 5.1.1
 
     - TiDB Lightning
 
-        - TiDBがParquetファイル内の`DECIMAL`種類のデータを解析できない問題を修正 [#1275](https://github.com/pingcap/br/pull/1275)
+        - TiDBがParquetファイル内の`DECIMAL`型のデータを解析できない問題を修正 [#1275](https://github.com/pingcap/br/pull/1275)
         - キー間隔を計算する際の整数オーバーフローの問題を修正[#1291](https://github.com/pingcap/br/issues/1291) [#1290](https://github.com/pingcap/br/issues/1290)

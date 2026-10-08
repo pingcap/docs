@@ -16,7 +16,7 @@ v5.0 の主な新機能または改善点は次のとおりです。
 - クラスター化インデックス。この機能を有効にすると、データベースのパフォーマンスが向上します。例えば、TPC-C tpmCテストでは、クラスター化インデックスを有効にしたTiDBのパフォーマンスは39%向上しました。
 - 非同期コミット。この機能を有効にすると、書き込みレイテンシーが短縮されます。例えば、Sysbench olpt-insert テストでは、非同期コミットを有効にした TiDB の書き込みレイテンシーが 37.3% 短縮されます。
 - ジッターの低減。これは、オプティマイザの安定性を向上させ、システムタスクによるI/O、ネットワーク、CPU、メモリリソースの使用を制限することで実現されます。例えば、72時間のパフォーマンステストでは、Sysbench TPSジッターの標準偏差が11.09%から3.36%に低減しました。
-- リージョンメンバーシップの変更中にシステムの可用性を確保するRaftジョイント コンセンサス アルゴリズム。
+- リージョンメンバーシップの変更中にシステムの可用性を確保するRaft Joint Consensus アルゴリズム。
 - 最適化された`EXPLAIN`機能と不可視インデックスにより、データベース管理者 (DBA) は SQL文をより効率的にデバッグできるようになります。
 - エンタープライズデータの信頼性を保証します。TiDBからAWS S3ストレージやGoogle Cloud GCSにデータをバックアップしたり、これらのクラウドストレージプラットフォームからデータを復元したりできます。
 - AWS S3ストレージまたはTiDB/MySQLとの間でのデータインポート/エクスポートのパフォーマンスが向上し、企業がクラウド上でアプリケーションを迅速に構築できるようになります。例えば、TPC-Cテストでは、1TiBデータのインポートパフォーマンスが254GiB/時間から366GiB/時間へと40%向上しました。
@@ -39,7 +39,7 @@ v5.0 の主な新機能または改善点は次のとおりです。
 たとえば、テーブル（ `tbl_name` ）にクラスター化インデックスがあるかどうかを確認するには、 `select tidb_pk_type from information_schema.tables where table_name = '{tbl_name}'`を実行します。
 
 - [ユーザードキュメント](/system-variables.md#tidb_enable_clustered_index-new-in-v50)
-- 関連号: [#4841](https://github.com/pingcap/tidb/issues/4841)
+- 関連問題: [#4841](https://github.com/pingcap/tidb/issues/4841)
 
 ### 不可視インデックスをサポート {#support-invisible-indexes}
 
@@ -48,7 +48,7 @@ v5.0 の主な新機能または改善点は次のとおりです。
 インデックスの可視性を変更するには、 `ALTER INDEX`文を使用します。変更後、オプティマイザはインデックスの可視性に基づいて、このインデックスをインデックスリストに追加するかどうかを決定します。
 
 - [ユーザードキュメント](/sql-statements/sql-statement-alter-index.md)
-- 関連号: [#9246](https://github.com/pingcap/tidb/issues/9246)
+- 関連問題: [#9246](https://github.com/pingcap/tidb/issues/9246)
 
 ### `EXCEPT`および`INTERSECT`演算子をサポート {#support-except-and-intersect-operators}
 
@@ -57,22 +57,22 @@ v5.0 の主な新機能または改善点は次のとおりです。
 `EXCEPT`演算子はセット演算子であり、2つのクエリの結果セットを結合し、最初のクエリ結果にはあるが 2 番目のクエリ結果にはない要素を返します。
 
 - [ユーザードキュメント](/functions-and-operators/set-operators.md)
-- 関連号: [#18031](https://github.com/pingcap/tidb/issues/18031)
+- 関連問題: [#18031](https://github.com/pingcap/tidb/issues/18031)
 
 ## トランザクション {#transaction}
 
 ### 悲観的トランザクションの実行成功率を高める {#increase-the-success-rate-of-executing-pessimistic-transactions}
 
-悲観的トランザクションモードでは、トランザクションに関係するテーブルに同時DDL操作または`SCHEMA VERSION`変更が含まれている場合、システムはトランザクションの`SCHEMA VERSION`最新のものに自動的に更新し、DDL操作によるトランザクションの中断を回避し、トランザクションのコミットを確実に成功させます。トランザクションが中断された場合、クライアントは`Information schema is changed`エラーメッセージを受け取ります。
+悲観的トランザクションモードでは、トランザクションに関係するテーブルに同時DDL操作または`SCHEMA VERSION`変更が含まれている場合、システムはトランザクションの`SCHEMA VERSION`を最新のものに自動的に更新し、DDL操作によるトランザクションの中断を回避し、トランザクションのコミットを確実に成功させます。トランザクションが中断された場合、クライアントは`Information schema is changed`エラーメッセージを受け取ります。
 
-- 関連号: [#18005](https://github.com/pingcap/tidb/issues/18005)
+- 関連問題: [#18005](https://github.com/pingcap/tidb/issues/18005)
 
 ## 文字セットと照合順序 {#character-set-and-collation}
 
 文字セットの大文字と小文字を区別しない比較ソートをサポートします。
 
 - [ユーザードキュメント](/character-set-and-collation.md#new-framework-for-collations)
-- 関連号: [#17596](https://github.com/pingcap/tidb/issues/17596)
+- 関連問題: [#17596](https://github.com/pingcap/tidb/issues/17596)
 
 ## セキュリティ {#security}
 
@@ -89,7 +89,7 @@ TiDB では、ID 情報やクレジットカード番号などの機密情報の
 
 [ユーザードキュメント](/log-redaction.md)
 
-関連号: [#18566](https://github.com/pingcap/tidb/issues/18566)
+関連問題: [#18566](https://github.com/pingcap/tidb/issues/18566)
 
 ## パフォーマンスの改善 {#performance-improvements}
 
@@ -104,7 +104,7 @@ TiDB では、ID 情報やクレジットカード番号などの機密情報の
 ユーザーは、グローバル変数`tidb_enable_async_commit = ON`を設定することでこの機能を有効にできます。
 
 - [ユーザードキュメント](/system-variables.md#tidb_enable_async_commit-new-in-v50)
-- 関連号: [#8316](https://github.com/tikv/tikv/issues/8316)
+- 関連問題: [#8316](https://github.com/tikv/tikv/issues/8316)
 
 ### インデックス選択におけるオプティマイザの安定性を向上（実験的） {#improve-the-optimizer-s-stability-in-index-selection-experimental}
 
@@ -116,7 +116,7 @@ TiDB では、ID 情報やクレジットカード番号などの機密情報の
     - `TopN`の検索ロジックをリファクタリングします。
     - ヒストグラムから`TopN`情報を削除し、ヒストグラムのインデックスを作成して、バケット NDV のメンテナンスを容易にします。
 
-関連号: [#18065](https://github.com/pingcap/tidb/issues/18065)
+関連問題: [#18065](https://github.com/pingcap/tidb/issues/18065)
 
 ### 不完全なスケジューリングや不完全なI/Oフロー制御によって発生するパフォーマンスジッタを最適化します。 {#optimize-performance-jitter-caused-by-imperfect-scheduling-or-imperfect-i-o-flow-control}
 
@@ -125,10 +125,10 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 - ノード容量の変動（常にウォーターライン付近）やPDの`store-limit`設定値が大きすぎることによって引き起こされる冗長なスケジューリングの問題を軽減します。これは、 `region-score-formula-version = v2`設定項目で有効化できる新しいスケジューリング計算式を導入することで実現します[#3269](https://github.com/tikv/pd/pull/3269)
 - `enable-cross-table-merge = true`を変更して、空のリージョンの数を減らし、リージョン間のマージ機能を有効にします[#3129](https://github.com/tikv/pd/pull/3129)
 - TiKVバックグラウンドでのデータ圧縮は、多くのI/Oリソースを消費します。システムは、バックグラウンドタスクとフォアグラウンドの読み取り・書き込み間のI/Oリソースの競合をバランスさせるために、圧縮率を自動的に調整します。この機能を`rate-limiter-auto-tuned`設定項目で有効にすると、遅延ジッターが大幅に減少します[#18011](https://github.com/pingcap/tidb/issues/18011)
-- TiKVがガベージコレクション（GC）とデータ圧縮を実行する際、パーティションはCPUとI/Oリソースを占有します。これらの2つのタスクの実行中は、データが重複する状態になります。I/O使用量を削減するため、GC圧縮フィルタ機能はこれらの2つのタスクを1つに統合し、同じタスク内で実行します。この機能はまだ実験的であり、 `gc.enable-compaction-filter = true` . から有効化できます。 [#18009](https://github.com/pingcap/tidb/issues/18009)
+- TiKVがガベージコレクション（GC）とデータ圧縮を実行する際、パーティションはCPUとI/Oリソースを占有します。これらの2つのタスクの実行中は、データが重複する状態になります。I/O使用量を削減するため、GC圧縮フィルタ機能はこれらの2つのタスクを1つに統合し、同じタスク内で実行します。この機能はまだ実験的であり、 `gc.enable-compaction-filter = true`で有効化できます。 [#18009](https://github.com/pingcap/tidb/issues/18009)
 - TiFlash がデータを圧縮またはソートすると、大量の I/O リソースが消費されます。システムは、圧縮とデータソートによる I/O リソースの使用を制限することで、リソースの競合を軽減します。この機能はまだ実験的であり、 `bg_task_io_rate_limit`で有効化できます。
 
-関連号: [#18005](https://github.com/pingcap/tidb/issues/18005)
+関連問題: [#18005](https://github.com/pingcap/tidb/issues/18005)
 
 ### リアルタイム BI / データ ウェアハウス シナリオにおけるTiFlashの安定性を向上 {#improve-the-stability-of-tiflash-in-real-time-bi-data-warehousing-scenarios}
 
@@ -145,10 +145,10 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 ### リージョンメンバーシップの変更時のシステム可用性の向上（実験的） {#improve-system-availability-during-region-membership-change-experimental}
 
-リージョンメンバーシップの変更プロセスでは、「メンバーの追加」と「メンバーの削除」という2つの操作が2つのステップで実行されます。メンバーシップの変更完了時に障害が発生した場合、リージョンは利用できなくなり、フォアグラウンドアプリケーションのエラーが返されます。導入されたRaft Joint Consensusアルゴリズムは、リージョンメンバーシップの変更中のシステム可用性を向上させます。メンバーシップ変更中の「メンバーの追加」と「メンバーの削除」操作は1つの操作に統合され、すべてのメンバーに送信されます。変更プロセス中、リージョンは中間状態にあります。変更されたメンバーのいずれかに障害が発生した場合でも、システムは引き続き利用可能です。ユーザーは、 `pd-ctl config set enable-joint-consensus true` . を実行してメンバーシップ変数を変更することで、この機能を有効にできます。 [#2860](https://github.com/tikv/pd/issues/2860) [#7587](https://github.com/tikv/tikv/issues/7587)
+リージョンメンバーシップの変更プロセスでは、「メンバーの追加」と「メンバーの削除」という2つの操作が2つのステップで実行されます。メンバーシップの変更完了時に障害が発生した場合、リージョンは利用できなくなり、フォアグラウンドアプリケーションのエラーが返されます。導入されたRaft Joint Consensusアルゴリズムは、リージョンメンバーシップの変更中のシステム可用性を向上させます。メンバーシップ変更中の「メンバーの追加」と「メンバーの削除」操作は1つの操作に統合され、すべてのメンバーに送信されます。変更プロセス中、リージョンは中間状態にあります。変更されたメンバーのいずれかに障害が発生した場合でも、システムは引き続き利用可能です。ユーザーは、 `pd-ctl config set enable-joint-consensus true`を実行してメンバーシップ変数を変更することで、この機能を有効にできます。 [#2860](https://github.com/tikv/pd/issues/2860) [#7587](https://github.com/tikv/tikv/issues/7587)
 
 - [ユーザードキュメント](/pd-configuration-file.md#enable-joint-consensus-new-in-v50)
-- 関連号: [#18079](https://github.com/pingcap/tidb/issues/18079)
+- 関連問題: [#18079](https://github.com/pingcap/tidb/issues/18079)
 
 ### メモリ管理モジュールを最適化してシステムのOOMリスクを軽減します {#optimize-the-memory-management-module-to-reduce-system-oom-risks}
 
@@ -160,7 +160,7 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 - バックアップ＆リストアツール（BR）は、AWS S3とGoogle Cloud GCSへのデータのバックアップをサポートしています。（ [ユーザードキュメント](/br/backup-and-restore-storages.md) ）
 - バックアップ＆リストアツール(BR)は、AWS S3およびGoogle Cloud GCSからTiDBへのデータの復元をサポートしています。( [ユーザードキュメント](/br/backup-and-restore-storages.md) )
-- 関連号: [#89](https://github.com/pingcap/br/issues/89)
+- 関連問題: [#89](https://github.com/pingcap/br/issues/89)
 
 ## データのインポートとエクスポート {#data-import-and-export}
 

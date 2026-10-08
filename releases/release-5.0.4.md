@@ -20,11 +20,11 @@ TiDB バージョン: 5.0.4
 
     - 次のバグ修正により実行結果が変わり、アップグレードの非互換性が発生する可能性があります。
         - `UNION`の子に`NULL`値が含まれている場合に TiDB が間違った結果を返す問題を修正しました [#26559](https://github.com/pingcap/tidb/issues/26559)
-        - `greatest(datetime) union null`空の文字列を返す問題を修正[#26532](https://github.com/pingcap/tidb/issues/26532)
+        - `greatest(datetime) union null`が空の文字列を返す問題を修正[#26532](https://github.com/pingcap/tidb/issues/26532)
         - `last_day`関数の動作が SQL モードで互換性がない問題を修正しました [#26000](https://github.com/pingcap/tidb/pull/26000)
         - `having`節が正しく動作しない可能性がある問題を修正[#26496](https://github.com/pingcap/tidb/issues/26496)
         - `between`前後の照合順序が異なる場合に発生する誤った実行結果を修正[#27146](https://github.com/pingcap/tidb/issues/27146)
-        - `group_concat`関数の列に非ビン照合順序ある場合に発生する誤った実行結果を修正しました [#27429](https://github.com/pingcap/tidb/issues/27429)
+        - `group_concat`関数の列に非ビン照合順序がある場合に発生する誤った実行結果を修正しました [#27429](https://github.com/pingcap/tidb/issues/27429)
         - 新しい照合順序が有効になっているときに、複数の列で`count(distinct)`式を使用すると間違った結果が返される問題を修正しました[#27091](https://github.com/pingcap/tidb/issues/27091)
         - `extract`関数の引数が負の期間の場合に発生する結果の誤りを修正 [#27236](https://github.com/pingcap/tidb/issues/27236)
         - `SQL_MODE`が'STRICT_TRANS_TABLES'の場合、無効な日付を挿入してもエラーが報告されない問題を修正しました[#26762](https://github.com/pingcap/tidb/issues/26762)
@@ -42,7 +42,7 @@ TiDB バージョン: 5.0.4
 
 - TiDB
 
-    - 最適化の推定を無視し、MPPモードを強制的に使用する設定`tidb_enforce_mpp=1`サポート [#26382](https://github.com/pingcap/tidb/pull/26382)
+    - オプティマイザーの推定を無視してMPPモードを強制的に使用するための`tidb_enforce_mpp=1`の設定をサポート [#26382](https://github.com/pingcap/tidb/pull/26382)
 
 - TiKV
 
@@ -64,12 +64,12 @@ TiDB バージョン: 5.0.4
 
     - ヒストグラムの行数に基づいて自動分析をトリガーする[#24237](https://github.com/pingcap/tidb/issues/24237)
     - ノードが故障して前に再起動した場合、一定期間TiFlashノードへのリクエストの送信を停止します。 [#26757](https://github.com/pingcap/tidb/pull/26757)
-    - `split region`上限を上げて`split table`と`presplit`をより安定させる[#26657](https://github.com/pingcap/tidb/pull/26657)
+    - `split region`の上限を上げて`split table`と`presplit`をより安定させる[#26657](https://github.com/pingcap/tidb/pull/26657)
     - MPPクエリの再試行をサポート[#26483](https://github.com/pingcap/tidb/pull/26483)
     - MPPクエリを起動する前にTiFlashの可用性を確認するようにします [#1807](https://github.com/pingcap/tics/issues/1807)
     - クエリ結果をより安定させるために、安定した結果モードをサポートします[#26084](https://github.com/pingcap/tidb/pull/26084)
     - MySQLシステム変数`init_connect`とその関連機能をサポートする [#18894](https://github.com/pingcap/tidb/issues/18894)
-    - MPPモードで`COUNT(DISTINCT)`集約機能を徹底的にプッシュダウンする [#25861](https://github.com/pingcap/tidb/pull/25861)
+    - MPPモードで`COUNT(DISTINCT)`集計関数を徹底的にプッシュダウンする [#25861](https://github.com/pingcap/tidb/pull/25861)
     - 集計関数を`EXPLAIN`文でプッシュダウンできない場合にログ警告を出力する [#25736](https://github.com/pingcap/tidb/pull/25736)
     - Grafanaダッシュボードの`TiFlashQueryTotalCounter`にエラーラベルを追加する [#25327](https://github.com/pingcap/tidb/pull/25327)
     - HTTP API によるセカンダリインデックス経由でクラスター化インデックステーブルの MVCC データを取得する機能をサポート [#24209](https://github.com/pingcap/tidb/issues/24209)
@@ -84,7 +84,7 @@ TiDB バージョン: 5.0.4
     - 未確定エラーの可能性を減らすために、できるだけべき等な事前書き込みを行う[#10587](https://github.com/tikv/tikv/pull/10587)
     - 書き込みフローが低い場合に"GC can not work"という誤った警告を回避する[#10662](https://github.com/tikv/tikv/pull/10662)
     - 復元するデータベースが、バックアップ時の元のクラスタサイズと常に一致するようにします[#10643](https://github.com/tikv/tikv/pull/10643)
-    - panic出力がログにフラッシュされていることを確認する [#9955](https://github.com/tikv/tikv/pull/9955)
+    - panic出力が確実にログにフラッシュされるようにする [#9955](https://github.com/tikv/tikv/pull/9955)
 
 - PD
 
@@ -118,13 +118,13 @@ TiDB バージョン: 5.0.4
     - 悲観的トランザクションのインデックスキーが繰り返しコミットされる可能性があるバグを修正[#26359](https://github.com/pingcap/tidb/issues/26359) [#10600](https://github.com/tikv/tikv/pull/10600)
     - 非同期コミットロックを解決する際に TiDB がpanicする可能性がある問題を修正[#25778](https://github.com/pingcap/tidb/issues/25778)
     - `INDEX MERGE` 使用時に列が見つからないことがあるバグを修正 [#25045](https://github.com/pingcap/tidb/issues/25045)
-    - `ALTER USER REQUIRE SSL`ユーザーの`authentication_string` をクリアするバグを修正 [#25225](https://github.com/pingcap/tidb/issues/25225)
+    - `ALTER USER REQUIRE SSL`がユーザーの`authentication_string` をクリアするバグを修正 [#25225](https://github.com/pingcap/tidb/issues/25225)
     - 新しいクラスターの`tidb_gc_scan_lock_mode`グローバル変数の値が、実際のデフォルトモード"LEGACY" ではなく"PHYSICAL"と表示されるバグを修正しました。 [#25100](https://github.com/pingcap/tidb/issues/25100)
     - `TIKV_REGION_PEERS`システムテーブルに正しい`DOWN`ステータスが表示されないバグを修正しました [#24879](https://github.com/pingcap/tidb/issues/24879)
     - HTTP API使用時に発生するメモリリークの問題を修正[#24649](https://github.com/pingcap/tidb/pull/24649)
     - ビューが`DEFINER` をサポートしない問題を修正 [#24414](https://github.com/pingcap/tidb/issues/24414)
-    - `tidb-server --help`コード`2` で終了する問題を修正 [#24046](https://github.com/pingcap/tidb/issues/24046)
-    - グローバル変数`dml_batch_size`設定が有効にならない問題を修正[#24709](https://github.com/pingcap/tidb/issues/24709)
+    - `tidb-server --help`がコード`2` で終了する問題を修正 [#24046](https://github.com/pingcap/tidb/issues/24046)
+    - グローバル変数`dml_batch_size`の設定が有効にならない問題を修正[#24709](https://github.com/pingcap/tidb/issues/24709)
     - `read_from_storage`とパーティションテーブルを同時に使用するとエラーが発生する問題を修正[#20372](https://github.com/pingcap/tidb/issues/20372)
     - 射影演算子を実行するときに TiDB がパニックを起こす問題を修正しました [#24264](https://github.com/pingcap/tidb/issues/24264)
     - 統計情報によりクエリがpanicになる可能性がある問題を修正[#24061](https://github.com/pingcap/tidb/pull/24061)
@@ -141,7 +141,7 @@ TiDB バージョン: 5.0.4
     - Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKV panic問題を修正しました[#10843](https://github.com/tikv/tikv/pull/10843)
     - 新しいバージョンのTiKVをv5.0.xにロールバックできない問題を修正しました[#10843](https://github.com/tikv/tikv/pull/10843)
     - 5.0より前のバージョンから5.0以降のバージョンにアップグレードする際に発生するTiKV panicの問題を修正しました。アップグレード前にTitanが有効になっているTiKV v3.xからクラスタをアップグレードした場合、このクラスタでこの問題が発生する可能性があります[#10774](https://github.com/tikv/tikv/issues/10774)
-    - 左悲観的ロックによる解析エラーを修正[#26404](https://github.com/pingcap/tidb/issues/26404)
+    - 残存する悲観的ロックによる解析エラーを修正[#26404](https://github.com/pingcap/tidb/issues/26404)
     - 特定のプラットフォームで期間を計算するときに発生するpanicを修正[#10571](https://github.com/tikv/tikv/pull/10571)
     - Load Base Split の`batch_get_command`のキーがエンコードされていない問題を修正[#10542](https://github.com/tikv/tikv/issues/10542)
 
@@ -184,7 +184,7 @@ TiDB バージョン: 5.0.4
         - TiCDC があまりにも多くのリージョンをキャプチャしたときに発生する OOM を回避するために、gRPC ウィンドウのサイズを小さくします[#2724](https://github.com/pingcap/tiflow/pull/2724)
         - メモリ負荷が高いときにgRPC接続が頻繁に切断されるエラーを修正[#2202](https://github.com/pingcap/tiflow/issues/2202)
         - 符号なし`TINYINT`型でTiCDCがpanicを起こすバグを修正 [#2648](https://github.com/pingcap/tiflow/issues/2648)
-        - TiCDC Open Protocolがトランザクションを挿入し、アップストリームで同じ行のデータを削除すると空の値を出力する問題を修正しました。 [#2612](https://github.com/pingcap/tiflow/issues/2612)
+        - アップストリームで同一トランザクション内に同じ行の挿入と削除が行われた場合に、TiCDC Open Protocolが空の値を出力する問題を修正しました。 [#2612](https://github.com/pingcap/tiflow/issues/2612)
         - スキーマ変更の終了 TS で変更フィードが開始されると DDL 処理が失敗するバグを修正しました。 [#2603](https://github.com/pingcap/tiflow/issues/2603)
         - 応答しないダウンストリームが、タスクがタイムアウトするまで古い所有者のレプリケーションタスクを中断する問題を修正しました[#2295](https://github.com/pingcap/tiflow/issues/2295)
         - メタデータ管理のバグを修正 [#2558](https://github.com/pingcap/tiflow/pull/2558)

@@ -111,7 +111,7 @@ TiDB バージョン: 5.2.0
 
     バージョン5.2では、ロックビューに以下の機能強化が加えられました。
 
-    - ロックビュー関連テーブルのSQLダイジェスト列に加えて、対応する正規化されたSQLテキストを表示する列をこれらのテーブルに追加してください。SQLダイジェストに対応するステートメントを手動でクエリする必要はありません。
+    - ロックビュー関連テーブルのSQLダイジェスト列に加えて、対応する正規化されたSQLテキストを表示する列をこれらのテーブルに追加します。SQLダイジェストに対応するステートメントを手動でクエリする必要はありません。
     - `TIDB_DECODE_SQL_DIGESTS`関数を追加して、クラスタ内の一連の SQL ダイジェストに対応する正規化された SQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会します。これにより、トランザクションによって過去に実行された文の照会操作が簡素化されます。
     - `DATA_LOCK_WAITS`および`DEADLOCKS`システムテーブルに、テーブル名、行 ID、インデックス値、およびキーから解釈されるその他のキー情報を表示する列を追加します。これにより、キーが属するテーブルの検索やキー情報の解釈などの操作が簡素化されます。
     - `DEADLOCKS`テーブルで再試行可能なデッドロックエラーの情報を収集する機能をサポートします。これにより、そのようなエラーによって発生する問題のトラブルシューティングが容易になります。エラー収集はデフォルトでは無効になっており、 `pessimistic-txn.deadlock-history-collect-retryable`設定を使用して有効にできます。
@@ -199,7 +199,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
 
     - TiKV への組み込み関数`json_unquote()`のプッシュダウンをサポートする [#24415](https://github.com/pingcap/tidb/issues/24415)
     - デュアルテーブルから`union`ブランチを削除することをサポートします [#25614](https://github.com/pingcap/tidb/pull/25614)
-    - 集約事業者のコスト係数を最適化する [#25241](https://github.com/pingcap/tidb/pull/25241)
+    - 集約演算子のコスト係数を最適化する [#25241](https://github.com/pingcap/tidb/pull/25241)
     - MPP外部結合で、テーブルの行数に基づいて構築テーブルを選択できるようにする [#25142](https://github.com/pingcap/tidb/pull/25142)
     - リージョンに基づいて、異なるTiFlashノード間でMPPクエリワークロードのバランスを取ることをサポートする [#24724](https://github.com/pingcap/tidb/pull/24724)
     - MPPクエリ実行後にキャッシュ内の古いリージョンを無効化する機能をサポートする [#24432](https://github.com/pingcap/tidb/pull/24432)
@@ -238,7 +238,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
         - kvクライアントの増分スキャンに同時実行制限を追加する [#1899](https://github.com/pingcap/tiflow/pull/1899)
         - TiCDCは常に内部的に古い値を取得できる [#2271](https://github.com/pingcap/tiflow/pull/2271)
         - TiCDCは、回復不能なDMLエラーが発生するとすぐに失敗して終了する可能性がある [#1928](https://github.com/pingcap/tiflow/pull/1928)
-        - `resolve lock`リージョンの初期化直後には実行できません [#2235](https://github.com/pingcap/tiflow/pull/2235)
+        - `resolve lock`はリージョンの初期化直後には実行できません [#2235](https://github.com/pingcap/tiflow/pull/2235)
         - 高並行処理時のゴルーチン数を削減するためにワーカープールを最適化する [#2201](https://github.com/pingcap/tiflow/pull/2201)
 
     - Dumpling
@@ -257,14 +257,14 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - `Limit`を使用してパーティションテーブルをクエリしたときに返される誤った値を修正する [#24636](https://github.com/pingcap/tidb/issues/24636)
     - `IFNULL`が`ENUM`または`SET`タイプの列に正しく適用されない問題を修正します。 [#24944](https://github.com/pingcap/tidb/issues/24944)
     - 結合サブクエリ内の`count`を`first_row`に変更したことで発生した誤った結果を修正します [#24865](https://github.com/pingcap/tidb/issues/24865)
-    - `ParallelApply`演算子の下で`TopN`を使用した場合に発生するクエリのハング問題を修正します [#24930](https://github.com/pingcap/tidb/issues/24930)
+    - `TopN`演算子の下で`ParallelApply`を使用した場合に発生するクエリのハング問題を修正します [#24930](https://github.com/pingcap/tidb/issues/24930)
     - 複数列プレフィックスインデックスを使用したSQL文の実行時に、予想よりも多くの結果が返される問題を修正しました [#24356](https://github.com/pingcap/tidb/issues/24356)
     - `<=>`演算子が正しく機能しない問題を修正しました [#24477](https://github.com/pingcap/tidb/issues/24477)
     - 並列演算子`Apply`のデータ競合問題を修正 [#23280](https://github.com/pingcap/tidb/issues/23280)
     - PartitionUnion オペレーターの IndexMerge 結果をソートする際に`index out of range`エラーが報告される問題を修正しました [#23919](https://github.com/pingcap/tidb/issues/23919)
     - `tidb_snapshot`変数に予想外に大きな値を設定するとトランザクション分離が損なわれる可能性がある問題を修正しました [#25680](https://github.com/pingcap/tidb/issues/25680)
     - ODBC スタイルの定数 (例: `{d '2020-01-01'}` ) を式として使用できない問題を修正しました [#25531](https://github.com/pingcap/tidb/issues/25531)
-    - `SELECT DISTINCT` `Batch Get`に変換されることで誤った結果が生じる問題を修正します [#25320](https://github.com/pingcap/tidb/issues/25320)
+    - `SELECT DISTINCT`が`Batch Get`に変換されることで誤った結果が生じる問題を修正します [#25320](https://github.com/pingcap/tidb/issues/25320)
     - TiFlashからTiKVへのバックオフクエリがトリガーできない問題を修正[#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
     - `only_full_group_by`をチェックした際に発生する`index-out-of-range`エラーを修正します[#23839](https://github.com/pingcap/tidb/issues/23839)
     - 相関サブクエリにおけるインデックス結合の結果が間違っている問題を修正しました [#25799](https://github.com/pingcap/tidb/issues/25799)
@@ -274,7 +274,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - 誤った`tikv_raftstore_hibernated_peer_state` メトリックを修正 [#10330](https://github.com/tikv/tikv/issues/10330)
     - コプロセッサ内の`json_unquote()`関数の引数の型が間違っている問題を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
     - 場合によってはACIDが損なわれるのを避けるため、正常シャットダウン時にクリアリングコールバックをスキップする[#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
-    - Leader上でレプリカ読み取り時に読み取りインデックスが共有されるバグを修正 [#10347](https://github.com/tikv/tikv/issues/10347)
+    - Leader上でレプリカ読み取り時にReadIndex が共有されるバグを修正 [#10347](https://github.com/tikv/tikv/issues/10347)
     - `DOUBLE`を`DOUBLE`にキャストする誤った関数を修正 [#25200](https://github.com/pingcap/tidb/issues/25200)
 
 - PD
@@ -291,7 +291,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - 右側の結合キーがnull許容でなく、左側の結合キーがnull許容である場合に発生するpanicを修正します。
     - `read-index`リクエストの処理に時間がかかる可能性がある問題を修正します。
     - 読み込み負荷が高いときに発生するpanic問題を修正します。
-    - `Date_Format`panicが`STRING`型の引数と`NULL`の値で呼び出されたときに発生する可能性のあるパニック問題を修正します。
+    - `Date_Format`関数が`STRING`型の引数と`NULL`の値で呼び出されたときに発生する可能性のあるパニック問題を修正します。
 
 - ツール
 
@@ -310,7 +310,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - Backup & Restore (BR)
 
         - BRが復元時にすべてのシステムテーブルの復元をスキップするバグを修正[#1197](https://github.com/pingcap/br/issues/1197) [#1201](https://github.com/pingcap/br/issues/1201)
-        - CDclog復元時にBRがDDL操作を見逃すバグを修正 [#870](https://github.com/pingcap/br/issues/870)
+        - cdclog復元時にBRがDDL操作を見逃すバグを修正 [#870](https://github.com/pingcap/br/issues/870)
 
     - TiDB Lightning
 

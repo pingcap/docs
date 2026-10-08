@@ -24,7 +24,7 @@ TiDB バージョン: 5.0.3
 
         - ノードの変更フィード情報とヘルス情報を取得するためのHTTP APIを追加します。 [#1955](https://github.com/pingcap/tiflow/pull/1955)
         - kafka シンクに SASL/SCRAM サポートを追加する [#1942](https://github.com/pingcap/tiflow/pull/1942)
-        - TiCDCをサーバーレベルで`--data-dir`サポートする [#2070](https://github.com/pingcap/tiflow/pull/2070)
+        - TiCDCがサーバーレベルで`--data-dir`をサポートするようにする [#2070](https://github.com/pingcap/tiflow/pull/2070)
 
 ## 改善点 {#improvements}
 
@@ -33,17 +33,17 @@ TiDB バージョン: 5.0.3
     - `TopN`オペレーターのTiFlashへのプッシュダウンをサポート [#25162](https://github.com/pingcap/tidb/pull/25162)
     - 組み込み関数`json_unquote()`をTiKV にプッシュダウンする機能をサポート [#24415](https://github.com/pingcap/tidb/issues/24415)
     - デュアルテーブルからユニオンブランチを削除することをサポート [#25614](https://github.com/pingcap/tidb/pull/25614)
-    - 内蔵機能`replace()` TiFlash にプッシュダウンする機能をサポート [#25565](https://github.com/pingcap/tidb/pull/25565)
+    - 組み込み関数`replace()`を TiFlash にプッシュダウンする機能をサポート [#25565](https://github.com/pingcap/tidb/pull/25565)
     - 組み込み関数`unix_timestamp()`、 `concat()`、 `year()`、 `day()`、 `datediff()`、 `datesub()`、 `concat_ws()`をTiFlashにプッシュダウンする機能をサポート [#25564](https://github.com/pingcap/tidb/pull/25564)
     - 集計オペレーターのコスト係数を最適化する [#25241](https://github.com/pingcap/tidb/pull/25241)
     - `Limit`オペレーターのTiFlashへのプッシュダウンをサポート [#25159](https://github.com/pingcap/tidb/pull/25159)
-    - 内蔵機能`str_to_date` TiFlash にプッシュダウンする機能をサポート [#25148](https://github.com/pingcap/tidb/pull/25148)
+    - 組み込み関数`str_to_date`を TiFlash にプッシュダウンする機能をサポート [#25148](https://github.com/pingcap/tidb/pull/25148)
     - MPP外部結合がテーブル行数に基づいてビルドテーブルを選択できるようにします。 [#25142](https://github.com/pingcap/tidb/pull/25142)
-    - `abs()`関数`left()` `right()` TiFlash にプッシュダウンする機能をサポート [#25133](https://github.com/pingcap/tidb/pull/25133)
+    - 組み込み関数`left()` 、 `right()` 、 `abs()`を TiFlash にプッシュダウンする機能をサポート [#25133](https://github.com/pingcap/tidb/pull/25133)
     - ブロードキャストカルテシアン結合をTiFlash にプッシュダウンする機能をサポート [#25106](https://github.com/pingcap/tidb/pull/25106)
     - `Union All`オペレーターのTiFlashへのプッシュダウンをサポート [#25051](https://github.com/pingcap/tidb/pull/25051)
     - リージョンに基づいて、異なるTiFlashノード間でMPPクエリワークロードのバランスをとることをサポート [#24724](https://github.com/pingcap/tidb/pull/24724)
-    - MPPクエリ実行後にキャッシュ内の古い領域を無効にする機能をサポート[#24432](https://github.com/pingcap/tidb/pull/24432)
+    - MPPクエリ実行後にキャッシュ内の古いリージョンを無効にする機能をサポート[#24432](https://github.com/pingcap/tidb/pull/24432)
     - フォーマット指定子`%b/%M/%r/%T` の組み込み関数`str_to_date`の MySQL 互換性を改善しました [#25767](https://github.com/pingcap/tidb/pull/25767)
 
 - TiKV
@@ -83,16 +83,16 @@ TiDB バージョン: 5.0.3
     - `Limit` を使用してパーティションテーブルをクエリしたときに返される誤った値を修正しました [#24636](https://github.com/pingcap/tidb/issues/24636)
     - `IFNULL`が`ENUM`または`SET`タイプの列に正しく反映されない問題を修正 [#24944](https://github.com/pingcap/tidb/issues/24944)
     - 結合サブクエリの`count`を`first_row`に変更することで発生する誤った結果を修正しました [#24865](https://github.com/pingcap/tidb/issues/24865)
-    - `ParallelApply` `TopN`オペレーター下で使用された場合に発生するクエリ ハングの問題を修正しました [#24930](https://github.com/pingcap/tidb/issues/24930)
+    - `ParallelApply`が`TopN`オペレーターの下で使用された場合に発生するクエリ ハングの問題を修正しました [#24930](https://github.com/pingcap/tidb/issues/24930)
     - マルチカラムプレフィックスインデックスを使用してSQL文を実行したときに予想よりも多くの結果が返される問題を修正[#24356](https://github.com/pingcap/tidb/issues/24356)
     - `<=>`演算子が正しく機能しない問題を修正[#24477](https://github.com/pingcap/tidb/issues/24477)
     - 並列`Apply`オペレーターのデータ競合問題を修正 [#23280](https://github.com/pingcap/tidb/issues/23280)
     - PartitionUnionオペレーターのIndexMerge結果をソートするときに`index out of range`エラーが報告される問題を修正しました [#23919](https://github.com/pingcap/tidb/issues/23919)
     - `tidb_snapshot`変数を予想外に大きな値に設定するとトランザクション分離が損なわれる可能性がある問題を修正しました [#25680](https://github.com/pingcap/tidb/issues/25680)
     - ODBCスタイルの定数（たとえば、 `{d '2020-01-01'}` ）を式として使用できない問題を修正しました。 [#25531](https://github.com/pingcap/tidb/issues/25531)
-    - `SELECT DISTINCT` `Batch Get`に変換すると誤った結果になる問題を修正[#25320](https://github.com/pingcap/tidb/issues/25320)
+    - `SELECT DISTINCT`が`Batch Get`に変換されると誤った結果になる問題を修正[#25320](https://github.com/pingcap/tidb/issues/25320)
     - TiFlashからTiKVへのクエリのバックオフがトリガーされない問題を修正[#23665](https://github.com/pingcap/tidb/issues/23665) [#24421](https://github.com/pingcap/tidb/issues/24421)
-    - `only_full_group_by` チェックするときに発生する`index-out-of-range`エラーを修正します) [#23839](https://github.com/pingcap/tidb/issues/23839)
+    - `only_full_group_by`をチェックするときに発生する`index-out-of-range`エラーを修正します [#23839](https://github.com/pingcap/tidb/issues/23839)
     - 相関サブクエリのインデックス結合の結果が間違っている問題を修正[#25799](https://github.com/pingcap/tidb/issues/25799)
 
 - TiKV
@@ -117,7 +117,7 @@ TiDB バージョン: 5.0.3
     - TiFlashが`CAST`関数で非バイナリ文字に間違ったパディングを追加するバグを修正しました
     - 複雑な`GROUP BY`列の集計クエリを処理するときに誤った結果が発生する問題を修正しました
     - 書き込み圧力が高い場合に発生するTiFlash panic問題を修正
-    - 右結合キーが null 値ではなく、左結合キーが null 値の場合に発生するpanicを修正しました。
+    - 右結合キーが NULL 許容ではなく、左結合キーが NULL 許容の場合に発生するpanicを修正しました。
     - `read-index`リクエストに長い時間がかかる可能性がある問題を修正しました
     - 読み取り負荷が大きい場合に発生するpanic問題を修正しました
     - `Date_Format`の関数が`STRING`型引数と`NULL`値で呼び出されたときに発生する可能性のあるpanic問題を修正しました。
@@ -126,12 +126,12 @@ TiDB バージョン: 5.0.3
 
     - TiCDC
 
-        - チェックポイント更新するときに TiCDC 所有者が終了する問題を修正しました [#1902](https://github.com/pingcap/tiflow/issues/1902)
+        - チェックポイントを更新するときに TiCDC 所有者が終了する問題を修正しました [#1902](https://github.com/pingcap/tiflow/issues/1902)
         - MySQLシンクがエラーに遭遇して一時停止した後に、一部のMySQL接続がリークする可能性があるバグを修正しました[#1946](https://github.com/pingcap/tiflow/pull/1946)
         - TiCDCが`/proc/meminfo` の読み取りに失敗した場合に発生するpanic問題を修正しました [#2024](https://github.com/pingcap/tiflow/pull/2024)
         - TiCDC のランタイムメモリ消費を削減する[#2012](https://github.com/pingcap/tiflow/pull/2012) [#1958](https://github.com/pingcap/tiflow/pull/1958)
-        - 解決された ts の計算が遅れることによって TiCDCサーバーのpanicを引き起こす可能性があるバグを修正しました。 [#1576](https://github.com/pingcap/tiflow/issues/1576)
-        - プロセッサ潜在的なデッドロック問題を修正 [#2142](https://github.com/pingcap/tiflow/pull/2142)
+        - resolved ts の計算が遅れることによって TiCDCサーバーのpanicを引き起こす可能性があるバグを修正しました。 [#1576](https://github.com/pingcap/tiflow/issues/1576)
+        - プロセッサの潜在的なデッドロック問題を修正 [#2142](https://github.com/pingcap/tiflow/pull/2142)
 
     - Backup & Restore (BR)
 
@@ -143,4 +143,4 @@ TiDB バージョン: 5.0.3
         - 一部の特殊データにおけるTiDB Lightning panic問題を修正[#1213](https://github.com/pingcap/br/issues/1213)
         - TiDB Lightningがインポートした大きなCSVファイルを分割する際に報告されるEOFエラーを修正しました[#1133](https://github.com/pingcap/br/issues/1133)
         - TiDB Lightningが`FLOAT`または`DOUBLE`タイプの`auto_increment`列を持つテーブルをインポートするときに過度に大きなベース値が生成されるバグを修正しました[#1186](https://github.com/pingcap/br/pull/1186)
-        - TiDBがParquetファイル内の`DECIMAL`種類のデータを解析できない問題を修正 [#1277](https://github.com/pingcap/br/pull/1277)
+        - TiDBがParquetファイル内の`DECIMAL`型のデータを解析できない問題を修正 [#1277](https://github.com/pingcap/br/pull/1277)
