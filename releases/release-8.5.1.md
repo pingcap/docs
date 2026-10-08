@@ -43,7 +43,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
 
 - TiFlash
 
-    - 分散型ストレージおよびコンピューティングアーキテクチャにおけるTiFlashコンピューティングノードの再試行戦略を最適化し、Amazon S3からのファイルダウンロード時に発生する例外を処理する [#9695](https://github.com/pingcap/tiflash/issues/9695) @[JinheLin](https://github.com/JinheLin)
+    - ストレージとコンピューティングの分離アーキテクチャにおけるTiFlashコンピューティングノードの再試行戦略を最適化し、Amazon S3からのファイルダウンロード時に発生する例外を処理する [#9695](https://github.com/pingcap/tiflash/issues/9695) @[JinheLin](https://github.com/JinheLin)
 
 - ツール
 
@@ -93,7 +93,7 @@ CentOS Linux 7はサポート終了（EOL）を迎えたため、今後のTiDB�
 
 - TiFlash
 
-    - 分散ストレージおよびコンピューティングアーキテクチャにおいて、新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
+    - ストレージとコンピューティングの分離アーキテクチャにおいて、新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
     - メモリ使用量が低い場合、 TiFlash がRaftメッセージの処理を予期せず拒否する可能性がある問題を修正 [#9745](https://github.com/pingcap/tiflash/issues/9745) @[CalvinNeo](https://github.com/CalvinNeo)
     - TiFlashの`POSITION()`関数が文字セット照合順序をサポートしていない問題を修正 [#9377](https://github.com/pingcap/tiflash/issues/9377) @[xzhangxian1008](https://github.com/xzhangxian1008)
 

@@ -32,7 +32,7 @@ TiDB バージョン: 7.5.5
 
     - TLS を有効にした後に証明書を更新することでTiFlash がpanicする可能性がある問題を軽減します[#8535](https://github.com/pingcap/tiflash/issues/8535) @[windtalker](https://github.com/windtalker)
     - クラスター化インデックスを持つテーブルで、バックグラウンドでの古いデータのガベージコレクションの速度が向上しました。 [#9529](https://github.com/pingcap/tiflash/issues/9529) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 分散ストレージおよびコンピューティングアーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 からファイルをダウンロードする際の例外を処理します。 [#9695](https://github.com/pingcap/tiflash/issues/9695) @[JinheLin](https://github.com/JinheLin)
+    - ストレージとコンピューティングの分離アーキテクチャ内のTiFlashコンピューティングノードの再試行戦略を最適化して、Amazon S3 からファイルをダウンロードする際の例外を処理します。 [#9695](https://github.com/pingcap/tiflash/issues/9695) @[JinheLin](https://github.com/JinheLin)
 
 - ツール
 
@@ -126,7 +126,7 @@ TiDB バージョン: 7.5.5
     - `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[#9465](https://github.com/pingcap/tiflash/issues/9465) @[guo-shaoge](https://github.com/guo-shaoge)
     - 2番目のパラメータが負の場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [#9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
     - テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - 分散ストレージおよびコンピューティングアーキテクチャで新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
+    - ストレージとコンピューティングの分離アーキテクチャで新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
 
 - ツール
 

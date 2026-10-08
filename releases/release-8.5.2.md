@@ -43,7 +43,7 @@ TiDBバージョン：8.5.2
     - 同じ名前のビューを2つ作成してもエラーが報告されない問題を修正 [#58769](https://github.com/pingcap/tidb/issues/58769) @[tiancaiamao](https://github.com/tiancaiamao)
     - TiFlashの Join における等価条件の両側のデータ型が異なると、誤った結果が生じる可能性がある問題を修正しました [#59877](https://github.com/pingcap/tidb/issues/59877) @[yibin87](https://github.com/yibin87)
     - ハッシュパーティションテーブルで`is null`条件を含むクエリがpanicを引き起こす問題を修正 [#58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014)
-    - 分散ストレージおよびコンピューティングアーキテクチャのTiFlashノードを含むクラスタで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlash Compute ノードに追加される可能性がある問題を修正しました [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ストレージとコンピューティングの分離アーキテクチャのTiFlashノードを含むクラスタで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlash Compute ノードに追加される可能性がある問題を修正しました [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 統計ファイルにnull値が含まれている場合、統計の手動読み込みに失敗することがある問題を修正 [#53966](https://github.com/pingcap/tidb/issues/53966) @[King-Dylan](https://github.com/King-Dylan)
     - TTLジョブが無視されたり、複数回処理されたりする問題を修正 [#59347](https://github.com/pingcap/tidb/issues/59347) @[YangKeao](https://github.com/YangKeao)
     - パーティション交換での誤った判断により実行が失敗する問題を修正 [#59534](https://github.com/pingcap/tidb/issues/59534) @[mjonss](https://github.com/mjonss)
@@ -102,7 +102,7 @@ TiDBバージョン：8.5.2
 
     - ソート中のデータスピルによってTiFlashがクラッシュする可能性がある問題を修正 [#9999](https://github.com/pingcap/tiflash/issues/9999) @[windtalker](https://github.com/windtalker)
     - TiFlashが`GROUP BY ... WITH ROLLUP`を含むSQL文を実行する際に`Exception: Block schema mismatch`エラーを返す可能性がある問題を修正しました。 [#10110](https://github.com/pingcap/tiflash/issues/10110) @[gengliqi](https://github.com/gengliqi)
-    - 分散ストレージとコンピューティングアーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するターゲットノードとして誤って選択される可能性がある問題を修正 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ストレージとコンピューティングの分離アーキテクチャで、 TiFlashコンピューティングノードがリージョンピアを追加するターゲットノードとして誤って選択される可能性がある問題を修正 [#9750](https://github.com/pingcap/tiflash/issues/9750) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 特定の状況でTiFlash が予期せず終了した場合に、エラースタック トレースの出力に失敗することがある問題を修正 [#9902](https://github.com/pingcap/tiflash/issues/9902) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 大量のデータをインポートした後にTiFlash が高いメモリ使用量を維持する可能性がある問題を修正 [#9812](https://github.com/pingcap/tiflash/issues/9812) @[CalvinNeo](https://github.com/CalvinNeo)
     - `profiles.default.init_thread_count_scale`が`0`に設定されている場合、 TiFlash の起動がブロックされる場合がある問題を修正 [#9906](https://github.com/pingcap/tiflash/issues/9906) @[JaySon-Huang](https://github.com/JaySon-Huang)
@@ -112,8 +112,8 @@ TiDBバージョン：8.5.2
     - 16 MiB を超えるデータを 1 行挿入するとTiFlash が再起動に失敗することがある問題を修正 [#10052](https://github.com/pingcap/tiflash/issues/10052) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - ベクトルインデックスを持つテーブルに新しいデータが挿入された後、 TiFlash が一部のディスク データを正しくクリーンアップできず、ディスク容量が異常に消費される問題を修正 [#9946](https://github.com/pingcap/tiflash/issues/9946) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TiFlashが同じテーブルに複数のベクトルインデックスを作成した後、以前に作成されたベクトルインデックスを予期せず削除し、パフォーマンスの低下を引き起こす可能性がある問題を修正しました [#9971](https://github.com/pingcap/tiflash/issues/9971) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - TiFlashが分散ストレージおよびコンピューティングアーキテクチャでベクトルインデックスを使用してベクトル検索クエリを高速化できない可能性がある問題を修正 [#9847](https://github.com/pingcap/tiflash/issues/9847) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
-    - TiFlash が分散ストレージおよびコンピューティングアーキテクチャで大量の`tag=EnumParseOverflowContainer`ログを出力する可能性がある問題を修正 [#9955](https://github.com/pingcap/tiflash/issues/9955) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - TiFlashがストレージとコンピューティングの分離アーキテクチャでベクトルインデックスを使用してベクトル検索クエリを高速化できない可能性がある問題を修正 [#9847](https://github.com/pingcap/tiflash/issues/9847) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - TiFlash がストレージとコンピューティングの分離アーキテクチャで大量の`tag=EnumParseOverflowContainer`ログを出力する可能性がある問題を修正 [#9955](https://github.com/pingcap/tiflash/issues/9955) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `SELECT ... AS OF TIMESTAMP`クエリの実行時にTiFlash が期待どおりにLearnerの読み取りをスキップしない問題を修正 [#10046](https://github.com/pingcap/tiflash/issues/10046) @[CalvinNeo](https://github.com/CalvinNeo)
     - リージョンのキー範囲が不規則なスナップショットを処理するとTiFlash がpanicになる問題を修正 [#10147](https://github.com/pingcap/tiflash/issues/10147) @[JaySon-Huang](https://github.com/JaySon-Huang)
 

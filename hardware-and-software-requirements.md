@@ -186,12 +186,12 @@ TiDBはXFSおよびExt4ファイルシステムをサポートしています。
 
 TiDBは、データベースメトリクスの可視化に[Grafana](https://grafana.com/)利用しています。JavaScriptが有効になっている最新バージョンのMicrosoft Edge、Safari、Chrome、またはFirefoxがあれば十分です。
 
-## TiFlashの分離型ストレージおよびコンピューティングアーキテクチャに必要なハードウェアおよびソフトウェア要件 {#hardware-and-software-requirements-for-tiflash-disaggregated-storage-and-compute-architecture}
+## TiFlash のストレージとコンピューティングの分離アーキテクチャに必要なハードウェアおよびソフトウェア要件 {#hardware-and-software-requirements-for-tiflash-disaggregated-storage-and-compute-architecture}
 
-前述のTiFlashソフトウェアおよびハードウェア要件は、結合されたストレージとコンピューティングアーキテクチャに関するものです。 v7.0.0 以降、 TiFlash は[分散型ストレージおよびコンピューティングアーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードと計算ノードの 2種類のノードに分割されます。これらのノードの要件は次のとおりです。
+前述のTiFlashソフトウェアおよびハードウェア要件は、ストレージとコンピューティングの結合アーキテクチャに関するものです。 v7.0.0 以降、 TiFlash は[ストレージとコンピューティングの分離アーキテクチャ](/tiflash/tiflash-disaggregated-and-s3.md)をサポートします。このアーキテクチャでは、 TiFlash は書き込みノードと計算ノードの 2種類のノードに分割されます。これらのノードの要件は次のとおりです。
 
-- ソフトウェア: 結合されたストレージとコンピューティングアーキテクチャと同じままです。 [OSおよびプラットフォームの要件](#os-and-platform-requirements)を参照してください。
-- ネットワーク ポート: 結合されたストレージとコンピューティングアーキテクチャと同じままです。[ネットワーク](#network-requirements)を参照してください。
+- ソフトウェア: ストレージとコンピューティングの結合アーキテクチャと同じままです。 [OSおよびプラットフォームの要件](#os-and-platform-requirements)を参照してください。
+- ネットワーク ポート: ストレージとコンピューティングの結合アーキテクチャと同じままです。[ネットワーク](#network-requirements)を参照してください。
 - ディスク容量:
     - TiFlash書き込みノード： TiFlashレプリカの追加時およびリージョンレプリカの移行時に、データをAmazon S3にアップロードする前にローカルバッファとして使用されるディスク容量は、少なくとも200GB以上設定することをお勧めします。また、Amazon S3と互換性のあるオブジェクトストレージが必要です。
     - TiFlash計算ノード：パフォーマンス向上のため、主に書き込みノードから読み取ったデータをキャッシュする目的で、最低でも100GBのディスク容量を設定することをお勧めします。計算ノードのキャッシュが満杯になる場合がありますが、これは正常な動作です。

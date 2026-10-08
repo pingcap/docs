@@ -164,7 +164,7 @@ v8.1.1 では、 `TiDB-community-toolkit` [バイナリパッケージ](/binary-
     - BRまたはTiDB Lightning 経由でデータをインポートした後、FastScanモードで多数の重複行が読み取られる可能性がある問題を修正しました。 [#9118](https://github.com/pingcap/tiflash/issues/9118) @[JinheLin](https://github.com/JinheLin)
     - データベースが作成直後に削除されるとTiFlash がpanicする可能性がある問題を修正[#9266](https://github.com/pingcap/tiflash/issues/9266) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TiFlashで SSL 証明書の構成を空の文字列に設定すると、誤って TLS が有効になり、 TiFlash が起動しなくなる問題を修正しました[#9235](https://github.com/pingcap/tiflash/issues/9235) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、DDL操作で非NULL列を追加した後にクエリでNULL値が誤って返される可能性がある問題を修正しました。 [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - ストレージとコンピューティングの分離アーキテクチャで、DDL操作で非NULL列を追加した後にクエリでNULL値が誤って返される可能性がある問題を修正しました。 [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - データベースにまたがる空のパーティションを持つパーティションテーブルで`RENAME TABLE ... TO ...`を実行した後にTiFlash がpanicする可能性がある問題を修正しました。 [#9132](https://github.com/pingcap/tiflash/issues/9132) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 空のパーティションを含むパーティションテーブルでクエリを実行するときに発生するクエリタイムアウトの問題を修正しました。 [#9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
     - 遅延マテリアライゼーションが有効になった後に、一部のクエリで列タイプの不一致エラーが報告される可能性がある問題を修正[#9175](https://github.com/pingcap/tiflash/issues/9175) @[JinheLin](https://github.com/JinheLin)

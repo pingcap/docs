@@ -323,7 +323,7 @@ TiDB バージョン: 8.2.0
 - TiFlash
 
     - 空のパーティションを含むパーティションテーブルに対してクエリを実行する際に発生するクエリタイムアウトの問題を修正 [#9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
-    - 分散ストレージおよびコンピューティングアーキテクチャにおいて、DDL操作で非null列を追加した後、クエリでnull値が誤って返される可能性がある問題を修正します [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - ストレージとコンピューティングの分離アーキテクチャにおいて、DDL操作で非null列を追加した後、クエリでnull値が誤って返される可能性がある問題を修正します [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `SUBSTRING_INDEX()`関数が一部の特殊なケースでTiFlashをクラッシュさせる可能性がある問題を修正しました [#9116](https://github.com/pingcap/tiflash/issues/9116) @[wshwsh12](https://github.com/wshwsh12)
     - BRまたはTiDB Lightning経由でデータをインポートした後、FastScanモードで多数の重複行が読み込まれる可能性がある問題を修正しました [#9118](https://github.com/pingcap/tiflash/issues/9118) @[JinheLin](https://github.com/JinheLin)
 

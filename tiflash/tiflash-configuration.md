@@ -175,7 +175,7 @@ I/O トラフィック制限設定を構成します。
 
 #### storage.s3 {#storages3}
 
-以下の設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
+以下の設定項目は、 TiFlash のストレージとコンピューティングの分離アーキテクチャモードにのみ適用されます。詳細については、 [TiFlash のストレージとコンピューティングの分離アーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
 
 ##### `endpoint` {#endpoint}
 
@@ -201,7 +201,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `dir` {#dir-2}
 
-- 分散ストレージおよびコンピューティングアーキテクチャ内のコンピューティングノードのローカルデータ キャッシュ ディレクトリ。
+- ストレージとコンピューティングの分離アーキテクチャ内のコンピューティングノードのローカルデータ キャッシュ ディレクトリ。
 
 <!-- Example: `"/data1/tiflash/cache"` -->
 
@@ -238,7 +238,7 @@ I/O トラフィック制限設定を構成します。
 
 ##### `disaggregated_mode` {#disaggregated_mode}
 
-- この設定項目は、 TiFlash分散ストレージおよびコンピューティングアーキテクチャモードにのみ適用されます。詳細については、 [TiFlash分散ストレージおよびコンピューティングアーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
+- この設定項目は、 TiFlash のストレージとコンピューティングの分離アーキテクチャモードにのみ適用されます。詳細については、 [TiFlash のストレージとコンピューティングの分離アーキテクチャと S3 サポート](/tiflash/tiflash-disaggregated-and-s3.md)を参照してください。
 - 値のオプション: `"tiflash_write"` 、 `"tiflash_compute"`
 
 ##### `graceful_wait_shutdown_timeout` <span class="version-mark">v8.5.4 の新機能</span> {#graceful_wait_shutdown_timeout-new-in-v854}

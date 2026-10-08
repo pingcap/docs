@@ -588,7 +588,7 @@
     - [TiDBを使用してTiFlashレプリカを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
     - [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
     - [FastScanを使用する](/tiflash/use-fastscan.md)
-    - [分散型ストレージおよびコンピューティングアーキテクチャとS3サポート](/tiflash/tiflash-disaggregated-and-s3.md)
+    - [ストレージとコンピューティングの分離アーキテクチャとS3サポート](/tiflash/tiflash-disaggregated-and-s3.md)
     - [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [TiFlashクエリ結果の具体化](/tiflash/tiflash-results-materialization.md)
     - [TiFlashの遅延発生](/tiflash/tiflash-late-materialization.md)

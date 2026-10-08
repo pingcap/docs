@@ -201,7 +201,7 @@ TiDB バージョン: 7.5.1
     - `ALTER TABLE ... MODIFY COLUMN ... NOT NULL`を実行した後にTiFlash がパニックを起こし、null 許容列が非 null 許容に変更される問題を修正しました。 [#8419](https://github.com/pingcap/tiflash/issues/8419) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `ColumnRef in (Literal, Func...)` のようなフィルタリング条件でクエリを実行したときにクエリ結果が正しくない問題を修正しました [#8631](https://github.com/pingcap/tiflash/issues/8631) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `FLASHBACK DATABASE` を実行した後もTiFlashレプリカのデータがガベージコレクションされる問題を修正しました [#8450](https://github.com/pingcap/tiflash/issues/8450) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlash がオブジェクトストレージデータの GC 所有者を選択できない可能性がある問題を修正しました。 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ストレージとコンピューティングの分離アーキテクチャで、 TiFlash がオブジェクトストレージデータの GC 所有者を選択できない可能性がある問題を修正しました。 [#8519](https://github.com/pingcap/tiflash/issues/8519) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 定数文字列パラメータを含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。 [#8604](https://github.com/pingcap/tiflash/issues/8604) @[windtalker](https://github.com/windtalker)
     - ポイントインタイムリカバリ（PITR）を実行した後、または`FLASHBACK CLUSTER TO`を実行した後にTiFlashレプリカデータが誤って削除され、データ異常が発生する可能性がある問題を修正しました。 [#8777](https://github.com/pingcap/tiflash/issues/8777) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - 結合に非等価条件が含まれている場合に、 TiFlash Anti Semi Join が誤った結果を返す可能性がある問題を修正しました。 [#8791](https://github.com/pingcap/tiflash/issues/8791) @[windtalker](https://github.com/windtalker)

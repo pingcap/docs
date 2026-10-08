@@ -107,7 +107,7 @@ TiDB バージョン: 7.1.1
 
 - TiFlash
 
-    - 分散ストレージおよびコンピューティングアーキテクチャモードで、 TiFlashコンピューティングノードが不正確なCPUコア情報を取得する問題を修正しました。 [#7436](https://github.com/pingcap/tiflash/issues/7436) @[guo-shaoge](https://github.com/guo-shaoge)
+    - ストレージとコンピューティングの分離アーキテクチャモードで、 TiFlashコンピューティングノードが不正確なCPUコア情報を取得する問題を修正しました。 [#7436](https://github.com/pingcap/tiflash/issues/7436) @[guo-shaoge](https://github.com/guo-shaoge)
     - オンラインアンセーフリカバリを使用した後、 TiFlashの再起動に時間がかかりすぎる問題を修正しました [#7671](https://github.com/pingcap/tiflash/issues/7671) @[hongyunyan](https://github.com/hongyunyan)
 
 - ツール

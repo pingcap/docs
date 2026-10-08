@@ -297,7 +297,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
 - TiFlash
 
     - `SUBSTRING()`関数が特定の整数型に対して`pos`および`len`引数をサポートしていないためクエリエラーが発生する問題を修正しました [#9473](https://github.com/pingcap/tiflash/issues/9473) @[gengliqi](https://github.com/gengliqi)
-    - 分散ストレージおよびコンピューティングアーキテクチャにおいて、 TiFlash書き込みノードをスケールアウトした後にベクトル検索のパフォーマンスが低下する可能性がある問題を修正します [#9637](https://github.com/pingcap/tiflash/issues/9637) @[kolafish](https://github.com/kolafish)
+    - ストレージとコンピューティングの分離アーキテクチャにおいて、 TiFlash書き込みノードをスケールアウトした後にベクトル検索のパフォーマンスが低下する可能性がある問題を修正します [#9637](https://github.com/pingcap/tiflash/issues/9637) @[kolafish](https://github.com/kolafish)
     - `SUBSTRING()`関数が、2 番目のパラメータが負の場合に誤った結果を返す問題を修正しました [#9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
     - `REPLACE()`関数が最初のパラメータが定数の場合にエラーを返す問題を修正 [#9522](https://github.com/pingcap/tiflash/issues/9522) @[guo-shaoge](https://github.com/guo-shaoge)
     - `LPAD()`および`RPAD()`関数が場合によっては誤った結果を返す問題を修正 [#9465](https://github.com/pingcap/tiflash/issues/9465) @[guo-shaoge](https://github.com/guo-shaoge)

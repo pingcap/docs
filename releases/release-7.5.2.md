@@ -192,17 +192,17 @@ TiDB バージョン: 7.5.2
 
 - TiFlash
 
-    - 分散ストレージおよびコンピューティングアーキテクチャで、DDL操作で非NULL列を追加した後にクエリでNULL値が誤って返される可能性がある問題を修正しました。 [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - ストレージとコンピューティングの分離アーキテクチャで、DDL操作で非NULL列を追加した後にクエリでNULL値が誤って返される可能性がある問題を修正しました。 [#9084](https://github.com/pingcap/tiflash/issues/9084) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - 空のパーティションを含むパーティションテーブルでクエリを実行するときに発生するクエリタイムアウトの問題を修正しました。 [#9024](https://github.com/pingcap/tiflash/issues/9024) @[JinheLin](https://github.com/JinheLin)
-    - 分散ストレージとコンピューティングアーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanicする可能性がある問題を修正しました[#8860](https://github.com/pingcap/tiflash/issues/8860) @[guo-shaoge](https://github.com/guo-shaoge)
+    - ストレージとコンピューティングの分離アーキテクチャで、コンピューティングノードのプロセスが停止するとTiFlash がpanicする可能性がある問題を修正しました[#8860](https://github.com/pingcap/tiflash/issues/8860) @[guo-shaoge](https://github.com/guo-shaoge)
     - 生成列をクエリするとエラーが返される問題を修正しました [#8787](https://github.com/pingcap/tiflash/issues/8787) @[guo-shaoge](https://github.com/guo-shaoge)
     - クラスタをv6.5.0より前のバージョンからv6.5.0以降にアップグレードするときに、 TiFlashメタデータが破損してプロセスがpanicになる可能性がある問題を修正しました[#9039](https://github.com/pingcap/tiflash/issues/9039) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - チャンクエンコード中に`ENUM`列がTiFlashを引き起こす可能性がある問題を修正しました [#8674](https://github.com/pingcap/tiflash/issues/8674) @[yibin87](https://github.com/yibin87)
     - ログの誤った`local_region_num`値を修正 [#8895](https://github.com/pingcap/tiflash/issues/8895) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - 分散ストレージとコンピューティングアーキテクチャで、シャットダウン中にTiFlash がpanicになる可能性がある問題を修正しました。 [#8837](https://github.com/pingcap/tiflash/issues/8837) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - ストレージとコンピューティングの分離アーキテクチャで、シャットダウン中にTiFlash がpanicになる可能性がある問題を修正しました。 [#8837](https://github.com/pingcap/tiflash/issues/8837) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - TiFlash が高同時実行読み取りシナリオで一時的に誤った結果を返す可能性がある問題を修正[#8845](https://github.com/pingcap/tiflash/issues/8845) @[JinheLin](https://github.com/JinheLin)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`設定項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [#8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
-    - 分散ストレージおよびコンピューティングアーキテクチャで、ネットワーク分離後にクエリが永続的にブロックされる可能性がある問題を修正しました [#8806](https://github.com/pingcap/tiflash/issues/8806) @[JinheLin](https://github.com/JinheLin)
+    - ストレージとコンピューティングの分離アーキテクチャで、 TiFlashコンピューティングノードの`storage.remote.cache.capacity`設定項目の値を変更した後、Grafanaに表示されるディスク`used_size`メトリックが正しくないという問題を修正しました。 [#8920](https://github.com/pingcap/tiflash/issues/8920) @[JinheLin](https://github.com/JinheLin)
+    - ストレージとコンピューティングの分離アーキテクチャで、ネットワーク分離後にクエリが永続的にブロックされる可能性がある問題を修正しました [#8806](https://github.com/pingcap/tiflash/issues/8806) @[JinheLin](https://github.com/JinheLin)
     - 非厳密モードの`sql_mode` で無効なデフォルト値を持つ列にデータを挿入するとTiFlash がpanicする可能性がある問題を修正しました [#8803](https://github.com/pingcap/tiflash/issues/8803) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
 - ツール
