@@ -144,7 +144,7 @@ ALTER TABLE `tbl01` ADD COLUMN `Level` INT;
 
 ![optimistic-ddl-example-5](/media/dm/optimistic-ddl-example-5.png)
 
-At this time, the downstream already have had the same `Level` column, so DM-master performs no operation after comparing the table schemas.
+At this time, the downstream already has the same `Level` column, so DM-master performs no operation after comparing the table schemas.
 
 Drop a `Name` column in `tbl01`:
 
