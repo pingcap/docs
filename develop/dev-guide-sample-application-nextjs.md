@@ -229,7 +229,7 @@ For complete sample code and how to run it, check out the [tidb-nextjs-vercel-qu
 
 ### Connect to TiDB
 
-The following code establish a connection to TiDB with options defined in the environment variables:
+The following code establishes a connection to TiDB with options defined in the environment variables:
 
 ```javascript
 // src/lib/tidb.js
