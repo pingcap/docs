@@ -772,7 +772,7 @@ grafana_servers:
 
 - `web_port`: Specifies the port that Alertmanager uses to provide web services. The default value is `9093`.
 
-- `cluster_port`: Specifies the communication port between one Alertmanger and other Alertmanager. The default value is `9094`.
+- `cluster_port`: Specifies the communication port between one Alertmanager and other Alertmanager. The default value is `9094`.
 
 - `deploy_dir`: Specifies the deployment directory. If it is not specified or specified as a relative directory, the directory is generated according to the `deploy_dir` directory configured in `global`.
 
