@@ -122,10 +122,10 @@ block-allow-list:  # Use black-white-list if the DM version is earlier than or e
     - db-name: "logs"
       tbl-name: "~_2018$"
     - db-name: "~^forum.*"
-​      tbl-name: "messages"
+      tbl-name: "messages"
     ignore-tables:
     - db-name: "~.*"
-​      tbl-name: "^messages.*"
+      tbl-name: "^messages.*"
 ```
 
 After applying the `bw-rule` rule:
