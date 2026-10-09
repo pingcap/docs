@@ -24,7 +24,7 @@ On February 11, 2018, TiDB 1.0.8 is released with the following updates:
 
 ## PD
 
-- [Reduce the lock overheat of the region heartbeats](https://github.com/pingcap/pd/pull/932)
+- [Reduce the lock overhead of the region heartbeats](https://github.com/pingcap/pd/pull/932)
 - [Fix the issue that a hot region scheduler selects the wrong Leader](https://github.com/pingcap/pd/pull/939)
 
 ## TiKV
