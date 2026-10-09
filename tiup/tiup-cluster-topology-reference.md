@@ -70,7 +70,7 @@ The `global` section corresponds to the cluster's global configuration and has t
 
     - If the absolute path `log_dir` is configured at the instance level, the actual log directory is the `log_dir` configured for the instance.
 
-    - For each instance, if you not configure `log_dir`, its default value is `<global.log_dir>`.
+    - For each instance, if you do not configure `log_dir`, its default value is `<global.log_dir>`.
 
     - If `log_dir` is a relative path, the component log is placed in `<deploy_dir>/<log_dir>`. For the calculation rules of `<deploy_dir>`, see the application rules of the `deploy_dir` field.
 
