@@ -51,7 +51,7 @@ On August 4, 2017, TiDB RC4 is released! This release is focused on MySQL compat
 
 ### TiSpark Beta Release
 
-+ Implement the prediction pushdown
++ Implement the predicate pushdown
 + Implement the aggregation pushdown
 + Implement range pruning
 + Capable of running full set of TPC-H except one query that needs view support
