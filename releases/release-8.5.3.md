@@ -102,7 +102,7 @@ TiDBバージョン：8.5.3
 
 - TiKV
 
-    - TiKV が正常シャットダウン中に進行中の手動圧縮タスクを終了できない問題を修正 [#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
+    - TiKV が正常シャットダウン中に進行中の手動コンパクションタスクを終了できない問題を修正 [#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
     - クラスターのアップグレード後にデフォルトのリージョンサイズが予期せず変更される問題を修正 [#18503](https://github.com/tikv/tikv/issues/18503) @[LykxSassinator](https://github.com/LykxSassinator)
     - TiKVがクライアントがデコードできない圧縮アルゴリズムを使用する可能性がある問題を修正 [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
     - Titanが無効化された後に、ブロブインデックスが原因でスナップショットの適用が失敗する可能性がある問題を修正しました [#18434](https://github.com/tikv/tikv/issues/18434) @[v01dstar](https://github.com/v01dstar)

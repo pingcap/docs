@@ -65,7 +65,7 @@ TiDB Ansible バージョン: 3.0.5
 - エンジン
     - RocksDB `force_consistency_checks`を有効にしてデータの安全性を向上[#5662](https://github.com/tikv/tikv/pull/5662)
     - Titan での同時フラッシュ操作によりデータ損失が発生する可能性がある問題を修正[#5672](https://github.com/tikv/tikv/pull/5672)
-    - L0内圧縮によるTiKVのクラッシュと再起動の問題を回避するためにrust-rocksdbのバージョンを更新しました[#5710](https://github.com/tikv/tikv/pull/5710)
+    - L0内コンパクションによるTiKVのクラッシュと再起動の問題を回避するためにrust-rocksdbのバージョンを更新しました[#5710](https://github.com/tikv/tikv/pull/5710)
 
 ## PD {#pd}
 

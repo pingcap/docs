@@ -35,11 +35,11 @@ TiDBバージョン: 6.4.0-DMR
 
 ### SQL {#sql}
 
-- SQL文を使用して、テーブル内の指定されたパーティションのTiFlashレプリカをすぐに圧縮するサポート [#5315](https://github.com/pingcap/tiflash/issues/5315) @[hehechen](https://github.com/hehechen)
+- SQL文を使用して、テーブル内の指定されたパーティションのTiFlashレプリカをすぐにコンパクションするサポート [#5315](https://github.com/pingcap/tiflash/issues/5315) @[hehechen](https://github.com/hehechen)
 
-    バージョン6.2.0以降、TiDBはTiFlashのフルテーブルレプリカに対して[物理データを即座に圧縮する](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)機能をサポートしています。適切なタイミングでSQL文を手動で実行してTiFlash内の物理データを即座に圧縮することで、ストレージ容量を削減し、クエリパフォーマンスを向上させることができます。バージョン6.4.0では、圧縮するTiFlashレプリカデータの粒度をさらに細かくし、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できるようにしました。
+    バージョン6.2.0以降、TiDBはTiFlashのフルテーブルレプリカに対して[物理データを即座にコンパクションする](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact)機能をサポートしています。適切なタイミングでSQL文を手動で実行してTiFlash内の物理データを即座にコンパクションすることで、ストレージ容量を削減し、クエリパフォーマンスを向上させることができます。バージョン6.4.0では、コンパクションするTiFlashレプリカデータの粒度をさらに細かくし、テーブル内の指定されたパーティションのTiFlashレプリカを即座にコンパクションできるようにしました。
 
-    SQL文`ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`を実行すると、テーブル内の指定されたパーティションのTiFlashレプリカを即座に圧縮できます。
+    SQL文`ALTER TABLE table_name COMPACT [PARTITION PartitionNameList] [engine_type REPLICA]`を実行すると、テーブル内の指定されたパーティションのTiFlashレプリカを即座にコンパクションできます。
 
     詳細については、 [ユーザー向けドキュメント](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)を参照してください。
 

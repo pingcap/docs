@@ -14,7 +14,7 @@ TiDB バージョン: 7.5.7
 ## 互換性の変更 {#compatibility-changes}
 
 - [`tidb_enable_historical_stats`](https://docs.pingcap.com/tidb/v7.5/system-variables/#tidb_enable_historical_stats)のデフォルト値を`ON`から`OFF`に変更します。これにより、潜在的な安定性の問題を回避するために履歴統計がオフになります[#53048](https://github.com/pingcap/tidb/issues/53048) @[hawkingrei](https://github.com/hawkingrei)
-- TiKV は以下の設定項目を廃止し、自動圧縮動作を制御する新しい[`gc.auto-compaction`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#gcauto-compaction)設定グループに置き換えます。 [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
+- TiKV は以下の設定項目を廃止し、自動コンパクション動作を制御する新しい[`gc.auto-compaction`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file/#gcauto-compaction)設定グループに置き換えます。 [#18727](https://github.com/tikv/tikv/issues/18727) @[v01dstar](https://github.com/v01dstar)
 
     - 非推奨の設定項目: [`region-compact-check-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-check-interval) 、 [`region-compact-check-step`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-check-step) 、 [`region-compact-min-tombstones`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-min-tombstones) 、 [`region-compact-tombstones-percent`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-tombstones-percent) 、 [`region-compact-min-redundant-rows`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-min-redundant-rows-new-in-v710) 、および[`region-compact-redundant-rows-percent`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#region-compact-redundant-rows-percent-new-in-v710) 。
     - 新しい設定項目: [`gc.auto-compaction.check-interval`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#check-interval-new-in-v757)、 [`gc.auto-compaction.tombstone-num-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#tombstone-num-threshold-new-in-v757)、 [`gc.auto-compaction.tombstone-percent-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#tombstone-percent-threshold-new-in-v757)、 [`gc.auto-compaction.redundant-rows-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#redundant-rows-threshold-new-in-v757)、 [`gc.auto-compaction.redundant-rows-percent-threshold`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#redundant-rows-percent-threshold-new-in-v757)、および[`gc.auto-compaction.bottommost-level-force`](https://docs.pingcap.com/tidb/v7.5/tikv-configuration-file#bottommost-level-force-new-in-v757)
@@ -35,7 +35,7 @@ TiDB バージョン: 7.5.7
 
 - TiKV
 
-    - TiKV圧縮のトリガーロジックを最適化して、すべてのデータセグメントを再利用効率の順に処理し、MVCC冗長データのパフォーマンスへの影響を軽減します。 [#18571](https://github.com/tikv/tikv/issues/18571) @[v01dstar](https://github.com/v01dstar)
+    - TiKVコンパクションのトリガーロジックを最適化して、すべてのデータセグメントを再利用効率の順に処理し、MVCC冗長データのパフォーマンスへの影響を軽減します。 [#18571](https://github.com/tikv/tikv/issues/18571) @[v01dstar](https://github.com/v01dstar)
     - 多数の SST ファイルが存在する環境での非同期スナップショットおよび書き込み操作のテールレイテンシーを最適化します[#18743](https://github.com/tikv/tikv/issues/18743) @[Connor1996](https://github.com/Connor1996)
     - 空のテーブルと小さなリージョンシナリオでのリージョン結合の速度を改善 [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
     - Raftstoreの`CompactedEvent`処理を`split-check`ワーカーに移動して最適化し、メインのRaftstoreスレッドのブロッキングを削減します。 [#18532](https://github.com/tikv/tikv/issues/18532) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -120,7 +120,7 @@ TiDB バージョン: 7.5.7
     - TiKVがブラジルとエジプトのタイムゾーンを誤って変換する問題を修正[#16220](https://github.com/tikv/tikv/issues/16220) @[overvenus](https://github.com/overvenus)
     - スローログの`StoreMsg`ログエントリの誤解を招く説明を修正 [#18561](https://github.com/tikv/tikv/issues/18561) @[LykxSassinator](https://github.com/LykxSassinator)
     - スレッドメモリメトリックの誤りを修正[#18125](https://github.com/tikv/tikv/issues/18125) @[Connor1996](https://github.com/Connor1996)
-    - TiKV が正常なシャットダウン中に進行中の手動圧縮タスクを終了できない問題を修正[#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
+    - TiKV が正常なシャットダウン中に進行中の手動コンパクションタスクを終了できない問題を修正[#18396](https://github.com/tikv/tikv/issues/18396) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - PD
 

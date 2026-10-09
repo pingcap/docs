@@ -66,7 +66,7 @@ TiDB Ansible バージョン: 4.0.0-beta
 ## TiKV {#tikv}
 
 - RocksDBのバージョンを6.4.6にアップグレードします
-- TiKV起動時に2GBの空ファイルを自動的に作成することで、ディスク容量が不足するとシステムが正常に圧縮タスクを実行できない問題を修正しました。 [#6321](https://github.com/tikv/tikv/pull/6321)
+- TiKV起動時に2GBの空ファイルを自動的に作成することで、ディスク容量が不足するとシステムが正常にコンパクションタスクを実行できない問題を修正しました。 [#6321](https://github.com/tikv/tikv/pull/6321)
 - 迅速なバックアップと復元をサポート
     - [#6462](https://github.com/tikv/tikv/pull/6462) [#6395](https://github.com/tikv/tikv/pull/6395) [#6378](https://github.com/tikv/tikv/pull/6378) [#6374](https://github.com/tikv/tikv/pull/6374) [#6349](https://github.com/tikv/tikv/pull/6349)
     - [#6339](https://github.com/tikv/tikv/pull/6339) [#6308](https://github.com/tikv/tikv/pull/6308) [#6295](https://github.com/tikv/tikv/pull/6295) [#6286](https://github.com/tikv/tikv/pull/6286) [#6283](https://github.com/tikv/tikv/pull/6283)

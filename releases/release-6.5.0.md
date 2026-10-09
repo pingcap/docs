@@ -466,7 +466,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 
 - TiFlash
 
-    - TiFlash を再起動した後、デルタレイヤーの列ファイルを圧縮できない問題を修正しました。 [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
+    - TiFlash を再起動した後、デルタレイヤーの列ファイルをコンパクションできない問題を修正しました。 [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
     - TiFlashファイルオープンOPSが高すぎる問題を修正 [#6345](https://github.com/pingcap/tiflash/issues/6345) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 - ツール

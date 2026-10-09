@@ -105,9 +105,9 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 | 設定ファイルまたはコンポーネント | 設定パラメータ                                                                                                                                | 変更の種類  | 説明                                                                               |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
-| TiKV                     | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | 新しく追加された | MVCC読み取り対応の圧縮を有効にするかどうかを制御します。デフォルト値は`false`です。                                  |
-| TiKV                     | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856)               | 新しく追加された | リージョンの圧縮優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。デフォルト値は`3.0`です。                 |
-| TiKV                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)         | 新しく追加された | リージョンを圧縮候補としてマークするために、読み取りリクエストごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
+| TiKV                     | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | 新しく追加された | MVCC読み取り対応のコンパクションを有効にするかどうかを制御します。デフォルト値は`false`です。                                  |
+| TiKV                     | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856)               | 新しく追加された | リージョンのコンパクション優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。デフォルト値は`3.0`です。                 |
+| TiKV                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)         | 新しく追加された | リージョンをコンパクション候補としてマークするために、読み取りリクエストごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
 | TiCDC                    | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv)                                                         | 新しく追加された | CSVファイルにヘッダー行を出力するかどうかを制御します。デフォルト値は`false`です。このパラメータはTiCDCの新しいアーキテクチャにのみ適用されます。 |
 
 ### システムテーブルの変更 {#system-table-changes}
@@ -131,7 +131,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
 - TiKV
 
-    - MVCCの読み取りオーバーヘッドを検出し、読み取りコストの高いリージョンの圧縮を優先することでクエリパフォーマンスを向上させる、負荷ベースの圧縮メカニズムを導入します [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
+    - MVCCの読み取りオーバーヘッドを検出し、読み取りコストの高いリージョンのコンパクションを優先することでクエリパフォーマンスを向上させる、負荷ベースのコンパクションメカニズムを導入します [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
     - クラスタのスケールアウトおよびスケールイン操作中に、古いキーをSSTファイル取り込みでクリーンアップするのではなく直接削除することで、古いキーの範囲のクリーンアップロジックを最適化し、オンラインリクエストのレイテンシーへの影響を軽減します。 [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - PD

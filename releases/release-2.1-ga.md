@@ -262,7 +262,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - [RocksDB関連の問題を診断するための`ldb`コマンドを追加します](https://tikv.org/docs/3.0/reference/tools/tikv-ctl/#ldb-command)
 
-    - `compact`コマンドは、最下層のデータを圧縮するかどうかの指定をサポートします。
+    - `compact`コマンドは、最下層のデータをコンパクションするかどうかの指定をサポートします。
 
 ## ツール {#tools}
 

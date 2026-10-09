@@ -368,7 +368,7 @@ TiDB バージョン: 5.4.0
     - MVCC削除レコードがGCによってクリアされない問題を修正しました [#11217](https://github.com/tikv/tikv/issues/11217)
     - 悲観的トランザクションモードでプリライトリクエストを再試行すると、まれにデータ不整合のリスクが発生する可能性がある問題を修正しました [#11187](https://github.com/tikv/tikv/issues/11187)
     - GCスキャンによってメモリオーバーフローが発生する問題を修正 [#11410](https://github.com/tikv/tikv/issues/11410)
-    - RocksDBのフラッシュまたは圧縮時にディスク容量がいっぱいになったときにpanicが発生する問題を修正 [#11224](https://github.com/tikv/tikv/issues/11224)
+    - RocksDBのフラッシュまたはコンパクション時にディスク容量がいっぱいになったときにpanicが発生する問題を修正 [#11224](https://github.com/tikv/tikv/issues/11224)
 
 - PD
 

@@ -241,7 +241,7 @@ TiDB バージョン: 7.4.0
 
 - v7.4.0 以降、TiDB は MySQL 8.0 の主要な機能と互換性があり、 `version()`は`8.0.11`で始まるバージョンを返します。
 
-- TiFlash を以前のバージョンから v7.4.0 にアップグレードした後、元のバージョンへのインプレースダウングレードはサポートされません。これは、v7.4 以降、 TiFlash がPageStorage V3 のデータ圧縮ロジックを最適化し、データ圧縮中に発生する読み取りおよび書き込みの増幅を削減しているためです。これにより、基盤となるストレージファイル名の一部が変更されます。
+- TiFlash を以前のバージョンから v7.4.0 にアップグレードした後、元のバージョンへのインプレースダウングレードはサポートされません。これは、v7.4 以降、 TiFlash がPageStorage V3 のデータコンパクションロジックを最適化し、データコンパクション中に発生する読み取りおよび書き込みの増幅を削減しているためです。これにより、基盤となるストレージファイル名の一部が変更されます。
 
 - TSO タイムスタンプの論理部分を抽出できるように[`TIDB_PARSE_TSO_LOGICAL()`](/functions-and-operators/tidb-functions.md#tidb-specific-functions)関数が追加されました。
 
@@ -273,7 +273,7 @@ TiDB バージョン: 7.4.0
 | -------------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`enable-stats-cache-mem-quota`](/tidb-configuration-file.md#enable-stats-cache-mem-quota-new-in-v610)                                  | 変更     | デフォルト値は`false`から`true`に変更され、TiDB 統計のキャッシュのメモリ制限がデフォルトで有効になることを意味します。                                                                                                    |
 | TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].periodic-compaction-seconds</code>](/tikv-configuration-file.md#periodic-compaction-seconds-new-in-v720) | 変更     | RocksDBの定期的なコンパクションをデフォルトで無効化するため、デフォルト値を`"30d"`から`"0s"`に変更しました。この変更により、TiDBのアップグレード後に大量のコンパクションがトリガーされ、フロントエンドの読み取りおよび書き込みパフォーマンスに影響が出るのを回避できます。                       |
-| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].ttl</code>](/tikv-configuration-file.md#ttl-new-in-v720)                                                 | 変更     | デフォルト値が`"30d"`から`"0s"`に変更され、SST ファイルは TTL によりデフォルトで圧縮をトリガーしなくなり、フロントエンドの読み取りおよび書き込みパフォーマンスに影響を与えなくなります。                                                                 |
+| TiKV           | [<code>rocksdb.\[defaultcf\|writecf\|lockcf\].ttl</code>](/tikv-configuration-file.md#ttl-new-in-v720)                                                 | 変更     | デフォルト値が`"30d"`から`"0s"`に変更され、SST ファイルは TTL によりデフォルトでコンパクションをトリガーしなくなり、フロントエンドの読み取りおよび書き込みパフォーマンスに影響を与えなくなります。                                                                 |
 | TiFlash        | [`flash.compact_log_min_gap`](/tiflash/tiflash-configuration.md)                                                                        | 新しく追加された | 現在のRaftステートマシンによって進められた`applied_index`と最後のディスクスピル時の`applied_index`の差が`compact_log_min_gap`を超えると、 TiFlash はTiKV から`CompactLog`コマンドを実行し、データをディスクにスピルします。                 |
 | TiFlash        | [`profiles.default.enable_resource_control`](/tiflash/tiflash-configuration.md)                                                         | 新しく追加された | TiFlashリソース制御機能を有効にするかどうかを制御します。                                                                                                                                        |
 | TiFlash        | [`storage.format_version`](/tiflash/tiflash-configuration.md)                                                                           | 変更     | デフォルト値を`4`から`5`に変更します。新しい形式では、小さなファイルを結合することで物理ファイルの数を削減できます。                                                                                                           |
@@ -305,7 +305,7 @@ TiDB バージョン: 7.4.0
     - OOM を防ぐためにリゾルバのメモリ使用量を最適化します [#15458](https://github.com/tikv/tikv/issues/15458) @[overvenus](https://github.com/overvenus)
     - ルータオブジェクトのLRUCacheを排除してメモリ使用量を削減し、OOM を防止します。 [#15430](https://github.com/tikv/tikv/issues/15430) @[Connor1996](https://github.com/Connor1996)
     - TiCDC リゾルバのメモリ使用量を削減 [#15412](https://github.com/tikv/tikv/issues/15412) @[overvenus](https://github.com/overvenus)
-    - RocksDB 圧縮によるメモリ変動を削減 [#15324](https://github.com/tikv/tikv/issues/15324) @[overvenus](https://github.com/overvenus)
+    - RocksDB コンパクションによるメモリ変動を削減 [#15324](https://github.com/tikv/tikv/issues/15324) @[overvenus](https://github.com/overvenus)
     - Partitioned Raft KV のフロー制御モジュールのメモリ消費を削減 [#15269](https://github.com/tikv/tikv/issues/15269) @[overvenus](https://github.com/overvenus)
     - 接続再試行のプロセスでPDクライアントのバックオフメカニズムを追加し、エラー再試行中に再試行間隔を徐々に増やしてPD圧力を軽減します。 [#15428](https://github.com/tikv/tikv/issues/15428) @[nolouch](https://github.com/nolouch)
     - RocksDB の`background_compaction`を動的に調整するサポート [#15424](https://github.com/tikv/tikv/issues/15424) @[glorv](https://github.com/glorv)

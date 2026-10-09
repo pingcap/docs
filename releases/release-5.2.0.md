@@ -55,8 +55,8 @@ TiDB バージョン: 5.2.0
 | TiKV設定ファイル     | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新しく追加された | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                     |
 | TiKV設定ファイル     | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)                                 | 新しく追加された | kvDB の memtable の数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`5`です。                                                                |
 | TiKV設定ファイル     | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                   | 新しく追加された | kvDB L0 ファイルの数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`9`です。                                                                    |
-| TiKV設定ファイル     | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"192GB"です。                                |
-| TiKV設定ファイル     | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中の圧縮バイト数がこのしきい値に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"1024GB"です。                              |
+| TiKV設定ファイル     | [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中のコンパクションバイト数がこのしきい値に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"192GB"です。                                |
+| TiKV設定ファイル     | [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit) | 新しく追加された | KvDB の保留中のコンパクションバイト数がこのしきい値に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し、 `ServerIsBusy`エラーを報告します。デフォルト値は"1024GB"です。                              |
 
 ### その他 {#others}
 
@@ -139,7 +139,7 @@ TiDB バージョン: 5.2.0
 
     TiKVは、従来のRocksDBの書き込み停止メカニズムに代わる新しいフロー制御メカニズムを導入しました。この新しいメカニズムは、従来の書き込み停止メカニズムと比較して、フォアグラウンド書き込みの安定性への影響を軽減します。
 
-    具体的には、RocksDBの圧縮による負荷が蓄積した場合、以下の問題を回避するために、RocksDBレイヤーではなくTiKVスケジューラレイヤーでフロー制御が実行されます。
+    具体的には、RocksDBのコンパクションによる負荷が蓄積した場合、以下の問題を回避するために、RocksDBレイヤーではなくTiKVスケジューラレイヤーでフロー制御が実行されます。
 
     - Raftstoreが停止していますが、これはRocksDBの書き込み停止が原因です。
     - Raftの選挙がタイムアウトし、その結果、ノードリーダーが移管されます。

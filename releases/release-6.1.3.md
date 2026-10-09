@@ -68,7 +68,7 @@ TiDB バージョン: 6.1.3
     - 引数の型が`UInt8`の場合に論理演算子が誤った結果を返す問題を修正しました [#6127](https://github.com/pingcap/tiflash/issues/6127) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `CAST(value AS DATETIME)`への間違ったデータ入力によりTiFlash sys CPUの負荷が高くなる問題を修正 [#5097](https://github.com/pingcap/tiflash/issues/5097) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - 書き込み圧力が高すぎるとデルタレイヤーに過剰な列ファイルが生成される可能性がある問題を修正しました。 [#6361](https://github.com/pingcap/tiflash/issues/6361) @[lidezhu](https://github.com/lidezhu)
-    - TiFlash を再起動した後、デルタレイヤーの列ファイルを圧縮できない問題を修正しました。 [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
+    - TiFlash を再起動した後、デルタレイヤーの列ファイルをコンパクションできない問題を修正しました。 [#6159](https://github.com/pingcap/tiflash/issues/6159) @[lidezhu](https://github.com/lidezhu)
 
 - ツール
 
