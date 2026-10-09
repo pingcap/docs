@@ -152,7 +152,11 @@ These values are strings with space-separated types enclosed in brackets, such a
 
 If the corresponding fields are absent from a log entry, these columns return an empty string (`''`), rather than SQL `NULL`. An empty string does not prove that the statement had no backoff. These columns do not provide backoff types for coprocessor tasks, `Point_Get` requests, or independent pessimistic `LockKeys` requests. Coprocessor backoff types remain visible in the `Backoff_Detail` column, which concatenates the `Cop_backoff_{type}_*` detail lines of the record.
 
-The existing `Backoff_types` column continues to parse the historical `Backoff_types` log field. TiDB does not combine the new columns into it. Logs that contain only the phase-specific fields can therefore have an empty `Backoff_types` value. Existing log files that contain the relevant fields can populate the new columns without being rewritten.
+The existing `Backoff_types` column provides a transaction backoff type summary. If a log entry contains the original `Backoff_types` field, TiDB preserves that value, including an empty string or `[]`. Otherwise, TiDB derives the summary by concatenating the recorded prewrite types followed by the commit types. For example, `[txnLock txnLock]` and `[regionMiss]` produce `[txnLock txnLock regionMiss]`. The summary preserves type order, case, and duplicates; it is not a set or a retry-count map.
+
+This read-time fallback restores the historical list-combination behavior. It does not include coprocessor, `Point_Get`, independent `LockKeys`, or background commit backoff that the phase fields do not record. List order is not a guarantee of event time order, and duplicate counts do not represent all retries of the statement. If no types are recorded, the derived value is an empty string. Malformed phase lists or a failed key-value line parse prevent fallback and produce a parsing warning; an original `Backoff_types` value still takes precedence.
+
+Existing log files can populate both the phase columns and the summary if they contain the relevant fields; no log rewrite is required. Fallback is performed by the TiDB slow-query table reader, even when only `Backoff_types` is selected or used in a predicate. It does not change raw log files or add fields to pipelines that read those files directly. The reader retains the complete derived list rather than truncating it to the existing `VARCHAR(64)` metadata length; clients that impose a fixed length need to verify their handling of longer values.
 
 Adding these columns increases the number of columns returned by `SELECT *`; `Query` is no longer the last column. If your client depends on column positions or a fixed number of columns, use an explicit column list. For a filtering example, see [Filter by transaction backoff type](/identify-slow-queries.md#filter-by-transaction-backoff-type).
 
@@ -171,6 +175,8 @@ For how to use this table to identify problematic statements and improve query p
 </CustomContent>
 
 During a rolling upgrade across the version that adds the backoff type columns, avoid selecting the new columns from `CLUSTER_SLOW_QUERY` until all TiDB nodes support them. A newer node querying an older node with these columns, including through `SELECT *`, can fail with `Column ID <id> of table <table> not found`. Use an explicit list of columns supported by every node during this period. Querying the local `SLOW_QUERY` table on a newer node does not require other nodes to support the new columns.
+
+The `Backoff_types` column remains available, but its values also depend on the reader version. For the same log entry containing only phase fields, an older reader can return `''`, while a reader with fallback returns the derived transaction summary. During a rolling upgrade, `CLUSTER_SLOW_QUERY` can therefore contain both empty and derived values. Filters, aggregates, and alerts using this column can change as nodes are upgraded; column availability alone does not guarantee that every node performs fallback.
 
 ```sql
 DESC CLUSTER_SLOW_QUERY;

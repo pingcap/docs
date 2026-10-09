@@ -431,6 +431,8 @@ WHERE time >= NOW() - INTERVAL 1 HOUR
 
 An empty type column does not rule out backoff in other phases or paths: coprocessor backoff types remain visible in the `Backoff_Detail` column of the same row, and backoff of `Point_Get` requests is only reflected in `Backoff_total`. To query all nodes with `CLUSTER_SLOW_QUERY`, first check the [rolling upgrade requirements](/information-schema/information-schema-slow-query.md#cluster_slow_query-table).
 
+The existing `Backoff_types` column provides a compatible transaction summary: the table reader preserves an original `Backoff_types` value when present, or derives a list from the recorded prewrite types followed by commit types. The phase columns let you distinguish the two stages. This fallback does not change the raw slow log, so tools that parse log files directly need separate support. During a rolling upgrade, older readers can still return an empty summary for phase-only logs, which affects filters and aggregates using `Backoff_types`.
+
 ### Top-N slow queries
 
 Query the Top 2 slow queries of users. `Is_internal=false` means excluding slow queries inside TiDB and only querying slow queries of users.
