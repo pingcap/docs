@@ -5,7 +5,7 @@ summary: Learn about the v1beta2 API of TiDB Cloud.
 
 # TiDB Cloud API v1beta2 Overview
 
-The TiDB Cloud API v1beta2 is a RESTful API that gives you programmatic access to manage [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances and related resources. You can also create and list backups for TiDB Cloud Essential instances created on or after July 1, 2026.
+The TiDB Cloud API v1beta2 is a RESTful API that gives you programmatic access to manage [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances and related resources.
 
 Currently, you can use the following v1beta2 APIs to manage the resources in TiDB Cloud Premium:
 
@@ -14,12 +14,3 @@ Currently, you can use the following v1beta2 APIs to manage the resources in TiD
     - **TiDB Cloud Premium Instance**: manage the lifecycle and configuration of TiDB Cloud Premium instances, including passwords, CA certificates, and cloud provider information.
     - **Backup**: manage backups for TiDB Cloud Premium instances, including backup-based restore.
     - **Region**: retrieve available regions for creating TiDB Cloud Premium instances.
-
-## Essential manual backups
-
-For TiDB Cloud Essential instances created on or after July 1, 2026, you can use the following v1beta2 endpoints:
-
-- `POST /v1beta2/tidbs/{tidbId}/backups`: create a manual backup.
-- `GET /v1beta2/tidbs/{tidbId}/backups`: list backups and check their states.
-
-For authentication, request examples, and backup status checks, see [Create a manual backup using the API](/tidb-cloud/backup-and-restore-serverless.md#create-a-manual-backup-using-the-api).

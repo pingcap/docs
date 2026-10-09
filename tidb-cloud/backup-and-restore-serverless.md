@@ -80,7 +80,7 @@ Manual backups are retained until you explicitly delete them. The automatic back
 
 ### Create a manual backup using the API
 
-You can create a manual backup using the [TiDB Cloud API v1beta2](/api/tidb-cloud-api-v1beta2.md#essential-manual-backups). Before you begin, [create an API key](/api/tidb-cloud-api-overview.md) and set the `PUBLIC_KEY`, `PRIVATE_KEY`, and `TIDB_ID` environment variables to your API public key, private key, and instance ID, respectively.
+You can create a manual backup using the TiDB Cloud API v1beta2. Before you begin, [create an API key](/api/tidb-cloud-api-overview.md) and set the `PUBLIC_KEY`, `PRIVATE_KEY`, and `TIDB_ID` environment variables to your API public key, private key, and instance ID, respectively.
 
 1. Send a request to create a manual backup. Replace `before-schema-change` with your desired backup name.
 
