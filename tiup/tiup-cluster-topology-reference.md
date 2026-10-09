@@ -803,7 +803,7 @@ For the above fields, you cannot modify these configured fields after the deploy
 - `arch`
 - `os`
 
-A `alertmanager_servers` configuration example is as follows:
+An `alertmanager_servers` configuration example is as follows:
 
 ```yaml
 alertmanager_servers:
