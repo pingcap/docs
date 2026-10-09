@@ -32,9 +32,9 @@ In general, TiDB performance increases linearly with the number of TiDB nodes.
 
 ## TiKV scalability
 
-TiKV is responsible for storing row-based data. You can configure the node number, vCPU and RAM, and storage for TiKV. The number of TiKV nodes should be at least 1 set (3 nodes in 3 different available zones) and increase by 3 nodes.
+TiKV is responsible for storing row-based data. You can configure the node number, vCPU and RAM, and storage for TiKV. The number of TiKV nodes should be at least 1 set (3 nodes in 3 different availability zones) and increase by 3 nodes.
 
-TiDB Cloud deploys TiKV nodes evenly to 3 available zones in the region you select to achieve durability and high availability. In a typical 3-replica setup, your data is distributed evenly among the TiKV nodes across all availability zones and is persisted to the disk of each TiKV node. Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads.
+TiDB Cloud deploys TiKV nodes evenly to 3 availability zones in the region you select to achieve durability and high availability. In a typical 3-replica setup, your data is distributed evenly among the TiKV nodes across all availability zones and is persisted to the disk of each TiKV node. Although TiKV is mainly used for data storage, the performance of the TiKV node also varies depending on different workloads.
 
 ## TiFlash scalability
 
