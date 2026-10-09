@@ -261,7 +261,7 @@ You can use the following methods to manually control the impact of backup tasks
 > - [Scale out a cluster](/tiup/tiup-cluster.md#scale-out-a-cluster) to increase available resources.
 > - Enable [`Log Backup`](/br/br-log-architecture.md) to offload backup pressure and minimize disruption to online workloads.
 
-The impact of backup on cluster performance can be reduced by limiting the backup threads number, but this affects the backup performance. The preceding tests show that the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MiB/thread. For example, 5 backup threads on a single TiKV node can reach a backup speed of 100 MiB/s.
+The impact of backup on cluster performance can be reduced by limiting the number of backup threads, but this affects the backup performance. The preceding tests show that the backup speed is proportional to the number of backup threads. When the number of threads is small, the backup speed is about 20 MiB/thread. For example, 5 backup threads on a single TiKV node can reach a backup speed of 100 MiB/s.
 
 ### Performance and impact of snapshot restore
 

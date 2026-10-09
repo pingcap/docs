@@ -206,7 +206,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
 
 This section shows and displays the output logs of the Event stream.
 
-Suppose that you execute the following SQL statement in the upstream and the MQ Partition number is 2:
+Suppose that you execute the following SQL statement in the upstream and the number of MQ partitions is 2:
 
 {{< copyable "sql" >}}
 
