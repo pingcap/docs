@@ -46,7 +46,7 @@ TiDB Ansible version: 3.0.9
 
 ## PD
 
-+ Support using backlash `/` in the location label name [#2083](https://github.com/pingcap/pd/pull/2083)
++ Support using slash `/` in the location label name [#2083](https://github.com/pingcap/pd/pull/2083)
 + Fix the incorrect statistics because the tombstone store is mistakenly included by the label counter [#2067](https://github.com/pingcap/pd/pull/2067)
 
 ## Tools
