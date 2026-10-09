@@ -44,7 +44,7 @@ Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH
 
 <CustomContent platform="tidb-cloud">
 
-Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Change node number](/tidb-cloud/scale-tidb-cluster.md#change-node-number).
+Before v8.3.0, TiDB only supports generating valid execution plans for the `WITH ROLLUP` syntax in [TiFlash MPP mode](/tiflash/use-tiflash-mpp-mode.md). Therefore, your TiDB cluster needs to contain TiFlash nodes, and the target table must be configured with the correct TiFlash replica. For more information, see [Change node count](/tidb-cloud/scale-tidb-cluster.md#change-node-count).
 
 </CustomContent>
 
