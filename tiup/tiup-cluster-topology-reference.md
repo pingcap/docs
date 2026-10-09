@@ -770,7 +770,7 @@ grafana_servers:
 
 - `ssh_port`: Specifies the SSH port to connect to the target machine for operations. If it is not specified, the `ssh_port` of the `global` section is used.
 
-- `web_port`: Specifies the port used that Alertmanager uses to provide web services. The default value is `9093`.
+- `web_port`: Specifies the port that Alertmanager uses to provide web services. The default value is `9093`.
 
 - `cluster_port`: Specifies the communication port between one Alertmanger and other Alertmanager. The default value is `9094`.
 
