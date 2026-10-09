@@ -158,7 +158,7 @@ Attention:
 Do you want to continue? [y/N]:
 ```
 
-After you enter the password, TiUP cluster downloads the required components and deploy them on the corresponding machines. When you see the following message, the deployment is successful:
+After you enter the password, TiUP cluster downloads the required components and deploys them on the corresponding machines. When you see the following message, the deployment is successful:
 
 ```bash
 Deployed cluster `prod-cluster` successfully
