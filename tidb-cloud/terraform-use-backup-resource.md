@@ -124,7 +124,7 @@ The features of the `tidbcloud_backup` resource include the following:
     }
     ```
 
-6. Wait for some minutes. Then use `terraform refersh` to update the status:
+6. Wait for some minutes. Then use `terraform refresh` to update the status:
 
     ```
     $ terraform refresh
