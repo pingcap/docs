@@ -816,7 +816,7 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - Debezium converts FLOAT data `"5.61"` to `"5.610000133514404"`, but TiCDC does not.
 
-- TiCDC print the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060).
+- TiCDC prints the wrong `flen` with the FLOAT [tidb#57060](https://github.com/pingcap/tidb/issues/57060).
 
 - Debezium converts `charsetName` to `"utf8mb4"` when the column collation is `"utf8_unicode_ci"` and the character set is null, but TiCDC does not.
 
