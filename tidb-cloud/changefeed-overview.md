@@ -81,7 +81,7 @@ For {{{ .premium }}}, you can query the TiCDC Changefeed Capacity Units (CCUs) o
 
 <CustomContent plan="dedicated">
 
-You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by scaling up or down the changfeed.
+You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by scaling up or down the changefeed.
 
 > **Note:**
 >
@@ -91,7 +91,7 @@ You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by sc
 </CustomContent>
 <CustomContent plan="premium">
 
-You can change the TiCDC Changefeed Capacity Units (CCUs) of a changefeed by scaling up or down the changfeed.
+You can change the TiCDC Changefeed Capacity Units (CCUs) of a changefeed by scaling up or down the changefeed.
 
 </CustomContent>
 
@@ -100,7 +100,7 @@ You can change the TiCDC Changefeed Capacity Units (CCUs) of a changefeed by sca
 3. Select a new specification.
 4. Click **Submit**.
 
-It takes about 10 minutes to complete the scaling process (during which the changfeed works normally) and a few seconds to switch to the new specification (during which the changefeed will be paused and resumed automatically).
+It takes about 10 minutes to complete the scaling process (during which the changefeed works normally) and a few seconds to switch to the new specification (during which the changefeed will be paused and resumed automatically).
 
 ## Pause or resume a changefeed
 

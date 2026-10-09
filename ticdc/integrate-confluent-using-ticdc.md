@@ -124,7 +124,7 @@ The preceding steps are performed in a lab environment. You can also deploy a cl
             ```shell
             Create changefeed successfully!
             ID: confluent-changefeed
-            Info: {... changfeed info json struct ...}
+            Info: {... changefeed info json struct ...}
             ```
 
         - If no result is returned after you run the command, check the network connectivity between the server where you run the command and Confluent Cloud. For details, see [Test connectivity to Confluent Cloud](https://docs.confluent.io/cloud/current/networking/testing.html).
