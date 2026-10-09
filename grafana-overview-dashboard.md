@@ -18,7 +18,7 @@ To understand the key metrics displayed on the Overview dashboard, check the fol
 
 | Service | Panel Name | Description | Normal Range |
 | ---- | ---------------- | ---------------------------------- | -------------- |
-| Services Port Status | Services Up | The online nodes number of each service. |
+| Services Port Status | Services Up | The number of online nodes of each service. |
 | PD | PD role | The role of the current PD. |
 | PD | Storage capacity |  The total storage capacity of the TiDB cluster. |
 | PD | Current storage size | The occupied storage capacity of the TiDB cluster, including the space occupied by TiKV replicas. |
