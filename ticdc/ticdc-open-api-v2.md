@@ -376,7 +376,7 @@ The `sink.csv` parameters are described as follows:
 
 ### Example
 
-The following request creates a replication task with an ID of `test5` and `sink_uri` of `blackhome://`.
+The following request creates a replication task with an ID of `test5` and `sink_uri` of `blackhole://`.
 
 ```shell
 curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'
