@@ -645,7 +645,7 @@ tikv-ctl [args] = tiup ctl tikv [args]
 etcdctl [args] = tiup ctl etcd [args]
 ```
 
-For example, if you previously view the store by running `pd-ctl -u http://127.0.0.1:2379 store`, now you can run the following command in TiUP:
+For example, if you previously viewed the store by running `pd-ctl -u http://127.0.0.1:2379 store`, now you can run the following command in TiUP:
 
 {{< copyable "shell-regular" >}}
 
