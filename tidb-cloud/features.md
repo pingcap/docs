@@ -168,7 +168,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
   <tr>
     <td>Manual backup</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅<br/><span style="font-size: 14px;">(Instances created on or after July 1, 2026)</span></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
