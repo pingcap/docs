@@ -173,7 +173,7 @@ In v5.4, the key new features or improvements are as follows:
 
 - **Continue improving the stability and performance of the columnar storage engine TiFlash and the computing engine MPP**
 
-    - Support pusing down more functions to the MPP engine:
+    - Support pushing down more functions to the MPP engine:
 
         - String functions: `LPAD()`, `RPAD()`, `STRCMP()`
         - Date functions: `ADDDATE(string, real)`, `DATE_ADD(string, real)`, `DATE_SUB(string, real)`, `SUBDATE(string, real)`, `QUARTER()`
