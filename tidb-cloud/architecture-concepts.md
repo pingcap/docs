@@ -88,8 +88,6 @@ For mission-critical applications that require high performance and enhanced sec
 
 To maximize uptime and resilience for mission-critical workloads, {{{ .premium }}} provides [Regional High Availability](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture), which distributes nodes across multiple availability zones for greater redundancy than zonal deployments.
 
-<CustomContent plan="byoc">
-
 ## TiDB Cloud BYOC
 
 TiDB Cloud BYOC (Bring Your Own Cloud) is designed for organizations that need stronger control over data location, cloud resources, network boundaries, and compliance posture while still using TiDB Cloud as a managed service. With BYOC, the TiDB Cloud control plane is managed by PingCAP, while the TiDB data plane runs in your own cloud account.
@@ -120,8 +118,6 @@ A TiDB Cloud BYOC deployment includes the following major components:
 Each BYOC region is deployed and operated independently. When a BYOC region is added, TiDB Cloud provisions the required regional resources in your cloud account. Because each BYOC region has its own data-plane setup, regions do not share a single TiDB Service VPC or Observability Service VPC.
 
 Your applications connect to a {{{ .byoc }}} instance from your application environment. Depending on your BYOC configuration, connections use either private or controlled public access. For private access, BYOC supports VPC peering and other private connectivity options.
-
-</CustomContent>
 
 ## TiDB Cloud Dedicated
 
