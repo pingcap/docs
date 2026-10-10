@@ -135,10 +135,11 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - To manually configure the mapping rules to associate your source CSV files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files.
 
             - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
+            - `my-data[1-4].csv`: matches CSV files named `my-data1.csv` through `my-data4.csv`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
@@ -188,10 +189,11 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - To manually configure the mapping rules to associate your source CSV files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files.
 
             - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
+            - `my-data[1-4].csv`: matches CSV files named `my-data1.csv` through `my-data4.csv`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
@@ -261,10 +263,11 @@ To import the CSV files to TiDB Cloud, take the following steps:
 
     - To manually configure the mapping rules to associate your source CSV files with the target database and table, deselect this option, and then fill in the following fields:
 
-        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use wildcards to match multiple files. TiDB Cloud only supports the `*` and `?` wildcards.
+        - **Source**: enter the file name pattern in the `[file_name].csv` format. For example, `TableName.01.csv`. You can also use the `*`, `?`, and `[]` wildcards to match multiple files.
 
             - `my-data?.csv`: matches all CSV files that start with `my-data` followed by a single character, such as `my-data1.csv` and `my-data2.csv`.
             - `my-data*.csv`: matches all CSV files that start with `my-data`, such as `my-data-2023.csv` and `my-data-final.csv`.
+            - `my-data[1-4].csv`: matches CSV files named `my-data1.csv` through `my-data4.csv`.
 
         - **Target Database** and **Target Table**: enter the target database and table to import the data to.
 
