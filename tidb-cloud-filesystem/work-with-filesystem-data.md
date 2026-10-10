@@ -1,22 +1,62 @@
 ---
 title: Work with Files and Directories in TiDB Cloud Filesystem
-summary: Learn how to upload, download, read, organize, and search files in TiDB Cloud Filesystem using CLI commands without a local mount.
+summary: Learn how to view file metadata in the console and upload, download, read, organize, and search files with TiDB Cloud CLI.
 aliases: ['/ai/work-with-filesystem-data']
 ---
 
 # Work with Files and Directories in TiDB Cloud Filesystem
 
-In TiDB Cloud Filesystem, you can use TiDB Cloud CLI (`ti`) to upload, download, read, organize, and search files without mounting the file system. For all commands and options, see the [`ti fs` reference](/ai/ti/reference/ti-filesystem.md).
+In TiDB Cloud Filesystem, you can browse file and directory metadata in the TiDB Cloud console or use TiDB Cloud CLI (`ti`) to upload, download, read, organize, and search files without mounting the file system. For all commands and options, see the [`ti fs` reference](/ai/ti/reference/ti-filesystem.md).
 
-If your tools need local file paths, [mount the file system](/tidb-cloud-filesystem/filesystem-mount.md).
+If you [mount the file system](/tidb-cloud-filesystem/filesystem-mount.md) to your machine, you can work with files and directories as you do with a local file system.
 
 ## Prerequisites
 
-Before you begin:
+The following prerequisites apply to CLI operations. If you only need to browse file metadata in the TiDB Cloud console, see [View files](#view-files-via-the-console).
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - [Create a file system](/tidb-cloud-filesystem/manage-filesystem-resources.md) or obtain access to an existing one.
 - Select the file system and make its token available to `ti`. For available access options, see [Access an Existing File System](/tidb-cloud-filesystem/access-filesystem.md).
+
+## View files
+
+<SimpleTab>
+
+<div label="Console">
+
+1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**File Systems**](https://tidbcloud.com/filesystems) page for your organization, select the cloud provider and region, and then click the name of your target file system.
+2. In the left navigation pane, click **Files**. The page lists directories and files with their type, size, and modification time.
+3. Expand a directory to browse its contents, use **Search** to filter the visible file tree, or click a file name to view its metadata.
+
+The console displays file metadata. To read file contents or change files and directories, use the CLI commands or [mount the file system](/tidb-cloud-filesystem/filesystem-mount.md).
+
+</div>
+
+<div label="CLI">
+
+List the contents of a directory:
+
+```shell
+ti fs list-files --path /reports --output text
+```
+
+Example output:
+
+```text
+NAME       TYPE  SIZE  MTIME
+archive    dir   0     0
+report.md  file  23    0
+```
+
+Inspect metadata for a file or directory:
+
+```shell
+ti fs describe-file --path /reports/report.md
+```
+
+</div>
+
+</SimpleTab>
 
 ## Upload and download files
 
@@ -41,7 +81,7 @@ You can also use `copy-file` to copy files or directories within the file system
 
 To copy a directory recursively, use `--recursive`. For all supported copy operations and options, see the [`copy-file` reference](/ai/ti/reference/ti-fs-copy-file.md).
 
-## Read and inspect files and directories
+## Read files
 
 Read the complete contents of a file:
 
@@ -58,26 +98,6 @@ ti fs read-file \
   --path /reports/report.md \
   --offset 0 \
   --length 1024
-```
-
-List the contents of a directory:
-
-```shell
-ti fs list-files --path /reports --output text
-```
-
-Example output:
-
-```text
-NAME       TYPE  SIZE  MTIME
-archive    dir   0     0
-report.md  file  23    0
-```
-
-Inspect metadata for a file or directory:
-
-```shell
-ti fs describe-file --path /reports/report.md
 ```
 
 ## Organize files and directories

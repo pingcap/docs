@@ -1,9 +1,9 @@
 ---
-title: Get Started with TiDB Cloud Filesystem
+title: Get Started with TiDB Cloud Filesystem via CLI
 summary: Learn how to create a persistent TiDB Cloud file system, read and write files, and optionally access them through a local mount.
 ---
 
-# Get Started with TiDB Cloud Filesystem
+# Get Started with TiDB Cloud Filesystem via CLI
 
 [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md) is a persistent, shared cloud file system for applications, automation, and AI agents. Files remain available independently of the machine or process that creates them, so you can reuse a workspace across sessions and environments.
 
