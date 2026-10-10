@@ -211,7 +211,7 @@ You can create a `.env` file in the root directory of your project and set up th
 
 #### Define a vector column
 
-`tidb-django` provides a `VectorField` to store vector embeddings in a table.
+`django-tidb` provides a `VectorField` to store vector embeddings in a table.
 
 Create a table with a column named `embedding` that stores a 3-dimensional vector.
 
