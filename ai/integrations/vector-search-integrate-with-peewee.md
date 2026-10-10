@@ -207,7 +207,7 @@ db = MySQLDatabase(
 
 #### Define a vector column
 
-Create a table with a column named `peewee_demo_documents` that stores a 3-dimensional vector.
+Create a table named `peewee_demo_documents` with a column that stores a 3-dimensional vector.
 
 ```python
 class Document(Model):
