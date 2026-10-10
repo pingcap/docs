@@ -1,6 +1,6 @@
 ---
 title: LISTAGG
-summary: 指定した区切り文字で複数行の値を 1 つの文字列に連結します。この操作は 2 種類の関数タイプで実行できます。- Aggregate Function: 連結は結果セット全体のすべての行に対して行われます。- Window Function: 連結は `PARTITION BY` 句で定義された結果セット内の各パーティションごとに行われます。
+summary: "指定した区切り文字で複数行の値を 1 つの文字列に連結します。この操作は 2 種類の関数タイプで実行できます。- Aggregate Function: 連結は結果セット全体のすべての行に対して行われます。- Window Function: 連結は `PARTITION BY` 句で定義された結果セット内の各パーティションごとに行われます。"
 ---
 
 # LISTAGG

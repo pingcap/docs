@@ -4,6 +4,8 @@ import argparse
 from pathlib import Path
 import sys
 
+import yaml
+
 
 SPECIAL_START_CHARS = set("-?:,[]{}#&*!|>'\"%@`")
 
@@ -26,7 +28,7 @@ def has_special_unquoted_summary(line):
     if not value:
         return False
 
-    if value[0] in ("'", '"'):
+    if value[0] in ("'", '"', "|", ">"):
         return False
 
     first_char = value[0]
@@ -50,12 +52,26 @@ def check_file(path):
         return []
 
     issues = []
+    frontmatter_end = None
     for line_number, line in enumerate(lines[1:], start=2):
         if line.strip() == "---":
+            frontmatter_end = line_number - 1
             break
         if has_special_unquoted_summary(line):
-            issues.append((line_number, line))
-            break
+            issues.append((line_number, f"quote the summary value: {line}"))
+
+    if frontmatter_end is None:
+        issues.append((1, "missing closing frontmatter delimiter"))
+        return issues
+
+    # Parse every field to catch invalid YAML beyond the summary's first character.
+    try:
+        yaml.safe_load("\n".join(lines[1:frontmatter_end]))
+    except yaml.YAMLError as error:
+        mark = getattr(error, "problem_mark", None)
+        line_number = mark.line + 2 if mark is not None else 1
+        problem = getattr(error, "problem", None) or str(error)
+        issues.append((line_number, f"invalid YAML frontmatter: {problem}"))
 
     return issues
 
@@ -63,8 +79,8 @@ def check_file(path):
 def main():
     parser = argparse.ArgumentParser(
         description=(
-            "Check that Markdown frontmatter summary values that begin with "
-            "YAML special characters are quoted."
+            "Validate Markdown YAML frontmatter and check that summary values "
+            "beginning with YAML special characters are quoted."
         )
     )
     parser.add_argument(
@@ -78,14 +94,15 @@ def main():
 
     has_issue = False
     for markdown_file in sorted(set(iter_markdown_files(args.paths))):
-        for line_number, line in check_file(markdown_file):
+        for line_number, message in check_file(markdown_file):
             has_issue = True
-            print(f"{markdown_file}:{line_number}: quote the summary value: {line}")
+            print(f"{markdown_file}:{line_number}: {message}")
 
     if has_issue:
         print(
-            "\nFound frontmatter summary values that start with special characters. "
-            'Wrap the full value in quotes, for example: summary: "`ti fs` ..."',
+            "\nFound invalid YAML frontmatter or unquoted special-leading summaries. "
+            'Quote full values when needed, for example: summary: "Scenario: ...". '
+            "Escape double quotes inside double-quoted values.",
             file=sys.stderr,
         )
         return 1

@@ -6,6 +6,7 @@ on:
       - "*.md"
       - "**/*.md"
       - "scripts/check-summary-frontmatter.py"
+      - "scripts/test-check-summary-frontmatter.py"
       - ".github/workflows/check-summary-frontmatter.yaml"
 
 jobs:
@@ -14,6 +15,17 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install YAML parser
+        run: python3 -m pip install PyYAML==6.0.2
+
+      - name: Test frontmatter checker
+        run: python3 scripts/test-check-summary-frontmatter.py
 
       - name: Check summary frontmatter
         run: python3 scripts/check-summary-frontmatter.py .
