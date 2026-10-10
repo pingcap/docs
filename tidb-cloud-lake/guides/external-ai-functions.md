@@ -3,7 +3,7 @@ title: 外部 AI 関数
 summary: "{{{ .lake }}} を独自のインフラストラクチャに接続して、強力な AI/ML 機能を構築します。外部関数を使用すると、データの安全性を保ちながら、カスタムモデルのデプロイ、GPU アクセラレーションの活用、あらゆる ML フレームワークとの統合が可能になります。"
 ---
 
-# 外部 AI 関数
+# 外部 AI 関数 <!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
 
 {{{ .lake }}} を独自のインフラストラクチャに接続して、強力な AI/ML 機能を構築します。外部関数を使用すると、データの安全性を保ちながら、カスタムモデルのデプロイ、GPU アクセラレーションの活用、あらゆる ML フレームワークとの統合が可能になります。
 
@@ -22,6 +22,22 @@ summary: "{{{ .lake }}} を独自のインフラストラクチャに接続し�
 1. **AI サーバーを作成**: Python と [`tidbcloudlake-udf`](https://pypi.org/project/tidbcloudlake-udf/) を使用して AI/ML サーバーを構築します
 2. **関数を登録**: `CREATE FUNCTION` を使用してサーバーを {{{ .lake }}} に接続します
 3. **SQL で使用**: カスタム AI 関数を SQL クエリ内で直接呼び出します
+
+## ネットワーク要件 {#network-requirements}
+
+外部関数は REST ではなく、**gRPC/HTTP2 上の Arrow Flight** を使用します。
+
+1. 公開 TLS 証明書と gRPC/HTTP2 サポートを備えた HTTPS で UDF サーバーを公開します。
+2. 右上隅の **Support** をクリックし、**Submit a request** を選択して、サーバーのホスト名をテナントの **UDF server allowlist** に追加するよう依頼します。
+3. ファイアウォールが厳しく制限されている場合は、サポートリクエストを送信して {{{ .lake }}} の送信元アドレスを取得し、TCP 443 で許可します。
+
+ホストが許可リストに追加されるまで、`CREATE FUNCTION` は `Unallowed UDF server address` で失敗します。また、リモートスキーマも検証するため、エンドポイントはオンラインである必要があります。
+
+ローカルの `UDFServer` gRPC リスナーは非公開のままにし、gRPC ロードバランサーで TLS を終端してください。
+
+```text
+{{{ .lake }}} → HTTPS/HTTP2 :443 → UDFServer gRPC :8815
+```
 
 ## 例: テキスト埋め込み関数 {#example-text-embedding-function}
 

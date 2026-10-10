@@ -1,3 +1,4 @@
+<!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
 ---
 title: TiDB Cloud Lake ドキュメント
 hide_sidebar: true
@@ -53,8 +54,6 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 </LearningPath>
 
-<LearningPath label="ロード" icon="cloud3">
-
 [stage の操作](https://docs.pingcap.com/ja/tidbcloudlake/stage-overview/)
 
 [ファイルからのロード](https://docs.pingcap.com/ja/tidbcloudlake/load-from-files/)
@@ -63,9 +62,9 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 [継続的データパイプライン](https://docs.pingcap.com/ja/tidbcloudlake/continuous-data-pipelines/)
 
-</LearningPath>
+[継続的データパイプライン](https://docs.pingcap.com/ja/tidbcloudlake/continuous-data-pipelines/)
 
-<LearningPath label="分析" icon="cloud6">
+</LearningPath>
 
 [マルチモーダルデータ分析](https://docs.pingcap.com/ja/tidbcloudlake/multimodal-data-analytics/)
 
@@ -73,25 +72,19 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 [ベクトル検索](https://docs.pingcap.com/ja/tidbcloudlake/vector-search-guide/)
 
-</LearningPath>
+[ベクトル検索](https://docs.pingcap.com/ja/tidbcloudlake/vector-search-guide/)
 
-<LearningPath label="運用" icon="tidb-cloud-tune">
+</LearningPath>
 
 [コストの管理](https://docs.pingcap.com/ja/tidbcloudlake/manage-costs/)
 
-[使用状況の監視](https://docs.pingcap.com/ja/tidbcloudlake/monitor-usage/)
-
 [AI を活用した機能](https://docs.pingcap.com/ja/tidbcloudlake/ai-powered-features/)
-
-[パフォーマンスチューニング](https://docs.pingcap.com/ja/tidbcloudlake/performance-optimization/)
 
 [トラブルシューティング](https://docs.pingcap.com/ja/tidbcloudlake/troubleshooting/)
 
-</LearningPath>
-
-<LearningPath label="セキュリティ" icon="users">
-
 [セキュリティと信頼性](https://docs.pingcap.com/ja/tidbcloudlake/security-reliability/)
+
+</LearningPath>
 
 [アクセス制御](https://docs.pingcap.com/ja/tidbcloudlake/access-control/)
 
@@ -101,11 +94,15 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 [コンプライアンスとセキュリティ](https://docs.pingcap.com/ja/tidbcloudlake/compliance-security/)
 
+[SQL リファレンス](https://docs.pingcap.com/ja/tidbcloudlake/sql-statements-overview/)
+
+[料金と請求](https://docs.pingcap.com/ja/tidbcloudlake/pricing-billing/)
+
 </LearningPath>
 
-<LearningPath label="リファレンス" icon="cloud-dev">
+[データ取り込みベンチマーク](https://docs.pingcap.com/ja/tidbcloudlake/benchmark-data-ingestion/)
 
-[SQL リファレンス](https://docs.pingcap.com/ja/tidbcloudlake/sql-statements-overview/)
+[サポートサービス](https://docs.pingcap.com/ja/tidbcloudlake/support-services/)
 
 [料金と請求](https://docs.pingcap.com/ja/tidbcloudlake/pricing-billing/)
 
