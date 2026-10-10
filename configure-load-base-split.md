@@ -29,6 +29,8 @@ The Region split by Load Base Split will not be merged quickly. On the one hand,
 
 ## Usage
 
+<CustomContent platform="tidb">
+
 The Load Base Split feature is currently controlled by the following parameters:
 
 - [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold): The QPS threshold at which a Region is identified as a hotspot. The default value is `3000` per second when [`region-split-size`](/tikv-configuration-file.md#region-split-size) is less than 4 GB; otherwise the default value is `7000`.
@@ -87,3 +89,28 @@ Accordingly, you can view the configuration by either of the following two metho
 > **Note:**
 >
 > Starting from v4.0.0-rc.2, you can modify and view the configuration using SQL statements.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+### Load Base Split in Cloud Storage Engine
+
+Starting from TiDB Cloud 2609, Cloud Storage Engine (CSE) supports Load Base Split. **Load Base Split is disabled by default in CSE.**
+
+<!-- TODO: Confirm the supported TiDB Cloud plans and the customer-facing enablement procedure before publication. -->
+
+When enabled, CSE collects read request statistics over multiple detection rounds to identify sustained hotspots. It first selects a split position from sampled query ranges, aiming to balance read load and reduce queries that span both resulting Regions.
+
+If sampling cannot find a suitable position, CSE can use a CPU-based fallback for expensive scans. This requires a busy local read thread pool, substantial CPU usage by both the Region and the scan, and spare capacity in the gRPC request-handling threads. CSE looks for bucket, SST file, or block boundaries within the hot range, and can fall back to a boundary elsewhere in the Region. The selection uses storage metadata and indexes without scanning data rows.
+
+Before applying the split, CSE checks that the Region state and split position are still valid. PD can then schedule the resulting Regions to distribute read load.
+
+Consider the following limitations:
+
+- Splitting cannot distribute the load of a single hot key across Regions.
+- A split can increase network requests and coordination work for queries that access both resulting Regions.
+- The CPU fallback uses local read thread pool CPU usage. It does not include remote coprocessor CPU usage or evaluate CPU usage relative to each keyspace's quota.
+- A fallback split does not guarantee equal load between the resulting Regions. Performance gains depend on the access pattern, available node capacity, and subsequent scheduling.
+
+</CustomContent>
