@@ -28,17 +28,3 @@ For the "Send Notifications Only" option, {{{ .lake }}} will send email notifica
 | 80% - 90%       | Every three days        |
 | 90% - 100%      | Every three days        |
 | 100% or above     | Every three days        |
-
-## Granting Access to Finance Personnel
-
-To facilitate the work of your finance team while ensuring data security, you can create a role named `billing` within {{{ .lake }}}. This role will be specifically tailored to provide access only to billing-related information.
-
-```sql
-CREATE ROLE billing;
-```
-
-When inviting finance personnel to your organization, assign them this `billing` role.
-
-![alt text](/media/tidb-cloud-lake/billing-role.png)
-
-Once they log in to {{{ .lake }}}, they will have restricted access, limited to only the billing page, with all other business-related pages hidden from view. This approach helps to safeguard sensitive data by restricting unnecessary access to other parts of your {{{ .lake }}} environment.
