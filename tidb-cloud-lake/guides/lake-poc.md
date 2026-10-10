@@ -5,7 +5,7 @@ summary: Evaluate TiDB Cloud Lake with a representative workload using schema ma
 
 # TiDB Cloud Lake PoC Guide
 
-This guide describes a repeatable proof of concept (PoC) for TiDB Cloud Lake. It focuses on the decisions that have the largest impact on a representative workload: object-storage and PrivateLink connectivity, schema compatibility, data layout, overlap maintenance, block size, and pre-aggregation.
+This guide describes a repeatable proof of concept (PoC) for TiDB Cloud Lake, using data replication from a TiDB Cloud Premium instance to TiDB Cloud Lake as the primary example. It focuses on the decisions that have the largest impact on a representative workload: object-storage and PrivateLink connectivity, schema compatibility, data layout, overlap maintenance, block size, and pre-aggregation.
 
 Run the PoC with a representative data sample and the query shapes used in production. Record query latency, QPS, warehouse size, and storage size so that you can compare each optimization with the same baseline.
 
