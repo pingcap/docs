@@ -5,7 +5,7 @@ summary: Learn about feature support status for different TiDB Cloud plans.
 
 # Features
 
-This document lists the feature support status for different TiDB Cloud plans, including {{{ .starter }}}, Essential, Premium, and Dedicated.
+This document lists the feature support status for different TiDB Cloud plans, including {{{ .starter }}}, Essential, Premium, BYOC, and Dedicated.
 
 > **Tip:**
 >
@@ -23,12 +23,14 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <th style="text-align:center;">Starter</th>
     <th style="text-align:center;">Essential</th>
     <th style="text-align:center;">Premium</th>
+    <th style="text-align:center;">BYOC</th>
     <th style="text-align:center;">Dedicated</th>
   </tr></thead>
 <tbody>
   <tr>
     <td rowspan="3" style="background-color: white;">Basics</td>
     <td>Scalable transactional processing</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -40,12 +42,14 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>API</td>
     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
   <tr>
@@ -54,11 +58,13 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">🚧</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td><Tooltip id="sql-editor">SQL Editor</Tooltip></td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">🚧</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
@@ -69,10 +75,12 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>Automatic scaling based on workload</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -84,9 +92,11 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Password setting</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -96,7 +106,8 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td>Pause &amp; resume</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
-    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">❌</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -104,11 +115,13 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🚧</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Backup file recycle bin</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -120,11 +133,13 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>Full-text search</td>
     <td style="text-align:center;">✅<br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">🚧</td>
     <td style="text-align:center; font-size: 14px;">🚧</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
@@ -135,10 +150,12 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Data migration from MySQL-compatible databases into TiDB Cloud</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅</td>
@@ -148,6 +165,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">🔒</td>
+    <td style="text-align:center;">🔒</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
@@ -156,10 +174,12 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td rowspan="5" style="background-color: white;">Backup &amp; restore</td>
     <td>Automatic backup</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -171,9 +191,11 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Dual region backup</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
@@ -185,9 +207,11 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Restore</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -200,6 +224,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Alerting</td>
@@ -207,9 +232,11 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>SQL statement analysis</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -221,10 +248,12 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Top SQL</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅ <br/><span style="font-size: 14px;">(Top RU in Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px;">(Top RU in Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px;">(Top RU in Public preview)</span></td>
     <td style="text-align:center;">✅</td>
@@ -235,12 +264,14 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Prometheus and Grafana integration</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -248,6 +279,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -255,19 +287,30 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="1" style="background-color: white;">High availability</td>
+    <td rowspan="2" style="background-color: white;">High availability</td>
     <td>Cross-AZ failover</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;"><CustomContent language="en,zh">❌</CustomContent><CustomContent language="ja">✅</CustomContent></td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Single-AZ deployment</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">✅</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">✅</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td rowspan="2" style="background-color: white;">Resource allocation</td>
     <td>Node groups</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
@@ -278,11 +321,13 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🚧</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td rowspan="3" style="background-color: white;">Network connection</td>
     <td>Private endpoint</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -294,19 +339,22 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>VPC peering</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
+    <td style="text-align:center;">🔒</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
-    <td rowspan="6" style="background-color: white;">Security</td>
+    <td rowspan="7" style="background-color: white;">Security</td>
     <td>Database audit logging</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅ <br/><span style="font-size: 14px; white-space: nowrap;">(Public preview)</span></td>
   </tr>
@@ -316,9 +364,19 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
+  </tr>
+  <tr>
+    <td>Ops Audit logging</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">✅</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>Log redaction</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -329,6 +387,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🔒</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
@@ -336,10 +395,12 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">🔒</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>IAM (including email and password login, standard SSO, and organization SSO)</td>
+    <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
@@ -353,18 +414,21 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Alibaba Cloud</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
   </tr>
   <tr>
     <td>Azure</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">✅</td>
   </tr>
@@ -373,6 +437,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
+    <td style="text-align:center;">❌</td>
     <td style="text-align:center;">✅</td>
   </tr>
   </CustomContent>
@@ -384,16 +449,19 @@ This document lists the feature support status for different TiDB Cloud plans, i
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
     <td style="text-align:center;">✅</td>
+    <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Azure</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center;">🚧</td>
+    <td style="text-align:center;">🚧</td>
     <td style="text-align:center;">✅</td>
   </tr>
   <tr>
     <td>Google Cloud</td>
+    <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
     <td style="text-align:center; font-size: 14px;">❌</td>
