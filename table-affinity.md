@@ -13,11 +13,12 @@ Table-level data affinity is a PD mechanism for scheduling data distribution at 
 
 When you enable PD affinity scheduling and set the `AFFINITY` option of a table to `table` or `partition`, PD groups Regions belonging to the same table or partition into the same affinity group. During scheduling, PD prioritizes placing the Leader and Voter replicas of these Regions on the same subset of a few TiKV nodes. This reduces network latency caused by cross-node access during queries, thereby improving query performance.
 
+Table-level data affinity is available starting from v8.5.5 when PD is not deployed in [PD Microservices Mode](/pd-microservices.md). Starting from v8.5.7, it is also available in PD Microservices Mode when scheduling is handled by the scheduling microservice.
+
 ## Limitations
 
 Before using table-level data affinity, note the following limitations:
 
-- This feature does not take effect in [PD Microservices Mode](/pd-microservices.md).
 - This feature does not work with [Temporary tables](/temporary-tables.md) and [views](/views.md).
 - After data affinity is configured for a [partitioned table](/partitioned-table.md), **modifying the table partitioning scheme is not supported**, including adding, dropping, reorganizing, or swapping partitions. To change the partitioning scheme, you must first remove the affinity configuration for that table.
 - **Evaluate disk capacity in advance for large data volumes**: after affinity is enabled, PD prioritizes scheduling Regions of a table or partition to the same subset of a few TiKV nodes. For tables or partitions with large data volumes, this might significantly increase disk usage on these nodes. It is recommended to evaluate disk capacity and monitor it in advance.
