@@ -38,7 +38,7 @@ env:
   SOURCE_BRANCH: release-8.5
   TERMS_BRANCH: master
   JA_BRANCH: i18n-ja-release-8.5
-  TOC_FILES: TOC.md,TOC-ai.md,TOC-api.md,TOC-best-practices.md,TOC-develop.md,TOC-tidb-releases.md,TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md
+  TOC_FILES: TOC.md,TOC-ai.md,TOC-api.md,TOC-best-practices.md,TOC-develop.md,TOC-tidb-releases.md,TOC-tidb-cloud.md,TOC-tidb-cloud-starter.md,TOC-tidb-cloud-essential.md,TOC-tidb-cloud-premium.md,TOC-tidb-cloud-releases.md,TOC-tidb-cloud-lake.md
   # Exclude specified doc files from specified TOC files after Japanese translation.
   TOC_EXCLUSIONS: >-
     {
@@ -47,7 +47,7 @@ env:
         "TOC-tidb-cloud-premium.md"
       ]
     }
-  INDEX_FILES: _index.md,ai/_index.md,api/_index.md,best-practices/_index.md,develop/_index.md,releases/_index.md,tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md
+  INDEX_FILES: _index.md,ai/_index.md,api/_index.md,best-practices/_index.md,develop/_index.md,releases/_index.md,tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md,tidb-cloud-lake/_index.md
   AI_TRANSLATOR_REPO: qiancai/ai-markdown-translator
   AI_TRANSLATOR_REF: main
   # Manual all-updated runs use the same global cursor behavior as scheduled runs.
@@ -178,6 +178,7 @@ jobs:
           BASE_REF: ${{ steps.commits.outputs.base_ref }}
           HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           DOCS_SOURCE_PATH: ${{ github.workspace }}/docs-source
+          DOCS_TARGET_PATH: ${{ github.workspace }}/docs
           TOC_FILES: ${{ env.TOC_FILES }}
           INDEX_FILES: ${{ env.INDEX_FILES }}
         run: |
@@ -200,6 +201,7 @@ jobs:
           SOURCE_HEAD_REF: ${{ steps.commits.outputs.head_ref }}
           SOURCE_FOLDER: ""
           SOURCE_FILES: ${{ steps.source_files.outputs.files }}
+          SOURCE_FULL_FILES: ${{ steps.source_files.outputs.full_files }}
           SOURCE_FILES_TRANSLATION_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.translation_scope == 'Translate only specified files' && inputs.source_files_translation_mode || 'incremental' }}
           SOURCE_LANGUAGE: English
           TARGET_LANGUAGE: Japanese
