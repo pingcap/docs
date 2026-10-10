@@ -93,7 +93,7 @@ TiDB バージョン: 7.5.4
 - TiFlash
 
     - ストレージとコンピューティングの分離アーキテクチャでTiFlash書き込みノードが再起動に失敗する可能性がある問題を修正しました [#9282](https://github.com/pingcap/tiflash/issues/9282) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - TiFlashとPD間のネットワークパーティション（ネットワーク切断）により、読み取りリクエストタイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+    - TiFlashと任意のPD間のネットワークパーティション（ネットワーク切断）により、読み取りリクエストタイムアウトエラーが発生する可能性がある問題を修正しました。 [#9243](https://github.com/pingcap/tiflash/issues/9243) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `CAST()`関数を使用して文字列をタイムゾーンまたは無効な文字を含む日付時刻に変換すると、結果が正しくなくなる問題を修正しました[#8754](https://github.com/pingcap/tiflash/issues/8754) @[solotzg](https://github.com/solotzg)
     - ストレージとコンピューティングの分離アーキテクチャで、 TiFlash書き込みノードの読み取りスナップショットがタイムリーにリリースされない問題を修正しました。 [#9298](https://github.com/pingcap/tiflash/issues/9298) @[JinheLin](https://github.com/JinheLin)
     - テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
