@@ -297,7 +297,7 @@ Average Speed: 113.277149MB/s
 
 If different rows exist during the data checking process, the SQL statements will be generated to fix them. If the data inconsistency exists in a chunk, a SQL file named by `chunk.Index` will be generated. The SQL file is located at `${output}/fix-on-${instance}`, and `${instance}` is the value of `task.target-instance` in the `config.toml` file.
 
-A SQL file contains the tale to which the chunk belong and the range information. For the SQL files, you should consider the following three situations:
+A SQL file contains the table to which the chunk belongs and the range information. For the SQL files, you should consider the following three situations:
 
 - If the rows in the downstream database are missing, REPLACE statements will be applied
 - If the rows in the downstream database are redundant, DELETE statements will be applied
