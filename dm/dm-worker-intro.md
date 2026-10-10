@@ -113,7 +113,7 @@ GRANT SELECT ON `db1`.* TO 'your_user'@'your_wildcard_of_host';
 >
 > Because MariaDB reports these privileges differently from MySQL, `dmctl check-task` might report privilege errors even when the account has the required privileges.
 >
-> For DM v8.5.6, if the precheck returns `[code=26005] fail to check synchronization configuration` for the replication privilege, dump privilege, or dump connection number check, add only the following items to the task configuration file:
+> For DM v8.5.6, if the precheck returns `[code=26005] fail to check synchronization configuration` for the replication privilege, dump privilege, or dump connection count check, add only the following items to the task configuration file:
 >
 > ```yaml
 > ignore-checking-items:

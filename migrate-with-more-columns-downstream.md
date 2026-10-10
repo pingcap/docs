@@ -15,7 +15,7 @@ This document provides the additional steps to be taken when you migrate data to
 
 ## Use DM to migrate data to a downstream TiDB table with more columns
 
-When replicating the upstream binlog, DM tries to use the current table schema of the downstream to parse the binlog and generate the corresponding DML statements. If the column number of the table in the upstream binlog does not match the column number in the downstream table schema, the following error occurs:
+When replicating the upstream binlog, DM tries to use the current table schema of the downstream to parse the binlog and generate the corresponding DML statements. If the number of columns of the table in the upstream binlog does not match the number of columns in the downstream table schema, the following error occurs:
 
 ```json
 "errors": [
