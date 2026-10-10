@@ -46,6 +46,54 @@ send-bootstrap-to-all-partition = true
 encoding-format = "json"
 ```
 
+### Include the transaction start TSO
+
+With the [new TiCDC architecture](/ticdc/ticdc-architecture.md), you can include the original transaction start TSO in Simple JSON DML messages. The option is disabled by default. To enable it, use either of the following configurations:
+
+- In `sink-uri`:
+
+    ```text
+    kafka://127.0.0.1:9092/topic-name?protocol=simple&encoding-format=json&simple-include-start-ts=true
+    ```
+
+- In the changefeed configuration file:
+
+    ```toml
+    [sink]
+    protocol = "simple"
+
+    [sink.simple]
+    include-start-ts = true
+    ```
+
+An explicit URI value takes precedence over the configuration file. For example, `simple-include-start-ts=false` overrides `[sink.simple] include-start-ts = true`.
+
+When enabled, `INSERT`, `UPDATE`, and `DELETE` messages include the top-level JSON integer `startTs`. DDL, `BOOTSTRAP`, and `WATERMARK` messages do not include this field. Enabling the option with another protocol or with `encoding-format=avro` is rejected. Disabling the option omits `startTs` from subsequent messages.
+
+The following is an example `INSERT` message with the option enabled:
+
+```json
+{
+   "version":1,
+   "database":"simple",
+   "table":"user",
+   "tableID":148,
+   "type":"INSERT",
+   "commitTs":447984084414103554,
+   "startTs":447984084414103550,
+   "buildTs":1708923662983,
+   "schemaVersion":447984074911121426,
+   "data":{
+      "id":"1",
+      "name":"John Doe"
+   }
+}
+```
+
+> **Note:**
+>
+> `startTs` is the original `uint64` PD TSO, not a millisecond timestamp. Parse it directly with an integer-preserving JSON parser, or retain the original decimal digits as a string. Do not first parse it as JavaScript `Number` or IEEE 754 `float64`: integers greater than `2^53 - 1` can lose precision.
+
 ## Message types
 
 The TiCDC Simple protocol has the following message types.
@@ -74,7 +122,7 @@ Other:
 
 ## Message format
 
-In the Simple protocol, each message contains only one event. The Simple protocol supports encoding messages in JSON and Avro formats. This document uses JSON format as an example. For Avro format messages, their fields and meanings are the same as those in JSON format messages, but the encoding format is different. For details about the Avro format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/simple/message.json).
+In the Simple protocol, each message contains only one event. The Simple protocol supports encoding messages in JSON and Avro formats. This document uses JSON format as an example. Except for the optional JSON-only `startTs` field, Avro messages have the same fields and meanings as JSON messages, with a different encoding format. For details about the Avro format, see [Simple Protocol Avro Schema](https://github.com/pingcap/tiflow/blob/master/pkg/sink/codec/simple/message.json).
 
 ### DDL
 
@@ -241,6 +289,8 @@ The fields in the preceding JSON data are explained as follows:
 
 ### DML
 
+The following examples use the default configuration, which omits `startTs`. To include it in JSON DML messages, see [Include the transaction start TSO](#include-the-transaction-start-tso).
+
 #### INSERT
 
 TiCDC encodes an `INSERT` event in the following JSON format:
@@ -274,6 +324,7 @@ The fields in the preceding JSON data are explained as follows:
 | `tableID`     | Number  | The ID of the table.                                      |
 | `type`        | String  | The DML event type, including `INSERT`, `UPDATE`, and `DELETE`. |
 | `commitTs`    | Number  | The commit timestamp when the DML statement execution is completed in the upstream. |
+| `startTs` | JSON integer (`uint64`) | Optional. The original PD TSO of the source transaction. Present only when [transaction start TSO output](#include-the-transaction-start-tso) is enabled; preserve integer precision when parsing. |
 | `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
 | `schemaVersion` | Number | The schema version number of the table when the DML message is encoded. |
 | `data`        | Object  | The inserted data, where the field name is the column name and the field value is the column value. |
@@ -319,6 +370,7 @@ The fields in the preceding JSON data are explained as follows:
 | `tableID`     | Number  | The ID of the table.                                      |
 | `type`        | String  | The DML event type, including `INSERT`, `UPDATE`, and `DELETE`. |
 | `commitTs`    | Number  | The commit timestamp when the DML statement execution is completed in the upstream. |
+| `startTs` | JSON integer (`uint64`) | Optional. The original PD TSO of the source transaction. Present only when [transaction start TSO output](#include-the-transaction-start-tso) is enabled; preserve integer precision when parsing. |
 | `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
 | `schemaVersion` | Number | The schema version number of the table when the DML message is encoded. |
 | `data`        | Object  | The data after updating, where the field name is the column name and the field value is the column value. |
@@ -359,6 +411,7 @@ The fields in the preceding JSON data are explained as follows:
 | `tableID`     | Number  | The ID of the table.                                      |
 | `type`        | String  | The DML event type, including `INSERT`, `UPDATE`, and `DELETE`. |
 | `commitTs`    | Number  | The commit timestamp when the DML statement execution is completed in the upstream. |
+| `startTs` | JSON integer (`uint64`) | Optional. The original PD TSO of the source transaction. Present only when [transaction start TSO output](#include-the-transaction-start-tso) is enabled; preserve integer precision when parsing. |
 | `buildTs`     | Number  | The UNIX timestamp when the message is successfully encoded within TiCDC. |
 | `schemaVersion` | Number | The schema version number of the table when the DML message is encoded. |
 | `old`         | Object  | The deleted data, where the field name is the column name and the field value is the column value. |
