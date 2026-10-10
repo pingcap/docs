@@ -163,7 +163,7 @@ For binlog replication processing units, manually recover migration using the fo
 
 3. Update the `binlog_name` in the global checkpoints and in each table checkpoint of the downstream `dm_meta` database to the name of the binlog file in error; update `binlog_pos` to a valid position value for which migration has completed, for example, 4.
 
-    Example: the name of the task in error is `dm_test`, the corresponding s`source-id` is `replica-1`, and the corresponding binlog file is `mysql-bin|000001.004451`. Execute the following command:
+    Example: the name of the task in error is `dm_test`, the corresponding `source-id` is `replica-1`, and the corresponding binlog file is `mysql-bin|000001.004451`. Execute the following command:
 
     {{< copyable "sql" >}}
 
