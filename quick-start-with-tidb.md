@@ -268,7 +268,7 @@ The following describes how to deploy a TiDB cluster using a YAML file of the sm
 
 Before deploying the TiDB cluster, ensure that the target machine meets the following requirements:
 
-- CentOS 7.3 or a later version is installed.
+- A Linux distribution supported by TiDB is installed. For the current operating system recommendations, see [TiDB Software and Hardware Requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
 - The Linux OS has access to the internet, which is required to download TiDB and related software installation packages.
 
 The smallest TiDB cluster topology consists of the following instances:
@@ -289,10 +289,7 @@ Other requirements for the target machine include:
 
 - The `root` user and its password are required.
 - [Stop the firewall service of the target machine](/check-before-deployment.md#check-the-firewall-service-of-target-machines), or open the ports needed by the TiDB cluster nodes.
-- Currently, the TiUP cluster supports deploying TiDB on the x86_64 (AMD64) and ARM architectures:
-
-    - It is recommended to use CentOS 7.3 or later versions on AMD64 architecture.
-    - It is recommended to use CentOS 7.6 (1810) on ARM architecture.
+- Currently, the TiUP cluster supports deploying TiDB on the x86_64 (AMD64) and ARM architectures. For supported operating system and CPU architecture combinations, see [OS and platform requirements](/hardware-and-software-requirements.md#os-and-platform-requirements).
 
 ### Deploy
 
