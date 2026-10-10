@@ -211,7 +211,7 @@ TiDB バージョン: 8.2.0
 
 - TiKV
 
-    - 単一の圧縮ジョブに関係する SST ファイルの数を表示する**Compaction Job Size(files)**メトリックを追加します [#16837](https://github.com/tikv/tikv/issues/16837) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
+    - 単一のコンパクションジョブに関係する SST ファイルの数を表示する**Compaction Job Size(files)**メトリックを追加します [#16837](https://github.com/tikv/tikv/issues/16837) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
     - [早期適用](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810)をデフォルトで有効にします。この機能を有効にすると、 Raftリーダーは、クォーラム ピアがログを永続化した後、リーダー自身がログを永続化するのを待たずにログを適用できるため、少数の TiKV ノードでのジッターが書き込みリクエストのレイテンシーに与える影響が軽減されます。 [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
     - **Raft dropped messages**の可視性を向上させ、書き込み速度低下の根本原因を特定する [#17093](https://github.com/tikv/tikv/issues/17093) @[Connor1996](https://github.com/Connor1996)
     - クラスターのレイテンシーの問題をトラブルシューティングするために、ファイル取り込みレイテンシーの可視性を向上させる [#17078](https://github.com/tikv/tikv/issues/17078) @[LykxSassinator](https://github.com/LykxSassinator)

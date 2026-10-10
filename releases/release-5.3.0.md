@@ -388,7 +388,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
     - コプロセッサーリクエストの処理中にタイムアウトによって発生するpanic問題を修正[#10852](https://github.com/tikv/tikv/issues/10852)
     - 統計スレッドの監視データによって発生するメモリリークを修正しました [#11195](https://github.com/tikv/tikv/issues/11195)
     - 一部のプラットフォームから cgroup 情報を取得する際に発生するpanic問題を修正[#10980](https://github.com/tikv/tikv/pull/10980)
-    - MVCC 削除バージョンが圧縮フィルタ GC によって削除されないため、スキャンパフォーマンスが低下する問題を修正しました。 [#11248](https://github.com/tikv/tikv/pull/11248)
+    - MVCC 削除バージョンがコンパクションフィルタ GC によって削除されないため、スキャンパフォーマンスが低下する問題を修正しました。 [#11248](https://github.com/tikv/tikv/pull/11248)
 
 - PD
 

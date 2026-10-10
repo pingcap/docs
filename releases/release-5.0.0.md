@@ -303,11 +303,11 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 バージョン5.0より前は、TiDBはデフォルトでクロステーブルリージョンマージ機能を無効にしていました。バージョン5.0以降では、空のリージョンの数を減らし、ネットワーク、メモリ、CPUのオーバーヘッドを削減するために、この機能がデフォルトで有効になっています。この機能は`schedule.enable-cross-table-merge`設定項目を変更することで無効にできます。
 
-#### バックグラウンドタスクとフォアグラウンドの読み書き間のI/Oリソースの競合のバランスを取るために、システムがデフォルトでデータ圧縮速度を自動的に調整できるようにします。 {#enable-the-system-to-automatically-adjust-the-data-compaction-speed-by-default-to-balance-the-contention-for-i-o-resources-between-background-tasks-and-foreground-reads-and-writes}
+#### バックグラウンドタスクとフォアグラウンドの読み書き間のI/Oリソースの競合のバランスを取るために、システムがデフォルトでデータコンパクション速度を自動的に調整できるようにします。 {#enable-the-system-to-automatically-adjust-the-data-compaction-speed-by-default-to-balance-the-contention-for-i-o-resources-between-background-tasks-and-foreground-reads-and-writes}
 
 [ユーザー向けドキュメント](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)
 
-バージョン5.0より前は、バックグラウンドタスクとフォアグラウンドの読み書きにおけるI/Oリソースの競合を緩和するため、データ圧縮速度をシステムが自動的に調整する機能はデフォルトで無効になっていました。バージョン5.0以降、TiDBはこの機能をデフォルトで有効にし、アルゴリズムを最適化することで、レイテンシーのジッターを大幅に低減します。
+バージョン5.0より前は、バックグラウンドタスクとフォアグラウンドの読み書きにおけるI/Oリソースの競合を緩和するため、データコンパクション速度をシステムが自動的に調整する機能はデフォルトで無効になっていました。バージョン5.0以降、TiDBはこの機能をデフォルトで有効にし、アルゴリズムを最適化することで、レイテンシーのジッターを大幅に低減します。
 
 `rate-limiter-auto-tuned`設定項目を変更することで、この機能を無効にすることができます。
 
@@ -315,7 +315,7 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 [ユーザー向けドキュメント](/garbage-collection-configuration.md#gc-in-compaction-filter)、 [#18009](https://github.com/pingcap/tidb/issues/18009)
 
-TiDBがガベージコレクション（GC）とデータ圧縮を実行する際、パーティションはCPUとI/Oリソースを消費します。これらの2つのタスクの実行中は、データが重複している状態が発生します。
+TiDBがガベージコレクション（GC）とデータコンパクションを実行する際、パーティションはCPUとI/Oリソースを消費します。これらの2つのタスクの実行中は、データが重複している状態が発生します。
 
 GC の CPU および I/O リソースの消費を削減するために、GC コンパクション フィルタ機能は、これら2つのタスクを 1つに結合し、同じタスクで実行します。この機能はデフォルトで有効になっています。 `gc.enable-compaction-filter = false`を設定することで無効にできます。
 

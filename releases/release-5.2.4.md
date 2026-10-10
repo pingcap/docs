@@ -18,7 +18,7 @@ TiDBバージョン：5.2.4
 
 - TiKV
 
-    - 不要なRaftログを圧縮する時間間隔 (デフォルトでは`"2s"` ) を制御するために[`raft-log-compact-sync-interval`](https://docs-archive.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524)を追加する [#11404](https://github.com/tikv/tikv/issues/11404)
+    - 不要なRaftログをコンパクションする時間間隔 (デフォルトでは`"2s"` ) を制御するために[`raft-log-compact-sync-interval`](https://docs-archive.pingcap.com/tidb/v5.2/tikv-configuration-file#raft-log-compact-sync-interval-new-in-v524)を追加する [#11404](https://github.com/tikv/tikv/issues/11404)
     - [`raft-log-gc-tick-interval`](/tikv-configuration-file.md#raft-log-gc-tick-interval)のデフォルト値を`"10s"`から`"3s"`に変更する [#11404](https://github.com/tikv/tikv/issues/11404)
     - [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`に設定されている場合、 [`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)の値が[`rocksdb.(defaultcf|writecf|lockcf).hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1)の値を上書きします [#11424](https://github.com/tikv/tikv/issues/11424)
 

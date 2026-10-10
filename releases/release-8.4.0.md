@@ -325,7 +325,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
     - リージョンのデフォルト値を 96 MiB から 256 MiB に増やして、リージョンが多すぎることによる余分なオーバーヘッドを回避します [#17309](https://github.com/tikv/tikv/issues/17309) @[LykxSassinator](https://github.com/LykxSassinator)
     - リージョンまたはTiKVインスタンスにおけるインメモリ悲観的ロックのメモリ使用量制限の設定をサポートします。ホットライトシナリオで多数の悲観的ロックが発生する場合、構成によってメモリ制限を増やすことができます。これにより、悲観的ロックがディスクに書き込まれることによって発生するCPUおよびI/Oオーバーヘッドを回避できます。 [#17542](https://github.com/tikv/tikv/issues/17542) @[cfzjywxk](https://github.com/cfzjywxk)
     - Raft Engineに新しい設定項目`spill-dir`を導入し、 Raftログのマルチディスクストレージをサポートします。ホームディレクトリ（`dir`）が配置されているディスクの空き容量がなくなると、 Raft Engine は新しいログを自動的に`spill-dir`に書き込み、システムの継続的な動作を保証します [#17356](https://github.com/tikv/tikv/issues/17356) @[LykxSassinator](https://github.com/LykxSassinator)
-    - RocksDB の圧縮トリガー メカニズムを最適化し、多数の DELETE バージョンを処理する際のディスク領域の再利用を加速します [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
+    - RocksDB のコンパクショントリガー メカニズムを最適化し、多数の DELETE バージョンを処理する際のディスク領域の再利用を加速します [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - 書き込み操作のフロー制御構成を動的に変更するサポート [#17395](https://github.com/tikv/tikv/issues/17395) @[glorv](https://github.com/glorv)
     - 空のテーブルと小さなリージョンを含むシナリオでのリージョンマージの速度を改善 [#17376](https://github.com/tikv/tikv/issues/17376) @[LykxSassinator](https://github.com/LykxSassinator)
     - [パイプラインDML](https://github.com/pingcap/tidb/blob/release-8.4/docs/design/2024-01-09-pipelined-DML.md)が resolved-ts を長期間ブロックしないようにします [#17459](https://github.com/tikv/tikv/issues/17459) @[ekexium](https://github.com/ekexium)

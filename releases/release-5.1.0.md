@@ -51,7 +51,7 @@ TiDB バージョン: 5.1.0
 | TiKV設定ファイル     | [`sink-memory-quota`](/tikv-configuration-file.md#sink-memory-quota)                                     | 新しく追加された | TiCDCデータ変更イベントによるメモリ使用量の上限を設定します。デフォルト値は`512MB`です。                                                                                                                           |
 | TiKV設定ファイル     | [`incremental-scan-threads`](/tikv-configuration-file.md#incremental-scan-threads)                       | 新しく追加された | 履歴データを増分的にスキャンするタスクのスレッド数を設定します。デフォルト値は`4`で、これはタスクに4つのスレッドが使用されることを意味します。                                                                                                    |
 | TiKV設定ファイル     | [`incremental-scan-concurrency`](/tikv-configuration-file.md#incremental-scan-concurrency)               | 新しく追加された | 履歴データの増分スキャンを行うタスクの同時実行の最大数を設定します。デフォルト値は`6`で、これは最大で 6つのタスクを同時に実行できることを意味します。                                                                                               |
-| TiKV設定ファイル     | [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 変更     | 保留中の圧縮バイトのソフトリミット。デフォルト値は`"64GB"`から`"192GB"`に変更されます。                                                                                                                         |
+| TiKV設定ファイル     | [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit) | 変更     | 保留中のコンパクションバイトのソフトリミット。デフォルト値は`"64GB"`から`"192GB"`に変更されます。                                                                                                                         |
 | TiKV設定ファイル     | [`storage.io-rate-limit`](/tikv-configuration-file.md#storageio-rate-limit)                              | 新しく追加された | TiKV書き込みのI/Oレートを制御します。 `storage.io-rate-limit.max-bytes-per-sec`のデフォルト値は`"0MB"`です。                                                                                           |
 | TiKV設定ファイル     | [`resolved-ts.enable`](/tikv-configuration-file.md#enable)                                               | 新しく追加された | すべてのリージョンリーダーに対して`resolved-ts`を維持するかどうかを決定します。デフォルト値は`true`です。                                                                                                               |
 | TiKV設定ファイル     | [`resolved-ts.advance-ts-interval`](/tikv-configuration-file.md#advance-ts-interval)                     | 新しく追加された | `resolved-ts`が進められる間隔。デフォルト値は`"1s"`です。この値は動的に変更できます。                                                                                                                         |
@@ -167,7 +167,7 @@ TiDB バージョン: 5.1.0
 
 - TiKVバックグラウンドタスク用の書き込みレート制限機能を追加する（TiKV書き込みレート制限機能）
 
-    読み取りおよび書き込みリクエストの継続時間の安定性を確保するため、TiKV 書き込みレートリミッターは、GC や圧縮などの TiKV バックグラウンドタスクの書き込みトラフィックを平滑化します。TiKV バックグラウンドタスク書き込みレートリミッターのデフォルト値は"0MB"です。この値は、クラウドディスクメーカーが指定する最大 I/O 帯域幅など、ディスクの最適な I/O 帯域幅に設定することをお勧めします。
+    読み取りおよび書き込みリクエストの継続時間の安定性を確保するため、TiKV 書き込みレートリミッターは、GC やコンパクションなどの TiKV バックグラウンドタスクの書き込みトラフィックを平滑化します。TiKV バックグラウンドタスク書き込みレートリミッターのデフォルト値は"0MB"です。この値は、クラウドディスクメーカーが指定する最大 I/O 帯域幅など、ディスクの最適な I/O 帯域幅に設定することをお勧めします。
 
     [ユーザー向けドキュメント](/tikv-configuration-file.md#storageio-rate-limit)、 [#9156](https://github.com/tikv/tikv/issues/9156)
 
@@ -319,7 +319,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     - 削除されたテーブルにデータを書き込む際に発生するTiFlash panic問題を修正します。
     - TiFlashがBR復元中にpanicする可能性がある問題を修正しました。
     - 共有デルタインデックスを同時クローンする際に結果が正しくない問題を修正しました。
-    - 圧縮フィルター機能が有効になっているときに発生する可能性のあるpanicを修正します。
+    - コンパクションフィルター機能が有効になっているときに発生する可能性のあるpanicを修正します。
     - TiFlashが非同期コミットからフォールバックしたロックを解決できない問題を修正します。
     - `TIMEZONE`型のキャスト結果に`TIMESTAMP`型が含まれている場合に、誤った結果が返される問題を修正しました。
     - セグメント分割中に発生するTiFlash panic問題を修正します

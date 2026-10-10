@@ -14,7 +14,7 @@ TiDB バージョン: 6.5.4
 ## 互換性の変更 {#compatibility-changes}
 
 - `Cursor Fetch`を使用して大きな結果セットを取得するときにTiDBがメモリを大量に消費する問題を修正するために、TiDBは結果セットを自動的にディスクに書き込んでメモリを解放します[#43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao)
-- RocksDBの定期的な圧縮をデフォルトで無効にすることで、TiKV RocksDBのデフォルトの動作がv6.5.0より前のバージョンと一致するようになりました。この変更により、アップグレード後に大量の圧縮が行われることによるパフォーマンスへの影響を回避できます。さらに、TiKVでは2つの新しい設定項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#periodic-compaction-seconds-new-in-v654)と[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#ttl-new-in-v654)が導入され、RocksDB の定期的な圧縮を手動で設定できるようになりました。 [#15355](https://github.com/tikv/tikv/issues/15355) @[LykxSassinator](https://github.com/LykxSassinator)
+- RocksDBの定期的なコンパクションをデフォルトで無効にすることで、TiKV RocksDBのデフォルトの動作がv6.5.0より前のバージョンと一致するようになりました。この変更により、アップグレード後に大量のコンパクションが行われることによるパフォーマンスへの影響を回避できます。さらに、TiKVでは2つの新しい設定項目[`rocksdb.[defaultcf|writecf|lockcf].periodic-compaction-seconds`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#periodic-compaction-seconds-new-in-v654)と[`rocksdb.[defaultcf|writecf|lockcf].ttl`](https://docs.pingcap.com/tidb/v6.5/tikv-configuration-file#ttl-new-in-v654)が導入され、RocksDB の定期的なコンパクションを手動で設定できるようになりました。 [#15355](https://github.com/tikv/tikv/issues/15355) @[LykxSassinator](https://github.com/LykxSassinator)
 
 ### 動作の変更 {#behavior-changes}
 
@@ -32,9 +32,9 @@ TiDB バージョン: 6.5.4
 
     - `check_leader`リクエストに gzip 圧縮を使用してトラフィックを削減します [#14553](https://github.com/tikv/tikv/issues/14553) @[you06](https://github.com/you06)
     - `Max gap of safe-ts`と`Min safe ts region`メトリックを追加し、 `tikv-ctl get-region-read-progress`コマンドを導入して、resolved-tsとsafe-ts の状態をより適切に観察および診断します[#15082](https://github.com/tikv/tikv/issues/15082) @[ekexium](https://github.com/ekexium)
-    - TiKV で RocksDB の設定を公開し、ユーザーが TTL や定期的な圧縮などの機能を無効にできるようにします[#14873](https://github.com/tikv/tikv/issues/14873) @[LykxSassinator](https://github.com/LykxSassinator)
+    - TiKV で RocksDB の設定を公開し、ユーザーが TTL や定期的なコンパクションなどの機能を無効にできるようにします[#14873](https://github.com/tikv/tikv/issues/14873) @[LykxSassinator](https://github.com/LykxSassinator)
     - Titan マニフェストファイルを書き込むときにミューテックスを保持しないようにして、他のスレッドに影響を与えないようにします[#15351](https://github.com/tikv/tikv/issues/15351) @[Connor1996](https://github.com/Connor1996)
-    - 圧縮メカニズムを最適化します。リージョンが分割されるときに、分割するキーがない場合、圧縮がトリガーされ、過剰な MVCC バージョンが排除されます。 [#15282](https://github.com/tikv/tikv/issues/15282) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
+    - コンパクションメカニズムを最適化します。リージョンが分割されるときに、分割するキーがない場合、コンパクションがトリガーされ、過剰な MVCC バージョンが排除されます。 [#15282](https://github.com/tikv/tikv/issues/15282) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
 
 - PD
 
@@ -124,7 +124,7 @@ TiDB バージョン: 6.5.4
     - データレプリケーション自動同期モードで同期回復フェーズでQPSがゼロに低下する問題を修正しました。 [#14975](https://github.com/tikv/tikv/issues/14975) @[nolouch](https://github.com/nolouch)
     - 暗号化により部分書き込み中にデータ破損が発生する可能性がある問題を修正 [#15080](https://github.com/tikv/tikv/issues/15080) @[tabokie](https://github.com/tabokie)
     - ストアハートビートの再試行回数を減らして、ハートビートストームの問題を修正しました。 [#15184](https://github.com/tikv/tikv/issues/15184) @[nolouch](https://github.com/nolouch)
-    - 保留中の圧縮バイト量が多い場合にトラフィック制御が機能しない可能性がある問題を修正しました。 [#14392](https://github.com/tikv/tikv/issues/14392) @[Connor1996](https://github.com/Connor1996)
+    - 保留中のコンパクションバイト量が多い場合にトラフィック制御が機能しない可能性がある問題を修正しました。 [#14392](https://github.com/tikv/tikv/issues/14392) @[Connor1996](https://github.com/Connor1996)
     - PDとTiKV間のネットワーク中断によりPITRが停止する可能性がある問題を修正しました [#15279](https://github.com/tikv/tikv/issues/15279) @[YuJuncen](https://github.com/YuJuncen)
     - TiCDC の古い値機能が有効になっているときに TiKV がより多くのメモリを消費する可能性がある問題を修正[#14815](https://github.com/tikv/tikv/issues/14815) @[YuJuncen](https://github.com/YuJuncen)
 

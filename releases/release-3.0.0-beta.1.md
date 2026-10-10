@@ -107,7 +107,7 @@ TiDB Ansible バージョン: 3.0.0-beta.1
     - 複製する必要のないファイルのフィルタリングをサポート
     - 生成列の複製をサポート
 - Lightning
-    - TiKVの定期的なレベル1圧縮を無効にすることをサポートし、TiKVクラスタバージョンが2.1.4以降の場合、レベル1圧縮はインポートモードで自動的に実行されます[#4199](https://github.com/tikv/tikv/pull/4199) [#119](https://github.com/pingcap/tidb-lightning/pull/119)
+    - TiKVの定期的なレベル1コンパクションを無効にすることをサポートし、TiKVクラスタバージョンが2.1.4以降の場合、レベル1コンパクションはインポートモードで自動的に実行されます[#4199](https://github.com/tikv/tikv/pull/4199) [#119](https://github.com/pingcap/tidb-lightning/pull/119)
     - `table_concurrency`設定項目を追加して、インポートエンジンの数（デフォルトでは"16"）を制限し、インポーターのディスクスペースの過剰な使用を回避します。 [#119](https://github.com/pingcap/tidb-lightning/pull/119)
     - メモリ使用量を削減するために、中間状態SSTをディスクに保存することをサポート[#4369](https://github.com/tikv/tikv/pull/4369)
     - TiKV-Importer のインポートパフォーマンスを最適化し、大規模なテーブルのデータとインデックスの個別インポートをサポートします[#132](https://github.com/pingcap/tidb-lightning/pull/132)

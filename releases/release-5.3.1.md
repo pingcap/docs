@@ -84,7 +84,7 @@ TiDB バージョン: 5.3.1
     - Raftクライアント実装でバッチメッセージが大きすぎる問題を修正 [#9714](https://github.com/tikv/tikv/issues/9714)
     - 極端な状況でリージョンのマージ、ConfChange、スナップショットが同時に発生した場合に発生するpanicの問題を修正しました[#11475](https://github.com/tikv/tikv/issues/11475)
     - TiKVが逆テーブルスキャンを実行するときにメモリロックを検出できない問題を修正しました[#11440](https://github.com/tikv/tikv/issues/11440)
-    - ディスク容量がいっぱいのときにRocksDBのフラッシュまたは圧縮によってpanicが発生する問題を修正しました[#11224](https://github.com/tikv/tikv/issues/11224)
+    - ディスク容量がいっぱいのときにRocksDBのフラッシュまたはコンパクションによってpanicが発生する問題を修正しました[#11224](https://github.com/tikv/tikv/issues/11224)
     - tikv-ctlが正しいリージョン関連情報を返すことができないバグを修正[#11393](https://github.com/tikv/tikv/issues/11393)
     - TiKV メトリクスでインスタンスごとの gRPC リクエストの平均レイテンシーが不正確になる問題を修正しました [#11299](https://github.com/tikv/tikv/issues/11299)
 
