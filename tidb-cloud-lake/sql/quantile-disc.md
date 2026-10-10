@@ -1,6 +1,6 @@
 ---
 title: QUANTILE_DISC
-summary: `QUANTILE_DISC()` 関数は、数値データのシーケンスの正確な分位数を計算します。
+summary: "`QUANTILE_DISC()` 関数は、数値データのシーケンスの正確な分位数を計算します。"
 ---
 
 # QUANTILE_DISC

@@ -1,6 +1,6 @@
 ---
 title: DROP MASKING POLICY
-summary: {{{ .lake }}} から既存の masking policy を削除します。masking policy を削除すると、その policy は {{{ .lake }}} から削除され、関連付けられている masking ルールは効力を失います。masking policy を削除する前に、その policy がどのカラムにも関連付けられていないことを確認してください。
+summary: "{{{ .lake }}} から既存の masking policy を削除します。masking policy を削除すると、その policy は {{{ .lake }}} から削除され、関連付けられている masking ルールは効力を失います。masking policy を削除する前に、その policy がどのカラムにも関連付けられていないことを確認してください。"
 ---
 
 # DROP MASKING POLICY

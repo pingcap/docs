@@ -1,6 +1,6 @@
 ---
 title: TRY_TO_TIMESTAMP
-summary: {{{ .lake }}} における TO_TIMESTAMP のバリアントで、入力式を timestamp に変換する点は同じですが、変換に失敗した場合はエラーを発生させる代わりに NULL を返すことで、エラーハンドリングをサポートします。
+summary: "{{{ .lake }}} における TO_TIMESTAMP のバリアントで、入力式を timestamp に変換する点は同じですが、変換に失敗した場合はエラーを発生させる代わりに NULL を返すことで、エラーハンドリングをサポートします。"
 ---
 
 # TRY_TO_TIMESTAMP

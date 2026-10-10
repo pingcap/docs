@@ -1,6 +1,6 @@
 ---
 title: system.caches
-summary: {{{ .lake }}} で管理されるさまざまなキャッシュの概要。
+summary: "{{{ .lake }}} で管理されるさまざまなキャッシュの概要。"
 ---
 
 # system.caches

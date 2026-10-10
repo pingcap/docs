@@ -1,6 +1,6 @@
 ---
 title: RANGE
-summary: [start, end) で収集された配列を返します。
+summary: "[start, end) で収集された配列を返します。"
 ---
 
 # RANGE

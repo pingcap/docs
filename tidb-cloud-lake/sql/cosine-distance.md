@@ -1,6 +1,6 @@
 ---
 title: COSINE_DISTANCE
-summary: {{{ .lake }}} における cosine_distance 関数を使用した類似度の測定。
+summary: "{{{ .lake }}} における cosine_distance 関数を使用した類似度の測定。"
 ---
 
 # COSINE_DISTANCE

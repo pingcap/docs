@@ -1,6 +1,6 @@
 ---
 title: CREATE AGGREGATE FUNCTION
-summary: {{{ .lake }}} の JavaScript または Python ランタイム内で実行されるユーザー定義集計関数（UDAF）を作成します。
+summary: "{{{ .lake }}} の JavaScript または Python ランタイム内で実行されるユーザー定義集計関数（UDAF）を作成します。"
 ---
 
 # CREATE AGGREGATE FUNCTION

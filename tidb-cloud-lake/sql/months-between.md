@@ -1,6 +1,6 @@
 ---
 title: MONTHS_BETWEEN
-summary: *date1* と *date2* の間の月数を返します。
+summary: "*date1* と *date2* の間の月数を返します。"
 ---
 
 # MONTHS_BETWEEN

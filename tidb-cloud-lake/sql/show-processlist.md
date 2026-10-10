@@ -1,6 +1,6 @@
 ---
 title: SHOW PROCESSLIST
-summary: {{{ .lake }}} の process list は、サーバー内で実行されているスレッド群によって現在実行中の操作を示します。
+summary: "{{{ .lake }}} の process list は、サーバー内で実行されているスレッド群によって現在実行中の操作を示します。"
 ---
 
 # SHOW PROCESSLIST

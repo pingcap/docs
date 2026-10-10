@@ -1,6 +1,6 @@
 ---
 title: CREATE INVERTED INDEX
-summary: {{{ .lake }}} で新しい inverted index を作成します。
+summary: "{{{ .lake }}} で新しい inverted index を作成します。"
 ---
 
 # CREATE INVERTED INDEX

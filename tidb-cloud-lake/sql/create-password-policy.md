@@ -1,6 +1,6 @@
 ---
 title: CREATE PASSWORD POLICY
-summary: {{{ .lake }}} に新しいパスワードポリシーを作成します。
+summary: "{{{ .lake }}} に新しいパスワードポリシーを作成します。"
 ---
 
 # CREATE PASSWORD POLICY

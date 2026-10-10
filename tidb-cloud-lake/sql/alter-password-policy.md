@@ -1,6 +1,6 @@
 ---
 title: ALTER PASSWORD POLICY
-summary: {{{ .lake }}} 内の既存のパスワードポリシーを変更します。
+summary: "{{{ .lake }}} 内の既存のパスワードポリシーを変更します。"
 ---
 
 # ALTER PASSWORD POLICY

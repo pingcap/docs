@@ -1,6 +1,6 @@
 ---
 title: DROP INVERTED INDEX
-summary: {{{ .lake }}} の inverted index を削除します。
+summary: "{{{ .lake }}} の inverted index を削除します。"
 ---
 
 # DROP INVERTED INDEX

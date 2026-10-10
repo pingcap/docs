@@ -1,6 +1,6 @@
 ---
 title: CREATE MASKING POLICY
-summary: {{{ .lake }}} で新しいマスキングポリシーを作成します。
+summary: "{{{ .lake }}} で新しいマスキングポリシーを作成します。"
 ---
 
 # CREATE MASKING POLICY

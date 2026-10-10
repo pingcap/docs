@@ -1,6 +1,6 @@
 ---
 title: ALTER NETWORK POLICY
-summary: {{{ .lake }}} 内の既存のネットワークポリシーを変更します。
+summary: "{{{ .lake }}} 内の既存のネットワークポリシーを変更します。"
 ---
 
 # ALTER NETWORK POLICY

@@ -1,6 +1,6 @@
 ---
 title: CREATE AGGREGATING INDEX
-summary: {{{ .lake }}} で新しい集約インデックスを作成します。
+summary: "{{{ .lake }}} で新しい集約インデックスを作成します。"
 ---
 
 # CREATE AGGREGATING INDEX

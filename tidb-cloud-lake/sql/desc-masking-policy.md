@@ -1,6 +1,6 @@
 ---
 title: DESC MASKING POLICY
-summary: {{{ .lake }}} 内の特定のマスキングポリシーの詳細情報を表示します。
+summary: "{{{ .lake }}} 内の特定のマスキングポリシーの詳細情報を表示します。"
 ---
 
 # DESC MASKING POLICY

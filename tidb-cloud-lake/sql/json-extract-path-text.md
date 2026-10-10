@@ -1,6 +1,6 @@
 ---
 title: JSON_EXTRACT_PATH_TEXT
-summary: `path_name` によって Json 文字列から値を抽出します。いずれかの引数が `NULL` の場合、値は `String` または `NULL` として返されます。この関数は `to_varchar(GET_PATH(PARSE_JSON(JSON), PATH_NAME))` と同等です。
+summary: "`path_name` によって Json 文字列から値を抽出します。いずれかの引数が `NULL` の場合、値は `String` または `NULL` として返されます。この関数は `to_varchar(GET_PATH(PARSE_JSON(JSON), PATH_NAME))` と同等です。"
 ---
 
 # JSON_EXTRACT_PATH_TEXT

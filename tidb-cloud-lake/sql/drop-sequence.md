@@ -1,6 +1,6 @@
 ---
 title: DROP SEQUENCE
-summary: {{{ .lake }}} から既存のシーケンスを削除します。
+summary: "{{{ .lake }}} から既存のシーケンスを削除します。"
 ---
 
 # DROP SEQUENCE

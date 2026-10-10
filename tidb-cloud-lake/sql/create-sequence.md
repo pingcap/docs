@@ -1,6 +1,6 @@
 ---
 title: CREATE SEQUENCE
-summary: {{{ .lake }}} に新しいシーケンスを作成します。
+summary: "{{{ .lake }}} に新しいシーケンスを作成します。"
 ---
 
 # CREATE SEQUENCE

@@ -1,6 +1,6 @@
 ---
 title: SHOW PASSWORD POLICIES
-summary: {{{ .lake }}} 内の既存のすべてのパスワードポリシーの一覧を表示します。
+summary: "{{{ .lake }}} 内の既存のすべてのパスワードポリシーの一覧を表示します。"
 ---
 
 # SHOW PASSWORD POLICIES

@@ -1,6 +1,6 @@
 ---
 title: ST_UNION_AGG
-summary: `ST_UNION` を繰り返し適用して複数の GEOMETRY 値を集約し、マージされた GEOMETRY 結果を返します。
+summary: "`ST_UNION` を繰り返し適用して複数の GEOMETRY 値を集約し、マージされた GEOMETRY 結果を返します。"
 ---
 
 # ST_UNION_AGG

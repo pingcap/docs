@@ -1,6 +1,6 @@
 ---
 title: CREATE NETWORK POLICY
-summary: {{{ .lake }}} で新しいネットワークポリシーを作成します。
+summary: "{{{ .lake }}} で新しいネットワークポリシーを作成します。"
 ---
 
 # CREATE NETWORK POLICY

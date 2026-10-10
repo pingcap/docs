@@ -1,6 +1,6 @@
 ---
 title: IF
-summary: `<cond1>` が TRUE の場合は `<expr1>` を返します。そうでない場合、`<cond2>` が TRUE なら `<expr2>` を返し、以降も同様です。
+summary: "`<cond1>` が TRUE の場合は `<expr1>` を返します。そうでない場合、`<cond2>` が TRUE なら `<expr2>` を返し、以降も同様です。"
 ---
 
 # IF

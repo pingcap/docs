@@ -1,6 +1,6 @@
 ---
 title: NVL2
-summary: `<expr1>` が NULL でない場合は `<expr2>` を返し、それ以外の場合は `<expr3>` を返します。
+summary: "`<expr1>` が NULL でない場合は `<expr2>` を返し、それ以外の場合は `<expr3>` を返します。"
 ---
 
 # NVL2

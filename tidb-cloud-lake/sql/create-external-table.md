@@ -1,6 +1,6 @@
 ---
 title: CREATE EXTERNAL TABLE
-summary: `CREATE TABLE... CONNECTION = (...)` ステートメントは、デフォルトのローカルストレージを使用する代わりに、データ保存先として S3 互換ストレージのバケットを指定してテーブルを作成します。
+summary: "`CREATE TABLE... CONNECTION = (...)` ステートメントは、デフォルトのローカルストレージを使用する代わりに、データ保存先として S3 互換ストレージのバケットを指定してテーブルを作成します。"
 ---
 
 # CREATE EXTERNAL TABLE

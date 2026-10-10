@@ -1,6 +1,6 @@
 ---
 title: GET_PATH
-summary: `path_name` によって `VARIANT` から値を抽出します。いずれかの引数が `NULL` の場合、値は `Variant` または `NULL` として返されます。
+summary: "`path_name` によって `VARIANT` から値を抽出します。いずれかの引数が `NULL` の場合、値は `Variant` または `NULL` として返されます。"
 ---
 
 # GET_PATH

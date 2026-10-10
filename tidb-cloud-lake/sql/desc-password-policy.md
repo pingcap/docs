@@ -1,6 +1,6 @@
 ---
 title: DESC PASSWORD POLICY
-summary: {{{ .lake }}} 内の特定のパスワードポリシーの詳細情報を表示します。パスワードポリシー属性の詳細な説明については、Password Policy Attributes を参照してください。
+summary: "{{{ .lake }}} 内の特定のパスワードポリシーの詳細情報を表示します。パスワードポリシー属性の詳細な説明については、Password Policy Attributes を参照してください。"
 ---
 
 # DESC PASSWORD POLICY

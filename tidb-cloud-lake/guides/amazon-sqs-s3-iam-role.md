@@ -1,6 +1,6 @@
 ---
 title: Amazon SQS (S3) - IAM Role (Preview)
-summary: {{{ .lake }}} で "Amazon SQS (S3) - IAM Role" データソースを作成する方法を説明します。
+summary: "{{{ .lake }}} で \"Amazon SQS (S3) - IAM Role\" データソースを作成する方法を説明します。"
 ---
 
 # Amazon SQS (S3) - IAM Role (Preview)

@@ -1,6 +1,6 @@
 ---
 title: 継続的データパイプライン
-summary: {{{ .lake }}} で 2 つの基本機能を使って、エンドツーエンドの change data capture (CDC) フローを構築します。
+summary: "{{{ .lake }}} で 2 つの基本機能を使って、エンドツーエンドの change data capture (CDC) フローを構築します。"
 ---
 
 # 継続的データパイプライン

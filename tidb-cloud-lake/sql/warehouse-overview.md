@@ -1,6 +1,6 @@
 ---
 title: Warehouse
-summary: {{{ .lake }}} の Warehouse 関連 SQL コマンド。
+summary: "{{{ .lake }}} の Warehouse 関連 SQL コマンド。"
 ---
 
 # Warehouse

@@ -1,6 +1,6 @@
 ---
 title: REFRESH LINEAGE
-summary: {{{ .lake }}} 内の既存のビューに対してリネージをバックフィルまたは整合します。
+summary: "{{{ .lake }}} 内の既存のビューに対してリネージをバックフィルまたは整合します。"
 ---
 
 # REFRESH LINEAGE
