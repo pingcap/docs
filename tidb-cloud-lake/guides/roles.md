@@ -76,8 +76,6 @@ To set up and use the role `billing`, you can create it using the following comm
 CREATE ROLE billing;
 ```
 
-The role name is case-insensitive, so `billing` and `Billing` are considered the same. For detailed steps on setting and assigning the role `billing`, see [Granting Access to Finance Personnel](/tidb-cloud-lake/guides/manage-costs.md#granting-access-to-finance-personnel).
-
 ## Usage Examples (Basic)
 
 This example showcases role-based permission management. Initially, a 'writer' role is created and granted privileges. Subsequently, these privileges are assigned to the user 'eric', who inherits them. Lastly, the permissions are revoked from the role, demonstrating their impact on the user's privileges.
