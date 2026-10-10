@@ -7,6 +7,7 @@
 
 - [Overview](/tidb-cloud-lake/lake-overview.md)
 - [Quick Start](/tidb-cloud-lake/lake-quick-start.md)
+- [Lake PoC Guide](/tidb-cloud-lake/guides/lake-poc.md)
 
 ## Guides
 
