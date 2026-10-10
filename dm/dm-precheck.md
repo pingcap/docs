@@ -47,7 +47,7 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 
     > **Note:**
     >
-    > For MariaDB versions with Experimental compatibility, you can try migrating data using DM. Common migration scenarios have been verified, but test coverage is limited. Before production use, validate your migration scenario. For version-specific compatibility levels and limitations, see the [DM compatibility catalog](/dm/dm-compatibility-catalog.md).
+    > For MariaDB versions with **experimental** compatibility, you can try migrating data using DM. Common migration scenarios have been verified, but test coverage is limited. Before production use, validate your migration scenario. For version-specific compatibility levels and limitations, see the [DM compatibility catalog](/dm/dm-compatibility-catalog.md).
 
 - Compatibility of the upstream MySQL table schema
 
