@@ -31,7 +31,7 @@ These compatibility levels describe validation maturity. They do not specify sup
 
 ### MySQL 8.4 notes
 
-MySQL 8.4 source support is Experimental, not GA. Before production use, verify compatibility with your exact source version, DM version, and migration configuration. Validate the migration modes you plan to use and check data consistency.
+MySQL 8.4 source support is **experimental**, not GA. Before production use, verify compatibility with your exact source version, DM version, and migration configuration. Validate the migration modes you plan to use and check data consistency.
 
 - For incremental replication, set `binlog_transaction_compression=OFF`. DM does not support compressed binlog transaction events.
 - If your source uses tagged GTIDs, verify compatibility with your DM version before migration. Tagged GTIDs require further compatibility testing. For details, see [the tagged GTID issue](https://github.com/pingcap/tiflow/issues/12629) and [the compatibility testing tracker](https://github.com/pingcap/tiflow/issues/12412).
