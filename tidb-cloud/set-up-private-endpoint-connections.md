@@ -43,7 +43,7 @@ Make sure that DNS hostnames and DNS resolution are both enabled in your AWS VPC
 
 ## Set up a private endpoint connection and connect to your cluster
 
-To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the follow these steps:
+To connect to your TiDB Cloud Dedicated cluster via a private endpoint, complete the following steps:
 
 1. [Select a TiDB cluster](#step-1-select-a-tidb-cluster)
 2. [Create an AWS interface endpoint](#step-2-create-an-aws-interface-endpoint)
