@@ -455,4 +455,4 @@ Keep the following differences in mind:
 - Text without an explicit custom collation uses bytewise ordering.
 - Collation is not applied to `ORDER BY` inside aggregate functions.
 - Collation is not applied to window-function `ORDER BY`.
-- Custom collations are not fully reflected by `pg_collation` or `pg_attribute.attcollation`.
+- Custom collations can be used but are not listed in `pg_collation`.
