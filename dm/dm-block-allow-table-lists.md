@@ -71,7 +71,7 @@ The filtering process of a `test`.`t` table is as follows:
         - If yes, continue to filter at the **table** level.
         - If not, filter `test`.`t`.
 
-    - If `do-dbs` is empty and `ignore-dbs` is not empty, check whether a matched schema exits in `ignore-dbs`.
+    - If `do-dbs` is empty and `ignore-dbs` is not empty, check whether a matched schema exists in `ignore-dbs`.
 
         - If yes, filter `test`.`t`.
         - If not, continue to filter at the **table** level.
