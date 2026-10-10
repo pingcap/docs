@@ -43,13 +43,15 @@ This page provides a comprehensive overview of table operations in {{{ .lake }}}
 | [TRUNCATE TABLE](/tidb-cloud-lake/sql/truncate-table.md) | Removes all data from a table while preserving the table's schema | [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md) |
 | [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md) | Deletes a table | [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) |
 | [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | Permanently removes historical data files of a table (Enterprise Edition) | Not recoverable |
-| [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) | Permanently removes data files of dropped tables (Enterprise Edition) | Not recoverable |
+| [VACUUM DROPPED OBJECTS](/tidb-cloud-lake/sql/vacuum-dropped-objects.md) | Permanently removes eligible dropped objects and their storage and metadata (Enterprise Edition) | Not recoverable |
+| [VACUUM TABLES](/tidb-cloud-lake/sql/vacuum-tables.md) | Cleans eligible history from tables across a database or the current catalog (Enterprise Edition) | Not recoverable |
+| [VACUUM ALL](/tidb-cloud-lake/sql/vacuum-all.md) | Cleans table history, dropped objects, and temporary files (Enterprise Edition) | Not recoverable |
 
 ## Table Optimization
 
 | Command | Description |
 |---------|-------------|
-| [OPTIMIZE TABLE](/tidb-cloud-lake/sql/optimize-table.md) | Compacts or purges historical data to save storage space and enhance query performance |
+| [OPTIMIZE TABLE](/tidb-cloud-lake/sql/optimize-table.md) | Compacts segments and blocks to enhance query performance |
 | [SET CLUSTER KEY](/tidb-cloud-lake/sql/set-cluster-key.md) | Configures a cluster key to enhance query performance for large tables |
 
 > **Note:**
