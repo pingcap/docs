@@ -37,7 +37,7 @@ Generally, if the CPU usage of the loaded Raftstore reaches 85% or higher, Rafts
 
 You can check the following monitoring metrics in Grafana's **TiKV Dashboard**:
 
-+ `Raft store CPU` in the **Thread-CPU** panel
++ `Raft store CPU` in the **Thread CPU** panel
 
     Reference value: lower than `raftstore.store-pool-size * 85%`.
 
