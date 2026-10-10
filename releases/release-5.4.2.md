@@ -46,7 +46,7 @@ TiDB version: 5.4.2
     - Fix the wrong memory-usage value used when Plan Cache is evicted [#34613](https://github.com/pingcap/tidb/issues/34613)
     - Fix the issue that the column list does not work in the `LOAD DATA` statement [#35198](https://github.com/pingcap/tidb/issues/35198)
     - Avoid reporting `WriteConflict` errors in pessimistic transactions [#11612](https://github.com/tikv/tikv/issues/11612)
-    - Fix the issue that the prewrite requests are not idempotency when Region errors and network issues occur [#34875](https://github.com/pingcap/tidb/issues/34875)
+    - Fix the issue that the prewrite requests are not idempotent when Region errors and network issues occur [#34875](https://github.com/pingcap/tidb/issues/34875)
     - Fix the issue that the async commit transactions being rolled back might not meet atomicity [#33641](https://github.com/pingcap/tidb/issues/33641)
     - Previously, when a network connectivity issue occurred, TiDB did not always correctly free the resources held by the disconnected session. This issue has been fixed so that open transactions can be rolled back and other associated resources can be released. [#34722](https://github.com/pingcap/tidb/issues/34722)
     - Fix the issue that the `references invalid table` error might be incorrectly reported when TiDB queries views with CTE [#33965](https://github.com/pingcap/tidb/issues/33965)
