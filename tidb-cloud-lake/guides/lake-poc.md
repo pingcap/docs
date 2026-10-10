@@ -241,6 +241,7 @@ CREATE TABLE fact_table (
 
 -- Load representative data into fact_table before benchmarking.
 CREATE MATERIALIZED VIEW mv_account_totals
+  (tenant_id, account, category_id, total_amount)
 CLUSTER BY (tenant_id, account)
 AS
 SELECT
