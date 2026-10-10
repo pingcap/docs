@@ -1,5 +1,5 @@
 ---
-title: {{{ .starter }}} と Essential のための Project API 移行ガイド
+title: "{{{ .starter }}} と Essential のための Project API 移行ガイド"
 summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェクトタイプを導入した後も、既存の v1beta API 呼び出しを動作させ続けるために必要な最小限の変更について説明します。
 ---
 
