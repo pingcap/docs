@@ -173,7 +173,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Migrate from PostgreSQL](https://docs.pingcap.com/tidbcloud/starter/Import-with-psql/?plan=starter&compatibility=postgresql)
+[Migrate from PostgreSQL](https://docs.pingcap.com/tidbcloud/starter/import-with-psql/?plan=starter&compatibility=postgresql)
 
 </LearningPath>
 
