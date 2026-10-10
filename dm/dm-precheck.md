@@ -46,12 +46,8 @@ Regardless of the migration mode you choose, the precheck always includes the fo
 
     > **Note:**
     >
-<<<<<<< HEAD
     > - Migrating data from MySQL 8.0 to TiDB using DM is an experimental feature (introduced since DM v2.0). It is NOT recommended that you use it in a production environment.
-    > - Migrating data from MariaDB to TiDB using DM is an experimental feature. It is NOT recommended that you use it in a production environment.
-=======
-    > For MariaDB versions with **experimental** compatibility, you can try migrating data using DM. Common migration scenarios have been verified, but test coverage is limited. Before production use, validate your migration scenario. For version-specific compatibility levels and limitations, see the [DM compatibility catalog](/dm/dm-compatibility-catalog.md).
->>>>>>> 56da8d8e02 (dm: clarify Experimental source compatibility guidance (#24257))
+    > - For MariaDB versions with **experimental** compatibility, you can try migrating data using DM. Common migration scenarios have been verified, but test coverage is limited. Before production use, validate your migration scenario. For version-specific compatibility levels and limitations, see the [DM compatibility catalog](/dm/dm-compatibility-catalog.md).
 
 - Compatibility of the upstream MySQL table schema
 
