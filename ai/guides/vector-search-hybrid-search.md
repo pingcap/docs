@@ -15,7 +15,7 @@ A general workflow of hybrid search in TiDB is as follows:
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
-This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](https://github.com/pingcap/pytidb) Python SDK, which provides built-in support for embedding and reranking. Using pytidb is completely optional — you can perform a search using SQL directly and use your own reranking model as you like.
+This tutorial demonstrates how to use hybrid search in TiDB with the [pytidb](https://github.com/pingcap/pytidb) Python SDK, which provides built-in support for embedding and reranking. Using pytidb is completely optional — you can perform a search using SQL directly and use your own reranking model as you like. For a hybrid search written entirely in SQL, see [Hybrid Search with SQL](/ai/guides/vector-search-hybrid-search-sql.md).
 
 ## Prerequisites
 
