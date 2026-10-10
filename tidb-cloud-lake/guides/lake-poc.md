@@ -1,4 +1,9 @@
-# TiDB Cloud Lake PoC guide
+---
+title: TiDB Cloud Lake PoC Guide
+summary: Evaluate TiDB Cloud Lake with a representative workload using schema mapping, cluster keys, reclustering, block sizes, and materialized views.
+---
+
+# TiDB Cloud Lake PoC Guide
 
 This guide describes a repeatable proof of concept (PoC) for TiDB Cloud Lake.
 It focuses on the decisions that have the largest impact on a representative
@@ -11,19 +16,17 @@ you can compare each optimization with the same baseline.
 
 ## 1. Configure an S3 connection
 
-
 Use an S3 bucket when the source pipeline already writes Parquet, CSV, or
 JSON objects to object storage. In **Home > Connect**, obtain the IAM role ARN
 for your TiDB Cloud Lake deployment and follow [Authenticate with AWS IAM
-Role](https://docs.pingcap.com/tidbcloudlake/authenticate-with-aws-iam-role/)
+Role](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md)
 to configure the S3 connection, stage, and data load.
-
 
 ## 2. Configure PrivateLink
 
 Use PrivateLink when traffic must stay on a private network path. In **Home >
 Connect**, obtain the PrivateLink service and follow [Connect with AWS
-PrivateLink](https://docs.pingcap.com/tidbcloudlake/connect-with-aws-privatelink/)
+PrivateLink](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md)
 to configure the connection. Verify the endpoint, security-group rules, DNS
 behavior, and route from the client or source cluster before starting the load.
 
@@ -40,7 +43,7 @@ transfer data between TiDB Cloud and TiDB Cloud Lake. Before starting the PoC,
 verify that the required feature is available for your TiDB Cloud plan and that
 the external stage and access policy are configured. For current availability
 and configuration requirements, see [Data Pipeline to TiDB Cloud
-Lake](https://docs.pingcap.com/tidb-cloud/data-pipeline/data-pipeline-overview.md).
+Lake](https://docs.pingcap.com/tidbcloud/data-pipeline-sink-to-lake/).
 
 For the PoC, select representative tables and record their schemas, expected
 row counts, and freshness targets. After the initial snapshot completes,
@@ -50,6 +53,21 @@ deletes in the source and verify that TiDB Cloud Lake reflects them within the
 expected replication latency. Record snapshot duration, replication lag,
 rejected records, and schema-mapping errors before using the replicated tables
 for query-performance tests.
+
+### Map and validate the source schema
+
+Before loading files or starting replication, record each source column and its
+target Lake column, data type, nullability, default value, and any required
+conversion. Check decimal precision and scale, signed and unsigned integer
+ranges, timestamp precision and time zones, and string encoding. Use the
+[Lake data types reference](/tidb-cloud-lake/sql/data-types.md) to choose target
+types; do not assume that matching type names have identical semantics.
+
+Load a small sample that includes nulls and boundary values. Compare row and
+null counts, minimum and maximum values, and aggregates with the source at the
+same snapshot or replication checkpoint. Verify that conversions preserve
+precision and timestamp meaning, and investigate rejected or truncated values
+before starting the full load.
 
 ## 4. Establish the performance baseline
 
@@ -66,9 +84,11 @@ Capture `EXPLAIN` output for each baseline query. If `TableScan` dominates,
 inspect cluster-key pruning, overlap metrics, block size, cache hit rate, and
 warehouse capacity before increasing concurrency.
 
-## 5. Always choose a cluster key
+## 5. Choose a cluster key when the workload benefits
 
-Choose a cluster key when creating every table. Use columns that frequently
+Evaluate a cluster key when creating a large table with predictable filters or
+range scans. Small tables, random access patterns, and frequent changes might
+not benefit enough to justify the maintenance cost. Use columns that frequently
 appear in filters, joins, or range scans, and put the most commonly filtered
 columns first. Keep key expressions narrow; for a long string, use a bounded
 prefix expression.
@@ -84,13 +104,11 @@ CREATE TABLE lineitem (
 ENGINE = FUSE
 CLUSTER BY (DATE_TRUNC(MONTH, l_shipdate), l_orderkey)
 COMPRESSION = 'zstd'
-ENABLE_AUTO_ANALYZE = '1'
 STORAGE_FORMAT = 'parquet';
 ```
 
-A table without a cluster key usually cannot prune effectively for range
-predicates. If a table was created without one, add a key and recluster it
-before comparing query performance.
+If range predicates scan many blocks on a large table without a cluster key,
+evaluate adding a key and reclustering before comparing query performance.
 
 ```sql
 ALTER TABLE lineitem CLUSTER BY (DATE_TRUNC(MONTH, l_shipdate), l_orderkey);
@@ -105,17 +123,20 @@ for key design details.
 A cluster key does not impose one globally sorted file. Bulk loads and large
 mutations can leave many blocks overlapping, reducing pruning while keeping
 ingestion fast. Run the following after the initial load and after a major data
-change:
+change when the overlap metrics indicate that it is needed. Pause writes,
+including replication into the table, during the operation. Do not perform DML
+while `RECLUSTER` runs. For details, see [RECLUSTER TABLE](/tidb-cloud-lake/sql/recluster-table.md).
 
 ```sql
 ALTER TABLE lineitem RECLUSTER FINAL;
 ```
 
-Inspect `CLUSTERING_INFORMATION` before and after reclustering. Track
-`average_overlaps`, `average_depth`, `p95_depth`, and `p99_depth` together with
-bytes scanned and query latency. Use these metrics to compare the same workload
-before and after reclustering. A practical starting target is `p95_depth < 32`,
-but validate the threshold against your workload and data distribution.
+Inspect [CLUSTERING_INFORMATION](/tidb-cloud-lake/sql/clustering-information.md)
+before and after reclustering. Track `average_overlaps`, `average_depth`, and
+`block_depth_histogram` together with bytes scanned and query latency. Lower
+depth and overlap generally indicate better clustering. Compare the same
+workload before and after reclustering to establish a useful maintenance
+threshold for your data distribution.
 
 ```sql
 CREATE TABLE mytable(a INT, b INT) CLUSTER BY (a + 1);
@@ -135,8 +156,8 @@ SELECT * FROM CLUSTERING_INFORMATION('default', 'mytable')\G
    block_depth_histogram: {"00002":3}
 ```
 
-The following is an illustrative result with relatively moderate overlap. The
-values are examples, not universal healthy thresholds:
+The following metric summary illustrates relatively moderate overlap. These
+values are not universal healthy thresholds or the function's full output:
 
 ```json
 {
@@ -144,17 +165,15 @@ values are examples, not universal healthy thresholds:
   "info": {
     "average_depth": 40.6131,
     "average_overlaps": 40.7653,
-    "p95_depth": 42,
-    "p99_depth": 42,
     "total_block_count": 473
   },
   "type": "linear"
 }
 ```
 
-The following result shows severe overlap. A `p95_depth` above 10,000 indicates
-that reclustering should be scheduled promptly and that the cluster-key design
-should be reviewed:
+The following metric summary shows severe overlap: `average_depth` is close to
+the total block count. Review query scans and latency, schedule reclustering,
+and revisit the cluster-key design if this pattern persists:
 
 ```json
 {
@@ -162,17 +181,17 @@ should be reviewed:
   "info": {
     "average_depth": 10181.3357,
     "average_overlaps": 10211.5616,
-    "p95_depth": 10182,
-    "p99_depth": 10182,
     "total_block_count": 10214
   },
   "type": "linear"
 }
 ```
 
-For continuously changing tables, create a task to recluster the table and
-maintain acceptable overlap. Schedule it according to the observed overlap
-trend and measure its compute cost:
+For continuously changing tables, schedule reclustering during a maintenance
+window when DML and replication writes are paused. Choose the schedule based on
+the observed overlap trend and measure its compute cost. The following hourly
+task is an example; it does not pause writers, so coordinate the maintenance
+window before resuming it:
 
 ```sql
 CREATE OR REPLACE TASK lineitem_hourly
@@ -189,24 +208,39 @@ ALTER TASK lineitem_hourly RESUME;
 
 Start with a block size that matches the write pattern:
 
-- For large appends and analytical reads, evaluate approximately 512 MB:
-  `BLOCK_SIZE_THRESHOLD = '536870912'`.
+- For large appends and analytical reads, evaluate a threshold of 536870912
+  bytes (512 MiB).
 - For frequent small inserts, updates, or deletes, evaluate smaller blocks to
   reduce rewrite cost and write amplification.
 
-As a starting point, choose a larger block of approximately 512 MB for large
-append workloads.
+Apply the option before loading the PoC data:
+
+```sql
+ALTER TABLE lineitem SET OPTIONS (BLOCK_SIZE_THRESHOLD = 536870912);
+```
+
+This is a starting point for evaluation, not a universal default. Compare load
+time, write cost, bytes scanned, and query latency with the same data and queries.
 
 ## 8. Use materialized views for repeated aggregation
 
 When the workload repeatedly aggregates one table at the same granularity, use
 a materialized view to pre-aggregate the frequently queried dimensions. Keep
 the base-table and view cluster keys aligned with the dashboard predicates,
-then compare the view query with the baseline query under the same warehouse
-and cache conditions.
+then refresh the view before comparing its query with the baseline under the
+same warehouse and cache conditions. Creation records the definition; the
+first refresh populates physical storage.
 
 ```sql
-CREATE MATERIALIZED VIEW mv_account_daily
+CREATE TABLE fact_table (
+  tenant_id INT,
+  account BIGINT,
+  category_id INT,
+  amount DECIMAL(19, 6)
+);
+
+-- Load representative data into fact_table before benchmarking.
+CREATE MATERIALIZED VIEW mv_account_totals
 CLUSTER BY (tenant_id, account)
 AS
 SELECT
@@ -216,6 +250,8 @@ SELECT
   SUM(amount) AS total_amount
 FROM fact_table
 GROUP BY tenant_id, account, category_id;
+
+REFRESH MATERIALIZED VIEW mv_account_totals;
 ```
 
 Materialized views are best suited to single-table aggregation. See the
