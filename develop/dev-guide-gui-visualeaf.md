@@ -67,7 +67,7 @@ To complete this tutorial, you need:
     SELECT * FROM demo_users;
     ```
 
-    Click **Run All** (or press **F5**) to execute all statements in the editor. To execute only the current statement, click **Run** (or press **F9**). The results are displayed in the results grid below the editor.
+    Click **Run All** (or press **F5**) to execute all statements in the editor. To execute only the selected statements, select them and click **Run** (or press **F9**). The results are displayed in the results grid below the editor.
 
     ![VisuaLeaf: connected to TiDB and running a query](/media/develop/visualeaf-connected-query.png)
 
