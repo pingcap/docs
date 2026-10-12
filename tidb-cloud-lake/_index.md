@@ -1,3 +1,4 @@
+<!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
 ---
 title: TiDB Cloud Lake ドキュメント
 hide_sidebar: true
@@ -77,11 +78,7 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 <LearningPath label="運用" icon="tidb-cloud-tune">
 
-[コストの管理](https://docs.pingcap.com/ja/tidbcloudlake/manage-costs/)
-
 [使用状況の監視](https://docs.pingcap.com/ja/tidbcloudlake/monitor-usage/)
-
-[AI を活用した機能](https://docs.pingcap.com/ja/tidbcloudlake/ai-powered-features/)
 
 [パフォーマンスチューニング](https://docs.pingcap.com/ja/tidbcloudlake/performance-optimization/)
 

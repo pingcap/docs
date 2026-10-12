@@ -1,12 +1,13 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# Table of Contents
+# Table of Contents <!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
 
 ## はじめに
 
 - [概要](/tidb-cloud-lake/lake-overview.md)
 - [クイックスタート](/tidb-cloud-lake/lake-quick-start.md)
+- [Lake PoC ガイド](/tidb-cloud-lake/guides/lake-poc.md)
 
 ## ガイド
 
@@ -133,8 +134,6 @@
   - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
   - [運用エラーからのリカバリ](/tidb-cloud-lake/guides/recovery-from-operational-errors.md)
 - 管理
-  - [AI を活用した機能](/tidb-cloud-lake/guides/ai-powered-features.md)
-  - [コストの管理](/tidb-cloud-lake/guides/manage-costs.md)
   - [使用状況の監視](/tidb-cloud-lake/guides/monitor-usage.md)
   - [データライフサイクル](/tidb-cloud-lake/guides/data-lifecycle.md)
   - [データリネージ](/tidb-cloud-lake/guides/data-lineage.md)
