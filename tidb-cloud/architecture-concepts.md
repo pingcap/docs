@@ -239,7 +239,7 @@ TiDB Cloud calculates your usage every minute. It measures the total number of R
 
 To maintain baseline capacity and ensure that resources are always available for your instance, TiDB Cloud applies a minimum billing RCU. This value defines the reserved capacity for your instance and is the minimum number of RCUs you are billed for.
 
-If your actual consumption in a given minute is below this threshold, billing defaults to the minimum billing RCU. This mechanism ensures that your instance can immediately handle sudden traffic spikes, without performance degradation or delays.
+If your actual consumption in a given minute is below this threshold, billing defaults to the minimum billing RCU. This mechanism provides baseline capacity to handle incoming traffic while allowing the instance to scale out as demand increases.
 
 How the minimum billing RCU is determined depends on the capacity mode of your instance:
 
