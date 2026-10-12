@@ -54,6 +54,8 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 </LearningPath>
 
+<LearningPath label="ロード" icon="cloud3">
+
 [stage の操作](https://docs.pingcap.com/ja/tidbcloudlake/stage-overview/)
 
 [ファイルからのロード](https://docs.pingcap.com/ja/tidbcloudlake/load-from-files/)
@@ -62,9 +64,9 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 [継続的データパイプライン](https://docs.pingcap.com/ja/tidbcloudlake/continuous-data-pipelines/)
 
-[継続的データパイプライン](https://docs.pingcap.com/ja/tidbcloudlake/continuous-data-pipelines/)
-
 </LearningPath>
+
+<LearningPath label="分析" icon="cloud6">
 
 [マルチモーダルデータ分析](https://docs.pingcap.com/ja/tidbcloudlake/multimodal-data-analytics/)
 
@@ -72,19 +74,21 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 [ベクトル検索](https://docs.pingcap.com/ja/tidbcloudlake/vector-search-guide/)
 
-[ベクトル検索](https://docs.pingcap.com/ja/tidbcloudlake/vector-search-guide/)
-
 </LearningPath>
 
-[コストの管理](https://docs.pingcap.com/ja/tidbcloudlake/manage-costs/)
+<LearningPath label="運用" icon="tidb-cloud-tune">
 
-[AI を活用した機能](https://docs.pingcap.com/ja/tidbcloudlake/ai-powered-features/)
+[使用状況の監視](https://docs.pingcap.com/ja/tidbcloudlake/monitor-usage/)
+
+[パフォーマンスチューニング](https://docs.pingcap.com/ja/tidbcloudlake/performance-optimization/)
 
 [トラブルシューティング](https://docs.pingcap.com/ja/tidbcloudlake/troubleshooting/)
 
-[セキュリティと信頼性](https://docs.pingcap.com/ja/tidbcloudlake/security-reliability/)
-
 </LearningPath>
+
+<LearningPath label="セキュリティ" icon="users">
+
+[セキュリティと信頼性](https://docs.pingcap.com/ja/tidbcloudlake/security-reliability/)
 
 [アクセス制御](https://docs.pingcap.com/ja/tidbcloudlake/access-control/)
 
@@ -94,15 +98,11 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 [コンプライアンスとセキュリティ](https://docs.pingcap.com/ja/tidbcloudlake/compliance-security/)
 
-[SQL リファレンス](https://docs.pingcap.com/ja/tidbcloudlake/sql-statements-overview/)
-
-[料金と請求](https://docs.pingcap.com/ja/tidbcloudlake/pricing-billing/)
-
 </LearningPath>
 
-[データ取り込みベンチマーク](https://docs.pingcap.com/ja/tidbcloudlake/benchmark-data-ingestion/)
+<LearningPath label="リファレンス" icon="cloud-dev">
 
-[サポートサービス](https://docs.pingcap.com/ja/tidbcloudlake/support-services/)
+[SQL リファレンス](https://docs.pingcap.com/ja/tidbcloudlake/sql-statements-overview/)
 
 [料金と請求](https://docs.pingcap.com/ja/tidbcloudlake/pricing-billing/)
 
