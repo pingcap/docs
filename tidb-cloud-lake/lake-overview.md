@@ -1,9 +1,10 @@
 ---
 title: TiDB Cloud Lake の概要
 summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離し、ANSI SQL、半構造化データ処理、AI 指向のワークフローをサポートします。
+aliases: ['/ja/tidbcloudlake/ai-powered-features/','/ja/tidbcloudlake/manage-costs/']
 ---
 
-# TiDB Cloud Lake の概要
+# TiDB Cloud Lake の概要 <!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
 
 TiDB Cloud Lake は、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離しているため、Warehouse を個別にプロビジョニングし、ワークロードの変化に応じてスケールさせ、オブジェクトストレージにデータをコスト効率よく保存できます。
 
