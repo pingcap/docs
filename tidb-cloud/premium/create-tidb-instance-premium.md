@@ -42,12 +42,16 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 2. On the **Create Resource** page, select **Premium** as your plan.
 3. Enter a name for your {{{ .premium }}} instance, and then choose a cloud provider and a region where you want to host your instance.
 4. (Optional) To group this {{{ .premium }}} instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
-5. In the **Capacity** area, set the maximum number of Request Capacity Units (RCUs) for your instance. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within this range based on demand.
+5. In the **Capacity** area, configure the capacity of your instance. **Elastic Mode** is selected by default.
+
+    - **Elastic Mode**: Do not set a maximum RCU. Instead, set a **Baseline RCU** for your instance. Baseline RCU is the minimum number of Request Capacity Units (RCUs) you are billed for and the initial capacity for autoscaling. TiDB Cloud automatically allocates backend resources based on your workload and scales out from the Baseline RCU when demand increases. If your actual consumption in a given minute is lower than the Baseline RCU, billing is calculated using the Baseline RCU.
+
+    - **Max RCU Compatibility Mode**: Set **Maximum RCU** for your instance. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within the range of `0.25 * RCU_max` to `RCU_max` based on demand.
 
     > **Note:**
     > 
-    > - The maximum RCU value must be set in increments of 100.
-    > - You will be billed for a minimum number of RCUs, known as the **Minimum Billing RCU**. This value is the greater of 25% of your configured maximum RCU and 5,000 RCUs. The minimum billing RCU ensures that dedicated resources are reserved for peak performance. You are charged this minimum amount even if your actual usage is lower.
+    > - In **Max RCU Compatibility Mode**, the maximum RCU value must be set in increments of 100.
+    > - In **Max RCU Compatibility Mode**, you are billed for a minimum number of RCUs, known as the **Minimum Billing RCU**. This value is the greater of 25% of your configured maximum RCU and 5,000 RCUs. The minimum billing RCU ensures that dedicated resources are reserved for peak performance. You are charged this minimum amount even if your actual usage is lower.
 
 6. For {{{ .premium }}} instances, only regional high availability is enabled, and it is not configurable. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
 
