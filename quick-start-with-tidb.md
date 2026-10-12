@@ -467,12 +467,16 @@ Other requirements for the target machine include:
 
 11. Clean up the cluster after testing:
 
-    1. Stop the above TiDB service by pressing <kbd>Control</kbd>+<kbd>C</kbd>.
-
-    2. Run the following command after the service is stopped:
+    1. Stop the cluster:
 
         ```shell
-        tiup clean --all
+        tiup cluster stop <cluster-name>
+        ```
+
+    2. Destroy the cluster after it is stopped:
+
+        ```shell
+        tiup cluster destroy <cluster-name>
         ```
 
 ## What's next
