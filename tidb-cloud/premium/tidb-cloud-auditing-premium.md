@@ -1,6 +1,6 @@
 ---
 title: "{{{ .premium }}} or {{{ .byoc }}} Database Audit Logging"
-summary: Learn how to audit an instance in {{{ .premium }}}.
+summary: Learn how to enable database audit logging for {{{ .premium }}} or {{{ .byoc }}} instances and configure audit filters and cloud storage.
 ---
 
 # {{{ .premium }}} or {{{ .byoc }}} Database Audit Logging
