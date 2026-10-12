@@ -78,34 +78,6 @@ Manual backups are retained until you explicitly delete them. The automatic back
 
 4. Wait until the backup completes successfully before using it for a [snapshot restore](#restore-to-a-new-instance).
 
-### Create a manual backup using the API
-
-You can create a manual backup using the TiDB Cloud API v1beta2. Before you begin, [create an API key](/api/tidb-cloud-api-overview.md) and set the `PUBLIC_KEY`, `PRIVATE_KEY`, and `TIDB_ID` environment variables to your API public key, private key, and instance ID, respectively.
-
-1. Send a request to create a manual backup. Replace `before-schema-change` with your desired backup name.
-
-    ```shell
-    curl --request POST \
-      --url "https://cloud.tidbapi.com/v1beta2/tidbs/${TIDB_ID}/backups" \
-      --digest --user "${PUBLIC_KEY}:${PRIVATE_KEY}" \
-      --header 'Content-Type: application/json' \
-      --data '{"name":"before-schema-change"}'
-    ```
-
-    The response contains the `backupId` of the backup. A successful response means that the backup request was accepted, not that the backup has completed.
-
-2. List the instance's backups to check the state of the backup with the returned `backupId`:
-
-    ```shell
-    curl --request GET \
-      --url "https://cloud.tidbapi.com/v1beta2/tidbs/${TIDB_ID}/backups?pageSize=100" \
-      --digest --user "${PUBLIC_KEY}:${PRIVATE_KEY}"
-    ```
-
-    Match the returned `backupId` to the `id` field of a backup in the list. If the response includes a `nextPageToken`, use it as the `pageToken` query parameter to retrieve additional results.
-
-3. Wait until the backup state is `SUCCEEDED` before using it for a [snapshot restore](#restore-to-a-new-instance).
-
 ### Delete a manual backup
 
 1. Navigate to the [**Backup**](#view-the-backup-page) page of your {{{ .essential }}} instance. If the instance has been deleted, locate its backups in the [Recycle Bin](#restore-from-recycle-bin).
