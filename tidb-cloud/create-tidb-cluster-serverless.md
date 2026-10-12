@@ -62,7 +62,7 @@ If you are in the `Organization Owner` or the `Project Owner` role, you can crea
 
         - For {{{ .essential }}} instances running CLOUD.202603.x or later, **Elastic Mode** is selected by default. In Elastic Mode, you do not set a maximum RCU. Instead, your instance uses a fixed **Baseline RCU** of 2,000 RCUs, which is the minimum number of Request Capacity Units (RCUs) you are billed for and the initial capacity for autoscaling.
 
-        - For {{{ .essential }}} instances on earlier versions, use **Max RCU Compatibility Mode**, and specify both a minimum and maximum number of RCUs for the instance.
+        - To limit the capacity, select **Limited Mode**, and then specify the maximum number of RCUs that your instance can scale up to. {{{ .essential }}} instances on earlier versions do not support Elastic Mode; for these instances, specify both the minimum and maximum number of RCUs.
 
         - RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your {{{ .essential }}} instance based on demand. If your workload consistently requires more than 100,000 RCUs, consider upgrading to {{{ .premium }}} to avoid potential bottlenecks.
 

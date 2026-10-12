@@ -46,12 +46,12 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 
     - **Elastic Mode**: Do not set a maximum RCU. Instead, set a **Baseline RCU** for your instance. Baseline RCU is the minimum number of Request Capacity Units (RCUs) you are billed for and the initial capacity for autoscaling. TiDB Cloud automatically allocates backend resources based on your workload and scales out from the Baseline RCU when demand increases. If your actual consumption in a given minute is lower than the Baseline RCU, billing is calculated using the Baseline RCU.
 
-    - **Max RCU Compatibility Mode**: Set **Maximum RCU** for your instance. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within the range of `0.25 * RCU_max` to `RCU_max` based on demand.
+    - **Limited Mode**: Set the maximum capacity that your instance can scale up to. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within the range of `0.25 * RCU_max` to `RCU_max` based on demand.
 
     > **Note:**
     > 
-    > - In **Max RCU Compatibility Mode**, the maximum RCU value must be set in increments of 100.
-    > - In **Max RCU Compatibility Mode**, you are billed for a minimum number of RCUs, known as the **Minimum Billing RCU**. This value is the greater of 25% of your configured maximum RCU and 5,000 RCUs. The minimum billing RCU ensures that dedicated resources are reserved for peak performance. You are charged this minimum amount even if your actual usage is lower.
+    > - In **Limited Mode**, the maximum RCU value must be set in increments of 100.
+    > - In **Limited Mode**, you are billed for a minimum number of RCUs, known as the **Minimum Billing RCU**. This value is the greater of 25% of your configured maximum RCU and 5,000 RCUs. The minimum billing RCU ensures that dedicated resources are reserved for peak performance. You are charged this minimum amount even if your actual usage is lower.
 
 6. For {{{ .premium }}} instances, only regional high availability is enabled, and it is not configurable. For more information, see [High Availability](/tidb-cloud/serverless-high-availability.md).
 

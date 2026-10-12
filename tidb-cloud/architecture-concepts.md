@@ -244,7 +244,7 @@ If your actual consumption in a given minute is below this threshold, billing de
 How the minimum billing RCU is determined depends on the capacity mode of your instance:
 
 - In **Elastic Mode**, you do not configure a maximum RCU. Instead, your instance uses a Baseline RCU as its minimum billing RCU. Baseline RCU is also the initial capacity for autoscaling, that is, the capacity your instance has before it scales out to handle increased workload. If your actual consumption in a given minute is lower than the Baseline RCU, billing is calculated using the Baseline RCU.
-- In **Max RCU Compatibility Mode**, TiDB Cloud automatically sets the minimum billing RCU based on your maximum RCU setting.
+- In **Limited Mode**, you set the maximum capacity that your instance can scale up to. TiDB Cloud automatically sets the minimum billing RCU based on your maximum RCU setting.
 
 Baseline RCU does not change the minimum charge for your {{{ .premium }}} instance.
 
