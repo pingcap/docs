@@ -1,11 +1,11 @@
 ---
-title: Import Data from Amazon S3 into {{{ .premium }}}
-summary: Learn how to import CSV files from Amazon S3 into {{{ .premium }}} instances using the console wizard.
+title: Import Data from Amazon S3 into {{{ .premium }}} or {{{ .byoc }}}
+summary: Learn how to import CSV files from Amazon S3 into {{{ .premium }}} or {{{ .byoc }}} instances using the console wizard.
 ---
 
-# Import Data from Amazon S3 into {{{ .premium }}}
+# Import Data from Amazon S3 into {{{ .premium }}} or {{{ .byoc }}}
 
-This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3) into {{{ .premium }}} instances.
+This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3) into {{{ .premium }}} and {{{ .byoc }}} instances.
 
 > **Tip:**
 >

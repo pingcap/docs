@@ -1,15 +1,15 @@
 ---
-title: "{{{ .premium }}} Database Audit Logging"
+title: "{{{ .premium }}} or {{{ .byoc }}} Database Audit Logging"
 summary: Learn how to audit an instance in {{{ .premium }}}.
 ---
 
-# {{{ .premium }}} Database Audit Logging
+# {{{ .premium }}} or {{{ .byoc }}} Database Audit Logging
 
 TiDB Cloud provides an audit logging feature that records user access activities of your database, such as executed SQL statements.
 
 To evaluate the effectiveness of user access policies and other information security measures of your organization, it is a security best practice to periodically analyze database audit logs.
 
-The audit logging feature is **disabled by default**. To audit a {{{ .premium }}} instance, you must first enable audit logging, and then configure auditing filter rules.
+The audit logging feature is **disabled by default**. To audit a {{{ .premium }}} or {{{ .byoc }}} instance, you must first enable audit logging, and then configure auditing filter rules.
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ The audit logging feature is **disabled by default**. To audit a {{{ .premium }}
 
 ## Prerequisites
 
-- You are using a {{{ .premium }}} instance.
+- You are using a {{{ .premium }}} or {{{ .byoc }}} instance.
 
     > **Note:**
     >
@@ -29,7 +29,7 @@ The audit logging feature is **disabled by default**. To audit a {{{ .premium }}
 
 ## Enable audit logging
 
-TiDB Cloud supports recording the audit logs of a {{{ .premium }}} instance to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the instance is located.
+TiDB Cloud supports recording the audit logs of a {{{ .premium }}} or {{{ .byoc }}} instance to your cloud storage service. Before enabling database audit logging, configure your cloud storage service on the cloud provider where the instance is located.
 
 ### Enable audit logging for TiDB on AWS
 
@@ -47,7 +47,7 @@ For more information, see [Creating a general purpose bucket](https://docs.aws.a
 
 #### Step 2. Configure Amazon S3 access
 
-1. Get the TiDB Cloud Account ID and the External ID of the {{{ .premium }}} instance that you want to enable audit logging.
+1. Get the TiDB Cloud Account ID and the External ID of the {{{ .premium }}} or {{{ .byoc }}} instance that you want to enable audit logging.
 
     1. In the TiDB Cloud console, navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page.
 

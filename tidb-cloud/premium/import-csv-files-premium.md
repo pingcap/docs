@@ -1,11 +1,11 @@
 ---
-title: Import CSV Files from Cloud Storage into {{{ .premium }}}
-summary: Learn how to import CSV files from Amazon S3 or Alibaba Cloud Object Storage Service (OSS) into {{{ .premium }}} instances.
+title: Import CSV Files from Cloud Storage into {{{ .premium }}} or {{{ .byoc }}}
+summary: Learn how to import CSV files from Amazon Simple Storage Service (Amazon S3) into {{{ .premium }}} and {{{ .byoc }}} instances, and from Alibaba Cloud Object Storage Service (OSS) into {{{ .premium }}} instances.
 ---
 
-# Import CSV Files from Cloud Storage into {{{ .premium }}}
+# Import CSV Files from Cloud Storage into {{{ .premium }}} or {{{ .byoc }}}
 
-This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3) or Alibaba Cloud Object Storage Service (OSS) into {{{ .premium }}} instances.
+This document describes how to import CSV files from Amazon Simple Storage Service (Amazon S3) into {{{ .premium }}} and {{{ .byoc }}} instances, and from Alibaba Cloud Object Storage Service (OSS) into {{{ .premium }}} instances.
 
 > **Tip:**
 >
