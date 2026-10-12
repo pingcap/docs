@@ -41,7 +41,7 @@ To connect to your {{{ .premium }}} or {{{ .byoc }}} instance via a private endp
 2. [Create a VPC endpoint in AWS](#step-2-create-a-vpc-endpoint-in-aws)
 3. [Enter the VPC endpoint ID in TiDB Cloud](#step-3-enter-the-vpc-endpoint-id-in-tidb-cloud)
 4. [Enable private DNS](#step-4-enable-private-dns)
-5. [Connect to your {{{ .premium }}} or {{{ .byoc }}} instance](#step-5-connect-to-your-premium-instance)
+5. [Connect to your {{{ .premium }}} or {{{ .byoc }}} instance](#step-5-connect-to-your-premium-or-byoc-instance)
 
 If you have multiple instances, you need to repeat these steps for each instance that you want to connect to using AWS PrivateLink.
 
@@ -172,7 +172,7 @@ To enable private DNS in your AWS Management Console:
 </div>
 </SimpleTab>
 
-### Step 5. Connect to your {{{ .premium }}} instance {#step-5-connect-to-your-premium-instance}
+### Step 5. Connect to your {{{ .premium }}} or {{{ .byoc }}} instance {#step-5-connect-to-your-premium-or-byoc-instance}
 
 After the private endpoint connection is created, you are redirected back to the connection dialog.
 
@@ -213,7 +213,7 @@ The possible statuses of a private endpoint service are explained as follows:
 
 ## Troubleshooting
 
-### I cannot connect to a {{{ .premium }}} instance via a private endpoint after enabling private DNS. Why?
+### I cannot connect to a {{{ .premium }}} or {{{ .byoc }}} instance via a private endpoint after enabling private DNS. Why?
 
 You might need to properly set the security group for your VPC endpoint in the AWS Management Console. To do so, go to **VPC** > **Endpoints**, right-click your VPC endpoint, and select **Manage security groups**. Ensure that the selected security group allows inbound access from your EC2 instances on port `4000` or a customer-defined port.
 

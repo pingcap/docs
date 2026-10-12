@@ -1,11 +1,11 @@
 ---
-title: Import Data into {{{ .premium }}} using the MySQL Command-Line Client
-summary: Learn how to import small CSV or SQL files into {{{ .premium }}} instances using the MySQL Command-Line Client (`mysql`).
+title: Import Data into {{{ .premium }}} or {{{ .byoc }}} using the MySQL Command-Line Client
+summary: Learn how to import small CSV or SQL files into {{{ .premium }}} or {{{ .byoc }}} instances using the MySQL Command-Line Client (`mysql`).
 ---
 
-# Import Data into {{{ .premium }}} using the MySQL Command-Line Client
+# Import Data into {{{ .premium }}} or {{{ .byoc }}} using the MySQL Command-Line Client
 
-This document describes how to import data into {{{ .premium }}} using the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) (`mysql`). The following sections provide step-by-step instructions for importing data from SQL or CSV files. This process performs a logical import, where the MySQL Command-Line Client replays SQL statements from your local machine against TiDB Cloud.
+This document describes how to import data into {{{ .premium }}} or {{{ .byoc }}} using the [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) (`mysql`). The following sections provide step-by-step instructions for importing data from SQL or CSV files. This process performs a logical import, where the MySQL Command-Line Client replays SQL statements from your local machine against TiDB Cloud.
 
 > **Tip:**
 >
@@ -17,14 +17,14 @@ This document describes how to import data into {{{ .premium }}} using the [MySQ
 
 Before you can import data to a {{{ .premium }}} instance via the MySQL Command-Line Client, you need the following prerequisites:
 
-- You have access to your {{{ .premium }}} instance.
+- You have access to your {{{ .premium }}} or {{{ .byoc }}} instance.
 - Install the MySQL Command-Line Client (`mysql`) on your local computer.
 
-## Step 1. Connect to your {{{ .premium }}} instance
+## Step 1. Connect to your {{{ .premium }}} or {{{ .byoc }}} instance
 
-Connect to your {{{ .premium }}} instance using the MySQL Command-Line Client. If this is your first time, perform the following steps to configure the network connection and generate the TiDB SQL `root` user password:
+Connect to your {{{ .premium }}} or {{{ .byoc }}} instance using the MySQL Command-Line Client. If this is your first time, perform the following steps to configure the network connection and generate the TiDB SQL `root` user password:
 
-1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. Then, click the name of your target {{{ .premium }}} instance to go to its overview page.
+1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page. Then, click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page.
 
 2. Click **Connect** in the upper-right corner. A connection dialog is displayed.
 
@@ -57,7 +57,7 @@ CREATE TABLE products (
 );
 ```
 
-Run the schema file against your {{{ .premium }}} instance so the database and table exist before you load data in the next step.
+Run the schema file against your {{{ .premium }}} or {{{ .byoc }}} instance so the database and table exist before you load data in the next step.
 
 ## Step 3. Import data from an SQL or CSV file
 
