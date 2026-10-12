@@ -108,8 +108,7 @@ try (FileInputStream fileInputStream = new FileInputStream(file);
 
 > **Note:**
 >
-> Be sure that you are able to connect to the backend object storage for {{{ .lake }}} from local LakeSQL directly.
-> If not, you need to specify the `--set presigned_url_disabled=1` option to disable the presigned url feature.
+> Be sure that you are able to connect to the backend object storage for {{{ .lake }}} from local LakeSQL directly. If not, you need to specify the `--set presigned_url_disabled=1` option to disable the presigned url feature.
 
 ### Step 3. Verify Loaded Data
 
