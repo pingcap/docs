@@ -22,12 +22,6 @@ jobs:
           curl -L https://github.com/pingcap/cloud-assets-utils/releases/download/v0.2.0/cloud_assets_utils-ubuntu-latest -o cloud_assets_utils
           chmod +x cloud_assets_utils
           sudo mv cloud_assets_utils /usr/local/bin/cloud-assets-utils
-      - name: Configure qshell
-        run: |
-          curl http://devtools.qiniu.com/qshell-linux-x64-v2.4.1.zip -o qshell.zip
-          unzip qshell.zip
-          sudo mv qshell-linux-x64-v2.4.1 /usr/local/bin/qshell
-          qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }} test
       #- name: Configure awscli
       #  run: |
       #    pip3 install --upgrade setuptools
