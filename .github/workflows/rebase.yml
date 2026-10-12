@@ -5,7 +5,19 @@ on:
 jobs:
   rebase:
     name: Rebase
+<<<<<<< HEAD
     if: github.event.issue.pull_request != '' && contains(github.event.comment.body, '/rebase')
+=======
+    if: >
+      github.repository == 'pingcap/docs' &&
+      github.event.issue.pull_request != '' &&
+      contains(github.event.comment.body, '/rebase') &&
+      (
+        github.event.comment.user.login == 'qiancai' ||
+        github.event.comment.user.login == 'lilin90' ||
+        github.event.comment.user.login == 'seominjea1942'
+      )
+>>>>>>> 64b746e67c (ci: restrict automatic rebase to authorized users (#24434))
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
