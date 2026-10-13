@@ -1,9 +1,9 @@
 ---
-title: Masking Policy
+title: マスキングポリシー
 summary: このページでは、{{{ .lake }}} における Masking Policy の操作について、参照しやすいよう機能別に整理して包括的に説明します。
 ---
 
-# Masking Policy
+# マスキングポリシー
 
 このページでは、{{{ .lake }}} における Masking Policy の操作について、参照しやすいよう機能別に整理して包括的に説明します。
 

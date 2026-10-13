@@ -1,9 +1,9 @@
 ---
-title: Explain Commands
+title: EXPLAIN コマンド
 summary: このページでは、{{{ .lake }}} の explain 関連コマンドのリファレンス情報を提供します。
 ---
 
-# Explain Commands
+# EXPLAIN コマンド
 
 このページでは、{{{ .lake }}} の explain 関連コマンドのリファレンス情報を提供します。
 

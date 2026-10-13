@@ -1,9 +1,9 @@
 ---
-title: External Function
+title: 外部関数
 summary: このページでは、{{{ .lake }}} における External Function の操作について、機能別に整理して包括的に説明します。
 ---
 
-# External Function
+# 外部関数
 
 このページでは、{{{ .lake }}} における External Function の操作について、機能別に整理して包括的に説明します。
 

@@ -1,9 +1,9 @@
 ---
-title: Ngram Index
+title: Ngram インデックス
 summary: このページでは、{{{ .lake }}} における Ngram index の操作について、参照しやすいよう機能別に包括的に説明します。
 ---
 
-# Ngram Index
+# Ngram インデックス
 
 このページでは、{{{ .lake }}} における Ngram index の操作について、参照しやすいよう機能別に包括的に説明します。
 
