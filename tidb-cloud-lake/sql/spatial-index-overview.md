@@ -36,4 +36,4 @@ summary: Spatial インデックスは、`GEOMETRY` カラムに対する空間�
 
 ## 関連トピック {#related-topics}
 
-- [Geospatial Functions](/tidb-cloud-lake/sql/geospatial-functions.md)
+- [地理空間関数](/tidb-cloud-lake/sql/geospatial-functions.md)

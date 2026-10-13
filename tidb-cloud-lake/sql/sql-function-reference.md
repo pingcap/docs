@@ -32,7 +32,7 @@ summary: "{{{ .lake }}} は、あらゆる種類のデータ処理に対応す�
 
 | カテゴリ | 説明 |
 |----------|-------------|
-| [Structured & Semi-Structured Functions](/tidb-cloud-lake/sql/structured-semi-structured-functions.md) | JSON、配列、オブジェクト、およびネストされたデータの処理 |
+| [構造化・半構造化関数](/tidb-cloud-lake/sql/structured-semi-structured-functions.md) | JSON、配列、オブジェクト、およびネストされたデータの処理 |
 
 ## 検索関数 {#search-functions}
 
@@ -50,13 +50,13 @@ summary: "{{{ .lake }}} は、あらゆる種類のデータ処理に対応す�
 
 | カテゴリ | 説明 |
 |----------|-------------|
-| [Geospatial Functions](/tidb-cloud-lake/sql/geospatial-functions.md) | Geometry、GeoHash、および H3 の空間操作 |
+| [地理空間関数](/tidb-cloud-lake/sql/geospatial-functions.md) | Geometry、GeoHash、および H3 の空間操作 |
 
 ## データ管理 {#data-management}
 
 | カテゴリ | 説明 |
 |----------|-------------|
-| [Table Functions](/tidb-cloud-lake/sql/table-functions.md) | ファイル検査、データ生成、およびシステム情報 |
+| [テーブル関数](/tidb-cloud-lake/sql/table-functions.md) | ファイル検査、データ生成、およびシステム情報 |
 | [システム関数](/tidb-cloud-lake/sql/system-functions.md) | システム情報および管理操作 |
 | [コンテキスト関数](/tidb-cloud-lake/sql/context-functions.md) | 現在のセッション、ユーザー、およびデータベース情報 |
 
@@ -64,8 +64,8 @@ summary: "{{{ .lake }}} は、あらゆる種類のデータ処理に対応す�
 
 | カテゴリ | 説明 |
 |----------|-------------|
-| [Hash Functions](/tidb-cloud-lake/sql/hash-functions.md) | データのハッシュ化と整合性検証 |
-| [Bitmap Functions](/tidb-cloud-lake/sql/bitmap-functions.md) | 高性能なビットマップ操作と分析 |
+| [ハッシュ関数](/tidb-cloud-lake/sql/hash-functions.md) | データのハッシュ化と整合性検証 |
+| [Bitmap 関数](/tidb-cloud-lake/sql/bitmap-functions.md) | 高性能なビットマップ操作と分析 |
 | [UUID 関数](/tidb-cloud-lake/sql/uuid-functions.md) | Universally unique identifier の生成 |
 | [IP Address Functions](/tidb-cloud-lake/sql/ip-address-functions.md) | ネットワークアドレスの操作と検証 |
 
@@ -73,7 +73,7 @@ summary: "{{{ .lake }}} は、あらゆる種類のデータ処理に対応す�
 
 | カテゴリ | 説明 |
 |----------|-------------|
-| [Interval Functions](/tidb-cloud-lake/sql/interval-functions.md) | 時間単位の変換と interval の作成 |
+| [Interval 関数](/tidb-cloud-lake/sql/interval-functions.md) | 時間単位の変換と interval の作成 |
 | [シーケンス関数](/tidb-cloud-lake/sql/sequence-functions-overview.md) | 自動増分シーケンス値の生成 |
 | [データ匿名化関数](/tidb-cloud-lake/sql/data-anonymization-functions.md) | データマスキングと匿名化のユーティリティ |
 | [テスト関数](/tidb-cloud-lake/sql/test-functions.md) | テストおよびデバッグ用ユーティリティ |
