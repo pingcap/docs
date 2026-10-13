@@ -127,7 +127,7 @@ Foreign keys support the following `ON DELETE` and `ON UPDATE` actions:
 For example:
 
 ```sql
-CREATE TABLE orders (
+CREATE TABLE orders_with_cascade (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT REFERENCES users(id) ON DELETE CASCADE
 );
