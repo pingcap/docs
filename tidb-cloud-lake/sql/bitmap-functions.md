@@ -1,9 +1,9 @@
 ---
-title: Bitmap Functions
+title: Bitmap 関数
 summary: このページでは、{{{ .lake }}} の Bitmap 関数について、参照しやすいように機能別に整理して包括的に説明します。
 ---
 
-# Bitmap Functions
+# Bitmap 関数
 
 このページでは、{{{ .lake }}} の Bitmap 関数について、参照しやすいように機能別に整理して包括的に説明します。
 
