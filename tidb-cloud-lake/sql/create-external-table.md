@@ -39,11 +39,11 @@ CONNECTION = (
 
 | パラメータ                  | 説明                                                                                                                                                                                                                     | 必須       |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
-| `s3://<bucket>/[<path>]`    | ファイルが指定された外部ロケーション（S3 互換バケット）に存在します                                                                                                                                                      | YES        |
-| ENDPOINT_URL                | `https://` で始まるバケットのエンドポイント URL。                                                                                                                                                                        | Optional   |
-| ACCESS_KEY_ID               | AWS S3 互換オブジェクトストレージに接続するための access key ID です。指定しない場合、{{{ .lake }}} は匿名でバケットにアクセスします。                                                                                 | Optional   |
-| SECRET_ACCESS_KEY           | AWS S3 互換オブジェクトストレージに接続するための secret access key です。                                                                                                                                               | Optional   |
-| ENABLE_VIRTUAL_HOST_STYLE   | バケットのアドレッシングに virtual hosting を使用する場合は、`"true"` に設定します。                                                                                                                                     | Optional   |
+| `s3://<bucket>/[<path>]`    | ファイルが指定された外部ロケーション（S3 互換バケット）に存在します                                                                                                                                                      | はい        |
+| ENDPOINT_URL                | `https://` で始まるバケットのエンドポイント URL。                                                                                                                                                                        | 任意   |
+| ACCESS_KEY_ID               | AWS S3 互換オブジェクトストレージに接続するための access key ID です。指定しない場合、{{{ .lake }}} は匿名でバケットにアクセスします。                                                                                 | 任意   |
+| SECRET_ACCESS_KEY           | AWS S3 互換オブジェクトストレージに接続するための secret access key です。                                                                                                                                               | 任意   |
+| ENABLE_VIRTUAL_HOST_STYLE   | バケットのアドレッシングに virtual hosting を使用する場合は、`"true"` に設定します。                                                                                                                                     | 任意   |
 
 `CONNECTION_NAME` の詳細については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 

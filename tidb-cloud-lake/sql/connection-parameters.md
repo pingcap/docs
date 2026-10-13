@@ -17,13 +17,13 @@ summary: 接続パラメータは、`CREATE CONNECTION` を使用して再利用
 
 | パラメーター                | 必須?      | 説明                                                          |
 |--------------------------- |----------- |-------------------------------------------------------------- |
-| endpoint_url               | Yes        | Amazon S3 互換ストレージサービスのエンドポイント URL。              |
-| access_key_id              | Yes        | リクエスタを識別するためのアクセスキー ID。                         |
-| secret_access_key          | Yes        | 認証用のシークレットアクセスキー。                                 |
-| enable_virtual_host_style  | No         | 仮想ホスト形式 URL を使用するかどうか。デフォルトは *false*。        |
-| master_key                 | No         | 高度なデータ暗号化のためのオプションのマスターキー。                 |
-| region                     | No         | バケットが配置されている AWS リージョン。                          |
-| security_token             | No         | 一時的な認証情報のためのセキュリティトークン。                      |
+| endpoint_url               | はい        | Amazon S3 互換ストレージサービスのエンドポイント URL。              |
+| access_key_id              | はい        | リクエスタを識別するためのアクセスキー ID。                         |
+| secret_access_key          | はい        | 認証用のシークレットアクセスキー。                                 |
+| enable_virtual_host_style  | いいえ         | 仮想ホスト形式 URL を使用するかどうか。デフォルトは *false*。        |
+| master_key                 | いいえ         | 高度なデータ暗号化のためのオプションのマスターキー。                 |
+| region                     | いいえ         | バケットが配置されている AWS リージョン。                          |
+| security_token             | いいえ         | 一時的な認証情報のためのセキュリティトークン。                      |
 
 > **Note:**
 >
@@ -61,9 +61,9 @@ Amazon S3 バケットにアクセスするために、認証用の AWS IAM ロ�
 
 | パラメーター   | 必須?      | 説明                                                   |
 |-------------- |----------- |------------------------------------------------------- |
-| endpoint_url  | No         | Amazon S3 のエンドポイント URL。                        |
-| role_arn      | Yes        | S3 への認可に使用する AWS IAM ロールの ARN。             |
-| external_id   | No         | ロール引き受け時のセキュリティを強化するための external ID。  |
+| endpoint_url  | いいえ         | Amazon S3 のエンドポイント URL。                        |
+| role_arn      | はい        | S3 への認可に使用する AWS IAM ロールの ARN。             |
+| external_id   | いいえ         | ロール引き受け時のセキュリティを強化するための external ID。  |
 
 ```sql title='Examples'
 -- Create the connection using IAM role authentication
@@ -140,10 +140,10 @@ CREATE STAGE my_gcs_stage
 
 | パラメーター          | 必須?      | 説明                                                     |
 |---------------------- |----------- |--------------------------------------------------------- |
-| access_key_id         | Yes        | 認証用の Alibaba Cloud OSS access key ID。                |
-| access_key_secret     | Yes        | 認証用の Alibaba Cloud OSS access key secret。            |
-| endpoint_url          | Yes        | Alibaba Cloud OSS のエンドポイント URL。                  |
-| presign_endpoint_url  | No         | Alibaba Cloud OSS URL の事前署名に使用するエンドポイント URL。 |
+| access_key_id         | はい        | 認証用の Alibaba Cloud OSS access key ID。                |
+| access_key_secret     | はい        | 認証用の Alibaba Cloud OSS access key secret。            |
+| endpoint_url          | はい        | Alibaba Cloud OSS のエンドポイント URL。                  |
+| presign_endpoint_url  | いいえ         | Alibaba Cloud OSS URL の事前署名に使用するエンドポイント URL。 |
 
 ```sql title='Examples'
 -- Create a connection for Alibaba Cloud OSS
@@ -167,9 +167,9 @@ CREATE STAGE my_oss_stage
 
 | パラメーター     | 必須?  | 説明                                                  |
 |-------------- |----------- |------------------------------------------------------------- |
-| endpoint_url  | Yes        | Tencent Cloud Object Storage のエンドポイント URL。            |
-| secret_id     | Yes        | 認証用の Tencent Cloud Object Storage secret ID。             |
-| secret_key    | Yes        | 認証用の Tencent Cloud Object Storage secret key。            |
+| endpoint_url  | はい        | Tencent Cloud Object Storage のエンドポイント URL。            |
+| secret_id     | はい        | 認証用の Tencent Cloud Object Storage secret ID。             |
+| secret_key    | はい        | 認証用の Tencent Cloud Object Storage secret key。            |
 
 ```sql title='Examples'
 -- Create a connection for Tencent COS
@@ -193,9 +193,9 @@ CREATE STAGE my_cos_stage
 
 | パラメーター | 必須?             | 説明                                                                                                     |
 |-----------|-----------------------|-----------------------------------------------------------------------------------------------------------------|
-| repo_type | No (default: dataset) | Hugging Face リポジトリのタイプ。`dataset` または `model` を指定できます。                                      |
-| revision  | No (default: main)    | Hugging Face URI のリビジョン。リポジトリのブランチ、タグ、またはコミットを指定できます。                       |
-| token     | No                    | Hugging Face の API トークン。プライベートリポジトリや特定のリソースへのアクセスに必要な場合があります。         |
+| repo_type | いいえ（デフォルト: dataset） | Hugging Face リポジトリのタイプ。`dataset` または `model` を指定できます。                                      |
+| revision  | いいえ（デフォルト: main）    | Hugging Face URI のリビジョン。リポジトリのブランチ、タグ、またはコミットを指定できます。                       |
+| token     | いいえ                    | Hugging Face の API トークン。プライベートリポジトリや特定のリソースへのアクセスに必要な場合があります。         |
 
 ```sql title='Examples'
 -- Create a connection for Hugging Face
