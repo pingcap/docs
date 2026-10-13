@@ -9,7 +9,7 @@ summary: このページでは、{{{ .lake }}} における Stored Procedure の
 
 ## Procedure の管理 {#procedure-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [CREATE PROCEDURE](/tidb-cloud-lake/sql/create-procedure.md) | 新しいストアドプロシージャを作成します |
 | [DROP PROCEDURE](/tidb-cloud-lake/sql/drop-procedure.md) | ストアドプロシージャを削除します |
@@ -17,7 +17,7 @@ summary: このページでは、{{{ .lake }}} における Stored Procedure の
 
 ## Procedure の情報 {#procedure-information}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [DESCRIBE PROCEDURE](/tidb-cloud-lake/sql/desc-procedure.md) | 特定のストアドプロシージャの詳細を表示します |
 | [SHOW PROCEDURES](/tidb-cloud-lake/sql/show-procedures.md) | 現在のデータベース内のすべてのストアドプロシージャを一覧表示します |

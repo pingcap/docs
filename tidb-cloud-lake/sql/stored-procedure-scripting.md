@@ -411,7 +411,7 @@ $$;
 CALL PROCEDURE sp_retry_counter(5);
 ```
 
-### Break and Continue {#break-and-continue}
+### BREAK と CONTINUE {#break-and-continue}
 
 `BREAK` はループを途中で終了するために使用し、`CONTINUE` は次の反復にスキップするために使用します。
 

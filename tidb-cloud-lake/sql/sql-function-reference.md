@@ -67,7 +67,7 @@ summary: "{{{ .lake }}} は、あらゆる種類のデータ処理に対応す�
 | [ハッシュ関数](/tidb-cloud-lake/sql/hash-functions.md) | データのハッシュ化と整合性検証 |
 | [Bitmap 関数](/tidb-cloud-lake/sql/bitmap-functions.md) | 高性能なビットマップ操作と分析 |
 | [UUID 関数](/tidb-cloud-lake/sql/uuid-functions.md) | Universally unique identifier の生成 |
-| [IP Address Functions](/tidb-cloud-lake/sql/ip-address-functions.md) | ネットワークアドレスの操作と検証 |
+| [IP アドレス関数](/tidb-cloud-lake/sql/ip-address-functions.md) | ネットワークアドレスの操作と検証 |
 
 ## ユーティリティ関数 {#utility-functions}
 

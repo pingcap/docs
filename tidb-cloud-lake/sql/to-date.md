@@ -15,7 +15,7 @@ summary: 式を日付に変換します。変換対象には以下が含まれ�
 
 関連情報: [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md)
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```sql
 -- Convert a timestamp-format string
@@ -28,12 +28,12 @@ TO_DATE(<integer>)
 TO_DATE('<string>', '<format>')
 ```
 
-## Aliases {#aliases}
+## エイリアス {#aliases}
 
 - [DATE](/tidb-cloud-lake/sql/date.md)
 - [STR_TO_DATE](/tidb-cloud-lake/sql/str-to-date.md)
 
-## Return Type {#return-type}
+## 戻り値の型 {#return-type}
 
 この関数は、`YYYY-MM-DD` 形式の日付を返します。
 
@@ -59,7 +59,7 @@ SELECT DATE_FORMAT(TO_DATE('2022-01-02')) AS dt, TYPEOF(dt);
 └─────────────────────────┘
 ```
 
-## Examples {#examples}
+## 例 {#examples}
 
 ### 例 1: タイムスタンプ形式の文字列を変換する {#example-1-converting-a-timestamp-format-string}
 

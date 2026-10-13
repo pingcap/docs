@@ -7,7 +7,7 @@ summary: SELECT クエリ内でストリームからデータを消費します�
 
 SELECT クエリ内でストリームからデータを消費します。
 
-関連情報: [WITH Stream Hints](/tidb-cloud-lake/sql/stream-hints.md)
+関連情報: [WITH ストリームヒント](/tidb-cloud-lake/sql/stream-hints.md)
 
 ## 構文 {#syntax}
 

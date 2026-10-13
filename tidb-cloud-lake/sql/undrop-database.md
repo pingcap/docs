@@ -7,7 +7,7 @@ summary: 削除されたデータベースの最新バージョンを復元し�
 
 削除されたデータベースの最新バージョンを復元します。これは {{{ .lake }}} の Time Travel 機能を利用しており、削除されたオブジェクトを復元できるのは保持期間内のみです（デフォルトは 24 時間）。
 
-**See also:**
+**関連情報:**
 
 - [DROP DATABASE](/tidb-cloud-lake/sql/drop-database.md)
 - [SHOW DROP DATABASES](/tidb-cloud-lake/sql/show-drop-databases.md)

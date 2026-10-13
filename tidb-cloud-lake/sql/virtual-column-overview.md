@@ -9,7 +9,7 @@ summary: このページでは、{{{ .lake }}} における仮想カラム操作
 
 ## 仮想カラムの管理 {#virtual-column-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [REFRESH VIRTUAL COLUMN](/tidb-cloud-lake/sql/refresh-virtual-column.md) | 最新のデータで仮想カラムを更新します |
 | [SHOW VIRTUAL COLUMNS](/tidb-cloud-lake/sql/show-virtual-columns.md) | テーブル内のすべての仮想カラムを一覧表示します |
