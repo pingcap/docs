@@ -149,7 +149,7 @@ LIMIT 10;
 
 ## Joins
 
-The following join forms are supported:
+The following joins and related query patterns are supported:
 
 | Join type | Supported |
 | --- | --- |
