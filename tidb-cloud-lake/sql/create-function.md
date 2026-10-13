@@ -75,7 +75,7 @@ python udf_server.py
 
 UDF サーバーを gRPC/HTTP2 をサポートする HTTPS で公開し、右上隅の **Support** をクリックして **Submit a request** を選択し、サーバーのホスト名をテナントの **UDF server allowlist** に追加するよう依頼します。それまでは、`CREATE FUNCTION` は `Unallowed UDF server address` で失敗します。
 
-### ステップ 3: {{{ .lake }}} で関数を登録する {#step-2-register-the-function-in-lake}
+### ステップ 3: {{{ .lake }}} で関数を登録する {#step-3-register-the-function-in--lake-}
 
 ```sql
 CREATE FUNCTION gcd AS (INT, INT)
@@ -85,7 +85,7 @@ CREATE FUNCTION gcd AS (INT, INT)
     ADDRESS = 'https://udf.example.com';
 ```
 
-### ステップ 4: 関数を呼び出す {#step-3-call-the-function}
+### ステップ 4: 関数を呼び出す {#step-4-call-the-function}
 
 ```sql
 SELECT gcd(48, 18);

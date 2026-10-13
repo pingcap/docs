@@ -35,7 +35,7 @@ ENABLED = <bool>
 
 ## 例 {#examples}
 
-### Webhook 通知 {#webhook-notification}
+### Webhook 通知 {#webhook-notification-1}
 
 ```sql
 CREATE NOTIFICATION INTEGRATION IF NOT EXISTS SampleNotification type = webhook enabled = true webhook = (url = 'https://example.com', method = 'GET', authorization_header = 'bearer auth')

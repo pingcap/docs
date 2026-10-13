@@ -29,7 +29,7 @@ DATE_BETWEEN(
 | `YEARWEEK`   | ISO 8601 に従った年と週番号の組み合わせ（例: 202415）。 |
 | `MILLENNIUM` | 日付が属する千年紀（1 は 1–1000 年、2 は 1001–2000 年、以降同様）。 |
 
-## DATE_DIFF と DATE_BETWEEN の違い {#date-diff-vs-date-between}
+## DATE_DIFF と DATE_BETWEEN の違い {#date_diff-vs-date_between}
 
 `DATE_DIFF` 関数は、2 つの日付の間でユーザー指定の単位（day、month、year など）の境界をいくつまたぐかを数えます。一方、`DATE_BETWEEN` は、その間に厳密に含まれる完全な単位の数を数えます。例:
 

@@ -47,7 +47,7 @@ SELECT ...
 
 ## 例 {#examples}
 
-### 基本 CTE {#basic-cte}
+### 基本 CTE {#basic-cte-1}
 
 ```sql
 WITH high_value_customers AS (
@@ -80,7 +80,7 @@ FROM top_regions r
 ORDER BY r.total_sales DESC;
 ```
 
-### 再帰 CTE {#recursive-cte}
+### 再帰 CTE {#recursive-cte-1}
 
 ```sql
 WITH RECURSIVE countdown AS (

@@ -7,7 +7,7 @@ summary: これらのトピックでは、{{{ .lake }}} における DDL (Data D
 
 これらのトピックでは、{{{ .lake }}} における DDL (Data Definition Language) コマンドのリファレンス情報を提供します。
 
-## データベースとテーブルの管理 {#database-table-management}
+## データベースとテーブルの管理 {#database--table-management}
 
 | コンポーネント | 説明 |
 |-----------|-------------|
@@ -17,7 +17,7 @@ summary: これらのトピックでは、{{{ .lake }}} における DDL (Data D
 | **[テーブルバージョニング](/tidb-cloud-lake/sql/table-versioning.md)** | タイムトラベル用の名前付きスナップショットタグを作成 |
 | **[ビュー](/tidb-cloud-lake/sql/ddl-view-overview.md)** | クエリに基づく仮想テーブルの作成と管理 |
 
-## パフォーマンスとインデックス {#performance-indexing}
+## パフォーマンスとインデックス {#performance--indexing}
 
 | コンポーネント | 説明 |
 |-----------|-------------|
@@ -29,7 +29,7 @@ summary: これらのトピックでは、{{{ .lake }}} における DDL (Data D
 | **[ベクトルインデックス](/tidb-cloud-lake/sql/vector-index.md)** | ベクトル埋め込み向けの類似検索インデックス |
 | **[仮想カラム](/tidb-cloud-lake/sql/virtual-column-overview.md)** | JSON フィールドを仮想カラムとして抽出してインデックス化 |
 
-## セキュリティとアクセス制御 {#security-access-control}
+## セキュリティとアクセス制御 {#security--access-control}
 
 | コンポーネント | 説明 |
 |-----------|-------------|
@@ -40,7 +40,7 @@ summary: これらのトピックでは、{{{ .lake }}} における DDL (Data D
 | **[パスワードポリシー](/tidb-cloud-lake/sql/password-policy-sql.md)** | パスワード要件とローテーションを強制 |
 | **[行アクセスポリシー](/tidb-cloud-lake/sql/row-access-policy-overview.md)** | 集中管理された行レベル述語でテーブル行をフィルタリング |
 
-## データ統合と処理 {#data-integration-processing}
+## データ統合と処理 {#data-integration--processing}
 
 | コンポーネント | 説明 |
 |-----------|-------------|
@@ -53,7 +53,7 @@ summary: これらのトピックでは、{{{ .lake }}} における DDL (Data D
 | **[ファイル形式](/tidb-cloud-lake/sql/file-format.md)** | データのインポート/エクスポート用フォーマットを定義 |
 | **[Dictionary](/tidb-cloud-lake/sql/dictionary.md)** | 外部ソースをバックエンドとする辞書を定義 |
 
-## 関数とプロシージャ {#functions-procedures}
+## 関数とプロシージャ {#functions--procedures}
 
 | コンポーネント | 説明 |
 |-----------|-------------|

@@ -57,7 +57,7 @@ summary: 新しいトランザクションを開始します。BEGIN と COMMIT/
 BEGIN [ TRANSACTION ]
 ```
 
-## トランザクション ID とステータス {#transaction-ids-statuses}
+## トランザクション ID とステータス {#transaction-ids--statuses}
 
 {{{ .lake }}} は各トランザクションに対して自動的にトランザクション ID を生成します。この ID により、どの文が同じトランザクションに属しているかを識別でき、問題のトラブルシューティングが容易になります。
 

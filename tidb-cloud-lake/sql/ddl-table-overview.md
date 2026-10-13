@@ -36,7 +36,7 @@ summary: このページでは、{{{ .lake }}} におけるテーブル操作の
 | [SHOW TABLE STATUS](/tidb-cloud-lake/sql/show-table-status.md) | データベース内のテーブルのステータスを表示します |
 | [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md) | 現在のデータベースまたは指定したデータベースで削除されたテーブルを一覧表示します |
 
-## テーブルの削除とリカバリ {#table-deletion-recovery}
+## テーブルの削除とリカバリ {#table-deletion--recovery}
 
 | コマンド | 説明 | リカバリオプション |
 |---------|-------------|----------------|

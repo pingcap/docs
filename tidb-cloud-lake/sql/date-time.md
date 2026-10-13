@@ -73,7 +73,7 @@ SELECT meeting_id, meeting_time FROM meetings;
 └────────────┴──────────────────────┘
 ```
 
-### TIMESTAMP_TZ {#timestamp-tz}
+### TIMESTAMP_TZ {#timestamp_tz}
 
 ```sql
 CREATE TABLE system_logs (

@@ -23,7 +23,7 @@ summary: テーブルの作成は、多くのデータベースにおいて最�
 - [CREATE TRANSIENT TABLE](/tidb-cloud-lake/sql/create-transient-table.md)
 - [CREATE EXTERNAL TABLE](/tidb-cloud-lake/sql/create-external-table.md)
 
-## CREATE TABLE {#create-table}
+## CREATE TABLE {#create-table-1}
 
 ```sql
 CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
@@ -50,7 +50,7 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 >
 > - {{{ .lake }}} はカラム名を自動的に小文字に変換します。たとえば、カラム名を _Total_ とした場合、結果では _total_ と表示されます。
 
-## CREATE TABLE ... LIKE {#create-table-like}
+## CREATE TABLE ... LIKE {#create-table--like}
 
 既存のテーブルと同じカラム定義を持つテーブルを作成します。既存テーブルのカラム名、データ型、および NOT NULL 制約が新しいテーブルにコピーされます。
 
@@ -73,7 +73,7 @@ LIKE [db.]origin_table_name
 > create table t_new compression='lz4' like t_old;
 > ```
 
-## CREATE TABLE ... AS {#create-table-as}
+## CREATE TABLE ... AS {#create-table--as}
 
 テーブルを作成し、SELECT コマンドによって計算されたデータをそのテーブルに格納します。
 
@@ -216,7 +216,7 @@ MySQL とは異なり、{{{ .lake }}} はデフォルトで PostgreSQL スタイ
 
 ## 例 {#examples}
 
-### テーブルを作成する {#create-table}
+### テーブルを作成する {#create-table-2}
 
 カラムにデフォルト値を持つテーブルを作成します（この例では、`genre` カラムのデフォルト値は 'General' です）。
 
@@ -258,7 +258,7 @@ SELECT * FROM books;
 +----+----------------+---------+
 ```
 
-### Create Table ... Like {#create-table-like}
+### Create Table ... Like {#create-table--like-1}
 
 既存のテーブル (`books`) と同じ構造を持つ新しいテーブル (`books_copy`) を作成します。
 
@@ -292,7 +292,7 @@ SELECT * FROM books_copy;
 +----+----------------+---------+
 ```
 
-### Create Table ... As {#create-table-as}
+### Create Table ... As {#create-table--as-1}
 
 既存のテーブル (`books`) のデータを含む新しいテーブル (`books_backup`) を作成します。
 
@@ -324,7 +324,7 @@ SELECT * FROM books_backup;
 +----+----------------+---------+
 ```
 
-### Create Table ... Column As STORED | VIRTUAL {#create-table-column-as-stored-virtual}
+### Create Table ... Column As STORED | VIRTUAL {#create-table--column-as-stored--virtual}
 
 次の例は、"price" または "quantity" カラムの更新に基づいて自動的に再計算される、stored 計算カラムを持つテーブルを示しています。
 

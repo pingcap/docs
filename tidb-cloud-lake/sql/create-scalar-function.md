@@ -24,7 +24,7 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
     [ DESC='<description>' ]
 ```
 
-### Python / JavaScript {#python-javascript}
+### Python / JavaScript {#python--javascript}
 
 ```sql
 CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>

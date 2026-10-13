@@ -7,7 +7,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 
 このページでは、{{{ .lake }}} の日付・時刻関数について、参照しやすいように機能別に整理して包括的に紹介します。
 
-## 現在の日付・時刻関数 {#current-date-time-functions}
+## 現在の日付・時刻関数 {#current-date--time-functions}
 
 | Function                                  | Description                  | Example                                              |
 |-------------------------------------------|------------------------------|------------------------------------------------------|
@@ -17,7 +17,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 | [TOMORROW](/tidb-cloud-lake/sql/tomorrow.md)                   | 翌日の日付を返します         | `TOMORROW()` → `2024-06-05`                          |
 | [YESTERDAY](/tidb-cloud-lake/sql/yesterday.md)                 | 前日の日付を返します         | `YESTERDAY()` → `2024-06-03`                         |
 
-## 日付・時刻の抽出関数 {#date-time-extraction-functions}
+## 日付・時刻の抽出関数 {#date--time-extraction-functions}
 
 | 関数                                      | 説明                          | 例                                  |
 |-----------------------------------------------|--------------------------------------|------------------------------------------|
@@ -31,7 +31,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 | [YEARWEEK](/tidb-cloud-lake/sql/yearweek.md)                       | 年と週番号を返します                 | `YEARWEEK('2024-06-04')` → `202423`      |
 | [MILLENNIUM](/tidb-cloud-lake/sql/millennium.md)                   | 日付からミレニアムを返します         | `MILLENNIUM('2024-06-04')` → `3`         |
 
-## 日付・時刻の変換関数 {#date-time-conversion-functions}
+## 日付・時刻の変換関数 {#date--time-conversion-functions}
 
 | 関数                                  | 説明                                 | 例                                                       |
 |-------------------------------------------|---------------------------------------------|---------------------------------------------------------------|
@@ -47,7 +47,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 | [DATE_FORMAT](/tidb-cloud-lake/sql/date-format.md)             | フォーマット文字列に従って日付を整形します  | `DATE_FORMAT('2024-06-04', '%Y-%m-%d')` → `'2024-06-04'`      |
 | [CONVERT_TIMEZONE](/tidb-cloud-lake/sql/convert-timezone.md)   | timestamp を対象のタイムゾーンに変換します  | `CONVERT_TIMEZONE('America/Los_Angeles', '2024-11-01 11:36:10')` → `2024-10-31 20:36:10` |
 
-## 日付・時刻の算術関数 {#date-time-arithmetic-functions}
+## 日付・時刻の算術関数 {#date--time-arithmetic-functions}
 
 | 関数                                       | 説明                                                                                           | 例                                                                                     |
 |------------------------------------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
@@ -62,7 +62,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 | [AGE](/tidb-cloud-lake/sql/age.md)                            | timestamp 同士、または timestamp と現在の日付/時刻との差を計算します                         | `AGE('2000-01-01'::TIMESTAMP, '1990-05-15'::TIMESTAMP)` → `9 years 7 months 17 days` |
 | [ADD_MONTHS](/tidb-cloud-lake/sql/add-months.md)              | 月末日を維持しながら、日付に月を加算します。                                                 | `ADD_MONTHS('2025-04-30',1)` → `2025-05-31`                                          |
 
-## 日付・時刻の切り捨て関数 {#date-time-truncation-functions}
+## 日付・時刻の切り捨て関数 {#date--time-truncation-functions}
 
 | 関数                                      | 説明                                                      | 例                                                             |
 |-----------------------------------------------|------------------------------------------------------------------|---------------------------------------------------------------------|
@@ -76,7 +76,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 | [TO_START_OF_YEAR](/tidb-cloud-lake/sql/to-start-of-year.md)       | その年の開始日を返します                                         | `TO_START_OF_YEAR('2024-06-04')` → `2024-01-01`                     |
 | [TO_START_OF_WEEK](/tidb-cloud-lake/sql/to-start-of-week.md)       | その週の開始日を返します                                         | `TO_START_OF_WEEK('2024-06-04')` → `2024-06-03`                     |
 
-## 日付・時刻のナビゲーション関数 {#date-time-navigation-functions}
+## 日付・時刻のナビゲーション関数 {#date--time-navigation-functions}
 
 | 関数                              | 説明                                                 | 例                                                    |
 |---------------------------------|----------------------------------------------------|-------------------------------------------------------|
@@ -84,7 +84,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 | [NEXT_DAY](/tidb-cloud-lake/sql/next-day.md)         | 指定した曜日の次の日付を返します                   | `NEXT_DAY('2024-06-04', 'SUNDAY')` → `2024-06-09`     |
 | [PREVIOUS_DAY](/tidb-cloud-lake/sql/previous-day.md) | 指定した曜日の前の日付を返します                   | `PREVIOUS_DAY('2024-06-04', 'MONDAY')` → `2024-06-03` |
 
-## その他の日付・時刻関数 {#other-date-time-functions}
+## その他の日付・時刻関数 {#other-date--time-functions}
 
 | 関数                  | 説明                  | 例                                                                  |
 |---------------------------|------------------------------|--------------------------------------------------------------------------|

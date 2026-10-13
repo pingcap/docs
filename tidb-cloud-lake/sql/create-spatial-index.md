@@ -78,7 +78,7 @@ INSERT INTO stores VALUES
 ALTER TABLE stores RECLUSTER FINAL;
 ```
 
-### `ST_WITHIN`、`ST_INTERSECTS`、`ST_CONTAINS` によるフィルタリング {#filter-with-st-within-st-intersects-and-st-contains}
+### `ST_WITHIN`、`ST_INTERSECTS`、`ST_CONTAINS` によるフィルタリング {#filter-with-st_within-st_intersects-and-st_contains}
 
 これらの述語は、ジオフェンス形式のフィルタとして一般的であり、空間インデックスの恩恵を受けられます。
 
@@ -115,7 +115,7 @@ WHERE ST_CONTAINS(
 ORDER BY store_id;
 ```
 
-### `ST_DWITHIN` によるフィルタリング {#filter-with-st-dwithin}
+### `ST_DWITHIN` によるフィルタリング {#filter-with-st_dwithin}
 
 半径ベースの検索には `ST_DWITHIN` を使用します。これは「近くの場所を探す」クエリに便利です。
 

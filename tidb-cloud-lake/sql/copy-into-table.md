@@ -296,7 +296,7 @@ copyOptions ::=
 | COLUMN_MATCH_MODE | Parquet 用: カラム名のマッチングモード | `case-insensitive` |
 | SCHEMA_EVOLUTION | NDJSON 用: ターゲットテーブルに存在しないカラムを推論するために使用されるサンプリングオプション。`ENABLE_SCHEMA_EVOLUTION = true` と、ターゲットテーブルに対する `ALTER` 権限が必要です。 | `AUTO` サンプリング |
 
-### SCHEMA_EVOLUTION Options {#schema-evolution-options}
+### SCHEMA_EVOLUTION Options {#schema_evolution-options}
 
 `SCHEMA_EVOLUTION` は、{{{ .lake }}} がロード前に stage 上の NDJSON ファイルをどのようにサンプリングするかを制御します。ターゲットテーブルで `ENABLE_SCHEMA_EVOLUTION = true` が設定されている場合に、`FILE_FORMAT = (TYPE = NDJSON ...)` と組み合わせて使用します。
 

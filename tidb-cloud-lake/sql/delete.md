@@ -84,7 +84,7 @@ INSERT INTO departments VALUES (1, 'Sales');
 INSERT INTO departments VALUES (2, 'IT');
 ```
 
-#### IN / NOT IN 句を使用したサブクエリによる削除 {#deleting-with-subquery-using-in-not-in-clause}
+#### IN / NOT IN 句を使用したサブクエリによる削除 {#deleting-with-subquery-using-in--not-in-clause}
 
 ```sql
 DELETE FROM EMPLOYEES
@@ -96,7 +96,7 @@ WHERE DEPARTMENT IN (
 
 これは、departments テーブル内のいずれかの department と一致する department を持つ従業員を削除します。この場合、ID が 2 と 3 の従業員が削除されます。
 
-#### EXISTS / NOT EXISTS 句を使用したサブクエリによる削除 {#deleting-with-subquery-using-exists-not-exists-clause}
+#### EXISTS / NOT EXISTS 句を使用したサブクエリによる削除 {#deleting-with-subquery-using-exists--not-exists-clause}
 
 ```sql
 DELETE FROM EMPLOYEES

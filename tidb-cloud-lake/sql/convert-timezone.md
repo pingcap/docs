@@ -44,7 +44,7 @@ SELECT CONVERT_TIMEZONE('America/Los_Angeles', '2024-11-01 11:36:10');
 └──────────────────────────────────────────────────────┘
 ```
 
-### 各ユーザーのタイムゾーンを使って行を変換する {#convert-rows-using-each-user-s-timezone}
+### 各ユーザーのタイムゾーンを使って行を変換する {#convert-rows-using-each-users-timezone}
 
 ```sql
 SELECT

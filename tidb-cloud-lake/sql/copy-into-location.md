@@ -114,7 +114,7 @@ Tencent Cloud Object Storage へのアクセスに使用できる接続パラメ
 </div>
 </SimpleTab>
 
-### FILE_FORMAT {#file-format}
+### FILE_FORMAT {#file_format}
 
 詳細は [入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
 
@@ -162,7 +162,7 @@ copyOptions ::=
 > - `TYPE = LANCE` の場合、下流の Lance リーダー向けに安定したデータセット URI が必要であれば、`USE_RAW_PATH = TRUE` を推奨します。
 > - `TYPE = LANCE` かつ `USE_RAW_PATH = FALSE` の場合、{{{ .lake}}} は対象パスにクエリ ID を付加し、エクスポートごとに個別のデータセットルートを作成します。
 
-### DETAILED_OUTPUT {#detailed-output}
+### DETAILED_OUTPUT {#detailed_output}
 
 データのアンロード結果の詳細を返すかどうかを決定します。デフォルト値は `false` です。詳細については、[出力](#output) を参照してください。
 
