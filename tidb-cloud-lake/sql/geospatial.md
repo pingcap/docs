@@ -70,7 +70,7 @@ SELECT ST_ASWKB(geo), ST_ASEWKT(geo), ST_ASGEOJSON(geo) FROM ...;
 
 空間関数の一覧は次を参照してください。
 
-- [Geospatial Functions](/tidb-cloud-lake/sql/geospatial-functions.md)
+- [地理空間関数](/tidb-cloud-lake/sql/geospatial-functions.md)
 
 ## 例 {#examples}
 

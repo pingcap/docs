@@ -1,9 +1,9 @@
 ---
-title: Hash Functions
+title: ハッシュ関数
 summary: このページでは、{{{ .lake }}} の Hash 関数について、機能別に整理して包括的に紹介します。
 ---
 
-# Hash Functions
+# ハッシュ関数
 
 このページでは、{{{ .lake }}} の Hash 関数について、機能別に整理して包括的に紹介します。
 

@@ -1,9 +1,9 @@
 ---
-title: Interval Functions
+title: Interval 関数
 summary: このセクションでは、{{{ .lake }}} の interval 関数に関するリファレンス情報を提供します。interval 関数を使用すると、日付および時刻の計算で使用するさまざまな時間単位の interval 値を作成できます。
 ---
 
-# Interval Functions
+# Interval 関数
 
 このセクションでは、{{{ .lake }}} の interval 関数に関するリファレンス情報を提供します。interval 関数を使用すると、日付および時刻の計算で使用するさまざまな時間単位の interval 値を作成できます。
 
