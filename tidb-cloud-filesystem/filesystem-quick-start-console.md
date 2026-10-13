@@ -5,7 +5,9 @@ summary: Create a file system in the TiDB Cloud console, connect to it from your
 
 # Get Started with TiDB Cloud Filesystem via Console
 
-Create a file system in the [TiDB Cloud console](https://tidbcloud.com/), mount it on a macOS or Linux computer, write a test file, and view its metadata in the console.
+[TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md) is a persistent, shared cloud file system for applications, automation, and AI agents. Files remain available independently of the machine or process that creates them, so you can reuse a workspace across sessions and environments.
+
+This quick start guide walks you through how to create a file system via the [TiDB Cloud console](https://tidbcloud.com/), mount it on a macOS or Linux computer, write a test file, and view its metadata in the console.
 
 > **Note:**
 >
@@ -35,7 +37,7 @@ On macOS or Linux, follow the steps in the **Your File System is Ready!** dialog
     curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh
     ```
 
-2. Copy and run the command under **Mount Your File System** in the same shell. The command adds `ti` to `PATH`, sets `TI_FS_TOKEN`, creates `~/tidbcloudfs`, and mounts the file system there.
+2. Copy and run the command under **Mount Your File System** in the same shell. The command adds `ti` to `PATH`, sets `TI_FS_TOKEN`, creates the `~/tidbcloudfs` directory, and mounts the file system in that directory.
 
     > **Note:**
     >
@@ -58,7 +60,7 @@ echo 'Hello from TiDB Cloud Filesystem' > ~/tidbcloudfs/hello.txt
 cat ~/tidbcloudfs/hello.txt
 ```
 
-In the left navigation pane of the file system, click **Files**. The root directory lists `hello.txt`. You can search for the file or click its name to view its metadata. The console displays file information, but reading file contents and changing files require the TiDB Cloud CLI `ti` or a mount.
+In the left navigation pane of your file system, click **Files**. The root directory lists `hello.txt`. You can search for the file or click its name to view its metadata. The console displays file information, but reading file contents and changing files require the TiDB Cloud CLI `ti` or a mount.
 
 ## (Optional) Step 4. Unmount the file system
 
