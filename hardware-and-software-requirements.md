@@ -123,7 +123,7 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
     > **Note:**
     >
     > - For Oracle Enterprise Linux, TiDB supports the Red Hat Compatible Kernel (RHCK) and does not support the Unbreakable Enterprise Kernel provided by Oracle Enterprise Linux.
-    > - Ubuntu 16.04 and Ubuntu 18.04 are not supported. It is strongly recommended to use Ubuntu LTS 20.04 or later.
+    > - Support for Ubuntu 16.04 will be removed in future versions of TiDB. It is strongly recommended to use Ubuntu LTS 20.04 or later.
     > - CentOS Stream 8 reaches [End of Builds](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/) on May 31, 2024.
 
 + If you are using the 32-bit version of an operating system listed in the preceding two tables, TiDB **is not guaranteed** to be compilable, buildable or deployable on the 32-bit operating system and the corresponding CPU architecture, or TiDB does not actively adapt to the 32-bit operating system.
@@ -139,7 +139,11 @@ In v8.5 LTS, TiDB ensures multi-level quality standards for various combinations
 |  GCC      |   7.x      |
 |  LLVM     |  17.0 or later  |
 
-Library required for running TiDB: glibc (TiDB v8.5.0 requires 2.28-151.el8 or later; TiDB v8.5.1 and later v8.5 releases require 2.17 or later)
+Library required for running TiDB: glibc (2.28-151.el8 version)
+
+> **Note:**
+>
+> For TiDB v8.5.1 and later v8.5.x releases, if you are still using CentOS Linux 7, TiDB also supports glibc 2.17.
 
 ### Docker image dependencies
 
@@ -244,7 +248,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | TiKV |  20180 | the communication port to report TiKV status |
 | PD | 2379 | the communication port between TiDB and PD |
 | PD | 2380 | the inter-node communication port within the PD cluster |
-| TiFlash | 9000 | the TiFlash TCP service port (disabled by default in TiUP deployments starting from v7.1.0; not recommended to configure) |
+| TiFlash | 9000 | the TiFlash TCP service port (disabled by default when TiFlash v7.1.0 or later is deployed using TiUP v1.12.5 or later; not recommended to configure) |
 | TiFlash | 3930 | the TiFlash RAFT and Coprocessor service port |
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
