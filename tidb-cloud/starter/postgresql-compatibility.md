@@ -160,7 +160,7 @@ PostgreSQL-compatible {{{ .starter }}} instances provide a predefined set of ext
 
 Arbitrary custom or third-party PostgreSQL extensions cannot be installed. Only extensions explicitly supported by TiDB Cloud are available.
 
-For the list of available extensions and extension-specific limitations, see [Supported PostgreSQL extensions](<link>).
+For the list of available extensions and extension-specific limitations, see [Supported PostgreSQL extensions](/tidb-cloud/starter/pg-extensions-overview.md).
 
 ### Replication
 
