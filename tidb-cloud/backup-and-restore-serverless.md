@@ -62,11 +62,16 @@ To set the backup time for a {{{ .essential }}} instance, perform the following 
 
 ## Manual backups
 
-{{{ .essential }}} instances that display `CLOUD.202603.x` as their TiDB version on the instance overview page in the TiDB Cloud console support manual backups. You can create a manual backup before high-risk operations, such as critical data deletion or irreversible schema changes.
+For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, you can create a manual backup before high-risk operations, such as critical data deletion or irreversible schema changes.
+
+> **Note:**
+>
+> - You can check the TiDB version of an {{{ .essential }}} instance on its overview page in the TiDB Cloud console.
+> -  {{{ .essential }}} instances with TiDB version `v8.5.3` or earlier and {{{ .starter }}} do not support manual backups.
 
 ### Retention and deletion
 
-Manual backups are retained until you explicitly delete them. The automatic backup retention setting does not apply to manual backups. If you delete the instance, its manual backups move to the Recycle Bin and remain there until you manually delete them. Backups in the Recycle Bin continue to incur charges until deleted. For more information, see [Delete a TiDB Cloud Resource](/tidb-cloud/delete-tidb-cluster.md).
+Manual backups are retained until you explicitly delete them. The automatic backup retention setting does not apply to manual backups. If you delete an {{{ .essential }}} instance, its manual backups move to the Recycle Bin and remain there until you manually delete them. Backups in the Recycle Bin continue to incur charges until deleted. For more information, see [Delete a TiDB Cloud Resource](/tidb-cloud/delete-tidb-cluster.md).
 
 ### Create a manual backup in the console
 
@@ -94,7 +99,7 @@ TiDB Cloud offer restore functionality to help recover data in case of accidenta
 
 TiDB Cloud supports snapshot restore and point-in-time restore for your {{{ .starter }}} or Essential instance.
 
-- **Snapshot Restore**: restores your {{{ .starter }}} or Essential instance from a specific backup snapshot. For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x`, you can restore from either an automatic or a manual backup.
+- **Snapshot Restore**: restores your {{{ .starter }}} or Essential instance from a specific backup snapshot. For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, you can restore from either an automatic or a manual backup.
 
 - **Point-in-Time Restore (PREVIEW)**: restores your {{{ .essential }}} instance to a specific time.
 
@@ -172,7 +177,7 @@ To restore a deleted {{{ .essential }}} instance from the Recycle Bin, take the 
 
 2. On the **Recycle Bin** page, click the **Essential** tab to go to the recycle bin of {{{ .essential }}} instances.
 
-3. Locate the {{{ .essential }}} instance you want to restore, and then click the **>** button to expand the available backups of the instance. For instances with TiDB version `CLOUD.202603.x`, this list can include manual backups. Manual backups remain available until you explicitly delete them.
+3. Locate the {{{ .essential }}} instance you want to restore, and then click the **>** button to expand the available backups of the instance. For instances with TiDB version `CLOUD.202603.x` or later, this list can include manual backups. Manual backups remain available until you explicitly delete them.
 
     > **Note:**
     >
@@ -185,6 +190,6 @@ To restore a deleted {{{ .essential }}} instance from the Recycle Bin, take the 
 ## Limitations
 
 - If a TiFlash replica is enabled, it will be unavailable for a period after the restore, because the data needs to be rebuilt in TiFlash.
-- Manual backups are not supported for {{{ .starter }}} instances. For {{{ .essential }}} instances, manual backups require TiDB version `CLOUD.202603.x`.
+- Manual backups are not supported for {{{ .starter }}} instances. For {{{ .essential }}} instances, manual backups require TiDB version `CLOUD.202603.x` or later.
 - Manual backups do not support point-in-time restore or partial backups, such as table-level or database-level backups. Each restore creates a new instance; restoring a manual backup to an existing instance is not supported.
 - A {{{ .starter }}} or {{{ .essential }}} instance with more than 1 TiB of data does not support restoring to a new instance by default. Contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for assistance with larger datasets.
