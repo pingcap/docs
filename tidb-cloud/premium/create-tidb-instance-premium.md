@@ -44,7 +44,7 @@ If you have the `Organization Owner` role, you can create a {{{ .premium }}} ins
 4. (Optional) To group this {{{ .premium }}} instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
 5. In the **Capacity** area, configure the capacity of your instance. **Elastic Mode** is selected by default.
 
-    - **Elastic Mode**: Do not set a maximum number of RCUs. Instead, set a **Baseline RCU** for your instance. Baseline RCU is the minimum number of Request Capacity Units (RCUs) you are billed for and the initial capacity for autoscaling. TiDB Cloud automatically allocates backend resources based on your workload and scales out from the Baseline RCU when demand increases. If your actual consumption in a given minute is lower than the Baseline RCU, billing is calculated using the Baseline RCU.
+    - **Elastic Mode**: set a **Baseline RCU** for your instance (rather than a maximum RCU). Baseline RCU is the minimum number of Request Capacity Units (RCUs) you are billed for and the initial capacity for autoscaling. TiDB Cloud automatically allocates backend resources based on your workload and scales out from the Baseline RCU when demand increases. If your actual consumption in a given minute is lower than the Baseline RCU, billing is calculated using the Baseline RCU.
 
     - **Limited Mode**: Set the maximum capacity that your instance can scale up to. RCUs represent the compute resources provisioned for your workload. TiDB Cloud automatically scales your instance within the range of `0.25 * RCU_max` to `RCU_max` based on demand.
 
