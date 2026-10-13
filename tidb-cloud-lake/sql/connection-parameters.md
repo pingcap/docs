@@ -3,7 +3,7 @@ title: 接続パラメータ
 summary: 接続パラメータは、`CREATE CONNECTION` を使用して再利用可能な接続を作成する際に指定するキーと値のペアです。接続を作成した後は、`CONNECTION = (CONNECTION_NAME = '<connection-name>')` を使用して、stage、`COPY` コマンド、およびその他の SQL 機能からその接続を参照できます。完全な構文と使用方法については、`CREATE CONNECTION` を参照してください。
 ---
 
-# Connection Parameters
+# 接続パラメータ
 
 接続パラメータは、`CREATE CONNECTION` を使用して再利用可能な接続を作成する際に指定するキーと値のペアです。接続を作成した後は、`CONNECTION = (CONNECTION_NAME = '<connection-name>')` を使用して、stage、COPY コマンド、およびその他の SQL 機能からその接続を参照できます。完全な構文と使用方法については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 

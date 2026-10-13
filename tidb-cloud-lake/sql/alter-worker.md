@@ -33,7 +33,7 @@ ALTER WORKER <worker_name> RESUME
 
 ## パラメーター {#parameters}
 
-| Form | 説明 |
+| 形式 | 説明 |
 |------|-------------|
 | `SET TAG` | worker タグを追加または更新します。タグ値は文字列リテラルである必要があります。 |
 | `UNSET TAG` | 1 つ以上の worker タグを削除します。 |

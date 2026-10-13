@@ -130,7 +130,7 @@ Tencent Cloud Object Storage へのアクセスに使用できる接続パラメ
 
 以下のオプションは `PARTITION BY` と互換性がなく、設定するとエラーになります。
 
-| Option              | 制約                                              |
+| オプション              | 制約                                              |
 | ------------------- | ------------------------------------------------- |
 | SINGLE              | `PARTITION BY` 使用時は `TRUE` にできません。     |
 | OVERWRITE           | `PARTITION BY` 使用時は `TRUE` にできません。     |

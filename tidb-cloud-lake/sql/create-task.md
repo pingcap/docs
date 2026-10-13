@@ -9,7 +9,7 @@ CREATE TASK ステートメントは、指定した SQL ステートメントを
 
 **NOTICE:** この機能は、{{{ .lake }}} でのみ追加設定なしですぐに利用できます。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```sql
 CREATE [ OR REPLACE ] TASK [ IF NOT EXISTS ] <name>
@@ -46,7 +46,7 @@ AS
 | session_parameter                                | 任意。タスク実行時に使用するセッションパラメータを指定します。セッションパラメータは、CREATE TASK ステートメント内で他のすべてのタスクパラメータの後に配置する必要があります。 |
 | sql                                              | タスクが実行する SQL ステートメントです。単一のステートメント、または `BEGIN ... END;` で囲まれたスクリプトを指定できます。これは必須フィールドです。 |
 
-### Usage Notes {#usage-notes}
+### 使用上の注意 {#usage-notes}
 
 - 単独タスク、またはタスク DAG のルートタスクにはスケジュールを定義する必要があります。そうしない場合、タスクは EXECUTE TASK を使用して手動実行したときにのみ実行されます。
 - DAG 内の子タスクにはスケジュールを指定できません。
@@ -75,7 +75,7 @@ AS
       query_result_cache_min_execute_secs = 5;
   ```
 
-### Important Notes on Cron Expressions {#important-notes-on-cron-expressions}
+### cron 式に関する重要な注意事項 {#important-notes-on-cron-expressions}
 
 - `SCHEDULE` パラメータで使用する cron 式には、**ちょうど 6 つのフィールド**を含める必要があります。
 - 各フィールドは次を表します。
@@ -86,7 +86,7 @@ AS
   5. **Month** (1-12 or JAN-DEC)
   6. **Day of the Week** (0-6, where 0 is Sunday, or SUN-SAT)
 
-#### Example Cron Expressions {#example-cron-expressions}
+#### cron 式の例 {#example-cron-expressions}
 
 - **Pacific Time の毎日午前 9:00:00:**
     - `USING CRON '0 0 9 * * *' 'America/Los_Angeles'`
@@ -111,9 +111,9 @@ AS
     - `USING CRON '0 30 8 * * 1-5' 'UTC'`
     - これは平日（月曜日から金曜日）の毎日午前 8:30 にタスクを実行します。
 
-## Usage Examples {#usage-examples}
+## 使用例 {#usage-examples}
 
-### CRON Schedule {#cron-schedule}
+### CRON スケジュール {#cron-schedule}
 
 ```sql
 CREATE TASK my_daily_task
@@ -126,7 +126,7 @@ AS
 
 この例では、`my_daily_task` という名前のタスクを作成しています。このタスクは **compute_wh** Warehouse を使用して、source_table から summary_table にデータを挿入する SQL ステートメントを実行します。タスクは **CRON 式** を使用して、**Pacific Time の毎日午前 9 時** に実行されるようスケジュールされています。
 
-### Multiple Statements {#multiple-statements}
+### 複数のステートメント {#multiple-statements}
 
 ```sql
 CREATE TASK IF NOT EXISTS nightly_refresh
@@ -141,7 +141,7 @@ END;
 
 この例では、`nightly_refresh` という名前のタスクを作成し、複数のステートメントを含むスクリプトを実行します。スクリプトは `BEGIN ... END;` で囲まれているため、タスクが実行されるたびに DELETE が INSERT より先に実行されます。
 
-### Dynamic SQL (EXECUTE IMMEDIATE) {#dynamic-sql-execute-immediate}
+### 動的 SQL (EXECUTE IMMEDIATE) {#dynamic-sql-execute-immediate}
 
 ```sql
 CREATE OR REPLACE TASK log_ingestion
@@ -164,7 +164,7 @@ $$;
 
 この例では、毎分実行されるタスクを作成しています。このタスクは **3 日前** の stage パス（たとえば `@mylog/12/15/`）を動的に計算し、`COPY INTO` ステートメントを組み立てて、`EXECUTE IMMEDIATE` で実行します。
 
-### Automatic Suspension {#automatic-suspension}
+### 自動一時停止 {#automatic-suspension}
 
 ```sql
 CREATE TASK IF NOT EXISTS mytask
@@ -177,7 +177,7 @@ AS
 
 この例では、`mytask` という名前のタスクを、まだ存在しない場合に作成します。このタスクは **system** Warehouse に割り当てられ、**2 分ごと** に実行されるようスケジュールされています。**3 回連続で失敗** すると、**自動的に一時停止** されます。このタスクは compaction_test.test テーブルに対して INSERT 操作を実行します。
 
-### Second-Level Scheduling {#second-level-scheduling}
+### 秒単位のスケジューリング {#second-level-scheduling}
 
 ```sql
 CREATE TASK IF NOT EXISTS daily_sales_summary

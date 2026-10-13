@@ -56,7 +56,7 @@ $$
 
 ## 例 {#examples}
 
-### Python average UDAF {#python-average-udaf}
+### Python の平均値 UDAF {#python-average-udaf}
 
 次の Python 集計は、カラムの平均を計算します。
 
@@ -102,7 +102,7 @@ SELECT py_avg(number) AS avg_val FROM numbers(5);
 +---------+
 ```
 
-### JavaScript average UDAF {#javascript-average-udaf}
+### JavaScript の平均値 UDAF {#javascript-average-udaf}
 
 次の例は、同じ計算を JavaScript で実装したものです。
 

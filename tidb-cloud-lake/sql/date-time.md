@@ -349,11 +349,11 @@ SETTINGS (week_start = 1) SELECT DATE_TRUNC(WEEK, to_date('2024-04-05')); -- Mon
 
 - %s: これは埋め込みされず、負の値になることがあります。Chrono の目的上、これはうるう秒以外の秒のみを考慮するため、ISO C strftime の動作とはわずかに異なります。
 
-### Oracle Format Specifiers {#oracle-format-specifiers}
+### Oracle フォーマット指定子 {#oracle-format-specifiers}
 
 `date_format_style` が 'Oracle' に設定されている場合、以下のフォーマット指定子がサポートされます。
 
-| Oracle Format | 説明 | Example Output (for '2024-04-05 14:30:45.123456') |
+| Oracle 形式 | 説明 | 出力例（'2024-04-05 14:30:45.123456' の場合） |
 |---------------|----------------------------------------------|---------------------------------------------------|
 | YYYY          | 4 桁の年 | 2024                                              |
 | YY            | 2 桁の年 | 24                                                |

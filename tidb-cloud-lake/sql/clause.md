@@ -38,7 +38,7 @@ SELECT ...
 
 ## パラメーター {#parameters}
 
-| Parameter | 説明 |
+| パラメータ | 説明 |
 |-----------|-------------|
 | `cte_name` | CTE 名は標準の識別子ルールに従う必要があります |
 | `cte_column_list` | CTE 内のカラム名 |

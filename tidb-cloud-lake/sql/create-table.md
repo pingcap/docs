@@ -96,11 +96,11 @@ AS SELECT query
 > create table t_new compression='lz4' as select * from t_old;
 > ```
 
-## Column Nullable {#column-nullable}
+## カラムの NULL 許容 {#column-nullable}
 
 {{{ .lake }}} では、デフォルトで **すべてのカラムが nullable(NULL)** です。NULL 値を許可しないカラムが必要な場合は、NOT NULL 制約を使用してください。詳細は [NULL Values and NOT NULL Constraint](/tidb-cloud-lake/sql/data-types.md) を参照してください。
 
-## Column Default Values {#column-default-values}
+## カラムのデフォルト値 {#column-default-values}
 
 `DEFAULT <expr>` は、明示的な式が指定されていない場合に、カラムのデフォルト値を設定します。デフォルト式には次のものを使用できます。
 
@@ -110,7 +110,7 @@ AS SELECT query
     - NEXTVAL は単独のデフォルト値として使用する必要があります。`NEXTVAL(seq1) + 1` のような式はサポートされていません。
     - ユーザーは、[NEXTVAL](/tidb-cloud-lake/sql/nextval.md#access-control-requirements) などの操作を含め、シーケンスの利用に関して付与された権限に従う必要があります。
 
-## Auto-Increment Columns {#auto-increment-columns}
+## 自動インクリメントカラム {#auto-increment-columns}
 
 `AUTOINCREMENT` または `IDENTITY` を使用すると、自動インクリメントカラムを作成できます。これらのカラムは、連続した数値を自動生成します。これは、一意な識別子を作成する場合に特に便利です。
 

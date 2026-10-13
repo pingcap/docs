@@ -35,7 +35,7 @@ $$;
 
 ## アクセス制御要件 {#access-control-requirements}
 
-| Privilege        | Object Type | 説明          |
+| 権限        | オブジェクトタイプ | 説明          |
 |:-----------------|:------------|:---------------------|
 | CREATE PROCEDURE | Global      | プロシージャを作成します。 |
 

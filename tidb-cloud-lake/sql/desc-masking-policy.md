@@ -15,7 +15,7 @@ DESC MASKING POLICY <policy_name>
 
 ## アクセス制御の要件 {#access-control-requirements}
 
-| Privilege | 説明 |
+| 権限 | 説明 |
 |:----------|:------------|
 | APPLY MASKING POLICY | そのポリシーの所有者でない限り、マスキングポリシーの詳細を表示するには必要です。 |
 

@@ -15,7 +15,7 @@ DROP MASKING POLICY [ IF EXISTS ] <policy_name>
 
 ## アクセス制御の要件 {#access-control-requirements}
 
-| Privilege | 説明 |
+| 権限 | 説明 |
 |:----------|:------------|
 | APPLY MASKING POLICY | その policy の所有者でない限り、masking policy を削除するには必要です。 |
 
