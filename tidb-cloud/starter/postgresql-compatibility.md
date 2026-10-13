@@ -127,7 +127,7 @@ Other pgvector index types that are not provided by TiDB Cloud, such as IVFFlat,
 
 ### `COPY`
 
-`COPY FROM` supports text and CSV formats over the PostgreSQL wire protocol.
+`COPY ... FROM STDIN` supports text and CSV formats over the PostgreSQL wire protocol.
 
 The following PostgreSQL `COPY` capabilities are not supported:
 
