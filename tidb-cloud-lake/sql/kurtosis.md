@@ -1,11 +1,11 @@
 ---
 title: KURTOSIS
-summary: 集約関数。
+summary: 集計関数。
 ---
 
 # KURTOSIS
 
-集約関数。
+集計関数。
 
 `KURTOSIS()` 関数は、すべての入力値の過剰尖度を返します。
 
