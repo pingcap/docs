@@ -11,7 +11,7 @@ summary: "{{{ .lake }}} は、{{{ .lake }}} のデプロイ、データベース
 
 ## 利用可能なシステムテーブル {#available-system-tables}
 
-### データベースとテーブルのメタデータ {#database-table-metadata}
+### データベースとテーブルのメタデータ {#database--table-metadata}
 
 | テーブル                                                             | 説明                                                                                       |
 |-------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
@@ -24,7 +24,7 @@ summary: "{{{ .lake }}} は、{{{ .lake }}} のデプロイ、データベース
 | [system.indexes](/tidb-cloud-lake/sql/system-indexes.md)                               | テーブルインデックスに関する情報を含みます。                                                         |
 | [system.virtual_columns](/tidb-cloud-lake/sql/system-virtual-columns.md)               | システムで利用可能な仮想カラムを一覧表示します。                                                    |
 
-### クエリとパフォーマンス {#query-performance}
+### クエリとパフォーマンス {#query--performance}
 
 | テーブル | 説明 |
 |-------|-------------|
@@ -33,7 +33,7 @@ summary: "{{{ .lake }}} は、{{{ .lake }}} のデプロイ、データベース
 | [system.query_cache](/tidb-cloud-lake/sql/system-query-cache.md) | クエリキャッシュに関する情報を提供します。 |
 | [system.locks](/tidb-cloud-lake/sql/system-locks.md) | システム内で取得されたロックに関する情報を含みます。 |
 
-### 関数と設定 {#functions-settings}
+### 関数と設定 {#functions--settings}
 
 | テーブル | 説明 |
 |-------|-------------|

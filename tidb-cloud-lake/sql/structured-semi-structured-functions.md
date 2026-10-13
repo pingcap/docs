@@ -9,7 +9,7 @@ summary: "{{{ .lake }}} の構造化関数および半構造化関数を使用�
 
 ## JSON 関数 {#json-functions}
 
-### 解析と検証 {#parsing-validation}
+### 解析と検証 {#parsing--validation}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
@@ -37,7 +37,7 @@ summary: "{{{ .lake }}} の構造化関数および半構造化関数を使用�
 | [GET_IGNORE_CASE](/tidb-cloud-lake/sql/get-ignore-case.md) | 大文字と小文字を区別しないキー照合で値を取得します | `GET_IGNORE_CASE(json_obj, 'NAME')` |
 | [JSON_EXTRACT_PATH_TEXT](/tidb-cloud-lake/sql/json-extract-path-text.md) | パスを使用して JSON からテキスト値を抽出します | `JSON_EXTRACT_PATH_TEXT(json_obj, 'name')` |
 
-### 変換と出力 {#transformation-output}
+### 変換と出力 {#transformation--output}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
@@ -46,7 +46,7 @@ summary: "{{{ .lake }}} の構造化関数および半構造化関数を使用�
 | [STRIP_NULL_VALUE](/tidb-cloud-lake/sql/strip-null-value.md) | JSON の null 値を SQL の NULL 値に変換します | `STRIP_NULL_VALUE(parse_json('null'))` → `NULL` |
 | [JSON_STRIP_NULLS](/tidb-cloud-lake/sql/json-strip-nulls.md) | JSON オブジェクトから null 値を削除します | `JSON_STRIP_NULLS(PARSE_JSON('{"a":1,"b":null}'))` → `{"a":1}` |
 
-### 配列/オブジェクトの展開 {#array-object-expansion}
+### 配列/オブジェクトの展開 {#arrayobject-expansion}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|

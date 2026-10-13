@@ -322,7 +322,7 @@ $$;
 CALL PROCEDURE sp_reverse_count(1, 5);
 ```
 
-#### `FOR ... IN` クエリ {#for-in-queries}
+#### `FOR ... IN` クエリ {#for--in-queries}
 
 クエリの結果を直接反復処理します。ループ変数は、カラムをフィールドとして公開します。
 

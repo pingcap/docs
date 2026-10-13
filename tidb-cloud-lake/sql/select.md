@@ -491,7 +491,7 @@ SELECT number FROM numbers(5) ORDER BY number OFFSET 2;
 +--------+
 ```
 
-## IGNORE_RESULT {#ignore-result}
+## IGNORE_RESULT {#ignore_result}
 
 結果セットを出力しません。
 

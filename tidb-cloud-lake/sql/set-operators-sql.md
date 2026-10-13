@@ -52,7 +52,7 @@ Output:
 
 最初のクエリで選択され、2 番目のクエリでは選択されない、重複のないすべての行を返します。
 
-### 構文 {#syntax}
+### 構文 {#syntax-1}
 
 ```sql
 SELECT column1 , column2 ....
@@ -66,7 +66,7 @@ FROM table_names
 WHERE condition
 ```
 
-### 例 {#example}
+### 例 {#example-1}
 
 ```sql
 create table t1(a int, b int);
@@ -90,7 +90,7 @@ Output:
 
 結果セットを結合する際、デフォルトでは重複行が削除されます。重複行を含めるには、**UNION ALL** を使用します。
 
-### 構文 {#syntax}
+### 構文 {#syntax-2}
 
 ```sql
 SELECT column1 , column2 ...
@@ -112,7 +112,7 @@ WHERE condition]...
 [ORDER BY ...]
 ```
 
-### 例 {#example}
+### 例 {#example-2}
 
 ```sql
 CREATE TABLE support_team

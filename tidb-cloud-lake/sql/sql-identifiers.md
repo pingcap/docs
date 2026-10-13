@@ -7,7 +7,7 @@ summary: SQL 識別子は、テーブル、ビュー、データベースなど�
 
 SQL 識別子は、テーブル、ビュー、データベースなど、{{{ .lake }}} 内のさまざまな要素に使用される名前です。
 
-## クォートなし識別子と二重引用符付き識別子 {#unquoted-double-quoted-identifiers}
+## クォートなし識別子と二重引用符付き識別子 {#unquoted--double-quoted-identifiers}
 
 クォートなし識別子は、文字 (A-Z, a-z) またはアンダースコア (`_`) で始まり、文字、アンダースコア、数字 (0-9)、またはドル記号 (`$`) で構成できます。
 
@@ -53,7 +53,7 @@ _my_datalake
 >
 > クォートの有無にかかわらず識別子を大文字・小文字を区別しないものとして扱う MySQL スタイルの動作を使用したい場合は、`unquoted_ident_case_sensitive` と `quoted_ident_case_sensitive` の両方を `0` に設定してください。
 
-### `SELECT *` は動作するのに `SELECT <column>` が失敗する理由 {#why-select-works-but-select-fails}
+### `SELECT *` は動作するのに `SELECT <column>` が失敗する理由 {#why-select--works-but-select--fails}
 
 よくある混乱の原因として、カラムが大文字・小文字を保持するクォート（二重引用符またはバッククォート）付きで作成されたテーブルがあります。たとえば `"Employee_ID"` のような場合です。デフォルト設定では、`SELECT *` はデータを返しますが、カラム名を指定して参照すると、大文字・小文字をどう書いても失敗します。
 

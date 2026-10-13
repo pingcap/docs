@@ -21,7 +21,7 @@ SHOW VARIABLES コマンドには、対応するテーブル関数 [`SHOW_VARIAB
 
 文の中で変数を参照して、値を動的に置き換えたり、実行時にオブジェクト名を構築したりできます。
 
-### `$` と `getvariable()` を使った変数へのアクセス {#accessing-variables-with-and-getvariable}
+### `$` と `getvariable()` を使った変数へのアクセス {#accessing-variables-with--and-getvariable}
 
 `$` 記号または `getvariable()` 関数を使用して、変数の値をクエリに直接埋め込みます。
 

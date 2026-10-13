@@ -20,7 +20,7 @@ UPDATE <target_table>
         [ WHERE <condition> ] -- Filter rows
 ```
 
-## `error_on_nondeterministic_update` 設定の構成 {#configuring-error-on-nondeterministic-update-setting}
+## `error_on_nondeterministic_update` 設定の構成 {#configuring-error_on_nondeterministic_update-setting}
 
 `error_on_nondeterministic_update` 設定は、UPDATE 文が決定的な更新ルールなしに複数のソース行と結合するターゲット行を更新しようとしたときに、エラーを返すかどうかを制御します。
 
@@ -179,7 +179,7 @@ INSERT INTO book_updates VALUES (103, 'The long answer (Revised)');
 INSERT INTO book_updates VALUES (104, 'Wartime friends (Expanded Edition)');
 ```
 
-### ステップ 6: book_updates の値を使って bookstore テーブルを更新する {#step-6-update-the-bookstore-table-using-values-from-book-updates}
+### ステップ 6: book_updates の値を使って bookstore テーブルを更新する {#step-6-update-the-bookstore-table-using-values-from-book_updates}
 
 ここでは、**book_updates** テーブルの値を使って **bookstore** テーブルを更新します。
 

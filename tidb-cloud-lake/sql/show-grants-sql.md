@@ -20,7 +20,7 @@ SHOW_GRANTS('table', '<table_name>', '<catalog_name>', '<db_name>')
 SHOW_GRANTS('database', '<db_name>', '<catalog_name>')
 ```
 
-## `enable_expand_roles` 設定の構成 {#configuring-enable-expand-roles-setting}
+## `enable_expand_roles` 設定の構成 {#configuring-enable_expand_roles-setting}
 
 `enable_expand_roles` 設定は、SHOW_GRANTS 関数が権限を表示する際にロール継承を展開するかどうかを制御します。
 

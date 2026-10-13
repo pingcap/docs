@@ -28,7 +28,7 @@ summary: "{{{ .lake }}} は、あらゆる種類のデータ処理に対応す�
 | [集計関数](/tidb-cloud-lake/sql/aggregate-functions.md) | 複数行にまたがる統計計算 |
 | [ウィンドウ関数](/tidb-cloud-lake/sql/window-functions-overview.md) | ウィンドウ操作による高度な分析 |
 
-## 構造化データと半構造化データ {#structured-semi-structured-data}
+## 構造化データと半構造化データ {#structured--semi-structured-data}
 
 | カテゴリ | 説明 |
 |----------|-------------|
@@ -60,7 +60,7 @@ summary: "{{{ .lake }}} は、あらゆる種類のデータ処理に対応す�
 | [システム関数](/tidb-cloud-lake/sql/system-functions.md) | システム情報および管理操作 |
 | [コンテキスト関数](/tidb-cloud-lake/sql/context-functions.md) | 現在のセッション、ユーザー、およびデータベース情報 |
 
-## セキュリティと整合性 {#security-integrity}
+## セキュリティと整合性 {#security--integrity}
 
 | カテゴリ | 説明 |
 |----------|-------------|
