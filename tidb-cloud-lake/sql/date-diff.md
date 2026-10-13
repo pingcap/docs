@@ -39,7 +39,7 @@ SELECT
     DATE_BETWEEN(month, '2025-07-31', '2025-10-01'); -- returns 2
 ```
 
-この例では、`DATE_DIFF` は 3 つの月境界（July → August → September → October）をまたぐため `3` を返します。一方、`DATE_BETWEEN` は日付の間に完全な 2 か月分、つまり August と September が含まれるため `2` を返します。
+この例では、`DATE_DIFF` は 3 つの月境界（7 月 → 8 月 → 9 月 → 10 月）をまたぐため `3` を返します。一方、`DATE_BETWEEN` は日付の間に完全な 2 か月分、つまり 8 月と 9 月が含まれるため `2` を返します。
 
 ## 例 {#examples}
 

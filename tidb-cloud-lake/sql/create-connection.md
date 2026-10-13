@@ -22,7 +22,7 @@ CREATE [ OR REPLACE ] CONNECTION [ IF NOT EXISTS ] <connection_name>
 | パラメータ        | 説明                                                                                                                                        |
 |------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | STORAGE_TYPE     | ストレージサービスの種類です。指定可能な値には `s3`、`azblob`、`gcs`、`oss`、`cos` があります。                                                         |
-| storage_params   | ストレージの種類と認証方法によって異なります。完全な一覧については [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。 |
+| storage_params   | ストレージの種類と認証方法によって異なります。完全な一覧については [接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。 |
 
 ## 接続パラメータ {#connection-parameters}
 
@@ -37,7 +37,7 @@ CREATE [ OR REPLACE ] CONNECTION [ IF NOT EXISTS ] <connection_name>
 | `cos`        | `SECRET_ID`、`SECRET_KEY`、`ENDPOINT_URL` | Tencent Cloud Object Storage。 |
 | `hf`         | `REPO_TYPE`、`REVISION`、任意で `TOKEN` | Hugging Face Hub のデータセットおよびモデル。 |
 
-パラメータの意味、任意フラグ、追加のストレージタイプについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。以下のタブを展開すると、ストレージ固有の例を確認できます。
+パラメータの意味、任意フラグ、追加のストレージタイプについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。以下のタブを展開すると、ストレージ固有の例を確認できます。
 
 <SimpleTab groupId="connection-storage-types">
 
@@ -145,9 +145,9 @@ CREATE CONNECTION <connection_name>
 
 | 権限         | オブジェクトタイプ | 説明           |
 |:------------------|:------------|:----------------------|
-| CREATE CONNECTION | Global      | 接続を作成します。 |
+| CREATE CONNECTION | グローバル  | 接続を作成します。 |
 
-接続を作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が CREATE CONNECTION [privilege](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
+接続を作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が CREATE CONNECTION [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 
 ## テーブル接続の更新 {#update-table-connections}
 

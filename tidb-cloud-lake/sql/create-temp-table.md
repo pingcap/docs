@@ -8,7 +8,7 @@ summary: セッションの終了時に自動的に削除される一時テー�
 セッションの終了時に自動的に削除される一時テーブルを作成します。
 
 - 一時テーブルは、それを作成したセッション内でのみ可視であり、セッションの終了時に、すべてのデータが vacuum されたうえで自動的に削除されます。
-       - 一時テーブルの自動クリーンアップに失敗した場合（たとえば、query node のクラッシュが原因の場合）は、[FUSE_VACUUM_TEMPORARY_TABLE](/tidb-cloud-lake/sql/fuse-vacuum-temporary-table.md) 関数を使用して、一時テーブルの残存ファイルを手動でクリーンアップできます。
+       - 一時テーブルの自動クリーンアップに失敗した場合（たとえば、クエリノードのクラッシュが原因の場合）は、[FUSE_VACUUM_TEMPORARY_TABLE](/tidb-cloud-lake/sql/fuse-vacuum-temporary-table.md) 関数を使用して、一時テーブルの残存ファイルを手動でクリーンアップできます。
 - セッション内の既存の一時テーブルを表示するには、[system.temporary_tables](/tidb-cloud-lake/sql/system-tables.md) システムテーブルをクエリします。[例 1](#example-1) を参照してください。
 - 通常テーブルと同じ名前の一時テーブルは優先され、一時テーブルが削除されるまで通常テーブルは隠されます。[例 2](#example-2) を参照してください。
 - 一時テーブルの作成や操作に権限は不要です。

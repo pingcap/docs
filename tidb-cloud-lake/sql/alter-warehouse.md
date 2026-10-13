@@ -42,7 +42,7 @@ ALTER WAREHOUSE <warehouse_name> RENAME TO <new_name>
 | オプション              | 型 / 値                                                              | 説明                                                                   |
 | ------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | `WAREHOUSE_SIZE`    | `XSmall`, `Small`, `Medium`, `Large`, `XLarge`, `2XLarge`–`6XLarge` | コンピュートサイズを変更します。                                                     |
-| `AUTO_SUSPEND`      | `NULL`, `0`, または 300 秒以上                                            | 自動一時停止までのアイドルタイムアウトです。`NULL` は auto-suspend を無効にします。                 |
+| `AUTO_SUSPEND`      | `NULL`, `0`, または 300 秒以上                                            | 自動一時停止までのアイドルタイムアウトです。`NULL` は自動一時停止を無効にします。                 |
 | `AUTO_RESUME`       | Boolean                                                             | 受信したクエリによってWarehouseを自動的に起動するかどうかを制御します。                              |
 | `MAX_CLUSTER_COUNT` | `NULL` または 0 以上の整数                                                  | オートスケーリングされるクラスター数の上限です。                                             |
 | `MIN_CLUSTER_COUNT` | `NULL` または 0 以上の整数                                                  | オートスケーリングされるクラスター数の下限です。                                             |
@@ -77,7 +77,7 @@ ALTER WAREHOUSE 'my-wh'
     comment = 'Serving tier';
 ```
 
-auto-suspend を無効にします。
+自動一時停止を無効にします。
 
 ```sql
 ALTER WAREHOUSE 'my-wh' SET auto_suspend = NULL;

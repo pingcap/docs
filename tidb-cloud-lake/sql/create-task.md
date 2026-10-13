@@ -41,7 +41,7 @@ AS
 | SUSPEND_TASK_AFTER_NUM_FAILURES                  | 任意。連続して失敗した回数がこの値に達すると、タスクは自動的に一時停止されます。 |
 | AFTER                                            | このタスクの開始前に完了している必要があるタスクの一覧です。 |
 | WHEN boolean_expr                                | タスクを実行するために true である必要がある条件です。 |
-| [ERROR_INTEGRATION](/tidb-cloud-lake/sql/notification.md) | 任意。特定の [task error payload](/tidb-cloud-lake/sql/task-error-notification-payload.md) を適用したタスクエラー通知に使用する notification integration の名前です。 |
+| [ERROR_INTEGRATION](/tidb-cloud-lake/sql/notification.md) | 任意。特定の [タスクエラーのペイロード](/tidb-cloud-lake/sql/task-error-notification-payload.md) を適用したタスクエラー通知に使用する notification integration の名前です。 |
 | COMMENT                                          | 任意。タスクのコメントまたは説明として使用される文字列リテラルです。 |
 | session_parameter                                | 任意。タスク実行時に使用するセッションパラメータを指定します。セッションパラメータは、CREATE TASK ステートメント内で他のすべてのタスクパラメータの後に配置する必要があります。 |
 | sql                                              | タスクが実行する SQL ステートメントです。単一のステートメント、または `BEGIN ... END;` で囲まれたスクリプトを指定できます。これは必須フィールドです。 |
@@ -79,12 +79,12 @@ AS
 
 - `SCHEDULE` パラメータで使用する cron 式には、**ちょうど 6 つのフィールド**を含める必要があります。
 - 各フィールドは次を表します。
-  1. **Second** (0-59)
-  2. **Minute** (0-59)
-  3. **Hour** (0-23)
-  4. **Day of the Month** (1-31)
-  5. **Month** (1-12 or JAN-DEC)
-  6. **Day of the Week** (0-6, where 0 is Sunday, or SUN-SAT)
+  1. **秒** (0-59)
+  2. **分** (0-59)
+  3. **時** (0-23)
+  4. **日** (1-31)
+  5. **月** (1-12 または JAN-DEC)
+  6. **曜日** (0-6、0 は日曜日、または SUN-SAT)
 
 #### cron 式の例 {#example-cron-expressions}
 

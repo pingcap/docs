@@ -35,7 +35,7 @@ float64。`n <= 1` の場合は +∞ を返します。
 
 ## 例 {#example}
 
-**Create a Table and Insert Sample Data**
+**テーブルを作成してサンプルデータを挿入する**
 
 ```sql
 CREATE TABLE store_sales (
@@ -53,7 +53,7 @@ VALUES (1, 1, 100, 1000),
        (5, 5, 500, 5000);
 ```
 
-**Query Demo: Calculate Sample Covariance between Items Sold and Profit**
+**クエリのデモ: 販売数と利益の間の標本共分散を計算する**
 
 ```sql
 SELECT COVAR_SAMP(items_sold, profit) AS covar_samp_items_profit

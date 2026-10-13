@@ -29,7 +29,7 @@ COUNT(<expr>)
 
 ## 例 {#example}
 
-**Create a Table and Insert Sample Data**
+**テーブルを作成してサンプルデータを挿入する**
 
 ```sql
 CREATE TABLE students (
@@ -48,7 +48,7 @@ VALUES (1, 'John', 21, 85),
 
 ```
 
-**Query Demo: Count Students with Valid Grades**
+**クエリのデモ: 有効な成績を持つ学生数をカウントする**
 
 ```sql
 SELECT COUNT(grade) AS count_valid_grades

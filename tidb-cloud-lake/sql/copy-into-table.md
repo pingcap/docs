@@ -7,7 +7,7 @@ summary: COPY INTO を使用すると、以下のいずれかの場所にある�
 
 COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロード (load) できます。
 
-- User / Internal / External stages: {{{ .lake }}} の stage については、[What is Stage?](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
+- User / Internal / External stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
 - ストレージサービスで作成されたバケットまたはコンテナ。
 - URL（`https://` で始まる）でファイルにアクセスできるリモートサーバー。
 - [IPFS](https://ipfs.tech) および Hugging Face リポジトリ。
@@ -193,7 +193,7 @@ copyOptions ::=
 
 ## フォーマットタイプのオプション {#format-type-options}
 
-`FILE_FORMAT` パラメータはさまざまなファイルタイプをサポートしており、それぞれに固有のフォーマットオプションがあります。以下に、サポートされている各ファイル形式で使用可能なオプションを示します。すべてのオプションの詳細については、[Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
+`FILE_FORMAT` パラメータはさまざまなファイルタイプをサポートしており、それぞれに固有のフォーマットオプションがあります。以下に、サポートされている各ファイル形式で使用可能なオプションを示します。すべてのオプションの詳細については、[入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
 
 <SimpleTab>
 

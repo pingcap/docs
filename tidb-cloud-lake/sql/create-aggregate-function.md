@@ -52,7 +52,7 @@ $$
 |:----------|:--------------|:---------------|
 | SUPER     | グローバル、テーブル | UDF を操作する |
 
-ユーザー定義関数を作成するには、操作を実行するユーザー、または [current_role](/tidb-cloud-lake/guides/roles.md) が SUPER [privilege](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
+ユーザー定義関数を作成するには、操作を実行するユーザー、または [current_role](/tidb-cloud-lake/guides/roles.md) が SUPER [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 
 ## 例 {#examples}
 

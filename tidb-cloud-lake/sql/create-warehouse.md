@@ -36,8 +36,8 @@ CREATE WAREHOUSE [ IF NOT EXISTS ] <warehouse_name>
 | `AUTO_RESUME`         | Boolean                                                                                | `TRUE`        | 受信したクエリによって Warehouse を自動的に起動するかどうかを制御します。 |
 | `MAX_CLUSTER_COUNT`   | `NULL` または 0 以上の整数                                                         | `0`           | オートスケーリングするクラスター数の上限です。`0` はオートスケールを無効にします。 |
 | `MIN_CLUSTER_COUNT`   | `NULL` または 0 以上の整数                                                         | `0`           | オートスケーリングするクラスター数の下限です。`MAX_CLUSTER_COUNT` 以下である必要があります。 |
-| `COMMENT`             | String                                                                                 | Empty         | `SHOW WAREHOUSES` で表示される自由形式のテキストです。 |
-| `TAG`                 | キーと値のペア: `TAG ( key1 = 'value1', key2 = 'value2' )`                            | None          | 分類および整理のためのリソースタグです（AWS tags に類似）。コスト配分、環境の識別、またはチーム所有者の管理に使用されます。 |
+| `COMMENT`             | String                                                                                 | 空            | `SHOW WAREHOUSES` で表示される自由形式のテキストです。 |
+| `TAG`                 | キーと値のペア: `TAG ( key1 = 'value1', key2 = 'value2' )`                            | なし          | 分類および整理のためのリソースタグです（AWS のタグに類似）。コスト配分、環境の識別、またはチーム所有者の管理に使用されます。 |
 
 - オプションは任意の順序で指定でき、重複して指定することもできます（後に指定した値が優先されます）。
 - `AUTO_SUSPEND`、`MAX_CLUSTER_COUNT`、`MIN_CLUSTER_COUNT` は `= NULL` を受け付け、`0` にリセットします。

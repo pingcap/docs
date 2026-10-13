@@ -1,11 +1,11 @@
 ---
 title: BITMAP_SUBSET_IN_RANGE
-summary: 指定した範囲内で、ソース bitmap のサブ bitmap を生成します。
+summary: 指定した範囲内で、ソースビットマップのサブビットマップを生成します。
 ---
 
 # BITMAP_SUBSET_IN_RANGE
 
-指定した範囲内で、ソース bitmap のサブ bitmap を生成します。
+指定した範囲内で、ソースビットマップのサブビットマップを生成します。
 
 ## 構文 {#syntax}
 

@@ -276,7 +276,7 @@ ALTER TABLE t COMMENT = 'new-comment';
 
 ## Fuse Engine オプション {#fuse-engine-options}
 
-テーブルの [Fuse Engine options](/tidb-cloud-lake/sql/fuse-engine-tables.md#fuse-engine-options) を設定または解除します。
+テーブルの [Fuse Engine オプション](/tidb-cloud-lake/sql/fuse-engine-tables.md#fuse-engine-options) を設定または解除します。
 
 ### 構文 {#syntax-3}
 
@@ -417,7 +417,7 @@ ALTER TABLE sales_data CONNECTION=( connection_name = 's3_role_conn' );
 
 > **Note:**
 >
-> スナップショットタグは、[governance tags](#tag-operations) とは異なります。スナップショットタグはタイムトラベルのためにテーブルスナップショットをブックマークするものであり、governance tags は分類のためにオブジェクトへキーと値のメタデータを付与するものです。
+> スナップショットタグは、[ガバナンスタグ](#tag-operations) とは異なります。スナップショットタグはタイムトラベルのためにテーブルスナップショットをブックマークするものであり、ガバナンスタグは分類のためにオブジェクトへキーと値のメタデータを付与するものです。
 
 ## テーブルの入れ替え {#swap-tables}
 
@@ -464,7 +464,7 @@ DESC t2;
 
 ## タグ操作 {#tag-operations}
 
-テーブルに governance tags を割り当てる、または削除します。governance tags は、分類とデータガバナンスのためのキーと値のメタデータです。タグは事前に [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) で作成しておく必要があります。詳細については、[SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md) を参照してください。
+テーブルにガバナンスタグを割り当てる、または削除します。ガバナンスタグは、分類とデータガバナンスのためのキーと値のメタデータです。タグは事前に [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) で作成しておく必要があります。詳細については、[SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md) を参照してください。
 
 ### 構文 {#syntax-6}
 

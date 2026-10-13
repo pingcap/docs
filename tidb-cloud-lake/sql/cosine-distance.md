@@ -15,8 +15,8 @@ COSINE_DISTANCE(vector1, vector2)
 
 ## 引数 {#arguments}
 
-- `vector1`: 1 つ目のベクトル（VECTOR Data Type）
-- `vector2`: 2 つ目のベクトル（VECTOR Data Type）
+- `vector1`: 1 つ目のベクトル（VECTOR データ型）
+- `vector2`: 2 つ目のベクトル（VECTOR データ型）
 
 ## 戻り値 {#returns}
 

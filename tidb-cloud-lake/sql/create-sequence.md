@@ -27,9 +27,9 @@ CREATE [ OR REPLACE ] SEQUENCE [ IF NOT EXISTS ] <sequence>
 
 | 権限       | オブジェクトタイプ | 説明           |
 |:----------------|:------------|:----------------------|
-| CREATE SEQUENCE | Global      | シーケンスを作成します。 |
+| CREATE SEQUENCE | グローバル  | シーケンスを作成します。 |
 
-シーケンスを作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が CREATE SEQUENCE [privilege](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
+シーケンスを作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が CREATE SEQUENCE [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 
 > **Note:**
 >

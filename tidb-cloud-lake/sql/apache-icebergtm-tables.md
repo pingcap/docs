@@ -13,7 +13,7 @@ summary: TiDB Cloud Lake を Apache Iceberg カタログに接続し、Iceberg �
 
 - データがすでに Iceberg カタログで管理されている。
 - 複数のクエリエンジンで同じテーブルメタデータとオブジェクトストレージを共有する必要がある。
-- schema evolution や snapshot などの Iceberg の機能が必要である。
+- schema evolution やスナップショットなどの Iceberg の機能が必要である。
 - {{{ .lake }}} から Iceberg テーブルをクエリまたは書き込みたい。
 
 ## Iceberg カタログを作成する {#create-an-iceberg-catalog}
@@ -41,7 +41,7 @@ CONNECTION = (
 | `<catalog_name>` | はい | {{{ .lake }}} 内のカタログ名。 |
 | `TYPE` | はい | カタログエンジン。この値を `ICEBERG` に設定します。 |
 | `CONNECTION` | はい | Iceberg カタログおよびそのストレージの接続プロパティ。 |
-| `TYPE` inside `CONNECTION` | はい | Iceberg カタログタイプ: `rest`、`glue`、`storage`、または `hive`。 |
+| `CONNECTION` 内の `TYPE` | はい | Iceberg カタログタイプ: `rest`、`glue`、`storage`、または `hive`。 |
 | `ADDRESS` | カタログタイプによる | カタログサービスのエンドポイント、または Hive Metastore のアドレス。 |
 | `WAREHOUSE` | カタログタイプによる | カタログで使用される Warehouse の場所。 |
 | `<connection_parameter>` | カタログタイプによる | カタログ、認証、およびオブジェクトストレージのプロパティ。 |

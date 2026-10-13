@@ -44,7 +44,7 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 
 > **Note:**
 >
-> - {{{ .lake }}} で使用可能なデータ型については、[Data Types](/tidb-cloud-lake/sql/data-types.md) を参照してください。
+> - {{{ .lake }}} で使用可能なデータ型については、[データ型](/tidb-cloud-lake/sql/data-types.md) を参照してください。
 >
 > - {{{ .lake }}} では、カラム名に特殊文字をできるだけ使用しないことを推奨しています。ただし、場合によって特殊文字が必要な場合は、次のようにエイリアスをバッククォートで囲む必要があります: CREATE TABLE price(\`$CA\` int);
 >
@@ -98,7 +98,7 @@ AS SELECT query
 
 ## カラムの NULL 許容 {#column-nullable}
 
-{{{ .lake }}} では、デフォルトで **すべてのカラムが nullable(NULL)** です。NULL 値を許可しないカラムが必要な場合は、NOT NULL 制約を使用してください。詳細は [NULL Values and NOT NULL Constraint](/tidb-cloud-lake/sql/data-types.md) を参照してください。
+{{{ .lake }}} では、デフォルトで **すべてのカラムが nullable(NULL)** です。NULL 値を許可しないカラムが必要な場合は、NOT NULL 制約を使用してください。詳細は [NULL 値と NOT NULL 制約](/tidb-cloud-lake/sql/data-types.md) を参照してください。
 
 ## カラムのデフォルト値 {#column-default-values}
 

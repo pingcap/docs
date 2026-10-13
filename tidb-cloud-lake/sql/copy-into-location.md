@@ -7,7 +7,7 @@ summary: COPY INTO を使用すると、テーブルまたはクエリからデ�
 
 COPY INTO を使用すると、テーブルまたはクエリからデータを、以下のいずれかの場所にある 1 つ以上のファイルへアンロードできます。
 
-- User / Internal / External stages: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
+- User / Internal / External stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
 - ストレージサービスで作成されたバケットまたはコンテナ。
 
 関連情報: [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
@@ -53,7 +53,7 @@ externalLocation ::=
   )
 ```
 
-Amazon S3 互換ストレージサービスへのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Amazon S3 互換ストレージサービスへのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -67,7 +67,7 @@ externalLocation ::=
   )
 ```
 
-Azure Blob Storage へのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Azure Blob Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -81,7 +81,7 @@ externalLocation ::=
   )
 ```
 
-Google Cloud Storage へのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Google Cloud Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -95,7 +95,7 @@ externalLocation ::=
   )
 ```
 
-Alibaba Cloud OSS へのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Alibaba Cloud OSS へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -109,7 +109,7 @@ externalLocation ::=
   )
 ```
 
-Tencent Cloud Object Storage へのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Tencent Cloud Object Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 </SimpleTab>

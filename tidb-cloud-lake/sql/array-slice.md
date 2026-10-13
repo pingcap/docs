@@ -27,12 +27,12 @@ ARRAY_SLICE(array, start, end)
 
 ## インデックスに関する重要な注意 {#important-note-on-indexing}
 
-- 標準の配列型の場合: インデックスは **1-based** です（最初の要素の位置は 1）。
-- variant 配列型の場合: Snowflake との互換性のため、インデックスは **0-based** です（最初の要素の位置は 0）。
+- 標準の配列型の場合: インデックスは **1 始まり** です（最初の要素の位置は 1）。
+- variant 配列型の場合: Snowflake との互換性のため、インデックスは **0 始まり** です（最初の要素の位置は 0）。
 
 ## 例 {#examples}
 
-### 例 1: 標準配列のスライス（1-based indexing） {#example-1-slicing-a-standard-array-1-based-indexing}
+### 例 1: 標準配列のスライス（1 始まりのインデックス） {#example-1-slicing-a-standard-array-1-based-indexing}
 
 ```sql
 SELECT ARRAY_SLICE([10, 20, 30, 40, 50], 2, 4);
@@ -44,7 +44,7 @@ SELECT ARRAY_SLICE([10, 20, 30, 40, 50], 2, 4);
 [20, 30]
 ```
 
-### 例 2: variant 配列のスライス（0-based indexing） {#example-2-slicing-a-variant-array-0-based-indexing}
+### 例 2: variant 配列のスライス（0 始まりのインデックス） {#example-2-slicing-a-variant-array-0-based-indexing}
 
 ```sql
 SELECT ARRAY_SLICE(PARSE_JSON('["apple", "banana", "orange", "grape", "kiwi"]'), 1, 3);
