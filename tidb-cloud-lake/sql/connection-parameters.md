@@ -55,7 +55,7 @@ CREATE STAGE my_minio_stage
   CONNECTION = (CONNECTION_NAME = 'my_minio_conn');
 ```
 
-Amazon S3 バケットにアクセスするために、認証用の AWS IAM ロールと external ID を指定することもできます。AWS IAM ロールと external ID を指定することで、ユーザーがアクセスできる S3 バケットをより細かく制御できます。つまり、IAM ロールに特定の S3 バケットへのアクセス権限のみが付与されている場合、ユーザーはそのバケットにのみアクセスできます。external ID は、追加の検証レイヤーを提供することで、さらにセキュリティを強化できます。詳細については、<https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html> を参照してください。
+Amazon S3 バケットにアクセスするために、認証用の AWS IAM ロールと 外部 ID を指定することもできます。AWS IAM ロールと 外部 ID を指定することで、ユーザーがアクセスできる S3 バケットをより細かく制御できます。つまり、IAM ロールに特定の S3 バケットへのアクセス権限のみが付与されている場合、ユーザーはそのバケットにのみアクセスできます。外部 ID は、追加の検証レイヤーを提供することで、さらにセキュリティを強化できます。詳細については、<https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html> を参照してください。
 
 以下の表は、AWS IAM ロール認証を使用して Amazon S3 ストレージサービスにアクセスするための接続パラメータを示しています。
 
@@ -63,7 +63,7 @@ Amazon S3 バケットにアクセスするために、認証用の AWS IAM ロ�
 |-------------- |----------- |------------------------------------------------------- |
 | endpoint_url  | いいえ         | Amazon S3 のエンドポイント URL。                        |
 | role_arn      | はい        | S3 への認可に使用する AWS IAM ロールの ARN。             |
-| external_id   | いいえ         | ロール引き受け時のセキュリティを強化するための external ID。  |
+| external_id   | いいえ         | ロール引き受け時のセキュリティを強化するための 外部 ID。  |
 
 ```sql title='Examples'
 -- Create the connection using IAM role authentication

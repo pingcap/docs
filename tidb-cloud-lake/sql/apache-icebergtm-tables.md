@@ -61,7 +61,7 @@ CONNECTION = (
 | `s3.sse.key` | KMS key ID、または顧客提供の暗号化キー。 |
 | `s3.sse.md5` | 顧客提供の暗号化キーに対する MD5 チェックサム。 |
 | `client.assume-role.arn` | 引き受ける IAM ロールの ARN。 |
-| `client.assume-role.external-id` | IAM ロールを引き受ける際に使用する external ID。 |
+| `client.assume-role.external-id` | IAM ロールを引き受ける際に使用する外部 ID。 |
 | `client.assume-role.session-name` | IAM ロールを引き受ける際に使用するセッション名。 |
 | `s3.allow-anonymous` | パブリックストレージへの匿名アクセスを許可するかどうか。 |
 | `s3.disable-ec2-metadata` | EC2 インスタンスメタデータからのクレデンシャルを無効にするかどうか。 |
