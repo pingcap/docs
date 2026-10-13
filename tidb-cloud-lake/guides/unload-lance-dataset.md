@@ -34,7 +34,7 @@ FILE_FORMAT = (TYPE = LANCE)
 
 {{{ .lake }}} と Python 環境の両方からアクセス可能な、S3 互換のバケットを用意します。
 
-### Step 1. 外部 stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
 ```sql
 CREATE OR REPLACE STAGE ml_assets
@@ -47,7 +47,7 @@ CONNECTION = (
 );
 ```
 
-### Step 2. サンプルソースファイルを作成する {#step-2-create-sample-source-files}
+### ステップ 2. サンプルソースファイルを作成する {#step-2-create-sample-source-files}
 
 stage に 3 つの生テキストファイルを作成します。
 
@@ -74,7 +74,7 @@ USE_RAW_PATH = TRUE
 OVERWRITE = TRUE;
 ```
 
-### Step 3. マニフェストテーブルを作成する {#step-3-create-a-manifest-table}
+### ステップ 3. マニフェストテーブルを作成する {#step-3-create-a-manifest-table}
 
 ```sql
 CREATE OR REPLACE TABLE support_ticket_manifest (
@@ -89,7 +89,7 @@ INSERT INTO support_ticket_manifest VALUES
     (3, 'escalation', 'raw/ticket_003.txt');
 ```
 
-### Step 4. dataset を Lance にエクスポートする {#step-4-export-the-dataset-to-lance}
+### ステップ 4. dataset を Lance にエクスポートする {#step-4-export-the-dataset-to-lance}
 
 `READ_FILE` は stage 上のテキストファイルを生バイト列として読み取ります。その後、`COPY INTO` がそれらの行を Lance dataset に書き込みます。
 
@@ -120,7 +120,7 @@ DETAILED_OUTPUT = TRUE;
 └───────────────────────────────────────────────────────────────┘
 ```
 
-### Step 5. エクスポートされた dataset レイアウトを確認する {#step-5-inspect-the-exported-dataset-layout}
+### ステップ 5. エクスポートされた dataset レイアウトを確認する {#step-5-inspect-the-exported-dataset-layout}
 
 ```sql
 LIST @ml_assets/datasets/support-ticket-train;
@@ -134,7 +134,7 @@ datasets/support-ticket-train/data/... .lance
 datasets/support-ticket-train/*.manifest
 ```
 
-### Step 6. Python `lance` で検証する {#step-6-verify-with-python-lance}
+### ステップ 6. Python `lance` で検証する {#step-6-verify-with-python-lance}
 
 Python パッケージをインストールします。
 

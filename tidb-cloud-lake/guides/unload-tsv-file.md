@@ -29,7 +29,7 @@ FILE_FORMAT = (
 
 ## チュートリアル {#tutorial}
 
-### Step 1. 外部 stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
 ```sql
 CREATE STAGE tsv_unload_stage
@@ -40,7 +40,7 @@ CONNECTION = (
 );
 ```
 
-### Step 2. カスタム TSV ファイル形式を作成する {#step-2-create-custom-tsv-file-format}
+### ステップ 2. カスタム TSV ファイル形式を作成する {#step-2-create-custom-tsv-file-format}
 
 ```sql
 CREATE FILE FORMAT tsv_unload_format
@@ -48,7 +48,7 @@ CREATE FILE FORMAT tsv_unload_format
     COMPRESSION = gzip;     -- Unload with gzip compression
 ```
 
-### Step 3. TSV ファイルにアンロードする {#step-3-unload-into-tsv-file}
+### ステップ 3. TSV ファイルにアンロードする {#step-3-unload-into-tsv-file}
 
 ```sql
 COPY INTO @tsv_unload_stage
@@ -70,7 +70,7 @@ DETAILED_OUTPUT = true;
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 4. アンロードされた TSV ファイルを確認する {#step-4-verify-the-unloaded-tsv-files}
+### ステップ 4. アンロードされた TSV ファイルを確認する {#step-4-verify-the-unloaded-tsv-files}
 
 ```
 SELECT COUNT($1)

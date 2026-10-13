@@ -200,7 +200,7 @@ tags    VARIANT   NULL
 
 2 行目の `age = NULL` は、1 行目から推論された `BIGINT` 型を変更しません。`score` には整数と浮動小数点数の両方が含まれるため、`DOUBLE` になります。`profile` と `tags` はそれぞれオブジェクトと配列であるため、Schema Evolution はそれらを `VARIANT` カラムとして追加します。
 
-### Step 4: 結果を確認する {#step-4-verify-results}
+### ステップ 4: 結果を確認する {#step-4-verify-results}
 
 テーブルには現在 3 つのカラムがあります。`city` と `score` は自動的に追加されました。
 

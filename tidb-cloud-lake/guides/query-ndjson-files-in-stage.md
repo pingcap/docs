@@ -32,7 +32,7 @@ NDJSON (Newline Delimited JSON) は、各行に完全で有効な JSON オブジ
 
 ## チュートリアル {#tutorial}
 
-### Step 1. 外部 stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
 NDJSON ファイルが保存されている独自の S3 バケットと認証情報を使用して、外部 stage を作成します。
 
@@ -45,7 +45,7 @@ CONNECTION = (
 );
 ```
 
-### Step 2. カスタム NDJSON ファイル形式を作成する {#step-2-create-custom-ndjson-file-format}
+### ステップ 2. カスタム NDJSON ファイル形式を作成する {#step-2-create-custom-ndjson-file-format}
 
 ```sql
 CREATE FILE FORMAT ndjson_query_format
@@ -55,7 +55,7 @@ CREATE FILE FORMAT ndjson_query_format
 
 - NDJSON ファイル形式のその他のオプションについては、[NDJSON ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#ndjson-options) を参照してください
 
-### Step 3. NDJSON ファイルをクエリする {#step-3-query-ndjson-files}
+### ステップ 3. NDJSON ファイルをクエリする {#step-3-query-ndjson-files}
 
 これで、stage から NDJSON ファイルを直接クエリできます。この例では、各 JSON オブジェクトから `title` フィールドと `author` フィールドを抽出します。
 

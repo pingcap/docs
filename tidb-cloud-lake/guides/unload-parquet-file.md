@@ -23,7 +23,7 @@ FILE_FORMAT = (TYPE = PARQUET)
 
 ## チュートリアル {#tutorial}
 
-### Step 1. 外部 stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
 ```sql
 CREATE STAGE parquet_unload_stage
@@ -34,7 +34,7 @@ CONNECTION = (
 );
 ```
 
-### Step 2. カスタム Parquet ファイル形式を作成する {#step-2-create-custom-parquet-file-format}
+### ステップ 2. カスタム Parquet ファイル形式を作成する {#step-2-create-custom-parquet-file-format}
 
 ```sql
 CREATE FILE FORMAT parquet_unload_format
@@ -42,7 +42,7 @@ CREATE FILE FORMAT parquet_unload_format
     ;
 ```
 
-### Step 3. Parquet ファイルにアンロードする {#step-3-unload-into-parquet-file}
+### ステップ 3. Parquet ファイルにアンロードする {#step-3-unload-into-parquet-file}
 
 ```sql
 COPY INTO @parquet_unload_stage
@@ -65,7 +65,7 @@ DETAILED_OUTPUT = true;
 └───────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 4. アンロードした Parquet ファイルを確認する {#step-4-verify-the-unloaded-parquet-files}
+### ステップ 4. アンロードした Parquet ファイルを確認する {#step-4-verify-the-unloaded-parquet-files}
 
 ```sql
 SELECT COUNT($1)

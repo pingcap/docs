@@ -13,11 +13,11 @@ summary: Tableau は、データを使って問題を解決する方法を変革
 
 このチュートリアルでは、`lake-jdbc` を使用して Tableau Desktop を {{{ .lake }}} に接続する方法を説明します。
 
-### Step 1. 接続情報を取得する {#step-1-obtain-connection-information}
+### ステップ 1. 接続情報を取得する {#step-1-obtain-connection-information}
 
 {{{ .lake }}} Warehouse の接続情報を取得します。詳細については、[Warehouse への接続](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse) を参照してください。
 
-### Step 2. lake-jdbc をインストールする {#step-2-install-lake-jdbc}
+### ステップ 2. lake-jdbc をインストールする {#step-2-install-lake-jdbc}
 
 1. 次のいずれかの場所から `lake-jdbc` バージョン `0.4.6` 以降をダウンロードします。
 
@@ -32,7 +32,7 @@ summary: Tableau は、データを使って問題を解決する方法を変革
     | Windows          | C:\Program Files\Tableau\Drivers |
     | Linux            | /opt/tableau/tableau_driver/jdbc |
 
-### Step 3. {{{ .lake }}} に接続する {#step-3-connect-to-lake}
+### ステップ 3. {{{ .lake }}} に接続する {#step-3-connect-to-lake}
 
 1. Tableau Desktop を起動し、サイドバーで **Other Databases (JDBC)** を選択します。
 

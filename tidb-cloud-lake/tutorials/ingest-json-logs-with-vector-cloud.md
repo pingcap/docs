@@ -113,7 +113,7 @@ aws s3 cp s3://lake-doc/logs/1733871161-7b89e50a-6eb4-4531-8479-dd46981e4674.log
 {"log":{"event":"purchase","timestamp":"2024-12-08T10:05:00Z","user_id":2}}
 ```
 
-## Step 4: {{{ .lake }}} でタスクを作成する {#step-4-create-a-task-in-lake}
+## ステップ 4: {{{ .lake }}} でタスクを作成する {#step-4-create-a-task-in-lake}
 
 1. Worksheet を開き、バケット内の `logs` フォルダにリンクする外部 stage を作成します。
 

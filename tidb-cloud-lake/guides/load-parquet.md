@@ -27,7 +27,7 @@ FILE_FORMAT = (TYPE = PARQUET)
 
 ## チュートリアル: Parquet ファイルからのデータのロード {#tutorial-loading-data-from-parquet-files}
 
-### Step 1. 内部 stage を作成する {#step-1-create-an-internal-stage}
+### ステップ 1. 内部 stage を作成する {#step-1-create-an-internal-stage}
 
 Parquet ファイルを保存するための内部 stage を作成します。
 
@@ -35,7 +35,7 @@ Parquet ファイルを保存するための内部 stage を作成します。
 CREATE STAGE my_parquet_stage;
 ```
 
-### Step 2. Parquet ファイルを作成する {#step-2-create-parquet-files}
+### ステップ 2. Parquet ファイルを作成する {#step-2-create-parquet-files}
 
 次の SQL ステートメントを使用して Parquet ファイルを生成します。
 
@@ -69,7 +69,7 @@ LIST @my_parquet_stage;
 
 データを stage にアンロード (unload) する詳細については、[COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください。
 
-### Step 3. ターゲットテーブルを作成する {#step-3-create-target-table}
+### ステップ 3. ターゲットテーブルを作成する {#step-3-create-target-table}
 
 ```sql
 CREATE TABLE books
@@ -79,7 +79,7 @@ CREATE TABLE books
 );
 ```
 
-### Step 4. Parquet から直接コピーする {#step-4-copying-directly-from-parquet}
+### ステップ 4. Parquet から直接コピーする {#step-4-copying-directly-from-parquet}
 
 Parquet ファイルからテーブルに直接データをコピーするには、次の SQL コマンドを使用します。
 
@@ -100,7 +100,7 @@ COPY INTO books
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 5 (任意). SELECT を使用してデータをコピーする {#step-5-optional-using-select-to-copy-data}
+### ステップ 5 (任意). SELECT を使用してデータをコピーする {#step-5-optional-using-select-to-copy-data}
 
 コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT ステートメントを使用します。詳細は [`Parquet からの SELECT`](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md) を参照してください。
 

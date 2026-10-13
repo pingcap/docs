@@ -21,7 +21,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
 - **AWS Credentials**: S3 バケットにアクセスするための十分な権限を持つ AWS Access Key ID と Secret Access Key が必要です。[AWS 認証情報の管理](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys)を参照してください。
 - **IAM Roles と Policies を管理する権限**: Snowflake と Amazon S3 間のアクセスを設定するために必要な IAM roles と policies を作成および管理する権限があることを確認してください。[IAM roles と policies について](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を参照してください。
 
-## Step 1: Amazon S3 用の Snowflake Storage Integration を設定する {#step-1-configuring-snowflake-storage-integration-for-amazon-s3}
+## ステップ 1: Amazon S3 用の Snowflake Storage Integration を設定する {#step-1-configuring-snowflake-storage-integration-for-amazon-s3}
 
 このステップでは、IAM roles を使用して Snowflake が Amazon S3 にアクセスできるように設定します。まず IAM role を作成し、その後その role を使用して、安全なデータアクセスのための Snowflake Storage Integration を確立します。
 
@@ -105,7 +105,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
 
     `arn:aws:iam::123456789012:user/example` という ARN は、前のステップで取得した Snowflake アカウントの IAM user ARN です。
 
-## Step 2: Amazon S3 へのデータの準備とエクスポート {#step-2-preparing-and-exporting-data-to-amazon-s3}
+## ステップ 2: Amazon S3 へのデータの準備とエクスポート {#step-2-preparing-and-exporting-data-to-amazon-s3}
 
 1. Snowflake で、Snowflake storage integration `my_s3_integration` を使用して external stage を作成します。
 
@@ -146,7 +146,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
 
     `lake-doc` バケットを開くと、`snowflake` フォルダ内に Parquet ファイルが表示されます。
 
-## Step 3: {{{ .lake }}} へのデータのロード (load) {#step-3-loading-data-into-lake}
+## ステップ 3: {{{ .lake }}} へのデータのロード (load) {#step-3-loading-data-into-lake}
 
 1. {{{ .lake }}} にターゲットテーブルを作成します。
 

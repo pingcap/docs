@@ -36,7 +36,7 @@ TiDB integration task を作成する前に、以下を確認してください�
 
 このセクションでは、TiDB Cloud Lake で TiDB integration task を作成する手順を説明します。
 
-### Step 1: 基本設定を構成する {#step-1-configure-basic-settings}
+### ステップ 1: 基本設定を構成する {#step-1-configure-basic-settings}
 
 1. **Data** > **Data Integration** に移動し、**Create Task** をクリックします。
 2. **TiDB** データソースを選択し、基本設定を構成します。
@@ -94,7 +94,7 @@ target table    = targetTablePrefix    + sourceTable    + targetTableSuffix
 
 たとえば、データベース接頭辞が `src_` の場合、ソースデータベース `shard_1` とテーブル `orders` は `src_shard_1.orders` に書き込まれます。
 
-### Step 2: タスクを作成する {#step-2-create-the-task}
+### ステップ 2: タスクを作成する {#step-2-create-the-task}
 
 設定を確認し、**Create** をクリックしてデータ統合タスクを作成します。
 

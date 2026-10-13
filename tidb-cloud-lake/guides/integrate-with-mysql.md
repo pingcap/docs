@@ -54,7 +54,7 @@ MySQL インスタンスに {{{ .lake }}} からアクセスできることを�
 
 ## Creating a MySQL Integration Task {#creating-a-mysql-integration-task}
 
-### Step 1: Basic Info {#step-1-basic-info}
+### ステップ 1: Basic Info {#step-1-basic-info}
 
 1. **Data** > **Data Integration** に移動し、**Create Task** をクリックします。
 
@@ -91,7 +91,7 @@ MySQL インスタンスに {{{ .lake }}} からアクセスできることを�
 | **Mode**            | アーカイブ頻度 — **Daily**、**Weekly**、または **Monthly**                |
 | **Time Column**     | アーカイブのパーティション分割に使用する時間ベースのカラム（例: `created_at`） |
 
-### Step 2: Preview Data {#step-2-preview-data}
+### ステップ 2: Preview Data {#step-2-preview-data}
 
 基本設定を構成したら、**Next** をクリックしてソースデータをプレビューします。
 
@@ -99,7 +99,7 @@ MySQL インスタンスに {{{ .lake }}} からアクセスできることを�
 
 システムは選択した MySQL テーブルからサンプル行を取得し、カラム名とデータ型を表示します。続行する前に、正しいテーブルとカラムが選択されていることを確認してください。
 
-### Step 3: Set Target Table {#step-3-set-target-table}
+### ステップ 3: Set Target Table {#step-3-set-target-table}
 
 {{{ .lake }}} 内の宛先を構成します。
 

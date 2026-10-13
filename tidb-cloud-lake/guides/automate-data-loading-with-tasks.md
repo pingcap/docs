@@ -57,7 +57,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
 
 センサーデータを継続的に生成し、Parquet として保存して、テーブルにロード (load) します。すべての `CREATE/ALTER TASK` 文で、`'etl_wh_small'` を**あなたの** warehouse 名に置き換えてください。
 
-### 手順 1. デモ用オブジェクトを準備する {#step-1-prepare-demo-objects}
+### ステップ 1. デモ用オブジェクトを準備する {#step-1-prepare-demo-objects}
 
 ```sql
 -- Create a playground schema and target table
@@ -75,7 +75,7 @@ CREATE OR REPLACE TABLE sensor_events (
 CREATE OR REPLACE STAGE sensor_events_stage;
 ```
 
-### 手順 2. Task 1 — ファイルを生成する {#step-2-task-1-generate-files}
+### ステップ 2. Task 1 — ファイルを生成する {#step-2-task-1-generate-files}
 
 `task_generate_data` は、1 分ごとに 100 件のランダムな測定値を stage に書き込みます。各実行で新しい Parquet ファイルが生成され、下流のコンシューマーがそれを取り込みできます。
 
@@ -96,7 +96,7 @@ FROM (
 FILE_FORMAT = (TYPE = PARQUET);
 ```
 
-### 手順 3. Task 2 — ファイルをロードする {#step-3-task-2-load-the-files}
+### ステップ 3. Task 2 — ファイルをロードする {#step-3-task-2-load-the-files}
 
 `task_consume_data` は同じ間隔で stage をスキャンし、新しく生成されたすべての Parquet ファイルを `sensor_events` テーブルにコピーします。`PURGE = TRUE` 句により、すでに取り込み済みのファイルはクリーンアップされます。
 
@@ -112,7 +112,7 @@ FILE_FORMAT = (TYPE = PARQUET)
 PURGE = TRUE;
 ```
 
-### 手順 4. Tasks を再開する {#step-4-resume-tasks}
+### ステップ 4. Tasks を再開する {#step-4-resume-tasks}
 
 ```sql
 ALTER TASK task_generate_data RESUME;
@@ -121,7 +121,7 @@ ALTER TASK task_consume_data RESUME;
 
 どちらの task も、再開するまでは一時停止状態で開始されます。最初のファイル生成とコピーは、次の 1 分以内に行われるはずです。
 
-### 手順 5. パイプラインを監視する {#step-5-monitor-the-pipeline}
+### ステップ 5. パイプラインを監視する {#step-5-monitor-the-pipeline}
 
 ```sql
 -- Confirm that the tasks are running
@@ -148,7 +148,7 @@ ALTER TASK task_consume_data
 
 テストが完了したら、`ALTER TASK ... SUSPEND` を使ってどちらの task も一時停止できます。
 
-### 手順 6. Tasks を更新する {#step-6-update-tasks}
+### ステップ 6. Tasks を更新する {#step-6-update-tasks}
 
 task を削除しなくても、スケジュール、warehouse、さらには SQL payload まで変更できます。
 
@@ -180,7 +180,7 @@ ORDER BY completed_time DESC;
 
 `WHEN STREAM_STATUS(...)` を使用すると、stream に新しい行がある場合にのみ実行できます。例 1 の `sensor_events` テーブルを再利用します。
 
-### 手順 1. stream と latest テーブルを作成する {#step-1-create-stream-latest-table}
+### ステップ 1. stream と latest テーブルを作成する {#step-1-create-stream-latest-table}
 
 ```sql
 -- Create a stream on the sensor table (Standard mode to capture every mutation)
@@ -195,7 +195,7 @@ FROM sensor_events
 WHERE 1 = 0;
 ```
 
-### Step 2. 条件付きタスクを作成する {#step-2-create-the-conditional-task}
+### ステップ 2. 条件付きタスクを作成する {#step-2-create-the-conditional-task}
 
 ```sql
 CREATE OR REPLACE TASK task_stream_merge
@@ -210,7 +210,7 @@ FROM sensor_events_stream;
 ALTER TASK task_stream_merge RESUME;
 ```
 
-### Step 3. 動作を確認する {#step-3-verify-the-behavior}
+### ステップ 3. 動作を確認する {#step-3-verify-the-behavior}
 
 ```sql
 SELECT *

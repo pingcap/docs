@@ -82,7 +82,7 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 
 ## Creating a PostgreSQL Integration Task {#creating-a-postgresql-integration-task}
 
-### Step 1: Basic Info {#step-1-basic-info}
+### ステップ 1: Basic Info {#step-1-basic-info}
 
 1. **Data** > **Data Integration** に移動し、**Create Task** をクリックします。
 
@@ -106,13 +106,13 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 
 - **Snapshot WHERE Condition**: snapshot 中にデータをフィルタリングする SQL WHERE 句です（例: `created_at > '2024-01-01'`）。これにより、ソースデータの一部のみをロードできます。
 
-### Step 2: Preview Data {#step-2-preview-data}
+### ステップ 2: Preview Data {#step-2-preview-data}
 
 基本設定を構成した後、**Next** をクリックしてソースデータをプレビューします。
 
 システムは選択した PostgreSQL テーブルからサンプル行を取得し、カラム名とデータ型を表示します。続行する前に、正しいテーブルとカラムが選択されていることを確認してください。
 
-### Step 3: Set Target Table {#step-3-set-target-table}
+### ステップ 3: Set Target Table {#step-3-set-target-table}
 
 {{{ .lake }}} 内の宛先を構成します。
 

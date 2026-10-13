@@ -73,7 +73,7 @@ export EXTERNAL_ID="<platform-org-id>"
 >
 > Platform から提供されたロール ARN を使用してください。`PLATFORM_SETUP_ROLE_ARN` は **Platform setup and validation role** の ARN、`PLATFORM_LOAD_ROLE_ARN` は **Platform data loading role** の ARN です。ほとんどの場合、IAM Role の信頼ポリシーでは両方のプラットフォームロールを信頼する必要があります。
 
-## Step 1: SQS 標準キューを作成または取得する {#step-1-create-or-get-an-sqs-standard-queue}
+## ステップ 1: SQS 標準キューを作成または取得する {#step-1-create-or-get-an-sqs-standard-queue}
 
 SQS 標準キューを作成します。
 
@@ -106,7 +106,7 @@ export QUEUE_ARN=$(
 
 各 SQS (S3) データソースごとに専用の SQS 標準キューを使用することを推奨します。同じキューを、他のバケット、他の prefix / suffix スコープ、または他の業務イベントに再利用しないでください。
 
-## Step 2: SQS キューポリシーを設定する {#step-2-configure-the-sqs-queue-policy}
+## ステップ 2: SQS キューポリシーを設定する {#step-2-configure-the-sqs-queue-policy}
 
 変更を加える前に、現在の SQS 属性をバックアップします。
 
@@ -166,7 +166,7 @@ aws sqs set-queue-attributes \
   --attributes file://set-queue-attributes.json
 ```
 
-## Step 3: S3 バケット通知を設定する {#step-3-configure-s3-bucket-notification}
+## ステップ 3: S3 バケット通知を設定する {#step-3-configure-s3-bucket-notification}
 
 変更を加える前に、現在のバケット通知をバックアップしてください。`put-bucket-notification-configuration` はバケット通知の設定全体を置き換えます。バケットにすでに他の通知がある場合は、新しい設定を適用する前にそれらをマージしてください。
 
@@ -231,7 +231,7 @@ aws s3api get-bucket-notification-configuration \
 
 `QueueArn` が対象の SQS キューを指していること、`Events` に `s3:ObjectCreated:*` が含まれていること、`FilterRules` が {{{ .lake }}} データソースで設定した `Object Key Prefix` / `Object Key Suffix` と一致していることを確認してください。
 
-## Step 4: {{{ .lake }}} が引き受ける IAM ロールを作成する {#step-4-create-an-iam-role-for-lake-to-assume}
+## ステップ 4: {{{ .lake }}} が引き受ける IAM ロールを作成する {#step-4-create-an-iam-role-for-lake-to-assume}
 
 `trust-policy.json` を生成します。`ExternalId` は {{{ .lake }}} (platform) コンソールの organization ID です。
 
@@ -296,7 +296,7 @@ aws iam update-assume-role-policy \
   --policy-document file://trust-policy.json
 ```
 
-## Step 5: S3/SQS 権限をアタッチする {#step-5-attach-s3-sqs-permissions}
+## ステップ 5: S3/SQS 権限をアタッチする {#step-5-attach-s3-sqs-permissions}
 
 `permissions-policy.json` を生成します。
 
@@ -357,7 +357,7 @@ aws iam put-role-policy \
 - デフォルトでは、このポリシーに S3 の書き込み権限や削除権限は不要です。
 - 将来の SQS (S3) 統合タスクで **PURGE** または **Clean Up Original Files** を有効にし、取り込み成功後にソースオブジェクトを削除する場合は、対象オブジェクトパスに対する `s3:DeleteObject` を付与してください。
 
-## Step 6: S3 から SQS への連携を確認する {#step-6-verify-s3-to-sqs}
+## ステップ 6: S3 から SQS への連携を確認する {#step-6-verify-s3-to-sqs}
 
 `PREFIX` / `SUFFIX` に一致するテストオブジェクトをアップロードします。
 

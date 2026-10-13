@@ -177,7 +177,7 @@ SELECT * FROM employees_date;
 └───────────────────────────────────────────────────────────────────────┘
 ```
 
-### Tutorial 4 - ロード中に算術演算を実行する {#tutorial-4-performing-arithmetic-operations-during-load}
+### チュートリアル 4 - ロード中に算術演算を実行する {#tutorial-4-performing-arithmetic-operations-during-load}
 
 データをロードし、算術演算を実行します（例: `age` を 1 増やす）。
 
@@ -216,7 +216,7 @@ SELECT * FROM employees_new_age;
 └────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Tutorial 5 - 追加カラムを持つテーブルへのロード {#tutorial-5-loading-to-a-table-with-additional-columns}
+### チュートリアル 5 - 追加カラムを持つテーブルへのロード {#tutorial-5-loading-to-a-table-with-additional-columns}
 
 ソースファイルよりも多くのカラムを持つテーブルにデータをロードします。
 
