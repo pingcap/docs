@@ -1,9 +1,9 @@
 ---
-title: Vector Index
+title: ベクトルインデックス
 summary: "{{{ .lake }}} のベクトルインデックスは、HNSW (Hierarchical Navigable Small World) アルゴリズムを使用して、高次元ベクトルデータに対する効率的な類似検索を可能にします。セマンティック検索、レコメンデーションシステム、AI アプリケーションなどのユースケースをサポートします。"
 ---
 
-# Vector Index
+# ベクトルインデックス
 
 {{{ .lake }}} のベクトルインデックスは、HNSW (Hierarchical Navigable Small World) アルゴリズムを使用して、高次元ベクトルデータに対する効率的な類似検索を可能にします。セマンティック検索、レコメンデーションシステム、AI アプリケーションなどのユースケースをサポートします。
 

@@ -1,9 +1,9 @@
 ---
-title: Stored Procedure
+title: ストアドプロシージャ
 summary: このページでは、{{{ .lake }}} における Stored Procedure の操作について、参照しやすいように機能別に整理して包括的に説明します。
 ---
 
-# Stored Procedure
+# ストアドプロシージャ
 
 このページでは、{{{ .lake }}} における Stored Procedure の操作について、参照しやすいように機能別に整理して包括的に説明します。
 
@@ -28,4 +28,4 @@ summary: このページでは、{{{ .lake }}} における Stored Procedure の
 
 ## 参考資料 {#further-reading}
 
-変数処理、制御フロー、カーソル、プロシージャ内での動的 SQL の使用方法を含む完全な言語リファレンスについては、[Stored Procedure & SQL Scripting](/tidb-cloud-lake/sql/stored-procedure-scripting.md) を参照してください。
+変数処理、制御フロー、カーソル、プロシージャ内での動的 SQL の使用方法を含む完全な言語リファレンスについては、[ストアドプロシージャと SQL スクリプト](/tidb-cloud-lake/sql/stored-procedure-scripting.md) を参照してください。
