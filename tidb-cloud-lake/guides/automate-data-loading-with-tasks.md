@@ -1,6 +1,6 @@
 ---
 title: Tasks によるデータロードの自動化
-summary: Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って、または条件が満たされたときに実行できるようにします。[CREATE TASK](/tidb-cloud-lake/sql/create-task.md) で定義する際は、以下の設定項目を考慮してください。
+summary: Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って、または条件が満たされたときに実行できるようにします。CREATE TASK で定義する際は、以下の設定項目を考慮してください。
 ---
 
 # Tasks によるデータロードの自動化

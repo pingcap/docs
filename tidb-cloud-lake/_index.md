@@ -1,10 +1,11 @@
-<!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
 ---
 title: TiDB Cloud Lake ドキュメント
 hide_sidebar: true
 hide_commit: true
 summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離し、ANSI SQL、半構造化データの処理、AI 指向のワークフローをサポートします。
 ---
+
+<!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Lake" subTitle="TiDB Cloud Lake は、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離し、ANSI SQL、半構造化データの処理、AI 指向のワークフローをサポートします。">
 

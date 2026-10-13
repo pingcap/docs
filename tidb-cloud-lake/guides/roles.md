@@ -66,18 +66,6 @@ ALTER USER eric WITH DEFAULT_ROLE = 'account_admin';
 
 - セカンダリロールは、追加の権限を提供するロールであり、デフォルトで有効です。ユーザーは [SET SECONDARY ROLES](/tidb-cloud-lake/sql/set-secondary-roles.md) コマンドを使用してセカンダリロールを有効化または無効化し、権限範囲を一時的に調整できます。
 
-## 請求ロール {#billing-role}
-
-標準の組み込みロールに加えて、{{{ .lake }}} では財務担当者のニーズに特化した `billing` という名前のカスタムロールを作成できます。`billing` ロールは請求関連情報のみにアクセスを提供するため、財務担当者は他の業務関連ページに触れることなく、必要な財務データを閲覧できます。
-
-`billing` ロールを設定して使用するには、次のコマンドで作成します。
-
-```sql
-CREATE ROLE billing;
-```
-
-ロール名では大文字と小文字は区別されないため、`billing` と `Billing` は同じものとして扱われます。`billing` ロールの設定および割り当て手順の詳細については、[財務担当者にアクセス権を付与する](/tidb-cloud-lake/guides/manage-costs.md#granting-access-to-finance-personnel) を参照してください。
-
 ## 使用例（基本） {#usage-examples-basic}
 
 この例では、ロールベースの権限管理を示します。まず、`writer` ロールを作成して権限を付与します。次に、これらの権限をユーザー `eric` に割り当て、`eric` がそれらを継承します。最後に、ロールから権限を取り消し、それがユーザーの権限に与える影響を示します。
