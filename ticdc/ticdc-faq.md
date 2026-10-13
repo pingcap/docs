@@ -212,7 +212,7 @@ The default Time-To-Live (TTL) that TiCDC sets for a service GC safepoint is 24 
 
 ## What is the default behavior of TiCDC if I create a replication task without specifying the configuration file in `--config`?
 
-If you use the `cdc cli changefeed create` command without specifying the `-config` parameter, TiCDC creates the replication task in the following default behaviors:
+If you use the `cdc cli changefeed create` command without specifying the `--config` parameter, TiCDC creates the replication task in the following default behaviors:
 
 - Replicates all tables except system tables
 - Only replicates tables that contain [valid indexes](/ticdc/ticdc-overview.md#best-practices)

@@ -71,7 +71,7 @@ The filtering process of a `test`.`t` table is as follows:
         - If yes, continue to filter at the **table** level.
         - If not, filter `test`.`t`.
 
-    - If `do-dbs` is empty and `ignore-dbs` is not empty, check whether a matched schema exits in `ignore-dbs`.
+    - If `do-dbs` is empty and `ignore-dbs` is not empty, check whether a matched schema exists in `ignore-dbs`.
 
         - If yes, filter `test`.`t`.
         - If not, continue to filter at the **table** level.
@@ -122,10 +122,10 @@ block-allow-list:  # Use black-white-list if the DM version is earlier than or e
     - db-name: "logs"
       tbl-name: "~_2018$"
     - db-name: "~^forum.*"
-​      tbl-name: "messages"
+      tbl-name: "messages"
     ignore-tables:
     - db-name: "~.*"
-​      tbl-name: "^messages.*"
+      tbl-name: "^messages.*"
 ```
 
 After applying the `bw-rule` rule:

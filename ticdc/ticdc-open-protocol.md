@@ -169,7 +169,7 @@ This section introduces the formats of Row Changed Event, DDL Event, and Resolve
     | :---------- | :----- | :---------------------------------- |
     | TS          | Number |  The timestamp of the transaction that performs the DDL change.    |
     | Schema Name | String |  The schema name of the DDL change, which might be an empty string.  |
-    | Table Name  | String |  The table name of the DDL change, which might be am empty string. |
+    | Table Name  | String |  The table name of the DDL change, which might be an empty string. |
 
 + **Value:**
 
