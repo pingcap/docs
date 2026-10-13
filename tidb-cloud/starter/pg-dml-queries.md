@@ -103,7 +103,7 @@ Delete rows matching a condition:
 
 ```sql
 DELETE FROM users
-WHERE id = 1;
+WHERE name = 'Bob';
 ```
 
 Return the deleted rows:
