@@ -1,11 +1,11 @@
 ---
 title: AWS IAM Role による認証
-summary: クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、{{{ .lake }}} は生のアクセスキーを扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
+summary: クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、{{{ .lake }}} はアクセスキーを直接扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
 ---
 
 # AWS IAM Role による認証
 
-クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、{{{ .lake }}} は生のアクセスキーを扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
+クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、{{{ .lake }}} はアクセスキーを直接扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
 
 ## IAM ロールの利点 {#iam-role-benefits}
 
