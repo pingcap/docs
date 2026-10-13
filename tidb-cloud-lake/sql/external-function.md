@@ -11,9 +11,9 @@ summary: このページでは、{{{ .lake }}} における External Function �
 
 | コマンド | 説明 |
 |---------|-------------|
-| [CREATE EXTERNAL FUNCTION](/tidb-cloud-lake/sql/create-function.md) | 新しい external function を作成します |
-| [ALTER EXTERNAL FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md) | 既存の external function を変更します |
-| [DROP EXTERNAL FUNCTION](/tidb-cloud-lake/sql/drop-function-sql.md) | external function を削除します |
+| [CREATE EXTERNAL FUNCTION](/tidb-cloud-lake/sql/create-function.md) | 新しい外部関数を作成します |
+| [ALTER EXTERNAL FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md) | 既存の外部関数を変更します |
+| [DROP EXTERNAL FUNCTION](/tidb-cloud-lake/sql/drop-function-sql.md) | 外部関数を削除します |
 
 > **Note:**
 >

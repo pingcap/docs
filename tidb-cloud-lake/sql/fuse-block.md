@@ -1,11 +1,11 @@
 ---
 title: FUSE_BLOCK
-summary: テーブルの最新または指定したスナップショットの block 情報を返します。{{{ .lake }}} における block について詳しくは、What are Snapshot, Segment, and Block? を参照してください。
+summary: テーブルの最新または指定したスナップショットの block 情報を返します。{{{ .lake }}} における block について詳しくは、Snapshot、Segment、Block とは何か？ を参照してください。
 ---
 
 # FUSE_BLOCK
 
-テーブルの最新または指定したスナップショットの block 情報を返します。{{{ .lake }}} における block について詳しくは、[What are Snapshot, Segment, and Block?](/tidb-cloud-lake/sql/optimize-table.md#-lake--data-storage-snapshot-segment-and-block) を参照してください。
+テーブルの最新または指定したスナップショットの block 情報を返します。{{{ .lake }}} における block について詳しくは、[Snapshot、Segment、Block とは何か？](/tidb-cloud-lake/sql/optimize-table.md#-lake--data-storage-snapshot-segment-and-block) を参照してください。
 
 このコマンドは、スナップショットによって参照される各 parquet ファイルのロケーション情報を返します。これにより、下流アプリケーションはファイルに保存されたデータへアクセスし、利用できます。
 

@@ -17,7 +17,7 @@ TO_MONTHS(<months>)
 
 ## 戻り値の型 {#return-type}
 
-Interval（months で表現）。
+Interval（月で表現）。
 
 ## 例 {#examples}
 

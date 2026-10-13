@@ -1,6 +1,6 @@
 ---
 title: FUSE_COLUMN
-summary: テーブルの最新または指定したスナップショットのカラム情報を返します。{{{ .lake }}} における block について詳しくは、「What are Snapshot, Segment, and Block?」を参照してください。
+summary: テーブルの最新または指定したスナップショットのカラム情報を返します。{{{ .lake }}} における block について詳しくは、「Snapshot、Segment、Block とは何か？」を参照してください。
 ---
 
 # FUSE_COLUMN

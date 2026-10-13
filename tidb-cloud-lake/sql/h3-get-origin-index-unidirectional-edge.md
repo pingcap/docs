@@ -1,11 +1,11 @@
 ---
 title: H3_GET_ORIGIN_INDEX_FROM_UNIDIRECTIONAL_EDGE
-summary: unidirectional edge H3Index から始点の六角形インデックスを返します。
+summary: 単方向エッジ H3Index から始点の六角形インデックスを返します。
 ---
 
 # H3_GET_ORIGIN_INDEX_FROM_UNIDIRECTIONAL_EDGE
 
-unidirectional edge H3Index から始点の六角形インデックスを返します。
+単方向エッジ H3Index から始点の六角形インデックスを返します。
 
 ## 構文 {#syntax}
 

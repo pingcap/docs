@@ -201,7 +201,7 @@ NULL 値を表す文字列です。
 
 **Available Values**: `EWKT`, `WKB`, `WKB`, `EWKB`, `GEOJSON`
 
-**Default**: `EWKT`
+**デフォルト**: `EWKT`
 
 ### ENCODING (ロードのみ) {#encoding-load-only}
 
@@ -209,7 +209,7 @@ NULL 値を表す文字列です。
 
 [Encoding Standard](https://encoding.spec.whatwg.org/) で認識される任意のラベルを使用できます（例: `UTF-8`, `GBK`, `SHIFT_JIS`, `EUC-KR`, `ISO-8859-1`）。このラベルは、ファイル形式 / stage の作成時に検証されます。
 
-**Default**: `UTF-8`
+**デフォルト**: `UTF-8`
 
 ### ENCODING_ERROR_MODE (ロードのみ) {#encoding_error_mode-load-only}
 
@@ -220,7 +220,7 @@ NULL 値を表す文字列です。
 | `STRICT` (Default) | 最初の不正なバイト列でエラーを返して中止します。                     |
 | `REPLACE`          | 各不正バイト列を U+FFFD に置き換えて処理を続行します。               |
 
-**Default**: `STRICT`
+**デフォルト**: `STRICT`
 
 ### COMPRESSION {#compression}
 
@@ -238,7 +238,7 @@ NULL 値を表す文字列です。
 | `RAW_DEFLATE`    | Deflate 圧縮ファイル（ヘッダーなし、RFC1951）。                  |
 | `XZ`             |                                                                 |
 
-**Default**: `NONE`
+**デフォルト**: `NONE`
 
 ## TSV オプション {#tsv-options}
 
@@ -246,14 +246,14 @@ NULL 値を表す文字列です。
 
 {{{ .lake }}} TSV には次の条件があります。
 
-- [RECORD_DELIMITER](#record_delimiter-1)、[FIELD_DELIMITER](#field_delimiter-1) は、[delimiter collision](https://en.wikipedia.org/wiki/Delimiter#Delimiter_collision) を解決するために `\` でエスケープされます
+- [RECORD_DELIMITER](#record_delimiter-1)、[FIELD_DELIMITER](#field_delimiter-1) は、[区切り文字の衝突](https://en.wikipedia.org/wiki/Delimiter#Delimiter_collision) を解決するために `\` でエスケープされます
 - 区切り文字に加えて、次の文字もエスケープされます: `\b`, `\f`, `\r`, `\n`, `\t`, `\0`, `\\`, `\'`。
 - [QUOTE](#quote-load-only) は形式の一部ではありません。
 - NULL は `\N` として表されます。
 
 > **Note:**
 >
-> 1. {{{ .lake }}} では、TSV と CSV の主な違いは、フィールド区切り文字としてカンマの代わりにタブを使うこと（これはオプションで変更可能）ではなく、[delimiter collision](https://en.wikipedia.org/wiki/Delimiter#Delimiter_collision) の処理に引用符ではなくエスケープを使うことです
+> 1. {{{ .lake }}} では、TSV と CSV の主な違いは、フィールド区切り文字としてカンマの代わりにタブを使うこと（これはオプションで変更可能）ではなく、[区切り文字の衝突](https://en.wikipedia.org/wiki/Delimiter#Delimiter_collision) の処理に引用符ではなくエスケープを使うことです
 > 2. CSV には正式な標準があるため、保存形式としては TSV より CSV を推奨します。
 > 3. TSV は、次のものによって生成されたファイルのロードに使用できます。
 >     1. [Postgresql TEXT](https://www.postgresql.org/docs/current/sql-copy.html)。
@@ -272,7 +272,7 @@ NULL 値を表す文字列です。
 - `#` や `|` などの任意の文字。
 - エスケープ文字付きの文字: `\b`, `\f`, `\r`, `\n`, `\t`, `\0`, `\xHH`
 
-**Default**: `\n`
+**デフォルト**: `\n`
 
 ### FIELD_DELIMITER {#field_delimiter-1}
 
@@ -283,7 +283,7 @@ NULL 値を表す文字列です。
 - `#` や `|` などの英数字以外の文字。
 - エスケープ文字付きの文字: `\b`, `\f`, `\r`, `\n`, `\t`, `\0`, `\xHH`
 
-**Default**: `\t` (TAB)
+**デフォルト**: `\t` (TAB)
 
 ### SKIP_HEADER (ロードのみ) {#skip_header-load-only-1}
 
@@ -311,7 +311,7 @@ NULL 値を表す文字列です。
 
 Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NULL` の CSV とは異なります）。
 
-**Default**: `FIELD_DEFAULT`
+**デフォルト**: `FIELD_DEFAULT`
 
 ### ERROR_ON_COLUMN_COUNT_MISMATCH (ロードのみ) {#error_on_column_count_mismatch-load-only-1}
 
@@ -356,7 +356,7 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 
 **Syntax**: `NULL_IF = ('value1', 'value2', ...)`
 
-**Default**: empty (追加の NULL マーカーなし)
+**デフォルト**: 空 (追加の NULL マーカーなし)
 
 ### COMPRESSION {#compression-2}
 
@@ -379,9 +379,9 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 
 ### USE_LOGIC_TYPE (ロードのみ) {#use_logic_type-load-only}
 
-有効にすると、ロード時に Parquet の論理型（例: DATE、TIMESTAMP、DECIMAL annotations）を使用して対象カラム型を決定します。無効にすると、物理ストレージ型のみが考慮されます。
+有効にすると、ロード時に Parquet の論理型（例: DATE、TIMESTAMP、DECIMAL などのアノテーション）を使用して対象カラム型を決定します。無効にすると、物理ストレージ型のみが考慮されます。
 
-**Default**: `true`
+**デフォルト**: `true`
 
 ### COMPRESSION (アンロードのみ) {#compression-unload-only}
 
@@ -449,4 +449,4 @@ FILE_FORMAT = (TYPE = LANCE)
 
 有効にすると、ロード時に対象カラム型を決定するために Avro の論理型（例: date、timestamp-millis、decimal）が使用されます。無効にすると、基になる Avro 型のみが考慮されます。
 
-**Default**: `true`
+**デフォルト**: `true`

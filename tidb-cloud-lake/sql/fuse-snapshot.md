@@ -1,6 +1,6 @@
 ---
 title: FUSE_SNAPSHOT
-summary: テーブルのスナップショット情報を返します。{{{ .lake }}} における snapshot について詳しくは、「What are Snapshot, Segment, and Block?」を参照してください。
+summary: テーブルのスナップショット情報を返します。{{{ .lake }}} における snapshot について詳しくは、「Snapshot、Segment、Block とは何か？」を参照してください。
 ---
 
 # FUSE_SNAPSHOT
