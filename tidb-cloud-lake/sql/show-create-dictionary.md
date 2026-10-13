@@ -17,13 +17,13 @@ SHOW CREATE DICTIONARY [ <catalog_name>. ][ <database_name>. ]<dictionary_name>
 
 | パラメータ | 説明 |
 |-----------|-------------|
-| `<dictionary_name>` | ディクショナリ名です。catalog 名および database 名で修飾できます。 |
+| `<dictionary_name>` | ディクショナリ名です。カタログ名およびデータベース名で修飾できます。 |
 
 ## 出力 {#output}
 
 結果には、ディクショナリ名と再構築された `CREATE DICTIONARY` 文が含まれます。
 
-返される SQL では、`password` などの機密性の高い source オプションはマスクされます。
+返される SQL では、`password` などの機密性の高いソースオプションはマスクされます。
 
 ## 例 {#examples}
 

@@ -1,13 +1,13 @@
 ---
 title: ストアドプロシージャ
-summary: このページでは、{{{ .lake }}} における Stored Procedure の操作について、参照しやすいように機能別に整理して包括的に説明します。
+summary: このページでは、{{{ .lake }}} におけるストアドプロシージャの操作について、参照しやすいように機能別に整理して包括的に説明します。
 ---
 
 # ストアドプロシージャ
 
-このページでは、{{{ .lake }}} における Stored Procedure の操作について、参照しやすいように機能別に整理して包括的に説明します。
+このページでは、{{{ .lake }}} におけるストアドプロシージャの操作について、参照しやすいように機能別に整理して包括的に説明します。
 
-## Procedure の管理 {#procedure-management}
+## プロシージャの管理 {#procedure-management}
 
 | コマンド | 説明 |
 |---------|-------------|
@@ -15,7 +15,7 @@ summary: このページでは、{{{ .lake }}} における Stored Procedure の
 | [DROP PROCEDURE](/tidb-cloud-lake/sql/drop-procedure.md) | ストアドプロシージャを削除します |
 | [CALL](/tidb-cloud-lake/sql/call-procedure.md) | ストアドプロシージャを実行します |
 
-## Procedure の情報 {#procedure-information}
+## プロシージャの情報 {#procedure-information}
 
 | コマンド | 説明 |
 |---------|-------------|

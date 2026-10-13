@@ -1,11 +1,11 @@
 ---
 title: TO_BINARY
-summary: string、variant、bitmap、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
+summary: string、variant、ビットマップ、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
 ---
 
 # TO_BINARY
 
-string、variant、bitmap、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
+string、variant、ビットマップ、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
 
 関連情報: [TRY_TO_BINARY](/tidb-cloud-lake/sql/try-to-binary.md)
 
@@ -41,7 +41,7 @@ SELECT TO_BINARY(PARSE_JSON('{"key":"value", "number":123}')) AS binary_variant;
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-この例では、bitmap データをバイナリに変換します。
+この例では、ビットマップデータをバイナリに変換します。
 
 ```sql
 SELECT TO_BINARY(TO_BITMAP('10,20,30')) AS binary_bitmap;

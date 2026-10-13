@@ -24,9 +24,9 @@ TRUNC(<date_or_timestamp>, <datetime_interval_type>)
 
 ## 週の開始日の設定 {#week-start-configuration}
 
-datetime interval type として `WEEK` を使用する場合、結果は週の最初の日を定義する `week_start` 設定に依存します。
+日時間隔の種類として `WEEK` を使用する場合、結果は週の最初の日を定義する `week_start` 設定に依存します。
 
-- `week_start = 1` (default): 月曜日が週の最初の日と見なされます
+- `week_start = 1`（デフォルト）: 月曜日が週の最初の日と見なされます
 - `week_start = 0`: 日曜日が週の最初の日と見なされます
 
 特定のクエリに対してこの設定を変更するには、`SETTINGS` 句を使用できます。

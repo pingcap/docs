@@ -1,11 +1,11 @@
 ---
 title: Variant
-summary: VARIANT は、NULL、BOOLEAN、NUMBER、STRING、ARRAY、OBJECT を含む任意の型の値を格納できます。また、内部の値は任意のレベルでネストした構造にできるため、さまざまなデータを柔軟に格納できます。VARIANT は JSON とも呼ばれます。詳細は JSON website を参照してください。
+summary: VARIANT は、NULL、BOOLEAN、NUMBER、STRING、ARRAY、OBJECT を含む任意の型の値を格納できます。また、内部の値は任意のレベルでネストした構造にできるため、さまざまなデータを柔軟に格納できます。VARIANT は JSON とも呼ばれます。詳細は JSON の Web サイトを参照してください。
 ---
 
 # Variant
 
-VARIANT は、NULL、BOOLEAN、NUMBER、STRING、ARRAY、OBJECT を含む任意の型の値を格納できます。また、内部の値は任意のレベルでネストした構造にできるため、さまざまなデータを柔軟に格納できます。VARIANT は JSON とも呼ばれます。詳細は [JSON website](https://www.json.org/json-en.html) を参照してください。
+VARIANT は、NULL、BOOLEAN、NUMBER、STRING、ARRAY、OBJECT を含む任意の型の値を格納できます。また、内部の値は任意のレベルでネストした構造にできるため、さまざまなデータを柔軟に格納できます。VARIANT は JSON とも呼ばれます。詳細は [JSON の Web サイト](https://www.json.org/json-en.html) を参照してください。
 
 以下は、{{{ .lake }}} で Variant データを挿入およびクエリする例です。
 
@@ -203,7 +203,7 @@ FROM
 └────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-フィールド名は **case-sensitive** であることに注意してください。フィールド名にスペースや特殊文字が含まれる場合は、二重引用符で囲みます。
+フィールド名は**大文字と小文字が区別される**ことに注意してください。フィールド名にスペースや特殊文字が含まれる場合は、二重引用符で囲みます。
 
 ```sql
 INSERT INTO

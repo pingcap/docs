@@ -17,7 +17,7 @@ TO_WEEKS(<weeks>)
 
 ## 戻り値の型 {#return-type}
 
-Interval（days で表現されます）。
+Interval（日数で表現されます）。
 
 ## 例 {#examples}
 

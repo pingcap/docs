@@ -38,7 +38,7 @@ SELECT * FROM sales WHERE amount > getvariable('threshold');
 
 ### `IDENTIFIER` を使ったオブジェクトへのアクセス {#accessing-objects-with-identifier}
 
-`IDENTIFIER` キーワードを使用すると、名前が変数に格納されているデータベースオブジェクトを参照でき、柔軟なクエリ構築が可能になります。（Note: LakeSQL はまだ `IDENTIFIER` をサポートしていません。）
+`IDENTIFIER` キーワードを使用すると、名前が変数に格納されているデータベースオブジェクトを参照でき、柔軟なクエリ構築が可能になります。（注: LakeSQL はまだ `IDENTIFIER` をサポートしていません。）
 
 ```sql title='Example:'
 -- Create a table with sales data

@@ -343,7 +343,7 @@ $$;
 CALL PROCEDURE sp_sum_query(5);
 ```
 
-`FOR` は、事前に宣言された result-set 変数やカーソルに対しても反復できます（[クエリ結果の操作](#working-with-query-results) を参照）。
+`FOR` は、事前に宣言された結果セット変数やカーソルに対しても反復できます（[クエリ結果の操作](#working-with-query-results) を参照）。
 
 ### `WHILE` {#while}
 

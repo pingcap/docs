@@ -19,14 +19,14 @@ UNSET VARIABLE (<variable1>, <variable2>, ...)
 
 ## 例 {#examples}
 
-次の例では、単一の変数を unset します。
+次の例では、単一の変数を削除します。
 
 ```sql
 -- Remove the variable a from the session
 UNSET VARIABLE a;
 ```
 
-次の例では、複数の変数を unset します。
+次の例では、複数の変数を削除します。
 
 ```sql
 -- Remove variables x and y from the session

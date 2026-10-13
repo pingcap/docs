@@ -157,7 +157,7 @@ SELECT "Datalake";
   |                                                                         ^^^^^^^^^^ column Datalake doesn't exist, do you mean 'Datalake'?
 ```
 
-デフォルトでは、{{{ .lake }}} の SQL dialect は `PostgreSQL` です。
+デフォルトでは、{{{ .lake }}} の SQL 方言は `PostgreSQL` です。
 
 ```sql
 SHOW SETTINGS LIKE '%sql_dialect%';
