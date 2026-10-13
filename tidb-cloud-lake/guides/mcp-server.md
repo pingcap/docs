@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud Lake MCP Server
+title: TiDB Cloud Lake MCP サーバー
 summary: transport、安全制御、利用可能なツールを含め、TiDB Cloud Lake MCP server のインストール、実行、設定方法を学びます。
 ---
 
-# TiDB Cloud Lake MCP Server
+# TiDB Cloud Lake MCP サーバー
 
 [TiDB Cloud Lake MCP server](https://github.com/tidbcloud/lake-mcp) は、Model Context Protocol (MCP) をサポートするクライアントに対して {{{ .lake }}} の操作を公開します。`tidbcloudlake-mcp` パッケージは、standard input/output、HTTP、および server-sent events (SSE) の transport をサポートします。
 

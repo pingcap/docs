@@ -7,7 +7,7 @@ summary: 保存された値を変更せずに機密情報を保護する、マ�
 
 {{{ .lake }}} は、保存された値を変更することなく、クエリ実行時に機密データを保護します。
 
-| Policy | 役割 |
+| ポリシー | 役割 |
 |--------|----------------|
 | [マスキングポリシー](/tidb-cloud-lake/guides/masking-policy.md) | カラム値を変換します — 権限のないユーザーにはマスクされたデータが表示されます |
 | [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md) | 行全体をフィルタリングします — 権限のないユーザーには行自体が表示されません |
@@ -190,7 +190,7 @@ SELECT * FROM ecommerce.orders;
 REVOKE ROLE analyst_apac FROM USER analyst_user;
 ```
 
-**Rules of thumb:**
+**経験則:**
 
 - ポリシーの作成 ≠ データのクエリ実行。アタッチには、ポリシーの `APPLY` とテーブルの `ALTER` の **両方** が必要です
 - ユーザーではなくロールに権限を付与することを推奨します

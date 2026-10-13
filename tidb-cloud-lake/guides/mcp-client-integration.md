@@ -132,4 +132,4 @@ MCP 設定を保存した後、AI ツールを再起動します。その後、�
 
 MCP ツール `get_session_sandbox_prefix` は、現在のセッションのプレフィックスを返します。
 
-サーバーのトランスポート、設定変数、および利用可能な MCP ツールについては、[TiDB Cloud Lake MCP Server](/tidb-cloud-lake/guides/mcp-server.md) を参照してください。
+サーバーのトランスポート、設定変数、および利用可能な MCP ツールについては、[TiDB Cloud Lake MCP サーバー](/tidb-cloud-lake/guides/mcp-server.md) を参照してください。

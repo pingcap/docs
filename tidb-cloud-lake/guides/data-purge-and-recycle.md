@@ -61,13 +61,13 @@ VACUUM コマンド群は、{{{ .lake }}} でデータをクリーンアップ�
 VACUUM DROP TABLE [FROM <database_name>] [DRY RUN [SUMMARY]] [LIMIT <file_count>];
 ```
 
-**Options:**
+**オプション:**
 
 - `FROM <database_name>`: 特定のデータベースに限定します
 - `DRY RUN [SUMMARY]`: 実際には削除せずに、削除対象となるファイルをプレビューします
 - `LIMIT <file_count>`: vacuum 対象のファイル数を制限します
 
-**Examples:**
+**例:**
 
 ```sql
 -- Preview files that would be removed
@@ -91,11 +91,11 @@ VACUUM DROP TABLE LIMIT 1000;
 VACUUM TABLE <table_name> [DRY RUN [SUMMARY]];
 ```
 
-**Options:**
+**オプション:**
 
 - `DRY RUN [SUMMARY]`: 実際には削除せずに、削除対象となるファイルをプレビューします
 
-**Examples:**
+**例:**
 
 ```sql
 -- Preview files that would be removed

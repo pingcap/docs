@@ -9,15 +9,15 @@ summary: このページでは、PostgreSQL データベースから {{{ .lake }
 
 まず再利用可能な PostgreSQL 接続設定を作成する必要がある場合は、[PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md) を参照してください。
 
-## Sync Modes {#sync-modes}
+## 同期モード {#sync-modes}
 
-| Sync Mode      | 説明                                                                                                  |
+| 同期モード      | 説明                                                                                                  |
 |----------------|-------------------------------------------------------------------------------------------------------|
 | Snapshot       | ソーステーブルから 1 回限りの完全なデータロードを実行します。初期データ移行や定期的な一括インポートに最適です。 |
 | CDC Only       | PostgreSQL の logical replication を使用して、リアルタイムの変更（insert、update、delete）を継続的に取得します。マージ操作には primary key が必要です。 |
 | Snapshot + CDC | 最初に完全な snapshot を実行し、その後シームレスに継続的な CDC に移行します。ほとんどのユースケースで推奨されます。 |
 
-## Prerequisites {#prerequisites}
+## 前提条件 {#prerequisites}
 
 PostgreSQL データ統合を設定する前に、PostgreSQL インスタンスが次の要件を満たしていることを確認してください。
 
@@ -25,7 +25,7 @@ PostgreSQL データ統合を設定する前に、PostgreSQL インスタンス�
 - 対象の PostgreSQL インスタンスに {{{ .lake }}} から到達できること
 - PostgreSQL バージョン 10 以降
 
-### Enable Logical Replication {#enable-logical-replication}
+### 論理レプリケーションを有効にする {#enable-logical-replication}
 
 CDC および Snapshot + CDC モードでは、PostgreSQL WAL (Write-Ahead Log) を logical レベルで設定する必要があります。
 
@@ -37,7 +37,7 @@ max_wal_senders = 4
 
 設定を変更した後、変更を有効にするために PostgreSQL を再起動してください。
 
-### Create a Dedicated User (Recommended) {#create-a-dedicated-user-recommended}
+### 専用ユーザーを作成する（推奨） {#create-a-dedicated-user-recommended}
 
 データレプリケーションに必要な権限を持つ PostgreSQL ユーザーを作成します。
 
@@ -49,7 +49,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO lake_cdc;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lake_cdc;
 ```
 
-### Create Publication and Replication Slot (Required for CDC) {#create-publication-and-replication-slot-required-for-cdc}
+### パブリケーションとレプリケーションスロットを作成する（CDC に必須） {#create-publication-and-replication-slot-required-for-cdc}
 
 CDC および Snapshot + CDC モードでは、publication と replication slot が存在している必要があります。`CREATE PUBLICATION ... FOR ALL TABLES` には superuser 権限が必要であり、個別のテーブルを追加するにはテーブル所有者である必要があるため、これらのオブジェクトは CDC タスクを開始する前にデータベース所有者または superuser が作成する必要があります。
 
@@ -76,11 +76,11 @@ ALTER ROLE lake_cdc WITH REPLICATION;
 >
 > これにより superuser 要件は回避できますが、列挙したテーブルの所有権は引き続き必要です。
 
-### Network Access {#network-access}
+### ネットワークアクセス {#network-access}
 
 PostgreSQL インスタンスに {{{ .lake }}} からアクセスできることを確認してください。ファイアウォールルールと security group を確認し、PostgreSQL ポートへの inbound 接続を許可してください。
 
-## Creating a PostgreSQL Integration Task {#creating-a-postgresql-integration-task}
+## PostgreSQL 統合タスクの作成 {#creating-a-postgresql-integration-task}
 
 ### ステップ 1: Basic Info {#step-1-basic-info}
 
@@ -100,7 +100,7 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
     | **Batch Size**            | いいえ          | バッチごとの行数                                                                         |
     | **Allow Delete**          | いいえ          | CDC で DELETE 操作を許可するかどうかを指定します。CDC Only および Snapshot + CDC モードで使用できます       |
 
-#### Snapshot Mode Options {#snapshot-mode-options}
+#### Snapshot モードのオプション {#snapshot-mode-options}
 
 **Snapshot** モードを使用する場合は、追加のオプションを利用できます。
 
@@ -124,9 +124,9 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 
 システムはソースカラムをターゲットテーブルスキーマに自動的にマッピングします。カラムマッピングを確認し、**Create** をクリックして integration task の作成を完了します。
 
-## Task Behavior by Sync Mode {#task-behavior-by-sync-mode}
+## 同期モードごとのタスクの動作 {#task-behavior-by-sync-mode}
 
-| Sync Mode      | 動作                                                                                          |
+| 同期モード      | 動作                                                                                          |
 |----------------|-----------------------------------------------------------------------------------------------|
 | Snapshot       | 1 回実行され、完全なデータロードが完了すると自動的に停止します。                           |
 | CDC Only       | 手動で停止するまで継続的に実行され、リアルタイムの変更を取得します。                            |
@@ -134,19 +134,19 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 
 CDC タスクでは、停止時に現在の LSN (Log Sequence Number) がチェックポイントとして保存されるため、再起動時に中断した位置からタスクを再開できます。
 
-## Sync Mode Details {#sync-mode-details}
+## 同期モードの詳細 {#sync-mode-details}
 
 ### Snapshot {#snapshot}
 
 Snapshot モードでは、ソーステーブルを 1 回だけ完全に読み取り、すべてのデータを {{{ .lake }}} 内のターゲットテーブルにロードします。
 
-**Use cases:**
+**ユースケース:**
 
 - PostgreSQL から {{{ .lake }}} への初期データ移行
 - 定期的な完全データ更新
 - WHERE 条件フィルタリングを使用した 1 回限りのデータインポート
 
-**Features:**
+**特長:**
 
 - WHERE 条件フィルタリングをサポートし、データの一部をロード可能
 - 完了後にタスクは自動的に停止
@@ -155,13 +155,13 @@ Snapshot モードでは、ソーステーブルを 1 回だけ完全に読み�
 
 CDC モードでは、logical replication を介して PostgreSQL WAL (Write-Ahead Log) を継続的に監視し、ソーステーブルのリアルタイムな行レベル変更（INSERT、UPDATE、DELETE）を取得します。
 
-**Use cases:**
+**ユースケース:**
 
 - リアルタイムデータレプリケーション
 - 運用中の PostgreSQL データベースと {{{ .lake }}} の同期維持
 - イベント駆動型データパイプライン
 
-**How it works:**
+**仕組み:**
 
 1. logical replication slot を使用して PostgreSQL に接続します
 2. `pgoutput` プラグインを介してリアルタイムに行レベルの変更を取得します
@@ -177,7 +177,7 @@ CDC モードでは、logical replication を介して PostgreSQL WAL (Write-Ahe
 
 このモードは両方のアプローチを組み合わせたものです。最初にソーステーブルの完全な snapshot を実行し、その後シームレスに CDC モードへ移行して継続的に変更を取得します。これはほとんどのデータ統合シナリオで推奨されるモードであり、完全な初期データロードと、その後の継続的なリアルタイム同期を実現します。
 
-## Advanced Configuration {#advanced-configuration}
+## 詳細設定 {#advanced-configuration}
 
 ### Primary Key {#primary-key}
 

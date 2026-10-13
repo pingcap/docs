@@ -7,7 +7,7 @@ summary: このページでは、Java を使用して TiDB Cloud Lake に接続�
 
 公式の JDBC ドライバーは標準の JDBC 4.0 互換性を提供し、Java アプリケーションとのシームレスな統合を実現します。
 
-## Installation {#installation}
+## インストール {#installation}
 
 ### Maven {#maven}
 
@@ -27,14 +27,14 @@ implementation 'com.tidbcloud:lake-jdbc:0.4.6'
 
 **Connection String**: DSN の形式と例については、[ドライバー概要](/tidb-cloud-lake/guides/driver-overview.md)を参照してください。
 
-## Key Features {#key-features}
+## 主な機能 {#key-features}
 
 - ✅ **JDBC 4.0 Compatible**: 標準 JDBC インターフェースをサポート
 - ✅ **Connection Pooling**: 組み込みの接続管理
 - ✅ **Prepared Statements**: 効率的なパラメーター化クエリ
 - ✅ **Batch Operations**: 一括挿入および更新をサポート
 
-## Data Type Mappings {#data-type-mappings}
+## データ型のマッピング {#data-type-mappings}
 
 | {{{ .lake }}} | Java | 注記 |
 |----------|------|---------|
@@ -64,7 +64,7 @@ implementation 'com.tidbcloud:lake-jdbc:0.4.6'
 
 ---
 
-## Basic Usage {#basic-usage}
+## 基本的な使い方 {#basic-usage}
 
 ```java
 import java.sql.*;
@@ -110,7 +110,7 @@ pstmt.close();
 conn.close();
 ```
 
-## Configuration Reference {#configuration-reference}
+## 設定リファレンス {#configuration-reference}
 
 以下を含む lake-jdbc ドライバーの完全な設定オプションについて:
 

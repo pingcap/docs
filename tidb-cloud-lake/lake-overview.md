@@ -25,7 +25,7 @@ TiDB Cloud Lake は、ANSI SQL、半構造化データ処理、ベクトル検�
 | **Analytics Native** | ANSI SQL、ウィンドウ処理、増分集計、ストリーミング BI を同じプラットフォーム上で実行できます。 | [Worksheets](/tidb-cloud-lake/guides/worksheet.md) |
 | **Vector Native** | 埋め込み、ベクトルインデックス、セマンティック検索はすべて SQL で実行できます。 | [ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) |
 | **Search Native** | 全文検索と転置インデックスにより、ハイブリッド検索を実現します。 | [Full-Text Index](/tidb-cloud-lake/guides/full-text-index.md) |
-| **Geo Native** | 地理空間インデックスと関数により、地図サービスや位置情報サービスを実現します。 | [Geo Analytics](/tidb-cloud-lake/guides/geo-analytics.md) |
+| **Geo Native** | 地理空間インデックスと関数により、地図サービスや位置情報サービスを実現します。 | [地理空間分析](/tidb-cloud-lake/guides/geo-analytics.md) |
 
 ## はじめに {#get-started}
 

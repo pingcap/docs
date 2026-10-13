@@ -68,7 +68,7 @@ shard_*.*              every table of every shard_ database
 
 **Preview Matched Tables** をクリックすると、現在のルールを、プレフィックス配下に実際に存在するオブジェクトに対して評価できます。プレビューには、一致したソースデータベースとテーブル、および導出されたターゲットデータベースとテーブルが表示されます。
 
-### Snapshot Options {#snapshot-options}
+### Snapshot のオプション {#snapshot-options}
 
 同期モードにスナップショットが含まれる場合、追加オプションによって Dumpling エクスポートのロード方法を制御できます。
 

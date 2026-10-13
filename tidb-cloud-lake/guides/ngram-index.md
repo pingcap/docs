@@ -167,7 +167,7 @@ TableScan
 
 完全なコマンドリファレンスについては、[Ngram インデックス](/tidb-cloud-lake/sql/ngram-index-sql.md) を参照してください。
 
-| Command                                                  | 目的 |
+| コマンド                                                  | 目的 |
 |----------------------------------------------------------|----------------------------------------------|
 | `CREATE NGRAM INDEX name ON table(column) gram_size = N` | N 文字セグメントの ngram インデックスを作成する |
 | `SHOW INDEXES`                                           | ngram インデックスを含むすべてのインデックスを一覧表示する |

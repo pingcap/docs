@@ -1,9 +1,9 @@
 ---
-title: Virtual Column
+title: 仮想カラム
 summary: Virtual Column は、VARIANT カラムに格納された半構造化データに対するクエリを自動的に高速化します。この機能は、JSON データアクセスに対して設定不要のパフォーマンス最適化を提供します。
 ---
 
-# Virtual Column
+# 仮想カラム
 
 Virtual columns は、[VARIANT](/tidb-cloud-lake/sql/variant.md) カラムに格納された半構造化データに対するクエリを自動的に高速化します。この機能は、JSON データアクセスに対して**設定不要のパフォーマンス最適化**を提供します。
 

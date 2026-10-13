@@ -3,7 +3,7 @@ title: TiDB Cloud Lake のアーキテクチャ
 summary: TiDB Cloud Lake のアーキテクチャ。
 ---
 
-# TiDB Cloud Lake Architecture
+# TiDB Cloud Lake のアーキテクチャ
 
 このドキュメントでは、TiDB Cloud Lake のアーキテクチャを紹介します。
 

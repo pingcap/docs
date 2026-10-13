@@ -1,9 +1,9 @@
 ---
-title: "TPC-H SF1000 (1TB): {{{ .lake }}} Warehouse Size Benchmark"
+title: "TPC-H SF1000 (1TB): {{{ .lake }}} の Warehouse サイズ別ベンチマーク"
 summary: このガイドでは、TPC-H SF1000 データセットを使用して、Small、Medium、Large の {{{ .lake }}} Warehouse のパフォーマンスを比較します。各 Warehouse サイズのクエリ実行時間と、ベンチマーク結果を再現するための手順を含みます。
 ---
 
-# TPC-H SF1000 (1TB): {{{ .lake }}} Warehouse Size Benchmark
+# TPC-H SF1000 (1TB): {{{ .lake }}} の Warehouse サイズ別ベンチマーク
 
 このページでは、同じ TPC-H SF1000 ワークロードにおける Small、Medium、Large の {{{ .lake }}} Warehouse を比較します。SF1000 は、約 1TB の TPC-H データを表すためによく使用されます。
 

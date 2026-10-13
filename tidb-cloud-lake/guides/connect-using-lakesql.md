@@ -13,11 +13,11 @@ LakeSQL は、コマンドラインインターフェイスを好み、日常的
 
 LakeSQL には、さまざまなプラットフォームや好みに対応する複数のインストール方法があります。以下のセクションから希望する方法を選択するか、[LakeSQL release page](https://github.com/tidbcloud/lakesql/releases) からインストールパッケージをダウンロードして手動でインストールしてください。
 
-### Shell Script {#shell-script}
+### シェルスクリプト {#shell-script}
 
 LakeSQL では、便利な Shell script によるインストール方法を提供しています。次の 2 つのオプションから選択できます。
 
-#### Default Installation {#default-installation}
+#### デフォルトのインストール {#default-installation}
 
 ユーザーのホームディレクトリ (`~/.lakesql`) に LakeSQL をインストールします。
 
@@ -534,7 +534,7 @@ root@localhost:8000/default> SELECT 'Hello\nWorld' AS message;
 
 LakeSQL の設定を構成するには、次の方法があります。
 
-- `!set <setting> <value>` コマンドを使用します。詳細は、[Utility Commands](#utility-commands) を参照してください。
+- `!set <setting> <value>` コマンドを使用します。詳細は、[ユーティリティコマンド](#utility-commands) を参照してください。
 
 - 設定ファイル `~/.config/lakesql/config.toml` に設定を追加して構成します。これを行うには、ファイルを開き、`[settings]` セクションの下に設定を追加します。次の例では、`max_display_rows` を 10、`max_width` を 100 に設定しています。
 
@@ -553,11 +553,11 @@ root@localhost:8000/default> .max_display_rows 10
 root@localhost:8000/default> .max_width 100
 ```
 
-## Utility Commands {#utility-commands}
+## ユーティリティコマンド {#utility-commands}
 
 LakeSQL には、ワークフローを効率化し、利用体験をカスタマイズするためのさまざまなコマンドが用意されています。以下は、LakeSQL で使用できるコマンドの概要です。
 
-| Command                  | 説明 |
+| コマンド                  | 説明 |
 | ------------------------ | ---------------------------------- |
 | `!exit`                  | LakeSQL を終了します。                     |
 | `!quit`                  | LakeSQL を終了します。                     |

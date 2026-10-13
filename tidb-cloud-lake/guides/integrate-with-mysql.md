@@ -9,22 +9,22 @@ summary: MySQL データ統合を使用すると、MySQL データベースか�
 
 再利用可能な MySQL 接続設定を先に作成する必要がある場合は、[MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md) を参照してください。
 
-## Sync Modes {#sync-modes}
+## 同期モード {#sync-modes}
 
-| Sync Mode      | 説明                                                                                                  |
+| 同期モード      | 説明                                                                                                  |
 |----------------|-------------------------------------------------------------------------------------------------------|
 | Snapshot       | ソーステーブルから一度だけ完全なデータのロードを実行します。初回のデータ移行や定期的な一括インポートに最適です。 |
 | CDC Only       | MySQL binlog からリアルタイムの変更（insert、update、delete）を継続的に取得します。マージ操作には主キーが必要です。 |
 | Snapshot + CDC | 最初に完全なスナップショットを実行し、その後シームレスに継続的な CDC に移行します。ほとんどのユースケースで推奨されます。 |
 
-## Prerequisites {#prerequisites}
+## 前提条件 {#prerequisites}
 
 MySQL データ統合を設定する前に、MySQL インスタンスが次の要件を満たしていることを確認してください。
 
 - **MySQL - Credentials** データソースがすでに作成されていること
 - 対象の MySQL インスタンスに {{{ .lake }}} から到達できること
 
-### Enable Binlog {#enable-binlog}
+### Binlog を有効にする {#enable-binlog}
 
 すべての同期モードで、MySQL のバイナリログを有効にしてください。**CDC Only** および **Snapshot + CDC** では、バイナリログは `ROW` 形式と `FULL` row image を**必ず**使用する必要があります。
 
@@ -38,7 +38,7 @@ binlog-row-image=FULL
 
 設定を変更した後、変更を有効にするために MySQL を再起動してください。
 
-### Create a Dedicated User (Recommended) {#create-a-dedicated-user-recommended}
+### 専用ユーザーを作成する（推奨） {#create-a-dedicated-user-recommended}
 
 データレプリケーションに必要な権限を持つ MySQL ユーザーを作成します。
 
@@ -48,11 +48,11 @@ GRANT SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'lake_cdc'@'%';
 FLUSH PRIVILEGES;
 ```
 
-### Network Access {#network-access}
+### ネットワークアクセス {#network-access}
 
 MySQL インスタンスに {{{ .lake }}} からアクセスできることを確認してください。ファイアウォールルールとセキュリティグループを確認し、MySQL ポートへの受信接続を許可してください。
 
-## Creating a MySQL Integration Task {#creating-a-mysql-integration-task}
+## MySQL 統合タスクの作成 {#creating-a-mysql-integration-task}
 
 ### ステップ 1: Basic Info {#step-1-basic-info}
 
@@ -76,7 +76,7 @@ MySQL インスタンスに {{{ .lake }}} からアクセスできることを�
 
     ![Create Task - Basic Info](/media/tidb-cloud-lake/create-mysql-task-step1-basic-info.png)
 
-#### Snapshot Mode Options {#snapshot-mode-options}
+#### Snapshot モードのオプション {#snapshot-mode-options}
 
 **Snapshot** モードを使用する場合、追加オプションを利用できます。
 
@@ -113,9 +113,9 @@ MySQL インスタンスに {{{ .lake }}} からアクセスできることを�
 
 システムはソースカラムをターゲットテーブルのスキーマに自動的にマッピングします。カラムマッピングを確認し、**Create** をクリックして integration task の作成を完了します。
 
-## Task Behavior by Sync Mode {#task-behavior-by-sync-mode}
+## 同期モードごとのタスクの動作 {#task-behavior-by-sync-mode}
 
-| Sync Mode      | 動作                                                                                          |
+| 同期モード      | 動作                                                                                          |
 |----------------|-----------------------------------------------------------------------------------------------|
 | Snapshot       | 一度実行され、完全なデータのロードが完了すると自動的に停止します。                                         |
 | CDC Only       | 手動で停止するまで継続的に実行され、リアルタイムの変更を取得します。                                         |
@@ -123,19 +123,19 @@ MySQL インスタンスに {{{ .lake }}} からアクセスできることを�
 
 CDC タスクでは、停止時に現在の binlog 位置がチェックポイントとして保存されるため、再起動時に中断した位置から再開できます。
 
-## Sync Mode Details {#sync-mode-details}
+## 同期モードの詳細 {#sync-mode-details}
 
 ### Snapshot {#snapshot}
 
 Snapshot モードでは、ソーステーブルを一度だけ完全に読み取り、すべてのデータを {{{ .lake }}} のターゲットテーブルにロードします。
 
-**Use cases:**
+**ユースケース:**
 
 - MySQL から {{{ .lake }}} への初回データ移行
 - 定期的な完全データ更新
 - WHERE 条件によるフィルタリングを伴う一度限りのデータインポート
 
-**Features:**
+**特長:**
 
 - WHERE 条件によるフィルタリングをサポートし、データの一部のみをロード可能
 - 繰り返しスナップショットのための定期アーカイブスケジュールをサポート
@@ -145,13 +145,13 @@ Snapshot モードでは、ソーステーブルを一度だけ完全に読み�
 
 CDC モードでは、MySQL binlog を継続的に監視し、ソーステーブルのリアルタイムな行レベル変更（INSERT、UPDATE、DELETE）を取得します。
 
-**Use cases:**
+**ユースケース:**
 
 - リアルタイムデータレプリケーション
 - 運用中の MySQL データベースと {{{ .lake }}} の同期維持
 - イベント駆動型データパイプライン
 
-**How it works:**
+**仕組み:**
 
 1. 一意の server ID を使用して MySQL binlog に接続します
 2. 行レベルの変更をリアルタイムで取得します
@@ -167,7 +167,7 @@ CDC モードでは、MySQL binlog を継続的に監視し、ソーステーブ
 
 このモードは両方のアプローチを組み合わせたものです。最初にソーステーブルの完全なスナップショットを実行し、その後シームレスに CDC モードへ移行して継続的に変更を取得します。完全な初期データロードと、その後の継続的なリアルタイム同期を実現できるため、ほとんどのデータ統合シナリオで推奨されるモードです。
 
-## Advanced Configuration {#advanced-configuration}
+## 詳細設定 {#advanced-configuration}
 
 ### Primary Key {#primary-key}
 
