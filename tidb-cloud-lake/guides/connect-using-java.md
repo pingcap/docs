@@ -112,7 +112,7 @@ conn.close();
 
 ## Configuration Reference {#configuration-reference}
 
-以下を含む lake-jdbc ドライバーの完全な設定オプションについては、次を参照してください。
+以下を含む lake-jdbc ドライバーの完全な設定オプションについて:
 
 - 接続文字列パラメーター
 - SSL/TLS 設定

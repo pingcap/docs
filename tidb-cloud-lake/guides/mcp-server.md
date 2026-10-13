@@ -104,7 +104,7 @@ lake-mcp
 | `create_session_sandbox_database` | 現在のセッション用の sandbox データベースを作成します。 |
 | `show_stages` | stage を一覧表示します。 |
 | `list_stage_files` | stage 内のファイルを一覧表示します。 |
-| `create_stage` | sandbox 検証の対象として stage を作成します。 |
+| `create_stage` | sandbox 検証を経て stage を作成します。 |
 | `show_connections` | 接続を一覧表示します。 |
 
 ## セーフモード {#safe-mode}

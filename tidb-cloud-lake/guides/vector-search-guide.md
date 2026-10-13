@@ -117,7 +117,7 @@ FRAME-0102| VID-20250101-001 | 0.9842
 
 距離が小さいほど、より類似しています。`VECTOR INDEX` により、数百万フレーム規模でもレイテンシーを低く保てます。
 
-ベクトル比較の前後で、従来の述語（route、video、sensor view）を追加して Candidate 集合を絞り込めます。
+ベクトル比較の前後で、従来の述語（route、video、sensor view）を追加して 候補集合を絞り込めます。
 
 ```sql
 WITH query_embedding AS (

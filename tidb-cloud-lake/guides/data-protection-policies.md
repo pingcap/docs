@@ -81,7 +81,7 @@ ALTER TABLE customers MODIFY COLUMN ssn SET MASKING POLICY mask_ssn;
 
 RBAC を両方のポリシーと組み合わせることで、作成者、適用者、閲覧者を分離したままにできます。
 
-| Role | 役割 | 表示内容 |
+| ロール | 職務 | 表示内容 |
 |------|-----|------|
 | `security_admin` | ポリシーを作成 / 所有する | テーブルの SELECT なし |
 | `data_engineer` | テーブルを所有し、ポリシーをアタッチする | 全行、phone は生データ |

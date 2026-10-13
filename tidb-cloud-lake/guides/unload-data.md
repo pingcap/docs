@@ -13,7 +13,7 @@ summary: "`COPY INTO` コマンドを使用して、TiDB Cloud Lake からさま
 |--------|---------------|------------------|
 | [**Parquet ファイルをアンロード**](/tidb-cloud-lake/guides/unload-parquet-file.md) | `FILE_FORMAT = (TYPE = PARQUET)` | 分析ワークロード、効率的なストレージ |
 | [**CSV ファイルをアンロード**](/tidb-cloud-lake/guides/unload-csv-file.md) | `FILE_FORMAT = (TYPE = CSV)` | データ交換、幅広い互換性 |
-| [**TSV ファイルをアンロード**](/tidb-cloud-lake/guides/unload-tsv-file.md) | `FILE_FORMAT = (TYPE = TSV)` | タブ区切りデータとカンマ値 |
+| [**TSV ファイルをアンロード**](/tidb-cloud-lake/guides/unload-tsv-file.md) | `FILE_FORMAT = (TYPE = TSV)` | カンマを含む値がある表形式データ |
 | [**NDJSON ファイルをアンロード**](/tidb-cloud-lake/guides/unload-ndjson-file.md) | `FILE_FORMAT = (TYPE = NDJSON)` | 半構造化データ、柔軟なスキーマ |
 | [**Lance データセットをアンロード**](/tidb-cloud-lake/guides/unload-lance-dataset.md) | `FILE_FORMAT = (TYPE = LANCE)` | ML およびベクトルワークロード、Arrow/Lance コンシューマー |
 

@@ -136,7 +136,7 @@ Multi-cluster Warehouse は、ワークロード需要に応じてクラスタ�
 
 デフォルトでは、Warehouse は単一のコンピュートリソースクラスターで構成され、そのサイズに応じて最大数の同時クエリを処理できます。Warehouse で Multi-Cluster を有効にすると、単一クラスターの容量を超えるワークロードに対応するため、複数のクラスター（**Max Clusters** 設定で定義）を動的に追加できるようになります。
 
-同時クエリ数が Warehouse の容量を超えると、追加のクラスターが追加されて余分なロードを処理します。需要がさらに増え続ける場合は、クラスターが 1 つずつ追加されます。クエリ需要が減少すると、**Auto Suspend** の時間より長くアクティビティがないクラスターは自動的にシャットダウンされます。
+同時クエリ数が Warehouse の容量を超えると、追加のクラスターが追加されて増加した負荷を処理します。需要がさらに増え続ける場合は、クラスターが 1 つずつ追加されます。クエリ需要が減少すると、**Auto Suspend** の時間より長くアクティビティがないクラスターは自動的にシャットダウンされます。
 
 ![alt text](/media/tidb-cloud-lake/multi-cluster-how-it-works.png)
 
@@ -166,7 +166,7 @@ Warehouse の作成時、または後から変更する際に MySQL Endpoint を
 
 > **Warning:**
 >
-> MySQL Endpoint を有効にすると、その Warehouse では **Auto Suspend is automatically disabled**（0 に設定）されます。これは、Warehouse がアイドル時でも継続的に実行されたままとなり、コストが発生し続けることを意味します。使用計画を適切に立ててください。
+> MySQL Endpoint を有効にすると、その Warehouse の **Auto Suspend は自動的に無効**（0 に設定）になります。これは、Warehouse がアイドル時でも継続的に実行されたままとなり、コストが発生し続けることを意味します。使用計画を適切に立ててください。
 
 ### MySQL プロトコル経由での接続 {#connecting-via-mysql-protocol}
 
@@ -240,7 +240,7 @@ GRANT ROLE full_access_role TO admin_user;
 
 #### 例 2: 単一データベースへのアクセス {#example-2-single-database-access}
 
-特定の 1 つのデータベースのみにアクセスできるユーザーを付与します。
+特定の 1 つのデータベースのみへのアクセスをユーザーに付与します。
 
 ```sql
 -- Create a role scoped to one database

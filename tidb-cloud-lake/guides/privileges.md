@@ -82,7 +82,7 @@ SHOW GRANTS FOR ROLE writer;
 | 権限         | オブジェクトタイプ                   | 説明                                                                                                                                        |
 |:------------------|:------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
 | ALL               | すべて                           | 指定したオブジェクトタイプに対するすべての権限を付与します。                                                                                           |
-| APPLY MASKING POLICY | Global, Masking Policy     | マスキングポリシーのアタッチ、デタッチ、記述、または削除を行います。*.* に対して付与された場合、被付与者は任意のマスキングポリシーを管理できます。                          |
+| APPLY MASKING POLICY | Global, Masking Policy     | マスキングポリシーのアタッチ、デタッチ、詳細表示、または削除を行います。*.* に対して付与された場合、被付与者は任意のマスキングポリシーを管理できます。                          |
 | APPLY ROW ACCESS POLICY | Global, Row Access Policy | テーブルに行アクセスポリシーを追加または削除し、任意のポリシーに対する DESCRIBE/DROP 操作を許可します。*.* に対して付与された場合、被付与者はすべての行アクセスポリシーを管理できます。 |
 | ALTER             | Global, Database, Table, View | データベース、テーブル、ユーザー、または UDF を変更します。                                                                                                             |
 | CREATE            | Global, Table                 | テーブルまたは UDF を作成します。                                                                                                                            |
@@ -125,7 +125,7 @@ SHOW GRANTS FOR ROLE writer;
 | DROPUSER          | ユーザーを削除します。                                                                                                     |
 | CREATEUSER        | ユーザーを作成します。                                                                                                   |
 | DROPROLE          | ロールを削除します。                                                                                                     |
-| SUPER             | クエリを強制終了します。設定を有効化または無効化します。stage、catalog、または share を操作します。関数を呼び出します。stage への COPY INTO を実行します。 |
+| SUPER             | クエリを強制終了します。設定を SET または UNSET します。stage、catalog、または share を操作します。関数を呼び出します。stage への COPY INTO を実行します。 |
 | USAGE             | {{{ .lake }}} のクエリにのみ接続します。                                                                             |
 | CREATE            | UDF を作成します。                                                                                                    |
 | DROP              | UDF を削除します。                                                                                                      |
@@ -174,7 +174,7 @@ SHOW GRANTS FOR ROLE writer;
 
 | 権限 | 説明 |
 | :--                 | :--                  |
-| SUPER       |    クエリを強制終了します。設定を有効化または無効化します。 |
+| SUPER       |    クエリを強制終了します。設定を SET または UNSET します。 |
 | ALL   |  指定したオブジェクトタイプに対するすべての権限を付与します。 |
 
 ### stage 権限 {#stage-privileges}
