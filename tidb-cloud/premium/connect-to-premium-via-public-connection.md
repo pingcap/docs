@@ -26,7 +26,7 @@ For public connections, {{{ .premium }}} or {{{ .byoc }}} only allows client con
 
 ## Connect to the instance
 
-To connect to a {{{ .premium }}} or {{{ .byoc }}} instance via public connection, take the following steps:
+To connect to your instance via public connection, take the following steps:
 
 <CustomContent plan="premium">
 

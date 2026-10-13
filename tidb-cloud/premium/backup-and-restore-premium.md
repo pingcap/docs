@@ -82,7 +82,8 @@ PITR lets you restore data to any point in time within the retention period. A s
 
 > **Note:**
 >
-> If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
+> - For BYOC instances, TiDB Cloud does not charge for backup or restore operations. You are responsible for the storage and data transfer costs of backup files in your cloud account. A restore operation might provision nodes in your cloud account, and you are responsible for their provisioned vCPU costs.
+> - If you [switch between backup modes](#switch-between-automatic-backup-modes) or reduce the retention period, TiDB Cloud might permanently delete existing automatic backups that are older than the new retention period. This action cannot be undone.
 
 </CustomContent>
 
