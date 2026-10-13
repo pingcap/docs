@@ -21,13 +21,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       Existing TiDB Cloud Essential instances with a configured Max RCU continue to run without any configuration changes. You can keep the current value or clear it to switch to **Elastic Mode**.
 
-      For more information, see [documentation](/tidb-cloud/create-tidb-cluster-serverless.md).
+      For more information, see [documentation](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=essential).
 
     - TiDB Cloud Essential now supports manual backups. These manual backups are retained until you explicitly delete them.
 
       This feature is available for TiDB Cloud Essential instances running TiDB version `CLOUD.202603.x` or later.
 
-      To create a manual backup, see [documentation](/tidb-cloud/backup-and-restore-serverless.md#manual-backups).
+      To create a manual backup, see [documentation](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#manual-backups).
 
 - **TiDB Cloud Premium**
 
@@ -38,7 +38,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       Existing TiDB Cloud Premium instances with a configured Max RCU continue to run without any configuration changes. You can keep the current value or clear it to switch to Elastic Mode.
 
-      For more information, see [documentation](/tidb-cloud/premium/create-tidb-instance-premium.md).
+      For more information, see [documentation](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium).
 
 ## September 29, 2026
 
