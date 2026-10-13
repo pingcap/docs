@@ -171,14 +171,14 @@ Iceberg テーブルへの書き込み時には、以下の {{{ .lake }}} デー
 
 | {{{ .lake }}} 型 | Apache Iceberg™ 型 |
 | --- | --- |
-| BOOLEAN | ブール値 |
-| INT | 整数 |
-| BIGINT | 長整数 |
-| FLOAT | 浮動小数点数 |
-| DOUBLE | 倍精度浮動小数点数 |
-| STRING | 文字列 |
-| DATE | 日付 |
-| TIMESTAMP | タイムスタンプ |
+| BOOLEAN | Boolean |
+| INT | Int |
+| BIGINT | Long |
+| FLOAT | Float |
+| DOUBLE | Double |
+| STRING | String |
+| DATE | Date |
+| TIMESTAMP | Timestamp |
 
 ### データを挿入する {#insert-data}
 

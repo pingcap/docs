@@ -19,7 +19,7 @@ DESC ROW ACCESS POLICY <policy_name>
 
 | 権限 | 説明 |
 |:----------|:------------|
-| APPLY ROW ACCESS POLICY | そのポリシーの所有者でない限り、行アクセスポリシーを記述するにはこの権限が必要です。 |
+| APPLY ROW ACCESS POLICY | そのポリシーの所有者でない限り、行アクセスポリシーの詳細を表示するにはこの権限が必要です。 |
 
 グローバルな `APPLY ROW ACCESS POLICY` 権限、または特定の行アクセスポリシーに対する APPLY/OWNERSHIP のいずれかがあれば、この要件を満たします。
 

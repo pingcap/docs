@@ -1,6 +1,6 @@
 ---
 title: DESCRIBE PIPE
-summary: "{{{ .lake }}} で取り込みパイプラインのプロパティをビューするための DESCRIBE PIPE コマンドの使用方法を学びます。"
+summary: "{{{ .lake }}} で取り込みパイプラインのプロパティを表示するための DESCRIBE PIPE コマンドの使用方法を学びます。"
 ---
 
 # DESCRIBE PIPE

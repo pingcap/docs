@@ -51,7 +51,7 @@ AS
 - 単独タスク、またはタスク DAG のルートタスクにはスケジュールを定義する必要があります。そうしない場合、タスクは EXECUTE TASK を使用して手動実行したときにのみ実行されます。
 - DAG 内の子タスクにはスケジュールを指定できません。
 - タスク作成後、タスク定義で指定したパラメータに基づいて実行されるようにするには、ALTER TASK … RESUME を実行する必要があります。
-- Condition では `<boolean_expression>` の一部のみがサポートされます。
+- WHEN 条件では `<boolean_expression>` の一部のみがサポートされます。
 
     タスクの WHEN 句では、以下がサポートされます。
 
@@ -201,7 +201,7 @@ AS
  INSERT INTO data_warehouse.orders SELECT * FROM staging.orders;
 ```
 
-この例では、`process_orders` という名前のタスクを作成し、**task1** と **task2** が**正常に完了した後**に実行されるよう定義しています。これは、タスクの **Directed Acyclic Graph (DAG)** における**依存関係**を作成するのに役立ちます。このタスクは **etl** Warehouse を使用し、staging 領域からデータ Warehouse にデータを転送します。
+この例では、`process_orders` という名前のタスクを作成し、**task1** と **task2** が**正常に完了した後**に実行されるよう定義しています。これは、タスクの **Directed Acyclic Graph (DAG)** における**依存関係**を作成するのに役立ちます。このタスクは **etl** Warehouse を使用し、ステージング領域からデータウェアハウスにデータを転送します。
 
 > Tip: AFLTER パラメータを使用する場合、SCHEDULE パラメータを設定する必要はありません。
 

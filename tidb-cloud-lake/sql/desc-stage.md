@@ -1,11 +1,11 @@
 ---
 title: DESC STAGE
-summary: stage のプロパティを記述します。
+summary: stage のプロパティを表示します。
 ---
 
 # DESC STAGE
 
-stage のプロパティを記述します。
+stage のプロパティを表示します。
 
 ## 構文 {#syntax}
 
