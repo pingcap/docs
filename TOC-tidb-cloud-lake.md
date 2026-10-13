@@ -113,7 +113,7 @@
   - [Virtual Column](/tidb-cloud-lake/guides/virtual-column.md)
   - [集計インデックス](/tidb-cloud-lake/guides/aggregating-index.md)
   - [Full-Text Index](/tidb-cloud-lake/guides/full-text-index.md)
-  - [Ngram Index](/tidb-cloud-lake/guides/ngram-index.md)
+  - [Ngram インデックス](/tidb-cloud-lake/guides/ngram-index.md)
   - [クエリ結果キャッシュ](/tidb-cloud-lake/guides/query-result-cache.md)
 - セキュリティと信頼性
   - [概要](/tidb-cloud-lake/guides/security-reliability.md)
@@ -171,7 +171,7 @@
       - [Variant](/tidb-cloud-lake/sql/variant.md)
       - [Vector](/tidb-cloud-lake/sql/vector.md)
     - Information Schema
-      - [Information_Schema Tables](/tidb-cloud-lake/sql/information-schema-tables-overview.md)
+      - [Information_Schema テーブル](/tidb-cloud-lake/sql/information-schema-tables-overview.md)
       - [information_schema.columns](/tidb-cloud-lake/sql/information-schema-columns-sql.md)
       - [information_schema.keywords](/tidb-cloud-lake/sql/information-schema-keywords-sql.md)
       - [information_schema.schemata](/tidb-cloud-lake/sql/information-schema-schemata-sql.md)
@@ -358,17 +358,17 @@
       - Ngram インデックス
         - [CREATE NGRAM INDEX](/tidb-cloud-lake/sql/create-ngram-index.md)
         - [DROP NGRAM INDEX](/tidb-cloud-lake/sql/drop-ngram-index.md)
-        - [Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md)
+        - [Ngram インデックス](/tidb-cloud-lake/sql/ngram-index-sql.md)
         - [REFRESH NGRAM INDEX](/tidb-cloud-lake/sql/refresh-ngram-index.md)
       - 空間インデックス
-        - [Spatial Index](/tidb-cloud-lake/sql/spatial-index-overview.md)
+        - [空間インデックス](/tidb-cloud-lake/sql/spatial-index-overview.md)
         - [CREATE SPATIAL INDEX](/tidb-cloud-lake/sql/create-spatial-index.md)
         - [REFRESH SPATIAL INDEX](/tidb-cloud-lake/sql/refresh-spatial-index.md)
         - [DROP SPATIAL INDEX](/tidb-cloud-lake/sql/drop-spatial-index.md)
       - ベクトルインデックス
         - [CREATE VECTOR INDEX](/tidb-cloud-lake/sql/create-vector-index.md)
         - [DROP VECTOR INDEX](/tidb-cloud-lake/sql/drop-vector-index.md)
-        - [Vector Index](/tidb-cloud-lake/sql/vector-index.md)
+        - [ベクトルインデックス](/tidb-cloud-lake/sql/vector-index.md)
         - [REFRESH VECTOR INDEX](/tidb-cloud-lake/sql/refresh-vector-index.md)
       - 仮想カラム
         - [仮想カラム](/tidb-cloud-lake/sql/virtual-column-overview.md)
@@ -384,7 +384,7 @@
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function.md)
         - [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md)
       - 外部関数
-        - [External Function](/tidb-cloud-lake/sql/external-function.md)
+        - [外部関数](/tidb-cloud-lake/sql/external-function.md)
         - [CREATE FUNCTION](/tidb-cloud-lake/sql/create-function.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md)
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function-sql.md)
@@ -440,7 +440,7 @@
         - [CREATE PROCEDURE](/tidb-cloud-lake/sql/create-procedure.md)
         - [DESC PROCEDURE](/tidb-cloud-lake/sql/desc-procedure.md)
         - [DROP PROCEDURE](/tidb-cloud-lake/sql/drop-procedure.md)
-        - [Stored Procedure](/tidb-cloud-lake/sql/stored-procedure.md)
+        - [ストアドプロシージャ](/tidb-cloud-lake/sql/stored-procedure.md)
         - [SHOW PROCEDURES](/tidb-cloud-lake/sql/show-procedures.md)
       - Warehouse
         - [概要](/tidb-cloud-lake/sql/warehouse-overview.md)

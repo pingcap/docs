@@ -197,5 +197,5 @@ DROP MASKING POLICY IF EXISTS email_mask;
 - [User & Role](/tidb-cloud-lake/sql/user-role.md)
 - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
 - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations)
-- [Masking Policy コマンド](/tidb-cloud-lake/sql/masking-policy-sql.md)
+- [マスキングポリシーコマンド](/tidb-cloud-lake/sql/masking-policy-sql.md)
 - [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md)

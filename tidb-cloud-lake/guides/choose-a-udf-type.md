@@ -347,5 +347,5 @@ SQL の `ADDRESS` には公開エンドポイントを含める必要があり�
 ## 関連リソース {#related-resources}
 
 - [ユーザー定義関数](/tidb-cloud-lake/sql/user-defined-function.md)
-- [External Function](/tidb-cloud-lake/sql/external-function.md)
+- [外部関数](/tidb-cloud-lake/sql/external-function.md)
 - [GitHub 上の `tidbcloud/lake-udf`](https://github.com/tidbcloud/lake-udf)

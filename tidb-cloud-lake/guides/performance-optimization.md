@@ -16,7 +16,7 @@ summary: "{{{ .lake }}} は、データクラスタリング、結果キャッ�
 | [**Virtual Column**](/tidb-cloud-lake/guides/virtual-column.md) | JSON/VARIANT データ内のフィールドへのアクセスを自動的に高速化する | 半構造化データ内の特定パスを頻繁にクエリし、サブ秒レベルの応答時間が必要な場合 |
 | [**集計インデックス**](/tidb-cloud-lake/guides/aggregating-index.md) | 一般的な集計結果を事前計算して保存する | 分析ワークロードで、大規模データセットに対する SUM、COUNT、AVG クエリを頻繁に実行する場合 |
 | [**Full-Text Index**](/tidb-cloud-lake/guides/full-text-index.md) | 超高速なセマンティックテキスト検索機能を有効にする | 関連度スコアリングやあいまい一致など、高度なテキスト検索機能が必要な場合 |
-| [**Ngram Index**](/tidb-cloud-lake/guides/ngram-index.md) | ワイルドカードを使ったパターンマッチングを高速化する | 大規模なテキストカラムに対して、LIKE 演算子とワイルドカード（特に '%keyword%'）を使用するクエリがある場合 |
+| [**Ngram インデックス**](/tidb-cloud-lake/guides/ngram-index.md) | ワイルドカードを使ったパターンマッチングを高速化する | 大規模なテキストカラムに対して、LIKE 演算子とワイルドカード（特に '%keyword%'）を使用するクエリがある場合 |
 
 ## 機能の提供状況 {#feature-availability}
 
