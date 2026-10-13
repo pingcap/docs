@@ -281,7 +281,7 @@ FROM employees;
 
 ## Common table expressions
 
-Standard CTEs are supported:
+Non-recursive CTEs are supported:
 
 ```sql
 WITH active_users AS (
