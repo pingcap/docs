@@ -110,7 +110,7 @@ Return the deleted rows:
 
 ```sql
 DELETE FROM users
-WHERE id = 1
+WHERE name = 'Charlie'
 RETURNING *;
 ```
 
