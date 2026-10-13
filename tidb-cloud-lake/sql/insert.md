@@ -39,7 +39,7 @@ INSERT { OVERWRITE [ INTO ] | INTO } <table>
 
 ## 例 {#examples}
 
-### Example-1: Insert Values with OVERWRITE {#example-1-insert-values-with-overwrite}
+### 例 1: OVERWRITE を使用した値の挿入 {#example-1-insert-values-with-overwrite}
 
 この例では、INSERT OVERWRITE 文を使用して employee テーブルを切り捨て、新しいデータを挿入します。これにより、既存のすべてのレコードが、ID 100 の従業員に対して指定された値で置き換えられます。
 
@@ -67,7 +67,7 @@ SELECT * FROM employee;
 └────────────────────────────────────┘
 ```
 
-### Example-2: Insert Query Results {#example-2-insert-query-results}
+### 例 2: クエリ結果の挿入 {#example-2-insert-query-results}
 
 SELECT 文の結果を挿入する場合、カラムの対応付けは SELECT 句内の位置に従います。そのため、SELECT 文内のカラム数は、INSERT 先テーブルのカラム数以上である必要があります。SELECT 文と INSERT 先テーブルでカラムのデータ型が異なる場合は、必要に応じて型変換が実行されます。
 
@@ -149,7 +149,7 @@ SELECT * FROM sales_summary;
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-### Example-3: Insert Default Values {#example-3-insert-default-values}
+### 例 3: デフォルト値の挿入 {#example-3-insert-default-values}
 
 この例では、department や status などのカラムにデフォルト値を設定した "staff_records" というテーブルを作成し、その後データを挿入して、デフォルト値の使用方法を示します。
 
@@ -183,7 +183,7 @@ SELECT * FROM staff_records;
 └───────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Example-4: stage 内のファイルを使った挿入 {#example-4-insert-with-staged-files}
+### 例 4: stage 内のファイルを使った挿入 {#example-4-insert-with-staged-files}
 
 {{{ .lake }}} では、INSERT INTO 文を使用して stage 内のファイルからテーブルにデータを挿入できます。これは、{{{ .lake }}} が [Query Staged Files](/tidb-cloud-lake/sql/stage.md) を実行し、そのクエリ結果をテーブルに取り込める機能によって実現されています。
 
