@@ -77,7 +77,7 @@ Most commonly used PostgreSQL data types are supported, but the following types 
 | PostgreSQL type | Behavior |
 | --- | --- |
 | `SMALLINT` / `INT2` | Accepted, but stored internally as a 32-bit integer. |
-| `REAL` / `FLOAT4` | Accepted, but stored internally as double precision. |
+| `REAL` / `FLOAT4` | Not supported. Use `DOUBLE PRECISION` instead. |
 | `CHAR(n)` / `CHARACTER(n)` | Accepted, but stored internally as `VARCHAR`. Fixed-length padding semantics differ from PostgreSQL. |
 | `INET` | IPv4 and IPv6 host or network addresses are supported for equality and ordering. PostgreSQL network-specific operators and functions are not supported. |
 | `INT4RANGE` | Partially supported. Common range operators are available, but some PostgreSQL range functions are not supported or behave differently. |
