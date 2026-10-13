@@ -54,6 +54,6 @@ summary: このページでは、タスク作成フロー、開始および停�
 
 - [Amazon S3 統合タスク](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
 - [Amazon SQS (S3) 統合タスク (Preview)](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md)
-- [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
-- [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
-- [Kafka Consumer Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md)
+- [MySQL 統合タスク](/tidb-cloud-lake/guides/integrate-with-mysql.md)
+- [PostgreSQL 統合タスク](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
+- [Kafka Consumer 統合タスク (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md)

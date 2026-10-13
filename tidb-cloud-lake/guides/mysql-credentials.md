@@ -39,4 +39,4 @@ summary: このページでは、`MySQL - Credentials` データソースを作�
 
 ## 次のステップ {#next-steps}
 
-このデータソースを作成した後は、これを使用して [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md) を作成できます。
+このデータソースを作成した後は、これを使用して [MySQL 統合タスク](/tidb-cloud-lake/guides/integrate-with-mysql.md) を作成できます。

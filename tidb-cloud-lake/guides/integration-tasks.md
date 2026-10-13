@@ -1,9 +1,9 @@
 ---
-title: Integration Tasks
+title: 統合タスク
 summary: このページでは、{{{ .lake }}} における integration task の概要を説明します。integration task は、ソース設定、ターゲットテーブル、実行時パラメータなど、外部ソースから {{{ .lake }}} へのデータフローの定義に使用されます。
 ---
 
-# Integration Tasks
+# 統合タスク
 
 {{{ .lake }}} の integration task は、ソースから {{{ .lake }}} へどのようにデータが流れるかを定義します。各 task は既存のデータソースを参照し、ソース設定、ターゲットの場所または結果の表示方法、および task タイプ固有の実行時パラメータを指定します。
 
@@ -17,8 +17,8 @@ summary: このページでは、{{{ .lake }}} における integration task の
 | [Amazon SQS (S3) (Preview)](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) | SQS キューから S3 オブジェクト作成イベントを消費し、対応するオブジェクトデータを {{{ .lake }}} に書き込みます。 |
 | [MySQL](/tidb-cloud-lake/guides/integrate-with-mysql.md) | `Snapshot`、`CDC Only`、または `Snapshot + CDC` を使用して MySQL からテーブルデータを同期します。 |
 | [PostgreSQL](/tidb-cloud-lake/guides/integrate-with-postgresql.md) | `Snapshot`、`CDC Only`、または `Snapshot + CDC` を使用して PostgreSQL からテーブルデータを同期します。 |
-| [Kafka Consumer Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md) | Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージに保存します。 |
-| [TiDB Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-tidb.md) | `Snapshot`、`CDC Only`、または `Snapshot + CDC` を使用して TiDB からテーブルデータを同期します。 |
+| [Kafka Consumer 統合タスク (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md) | Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージに保存します。 |
+| [TiDB 統合タスク (Preview)](/tidb-cloud-lake/guides/integrate-with-tidb.md) | `Snapshot`、`CDC Only`、または `Snapshot + CDC` を使用して TiDB からテーブルデータを同期します。 |
 
 ## 読み進め方 {#reading-guide}
 

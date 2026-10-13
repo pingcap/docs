@@ -99,4 +99,4 @@ Role ARN は AssumeRole モデルを使用します。TiDB Cloud Lake は AWS �
 
 ## 次のステップ {#next-steps}
 
-このデータソースを作成した後、それを使用して [TiDB Integration Task](/tidb-cloud-lake/guides/integrate-with-tidb.md) を作成できます。
+このデータソースを作成した後、それを使用して [TiDB 統合タスク](/tidb-cloud-lake/guides/integrate-with-tidb.md) を作成できます。

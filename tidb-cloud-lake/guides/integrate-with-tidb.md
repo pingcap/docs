@@ -1,9 +1,9 @@
 ---
-title: TiDB Integration Task (Preview)
+title: TiDB 統合タスク (Preview)
 summary: フル Snapshot ロード、継続的な CDC、またはその両方を使用して、TiDB クラスターから TiDB Cloud Lake にデータをレプリケートします。
 ---
 
-# TiDB Integration Task (Preview)
+# TiDB 統合タスク (Preview)
 
 TiDB integration task は、TiDB クラスターから TiDB Cloud Lake にデータをレプリケートします。Dumpling エクスポートからのフル `Snapshot` ロード、TiCDC changefeed からの継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートします。
 

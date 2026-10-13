@@ -1,9 +1,9 @@
 ---
-title: Kafka Consumer Integration Task (Preview)
+title: Kafka Consumer 統合タスク (Preview)
 summary: Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージ（tenant Stage）に保存する Kafka Consumer タスクを作成します。
 ---
 
-# Kafka Consumer Integration Task (Preview)
+# Kafka Consumer 統合タスク (Preview)
 
 このページでは、Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージ（tenant Stage）に保存する Kafka Consumer タスクの作成方法について説明します。
 

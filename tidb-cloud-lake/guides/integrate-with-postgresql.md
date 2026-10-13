@@ -1,9 +1,9 @@
 ---
-title: PostgreSQL Integration Task
+title: PostgreSQL 統合タスク
 summary: このページでは、PostgreSQL データベースから {{{ .lake }}} にデータを同期する PostgreSQL integration task を作成する方法について説明します。
 ---
 
-# PostgreSQL Integration Task
+# PostgreSQL 統合タスク
 
 このページでは、PostgreSQL データベースから {{{ .lake }}} にデータを同期する PostgreSQL integration task を作成する方法について説明します。PostgreSQL タスクは、完全な `Snapshot` ロード (load)、継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートします。
 

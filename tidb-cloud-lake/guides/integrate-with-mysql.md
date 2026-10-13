@@ -1,9 +1,9 @@
 ---
-title: MySQL Integration Task
+title: MySQL 統合タスク
 summary: MySQL データ統合を使用すると、MySQL データベースから {{{ .lake }}} にデータをリアルタイムで同期できます。完全なスナップショットのロード、継続的な Change Data Capture (CDC)、またはその両方の組み合わせをサポートしています。
 ---
 
-# MySQL Integration Task
+# MySQL 統合タスク
 
 このページでは、MySQL データベースから {{{ .lake }}} にデータを同期する MySQL integration task を作成する方法について説明します。MySQL タスクは、完全な `Snapshot` ロード、継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートしています。
 

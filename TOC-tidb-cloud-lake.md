@@ -55,8 +55,8 @@
     - [タスク管理](/tidb-cloud-lake/guides/task-management.md)
     - [Amazon S3 統合タスク](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
     - [Amazon SQS (S3) 統合タスク](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
-    - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
+    - [MySQL 統合タスク](/tidb-cloud-lake/guides/integrate-with-mysql.md)
+    - [PostgreSQL 統合タスク](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
     - [Kafka Consumer 統合タスク](/tidb-cloud-lake/guides/integrate-with-kafka.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [TiDB 統合タスク](/tidb-cloud-lake/guides/integrate-with-tidb.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
 - データのロード
@@ -557,7 +557,7 @@
       - [BITMAP_UNION](/tidb-cloud-lake/sql/bitmap-union.md)
       - [BITMAP_XOR](/tidb-cloud-lake/sql/bitmap-xor.md)
       - [BITMAP_XOR_COUNT](/tidb-cloud-lake/sql/bitmap-xor-count.md)
-      - [Bitmap Functions](/tidb-cloud-lake/sql/bitmap-functions.md)
+      - [Bitmap 関数](/tidb-cloud-lake/sql/bitmap-functions.md)
       - [INTERSECT_COUNT](/tidb-cloud-lake/sql/intersect-count.md)
       - [SUB_BITMAP](/tidb-cloud-lake/sql/sub-bitmap.md)
     - 変換関数
@@ -1016,7 +1016,7 @@
       - [QUERY](/tidb-cloud-lake/sql/query.md)
       - [SCORE](/tidb-cloud-lake/sql/score.md)
     - 構造化データ・半構造化データ
-      - [Structured & Semi-Structured Functions](/tidb-cloud-lake/sql/structured-semi-structured-functions.md)
+      - [構造化・半構造化関数](/tidb-cloud-lake/sql/structured-semi-structured-functions.md)
       - JSON 関数
         - [概要](/tidb-cloud-lake/sql/json-functions-overview.md)
         - [CHECK_JSON](/tidb-cloud-lake/sql/check-json.md)
@@ -1091,7 +1091,7 @@
         - [SLICE](/tidb-cloud-lake/sql/slice.md)
         - [UNNEST](/tidb-cloud-lake/sql/unnest.md)
       - オブジェクト関数
-        - [Object Functions](/tidb-cloud-lake/sql/object-functions.md)
+        - [Object 関数](/tidb-cloud-lake/sql/object-functions.md)
         - [OBJECT_CONSTRUCT](/tidb-cloud-lake/sql/object-construct.md)
         - [OBJECT_CONSTRUCT_KEEP_NULL](/tidb-cloud-lake/sql/object-construct-keep-null.md)
         - [OBJECT_DELETE](/tidb-cloud-lake/sql/object-delete.md)
@@ -1142,7 +1142,7 @@
     - ハッシュ関数
       - [BLAKE3](/tidb-cloud-lake/sql/blake.md)
       - [CITY64WITHSEED](/tidb-cloud-lake/sql/city-withseed.md)
-      - [Hash Functions](/tidb-cloud-lake/sql/hash-functions.md)
+      - [ハッシュ関数](/tidb-cloud-lake/sql/hash-functions.md)
       - [MD5](/tidb-cloud-lake/sql/md.md)
       - [SHA](/tidb-cloud-lake/sql/sha.md)
       - [SHA1](/tidb-cloud-lake/sql/sha-sql.md)
