@@ -191,13 +191,13 @@ lake+flight://root:@localhost:8900/database1?connect_timeout=10
 
 ### {{{ .lake }}} への接続 {#connect-to--lake-}
 
-{{{ .lake }}} に接続するベストプラクティスは、{{{ .lake }}} から DSN を取得し、それを環境変数として export することです。DSN を取得するには、次の手順を実行します。
+{{{ .lake }}} に接続するベストプラクティスは、{{{ .lake }}} から DSN を取得し、それを環境変数として設定することです。DSN を取得するには、次の手順を実行します。
 
 1. {{{ .lake }}} にログインし、**Overview** ページで **Connect** をクリックします。
 
 2. 接続したいデータベースと Warehouse を選択します。
 
-3. **Examples** セクションで DSN が自動的に生成されます。DSN の下には、DSN を `LAKESQL_DSN` という名前の環境変数として export し、正しい設定で LakeSQL を起動する LakeSQL スニペットがあります。これをそのままターミナルにコピー＆ペーストできます。
+3. **Examples** セクションで DSN が自動的に生成されます。DSN の下には、DSN を `LAKESQL_DSN` という名前の環境変数として設定し、正しい設定で LakeSQL を起動する LakeSQL スニペットがあります。これをそのままターミナルにコピー＆ペーストできます。
 
     ```bash title='Example'
     export LAKESQL_DSN="lake://cloudapp:******@tn3ftqihs.gw.aws-us-east-2.default.tidbcloud.com:443/information_schema?warehouse=small-xy2t"
