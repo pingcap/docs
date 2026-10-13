@@ -151,7 +151,7 @@ LIMIT 10;
 
 The following joins and related query patterns are supported:
 
-| Join type | Supported |
+| Join or query pattern | Supported |
 | --- | --- |
 | `INNER JOIN` | Yes |
 | `LEFT [OUTER] JOIN` | Yes |
