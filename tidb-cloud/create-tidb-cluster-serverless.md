@@ -57,7 +57,7 @@ If you have the `Organization Owner` or `Project Owner` role, you can create a T
 4. If you select **Starter** and PostgreSQL preview access is enabled for your organization, the **Compatibility Mode** section is displayed. Choose one of the following compatibility modes:
 
     - **MySQL Compatible**: the default compatibility mode for TiDB Cloud Starter.
-    - **PostgreSQL Compatible**: provides PostgreSQL compatibility and is currently in limited public preview. This compatibility mode is available only for TiDB Cloud Starter.
+    - **PostgreSQL Compatible**: provides PostgreSQL compatibility and is currently in public preview. This compatibility mode is available only for TiDB Cloud Starter.
 
 5. Enter a name for your instance, and then choose a cloud provider and a region where you want to host your instance.
 
@@ -69,23 +69,11 @@ If you have the `Organization Owner` or `Project Owner` role, you can create a T
 
         - You can update the spending limit for your TiDB Cloud Starter instance. If the spending limit is set to 0, the instance remains free. If the spending limit is greater than 0, you need to add a credit card before creating the instance.
         - By default, each organization can create up to five free MySQL-compatible Starter instances. To create additional instances, you must add a credit card and specify a spending limit.
-        - Each of the first five MySQL-compatible Starter instances in your organization includes the following monthly free quota:
-            - 5 GiB of row-based storage
-            - 5 GiB of columnar storage
-            - 50 million Request Units (RUs)
 
     - **PostgreSQL-compatible Starter**:
 
-        PostgreSQL-compatible Starter instances are currently free during the limited public preview.
-
-        For the first 10 PostgreSQL-compatible Starter instances in your organization, each instance includes the following monthly free quota:
-
-        - 50 GiB of row-based storage
-        - 500 million Request Units (RUs)
-
-        When the free quota is exhausted, new connection attempts are rejected. Existing connections remain active but are throttled.
-
-        If you need more quota, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+        During Public Preview, each organization can create up to 10 free PostgreSQL-compatible Starter instances. Creating additional instances may result in usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact support@pingcap.com to discuss your requirements.
+        
 
     - **Essential**:
 

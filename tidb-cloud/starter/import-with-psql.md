@@ -46,6 +46,18 @@ It is recommended to use a `pg_dump` version that is from the same major Postgre
 
 PostgreSQL-compatible {{{ .starter }}} supports common PostgreSQL workloads, but some PostgreSQL features are unsupported or behave differently. Before migration, check whether your source database depends on these features.
 
+### Check database roles and permissions
+
+If your application uses row-level security (RLS), run the following query on the source PostgreSQL database to identify roles referenced by RLS policies:
+
+```sql
+SELECT DISTINCT r AS policy_role
+FROM pg_policies, unnest(roles) AS r
+WHERE r <> 'public';
+```
+
+Make sure the required application roles are created in the target instance before importing the schema.
+
 ### Check unsupported schema features
 
 Run the following queries against the source PostgreSQL database:
@@ -71,6 +83,23 @@ FROM pg_publication;
 If any of these queries return a non-zero count, review the affected objects before migration.
 
 PostgreSQL-compatible {{{ .starter }}} does not support table partitioning, table inheritance, foreign data wrappers, or logical replication.
+
+### Check deferred foreign-key constraints
+
+PostgreSQL-compatible {{{ .starter }}} does not support deferred foreign-key enforcement. Foreign-key constraints declared as `DEFERRABLE` are enforced immediately.
+
+Before migration, run the following query against the source PostgreSQL database to identify deferrable foreign-key constraints:
+
+```sql
+SELECT
+    conrelid::regclass AS table_name,
+    conname AS constraint_name
+FROM pg_constraint
+WHERE contype = 'f'
+  AND condeferrable;
+```
+
+Review any application transactions that depend on deferred foreign-key enforcement before migrating.
 
 ### Check extensions
 
@@ -121,6 +150,13 @@ For a PostgreSQL database migration, import the schema before importing the data
 > Do not import a standard full `pg_dump` file into PostgreSQL-compatible {{{ .starter }}} in a single pass. A standard PostgreSQL dump can add primary keys and other constraints after table data is loaded, while PostgreSQL-compatible {{{ .starter }}} might not be able to add a primary key to a non-empty table.
 >
 > Import the schema first while the tables are empty, and then import the data.
+>
+> This migration method does not support zero-downtime migration or logical replication. Plan a maintenance window for the final migration and application cutover.
+>
+> For the final migration, stop all writes and schema changes to the source database and wait for any in-progress operations to complete before exporting the schema and data. Keep the source database unchanged until migration validation and application cutover are complete.
+>
+> You can perform a trial migration without stopping source writes, but changes made after the export begins might not be included in the target database.
+
 
 ### Step 1: Export the schema
 
@@ -166,6 +202,23 @@ grep -i "CREATE RULE" schema.sql
 Remove or rewrite unsupported statements before importing the schema.
 
 Also review the schema for unsupported data types, index access methods, PL/pgSQL constructs, and extensions. For more information, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+
+#### Row-level security
+
+Keep the row-level security (RLS) statements in the exported schema, including `ENABLE ROW LEVEL SECURITY`, `FORCE ROW LEVEL SECURITY`, and `CREATE POLICY`.
+
+The `pg_dump` utility does not export database roles. If an RLS policy references a specific role, create that role in the target instance before importing the schema.
+
+For example:
+
+```shell
+psql "<TARGET_DATABASE_URL>" \
+  -c "CREATE ROLE app_user LOGIN PASSWORD '<PASSWORD>'"
+```
+
+The `--no-owner` option omits object ownership statements, and `--no-privileges` omits `GRANT` and `REVOKE` statements.
+
+After importing the schema and data, grant the required table and sequence privileges to the application roles.
 
 #### SERIAL and identity columns
 
@@ -233,6 +286,36 @@ psql "<TARGET_DATABASE_URL>" \
 
 Make sure that the target table exists before importing the data.
 
+#### Restore sequence values
+
+When migrating individual tables using `\copy`, sequence values are not transferred automatically.
+
+If your table uses `SERIAL`, `BIGSERIAL`, or an explicitly created sequence, restore the sequence state after importing the data to prevent duplicate key errors during subsequent inserts.
+
+While source writes are stopped, run the following query against the source PostgreSQL database to retrieve the sequence state:
+
+```sql
+
+SELECT last_value, is_called
+
+FROM public.users_id_seq;
+
+```
+
+After importing the table data, restore the sequence state in the target instance using `setval()`.
+
+For example, if the source sequence has `last_value = 3` and `is_called = true`, run:
+
+```sql
+
+SELECT setval('public.users_id_seq', 3, true);
+
+```
+
+Replace the values with the actual `last_value` and `is_called` values retrieved from the source database.
+
+Repeat this process for each sequence associated with the migrated tables.
+
 > **Note:**
 >
 > The SQL-level `COPY (SELECT ...) TO STDOUT` syntax is not supported. Use the table form of `\copy` instead.
@@ -284,7 +367,7 @@ Pay particular attention to application logic that depends on PostgreSQL feature
 Keep the following limitations in mind when planning a migration:
 
 - During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` with `pg_dump` `COPY` data streams and table-form `\copy`.
-- PostgreSQL logical replication and streaming replication are not supported. If the source database continues to receive writes during migration, plan an appropriate maintenance window for the final cutover.
+- PostgreSQL logical replication and streaming replication are not supported. For the final migration, stop source writes before exporting the schema and data, and keep them paused until migration validation and application cutover are complete.
 - The `COPY` protocol supports text and CSV formats. Binary `COPY` is not supported.
 - The SQL-level `COPY (SELECT ...) TO STDOUT` syntax is not supported. For individual-table migration, use the table form of `\copy`.
 - Some PostgreSQL schema objects, data types, index access methods, extensions, and PL/pgSQL constructs are unsupported or behave differently. Review [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) before migration.

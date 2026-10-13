@@ -72,9 +72,9 @@ To learn more about the RU consumption of different resources (including read, w
 
 > **Note:**
 >
-> PostgreSQL-compatible TiDB Cloud Starter is currently in limited public preview.
+> PostgreSQL-compatible TiDB Cloud Starter is currently in public preview.
 
-PostgreSQL-compatible {{{ .starter }}} instances are currently free during the limited public preview.
+PostgreSQL-compatible {{{ .starter }}} instances are currently free during the public preview.
 
 For the first 10 PostgreSQL-compatible {{{ .starter }}} instances in your organization, TiDB Cloud provides the following monthly free quota for each instance:
 
@@ -82,7 +82,7 @@ For the first 10 PostgreSQL-compatible {{{ .starter }}} instances in your organi
 
 - Request Units (RUs): 500 million RUs per month
 
-When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, new connection attempts are rejected. Existing connections remain active but are throttled.
+When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact support@pingcap.com to discuss your requirements.
 
 
 ### Instance Capacity Plan

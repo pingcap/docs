@@ -10,9 +10,7 @@ This tutorial guides you through creating and connecting to a PostgreSQL-compati
 
 > **Note:**
 >
-> PostgreSQL-compatible TiDB Cloud Starter is currently available in limited public preview. To access this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request access for your organization.
->
-> After access is enabled, you can create PostgreSQL-compatible {{{ .starter }}} instances from the TiDB Cloud console.
+> PostgreSQL-compatible TiDB Cloud Starter is currently available in public preview. 
 
 Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
@@ -37,14 +35,14 @@ To create a {{{ .starter }}} instance, follow these steps:
 
     > **Note:**
     >
-    > PostgreSQL-compatible {{{ .starter }}} instances are currently free during the limited public preview.
+    > PostgreSQL-compatible {{{ .starter }}} instances are currently free during the public preview.
     >
     > The first 10 PostgreSQL-compatible {{{ .starter }}} instances in your organization are eligible for the free quota. Each eligible instance includes the following monthly free quota:
     >
     > + 50 GiB of row-based storage
     > + 500 million Request Units (RUs)
     >
-    > When the free quota is exhausted, new connection attempts are rejected. Existing connections remain active but are throttled.
+    > When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact support@pingcap.com to discuss your requirements.
 
 ## Step 2: Connect to your {{{ .starter }}} instance
 

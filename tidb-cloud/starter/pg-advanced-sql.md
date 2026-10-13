@@ -26,6 +26,29 @@ Supported constructs include:
 - `RETURN`
 - Dynamic `EXECUTE`, including `INTO` and `USING`
 
+### Prepare sample tables
+
+Some examples in this document use the `users`, `orders`, and `audit_log` tables. Before running these examples, create the following sample tables:
+
+```sql
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    active BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE orders (
+    id BIGSERIAL PRIMARY KEY,
+    item TEXT NOT NULL
+);
+
+CREATE TABLE audit_log (
+    table_name TEXT,
+    action TEXT,
+    changed_at TIMESTAMPTZ
+);
+```
+
 ### Create a PL/pgSQL function
 
 For example:

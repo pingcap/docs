@@ -25,6 +25,7 @@ The following limits apply:
 | Pending portals per connection | 32 |
 | Identifier length | 63 bytes |
 | Encoding | UTF-8 only |
+| `NUMERIC` fractional digits | Up to 28 |
 
 The statement timeout can be changed for the current session.
 

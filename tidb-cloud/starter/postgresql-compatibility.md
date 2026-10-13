@@ -76,13 +76,13 @@ Most commonly used PostgreSQL data types are supported, but the following types 
 
 | PostgreSQL type | Behavior |
 | --- | --- |
-| `SMALLINT` / `INT2` | Accepted, but stored internally as a 32-bit integer. |
-| `REAL` / `FLOAT4` | Accepted, but stored internally as double precision. |
-| `CHAR(n)` / `CHARACTER(n)` | Accepted, but stored internally as `VARCHAR`. Fixed-length padding semantics differ from PostgreSQL. |
+| `SMALLINT` / `INT2` | Accepted and stored internally as a 32-bit integer. The PostgreSQL `SMALLINT` range (-32768 to 32767) is not enforced. |
+| `REAL` / `FLOAT4` | Accepted and stored internally as `DOUBLE PRECISION`. PostgreSQL single-precision floating-point semantics are not preserved. |
+| `CHAR(n)` / `CHARACTER(n)` | Accepted and stored internally as `VARCHAR`. Values are not blank-padded as in PostgreSQL, so comparisons against space-padded strings might produce different results. |
 | `INET` | IPv4 and IPv6 host or network addresses are supported for equality and ordering. PostgreSQL network-specific operators and functions are not supported. |
-| `INT4RANGE` | Partially supported. Common range operators are available, but some PostgreSQL range functions are not supported or behave differently. |
+| `INT4RANGE` | Partially supported. Equality (`=`) and overlap (`&&`) operators are supported. Containment operators (`@>` and `<@`) are not supported. PostgreSQL range accessor functions, such as `upper()` and `isempty()`, are unavailable or do not behave as expected. |
 | Composite types | Can be declared and written using text literals, but values cannot be read field by field. |
-| `BIT` / `VARBIT` | Accepted with compatibility differences. In particular, over-length values can be silently truncated instead of returning an error. |
+| `BIT` / `VARBIT` | Accepted with compatibility differences. Values use `BYTEA` semantics, and the declared bit length is not enforced. Over-length values are preserved rather than rejected or truncated. PostgreSQL bit-string literals such as `B'1010'` are not supported. |
 | Arrays | One-dimensional arrays are supported. Multi-dimensional arrays are not supported. |
 
 The following PostgreSQL data types are not supported:
@@ -102,11 +102,17 @@ The following PostgreSQL data types are not supported:
 Most common PostgreSQL DDL is supported, but some operations differ:
 
 + `CREATE TABLE AS` and `SELECT INTO` are supported, but the resulting table contains an additional `_rowid` primary key column that is visible in `SELECT *`.
-+ `ALTER SEQUENCE` supports only ownership-related operations such as `OWNER TO` and `OWNED BY`. Other clauses, including `RESTART` and `INCREMENT BY`, are not supported.
++ `ALTER SEQUENCE` supports only ownership-related operations such as `OWNER TO` and `OWNED BY`. Other clauses, including `RESTART`, `INCREMENT BY`, and `RENAME TO`, are not supported. To change a sequence's current value, use `setval()`.
 + `TRUNCATE` supports only the basic single-table form. Multi-table `TRUNCATE` and optional clauses such as `CASCADE`, `RESTRICT`, `ONLY`, `RESTART IDENTITY`, and `CONTINUE IDENTITY` are not supported.
-+ Foreign keys and the `CASCADE`, `SET NULL`, `SET DEFAULT`, `RESTRICT`, and `NO ACTION` referential actions are supported. However, dropping a referenced table does not perform the same foreign-key dependency check as PostgreSQL and can leave a dangling foreign-key constraint.
++ Foreign keys support the `CASCADE`, `SET NULL`, `SET DEFAULT`, `RESTRICT`, and `NO ACTION` referential actions.
++ Foreign-key dependency handling differs from PostgreSQL. Dropping a referenced table, including with `CASCADE` or `RESTRICT`, can leave dangling foreign-key constraints. These constraints can cause queries against `pg_constraint` and `information_schema.referential_constraints` to fail. To avoid this issue, drop the referencing foreign-key constraints before dropping the referenced table.
++ Deferred foreign-key enforcement is not supported. Foreign-key constraints declared with `DEFERRABLE INITIALLY DEFERRED` are accepted but enforced immediately rather than at transaction commit. Applications that rely on deferred foreign-key checks might experience transaction failures.
 + Enum types are supported, but enum values sort by label text rather than declaration order.
 + PostgreSQL table partitioning and table inheritance are not supported.
+
+> **Note:**
+>
+> If a dangling foreign-key constraint already exists, drop the constraint using `ALTER TABLE ... DROP CONSTRAINT` or drop the referencing table. Recreating the referenced table with the same name does not restore the original foreign-key dependency.
 
 ### Indexes
 
@@ -145,6 +151,12 @@ The following limitations apply:
 + Cursor and `REFCURSOR` operations are not supported.
 + Exception handling with `BEGIN ... EXCEPTION` is supported only in `DO` blocks.
 + Nested procedural blocks are supported only in `DO` blocks.
+
+> **Note:**
+>
+> Some PL/pgSQL statements are validated only when a function is called, rather than when it is created. As a result, `CREATE FUNCTION` might succeed even if the function contains unsupported constructs.
+>
+> To verify compatibility, test your functions by executing them after creation.
 
 ### Triggers
 
