@@ -158,7 +158,7 @@ The following joins and related query patterns are supported:
 | `RIGHT [OUTER] JOIN` | Yes |
 | `FULL [OUTER] JOIN` | Yes |
 | `CROSS JOIN` | Yes |
-| `LATERAL JOIN` | Yes |
+| `LATERAL` subquery | Yes |
 | Semi join using `EXISTS` | Yes |
 | Anti join using `NOT EXISTS` | Yes |
 
