@@ -188,7 +188,7 @@ CREATE STAGE iam_external_stage
 3. API token を設定する際に、必要な権限を選択し、必要に応じて **TTL** を設定します。
 4. **Create API Token** をクリックして Access Key ID と Secret Access Key を取得します。これらをコピーし、安全な場所に保存します。
 
-#### Step 3: 外部 stage を作成する {#step-3-create-external-stage}
+#### ステップ 3: 外部 stage を作成する {#step-3-create-external-stage}
 
 作成した Access Key ID と Secret Access Key を使用して、*r2_stage* という名前の外部 stage を作成します。
 

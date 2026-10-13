@@ -332,7 +332,7 @@ COPY INTO は、以下のカラムを含むデータロード結果のサマリ�
 
 外部ストレージソースでは、COPY 文で認証情報を直接指定する代わりに、`CONNECTION_NAME` パラメータを使用して事前作成済みの接続を利用することを推奨します。この方法により、セキュリティ、管理性、再利用性が向上します。接続の作成方法の詳細については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 
-### Example 1: Loading from Stages {#example-1-loading-from-stages}
+### 例 1: stage からのロード {#example-1-loading-from-stages}
 
 以下の例は、さまざまな種類の stage から {{{ .lake }}} にデータをロードする方法を示しています。
 
