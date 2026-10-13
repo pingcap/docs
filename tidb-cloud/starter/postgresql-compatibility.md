@@ -68,7 +68,7 @@ SHOW transaction_isolation;
 
 The effective isolation level is `REPEATABLE READ`.
 
-If your application relies on true serializability, use explicit row locking such as `SELECT ... FOR UPDATE` or database constraints to protect application invariants.
+If your application relies on PostgreSQL `SERIALIZABLE` semantics, review and redesign your transaction logic as needed. Explicit row locking or database constraints can protect specific invariants, but they do not provide PostgreSQL Serializable Snapshot Isolation (SSI) semantics.
 
 ### Data types
 
