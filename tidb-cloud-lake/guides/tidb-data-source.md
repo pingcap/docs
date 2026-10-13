@@ -42,7 +42,7 @@ TiDB Cloud は、完全スナップショット (Dumpling) と増分変更 (TiCD
 
 Role ARN は AssumeRole モデルを使用します。TiDB Cloud Lake は AWS アカウント内の IAM Role を引き受けて一時的な認証情報を取得するため、静的キーを TiDB Cloud Lake に渡す必要がありません。
 
-データソースを保存する前に、IAM Role の信頼ポリシーで 2 つのプラットフォームロール (TiDB Cloud Lake のセットアップおよび検証ロール、ならびに TiDB Cloud Lake のデータロード用ロール) を信頼し、`sts:ExternalId` 条件に対応する External ID を指定する必要があります。完全な信頼ポリシー設定については、[AWS IAM Role による認証](https://docs.pingcap.com/tidbcloudlake/authenticate-with-aws-iam-role/) を参照してください。
+データソースを保存する前に、IAM Role の信頼ポリシーで 2 つのプラットフォームロール (TiDB Cloud Lake のセットアップおよび検証ロール、ならびに TiDB Cloud Lake のデータロード用ロール) を信頼し、`sts:ExternalId` 条件に対応する外部 ID を指定する必要があります。完全な信頼ポリシー設定については、[AWS IAM Role による認証](https://docs.pingcap.com/tidbcloudlake/authenticate-with-aws-iam-role/) を参照してください。
 
 | フィールド | 必須 | 説明 |
 | ------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
