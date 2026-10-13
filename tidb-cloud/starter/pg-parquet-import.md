@@ -73,7 +73,7 @@ The following common Parquet types are mapped to PostgreSQL-compatible types:
 | `BOOLEAN` | `BOOLEAN` |
 | `INT32` | `INTEGER` |
 | `INT64` | `BIGINT` |
-| `FLOAT` | `REAL` |
+| `FLOAT` | `DOUBLE PRECISION` |
 | `DOUBLE` | `DOUBLE PRECISION` |
 | `BYTE_ARRAY` with UTF-8 annotation | `TEXT` |
 | Binary `BYTE_ARRAY` | `BYTEA` |
