@@ -17,7 +17,7 @@ summary: "参照しやすいように機能別に整理した、{{{ .lake }}} �
 
 ## 関連トピック {#related-topics}
 
-- [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md)
+- [行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md)
 - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#row-access-policy-operations)
 - [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md)
 
