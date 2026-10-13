@@ -41,7 +41,7 @@ To restore the default owner behavior:
 ALTER TABLE todos NO FORCE ROW LEVEL SECURITY;
 ```
 
-Roles with the `BYPASSRLS` attribute bypass RLS even when `FORCE ROW LEVEL SECURITY` is enabled.
+Superusers and roles with the `BYPASSRLS` attribute bypass RLS even when `FORCE ROW LEVEL SECURITY` is enabled. `FORCE ROW LEVEL SECURITY` subjects a table owner to policies only when the owner is not a superuser and does not have `BYPASSRLS`.
 
 ## Create a policy
 

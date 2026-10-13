@@ -26,7 +26,7 @@ PostgreSQL-compatible {{{ .starter }}} instances support the following PostgreSQ
 + **Transactions**: `BEGIN`, `COMMIT`, `ROLLBACK`, savepoints, and autocommit.
 + **Data types**: Boolean, integer, bigint, double precision, numeric, text, varchar, bytea, timestamp/timestamptz, date, time, interval, UUID, JSON/JSONB, arrays, serial/bigserial, vector, tsvector, and tsquery.
 + **PL/pgSQL**: Functions, procedures, control flow, and dynamic `EXECUTE`, with some limitations. `WHILE`, `FOREACH`, and cursors are not supported. `EXCEPTION` and nested blocks require a `DO` block.
-+ **Triggers**: `BEFORE` and `AFTER` triggers on `INSERT`, `UPDATE`, and `DELETE`, with some limitations. For more information, see [PL/pgSQL](#plpgsql).
++ **Triggers**: `BEFORE` and `AFTER` triggers on `INSERT`, `UPDATE`, and `DELETE`, with some limitations. For more information, see [Triggers](#triggers).
 + **Indexes**: B-tree (default), GIN, partial indexes, expression indexes, `CREATE INDEX CONCURRENTLY`, and HNSW vector indexes. GiST, Hash, SP-GiST, and BRIN indexes are not supported.
 
 ## Unsupported features
@@ -68,7 +68,7 @@ SHOW transaction_isolation;
 
 The effective isolation level is `REPEATABLE READ`.
 
-If your application relies on true serializability, use explicit row locking such as `SELECT ... FOR UPDATE` or database constraints to protect application invariants.
+If your application relies on PostgreSQL `SERIALIZABLE` semantics, review and redesign your transaction logic as needed. Explicit row locking or database constraints can protect specific invariants, but they do not provide PostgreSQL Serializable Snapshot Isolation (SSI) semantics.
 
 ### Data types
 
@@ -129,11 +129,11 @@ The following PostgreSQL index access methods are not supported:
 
 HNSW is the supported approximate nearest-neighbor index type for vector workloads. It has additional structural and query-shape requirements.
 
-PostgreSQL vector index types that are not provided by TiDB Cloud, such as IVFFlat, are not available.
+Other pgvector index types that are not provided by TiDB Cloud, such as IVFFlat, are not available.
 
 ### `COPY`
 
-`COPY FROM` supports text and CSV formats over the PostgreSQL wire protocol.
+`COPY ... FROM STDIN` supports text and CSV formats over the PostgreSQL wire protocol.
 
 The following PostgreSQL `COPY` capabilities are not supported:
 
@@ -172,7 +172,7 @@ PostgreSQL-compatible {{{ .starter }}} instances provide a predefined set of ext
 
 Arbitrary custom or third-party PostgreSQL extensions cannot be installed. Only extensions explicitly supported by TiDB Cloud are available.
 
-For the list of available extensions and extension-specific limitations, see [Supported PostgreSQL extensions](<link>).
+For the list of available extensions and extension-specific limitations, see [Supported PostgreSQL extensions](/tidb-cloud/starter/pg-extensions-overview.md).
 
 ### Replication
 

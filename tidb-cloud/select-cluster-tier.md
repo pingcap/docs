@@ -52,7 +52,7 @@ The free plan is ideal for developers and small teams getting started with {{{ .
 - **Storage**: Includes a monthly free storage quota.
 - **Request Units**: Includes [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) for database operations.
 
-### MySQL-compatible Starter
+### MySQL-compatible Starter {#usage-quota}
 
 For each organization in TiDB Cloud, you can create a maximum of five free MySQL-compatible {{{ .starter }}} instances by default. To create more {{{ .starter }}} instances, you need to add a credit card and specify a spending limit.
 

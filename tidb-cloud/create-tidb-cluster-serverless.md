@@ -38,7 +38,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 >
 > PostgreSQL-compatible TiDB Cloud Starter is currently available in limited public preview. To request access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
 >
-> After preview access is enabled, the **Compatibility Mode** section is displayed when you create a Starter instance.
+> After preview access is enabled, the **Compatibility Mode** section is displayed when you create a TiDB Cloud Starter instance.
 
 ## Steps
 

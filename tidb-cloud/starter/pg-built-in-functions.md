@@ -363,7 +363,7 @@ Common UUID, encoding, and hashing functions include:
 | `ENCODE(bytea, format)` | Encodes binary data. |
 | `DECODE(text, format)` | Decodes text into binary data. |
 
-Additional UUID functions are provided through the `uuid-ossp` compatibility extension.
+Additional `uuid-ossp`-compatible UUID functions are built in, and `CREATE EXTENSION "uuid-ossp"` can be used to register the extension metadata.
 
 ## Sequence functions
 

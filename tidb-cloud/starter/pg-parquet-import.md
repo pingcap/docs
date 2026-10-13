@@ -73,15 +73,15 @@ The following common Parquet types are mapped to PostgreSQL-compatible types:
 | `BOOLEAN` | `BOOLEAN` |
 | `INT32` | `INTEGER` |
 | `INT64` | `BIGINT` |
-| `FLOAT` | `REAL` |
+| `FLOAT` | `DOUBLE PRECISION` |
 | `DOUBLE` | `DOUBLE PRECISION` |
 | `BYTE_ARRAY` with UTF-8 annotation | `TEXT` |
 | Binary `BYTE_ARRAY` | `BYTEA` |
 | `INT96` timestamp | `TIMESTAMP` |
 | `DATE` logical type | `DATE` |
-| `TIME` logical type | `TIME` |
+| `TIME` logical type | Not supported |
 | `TIMESTAMP` logical type | `TIMESTAMP` |
-| `DECIMAL` logical type | `NUMERIC` |
+| `DECIMAL` logical type | `NUMERIC`, limited to Decimal128 with precision at most 28 |
 
 Before importing data, verify that the Parquet schema is compatible with the target table schema.
 

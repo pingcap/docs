@@ -21,7 +21,7 @@ Insert multiple rows:
 ```sql
 INSERT INTO users (name, email)
 VALUES
-    ('Alice', 'alice@example.com'),
+    ('Charlie', 'charlie@example.com'),
     ('Bob', 'bob@example.com');
 ```
 
@@ -103,14 +103,14 @@ Delete rows matching a condition:
 
 ```sql
 DELETE FROM users
-WHERE id = 1;
+WHERE name = 'Bob';
 ```
 
 Return the deleted rows:
 
 ```sql
 DELETE FROM users
-WHERE id = 1
+WHERE name = 'Charlie'
 RETURNING *;
 ```
 
@@ -127,7 +127,7 @@ Foreign keys support the following `ON DELETE` and `ON UPDATE` actions:
 For example:
 
 ```sql
-CREATE TABLE orders (
+CREATE TABLE orders_with_cascade (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT REFERENCES users(id) ON DELETE CASCADE
 );
@@ -149,16 +149,16 @@ LIMIT 10;
 
 ## Joins
 
-The following join forms are supported:
+The following joins and related query patterns are supported:
 
-| Join type | Supported |
+| Join or query pattern | Supported |
 | --- | --- |
 | `INNER JOIN` | Yes |
 | `LEFT [OUTER] JOIN` | Yes |
 | `RIGHT [OUTER] JOIN` | Yes |
 | `FULL [OUTER] JOIN` | Yes |
 | `CROSS JOIN` | Yes |
-| `LATERAL JOIN` | Yes |
+| `LATERAL` subquery | Yes |
 | Semi join using `EXISTS` | Yes |
 | Anti join using `NOT EXISTS` | Yes |
 
@@ -281,7 +281,7 @@ FROM employees;
 
 ## Common table expressions
 
-Standard CTEs are supported:
+Non-recursive CTEs are supported:
 
 ```sql
 WITH active_users AS (
@@ -318,7 +318,7 @@ FROM category_tree;
 
 Recursive CTEs are limited to 1,000 iterations.
 
-Use a unique name for each CTE definition in the same `WITH` list. For compatibility details, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
+Use a unique name for each CTE definition in the same `WITH` list. For recursive CTE limits, see [PostgreSQL Limits and Constraints](/tidb-cloud/starter/pg-limits-constraints.md).
 
 ### Data-modifying CTEs
 
