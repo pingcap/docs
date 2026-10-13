@@ -142,9 +142,21 @@ In addition to automatic backups, {{{ .premium }}} and {{{ .byoc }}} support man
 
 - **Retention and deletion**: unlike automatic backups, manual backups are not automatically deleted based on retention policies. They are retained until you explicitly delete them. If you delete the instance, its manual backups move to the recycle bin and remain there until you manually delete them.
 
+<CustomContent plan="premium">
+
 - **Storage location**: manual backups are stored in cloud storage managed by TiDB.
 
 - **Cost**: manual backups incur additional charges because they are retained until you delete them.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+- **Storage location**: manual backups are stored in your cloud account.
+
+- **Cost**: TiDB Cloud does not charge for backup or restore operations. You are responsible for the storage and data transfer costs of backup files in your cloud account.
+
+</CustomContent>
 
 - **Limitations**: manual backups do not support point-in-time recovery (PITR) or partial backups (for example, table-level or database-level backups). You cannot restore a manual backup to an existing instance. Each restore operation creates a new instance.
 
@@ -156,7 +168,7 @@ In addition to automatic backups, {{{ .premium }}} and {{{ .byoc }}} support man
 
 2. In the upper-right corner, click **...**, and then click **Manual Backup**.
 
-3. Confirm the operation. The backup is stored in TiDB Cloud and will appear in the **Backup List**.
+3. Confirm the operation. After the backup is created, it appears in the **Backup List**.
 
 You can restore a manual backup directly in the TiDB Cloud console without providing external storage credentials.
 

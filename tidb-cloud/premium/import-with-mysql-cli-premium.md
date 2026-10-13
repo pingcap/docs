@@ -9,13 +9,13 @@ This document describes how to import data into {{{ .premium }}} or {{{ .byoc }}
 
 > **Tip:**
 >
-> - Logical imports are best suited for relatively small SQL or CSV files. For faster, parallel imports from cloud storage or to process multiple files from [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) exports, see [Import CSV Files from Cloud Storage into {{{ .premium }}}](/tidb-cloud/premium/import-csv-files-premium.md).
+> - Logical imports are best suited for relatively small SQL or CSV files. For faster, parallel imports from cloud storage or to process multiple files from [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) exports, see [Import CSV Files from Cloud Storage into {{{ .premium }}} or {{{ .byoc }}}](/tidb-cloud/premium/import-csv-files-premium.md).
 > - For {{{ .starter }}} or Essential, see [Import Data into {{{ .starter }}} or Essential via MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md).
 > - For {{{ .dedicated }}}, see [Import Data into {{{ .dedicated }}} via MySQL CLI](/tidb-cloud/import-with-mysql-cli.md).
 
 ## Prerequisites
 
-Before you can import data to a {{{ .premium }}} instance via the MySQL Command-Line Client, you need the following prerequisites:
+Before you can import data to a {{{ .premium }}} or {{{ .byoc }}} instance via the MySQL Command-Line Client, you need the following prerequisites:
 
 - You have access to your {{{ .premium }}} or {{{ .byoc }}} instance.
 - Install the MySQL Command-Line Client (`mysql`) on your local computer.
@@ -30,13 +30,36 @@ Connect to your {{{ .premium }}} or {{{ .byoc }}} instance using the MySQL Comma
 
 3. Ensure that the configurations in the connection dialog match your operating environment.
 
+<CustomContent plan="premium">
+
     - **Connection Type** is set to `Public`.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+    - **Connection Type** is set to `Public` or `Private`, depending on your BYOC deployment.
+
+</CustomContent>
+
     - **Connect With** is set to `MySQL CLI`.
     - **Operating System** matches your environment.
+
+<CustomContent plan="premium">
 
     > **Note:**
     >
     > {{{ .premium }}} instances have the public endpoint disabled by default. If you do not see the `Public` option, enable the public endpoint on the instance details page (under the **Network** tab), or ask an organization admin to enable it before proceeding.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+    > **Note:**
+    >
+    > Public connections are available only if you provided a public hosted zone during the BYOC deployment. If you provided a private hosted zone, use a private connection to connect to your instance.
+
+</CustomContent>
 
 4. Click **Generate Password** to create a random password. If you have already configured a password, reuse that credential or rotate it before proceeding.
 

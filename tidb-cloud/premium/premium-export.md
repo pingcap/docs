@@ -23,8 +23,13 @@ While you can also export data using tools such as [mysqldump](https://dev.mysql
 You can export data to the following external storage locations:
 
 - [Amazon S3](https://aws.amazon.com/s3/)
+
+<CustomContent plan="premium">
+
 - [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/)
 - [Alibaba Cloud Object Storage Service (OSS)](https://www.alibabacloud.com/product/oss)
+
+</CustomContent>
 
 ### Amazon S3
 
@@ -36,6 +41,8 @@ To export data to Amazon S3, you need to provide the following information:
     - [A role ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html): make sure the role ARN (Amazon Resource Name) has the `s3:PutObject` permission. Note that only {{{ .premium }}} or {{{ .byoc }}} instances hosted on AWS support the role ARN.
 
 For more information, see [Configure External Storage Access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
+
+<CustomContent plan="premium">
 
 ### Azure Blob Storage
 
@@ -54,6 +61,8 @@ To export data to Alibaba Cloud OSS, you need to provide the following informati
 - Access credential: an [AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair) for your Alibaba Cloud account. Make sure the AccessKey pair has the `oss:PutObject` and `oss:GetBucketInfo` permissions.
 
 For more information, see [Configure External Storage Access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access).
+
+</CustomContent>
 
 ## Export options
 
@@ -118,6 +127,8 @@ You can compress the exported CSV and SQL data using the following algorithms:
 
 4. Click **Export**.
 
+<CustomContent plan="premium">
+
 ### Export data to Azure Blob Storage
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com/) and navigate to the [**TiDB Instances**](https://tidbcloud.com/tidbs) page.
@@ -165,6 +176,8 @@ You can compress the exported CSV and SQL data using the following algorithms:
     - **Compression**: choose **Gzip**, **Snappy**, **Zstd**, or **None**.
 
 4. Click **Export**.
+
+</CustomContent>
 
 ### Cancel an export task
 

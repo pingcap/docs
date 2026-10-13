@@ -115,6 +115,8 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 > - After enabling audit logging, if you make any new changes to the bucket URI, location, or ARN, you must click **Test Connection** again to verify that TiDB Cloud can connect to the bucket. Then, click **Enable** to apply the changes.
 > - To remove TiDB Cloud's access to your Amazon S3, simply delete the trust policy granted to this instance in the AWS Management Console.
 
+<CustomContent plan="premium">
+
 <CustomContent language="en,zh">
 
 ### Enable audit logging for TiDB on Alibaba Cloud
@@ -259,6 +261,8 @@ In the TiDB Cloud console, go back to the **Database Audit Log Storage Configura
 
 </CustomContent>
 
+</CustomContent>
+
 ## Configure database audit logging settings
 
 After configuring storage for your cloud provider, complete the step for database audit logging settings:
@@ -399,4 +403,4 @@ When the event class is `AUDIT` or a subclass of `AUDIT`, the audit logs contain
 
 ## Audit logging limitations
 
-{{{ .premium }}} does not guarantee that audit logs are written in chronological order. To find the most recent events, you might need to review all log files. To sort logs chronologically, use the `TIME` field in each audit record.
+{{{ .premium }}} and {{{ .byoc }}} do not guarantee that audit logs are written in chronological order. To find the most recent events, you might need to review all log files. To sort logs chronologically, use the `TIME` field in each audit record.

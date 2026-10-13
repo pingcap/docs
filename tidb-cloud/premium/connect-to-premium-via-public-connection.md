@@ -22,7 +22,7 @@ This document describes how to connect to your {{{ .premium }}} or {{{ .byoc }}}
 
 ## Prerequisite: Configure IP access list
 
-For public connections, {{{ .premium }}} or {{{ .byoc }}} only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
+For public connections, TiDB Cloud only allows client connections from IP addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/premium/configure-ip-access-list-premium.md) to configure it before your first connection.
 
 ## Connect to the instance
 

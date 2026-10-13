@@ -41,6 +41,14 @@ For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-
 
 </CustomContent>
 
+<CustomContent plan="byoc">
+
+## Data access control
+
+With {{{ .byoc }}}, the TiDB data plane runs in your cloud account. You can use your cloud provider's IAM policies, network controls, encryption settings, and key management capabilities to control access to data-plane resources and meet your security and compliance requirements.
+
+</CustomContent>
+
 ## Database access control
 
 TiDB Cloud provides a user- and role-based access control mechanism, combining static and dynamic privileges. You can assign roles to users to manage and distribute permissions in a more fine-grained way.

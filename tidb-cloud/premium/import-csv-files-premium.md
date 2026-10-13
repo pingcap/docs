@@ -48,13 +48,13 @@ Because CSV files do not contain schema information, before importing data from 
 
 - Method 1: In {{{ .premium }}} or {{{ .byoc }}}, create the target databases and tables for your source data.
 
-- Method 2: In the Amazon S3 or Alibaba Cloud Object Storage Service (OSS) directory where the CSV files are located, create the target table schema files for your source data as follows:
+- Method 2: In the cloud storage directory where the CSV files are located, create the target table schema files for your source data as follows:
 
     1. Create database schema files for your source data.
 
         If your CSV files follow the naming rules in [Step 1](#step-1-prepare-the-csv-files), the database schema files are optional for the data import. Otherwise, the database schema files are mandatory.
 
-        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, {{{ .premium }}} will create the `${db_name}` database to store your data when you import the data.
+        Each database schema file must be in the `${db_name}-schema-create.sql` format and contain a `CREATE DATABASE` DDL statement. With this file, {{{ .premium }}} or {{{ .byoc }}} will create the `${db_name}` database to store your data when you import the data.
 
         For example, if you create a `mydb-schema-create.sql` file that contains the following statement, {{{ .premium }}} or {{{ .byoc }}} will create the `mydb` database when you import the data.
 
@@ -64,9 +64,9 @@ Because CSV files do not contain schema information, before importing data from 
 
     2. Create table schema files for your source data.
 
-        If you do not include the table schema files in the Amazon S3 or Alibaba Cloud Object Storage Service directory where the CSV files are located, {{{ .premium }}} will not create the corresponding tables for you when you import the data.
+        If you do not include the table schema files in the cloud storage directory where the CSV files are located, {{{ .premium }}} or {{{ .byoc }}} will not create the corresponding tables for you when you import the data.
 
-        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, {{{ .premium }}} will create the `${table_name}` table in the `${db_name}` database when you import the data.
+        Each table schema file must be in the `${db_name}.${table_name}-schema.sql` format and contain a `CREATE TABLE` DDL statement. With this file, {{{ .premium }}} or {{{ .byoc }}} will create the `${table_name}` table in the `${db_name}` database when you import the data.
 
         For example, if you create a `mydb.mytable-schema.sql` file that contains the following statement, {{{ .premium }}} or {{{ .byoc }}} will create the `mytable` table in the `mydb` database when you import the data.
 
@@ -83,7 +83,7 @@ Because CSV files do not contain schema information, before importing data from 
 
 ## Step 3. Configure cross-account access
 
-To allow {{{ .premium }}} or {{{ .byoc }}} to access the CSV files in Amazon S3 or Alibaba Cloud Object Storage Service (OSS), do one of the following:
+To allow {{{ .premium }}} or {{{ .byoc }}} to access CSV files in cloud storage, configure cross-account access for the applicable storage provider:
 
 - If your CSV files are located in Amazon S3, [configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access) for your {{{ .premium }}} or {{{ .byoc }}} instance.
 
@@ -95,7 +95,11 @@ To allow {{{ .premium }}} or {{{ .byoc }}} to access the CSV files in Amazon S3 
 
     </CustomContent>
 
-- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your {{{ .premium }}} or {{{ .byoc }}} instance.
+<CustomContent plan="premium">
+
+- If your CSV files are located in Alibaba Cloud Object Storage Service (OSS), [configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access) for your {{{ .premium }}} instance.
+
+</CustomContent>
 
 ## Step 4. Import CSV files
 
@@ -123,7 +127,7 @@ To import the CSV files to {{{ .premium }}} or {{{ .byoc }}}, take the following
         - When importing one file, enter the source file URI in the following format `s3://[bucket_name]/[data_source_folder]/[file_name].csv`. For example, `s3://sampledata/ingest/TableName.01.csv`.
         - When importing multiple files, enter the source folder URI in the following format `s3://[bucket_name]/[data_source_folder]/`. For example, `s3://sampledata/ingest/`.
     - **Credential**: you can use either an AWS Role ARN or an AWS access key to access your bucket. For more information, see [Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access).
-        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create a new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into {{{ .premium }}}.
+        - **AWS Role ARN**: enter the AWS Role ARN value. If you need to create a new role, click **Click here to create a new one with AWS CloudFormation** and follow the guided steps to launch the provided template, acknowledge the IAM warning, create the stack, and copy the generated ARN back into TiDB Cloud.
         - **AWS Access Key**: enter the AWS access key ID and AWS secret access key.
     - **Test Bucket Access**: click this button after the credentials are in place to confirm that {{{ .premium }}} or {{{ .byoc }}} can reach the bucket.
     - **Target Connection**: provide the TiDB username and password that will run the import. Optionally, click **Test Connection** to validate the credentials.
@@ -150,11 +154,13 @@ To import the CSV files to {{{ .premium }}} or {{{ .byoc }}}, take the following
     > - **Source**: enter a filename pattern such as `TableName.01.csv`. Wildcards `*` and `?` are supported (for example, `my-data*.csv`).
     > - **Target Database** and **Target Table**: choose the destination objects for the matched files.
 
-6. {{{ .premium }}} automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
+6. {{{ .premium }}} or {{{ .byoc }}} automatically scans the source path. Review the scan results, check the data files found and corresponding target tables, and then click **Start Import**.
 
 7. When the import progress shows **Completed**, check the imported tables.
 
 </div>
+
+<CustomContent plan="premium">
 
 <div label="Alibaba Cloud Object Storage Service (OSS)">
 
@@ -207,6 +213,8 @@ To import the CSV files to {{{ .premium }}} or {{{ .byoc }}}, take the following
 7. When the import progress shows **Completed**, check the imported tables.
 
 </div>
+
+</CustomContent>
 
 </SimpleTab>
 

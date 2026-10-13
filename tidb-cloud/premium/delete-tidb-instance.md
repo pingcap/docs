@@ -29,8 +29,20 @@ You can delete an instance at any time by performing the following steps:
 
     Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
 
+<CustomContent plan="premium">
+
     > **Note:**
     >
-    > Please be aware that backups will continue to incur charges until deleted.
+    > Backups continue to incur charges until they are deleted.
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+    > **Note:**
+    >
+    > For BYOC instances, TiDB Cloud does not charge for backups. You are responsible for the storage and data transfer costs incurred in your cloud account. Storage charges continue until the backup files are deleted.
+
+</CustomContent>
 
     If you want to restore a {{{ .premium }}} or {{{ .byoc }}} instance from the recycle bin, see [Restore from Recycle Bin](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin).
