@@ -7,7 +7,6 @@
 | 12xlarge | 12xlarge | Instance type, keep in English. |
 | 16xlarge | 16xlarge | Instance type, keep in English. |
 | ACID | ACID | Do not translate to 「酸」. |
-| Aggregation | 集計 |  |
 | architecture | アーキテクチャ | Do not translate to 「建築」. |
 | atomic | アトミック |  |
 | Aurora | Aurora | Product name, keep in English. |
