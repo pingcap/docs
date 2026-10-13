@@ -67,7 +67,7 @@ For TiDB Cloud Dedicated, you can query the TiCDC Replication Capacity Units (RC
 3. You can see the current TiCDC Replication Capacity Units (RCUs) in the **Specification** area of the page.
 
 </CustomContent>
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 For {{{ .premium }}}, you can query the TiCDC Changefeed Capacity Units (CCUs) of a changefeed.
 

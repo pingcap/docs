@@ -22,7 +22,7 @@ Log redaction is enabled by default, ensuring that sensitive information in runn
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 * You must be in the **Organization Owner** role of your organization in TiDB Cloud.
 

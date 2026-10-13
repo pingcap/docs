@@ -72,7 +72,7 @@ You can connect your {{{ .dedicated }}} cluster to your MySQL service securely t
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 Make sure that your {{{ .premium }}} instance can connect to the MySQL service.
 

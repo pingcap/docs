@@ -19,9 +19,9 @@ TiDB Cloud provides private endpoints, VPC Peering, and IP access lists for netw
 
 You can encrypt all communications using TLS to ensure the confidentiality and integrity of data in transit. Network access controls ensure that only authorized sources can access cluster or instance resources, enhancing overall security.
 
-## Data access control
-
 <CustomContent plan="starter,essential,dedicated">
+
+## Data access control
 
 For {{{ .dedicated }}} clusters with Customer-Managed Encryption Keys (CMEK) enabled, TiDB Cloud provides encryption for both data at rest and backups.
 
@@ -32,6 +32,8 @@ For more information, see [Encryption at Rest Using Customer-Managed Encryption 
 </CustomContent>
 
 <CustomContent plan="premium">
+
+## Data access control
 
 For {{{ .premium }}} instances hosted on AWS, you can enable Dual-Layer Data Encryption to add a database-layer encryption on top of the default storage-layer encryption. With Dual-Layer Data Encryption enabled, TiDB Cloud encrypts data stored by TiKV, changefeed data, and backup data, and you can choose either a Customer-Managed Encryption Key (CMEK) or a Service-Managed Encryption Key.
 
