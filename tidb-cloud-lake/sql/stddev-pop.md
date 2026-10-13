@@ -1,11 +1,11 @@
 ---
 title: STDDEV_POP
-summary: 集約関数。
+summary: 集計関数。
 ---
 
 # STDDEV_POP
 
-集約関数。
+集計関数。
 
 `STDDEV_POP()` 関数は、式の母標準偏差（`VAR_POP()` の平方根）を返します。
 

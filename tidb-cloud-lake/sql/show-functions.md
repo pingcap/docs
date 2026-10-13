@@ -1,11 +1,11 @@
 ---
 title: SHOW FUNCTIONS
-summary: 現在サポートされている組み込みのスカラー関数および集約関数を一覧表示します。
+summary: 現在サポートされている組み込みのスカラー関数および集計関数を一覧表示します。
 ---
 
 # SHOW FUNCTIONS
 
-現在サポートされている組み込みのスカラー関数および集約関数を一覧表示します。
+現在サポートされている組み込みのスカラー関数および集計関数を一覧表示します。
 
 関連情報: [system.functions](/tidb-cloud-lake/sql/system-functions.md)
 

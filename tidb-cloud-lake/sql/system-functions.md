@@ -1,11 +1,11 @@
 ---
 title: system.functions
-summary: サポートされている組み込みのスカラー関数および集約関数に関する情報を含みます。
+summary: サポートされている組み込みのスカラー関数および集計関数に関する情報を含みます。
 ---
 
 # system.functions
 
-サポートされている組み込みのスカラー関数および集約関数に関する情報を含みます。
+サポートされている組み込みのスカラー関数および集計関数に関する情報を含みます。
 
 関連情報: [SHOW FUNCTIONS](/tidb-cloud-lake/sql/show-functions.md)。
 

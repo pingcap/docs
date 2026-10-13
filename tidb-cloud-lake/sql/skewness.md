@@ -1,11 +1,11 @@
 ---
 title: SKEWNESS
-summary: 集約関数。
+summary: 集計関数。
 ---
 
 # SKEWNESS
 
-集約関数。
+集計関数。
 
 `SKEWNESS()` 関数は、すべての入力値の歪度を返します。
 
