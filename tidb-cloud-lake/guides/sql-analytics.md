@@ -316,7 +316,7 @@ VID-MISSING-001 | FRAME-0501 | 10          | 0.25       | 0.25
 
 ---
 
-## 6. 集約インデックスによる高速化 {#6-aggregating-index-boost}
+## 6. 集計インデックスによる高速化 {#6-aggregating-index-boost}
 
 ダッシュボードで頻繁に使用されるサマリーを永続化します。
 

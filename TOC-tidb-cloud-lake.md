@@ -345,10 +345,10 @@
         - [RECLUSTER TABLE](/tidb-cloud-lake/sql/recluster-table.md)
         - [SET CLUSTER KEY](/tidb-cloud-lake/sql/set-cluster-key.md)
         - [クラスターキー](/tidb-cloud-lake/sql/cluster-key.md)
-      - 集約インデックス
+      - 集計インデックス
         - [CREATE AGGREGATING INDEX](/tidb-cloud-lake/sql/create-aggregating-index.md)
         - [DROP AGGREGATING INDEX](/tidb-cloud-lake/sql/drop-aggregating-index.md)
-        - [集約インデックス](/tidb-cloud-lake/sql/aggregating-index-sql.md)
+        - [集計インデックス](/tidb-cloud-lake/sql/aggregating-index-sql.md)
         - [REFRESH AGGREGATING INDEX](/tidb-cloud-lake/sql/refresh-aggregating-index.md)
       - 転置インデックス
         - [CREATE INVERTED INDEX](/tidb-cloud-lake/sql/create-inverted-index.md)

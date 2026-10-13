@@ -11,7 +11,7 @@ CityDrive Intelligence は、すべての走行を動画として記録します
 
 | ガイド | 内容 |
 |-------|----------------|
-| [SQL Analytics](/tidb-cloud-lake/guides/sql-analytics.md) | ベーステーブル、フィルター、テーブル結合、ウィンドウ、集約インデックス |
+| [SQL Analytics](/tidb-cloud-lake/guides/sql-analytics.md) | ベーステーブル、フィルター、テーブル結合、ウィンドウ、集計インデックス |
 | [JSON & Search](/tidb-cloud-lake/guides/json-search.md) | `frame_metadata_catalog` をロード (load) し、Elasticsearch `QUERY()` を実行して、bitmap タグを関連付ける |
 | [ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) | 埋め込みを永続化し、コサイン検索を実行して、リスクメトリクスを結合する |
 | [Geo Analytics](/tidb-cloud-lake/guides/geo-analytics.md) | `GEOMETRY`、距離/ポリゴンフィルター、信号機との結合を使用する |

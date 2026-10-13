@@ -171,7 +171,7 @@ FROM orders;
 - **パースとキャスト**: `parse_json`, `try_parse_json`, `to_variant`, `to_jsonb_binary`
 - **ナビゲーションと projection**: `get_path`, `get_by_keypath`, `flatten`, arrow (`->`, `->>`), path (`#>`, `#>>`) および containment 演算子 (`@>`, `?`)
 - **変更**: `object_insert`, `object_remove_keys`, 連結 (`||`), `array_*` ヘルパー
-- **分析**: `json_extract_keys`, `json_length`, `jsonb_array_elements`, `json_array_agg` などの集約関数
+- **分析**: `json_extract_keys`, `json_length`, `jsonb_array_elements`, `json_array_agg` などの集計関数
 
 すべての関数は、ベクトル化エンジン内の JSONB バッファに対して直接動作します。
 
