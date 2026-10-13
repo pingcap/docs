@@ -29,10 +29,10 @@ implementation 'com.tidbcloud:lake-jdbc:0.4.6'
 
 ## 主な機能 {#key-features}
 
-- ✅ **JDBC 4.0 Compatible**: 標準 JDBC インターフェースをサポート
-- ✅ **Connection Pooling**: 組み込みの接続管理
-- ✅ **Prepared Statements**: 効率的なパラメーター化クエリ
-- ✅ **Batch Operations**: 一括挿入および更新をサポート
+- ✅ **JDBC 4.0 互換**: 標準 JDBC インターフェースをサポート
+- ✅ **接続プーリング**: 組み込みの接続管理
+- ✅ **プリペアドステートメント**: 効率的なパラメーター化クエリ
+- ✅ **バッチ操作**: 一括挿入および更新をサポート
 
 ## データ型のマッピング {#data-type-mappings}
 

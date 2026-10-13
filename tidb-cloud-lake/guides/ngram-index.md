@@ -163,7 +163,7 @@ TableScan
 | **インデックス使用状況を監視する** | `EXPLAIN` を使用して `bloom pruning` 統計を確認する |
 | **パターン長を考慮する** | 検索パターンが少なくとも `gram_size` 文字以上であることを確認する |
 
-## Essential コマンド {#essential-commands}
+## 主要なコマンド {#essential-commands}
 
 完全なコマンドリファレンスについては、[Ngram インデックス](/tidb-cloud-lake/sql/ngram-index-sql.md) を参照してください。
 

@@ -95,5 +95,5 @@ fmt.Printf("User: %d, %s\n", id, name)
 
 ## リソース {#resources}
 
-- **GitHub Repository**: [lake-go](https://github.com/tidbcloud/lake-go)
-- **Examples**: [GitHub Examples](https://github.com/tidbcloud/lake-go/tree/main/examples)
+- **GitHub リポジトリ**: [lake-go](https://github.com/tidbcloud/lake-go)
+- **例**: [GitHub の例](https://github.com/tidbcloud/lake-go/tree/main/examples)

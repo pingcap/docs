@@ -200,8 +200,8 @@ SHOW GRANTS FOR ROLE writer;
 
 > Note:
 >
-> 1. すでに定数畳み込みされている場合は、udf auth をチェックしません。
-> 2. insert 内の値である場合は、udf auth をチェックしません。
+> 1. すでに定数畳み込みされている場合は、UDF の権限をチェックしません。
+> 2. insert 内の値である場合は、UDF の権限をチェックしません。
 
 ### Catalog 権限 {#catalog-privileges}
 
@@ -240,18 +240,18 @@ Share オブジェクトに対する権限は、同じ SQL 権限モデル（`GR
 
 ### Masking Policy 権限 {#masking-policy-privileges}
 
-グローバルな `CREATE MASKING POLICY` 権限および `APPLY MASKING POLICY` 権限に加えて、個々の masking policy へのアクセスを付与できます。
+グローバルな `CREATE MASKING POLICY` 権限および `APPLY MASKING POLICY` 権限に加えて、個々のマスキングポリシーへのアクセスを付与できます。
 
 | 権限 | 説明                                                                                                                           |
 |:----------|:--------------------------------------------------------------------------------------------------------------------------------|
-| APPLY     | masking policy をカラムにアタッチまたはデタッチし、policy に対する DESC/DROP 操作を許可します。                                |
-| OWNERSHIP | masking policy に対する完全な制御を付与します。{{{ .lake }}} は、policy を作成したロールに OWNERSHIP を付与し、policy が削除されると自動的に取り消します。 |
+| APPLY     | マスキングポリシーをカラムにアタッチまたはデタッチし、ポリシーに対する DESC/DROP 操作を許可します。                                |
+| OWNERSHIP | マスキングポリシーに対する完全な制御を付与します。{{{ .lake }}} は、ポリシーを作成したロールに OWNERSHIP を付与し、ポリシーが削除されると自動的に取り消します。 |
 
 ### Row Access Policy 権限 {#row-access-policy-privileges}
 
-Row access policy は同じガバナンスモデルを共有します。グローバルな `CREATE ROW ACCESS POLICY` 権限および `APPLY ROW ACCESS POLICY` 権限に加えて、必要に応じて policy ごとにアクセスを付与します。
+行アクセスポリシーは同じガバナンスモデルを共有します。グローバルな `CREATE ROW ACCESS POLICY` 権限および `APPLY ROW ACCESS POLICY` 権限に加えて、必要に応じてポリシーごとにアクセスを付与します。
 
 | 権限 | 説明                                                                                                                                        |
 |:----------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
-| APPLY     | row access policy をテーブルに追加またはテーブルから削除し、policy に対する DESC/DROP 操作を許可します。                                     |
-| OWNERSHIP | row access policy に対する完全な制御を付与します。{{{ .lake }}} は、作成者ロールに OWNERSHIP を付与し、policy が削除されると自動的に取り消します。 |
+| APPLY     | 行アクセスポリシーをテーブルに追加またはテーブルから削除し、ポリシーに対する DESC/DROP 操作を許可します。                                     |
+| OWNERSHIP | 行アクセスポリシーに対する完全な制御を付与します。{{{ .lake }}} は、作成者ロールに OWNERSHIP を付与し、ポリシーが削除されると自動的に取り消します。 |

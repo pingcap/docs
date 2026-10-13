@@ -84,7 +84,7 @@ ALTER TABLE sales CLUSTER BY (region, order_date);
 | 頻繁にフィルタされるカラム | ほとんど使われないカラム |
 | 中程度のカーディナリティ（100～10K 値） | Boolean カラム（値の種類が少なすぎる） |
 | 日付 / 時刻カラム | 一意 ID カラム（値の種類が多すぎる） |
-| リージョン、category、status | ランダムまたは hash カラム |
+| リージョン、カテゴリ、ステータス | ランダムまたはハッシュカラム |
 
 ## 性能の監視 {#monitoring-performance}
 

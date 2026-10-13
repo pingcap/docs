@@ -5,7 +5,7 @@ summary: MySQL データ統合を使用すると、MySQL データベースか�
 
 # MySQL 統合タスク
 
-このページでは、MySQL データベースから {{{ .lake }}} にデータを同期する MySQL integration task を作成する方法について説明します。MySQL タスクは、完全な `Snapshot` ロード、継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートしています。
+このページでは、MySQL データベースから {{{ .lake }}} にデータを同期する MySQL 統合タスクを作成する方法について説明します。MySQL タスクは、完全な `Snapshot` ロード、継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートしています。
 
 再利用可能な MySQL 接続設定を先に作成する必要がある場合は、[MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md) を参照してください。
 
@@ -64,15 +64,15 @@ MySQL インスタンスに {{{ .lake }}} からアクセスできることを�
 
     | フィールド                  | 必須        | 説明                                                                                      |
     |----------------------------|-------------|-------------------------------------------------------------------------------------------|
-    | **Data Source**             | Yes         | ドロップダウンから既存の **MySQL - Credentials** データソースを選択します                         |
-    | **Name**                   | Yes         | この integration task の名前                                                                  |
+    | **Data Source**             | はい         | ドロップダウンから既存の **MySQL - Credentials** データソースを選択します                         |
+    | **Name**                   | はい         | この統合タスクの名前                                                                  |
     | **Source Database**        | —           | 選択したデータソースに基づいて自動的に表示されます                                                |
-    | **Source Table**           | Yes         | MySQL データベースから同期するテーブルを選択します                                               |
-    | **Sync Mode**             | Yes         | **Snapshot**、**CDC Only**、または **Snapshot + CDC** から選択します                           |
-    | **Primary Key**          | Conditional | マージ操作に使用する一意識別子カラムです。CDC Only および Snapshot + CDC モードで必須です            |
-    | **Sync Interval**        | Yes         | 書き込み操作の間隔（秒）（デフォルト: 3）                                                        |
-    | **Batch Size**            | No          | バッチごとの行数                                                                              |
-    | **Allow Delete**          | No          | CDC で DELETE 操作を許可するかどうか。CDC Only および Snapshot + CDC モードで使用できます          |
+    | **Source Table**           | はい         | MySQL データベースから同期するテーブルを選択します                                               |
+    | **Sync Mode**             | はい         | **Snapshot**、**CDC Only**、または **Snapshot + CDC** から選択します                           |
+    | **Primary Key**          | 条件付き | マージ操作に使用する一意識別子カラムです。CDC Only および Snapshot + CDC モードで必須です            |
+    | **Sync Interval**        | はい         | 書き込み操作の間隔（秒）（デフォルト: 3）                                                        |
+    | **Batch Size**            | いいえ          | バッチごとの行数                                                                              |
+    | **Allow Delete**          | いいえ          | CDC で DELETE 操作を許可するかどうか。CDC Only および Snapshot + CDC モードで使用できます          |
 
     ![Create Task - Basic Info](/media/tidb-cloud-lake/create-mysql-task-step1-basic-info.png)
 
@@ -111,7 +111,7 @@ MySQL インスタンスに {{{ .lake }}} からアクセスできることを�
 
 ![Set Target Table](/media/tidb-cloud-lake/dataintegration-mysql-set-target-table.png)
 
-システムはソースカラムをターゲットテーブルのスキーマに自動的にマッピングします。カラムマッピングを確認し、**Create** をクリックして integration task の作成を完了します。
+システムはソースカラムをターゲットテーブルのスキーマに自動的にマッピングします。カラムマッピングを確認し、**Create** をクリックして統合タスクの作成を完了します。
 
 ## 同期モードごとのタスクの動作 {#task-behavior-by-sync-mode}
 
@@ -155,7 +155,7 @@ CDC モードでは、MySQL binlog を継続的に監視し、ソーステーブ
 
 1. 一意の server ID を使用して MySQL binlog に接続します
 2. 行レベルの変更をリアルタイムで取得します
-3. 変更を {{{ .lake }}} の raw staging table に書き込みます
+3. 変更を {{{ .lake }}} の raw ステージングテーブルに書き込みます
 4. 主キーを使用して変更を定期的にターゲットテーブルへマージします
 5. クラッシュリカバリのためにチェックポイント（binlog 位置）を保存します
 

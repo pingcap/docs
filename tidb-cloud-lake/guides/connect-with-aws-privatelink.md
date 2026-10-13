@@ -12,7 +12,7 @@ summary: 主要なクラウドが提供する PrivateLink スタイルのプラ�
 - ネットワーク分離: トラフィックが VPC/VPN 境界の外に出ることがなく、パブリックエンドポイントへの露出を排除できます。
 - コンプライアンス対応: インターネットへの送信を禁止する社内監査や業界要件を満たしやすくなります。
 - 安定したパフォーマンス: トラフィックは予測しにくいインターネット経路ではなく、クラウドプロバイダーのバックボーンを通ります。
-- 制御の簡素化: 既存の security group、route table、monitoring を再利用してアクセスを管理できます。
+- 制御の簡素化: 既存のセキュリティグループ、ルートテーブル、モニタリングを再利用してアクセスを管理できます。
 
 ## 仕組み {#how-it-works}
 
@@ -28,7 +28,7 @@ summary: 主要なクラウドが提供する PrivateLink スタイルのプラ�
 
     例: `com.amazonaws.vpce.us-east-2.vpce-svc-0123456789abcdef0`。
 
-3. tcp 443 ポートを開放した security group を準備します。
+3. tcp 443 ポートを開放したセキュリティグループを準備します。
 
    ![Security Group](/media/tidb-cloud-lake/security-group.png)
 
@@ -42,7 +42,7 @@ summary: 主要なクラウドが提供する PrivateLink スタイルのプラ�
 
    ![Create Endpoint Sheet](/media/tidb-cloud-lake/create-endpoint-2.png)
 
-   先ほど作成した security group `HTTPS` を選択します。
+   先ほど作成したセキュリティグループ `HTTPS` を選択します。
 
    ![Create Endpoint SG](/media/tidb-cloud-lake/create-endpoint-3.png)
 

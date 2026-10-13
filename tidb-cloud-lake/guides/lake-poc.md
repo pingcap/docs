@@ -27,7 +27,7 @@ PoC では、代表的なテーブルを選択し、それらのスキーマ、�
 
 ### ソーススキーマをマッピングして検証する {#map-and-validate-the-source-schema}
 
-ファイルをロードしたりレプリケーションを開始したりする前に、各ソースカラムと対応する Lake カラム、データ型、null 許容性、デフォルト値、および必要な変換を記録してください。decimal の精度とスケール、signed および unsigned 整数の範囲、timestamp の精度とタイムゾーン、文字列エンコーディングを確認します。ターゲット型の選択には [Lake data types reference](/tidb-cloud-lake/sql/data-types.md) を使用してください。型名が一致していても意味論が同一であるとは限りません。
+ファイルをロードしたりレプリケーションを開始したりする前に、各ソースカラムと対応する Lake カラム、データ型、null 許容性、デフォルト値、および必要な変換を記録してください。decimal の精度とスケール、signed および unsigned 整数の範囲、timestamp の精度とタイムゾーン、文字列エンコーディングを確認します。ターゲット型の選択には [Lake データ型リファレンス](/tidb-cloud-lake/sql/data-types.md) を使用してください。型名が一致していても意味論が同一であるとは限りません。
 
 null と境界値を含む小さなサンプルをロードします。同じスナップショットまたはレプリケーションチェックポイント時点で、行数、null 数、最小値と最大値、および集計結果をソースと比較してください。変換によって精度と timestamp の意味が保持されていることを確認し、完全ロードを開始する前に、拒否または切り捨てられた値を調査してください。
 
@@ -66,7 +66,7 @@ ALTER TABLE lineitem CLUSTER BY (DATE_TRUNC(MONTH, l_shipdate), l_orderkey);
 ALTER TABLE lineitem RECLUSTER FINAL;
 ```
 
-キー設計の詳細については、[cluster key ガイド](/tidb-cloud-lake/guides/cluster-key-performance.md) を参照してください。
+キー設計の詳細については、[クラスターキーガイド](/tidb-cloud-lake/guides/cluster-key-performance.md) を参照してください。
 
 ## ステップ 6. オーバーラップを監視し、`RECLUSTER FINAL` を実行する {#step-6-monitor-overlap-and-run-recluster-final}
 
@@ -180,4 +180,4 @@ GROUP BY tenant_id, account, category_id;
 REFRESH MATERIALIZED VIEW mv_account_totals;
 ```
 
-マテリアライズドビューは、単一テーブルの集計に最も適しています。詳細については、[TiDB Cloud Lake materialized view documentation](/tidb-cloud-lake/sql/materialized-view.md) を参照してください。
+マテリアライズドビューは、単一テーブルの集計に最も適しています。詳細については、[TiDB Cloud Lake のマテリアライズドビューのドキュメント](/tidb-cloud-lake/sql/materialized-view.md) を参照してください。

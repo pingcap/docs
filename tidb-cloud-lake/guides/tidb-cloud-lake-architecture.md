@@ -43,7 +43,7 @@ summary: TiDB Cloud Lake のアーキテクチャ。
 
 FuseEngine はデータをカラム形式で圧縮してオブジェクトストレージに保存するため、データ量とストレージコストを大幅に削減できます。
 
-FuseEngine はデータファイルを保存するだけでなく、MinMax index、Bloomfilter index などのインデックス情報も生成します。これらのインデックスにより、クエリ実行時の IO と CPU 消費が削減され、クエリ性能が大幅に向上します。
+FuseEngine はデータファイルを保存するだけでなく、MinMax インデックス、Bloomfilter インデックスなどのインデックス情報も生成します。これらのインデックスにより、クエリ実行時の IO と CPU 消費が削減され、クエリ性能が大幅に向上します。
 
 </div>
 </SimpleTab>

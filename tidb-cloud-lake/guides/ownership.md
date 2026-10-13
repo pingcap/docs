@@ -1,11 +1,11 @@
 ---
 title: Ownership
-summary: Ownership は、{{{ .lake }}} 内の特定のデータオブジェクト（現在は database、table、UDF、stage を含む）に対して、あるロールが持つ排他的な権利と責任を示す特別な権限です。
+summary: Ownership は、{{{ .lake }}} 内の特定のデータオブジェクト（現在はデータベース、テーブル、UDF、stage を含む）に対して、あるロールが持つ排他的な権利と責任を示す特別な権限です。
 ---
 
 # Ownership
 
-Ownership は、{{{ .lake }}} 内の特定のデータオブジェクト（現在は database、table、UDF、stage を含む）に対して、あるロールが持つ排他的な権利と責任を示す特別な権限です。
+Ownership は、{{{ .lake }}} 内の特定のデータオブジェクト（現在はデータベース、テーブル、UDF、stage を含む）に対して、あるロールが持つ排他的な権利と責任を示す特別な権限です。
 
 ## Ownership の付与 {#granting-ownership}
 
@@ -13,7 +13,7 @@ Ownership は、{{{ .lake }}} 内の特定のデータオブジェクト（現�
 
 - オブジェクトの Ownership を新しいロールに付与すると、完全な Ownership が新しいロールに移譲され、以前のロールからは削除されます。たとえば、最初に Role A があるテーブルを所有していて、その Ownership を Role B に付与した場合、Role B が新しい所有者となり、Role A はそのテーブルに対する Ownership を失います。
 - セキュリティ上の理由から、組み込みロール `public` に Ownership を付与することは推奨されません。ユーザーが `public` ロールに属した状態でオブジェクトを作成すると、すべてのユーザーがそのオブジェクトの Ownership を持つことになります。これは、各ユーザーがデフォルトで `public` ロールを持っているためです。{{{ .lake }}} では、Ownership を明確に管理するために、`public` ロールを使用する代わりにカスタムロールを作成してユーザーに割り当てることを推奨しています。組み込みロールの詳細については、[組み込みロール](/tidb-cloud-lake/guides/roles.md) を参照してください。
-- `default` database 内のテーブルについては、組み込みロール `account_admin` が所有しているため、Ownership を付与できません。
+- `default` データベース内のテーブルについては、組み込みロール `account_admin` が所有しているため、Ownership を付与できません。
 
 ## Ownership の取り消しは不可 {#revoking-ownership-not-allowed}
 
@@ -24,7 +24,7 @@ Ownership は、{{{ .lake }}} 内の特定のデータオブジェクト（現�
 
 ## 例 {#examples}
 
-ロールに Ownership を付与するには、[GRANT](/tidb-cloud-lake/sql/grant.md) コマンドを使用します。以下の例では、異なる database オブジェクトの Ownership をロール 'data_owner' に付与する方法を示します。
+ロールに Ownership を付与するには、[GRANT](/tidb-cloud-lake/sql/grant.md) コマンドを使用します。以下の例では、異なるデータベースオブジェクトの Ownership をロール 'data_owner' に付与する方法を示します。
 
 ```sql
 -- Grant ownership of all tables in the 'finance_data' database to the role 'data_owner'
@@ -56,7 +56,7 @@ u1> SELECT * FROM db.t;
 u1> SELECT * FROM db.t_old_exists; -- Failed because the owner of this table is not role1
 ```
 
-次の例は、ユーザーが自分のロールのみに所有される database を作成できるようにし、明示的にアクセス権が付与されない限り他のユーザーがそれを参照できないようにする方法を示しています。
+次の例は、ユーザーが自分のロールのみに所有されるデータベースを作成できるようにし、明示的にアクセス権が付与されない限り他のユーザーがそれを参照できないようにする方法を示しています。
 
 ```sql
 CREATE ROLE part1_role;

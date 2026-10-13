@@ -9,7 +9,7 @@ summary: "{{{ .lake }}} は、データを最初にテーブルへロードせ�
 
 ## 構文 {#syntax}
 
-query only
+クエリのみ:
 
 ```sql
 SELECT {
@@ -28,7 +28,7 @@ FROM {@<stage_name>[/<path>] | '<uri>'}  -- stage table function
   [<alias>]
 ```
 
-copy with transform
+変換を伴うコピー:
 
 ```sql
 COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
@@ -63,7 +63,7 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
 
 FROM 句は `Table Function` と似た構文を使用します。通常のテーブルと同様に、他のテーブルと join する際にはテーブル `alias` を使用できます。
 
-table function parameters:
+テーブル関数のパラメータ:
 
 | パラメータ | 説明 |
 |-------------------------|---------------------------------------------------------|
@@ -85,7 +85,7 @@ select list は 3 つの構文をサポートしており、使用できるの�
 >
 > 現在、Parquet と ORC では、`Query rows as Variants` は `Query columns by name` より低速であり、この 2 つの方法を混在して使用することはできません。
 
-syntax:
+構文:
 
 ```sql
 SELECT [<alias>.]$1[:<column>] [, [<alias>.]$1[:<column>]  ...] <FROM Clause>

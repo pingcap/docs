@@ -36,7 +36,7 @@ CREATE FILE FORMAT csv_query_format
     SKIP_HEADER = 1;        -- Skip first line when querying if the CSV file has header
 ```
 
-- CSV ファイル形式のその他のオプションについては、[CSV File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#csv-options) を参照してください
+- CSV ファイル形式のその他のオプションについては、[CSV ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#csv-options) を参照してください
 
 ### ステップ 3. CSV ファイルをクエリする {#step-3-query-csv-files}
 

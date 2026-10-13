@@ -111,13 +111,13 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 <details>
   <summary>TPC-H データロード</summary>
 
-1. **Snowflake Data Load**:
+1. **Snowflake のデータロード**:
 
     - [Snowflake account](https://app.snowflake.com/) にログインします。
     - TPC-H スキーマに対応するテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
     - `COPY INTO` コマンドを使用して AWS S3 からデータをロードします。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
 
-2. **{{{ .lake }}} Data Load**:
+2. **{{{ .lake }}} のデータロード**:
 
     - [{{{ .lake }}} account](https://tidbcloud.com) にサインインします。
     - TPC-H スキーマに従って必要なテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
@@ -128,13 +128,13 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 <details>
   <summary>ClickBench Hits データロード</summary>
 
-1. **Snowflake Data Load**:
+1. **Snowflake のデータロード**:
 
     - [Snowflake account](https://app.snowflake.com/) にログインします。
     - `hits` スキーマに対応するテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/snowflake/schema.sql)。
     - `COPY INTO` コマンドを使用して AWS S3 からデータをロードします。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/snowflake/copy.sql)。
 
-2. **{{{ .lake }}} Data Load**:
+2. **{{{ .lake }}} のデータロード**:
 
     - [{{{ .lake }}} account](https://tidbcloud.com) にサインインします。
     - `hits` スキーマに従って必要なテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/lake/schema.sql)。

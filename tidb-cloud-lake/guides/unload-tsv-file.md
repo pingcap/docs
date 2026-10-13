@@ -24,7 +24,7 @@ FILE_FORMAT = (
 ```
 
 - TSV のその他のオプションについては、[TSV ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#tsv-options) を参照してください
-- 複数ファイルへのアンロードには、[MAX_FILE_SIZE Copy Option](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions) を使用します
+- 複数ファイルへのアンロードには、[MAX_FILE_SIZE コピーオプション](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions) を使用します
 - 構文の詳細については、[COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください
 
 ## チュートリアル {#tutorial}

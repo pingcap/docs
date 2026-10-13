@@ -16,7 +16,7 @@ summary: "{{{ .lake }}} の stream は常時稼働する変更テーブルであ
 | モード | キャプチャ対象 | 一般的な用途 |
 | --- | --- | --- |
 | Standard (`APPEND_ONLY = false`) | INSERT + UPDATE + DELETE。行ごとに最新状態へ集約されます。 | 緩やかに変化するディメンション、コンプライアンス監査。 |
-| Append-Only (`APPEND_ONLY = true`, default) | INSERT のみ。 | 追記専用のファクト/イベント取り込み。 |
+| Append-Only (`APPEND_ONLY = true`、デフォルト) | INSERT のみ。 | 追記専用のファクト/イベント取り込み。 |
 
 ## 例 1: Append-Only Stream {#example-1-append-only-stream}
 
@@ -66,7 +66,7 @@ SELECT * FROM sensor_readings_stream; -- now empty
 
 `WITH CONSUME` は stream を 1 回読み取り、差分をクリアするため、次のラウンドでは新しい INSERT をキャプチャできます。
 
-## 例 2: Standard Stream（Updates & Deletes） {#example-2-standard-stream-updates--deletes}
+## 例 2: Standard Stream（UPDATE と DELETE） {#example-2-standard-stream-updates--deletes}
 
 UPDATE や DELETE を含むすべての変更に反応する必要がある場合は、Standard モードに切り替えます。
 
@@ -222,22 +222,22 @@ ORDER BY o.customer_id;
 
 ## ストリームワークフローに関する注意事項 {#stream-workflow-notes}
 
-**Consumption**
+**消費**
 
 - ストリームはトランザクション内で消費されます。`INSERT INTO target SELECT ... FROM stream` は、ステートメントがコミットされたときにのみストリームを空にします。
 - 同時に成功できるコンシューマは 1 つだけで、他の並行ステートメントはロールバックされます。
 
-**Modes**
+**モード**
 
 - Append-Only ストリームは INSERT のみをキャプチャし、追記が多いワークロードに最適です。
 - Standard ストリームは、消費し続ける限り update と delete を出力します。遅れて到着した update は次回の実行まで保持されます。
 
-**Hidden Columns**
+**隠しカラム**
 
 - ストリームは `change$action`、`change$is_update`、`change$row_id` を公開します。これらを使うと、{{{ .lake }}} が各行をどのように記録したかを把握できます。
 - ベーステーブルには、行の来歴をデバッグするために `_origin_version`、`_origin_block_id`、`_origin_block_row_num` が追加されます。
 
-**Integrations**
+**連携**
 
 - スケジュールされた増分ロード (load) には、ストリームを `task_history('<name>', <limit>)` と組み合わせて使用します。
 - 最新の差分のみを消費したい場合は [`WITH CONSUME`](/tidb-cloud-lake/sql/task.md) を使用します。

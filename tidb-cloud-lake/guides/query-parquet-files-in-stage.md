@@ -26,13 +26,13 @@ CONNECTION = (
 );
 ```
 
-### ステップ 2. カスタム Parquet File Format を作成する {#step-2-create-custom-parquet-file-format}
+### ステップ 2. カスタム Parquet ファイル形式を作成する {#step-2-create-custom-parquet-file-format}
 
 ```sql
 CREATE FILE FORMAT parquet_query_format TYPE = PARQUET;
 ```
 
-- Parquet file format のその他のオプションについては、[Parquet File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options) を参照してください。
+- Parquet ファイル形式のその他のオプションについては、[Parquet ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options) を参照してください。
 
 ### ステップ 3. Parquet ファイルをクエリする {#step-3-query-parquet-files}
 

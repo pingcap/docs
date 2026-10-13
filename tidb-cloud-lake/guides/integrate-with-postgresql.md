@@ -1,11 +1,11 @@
 ---
 title: PostgreSQL 統合タスク
-summary: このページでは、PostgreSQL データベースから {{{ .lake }}} にデータを同期する PostgreSQL integration task を作成する方法について説明します。
+summary: このページでは、PostgreSQL データベースから {{{ .lake }}} にデータを同期する PostgreSQL 統合タスクを作成する方法について説明します。
 ---
 
 # PostgreSQL 統合タスク
 
-このページでは、PostgreSQL データベースから {{{ .lake }}} にデータを同期する PostgreSQL integration task を作成する方法について説明します。PostgreSQL タスクは、完全な `Snapshot` ロード (load)、継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートします。
+このページでは、PostgreSQL データベースから {{{ .lake }}} にデータを同期する PostgreSQL 統合タスクを作成する方法について説明します。PostgreSQL タスクは、完全な `Snapshot` ロード (load)、継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートします。
 
 まず再利用可能な PostgreSQL 接続設定を作成する必要がある場合は、[PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md) を参照してください。
 
@@ -14,8 +14,8 @@ summary: このページでは、PostgreSQL データベースから {{{ .lake }
 | 同期モード      | 説明                                                                                                  |
 |----------------|-------------------------------------------------------------------------------------------------------|
 | Snapshot       | ソーステーブルから 1 回限りの完全なデータロードを実行します。初期データ移行や定期的な一括インポートに最適です。 |
-| CDC Only       | PostgreSQL の logical replication を使用して、リアルタイムの変更（insert、update、delete）を継続的に取得します。マージ操作には primary key が必要です。 |
-| Snapshot + CDC | 最初に完全な snapshot を実行し、その後シームレスに継続的な CDC に移行します。ほとんどのユースケースで推奨されます。 |
+| CDC Only       | PostgreSQL の論理レプリケーションを使用して、リアルタイムの変更（insert、update、delete）を継続的に取得します。マージ操作には主キーが必要です。 |
+| Snapshot + CDC | 最初に完全なスナップショットを実行し、その後シームレスに継続的な CDC に移行します。ほとんどのユースケースで推奨されます。 |
 
 ## 前提条件 {#prerequisites}
 
@@ -78,7 +78,7 @@ ALTER ROLE lake_cdc WITH REPLICATION;
 
 ### ネットワークアクセス {#network-access}
 
-PostgreSQL インスタンスに {{{ .lake }}} からアクセスできることを確認してください。ファイアウォールルールと security group を確認し、PostgreSQL ポートへの inbound 接続を許可してください。
+PostgreSQL インスタンスに {{{ .lake }}} からアクセスできることを確認してください。ファイアウォールルールとセキュリティグループを確認し、PostgreSQL ポートへの受信接続を許可してください。
 
 ## PostgreSQL 統合タスクの作成 {#creating-a-postgresql-integration-task}
 
@@ -91,7 +91,7 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
     | フィールド                 | 必須    | 説明                                                                                      |
     |----------------------------|-------------|-------------------------------------------------------------------------------------------|
     | **Data Source**             | はい         | ドロップダウンから既存の **PostgreSQL - Credentials** データソースを選択します                    |
-    | **Name**                   | はい         | この integration task の名前                                                                 |
+    | **Name**                   | はい         | この統合タスクの名前                                                                 |
     | **Source Database**        | —           | 選択したデータソースに基づいて自動的に表示されます                                        |
     | **Source Table**           | はい         | PostgreSQL データベースから同期するテーブルを選択します                                            |
     | **Sync Mode**             | はい         | **Snapshot**、**CDC Only**、**Snapshot + CDC** から選択します                                    |
@@ -104,7 +104,7 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 
 **Snapshot** モードを使用する場合は、追加のオプションを利用できます。
 
-- **Snapshot WHERE Condition**: snapshot 中にデータをフィルタリングする SQL WHERE 句です（例: `created_at > '2024-01-01'`）。これにより、ソースデータの一部のみをロードできます。
+- **Snapshot WHERE Condition**: スナップショット中にデータをフィルタリングする SQL WHERE 句です（例: `created_at > '2024-01-01'`）。これにより、ソースデータの一部のみをロードできます。
 
 ### ステップ 2: Preview Data {#step-2-preview-data}
 
@@ -122,7 +122,7 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 | **Target Database** | {{{ .lake }}} 内の対象データベースを選択します                             |
 | **Target Table**    | {{{ .lake }}} 内のテーブル名です（デフォルトはソーステーブル名）     |
 
-システムはソースカラムをターゲットテーブルスキーマに自動的にマッピングします。カラムマッピングを確認し、**Create** をクリックして integration task の作成を完了します。
+システムはソースカラムをターゲットテーブルスキーマに自動的にマッピングします。カラムマッピングを確認し、**Create** をクリックして統合タスクの作成を完了します。
 
 ## 同期モードごとのタスクの動作 {#task-behavior-by-sync-mode}
 
@@ -130,7 +130,7 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 |----------------|-----------------------------------------------------------------------------------------------|
 | Snapshot       | 1 回実行され、完全なデータロードが完了すると自動的に停止します。                           |
 | CDC Only       | 手動で停止するまで継続的に実行され、リアルタイムの変更を取得します。                            |
-| Snapshot + CDC | 最初に初期 snapshot を完了し、その後、手動で停止するまで継続的な CDC に移行します。   |
+| Snapshot + CDC | 最初に初期スナップショットを完了し、その後、手動で停止するまで継続的な CDC に移行します。   |
 
 CDC タスクでは、停止時に現在の LSN (Log Sequence Number) がチェックポイントとして保存されるため、再起動時に中断した位置からタスクを再開できます。
 
@@ -153,7 +153,7 @@ Snapshot モードでは、ソーステーブルを 1 回だけ完全に読み�
 
 ### CDC (Change Data Capture) {#cdc-change-data-capture}
 
-CDC モードでは、logical replication を介して PostgreSQL WAL (Write-Ahead Log) を継続的に監視し、ソーステーブルのリアルタイムな行レベル変更（INSERT、UPDATE、DELETE）を取得します。
+CDC モードでは、論理レプリケーションを介して PostgreSQL WAL (Write-Ahead Log) を継続的に監視し、ソーステーブルのリアルタイムな行レベル変更（INSERT、UPDATE、DELETE）を取得します。
 
 **ユースケース:**
 
@@ -163,25 +163,25 @@ CDC モードでは、logical replication を介して PostgreSQL WAL (Write-Ahe
 
 **仕組み:**
 
-1. logical replication slot を使用して PostgreSQL に接続します
+1. 論理レプリケーション slot を使用して PostgreSQL に接続します
 2. `pgoutput` プラグインを介してリアルタイムに行レベルの変更を取得します
-3. 変更を {{{ .lake }}} 内の raw staging table に書き込みます
-4. primary key を使用して、変更を定期的にターゲットテーブルへマージします
+3. 変更を {{{ .lake }}} 内の raw ステージングテーブルに書き込みます
+4. 主キーを使用して、変更を定期的にターゲットテーブルへマージします
 5. クラッシュリカバリのためにチェックポイント（LSN 位置）を保存します
 
 > **Note:**
 >
-> CDC モードでは、PostgreSQL WAL レベルを `logical` に設定する必要があり、primary key（一意カラム）を指定する必要があります。PostgreSQL ユーザーには `REPLICATION` 権限が必要です。
+> CDC モードでは、PostgreSQL WAL レベルを `logical` に設定する必要があり、主キー（一意カラム）を指定する必要があります。PostgreSQL ユーザーには `REPLICATION` 権限が必要です。
 
 ### Snapshot + CDC {#snapshot--cdc}
 
-このモードは両方のアプローチを組み合わせたものです。最初にソーステーブルの完全な snapshot を実行し、その後シームレスに CDC モードへ移行して継続的に変更を取得します。これはほとんどのデータ統合シナリオで推奨されるモードであり、完全な初期データロードと、その後の継続的なリアルタイム同期を実現します。
+このモードは両方のアプローチを組み合わせたものです。最初にソーステーブルの完全なスナップショットを実行し、その後シームレスに CDC モードへ移行して継続的に変更を取得します。これはほとんどのデータ統合シナリオで推奨されるモードであり、完全な初期データロードと、その後の継続的なリアルタイム同期を実現します。
 
 ## 詳細設定 {#advanced-configuration}
 
 ### Primary Key {#primary-key}
 
-Primary key は、CDC 中の MERGE 操作に使用される一意識別カラムを指定します。変更イベントが取得されると、{{{ .lake }}} はこのキーを使用して、新しい行を挿入するか既存の行を更新するかを判断します。通常は、ソーステーブルの primary key を指定します。
+主キーは、CDC 中の MERGE 操作に使用される一意識別カラムを指定します。変更イベントが取得されると、{{{ .lake }}} はこのキーを使用して、新しい行を挿入するか既存の行を更新するかを判断します。通常は、ソーステーブルの主キーを指定します。
 
 ### Sync Interval {#sync-interval}
 

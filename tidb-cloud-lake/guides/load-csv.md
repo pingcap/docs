@@ -117,7 +117,7 @@ FILE_FORMAT = (
 
 ### ステップ 4（オプション）. SELECT を使用してデータをコピーする {#step-4-option-using-select-to-copy-data}
 
-コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT 文を使用します。詳細は [`CSV からの SELECT`](/tidb-cloud-lake/guides/query-csv-files-in-stage.md) を参照してください。
+コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT 文を使用します。詳細は [`SELECT from CSV`](/tidb-cloud-lake/guides/query-csv-files-in-stage.md) を参照してください。
 
 ```sql
 COPY INTO books (title, author)

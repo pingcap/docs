@@ -124,7 +124,7 @@ s3://mybucket/events/data.ndjson     # A single specific file
 
 ### エラーハンドリング {#error-handling}
 
-- **Abort** (default): 最初に発生したエラーでインポートを停止します。データ品質が重要で、続行前に問題を調査したい場合に使用します。
+- **Abort**（デフォルト）: 最初に発生したエラーでインポートを停止します。データ品質が重要で、続行前に問題を調査したい場合に使用します。
 - **Continue**: エラーの原因となる行をスキップし、残りのデータのインポートを継続します。部分的なインポートを許容でき、データスループットを最大化したい場合に使用します。
 
 ### Clean Up Original Files (PURGE) {#clean-up-original-files-purge}

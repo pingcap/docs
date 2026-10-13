@@ -23,14 +23,14 @@ summary: "{{{ .lake }}} で \"Amazon SQS (S3) - IAM Role\" データソースを
 
     | フィールド | 必須 | 説明 |
     |-------|----------|-------------|
-    | **Name** | Yes | データソースを識別するための説明的な名前 |
-    | **Queue URL** | Yes | SQS 標準キューの URL。例: `https://sqs.us-east-1.amazonaws.com/123456789012/my-queue` |
-    | **Queue Region** | Yes | SQS キューが配置されている AWS リージョン。例: `us-east-1`。S3 バケットは SQS キューと同じリージョンに存在する必要があります |
-    | **Role ARN** | Yes | {{{ .lake }}} が引き受けることを許可された、AWS アカウント内の IAM Role ARN |
-    | **External ID** | Yes | {{{ .lake }}} コンソールの Organization ID。IAM Role の信頼ポリシーで使用されます |
-    | **Bucket** | Yes | ObjectCreated イベントを送信する S3 バケットの名前 |
-    | **Object Key Prefix** | No | S3 オブジェクトキーのプレフィックスフィルター。S3 通知フィルターと一致している必要があります |
-    | **Object Key Suffix** | No | S3 オブジェクトキーのサフィックスフィルター。S3 通知フィルターと一致している必要があります |
+    | **Name** | はい | データソースを識別するための説明的な名前 |
+    | **Queue URL** | はい | SQS 標準キューの URL。例: `https://sqs.us-east-1.amazonaws.com/123456789012/my-queue` |
+    | **Queue Region** | はい | SQS キューが配置されている AWS リージョン。例: `us-east-1`。S3 バケットは SQS キューと同じリージョンに存在する必要があります |
+    | **Role ARN** | はい | {{{ .lake }}} が引き受けることを許可された、AWS アカウント内の IAM Role ARN |
+    | **External ID** | はい | {{{ .lake }}} コンソールの Organization ID。IAM Role の信頼ポリシーで使用されます |
+    | **Bucket** | はい | ObjectCreated イベントを送信する S3 バケットの名前 |
+    | **Object Key Prefix** | いいえ | S3 オブジェクトキーのプレフィックスフィルター。S3 通知フィルターと一致している必要があります |
+    | **Object Key Suffix** | いいえ | S3 オブジェクトキーのサフィックスフィルター。S3 通知フィルターと一致している必要があります |
 
 3. **Test Connectivity** をクリックして接続を検証します。テストが成功したら、**OK** をクリックしてデータソースを保存します。
 
@@ -411,11 +411,11 @@ aws iam get-role \
 ## 設定要件 {#configuration-requirements}
 
 - S3 バケットと SQS キューは同じ AWS リージョンに存在している必要があります。
-- SQS キューは standard queue である必要があります。FIFO キューはサポートされていません。
-- SQS キューは 1 つの S3 notification rule 専用にする必要があります。他のバケット、他の prefix / suffix スコープ、または他の業務イベントに再利用しないでください。
-- S3 notification の bucket、prefix、suffix は、{{{ .lake }}} のデータソース設定と一致している必要があります。
+- SQS キューは標準キューである必要があります。FIFO キューはサポートされていません。
+- SQS キューは 1 つの S3 通知ルール専用にする必要があります。他のバケット、他のプレフィックス / サフィックスのスコープ、または他の業務イベントに再利用しないでください。
+- S3 通知のバケット、プレフィックス、サフィックスは、{{{ .lake }}} のデータソース設定と一致している必要があります。
 - `put-bucket-notification-configuration` は、バケット通知設定全体を置き換えます。変更を適用する前に、既存の設定をバックアップし、マージしてください。
-- S3 event notifications と SQS standard queues はどちらも at-least-once 配信を使用するため、メッセージが重複する可能性があります。
+- S3 イベント通知と SQS 標準キューはどちらも at-least-once 配信を使用するため、メッセージが重複する可能性があります。
 
 ## 次のステップ {#next-steps}
 

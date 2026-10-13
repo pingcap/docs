@@ -111,7 +111,7 @@ FRAME-0102| VID-20250101-001 | pedestrian | 180.277138577
 FRAME-0101| VID-20250101-001 | hard_brake | 324.291965923
 ```
 
-Tip: デバッグ時には `ST_ASTEXT(l.geom)` を追加するか、大圏距離の計算には [`HAVERSINE`](/tidb-cloud-lake/sql/geospatial-functions.md#distance--measurements) を使用してください。
+ヒント: デバッグ時には `ST_ASTEXT(l.geom)` を追加するか、大圏距離の計算には [`HAVERSINE`](/tidb-cloud-lake/sql/geospatial-functions.md#distance--measurements) を使用してください。
 
 ```sql
 WITH school_zone AS (
@@ -228,7 +228,7 @@ FRAME-0301| hard_brake  | ["hard_brake","highway"]
 
 ## 5. ヒートマップ ビューを公開する {#5-publish-a-heatmap-view}
 
-重い SQL を再実行することなく、geo heatmap を BI ツールや GIS ツールに公開できます。
+重い SQL を再実行することなく、地理ヒートマップを BI ツールや GIS ツールに公開できます。
 
 ```sql
 CREATE OR REPLACE VIEW v_citydrive_geo_heatmap AS

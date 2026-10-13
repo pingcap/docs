@@ -11,7 +11,7 @@ LakeSQL は、コマンドラインインターフェイスを好み、日常的
 
 ## LakeSQL のインストール {#installing-lakesql}
 
-LakeSQL には、さまざまなプラットフォームや好みに対応する複数のインストール方法があります。以下のセクションから希望する方法を選択するか、[LakeSQL release page](https://github.com/tidbcloud/lakesql/releases) からインストールパッケージをダウンロードして手動でインストールしてください。
+LakeSQL には、さまざまなプラットフォームや好みに対応する複数のインストール方法があります。以下のセクションから希望する方法を選択するか、[LakeSQL のリリースページ](https://github.com/tidbcloud/lakesql/releases) からインストールパッケージをダウンロードして手動でインストールしてください。
 
 ### シェルスクリプト {#shell-script}
 

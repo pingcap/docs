@@ -5,7 +5,7 @@ summary: フル Snapshot ロード、継続的な CDC、またはその両方を
 
 # TiDB 統合タスク (Preview)
 
-TiDB integration task は、TiDB クラスターから TiDB Cloud Lake にデータをレプリケートします。Dumpling エクスポートからのフル `Snapshot` ロード、TiCDC changefeed からの継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートします。
+TiDB 統合タスクは、TiDB クラスターから TiDB Cloud Lake にデータをレプリケートします。Dumpling エクスポートからのフル `Snapshot` ロード、TiCDC changefeed からの継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートします。
 
 再利用可能なステージング用バケット設定を先に作成する必要がある場合は、[TiDB データソース](/tidb-cloud-lake/guides/tidb-data-source.md) を参照してください。
 
@@ -26,7 +26,7 @@ TiDB integration task は、TiDB クラスターから TiDB Cloud Lake にデー
 
 ## 前提条件 {#prerequisites}
 
-TiDB integration task を作成する前に、以下を確認してください。
+TiDB 統合タスクを作成する前に、以下を確認してください。
 
 - **TiDB** データソースがすでに作成されていること。
 - データソースで設定したオブジェクトストレージのバケットに、TiDB Cloud Lake から到達できること。
@@ -34,7 +34,7 @@ TiDB integration task を作成する前に、以下を確認してください�
 
 ## TiDB Integration Task の作成 {#creating-a-tidb-integration-task}
 
-このセクションでは、TiDB Cloud Lake で TiDB integration task を作成する手順を説明します。
+このセクションでは、TiDB Cloud Lake で TiDB 統合タスクを作成する手順を説明します。
 
 ### ステップ 1: 基本設定を構成する {#step-1-configure-basic-settings}
 
@@ -48,7 +48,7 @@ TiDB integration task を作成する前に、以下を確認してください�
 | **Sync Mode** | はい | **Snapshot**、**CDC Only**、または **Snapshot + CDC** を選択します |
 | **Table Rules** | はい | 同期するソースオブジェクトを選択するルールです。[Table Rules](#table-rules) を参照してください |
 | **Max Matched Tables** | いいえ | ルールが一致できるテーブル数の上限です。空欄のままにすると、システムのデフォルト値 (500) が使用されます |
-| **Dumpling S3 Prefix** | はい (Snapshot modes) | Dumpling エクスポートを格納するバケットプレフィックスです。例: `dumpling/export` |
+| **Dumpling S3 Prefix** | はい（Snapshot モード） | Dumpling エクスポートを格納するバケットプレフィックスです。例: `dumpling/export` |
 | **Table Parallelism** | いいえ | 同時にロードするテーブル数です（デフォルト: 4） |
 | **Warehouse** | はい | タスクの実行に使用する TiDB Cloud Lake Warehouse |
 

@@ -7,7 +7,7 @@ summary: マスキングポリシーは、クエリ実行時にカラム値を�
 
 マスキングポリシーは、クエリ時にカラム値を変換します。権限のあるロールには実データが表示され、それ以外にはマスクされた値が表示されます。保存されているデータ自体は変更されません。
 
-カラムをマスクするのではなく行全体を非表示にしたい場合は、[行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md)を使用してください。
+カラムをマスクするのではなく行全体を非表示にしたい場合は、[行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md)を使用してください。
 
 ## 使用する場面 {#when-to-use}
 
@@ -198,4 +198,4 @@ DROP MASKING POLICY IF EXISTS email_mask;
 - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
 - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations)
 - [マスキングポリシーコマンド](/tidb-cloud-lake/sql/masking-policy-sql.md)
-- [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md)
+- [行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md)

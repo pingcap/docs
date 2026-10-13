@@ -1,6 +1,6 @@
 ---
 title: パスワードポリシー
-summary: パスワードポリシーは、{{{ .lake }}} のパスワードにどの程度の強度を求めるか（長さ、文字種、履歴、再試行回数の上限など）と、どのくらいの頻度で変更できるかを定義します。これにより、すべての CREATE USER とパスワード変更に対して一貫したガードレールを設けられます。属性の完全な一覧については、Password Policy Attributes を参照してください。
+summary: パスワードポリシーは、{{{ .lake }}} のパスワードにどの程度の強度を求めるか（長さ、文字種、履歴、再試行回数の上限など）と、どのくらいの頻度で変更できるかを定義します。これにより、すべての CREATE USER とパスワード変更に対して一貫したガードレールを設けられます。属性の完全な一覧については、パスワードポリシー属性を参照してください。
 ---
 
 # パスワードポリシー
@@ -111,4 +111,4 @@ DROP PASSWORD POLICY analyst_policy;
 
 ---
 
-完全な構文については、[Password Policy SQL reference](/tidb-cloud-lake/sql/password-policy-sql.md) を参照してください。`CREATE`、`ALTER`、`SHOW`、`DESC`、`DROP` を扱っています。
+完全な構文については、[パスワードポリシーの SQL リファレンス](/tidb-cloud-lake/sql/password-policy-sql.md) を参照してください。`CREATE`、`ALTER`、`SHOW`、`DESC`、`DROP` を扱っています。

@@ -11,7 +11,7 @@ summary: "{{{ .lake }}} の Data Integration 機能は、外部システムか�
 
 | 概念 | 説明 |
 |---------|-------------|
-| [データソース](/tidb-cloud-lake/guides/data-sources.md) | 外部システムへのアクセスや通知の送信に使用する、再利用可能な接続設定または認証情報です。たとえば、AWS Access Key / Secret Key、MySQL hostname / username / password、SQS (S3) queue URL、Kafka broker addresses、または FeiShu bot webhook などがあります。 |
+| [データソース](/tidb-cloud-lake/guides/data-sources.md) | 外部システムへのアクセスや通知の送信に使用する、再利用可能な接続設定または認証情報です。たとえば、AWS Access Key / Secret Key、MySQL のホスト名 / ユーザー名 / パスワード、SQS (S3) キューの URL、Kafka ブローカーのアドレス、または FeiShu ボットの Webhook などがあります。 |
 | [統合タスク](/tidb-cloud-lake/guides/integration-tasks.md) | データの取得元、タスクによるデータの書き込み先または結果の保存方法、使用するランタイムパラメータ、およびタスクの開始方法と監視方法を定義する実行可能なタスクです。 |
 
 データソース自体はデータを移動しません。データソースは、外部システムにアクセスするために必要な情報を保存するだけです。統合タスクは、実際にインポート、スナップショット、継続的な同期、またはメッセージ消費を実行する単位です。

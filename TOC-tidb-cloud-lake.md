@@ -125,7 +125,7 @@
   - データ保護ポリシー
     - [概要](/tidb-cloud-lake/guides/data-protection-policies.md)
     - [マスキングポリシー](/tidb-cloud-lake/guides/masking-policy.md)
-    - [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md)
+    - [行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md)
   - [監査証跡](/tidb-cloud-lake/guides/audit-trail.md)
   - [ネットワークポリシー](/tidb-cloud-lake/guides/network-policy.md)
   - [パスワードポリシー](/tidb-cloud-lake/guides/password-policy.md)

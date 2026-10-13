@@ -40,4 +40,4 @@ summary: 3 つのステップで TiDB Cloud Lake を使い始めましょう。�
 
 - [**TiDB Cloud Lake への接続**](/tidb-cloud-lake/guides/connection-overview.md): ワークフローに適したクライアントまたはドライバーを選択します。
 - [**アーキテクチャを学ぶ**](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md): メタデータ、コンピュート、ストレージの各レイヤーを理解します。
-- [**製品機能を確認する**](/tidb-cloud-lake/guides/vector-search-guide.md): 分析、ベクトル、検索、geo 機能から始めましょう。
+- [**製品機能を確認する**](/tidb-cloud-lake/guides/vector-search-guide.md): 分析、ベクトル、検索、地理空間の機能から始めましょう。

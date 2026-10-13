@@ -7,7 +7,7 @@ summary: "{{{ .lake }}} には Personal、Business、Dedicated の 3 つのエ�
 
 {{{ .lake }}} には **Personal**、**Business**、**Dedicated** の 3 つのエディションがあり、幅広いニーズに対応し、さまざまなユースケースで最適なパフォーマンスを確保できるよう選択できます。
 
-料金情報については、[Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md) を参照してください。これらのエディション間の詳細な機能一覧については、[機能一覧](#feature-lists) を参照してください。
+料金情報については、[料金と請求](/tidb-cloud-lake/guides/pricing-billing.md) を参照してください。これらのエディション間の詳細な機能一覧については、[機能一覧](#feature-lists) を参照してください。
 
 ## 機能一覧 {#feature-lists}
 

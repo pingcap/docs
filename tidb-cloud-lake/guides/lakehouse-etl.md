@@ -231,7 +231,7 @@ CREATE OR REPLACE TASK task_load_frame_events
 ALTER TASK task_load_frame_events RESUME;
 ```
 
-同じパターンを使って、`frame_metadata_catalog`、embeddings、または GPS データ向けのタスクをさらに追加できます。すべてのオプションについては、[Tasks](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md) を参照してください。
+同じパターンを使って、`frame_metadata_catalog`、埋め込み、または GPS データ向けのタスクをさらに追加できます。すべてのオプションについては、[Tasks](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md) を参照してください。
 
 ---
 

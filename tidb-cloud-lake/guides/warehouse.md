@@ -70,13 +70,13 @@ Warehouse を効果的に管理し、最適なパフォーマンスとコスト�
 
 - **適切なサイズを選択する**
 
-    - **development & testing** には、小さい Warehouse（XSmall、Small）を使用します。
+    - **開発およびテスト** には、小さい Warehouse（XSmall、Small）を使用します。
     - **本番** には、大きい Warehouse（Medium、Large、XLarge）を選択します。
 
 - **Warehouse を分離する**
 
     - **データロード** 用と **クエリ実行** 用で別々の Warehouse を使用します。
-    - **development**、**testing**、**本番** 環境ごとに個別の Warehouse を作成します。
+    - **開発**、**テスト**、**本番** 環境ごとに個別の Warehouse を作成します。
 
 - **データロードのヒント**
 

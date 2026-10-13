@@ -5,7 +5,7 @@ summary: Tableau は、データを使って問題を解決する方法を変革
 
 # Tableau で TiDB Cloud Lake に接続する
 
-[Tableau](https://www.tableau.com/) は、データを使って問題を解決する方法を変革するビジュアル分析プラットフォームです。[lake-jdbc driver](https://github.com/tidbcloud/lake-jdbc) を使用することで、Tableau の **Other Databases (JDBC)** インターフェースを介して {{{ .lake }}} に接続できます。
+[Tableau](https://www.tableau.com/) は、データを使って問題を解決する方法を変革するビジュアル分析プラットフォームです。[lake-jdbc ドライバー](https://github.com/tidbcloud/lake-jdbc) を使用することで、Tableau の **Other Databases (JDBC)** インターフェースを介して {{{ .lake }}} に接続できます。
 
 最適な互換性のために、Tableau バージョン 2022.3 以降を使用してください。
 
@@ -44,8 +44,8 @@ summary: Tableau は、データを使って問題を解決する方法を変革
     | --------- | ----------------------------------------- | ------------------------------------------------------------------- |
     | URL       | 形式: `jdbc:lake://{user}:{password}@{host}:{port}/{database}` | `jdbc:lake://cloudapp:<your-password>@<your-host>:443/default` |
     | Dialect   | SQL dialect には "MySQL" を選択します。           | MySQL                                                               |
-    | Username  | {{{ .lake }}} に接続するための SQL user  | cloudapp                                                            |
-    | Password  | SQL user のパスワード                         | あなたのパスワード                                                       |
+    | Username  | {{{ .lake }}} に接続するための SQL ユーザー | cloudapp                                                            |
+    | Password  | SQL ユーザーのパスワード                        | あなたのパスワード                                                       |
 
 3. Tableau ワークブックが開いたら、クエリ対象のデータベース、スキーマ、およびテーブルを選択します。このチュートリアルでは、**Database** と **Schema** の両方に _default_ を選択します。
 

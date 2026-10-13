@@ -12,7 +12,7 @@ TiDB Cloud Lake は、ANSI SQL、半構造化データ処理、ベクトル検�
 
 > **Warning:**
 >
-> TiDB Cloud Lake は現在 **public preview** 段階です。製品の改善に伴い、利用可能な機能やサービス制限が変更される場合があります。
+> TiDB Cloud Lake は現在 **パブリックプレビュー** 段階です。製品の改善に伴い、利用可能な機能やサービス制限が変更される場合があります。
 
 ## {{{ .lake }}} を選ぶ理由 {#why--lake-}
 
