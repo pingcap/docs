@@ -1,11 +1,11 @@
 ---
 title: GET
-summary: ARRAY を含む Variant から index で値を抽出するか、OBJECT を含む Variant から field_name で値を抽出します。いずれかの引数が NULL の場合、値は Variant または NULL として返されます。
+summary: ARRAY を含む Variant から index で値を抽出するか、OBJECT を含む Variant から field_name で値を抽出します。値は Variant として返されます。いずれかの引数が NULL の場合は NULL を返します。
 ---
 
 # GET
 
-`ARRAY` を含む `Variant` から `index` によって値を抽出するか、`OBJECT` を含む `Variant` から `field_name` によって値を抽出します。いずれかの引数が `NULL` の場合、値は `Variant` または `NULL` として返されます。
+`ARRAY` を含む `Variant` から `index` によって値を抽出するか、`OBJECT` を含む `Variant` から `field_name` によって値を抽出します。値は `Variant` として返されます。いずれかの引数が `NULL` の場合は `NULL` を返します。
 
 `GET` は `field_name` に対して大文字と小文字を区別して照合します。大文字と小文字を区別しない照合を行うには、`GET_IGNORE_CASE` を使用します。
 

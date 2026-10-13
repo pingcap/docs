@@ -24,7 +24,7 @@ TRY_TO_GEOMETRY(<variant>, [<srid>])
 
 | 引数        | 説明                                                                 |
 |-------------|----------------------------------------------------------------------|
-| `<string>`  | 引数は、16 進形式の WKT、EWKT、WKB、EWKB、または GeoJSON 形式の文字列表現である必要があります。 |
+| `<string>`  | 引数は、WKT、EWKT、16 進形式の WKB または EWKB、あるいは GeoJSON 形式の文字列式である必要があります。 |
 | `<binary>`  | 引数は、WKB または EWKB 形式のバイナリ式である必要があります。      |
 | `<variant>` | 引数は、GeoJSON 形式の JSON OBJECT である必要があります。            |
 | `<srid>`    | 使用する SRID の整数値です。                                         |

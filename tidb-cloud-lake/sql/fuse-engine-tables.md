@@ -194,7 +194,7 @@ ALTER TABLE t1 SET OPTIONS(data_retention_num_snapshots_to_keep = 3);
 
 - **説明:**
 
-    `COPY INTO` 操作中にテーブルスキーマを自動的に Schema Evolution できるかどうかを制御します。有効化すると（`True` に設定）、{{{ .lake }}} は、スキーマに宛先テーブルに存在しないカラムを含む Parquet ファイルをロード (load) する際に、不足しているカラムをテーブルに自動的に追加します。既存の行に対する不足値は `NULL` で埋められます。詳細は、[Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md) を参照してください。
+    `COPY INTO` 操作中にテーブルスキーマを自動的に変更（Schema Evolution）できるかどうかを制御します。有効化すると（`True` に設定）、{{{ .lake }}} は、スキーマに宛先テーブルに存在しないカラムを含む Parquet ファイルをロード (load) する際に、不足しているカラムをテーブルに自動的に追加します。既存の行に対する不足値は `NULL` で埋められます。詳細は、[Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md) を参照してください。
 
 **例:**
 

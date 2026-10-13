@@ -48,7 +48,7 @@ REGEXP_SUBSTR(<expr>, <pat[, pos[, occurrence[, match_type]]]>)
 | expr       | 一致対象となる文字列 expr |
 | pat        | 正規表現 |
 | pos        | 任意。検索を開始する expr 内の位置です。省略した場合のデフォルトは 1 です。 |
-| occurrence | 任意。検索する一致の出現回数です。省略した場合のデフォルトは 1 です。 |
+| occurrence | 任意。何番目の一致を検索するかを指定します。省略した場合のデフォルトは 1 です。 |
 | match_type | 任意。一致方法を指定する文字列です。意味は REGEXP_LIKE() で説明されているものと同じです。 |
 
 ## 戻り値の型 {#return-type}
