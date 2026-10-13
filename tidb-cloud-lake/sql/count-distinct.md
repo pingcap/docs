@@ -1,11 +1,11 @@
 ---
 title: COUNT_DISTINCT
-summary: 集約関数。
+summary: 集計関数。
 ---
 
 # COUNT_DISTINCT
 
-集約関数。
+集計関数。
 
 `count(distinct ...)` 関数は、値の集合における一意な値の数を計算します。
 

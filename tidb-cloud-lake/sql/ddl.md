@@ -22,7 +22,7 @@ summary: これらのトピックでは、{{{ .lake }}} における DDL (Data D
 | コンポーネント | 説明 |
 |-----------|-------------|
 | **[クラスターキー](/tidb-cloud-lake/sql/cluster-key.md)** | クエリ最適化のためのデータクラスタリングを定義 |
-| **[集約インデックス](/tidb-cloud-lake/sql/aggregating-index-sql.md)** | より高速なクエリのために集計を事前計算 |
+| **[集計インデックス](/tidb-cloud-lake/sql/aggregating-index-sql.md)** | より高速なクエリのために集計を事前計算 |
 | **[転置インデックス](/tidb-cloud-lake/sql/inverted-index.md)** | テキストカラム向けの全文検索インデックス |
 | **[Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md)** | LIKE パターン向けの部分文字列検索インデックス |
 | **[Spatial Index](/tidb-cloud-lake/sql/spatial-index-overview.md)** | GEOMETRY カラム向けの空間プルーニングインデックス |

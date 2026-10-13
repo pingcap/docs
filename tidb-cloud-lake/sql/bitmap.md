@@ -38,7 +38,7 @@ SELECT
 
 ### Bitmap の永続化 {#persist-bitmaps}
 
-配列をテーブルに挿入する前に bitmap に変換するには、`BUILD_BITMAP` を使用します。その後、`BITMAP_COUNT` などの集約関数を使うことで、格納された値を高速に読み取れます。
+配列をテーブルに挿入する前に bitmap に変換するには、`BUILD_BITMAP` を使用します。その後、`BITMAP_COUNT` などの集計関数を使うことで、格納された値を高速に読み取れます。
 
 ```sql
 CREATE TABLE user_visits (
