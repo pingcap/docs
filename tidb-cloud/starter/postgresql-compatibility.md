@@ -123,7 +123,7 @@ The following PostgreSQL index access methods are not supported:
 
 HNSW is the supported approximate nearest-neighbor index type for vector workloads. It has additional structural and query-shape requirements.
 
-PostgreSQL vector index types that are not provided by TiDB Cloud, such as IVFFlat, are not available.
+Other pgvector index types that are not provided by TiDB Cloud, such as IVFFlat, are not available.
 
 ### `COPY`
 
