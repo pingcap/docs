@@ -9,9 +9,9 @@ summary: ジオメトリオブジェクトの次元を返します。GEOMETRY �
 
 | 地理空間オブジェクト型       | 次元  |
 |------------------------------|------------|
-| 点 / マルチポイント           | 0          |
-| 線ストリング / マルチ線ストリング | 1          |
-| ポリゴン / マルチポリゴン       | 2          |
+| Point / MultiPoint           | 0          |
+| LineString / MultiLineString | 1          |
+| Polygon / MultiPolygon       | 2          |
 
 ## 構文 {#syntax}
 

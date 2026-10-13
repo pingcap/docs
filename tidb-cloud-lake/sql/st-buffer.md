@@ -23,7 +23,7 @@ ST_BUFFER(<geometry>, <distance>)
 > **Note:**
 >
 > - Point、MultiPoint、LineString、MultiLineString の場合: distance の絶対値が使用されます（負の値でも正の値と同じように動作します）。
-> - Polygon、MultiPolygon の場合: 正の distance は膨張し、負の distance は縮小します。
+> - Polygon、MultiPolygon の場合: 正の distance ではジオメトリが膨張し、負の distance では縮小します。
 > - 結果が空の場合は NULL を返します（例: Point に対する距離 0、またはポリゴンを面積 0 を超えて縮小した場合）。
 > - distance が 0 の Polygon の場合: MultiPolygon でラップされたポリゴンを返します。
 > - 出力では SRID が保持されます。

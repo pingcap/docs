@@ -38,7 +38,7 @@ VACUUM DROP TABLE
 
 `VACUUM DROP TABLE` コマンドは、`DRY RUN` または `DRY RUN SUMMARY` パラメータが指定された場合に結果を返します。
 
-- `DRY RUN`: 各削除済みテーブルについて、最大 1,000 件の Candidate ファイルとそのサイズ（バイト単位）の一覧を返します。
+- `DRY RUN`: 各削除済みテーブルについて、最大 1,000 件の 削除候補ファイルとそのサイズ（バイト単位）の一覧を返します。
 - `DRY RUN SUMMARY`: 各削除済みテーブルについて、削除対象ファイルの総数と合計サイズを返します。
 
 ```sql title='Example:'

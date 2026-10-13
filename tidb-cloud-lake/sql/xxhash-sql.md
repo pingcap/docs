@@ -1,11 +1,11 @@
 ---
 title: XXHASH64
-summary: 文字列の xxHash64 64-bit ハッシュ値を計算します。引数が NULL の場合、値は UInt64 または NULL として返されます。
+summary: 文字列の xxHash64 64-bit ハッシュ値を計算します。値は UInt64 として返されます。引数が NULL の場合は NULL を返します。
 ---
 
 # XXHASH64
 
-文字列の xxHash64 64-bit ハッシュ値を計算します。引数が NULL の場合、値は UInt64 または NULL として返されます。
+文字列の xxHash64 64-bit ハッシュ値を計算します。値は UInt64 として返されます。引数が NULL の場合は NULL を返します。
 
 ## 構文 {#syntax}
 
