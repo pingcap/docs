@@ -128,7 +128,7 @@ SELECT * FROM employee_history;
 └─────────────────────────────────────────────────────┘
 ```
 
-### 例 2: 条件付き INSERT ALL と FIRST {#example-2-conditional-insert-all-first}
+### 例 2: 条件付き INSERT ALL と FIRST {#example-2-conditional-insert-all--first}
 
 この例では、条件付き INSERT ALL を使用して、特定の条件に基づいて売上データを別々のテーブルに挿入する方法を示します。複数の条件を満たすレコードは、対応するすべてのテーブルに挿入されます。
 

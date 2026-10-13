@@ -66,32 +66,32 @@ CREATE TABLE <table_name> (
 - **構文:** `compression = '<compression>'`
 - **説明:** エンジンの圧縮方式を指定します。圧縮オプションには lz4、zstd、snappy、none があります。圧縮方式のデフォルトは、オブジェクトストレージでは zstd、ファイルシステム (fs) ストレージでは lz4 です。
 
-### `snapshot_loc` {#snapshot-loc}
+### `snapshot_loc` {#snapshot_loc}
 
 - **構文:** `snapshot_loc = '<snapshot_loc>'`
 - **説明:** 文字列形式の location パラメータを指定し、データをコピーせずにテーブルを簡単に共有できるようにします。
 
-### `block_size_threshold` {#block-size-threshold}
+### `block_size_threshold` {#block_size_threshold}
 
 - **構文:** `block_size_threshold = <n>`
 - **説明:** 最大ブロックサイズをバイト単位で指定します。デフォルトは 104,857,600 バイトです。
 
-### `block_per_segment` {#block-per-segment}
+### `block_per_segment` {#block_per_segment}
 
 - **構文:** `block_per_segment = <n>`
 - **説明:** セグメント内の最大ブロック数を指定します。デフォルトは 1,000 です。
 
-### `row_per_block` {#row-per-block}
+### `row_per_block` {#row_per_block}
 
 - **構文:** `row_per_block = <n>`
 - **説明:** ファイル内の最大行数を指定します。デフォルトは 1,000,000 です。
 
-### `bloom_index_columns` {#bloom-index-columns}
+### `bloom_index_columns` {#bloom_index_columns}
 
 - **構文:** `bloom_index_columns = '<column> [, <column> ...]'`
 - **説明:** ブルームインデックスに使用するカラムを指定します。これらのカラムのデータ型には、Map、Number、String、Date、Timestamp を使用できます。特定のカラムを指定しない場合、ブルームインデックスはデフォルトですべてのサポート対象カラムに作成されます。`bloom_index_columns=''` を指定すると、ブルームインデックス作成は無効になります。
 
-### `bloom_index_type` {#bloom-index-type}
+### `bloom_index_type` {#bloom_index_type}
 
 - **構文:** `bloom_index_type = 'xor8' | 'binary_fuse32'`
 - **説明:** ブルームインデックスに使用するフィルターアルゴリズムを指定します。デフォルトは `xor8` です。ポイントルックアップの負荷が高いテーブルでは `binary_fuse32` を使用してください。インデックスサイズが大きくなる（`xor8` の約 4 倍）代わりに、偽陽性率が低くなります。
@@ -111,17 +111,17 @@ CREATE TABLE <table_name> (
     ALTER TABLE t SET OPTIONS(bloom_index_type = 'xor8');
     ```
 
-### `change_tracking` {#change-tracking}
+### `change_tracking` {#change_tracking}
 
 - **構文:** `change_tracking = True / False`
 - **説明:** Fuse Engine でこのオプションを `True` に設定すると、テーブルの変更を追跡できます。テーブルに対して stream を作成すると、自動的に `change_tracking` が `True` に設定され、変更追跡メタデータとして追加の隠しカラムがテーブルに導入されます。詳細については、[How Stream Works](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md) を参照してください。
 
-### `data_retention_period_in_hours` {#data-retention-period-in-hours}
+### `data_retention_period_in_hours` {#data_retention_period_in_hours}
 
 - **構文:** `data_retention_period_in_hours = <n>`
 - **説明:** テーブルデータを保持する時間数を指定します。最小値は 1 時間です。最大値は {{{ .lake }}} のサービス設定によって決まり、指定されていない場合のデフォルトは 2,160 時間（90 日 x 24 時間）です。
 
-### `enable_auto_vacuum` {#enable-auto-vacuum}
+### `enable_auto_vacuum` {#enable_auto_vacuum}
 
 - **構文:** `enable_auto_vacuum = 0 / 1`
 - **説明:** 変更操作中にテーブルが自動的に vacuum 操作をトリガーするかどうかを制御します。これは、すべてのテーブルに対する設定としてグローバルに設定することも、テーブルレベルで設定することもできます。テーブルレベルのオプションは、同名の session/global 設定よりも優先されます。有効化されている場合（1 に設定）、INSERT や ALTER TABLE などの変更操作の後に vacuum 操作が自動的にトリガーされ、設定された保持ポリシーに従ってテーブルデータがクリーンアップされます。
@@ -151,7 +151,7 @@ INSERT INTO t1 VALUES(3); -- Will still trigger vacuum
 INSERT INTO t2 VALUES(2); -- Won't trigger vacuum anymore
 ```
 
-### `data_retention_num_snapshots_to_keep` {#data-retention-num-snapshots-to-keep}
+### `data_retention_num_snapshots_to_keep` {#data_retention_num_snapshots_to_keep}
 
 - **構文:** `data_retention_num_snapshots_to_keep = <n>`
 - **説明:** vacuum 操作中に保持するスナップショット数を指定します。これは、すべてのテーブルに対する設定としてグローバルに設定することも、テーブルレベルで設定することもできます。テーブルレベルのオプションは、同名の session/global 設定よりも優先されます。設定すると、vacuum 操作後は指定した数の最新スナップショットのみが保持されます。`data_retention_time_in_days` 設定を上書きします。0 に設定した場合、この設定は無視されます。このオプションは `enable_auto_vacuum` 設定と組み合わせて機能し、スナップショット保持ポリシーをきめ細かく制御できます。
@@ -186,7 +186,7 @@ ALTER TABLE t1 SET OPTIONS(data_retention_num_snapshots_to_keep = 3);
 -- Now t1 will keep 3 snapshots when vacuum is triggered
 ```
 
-### `enable_schema_evolution` {#enable-schema-evolution}
+### `enable_schema_evolution` {#enable_schema_evolution}
 
 - **構文:**
 

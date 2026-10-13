@@ -47,7 +47,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [ST_GEOHASH](/tidb-cloud-lake/sql/st-geohash.md) | geometry を GeoHash に変換します |  | `ST_GEOHASH(ST_MAKEGEOMPOINT(-122.35, 37.55), 7)` → `'9q8yyk8'` |
 | [TO_STRING](/tidb-cloud-lake/sql/string.md) | geometry を文字列に変換します |  | `TO_STRING(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'POINT(-122.35 37.55)'` |
 
-## Accessors & Properties {#accessors-properties}
+## Accessors & Properties {#accessors--properties}
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
@@ -99,14 +99,14 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [ST_CONTAINS](/tidb-cloud-lake/sql/st-contains.md) | ある geometry が別の geometry を含むかどうかを判定します | `ST_CONTAINS(ST_MAKEPOLYGON(...), ST_MAKEGEOMPOINT(...))` → `TRUE` |
 | [POINT_IN_POLYGON](/tidb-cloud-lake/sql/point-in-polygon.md) | 点が polygon の内側にあるかどうかを確認します | `POINT_IN_POLYGON([lon, lat], [[p1_lon, p1_lat], ...])` → `TRUE` |
 
-## Distance & Measurements {#distance-measurements}
+## Distance & Measurements {#distance--measurements}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
 | [ST_DISTANCE](/tidb-cloud-lake/sql/st-distance.md) | geometry 間の距離を測定します | `ST_DISTANCE(ST_MAKEGEOMPOINT(-122.35, 37.55), ST_MAKEGEOMPOINT(-122.40, 37.60))` → `5.57` |
 | [HAVERSINE](/tidb-cloud-lake/sql/haversine.md) | 座標間の大円距離を計算します | `HAVERSINE(37.55, -122.35, 37.60, -122.40)` → `6.12` |
 
-## H3 Indexing & Conversion {#h3-indexing-conversion}
+## H3 Indexing & Conversion {#h3-indexing--conversion}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -164,7 +164,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON](/tidb-cloud-lake/sql/h3-get-unidirectional-edges-hexagon.md) | セルから出るエッジを一覧表示します | `H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON(h3_index)` → `[edge1, edge2, ...]` |
 | [H3_GET_UNIDIRECTIONAL_EDGE_BOUNDARY](/tidb-cloud-lake/sql/h3-get-unidirectional-edge-boundary.md) | エッジの境界を返します | `H3_GET_UNIDIRECTIONAL_EDGE_BOUNDARY(edge_index)` → `[[lon1,lat1], [lon2,lat2]]` |
 
-## H3 Measurements & Angles {#h3-measurements-angles}
+## H3 Measurements & Angles {#h3-measurements--angles}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|

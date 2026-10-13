@@ -32,7 +32,7 @@ internalStage ::= @<internal_stage_name>[/<file>]
 externalStage ::= @<external_stage_name>[/<file>]
 ```
 
-### PATTERN = 'regex_pattern' {#pattern-regex-pattern}
+### PATTERN = 'regex_pattern' {#pattern--regex_pattern}
 
 単一引用符で囲まれた正規表現パターン文字列で、削除する stage 上のファイルを絞り込みます。これは `@<stage_name>[/<path>]` の後のファイルパス部分に一致します。詳細は [PATTERN を使用した stage ファイルのフィルタリング](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern) を参照してください。
 

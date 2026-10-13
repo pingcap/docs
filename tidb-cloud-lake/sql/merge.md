@@ -13,7 +13,7 @@ summary: 指定したソースのデータを使用し、ステートメント�
 
 MERGE ステートメントには通常、MATCHED 句および / または NOT MATCHED 句が含まれ、一致した場合と一致しなかった場合を {{{ .lake }}} がどのように処理するかを指示します。MATCHED 句では、ターゲットテーブルに対して **UPDATE** または **DELETE** 操作を実行するかを選択できます。一方、NOT MATCHED 句で使用できるのは **INSERT** です。
 
-## 複数の MATCHED 句と NOT MATCHED 句 {#multiple-matched-not-matched-clauses}
+## 複数の MATCHED 句と NOT MATCHED 句 {#multiple-matched--not-matched-clauses}
 
 MERGE ステートメントには複数の MATCHED 句および / または NOT MATCHED 句を含めることができ、MERGE 操作中に満たされた条件に応じて異なるアクションを柔軟に指定できます。
 
@@ -123,7 +123,7 @@ SELECT * FROM salaries;
 └────────────────────────────────────────────┘
 ```
 
-### 例 2: UPDATE \* と INSERT \* を使用したマージ {#example-2-merge-with-update-insert}
+### 例 2: UPDATE \* と INSERT \* を使用したマージ {#example-2-merge-with-update---insert-}
 
 この例では、MERGE を使用して target_table と source_table の間でデータを同期し、一致する行をソースの値で更新し、一致しない行を挿入します。
 

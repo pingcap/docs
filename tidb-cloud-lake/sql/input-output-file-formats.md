@@ -61,7 +61,7 @@ formatTypeOptions ::=
 - 引用符で囲まれた文字列内では、[QUOTE](#quote-load-only) を除き、どの文字もエスケープされません。
 - [FIELD_DELIMITER](#field_delimiter) と [QUOTE](#quote-load-only) の間に空白を入れてはいけません。
 
-### RECORD_DELIMITER {#record-delimiter}
+### RECORD_DELIMITER {#record_delimiter}
 
 ファイル内でレコードを区切る区切り文字です。
 
@@ -73,7 +73,7 @@ formatTypeOptions ::=
 
 **デフォルト**: `\n`
 
-### FIELD_DELIMITER {#field-delimiter}
+### FIELD_DELIMITER {#field_delimiter}
 
 レコード内でフィールドを区切る区切り文字です。
 
@@ -104,13 +104,13 @@ CSV の一部のバリアントでは、引用符を二重にしてエスケー�
 
 **デフォルト**: `''`
 
-### SKIP_HEADER (Load Only) {#skip-header-load-only}
+### SKIP_HEADER (Load Only) {#skip_header-load-only}
 
 ファイルの先頭からスキップする行数です。
 
 **デフォルト**: `0`
 
-### TRIM_SPACE (Load Only) {#trim-space-load-only}
+### TRIM_SPACE (Load Only) {#trim_space-load-only}
 
 型変換の前に、各フィールド値の先頭および末尾から ASCII 空白文字を削除します。
 
@@ -120,13 +120,13 @@ CSV では、csv-core がフィールドを抽出した後にトリミングが�
 
 **デフォルト**: `false`
 
-### OUTPUT_HEADER (Unload Only) {#output-header-unload-only}
+### OUTPUT_HEADER (Unload Only) {#output_header-unload-only}
 
 カラム名を含むヘッダー行を出力に含めます。
 
 **デフォルト**: `false`
 
-### QUOTE_STYLE (Unload Only) {#quote-style-unload-only}
+### QUOTE_STYLE (Unload Only) {#quote_style-unload-only}
 
 出力時に CSV の値をどのように引用符で囲むかを制御します。
 
@@ -137,7 +137,7 @@ CSV では、csv-core がフィールドを抽出した後にトリミングが�
 
 **デフォルト**: `QUOTE_NOT_NULL`
 
-### NAN_DISPLAY {#nan-display}
+### NAN_DISPLAY {#nan_display}
 
 "NaN" (Not-a-Number) を表す文字列です。
 
@@ -145,7 +145,7 @@ CSV では、csv-core がフィールドを抽出した後にトリミングが�
 
 **デフォルト**: `'NaN'`
 
-### NULL_DISPLAY {#null-display}
+### NULL_DISPLAY {#null_display}
 
 NULL 値を表す文字列です。
 
@@ -153,7 +153,7 @@ NULL 値を表す文字列です。
 
 **デフォルト**: `'\N'`
 
-### ALLOW_QUOTED_NULLS (Load Only) {#allow-quoted-nulls-load-only}
+### ALLOW_QUOTED_NULLS (Load Only) {#allow_quoted_nulls-load-only}
 
 引用符付き文字列を NULL 値に変換できるようにします。
 
@@ -161,13 +161,13 @@ NULL 値を表す文字列です。
 
 **デフォルト**: `false`
 
-### ERROR_ON_COLUMN_COUNT_MISMATCH (Load Only) {#error-on-column-count-mismatch-load-only}
+### ERROR_ON_COLUMN_COUNT_MISMATCH (Load Only) {#error_on_column_count_mismatch-load-only}
 
 データファイル内のカラム数が宛先テーブルのカラム数と一致しない場合にエラーを返します。
 
 **デフォルト**: `true`
 
-### EMPTY_FIELD_AS (Load Only) {#empty-field-as-load-only}
+### EMPTY_FIELD_AS (Load Only) {#empty_field_as-load-only}
 
 引用符なしの空フィールド (つまり `,,`) を変換する値です。
 
@@ -179,7 +179,7 @@ NULL 値を表す文字列です。
 
 **デフォルト**: `NULL`
 
-### QUOTED_EMPTY_FIELD_AS (Load Only) {#quoted-empty-field-as-load-only}
+### QUOTED_EMPTY_FIELD_AS (Load Only) {#quoted_empty_field_as-load-only}
 
 引用符付きの空フィールド (つまり `,"",`) を変換する値です。
 
@@ -187,7 +187,7 @@ NULL 値を表す文字列です。
 
 **デフォルト**: `STRING`
 
-### BINARY_FORMAT {#binary-format}
+### BINARY_FORMAT {#binary_format}
 
 `Binary` カラムのエンコード形式です。
 
@@ -195,7 +195,7 @@ NULL 値を表す文字列です。
 
 **デフォルト**: `HEX`
 
-### GEOMETRY_FORMAT {#geometry-format}
+### GEOMETRY_FORMAT {#geometry_format}
 
 `Geometry` カラムのエンコード形式です。
 
@@ -211,7 +211,7 @@ NULL 値を表す文字列です。
 
 **Default**: `UTF-8`
 
-### ENCODING_ERROR_MODE (Load Only) {#encoding-error-mode-load-only}
+### ENCODING_ERROR_MODE (Load Only) {#encoding_error_mode-load-only}
 
 宣言されたエンコーディングで無効なバイト列（または encoding が `UTF-8` の場合は無効な UTF-8）をどのように処理するかを指定します。
 
@@ -262,7 +262,7 @@ NULL 値を表す文字列です。
 >     4. デフォルトオプションの [Snowflake CSV](https://docs.snowflake.com/en/sql-reference/sql/create-file-format#type-csv)。`ESCAPE_UNENCLOSED_FIELD` が指定されている場合は、代わりに CSV を使用してください。
 >     5. Hive Textfile。
 
-### RECORD_DELIMITER {#record-delimiter}
+### RECORD_DELIMITER {#record_delimiter-1}
 
 ファイル内でレコードを区切る文字です。
 
@@ -274,7 +274,7 @@ NULL 値を表す文字列です。
 
 **Default**: `\n`
 
-### FIELD_DELIMITER {#field-delimiter}
+### FIELD_DELIMITER {#field_delimiter-1}
 
 レコード内でフィールドを区切る文字です。
 
@@ -285,27 +285,27 @@ NULL 値を表す文字列です。
 
 **Default**: `\t` (TAB)
 
-### SKIP_HEADER (Load Only) {#skip-header-load-only}
+### SKIP_HEADER (Load Only) {#skip_header-load-only-1}
 
 [CSV の SKIP_HEADER オプション](#skip_header-load-only)と同じです。
 
-### TRIM_SPACE (Load Only) {#trim-space-load-only}
+### TRIM_SPACE (Load Only) {#trim_space-load-only-1}
 
 [CSV の TRIM_SPACE オプション](#trim_space-load-only)と同じです。
 
-### OUTPUT_HEADER (Unload Only) {#output-header-unload-only}
+### OUTPUT_HEADER (Unload Only) {#output_header-unload-only-1}
 
 [CSV の OUTPUT_HEADER オプション](#output_header-unload-only)と同じです。
 
-### NAN_DISPLAY {#nan-display}
+### NAN_DISPLAY {#nan_display-1}
 
 [CSV の NAN_DISPLAY オプション](#nan_display)と同じです。
 
-### NULL_DISPLAY {#null-display}
+### NULL_DISPLAY {#null_display-1}
 
 [CSV の NULL_DISPLAY オプション](#null_display)と同じです。
 
-### EMPTY_FIELD_AS (Load Only) {#empty-field-as-load-only}
+### EMPTY_FIELD_AS (Load Only) {#empty_field_as-load-only-1}
 
 [CSV の EMPTY_FIELD_AS オプション](#empty_field_as-load-only)と同じです。
 
@@ -313,25 +313,25 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 
 **Default**: `FIELD_DEFAULT`
 
-### ERROR_ON_COLUMN_COUNT_MISMATCH (Load Only) {#error-on-column-count-mismatch-load-only}
+### ERROR_ON_COLUMN_COUNT_MISMATCH (Load Only) {#error_on_column_count_mismatch-load-only-1}
 
 [CSV の ERROR_ON_COLUMN_COUNT_MISMATCH オプション](#error_on_column_count_mismatch-load-only)と同じです。
 
-### ENCODING (Load Only) {#encoding-load-only}
+### ENCODING (Load Only) {#encoding-load-only-1}
 
 [CSV の ENCODING オプション](#encoding-load-only)と同じです。
 
-### ENCODING_ERROR_MODE (Load Only) {#encoding-error-mode-load-only}
+### ENCODING_ERROR_MODE (Load Only) {#encoding_error_mode-load-only-1}
 
 [CSV の ENCODING_ERROR_MODE オプション](#encoding_error_mode-load-only)と同じです。
 
-### COMPRESSION {#compression}
+### COMPRESSION {#compression-1}
 
 [CSV の COMPRESSION オプション](#compression)と同じです。
 
 ## NDJSON Options {#ndjson-options}
 
-### NULL_FIELD_AS (Load Only) {#null-field-as-load-only}
+### NULL_FIELD_AS (Load Only) {#null_field_as-load-only}
 
 `null` を変換する値です。
 
@@ -340,7 +340,7 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 | `NULL` (Default)        | NULL 許容フィールドでは NULL。NULL 非許容フィールドではエラー。 |
 | `FIELD_DEFAULT`         | フィールドのデフォルト値。                               |
 
-### MISSING_FIELD_AS (Load Only) {#missing-field-as-load-only}
+### MISSING_FIELD_AS (Load Only) {#missing_field_as-load-only}
 
 欠落しているフィールドを変換する値です。
 
@@ -350,7 +350,7 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 | `NULL`           | NULL 許容フィールドでは NULL。NULL 非許容フィールドではエラー。 |
 | `FIELD_DEFAULT`  | フィールドのデフォルト値。                               |
 
-### NULL_IF (Load Only) {#null-if-load-only}
+### NULL_IF (Load Only) {#null_if-load-only}
 
 文字列のリストです。ソースファイル内のフィールド値がこれらの文字列のいずれかと一致する場合、その値は NULL としてロードされます。一致は完全一致かつ大文字小文字を区別します。
 
@@ -358,13 +358,13 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 
 **Default**: empty (追加の NULL マーカーなし)
 
-### COMPRESSION {#compression}
+### COMPRESSION {#compression-2}
 
 [CSV の COMPRESSION オプション](#compression)と同じです。
 
 ## PARQUET Options {#parquet-options}
 
-### MISSING_FIELD_AS (Load Only) {#missing-field-as-load-only}
+### MISSING_FIELD_AS (Load Only) {#missing_field_as-load-only-1}
 
 欠落しているフィールドを変換する値です。
 
@@ -373,11 +373,11 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 | `ERROR` (Default)| エラー。                   |
 | `FIELD_DEFAULT`  | フィールドのデフォルト値。 |
 
-### NULL_IF (Load Only) {#null-if-load-only}
+### NULL_IF (Load Only) {#null_if-load-only-1}
 
 [NDJSON の NULL_IF オプション](#null_if-load-only)と同じです。
 
-### USE_LOGIC_TYPE (Load Only) {#use-logic-type-load-only}
+### USE_LOGIC_TYPE (Load Only) {#use_logic_type-load-only}
 
 有効にすると、ロード時に Parquet の論理型（例: DATE、TIMESTAMP、DECIMAL annotations）を使用して対象カラム型を決定します。無効にすると、物理ストレージ型のみが考慮されます。
 
@@ -421,7 +421,7 @@ FILE_FORMAT = (TYPE = LANCE)
 
 ## ORC オプション {#orc-options}
 
-### MISSING_FIELD_AS (ロードのみ) {#missing-field-as-load-only}
+### MISSING_FIELD_AS (ロードのみ) {#missing_field_as-load-only-2}
 
 欠落しているフィールドが変換される値です。
 
@@ -432,7 +432,7 @@ FILE_FORMAT = (TYPE = LANCE)
 
 ## AVRO オプション {#avro-options}
 
-### MISSING_FIELD_AS (ロードのみ) {#missing-field-as-load-only}
+### MISSING_FIELD_AS (ロードのみ) {#missing_field_as-load-only-3}
 
 欠落しているフィールドが変換される値です。
 
@@ -441,11 +441,11 @@ FILE_FORMAT = (TYPE = LANCE)
 | `ERROR` (Default)| エラー。 |
 | `FIELD_DEFAULT`  | フィールドのデフォルト値。 |
 
-### NULL_IF (ロードのみ) {#null-if-load-only}
+### NULL_IF (ロードのみ) {#null_if-load-only-2}
 
 [NDJSON の NULL_IF オプション](#null_if-load-only)と同じです。
 
-### USE_LOGIC_TYPE (ロードのみ) {#use-logic-type-load-only}
+### USE_LOGIC_TYPE (ロードのみ) {#use_logic_type-load-only-1}
 
 有効にすると、ロード時に対象カラム型を決定するために Avro の論理型（例: date、timestamp-millis、decimal）が使用されます。無効にすると、基になる Avro 型のみが考慮されます。
 

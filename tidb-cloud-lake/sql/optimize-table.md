@@ -14,7 +14,7 @@ summary: "{{{ .lake }}} でテーブルを最適化するには、履歴デー�
    <div>時間の経過とともにテーブルに Parquet ファイルが蓄積されると、性能上の問題やストレージ要件の増加につながる可能性があります。テーブル性能を最適化するために、不要になった履歴 Parquet ファイルを削除できます。この最適化により、クエリ性能の向上と、テーブルが使用するストレージ容量の削減が期待できます。</div>
 </details>
 
-## {{{ .lake }}} のデータストレージ: Snapshot、Segment、Block {#lake-data-storage-snapshot-segment-and-block}
+## {{{ .lake }}} のデータストレージ: Snapshot、Segment、Block {#-lake--data-storage-snapshot-segment-and-block}
 
 Snapshot、segment、block は、{{{ .lake }}} がデータストレージに使用する概念です。{{{ .lake }}} はこれらを使用して、テーブルデータを保存するための階層構造を構築します。
 

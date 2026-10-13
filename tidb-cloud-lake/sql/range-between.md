@@ -53,7 +53,7 @@ RANGE BETWEEN 10 PRECEDING AND 10 FOLLOWING
 RANGE BETWEEN 50 PRECEDING AND CURRENT ROW
 ```
 
-### 2. Interval 値（DATE/TIMESTAMP 用） {#2-interval-values-for-date-timestamp}
+### 2. Interval 値（DATE/TIMESTAMP 用） {#2-interval-values-for-datetimestamp}
 
 ```sql
 -- 7-day window
