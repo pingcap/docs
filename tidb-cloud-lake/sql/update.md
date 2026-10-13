@@ -190,7 +190,7 @@ FROM book_updates
 WHERE bookstore.book_id = book_updates.book_id;
 ```
 
-### Step 7: 更新後の bookstore テーブルを確認する {#step-7-view-the-bookstore-table-after-the-update}
+### ステップ 7: 更新後の bookstore テーブルを確認する {#step-7-view-the-bookstore-table-after-the-update}
 
 最後に、**bookstore** テーブルをもう一度確認し、**book_updates** の値を使って名前が更新されたことを確認します。
 

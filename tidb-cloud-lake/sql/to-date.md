@@ -61,7 +61,7 @@ SELECT DATE_FORMAT(TO_DATE('2022-01-02')) AS dt, TYPEOF(dt);
 
 ## Examples {#examples}
 
-### Example 1: Converting a Timestamp-Format String {#example-1-converting-a-timestamp-format-string}
+### 例 1: タイムスタンプ形式の文字列を変換する {#example-1-converting-a-timestamp-format-string}
 
 ```sql
 SELECT TO_DATE('2022-01-02T01:12:00+07:00'), STR_TO_DATE('2022-01-02T01:12:00+07:00');
@@ -81,7 +81,7 @@ SELECT TO_DATE('2022-01-02'), STR_TO_DATE('2022-01-02');
 └───────────────────────────────────────────────────┘
 ```
 
-### Example 2: Converting an Integer {#example-2-converting-an-integer}
+### 例 2: 整数を変換する {#example-2-converting-an-integer}
 
 ```sql
 SELECT TO_DATE(1), STR_TO_DATE(1), TO_DATE(-1), STR_TO_DATE(-1);
@@ -94,7 +94,7 @@ SELECT TO_DATE(1), STR_TO_DATE(1), TO_DATE(-1), STR_TO_DATE(-1);
 └───────────────────────────────────────────────────────────────────┘
 ```
 
-### Example 3: Converting a String using the Given Format {#example-3-converting-a-string-using-the-given-format}
+### 例 3: 指定した形式を使用して文字列を変換する {#example-3-converting-a-string-using-the-given-format}
 
 ```sql
 SELECT TO_DATE('12/25/2022','%m/%d/%Y'), STR_TO_DATE('12/25/2022','%m/%d/%Y');
