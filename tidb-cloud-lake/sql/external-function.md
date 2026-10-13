@@ -9,7 +9,7 @@ summary: このページでは、{{{ .lake }}} における External Function �
 
 ## External Function の管理 {#external-function-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [CREATE EXTERNAL FUNCTION](/tidb-cloud-lake/sql/create-function.md) | 新しい external function を作成します |
 | [ALTER EXTERNAL FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md) | 既存の external function を変更します |

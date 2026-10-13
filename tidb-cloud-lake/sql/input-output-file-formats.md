@@ -84,7 +84,7 @@ formatTypeOptions ::=
 
 **デフォルト**: `,` (カンマ)
 
-### QUOTE (Load Only) {#quote-load-only}
+### QUOTE (ロードのみ) {#quote-load-only}
 
 値を引用符で囲むために使用する文字です。
 
@@ -104,13 +104,13 @@ CSV の一部のバリアントでは、引用符を二重にしてエスケー�
 
 **デフォルト**: `''`
 
-### SKIP_HEADER (Load Only) {#skip_header-load-only}
+### SKIP_HEADER (ロードのみ) {#skip_header-load-only}
 
 ファイルの先頭からスキップする行数です。
 
 **デフォルト**: `0`
 
-### TRIM_SPACE (Load Only) {#trim_space-load-only}
+### TRIM_SPACE (ロードのみ) {#trim_space-load-only}
 
 型変換の前に、各フィールド値の先頭および末尾から ASCII 空白文字を削除します。
 
@@ -120,13 +120,13 @@ CSV では、csv-core がフィールドを抽出した後にトリミングが�
 
 **デフォルト**: `false`
 
-### OUTPUT_HEADER (Unload Only) {#output_header-unload-only}
+### OUTPUT_HEADER (アンロードのみ) {#output_header-unload-only}
 
 カラム名を含むヘッダー行を出力に含めます。
 
 **デフォルト**: `false`
 
-### QUOTE_STYLE (Unload Only) {#quote_style-unload-only}
+### QUOTE_STYLE (アンロードのみ) {#quote_style-unload-only}
 
 出力時に CSV の値をどのように引用符で囲むかを制御します。
 
@@ -153,7 +153,7 @@ NULL 値を表す文字列です。
 
 **デフォルト**: `'\N'`
 
-### ALLOW_QUOTED_NULLS (Load Only) {#allow_quoted_nulls-load-only}
+### ALLOW_QUOTED_NULLS (ロードのみ) {#allow_quoted_nulls-load-only}
 
 引用符付き文字列を NULL 値に変換できるようにします。
 
@@ -161,13 +161,13 @@ NULL 値を表す文字列です。
 
 **デフォルト**: `false`
 
-### ERROR_ON_COLUMN_COUNT_MISMATCH (Load Only) {#error_on_column_count_mismatch-load-only}
+### ERROR_ON_COLUMN_COUNT_MISMATCH (ロードのみ) {#error_on_column_count_mismatch-load-only}
 
 データファイル内のカラム数が宛先テーブルのカラム数と一致しない場合にエラーを返します。
 
 **デフォルト**: `true`
 
-### EMPTY_FIELD_AS (Load Only) {#empty_field_as-load-only}
+### EMPTY_FIELD_AS (ロードのみ) {#empty_field_as-load-only}
 
 引用符なしの空フィールド (つまり `,,`) を変換する値です。
 
@@ -179,7 +179,7 @@ NULL 値を表す文字列です。
 
 **デフォルト**: `NULL`
 
-### QUOTED_EMPTY_FIELD_AS (Load Only) {#quoted_empty_field_as-load-only}
+### QUOTED_EMPTY_FIELD_AS (ロードのみ) {#quoted_empty_field_as-load-only}
 
 引用符付きの空フィールド (つまり `,"",`) を変換する値です。
 
@@ -203,7 +203,7 @@ NULL 値を表す文字列です。
 
 **Default**: `EWKT`
 
-### ENCODING (Load Only) {#encoding-load-only}
+### ENCODING (ロードのみ) {#encoding-load-only}
 
 ソースファイルの文字セットエンコーディングです。UTF-8 以外のエンコーディングに設定した場合、フィールド解析の前にファイル内容は UTF-8 に変換されます。
 
@@ -211,11 +211,11 @@ NULL 値を表す文字列です。
 
 **Default**: `UTF-8`
 
-### ENCODING_ERROR_MODE (Load Only) {#encoding_error_mode-load-only}
+### ENCODING_ERROR_MODE (ロードのみ) {#encoding_error_mode-load-only}
 
 宣言されたエンコーディングで無効なバイト列（または encoding が `UTF-8` の場合は無効な UTF-8）をどのように処理するかを指定します。
 
-| Available Values   | 説明                                                                 |
+| 利用可能な値   | 説明                                                                 |
 |--------------------|----------------------------------------------------------------------|
 | `STRICT` (Default) | 最初の不正なバイト列でエラーを返して中止します。                     |
 | `REPLACE`          | 各不正バイト列を U+FFFD に置き換えて処理を続行します。               |
@@ -226,7 +226,7 @@ NULL 値を表す文字列です。
 
 圧縮アルゴリズムです。
 
-| Available Values | 説明                                                            |
+| 利用可能な値 | 説明                                                            |
 |------------------|-----------------------------------------------------------------|
 | `NONE`           | ファイルが圧縮されていないことを示します。                      |
 | `AUTO`           | ファイル拡張子から圧縮形式を自動検出します                      |
@@ -240,7 +240,7 @@ NULL 値を表す文字列です。
 
 **Default**: `NONE`
 
-## TSV Options {#tsv-options}
+## TSV オプション {#tsv-options}
 
 {{{ .lake }}} TSV（`v1.2.891-nightly` 以降では `TEXT` とも呼ばれます）は、どちらの名前でも同じ形式とオプションを使用します。このページでは、古いサーバーバージョンとの互換性のため、主要な用語として `TSV` を使用します。
 
@@ -285,15 +285,15 @@ NULL 値を表す文字列です。
 
 **Default**: `\t` (TAB)
 
-### SKIP_HEADER (Load Only) {#skip_header-load-only-1}
+### SKIP_HEADER (ロードのみ) {#skip_header-load-only-1}
 
 [CSV の SKIP_HEADER オプション](#skip_header-load-only)と同じです。
 
-### TRIM_SPACE (Load Only) {#trim_space-load-only-1}
+### TRIM_SPACE (ロードのみ) {#trim_space-load-only-1}
 
 [CSV の TRIM_SPACE オプション](#trim_space-load-only)と同じです。
 
-### OUTPUT_HEADER (Unload Only) {#output_header-unload-only-1}
+### OUTPUT_HEADER (アンロードのみ) {#output_header-unload-only-1}
 
 [CSV の OUTPUT_HEADER オプション](#output_header-unload-only)と同じです。
 
@@ -305,7 +305,7 @@ NULL 値を表す文字列です。
 
 [CSV の NULL_DISPLAY オプション](#null_display)と同じです。
 
-### EMPTY_FIELD_AS (Load Only) {#empty_field_as-load-only-1}
+### EMPTY_FIELD_AS (ロードのみ) {#empty_field_as-load-only-1}
 
 [CSV の EMPTY_FIELD_AS オプション](#empty_field_as-load-only)と同じです。
 
@@ -313,15 +313,15 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 
 **Default**: `FIELD_DEFAULT`
 
-### ERROR_ON_COLUMN_COUNT_MISMATCH (Load Only) {#error_on_column_count_mismatch-load-only-1}
+### ERROR_ON_COLUMN_COUNT_MISMATCH (ロードのみ) {#error_on_column_count_mismatch-load-only-1}
 
 [CSV の ERROR_ON_COLUMN_COUNT_MISMATCH オプション](#error_on_column_count_mismatch-load-only)と同じです。
 
-### ENCODING (Load Only) {#encoding-load-only-1}
+### ENCODING (ロードのみ) {#encoding-load-only-1}
 
 [CSV の ENCODING オプション](#encoding-load-only)と同じです。
 
-### ENCODING_ERROR_MODE (Load Only) {#encoding_error_mode-load-only-1}
+### ENCODING_ERROR_MODE (ロードのみ) {#encoding_error_mode-load-only-1}
 
 [CSV の ENCODING_ERROR_MODE オプション](#encoding_error_mode-load-only)と同じです。
 
@@ -329,28 +329,28 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 
 [CSV の COMPRESSION オプション](#compression)と同じです。
 
-## NDJSON Options {#ndjson-options}
+## NDJSON オプション {#ndjson-options}
 
-### NULL_FIELD_AS (Load Only) {#null_field_as-load-only}
+### NULL_FIELD_AS (ロードのみ) {#null_field_as-load-only}
 
 `null` を変換する値です。
 
-| Available Values        | 変換先                                                   |
+| 利用可能な値        | 変換先                                                   |
 |-------------------------|----------------------------------------------------------|
 | `NULL` (Default)        | NULL 許容フィールドでは NULL。NULL 非許容フィールドではエラー。 |
 | `FIELD_DEFAULT`         | フィールドのデフォルト値。                               |
 
-### MISSING_FIELD_AS (Load Only) {#missing_field_as-load-only}
+### MISSING_FIELD_AS (ロードのみ) {#missing_field_as-load-only}
 
 欠落しているフィールドを変換する値です。
 
-| Available Values | 変換先                                                   |
+| 利用可能な値 | 変換先                                                   |
 |------------------|----------------------------------------------------------|
 | `ERROR` (Default)| エラー。                                                 |
 | `NULL`           | NULL 許容フィールドでは NULL。NULL 非許容フィールドではエラー。 |
 | `FIELD_DEFAULT`  | フィールドのデフォルト値。                               |
 
-### NULL_IF (Load Only) {#null_if-load-only}
+### NULL_IF (ロードのみ) {#null_if-load-only}
 
 文字列のリストです。ソースファイル内のフィールド値がこれらの文字列のいずれかと一致する場合、その値は NULL としてロードされます。一致は完全一致かつ大文字小文字を区別します。
 
@@ -362,32 +362,32 @@ Note: TSV のデフォルトは `FIELD_DEFAULT` です（デフォルトが `NUL
 
 [CSV の COMPRESSION オプション](#compression)と同じです。
 
-## PARQUET Options {#parquet-options}
+## PARQUET オプション {#parquet-options}
 
-### MISSING_FIELD_AS (Load Only) {#missing_field_as-load-only-1}
+### MISSING_FIELD_AS (ロードのみ) {#missing_field_as-load-only-1}
 
 欠落しているフィールドを変換する値です。
 
-| Available Values | 変換先                     |
+| 利用可能な値 | 変換先                     |
 |------------------|----------------------------|
 | `ERROR` (Default)| エラー。                   |
 | `FIELD_DEFAULT`  | フィールドのデフォルト値。 |
 
-### NULL_IF (Load Only) {#null_if-load-only-1}
+### NULL_IF (ロードのみ) {#null_if-load-only-1}
 
 [NDJSON の NULL_IF オプション](#null_if-load-only)と同じです。
 
-### USE_LOGIC_TYPE (Load Only) {#use_logic_type-load-only}
+### USE_LOGIC_TYPE (ロードのみ) {#use_logic_type-load-only}
 
 有効にすると、ロード時に Parquet の論理型（例: DATE、TIMESTAMP、DECIMAL annotations）を使用して対象カラム型を決定します。無効にすると、物理ストレージ型のみが考慮されます。
 
 **Default**: `true`
 
-### COMPRESSION (Unload Only) {#compression-unload-only}
+### COMPRESSION (アンロードのみ) {#compression-unload-only}
 
 parquet ファイル内部ブロックの圧縮アルゴリズムです。
 
-| Available Values | 説明                                                                    |
+| 利用可能な値 | 説明                                                                    |
 |------------------|-------------------------------------------------------------------------|
 | `ZSTD` (default) | Zstandard v0.8 以降をサポートします。                                   |
 | `SNAPPY`         | Snappy は、Parquet でよく使用される一般的で高速な圧縮アルゴリズムです。 |

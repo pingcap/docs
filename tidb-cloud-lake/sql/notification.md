@@ -9,7 +9,7 @@ summary: このページでは、{{{ .lake }}} における Notification 操作�
 
 ## Notification の管理 {#notification-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [CREATE NOTIFICATION](/tidb-cloud-lake/sql/create-notification-integration.md) | イベントアラート用の新しい notification integration を作成します |
 | [ALTER NOTIFICATION](/tidb-cloud-lake/sql/alter-notification-integration.md) | 既存の notification integration を変更します |
@@ -17,7 +17,7 @@ summary: このページでは、{{{ .lake }}} における Notification 操作�
 
 ## Notification 情報 {#notification-information}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [DESCRIBE NOTIFICATION](/tidb-cloud-lake/sql/describe-notification-integration.md) | notification integration のプロパティを表示します |
 

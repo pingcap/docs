@@ -5,7 +5,7 @@ summary: 指定した JSON パス式が JSON データ内の特定の条件に�
 
 # JSON_PATH_MATCH
 
-指定した JSON パス式が JSON データ内の特定の条件に一致するかどうかを確認します。`@@` 演算子はこの関数と同義であることに注意してください。詳細は [JSON Operators](/tidb-cloud-lake/sql/json-operators.md) を参照してください。
+指定した JSON パス式が JSON データ内の特定の条件に一致するかどうかを確認します。`@@` 演算子はこの関数と同義であることに注意してください。詳細は [JSON 演算子](/tidb-cloud-lake/sql/json-operators.md) を参照してください。
 
 ## 構文 {#syntax}
 

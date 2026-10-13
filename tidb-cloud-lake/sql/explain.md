@@ -24,13 +24,13 @@ TableScan
 
 {{{ .lake }}} を使用している場合は、Query Profile 機能を利用して SQL ステートメントの実行計画を可視化できます。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```sql
 EXPLAIN <statement>
 ```
 
-## Examples {#examples}
+## 例 {#examples}
 
 ```sql
 EXPLAIN select t.number from numbers(1) as t, numbers(1) as t1 where t.number = t1.number;

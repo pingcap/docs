@@ -5,7 +5,7 @@ summary: テーブルの最新または指定したスナップショットの�
 
 # FUSE_VIRTUAL_COLUMN
 
-テーブルの最新または指定したスナップショットの仮想カラム情報を返します。詳細は、[Virtual Column](/tidb-cloud-lake/guides/virtual-column.md) を参照してください。
+テーブルの最新または指定したスナップショットの仮想カラム情報を返します。詳細は、[仮想カラム](/tidb-cloud-lake/guides/virtual-column.md) を参照してください。
 
 ## 構文 {#syntax}
 

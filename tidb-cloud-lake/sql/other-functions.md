@@ -7,7 +7,7 @@ summary: このセクションでは、主要な機能グループに分類さ�
 
 このセクションでは、主要な機能グループに分類されない各種ユーティリティをまとめています。
 
-| Function | 説明 |
+| 関数 | 説明 |
 |----------|------|
 | [ASSUME_NOT_NULL](/tidb-cloud-lake/sql/assume-not-null.md) | NULL 許容カラム内の値が NULL にならないことを示すヒント |
 | [EXISTS](/tidb-cloud-lake/sql/exists.md) | サブクエリがいずれかの行を生成した場合に TRUE を返す |

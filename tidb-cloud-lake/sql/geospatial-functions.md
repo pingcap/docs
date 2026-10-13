@@ -7,7 +7,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 
 {{{ .lake }}} は、相互補完的な 2 つの地理空間機能セットを提供します。1 つは図形の構築と解析のための PostGIS スタイルの geometry 関数、もう 1 つはグローバルな六角形インデックスのための H3 ユーティリティです。以下の表では、Snowflake のドキュメントと同様のレイアウトで、タスクごとに関数を分類しているため、適切なツールをすばやく見つけることができます。
 
-## Constructors {#constructors}
+## コンストラクター {#constructors}
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
@@ -17,7 +17,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [ST_MAKEPOLYGON](/tidb-cloud-lake/sql/st-makepolygon.md) | 閉じた LineString から Polygon を作成します |  | `ST_MAKEPOLYGON(ST_MAKELINE(...))` → `POLYGON(...)` |
 | [ST_POLYGON](/tidb-cloud-lake/sql/st-polygon.md) | 座標リングから Polygon を作成します | GEOGRAPHY のみ | `ST_POLYGON(...)` → `POLYGON(...)` |
 
-## Conversion {#conversion}
+## 変換 {#conversion}
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
@@ -34,7 +34,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [TO_GEOMETRY](/tidb-cloud-lake/sql/geometry.md) | さまざまな形式を geometry として解析します | GEOGRAPHY のみ | `TO_GEOMETRY('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
 | [TO_GEOGRAPHY](/tidb-cloud-lake/sql/to-geography.md) / [TRY_TO_GEOGRAPHY](/tidb-cloud-lake/sql/to-geography.md) | さまざまな形式を geography として解析します | GEOGRAPHY のみ | `TO_GEOGRAPHY('POINT(-122.35 37.55)')` → `POINT(-122.35 37.55)` |
 
-## Output {#output}
+## 出力 {#output}
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
@@ -47,7 +47,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [ST_GEOHASH](/tidb-cloud-lake/sql/st-geohash.md) | geometry を GeoHash に変換します |  | `ST_GEOHASH(ST_MAKEGEOMPOINT(-122.35, 37.55), 7)` → `'9q8yyk8'` |
 | [TO_STRING](/tidb-cloud-lake/sql/string.md) | geometry を文字列に変換します |  | `TO_STRING(ST_MAKEGEOMPOINT(-122.35, 37.55))` → `'POINT(-122.35 37.55)'` |
 
-## Accessors & Properties {#accessors--properties}
+## アクセサーとプロパティ {#accessors--properties}
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
@@ -62,7 +62,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [ST_XMIN](/tidb-cloud-lake/sql/st-xmin.md) / [ST_XMAX](/tidb-cloud-lake/sql/st-xmax.md) | X 座標の最小値/最大値を返します |  | `ST_XMIN(ST_MAKELINE(...))` → `-122.40` |
 | [ST_YMIN](/tidb-cloud-lake/sql/st-ymin.md) / [ST_YMAX](/tidb-cloud-lake/sql/st-ymax.md) | Y 座標の最小値/最大値を返します |  | `ST_YMAX(ST_MAKELINE(...))` → `37.60` |
 
-## Relationship and measurement {#relationship-and-measurement}
+## 関係と計測 {#relationship-and-measurement}
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
@@ -84,7 +84,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [ST_DIFFERENCE](/tidb-cloud-lake/sql/st-difference.md) | 1 つ目の geometry のうち、2 つ目で覆われていない部分を返します | GEOMETRY のみ | `ST_DIFFERENCE(TO_GEOMETRY('POINT(0 0)'), TO_GEOMETRY('POINT(1 1)'))` → `POINT(0 0)` |
 | [ST_SYMDIFFERENCE](/tidb-cloud-lake/sql/st-symdifference.md) | 2 つの geometry の重ならない部分を返します | GEOMETRY のみ | `ST_SYMDIFFERENCE(TO_GEOMETRY('POINT(0 0)'), TO_GEOMETRY('POINT(1 1)'))` → `MULTIPOINT(0 0,1 1)` |
 
-## Transformation {#transformation}
+## 変形 {#transformation}
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
@@ -92,21 +92,21 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [ST_SETSRID](/tidb-cloud-lake/sql/st-setsrid.md) | geometry に SRID を割り当てます | GEOMETRY のみ | `ST_SETSRID(ST_MAKEGEOMPOINT(-122.35, 37.55), 3857)` → `POINT(-122.35 37.55)` |
 | [ST_TRANSFORM](/tidb-cloud-lake/sql/st-transform.md) | geometry を新しい SRID に変換します | GEOMETRY のみ | `ST_TRANSFORM(ST_MAKEGEOMPOINT(-122.35, 37.55), 3857)` → `POINT(-13618288.8 4552395.0)` |
 
-## Spatial Relationships {#spatial-relationships}
+## 空間関係 {#spatial-relationships}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
 | [ST_CONTAINS](/tidb-cloud-lake/sql/st-contains.md) | ある geometry が別の geometry を含むかどうかを判定します | `ST_CONTAINS(ST_MAKEPOLYGON(...), ST_MAKEGEOMPOINT(...))` → `TRUE` |
 | [POINT_IN_POLYGON](/tidb-cloud-lake/sql/point-in-polygon.md) | 点が polygon の内側にあるかどうかを確認します | `POINT_IN_POLYGON([lon, lat], [[p1_lon, p1_lat], ...])` → `TRUE` |
 
-## Distance & Measurements {#distance--measurements}
+## 距離と計測 {#distance--measurements}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
 | [ST_DISTANCE](/tidb-cloud-lake/sql/st-distance.md) | geometry 間の距離を測定します | `ST_DISTANCE(ST_MAKEGEOMPOINT(-122.35, 37.55), ST_MAKEGEOMPOINT(-122.40, 37.60))` → `5.57` |
 | [HAVERSINE](/tidb-cloud-lake/sql/haversine.md) | 座標間の大円距離を計算します | `HAVERSINE(37.55, -122.35, 37.60, -122.40)` → `6.12` |
 
-## H3 Indexing & Conversion {#h3-indexing--conversion}
+## H3 のインデックス作成と変換 {#h3-indexing--conversion}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -117,7 +117,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [GEOHASH_ENCODE](/tidb-cloud-lake/sql/geohash-encode.md) | 経度/緯度を GeoHash にエンコードします | `GEOHASH_ENCODE(37.7950, 55.7129, 12)` → `'ucfv0nzpt3s7'` |
 | [GEOHASH_DECODE](/tidb-cloud-lake/sql/geohash-decode.md) | GeoHash を経度/緯度にデコードします | `GEOHASH_DECODE('ucfv0nzpt3s7')` → `[37.7950, 55.7129]` |
 
-## H3 Cell Properties {#h3-cell-properties}
+## H3 セルのプロパティ {#h3-cell-properties}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -142,7 +142,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [POINT_IN_POLYGON](/tidb-cloud-lake/sql/point-in-polygon.md) | 点が多角形の内側にあるかどうかを確認します | `POINT_IN_POLYGON([lon, lat], [[p1_lon, p1_lat], ...])` → `TRUE` |
 | [POINT_IN_ELLIPSES](/tidb-cloud-lake/sql/point-in-ellipses.md) | 点がいずれかの楕円の内側にあるかどうかを確認します | `POINT_IN_ELLIPSES(10, 10, 10, 9.1, 1, 0.9999)` → `1` |
 
-## H3 Neighborhoods {#h3-neighborhoods}
+## H3 の近傍 {#h3-neighborhoods}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -152,7 +152,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [H3_HEX_RING](/tidb-cloud-lake/sql/h3-hex-ring.md) | ちょうど k ステップ離れたインデックスを返します | `H3_HEX_RING(599119489002373119, 1)` → `[599119491149856767, ...]` |
 | [H3_LINE](/tidb-cloud-lake/sql/h3-line.md) | 経路に沿ったインデックスを返します | `H3_LINE(from_h3, to_h3)` → `[from_h3, ..., to_h3]` |
 
-## H3 Edge Operations {#h3-edge-operations}
+## H3 のエッジ操作 {#h3-edge-operations}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -164,7 +164,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON](/tidb-cloud-lake/sql/h3-get-unidirectional-edges-hexagon.md) | セルから出るエッジを一覧表示します | `H3_GET_UNIDIRECTIONAL_EDGES_FROM_HEXAGON(h3_index)` → `[edge1, edge2, ...]` |
 | [H3_GET_UNIDIRECTIONAL_EDGE_BOUNDARY](/tidb-cloud-lake/sql/h3-get-unidirectional-edge-boundary.md) | エッジの境界を返します | `H3_GET_UNIDIRECTIONAL_EDGE_BOUNDARY(edge_index)` → `[[lon1,lat1], [lon2,lat2]]` |
 
-## H3 Measurements & Angles {#h3-measurements--angles}
+## H3 の計測と角度 {#h3-measurements--angles}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|

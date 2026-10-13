@@ -13,7 +13,7 @@ summary: 正規表現パターンを使用して文字列を分割し、各セ�
 REGEXP_SPLIT_TO_TABLE(string, pattern [, flags text])
 ```
 
-| Parameter    | 説明                                                           |
+| パラメータ    | 説明                                                           |
 |--------------|----------------------------------------------------------------|
 | `string`     | 分割する入力文字列（VARCHAR 型）                               |
 | `pattern`    | 分割に使用する正規表現パターン（VARCHAR 型）                   |

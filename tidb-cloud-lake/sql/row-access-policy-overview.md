@@ -9,7 +9,7 @@ summary: "参照しやすいように機能別に整理した、{{{ .lake }}} �
 
 ## Row Access Policy の管理 {#row-access-policy-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md) | 行レベルのフィルタポリシーを作成します |
 | [DESCRIBE ROW ACCESS POLICY](/tidb-cloud-lake/sql/desc-row-access-policy.md) | Row Access Policy の詳細を表示します |

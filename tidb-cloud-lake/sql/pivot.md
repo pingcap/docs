@@ -9,7 +9,7 @@ summary: "{{{ .lake }}} の `PIVOT` 操作では、指定したカラムに基�
 
 これは、大量のデータをより読みやすい形式で要約および分析するのに便利な操作です。このドキュメントでは、構文を説明し、`PIVOT` 操作の使用例を示します。
 
-**See also:** [UNPIVOT](/tidb-cloud-lake/sql/unpivot.md)
+**関連情報:** [UNPIVOT](/tidb-cloud-lake/sql/unpivot.md)
 
 ## 構文 {#syntax}
 

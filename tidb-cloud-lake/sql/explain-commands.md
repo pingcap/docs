@@ -9,7 +9,7 @@ summary: このページでは、{{{ .lake }}} の explain 関連コマンドの
 
 ## コマンド概要 {#commands-overview}
 
-| Command | ユースケース |
+| コマンド | ユースケース |
 |---------|----------|
 | [`EXPLAIN`](/tidb-cloud-lake/sql/explain.md) | クエリ構造と最適化の理解 |
 | [`EXPLAIN ANALYZE`](/tidb-cloud-lake/sql/explain-analyze.md) | 実行時統計を使用したパフォーマンス分析 |

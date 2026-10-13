@@ -40,7 +40,7 @@ segment は JSON ファイルで、データが保存されているストレー
 
 ## テーブルの最適化 {#table-optimizations}
 
-{{{ .lake }}} では、理想的な block サイズとして 100MB（非圧縮）または 1,000,000 行を目安とし、各 segment は 1,000 block で構成されることが推奨されます。テーブル最適化を最大化するには、[Segment Compaction](#segment-compaction) や [Block Compaction](#block-compaction) など、さまざまな最適化手法をいつどのように適用するかを明確に理解することが重要です。
+{{{ .lake }}} では、理想的な block サイズとして 100MB（非圧縮）または 1,000,000 行を目安とし、各 segment は 1,000 block で構成されることが推奨されます。テーブル最適化を最大化するには、[セグメントのコンパクション](#segment-compaction) や [ブロックのコンパクション](#block-compaction) など、さまざまな最適化手法をいつどのように適用するかを明確に理解することが重要です。
 
 - cluster key を含むテーブルに対して COPY INTO または REPLACE INTO コマンドでデータを書き込む場合、{{{ .lake }}} は re-clustering プロセスに加えて、segment および block の compact プロセスも自動的に開始します。
 
@@ -50,7 +50,7 @@ segment は JSON ファイルで、データが保存されているストレー
   SET enable_distributed_compact = 1;
   ```
 
-### Segment Compaction {#segment-compaction}
+### セグメントのコンパクション {#segment-compaction}
 
 テーブルに小さな segment（1 segment あたり `100 blocks` 未満）が多すぎる場合は、segment を compact します。
 
@@ -122,7 +122,7 @@ FROM
 +-------------+---------------+---------------------------------------------+
 ```
 
-### Block Compaction {#block-compaction}
+### ブロックのコンパクション {#block-compaction}
 
 テーブルに多数の小さな block がある場合、または挿入、削除、更新された行の割合が高い場合は、block を compact します。
 

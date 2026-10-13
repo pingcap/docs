@@ -11,7 +11,7 @@ summary: 1 つ以上の行をテーブルに挿入します。
 >
 > {{{ .lake }}} は、アトミックな操作によってデータ整合性を保証します。挿入、更新、置換、削除は、完全に成功するか、完全に失敗するかのいずれかです。
 
-関連情報: [INSERT (multi-table)](/tidb-cloud-lake/sql/insert-multi-table.md)
+関連情報: [INSERT（マルチテーブル）](/tidb-cloud-lake/sql/insert-multi-table.md)
 
 ## 構文 {#syntax}
 
