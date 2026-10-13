@@ -27,9 +27,9 @@ For more information, see the following:
 
 Manual backup enables you to back up your data to a known state as needed, and then restore to that state at any time. You can use a manual backup before high-risk operations such as system upgrades, critical data deletion, or irreversible schema changes.
 
-For {{{ .essential }}} with TiDB version `CLOUD.202603.x` or later, {{{ .premium }}}<CustomContent plan="byoc">, {{{ .byoc }}},</CustomContent> and TiDB Cloud Dedicated, you can create manual backups.
+For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, {{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent> instances, and TiDB Cloud Dedicated clusters, you can create manual backups.
 
-A manual backup provides a controlled restore point and is retained until you explicitly delete it. Manual backups do not support PITR or partial backups, and each restore operation creates a new instance.
+A manual backup provides a controlled restore point and is retained until you explicitly delete it. Manual backups do not support PITR or partial backups, and each restore operation creates a new instance or cluster.
 
 For more information, see the following:
 
@@ -61,5 +61,5 @@ If you want to perform Point-in-time Restore, note the following:
 
 TiDB Cloud supports restoring data from backup snapshots or point-in-time recovery to a new cluster or instance. Restore operations help you recover from accidental data loss, data corruption, or application errors.
 
-- For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, you can restore either an automatic or a manual backup to a new instance. To restore a manual backup, use snapshot restore. PITR is supported only for automatic backups. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
+- For {{{ .essential }}} instances, you can restore an automatic backup to a new instance. For instances with TiDB version `CLOUD.202603.x` or later, you can also restore a manual backup. To restore a manual backup, use snapshot restore. PITR is supported only for automatic backups. For more information, see [Restore mode](/tidb-cloud/backup-and-restore-serverless.md#restore-mode).
 - For {{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent> instances, you can restore data to a new instance. You can restore from automatic backups, manual backups, or supported external cloud storage backups. PITR is supported only for automatic backups and is not supported for manual backups.

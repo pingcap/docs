@@ -99,7 +99,7 @@ TiDB Cloud offer restore functionality to help recover data in case of accidenta
 
 TiDB Cloud supports snapshot restore and point-in-time restore for your {{{ .starter }}} or Essential instance.
 
-- **Snapshot Restore**: restores your {{{ .starter }}} or Essential instance from a specific backup snapshot. For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, you can restore from either an automatic or a manual backup.
+- **Snapshot Restore**: restores data from a specific backup snapshot to a new {{{ .starter }}} or Essential instance. For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, you can restore from either an automatic or a manual backup.
 
 - **Point-in-Time Restore (PREVIEW)**: restores your {{{ .essential }}} instance to a specific time.
 
