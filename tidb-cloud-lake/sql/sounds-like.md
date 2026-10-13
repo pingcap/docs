@@ -1,6 +1,6 @@
 ---
 title: SOUNDS LIKE
-summary: 2 つの文字列の発音を、それぞれの Soundex コードを使って比較します。Soundex は、文字列の発音を表すコードを生成する音声学的アルゴリズムで、スペルではなく発音に基づいて文字列をおおよそ一致させることができます。{{{ .lake }}} では、文字列から Soundex コードを取得できる [SOUNDEX](/tidb-cloud-lake/sql/soundex.md) 関数を提供しています。
+summary: 2 つの文字列の発音を、それぞれの Soundex コードを使って比較します。Soundex は、文字列の発音を表すコードを生成する音声学的アルゴリズムで、スペルではなく発音に基づいて文字列をおおよそ一致させることができます。{{{ .lake }}} では、文字列から Soundex コードを取得できる SOUNDEX 関数を提供しています。
 ---
 
 # SOUNDS LIKE
