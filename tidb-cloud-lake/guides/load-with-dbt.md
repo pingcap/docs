@@ -32,7 +32,7 @@ pip3 install tidbcloudlake-dbt
 
 ただし、dbt を個別にインストールしたい場合は、詳細な手順について公式の dbt インストールガイドを参照してください。
 
-## チュートリアル: dbt プロジェクト jaffle_shop を実行する {#tutorial-run-dbt-project-jaffle-shop}
+## チュートリアル: dbt プロジェクト jaffle_shop を実行する {#tutorial-run-dbt-project-jaffle_shop}
 
 dbt を初めて使用する場合、{{{ .lake }}} では <https://github.com/dbt-labs/jaffle_shop> で提供されている公式 dbt チュートリアルを完了することを推奨します。開始する前に、[tidbcloudlake-dbt のインストール](#install-tidbcloudlake-dbt) に従って dbt と tidbcloudlake-dbt をインストールしてください。
 

@@ -213,7 +213,7 @@ Fuse Engine のスナップショットアーキテクチャにより、強力�
 | **JSON Index**      | JSON ドキュメント内の特定のパス/キーにインデックスを作成する       | 特定の JSON パス/値によるフィルタリング             | `WHERE event_data:user.id = 123`      |
 | **Bloom Filter Index** | 一致しない block をすばやくスキップするための確率的チェック | 高速なポイントルックアップ（`=`）および `IN` リストのフィルタリング      | `WHERE user_id = 'xyz'` |
 
-## 比較: {{{ .lake }}} Fuse Engine と Apache Iceberg {#comparison-lake-fuse-engine-vs-apache-iceberg}
+## 比較: {{{ .lake }}} Fuse Engine と Apache Iceberg {#comparison--lake--fuse-engine-vs-apache-iceberg}
 
 _**Note:** この比較は、**テーブルフォーマット機能**に特化したものです。{{{ .lake }}} のネイティブなテーブルフォーマットとして、Fuse は進化を続けており、**使いやすさとパフォーマンス**の向上を目指しています。ここに示す機能は現時点のものであり、今後変更される可能性があります。_
 

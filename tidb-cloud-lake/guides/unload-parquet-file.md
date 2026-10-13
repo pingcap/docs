@@ -5,7 +5,7 @@ summary: parquet ファイルをアンロードする方法について説明し
 
 # Parquet ファイルのアンロード
 
-## Parquet ファイルのアンロード {#unloading-parquet-file}
+## Parquet ファイルのアンロード {#unloading-parquet-file-1}
 
 構文:
 

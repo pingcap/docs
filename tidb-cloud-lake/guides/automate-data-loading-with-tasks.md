@@ -75,7 +75,7 @@ CREATE OR REPLACE TABLE sensor_events (
 CREATE OR REPLACE STAGE sensor_events_stage;
 ```
 
-### ステップ 2. Task 1 — ファイルを生成する {#step-2-task-1-generate-files}
+### ステップ 2. Task 1 — ファイルを生成する {#step-2-task-1--generate-files}
 
 `task_generate_data` は、1 分ごとに 100 件のランダムな測定値を stage に書き込みます。各実行で新しい Parquet ファイルが生成され、下流のコンシューマーがそれを取り込みできます。
 
@@ -96,7 +96,7 @@ FROM (
 FILE_FORMAT = (TYPE = PARQUET);
 ```
 
-### ステップ 3. Task 2 — ファイルをロードする {#step-3-task-2-load-the-files}
+### ステップ 3. Task 2 — ファイルをロードする {#step-3-task-2--load-the-files}
 
 `task_consume_data` は同じ間隔で stage をスキャンし、新しく生成されたすべての Parquet ファイルを `sensor_events` テーブルにコピーします。`PURGE = TRUE` 句により、すでに取り込み済みのファイルはクリーンアップされます。
 
@@ -180,7 +180,7 @@ ORDER BY completed_time DESC;
 
 `WHEN STREAM_STATUS(...)` を使用すると、stream に新しい行がある場合にのみ実行できます。例 1 の `sensor_events` テーブルを再利用します。
 
-### ステップ 1. stream と latest テーブルを作成する {#step-1-create-stream-latest-table}
+### ステップ 1. stream と latest テーブルを作成する {#step-1-create-stream--latest-table}
 
 ```sql
 -- Create a stream on the sensor table (Standard mode to capture every mutation)

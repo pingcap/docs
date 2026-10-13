@@ -133,7 +133,7 @@ SELECT * FROM events WHERE data['content'] IS NOT NULL;
 ELSE delete_by_keypath(val, 'nested:secret')
 ```
 
-## 読み取り / 書き込みの動作 {#read-write-behavior}
+## 読み取り / 書き込みの動作 {#read--write-behavior}
 
 | 操作 | 効果 |
 |-----------|--------|
@@ -186,7 +186,7 @@ DROP MASKING POLICY IF EXISTS email_mask;
 4. VARIANT では、値全体をマスクするのではなく `object_delete` / `delete_by_keypath` を使用してください。
 5. 削除前にバインドを解除し、適用後は制限付きロールで確認してください。
 
-## 権限と参照 {#privileges-references}
+## 権限と参照 {#privileges--references}
 
 - ポリシーを作成するには、`*.*` に対する `CREATE MASKING POLICY` が必要です（作成者には OWNERSHIP が付与されます）
 - アタッチ/デタッチするには、グローバル `APPLY MASKING POLICY` または `APPLY ON MASKING POLICY <name>` が必要です

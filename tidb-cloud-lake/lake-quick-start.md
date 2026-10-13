@@ -36,7 +36,7 @@ summary: 3 つのステップで TiDB Cloud Lake を使い始めましょう。�
     - **Load Data** または **Load from Cloud Storage**: データのロード (load) を開始します。
     - **Query Data**: SQL Worksheet を作成します。
 
-## 次のステップ {#what-s-next}
+## 次のステップ {#whats-next}
 
 - [**TiDB Cloud Lake への接続**](/tidb-cloud-lake/guides/connection-overview.md): ワークフローに適したクライアントまたはドライバーを選択します。
 - [**アーキテクチャを学ぶ**](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md): メタデータ、コンピュート、ストレージの各レイヤーを理解します。

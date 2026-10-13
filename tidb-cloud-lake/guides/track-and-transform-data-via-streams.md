@@ -66,7 +66,7 @@ SELECT * FROM sensor_readings_stream; -- now empty
 
 `WITH CONSUME` は stream を 1 回読み取り、差分をクリアするため、次のラウンドでは新しい INSERT をキャプチャできます。
 
-## 例 2: Standard Stream（Updates & Deletes） {#example-2-standard-stream-updates-deletes}
+## 例 2: Standard Stream（Updates & Deletes） {#example-2-standard-stream-updates--deletes}
 
 UPDATE や DELETE を含むすべての変更に反応する必要がある場合は、Standard モードに切り替えます。
 

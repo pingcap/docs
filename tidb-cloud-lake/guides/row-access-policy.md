@@ -79,7 +79,7 @@ ADD ROW ACCESS POLICY rap_region_dept ON (office_region, department);
 
 ## 例 {#examples}
 
-### ベクトル / RAG ドキュメント可視性 {#vector-rag-document-visibility}
+### ベクトル / RAG ドキュメント可視性 {#vector--rag-document-visibility}
 
 共有ナレッジベース テーブルとベクトル検索を組み合わせた例です。可視性を一度設定すれば、検索 SQL にドキュメント ID フィルタを含める必要はありません。[ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) を参照してください。
 
@@ -289,7 +289,7 @@ ALTER TABLE employees DROP ALL ROW ACCESS POLICIES;
 4. アタッチ後は複数のロールで検証してください — admin、制限付き、非一致。
 5. 全データの確認には、繰り返しデタッチ/アタッチするより、権限のあるロールを使うことを推奨します。
 
-## 権限と参照情報 {#privileges-references}
+## 権限と参照情報 {#privileges--references}
 
 - policy を作成するには `*.*` に対する `CREATE ROW ACCESS POLICY` が必要（作成者は OWNERSHIP を取得）
 - アタッチ/デタッチするには、テーブルに対する `ALTER` と `APPLY ROW ACCESS POLICY`（グローバル）または `APPLY ON ROW ACCESS POLICY <name>` が必要

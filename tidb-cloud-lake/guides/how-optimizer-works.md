@@ -9,7 +9,7 @@ summary: "{{{ .lake }}} のクエリオプティマイザは、SQL テキスト�
 
 同じオプティマイザパイプラインが、分析レポート、JSON 検索、ベクトル検索、地理空間検索を支えています。**{{{ .lake }}} は、保存するあらゆるデータ型を理解する単一のオプティマイザを管理します。**
 
-## {{{ .lake }}} の Optimizer を支える仕組み {#what-makes-lake-s-optimizer-tick}
+## {{{ .lake }}} の Optimizer を支える仕組み {#what-makes--lake-s-optimizer-tick}
 
 - 統計情報は自動的に最新の状態に保たれます。データが書き込まれると、{{{ .lake }}} は行数、値の範囲、NDV を即座に管理するため、オプティマイザは selectivity、テーブル結合順序、コスト計算に新しい情報を手動メンテナンスなしで利用できます。
 - まず形、次にコスト: パイプラインは、グローバル探索の前に相関を除去し、述語や limit を push down し、集計を分割します。これにより探索空間を縮小し、処理をストレージ側へ移動します。
@@ -51,7 +51,7 @@ ORDER BY order_count DESC
 LIMIT 10;
 ```
 
-## フェーズ 1: 準備と統計情報 {#phase-1-prep-stats}
+## フェーズ 1: 準備と統計情報 {#phase-1-prep--stats}
 
 フェーズ 1 では、クエリを理解しやすい形に整え、コスト計算に必要なデータを付与します。この例では、オプティマイザは次の具体的な手順を実行します。
 
@@ -127,7 +127,7 @@ SELECT c.region,
 
 フェーズ 2 では、実際に必要な処理だけを残すための対象を絞った書き換えを実行します。
 
-### 1. フィルタと limit を push down する {#1-push-filters-limits-down}
+### 1. フィルタと limit を push down する {#1-push-filterslimits-down}
 
 ```
 # Before
@@ -193,7 +193,7 @@ WITH recent_orders AS (
 )
 ```
 
-## フェーズ 3: コストと物理プラン {#phase-3-cost-physical-plan}
+## フェーズ 3: コストと物理プラン {#phase-3-cost--physical-plan}
 
 論理プランが整理され、統計情報も最新になった段階で、オプティマイザは 3 つの判断を行います。
 

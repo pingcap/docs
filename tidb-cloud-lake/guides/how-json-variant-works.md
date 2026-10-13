@@ -183,7 +183,7 @@ FROM orders;
     - Predicate pushdown は bloom/inverted indexes と組み合わせてブロックを絞り込めます。
 - JSON の形状が安定しているほど、インデックス対象となるパスが増えます。
 
-## Variant データに対する {{{ .lake }}} の利点 {#lake-advantages-for-variant-data}
+## Variant データに対する {{{ .lake }}} の利点 {#-lake--advantages-for-variant-data}
 
 - **Snowflake 互換の表面積** – 既存のクエリや UDF をそのまま持ち込めます。
 - **ネイティブ JSONB 実行** – 型付きエンコーディングとベクトル化演算子により、文字列の組み替えを回避します。

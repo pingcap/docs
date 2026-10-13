@@ -173,7 +173,7 @@ CDC モードでは、logical replication を介して PostgreSQL WAL (Write-Ahe
 >
 > CDC モードでは、PostgreSQL WAL レベルを `logical` に設定する必要があり、primary key（一意カラム）を指定する必要があります。PostgreSQL ユーザーには `REPLICATION` 権限が必要です。
 
-### Snapshot + CDC {#snapshot-cdc}
+### Snapshot + CDC {#snapshot--cdc}
 
 このモードは両方のアプローチを組み合わせたものです。最初にソーステーブルの完全な snapshot を実行し、その後シームレスに CDC モードへ移行して継続的に変更を取得します。これはほとんどのデータ統合シナリオで推奨されるモードであり、完全な初期データロードと、その後の継続的なリアルタイム同期を実現します。
 

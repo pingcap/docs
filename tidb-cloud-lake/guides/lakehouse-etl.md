@@ -71,7 +71,7 @@ LIMIT 5;
 
 各エクスポートは、各ガイドで共通して使用される共有テーブルのいずれか 1 つに対応します。インラインキャストにより、上流の列順が変わってもスキーマの一貫性を保てます。
 
-### `citydrive_videos` {#citydrive-videos}
+### `citydrive_videos` {#citydrive_videos}
 
 ```sql
 COPY INTO citydrive_videos (video_id, vehicle_id, capture_date, route_name, weather, camera_source, duration_sec)
@@ -88,7 +88,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `frame_events` {#frame-events}
+### `frame_events` {#frame_events}
 
 ```sql
 COPY INTO frame_events (frame_id, video_id, frame_index, collected_at, event_tag, risk_score, speed_kmh)
@@ -105,7 +105,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `frame_metadata_catalog` {#frame-metadata-catalog}
+### `frame_metadata_catalog` {#frame_metadata_catalog}
 
 ```sql
 COPY INTO frame_metadata_catalog (doc_id, meta_json, captured_at)
@@ -118,7 +118,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `frame_embeddings` {#frame-embeddings}
+### `frame_embeddings` {#frame_embeddings}
 
 ```sql
 COPY INTO frame_embeddings (frame_id, video_id, sensor_view, embedding, encoder_build, created_at)
@@ -134,7 +134,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `frame_geo_points` {#frame-geo-points}
+### `frame_geo_points` {#frame_geo_points}
 
 ```sql
 COPY INTO frame_geo_points (video_id, frame_id, position_wgs84, solution_grade, source_system, created_at)
@@ -150,7 +150,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `signal_contact_points` {#signal-contact-points}
+### `signal_contact_points` {#signal_contact_points}
 
 ```sql
 COPY INTO signal_contact_points (node_id, signal_position, video_id, frame_id, frame_position, distance_m, created_at)

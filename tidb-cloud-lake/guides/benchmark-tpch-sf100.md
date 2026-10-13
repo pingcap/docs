@@ -15,7 +15,7 @@ TPC-H ベンチマークは、複雑なクエリとデータメンテナンス�
 >
 > TPC Benchmark™ および TPC-H™ は、Transaction Processing Performance Council（[TPC](http://www.tpc.org)）の商標です。本ベンチマークは TPC-H に着想を得ていますが、公式の TPC-H 結果と直接比較できるものではありません。
 
-### Snowflake と {{{ .lake }}} {#snowflake-and-lake}
+### Snowflake と {{{ .lake }}} {#snowflake-and--lake-}
 
 - **[Snowflake](https://www.snowflake.com)**: Snowflake は、ストレージとコンピュートの分離、オンデマンドでスケーラブルなコンピューティング、データ共有、クローン機能などの高度な機能で広く知られています。
 

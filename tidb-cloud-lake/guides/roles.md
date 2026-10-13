@@ -9,7 +9,7 @@ summary: "{{{ .lake }}} のロールは、権限管理を簡素化するうえ�
 
 ![Alt text](/media/tidb-cloud-lake/access-control-3.png)
 
-## ロールの継承と階層の確立 {#inheriting-roles-establishing-hierarchy}
+## ロールの継承と階層の確立 {#inheriting-roles--establishing-hierarchy}
 
 ロールの付与により、あるロールが別のロールから権限と責務を継承できるようになります。これにより、組織構造に似た柔軟な階層を作成できます。この階層には 2 つの [組み込みロール](#built-in-roles) があり、最上位が `account-admin`、最下位が `public` です。
 
@@ -58,7 +58,7 @@ ALTER USER eric WITH DEFAULT_ROLE = 'account_admin';
 - ユーザーは、[SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) コマンドを使用して、現在のロールを確認し、自分に付与されているすべてのロールを表示できます。
 - ユーザーに対してデフォルトロールを明示的に設定しない場合、{{{ .lake }}} は組み込みロール `public` をデフォルトロールとして使用します。
 
-## アクティブロールとセカンダリロール {#active-role-secondary-roles}
+## アクティブロールとセカンダリロール {#active-role--secondary-roles}
 
 {{{ .lake }}} では、1 人のユーザーに複数のロールを付与できます。これらのロールは、アクティブロールとセカンダリロールに分類されます。
 

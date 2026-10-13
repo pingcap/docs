@@ -9,7 +9,7 @@ summary: Tableau は、データを使って問題を解決する方法を変革
 
 最適な互換性のために、Tableau バージョン 2022.3 以降を使用してください。
 
-## チュートリアル: {{{ .lake }}} との統合 {#tutorial-integrating-with-lake}
+## チュートリアル: {{{ .lake }}} との統合 {#tutorial-integrating-with--lake-}
 
 このチュートリアルでは、`lake-jdbc` を使用して Tableau Desktop を {{{ .lake }}} に接続する方法を説明します。
 
@@ -32,7 +32,7 @@ summary: Tableau は、データを使って問題を解決する方法を変革
     | Windows          | C:\Program Files\Tableau\Drivers |
     | Linux            | /opt/tableau/tableau_driver/jdbc |
 
-### ステップ 3. {{{ .lake }}} に接続する {#step-3-connect-to-lake}
+### ステップ 3. {{{ .lake }}} に接続する {#step-3-connect-to--lake-}
 
 1. Tableau Desktop を起動し、サイドバーで **Other Databases (JDBC)** を選択します。
 

@@ -115,7 +115,7 @@ SELECT * FROM invoices ORDER BY order_id;
 
 {{{ .lake }}} は `TYPE = ndjson` を使用して NDJSON ファイルをロードします。NDJSON ファイルには Parquet ファイルのような埋め込みのカラムスキーマがないため、{{{ .lake }}} はファイル内容をサンプリングし、ターゲットテーブルに存在しないフィールドを推論して、NULL 許容カラムとして追加します。
 
-### ステップ 1: テーブルと stage を作成する {#step-1-create-a-table-and-stage}
+### ステップ 1: テーブルと stage を作成する {#step-1-create-a-table-and-stage-1}
 
 ```sql
 CREATE OR REPLACE TABLE events(id INT);
@@ -138,7 +138,7 @@ COPY INTO @events_stage FROM (
 ) FILE_FORMAT = (TYPE = ndjson);
 ```
 
-### ステップ 3: Schema Evolution を有効にしてロードする {#step-3-enable-schema-evolution-and-load}
+### ステップ 3: Schema Evolution を有効にしてロードする {#step-3-enable-schema-evolution-and-load-1}
 
 ```sql
 ALTER TABLE events SET OPTIONS(ENABLE_SCHEMA_EVOLUTION = true);
@@ -200,7 +200,7 @@ tags    VARIANT   NULL
 
 2 行目の `age = NULL` は、1 行目から推論された `BIGINT` 型を変更しません。`score` には整数と浮動小数点数の両方が含まれるため、`DOUBLE` になります。`profile` と `tags` はそれぞれオブジェクトと配列であるため、Schema Evolution はそれらを `VARIANT` カラムとして追加します。
 
-### ステップ 4: 結果を確認する {#step-4-verify-results}
+### ステップ 4: 結果を確認する {#step-4-verify-results-1}
 
 テーブルには現在 3 つのカラムがあります。`city` と `score` は自動的に追加されました。
 

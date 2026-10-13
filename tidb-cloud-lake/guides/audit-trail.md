@@ -23,7 +23,7 @@ summary: "{{{ .lake }}} system history tables automatically capture detailed rec
 | [access_history](/tidb-cloud-lake/sql/system-history-access-history.md) | データベースオブジェクトへのアクセスと変更 | データリネージの追跡、コンプライアンス監査、変更管理 |
 | [login_history](/tidb-cloud-lake/sql/system-history-login-history.md) | 認証試行とセッション | セキュリティ監視、ログイン失敗の検出、アクセスパターン分析 |
 
-## 監査のユースケースと例 {#audit-use-cases-examples}
+## 監査のユースケースと例 {#audit-use-cases--examples}
 
 ### セキュリティ監視 {#security-monitoring}
 

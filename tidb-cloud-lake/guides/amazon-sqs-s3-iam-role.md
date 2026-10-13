@@ -16,7 +16,7 @@ summary: "{{{ .lake }}} で \"Amazon SQS (S3) - IAM Role\" データソースを
 - S3 パスのポーリングのみに依存せず、S3 イベント通知を使用してデータ取り込みを駆動する
 - 複数のタスクから参照されている場合に、IAM Role、queue URL、またはパススコープを 1 か所で更新する
 
-## Amazon SQS (S3) - IAM Role を作成する {#create-amazon-sqs-s3-iam-role}
+## Amazon SQS (S3) - IAM Role を作成する {#create-amazon-sqs-s3---iam-role}
 
 1. **Data** > **Data Sources** に移動し、**Create Data Source** をクリックします。
 2. サービスタイプとして **Amazon SQS (S3) - IAM Role** を選択し、接続の詳細を入力します。
@@ -231,7 +231,7 @@ aws s3api get-bucket-notification-configuration \
 
 `QueueArn` が対象の SQS キューを指していること、`Events` に `s3:ObjectCreated:*` が含まれていること、`FilterRules` が {{{ .lake }}} データソースで設定した `Object Key Prefix` / `Object Key Suffix` と一致していることを確認してください。
 
-## ステップ 4: {{{ .lake }}} が引き受ける IAM ロールを作成する {#step-4-create-an-iam-role-for-lake-to-assume}
+## ステップ 4: {{{ .lake }}} が引き受ける IAM ロールを作成する {#step-4-create-an-iam-role-for--lake--to-assume}
 
 `trust-policy.json` を生成します。`ExternalId` は {{{ .lake }}} (platform) コンソールの organization ID です。
 
@@ -296,7 +296,7 @@ aws iam update-assume-role-policy \
   --policy-document file://trust-policy.json
 ```
 
-## ステップ 5: S3/SQS 権限をアタッチする {#step-5-attach-s3-sqs-permissions}
+## ステップ 5: S3/SQS 権限をアタッチする {#step-5-attach-s3sqs-permissions}
 
 `permissions-policy.json` を生成します。
 
@@ -386,7 +386,7 @@ aws sqs receive-message \
 >
 > `receive-message` はメッセージを自動的に削除しません。可視性タイムアウトの間、一時的にメッセージを非表示にするだけです。後で {{{ .lake }}} にこのテストメッセージを消費させたい場合は、手動で削除しないでください。データソース接続をテストする前に、可視性タイムアウトが期限切れになるまで待ってください。
 
-## {{{ .lake }}} に提供する情報 {#information-to-provide-to-lake}
+## {{{ .lake }}} に提供する情報 {#information-to-provide-to--lake-}
 
 AWS 側の設定が完了したら、{{{ .lake }}} でデータソースを作成する際に、以下の情報を入力します。
 

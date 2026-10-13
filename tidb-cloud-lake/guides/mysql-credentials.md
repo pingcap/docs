@@ -13,7 +13,7 @@ summary: このページでは、`MySQL - Credentials` データソースを作�
 - すべてのタスクで同じデータベース接続設定を毎回入力し直す手間を避ける
 - データベースのエンドポイントまたはアカウントが変更されたときに、依存するすべてのタスクを 1 か所で更新する
 
-## MySQL - Credentials を作成する {#create-mysql-credentials}
+## MySQL - Credentials を作成する {#create-mysql---credentials}
 
 1. **Data** > **Data Sources** に移動し、**Create Data Source** をクリックします。
 2. サービスタイプとして **MySQL - Credentials** を選択し、接続の詳細を入力します。

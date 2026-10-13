@@ -58,7 +58,7 @@ Github: https://github.com/tidbcloud/lakesql
 >>> More information at https://github.com/tidbcloud/lakesql
 ```
 
-#### `--prefix` を使用したカスタムインストール {#custom-installation-with-prefix}
+#### `--prefix` を使用したカスタムインストール {#custom-installation-with---prefix}
 
 指定したディレクトリ (例: `/usr/local`) に LakeSQL をインストールします。
 
@@ -96,7 +96,7 @@ macOS では、次の簡単なコマンドを使用して Homebrew で LakeSQL �
 brew install tidbcloud/homebrew-tap/lakesql
 ```
 
-### Apt (Ubuntu/Debian 向け) {#apt-for-ubuntu-debian}
+### Apt (Ubuntu/Debian 向け) {#apt-for-ubuntudebian}
 
 Ubuntu および Debian システムでは、Apt パッケージマネージャーを使用して LakeSQL をインストールできます。
 
@@ -189,7 +189,7 @@ lake://user1:password1@tnxxxx--default.gw.aws-us-east-2.default.tidbcloud.com:44
 lake+flight://root:@localhost:8900/database1?connect_timeout=10
 ```
 
-### {{{ .lake }}} への接続 {#connect-to-lake}
+### {{{ .lake }}} への接続 {#connect-to--lake-}
 
 {{{ .lake }}} に接続するベストプラクティスは、{{{ .lake }}} から DSN を取得し、それを環境変数として export することです。DSN を取得するには、次の手順を実行します。
 
@@ -225,7 +225,7 @@ LakeSQL には、クエリ結果の表示方法を定義できるさまざまな
 
 各設定の詳細については、以下のリファレンス情報を参照してください。
 
-### `display_pretty_sql` {#display-pretty-sql}
+### `display_pretty_sql` {#display_pretty_sql}
 
 `display_pretty_sql` 設定は、SQL クエリを視覚的に整形して表示するかどうかを制御します。以下の最初のクエリのように `false` に設定すると、SQL クエリは見やすい形式に整形されません。一方、2 番目のクエリのように `true` に設定すると、SQL クエリが見やすい形式で整形され、読みやすく理解しやすくなります。
 
@@ -292,7 +292,7 @@ root@localhost:8000 !set prompt {user}@{warehouse}/{database}
 root@localhost:8000/default
 ```
 
-### `progress_color` {#progress-color}
+### `progress_color` {#progress_color}
 
 `progress_color` 設定は、クエリ実行中の進行状況インジケーターに使用する色を制御します。この例では、色が `blue` に設定されています。
 
@@ -301,7 +301,7 @@ root@localhost:8000/default
 root@localhost:8000/default> !set progress_color blue
 ```
 
-### `show_progress` {#show-progress}
+### `show_progress` {#show_progress}
 
 `true` に設定すると、クエリの実行中に進行状況情報が表示されます。進行状況情報には、処理済みの行数、クエリ内の総行数、1 秒あたりの処理行数、処理済みメモリ量、および 1 秒あたりのメモリ処理速度が含まれます。
 
@@ -312,7 +312,7 @@ root@localhost:8000/default> select * from numbers(1000000000000000);
 ⠁ [00:00:08] Processing 18.02 million/1 quadrillion (2.21 million rows/s), 137.50 MiB/7.11 PiB (16.88 MiB/s) ░
 ```
 
-### `show_stats` {#show-stats}
+### `show_stats` {#show_stats}
 
 `show_stats` 設定は、各クエリの実行後にクエリ統計情報を表示するかどうかを制御します。以下の例の最初のクエリのように `false` に設定すると、クエリ統計情報は表示されません。一方、2 番目のクエリのように `true` に設定すると、各クエリの実行後に、実行時間、読み取った行数、処理したバイト数などのクエリ統計情報が表示されます。
 
@@ -338,7 +338,7 @@ root@localhost:8000/default> select now();
 1 row read in 0.045 sec. Processed 1 row, 1 B (22.26 rows/s, 22 B/s)
 ```
 
-### `max_display_rows` {#max-display-rows}
+### `max_display_rows` {#max_display_rows}
 
 `max_display_rows` 設定は、クエリ結果の出力に表示される最大行数を制御します。以下の例では `5` に設定されているため、クエリ結果には最大 5 行のみが表示されます。残りの行は (5 shown) として示されます。
 
@@ -364,7 +364,7 @@ root@localhost:8000/default> SELECT * FROM system.configs;
 176 rows read in 0.059 sec. Processed 176 rows, 10.36 KiB (2.98 thousand rows/s, 175.46 KiB/s)
 ```
 
-### `max_col_width` & `max_width` {#max-col-width-max-width}
+### `max_col_width` & `max_width` {#max_col_width--max_width}
 
 `max_col_width` と `max_width` の設定は、それぞれ個々のカラムおよび表示出力全体に対して、文字数ベースで許可される最大幅を指定します。次の例では、カラムの表示幅を 10 文字、表示全体の幅を 100 文字に設定しています。
 
@@ -397,7 +397,7 @@ root@localhost:8000/default> select * from system.settings;
 96 rows read in 0.040 sec. Processed 96 rows, 16.52 KiB (2.38 thousand rows/s, 410.18 KiB/s)
 ```
 
-### `output_format` {#output-format}
+### `output_format` {#output_format}
 
 `output_format` を `table`、`csv`、`tsv`、または `null` に設定することで、クエリ結果の形式を制御できます。`table` 形式では、カラムヘッダー付きの表形式で結果を表示します。`csv` と `tsv` 形式では、それぞれカンマ区切り値とタブ区切り値で出力されます。`null` 形式では、出力の整形を行いません。
 
@@ -474,7 +474,7 @@ is_configured: YES
 1 row read in 0.037 sec. Processed 1 row, 113 B (26.75 rows/s, 2.95 KiB/s)
 ```
 
-### `multi_line` {#multi-line}
+### `multi_line` {#multi_line}
 
 `multi_line` を `true` に設定すると、入力を複数行にまたがって入力できるようになります。その結果、SQL クエリの各句を別々の行に記述できるため、可読性と整理しやすさが向上します。
 
@@ -501,7 +501,7 @@ root@localhost:8000/default> SELECT *
 176 rows read in 0.060 sec. Processed 176 rows, 10.36 KiB (2.91 thousand rows/s, 171.39 KiB/s)
 ```
 
-### `replace_newline` {#replace-newline}
+### `replace_newline` {#replace_newline}
 
 `replace_newline` 設定は、出力内の改行文字 (`\n`) をリテラル文字列 (`\\n`) に置き換えるかどうかを決定します。次の例では、`replace_newline` を `true` に設定しています。その結果、文字列 `'Hello\nWorld'` を選択すると、改行文字 (`\n`) はリテラル文字列 (`\\n`) に置き換えられます。つまり、改行文字をそのまま表示する代わりに、出力には `'Hello\nWorld'` が `'Hello\\nWorld'` として表示されます。
 
@@ -623,7 +623,7 @@ Settings {
 }
 ```
 
-### `!set <setting> <value>` {#set}
+### `!set <setting> <value>` {#set--}
 
 LakeSQL の設定を変更します。
 
@@ -631,7 +631,7 @@ LakeSQL の設定を変更します。
 root@localhost:8000/default> !set display_pretty_sql false
 ```
 
-### `!source <sql_file>` {#source}
+### `!source <sql_file>` {#source-}
 
 SQL ファイルを実行します。
 

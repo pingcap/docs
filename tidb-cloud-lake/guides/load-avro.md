@@ -23,7 +23,7 @@ FILE_FORMAT = (TYPE = AVRO)
 - Avro ファイル形式のオプションの詳細については、[Avro ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#avro-options) を参照してください。
 - COPY INTO table オプションの詳細については、[COPY INTO table](/tidb-cloud-lake/sql/copy-into-table.md) を参照してください。
 
-## チュートリアル: リモート HTTP URL から {{{ .lake }}} に Avro データをロードする {#tutorial-loading-avro-data-into-lake-from-remote-http-url}
+## チュートリアル: リモート HTTP URL から {{{ .lake }}} に Avro データをロードする {#tutorial-loading-avro-data-into--lake--from-remote-http-url}
 
 このチュートリアルでは、Avro スキーマを使用して {{{ .lake }}} にテーブルを作成し、GitHub でホストされている `.avro` ファイルから HTTPS 経由で Avro データを直接ロードします。
 
@@ -53,7 +53,7 @@ FILE_FORMAT = (TYPE = AVRO)
 }
 ```
 
-### ステップ 2: {{{ .lake }}} にテーブルを作成する {#step-2-create-a-table-in-lake}
+### ステップ 2: {{{ .lake }}} にテーブルを作成する {#step-2-create-a-table-in--lake-}
 
 スキーマで定義された構造に一致するテーブルを作成します。
 

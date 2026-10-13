@@ -55,7 +55,7 @@ Role ARN は AssumeRole モデルを使用します。TiDB Cloud Lake は AWS �
 | **S3 Endpoint**           | いいえ       | MinIO などの S3 互換ストレージでのみ使用します。例: `http://localhost:9000`。Amazon S3 の場合は空のままにします                                 |
 | **SQS Queue URL**         | いいえ       | イベント駆動モード用のオプションの SQS 標準キュー URL。[オプションの SQS キュー](#optional-sqs-queue) を参照してください                                         |
 
-### 認証方式: Access Key / Secret Key {#authentication-method-access-key-secret-key}
+### 認証方式: Access Key / Secret Key {#authentication-method-access-key--secret-key}
 
 この方式は、たとえばロール引き受けをサポートしない S3 互換ストアなど、静的認証情報を使用したい場合に利用します。
 

@@ -146,7 +146,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
 
     `lake-doc` バケットを開くと、`snowflake` フォルダ内に Parquet ファイルが表示されます。
 
-## ステップ 3: {{{ .lake }}} へのデータのロード (load) {#step-3-loading-data-into-lake}
+## ステップ 3: {{{ .lake }}} へのデータのロード (load) {#step-3-loading-data-into--lake-}
 
 1. {{{ .lake }}} にターゲットテーブルを作成します。
 

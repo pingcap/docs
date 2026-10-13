@@ -29,7 +29,7 @@ COPY INTO your_table
 FROM 'https://your-remote-location/data_file_[001-003].csv' ...
 ```
 
-## チュートリアル - リモートファイルからのロード {#tutorial-load-from-a-remote-file}
+## チュートリアル - リモートファイルからのロード {#tutorial---load-from-a-remote-file}
 
 このチュートリアルでは、リモート CSV ファイルから {{{ .lake }}} にデータをインポートする方法を示します。サンプルファイル [books.csv](https://lakesql-bin.tidbcloud.com/datasets/books.csv) には 2 件のレコードが含まれています。
 

@@ -74,7 +74,7 @@ FRAME-0101 | 2025-01-01 08:15:21
 FRAME-0102 | 2025-01-01 08:33:54
 ```
 
-### ブール OR / リスト {#boolean-or-list}
+### ブール OR / リスト {#boolean-or--list}
 
 ```sql
 SELECT doc_id,

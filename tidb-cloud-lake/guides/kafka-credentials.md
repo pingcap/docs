@@ -15,7 +15,7 @@ summary: Kafka 接続情報を再利用できるように保存するための�
 - 同じ Kafka 接続設定を複数の Kafka Consumer タスクで再利用する
 - 複数のタスクから参照されている Kafka アドレス、認証方式、またはアカウント情報を 1 か所で更新する
 
-## Kafka - Credentials を作成する {#create-kafka-credentials}
+## Kafka - Credentials を作成する {#create-kafka---credentials}
 
 1. **Data** > **Data Sources** に移動し、**Create Data Source** をクリックします。
 2. サービスタイプとして **Kafka - Credentials** を選択し、接続の詳細を入力します。

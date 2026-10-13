@@ -225,7 +225,7 @@ Downtown Loop      | pedestrian     | 1
 ... (total rows: 10)
 ```
 
-### ルート × 天候カバレッジに対する CUBE {#cube-for-route-weather-coverage}
+### ルート × 天候カバレッジに対する CUBE {#cube-for-route--weather-coverage}
 
 ```sql
 SELECT v.route_name,

@@ -9,7 +9,7 @@ summary: このページでは、TiDB Cloud Lake における一般的な問題�
 
 ## テーブル {#tables}
 
-### system_history.query_history {#system-history-query-history}
+### system_history.query_history {#system_historyquery_history}
 
 完全な SQL 実行監査証跡です。すべてのクエリについて、開始/終了ステータスを持つエントリが生成されます。
 
@@ -67,7 +67,7 @@ summary: このページでは、TiDB Cloud Lake における一般的な問題�
 | session_id | VARCHAR | セッション識別子 |
 | session_settings | VARCHAR | セッション設定 |
 
-### system_history.profile_history {#system-history-profile-history}
+### system_history.profile_history {#system_historyprofile_history}
 
 すべてのクエリに対する詳細な実行プロファイルです。演算子ごとの統計情報を抽出するには `jq()` を使用します。
 
@@ -80,7 +80,7 @@ summary: このページでは、TiDB Cloud Lake における一般的な問題�
 
 統計配列のインデックス: `[0]`=OutputRows, `[1]`=OutputBytes, `[2]`=InputRows, `[3]`=InputBytes, `[4]`=CpuTime(ns)。
 
-### system_history.log_history {#system-history-log-history}
+### system_history.log_history {#system_historylog_history}
 
 すべての {{{ .lake }}} ノードおよびコンポーネントからの生ログエントリです。
 
@@ -98,7 +98,7 @@ summary: このページでは、TiDB Cloud Lake における一般的な問題�
 | fields | VARIANT | 追加フィールド（JSON） |
 | batch_number | BIGINT | 内部使用 |
 
-### system_history.access_history {#system-history-access-history}
+### system_history.access_history {#system_historyaccess_history}
 
 データリネージおよびアクセス制御の監査です。アクセスまたは変更されたすべてのオブジェクトを追跡します。
 
@@ -114,7 +114,7 @@ summary: このページでは、TiDB Cloud Lake における一般的な問題�
 
 JSON オブジェクトのフィールド: `object_domain` (Database/Table/Stage), `object_name`, `columns[]`, `stage_type`, `operation_type` (Create/Alter/Drop/Undrop), `properties`。
 
-### system_history.login_history {#system-history-login-history}
+### system_history.login_history {#system_historylogin_history}
 
 すべてのログイン試行に対する認証監査証跡です。
 

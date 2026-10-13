@@ -13,7 +13,7 @@ summary: このページでは、`Amazon S3 - Credentials` データソースを
 - すべてのタスクで同じ S3 アクセス認証情報を毎回再入力する手間を省く
 - 認証情報がローテーションされた際に、一元的に更新する
 
-## Amazon S3 - Credentials を作成する {#create-amazon-s3-credentials}
+## Amazon S3 - Credentials を作成する {#create-amazon-s3---credentials}
 
 1. **Data** > **Data Sources** に移動し、**Create Data Source** をクリックします。
 2. サービスタイプとして **Amazon S3 - Credentials** を選択し、認証情報を入力します。

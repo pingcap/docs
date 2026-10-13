@@ -5,7 +5,7 @@ summary: TSV ファイルをアンロードする方法について説明しま�
 
 # TSV ファイルのアンロード
 
-## TSV ファイルのアンロード {#unloading-tsv-file}
+## TSV ファイルのアンロード {#unloading-tsv-file-1}
 
 構文:
 
