@@ -126,7 +126,7 @@ fts AS (
     WHERE fts_match_word(
       'vector index error 8200 partitioned table',
       content
-    ) > 0
+    )
     ORDER BY score DESC
     LIMIT 20
   ) f
