@@ -144,7 +144,7 @@ SHOW GRANTS FOR ROLE writer;
 | SELECT    | Selects rows from a table. SHOW CREATE a table. DESCRIBE a table.                                                |
 | UPDATE    | Updates rows in a table.                                                                                         |
 | SUPER     | Optimizes or analyzes a table.                                                                                   |
-| OWNERSHIP | Grants full control over a database.  Only a single role can hold this privilege on a specific object at a time. |
+| OWNERSHIP | Grants full control over a table.  Only a single role can hold this privilege on a specific object at a time. |
 
 ### View Privileges
 
