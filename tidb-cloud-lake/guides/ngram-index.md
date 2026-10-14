@@ -88,7 +88,7 @@ INSERT INTO logs VALUES (1, 'Application error occurred');
 SELECT * FROM logs WHERE message LIKE '%error%';
 ```
 
-## 完全な例 {#complete-example}
+## 実践例 {#complete-example}
 
 この例では、ログ分析用の ngram インデックスを作成し、そのパフォーマンス上の利点を確認する方法を示します。
 

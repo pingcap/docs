@@ -34,7 +34,7 @@ JSON データをクエリする際、従来のデータベースではネスト
 
 Virtual columns は v1.2.832 以降でデフォルトで有効になっており、追加の設定は不要です。
 
-## 完全な例 {#complete-example}
+## 実践例 {#complete-example}
 
 この例では、自動的な virtual column の作成とパフォーマンス上の利点を示します。
 

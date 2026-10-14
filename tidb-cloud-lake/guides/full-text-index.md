@@ -95,7 +95,7 @@ ORDER BY SCORE() DESC;
 SELECT * FROM docs WHERE QUERY('title:"user guide" AND content:(tutorial OR example)');
 ```
 
-## 完全な例 {#complete-example}
+## 実践例 {#complete-example}
 
 この例では、Kubernetes のログデータにフルテキスト検索インデックスを作成し、さまざまな関数を使って検索する方法を示します。
 
