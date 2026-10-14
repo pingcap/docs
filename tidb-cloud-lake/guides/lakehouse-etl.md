@@ -173,7 +173,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 
 ## 4. 増分処理のための Streams（オプション） {#4-streams-for-incremental-reactions-optional}
 
-下流ジョブで前回のバッチ以降に追加された行だけを消費したい場合は、streams を使用します。
+下流ジョブで前回のバッチ以降に追加された行だけを消費したい場合は、ストリームを使用します。
 
 ```sql
 CREATE OR REPLACE STREAM frame_events_stream ON TABLE frame_events;
@@ -183,7 +183,7 @@ SELECT * FROM frame_events_stream;   -- shows newly copied rows
 SELECT * FROM frame_events_stream WITH CONSUME;  -- advance the offset
 ```
 
-`WITH CONSUME` により、行の処理後に stream カーソルが先へ進むことが保証されます。参考: [Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md).
+`WITH CONSUME` により、行の処理後にストリームカーソルが先へ進むことが保証されます。参考: [Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md).
 
 ---
 

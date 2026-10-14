@@ -178,9 +178,9 @@ ORDER BY completed_time DESC;
 
 ## 例 2: Stream トリガーによるマージ {#example-2-stream-triggered-merge}
 
-`WHEN STREAM_STATUS(...)` を使用すると、stream に新しい行がある場合にのみ実行できます。例 1 の `sensor_events` テーブルを再利用します。
+`WHEN STREAM_STATUS(...)` を使用すると、ストリームに新しい行がある場合にのみ実行できます。例 1 の `sensor_events` テーブルを再利用します。
 
-### ステップ 1. stream と latest テーブルを作成する {#step-1-create-stream--latest-table}
+### ステップ 1. ストリームと latest テーブルを作成する {#step-1-create-stream--latest-table}
 
 ```sql
 -- Create a stream on the sensor table (Standard mode to capture every mutation)
@@ -222,4 +222,4 @@ SELECT *
 FROM task_history('task_stream_merge', 5);
 ```
 
-このタスクは、`STREAM_STATUS('<database>.<stream_name>')` が `TRUE` を返した場合にのみ実行されます。現在のスキーマに関係なくタスクが stream を解決できるよう、stream には必ずそのデータベース名をプレフィックスとして付けてください（例: `task_demo.sensor_events_stream`）。また、すべての `CREATE/ALTER TASK` では、自身の Warehouse 名を使用してください。
+このタスクは、`STREAM_STATUS('<database>.<stream_name>')` が `TRUE` を返した場合にのみ実行されます。現在のスキーマに関係なくタスクがストリームを解決できるよう、ストリームには必ずそのデータベース名をプレフィックスとして付けてください（例: `task_demo.sensor_events_stream`）。また、すべての `CREATE/ALTER TASK` では、自身の Warehouse 名を使用してください。
