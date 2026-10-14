@@ -1,6 +1,6 @@
 ---
 title: system_history.login_history
-summary: Comprehensive logging of all user login attempts (successful and failed) for authentication security auditing.
+summary: Use system_history.login_history to audit successful and failed user login attempts for security monitoring and compliance.
 ---
 
 # system_history.login_history

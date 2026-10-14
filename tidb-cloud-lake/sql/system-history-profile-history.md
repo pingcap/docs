@@ -1,6 +1,6 @@
 ---
 title: system_history.profile_history
-summary: Detailed execution profiles and statistics for every SQL query, for query performance analysis.
+summary: Use system_history.profile_history to analyze detailed execution profiles and statistics of SQL queries for performance tuning.
 ---
 
 # system_history.profile_history
