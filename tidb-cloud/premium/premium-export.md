@@ -137,12 +137,12 @@ You can compress the exported CSV and SQL data using the following algorithms:
    >
    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
 3. On the **Export** page, click **Export Data** in the upper-right corner. Then configure the following settings:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} or {{{ .byoc }}} instance, and then click **Test Connection** to verify the credentials.
+    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} instance, and then click **Test Connection** to verify the credentials.
     - **Target Connection**:
         - **Storage Provider**: choose Azure Blob Storage.
         - **Folder URI**: enter the URI of Azure Blob Storage with the `azure://<account-name>.blob.core.windows.net/<container-name>/<folder-path>/` format.
@@ -161,12 +161,12 @@ You can compress the exported CSV and SQL data using the following algorithms:
    >
    > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
+2. Click the name of your target {{{ .premium }}} instance to go to its overview page, and then click **Data** > **Export** in the left navigation pane.
 
 3. On the **Export** page, click **Export Data** in the upper-right corner:
 
     - **Task Name**: enter a name for the export task. The default value is `SNAPSHOT_{snapshot_time}`.
-    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} or {{{ .byoc }}} instance, and then click **Test Connection** to verify the credentials.
+    - **Source Connection**: enter **Username** and **Password** of your {{{ .premium }}} instance, and then click **Test Connection** to verify the credentials.
     - **Target Connection**:
         - **Storage Provider**: choose Alibaba Cloud OSS.
         - **Folder URI**: enter the Alibaba Cloud OSS URI where you want to export the data, in the `oss://<bucket-name>/<folder-path>/` format.
