@@ -30,36 +30,25 @@ Connect to your {{{ .premium }}} or {{{ .byoc }}} instance using the MySQL Comma
 
 3. Ensure that the configurations in the connection dialog match your operating environment.
 
-<CustomContent plan="premium">
-
-    - **Connection Type** is set to `Public`.
-
-</CustomContent>
-
-<CustomContent plan="byoc">
-
-    - **Connection Type** is set to `Public` or `Private`, depending on your BYOC deployment.
-
-</CustomContent>
-
+    - **Connection Type** is set to `Public`<CustomContent plan="byoc"> or `Private`, depending on your BYOC deployment</CustomContent>.
     - **Connect With** is set to `MySQL CLI`.
     - **Operating System** matches your environment.
 
-<CustomContent plan="premium">
+    <CustomContent plan="premium">
 
     > **Note:**
     >
     > {{{ .premium }}} instances have the public endpoint disabled by default. If you do not see the `Public` option, enable the public endpoint on the instance details page (under the **Network** tab), or ask an organization admin to enable it before proceeding.
 
-</CustomContent>
+    </CustomContent>
 
-<CustomContent plan="byoc">
+    <CustomContent plan="byoc">
 
     > **Note:**
     >
     > Public connections are available only if you provided a public hosted zone during the BYOC deployment. If you provided a private hosted zone, use a private connection to connect to your instance.
 
-</CustomContent>
+    </CustomContent>
 
 4. Click **Generate Password** to create a random password. If you have already configured a password, reuse that credential or rotate it before proceeding.
 
