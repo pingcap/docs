@@ -40,7 +40,7 @@
 - Build AI Applications
   - [RAG Example](/ai/guides/rag-with-pytidb.md)
   - [Agent Memory Guide](/ai/guides/agent-memory.md)
-  - [Conversational Memory Example](/ai/guides/memory-with-pytidb.md)
+  - [Agent Memory Example](/ai/guides/memory-with-pytidb.md)
   - [Text-to-SQL Example](/ai/guides/text2sql-with-pytidb.md)
 - TiDB Cloud CLI
   - [Overview](/ai/ti/ti-overview.md)
