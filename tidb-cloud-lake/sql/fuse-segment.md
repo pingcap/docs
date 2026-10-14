@@ -1,11 +1,11 @@
 ---
 title: FUSE_SEGMENT
-summary: 指定したテーブルスナップショットのセグメント情報を返します。{{{ .lake }}} における segment について詳しくは、Snapshot、Segment、Block とは何か？ を参照してください。
+summary: 指定したテーブルスナップショットのセグメント情報を返します。{{{ .lake }}} におけるセグメントについて詳しくは、Snapshot、Segment、Block とは何か？ を参照してください。
 ---
 
 # FUSE_SEGMENT
 
-指定したテーブルスナップショットのセグメント情報を返します。{{{ .lake }}} における segment について詳しくは、[Snapshot、Segment、Block とは何か？](/tidb-cloud-lake/sql/optimize-table.md#-lake--data-storage-snapshot-segment-and-block) を参照してください。
+指定したテーブルスナップショットのセグメント情報を返します。{{{ .lake }}} におけるセグメントについて詳しくは、[Snapshot、Segment、Block とは何か？](/tidb-cloud-lake/sql/optimize-table.md#-lake--data-storage-snapshot-segment-and-block) を参照してください。
 
 関連情報:
 

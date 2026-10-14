@@ -1,11 +1,11 @@
 ---
 title: FUSE_COLUMN
-summary: テーブルの最新または指定したスナップショットのカラム情報を返します。{{{ .lake }}} における block について詳しくは、「Snapshot、Segment、Block とは何か？」を参照してください。
+summary: テーブルの最新または指定したスナップショットのカラム情報を返します。{{{ .lake }}} におけるブロックについて詳しくは、「Snapshot、Segment、Block とは何か？」を参照してください。
 ---
 
 # FUSE_COLUMN
 
-テーブルの最新または指定したスナップショットのカラム情報を返します。{{{ .lake }}} における block について詳しくは、[Snapshot、Segment、Block とは何か？](/tidb-cloud-lake/sql/optimize-table.md#-lake--data-storage-snapshot-segment-and-block) を参照してください。
+テーブルの最新または指定したスナップショットのカラム情報を返します。{{{ .lake }}} におけるブロックについて詳しくは、[Snapshot、Segment、Block とは何か？](/tidb-cloud-lake/sql/optimize-table.md#-lake--data-storage-snapshot-segment-and-block) を参照してください。
 
 関連情報:
 
