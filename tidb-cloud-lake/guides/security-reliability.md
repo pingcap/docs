@@ -12,7 +12,7 @@ summary: "{{{ .lake }}} は、データのライフサイクル全体を通じ�
 | [**アクセス制御**](/tidb-cloud-lake/guides/access-control.md) | ユーザー権限を管理する | ロールベースのセキュリティとオブジェクト所有権によってデータアクセスを制御する必要がある場合 |
 | [**データ保護ポリシー**](/tidb-cloud-lake/guides/data-protection-policies.md) | 行レベルおよびカラムレベルで機密データを保護する | 行レベルのフィルタリング、カラムレベルのマスキング、またはその両方が必要な場合 |
 | [**監査証跡**](/tidb-cloud-lake/guides/audit-trail.md) | データベースアクティビティを追跡する | セキュリティ監視、コンプライアンス、パフォーマンス分析のために包括的な監査証跡が必要な場合 |
-| [**ネットワークポリシー**](/tidb-cloud-lake/guides/network-policy.md) | ネットワークアクセスを制限する | 有効な認証情報があっても、特定の IP 範囲への接続のみに制限したい場合 |
+| [**ネットワークポリシー**](/tidb-cloud-lake/guides/network-policy.md) | ネットワークアクセスを制限する | 有効な認証情報があっても、接続を特定の IP 範囲からのものに限定したい場合 |
 | [**パスワードポリシー**](/tidb-cloud-lake/guides/password-policy.md) | パスワード要件を設定する | パスワードの複雑さ、ローテーション、アカウントロックアウトのルールを強制する必要がある場合 |
 | [**AWS IAM Role による認証**](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) | 認証に AWS IAM ロールを使用する | {{{ .lake }}} への安全なアクセスのために AWS IAM を活用したい場合 |
 | [**コンプライアンスとセキュリティ**](/tidb-cloud-lake/guides/compliance-security.md) | 規制コンプライアンスを確保する | 業界標準や規制に準拠する必要がある場合 |

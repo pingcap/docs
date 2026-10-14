@@ -19,13 +19,13 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
 
 - **Amazon S3 Bucket**: エクスポートしたデータを保存するための S3 バケットと、ファイルをアップロードするために必要な権限が必要です。[S3 バケットの作成方法](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照してください。このチュートリアルでは、エクスポートしたデータを stage する場所として `s3://lake-doc/snowflake/` を使用します。
 - **AWS Credentials**: S3 バケットにアクセスするための十分な権限を持つ AWS Access Key ID と Secret Access Key が必要です。[AWS 認証情報の管理](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys)を参照してください。
-- **IAM Roles と Policies を管理する権限**: Snowflake と Amazon S3 間のアクセスを設定するために必要な IAM roles と policies を作成および管理する権限があることを確認してください。[IAM roles と policies について](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を参照してください。
+- **IAM ロールとポリシーを管理する権限**: Snowflake と Amazon S3 間のアクセスを設定するために必要な IAM ロールとポリシーを作成および管理する権限があることを確認してください。[IAM ロールとポリシーについて](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)を参照してください。
 
-## Step 1: Amazon S3 用の Snowflake Storage Integration を設定する {#step-1-configuring-snowflake-storage-integration-for-amazon-s3}
+## ステップ 1: Amazon S3 用の Snowflake Storage Integration を設定する {#step-1-configuring-snowflake-storage-integration-for-amazon-s3}
 
-このステップでは、IAM roles を使用して Snowflake が Amazon S3 にアクセスできるように設定します。まず IAM role を作成し、その後その role を使用して、安全なデータアクセスのための Snowflake Storage Integration を確立します。
+このステップでは、IAM ロールを使用して Snowflake が Amazon S3 にアクセスできるように設定します。まず IAM ロールを作成し、その後そのロールを使用して、安全なデータアクセスのための Snowflake Storage Integration を確立します。
 
-1. AWS Management Console にサインインし、**IAM** > **Policies** で次の JSON コードを使って policy を作成します。
+1. AWS Management Console にサインインし、**IAM** > **Policies** で次の JSON コードを使ってポリシーを作成します。
 
     ```json
     {
@@ -56,20 +56,20 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
     }
     ```
 
-    この policy は、`lake-doc` という名前の S3 バケットと、そのバケット内の `snowflake` フォルダに対して適用されます。
+    このポリシーは、`lake-doc` という名前の S3 バケットと、そのバケット内の `snowflake` フォルダに対して適用されます。
 
     - `s3:PutObject`, `s3:GetObject`, `s3:GetObjectVersion`, `s3:DeleteObject`, `s3:DeleteObjectVersion`: snowflake フォルダ内のオブジェクト（例: `s3://lake-doc/snowflake/`）に対する操作を許可します。このフォルダ内でオブジェクトのアップロード、読み取り、削除ができます。
     - `s3:ListBucket`, `s3:GetBucketLocation`: `lake-doc` バケットの内容一覧の取得と、そのロケーションの取得を許可します。`Condition` 要素により、一覧取得は `snowflake` フォルダ内のオブジェクトに制限されます。
 
-2. **IAM** > **Roles** で `lake-doc-role` という名前の role を作成し、先ほど作成した policy をアタッチします。
-    - role 作成の最初のステップで、**Trusted entity type** に **AWS account**、**An AWS account** に **This account (xxxxx)** を選択します。
+2. **IAM** > **Roles** で `lake-doc-role` という名前のロールを作成し、先ほど作成したポリシーをアタッチします。
+    - ロール作成の最初のステップで、**Trusted entity type** に **AWS account**、**An AWS account** に **This account (xxxxx)** を選択します。
 
     ![alt text](/media/tidb-cloud-lake/trusted-entity.png)
 
-    - role の作成後、role ARN をコピーして安全な場所に保存します。例: `arn:aws:iam::123456789012:role/lake-doc-role`
-    - Snowflake アカウントの IAM user ARN を取得した後で、この role の **Trust Relationships** を更新します。
+    - ロールの作成後、ロール ARN をコピーして安全な場所に保存します。例: `arn:aws:iam::123456789012:role/lake-doc-role`
+    - Snowflake アカウントの IAM user ARN を取得した後で、このロールの **Trust Relationships** を更新します。
 
-3. Snowflake で SQL worksheet を開き、role ARN を使用して `my_s3_integration` という名前の storage integration を作成します。
+3. Snowflake で SQL worksheet を開き、ロール ARN を使用して `my_s3_integration` という名前の storage integration を作成します。
 
     ```sql
     CREATE OR REPLACE STORAGE INTEGRATION my_s3_integration
@@ -86,7 +86,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
     DESCRIBE INTEGRATION my_s3_integration;
     ```
 
-5. AWS Management Console に戻り、role `lake-doc-role` を開いて **Trust relationships** > **Edit trust policy** に移動します。次のコードをエディタにコピーします。
+5. AWS Management Console に戻り、ロール `lake-doc-role` を開いて **Trust relationships** > **Edit trust policy** に移動します。次のコードをエディタにコピーします。
 
     ```json
     {
@@ -105,7 +105,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
 
     `arn:aws:iam::123456789012:user/example` という ARN は、前のステップで取得した Snowflake アカウントの IAM user ARN です。
 
-## Step 2: Amazon S3 へのデータの準備とエクスポート {#step-2-preparing-and-exporting-data-to-amazon-s3}
+## ステップ 2: Amazon S3 へのデータの準備とエクスポート {#step-2-preparing-and-exporting-data-to-amazon-s3}
 
 1. Snowflake で、Snowflake storage integration `my_s3_integration` を使用して external stage を作成します。
 
@@ -146,7 +146,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
 
     `lake-doc` バケットを開くと、`snowflake` フォルダ内に Parquet ファイルが表示されます。
 
-## Step 3: {{{ .lake }}} へのデータのロード (load) {#step-3-loading-data-into-lake}
+## ステップ 3: {{{ .lake }}} へのデータのロード (load) {#step-3-loading-data-into--lake-}
 
 1. {{{ .lake }}} にターゲットテーブルを作成します。
 

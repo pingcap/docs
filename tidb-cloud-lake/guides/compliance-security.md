@@ -44,9 +44,9 @@ summary: "{{{ .lake }}} はセキュリティを中核として構築されて�
 
 {{{ .lake }}} Enterprise は、Object Storage Service (OSS) におけるサーバー側暗号化をサポートしています。この機能により、OSS に保存されるデータに対してサーバー側暗号化を有効化することで、データセキュリティとプライバシーを強化できます。ニーズに最も適した暗号化方式を選択できます。
 
-- AES-256 encryption
-- Customer-managed keys (CMK)
-- Hardware security module (HSM) integration options
+- AES-256 暗号化
+- カスタマー管理キー (CMK)
+- ハードウェアセキュリティモジュール (HSM) との統合オプション
 
 ## コンプライアンス {#compliance}
 

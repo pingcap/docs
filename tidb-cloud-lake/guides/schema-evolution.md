@@ -109,13 +109,13 @@ SELECT * FROM invoices ORDER BY order_id;
 └──────────────────────────────────────────────────┘
 ```
 
-3 行目の `currency = NULL` になっているのは、ソースファイルにそのカラムが含まれていなかったためです。
+3 行目が `currency = NULL` になっているのは、ソースファイルにそのカラムが含まれていなかったためです。
 
 ## NDJSON の例 {#ndjson-example}
 
 {{{ .lake }}} は `TYPE = ndjson` を使用して NDJSON ファイルをロードします。NDJSON ファイルには Parquet ファイルのような埋め込みのカラムスキーマがないため、{{{ .lake }}} はファイル内容をサンプリングし、ターゲットテーブルに存在しないフィールドを推論して、NULL 許容カラムとして追加します。
 
-### ステップ 1: テーブルと stage を作成する {#step-1-create-a-table-and-stage}
+### ステップ 1: テーブルと stage を作成する {#step-1-create-a-table-and-stage-1}
 
 ```sql
 CREATE OR REPLACE TABLE events(id INT);
@@ -138,7 +138,7 @@ COPY INTO @events_stage FROM (
 ) FILE_FORMAT = (TYPE = ndjson);
 ```
 
-### ステップ 3: Schema Evolution を有効にしてロードする {#step-3-enable-schema-evolution-and-load}
+### ステップ 3: Schema Evolution を有効にしてロードする {#step-3-enable-schema-evolution-and-load-1}
 
 ```sql
 ALTER TABLE events SET OPTIONS(ENABLE_SCHEMA_EVOLUTION = true);
@@ -168,11 +168,11 @@ SCHEMA_EVOLUTION = (
 NDJSON に対して Schema Evolution を実行すると、{{{ .lake }}} は次のルールを使用して新しいカラムを推論します。
 
 - スキーマは、サンプリングされた NDJSON レコードからのみ推論されます。サンプルに含まれないフィールドは、事前にターゲットテーブルへ追加されません。
-- 各行は JSON オブジェクトである必要があります。{{{ .lake }}} は、トップレベルのオブジェクトのフィールド名を Candidate カラム名として使用します。
+- 各行は JSON オブジェクトである必要があります。{{{ .lake }}} は、トップレベルのオブジェクトのフィールド名を 候補カラム名として使用します。
 - ターゲットテーブルにすでに存在するカラムは再度追加されません。ターゲットテーブルに存在しないフィールドのみが追加されます。
 - 新しいフィールドの型は、整数、浮動小数点数、文字列、ブール値など、サンプリングされた JSON 値から推論されます。
 - Schema Evolution は浅い NDJSON 推論を使用します。トップレベルのフィールド値がオブジェクトまたは配列の場合、再帰的に展開するのではなく、`VARIANT` カラムとして追加されます。
-- `NULL` のサンプルは、そのフィールドが nullable であることを示すだけです。後続の非 null 値が `VARCHAR` や `VARIANT` になることを強制しません。
+- `NULL` のサンプルは、そのフィールドが NULL 許容であることを示すだけです。後続の非 null 値が `VARCHAR` や `VARIANT` になることを強制しません。
 - ファイルまたはレコード間で同名のフィールドはマージされます。整数と浮動小数点数の競合は `DOUBLE` になり、その他のスカラー型の競合は `VARCHAR` になり、オブジェクト、配列、または `VARIANT` を含む競合は `VARIANT` になります。
 - ロード時に、サンプリング中に推論されなかった追加フィールドが見つかった場合、ロードは失敗し、それらのフィールド名が報告されます。`SAMPLE_FILES`、`SAMPLE_RECORDS_PER_FILE`、または `SAMPLE_TOTAL_RECORDS` を増やして再試行してください。
 
@@ -200,7 +200,7 @@ tags    VARIANT   NULL
 
 2 行目の `age = NULL` は、1 行目から推論された `BIGINT` 型を変更しません。`score` には整数と浮動小数点数の両方が含まれるため、`DOUBLE` になります。`profile` と `tags` はそれぞれオブジェクトと配列であるため、Schema Evolution はそれらを `VARIANT` カラムとして追加します。
 
-### Step 4: 結果を確認する {#step-4-verify-results}
+### ステップ 4: 結果を確認する {#step-4-verify-results-1}
 
 テーブルには現在 3 つのカラムがあります。`city` と `score` は自動的に追加されました。
 
@@ -248,7 +248,7 @@ COLUMN_MATCH_MODE = CASE_SENSITIVE;
 ## 制限事項 {#limitations}
 
 - 現在サポートしているのは **Parquet** ファイルと **NDJSON** ファイルです。
-- 新しいカラムはテーブルの末尾に追加され、常に nullable です。
+- 新しいカラムはテーブルの末尾に追加され、常に NULL 許容です。
 - 同じカラム名が複数のファイルに **異なるデータ型** で現れる場合、ロードは失敗します。
 - `INT` から `BIGINT` へのような自動的な型昇格はありません。
 - Schema Evolution では、カラムの削除および名前変更はサポートされていません。

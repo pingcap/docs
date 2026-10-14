@@ -1,6 +1,6 @@
 ---
 title: Tasks によるデータロードの自動化
-summary: Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って、または条件が満たされたときに実行できるようにします。[CREATE TASK](/tidb-cloud-lake/sql/create-task.md) で定義する際は、以下の設定項目を考慮してください。
+summary: Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って、または条件が満たされたときに実行できるようにします。CREATE TASK で定義する際は、以下の設定項目を考慮してください。
 ---
 
 # Tasks によるデータロードの自動化
@@ -9,7 +9,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
 
 ![alt text](/media/tidb-cloud-lake/task.png)
 
-- **Name & warehouse** – すべての task には warehouse が必要です。
+- **Name & warehouse** – すべてのタスクには warehouse が必要です。
 
     ```sql
     CREATE TASK ingest_orders
@@ -44,7 +44,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
     AS ...;
     ```
 
-- **SQL payload** – `AS` の後に記述した内容が、その task によって実行されます。
+- **SQL payload** – `AS` の後に記述した内容が、そのタスクによって実行されます。
 
     ```sql
     CREATE TASK bump_age
@@ -57,7 +57,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
 
 センサーデータを継続的に生成し、Parquet として保存して、テーブルにロード (load) します。すべての `CREATE/ALTER TASK` 文で、`'etl_wh_small'` を**あなたの** warehouse 名に置き換えてください。
 
-### 手順 1. デモ用オブジェクトを準備する {#step-1-prepare-demo-objects}
+### ステップ 1. デモ用オブジェクトを準備する {#step-1-prepare-demo-objects}
 
 ```sql
 -- Create a playground schema and target table
@@ -75,7 +75,7 @@ CREATE OR REPLACE TABLE sensor_events (
 CREATE OR REPLACE STAGE sensor_events_stage;
 ```
 
-### 手順 2. Task 1 — ファイルを生成する {#step-2-task-1-generate-files}
+### ステップ 2. Task 1 — ファイルを生成する {#step-2-task-1--generate-files}
 
 `task_generate_data` は、1 分ごとに 100 件のランダムな測定値を stage に書き込みます。各実行で新しい Parquet ファイルが生成され、下流のコンシューマーがそれを取り込みできます。
 
@@ -96,7 +96,7 @@ FROM (
 FILE_FORMAT = (TYPE = PARQUET);
 ```
 
-### 手順 3. Task 2 — ファイルをロードする {#step-3-task-2-load-the-files}
+### ステップ 3. Task 2 — ファイルをロードする {#step-3-task-2--load-the-files}
 
 `task_consume_data` は同じ間隔で stage をスキャンし、新しく生成されたすべての Parquet ファイルを `sensor_events` テーブルにコピーします。`PURGE = TRUE` 句により、すでに取り込み済みのファイルはクリーンアップされます。
 
@@ -112,16 +112,16 @@ FILE_FORMAT = (TYPE = PARQUET)
 PURGE = TRUE;
 ```
 
-### 手順 4. Tasks を再開する {#step-4-resume-tasks}
+### ステップ 4. Tasks を再開する {#step-4-resume-tasks}
 
 ```sql
 ALTER TASK task_generate_data RESUME;
 ALTER TASK task_consume_data RESUME;
 ```
 
-どちらの task も、再開するまでは一時停止状態で開始されます。最初のファイル生成とコピーは、次の 1 分以内に行われるはずです。
+どちらのタスクも、再開するまでは一時停止状態で開始されます。最初のファイル生成とコピーは、次の 1 分以内に行われるはずです。
 
-### 手順 5. パイプラインを監視する {#step-5-monitor-the-pipeline}
+### ステップ 5. パイプラインを監視する {#step-5-monitor-the-pipeline}
 
 ```sql
 -- Confirm that the tasks are running
@@ -146,11 +146,11 @@ ALTER TASK task_consume_data
     WAREHOUSE = 'etl_wh_medium'; -- replace with your warehouse
 ```
 
-テストが完了したら、`ALTER TASK ... SUSPEND` を使ってどちらの task も一時停止できます。
+テストが完了したら、`ALTER TASK ... SUSPEND` を使ってどちらのタスクも一時停止できます。
 
-### 手順 6. Tasks を更新する {#step-6-update-tasks}
+### ステップ 6. Tasks を更新する {#step-6-update-tasks}
 
-task を削除しなくても、スケジュール、warehouse、さらには SQL payload まで変更できます。
+タスクを削除しなくても、スケジュール、warehouse、さらには SQL payload まで変更できます。
 
 ```sql
 -- Tweak the schedule and warehouse
@@ -178,9 +178,9 @@ ORDER BY completed_time DESC;
 
 ## 例 2: Stream トリガーによるマージ {#example-2-stream-triggered-merge}
 
-`WHEN STREAM_STATUS(...)` を使用すると、stream に新しい行がある場合にのみ実行できます。例 1 の `sensor_events` テーブルを再利用します。
+`WHEN STREAM_STATUS(...)` を使用すると、ストリームに新しい行がある場合にのみ実行できます。例 1 の `sensor_events` テーブルを再利用します。
 
-### 手順 1. stream と latest テーブルを作成する {#step-1-create-stream-latest-table}
+### ステップ 1. ストリームと latest テーブルを作成する {#step-1-create-stream--latest-table}
 
 ```sql
 -- Create a stream on the sensor table (Standard mode to capture every mutation)
@@ -195,7 +195,7 @@ FROM sensor_events
 WHERE 1 = 0;
 ```
 
-### Step 2. 条件付きタスクを作成する {#step-2-create-the-conditional-task}
+### ステップ 2. 条件付きタスクを作成する {#step-2-create-the-conditional-task}
 
 ```sql
 CREATE OR REPLACE TASK task_stream_merge
@@ -210,7 +210,7 @@ FROM sensor_events_stream;
 ALTER TASK task_stream_merge RESUME;
 ```
 
-### Step 3. 動作を確認する {#step-3-verify-the-behavior}
+### ステップ 3. 動作を確認する {#step-3-verify-the-behavior}
 
 ```sql
 SELECT *
@@ -222,4 +222,4 @@ SELECT *
 FROM task_history('task_stream_merge', 5);
 ```
 
-このタスクは、`STREAM_STATUS('<database>.<stream_name>')` が `TRUE` を返した場合にのみ実行されます。現在のスキーマに関係なくタスクが stream を解決できるよう、stream には必ずそのデータベース名をプレフィックスとして付けてください（例: `task_demo.sensor_events_stream`）。また、すべての `CREATE/ALTER TASK` では、自身の Warehouse 名を使用してください。
+このタスクは、`STREAM_STATUS('<database>.<stream_name>')` が `TRUE` を返した場合にのみ実行されます。現在のスキーマに関係なくタスクがストリームを解決できるよう、ストリームには必ずそのデータベース名をプレフィックスとして付けてください（例: `task_demo.sensor_events_stream`）。また、すべての `CREATE/ALTER TASK` では、自身の Warehouse 名を使用してください。

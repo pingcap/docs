@@ -1,6 +1,6 @@
 ---
 title: Full-Text Index
-summary: Full-text indexes (inverted indexes) は、用語をドキュメントに対応付けることで、大規模なドキュメントコレクション全体に対する超高速なテキスト検索を自動的に実現し、低速なテーブルスキャンを不要にします。
+summary: Full-text indexes（転置インデックス）は、用語をドキュメントに対応付けることで、大規模なドキュメントコレクション全体に対する超高速なテキスト検索を自動的に実現し、低速なテーブルスキャンを不要にします。
 ---
 
 # Full-Text Index
@@ -58,7 +58,7 @@ SELECT * FROM logs WHERE MATCH(message, 'error kubernetes');
 **自動インデックス管理**:
 
 - **新規データ**: 挿入時に自動でインデックス化されるため、手動操作は不要
-- **既存データ**: インデックス作成前から存在していたデータに対してのみ、1 回の refresh が必要
+- **既存データ**: インデックス作成前から存在していたデータに対してのみ、1 回のリフレッシュが必要
 - **継続的な管理**: {{{ .lake }}} が最適な検索パフォーマンスを自動的に管理
 
 ## 検索関数 {#search-functions}
@@ -95,7 +95,7 @@ ORDER BY SCORE() DESC;
 SELECT * FROM docs WHERE QUERY('title:"user guide" AND content:(tutorial OR example)');
 ```
 
-## Complete Example {#complete-example}
+## 実践例 {#complete-example}
 
 この例では、Kubernetes のログデータにフルテキスト検索インデックスを作成し、さまざまな関数を使って検索する方法を示します。
 
@@ -244,7 +244,7 @@ event_timestamp: 2024-04-08 12:00:00
 - 関連度スコアリングにより、一致品質に基づいて結果を順位付けできます
 - あいまい検索では、タイプミスがあっても結果を見つけられます（`"create"` と `"created"` など）
 
-## Best Practices {#best-practices}
+## ベストプラクティス {#best-practices}
 
 | ベストプラクティス | 利点 |
 |----------|---------|
@@ -253,15 +253,15 @@ event_timestamp: 2024-04-08 12:00:00
 | **インデックス使用状況を監視する** | EXPLAIN を使用してインデックスが活用されていることを確認できます |
 | **複数のインデックスを検討する** | 異なるカラムに個別のインデックスを作成できます |
 
-## Essential Commands {#essential-commands}
+## 主要なコマンド {#essential-commands}
 
-| Command | 用途 | 使用するタイミング |
+| コマンド | 用途 | 使用するタイミング |
 |---------|---------|-------------|
 | `CREATE INVERTED INDEX name ON table(column)` | 新しいフルテキストインデックスを作成する | 初期セットアップ時 - 新しいデータには自動的に適用されます |
 | `REFRESH INVERTED INDEX name ON table` | 既存データをインデックス化する | インデックス作成前から存在していたデータに対して一度だけ実行します |
 | `DROP INVERTED INDEX name ON table` | インデックスを削除する | インデックスが不要になったとき |
 
-## Important Notes {#important-notes}
+## 重要な注意事項 {#important-notes}
 
 **フルテキストインデックスを使用する場面:**
 
@@ -276,10 +276,10 @@ event_timestamp: 2024-04-08 12:00:00
 - 完全一致の文字列マッチングのみが必要な場合
 - 検索操作の頻度が低い場合
 
-## Index Limitations {#index-limitations}
+## インデックスの制限 {#index-limitations}
 
-- 各カラムは 1 つの inverted index にしか含められません
-- データ挿入後に refresh が必要です（インデックス作成前からデータが存在していた場合）
+- 各カラムは 1 つの転置インデックスにしか含められません
+- データ挿入後にリフレッシュが必要です（インデックス作成前からデータが存在していた場合）
 - インデックスデータ用に追加のストレージ領域を使用します
 
 ---

@@ -14,8 +14,8 @@ summary: "{{{ .lake }}} は、{{{ .lake }}} のユーザーおよびお客様向
 サポートには複数のチャネルからアクセスできます。
 
 - **Cloud Console**: {{{ .lake }}} コンソールにログインし、メニューオプションから **Support → Create New Ticket** を選択すると、新しいサポートケースを作成し、送信済みケースのステータスを確認できます。
-- **Status Page**: 当社の [status page](https://status.tidbcloud.com/) を購読すると、プラットフォームに影響するインシデントの通知をすばやく受け取れます。
-- **Documentation**: ガイド、チュートリアル、リファレンス資料については、包括的な [documentation](https://docs.pingcap.com/tidbcloudlake/) を参照してください。
+- **Status Page**: 当社の[ステータスページ](https://status.tidbcloud.com/)を購読すると、プラットフォームに影響するインシデントの通知をすばやく受け取れます。
+- **Documentation**: ガイド、チュートリアル、リファレンス資料については、包括的な[ドキュメント](https://docs.pingcap.com/tidbcloudlake/)を参照してください。
 
 ## サポートサービスレベル {#support-service-levels}
 
@@ -24,8 +24,8 @@ summary: "{{{ .lake }}} は、{{{ .lake }}} のユーザーおよびお客様向
 | 機能 | Personal | Business | Dedicated |
 | ------------------------------------------------------ | -------- | -------- | --------- |
 | サポートチケットの記録と追跡 | ✓        | ✓        | ✓         |
-| Severity 1 問題に対する 4/7 の対応体制と応答時間枠 | 24 hours | 8 hours  | 4 hours   |
-| Severity 1 以外の問題への応答 | 48 hours | 24 hours | 8 hours   |
+| Severity 1 問題に対する 4/7 の対応体制と応答時間枠 | 24 時間 | 8 時間  | 4 時間   |
+| Severity 1 以外の問題への応答 | 48 時間 | 24 時間 | 8 時間   |
 
 ### 重大度レベル {#severity-levels}
 

@@ -82,7 +82,7 @@ SHOW GRANTS FOR ROLE writer;
 | 権限         | オブジェクトタイプ                   | 説明                                                                                                                                        |
 |:------------------|:------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
 | ALL               | すべて                           | 指定したオブジェクトタイプに対するすべての権限を付与します。                                                                                           |
-| APPLY MASKING POLICY | Global, Masking Policy     | マスキングポリシーのアタッチ、デタッチ、記述、または削除を行います。*.* に対して付与された場合、被付与者は任意のマスキングポリシーを管理できます。                          |
+| APPLY MASKING POLICY | Global, Masking Policy     | マスキングポリシーのアタッチ、デタッチ、詳細表示、または削除を行います。*.* に対して付与された場合、被付与者は任意のマスキングポリシーを管理できます。                          |
 | APPLY ROW ACCESS POLICY | Global, Row Access Policy | テーブルに行アクセスポリシーを追加または削除し、任意のポリシーに対する DESCRIBE/DROP 操作を許可します。*.* に対して付与された場合、被付与者はすべての行アクセスポリシーを管理できます。 |
 | ALTER             | Global, Database, Table, View | データベース、テーブル、ユーザー、または UDF を変更します。                                                                                                             |
 | CREATE            | Global, Table                 | テーブルまたは UDF を作成します。                                                                                                                            |
@@ -125,7 +125,7 @@ SHOW GRANTS FOR ROLE writer;
 | DROPUSER          | ユーザーを削除します。                                                                                                     |
 | CREATEUSER        | ユーザーを作成します。                                                                                                   |
 | DROPROLE          | ロールを削除します。                                                                                                     |
-| SUPER             | クエリを強制終了します。設定を有効化または無効化します。stage、catalog、または share を操作します。関数を呼び出します。stage への COPY INTO を実行します。 |
+| SUPER             | クエリを強制終了します。設定を SET または UNSET します。stage、catalog、または share を操作します。関数を呼び出します。stage への COPY INTO を実行します。 |
 | USAGE             | {{{ .lake }}} のクエリにのみ接続します。                                                                             |
 | CREATE            | UDF を作成します。                                                                                                    |
 | DROP              | UDF を削除します。                                                                                                      |
@@ -174,7 +174,7 @@ SHOW GRANTS FOR ROLE writer;
 
 | 権限 | 説明 |
 | :--                 | :--                  |
-| SUPER       |    クエリを強制終了します。設定を有効化または無効化します。 |
+| SUPER       |    クエリを強制終了します。設定を SET または UNSET します。 |
 | ALL   |  指定したオブジェクトタイプに対するすべての権限を付与します。 |
 
 ### stage 権限 {#stage-privileges}
@@ -192,7 +192,7 @@ SHOW GRANTS FOR ROLE writer;
 
 ### UDF 権限 {#udf-privileges}
 
-| Privilege | 説明                                                                                                 |
+| 権限 | 説明                                                                                                 |
 |:----------|:-----------------------------------------------------------------------------------------------------|
 | USAGE     | UDF を使用できます。たとえば、stage への copy や presign upload です。                               |
 | ALL       | 指定したオブジェクトタイプに対する READ、WRITE 権限を付与します。                                   |
@@ -200,12 +200,12 @@ SHOW GRANTS FOR ROLE writer;
 
 > Note:
 >
-> 1. すでに定数畳み込みされている場合は、udf auth をチェックしません。
-> 2. insert 内の値である場合は、udf auth をチェックしません。
+> 1. すでに定数畳み込みされている場合は、UDF の権限をチェックしません。
+> 2. insert 内の値である場合は、UDF の権限をチェックしません。
 
 ### Catalog 権限 {#catalog-privileges}
 
-| Privilege | 説明                                              |
+| 権限 | 説明                                              |
 |:----------|:--------------------------------------------------|
 | SUPER     | SHOW CREATE catalog を実行できます。catalog を作成または削除できます。 |
 | ALL       | 指定したオブジェクトタイプに対するすべての権限を付与します。 |
@@ -240,18 +240,18 @@ Share オブジェクトに対する権限は、同じ SQL 権限モデル（`GR
 
 ### Masking Policy 権限 {#masking-policy-privileges}
 
-グローバルな `CREATE MASKING POLICY` 権限および `APPLY MASKING POLICY` 権限に加えて、個々の masking policy へのアクセスを付与できます。
+グローバルな `CREATE MASKING POLICY` 権限および `APPLY MASKING POLICY` 権限に加えて、個々のマスキングポリシーへのアクセスを付与できます。
 
-| Privilege | 説明                                                                                                                           |
+| 権限 | 説明                                                                                                                           |
 |:----------|:--------------------------------------------------------------------------------------------------------------------------------|
-| APPLY     | masking policy をカラムにアタッチまたはデタッチし、policy に対する DESC/DROP 操作を許可します。                                |
-| OWNERSHIP | masking policy に対する完全な制御を付与します。{{{ .lake }}} は、policy を作成したロールに OWNERSHIP を付与し、policy が削除されると自動的に取り消します。 |
+| APPLY     | マスキングポリシーをカラムにアタッチまたはデタッチし、ポリシーに対する DESC/DROP 操作を許可します。                                |
+| OWNERSHIP | マスキングポリシーに対する完全な制御を付与します。{{{ .lake }}} は、ポリシーを作成したロールに OWNERSHIP を付与し、ポリシーが削除されると自動的に取り消します。 |
 
 ### Row Access Policy 権限 {#row-access-policy-privileges}
 
-Row access policy は同じガバナンスモデルを共有します。グローバルな `CREATE ROW ACCESS POLICY` 権限および `APPLY ROW ACCESS POLICY` 権限に加えて、必要に応じて policy ごとにアクセスを付与します。
+行アクセスポリシーは同じガバナンスモデルを共有します。グローバルな `CREATE ROW ACCESS POLICY` 権限および `APPLY ROW ACCESS POLICY` 権限に加えて、必要に応じてポリシーごとにアクセスを付与します。
 
-| Privilege | 説明                                                                                                                                        |
+| 権限 | 説明                                                                                                                                        |
 |:----------|:-----------------------------------------------------------------------------------------------------------------------------------------------|
-| APPLY     | row access policy をテーブルに追加またはテーブルから削除し、policy に対する DESC/DROP 操作を許可します。                                     |
-| OWNERSHIP | row access policy に対する完全な制御を付与します。{{{ .lake }}} は、作成者ロールに OWNERSHIP を付与し、policy が削除されると自動的に取り消します。 |
+| APPLY     | 行アクセスポリシーをテーブルに追加またはテーブルから削除し、ポリシーに対する DESC/DROP 操作を許可します。                                     |
+| OWNERSHIP | 行アクセスポリシーに対する完全な制御を付与します。{{{ .lake }}} は、作成者ロールに OWNERSHIP を付与し、ポリシーが削除されると自動的に取り消します。 |

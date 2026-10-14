@@ -9,7 +9,7 @@ summary: "{{{ .lake }}} のロールは、権限管理を簡素化するうえ�
 
 ![Alt text](/media/tidb-cloud-lake/access-control-3.png)
 
-## ロールの継承と階層の確立 {#inheriting-roles-establishing-hierarchy}
+## ロールの継承と階層の確立 {#inheriting-roles--establishing-hierarchy}
 
 ロールの付与により、あるロールが別のロールから権限と責務を継承できるようになります。これにより、組織構造に似た柔軟な階層を作成できます。この階層には 2 つの [組み込みロール](#built-in-roles) があり、最上位が `account-admin`、最下位が `public` です。
 
@@ -58,25 +58,13 @@ ALTER USER eric WITH DEFAULT_ROLE = 'account_admin';
 - ユーザーは、[SHOW ROLES](/tidb-cloud-lake/sql/show-roles.md) コマンドを使用して、現在のロールを確認し、自分に付与されているすべてのロールを表示できます。
 - ユーザーに対してデフォルトロールを明示的に設定しない場合、{{{ .lake }}} は組み込みロール `public` をデフォルトロールとして使用します。
 
-## アクティブロールとセカンダリロール {#active-role-secondary-roles}
+## アクティブロールとセカンダリロール {#active-role--secondary-roles}
 
 {{{ .lake }}} では、1 人のユーザーに複数のロールを付与できます。これらのロールは、アクティブロールとセカンダリロールに分類されます。
 
 - アクティブロールは、そのセッションで現在有効なユーザーの主要ロールであり、[SET ROLE](/tidb-cloud-lake/sql/set-role.md) コマンドを使用して設定できます。
 
 - セカンダリロールは、追加の権限を提供するロールであり、デフォルトで有効です。ユーザーは [SET SECONDARY ROLES](/tidb-cloud-lake/sql/set-secondary-roles.md) コマンドを使用してセカンダリロールを有効化または無効化し、権限範囲を一時的に調整できます。
-
-## 請求ロール {#billing-role}
-
-標準の組み込みロールに加えて、{{{ .lake }}} では財務担当者のニーズに特化した `billing` という名前のカスタムロールを作成できます。`billing` ロールは請求関連情報のみにアクセスを提供するため、財務担当者は他の業務関連ページに触れることなく、必要な財務データを閲覧できます。
-
-`billing` ロールを設定して使用するには、次のコマンドで作成します。
-
-```sql
-CREATE ROLE billing;
-```
-
-ロール名では大文字と小文字は区別されないため、`billing` と `Billing` は同じものとして扱われます。`billing` ロールの設定および割り当て手順の詳細については、[財務担当者にアクセス権を付与する](/tidb-cloud-lake/guides/manage-costs.md#granting-access-to-finance-personnel) を参照してください。
 
 ## 使用例（基本） {#usage-examples-basic}
 

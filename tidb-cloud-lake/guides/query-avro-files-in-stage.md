@@ -24,7 +24,7 @@ summary: "{{{ .lake }}} は、stage から直接 Avro ファイルをクエリ�
 
 ### ステップ 1. Avro ファイルを準備する {#step-1-prepare-an-avro-file}
 
-次のスキーマを持つ `user` という名前の Avro ファイルを考えます。
+`user` という名前の次のスキーマを持つ Avro ファイルを考えます。
 
 ```json
 {

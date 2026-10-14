@@ -1,11 +1,11 @@
 ---
-title: Kafka Consumer Integration Task (Preview)
-summary: Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージ（tenant Stage）に保存する Kafka Consumer タスクを作成します。
+title: Kafka Consumer 統合タスク (Preview)
+summary: Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージ（テナント Stage）に保存する Kafka Consumer タスクを作成します。
 ---
 
-# Kafka Consumer Integration Task (Preview)
+# Kafka Consumer 統合タスク (Preview)
 
-このページでは、Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージ（tenant Stage）に保存する Kafka Consumer タスクの作成方法について説明します。
+このページでは、Kafka トピックからメッセージを継続的に消費し、メッセージ内容を内部オブジェクトストレージ（テナント Stage）に保存する Kafka Consumer タスクの作成方法について説明します。
 
 S3、MySQL、PostgreSQL のデータ統合タスクとは異なり、Kafka Consumer タスクは通常のターゲットテーブルに直接書き込みません。タスクを作成して開始した後、`@kafka_consumer/<task_name>/` の stage パスを使用して保存されたメッセージオブジェクトを確認し、SQL でその内容をクエリできます。
 
@@ -21,7 +21,7 @@ S3、MySQL、PostgreSQL のデータ統合タスクとは異なり、Kafka Consu
 
 1. 上流システムが Kafka トピックにメッセージを書き込みます。
 2. Kafka Consumer タスクが指定されたトピックからメッセージを読み取ります。
-3. タスクはメッセージをバッチ単位で内部オブジェクトストレージ（tenant Stage）に保存します。
+3. タスクはメッセージをバッチ単位で内部オブジェクトストレージ（テナント Stage）に保存します。
 4. ユーザーは `@kafka_consumer/<task_name>/` を通じて生成されたオブジェクトを確認します。
 5. ユーザーは stage からメッセージ内容をクエリし、必要に応じて後続のロード (load) や変換を実行します。
 
@@ -72,7 +72,7 @@ Kafka Consumer タスクを作成する前に、以下を確認してくださ�
 
 **Result Viewing** ステップで、Kafka Consumer タスクを実行する **Warehouse** を選択します。
 
-タスクの開始後、Kafka メッセージを読み取り、それらを内部オブジェクトストレージ（tenant Stage）に保存します。ページには SQL の例が表示されます。`LIST @kafka_consumer/<task_name>/` を使用して生成されたオブジェクトを確認し、stage クエリを使用してメッセージ内容を読み取ることができます。
+タスクの開始後、Kafka メッセージを読み取り、それらを内部オブジェクトストレージ（テナント Stage）に保存します。ページには SQL の例が表示されます。`LIST @kafka_consumer/<task_name>/` を使用して生成されたオブジェクトを確認し、stage クエリを使用してメッセージ内容を読み取ることができます。
 
 ```sql
 -- List stage objects:
@@ -94,7 +94,7 @@ Kafka Consumer タスクは継続的に実行されます。開始後、指定�
 
 | シナリオ | 動作 |
 |----------|----------|
-| トピックに新しいメッセージが存在する | メッセージを読み取り、tenant Stage に書き込みます |
+| トピックに新しいメッセージが存在する | メッセージを読み取り、テナント Stage に書き込みます |
 | バッチサイズが **Max Batch Bytes** に達する | 現在のバッチをオブジェクトストレージに書き込みます |
 | 待機時間が **Max Batch Wait Interval** に達する | バッチがサイズ上限に達していなくても、現在のバッチをオブジェクトストレージに書き込みます |
 | 書き込み操作が成功する | 後で継続できるように消費の進行状況を保存します |

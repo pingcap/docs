@@ -7,7 +7,7 @@ summary: "{{{ .lake }}} は、使い慣れた Data Definition Language (DDL) お
 
 {{{ .lake }}} は、使い慣れた Data Definition Language (DDL) および Data Manipulation Language (DML) コマンドをサポートしており、データベースを簡単に管理できます。データの整理、保存、クエリ、変更、削除のいずれを行う場合でも、{{{ .lake }}} は一般的な業界標準に従っています。
 
-## {{{ .lake }}} のオブジェクト {#lake-objects}
+## {{{ .lake }}} のオブジェクト {#-lake--objects}
 
 {{{ .lake }}} は、以下のオブジェクトの作成および変更をサポートしています。
 

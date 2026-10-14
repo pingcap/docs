@@ -55,8 +55,8 @@
     - [タスク管理](/tidb-cloud-lake/guides/task-management.md)
     - [Amazon S3 統合タスク](/tidb-cloud-lake/guides/integrate-with-amazon-s3.md)
     - [Amazon SQS (S3) 統合タスク](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
-    - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
-    - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
+    - [MySQL 統合タスク](/tidb-cloud-lake/guides/integrate-with-mysql.md)
+    - [PostgreSQL 統合タスク](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
     - [Kafka Consumer 統合タスク](/tidb-cloud-lake/guides/integrate-with-kafka.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [TiDB 統合タスク](/tidb-cloud-lake/guides/integrate-with-tidb.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
 - データのロード
@@ -102,18 +102,18 @@
   - [Lance データセットのアンロード](/tidb-cloud-lake/guides/unload-lance-dataset.md)
 - マルチモーダルデータ分析
   - [概要](/tidb-cloud-lake/guides/multimodal-data-analytics.md)
-  - [SQL Analytics](/tidb-cloud-lake/guides/sql-analytics.md)
-  - [JSON & Search](/tidb-cloud-lake/guides/json-search.md)
+  - [SQL 分析](/tidb-cloud-lake/guides/sql-analytics.md)
+  - [JSON と検索](/tidb-cloud-lake/guides/json-search.md)
   - [ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md)
-  - [Geo Analytics](/tidb-cloud-lake/guides/geo-analytics.md)
+  - [地理空間分析](/tidb-cloud-lake/guides/geo-analytics.md)
   - [Lakehouse ETL](/tidb-cloud-lake/guides/lakehouse-etl.md)
 - パフォーマンスチューニング
   - [概要](/tidb-cloud-lake/guides/performance-optimization.md)
   - [クラスターキー](/tidb-cloud-lake/guides/cluster-key-performance.md)
-  - [Virtual Column](/tidb-cloud-lake/guides/virtual-column.md)
+  - [仮想カラム](/tidb-cloud-lake/guides/virtual-column.md)
   - [集計インデックス](/tidb-cloud-lake/guides/aggregating-index.md)
   - [Full-Text Index](/tidb-cloud-lake/guides/full-text-index.md)
-  - [Ngram Index](/tidb-cloud-lake/guides/ngram-index.md)
+  - [Ngram インデックス](/tidb-cloud-lake/guides/ngram-index.md)
   - [クエリ結果キャッシュ](/tidb-cloud-lake/guides/query-result-cache.md)
 - セキュリティと信頼性
   - [概要](/tidb-cloud-lake/guides/security-reliability.md)
@@ -125,7 +125,7 @@
   - データ保護ポリシー
     - [概要](/tidb-cloud-lake/guides/data-protection-policies.md)
     - [マスキングポリシー](/tidb-cloud-lake/guides/masking-policy.md)
-    - [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md)
+    - [行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md)
   - [監査証跡](/tidb-cloud-lake/guides/audit-trail.md)
   - [ネットワークポリシー](/tidb-cloud-lake/guides/network-policy.md)
   - [パスワードポリシー](/tidb-cloud-lake/guides/password-policy.md)
@@ -171,7 +171,7 @@
       - [Variant](/tidb-cloud-lake/sql/variant.md)
       - [Vector](/tidb-cloud-lake/sql/vector.md)
     - Information Schema
-      - [Information_Schema Tables](/tidb-cloud-lake/sql/information-schema-tables-overview.md)
+      - [Information_Schema テーブル](/tidb-cloud-lake/sql/information-schema-tables-overview.md)
       - [information_schema.columns](/tidb-cloud-lake/sql/information-schema-columns-sql.md)
       - [information_schema.keywords](/tidb-cloud-lake/sql/information-schema-keywords-sql.md)
       - [information_schema.schemata](/tidb-cloud-lake/sql/information-schema-schemata-sql.md)
@@ -220,7 +220,7 @@
     - [SQL 識別子](/tidb-cloud-lake/sql/sql-identifiers.md)
     - [入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md)
     - [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md)
-    - [SQL Dialects & Conformance](/tidb-cloud-lake/sql/sql-dialects-conformance.md)
+    - [SQL 方言と準拠](/tidb-cloud-lake/sql/sql-dialects-conformance.md)
   - SQL 文
     - [概要](/tidb-cloud-lake/sql/sql-statements-reference.md)
     - DDL コマンド
@@ -345,10 +345,10 @@
         - [RECLUSTER TABLE](/tidb-cloud-lake/sql/recluster-table.md)
         - [SET CLUSTER KEY](/tidb-cloud-lake/sql/set-cluster-key.md)
         - [クラスターキー](/tidb-cloud-lake/sql/cluster-key.md)
-      - 集約インデックス
+      - 集計インデックス
         - [CREATE AGGREGATING INDEX](/tidb-cloud-lake/sql/create-aggregating-index.md)
         - [DROP AGGREGATING INDEX](/tidb-cloud-lake/sql/drop-aggregating-index.md)
-        - [集約インデックス](/tidb-cloud-lake/sql/aggregating-index-sql.md)
+        - [集計インデックス](/tidb-cloud-lake/sql/aggregating-index-sql.md)
         - [REFRESH AGGREGATING INDEX](/tidb-cloud-lake/sql/refresh-aggregating-index.md)
       - 転置インデックス
         - [CREATE INVERTED INDEX](/tidb-cloud-lake/sql/create-inverted-index.md)
@@ -358,17 +358,17 @@
       - Ngram インデックス
         - [CREATE NGRAM INDEX](/tidb-cloud-lake/sql/create-ngram-index.md)
         - [DROP NGRAM INDEX](/tidb-cloud-lake/sql/drop-ngram-index.md)
-        - [Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md)
+        - [Ngram インデックス](/tidb-cloud-lake/sql/ngram-index-sql.md)
         - [REFRESH NGRAM INDEX](/tidb-cloud-lake/sql/refresh-ngram-index.md)
       - 空間インデックス
-        - [Spatial Index](/tidb-cloud-lake/sql/spatial-index-overview.md)
+        - [空間インデックス](/tidb-cloud-lake/sql/spatial-index-overview.md)
         - [CREATE SPATIAL INDEX](/tidb-cloud-lake/sql/create-spatial-index.md)
         - [REFRESH SPATIAL INDEX](/tidb-cloud-lake/sql/refresh-spatial-index.md)
         - [DROP SPATIAL INDEX](/tidb-cloud-lake/sql/drop-spatial-index.md)
       - ベクトルインデックス
         - [CREATE VECTOR INDEX](/tidb-cloud-lake/sql/create-vector-index.md)
         - [DROP VECTOR INDEX](/tidb-cloud-lake/sql/drop-vector-index.md)
-        - [Vector Index](/tidb-cloud-lake/sql/vector-index.md)
+        - [ベクトルインデックス](/tidb-cloud-lake/sql/vector-index.md)
         - [REFRESH VECTOR INDEX](/tidb-cloud-lake/sql/refresh-vector-index.md)
       - 仮想カラム
         - [仮想カラム](/tidb-cloud-lake/sql/virtual-column-overview.md)
@@ -384,7 +384,7 @@
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function.md)
         - [SHOW USER FUNCTIONS](/tidb-cloud-lake/sql/show-user-functions.md)
       - 外部関数
-        - [External Function](/tidb-cloud-lake/sql/external-function.md)
+        - [外部関数](/tidb-cloud-lake/sql/external-function.md)
         - [CREATE FUNCTION](/tidb-cloud-lake/sql/create-function.md)
         - [ALTER FUNCTION](/tidb-cloud-lake/sql/alter-function-sql.md)
         - [DROP FUNCTION](/tidb-cloud-lake/sql/drop-function-sql.md)
@@ -431,7 +431,7 @@
         - [ROLLBACK](/tidb-cloud-lake/sql/rollback.md)
         - [SHOW LOCKS](/tidb-cloud-lake/sql/show-locks.md)
       - 変数
-        - [SQL Variables](/tidb-cloud-lake/sql/sql-variables.md)
+        - [SQL 変数](/tidb-cloud-lake/sql/sql-variables.md)
         - [SET VARIABLE](/tidb-cloud-lake/sql/set-variable.md)
         - [SHOW VARIABLES](/tidb-cloud-lake/sql/show-variables.md)
         - [UNSET VARIABLE](/tidb-cloud-lake/sql/unset-variable.md)
@@ -440,7 +440,7 @@
         - [CREATE PROCEDURE](/tidb-cloud-lake/sql/create-procedure.md)
         - [DESC PROCEDURE](/tidb-cloud-lake/sql/desc-procedure.md)
         - [DROP PROCEDURE](/tidb-cloud-lake/sql/drop-procedure.md)
-        - [Stored Procedure](/tidb-cloud-lake/sql/stored-procedure.md)
+        - [ストアドプロシージャ](/tidb-cloud-lake/sql/stored-procedure.md)
         - [SHOW PROCEDURES](/tidb-cloud-lake/sql/show-procedures.md)
       - Warehouse
         - [概要](/tidb-cloud-lake/sql/warehouse-overview.md)
@@ -476,7 +476,7 @@
       - [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
       - [DELETE](/tidb-cloud-lake/sql/delete.md)
       - [INSERT](/tidb-cloud-lake/sql/insert.md)
-      - [INSERT (multi-table)](/tidb-cloud-lake/sql/insert-multi-table.md)
+      - [INSERT（マルチテーブル）](/tidb-cloud-lake/sql/insert-multi-table.md)
       - [MERGE](/tidb-cloud-lake/sql/merge.md)
       - [REPLACE](/tidb-cloud-lake/sql/replace.md)
       - [UPDATE](/tidb-cloud-lake/sql/update.md)
@@ -495,12 +495,12 @@
       - [VALUES](/tidb-cloud-lake/sql/values.md)
       - [WITH 句](/tidb-cloud-lake/sql/clause.md)
       - [WITH CONSUME](/tidb-cloud-lake/sql/with-consume.md)
-      - [WITH Stream Hints](/tidb-cloud-lake/sql/stream-hints.md)
+      - [WITH ストリームヒント](/tidb-cloud-lake/sql/stream-hints.md)
     - クエリ演算子
       - [算術演算子](/tidb-cloud-lake/sql/arithmetic-operators.md)
       - [比較演算子](/tidb-cloud-lake/sql/comparison-operators.md)
       - [クエリ演算子](/tidb-cloud-lake/sql/query-operators.md)
-      - [JSON Operators](/tidb-cloud-lake/sql/json-operators.md)
+      - [JSON 演算子](/tidb-cloud-lake/sql/json-operators.md)
       - [論理演算子](/tidb-cloud-lake/sql/logical-operators.md)
       - [集合演算子](/tidb-cloud-lake/sql/set-operators-sql.md)
       - [サブクエリ演算子](/tidb-cloud-lake/sql/subquery-operators.md)
@@ -557,7 +557,7 @@
       - [BITMAP_UNION](/tidb-cloud-lake/sql/bitmap-union.md)
       - [BITMAP_XOR](/tidb-cloud-lake/sql/bitmap-xor.md)
       - [BITMAP_XOR_COUNT](/tidb-cloud-lake/sql/bitmap-xor-count.md)
-      - [Bitmap Functions](/tidb-cloud-lake/sql/bitmap-functions.md)
+      - [Bitmap 関数](/tidb-cloud-lake/sql/bitmap-functions.md)
       - [INTERSECT_COUNT](/tidb-cloud-lake/sql/intersect-count.md)
       - [SUB_BITMAP](/tidb-cloud-lake/sql/sub-bitmap.md)
     - 変換関数
@@ -1016,7 +1016,7 @@
       - [QUERY](/tidb-cloud-lake/sql/query.md)
       - [SCORE](/tidb-cloud-lake/sql/score.md)
     - 構造化データ・半構造化データ
-      - [Structured & Semi-Structured Functions](/tidb-cloud-lake/sql/structured-semi-structured-functions.md)
+      - [構造化・半構造化関数](/tidb-cloud-lake/sql/structured-semi-structured-functions.md)
       - JSON 関数
         - [概要](/tidb-cloud-lake/sql/json-functions-overview.md)
         - [CHECK_JSON](/tidb-cloud-lake/sql/check-json.md)
@@ -1091,7 +1091,7 @@
         - [SLICE](/tidb-cloud-lake/sql/slice.md)
         - [UNNEST](/tidb-cloud-lake/sql/unnest.md)
       - オブジェクト関数
-        - [Object Functions](/tidb-cloud-lake/sql/object-functions.md)
+        - [オブジェクト関数](/tidb-cloud-lake/sql/object-functions.md)
         - [OBJECT_CONSTRUCT](/tidb-cloud-lake/sql/object-construct.md)
         - [OBJECT_CONSTRUCT_KEEP_NULL](/tidb-cloud-lake/sql/object-construct-keep-null.md)
         - [OBJECT_DELETE](/tidb-cloud-lake/sql/object-delete.md)
@@ -1142,7 +1142,7 @@
     - ハッシュ関数
       - [BLAKE3](/tidb-cloud-lake/sql/blake.md)
       - [CITY64WITHSEED](/tidb-cloud-lake/sql/city-withseed.md)
-      - [Hash Functions](/tidb-cloud-lake/sql/hash-functions.md)
+      - [ハッシュ関数](/tidb-cloud-lake/sql/hash-functions.md)
       - [MD5](/tidb-cloud-lake/sql/md.md)
       - [SHA](/tidb-cloud-lake/sql/sha.md)
       - [SHA1](/tidb-cloud-lake/sql/sha-sql.md)
@@ -1156,7 +1156,7 @@
       - [GEN_RANDOM_UUID](/tidb-cloud-lake/sql/gen-random-uuid.md)
       - [UUID](/tidb-cloud-lake/sql/uuid-sql.md)
     - IP アドレス関数
-      - [IP Address Functions](/tidb-cloud-lake/sql/ip-address-functions.md)
+      - [IP アドレス関数](/tidb-cloud-lake/sql/ip-address-functions.md)
       - [INET_ATON](/tidb-cloud-lake/sql/inet-aton.md)
       - [INET_NTOA](/tidb-cloud-lake/sql/inet-ntoa.md)
       - [IPV4_NUM_TO_STRING](/tidb-cloud-lake/sql/ipv4-num-to-string.md)
@@ -1232,7 +1232,7 @@
   - [アーキテクチャ](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md)
   - 実装の詳細解説
     - [Fuse Engine](/tidb-cloud-lake/guides/how-fuse-engine-works.md)
-    - [オプティマイザー](/tidb-cloud-lake/guides/how-optimizer-works.md)
+    - [オプティマイザ](/tidb-cloud-lake/guides/how-optimizer-works.md)
     - [JSON](/tidb-cloud-lake/guides/how-json-variant-works.md)
     - [データ共有](/tidb-cloud-lake/guides/how-data-sharing-works.md)
   - [エディション](/tidb-cloud-lake/guides/editions.md)

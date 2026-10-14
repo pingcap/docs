@@ -7,7 +7,7 @@ summary: Kafka 接続情報を再利用できるように保存するための�
 
 このページでは、`Kafka - Credentials` データソースを作成する方法について説明します。このデータソースには、Kafka クラスターへのアクセスに必要な broker アドレス、認証方式、および接続資格情報が保存されます。これらの設定は、複数の Kafka Consumer 統合タスクで再利用できます。
 
-`Kafka - Credentials` は Kafka の接続情報のみを保存します。メッセージ自体を消費することはありません。Kafka トピックのメッセージを読み取り、内部オブジェクトストレージに書き込む実際の処理は、[Kafka Consumer Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md) によって実行されます。
+`Kafka - Credentials` は Kafka の接続情報のみを保存します。メッセージ自体を消費することはありません。Kafka トピックのメッセージを読み取り、内部オブジェクトストレージに書き込む実際の処理は、[Kafka Consumer 統合タスク (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md) によって実行されます。
 
 ## ユースケース {#use-cases}
 
@@ -15,7 +15,7 @@ summary: Kafka 接続情報を再利用できるように保存するための�
 - 同じ Kafka 接続設定を複数の Kafka Consumer タスクで再利用する
 - 複数のタスクから参照されている Kafka アドレス、認証方式、またはアカウント情報を 1 か所で更新する
 
-## Kafka - Credentials を作成する {#create-kafka-credentials}
+## Kafka - Credentials を作成する {#create-kafka---credentials}
 
 1. **Data** > **Data Sources** に移動し、**Create Data Source** をクリックします。
 2. サービスタイプとして **Kafka - Credentials** を選択し、接続の詳細を入力します。
@@ -40,4 +40,4 @@ summary: Kafka 接続情報を再利用できるように保存するための�
 
 ## 次のステップ {#next-steps}
 
-データソースを作成した後、それを使用して [Kafka Consumer Integration Task (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md) を作成できます。
+データソースを作成した後、それを使用して [Kafka Consumer 統合タスク (Preview)](/tidb-cloud-lake/guides/integrate-with-kafka.md) を作成できます。

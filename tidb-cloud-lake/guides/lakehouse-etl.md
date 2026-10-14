@@ -5,7 +5,7 @@ summary: "シナリオ: CityDrive のデータエンジニアリングチーム�
 
 # Lakehouse ETL
 
-> **Scenario:** CityDrive のデータエンジニアリングチームは、各バッチのダッシュカムデータを Parquet（動画、フレームイベント、メタデータ JSON、埋め込み、GPS トレース、信号機までの距離）としてエクスポートしています。これらの Parquet ファイルは、生の動画ストリームから抽出されたすべてのマルチモーダル信号を集約し、Warehouse の基盤を形成します。チームは、単一の COPY パイプラインを通じて {{{ .lake }}} の共有テーブルを更新し、{{{ .lake }}} 内の共有テーブルをリフレッシュしたいと考えています。
+> **シナリオ:** CityDrive のデータエンジニアリングチームは、各バッチのダッシュカムデータを Parquet（動画、フレームイベント、メタデータ JSON、埋め込み、GPS トレース、信号機までの距離）としてエクスポートしています。これらの Parquet ファイルは、生の動画ストリームから抽出されたすべてのマルチモーダル信号を集約し、Warehouse の基盤を形成します。チームは、単一の COPY パイプラインを通じて {{{ .lake }}} の共有テーブルを更新し、{{{ .lake }}} 内の共有テーブルをリフレッシュしたいと考えています。
 
 ロード (load) ループはシンプルです。
 
@@ -71,7 +71,7 @@ LIMIT 5;
 
 各エクスポートは、各ガイドで共通して使用される共有テーブルのいずれか 1 つに対応します。インラインキャストにより、上流の列順が変わってもスキーマの一貫性を保てます。
 
-### `citydrive_videos` {#citydrive-videos}
+### `citydrive_videos` {#citydrive_videos}
 
 ```sql
 COPY INTO citydrive_videos (video_id, vehicle_id, capture_date, route_name, weather, camera_source, duration_sec)
@@ -88,7 +88,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `frame_events` {#frame-events}
+### `frame_events` {#frame_events}
 
 ```sql
 COPY INTO frame_events (frame_id, video_id, frame_index, collected_at, event_tag, risk_score, speed_kmh)
@@ -105,7 +105,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `frame_metadata_catalog` {#frame-metadata-catalog}
+### `frame_metadata_catalog` {#frame_metadata_catalog}
 
 ```sql
 COPY INTO frame_metadata_catalog (doc_id, meta_json, captured_at)
@@ -118,7 +118,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `frame_embeddings` {#frame-embeddings}
+### `frame_embeddings` {#frame_embeddings}
 
 ```sql
 COPY INTO frame_embeddings (frame_id, video_id, sensor_view, embedding, encoder_build, created_at)
@@ -134,7 +134,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `frame_geo_points` {#frame-geo-points}
+### `frame_geo_points` {#frame_geo_points}
 
 ```sql
 COPY INTO frame_geo_points (video_id, frame_id, position_wgs84, solution_grade, source_system, created_at)
@@ -150,7 +150,7 @@ FROM (
 FILE_FORMAT = (TYPE = 'PARQUET');
 ```
 
-### `signal_contact_points` {#signal-contact-points}
+### `signal_contact_points` {#signal_contact_points}
 
 ```sql
 COPY INTO signal_contact_points (node_id, signal_position, video_id, frame_id, frame_position, distance_m, created_at)
@@ -173,7 +173,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 
 ## 4. 増分処理のための Streams（オプション） {#4-streams-for-incremental-reactions-optional}
 
-下流ジョブで前回のバッチ以降に追加された行だけを消費したい場合は、streams を使用します。
+下流ジョブで前回のバッチ以降に追加された行だけを消費したい場合は、ストリームを使用します。
 
 ```sql
 CREATE OR REPLACE STREAM frame_events_stream ON TABLE frame_events;
@@ -183,7 +183,7 @@ SELECT * FROM frame_events_stream;   -- shows newly copied rows
 SELECT * FROM frame_events_stream WITH CONSUME;  -- advance the offset
 ```
 
-`WITH CONSUME` により、行の処理後に stream カーソルが先へ進むことが保証されます。参考: [Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md).
+`WITH CONSUME` により、行の処理後にストリームカーソルが先へ進むことが保証されます。参考: [Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md).
 
 ---
 
@@ -231,7 +231,7 @@ CREATE OR REPLACE TASK task_load_frame_events
 ALTER TASK task_load_frame_events RESUME;
 ```
 
-同じパターンを使って、`frame_metadata_catalog`、embeddings、または GPS データ向けのタスクをさらに追加できます。すべてのオプションについては、[Tasks](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md) を参照してください。
+同じパターンを使って、`frame_metadata_catalog`、埋め込み、または GPS データ向けのタスクをさらに追加できます。すべてのオプションについては、[Tasks](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md) を参照してください。
 
 ---
 

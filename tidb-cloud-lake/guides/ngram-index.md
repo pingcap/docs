@@ -1,9 +1,9 @@
 ---
-title: Ngram Index
+title: Ngram インデックス
 summary: Ngram インデックスは、ワイルドカード (`%`) を含む `LIKE` 演算子を使ったパターンマッチングクエリを高速化し、フルテーブルスキャンなしで高速な部分文字列検索を可能にします。
 ---
 
-# Ngram Index
+# Ngram インデックス
 
 Ngram インデックスは、ワイルドカード (`%`) を含む `LIKE` 演算子を使ったパターンマッチングクエリを高速化し、フルテーブルスキャンなしで高速な部分文字列検索を可能にします。
 
@@ -88,7 +88,7 @@ INSERT INTO logs VALUES (1, 'Application error occurred');
 SELECT * FROM logs WHERE message LIKE '%error%';
 ```
 
-## 完全な例 {#complete-example}
+## 実践例 {#complete-example}
 
 この例では、ログ分析用の ngram インデックスを作成し、そのパフォーマンス上の利点を確認する方法を示します。
 
@@ -163,11 +163,11 @@ TableScan
 | **インデックス使用状況を監視する** | `EXPLAIN` を使用して `bloom pruning` 統計を確認する |
 | **パターン長を考慮する** | 検索パターンが少なくとも `gram_size` 文字以上であることを確認する |
 
-## Essential コマンド {#essential-commands}
+## 主要なコマンド {#essential-commands}
 
-完全なコマンドリファレンスについては、[Ngram Index](/tidb-cloud-lake/sql/ngram-index-sql.md) を参照してください。
+完全なコマンドリファレンスについては、[Ngram インデックス](/tidb-cloud-lake/sql/ngram-index-sql.md) を参照してください。
 
-| Command                                                  | 目的 |
+| コマンド                                                  | 目的 |
 |----------------------------------------------------------|----------------------------------------------|
 | `CREATE NGRAM INDEX name ON table(column) gram_size = N` | N 文字セグメントの ngram インデックスを作成する |
 | `SHOW INDEXES`                                           | ngram インデックスを含むすべてのインデックスを一覧表示する |

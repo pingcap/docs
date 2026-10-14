@@ -38,7 +38,7 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 
 ## チュートリアル: CSV ファイルからのデータのロード {#tutorial-loading-data-from-csv-files}
 
-### Step 1. 内部 stage を作成する {#step-1-create-an-internal-stage}
+### ステップ 1. 内部 stage を作成する {#step-1-create-an-internal-stage}
 
 CSV ファイルを保存するための内部 stage を作成します。
 
@@ -46,7 +46,7 @@ CSV ファイルを保存するための内部 stage を作成します。
 CREATE STAGE my_csv_stage;
 ```
 
-### Step 2. CSV ファイルを作成する {#step-2-create-csv-files}
+### ステップ 2. CSV ファイルを作成する {#step-2-create-csv-files}
 
 次の SQL 文を使用して CSV ファイルを生成します。
 
@@ -78,7 +78,7 @@ LIST @my_csv_stage;
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 3: 対象テーブルを作成する {#step-3-create-target-table}
+### ステップ 3: 対象テーブルを作成する {#step-3-create-target-table}
 
 ```sql
 CREATE TABLE books
@@ -88,7 +88,7 @@ CREATE TABLE books
 );
 ```
 
-### Step 4. CSV から直接コピーする {#step-4-copying-directly-from-csv}
+### ステップ 4. CSV から直接コピーする {#step-4-copying-directly-from-csv}
 
 CSV ファイルからテーブルに直接データをコピーするには、次の SQL コマンドを使用します。
 
@@ -115,9 +115,9 @@ FILE_FORMAT = (
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 4 (Option). SELECT を使用してデータをコピーする {#step-4-option-using-select-to-copy-data}
+### ステップ 4（オプション）. SELECT を使用してデータをコピーする {#step-4-option-using-select-to-copy-data}
 
-コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT 文を使用します。詳細は [`CSV からの SELECT`](/tidb-cloud-lake/guides/query-csv-files-in-stage.md) を参照してください。
+コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT 文を使用します。詳細は [`SELECT from CSV`](/tidb-cloud-lake/guides/query-csv-files-in-stage.md) を参照してください。
 
 ```sql
 COPY INTO books (title, author)

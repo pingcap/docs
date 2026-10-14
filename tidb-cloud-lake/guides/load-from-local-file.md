@@ -129,7 +129,7 @@ root@localhost:8000/book_db> SELECT * FROM books;
 
 [チュートリアル 1](#tutorial-1-load-from-a-local-file) では、サンプルファイル内のデータと完全に一致する 3 つのカラムを持つテーブルを作成しました。テーブルの指定したカラムにデータをロードすることもできるため、指定したカラムが一致していれば、ロード対象のデータとテーブルが同じカラムを持っている必要はありません。このチュートリアルでは、その方法を示します。
 
-### 始める前に {#before-you-begin}
+### 始める前に {#before-you-begin-1}
 
 このチュートリアルを始める前に、[チュートリアル 1](#tutorial-1-load-from-a-local-file) を完了していることを確認してください。
 
@@ -154,7 +154,7 @@ CREATE TABLE bookcomments (
 )
 ```
 
-### ステップ 2. テーブルにデータをロードする {#step-2-load-data-into-table}
+### ステップ 2. テーブルにデータをロードする {#step-2-load-data-into-table-1}
 
 次のコマンドでデータロードリクエストを送信します。
 
@@ -164,7 +164,7 @@ CREATE TABLE bookcomments (
 
 上記の `query` 部分では、ロードするデータに対応するカラムとして (title, author, date) が指定されていることに注意してください。
 
-### ステップ 3. ロードしたデータを確認する {#step-3-verify-loaded-data}
+### ステップ 3. ロードしたデータを確認する {#step-3-verify-loaded-data-1}
 
 ```shell
 root@localhost:8000/book_db> SELECT * FROM bookcomments;

@@ -16,21 +16,21 @@ summary: "{{{ .lake }}} で \"Amazon SQS (S3) - IAM Role\" データソースを
 - S3 パスのポーリングのみに依存せず、S3 イベント通知を使用してデータ取り込みを駆動する
 - 複数のタスクから参照されている場合に、IAM Role、queue URL、またはパススコープを 1 か所で更新する
 
-## Amazon SQS (S3) - IAM Role を作成する {#create-amazon-sqs-s3-iam-role}
+## Amazon SQS (S3) - IAM Role を作成する {#create-amazon-sqs-s3---iam-role}
 
 1. **Data** > **Data Sources** に移動し、**Create Data Source** をクリックします。
 2. サービスタイプとして **Amazon SQS (S3) - IAM Role** を選択し、接続の詳細を入力します。
 
     | フィールド | 必須 | 説明 |
     |-------|----------|-------------|
-    | **Name** | Yes | データソースを識別するための説明的な名前 |
-    | **Queue URL** | Yes | SQS 標準キューの URL。例: `https://sqs.us-east-1.amazonaws.com/123456789012/my-queue` |
-    | **Queue Region** | Yes | SQS キューが配置されている AWS リージョン。例: `us-east-1`。S3 バケットは SQS キューと同じリージョンに存在する必要があります |
-    | **Role ARN** | Yes | {{{ .lake }}} が引き受けることを許可された、AWS アカウント内の IAM Role ARN |
-    | **External ID** | Yes | {{{ .lake }}} コンソールの Organization ID。IAM Role の信頼ポリシーで使用されます |
-    | **Bucket** | Yes | ObjectCreated イベントを送信する S3 バケットの名前 |
-    | **Object Key Prefix** | No | S3 オブジェクトキーのプレフィックスフィルター。S3 通知フィルターと一致している必要があります |
-    | **Object Key Suffix** | No | S3 オブジェクトキーのサフィックスフィルター。S3 通知フィルターと一致している必要があります |
+    | **Name** | はい | データソースを識別するための説明的な名前 |
+    | **Queue URL** | はい | SQS 標準キューの URL。例: `https://sqs.us-east-1.amazonaws.com/123456789012/my-queue` |
+    | **Queue Region** | はい | SQS キューが配置されている AWS リージョン。例: `us-east-1`。S3 バケットは SQS キューと同じリージョンに存在する必要があります |
+    | **Role ARN** | はい | {{{ .lake }}} が引き受けることを許可された、AWS アカウント内の IAM Role ARN |
+    | **External ID** | はい | {{{ .lake }}} コンソールの Organization ID。IAM Role の信頼ポリシーで使用されます |
+    | **Bucket** | はい | ObjectCreated イベントを送信する S3 バケットの名前 |
+    | **Object Key Prefix** | いいえ | S3 オブジェクトキーのプレフィックスフィルター。S3 通知フィルターと一致している必要があります |
+    | **Object Key Suffix** | いいえ | S3 オブジェクトキーのサフィックスフィルター。S3 通知フィルターと一致している必要があります |
 
 3. **Test Connectivity** をクリックして接続を検証します。テストが成功したら、**OK** をクリックしてデータソースを保存します。
 
@@ -73,7 +73,7 @@ export EXTERNAL_ID="<platform-org-id>"
 >
 > Platform から提供されたロール ARN を使用してください。`PLATFORM_SETUP_ROLE_ARN` は **Platform setup and validation role** の ARN、`PLATFORM_LOAD_ROLE_ARN` は **Platform data loading role** の ARN です。ほとんどの場合、IAM Role の信頼ポリシーでは両方のプラットフォームロールを信頼する必要があります。
 
-## Step 1: SQS 標準キューを作成または取得する {#step-1-create-or-get-an-sqs-standard-queue}
+## ステップ 1: SQS 標準キューを作成または取得する {#step-1-create-or-get-an-sqs-standard-queue}
 
 SQS 標準キューを作成します。
 
@@ -104,9 +104,9 @@ export QUEUE_ARN=$(
 )
 ```
 
-各 SQS (S3) データソースごとに専用の SQS 標準キューを使用することを推奨します。同じキューを、他のバケット、他の prefix / suffix スコープ、または他の業務イベントに再利用しないでください。
+各 SQS (S3) データソースごとに専用の SQS 標準キューを使用することを推奨します。同じキューを、他のバケット、他のプレフィックス / サフィックスのスコープ、または他の業務イベントに再利用しないでください。
 
-## Step 2: SQS キューポリシーを設定する {#step-2-configure-the-sqs-queue-policy}
+## ステップ 2: SQS キューポリシーを設定する {#step-2-configure-the-sqs-queue-policy}
 
 変更を加える前に、現在の SQS 属性をバックアップします。
 
@@ -166,7 +166,7 @@ aws sqs set-queue-attributes \
   --attributes file://set-queue-attributes.json
 ```
 
-## Step 3: S3 バケット通知を設定する {#step-3-configure-s3-bucket-notification}
+## ステップ 3: S3 バケット通知を設定する {#step-3-configure-s3-bucket-notification}
 
 変更を加える前に、現在のバケット通知をバックアップしてください。`put-bucket-notification-configuration` はバケット通知の設定全体を置き換えます。バケットにすでに他の通知がある場合は、新しい設定を適用する前にそれらをマージしてください。
 
@@ -231,7 +231,7 @@ aws s3api get-bucket-notification-configuration \
 
 `QueueArn` が対象の SQS キューを指していること、`Events` に `s3:ObjectCreated:*` が含まれていること、`FilterRules` が {{{ .lake }}} データソースで設定した `Object Key Prefix` / `Object Key Suffix` と一致していることを確認してください。
 
-## Step 4: {{{ .lake }}} が引き受ける IAM ロールを作成する {#step-4-create-an-iam-role-for-lake-to-assume}
+## ステップ 4: {{{ .lake }}} が引き受ける IAM ロールを作成する {#step-4-create-an-iam-role-for--lake--to-assume}
 
 `trust-policy.json` を生成します。`ExternalId` は {{{ .lake }}} (platform) コンソールの organization ID です。
 
@@ -296,7 +296,7 @@ aws iam update-assume-role-policy \
   --policy-document file://trust-policy.json
 ```
 
-## Step 5: S3/SQS 権限をアタッチする {#step-5-attach-s3-sqs-permissions}
+## ステップ 5: S3/SQS 権限をアタッチする {#step-5-attach-s3sqs-permissions}
 
 `permissions-policy.json` を生成します。
 
@@ -357,7 +357,7 @@ aws iam put-role-policy \
 - デフォルトでは、このポリシーに S3 の書き込み権限や削除権限は不要です。
 - 将来の SQS (S3) 統合タスクで **PURGE** または **Clean Up Original Files** を有効にし、取り込み成功後にソースオブジェクトを削除する場合は、対象オブジェクトパスに対する `s3:DeleteObject` を付与してください。
 
-## Step 6: S3 から SQS への連携を確認する {#step-6-verify-s3-to-sqs}
+## ステップ 6: S3 から SQS への連携を確認する {#step-6-verify-s3-to-sqs}
 
 `PREFIX` / `SUFFIX` に一致するテストオブジェクトをアップロードします。
 
@@ -386,7 +386,7 @@ aws sqs receive-message \
 >
 > `receive-message` はメッセージを自動的に削除しません。可視性タイムアウトの間、一時的にメッセージを非表示にするだけです。後で {{{ .lake }}} にこのテストメッセージを消費させたい場合は、手動で削除しないでください。データソース接続をテストする前に、可視性タイムアウトが期限切れになるまで待ってください。
 
-## {{{ .lake }}} に提供する情報 {#information-to-provide-to-lake}
+## {{{ .lake }}} に提供する情報 {#information-to-provide-to--lake-}
 
 AWS 側の設定が完了したら、{{{ .lake }}} でデータソースを作成する際に、以下の情報を入力します。
 
@@ -411,11 +411,11 @@ aws iam get-role \
 ## 設定要件 {#configuration-requirements}
 
 - S3 バケットと SQS キューは同じ AWS リージョンに存在している必要があります。
-- SQS キューは standard queue である必要があります。FIFO キューはサポートされていません。
-- SQS キューは 1 つの S3 notification rule 専用にする必要があります。他のバケット、他の prefix / suffix スコープ、または他の業務イベントに再利用しないでください。
-- S3 notification の bucket、prefix、suffix は、{{{ .lake }}} のデータソース設定と一致している必要があります。
+- SQS キューは標準キューである必要があります。FIFO キューはサポートされていません。
+- SQS キューは 1 つの S3 通知ルール専用にする必要があります。他のバケット、他のプレフィックス / サフィックスのスコープ、または他の業務イベントに再利用しないでください。
+- S3 通知のバケット、プレフィックス、サフィックスは、{{{ .lake }}} のデータソース設定と一致している必要があります。
 - `put-bucket-notification-configuration` は、バケット通知設定全体を置き換えます。変更を適用する前に、既存の設定をバックアップし、マージしてください。
-- S3 event notifications と SQS standard queues はどちらも at-least-once 配信を使用するため、メッセージが重複する可能性があります。
+- S3 イベント通知と SQS 標準キューはどちらも at-least-once 配信を使用するため、メッセージが重複する可能性があります。
 
 ## 次のステップ {#next-steps}
 

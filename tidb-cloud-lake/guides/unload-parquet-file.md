@@ -5,7 +5,7 @@ summary: parquet ファイルをアンロードする方法について説明し
 
 # Parquet ファイルのアンロード
 
-## Parquet ファイルのアンロード {#unloading-parquet-file}
+## Parquet ファイルのアンロード {#unloading-parquet-file-1}
 
 構文:
 
@@ -18,12 +18,12 @@ FILE_FORMAT = (TYPE = PARQUET)
 ```
 
 - Parquet のその他のオプションについては、[Parquet ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options) を参照してください
-- 複数ファイルへのアンロードには、[MAX_FILE_SIZE Copy Option](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions) を使用します
+- 複数ファイルへのアンロードには、[MAX_FILE_SIZE コピーオプション](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions) を使用します
 - 構文の詳細については、[COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください
 
 ## チュートリアル {#tutorial}
 
-### Step 1. 外部 stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
 ```sql
 CREATE STAGE parquet_unload_stage
@@ -34,7 +34,7 @@ CONNECTION = (
 );
 ```
 
-### Step 2. カスタム Parquet ファイル形式を作成する {#step-2-create-custom-parquet-file-format}
+### ステップ 2. カスタム Parquet ファイル形式を作成する {#step-2-create-custom-parquet-file-format}
 
 ```sql
 CREATE FILE FORMAT parquet_unload_format
@@ -42,7 +42,7 @@ CREATE FILE FORMAT parquet_unload_format
     ;
 ```
 
-### Step 3. Parquet ファイルにアンロードする {#step-3-unload-into-parquet-file}
+### ステップ 3. Parquet ファイルにアンロードする {#step-3-unload-into-parquet-file}
 
 ```sql
 COPY INTO @parquet_unload_stage
@@ -65,7 +65,7 @@ DETAILED_OUTPUT = true;
 └───────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 4. アンロードした Parquet ファイルを確認する {#step-4-verify-the-unloaded-parquet-files}
+### ステップ 4. アンロードした Parquet ファイルを確認する {#step-4-verify-the-unloaded-parquet-files}
 
 ```sql
 SELECT COUNT($1)

@@ -1,13 +1,13 @@
 ---
 title: エディション
-summary: "{{{ .lake }}} には **Personal**、**Business**、**Dedicated** の 3 つのエディションがあり、幅広いニーズに対応し、さまざまなユースケースで最適なパフォーマンスを確保できるよう選択できます。"
+summary: "{{{ .lake }}} には Personal、Business、Dedicated の 3 つのエディションがあり、幅広いニーズに対応し、さまざまなユースケースで最適なパフォーマンスを確保できるよう選択できます。"
 ---
 
 # エディション
 
 {{{ .lake }}} には **Personal**、**Business**、**Dedicated** の 3 つのエディションがあり、幅広いニーズに対応し、さまざまなユースケースで最適なパフォーマンスを確保できるよう選択できます。
 
-料金情報については、[Pricing & Billing](/tidb-cloud-lake/guides/pricing-billing.md) を参照してください。これらのエディション間の詳細な機能一覧については、[機能一覧](#feature-lists) を参照してください。
+料金情報については、[料金と請求](/tidb-cloud-lake/guides/pricing-billing.md) を参照してください。これらのエディション間の詳細な機能一覧については、[機能一覧](#feature-lists) を参照してください。
 
 ## 機能一覧 {#feature-lists}
 
@@ -19,7 +19,7 @@ summary: "{{{ .lake }}} には **Personal**、**Business**、**Dedicated** の 3
 |----------|----------|----------|-----------|
 | 毎週の新しいリリースへの早期アクセス。各リリースが本番アカウントにデプロイされる前に、追加のテストや検証に利用できます。 | | ✓ | ✓ |
 
-### セキュリティとガバナンス {#security-governance}
+### セキュリティとガバナンス {#security--governance}
 
 | 機能 | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
@@ -68,7 +68,7 @@ summary: "{{{ .lake }}} には **Personal**、**Business**、**Dedicated** の 3
 | [外部ロケーション付きテーブルの作成](/tidb-cloud-lake/sql/create-external-table.md) のサポート。 | ✓ | ✓ | ✓ |
 | [ATTACH TABLE](/tidb-cloud-lake/sql/attach-table.md) のサポート。 | ✓ | ✓ | ✓ |
 
-### インターフェースとツール {#interfaces-tools}
+### インターフェースとツール {#interfaces--tools}
 
 | 機能 | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|
@@ -78,7 +78,7 @@ summary: "{{{ .lake }}} には **Personal**、**Business**、**Dedicated** の 3
 | JDBC のネイティブサポート。 | ✓ | ✓ | ✓ |
 | ETL、BI、その他のサードパーティベンダーや技術と接続するための広範なエコシステム。 | ✓ | ✓ | ✓ |
 
-### データのインポートとエクスポート {#data-import-export}
+### データのインポートとエクスポート {#data-import--export}
 
 | 機能 | Personal | Business | Dedicated |
 |----------|----------|----------|-----------|

@@ -1,13 +1,13 @@
 ---
 title: AWS IAM Role による認証
-summary: クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、{{{ .lake }}} は生の access key を扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
+summary: クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、{{{ .lake }}} はアクセスキーを直接扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
 ---
 
 # AWS IAM Role による認証
 
-クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、{{{ .lake }}} は生の access key を扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
+クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed Identity、Google Service Account federation など）により、{{{ .lake }}} はアクセスキーを直接扱うことなく、オブジェクトストレージに対する短期間有効な認証情報を取得できます。これにより、データプレーンへのアクセスはクラウドプロバイダーのコントロールプレーン内で管理され、すべての権限の所有権は引き続きお客様が保持できます。
 
-## IAM role の利点 {#iam-role-benefits}
+## IAM ロールの利点 {#iam-role-benefits}
 
 - 静的キーが不要: 一時的な認証情報により、ローテーションや漏えい対策が必要な長期間有効なシークレットを排除できます。
 - 最小権限: きめ細かなポリシーにより、{{{ .lake }}} がアクセスできるバケットや実行できる操作を、承認したもののみに制限できます。
@@ -16,11 +16,11 @@ summary: クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed
 
 ## 仕組み {#how-it-works}
 
-{{{ .lake }}} サポートから組織向けの信頼されたプリンシパル情報が共有された後、クラウドアカウント内で IAM role/identity を作成し、必要なオブジェクトストレージ操作（たとえば一連のバケットの読み取り）を許可するポリシーをアタッチします。さらに、固有の external ID を使用して {{{ .lake }}} のみがその role を引き受けられるように信頼ポリシーを設定します。その後、{{{ .lake }}} は必要に応じてその role を引き受け、一時的な認証情報を使ってストレージにアクセスし、セッションの有効期限が切れると自動的にログアウトします。
+{{{ .lake }}} サポートから組織向けの信頼されたプリンシパル情報が共有された後、クラウドアカウント内で IAM ロール/ID を作成し、必要なオブジェクトストレージ操作（たとえば一連のバケットの読み取り）を許可するポリシーをアタッチします。さらに、固有の外部 ID を使用して {{{ .lake }}} のみがそのロールを引き受けられるように信頼ポリシーを設定します。その後、{{{ .lake }}} は必要に応じてそのロールを引き受け、一時的な認証情報を使ってストレージにアクセスし、セッションの有効期限が切れると自動的にログアウトします。
 
-## IAM role を使用する {#use-iam-role}
+## IAM ロールを使用する {#use-iam-role}
 
-1. サポートチケットを起票し、{{{ .lake }}} 組織用の IAM role ARN を取得します。
+1. サポートチケットを起票し、{{{ .lake }}} 組織用の IAM ロール ARN を取得します。
 
    例: `arn:aws:iam::123456789012:role/xxxxxxx/tnabcdefg/xxxxxxx-tnabcdefg`
 
@@ -82,9 +82,9 @@ summary: クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed
 
    `Next` をクリックし、先ほど作成したポリシー `lake-test` を選択します。
 
-   `Next` をクリックし、role 名 `lake-test` を入力します。
+   `Next` をクリックし、ロール名 `lake-test` を入力します。
 
-   `View Role` をクリックし、role ARN `arn:aws:iam::987654321987:role/lake-test` を記録します。
+   `View Role` をクリックし、ロール ARN `arn:aws:iam::987654321987:role/lake-test` を記録します。
 
 4. 次の SQL 文を {{{ .lake }}} cloud worksheet または `LakeSQL` で実行します。
 

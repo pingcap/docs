@@ -21,7 +21,7 @@ UDF は、次のようなタスクに役立ちます。
 - Python ライブラリ、独自ロジック、または機械学習モデルを呼び出す。
 - Warehouse とは独立して特化したコンピュートをスケールさせる。
 
-UDF は 1 つの明確な責務だけを持つべきです。データ移動、スケジューリング、ストリーミング状態、継続的なイベントストリーム間のテーブル結合、ワークフローオーケストレーションは、UDF の内部ではなく、対応する Lake SQL、Stream、Task、または統合機能に属します。
+UDF は 1 つの明確な責務だけを持つべきです。データ移動、スケジューリング、ストリーミング状態、継続的なイベントストリーム間の結合、ワークフローオーケストレーションは、UDF の内部ではなく、対応する Lake SQL、Stream、Task、または統合機能に属します。
 
 ## UDF エコシステムを理解する {#understand-the-udf-ecosystem}
 
@@ -37,17 +37,17 @@ UDF は 1 つの明確な責務だけを持つべきです。データ移動、�
 | External scalar UDF | Python UDF Server | 各入力行に対して 1 つの値 | ユーザーがホスト | ライブラリ、モデル、独自サービス |
 | External table UDF | Python UDF Server | 複数のカラムまたは行 | ユーザーがホスト | トークン化、展開、レコード生成 |
 
-Aggregate UDF と table UDF は異なる問題を解決します。Aggregate UDF は複数行を消費して 1 つの値を返します。table UDF は結果セットを返します。{{{ .lake }}} は、これら 2 つの実行モデルを組み合わせた Python table aggregate UDF を提供していません。
+集計 UDF とテーブル UDF は異なる問題を解決します。集計 UDF は複数行を消費して 1 つの値を返します。テーブル UDF は結果セットを返します。{{{ .lake }}} は、これら 2 つの実行モデルを組み合わせた Python のテーブル集計 UDF を提供していません。
 
 ## 最もシンプルな実行モデルを選択する {#choose-the-simplest-execution-model}
 
 実装を選択する際は、次の順序を使用してください。
 
 1. 必要な動作をすでに提供している場合は、組み込み関数を使用します。
-2. SQL でロジックを明確に表現できる場合は、SQL scalar UDF または table UDF を使用します。
-3. {{{ .lake }}} 内で実行すべきスクリプトロジックには、組み込みの Python または JavaScript scalar UDF を使用します。
-4. コンパイル済みモジュールとして提供される計算集約型の scalar ロジックには、WebAssembly を使用します。
-5. 計算にカスタム集計状態が必要な場合は、Aggregate UDF を使用します。
+2. SQL でロジックを明確に表現できる場合は、SQL スカラー UDF またはテーブル UDF を使用します。
+3. {{{ .lake }}} 内で実行すべきスクリプトロジックには、埋め込み型の Python または JavaScript スカラー UDF を使用します。
+4. コンパイル済みモジュールとして提供される計算集約型のスカラーロジックには、WebAssembly を使用します。
+5. 計算にカスタム集計状態が必要な場合は、集計 UDF を使用します。
 6. ロジックがリモートサービス、GPU、または独立したスケーリングに依存する場合は、外部 UDF を使用します。
 
 次の質問は、選択肢を絞り込むのに役立ちます。
@@ -62,9 +62,9 @@ Aggregate UDF と table UDF は異なる問題を解決します。Aggregate UDF
 | 1 つの入力から Python によって生成された複数行を生成する必要がありますか。 | External table UDF |
 | ロジックに Python パッケージ、モデル、ネットワーク呼び出し、または別個のコンピュートが必要ですか。 | External scalar または table UDF |
 
-## 再利用可能な変換には SQL scalar UDF を使用する {#use-sql-scalar-udfs-for-reusable-transformations}
+## 再利用可能な変換には SQL スカラー UDF を使用する {#use-sql-scalar-udfs-for-reusable-transformations}
 
-SQL scalar UDF は、各入力行を 1 つの値にマッピングします。これは、計算、文字列の正規化、条件付きビジネスルールに適しています。
+SQL スカラー UDF は、各入力行を 1 つの値にマッピングします。これは、計算、文字列の正規化、条件付きビジネスルールに適しています。
 
 ### 電話番号を正規化する {#normalize-phone-numbers}
 
@@ -97,9 +97,9 @@ SELECT apply_discount(100, 0.15);
 
 完全な構文については、[CREATE SCALAR FUNCTION](/tidb-cloud-lake/sql/create-scalar-function.md)を参照してください。
 
-## データ処理ロジックには Python scalar UDF を使用する {#use-python-scalar-udfs-for-data-processing-logic}
+## データ処理ロジックには Python スカラー UDF を使用する {#use-python-scalar-udfs-for-data-processing-logic}
 
-Python scalar UDF は、ロジックに制御フロー、Python 標準ライブラリ、または SQL で表現しにくいパッケージが必要な場合に役立ちます。
+Python スカラー UDF は、ロジックに制御フロー、Python 標準ライブラリ、または SQL で表現しにくいパッケージが必要な場合に役立ちます。
 
 次の関数は、住所内の空白と大文字小文字を標準化します。
 
@@ -118,7 +118,7 @@ SELECT normalize_address('  123 Main Street  ');
 
 Python UDF は、PyPI 依存関係に `PACKAGES` を、stage に保存されたファイルに `IMPORTS` を使用することもできます。依存関係は必要最小限に絞ることで、関数環境の再現と管理が容易になります。
 
-## JSON 変換には JavaScript scalar UDF を使用する {#use-javascript-scalar-udfs-for-json-transformations}
+## JSON 変換には JavaScript スカラー UDF を使用する {#use-javascript-scalar-udfs-for-json-transformations}
 
 JavaScript は、オブジェクトや JSON の変換に自然に適しており、特にそのロジックがすでにアプリケーションコードベースに存在する場合に有効です。
 
@@ -145,7 +145,7 @@ $$;
 
 ## コンパイル済みロジックには WebAssembly UDF を使用する {#use-webassembly-udfs-for-compiled-logic}
 
-WebAssembly UDF は、コンパイル済みコードをポータブルなモジュールとしてパッケージ化します。これは、スクリプトランタイムよりもコンパイル済み実装が望ましい計算集約型の scalar ロジックに適しています。
+WebAssembly UDF は、コンパイル済みコードをポータブルなモジュールとしてパッケージ化します。これは、スクリプトランタイムよりもコンパイル済み実装が望ましい計算集約型のスカラーロジックに適しています。
 
 必要な Arrow UDF インターフェースを実装したモジュールを stage にアップロードし、その後ハンドラーを登録します。
 
@@ -347,5 +347,5 @@ SQL の `ADDRESS` には公開エンドポイントを含める必要があり�
 ## 関連リソース {#related-resources}
 
 - [ユーザー定義関数](/tidb-cloud-lake/sql/user-defined-function.md)
-- [External Function](/tidb-cloud-lake/sql/external-function.md)
+- [外部関数](/tidb-cloud-lake/sql/external-function.md)
 - [GitHub 上の `tidbcloud/lake-udf`](https://github.com/tidbcloud/lake-udf)

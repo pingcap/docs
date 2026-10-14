@@ -1,11 +1,11 @@
 ---
-title: Geo Analytics
+title: 地理空間分析
 summary: CityDrive は、フラグ付きフレームごとに高精度な GPS 位置情報と信号までの距離を記録します。この地理空間データはダッシュカムの GPS モジュールに由来し、動画キーフレームのタイムスタンプと正確に対応付けられています。運用チームは「これはどこで起きたのか？」という問いに、SQL だけで答えられます。
 ---
 
-# Geo Analytics
+# 地理空間分析
 
-> **Scenario:** CityDrive は、フラグ付きフレームごとに高精度な GPS 位置情報と信号までの距離を記録します。この地理空間データはダッシュカムの GPS モジュールに由来し、動画キーフレームのタイムスタンプと正確に対応付けられています。運用チームは「これはどこで起きたのか？」という問いに、SQL だけで答えられます。
+> **シナリオ:** CityDrive は、フラグ付きフレームごとに高精度な GPS 位置情報と信号までの距離を記録します。この地理空間データはダッシュカムの GPS モジュールに由来し、動画キーフレームのタイムスタンプと正確に対応付けられています。運用チームは「これはどこで起きたのか？」という問いに、SQL だけで答えられます。
 
 `frame_geo_points` と `signal_contact_points` は、このガイドの他の部分と同じ `video_id`/`frame_id` キーを共有しているため、データをコピーせずに SQL メトリクスから地図へ移行できます。
 
@@ -111,7 +111,7 @@ FRAME-0102| VID-20250101-001 | pedestrian | 180.277138577
 FRAME-0101| VID-20250101-001 | hard_brake | 324.291965923
 ```
 
-Tip: デバッグ時には `ST_ASTEXT(l.geom)` を追加するか、大圏距離の計算には [`HAVERSINE`](/tidb-cloud-lake/sql/geospatial-functions.md#distance--measurements) を使用してください。
+ヒント: デバッグ時には `ST_ASTEXT(l.geom)` を追加するか、大圏距離の計算には [`HAVERSINE`](/tidb-cloud-lake/sql/geospatial-functions.md#distance--measurements) を使用してください。
 
 ```sql
 WITH school_zone AS (
@@ -228,7 +228,7 @@ FRAME-0301| hard_brake  | ["hard_brake","highway"]
 
 ## 5. ヒートマップ ビューを公開する {#5-publish-a-heatmap-view}
 
-重い SQL を再実行することなく、geo heatmap を BI ツールや GIS ツールに公開できます。
+重い SQL を再実行することなく、地理ヒートマップを BI ツールや GIS ツールに公開できます。
 
 ```sql
 CREATE OR REPLACE VIEW v_citydrive_geo_heatmap AS

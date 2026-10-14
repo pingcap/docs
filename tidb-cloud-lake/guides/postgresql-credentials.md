@@ -13,7 +13,7 @@ summary: このページでは、`PostgreSQL - Credentials` データソース�
 - すべてのタスクで同じデータベース接続設定を毎回入力し直す手間を避ける
 - データベースのエンドポイントまたはアカウントが変更されたときに、依存するすべてのタスクを 1 か所で更新する
 
-## PostgreSQL - Credentials を作成する {#create-postgresql-credentials}
+## PostgreSQL - Credentials を作成する {#create-postgresql---credentials}
 
 1. **Data** > **Data Sources** に移動し、**Create Data Source** をクリックします。
 2. サービスタイプとして **PostgreSQL - Credentials** を選択し、接続の詳細を入力します。
@@ -38,4 +38,4 @@ summary: このページでは、`PostgreSQL - Credentials` データソース�
 
 ## 次のステップ {#next-steps}
 
-このデータソースを作成した後は、これを使用して [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md) を作成できます。
+このデータソースを作成した後は、これを使用して [PostgreSQL 統合タスク](/tidb-cloud-lake/guides/integrate-with-postgresql.md) を作成できます。

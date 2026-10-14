@@ -7,7 +7,7 @@ summary: マスキングポリシーは、クエリ実行時にカラム値を�
 
 マスキングポリシーは、クエリ時にカラム値を変換します。権限のあるロールには実データが表示され、それ以外にはマスクされた値が表示されます。保存されているデータ自体は変更されません。
 
-カラムをマスクするのではなく行全体を非表示にしたい場合は、[行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md)を使用してください。
+カラムをマスクするのではなく行全体を非表示にしたい場合は、[行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md)を使用してください。
 
 ## 使用する場面 {#when-to-use}
 
@@ -133,7 +133,7 @@ SELECT * FROM events WHERE data['content'] IS NOT NULL;
 ELSE delete_by_keypath(val, 'nested:secret')
 ```
 
-## 読み取り / 書き込みの動作 {#read-write-behavior}
+## 読み取り / 書き込みの動作 {#read--write-behavior}
 
 | 操作 | 効果 |
 |-----------|--------|
@@ -186,7 +186,7 @@ DROP MASKING POLICY IF EXISTS email_mask;
 4. VARIANT では、値全体をマスクするのではなく `object_delete` / `delete_by_keypath` を使用してください。
 5. 削除前にバインドを解除し、適用後は制限付きロールで確認してください。
 
-## 権限と参照 {#privileges-references}
+## 権限と参照 {#privileges--references}
 
 - ポリシーを作成するには、`*.*` に対する `CREATE MASKING POLICY` が必要です（作成者には OWNERSHIP が付与されます）
 - アタッチ/デタッチするには、グローバル `APPLY MASKING POLICY` または `APPLY ON MASKING POLICY <name>` が必要です
@@ -197,5 +197,5 @@ DROP MASKING POLICY IF EXISTS email_mask;
 - [User & Role](/tidb-cloud-lake/sql/user-role.md)
 - [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md)
 - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#column-operations)
-- [Masking Policy コマンド](/tidb-cloud-lake/sql/masking-policy-sql.md)
-- [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md)
+- [マスキングポリシーコマンド](/tidb-cloud-lake/sql/masking-policy-sql.md)
+- [行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md)

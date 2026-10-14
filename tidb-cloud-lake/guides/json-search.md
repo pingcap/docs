@@ -1,13 +1,13 @@
 ---
-title: JSON & Search
+title: JSON と検索
 summary: "シナリオ: CityDrive は、抽出された各フレームにメタデータ JSON ペイロードを付加します。この JSON データはバックグラウンドツールによって動画のキーフレームから抽出され、シーン認識や物体検出のような豊富な非構造化情報を含みます。これを外部システムに複製することなく、Elasticsearch スタイルの構文で {{{ .lake }}} 内の JSON をフィルタリングする必要があります。{{{ .lake }}} の外にコピーせずに JSON を扱います。"
 ---
 
-# JSON & Search
+# JSON と検索
 
-> **Scenario:** CityDrive は、抽出された各フレームにメタデータ JSON ペイロードを付加します。この JSON データはバックグラウンドツールによって動画のキーフレームから抽出され、シーン認識や物体検出のような豊富な非構造化情報を含みます。これを外部システムに複製することなく、Elasticsearch スタイルの構文で {{{ .lake }}} 内の JSON をフィルタリングする必要があります。{{{ .lake }}} の外にコピーせずに JSON を扱います。
+> **シナリオ:** CityDrive は、抽出された各フレームにメタデータ JSON ペイロードを付加します。この JSON データはバックグラウンドツールによって動画のキーフレームから抽出され、シーン認識や物体検出のような豊富な非構造化情報を含みます。これを外部システムに複製することなく、Elasticsearch スタイルの構文で {{{ .lake }}} 内の JSON をフィルタリングする必要があります。{{{ .lake }}} の外にコピーせずに JSON を扱います。
 
-{{{ .lake }}} は、これらの異種シグナルを 1 つの warehouse に保持します。転置インデックスは VARIANT カラムに対する Elasticsearch スタイルの検索を実現し、bitmap テーブルはラベルのカバレッジを要約し、ベクトルインデックスは類似検索に応答し、ネイティブの GEOMETRY カラムは空間フィルタをサポートします。
+{{{ .lake }}} は、これらの異種シグナルを 1 つの warehouse に保持します。転置インデックスは VARIANT カラムに対する Elasticsearch スタイルの検索を実現し、ビットマップテーブルはラベルのカバレッジを要約し、ベクトルインデックスは類似検索に応答し、ネイティブの GEOMETRY カラムは空間フィルタをサポートします。
 
 ## 1. メタデータテーブルを作成する {#1-create-the-metadata-table}
 
@@ -33,7 +33,7 @@ INSERT INTO frame_metadata_catalog VALUES
   ('FRAME-0401', PARSE_JSON('{"scene":{"weather_code":"lightfog","lighting":"night"},"camera":{"sensor_view":"rear"},"vehicle":{"speed_kmh":38.9},"detections":{"objects":[{"type":"traffic_light","confidence":0.78},{"type":"vehicle","confidence":0.36}]},"media_meta":{"tagging":{"labels":["night_lowlight","traffic_light"]}}}'), '2025-01-03 21:18:07');
 ```
 
-> マルチモーダルデータ（ベクトル埋め込み、GPS 軌跡、タグ bitmap）が必要ですか？ここで示した検索結果と組み合わせられるように、[Vector](/tidb-cloud-lake/guides/vector-search-guide.md) および [Geo](/tidb-cloud-lake/guides/geo-analytics.md) ガイドからスキーマを取得してください。
+> マルチモーダルデータ（ベクトル埋め込み、GPS 軌跡、タグのビットマップ）が必要ですか？ここで示した検索結果と組み合わせられるように、[Vector](/tidb-cloud-lake/guides/vector-search-guide.md) および [Geo](/tidb-cloud-lake/guides/geo-analytics.md) ガイドからスキーマを取得してください。
 
 ## 2. `QUERY()` を使った検索パターン {#2-search-patterns-with-query}
 
@@ -74,7 +74,7 @@ FRAME-0101 | 2025-01-01 08:15:21
 FRAME-0102 | 2025-01-01 08:33:54
 ```
 
-### ブール OR / リスト {#boolean-or-list}
+### ブール OR / リスト {#boolean-or--list}
 
 ```sql
 SELECT doc_id,

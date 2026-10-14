@@ -13,7 +13,7 @@ summary: Parquet ファイルが保存されている独自の S3 バケット�
 
 ## チュートリアル {#tutorial}
 
-### Step 1. External Stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. External Stage を作成する {#step-1-create-an-external-stage}
 
 Parquet ファイルが保存されている独自の S3 バケットと認証情報を使用して external stage を作成します。
 
@@ -26,15 +26,15 @@ CONNECTION = (
 );
 ```
 
-### Step 2. カスタム Parquet File Format を作成する {#step-2-create-custom-parquet-file-format}
+### ステップ 2. カスタム Parquet ファイル形式を作成する {#step-2-create-custom-parquet-file-format}
 
 ```sql
 CREATE FILE FORMAT parquet_query_format TYPE = PARQUET;
 ```
 
-- Parquet file format のその他のオプションについては、[Parquet File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options) を参照してください。
+- Parquet ファイル形式のその他のオプションについては、[Parquet ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#parquet-options) を参照してください。
 
-### Step 3. Parquet ファイルをクエリする {#step-3-query-parquet-files}
+### ステップ 3. Parquet ファイルをクエリする {#step-3-query-parquet-files}
 
 カラム名を使用してクエリします。
 

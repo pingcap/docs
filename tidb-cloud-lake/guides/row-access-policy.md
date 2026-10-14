@@ -1,11 +1,11 @@
 ---
-title: 行アクセス ポリシー
-summary: 行アクセス ポリシーは、クエリ時にテーブルの行をフィルタリングすることでデータを保護します。ブール述語を一度だけ定義してテーブルに関連付けることで、ユーザーにはポリシーを満たす行だけが表示されます。
+title: 行アクセスポリシー
+summary: 行アクセスポリシーは、クエリ時にテーブルの行をフィルタリングすることでデータを保護します。一元管理された行レベルの述語を一度定義してテーブルにアタッチすることで、ユーザーにはポリシーを満たす行だけが表示されるようにできます。
 ---
 
-# 行アクセス ポリシー
+# 行アクセスポリシー
 
-行アクセス ポリシーは、クエリ時にテーブルの行をフィルタリングします。ブール述語を一度定義してテーブルに関連付けると、ユーザーにはそのポリシーを通過した行だけが表示されます。
+行アクセスポリシーは、クエリ時にテーブルの行をフィルタリングします。ブール述語を一度定義してテーブルに関連付けると、ユーザーにはそのポリシーを通過した行だけが表示されます。
 
 行を非表示にするのではなく、カラムレベルでマスキングしたい場合は、[マスキングポリシー](/tidb-cloud-lake/guides/masking-policy.md) を使用してください。
 
@@ -79,7 +79,7 @@ ADD ROW ACCESS POLICY rap_region_dept ON (office_region, department);
 
 ## 例 {#examples}
 
-### ベクトル / RAG ドキュメント可視性 {#vector-rag-document-visibility}
+### ベクトル / RAG ドキュメント可視性 {#vector--rag-document-visibility}
 
 共有ナレッジベース テーブルとベクトル検索を組み合わせた例です。可視性を一度設定すれば、検索 SQL にドキュメント ID フィルタを含める必要はありません。[ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) を参照してください。
 
@@ -274,24 +274,24 @@ ALTER TABLE employees DROP ALL ROW ACCESS POLICIES;
 
 ## 制限事項 {#limits}
 
-- テーブルごとに 1 つの row access policy
+- テーブルごとに 1 つの行アクセスポリシー
 - 通常テーブルのみ対応 — ビュー、ストリーム、一時テーブル、ICE データベースは非対応
-- カラムごとに 1 つの security policy（masking **または** row access のいずれか一方で、両方は不可）
-- `CREATE OR REPLACE` / `ALTER` policy は非対応 — 削除して再作成が必要
-- policy 名は masking policy と row access policy の間でグローバルに一意
-- policy の引数名は作成時に小文字化される
+- カラムごとに 1 つのセキュリティポリシー（マスキング**または**行アクセスのいずれか一方で、両方は不可）
+- ポリシーの `CREATE OR REPLACE` / `ALTER` は非対応 — 削除して再作成が必要
+- ポリシー名はマスキングポリシーと行アクセスポリシーの間でグローバルに一意
+- ポリシーの引数名は作成時に小文字化される
 
 ## ベストプラクティス {#best-practices}
 
 1. `current_role()` より `IS_ROLE_IN_SESSION()` を優先してください。
 2. `CASE` の分岐は、最も広いもの → 最も狭いものの順に並べてください（admin を先頭）。
-3. policy が lookup table を参照する場合は、保護対象テーブルと同じデータベースに配置してください。
+3. ポリシーがルックアップテーブルを参照する場合は、保護対象テーブルと同じデータベースに配置してください。
 4. アタッチ後は複数のロールで検証してください — admin、制限付き、非一致。
 5. 全データの確認には、繰り返しデタッチ/アタッチするより、権限のあるロールを使うことを推奨します。
 
-## 権限と参照情報 {#privileges-references}
+## 権限と参照情報 {#privileges--references}
 
-- policy を作成するには `*.*` に対する `CREATE ROW ACCESS POLICY` が必要（作成者は OWNERSHIP を取得）
+- ポリシーを作成するには `*.*` に対する `CREATE ROW ACCESS POLICY` が必要（作成者は OWNERSHIP を取得）
 - アタッチ/デタッチするには、テーブルに対する `ALTER` と `APPLY ROW ACCESS POLICY`（グローバル）または `APPLY ON ROW ACCESS POLICY <name>` が必要
 - 監査: `SHOW GRANTS ON ROW ACCESS POLICY <name>`
 - 使用状況: [`POLICY_REFERENCES`](/tidb-cloud-lake/sql/policy-references.md)

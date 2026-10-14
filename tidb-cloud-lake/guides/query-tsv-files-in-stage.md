@@ -14,7 +14,7 @@ summary: TSV ファイルが保存されている独自の S3 バケットと認
 
 ## チュートリアル {#tutorial}
 
-### Step 1. External Stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. External Stage を作成する {#step-1-create-an-external-stage}
 
 TSV ファイルが保存されている独自の S3 バケットと認証情報を使用して external stage を作成します。
 
@@ -27,7 +27,7 @@ CONNECTION = (
 );
 ```
 
-### Step 2. カスタム TSV File Format を作成する {#step-2-create-custom-tsv-file-format}
+### ステップ 2. カスタム TSV ファイル形式を作成する {#step-2-create-custom-tsv-file-format}
 
 ```sql
 CREATE FILE FORMAT tsv_query_format
@@ -37,9 +37,9 @@ CREATE FILE FORMAT tsv_query_format
     COMPRESSION = AUTO;
 ```
 
-- TSV ファイル形式のその他のオプションについては、[TSV File Format Options](/tidb-cloud-lake/sql/input-output-file-formats.md#tsv-options) を参照してください
+- TSV ファイル形式のその他のオプションについては、[TSV ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#tsv-options) を参照してください
 
-### Step 3. TSV ファイルをクエリする {#step-3-query-tsv-files}
+### ステップ 3. TSV ファイルをクエリする {#step-3-query-tsv-files}
 
 ```sql
 SELECT $1, $2, $3

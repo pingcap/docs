@@ -13,11 +13,11 @@ Deepnote の ClickHouse 互換インテグレーションを使用すると、�
 
 このチュートリアルでは、{{{ .lake }}} を Deepnote と統合する手順を説明します。
 
-### Step 1. 環境をセットアップする {#step-1-set-up-environment}
+### ステップ 1. 環境をセットアップする {#step-1-set-up-environment}
 
 {{{ .lake }}} アカウントにログインでき、Warehouse の接続情報を取得できることを確認してください。詳細は、[Warehouse への接続](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse) を参照してください。
 
-### Step 2. {{{ .lake }}} に接続する {#step-2-connect-to-lake}
+### ステップ 2. {{{ .lake }}} に接続する {#step-2-connect-to--lake-}
 
 1. Deepnote にサインインします。アカウントを持っていない場合は作成してください。
 

@@ -1,11 +1,11 @@
 ---
 title: 監査証跡
-summary: "{{{ .lake }}} system history tables automatically capture detailed records of database activities, providing a complete audit trail for compliance and security monitoring."
+summary: "{{{ .lake }}} のシステム履歴テーブルは、データベースアクティビティの詳細な記録を自動的に取得し、コンプライアンス対応とセキュリティ監視のための完全な監査証跡を提供します。"
 ---
 
 # 監査証跡
 
-{{{ .lake }}} の system history tables は、データベースアクティビティの詳細な記録を自動的に取得し、コンプライアンス対応とセキュリティ監視のための完全な監査証跡を提供します。
+{{{ .lake }}} のシステム履歴テーブルは、データベースアクティビティの詳細な記録を自動的に取得し、コンプライアンス対応とセキュリティ監視のための完全な監査証跡を提供します。
 
 ユーザーに対して次の監査を実行できます。
 
@@ -15,7 +15,7 @@ summary: "{{{ .lake }}} system history tables automatically capture detailed rec
 
 ## 利用可能な監査テーブル {#available-audit-tables}
 
-{{{ .lake }}} は、データベースアクティビティのさまざまな側面を記録する 5 つの system history tables を提供します。
+{{{ .lake }}} は、データベースアクティビティのさまざまな側面を記録する 5 つのシステム履歴テーブルを提供します。
 
 | テーブル | 目的 | 主なユースケース |
 |-------|---------|---------------|
@@ -23,7 +23,7 @@ summary: "{{{ .lake }}} system history tables automatically capture detailed rec
 | [access_history](/tidb-cloud-lake/sql/system-history-access-history.md) | データベースオブジェクトへのアクセスと変更 | データリネージの追跡、コンプライアンス監査、変更管理 |
 | [login_history](/tidb-cloud-lake/sql/system-history-login-history.md) | 認証試行とセッション | セキュリティ監視、ログイン失敗の検出、アクセスパターン分析 |
 
-## 監査のユースケースと例 {#audit-use-cases-examples}
+## 監査のユースケースと例 {#audit-use-cases--examples}
 
 ### セキュリティ監視 {#security-monitoring}
 

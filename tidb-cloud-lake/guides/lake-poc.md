@@ -9,15 +9,15 @@ summary: スキーママッピング、クラスターキー、reclustering、�
 
 PoC は、代表的なデータサンプルと本番で使用されるクエリパターンで実行してください。クエリレイテンシー、QPS、Warehouse サイズ、ストレージサイズを記録し、各最適化を同じベースラインで比較できるようにします。
 
-## Step 1. S3 接続を設定する {#step-1-configure-an-s3-connection}
+## ステップ 1. S3 接続を設定する {#step-1-configure-an-s3-connection}
 
 ソースパイプラインがすでに Parquet、CSV、または JSON オブジェクトをオブジェクトストレージに書き込んでいる場合は、S3 バケットを使用します。**Home > Connect** で TiDB Cloud Lake デプロイメント用の IAM role ARN を取得し、[AWS IAM Role による認証](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) に従って S3 接続、stage、およびデータロードを設定します。
 
-## Step 2. PrivateLink を設定する {#step-2-configure-privatelink}
+## ステップ 2. PrivateLink を設定する {#step-2-configure-privatelink}
 
-トラフィックをプライベートネットワーク経路内に留める必要がある場合は、PrivateLink を使用します。**Home > Connect** で PrivateLink service を取得し、[AWS PrivateLink で接続する](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md) に従って接続を設定します。ロードを開始する前に、クライアントまたはソースクラスターから、エンドポイント、security-group ルール、DNS の動作、およびルートを確認してください。
+トラフィックをプライベートネットワーク経路内に留める必要がある場合は、PrivateLink を使用します。**Home > Connect** で PrivateLink サービスを取得し、[AWS PrivateLink で接続する](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md) に従って接続を設定します。ロードを開始する前に、クライアントまたはソースクラスターから、エンドポイント、セキュリティグループルール、DNS の動作、およびルートを確認してください。
 
-## Step 3. Data Pipeline を使用して TiDB Cloud Premium インスタンスから TiDB Cloud Lake にデータをレプリケートする {#step-3-use-data-pipeline-to-replicate-data-from-a-tidb-cloud-premium-instance-to-tidb-cloud-lake}
+## ステップ 3. Data Pipeline を使用して TiDB Cloud Premium インスタンスから TiDB Cloud Lake にデータをレプリケートする {#step-3-use-data-pipeline-to-replicate-data-from-a-tidb-cloud-premium-instance-to-tidb-cloud-lake}
 
 TiDB Cloud Data Pipeline を使用すると、サードパーティの ETL ツールを導入せずに、TiDB Cloud Premium インスタンスから TiDB Cloud Lake にデータをレプリケートできます。Data Pipeline はまず選択したソースデータの完全なスナップショットをエクスポートし、その後、行レベルの変更を継続的にレプリケートすることで、TiDB Cloud Lake 内のデータを最新の状態に保ちます。
 
@@ -27,11 +27,11 @@ PoC では、代表的なテーブルを選択し、それらのスキーマ、�
 
 ### ソーススキーマをマッピングして検証する {#map-and-validate-the-source-schema}
 
-ファイルをロードしたりレプリケーションを開始したりする前に、各ソースカラムと対応する Lake カラム、データ型、null 許容性、デフォルト値、および必要な変換を記録してください。decimal の精度とスケール、signed および unsigned 整数の範囲、timestamp の精度とタイムゾーン、文字列エンコーディングを確認します。ターゲット型の選択には [Lake data types reference](/tidb-cloud-lake/sql/data-types.md) を使用してください。型名が一致していても意味論が同一であるとは限りません。
+ファイルをロードしたりレプリケーションを開始したりする前に、各ソースカラムと対応する Lake カラム、データ型、null 許容性、デフォルト値、および必要な変換を記録してください。decimal の精度とスケール、signed および unsigned 整数の範囲、timestamp の精度とタイムゾーン、文字列エンコーディングを確認します。ターゲット型の選択には [Lake データ型リファレンス](/tidb-cloud-lake/sql/data-types.md) を使用してください。型名が一致していても意味論が同一であるとは限りません。
 
 null と境界値を含む小さなサンプルをロードします。同じスナップショットまたはレプリケーションチェックポイント時点で、行数、null 数、最小値と最大値、および集計結果をソースと比較してください。変換によって精度と timestamp の意味が保持されていることを確認し、完全ロードを開始する前に、拒否または切り捨てられた値を調査してください。
 
-## Step 4. 性能ベースラインを確立する {#step-4-establish-the-performance-baseline}
+## ステップ 4. 性能ベースラインを確立する {#step-4-establish-the-performance-baseline}
 
 Lake のクエリ性能に影響する主な要因は次のとおりです。
 
@@ -41,7 +41,7 @@ Lake のクエリ性能に影響する主な要因は次のとおりです。
 
 各ベースラインクエリについて `EXPLAIN` の出力を取得してください。`TableScan` が支配的な場合は、同時実行数を増やす前に、クラスターキープルーニング、オーバーラップメトリクス、ブロックサイズ、キャッシュヒット率、および Warehouse 容量を確認します。
 
-## Step 5. ワークロードに効果がある場合はクラスターキーを選択する {#step-5-choose-a-cluster-key-when-the-workload-benefits}
+## ステップ 5. ワークロードに効果がある場合はクラスターキーを選択する {#step-5-choose-a-cluster-key-when-the-workload-benefits}
 
 予測可能なフィルターや範囲スキャンを伴う大きなテーブルを作成する場合は、クラスターキーを評価してください。小さなテーブル、ランダムアクセスパターン、頻繁な変更では、メンテナンスコストを正当化できるほどの効果が得られない可能性があります。フィルター、テーブル結合、または範囲スキャンで頻繁に使用されるカラムを使い、最もよくフィルターされるカラムを先頭に配置してください。キー式は簡潔に保ちます。長い文字列には、長さを制限したプレフィックス式を使用してください。
 
@@ -66,9 +66,9 @@ ALTER TABLE lineitem CLUSTER BY (DATE_TRUNC(MONTH, l_shipdate), l_orderkey);
 ALTER TABLE lineitem RECLUSTER FINAL;
 ```
 
-キー設計の詳細については、[cluster key ガイド](/tidb-cloud-lake/guides/cluster-key-performance.md) を参照してください。
+キー設計の詳細については、[クラスターキーガイド](/tidb-cloud-lake/guides/cluster-key-performance.md) を参照してください。
 
-## Step 6. オーバーラップを監視し、`RECLUSTER FINAL` を実行する {#step-6-monitor-overlap-and-run-recluster-final}
+## ステップ 6. オーバーラップを監視し、`RECLUSTER FINAL` を実行する {#step-6-monitor-overlap-and-run-recluster-final}
 
 クラスターキーは、グローバルにソートされた単一ファイルを強制するものではありません。バルクロードや大規模な変更によって、多くのブロックがオーバーラップしたままになり、取り込みを高速に保ちながらもプルーニング効率を低下させることがあります。初期ロード後、および大きなデータ変更後に、オーバーラップメトリクスが必要性を示している場合は、次の操作を実行してください。操作中は、そのテーブルへのレプリケーションを含む書き込みを一時停止します。`RECLUSTER` の実行中は DML を実行しないでください。詳細については、[RECLUSTER TABLE](/tidb-cloud-lake/sql/recluster-table.md) を参照してください。
 
@@ -137,7 +137,7 @@ AS
 ALTER TASK lineitem_hourly RESUME;
 ```
 
-## Step 7. 適切なブロックサイズを選択する {#step-7-choose-an-appropriate-block-size}
+## ステップ 7. 適切なブロックサイズを選択する {#step-7-choose-an-appropriate-block-size}
 
 書き込みパターンに合ったブロックサイズから開始してください。
 
@@ -152,9 +152,9 @@ ALTER TABLE lineitem SET OPTIONS (BLOCK_SIZE_THRESHOLD = 536870912);
 
 これは評価の出発点であり、普遍的なデフォルトではありません。同じデータとクエリで、ロード時間、書き込みコスト、スキャンされたバイト数、およびクエリレイテンシーを比較してください。
 
-## Step 8. 繰り返し行う集計にはマテリアライズドビューを使用する {#step-8-use-materialized-views-for-repeated-aggregation}
+## ステップ 8. 繰り返し行う集計にはマテリアライズドビューを使用する {#step-8-use-materialized-views-for-repeated-aggregation}
 
-ワークロードが同じ粒度で 1 つのテーブルを繰り返し集計する場合は、マテリアライズドビューを使用して、頻繁にクエリされるディメンションを事前集計してください。ベーステーブルとビューのクラスターキーをダッシュボードの述語に合わせ、その後、同じ Warehouse とキャッシュ条件の下でベースラインとクエリを比較する前にビューを refresh します。作成時には定義が記録され、最初の refresh で物理ストレージが作成されます。
+ワークロードが同じ粒度で 1 つのテーブルを繰り返し集計する場合は、マテリアライズドビューを使用して、頻繁にクエリされるディメンションを事前集計してください。ベーステーブルとビューのクラスターキーをダッシュボードの述語に合わせ、その後、同じ warehouse とキャッシュ条件の下で、ビューに対するクエリをベースラインと比較する前に、ビューをリフレッシュします。作成時には定義が記録され、最初のリフレッシュで物理ストレージにデータが格納されます。
 
 ```sql
 CREATE TABLE fact_table (
@@ -180,4 +180,4 @@ GROUP BY tenant_id, account, category_id;
 REFRESH MATERIALIZED VIEW mv_account_totals;
 ```
 
-マテリアライズドビューは、単一テーブルの集計に最も適しています。詳細については、[TiDB Cloud Lake materialized view documentation](/tidb-cloud-lake/sql/materialized-view.md) を参照してください。
+マテリアライズドビューは、単一テーブルの集計に最も適しています。詳細については、[TiDB Cloud Lake のマテリアライズドビューのドキュメント](/tidb-cloud-lake/sql/materialized-view.md) を参照してください。

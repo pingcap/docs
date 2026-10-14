@@ -1,6 +1,6 @@
 ---
 title: stage からのロード
-summary: "{{{ .lake }}} では、user stage または internal/external stage にアップロードされたファイルからデータを簡単にインポートできます。これを行うには、まず LakeSQL を使用してファイルを stage にアップロードし、その後 [COPY INTO] コマンドを使用して stage 上のファイルからデータをロードできます。ファイルは {{{ .lake }}} がサポートする形式である必要があり、そうでない場合はデータをインポートできません。{{{ .lake }}} がサポートするファイル形式の詳細については、Input & Output File Formats を参照してください。"
+summary: "{{{ .lake }}} では、user stage または internal/external stage にアップロードされたファイルからデータを簡単にインポートできます。これを行うには、まず LakeSQL を使用してファイルを stage にアップロードし、その後 COPY INTO コマンドを使用して stage 上のファイルからデータをロードできます。ファイルは {{{ .lake }}} がサポートする形式である必要があり、そうでない場合はデータをインポートできません。{{{ .lake }}} がサポートするファイル形式の詳細については、入出力ファイル形式を参照してください。"
 ---
 
 # stage からのロード
@@ -189,7 +189,7 @@ Readings in Database Systems|Michael Stonebraker|2004|
     my_external_stage|External  |'root'@'%'|       |
     ```
 
-### Step 2. サンプルファイルをアップロードする {#step-2-upload-sample-file}
+### ステップ 2. サンプルファイルをアップロードする {#step-2-upload-sample-file-1}
 
 1. [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) を使用してサンプルファイルをアップロードします。
 
@@ -214,7 +214,7 @@ Readings in Database Systems|Michael Stonebraker|2004|
     books.parquet| 998|"88432bf90aadb79073682988b39d461c"|2023-06-28 04:13:15.178 +0000|       |
     ```
 
-### Step 3. テーブルにデータをコピーする {#step-3-copy-data-into-table}
+### ステップ 3. テーブルにデータをコピーする {#step-3-copy-data-into-table-1}
 
 1. [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) コマンドを使用して、対象テーブルにデータをロード (load) します。
 

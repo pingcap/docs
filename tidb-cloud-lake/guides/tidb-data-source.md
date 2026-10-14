@@ -42,7 +42,7 @@ TiDB Cloud は、完全スナップショット (Dumpling) と増分変更 (TiCD
 
 Role ARN は AssumeRole モデルを使用します。TiDB Cloud Lake は AWS アカウント内の IAM Role を引き受けて一時的な認証情報を取得するため、静的キーを TiDB Cloud Lake に渡す必要がありません。
 
-データソースを保存する前に、IAM Role の信頼ポリシーで 2 つのプラットフォームロール (TiDB Cloud Lake のセットアップおよび検証ロール、ならびに TiDB Cloud Lake のデータロード用ロール) を信頼し、`sts:ExternalId` 条件に対応する External ID を指定する必要があります。完全な信頼ポリシー設定については、[AWS IAM Role による認証](https://docs.pingcap.com/tidbcloudlake/authenticate-with-aws-iam-role/) を参照してください。
+データソースを保存する前に、IAM Role の信頼ポリシーで 2 つのプラットフォームロール (TiDB Cloud Lake のセットアップおよび検証ロール、ならびに TiDB Cloud Lake のデータロード用ロール) を信頼し、`sts:ExternalId` 条件に対応する外部 ID を指定する必要があります。完全な信頼ポリシー設定については、[AWS IAM Role による認証](https://docs.pingcap.com/tidbcloudlake/authenticate-with-aws-iam-role/) を参照してください。
 
 | フィールド | 必須 | 説明 |
 | ------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -55,7 +55,7 @@ Role ARN は AssumeRole モデルを使用します。TiDB Cloud Lake は AWS �
 | **S3 Endpoint**           | いいえ       | MinIO などの S3 互換ストレージでのみ使用します。例: `http://localhost:9000`。Amazon S3 の場合は空のままにします                                 |
 | **SQS Queue URL**         | いいえ       | イベント駆動モード用のオプションの SQS 標準キュー URL。[オプションの SQS キュー](#optional-sqs-queue) を参照してください                                         |
 
-### 認証方式: Access Key / Secret Key {#authentication-method-access-key-secret-key}
+### 認証方式: Access Key / Secret Key {#authentication-method-access-key--secret-key}
 
 この方式は、たとえばロール引き受けをサポートしない S3 互換ストアなど、静的認証情報を使用したい場合に利用します。
 
@@ -99,4 +99,4 @@ Role ARN は AssumeRole モデルを使用します。TiDB Cloud Lake は AWS �
 
 ## 次のステップ {#next-steps}
 
-このデータソースを作成した後、それを使用して [TiDB Integration Task](/tidb-cloud-lake/guides/integrate-with-tidb.md) を作成できます。
+このデータソースを作成した後、それを使用して [TiDB 統合タスク](/tidb-cloud-lake/guides/integrate-with-tidb.md) を作成できます。

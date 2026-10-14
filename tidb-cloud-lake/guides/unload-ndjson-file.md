@@ -22,12 +22,12 @@ FILE_FORMAT = (
 ```
 
 - NDJSON のその他のオプションについては、[NDJSON ファイル形式オプション](/tidb-cloud-lake/sql/input-output-file-formats.md#ndjson-options) を参照してください
-- 複数ファイルへのアンロードには、[MAX_FILE_SIZE Copy Option](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions) を使用します
+- 複数ファイルへのアンロードには、[MAX_FILE_SIZE コピーオプション](/tidb-cloud-lake/sql/copy-into-location.md#copyoptions) を使用します
 - 構文の詳細については、[COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください
 
 ## チュートリアル {#tutorial}
 
-### Step 1. 外部 stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
 ```sql
 CREATE STAGE ndjson_unload_stage
@@ -38,7 +38,7 @@ CONNECTION = (
 );
 ```
 
-### Step 2. カスタム NDJSON ファイル形式を作成する {#step-2-create-custom-ndjson-file-format}
+### ステップ 2. カスタム NDJSON ファイル形式を作成する {#step-2-create-custom-ndjson-file-format}
 
 ```
 CREATE FILE FORMAT ndjson_unload_format
@@ -46,7 +46,7 @@ CREATE FILE FORMAT ndjson_unload_format
     COMPRESSION = gzip;     -- Unload with gzip compression
 ```
 
-### Step 3. NDJSON ファイルにアンロードする {#step-3-unload-into-ndjson-file}
+### ステップ 3. NDJSON ファイルにアンロードする {#step-3-unload-into-ndjson-file}
 
 ```sql
 COPY INTO @ndjson_unload_stage
@@ -68,7 +68,7 @@ DETAILED_OUTPUT = true;
 └─────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Step 4. アンロードされた NDJSON ファイルを確認する {#step-4-verify-the-unloaded-ndjson-files}
+### ステップ 4. アンロードされた NDJSON ファイルを確認する {#step-4-verify-the-unloaded-ndjson-files}
 
 ```sql
 SELECT COUNT($1)

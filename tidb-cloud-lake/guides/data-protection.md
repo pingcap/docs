@@ -7,7 +7,7 @@ summary: TiDB Cloud Lake の Continuous Data Protection (CDP) は、ミス、悪
 
 {{{ .lake }}} の Continuous Data Protection (CDP) は、ミス、悪意のある操作、ソフトウェアの問題からデータを安全に保つための使いやすい機能を提供します。これにより、データが意図的または偶発的に変更、消失、破損した場合でも、常に復元できるようにします。
 
-## {{{ .lake }}} の CDP 機能 {#cdp-features-in-lake}
+## {{{ .lake }}} の CDP 機能 {#cdp-features-in--lake-}
 
 - [ネットワークポリシー](/tidb-cloud-lake/guides/network-policy.md)
     - インターネットアドレスに基づいて、だれが {{{ .lake }}} にアクセスできるかを設定します。データの安全性向上に役立ちます。

@@ -7,10 +7,10 @@ summary: 保存された値を変更せずに機密情報を保護する、マ�
 
 {{{ .lake }}} は、保存された値を変更することなく、クエリ実行時に機密データを保護します。
 
-| Policy | 役割 |
+| ポリシー | 役割 |
 |--------|----------------|
 | [マスキングポリシー](/tidb-cloud-lake/guides/masking-policy.md) | カラム値を変換します — 権限のないユーザーにはマスクされたデータが表示されます |
-| [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md) | 行全体をフィルタリングします — 権限のないユーザーには行自体が表示されません |
+| [行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md) | 行全体をフィルタリングします — 権限のないユーザーには行自体が表示されません |
 
 どちらもアプリケーションに対して透過的です。コード変更、追加のビュー、データコピーは不要です。
 
@@ -53,7 +53,7 @@ Query
 | 影響対象 | `SELECT` | `SELECT`, `UPDATE`, `DELETE`, `MERGE` |
 | 保存データ / `INSERT` | 変更なし / フィルタなし | 変更なし / フィルタなし |
 
-同じテーブルで両方を使用できます。ただし、同じ **column** を両方にバインドすることはできません。
+同じテーブルで両方を使用できます。ただし、同じ**カラム**を両方にバインドすることはできません。
 
 ```sql
 -- Rows: sales only see their region
@@ -81,7 +81,7 @@ ALTER TABLE customers MODIFY COLUMN ssn SET MASKING POLICY mask_ssn;
 
 RBAC を両方のポリシーと組み合わせることで、作成者、適用者、閲覧者を分離したままにできます。
 
-| Role | 役割 | 表示内容 |
+| ロール | 職務 | 表示内容 |
 |------|-----|------|
 | `security_admin` | ポリシーを作成 / 所有する | テーブルの SELECT なし |
 | `data_engineer` | テーブルを所有し、ポリシーをアタッチする | 全行、phone は生データ |
@@ -164,11 +164,11 @@ GRANT SELECT ON ecommerce.orders TO ROLE support_global;
 
 結果:
 
-| 役割 | 行 | Phone |
+| ロール | 行 | Phone |
 |------|------|-------|
 | `analyst_apac` | APAC のみ | マスク済み (`138****5678`) |
 | `support_global` | すべて | 生データ |
-| `security_admin` | — | 権限拒否 (no SELECT) |
+| `security_admin` | — | アクセス不可（SELECT 権限なし） |
 
 ```sql
 SET ROLE analyst_apac;
@@ -190,7 +190,7 @@ SELECT * FROM ecommerce.orders;
 REVOKE ROLE analyst_apac FROM USER analyst_user;
 ```
 
-**Rules of thumb:**
+**要点:**
 
 - ポリシーの作成 ≠ データのクエリ実行。アタッチには、ポリシーの `APPLY` とテーブルの `ALTER` の **両方** が必要です
 - ユーザーではなくロールに権限を付与することを推奨します
@@ -201,4 +201,4 @@ REVOKE ROLE analyst_apac FROM USER analyst_user;
 ## 次のステップ {#next-steps}
 
 - [マスキングポリシー](/tidb-cloud-lake/guides/masking-policy.md) — 条件付きマスキング、VARIANT キー
-- [行アクセス ポリシー](/tidb-cloud-lake/guides/row-access-policy.md) — ベクトル / RAG の可視性、時間ウィンドウ、DML
+- [行アクセスポリシー](/tidb-cloud-lake/guides/row-access-policy.md) — ベクトル / RAG の可視性、時間ウィンドウ、DML

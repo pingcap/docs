@@ -46,7 +46,7 @@ tokio = { version = "1", features = ["full"] }
 | VARCHAR   | String                | UTF-8 エンコード         |
 | BINARY    | `Vec<u8>`             |                          |
 
-### 日付/時刻型 {#date-time-types}
+### 日付/時刻型 {#datetime-types}
 
 | {{{ .lake }}} | Rust                  | 注記                     |
 | --------- | --------------------- | ------------------------ |
