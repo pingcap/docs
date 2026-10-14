@@ -24,7 +24,7 @@ You can access support through multiple channels:
 | Feature                                                | Personal | Business | Dedicated |
 | ------------------------------------------------------ | -------- | -------- | --------- |
 | Logging and tracking support tickets                   | ✓        | ✓        | ✓         |
-| 24/7 coverage and response window for Severity 1 issues | 24 hours | 8 hours  | 4 hours   |
+| 4/7 coverage and response window for Severity 1 issues | 24 hours | 8 hours  | 4 hours   |
 | Response to non-severity-1 issues                      | 48 hours | 24 hours | 8 hours   |
 
 ### Severity Levels
