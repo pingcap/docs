@@ -12,7 +12,7 @@ If you [mount the file system](/tidb-cloud-filesystem/filesystem-mount.md) to yo
 
 ## Prerequisites
 
-The following prerequisites apply to CLI operations. If you only need to browse file metadata in the TiDB Cloud console, see [View files](#view-files-via-the-console).
+The following prerequisites apply to CLI operations. If you only need to browse file metadata in the TiDB Cloud console, see [View files](#view-files).
 
 - [Install TiDB Cloud CLI](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli).
 - [Create a file system](/tidb-cloud-filesystem/manage-filesystem-resources.md) or obtain access to an existing one.

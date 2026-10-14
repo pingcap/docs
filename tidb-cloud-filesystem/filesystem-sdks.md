@@ -1,9 +1,9 @@
 ---
-title: SDKs
+title: TiDB Cloud Filesystem SDKs
 summary: Learn how TiDB Cloud Filesystem relates to the Drive9 workspace engine and find client SDK documentation for six programming languages.
 ---
 
-# SDKs
+# TiDB Cloud Filesystem SDKs
 
 TiDB Cloud Filesystem uses the Drive9 workspace engine to run file system operations. TiDB Cloud Filesystem is PingCAP's official hosted Drive9 service on TiDB Cloud. Drive9 is an open-source, community-based project owned by PingCAP, and TiDB Cloud Filesystem is its managed cloud service. At the API and SDK layers, you directly invoke the drive9 endpoints exposed by TiDB Cloud Filesystem service. 
 
@@ -11,14 +11,14 @@ Drive9 is an open-source project (Apache 2.0) maintained in the [mem9-ai/drive9 
 
 The SDK guides describe how a client connects to a Drive9 server, including how to provide the server URL and an API key.
 
-The API Keys mentioned in Drive9 SDK/API documentations.
+The following table shows which TiDB Cloud Filesystem credential to use. When an SDK guide asks for an API key, use a file system token.
 
 |TiDB Cloud Filesystem Object|Drive9 SDK/API Usage|
 |:--|:--|
 |TiDB Cloud API Key|File system control plane actions|
 |File System Token|File system data plane actions|
 
-Available server URL for Drive9 SDK/API server URL to TiDB Cloud Filesystem regions.
+Use the following server URL for each TiDB Cloud Filesystem region.
 
 | TiDB Cloud Filesystem Region| Server URL for Drive9 SDK/API | API Key|
 |:--|:--|:--|
@@ -28,6 +28,8 @@ Available server URL for Drive9 SDK/API server URL to TiDB Cloud Filesystem regi
 |`gcp-us-east1`|`https://gcp-us-east1.drive9.ai`| FS token|
 |`azure-centralus`|`https://azure-centralus.drive9.ai`|FS token|
 |`alicloud-ap-southeast-1`|`https://alicloud-ap-southeast-1.drive9.ai`|FS token|
+
+Always set the SDK server URL to the endpoint of the region where your file system is located. If you do not set a server URL, most SDKs fall back to `https://api.drive9.ai`, which is not a TiDB Cloud Filesystem endpoint and rejects TiDB Cloud Filesystem tokens. A file system token works only with the endpoint of its own region.
 
 ## Available SDKs
 
