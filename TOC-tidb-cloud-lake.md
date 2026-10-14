@@ -1091,7 +1091,7 @@
         - [SLICE](/tidb-cloud-lake/sql/slice.md)
         - [UNNEST](/tidb-cloud-lake/sql/unnest.md)
       - オブジェクト関数
-        - [Object 関数](/tidb-cloud-lake/sql/object-functions.md)
+        - [オブジェクト関数](/tidb-cloud-lake/sql/object-functions.md)
         - [OBJECT_CONSTRUCT](/tidb-cloud-lake/sql/object-construct.md)
         - [OBJECT_CONSTRUCT_KEEP_NULL](/tidb-cloud-lake/sql/object-construct-keep-null.md)
         - [OBJECT_DELETE](/tidb-cloud-lake/sql/object-delete.md)
