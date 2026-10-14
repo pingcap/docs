@@ -28,7 +28,7 @@ To view the current usage of a file system, go to its overview page in the [TiDB
 
 ## When a file system reaches a limit
 
-When a file system reaches a limit, existing files remain readable, but the file system stops accepting new writes. The TiDB Cloud console shows a warning.
+When a file system reaches its storage or file count limit, existing files remain readable, but the file system stops accepting new writes. A single file cannot grow beyond the file size limit. The one-file-system-per-region limit applies when you create another file system in that region. The TiDB Cloud console shows a warning.
 
 ## Update the usage limit
 

@@ -174,7 +174,7 @@ With owner token authentication, these two commands can change only scoped token
 
 ## Rotate or revoke a token
 
-To rotate or revoke a token, it is recommended to use the CLI commands. The TiDB Cloud console does not offer the `refresh-file-system-token` operation of the CLI.
+To rotate a token, use the CLI, because the TiDB Cloud console does not provide the `refresh-file-system-token` operation. To revoke a token, use either the CLI or the console.
 
 <SimpleTab>
 
