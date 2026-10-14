@@ -88,7 +88,7 @@
         - ロジック最適化
           - [概要](/sql-logical-optimization.md)
           - [サブクエリ関連の最適化](/subquery-optimization.md)
-          - [カラムの剪定](/column-pruning.md)
+          - [列プルーニング](/column-pruning.md)
           - [相関サブクエリのデコヒーレンス](/correlated-subquery-optimization.md)
           - [最大値/最小値を削除する](/max-min-eliminate.md)
           - [Predicate Push Down](/predicate-push-down.md)
