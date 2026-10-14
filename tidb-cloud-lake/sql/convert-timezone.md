@@ -5,7 +5,7 @@ summary: タイムスタンプをあるタイムゾーンから別のタイム�
 
 # CONVERT_TIMEZONE
 
-`CONVERT_TIMEZONE()` は、タイムスタンプを現在のセッションタイムゾーン（デフォルトは `UTC`）から、第 1 引数で指定したタイムゾーンに変換します。変換先のタイムゾーンは、有効な [IANA timezone name](https://docs.rs/chrono-tz/latest/chrono_tz/enum.Tz.html) である必要があります。
+`CONVERT_TIMEZONE()` は、タイムスタンプを現在のセッションタイムゾーン（デフォルトは `UTC`）から、第 1 引数で指定したタイムゾーンに変換します。変換先のタイムゾーンは、有効な [IANA タイムゾーン名](https://docs.rs/chrono-tz/latest/chrono_tz/enum.Tz.html) である必要があります。
 
 ## 構文 {#syntax}
 
@@ -44,7 +44,7 @@ SELECT CONVERT_TIMEZONE('America/Los_Angeles', '2024-11-01 11:36:10');
 └──────────────────────────────────────────────────────┘
 ```
 
-### 各ユーザーのタイムゾーンを使って行を変換する {#convert-rows-using-each-user-s-timezone}
+### 各ユーザーのタイムゾーンを使って行を変換する {#convert-rows-using-each-users-timezone}
 
 ```sql
 SELECT

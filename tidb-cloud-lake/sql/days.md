@@ -17,7 +17,7 @@ TO_DAYS(<days>)
 
 ## 戻り値の型 {#return-type}
 
-Interval（day 単位で表現）。
+Interval（日単位で表現）。
 
 ## 例 {#examples}
 

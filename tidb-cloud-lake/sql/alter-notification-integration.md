@@ -34,7 +34,7 @@ ALTER NOTIFICATION INTEGRATION [ IF NOT EXISTS ] <name> SET
 
 ## 例 {#examples}
 
-### Webhook 通知 {#webhook-notification}
+### Webhook 通知 {#webhook-notification-1}
 
 ```sql
 ALTER NOTIFICATION INTEGRATION SampleNotification SET enabled = true

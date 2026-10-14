@@ -33,7 +33,7 @@ CREATE [ OR REPLACE ] DATABASE [ IF NOT EXISTS ] <database_name>
 
 | 権限       | オブジェクトタイプ | 説明         |
 |:----------------|:------------|:--------------------|
-| CREATE DATABASE | Global      | データベースを作成します。 |
+| CREATE DATABASE | グローバル  | データベースを作成します。 |
 
 データベースを作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が CREATE DATABASE [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 

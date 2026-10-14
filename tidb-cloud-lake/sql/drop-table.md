@@ -7,7 +7,7 @@ summary: テーブルを削除します。
 
 テーブルを削除します。
 
-**See also:**
+**関連情報:**
 
 - [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md)
 - [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md)

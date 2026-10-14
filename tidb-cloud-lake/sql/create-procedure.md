@@ -35,9 +35,9 @@ $$;
 
 ## アクセス制御要件 {#access-control-requirements}
 
-| Privilege        | Object Type | 説明          |
+| 権限        | オブジェクトタイプ | 説明          |
 |:-----------------|:------------|:---------------------|
-| CREATE PROCEDURE | Global      | プロシージャを作成します。 |
+| CREATE PROCEDURE | グローバル  | プロシージャを作成します。 |
 
 プロシージャを作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が CREATE PROCEDURE [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 

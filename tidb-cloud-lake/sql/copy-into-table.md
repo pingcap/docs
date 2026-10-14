@@ -7,7 +7,7 @@ summary: COPY INTO を使用すると、以下のいずれかの場所にある�
 
 COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロード (load) できます。
 
-- User / Internal / External stages: {{{ .lake }}} の stage については、[What is Stage?](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
+- User / Internal / External stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
 - ストレージサービスで作成されたバケットまたはコンテナ。
 - URL（`https://` で始まる）でファイルにアクセスできるリモートサーバー。
 - [IPFS](https://ipfs.tech) および Hugging Face リポジトリ。
@@ -191,9 +191,9 @@ copyOptions ::=
 
 - **PATTERN**: 一致させるファイル名を指定する、[PCRE2](https://www.pcre.org/current/doc/html/) ベースの正規表現パターン文字列です。stage からロードする場合、このパターンは `@<stage_name>[/<path>]` より後ろのファイルパス部分に対して一致します。[PATTERN を使用した stage ファイルのフィルタリング](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern) および [例 4: PATTERN を使用したファイルのフィルタリング](#example-4-filtering-files-with-pattern) を参照してください。
 
-## Format Type Options {#format-type-options}
+## フォーマットタイプのオプション {#format-type-options}
 
-`FILE_FORMAT` パラメータはさまざまなファイルタイプをサポートしており、それぞれに固有のフォーマットオプションがあります。以下に、サポートされている各ファイル形式で使用可能なオプションを示します。すべてのオプションの詳細については、[Input & Output File Formats](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
+`FILE_FORMAT` パラメータはさまざまなファイルタイプをサポートしており、それぞれに固有のフォーマットオプションがあります。以下に、サポートされている各ファイル形式で使用可能なオプションを示します。すべてのオプションの詳細については、[入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
 
 <SimpleTab>
 
@@ -283,7 +283,7 @@ copyOptions ::=
 </div>
 </SimpleTab>
 
-## Copy Options {#copy-options}
+## コピーオプション {#copy-options}
 
 | パラメータ | 説明 | デフォルト |
 |-----------|-------------|----------|
@@ -296,7 +296,7 @@ copyOptions ::=
 | COLUMN_MATCH_MODE | Parquet 用: カラム名のマッチングモード | `case-insensitive` |
 | SCHEMA_EVOLUTION | NDJSON 用: ターゲットテーブルに存在しないカラムを推論するために使用されるサンプリングオプション。`ENABLE_SCHEMA_EVOLUTION = true` と、ターゲットテーブルに対する `ALTER` 権限が必要です。 | `AUTO` サンプリング |
 
-### SCHEMA_EVOLUTION Options {#schema-evolution-options}
+### SCHEMA_EVOLUTION のオプション {#schema_evolution-options}
 
 `SCHEMA_EVOLUTION` は、{{{ .lake }}} がロード前に stage 上の NDJSON ファイルをどのようにサンプリングするかを制御します。ターゲットテーブルで `ENABLE_SCHEMA_EVOLUTION = true` が設定されている場合に、`FILE_FORMAT = (TYPE = NDJSON ...)` と組み合わせて使用します。
 
@@ -314,11 +314,11 @@ stage または location のロードで schema evolution の推論が実行さ�
 >
 > ログのような大量のデータをインポートする場合は、`PURGE` と `FORCE` の両方を `true` に設定することを推奨します。これにより、Meta server とのやり取り（copied-files セットの更新）を必要とせず、効率的にデータをインポートできます。ただし、これにより重複データがインポートされる可能性がある点に注意してください。
 
-## Output {#output}
+## 出力 {#output}
 
 COPY INTO は、以下のカラムを含むデータロード結果のサマリーを提供します。
 
-| カラム           | Type    | Nullable | Description                                     |
+| カラム           | 型    | NULL 許容 | 説明                                     |
 | ---------------- | ------- | -------- | ----------------------------------------------- |
 | FILE             | VARCHAR | NO       | ソースファイルへの相対パス。                    |
 | ROWS_LOADED      | INT     | NO       | ソースファイルからロードされた行数。            |
@@ -328,11 +328,11 @@ COPY INTO は、以下のカラムを含むデータロード結果のサマリ�
 
 `RETURN_FAILED_ONLY` が `true` に設定されている場合、出力にはロードに失敗したファイルのみが含まれます。
 
-## Examples {#examples}
+## 例 {#examples}
 
 外部ストレージソースでは、COPY 文で認証情報を直接指定する代わりに、`CONNECTION_NAME` パラメータを使用して事前作成済みの接続を利用することを推奨します。この方法により、セキュリティ、管理性、再利用性が向上します。接続の作成方法の詳細については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 
-### Example 1: Loading from Stages {#example-1-loading-from-stages}
+### 例 1: stage からのロード {#example-1-loading-from-stages}
 
 以下の例は、さまざまな種類の stage から {{{ .lake }}} にデータをロードする方法を示しています。
 

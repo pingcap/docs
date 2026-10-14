@@ -7,7 +7,7 @@ summary: このセクションでは、{{{ .lake }}} の配列関数に関する
 
 このセクションでは、{{{ .lake }}} の配列関数に関するリファレンス情報を提供します。配列関数を使用すると、配列データ構造の作成、操作、検索、変換を行えます。
 
-## 配列の作成と構築 {#array-creation-construction}
+## 配列の作成と構築 {#array-creation--construction}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -16,7 +16,7 @@ summary: このセクションでは、{{{ .lake }}} の配列関数に関する
 | [RANGE](/tidb-cloud-lake/sql/range.md) | 連続した数値の配列を生成します | `RANGE(1, 5)` → `[1,2,3,4]` |
 | [ARRAY_GENERATE_RANGE](/tidb-cloud-lake/sql/array-generate-range.md) | オプションのステップを指定してシーケンスを生成します | `ARRAY_GENERATE_RANGE(0, 6, 2)` → `[0,2,4]` |
 
-## 配列へのアクセスと情報取得 {#array-access-information}
+## 配列へのアクセスと情報取得 {#array-access--information}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -39,7 +39,7 @@ summary: このセクションでは、{{{ .lake }}} の配列関数に関する
 | [ARRAY_REMOVE_FIRST](/tidb-cloud-lake/sql/array-remove-first.md) | 配列の最初の要素を削除します | `ARRAY_REMOVE_FIRST([1,2,3])` → `[2,3]` |
 | [ARRAY_REMOVE_LAST](/tidb-cloud-lake/sql/array-remove-last.md) | 配列の最後の要素を削除します | `ARRAY_REMOVE_LAST([1,2,3])` → `[1,2]` |
 
-## 配列の結合と操作 {#array-combination-manipulation}
+## 配列の結合と操作 {#array-combination--manipulation}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -59,7 +59,7 @@ summary: このセクションでは、{{{ .lake }}} の配列関数に関する
 | [ARRAY_EXCEPT](/tidb-cloud-lake/sql/array-except.md) | 1 つ目の配列にあり、2 つ目の配列にない要素を返します | `ARRAY_EXCEPT([1,2,3], [2,4])` → `[1,3]` |
 | [ARRAY_OVERLAP](/tidb-cloud-lake/sql/array-overlap.md) | 配列同士に共通要素があるかを確認します | `ARRAY_OVERLAP([1,2,3], [3,4,5])` → `true` |
 
-## 配列の処理と変換 {#array-processing-transformation}
+## 配列の処理と変換 {#array-processing--transformation}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -68,7 +68,7 @@ summary: このセクションでは、{{{ .lake }}} の配列関数に関する
 | [ARRAY_REDUCE](/tidb-cloud-lake/sql/array-reduce.md) | 集計を使用して配列を単一の値に縮約します | `ARRAY_REDUCE([1,2,3], 0, (acc,x) -> acc + x)` → `6` |
 | [ARRAY_AGGREGATE](/tidb-cloud-lake/sql/array-aggregate.md) | 関数を使用して配列要素を集計します | `ARRAY_AGGREGATE([1,2,3], 'sum')` → `6` |
 
-## 配列の集計と統計 {#array-aggregations-statistics}
+## 配列の集計と統計 {#array-aggregations--statistics}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|

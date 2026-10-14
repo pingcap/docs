@@ -56,7 +56,7 @@ ALTER USER <name> WITH UNSET WORKLOAD GROUP
 
 ## 例 {#examples}
 
-### 例 1: パスワードと認証タイプの変更 {#example-1-changing-password-authentication-type}
+### 例 1: パスワードと認証タイプの変更 {#example-1-changing-password--authentication-type}
 
 ```sql
 CREATE USER user1 IDENTIFIED BY 'abc123';
@@ -87,7 +87,7 @@ show users;
 +-------+----------+-------------+---------------+
 ```
 
-### 例 2: ネットワークポリシーの設定と解除 {#example-2-setting-unsetting-network-policy}
+### 例 2: ネットワークポリシーの設定と解除 {#example-2-setting--unsetting-network-policy}
 
 ```sql
 SHOW NETWORK POLICIES;
@@ -136,7 +136,7 @@ show roles;
 └───────────────────────────────────────────────────────┘
 ```
 
-### 例 2: Workload Group の設定と解除 {#example-2-setting-unsetting-workload-group}
+### 例 2: Workload Group の設定と解除 {#example-2-setting--unsetting-workload-group}
 
 ```sql
 CREATE USER user1 IDENTIFIED BY 'abc123';

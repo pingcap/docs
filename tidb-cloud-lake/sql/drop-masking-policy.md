@@ -1,11 +1,11 @@
 ---
 title: DROP MASKING POLICY
-summary: "{{{ .lake }}} から既存の masking policy を削除します。masking policy を削除すると、その policy は {{{ .lake }}} から削除され、関連付けられている masking ルールは効力を失います。masking policy を削除する前に、その policy がどのカラムにも関連付けられていないことを確認してください。"
+summary: "{{{ .lake }}} から既存のマスキングポリシーを削除します。マスキングポリシーを削除すると、そのポリシーは {{{ .lake }}} から削除され、関連付けられているマスキングルールは効力を失います。マスキングポリシーを削除する前に、そのポリシーがどのカラムにも関連付けられていないことを確認してください。"
 ---
 
 # DROP MASKING POLICY
 
-{{{ .lake }}} から既存の masking policy を削除します。masking policy を削除すると、その policy は {{{ .lake }}} から削除され、関連付けられている masking ルールは効力を失います。masking policy を削除する前に、その policy がどのカラムにも関連付けられていないことを確認してください。
+{{{ .lake }}} から既存のマスキングポリシーを削除します。マスキングポリシーを削除すると、そのポリシーは {{{ .lake }}} から削除され、関連付けられているマスキングルールは効力を失います。マスキングポリシーを削除する前に、そのポリシーがどのカラムにも関連付けられていないことを確認してください。
 
 ## 構文 {#syntax}
 
@@ -15,11 +15,11 @@ DROP MASKING POLICY [ IF EXISTS ] <policy_name>
 
 ## アクセス制御の要件 {#access-control-requirements}
 
-| Privilege | 説明 |
+| 権限 | 説明 |
 |:----------|:------------|
-| APPLY MASKING POLICY | その policy の所有者でない限り、masking policy を削除するには必要です。 |
+| APPLY MASKING POLICY | そのポリシーの所有者でない限り、マスキングポリシーを削除するには必要です。 |
 
-グローバルな `APPLY MASKING POLICY` 権限、または対象 policy に対する APPLY/OWNERSHIP が必要です。policy が削除されると、{{{ .lake }}} は作成者ロールから OWNERSHIP を自動的に取り消します。
+グローバルな `APPLY MASKING POLICY` 権限、または対象ポリシーに対する APPLY/OWNERSHIP が必要です。ポリシーが削除されると、{{{ .lake }}} は作成者ロールから OWNERSHIP を自動的に取り消します。
 
 ## 例 {#examples}
 

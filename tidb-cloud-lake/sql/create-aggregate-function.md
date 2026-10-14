@@ -52,11 +52,11 @@ $$
 |:----------|:--------------|:---------------|
 | SUPER     | グローバル、テーブル | UDF を操作する |
 
-ユーザー定義関数を作成するには、操作を実行するユーザー、または [current_role](/tidb-cloud-lake/guides/roles.md) が SUPER [privilege](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
+ユーザー定義関数を作成するには、操作を実行するユーザー、または [current_role](/tidb-cloud-lake/guides/roles.md) が SUPER [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 
 ## 例 {#examples}
 
-### Python average UDAF {#python-average-udaf}
+### Python の平均値 UDAF {#python-average-udaf}
 
 次の Python 集計は、カラムの平均を計算します。
 
@@ -102,7 +102,7 @@ SELECT py_avg(number) AS avg_val FROM numbers(5);
 +---------+
 ```
 
-### JavaScript average UDAF {#javascript-average-udaf}
+### JavaScript の平均値 UDAF {#javascript-average-udaf}
 
 次の例は、同じ計算を JavaScript で実装したものです。
 

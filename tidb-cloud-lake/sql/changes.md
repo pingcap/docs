@@ -37,7 +37,7 @@ FROM ...
 
 ## 変更追跡の有効化 {#enabling-change-tracking}
 
-CHANGES 句を使用するには、テーブルで Fuse エンジンオプション `change_tracking` を `true` に設定しておく必要があります。`change_tracking` オプションの詳細については、[Fuse Engine Options](/tidb-cloud-lake/sql/table-engines.md#available-engines) を参照してください。
+CHANGES 句を使用するには、テーブルで Fuse エンジンオプション `change_tracking` を `true` に設定しておく必要があります。`change_tracking` オプションの詳細については、[Fuse Engine オプション](/tidb-cloud-lake/sql/table-engines.md#available-engines) を参照してください。
 
 ```sql title='Example:'
 -- Enable change tracking for table 't'

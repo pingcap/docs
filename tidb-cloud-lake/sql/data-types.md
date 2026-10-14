@@ -22,7 +22,7 @@ summary: "{{{ .lake }}} は強い型付けを持つカラムにデータを格�
 | [DOUBLE](/tidb-cloud-lake/sql/numeric.md#floating-point-data-types) | –       | 8 バイト (Float64)               | -1.79e308                | 1.79e308                       |
 | [DECIMAL](/tidb-cloud-lake/sql/decimal.md)                      | –          | 16/32 バイト (精度 ≤38/76)   | `-(10^P-1)/10^S`         | `(10^P-1)/10^S`                |
 
-## 日付・時刻型 {#date-time-types}
+## 日付・時刻型 {#date--time-types}
 
 | データ型                 | エイリアス     | 精度 / 備考                   |
 |---------------------------|-----------|--------------------------------------|
@@ -31,7 +31,7 @@ summary: "{{{ .lake }}} は強い型付けを持つカラムにデータを格�
 | [TIMESTAMP_TZ](/tidb-cloud-lake/sql/datetime.md) | –       | マイクロ秒 + オフセットを保存          |
 | [INTERVAL](/tidb-cloud-lake/sql/interval.md)   | –         | マイクロ秒、負の期間をサポート |
 
-## 構造化型・半構造化型 {#structured-semi-structured-types}
+## 構造化型・半構造化型 {#structured--semi-structured-types}
 
 | データ型             | サンプル                                | 説明 |
 |-----------------------|----------------------------------------|-------------|

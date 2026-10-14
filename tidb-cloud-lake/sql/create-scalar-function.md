@@ -1,13 +1,13 @@
 ---
 title: CREATE SCALAR FUNCTION
-summary: スカラー user-defined function（Scalar UDF）を作成します。同じ CREATE FUNCTION ステートメントで 2 つの実装スタイルをサポートします。
+summary: スカラーユーザー定義関数（Scalar UDF）を作成します。同じ CREATE FUNCTION ステートメントで 2 つの実装スタイルをサポートします。
 ---
 
 # CREATE SCALAR FUNCTION
 
-スカラー user-defined function（Scalar UDF）を作成します。同じ `CREATE FUNCTION` ステートメントで、次の 2 つの実装スタイルをサポートします。
+スカラーユーザー定義関数（Scalar UDF）を作成します。同じ `CREATE FUNCTION` ステートメントで、次の 2 つの実装スタイルをサポートします。
 
-- **SQL expression**: ロジックを純粋に SQL で記述します。外部ランタイムは不要です。
+- **SQL 式**: ロジックを純粋に SQL で記述します。外部ランタイムは不要です。
 - **Python / JavaScript**: コードを記述し、`HANDLER` でエントリポイントを指定します。
 
 外部システム（HTTP/サービス）を呼び出す必要がある場合は、External Function コマンドを参照してください。
@@ -24,7 +24,7 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
     [ DESC='<description>' ]
 ```
 
-### Python / JavaScript {#python-javascript}
+### Python / JavaScript {#python--javascript}
 
 ```sql
 CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
@@ -54,7 +54,7 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
 |:----------|:--------------|:---------------|
 | SUPER     | グローバル、テーブル | UDF を操作します |
 
-user-defined function を作成するには、操作を実行するユーザー、または [current_role](/tidb-cloud-lake/guides/roles.md) が、SUPER [privilege](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
+ユーザー定義関数を作成するには、操作を実行するユーザー、または [current_role](/tidb-cloud-lake/guides/roles.md) が、SUPER [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 
 ## SQL {#sql}
 

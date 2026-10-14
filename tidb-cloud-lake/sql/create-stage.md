@@ -46,11 +46,11 @@ externalStageParams ::=
   );
 ```
 
-異なるストレージサービスで使用可能な接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+異なるストレージサービスで使用可能な接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 `CONNECTION_NAME` の詳細については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 
-### FILE_FORMAT {#file-format}
+### FILE_FORMAT {#file_format}
 
 詳細は [入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
 
@@ -60,7 +60,7 @@ externalStageParams ::=
 |:----------|:--------------|:--------------------------------------------------------------------------|
 | SUPER     | グローバル、テーブル | stage（stage の一覧表示、作成、削除）、catalog、または share を操作します。 |
 
-stage を作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が SUPER [privilege](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
+stage を作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が SUPER [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 
 ## 例 {#examples}
 
@@ -107,7 +107,7 @@ DESC STAGE my_s3_stage;
 
 ### 例 3: AWS IAM User を使用して外部 stage を作成する {#example-3-create-external-stage-with-aws-iam-user}
 
-この例では、AWS Identity and Access Management (IAM) user を使用して、Amazon S3 上に *iam_external_stage* という名前の外部 stage を作成します。
+この例では、AWS Identity and Access Management (IAM) ユーザーを使用して、Amazon S3 上に *iam_external_stage* という名前の外部 stage を作成します。
 
 #### ステップ 1: S3 バケットのアクセスポリシーを作成する {#step-1-create-access-policy-for-s3-bucket}
 
@@ -140,20 +140,20 @@ DESC STAGE my_s3_stage;
 
 #### ステップ 2: IAM User を作成する {#step-2-create-iam-user}
 
-以下の手順では、*lake* という名前の IAM user を作成し、その user にアクセスポリシー *lake-access* をアタッチします。
+以下の手順では、*lake* という名前の IAM ユーザーを作成し、そのユーザーにアクセスポリシー *lake-access* をアタッチします。
 
 1. 左側のナビゲーションペインで **Users** を選択し、右側のページで **Add users** を選択します。
-2. user を設定します。
-    - user 名を *lake* に設定します。
-    - user の権限を設定する際に、**Attach policies directly** をクリックし、アクセスポリシー *lake-access* を検索して選択します。
-3. user の作成後、user 名をクリックして詳細ページを開き、**Security credentials** タブを選択します。
+2. ユーザーを設定します。
+    - ユーザー名を *lake* に設定します。
+    - ユーザーの権限を設定する際に、**Attach policies directly** をクリックし、アクセスポリシー *lake-access* を検索して選択します。
+3. ユーザーの作成後、ユーザー名をクリックして詳細ページを開き、**Security credentials** タブを選択します。
 4. **Access keys** セクションで、**Create access key** をクリックします。
 5. ユースケースとして **Third-party service** を選択し、その下のチェックボックスをオンにして access key の作成を確認します。
 6. 生成された access key と secret access key をコピーし、安全な場所に保存します。
 
 #### ステップ 3: 外部 stage を作成する {#step-3-create-external-stage}
 
-より高いセキュリティのために、IAM role を使用して外部 stage を作成します。
+より高いセキュリティのために、IAM ロールを使用して外部 stage を作成します。
 
 ```sql
 -- First create a connection using IAM role
@@ -188,7 +188,7 @@ CREATE STAGE iam_external_stage
 3. API token を設定する際に、必要な権限を選択し、必要に応じて **TTL** を設定します。
 4. **Create API Token** をクリックして Access Key ID と Secret Access Key を取得します。これらをコピーし、安全な場所に保存します。
 
-#### Step 3: 外部 stage を作成する {#step-3-create-external-stage}
+#### ステップ 3: 外部 stage を作成する {#step-3-create-external-stage-1}
 
 作成した Access Key ID と Secret Access Key を使用して、*r2_stage* という名前の外部 stage を作成します。
 

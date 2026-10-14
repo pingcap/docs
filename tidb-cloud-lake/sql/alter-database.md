@@ -81,7 +81,7 @@ ALTER DATABASE analytics SET OPTIONS (
 
 データベースにタグを割り当てたり削除したりします。タグは事前に [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) で作成しておく必要があります。詳細は [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md) を参照してください。
 
-### 構文 {#syntax}
+### 構文 {#syntax-1}
 
 ```sql
 ALTER DATABASE [ IF EXISTS ] <name> SET TAG <tag_name> = '<value>' [, <tag_name> = '<value>' ...]
@@ -89,7 +89,7 @@ ALTER DATABASE [ IF EXISTS ] <name> SET TAG <tag_name> = '<value>' [, <tag_name>
 ALTER DATABASE [ IF EXISTS ] <name> UNSET TAG <tag_name> [, <tag_name> ...]
 ```
 
-### 例 {#examples}
+### 例 {#examples-1}
 
 ```sql
 ALTER DATABASE mydb SET TAG env = 'prod', owner = 'team_a';

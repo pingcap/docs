@@ -33,7 +33,7 @@ CREATE ROW ACCESS POLICY [ IF NOT EXISTS ] <policy_name> AS
 
 ## アクセス制御要件 {#access-control-requirements}
 
-| Privilege | 説明 |
+| 権限 | 説明 |
 |:----------|:------------|
 | CREATE ROW ACCESS POLICY | 行アクセスポリシーを作成するために必要です。通常は `*.*` に対して付与されます。 |
 

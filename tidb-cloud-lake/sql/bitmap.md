@@ -11,13 +11,13 @@ summary: BITMAP は符号なし 64 ビット整数のメンバーシップ情報
 
 ## 概要 {#overview}
 
-`BITMAP` は符号なし 64 ビット整数のメンバーシップ情報を格納し、高速な集合演算（count、union、intersection など）をサポートします。SELECT 文ではバイナリ blob として表示されるため、値を解釈するには [Bitmap Functions](/tidb-cloud-lake/sql/bitmap-functions.md) を使用してください。
+`BITMAP` は符号なし 64 ビット整数のメンバーシップ情報を格納し、高速な集合演算（count、union、intersection など）をサポートします。SELECT 文ではバイナリ blob として表示されるため、値を解釈するには [Bitmap 関数](/tidb-cloud-lake/sql/bitmap-functions.md) を使用してください。
 
 ## 例 {#examples}
 
 ### Bitmap の構築 {#build-bitmaps}
 
-`TO_BITMAP` は、カンマ区切りの文字列、または `UINT64` 値（単一要素として扱われます）のいずれかを受け取ります。`TO_STRING` は bitmap を読みやすいテキストに再シリアライズします。
+`TO_BITMAP` は、カンマ区切りの文字列、または `UINT64` 値（単一要素として扱われます）のいずれかを受け取ります。`TO_STRING` はビットマップを読みやすいテキストに再シリアライズします。
 
 ```sql
 SELECT
@@ -38,7 +38,7 @@ SELECT
 
 ### Bitmap の永続化 {#persist-bitmaps}
 
-配列をテーブルに挿入する前に bitmap に変換するには、`BUILD_BITMAP` を使用します。その後、`BITMAP_COUNT` などの集約関数を使うことで、格納された値を高速に読み取れます。
+配列をテーブルに挿入する前にビットマップに変換するには、`BUILD_BITMAP` を使用します。その後、`BITMAP_COUNT` などの集計関数を使うことで、格納された値を高速に読み取れます。
 
 ```sql
 CREATE TABLE user_visits (

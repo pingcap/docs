@@ -1,11 +1,11 @@
 ---
 title: DROP INVERTED INDEX
-summary: "{{{ .lake }}} の inverted index を削除します。"
+summary: "{{{ .lake }}} の転置インデックスを削除します。"
 ---
 
 # DROP INVERTED INDEX
 
-{{{ .lake }}} の inverted index を削除します。
+{{{ .lake }}} の転置インデックスを削除します。
 
 ## 構文 {#syntax}
 

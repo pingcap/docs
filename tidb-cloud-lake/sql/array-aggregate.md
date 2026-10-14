@@ -1,11 +1,11 @@
 ---
 title: ARRAY_AGGREGATE
-summary: 集約関数を使用して配列内の要素を集約します。
+summary: 集計関数を使用して配列内の要素を集約します。
 ---
 
 # ARRAY_AGGREGATE
 
-集約関数を使用して配列内の要素を集約します。
+集計関数を使用して配列内の要素を集約します。
 
 ## 構文 {#syntax}
 
@@ -13,7 +13,7 @@ summary: 集約関数を使用して配列内の要素を集約します。
 ARRAY_AGGREGATE( <array>, '<agg_func>' )
 ```
 
-- サポートされている集約関数には、`avg`、`count`、`max`、`min`、`sum`、`any`、`stddev_samp`、`stddev_pop`、`stddev`、`std`、`median`、`approx_count_distinct`、`kurtosis`、`skewness` があります。
+- サポートされている集計関数には、`avg`、`count`、`max`、`min`、`sum`、`any`、`stddev_samp`、`stddev_pop`、`stddev`、`std`、`median`、`approx_count_distinct`、`kurtosis`、`skewness` があります。
 
 - この構文は `ARRAY_<agg_func>( <array> )` と書き換えることもできます。たとえば、`ARRAY_AVG( <array> )` です。
 

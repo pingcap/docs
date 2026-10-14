@@ -18,7 +18,7 @@ summary: このページでは、{{{ .lake }}} における DML (Data Manipulati
 | **[REPLACE](/tidb-cloud-lake/sql/replace.md)** | 新しい行を挿入するか、既存の行を更新します |
 | **[MERGE](/tidb-cloud-lake/sql/merge.md)** | 条件に基づいて upsert 操作を実行します |
 
-## データのロード (load) とエクスポート {#data-loading-export}
+## データのロード (load) とエクスポート {#data-loading--export}
 
 | コマンド | 説明 |
 |---------|-------------|

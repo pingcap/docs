@@ -27,17 +27,15 @@ CREATE [ OR REPLACE ] SEQUENCE [ IF NOT EXISTS ] <sequence>
 
 | 権限       | オブジェクトタイプ | 説明           |
 |:----------------|:------------|:----------------------|
-| CREATE SEQUENCE | Global      | シーケンスを作成します。 |
+| CREATE SEQUENCE | グローバル  | シーケンスを作成します。 |
 
-シーケンスを作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が CREATE SEQUENCE [privilege](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
+シーケンスを作成するには、操作を実行するユーザーまたは [current_role](/tidb-cloud-lake/guides/roles.md) が CREATE SEQUENCE [権限](/tidb-cloud-lake/guides/privileges.md) を持っている必要があります。
 
 > **Note:**
 >
-> enable_experimental_sequence_rbac_check 設定は、シーケンスレベルのアクセス制御を管理します。デフォルトでは無効です。
-> シーケンスの作成では、詳細な RBAC チェックを行わず、ユーザーが superuser 権限を持っていることだけが必要です。
-> 有効にすると、シーケンス作成時にきめ細かな権限検証が実施されます。
->
-> これは実験的機能であり、将来的にはデフォルトで有効になる可能性があります。
+> - `enable_experimental_sequence_rbac_check` 設定は、シーケンスレベルのアクセス制御を管理します。デフォルトでは無効です。これは実験的機能であり、将来的にはデフォルトで有効になる可能性があります。
+> - シーケンスの作成では、詳細な RBAC チェックを行わず、ユーザーが superuser 権限を持っていることだけが必要です。
+> - 有効にすると、シーケンス作成時にきめ細かな権限検証が実施されます。
 
 ## 例 {#examples}
 

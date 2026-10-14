@@ -13,7 +13,7 @@ summary: TiDB Cloud Lake を Apache Iceberg カタログに接続し、Iceberg �
 
 - データがすでに Iceberg カタログで管理されている。
 - 複数のクエリエンジンで同じテーブルメタデータとオブジェクトストレージを共有する必要がある。
-- schema evolution や snapshot などの Iceberg の機能が必要である。
+- schema evolution やスナップショットなどの Iceberg の機能が必要である。
 - {{{ .lake }}} から Iceberg テーブルをクエリまたは書き込みたい。
 
 ## Iceberg カタログを作成する {#create-an-iceberg-catalog}
@@ -41,7 +41,7 @@ CONNECTION = (
 | `<catalog_name>` | はい | {{{ .lake }}} 内のカタログ名。 |
 | `TYPE` | はい | カタログエンジン。この値を `ICEBERG` に設定します。 |
 | `CONNECTION` | はい | Iceberg カタログおよびそのストレージの接続プロパティ。 |
-| `TYPE` inside `CONNECTION` | はい | Iceberg カタログタイプ: `rest`、`glue`、`storage`、または `hive`。 |
+| `CONNECTION` 内の `TYPE` | はい | Iceberg カタログタイプ: `rest`、`glue`、`storage`、または `hive`。 |
 | `ADDRESS` | カタログタイプによる | カタログサービスのエンドポイント、または Hive Metastore のアドレス。 |
 | `WAREHOUSE` | カタログタイプによる | カタログで使用される Warehouse の場所。 |
 | `<connection_parameter>` | カタログタイプによる | カタログ、認証、およびオブジェクトストレージのプロパティ。 |
@@ -61,7 +61,7 @@ CONNECTION = (
 | `s3.sse.key` | KMS key ID、または顧客提供の暗号化キー。 |
 | `s3.sse.md5` | 顧客提供の暗号化キーに対する MD5 チェックサム。 |
 | `client.assume-role.arn` | 引き受ける IAM ロールの ARN。 |
-| `client.assume-role.external-id` | IAM ロールを引き受ける際に使用する external ID。 |
+| `client.assume-role.external-id` | IAM ロールを引き受ける際に使用する外部 ID。 |
 | `client.assume-role.session-name` | IAM ロールを引き受ける際に使用するセッション名。 |
 | `s3.allow-anonymous` | パブリックストレージへの匿名アクセスを許可するかどうか。 |
 | `s3.disable-ec2-metadata` | EC2 インスタンスメタデータからのクレデンシャルを無効にするかどうか。 |
@@ -171,14 +171,14 @@ Iceberg テーブルへの書き込み時には、以下の {{{ .lake }}} デー
 
 | {{{ .lake }}} 型 | Apache Iceberg™ 型 |
 | --- | --- |
-| BOOLEAN | ブール値 |
-| INT | 整数 |
-| BIGINT | 長整数 |
-| FLOAT | 浮動小数点数 |
-| DOUBLE | 倍精度浮動小数点数 |
-| STRING | 文字列 |
-| DATE | 日付 |
-| TIMESTAMP | タイムスタンプ |
+| BOOLEAN | Boolean |
+| INT | Int |
+| BIGINT | Long |
+| FLOAT | Float |
+| DOUBLE | Double |
+| STRING | String |
+| DATE | Date |
+| TIMESTAMP | Timestamp |
 
 ### データを挿入する {#insert-data}
 

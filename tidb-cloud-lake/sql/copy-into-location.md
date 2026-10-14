@@ -7,7 +7,7 @@ summary: COPY INTO を使用すると、テーブルまたはクエリからデ�
 
 COPY INTO を使用すると、テーブルまたはクエリからデータを、以下のいずれかの場所にある 1 つ以上のファイルへアンロードできます。
 
-- User / Internal / External stages: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
+- User / Internal / External stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
 - ストレージサービスで作成されたバケットまたはコンテナ。
 
 関連情報: [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
@@ -53,7 +53,7 @@ externalLocation ::=
   )
 ```
 
-Amazon S3 互換ストレージサービスへのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Amazon S3 互換ストレージサービスへのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -67,7 +67,7 @@ externalLocation ::=
   )
 ```
 
-Azure Blob Storage へのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Azure Blob Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -81,7 +81,7 @@ externalLocation ::=
   )
 ```
 
-Google Cloud Storage へのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Google Cloud Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -95,7 +95,7 @@ externalLocation ::=
   )
 ```
 
-Alibaba Cloud OSS へのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Alibaba Cloud OSS へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 
@@ -109,12 +109,12 @@ externalLocation ::=
   )
 ```
 
-Tencent Cloud Object Storage へのアクセスに使用できる接続パラメータについては、[Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
+Tencent Cloud Object Storage へのアクセスに使用できる接続パラメータについては、[接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を参照してください。
 
 </div>
 </SimpleTab>
 
-### FILE_FORMAT {#file-format}
+### FILE_FORMAT {#file_format}
 
 詳細は [入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
 
@@ -130,7 +130,7 @@ Tencent Cloud Object Storage へのアクセスに使用できる接続パラメ
 
 以下のオプションは `PARTITION BY` と互換性がなく、設定するとエラーになります。
 
-| Option              | 制約                                              |
+| オプション              | 制約                                              |
 | ------------------- | ------------------------------------------------- |
 | SINGLE              | `PARTITION BY` 使用時は `TRUE` にできません。     |
 | OVERWRITE           | `PARTITION BY` 使用時は `TRUE` にできません。     |
@@ -162,7 +162,7 @@ copyOptions ::=
 > - `TYPE = LANCE` の場合、下流の Lance リーダー向けに安定したデータセット URI が必要であれば、`USE_RAW_PATH = TRUE` を推奨します。
 > - `TYPE = LANCE` かつ `USE_RAW_PATH = FALSE` の場合、{{{ .lake}}} は対象パスにクエリ ID を付加し、エクスポートごとに個別のデータセットルートを作成します。
 
-### DETAILED_OUTPUT {#detailed-output}
+### DETAILED_OUTPUT {#detailed_output}
 
 データのアンロード結果の詳細を返すかどうかを決定します。デフォルト値は `false` です。詳細については、[出力](#output) を参照してください。
 

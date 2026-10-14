@@ -29,9 +29,9 @@ DATE_BETWEEN(
 | `YEARWEEK`   | ISO 8601 に従った年と週番号の組み合わせ（例: 202415）。 |
 | `MILLENNIUM` | 日付が属する千年紀（1 は 1–1000 年、2 は 1001–2000 年、以降同様）。 |
 
-## DATE_DIFF と DATE_BETWEEN の違い {#date-diff-vs-date-between}
+## DATE_DIFF と DATE_BETWEEN の違い {#date_diff-vs-date_between}
 
-`DATE_DIFF` 関数は、2 つの日付の間でユーザー指定の単位（day、month、year など）の境界をいくつまたぐかを数えます。一方、`DATE_BETWEEN` は、その間に厳密に含まれる完全な単位の数を数えます。例:
+`DATE_DIFF` 関数は、2 つの日付の間でユーザー指定の単位（日、月、年など）の境界をいくつまたぐかを数えます。一方、`DATE_BETWEEN` は、その間に厳密に含まれる完全な単位の数を数えます。例:
 
 ```sql
 SELECT
@@ -39,11 +39,11 @@ SELECT
     DATE_BETWEEN(month, '2025-07-31', '2025-10-01'); -- returns 2
 ```
 
-この例では、`DATE_DIFF` は 3 つの月境界（July → August → September → October）をまたぐため `3` を返します。一方、`DATE_BETWEEN` は日付の間に完全な 2 か月分、つまり August と September が含まれるため `2` を返します。
+この例では、`DATE_DIFF` は 3 つの月境界（7 月 → 8 月 → 9 月 → 10 月）をまたぐため `3` を返します。一方、`DATE_BETWEEN` は日付の間に完全な 2 か月分、つまり 8 月と 9 月が含まれるため `2` を返します。
 
 ## 例 {#examples}
 
-この例では、固定のタイムスタンプ (`2020-01-01 00:00:00`) と現在のタイムスタンプ (`NOW()`) の差を、year、ISO weekday、year-week、millennium などのさまざまな単位で計算します。
+この例では、固定のタイムスタンプ (`2020-01-01 00:00:00`) と現在のタイムスタンプ (`NOW()`) の差を、年、ISO 曜日、年週、千年紀などのさまざまな単位で計算します。
 
 ```sql
 SELECT

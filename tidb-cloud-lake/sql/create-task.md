@@ -9,7 +9,7 @@ CREATE TASK ステートメントは、指定した SQL ステートメントを
 
 **NOTICE:** この機能は、{{{ .lake }}} でのみ追加設定なしですぐに利用できます。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```sql
 CREATE [ OR REPLACE ] TASK [ IF NOT EXISTS ] <name>
@@ -41,17 +41,17 @@ AS
 | SUSPEND_TASK_AFTER_NUM_FAILURES                  | 任意。連続して失敗した回数がこの値に達すると、タスクは自動的に一時停止されます。 |
 | AFTER                                            | このタスクの開始前に完了している必要があるタスクの一覧です。 |
 | WHEN boolean_expr                                | タスクを実行するために true である必要がある条件です。 |
-| [ERROR_INTEGRATION](/tidb-cloud-lake/sql/notification.md) | 任意。特定の [task error payload](/tidb-cloud-lake/sql/task-error-notification-payload.md) を適用したタスクエラー通知に使用する notification integration の名前です。 |
+| [ERROR_INTEGRATION](/tidb-cloud-lake/sql/notification.md) | 任意。特定の [タスクエラーのペイロード](/tidb-cloud-lake/sql/task-error-notification-payload.md) を適用したタスクエラー通知に使用する notification integration の名前です。 |
 | COMMENT                                          | 任意。タスクのコメントまたは説明として使用される文字列リテラルです。 |
 | session_parameter                                | 任意。タスク実行時に使用するセッションパラメータを指定します。セッションパラメータは、CREATE TASK ステートメント内で他のすべてのタスクパラメータの後に配置する必要があります。 |
 | sql                                              | タスクが実行する SQL ステートメントです。単一のステートメント、または `BEGIN ... END;` で囲まれたスクリプトを指定できます。これは必須フィールドです。 |
 
-### Usage Notes {#usage-notes}
+### 使用上の注意 {#usage-notes}
 
 - 単独タスク、またはタスク DAG のルートタスクにはスケジュールを定義する必要があります。そうしない場合、タスクは EXECUTE TASK を使用して手動実行したときにのみ実行されます。
 - DAG 内の子タスクにはスケジュールを指定できません。
 - タスク作成後、タスク定義で指定したパラメータに基づいて実行されるようにするには、ALTER TASK … RESUME を実行する必要があります。
-- Condition では `<boolean_expression>` の一部のみがサポートされます。
+- WHEN 条件では `<boolean_expression>` の一部のみがサポートされます。
 
     タスクの WHEN 句では、以下がサポートされます。
 
@@ -75,18 +75,18 @@ AS
       query_result_cache_min_execute_secs = 5;
   ```
 
-### Important Notes on Cron Expressions {#important-notes-on-cron-expressions}
+### cron 式に関する重要な注意事項 {#important-notes-on-cron-expressions}
 
 - `SCHEDULE` パラメータで使用する cron 式には、**ちょうど 6 つのフィールド**を含める必要があります。
 - 各フィールドは次を表します。
-  1. **Second** (0-59)
-  2. **Minute** (0-59)
-  3. **Hour** (0-23)
-  4. **Day of the Month** (1-31)
-  5. **Month** (1-12 or JAN-DEC)
-  6. **Day of the Week** (0-6, where 0 is Sunday, or SUN-SAT)
+  1. **秒** (0-59)
+  2. **分** (0-59)
+  3. **時** (0-23)
+  4. **日** (1-31)
+  5. **月** (1-12 または JAN-DEC)
+  6. **曜日** (0-6、0 は日曜日、または SUN-SAT)
 
-#### Example Cron Expressions {#example-cron-expressions}
+#### cron 式の例 {#example-cron-expressions}
 
 - **Pacific Time の毎日午前 9:00:00:**
     - `USING CRON '0 0 9 * * *' 'America/Los_Angeles'`
@@ -111,9 +111,9 @@ AS
     - `USING CRON '0 30 8 * * 1-5' 'UTC'`
     - これは平日（月曜日から金曜日）の毎日午前 8:30 にタスクを実行します。
 
-## Usage Examples {#usage-examples}
+## 使用例 {#usage-examples}
 
-### CRON Schedule {#cron-schedule}
+### CRON スケジュール {#cron-schedule}
 
 ```sql
 CREATE TASK my_daily_task
@@ -126,7 +126,7 @@ AS
 
 この例では、`my_daily_task` という名前のタスクを作成しています。このタスクは **compute_wh** Warehouse を使用して、source_table から summary_table にデータを挿入する SQL ステートメントを実行します。タスクは **CRON 式** を使用して、**Pacific Time の毎日午前 9 時** に実行されるようスケジュールされています。
 
-### Multiple Statements {#multiple-statements}
+### 複数のステートメント {#multiple-statements}
 
 ```sql
 CREATE TASK IF NOT EXISTS nightly_refresh
@@ -141,7 +141,7 @@ END;
 
 この例では、`nightly_refresh` という名前のタスクを作成し、複数のステートメントを含むスクリプトを実行します。スクリプトは `BEGIN ... END;` で囲まれているため、タスクが実行されるたびに DELETE が INSERT より先に実行されます。
 
-### Dynamic SQL (EXECUTE IMMEDIATE) {#dynamic-sql-execute-immediate}
+### 動的 SQL (EXECUTE IMMEDIATE) {#dynamic-sql-execute-immediate}
 
 ```sql
 CREATE OR REPLACE TASK log_ingestion
@@ -164,7 +164,7 @@ $$;
 
 この例では、毎分実行されるタスクを作成しています。このタスクは **3 日前** の stage パス（たとえば `@mylog/12/15/`）を動的に計算し、`COPY INTO` ステートメントを組み立てて、`EXECUTE IMMEDIATE` で実行します。
 
-### Automatic Suspension {#automatic-suspension}
+### 自動一時停止 {#automatic-suspension}
 
 ```sql
 CREATE TASK IF NOT EXISTS mytask
@@ -177,7 +177,7 @@ AS
 
 この例では、`mytask` という名前のタスクを、まだ存在しない場合に作成します。このタスクは **system** Warehouse に割り当てられ、**2 分ごと** に実行されるようスケジュールされています。**3 回連続で失敗** すると、**自動的に一時停止** されます。このタスクは compaction_test.test テーブルに対して INSERT 操作を実行します。
 
-### Second-Level Scheduling {#second-level-scheduling}
+### 秒単位のスケジューリング {#second-level-scheduling}
 
 ```sql
 CREATE TASK IF NOT EXISTS daily_sales_summary
@@ -201,7 +201,7 @@ AS
  INSERT INTO data_warehouse.orders SELECT * FROM staging.orders;
 ```
 
-この例では、`process_orders` という名前のタスクを作成し、**task1** と **task2** が**正常に完了した後**に実行されるよう定義しています。これは、タスクの **Directed Acyclic Graph (DAG)** における**依存関係**を作成するのに役立ちます。このタスクは **etl** Warehouse を使用し、staging 領域からデータ Warehouse にデータを転送します。
+この例では、`process_orders` という名前のタスクを作成し、**task1** と **task2** が**正常に完了した後**に実行されるよう定義しています。これは、タスクの **Directed Acyclic Graph (DAG)** における**依存関係**を作成するのに役立ちます。このタスクは **etl** Warehouse を使用し、ステージング領域からデータウェアハウスにデータを転送します。
 
 > Tip: AFLTER パラメータを使用する場合、SCHEDULE パラメータを設定する必要はありません。
 

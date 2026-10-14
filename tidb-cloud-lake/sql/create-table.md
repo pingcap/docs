@@ -23,7 +23,7 @@ summary: テーブルの作成は、多くのデータベースにおいて最�
 - [CREATE TRANSIENT TABLE](/tidb-cloud-lake/sql/create-transient-table.md)
 - [CREATE EXTERNAL TABLE](/tidb-cloud-lake/sql/create-external-table.md)
 
-## CREATE TABLE {#create-table}
+## CREATE TABLE {#create-table-1}
 
 ```sql
 CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
@@ -44,13 +44,13 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 
 > **Note:**
 >
-> - {{{ .lake }}} で使用可能なデータ型については、[Data Types](/tidb-cloud-lake/sql/data-types.md) を参照してください。
+> - {{{ .lake }}} で使用可能なデータ型については、[データ型](/tidb-cloud-lake/sql/data-types.md) を参照してください。
 >
 > - {{{ .lake }}} では、カラム名に特殊文字をできるだけ使用しないことを推奨しています。ただし、場合によって特殊文字が必要な場合は、次のようにエイリアスをバッククォートで囲む必要があります: CREATE TABLE price(\`$CA\` int);
 >
 > - {{{ .lake }}} はカラム名を自動的に小文字に変換します。たとえば、カラム名を _Total_ とした場合、結果では _total_ と表示されます。
 
-## CREATE TABLE ... LIKE {#create-table-like}
+## CREATE TABLE ... LIKE {#create-table--like}
 
 既存のテーブルと同じカラム定義を持つテーブルを作成します。既存テーブルのカラム名、データ型、および NOT NULL 制約が新しいテーブルにコピーされます。
 
@@ -73,7 +73,7 @@ LIKE [db.]origin_table_name
 > create table t_new compression='lz4' like t_old;
 > ```
 
-## CREATE TABLE ... AS {#create-table-as}
+## CREATE TABLE ... AS {#create-table--as}
 
 テーブルを作成し、SELECT コマンドによって計算されたデータをそのテーブルに格納します。
 
@@ -96,11 +96,11 @@ AS SELECT query
 > create table t_new compression='lz4' as select * from t_old;
 > ```
 
-## Column Nullable {#column-nullable}
+## カラムの NULL 許容 {#column-nullable}
 
-{{{ .lake }}} では、デフォルトで **すべてのカラムが nullable(NULL)** です。NULL 値を許可しないカラムが必要な場合は、NOT NULL 制約を使用してください。詳細は [NULL Values and NOT NULL Constraint](/tidb-cloud-lake/sql/data-types.md) を参照してください。
+{{{ .lake }}} では、デフォルトで **すべてのカラムが nullable(NULL)** です。NULL 値を許可しないカラムが必要な場合は、NOT NULL 制約を使用してください。詳細は [NULL 値と NOT NULL 制約](/tidb-cloud-lake/sql/data-types.md) を参照してください。
 
-## Column Default Values {#column-default-values}
+## カラムのデフォルト値 {#column-default-values}
 
 `DEFAULT <expr>` は、明示的な式が指定されていない場合に、カラムのデフォルト値を設定します。デフォルト式には次のものを使用できます。
 
@@ -110,7 +110,7 @@ AS SELECT query
     - NEXTVAL は単独のデフォルト値として使用する必要があります。`NEXTVAL(seq1) + 1` のような式はサポートされていません。
     - ユーザーは、[NEXTVAL](/tidb-cloud-lake/sql/nextval.md#access-control-requirements) などの操作を含め、シーケンスの利用に関して付与された権限に従う必要があります。
 
-## Auto-Increment Columns {#auto-increment-columns}
+## 自動インクリメントカラム {#auto-increment-columns}
 
 `AUTOINCREMENT` または `IDENTITY` を使用すると、自動インクリメントカラムを作成できます。これらのカラムは、連続した数値を自動生成します。これは、一意な識別子を作成する場合に特に便利です。
 
@@ -216,7 +216,7 @@ MySQL とは異なり、{{{ .lake }}} はデフォルトで PostgreSQL スタイ
 
 ## 例 {#examples}
 
-### テーブルを作成する {#create-table}
+### テーブルを作成する {#create-table-2}
 
 カラムにデフォルト値を持つテーブルを作成します（この例では、`genre` カラムのデフォルト値は 'General' です）。
 
@@ -258,7 +258,7 @@ SELECT * FROM books;
 +----+----------------+---------+
 ```
 
-### Create Table ... Like {#create-table-like}
+### Create Table ... Like {#create-table--like-1}
 
 既存のテーブル (`books`) と同じ構造を持つ新しいテーブル (`books_copy`) を作成します。
 
@@ -292,7 +292,7 @@ SELECT * FROM books_copy;
 +----+----------------+---------+
 ```
 
-### Create Table ... As {#create-table-as}
+### Create Table ... As {#create-table--as-1}
 
 既存のテーブル (`books`) のデータを含む新しいテーブル (`books_backup`) を作成します。
 
@@ -324,7 +324,7 @@ SELECT * FROM books_backup;
 +----+----------------+---------+
 ```
 
-### Create Table ... Column As STORED | VIRTUAL {#create-table-column-as-stored-virtual}
+### Create Table ... Column As STORED | VIRTUAL {#create-table--column-as-stored--virtual}
 
 次の例は、"price" または "quantity" カラムの更新に基づいて自動的に再計算される、stored 計算カラムを持つテーブルを示しています。
 

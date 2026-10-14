@@ -38,7 +38,7 @@ SELECT ...
 
 ## パラメーター {#parameters}
 
-| Parameter | 説明 |
+| パラメータ | 説明 |
 |-----------|-------------|
 | `cte_name` | CTE 名は標準の識別子ルールに従う必要があります |
 | `cte_column_list` | CTE 内のカラム名 |
@@ -47,7 +47,7 @@ SELECT ...
 
 ## 例 {#examples}
 
-### 基本 CTE {#basic-cte}
+### 基本 CTE {#basic-cte-1}
 
 ```sql
 WITH high_value_customers AS (
@@ -80,7 +80,7 @@ FROM top_regions r
 ORDER BY r.total_sales DESC;
 ```
 
-### 再帰 CTE {#recursive-cte}
+### 再帰 CTE {#recursive-cte-1}
 
 ```sql
 WITH RECURSIVE countdown AS (

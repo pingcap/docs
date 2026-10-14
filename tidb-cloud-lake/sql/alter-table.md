@@ -182,7 +182,7 @@ MODIFY COLUMN email UNSET MASKING POLICY;
 
 テーブルに row access policy を関連付ける、または関連解除します。row access policy は、クエリ実行時および DML の対象行マッチング時に行をフィルタリングします。
 
-### 構文 {#syntax}
+### 構文 {#syntax-1}
 
 ```sql
 -- Add a row access policy to a table
@@ -233,14 +233,14 @@ DROP ROW ACCESS POLICY rap_engineering;
 
 テーブルのコメントを変更します。テーブルにまだコメントがない場合、このコマンドは指定したコメントをテーブルに追加します。
 
-### 構文 {#syntax}
+### 構文 {#syntax-2}
 
 ```sql
 ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 COMMENT = '<comment>'
 ```
 
-### 例 {#examples}
+### 例 {#examples-1}
 
 ```sql
 -- Create a table with a comment
@@ -276,9 +276,9 @@ ALTER TABLE t COMMENT = 'new-comment';
 
 ## Fuse Engine オプション {#fuse-engine-options}
 
-テーブルの [Fuse Engine options](/tidb-cloud-lake/sql/fuse-engine-tables.md#fuse-engine-options) を設定または解除します。
+テーブルの [Fuse Engine オプション](/tidb-cloud-lake/sql/fuse-engine-tables.md#fuse-engine-options) を設定または解除します。
 
-### 構文 {#syntax}
+### 構文 {#syntax-3}
 
 ```sql
 -- Set Fuse Engine options
@@ -299,7 +299,7 @@ ALTER TABLE [ <database_name>. ]<table_name> UNSET OPTIONS (<options>)
 - `row_per_block`
 - `row_per_page`
 
-### 例 {#examples}
+### 例 {#examples-2}
 
 ```sql
 CREATE TABLE fuse_table (a int);
@@ -333,7 +333,7 @@ ALTER TABLE fuse_table UNSET OPTIONS (block_per_segment, data_retention_period_i
 
 外部テーブルの接続設定を更新します。コマンド実行時に適用されるのは、認証情報関連のフィールド（`access_key_id`、`secret_access_key`、`role_arn`）のみです。`bucket`、`region`、`root` などのその他のプロパティは変更されません。
 
-### 構文 {#syntax}
+### 構文 {#syntax-4}
 
 ```sql
 ALTER TABLE [ <database_name>. ]<table_name> CONNECTION = ( connection_name = '<connection_name>' )
@@ -355,7 +355,7 @@ ALTER TABLE [ <database_name>. ]<table_name> CONNECTION = ( connection_name = '<
 
 {{{ .lake }}} で IAM ロールを使用する方法については、[AWS IAM Role による認証](/tidb-cloud-lake/guides/authenticate-with-aws-iam-role.md) を参照してください。
 
-### 例 {#examples}
+### 例 {#examples-3}
 
 ```sql
 -- Create connections
@@ -417,13 +417,13 @@ ALTER TABLE sales_data CONNECTION=( connection_name = 's3_role_conn' );
 
 > **Note:**
 >
-> スナップショットタグは、[governance tags](#tag-operations) とは異なります。スナップショットタグはタイムトラベルのためにテーブルスナップショットをブックマークするものであり、governance tags は分類のためにオブジェクトへキーと値のメタデータを付与するものです。
+> スナップショットタグは、[ガバナンスタグ](#tag-operations) とは異なります。スナップショットタグはタイムトラベルのためにテーブルスナップショットをブックマークするものであり、ガバナンスタグは分類のためにオブジェクトへキーと値のメタデータを付与するものです。
 
 ## テーブルの入れ替え {#swap-tables}
 
 1 つのトランザクション内で、2 つのテーブル間のすべてのテーブルメタデータとデータをアトミックに入れ替えます。この操作では、すべてのカラム、制約、データを含むテーブルスキーマが交換され、結果として各テーブルがもう一方のテーブルの実体を引き継ぎます。
 
-### 構文 {#syntax}
+### 構文 {#syntax-5}
 
 ```sql
 ALTER TABLE [ IF EXISTS ] <source_table_name> SWAP WITH <target_table_name>
@@ -443,7 +443,7 @@ ALTER TABLE [ IF EXISTS ] <source_table_name> SWAP WITH <target_table_name>
 - 入れ替え操作はアトミックです。両方のテーブルが正常に入れ替えられるか、どちらも変更されないかのいずれかです。
 - 入れ替え中はすべてのデータとメタデータが保持されます。データが失われたり変更されたりすることはありません。
 
-### 例 {#examples}
+### 例 {#examples-4}
 
 ```sql
 -- Create two tables with different schemas
@@ -464,9 +464,9 @@ DESC t2;
 
 ## タグ操作 {#tag-operations}
 
-テーブルに governance tags を割り当てる、または削除します。governance tags は、分類とデータガバナンスのためのキーと値のメタデータです。タグは事前に [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) で作成しておく必要があります。詳細については、[SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md) を参照してください。
+テーブルにガバナンスタグを割り当てる、または削除します。ガバナンスタグは、分類とデータガバナンスのためのキーと値のメタデータです。タグは事前に [CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) で作成しておく必要があります。詳細については、[SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md) を参照してください。
 
-### 構文 {#syntax}
+### 構文 {#syntax-6}
 
 ```sql
 ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
@@ -476,7 +476,7 @@ ALTER TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
     UNSET TAG <tag_name> [, <tag_name> ...]
 ```
 
-### 例 {#examples}
+### 例 {#examples-5}
 
 ```sql
 ALTER TABLE default.users SET TAG env = 'prod', owner = 'team_a';

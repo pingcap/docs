@@ -9,7 +9,7 @@ Warehouse 内の 1 つ以上のクラスターから割り当て済みノード�
 
 > **Note:**
 >
-> このコマンドには system management support と enterprise license が必要です。
+> このコマンドを使用するには、システム管理のサポートとエンタープライズライセンスが必要です。
 
 ## 構文 {#syntax}
 
