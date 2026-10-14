@@ -61,6 +61,8 @@ summary: TiDB Cloud Filesystem provides persistent, shared file storage for appl
 
 [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 
+[FAQ](/tidb-cloud-filesystem/filesystem-faq.md)
+
 [Troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md)
 
 </LearningPath>

@@ -38,4 +38,5 @@
 - [Command Reference](/tidb-cloud-filesystem/filesystem-command-reference.md)
 - [SDKs](/tidb-cloud-filesystem/filesystem-sdks.md)
 - [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
+- [FAQ](/tidb-cloud-filesystem/filesystem-faq.md)
 - [Troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md)
