@@ -1232,7 +1232,7 @@
   - [アーキテクチャ](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md)
   - 実装の詳細解説
     - [Fuse Engine](/tidb-cloud-lake/guides/how-fuse-engine-works.md)
-    - [オプティマイザー](/tidb-cloud-lake/guides/how-optimizer-works.md)
+    - [オプティマイザ](/tidb-cloud-lake/guides/how-optimizer-works.md)
     - [JSON](/tidb-cloud-lake/guides/how-json-variant-works.md)
     - [データ共有](/tidb-cloud-lake/guides/how-data-sharing-works.md)
   - [エディション](/tidb-cloud-lake/guides/editions.md)
