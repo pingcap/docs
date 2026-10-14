@@ -5,13 +5,13 @@ summary: Learn about the limited SQL features on TiDB X Instances.
 
 # Limited SQL features on TiDB X Instances
 
-A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, Premium, or {{{ .byoc }}} instance.
+A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, Premium, or BYOC instance.
 
-TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed and TiDB Cloud. This document describes the limitations of SQL features on TiDB Cloud Starter, Essential, Premium, and {{{ .byoc }}}. We are constantly filling in the feature gaps between TiDB Self-Managed and TiDB Cloud. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
+TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed and TiDB Cloud. This document describes the limitations of SQL features on TiDB Cloud Starter, Essential, Premium, and BYOC. We are constantly filling in the feature gaps between TiDB Self-Managed and TiDB Cloud. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
 
 > **Note:**
 >
-> This document applies only to {{{ .starter }}}, Essential, Premium, and {{{ .byoc }}}. For TiDB Cloud Dedicated, see [Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md).
+> This document applies only to {{{ .starter }}}, Essential, Premium, and BYOC. For TiDB Cloud Dedicated, see [Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md).
 
 ## Statements
 
@@ -346,21 +346,21 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `validate_password.special_char_count` | No limitation | At least `1` [^9] |
 | `wait_timeout` | No limitation | Read-only [^10] |
 
-[^1]: Configuring data placement is not supported on {{{ .starter }}}, Essential, or Premium.
+[^1]: Configuring data placement is not supported on {{{ .starter }}}, Essential, Premium, and BYOC.
 
-[^2]: Configuring resource groups is not supported on {{{ .starter }}}, Essential, or Premium.
+[^2]: Configuring resource groups is not supported on {{{ .starter }}}, Essential, Premium, and BYOC.
 
-[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on {{{ .starter }}}, Essential, or Premium, you can use the TiDB Cloud console instead.
+[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on {{{ .starter }}}, Essential, Premium, or BYOC, you can use the TiDB Cloud console instead.
 
 [^4]: The feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
 
-[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on {{{ .starter }}}, Essential, or Premium, you can use the TiDB Cloud console instead.
+[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on {{{ .starter }}}, Essential, Premium, or BYOC, you can use the TiDB Cloud console instead.
 
 [^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on {{{ .starter }}} or {{{ .essential }}}, you can use the TiDB Cloud console instead.
 
 [^7]: Drainer and Pump are not supported on TiDB Cloud.
 
-[^8]: Plugins are not supported on {{{ .starter }}}, Essential, or Premium.
+[^8]: Plugins are not supported on {{{ .starter }}}, Essential, Premium, and BYOC.
 
 [^9]: {{{ .starter }}} and {{{ .essential }}} enforce a strong password policy.
 
