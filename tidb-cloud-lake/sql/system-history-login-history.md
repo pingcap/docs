@@ -1,6 +1,6 @@
 ---
 title: system_history.login_history
-summary: Login successful example sql SELECT * FROM system_history.login_history LIMIT 1;.
+summary: Comprehensive logging of all user login attempts (successful and failed) for authentication security auditing.
 ---
 
 # system_history.login_history
