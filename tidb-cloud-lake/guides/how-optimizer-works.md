@@ -12,7 +12,7 @@ summary: "{{{ .lake }}} のクエリオプティマイザは、SQL テキスト�
 ## {{{ .lake }}} の Optimizer を支える仕組み {#what-makes--lake-s-optimizer-tick}
 
 - 統計情報は自動的に最新の状態に保たれます。データが書き込まれると、{{{ .lake }}} は行数、値の範囲、NDV を即座に管理するため、オプティマイザは selectivity、テーブル結合順序、コスト計算に新しい情報を手動メンテナンスなしで利用できます。
-- まず形、次にコスト: パイプラインは、グローバル探索の前に相関を除去し、述語や limit を push down し、集計を分割します。これにより探索空間を縮小し、処理をストレージ側へ移動します。
+- まず形、次にコスト: パイプラインは、グローバル探索の前に相関を除去し、述語や limit をプッシュダウンし、集計を分割します。これにより探索空間を縮小し、処理をストレージ側へ移動します。
 - DP + Cascades を併用: DPhpy が良好なテーブル結合順序を見つけ、memo 駆動の Cascades パスが同じ SExpr memo 上で最もコストの低い物理演算子を選択します。
 - 分散を考慮した設計: プランニングではローカル実行か分散実行かを決定し、ホットスポットを避けるために broadcast をキー ベースの shuffle に書き換えます。
 
@@ -127,7 +127,7 @@ SELECT c.region,
 
 フェーズ 2 では、実際に必要な処理だけを残すための対象を絞った書き換えを実行します。
 
-### 1. フィルタと limit を push down する {#1-push-filterslimits-down}
+### 1. フィルタと limit をプッシュダウンする {#1-push-filterslimits-down}
 
 ```
 # Before
@@ -179,9 +179,9 @@ Aggregate (final)
 
 partial aggregate はデータの近くで実行され、その後 1 回の final ステップで結果をマージします。
 
-### 4. フィルタを CTE に push down する {#4-push-filters-into-the-cte}
+### 4. フィルタを CTE にプッシュダウンする {#4-push-filters-into-the-cte}
 
-CTE のカラムだけを参照する述語は `recent_orders` の定義内に push down され、join 前にデータ量を削減します。
+CTE のカラムだけを参照する述語は `recent_orders` の定義内にプッシュダウンされ、join 前にデータ量を削減します。
 
 ```sql
 WITH recent_orders AS (
