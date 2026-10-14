@@ -164,11 +164,11 @@ GRANT SELECT ON ecommerce.orders TO ROLE support_global;
 
 結果:
 
-| 役割 | 行 | Phone |
+| ロール | 行 | Phone |
 |------|------|-------|
 | `analyst_apac` | APAC のみ | マスク済み (`138****5678`) |
 | `support_global` | すべて | 生データ |
-| `security_admin` | — | 権限拒否（SELECT 権限なし） |
+| `security_admin` | — | アクセス不可（SELECT 権限なし） |
 
 ```sql
 SET ROLE analyst_apac;
@@ -190,7 +190,7 @@ SELECT * FROM ecommerce.orders;
 REVOKE ROLE analyst_apac FROM USER analyst_user;
 ```
 
-**経験則:**
+**要点:**
 
 - ポリシーの作成 ≠ データのクエリ実行。アタッチには、ポリシーの `APPLY` とテーブルの `ALTER` の **両方** が必要です
 - ユーザーではなくロールに権限を付与することを推奨します
