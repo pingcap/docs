@@ -27,7 +27,7 @@ PostgreSQL データ統合を設定する前に、PostgreSQL インスタンス�
 
 ### 論理レプリケーションを有効にする {#enable-logical-replication}
 
-CDC および Snapshot + CDC モードでは、PostgreSQL WAL (Write-Ahead Log) を logical レベルで設定する必要があります。
+CDC および Snapshot + CDC モードでは、PostgreSQL WAL (Write-Ahead Log) のレベルを logical に設定する必要があります。
 
 ```ini title='postgresql.conf'
 wal_level = logical
