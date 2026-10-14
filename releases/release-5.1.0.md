@@ -278,7 +278,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
     - `new-collation`が有効で`new-row-format`が無効になっている場合に、クラスター化インデックスでポイントクエリが正しく実行されない可能性があるバグを修正しました [#24541](https://github.com/pingcap/tidb/issues/24541)
     - シャッフルハッシュ結合のためのパーティションキーの変換をリファクタリングする [#24490](https://github.com/pingcap/tidb/pull/24490)
     - `HAVING`句を含むクエリのプランを作成する際に発生するpanic問題を修正します [#24045](https://github.com/pingcap/tidb/issues/24045)
-    - 列剪定の改善により、 `Apply`および`Join`オペレーターの結果が不正になる問題を修正します [#23887](https://github.com/pingcap/tidb/issues/23887)
+    - 列プルーニングの改善により、 `Apply`および`Join`オペレーターの結果が不正になる問題を修正します [#23887](https://github.com/pingcap/tidb/issues/23887)
     - 非同期コミットからフォールバックしたプライマリロックが解決できないバグを修正 [#24384](https://github.com/pingcap/tidb/issues/24384)
     - fm-sketch レコードの重複を引き起こす可能性のある統計情報の GC 問題を修正しました [#24357](https://github.com/pingcap/tidb/pull/24357)
     - 悲観的ロックが `ErrKeyExists` エラーを受け取った場合、不要な悲観的ロールバックを回避する [#23799](https://github.com/pingcap/tidb/issues/23799)
