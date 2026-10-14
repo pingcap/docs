@@ -5,7 +5,7 @@ summary: Returns the grid distance between the given two H3 indexes.
 
 # H3_DISTANCE
 
-Returns the grid distance between the given two [H3](https://eng.uber.com/h3/) indexes.
+Returns the grid distance between the given two [H3](https://h3geo.org/) indexes.
 
 ## Syntax
 
