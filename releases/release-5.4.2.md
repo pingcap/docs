@@ -46,7 +46,7 @@ TiDB バージョン: 5.4.2
     - プランキャッシュが削除されたときに使用される間違ったメモリ使用量の値を修正しました[#34613](https://github.com/pingcap/tidb/issues/34613)
     - `LOAD DATA`文で列リストが機能しない問題を修正 [#35198](https://github.com/pingcap/tidb/issues/35198)
     - 悲観的トランザクションで`WriteConflict`エラーを報告しないようにする [#11612](https://github.com/tikv/tikv/issues/11612)
-    - リージョンエラーやネットワーク問題が発生した場合に事前書き込みリクエストが冪等性を持たない問題を修正[#34875](https://github.com/pingcap/tidb/issues/34875)
+    - リージョンエラーやネットワーク問題が発生した場合に事前書き込みリクエストが冪等でない問題を修正[#34875](https://github.com/pingcap/tidb/issues/34875)
     - ロールバックされる非同期コミットトランザクションがアトミック性を満たさない可能性がある問題を修正しました [#33641](https://github.com/pingcap/tidb/issues/33641)
     - 以前は、ネットワーク接続の問題が発生した場合、TiDBは切断されたセッションによって保持されていたリソースを正しく解放できないことがありました。この問題は修正され、開いているトランザクションをロールバックし、その他の関連リソースを解放できるようになりました[#34722](https://github.com/pingcap/tidb/issues/34722)
     - TiDBがCTE ビューをクエリするときに`references invalid table`エラーが誤って報告される可能性がある問題を修正しました。 [#33965](https://github.com/pingcap/tidb/issues/33965)

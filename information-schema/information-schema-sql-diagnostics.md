@@ -45,7 +45,7 @@ TiDB v4.0より前のシステムテーブルでは、現在のインスタン�
 
 TiDB クラスターには多くの監視メトリックがあるため、TiDB は v4.0 で次の監視サマリー テーブルを提供します。
 
-- 監視サマリーテーブル[`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md)は、すべての監視データがまとめられており、各監視メトリックをより効率的に確認できます。
+- 監視サマリーテーブル[`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md)は、すべての監視データを要約しており、各監視メトリックをより効率的に確認できます。
 - [`information_schema.metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md)もすべての監視データを要約します。特に、このテーブルは各監視メトリックの異なるラベルを使用して統計情報を集計します。
 
 ## 自動診断 {#automatic-diagnostics}

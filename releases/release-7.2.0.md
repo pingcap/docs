@@ -186,7 +186,7 @@ TiDB バージョン: 7.2.0
     - 推定時間を使用してステイル読み取りの ts を計算し、ステイル読み取りのオーバーヘッドを削減します [#44215](https://github.com/pingcap/tidb/issues/44215) @[you06](https://github.com/you06)
     - 長時間実行されるトランザクションのログとシステム変数を追加する [#41471](https://github.com/pingcap/tidb/issues/41471) @[crazycs520](https://github.com/crazycs520)
     - 圧縮されたMySQLプロトコルを介したTiDBへの接続をサポートします。これにより、低帯域幅ネットワーク下でのデータ集約型クエリのパフォーマンスが向上し、帯域幅コストが削減されます。これは`zlib`と`zstd`ベースの圧縮の両方をサポートします。 [#22605](https://github.com/pingcap/tidb/issues/22605) @[dveeden](https://github.com/dveeden)
-    - `utf8`と`utf8bm3`の両方を従来の 3 バイト UTF-8 文字セットエンコーディングとして認識することで、従来の UTF-8 エンコーディングを持つテーブルを MySQL 8.0 から TiDB に移行しやすくなります。 [#26226](https://github.com/pingcap/tidb/issues/26226) @[dveeden](https://github.com/dveeden)
+    - `utf8`と`utf8mb3`の両方を従来の 3 バイト UTF-8 文字セットエンコーディングとして認識することで、従来の UTF-8 エンコーディングを持つテーブルを MySQL 8.0 から TiDB に移行しやすくなります。 [#26226](https://github.com/pingcap/tidb/issues/26226) @[dveeden](https://github.com/dveeden)
     - `UPDATE`ステートメントでの代入に`:=`を使用することをサポート [#44751](https://github.com/pingcap/tidb/issues/44751) @[CbcWestwolf](https://github.com/CbcWestwolf)
 
 - TiKV

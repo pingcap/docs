@@ -59,7 +59,7 @@ Global Flags:
 
 ### 使用例 {#usage-example}
 
-次の`operate-source`コマンドを使用して、ソース設定ファイルを作成します。
+次の`operate-source`コマンドを使用して、`source.yaml`の設定に基づいてDMクラスターにデータソースを作成します。
 
 ```bash
 operate-source create ./source.yaml

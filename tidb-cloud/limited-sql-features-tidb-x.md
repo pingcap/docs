@@ -73,6 +73,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 | `ALTER INSTANCE` | サポートされていません | サポートされていません |
 | `ALTER INSTANCE RELOAD TLS` | サポートされていません | {{{ .starter }}} と {{{ .essential }}} では TLS 証明書が自動的に更新されます。 |
 | `ALTER TABLE ... ATTRIBUTES` | サポートされていません | サポートされていません |
+| `ALTER TABLE ... EXCHANGE PARTITION` | サポートされていません | サポートされていません |
 | `CHANGE DRAINER` | サポートされていません [^7] | サポートされていません [^7] |
 | `CHANGE PUMP` | サポートされていません [^7] | サポートされていません [^7] |
 | `FLASHBACK CLUSTER` | サポートされていません [^3] | サポートされていません [^3] |

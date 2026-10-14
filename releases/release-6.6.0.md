@@ -496,7 +496,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
     - `Prepare`または`Execute`を使用して一部の仮想テーブルをクエリする際に、リージョンが多数存在するのにテーブル ID をプッシュダウンできない場合に PD OOM が発生する問題を修正 [#39605](https://github.com/pingcap/tidb/issues/39605) @[djshow832](https://github.com/djshow832)
     - インデックス追加時にデータ競合が発生する可能性がある問題を修正 [#40879](https://github.com/pingcap/tidb/issues/40879) @[tangenta](https://github.com/tangenta)
     - 仮想列によって引き起こされる`can't find proper physical plan`の問題を修正します [#41014](https://github.com/pingcap/tidb/issues/41014) @[AilinKid](https://github.com/AilinKid)
-    - 動的トリミングモードでパーティションテーブルのグローバルバインディングが作成された後、TiDBが再起動できない問題を修正 [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
+    - 動的プルーニングモードでパーティションテーブルのグローバルバインディングが作成された後、TiDBが再起動できない問題を修正 [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
     - `auto analyze`が原因で正常シャットダウンに時間がかかる問題を修正 [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - IndexMerge オペレーターがメモリ制限動作をトリガーしたときの TiDBサーバーのpanicを修正 [#41036](https://github.com/pingcap/tidb/pull/41036) @[guo-shaoge](https://github.com/guo-shaoge)
     - パーティションテーブルに対する`SELECT * FROM table_name LIMIT 1`クエリが遅い問題を修正 [#40741](https://github.com/pingcap/tidb/pull/40741) @[solotzg](https://github.com/solotzg)

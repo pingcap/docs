@@ -206,7 +206,7 @@ TiDBバージョン：8.3.0
 
 ### システムテーブル {#system-tables}
 
-- [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システムテーブルに`SESSION_ALIAS`フィールドが追加され、DML文によって現在影響を受けている行数が表示されます。[#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
+- [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システムテーブルに`ROWS_AFFECTED`フィールドが追加され、DML文によって現在影響を受けている行数が表示されます。[#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
 
 ## 非推奨機能 {#deprecated-features}
 

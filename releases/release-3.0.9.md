@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.9 Release Notes
-summary: TiDB 3.0.9は2020年1月14日にリリースされました。既知の問題の修正と新機能が含まれています。Executor、Server、DDL、Planner、TiKV、PD、Tools、TiDB Ansibleにいくつかの改善が加えられました。主な変更点としては、システム変数のサポート、メトリクスの監視、トランザクション実行レイテンシーの最適化などが挙げられます。さらに、ロケーションラベル名でのバックラッシュの使用と、 TiDB Lightningデプロイメント用のディレクトリの自動作成のサポートが追加されました。
+summary: TiDB 3.0.9は2020年1月14日にリリースされました。既知の問題の修正と新機能が含まれています。Executor、Server、DDL、Planner、TiKV、PD、Tools、TiDB Ansibleにいくつかの改善が加えられました。主な変更点としては、システム変数のサポート、メトリクスの監視、トランザクション実行レイテンシーの最適化などが挙げられます。さらに、ロケーションラベル名でのスラッシュの使用と、 TiDB Lightningデプロイメント用のディレクトリの自動作成のサポートが追加されました。
 ---
 
 # TiDB 3.0.9 リリースノート {#tidb-3-0-9-release-notes}
@@ -45,7 +45,7 @@ TiDB Ansible バージョン: 3.0.9
 
 ## PD {#pd}
 
-- 位置ラベル名でバックラッシュ`/`使用をサポート [#2083](https://github.com/pingcap/pd/pull/2083)
+- 位置ラベル名でスラッシュ`/`使用をサポート [#2083](https://github.com/pingcap/pd/pull/2083)
 - tombstoneストアがラベルカウンタに誤って含まれているために誤った統計を修正しました [#2067](https://github.com/pingcap/pd/pull/2067)
 
 ## ツール {#tools}

@@ -167,7 +167,7 @@ ORDER BY total_queries DESC;
 
 ## `schema_unused_indexes`を使用して未使用のインデックスを識別する {#identify-unused-indexes-using-schema-unused-indexes}
 
-インデックス使用状況データを手動で分析するのは時間がかかります。このプロセスを簡素化するために、TiDBは[`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)を提供しています。これは、データベースの最後の再起動以降に使用されていないインデックスを一覧表示するシステムビューです。
+インデックス使用状況データを手動で分析するのは時間がかかります。このプロセスを簡素化するために、TiDBは[`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)を提供しています。これは、現在どのTiDBインスタンスにもそのインデックスへのアクセス記録がない場合に、そのインデックスを一覧表示するシステムビューです。インデックスの使用状況は各TiDBインスタンスで個別に追跡され、そのインスタンスが再起動するとリセットされます。
 
 これにより、次の操作を簡単に実行できるようになります。
 
@@ -179,7 +179,7 @@ ORDER BY total_queries DESC;
 
 ### `schema_unused_indexes`の仕組み {#how-schema-unused-indexes-works}
 
-`schema_unused_indexes`ビューは`TIDB_INDEX_USAGE`から派生しており、最後の TiDB 再起動以降にクエリアクティビティが 0 回記録されたインデックスを自動的に抽出することを意味します。
+`schema_unused_indexes`ビューは`CLUSTER_TIDB_INDEX_USAGE`から派生しています。各TiDBインスタンスの直近の再起動以降、そのインデックスへのアクセスがどのTiDBインスタンスにも記録されていない場合にのみ、そのインデックスを返します。
 
 未使用のインデックスのリストを取得するには、次の SQL文を実行します。
 
@@ -202,7 +202,7 @@ SELECT * FROM sys.schema_unused_indexes;
 
 `schema_unused_indexes`を使用する場合は、次の点に注意してください。
 
-#### インデックスは最後の再起動以降のみ未使用とみなされます {#indexes-are-considered-unused-only-since-the-last-restart}
+#### TiDBインスタンスが再起動するとインデックス使用状況データはリセットされます {#index-usage-data-is-reset-when-a-tidb-instance-restarts}
 
 - TiDB ノードが再起動すると、使用状況追跡データはリセットされます。
 - このデータに依存する前に、代表的なワークロードをキャプチャできるほど十分にシステムが実行中であることを確認してください。

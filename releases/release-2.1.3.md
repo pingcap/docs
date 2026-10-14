@@ -52,6 +52,6 @@ summary: "TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、シス
 ## ツール {#tools}
 
 - TiDB Binlog
-    - TiDBの起動または再起動中に発生する`no available pump`問題を修正[#157](https://github.com/pingcap/tidb-tools/pull/158)
+    - TiDBの起動または再起動中に発生する`no available pump`問題を修正[#158](https://github.com/pingcap/tidb-tools/pull/158)
     - Pumpクライアントログの出力を有効にする [#165](https://github.com/pingcap/tidb-tools/pull/165)
     - テーブルに一意キーのみがあり、主キーがない場合に、一意キーに NULL 値が含まれることで発生するデータの不整合の問題を修正しました。

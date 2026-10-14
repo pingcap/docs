@@ -15,10 +15,10 @@ TiDB Data Migration (DM) は、特定のスキーマまたはテーブルのbinl
 filters:
   rule-1:
     schema-pattern: "test_*"
-    ​table-pattern: "t_*"
-    ​events: ["truncate table", "drop table"]
+    table-pattern: "t_*"
+    events: ["truncate table", "drop table"]
     sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
-    ​action: Ignore
+    action: Ignore
 ```
 
 DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィルターを設定できます。詳細については、 [上流データベース設定ファイル](/dm/dm-source-configuration-file.md)を参照してください。

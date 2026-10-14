@@ -123,7 +123,7 @@ TiDB Binlog
 TiDB Lightning
 
 - 2つのチェックサムが同時に実行されているときに`tikv_gc_life_time`を元の値に戻せない問題を修正しました[#218](https://github.com/pingcap/tidb-lightning/pull/218)
-- 起動時に設定項目のチェック機能を追加し、無効な項目が見つかった場合にBinlogサービスを停止してエラーを報告します[#217](https://github.com/pingcap/tidb-lightning/pull/217)
+- 起動時に設定項目のチェック機能を追加し、無効な項目が見つかった場合にTiDB Lightningを停止してエラーを報告します[#217](https://github.com/pingcap/tidb-lightning/pull/217)
 
 ## TiDB Ansible {#tidb-ansible}
 

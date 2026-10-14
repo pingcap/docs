@@ -108,8 +108,7 @@ try (FileInputStream fileInputStream = new FileInputStream(file);
 
 > **Note:**
 >
-> ローカルの LakeSQL から {{{ .lake }}} のバックエンドオブジェクトストレージへ直接接続できることを確認してください。
-> できない場合は、`--set presigned_url_disabled=1` オプションを指定して presigned url 機能を無効にする必要があります。
+> ローカルの LakeSQL が {{{ .lake }}} のバックエンドオブジェクトストレージに直接接続できることを確認してください。接続できない場合は、`--set presigned_url_disabled=1` オプションを指定して presigned URL 機能を無効にしてください。
 
 ### ステップ 3. ロードしたデータを確認する {#step-3-verify-loaded-data}
 

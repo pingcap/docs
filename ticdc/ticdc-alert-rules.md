@@ -123,7 +123,7 @@ summary: TiCDC アラートルールとアラートの処理方法について�
 
 - 説明：
 
-    TiKV CDC の最小 Resolved TS 1 が 1分間進んでいません。
+    TiKV CDC の最小 Resolved TS が 1分間進んでいません。
 
 - 解決：
 

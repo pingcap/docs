@@ -3,7 +3,7 @@ title: CREATE FUNCTION
 summary: Flight 経由でリモートハンドラーを呼び出す外部関数を作成します（通常は Python またはその他のサービス）。
 ---
 
-# CREATE FUNCTION <!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
+# CREATE FUNCTION
 
 Flight 経由でリモートハンドラーを呼び出す外部関数を作成します（通常は Python またはその他のサービス）。
 

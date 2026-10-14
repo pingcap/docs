@@ -210,7 +210,7 @@ TiCDC がサービス GC セーフポイントに設定するデフォルトの 
 
 ## `--config`で設定ファイルを指定せずにレプリケーションタスクを作成した場合、TiCDC のデフォルトの動作はどうなりますか? {#what-is-the-default-behavior-of-ticdc-if-i-create-a-replication-task-without-specifying-the-configuration-file-in---config}
 
-`-config`パラメータを指定せずに`cdc cli changefeed create`コマンドを使用すると、TiCDC は次のデフォルト動作でレプリケーションタスクを作成します。
+`--config`パラメータを指定せずに`cdc cli changefeed create`コマンドを使用すると、TiCDC は次のデフォルト動作でレプリケーションタスクを作成します。
 
 - システムテーブルを除くすべてのテーブルを複製します
 - [有効なインデックス](/ticdc/ticdc-overview.md#best-practices)を含むテーブルのみを複製します

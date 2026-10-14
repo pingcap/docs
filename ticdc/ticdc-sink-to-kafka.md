@@ -273,10 +273,10 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 特定のテーブルに関連するDDLは、テーブルレベルDDLと呼ばれます（ `alter table`や`create table`など）。テーブルレベルDDLに対応するイベントは、ディスパッチャの設定に従って対応するトピックに送信されます。
 
-たとえば、 `matcher = ['test.*'], topic = {schema}_{table}`のようなディスパッチャの場合、DDL イベントは次のようにディスパッチされます。
+たとえば、 `matcher = ['test.*'], topic = "{schema}_{table}"`のようなディスパッチャの場合、DDL イベントは次のようにディスパッチされます。
 
 - DDLイベントに単一のテーブルが関係している場合、DDLイベントは対応するトピックにそのまま送信されます。例えば、DDLイベント`drop table test.table1`の場合、イベントは`test_table1`という名前のトピックに送信されます。
-- DDLイベントに複数のテーブルが関係する場合（ `rename table` / `drop table` / `drop view`は複数のテーブルに関係する可能性があります）、DDLイベントは複数のイベントに分割され、対応するトピックに送信されます。例えば、DDLイベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10`はトピック`test_table1`に送信され、イベント`rename table test.table2 to test.table20`はトピック`test.table2`に送信されます。
+- DDLイベントに複数のテーブルが関係する場合（ `rename table` / `drop table` / `drop view`は複数のテーブルに関係する可能性があります）、DDLイベントは複数のイベントに分割され、対応するトピックに送信されます。例えば、DDLイベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10`はトピック`test_table1`に送信され、イベント`rename table test.table2 to test.table20`はトピック`test_table2`に送信されます。
 
 ### パーティションディスパッチャ {#partition-dispatchers}
 

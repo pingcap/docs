@@ -144,7 +144,7 @@ Terraform によって管理されていないTiDB Cloud Dedicated ネットワ�
 
 1. 新しい`tidbcloud_dedicated_network_container`リソースのインポート ブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,network_container_id`の形式に置き換えます。
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をネットワークコンテナ ID に置き換えます。
 
     ```
     import {
@@ -172,8 +172,8 @@ Terraform によって管理されていないTiDB Cloud Dedicated ネットワ�
     次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後、出力例は次のようになります。
 
     ```shell
-    tidbcloud_dedicated_network_container.example: Importing... [id=10423692645683000000,example]
-    tidbcloud_dedicated_network_container.example: Import complete [id=10423692645683000000,example]
+    tidbcloud_dedicated_network_container.example: Importing... [id=1934235512696000000]
+    tidbcloud_dedicated_network_container.example: Import complete [id=1934235512696000000]
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
