@@ -57,9 +57,9 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Manage Resource Pools](https://docs.pingcap.com/tidbcloud/manage-resource-pools-byoc/?plan=byoc)
 
-[Create a {{{ .byoc }}} Instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-byoc/?plan=byoc)
+[Create a BYOC Instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-byoc/?plan=byoc)
 
-[Connect to a {{{ .byoc }}} Instance](https://docs.pingcap.com/tidbcloud/connect-to-tidb-instance/?plan=byoc)
+[Connect to a BYOC Instance](https://docs.pingcap.com/tidbcloud/connect-to-tidb-instance/?plan=byoc)
 
 [Use an HTAP Cluster](https://docs.pingcap.com/tidbcloud/tiflash-overview/?plan=byoc)
 

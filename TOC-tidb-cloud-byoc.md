@@ -29,7 +29,6 @@
 ## GUIDES
 
 - [Select Your Plan](/tidb-cloud/select-cluster-tier.md)
-- [Manage TiDB Cloud Resources and Projects](/tidb-cloud/manage-projects-and-resources.md)
 - Deploy BYOC
   - [Onboarding Overview](/tidb-cloud/byoc/byoc-onboarding-overview.md)
   - [Prepare AWS Environment](/tidb-cloud/byoc/byoc-prepare-environment-aws.md)
@@ -40,7 +39,8 @@
   - [Joint Validation](/tidb-cloud/byoc/joint-validation.md)
   - [Security Hardening](/tidb-cloud/byoc/security-hardening.md)
   - [Multi-Region Deployment](/tidb-cloud/byoc/multi-region-deployment.md)
-- Manage Resources
+- Manage Resources and Projects
+  - [Overview](/tidb-cloud/manage-projects-and-resources.md)
   - Resource Pools
     - [Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)
     - [Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md)
