@@ -7,6 +7,83 @@ summary: Learn about the PostgreSQL data manipulation and query features support
 
 PostgreSQL-compatible {{{ .starter }}} supports common PostgreSQL Data Manipulation Language (DML) statements and query features, including `INSERT`, `UPDATE`, `DELETE`, `RETURNING`, upsert, joins, aggregation, window functions, common table expressions (CTEs), subqueries, and set operations.
 
+## Prepare sample tables
+
+Some examples on this page use sample tables. Before running the examples, create the following tables in a test database.
+
+```sql
+CREATE TABLE users (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT CONSTRAINT users_email_key UNIQUE,
+    active BOOLEAN NOT NULL DEFAULT true
+);
+
+CREATE TABLE archived_users (
+    id BIGINT PRIMARY KEY,
+    name TEXT,
+    email TEXT
+);
+
+CREATE TABLE employees (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT,
+    department TEXT,
+    salary NUMERIC
+);
+
+CREATE TABLE customers (
+    id BIGSERIAL PRIMARY KEY,
+    email TEXT
+);
+
+CREATE TABLE leads (
+    id BIGSERIAL PRIMARY KEY,
+    email TEXT
+);
+
+CREATE TABLE categories (
+    id BIGINT PRIMARY KEY,
+    parent_id BIGINT,
+    name TEXT
+);
+
+CREATE TABLE orders (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT REFERENCES users(id)
+);
+```
+
+To populate the sample tables used in aggregation, window function, recursive CTE, and set operation examples, run:
+
+```sql
+INSERT INTO employees (name, department, salary) VALUES
+    ('Alice', 'Engineering', 90000),
+    ('Bob', 'Engineering', 85000),
+    ('Charlie', 'Engineering', 95000),
+    ('David', 'Engineering', 88000),
+    ('Emma', 'Engineering', 92000),
+    ('Frank', 'Engineering', 87000),
+    ('Grace', 'Sales', 75000);
+
+INSERT INTO categories (id, parent_id, name) VALUES
+    (1, NULL, 'Electronics'),
+    (2, 1, 'Computers'),
+    (3, 2, 'Laptops');
+
+INSERT INTO customers (email) VALUES
+    ('alice@example.com'),
+    ('bob@example.com');
+
+INSERT INTO leads (email) VALUES
+    ('charlie@example.com'),
+    ('david@example.com');
+```
+
+Run the setup statements once before executing the examples on this page. The `users` table is initially empty so that the `INSERT` examples can populate it without conflicts.
+
+Depending on the data inserted or modified by earlier examples, some queries might return no rows.
+
 ## Insert data
 
 Insert a single row:
@@ -79,6 +156,10 @@ DO UPDATE SET name = excluded.name;
 The `excluded` pseudo-table represents the row proposed for insertion.
 
 ## Update data
+
+In PostgreSQL-compatible {{{ .starter }}}, `UPDATE` requires the target table to have a primary key. Unlike PostgreSQL, updating a table without a primary key fails with `ERROR: No PK`, even if the `WHERE` condition matches no rows.
+
+If a table already contains data but has no primary key, adding a primary key directly to the populated table is not supported. To enable updates, back up or copy the existing rows to another table, remove the rows from the original table, add a primary key, and then reinsert the data. Ensure that the primary key values are unique and non-null before restoring the rows.
 
 Update rows matching a condition:
 

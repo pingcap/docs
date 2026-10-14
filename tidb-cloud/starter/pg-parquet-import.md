@@ -49,7 +49,7 @@ For example:
 
 ```sql
 CREATE TABLE users (
-    id BIGINT,
+    id BIGINT PRIMARY KEY,
     name TEXT,
     created_at TIMESTAMP
 );

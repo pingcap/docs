@@ -98,7 +98,7 @@ The following commonly used parameters are supported:
 | `transaction_isolation` | `read committed` | Yes | Current transaction isolation level. |
 | `lock_timeout` | `0` | Yes | Lock acquisition timeout. |
 | `password_encryption` | `scram-sha-256` | Yes | Password hashing algorithm. |
-| `max_identifier_length` | `63` | No | Maximum identifier length in bytes. |
+| `max_identifier_length` | `63` | No | Reports the PostgreSQL-compatible identifier length of 63 bytes. This limit is not currently enforced. |
 | `lc_messages` | `C` | Yes | Locale used for server messages. |
 
 `SHOW ALL` is the best way to inspect the complete parameter set available in the current PostgreSQL-compatible {{{ .starter }}} instance.

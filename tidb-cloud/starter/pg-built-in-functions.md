@@ -120,6 +120,58 @@ Date and time arithmetic with `INTERVAL` is also supported:
 SELECT NOW() - INTERVAL '7 days';
 ```
 
+## Set up sample data
+
+Some examples in the following sections query sample tables. Before running these examples, create the required tables and insert sample data into a test database.
+
+```sql
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    nickname TEXT,
+    active BOOLEAN,
+    score INTEGER
+);
+
+CREATE TABLE employees (
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    department TEXT,
+    salary NUMERIC
+);
+
+CREATE TABLE events (
+    id INTEGER PRIMARY KEY,
+    created_at TIMESTAMP
+);
+
+CREATE TABLE profiles (
+    id INTEGER PRIMARY KEY,
+    settings JSONB
+);
+
+INSERT INTO users (id, name, nickname, active, score) VALUES
+    (1, 'Alice', 'Ali', true, 100),
+    (2, 'Bob', NULL, false, 0),
+    (3, 'Charlie', NULL, true, 85);
+
+INSERT INTO employees (id, name, department, salary) VALUES
+    (1, 'Alice', 'Engineering', 90000),
+    (2, 'Bob', 'Engineering', 85000),
+    (3, 'Charlie', 'Sales', 75000);
+
+INSERT INTO events (id, created_at) VALUES
+    (1, '2026-09-01 10:00:00'),
+    (2, '2026-09-02 11:00:00'),
+    (3, '2026-09-03 12:00:00');
+
+INSERT INTO profiles (id, settings) VALUES
+    (1, '{"theme": "dark", "active": true}'::jsonb),
+    (2, '{"theme": "light", "active": false}'::jsonb);
+```
+
+Run this setup once before executing the table-based examples. The examples that use literal values do not require any setup.
+
 ## Aggregate functions
 
 The following common aggregate functions are supported:

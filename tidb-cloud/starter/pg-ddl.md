@@ -104,10 +104,9 @@ CREATE TABLE sequence_orders (
 
 ### Generated columns
 
-Stored generated columns are supported:
-
 ```sql
 CREATE TABLE products (
+    id BIGSERIAL PRIMARY KEY,
     price NUMERIC,
     tax NUMERIC,
     total NUMERIC GENERATED ALWAYS AS (price + tax) STORED

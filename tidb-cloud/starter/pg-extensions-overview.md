@@ -22,8 +22,7 @@ The following extensions and capabilities are currently supported:
 | Full-Text Search | Provides PostgreSQL-compatible full-text search using `tsvector`, `tsquery`, ranking functions, and GIN indexes. | Built in. |
 | Chinese tokenization (`zhparser`-compatible) | Provides Chinese-language tokenization for full-text search. | Built in and always available. |
 | `parquet` | Enables querying and importing Parquet data from supported URLs. | Run `CREATE EXTENSION parquet`. |
-| `http` | Enables HTTP requests directly from SQL. | Pre-enabled. |
-| `pg_cron` | Provides `pg_cron`-compatible metadata and management interfaces. Scheduled job execution is not currently available during the limited public preview. | Pre-enabled. |
+| `http` | Enables HTTP requests directly from SQL. HTTP functions are available without registering the extension. | Built in. |
 | `uuid-ossp` | Provides common UUID generation functions, such as `uuid_generate_v4()`. | Built in. `CREATE EXTENSION "uuid-ossp"` can be used to register extension metadata. |
 
 
@@ -44,13 +43,6 @@ The `vector` type and vector operators are built in. You can also run the follow
 CREATE EXTENSION IF NOT EXISTS vector;
 ```
 
-To view extensions that are available to the current database, run:
-
-```sql
-SELECT *
-FROM pg_available_extensions;
-```
-
 To view extensions registered in the current database, run:
 
 ```sql
@@ -66,3 +58,4 @@ The following limitations apply:
 - You cannot install arbitrary custom or third-party PostgreSQL extensions.
 - Some supported extensions provide only a subset of the behavior available in upstream PostgreSQL or the corresponding open-source extension.
 - Extension availability and behavior might change during the limited public preview.
+- `pg_cron` job scheduling is not supported during Public Preview. Although `CREATE EXTENSION pg_cron` might succeed, scheduling functions such as `cron.schedule()` are not available, and scheduled jobs cannot be executed. Querying `cron.job` might return an empty result, but this does not indicate that `pg_cron` is operational.
