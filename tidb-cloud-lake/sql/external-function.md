@@ -1,13 +1,13 @@
 ---
 title: 外部関数
-summary: このページでは、{{{ .lake }}} における External Function の操作について、機能別に整理して包括的に説明します。
+summary: このページでは、{{{ .lake }}} における外部関数の操作について、機能別に整理して包括的に説明します。
 ---
 
 # 外部関数
 
-このページでは、{{{ .lake }}} における External Function の操作について、機能別に整理して包括的に説明します。
+このページでは、{{{ .lake }}} における外部関数の操作について、機能別に整理して包括的に説明します。
 
-## External Function の管理 {#external-function-management}
+## 外部関数の管理 {#external-function-management}
 
 | コマンド | 説明 |
 |---------|-------------|
@@ -17,4 +17,4 @@ summary: このページでは、{{{ .lake }}} における External Function �
 
 > **Note:**
 >
-> {{{ .lake }}} の External Functions を使用すると、HTTP/HTTPS エンドポイントを介して外部サービスと統合することで機能を拡張でき、外部の処理能力を活用できます。
+> {{{ .lake }}} の外部関数を使用すると、HTTP/HTTPS エンドポイントを介して外部サービスと統合することで機能を拡張でき、外部の処理能力を活用できます。
