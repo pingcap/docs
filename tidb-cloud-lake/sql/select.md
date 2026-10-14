@@ -141,7 +141,7 @@ SELECT * EXCLUDE (id,lastname) FROM allemployees;
 | Macy      | F      |
 ```
 
-### COLUMNS Keyword {#columns-keyword}
+### COLUMNS キーワード {#columns-keyword}
 
 `COLUMNS` キーワードは、リテラルの正規表現パターンおよびラムダ式に基づいてカラムを選択するための柔軟な仕組みを提供します。
 
@@ -200,7 +200,7 @@ SELECT COLUMNS(* EXCLUDE salary) FROM employee;
 └───────────────────────────────────────────────────────┘
 ```
 
-### Column Position {#column-position}
+### カラム位置 {#column-position}
 
 `$N` を使用すると、`SELECT` 句内のカラムを表せます。たとえば、`$2` は 2 番目のカラムを表します。
 
@@ -217,7 +217,7 @@ SELECT a, $2 FROM t1;
 +---+-------+
 ```
 
-### Retrieving All Columns {#retrieving-all-columns}
+### すべてのカラムの取得 {#retrieving-all-columns}
 
 `SELECT *` 文は、テーブルまたはクエリ結果からすべてのカラムを取得するために使用されます。個々のカラム名を指定せずに完全なデータセットを取得できる便利な方法です。
 
@@ -239,7 +239,7 @@ FROM my_table;
 SELECT * FROM my_table;
 ```
 
-## FROM Clause {#from-clause}
+## FROM 句 {#from-clause}
 
 `SELECT` 文の `FROM` 句は、データをクエリする元となるテーブルを指定します。特に `SELECT` リストが長い場合や、選択したカラムの由来をすばやく把握したい場合には、`SELECT` 句の前に `FROM` 句を置くことで、コードの可読性を向上させることもできます。
 
@@ -263,11 +263,11 @@ FROM numbers(3) SELECT number;
 
 `FROM` 句では場所を指定することもでき、さまざまなソースのデータをテーブルに最初にロード (load) することなく直接クエリできます。詳細は、[stage 上のファイルのクエリ](/tidb-cloud-lake/sql/stage.md) を参照してください。
 
-## AT Clause {#at-clause}
+## AT 句 {#at-clause}
 
 `AT` 句を使用すると、データの過去のバージョンをクエリできます。詳細は、[AT](/tidb-cloud-lake/sql/at.md) を参照してください。
 
-## WHERE Clause {#where-clause}
+## WHERE 句 {#where-clause}
 
 ```sql
 SELECT number FROM numbers(3) WHERE number > 1;
@@ -278,7 +278,7 @@ SELECT number FROM numbers(3) WHERE number > 1;
 +--------+
 ```
 
-## GROUP BY Clause {#group-by-clause}
+## GROUP BY 句 {#group-by-clause}
 
 ```sql
 --Group the rows of the result set by column alias
@@ -309,7 +309,7 @@ SELECT number%2 as c1, number%3 as c2, MAX(number) FROM numbers(10000) GROUP BY 
 
 ```
 
-## HAVING Clause {#having-clause}
+## HAVING 句 {#having-clause}
 
 ```sql
 SELECT
@@ -491,7 +491,7 @@ SELECT number FROM numbers(5) ORDER BY number OFFSET 2;
 +--------+
 ```
 
-## IGNORE_RESULT {#ignore-result}
+## IGNORE_RESULT {#ignore_result}
 
 結果セットを出力しません。
 

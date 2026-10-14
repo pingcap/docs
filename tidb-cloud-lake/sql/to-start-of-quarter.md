@@ -1,11 +1,11 @@
 ---
 title: TO_START_OF_QUARTER
-summary: 日付または日時（timestamp/datetime）を、その四半期の初日まで切り下げます。四半期の初日は、1 January、1 April、1 July、または 1 October のいずれかです。日付を返します。
+summary: 日付または日時（timestamp/datetime）を、その四半期の初日まで切り下げます。四半期の初日は、1 月 1 日、4 月 1 日、7 月 1 日、または 10 月 1 日のいずれかです。日付を返します。
 ---
 
 # TO_START_OF_QUARTER
 
-日付または日時（timestamp/datetime）を、その四半期の初日まで切り下げます。四半期の初日は、1 January、1 April、1 July、または 1 October のいずれかです。日付を返します。
+日付または日時（timestamp/datetime）を、その四半期の初日まで切り下げます。四半期の初日は、1 月 1 日、4 月 1 日、7 月 1 日、または 10 月 1 日のいずれかです。日付を返します。
 
 ## 構文 {#syntax}
 

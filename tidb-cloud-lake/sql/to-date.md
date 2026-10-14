@@ -11,11 +11,11 @@ summary: 式を日付に変換します。変換対象には以下が含まれ�
 
 - **整数を日付に変換**: その整数を、Unix エポック（1970 年 1 月 1 日 00:00:00）より前の日数（負の数の場合）または後の日数（正の数の場合）として解釈します。Date 値の範囲は `1000-01-01` から `9999-12-31` までであることに注意してください。`SELECT TO_DATE(9999999999999999999)` を実行すると、{{{ .lake }}} はエラーを返します。
 
-- **指定した形式を使用して文字列を日付に変換**: この関数は 2 つの引数を取り、2 番目の文字列で指定した形式に基づいて、1 番目の文字列を日付に変換します。{{{ .lake }}} で日付と時刻の形式をカスタマイズするには、書式指定子を使用できます。サポートされている書式指定子の一覧については、[日付と時刻の書式設定](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time) を参照してください。
+- **指定した形式を使用して文字列を日付に変換**: この関数は 2 つの引数を取り、2 番目の文字列で指定した形式に基づいて、1 番目の文字列を日付に変換します。{{{ .lake }}} で日付と時刻の形式をカスタマイズするには、フォーマット指定子を使用できます。サポートされているフォーマット指定子の一覧については、[日付と時刻の書式設定](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time) を参照してください。
 
 関連情報: [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md)
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```sql
 -- Convert a timestamp-format string
@@ -28,12 +28,12 @@ TO_DATE(<integer>)
 TO_DATE('<string>', '<format>')
 ```
 
-## Aliases {#aliases}
+## エイリアス {#aliases}
 
 - [DATE](/tidb-cloud-lake/sql/date.md)
 - [STR_TO_DATE](/tidb-cloud-lake/sql/str-to-date.md)
 
-## Return Type {#return-type}
+## 戻り値の型 {#return-type}
 
 この関数は、`YYYY-MM-DD` 形式の日付を返します。
 
@@ -59,9 +59,9 @@ SELECT DATE_FORMAT(TO_DATE('2022-01-02')) AS dt, TYPEOF(dt);
 └─────────────────────────┘
 ```
 
-## Examples {#examples}
+## 例 {#examples}
 
-### Example 1: Converting a Timestamp-Format String {#example-1-converting-a-timestamp-format-string}
+### 例 1: タイムスタンプ形式の文字列を変換する {#example-1-converting-a-timestamp-format-string}
 
 ```sql
 SELECT TO_DATE('2022-01-02T01:12:00+07:00'), STR_TO_DATE('2022-01-02T01:12:00+07:00');
@@ -81,7 +81,7 @@ SELECT TO_DATE('2022-01-02'), STR_TO_DATE('2022-01-02');
 └───────────────────────────────────────────────────┘
 ```
 
-### Example 2: Converting an Integer {#example-2-converting-an-integer}
+### 例 2: 整数を変換する {#example-2-converting-an-integer}
 
 ```sql
 SELECT TO_DATE(1), STR_TO_DATE(1), TO_DATE(-1), STR_TO_DATE(-1);
@@ -94,7 +94,7 @@ SELECT TO_DATE(1), STR_TO_DATE(1), TO_DATE(-1), STR_TO_DATE(-1);
 └───────────────────────────────────────────────────────────────────┘
 ```
 
-### Example 3: Converting a String using the Given Format {#example-3-converting-a-string-using-the-given-format}
+### 例 3: 指定した形式を使用して文字列を変換する {#example-3-converting-a-string-using-the-given-format}
 
 ```sql
 SELECT TO_DATE('12/25/2022','%m/%d/%Y'), STR_TO_DATE('12/25/2022','%m/%d/%Y');

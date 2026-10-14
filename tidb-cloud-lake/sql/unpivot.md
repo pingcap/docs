@@ -9,7 +9,7 @@ summary: UNPIVOT 操作は、カラムを行に変換することでテーブル
 
 これは、2 つのカラム（テーブルまたはサブクエリから）とカラムのリストを受け取り、リストで指定された各カラムに対して 1 行を生成するリレーショナル演算子です。クエリでは、テーブル名またはサブクエリの後の FROM 句で指定します。
 
-**See also:** [PIVOT](/tidb-cloud-lake/sql/pivot.md)
+**関連情報:** [PIVOT](/tidb-cloud-lake/sql/pivot.md)
 
 ## 構文 {#syntax}
 

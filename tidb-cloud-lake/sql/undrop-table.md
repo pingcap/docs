@@ -7,7 +7,7 @@ summary: 削除されたテーブルの直近のバージョンを復元しま�
 
 削除されたテーブルの直近のバージョンを復元します。これは {{{ .lake }}} の Time Travel 機能を利用しており、削除されたオブジェクトは保持期間内でのみ復元できます（デフォルトは 24 時間）。
 
-**See also:**
+**関連情報:**
 
 - [CREATE TABLE](/tidb-cloud-lake/sql/create-table.md)
 - [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md)

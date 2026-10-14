@@ -26,7 +26,7 @@ TIME_SLICE(<date_or_time_expr>, <slice_length>, <IntervalKind> [, <start_or_end>
 
 - 指定された呼び出し TIME_SLICE(value, slice_length, IntervalKind, start_or_end) について:
     - START は、そのスライスの開始境界（包含）となる正確なカレンダー境界を返します。
-    - END は、そのスライスの直後の境界（排他的な上限）を返します。入力型とシステム精度によっては、最小の時間単位を減算して包含的な終端に変換することで、END をそのスライスで表現可能な最後の時点として解釈することもできます。
+    - END は、そのスライスの直後の境界（この境界自体は含まない上限）を返します。入力型とシステム精度によっては、最小の時間単位を減算して包含的な終端に変換することで、END をそのスライスで表現可能な最後の時点として解釈することもできます。
 
 - サポートされる IntervalKind と入力型の対応:
     - DATE 入力: YEAR, QUARTER, MONTH, WEEK, DAY。

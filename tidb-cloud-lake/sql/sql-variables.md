@@ -1,9 +1,9 @@
 ---
-title: SQL Variables
+title: SQL 変数
 summary: SQL 変数を使用すると、セッション内で一時データを保存および管理でき、スクリプトをより動的で再利用しやすくできます。
 ---
 
-# SQL Variables
+# SQL 変数
 
 SQL 変数を使用すると、セッション内で一時データを保存および管理でき、スクリプトをより動的で再利用しやすくできます。
 
@@ -21,7 +21,7 @@ SHOW VARIABLES コマンドには、対応するテーブル関数 [`SHOW_VARIAB
 
 文の中で変数を参照して、値を動的に置き換えたり、実行時にオブジェクト名を構築したりできます。
 
-### `$` と `getvariable()` を使った変数へのアクセス {#accessing-variables-with-and-getvariable}
+### `$` と `getvariable()` を使った変数へのアクセス {#accessing-variables-with--and-getvariable}
 
 `$` 記号または `getvariable()` 関数を使用して、変数の値をクエリに直接埋め込みます。
 
@@ -38,7 +38,7 @@ SELECT * FROM sales WHERE amount > getvariable('threshold');
 
 ### `IDENTIFIER` を使ったオブジェクトへのアクセス {#accessing-objects-with-identifier}
 
-`IDENTIFIER` キーワードを使用すると、名前が変数に格納されているデータベースオブジェクトを参照でき、柔軟なクエリ構築が可能になります。（Note: LakeSQL はまだ `IDENTIFIER` をサポートしていません。）
+`IDENTIFIER` キーワードを使用すると、名前が変数に格納されているデータベースオブジェクトを参照でき、柔軟なクエリ構築が可能になります。（注: LakeSQL はまだ `IDENTIFIER` をサポートしていません。）
 
 ```sql title='Example:'
 -- Create a table with sales data

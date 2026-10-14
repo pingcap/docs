@@ -9,7 +9,7 @@ summary: 現在のロールから参照可能なタスクを一覧表示しま�
 
 **NOTICE:** このコマンドは、{{{ .lake }}} でのみそのまま利用できます。セルフホスト環境では、タスクをクエリできるように Cloud Control を設定してください。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```sql
 SHOW TASKS [LIKE '<pattern>' | WHERE <expr>]
@@ -20,7 +20,7 @@ SHOW TASKS [LIKE '<pattern>' | WHERE <expr>]
 | LIKE      | `%` ワイルドカードを使用した大文字小文字を区別するパターンマッチングで、タスク名を絞り込みます。 |
 | WHERE     | 出力カラムに対する式を使用して結果セットを絞り込みます。               |
 
-### Output {#output}
+### 出力 {#output}
 
 `SHOW TASKS` は次のカラムを返します。
 
@@ -42,7 +42,7 @@ SHOW TASKS [LIKE '<pattern>' | WHERE <expr>]
 - `last_suspended_on`: タスクが最後に一時停止された時刻のタイムスタンプ。存在する場合。
 - `session_parameters`: タスク実行時に適用されるセッションパラメータ。
 
-## Examples {#examples}
+## 例 {#examples}
 
 現在のロールで利用可能なすべてのタスクを一覧表示します。
 

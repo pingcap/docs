@@ -28,7 +28,7 @@ cloud control が有効なデプロイ向けの Worker 関連 SQL コマンド�
 | [ALTER WORKER](/tidb-cloud-lake/sql/alter-worker.md) | worker のタグ、オプション、または状態を変更します |
 | [DROP WORKER](/tidb-cloud-lake/sql/drop-worker.md) | worker 定義を削除します |
 | [SHOW WORKERS](/tidb-cloud-lake/sql/show-workers.md) | worker とそのメタデータを一覧表示します |
-| [Examples](/tidb-cloud-lake/sql/worker-examples.md) | 検証済みの worker SQL の例を示します |
+| [Worker の例](/tidb-cloud-lake/sql/worker-examples.md) | 検証済みの worker SQL の例を示します |
 
 ## 注意事項 {#notes}
 

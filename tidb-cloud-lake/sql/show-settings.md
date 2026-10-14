@@ -1,11 +1,11 @@
 ---
 title: SHOW SETTINGS
-summary: "{{{ .lake }}} には、{{{ .lake }}} の動作を制御するためのさまざまなシステム設定があります。このコマンドは、利用可能なシステム設定の現在値とデフォルト値、および Setting Levels を表示します。設定を更新するには、SET または UNSET コマンドを使用します。"
+summary: "{{{ .lake }}} には、{{{ .lake }}} の動作を制御するためのさまざまなシステム設定があります。このコマンドは、利用可能なシステム設定の現在値とデフォルト値、および設定レベルを表示します。設定を更新するには、SET または UNSET コマンドを使用します。"
 ---
 
 # SHOW SETTINGS
 
-{{{ .lake }}} には、{{{ .lake }}} の動作を制御するためのさまざまなシステム設定があります。このコマンドは、利用可能なシステム設定の現在値とデフォルト値、および [Setting Levels](#setting-levels) を表示します。設定を更新するには、[SET](/tidb-cloud-lake/sql/set.md) または [UNSET](/tidb-cloud-lake/sql/unset.md) コマンドを使用します。
+{{{ .lake }}} には、{{{ .lake }}} の動作を制御するためのさまざまなシステム設定があります。このコマンドは、利用可能なシステム設定の現在値とデフォルト値、および [設定レベル](#setting-levels) を表示します。設定を更新するには、[SET](/tidb-cloud-lake/sql/set.md) または [UNSET](/tidb-cloud-lake/sql/unset.md) コマンドを使用します。
 
 - {{{ .lake }}} の一部の動作はシステム設定では変更できないため、{{{ .lake }}} を使用する際に考慮する必要があります。たとえば、次のとおりです。
     - {{{ .lake }}} は文字列を UTF-8 文字セットにエンコードします。
@@ -18,7 +18,7 @@ summary: "{{{ .lake }}} には、{{{ .lake }}} の動作を制御するための
 SHOW SETTINGS [LIKE '<pattern>' | WHERE <expr>] | [LIMIT <limit>]
 ```
 
-## Setting Levels {#setting-levels}
+## 設定レベル {#setting-levels}
 
 各 {{{ .lake }}} 設定には、Global、Default、または Session のいずれかのレベルがあります。次の表は、各レベルの違いを示しています。
 

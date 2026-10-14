@@ -9,7 +9,7 @@ summary: このページでは、{{{ .lake }}} におけるタスク操作の包
 
 ## タスク管理 {#task-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [CREATE TASK](/tidb-cloud-lake/sql/create-task.md) | 新しいスケジュール済みタスクを作成します |
 | [ALTER TASK](/tidb-cloud-lake/sql/alter-task.md) | 既存のタスクを変更します |
@@ -18,7 +18,7 @@ summary: このページでは、{{{ .lake }}} におけるタスク操作の包
 
 ## タスク情報 {#task-information}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [SHOW TASKS](/tidb-cloud-lake/sql/show-tasks.md) | 現在のロールから参照可能なタスクを一覧表示します |
 | [TASK HISTORY](/tidb-cloud-lake/sql/task-history.md) | 1 つ以上のタスクの実行履歴を表示します |

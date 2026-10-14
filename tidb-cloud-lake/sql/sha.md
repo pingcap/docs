@@ -1,11 +1,11 @@
 ---
 title: SHA
-summary: RFC 3174（Secure Hash Algorithm）で説明されているとおり、文字列の SHA-1 160-bit チェックサムを計算します。引数が NULL の場合、値は 40 桁の 16 進数文字列または NULL として返されます。
+summary: RFC 3174（Secure Hash Algorithm）で説明されているとおり、文字列の SHA-1 160-bit チェックサムを計算します。値は 40 桁の 16 進数文字列として返されます。引数が NULL の場合は NULL を返します。
 ---
 
 # SHA
 
-RFC 3174（Secure Hash Algorithm）で説明されているとおり、文字列の SHA-1 160-bit チェックサムを計算します。引数が NULL の場合、値は 40 桁の 16 進数文字列または NULL として返されます。
+RFC 3174（Secure Hash Algorithm）で説明されているとおり、文字列の SHA-1 160-bit チェックサムを計算します。値は 40 桁の 16 進数文字列として返されます。引数が NULL の場合は NULL を返します。
 
 ## 構文 {#syntax}
 

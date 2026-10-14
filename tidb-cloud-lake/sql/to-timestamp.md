@@ -31,7 +31,7 @@ TO_TIMESTAMP(<expr>)
 TO_TIMESTAMP(<expr>, <pattern>)
 ```
 
-この関数は、2 番目の文字列で指定されたパターンに基づいて、最初の文字列を timestamp に変換します。パターンを指定するには、specifier を使用します。specifier を使うことで、日付および時刻の値に対して希望する形式を定義できます。サポートされている specifier の一覧については、[日付と時刻の書式設定](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time) を参照してください。
+この関数は、2 番目の文字列で指定されたパターンに基づいて、最初の文字列を timestamp に変換します。パターンを指定するには、フォーマット指定子を使用します。フォーマット指定子を使うことで、日付および時刻の値に対して希望する形式を定義できます。サポートされているフォーマット指定子の一覧については、[日付と時刻の書式設定](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time) を参照してください。
 
 ```sql
 -- Convert an integer to a timestamp based on the specified scale

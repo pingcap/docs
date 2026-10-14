@@ -7,7 +7,7 @@ summary: クエリが返す行数の最大数を制限します。
 
 クエリが返す行数の最大数を制限します。
 
-関連情報: [Limit Clause](/tidb-cloud-lake/sql/select.md#limit-clause)
+関連情報: [LIMIT 句](/tidb-cloud-lake/sql/select.md#limit-clause)
 
 ## 構文 {#syntax}
 

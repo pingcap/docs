@@ -9,7 +9,7 @@ summary: このセクションでは、{{{ .lake }}} における型変換関数
 
 ## 型変換 {#type-conversion}
 
-| Function | 説明 | 例 |
+| 関数 | 説明 | 例 |
 |----------|-------------|---------|
 | [AS_BOOLEAN](/tidb-cloud-lake/sql/as-boolean.md) | VARIANT 値を BOOLEAN に変換します | `AS_BOOLEAN(PARSE_JSON('true'))` → `true` |
 | [AS_INTEGER](/tidb-cloud-lake/sql/as-integer.md) | VARIANT 値を BIGINT に変換します | `AS_INTEGER(PARSE_JSON('42'))` → `42` |

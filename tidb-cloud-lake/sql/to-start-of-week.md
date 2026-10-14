@@ -1,11 +1,11 @@
 ---
 title: TO_START_OF_WEEK
-summary: 日付または日時（timestamp/datetime）に対して、その週の最初の日を返します。週の最初の日は、引数 mode で指定された Sunday または Monday です。
+summary: 日付または日時（timestamp/datetime）に対して、その週の最初の日を返します。週の最初の日は、引数 mode で指定された日曜日または月曜日です。
 ---
 
 # TO_START_OF_WEEK
 
-日付または日時（timestamp/datetime）に対して、その週の最初の日を返します。週の最初の日は、引数 `mode` で Sunday または Monday のいずれかを指定できます。
+日付または日時（timestamp/datetime）に対して、その週の最初の日を返します。週の最初の日は、引数 `mode` で日曜日または月曜日のいずれかを指定できます。
 
 ## 構文 {#syntax}
 

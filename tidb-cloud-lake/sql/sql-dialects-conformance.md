@@ -1,9 +1,9 @@
 ---
-title: SQL Dialects & Conformance
+title: SQL 方言と準拠
 summary: このページでは、{{{ .lake }}} がサポートする SQL 方言の詳細と、SQL 標準への準拠状況、特に SQL:2011 の機能と {{{ .lake }}} におけるそのサポート状況について説明します。
 ---
 
-# SQL Dialects & Conformance
+# SQL 方言と準拠
 
 このページでは、{{{ .lake }}} がサポートする SQL 方言の詳細と、SQL 標準への準拠状況、特に SQL:2011 の機能と {{{ .lake }}} におけるそのサポート状況について説明します。
 
@@ -11,7 +11,7 @@ summary: このページでは、{{{ .lake }}} がサポートする SQL 方言�
 
 SQL 方言とは、Structured Query Language の特定のバリエーションまたは種類を指します。{{{ .lake }}} はデフォルトで `PostgreSQL` 方言をサポートしており、他のサポート対象の方言へ柔軟に切り替えることもできます。サポートされる方言とその簡単な説明については、以下の表を参照してください。
 
-| Dialect       | 概要                                                                                            | 詳細情報                     |
+| 方言       | 概要                                                                                            | 詳細情報                     |
 |---------------|-------------------------------------------------------------------------------------------------|------------------------------|
 | `PostgreSQL`  | エンタープライズで一般的に使用される、デフォルトでサポートされる方言                           | <https://www.postgresql.org/>  |
 | `MySQL`       | オープンソースのデータベース管理システム                                                        | <https://www.mysql.com/>       |
@@ -150,7 +150,7 @@ SHOW SETTINGS LIKE 'sql_dialect';
 | F031-13     | DROP TABLE 文: RESTRICT 句                                                                                     | <span class="text-orange">Partial</span>     |                                                                                                               |
 | F031-16     | DROP VIEW 文: RESTRICT 句                                                                                      | <span class="text-orange">Partial</span>     |                                                                                                               |
 | F031-19     | REVOKE 文: RESTRICT 句                                                                                         | <span class="text-orange">Partial</span>     |                                                                                                               |
-| **F041**    | **基本テーブル結合テーブル**                                                                                                    | <span class="text-blue">Yes</span>            |                                                                                                               |
+| **F041**    | **基本的な結合テーブル**                                                                                                    | <span class="text-blue">Yes</span>            |                                                                                                               |
 | F041-01     | 内部結合（ただし INNER キーワードは必須ではない）                                                                        | <span class="text-blue">Yes</span>         |                                                                                                               |
 | F041-02     | INNER キーワード                                                                                                             | <span class="text-blue">Yes</span>         |                                                                                                               |
 | F041-03     | LEFT OUTER JOIN                                                                                                           | <span class="text-blue">Yes</span>         |                                                                                                               |

@@ -9,7 +9,7 @@ summary: このページでは、{{{ .lake }}} におけるユーザーおよび
 
 ## ユーザー管理 {#user-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [CREATE USER](/tidb-cloud-lake/sql/create-user.md) | 新しいユーザーアカウントを作成します |
 | [ALTER USER](/tidb-cloud-lake/sql/alter-user.md) | 既存のユーザーアカウントを変更します |
@@ -19,7 +19,7 @@ summary: このページでは、{{{ .lake }}} におけるユーザーおよび
 
 ## ロール管理 {#role-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [CREATE ROLE](/tidb-cloud-lake/sql/create-role.md) | 新しいロールを作成します |
 | [DROP ROLE](/tidb-cloud-lake/sql/drop-role.md) | ロールを削除します |
@@ -29,7 +29,7 @@ summary: このページでは、{{{ .lake }}} におけるユーザーおよび
 
 ## 権限管理 {#privilege-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [GRANT](/tidb-cloud-lake/sql/grant.md) | ロールに権限を付与します |
 | [REVOKE](/tidb-cloud-lake/sql/revoke.md) | ロールから権限を削除します |

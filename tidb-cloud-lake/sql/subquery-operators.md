@@ -48,7 +48,7 @@ WHERE  t1.a < (SELECT Min(t2.a)
 +--------+
 ```
 
-## EXISTS / NOT EXISTS {#exists-not-exists}
+## EXISTS / NOT EXISTS {#exists--not-exists}
 
 EXISTS サブクエリは、WHERE 句に記述できるブール式です。
 
@@ -65,7 +65,7 @@ EXISTS サブクエリは、WHERE 句に記述できるブール式です。
 >
 > * 相関 EXISTS サブクエリは、現在のところ WHERE 句でのみサポートされています。
 
-### 例 {#examples}
+### 例 {#examples-1}
 
 ```sql
 SELECT number FROM numbers(10) WHERE number>5 AND exists(SELECT number FROM numbers(5) WHERE number>4);
@@ -101,19 +101,19 @@ SELECT number FROM numbers(10) WHERE number>5 AND not exists(SELECT number FROM 
 
 `not exists(SELECT number FROM numbers(5) WHERE number>4)` は TRUE です。
 
-## IN / NOT IN {#in-not-in}
+## IN / NOT IN {#in--not-in}
 
 IN または NOT IN を使用すると、式がサブクエリによって返されるリスト内のいずれかの値に一致するかどうかを確認できます。
 
 - IN または NOT IN を使用する場合、サブクエリは値の単一カラムを返す必要があります。
 
-### 構文 {#syntax}
+### 構文 {#syntax-1}
 
 ```sql
 [ NOT ] IN ( <query> )
 ```
 
-### 例 {#examples}
+### 例 {#examples-2}
 
 ```sql
 CREATE TABLE t1 (a int);
@@ -163,7 +163,7 @@ ANY（または SOME）を使用すると、比較がサブクエリによって
 - サブクエリが値を返さない場合、比較結果は false になります。
 - SOME は ANY と同じように動作します。
 
-### 構文 {#syntax}
+### 構文 {#syntax-2}
 
 ```sql
 -- ANY
@@ -173,7 +173,7 @@ comparison_operator ANY ( <query> )
 comparison_operator SOME ( <query> )
 ```
 
-### 例 {#examples}
+### 例 {#examples-3}
 
 ```sql
 CREATE TABLE t1 (a int);
@@ -209,13 +209,13 @@ ALL を使用すると、サブクエリが返すすべての値に対して比�
 - キーワード ALL は、[比較演算子](/tidb-cloud-lake/sql/comparison-operators.md) のいずれかの後に置く必要があります。
 - サブクエリが値を返さない場合、この比較は true と評価されます。
 
-### 構文 {#syntax}
+### 構文 {#syntax-3}
 
 ```sql
 comparison_operator ALL ( <query> )
 ```
 
-### 例 {#examples}
+### 例 {#examples-4}
 
 ```sql
 CREATE TABLE t1 (a int);

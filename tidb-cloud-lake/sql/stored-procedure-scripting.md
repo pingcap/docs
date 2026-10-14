@@ -1,9 +1,9 @@
 ---
-title: Stored Procedure & SQL Scripting
+title: ストアドプロシージャと SQL スクリプト
 summary: "{{{ .lake }}} のストアドプロシージャを使用すると、制御フロー、変数、カーソル、動的ステートメントにアクセスしながら、サーバー上で実行される SQL ロジックをパッケージ化できます。このページでは、プロシージャの作成方法と、それを支えるインラインスクリプトの記述方法について説明します。"
 ---
 
-# Stored Procedure & SQL Scripting
+# ストアドプロシージャと SQL スクリプト
 
 {{{ .lake }}} のストアドプロシージャを使用すると、制御フロー、変数、カーソル、動的ステートメントにアクセスしながら、サーバー上で実行される SQL ロジックをパッケージ化できます。このページでは、プロシージャの作成方法と、それを支えるインラインスクリプトの記述方法について説明します。
 
@@ -322,7 +322,7 @@ $$;
 CALL PROCEDURE sp_reverse_count(1, 5);
 ```
 
-#### `FOR ... IN` クエリ {#for-in-queries}
+#### `FOR ... IN` クエリ {#for--in-queries}
 
 クエリの結果を直接反復処理します。ループ変数は、カラムをフィールドとして公開します。
 
@@ -343,7 +343,7 @@ $$;
 CALL PROCEDURE sp_sum_query(5);
 ```
 
-`FOR` は、事前に宣言された result-set 変数やカーソルに対しても反復できます（[クエリ結果の操作](#working-with-query-results) を参照）。
+`FOR` は、事前に宣言された結果セット変数やカーソルに対しても反復できます（[クエリ結果の操作](#working-with-query-results) を参照）。
 
 ### `WHILE` {#while}
 
@@ -411,7 +411,7 @@ $$;
 CALL PROCEDURE sp_retry_counter(5);
 ```
 
-### Break and Continue {#break-and-continue}
+### BREAK と CONTINUE {#break-and-continue}
 
 `BREAK` はループを途中で終了するために使用し、`CONTINUE` は次の反復にスキップするために使用します。
 

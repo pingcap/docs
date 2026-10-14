@@ -1,20 +1,20 @@
 ---
-title: Table Functions
+title: テーブル関数
 summary: このページでは、{{{ .lake }}} のテーブル関数に関するリファレンス情報を提供します。テーブル関数は、行の集合（テーブルに類似）を返し、クエリの FROM 句で使用できます。
 ---
 
-# Table Functions
+# テーブル関数
 
 このページでは、{{{ .lake }}} のテーブル関数に関するリファレンス情報を提供します。テーブル関数は、行の集合（テーブルに類似）を返し、クエリの FROM 句で使用できます。
 
-## データスキーマとファイル検査 {#data-schema-file-inspection}
+## データスキーマとファイル検査 {#data-schema--file-inspection}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
 | [INFER_SCHEMA](/tidb-cloud-lake/sql/infer-schema.md) | ファイルメタデータのスキーマを検出し、カラム定義を取得します | `SELECT * FROM INFER_SCHEMA(LOCATION => '@mystage/data/')` |
 | [INSPECT_PARQUET](/tidb-cloud-lake/sql/inspect-parquet.md) | Parquet ファイルの構造を検査します | `SELECT * FROM INSPECT_PARQUET(LOCATION => '@mystage/data.parquet')` |
 
-## stage とクエリ管理 {#stage-query-management}
+## stage とクエリ管理 {#stage--query-management}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
@@ -27,13 +27,13 @@ summary: このページでは、{{{ .lake }}} のテーブル関数に関する
 |----------|-------------|--------|
 | [GENERATE_SERIES](/tidb-cloud-lake/sql/generate-series.md) | 値のシーケンスを生成します | `SELECT * FROM GENERATE_SERIES(1, 10, 2)` |
 
-## データ変換と展開 {#data-transformation-expansion}
+## データ変換と展開 {#data-transformation--expansion}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
 | [FLATTEN](/tidb-cloud-lake/sql/flatten.md) | ネストされた JSON または配列データを表形式に変換します | `SELECT * FROM FLATTEN(INPUT => parse_json('[1,2,3]'))` |
 
-## システム情報と管理 {#system-information-management}
+## システム情報と管理 {#system-information--management}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|

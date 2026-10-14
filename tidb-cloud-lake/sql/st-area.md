@@ -1,6 +1,6 @@
 ---
 title: ST_AREA
-summary: GEOMETRY または GEOGRAPHY オブジェクトの面積を返します。GEOMETRY 入力の場合、この関数は [shoelace formula](https://en.wikipedia.org/wiki/Shoelace_formula) に基づく平面面積を使用します。GEOGRAPHY 入力の場合、この関数は [Karney (2013)](https://arxiv.org/pdf/1109.4448.pdf) で説明されている手法を使用して、地球の楕円体モデル上の測地面積を計測します。
+summary: GEOMETRY または GEOGRAPHY オブジェクトの面積を返します。GEOMETRY 入力の場合、この関数は shoelace formula に基づく平面面積を使用します。GEOGRAPHY 入力の場合、この関数は Karney (2013) で説明されている手法を使用して、地球の楕円体モデル上の測地面積を計測します。
 ---
 
 # ST_AREA

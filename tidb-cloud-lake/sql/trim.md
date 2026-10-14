@@ -60,7 +60,7 @@ SELECT TRIM(TRAILING 'xxx' FROM 'datalakexxx' ), TRIM(TRAILING 'xx' FROM 'datala
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-この例では、trim string 内の各文字を個別に扱い、入力文字列の先頭と末尾の両方から一致する文字を削除します。
+この例では、トリム文字列内の各文字を個別に扱い、入力文字列の先頭と末尾の両方から一致する文字を削除します。
 
 ```sql
 SELECT TRIM('xxxdatalakexxx', 'xyz'), TRIM('xxxdatalakexxx', 'xy'), TRIM('xxxdatalakexxx', 'x');

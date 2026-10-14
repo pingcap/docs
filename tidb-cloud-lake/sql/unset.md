@@ -5,7 +5,7 @@ summary: 1 つ以上のシステム設定をグローバルまたはデフォル
 
 # UNSET
 
-1 つ以上のシステム設定をグローバルまたはデフォルトのレベルと値に戻します。設定レベルの詳細については、[Setting Levels](/tidb-cloud-lake/sql/show-settings.md#setting-levels) を参照してください。現在のすべての設定を表示するには、[SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md) を使用します。
+1 つ以上のシステム設定をグローバルまたはデフォルトのレベルと値に戻します。設定レベルの詳細については、[設定レベル](/tidb-cloud-lake/sql/show-settings.md#setting-levels) を参照してください。現在のすべての設定を表示するには、[SHOW SETTINGS](/tidb-cloud-lake/sql/show-settings.md) を使用します。
 
 関連情報: [SET](/tidb-cloud-lake/sql/set.md)
 

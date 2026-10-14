@@ -41,7 +41,7 @@ SELECT TO_BINARY(PARSE_JSON('{"key":"value", "number":123}')) AS binary_variant;
 └──────────────────────────────────────────────────────────────────────────┘
 ```
 
-この例では、bitmap データをバイナリに変換します。
+この例では、ビットマップデータをバイナリに変換します。
 
 ```sql
 SELECT TO_BINARY(TO_BITMAP('10,20,30')) AS binary_bitmap;

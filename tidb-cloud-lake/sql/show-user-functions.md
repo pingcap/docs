@@ -18,7 +18,7 @@ SHOW USER FUNCTIONS
 | カラム | 説明 |
 |--------|-------------|
 | `name` | 関数名 |
-| `is_aggregate` | 集約関数かどうか（UDF の場合は NULL） |
+| `is_aggregate` | 集計関数かどうか（UDF の場合は NULL） |
 | `description` | 指定されている場合の関数の説明 |
 | `arguments` | JSON 形式の関数パラメータ |
 | `language` | プログラミング言語: SQL、python、javascript、wasm、または external |

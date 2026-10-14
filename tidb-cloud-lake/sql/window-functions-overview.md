@@ -1,13 +1,13 @@
 ---
 title: ウィンドウ関数
-summary: ウィンドウ関数は、関連する行の集合に対して計算を実行しながら、入力行ごとに 1 つの結果を返します。集約関数とは異なり、ウィンドウ関数は行を 1 つの出力にまとめません。
+summary: ウィンドウ関数は、関連する行の集合に対して計算を実行しながら、入力行ごとに 1 つの結果を返します。集計関数とは異なり、ウィンドウ関数は行を 1 つの出力にまとめません。
 ---
 
 # ウィンドウ関数
 
 ## 概要 {#overview}
 
-ウィンドウ関数は、関連する行の集合に対して計算を実行しながら、入力行ごとに 1 つの結果を返します。集約関数とは異なり、ウィンドウ関数は行を 1 つの出力にまとめません。
+ウィンドウ関数は、関連する行の集合に対して計算を実行しながら、入力行ごとに 1 つの結果を返します。集計関数とは異なり、ウィンドウ関数は行を 1 つの出力にまとめません。
 
 **主な特徴:**
 
@@ -16,24 +16,24 @@ summary: ウィンドウ関数は、関連する行の集合に対して計算�
 - ウィンドウ内の他の行の値にアクセスできます
 - 柔軟な計算のためにパーティション分割と並び替えをサポートします
 
-**Note on SQL examples in this documentation:**
+**このドキュメントの SQL 例について:**
 
-- ✅ **Complete SQL statements** は {{{ .lake }}} に対して検証済みです
-- ⚠️ **Syntax examples** はウィンドウフレームのパターンを示します（完全な文ではありません）
+- ✅ **完全な SQL 文**は {{{ .lake }}} に対して検証済みです
+- ⚠️ **構文例**はウィンドウフレームのパターンを示します（完全な文ではありません）
 - 📋 すべての例は {{{ .lake }}} がサポートする標準 SQL 構文を使用しています
-- 🔍 "Complete example" と記載された例はそのまま実行可能です
+- 🔍 「完全な例」と記載された例はそのまま実行可能です
 
 ## ウィンドウ関数のカテゴリ {#window-function-categories}
 
 {{{ .lake }}} は、ウィンドウ関数の 2 つの主要カテゴリをサポートしています。
 
-### 1. Dedicated ウィンドウ関数 {#1-dedicated-window-functions}
+### 1. ウィンドウ専用関数 {#1-dedicated-window-functions}
 
 これらの関数は、ウィンドウ操作向けに特別に設計されています。
 
 **ランキング関数:**
 
-| Function | 説明 | 同順位の扱い | 出力例 |
+| 関数 | 説明 | 同順位の扱い | 出力例 |
 |----------|-------------|---------------|----------------|
 | [ROW_NUMBER](/tidb-cloud-lake/sql/row-number.md) | 連番を付与 | 常に一意 | `1, 2, 3, 4, 5` |
 | [RANK](/tidb-cloud-lake/sql/rank.md) | ギャップありの順位付け | 同順位は同じ順位、その後にギャップ | `1, 2, 2, 4, 5` |
@@ -41,7 +41,7 @@ summary: ウィンドウ関数は、関連する行の集合に対して計算�
 
 **分布関数:**
 
-| Function | 説明 | 範囲 | 出力例 |
+| 関数 | 説明 | 範囲 | 出力例 |
 |----------|-------------|-------|----------------|
 | [PERCENT_RANK](/tidb-cloud-lake/sql/percent-rank.md) | パーセンテージとしての相対順位 | 0.0 から 1.0 | `0.0, 0.25, 0.5, 0.75, 1.0` |
 | [CUME_DIST](/tidb-cloud-lake/sql/cume-dist.md) | 累積分布 | 0.0 から 1.0 | `0.2, 0.4, 0.6, 0.8, 1.0` |
@@ -49,7 +49,7 @@ summary: ウィンドウ関数は、関連する行の集合に対して計算�
 
 **値アクセス関数:**
 
-| Function | 説明 | ユースケース |
+| 関数 | 説明 | ユースケース |
 |----------|-------------|----------|
 | [FIRST_VALUE](/tidb-cloud-lake/sql/first-value.md) | ウィンドウ内の最初の値 | 最大値 / 最も早い値を取得 |
 | [LAST_VALUE](/tidb-cloud-lake/sql/last-value.md) | ウィンドウ内の最後の値 | 最小値 / 最新の値を取得 |
@@ -64,11 +64,11 @@ summary: ウィンドウ関数は、関連する行の集合に対して計算�
 | [FIRST](/tidb-cloud-lake/sql/first.md) | FIRST_VALUE |
 | [LAST](/tidb-cloud-lake/sql/last.md) | LAST_VALUE |
 
-### 2. ウィンドウ関数として使用される集約関数 {#2-aggregate-functions-used-as-window-functions}
+### 2. ウィンドウ関数として使用される集計関数 {#2-aggregate-functions-used-as-window-functions}
 
-これらは標準の集約関数で、OVER 句とともに使用することでウィンドウ操作を実行できます。
+これらは標準の集計関数で、OVER 句とともに使用することでウィンドウ操作を実行できます。
 
-| Function | 説明 | ウィンドウフレームのサポート | 例 |
+| 関数 | 説明 | ウィンドウフレームのサポート | 例 |
 |----------|-------------|---------------------|---------|
 | [SUM](/tidb-cloud-lake/sql/sum.md) | ウィンドウ全体の合計を計算 | ✓ | `SUM(sales) OVER (PARTITION BY region ORDER BY date)` |
 | [AVG](/tidb-cloud-lake/sql/avg.md) | ウィンドウ全体の平均を計算 | ✓ | `AVG(score) OVER (ORDER BY id ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)` |
@@ -82,7 +82,7 @@ summary: ウィンドウ関数は、関連する行の集合に対して計算�
 
 **条件付きバリアント**
 
-| Function | 説明 | ウィンドウフレームのサポート | 例 |
+| 関数 | 説明 | ウィンドウフレームのサポート | 例 |
 |----------|-------------|---------------------|---------|
 | [COUNT_IF](/tidb-cloud-lake/sql/count-if.md) | 条件付きカウント | ✓ | `COUNT_IF(status = 'complete') OVER (PARTITION BY dept)` |
 | [SUM_IF](/tidb-cloud-lake/sql/sum-if.md) | 条件付き合計 | ✓ | `SUM_IF(amount, status = 'paid') OVER (PARTITION BY customer)` |

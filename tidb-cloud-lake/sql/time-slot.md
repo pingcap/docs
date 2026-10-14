@@ -7,23 +7,23 @@ summary: 時刻を30分単位に丸めます。## Syntax。
 
 時刻を30分単位に丸めます。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```sql
 time_slot(<expr>)
 ```
 
-## Arguments {#arguments}
+## 引数 {#arguments}
 
 | 引数 | 説明 |
 | ----------- | ----------- |
 | `<expr>`    | timestamp   |
 
-## Return Type {#return-type}
+## 戻り値の型 {#return-type}
 
 `TIMESTAMP`。`YYYY-MM-DD hh:mm:ss.ffffff` 形式で返します。
 
-## Examples {#examples}
+## 例 {#examples}
 
 ```sql
 SELECT

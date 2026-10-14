@@ -1,11 +1,11 @@
 ---
 title: system.query_log
-summary: すべてのクエリログを格納する読み取り専用のインメモリテーブルです。クエリログで利用可能な具体的なフィールドについては、Examples セクションを参照してください。
+summary: すべてのクエリログを格納する読み取り専用のインメモリテーブルです。クエリログで利用可能な具体的なフィールドについては、「例」セクションを参照してください。
 ---
 
 # system.query_log
 
-すべてのクエリログを格納する読み取り専用のインメモリテーブルです。クエリログで利用可能な具体的なフィールドについては、[Examples](#examples) セクションを参照してください。
+すべてのクエリログを格納する読み取り専用のインメモリテーブルです。クエリログで利用可能な具体的なフィールドについては、[例](#examples) セクションを参照してください。
 
 ## セッションタグの設定 {#setting-a-session-tag}
 
@@ -31,7 +31,7 @@ select query_tag, query_text from system.query_log where query_tag='eric' limit 
               query_text: SHOW USERS
 ```
 
-## Examples {#examples}
+## 例 {#examples}
 
 `system.query_log` テーブルには、実行されたクエリの詳細なログが格納されます。以下は、ログエントリの例です。
 

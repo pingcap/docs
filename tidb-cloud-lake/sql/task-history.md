@@ -7,7 +7,7 @@ summary: 指定した変数に基づいてタスクの実行履歴を表示し�
 
 指定した変数に基づいてタスクの実行履歴を表示します。
 
-## Syntax {#syntax}
+## 構文 {#syntax}
 
 ```sql
 TASK_HISTORY(
@@ -19,7 +19,7 @@ TASK_HISTORY(
       [, ROOT_TASK_ID => '<string>'] )
 ```
 
-## Arguments {#arguments}
+## 引数 {#arguments}
 
 すべての引数は省略可能です。
 
@@ -55,12 +55,12 @@ TRUE に設定すると、この関数は失敗したタスク実行またはキ
 
 タスクグラフ内のルートタスクの一意識別子です。この ID は、同じタスクに対する SHOW TASKS の出力にある ID カラムの値と一致します。ROOT_TASK_ID を指定すると、ルートタスクおよびそのタスクグラフに含まれる子タスクの履歴を表示できます。
 
-## Usage Notes {#usage-notes}
+## 使用上の注意 {#usage-notes}
 
 * この関数が返す最大行数は 10,000 行で、RESULT_LIMIT 引数の値で設定します。デフォルト値は 100 です。
 * この関数は ACCOUNTADMIN ロールに対してのみ結果を返します。
 
-## Examples {#examples}
+## 例 {#examples}
 
 ```sql
 SELECT

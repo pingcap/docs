@@ -1,9 +1,9 @@
 ---
-title: SET TAG and UNSET TAG
+title: SET TAG と UNSET TAG
 summary: データベースオブジェクトにタグを割り当てる、または削除します。
 ---
 
-# SET TAG and UNSET TAG
+# SET TAG と UNSET TAG
 
 データベースオブジェクトにタグを割り当てる、または削除します。タグを割り当てる前に、[CREATE TAG](/tidb-cloud-lake/sql/create-tag.md) を使用して作成しておく必要があります。
 

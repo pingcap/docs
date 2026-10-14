@@ -21,7 +21,7 @@ SETTINGS 句は、次の SQL 文で使用できます。
 
 - [SELECT](/tidb-cloud-lake/sql/select.md)
 - [INSERT](/tidb-cloud-lake/sql/insert.md)
-- [INSERT (multi-table)](/tidb-cloud-lake/sql/insert-multi-table.md)
+- [INSERT（マルチテーブル）](/tidb-cloud-lake/sql/insert-multi-table.md)
 - [MERGE](/tidb-cloud-lake/sql/merge.md)
 - [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
 - [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md)

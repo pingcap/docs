@@ -1,11 +1,11 @@
 ---
 title: SCORE
-summary: 反転インデックス検索条件に一致した行の関連性スコアを返します。
+summary: 転置インデックス検索条件に一致した行の関連性スコアを返します。
 ---
 
 # SCORE
 
-`SCORE()` は、反転インデックス検索によって現在の行に割り当てられた関連性スコアを返します。`WHERE` 句で [MATCH](/tidb-cloud-lake/sql/match.md) または [QUERY](/tidb-cloud-lake/sql/query.md) と一緒に使用します。
+`SCORE()` は、転置インデックス検索によって現在の行に割り当てられた関連性スコアを返します。`WHERE` 句で [MATCH](/tidb-cloud-lake/sql/match.md) または [QUERY](/tidb-cloud-lake/sql/query.md) と一緒に使用します。
 
 > **Note:**
 >
