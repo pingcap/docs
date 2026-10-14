@@ -58,6 +58,8 @@ INSERT INTO agent_memory (user_id, kind, content, embedding) VALUES
 
 When a user changes a preference, retire the old memory and write the new one in a single transaction. The transaction ensures that readers do not see a partially applied replacement.
 
+To prevent concurrent writes from creating multiple active preferences for the same user, add a uniqueness constraint as described in [Enforce at most one active preference per user](#enforce-at-most-one-active-preference-per-user).
+
 ```sql
 BEGIN;
 UPDATE agent_memory SET is_active = FALSE
@@ -85,6 +87,30 @@ ORDER BY is_active DESC;
 ```
 
 If a statement in the transaction fails, for example because a value does not fit its column, run `ROLLBACK` instead of `COMMIT`. A failed statement does not end the transaction: the statements that succeeded are still pending, and `COMMIT` would save them, for example leaving the user with the old preference retired and no new one. After `ROLLBACK`, the memory stays as it was.
+
+### Enforce at most one active preference per user
+
+The transaction makes each replacement atomic, but concurrent writes can still create multiple active preferences for the same user. For example, if no active preference exists, two transactions can each update zero rows, insert a new preference, and commit successfully.
+
+If your application allows only one active preference per user, add the following generated column and unique index. For an existing table, first deactivate or remove duplicate active preferences for each user.
+
+```sql
+ALTER TABLE agent_memory
+ADD COLUMN active_preference_user VARCHAR(64)
+GENERATED ALWAYS AS (
+  CASE
+    WHEN kind = 'preference' AND is_active THEN user_id
+    ELSE NULL
+  END
+) VIRTUAL;
+
+ALTER TABLE agent_memory
+ADD UNIQUE KEY uk_active_preference (active_preference_user);
+```
+
+The generated column contains `user_id` only for active preferences. The unique index prevents two such rows from having the same user ID. Other rows have `NULL` in this column, so the index allows multiple inactive preferences, facts, and episodes per user.
+
+After adding the unique index, deactivate the old preference and insert the new preference in a single transaction, as shown above. The unique index enforces the limit even under concurrent writes. If the replacement fails, roll back the transaction. To retry, start a new transaction and repeat both the `UPDATE` and the `INSERT`.
 
 ## Step 4. Recall memories for one user
 
