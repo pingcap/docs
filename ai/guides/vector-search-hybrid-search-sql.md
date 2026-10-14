@@ -94,7 +94,7 @@ LIMIT 3;
 
 ## Step 5. Combine both searches in one query
 
-The following query runs both searches, ranks each result list, and performs Reciprocal Rank Fusion (RRF) on the bounded Top-K candidate IDs first. It then joins the fused top hits back to `docs` to fetch the document content. Each row scores `1 / (60 + rank)` for every list it appears in, and the scores are added. A row that ranks well in both lists rises to the top. The constant `60` is the value commonly used for RRF; a larger value reduces the advantage of top-ranked rows over lower-ranked ones.
+The following query runs both searches, ranks each result list, and performs Reciprocal Rank Fusion (RRF) on the Top-K candidate IDs returned by the vector and full-text searches first. It then joins the fused top hits back to `docs` to fetch the document content. Each row scores `1 / (60 + rank)` for every list it appears in, and the scores are added. A row that ranks well in both lists rises to the top. The constant `60` is the value commonly used for RRF; a larger value reduces the advantage of top-ranked rows over lower-ranked ones.
 
 ```sql
 WITH
