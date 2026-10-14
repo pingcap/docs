@@ -67,7 +67,7 @@ For {{{ .essential }}} instances with TiDB version `CLOUD.202603.x` or later, yo
 > **Note:**
 >
 > - You can check the TiDB version of an {{{ .essential }}} instance on its overview page in the TiDB Cloud console.
-> -  {{{ .essential }}} instances with TiDB version `v8.5.3` or earlier and {{{ .starter }}} do not support manual backups.
+> - {{{ .essential }}} instances with TiDB version `v8.5.3` or earlier and {{{ .starter }}} do not support manual backups.
 
 ### Retention and deletion
 
