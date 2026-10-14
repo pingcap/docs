@@ -10,7 +10,7 @@ On macOS, you can mount a TiDB Cloud file system as a local directory and access
 - **WebDAV**: Recommended for most workflows. It requires no additional mount software.
 - **macFUSE**: Supports mounting layers or checkpoints, creating a local read-only mount, and flushing pending writes without unmounting the file system. It requires you to install [macFUSE](https://macfuse.github.io/).
 
-If you do not specify a mount `--driver` option, TiDB Cloud CLI (`ti`) automatically uses FUSE if macFUSE is installed on your Mac. Otherwise, it uses WebDAV. The examples in this guide explicitly specify `--driver` so you know which mount method is used.
+If you do not specify the `--driver` option, TiDB Cloud CLI (`ti`) mounts the file system with WebDAV on macOS, even when macFUSE is installed. To use FUSE, specify `--driver fuse`. Layer and checkpoint mounts always require FUSE. The examples in this guide specify `--driver` explicitly so that you know which mount method is used.
 
 > **Note:**
 >
