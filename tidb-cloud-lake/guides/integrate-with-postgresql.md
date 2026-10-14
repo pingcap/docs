@@ -51,9 +51,9 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO lake_cdc;
 
 ### パブリケーションとレプリケーションスロットを作成する（CDC に必須） {#create-publication-and-replication-slot-required-for-cdc}
 
-CDC および Snapshot + CDC モードでは、publication と replication slot が存在している必要があります。`CREATE PUBLICATION ... FOR ALL TABLES` には superuser 権限が必要であり、個別のテーブルを追加するにはテーブル所有者である必要があるため、これらのオブジェクトは CDC タスクを開始する前にデータベース所有者または superuser が作成する必要があります。
+CDC および Snapshot + CDC モードでは、パブリケーションとレプリケーションスロットが存在している必要があります。`CREATE PUBLICATION ... FOR ALL TABLES` にはスーパーユーザー権限が必要であり、個別のテーブルを追加するにはテーブル所有者である必要があるため、これらのオブジェクトは CDC タスクを開始する前にデータベース所有者またはスーパーユーザーが作成する必要があります。
 
-次のコマンドを superuser またはデータベース所有者として実行してください。
+次のコマンドをスーパーユーザーまたはデータベース所有者として実行してください。
 
 ```sql
 -- Create a publication that includes the tables you want to replicate
@@ -74,7 +74,7 @@ ALTER ROLE lake_cdc WITH REPLICATION;
 > CREATE PUBLICATION bend_cdc_pub FOR TABLE table1, table2;
 > ```
 >
-> これにより superuser 要件は回避できますが、列挙したテーブルの所有権は引き続き必要です。
+> これによりスーパーユーザー要件は回避できますが、列挙したテーブルの所有権は引き続き必要です。
 
 ### ネットワークアクセス {#network-access}
 
