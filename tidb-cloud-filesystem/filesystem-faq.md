@@ -23,7 +23,7 @@ For examples, see [Automation and AI Agent Workflows](/tidb-cloud-filesystem/use
 
 Not necessarily. A mount can buffer changes locally before uploading them to the remote file system. FUSE mounts do this by default, so a local write does not mean that another environment can already read the updated file.
 
-For a FUSE mount, use [`ti fs drain-file-system --mount-path <local-mount-path>`](/ai/ti/reference/ti-fs-drain-file-system.md) to upload pending writes while keeping the mount running. Normal FUSE unmount also uploads pending writes. WebDAV does not support this command; stop applications from writing, close open files, and unmount instead.
+For a FUSE mount, stop applications from writing, close open files, and then use [`ti fs drain-file-system --mount-path <local-mount-path>`](/ai/ti/reference/ti-fs-drain-file-system.md) to upload pending writes while keeping the mount running. Normal FUSE unmount also uploads pending writes. WebDAV does not support this command; stop applications from writing, close open files, and unmount instead.
 
 Before deleting the machine or its local cache, use `ti fs read-file` to verify that required changes reached the remote file system. If drain or unmount fails, keep the machine and its local data available for recovery. For details, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
 
@@ -35,7 +35,7 @@ When creating a file system through the CLI, select a supported region with `ti 
 
 ## Can I mount a file system on my laptop?
 
-Yes, on macOS or Linux. For evaluation, use a cloud virtual machine (VM) in the same region as the file system. If you only need to read a remote file, use `ti fs read-file` without mounting.
+Yes, on macOS or Linux. For evaluation, it is recommended to use a cloud virtual machine (VM) in the same region as the file system. If you only need to read a remote file, use `ti fs read-file` without mounting.
 
 Native mounting is not supported on Windows. For platform requirements and alternatives, see [Mount a File System](/tidb-cloud-filesystem/filesystem-mount.md).
 
@@ -59,7 +59,7 @@ Yes. Semantic search finds content by meaning using embeddings, which represent 
 
 Semantic search requires embeddings. Check the file system's embedding configuration before setting up a provider: some file systems use service-managed embeddings and do not allow a custom provider. Media extraction and custom embedding providers are optional and can be configured separately.
 
-The `ti fs search-file-content` command accepts a text query for full-text and, when configured, semantic search. Its `--pattern` value is not a regular expression or glob. To find paths by name, type, tag, size, or modification time, use `ti fs find-files`.
+The `ti fs search-file-content` command accepts a text query for full-text and, when embeddings are available, semantic search. Its `--pattern` value is not a regular expression or glob. To find paths by name, type, tag, size, or modification time, use `ti fs find-files`.
 
 For setup, see [Configure AI Providers for a File System](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md). For search examples, see [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md).
 
