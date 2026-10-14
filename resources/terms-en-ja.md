@@ -24,7 +24,7 @@
 | collation | 照合順序 |  |
 | Column | カラム | Do not translate to 「桁」. |
 | column family | カラムファミリー |  |
-| Column Pruning | カラムの剪定 |  |
+| Column Pruning | カラムのプルーニング |  |
 | component | コンポーネント | Do not translate to 「成分」. |
 | Configuration | 設定 |  |
 | Coprocessor | コプロセッサー |  |
