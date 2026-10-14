@@ -29,7 +29,7 @@ CALL system$set_cache_capacity('<cache_name>', <new_capacity>)
 
 ## 例 {#examples}
 
-Bloom インデックスのメタデータキャッシュを 5000 エントリに設定します。
+ブルームインデックスのメタデータキャッシュを 5000 エントリに設定します。
 
 ```sql
 CALL system$set_cache_capacity('memory_cache_bloom_index_file_meta_data', 5000);
