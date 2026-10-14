@@ -5,7 +5,7 @@ summary: Scenario CityDrive's data engineering team exports every batch of dash-
 
 # Lakehouse ETL
 
-> **Scenario:** CityDrive's data engineering team exports every batch of dash-cam data as Parquet (videos, frame events, metadata JSON, embeddings, GPS traces, traffic light distances). These Parquet files aggregate all multimodal signals extracted from the raw video streams, forming the foundation of the warehouse. They want to refresh {{{ .lake }}}'s shared tables via a single COPY pipeline.
+**Scenario:** CityDrive's data engineering team exports every batch of dash-cam data as Parquet (videos, frame events, metadata JSON, embeddings, GPS traces, traffic light distances). These Parquet files aggregate all multimodal signals extracted from the raw video streams, forming the foundation of the warehouse. They want to refresh {{{ .lake }}}'s shared tables via a single COPY pipeline.
 
 The loading loop is straightforward:
 
