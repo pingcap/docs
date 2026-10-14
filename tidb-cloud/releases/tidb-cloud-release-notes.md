@@ -21,13 +21,13 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
       Existing TiDB Cloud Essential instances with a configured Max RCU continue to run without any configuration changes. You can keep the current value or clear it to switch to **Elastic Mode**.
 
-      For more information, see [documentation](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=essential).
+      For more information, see [Create a TiDB Cloud Essential instance](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=essential).
 
     - TiDB Cloud Essential now supports manual backups. These manual backups are retained until you explicitly delete them.
 
       This feature is available for TiDB Cloud Essential instances running TiDB version `CLOUD.202603.x` or later.
 
-      To create a manual backup, see [documentation](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#manual-backups).
+      To create a manual backup, see [Manual backups](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#manual-backups).
 
 - **TiDB Cloud Premium**
 
@@ -36,9 +36,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
         - **Elastic Mode** is the default mode when you create a new TiDB Cloud Premium instance: TiDB Cloud automatically allocates backend resources based on your workload. In Elastic Mode, you can set Baseline RCU to specify the minimum provisioned capacity and minimum billable capacity. RCU consumption alerts are supported, and you can set a custom threshold to monitor usage as capacity scales.
         - If you need to set a maximum capacity limit, you can still use **Limited Mode**.
 
-      Existing TiDB Cloud Premium instances with a configured Max RCU continue to run without any configuration changes. You can keep the current value or clear it to switch to Elastic Mode.
+      Existing TiDB Cloud Premium instances with a configured Max RCU continue to run without any configuration changes. You can keep the current value or clear it to switch to **Elastic Mode**.
 
-      For more information, see [documentation](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium).
+      For more information, see [Create a TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium).
 
 ## September 29, 2026
 
