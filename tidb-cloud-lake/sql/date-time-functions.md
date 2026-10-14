@@ -9,7 +9,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 
 ## 現在の日付・時刻関数 {#current-date--time-functions}
 
-| Function                                  | Description                  | Example                                              |
+| 関数                                      | 説明                         | 例                                                   |
 |-------------------------------------------|------------------------------|------------------------------------------------------|
 | [NOW](/tidb-cloud-lake/sql/now.md)                             | 現在の日付と時刻を返します   | `NOW()` → `2024-06-04 17:42:31.123456`               |
 | [CURRENT_TIMESTAMP](/tidb-cloud-lake/sql/current-timestamp.md) | 現在の日付と時刻を返します   | `CURRENT_TIMESTAMP()` → `2024-06-04 17:42:31.123456` |
