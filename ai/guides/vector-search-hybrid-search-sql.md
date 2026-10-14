@@ -7,7 +7,7 @@ summary: Learn how to combine full-text search and vector search in one SQL quer
 
 Hybrid search runs a full-text search and a vector search over the same table and merges the two result lists. Full-text search finds exact keywords such as error codes and product names. Vector search finds text with similar meaning even when the words differ. Merging the two result lists helps when a query mixes exact terms with a description of what you mean.
 
-This document shows how to do hybrid search in plain SQL, in a single query, with embeddings that TiDB generates automatically when you insert text. To do the same with the `pytidb` Python SDK, see [Hybrid Search](/ai/guides/vector-search-hybrid-search.md).
+This document shows how to do hybrid search in a single SQL query. TiDB automatically generates embeddings when you insert text. To do the same with the `pytidb` Python SDK, see [Hybrid Search](/ai/guides/vector-search-hybrid-search.md).
 
 ## Prerequisites
 
@@ -24,6 +24,8 @@ To complete this tutorial, make sure you have a {{{ .starter }}} instance in one
 Create a table with a text column, a vector column that TiDB fills from the text, a full-text index, and a vector index:
 
 ```sql
+USE test;
+
 CREATE TABLE docs (
     id INT PRIMARY KEY AUTO_INCREMENT,
     content TEXT,
@@ -73,7 +75,7 @@ LIMIT 3;
 
 ## Step 4. Search by keyword
 
-Use `fts_match_word()` to find rows that contain the query words, ranked by relevance:
+Use `fts_match_word()` to find rows that contain at least one of the query terms, ranked by relevance:
 
 ```sql
 SELECT id, content FROM docs
@@ -140,7 +142,7 @@ Each search fetches 20 candidates before merging. Raise that `LIMIT` if relevant
 
 Full-text relevance scores can change after TiFlash reorganizes newly written rows in the background, and rows with similar scores can then swap places. On a freshly loaded table, the `fulltext_rank` and `rrf_score` values in your output might therefore differ from the preceding example.
 
-The `READ_FROM_STORAGE(TIFLASH[docs])` hint makes the vector search read from TiFlash, where the vector index lives. On a small table the optimizer might otherwise read from TiKV and skip the vector index. The same can happen to other vector searches on a small table, such as the Step 3 query; add the same hint there if `EXPLAIN` does not show `annIndex:`. To confirm that both indexes are used, run `EXPLAIN` on the query: the `operator info` column shows `annIndex:` for the vector search and `textSearch:` for the full-text search. For more about checking vector index use, see [Check whether the vector index is used](/ai/reference/vector-search-index.md#check-whether-the-vector-index-is-used).
+The `READ_FROM_STORAGE(TIFLASH[docs])` hint makes the vector search read from TiFlash, where the vector index lives. On a small table the optimizer might otherwise read from TiKV and skip the vector index. The same can happen to other vector searches on a small table, such as the Step 3 query; add the same hint there if `EXPLAIN` does not show `annIndex:`. To check whether the optimizer selects both indexes, run `EXPLAIN` on the query: the `operator info` column shows `annIndex:` for the vector search and `textSearch:` for the full-text search. For more about checking vector index use, see [Check whether the vector index is used](/ai/reference/vector-search-index.md#check-whether-the-vector-index-is-used).
 
 ## See also
 
