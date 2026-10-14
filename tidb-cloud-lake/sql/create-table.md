@@ -52,7 +52,7 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 
 ## CREATE TABLE ... LIKE
 
-Creates a table with the same column definitions as an existing table. Column names, data types, and their non-NULL constraints of the existing will be copied to the new table.
+Creates a table with the same column definitions as an existing table. Column names, data types, and their NOT NULL constraints of the existing table will be copied to the new table.
 
 Syntax:
 
