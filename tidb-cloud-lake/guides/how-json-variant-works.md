@@ -134,7 +134,7 @@ JSON Path    ───────────▶  Virtual Column (typed values 
 - プランニング時に、{{{ .lake }}} は `get_by_keypath` のような呼び出しを、メタデータ上インデックスが存在する場合は直接 virtual column を読む形に書き換えます。
 - ストレージ層は virtual column が存在する場合にそれを参照し、その Parquet スライスだけを読み取ります。要求されたすべてのパスがインデックス化されていれば、元の JSON カラムをスキップすることもできます。
 - それ以外の場合は、JSONB カラム上で `get_by_keypath` を評価する形にフォールバックし、セマンティクスを維持します。
-- フィルタ、projection、統計情報は、JSON 文字列を再パースする代わりにネイティブ型に対して動作します。
+- フィルタ、射影、統計情報は、JSON 文字列を再パースする代わりにネイティブ型に対して動作します。
 
 内部では、{{{ .lake }}} は各 virtual column がどの JSON パスから生成されたかを追跡しているため、生のドキュメントをスキップできる場面と、再度開く必要がある場面を正確に判断できます。
 
@@ -169,7 +169,7 @@ FROM orders;
 パスアクセサに加えて、{{{ .lake }}} には豊富な Variant ツールキットが用意されています。
 
 - **パースとキャスト**: `parse_json`, `try_parse_json`, `to_variant`, `to_jsonb_binary`
-- **ナビゲーションと projection**: `get_path`, `get_by_keypath`, `flatten`, arrow (`->`, `->>`), path (`#>`, `#>>`) および containment 演算子 (`@>`, `?`)
+- **ナビゲーションと射影**: `get_path`, `get_by_keypath`, `flatten`, arrow (`->`, `->>`), path (`#>`, `#>>`) および containment 演算子 (`@>`, `?`)
 - **変更**: `object_insert`, `object_remove_keys`, 連結 (`||`), `array_*` ヘルパー
 - **分析**: `json_extract_keys`, `json_length`, `jsonb_array_elements`, `json_array_agg` などの集計関数
 
@@ -179,8 +179,8 @@ FROM orders;
 
 - 生の JSON スキャンとの内部ベンチマーク比較:
     - 単一パスのルックアップ: **約 3 倍高速**、スキャンデータ量は **約 26 分の 1**
-    - 複数パスの projection: **約 1.4 倍高速**、読み取りデータ量は **約 5.5 分の 1**
-    - 述語プッシュダウンは bloom インデックスや転置インデックスと組み合わせてブロックを絞り込めます。
+    - 複数パスの射影: **約 1.4 倍高速**、読み取りデータ量は **約 5.5 分の 1**
+    - 述語プッシュダウンは、ブルームインデックスや転置インデックスと組み合わせてブロックを絞り込めます。
 - JSON の形状が安定しているほど、インデックス対象となるパスが増えます。
 
 ## Variant データに対する {{{ .lake }}} の利点 {#-lake--advantages-for-variant-data}
