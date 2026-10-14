@@ -180,7 +180,7 @@ FROM orders;
 - 生の JSON スキャンとの内部ベンチマーク比較:
     - 単一パスのルックアップ: **約 3 倍高速**、スキャンデータ量は **約 26 分の 1**
     - 複数パスの projection: **約 1.4 倍高速**、読み取りデータ量は **約 5.5 分の 1**
-    - Predicate pushdown は bloom/inverted indexes と組み合わせてブロックを絞り込めます。
+    - Predicate pushdown は bloom インデックスや転置インデックスと組み合わせてブロックを絞り込めます。
 - JSON の形状が安定しているほど、インデックス対象となるパスが増えます。
 
 ## Variant データに対する {{{ .lake }}} の利点 {#-lake--advantages-for-variant-data}
