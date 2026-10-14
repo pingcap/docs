@@ -5,7 +5,7 @@ summary: Lance データセットをアンロードする方法について説�
 
 ## Lance データセットのアンロード {#unloading-lance-dataset}
 
-Lance エクスポートは、機械学習やベクトルワークフローのような、データセット指向の利用者を対象としています。CSV、TSV、NDJSON、Parquet のアンロードとは異なり、{{{ .lake }}} は `.lance` データファイルに加えて、`_versions/` などのメタデータを含む Lance の **dataset directory** を書き出します。
+Lance エクスポートは、機械学習やベクトルワークフローのような、データセット指向の利用者を対象としています。CSV、TSV、NDJSON、Parquet のアンロードとは異なり、{{{ .lake }}} は `.lance` データファイルに加えて、`_versions/` などのメタデータを含む Lance の**データセットディレクトリ**を書き出します。
 
 構文:
 
@@ -21,14 +21,14 @@ FILE_FORMAT = (TYPE = LANCE)
 
 - Lance は `COPY INTO <location>` でのみサポートされます。
 - `SINGLE` と `PARTITION BY` は Lance ではサポートされません。
-- `USE_RAW_PATH = false`（デフォルト）の場合、{{{ .lake }}} はターゲットパスにクエリ ID を付加するため、各エクスポートはそれぞれ専用の dataset ルートを持ちます。
+- `USE_RAW_PATH = false`（デフォルト）の場合、{{{ .lake }}} はターゲットパスにクエリ ID を付加するため、各エクスポートはそれぞれ専用のデータセットのルートを持ちます。
 - Python の `lance` など、後続のリーダー向けに安定したデータセット URI が必要な場合は、`USE_RAW_PATH = true` を設定します。
 - 構文の詳細は [COPY INTO location](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください。
 - Lance の動作に関する詳細な注意事項は [入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md#lance-options) に記載されています。
 
 ## チュートリアル {#tutorial}
 
-この例では、小規模な文書分類データセットを作成します。生のテキストファイルは stage に保存され、`READ_FILE` によってクエリ実行時に `BINARY` 値へ変換され、{{{ .lake }}} が最終的な dataset を Python 利用者向けに Lance 形式でエクスポートします。
+この例では、小規模な文書分類データセットを作成します。生のテキストファイルは stage に保存され、`READ_FILE` によってクエリ実行時に `BINARY` 値へ変換され、{{{ .lake }}} が最終的なデータセットを Python 利用者向けに Lance 形式でエクスポートします。
 
 ### 前提条件 {#prerequisites}
 
