@@ -120,7 +120,7 @@ sale_date   | product | amount | moving_avg_3day
 2024-01-05  | A       | 300.00 | 250.00  -- (200+250+300)/3
 ```
 
-### 3. 中央寄せウィンドウ（現在 + 前の 1 行 + 後の 1 行） {#3-centered-window-current-1-before-1-after}
+### 3. 中央寄せウィンドウ（現在 + 前の 1 行 + 後の 1 行） {#3-centered-window-current--1-before--1-after}
 
 ```sql
 SELECT sale_date, product, amount,

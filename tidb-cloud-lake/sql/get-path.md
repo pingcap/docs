@@ -1,11 +1,11 @@
 ---
 title: GET_PATH
-summary: "`path_name` によって `VARIANT` から値を抽出します。いずれかの引数が `NULL` の場合、値は `Variant` または `NULL` として返されます。"
+summary: "`path_name` によって `VARIANT` から値を抽出します。値は `Variant` として返されます。いずれかの引数が `NULL` の場合は `NULL` を返します。"
 ---
 
 # GET_PATH
 
-`path_name` によって `VARIANT` から値を抽出します。いずれかの引数が `NULL` の場合、値は `Variant` または `NULL` として返されます。
+`path_name` によって `VARIANT` から値を抽出します。値は `Variant` として返されます。いずれかの引数が `NULL` の場合は `NULL` を返します。
 
 `GET_PATH` は `GET` 関数の連鎖と等価です。`path_name` は、ピリオド (`.`)、コロン (`:`)、またはインデックス演算子 (`[index]`) が前に付いたフィールド名を連結したものです。最初のフィールド名では、先頭の識別子を指定する必要はありません。
 

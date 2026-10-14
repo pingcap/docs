@@ -194,9 +194,9 @@ SHOW GRANTS FOR user1;
 
 > **Tip:**
 >
-> revoke の後でも、なぜ `default_role` は引き続き表示されるのでしょうか？
+> REVOKE の後でも、なぜ `default_role` は引き続き表示されるのでしょうか？
 >
-> `default_role` は grant ではなく、ユーザーのプロパティです。`REVOKE` はロールのメンバーシップを削除しますが、`default_role` はリセットしません。以下はその例です。
+> `default_role` は権限付与ではなく、ユーザーのプロパティです。`REVOKE` はロールのメンバーシップを削除しますが、`default_role` はリセットしません。以下はその例です。
 >
 > ```sql
 > CREATE ROLE analyst;

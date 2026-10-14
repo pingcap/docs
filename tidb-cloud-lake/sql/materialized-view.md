@@ -11,10 +11,10 @@ summary: マテリアライズドビューは、クエリ結果を物理的に�
 
 ## 制限事項 {#limitations}
 
-- 定義は、厳密に 1 つのベーステーブルに対する単純な `SELECT ... FROM ... [WHERE ...] [GROUP BY ...]` クエリである必要があります。テーブル結合、サブクエリ、集合演算、および非決定的 関数 はサポートされていません。
-- 集計 は `sum`、`min`、`max`、`avg`、`count`、`approx_count_distinct` のみサポートされます。`DISTINCT`、`FILTER`、window、および ordered aggregate 形式はサポートされていません。
+- 定義は、厳密に 1 つのベーステーブルに対する単純な `SELECT ... FROM ... [WHERE ...] [GROUP BY ...]` クエリである必要があります。結合、サブクエリ、集合演算、および非決定的関数はサポートされていません。
+- 集計は `sum`、`min`、`max`、`avg`、`count`、`approx_count_distinct` のみサポートされます。`DISTINCT`、`FILTER`、ウィンドウ、および順序付き集計の形式はサポートされていません。
 - ソースは、`default` catalog 内の永続的な FUSE ベーステーブルである必要があります。マテリアライズドビューは、別のビューや異なるテーブルエンジンをソースとして使用できません。
-- マテリアライズドビューは読み取り専用です。内容を 管理 するには `REFRESH MATERIALIZED VIEW` を使用します。`INSERT`、`UPDATE`、`DELETE`、`TRUNCATE`、および通常の `ALTER TABLE` 操作はサポートされていません。
+- マテリアライズドビューは読み取り専用です。内容を管理するには `REFRESH MATERIALIZED VIEW` を使用します。`INSERT`、`UPDATE`、`DELETE`、`TRUNCATE`、および通常の `ALTER TABLE` 操作はサポートされていません。
 
 ## マテリアライズドビューを作成する {#create-a-materialized-view}
 
@@ -65,7 +65,7 @@ REFRESH MATERIALIZED VIEW [ <catalog_name>. ][ <database_name>. ]<view_name>
 
 ## 物理レイアウトを変更する {#change-physical-layout}
 
-サポートされる 管理 操作には、専用の `ALTER MATERIALIZED VIEW` 構文を使用します。
+サポートされる管理操作には、専用の `ALTER MATERIALIZED VIEW` 構文を使用します。
 
 ```sql
 ALTER MATERIALIZED VIEW <view_name> CLUSTER BY ( <expr>, ... );
@@ -107,4 +107,4 @@ DROP MATERIALIZED VIEW IF EXISTS paid_orders_by_customer;
 
 ## アクセス制御要件 {#access-control-requirements}
 
-マテリアライズドビューに対して query、refresh、alter、show、または drop を行うには、ユーザーはそのソーステーブルに対する `SELECT` 権限（または同等のアクセスを提供する所有権）を持っている必要があります。権限は現在のソーステーブル ID に対してチェックされるため、ソーステーブルの rename を行ってもこの要件は変わりません。
+マテリアライズドビューのクエリ、refresh、変更、表示、または削除を行うには、ユーザーはそのソーステーブルに対する `SELECT` 権限（または同等のアクセスを提供する所有権）を持っている必要があります。権限は現在のソーステーブル ID に対してチェックされるため、ソーステーブルの 名前を変更してもこの要件は変わりません。

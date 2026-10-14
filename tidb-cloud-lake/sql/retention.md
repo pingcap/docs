@@ -1,11 +1,11 @@
 ---
 title: RETENTION
-summary: 集約関数。
+summary: 集計関数。
 ---
 
 # RETENTION
 
-集約関数
+集計関数
 
 `RETENTION()` 関数は、イベントに対して特定の条件が満たされたかどうかを示す `UInt8` 型の条件を、1 個から 32 個まで引数として受け取ります。
 

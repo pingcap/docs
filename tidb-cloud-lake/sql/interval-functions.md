@@ -1,9 +1,9 @@
 ---
-title: Interval Functions
+title: Interval 関数
 summary: このセクションでは、{{{ .lake }}} の interval 関数に関するリファレンス情報を提供します。interval 関数を使用すると、日付および時刻の計算で使用するさまざまな時間単位の interval 値を作成できます。
 ---
 
-# Interval Functions
+# Interval 関数
 
 このセクションでは、{{{ .lake }}} の interval 関数に関するリファレンス情報を提供します。interval 関数を使用すると、日付および時刻の計算で使用するさまざまな時間単位の interval 値を作成できます。
 
@@ -29,7 +29,7 @@ summary: このセクションでは、{{{ .lake }}} の interval 関数に関�
 
 ### より小さい時間単位 {#smaller-time-units}
 
-| Function | 説明 | 例 |
+| 関数 | 説明 | 例 |
 |----------|-------------|--------|
 | [TO_MILLISECONDS](/tidb-cloud-lake/sql/milliseconds.md) | 数値をミリ秒単位の interval に変換します | `TO_MILLISECONDS(2000)` → `00:00:02` |
 | [TO_MICROSECONDS](/tidb-cloud-lake/sql/microseconds.md) | 数値をマイクロ秒単位の interval に変換します | `TO_MICROSECONDS(2000000)` → `00:00:02` |

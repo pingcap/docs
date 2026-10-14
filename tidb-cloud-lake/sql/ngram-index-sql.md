@@ -1,15 +1,15 @@
 ---
-title: Ngram Index
+title: Ngram インデックス
 summary: このページでは、{{{ .lake }}} における Ngram index の操作について、参照しやすいよう機能別に包括的に説明します。
 ---
 
-# Ngram Index
+# Ngram インデックス
 
 このページでは、{{{ .lake }}} における Ngram index の操作について、参照しやすいよう機能別に包括的に説明します。
 
 ## Ngram index の管理 {#ngram-index-management}
 
-| Command                                       | 説明                                              |
+| コマンド                                       | 説明                                              |
 |-----------------------------------------------|----------------------------------------------------------|
 | [CREATE NGRAM INDEX](/tidb-cloud-lake/sql/create-ngram-index.md)   | 効率的な部分文字列検索のために新しい Ngram index を作成します |
 | [REFRESH NGRAM INDEX](/tidb-cloud-lake/sql/refresh-ngram-index.md) | Ngram index を更新します                                 |

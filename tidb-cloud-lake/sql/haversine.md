@@ -1,11 +1,11 @@
 ---
 title: HAVERSINE
-summary: Haversine formula を使用して、地球表面上の 2 点間の大円距離をキロメートル単位で計算します。2 点は緯度と経度を度単位で指定します。
+summary: Haversine の公式を使用して、地球表面上の 2 点間の大円距離をキロメートル単位で計算します。2 点は緯度と経度を度単位で指定します。
 ---
 
 # HAVERSINE
 
-[Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula) を使用して、地球表面上の 2 点間の大円距離をキロメートル単位で計算します。2 点は緯度と経度を度単位で指定します。
+[Haversine の公式](https://en.wikipedia.org/wiki/Haversine_formula) を使用して、地球表面上の 2 点間の大円距離をキロメートル単位で計算します。2 点は緯度と経度を度単位で指定します。
 
 ## 構文 {#syntax}
 

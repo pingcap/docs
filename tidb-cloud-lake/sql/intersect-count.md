@@ -1,11 +1,11 @@
 ---
 title: INTERSECT_COUNT
-summary: 2 つの bitmap カラム間で交差するビット数をカウントします。
+summary: 2 つのビットマップカラム間で交差するビット数をカウントします。
 ---
 
 # INTERSECT_COUNT
 
-2 つの bitmap カラム間で交差するビット数をカウントします。
+2 つのビットマップカラム間で交差するビット数をカウントします。
 
 ## 構文 {#syntax}
 

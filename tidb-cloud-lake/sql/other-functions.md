@@ -7,11 +7,11 @@ summary: このセクションでは、主要な機能グループに分類さ�
 
 このセクションでは、主要な機能グループに分類されない各種ユーティリティをまとめています。
 
-| Function | 説明 |
+| 関数 | 説明 |
 |----------|------|
 | [ASSUME_NOT_NULL](/tidb-cloud-lake/sql/assume-not-null.md) | NULL 許容カラム内の値が NULL にならないことを示すヒント |
 | [EXISTS](/tidb-cloud-lake/sql/exists.md) | サブクエリがいずれかの行を生成した場合に TRUE を返す |
-| [GROUPING](/tidb-cloud-lake/sql/grouping.md) | 出力カラムが GROUPING SETS で集約されたかどうかを示す |
+| [GROUPING](/tidb-cloud-lake/sql/grouping.md) | 出力カラムが GROUPING SETS で集計されたかどうかを示す |
 | [HUMANIZE_NUMBER](/tidb-cloud-lake/sql/humanize-number.md) | 大きな数値を単位サフィックス付きで整形する |
 | [HUMANIZE_SIZE](/tidb-cloud-lake/sql/humanize-size.md) | バイト数を読みやすい単位に整形する |
 | [READ_FILE](/tidb-cloud-lake/sql/read-file.md) | stage からファイルを読み取り、その生バイトを返す |

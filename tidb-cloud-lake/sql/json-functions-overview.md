@@ -7,7 +7,7 @@ summary: このセクションでは、{{{ .lake }}} の JSON 関数に関する
 
 このセクションでは、{{{ .lake }}} の JSON 関数に関するリファレンス情報を提供します。JSON 関数を使用すると、JSON データ構造の解析、検証、クエリ、および操作を実行できます。
 
-## JSON の解析と検証 {#json-parsing-validation}
+## JSON の解析と検証 {#json-parsing--validation}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -49,7 +49,7 @@ summary: このセクションでは、{{{ .lake }}} の JSON 関数に関する
 | [JSON_ARRAY_ELEMENTS](/tidb-cloud-lake/sql/json-array-elements.md) | JSON 配列を個々の要素に展開します | `JSON_ARRAY_ELEMENTS('[1,2,3]')` → `1, 2, 3` |
 | [JQ](/tidb-cloud-lake/sql/jq.md) | jq スタイルのクエリを使用して JSON を処理します | `JQ('{"name":"John"}', '.name')` → `"John"` |
 
-## JSON の整形と処理 {#json-formatting-processing}
+## JSON の整形と処理 {#json-formatting--processing}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
@@ -57,7 +57,7 @@ summary: このセクションでは、{{{ .lake }}} の JSON 関数に関する
 | [STRIP_NULL_VALUE](/tidb-cloud-lake/sql/strip-null-value.md) | JSON から null 値を削除します | `STRIP_NULL_VALUE('{"a":1,"b":null}')` → `{"a":1}` |
 | [JSON_STRIP_NULLS](/tidb-cloud-lake/sql/json-strip-nulls.md) | JSON オブジェクトから null 値を削除します | `JSON_STRIP_NULLS(PARSE_JSON('{"a":1,"b":null}'))` → `{"a":1}` |
 
-## JSON の包含と存在確認 {#json-containment-existence}
+## JSON の包含と存在確認 {#json-containment--existence}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|

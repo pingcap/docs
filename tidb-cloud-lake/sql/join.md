@@ -12,14 +12,14 @@ summary: テーブル結合は、2 つ以上のテーブルのカラムを 1 つ
 ## サポートされる JOIN の種類 {#supported-join-types}
 
 * [内部結合](#inner-join)
-* [Natural Join](#natural-join)
-* [Cross Join](#cross-join)
-* [Left Join](#left-join)
-* [Right Join](#right-join)
-* [Full Outer Join](#full-outer-join)
+* [自然結合](#natural-join)
+* [クロス結合](#cross-join)
+* [左結合](#left-join)
+* [右結合](#right-join)
+* [完全外部結合](#full-outer-join)
 * [左 / 右セミ結合](#left--right-semi-join)
 * [左 / 右アンチ結合](#left--right-anti-join)
-* [Asof Join](#asof-join)
+* [Asof 結合](#asof-join)
 
 ## サンプルデータ {#sample-data}
 
@@ -196,11 +196,11 @@ INNER JOIN purchase_records AS p
 +-----------+--------+------+
 ```
 
-## Natural Join {#natural-join}
+## 自然結合 {#natural-join}
 
 Natural Join は、両方のテーブルで同じ名前を持つカラムを自動的に対応付けます。一致した各カラムは、結果に 1 回だけ表示されます。
 
-### Visual {#visual}
+### 図解 {#visual-1}
 
 ```text
 ┌──────────────────────────────┐
@@ -232,7 +232,7 @@ Natural Join は、両方のテーブルで同じ名前を持つカラムを自�
 └──────────────────────────────┘
 ```
 
-### Syntax {#syntax}
+### 構文 {#syntax-1}
 
 ```sql
 SELECT select_list
@@ -240,7 +240,7 @@ FROM table_a
 NATURAL JOIN table_b;
 ```
 
-### Example {#example}
+### 例 {#example-1}
 
 ```sql
 SELECT client_id, item, qty
@@ -259,11 +259,11 @@ NATURAL JOIN purchase_records;
 +-----------+--------+------+
 ```
 
-## Cross Join {#cross-join}
+## クロス結合 {#cross-join}
 
 Cross Join（直積）は、結合に参加するテーブルの行のあらゆる組み合わせを返します。
 
-### Visual {#visual}
+### 図解 {#visual-2}
 
 ```text
 ┌──────────────────────────────┐
@@ -295,7 +295,7 @@ Cross Join（直積）は、結合に参加するテーブルの行のあらゆ�
 └──────────────────────────────┘
 ```
 
-### Syntax {#syntax}
+### 構文 {#syntax-2}
 
 ```sql
 SELECT select_list
@@ -303,7 +303,7 @@ FROM table_a
 CROSS JOIN table_b;
 ```
 
-### Example {#example}
+### 例 {#example-2}
 
 ```sql
 SELECT v.client_id, v.region, g.gift
@@ -325,11 +325,11 @@ CROSS JOIN gift AS g;
 +-----------+----------+-----------+
 ```
 
-## Left Join {#left-join}
+## 左結合 {#left-join}
 
 Left Join は、左側のテーブルのすべての行と、右側のテーブルで一致する行を返します。一致する行がない場合、右側のカラムは `NULL` になります。
 
-### Visual {#visual}
+### 図解 {#visual-3}
 
 ```text
 ┌──────────────────────────────┐
@@ -360,7 +360,7 @@ Left Join は、左側のテーブルのすべての行と、右側のテーブ�
 └──────────────────────────────┘
 ```
 
-### Syntax {#syntax}
+### 構文 {#syntax-3}
 
 ```sql
 SELECT select_list
@@ -373,7 +373,7 @@ LEFT [OUTER] JOIN table_b
 >
 > `OUTER` は省略可能です。
 
-### Example {#example}
+### 例 {#example-3}
 
 ```sql
 SELECT v.client_id, p.item, p.qty
@@ -394,11 +394,11 @@ LEFT JOIN purchase_records AS p
 +-----------+--------+------+
 ```
 
-## Right Join {#right-join}
+## 右結合 {#right-join}
 
 Right Join は Left Join を左右反転したものです。右側のテーブルのすべての行が結果に含まれ、左側のテーブルで一致しない行は `NULL` になります。
 
-### Visual {#visual}
+### 図解 {#visual-4}
 
 ```text
 ┌──────────────────────────────┐
@@ -429,7 +429,7 @@ Right Join は Left Join を左右反転したものです。右側のテーブ�
 └──────────────────────────────┘
 ```
 
-### Syntax {#syntax}
+### 構文 {#syntax-4}
 
 ```sql
 SELECT select_list
@@ -438,7 +438,7 @@ RIGHT [OUTER] JOIN table_b
               ON join_condition;
 ```
 
-### Example {#example}
+### 例 {#example-4}
 
 ```sql
 SELECT v.client_id, v.region
@@ -460,11 +460,11 @@ RIGHT JOIN purchase_records AS p
 +-----------+-----------+
 ```
 
-## Full Outer Join {#full-outer-join}
+## 完全外部結合 {#full-outer-join}
 
 Full Outer Join は Left Join と Right Join の和集合を返します。両方のテーブルのすべての行が結果に含まれ、一致しない場合は `NULL` になります。
 
-### Visual {#visual}
+### 図解 {#visual-5}
 
 ```text
 ┌──────────────────────────────┐
@@ -495,7 +495,7 @@ Full Outer Join は Left Join と Right Join の和集合を返します。両�
 └──────────────────────────────┘
 ```
 
-### Syntax {#syntax}
+### 構文 {#syntax-5}
 
 ```sql
 SELECT select_list
@@ -504,7 +504,7 @@ FULL [OUTER] JOIN table_b
              ON join_condition;
 ```
 
-### Example {#example}
+### 例 {#example-5}
 
 ```sql
 SELECT v.region, p.item
@@ -527,11 +527,11 @@ FULL OUTER JOIN purchase_records AS p
 +-----------+-----------+
 ```
 
-## Left / Right Semi Join {#left-right-semi-join}
+## 左 / 右セミ結合 {#left--right-semi-join}
 
 Semi Join は、反対側のテーブルに少なくとも 1 件一致する行があるものだけを左側（または右側）のテーブルから抽出します。Inner Join と異なり、返されるのは保持される側のカラムだけです。
 
-### Visual {#visual}
+### 図解 {#visual-6}
 
 ```text
 LEFT SEMI JOIN
@@ -587,7 +587,7 @@ RIGHT SEMI JOIN
 └──────────────────────────────┘
 ```
 
-### 構文 {#syntax}
+### 構文 {#syntax-6}
 
 ```sql
 -- Left Semi Join
@@ -645,11 +645,11 @@ RIGHT SEMI JOIN purchase_records
 +-----------+--------+------+
 ```
 
-## Left / Right Anti Join {#left-right-anti-join}
+## 左 / 右アンチ結合 {#left--right-anti-join}
 
 Anti join は、反対側に一致する行が**存在しない**行を返すため、存在チェックに最適です。
 
-### 図解 {#visual}
+### 図解 {#visual-7}
 
 ```text
 LEFT ANTI JOIN
@@ -704,7 +704,7 @@ RIGHT ANTI JOIN
 └──────────────────────────────┘
 ```
 
-### 構文 {#syntax}
+### 構文 {#syntax-7}
 
 ```sql
 -- Left Anti Join
@@ -720,7 +720,7 @@ RIGHT ANTI JOIN table_b
             ON join_condition;
 ```
 
-### 例 {#examples}
+### 例 {#examples-1}
 
 Left anti join—購入履歴のない VIP 顧客:
 
@@ -761,7 +761,7 @@ RIGHT ANTI JOIN purchase_records
 +-----------+-----------+------+
 ```
 
-## Asof Join {#asof-join}
+## Asof 結合 {#asof-join}
 
 ASOF (Approximate Sort-Merge) join は、左側の順序付けされたストリームの各行を、タイムスタンプが左側のタイムスタンプ以下である右側の最新行に対応付けます。`symbol` のようなキーに対する任意の等価述語を使うことで、さらに一致条件を絞り込めます。ASOF join は、各取引に最新の気配値を付加するような分析処理で役立ちます。
 
@@ -810,7 +810,7 @@ ASOF は、「このイベントの**前または同時点**で発生した最�
 
 LEFT ASOF テーブル結合では、すべてのセンサー読み取り値が保持されます（たとえば、09:55 の読み取り値は、まだ HVAC モードが開始されていないため `NULL` のままです）。RIGHT ASOF テーブル結合では、すべての HVAC の変更が保持されます（それらを参照する読み取り値がまだ発生していなくても保持されます）。
 
-### 構文 {#syntax}
+### 構文 {#syntax-8}
 
 ```sql
 SELECT select_list
@@ -845,7 +845,7 @@ INSERT INTO hvac_mode VALUES
     ('2024-01-01 10:30:00', 'Heating');
 ```
 
-### 例 {#examples}
+### 例 {#examples-2}
 
 各温度読み取り値を、それより前に開始された最新の HVAC モードに対応付けます。
 

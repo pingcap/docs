@@ -1,11 +1,11 @@
 ---
 title: TO_MILLENNIA
-summary: 指定した millennia 数を Interval 型に変換します。
+summary: 指定した千年紀数を Interval 型に変換します。
 ---
 
 # TO_MILLENNIA
 
-指定した millennia 数を Interval 型に変換します。
+指定した千年紀数を Interval 型に変換します。
 
 - 入力として、正の整数、0、負の整数を受け付けます。
 

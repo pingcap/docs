@@ -5,7 +5,7 @@ summary: SQL スクリプトを実行します。{{{ .lake }}} 向けの SQL ス
 
 # EXECUTE IMMEDIATE
 
-SQL スクリプトを実行します。{{{ .lake }}} 向けの SQL スクリプトの書き方については、[Stored Procedure & SQL Scripting](/tidb-cloud-lake/sql/stored-procedure-scripting.md) を参照してください。
+SQL スクリプトを実行します。{{{ .lake }}} 向けの SQL スクリプトの書き方については、[ストアドプロシージャと SQL スクリプト](/tidb-cloud-lake/sql/stored-procedure-scripting.md) を参照してください。
 
 ## 構文 {#syntax}
 

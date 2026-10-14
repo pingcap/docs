@@ -1,13 +1,13 @@
 ---
-title: Hash Functions
+title: ハッシュ関数
 summary: このページでは、{{{ .lake }}} の Hash 関数について、機能別に整理して包括的に紹介します。
 ---
 
-# Hash Functions
+# ハッシュ関数
 
 このページでは、{{{ .lake }}} の Hash 関数について、機能別に整理して包括的に紹介します。
 
-## Cryptographic Hash Functions {#cryptographic-hash-functions}
+## 暗号学的ハッシュ関数 {#cryptographic-hash-functions}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
@@ -16,7 +16,7 @@ summary: このページでは、{{{ .lake }}} の Hash 関数について、機
 | [SHA2](/tidb-cloud-lake/sql/sha.md) | SHA-2 ファミリーのハッシュ（SHA-224、SHA-256、SHA-384、SHA-512）を計算します | `SHA2('1234567890', 256)` → `'c775e7b757ede630cd0aa1113bd102661ab38829ca52a6422ab782862f268646'` |
 | [BLAKE3](/tidb-cloud-lake/sql/blake.md) | BLAKE3 ハッシュを計算します | `BLAKE3('1234567890')` → `'e2cf6ae2a7e65c7b9e089da1ad582100a0d732551a6a07abb07f7a4a119ecc51'` |
 
-## Non-Cryptographic Hash Functions {#non-cryptographic-hash-functions}
+## 非暗号学的ハッシュ関数 {#non-cryptographic-hash-functions}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
@@ -25,9 +25,9 @@ summary: このページでは、{{{ .lake }}} の Hash 関数について、機
 | [SIPHASH64](/tidb-cloud-lake/sql/siphash.md) / [SIPHASH](/tidb-cloud-lake/sql/siphash.md) | SipHash-2-4 64-bit ハッシュ値を計算します | `SIPHASH64('1234567890')` → `2917646445633666330` |
 | [CITY64WITHSEED](/tidb-cloud-lake/sql/city-withseed.md) | シード値付きの CityHash64 ハッシュを計算します | `CITY64WITHSEED('1234567890', 42)` → `5210846883572933352` |
 
-## Usage Examples {#usage-examples}
+## 使用例 {#usage-examples}
 
-### Data Integrity Verification {#data-integrity-verification}
+### データ整合性の検証 {#data-integrity-verification}
 
 ```sql
 -- Calculate MD5 hash for file content verification
@@ -38,7 +38,7 @@ FROM files
 ORDER BY filename;
 ```
 
-### Data Anonymization {#data-anonymization}
+### データの匿名化 {#data-anonymization}
 
 ```sql
 -- Hash sensitive data before storing or processing
@@ -49,7 +49,7 @@ SELECT
 FROM users;
 ```
 
-### Hash-Based Partitioning {#hash-based-partitioning}
+### ハッシュベースのパーティション分割 {#hash-based-partitioning}
 
 ```sql
 -- Use hash functions for data distribution

@@ -1,15 +1,15 @@
 ---
-title: Masking Policy
+title: マスキングポリシー
 summary: このページでは、{{{ .lake }}} における Masking Policy の操作について、参照しやすいよう機能別に整理して包括的に説明します。
 ---
 
-# Masking Policy
+# マスキングポリシー
 
 このページでは、{{{ .lake }}} における Masking Policy の操作について、参照しやすいよう機能別に整理して包括的に説明します。
 
 ## Masking Policy の管理 {#masking-policy-management}
 
-| Command | 説明 |
+| コマンド | 説明 |
 |---------|-------------|
 | [CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md) | データの難読化のための新しい masking policy を作成します |
 | [DESCRIBE MASKING POLICY](/tidb-cloud-lake/sql/desc-masking-policy.md) | 特定の masking policy の詳細を表示します |

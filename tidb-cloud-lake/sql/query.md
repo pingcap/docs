@@ -47,7 +47,7 @@ QUERY('<query_expr>'[, '<options>'])
 | オプション | 値 | 説明 | 例 |
 |--------|--------|-------------|---------|
 | `fuzziness` | `1` または `2` | 指定した Levenshtein 距離内の用語に一致します。 | `SELECT id FROM frames WHERE QUERY('meta.detections.label:pedestrain', 'fuzziness=1');` |
-| `operator` | `OR` (default) または `AND` | 明示的なブール演算子が指定されていない場合に、複数の用語をどのように組み合わせるかを制御します。 | `SELECT id FROM frames WHERE QUERY('meta.scene.weather:rain fog', 'operator=AND');` |
+| `operator` | `OR`（デフォルト）または `AND` | 明示的なブール演算子が指定されていない場合に、複数の用語をどのように組み合わせるかを制御します。 | `SELECT id FROM frames WHERE QUERY('meta.scene.weather:rain fog', 'operator=AND');` |
 | `lenient` | `true` または `false` | `true` の場合、解析エラーを抑制し、空の結果セットを返します。 | `SELECT id FROM frames WHERE QUERY('meta.detections.label:()', 'lenient=true');` |
 
 ## 例 {#examples}

@@ -1,13 +1,13 @@
 ---
-title: Information_Schema Tables
+title: Information_Schema テーブル
 summary: このページでは、TiDB Cloud Lake の Information_Schema Tables について説明します。
 ---
 
-# Information_Schema Tables
+# Information_Schema テーブル
 
 ## Information Schema {#information-schema}
 
-| Table                                        | 説明                                           |
+| テーブル                                        | 説明                                           |
 |----------------------------------------------|------------------------------------------------|
 | [tables](/tidb-cloud-lake/sql/information-schema-tables-sql.md)       | テーブル用の ANSI SQL 標準メタデータビューです。    |
 | [schemata](/tidb-cloud-lake/sql/information-schema-schemata-sql.md) | データベース用の ANSI SQL 標準メタデータビューです。 |

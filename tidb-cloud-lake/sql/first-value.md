@@ -30,7 +30,7 @@ OVER (
 - `ORDER BY`: 必須。ウィンドウ内の並び順を決定します。
 - `window_frame`: 任意。ウィンドウフレームを定義します。デフォルトは `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` です。
 
-**Notes:**
+**注:**
 
 - 並び替えられたウィンドウフレーム内の最初の値を返します。
 - `IGNORE NULLS` を使用して null 値をスキップでき、`RESPECT NULLS` を使用するとデフォルトの動作を維持します。

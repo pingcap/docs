@@ -28,9 +28,9 @@ summary: "{{{ .lake }}} は 2 つのデータ型を通じて空間データを�
 
 | 機能 | GEOMETRY | GEOGRAPHY |
 | :--- | :--- | :--- |
-| **座標系** | Cartesian（平面） | Ellipsoidal（球面） |
-| **SRID** | 0（デフォルト）または Custom | 4326（WGS 84）のみ |
-| **X / Y の解釈** | 平面上の X, Y | 球面上の Longitude, Latitude |
+| **座標系** | デカルト座標（平面） | 楕円体（球面） |
+| **SRID** | 0（デフォルト）またはカスタム | 4326（WGS 84）のみ |
+| **X / Y の解釈** | 平面上の X, Y | 球面上の経度、緯度 |
 | **辺の解釈** | 平面上の直線 | 大円弧（球面上の最短経路） |
 | **主なユースケース** | ローカル / 投影データ（例: 都市、建物） | グローバルデータ（例: GPS 軌跡、航路） |
 
@@ -70,13 +70,13 @@ SELECT ST_ASWKB(geo), ST_ASEWKT(geo), ST_ASGEOJSON(geo) FROM ...;
 
 空間関数の一覧は次を参照してください。
 
-- [Geospatial Functions](/tidb-cloud-lake/sql/geospatial-functions.md)
+- [地理空間関数](/tidb-cloud-lake/sql/geospatial-functions.md)
 
 ## 例 {#examples}
 
 以下の各例では、1 つのオブジェクト型、その解決するシナリオ、それを生成する SQL、およびサンプル結果テーブルを示します。`CAST('…' AS GEOMETRY)` はインラインの WKT リテラルを解析するため、テーブルを作成しなくても試すことができます。
 
-### Point — 単一のセンサー位置を特定する {#point-pinpoint-a-single-sensor}
+### Point — 単一のセンサー位置を特定する {#point--pinpoint-a-single-sensor}
 
 *シナリオ*: IoT デバイスが生成した正確な緯度/経度を格納し、GeoJSON と数値座標の両方を公開します。
 
@@ -96,7 +96,7 @@ FROM (SELECT CAST('POINT(113.98765432109876 23.456789012345678)' AS GEOMETRY) AS
 └──────────────────────────────────────────────────────────────────────────────┴──────────────────────┴──────────────────────┘
 ```
 
-### LineString — ルートを表現する {#linestring-describe-a-route}
+### LineString — ルートを表現する {#linestring--describe-a-route}
 
 *シナリオ*: 単純な走行ルートを記録し、その長さを座標単位で測定します。
 
@@ -115,7 +115,7 @@ FROM (SELECT CAST('LINESTRING(10 20, 30 40, 50 60)' AS GEOMETRY) AS route);
 └──────────────────────────────────────────────────────────────┴────────────────────┘
 ```
 
-### Polygon — 領域またはジオフェンスを表す {#polygon-capture-an-area-or-geofence}
+### Polygon — 領域またはジオフェンスを表す {#polygon--capture-an-area-or-geofence}
 
 *シナリオ*: 施設の矩形ジオフェンスを定義し、SRID 情報付きで読み戻して、その面積を計算します。
 
@@ -134,7 +134,7 @@ FROM (SELECT CAST('POLYGON((0 0, 0 10, 10 10, 10 0, 0 0))' AS GEOMETRY) AS area)
 └──────────────────────────────────────────────────────────────┴──────────────┘
 ```
 
-### MultiPoint — 複数の地点をまとめて扱う {#multipoint-tag-multiple-sites-together}
+### MultiPoint — 複数の地点をまとめて扱う {#multipoint--tag-multiple-sites-together}
 
 *シナリオ*: 3 つのキオスクの座標をまとめて保持し、GeoJSON ペイロードと合計数の両方を報告します。
 
@@ -153,7 +153,7 @@ FROM (SELECT CAST('MULTIPOINT((10 20), (30 40), (50 60))' AS GEOMETRY) AS places
 └──────────────────────────────────────────────────────────────┴──────────────┘
 ```
 
-### MultiLineString — 平行な線を表現する {#multilinestring-represent-parallel-lines}
+### MultiLineString — 平行な線を表現する {#multilinestring--represent-parallel-lines}
 
 *シナリオ*: 2 本の平行な道路区間をグループ化し、WKT として読み戻し、`ST_NUMPOINTS` で頂点の総数を数えます。
 
@@ -172,7 +172,7 @@ FROM (SELECT CAST('MULTILINESTRING((10 20, 30 40), (50 60, 70 80))' AS GEOMETRY)
 └──────────────────────────────────────────────────────────────┴──────────────┘
 ```
 
-### MultiPolygon — 離れた区域をカバーする {#multipolygon-cover-disjoint-districts}
+### MultiPolygon — 離れた区域をカバーする {#multipolygon--cover-disjoint-districts}
 
 *シナリオ*: 分離した 2 つのサービス区域を表現し、合計面積を計算します。
 
@@ -193,7 +193,7 @@ FROM (
 └─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┴──────────────┘
 ```
 
-### GeometryCollection — 異種の図形を混在させる {#geometrycollection-mix-heterogenous-shapes}
+### GeometryCollection — 異種の図形を混在させる {#geometrycollection--mix-heterogenous-shapes}
 
 *シナリオ*: ランドマークのマーカーとそれに接続する経路をまとめて保持し、混在した GeoJSON と最大次元を公開します。
 

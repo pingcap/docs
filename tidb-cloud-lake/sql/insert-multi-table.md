@@ -1,9 +1,9 @@
 ---
-title: INSERT (multi-table)
+title: INSERT（マルチテーブル）
 summary: 単一のトランザクションで複数のテーブルに行を挿入します。挿入は、特定の条件に依存して実行することも（条件付き）、条件に関係なく実行することも（無条件）できます。
 ---
 
-# INSERT (multi-table)
+# INSERT（マルチテーブル）
 
 単一のトランザクションで複数のテーブルに行を挿入します。挿入は、特定の条件に依存して実行することも（条件付き）、条件に関係なく実行することも（無条件）できます。
 
@@ -56,7 +56,7 @@ SELECT ...
 
 ## 重要な注意事項 {#important-notes}
 
-- `VALUES(...)` 式では、集約関数、外部 UDF、ウィンドウ関数は使用できません。
+- `VALUES(...)` 式では、集計関数、外部 UDF、ウィンドウ関数は使用できません。
 
 ## 例 {#examples}
 
@@ -128,7 +128,7 @@ SELECT * FROM employee_history;
 └─────────────────────────────────────────────────────┘
 ```
 
-### Example-2: 条件付き INSERT ALL と FIRST {#example-2-conditional-insert-all-first}
+### 例 2: 条件付き INSERT ALL と FIRST {#example-2-conditional-insert-all--first}
 
 この例では、条件付き INSERT ALL を使用して、特定の条件に基づいて売上データを別々のテーブルに挿入する方法を示します。複数の条件を満たすレコードは、対応するすべてのテーブルに挿入されます。
 
@@ -234,7 +234,7 @@ SELECT * FROM high_price_sales;
 └─────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Example-3: 明示的なエイリアスを使用した挿入 {#example-3-insert-with-explicit-alias}
+### 例 3: 明示的なエイリアスを使用した挿入 {#example-3-insert-with-explicit-alias}
 
 この例では、VALUES 句でエイリアスを使用して、`employees` テーブルから `employee_history` テーブルへ、雇用日が '2023-02-01' より後の行を条件付きで挿入する方法を示します。
 

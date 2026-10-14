@@ -29,7 +29,7 @@ summary: このページでは、{{{ .lake }}} におけるクエリ構文のリ
 | **[QUALIFY](/tidb-cloud-lake/sql/qualify.md)** | ウィンドウ関数の計算後に行をフィルタリングします |
 | **[VALUES](/tidb-cloud-lake/sql/values.md)** | インラインの一時データセットを作成します |
 
-## Time Travel と Streaming {#time-travel-streaming}
+## Time Travel と Streaming {#time-travel--streaming}
 
 | コンポーネント | 説明 |
 |-----------|-------------|
