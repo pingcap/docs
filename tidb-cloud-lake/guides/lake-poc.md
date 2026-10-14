@@ -15,7 +15,7 @@ PoC は、代表的なデータサンプルと本番で使用されるクエリ�
 
 ## ステップ 2. PrivateLink を設定する {#step-2-configure-privatelink}
 
-トラフィックをプライベートネットワーク経路内に留める必要がある場合は、PrivateLink を使用します。**Home > Connect** で PrivateLink service を取得し、[AWS PrivateLink で接続する](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md) に従って接続を設定します。ロードを開始する前に、クライアントまたはソースクラスターから、エンドポイント、security-group ルール、DNS の動作、およびルートを確認してください。
+トラフィックをプライベートネットワーク経路内に留める必要がある場合は、PrivateLink を使用します。**Home > Connect** で PrivateLink サービスを取得し、[AWS PrivateLink で接続する](/tidb-cloud-lake/guides/connect-with-aws-privatelink.md) に従って接続を設定します。ロードを開始する前に、クライアントまたはソースクラスターから、エンドポイント、セキュリティグループルール、DNS の動作、およびルートを確認してください。
 
 ## ステップ 3. Data Pipeline を使用して TiDB Cloud Premium インスタンスから TiDB Cloud Lake にデータをレプリケートする {#step-3-use-data-pipeline-to-replicate-data-from-a-tidb-cloud-premium-instance-to-tidb-cloud-lake}
 
