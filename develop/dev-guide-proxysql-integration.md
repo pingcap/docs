@@ -38,7 +38,7 @@ ProxySQL 从零开始设计，目标是快速、高效且易于使用。它完�
 
 ## 开发环境
 
-本节介绍如何在开发环境中将 TiDB 与 ProxySQL 集成。在开始 ProxySQL 集成前，请根据 TiDB 部署方式选择以下任一方案，并确保已满足所有[前置条件](#prerequisite)。
+本节介绍如何在开发环境中将 TiDB 与 ProxySQL 集成。在开始 ProxySQL 集成前，请根据 TiDB 部署方式选择以下任一方案，并确保已满足所有[前置条件](#prerequisites)。
 
 - 方案 1：[集成 TiDB Cloud 与 ProxySQL](#option-1-integrate-tidb-cloud-with-proxysql)
 - 方案 2：[集成 TiDB Self-Managed 与 ProxySQL](#option-2-integrate-tidb-self-managed-with-proxysql)

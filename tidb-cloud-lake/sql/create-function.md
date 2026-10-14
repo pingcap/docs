@@ -71,7 +71,11 @@ if __name__ == '__main__':
 python udf_server.py
 ```
 
-### 第 2 步：在 {{{ .lake }}} 中注册函数 {#step-2-register-the-function-in-lake}
+### 第 2 步：公开服务器并将其加入允许列表
+
+通过支持 gRPC/HTTP2 的 HTTPS 公开 UDF 服务器，然后点击右上角的 **Support**，选择 **Submit a request**，并请求将该服务器主机名添加到你的租户的 **UDF server allowlist** 中。在此之前，`CREATE FUNCTION` 会因 `Unallowed UDF server address` 而失败。
+
+### 第 3 步：在 {{{ .lake }}} 中注册函数 {#step-2-register-the-function-in-lake}
 
 ```sql
 CREATE FUNCTION gcd AS (INT, INT)
@@ -81,7 +85,7 @@ CREATE FUNCTION gcd AS (INT, INT)
     ADDRESS = 'https://udf.example.com';
 ```
 
-### 第 3 步：调用函数 {#step-3-call-the-function}
+### 第 4 步：调用函数 {#step-3-call-the-function}
 
 ```sql
 SELECT gcd(48, 18);

@@ -42,12 +42,16 @@ summary: 了解如何创建 {{{ .premium }}} 实例。
 2. 在 **Create Resource** 页面，选择 **Premium** 作为你的套餐。
 3. 输入 {{{ .premium }}} 实例的名称，然后选择要托管实例的云服务提供商和区域。
 4. （可选）如需将此 {{{ .premium }}} 实例归入某个项目以便管理，请点击 **Group Your Instance in a Project**，然后为该实例选择目标项目。如果你的组织中还没有项目，可以点击 **Create a Project** 创建一个。
-5. 在 **Capacity** 区域，为实例设置 Request Capacity Units (RCUs) 的最大数量。RCU 表示为你的工作负载预配的计算资源。TiDB Cloud 会根据需求在此范围内自动扩缩容你的实例。
+5. 在 **Capacity** 区域，配置实例的容量。默认选择 **Elastic Mode**。
+
+    - **Elastic Mode**：为实例设置 **Baseline RCU**（而不是最大 RCU）。Baseline RCU 是向你计费的最小 Request Capacity Units (RCUs) 数量，也是自动扩缩容的初始容量。TiDB Cloud 会根据你的工作负载自动分配后端资源，并在需求增加时从 Baseline RCU 开始向外扩展。如果你在某一分钟内的实际消耗低于 Baseline RCU，则将按 Baseline RCU 计费。
+
+    - **Limited Mode**：设置实例可扩展到的最大容量。RCU 表示为你的工作负载预配的计算资源。TiDB Cloud 会根据需求在 `0.25 * RCU_max` 到 `RCU_max` 的范围内自动扩缩容你的实例。
 
     > **注意：**
     > 
-    > - 最大 RCU 值必须以 100 为增量进行设置。
-    > - 系统会按最小 RCU 数量向你计费，该值称为 **Minimum Billing RCU**。此值取以下两者中的较大者：你所配置最大 RCU 的 25% 和 5,000 RCUs。最小计费 RCU 可确保为峰值性能预留专用资源。即使你的实际使用量更低，也会按此最小值收费。
+    > - 在 **Limited Mode** 下，最大 RCU 值必须以 100 为增量进行设置。
+    > - 在 **Limited Mode** 下，系统会按最小 RCU 数量向你计费，该值称为 **Minimum Billing RCU**。此值取以下两者中的较大者：你所配置最大 RCU 的 25% 和 5,000 RCUs。最小计费 RCU 可确保预留专用资源以维持基线容量。即使你的实际使用量更低，也会按此最小值收费。
 
 6. 对于 {{{ .premium }}} 实例，仅启用区域级高可用，且不可配置。更多信息，请参见 [High Availability](/tidb-cloud/serverless-high-availability.md)。
 

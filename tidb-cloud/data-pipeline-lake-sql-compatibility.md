@@ -20,6 +20,7 @@ summary: TiDB Cloud Data Pipeline 中 DDL、DML 以及 TiDB 到 TiDB Cloud Lake 
 | `ADD COLUMN ... NOT NULL DEFAULT ...` | ✅ |  |
 | `DROP COLUMN` | ✅ |  |
 | `RENAME COLUMN` | ✅ |  |
+| `TRUNCATE` | ✅ |  |
 | `MODIFY COLUMN` | ⚠️ 部分支持 | 仅支持下方列出的 schema evolution 场景。其他转换不作保证，并且可能会阻塞下游消费。 |
 
 ### 支持的 `MODIFY COLUMN` 转换 {#supported-modify-column-conversions}

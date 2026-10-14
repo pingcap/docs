@@ -7,7 +7,7 @@ summary: 了解如何通过 Google、GitHub 或 Microsoft 账号登录 TiDB Clou
 
 本文档介绍如何通过基本的单点登录（SSO）认证登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，这种方式快速且方便。
 
-TiDB Cloud 支持 Google、GitHub 和 Microsoft 账号的 SSO 认证。如果你通过 SSO 认证登录 TiDB Cloud，由于你的 ID 和凭据存储在第三方 Google、GitHub 和 Microsoft 平台上，你将无法使用 TiDB 控制台修改账号密码和启用多因素认证（MFA）。
+TiDB Cloud 支持 Google、GitHub 和 Microsoft 账号的 SSO 认证。如果你通过 SSO 认证登录 TiDB Cloud，由于你的 ID 和凭据存储在第三方 Google、GitHub 和 Microsoft 平台上，你将无法使用 TiDB Cloud 控制台修改账号密码和启用多因素认证（MFA）。
 
 > **注意：**
 >

@@ -77,11 +77,7 @@ summary: TiDB Cloud Lake 是一项面向分析型工作负载的云原生数据�
 
 <LearningPath label="运维" icon="tidb-cloud-tune">
 
-[管理成本](https://docs.pingcap.com/zh/tidbcloudlake/manage-costs/)
-
 [监控使用情况](https://docs.pingcap.com/zh/tidbcloudlake/monitor-usage/)
-
-[AI-Powered 的功能](https://docs.pingcap.com/zh/tidbcloudlake/ai-powered-features/)
 
 [性能优化](https://docs.pingcap.com/zh/tidbcloudlake/performance-optimization/)
 

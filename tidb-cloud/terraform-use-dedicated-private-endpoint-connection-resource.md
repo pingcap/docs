@@ -150,7 +150,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_private_endpoint_connection` �
 
 1. 为新的 `tidbcloud_dedicated_private_endpoint_connection` 资源添加 import 块。
 
-    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为 `cluster_id,dedicated_private_endpoint_connection_id` 的格式：
+    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你期望的资源名称，将 `${id}` 替换为 `cluster_id,node_group_id,private_endpoint_connection_id` 的格式：
 
     ```
     import {
@@ -178,8 +178,8 @@ summary: 了解如何使用 `tidbcloud_dedicated_private_endpoint_connection` �
     然后，运行 `terraform apply` 来导入你的基础设施。应用后，示例输出如下：
 
     ```shell
-    tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=aws-1934187953894000000,example]
-    tidbcloud_dedicated_private_endpoint_connection.example: Import complete [id=aws-19341879538940000000,example]
+    tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=10757937805044000000,1934178998036000000,1934214559409000000]
+    tidbcloud_dedicated_private_endpoint_connection.example: Import complete [id=10757937805044000000,1934178998036000000,1934214559409000000]
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```

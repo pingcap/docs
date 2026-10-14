@@ -177,7 +177,7 @@ summary: 了解如何使用 restore 资源。
 
     你可以看到恢复任务的状态为 `PENDING`，集群的状态为 `INITIALIZING`。
 
-5. 等待几分钟，然后使用 `terraform refersh` 更新状态。
+5. 等待几分钟，然后使用 `terraform refresh` 更新状态。
 
 6. 当集群状态变为 `AVAILABLE` 后，恢复任务会变为 `RUNNING`，最终变为 `SUCCESS`。
 

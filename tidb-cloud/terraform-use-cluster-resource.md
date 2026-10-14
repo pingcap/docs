@@ -832,7 +832,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
    }
    ```
 
-6. 稍等片刻后，使用 `terraform refersh` 命令更新状态，最终状态会变为 `AVAILABLE`。
+6. 稍等片刻后，使用 `terraform refresh` 命令更新状态，最终状态会变为 `AVAILABLE`。
 
 现在，你已经使用 Terraform 创建并管理了 TiDB Cloud Dedicated 集群。接下来，你可以尝试通过我们的 [备份资源](/tidb-cloud/terraform-use-backup-resource.md) 为集群创建备份。
 

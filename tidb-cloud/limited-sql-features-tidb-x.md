@@ -73,6 +73,7 @@ TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Mana
 | `ALTER INSTANCE` | 不支持 | 不支持 |
 | `ALTER INSTANCE RELOAD TLS` | 不支持 | {{{ .starter }}} 和 {{{ .essential }}} 会自动刷新 TLS 证书。 |
 | `ALTER TABLE ... ATTRIBUTES` | 不支持 | 不支持 |
+| `ALTER TABLE ... EXCHANGE PARTITION` | 不支持 | 不支持 |
 | `CHANGE DRAINER` | 不支持 [^7] | 不支持 [^7] |
 | `CHANGE PUMP` | 不支持 [^7] | 不支持 [^7] |
 | `FLASHBACK CLUSTER` | 不支持 [^3] | 不支持 [^3] |

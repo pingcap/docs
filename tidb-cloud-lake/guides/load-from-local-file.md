@@ -108,8 +108,7 @@ try (FileInputStream fileInputStream = new FileInputStream(file);
 
 > **Note:**
 >
-> 请确保你本地的 LakeSQL 可以直接连接到 {{{ .lake }}} 的后端对象存储。
-> 如果不能，则需要指定 `--set presigned_url_disabled=1` 选项以禁用 presigned url 功能。
+> 请确保本地的 LakeSQL 可以直接连接到 {{{ .lake }}} 的后端对象存储。如果不能，请指定 `--set presigned_url_disabled=1` 选项以禁用 presigned URL 功能。
 
 ### 步骤 3：验证已加载的数据 {#step-3-verify-loaded-data}
 

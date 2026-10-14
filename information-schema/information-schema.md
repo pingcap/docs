@@ -145,7 +145,7 @@ Information Schema 提供了一种符合 ANSI 标准的方式来查看系统元�
 | [`TIDB_HOT_REGIONS`](/information-schema/information-schema-tidb-hot-regions.md)        | 提供热点 Region 的统计信息。 |
 | [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md) | 提供热点 Region 的历史统计信息。 |
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                | 提供 TiDB 表的索引信息。 |
-| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | 提供 TiDB 节点上索引使用统计信息。 ｜
+| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | 提供 TiDB 节点上索引使用统计信息。 |
 | [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | 提供 TiDB 服务器（即 tidb-server 组件）列表。 |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | 提供 TiDB 节点上正在执行的事务信息。 |
 | [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)          | 提供 TiFlash 副本索引构建的统计信息。 |
@@ -200,7 +200,7 @@ Information Schema 提供了一种符合 ANSI 标准的方式来查看系统元�
 | [`TIDB_HOT_REGIONS`](https://docs.pingcap.com/tidb/stable/information-schema-tidb-hot-regions)        | 提供热点 Region 的统计信息。该表不适用于 TiDB Cloud。 |
 | [`TIDB_HOT_REGIONS_HISTORY`](/information-schema/information-schema-tidb-hot-regions-history.md) | 提供热点 Region 的历史统计信息。 |
 | [`TIDB_INDEXES`](/information-schema/information-schema-tidb-indexes.md)                | 提供 TiDB 表的索引信息。 |
-| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | 提供 TiDB 节点上索引使用统计信息。 ｜
+| [`TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)        | 提供 TiDB 节点上索引使用统计信息。 |
 | [`TIDB_SERVERS_INFO`](/information-schema/information-schema-tidb-servers-info.md)      | 提供 TiDB 服务器（即 tidb-server 组件）列表。 |
 | [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) | 提供 TiDB 节点上正在执行的事务信息。 |
 | [`TIFLASH_INDEXES`](/information-schema/information-schema-tiflash-indexes.md)          | 提供 TiFlash 副本索引构建的统计信息。 |

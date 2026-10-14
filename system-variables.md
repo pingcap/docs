@@ -7081,7 +7081,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 类型：整数型
 - 默认值： `1`
 - 范围：TiDB Self-Managed 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 为 `[0, 2147483647]`，[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 为 `[1, 2147483647]`
-- 该变量是密码复杂度检查中的一项检查项，用于检查密码中是否包含足够数量的数字。该变量仅在 [`validate_password.enable`](#password_reuse_interval-new-in-v650) 开启且 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) 设为 `1` (MEDIUM) 或更高时生效。
+- 该变量是密码复杂度检查中的一项检查项，用于检查密码中是否包含足够数量的数字。该变量仅在 [`validate_password.enable`](#validate_passwordenable-new-in-v650) 开启且 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) 设为 `1` (MEDIUM) 或更高时生效。
 
 ### validate_password.policy <span class="version-mark">从 v6.5.0 版本开始引入</span>
 
@@ -7091,7 +7091,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 类型：枚举型
 - 默认值： `1`
 - 可选值：TiDB Self-Managed 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 为 `0`、`1`、`2`；[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 为 `1`、`2`
-- 该变量用于控制密码复杂度检查的策略。该变量仅在 [`validate_password.enable`](#password_reuse_interval-new-in-v650) 开启时生效。该变量的值决定了除 `validate_password.check_user_name` 外的其他 `validate-password` 变量是否在密码复杂度检查中生效。
+- 该变量用于控制密码复杂度检查的策略。该变量仅在 [`validate_password.enable`](#validate_passwordenable-new-in-v650) 开启时生效。该变量的值决定了除 `validate_password.check_user_name` 外的其他 `validate-password` 变量是否在密码复杂度检查中生效。
 - 该变量的值可以为 `0`、`1` 或 `2`（分别对应 LOW、MEDIUM 或 STRONG）。不同策略级别有不同的检查项：
     - 0 或 LOW：密码长度。
     - 1 或 MEDIUM：密码长度、大小写字母、数字和特殊字符。
@@ -7105,7 +7105,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - 类型：整数型
 - 默认值： `1`
 - 范围：TiDB Self-Managed 和 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated) 为 `[0, 2147483647]`，[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter) 和 [{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential) 为 `[1, 2147483647]`
-- 该变量是密码复杂度检查中的一项检查项，用于检查密码中是否包含足够数量的特殊字符。该变量仅在 [`validate_password.enable`](#password_reuse_interval-new-in-v650) 开启且 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) 设为 `1` (MEDIUM) 或更高时生效。
+- 该变量是密码复杂度检查中的一项检查项，用于检查密码中是否包含足够数量的特殊字符。该变量仅在 [`validate_password.enable`](#validate_passwordenable-new-in-v650) 开启且 [`validate_password.policy`](#validate_passwordpolicy-new-in-v650) 设为 `1` (MEDIUM) 或更高时生效。
 
 ### version
 

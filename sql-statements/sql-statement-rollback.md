@@ -39,7 +39,7 @@ Empty set (0.01 sec)
 
 ## MySQL 兼容性
 
-* TiDB 解析但忽略语法 `ROLLBACK AND [NO] RELEASE`。此功能在 MySQL 中用于在回滚事务后立即断开客户端会话。在 TiDB 中，建议使用你的客户端驱动的 `mysql_close()` 功能。
+* TiDB 解析但忽略语法 `ROLLBACK [NO] RELEASE`。此功能在 MySQL 中用于在回滚事务后立即断开客户端会话。在 TiDB 中，建议使用你的客户端驱动的 `mysql_close()` 功能。
 * TiDB 解析但忽略语法 `ROLLBACK AND [NO] CHAIN`。此功能在 MySQL 中用于在当前事务回滚的同时立即以相同的隔离级别启动一个新事务。在 TiDB 中，建议改为启动一个新事务。
 
 ## 相关链接

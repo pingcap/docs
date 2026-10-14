@@ -122,7 +122,10 @@ TiDB Cloud 支持将数据恢复到新的 TiDB Cloud Starter 或 Essential 实�
 5. 根据需要更新容量。
 
     - 对于 TiDB Cloud Starter 实例，如果你需要的资源超过[免费额度](/tidb-cloud/select-cluster-tier.md#usage-quota)，请设置每月消费上限。
-    - 对于 TiDB Cloud Essential 实例，请设置最小 RCU 和最大 RCU，然后根据需要配置高级设置。
+    - 对于新的 TiDB Cloud Essential 实例，请根据 TiDB 内核版本配置以下容量设置，然后根据需要配置高级设置。
+
+      - 对于运行 CLOUD.202603.x 或更高版本的新 TiDB Cloud Essential 实例，默认选择 **Elastic Mode**，并使用固定的 **Baseline RCU** 2,000 RCUs。如果你需要限制容量，请切换到 **Limited Mode** 并设置最大 RCU；最小计费 RCU 会自动计算。
+      - 对于运行较早 TiDB 版本的新 TiDB Cloud Essential 实例，请设置最小 RCU 和最大 RCU。
 
 6. 点击 **Restore** 开始恢复过程。
 
