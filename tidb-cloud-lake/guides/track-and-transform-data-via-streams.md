@@ -10,7 +10,7 @@ summary: "{{{ .lake }}} の stream は常時稼働する変更テーブルであ
 ## Stream の概要 {#stream-overview}
 
 - Stream はテーブルストレージを複製しません。消費されるまで、影響を受けた各行について最新の変更を一覧表示します。
-- 消費（task、INSERT ... SELECT、`WITH CONSUME` など）を行うと、stream はクリアされますが、新しいデータを受け取れる状態は維持されます。
+- 消費（タスク、INSERT ... SELECT、`WITH CONSUME` など）を行うと、stream はクリアされますが、新しいデータを受け取れる状態は維持されます。
 - `APPEND_ONLY` のデフォルトは `true` です。UPDATE/DELETE イベントをキャプチャする必要がある場合にのみ、`APPEND_ONLY = false` を設定してください。
 
 | モード | キャプチャ対象 | 一般的な用途 |

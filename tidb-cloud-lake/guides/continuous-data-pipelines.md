@@ -15,14 +15,14 @@ summary: "{{{ .lake }}} で 2 つの基本機能を使って、エンドツー�
 - [例 1: 追記専用 Stream コピー](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-1-append-only-stream) – 挿入をキャプチャし、別のテーブルに消費します。
 - [例 2: 標準 Stream の更新](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-2-standard-stream-updates--deletes) – 更新と削除がどのように現れるか、また 1 つのコンシューマーだけがストリームを消費しきれる理由を確認します。
 - [例 3: 増分 Stream メトリクス](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md#example-3-incremental-stream-join) – `WITH CONSUME` を使って複数の stream を結合し、バッチごとに差分を計算します。
-- [例 1: スケジュールされたコピー Task](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md#example-1-scheduled-copy) – 2 つの定期実行 task でファイルを生成してロードします。
-- [例 2: Stream トリガーによるマージ](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md#example-2-stream-triggered-merge) – `STREAM_STATUS` が true のときだけ task を実行します。
+- [例 1: スケジュールされたコピー Task](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md#example-1-scheduled-copy) – 2 つの定期実行タスクでファイルを生成してロードします。
+- [例 2: Stream トリガーによるマージ](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md#example-2-stream-triggered-merge) – `STREAM_STATUS` が true のときだけタスクを実行します。
 
 ## {{{ .lake }}} で CDC を使う理由 {#why-cdc-in--lake-}
 
 - **軽量** – stream は完全なテーブルを複製せずに、最新の変更セットを保持します。
 - **トランザクション対応** – stream の消費は、SQL ステートメントとともに成功するかロールバックされます。
 - **増分処理** – `WITH CONSUME` を使って同じクエリを再実行し、新しい行だけを処理できます。
-- **スケジュール可能** – task を使うことで、すでに SQL で表現したコピー、merge、またはアラートのロジックを自動化できます。
+- **スケジュール可能** – タスクを使うことで、すでに SQL で表現したコピー、merge、またはアラートのロジックを自動化できます。
 
-まず stream の例を確認し、その後 task と組み合わせてパイプラインを自動化してください。
+まず stream の例を確認し、その後タスクと組み合わせてパイプラインを自動化してください。

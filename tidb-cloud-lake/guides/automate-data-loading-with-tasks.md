@@ -9,7 +9,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
 
 ![alt text](/media/tidb-cloud-lake/task.png)
 
-- **Name & warehouse** – すべての task には warehouse が必要です。
+- **Name & warehouse** – すべてのタスクには warehouse が必要です。
 
     ```sql
     CREATE TASK ingest_orders
@@ -44,7 +44,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
     AS ...;
     ```
 
-- **SQL payload** – `AS` の後に記述した内容が、その task によって実行されます。
+- **SQL payload** – `AS` の後に記述した内容が、そのタスクによって実行されます。
 
     ```sql
     CREATE TASK bump_age
@@ -119,7 +119,7 @@ ALTER TASK task_generate_data RESUME;
 ALTER TASK task_consume_data RESUME;
 ```
 
-どちらの task も、再開するまでは一時停止状態で開始されます。最初のファイル生成とコピーは、次の 1 分以内に行われるはずです。
+どちらのタスクも、再開するまでは一時停止状態で開始されます。最初のファイル生成とコピーは、次の 1 分以内に行われるはずです。
 
 ### ステップ 5. パイプラインを監視する {#step-5-monitor-the-pipeline}
 
@@ -146,11 +146,11 @@ ALTER TASK task_consume_data
     WAREHOUSE = 'etl_wh_medium'; -- replace with your warehouse
 ```
 
-テストが完了したら、`ALTER TASK ... SUSPEND` を使ってどちらの task も一時停止できます。
+テストが完了したら、`ALTER TASK ... SUSPEND` を使ってどちらのタスクも一時停止できます。
 
 ### ステップ 6. Tasks を更新する {#step-6-update-tasks}
 
-task を削除しなくても、スケジュール、warehouse、さらには SQL payload まで変更できます。
+タスクを削除しなくても、スケジュール、warehouse、さらには SQL payload まで変更できます。
 
 ```sql
 -- Tweak the schedule and warehouse
