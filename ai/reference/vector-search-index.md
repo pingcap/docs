@@ -98,11 +98,12 @@ A query that filters with `WHERE` and then sorts by distance asks for the K near
 
 SELECT * FROM vec_table
 WHERE category = "document"
+  AND VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]') IS NOT NULL
 ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-The result is exact: you always get the 5 closest matching rows, or every matching row if fewer than 5 match. The cost grows with the number of rows that pass the filter, so this pattern suits selective filters.
+By excluding rows with a `NULL` distance, the result is exact: you get the 5 closest rows that match the filter and have a valid cosine distance, or every such row if fewer than 5 exist. `VEC_COSINE_DISTANCE()` returns `NULL` if an input vector is `NULL` or the cosine distance is undefined, such as for a zero vector. Without this exclusion, `NULL` values sort before non-`NULL` values in ascending order and can occupy the first positions in the result. The cost grows with the number of rows that pass the filter, so this pattern suits selective filters.
 
 ### Filter after the vector search
 
