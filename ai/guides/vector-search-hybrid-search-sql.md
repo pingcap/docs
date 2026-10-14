@@ -94,38 +94,73 @@ LIMIT 3;
 
 ## Step 5. Combine both searches in one query
 
-The following query runs both searches, ranks each result list, and merges them with Reciprocal Rank Fusion (RRF). Each row scores `1 / (60 + rank)` for every list it appears in, and the scores are added. A row that ranks well in both lists rises to the top. The constant `60` is the value commonly used for RRF; a larger value reduces the advantage of top-ranked rows over lower-ranked ones.
+The following query runs both searches, ranks each result list, and performs Reciprocal Rank Fusion (RRF) on the bounded Top-K candidate IDs first. It then joins the fused top hits back to `docs` to fetch the document content. Each row scores `1 / (60 + rank)` for every list it appears in, and the scores are added. A row that ranks well in both lists rises to the top. The constant `60` is the value commonly used for RRF; a larger value reduces the advantage of top-ranked rows over lower-ranked ones.
 
 ```sql
 WITH
 vec AS (
-  SELECT id, ROW_NUMBER() OVER (ORDER BY distance) AS r FROM (
-    SELECT /*+ READ_FROM_STORAGE(TIFLASH[docs]) */ id,
-           VEC_EMBED_COSINE_DISTANCE(content_vector, 'vector index error 8200 partitioned table') AS distance
+  SELECT id,
+         ROW_NUMBER() OVER (ORDER BY distance, id) AS r
+  FROM (
+    SELECT /*+ READ_FROM_STORAGE(TIFLASH[docs]) */
+           id,
+           VEC_EMBED_COSINE_DISTANCE(
+             content_vector,
+             'vector index error 8200 partitioned table'
+           ) AS distance
     FROM docs
     ORDER BY distance
     LIMIT 20
   ) v
 ),
 fts AS (
-  SELECT id, ROW_NUMBER() OVER (ORDER BY score DESC) AS r FROM (
-    SELECT id, fts_match_word('vector index error 8200 partitioned table', content) AS score
+  SELECT id,
+         ROW_NUMBER() OVER (ORDER BY score DESC, id) AS r
+  FROM (
+    SELECT id,
+           fts_match_word(
+             'vector index error 8200 partitioned table',
+             content
+           ) AS score
     FROM docs
-    WHERE fts_match_word('vector index error 8200 partitioned table', content)
+    WHERE fts_match_word(
+      'vector index error 8200 partitioned table',
+      content
+    ) > 0
     ORDER BY score DESC
     LIMIT 20
   ) f
+),
+hits AS (
+  SELECT id,
+         1.0 / (60 + r) AS contribution,
+         r AS vector_rank,
+         NULL AS fulltext_rank
+  FROM vec
+  UNION ALL
+  SELECT id,
+         1.0 / (60 + r),
+         NULL,
+         r
+  FROM fts
+),
+top_hits AS (
+  SELECT id,
+         SUM(contribution) AS rrf_score,
+         MAX(vector_rank) AS vector_rank,
+         MAX(fulltext_rank) AS fulltext_rank
+  FROM hits
+  GROUP BY id
+  ORDER BY rrf_score DESC, id
+  LIMIT 3
 )
 SELECT d.id, d.content,
-       COALESCE(1.0 / (60 + vec.r), 0) + COALESCE(1.0 / (60 + fts.r), 0) AS rrf_score,
-       vec.r AS vector_rank,
-       fts.r AS fulltext_rank
-FROM docs d
-LEFT JOIN vec ON vec.id = d.id
-LEFT JOIN fts ON fts.id = d.id
-WHERE vec.id IS NOT NULL OR fts.id IS NOT NULL
-ORDER BY rrf_score DESC, d.id
-LIMIT 3;
+       t.rrf_score,
+       t.vector_rank,
+       t.fulltext_rank
+FROM top_hits t
+JOIN docs d ON d.id = t.id
+ORDER BY t.rrf_score DESC, t.id;
 ```
 
 ```
