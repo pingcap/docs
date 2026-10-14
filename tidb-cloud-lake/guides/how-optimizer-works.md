@@ -217,7 +217,7 @@ WITH recent_orders AS (
 
 #### a. 安全な LEFT JOIN を INNER JOIN に変換する {#a-turn-safe-left-joins-into-inner-joins}
 
-このクエリは `LEFT JOIN products p` で始まりますが、述語 `p.is_active = TRUE` により、一致する product を持つ行だけが保持されることが保証されます。そのため、オプティマイザは結合の種類を切り替えます。
+このクエリは `LEFT JOIN products p` で始まりますが、述語 `p.is_active = TRUE` により、一致する商品を持つ行だけが保持されることが保証されます。そのため、オプティマイザは結合の種類を切り替えます。
 
 ```
 # Before
