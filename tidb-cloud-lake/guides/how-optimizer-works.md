@@ -199,7 +199,7 @@ WITH recent_orders AS (
 
 ### 1. 結合順序を選択する {#1-choose-the-join-order}
 
-統計情報に基づく動的計画法（`DPhpyOptimizer`）が、テーブル結合の順列を評価します。大きなファクトテーブル（`recent_orders`）がそれらを probe する一方で、より小さくフィルタ済みのテーブル（`customers`、`products`、`support_tickets`）上にハッシュテーブルを構築することを優先します。
+統計情報に基づく動的計画法（`DPhpyOptimizer`）が、結合の順列を評価します。より小さくフィルタ済みのテーブル（`customers`、`products`、`support_tickets`）上にハッシュテーブルを構築し、大きなファクトテーブル（`recent_orders`）がそれらをプローブする構成を優先します。
 
 ```
     customers      products
