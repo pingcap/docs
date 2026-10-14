@@ -1,11 +1,11 @@
 ---
 title: SHOW DICTIONARIES
-summary: 現在または指定したデータベース内のディクショナリを一覧表示します。
+summary: 現在または指定したデータベース内の辞書を一覧表示します。
 ---
 
 # SHOW DICTIONARIES
 
-現在または指定したデータベース内のディクショナリを一覧表示します。
+現在または指定したデータベース内の辞書を一覧表示します。
 
 ## 構文 {#syntax}
 
@@ -19,9 +19,9 @@ SHOW DICTIONARIES [ FROM <database_name> | IN <database_name> ]
 
 | パラメータ | 説明 |
 |-----------|-------------|
-| `FROM <database_name>` / `IN <database_name>` | 任意。指定したデータベースのディクショナリを一覧表示します。 |
+| `FROM <database_name>` / `IN <database_name>` | 任意。指定したデータベースの辞書を一覧表示します。 |
 | `LIMIT <limit>` | 任意。返される行数を制限します。 |
-| `LIKE '<pattern>'` | 任意。パターンに基づいてディクショナリ名を絞り込みます。 |
+| `LIKE '<pattern>'` | 任意。パターンに基づいて辞書名を絞り込みます。 |
 | `WHERE <expr>` | 任意。式を使用して結果セットを絞り込みます。 |
 
 ## 例 {#examples}
