@@ -1,11 +1,11 @@
 ---
 title: TO_BINARY
-summary: string、variant、ビットマップ、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
+summary: string、variant、bitmap、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
 ---
 
 # TO_BINARY
 
-string、variant、ビットマップ、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
+string、variant、bitmap、geometry、geography などのサポートされているデータ型を、そのバイナリ表現（16進形式）に変換します。
 
 関連情報: [TRY_TO_BINARY](/tidb-cloud-lake/sql/try-to-binary.md)
 
