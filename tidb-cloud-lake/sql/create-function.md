@@ -25,8 +25,8 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
 | `<function_name>`     | The name of the function.                                                                        |
 | `<lambda_expression>` | The lambda expression or code snippet defining the function's behavior.                          |
 | `DESC='<description>'`  | Description of the UDF.|
-| `<<input_param_names>`| A list of input parameter names. Separated by comma.|
-| `<<input_param_types>`| A list of input parameter types. Separated by comma.|
+| `<input_param_names>`| A list of input parameter names. Separated by comma.|
+| `<input_param_types>`| A list of input parameter types. Separated by comma.|
 | `<return_type>`       | The return type of the function.                                                                  |
 | `LANGUAGE`            | Specifies the language used to write the function. Available values: `python`.                    |
 | `HANDLER = '<handler_name>'` | Specifies the name of the function's handler.                                               |
