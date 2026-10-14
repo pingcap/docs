@@ -177,7 +177,7 @@ Aggregate (final)
    └─ Scan (recent_orders)
 ```
 
-partial aggregate はデータの近くで実行され、その後 1 回の final ステップで結果をマージします。
+部分集計はデータの近くで実行され、その後 1 回の最終ステップで結果をマージします。
 
 ### 4. フィルタを CTE にプッシュダウンする {#4-push-filters-into-the-cte}
 
