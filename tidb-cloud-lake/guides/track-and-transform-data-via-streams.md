@@ -106,7 +106,7 @@ ORDER BY change$row_id;
 └────────────┴───────────────┴───────────────┴──────────────────┘
 ```
 
-Standard ストリームは、コンテキスト付きで各変更をキャプチャします。更新は同じ `sensor_id` に対する DELETE+INSERT として表示され、単独の削除/挿入は個別に表示されます。Append-Only ストリームは insert のみを追跡するため、空のままです。
+Standard ストリームは、コンテキスト付きで各変更をキャプチャします。更新は同じ `sensor_id` に対する DELETE+INSERT として表示され、単独の削除/挿入は個別に表示されます。Append-Only ストリームは挿入のみを追跡するため、空のままです。
 
 ## 例 3: 増分 Stream Join {#example-3-incremental-stream-join}
 
