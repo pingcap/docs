@@ -134,8 +134,6 @@
   - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
   - [Recovery from Operational Errors](/tidb-cloud-lake/guides/recovery-from-operational-errors.md)
 - Management
-  - [AI-Powered Features](/tidb-cloud-lake/guides/ai-powered-features.md)
-  - [Manage Costs](/tidb-cloud-lake/guides/manage-costs.md)
   - [Monitor Usage](/tidb-cloud-lake/guides/monitor-usage.md)
   - [Data Lifecycle](/tidb-cloud-lake/guides/data-lifecycle.md)
   - [Data Lineage](/tidb-cloud-lake/guides/data-lineage.md)

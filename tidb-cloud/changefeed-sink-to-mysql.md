@@ -17,7 +17,7 @@ This document describes how to stream data from TiDB Cloud to MySQL using the **
 
 ## Restrictions
 
-- For each <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>, you can create up to 100 changefeeds.
+- For each <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
@@ -72,13 +72,13 @@ You can connect your {{{ .dedicated }}} cluster to your MySQL service securely t
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
-Make sure that your {{{ .premium }}} instance can connect to the MySQL service.
+Make sure that your {{{ .premium }}} or {{{ .byoc }}} instance can connect to the MySQL service.
 
 Private endpoints leverage **Private Link** or **Private Service Connect** technologies from cloud providers, enabling resources in your VPC to connect to services in other VPCs through private IP addresses, as if those services were hosted directly within your VPC.
 
-You can connect your {{{ .premium }}} instance to your MySQL service securely through a private endpoint. If the private endpoint is not available for your MySQL service, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) to create one.
+You can connect your {{{ .premium }}} or {{{ .byoc }}} instance to your MySQL service securely through a private endpoint. If the private endpoint is not available for your MySQL service, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) to create one.
 
 </CustomContent>
 
@@ -89,9 +89,9 @@ You can connect your {{{ .premium }}} instance to your MySQL service securely th
 The **Sink to MySQL** connector can only sink incremental data from your {{{ .dedicated }}} cluster to MySQL after a certain timestamp. If you already have data in your {{{ .dedicated }}} cluster, you can export and load the existing data of your {{{ .dedicated }}} cluster into MySQL before enabling **Sink to MySQL**.
 
 </CustomContent>
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
-The **Sink to MySQL** connector can only sink incremental data from your {{{ .premium }}} instance to MySQL after a certain timestamp. If you already have data in your {{{ .premium }}} instance, you can export and load the existing data of your {{{ .premium }}} instance into MySQL before enabling **Sink to MySQL**.
+The **Sink to MySQL** connector can only sink incremental data from your {{{ .premium }}} or {{{ .byoc }}} instance to MySQL after a certain timestamp. If you already have data in your {{{ .premium }}} or {{{ .byoc }}} instance, you can export and load the existing data into MySQL before enabling **Sink to MySQL**.
 
 </CustomContent>
 
@@ -110,7 +110,7 @@ To load the existing data:
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data from your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the MySQL service.
+2. Use [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) to export data from your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>, then use community tools such as [mydumper/myloader](https://centminmod.com/mydumper.html) to load data to the MySQL service.
 
 3. From the [exported files of Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files), get the start position of MySQL sink from the metadata file:
 
@@ -132,7 +132,7 @@ If you do not load the existing data, you need to create corresponding target ta
 
 After completing the prerequisites, you can sink your data to MySQL.
 
-1. Navigate to the overview page of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>, and then click **Data** > **Changefeed** in the left navigation pane.
+1. Navigate to the overview page of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>, and then click **Data** > **Changefeed** in the left navigation pane.
 
 2. Click **Create Changefeed**, and select **MySQL** as **Destination**.
 
@@ -174,7 +174,7 @@ After completing the prerequisites, you can sink your data to MySQL.
 
 9. Click **Next** to configure your changefeed specification.
 
-    - In the **Changefeed Specification** area, specify the number of <CustomContent plan="dedicated">Replication Capacity Units (RCUs)</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs)</CustomContent> to be used by the changefeed.
+    - In the **Changefeed Specification** area, configure the <CustomContent plan="dedicated">number of Replication Capacity Units (RCUs)</CustomContent><CustomContent plan="premium">number of Changefeed Capacity Units (CCUs)</CustomContent><CustomContent plan="byoc">provisioned vCPUs of the TiCDC nodes</CustomContent> to be used by the changefeed.
     - In the **Changefeed Name** area, specify a name for the changefeed.
 
 10. Click **Next** to review the changefeed configuration.

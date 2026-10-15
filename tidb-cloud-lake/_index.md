@@ -77,11 +77,7 @@ summary: TiDB Cloud Lake is a cloud-native data warehouse service for analytics 
 
 <LearningPath label="Operate" icon="tidb-cloud-tune">
 
-[Manage Costs](https://docs.pingcap.com/tidbcloudlake/manage-costs/)
-
 [Monitor Usage](https://docs.pingcap.com/tidbcloudlake/monitor-usage/)
-
-[AI-Powered Features](https://docs.pingcap.com/tidbcloudlake/ai-powered-features/)
 
 [Performance Tuning](https://docs.pingcap.com/tidbcloudlake/performance-optimization/)
 

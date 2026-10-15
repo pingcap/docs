@@ -10,26 +10,12 @@ The plan determines the throughput and performance of your TiDB resource.
 
 TiDB Cloud provides the following options of plans. Whether you are just getting started or scaling to meet the increasing application demands, these service plans provide the flexibility and capability you need. Before creating a TiDB resource, you need to consider which option suits your need better.
 
-<CustomContent plan="starter,essential,premium,dedicated">
-
-- [{{{ .starter }}}](#starter)
-- [{{{ .essential }}}](#essential)
-- [{{{ .premium }}}](#premium)
-- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
-- [{{{ .lake }}}](#lake)
-
-</CustomContent>
-
-<CustomContent plan="byoc">
-
 - [{{{ .starter }}}](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
 - [{{{ .byoc }}}](#byoc)
 - [{{{ .dedicated }}}](#tidb-cloud-dedicated)
 - [{{{ .lake }}}](#lake)
-
-</CustomContent>
 
 > **Note:**
 >
@@ -121,8 +107,6 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 - **Predictable pricing**: billed based on storage and Request Capacity Units (RCUs), offering transparent, usage-based pricing that scales with your needs, so you only pay for what you use without surprises.
 - **Advanced security and compliance**: supports advanced encryption, customer-managed encryption keys (CMEK), private networking, and compliance certifications to protect sensitive data.
 
-<CustomContent plan="byoc">
-
 ## {{{ .byoc }}} {#byoc}
 
 {{{ .byoc }}} is designed for enterprise workloads that require stronger control over data location, cloud resources, network boundaries, and compliance posture. With {{{ .byoc }}}, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account.
@@ -134,8 +118,6 @@ For mission-critical enterprise workloads that require large-scale capacity and 
 - **Flexible high availability**: supports both Single-AZ and Multi-AZ deployments, enabling you to choose between lower-latency zonal deployment and higher-resilience deployment across multiple availability zones.
 - **Cloud-account-level security controls**: lets you apply your own cloud policies, network controls, audit logging, and compliance controls to the BYOC data plane.
 - **Private connectivity**: supports private network access patterns such as VPC peering, depending on your BYOC configuration.
-
-</CustomContent>
 
 ## TiDB Cloud Dedicated
 
