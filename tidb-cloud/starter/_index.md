@@ -145,7 +145,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <CustomContent plan="starter" compatibility="postgresql">
 
-<LearningPathContainer platform="tidb-cloud" title="PostgreSQL-compatible TiDB Cloud Starter is designed for developers building and testing applications with familiar PostgreSQL tools and frameworks. It offers a fully managed, autoscaling database with pgvector-compatible vector search and selected PostgreSQL extensions.">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="PostgreSQL-compatible TiDB Cloud Starter is designed for developers building and testing applications with familiar PostgreSQL tools and frameworks. It offers a fully managed, autoscaling database with pgvector-compatible vector search and selected PostgreSQL extensions.">
 
 <LearningPath label="Learn" icon="cloud1">
 
