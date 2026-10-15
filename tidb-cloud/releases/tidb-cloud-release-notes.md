@@ -38,6 +38,14 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         For more information, see [TiDB Cloud BYOC documentation](https://docs.pingcap.com/tidbcloud/byoc/?plan=byoc).
 
+- **TiDB Cloud Filesystem**
+
+    - TiDB Cloud Filesystem is now in public preview.
+
+        TiDB Cloud Filesystem is a distributed file system designed specifically for AI coding agents. Built on the same TiDB Cloud Starter infrastructure that already powers millions of AI agents in production, it provides Git-aware, persistent workspaces across sandbox lifecycles, with always-on availability and seamless scalability.
+
+        To get started, see [TiDB Cloud Filesystem documentation](https://docs.pingcap.com/tidbcloud-filesystem/).
+
 ## October 13, 2026
 
 **General changes**
