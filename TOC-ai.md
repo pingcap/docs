@@ -22,7 +22,7 @@
     - [SQLによる全文検索](/ai/guides/vector-search-full-text-search-sql.md)
     - [全文検索の例](/ai/guides/fulltext-search-with-pytidb.md)
   - ハイブリッド検索
-    - [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
+    - [Python によるハイブリッド検索](/ai/guides/vector-search-hybrid-search.md)
     - [SQL によるハイブリッド検索](/ai/guides/vector-search-hybrid-search-sql.md)
     - [ハイブリッド検索の例](/ai/guides/hybrid-search-with-pytidb.md)
   - 自動埋め込み
@@ -40,7 +40,7 @@
   - [トランザクション](/ai/guides/transactions.md)
 - AI アプリケーションを構築する
   - [RAG の例](/ai/guides/rag-with-pytidb.md)
-  - [Agent メモリ ガイド](/ai/guides/agent-memory.md)
+  - [エージェントメモリガイド](/ai/guides/agent-memory.md)
   - [AI エージェントのメモリの例](/ai/guides/memory-with-pytidb.md)
   - [Text-to-SQL の例](/ai/guides/text2sql-with-pytidb.md)
 - TiDB Cloud CLI

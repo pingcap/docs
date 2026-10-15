@@ -51,7 +51,7 @@ TiDBは、AIアプリケーションの構築とAIエージェントワークフ
 
 | ドキュメント | 説明 |
 | --- | --- |
-| [ハイブリッド検索](/ai/guides/vector-search-hybrid-search.md) | `pytidb` を使用してベクトル検索と全文検索を組み合わせます。 |
+| [Python によるハイブリッド検索](/ai/guides/vector-search-hybrid-search.md) | `pytidb` を使用してベクトル検索と全文検索を組み合わせます。 |
 | [SQL によるハイブリッド検索](/ai/guides/vector-search-hybrid-search-sql.md) | Reciprocal Rank Fusion (RRF) を使用して、単一の SQL クエリでベクトル検索と全文検索を組み合わせます。 |
 | [ハイブリッド検索の例](/ai/guides/hybrid-search-with-pytidb.md) | `pytidb` を使用したハイブリッド検索の例。 |
 
