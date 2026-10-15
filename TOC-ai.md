@@ -41,7 +41,7 @@
 - AI アプリケーションを構築する
   - [RAG の例](/ai/guides/rag-with-pytidb.md)
   - [エージェントメモリガイド](/ai/guides/agent-memory.md)
-  - [AI エージェントのメモリの例](/ai/guides/memory-with-pytidb.md)
+  - [エージェントメモリの例](/ai/guides/memory-with-pytidb.md)
   - [Text-to-SQL の例](/ai/guides/text2sql-with-pytidb.md)
 - TiDB Cloud CLI
   - [概要](/ai/ti/ti-overview.md)

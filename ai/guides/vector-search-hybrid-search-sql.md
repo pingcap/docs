@@ -13,7 +13,7 @@ summary: TiDB で、挿入時に自動生成される埋め込みを使って、
 
 全文検索はまだ初期段階にあり、より多くの顧客に向けて順次提供されています。現在、全文検索は次のリージョンの {{{ .starter }}} でのみ利用できます。
 
-- AWS: `Oregon (us-west-2)`, `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`, `Frankfurt (eu-central-1)`, and `Singapore (ap-southeast-1)`
+- AWS: `Oregon (us-west-2)` 、 `N. Virginia (us-east-1)` 、 `Tokyo (ap-northeast-1)` 、 `Frankfurt (eu-central-1)` 、および`Singapore (ap-southeast-1)`
 
 Auto Embedding は、AWS でホストされている {{{ .starter }}} インスタンスでのみ利用できます。
 
