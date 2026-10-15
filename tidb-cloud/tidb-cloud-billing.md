@@ -27,7 +27,9 @@ For {{{ .premium }}}, you are billed based on the actual [Request Capacity Unit 
 
 ### Pricing for {{{ .byoc }}} {#pricing-for-byoc}
 
-For pricing information about {{{ .byoc }}}, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+{{{ .byoc}}} costs include infrastructure charges paid directly to your cloud provider, a PingCAP BYOC service fee based on provisioned vCPU capacity, and a separate support fee. BYOC requires the [Enterprise support plan or higher](/tidb-cloud/connected-care-overview.md#connected-care).
+
+For pricing information about {{{ .byoc }}}, [contact Sales](https://www.pingcap.com/contact-us/).
 
 ### Pricing for {{{ .lake }}} {#pricing-for-lake}
 
