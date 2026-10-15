@@ -192,7 +192,7 @@ LIMIT 3;
 
 > **Note:**
 >
-> `DELETE` の後でも、削除された行は、ガベージコレクションが古い行バージョンを削除するまで、`SELECT ... AS OF TIMESTAMP` のような [ステイル読み取り](/stale-read.md) で短時間読み取れる場合があります。TiDB は古いバージョンを少なくとも [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) で設定された時間だけ保持します。デフォルトは 10 分です。
+> `DELETE` の後も、ガベージコレクションが古い行バージョンを削除するまでの短い間は、削除された行を `SELECT ... AS OF TIMESTAMP` のような [ステイル読み取り](/stale-read.md) で引き続き読み取れます。TiDB は古いバージョンを少なくとも [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) で設定された時間だけ保持します。デフォルトは 10 分です。
 
 ## 関連情報 {#see-also}
 
