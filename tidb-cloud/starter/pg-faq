@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL-Compatible TiDB Cloud Starter FAQs
-summary: Learn about the most frequently asked questions (FAQs) relating to PostgreSQL-compatible TiDB Cloud Starter during Public Preview.
+summary: Find answers to frequently asked questions about PostgreSQL-compatible TiDB Cloud Starter during the Public Preview period.
 ---
 
 # PostgreSQL-Compatible TiDB Cloud Starter FAQs
@@ -17,7 +17,7 @@ During Public Preview, PostgreSQL-compatible {{{ .starter }}} is available free 
 
 PostgreSQL-compatible {{{ .starter }}} is available in Public Preview.
 
-To create an instance, select **Starter** in the TiDB Cloud console, choose the **PostgreSQL-compatible** option, review your configuration, and create the instance.
+To create an instance, select **Starter** in the TiDB Cloud console, choose the **PostgreSQL Compatible** option, review your configuration, and create the instance.
 
 During Public Preview, PostgreSQL compatibility is available only with {{{ .starter }}}. {{{ .essential }}} and {{{ .premium }}} do not currently support this option.
 
@@ -31,13 +31,13 @@ Additional regions might become available as the preview expands. New region ava
 
 ### Can I use both MySQL-compatible and PostgreSQL-compatible Starter instances in the same TiDB Cloud organization?
 
-Yes. You can use both MySQL-compatible and PostgreSQL-compatible {{{ .starter }}} instances in the same organization, project, supported region, and instance list.
+Yes. You can use both MySQL-compatible and PostgreSQL-compatible {{{ .starter }}} instances in the same organization, project, and region.
 
 TiDB Cloud displays the database type in the resource list and instance overview so you can distinguish between the two types of instances.
 
 ### How many Starter instances can I create?
 
-An organization can create up to **100 {{{ .starter }}} instances** in total by default, including both MySQL-compatible and PostgreSQL-compatible instances.
+A paid organization can create up to **100 {{{ .starter }}} instances** in total by default, including both MySQL-compatible and PostgreSQL-compatible instances. For MySQL-compatible instances, each branch is also counted as a instance.
 
 The free-instance allowance covers:
 
@@ -48,7 +48,7 @@ The free-instance allowance covers:
 
 During Public Preview, you can evaluate PostgreSQL-compatible {{{ .starter }}} with development, testing, and production-like workloads. **No service-level agreement (SLA) commitment is provided during Public Preview.**
 
-Because the service is still in preview and some capabilities might continue to evolve, we recommend waiting until General Availability (GA) before using PostgreSQL-compatible {{{ .starter }}} for mission-critical production workloads.
+Because the service is still in preview and some capabilities might continue to evolve, we recommend waiting until General Availability (GA) before using PostgreSQL-compatible {{{ .starter }}} for production workloads.
 
 ## Features and operations FAQs
 
@@ -60,7 +60,7 @@ PostgreSQL-compatible {{{ .starter }}} includes the following capabilities:
 - **Connectivity:** Connect through a public endpoint using PostgreSQL-compatible clients and drivers.
 - **Data import:** Import data using familiar PostgreSQL workflows, such as `psql` and `COPY`.
 - **Backup and restore:** Use daily automatic backups and restore a snapshot to a new PostgreSQL-compatible {{{ .starter }}} instance.
-- **Observability:** View built-in metrics for storage usage, queries per second (QPS), transactions per second (TPS), connections, and query duration.
+- **Observability:** View built-in metrics for storage usage, queries per second (QPS), connections, and query duration.
 - **AI and vector search:** Use pgvector-compatible vector search, full-text search, server-side embedding capabilities, and selected PostgreSQL extensions.
 
 Additional capabilities are planned as PostgreSQL-compatible {{{ .starter }}} continues to evolve during Public Preview.
@@ -83,7 +83,7 @@ PostgreSQL-compatible {{{ .starter }}} uses system-managed tables in the `public
 - **`tidbcloud_com_cell_sql_versions`:** Tracks changes to managed database resources and helps prevent conflicting updates.
 - **`tidbcloud_com_cell_sql_receipts`:** Records operation results so retries can be handled safely. This table does not store passwords.
 
-TiDB Cloud automatically maintains these tables. **Do not modify or delete them, or use them to store application data.** Doing so might interfere with managed database user operations.
+TiDB Cloud automatically maintains these tables. **Do not modify or drop them, or use them to store application data.** Doing so might interfere with managed database user operations.
 
 ## Billing and metering FAQs
 
@@ -105,6 +105,6 @@ For the first **10 PostgreSQL-compatible {{{ .starter }}} instances** in each or
 - **Row-based storage:** 50 GiB
 - **Request Units (RUs):** 500 million per month
 
-When an instance reaches its free quota, excessive resource consumption might be subject to usage restrictions or service suspension.
+If resource usage exceeds the free quota, TiDB Cloud might restrict further usage or suspend service.
 
 If you anticipate exceeding these allowances or need additional resources, contact support@pingcap.com to discuss your requirements.
