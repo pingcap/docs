@@ -17,7 +17,7 @@ This document describes how to create a changefeed to stream data from TiDB Clou
 
 ## Restrictions
 
-- For each <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>, you can create up to 100 changefeeds.
+- For each <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>, you can create up to 100 changefeeds.
 - Currently, TiDB Cloud does not support uploading self-signed TLS certificates to connect to Kafka brokers.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
@@ -47,7 +47,7 @@ Before creating a changefeed to stream data to Apache Kafka, you need to complet
 
 ### Network
 
-Ensure that your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> can connect to the Apache Kafka service. You can choose one of the following connection methods:
+Ensure that your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent> can connect to the Apache Kafka service. You can choose one of the following connection methods:
 
 - Private Connect: ideal for avoiding VPC CIDR conflicts and meeting security compliance, but incurs additional [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost).
 - VPC Peering: suitable as a cost-effective option, but requires managing potential VPC CIDR conflicts and security considerations.
@@ -99,14 +99,14 @@ It is **NOT** recommended to use Public IP in a production environment.
 </SimpleTab>
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 <SimpleTab>
 <div label="Private Connect">
 
 Private Connect leverages **Private Link** or **Private Service Connect** technologies from cloud providers to enable resources in your VPC to connect to services in other VPCs using private IP addresses, as if those services were hosted directly within your VPC.
 
-To create a private endpoint for changefeeds in your {{{ .premium }}} instances, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md).
+To create a private endpoint for changefeeds in your {{{ .premium }}} or {{{ .byoc }}} instances, follow [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md).
 
 TiDB Cloud currently supports Private Connect only for self-hosted Kafka. It does not support direct integration with MSK, Confluent Kafka, or other Kafka SaaS services. To connect to these Kafka SaaS services via Private Connect, you can deploy a [kafka-proxy](https://github.com/grepplabs/kafka-proxy) as an intermediary, effectively exposing the Kafka service as self-hosted Kafka.
 
@@ -123,7 +123,7 @@ It is **NOT** recommended to use Public IP in a production environment.
 
 <div label="VPC Peering">
 
-Currently, the VPC Peering feature for {{{ .premium }}} instances is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for VPC Peering for {{{ .premium }}} instance" in the **Description** field, and then click **Submit**.
+Currently, the VPC Peering feature for {{{ .premium }}} or {{{ .byoc }}} instances is only available upon request. To request this feature, click **?** in the lower-right corner of the [TiDB Cloud console](https://tidbcloud.com), and then click **Support Tickets** to go to the [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals). Create a ticket, fill in "Apply for VPC Peering for {{{ .premium }}} or {{{ .byoc }}} instance" in the **Description** field, and then click **Submit**.
 
 </div>
 </SimpleTab>
@@ -141,7 +141,7 @@ For example, if your Kafka cluster is in Confluent Cloud, you can see [Resources
 ## Step 1. Open the Changefeed page for Apache Kafka
 
 1. Log in to the [TiDB Cloud console](https://tidbcloud.com).
-2. Navigate to the overview page of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>, and then click **Data** > **Changefeed** in the left navigation pane.
+2. Navigate to the overview page of the target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>, and then click **Data** > **Changefeed** in the left navigation pane.
 3. Click **Create Changefeed**, and select **Kafka** as **Destination**.
 
 ## Step 2. Configure the changefeed target
@@ -281,7 +281,7 @@ The steps vary depending on the connectivity method you select.
 6. If you select **Avro** as your data format, you will see some Avro-specific configurations on the page. You can fill in these configurations as follows:
 
     - In the **Decimal** and **Unsigned BigInt** configurations, specify how TiDB Cloud handles the decimal and unsigned bigint data types in Kafka messages.
-    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and automatically filled in with the endpoint and password of your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
+    - In the **Schema Registry** area, fill in your schema registry endpoint. If you enable **HTTP Authentication**, the fields for user name and password are displayed and automatically filled in with the endpoint and password of your <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>.
 
 7. In the **Topic Distribution** area, select a distribution mode, and then fill in the topic name configurations according to the mode.
 
@@ -334,7 +334,7 @@ The steps vary depending on the connectivity method you select.
 
 ## Step 4. Configure your changefeed specification
 
-1. In the **Changefeed Specification** area, specify the number of <CustomContent plan="dedicated">Replication Capacity Units (RCUs)</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs)</CustomContent> to be used by the changefeed.
+1. In the **Changefeed Specification** area, configure the <CustomContent plan="dedicated">number of Replication Capacity Units (RCUs)</CustomContent><CustomContent plan="premium">number of Changefeed Capacity Units (CCUs)</CustomContent><CustomContent plan="byoc">provisioned vCPUs of the TiCDC nodes</CustomContent> to be used by the changefeed.
 2. In the **Changefeed Name** area, specify a name for the changefeed.
 3. Click **Next** to check the configurations you set and go to the next page.
 

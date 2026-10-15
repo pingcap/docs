@@ -34,6 +34,7 @@ For more information, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq
 | {{{ .premium }}} | Data Pipeline is available in the [TiDB Cloud console](https://tidbcloud.com) in private preview, and it is available upon request. |
 | {{{ .dedicated }}} | Data Pipeline is not available in the TiDB Cloud console yet. To use a data pipeline, you need to set it up manually. |
 | {{{ .essential }}} | Data Pipeline is not available in the TiDB Cloud console yet. To use a data pipeline, you need to set it up manually. |
+
 </CustomContent>
 
 <CustomContent plan="byoc">
@@ -41,9 +42,9 @@ For more information, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq
 | Plan | Status |
 | ---- | ------ |
 | {{{ .premium }}} | Data Pipeline is available in the [TiDB Cloud console](https://tidbcloud.com) in private preview, and it is available upon request. |
-| {{{ .byoc }}} | Data Pipeline is available in the [TiDB Cloud console](https://tidbcloud.com) in private preview, and it is available upon request. |
 | {{{ .dedicated }}} | Data Pipeline is not available in the TiDB Cloud console yet. To use a data pipeline, you need to set it up manually. |
 | {{{ .essential }}} | Data Pipeline is not available in the TiDB Cloud console yet. To use a data pipeline, you need to set it up manually. |
+
 </CustomContent>
 
 > **Note:**
@@ -54,7 +55,7 @@ For more information, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq
 
 Refer to the guide for your plan:
 
-- TiDB Cloud Premium<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent>: [Set Up a Data Pipeline to TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
+- TiDB Cloud Premium and {{{ .byoc }}}: [Set Up a Data Pipeline to TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
 - TiDB Cloud Dedicated: [Manually set up a data pipeline to replicate data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
 - TiDB Cloud Essential: [Manually set up a data pipeline to replicate data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
 
@@ -62,7 +63,7 @@ Refer to the guide for your plan:
 
 > **Note:**
 >
-> The **Data Pipeline** page and the management operations in this section are available for {{{ .premium }}}<CustomContent plan="byoc"> and {{{ .byoc }}}</CustomContent> only. For {{{ .dedicated }}} and {{{ .essential }}}, you configure and maintain the data pipeline manually.
+> The **Data Pipeline** page and the management operations in this section are available for {{{ .premium }}} and {{{ .byoc }}} only. For {{{ .dedicated }}} and {{{ .essential }}}, you configure and maintain the data pipeline manually.
 
 To view and manage your data pipelines, take the following steps:
 
@@ -72,7 +73,7 @@ To view and manage your data pipelines, take the following steps:
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance to go to its overview page, and then click **Data** > **Data Pipeline** in the left navigation pane. The **Data Pipeline** page is displayed.
+2. Click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page, and then click **Data** > **Data Pipeline** in the left navigation pane. The **Data Pipeline** page is displayed.
 
 On the **Data Pipeline** page, you can create a data pipeline, view a list of existing data pipelines, and manage existing data pipelines, such as pausing, resuming, editing, and deleting a pipeline.
 
@@ -83,11 +84,11 @@ On the **Data Pipeline** page, you can create a data pipeline, view a list of ex
 - **Pause**: stops data replication and marks the pipeline as `Paused`. No data is lost, and the replication progress is preserved. A pipeline cannot be paused while it is being created or while the full snapshot is being exported.
 - **Resume**: continues replication from where it was paused, including ingestion into TiDB Cloud Lake.
 
-To pause and resume a data pipeline, navigate to the **Data Pipeline** page of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, click **...** in the row of the pipeline, and then click **Pause** or **Resume**.
+To pause and resume a data pipeline, navigate to the **Data Pipeline** page of your target {{{ .premium }}} or {{{ .byoc }}} instance, click **...** in the row of the pipeline, and then click **Pause** or **Resume**.
 
 ### Edit a data pipeline
 
-To edit a data pipeline, navigate to the **Data Pipeline** page of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, click **...** in the row of the pipeline, and then click **Edit**.
+To edit a data pipeline, navigate to the **Data Pipeline** page of your target {{{ .premium }}} or {{{ .byoc }}} instance, click **...** in the row of the pipeline, and then click **Edit**.
 
 Editing is disabled while a data pipeline is `Running`. Pause the pipeline first, then edit it, and resume it afterwards to apply the changes.
 
@@ -104,7 +105,7 @@ The destination type and the sync mode cannot be changed after the pipeline is c
 
 To delete a data pipeline, take the following steps:
 
-1. Navigate to the **Data Pipeline** page of your target {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, click **...** in the row of the pipeline, and then click **Delete**.
+1. Navigate to the **Data Pipeline** page of your target {{{ .premium }}} or {{{ .byoc }}} instance, click **...** in the row of the pipeline, and then click **Delete**.
 2. Read the warning and confirm the operation. Deleting a data pipeline:
 
     - Immediately stops all data replication.

@@ -17,7 +17,9 @@ summary: TiDB Cloud Filesystem provides persistent, shared file storage for appl
 
 <LearningPath label="Try" icon="cloud5">
 
-[Quick Start](/tidb-cloud-filesystem/filesystem-quick-start.md)
+[Quick Start via Console](/tidb-cloud-filesystem/filesystem-quick-start-console.md)
+
+[Quick Start via CLI](/tidb-cloud-filesystem/filesystem-quick-start.md)
 
 </LearningPath>
 
@@ -58,6 +60,8 @@ summary: TiDB Cloud Filesystem provides persistent, shared file storage for appl
 [File System CLI Commands](/ai/ti/reference/ti-filesystem.md)
 
 [Regions and Limitations](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
+
+[FAQ](/tidb-cloud-filesystem/filesystem-faq.md)
 
 [Troubleshooting](/tidb-cloud-filesystem/filesystem-troubleshooting.md)
 

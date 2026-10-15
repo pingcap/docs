@@ -8,6 +8,44 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## October 15, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - PostgreSQL-compatible TiDB Cloud Starter is now in public preview on AWS.
+
+      When creating a TiDB Cloud Starter instance, you can now choose between MySQL and PostgreSQL compatibility based on your application needs and technology stack.
+
+      PostgreSQL-compatible TiDB Cloud Starter instances support core instance management operations, including connection, monitoring, backup, and restore. It also supports pgvector-compatible vector search and selected PostgreSQL extensions, enabling you to build a wide range of applications using familiar PostgreSQL ecosystem tools and capabilities.
+
+      Currently, the public preview of PostgreSQL-compatible TiDB Cloud Starter is intended for development and evaluation and is not recommended for production workloads.
+
+      To get started, see [PostgreSQL-compatible TiDB Cloud Starter documentation](https://docs.pingcap.com/tidbcloud/starter/?plan=starter&compatibility=postgresql).
+
+- **TiDB Cloud BYOC**
+
+    - TiDB Cloud BYOC is now in public preview on AWS.
+
+        Powered by the TiDB X kernel, [TiDB Cloud BYOC](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=byoc#tidb-cloud-byoc) is specifically designed for mission-critical and AI workloads that require a scalable, reliable database platform while keeping the data plane within your own cloud environment.
+
+        TiDB Cloud BYOC combines the flexibility of customer-managed infrastructure with the operational simplicity of a managed TiDB Cloud service.
+
+        With the data plane running directly in your AWS account and VPC, your organization retains greater control over the cloud environment, ensuring strict data isolation and seamless security integration. At the same time, PingCAP manages the control plane. This allows you to benefit from TiDB's distributed SQL capabilities, scalability, and compatibility, without the full operational burden of managing the platform yourself.
+
+        Because TiDB Cloud BYOC is deployed in your AWS account, onboarding requires coordination with the TiDB Cloud team. To start BYOC onboarding, [contact Sales](https://www.pingcap.com/contact-us/).
+
+        For more information, see [TiDB Cloud BYOC documentation](https://docs.pingcap.com/tidbcloud/byoc/?plan=byoc).
+
+- **TiDB Cloud Filesystem**
+
+    - TiDB Cloud Filesystem is now in public preview.
+
+        TiDB Cloud Filesystem is a distributed file system designed specifically for AI coding agents. Built on the same TiDB Cloud Starter infrastructure that already powers millions of AI agents in production, it provides Git-aware, persistent workspaces across sandbox lifecycles, with always-on availability and seamless scalability.
+
+        To get started, see [TiDB Cloud Filesystem documentation](https://docs.pingcap.com/tidbcloud-filesystem/).
+
 ## October 13, 2026
 
 **General changes**

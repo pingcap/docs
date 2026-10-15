@@ -19,6 +19,7 @@ TiDB Cloud Filesystem is available only in the regions and environments listed b
 | AWS | Oregon | `aws-us-west-2` |
 | AWS | Singapore | `aws-ap-southeast-1` |
 | Alibaba Cloud | Singapore | `alicloud-ap-southeast-1` |
+| Google Cloud | South Carolina | `gcp-us-east1` |
 
 TiDB Cloud Starter also supports some regions where TiDB Cloud Filesystem is not available. A file system command in one of those regions fails and displays an error indicating that the service is not available for that region, and lists the regions that are supported. Supported file system regions are built into each `ti` release. If support for a region was added after your installed version was released, upgrade `ti`; specifying a service URL cannot enable support for that region.
 
@@ -28,7 +29,7 @@ The `list` and `describe` file system commands query only the selected region. T
 
 | Platform | File system mount | Vault mount | Requirements and alternatives |
 | --- | --- | --- | --- |
-| macOS | WebDAV without macFUSE; FUSE when macFUSE is installed (automatic or explicit) | FUSE | The built-in WebDAV helper supports file system mounts. Install macFUSE and approve its system extension for FUSE or Vault mounts. |
+| macOS | File system mounts use WebDAV by default, even when macFUSE is installed. To use FUSE, specify `--driver fuse`. Layer and checkpoint mounts require FUSE. | FUSE | The built-in WebDAV helper supports file system mounts. Install macFUSE and approve its system extension for FUSE or Vault mounts. |
 | Linux | FUSE | FUSE | Install the `fuse3` package and provide access to `/dev/fuse`. WebDAV mounting is not supported. |
 | Windows | Not supported | Not supported | Use `ti fs` data-plane commands and non-mount Vault commands instead. |
 

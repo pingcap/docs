@@ -26,7 +26,7 @@ The available mount method depends on your environment:
 
 Native file system mounting is not supported on Windows. On Windows, use direct commands such as `ti fs copy-file`, `ti fs read-file`, and `ti fs list-files` instead.
 
-On macOS, WebDAV is sufficient for general file access and does not require additional mount software. FUSE is required for features such as mounting layers or checkpoints and using `drain-file-system`.
+On macOS, WebDAV is sufficient for general file access and does not require additional mount software. FUSE is required for features such as mounting layers or checkpoints, creating a local read-only mount with `--read-only`, and using `drain-file-system`.
 
 ## Use a token without configuring a profile
 
