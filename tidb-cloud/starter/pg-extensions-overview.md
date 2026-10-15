@@ -57,4 +57,4 @@ The following limitations apply:
 - You cannot install arbitrary custom or third-party PostgreSQL extensions.
 - Some supported extensions provide only a subset of the behavior available in upstream PostgreSQL or the corresponding open-source extension.
 - Extension availability and behavior might change during the public preview.
-- `pg_cron` job scheduling is not supported during Public Preview. Although `CREATE EXTENSION pg_cron` might succeed, scheduling functions such as `cron.schedule()` are not available, and scheduled jobs cannot be executed. Querying `cron.job` might return an empty result, but this does not indicate that `pg_cron` is operational.
+- `pg_cron` job scheduling is not supported during public preview. Although `CREATE EXTENSION pg_cron` might succeed, scheduling functions such as `cron.schedule()` are not available, and scheduled jobs cannot be executed. Querying `cron.job` might return an empty result, but this does not indicate that `pg_cron` is operational.

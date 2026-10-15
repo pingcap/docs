@@ -468,13 +468,12 @@ Drop the collation:
 DROP COLLATION my_collation;
 ```
 
-A custom collation changes plain text comparison and `ORDER BY` behavior.
+A custom collation changes plain text comparison and `ORDER BY` behavior. The `LOCALE` value selects the sorting rules. For example, `en_US.utf8` sorts `å`, `ä`, and `ö` before `z`, while `sv_SE.utf8` sorts these letters after `z`.
 
 ### Collation limitations
 
 Keep the following differences in mind:
 
-- The specified `LOCALE` value does not select distinct locale-specific behavior. A custom collation uses one locale-aware ordering mode.
 - Text without an explicit custom collation uses bytewise ordering.
 - Collation is not applied to `ORDER BY` inside aggregate functions.
 - Collation is not applied to window-function `ORDER BY`.

@@ -124,6 +124,8 @@ SELECT NOW() - INTERVAL '7 days';
 
 Some examples in the following sections query sample tables. Before running these examples, create the required tables and insert sample data into a test database.
 
+The table definitions on this page differ from those in other examples. If your test database already contains tables with the names shown below, use a separate test database for this page.
+
 ```sql
 CREATE TABLE users (
     id INTEGER PRIMARY KEY,

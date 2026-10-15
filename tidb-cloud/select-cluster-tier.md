@@ -43,7 +43,7 @@ TiDB Cloud Starter supports the following compatibility modes:
 
 - **MySQL-compatible**: provides MySQL protocol compatibility. Each eligible instance includes a monthly free quota, and you can enable consumption-based billing to continue using the instance after exceeding the free quota.
 
-- **PostgreSQL-compatible (public preview)**: provides PostgreSQL wire protocol compatibility. PostgreSQL-compatible Starter instances are currently free during the public preview.
+- **PostgreSQL-compatible (Public Preview)**: provides PostgreSQL wire protocol compatibility. PostgreSQL-compatible Starter instances are currently free during the public preview.
 
 The free plan is ideal for developers and small teams getting started with {{{ .starter }}}. Each compatibility mode includes a monthly free quota for storage and Request Units (RUs). The quota varies by compatibility mode.
 
@@ -82,7 +82,7 @@ For the first 10 PostgreSQL-compatible {{{ .starter }}} instances in your organi
 
 - Request Units (RUs): 500 million RUs per month
 
-When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact support@pingcap.com to discuss your requirements.
+When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption might be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact <a href="mailto:support@pingcap.com">support@pingcap.com</a> to discuss your requirements.
 
 ### Instance Capacity Plan
 

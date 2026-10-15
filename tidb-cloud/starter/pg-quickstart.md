@@ -42,7 +42,7 @@ To create a {{{ .starter }}} instance, follow these steps:
     > + 50 GiB of row-based storage
     > + 500 million Request Units (RUs)
     >
-    > When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact support@pingcap.com to discuss your requirements.
+    > When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact <a href="mailto:support@pingcap.com">support@pingcap.com</a> to discuss your requirements.
 
 ## Step 2: Connect to your {{{ .starter }}} instance
 
@@ -59,6 +59,5 @@ The PostgreSQL CLI client `psql` opens and connects to your {{{ .starter }}} ins
 
 ## What's next
 
-- To learn how to connect to your PostgreSQL-compatible {{{ .starter }}} instance, see [Connect to a {{{ .starter }}} or Essential instance](/tidb-cloud/connect-via-standard-connection-serverless.md).
 - To learn about PostgreSQL compatibility, see [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md).
-- To learn about the PostgreSQL extensions currently supported by TiDB Cloud, see [PostgreSQL extensions](/tidb-cloud/starter/pg-extensions-overview.md).
+- To learn about the PostgreSQL extensions currently supported by TiDB Cloud, see [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md).

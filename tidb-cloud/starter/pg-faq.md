@@ -1,29 +1,29 @@
 ---
 title: PostgreSQL-Compatible TiDB Cloud Starter FAQs
-summary: Find answers to frequently asked questions about PostgreSQL-compatible TiDB Cloud Starter during the Public Preview period.
+summary: Find answers to frequently asked questions about PostgreSQL-compatible TiDB Cloud Starter during the public preview period.
 ---
 
 # PostgreSQL-Compatible TiDB Cloud Starter FAQs
 
-This document answers frequently asked questions about PostgreSQL-compatible {{{ .starter }}} during Public Preview.
+This document answers frequently asked questions about PostgreSQL-compatible {{{ .starter }}} during public preview.
 
 PostgreSQL-compatible {{{ .starter }}} enables developers to create and manage PostgreSQL-compatible database instances directly from the TiDB Cloud console. It supports the core instance lifecycle, including connections, monitoring, backup, and restore, as well as PostgreSQL ecosystem capabilities such as pgvector-compatible vector search and selected PostgreSQL extensions.
 
-During Public Preview, PostgreSQL-compatible {{{ .starter }}} is available free of charge, subject to usage quotas. Billing is not enabled during the preview period.
+During public preview, PostgreSQL-compatible {{{ .starter }}} is available free of charge, subject to usage quotas. Billing is not enabled during the preview period.
 
 ## General FAQs
 
 ### How can I create a PostgreSQL-compatible Starter instance?
 
-PostgreSQL-compatible {{{ .starter }}} is available in Public Preview.
+PostgreSQL-compatible {{{ .starter }}} is available in public preview.
 
 To create an instance, select **Starter** in the TiDB Cloud console, choose the **PostgreSQL Compatible** option, review your configuration, and create the instance.
 
-During Public Preview, PostgreSQL compatibility is available only with {{{ .starter }}}. {{{ .essential }}} and {{{ .premium }}} do not currently support this option.
+During public preview, PostgreSQL compatibility is available only with {{{ .starter }}}. {{{ .essential }}} and {{{ .premium }}} do not currently support this option.
 
 ### Which regions currently support PostgreSQL-compatible Starter?
 
-During Public Preview, PostgreSQL-compatible {{{ .starter }}} is available in the following region:
+During public preview, PostgreSQL-compatible {{{ .starter }}} is available in the following region:
 
 - AWS US East (N. Virginia): `us-east-1`
 
@@ -46,7 +46,7 @@ The free-instance allowance covers:
 
 ### Can I use PostgreSQL-compatible Starter in production?
 
-During Public Preview, you can evaluate PostgreSQL-compatible {{{ .starter }}} with development, testing, and production-like workloads. **No service-level agreement (SLA) commitment is provided during Public Preview.**
+During public preview, you can evaluate PostgreSQL-compatible {{{ .starter }}} with development, testing, and production-like workloads. **No service-level agreement (SLA) commitment is provided during public preview.**
 
 Because the service is still in preview and some capabilities might continue to evolve, we recommend waiting until General Availability (GA) before using PostgreSQL-compatible {{{ .starter }}} for production workloads.
 
@@ -63,7 +63,7 @@ PostgreSQL-compatible {{{ .starter }}} includes the following capabilities:
 - **Observability:** View built-in metrics for storage usage, queries per second (QPS), connections, and query duration.
 - **AI and vector search:** Use pgvector-compatible vector search, full-text search, server-side embedding capabilities, and selected PostgreSQL extensions.
 
-Additional capabilities are planned as PostgreSQL-compatible {{{ .starter }}} continues to evolve during Public Preview.
+Additional capabilities are planned as PostgreSQL-compatible {{{ .starter }}} continues to evolve during public preview.
 
 ### How do I connect to a PostgreSQL-compatible Starter instance?
 
@@ -94,11 +94,11 @@ PostgreSQL-compatible {{{ .starter }}} follows the TiDB Cloud Starter usage mode
 - **Request Units (RUs)**
 - **Row-based storage**
 
-During Public Preview, RU usage is not yet displayed, and no billing charges are generated.
+During public preview, RU usage is not yet displayed, and no billing charges are generated.
 
-### Is PostgreSQL-compatible Starter free during Public Preview?
+### Is PostgreSQL-compatible Starter free during public preview?
 
-Yes. PostgreSQL-compatible {{{ .starter }}} is free of charge during Public Preview, subject to usage quotas. Billing is not enabled during this period.
+Yes. PostgreSQL-compatible {{{ .starter }}} is free of charge during public preview, subject to usage quotas. Billing is not enabled during this period.
 
 For the first **10 PostgreSQL-compatible {{{ .starter }}} instances** in each organization, the free quota for each instance is:
 
@@ -107,4 +107,4 @@ For the first **10 PostgreSQL-compatible {{{ .starter }}} instances** in each or
 
 If resource usage exceeds the free quota, TiDB Cloud might restrict further usage or suspend service.
 
-If you anticipate exceeding these allowances or need additional resources, contact support@pingcap.com to discuss your requirements.
+If you anticipate exceeding these allowances or need additional resources, please contact <a href="mailto:support@pingcap.com">support@pingcap.com</a> to discuss your requirements.

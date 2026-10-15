@@ -175,7 +175,7 @@ Queries that do not meet the HNSW planning requirements fall back to an exact sc
 PostgreSQL-compatible full-text search has the following notable constraints:
 
 - Only the documented text search configurations are supported.
-- Prefix matching using the `:*` flag is not supported. The prefix flag is silently ignored rather than rejected, causing prefix queries to behave as exact-match queries. For example, `to_tsquery('english', 'qui:*')` is interpreted as `to_tsquery('english', 'qui')`, which does not match `quick`. Do not rely on prefix matching during Public Preview.
+- Prefix matching using the `:*` flag is not supported. The prefix flag is silently ignored rather than rejected, causing prefix queries to behave as exact-match queries. For example, `to_tsquery('english', 'qui:*')` is interpreted as `to_tsquery('english', 'qui')`, which does not match `quick`. Do not rely on prefix matching during public preview.
 - Lexeme weight modifiers in `tsquery` expressions, such as `:A`, are also silently ignored. For example, `to_tsquery('english', 'qui:A')` is interpreted without the weight modifier. Do not rely on these modifiers for weighted query matching.
 - `ts_headline()` does not highlight Chinese Han-script terms.
 - The maximum `TSVECTOR` value size is 1 MiB.
@@ -237,7 +237,6 @@ If application logic depends on enum order, use an explicit rank instead of rely
 
 Custom collations are supported with the following limitations:
 
-- The specified locale does not select distinct locale-specific behavior.
 - Text without an explicit custom collation uses bytewise ordering.
 - Aggregate and window `ORDER BY` expressions do not apply custom collation ordering.
 - Custom collations are not fully represented in the PostgreSQL system catalogs.

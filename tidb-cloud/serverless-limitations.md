@@ -88,11 +88,11 @@ After creating a {{{ .starter }}} instance, you can still check and edit the spe
 
 ### PostgreSQL-compatible Starter (Public Preview)
 
-During Public Preview, each organization can create up to 10 free PostgreSQL-compatible Starter instances.
+During public preview, each organization can create up to 10 free PostgreSQL-compatible Starter instances.
 
 For each of the first 10 PostgreSQL-compatible Starter instances, TiDB Cloud provides the following free usage allowance:
 
 - Row-based storage: 50 GiB
 - Request Units (RUs): 500 million RUs per month
 
-When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact support@pingcap.com to discuss your requirements.
+When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact <a href="mailto:support@pingcap.com">support@pingcap.com</a> to discuss your requirements.

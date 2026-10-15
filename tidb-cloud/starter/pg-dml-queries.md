@@ -11,6 +11,8 @@ PostgreSQL-compatible {{{ .starter }}} supports common PostgreSQL Data Manipulat
 
 Some examples on this page use sample tables. Before running the examples, create the following tables in a test database.
 
+The table definitions on this page differ from those in other examples. If your test database already contains tables with the names shown below, use a separate test database for this page.
+
 ```sql
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,

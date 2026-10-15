@@ -1,4 +1,9 @@
-# TiDB Cloud Built-in Metrics
+---
+title: Built-in Metrics for PostgreSQL-Compatible TiDB Cloud Starter
+summary: Learn about the built-in metrics available for PostgreSQL-compatible TiDB Cloud Starter instances.
+---
+
+# Built-in Metrics for PostgreSQL-Compatible TiDB Cloud Starter
 
 TiDB Cloud collects and displays a full set of standard metrics of your TiDB resource on the Metrics page. By viewing these metrics, you can easily identify performance issues and determine whether your current database deployment meets your requirements.
 
@@ -22,28 +27,18 @@ In TiDB Cloud, the metrics data is kept for 7 days.
 
 The following sections illustrate the metrics on the **Metrics** page for PostgreSQL-compatible {{{ .starter }}} instances.
 
-### Overview
-
-The following sections illustrate the metrics on the **Metrics** page for PostgreSQL-compatible {{{ .starter }}} instances.
-
 | Metric name  | Labels | Description                                   |
 | :------------| :------| :-------------------------------------------- |
 | Used Storage Size | Row-based storage, Row-based standard storage, Columnar storage | The size of row-based storage, row-based standard storage, and columnar storage. TiDB Cloud displays this metric only when the size of each storage type is 50 MiB or larger. **Row-based standard storage** has the same meaning as **Row-based storage**. |
 | Query Per Second | All, {SQL type} | The number of SQL statements executed per second, which are collected by SQL types, such as `SELECT`, `INSERT`, and `UPDATE`. |
-| Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} or {{{ .essential }}} instance until the instance executes the request and returns the result to the client. |
-| Total Connection | All | The number of connections to the {{{ .starter }}} or {{{ .essential }}} instance. |
-
+| Query Duration | Avg, P99, P99-{SQL type} | The duration from receiving a request from the client to the {{{ .starter }}} instance until the instance executes the request and returns the result to the client. |
+| Total Connection | All | The number of connections to the {{{ .starter }}} instance. |
 
 ## FAQ
 
 **1. Why are some panes empty on this page?**
 
-If a pane does not provide any metrics, the possible reasons are as follows:
-
-- The workload of the corresponding TiDB Cloud resource does not trigger this metric. For example, the failed query metric is always empty in the case of no failed queries.
-- The TiDB version of your TiDB Cloud resource is low. You need to upgrade it to the latest version of TiDB to see these metrics.
-
-If all these reasons are excluded, you can contact the [PingCAP support team](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
+Check that the selected time range includes activity on your instance. If the charts remain empty, contact [PingCAP Support](/tidb-cloud/tidb-cloud-support.md) for troubleshooting.
 
 **2. Why might metrics be discontinuous in rare cases?**
 

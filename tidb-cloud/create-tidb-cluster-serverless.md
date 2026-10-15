@@ -72,7 +72,7 @@ If you have the `Organization Owner` or `Project Owner` role, you can create a T
 
         During public preview, each organization can create up to 10 free PostgreSQL-compatible Starter instances.
 
-        When an instance reaches its free quota, excessive resource consumption might be subject to usage restrictions or service suspension. If you anticipate exceeding the free usage quota, contact support@pingcap.com to discuss your requirements.
+        When an instance reaches its free quota, excessive resource consumption might be subject to usage restrictions or service suspension. If you anticipate exceeding the free usage quota, please contact <a href="mailto:support@pingcap.com">support@pingcap.com</a> to discuss your requirements.
 
     - **Essential**:
 

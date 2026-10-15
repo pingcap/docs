@@ -140,7 +140,7 @@ The default value of `hnsw.ef_search` is `40`. A higher value can improve recall
 
 The optimizer can use an HNSW index when all of the following conditions are met:
 
-- The query orders by a distance expression on the indexed vector column and a constant vector.
+- The query orders by a distance expression on the indexed vector column and a constant vector, or uses `vec_embed_cosine_distance()` on that column with constant query text.
 - The query contains a `LIMIT` clause.
 - The HNSW index uses an operator class that matches the distance metric in the query.
 - The HNSW index has finished building and is available for queries.
@@ -220,6 +220,8 @@ FROM docs
 ORDER BY vec_embed_cosine_distance(vec, 'managed database')
 LIMIT 3;
 ```
+
+The `vec_embed_cosine_distance()` query can use `idx_docs_vec` for cosine-distance search. You can add `EXPLAIN` before the `SELECT` statement to check whether the plan includes an `HNSW Scan` using this index.
 
 ## Search with automatic embedding
 

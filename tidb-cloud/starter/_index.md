@@ -145,7 +145,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <CustomContent plan="starter" compatibility="postgresql">
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter is a fully managed, multi-tenant database service with instant provisioning and automatic scaling. PostgreSQL compatibility is now available in Public Preview. During the preview, PostgreSQL-compatible Starter instances are free to use, subject to usage quotas. The preview is intended for development and evaluation and is not recommended for production workloads. To request additional quota, contact support@pingcap.com.">
+<LearningPathContainer platform="tidb-cloud" title="PostgreSQL-compatible TiDB Cloud Starter is designed for developers building and testing applications with familiar PostgreSQL tools and frameworks. It offers a fully managed, autoscaling database with pgvector-compatible vector search and selected PostgreSQL extensions.">
 
 <LearningPath label="Learn" icon="cloud1">
 
