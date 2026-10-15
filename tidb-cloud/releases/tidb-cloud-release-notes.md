@@ -12,6 +12,18 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+- **TiDB Cloud Starter**
+
+    - PostgreSQL-compatible TiDB Cloud Starter is now in public preview on AWS.
+
+      When creating a TiDB Cloud Starter instance, you can now choose between MySQL and PostgreSQL compatibility based on your application needs and technology stack.
+
+      PostgreSQL-compatible TiDB Cloud Starter instances support core instance management operations, including connection, monitoring, backup, and restore. It also supports pgvector-compatible vector search and selected PostgreSQL extensions, enabling you to build a wide range of applications using familiar PostgreSQL ecosystem tools and capabilities.
+
+      Currently, the public preview of PostgreSQL-compatible TiDB Cloud Starter is intended for development and evaluation and is not recommended for production workloads.
+
+      To get started, see [PostgreSQL-compatible TiDB Cloud Starter documentation](https://docs.pingcap.com/tidbcloud/starter/?plan=starter&compatibility=postgresql).
+
 - **TiDB Cloud BYOC**
 
     - TiDB Cloud BYOC is now in public preview on AWS.
