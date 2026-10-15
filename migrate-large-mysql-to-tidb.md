@@ -1,6 +1,7 @@
 ---
 title: Migrate Large Datasets from MySQL to TiDB
 summary: Learn how to migrate large datasets from MySQL to TiDB.
+aliases: ['/tidb/v7.5/migrate-from-mysql-dumpling/']
 ---
 
 # Migrate Large Datasets from MySQL to TiDB
