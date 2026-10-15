@@ -1,5 +1,5 @@
 ---
-title: {{{ .starter }}} 和 Essential 的项目 API 迁移指南
+title: "{{{ .starter }}} 和 Essential 的项目 API 迁移指南"
 summary: 了解在 TiDB Cloud 为 TiDB X 实例引入独立项目类型后，为保持现有 v1beta API 调用正常工作所需的最少变更。
 ---
 

@@ -168,8 +168,8 @@ TiDB Cloud 以 TiCDC Replication Capacity Unit（RCU）衡量 [changefeeds](/tid
 
 对于 {{{ .essential }}} 和 {{{ .premium }}}，Request Capacity Unit（RCU）是用于表示 {{{ .essential }}} 或 {{{ .premium }}} 实例预配置计算能力的单位。1 个 RCU 提供固定数量的计算资源，可处理一定数量的 RU 每秒。你预配置的 RCU 数量决定了实例的基线性能和吞吐能力。不过，{{{ .essential }}} 和 {{{ .premium }}} 的 RCU 管理方式有所不同：
 
-- {{{ .essential }}} 会根据你的工作负载自动预配置 RCU。随着 QPS 增加，TiDB Cloud 会动态扩容已预配置的 RCU 以维持性能。更多信息，参见 [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
-- {{{ .premium }}} 允许你为工作负载指定最大 RCU 数量（`RCU_max`）。TiDB Cloud 会根据实时需求，在 `0.25 * RCU_max` 到 `RCU_max` 的范围内自动扩缩容。更多信息，参见 [{{{ .premium }}} 中的请求单位与容量](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)。
+- 运行在 CLOUD.202603.x 或更高版本上的 {{{ .essential }}} 实例支持 **Elastic Mode** 和 **Limited Mode**。在 Elastic Mode 下，实例使用固定的 2,000 RCU 作为 Baseline RCU，并根据工作负载需求扩展容量。在 Limited Mode 下，你可以配置最大 RCU。对于运行在以下版本上的实例，你需要同时配置最小和最大 RCU。更多信息，参见 [{{{ .essential }}} Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
+- {{{ .premium }}} 支持两种容量模式。在 **Elastic Mode** 下，你可以配置 Baseline RCU，并且 TiDB Cloud 会随着工作负载需求增加而在此基线之上扩展容量。在 **Limited Mode** 下，你可以配置最大 RCU 数量（`RCU_max`），TiDB Cloud 会在 `0.25 * RCU_max` 到 `RCU_max` 的范围内自动扩缩容。更多信息，参见 [{{{ .premium }}} 中的请求单位与容量](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)。
 
 ### Request Unit (RU)
 

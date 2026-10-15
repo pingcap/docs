@@ -43,7 +43,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 
 ## 设置私有终端节点连接并连接到你的集群
 
-要通过私有终端节点连接到 TiDB Cloud 专属集群，请完成以下步骤：
+要通过私有终端节点连接到 TiDB Cloud Dedicated 集群，请完成以下步骤：
 
 1. [选择 TiDB 集群](#step-1-select-a-tidb-cluster)
 2. [创建 AWS 接口终端节点](#step-2-create-an-aws-interface-endpoint)

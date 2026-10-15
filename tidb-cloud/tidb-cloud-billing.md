@@ -202,6 +202,10 @@ TiDB Cloud 为概念验证 (PoC) 用户提供一定数量的 credits。一个 cr
 3. 在 **Billing** 页面上，点击 **Discounts** 标签页。
 ## 支付方式 {#payment-method}
 
+> **注意：**
+>
+> 每个新的 TiDB Cloud 账户都附带免费试用。你无需订阅 AWS Marketplace 免费试用版或关联 AWS billing account 即可访问它。
+
 如果你在所属组织中具有 `Organization Owner` 或 `Organization Billing Manager` 角色，则可以管理 TiDB Cloud 的支付信息。否则，请跳过本节。
 
 <CustomContent language="en,zh">
@@ -302,6 +306,10 @@ If you already have a TiDB Cloud account and you want to pay for the usage via y
 
 <SimpleTab>
 <div label="AWS Marketplace">
+
+> **注意：**
+>
+> 通过 AWS Marketplace 订阅免费试用版需要创建一个新的 TiDB Cloud 账户；该试用订阅无法关联到现有账户。如果你已经有 TiDB Cloud 账户并希望通过 AWS 付款，请按照以下 billing account 关联步骤操作。
 
 要将你的 TiDB Cloud 账户关联到 AWS billing account，请执行以下步骤：
 

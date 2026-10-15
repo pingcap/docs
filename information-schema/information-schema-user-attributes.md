@@ -26,7 +26,7 @@ DESC user_attributes;
 `USER_ATTRIBUTES` 表中的字段说明如下：
 
 * `USER`：用户名称。
-* `HOST`：用户可以连接到 TiDB 的主机。如果该字段的值为 `％`，表示用户可以从任何主机连接到 TiDB。
+* `HOST`：用户可以连接到 TiDB 的主机。如果该字段的值为 `%`，表示用户可以从任何主机连接到 TiDB。
 * `ATTRIBUTE`：用户的注释和属性，由 [`CREATE USER`](/sql-statements/sql-statement-create-user.md) 或 [`ALTER USER`](/sql-statements/sql-statement-alter-user.md) 语句设置。
 
 以下是一个示例：

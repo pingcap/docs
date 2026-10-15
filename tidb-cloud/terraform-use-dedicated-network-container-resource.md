@@ -144,7 +144,7 @@ summary: 了解如何使用 `tidbcloud_dedicated_network_container` 资源来创
 
 1. 为新的 `tidbcloud_dedicated_network_container` 资源添加一个 import 块。
 
-    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你想要的资源名称，将 `${id}` 替换为 `cluster_id,network_container_id` 格式：
+    在你的 `.tf` 文件中添加如下 import 块，将 `example` 替换为你想要的资源名称，将 `${id}` 替换为网络容器 ID：
 
     ```
     import {
@@ -172,8 +172,8 @@ summary: 了解如何使用 `tidbcloud_dedicated_network_container` 资源来创
     然后，运行 `terraform apply` 来导入你的基础设施。应用后，示例输出如下：
 
     ```shell
-    tidbcloud_dedicated_network_container.example: Importing... [id=10423692645683000000,example]
-    tidbcloud_dedicated_network_container.example: Import complete [id=10423692645683000000,example]
+    tidbcloud_dedicated_network_container.example: Importing... [id=1934235512696000000]
+    tidbcloud_dedicated_network_container.example: Import complete [id=1934235512696000000]
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```

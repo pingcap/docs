@@ -1,6 +1,7 @@
 ---
 title: TiDB Cloud Lake 概览
 summary: TiDB Cloud Lake 是面向分析型工作负载的云原生数据仓库服务。它将计算与存储分离，并支持 ANSI SQL、半结构化数据处理以及面向 AI 的工作流。
+aliases: ['/zh/tidbcloudlake/ai-powered-features/','/zh/tidbcloudlake/manage-costs/']
 ---
 
 # TiDB Cloud Lake 概览

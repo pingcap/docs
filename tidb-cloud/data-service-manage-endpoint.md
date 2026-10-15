@@ -70,7 +70,7 @@ Data Service（PREVIEW）中的 endpoint 是一个可自定义的 Web API，用�
     - Endpoint 属性：TiDB Cloud Data Service 会根据你的选择自动配置 endpoint 路径、请求 method、timeout 和 tag。你可以在页面右侧面板查看属性。
     - Endpoint 参数：TiDB Cloud Data Service 会自动为生成的 endpoint 配置参数。你可以在页面右侧面板查看参数。
 
-6. 如果你想修改生成 endpoint 的详细信息（如名称、SQL 语句、属性或参数），请参考 [开发 endpoint](#deploy-an-endpoint) 中的说明。
+6. 如果你想修改生成 endpoint 的详细信息（如名称、SQL 语句、属性或参数），请参考 [开发 endpoint](#develop-an-endpoint) 中的说明。
 
 ### 手动创建 endpoint
 

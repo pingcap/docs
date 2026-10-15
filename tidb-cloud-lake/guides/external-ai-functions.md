@@ -23,6 +23,22 @@ summary: 通过将 {{{ .lake }}} 与您自己的基础设施连接，构建强�
 2. **Register Function**：使用 `CREATE FUNCTION` 将您的服务器连接到 {{{ .lake }}}
 3. **Use in SQL**：直接在 SQL 查询中调用您的自定义 AI 函数
 
+## 网络要求 {#network-requirements}
+
+外部函数使用 **Arrow Flight over gRPC/HTTP2**，而不是 REST。
+
+1. 通过 HTTPS 暴露 UDF 服务器，并提供公共 TLS 证书以及 gRPC/HTTP2 支持。
+2. 单击右上角的 **Support**，选择 **Submit a request**，并请求将服务器主机名添加到你的租户的 **UDF server allowlist** 中。
+3. 如果你的防火墙受到严格限制，请提交支持请求以获取 {{{ .lake }}} 出站地址，并在 TCP 443 上放行这些地址。
+
+在主机被加入允许列表之前，`CREATE FUNCTION` 会因 `Unallowed UDF server address` 而失败；它还会验证远程 schema，因此该端点必须处于在线状态。
+
+请将本地 `UDFServer` gRPC 监听器保持为私有；在 gRPC 负载均衡器处终止 TLS：
+
+```text
+{{{ .lake }}} → HTTPS/HTTP2 :443 → UDFServer gRPC :8815
+```
+
 ## 示例：文本嵌入函数 {#example-text-embedding-function}
 
 ```python

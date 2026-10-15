@@ -131,6 +131,7 @@ TiDB Cloud 会根据不同的 [TiDB Cloud 方案](/tidb-cloud/select-cluster-tie
 | 条件 | 建议操作 |
 |:--- |:--- |
 | 每秒请求单元数（RU/s）超过最大 RCU 的 80% | <ol><li>查看 RU 指标，判断增长是逐步上升还是突然激增。</li><li>如果增长是逐步发生的，请检查查询持续时间是否增加。如果是，则当前最大 RCU 可能不足。</li><li>在 TiDB Cloud 控制台中手动增加最大 RCU，以扩展容量。</li></ol><br/>如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| RCU 消耗（Request Unit/s）超过 100,000 RCU | <ol><li>查看 RU 指标中的流量模式，判断增长是逐步上升还是突然激增。</li><li>在 Elastic Mode 下，TiDB Cloud 会根据你的工作负载自动扩展后端容量。如果该使用水平符合预期，请调整告警阈值以匹配你的工作负载。请注意，持续较高的 RU/s 可能会增加你的成本。</li><li>如果该使用水平不符合预期，请使用 Top RU 功能识别并优化消耗最多 RU 的查询。</li></ol><br/>如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
 | QPS 下降 80% | <ol><li>检查下降是否由查询延时增加导致。</li><li>验证你的应用是否运行正常。如果该下降是预期行为，请忽略此告警。如果该下降并非预期且你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。</li></ol>|
 | 查询 P99 延时超过 200 ms | <ol><li>排查慢查询：前往 Slow Query 页面，并按最近时间范围进行筛选，以识别新引入的查询或运行变慢的查询。</li><li>检查最近的变更，例如应用部署、schema 变更或数据导入任务，这些变更可能影响了流量模式。</li></ol><br/>如果你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
 | 查询 P95 延时超过 200 ms | <ol><li>排查慢查询：前往 Slow Query 页面，并按最近时间范围进行筛选，以识别新引入的查询或运行变慢的查询。</li><li>检查最近的变更，例如应用部署、schema 变更或数据导入任务，这些变更可能影响了流量模式。</li></ol><br/>如果你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
@@ -156,6 +157,7 @@ TiDB Cloud 会根据不同的 [TiDB Cloud 方案](/tidb-cloud/select-cluster-tie
 | 条件 | 推荐操作 |
 |:--- |:--- |
 | 每秒请求单位（RU/s）超过最大 RCU 的 80% | <ol><li>查看 RU 指标，判断增长是逐步的还是突发的。</li><li>如果是逐步增长，检查 query 时延是否增加。如果是，则当前最大 RCU 可能不足。</li><li>通过 TiDB Cloud 控制台手动增加最大 RCU 以扩展容量。</li></ol><br/>如果你无法解决该问题，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。|
+| RCU 消耗（Request Unit/s）超过 100,000 RCU | <ol><li>查看 RU 指标中的流量模式，判断增长是逐步上升还是突然激增。</li><li>在 Elastic Mode 下，TiDB Cloud 会根据你的工作负载自动扩展后端容量。如果该使用水平符合预期，且消耗持续高于 100,000 RCU，请考虑升级到 TiDB Cloud Premium 以避免潜在的性能瓶颈。请注意，持续较高的 RU/s 可能会增加你的成本。</li><li>如果该使用水平不符合预期，请使用 Top RU 功能识别并优化消耗最多 RU 的查询。</li></ol><br/>如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
 | QPS 下降 80% | <ol><li>检查是否由于 query 延时增加导致下降。</li><li>确认你的应用是否正常运行。如果下降是有意为之，可忽略该告警。如果下降是无意的且无法定位根因，请立即联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。</li></ol>|
 | Query P99 延时超过 200 ms | <ol><li>排查慢 query：进入 Slow Query 页面，按最近时间范围筛选，定位新引入或运行变慢的 query。</li><li>回顾近期变更，如应用部署、schema 变更或数据导入任务，这些可能影响流量模式。</li></ol><br/>如果无法定位根因，请立即联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。|
 | Query P95 延时超过 200 ms | <ol><li>排查慢 query：进入 Slow Query 页面，按最近时间范围筛选，定位新引入或运行变慢的 query。</li><li>回顾近期变更，如应用部署、schema 变更或数据导入任务，这些可能影响流量模式。</li></ol><br/>如果无法定位根因，请立即联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。|

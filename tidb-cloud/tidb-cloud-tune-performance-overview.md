@@ -81,7 +81,7 @@ TiDB Cloud 控制台中有几个页面可以帮助你排查用户响应时间。
 
 有关 SQL 性能调优的更多信息，请参见 [SQL 调优概述](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)。
 
-#### 解决热点问题
+#### 解决热点问题 {#resolve-hotspot-issues}
 
 你可以在 [Key Visualizer 标签页](/tidb-cloud/tune-performance.md#key-visualizer)上查看热点问题。以下截图显示了一个热力图示例。图的横坐标是时间，纵坐标是表和索引。颜色越亮表示流量越高。你可以在工具栏中切换显示读取或写入流量。
 

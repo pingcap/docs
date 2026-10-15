@@ -7,6 +7,7 @@
 
 - [概览](/tidb-cloud-lake/lake-overview.md)
 - [快速入门](/tidb-cloud-lake/lake-quick-start.md)
+- [Lake PoC 指南](/tidb-cloud-lake/guides/lake-poc.md)
 
 ## 指南
 
@@ -133,8 +134,6 @@
   - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
   - [从操作错误中恢复](/tidb-cloud-lake/guides/recovery-from-operational-errors.md)
 - 管理
-  - [AI 驱动功能](/tidb-cloud-lake/guides/ai-powered-features.md)
-  - [管理成本](/tidb-cloud-lake/guides/manage-costs.md)
   - [监控使用情况](/tidb-cloud-lake/guides/monitor-usage.md)
   - [数据生命周期](/tidb-cloud-lake/guides/data-lifecycle.md)
   - [数据血缘](/tidb-cloud-lake/guides/data-lineage.md)

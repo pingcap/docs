@@ -60,9 +60,11 @@ summary: 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例�
 
     - **Essential** 方案：
 
-        - 你必须为 {{{ .essential }}} 实例指定最小和最大 Request Capacity Units（RCUs）。
+        - 对于运行在 CLOUD.202603.x 或更高版本上的 {{{ .essential }}} 实例，默认选中 **Elastic Mode**。在 Elastic Mode 下，你无需设置最大 RCU 数。相反，你的实例会使用固定的 **Baseline RCU** 2,000 RCU，这是向你计费的最小 Request Capacity Units（RCUs）数量，也是自动扩缩容的初始容量。
 
-        - RCU 代表为你的工作负载分配的计算资源。TiDB Cloud 会根据需求在该范围内自动扩缩 {{{ .essential }}} 实例。
+        - 如需限制容量，请选择 **Limited Mode**，然后指定实例可扩展到的最大 RCU 数。以下版本上的 {{{ .essential }}} 实例不支持 Elastic Mode；对于这些实例，你需要同时指定最小和最大 RCU 数。
+
+        - RCU 代表为你的工作负载分配的计算资源。TiDB Cloud 会根据需求自动扩缩 {{{ .essential }}} 实例。如果你的工作负载持续需要超过 100,000 RCU，建议升级到 {{{ .premium }}} 以避免潜在瓶颈。
 
 7. 点击 **Create**。
 

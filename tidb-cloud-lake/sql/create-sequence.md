@@ -33,11 +33,9 @@ CREATE [ OR REPLACE ] SEQUENCE [ IF NOT EXISTS ] <sequence>
 
 > **注意：**
 >
-> `enable_experimental_sequence_rbac_check` 设置控制序列级别的访问控制。该设置默认禁用。
-> 创建序列时仅要求用户具有 superuser 权限，会跳过详细的 RBAC 检查。
-> 启用后，在创建序列期间会强制执行细粒度的权限验证。
->
-> 这是一个实验特性，未来可能会默认启用。
+> - `enable_experimental_sequence_rbac_check` 设置控制序列级别的访问控制。该设置默认禁用。这是一个实验特性，未来可能会默认启用。
+> - 创建序列时仅要求用户具有 superuser 权限，会跳过详细的 RBAC 检查。
+> - 启用后，在创建序列期间会强制执行细粒度的权限验证。
 
 ## 示例 {#examples}
 
