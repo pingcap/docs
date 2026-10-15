@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud Lake 概念验证指南
+title: TiDB Cloud Lake 概念验证（PoC）指南
 summary: 使用 schema 映射、cluster key、reclustering、块大小和物化视图，通过具有代表性的工作负载评估 TiDB Cloud Lake。
 ---
 
-# TiDB Cloud Lake 概念验证指南
+# TiDB Cloud Lake 概念验证（PoC）指南
 
 本文档介绍了一个可重复执行的 TiDB Cloud Lake 概念验证（PoC）流程，并以将数据从 TiDB Cloud Premium 实例复制到 TiDB Cloud Lake 为主要示例。本文重点关注对代表性工作负载影响最大的决策：对象存储和 PrivateLink 连接、schema 兼容性、数据布局、重叠维护、块大小以及预聚合。
 
