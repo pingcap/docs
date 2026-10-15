@@ -1,11 +1,11 @@
 ---
-title: Delete a {{{ .premium }}} instance
-summary: Learn how to delete a {{{ .premium }}} instance.
+title: Delete a {{{ .premium }}} or {{{ .byoc }}} instance
+summary: Learn how to delete a {{{ .premium }}} or {{{ .byoc }}} instance.
 ---
 
-# Delete a {{{ .premium }}} instance
+# Delete a {{{ .premium }}} or {{{ .byoc }}} instance
 
-This document describes how to delete a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance.
+This document describes how to delete a {{{ .premium }}} or {{{ .byoc }}} instance.
 
 You can delete an instance at any time by performing the following steps:
 
@@ -21,16 +21,28 @@ You can delete an instance at any time by performing the following steps:
 
     Enter `<organization name>/<instance name>` to ensure the instance is deleted correctly.
 
-    If you want to restore the instance some time in the future, make sure that you have a backup of the instance. Otherwise, you cannot restore it. For more information about how to back up {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instances, see [Back Up and Restore {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> Data](/tidb-cloud/premium/backup-and-restore-premium.md).
+    If you want to restore the instance some time in the future, make sure that you have a backup of the instance. Otherwise, you cannot restore it. For more information about how to back up {{{ .premium }}} or {{{ .byoc }}} instances, see [Back Up and Restore {{{ .premium }}} or {{{ .byoc }}} Data](/tidb-cloud/premium/backup-and-restore-premium.md).
 
 5. Click **I understand, delete it**.
 
-    Once you delete a backed up {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance, the existing backup files of the instance are moved to the recycle bin.
+    Once you delete a backed up {{{ .premium }}} or {{{ .byoc }}} instance, the existing backup files of the instance are moved to the recycle bin.
 
     Automatic backups will expire and be automatically deleted once the retention period ends. The default retention period is 7 days if you don't modify it.
 
+    <CustomContent plan="premium">
+
     > **Note:**
     >
-    > Please be aware that backups will continue to incur charges until deleted.
+    > Backups continue to incur charges until they are deleted.
 
-    If you want to restore a {{{ .premium }}}<CustomContent plan="byoc"> or {{{ .byoc }}}</CustomContent> instance from the recycle bin, see [Restore from Recycle Bin](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin).
+    </CustomContent>
+
+    <CustomContent plan="byoc">
+
+    > **Note:**
+    >
+    > For BYOC instances, TiDB Cloud does not charge for backups. You are responsible for the storage and data transfer costs incurred in your cloud account. Storage charges continue until the backup files are deleted.
+
+    </CustomContent>
+
+    If you want to restore a {{{ .premium }}} or {{{ .byoc }}} instance from the recycle bin, see [Restore from Recycle Bin](/tidb-cloud/premium/backup-and-restore-premium.md#restore-from-recycle-bin).

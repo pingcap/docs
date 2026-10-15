@@ -1,6 +1,6 @@
 ---
 title: DROP PLACEMENT POLICY
-summary: The usage of ALTER PLACEMENT POLICY in TiDB.
+summary: The usage of DROP PLACEMENT POLICY in TiDB.
 ---
 
 # DROP PLACEMENT POLICY

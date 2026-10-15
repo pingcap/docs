@@ -267,8 +267,8 @@ dispatchers = [
 
 - The tables that match a matcher rule are dispatched according to the policy specified by the corresponding topic expression. For example, the table `test3.aa` is dispatched according to `Topic expression 2`, and the table `test5.aa` is dispatched according to `Topic expression 3`.
 - For a table that matches more than one matcher rule, it is dispatched according to the first matching topic expression. For example, the table `test1.aa` is dispatched according to `Topic expression 1`.
-- For tables that do not match any matcher, the corresponding data change events are sent to the default topic specified in `-sink-uri`. For example, the table `test10.aa` is sent to the default topic.
-- For tables that match the matcher rule but do not have a topic dispatcher specified, the corresponding data changes are sent to the default topic specified in `-sink-uri`. For example, the table `test6.abc` is sent to the default topic.
+- For tables that do not match any matcher, the corresponding data change events are sent to the default topic specified in `--sink-uri`. For example, the table `test10.aa` is sent to the default topic.
+- For tables that match the matcher rule but do not have a topic dispatcher specified, the corresponding data changes are sent to the default topic specified in `--sink-uri`. For example, the table `test6.abc` is sent to the default topic.
 
 ### Topic dispatcher
 
@@ -308,7 +308,7 @@ DDL statements such as `CREATE DATABASE` and `DROP DATABASE` that are not relate
 
 DDL statements such as `ALTER TABLE` and `CREATE TABLE` that are related to a specific table are called table-level DDL statements. Events corresponding to table-level DDL statements are dispatched to an appropriate topic according to the configuration of `dispatchers`.
 
-For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = {schema}_{table}`, the DDL events are despatched as follows:
+For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = "{schema}_{table}"`, the DDL events are despatched as follows:
 
 - If a DDL event only involves a single table, the DDL event is dispatched to the appropriate topic as it is. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
 

@@ -5,7 +5,7 @@ summary: This document explains how to create a changefeed to stream data from T
 
 # Sink to Cloud Storage
 
-This document describes how to create a changefeed to stream data from <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> to cloud storage.
+This document describes how to create a changefeed to stream data from <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC</CustomContent> to cloud storage.
 
 <CustomContent plan="dedicated">
 
@@ -15,6 +15,7 @@ This document describes how to create a changefeed to stream data from <CustomCo
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 > - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
 > - For [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
+> - For [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc).
 
 </CustomContent>
 
@@ -24,13 +25,25 @@ This document describes how to create a changefeed to stream data from <CustomCo
 >
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 > - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
+> - For [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc).
+> - For [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/).
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+> **Note:**
+>
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
+> - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
+> - For [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
 > - For [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/).
 
 </CustomContent>
 
 ## Restrictions
 
-- For each <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent>, you can create up to 100 changefeeds.
+- For each <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent>, you can create up to 100 changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
@@ -48,6 +61,12 @@ Navigate to the overview page of the target TiDB Cloud Premium instance. Click *
 
 </CustomContent>
 
+<CustomContent plan="byoc">
+
+Navigate to the overview page of the target {{{ .byoc }}} instance. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3** as the destination, depending on the cloud provider on which your {{{ .byoc }}} instance is hosted. The configuration process varies depending on the destination you choose.
+
+</CustomContent>
+
 <SimpleTab>
 <div label="Amazon S3">
 
@@ -57,7 +76,7 @@ For **Amazon S3**, you can use either **AWS Role ARN** or **AWS access key** for
 
 To use an IAM Role for authentication, follow these steps:
 
-1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent>.
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent>.
 2. Under **Bucket Access**, select **AWS Role ARN**.
 3. To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
 
@@ -246,7 +265,7 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
 </SimpleTab>
 
-Click **Next** to establish the connection from the <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent> to your cloud storage. TiDB Cloud will automatically test and verify if the connection is successful.
+Click **Next** to establish the connection from the <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent> to your cloud storage. TiDB Cloud will automatically test and verify if the connection is successful.
 
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
@@ -260,7 +279,7 @@ Click **Next** to establish the connection from the <CustomContent plan="dedicat
     - **Case Sensitive**: you can set whether the matching of database and table names in filter rules is case-sensitive. By default, matching is case-insensitive.
     - **Filter Rules**: you can set filter rules in this column. By default, there is a rule `*.*`, which stands for replicating all tables. When you add a new rule, TiDB Cloud queries all the tables in TiDB and displays only the tables that match the rules in the box on the right. You can add up to 100 filter rules.
     - **Tables with valid keys**: this column displays the tables that have valid keys, including primary keys or unique indexes.
-    - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when handling duplicate events downstream. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can employ filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `"!test.tbl1"`.
+    - **Tables without valid keys**: this column shows tables that lack primary keys or unique keys. These tables present a challenge during replication because the absence of a unique identifier can result in inconsistent data when handling duplicate events downstream. To ensure data consistency, it is recommended to add unique keys or primary keys to these tables before initiating the replication. Alternatively, you can employ filter rules to exclude these tables. For example, you can exclude the table `test.tbl1` by using the rule `!test.tbl1`.
 
 2. Customize **Event Filter** to filter the events that you want to replicate.
 

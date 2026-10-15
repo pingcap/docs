@@ -14,7 +14,7 @@ This tutorial walks you through the steps to connect to your {{{ .starter }}} or
 ## Restrictions
 
 - Currently, {{{ .starter }}} and {{{ .essential }}} support private endpoint connections when the endpoint service is hosted on AWS or Alibaba Cloud. If the service is hosted on another cloud provider, the private endpoint is not applicable.
-- Cross-region private endpoint connections is not supported.
+- Cross-region private endpoint connections are not supported.
 
 ## Set up a private endpoint with Alibaba Cloud
 

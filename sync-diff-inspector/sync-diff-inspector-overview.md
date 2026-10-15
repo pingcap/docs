@@ -201,7 +201,7 @@ Run the following command:
 ./sync_diff_inspector --config=./config.toml
 ```
 
-This command outputs a check report `summary.txt` in the `output-dir` of `config.toml` and the log `sync_diff.log`. In the `output-dir`, a folder named by the hash value of the `config. toml` file is also generated. This folder includes the checkpoint node information of breakpoints and the SQL file generated when the data is inconsistent.
+This command outputs a check report `summary.txt` in the `output-dir` of `config.toml` and the log `sync_diff.log`. In the `output-dir`, a folder named by the hash value of the `config.toml` file is also generated. This folder includes the checkpoint node information of breakpoints and the SQL file generated when the data is inconsistent.
 
 ### Progress information
 
@@ -296,7 +296,7 @@ Average Speed: 113.277149MB/s
 
 If different rows exist during the data checking process, the SQL statements will be generated to fix them. If the data inconsistency exists in a chunk, a SQL file named by `chunk.Index` will be generated. The SQL file is located at `${output}/fix-on-${instance}`, and `${instance}` is the value of `task.target-instance` in the `config.toml` file.
 
-A SQL file contains the tale to which the chunk belong and the range information. For the SQL files, you should consider the following three situations:
+A SQL file contains the table to which the chunk belongs and the range information. For the SQL files, you should consider the following three situations:
 
 - If the rows in the downstream database are missing, REPLACE statements will be applied
 - If the rows in the downstream database are redundant, DELETE statements will be applied

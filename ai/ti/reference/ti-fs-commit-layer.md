@@ -1,11 +1,11 @@
 ---
 title: ti fs commit-layer
-summary: Commit a TiDB Cloud Filesystem layer.
+summary: Commit a file system layer.
 ---
 
 # ti fs commit-layer
 
-Applies one layer to its base Filesystem.
+Applies one layer to its base file system.
 
 > **Note:**
 >
@@ -28,7 +28,7 @@ ti fs commit-layer
 - `--layer-id <string>`: Layer ID. \[required]
 - `--dry-run`: Validate the request without applying changes.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--version`: Display version information.
 
@@ -39,7 +39,7 @@ For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli
 - Commit a layer:
 
     ```bash
-    # Apply the selected layer's changes to its base Filesystem view.
+    # Apply the selected layer's changes to its base file system view.
     ti fs commit-layer --file-system-id <file-system-id> --layer-id "<layer-id>"
     ```
 

@@ -61,6 +61,14 @@ It is recommended that you use [AWS CloudFormation](https://docs.aws.amazon.com/
 
 3. Create a role ARN with an AWS CloudFormation template.
 
+    <CustomContent plan="byoc">
+
+    > **Note:**
+    >
+    > For {{{ .byoc }}}, after the IAM role is created, add the `tidbcloud.com/allow-dataplane-access=true` tag to the role before using the Role ARN for data import. This tag is required for TiDB Cloud to use the role to access the BYOC data plane.
+
+    </CustomContent>
+
     1. In the **Add New ARN** dialog, click **AWS Console with CloudFormation Template**.
 
     2. Log in to the [AWS Management Console](https://console.aws.amazon.com) and you will be redirected to the AWS CloudFormation **Quick create stack** page.

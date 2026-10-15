@@ -81,7 +81,7 @@ This document introduces the user scenarios, supported upstreams and downstreams
 - **Upstream**: TiDB, MySQL
 - **Downstream**: TiDB, MySQL
 - **Advantages**: Can be used to repair data in the scenario where a small amount of data is inconsistent
-- **Limitation**: sync-diff-inspector has some restrictions on online checks for data migration between MySQL and TiDB, comparisons of certain data types, and checking and repairing tables without a primary key or unique index. For more information, see [Restrictions of sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md#restrictions-of-sync-diff-inspector).
+- **Limitation**: sync-diff-inspector does not support online checks for data migration between MySQL and TiDB. It also has limitations when comparing certain data types and repairing inconsistent data in tables without a primary key or unique index. For more information, see [Restrictions of sync-diff-inspector](/sync-diff-inspector/sync-diff-inspector-overview.md#restrictions-of-sync-diff-inspector).
 
 ## Install tools using TiUP
 

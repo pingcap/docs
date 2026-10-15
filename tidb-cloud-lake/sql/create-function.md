@@ -71,7 +71,11 @@ Start the server:
 python udf_server.py
 ```
 
-### Step 2: Register the Function in {{{ .lake }}}
+### Step 2: Expose and Allow the Server
+
+Expose the UDF server on HTTPS with gRPC/HTTP2 support, then click **Support** in the upper-right corner, select **Submit a request**, and request that the server hostname be added to your tenant's **UDF server allowlist**. Until then, `CREATE FUNCTION` fails with `Unallowed UDF server address`.
+
+### Step 3: Register the Function in {{{ .lake }}}
 
 ```sql
 CREATE FUNCTION gcd AS (INT, INT)
@@ -81,7 +85,7 @@ CREATE FUNCTION gcd AS (INT, INT)
     ADDRESS = 'https://udf.example.com';
 ```
 
-### Step 3: Call the Function
+### Step 4: Call the Function
 
 ```sql
 SELECT gcd(48, 18);

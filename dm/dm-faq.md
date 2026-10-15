@@ -146,7 +146,7 @@ You need to check the error message and log files to further analyze this error.
 Check the configuration items `block-allow-list` and `table-route`:
 
 - You need to configure the names of upstream databases and tables under `block-allow-list`. You can add "~" before `do-tables` to use regular expressions to match names.
-- `table-route` uses wildcard characters instead of regular expressions to match table names. For example, `table_parttern_[0-63]` only matches 7 tables, from `table_parttern_0` to `table_pattern_6`.
+- `table-route` uses wildcard characters instead of regular expressions to match table names. For example, `table_pattern_[0-63]` only matches 7 tables, from `table_pattern_0` to `table_pattern_6`.
 
 ## Why does the `replicate lag` monitor metric show no data when DM is not replicating from upstream?
 
@@ -368,7 +368,7 @@ When using dmctl execute commands, you might find the connection to DM master fa
 
 In this case, you can check the environment variable `https_proxy` (note that it is **https**). If this variable is configured, dmctl automatically connects the host and port specified by `https_proxy`. If the host does not have a corresponding `proxy` forwarding service, the connection fails.
 
-To solve this issue, check whether `https_proxy` is mandatory. If not, cancel the setting. Otherwise, add the environment variable setting `https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"` before the oringial dmctl commands.
+To solve this issue, check whether `https_proxy` is mandatory. If not, cancel the setting. Otherwise, add the environment variable setting `https_proxy="" ./dmctl --master-addr "x.x.x.x:8261"` before the original dmctl commands.
 
 > **Note:**
 >

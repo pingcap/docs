@@ -40,7 +40,7 @@ The meaning of each column field in the `TIDB_TRX` table is as follows:
 * `START_TIME`: The start time of the transaction, which is the physical time corresponding to the `start_ts` of the transaction.
 * `CURRENT_SQL_DIGEST`: The digest of the SQL statement currently being executed in the transaction.
 * `CURRENT_SQL_DIGEST_TEXT`: The normalized form of the SQL statement currently being executed by the transaction, that is, the SQL statement without arguments and format. It corresponds to `CURRENT_SQL_DIGEST`.
-* `STATE`: The current state of the transaction. The possible values ​​include:
+* `STATE`: The current state of the transaction. The possible values include:
     * `Idle`: The transaction is in an idle state, that is, it is waiting for the user to input a query.
     * `Running`: The transaction is executing a query.
     * `LockWaiting`: The transaction is waiting for the pessimistic lock to be acquired. Note that the transaction enters this state at the beginning of the pessimistic locking operation, no matter whether it is blocked by other transactions or not.

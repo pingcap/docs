@@ -71,7 +71,7 @@ The `KEY_INFO` column shows the detailed information of the `KEY` column. The in
 * `"table_name"`: The name of the table to which the key belongs.
 * `"partition_id"`: The ID of the partition where the key is located.
 * `"partition_name"`: The name of the partition where the key is located.
-* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values ​​are as follows:
+* `"handle_type"`: The handle type of the row key (that is, the key that stores a row of data). The possible values are as follows:
     * `"int"`: The handle type is int, which means that the handle is the row ID.
     * `"common"`: The handle type is not int64. This type is shown in the non-int primary key when clustered index is enabled.
     * `"unknown"`: The handle type is currently not supported.
@@ -84,7 +84,7 @@ In the above fields, if the information of a field is not applicable or currentl
 
 > **Note:**
 >
-> If a key comes from a table with partitioning enabled, and the information of the schema to which the key belongs cannot be queried due to some reasons (for example, the table to which the key belongs has been deleted) during the query, the ID of the partition to which the key belongs might be appear in the `table_id` field. This is because TiDB encodes the keys of different partitions in the same way as it encodes the keys of several independent tables. Therefore, when the schema information is missing, TiDB cannot confirm whether the key belongs to an unpartitioned table or to one partition of a table.
+> If a key comes from a table with partitioning enabled, and the information of the schema to which the key belongs cannot be queried due to some reasons (for example, the table to which the key belongs has been deleted) during the query, the ID of the partition to which the key belongs might appear in the `table_id` field. This is because TiDB encodes the keys of different partitions in the same way as it encodes the keys of several independent tables. Therefore, when the schema information is missing, TiDB cannot confirm whether the key belongs to an unpartitioned table or to one partition of a table.
 
 ## Retryable deadlock errors
 

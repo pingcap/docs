@@ -81,7 +81,7 @@ If you determine that the performance bottleneck is within a TiDB cluster, it is
 
 For more information about SQL performance tuning, see [SQL Tuning Overview](/tidb-cloud/tidb-cloud-sql-tuning-overview.md).
 
-#### Resolve hotstpot issues
+#### Resolve hotspot issues
 
 You can view hotspot issues on the [Key Visualizer tab](/tidb-cloud/tune-performance.md#key-visualizer). The following screenshot shows a sample heat map. The horizontal coordinate of the map is the time, and the vertical coordinate is the table and index. Brighter color indicates higher traffic. You can toggle the display of read or write traffic in the toolbar.
 

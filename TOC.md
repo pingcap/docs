@@ -816,7 +816,7 @@
       - [Date and Time Types](/data-type-date-and-time.md)
       - [String Types](/data-type-string.md)
       - [JSON Type](/data-type-json.md)
-      - [Vector Types](/ai/reference/vector-search-data-types.md)
+      - [Vector Types](https://docs.pingcap.com/ai/vector-search-data-types/)
     - Functions and Operators
       - [Overview](/functions-and-operators/functions-and-operators-overview.md)
       - [Type Conversion in Expression Evaluation](/functions-and-operators/type-conversion-in-expression-evaluation.md)
@@ -830,7 +830,7 @@
       - [Encryption and Compression Functions](/functions-and-operators/encryption-and-compression-functions.md)
       - [Locking Functions](/functions-and-operators/locking-functions.md)
       - [Information Functions](/functions-and-operators/information-functions.md)
-      - [Vector Functions and Operators](/ai/reference/vector-search-functions-and-operators.md)
+      - [Vector Functions and Operators](https://docs.pingcap.com/ai/vector-search-functions-and-operators/)
       - JSON Functions
         - [Overview](/functions-and-operators/json-functions.md)
         - [Functions That Create JSON](/functions-and-operators/json-functions/json-functions-create.md)
@@ -853,7 +853,7 @@
       - [Comparisons between Functions and Syntax of Oracle and TiDB](/oracle-functions-to-tidb.md)
     - [Clustered Indexes](/clustered-indexes.md)
     - [Global Indexes](/global-indexes.md)
-    - [Vector Index](/ai/reference/vector-search-index.md)
+    - [Vector Index](https://docs.pingcap.com/ai/vector-search-index/)
     - [Constraints](/constraints.md)
     - [Generated Columns](/generated-columns.md)
     - [SQL Mode](/sql-mode.md)

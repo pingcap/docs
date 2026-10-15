@@ -1,6 +1,6 @@
 ---
 title: ti fs find-files
-summary: Find files in a TiDB Cloud Filesystem.
+summary: Find files in a file system.
 ---
 
 # ti fs find-files
@@ -35,7 +35,7 @@ ti fs find-files
 
 - `--file-name-pattern <string>`: File name pattern filter, such as `*.md`.
 - `--file-system-id <string>`: Select the file system. You can also set `TI_FS_FILE_SYSTEM_ID`.
-- `--fs-token <string>`: Set the Filesystem token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected Filesystem.
+- `--fs-token <string>`: Set the file system token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command uses the local token stored for the selected file system.
 - `--help`: Display help information.
 - `--layer-id <string>`: Search files and directories within a specific file system layer.
 - `--limit <int32>`: Maximum number of results; 0 uses the service default.

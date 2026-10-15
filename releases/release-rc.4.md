@@ -1,6 +1,6 @@
 ---
 title: TiDB RC4 Release Notes
-summary: TiDB RC4 is released with a focus on MySQL compatibility, SQL optimization, stability, and performance. Highlights include improved write performance, better query cost estimating, and support for TiSpark to access data in TiKV. Detailed updates include refactoring of the SQL query optimizer, support for JSON type and operations, and optimization of the scheduler in Placement Driver. TiKV now supports RC isolation level, Document Store, and more pushdown functions in Coprocessor. TiSpark beta release includes prediction pushdown, aggregation pushdown, and range pruning, capable of running a full set of TPC-H queries.
+summary: TiDB RC4 is released with a focus on MySQL compatibility, SQL optimization, stability, and performance. Highlights include improved write performance, better query cost estimation, and support for TiSpark to access data in TiKV. Detailed updates include refactoring of the SQL query optimizer, support for JSON type and operations, and optimization of the scheduler in Placement Driver. TiKV now supports RC isolation level, Document Store, and more pushdown functions in Coprocessor. TiSpark beta release includes predicate pushdown, aggregation pushdown, and range pruning, capable of running a full set of TPC-H queries.
 aliases: ['/tidb/dev/release-rc.4/','/docs/dev/releases/release-rc.4/','/docs/dev/releases/rc4/','/tidb/v5.4/release-rc.4','/tidb/v6.1/release-rc.4','/tidb/v6.5/release-rc.4','/tidb/v7.1/release-rc.4','/tidb/v7.5/release-rc.4','/tidb/v8.1/release-rc.4']
 ---
 
@@ -51,7 +51,7 @@ On August 4, 2017, TiDB RC4 is released! This release is focused on MySQL compat
 
 ### TiSpark Beta Release
 
-+ Implement the prediction pushdown
++ Implement the predicate pushdown
 + Implement the aggregation pushdown
 + Implement range pruning
 + Capable of running full set of TPC-H except one query that needs view support

@@ -20,17 +20,17 @@ This document describes the hardware requirements of using TiDB Lightning to imp
 
     This command automatically adds TiUP to the `PATH` environment variable. You need to start a new terminal session or run `source ~/.bashrc` before you can use TiUP. (According to your environment, you may need to run `source ~/.profile`. For the specific command, check the output of TiUP.)
 
-2. Install TiDB Lightning using TiUP:
+2. Install TiDB Lightning using TiUP. It is recommended to use the same version of TiDB Lightning as the target TiDB cluster. Replace `<version>` with the version of the target TiDB cluster (for example, `v{{{ .tidb-version }}}`):
 
     ```shell
-    tiup install tidb-lightning
+    tiup install tidb-lightning:<version>
     ```
 
 ## Manual deployment
 
 ### Download TiDB Lightning binaries
 
-Refer to [Download TiDB Tools](/download-ecosystem-tools.md) and download TiDB Lightning binaries. TiDB Lightning is completely compatible with early versions of TiDB. It is recommended to use the latest version of TiDB Lightning.
+Refer to [Download TiDB Tools](/download-ecosystem-tools.md) and download TiDB Lightning binaries. It is recommended to use the same version of TiDB Lightning as the target TiDB cluster.
 
 Unzip the TiDB Lightning binary package to obtain the `tidb-lightning` executable file:
 

@@ -1,11 +1,11 @@
 ---
 title: ti fs update-file-system-embedding-configuration
-summary: Replace embedding configuration for a TiDB Cloud Filesystem.
+summary: Replace embedding configuration for a file system.
 ---
 
 # ti fs update-file-system-embedding-configuration
 
-Enables or disables optional app-managed embedding for one Filesystem. Enabling performs a real provider validation request that can incur a small provider charge. After enablement, text or extracted descriptions are sent to the selected embedding provider.
+Enables or disables optional app-managed embedding for one file system. Enabling performs a real provider validation request that can incur a small provider charge. After enablement, text or extracted descriptions are sent to the selected embedding provider.
 
 > **Note:**
 >
@@ -27,8 +27,8 @@ ti fs update-file-system-embedding-configuration
 ## Options
 
 - `--enabled <boolean>`: Enter `true` with a complete provider configuration, or `false` without provider options. \[required]
-- `--file-system-id <string>`: Set the immutable Filesystem ID. \[required]
-- `--dry-run`: Validate the request without contacting the Filesystem backend or embedding provider.
+- `--file-system-id <string>`: Set the immutable file system ID. \[required]
+- `--dry-run`: Validate the request without contacting the file system backend or embedding provider.
 - `--provider-api-base <string>`: Set a valid HTTPS OpenAI-compatible provider base URL.
 - `--provider-model <string>`: Set an embedding model that returns exactly 1024 dimensions.
 - `--help`: Display help information.
@@ -36,9 +36,9 @@ ti fs update-file-system-embedding-configuration
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
 
-The provider API key is accepted only from `TI_FS_AI_PROVIDER_API_KEY`. It is sent to the Filesystem backend for validation and encrypted storage, is never stored locally by `ti`, and is returned only in masked form. Embedding requires an exact OpenAI-compatible `/v1/embeddings` contract. Native provider interfaces are not supported.
+The provider API key is accepted only from `TI_FS_AI_PROVIDER_API_KEY`. It is sent to the file system backend for validation and encrypted storage, is never stored locally by `ti`, and is returned only in masked form. Embedding requires an exact OpenAI-compatible `/v1/embeddings` contract. Native provider interfaces are not supported.
 
-A Filesystem whose `source` is `database_auto` uses database-managed embedding and cannot be changed with this command. Do not retry an update blindly after a timeout or lost response. Run the describe command first to determine whether the update succeeded.
+A file system whose `source` is `database_auto` uses database-managed embedding and cannot be changed with this command. Do not retry an update blindly after a timeout or lost response. Run the describe command first to determine whether the update succeeded.
 
 ## Examples
 

@@ -49,7 +49,7 @@ Before using PingCAP Clinic, you need to install Diag (a component to collect da
 
 2. Get and set an access token (token) to upload data.
 
-    When uploading collected data through Diag, you need a token for user authentication. If you already set a token Diag, you can reuse the token and skip this step.
+    When uploading collected data through Diag, you need a token for user authentication. If you already set a token in Diag, you can reuse the token and skip this step.
 
     To get a token, perform the following steps:
 
@@ -218,7 +218,7 @@ The collected data is stored in separate subdirectories based on its data source
 - List of kernel parameters: in `sysctl.conf`
 - Kernel logs: in `dmesg.log`
 - Network connection during data collection: in `ss.txt`
-- Configuration data: in the `config.json` directory of each node
+- Configuration data: in the `config.json` file under each node's directory
 - Meta-information for the cluster itself: in `meta.yaml` (this file is located at the top level of the directory that stores collected data)
 - Monitoring data: in the `/monitor` file directory. The monitoring data is compressed by default and cannot be viewed directly. To directly view the JSON files with monitoring data, disable compression with the `--compress-metrics=false` parameter when collecting data.
 

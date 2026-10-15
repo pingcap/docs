@@ -70,7 +70,7 @@ In TiDB Cloud Data Service, you can generate one or multiple endpoints automatic
     - Endpoint properties: TiDB Cloud Data Service automatically configures the endpoint path, request method, timeout, and tag according to your selection. You can find the properties in the right pane of the page.
     - Endpoint parameters: TiDB Cloud Data Service automatically configures parameters for the generated endpoints. You can find the parameters in the right pane of the page.
 
-6. If you want to modify the details of the generated endpoint, such as its name, SQL statements, properties, or parameters, refer to the instructions provided in [Develop an endpoint](#deploy-an-endpoint).
+6. If you want to modify the details of the generated endpoint, such as its name, SQL statements, properties, or parameters, refer to the instructions provided in [Develop an endpoint](#develop-an-endpoint).
 
 ### Create an endpoint manually
 
@@ -379,8 +379,8 @@ TiDB Cloud Data Service generates code examples to help you call an endpoint. To
 
     - Environment: choose **Test Environment** or **Online Environment** depending on your need. **Online Environment** is available only after you deploy the endpoint.
     - Authentication method: choose **Basic Authentication** or **Digest Authentication**.
-        - **Basic Authentication** transmits your API key as based64 encoded text.
-        - **Digest Authentication** transmits your API key in an encrypted form, which is more secure.
+        - **Basic Authentication** transmits your API key as base64 encoded text.
+        - **Digest Authentication** does not send your API key in plain text. Instead, it sends a hash computed from the key and a server-supplied nonce, which is more secure.
 
       Compared with **Basic Authentication**, the curl code of **Digest Authentication** includes an additional `--digest` option.
 
