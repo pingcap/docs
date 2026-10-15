@@ -24,7 +24,7 @@
   - [Docker and Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md)
 - [Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md)
 - [Share a File System](/tidb-cloud-filesystem/filesystem-sharing.md)
-- [Manage Usage Limit](/tidb-cloud-filesystem/manage-filesystem-limits.md)
+- [Manage Usage Limits](/tidb-cloud-filesystem/manage-filesystem-limits.md)
 - [Manage File System Layers and Checkpoints](/tidb-cloud-filesystem/manage-filesystem-layers.md)
 - [Manage Git Workspaces](/tidb-cloud-filesystem/manage-git-workspaces.md)
 - [Use Journals in a File System](/tidb-cloud-filesystem/use-filesystem-journals.md)
