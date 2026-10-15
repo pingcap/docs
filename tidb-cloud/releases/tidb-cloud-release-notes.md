@@ -16,7 +16,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - TiDB Cloud Essential で、Max RCU を設定せずにインスタンスを作成したり、その容量を更新したりできるようになりました。この機能は、TiDB バージョン `CLOUD.202603.x` 以降を実行する TiDB Cloud Essential インスタンスで利用できます。
 
-        - 新しい TiDB Cloud Essential インスタンスを作成するときのデフォルトモードは **Elastic Mode** です。このモードでは、TiDB Cloud がワークロードに基づいてバックエンドリソースを自動的に割り当てます。一貫して 100,000 RCU を超えるワークロードが必要な場合は、潜在的なパフォーマンスのボトルネックを回避するために TiDB Cloud Premium へのアップグレードを検討してください。
+        - 新しい TiDB Cloud Essential インスタンスを作成するときのデフォルトモードは **Elastic Mode** です。このモードでは、TiDB Cloud がワークロードに基づいてバックエンドリソースを自動的に割り当てます。一貫して 100,000 RCU を超える RCU を必要とするワークロードの場合は、潜在的なパフォーマンスのボトルネックを回避するために TiDB Cloud Premium へのアップグレードを検討してください。
         - 最大容量の制限を設定する必要がある場合は、**Limited Mode** に切り替えることができます。
 
       Max RCU が設定済みの既存の TiDB Cloud Essential インスタンスは、設定を変更しなくても引き続き実行されます。現在の値を維持することも、これをクリアして **Elastic Mode** に切り替えることもできます。
