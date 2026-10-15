@@ -9,7 +9,7 @@ This document lists the feature support status for different TiDB Cloud plans, i
 
 > **Tip:**
 >
-> - This feature comparison applies to MySQL-compatible TiDB Cloud only. PostgreSQL-compatible TiDB Cloud Starter (Public Preview) is not included.
+> - This feature comparison table applies to MySQL-compatible TiDB Cloud only. It does not include [PostgreSQL-compatible TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/starter/?plan=starter&compatibility=postgresql) (Public Preview).
 > - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) is the best way to get started with TiDB Cloud. Additionally, you can try out TiDB Cloud features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 
 - ✅: **Generally available** or **in public preview**.
