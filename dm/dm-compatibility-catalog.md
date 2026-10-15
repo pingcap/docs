@@ -33,8 +33,8 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 
 MySQL 8.4ソースのサポートはGAではなく、**実験的**です。本番環境で使用する前に、使用するソースの正確なバージョン、DMのバージョン、および移行設定との互換性を確認してください。使用予定の移行モードを検証し、データ整合性を確認してください。
 
-- 増分レプリケーションでは、`binlog_transaction_compression=OFF`を設定してください。DMは圧縮されたBinlogトランザクションイベントをサポートしていません。
-- ソースでtagged GTIDsを使用している場合は、移行前に使用するDMバージョンとの互換性を確認してください。tagged GTIDsについては、さらに互換性テストが必要です。詳細については、[tagged GTID issue](https://github.com/pingcap/tiflow/issues/12629)および[compatibility testing tracker](https://github.com/pingcap/tiflow/issues/12412)を参照してください。
+- 増分レプリケーションでは、`binlog_transaction_compression=OFF`を設定してください。DMは圧縮されたbinlogトランザクションイベントをサポートしていません。
+- ソースでタグ付きGTIDを使用している場合は、移行前に使用するDMバージョンとの互換性を確認してください。タグ付きGTIDについては、さらに互換性テストが必要です。詳細については、[タグ付きGTIDに関するissue](https://github.com/pingcap/tiflow/issues/12629)および[互換性テストのトラッカー](https://github.com/pingcap/tiflow/issues/12412)を参照してください。
 
 ### 外部キーの`CASCADE`操作 {#foreign-key-cascade-operations}
 
