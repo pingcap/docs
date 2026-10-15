@@ -54,7 +54,7 @@
 | CTE | CTE | In SQL, it abbreviates common table expression (公用表表达式). Keep CTE and its plural CTEs in English. |
 | Custom Resource Definition (CRD) | 自定义资源类型 |  |
 | checksum | 校验和 |  |
-| checkpoint | checkpoint | In TiDB Cloud Filesystem docs, it refers to a durable snapshot point in a layer. |
+| checkpoint | checkpoint | In TiDB Cloud Filesystem docs, keep it in English for a named point in a layer's durable history. Do not translate it as "检查点" or "快照". In other contexts, translate according to the meaning. |
 | circular dependency | 循环依赖 |  |
 | class | 类 |  |
 | client | 客户端 |  |
@@ -128,7 +128,7 @@
 | deferred | 延迟 | For PostgreSQL constraints, it means checking is deferred until transaction commit. Translate "deferred constraint" as "延迟约束" and "deferred constraint checking" as "延迟约束检查". Distinguish it from deferrable (可延迟). Keep the SQL keyword DEFERRED unchanged. |
 | dependency/dependencies | 依赖包 |  |
 | dependency | 依赖关系 |  |
-| delegated Vault token | Vault 委派令牌 | In TiDB Cloud Filesystem Vault docs, it refers to a temporary token created from a grant. |
+| delegated Vault token | Vault 委派 Token | In TiDB Cloud Filesystem Vault docs, it refers to a temporary token created from a grant. Use "Token" to match the UI. |
 | deploy | 部署 |  |
 | deployment | 部署 |  |
 | destroy the cluster | 销毁集群 |  |
@@ -171,8 +171,8 @@
 | file descriptor | 文件描述符 |  |
 | file handle | 文件句柄 |  |
 | file system | 文件系统 | Use this translation only for the generic computing concept. For the TiDB Cloud product name, use "Filesystem". |
-| Filesystem | Filesystem | In TiDB Cloud Filesystem docs, keep it in English when capitalized and used as a shortened product name. |
-| Filesystem token | Filesystem 访问令牌 | In TiDB Cloud Filesystem docs, it refers to an access token for a Filesystem. |
+| Filesystem | Filesystem | Keep it in English when used as the shortened TiDB Cloud product name. For the generic computing concept "file system", use "文件系统". |
+| Filesystem token | Filesystem Token | In TiDB Cloud Filesystem docs, it refers to an access token for a Filesystem. Use "Token" to match the UI. |
 | fill-factor | 填充因子 |  |
 | fine-grained | 细粒度 |  |
 | flag | （命令行）标记/参数 |  |
@@ -345,7 +345,7 @@
 | outer join | 外连接 |  |
 | outer join simplification | 外连化简 |  |
 | overhead | 开销 |  |
-| owner token | 所有者令牌 | In TiDB Cloud Filesystem docs, it refers to a Filesystem token with owner-level permissions. |
+| owner token | 所有者 Token | In TiDB Cloud Filesystem docs, it refers to a Filesystem token with owner-level permissions. Use "Token" to match the UI. |
 | pack / unpack | 打包 / 解包 | In TiDB Cloud Filesystem docs, it refers to archiving and restoring local overlay state. |
 | parallel replication | 并行复制 |  |
 | parameter | 参数 |  |
@@ -436,7 +436,7 @@
 | schema | 数据库模式 | In PostgreSQL, when it refers to a namespace within a database, use "数据库模式", not "架构" or "表结构". When it refers to table definitions, such as "table schema" or schema exported by pg_dump, use "表结构" or "数据库结构" as appropriate. For a Parquet file schema, use "数据结构". Keep the feature name Schema Evolution in English. Keep SQL keywords, identifiers, and schema names unchanged. |
 | Schema Evolution | Schema Evolution | A feature that allows TiDB Cloud Lake to automatically add columns that exist in source files but are missing from the target table during `COPY INTO` file loads when `ENABLE_SCHEMA_EVOLUTION` is enabled. |
 | scope | 作用域 |  |
-| scoped token | 范围受限令牌 | In TiDB Cloud Filesystem docs, it refers to a token limited by path, operation, and lifetime. |
+| scoped token | 范围受限 Token | In TiDB Cloud Filesystem docs, it refers to a token limited by path, operation, and lifetime. Use "Token" to match the UI. |
 | secondary indices | 次级索引 |  |
 | see also | 另请参阅 |  |
 | seed | 数据填充 |  |
@@ -523,6 +523,7 @@
 | timestamp | 时间戳 |  |
 | timestamp allocator | 时间戳分配器 |  |
 | Timestamp Oracle (TSO) | Timestamp Oracle (TSO) |  |
+| token | Token | For TiDB Cloud Filesystem access credentials, keep it in English and use "Token" to match the UI. In other contexts, follow the relevant terminology, such as "token bucket" (令牌桶) and AI model Token. Keep commands, identifiers, and parameter names unchanged. |
 | token bucket | 令牌桶 | An algorithm used in packet switched computer networks and telecommunications networks |
 | tokenization | 分词 | Use "分词" in full-text search. In other contexts, such as model token processing or data security, translate according to the meaning. |
 | tokenizer | 分词器 | Use "分词器" in full-text search. In other contexts, translate according to the meaning. |
