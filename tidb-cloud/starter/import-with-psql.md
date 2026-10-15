@@ -206,6 +206,10 @@ Also review the schema for unsupported data types, index access methods, PL/pgSQ
 
 Keep the row-level security (RLS) statements in the exported schema, including `ENABLE ROW LEVEL SECURITY`, `FORCE ROW LEVEL SECURITY`, and `CREATE POLICY`.
 
+Before importing data, make sure the role in `<TARGET_DATABASE_URL>` has the required table privileges. If RLS policies apply to this role, each imported row must satisfy the target table's policies. Otherwise, `COPY FROM STDIN` fails with `new row violates row-level security policy`.
+
+If you need to import rows that these policies would reject, ask your database administrator to perform the import using a separate migration role authorized to bypass RLS. Do not grant `BYPASSRLS` to application roles for the migration. Remove any privileges granted only for the migration after it is complete.
+
 The `pg_dump` utility does not export database roles. If an RLS policy references a specific role, create that role in the target instance before importing the schema.
 
 For example:
