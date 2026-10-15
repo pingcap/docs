@@ -60,7 +60,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     - **Essential**プラン：
 
-        - CLOUD.202603.x以降で実行されるTiDB Cloud Essentialインスタンスでは、デフォルトで**Elastic Mode**が選択されています。Elastic Modeでは、RCUの最大数を設定しません。代わりに、インスタンスは固定の**Baseline RCU**である2,000 RCUを使用します。これは、課金対象となる最小のRequest Capacity Units（RCU）数であり、自動スケーリングの初期容量でもあります。
+        - CLOUD.202603.x以降で実行されるTiDB Cloud Essentialインスタンスでは、デフォルトで**Elastic Mode**が選択されています。Elastic Modeでは、RCUの最大数を設定しません。代わりに、インスタンスは固定の**Baseline RCU**である2,000 RCUを使用します。これは、課金対象となる最小のリクエストキャパシティユニット（RCU）数であり、自動スケーリングの初期容量でもあります。
 
         - 容量を制限するには、**Limited Mode**を選択してから、インスタンスがスケールアップできるRCUの最大数を指定します。以前のバージョンのTiDB Cloud EssentialインスタンスはElastic Modeをサポートしていません。これらのインスタンスでは、RCUの最小数と最大数の両方を指定します。
 
