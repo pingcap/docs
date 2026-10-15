@@ -78,13 +78,10 @@ TiDB Cloud provides the following deployment options:
 
 - TiDB Cloud Starter
 
-    {{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
+    {{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling database with MySQL compatibility, while PostgreSQL compatibility is available in public preview.
 
-    <CustomContent language="en,zh">
-
-    Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud.
-
-    </CustomContent>
+    - MySQL-compatible Starter offers a monthly free quota, with consumption-based billing available for usage beyond the free allowance. <CustomContent language="en,zh">Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. </CustomContent>
+    - PostgreSQL-compatible Starter is available free of charge during public preview, subject to usage allowances. The preview is intended for development and evaluation and is not recommended for production workloads.
 
 - {{{ .essential }}}
 
