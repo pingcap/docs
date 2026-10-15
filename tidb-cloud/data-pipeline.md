@@ -34,6 +34,7 @@ For more information, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq
 | {{{ .premium }}} | Data Pipeline is available in the [TiDB Cloud console](https://tidbcloud.com) in private preview, and it is available upon request. |
 | {{{ .dedicated }}} | Data Pipeline is not available in the TiDB Cloud console yet. To use a data pipeline, you need to set it up manually. |
 | {{{ .essential }}} | Data Pipeline is not available in the TiDB Cloud console yet. To use a data pipeline, you need to set it up manually. |
+
 </CustomContent>
 
 <CustomContent plan="byoc">
@@ -41,9 +42,9 @@ For more information, see [Data Pipeline FAQ](/tidb-cloud/data-pipeline-lake-faq
 | Plan | Status |
 | ---- | ------ |
 | {{{ .premium }}} | Data Pipeline is available in the [TiDB Cloud console](https://tidbcloud.com) in private preview, and it is available upon request. |
-| {{{ .byoc }}} | Data Pipeline is available in the [TiDB Cloud console](https://tidbcloud.com) in private preview, and it is available upon request. |
 | {{{ .dedicated }}} | Data Pipeline is not available in the TiDB Cloud console yet. To use a data pipeline, you need to set it up manually. |
 | {{{ .essential }}} | Data Pipeline is not available in the TiDB Cloud console yet. To use a data pipeline, you need to set it up manually. |
+
 </CustomContent>
 
 > **Note:**

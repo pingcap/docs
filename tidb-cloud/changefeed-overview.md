@@ -12,7 +12,7 @@ TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data servic
 </CustomContent>
 <CustomContent plan="premium,byoc">
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, {{{ .premium }}} and {{{ .byoc }}} support streaming data to Apache Kafka and MySQL via changefeeds.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, {{{ .premium }}} and {{{ .byoc }}} support streaming data to Apache Kafka, MySQL, and cloud storage via changefeeds.
 
 </CustomContent>
 
@@ -45,6 +45,7 @@ To create a changefeed, refer to the tutorials:
 
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
 </CustomContent>
 <CustomContent plan="dedicated">
