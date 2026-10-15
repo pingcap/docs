@@ -22,7 +22,7 @@ With a credit card, you can set higher limits and continue with pay-as-you-go us
 
 To view the current usage of a file system, go to its overview page in the [TiDB Cloud console](https://tidbcloud.com/) and check the **Usage** area. For usage details, click **Usage** in the left navigation pane.
 
-## When a free file system reaches a usage limit
+## When a file system reaches a usage limit
 
 When a file system reaches its storage or file count limit, existing files remain readable, but the file system stops accepting new writes. A single file cannot grow beyond the file size limit. The one-file-system-per-region limit applies when you create another file system in that region. The TiDB Cloud console shows a warning.
 
