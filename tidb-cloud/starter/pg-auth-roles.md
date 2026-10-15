@@ -9,7 +9,6 @@ PostgreSQL-compatible {{{ .starter }}} supports database roles, role attributes,
 
 This page describes database-level authentication and authorization. TiDB Cloud organization, project, and instance access is managed separately through TiDB Cloud Identity and Access Management.
 
-
 ## Create a role
 
 Use `CREATE ROLE ... LOGIN` to create a role that can connect to the database.
@@ -60,7 +59,6 @@ The following common role attributes are supported:
 | `BYPASSRLS` / `NOBYPASSRLS` | Controls whether the role bypasses row-level security policies. |
 
 Set the `BYPASSRLS` attribute only to trusted administrative or service roles.
-
 
 ## Grant table privileges
 

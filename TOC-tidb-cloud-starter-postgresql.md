@@ -110,4 +110,3 @@
   - [TiDB Cloud FAQs](/tidb-cloud/tidb-cloud-faq.md)
   - [PostgreSQL-Compatible TiDB Cloud Starter FAQs](/tidb-cloud/starter/pg-faq.md)
 - [Glossary](/tidb-cloud/tidb-cloud-glossary.md)
-

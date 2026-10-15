@@ -344,4 +344,3 @@ The following common DDL statements are also supported:
 | `CREATE COLLATION` / `DROP COLLATION` | Create or drop a collation. |
 | `CREATE EXTENSION` / `DROP EXTENSION` | Manage extensions provided by TiDB Cloud. |
 | `COMMENT ON` | Add comments to selected object types. |
-

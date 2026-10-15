@@ -7,7 +7,6 @@ summary: Learn how to view and configure PostgreSQL session parameters on Postgr
 
 PostgreSQL-compatible {{{ .starter }}} supports PostgreSQL-compatible session parameters that control transaction behavior, schema resolution, time zones, query timeouts, output formats, and other session settings.
 
-
 ## Set and view parameters
 
 Use `SET` to change a parameter for the current session:
@@ -182,7 +181,6 @@ SHOW transaction_isolation;
 SHOW transaction_read_only;
 ```
 
-
 ## Other accepted PostgreSQL parameters
 
 The following PostgreSQL-compatible parameters are also recognized:
@@ -268,7 +266,6 @@ Set it for the current session:
 SET default_text_search_config = 'simple';
 ```
 
-
 ## Vector search parameter
 
 The `hnsw.ef_search` parameter controls the HNSW candidate list size for the current session.
@@ -287,7 +284,6 @@ SET hnsw.ef_search = 100;
 
 The default value is `40`. A higher value can improve recall at the cost of additional query latency.
 
-
 ## Embedding parameter
 
 After you enable the `embedding` extension, the `embedding.dimensions` parameter controls the output dimension used by supported server-side embedding functions.
@@ -297,4 +293,3 @@ For example:
 ```sql
 SET embedding.dimensions = 512;
 ```
-
