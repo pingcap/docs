@@ -125,7 +125,7 @@
 | dataflow | 数据流 |  |
 | decompress | 解压缩 |  |
 | deferrable | 可延迟 | For PostgreSQL constraints, it means constraint checking can be deferred, not that it is currently deferred. Translate "deferrable constraint" as "可延迟约束". For transaction characteristics, use "可延迟". Keep the SQL keyword DEFERRABLE unchanged. |
-| deferred | 延迟 | For PostgreSQL constraints, it means checking is deferred until transaction commit. Translate "deferred constraint" as "延迟约束" and "deferred constraint checking" as "延迟约束检查". Distinguish it from deferrable (可延迟). Keep the SQL keyword DEFERRED unchanged. |
+| deferred | 延迟 | For PostgreSQL constraints, checking is deferred until transaction commit unless SET CONSTRAINTS changes the mode to IMMEDIATE, which checks pending changes immediately. Translate "deferred constraint" as "延迟约束" and "deferred constraint checking" as "延迟约束检查". Distinguish it from deferrable (可延迟). Keep the SQL keyword DEFERRED unchanged. |
 | dependency/dependencies | 依赖包 |  |
 | dependency | 依赖关系 |  |
 | delegated Vault token | Vault 委派 Token | In TiDB Cloud Filesystem Vault docs, it refers to a temporary token created from a grant. Use "Token" to match the UI. |
@@ -355,7 +355,7 @@
 | performance jitter | 性能抖动 |  |
 | performance overhead | 性能开销 |  |
 | performance tuning | 性能调优 |  |
-| permissive | 宽容 | For PostgreSQL RLS policies, translate "permissive policy" and "permissive policies" as "宽容策略". Applicable permissive policies are combined with OR. Outside this context, translate according to the meaning. Keep the SQL keyword PERMISSIVE unchanged. |
+| permissive | 宽松 | For PostgreSQL RLS policies, translate "permissive policy" and "permissive policies" as "宽松策略". Applicable permissive policies are combined with OR. Outside this context, translate according to the meaning. Keep the SQL keyword PERMISSIVE unchanged. |
 | persist (data) | 持久化存储（数据） | persist 与一般的 save（保存）不一样，持久化存储是将数据保存到硬盘中，使得在应用程序或机器重启后可以继续访问之前保存的数据。 |
 | persistent data | 持久化数据 |  |
 | pessimistic locking | 悲观锁 |  |
@@ -408,7 +408,7 @@
 | request | 请求 |  |
 | restart | 重启 |  |
 | restore | 恢复 | 可以作为名词 (noun) 或动词 (verb) 使用 |
-| restrictive | 限制 | For PostgreSQL RLS policies, translate "restrictive policy" and "restrictive policies" as "限制策略". Applicable restrictive policies are combined with AND. Outside this context, translate according to the meaning. Keep the SQL keyword RESTRICTIVE unchanged. |
+| restrictive | 限制性 | For PostgreSQL RLS policies, translate "restrictive policy" and "restrictive policies" as "限制性策略". Applicable restrictive policies are combined with AND. Outside this context, translate according to the meaning. Keep the SQL keyword RESTRICTIVE unchanged. |
 | retention period | 保留时间 |  |
 | return | 返回 |  |
 | return value | 返回值 |  |
@@ -433,7 +433,7 @@
 | scalability | 扩展性 |  |
 | scenario | 场景 |  |
 | schedule | 调度 |  |
-| schema | 数据库模式 | In PostgreSQL, when it refers to a namespace within a database, use "数据库模式", not "架构" or "表结构". When it refers to table definitions, such as "table schema" or schema exported by pg_dump, use "表结构" or "数据库结构" as appropriate. For a Parquet file schema, use "数据结构". Keep the feature name Schema Evolution in English. Keep SQL keywords, identifiers, and schema names unchanged. |
+| schema | 数据库模式 | In PostgreSQL, when it refers to a namespace within a database, use "数据库模式", not "架构" or "表结构". When it refers to database object definitions, such as "table schema" or definitions exported by `pg_dump --schema-only`, use "表结构" or "数据库结构" as appropriate. The `pg_dump --schema` option selects a namespace, so use "数据库模式" in that context. For a Parquet file schema, use "数据结构". Keep the feature name Schema Evolution in English. Keep SQL keywords, identifiers, and schema names unchanged. |
 | Schema Evolution | Schema Evolution | A feature that allows TiDB Cloud Lake to automatically add columns that exist in source files but are missing from the target table during `COPY INTO` file loads when `ENABLE_SCHEMA_EVOLUTION` is enabled. |
 | scope | 作用域 |  |
 | scoped token | 范围受限 Token | In TiDB Cloud Filesystem docs, it refers to a token limited by path, operation, and lifetime. Use "Token" to match the UI. |
@@ -485,7 +485,7 @@
 | synchronizing/syncing | 同步 |  |
 | syntactic sugar | 语法糖 | In computer science, syntactic sugar is syntax within a programming language that is designed to make things easier to read or to express. It makes the language "sweeter" for human use: things can be expressed more clearly, more concisely, or in an alternative style that some may prefer. |
 | syntax | 语法 |  |
-| system catalog | 系统目录 | In PostgreSQL, it refers to system metadata relations, including system tables and views. Do not translate it as "系统分类". |
+| system catalog | 系统目录 | In PostgreSQL, system catalogs are system tables that store metadata about database objects and internal state. Distinguish them from system views. Do not translate it as "系统分类". |
 | system variable | 系统变量 |  |
 | table schema | 表结构 |  |
 | target machine | （部署）目标机器 |  |
