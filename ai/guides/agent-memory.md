@@ -56,7 +56,7 @@ INSERT INTO agent_memory (user_id, kind, content, embedding) VALUES
 
 ## ステップ 3. トランザクションで古いメモリを置き換える {#step-3-replace-an-outdated-memory-in-a-transaction}
 
-ユーザーの preference が変わった場合は、古いメモリを無効化し、新しいメモリを書き込む処理を 1 つのトランザクションで行います。これにより、読み取り側が一部だけ適用された置き換えを見ることはありません。
+ユーザーの好みが変わった場合は、古いメモリを無効化し、新しいメモリを書き込む処理を 1 つのトランザクションで行います。これにより、読み取り側が一部だけ適用された置き換えを見ることはありません。
 
 同じユーザーに対して同時書き込みによって複数のアクティブな preference が作成されるのを防ぐには、[ユーザーごとにアクティブな preference を最大 1 つに制限する](#enforce-at-most-one-active-preference-per-user) で説明する一意制約を追加してください。
 
