@@ -73,7 +73,7 @@ Titan を有効にした後、RocksDB に保存されている既存のデータ
 
 書き込みプロセスを高速化したい場合は、tikv-ctl を使用して TiKV クラスター全体のデータを手動でコンパクションできます。詳細は[手動コンパクション](/tikv-control.md#compact-data-of-the-whole-tikv-cluster-manually)を参照してください。RocksDB から Titan への変換中はデータアクセスが継続的に行われるため、RocksDB のブロックキャッシュによってデータ変換プロセスが大幅に高速化されます。テストでは、tikv-ctl を使用することで、670 GiB の TiKV データを 1時間で Titan に変換できました。
 
-Titan BLOBファイル内の値は連続しておらず、Titanのキャッシュは値レベルであるため、コンパクション時にはBLOBキャッシュは役に立ちません。TitanからRocksDBへの変換速度は、RocksDBからTitanへの変換速度よりも桁違いに遅くなります。テストでは、TiKVノード上の800GiBのTitanデータをtikv-ctlのフルコンパクションでRocksDBに変換するのに12時間かかりました.
+Titan BLOBファイル内の値は連続しておらず、Titanのキャッシュは値レベルであるため、コンパクション時にはBLOBキャッシュは役に立ちません。TitanからRocksDBへの変換速度は、RocksDBからTitanへの変換速度よりも桁違いに遅くなります。テストでは、TiKVノード上の800GiBのTitanデータをtikv-ctlのフルコンパクションでRocksDBに変換するのに12時間かかりました。
 
 ## パラメータ {#parameters}
 

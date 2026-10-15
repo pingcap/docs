@@ -38,7 +38,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
       Max RCU が設定済みの既存の TiDB Cloud Premium インスタンスは、設定を変更しなくても引き続き実行されます。現在の値を維持することも、これをクリアして **Elastic Mode** に切り替えることもできます。
 
-      詳細は、[Create a TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium) を参照してください.
+      詳細は、[Create a TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium) を参照してください。
 
 ## 2026年9月29日 {#september-29-2026}
 
