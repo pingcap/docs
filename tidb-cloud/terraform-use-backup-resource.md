@@ -124,7 +124,7 @@ summary: "`tidbcloud_backup`リソースを使用してTiDB Cloudクラスター
     }
     ```
 
-6. 数分お待ちください。その後、 `terraform refersh`を使用してステータスを更新します。
+6. 数分お待ちください。その後、 `terraform refresh`を使用してステータスを更新します。
 
     ```
     $ terraform refresh

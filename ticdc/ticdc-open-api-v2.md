@@ -307,7 +307,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | `column_selectors`            | 列セレクターの構成。(オプション)                                                                                                            |
 | `csv`                         | CSV 構成。(オプション)                                                                                                               |
 | `date_separator`              | `STRING`型。ファイルディレクトリの日付区切り文字の種類を示します。値の選択肢は`none` 、 `year` 、 `month` 、 `day`です。`none`がデフォルト値で、日付が区切られないことを意味します。(オプション)    |
-| `dispatchers`                 | イベントディスパッチ用の構成配列。(オプション)                                                                                                     |
+| `dispatchers`                 | イベントディスパッチ用の設定配列。(オプション)                                                                                                     |
 | `encoder_concurrency`         | `INT`型。MQシンク内のエンコーダスレッドの数。デフォルト値は`16`です。（オプション）                                                                              |
 | `protocol`                    | `STRING`型。MQシンクの場合、メッセージのプロトコル形式を指定できます。現在サポートされているプロトコルは、 `canal-json` 、 `open-protocol` 、 `avro` 、 `debezium` 、 `simple`です。 |
 | `schema_registry`             | `STRING`型。スキーマレジストリアドレス。（オプション）                                                                                              |
@@ -376,7 +376,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 
 ### 例 {#example}
 
-次のリクエストは、ID が`test5`で、`sink_uri`が`blackhome://`であるレプリケーションタスクを作成します。
+次のリクエストは、ID が`test5`で、`sink_uri`が`blackhole://`であるレプリケーションタスクを作成します。
 
 ```shell
 curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'

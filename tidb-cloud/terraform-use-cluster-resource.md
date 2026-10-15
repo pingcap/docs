@@ -831,7 +831,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
    }
    ```
 
-6. 少し待ってから、コマンド`terraform refersh`で状態を更新します。最終的にステータスは`AVAILABLE`に変更されます。
+6. 少し待ってから、コマンド`terraform refresh`で状態を更新します。最終的にステータスは`AVAILABLE`に変更されます。
 
 これで、Terraform を使用してTiDB Cloud Dedicated クラスタを作成および管理できました。次に、 [`tidbcloud_backup`](/tidb-cloud/terraform-use-backup-resource.md)リソースでクラスタのバックアップを作成してみましょう。
 

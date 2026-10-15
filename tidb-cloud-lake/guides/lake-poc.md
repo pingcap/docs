@@ -3,7 +3,7 @@ title: TiDB Cloud Lake PoC ガイド
 summary: スキーママッピング、クラスターキー、reclustering、ブロックサイズ、マテリアライズドビューを使用して、代表的なワークロードで TiDB Cloud Lake を評価します。
 ---
 
-# TiDB Cloud Lake PoC ガイド <!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
+# TiDB Cloud Lake PoC ガイド
 
 このガイドでは、TiDB Cloud Premium インスタンスから TiDB Cloud Lake へのデータレプリケーションを主な例として、TiDB Cloud Lake の再現可能な概念実証（PoC）について説明します。代表的なワークロードに最も大きな影響を与える判断事項、すなわちオブジェクトストレージと PrivateLink 接続、スキーマ互換性、データレイアウト、オーバーラップのメンテナンス、ブロックサイズ、事前集計に焦点を当てています。
 

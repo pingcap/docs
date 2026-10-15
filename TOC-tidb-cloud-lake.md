@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD007 -->
 <!-- markdownlint-disable MD041 -->
 
-# Table of Contents <!--Corresponding EN commit: 98a43e43b8d02b1c0a405d0332dadbd055612466-->
+# 目次
 
 ## はじめに
 

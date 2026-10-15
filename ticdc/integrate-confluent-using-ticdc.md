@@ -124,7 +124,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
             ```shell
             Create changefeed successfully!
             ID: confluent-changefeed
-            Info: {... changfeed info json struct ...}
+            Info: {... changefeed info json struct ...}
             ```
 
         - コマンドを実行しても結果が返されない場合は、コマンドを実行したサーバーとConfluent Cloud間のネットワーク接続を確認してください。詳細は[Confluent Cloudへの接続をテストする](https://docs.confluent.io/cloud/current/networking/testing.html)を参照してください。

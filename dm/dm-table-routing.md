@@ -23,7 +23,7 @@ routes:
     target-table: "t"
     # extract-table, extract-schema, and extract-source are optional and
     # are required only when you need to extract information about sharded
-    # tables, sharded schemas, and source datatabase information.
+    # tables, sharded schemas, and source database information.
     extract-table:
       table-regexp: "t_(.*)"
       target-column: "c_table"

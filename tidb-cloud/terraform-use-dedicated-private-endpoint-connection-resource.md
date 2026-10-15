@@ -150,7 +150,7 @@ Terraform によって管理されていないTiDB Cloud Dedicated プライベ�
 
 1. 新しい`tidbcloud_dedicated_private_endpoint_connection`リソースのインポート ブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,dedicated_private_endpoint_connection_id`の形式に置き換えます。
+    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,node_group_id,private_endpoint_connection_id`の形式に置き換えます。
 
     ```
     import {
@@ -178,8 +178,8 @@ Terraform によって管理されていないTiDB Cloud Dedicated プライベ�
     次に、 `terraform apply`を実行してインフラストラクチャをインポートします。適用後の出力例は次のとおりです。
 
     ```shell
-    tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=aws-1934187953894000000,example]
-    tidbcloud_dedicated_private_endpoint_connection.example: Import complete [id=aws-19341879538940000000,example]
+    tidbcloud_dedicated_private_endpoint_connection.example: Importing... [id=10757937805044000000,1934178998036000000,1934214559409000000]
+    tidbcloud_dedicated_private_endpoint_connection.example: Import complete [id=10757937805044000000,1934178998036000000,1934214559409000000]
 
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```

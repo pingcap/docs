@@ -772,9 +772,9 @@ grafana_servers:
 
 - `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
 
-- `web_port` : AlertmanagerがWebサービスを提供するために使用するポートを指定します。デフォルト値は`9093`です。
+- `web_port` : AlertmanagerがWebサービスを提供するためのポートを指定します。デフォルト値は`9093`です。
 
-- `cluster_port` : Alertmanager間の通信ポートを指定します。デフォルト値は`9094`です。
+- `cluster_port` : 1つのAlertmanagerと他のAlertmanager間の通信ポートを指定します。デフォルト値は`9094`です。
 
 - `deploy_dir` : デプロイメントディレクトリを指定します。指定されていない場合、または相対ディレクトリとして指定された場合は、 `global`で設定された`deploy_dir`ディレクトリに従ってディレクトリが生成されます。
 

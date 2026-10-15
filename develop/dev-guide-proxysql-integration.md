@@ -38,7 +38,7 @@ TiDB と ProxySQL を連携させる最も一般的な方法は、アプリケ�
 
 ## 開発環境 {#development-environment}
 
-このセクションでは、開発環境で TiDB と ProxySQL を統合する方法について説明します。ProxySQL 統合を開始するには、すべての[前提条件](#prerequisite)を満たした後、TiDB のデプロイオプションに応じて次のいずれかのオプションを選択できます。
+このセクションでは、開発環境で TiDB と ProxySQL を統合する方法について説明します。ProxySQL 統合を開始するには、すべての[前提条件](#prerequisites)を満たした後、TiDB のデプロイオプションに応じて次のいずれかのオプションを選択できます。
 
 - オプション 1: [TiDB CloudとProxySQLを統合する](#option-1-integrate-tidb-cloud-with-proxysql)
 - オプション 2: [TiDB Self-ManagedをProxySQLと統合する](#option-2-integrate-tidb-self-managed-with-proxysql)

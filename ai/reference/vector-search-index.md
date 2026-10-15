@@ -87,21 +87,30 @@ LIMIT 10
 
 ## フィルター付きベクトルインデックスを使用する {#use-the-vector-index-with-filters}
 
-プレフィルタ（ `WHERE`句を使用）を含むクエリは、SQLセマンティクスに従ってK近傍検索を実行していないため、ベクトルインデックスを利用できません。例：
+`WHERE` フィルターをどこに置くかによって、ベクトル検索でベクトルインデックスを使用できるかどうかが決まります。2 つのパターンがあり、それぞれ精度と速度のトレードオフが逆になります。
+
+### ベクトル検索の前にフィルターする {#filter-before-the-vector-search}
+
+`WHERE` でフィルターしてから距離でソートするクエリは、一致する行の中だけで K 近傍を求めます。ベクトルインデックスはその問いに答えられないため、TiDB はテーブルをスキャンし、フィルターを適用し、一致する各行の距離を計算します。
 
 ```sql
--- For the following query, the `WHERE` filter is performed before KNN, so the vector index cannot be used:
+-- The WHERE filter is applied before the K-nearest-neighbor search, so the vector index is not used:
 
 SELECT * FROM vec_table
 WHERE category = "document"
+  AND VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]') IS NOT NULL
 ORDER BY VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]')
 LIMIT 5;
 ```
 
-フィルター付きのベクトルインデックスを使用するには、まずベクトル検索を使用して K近傍を照会し、次に不要な結果をフィルター処理します。
+距離が `NULL` の行を除外することで、結果は正確になります。つまり、フィルターに一致し、有効なコサイン距離を持つ最も近い 5 行、またはそのような行が 5 行未満の場合はそのすべてを取得します。`VEC_COSINE_DISTANCE()` は、入力ベクトルが `NULL` の場合や、ゼロベクトルのようにコサイン距離が未定義の場合に `NULL` を返します。この除外を行わないと、`NULL` 値は昇順では非 `NULL` 値より前にソートされ、結果の先頭を占めることがあります。コストはフィルターを通過する行数に応じて増加するため、このパターンは選択性の高いフィルターに適しています。
+
+### ベクトル検索の後にフィルターする {#filter-after-the-vector-search}
+
+ベクトルインデックスを使用するには、まずサブクエリで K 近傍を見つけてから、結果をフィルターします。
 
 ```sql
--- For the following query, the `WHERE` filter is performed after KNN, so the vector index cannot be used:
+-- The WHERE filter is applied after the K-nearest-neighbor search, so the query can use the vector index:
 
 SELECT * FROM
 (
@@ -110,9 +119,30 @@ SELECT * FROM
   LIMIT 5
 ) t
 WHERE category = "document";
-
--- Note that this query might return fewer than 5 results if some are filtered out.
 ```
+
+フィルターは近傍が見つかった後でそれらを除外するため、このクエリは 5 行未満、または 0 行を返すことがあります。その可能性を低くするには、サブクエリで必要数より多くの近傍を取得し、最終結果の件数を制限します。
+
+```sql
+SELECT * FROM
+(
+  SELECT *, VEC_COSINE_DISTANCE(embedding, '[1, 2, 3]') AS distance
+  FROM vec_table
+  ORDER BY distance
+  LIMIT 50
+) t
+WHERE category = "document"
+ORDER BY distance
+LIMIT 5;
+```
+
+より多くの近傍を取得すると 5 行を得られる可能性は高まりますが、保証はされません。内側の `LIMIT` は、通常フィルターによって何行除外されるかに基づいて選択してください。
+
+クエリがどちらのパターンを使用しているかを確認するには、そのクエリに対して `EXPLAIN` を実行し、`operator info` カラムに `annIndex:` があるかを確認します。詳細は、[ベクトルインデックスが使用されているかどうかを確認する](#check-whether-the-vector-index-is-used) を参照してください。
+
+> **Note:**
+>
+> パーティションテーブルにはベクトルインデックスを作成できません。ベクトルインデックス付きの `CREATE TABLE ... PARTITION BY` と、パーティションテーブルに対する `ALTER TABLE ... ADD VECTOR INDEX` は、どちらも `ERROR 8200 (HY000): Unsupported add columnar index: partition table is currently not supported` を返します。たとえばテナントごとにテーブルをパーティション化した場合、そのテーブルに対するベクトル検索では、ベクトルインデックスを使用せずに選択されたパーティションをスキャンします。
 
 ## インデックス構築の進行状況を確認する {#view-index-build-progress}
 

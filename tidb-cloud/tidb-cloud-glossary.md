@@ -168,8 +168,8 @@ TiDB Cloud は、[変更フィード](/tidb-cloud/changefeed-overview.md)の容�
 
 TiDB Cloud EssentialおよびTiDB Cloud Premium では、リクエストキャパシティユニット (RCU) は、 TiDB Cloud EssentialまたはTiDB Cloud Premium インスタンスにプロビジョニングされたコンピューティング容量を表す単位です。1 RCU は、1秒あたり一定数の RU を処理できる固定量のコンピューティングリソースを提供します。プロビジョニングする RCU の数によって、インスタンスのベースラインパフォーマンスとスループット容量が決まります。ただし、RCU の管理方法は、 TiDB Cloud EssentialとTiDB Cloud Premium で異なります。
 
-- TiDB Cloud Essential は、ワークロードに基づいて RCU を自動的にプロビジョニングします。QPS が増加すると、 TiDB Cloud はプロビジョニングされた RCU を動的にスケールアップしてパフォーマンスを維持します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
-- TiDB Cloud Premium では、ワークロードの RCU の最大数 ( `RCU_max` ) を指定できます。 TiDB Cloudは、リアルタイムの需要に基づいて、 `0.25 * RCU_max`から`RCU_max`の範囲内で容量を自動的にスケーリングします。詳細については、 [TiDB Cloud Premiumのリクエストユニットと容量](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
+- CLOUD.202603.x 以降で実行される TiDB Cloud Essential インスタンスは、**Elastic Mode** と **Limited Mode** をサポートします。Elastic Mode では、インスタンスは 2,000 RCU の固定ベースライン RCU を使用し、ワークロードの需要に基づいて容量をスケーリングします。Limited Mode では、最大 RCU を設定します。以前のバージョンのインスタンスでは、最小 RCU と最大 RCU の両方を設定します。詳細については、 [TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)を参照してください。
+- TiDB Cloud Premium は 2 つの容量モードをサポートします。**Elastic Mode** では、ベースライン RCU を設定し、ワークロードの需要が増加すると、TiDB Cloud はこのベースラインを超えて容量をスケーリングします。**Limited Mode** では、RCU の最大数 (`RCU_max`) を設定し、TiDB Cloud は `0.25 * RCU_max` から `RCU_max` の範囲内で容量を自動的にスケーリングします。詳細については、 [TiDB Cloud Premiumのリクエストユニットと容量](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=premium#request-units-and-capacity-in-premium)を参照してください。
 
 ### リクエストユニット（RU） {#request-unit-ru}
 

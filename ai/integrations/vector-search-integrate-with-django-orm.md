@@ -214,7 +214,7 @@ if TIDB_CA_PATH:
 
 #### ベクトル列を定義する {#define-a-vector-column}
 
-`tidb-django`は、ベクトル埋め込みをテーブルに格納するための`VectorField`を提供します。
+`django-tidb`は、ベクトル埋め込みをテーブルに格納するための`VectorField`を提供します。
 
 `embedding`という名前の列を持つテーブルを作成し、その列に3次元ベクトルを格納します。
 

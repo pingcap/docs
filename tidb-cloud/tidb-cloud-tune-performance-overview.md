@@ -81,7 +81,7 @@ TiDB Cloudコンソールには、ユーザー応答時間のトラブルシュ�
 
 SQL パフォーマンスチューニングの詳細については、 [SQLチューニングの概要](/tidb-cloud/tidb-cloud-sql-tuning-overview.md)を参照してください。
 
-#### ホットスポットの問題を解決する {#resolve-hotstpot-issues}
+#### ホットスポットの問題を解決する {#resolve-hotspot-issues}
 
 ホットスポットの問題は[Key Visualizerタブ](/tidb-cloud/tune-performance.md#key-visualizer)で確認できます。以下のスクリーンショットはヒートマップのサンプルです。マップの横軸は時間、縦軸はテーブルとインデックスです。明るい色はトラフィックが多いことを示します。ツールバーで読み取りトラフィックと書き込みトラフィックの表示を切り替えることができます。
 

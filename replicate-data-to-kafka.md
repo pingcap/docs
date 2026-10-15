@@ -65,7 +65,7 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
         ```shell
         Create changefeed successfully!
         ID: kafka-changefeed
-        Info: {... changfeed info json struct ...}
+        Info: {... changefeed info json struct ...}
         ```
 
     - コマンドを実行した後に結果が返されない場合は、コマンドを実行したサーバーとシンク URI で指定された Kafka マシン間のネットワーク接続を確認してください。

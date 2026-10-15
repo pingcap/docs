@@ -500,7 +500,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 ## 2022年6月21日 {#june-21-2022}
 
 - [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの作成に GCP リージョン`Taiwan`のサポートを追加します。
-- TiDB Cloudコンソールで[ユーザープロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles)をサポートします (名、最終時刻、会社名、国、電話番号を含む)。
+- TiDB Cloudコンソールで[ユーザープロファイルの更新](/tidb-cloud/manage-user-access.md#manage-user-profiles)をサポートします (名、姓、会社名、国、電話番号を含む)。
 - [**TiDBに接続する**](/tidb-cloud/connect-via-standard-connection.md)ダイアログで MySQL、MyCLI、JDBC、Python、Go、Node.js の接続文字列を指定すると、TiDB クラスターに簡単に接続できます。
 - データのインポート中にバケット URI からバケット領域を自動的に取得することをサポートし、そのような情報を入力する手間を省きます。
 

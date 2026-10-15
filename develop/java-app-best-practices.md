@@ -319,7 +319,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 </insert>
 ```
 
-このマッパーは`insert on duplicate key update`文を生成します。 "values"に続く`(?,?,?)`の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
+このマッパーは`insert on duplicate key update`文を生成します。 "values"に続く`(?,?,?)`の数は、渡されたリストの数によって決まります。最終的な効果は`rewriteBatchedStatements=true`を使用した場合と同様で、クライアントと TiDB 間の通信オーバーヘッドを効果的に削減します。
 
 前述のとおり、プリペアドステートメントの最大長が`prepStmtCacheSqlLimit`の値を超えると、キャッシュされないことにも注意する必要があります。
 
@@ -353,7 +353,7 @@ Cursor<Post> queryAllPost();
 
 - Simple: プリペアドステートメントは、実行ごとにJDBCに呼び出されます（JDBC設定項目`cachePrepStmts`が有効になっている場合、繰り返し実行されるプリペアドステートメントは再利用されます）。
 - Reuse: プリペアドステートメントは`executor`にキャッシュされるため、JDBC `cachePrepStmts`を使用せずにプリペアドステートメントの重複呼び出しを減らすことができます。
-- Batch: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は、まずバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。JDBCレイヤーで`rewriteBatchStatements`が有効になっている場合は、ステートメントの書き換えが試みられます。そうでない場合は、ステートメントは 1つずつ送信されます。
+- Batch: 各更新操作 ( `INSERT` / `DELETE` / `UPDATE` ) は、まずバッチに追加され、トランザクションがコミットされるか`SELECT`クエリが実行されるまで実行されます。JDBCレイヤーで`rewriteBatchedStatements`が有効になっている場合は、ステートメントの書き換えが試みられます。そうでない場合は、ステートメントは 1つずつ送信されます。
 
 通常、 `ExecutorType`のデフォルト値は`Simple`です。 `openSession`を呼び出すときは`ExecutorType`を変更する必要があります。バッチ実行の場合、トランザクション内で`UPDATE`または`INSERT`文の実行は非常に高速ですが、データの読み取りやトランザクションのコミットは遅くなる場合があります。これは正常な動作ですので、SQL クエリの遅延をトラブルシューティングする際には、この点に注意してください。
 

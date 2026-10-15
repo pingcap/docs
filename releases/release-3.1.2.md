@@ -14,7 +14,7 @@ TiDB バージョン: 3.1.2
 - TiKV
 
     - S3 と GCS を使用したバックアップと復元中のエラー処理の問題を修正 [#7965](https://github.com/tikv/tikv/pull/7965)
-    - 復元中に発生する`DefaultNotFound`エラーを修正する[#7838](https://github.com/tikv/tikv/pull/7938)
+    - 復元中に発生する`DefaultNotFound`エラーを修正する[#7938](https://github.com/tikv/tikv/pull/7938)
 
 - ツール
 

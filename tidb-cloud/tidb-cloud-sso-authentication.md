@@ -7,7 +7,7 @@ summary: Google、GitHub、または Microsoft アカウントを使用してTiD
 
 このドキュメントでは、迅速かつ便利な基本的なシングル サインオン (SSO) 認証を使用して[TiDB Cloudコンソール](https://tidbcloud.com/)にログインする方法について説明します。
 
-TiDB Cloudは、Google、GitHub、MicrosoftアカウントのSSO認証をサポートしています。SSO認証を使用してTiDB Cloudにログインする場合、IDと認証情報はサードパーティのGoogle、GitHub、Microsoftプラットフォームに保存されるため、TiDBコンソールを使用してアカウントのパスワードを変更したり、多要素認証（MFA）を有効にしたりすることはできません。
+TiDB Cloudは、Google、GitHub、MicrosoftアカウントのSSO認証をサポートしています。SSO認証を使用してTiDB Cloudにログインする場合、IDと認証情報はサードパーティのGoogle、GitHub、Microsoftプラットフォームに保存されるため、TiDB Cloudコンソールを使用してアカウントのパスワードを変更したり、多要素認証（MFA）を有効にしたりすることはできません。
 
 > **Note:**
 >

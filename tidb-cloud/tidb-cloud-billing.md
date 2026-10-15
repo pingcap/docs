@@ -203,6 +203,10 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 
 ## 支払方法 {#payment-method}
 
+> **Note:**
+>
+> 新しい TiDB Cloud アカウントにはそれぞれ無料トライアルが付属しています。これを利用するために、AWS Marketplace の無料トライアルにサブスクライブしたり、AWS の請求アカウントをリンクしたりする必要はありません。
+
 組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB Cloudの支払い情報を管理できます。それ以外の場合は、このセクションをスキップしてください。
 
 <CustomContent language="en,zh">
@@ -303,6 +307,10 @@ TiDB Cloudを初めてご利用になる方で、 TiDB Cloudアカウントを�
 
 <SimpleTab>
 <div label="AWS Marketplace">
+
+> **Note:**
+>
+> AWS Marketplace 経由で無料トライアルにサブスクライブするには、新しい TiDB Cloud アカウントを作成する必要があります。このトライアルサブスクリプションは既存のアカウントにリンクできません。すでに TiDB Cloud アカウントをお持ちで AWS 経由で支払いたい場合は、以下の請求アカウントのリンク手順に従ってください。
 
 TiDB CloudアカウントをAWSの請求アカウントにリンクするには、以下の手順に従ってください。
 

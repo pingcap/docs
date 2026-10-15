@@ -15,7 +15,7 @@ TiDBにおけるハイブリッド検索の一般的なワークフローは以�
 
 ![Hybrid Search](/media/vector-search/hybrid-search-overview.svg)
 
-このチュートリアルでは、埋め込みと再ランキングを標準でサポートする[pytidb](https://github.com/pingcap/pytidb) Python SDKを使用して、TiDBでハイブリッド検索を行う方法を説明します。pytidbの使用は完全に任意です。SQLを直接使用して検索を実行し、独自の再ランキングモデルを自由に利用することもできます。
+このチュートリアルでは、埋め込みと再ランキングを標準でサポートする[pytidb](https://github.com/pingcap/pytidb) Python SDKを使用して、TiDBでハイブリッド検索を行う方法を説明します。pytidbの使用は完全に任意です。SQLを直接使用して検索を実行し、独自の再ランキングモデルを自由に利用することもできます。完全にSQLで記述されたハイブリッド検索については、[SQL によるハイブリッド検索](/ai/guides/vector-search-hybrid-search-sql.md)を参照してください。
 
 ## 前提条件 {#prerequisites}
 

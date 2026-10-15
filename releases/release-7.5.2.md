@@ -29,7 +29,7 @@ TiDB バージョン: 7.5.2
     - MPP ロードバランシング中にリージョンのないストアを削除する [#52313](https://github.com/pingcap/tidb/issues/52313) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - PD からリージョンを一括ロードすることをサポートし、大規模なテーブルをクエリするときに KV 範囲からリージョンへの変換プロセスを高速化します。 [#51326](https://github.com/pingcap/tidb/issues/51326) @[SeaRise](https://github.com/SeaRise)
     - `Resource Control`監視ページで、各リソースグループの最大 RU 消費率を表示する新しいパネル`RU(Max)`を追加します。 [#49318](https://github.com/pingcap/tidb/issues/49318) @[nolouch](https://github.com/nolouch)
-    - 同期ロードパフォーマンスを改善し、統計情報のロードのレイテンシーを削減します[#52994](https://github.com/pingcap/tidb/issues/52294) @[hawkingrei](https://github.com/hawkingrei)
+    - 同期ロードパフォーマンスを改善し、統計情報のロードのレイテンシーを削減します[#52294](https://github.com/pingcap/tidb/issues/52294) @[hawkingrei](https://github.com/hawkingrei)
     - 統計初期化の同時実行性を高めて起動を高速化します[#52466](https://github.com/pingcap/tidb/issues/52466) [#52102](https://github.com/pingcap/tidb/issues/52102) [#52553](https://github.com/pingcap/tidb/issues/52553) @[hawkingrei](https://github.com/hawkingrei)
 
 - TiKV

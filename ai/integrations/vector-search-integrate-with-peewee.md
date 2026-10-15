@@ -210,7 +210,7 @@ db = MySQLDatabase(
 
 #### ベクトル列を定義する {#define-a-vector-column}
 
-`peewee_demo_documents`という名前の列を持つテーブルを作成し、その列に3次元ベクトルを格納します。
+`peewee_demo_documents`という名前のテーブルを作成し、3次元ベクトルを格納するカラムを定義します。
 
 ```python
 class Document(Model):

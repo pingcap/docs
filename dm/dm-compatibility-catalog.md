@@ -12,6 +12,8 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 - **未テスト**：DMはMySQLプロトコルおよびbinlogとの互換性を目指していますが、DMのテストマトリックスにはすべてのMySQLフォークやバージョンが含まれているわけではありません。フォークやバージョンがMySQL互換のプロトコルとbinlogフォーマットを使用している場合は動作するはずですが、使用前にご自身の環境で互換性を確認する必要があります。
 - **互換性なし**：DMには既知のブロッキング問題があるため、本番での使用は推奨されません。
 
+これらの互換性レベルは検証の成熟度を示すものです。サポートの応答時間やバグ修正を約束するものではありません。問題が発生した場合は、[GitHub](https://github.com/pingcap/tiflow/issues)で報告できます。
+
 ## データソース {#data-sources}
 
 | データソース                   | 互換性レベル                           | 注記                                                                                                                                           |
@@ -21,11 +23,18 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 | MySQL 5.7                | GA                               |                                                                                                                                              |
 | MySQL 8.0                | GA                               | [binlogトランザクション圧縮（ `Transaction_payload_event` ）](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)はサポートしません。 |
 | MySQL 8.1～8.3            | テストされていません                       | [binlogトランザクション圧縮（ `Transaction_payload_event` ）](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)はサポートしません。 |
-| MySQL 8.4                | Experimental（TiDB v8.5.6以降でサポート） | [binlogトランザクション圧縮（ `Transaction_payload_event` ）](https://dev.mysql.com/doc/refman/8.4/en/binary-log-transaction-compression.html)はサポートしません。 |
+| MySQL 8.4                | Experimental（TiDB v8.5.6以降でサポート） | [binlogトランザクション圧縮（ `Transaction_payload_event` ）](https://dev.mysql.com/doc/refman/8.4/en/binary-log-transaction-compression.html)はサポートしません。[MySQL 8.4に関する注記](#mysql-84-notes)を参照してください。 |
 | MySQL 9.x                | テストされていません                       |                                                                                                                                              |
 | MariaDB &lt; 10.1.2      | 互換性がない                           | 時間型のbinlogとは互換性がありません。                                                                                                                       |
 | MariaDB 10.1.2 ～ 10.5.10 | Experimental                     |                                                                                                                                              |
 | MariaDB &gt; 10.5.10     | テストされていません                       | [事前チェック](/dm/dm-precheck.md)をバイパスした後は、ほとんどの場合に機能すると予想されます。 [MariaDBに関する注記](#mariadb-notes)を参照してください。                                          |
+
+### MySQL 8.4に関する注記 {#mysql-84-notes}
+
+MySQL 8.4ソースのサポートはGAではなく、**実験的**です。本番環境で使用する前に、使用するソースの正確なバージョン、DMのバージョン、および移行設定との互換性を確認してください。使用予定の移行モードを検証し、データ整合性を確認してください。
+
+- 増分レプリケーションでは、`binlog_transaction_compression=OFF`を設定してください。DMは圧縮されたbinlogトランザクションイベントをサポートしていません。
+- ソースでタグ付きGTIDを使用している場合は、移行前に使用するDMバージョンとの互換性を確認してください。タグ付きGTIDについては、さらに互換性テストが必要です。詳細については、[タグ付きGTIDに関するissue](https://github.com/pingcap/tiflow/issues/12629)および[互換性テストのトラッカー](https://github.com/pingcap/tiflow/issues/12412)を参照してください。
 
 ### 外部キーの`CASCADE`操作 {#foreign-key-cascade-operations}
 

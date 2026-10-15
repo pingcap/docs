@@ -8,6 +8,38 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年10月13日 {#october-13-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential で、Max RCU を設定せずにインスタンスを作成したり、その容量を更新したりできるようになりました。この機能は、TiDB バージョン `CLOUD.202603.x` 以降を実行する TiDB Cloud Essential インスタンスで利用できます。
+
+        - 新しい TiDB Cloud Essential インスタンスを作成するときのデフォルトモードは **Elastic Mode** です。このモードでは、TiDB Cloud がワークロードに基づいてバックエンドリソースを自動的に割り当てます。一貫して 100,000 RCU を超える RCU を必要とするワークロードの場合は、潜在的なパフォーマンスのボトルネックを回避するために TiDB Cloud Premium へのアップグレードを検討してください。
+        - 最大容量の制限を設定する必要がある場合は、**Limited Mode** に切り替えることができます。
+
+      Max RCU が設定済みの既存の TiDB Cloud Essential インスタンスは、設定を変更しなくても引き続き実行されます。現在の値を維持することも、これをクリアして **Elastic Mode** に切り替えることもできます。
+
+      詳細は、[Create a TiDB Cloud Essential instance](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=essential) を参照してください。
+
+    - TiDB Cloud Essential で手動バックアップがサポートされるようになりました。これらの手動バックアップは、明示的に削除するまで保持されます。
+
+      この機能は、TiDB バージョン `CLOUD.202603.x` 以降を実行する TiDB Cloud Essential インスタンスで利用できます。
+
+      手動バックアップを作成するには、[Manual backups](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#manual-backups) を参照してください。
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium で、Max RCU を設定せずにインスタンスを作成したり、その容量を更新したりできるようになりました。
+
+        - 新しい TiDB Cloud Premium インスタンスを作成するときのデフォルトモードは **Elastic Mode** です。このモードでは、TiDB Cloud がワークロードに基づいてバックエンドリソースを自動的に割り当てます。Elastic Mode では、ベースラインRCUを設定して、最小プロビジョニング容量と最小課金容量を指定できます。RCU 消費アラートがサポートされており、容量のスケーリングに応じた使用量を監視するためにカスタムしきい値を設定できます。
+        - 最大容量の制限を設定する必要がある場合でも、引き続き **Limited Mode** を使用できます。
+
+      Max RCU が設定済みの既存の TiDB Cloud Premium インスタンスは、設定を変更しなくても引き続き実行されます。現在の値を維持することも、これをクリアして **Elastic Mode** に切り替えることもできます。
+
+      詳細は、[Create a TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium) を参照してください。
+
 ## 2026年9月29日 {#september-29-2026}
 
 **一般的な変更**

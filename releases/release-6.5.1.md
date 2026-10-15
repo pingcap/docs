@@ -90,7 +90,7 @@ TiDB バージョン: 6.5.1
     - テーブルの主キーに`ENUM`列が含まれている場合にTTLタスクが失敗する問題を修正しました [#40456](https://github.com/pingcap/tidb/issues/40456) @[lcwangchao](https://github.com/lcwangchao)
     - 一意インデックスを追加するときに TiDB がパニックを起こす問題を修正しました [#40592](https://github.com/pingcap/tidb/issues/40592) @[tangenta](https://github.com/tangenta)
     - 同じテーブルを同時に切り捨てるときに、一部の切り捨て操作が MDL によってブロックされない問題を修正[#40484](https://github.com/pingcap/tidb/issues/40484) @[wjhuang2016](https://github.com/wjhuang2016)
-    - 動的トリミングモードでパーティションテーブルにグローバルバインディングが作成された後にTiDBが再起動できない問題を修正しました [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
+    - 動的プルーニングモードでパーティションテーブルにグローバルバインディングが作成された後にTiDBが再起動できない問題を修正しました [#40368](https://github.com/pingcap/tidb/issues/40368) @[Yisaer](https://github.com/Yisaer)
     - "cursor read"メソッドを使用してデータを読み取ると、GC のためにエラーが返される可能性がある問題を修正しました。 [#39447](https://github.com/pingcap/tidb/issues/39447) @[zyguan](https://github.com/zyguan)
     - `SHOW PROCESSLIST` の結果で`EXECUTE`情報が null になる問題を修正しました [#41156](https://github.com/pingcap/tidb/issues/41156) @[YangKeao](https://github.com/YangKeao)
     - `globalMemoryControl`がクエリを強制終了しているときに、 `KILL`操作が終了しない可能性がある問題を修正しました [#41057](https://github.com/pingcap/tidb/issues/41057) @[wshwsh12](https://github.com/wshwsh12)

@@ -102,7 +102,7 @@ TiDB バージョン: 6.5.6
     - raftstore-applys が継続的に増加するデータエラーを修正しました [#15371](https://github.com/tikv/tikv/issues/15371) @[Connor1996](https://github.com/Connor1996)
     - オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサのリクエストがタイムアウトする問題を修正しました [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
     - `lz4-sys`のバージョンを 1.9.4 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
-    - `tokio`のバージョンを 6.5 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[LykxSassinator](https://github.com/LykxSassinator)
+    - `tokio-timer`をアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[LykxSassinator](https://github.com/LykxSassinator)
     - `flatbuffer` を削除してセキュリティ問題を修正 [#15621](https://github.com/tikv/tikv/issues/15621) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - TiKVストアがネットワーク分断されているときにresolved-tsの遅延が増加する問題を修正しました [#15679](https://github.com/tikv/tikv/issues/15679) @[hicqu](https://github.com/hicqu)
     - TiKV を再起動したときに、適用されていないRaftログが多数存在すると TiKV OOM が発生する問題を修正しました[#15770](https://github.com/tikv/tikv/issues/15770) @[overvenus](https://github.com/overvenus)

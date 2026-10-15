@@ -20,6 +20,7 @@ summary: TiDB Cloud Data Pipeline における DDL、DML、および TiDB から
 | `ADD COLUMN ... NOT NULL DEFAULT ...` | ✅ |  |
 | `DROP COLUMN` | ✅ |  |
 | `RENAME COLUMN` | ✅ |  |
+| `TRUNCATE` | ✅ |  |
 | `MODIFY COLUMN` | ⚠️ 部分サポート | 以下に示す Schema Evolution のケースのみサポートされます。その他の変換は保証されず、下流での取り込みをブロックする可能性があります。 |
 
 ### サポートされる `MODIFY COLUMN` 変換 {#supported-modify-column-conversions}

@@ -178,7 +178,7 @@ summary: "`tidbcloud_restore` リソースを使用して復元タスクを作�
 
     復元タスクのステータスは`PENDING` 、クラスターのステータスは`INITIALIZING`であることがわかります。
 
-5. 数分お待ちください。その後、 `terraform refersh`を使用してステータスを更新してください。
+5. 数分お待ちください。その後、 `terraform refresh`を使用してステータスを更新してください。
 
 6. クラスターのステータスが`AVAILABLE`に変わると、復元タスクは`RUNNING`になり、最終的に`SUCCESS`になります。
 
