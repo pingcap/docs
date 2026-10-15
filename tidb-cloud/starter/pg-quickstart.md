@@ -10,7 +10,7 @@ This tutorial guides you through creating and connecting to a PostgreSQL-compati
 
 > **Note:**
 >
-> PostgreSQL-compatible TiDB Cloud Starter is currently available in public preview. 
+> PostgreSQL-compatible TiDB Cloud Starter is currently available in public preview.
 
 Additionally, you can try out TiDB features on [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start).
 

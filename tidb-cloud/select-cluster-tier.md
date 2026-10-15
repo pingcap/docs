@@ -43,7 +43,7 @@ TiDB Cloud Starter supports the following compatibility modes:
 
 - **MySQL-compatible**: provides MySQL protocol compatibility. Each eligible instance includes a monthly free quota, and you can enable consumption-based billing to continue using the instance after exceeding the free quota.
 
-- **PostgreSQL-compatible (limited public preview)**: provides PostgreSQL wire protocol compatibility. PostgreSQL-compatible Starter instances are currently free during the limited public preview.
+- **PostgreSQL-compatible (public preview)**: provides PostgreSQL wire protocol compatibility. PostgreSQL-compatible Starter instances are currently free during the public preview.
 
 The free plan is ideal for developers and small teams getting started with {{{ .starter }}}. Each compatibility mode includes a monthly free quota for storage and Request Units (RUs). The quota varies by compatibility mode.
 
@@ -84,7 +84,6 @@ For the first 10 PostgreSQL-compatible {{{ .starter }}} instances in your organi
 
 When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact support@pingcap.com to discuss your requirements.
 
-
 ### Instance Capacity Plan
 
 The following instance capacity limits apply to MySQL-compatible {{{ .starter }}} instances.
@@ -96,7 +95,6 @@ For each paid organization in TiDB Cloud, you can create up to 100 {{{ .starter 
 For paid organizations building agent platforms or other services that require a large number of instances and branches, TiDB Cloud offers the **Instance Capacity Plan**. With this plan, each paid TiDB Cloud organization can create more than five branches and is not subject to the limit of 100 {{{ .starter }}} instances and branches. To learn more and apply for the Instance Capacity Plan, fill out the [application form](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
 
 You will receive an email notification once your application for the TiDB Cloud Instance Capacity Plan is approved. 
-
 
 ## {{{ .essential }}} {#essential}
 

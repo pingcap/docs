@@ -9,7 +9,7 @@ PostgreSQL-compatible {{{ .starter }}} provides a predefined set of PostgreSQL e
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview. Extension availability and functionality might change during the preview.
+> PostgreSQL-compatible {{{ .starter }}} is currently in public preview. Extension availability and functionality might change during the preview.
 
 ## Supported extensions and capabilities
 
@@ -24,7 +24,6 @@ The following extensions and capabilities are currently supported:
 | `parquet` | Enables querying and importing Parquet data from supported URLs. | Run `CREATE EXTENSION parquet`. |
 | `http` | Enables HTTP requests directly from SQL. HTTP functions are available without registering the extension. | Built in. |
 | `uuid-ossp` | Provides common UUID generation functions, such as `uuid_generate_v4()`. | Built in. `CREATE EXTENSION "uuid-ossp"` can be used to register extension metadata. |
-
 
 ## Enable an extension
 
@@ -57,5 +56,5 @@ The following limitations apply:
 - Only extensions and built-in capabilities explicitly provided by TiDB Cloud are supported.
 - You cannot install arbitrary custom or third-party PostgreSQL extensions.
 - Some supported extensions provide only a subset of the behavior available in upstream PostgreSQL or the corresponding open-source extension.
-- Extension availability and behavior might change during the limited public preview.
+- Extension availability and behavior might change during the public preview.
 - `pg_cron` job scheduling is not supported during Public Preview. Although `CREATE EXTENSION pg_cron` might succeed, scheduling functions such as `cron.schedule()` are not available, and scheduled jobs cannot be executed. Querying `cron.job` might return an empty result, but this does not indicate that `pg_cron` is operational.

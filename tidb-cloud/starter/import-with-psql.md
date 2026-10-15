@@ -9,9 +9,9 @@ This document describes how to migrate an existing PostgreSQL database to a Post
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview.
+> PostgreSQL-compatible {{{ .starter }}} is currently in public preview. The preview is intended for development and evaluation and is not recommended for production workloads.
 >
-> During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `\copy`. This guide uses `pg_dump` to export schema and data from the source PostgreSQL database, and uses `psql` and `\copy` to import them into the target instance.
+> During the public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` and `\copy`. This guide uses `pg_dump` to export schema and data from the source PostgreSQL database, and uses `psql` and `\copy` to import them into the target instance.
 
 The overall migration procedure is as follows:
 
@@ -31,7 +31,7 @@ Before migration, make sure that you have the following:
 - The connection string of the target instance. To get the connection string, open the target instance in the TiDB Cloud console, click **Connect**, and select **PostgreSQL CLI**.
 - Network access from the machine where you run the migration commands to both the source PostgreSQL database and the target instance.
 
-Before migrating production workloads, review [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) and [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md).
+Before migrating, review [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) and [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md).
 
 ## Prepare tools
 
@@ -157,7 +157,6 @@ For a PostgreSQL database migration, import the schema before importing the data
 >
 > You can perform a trial migration without stopping source writes, but changes made after the export begins might not be included in the target database.
 
-
 ### Step 1: Export the schema
 
 Export the source schema in plain SQL format:
@@ -218,7 +217,7 @@ psql "<TARGET_DATABASE_URL>" \
 
 The `--no-owner` option omits object ownership statements, and `--no-privileges` omits `GRANT` and `REVOKE` statements.
 
-After importing the schema and data, grant the required table and sequence privileges to the application roles.
+After importing the schema and data, restore the required schema, table, and sequence privileges, as well as role memberships, for the application roles. For more information, see [PostgreSQL Authentication and Roles](/tidb-cloud/starter/pg-auth-roles.md).
 
 #### SERIAL and identity columns
 
@@ -295,11 +294,8 @@ If your table uses `SERIAL`, `BIGSERIAL`, or an explicitly created sequence, res
 While source writes are stopped, run the following query against the source PostgreSQL database to retrieve the sequence state:
 
 ```sql
-
 SELECT last_value, is_called
-
 FROM public.users_id_seq;
-
 ```
 
 After importing the table data, restore the sequence state in the target instance using `setval()`.
@@ -307,9 +303,7 @@ After importing the table data, restore the sequence state in the target instanc
 For example, if the source sequence has `last_value = 3` and `is_called = true`, run:
 
 ```sql
-
 SELECT setval('public.users_id_seq', 3, true);
-
 ```
 
 Replace the values with the actual `last_value` and `is_called` values retrieved from the source database.
@@ -366,7 +360,7 @@ Pay particular attention to application logic that depends on PostgreSQL feature
 
 Keep the following limitations in mind when planning a migration:
 
-- During the limited public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` with `pg_dump` `COPY` data streams and table-form `\copy`.
+- During the public preview, PostgreSQL-compatible {{{ .starter }}} supports migration using `psql` with `pg_dump` `COPY` data streams and table-form `\copy`.
 - PostgreSQL logical replication and streaming replication are not supported. For the final migration, stop source writes before exporting the schema and data, and keep them paused until migration validation and application cutover are complete.
 - The `COPY` protocol supports text and CSV formats. Binary `COPY` is not supported.
 - The SQL-level `COPY (SELECT ...) TO STDOUT` syntax is not supported. For individual-table migration, use the table form of `\copy`.

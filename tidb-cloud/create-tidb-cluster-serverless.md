@@ -36,9 +36,7 @@ If you do not have a TiDB Cloud account, click [here](https://tidbcloud.com/sign
 
 > **Note:**
 >
-> PostgreSQL-compatible TiDB Cloud Starter is currently available in limited public preview. To request access, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
->
-> After preview access is enabled, the **Compatibility Mode** section is displayed when you create a TiDB Cloud Starter instance.
+> PostgreSQL-compatible TiDB Cloud Starter is currently available in public preview. You can select the PostgreSQL compatibility mode when creating a Starter instance.
 
 ## Steps
 
@@ -54,7 +52,7 @@ If you have the `Organization Owner` or `Project Owner` role, you can create a T
 
     For MySQL-compatible workloads, you can start with a Starter instance and later upgrade to an Essential instance as your needs grow. For more information, see [Select a Plan](/tidb-cloud/select-cluster-tier.md).
 
-4. If you select **Starter** and PostgreSQL preview access is enabled for your organization, the **Compatibility Mode** section is displayed. Choose one of the following compatibility modes:
+4. If you select **Starter**, choose one of the following options in the **Compatibility Mode** section:
 
     - **MySQL Compatible**: the default compatibility mode for TiDB Cloud Starter.
     - **PostgreSQL Compatible**: provides PostgreSQL compatibility and is currently in public preview. This compatibility mode is available only for TiDB Cloud Starter.
@@ -63,7 +61,7 @@ If you have the `Organization Owner` or `Project Owner` role, you can create a T
 
 6. (Optional) To group this instance in a project for management, click **Group Your Instance in a Project**, and then select the target project for the instance. If there is no project in your organization, you can create one by clicking **Create a Project**.
 
-7. Configure or review the capacity and usage quota based on the selected plan and compatibility mode:
+7. Configure or review the capacity and usage quota based on the selected plan and compatibility mode. For the free usage quotas of each Starter compatibility mode, see [Select a Plan](/tidb-cloud/select-cluster-tier.md#starter).
 
     - **MySQL-compatible Starter**:
 
@@ -72,8 +70,9 @@ If you have the `Organization Owner` or `Project Owner` role, you can create a T
 
     - **PostgreSQL-compatible Starter**:
 
-        During Public Preview, each organization can create up to 10 free PostgreSQL-compatible Starter instances. Creating additional instances may result in usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact support@pingcap.com to discuss your requirements.
-        
+        During public preview, each organization can create up to 10 free PostgreSQL-compatible Starter instances.
+
+        When an instance reaches its free quota, excessive resource consumption might be subject to usage restrictions or service suspension. If you anticipate exceeding the free usage quota, contact support@pingcap.com to discuss your requirements.
 
     - **Essential**:
 

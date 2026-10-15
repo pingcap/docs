@@ -9,7 +9,7 @@ PostgreSQL-compatible {{{ .starter }}} provides pgvector-compatible vector stora
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} is currently in limited public preview.
+> PostgreSQL-compatible {{{ .starter }}} is currently in public preview.
 
 ## Enable vector search
 
@@ -246,7 +246,7 @@ The following functions are available:
 
 ## Limitations
 
-The following limitations apply to vector search during the limited public preview:
+The following limitations apply to vector search during the public preview:
 
 - IVFFlat indexes are not supported. HNSW is the supported approximate nearest-neighbor index type.
 - An HNSW index can contain only one vector column.
@@ -257,4 +257,3 @@ The following limitations apply to vector search during the limited public previ
 - Distance operations require vectors with matching dimensions.
 - The `embedding()` and `embed_text()` functions require a database user with sufficient privileges.
 - HNSW acceleration has query-shape restrictions. Queries that do not meet the requirements described in [When an HNSW index is used](#when-an-hnsw-index-is-used) use an exact sequential scan instead.
-

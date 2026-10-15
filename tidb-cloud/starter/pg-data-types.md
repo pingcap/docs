@@ -64,6 +64,7 @@ CREATE TABLE products (
     price NUMERIC(10, 2)
 );
 ```
+
 PostgreSQL-compatible {{{ .starter }}} supports `NUMERIC` with a 96-bit coefficient and up to 28 fractional digits.
 
 Declaring a larger precision, such as `NUMERIC(38,0)`, does not increase the supported runtime range. A declared scale greater than 28 is limited to 28 fractional digits.
@@ -173,7 +174,6 @@ CREATE TABLE sessions (
 );
 ```
 
-
 ## INET
 
 Use `INET` to store IPv4 or IPv6 host or network addresses:
@@ -237,7 +237,6 @@ VALUES (ARRAY['database', 'cloud', 'postgresql']);
 SELECT tags[1]
 FROM articles;
 ```
-
 
 ## Vector and full-text search types
 
