@@ -1,6 +1,6 @@
 ---
 title: Manage File Systems in TiDB Cloud Filesystem
-summary: Learn how to create, inspect, and delete file systems by using the TiDB Cloud console or CLI, rename them in the console, and check access with CLI.
+summary: Learn how to manage file systems using the TiDB Cloud console or TiDB Cloud CLI, rename them in the console, and check CLI access.
 aliases: ['/ai/manage-filesystem-resources']
 ---
 
@@ -17,9 +17,11 @@ For command syntax, flags, and output fields, see the [`ti fs` command reference
 
 ## Create a file system
 
-<SimpleTab>
+You can create a file system using the TiDB Cloud console or TiDB Cloud CLI.
 
-<div label="Console">
+<SimpleTab groupId="console-cli">
+
+<div label="Console" value="console">
 
 1. In the left navigation pane of the [TiDB Cloud console](https://tidbcloud.com), select your organization and click **File Systems**.
 2. In the upper-right corner, click **Create File System**.
@@ -32,7 +34,7 @@ For command syntax, flags, and output fields, see the [`ti fs` command reference
 
 </div>
 
-<div label="CLI">
+<div label="CLI" value="cli">
 
 Create a file system and wait until it is ready:
 
@@ -67,9 +69,11 @@ Setting `TI_FS_FILE_SYSTEM_ID` lets subsequent commands identify the target file
 
 ## List and inspect file systems
 
-<SimpleTab>
+You can list file systems and view their details using the TiDB Cloud console or TiDB Cloud CLI.
 
-<div label="Console">
+<SimpleTab groupId="console-cli">
+
+<div label="Console" value="console">
 
 1. In the left navigation pane of the [TiDB Cloud console](https://tidbcloud.com), select your organization and click **File Systems**.
 2. On the [**File Systems**](https://tidbcloud.com/filesystems) page, select a cloud provider and region to list file systems in that location. Use **Search Name** or **Status** to narrow the list.
@@ -80,7 +84,7 @@ To change its display name, click **...** in the upper-right corner of the overv
 
 </div>
 
-<div label="CLI">
+<div label="CLI" value="cli">
 
 List the file systems available in the current region:
 
@@ -124,13 +128,15 @@ For common access and connectivity issues, see [Troubleshoot TiDB Cloud Filesyst
 
 ## Delete a file system
 
+You can delete a file system using the TiDB Cloud console or TiDB Cloud CLI.
+
 > **Warning:**
 >
 > Deleting a file system permanently removes its remote data. Before deletion, stop applications that are using the file system and successfully unmount any active local mounts. For information about finishing pending writes safely, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
 
-<SimpleTab>
+<SimpleTab groupId="console-cli">
 
-<div label="Console">
+<div label="Console" value="console">
 
 1. In the TiDB Cloud console, open your organization's [**File Systems**](https://tidbcloud.com/filesystems) page, then select the **Cloud Provider** and **Region** for the target file system.
 2. In the row of the target file system, click **...**, and then select **Delete**.
@@ -140,7 +146,7 @@ Deletion is asynchronous. After the request is submitted, the file system might 
 
 </div>
 
-<div label="CLI">
+<div label="CLI" value="cli">
 
 Delete a file system by its ID:
 

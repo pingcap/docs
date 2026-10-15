@@ -20,9 +20,11 @@ The following prerequisites apply to CLI operations. If you only need to browse 
 
 ## View files
 
-<SimpleTab>
+You can browse files and directories and view their metadata using the TiDB Cloud console or TiDB Cloud CLI.
 
-<div label="Console">
+<SimpleTab groupId="console-cli">
+
+<div label="Console" value="console">
 
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**File Systems**](https://tidbcloud.com/filesystems) page for your organization, select the cloud provider and region, and then click the name of your target file system.
 2. In the left navigation pane, click **Files**. The page lists directories and files with their type, size, and modification time.
@@ -32,7 +34,7 @@ The console displays file metadata. To read file contents or change files and di
 
 </div>
 
-<div label="CLI">
+<div label="CLI" value="cli">
 
 List the contents of a directory:
 

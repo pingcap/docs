@@ -36,9 +36,11 @@ The CLI validates the token, extracts the file system ID from it, verifies conne
 
 ## Generate an owner token
 
-<SimpleTab>
+The TiDB Cloud console provides an owner token when you create a file system. To generate additional owner tokens, use the CLI.
 
-<div label="Console">
+<SimpleTab groupId="console-cli">
+
+<div label="Console" value="console">
 
 The TiDB Cloud console creates a default owner token when you create a file system. Its plaintext appears only in the **Your File System is Ready!** dialog.
 
@@ -46,7 +48,7 @@ For an additional owner token, use the **CLI** tab.
 
 </div>
 
-<div label="CLI">
+<div label="CLI" value="cli">
 
 When you create a file system with the CLI, it returns a non-expiring owner token, stores it locally, and uses it for later commands.
 
@@ -76,9 +78,11 @@ The CLI does not store the generated token locally by default. To store it local
 
 ## Generate and delegate a scoped token
 
-<SimpleTab>
+You can generate a scoped token using the TiDB Cloud console or TiDB Cloud CLI and provide it to another user, application, or agent.
 
-<div label="Console">
+<SimpleTab groupId="console-cli">
+
+<div label="Console" value="console">
 
 If you want to restrict a token to a specific directory, create that directory before generating the token.
 
@@ -99,7 +103,7 @@ Provide the token and file system region to the receiving environment. When moun
 
 </div>
 
-<div label="CLI">
+<div label="CLI" value="cli">
 
 On a trusted machine, use an owner token to generate a scoped token. Supply the owner token through `--fs-token` or `TI_FS_TOKEN`, or use the owner token stored locally for the selected file system.
 
@@ -135,13 +139,15 @@ For more information about scoped permissions and credential selection, see [Aut
 
 ## Inspect and change token status
 
+You can view token details and activate or deactivate tokens using the TiDB Cloud console or TiDB Cloud CLI.
+
 > **Warning:**
 >
 > Before deactivating, rotating, or deleting a token used by an active mount, stop applications that are writing to the mount and successfully unmount it. The CLI can detect known local mounts but cannot discover mounts on other machines. Coordinate with those machines before changing the token. For more information, see [Finish safely](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely).
 
-<SimpleTab>
+<SimpleTab groupId="console-cli">
 
-<div label="Console">
+<div label="Console" value="console">
 
 1. In the TiDB Cloud console, navigate to the [**File Systems**](https://tidbcloud.com/filesystems) page, select the cloud provider and region, and then click the name of your target file system.
 2. On the overview page of the file system, click **Access Tokens** in the left navigation pane.
@@ -150,7 +156,7 @@ For more information about scoped permissions and credential selection, see [Aut
 
 </div>
 
-<div label="CLI">
+<div label="CLI" value="cli">
 
 For an owner-token-only environment, set `TI_FS_TOKEN` to the owner token and `TI_REGION_CODE` to the file system's region before running the commands below. Keep management credentials separate from the scoped token you give to the recipient. A scoped token cannot manage other tokens.
 
@@ -176,9 +182,9 @@ With owner token authentication, these two commands can change only scoped token
 
 To rotate a token, use the CLI, because the TiDB Cloud console does not provide the `refresh-file-system-token` operation. To revoke a token, use either the CLI or the console.
 
-<SimpleTab>
+<SimpleTab groupId="console-cli">
 
-<div label="Console">
+<div label="Console" value="console">
 
 To replace a scoped token in the TiDB Cloud console, [create a new token](#generate-and-delegate-a-scoped-token) with the required path, permissions, and expiration. Distribute and validate the new token before retiring the old one. Then, go to the **Access Tokens** page of the target file system, locate the row of the old token, click **...**, and then select **Delete**.
 
@@ -186,7 +192,7 @@ To replace an owner token, [generate another owner token with the CLI](#generate
 
 </div>
 
-<div label="CLI">
+<div label="CLI" value="cli">
 
 Use [`refresh-file-system-token`](/ai/ti/reference/ti-fs-refresh-file-system-token.md) to rotate a file system token.
 
