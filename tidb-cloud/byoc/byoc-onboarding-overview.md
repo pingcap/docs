@@ -7,7 +7,7 @@ summary: Overview of the TiDB Cloud BYOC onboarding process, detailing the respo
 
 TiDB Cloud BYOC (Bring Your Own Cloud) is an enterprise solution that lets you run the data plane in your own cloud environment while retaining the fully managed experience of TiDB Cloud.
 
-The TiDB Cloud BYOC deployment process is a collaborative effort between your organization and the TiDB Cloud team. The process includes secure infrastructure preparation, automated provisioning, and comprehensive validation.
+The TiDB Cloud BYOC deployment process is a collaborative effort between your organization and the TiDB Cloud team. The process includes secure infrastructure preparation, automated provisioning, and comprehensive validation. To start BYOC onboarding, [contact Sales](https://www.pingcap.com/contact-us/).
 
 <!--TO confirm: might need to state that currently only AWS is supported and the word AWS is not used in title for future content scale.-->
 

@@ -1,15 +1,15 @@
 ---
-title: Kafka Consumer Integration Task (Beta)
+title: Kafka Consumer Integration Task (Preview)
 summary: Create a Kafka Consumer task to continuously consume messages from Kafka topics and save the message content to internal object storage (tenant Stage).
 ---
 
-# Kafka Consumer Integration Task (Beta)
+# Kafka Consumer Integration Task (Preview)
 
 This page describes how to create a Kafka Consumer task that continuously consumes messages from Kafka topics and saves the message content to internal object storage (tenant Stage).
 
 Unlike S3, MySQL, or PostgreSQL integration tasks, a Kafka Consumer task does not write directly to a regular target table. After the task is created and started, you can use the `@kafka_consumer/<task_name>/` stage path to view saved message objects and query their content with SQL.
 
-If you need to create reusable Kafka connection settings first, see [Kafka - Credentials (Beta)](/tidb-cloud-lake/guides/kafka-credentials.md).
+If you need to create reusable Kafka connection settings first, see [Kafka - Credentials (Preview)](/tidb-cloud-lake/guides/kafka-credentials.md).
 
 ## Use Cases
 

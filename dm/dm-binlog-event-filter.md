@@ -15,10 +15,10 @@ In the task configuration file, add the following configuration:
 filters:
   rule-1:
     schema-pattern: "test_*"
-    ​table-pattern: "t_*"
-    ​events: ["truncate table", "drop table"]
+    table-pattern: "t_*"
+    events: ["truncate table", "drop table"]
     sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
-    ​action: Ignore
+    action: Ignore
 ```
 
 Starting from DM v2.0.2, you can configure the binlog event filter in the source configuration file. For details, see [Upstream Database Configuration File](/dm/dm-source-configuration-file.md).

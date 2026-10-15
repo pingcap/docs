@@ -78,13 +78,10 @@ TiDB Cloud provides the following deployment options:
 
 - TiDB Cloud Starter
 
-    {{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling MySQL-compatible database and offers a generous free quota and consumption based billing once free limits are exceeded.
+    {{{ .starter }}} is a fully managed, multi-tenant TiDB offering. It delivers an instant, autoscaling database with MySQL compatibility, while PostgreSQL compatibility is available in public preview.
 
-    <CustomContent language="en,zh">
-
-    Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud.
-
-    </CustomContent>
+    - MySQL-compatible Starter offers a monthly free quota, with consumption-based billing available for usage beyond the free allowance. <CustomContent language="en,zh">Currently, {{{ .starter }}} is generally available on AWS and in public preview on Alibaba Cloud. </CustomContent>
+    - PostgreSQL-compatible Starter is available free of charge during public preview, subject to usage allowances. The preview is intended for development and evaluation and is not recommended for production workloads.
 
 - {{{ .essential }}}
 
@@ -120,15 +117,11 @@ TiDB Cloud provides the following deployment options:
 
     </CustomContent>
 
-<CustomContent plan="byoc">
-
 - {{{ .byoc }}}
 
     {{{ .byoc }}} is designed for large-scale production workloads that require greater control, security, and compliance. It enables you to run the data plane in your own AWS account while benefiting from TiDB Cloud's automated operations, elastic scalability, and enterprise-grade security.
 
-    Currently, {{{ .byoc }}} is in private preview on AWS.
-
-</CustomContent>
+    Currently, {{{ .byoc }}} is in public preview on AWS.
 
 - TiDB Cloud Dedicated
 
@@ -156,13 +149,9 @@ TiDB Cloud provides the following deployment options:
 
     You can connect to your TiDB Cloud resource via private endpoint connection or VPC peering connection. Refer to [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) or [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md) for details.
 
-<CustomContent plan="byoc">
-
 > **Note:**
 >
 > TiDB Cloud BYOC uses a different architecture from other TiDB Cloud deployment options. In BYOC, the TiDB Cloud control plane is managed by PingCAP, while the data plane runs in your own cloud account. For details, see the [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc).
-
-</CustomContent>
 
 ## Related resources
 

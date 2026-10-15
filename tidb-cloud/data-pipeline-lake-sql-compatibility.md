@@ -20,6 +20,7 @@ This document describes the DDL, DML, and column type support for TiDB Cloud Dat
 | `ADD COLUMN ... NOT NULL DEFAULT ...` | ✅ |  |
 | `DROP COLUMN` | ✅ |  |
 | `RENAME COLUMN` | ✅ |  |
+| `TRUNCATE` | ✅ |  |
 | `MODIFY COLUMN` | ⚠️ Partial support | Supported only for the schema-evolution cases listed below. Other conversions are not guaranteed and can block downstream consumption. |
 
 ### Supported `MODIFY COLUMN` conversions

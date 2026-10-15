@@ -51,7 +51,8 @@ Use the [`pytidb`](https://github.com/pingcap/pytidb) SDK or SQL to connect to T
 
 | Document | Description |
 | --- | --- |
-| [Hybrid Search Guide](/ai/guides/vector-search-hybrid-search.md) | Combine vector and full-text search for better results. |
+| [Hybrid Search via Python](/ai/guides/vector-search-hybrid-search.md) | Combine vector and full-text search using `pytidb`. |
+| [Hybrid Search via SQL](/ai/guides/vector-search-hybrid-search-sql.md) | Combine vector and full-text search in a single SQL query using Reciprocal Rank Fusion (RRF). |
 | [Hybrid Search Example](/ai/guides/hybrid-search-with-pytidb.md) | Hybrid search example with `pytidb`. |
 
 #### Auto embeddings

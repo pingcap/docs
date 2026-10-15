@@ -64,7 +64,11 @@ We are constantly filling in the feature gaps between {{{ .starter }}}/Essential
 
 ## Usage quota
 
-For each organization in TiDB Cloud, you can create a maximum of five [free {{{ .starter }}} instances](/tidb-cloud/select-cluster-tier.md#starter) by default. To create more {{{ .starter }}} instances, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md) for the usage.
+TiDB Cloud Starter provides free usage quotas for both MySQL-compatible and PostgreSQL-compatible instances. The free quotas and usage policies differ depending on the compatibility mode.
+
+### MySQL-compatible Starter
+
+By default, each organization can create up to five free MySQL-compatible {{{ .starter }}} instances. To create additional instances, you need to add a credit card and [set a monthly spending limit](/tidb-cloud/manage-serverless-spend-limit.md).
 
 For the first five {{{ .starter }}} instances in your organization, TiDB Cloud provides a free usage quota for each of them as follows:
 
@@ -74,10 +78,21 @@ For the first five {{{ .starter }}} instances in your organization, TiDB Cloud p
 
 The Request Unit (RU) is a unit of measurement used to track the resource consumption of a query or transaction. It is a metric that allows you to estimate the computational resources required to process a specific request in the database. The request unit is also the billing unit for {{{ .starter }}} service.
 
-Once a {{{ .starter }}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
+Once a MySQL-compatible {{{ .starter }}} instance reaches its usage quota, it immediately denies any new connection attempts until you [increase the quota](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) or the usage is reset upon the start of a new month. Existing connections established before reaching the quota will remain active but will experience throttling.
 
 To learn more about the RU consumption of different resources (including read, write, SQL CPU, and network egress), the pricing details, and the throttled information, see [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/).
 
 If you want to create a {{{ .starter }}} instance with an additional quota, you can set the monthly spending limit on the {{{ .starter }}} instance creation page. For more information, see [Create a {{{ .starter }}} instance](/tidb-cloud/create-tidb-cluster-serverless.md).
 
 After creating a {{{ .starter }}} instance, you can still check and edit the spending limit on the overview page of your {{{ .starter }}} instance. For more information, see [Manage Spending Limit for {{{ .starter }}} Instances](/tidb-cloud/manage-serverless-spend-limit.md).
+
+### PostgreSQL-compatible Starter (Public Preview)
+
+During public preview, each organization can create up to 10 free PostgreSQL-compatible Starter instances.
+
+For each of the first 10 PostgreSQL-compatible Starter instances, TiDB Cloud provides the following free usage allowance:
+
+- Row-based storage: 50 GiB
+- Request Units (RUs): 500 million RUs per month
+
+When a PostgreSQL-compatible {{{ .starter }}} instance reaches its free quota, excessive resource consumption may be subject to usage restrictions or service suspension. If you anticipate exceeding these allowances, please contact <a href="mailto:support@pingcap.com">support@pingcap.com</a> to discuss your requirements.

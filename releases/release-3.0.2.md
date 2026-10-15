@@ -124,7 +124,7 @@ TiDB Binlog
 TiDB Lightning
 
 - Fix the issue that `tikv_gc_life_time` fails to be changed back to its original value when 2 checksums are running at the same time [#218](https://github.com/pingcap/tidb-lightning/pull/218)
-- Add the configuration item check feature when starting, which will stop the Binlog service and report an error when an invalid item is found [#217](https://github.com/pingcap/tidb-lightning/pull/217)
+- Add the configuration item check feature when starting, which will stop TiDB Lightning and report an error when an invalid item is found [#217](https://github.com/pingcap/tidb-lightning/pull/217)
 
 ## TiDB Ansible
 

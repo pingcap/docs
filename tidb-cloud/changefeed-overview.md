@@ -10,15 +10,15 @@ summary: TiDB Cloud changefeed helps you stream data from TiDB Cloud to other da
 TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud Dedicated supports streaming data to Apache Kafka, MySQL, TiDB Cloud, and cloud storage via changefeeds.
 
 </CustomContent>
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
-TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, TiDB Cloud Premium supports streaming data to Apache Kafka and MySQL via changefeeds.
+TiDB Cloud changefeed helps you stream data from TiDB Cloud to other data services. Currently, {{{ .premium }}} and {{{ .byoc }}} support streaming data to Apache Kafka, MySQL, and cloud storage via changefeeds.
 
 </CustomContent>
 
 > **Note:**
 >
-> - Currently, TiDB Cloud only allows up to 100 changefeeds per <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
+> - Currently, TiDB Cloud only allows up to 100 changefeeds per <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>.
 > - Currently, TiDB Cloud only allows up to 100 table filter rules per changefeed.
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 > - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
@@ -33,7 +33,7 @@ To access the changefeed feature, take the following steps:
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of your target <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
+2. Click the name of your target <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent> to go to its overview page, and then click **Data** > **Changefeed** in the left navigation pane. The changefeed page is displayed.
 
 On the **Changefeed** page, you can create a changefeed, view a list of existing changefeeds, and operate the existing changefeeds (such as scaling, pausing, resuming, editing, and deleting a changefeed).
 
@@ -41,10 +41,11 @@ On the **Changefeed** page, you can create a changefeed, view a list of existing
 
 To create a changefeed, refer to the tutorials:
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 - [Sink to Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - [Sink to MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [Sink to cloud storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
 </CustomContent>
 <CustomContent plan="dedicated">
@@ -81,7 +82,7 @@ For {{{ .premium }}}, you can query the TiCDC Changefeed Capacity Units (CCUs) o
 
 <CustomContent plan="dedicated">
 
-You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by scaling up or down the changfeed.
+You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by scaling up or down the changefeed.
 
 > **Note:**
 >
@@ -91,20 +92,26 @@ You can change the TiCDC Replication Capacity Units (RCUs) of a changefeed by sc
 </CustomContent>
 <CustomContent plan="premium">
 
-You can change the TiCDC Changefeed Capacity Units (CCUs) of a changefeed by scaling up or down the changfeed.
+You can change the TiCDC Changefeed Capacity Units (CCUs) of a changefeed by scaling up or down the changefeed.
 
 </CustomContent>
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
+<CustomContent plan="byoc">
+
+You can scale a changefeed by changing the provisioned vCPUs of its TiCDC nodes.
+
+</CustomContent>
+
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>.
 2. Locate the corresponding changefeed you want to scale, and click **...** > **Scale Up/Down** in the **Action** column.
 3. Select a new specification.
 4. Click **Submit**.
 
-It takes about 10 minutes to complete the scaling process (during which the changfeed works normally) and a few seconds to switch to the new specification (during which the changefeed will be paused and resumed automatically).
+It takes about 10 minutes to complete the scaling process (during which the changefeed works normally) and a few seconds to switch to the new specification (during which the changefeed will be paused and resumed automatically).
 
 ## Pause or resume a changefeed
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>.
 2. Locate the corresponding changefeed you want to pause or resume, and click **...** > **Pause/Resume** in the **Action** column.
 
 ## Edit a changefeed
@@ -113,13 +120,13 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 >
 > TiDB Cloud currently only allows editing changefeeds in the paused status.
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>.
 2. Locate the changefeed you want to pause, and click **...** > **Pause** in the **Action** column.
 3. When the changefeed status changes to `Paused`, click **...** > **Edit** to edit the corresponding changefeed.
 
     TiDB Cloud populates the changefeed configuration by default. You can modify the following configurations:
 
-    <CustomContent plan="premium">
+    <CustomContent plan="premium,byoc">
 
     - Apache Kafka sink: all configurations.
     - MySQL sink: **MySQL Connection**, **Table Filter**, and **Event Filter**.
@@ -138,19 +145,35 @@ It takes about 10 minutes to complete the scaling process (during which the chan
 
 ## Duplicate a changefeed
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>.
 2. Locate the changefeed that you want to duplicate. In the **Action** column, click **...** > **Duplicate**.
 3. TiDB Cloud automatically populates the new changefeed configuration with the original settings. You can review and modify the configuration as needed.
 4. After confirming the configuration, click **Submit** to create and start the new changefeed.
 
 ## Delete a changefeed
 
-1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent>.
+1. Navigate to the [**Changefeed**](#view-the-changefeed-page) page of your target <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} or {{{ .byoc }}} instance</CustomContent>.
 2. Locate the corresponding changefeed you want to delete, and click **...** > **Delete** in the **Action** column.
 
 ## Changefeed billing
 
-To learn the billing for changefeeds in TiDB Cloud, see [Changefeed billing](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md).
+<CustomContent plan="dedicated">
+
+To learn about changefeed billing for TiDB Cloud Dedicated, see [Changefeed Billing for TiDB Cloud Dedicated](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md).
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+To learn about changefeed billing for {{{ .premium }}}, see [Changefeed Billing for {{{ .premium }}}](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md).
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+For {{{ .byoc }}}, changefeeds do not incur a separate feature charge. TiDB Cloud charges a service fee based on the provisioned vCPUs of the TiCDC nodes, and you are also responsible for the cloud provider costs of running those nodes in your cloud account.
+
+</CustomContent>
 
 ## Changefeed states
 

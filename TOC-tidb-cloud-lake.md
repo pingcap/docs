@@ -7,6 +7,7 @@
 
 - [Overview](/tidb-cloud-lake/lake-overview.md)
 - [Quick Start](/tidb-cloud-lake/lake-quick-start.md)
+- [Lake PoC Guide](/tidb-cloud-lake/guides/lake-poc.md)
 
 ## Guides
 
@@ -48,6 +49,7 @@
     - [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md)
     - [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md)
     - [Kafka - Credentials](/tidb-cloud-lake/guides/kafka-credentials.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB Data Source](/tidb-cloud-lake/guides/tidb-data-source.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - Integration Tasks
     - [Overview](/tidb-cloud-lake/guides/integration-tasks.md)
     - [Task Management](/tidb-cloud-lake/guides/task-management.md)
@@ -56,6 +58,7 @@
     - [MySQL Integration Task](/tidb-cloud-lake/guides/integrate-with-mysql.md)
     - [PostgreSQL Integration Task](/tidb-cloud-lake/guides/integrate-with-postgresql.md)
     - [Kafka Consumer Integration Task](/tidb-cloud-lake/guides/integrate-with-kafka.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [TiDB Integration Task](/tidb-cloud-lake/guides/integrate-with-tidb.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
 - Load Data
   - Work with Stages
     - [Stage Overview](/tidb-cloud-lake/guides/stage-overview.md)
@@ -131,8 +134,6 @@
   - [Fail-Safe](/tidb-cloud-lake/guides/fail-safe.md)
   - [Recovery from Operational Errors](/tidb-cloud-lake/guides/recovery-from-operational-errors.md)
 - Management
-  - [AI-Powered Features](/tidb-cloud-lake/guides/ai-powered-features.md)
-  - [Manage Costs](/tidb-cloud-lake/guides/manage-costs.md)
   - [Monitor Usage](/tidb-cloud-lake/guides/monitor-usage.md)
   - [Data Lifecycle](/tidb-cloud-lake/guides/data-lifecycle.md)
   - [Data Lineage](/tidb-cloud-lake/guides/data-lineage.md)

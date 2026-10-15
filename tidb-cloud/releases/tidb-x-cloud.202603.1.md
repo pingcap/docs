@@ -48,7 +48,7 @@ In `TiDB-X-CLOUD.202603.1`:
 
     In TiDB Cloud, SQL queries that take more than 300 milliseconds are considered slow queries by default. You can view slow queries on the [**Slow Query**](/tidb-cloud/tune-performance.md#slow-query) tab of the [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) page in the [TiDB Cloud console](https://tidbcloud.com/).
 
-    TiDB Cloud now provides more flexible control over slow query logging. You can use the [`tidb_slow_log_rules`](https://docs.pingcap.com/tidbcloud/system-variables/?plan=premium#tidb_slow_log_rules) system variable to define multi-dimensional slow query log output rules at the instance, session, and SQL levels, based on conditions such as `Query_time`, `Digest`, `Mem_max`, and `KV_total`. You can use the `WRITE_SLOW_LOG` hint to force slow query logging for specific SQL statements. This enables more flexible and fine-grained control over slow query logs.
+    TiDB Cloud now provides more flexible control over slow query logging. You can use the [`tidb_slow_log_rules`](https://docs.pingcap.com/tidbcloud/system-variables/?plan=premium#tidb_slow_log_rules) system variable to define multi-dimensional slow query log output rules at the session and SQL levels, based on conditions such as `Query_time`, `Digest`, `Mem_max`, and `KV_total`. You can use the `WRITE_SLOW_LOG` hint to force slow query logging for specific SQL statements. This enables more flexible and fine-grained control over slow query logs.
 
     For more information, see [documentation](https://docs.pingcap.com/tidbcloud/config-slow-query-trigger-rules/?plan=premium).
 

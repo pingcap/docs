@@ -18,6 +18,7 @@ const CLOUD_TOC_FILES = [
   "TOC-tidb-cloud.md",
   "TOC-tidb-cloud-premium.md",
   "TOC-tidb-cloud-starter.md",
+  "TOC-tidb-cloud-starter-postgresql.md",
   "TOC-tidb-cloud-essential.md",
   "TOC-tidb-cloud-byoc.md",
 ];
