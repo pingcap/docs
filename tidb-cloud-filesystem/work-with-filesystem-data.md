@@ -6,7 +6,7 @@ aliases: ['/ai/work-with-filesystem-data']
 
 # Work with Files and Directories in TiDB Cloud Filesystem
 
-In TiDB Cloud Filesystem, you can browse file and directory metadata in the TiDB Cloud console or use TiDB Cloud CLI (`ti`) to upload, download, read, organize, and search files without mounting the file system. For all commands and options, see the [`ti fs` reference](/ai/ti/reference/ti-filesystem.md).
+In TiDB Cloud Filesystem, you can browse file and directory metadata in the [TiDB Cloud console](https://tidbcloud.com/) or use TiDB Cloud CLI (`ti`) to upload, download, read, organize, and search files without mounting the file system. For all commands and options, see the [`ti fs` reference](/ai/ti/reference/ti-filesystem.md).
 
 If you [mount the file system](/tidb-cloud-filesystem/filesystem-mount.md) to your machine, you can work with files and directories as you do with a local file system.
 
