@@ -26,6 +26,7 @@ The following table lists the supported regions for TiDB Cloud CLI and shows whi
 | AWS | Tokyo | `aws-ap-northeast-1` | Supported | Not supported |
 | Alibaba Cloud | Singapore | `alicloud-ap-southeast-1` | Supported | Supported |
 | Google Cloud | South Carolina | `gcp-us-east1` | Not supported | Supported |
+| Microsoft Azure | Central US | `azure-centralus` | Not supported | Supported |
 
 If your configured region supports TiDB Cloud Starter but not TiDB Cloud Filesystem, you can manage Starter instances in that region. File system commands fail with an `unsupported endpoint` error.
 
