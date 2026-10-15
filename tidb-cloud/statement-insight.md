@@ -5,14 +5,14 @@ summary: 了解如何使用 Statement Insight 按 DB user、DB、table、SQL typ
 
 # Statement Insight（预览版）
 
-**Statement Insight** 为你的 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} and {{{ .byoc }}}</CustomContent> 实例提供 SQL 资源消耗的多维度分析。它按 **DB User**、**DB**、**Table**、**SQL Type** 或 **SQL Digest** 拆分 Request Unit（RU）消耗、延时和执行次数，并通过排行榜和趋势图让你一目了然地查看主要贡献项。你可以使用 Statement Insight 基于历史数据建立 RU 和性能基线，并定位导致 RU 消耗增加或性能变慢的原因。
+**Statement Insight** 为你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例提供 SQL 资源消耗的多维度分析。它按 **DB User**、**DB**、**Table**、**SQL Type** 或 **SQL Digest** 拆分 Request Unit（RU）消耗、延时和执行次数，并通过排行榜和趋势图让你一目了然地查看主要贡献项。你可以使用 Statement Insight 基于历史数据建立 RU 和性能基线，并定位导致 RU 消耗增加或性能变慢的原因。
 
 Statement Insight 是一个面向历史数据和基线分析的视图。
 
 > **Note:**
 >
-> Statement Insight 目前处于公开预览阶段，仅适用于 8 月 19 日及之后创建的有限数量的 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} and {{{ .byoc }}}</CustomContent> 实例，后续版本将逐步扩大可用范围。如需申请抢先体验，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
-> 对于尚未提供 Statement Insight 的实例，你仍可暂时使用 [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis) 标签页进行语句分析。
+> - Statement Insight 目前处于公测阶段，仅适用于 8 月 19 日及之后创建的有限数量的 {{{ .premium }}} 和 {{{ .byoc }}} 实例，后续版本将逐步扩大可用范围。如需申请抢先体验，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
+> - 对于尚未提供 Statement Insight 的实例，你仍可暂时使用 [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis) 标签页进行语句分析。
 
 ## 开始之前 {#before-you-begin}
 
@@ -23,7 +23,7 @@ Statement Insight 是一个面向历史数据和基线分析的视图。
 
 ## 打开 Statement Insight {#open-statement-insight}
 
-1. 登录 [TiDB Cloud console](https://tidbcloud.com/)，并进入你的 <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} or {{{ .byoc }}}</CustomContent> 实例。
+1. 登录 [TiDB Cloud console](https://tidbcloud.com/)，并进入你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 2. 在左侧导航栏中，点击 **Monitoring** > **Diagnosis**。
 3. 在 **Diagnosis** 页面上，点击 **Statement Insight** 标签页。
 

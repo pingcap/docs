@@ -1,11 +1,11 @@
 ---
-title: 通过 AWS PrivateLink 连接到 {{{ .premium }}}
-summary: 了解如何通过 AWS 的私有端点连接到你的 {{{ .premium }}} 实例。
+title: 通过 AWS PrivateLink 连接到 {{{ .premium }}} 或 {{{ .byoc }}}
+summary: 了解如何通过 AWS 的私有端点连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 ---
 
-# 通过 AWS PrivateLink 连接到 {{{ .premium }}}
+# 通过 AWS PrivateLink 连接到 {{{ .premium }}} 或 {{{ .byoc }}}
 
-本文档介绍如何通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) 连接到你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例。
+本文档介绍如何通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) 连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 
 > **Tip:**
 >
@@ -27,7 +27,7 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 ## 限制 {#restrictions}
 
 - 只有目标实例的 `Organization Owner`、`Project Owner` 或 `Instance Owner` 角色用户才能创建私有端点连接。
-- 私有端点和你要连接的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例必须位于**同一区域**。
+- 私有端点和你要连接的 {{{ .premium }}} 或 {{{ .byoc }}} 实例必须位于**同一区域**。
 
 ## 前提条件 {#prerequisites}
 
@@ -35,28 +35,28 @@ TiDB Cloud 支持通过 [AWS PrivateLink](https://aws.amazon.com/privatelink) �
 
 ## 设置私有端点连接并连接到你的实例 {#set-up-a-private-endpoint-connection-and-connect-to-your-instance}
 
-要通过私有端点连接到你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例，请按以下步骤操作：
+要通过私有端点连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例，请按以下步骤操作：
 
 1. [打开私有端点连接对话框](#step-1-open-the-private-endpoint-connection-dialog)
 2. [在 AWS 中创建 VPC endpoint](#step-2-create-a-vpc-endpoint-in-aws)
 3. [在 TiDB Cloud 中输入 VPC endpoint ID](#step-3-enter-the-vpc-endpoint-id-in-tidb-cloud)
 4. [启用 private DNS](#step-4-enable-private-dns)
-5. [连接到你的 {{{ .premium }}} <CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例](#step-5-connect-to-your-premium-instance)
+5. [连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例](#step-5-connect-to-your-premium-or-byoc-instance)
 
 如果你有多个实例，则需要对每个希望通过 AWS PrivateLink 连接的实例重复这些步骤。
 
 ### 第 1 步：打开私有端点连接对话框 {#step-1-open-the-private-endpoint-connection-dialog}
 
-1. 在 TiDB Cloud 控制台的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面上，点击目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的名称，进入其实例概览页面。
+1. 在 TiDB Cloud 控制台的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面上，点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其实例概览页面。
 2. 点击右上角的 **Connect**。此时会显示连接对话框。
 3. 在 **Connection Type** 下拉列表中，选择 **Private Endpoint**，然后点击 **Create Private Endpoint Connection**。
 4. 在 **Create AWS Private Endpoint Connection** 对话框中，等待直到显示 `TiDB Private Link Service is ready` 消息。
 5. 复制 **Endpoint Service Name**。
 
-> **注意：**
+> **Note:**
 >
 > - 如果你已经创建了一个私有端点连接，活动端点会显示在连接对话框中。若要创建更多私有端点连接，请通过左侧导航栏中的 **Settings** > **Networking** 进入 **Networking** 页面。
-> - 对于每个 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例，系统会在实例创建后 3 到 4 分钟自动创建对应的端点服务。
+> - 对于每个 {{{ .premium }}} 或 {{{ .byoc }}} 实例，系统会在实例创建后 3 到 4 分钟自动创建对应的端点服务。
 
 ### 第 2 步：在 AWS 中创建 VPC endpoint {#step-2-create-a-vpc-endpoint-in-aws}
 
@@ -88,7 +88,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --se
 >
 > - 运行命令之前，你需要先安装并配置 AWS CLI。详情请参见 [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)。
 >
-> - 如果你的服务跨越三个以上的可用区（AZ），你将收到一条错误消息，提示 VPC endpoint 服务不支持该子网所在的 AZ。出现此问题的原因是：在你所选 Region 中，除了你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例所在的 AZ 之外，还存在一个额外的 AZ。在这种情况下，你可以联系 [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
+> - 如果你的服务跨越三个以上的可用区（AZ），你将收到一条错误消息，提示 VPC endpoint 服务不支持该子网所在的 AZ。出现此问题的原因是：在你所选 Region 中，除了你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例所在的 AZ 之外，还存在一个额外的 AZ。在这种情况下，你可以联系 [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
 
 </div>
 <div label="Use AWS Console">
@@ -106,11 +106,11 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --se
 4. 在 **Service settings** 区域中，输入从 TiDB Cloud 复制的 **Endpoint Service Name**。
 5. 点击 **Verify service**。
 6. 在 **Network settings** 区域中，从下拉列表中选择你的 VPC。
-7. 在 **Subnets** 区域中，选择你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例所在的可用区。
+7. 在 **Subnets** 区域中，选择你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例所在的可用区。
 
     > **Tip:**
     >
-    > 如果你的服务跨越三个以上的可用区（AZ），你可能无法在 **Subnets** 区域中选择 AZ。这是因为在你所选的 Region 中，除了你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例所在的 AZ 之外，还存在一个额外的 AZ。在这种情况下，请联系 [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
+    > 如果你的服务跨越三个以上的可用区（AZ），你可能无法在 **Subnets** 区域中选择 AZ。这是因为在你所选的 Region 中，除了你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例所在的 AZ 之外，还存在一个额外的 AZ。在这种情况下，请联系 [PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)。
 
 8. 在 **Security groups** 区域中，正确选择你的安全组。
 
@@ -130,9 +130,9 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --se
 2. 在 **Create AWS Private Endpoint Connection** 对话框中，将你在 AWS 中创建的 VPC endpoint ID 输入到 **Your VPC Endpoint ID** 字段中。
 3. 点击 **Create Private Endpoint**。
 
-> **提示：**
+> **Tip:**
 >
-> 你可以在目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的 **Networking** 页面查看和管理私有端点连接。要访问此页面，请在左侧导航栏中点击 **Settings** > **Networking**。
+> 你可以在目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的 **Networking** 页面查看和管理私有端点连接。要访问此页面，请在左侧导航栏中点击 **Settings** > **Networking**。
 
 ### 步骤 4. 启用 private DNS {#step-4-enable-private-dns}
 
@@ -172,7 +172,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --se
 </div>
 </SimpleTab>
 
-### 步骤 5. 连接到你的 {{{ .premium }}} 实例 {#step-5-connect-to-your-premium-instance}
+### 第 5 步：连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例 {#step-5-connect-to-your-premium-or-byoc-instance}
 
 创建私有端点连接后，你会被重定向回连接对话框。
 
@@ -194,7 +194,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --se
 
 使用私有端点连接时，私有端点和私有端点服务的状态会显示在实例级别的 **Networking** 页面上：
 
-1. 进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的名称，进入其概览页面。
+1. 进入你组织的 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其概览页面。
 2. 在左侧导航栏中点击 **Settings** > **Networking**。
 
 私有端点的可能状态说明如下：
@@ -213,7 +213,7 @@ aws ec2 create-vpc-endpoint --vpc-id ${your_vpc_id} --region ${your_region} --se
 
 ## 故障排查 {#troubleshooting}
 
-### 启用 private DNS 后，我为什么仍然无法通过私有端点连接到 {{{ .premium }}} 实例？ {#i-cannot-connect-to-a-premium-instance-via-a-private-endpoint-after-enabling-private-dns-why}
+### 启用 private DNS 后，我无法通过私有端点连接到 {{{ .premium }}} 或 {{{ .byoc }}} 实例。为什么？ {#i-cannot-connect-to-a-premium-or-byoc-instance-via-a-private-endpoint-after-enabling-private-dns-why}
 
 你可能需要在 AWS Management Console 中正确设置 VPC endpoint 的安全组。为此，请前往 **VPC** > **Endpoints**，右键点击你的 VPC endpoint，然后选择 **Manage security groups**。确保所选安全组允许你的 EC2 实例通过端口 `4000` 或客户自定义端口进行入站访问。
 

@@ -39,6 +39,12 @@ TiDB Cloud 提供私有终端节点、VPC Peering 以及 IP 访问列表，用�
 
 </CustomContent>
 
+<CustomContent plan="byoc">
+
+使用 {{{ .byoc }}} 时，TiDB 数据面运行在你的云账户中。你可以使用云服务提供商的 IAM 策略、网络控制、加密设置和密钥管理能力来控制对数据面资源的访问，并满足你的安全性和合规性要求。
+
+</CustomContent>
+
 ## 数据库访问控制
 
 TiDB Cloud 提供基于用户和角色的访问控制机制，结合静态和动态权限。你可以为用户分配角色，以更细粒度地管理和分发权限。

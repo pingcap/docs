@@ -64,7 +64,7 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持几乎所有 TiDB 支持的 wo
 
 ## 使用配额
 
-对于 TiDB Cloud 中的每个组织，默认最多可创建 5 个 [免费 TiDB Cloud Starter 实例](/tidb-cloud/select-cluster-tier.md#starter)。如需创建更多 TiDB Cloud Starter 实例，你需要添加信用卡并为使用量 [设置每月 spending limit](/tidb-cloud/manage-serverless-spend-limit.md)。
+TiDB Cloud Starter 为 MySQL 兼容和 PostgreSQL 兼容实例都提供免费使用配额。免费配额和使用策略因兼容模式而异。
 
 对于组织中的前 5 个 TiDB Cloud Starter 实例，TiDB Cloud 为每个实例提供如下免费使用配额：
 
@@ -74,10 +74,41 @@ TiDB Cloud Starter 和 TiDB Cloud Essential 支持几乎所有 TiDB 支持的 wo
 
 Request Unit (RU) 是用于衡量 query 或 transaction 资源消耗的单位。它是一种指标，可以帮助你估算处理特定 request 在数据库中所需的计算资源。request unit 也是 TiDB Cloud Starter service 的计费单位。
 
-当 TiDB Cloud Starter 实例达到其使用配额后，将立即拒绝所有新的连接尝试，直到你 [提升配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新一月开始时使用量被重置。已建立的连接在达到配额前会保持活跃，但会受到限流。
+当 MySQL 兼容的 TiDB Cloud Starter 实例达到其使用配额后，将立即拒绝所有新的连接尝试，直到你 [提升配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新一月开始时使用量被重置。已建立的连接在达到配额前会保持活跃，但会受到限流。
 
 如需了解不同资源（包括 read、write、SQL CPU 和网络出口）的 RU 消耗、定价详情及限流信息，请参见 [TiDB Cloud Starter Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
 
 如果你希望创建配额更高的 TiDB Cloud Starter 实例，可以在 TiDB Cloud Starter 实例创建页面设置每月 spending limit。更多信息参见 [创建 TiDB Cloud Starter 实例](/tidb-cloud/create-tidb-cluster-serverless.md)。
 
 创建 TiDB Cloud Starter 实例后，你仍可在 TiDB Cloud Starter 实例的概览页面查看和 edit spending limit。更多信息参见 [管理 TiDB Cloud Starter 实例的 Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)。
+
+### MySQL 兼容 Starter {#mysql-compatible-starter}
+
+默认情况下，每个组织最多可以创建 5 个免费的 MySQL 兼容 {{{ .starter }}} 实例。如需创建更多实例，你需要添加信用卡并[设置每月 spending limit](/tidb-cloud/manage-serverless-spend-limit.md)。
+
+对于组织中的前 5 个 {{{ .starter }}} 实例，TiDB Cloud 为每个实例提供如下免费使用配额：
+
+- 行存储：5 GiB
+- 列存储：5 GiB
+- [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)：每月 5,000 万 RU
+
+Request Unit (RU) 是用于跟踪查询或事务资源消耗的计量单位。它是一种指标，可帮助你估算数据库中处理特定请求所需的计算资源。request unit 也是 {{{ .starter }}} 服务的计费单位。
+
+当 MySQL 兼容的 {{{ .starter }}} 实例达到其使用配额后，将立即拒绝所有新的连接尝试，直到你[提升配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)或新一月开始时使用量被重置。已在达到配额前建立的连接将保持活跃，但会受到限流。
+
+如需了解不同资源（包括读、写、SQL CPU 和网络出口）的 RU 消耗、定价详情及限流信息，请参见 [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
+
+如果你希望创建具有额外配额的 {{{ .starter }}} 实例，可以在 {{{ .starter }}} 实例创建页面设置每月 spending limit。更多信息，请参见[创建 {{{ .starter }}} 实例](/tidb-cloud/create-tidb-cluster-serverless.md)。
+
+创建 {{{ .starter }}} 实例后，你仍可在 {{{ .starter }}} 实例的概览页面查看和编辑 spending limit。更多信息，请参见[管理 {{{ .starter }}} 实例的 Spending Limit](/tidb-cloud/manage-serverless-spend-limit.md)。
+
+### PostgreSQL 兼容 Starter（公测） {#postgresql-compatible-starter-public-preview}
+
+在公测期间，每个组织最多可以创建 10 个免费的 PostgreSQL 兼容 Starter 实例。
+
+对于前 10 个 PostgreSQL 兼容 Starter 实例中的每一个，TiDB Cloud 提供以下免费使用配额：
+
+- 行存储：50 GiB
+- Request Units (RUs)：每月 5 亿 RU
+
+当 PostgreSQL 兼容的 {{{ .starter }}} 实例达到其免费配额后，超出的资源消耗可能会受到使用限制或服务暂停。如果你预计会超出这些配额，请联系 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 讨论你的需求。

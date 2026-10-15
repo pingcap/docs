@@ -5,32 +5,45 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 # Sink to Cloud Storage
 
-本文档介绍如何创建 changefeed，将数据从 <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent> 同步到云存储。
+本文档介绍如何创建 changefeed，将数据从 <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC</CustomContent> 同步到云存储。
 
 <CustomContent plan="dedicated">
 
-> **注意：**
+> **Note:**
 >
 > - 若要将数据从 {{{ .dedicated }}} 同步到云存储，请确保你的 TiDB 集群版本为 v7.1.1 或更高版本。如需将 TiDB Cloud Dedicated 集群升级到 v7.1.1 或更高版本，请[联系 TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
 > - 对于 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
 > - 对于 [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) 实例，changefeed 功能仅可按请求提供。更多信息，参见 [Changefeed](/tidb-cloud/essential-changefeed-overview.md)。
 > - 对于 [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) 实例，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium)。
+> - 对于 [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) 实例，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc)。
 
 </CustomContent>
 
 <CustomContent plan="premium">
 
-> **注意：**
+> **Note:**
 >
 > - 对于 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
 > - 对于 [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) 实例，changefeed 功能仅可按请求提供。更多信息，参见 [Changefeed](/tidb-cloud/essential-changefeed-overview.md)。
+> - 对于 [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) 实例，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc)。
 > - 对于 [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/)。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+> **Note:**
+>
+> - 对于 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
+> - 对于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例，changefeed 功能仅可按请求提供。更多信息，参见 [Changefeed](/tidb-cloud/essential-changefeed-overview.md)。
+> - 对于 [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) 实例，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium)。
+> - 对于 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群，参见 [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/)。
 
 </CustomContent>
 
 ## 限制
 
-- 每个 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent> 最多可创建 100 个 changefeed。
+- 每个 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC 实例</CustomContent> 最多可创建 100 个 changefeed。
 - 由于 TiDB Cloud 使用 TiCDC 建立 changefeed，因此具有与 [TiCDC 相同的限制](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)。
 - 如果待同步的表没有主键或非空唯一索引，则在某些重试场景下，由于同步过程中缺乏唯一约束，可能会导致下游插入重复数据。
 
@@ -48,6 +61,12 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 </CustomContent>
 
+<CustomContent plan="byoc">
+
+进入目标 {{{ .byoc }}} 实例的总览页面。在左侧导航栏点击 **Data** > **Changefeed**，点击 **Create Changefeed** 进入 **Destination** 页面，然后根据你的 {{{ .byoc }}} 实例所在的云服务商选择 **Amazon S3** 作为目标端。不同目标端的配置流程有所不同。
+
+</CustomContent>
+
 <SimpleTab>
 <div label="Amazon S3">
 
@@ -57,7 +76,7 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 如需使用 IAM Role 进行认证，请按以下步骤操作：
 
-1. 在 Amazon S3 的 **Destination** 页面，填写 **S3 URI**。确保 S3 bucket 与你的 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent> 处于同一 AWS 区域。
+1. 在 Amazon S3 的 **Destination** 页面，填写 **S3 URI**。确保 S3 bucket 与你的 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC 实例</CustomContent> 处于同一 AWS 区域。
 2. 在 **Bucket Access** 下选择 **AWS Role ARN**。
 3. 若需创建新的 Role ARN，点击 **Click here to create new one with AWS CloudFormation**。该模板会自动配置所需权限。
 
@@ -246,7 +265,7 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 </SimpleTab>
 
-点击 **Next**，建立从 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent> 到你的云存储的连接。TiDB Cloud 会自动测试并验证连接是否成功。
+点击 **Next**，建立从 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud Premium 实例</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC 实例</CustomContent> 到你的云存储的连接。TiDB Cloud 会自动测试并验证连接是否成功。
 
 - 若连接成功，将进入下一步配置。
 - 若连接失败，会显示连接错误，你需要处理该错误。错误解决后，点击 **Next** 重试连接。

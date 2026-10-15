@@ -10,15 +10,15 @@ summary: TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到�
 TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，TiDB Cloud Dedicated 支持通过 changefeed 将数据流式传输到 Apache Kafka、MySQL、TiDB Cloud 以及云存储。
 
 </CustomContent>
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
-TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，TiDB Cloud Premium 支持通过 changefeed 将数据流式传输到 Apache Kafka 和 MySQL。
+TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，{{{ .premium }}} 和 {{{ .byoc }}} 支持通过 changefeed 将数据流式传输到 Apache Kafka、MySQL 和云存储。
 
 </CustomContent>
 
-> **注意：**
+> **Note:**
 >
-> - 目前，TiDB Cloud 每个<CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>最多只允许创建 100 个 changefeed。
+> - 目前，TiDB Cloud 每个<CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>最多只允许创建 100 个 changefeed。
 > - 目前，TiDB Cloud 每个 changefeed 最多只允许配置 100 条表过滤规则。
 > - 对于 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例，changefeed 功能不可用。
 > - 对于 [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) 实例，changefeed 功能仅可按请求提供。更多信息，参见 [Changefeed](/tidb-cloud/essential-changefeed-overview.md)。
@@ -33,7 +33,7 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
     >
     > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标<CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的名称，进入其概览页面，然后在左侧导航栏点击 **Data** > **Changefeed**。此时会显示 changefeed 页面。
+2. 点击目标<CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的名称，进入其概览页面，然后在左侧导航栏点击 **Data** > **Changefeed**。此时会显示 changefeed 页面。
 
 在 **Changefeed** 页面，你可以创建 changefeed，查看已有 changefeed 列表，并对已有 changefeed 进行操作（如扩展、暂停、恢复、edit 和删除 changefeed）。
 
@@ -41,10 +41,11 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 
 要创建 changefeed，请参考以下教程：
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 - [同步到 Apache Kafka](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
 - [同步到 MySQL](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [同步到云存储](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
 </CustomContent>
 <CustomContent plan="dedicated">
@@ -95,7 +96,13 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 
 </CustomContent>
 
-1. 进入目标 TiDB <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
+<CustomContent plan="byoc">
+
+你可以通过更改其 TiCDC 节点的预配置 vCPU 来扩展 changefeed。
+
+</CustomContent>
+
+1. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
 2. 找到你要扩展的 changefeed，在 **Action** 列点击 **...** > **Scale Up/Down**。
 3. 选择新的规格。
 4. 点击 **Submit**。
@@ -104,7 +111,7 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 
 ## 暂停或恢复 changefeed
 
-1. 进入目标 TiDB <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
+1. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
 2. 找到你要暂停或恢复的 changefeed，在 **Action** 列点击 **...** > **Pause/Resume**。
 
 ## edit changefeed
@@ -113,13 +120,13 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 >
 > TiDB Cloud 目前仅允许对处于暂停状态的 changefeed 进行 edit。
 
-1. 进入目标 TiDB <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
+1. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
 2. 找到你要暂停的 changefeed，在 **Action** 列点击 **...** > **Pause**。
-3. 当 changefeed 状态变为 `Paused` 后，点击 **...** > **Edit** 以 edit 对应的 changefeed。
+3. 当 changefeed 状态变为 `Paused` 后，点击 **...** > **Edit** 以编辑对应的 changefeed。
 
     TiDB Cloud 会默认 populate changefeed 配置。你可以 edit 以下配置项：
 
-    <CustomContent plan="premium">
+    <CustomContent plan="premium,byoc">
 
     - Apache Kafka sink：所有配置项。
     - MySQL sink：**MySQL Connection**、**Table Filter** 和 **Event Filter**。
@@ -138,19 +145,35 @@ TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数�
 
 ## 复制 changefeed
 
-1. 进入目标 TiDB <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
+1. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
 2. 找到你要复制的 changefeed，在 **Action** 列点击 **...** > **Duplicate**。
-3. TiDB Cloud 会自动 populate 新 changefeed 的配置为原有设置。你可以根据需要 review 并 edit 配置。
+3. TiDB Cloud 会自动将新 changefeed 的配置填充为原有设置。你可以根据需要检查并修改配置。
 4. 确认配置后，点击 **Submit** 创建并启动新的 changefeed。
 
 ## 删除 changefeed
 
-1. 进入目标 TiDB <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
+1. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的 [**Changefeed**](#view-the-changefeed-page) 页面。
 2. 找到你要删除的 changefeed，在 **Action** 列点击 **...** > **Delete**。
 
 ## changefeed 计费
 
-要了解 TiDB Cloud 中 changefeed 的计费方式，请参见 [Changefeed 计费](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)。
+<CustomContent plan="dedicated">
+
+要了解 TiDB Cloud Dedicated 中 changefeed 的计费方式，请参见 [TiDB Cloud Dedicated Changefeed 计费](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+要了解 {{{ .premium }}} 的 changefeed 计费方式，请参见 [{{{ .premium }}} 的 Changefeed 计费](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+对于 {{{ .byoc }}}，changefeed 不会产生单独的功能费用。TiDB Cloud 会根据已配置的 TiCDC 节点 vCPU 数量收取服务费，你还需要承担在你的云账户中运行这些节点所产生的云服务提供商费用。
+
+</CustomContent>
 
 ## changefeed 状态
 

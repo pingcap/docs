@@ -10,18 +10,6 @@ aliases: ['/tidbcloud/developer-tier-cluster']
 
 TiDB Cloud 提供了以下几种方案选项。无论你是刚刚开始使用，还是需要扩展以满足不断增长的应用需求，这些服务方案都能为你提供所需的灵活性和能力。在创建 TiDB 资源之前，你需要考虑哪种选项更适合你的需求。
 
-<CustomContent plan="starter,essential,premium,dedicated">
-
-- [{{{ .starter }}}](#starter)
-- [{{{ .essential }}}](#essential)
-- [{{{ .premium }}}](#premium)
-- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
-- [{{{ .lake }}}](#lake)
-
-</CustomContent>
-
-<CustomContent plan="byoc">
-
 - [{{{ .starter }}}](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
@@ -29,39 +17,62 @@ TiDB Cloud 提供了以下几种方案选项。无论你是刚刚开始使用，
 - [{{{ .dedicated }}}](#tidb-cloud-dedicated)
 - [{{{ .lake }}}](#lake)
 
-</CustomContent>
-
 > **注意：**
 >
 > 部分 TiDB Cloud 功能在 TiDB Cloud Starter 和 TiDB Cloud Essential 上仅部分支持或不支持。详情请参见 [TiDB Cloud Starter 和 Essential 限制](/tidb-cloud/serverless-limitations.md)。
 
-## TiDB Cloud Starter {#starter}
+## {{{ .starter }}} {#starter}
 
-TiDB Cloud Starter 是一款全托管的多租户 TiDB 服务。它提供了一个即开即用、自动弹性扩展、兼容 MySQL 的数据库，并在超出免费额度后按用量计费。
+TiDB Cloud Starter 是一款全托管的多租户数据库产品，为开发者和小型团队提供即开即用、自动扩缩容的数据库实例。
 
-免费方案非常适合刚开始使用 TiDB Cloud Starter 的用户。它为开发者和小型团队提供以下基础功能：
+TiDB Cloud Starter 支持以下兼容模式：
+
+- **兼容 MySQL**：提供 MySQL 协议兼容性。每个符合条件的实例都包含每月免费额度；超出免费额度后，你可以启用按量计费以继续使用该实例。
+
+- **兼容 PostgreSQL（公测）**：提供 PostgreSQL wire 协议兼容性。兼容 PostgreSQL 的 Starter 实例在公测期间当前免费。
+
+免费方案非常适合刚开始使用 {{{ .starter }}} 的开发者和小型团队。每种兼容模式都包含每月免费的存储和 Request Units (RUs) 配额。具体配额因兼容模式而异。
 
 - **免费**：该方案在使用量不超过[免费额度](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)时免费。无需信用卡即可开始使用。
-- **存储**：提供初始 5 GiB 的行存储和 5 GiB 的列存储。
-- **Request Units**：包含 5000 万 [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) 用于数据库操作。
 
-### 使用额度
+- **存储**：包含每月免费存储配额。
+- **Request Units**：包含用于数据库操作的 [Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)。
 
-对于 TiDB Cloud 中的每个组织，默认最多可以创建 5 个免费的 TiDB Cloud Starter 实例。若需创建更多 TiDB Cloud Starter 实例，你需要添加信用卡并设置消费上限。
+### MySQL-compatible Starter {#usage-quota}
 
-对于组织中的前 5 个 TiDB Cloud Starter 实例，无论是免费还是可扩展实例，TiDB Cloud 都为每个实例提供如下免费使用额度：
+对于 TiDB Cloud 中的每个组织，默认情况下，你最多可以创建五个免费的 MySQL-compatible {{{ .starter }}} 实例。要创建更多 {{{ .starter }}} 实例，你需要添加信用卡并指定支出上限。
 
-- 行存储：5 GiB
-- 列存储：5 GiB
-- Request Units (RUs)：每月 5000 万 RU
+对于你组织中的前五个 MySQL-compatible {{{ .starter }}} 实例，无论它们是免费版还是可扩缩版，TiDB Cloud 都会为其中的每个实例提供如下免费使用配额：
 
-Request Unit (RU) 是用于衡量单次数据库请求所消耗资源量的单位。每个请求消耗的 RU 数量取决于多种因素，例如操作类型或检索/修改的数据量。
+- 基于行的存储：5 GiB
+- 列式存储：5 GiB
+- Request Units (RUs)：每月 5000 万 RUs
 
-一旦 TiDB Cloud Starter 实例达到其使用额度，将立即拒绝任何新的连接尝试，直到你 [增加额度](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit) 或新月开始时重置使用量。已建立的连接在达到额度前会保持活跃，但会受到限流。例如，当免费 TiDB Cloud Starter 实例的行存储超过 5 GiB 时，该实例会自动限制任何新的连接尝试。
+Request Unit (RU) 是一个计量单位，用于表示向数据库发起单个请求所消耗的资源量。一个请求消耗的 RU 数量取决于多种因素，例如操作类型，或者读取或修改的数据量。
 
-如需了解不同资源（包括读、写、SQL CPU 和网络出口）的 RU 消耗、定价详情及限流信息，请参见 [TiDB Cloud Starter 价格详情](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
+一旦某个 {{{ .starter }}} 实例达到其使用配额，它会立即拒绝任何新的连接尝试，直到你[提高配额](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)或在新月份开始时使用量被重置。在达到配额之前已建立的现有连接将保持活动状态，但会受到限流影响。例如，当某个免费的 {{{ .starter }}} 实例的基于行的存储超过 5 GiB 时，该实例会自动限制任何新的连接尝试。
+
+要了解不同资源（包括读、写、SQL CPU 和网络出口流量）的 RU 消耗、定价详情以及限流信息，请参见 [{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)。
+
+### PostgreSQL-compatible Starter {#postgresql-compatible-starter}
+
+> **Note:**
+>
+> PostgreSQL-compatible TiDB Cloud Starter 当前处于公测阶段。
+
+在公测期间，PostgreSQL-compatible {{{ .starter }}} 实例当前免费。
+
+对于你组织中的前 10 个 PostgreSQL-compatible {{{ .starter }}} 实例，TiDB Cloud 为每个实例提供以下每月免费配额：
+
+- 基于行的存储：50 GiB
+
+- Request Units (RUs)：每月 5 亿 RUs
+
+当 PostgreSQL-compatible {{{ .starter }}} 实例达到其免费配额时，超出的资源消耗可能会受到使用限制或服务暂停。如果你预计会超出这些额度，请联系 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 讨论你的需求。
 
 ### Instance Capacity Plan
+
+以下实例容量限制适用于兼容 MySQL 的 {{{ .starter }}} 实例。
 
 默认情况下，TiDB Cloud 中的每个组织在所有 TiDB Cloud Starter 和 Essential 实例中总共最多可以创建五个 [branch](/tidb-cloud/branch-overview.md)。
 
@@ -120,8 +131,6 @@ TiDB Cloud 中的每个付费组织总共最多可以创建 100 个 TiDB Cloud S
 - **可预测的定价**：基于存储和 Request Capacity Units (RCUs) 计费，提供透明的按使用量计费模式，可随你的需求扩展，因此你只需为实际使用量付费，不会有意外费用。
 - **高级安全性与合规性**：支持高级加密、客户管理的加密密钥 (CMEK)、私有网络和合规认证，以保护敏感数据。
 
-<CustomContent plan="byoc">
-
 ## {{{ .byoc }}} {#byoc}
 
 {{{ .byoc }}} 专为需要更强数据位置控制、云资源控制、网络边界控制以及合规态势控制的企业级工作负载而设计。使用 {{{ .byoc }}} 时，TiDB Cloud 控制平面由 PingCAP 管理，而数据平面运行在你自己的云账户中。
@@ -133,8 +142,6 @@ TiDB Cloud 中的每个付费组织总共最多可以创建 100 个 TiDB Cloud S
 - **灵活的高可用性**：同时支持 Single-AZ 和 Multi-AZ 部署，使你能够在更低延时的单可用区部署与跨多个可用区的更高韧性部署之间进行选择。
 - **云账户级安全控制**：允许你将自己的云策略、网络控制、审计日志记录和合规控制应用到 BYOC 数据平面。
 - **私有网络连接**：根据你的 BYOC 配置，支持 VPC peering 等私有网络访问模式。
-
-</CustomContent>
 
 ## TiDB Cloud Dedicated
 

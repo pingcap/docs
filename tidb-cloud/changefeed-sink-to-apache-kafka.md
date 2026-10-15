@@ -17,8 +17,8 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 ## 限制
 
-- 对于每个 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>，最多可以创建 100 个 changefeed。
-- 目前，TiDB Cloud 不支持上传自签名 TLS 证书以连接 Kafka broker。
+- 对于每个 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>，最多可以创建 100 个 changefeed。
+- 目前，TiDB Cloud 不支持上传自签名 TLS 证书以连接 Kafka brokers。
 - 由于 TiDB Cloud 使用 TiCDC 建立 changefeed，因此具有与 [TiCDC 相同的限制](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)。
 - 如果需要同步的表没有主键或非空唯一索引，在某些重试场景下，由于同步过程中缺少唯一约束，可能会导致下游插入重复数据。
 
@@ -47,7 +47,7 @@ summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式
 
 ### 网络
 
-确保你的 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent> 能够连接到 Apache Kafka 服务。你可以选择以下任一连接方式：
+确保你的 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent> 能够连接到 Apache Kafka 服务。你可以选择以下任一连接方式：
 
 - Private Connect：适用于避免 VPC CIDR 冲突并满足安全合规性，但会产生额外的 [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)。
 - VPC Peering：作为一种高性价比的选项，但需要管理潜在的 VPC CIDR 冲突和安全性问题。
@@ -99,14 +99,14 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 </SimpleTab>
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 <SimpleTab>
 <div label="Private Connect">
 
 Private Connect 利用云服务商的 **Private Link** 或 **Private Service Connect** 技术，使你 VPC 中的资源能够通过私有 IP 地址连接到其他 VPC 中的服务，就像这些服务直接托管在你的 VPC 内一样。
 
-要在 TiDB Cloud Premium 实例中为 changefeed 创建私有 endpoint，请参见 [Set Up Private Endpoint for Changefeeds](/tidb-cloud/set-up-sink-private-endpoint.md)。
+要在你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例中为 changefeed 创建私有 endpoint，请参见 [为 Changefeed 设置私有端点](/tidb-cloud/set-up-sink-private-endpoint.md)。
 
 TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、Confluent Kafka 或其他 Kafka SaaS 服务的直接集成。若需通过 Private Connect 连接这些 Kafka SaaS 服务，你可以部署一个 [kafka-proxy](https://github.com/grepplabs/kafka-proxy) 作为中间层，将 Kafka 服务以自建 Kafka 的方式暴露出来。
 
@@ -123,7 +123,7 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 
 <div label="VPC Peering">
 
-目前，TiDB Cloud Premium 实例的 VPC Peering 功能仅支持按需申请。若需申请此功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，点击 **Request Support**，在 **Description** 字段填写“Apply for VPC Peering for TiDB Cloud Premium instance”，然后点击 **Submit**。
+目前，{{{ .premium }}} 或 {{{ .byoc }}} 实例的 VPC Peering 功能仅支持按需申请。若需申请此功能，请点击 [TiDB Cloud 控制台](https://tidbcloud.com) 右下角的 **?**，然后点击 **Support Tickets** 进入 [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals)。创建一个工单，在 **Description** 字段中填写 "Apply for VPC Peering for {{{ .premium }}} or {{{ .byoc }}} instance"，然后点击 **Submit**。
 
 </div>
 </SimpleTab>
@@ -141,7 +141,7 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 ## 第 1 步：打开 Apache Kafka 的 Changefeed 页面
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com)。
-2. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的概览页面，然后点击左侧导航栏的 **Data** > **Changefeed**。
+2. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的概览页面，然后点击左侧导航栏中的 **Data** > **Changefeed**。
 3. 点击 **Create Changefeed**，并选择 **Kafka** 作为 **Destination**。
 
 ## 第 2 步：配置 changefeed 目标
@@ -281,7 +281,7 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 6. 如果你选择 **Avro** 作为数据格式，页面会显示一些 Avro 专属配置。你可以按如下方式填写：
 
     - 在 **Decimal** 和 **Unsigned BigInt** 配置项中，指定 TiDB Cloud 如何处理 Kafka 消息中的 decimal 和 unsigned bigint 数据类型。
-    - 在 **Schema Registry** 区域，填写你的 schema registry endpoint。如果启用 **HTTP Authentication**，会显示用户名和密码字段，并自动填充为你的 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的 endpoint 和密码。
+    - 在 **Schema Registry** 区域，填写你的 schema registry endpoint。如果启用 **HTTP Authentication**，会显示用户名和密码字段，并自动填充为你的 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的 endpoint 和密码。
 
 7. 在 **Topic Distribution** 区域，选择分发模式，并根据模式填写 topic 名称配置。
 
@@ -334,7 +334,7 @@ TiDB Cloud 目前仅支持自建 Kafka 的 Private Connect，不支持与 MSK、
 
 ## 第 4 步：配置 changefeed 规范
 
-1. 在 **Changefeed Specification** 区域，指定 changefeed 使用的 <CustomContent plan="dedicated">Replication Capacity Units (RCUs)</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs)</CustomContent> 数量。
+1. 在 **Changefeed Specification** 区域，指定 changefeed 使用的 <CustomContent plan="dedicated">Replication Capacity Units (RCUs)</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs)</CustomContent><CustomContent plan="byoc">TiCDC 节点预配置的 vCPUs</CustomContent> 数量。
 2. 在 **Changefeed Name** 区域，指定 changefeed 的名称。
 3. 点击 **Next** 检查你设置的配置并进入下一页面。
 
