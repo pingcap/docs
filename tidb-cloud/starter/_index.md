@@ -151,13 +151,15 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Why TiDB Cloud](https://docs.pingcap.com/tidbcloud/tidb-cloud-intro/?plan=starter&compatibility=postgresql)
 
-[PostgreSQL Compatibility](https://docs.pingcap.com/tidbcloud/starter/postgresql-compatibility/?plan=starter&compatibility=postgresql)
+[PostgreSQL Compatibility](https://docs.pingcap.com/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)
+
+[FAQ](https://docs.pingcap.com/tidbcloud/pg-faq/?plan=starter&compatibility=postgresql)
 
 </LearningPath>
 
 <LearningPath label="Try" icon="cloud5">
 
-[Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/starter/pg-quickstart/?plan=starter&compatibility=postgresql)
+[Try Out TiDB Cloud](https://docs.pingcap.com/tidbcloud/pg-quickstart/?plan=starter&compatibility=postgresql)
 
 </LearningPath>
 
@@ -173,7 +175,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Migrate" icon="cloud3">
 
-[Migrate from PostgreSQL](https://docs.pingcap.com/tidbcloud/starter/import-with-psql/?plan=starter&compatibility=postgresql)
+[Migrate from PostgreSQL](https://docs.pingcap.com/tidbcloud/import-with-psql/?plan=starter&compatibility=postgresql)
 
 </LearningPath>
 
@@ -181,7 +183,7 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 [Status and Metrics](https://docs.pingcap.com/tidbcloud/monitor-tidb-cluster/?plan=starter&compatibility=postgresql)
 
-[Built-in Metrics](https://docs.pingcap.com/tidbcloud/starter/built-in-monitoring-pg/?plan=starter&compatibility=postgresql)
+[Built-in Metrics](https://docs.pingcap.com/tidbcloud/built-in-monitoring-pg/?plan=starter&compatibility=postgresql)
 
 </LearningPath>
 
@@ -199,11 +201,11 @@ summary: TiDB Cloud is a fully-managed Database-as-a-Service (DBaaS) that brings
 
 <LearningPath label="Reference" icon="cloud-dev">
 
-[PostgreSQL Extensions](https://docs.pingcap.com/tidbcloud/starter/pg-extensions-overview/?plan=starter&compatibility=postgresql)
+[PostgreSQL Extensions](https://docs.pingcap.com/tidbcloud/pg-extensions-overview/?plan=starter&compatibility=postgresql)
 
-[SQL Reference](https://docs.pingcap.com/tidbcloud/starter/pg-sql-reference-overview/?plan=starter&compatibility=postgresql)
+[SQL Reference](https://docs.pingcap.com/tidbcloud/pg-sql-reference-overview/?plan=starter&compatibility=postgresql)
 
-[Limits and Constraints](https://docs.pingcap.com/tidbcloud/starter/pg-limits-constraints/?plan=starter&compatibility=postgresql)
+[Limits and Constraints](https://docs.pingcap.com/tidbcloud/pg-limits-constraints/?plan=starter&compatibility=postgresql)
 
 [System Variables](https://docs.pingcap.com/tidbcloud/system-variables/?plan=starter&compatibility=postgresql)
 
