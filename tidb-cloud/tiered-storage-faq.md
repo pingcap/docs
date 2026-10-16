@@ -83,3 +83,9 @@ Compare `IA_EXEC_COUNT` with `EXEC_COUNT` in the statement summary tables to get
 In the Cloud Console, go to **Monitoring** > **Metrics** > **Instance Overview** and open the **IA Cache Performance** panel group. It includes the cache hit rate, the cache miss rate, the remote read segment count and volume, and the remote read wait time.
 
 A yellow indicator appears when the hit rate drops below 85%. If the cluster has no IA tables, the panels show **No IA data**.
+
+## How do I view the IA columns of a slow query?
+
+The console shows `IA_remote_read_segment_count`, `IA_remote_read_segment_size`, and `IA_remote_read_segment_wait_time` in the details of each slow query. Open the **Slow Query** tab of the **Diagnosis** page. For the steps, see [Slow Query](/tidb-cloud/tune-performance.md#slow-query).
+
+You cannot read these columns with SQL on {{{ .premium }}} or {{{ .byoc }}}: the `SLOW_QUERY` and `CLUSTER_SLOW_QUERY` tables and the `ADMIN SHOW SLOW` statement require the internal privileges of the TiDB Cloud backend. For the full list of restricted SQL features, see [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md).

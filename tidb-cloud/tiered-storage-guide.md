@@ -262,7 +262,7 @@ Changing the segment size does not rewrite any file in object storage. SST files
 
 ## Observability
 
-For IA observability, including storage class transition progress, `EXPLAIN ANALYZE` fields, statement summary and slow query metrics, and the cluster-level IA cache performance panels, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
+For IA observability, including storage class transition progress, `EXPLAIN ANALYZE` fields, statement summary metrics, slow query metrics in the console, and the cluster-level IA cache performance panels, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
 
 ## Best practices
 
@@ -299,7 +299,7 @@ These figures are from test environments and do not represent real-world product
 
 - Queries spanning IA partitions are recommended to cover **no more than 3 partitions**; exceeding this may cause significant response time degradation
 - Avoid running concurrent `SELECT *` full-table scans on IA tables simultaneously
-- Monitor IA remote read volume via `EXPLAIN ANALYZE` and slow queries, and adjust accordingly
+- Monitor IA remote read volume via `EXPLAIN ANALYZE` and the **Slow Query** page in the console, and adjust accordingly
 
 ### Tune the IA cache level
 
