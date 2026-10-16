@@ -11,7 +11,7 @@ summary: TiDB Cloud 是一个全托管的 Database-as-a-Service (DBaaS)，将 Ti
 
 [为什么选择 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-intro/?plan=byoc)
 
-[核心概念](https://docs.pingcap.com/zh/tidbcloud/key-concepts/?plan=byoc)
+[关键概念](https://docs.pingcap.com/zh/tidbcloud/key-concepts/?plan=byoc)
 
 [常见问题](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-faq/?plan=byoc)
 
