@@ -3,7 +3,7 @@
 
 # 目录
 
-## 快速开始 {#get-started}
+## 快速开始
 
 - [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md)
 - [通过控制台快速开始](/tidb-cloud-filesystem/filesystem-quick-start-console.md)
@@ -12,7 +12,7 @@
   - [授权](/tidb-cloud-filesystem/filesystem-authorization.md)
   - [Layers 和 Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md)
 
-## 指南 {#guides}
+## 指南
 
 - [管理文件系统](/tidb-cloud-filesystem/manage-filesystem-resources.md)
 - [管理文件系统 Token](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
@@ -33,7 +33,7 @@
 - [自动化与 AI Agent 工作流](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
 - [定价与计费](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)
 
-## 参考 {#references}
+## 参考
 
 - [命令参考](/tidb-cloud-filesystem/filesystem-command-reference.md)
 - [TiDB Cloud Filesystem SDK](/tidb-cloud-filesystem/filesystem-sdks.md)

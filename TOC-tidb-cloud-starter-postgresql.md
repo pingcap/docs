@@ -3,7 +3,7 @@
 
 # 目录
 
-## 快速开始 {#get-started}
+## 快速开始
 
 - 为什么选择 TiDB Cloud
   - [简介](/tidb-cloud/tidb-cloud-intro.md)
@@ -12,7 +12,7 @@
 - 快速开始
   - [试用 TiDB Cloud Starter](/tidb-cloud/starter/pg-quickstart.md)
 
-## 指南 {#guides}
+## 指南
 
 - [选择方案](/tidb-cloud/select-cluster-tier.md)
 - [管理 TiDB Cloud 资源和项目](/tidb-cloud/manage-projects-and-resources.md)
@@ -39,7 +39,7 @@
   - 审计管理
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
 
-## 参考 {#reference}
+## 参考
 
 - PostgreSQL 扩展
   - [PostgreSQL 扩展](/tidb-cloud/starter/pg-extensions-overview.md)
