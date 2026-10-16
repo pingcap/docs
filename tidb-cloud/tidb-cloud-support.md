@@ -117,11 +117,7 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 
     このページで、現在のプランを確認できます。デフォルトでは、無料の**Basic**プランが選択されています。
 
-    <CustomContent plan="byoc">
-
     {{{ .byoc }}} の場合、必要な最小サポートプランは **Enterprise** です。
-
-    </CustomContent>
 
 2. 希望するサポートプランを選択します。
 
@@ -158,8 +154,4 @@ TiDB Cloudは、デフォルトで無料の基本サポートプランを提供�
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅にある**Support**をクリックします。
 2. 切り替えるサポートプランを選択し、 **Downgrade**をクリックします。
 
-    <CustomContent plan="byoc">
-
     {{{ .byoc }}} の場合、ダウングレードできるのは **Enterprise** またはそれ以上のサポートプランのみです。
-
-    </CustomContent>

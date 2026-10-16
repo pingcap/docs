@@ -25,6 +25,8 @@ TiDB Cloud CLI を使用する場合、CLI 操作のデフォルトリージョ�
 | AWS | フランクフルト | `aws-eu-central-1` | サポート対象 | 非サポート |
 | AWS | 東京 | `aws-ap-northeast-1` | サポート対象 | 非サポート |
 | Alibaba Cloud | シンガポール | `alicloud-ap-southeast-1` | サポート対象 | サポート対象 |
+| Google Cloud | サウスカロライナ | `gcp-us-east1` | 非サポート | サポート対象 |
+| Microsoft Azure | 米国中部 | `azure-centralus` | 非サポート | サポート対象 |
 
 設定したリージョンが TiDB Cloud Starter をサポートしていても TiDB Cloud Filesystem をサポートしていない場合、そのリージョンで Starter インスタンスを管理できます。ファイルシステムコマンドは `unsupported endpoint` エラーで失敗します。
 

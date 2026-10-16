@@ -1,11 +1,11 @@
 ---
-title: Connect to TiDB Cloud Premium via AWS PrivateLink
-summary: AWSのプライベートエンドポイントを使用して、 TiDB Cloud Premiumインスタンスに接続する方法を学びましょう。
+title: AWS PrivateLink 経由で {{{ .premium }}} または {{{ .byoc }}} に接続する
+summary: AWS のプライベートエンドポイントを使用して、{{{ .premium }}} または {{{ .byoc }}} インスタンスに接続する方法を学びましょう。
 ---
 
-# AWS PrivateLink経由でTiDB Cloud Premiumに接続します。 {#connect-to-tidb-cloud-premium-via-aws-privatelink}
+# AWS PrivateLink 経由で {{{ .premium }}} または {{{ .byoc }}} に接続する
 
-このドキュメントでは、[AWS PrivateLink](https://aws.amazon.com/privatelink) 経由で {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続する方法について説明します。
+このドキュメントでは、[AWS PrivateLink](https://aws.amazon.com/privatelink) 経由で {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続する方法について説明します。
 
 > **Tip:**
 >
@@ -27,7 +27,7 @@ AWS PrivateLink を利用したエンドポイント接続は、安全かつプ�
 ## 制限 {#restrictions}
 
 - 対象インスタンスの `Organization Owner`、`Project Owner`、または `Instance Owner` ロールを持つユーザーのみがプライベートエンドポイント接続を作成できます。
-- 接続先のプライベートエンドポイントと {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスは、**同じリージョン** に配置されている必要があります。
+- 接続先のプライベートエンドポイントと {{{ .premium }}} または {{{ .byoc }}} インスタンスは、**同じリージョン** に配置されている必要があります。
 
 ## 前提条件 {#prerequisites}
 
@@ -35,19 +35,19 @@ AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になって�
 
 ## プライベートエンドポイント接続を設定し、インスタンスに接続します。 {#set-up-a-private-endpoint-connection-and-connect-to-your-instance}
 
-プライベートエンドポイント経由で{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続するには、以下の手順に従ってください。
+プライベートエンドポイント経由で {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続するには、以下の手順に従ってください。
 
 1. [プライベートエンドポイント接続ダイアログを開く](#step-1-open-the-private-endpoint-connection-dialog)
 2. [AWS で VPC エンドポイントを作成する](#step-2-create-a-vpc-endpoint-in-aws)
 3. [TiDB Cloud で VPC エンドポイント ID を入力する](#step-3-enter-the-vpc-endpoint-id-in-tidb-cloud)
 4. [プライベートDNSを有効にする](#step-4-enable-private-dns)
-5. [{{{ .premium }}} <CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続する](#step-5-connect-to-your-premium-instance)
+5. [{{{ .premium }}} または {{{ .byoc }}} インスタンスに接続する](#step-5-connect-to-your-premium-or-byoc-instance)
 
 複数のインスタンスがある場合は、AWS PrivateLinkを使用して接続したいインスタンスごとに、これらの手順を繰り返す必要があります。
 
 ### Step 1. プライベートエンドポイント接続ダイアログを開く {#step-1-open-the-private-endpoint-connection-dialog}
 
-1. TiDB Cloud コンソールの [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンス名をクリックして、その概要ページに移動します。
+1. TiDB Cloud コンソールの [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の {{{ .premium }}} または {{{ .byoc }}} インスタンス名をクリックして、その概要ページに移動します。
 2. 右上隅の **Connect** をクリックします。接続ダイアログが表示されます。
 3. **Connection Type** ドロップダウンリストで **Private Endpoint** を選択し、**Create Private Endpoint Connection** をクリックします。
 4. **Create AWS Private Endpoint Connection** ダイアログで、`TiDB Private Link Service is ready` メッセージが表示されるまで待ちます。
@@ -56,7 +56,7 @@ AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になって�
 > **Note:**
 >
 > - すでにプライベートエンドポイント接続を作成している場合、アクティブなエンドポイントが接続ダイアログに表示されます。追加のプライベートエンドポイント接続を作成するには、左側のナビゲーションペインで **Settings** > **Networking** をクリックして **Networking** ページに移動します。
-> - 各 {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスについて、対応するエンドポイントサービスはインスタンス作成後 3 ～ 4分で自動的に作成されます。
+> - 各 {{{ .premium }}} または {{{ .byoc }}} インスタンスについて、対応するエンドポイントサービスはインスタンス作成後 3 ～ 4分で自動的に作成されます。
 
 ### Step 2. AWS で VPC endpoint を作成する {#step-2-create-a-vpc-endpoint-in-aws}
 
@@ -88,7 +88,7 @@ AWS CLI を使用して VPC endpoint を作成するには、次の手順を実�
 >
 > - コマンドを実行する前に、AWS CLI をインストールして設定しておく必要があります。詳細は [AWS CLI configuration basics](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) を参照してください。
 >
-> - サービスが 3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、VPC endpoint service が subnet の AZ をサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
+> - サービスが 3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、VPC endpoint service が subnet の AZ をサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、{{{ .premium }}} または {{{ .byoc }}} インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
 
 </div>
 <div label="Use AWS Console">
@@ -106,11 +106,11 @@ AWS Management Console を使用して VPC endpoint を作成するには、次�
 4. **Service settings** エリアで、TiDB Cloud からコピーした **Endpoint Service Name** を入力します。
 5. **Verify service** をクリックします。
 6. **Network settings** エリアで、ドロップダウンリストから VPC を選択します。
-7. **Subnets** エリアで、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されているアベイラビリティゾーンを選択します。
+7. **Subnets** エリアで、{{{ .premium }}} または {{{ .byoc }}} インスタンスが配置されているアベイラビリティゾーンを選択します。
 
     > **Tip:**
     >
-    > サービスが 3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、**Subnets** エリアで AZ を選択できないことがあります。この問題は、選択したリージョンに、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
+    > サービスが 3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、**Subnets** エリアで AZ を選択できないことがあります。この問題は、選択したリージョンに、{{{ .premium }}} または {{{ .byoc }}} インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
 
 8. **Security groups** エリアで、適切な security group を選択します。
 
@@ -132,7 +132,7 @@ AWS Management Console を使用して VPC endpoint を作成するには、次�
 
 > **Tip:**
 >
-> プライベートエンドポイント接続は、対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの **Networking** ページで表示および管理できます。このページにアクセスするには、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
+> プライベートエンドポイント接続は、対象の {{{ .premium }}} または {{{ .byoc }}} インスタンスの **Networking** ページで表示および管理できます。このページにアクセスするには、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
 
 ### ステップ4. プライベートDNSを有効にする {#step-4-enable-private-dns}
 
@@ -172,7 +172,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 </div>
 </SimpleTab>
 
-### ステップ5．TiDB Cloud Premiumインスタンスに接続します {#step-5-connect-to-your-premium-instance}
+### Step 5. {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続する {#step-5-connect-to-your-premium-or-byoc-instance}
 
 プライベートエンドポイント接続が作成されると、接続ダイアログにリダイレクトされます。
 
@@ -194,8 +194,8 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 プライベートエンドポイント接続を使用する場合、プライベートエンドポイントおよびプライベートエンドポイントサービスのステータスは、インスタンスレベルの**Networking**ページに表示されます。
 
-1. 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックして、その概要ページに移動します。
-2. 左側のナビゲーションペインで、**Settings** > **Networking**をクリックします。
+1. 組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} または {{{ .byoc }}} インスタンスの名前をクリックして、その概要ページに移動します。
+2. 左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
 
 プライベートエンドポイントの可能なステータスは、以下のように説明されます。
 
@@ -213,7 +213,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 
 ## トラブルシューティング {#troubleshooting}
 
-### プライベートDNSを有効にした後、プライベートエンドポイント経由でTiDB Cloud Premiumインスタンスに接続できません。なぜでしょうか？ {#i-cannot-connect-to-a-tidb-cloud-premium-instance-via-a-private-endpoint-after-enabling-private-dns-why}
+### プライベートDNSを有効にした後、プライベートエンドポイント経由で {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続できません。なぜですか？ {#i-cannot-connect-to-a-premium-or-byoc-instance-via-a-private-endpoint-after-enabling-private-dns-why}
 
 AWS マネジメントコンソールで、VPC エンドポイントのセキュリティグループを適切に設定する必要がある場合があります。そのためには、**VPC** > **Endpoints** に移動し、VPC エンドポイントを右クリックして、**Manage security groups** を選択します。選択したセキュリティグループが、ポート`4000`またはお客様定義のポートで EC2 インスタンスからの受信アクセスを許可していることを確認してください。
 

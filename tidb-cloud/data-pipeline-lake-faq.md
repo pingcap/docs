@@ -19,7 +19,7 @@ summary: 外部 stage、イベント駆動の取り込み、課金など、TiDB 
 
 デフォルトのポーリングモードよりも**低いデータレイテンシー**が必要な場合は、イベント駆動の取り込みを有効にしてください。
 
-デフォルトモードでは、Data Pipeline は、changefeed が増分データを外部 stage にフラッシュする間隔と、TiDB Cloud Lake が新しいデータを検出するために stage をスキャンする間隔に依存します。{{{ .premium }}}<CustomContent plan="byoc"> および {{{ .byoc }}}</CustomContent> では、設定された **Sync Interval** が、これらの段階全体におけるエンドツーエンドのレイテンシー目標になります。
+デフォルトモードでは、Data Pipeline は、changefeed が増分データを外部 stage にフラッシュする間隔と、TiDB Cloud Lake が新しいデータを検出するために stage をスキャンする間隔に依存します。{{{ .premium }}} および {{{ .byoc }}} では、設定された **Sync Interval** が、これらの段階全体におけるエンドツーエンドのレイテンシー目標になります。
 
 イベント駆動モードでは、changefeed は設定された間隔で引き続きデータを外部 stage にフラッシュしますが、各フラッシュは同時に SQS キューへの **S3 イベント通知** もトリガーします。SQS 通知により、TiDB Cloud Lake は次回の定期スキャンを待つことなく、新しいデータをより早く検出できます。
 

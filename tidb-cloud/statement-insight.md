@@ -5,14 +5,14 @@ summary: Statement Insight を使用して、DB user、DB、table、SQL type、�
 
 # Statement Insight (PREVIEW)
 
-**Statement Insight** は、<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} and {{{ .byoc }}}</CustomContent> インスタンス向けに、SQL リソース消費の多次元分析を提供します。Request Unit (RU) の消費量、レイテンシー、実行回数を **DB User**、**DB**、**Table**、**SQL Type**、または **SQL Digest** ごとに分類し、リーダーボードとトレンドチャートによって、主要な要因をひと目で把握できます。Statement Insight を使用すると、過去データから RU とパフォーマンスのベースラインを確立し、RU 消費や処理遅延の原因を特定できます。
+**Statement Insight** は、{{{ .premium }}} または {{{ .byoc }}} インスタンス向けに、SQL リソース消費の多次元分析を提供します。Request Unit (RU) の消費量、レイテンシー、実行回数を **DB User**、**DB**、**Table**、**SQL Type**、または **SQL Digest** ごとに分類し、リーダーボードとトレンドチャートによって、主要な要因をひと目で把握できます。Statement Insight を使用すると、過去データから RU とパフォーマンスのベースラインを確立し、RU 消費や処理遅延の原因を特定できます。
 
 Statement Insight は、履歴データに基づいてベースラインを把握するためのビューです。 
 
 > **Note:**
 >
-> Statement Insight はパブリックプレビュー中であり、8月 19日以降に作成された一部の <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} and {{{ .byoc }}}</CustomContent> インスタンスでのみ利用できます。今後のリリースで、より広範囲に展開される予定です。早期アクセスを希望する場合は、[TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
-> Statement Insight がまだ利用できないインスタンスでは、当面の間、ステートメント分析に [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis) タブを引き続き使用できます。
+> - Statement Insight はパブリックプレビュー中であり、8月19日以降に作成された一部の {{{ .premium }}} および {{{ .byoc }}} インスタンスでのみ利用できます。今後のリリースで、より広範囲に展開される予定です。早期アクセスを希望する場合は、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
+> - Statement Insight がまだ利用できないインスタンスでは、当面の間、ステートメント分析に [SQL Statement](/tidb-cloud/tune-performance.md#statement-analysis) タブを引き続き使用できます。
 
 ## 始める前に {#before-you-begin}
 
@@ -23,7 +23,7 @@ Statement Insight は、インスタンスで有効化された後にのみデ�
 
 ## Statement Insight を開く {#open-statement-insight}
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/) にログインし、<CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .premium }}} or {{{ .byoc }}}</CustomContent> インスタンスに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/) にログインし、{{{ .premium }}} または {{{ .byoc }}} インスタンスに移動します。
 2. 左側のナビゲーションペインで、**Monitoring** > **Diagnosis** をクリックします。
 3. **Diagnosis** ページで、**Statement Insight** タブをクリックします。
 

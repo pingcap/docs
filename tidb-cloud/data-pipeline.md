@@ -34,6 +34,7 @@ Data Pipeline は、次のシナリオで使用できます。
 | {{{ .premium }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
 | {{{ .dedicated }}} | Data Pipeline はまだ TiDB Cloud コンソールでは利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
 | {{{ .essential }}} | Data Pipeline はまだ TiDB Cloud コンソールでは利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
+
 </CustomContent>
 
 <CustomContent plan="byoc">
@@ -41,9 +42,9 @@ Data Pipeline は、次のシナリオで使用できます。
 | プラン | ステータス |
 | ---- | ------ |
 | {{{ .premium }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
-| {{{ .byoc }}} | Data Pipeline は [TiDB Cloud コンソール](https://tidbcloud.com) でプライベートプレビューとして提供されており、リクエストに応じて利用できます。 |
 | {{{ .dedicated }}} | Data Pipeline はまだ TiDB Cloud コンソールでは利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
 | {{{ .essential }}} | Data Pipeline はまだ TiDB Cloud コンソールでは利用できません。データパイプラインを使用するには、手動でセットアップする必要があります。 |
+
 </CustomContent>
 
 > **Note:**
@@ -54,7 +55,7 @@ Data Pipeline は、次のシナリオで使用できます。
 
 ご利用のプランに応じたガイドを参照してください。
 
-- TiDB Cloud Premium<CustomContent plan="byoc"> および {{{ .byoc }}}</CustomContent>: [TiDB Cloud Lake への Data Pipeline をセットアップする](/tidb-cloud/data-pipeline-sink-to-lake.md)
+- TiDB Cloud Premium および {{{ .byoc }}}: [TiDB Cloud Lake への Data Pipeline をセットアップする](/tidb-cloud/data-pipeline-sink-to-lake.md)
 - TiDB Cloud Dedicated: [TiDB Cloud Lake にデータをレプリケートするデータパイプラインを手動でセットアップする](/tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
 - TiDB Cloud Essential: [TiDB Cloud Lake にデータをレプリケートするデータパイプラインを手動でセットアップする](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
 
@@ -62,7 +63,7 @@ Data Pipeline は、次のシナリオで使用できます。
 
 > **Note:**
 >
-> **Data Pipeline** ページおよびこのセクションの管理操作は、{{{ .premium }}}<CustomContent plan="byoc"> および {{{ .byoc }}}</CustomContent> でのみ利用できます。{{{ .dedicated }}} と {{{ .essential }}} では、データパイプラインを手動で設定および管理します。
+> **Data Pipeline** ページおよびこのセクションの管理操作は、{{{ .premium }}} と {{{ .byoc }}} でのみ利用できます。{{{ .dedicated }}} と {{{ .essential }}} では、データパイプラインを手動で設定および管理します。
 
 データパイプラインを表示および管理するには、次の手順を実行します。
 
@@ -72,7 +73,7 @@ Data Pipeline は、次のシナリオで使用できます。
     >
     > 複数の組織に所属している場合は、まず左上のコンボボックスを使用して対象の組織に切り替えてください。
 
-2. 対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンス名をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Data Pipeline** をクリックします。**Data Pipeline** ページが表示されます。
+2. 対象の {{{ .premium }}} または {{{ .byoc }}} インスタンス名をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Data Pipeline** をクリックします。**Data Pipeline** ページが表示されます。
 
 **Data Pipeline** ページでは、データパイプラインの作成、既存のデータパイプライン一覧の表示、および既存のデータパイプラインの管理（パイプラインの一時停止、再開、編集、削除など）ができます。
 
@@ -83,11 +84,11 @@ Data Pipeline は、次のシナリオで使用できます。
 - **Pause**: データレプリケーションを停止し、パイプラインを `Paused` としてマークします。データが失われることはなく、レプリケーションの進行状況は保持されます。パイプラインの作成中、または完全スナップショットのエクスポート中は、一時停止できません。
 - **Resume**: 一時停止した位置からレプリケーションを再開します。これには TiDB Cloud Lake への取り込みも含まれます。
 
-データパイプラインを一時停止または再開するには、対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの **Data Pipeline** ページに移動し、パイプラインの行にある **...** をクリックしてから、**Pause** または **Resume** をクリックします。
+データパイプラインを一時停止または再開するには、対象の {{{ .premium }}} または {{{ .byoc }}} インスタンスの **Data Pipeline** ページに移動し、パイプラインの行にある **...** をクリックしてから、**Pause** または **Resume** をクリックします。
 
 ### データパイプラインを編集する {#edit-a-data-pipeline}
 
-データパイプラインを編集するには、対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの **Data Pipeline** ページに移動し、パイプラインの行にある **...** をクリックしてから、**Edit** をクリックします。
+データパイプラインを編集するには、対象の {{{ .premium }}} または {{{ .byoc }}} インスタンスの **Data Pipeline** ページに移動し、パイプラインの行にある **...** をクリックしてから、**Edit** をクリックします。
 
 データパイプラインが `Running` の間は編集できません。まずパイプラインを一時停止し、その後編集して、変更を適用するために再開してください。
 
@@ -104,7 +105,7 @@ Data Pipeline は、次のシナリオで使用できます。
 
 データパイプラインを削除するには、次の手順を実行します。
 
-1. 対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスの **Data Pipeline** ページに移動し、パイプラインの行にある **...** をクリックしてから、**Delete** をクリックします。
+1. 対象の {{{ .premium }}} または {{{ .byoc }}} インスタンスの **Data Pipeline** ページに移動し、パイプラインの行にある **...** をクリックしてから、**Delete** をクリックします。
 2. 警告を確認し、操作を確定します。データパイプラインを削除すると、次のようになります。
 
     - すべてのデータレプリケーションが直ちに停止します。

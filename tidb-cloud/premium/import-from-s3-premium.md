@@ -3,7 +3,7 @@ title: Import Data from Amazon S3 into TiDB Cloud Premium
 summary: コンソールウィザードを使用して、Amazon S3からTiDB Cloud PremiumインスタンスにCSVファイルをインポートする方法を学びましょう。
 ---
 
-# Amazon S3からTiDB Cloud Premiumにデータをインポートする {#import-data-from-amazon-s3-into-tidb-cloud-premium}
+# Amazon S3から{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする {#import-data-from-amazon-s3-into-tidb-cloud-premium}
 
 このドキュメントでは、Amazon Simple Storage Service (Amazon S3) からTiDB Cloud Premium インスタンスに CSV ファイルをインポートする方法について説明します。
 
@@ -14,18 +14,18 @@ summary: コンソールウィザードを使用して、Amazon S3からTiDB Clo
 
 ## 制限事項 {#limitations}
 
-- データの一貫性を確保するため、 TiDB Cloud Premium では、CSV ファイルを空のテーブルにのみインポートできます。対象テーブルに既にデータが含まれている場合は、ステージングテーブルにインポートしてから、 `INSERT ... SELECT`文を使用して行をコピーしてください。
+- データの一貫性を確保するため、 TiDB Cloud Premium および {{{ .byoc }}} では、CSV ファイルを空のテーブルにのみインポートできます。対象テーブルに既にデータが含まれている場合は、ステージングテーブルにインポートしてから、 `INSERT ... SELECT`文を使用して行をコピーしてください。
 - パブリックプレビュー期間中は、ユーザーインターフェースはストレージプロバイダーとしてAmazon S3のみをサポートしています。その他のプロバイダーへの対応は、今後のリリースで追加される予定です。
 - 各インポートジョブは、単一のソースパターンを1つの宛先テーブルにマッピングします。
 
 ## ステップ1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
-1. CSVファイルが256MiBを超える場合は、 TiDB Cloud Premiumが並列処理できるように、256MiB程度の小さなファイルに分割することを検討してください。
+1. CSVファイルが256MiBを超える場合は、 TiDB Cloud Premiumまたは{{{ .byoc }}}が並列処理できるように、256MiB程度の小さなファイルに分割することを検討してください。
 2. CSVファイルの名前は、 Dumplingの命名規則に従ってください。
     - 完全な表ファイルの場合： `${db_name}.${table_name}.csv`形式を使用してください。
     - シャーディングされたファイル: `${db_name}.${table_name}.000001.csv`のような数値サフィックスを追加します。
     - 圧縮ファイル: `${db_name}.${table_name}.${suffix}.csv.${compress}`形式を使用してください。
-3. オプションのスキーマファイル（ `${db_name}-schema-create.sql` 、 `${db_name}.${table_name}-schema.sql` ）を使用すると、 TiDB Cloud Premium はデータベースとテーブルを自動的に作成できます。
+3. オプションのスキーマファイル（ `${db_name}-schema-create.sql` 、 `${db_name}.${table_name}-schema.sql` ）を使用すると、 TiDB Cloud Premium または {{{ .byoc }}} はデータベースとテーブルを自動的に作成できます。
 
 <!--Todo
 These naming conventions are identical to the TiDB Cloud Serverless workflow. Update this section after we validate the Premium defaults.
@@ -33,16 +33,16 @@ These naming conventions are identical to the TiDB Cloud Serverless workflow. Up
 
 ## ステップ2．ターゲットスキーマを作成する（オプション） {#step-2-create-target-schemas-optional}
 
-TiDB Cloud Premiumでデータベースとテーブルを自動的に作成する場合は、 Dumplingで生成されたスキーマファイルを同じS3ディレクトリに配置してください。そうでない場合は、インポートを実行する前に、 TiDB Cloud Premiumでデータベースとテーブルを手動で作成してください。
+TiDB Cloud Premiumまたは{{{ .byoc }}}でデータベースとテーブルを自動的に作成する場合は、 Dumplingで生成されたスキーマファイルを同じS3ディレクトリに配置してください。そうでない場合は、インポートを実行する前に、 TiDB Cloud Premiumまたは{{{ .byoc }}}でデータベースとテーブルを手動で作成してください。
 
 ## ステップ3. Amazon S3へのアクセスを設定する {#step-3-configure-access-to-amazon-s3}
 
-TiDB Cloud Premiumがバケットを読み取れるようにするには、以下のいずれかの方法を使用してください。
+TiDB Cloud Premiumまたは{{{ .byoc }}}がバケットを読み取れるようにするには、以下のいずれかの方法を使用してください。
 
 - TiDB Cloudを信頼し、関連するパスに対して`s3:GetObject`および`s3:ListBucket`権限を付与するAWSロールARNを指定します。
 - 同等の権限を持つAWSアクセスキー（アクセスキーIDとシークレットアクセスキー）を提供してください。
 
-ウィザードには**Click here to create a new one with AWS CloudFormation**というラベルの付いたヘルプリンクが含まれています。TiDB Cloud Premium で CloudFormation スタックを事前に設定してロールを作成する必要がある場合は、このリンクをクリックしてください。
+ウィザードには**Click here to create a new one with AWS CloudFormation**というラベルの付いたヘルプリンクが含まれています。TiDB Cloud Premium または {{{ .byoc }}} で CloudFormation スタックを事前に設定してロールを作成する必要がある場合は、このリンクをクリックしてください。
 
 <CustomContent plan="byoc">
 
@@ -52,7 +52,7 @@ TiDB Cloud Premiumがバケットを読み取れるようにするには、以�
 
 ## ステップ4. Amazon S3からCSVファイルをインポートする {#step-4-import-csv-files-from-amazon-s3}
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumインスタンスの名前をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 TiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスの名前をクリックします。
 
 2. 左側のナビゲーションペインで、 **Data** > **Import**をクリックし、 **Import data from Cloud Storage**を選択します。
 
@@ -80,5 +80,5 @@ TiDB Cloud Premiumがバケットを読み取れるようにするには、以�
 
 ## 次のステップ {#next-steps}
 
-- スクリプトによるインポートについては[MySQLコマンドラインクライアントを使用してTiDB Cloud Premiumにデータをインポートする](/tidb-cloud/premium/import-with-mysql-cli-premium.md)を参照してください。
+- スクリプトによるインポートについては[Import Data into {{{ .premium }}} or {{{ .byoc }}} using the MySQL Command-Line Client](/tidb-cloud/premium/import-with-mysql-cli-premium.md)を参照してください。
 - IAM関連の問題については[Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。

@@ -1,27 +1,17 @@
 ---
 title: Back Up and Restore TiDB Cloud Premium Data
-summary: TiDB Cloud Premiumインスタンスのバックアップと復元方法を学びましょう。
+summary: TiDB Cloud Premiumインスタンスまたは{{{ .byoc }}}インスタンスのバックアップと復元方法を学びましょう。
 aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
 
-# TiDB Cloud Premium データのバックアップと復元 {#back-up-and-restore-tidb-cloud-premium-data}
-
-<CustomContent plan="premium">
-
-このドキュメントでは、 TiDB Cloud Premiumインスタンス上のデータのバックアップと復元方法について説明します。TiDB Cloud Premiumは、自動バックアップと手動バックアップの両方をサポートしており、必要に応じてバックアップデータを新しいインスタンスに復元できます。
-
-</CustomContent>
-
-<CustomContent plan="byoc">
+# {{{ .premium }}} または {{{ .byoc }}} データをバックアップおよび復元する
 
 このドキュメントでは、{{{ .premium }}} または {{{ .byoc }}} インスタンス上のデータをバックアップおよび復元する方法について説明します。{{{ .premium }}} と {{{ .byoc }}} は、自動バックアップと手動バックアップの両方をサポートしており、必要に応じてバックアップデータを新しいインスタンスに復元できます。
 
-</CustomContent>
-
 バックアップファイルは、以下のソースから生成される可能性があります。
 
-- アクティブな {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンス
-- 削除された {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスのバックアップ用のごみ箱
+- アクティブな {{{ .premium }}} または {{{ .byoc }}} インスタンス
+- 削除された {{{ .premium }}} または {{{ .byoc }}} インスタンスのバックアップ用の Recycle Bin
 
 > **Tip:**
 >
@@ -30,7 +20,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ## バックアップページを確認する {#view-the-backup-page}
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象の{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの名前をクリックすると、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象の{{{ .premium }}}または{{{ .byoc }}}インスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
@@ -40,17 +30,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 ## 自動バックアップ {#automatic-backups}
 
-<CustomContent plan="premium">
-
-TiDB Cloud Premiumは、本番環境向けに強化された自動バックアップ機能を提供します。高頻度スナップショットとログバックアップを組み合わせることで、データの信頼性を確保します。
-
-</CustomContent>
-
-<CustomContent plan="byoc">
-
 {{{ .premium }}} と {{{ .byoc }}} は、本番環境向けに強化された自動バックアップ機能を提供します。高頻度スナップショットとログバックアップを組み合わせることで、データの信頼性を確保します。
-
-</CustomContent>
 
 ### 自動バックアップモード {#automatic-backup-modes}
 
@@ -78,7 +58,7 @@ PITR を使用すると、保持期間内の任意の時点にデータを復元
 
 ### 自動バックアップを構成する {#configure-automatic-backups}
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンス名をクリックします。
+1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の {{{ .premium }}} または {{{ .byoc }}} インスタンス名をクリックします。
 
 2. 左側のナビゲーションペインで、**Data** > **Backup** をクリックします。
 
@@ -102,7 +82,8 @@ PITR を使用すると、保持期間内の任意の時点にデータを復元
 
 > **Note:**
 >
-> [バックアップモードを切り替える](#switch-between-automatic-backup-modes)か、保持期間を短縮すると、TiDB Cloud は新しい保持期間より古い既存の自動バックアップを完全に削除する場合があります。この操作は元に戻せません。
+> - BYOC インスタンスの場合、TiDB Cloud はバックアップまたは復元操作に対して料金を請求しません。クラウドアカウント内のバックアップファイルのストレージおよびデータ転送コストはお客様の負担となります。復元操作によってクラウドアカウント内にノードがプロビジョニングされる場合があり、そのプロビジョニングされた vCPU コストもお客様の負担となります。
+> - [バックアップモードを切り替える](#switch-between-automatic-backup-modes) か、保持期間を短縮すると、TiDB Cloud は新しい保持期間より古い既存の自動バックアップを完全に削除する場合があります。この操作は元に戻せません。
 
 </CustomContent>
 
@@ -110,7 +91,7 @@ PITR を使用すると、保持期間内の任意の時点にデータを復元
 
 > **Note:**
 >
-> - Custom Retention Mode の料金は、スナップショットのサイズと保持期間に基づいて決まります。PITR はパブリックプレビュー期間中、一時的に無料です。詳細は [TiDB Cloud pricing](https://www.pingcap.com/tidb-cloud-premium-pricing-details) を参照してください。
+> - Custom Retention Mode の料金は、スナップショットのサイズと保持期間に基づいて決まります。PITR はパブリックプレビュー期間中、一時的に無料です。詳細は [TiDB Cloud Premium Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details) を参照してください。
 > - [バックアップモードを切り替える](#switch-between-automatic-backup-modes) か、保持期間を短縮すると、TiDB Cloud は新しい保持期間より古い既存の自動バックアップを完全に削除する場合があります。この操作は元に戻せません。
 
 </CustomContent>
@@ -142,7 +123,7 @@ PITR を使用すると、保持期間内の任意の時点にデータを復元
 
 ### バックアップファイルを削除する {#delete-backup-files}
 
-{{{ .premium }}}<CustomContent plan="byoc">または{{{ .byoc }}}</CustomContent>インスタンスの既存のバックアップファイルを削除するには、以下の手順を実行してください。
+{{{ .premium }}} または {{{ .byoc }}} インスタンスの既存のバックアップファイルを削除するには、以下の手順を実行してください。
 
 1. インスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
@@ -155,25 +136,27 @@ PITR を使用すると、保持期間内の任意の時点にデータを復元
 
 ## 手動バックアップ {#manual-backups}
 
-<CustomContent plan="premium">
-
-TiDB Cloud Premiumは、自動バックアップに加えて、手動バックアップもサポートしています。手動バックアップは、管理された確実な復元ポイントを提供します。システムアップグレード、重要なデータの削除、元に戻せないスキーマや構成の変更など、リスクの高い操作を実行する前に、手動バックアップを作成することを強くお勧めします。
-
-</CustomContent>
-
-<CustomContent plan="byoc">
-
 自動バックアップに加えて、{{{ .premium }}} と {{{ .byoc }}} は手動バックアップもサポートしています。手動バックアップは、管理された確実な復元ポイントを提供します。システムアップグレード、重要なデータの削除、元に戻せないスキーマや設定の変更など、リスクの高い操作を実行する前に、手動バックアップを作成することを強くお勧めします。
-
-</CustomContent>
 
 ### 主な特徴 {#key-characteristics}
 
 - **保持と削除**：自動バックアップとは異なり、手動バックアップは保持ポリシーに基づいて自動的に削除されません。明示的に削除するまで保持されます。インスタンスを削除すると、その手動バックアップはごみ箱に移動し、手動で削除するまでそこに残ります。
 
+<CustomContent plan="premium">
+
 - **Storage location**：手動バックアップは、TiDBが管理するクラウドストレージに保存されます。
 
 - **コスト**：手動バックアップは、削除するまで保持されるため、追加料金が発生します。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+- **Storage location**：手動バックアップは、お客様のクラウドアカウントに保存されます。
+
+- **コスト**：TiDB Cloud はバックアップまたは復元操作に対して料金を請求しません。クラウドアカウント内のバックアップファイルのストレージおよびデータ転送コストはお客様の負担となります。
+
+</CustomContent>
 
 - **制限事項**：手動バックアップは、ポイントインタイムリカバリ（PITR）や部分バックアップ（テーブルレベルまたはデータベースレベルのバックアップなど）をサポートしていません。手動バックアップを既存のインスタンスに復元することはできません。復元操作ごとに新しいインスタンスが作成されます。
 
@@ -185,7 +168,7 @@ TiDB Cloud Premiumは、自動バックアップに加えて、手動バック�
 
 2. 右上隅の**...**をクリックし、次に**Manual Backup**をクリックします。
 
-3. 操作を確認してください。バックアップはTiDB Cloudに保存され、**バックアップリスト**に表示されます。
+3. 操作を確認します。バックアップが作成されると、**Backup List** に表示されます。
 
 TiDB Cloudコンソールでは、外部ストレージの認証情報を入力することなく、手動バックアップを直接復元できます。
 
@@ -201,15 +184,15 @@ TiDB Cloudは、インスタンスのスナップショット復元と特定時�
 
 - **Point-in-Time Restore**：インスタンスを特定の時点の状態に復元します。
 
-    - Premium<CustomContent plan="byoc"> または BYOC</CustomContent> インスタンス：過去7日間の任意の時点に復元できますが、インスタンス作成時刻より前、または現在時刻の1分前より後の時点には復元できません。なお、手動バックアップではPITRはサポートされていません。
+    - Premium または BYOC インスタンス：過去 7 日間の任意の時点に復元できますが、インスタンスの作成時刻より前、または現在時刻の 1 分前より後の時点には復元できません。なお、手動バックアップでは PITR はサポートされていません。
 
 ### 復元先 {#restore-destination}
 
 TiDB Cloudは、新しいインスタンスへのデータ復元をサポートしています。
 
-### 新しいTiDB Cloud Premium インスタンスに復元する {#restore-to-a-new-instance}
+### 新しい {{{ .premium }}} または {{{ .byoc }}} インスタンスに復元する {#restore-to-a-new-instance}
 
-新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスにデータを復元するには、以下の手順に従ってください。
+データを新しい {{{ .premium }}} または {{{ .byoc }}} インスタンスに復元するには、以下の手順を実行してください。
 
 1. インスタンスの[**Backup**](#view-the-backup-page)ページに移動します。
 
@@ -228,7 +211,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
     </div>
      <div label="Point-in-Time Restore">
 
-    Premium<CustomContent plan="byoc"> または BYOC</CustomContent> インスタンスを特定の時点に復元するには、以下の手順を実行してください。
+    Premium または BYOC インスタンスの特定の時点に復元するには、以下の手順を実行してください。
 
     1. **Point-in-Time Restore**をクリックします。
     2. 復元したい日時を選択してください。
@@ -238,7 +221,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 4. **Next**をクリックして、 **Restore to a New Instance**ページに進んでください。
 
-5. 新しい {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元用に構成します。手順は <CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> を参照してください。
+5. 復元用に新しい {{{ .premium }}} または {{{ .byoc }}} インスタンスを構成します。<CustomContent plan="premium">[TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent> の手順に従ってください。
 
     <CustomContent plan="byoc">
 
@@ -262,7 +245,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 ### ごみ箱から復元 {#restore-from-recycle-bin}
 
-ごみ箱から削除した {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスを復元するには、以下の手順を実行してください。
+ごみ箱から削除した {{{ .premium }}} または {{{ .byoc }}} インスタンスを復元するには、以下の手順を実行してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**...**をクリックして、 **Recycle Bin**をクリックします。
 
@@ -404,7 +387,7 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 2. IAMユーザーに権限を付与します。
 
-    タスクに必要な権限のみを含むポリシーを作成し、それをIAMユーザーにアタッチします。{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスにデータを復元するには、`s3:GetObject`、`s3:GetBucketLocation`、および `s3:ListBucket` 権限を付与します。
+    タスクに必要な権限のみを含むポリシーを作成し、それを IAM ユーザーにアタッチします。{{{ .premium }}} または {{{ .byoc }}} インスタンスにデータを復元するには、`s3:GetObject`、`s3:GetBucketLocation`、および `s3:ListBucket` 権限を付与します。
 
     以下は、 TiDB CloudがAmazon S3バケット内の特定のフォルダからデータを復元できるようにするポリシーの例です。
 

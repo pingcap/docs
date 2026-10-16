@@ -17,10 +17,10 @@ summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデ�
 
 ## 制限 {#restrictions}
 
-- <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ごとに、最大 100 個の変更フィードを作成できます。
-- 現在、 TiDB Cloudは、Kafkaブローカーに接続するための自己署名TLS証明書のアップロードをサポートしていません。
-- TiDB Cloud はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
-- 複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
+- <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} instance</CustomContent>ごとに、最大 100 個の変更フィードを作成できます。
+- 現在、TiDB Cloud は、Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
+- TiDB Cloud は TiCDC を使用して変更フィードを確立するため、[TiCDC と同じ制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
+- 複製対象のテーブルに主キーまたは NULL を許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
 
 <CustomContent plan="dedicated">
 
@@ -47,84 +47,83 @@ Apache Kafkaにデータをストリーミングするためのチェンジフ�
 
 ### ネットワーク {#network}
 
-<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>が Apache Kafka サービスに接続できることを確認します。次の接続方法のいずれかを選択できます。
+<CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} instance</CustomContent> が Apache Kafka サービスに接続できることを確認します。次の接続方法のいずれかを選択できます。
 
-- プライベート接続: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、 [プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost)が発生します。
-- VPCピアリング：費用対効果の高い選択肢として適していますが、潜在的なVPC CIDRの競合やセキュリティ上の考慮事項を管理する必要があります。
-- パブリックIP：迅速なセットアップに適しています。
+- Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost) が発生します。
+- VPC Peering: 費用対効果の高い選択肢として適していますが、潜在的な VPC CIDR の競合やセキュリティ上の考慮事項を管理する必要があります。
+- Public IP: 迅速なセットアップに適しています。
 
 <CustomContent plan="dedicated">
 
 <SimpleTab>
 <div label="Private Connect">
 
-プライベートコネクトは、クラウドプロバイダーの**Private Link**または**Private Service Connect**技術を活用し、VPC内のリソースがプライベートIPアドレスを使用して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
+Private Connect は、クラウドプロバイダーの **Private Link** または **Private Service Connect** 技術を活用し、VPC 内のリソースがプライベート IP アドレスを使用して他の VPC 内のサービスに接続できるようにします。これにより、あたかもそれらのサービスが VPC 内で直接ホストされているかのように動作します。
 
-TiDB Cloud は現在、セルフホスト型 Kafka のプライベート接続のみをサポートしています。 MSK、Confluent Kafka、またはその他の Kafka SaaS サービスとの直接統合はサポートされていません。 Private Connect 経由でこれらの Kafka SaaS サービスに接続するには、 [kafka-proxy](https://github.com/grepplabs/kafka-proxy)を仲介としてデプロイし、Kafka サービスを自己ホスト型 Kafka として効果的に公開できます。詳細な例については、 [Google Cloud で Kafka-proxy を使用して自己ホスト型 Kafka プライベートサービス接続を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)を参照してください。この設定は、すべての Kafka SaaS サービスで同様です。
+TiDB Cloud は現在、セルフホスト型 Kafka のみで Private Connect をサポートしています。MSK、Confluent Kafka、またはその他の Kafka SaaS サービスとの直接統合はサポートされていません。これらの Kafka SaaS サービスに Private Connect 経由で接続するには、仲介として [kafka-proxy](https://github.com/grepplabs/kafka-proxy) をデプロイし、Kafka サービスをセルフホスト型 Kafka として効果的に公開できます。詳細な例については、[Google Cloud で Kafka-proxy を使用してセルフホスト型 Kafka Private Service Connect を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#set-up-self-hosted-kafka-private-service-connect-by-kafka-proxy)を参照してください。この設定は、すべての Kafka SaaS サービスで同様です。
 
-- Apache Kafka サービスが AWS でホストされている場合は、 [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってプライベートエンドポイントを作成します。
-- Apache Kafka サービスが Google Cloud でホストされている場合は、 [Google Cloud でセルフホスト型の Kafka プライベートサービスコネクトを設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)ネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)ポイントを設定するに従ってプライベートエンドポイントを作成します。
-- Apache Kafka サービスが Azure でホストされている場合は、 [Azureでセルフホスト型Kafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得してから、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってプライベートエンドポイントを作成します。
+- Apache Kafka サービスが AWS でホストされている場合は、[AWS でセルフホスト型 Kafka Private Link Service を設定する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**Bootstrap Ports** 情報を取得してから、[Changefeeds のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってプライベートエンドポイントを作成します。
+- Apache Kafka サービスが Google Cloud でホストされている場合は、[Google Cloud でセルフホスト型 Kafka Private Service Connect を設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)に従ってネットワーク接続を構成し、**Bootstrap Ports** 情報を取得してから、[Changefeeds のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってプライベートエンドポイントを作成します。
+- Apache Kafka サービスが Azure でホストされている場合は、[Azure でセルフホスト型 Kafka Private Link Service を設定する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**Bootstrap Ports** 情報を取得してから、[Changefeeds のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってプライベートエンドポイントを作成します。
 
 </div>
 <div label="VPC Peering">
 
-Apache KafkaサービスがインターネットにアクセスできないAWS VPC内にある場合は、以下の手順を実行してください。
+Apache Kafka サービスがインターネットにアクセスできない AWS VPC 内にある場合は、次の手順を実行します。
 
-1. Apache Kafka サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
+1. Apache Kafka サービスの VPC と {{{ .dedicated }}} cluster の間で [VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
+2. Apache Kafka サービスに関連付けられているセキュリティグループの受信ルールを変更します。
 
-2. Apache Kafkaサービスが関連付けられているセキュリティグループの受信ルールを変更します。
+    {{{ .dedicated }}} cluster が配置されているリージョンの CIDR を受信ルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} cluster から Kafka ブローカーへのトラフィックが流れるようになります。
 
-    TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR を受信ルールに追加する必要があります。CIDR は**VPC Peering**ページで確認できます。これにより、TiDB Cloud Dedicatedクラスターから Kafka ブローカーへのトラフィックが流れるようになります。
+3. Apache Kafka の URL にホスト名が含まれている場合、TiDB Cloud が Apache Kafka ブローカーの DNS ホスト名を解決できるようにする必要があります。
 
-3. Apache KafkaのURLにホスト名が含まれている場合、 TiDB CloudがApache KafkaブローカーのDNSホスト名を解決できるようにする必要があります。
+    1. [VPC ピアリング接続の DNS 解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-dns.html) の手順に従います。
+    2. **Accepter DNS resolution** オプションを有効にします。
 
-    1. [VPCピアリング接続のDNS解決を有効にする](https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-dns.html)の手順に従います。
-    2. **Accepter DNS resolution**オプションを有効にします。
+Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC 内にある場合は、次の手順を実行します。
 
-Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC 内にある場合は、以下の手順を実行してください。
+1. Apache Kafka サービスの VPC と {{{ .dedicated }}} cluster の間で [VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
+2. Apache Kafka が配置されている VPC のイングレス ファイアウォールルールを変更します。
 
-1. Apache Kafka サービスの VPC とTiDB Cloud Dedicatedクラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
-2. Apache Kafkaが配置されているVPCのイングレスファイアウォールルールを変更します。
-
-    TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR を、イングレス ファイアウォールルールに追加する必要があります。CIDR は**VPC Peering**ページで確認できます。これにより、TiDB Cloud Dedicatedクラスターから Kafka ブローカーへのトラフィックが流れるようになります。
+    {{{ .dedicated }}} cluster が配置されているリージョンの CIDR をイングレス ファイアウォールルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} cluster から Kafka ブローカーへのトラフィックが流れるようになります。
 
 </div>
 <div label="Public IP">
 
-Apache KafkaサービスにパブリックIPアクセスを提供する場合は、すべてのKafkaブローカーにパブリックIPアドレスを割り当ててください。
+Apache Kafka サービスに Public IP アクセスを提供する場合は、すべての Kafka ブローカーに Public IP アドレスを割り当ててください。 
 
-本番環境でパブリックIPを使用することは推奨**されません**。
+本番環境で Public IP を使用することは推奨**されません**。 
 
 </div>
 </SimpleTab>
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 <SimpleTab>
 <div label="Private Connect">
 
-プライベートコネクトは、クラウドプロバイダーの**Private Link**または**Private Service Connect**技術を活用し、VPC内のリソースがプライベートIPアドレスを使用して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
+Private Connect は、クラウドプロバイダーの **Private Link** または **Private Service Connect** 技術を活用し、VPC 内のリソースがプライベート IP アドレスを使用して他の VPC 内のサービスに接続できるようにします。これにより、あたかもそれらのサービスが VPC 内で直接ホストされているかのように動作します。
 
-TiDB Cloud Premium インスタンスでチェンジフィードのプライベートエンドポイントを作成するには、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)するに従ってください。
+{{{ .premium }}} または {{{ .byoc }}} instance で changefeeds 用のプライベートエンドポイントを作成するには、[Changefeeds のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってください。
 
-TiDB Cloudは現在、セルフホスト型KafkaのみPrivate Connectをサポートしています。MSK、Confluent Kafka、その他のKafka SaaSサービスとの直接統合はサポートしていません。これらのKafka SaaSサービスにPrivate Connect経由で接続するには、 [kafka-proxy](https://github.com/grepplabs/kafka-proxy)を中間サーバーとしてデプロイし、Kafkaサービスをセルフホスト型Kafkaとして公開できます。
+TiDB Cloud は現在、セルフホスト型 Kafka のみで Private Connect をサポートしています。MSK、Confluent Kafka、またはその他の Kafka SaaS サービスとの直接統合はサポートされていません。これらの Kafka SaaS サービスに Private Connect 経由で接続するには、仲介として [kafka-proxy](https://github.com/grepplabs/kafka-proxy) をデプロイし、Kafka サービスをセルフホスト型 Kafka として効果的に公開できます。
 
-Apache Kafka サービスが AWS でホストされている場合は、 [AWSでセルフホスト型のKafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**Bootstrap Ports**情報を取得します。次に[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従ってプライベートエンドポイントを作成します。
+Apache Kafka サービスが AWS でホストされている場合は、[AWS でセルフホスト型 Kafka Private Link Service を設定する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)に従ってネットワーク接続を構成し、**Bootstrap Ports** 情報を取得してから、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)に従ってプライベートエンドポイントを作成します。
 
 </div>
 <div label="Public IP">
 
-Apache KafkaサービスにパブリックIPアクセスを提供する場合は、すべてのKafkaブローカーにパブリックIPアドレスを割り当ててください。
+Apache Kafka サービスに Public IP アクセスを提供する場合は、すべての Kafka ブローカーに Public IP アドレスを割り当ててください。
 
-本番環境でパブリックIPを使用することは推奨**されません**。
+本番環境で Public IP を使用することは推奨**されません**。 
 
 </div>
 
 <div label="VPC Peering">
 
-現在、 TiDB Cloud PremiumインスタンスのVPCピアリング機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**？**をクリックし、 次に**Support Tickets**をクリックし[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「TiDB Cloud PremiumインスタンスのVPCピアリングの申請」と入力して、 **Submit**をクリックします。
+現在、{{{ .premium }}} または {{{ .byoc }}} instance の VPC Peering 機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、[TiDB Cloud console](https://tidbcloud.com) の右下隅にある **?** をクリックし、次に **Support Tickets** をクリックして [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for VPC Peering for {{{ .premium }}} or {{{ .byoc }}} instance" と入力してから、**Submit** をクリックします。
 
 </div>
 </SimpleTab>
@@ -142,7 +141,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 ## ステップ1. Apache KafkaのChangefeedページを開きます。 {#step-1-open-the-changefeed-page-for-apache-kafka}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
+2. ターゲットの<CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} instance</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
 3. **Create Changefeed**をクリックし、**Destination**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを設定する {#step-2-configure-the-changefeed-target}
@@ -285,8 +284,8 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 6. データ形式として**Avro**を選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
-    - **Decimal**および**Unsigned BigInt**の設定では、 TiDB CloudがKafkaメッセージ内のdecimal型およびunsigned bigint型データ型をどのように処理するかを指定します。
-    - **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のエンドポイントとパスワードが自動的に入力されます。
+    - **Decimal**および**Unsigned BigInt**の設定では、TiDB Cloud が Kafka メッセージ内の decimal 型および unsigned bigint 型データ型をどのように処理するかを指定します。
+    - **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、<CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} instance</CustomContent> のエンドポイントとパスワードが自動的に入力されます。
 
 7. **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 
@@ -339,9 +338,9 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 ## ステップ4. 変更フィード仕様を設定します {#step-4-configure-your-changefeed-specification}
 
-1. **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">複製容量単位（RCU）</CustomContent><CustomContent plan="premium">チェンジフィード容量ユニット（CCU）</CustomContent>の数を指定します。
-2. **Changefeed Name**欄に、変更フィードの名前を指定します。
-3. **Next**をクリックして、設定した内容を確認し、次のページへ進んでください。
+1. **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">Replication Capacity Units (RCUs) の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent>を設定します。
+2. **Changefeed Name**領域で、変更フィードの名前を指定します。
+3. **Next**をクリックして、設定した内容を確認し、次のページに進みます。
 
 ## ステップ5．設定内容を確認する {#step-5-review-the-configurations}
 

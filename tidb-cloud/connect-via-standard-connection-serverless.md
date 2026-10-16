@@ -33,7 +33,8 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
     > **Note:**
     >
     > - 接続タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
-    > - **Connection Type**ドロップダウンリストで**Private Endpoint**を選択した場合、接続はプライベートエンドポイント経由で行われます。詳細については、以下のドキュメントを参照してください。
+    > - PostgreSQL互換の{{{ .starter }}}は現在、パブリックエンドポイントのみをサポートしています。プライベートエンドポイントはサポートされていません。
+    > - MySQL互換の{{{ .starter }}}および{{{ .essential }}}インスタンスでは、**Connection Type**ドロップダウンリストで**Private Endpoint**を選択することもできます。詳細については、以下のドキュメントを参照してください。
     >
     >     - [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     >     - [Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
@@ -45,11 +46,16 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
     > **Note:**
     >
     > - 接続タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
-    > - **Connection Type**ドロップダウンリストで**Private Endpoint**を選択した場合、接続がプライベートエンドポイント経由であることを意味します。詳細については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+    > - PostgreSQL互換の{{{ .starter }}}は現在、パブリックエンドポイントのみをサポートしています。プライベートエンドポイントはサポートされていません。
+    > - MySQL互換の{{{ .starter }}}および{{{ .essential }}}インスタンスでは、**Connection Type**ドロップダウンリストで**Private Endpoint**を選択することもできます。詳細については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します。](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
     </CustomContent>
 
-4. TiDB Cloudでは、TiDB Cloud Starterインスタンス用に[ブランチ](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)を作成できます。ブランチが作成されると、**Branch**のドロップダウンリストからブランチに接続できます。 `main`は、TiDB Cloud Starterインスタンス自体を表します。
+4. TiDB Cloudでは、MySQL互換のTiDB Cloud Starterインスタンス用に[ブランチ](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)を作成できます。ブランチが作成されると、**Branch**のドロップダウンリストからブランチに接続できます。 `main`は、TiDB Cloud Starterインスタンス自体を表します。
+
+    > **Note:**
+    >
+    > PostgreSQL互換の{{{ .starter }}}は現在ブランチをサポートしていません。
 
 5. まだパスワードを設定していない場合は、 **Generate Password**をクリックしてランダムなパスワードを生成してください。生成されたパスワードは二度と表示されませんので、安全な場所に保存してください。
 

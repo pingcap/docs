@@ -64,20 +64,35 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ## 使用量クォータ {#usage-quota}
 
-TiDB Cloudでは、組織ごとにデフォルトで最大5つの[無料のTiDB Cloud Starterクラスター](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。TiDB Cloud Starterクラスターをさらに作成するには、クレジットカード情報を追加し、使用量に応じて[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)必要があります。
+TiDB Cloud Starter は、MySQL互換インスタンスと PostgreSQL互換インスタンスの両方に対して無料の使用量クォータを提供します。無料クォータと使用ポリシーは、互換モードによって異なります。
 
-組織内の最初の 5つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
+### MySQL互換 Starter {#mysql-compatible-starter}
+
+デフォルトでは、各組織は最大 5 つの無料の MySQL互換 {{{ .starter }}} インスタンスを作成できます。追加のインスタンスを作成するには、クレジットカードを追加し、[月間支出制限を設定する](/tidb-cloud/manage-serverless-spend-limit.md)必要があります。
+
+組織内の最初の 5 つの {{{ .starter }}} インスタンスについて、TiDB Cloud はそれぞれに対して次の無料使用量クォータを提供します。
 
 - 行ベースのストレージ: 5 GiB
 - 列指向ストレージ: 5 GiB
-- [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) : 月間5000万RU
+- [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru): 月間 5000 万 RU
 
-リクエストユニット（RU）は、クエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができる指標です。リクエストユニットは、 TiDB Cloud Starterサービスの課金単位でもあります。
+リクエストユニット（RU）は、クエリまたはトランザクションのリソース消費量を追跡するために使用される測定単位です。これは、データベース内の特定のリクエストを処理するために必要な計算リソースを見積もることができる指標です。リクエストユニットは、{{{ .starter }}} サービスの課金単位でもあります。
 
-クラスターが使用量のクォータに達すると、新しい接続試行はすべて拒否されます。これは、 [クォータを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで継続されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
+MySQL互換 {{{ .starter }}} インスタンスが使用量クォータに達すると、[クォータを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで、新しい接続試行は直ちにすべて拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
 
-さまざまなリソース (読み取り、書き込み、SQL CPU、ネットワーク送信など) の RU 消費量、価格の詳細、スロットル情報の詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
+さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク送信を含む）の RU 消費量、価格の詳細、スロットリング情報の詳細については、[{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
-追加のクォータを持つTiDB Cloud Starterクラスターを作成する場合は、クラスター作成ページで月間利用限度額を設定できます。詳細については、 [TiDB Cloud Starter クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)をご覧ください。
+追加のクォータを持つ {{{ .starter }}} インスタンスを作成する場合は、{{{ .starter }}} インスタンス作成ページで月間支出制限を設定できます。詳細については、[{{{ .starter }}} インスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
 
-TiDB Cloud Starterクラスターを作成した後でも、クラスターの概要ページで利用限度額を確認および編集できます。詳細については、 [TiDB Cloud Starter Clusters の支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)をご覧ください。
+{{{ .starter }}} インスタンスを作成した後でも、{{{ .starter }}} インスタンスの概要ページで支出制限を確認および編集できます。詳細については、[{{{ .starter }}} インスタンスの支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)を参照してください.
+
+### PostgreSQL互換 Starter（パブリックプレビュー） {#postgresql-compatible-starter-public-preview}
+
+パブリックプレビュー期間中、各組織は最大 10 個の無料の PostgreSQL互換 Starter インスタンスを作成できます。
+
+最初の 10 個の PostgreSQL互換 Starter インスタンスそれぞれに対して、TiDB Cloud は次の無料使用量枠を提供します。
+
+- 行ベースのストレージ: 50 GiB
+- リクエストユニット（RU）: 月間 5 億 RU
+
+PostgreSQL互換 {{{ .starter }}} インスタンスが無料クォータに達すると、過剰なリソース消費に対して使用制限またはサービス停止が適用される場合があります。これらの上限を超えることが予想される場合は、要件について相談するために <a href="mailto:support@pingcap.com">support@pingcap.com</a> までご連絡ください。

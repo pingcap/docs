@@ -89,8 +89,6 @@ TiDB Cloud Essentialは、さまざまな運用要件に対応するため、2�
 
 ミッションクリティカルなワークロードの稼働時間と回復力を最大化するために、 TiDB Cloud Premium は[地域的な高可用性](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture)を提供し、複数のアベイラビリティゾーンにノードを分散して、ゾーンデプロイよりも高い冗長性を実現します。
 
-<CustomContent plan="byoc">
-
 ## TiDB Cloud BYOC {#tidb-cloud-byoc}
 
 TiDB Cloud BYOC（Bring Your Own Cloud）は、マネージドサービスとして TiDB Cloud を利用しながら、データの配置場所、クラウドリソース、ネットワーク境界、コンプライアンス体制をより強く制御する必要がある組織向けに設計されています。BYOC では、TiDB Cloud の コントロールプレーン は PingCAP によって管理され、TiDB の データプレーン はお客様自身のクラウドアカウント内で実行されます。
@@ -121,8 +119,6 @@ TiDB Cloud BYOC のデプロイには、次の主要なコンポーネントが�
 各 BYOC リージョンは、それぞれ独立してデプロイおよび運用されます。BYOC リージョンが追加されると、TiDB Cloud はお客様のクラウドアカウント内に必要なリージョンリソースをプロビジョニングします。各 BYOC リージョンは独自の data-plane 構成を持つため、リージョン間で単一の TiDB Service VPC または Observability Service VPC を共有することはありません。
 
 お客様のアプリケーションは、アプリケーション環境から {{{ .byoc }}} インスタンスに接続します。BYOC の設定に応じて、接続にはプライベートアクセスまたは制御されたパブリックアクセスのいずれかが使用されます。プライベートアクセスについては、BYOC は VPC ピアリング やその他のプライベート接続オプションをサポートします。
-
-</CustomContent>
 
 ## TiDB Cloud Dedicated {#tidb-cloud-dedicated}
 
