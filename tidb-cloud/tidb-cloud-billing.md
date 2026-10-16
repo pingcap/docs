@@ -25,13 +25,11 @@ TiDB Cloud Essentialでは、アプリケーションの実際の使用量で**�
 
 TiDB Cloud Premium の場合、基礎となるバックエンド ノードやプロビジョニングされたディスク サイズではなく、実際の[リクエストキャパシティユニット（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)の消費量と実際に使用するストレージに基づいて請求されます。 [TiDB Cloud Premiumの料金詳細](https://www.pingcap.com/tidb-cloud-premium-pricing-details/)をご覧ください。
 
-<CustomContent plan="byoc">
-
 ### {{{ .byoc }}} の料金 {#pricing-for-byoc}
 
-{{{ .byoc }}} の料金情報については、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
+{{{ .byoc}}} の費用には、クラウドプロバイダに直接支払うインフラ料金、プロビジョニングされた vCPU 容量に基づく PingCAP BYOC サービス料金、および別途のサポート料金が含まれます。BYOC を利用するには、[Enterprise support plan or higher](/tidb-cloud/connected-care-overview.md#connected-care) が必要です。
 
-</CustomContent>
+{{{ .byoc }}} の料金情報については、[Sales にお問い合わせください](https://www.pingcap.com/contact-us/)。
 
 ### {{{ .lake }}} の料金 {#pricing-for-lake}
 

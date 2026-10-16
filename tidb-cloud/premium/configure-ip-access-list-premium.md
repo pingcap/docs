@@ -1,19 +1,20 @@
 ---
-title: Configure an IP Access List for TiDB Cloud Premium
-summary: TiDB Cloud Premiumインスタンスへのアクセスを許可するIPアドレスを設定する方法を学びましょう。
+title: Configure an IP Access List for TiDB Cloud Premium or BYOC
+summary: TiDB Cloud PremiumまたはBYOCインスタンスへのアクセスを許可するIPアドレスを設定する方法を学びましょう。
 ---
 
-# TiDB Cloud Premium の IP アクセス リストを設定します {#configure-an-ip-access-list-for-tidb-cloud-premium}
+# TiDB Cloud Premium または {{{ .byoc }}} の IP アクセス リストを設定します {#configure-an-ip-access-list-for-tidb-cloud-premium}
 
-TiDB Cloudの各TiDB Cloud Premium インスタンスに対して、IP アクセス リストを設定することで、インスタンスへのアクセスを試みるインターネット トラフィックをフィルタリングできます。これはファイアウォールのアクセス制御リストと同様の機能を持ちます。設定後、IP アクセス リストに登録されている IP アドレスを持つクライアントおよびアプリケーションのみが、 TiDB Cloud Premium インスタンスに接続できるようになります。
+TiDB Cloudの各TiDB Cloud Premium または BYOC インスタンスに対して、IP アクセス リストを設定することで、インスタンスへのアクセスを試みるインターネット トラフィックをフィルタリングできます。これはファイアウォールのアクセス制御リストと同様の機能を持ちます。設定後、IP アクセス リストに登録されている IP アドレスを持つクライアントおよびアプリケーションのみが、 TiDB Cloud Premium または BYOC インスタンスに接続できるようになります。
 
 > **Note:**
 >
-> このドキュメントは**TiDB Cloud Premium**に適用されます。 **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
+> - このドキュメントは**TiDB Cloud Premium**および**BYOC**に適用されます。 **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
+> - BYOC の場合、パブリック接続を利用できるのは、BYOC のデプロイ時にパブリック hosted zone を指定した場合のみです。プライベート hosted zone を指定した場合は、プライベート接続を使用してインスタンスに接続してください。
 
-TiDB Cloud PremiumインスタンスのIPアクセスリストを設定するには、以下の手順に従ってください。
+TiDB Cloud PremiumまたはBYOCインスタンスのIPアクセスリストを設定するには、以下の手順に従ってください。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud PremiumまたはBYOCインスタンスの名前をクリックして概要ページに移動します。
 
     > **Tip:**
     >

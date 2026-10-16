@@ -1,0 +1,67 @@
+---
+title: TiDB Cloud Filesystem
+summary: TiDB Cloud Filesystem とは何か、どのような場合に使用するか、またアプリケーション、自動化、AI エージェント間で永続ファイルにアクセスして共有する方法を学びます。
+---
+
+# TiDB Cloud Filesystem
+
+TiDB Cloud Filesystem は、アプリケーション、自動化、AI エージェント向けの永続的で共有可能なクラウドファイルシステムです。ファイルは、それを作成したマシンやプロセスとは独立して利用可能な状態が維持されるため、同じワークスペースをセッションや環境をまたいで再利用できます。
+
+TiDB Cloud Filesystem は、プロセスやサンドボックスの終了後もファイルを利用可能な状態に保つ必要がある場合、ワークフローが複数のマシンや一時的な環境にまたがる場合、または複数のユーザーやワークロードが同じファイルに対して制御されたアクセスを必要とする場合に使用します。
+
+たとえば、ファイルシステムは次のようなタスクに使用できます。
+
+- 異なるマシンや環境から同じファイルにアクセスして変更する。
+- ユーザー、アプリケーション、CI ジョブ、または AI エージェントとファイルや結果を共有する。
+- ローカルファイルパスを必要とするツール向けに、ファイルシステムをローカルディレクトリとしてマウントする。
+- 共有ファイルに適用する前に、レイヤー内でファイル変更を分離する。
+
+> **Note:**
+>
+> TiDB Cloud Filesystem は現在パブリックプレビューです。機能およびインターフェースは予告なく変更される場合があります。
+
+## How TiDB Cloud Filesystem works {#how-tidb-cloud-filesystem-works}
+
+TiDB Cloud Filesystem は、それにアクセスするマシンやプロセスとは独立して TiDB Cloud 内に永続化されます。そのため、認可された異なる環境が、マシン間でファイルをコピーすることなく同じファイルにアクセスできます。
+
+ファイルシステムを作成および管理するには、[TiDB Cloud console](https://tidbcloud.com/) または [TiDB Cloud CLI (`ti`)](/ai/ti/ti-overview.md) を使用できます。TiDB Cloud Filesystem を使用するために、TiDB データベースをプロビジョニングまたは管理する必要はありません。
+
+コンソールでは、ファイルやディレクトリを参照したり、ファイルサイズや更新時刻などのメタデータを確認したりすることもできます。
+
+ファイルの内容を読み取ったり、ファイルやディレクトリを変更したりするには、次のいずれかの方法を使用します。
+
+- **`ti fs` コマンドを使用する**: ファイルシステムをマウントせずに、コマンドラインから直接ファイルをアップロード、ダウンロード、読み取り、整理、検索できます。
+- **ファイルシステムをローカルディレクトリとしてマウントする**: アプリケーションやツールが通常のローカルファイルパスを通じてファイルシステムデータにアクセスできるようにします。
+
+詳細は、[ファイルとディレクトリを操作する](/tidb-cloud-filesystem/work-with-filesystem-data.md) および [ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
+
+## Share files across environments {#share-files-across-environments}
+
+複数のマシンまたは環境が、同時に 1 つのファイルシステムへアクセスできます。各環境は独自のファイルシステムトークンを使用できるため、環境間で認証情報を共有する必要はありません。
+
+たとえば、次のような使い方ができます。
+
+- CI ジョブがビルド出力をファイルシステムに書き込み、別の環境が後でそれを読み取る。
+- AI エージェントが、以前のセッションで作成されたファイルに対する作業を継続する。
+- レビュアーが特定のディレクトリに対する読み取り専用アクセスを受け取る。
+
+TiDB Cloud Filesystem は owner token と scoped token を提供しており、各ユーザーまたはワークロードがアクセスできるファイルや実行できる操作を制御できます。
+
+詳細は、[TiDB Cloud Filesystem の認可](/tidb-cloud-filesystem/filesystem-authorization.md) および [ファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md) を参照してください。
+
+## Isolate and manage changes {#isolate-and-manage-changes}
+
+複数のタスクが共有ベースを変更せずに同じファイルをもとに作業できるようにするために、ファイルシステムのレイヤーを作成できます。
+
+各レイヤーは、変更を独立して行える分離されたビューを提供します。レイヤーのチェックポイントを作成し、後で選択した変更をベースファイルシステムにコミットできます。
+
+詳細は、[レイヤーとチェックポイント](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を参照してください。
+
+## Get started {#get-started}
+
+実行したい内容に応じて、該当する手順を選択してください。
+
+- **新しいファイルシステムを作成する:** [Quick Start via Console](/tidb-cloud-filesystem/filesystem-quick-start-console.md) または [Quick Start via CLI](/tidb-cloud-filesystem/filesystem-quick-start.md) に従ってください。
+- **他のユーザーから共有されたファイルシステムを使用する:** [既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
+- **サポートされているリージョン、プラットフォーム、および現在の制限事項を確認する:** [リージョンと制限事項](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md) を参照してください。
+- **クライアント SDK をアプリケーションに統合する:** [TiDB Cloud Filesystem SDKs](/tidb-cloud-filesystem/filesystem-sdks.md) を参照してください。

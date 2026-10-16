@@ -1,6 +1,7 @@
 ---
 title: TiDB Data Migration Overview
 summary: データ移行ツール、そのアーキテクチャ、主要コンポーネント、および機能について学びましょう。
+aliases: ['/ja/tidb-data-migration/stable/overview/','/ja/tidb-data-migration/dev/overview/']
 ---
 
 <!-- markdownlint-disable MD007 -->

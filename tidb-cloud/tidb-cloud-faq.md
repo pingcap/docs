@@ -27,9 +27,17 @@ TiDB Cloudは、TiDBが提供するフルマネージド型のクラウドデー
 
 現在、 TiDB Cloudは、トリガー、ストアドプロシージャ、ユーザー定義関数を除き、 MySQL 5.7およびMySQL 8.0の構文の大部分をサポートしています。詳細については、 [MySQLとの互換性](/mysql-compatibility.md)を参照してください。
 
+### TiDB CloudはPostgreSQLをサポートしていますか？ {#does-tidb-cloud-support-postgresql}
+
+はい。PostgreSQL互換のTiDB Cloud Starterは現在パブリックプレビューで利用可能です。
+
+PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL wire protocol（pgwire v3）および一般的なPostgreSQL SQL構文をサポートしています。詳細については、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md)を参照してください。
+
 ### TiDB Cloudを操作するには、どのようなプログラミング言語を使用できますか？ {#what-programming-languages-can-i-use-to-work-with-tidb-cloud}
 
-MySQLクライアントまたはドライバがサポートする言語であれば、どれでも使用できます。
+MySQL互換のTiDB Cloudリソースでは、MySQLクライアントまたはドライバがサポートする任意のプログラミング言語を使用できます。
+
+PostgreSQL互換の{{{ .starter }}}インスタンスでは、標準のPostgreSQLクライアントまたはドライバをサポートするプログラミング言語およびフレームワークを使用できます。
 
 ### TiDB Cloudはどこで実行できますか？ {#where-can-i-run-tidb-cloud}
 

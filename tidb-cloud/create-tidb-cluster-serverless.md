@@ -34,9 +34,13 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 </CustomContent>
 
+> **Note:**
+>
+> PostgreSQL互換のTiDB Cloud Starterは現在パブリックプレビューで利用できます。Starterインスタンスの作成時にPostgreSQL互換モードを選択できます。
+
 ## 手順 {#steps}
 
-`Organization Owner`または`Project Owner`の役割に属している場合は、次のようにしてTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成できます。
+`Organization Owner`または`Project Owner`ロールを持っている場合は、次のようにしてTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成できます。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -44,21 +48,33 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 3. プランを選択してください。
 
-    **Starter**インスタンスから開始し、後でニーズの増大に応じて**Essential**インスタンスにアップグレードできます。詳細については、[プランを選択する](/tidb-cloud/select-cluster-tier.md)をご覧ください。
+    **Starter**または**Essential**を選択できます。
 
-4. インスタンスの名前を入力し、次にインスタンスをホストするクラウドプロバイダーとリージョンを選択してください。
+    MySQL互換ワークロードの場合は、Starterインスタンスから開始し、後でニーズの増大に応じてEssentialインスタンスにアップグレードできます。詳細については、[プランを選択してください](/tidb-cloud/select-cluster-tier.md)をご覧ください。
 
-5. （オプション）このインスタンスを管理対象プロジェクトにグループ化するには、 **Group Your Instance in a Project**をクリックし、インスタンスのターゲットプロジェクトを選択します。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
+4. **Starter**を選択した場合は、**Compatibility Mode**セクションで次のいずれかのオプションを選択します。
 
-6. インスタンスの容量を更新します。
+    - **MySQL Compatible**: TiDB Cloud Starterのデフォルトの互換モードです。
+    - **PostgreSQL Compatible**: PostgreSQL互換性を提供し、現在パブリックプレビュー中です。この互換モードはTiDB Cloud Starterでのみ利用できます。
 
-    - **Starter**プラン：
+5. インスタンスの名前を入力し、次にインスタンスをホストするクラウドプロバイダーとリージョンを選択してください。
 
-        - TiDB Cloud Starterインスタンスの利用限度額を更新できます。利用限度額を0に設定すると、インスタンスは無料のままです。利用限度額を0より大きい値に設定する場合は、 TiDB Cloud Starterインスタンスを作成する前にクレジットカードを追加する必要があります。
+6. （オプション）このインスタンスを管理対象プロジェクトにグループ化するには、 **Group Your Instance in a Project**をクリックし、インスタンスのターゲットプロジェクトを選択します。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
 
-        - デフォルトでは、各組織は最大 5つ [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)を作成できます。追加のTiDB Cloud Starterインスタンスを作成するには、クレジット カードを追加し、利用限度額を指定する必要があります。
+7. 選択したプランと互換モードに基づいて、容量と使用量クォータを設定または確認します。各Starter互換モードの無料使用量クォータについては、[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)をご覧ください。
 
-    - **Essential**プラン：
+    - **MySQL-compatible Starter**:
+
+        - TiDB Cloud Starterインスタンスの利用限度額を更新できます。利用限度額を0に設定すると、インスタンスは無料のままです。利用限度額を0より大きい値に設定する場合は、インスタンスを作成する前にクレジットカードを追加する必要があります。
+        - デフォルトでは、各組織は最大5つの無料のMySQL互換Starterインスタンスを作成できます。追加のインスタンスを作成するには、クレジットカードを追加し、利用限度額を指定する必要があります。
+
+    - **PostgreSQL-compatible Starter**:
+
+        パブリックプレビュー期間中、各組織は最大10個の無料のPostgreSQL互換Starterインスタンスを作成できます。
+
+        インスタンスが無料クォータに達すると、過剰なリソース消費に対して使用制限またはサービス停止が適用される場合があります。無料使用量クォータを超えることが予想される場合は、要件について相談するために<a href="mailto:support@pingcap.com">support@pingcap.com</a>までお問い合わせください。
+
+    - **Essential**:
 
         - CLOUD.202603.x以降で実行されるTiDB Cloud Essentialインスタンスでは、デフォルトで**Elastic Mode**が選択されています。Elastic Modeでは、RCUの最大数を設定しません。代わりに、インスタンスは固定の**Baseline RCU**である2,000 RCUを使用します。これは、課金対象となる最小のリクエストキャパシティユニット（RCU）数であり、自動スケーリングの初期容量でもあります。
 
@@ -66,9 +82,9 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
         - RCUは、ワークロード用にプロビジョニングされたコンピューティングリソースを表します。TiDB Cloudは、需要に基づいてTiDB Cloud Essentialインスタンスを自動的にスケーリングします。ワークロードで一貫して100,000 RCUを超える必要がある場合は、潜在的なボトルネックを回避するために{{{ .premium }}}へのアップグレードを検討してください。
 
-7. **Create**をクリックします。
+8. **Create**をクリックします。
 
-    インスタンス作成プロセスが開始され、約30秒でインスタンスが作成されます。
+インスタンス作成プロセスが開始され、約30秒でインスタンスが作成されます。
 
 ## 次は？ {#what-s-next}
 

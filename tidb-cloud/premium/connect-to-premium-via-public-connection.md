@@ -1,11 +1,11 @@
 ---
-title: Connect to TiDB Cloud Premium via Public Connection
-summary: パブリック接続を介してTiDB Cloud Premiumに接続する方法を学びましょう。
+title: Connect to {{{ .premium }}} or {{{ .byoc }}} via Public Connection
+summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}に接続する方法を学びましょう。
 ---
 
-# パブリック接続経由でTiDB Cloud Premiumに接続します {#connect-to-tidb-cloud-premium-via-public-connection}
+# {{{ .premium }}} または {{{ .byoc }}} にパブリック接続で接続する
 
-このドキュメントでは、パブリック接続を使用して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続する方法について説明します。パブリック接続では、トラフィックフィルタを備えたパブリックエンドポイントが公開されるため、ラップトップから SQL クライアントを介して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続できます。
+このドキュメントでは、パブリック接続を介して {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続する方法について説明します。パブリック接続では、トラフィックフィルタを備えたパブリックエンドポイントが公開されるため、ノートパソコン上の SQL クライアントから {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続できます。
 
 <CustomContent plan="byoc">
 
@@ -22,11 +22,11 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 ## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
 
-パブリック接続の場合、{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> は、IP アクセス リスト内のアドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合は、最初の接続の前に [IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って設定してください。
+パブリック接続の場合、TiDB Cloud は、IP アクセス リスト内の IP アドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合は、最初の接続の前に [IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って設定してください。
 
 ## インスタンスに接続します {#connect-to-the-instance}
 
-パブリック接続を介して {{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに接続するには、以下の手順を実行してください。
+パブリック接続を介してインスタンスに接続するには、以下の手順を実行してください。
 
 <CustomContent plan="premium">
 
@@ -76,4 +76,4 @@ summary: パブリック接続を介してTiDB Cloud Premiumに接続する方�
 
 ## 次は？ {#what-s-next}
 
-{{{ .premium }}}<CustomContent plan="byoc"> または {{{ .byoc }}}</CustomContent> インスタンスに正常に接続したら、[TiDBを使用してSQL文を探索する](/basic-sql-operations.md)ことができます。
+{{{ .premium }}} または {{{ .byoc }}} インスタンスに正常に接続したら、[TiDBを使用してSQL文を探索する](/basic-sql-operations.md)ことができます。

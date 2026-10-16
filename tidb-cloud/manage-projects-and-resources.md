@@ -13,7 +13,7 @@ summary: My TiDBページでTiDB Cloudのリソースとプロジェクトを管
 
 TiDB Cloudのリソースは、管理可能なデプロイ可能な単位です。以下のいずれかになります。
 
-- TiDB Xインスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloud製品です。{{{ .starter }}}、Essential、Premium<CustomContent plan="byoc">、またはBYOC</CustomContent>インスタンスなどがあります。
+- TiDB Xインスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloud製品です。{{{ .starter }}}、Essential、Premium、またはBYOCインスタンスなどがあります。
 - {{{ .dedicated }}}クラスター
 
 <CustomContent plan="byoc">
@@ -51,11 +51,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 - [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
 
-<CustomContent plan="byoc">
-
 - [TiDB Cloud {{{ .byoc }}}インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
-
-</CustomContent>
 
 - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 

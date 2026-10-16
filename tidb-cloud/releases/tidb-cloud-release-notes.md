@@ -8,6 +8,44 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年10月15日 {#october-15-2026}
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - PostgreSQL 互換の TiDB Cloud Starter が AWS でパブリックプレビューになりました。
+
+      TiDB Cloud Starter インスタンスの作成時に、アプリケーションの要件と技術スタックに応じて、MySQL 互換と PostgreSQL 互換のいずれかを選択できるようになりました。
+
+      PostgreSQL 互換の TiDB Cloud Starter インスタンスは、接続、モニタリング、バックアップ、復元など、インスタンス管理の中核となる操作をサポートします。また、pgvector 互換のベクトル検索と一部の PostgreSQL 拡張機能もサポートしており、使い慣れた PostgreSQL エコシステムのツールと機能を使用して、幅広いアプリケーションを構築できます。
+
+      現在、PostgreSQL 互換の TiDB Cloud Starter のパブリックプレビューは、開発および評価を目的としており、本番ワークロードには推奨されません。
+
+      使用を開始するには、[PostgreSQL 互換 TiDB Cloud Starter ドキュメント](https://docs.pingcap.com/tidbcloud/starter/?plan=starter&compatibility=postgresql)を参照してください。
+
+- **TiDB Cloud BYOC**
+
+    - TiDB Cloud BYOC が AWS でパブリックプレビューになりました。
+
+        TiDB X カーネルを基盤とする [TiDB Cloud BYOC](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=byoc#tidb-cloud-byoc) は、データプレーンを自社のクラウド環境内に維持しながら、スケーラブルで信頼性の高いデータベースプラットフォームを必要とするミッションクリティカルおよび AI ワークロード向けに特別に設計されています。
+
+        TiDB Cloud BYOC は、顧客管理インフラストラクチャの柔軟性と、マネージドな TiDB Cloud サービスの運用のシンプルさを兼ね備えています。
+
+        データプレーンが AWS アカウントと VPC 内で直接実行されるため、組織はクラウド環境をより細かく制御でき、厳格なデータ分離とシームレスなセキュリティ統合を実現できます。同時に、PingCAP がコントロールプレーンを管理します。これにより、プラットフォームを自ら全面的に運用管理する負担を負うことなく、TiDB の分散 SQL 機能、スケーラビリティ、互換性のメリットを得ることができます。
+
+        TiDB Cloud BYOC は AWS アカウントにデプロイされるため、オンボーディングには TiDB Cloud チームとの調整が必要です。BYOC のオンボーディングを開始するには、[Sales にお問い合わせください](https://www.pingcap.com/contact-us/)。
+
+        詳細については、[TiDB Cloud BYOC ドキュメント](https://docs.pingcap.com/tidbcloud/byoc/?plan=byoc)を参照してください。
+
+- **TiDB Cloud Filesystem**
+
+    - TiDB Cloud Filesystem がパブリックプレビューになりました。
+
+        TiDB Cloud Filesystem は、AI コーディングエージェント向けに特別に設計された分散ファイルシステムです。すでに本番環境で数百万の AI エージェントを支えている TiDB Cloud Starter と同じインフラストラクチャ上に構築されており、サンドボックスのライフサイクル全体にわたって Git を認識する永続的なワークスペースを提供し、常時利用可能でシームレスにスケールします。
+
+        使用を開始するには、[TiDB Cloud Filesystem ドキュメント](https://docs.pingcap.com/tidbcloud-filesystem/)を参照してください。
+
 ## 2026年10月13日 {#october-13-2026}
 
 **一般的な変更**

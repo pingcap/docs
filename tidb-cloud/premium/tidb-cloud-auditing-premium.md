@@ -1,23 +1,23 @@
 ---
-title: "TiDB Cloud Premium Database Audit Logging"
-summary: TiDB Cloud Premiumでインスタンスを監査する方法を学びましょう。
+title: "{{{ .premium }}} または {{{ .byoc }}} のデータベース監査ログ"
+summary: {{{ .premium }}} または {{{ .byoc }}} インスタンスでデータベース監査ログを有効にし、監査フィルターとクラウドストレージを設定する方法を学びましょう。
 ---
 
-# TiDB Cloud Premiumデータベース監査ログ {#tidb-cloud-premium-database-audit-logging}
+# {{{ .premium }}} or {{{ .byoc }}} Database Audit Logging
 
-TiDB Cloudは、実行されたSQL文など、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
+TiDB Cloud は、実行された SQL ステートメントなど、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 
-組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
+組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するために、データベース監査ログを定期的に分析することは、セキュリティのベストプラクティスです。
 
-監査ログ機能は**デフォルトでは無効になっています**。TiDB Cloud Premiumインスタンスを監査するには、まず監査ログを有効にしてから、監査フィルタールールを設定する必要があります。
+監査ログ機能は**デフォルトで無効**になっています。{{{ .premium }}} または {{{ .byoc }}} インスタンスを監査するには、まず監査ログを有効にしてから、監査フィルタールールを設定する必要があります。
 
 > **Note:**
 >
-> 監査ログはインスタンスのリソースを消費するため、インスタンスの監査を行うかどうかは慎重に検討してください。
+> 監査ログはインスタンスのリソースを消費するため、インスタンスを監査するかどうかは慎重に判断してください。
 
 ## 前提条件 {#prerequisites}
 
-- あなたはTiDB Cloud Premiumインスタンスを使用しています。
+- あなたは{{{ .premium }}} または {{{ .byoc }}} インスタンスを使用しています。
 
     > **Note:**
     >
@@ -29,7 +29,7 @@ TiDB Cloudは、実行されたSQL文など、データベースへのユーザ�
 
 ## 監査ログを有効にする {#enable-audit-logging}
 
-TiDB Cloudは、 TiDB Cloud Premiumインスタンスの監査ログをクラウドストレージサービスに記録することをサポートしています。データベース監査ログを有効にする前に、インスタンスが配置されているクラウドプロバイダーでクラウドストレージサービスを設定してください。
+TiDB Cloudは、{{{ .premium }}} または {{{ .byoc }}} インスタンスの監査ログをクラウドストレージサービスに記録することをサポートしています。データベース監査ログを有効にする前に、インスタンスが配置されているクラウドプロバイダーでクラウドストレージサービスを設定してください。
 
 ### AWS 上の TiDB の監査ログを有効にする {#enable-audit-logging-for-tidb-on-aws}
 
@@ -47,7 +47,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 #### ステップ2. Amazon S3へのアクセスを設定する {#step-2-configure-amazon-s3-access}
 
-1. 監査ログを有効にするTiDB Cloud PremiumインスタンスのTiDB CloudアカウントIDと外部IDを取得してください。
+1. 監査ログを有効にする {{{ .premium }}} または {{{ .byoc }}} インスタンスの TiDB Cloud Account ID と External ID を取得します。
 
     1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -97,26 +97,25 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 #### ステップ3．監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、 TiDB CloudアカウントIDと外部IDの値を取得した**Database Audit Log Storage Configuration**ダイアログに戻り、以下の手順を実行します。
+TiDB Cloudコンソールで、TiDB CloudアカウントIDと外部IDの値を取得した**Database Audit Log Storage Configuration**ダイアログに戻り、以下の手順を実行します。
 
 1. **Bucket URI**フィールドに、監査ログファイルが書き込まれるS3バケットのURIを入力してください。
-
 2. **Bucket Region**ドロップダウンリストから、バケットが配置されているAWSリージョンを選択します。
-
 3. **Role ARN**フィールドに、[ステップ2. Amazon S3へのアクセスを設定する](#step-2-configure-amazon-s3-access)でコピーした Role ARN の値を入力します。
-
-4. **Test Connection and Next**をクリックして、 TiDB Cloudがバケットにアクセスして書き込みできるかどうかを確認します。
+4. **Test Connection and Next**をクリックして、TiDB Cloudがバケットにアクセスして書き込みできるかどうかを確認します。
 
     **The connection is successful**と表示されます。そうでない場合は、アクセス設定を確認してください。
 
-5. インスタンスの監査ログを有効にするには、 **Enable**をクリックしてください。
+5. インスタンスの監査ログを有効にするには、**Enable**をクリックしてください。
 
     TiDB Cloudは、指定されたインスタンスの監査ログをAmazon S3バケットに書き込む準備ができています。
 
 > **Note:**
 >
-> - 監査ログを有効にした後、バケットURI、場所、またはARNに変更を加えた場合は、 TiDB Cloudがバケットに接続できることを確認するために、再度**Test Connection**をクリックする必要があります。その後、 **Enable**をクリックして変更を適用してください。
+> - 監査ログを有効にした後、バケットURI、場所、またはARNに変更を加えた場合は、TiDB Cloudがバケットに接続できることを確認するために、再度**Test Connection**をクリックする必要があります。その後、**Enable**をクリックして変更を適用してください。
 > - TiDB CloudによるAmazon S3へのアクセス権を削除するには、AWSマネジメントコンソールでこのインスタンスに付与されている信頼ポリシーを削除するだけです。
+
+<CustomContent plan="premium">
 
 <CustomContent language="en,zh">
 
@@ -241,27 +240,26 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 #### ステップ3．監査ログを有効にする {#step-3-enable-audit-logging}
 
-TiDB Cloudコンソールで、 TiDB CloudアカウントIDを取得した**Database Audit Log Storage Configuration**ダイアログに戻り、以下の手順を実行します。
+TiDB Cloudコンソールで、TiDB CloudアカウントIDを取得した**Database Audit Log Storage Configuration**ダイアログに戻り、以下の手順を実行します。
 
-1. **Bucket URI**フィールドに、OSSバケットのURIを入力します。例： `oss://tidb-cloud-audit-log` 。
-
-2. **Bucket Region**フィールドで、バケットが配置されているAlibaba Cloudリージョンを選択します（ TiDB Cloud Premiumインスタンスのリージョンと一致させることをお勧めします）。
-
+1. **Bucket URI**フィールドに、OSSバケットのURIを入力します。例： ``oss://tidb-cloud-audit-log``。
+2. **Bucket Region**フィールドで、バケットが配置されているAlibaba Cloudリージョンを選択します（{{{ .premium }}} インスタンスのリージョンと一致させることをお勧めします）。
 3. **Role ARN**フィールドに、[ステップ2. OSSアクセスを設定する](#step-2-configure-oss-access)でコピーした Role ARN の値を貼り付けます。
+4. **Test Connection**をクリックして、TiDB CloudがOSSバケットにアクセスして書き込みできるかどうかを確認してください。
 
-4. **Test Connection**をクリックして、 TiDB CloudがOSSバケットにアクセスして書き込みできるかどうかを確認してください。
-
-    - 接続が成功すると、 **The connection is successful**と表示されます。
+    - 接続が成功すると、**The connection is successful**と表示されます。
     - そうでない場合は、OSSバケットのアクセス許可、RAMロールの設定、およびポリシーを確認してください。
 
-5. インスタンスの監査ログを有効にするには、 **Enable**をクリックしてください。
+5. インスタンスの監査ログを有効にするには、**Enable**をクリックしてください。
 
     TiDB Cloudは、指定されたインスタンスの監査ログをOSSバケットに書き込む準備ができています。
 
 > **Note:**
 >
-> - 監査ログを有効にした後、バケットのURIまたは場所に変更を加えた場合は、 TiDB Cloudがバケットに接続できることを確認するために、再度**Test Connection**をクリックする必要があります。その後、 **Enable**をクリックして変更を適用してください。
+> - 監査ログを有効にした後、バケットのURIまたは場所に変更を加えた場合は、TiDB Cloudがバケットに接続できることを確認するために、再度**Test Connection**をクリックする必要があります。その後、**Enable**をクリックして変更を適用してください。
 > - TiDB CloudによるOSSバケットへのアクセス権を削除するには、Alibaba Cloudコンソールでこのインスタンスに付与されている信頼ポリシーを削除してください。
+
+</CustomContent>
 
 </CustomContent>
 
@@ -405,4 +403,4 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 
 ## 監査ログの制限 {#audit-logging-limitations}
 
-TiDB Cloud Premium では、監査ログが時系列順に書き込まれることを保証していません。最新のイベントを確認するには、すべてのログファイルを確認する必要がある場合があります。ログを時系列順に並べ替えるには、各監査レコードの`TIME`フィールドを使用してください。
+{{{ .premium }}} と {{{ .byoc }}} では、監査ログが時系列順に書き込まれることを保証していません。最新のイベントを確認するには、すべてのログファイルを確認する必要がある場合があります。ログを時系列順に並べ替えるには、各監査レコードの`TIME`フィールドを使用してください。

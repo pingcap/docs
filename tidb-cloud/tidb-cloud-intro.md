@@ -78,13 +78,10 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
 - TiDB Cloud Starter
 
-    TiDB Cloud Starterは、フルマネージド型のマルチテナント対応TiDBサービスです。MySQL互換の自動スケーリング対応データベースを即座に提供し、十分な無料クォータと、無料制限を超えた場合の従量課金制を採用しています。
+    {{{ .starter }}}は、フルマネージド型のマルチテナント対応TiDBサービスです。MySQL互換の自動スケーリング対応データベースを即座に提供し、PostgreSQL互換はパブリックプレビューで利用できます。
 
-    <CustomContent language="en,zh">
-
-    現在、 TiDB Cloud StarterはAWSで一般提供されており、Alibaba Cloudではパブリックプレビュー版として提供されています。
-
-    </CustomContent>
+    - MySQL互換のStarterでは、月間無料クォータが提供され、無料枠を超えた使用量については従量課金を利用できます。<CustomContent language="en,zh">現在、{{{ .starter }}}はAWSで一般提供されており、Alibaba Cloudではパブリックプレビュー版として提供されています。</CustomContent>
+    - PostgreSQL互換のStarterは、使用量の上限を条件として、パブリックプレビュー期間中は無料で利用できます。このプレビューは開発および評価を目的としており、本番ワークロードには推奨されません。
 
 - TiDB Cloud Essential
 
@@ -120,15 +117,11 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
     </CustomContent>
 
-<CustomContent plan="byoc">
-
 - {{{ .byoc }}}
 
     {{{ .byoc }}}は、より高度な制御、セキュリティ、およびコンプライアンスを必要とする大規模な本番ワークロード向けに設計されています。TiDB Cloudの自動運用、伸縮自在なスケーラビリティ、エンタープライズグレードのセキュリティの利点を活用しながら、自身のAWSアカウントでデータプレーンを実行できます。
 
-    現在、{{{ .byoc }}}はAWSでプライベートプレビュー版として提供されています。
-
-</CustomContent>
+    現在、{{{ .byoc }}}はAWS上でパブリックプレビュー版として提供されています。
 
 - TiDB Cloud Dedicated
 
@@ -156,13 +149,9 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
     プライベートエンドポイント接続または VPC ピアリング接続を介してTiDB Cloudリソースに接続できます。詳細については[プライベートエンドポイント接続を設定する](/tidb-cloud/set-up-private-endpoint-connections.md)または[VPCピアリング接続の設定](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
-<CustomContent plan="byoc">
-
 > **Note:**
 >
 > TiDB Cloud BYOC は、他の TiDB Cloud のデプロイオプションとは異なるアーキテクチャを採用しています。BYOC では、TiDB Cloud のコントロールプレーンは PingCAP によって管理され、データプレーンはお客様自身のクラウドアカウントで実行されます。詳細については、[TiDB Cloud BYOC アーキテクチャ](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc) を参照してください。
-
-</CustomContent>
 
 ## 関連リソース {#related-resources}
 

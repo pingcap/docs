@@ -5,6 +5,8 @@ hide_commit: true
 summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提供する、フルマネージドのデータベースアズアサービス（DBaaS）です。学習、試用、開発、保守、移行、監視、チューニング、セキュリティ保護、課金、統合、参照のためのガイド、サンプル、リファレンスを提供しています。
 ---
 
+<CustomContent plan="starter" compatibility="mysql">
+
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter は、フルマネージドのマルチテナント TiDB サービスです。即座に利用可能でオートスケーリング対応の MySQL 互換データベースを提供し、十分な無料クォータと、無料上限を超えた場合の従量課金を提供します。">
 
 <LearningPath label="Learn" icon="cloud1">
@@ -138,3 +140,77 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 </LearningPath>
 
 </LearningPathContainer>
+
+</CustomContent>
+
+<CustomContent plan="starter" compatibility="postgresql">
+
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="PostgreSQL互換のTiDB Cloud Starterは、使い慣れたPostgreSQLツールやフレームワークを使用してアプリケーションを構築およびテストする開発者向けに設計されています。pgvector互換のベクトル検索と一部のPostgreSQL拡張機能を備えた、フルマネージドでオートスケーリング対応のデータベースを提供します。">
+
+<LearningPath label="学ぶ" icon="cloud1">
+
+[TiDB Cloudを選ぶ理由](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-intro/?plan=starter&compatibility=postgresql)
+
+[PostgreSQL互換性](https://docs.pingcap.com/ja/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)
+
+[FAQ](https://docs.pingcap.com/ja/tidbcloud/pg-faq/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="試す" icon="cloud5">
+
+[TiDB Cloudを試す](https://docs.pingcap.com/ja/tidbcloud/pg-quickstart/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="管理" icon="cloud7">
+
+[クラスターを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster-serverless/?plan=starter&compatibility=postgresql)
+
+[パブリックエンドポイント経由で接続する](https://docs.pingcap.com/ja/tidbcloud/connect-via-standard-connection-serverless/?plan=starter&compatibility=postgresql)
+
+[データをバックアップおよび復元する](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore-serverless/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="移行" icon="cloud3">
+
+[PostgreSQLから移行する](https://docs.pingcap.com/ja/tidbcloud/import-with-psql/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="監視" icon="cloud6">
+
+[ステータスとメトリクス](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster/?plan=starter&compatibility=postgresql)
+
+[組み込みメトリクス](https://docs.pingcap.com/ja/tidbcloud/built-in-monitoring-pg/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="セキュリティ" icon="users">
+
+[パスワード認証](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-password-authentication/?plan=starter&compatibility=postgresql)
+
+[ユーザーロール](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=starter&compatibility=postgresql#user-roles)
+
+[組織アクセスを管理する](https://docs.pingcap.com/ja/tidbcloud/manage-user-access/?plan=starter&compatibility=postgresql#manage-organization-access)
+
+[TLS接続](https://docs.pingcap.com/ja/tidbcloud/secure-connections-to-serverless-clusters/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="リファレンス" icon="cloud-dev">
+
+[PostgreSQL拡張機能](https://docs.pingcap.com/ja/tidbcloud/pg-extensions-overview/?plan=starter&compatibility=postgresql)
+
+[SQLリファレンス](https://docs.pingcap.com/ja/tidbcloud/pg-sql-reference-overview/?plan=starter&compatibility=postgresql)
+
+[制限事項と制約](https://docs.pingcap.com/ja/tidbcloud/pg-limits-constraints/?plan=starter&compatibility=postgresql)
+
+[システム変数](https://docs.pingcap.com/ja/tidbcloud/system-variables/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+</LearningPathContainer>
+
+</CustomContent>

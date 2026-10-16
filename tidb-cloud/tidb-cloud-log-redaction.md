@@ -5,13 +5,13 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 # ユーザーによるログの秘匿化 {#user-controlled-log-redaction}
 
-ユーザー制御のログ秘匿化により<CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログ内の機密データの可視性を管理できます。この秘匿化機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスをとり、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ログに表示される内容を制御できます。
+ユーザー制御のログ秘匿化により、<CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>のログ内の機密データの可視性を管理できます。この秘匿化機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスを取り、<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>のログに表示される内容を制御できます。
 
-ログのマスキングはデフォルトで有効になっており、実行ログや実行計画内の機密情報が隠蔽されます。<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>のメンテナンスやSQLチューニングのために、より詳細なログ情報が必要な場合は、この機能をいつでも無効にできます。
+ログのマスキングはデフォルトで有効になっており、実行ログや実行計画内の機密情報が隠蔽されます。<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の管理や SQL チューニングのために、より詳細なログ情報が必要な場合は、この機能をいつでも無効にできます。
 
 > **Note:**
 >
-> ログの秘匿化機能は、 TiDB Cloud DedicatedクラスターおよびTiDB Cloud Premium インスタンスでサポートされています。
+> ログの秘匿化機能は、TiDB Cloud Dedicated クラスター、{{{ .premium }}} インスタンス、および {{{ .byoc }}} インスタンスでサポートされています。
 
 ## 前提条件 {#prerequisites}
 
@@ -22,7 +22,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 - TiDB Cloudにおいて、組織の**Organization Owner**の役割を担っている必要があります。
 
@@ -32,31 +32,27 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 > **Warning:**
 >
-> ログのマスキングを無効にすると、機密情報が公開され、データ漏洩のリスクが高まる可能性があります。続行する前に、このリスクを理解し、認識していることを確認してください。診断またはメンテナンス作業が完了したら、すぐにログのマスキングを再度有効にすることを忘れないでください。
+> ログの秘匿化を無効にすると、機密情報が公開され、データ漏洩のリスクが高まる可能性があります。続行する前に、このリスクを理解し、認識していることを確認してください。診断または管理タスクが完了したら、できるだけ早く再度有効にしてください。
 
-ログのマスキングを無効にするには、以下の手順を実行してください。
+ログの秘匿化を無効にするには、次の手順を実行します。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
-
-2. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
+2. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
 
     > **Tip:**
     >
-    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず対象の組織に切り替えてください。
 
-3. 左側のナビゲーションペインで、 **Settings** > **Security**をクリックします。
+3. 左側のナビゲーションペインで、**Settings** > **Security**をクリックします。
+4. **Execution Log Redaction**セクションで、秘匿化機能がデフォルトで**Enabled**になっていることを確認できます。
+5. **Disable**をクリックします。ログの秘匿化を無効にするリスクを説明する警告が表示されます。
+6. 無効化を確認します。
 
-4. **Execution Log Redaction**セクションでは、秘匿化機能がデフォルトで**Enabled**になっていることがわかります。
+ログの秘匿化を無効にした後は、次の点に注意してください。
 
-5. **Disable**をクリックします。ログのマスキングを無効にすることのリスクを説明する警告が表示されます。
-
-6. 無効化を確認してください。
-
-ログのマスキングを無効にした後、以下の点に注意してください。
-
-- この変更は、新規のデータベース接続にのみ適用されます。
-- 既存の接続には影響はありません。変更を有効にするには、既存の接続を再接続する必要があります。
-- 新規セッションのログは今後秘匿化されなくなります。
+* この変更は、新しいデータベース接続にのみ適用されます。
+* 既存の接続には影響しません。変更を有効にするには、再接続する必要があります。
+* 新しいセッションのログは秘匿化されなくなります。
 
 ## 更新されたログを確認してください {#check-the-updated-logs}
 
@@ -74,20 +70,16 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 ## ログの秘匿化を有効にする {#enable-log-redaction}
 
-データセキュリティを維持するため、診断またはメンテナンス作業が完了したらすぐに、以下の手順で**ログのマスキングを有効にしてください**。
+データセキュリティを維持するため、診断または管理タスクが完了したら、次のように**ログの秘匿化を有効に**してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
-
-2. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
+2. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。
 
     > **Tip:**
     >
-    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず対象の組織に切り替えてください。
 
-3. 左側のナビゲーションペインで、 **Settings** > **Security**をクリックします。
-
-4. **Execution Log Redaction**セクションでは、秘匿化機能が**Disabled**になっていることがわかります。
-
-5. 有効にするには、 **Enable**をクリックしてください。
-
-6. 変更内容を新しいセッションに反映させるには、データベースに再接続してください。
+3. 左側のナビゲーションペインで、**Settings** > **Security**をクリックします。
+4. **Execution Log Redaction**セクションで、秘匿化機能が**Disabled**になっていることを確認できます。
+5. 有効にするには、**Enable**をクリックします。
+6. 変更を新しいセッションに反映させるには、データベースに再接続します。

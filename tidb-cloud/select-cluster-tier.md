@@ -10,18 +10,6 @@ aliases: ['/ja/tidbcloud/developer-tier-cluster']
 
 TiDB Cloudでは、以下のプランをご用意しています。新規導入の場合でも、アプリケーションの需要増加に合わせて拡張していく場合でも、これらのサービスプランは必要な柔軟性と機能を提供します。TiDBリソースを作成する前に、どのプランがお客様のニーズに最適かを検討する必要があります。
 
-<CustomContent plan="starter,essential,premium,dedicated">
-
-- [{{{ .starter }}}](#starter)
-- [{{{ .essential }}}](#essential)
-- [{{{ .premium }}}](#premium)
-- [{{{ .dedicated }}}](#tidb-cloud-dedicated)
-- [{{{ .lake }}}](#lake)
-
-</CustomContent>
-
-<CustomContent plan="byoc">
-
 - [{{{ .starter }}}](#starter)
 - [{{{ .essential }}}](#essential)
 - [{{{ .premium }}}](#premium)
@@ -29,41 +17,62 @@ TiDB Cloudでは、以下のプランをご用意しています。新規導入�
 - [{{{ .dedicated }}}](#tidb-cloud-dedicated)
 - [{{{ .lake }}}](#lake)
 
-</CustomContent>
-
 > **Note:**
 >
 > TiDB Cloudの一部の機能は、 TiDB Cloud StarterおよびTiDB Cloud Essentialでは部分的にサポートされているか、サポートされていません。詳細については[TiDB Cloud StarterとEssential制限事項](/tidb-cloud/serverless-limitations.md)を参照してください。
 
-## TiDB Cloud Starter {#starter}
+## {{{ .starter }}} {#starter}
 
-TiDB Cloud Starterは、フルマネージド型のマルチテナント対応TiDBサービスです。MySQL互換の自動スケーリング対応データベースを即座に提供し、十分な無料クォータと、無料制限を超えた場合の従量課金制を採用しています。
+TiDB Cloud Starterは、開発者や小規模チーム向けに、即座に利用できる自動スケーリング対応のデータベースインスタンスを提供する、フルマネージド型のマルチテナントデータベースサービスです。
 
-無料プランは、 TiDB Cloud Starter を初めて利用する方に最適です。開発者や小規模チーム向けに、以下の必須機能を提供します。
+TiDB Cloud Starterは、以下の互換モードをサポートしています。
 
-- **No cost**：このプランは[無料割り当て](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)の範囲内でご利用の場合は無料です。始めるのにクレジットカードは必要ありません。
+- **MySQL-compatible**: MySQLプロトコル互換性を提供します。対象となる各インスタンスには毎月の無料クォータが含まれており、無料クォータを超えた後もインスタンスを継続して使用できるように、従量課金を有効にできます。
 
-- **ストレージ**：初期容量として、行ベースのストレージが5 GiB、列指向のストレージが5 GiB提供されます。
+- **PostgreSQL-compatible (Public Preview)**: PostgreSQL wire protocol互換性を提供します。PostgreSQL-compatible Starterインスタンスは、現在パブリックプレビュー期間中は無料です。
 
-- **Request Units**: データベース操作の 5,000 万[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
+無料プランは、{{{ .starter }}}を使い始める開発者や小規模チームに最適です。各互換モードには、ストレージとRequest Units（RUs）の毎月の無料クォータが含まれます。クォータは互換モードによって異なります。
 
-### 使用クォータ {#usage-quota}
+- **No cost**: 使用量が[無料クォータ](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)の範囲内であれば、このプランは無料です。始めるのにクレジットカードは必要ありません。
 
-TiDB Cloudでは、組織ごとにデフォルトで最大5つのTiDB Cloud Starterインスタンスを無料で作成できます。それ以上のTiDB Cloud Starterインスタンスを作成するには、クレジットカードを追加して利用限度額を指定する必要があります。
+- **Storage**: 毎月の無料ストレージクォータが含まれます。
+- **Request Units**: データベース操作用の[Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
 
-組織内の最初の 5つのTiDB Cloud Starterインスタンス（無料版かスケーラブル版かを問わず）については、 TiDB Cloud はそれぞれに以下の無料使用クォータを提供します。
+### MySQL-compatible Starter {#usage-quota}
 
-- 行ベースストレージ：5 GiB
-- 列指向ストレージ：5 GiB
-- リクエストユニット（RU）：月間5,000万RU
+TiDB Cloudの各組織につき、デフォルトでは最大 5つの無料MySQL-compatible {{{ .starter }}}インスタンスを作成できます。さらに{{{ .starter }}}インスタンスを作成するには、クレジットカードを追加し、支出上限を指定する必要があります。
 
-リクエストユニット（RU）とは、データベースへの単一のリクエストによって消費されるリソース量を表す単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。
+組織内の最初の 5つのMySQL-compatible {{{ .starter }}}インスタンスについては、無料かスケーラブルかにかかわらず、TiDB Cloudは各インスタンスに対して以下の無料使用量クォータを提供します。
 
-TiDB Cloud Starterインスタンスが使用クォータに達すると、[割り当てを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで、新しい接続試行は即座に拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、無料のTiDB Cloud Starterインスタンスの行ベースのストレージが5 GiB を超えると、インスタンスは自動的に新しい接続試行を制限します。
+- Row-based storage: 5 GiB
+- Columnar storage: 5 GiB
+- Request Units (RUs): 1か月あたり5,000万 RUs
 
-さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク出力など）のRU消費量、価格の詳細、およびスロットリング情報の詳細については、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
+Request Unit（RU）は、データベースへの単一のリクエストによって消費されるリソース量を表すために使用される測定単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータ量など、さまざまな要因によって異なります。
+
+{{{ .starter }}}インスタンスが使用量クォータに達すると、[クォータを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで、以後の新しい接続試行は直ちに拒否されます。クォータ到達前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、無料の{{{ .starter }}}インスタンスでrow-based storageが 5 GiBを超えると、そのインスタンスは新しい接続試行を自動的に制限します。
+
+さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク送信を含む）のRU消費量、料金の詳細、およびスロットリング情報については、[{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
+
+### PostgreSQL-compatible Starter {#postgresql-compatible-starter}
+
+> **Note:**
+>
+> PostgreSQL-compatible TiDB Cloud Starterは現在パブリックプレビュー中です。
+
+PostgreSQL-compatible {{{ .starter }}}インスタンスは、現在パブリックプレビュー期間中は無料です。
+
+組織内の最初の 10個のPostgreSQL-compatible {{{ .starter }}}インスタンスについて、TiDB Cloudは各インスタンスに対して以下の毎月の無料クォータを提供します。
+
+- Row-based storage: 50 GiB
+
+- Request Units (RUs): 1か月あたり5億 RUs
+
+PostgreSQL-compatible {{{ .starter }}}インスタンスが無料クォータに達すると、過剰なリソース消費に対して使用制限またはサービス停止が適用される場合があります。これらの上限を超えることが予想される場合は、要件について相談するために<a href="mailto:support@pingcap.com">support@pingcap.com</a>までお問い合わせください。
 
 ### インスタンス容量計画 {#instance-capacity-plan}
+
+以下のインスタンス容量制限は、MySQL-compatible {{{ .starter }}}インスタンスに適用されます。
 
 TiDB Cloudの各組織につき、デフォルトでは、すべてのTiDB Cloud StarterおよびEssentialインスタンスを合わせて最大 5つの[ブランチ](/tidb-cloud/branch-overview.md)を作成できます。
 
@@ -122,8 +131,6 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィ
 - **予測可能な料金体系**：ストレージとリクエストキャパシティユニット（RCU）に基づいて課金されるため、ニーズに合わせて拡張可能な透明性の高い使用量ベースの料金体系が実現し、予期せぬ追加料金なしで使用した分だけを支払うことができます。
 - **Advanced security and compliance**：高度な暗号化、顧客管理型暗号化キー（CMEK）、プライベートネットワーク、およびコンプライアンス認証をサポートし、機密データを保護します。
 
-<CustomContent plan="byoc">
-
 ## {{{ .byoc }}} {#byoc}
 
 {{{ .byoc }}} は、データの配置場所、クラウドリソース、ネットワーク境界、コンプライアンス体制をより強力に制御する必要があるエンタープライズワークロード向けに設計されています。{{{ .byoc }}} では、TiDB Cloud のコントロールプレーンは PingCAP によって管理され、データプレーンはお客様自身のクラウドアカウント内で実行されます。
@@ -135,8 +142,6 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィ
 - **Flexible high availability**: Single-AZ と Multi-AZ の両方のデプロイをサポートし、低レイテンシーのゾーン単位デプロイと、複数のアベイラビリティゾーンにまたがる高い耐障害性を持つデプロイのいずれかを選択できます。
 - **Cloud-account-level security controls**: 独自のクラウドポリシー、ネットワーク制御、監査ログ、およびコンプライアンス制御を BYOC データプレーンに適用できます。
 - **Private connectivity**: BYOC の設定に応じて、VPC peering などのプライベートネットワークアクセスパターンをサポートします。
-
-</CustomContent>
 
 ## TiDB Cloud Dedicated {#tidb-cloud-dedicated}
 

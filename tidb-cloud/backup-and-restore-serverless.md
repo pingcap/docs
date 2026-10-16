@@ -36,16 +36,23 @@ TiDB Cloudはデータを自動的にバックアップするため、災害発�
 | Backup Retention   | 1日                      | 最大30日間                            | 最大30日間               |
 | Backup Time   | 固定時間                    | 設定可能                              | 設定可能                 |
 
+> **Note:**
+>
+> PostgreSQL互換のTiDB Cloud Starterインスタンスは現在パブリックプレビュー期間中は無料ですが、自動バックアップ設定は利用限度額が0より大きいTiDB Cloud Starterインスタンスと同じです。
+>
+> - バックアップ保持期間は1日から30日まで設定可能です。
+> - バックアップ時刻は設定可能です。
+
 - **Backup Cycle**とは、バックアップが実行される頻度のことです。
 
 - **Backup Retention**とは、バックアップが保持される期間のことです。期限切れのバックアップは復元できません。
 
-    - 無料のTiDB Cloud Starterインスタンスの場合、バックアップの保持期間は1日間です。
+    - 無料のMySQL互換TiDB Cloud Starterインスタンスの場合、バックアップの保持期間は1日間です。
     - TiDB Cloud Starter （利用限度額が0より大きい場合）またはTiDB Cloud Essentialインスタンスの場合、バックアップの保持期間を1日から30日の間の任意の値に設定できます。デフォルトの保持期間は14日です。
 
 - **Backup Time**とは、バックアップのスケジュールが開始される時刻です。最終的なバックアップ時刻は、設定されたバックアップ時刻よりも遅れる場合があることにご注意ください。
 
-    - 無料のTiDB Cloud Starterインスタンスの場合、バックアップ時間はランダムに固定された時間になります。
+    - 無料のMySQL互換TiDB Cloud Starterインスタンスの場合、バックアップ時間はランダムに固定された時間になります。
     - TiDB Cloud Starter （利用限度額が0より大きい場合）またはTiDB Cloud Essentialインスタンスの場合、バックアップ時刻を30分単位で設定できます。デフォルト値はランダムに固定された時間です。
 
 ### バックアップ設定を構成する {#configure-the-backup-setting}
@@ -122,11 +129,11 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 5. 必要に応じて容量を更新してください。
 
-    - TiDB Cloud Starterインスタンスの場合、 [無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)よりも多くのリソースが必要な場合は、毎月の支出制限を設定してください。
+    - MySQL互換のTiDB Cloud Starterインスタンスの場合、 [無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)よりも多くのリソースが必要な場合は、毎月の支出制限を設定してください。
     - 新しいTiDB Cloud Essentialインスタンスの場合、TiDBカーネルバージョンに基づいて次の容量設定を構成し、その後必要に応じて詳細設定を構成してください。
 
-      - CLOUD.202603.x以降で実行される新しいTiDB Cloud Essentialインスタンスでは、デフォルトで**Elastic Mode**が選択され、2,000 RCUの固定**Baseline RCU**が使用されます。容量を制限する必要がある場合は、**Limited Mode**に切り替えて最大RCUを設定してください。最小課金RCUは自動的に計算されます。
-      - 以前のTiDBバージョンで実行される新しいTiDB Cloud Essentialインスタンスでは、最小RCUと最大RCUを設定してください。
+        - CLOUD.202603.x以降で実行される新しいTiDB Cloud Essentialインスタンスでは、デフォルトで**Elastic Mode**が選択され、2,000 RCUの固定**Baseline RCU**が使用されます。容量を制限する必要がある場合は、**Limited Mode**に切り替えて最大RCUを設定してください。最小課金RCUは自動的に計算されます。
+        - 以前のTiDBバージョンで実行される新しいTiDB Cloud Essentialインスタンスでは、最小RCUと最大RCUを設定してください。
 
 6. **Restore**をクリックして復元プロセスを開始してください。
 

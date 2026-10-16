@@ -10,18 +10,18 @@ summary: TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデー
 TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサービスにデータをストリーミングできます。現在、 TiDB Cloud Dedicated は、 changefeed を介した Apache Kafka、MySQL、 TiDB Cloud、およびクラウドストレージへのデータストリーミングをサポートしています。
 
 </CustomContent>
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
-TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサービスへデータをストリーミングできます。現在、 TiDB Cloud Premium は changefeed を介した Apache Kafka と MySQL へのデータストリーミングをサポートしています。
+TiDB Cloud changefeed を使用すると、TiDB Cloud から他のデータサービスにデータをストリーミングできます。現在、{{{ .premium }}} と {{{ .byoc }}} は、changefeed を介した Apache Kafka、MySQL、およびクラウドストレージへのデータストリーミングをサポートしています。
 
 </CustomContent>
 
 > **Note:**
 >
-> - 現在、 TiDB Cloudでは、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>ごとに最大 100件の変更フィードのみが許可されます。
-> - 現在、 TiDB Cloudでは、変更フィードごとに最大100個のテーブルフィルタルールしか設定できません。
-> - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
-> - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
+> - 現在、TiDB Cloud では、<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>ごとに最大 100 件の変更フィードのみが許可されます。
+> - 現在、TiDB Cloud では、変更フィードごとに最大 100 個のテーブルフィルタルールのみが許可されます。
+> - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
+> - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストがあった場合にのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
 
 ## Changefeedページを確認する {#view-the-changefeed-page}
 
@@ -33,7 +33,7 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
     >
     > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。チェンジフィードページが表示されます。
+2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicated クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の名前をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Changefeed** をクリックします。changefeed ページが表示されます。
 
 **Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの拡大縮小、一時停止、再開、編集、削除など）を行うことができます。
 
@@ -41,10 +41,11 @@ TiDB Cloud changefeed を使用すると、 TiDB Cloudから他のデータサ�
 
 変更フィードを作成するには、チュートリアルを参照してください。
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
-- [Apache Kafkaへのシンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-- [MySQLにシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [Apache Kafka へのシンク](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+- [MySQL にシンクする](/tidb-cloud/changefeed-sink-to-mysql.md)
+- [クラウドストレージにシンクする](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
 </CustomContent>
 <CustomContent plan="dedicated">
@@ -95,64 +96,84 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 
 </CustomContent>
 
-1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2. 拡大縮小したい対応する変更フィードを見つけて、 **Action**列の**...** > **Scale Up/Down**をクリックします。
-3. 新しい仕様を選択してください。
-4. **Submit**をクリックしてください。
+<CustomContent plan="byoc">
+
+TiCDC ノードのプロビジョニング済み vCPU を変更することで、changefeed をスケールできます。
+
+</CustomContent>
+
+1. ターゲットの<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の [**Changefeed**](#view-the-changefeed-page) ページに移動します。
+2. スケールしたい該当の changefeed を見つけて、**Action** 列の **...** > **Scale Up/Down** をクリックします。
+3. 新しい仕様を選択します。
+4. **Submit** をクリックします。
 
 スケーリング処理の完了には約10分かかります（この間、changefeedは通常通り動作します）。新しい仕様への切り替えには数秒かかります（この間、changefeedは一時停止され、自動的に再開されます）。
 
 ## 変更フィードを一時停止または再開する {#pause-or-resume-a-changefeed}
 
-1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2. 一時停止または再開したい該当する変更フィードを見つけて、 **Action**列の**...** > **Pause/Resume**をクリックします。
+1. ターゲットの<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の [**Changefeed**](#view-the-changefeed-page) ページに移動します。
+2. 一時停止または再開したい該当の changefeed を見つけて、**Action** 列の **...** > **Pause/Resume** をクリックします。
 
 ## 変更フィードを編集する {#edit-a-changefeed}
 
 > **Note:**
 >
-> TiDB Cloudでは現在、一時停止状態の変更フィードの編集のみが許可されています。
+> TiDB Cloud では現在、一時停止状態の変更フィードのみ編集できます。
 
-1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+1. ターゲットの<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の [**Changefeed**](#view-the-changefeed-page) ページに移動します。
+2. 一時停止したい changefeed を見つけて、**Action** 列の **...** > **Pause** をクリックします。
+3. changefeed のステータスが `Paused` に変わったら、**...** > **Edit** をクリックして該当の changefeed を編集します。
 
-2. 一時停止したい変更フィードを見つけて、 **Action**列の**...** > **Pause**をクリックします。
+    TiDB Cloud はデフォルトで changefeed の設定を入力します。次の設定を変更できます。
 
-3. 変更フィードのステータスが`Paused`に変更されたら、 **...** > **Edit**をクリックして、対応する変更フィードを編集します。
+    <CustomContent plan="premium,byoc">
 
-    TiDB Cloudはデフォルトで変更フィードの設定を自動的に行います。以下の設定を変更できます。
-
-    <CustomContent plan="premium">
-
-    - Apache Kafkaシンク：すべての設定。
-    - MySQLシンク： **MySQL Connection**、**Table Filter**、および**Event Filter**。
+    - Apache Kafka シンク: すべての設定。
+    - MySQL シンク: **MySQL Connection**、**Table Filter**、および **Event Filter**。
 
     </CustomContent>
     <CustomContent plan="dedicated">
 
-    - Apache Kafkaシンク：すべての設定。
-    - MySQLシンク： **MySQL Connection**、**Table Filter**、および**Event Filter**。
-    - TiDB Cloudシンク: **TiDB Cloud Connection**、**Table Filter**、および**Event Filter**。
-    - クラウドストレージシンク：**Storage Endpoint**、**Table Filter**、および**Event Filter**。
+    - Apache Kafka シンク: すべての設定。
+    - MySQL シンク: **MySQL Connection**、**Table Filter**、および **Event Filter**。
+    - TiDB Cloud シンク: **TiDB Cloud Connection**、**Table Filter**、および **Event Filter**。
+    - クラウドストレージシンク: **Storage Endpoint**、**Table Filter**、および **Event Filter**。
 
     </CustomContent>
 
-4. 設定を編集した後、 **...** > **Resume**をクリックして、対応する変更フィードを再開します。
+4. 設定を編集した後、**...** > **Resume** をクリックして該当の changefeed を再開します。
 
 ## 変更フィードを複製する {#duplicate-a-changefeed}
 
-1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2. 複製したい変更フィードを探します。**Action**列で、 **...** > **Duplicate**をクリックします。
-3. TiDB Cloudは、新しい変更フィード設定に元の設定を自動的に反映します。必要に応じて設定を確認および変更できます。
-4. 設定を確認後、 **Submit**をクリックして新しい変更フィードを作成して開始します。
+1. ターゲットの<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の [**Changefeed**](#view-the-changefeed-page) ページに移動します。
+2. 複製したい changefeed を見つけます。**Action** 列で、**...** > **Duplicate** をクリックします。
+3. TiDB Cloud は、新しい changefeed の設定に元の設定を自動的に入力します。必要に応じて設定を確認および変更できます。
+4. 設定を確認したら、**Submit** をクリックして新しい changefeed を作成し、開始します。
 
 ## 変更フィードを削除する {#delete-a-changefeed}
 
-1. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>の[**Changefeed**](#view-the-changefeed-page)ページに移動します。
-2. 削除したい該当する変更フィードを見つけて、 **Action**列の**...** > **Delete**をクリックします。
+1. ターゲットの<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の [**Changefeed**](#view-the-changefeed-page) ページに移動します。
+2. 削除したい該当の changefeed を見つけて、**Action** 列の **...** > **Delete** をクリックします。
 
 ## Changefeedの請求 {#changefeed-billing}
 
-TiDB Cloudでの変更フィードの請求については、[Changefeedの請求](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)を参照してください。
+<CustomContent plan="dedicated">
+
+TiDB Cloud Dedicated の changefeed の請求については、[TiDB Cloud DedicatedのChangefeed課金](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md) を参照してください。
+
+</CustomContent>
+
+<CustomContent plan="premium">
+
+{{{ .premium }}} の changefeed の請求については、[{{{ .premium }}} の Changefeed Billing](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md) を参照してください。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+{{{ .byoc }}} では、changefeed に個別の機能料金は発生しません。TiDB Cloud は TiCDC ノードのプロビジョニング済み vCPU に基づいてサービス料金を請求し、これらのノードをお客様のクラウドアカウントで実行するためのクラウドプロバイダー費用もお客様の負担となります。
+
+</CustomContent>
 
 ## Changefeedの状態 {#changefeed-states}
 
