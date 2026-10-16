@@ -1,6 +1,6 @@
 ---
 title: PostgreSQL から PostgreSQL-compatible TiDB Cloud Starter へ移行する
-summary: `psql` と `\copy` を使用して、PostgreSQL から PostgreSQL-compatible TiDB Cloud Starter インスタンスへスキーマとデータを移行する方法を説明します。
+summary: "`psql` と `\\copy` を使用して、PostgreSQL から PostgreSQL-compatible TiDB Cloud Starter インスタンスへスキーマとデータを移行する方法を説明します。"
 ---
 
 # PostgreSQL から PostgreSQL-compatible TiDB Cloud Starter へ移行する
