@@ -9,25 +9,25 @@
   - [简介](/tidb-cloud/tidb-cloud-intro.md)
   - [功能特性](/tidb-cloud/features.md)
   - [MySQL 兼容性](/mysql-compatibility.md)
-- 快速开始
-  - [体验 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [体验 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
-- 核心概念
+- 快速上手
+  - [试用 TiDB Cloud](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [试用 HTAP](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+- 关键概念
   - [概览](/tidb-cloud/key-concepts.md)
   - [架构](/tidb-cloud/architecture-concepts.md)
-  - [数据库模式](/tidb-cloud/database-schema-concepts.md)
+  - [数据库 Schema](/tidb-cloud/database-schema-concepts.md)
   - [事务](/tidb-cloud/transaction-concepts.md)
   - [SQL](/tidb-cloud/sql-concepts.md)
   - [AI 功能](/tidb-cloud/ai-feature-concepts.md)
-  - [扩展性](/tidb-cloud/scalability-concepts.md)
-  - [高可用](/tidb-cloud/serverless-high-availability.md)
+  - [可扩展性](/tidb-cloud/scalability-concepts.md)
+  - [高可用性](/tidb-cloud/serverless-high-availability.md)
   - [监控](/tidb-cloud/monitoring-concepts.md)
-  - [备份与恢复](/tidb-cloud/backup-and-restore-concepts.md)
-  - [安全](/tidb-cloud/security-concepts.md)
+  - [备份 & 恢复](/tidb-cloud/backup-and-restore-concepts.md)
+  - [安全性](/tidb-cloud/security-concepts.md)
 
 ## 指南
 
-- [选择你的方案](/tidb-cloud/select-cluster-tier.md)
+- [选择 TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)
 - 部署 BYOC
   - [入门概览](/tidb-cloud/byoc/byoc-onboarding-overview.md)
   - [准备 AWS 环境](/tidb-cloud/byoc/byoc-prepare-environment-aws.md)
@@ -62,7 +62,7 @@
     - [TiFlash 延迟物化](/tiflash/tiflash-late-materialization.md)
     - [兼容性](/tiflash/tiflash-compatibility.md)
     - [Pipeline 执行模型](/tiflash/tiflash-pipeline-model.md)
-  - 监控与告警
+  - 监控和告警
     - [概览](/tidb-cloud/monitor-tidb-cluster.md)
     - [内置指标](/tidb-cloud/premium/built-in-monitoring-premium.md)
     - [Statement Insight](/tidb-cloud/statement-insight.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
@@ -123,13 +123,13 @@
   - [删除 {{{ .byoc }}} 实例](/tidb-cloud/premium/delete-tidb-instance.md)
 - 迁移或导入数据
   - [概览](/tidb-cloud/tidb-cloud-migration-overview.md)
-  - 迁移数据到 TiDB Cloud
+  - 将数据迁移到 TiDB Cloud
     - [使用 Data Migration 迁移现有数据和增量数据](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
     - [使用 Data Migration 迁移增量数据](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
-    - [从 TiDB Self-Managed 迁移到 TiDB Cloud Premium](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
+    - [从 TiDB Self-Managed 迁移到 TiDB Cloud BYOC](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
     - [迁移并合并大型数据集的 MySQL 分片](/tidb-cloud/migrate-sql-shards.md)
     - [使用 AWS DMS 从 Amazon RDS for Oracle 迁移](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
-  - 导入数据到 TiDB Cloud
+  - 将数据导入 TiDB Cloud
     - [从云存储导入示例数据（SQL 文件）](/tidb-cloud/import-sample-data-serverless.md)
     - [从云存储导入 CSV 文件](/tidb-cloud/premium/import-csv-files-premium.md)
     - [从 Amazon S3 导入 CSV 文件](/tidb-cloud/premium/import-from-s3-premium.md)
@@ -138,11 +138,11 @@
     - [使用 MySQL CLI 导入数据](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
   - 参考
     - [为 TiDB Cloud 配置外部存储访问](/tidb-cloud/configure-external-storage-access.md)
-    - [数据导入命名约定](/tidb-cloud/naming-conventions-for-data-import.md)
+    - [数据导入的命名约定](/tidb-cloud/naming-conventions-for-data-import.md)
     - [导入数据的 CSV 配置](/tidb-cloud/csv-config-for-import-data.md)
-    - [排查从 Amazon S3 导入数据时的 Access Denied 错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
+    - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
-- 流式传输数据
+- 同步数据
   - [概览](/tidb-cloud/stream-data-overview.md)
   - [Changefeed](/tidb-cloud/changefeed-overview.md)
   - [Data Pipeline](/tidb-cloud/data-pipeline.md)
@@ -175,14 +175,14 @@
   - 审计管理
     - [数据库审计日志](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
-- 计费
+- 账单
   - [发票](/tidb-cloud/tidb-cloud-billing.md#invoices)
-  - [计费明细](/tidb-cloud/tidb-cloud-billing.md#billing-details)
-  - [成本浏览器](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
-  - [Billing Profile](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
+  - [账单详情](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+  - [成本资源管理器](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
+  - [账单资料](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [抵扣金](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [支付方式设置](/tidb-cloud/tidb-cloud-billing.md#payment-method)
-  - [来自云服务商 Marketplace 的计费](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
+  - [设置通过云提供商的 Marketplace 计费](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
   - [Changefeed 计费](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
   - [管理预算](/tidb-cloud/tidb-cloud-budget.md)
 - 集成
@@ -200,7 +200,7 @@
 
 - SQL 参考
   - [使用 TiDB 探索 SQL](/basic-sql-operations.md)
-  - SQL 语言结构与语法
+  - SQL 语言结构和语法
     - 属性
       - [AUTO_INCREMENT](/auto-increment.md)
       - [AUTO_RANDOM](/auto-random.md)
@@ -348,7 +348,7 @@
     - [日期和时间类型](/data-type-date-and-time.md)
     - [字符串类型](/data-type-string.md)
     - [JSON 类型](/data-type-json.md)
-  - 函数和运算符
+  - 函数与操作符
     - [概述](/functions-and-operators/functions-and-operators-overview.md)
     - [表达式求值中的类型转换](/functions-and-operators/type-conversion-in-expression-evaluation.md)
     - [运算符](/functions-and-operators/operators.md)
@@ -457,7 +457,7 @@
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [元信息锁](/metadata-lock.md)
   - [TiDB 加速建表](/accelerated-table-creation.md)
-- 常规参考
+- 通用参考
   - TiDB 经典架构
     - [概述](/tidb-architecture.md)
     - [存储](/tidb-storage.md)
@@ -476,18 +476,18 @@
     - [TiDB Cloud 合作伙伴](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
     - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
-  - [TiDB X 实例上的受限 SQL 特性](/tidb-cloud/limited-sql-features-tidb-x.md)
+  - [TiDB X 实例上的 SQL 功能限制](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDB 限制](/tidb-limitations.md)
   - [系统变量](/system-variables.md)
   - [服务器状态变量](/status-variables.md)
-  - [表过滤器](/table-filter.md)
+  - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
-  - [排查数据与索引不一致问题](/troubleshoot-data-inconsistency-errors.md)
+  - [数据索引不一致报错](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
 - 支持计划
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
-  - Connected Care 支持服务功能
+  - Connected Care 支持服务
     - [Connected: IM 中的 AI Chat](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: TiDB Cloud Alerts 的 IM 订阅
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
