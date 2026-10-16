@@ -22,7 +22,7 @@ This page provides a comprehensive overview of task operations in {{{ .lake }}},
 |---------|-------------|
 | [SHOW TASKS](/tidb-cloud-lake/sql/show-tasks.md) | Lists tasks visible to the current role |
 | [TASK HISTORY](/tidb-cloud-lake/sql/task-history.md) | Shows run history for one or more tasks |
-| [TASK ERROR INTEGRATION PAYLOAD](/tidb-cloud-lake/sql/task-error-notification-payload.md) | Shows the error payload format for task error notifications |
+| [TASK ERROR NOTIFICATION PAYLOAD](/tidb-cloud-lake/sql/task-error-notification-payload.md) | Shows the error payload format for task error notifications |
 
 > **Note:**
 >
