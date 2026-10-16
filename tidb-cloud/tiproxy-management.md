@@ -26,7 +26,7 @@ The following table shows the maximum QPS and network bandwidth of each TiProxy 
 | Small | 30K         | 93 MiB/s                  |
 | Large | 120K        | 312 MiB/s                 |
 
-The available TiProxy sizes are `Small` and `Large`. The available TiProxy node numbers are 2, 3, 6, 9, 12, 15, 18, 21, and 24. The default two small-sized TiProxy nodes can provide 60K QPS and 186 MiB/s network bandwidth. It is recommended that you reserve 20% of the QPS capacity to prevent high latency.
+The available TiProxy sizes are `Small` and `Large`. The available TiProxy node counts are 2, 3, 6, 9, 12, 15, 18, 21, and 24. The default two small-sized TiProxy nodes can provide 60K QPS and 186 MiB/s network bandwidth. It is recommended that you reserve 20% of the QPS capacity to prevent high latency.
 
 For example, if your cluster's maximum QPS is 100K and the maximum network bandwidth is 100 MiB/s, the size and number of TiProxy nodes mainly depend on the QPS. In this case, you can select 6 small-sized TiProxy nodes.
 
