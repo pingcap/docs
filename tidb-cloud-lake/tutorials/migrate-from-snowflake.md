@@ -19,7 +19,7 @@ Before you start, ensure you have the following prerequisites in place:
 
 - **Amazon S3 Bucket**: An S3 bucket where your exported data will be stored, along with the required permissions for uploading files. [Learn how to create an S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html). In this tutorial, we use `s3://lake-doc/snowflake/` as the location for staging the exported data.
 - **AWS Credentials**: AWS Access Key ID and Secret Access Key with sufficient permissions for accessing the S3 bucket. [Manage your AWS credentials](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys).
-- **Permissions to Manage IAM Roles and Policie**s: Ensure you have the necessary permissions to create and manage IAM roles and policies, which are required to configure access between Snowflake and Amazon S3. [Learn about IAM roles and policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html).
+- **Permissions to Manage IAM Roles and Policies**: Ensure you have the necessary permissions to create and manage IAM roles and policies, which are required to configure access between Snowflake and Amazon S3. [Learn about IAM roles and policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html).
 
 ## Step 1: Configuring Snowflake Storage Integration for Amazon S3
 

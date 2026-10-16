@@ -52,7 +52,7 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 
 ## CREATE TABLE ... LIKE
 
-Creates a table with the same column definitions as an existing table. Column names, data types, and their non-NUll constraints of the existing will be copied to the new table.
+Creates a table with the same column definitions as an existing table. Column names, data types, and their NOT NULL constraints of the existing table will be copied to the new table.
 
 Syntax:
 
@@ -202,7 +202,7 @@ CREATE TABLE employees (
 
 ## MySQL Compatibility
 
-{{{ .lake }}}'s syntax is difference from MySQL mainly in the data type and some specific index hints.
+{{{ .lake }}}'s syntax differs from MySQL mainly in the data type and some specific index hints.
 
 Unlike MySQL, {{{ .lake }}} follows PostgreSQL-style identifier casing by default: unquoted column names are folded to lowercase, while double-quoted names preserve their case and are case-sensitive. As a result, a table created with quoted, case-preserving column names (for example, `"Employee_ID"`) can return rows for `SELECT *` but fail for `SELECT Employee_ID` or `SELECT employee_id`. For more information about identifier casing rules, related settings, and troubleshooting, see [SQL Identifiers](/tidb-cloud-lake/sql/sql-identifiers.md#identifier-casing-rules).
 

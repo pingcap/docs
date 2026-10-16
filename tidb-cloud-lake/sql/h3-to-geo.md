@@ -5,7 +5,7 @@ summary: Returns the longitude and latitude corresponding to the given H3 index.
 
 # H3_TO_GEO
 
-Returns the longitude and latitude corresponding to the given [H3](https://eng.uber.com/h3/) index.
+Returns the longitude and latitude corresponding to the given [H3](https://h3geo.org/) index.
 
 ## Syntax
 

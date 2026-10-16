@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_DAY
-summary: Rounds down a date with time (timestamp/datetime) to the start of the day. ## Syntax.
+summary: Rounds down a date with time (timestamp/datetime) to the start of the day.
 ---
 
 # TO_START_OF_DAY

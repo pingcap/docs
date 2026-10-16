@@ -1,6 +1,6 @@
 ---
 title: system_history.login_history
-summary: Login successful example sql SELECT * FROM system_history.login_history LIMIT 1;.
+summary: Use system_history.login_history to audit successful and failed user login attempts for security monitoring and compliance.
 ---
 
 # system_history.login_history
