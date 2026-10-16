@@ -5,7 +5,7 @@ hide_commit: true
 summary: TiDB Cloud Filesystem は、アプリケーション、自動化、AI エージェントがマシンやセッションをまたいでアクセスできる、永続的で共有可能なファイルストレージを提供します。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Filesystem" subTitle="TiDB Cloud Filesystem は、アプリケーション、自動化、AI エージェントがマシンやセッションをまたいでアクセスできる、永続的で共有可能なファイルストレージです。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Filesystem" subTitle="TiDB Cloud Filesystem は、アプリケーション、自動化ツール、AI エージェントが異なるマシンやセッション間でアクセスできる、永続的な共有ファイルストレージです。">
 
 <LearningPath label="学ぶ" icon="cloud1">
 

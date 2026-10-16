@@ -145,7 +145,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 <CustomContent plan="starter" compatibility="postgresql">
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="PostgreSQL互換のTiDB Cloud Starterは、使い慣れたPostgreSQLツールやフレームワークを使用してアプリケーションを構築およびテストする開発者向けに設計されています。pgvector互換のベクトル検索と一部のPostgreSQL拡張機能を備えた、フルマネージドでオートスケーリング対応のデータベースを提供します。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="PostgreSQL 互換の TiDB Cloud Starter は、使い慣れた PostgreSQL のツールやフレームワークを使用してアプリケーションを開発・テストする開発者向けに設計されています。フルマネージドで自動スケーリングに対応したデータベースを提供し、pgvector 互換のベクトル検索機能と一部の PostgreSQL 拡張機能をサポートしています。">
 
 <LearningPath label="学ぶ" icon="cloud1">
 
