@@ -3,7 +3,7 @@
 
 # 目录
 
-## 快速开始 {#get-started}
+## 快速开始
 
 - 为什么选择 TiDB Cloud
   - [简介](/tidb-cloud/tidb-cloud-intro.md)
@@ -25,7 +25,7 @@
   - [备份与恢复](/tidb-cloud/backup-and-restore-concepts.md)
   - [安全](/tidb-cloud/security-concepts.md)
 
-## 指南 {#guides}
+## 指南
 
 - [选择你的方案](/tidb-cloud/select-cluster-tier.md)
 - 部署 BYOC
@@ -196,7 +196,7 @@
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
-## 参考 {#reference}
+## 参考
 
 - SQL 参考
   - [使用 TiDB 探索 SQL](/basic-sql-operations.md)
