@@ -5,9 +5,9 @@ hide_commit: true
 summary: TiDB Cloud Filesystem は、アプリケーション、自動化、AI エージェントがマシンやセッションをまたいでアクセスできる、永続的で共有可能なファイルストレージを提供します。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Filesystem" subTitle="TiDB Cloud Filesystem は、アプリケーション、自動化、AI エージェントがマシンやセッションをまたいでアクセスできる、永続的で共有可能なファイルストレージです。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Filesystem" subTitle="TiDB Cloud Filesystem は、アプリケーション、自動化ツール、AI エージェントが異なるマシンやセッション間でアクセスできる、永続的な共有ファイルストレージです。">
 
-<LearningPath label="Learn" icon="cloud1">
+<LearningPath label="学ぶ" icon="cloud1">
 
 [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md)
 
@@ -15,7 +15,7 @@ summary: TiDB Cloud Filesystem は、アプリケーション、自動化、AI �
 
 </LearningPath>
 
-<LearningPath label="Try" icon="cloud5">
+<LearningPath label="試す" icon="cloud5">
 
 [コンソールでクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start-console.md)
 
@@ -23,7 +23,7 @@ summary: TiDB Cloud Filesystem は、アプリケーション、自動化、AI �
 
 </LearningPath>
 
-<LearningPath label="Connect" icon="doc8">
+<LearningPath label="接続" icon="doc8">
 
 [既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md)
 
@@ -33,7 +33,7 @@ summary: TiDB Cloud Filesystem は、アプリケーション、自動化、AI �
 
 </LearningPath>
 
-<LearningPath label="Use" icon="cloud4">
+<LearningPath label="利用" icon="cloud4">
 
 [ファイルシステムを管理する](/tidb-cloud-filesystem/manage-filesystem-resources.md)
 
@@ -45,7 +45,7 @@ summary: TiDB Cloud Filesystem は、アプリケーション、自動化、AI �
 
 </LearningPath>
 
-<LearningPath label="Security" icon="users">
+<LearningPath label="セキュリティ" icon="users">
 
 [認可](/tidb-cloud-filesystem/filesystem-authorization.md)
 
@@ -55,7 +55,7 @@ summary: TiDB Cloud Filesystem は、アプリケーション、自動化、AI �
 
 </LearningPath>
 
-<LearningPath label="Reference" icon="cloud-dev">
+<LearningPath label="リファレンス" icon="cloud-dev">
 
 [ファイルシステム CLI コマンド](/ai/ti/reference/ti-filesystem.md)
 

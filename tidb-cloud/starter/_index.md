@@ -9,7 +9,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter は、フルマネージドのマルチテナント TiDB サービスです。即座に利用可能でオートスケーリング対応の MySQL 互換データベースを提供し、十分な無料クォータと、無料上限を超えた場合の従量課金を提供します。">
 
-<LearningPath label="Learn" icon="cloud1">
+<LearningPath label="学ぶ" icon="cloud1">
 
 [TiDB Cloudを選ぶ理由](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-intro/?plan=starter)
 
@@ -19,7 +19,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Try" icon="cloud5">
+<LearningPath label="試す" icon="cloud5">
 
 [TiDB Cloud を試してみる](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart/?plan=starter)
 
@@ -31,7 +31,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Develop" icon="doc8">
+<LearningPath label="開発" icon="doc8">
 
 [開発者ガイドの概要](https://docs.pingcap.com/ja/developer/)
 
@@ -41,7 +41,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Maintain" icon="cloud7">
+<LearningPath label="管理" icon="cloud7">
 
 [クラスタを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster-serverless/?plan=starter)
 
@@ -57,7 +57,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Migrate" icon="cloud3">
+<LearningPath label="移行" icon="cloud3">
 
 [Amazon RDS for Oracleから](https://docs.pingcap.com/ja/tidbcloud/migrate-from-oracle-using-aws-dms/?plan=starter)
 
@@ -71,7 +71,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Monitor" icon="cloud6">
+<LearningPath label="監視" icon="cloud6">
 
 [ステータスとメトリクス](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster/?plan=starter)
 
@@ -79,7 +79,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Tune" icon="tidb-cloud-tune">
+<LearningPath label="チューニング" icon="tidb-cloud-tune">
 
 [チューニングの概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-tune-performance-overview/?plan=starter)
 
@@ -91,7 +91,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Security" icon="users">
+<LearningPath label="セキュリティ" icon="users">
 
 [パスワード認証](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-password-authentication/?plan=starter)
 
@@ -107,7 +107,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Billing" icon="cloud2">
+<LearningPath label="課金" icon="cloud2">
 
 [価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)
 
@@ -117,7 +117,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Integrations" icon="cloud4">
+<LearningPath label="統合" icon="cloud4">
 
 [Airbyte](https://docs.pingcap.com/ja/tidbcloud/integrate-tidbcloud-with-airbyte/?plan=starter)
 
@@ -131,7 +131,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Reference" icon="cloud-dev">
+<LearningPath label="リファレンス" icon="cloud-dev">
 
 [SQLリファレンス](https://docs.pingcap.com/ja/tidbcloud/basic-sql-operations/?plan=starter)
 
@@ -145,7 +145,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 <CustomContent plan="starter" compatibility="postgresql">
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="PostgreSQL互換のTiDB Cloud Starterは、使い慣れたPostgreSQLツールやフレームワークを使用してアプリケーションを構築およびテストする開発者向けに設計されています。pgvector互換のベクトル検索と一部のPostgreSQL拡張機能を備えた、フルマネージドでオートスケーリング対応のデータベースを提供します。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="PostgreSQL 互換の TiDB Cloud Starter は、使い慣れた PostgreSQL のツールやフレームワークを使用してアプリケーションを開発・テストする開発者向けに設計されています。フルマネージドで自動スケーリングに対応したデータベースを提供し、pgvector 互換のベクトル検索機能と一部の PostgreSQL 拡張機能をサポートしています。">
 
 <LearningPath label="学ぶ" icon="cloud1">
 

@@ -15,7 +15,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 -->
 
-<LearningPath label="Learn" icon="cloud1">
+<LearningPath label="学ぶ" icon="cloud1">
 
 [TiDB Self-Managedとは](https://docs.pingcap.com/ja/tidb/stable/overview)
 
@@ -25,7 +25,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Try" icon="cloud5">
+<LearningPath label="試す" icon="cloud5">
 
 [TiDB Self-Managedを試してみる](https://docs.pingcap.com/ja/tidb/stable/quick-start-with-tidb)
 
@@ -35,7 +35,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Develop" icon="doc8">
+<LearningPath label="開発" icon="doc8">
 
 [開発者ガイドの概要](https://docs.pingcap.com/ja/developer/)
 
@@ -45,7 +45,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Deploy" icon="deploy">
+<LearningPath label="デプロイ" icon="deploy">
 
 [ソフトウェアおよびハードウェア要件](https://docs.pingcap.com/ja/tidb/stable/hardware-and-software-requirements)
 
@@ -55,7 +55,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Migrate" icon="cloud3">
+<LearningPath label="移行" icon="cloud3">
 
 [移行の概要](https://docs.pingcap.com/ja/tidb/stable/migration-overview)
 
@@ -65,7 +65,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Maintain" icon="maintain">
+<LearningPath label="管理" icon="maintain">
 
 [クラスタのアップグレード](https://docs.pingcap.com/ja/tidb/stable/upgrade-tidb-using-tiup)
 
@@ -79,7 +79,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Monitor" icon="cloud6">
+<LearningPath label="監視" icon="cloud6">
 
 [Prometheus、Grafana、TiDB Dashboardを使用する](https://docs.pingcap.com/ja/tidb/stable/tidb-monitoring-framework)
 
@@ -89,7 +89,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Tune" icon="tidb-cloud-tune">
+<LearningPath label="チューニング" icon="tidb-cloud-tune">
 
 [チューニングの概要](https://docs.pingcap.com/ja/tidb/stable/performance-tuning-overview)
 
@@ -105,7 +105,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Tools" icon="doc7">
+<LearningPath label="ツール" icon="doc7">
 
 [TiUP](https://docs.pingcap.com/ja/tidb/stable/tiup-overview)
 
@@ -125,7 +125,7 @@ summary: TiDBは、ハイブリッドトランザクションおよび分析処�
 
 </LearningPath>
 
-<LearningPath label="Reference" icon="cloud-dev">
+<LearningPath label="リファレンス" icon="cloud-dev">
 
 [TiDB設定ファイルのパラメータ](https://docs.pingcap.com/ja/tidb/stable/tidb-configuration-file)
 
