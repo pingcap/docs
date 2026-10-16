@@ -3,7 +3,7 @@
 
 # 目次
 
-## はじめに {#get-started}
+## はじめに
 
 - TiDB Cloud を選ぶ理由
   - [概要](/tidb-cloud/tidb-cloud-intro.md)
@@ -25,7 +25,7 @@
   - [バックアップと復元](/tidb-cloud/backup-and-restore-concepts.md)
   - [セキュリティ](/tidb-cloud/security-concepts.md)
 
-## ガイド {#guides}
+## ガイド
 
 - [プランを選択する](/tidb-cloud/select-cluster-tier.md)
 - BYOC をデプロイ
@@ -196,7 +196,7 @@
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
-## REFERENCE {#reference}
+## REFERENCE
 
 - SQL リファレンス
   - [TiDB で SQL を学ぶ](/basic-sql-operations.md)
@@ -505,7 +505,7 @@
   - [TiDB Cloud FAQ](/tidb-cloud/tidb-cloud-faq.md)
 - [用語集](/tidb-cloud/tidb-cloud-glossary.md)
 
-## _BUILD_ALLOWLIST {#build-allowlist}
+## _BUILD_ALLOWLIST
 
 - Tiered Storage を使用する
   - [概要](/tidb-cloud/tiered-storage-overview.md)
