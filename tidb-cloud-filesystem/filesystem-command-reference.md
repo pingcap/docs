@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Filesystem コマンドリファレンス
-summary: `ti` の設定、TiDB Cloud Filesystem リソース、データ、Git ワークスペース、ジャーナル、Vault シークレットの管理に関する TiDB Cloud CLI のコマンドリファレンスを確認できます。
+summary: "`ti` の設定、TiDB Cloud Filesystem リソース、データ、Git ワークスペース、ジャーナル、Vault シークレットの管理に関する TiDB Cloud CLI のコマンドリファレンスを確認できます。"
 ---
 
 # TiDB Cloud Filesystem コマンドリファレンス
