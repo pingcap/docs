@@ -17,7 +17,7 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 ## 限制
 
-- 对于每个 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>，最多可以创建 100 个 changefeed。
+- 对于每个 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>，最多可以创建 100 个 changefeed。
 - 由于 TiDB Cloud 使用 TiCDC 建立 changefeed，因此具有与 [TiCDC 相同的限制](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)。
 - 如果需要同步的表没有主键或非空唯一索引，则在某些重试场景下，由于同步过程中缺少唯一约束，可能会导致下游插入重复数据。
 
@@ -72,26 +72,26 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
-确保你的 {{{ .premium }}} 实例可以连接到 MySQL service。
+确保你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例可以连接到 MySQL service。
 
 私有 endpoint 利用云服务商的 **Private Link** 或 **Private Service Connect** 技术，使你 VPC 中的资源能够通过私有 IP 地址连接到其他 VPC 的 service，就像这些 service 直接托管在你的 VPC 内一样。
 
-你可以通过私有 endpoint，将 {{{ .premium }}} 实例安全地连接到你的 MySQL service。如果你的 MySQL service 尚未启用私有 endpoint，请参考 [为 Changefeed 设置私有 endpoint](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) 创建一个。
+你可以通过私有 endpoint，将 {{{ .premium }}} 或 {{{ .byoc }}} 实例安全地连接到你的 MySQL service。如果你的 MySQL service 尚未启用私有 endpoint，请参考 [为 Changefeed 设置 Private Endpoint](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) 创建一个。
 
 </CustomContent>
 
-### 加载已有数据（可选）
+### 加载已有数据（可选） {#load-existing-data-optional}
 
 <CustomContent plan="dedicated">
 
 **Sink to MySQL** 连接器只能将某一时间戳之后的增量数据从 {{{ .dedicated }}} 集群同步到 MySQL。如果你的 {{{ .dedicated }}} 集群中已经有数据，可以在启用 **Sink to MySQL** 之前，将 {{{ .dedicated }}} 集群的已有数据导出并加载到 MySQL。
 
 </CustomContent>
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
-**Sink to MySQL** 连接器只能将某一时间戳之后的增量数据从 {{{ .premium }}} 实例同步到 MySQL。如果你的 {{{ .premium }}} 实例中已经有数据，可以在启用 **Sink to MySQL** 之前，将 {{{ .premium }}} 实例的已有数据导出并加载到 MySQL。
+**Sink to MySQL** 连接器只能将某一时间戳之后的增量数据从 {{{ .premium }}} 或 {{{ .byoc }}} 实例同步到 MySQL。如果你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例中已经有数据，可以在启用 **Sink to MySQL** 之前，将已有数据导出并加载到 MySQL。
 
 </CustomContent>
 
@@ -104,12 +104,13 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
     例如：
 
-    
+    {{< copyable "sql" >}}
+
     ```sql
     SET GLOBAL tidb_gc_life_time = '720h';
     ```
 
-2. 使用 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 从 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>导出数据，然后使用 [mydumper/myloader](https://centminmod.com/mydumper.html) 等社区工具将数据加载到 MySQL service。
+2. 使用 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 从你的 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>导出数据，然后使用 [mydumper/myloader](https://centminmod.com/mydumper.html) 等社区工具将数据加载到 MySQL service。
 
 3. 从 [Dumpling 导出的文件](https://docs.pingcap.com/tidb/stable/dumpling-overview#format-of-exported-files) 中，在元信息文件获取 MySQL sink 的起始位置：
 
@@ -127,66 +128,68 @@ summary: 本文档介绍如何使用 Sink to MySQL changefeed 将数据从 TiDB 
 
 如果你没有加载已有数据，则需要在 MySQL 中手动创建对应的目标表，用于存储来自 TiDB 的增量数据。否则，数据将无法同步。
 
-## 创建 MySQL sink
+## 创建 MySQL sink {#create-a-mysql-sink}
 
 完成前提条件后，你可以将数据同步到 MySQL。
 
-1. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">{{{ .premium }}} 实例</CustomContent>的概览页面，在左侧导航栏点击 **Data** > **Changefeed**。
+1. 进入目标 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的概览页面，然后在左侧导航栏中点击 **Data** > **Changefeed**。
 
 2. 点击 **Create Changefeed**，并选择 **MySQL** 作为 **Destination**。
 
 3. 在 **Connectivity Method** 中，选择连接 MySQL service 的方法。
 
     - 如果选择 **VPC Peering** 或 **Public IP**，请填写你的 MySQL endpoint。
-    - 如果选择 **Private Link**，请选择你在 [网络](#network) 部分创建的私有 endpoint，并填写 MySQL service 的 port。
+    - 如果选择 **Private Link**，请选择你在 [Network](#network) 部分创建的私有 endpoint，然后填写你的 MySQL service 的 MySQL port。
 
-4. 在 **Authentication** 中，填写 MySQL service 的用户名和密码。
+4. 在 **Authentication** 中，填写你的 MySQL service 的 MySQL 用户名和密码。
 
 5. 点击 **Next**，测试 TiDB 是否能成功连接到 MySQL：
 
-    - 如果连接成功，将进入下一步配置。
-    - 如果连接失败，会显示连接错误，你需要处理该错误。错误解决后，再次点击 **Next**。
+    - 如果成功，你将进入下一步配置。
+    - 如果失败，会显示连接错误，你需要处理该错误。错误解决后，再次点击 **Next**。
 
 6. 自定义 **Table Filter**，筛选你希望同步的表。规则语法详见 [table filter rules](/table-filter.md)。
 
     - **Case Sensitive**：你可以设置 filter 规则中数据库和表名的匹配是否大小写敏感。默认情况下，匹配不区分大小写。
-    - **Filter Rules**：你可以在此列设置 filter 规则。默认有一条规则 `*.*`，表示同步所有表。添加新规则时，TiDB Cloud 会查询 TiDB 中的所有表，并在右侧仅显示符合规则的表。最多可添加 100 条 filter 规则。
-    - **Tables with valid keys**：此列显示具有有效键（包括主键或唯一索引）的表。
-    - **Tables without valid keys**：此列显示缺少主键或唯一键的表。这些表在同步时存在挑战，因为缺少唯一标识，可能导致下游处理重复事件时数据不一致。为保证数据一致性，建议在同步前为这些表添加唯一键或主键，或者通过添加 filter 规则排除这些表。例如，可以通过规则 `!test.tbl1` 排除表 `test.tbl1`。
+    - **Filter Rules**：你可以在此列设置 filter 规则。默认有一条规则 `*.*`，表示同步所有表。添加新规则时，TiDB Cloud 会查询 TiDB 中的所有表，并在右侧框中仅显示符合规则的表。最多可添加 100 条 filter 规则。
+    - **Tables with valid keys**：此列显示具有有效键的表，包括主键或唯一索引。
+    - **Tables without valid keys**：此列显示缺少主键或唯一键的表。这些表在同步过程中会带来挑战，因为缺少唯一标识符可能会导致下游处理重复事件时出现数据不一致。为保证数据一致性，建议在开始同步前为这些表添加唯一键或主键。或者，你也可以通过添加 filter 规则来排除这些表。例如，可以使用规则 `!test.tbl1` 排除表 `test.tbl1`。
 
 7. 自定义 **Event Filter**，筛选你希望同步的事件。
 
-    - **Tables matching**：你可以在此列设置 event filter 应用到哪些表。规则语法与前述 **Table Filter** 区域相同。每个 changefeed 最多可添加 10 条 event filter 规则。
+    - **Tables matching**：你可以在此列设置 event filter 将应用到哪些表。规则语法与前述 **Table Filter** 区域使用的语法相同。每个 changefeed 最多可添加 10 条 event filter 规则。
     - **Event Filter**：你可以使用以下 event filter，从 changefeed 中排除特定事件：
         - **Ignore event**：排除指定类型的事件。
         - **Ignore SQL**：排除匹配指定表达式的 DDL 事件。例如，`^drop` 排除以 `DROP` 开头的语句，`add column` 排除包含 `ADD COLUMN` 的语句。
         - **Ignore insert value expression**：排除满足特定条件的 `INSERT` 语句。例如，`id >= 100` 排除 `id` 大于等于 100 的 `INSERT` 语句。
         - **Ignore update new value expression**：排除新值满足指定条件的 `UPDATE` 语句。例如，`gender = 'male'` 排除修改后 `gender` 为 `male` 的更新。
         - **Ignore update old value expression**：排除旧值满足指定条件的 `UPDATE` 语句。例如，`age < 18` 排除旧值 `age` 小于 18 的更新。
-        - **Ignore delete value expression**：排除满足指定条件的 `DELETE` 语句。例如，`name = 'john'` 排除 `name` 为 `'john'` 的删除。
+        - **Ignore delete value expression**：排除满足指定条件的 `DELETE` 语句。例如，`name = 'john'` 排除 `name` 为 `'john'` 的 `DELETE` 语句。
 
 8. 在 **Start Replication Position** 中，配置 MySQL sink 的起始位置。
 
-    - 如果你已通过 Dumpling [加载了已有数据](#load-existing-data-optional)，请选择 **Start replication from a specific TSO**，并填写从 Dumpling 导出元信息文件中获取的 TSO。
-    - 如果上游 TiDB 中没有任何数据，选择 **Start replication from now on**。
+    - 如果你已通过 Dumpling [加载了已有数据](#load-existing-data-optional)，请选择 **Start replication from a specific TSO**，并填写从 Dumpling 导出的元信息文件中获取的 TSO。
+    - 如果上游 TiDB 中没有任何数据，请选择 **Start replication from now on**。
     - 否则，你可以通过选择 **Start replication from a specific time** 自定义起始时间点。
 
 9. 点击 **Next**，配置 changefeed 规格。
 
-    - 在 **Changefeed Specification** 区域，指定 changefeed 使用的 <CustomContent plan="dedicated">Replication Capacity Units (RCUs)</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs)</CustomContent> 数量。
+    - 在 **Changefeed Specification** 区域，配置 changefeed 使用的 <CustomContent plan="dedicated">Replication Capacity Units (RCUs) 数量</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) 数量</CustomContent><CustomContent plan="byoc">TiCDC 节点预配置的 vCPU 数量</CustomContent>。
     - 在 **Changefeed Name** 区域，指定 changefeed 的名称。
 
 10. 点击 **Next**，检查 changefeed 配置。
 
-    如果确认所有配置无误，检查跨区域同步的合规性，并点击 **Create**。
+    如果确认所有配置都正确，请检查跨 Region 同步的合规性，然后点击 **Create**。
 
-    如果需要修改某些配置，点击 **Previous** 返回上一步配置页面。
+    如果你想修改某些配置，点击 **Previous** 返回上一个配置页面。
 
 11. sink 很快会启动，你可以看到 sink 状态从 **Creating** 变为 **Running**。
 
-    点击 changefeed 名称，可以查看更多 changefeed 详情，如 checkpoint、同步延时、其他统计/指标（信息）等。
+    点击 changefeed 名称，可以查看更多 changefeed 详情，如 checkpoint、同步延时和其他统计/指标（信息）等。
 
-12. 如果你已通过 Dumpling [加载了已有数据](#load-existing-data-optional)，在 sink 创建完成后，需要将 GC 时间恢复为原值（默认值为 `10m`）：
+12. 如果你已通过 Dumpling [加载了已有数据](#load-existing-data-optional)，则在 sink 创建完成后，需要将 GC 时间恢复为原值（默认值为 `10m`）：
+
+{{< copyable "sql" >}}
 
 ```sql
 SET GLOBAL tidb_gc_life_time = '10m';

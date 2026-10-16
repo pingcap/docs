@@ -5,13 +5,13 @@ summary: 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱�
 
 # 用户可控的日志脱敏
 
-用户可控的日志脱敏功能允许你管理 <CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群</CustomContent><CustomContent plan="premium">TiDB Cloud 高级版实例</CustomContent>日志中敏感数据的可见性。通过切换该脱敏功能，你可以保护你的信息，在运维需求与安全之间取得平衡，并控制在 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">TiDB Cloud 高级版实例</CustomContent>日志中显示的内容。
+用户可控的日志脱敏功能允许你管理 <CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>日志中敏感数据的可见性。通过切换该脱敏功能，你可以保护你的信息，在运维需求与安全之间取得平衡，并控制在 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>日志中显示的内容。
 
-日志脱敏功能默认启用，确保运行日志和执行计划中的敏感信息被隐藏。如果你需要获取更详细的日志信息以便 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium">TiDB Cloud 高级版实例</CustomContent>维护或 SQL 调优，可以随时禁用该功能。
+日志脱敏功能默认启用，确保运行日志和执行计划中的敏感信息被隐藏。如果你需要获取更详细的日志信息以便进行 <CustomContent plan="dedicated">{{{ .dedicated }}} 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>维护或 SQL 调优，可以随时禁用该功能。
 
-> **注意：**
+> **Note:**
 >
-> 日志脱敏功能支持 TiDB Cloud Dedicated 集群和 TiDB Cloud Premium 实例。
+> 日志脱敏功能支持 TiDB Cloud Dedicated 集群、{{{ .premium }}} 实例和 {{{ .byoc }}} 实例。
 
 ## 前置条件
 
@@ -22,7 +22,7 @@ summary: 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱�
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 * 你必须是 TiDB Cloud 中组织的 **Organization Owner** 角色。
 
@@ -37,7 +37,7 @@ summary: 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱�
 要禁用日志脱敏，请按以下步骤操作：
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)。
-2. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud 高级版实例</CustomContent>的名称，进入其概览页面。
+2. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的名称，进入其概览页面。
 
     > **提示：**
     >
@@ -72,7 +72,7 @@ summary: 了解如何在 TiDB Cloud 中启用或禁用用户可控的日志脱�
 为保障数据安全，在完成诊断或维护任务后，请**及时启用日志脱敏**，操作如下。
 
 1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)。
-2. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium">TiDB Cloud 高级版实例</CustomContent>的名称，进入其概览页面。
+2. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 <CustomContent plan="dedicated">TiDB Cloud Dedicated 集群</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} 或 {{{ .byoc }}} 实例</CustomContent>的名称，进入其概览页面。
 
     > **提示：**
     >

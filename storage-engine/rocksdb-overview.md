@@ -1,10 +1,10 @@
 ---
-title: RocksDB 概述
+title: RocksDB 简介
 summary: 了解 RocksDB 的基本概念和工作原理。
 category: reference
 ---
 
-# RocksDB 概述
+# RocksDB 简介
 
 [RocksDB](https://github.com/facebook/rocksdb) 是一种 LSM-tree 存储引擎，提供键值存储和读写功能。它由 Facebook 开发，基于 LevelDB。用户写入的键值对首先插入到 Write Ahead Log (WAL)，然后写入内存中的 SkipList（一种数据结构，称为 MemTable）。LSM-tree 引擎将随机修改（插入）转换为对 WAL 文件的顺序写入，因此它们比 B-tree 引擎提供更高的写入吞吐量。
 

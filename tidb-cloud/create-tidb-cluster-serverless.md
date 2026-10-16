@@ -34,6 +34,10 @@ summary: 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例�
 
 </CustomContent>
 
+> **注意：**
+>
+> PostgreSQL 兼容的 TiDB Cloud Starter 当前处于公测阶段。创建 Starter 实例时，你可以选择 PostgreSQL 兼容模式。
+
 ## 操作步骤
 
 如果你拥有 `Organization Owner` 或 `Project Owner` 角色，可以按照以下步骤创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例：
@@ -44,21 +48,33 @@ summary: 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例�
 
 3. 选择一个方案。
 
-    你可以从 **Starter** 实例开始，随着需求增长，后续可以升级到 **Essential** 实例。更多信息请参见 [Select a Plan](/tidb-cloud/select-cluster-tier.md)。
+    你可以选择 **Starter** 或 **Essential**。
 
-4. 输入实例名称，然后选择你希望托管实例的云服务商和区域。
+    对于 MySQL 兼容的工作负载，你可以从 Starter 实例开始，随着需求增长，后续可以升级到 Essential 实例。更多信息请参见 [选择方案](/tidb-cloud/select-cluster-tier.md)。
 
-5. （可选）如需将此实例归入某个项目以便管理，请点击 **Group Your Instance in a Project**，然后为该实例选择目标项目。如果你的组织中还没有项目，可以点击 **Create a Project** 创建一个项目。
+4. 如果你选择 **Starter**，请在 **Compatibility Mode** 部分选择以下选项之一：
 
-6. 修改实例的容量配置。
+    - **MySQL Compatible**：TiDB Cloud Starter 的默认兼容模式。
+    - **PostgreSQL Compatible**：提供 PostgreSQL 兼容性，当前处于公测阶段。此兼容模式仅适用于 TiDB Cloud Starter。
 
-    - **Starter** 方案：
+5. 输入实例名称，然后选择你希望托管实例的云服务商和区域。
 
-        - 你可以设置 {{{ .starter }}} 实例的消费上限。如果消费上限设置为 0，实例将保持免费。如果消费上限大于 0，则需要在创建 {{{ .starter }}} 实例前添加信用卡。
+6. （可选）如需将此实例归入某个项目以便管理，请点击 **Group Your Instance in a Project**，然后为该实例选择目标项目。如果你的组织中还没有项目，可以点击 **Create a Project** 创建一个项目。
 
-        - 默认情况下，每个组织最多可以创建五个[免费 {{{ .starter }}} 实例](/tidb-cloud/select-cluster-tier.md#starter)。如需创建更多 {{{ .starter }}} 实例，必须添加信用卡并指定消费上限。
+7. 根据所选方案和兼容模式配置或查看容量和用量配额。有关每种 Starter 兼容模式的免费用量配额，请参见 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)。
 
-    - **Essential** 方案：
+    - **MySQL-compatible Starter**：
+
+        - 你可以修改 TiDB Cloud Starter 实例的消费上限。如果消费上限设置为 0，实例将保持免费。如果消费上限大于 0，则需要在创建实例前添加信用卡。
+        - 默认情况下，每个组织最多可以创建五个免费的 MySQL-compatible Starter 实例。如需创建更多实例，必须添加信用卡并指定消费上限。
+
+    - **PostgreSQL-compatible Starter**：
+
+        在公测期间，每个组织最多可以创建 10 个免费的 PostgreSQL-compatible Starter 实例。
+
+        当实例达到其免费配额时，超出的资源消耗可能会受到用量限制或服务暂停。如果你预计会超出免费用量配额，请联系 <a href="mailto:support@pingcap.com">support@pingcap.com</a> 讨论你的需求。
+
+    - **Essential**：
 
         - 对于运行在 CLOUD.202603.x 或更高版本上的 {{{ .essential }}} 实例，默认选中 **Elastic Mode**。在 Elastic Mode 下，你无需设置最大 RCU 数。相反，你的实例会使用固定的 **Baseline RCU** 2,000 RCU，这是向你计费的最小 Request Capacity Units（RCUs）数量，也是自动扩缩容的初始容量。
 
@@ -66,9 +82,9 @@ summary: 了解如何创建 TiDB Cloud Starter 或 TiDB Cloud Essential 实例�
 
         - RCU 代表为你的工作负载分配的计算资源。TiDB Cloud 会根据需求自动扩缩 {{{ .essential }}} 实例。如果你的工作负载持续需要超过 100,000 RCU，建议升级到 {{{ .premium }}} 以避免潜在瓶颈。
 
-7. 点击 **Create**。
+8. 点击 **Create**。
 
-    实例创建流程将启动，你的实例将在大约 30 秒内创建完成。
+实例创建流程将启动，你的实例将在大约 30 秒内创建完成。
 
 ## 后续操作
 

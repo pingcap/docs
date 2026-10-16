@@ -33,7 +33,8 @@ summary: 了解如何通过公共端点连接到你的 TiDB Cloud Starter 或 Ti
     > **注意：**
     >
     > - 保持连接类型为 `Public`，表示通过标准 TLS 连接进行连接。更多信息，请参见 [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
-    > - 如果你在 **Connection Type** 下拉列表中选择 **Private Endpoint**，则表示通过私有端点进行连接。更多信息，请参见以下文档：
+    > - PostgreSQL 兼容的 {{{ .starter }}} 当前仅支持公共端点，不支持私有端点。
+    > - 对于 MySQL 兼容的 {{{ .starter }}} 和 {{{ .essential }}} 实例，你也可以在 **Connection Type** 下拉列表中选择 **Private Endpoint**。更多信息，请参见以下文档：
     >
     >     - [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
     >     - [Connect to {{{ .starter }}} or Essential via Alibaba Cloud Private Endpoint](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
@@ -45,11 +46,16 @@ summary: 了解如何通过公共端点连接到你的 TiDB Cloud Starter 或 Ti
     > **注意：**
     >
     > - 保持连接类型为 `Public`，表示通过标准 TLS 连接进行连接。更多信息，请参见 [TLS Connection to {{{ .starter }}} or Essential](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
-    > - 如果你在 **Connection Type** 下拉列表中选择 **Private Endpoint**，则表示通过私有端点进行连接。更多信息，请参见 [Connect to {{{ .starter }}} or Essential via AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
+    > - PostgreSQL 兼容的 {{{ .starter }}} 当前仅支持公共端点，不支持私有端点。
+    > - 对于 MySQL 兼容的 {{{ .starter }}} 和 {{{ .essential }}} 实例，你也可以在 **Connection Type** 下拉列表中选择 **Private Endpoint**。更多信息，请参见 [通过 AWS PrivateLink 连接 TiDB Cloud Starter 或 Essential](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)。
 
     </CustomContent>
 
-4. TiDB Cloud 支持为你的 {{{ .starter }}} 实例创建 [branches](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)。创建分支后，你可以通过 **Branch** 下拉列表选择连接到某个分支。`main` 代表 {{{ .starter }}} 实例本身。
+4. TiDB Cloud 支持为你的 MySQL 兼容的 {{{ .starter }}} 实例创建 [branches](https://docs.pingcap.com/tidbcloud/branch-overview/?plan=starter)。创建分支后，你可以通过 **Branch** 下拉列表选择连接到某个分支。`main` 代表 {{{ .starter }}} 实例本身。
+
+    > **注意：**
+    >
+    > PostgreSQL 兼容的 {{{ .starter }}} 当前不支持分支。
 
 5. 如果你还没有设置密码，请点击 **Generate Password** 生成一个随机密码。生成的密码只会显示一次，请妥善保存。
 

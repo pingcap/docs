@@ -34,6 +34,7 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
 | {{{ .premium }}} | Data Pipeline 已在 [TiDB Cloud console](https://tidbcloud.com) 中以私有预览形式提供，可按需申请使用。 |
 | {{{ .dedicated }}} | Data Pipeline 尚未在 TiDB Cloud console 中提供。要使用 Data Pipeline，你需要手动进行设置。 |
 | {{{ .essential }}} | Data Pipeline 尚未在 TiDB Cloud console 中提供。要使用 Data Pipeline，你需要手动进行设置。 |
+
 </CustomContent>
 
 <CustomContent plan="byoc">
@@ -41,9 +42,9 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
 | 计划 | 状态 |
 | ---- | ------ |
 | {{{ .premium }}} | Data Pipeline 已在 [TiDB Cloud console](https://tidbcloud.com) 中以私有预览形式提供，可按需申请使用。 |
-| {{{ .byoc }}} | Data Pipeline 已在 [TiDB Cloud console](https://tidbcloud.com) 中以私有预览形式提供，可按需申请使用。 |
 | {{{ .dedicated }}} | Data Pipeline 尚未在 TiDB Cloud console 中提供。要使用 Data Pipeline，你需要手动进行设置。 |
 | {{{ .essential }}} | Data Pipeline 尚未在 TiDB Cloud console 中提供。要使用 Data Pipeline，你需要手动进行设置。 |
+
 </CustomContent>
 
 > **注意：**
@@ -54,15 +55,15 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
 
 请参考适用于你的计划的指南：
 
-- TiDB Cloud Premium<CustomContent plan="byoc"> 和 {{{ .byoc }}}</CustomContent>：[Set Up a Data Pipeline to TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
+- TiDB Cloud Premium 和 {{{ .byoc }}}：[Set Up a Data Pipeline to TiDB Cloud Lake](/tidb-cloud/data-pipeline-sink-to-lake.md)
 - TiDB Cloud Dedicated：[Manually set up a data pipeline to replicate data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-dedicated-sink-to-lake.md)
-- TiDB Cloud Essential：[Sink to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
+- TiDB Cloud Essential：[Manually set up a data pipeline to replicate data to TiDB Cloud Lake](/tidb-cloud/data-pipeline-essential-sink-to-lake.md)
 
 ## 查看 Data Pipeline 页面 {#view-the-data-pipeline-page}
 
-> **注意：**
+> **Note:**
 >
-> **Data Pipeline** 页面以及本节中的管理操作仅适用于 {{{ .premium }}}<CustomContent plan="byoc"> 和 {{{ .byoc }}}</CustomContent>。对于 {{{ .dedicated }}} 和 {{{ .essential }}}，你需要手动配置和维护 Data Pipeline。
+> **Data Pipeline** 页面以及本节中的管理操作仅适用于 {{{ .premium }}} 和 {{{ .byoc }}}。对于 {{{ .dedicated }}} 和 {{{ .essential }}}，你需要手动配置和维护 Data Pipeline。
 
 要查看和管理你的 Data Pipeline，请执行以下步骤：
 
@@ -72,7 +73,7 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
     >
     > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的名称进入其概览页面，然后在左侧导航栏中点击 **Data** > **Data Pipeline**。此时会显示 **Data Pipeline** 页面。
+2. 点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称进入其概览页面，然后在左侧导航栏中点击 **Data** > **Data Pipeline**。此时会显示 **Data Pipeline** 页面。
 
 在 **Data Pipeline** 页面中，你可以创建 Data Pipeline、查看现有 Data Pipeline 列表，以及管理现有 Data Pipeline，例如暂停、恢复、编辑和删除管道。
 
@@ -83,11 +84,11 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
 - **Pause**：停止数据同步，并将管道标记为 `Paused`。不会丢失数据，同步进度也会被保留。管道在创建过程中或导出完整快照期间无法暂停。
 - **Resume**：从暂停的位置继续同步，包括继续将数据导入 TiDB Cloud Lake。
 
-要暂停或恢复 Data Pipeline，请进入目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击管道所在行中的 **...**，然后点击 **Pause** 或 **Resume**。
+要暂停或恢复 Data Pipeline，请进入目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的 **Data Pipeline** 页面，点击管道所在行中的 **...**，然后点击 **Pause** 或 **Resume**。
 
 ### 编辑 Data Pipeline {#edit-a-data-pipeline}
 
-要编辑 Data Pipeline，请进入目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击管道所在行中的 **...**，然后点击 **Edit**。
+要编辑 Data Pipeline，请进入目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的 **Data Pipeline** 页面，点击管道所在行中的 **...**，然后点击 **Edit**。
 
 当 Data Pipeline 处于 `Running` 状态时，无法进行编辑。请先暂停管道，再进行编辑，之后恢复管道以使更改生效。
 
@@ -104,7 +105,7 @@ TiDB Cloud Data Pipeline 可以将全量数据和增量变更从你的 TiDB Clou
 
 要删除 Data Pipeline，请执行以下步骤：
 
-1. 进入目标 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例的 **Data Pipeline** 页面，点击管道所在行中的 **...**，然后点击 **Delete**。
+1. 进入目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的 **Data Pipeline** 页面，点击管道所在行中的 **...**，然后点击 **Delete**。
 2. 阅读警告并确认操作。删除 Data Pipeline 会：
 
     - 立即停止所有数据同步。

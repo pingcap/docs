@@ -19,7 +19,7 @@ summary: 关于 TiDB Cloud Data Pipeline 到 TiDB Cloud Lake 的常见问题，�
 
 当你需要比默认轮询模式提供的**更低数据延时**时，请启用事件驱动摄取。
 
-在默认模式下，Data Pipeline 依赖以下两个时间间隔：changefeed 将增量数据刷新到外部 stage 的间隔，以及 TiDB Cloud Lake 扫描 stage 以发现新数据的间隔。对于 {{{ .premium }}}<CustomContent plan="byoc"> 和 {{{ .byoc }}}</CustomContent>，配置的 **Sync Interval** 是这些阶段上的端到端延时目标。
+在默认模式下，Data Pipeline 依赖以下两个时间间隔：changefeed 将增量数据刷新到外部 stage 的间隔，以及 TiDB Cloud Lake 扫描 stage 以发现新数据的间隔。对于 {{{ .premium }}} 和 {{{ .byoc }}}，配置的 **Sync Interval** 是这些阶段上的端到端延时目标。
 
 在事件驱动模式下，changefeed 仍会按照其配置的时间间隔将数据刷新到外部 stage，但每次刷新还会触发发送到 SQS 队列的 **S3 event notification**。借助 SQS 通知，TiDB Cloud Lake 可以更快检测到新数据，而不必等待下一次按计划执行的扫描。
 

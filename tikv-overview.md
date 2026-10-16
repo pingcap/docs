@@ -3,7 +3,7 @@ title: TiKV 概述
 summary: TiKV 存储引擎的概述。
 ---
 
-# TiKV 概述
+# TiKV 简介
 
 TiKV 是一个分布式事务型键值数据库，提供符合 ACID 的事务 API。通过实现 [Raft 共识算法](https://raft.github.io/raft.pdf) 并将共识状态存储在 RocksDB 中，TiKV 保证了多个副本之间的数据一致性和高可用性。作为 TiDB 分布式数据库的存储层，TiKV 提供读写服务，并将应用程序写入的数据持久化。同时，它还存储 TiDB 集群的统计数据。
 

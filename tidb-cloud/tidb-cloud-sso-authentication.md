@@ -1,9 +1,9 @@
 ---
-title: 标准 SSO 认证
+title: 标准 SSO 身份验证
 summary: 了解如何通过 Google、GitHub 或 Microsoft 账号登录 TiDB Cloud 控制台。
 ---
 
-# 标准 SSO 认证
+# 标准 SSO 身份验证
 
 本文档介绍如何通过基本的单点登录（SSO）认证登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，这种方式快速且方便。
 

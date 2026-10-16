@@ -36,16 +36,23 @@ TiDB Cloud Starter 实例和 TiDB Cloud Essential 实例的自动备份设置有
 | Backup Retention | 1 day                      | Up to 30 days              | Up to 30 days              |
 | Backup Time      | Fixed time                 | Configurable               | Configurable               |
 
+> **Note:**
+>
+> PostgreSQL 兼容的 {{{ .starter }}} 实例目前在公测期间免费，但其自动备份设置与设置了消费上限大于 0 的 {{{ .starter }}} 实例相同：
+>
+> - 备份保留时长可配置为 1 到 30 天。
+> - 备份时间可配置。
+
 - **Backup Cycle** 表示备份的频率。
 
 - **Backup Retention** 表示备份的保留时长。过期的备份无法恢复。
 
-    - 对于免费版 TiDB Cloud Starter 实例，备份保留时长为 1 天。
+    - 对于免费的 MySQL 兼容 {{{ .starter }}} 实例，备份保留时长为 1 天。
     - 对于 TiDB Cloud Starter（设置了消费上限 > 0）或 TiDB Cloud Essential 实例，你可以将备份保留时长配置为 1 到 30 天之间的任意值。默认保留时长为 14 天。
 
 - **Backup Time** 表示备份开始调度的时间。请注意，最终的备份时间可能会滞后于配置的备份时间。
 
-    - 对于免费版 TiDB Cloud Starter 实例，备份时间为随机固定时间。
+    - 对于免费的 MySQL 兼容 {{{ .starter }}} 实例，备份时间为随机固定时间。
     - 对于 TiDB Cloud Starter（设置了消费上限 > 0）或 TiDB Cloud Essential 实例，你可以将备份时间配置为每半小时一次。默认值为随机固定时间。
 
 ### 配置备份设置
@@ -121,11 +128,11 @@ TiDB Cloud 支持将数据恢复到新的 TiDB Cloud Starter 或 Essential 实�
 4. 输入新实例的名称。
 5. 根据需要更新容量。
 
-    - 对于 TiDB Cloud Starter 实例，如果你需要的资源超过[免费额度](/tidb-cloud/select-cluster-tier.md#usage-quota)，请设置每月消费上限。
+    - 对于 MySQL 兼容的 {{{ .starter }}} 实例，如果你需要的资源超过[免费额度](/tidb-cloud/select-cluster-tier.md#usage-quota)，请设置每月消费上限。
     - 对于新的 TiDB Cloud Essential 实例，请根据 TiDB 内核版本配置以下容量设置，然后根据需要配置高级设置。
 
-      - 对于运行 CLOUD.202603.x 或更高版本的新 TiDB Cloud Essential 实例，默认选择 **Elastic Mode**，并使用固定的 **Baseline RCU** 2,000 RCUs。如果你需要限制容量，请切换到 **Limited Mode** 并设置最大 RCU；最小计费 RCU 会自动计算。
-      - 对于运行较早 TiDB 版本的新 TiDB Cloud Essential 实例，请设置最小 RCU 和最大 RCU。
+        - 对于运行 CLOUD.202603.x 或更高版本的新 TiDB Cloud Essential 实例，默认选择 **Elastic Mode**，并使用固定的 **Baseline RCU** 2,000 RCUs。如果你需要限制容量，请切换到 **Limited Mode** 并设置最大 RCU；最小计费 RCU 会自动计算。
+        - 对于运行较早 TiDB 版本的新 TiDB Cloud Essential 实例，请设置最小 RCU 和最大 RCU。
 
 6. 点击 **Restore** 开始恢复过程。
 

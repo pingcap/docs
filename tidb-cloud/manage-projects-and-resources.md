@@ -13,7 +13,7 @@ summary: 了解如何在 My TiDB 页面上管理你的 TiDB Cloud 资源和项�
 
 TiDB Cloud 资源是你可以管理的可部署单元。它可以是以下之一：
 
-- TiDB X 实例，即一种面向服务的 TiDB Cloud 产品，基于 [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md) 构建，例如 {{{ .starter }}}, Essential, Premium<CustomContent plan="byoc">, 或 BYOC</CustomContent> 实例
+- TiDB X 实例，即一种面向服务的 TiDB Cloud 产品，基于 [TiDB X 架构](/tidb-cloud/tidb-x-architecture.md) 构建，例如 {{{ .starter }}}, Essential, Premium 或 BYOC 实例
 - 一个 {{{ .dedicated }}} 集群
 
 <CustomContent plan="byoc">
@@ -51,11 +51,7 @@ TiDB Cloud 资源是你可以管理的可部署单元。它可以是以下之一
 
 - [Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md)
 
-<CustomContent plan="byoc">
-
 - [Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
-
-</CustomContent>
 
 - [Create a {{{ .dedicated }}} Cluster](/tidb-cloud/create-tidb-cluster.md)
 

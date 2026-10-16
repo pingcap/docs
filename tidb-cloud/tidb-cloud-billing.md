@@ -25,13 +25,11 @@ TiDB Cloud 根据你所消耗的资源进行收费。
 
 对于 {{{ .premium }}}，计费依据是已预配的 Request Capacity Units (RCUs) 数量以及你实际使用的存储，而不是底层后端节点或已预配的磁盘大小。由于 {{{ .premium }}} 当前处于私有预览阶段，你可以[联系我们的销售团队](https://www.pingcap.com/contact-us/)了解定价详情。
 
-<CustomContent plan="byoc">
-
 ### {{{ .byoc }}} 的定价 {#pricing-for-byoc}
 
-如需了解 {{{ .byoc }}} 的定价信息，请联系 [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md)。
+{{{ .byoc}}} 的费用包括直接支付给云服务提供商的基础设施费用、基于已配置 vCPU 容量收取的 PingCAP BYOC 服务费，以及单独的支持费用。BYOC 需要[企业支持计划或更高级别计划](/tidb-cloud/connected-care-overview.md#connected-care)。
 
-</CustomContent>
+如需了解 {{{ .byoc }}} 的定价信息，请[联系销售](https://www.pingcap.com/contact-us/)。
 
 ### {{{ .lake }}} 的定价 {#pricing-for-lake}
 

@@ -87,8 +87,6 @@ For more information, see [High Availability in TiDB Cloud](/tidb-cloud/serverle
 
 为最大限度地提升关键业务工作负载的可用性和弹性，{{{ .premium }}} 提供[区域级高可用](/tidb-cloud/serverless-high-availability.md#regional-high-availability-architecture)，通过将节点分布在多个可用区中，提供比同区部署更高的冗余能力。
 
-<CustomContent plan="byoc">
-
 ## TiDB Cloud BYOC {#tidb-cloud-byoc}
 
 TiDB Cloud BYOC（Bring Your Own Cloud）专为需要更强的数据位置、云资源、网络边界和合规态势控制能力，同时仍希望将 TiDB Cloud 作为托管服务使用的组织而设计。使用 BYOC 时，TiDB Cloud 控制平面由 PingCAP 管理，而 TiDB 数据平面运行在你自己的云账户中。
@@ -119,8 +117,6 @@ BYOC 提供以下特性：
 每个 BYOC Region 都是独立部署和运维的。添加某个 BYOC Region 时，TiDB Cloud 会在你的云账户中预配该 Region 所需的资源。由于每个 BYOC Region 都有各自独立的数据平面设置，因此不同 Region 不会共享同一个 TiDB Service VPC 或 Observability Service VPC。
 
 你的应用会从应用环境连接到 {{{ .byoc }}} 实例。根据你的 BYOC 配置，连接可以使用私有访问或受控的公网访问。对于私有访问，BYOC 支持 VPC peering 及其他私有连接选项。
-
-</CustomContent>
 
 ## TiDB Cloud Dedicated
 

@@ -1,9 +1,9 @@
 ---
-title: Security Overview
+title: 安全概览
 summary: 了解 TiDB Cloud 的全面安全框架，包括身份管理、网络隔离、数据保护、访问控制和审计。
 ---
 
-# Security Overview
+# 安全概览
 
 TiDB Cloud 提供了全面且灵活的安全框架，覆盖数据生命周期的所有阶段。该平台在身份与访问管理、网络安全与隔离、数据访问控制、数据库访问控制以及审计日志等方面，均提供了全方位的保护。
 
@@ -36,6 +36,12 @@ TiDB Cloud 提供私有终端节点、VPC Peering 以及 IP 访问列表，用�
 对于托管在 AWS 上的 {{{ .premium }}} 实例，你可以启用双层数据加密，在默认的存储层加密之上增加数据库层加密。启用双层数据加密后，TiDB Cloud 会对 TiKV 存储的数据、changefeed 数据和备份数据进行加密，并且你可以选择使用客户自管加密密钥（CMEK）或服务自管加密密钥。
 
 更多信息，请参见 [双层数据加密](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)。
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+使用 {{{ .byoc }}} 时，TiDB 数据面运行在你的云账户中。你可以使用云服务提供商的 IAM 策略、网络控制、加密设置和密钥管理能力来控制对数据面资源的访问，并满足你的安全性和合规性要求。
 
 </CustomContent>
 

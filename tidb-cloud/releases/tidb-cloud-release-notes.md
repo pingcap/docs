@@ -8,6 +8,76 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 10 月 15 日 {#october-15-2026}
+
+**常规变更**
+
+- **TiDB Cloud Starter**
+
+    - 兼容 PostgreSQL 的 TiDB Cloud Starter 现已在 AWS 上进入公测。
+
+      创建 TiDB Cloud Starter 实例时，你现在可以根据应用需求和技术栈，在 MySQL 兼容和 PostgreSQL 兼容之间进行选择。
+
+      兼容 PostgreSQL 的 TiDB Cloud Starter 实例支持核心实例管理操作，包括连接、监控、备份和恢复。它还支持兼容 pgvector 的向量搜索和部分 PostgreSQL 扩展，使你能够使用熟悉的 PostgreSQL 生态工具和功能构建各种应用。
+
+      目前，兼容 PostgreSQL 的 TiDB Cloud Starter 公测版仅适用于开发和评估，不建议用于生产负载。
+
+      如需开始使用，请参见[兼容 PostgreSQL 的 TiDB Cloud Starter 文档](https://docs.pingcap.com/tidbcloud/starter/?plan=starter&compatibility=postgresql)。
+
+- **TiDB Cloud BYOC**
+
+    - TiDB Cloud BYOC 现已在 AWS 上进入公测。
+
+        由 TiDB X 内核驱动，[TiDB Cloud BYOC](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=byoc#tidb-cloud-byoc)专为关键任务和 AI 负载而设计，这些负载需要一个可扩展、可靠的数据库平台，同时将数据面保留在你自己的云环境中。
+
+        TiDB Cloud BYOC 将客户自主管理基础设施的灵活性与托管式 TiDB Cloud 服务的运维简便性结合在一起。
+
+        由于数据面直接运行在你的 AWS 账户和 VPC 中，你的组织能够对云环境保留更强的控制力，确保严格的数据隔离和无缝的安全集成。同时，PingCAP 管理控制面。这使你能够受益于 TiDB 的分布式 SQL 能力、扩展性和兼容性，而无需自行承担管理整个平台的全部运维负担。
+
+        由于 TiDB Cloud BYOC 部署在你的 AWS 账户中，接入过程需要与 TiDB Cloud 团队协作。如需开始 BYOC 接入，请[联系销售](https://www.pingcap.com/contact-us/)。
+
+        更多信息，请参见 [TiDB Cloud BYOC 文档](https://docs.pingcap.com/tidbcloud/byoc/?plan=byoc)。
+
+- **TiDB Cloud Filesystem**
+
+    - TiDB Cloud Filesystem 现已进入公测。
+
+        TiDB Cloud Filesystem 是专为 AI 编码代理设计的分布式文件系统。它构建于与已在生产环境中为数百万 AI 代理提供支持的 TiDB Cloud Starter 相同的基础设施之上，可在沙箱生命周期内提供具备 Git 感知能力的持久化工作区，并具备始终在线的可用性和无缝扩展性。
+
+        如需开始使用，请参见 [TiDB Cloud Filesystem 文档](https://docs.pingcap.com/tidbcloud-filesystem/).
+
+## 2026 年 10 月 13 日 {#october-13-2026}
+
+**常规变更**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential 现在允许你在不设置 Max RCU 的情况下创建实例或修改其容量。此功能适用于运行 TiDB 版本 `CLOUD.202603.x` 或更高版本的 TiDB Cloud Essential 实例。
+
+        - 创建新的 TiDB Cloud Essential 实例时，**Elastic Mode** 是默认模式。在此模式下，TiDB Cloud 会根据你的工作负载自动分配后端资源。对于持续需要超过 100,000 RCU 的工作负载，建议升级到 TiDB Cloud Premium，以避免潜在的性能瓶颈。
+        - 如果你需要设置最大容量限制，可以切换到 **Limited Mode**。
+
+      已配置 Max RCU 的现有 TiDB Cloud Essential 实例将继续运行，无需任何配置更改。你可以保留当前值，或将其清除以切换到 **Elastic Mode**。
+
+      更多信息，请参见 [创建 TiDB Cloud Essential 实例](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=essential)。
+
+    - TiDB Cloud Essential 现在支持手动备份。这些手动备份会一直保留，直到你显式删除它们。
+
+      此功能适用于运行 TiDB 版本 `CLOUD.202603.x` 或更高版本的 TiDB Cloud Essential 实例。
+
+      如需创建手动备份，请参见[手动备份](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#manual-backups)。
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium 现在允许你在不设置 Max RCU 的情况下创建实例或修改其容量。
+
+        - 创建新的 TiDB Cloud Premium 实例时，**Elastic Mode** 是默认模式：TiDB Cloud 会根据你的工作负载自动分配后端资源。在 Elastic Mode 下，你可以设置 Baseline RCU 以指定最小预配容量和最小计费容量。支持 RCU 消耗告警，你还可以设置自定义阈值，以便在容量扩展时监控使用情况。
+        - 如果你需要设置最大容量限制，仍然可以使用 **Limited Mode**。
+
+      已配置 Max RCU 的现有 TiDB Cloud Premium 实例将继续运行，无需任何配置更改。你可以保留当前值，或将其清除以切换到 **Elastic Mode**。
+
+      更多信息，请参见 [创建 TiDB Cloud Premium 实例](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium)。
+
 ## 2026 年 9 月 29 日 {#september-29-2026}
 
 **常规变更**

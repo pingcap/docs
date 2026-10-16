@@ -5,7 +5,7 @@ summary: 了解如何为 changefeed 设置 private endpoint。
 
 # 为 Changefeed 设置 Private Endpoint
 
-本文档介绍如何在你的 {{{ .premium }}} 实例中为 changefeed 创建 private endpoint，从而使你能够通过私有连接安全地将数据流式传输到自托管 Kafka、Amazon MSK Provisioned 集群或 MySQL。
+本文档介绍如何在你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例中为 changefeed 创建 private endpoint，从而使你能够通过私有连接安全地将数据流式传输到自托管 Kafka、Amazon MSK Provisioned 集群或 MySQL。
 
 ## 前提条件 {#prerequisites}
 
@@ -25,10 +25,10 @@ summary: 了解如何为 changefeed 设置 private endpoint。
 
 Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的 VPC 中的资源能够通过私有 IP 地址连接到其他 VPC 中的服务，就像这些服务直接托管在你的 VPC 中一样。
 
-> **注意：**
+> **Note:**
 >
-> - Private endpoint 是组织级别的资源，不绑定到特定的 {{{ .premium }}} 实例。在同一组织和同一区域内创建的 private endpoint 可以由多个连接到同一下游服务的实例共享，因此你无需为每个实例单独创建 endpoint。
-> - 删除 {{{ .premium }}} 实例不会删除其 private endpoint。即使之前使用该 private endpoint 的实例仍然可用，如果 30 天内没有任何实例使用该 private endpoint，它也会被自动删除。你也可以在不再需要时手动删除 private endpoint。但是，当它仍被任何实例使用时，你无法删除它。
+> - private endpoint 是组织级别的资源，不绑定到特定的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。在同一组织和同一区域内创建的 private endpoint 可以由多个连接到同一下游服务的实例共享，因此你无需为每个实例单独创建 endpoint。
+> - 删除 {{{ .premium }}} 或 {{{ .byoc }}} 实例不会删除其 private endpoint。即使之前使用该 private endpoint 的实例仍然可用，如果 30 天内没有任何实例使用该 private endpoint，它也会被自动删除。你也可以在不再需要时手动删除 private endpoint。但是，当它仍被任何实例使用时，你无法删除它。
 
 <SimpleTab>
 <div label="AWS">
@@ -42,6 +42,8 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 - **Amazon MSK Provisioned**：你的 Amazon MSK Provisioned 集群的 ARN。要了解如何为 changefeed 创建 Amazon MSK Provisioned 集群，请参见[通过 AWS PrivateLink 设置 Amazon MSK Provisioned 集群](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md)。
 
 </div>
+
+<CustomContent plan="premium">
 
 <CustomContent language="en,zh">
 
@@ -59,13 +61,15 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 </div>
 </CustomContent>
 
+</CustomContent>
+
 </SimpleTab>
 
 ## 步骤 1. 打开实例的 Networking 页面 {#step-1-open-the-networking-page-for-your-instance}
 
 1. 登录 [TiDB Cloud console](https://tidbcloud.com/)。
 
-2. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面上，点击目标 {{{ .premium }}} 实例的名称，进入其实例概览页面。
+2. 在 [**My TiDB**](https://tidbcloud.com/tidbs) 页面上，点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其实例概览页面。
 
     > **Tip:**
     >
@@ -109,6 +113,8 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 
 </div>
 
+<CustomContent plan="premium">
+
 <CustomContent language="en,zh">
 
 <div label="Alibaba Cloud">
@@ -127,5 +133,7 @@ Private endpoint 利用云服务提供商的 **Private Link** 技术，使你的
 8. 点击 **Create** 以验证配置并创建 private endpoint。
 
 </div>
+</CustomContent>
+
 </CustomContent>
 </SimpleTab>

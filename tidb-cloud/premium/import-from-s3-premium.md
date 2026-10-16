@@ -1,11 +1,11 @@
 ---
-title: 从 Amazon S3 将数据导入到 {{{ .premium }}}
-summary: 了解如何使用控制台向导将 Amazon S3 中的 CSV 文件导入到 {{{ .premium }}} 实例。
+title: 从 Amazon S3 将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}
+summary: 了解如何使用控制台向导将 Amazon S3 中的 CSV 文件导入到 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 ---
 
-# 从 Amazon S3 将数据导入到 {{{ .premium }}}
+# 从 Amazon S3 将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}
 
-本文介绍如何将 Amazon Simple Storage Service (Amazon S3) 中的 CSV 文件导入到 {{{ .premium }}} 实例。
+本文介绍如何将 Amazon Simple Storage Service (Amazon S3) 中的 CSV 文件导入到 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 
 > **Tip:**
 >
@@ -14,18 +14,18 @@ summary: 了解如何使用控制台向导将 Amazon S3 中的 CSV 文件导入�
 
 ## 限制 {#limitations}
 
-- 为确保数据一致性，{{{ .premium }}} 仅允许将 CSV 文件导入到空表中。如果目标表已包含数据，请先导入到临时表，然后使用 `INSERT ... SELECT` 语句复制行。
+- 为确保数据一致性，{{{ .premium }}} 和 {{{ .byoc }}} 仅允许将 CSV 文件导入到空表中。如果目标表已包含数据，请先导入到临时表，然后使用 `INSERT ... SELECT` 语句复制行。
 - 在公开预览期间，用户界面当前仅支持 Amazon S3 作为存储提供方。对其他提供方的支持将在后续版本中添加。
 - 每个导入任务仅将单个源模式映射到一个目标表。
 
 ## 步骤 1：准备 CSV 文件 {#step-1-prepare-the-csv-files}
 
-1. 如果某个 CSV 文件大于 256 MiB，建议将其拆分为约 256 MiB 的较小文件，以便 {{{ .premium }}} 能够并行处理它们。
+1. 如果某个 CSV 文件大于 256 MiB，建议将其切分为约 256 MiB 的较小文件，以便 {{{ .premium }}} 或 {{{ .byoc }}} 能够并行处理它们。
 2. 按照 Dumpling 命名约定为 CSV 文件命名：
    - 整表文件：使用 `${db_name}.${table_name}.csv` 格式。
    - 分片文件：追加数字后缀，例如 `${db_name}.${table_name}.000001.csv`。
    - 压缩文件：使用 `${db_name}.${table_name}.${suffix}.csv.${compress}` 格式。
-3. 可选的 schema 文件（`${db_name}-schema-create.sql`、`${db_name}.${table_name}-schema.sql`）可帮助 {{{ .premium }}} 自动创建数据库和表。
+3. 可选的 schema 文件（`${db_name}-schema-create.sql`、`${db_name}.${table_name}-schema.sql`）可帮助 {{{ .premium }}} 或 {{{ .byoc }}} 自动创建数据库和表。
 
 <!--Todo
 These naming conventions are identical to the TiDB Cloud Serverless workflow. Update this section after we validate the Premium defaults.
@@ -33,16 +33,16 @@ These naming conventions are identical to the TiDB Cloud Serverless workflow. Up
 
 ## 步骤 2：创建目标 schema（可选） {#step-2-create-target-schemas-optional}
 
-如果你希望 {{{ .premium }}} 自动创建数据库和表，请将 Dumpling 生成的 schema 文件放在同一个 S3 目录中。否则，请在运行导入之前，先在 {{{ .premium }}} 中手动创建数据库和表。
+如果你希望 {{{ .premium }}} 或 {{{ .byoc }}} 自动创建数据库和表，请将 Dumpling 生成的 schema 文件放在同一个 S3 目录中。否则，请在运行导入之前，先在 {{{ .premium }}} 或 {{{ .byoc }}} 中手动创建数据库和表。
 
 ## 步骤 3：配置对 Amazon S3 的访问 {#step-3-configure-access-to-amazon-s3}
 
-要允许 {{{ .premium }}} 读取你的 bucket，请使用以下任一方法：
+要允许 {{{ .premium }}} 或 {{{ .byoc }}} 读取你的 bucket，请使用以下任一方法：
 
 - 提供一个信任 TiDB Cloud 的 AWS Role ARN，并在相关路径上授予 `s3:GetObject` 和 `s3:ListBucket` 权限。
 - 提供具有等效权限的 AWS access key（access key ID 和 secret access key）。
 
-向导中包含一个标记为 **Click here to create a new one with AWS CloudFormation** 的帮助链接。如果你需要 {{{ .premium }}} 预填充一个为你创建该角色的 CloudFormation stack，请使用此链接。
+向导中包含一个标记为 **Click here to create a new one with AWS CloudFormation** 的帮助链接。如果你需要 {{{ .premium }}} 或 {{{ .byoc }}} 预填充一个为你创建该角色的 CloudFormation stack，请使用此链接。
 
 <CustomContent plan="byoc">
 
@@ -52,7 +52,7 @@ These naming conventions are identical to the TiDB Cloud Serverless workflow. Up
 
 ## 步骤 4：从 Amazon S3 导入 CSV 文件 {#step-4-import-csv-files-from-amazon-s3}
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击你的 {{{ .premium }}} 实例名称。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例名称。
 2. 在左侧导航栏中，点击 **Data** > **Import**，然后选择 **Import data from Cloud Storage**。
 3. 在 **Source Connection** 对话框中：
     - 将 **Storage Provider** 设置为 **Amazon S3**。
@@ -74,5 +74,5 @@ These naming conventions are identical to the TiDB Cloud Serverless workflow. Up
 
 ## 后续步骤 {#next-steps}
 
-- 如需使用脚本方式导入，请参见[使用 MySQL Command-Line Client 将数据导入到 {{{ .premium }}}](/tidb-cloud/premium/import-with-mysql-cli-premium.md)。
+- 如需使用脚本方式导入，请参见[使用 MySQL 命令行客户端将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}](/tidb-cloud/premium/import-with-mysql-cli-premium.md)。
 - 有关 IAM 相关问题，请参见[排查从 Amazon S3 导入数据时的 Access Denied 错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)。

@@ -5,19 +5,19 @@ summary: 了解 TiDB X 实例上的 SQL 功能限制。
 
 # TiDB X 实例上的 SQL 功能限制
 
-TiDB X 实例是一种面向服务的 TiDB Cloud 产品，基于 [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md) 构建，例如 {{{ .starter }}}、Essential 或 Premium 实例。
+TiDB X 实例是一种面向服务的 TiDB Cloud 产品，基于 [TiDB X 架构](/tidb-cloud/tidb-x-architecture.md) 构建，例如 {{{ .starter }}}、Essential、Premium 或 BYOC 实例。
 
-TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Managed 与 TiDB Cloud 之间仍存在一些功能差异。本文档介绍 TiDB Cloud Starter、Essential 和 Premium 在 SQL 功能方面的限制。我们正在持续缩小 TiDB Self-Managed 与 TiDB Cloud 之间的功能差距。如果你需要这些尚未覆盖的功能或能力，请[联系我们](/tidb-cloud/tidb-cloud-support.md)提交功能请求。
+TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Managed 与 TiDB Cloud 之间仍存在一些功能差异。本文档介绍 TiDB Cloud Starter、Essential、Premium 和 BYOC 在 SQL 功能方面的限制。我们正在持续缩小 TiDB Self-Managed 与 TiDB Cloud 之间的功能差距。如果你需要这些尚未覆盖的功能或能力，请[TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)提交功能请求。
 
 > **Note:**
 >
-> 本文档仅适用于 {{{ .starter }}}、Essential 和 Premium。对于 TiDB Cloud Dedicated，请参见 [TiDB Cloud Dedicated 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)。
+> 本文档仅适用于 {{{ .starter }}}、Essential、Premium 和 BYOC。对于 TiDB Cloud Dedicated，请参见 [TiDB Cloud Dedicated 上的 SQL 功能限制](/tidb-cloud/limited-sql-features.md)。
 
 ## 语句 {#statements}
 
 ### 放置策略与范围管理 {#placement-and-range-management}
 
-| Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Statement | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER PLACEMENT POLICY` | 不支持 [^1] | 不支持 [^1] |
 | `ALTER RANGE` | 不支持 | 不支持 |
@@ -32,7 +32,7 @@ TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Mana
 
 ### 资源组 {#resource-groups}
 
-| Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Statement | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER RESOURCE GROUP` | 不支持 [^2] | 不支持 [^2] |
 | `CALIBRATE RESOURCE` | 不支持 [^2] | 不支持 [^2] |
@@ -43,7 +43,7 @@ TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Mana
 
 ### 其他 {#others}
 
-| Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Statement | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `BACKUP` | 不支持 [^3] | 不支持 [^3] |
 | `SHOW BACKUPS` | 不支持 [^3] | 不支持 [^3] |
@@ -92,13 +92,13 @@ TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Mana
 
 ## 函数和运算符 {#functions-and-operators}
 
-| Function and operator | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Function and operator | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `SLEEP` | 无限制 | [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) 函数支持的最大休眠时间为 300 秒。 |
 
 ## 系统表 {#system-tables}
 
-| Database | Table | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Database | Table | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|:-|
 | `metrics_schema` | 所有数据库 | 不支持 | 不支持 |
 | `information_schema` | `ATTRIBUTES` | 支持 | 不支持 [^1] |
@@ -150,7 +150,7 @@ TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Mana
 
 ## 系统变量 {#system-variables}
 
-| Variable | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Variable | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `hostname` | 值已隐藏 | 值已隐藏 |
 | `datadir` | 值已隐藏 | 不支持 [^1] |
@@ -346,21 +346,21 @@ TiDB Cloud 适用于 TiDB 支持的几乎所有工作负载，但 TiDB Self-Mana
 | `validate_password.special_char_count` | 无限制 | 至少为 `1` [^9] |
 | `wait_timeout` | 无限制 | 只读 [^10] |
 
-[^1]: {{{ .starter }}}、Essential 和 Premium 不支持配置数据放置。
+[^1]: {{{ .starter }}}、Essential、Premium 和 BYOC 不支持配置数据放置。
 
-[^2]: {{{ .starter }}}、Essential 和 Premium 不支持配置资源组。
+[^2]: {{{ .starter }}}、Essential、Premium 和 BYOC 不支持配置资源组。
 
-[^3]: 要在 {{{ .starter }}}、Essential 或 Premium 上执行[备份与恢复](/tidb-cloud/backup-and-restore-serverless.md)操作，可以改用 TiDB Cloud 控制台。
+[^3]: 要在 {{{ .starter }}}、Essential、Premium 或 BYOC 上执行[备份与恢复](/tidb-cloud/backup-and-restore-serverless.md)操作，可以改用 TiDB Cloud 控制台。
 
 [^4]: 该功能在 [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) 中不可用。
 
-[^5]: 要在 {{{ .starter }}}、Essential 或 Premium 上跟踪[慢查询](/tidb-cloud/tune-performance.md#slow-query)，可以改用 TiDB Cloud 控制台。
+[^5]: 要在 {{{ .starter }}}、Essential、Premium 或 BYOC 上跟踪[慢查询](/tidb-cloud/tune-performance.md#slow-query)，可以改用 TiDB Cloud 控制台。
 
 [^6]: 要在 {{{ .starter }}} 或 {{{ .essential }}} 上执行[语句分析](/tidb-cloud/tune-performance.md#statement-analysis)，可以改用 TiDB Cloud 控制台。
 
 [^7]: TiDB Cloud 不支持 Drainer 和 Pump。
 
-[^8]: {{{ .starter }}}、Essential 和 Premium 不支持插件。
+[^8]: {{{ .starter }}}、Essential、Premium 和 BYOC 不支持插件。
 
 [^9]: {{{ .starter }}} 和 {{{ .essential }}} 强制执行强密码策略。
 

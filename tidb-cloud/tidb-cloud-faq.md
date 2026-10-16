@@ -27,9 +27,17 @@ TiDB Cloud 是 TiDB 的完全托管云数据库服务（Database as a Service）
 
 目前，TiDB Cloud 支持大部分 MySQL 5.7 和 MySQL 8.0 语法，但不支持触发器、存储过程和用户自定义函数。详细信息请参见 [与 MySQL 的兼容性](/mysql-compatibility.md)。
 
+### TiDB Cloud 是否支持 PostgreSQL？ {#does-tidb-cloud-support-postgresql}
+
+是。兼容 PostgreSQL 的 TiDB Cloud Starter 当前已处于公测阶段。
+
+兼容 PostgreSQL 的 {{{ .starter }}} 实例支持 PostgreSQL wire 协议（pgwire v3）和常见的 PostgreSQL SQL 语法。详情请参见 [PostgreSQL 兼容性](/tidb-cloud/starter/postgresql-compatibility.md)。
+
 ### 我可以使用哪些编程语言与 TiDB Cloud 交互？
 
-你可以使用任何被 MySQL 客户端或驱动支持的语言。
+对于兼容 MySQL 的 TiDB Cloud 资源，你可以使用任何被 MySQL 客户端或驱动支持的编程语言。
+
+对于兼容 PostgreSQL 的 {{{ .starter }}} 实例，你可以使用支持标准 PostgreSQL 客户端或驱动的编程语言和框架。
 
 ### 我可以在哪里运行 TiDB Cloud？
 

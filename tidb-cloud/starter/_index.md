@@ -5,6 +5,8 @@ hide_commit: true
 summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiDB 的强大能力带入你的云端。它提供丰富的指南、示例和参考资料，帮助你学习、试用、开发、运维、迁移、监控、调优、安全管理、计费、集成和查阅。
 ---
 
+<CustomContent plan="starter" compatibility="mysql">
+
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="TiDB Cloud Starter 是一款全托管的多租户 TiDB 服务，提供即时可用的 MySQL 兼容数据库，支持自动扩缩容，并配有慷慨的免费额度。超出免费额度后，将会按量计费。">
 
 <LearningPath label="学习" icon="cloud1">
@@ -97,9 +99,9 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 [管理用户资料](https://docs.pingcap.com/zh/tidbcloud/manage-user-access/?plan=starter#manage-user-profiles)
 
-[管理组织访问](https://docs.pingcap.com/zh/tidbcloud/manage-user-access#manage-organization-access/?plan=starter)
+[管理组织访问](https://docs.pingcap.com/zh/tidbcloud/manage-user-access/?plan=starter#manage-organization-access)
 
-[管理项目访问](https://docs.pingcap.com/zh/tidbcloud/manage-user-access#manage-project-access/?plan=starter)
+[管理项目访问](https://docs.pingcap.com/zh/tidbcloud/manage-user-access/?plan=starter#manage-project-access)
 
 [配置密码设置](https://docs.pingcap.com/zh/tidbcloud/configure-serverless-firewall-rules-for-public-endpoints/?plan=starter)
 
@@ -107,7 +109,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 <LearningPath label="计费" icon="cloud2">
 
-[定价](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing#pricing-for-starter/?plan=starter)
+[定价](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)
 
 [发票](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-billing/?plan=starter#invoices)
 
@@ -138,3 +140,77 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 </LearningPath>
 
 </LearningPathContainer>
+
+</CustomContent>
+
+<CustomContent plan="starter" compatibility="postgresql">
+
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="兼容 PostgreSQL 的 TiDB Cloud Starter 专门为使用 PostgreSQL 常用工具和框架开发、测试应用程序的开发者而设计。它提供全托管、可自动扩缩容的数据库服务，支持兼容 pgvector 的向量搜索功能以及部分 PostgreSQL 扩展。">
+
+<LearningPath label="学习" icon="cloud1">
+
+[为什么选择 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-intro/?plan=starter&compatibility=postgresql)
+
+[PostgreSQL 兼容性](https://docs.pingcap.com/zh/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)
+
+[常见问题](https://docs.pingcap.com/zh/tidbcloud/pg-faq/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="试用" icon="cloud5">
+
+[试用 TiDB Cloud](https://docs.pingcap.com/zh/tidbcloud/pg-quickstart/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="运维" icon="cloud7">
+
+[创建集群](https://docs.pingcap.com/zh/tidbcloud/create-tidb-cluster-serverless/?plan=starter&compatibility=postgresql)
+
+[通过公共端点连接](https://docs.pingcap.com/zh/tidbcloud/connect-via-standard-connection-serverless/?plan=starter&compatibility=postgresql)
+
+[备份和恢复数据](https://docs.pingcap.com/zh/tidbcloud/backup-and-restore-serverless/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="迁移" icon="cloud3">
+
+[从 PostgreSQL 迁移](https://docs.pingcap.com/zh/tidbcloud/import-with-psql/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="监控" icon="cloud6">
+
+[状态和指标](https://docs.pingcap.com/zh/tidbcloud/monitor-tidb-cluster/?plan=starter&compatibility=postgresql)
+
+[内置指标](https://docs.pingcap.com/zh/tidbcloud/built-in-monitoring-pg/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="安全" icon="users">
+
+[密码认证](https://docs.pingcap.com/zh/tidbcloud/tidb-cloud-password-authentication/?plan=starter&compatibility=postgresql)
+
+[用户角色](https://docs.pingcap.com/zh/tidbcloud/manage-user-access/?plan=starter&compatibility=postgresql#user-roles)
+
+[管理组织访问](https://docs.pingcap.com/zh/tidbcloud/manage-user-access/?plan=starter&compatibility=postgresql#manage-organization-access)
+
+[TLS 连接](https://docs.pingcap.com/zh/tidbcloud/secure-connections-to-serverless-clusters/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+<LearningPath label="参考" icon="cloud-dev">
+
+[PostgreSQL 扩展](https://docs.pingcap.com/zh/tidbcloud/pg-extensions-overview/?plan=starter&compatibility=postgresql)
+
+[SQL 参考](https://docs.pingcap.com/zh/tidbcloud/pg-sql-reference-overview/?plan=starter&compatibility=postgresql)
+
+[限制和约束](https://docs.pingcap.com/zh/tidbcloud/pg-limits-constraints/?plan=starter&compatibility=postgresql)
+
+[系统变量](https://docs.pingcap.com/zh/tidbcloud/system-variables/?plan=starter&compatibility=postgresql)
+
+</LearningPath>
+
+</LearningPathContainer>
+
+</CustomContent>

@@ -1,42 +1,54 @@
 ---
-title: 使用 MySQL 命令行客户端将数据导入到 {{{ .premium }}}
-summary: 了解如何使用 MySQL 命令行客户端 (`mysql`) 将小型 CSV 或 SQL 文件导入到 {{{ .premium }}} 实例。
+title: 使用 MySQL 命令行客户端将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}
+summary: 了解如何使用 MySQL 命令行客户端 (`mysql`) 将小型 CSV 或 SQL 文件导入到 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 ---
 
-# 使用 MySQL 命令行客户端将数据导入到 {{{ .premium }}}
+# 使用 MySQL 命令行客户端将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}
 
-本文介绍如何使用 [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) (`mysql`) 将数据导入到 {{{ .premium }}}。以下各节提供了从 SQL 或 CSV 文件导入数据的分步说明。此过程执行的是逻辑导入，即 MySQL 命令行客户端会从你的本地机器向 TiDB Cloud 重放 SQL 语句。
+本文档介绍如何使用 [MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) (`mysql`) 将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}。以下各节提供了从 SQL 或 CSV 文件导入数据的分步说明。此过程执行的是逻辑导入，即 MySQL 命令行客户端会从本地机器向 TiDB Cloud 重放 SQL 语句。
 
 > **Tip:**
 >
-> - 逻辑导入最适合相对较小的 SQL 或 CSV 文件。若要从云存储进行更快的并行导入，或处理来自 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 导出的多个文件，请参见 [Import CSV Files from Cloud Storage into {{{ .premium }}}](/tidb-cloud/premium/import-csv-files-premium.md)。
-> - 对于 {{{ .starter }}} 或 Essential，请参见 [Import Data into {{{ .starter }}} or Essential via MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)。
-> - 对于 {{{ .dedicated }}}，请参见 [Import Data into {{{ .dedicated }}} via MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)。
+> - 逻辑导入最适合相对较小的 SQL 或 CSV 文件。若要从云存储进行更快的并行导入，或处理来自 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview) 导出的多个文件，请参见[从云存储将 CSV 文件导入到 {{{ .premium }}} 或 {{{ .byoc }}}](/tidb-cloud/premium/import-csv-files-premium.md)。
+> - 对于 {{{ .starter }}} 或 Essential，请参见[通过 MySQL CLI 将数据导入到 {{{ .starter }}} 或 Essential](/tidb-cloud/import-with-mysql-cli-serverless.md)。
+> - 对于 {{{ .dedicated }}}，请参见[通过 MySQL CLI 将数据导入到 {{{ .dedicated }}}](/tidb-cloud/import-with-mysql-cli.md)。
 
 ## 前提条件 {#prerequisites}
 
-在通过 MySQL 命令行客户端将数据导入到 {{{ .premium }}} 实例之前，你需要满足以下前提条件：
+在通过 MySQL 命令行客户端将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}} 实例之前，你需要满足以下前提条件：
 
-- 你可以访问你的 {{{ .premium }}} 实例。
+- 你可以访问你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 - 在本地计算机上安装 MySQL 命令行客户端 (`mysql`)。
 
-## 步骤 1. 连接到你的 {{{ .premium }}} 实例 {#step-1-connect-to-your-premium-instance}
+## 第 1 步：连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例 {#step-1-connect-to-your-premium-or-byoc-instance}
 
-使用 MySQL 命令行客户端连接到你的 {{{ .premium }}} 实例。如果这是你第一次连接，请执行以下步骤来配置网络连接并生成 TiDB SQL `root` 用户密码：
+使用 MySQL Command-Line Client 连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。如果这是你第一次连接，请执行以下步骤来配置网络连接并生成 TiDB SQL `root` 用户密码：
 
-1. 登录 [TiDB Cloud console](https://tidbcloud.com/)，并导航到 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。然后，点击目标 {{{ .premium }}} 实例的名称，进入其实例概览页面。
+1. 登录 [TiDB Cloud 控制台](https://tidbcloud.com/)，然后进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。接着，点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其实例概览页面。
 
 2. 点击右上角的 **Connect**。此时会显示连接对话框。
 
 3. 确保连接对话框中的配置与你的运行环境一致。
 
-    - **Connection Type** 设置为 `Public`。
+    - **Connection Type** 设置为 `Public`<CustomContent plan="byoc"> 或 `Private`，具体取决于你的 BYOC 部署</CustomContent>。
     - **Connect With** 设置为 `MySQL CLI`。
     - **Operating System** 与你的环境匹配。
+
+    <CustomContent plan="premium">
 
     > **Note:**
     >
     > 默认情况下，{{{ .premium }}} 实例的公共端点是禁用的。如果你没有看到 `Public` 选项，请在实例详情页（**Network** 选项卡下）启用公共端点，或联系组织管理员先启用它，然后再继续。
+
+    </CustomContent>
+
+    <CustomContent plan="byoc">
+
+    > **Note:**
+    >
+    > 仅当你在 BYOC 部署期间提供了 public hosted zone 时，才可使用公共连接。如果你提供的是 private hosted zone，请使用私有连接来连接到你的实例。
+
+    </CustomContent>
 
 4. 点击 **Generate Password** 以创建一个随机密码。如果你已经配置了密码，请复用该凭据，或在继续之前轮换该密码。
 
@@ -57,7 +69,7 @@ CREATE TABLE products (
 );
 ```
 
-在你的 {{{ .premium }}} 实例上运行该 schema 文件，以便在下一步加载数据之前，数据库和表已经存在。
+在你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例上运行该 schema 文件，以便在下一步加载数据之前，数据库和表已经存在。
 
 ## 步骤 3. 从 SQL 或 CSV 文件导入数据 {#step-3-import-data-from-an-sql-or-csv-file}
 

@@ -1,9 +1,9 @@
 ---
-title: Table Filter
+title: 表库过滤
 summary: TiDB 工具中表过滤器功能的使用方法。
 ---
 
-# Table Filter
+# 表库过滤
 
 TiDB 迁移工具默认会操作所有数据库，但通常只需要其中的一部分。例如，你只想处理形如 `foo*` 和 `bar*` 的 schema，而不需要其他的。
 

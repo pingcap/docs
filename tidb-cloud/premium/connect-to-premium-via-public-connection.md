@@ -1,11 +1,11 @@
 ---
-title: 通过公共连接连接到 {{{ .premium }}}
-summary: 了解如何通过公共连接连接到你的 {{{ .premium }}}。
+title: 通过公共连接连接到 {{{ .premium }}} 或 {{{ .byoc }}}
+summary: 了解如何通过公共连接连接到你的 {{{ .premium }}} 或 {{{ .byoc }}}。
 ---
 
-# 通过公共连接连接到 {{{ .premium }}}
+# 通过公共连接连接到 {{{ .premium }}} 或 {{{ .byoc }}}
 
-本文档介绍如何通过公共连接连接到你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例。公共连接会暴露一个带有流量过滤器的公共端点，因此你可以通过笔记本电脑上的 SQL 客户端连接到你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例。
+本文档介绍如何通过公共连接连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。公共连接会暴露一个带有流量过滤器的公共端点，因此你可以通过笔记本电脑上的 SQL 客户端连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 
 <CustomContent plan="byoc">
 
@@ -22,11 +22,11 @@ summary: 了解如何通过公共连接连接到你的 {{{ .premium }}}。
 
 ## 前提条件：配置 IP 访问列表 {#prerequisite-configure-ip-access-list}
 
-对于公共连接，{{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 仅允许来自 IP 访问列表中地址的客户端连接。如果你尚未配置 IP 访问列表，请先按照 [配置 IP 访问列表](/tidb-cloud/premium/configure-ip-access-list-premium.md) 中的步骤进行配置，然后再进行首次连接。
+对于公共连接，TiDB Cloud 仅允许来自 IP 访问列表中地址的客户端连接。如果你尚未配置 IP 访问列表，请先按照 [配置 IP 访问列表](/tidb-cloud/premium/configure-ip-access-list-premium.md) 中的步骤进行配置，然后再进行首次连接。
 
 ## 连接到实例 {#connect-to-the-instance}
 
-要通过公共连接连接到 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例，请执行以下步骤：
+要通过公共连接连接到你的实例，请执行以下步骤：
 
 <CustomContent plan="premium">
 
@@ -76,4 +76,4 @@ summary: 了解如何通过公共连接连接到你的 {{{ .premium }}}。
 
 ## 后续操作 {#what-s-next}
 
-成功连接到你的 {{{ .premium }}}<CustomContent plan="byoc"> 或 {{{ .byoc }}}</CustomContent> 实例后，你可以[使用 TiDB 探索 SQL 语句](/basic-sql-operations.md)。
+成功连接到你的 {{{ .premium }}} 或 {{{ .byoc }}} 实例后，你可以[使用 TiDB 探索 SQL 语句](/basic-sql-operations.md)。

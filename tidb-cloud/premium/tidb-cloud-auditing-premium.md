@@ -1,15 +1,15 @@
 ---
-title: "{{{ .premium }}} 数据库审计日志"
-summary: 了解如何在 {{{ .premium }}} 中审计实例。
+title: "{{{ .premium }}} 或 {{{ .byoc }}} 数据库审计日志"
+summary: 了解如何为 {{{ .premium }}} 或 {{{ .byoc }}} 实例启用数据库审计日志，并配置审计过滤器和云存储。
 ---
 
-# {{{ .premium }}} 数据库审计日志
+# {{{ .premium }}} 或 {{{ .byoc }}} 数据库审计日志
 
 TiDB Cloud 提供审计日志功能，用于记录数据库的用户访问活动，例如已执行的 SQL 语句。
 
 为了评估组织中用户访问策略及其他信息安全措施的有效性，定期分析数据库审计日志是一项安全最佳实践。
 
-审计日志功能**默认处于禁用状态**。要审计一个 {{{ .premium }}} 实例，你必须先启用审计日志，然后配置审计过滤规则。
+审计日志功能**默认处于禁用状态**。要审计一个 {{{ .premium }}} 或 {{{ .byoc }}} 实例，你必须先启用审计日志，然后配置审计过滤规则。
 
 > **注意：**
 >
@@ -17,7 +17,7 @@ TiDB Cloud 提供审计日志功能，用于记录数据库的用户访问活动
 
 ## 前提条件 {#prerequisites}
 
-- 你正在使用 {{{ .premium }}} 实例。
+- 你正在使用 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 
     > **注意：**
     >
@@ -29,7 +29,7 @@ TiDB Cloud 提供审计日志功能，用于记录数据库的用户访问活动
 
 ## 启用审计日志 {#enable-audit-logging}
 
-TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存储服务中。在启用数据库审计日志之前，请先在实例所在的云服务提供商上配置你的云存储服务。
+TiDB Cloud 支持将 {{{ .premium }}} 或 {{{ .byoc }}} 实例的审计日志记录到你的云存储服务中。在启用数据库审计日志之前，请先在实例所在的云服务提供商上配置你的云存储服务。
 
 ### 为 AWS 上的 TiDB 启用审计日志 {#enable-audit-logging-for-tidb-on-aws}
 
@@ -47,7 +47,7 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
 
 #### 第 2 步：配置 Amazon S3 访问权限 {#step-2-configure-amazon-s3-access}
 
-1. 获取你要启用审计日志的 {{{ .premium }}} 实例的 TiDB Cloud Account ID 和 External ID。
+1. 获取你要启用审计日志的 {{{ .premium }}} 或 {{{ .byoc }}} 实例的 TiDB Cloud Account ID 和 External ID。
 
     1. 在 TiDB Cloud 控制台中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面。
 
@@ -114,6 +114,8 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
 >
 > - 启用审计日志后，如果你对 bucket URI、位置或 ARN 做了任何新的更改，必须再次点击 **Test Connection** 以验证 TiDB Cloud 是否可以连接到该 bucket。然后，点击 **Enable** 以应用更改。
 > - 若要移除 TiDB Cloud 对你的 Amazon S3 的访问权限，只需在 AWS Management Console 中删除授予该实例的 trust policy。
+
+<CustomContent plan="premium">
 
 <CustomContent language="en,zh">
 
@@ -259,6 +261,8 @@ TiDB Cloud 支持将 {{{ .premium }}} 实例的审计日志记录到你的云存
 
 </CustomContent>
 
+</CustomContent>
+
 ## 配置数据库审计日志设置 {#configure-database-audit-logging-settings}
 
 为你的云服务提供商配置存储后，完成数据库审计日志设置步骤：
@@ -399,4 +403,4 @@ TiDB Cloud 审计日志是可读的文本文件，其完整文件名中包含实
 
 ## 审计日志限制 {#audit-logging-limitations}
 
-{{{ .premium }}} 不保证审计日志按时间顺序写入。要查找最新事件，你可能需要查看所有日志文件。若要按时间顺序对日志进行排序，请使用每条审计记录中的 `TIME` 字段。
+{{{ .premium }}} 和 {{{ .byoc }}} 不保证审计日志按时间顺序写入。要查找最新事件，你可能需要查看所有日志文件。若要按时间顺序对日志进行排序，请使用每条审计记录中的 `TIME` 字段。
