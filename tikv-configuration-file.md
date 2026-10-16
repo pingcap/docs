@@ -1553,7 +1553,7 @@ Configuration items related to Titan.
 
 ### `max-background-gc`
 
-+ The maximum number of GC threads in Titan. From the **TiKV Details** > **Thread CPU** > **RocksDB CPU** panel, if you observe that the Titan GC threads are at full capacity for a long time, consider increasing the size of the Titan GC thread pool.
++ The maximum number of GC threads in Titan. From the **TiKV-Details** > **Thread CPU** > **RocksDB CPU** panel, if you observe that the Titan GC threads are at full capacity for a long time, consider increasing the size of the Titan GC thread pool.
 + Default value: `1`. Before v8.0.0, the default value is `4`.
 + Minimum value: `1`
 
