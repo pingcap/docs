@@ -1,6 +1,6 @@
 ---
-title: {{{ .byoc }}} の Bastion Host を設定する
-summary: {{{ .byoc }}} 環境で、安全なメンテナンスアクセスのために bastion host をデプロイおよび管理する方法を説明します。
+title: "{{{ .byoc }}} の Bastion Host を設定する"
+summary: "{{{ .byoc }}} 環境で、安全なメンテナンスアクセスのために bastion host をデプロイおよび管理する方法を説明します。"
 ---
 
 # {{{ .byoc }}} の Bastion Host を設定する
