@@ -8,7 +8,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Dedicated" subTitle="TiDB Cloud Dedicated は、ミッションクリティカルなビジネス向けに設計されており、複数のアベイラビリティゾーンにまたがる高可用性、水平スケーリング、そして完全な HTAP 機能を提供します。">
 
-<LearningPath label="Learn" icon="cloud1">
+<LearningPath label="学ぶ" icon="cloud1">
 
 [TiDB Cloudを選ぶ理由](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-intro)
 
@@ -18,7 +18,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Try" icon="cloud5">
+<LearningPath label="試す" icon="cloud5">
 
 [TiDB Cloudを試してみる](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart)
 
@@ -30,7 +30,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Develop" icon="doc8">
+<LearningPath label="開発" icon="doc8">
 
 [開発者ガイドの概要](https://docs.pingcap.com/ja/developer/)
 
@@ -40,7 +40,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Maintain" icon="cloud7">
+<LearningPath label="管理" icon="cloud7">
 
 [クラスタを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster)
 
@@ -60,7 +60,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Migrate" icon="cloud3">
+<LearningPath label="移行" icon="cloud3">
 
 [サンプルデータのインポート](https://docs.pingcap.com/ja/tidbcloud/import-sample-data)
 
@@ -76,7 +76,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Monitor" icon="cloud6">
+<LearningPath label="監視" icon="cloud6">
 
 [ステータスとメトリクス](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster)
 
@@ -86,7 +86,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Tune" icon="tidb-cloud-tune">
+<LearningPath label="チューニング" icon="tidb-cloud-tune">
 
 [チューニングの概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-tune-performance-overview)
 
@@ -98,7 +98,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Security" icon="users">
+<LearningPath label="セキュリティ" icon="users">
 
 [パスワード認証](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-password-authentication)
 
@@ -114,7 +114,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Billing" icon="cloud2">
+<LearningPath label="課金" icon="cloud2">
 
 [価格](https://www.pingcap.com/pricing/)
 
@@ -124,7 +124,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Integrations" icon="cloud4">
+<LearningPath label="統合" icon="cloud4">
 
 [Airbyte](https://docs.pingcap.com/ja/tidbcloud/integrate-tidbcloud-with-airbyte)
 
@@ -140,7 +140,7 @@ summary: TiDB Cloudは、TiDBの優れた機能すべてをクラウドに提供
 
 </LearningPath>
 
-<LearningPath label="Reference" icon="cloud-dev">
+<LearningPath label="リファレンス" icon="cloud-dev">
 
 [SQLリファレンス](https://docs.pingcap.com/ja/tidbcloud/basic-sql-operations)
 

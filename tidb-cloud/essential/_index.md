@@ -7,7 +7,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Essential" subTitle="TiDB Cloud Essential は、増加するワークロードに対応し、リアルタイムのスケーラビリティを必要とするアプリケーション向けに設計されています。ビジネスの成長に合わせて柔軟性とパフォーマンスを提供します。">
 
-<LearningPath label="Learn" icon="cloud1">
+<LearningPath label="学ぶ" icon="cloud1">
 
 [TiDB Cloudを選ぶ理由](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-intro/?plan=essential)
 
@@ -17,7 +17,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Try" icon="cloud5">
+<LearningPath label="試す" icon="cloud5">
 
 [TiDB Cloud を試してみる](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart/?plan=essential)
 
@@ -27,7 +27,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Develop" icon="doc8">
+<LearningPath label="開発" icon="doc8">
 
 [開発者ガイドの概要](https://docs.pingcap.com/ja/developer/)
 
@@ -37,7 +37,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Maintain" icon="cloud7">
+<LearningPath label="管理" icon="cloud7">
 
 [クラスタを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-cluster-serverless/?plan=essential)
 
@@ -53,7 +53,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Migrate" icon="cloud3">
+<LearningPath label="移行" icon="cloud3">
 
 [Amazon RDS for Oracleから](https://docs.pingcap.com/ja/tidbcloud/migrate-from-oracle-using-aws-dms/?plan=essential)
 
@@ -67,7 +67,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Monitor" icon="cloud6">
+<LearningPath label="監視" icon="cloud6">
 
 [ステータスとメトリクス](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster/?plan=essential)
 
@@ -75,7 +75,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Tune" icon="tidb-cloud-tune">
+<LearningPath label="チューニング" icon="tidb-cloud-tune">
 
 [チューニングの概要](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-tune-performance-overview/?plan=essential)
 
@@ -87,7 +87,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Security" icon="users">
+<LearningPath label="セキュリティ" icon="users">
 
 [パスワード認証](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-password-authentication/?plan=essential)
 
@@ -103,7 +103,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Billing" icon="cloud2">
+<LearningPath label="課金" icon="cloud2">
 
 [価格](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)
 
@@ -113,7 +113,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Integrations" icon="cloud4">
+<LearningPath label="統合" icon="cloud4">
 
 [Airbyte](https://docs.pingcap.com/ja/tidbcloud/integrate-tidbcloud-with-airbyte/?plan=essential)
 
@@ -127,7 +127,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 </LearningPath>
 
-<LearningPath label="Reference" icon="cloud-dev">
+<LearningPath label="リファレンス" icon="cloud-dev">
 
 [SQLリファレンス](https://docs.pingcap.com/ja/tidbcloud/basic-sql-operations/?plan=essential)
 

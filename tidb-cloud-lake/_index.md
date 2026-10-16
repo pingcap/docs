@@ -8,7 +8,7 @@ summary: TiDB Cloud Lake は、分析ワークロード向けのクラウドネ�
 
 <LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Lake" subTitle="TiDB Cloud Lake は、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピュートとストレージを分離し、ANSI SQL、半構造化データの処理、AI 指向のワークフローをサポートします。">
 
-<LearningPath label="理解する" icon="cloud1">
+<LearningPath label="学ぶ" icon="cloud1">
 
 [TiDB Cloud Lake の概要](https://docs.pingcap.com/ja/tidbcloudlake/lake-overview/)
 
