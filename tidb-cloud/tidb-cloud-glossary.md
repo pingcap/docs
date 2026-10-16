@@ -154,7 +154,7 @@ Currently, only the following types of TiDB Cloud resources support the Recycle 
 
 - TiDB Region
 
-    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. The default size limit for each Region is 96 MB and can be configured.
+    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. The default size limit for each Region is 256 MiB and can be configured.
 
 ### replica
 
