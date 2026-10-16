@@ -1,30 +1,30 @@
 ---
-title: 从 TiDB Self-Managed 迁移到 {{{ .premium }}}
-summary: 了解如何将数据从 TiDB Self-Managed 迁移到 {{{ .premium }}}。
+title: 从 TiDB Self-Managed 迁移到 {{{ .premium }}} 或 {{{ .byoc }}}
+summary: 了解如何将数据从 TiDB Self-Managed 迁移到 {{{ .premium }}} 或 {{{ .byoc }}}。
 ---
 
-# 从 TiDB Self-Managed 迁移到 {{{ .premium }}}
+# 从 TiDB Self-Managed 迁移到 {{{ .premium }}} 或 {{{ .byoc }}}
 
-本文档介绍如何使用 Dumpling 和 TiCDC 将数据从你的 TiDB Self-Managed 集群迁移到 {{{ .premium }}}（AWS 上）的实例。
+本文档介绍如何使用 Dumpling 和 TiCDC 将数据从你的 TiDB Self-Managed 集群迁移到 {{{ .premium }}}（AWS 上）的实例或 {{{ .byoc }}}。
 
 整体流程如下：
 
 1. 搭建环境并准备工具。
 2. 迁移全量数据。流程如下：
    1. 使用 Dumpling 将数据从 TiDB Self-Managed 导出到 Amazon S3。
-   2. 将数据从 Amazon S3 导入到 {{{ .premium }}}。
+   2. 将数据从 Amazon S3 导入到 {{{ .premium }}} 或 {{{ .byoc }}}。
 3. 使用 TiCDC 复制增量数据。
 4. 验证迁移后的数据。
 
 ## 前提条件 {#prerequisites}
 
-建议将 S3 bucket 和 {{{ .premium }}} 实例放在同一 region。跨 region 迁移可能会产生额外的数据转换成本。
+建议将 S3 bucket 和 {{{ .premium }}} 或 {{{ .byoc }}} 实例放在同一 region。跨 region 迁移可能会产生额外的数据转换成本。
 
 迁移前，你需要准备以下内容：
 
 - 一个具有管理员访问权限的 [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg)
 - 一个 [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- 一个 [TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md)，并且对托管在 AWS 上的目标 {{{ .premium }}} 实例至少具有 [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) 权限
+- 一个 [TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md)，并且对托管在 AWS 上的目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例至少具有 [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) 权限
 
 ## 准备工具 {#prepare-tools}
 
@@ -39,7 +39,7 @@ summary: 了解如何将数据从 TiDB Self-Managed 迁移到 {{{ .premium }}}�
 
 在部署 Dumpling 之前，请注意以下事项：
 
-- 建议在与你的目标 {{{ .premium }}} 实例位于同一 VPC 的新 EC2 实例上部署 Dumpling。
+- 建议在与你的目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例位于同一 VPC 的新 EC2 实例上部署 Dumpling。
 - 推荐的 EC2 实例类型为 **c6g.4xlarge**（16 vCPU 和 32 GiB 内存）。你也可以根据需要选择其他 EC2 实例类型。Amazon Machine Image (AMI) 可以是 Amazon Linux、Ubuntu 或 Red Hat。
 
 你可以使用 TiUP 或安装包来部署 Dumpling。
@@ -77,7 +77,7 @@ tiup update --self && tiup update dumpling
 
 ### 部署 TiCDC {#deploy-ticdc}
 
-你需要[部署 TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc)，以便将增量数据从上游 TiDB Self-Managed 集群复制到 {{{ .premium }}}。
+你需要[部署 TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc)，以便将增量数据从上游 TiDB Self-Managed 集群复制到 {{{ .premium }}} 或 {{{ .byoc }}}。
 
 1. 确认当前 TiDB 版本是否支持 TiCDC。TiDB v4.0.8.rc.1 及之后的版本支持 TiCDC。你可以通过在 TiDB Self-Managed 集群中执行 `select tidb_version();` 来检查 TiDB 版本。如果你需要升级，请参见 [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)。
 
@@ -102,10 +102,10 @@ tiup update --self && tiup update dumpling
 
 ## 迁移全量数据 {#migrate-full-data}
 
-要将数据从 TiDB Self-Managed 集群迁移到 {{{ .premium }}}，请按如下方式执行全量数据迁移：
+要将数据从 TiDB Self-Managed 集群迁移到 {{{ .premium }}} 或 {{{ .byoc }}}，请按如下方式执行全量数据迁移：
 
 1. 将数据从 TiDB Self-Managed 集群迁移到 Amazon S3。
-2. 将数据从 Amazon S3 迁移到 {{{ .premium }}}。
+2. 将数据从 Amazon S3 迁移到 {{{ .premium }}} 或 {{{ .byoc }}}。
 
 ### 将数据从 TiDB Self-Managed 集群迁移到 Amazon S3 {#migrate-data-from-the-tidb-self-managed-cluster-to-amazon-s3}
 
@@ -198,9 +198,9 @@ SELECT @@global.tidb_gc_enable;
     - `*-schema-view.sql`, `*-schema-trigger.sql`, `*-schema-post.sql`：其他导出的 SQL 文件
 ### 将数据从 Amazon S3 迁移到 {{{ .premium }}} {#migrate-data-from-amazon-s3-to-premium}
 
-将数据从 TiDB Self-Managed 集群导出到 Amazon S3 后，你需要将这些数据迁移到 {{{ .premium }}}。
+将数据从 TiDB Self-Managed 集群导出到 Amazon S3 后，你需要将这些数据迁移到 {{{ .premium }}} 或 {{{ .byoc }}}。
 
-1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，获取目标 {{{ .premium }}} 实例的 Account ID 和 External ID。
+1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，获取目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的 Account ID 和 External ID。
 
     1. 进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标实例的名称。
     2. 在左侧导航栏中，点击 **Data** > **Import**。
@@ -213,7 +213,7 @@ SELECT @@global.tidb_gc_enable;
     2. 提供 role 名称，检查权限，并确认 IAM 警告。
     3. 创建 stack，并等待状态变为 **CREATE_COMPLETE**。
     4. 在 **Outputs** 选项卡中，复制新生成的 Role ARN。
-    5. 返回 {{{ .premium }}}，粘贴 Role ARN，然后点击 **Confirm**。向导会保存该 ARN，以供后续导入任务使用。
+    5. 返回目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例，粘贴 Role ARN，然后点击 **Confirm**。向导会保存该 ARN，以供后续导入任务使用。
 
 3. 继续完成导入向导中的其余步骤，并在提示时使用已保存的 Role ARN。
 
@@ -262,11 +262,11 @@ SELECT @@global.tidb_gc_enable;
     }
     ```
 
-2. 创建一个信任 {{{ .premium }}} 的 IAM role，方法是提供你之前记下的 **Account ID** 和 **External ID**。然后，将上一步创建的策略附加到该 role。
+2. 创建一个信任 {{{ .premium }}} 或 {{{ .byoc }}} 的 IAM role，方法是提供你之前记下的 **Account ID** 和 **External ID**。然后，将上一步创建的策略附加到该 role。
 
 3. 复制生成的 Role ARN，并将其填入 {{{ .premium }}} 导入向导中。
 
-4. 按照[从 Amazon S3 导入数据到 {{{ .premium }}}](/tidb-cloud/premium/import-from-s3-premium.md)中的说明，将数据导入到 {{{ .premium }}}。
+4. 按照[从 Amazon S3 导入数据到 {{{ .premium }}} 或 {{{ .byoc }}}](/tidb-cloud/premium/import-from-s3-premium.md)中的说明，将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}。
 
 ## 复制增量数据 {#replicate-incremental-data}
 
@@ -278,14 +278,14 @@ SELECT @@global.tidb_gc_enable;
 
 2. 授权 TiCDC 连接到 {{{ .premium }}}。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 实例的名称，进入其实例概览页面。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其实例概览页面。
     2. 在左侧导航栏中，点击 **Settings** > **Networking**。
     3. 在 **Networking** 页面中，点击 **Add IP Address**。
     4. 在弹出的对话框中，选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段中填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。现在 TiCDC 就可以访问 {{{ .premium }}}。更多信息，请参见[配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
 
-3. 获取下游 {{{ .premium }}} 实例的连接信息。
+3. 获取下游 {{{ .premium }}} 或 {{{ .byoc }}} 实例的连接信息。
 
-    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 实例的名称，进入其实例概览页面。
+    1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其实例概览页面。
     2. 点击右上角的 **Connect**。
     3. 在连接对话框中，从 **Connection Type** 下拉列表中选择 **Public**，并从 **Connect With** 下拉列表中选择 **General**。
     4. 从连接信息中，你可以获取该实例的 host IP 地址和端口。更多信息，请参见[通过公网连接](/tidb-cloud/connect-via-standard-connection.md)。
@@ -343,9 +343,9 @@ SELECT @@global.tidb_gc_enable;
 
         ![更新过滤器](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - 验证复制结果。向上游集群写入一条新记录，然后检查该记录是否已复制到下游 {{{ .premium }}} 实例。
+    - 验证复制结果。向上游集群写入一条新记录，然后检查该记录是否已复制到下游 {{{ .premium }}} 或 {{{ .byoc }}} 实例。
 
-7. 为上游集群和下游实例设置相同的时区。默认情况下，{{{ .premium }}} 将时区设置为 UTC。如果上游集群和下游实例的时区不同，则需要为两者设置相同的时区。
+7. 为上游集群和下游实例设置相同的时区。默认情况下，{{{ .premium }}} 或 {{{ .byoc }}} 将时区设置为 UTC。如果上游集群和下游实例的时区不同，则需要为两者设置相同的时区。
 
     1. 在上游集群中，运行以下命令检查时区：
 
@@ -404,4 +404,4 @@ SELECT @@global.tidb_gc_enable;
     backup_user_priv
     ```
 
-    获取用户和权限信息后，在下游 {{{ .premium }}} 实例中运行生成的 SQL 语句，以恢复用户和权限信息。
+    获取用户和权限信息后，在下游 {{{ .premium }}} 或 {{{ .byoc }}} 实例中运行生成的 SQL 语句，以恢复用户和权限信息。
