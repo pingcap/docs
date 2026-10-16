@@ -3,7 +3,7 @@
 
 # 目次
 
-## はじめに {#get-started}
+## はじめに
 
 - [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md)
 - [コンソールでのクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start-console.md)
@@ -12,7 +12,7 @@
   - [認可](/tidb-cloud-filesystem/filesystem-authorization.md)
   - [レイヤーとチェックポイント](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md)
 
-## ガイド {#guides}
+## ガイド
 
 - [ファイルシステムを管理する](/tidb-cloud-filesystem/manage-filesystem-resources.md)
 - [ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
@@ -33,7 +33,7 @@
 - [自動化と AI エージェントのワークフロー](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
 - [料金と請求](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)
 
-## リファレンス {#references}
+## リファレンス
 
 - [コマンドリファレンス](/tidb-cloud-filesystem/filesystem-command-reference.md)
 - [TiDB Cloud Filesystem SDKs](/tidb-cloud-filesystem/filesystem-sdks.md)

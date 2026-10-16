@@ -3,7 +3,7 @@
 
 # 目次
 
-## はじめに {#get-started}
+## はじめに
 
 - TiDB Cloud を選ぶ理由
   - [概要](/tidb-cloud/tidb-cloud-intro.md)
@@ -12,7 +12,7 @@
 - はじめに
   - [TiDB Cloud Starter を試す](/tidb-cloud/starter/pg-quickstart.md)
 
-## ガイド {#guides}
+## ガイド
 
 - [プランを選択してください](/tidb-cloud/select-cluster-tier.md)
 - [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
@@ -39,7 +39,7 @@
   - 監査管理
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
 
-## リファレンス {#reference}
+## リファレンス
 
 - PostgreSQL 拡張機能
   - [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md)
