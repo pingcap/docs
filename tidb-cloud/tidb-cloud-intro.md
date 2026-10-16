@@ -78,13 +78,10 @@ TiDB Cloud 提供以下部署选项：
 
 - TiDB Cloud Starter
 
-    TiDB Cloud Starter 是一款完全托管的多租户 TiDB 产品。它提供即时、自动扩展的 MySQL 兼容数据库，并在超出免费额度后按用量计费。
+    {{{ .starter }}} 是一款完全托管的多租户 TiDB 产品。它提供即时、自动扩展的 MySQL 兼容数据库，同时 PostgreSQL 兼容性现已进入公测。
 
-    <CustomContent language="en,zh">
-
-    目前，TiDB Cloud Starter 已在 AWS 上正式发布，并在阿里云上公测。
-
-    </CustomContent>
+    - MySQL 兼容的 Starter 提供每月免费额度，超出免费额度后的使用量可按量计费。<CustomContent language="en,zh">目前，{{{ .starter }}} 已在 AWS 上正式发布，并在阿里云上公测。</CustomContent>
+    - PostgreSQL 兼容的 Starter 在公测期间免费提供，但受使用额度限制。该预览版旨在用于开发和评估，不建议用于生产负载。
 
 - TiDB Cloud Essential
 
@@ -120,15 +117,11 @@ TiDB Cloud 提供以下部署选项：
 
     </CustomContent>
 
-<CustomContent plan="byoc">
-
 - {{{ .byoc }}}
 
     {{{ .byoc }}} 专为需要更高控制力、安全性和合规性的大规模生产负载而设计。它使你能够在自己的 AWS 账户中运行数据平面，同时享受 TiDB Cloud 的自动化运维、弹性扩展性和企业级安全能力。
 
-    目前，{{{ .byoc }}} 在 AWS 上处于私有预览阶段。
-
-</CustomContent>
+    目前，{{{ .byoc }}} 在 AWS 上公测。
 
 - TiDB Cloud Dedicated
 
@@ -156,10 +149,6 @@ TiDB Cloud 提供以下部署选项：
 
     你可以通过私有端点连接或 VPC 对等连接访问你的 TiDB Cloud 资源。详情请参考 [Set Up Private Endpoint Connections](/tidb-cloud/set-up-private-endpoint-connections.md) 或 [Set up VPC Peering Connection](/tidb-cloud/set-up-vpc-peering-connections.md)。
 
-<CustomContent plan="byoc">
-
 > **注意：**
 >
 > TiDB Cloud BYOC 使用的架构与其他 TiDB Cloud 部署选项不同。在 BYOC 中，TiDB Cloud 控制平面由 PingCAP 管理，而数据平面运行在你自己的云账户中。详情请参阅 [TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc)。
-
-</CustomContent>
