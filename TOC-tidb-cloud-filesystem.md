@@ -37,6 +37,6 @@
 
 - [命令参考](/tidb-cloud-filesystem/filesystem-command-reference.md)
 - [TiDB Cloud Filesystem SDK](/tidb-cloud-filesystem/filesystem-sdks.md)
-- [Regions 和限制](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
+- [区域和限制](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 - [常见问题](/tidb-cloud-filesystem/filesystem-faq.md)
 - [故障排查](/tidb-cloud-filesystem/filesystem-troubleshooting.md)

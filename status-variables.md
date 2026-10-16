@@ -1,9 +1,9 @@
 ---
-title: Server Status Variables
+title: 服务器状态变量
 summary: 使用状态变量查看系统和会话状态
 ---
 
-# Server Status Variables
+# 服务器状态变量
 
 服务器状态变量提供关于 TiDB 服务器的全局状态信息以及当前会话的状态。大部分这些变量设计为与 MySQL 兼容。
 

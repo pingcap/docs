@@ -1,9 +1,9 @@
 ---
-title: TiFlash 概述
+title: TiFlash 简介
 summary: 了解 TiFlash 的架构和关键特性。
 ---
 
-# TiFlash 概述
+# TiFlash 简介
 
 [TiFlash](https://github.com/pingcap/tiflash) 是使 TiDB 成为混合事务/分析处理（HTAP）数据库的关键组件。作为 TiKV 的列式存储扩展，TiFlash 同时提供良好的隔离级别和强一致性保证。
 

@@ -1,9 +1,9 @@
 ---
-title: Security Overview
+title: 安全概览
 summary: 了解 TiDB Cloud 的全面安全框架，包括身份管理、网络隔离、数据保护、访问控制和审计。
 ---
 
-# Security Overview
+# 安全概览
 
 TiDB Cloud 提供了全面且灵活的安全框架，覆盖数据生命周期的所有阶段。该平台在身份与访问管理、网络安全与隔离、数据访问控制、数据库访问控制以及审计日志等方面，均提供了全方位的保护。
 

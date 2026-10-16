@@ -5,7 +5,7 @@ hide_commit: true
 summary: TiDB Cloud Filesystem 为应用程序、自动化和 AI 代理提供持久化、共享的文件存储，使其能够跨机器和会话进行访问。
 ---
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Filesystem" subTitle="TiDB Cloud Filesystem 是一种持久化、共享的文件存储，应用程序、自动化和 AI 代理可以跨机器和会话访问它。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Filesystem" subTitle="TiDB Cloud Filesystem 提供持久化的共享文件存储服务，支持应用程序、自动化工具和 AI 智能体跨机器、跨会话访问文件。">
 
 <LearningPath label="Learn" icon="cloud1">
 
@@ -59,7 +59,7 @@ summary: TiDB Cloud Filesystem 为应用程序、自动化和 AI 代理提供持
 
 [文件系统 CLI 命令](/ai/ti/reference/ti-filesystem.md)
 
-[Region 和限制](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
+[区域和限制](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 
 [常见问题](/tidb-cloud-filesystem/filesystem-faq.md)
 

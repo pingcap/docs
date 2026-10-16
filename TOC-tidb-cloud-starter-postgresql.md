@@ -7,14 +7,14 @@
 
 - 为什么选择 TiDB Cloud
   - [简介](/tidb-cloud/tidb-cloud-intro.md)
-  - [功能特性](/tidb-cloud/features.md)
-  - [PostgreSQL 兼容性](/tidb-cloud/starter/postgresql-compatibility.md)
+  - [功能概览](/tidb-cloud/features.md)
+  - [与 PostgreSQL 的兼容性](/tidb-cloud/starter/postgresql-compatibility.md)
 - 快速开始
   - [试用 TiDB Cloud Starter](/tidb-cloud/starter/pg-quickstart.md)
 
 ## 指南
 
-- [选择方案](/tidb-cloud/select-cluster-tier.md)
+- [选择 TiDB Cloud 方案](/tidb-cloud/select-cluster-tier.md)
 - [管理 TiDB Cloud 资源和项目](/tidb-cloud/manage-projects-and-resources.md)
 - 管理 {{{ .starter }}} 实例
   - [创建 {{{ .starter }}} 实例](/tidb-cloud/create-tidb-cluster-serverless.md)
@@ -27,15 +27,15 @@
   - [删除 {{{ .starter }}} 实例](/tidb-cloud/delete-tidb-cluster.md)
 - [从 PostgreSQL 迁移到 TiDB Cloud Starter](/tidb-cloud/starter/import-with-psql.md)
 - 安全
-  - [Security Overview](/tidb-cloud/security-overview.md)
+  - [安全概览](/tidb-cloud/security-overview.md)
   - 身份访问控制
     - [密码认证](/tidb-cloud/tidb-cloud-password-authentication.md)
-    - [标准 SSO 认证](/tidb-cloud/tidb-cloud-sso-authentication.md)
-    - [组织 SSO 认证](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
+    - [标准 SSO 身份验证](/tidb-cloud/tidb-cloud-sso-authentication.md)
+    - [组织 SSO 身份验证](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
     - [身份访问管理](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - 网络访问控制
-    - [到 TiDB Cloud 的 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
+    - [通过 TLS 连接](/tidb-cloud/secure-connections-to-serverless-clusters.md)
   - 审计管理
     - [控制台审计日志](/tidb-cloud/tidb-cloud-console-auditing.md)
 
@@ -69,21 +69,21 @@
   - [TiDB X 架构](/tidb-cloud/tidb-x-architecture.md)
   - 存储引擎
     - TiKV
-      - [TiKV 概述](/tikv-overview.md)
-      - [RocksDB 概述](/storage-engine/rocksdb-overview.md)
+      - [TiKV 简介](/tikv-overview.md)
+      - [RocksDB 简介](/storage-engine/rocksdb-overview.md)
     - TiFlash
-      - [TiFlash 概述](/tiflash/tiflash-overview.md)
-      - [落盘](/tiflash/tiflash-spill-disk.md)
+      - [TiFlash 简介](/tiflash/tiflash-overview.md)
+      - [TiFlash 数据落盘](/tiflash/tiflash-spill-disk.md)
   - TiDB Cloud 合作伙伴 Web 控制台
     - [TiDB Cloud 合作伙伴](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP 客户](/tidb-cloud/managed-service-provider-customer.md)
     - [代理商的客户](/tidb-cloud/cppo-customer.md)
-  - [{{{ .starter }}} 和 Essential 的限制](/tidb-cloud/serverless-limitations.md)
-  - [TiDB X 实例上的受限 SQL 功能](/tidb-cloud/limited-sql-features-tidb-x.md)
+  - [{{{ .starter }}} 和 Essential 的使用限制](/tidb-cloud/serverless-limitations.md)
+  - [TiDB X 实例上的 SQL 功能限制](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDB 限制](/tidb-limitations.md)
   - [系统变量](/system-variables.md)
-  - [Server Status Variables](/status-variables.md)
-  - [Table Filter](/table-filter.md)
+  - [服务器状态变量](/status-variables.md)
+  - [表库过滤](/table-filter.md)
   - [外部存储服务的 URI 格式](/external-storage-uri.md)
   - [排查数据与索引不一致问题](/troubleshoot-data-inconsistency-errors.md)
   - [通知](/tidb-cloud/notifications.md)
@@ -91,7 +91,7 @@
   - [Connected Care 概览](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务功能
-    - [Connected: IM 中的 AI Chat](/tidb-cloud/connected-ai-chat-in-im.md)
+    - [Connected: IM 中的 AI 对话](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: TiDB Cloud Alerts 的 IM 订阅
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
       - [通过 Zoom 订阅](/tidb-cloud/monitor-alert-zoom.md)

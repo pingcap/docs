@@ -1,9 +1,9 @@
 ---
-title: 组织 SSO 认证
+title: 组织 SSO 身份验证
 summary: 了解如何通过自定义的组织认证登录 TiDB Cloud 控制台。
 ---
 
-# 组织 SSO 认证
+# 组织 SSO 身份验证
 
 单点登录（SSO）是一种认证方案，使你 TiDB Cloud [组织](/tidb-cloud/tidb-cloud-glossary.md#organization)中的成员能够使用身份提供商（IdP）中的身份登录 TiDB Cloud，而无需使用邮箱地址和密码。
 

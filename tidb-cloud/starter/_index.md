@@ -145,7 +145,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 <CustomContent plan="starter" compatibility="postgresql">
 
-<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="兼容 PostgreSQL 的 TiDB Cloud Starter 专为使用熟悉的 PostgreSQL 工具和框架构建和测试应用程序的开发者而设计。它提供完全托管、自动扩缩容的数据库，并支持兼容 pgvector 的向量搜索和部分 PostgreSQL 扩展。">
+<LearningPathContainer platform="tidb-cloud" title="TiDB Cloud Starter" subTitle="兼容 PostgreSQL 的 TiDB Cloud Starter 专门为使用 PostgreSQL 常用工具和框架开发、测试应用程序的开发者而设计。它提供全托管、可自动扩缩容的数据库服务，支持兼容 pgvector 的向量搜索功能以及部分 PostgreSQL 扩展。">
 
 <LearningPath label="学习" icon="cloud1">
 
@@ -163,7 +163,7 @@ summary: TiDB Cloud 是一款全托管的数据库即服务（DBaaS），将 TiD
 
 </LearningPath>
 
-<LearningPath label="维护" icon="cloud7">
+<LearningPath label="运维" icon="cloud7">
 
 [创建集群](https://docs.pingcap.com/zh/tidbcloud/create-tidb-cluster-serverless/?plan=starter&compatibility=postgresql)
 
