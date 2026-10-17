@@ -17,6 +17,78 @@ When the execution plan cache is enabled, in the first execution every `Prepare`
 
 TiDB also supports execution plan caching for some non-`PREPARE` statements, similar to the `Prepare`/`Execute` statements. For more details, refer to [Non-prepared plan cache](/sql-non-prepared-plan-cache.md).
 
+## Session-level and instance-level Prepared Plan Cache
+
+TiDB supports both session-level plan cache and instance-level plan cache. Session-level plan cache maintains a separate cache for each session, while instance-level plan cache maintains a single shared cache across all sessions in an instance.
+
+To enable or disable instance-level plan cache, you can use the [`tidb_enable_instance_plan_cache`](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840) system variable. When you set this variable to `ON`, instance-level plan cache is used. Otherwise, session-level plan cache is used.
+
+When you set `tidb_enable_instance_plan_cache` to `ON`, plans can be shared across different sessions. The following is an example:
+
+```sql
+-- Execute the following SQL statements in session 1.
+mysql> PREPARE st FROM "SELECT a FROM t WHERE a<?";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SET @a=1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> EXECUTE st USING @a;
+Empty set (0.01 sec)
+
+-- Execute the following SQL statements in session 2.
+mysql> PREPARE st FROM "SELECT a FROM t WHERE a<?";
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SET @a=30;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> EXECUTE st USING @a;
+Empty set (0.01 sec)
+
+mysql> SELECT @@last_plan_from_cache;
++------------------------+
+| @@last_plan_from_cache |
++------------------------+
+|                      1 |
++------------------------+
+```
+
+Starting from v8.5.0, TiDB provides two system tables to view entries in the instance-level plan cache:
+
+* `information_schema.tidb_plan_cache`: shows entries of instance plan cache in the current TiDB instance.
+* `information_schema.cluster_tidb_plan_cache`: shows entries of instance plan cache across all available TiDB instances.
+
+The following example shows how to view entries in `information_schema.tidb_plan_cache`:
+
+```sql
+mysql> SELECT *, tidb_decode_binary_plan(binary_plan) FROM information_schema.tidb_plan_cache\G
+*************************** 1. row ***************************
+                          SQL_DIGEST: 3689d7f367e2fdaf53c962c378efdf47799143b9af12f47e13ec247332269eac
+                            SQL_TEXT: SELECT a FROM t WHERE a<?
+                           STMT_TYPE: Select
+                          PARSE_USER: root
+                         PLAN_DIGEST: 6285ba7cabe7b19459668d62ec201ecbea63ac5f23e5b9166f02fbb86cdf4807
+                         BINARY_PLAN: iQKYCoYCCg1UYWJsZVJlYWRlcl83ErYBCgtTZWxlY3Rpb25fNhJqCg9UASFQRnVsbFNjYW5fNSEBAAAAOA1PQSkAAQHYiMNAOAJAAkoLCgkKBHRlc3QSAXRSHmtlZXAgb3JkZXI6ZmFsc2UsIHN0YXRzOnBzZXVkb3D//w0CBAF4DQkM//8BIQFPLOptUUEpq6qqqqr2qQVZEFIPbHQoAVggLnQuYSwgMSlwGTIuPQAYpHA9CrdyEx09KAFAAVIQZGF0YTpTGdFWPgA=
+                             BINDING: 
+                             OPT_ENV: af3d96834213de7624b07a2991ba8c4579c86054423f651a15d3a7246f35920f
+                        PARSE_VALUES: 1
+                            MEM_SIZE: 10786
+                          EXECUTIONS: 2
+                      PROCESSED_KEYS: 0
+                          TOTAL_KEYS: 0
+                         SUM_LATENCY: 10011084
+                           LOAD_TIME: 2025-05-22 14:49:47
+                    LAST_ACTIVE_TIME: 2025-05-22 14:50:54
+tidb_decode_binary_plan(binary_plan): 
+| id                  | estRows  | estCost    | task      | access object | operator info                   |
+| TableReader_7       | 3323.33  | 318637.76  | root      |               | data:Selection_6                |
+| └─Selection_6       | 3323.33  | 4569000.00 | cop[tikv] |               | lt(test.t.a, 1)                 |
+|   └─TableFullScan_5 | 10000.00 | 4070000.00 | cop[tikv] | table:t       | keep order:false, stats:pseudo  |
+```
+
+## Prepared Plan Cache restrictions
+
 In the current version of TiDB, if a `Prepare` statement meets any of the following conditions, the query or the plan is not cached:
 
 - The query contains SQL statements other than `SELECT`, `UPDATE`, `INSERT`, `DELETE`, `Union`, `Intersect`, and `Except`.
@@ -206,6 +278,20 @@ The following is an example of the **Plan Cache Memory Usage** and **Plan Cache 
 
 ![grafana_panels](/media/planCache-memoryUsage-planNum-panels.png)
 
+<CustomContent platform="tidb">
+
+Due to memory limits, plan cache entries might be missed. You can check this status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+Due to memory limits, plan cache entries might be missed.
+
+</CustomContent>
+
+### Memory management of session-level plan cache
+
 Starting from v7.1.0, you can control the maximum number of plans that can be cached in each session by configuring the system variable [`tidb_session_plan_cache_size`](/system-variables.md#tidb_session_plan_cache_size-new-in-v710). For different environments, the recommended value is as follows and you can adjust it according to the monitoring panels:
 
 </CustomContent>
@@ -229,19 +315,21 @@ When the unused memory of the TiDB server is less than a certain threshold, the 
 
 You can control the threshold by configuring the system variable `tidb_prepared_plan_cache_memory_guard_ratio`. The threshold is 0.1 by default, which means when the unused memory of the TiDB server is less than 10% of the total memory (90% of the memory is used), the memory protection mechanism is triggered.
 
-<CustomContent platform="tidb">
+### Memory management of instance-level plan cache
 
-Due to memory limit, plan cache might be missed sometimes. You can check the status by viewing the [`Plan Cache Miss OPS` metric](/grafana-tidb-dashboard.md) in the Grafana dashboard.
+You can use the [`tidb_instance_plan_cache_max_size`](/system-variables.md#tidb_instance_plan_cache_max_size-new-in-v840) system variable to set the maximum memory usage for the instance-level plan cache. For example, to set the cache limit to 200 MiB:
 
-</CustomContent>
+```sql
+SET GLOBAL tidb_instance_plan_cache_max_size = 200MiB
+```
 
-<CustomContent platform="tidb-cloud">
-
-Due to memory limit, plan cache might be missed sometimes.
-
-</CustomContent>
+TiDB purges the instance-level plan cache periodically. You can control the amount of memory purged each time by using the [`tidb_instance_plan_cache_reserved_percentage`](/system-variables.md#tidb_instance_plan_cache_reserved_percentage-new-in-v840) system variable. For example, if the default percentage is `0.1` and the maximum cache size is `200MiB`, TiDB purges `200 * 0.1 = 20MiB` of memory each time.
 
 ## Clear execution plan cache
+
+> **Note:**
+>
+> Currently, you can only use the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement to clear session-level plan cache. Support for clearing instance-level plan cache will be available in a future release.
 
 You can clear execution plan cache by executing the `ADMIN FLUSH [SESSION | INSTANCE] PLAN_CACHE` statement.
 
