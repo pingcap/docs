@@ -29,6 +29,55 @@ The Debezium output format contains the schema information of the current row so
 
 In addition, the original Debezium format does not include important fields such as the unique transaction identifier of the `CommitTS` in TiDB. To ensure data integrity, TiCDC adds two fields, `CommitTs` and `ClusterID`, to the Debezium format to identify the relevant information of TiDB data changes.
 
+### Numeric and binary handling
+
+For Debezium JSON (`protocol=debezium`), you can configure how TiCDC encodes decimal values, unsigned BIGINT values, and binary data. Set the following options in the [`[sink.debezium]`](/ticdc/ticdc-changefeed-config.md#sinkdebezium) section of the changefeed configuration file or use the corresponding `sink-uri` parameters. If you set an option in both places, the `sink-uri` value takes precedence. These options do not apply to `protocol=debezium-avro`.
+
+| Configuration option | Sink URI parameter | Default value | Value options |
+| :--- | :--- | :--- | :--- |
+| `decimal-handling-mode` | `debezium-decimal-handling-mode` | `double` | `double`, `string` |
+| `bigint-unsigned-handling-mode` | `debezium-bigint-unsigned-handling-mode` | `long` | `long`, `string` |
+| `binary-handling-mode` | `debezium-binary-handling-mode` | `base64` | `bytes`, `base64`, `base64-url-safe`, `hex` |
+
+The default values preserve the existing encoding behavior. To preserve the full precision of `DECIMAL` and `BIGINT UNSIGNED` values, set the corresponding handling modes to `string`:
+
+- `decimal-handling-mode = "double"` encodes `DECIMAL` and `NUMERIC` values as float64 JSON numbers with schema type `double`. High-precision values might lose precision. With `string`, TiCDC encodes the values as decimal strings and uses schema type `string`.
+- `bigint-unsigned-handling-mode = "long"` encodes `BIGINT UNSIGNED` values as signed 64-bit JSON numbers with schema type `int64`. Values greater than `9223372036854775807` wrap to negative numbers. For example, `18446744073709551615` is encoded as `-1`. With `string`, TiCDC preserves the full unsigned value as a string, such as `"18446744073709551615"`, and uses schema type `string`. Signed `BIGINT` columns are unaffected by this option.
+
+The `binary-handling-mode` option controls the encoding of string-like columns with the BINARY flag, such as `BINARY`, `VARBINARY`, and `BLOB`. For example, TiCDC encodes the binary value `X'FBFF'` as follows:
+
+| Mode | JSON value | Schema type |
+| :--- | :--- | :--- |
+| `base64` | `"+/8="` | `string` |
+| `bytes` | `"+/8="` | `bytes` |
+| `base64-url-safe` | `"-_8="` | `string` |
+| `hex` | `"fbff"` | `string` |
+
+In `bytes` mode, the JSON value is still a Base64-encoded string; only the schema type changes. This option does not change the encoding of `BIT` columns or columns without the BINARY flag.
+
+These handling modes apply to column values in message keys, `payload.before`, and `payload.after`, and to column defaults in the schema. Setting `debezium-disable-schema=true` omits the schema but does not change the configured payload encoding.
+
+For example, save the following configuration as `changefeed.toml` to preserve numeric precision and encode binary data as hexadecimal strings:
+
+```toml
+[sink.debezium]
+decimal-handling-mode = "string"
+bigint-unsigned-handling-mode = "string"
+binary-handling-mode = "hex"
+```
+
+Then create the changefeed using this file:
+
+```shell
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-debezium" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=debezium" --config=changefeed.toml
+```
+
+Alternatively, set the options directly in `sink-uri`:
+
+```shell
+cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-debezium" --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=debezium&debezium-decimal-handling-mode=string&debezium-bigint-unsigned-handling-mode=string&debezium-binary-handling-mode=hex"
+```
+
 ## Message format definition
 
 This section describes the message formats of DDL events, DML events and WATERMARK events.
@@ -785,9 +834,9 @@ The data format mapping in the TiCDC Debezium message basically follows the [Deb
 
 - Currently, TiDB does not support spatial data types, including GEOMETRY, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, and GEOMETRYCOLLECTION.
 
-- For string-like data types, including Varchar, String, VarString, TinyBlob, MediumBlob, BLOB, and LongBlob, when the column has the BINARY flag, TiCDC encodes it as a String type after encoding it in Base64; when the column does not have the BINARY flag, TiCDC encodes it directly as a String type. The native Debezium Connector encodes it in different ways according to `binary.handling.mode`.
+- For string-like data types, including Varchar, String, VarString, TinyBlob, MediumBlob, BLOB, and LongBlob, when the column has the BINARY flag, TiCDC encodes it according to `binary-handling-mode`, which defaults to Base64 encoding with schema type `string`; when the column does not have the BINARY flag, TiCDC encodes it directly as a String type. The native Debezium Connector uses `binary.handling.mode`. For the supported TiCDC modes, see [Numeric and binary handling](#numeric-and-binary-handling).
 
-- For the Decimal data type, including DECIMAL and NUMERIC, TiCDC uses the float64 type to represent it. The native Debezium Connector encodes it in float32 or float64 according to the different precision of the data type.
+- For the Decimal data type, including DECIMAL and NUMERIC, TiCDC uses the float64 type by default. Set `decimal-handling-mode` to `string` to preserve the full precision. For `BIGINT UNSIGNED`, TiCDC uses signed 64-bit integers by default. Set `bigint-unsigned-handling-mode` to `string` to preserve the full unsigned value. For details, see [Numeric and binary handling](#numeric-and-binary-handling).
 
 - TiCDC converts REAL to DOUBLE, and converts BOOLEAN to TINYINT(1) when the length is one.
 
