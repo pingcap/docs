@@ -352,7 +352,7 @@ column-selectors = [
 
 ## Scale out the load of a single large table to multiple TiCDC nodes
 
-This feature splits the data replication range of a single large table into multiple ranges, according to the data volume and the number of modified rows per minute, and it makes the data volume and the number of modified rows replicated in each range approximately the same. This feature distributes these ranges to multiple TiCDC nodes for replication, so that multiple TiCDC nodes can replicate a large single table at the same time. This feature can solve the following two problems:
+This feature splits the data replication range of a single large table into multiple ranges and distributes them to multiple TiCDC nodes for parallel replication. TiCDC can split a table when its Region count exceeds `region-threshold` or when its write traffic exceeds `write-key-threshold`. In the TiCDC classic architecture, `write-key-threshold` uses the upstream PD Region `written_keys` statistics. In the TiCDC new architecture, `write-key-threshold` uses sink DML event bytes per second. This feature can solve the following two problems:
 
 - A single TiCDC node cannot replicate a large single table in time.
 - The resources (such as CPU and memory) consumed by TiCDC nodes are not evenly distributed.
@@ -370,14 +370,16 @@ enable-table-across-nodes = true
 # When you enable this feature, it only takes effect for tables with the number of regions greater than the `region-threshold` value. For the TiCDC new architecture, the default value is `10000`; for the TiCDC classic architecture, the default value is `100000`.
 
 region-threshold = 10000
-# When you enable this feature, it takes effect for tables with the number of rows modified per minute greater than the `write-key-threshold` value.
+# When you enable this feature, it takes effect for tables whose write traffic exceeds the `write-key-threshold` value.
 # Note:
-# * The default value of `write-key-threshold` is 0, which means that the feature does not split the table replication range according to the number of rows modified in a table by default.
-# * You can configure this parameter according to your cluster workload. For example, if it is configured as 30000, it means that the feature will split the replication range of a table when the number of modified rows per minute in the table exceeds 30000.
+# * The default value of `write-key-threshold` is 0, which disables traffic-based table splitting by default.
+# * In the TiCDC classic architecture, `write-key-threshold` uses the upstream PD Region `written_keys` statistics.
+# * In the TiCDC new architecture, `write-key-threshold` is measured in sink DML event bytes per second. If you set a positive value smaller than 10485760 (10 MiB), TiCDC automatically adjusts it to 10485760, so do not reuse classic-architecture values directly.
+# * In the TiCDC new architecture, 10485760 (10 MiB) is the smallest positive value that takes effect without adjustment.
 # * When `region-threshold` and `write-key-threshold` are configured at the same time:
-#   TiCDC will check whether the number of modified rows is greater than `write-key-threshold` first.
+#   TiCDC will check whether the write traffic is greater than `write-key-threshold` first.
 #   If not, next check whether the number of Regions is greater than `region-threshold`.
-write-key-threshold = 30000
+write-key-threshold = 10485760
 ```
 
 You can query the number of Regions a table contains by the following SQL statement:
