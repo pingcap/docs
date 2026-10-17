@@ -89,6 +89,10 @@ Adjust the following system variables related to Fast Online DDL:
     * [`tidb_ddl_error_count_limit`](/system-variables.md#tidb_ddl_error_count_limit)
     * [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size): use the default value. The recommended maximum value is `1024`.
 
+## TiKV disk space precheck for `ADD INDEX` tasks
+
+For [`ADD INDEX`](/sql-statements/sql-statement-add-index.md) tasks executed by the DXF, TiDB performs a TiKV disk space precheck before task submission. This precheck applies to both local sort and Global Sort execution paths. For more information, see [TiKV disk space precheck](/sql-statements/sql-statement-add-index.md#tikv-disk-space-precheck).
+
 ## Task scheduling
 
 By default, the DXF schedules all TiDB nodes to execute distributed tasks. Starting from v7.4.0, for TiDB Self-Managed clusters, you can control which TiDB nodes can be scheduled by the DXF to execute distributed tasks by configuring [`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740).
