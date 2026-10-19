@@ -232,7 +232,7 @@ const tx = await conn.begin({isolation:"READ COMMITTED"})
 
 **decoders**
 
-To customize the format of returned column values, you can configure the `decoder` option in the `connect()` method as follows:
+To customize the format of returned column values, you can configure the `decoders` option in the `connect()` method as follows:
 
 ```ts
 import { connect, ColumnType } from '@tidbcloud/serverless';
