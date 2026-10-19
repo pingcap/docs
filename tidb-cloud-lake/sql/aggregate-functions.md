@@ -34,14 +34,18 @@ This page provides a comprehensive overview of aggregate functions in {{{ .lake 
 
 | Function | Description | Example |
 |----------|-------------|---------|
-| [VAR_POP](/tidb-cloud-lake/sql/var-pop.md) / [VARIANCE_POP](/tidb-cloud-lake/sql/variance-pop.md) | Population variance | `VAR_POP(height)` → `10.25` |
-| [VAR_SAMP](/tidb-cloud-lake/sql/var-samp.md) / [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md) | Sample variance | `VAR_SAMP(height)` → `12.3` |
+| [VAR_POP](/tidb-cloud-lake/sql/var-pop.md) / [VARIANCE_POP](/tidb-cloud-lake/sql/variance-pop.md) | Alias for COVAR_POP (population covariance) | `VAR_POP(x, y)` → `2.5` |
+| [VAR_SAMP](/tidb-cloud-lake/sql/var-samp.md) / [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md) | Alias for COVAR_SAMP (sample covariance) | `VAR_SAMP(x, y)` → `2.7` |
 | [STDDEV_POP](/tidb-cloud-lake/sql/stddev-pop.md) | Population standard deviation | `STDDEV_POP(height)` → `3.2` |
 | [STDDEV_SAMP](/tidb-cloud-lake/sql/stddev-samp.md) | Sample standard deviation | `STDDEV_SAMP(height)` → `3.5` |
 | [COVAR_POP](/tidb-cloud-lake/sql/covar-pop.md) | Population covariance | `COVAR_POP(x, y)` → `2.5` |
 | [COVAR_SAMP](/tidb-cloud-lake/sql/covar-samp.md) | Sample covariance | `COVAR_SAMP(x, y)` → `2.7` |
 | [KURTOSIS](/tidb-cloud-lake/sql/kurtosis.md) | Measures peakedness of distribution | `KURTOSIS(values)` → `2.1` |
 | [SKEWNESS](/tidb-cloud-lake/sql/skewness.md) | Measures asymmetry of distribution | `SKEWNESS(values)` → `0.2` |
+
+> **Note:**
+>
+> `VAR_POP`, `VARIANCE_POP`, `VAR_SAMP`, and `VARIANCE_SAMP` require two arguments. To calculate the variance of a single column, pass the column as both arguments, for example, `COVAR_POP(x, x)` for the population variance or `COVAR_SAMP(x, x)` for the sample variance.
 
 ## Percentile and Distribution
 
