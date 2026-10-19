@@ -43,10 +43,6 @@ This page provides a comprehensive overview of aggregate functions in {{{ .lake 
 | [KURTOSIS](/tidb-cloud-lake/sql/kurtosis.md) | Measures peakedness of distribution | `KURTOSIS(values)` → `2.1` |
 | [SKEWNESS](/tidb-cloud-lake/sql/skewness.md) | Measures asymmetry of distribution | `SKEWNESS(values)` → `0.2` |
 
-> **Note:**
->
-> `VAR_POP`, `VARIANCE_POP`, `VAR_SAMP`, and `VARIANCE_SAMP` require two arguments. To calculate the variance of a single column, pass the column as both arguments, for example, `COVAR_POP(x, x)` for the population variance or `COVAR_SAMP(x, x)` for the sample variance.
-
 ## Percentile and Distribution
 
 | Function | Description | Example |
