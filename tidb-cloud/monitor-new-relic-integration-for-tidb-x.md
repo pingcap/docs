@@ -42,7 +42,7 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
     </CustomContent>
 
-2. In the JSON file, add your New Relic account ID to all `"accountIds": []` fields.
+2. In the JSON file, add your [New Relic account ID](https://docs.newrelic.com/docs/accounts/accounts-billing/account-structure/account-id/) to all `"accountIds": []` fields.
 
     For example:
 
@@ -58,7 +58,7 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
 3. Log in to [New Relic](https://one.newrelic.com/), click **Dashboards** in the left navigation bar, and then click **Import dashboard** in the upper-right corner.
 
-4. In the displayed dialog, paste all the content in the prepared JSON file to the text area, and then click **Import dashboard**.
+4. In the displayed dialog, paste the contents of the prepared JSON file into the text area, select the account and permission settings, and then click **Save**.
 
 ### Step 2. Integrate with your New Relic API key
 
@@ -67,7 +67,7 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .essential }}} instance to go to its overview page.
 2. In the left navigation pane, click **Integrations**.
 3. On the **Integrations** page, locate the **New Relic (PREVIEW)** integration and click **Connect**.
-4. Enter your New Relic API key, choose the region of New Relic, and then click **Test Integration**.
+4. Enter your New Relic API key, select the region where your New Relic account is hosted, and then click **Test Integration**.
 
     - If the test succeeds, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
@@ -81,7 +81,7 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
 3. On the **Integrations** page, locate the **New Relic (PREVIEW)** integration and click **Connect**.
-4. Enter your New Relic API key, choose the region of New Relic, and then click **Test Integration**.
+4. Enter your New Relic API key, select the region where your New Relic account is hosted, and then click **Test Integration**.
 
     - If the test succeeds, the **Confirm** button is displayed.
     - If the test fails, an error message is displayed. Follow the message for troubleshooting and retry the integration.
