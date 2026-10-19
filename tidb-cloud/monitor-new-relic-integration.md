@@ -106,7 +106,7 @@ A new TiDB Cloud dashboard will be available in New Relic after the pending [PR]
         > To avoid integration errors, make sure your account ID is added in all `"accountIds"` fields in the JSON file.
 
 2. Log in to [New Relic](https://one.newrelic.com/), click **Dashboards** in the left navigation bar, and then click **Import dashboard** in the upper-right corner.
-3. In the displayed dialog, paste the contents of the prepared JSON file into the text area, select the account and permission settings, and then click **Save**.
+3. In the displayed dialog, paste the contents of the prepared JSON file into the text area, select the permission settings, and then click **Save**.
 
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">
