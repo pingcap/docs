@@ -341,13 +341,13 @@ ORDER BY extname;
 
 ## システムカタログの互換性 {#system-catalog-compatibility}
 
-PostgreSQL 互換の {{{ .starter }}} は、一般的な PostgreSQL ツールおよびイントロスペクションのワークフローに必要なカタログの表面を実装していますが、カタログの内容やカラムは本家の PostgreSQL と異なる場合があります。
+PostgreSQL 互換の {{{ .starter }}} は、一般的な PostgreSQL ツールおよびイントロスペクションのワークフローに必要なカタログの表面を実装していますが、カタログの内容やカラムは PostgreSQL 本体と異なる場合があります。
 
 特に、次の点に注意してください。
 
-- 本家の `pg_catalog` または `information_schema` のすべてのリレーションが利用できるわけではありません。
+- 本来の `pg_catalog` または `information_schema` のすべてのリレーションが利用できるわけではありません。
 - 一部のカタログリレーションは、基盤となる PostgreSQL 機能がサポートされていない場合でも、互換性のために存在します。
-- 一部のカタログリレーションでは、本家の PostgreSQL のカラムの一部のみが公開されています。
+- 一部のカタログリレーションでは、PostgreSQL 本体のカラムの一部のみが公開されています。
 - `information_schema.views` は利用できません。
 - カスタム照合順序は使用できますが、`pg_collation` には一覧表示されません。
 - トリガーのタイミングおよび行/文の向きは、`information_schema.triggers` から確認する必要があります。

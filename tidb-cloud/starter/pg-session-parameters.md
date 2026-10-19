@@ -213,7 +213,7 @@ SHOW transaction_read_only;
 - `transaction_deferrable`
 - `transaction_read_only`
 
-一部の値は、PostgreSQL クライアントおよびツールとの互換性のために公開されていますが、対応する本家の PostgreSQL サーバーのすべての機能が利用可能であることを意味するものではありません。
+一部の値は、PostgreSQL クライアントおよびツールとの互換性のために公開されていますが、対応する PostgreSQL 本体のサーバーのすべての機能が利用可能であることを意味するものではありません。
 
 ## 互換性専用パラメータ {#compatibility-only-parameters}
 
