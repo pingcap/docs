@@ -11,23 +11,23 @@ AWS 環境の準備が完了したら、TiDB Cloud Control Plane がお客様の
 
 スクリプトを実行する前に、以下を確認してください。
 
-1. **AWS CLI installed:** CLI は、IAM ロールとポリシーを作成する権限を持つ Access Key で設定されている必要があります。
-2. **TiDB Cloud account info:** **Control Plane Account ID** と **Clinic Account ID** を取得するために、TiDB Cloud のサポート担当者に連絡してください。
+1. **AWS CLI のインストール:** CLI は、IAM ロールとポリシーを作成する権限を持つ Access Key で設定されている必要があります。
+2. **TiDB Cloud のアカウント情報:** **Control Plane Account ID** と **Clinic Account ID** を取得するために、TiDB Cloud のサポート担当者に連絡してください。
 
 ## パラメーターを収集する {#gather-parameters}
 
 以下の表を使用して、スクリプトに必要なパラメーターを対応付けてください。
 
-| Parameter | ソース | 説明 |
+| パラメーター | ソース | 説明 |
 | :---- | :---- | :---- |
 | `<ControlPlaneAccountId>` | **TiDB Support** | TiDB Control Plane の AWS Account ID。 |
 | `<ClinicAccountId>` | **TiDB Support** | TiDB Clinic サービス用の AWS Account ID。 |
-| `<TidbHostedZoneId>` | [必要な情報](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#summary-required-information) | 作成した TiDB クラスター Hosted Zone の ID。 |
+| `<TidbHostedZoneId>` | [必要な情報](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#summary-required-information) | 作成した TiDB クラスターのホストゾーンの ID。 |
 | `<TidbPCAArn>` | [必要な情報](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#summary-required-information) | 作成した Private CA の ARN。 |
 
 ## ブートストラップスクリプトを実行する {#execute-bootstrapping-script}
 
-1. [PingCAP GitHub repository](https://github.com/tidbcloud/byoc-account-setup/tree/main) からスクリプトをダウンロードします。
+1. [PingCAP の GitHub リポジトリ](https://github.com/tidbcloud/byoc-account-setup/tree/main) からスクリプトをダウンロードします。
 
 2. ターミナルで次のコマンドを実行します。プレースホルダーは実際の値に置き換えてください。
 
@@ -47,7 +47,7 @@ AWS 環境の準備が完了したら、TiDB Cloud Control Plane がお客様の
 
 実行後、スクリプトは作成された IAM ロールの ARN を出力します。
 
-**Action required:** **execution result/log** を TiDB Cloud の担当者に共有してください。
+**必要な対応:** **実行結果/ログ** を TiDB Cloud の担当者に共有してください。
 
 ## 次のステップ {#what-s-next}
 

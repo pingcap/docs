@@ -11,7 +11,7 @@ BYOC インフラストラクチャをデプロイした後、リソースプー
 
 これで、TiDB Cloud コンソールから直接リソースプールと TiDB インスタンスをプロビジョニングできます。
 
-1. [TiDB Cloud console](https://tidbcloud.com/) にログインし、[リソースプールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md) の手順に従って、対象のクラウドプロバイダーとリージョンにリソースプールを作成します。 
+1. [TiDB Cloud コンソール](https://tidbcloud.com/) にログインし、[リソースプールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md) の手順に従って、対象のクラウドプロバイダーとリージョンにリソースプールを作成します。 
 
     >**Note:**
     >
@@ -28,7 +28,7 @@ BYOC インフラストラクチャをデプロイした後、リソースプー
 
 Amazon S3 にバックアップファイルを準備した後、アクティブなリソースプール内の新しい {{{ .byoc }}} インスタンスにデータを復元できます。
 
-1. Amazon S3 Access (AK/SK) を設定します。
+1. Amazon S3 アクセス (AK/SK) を設定します。
 
     TiDB Cloud が S3 バックアップを読み取れるようにするには、適切な S3 読み取り権限を持つ AWS Access Key ID と Secret Access Key (AK/SK) を生成して、外部ストレージアクセスを設定する必要があります。
 
@@ -46,15 +46,15 @@ Amazon S3 にバックアップファイルを準備した後、アクティブ�
 
 ## 安全な管理アクセスを設定する {#configure-secure-administrative-access}
 
-TiDB Cloud Support がトラブルシューティングや可観測性の支援を行えるようにするため、VPC 内に強化された bastion host をデプロイして、安全なアクセスチャネルを設定できます。
+TiDB Cloud Support がトラブルシューティングや可観測性の支援を行えるようにするため、VPC 内に強化された踏み台ホストをデプロイして、安全なアクセスチャネルを設定できます。
 
 > **Note:**
 >
 > - この手順は **任意** です。管理のために独自の安全なログイン方法を提供することもできます。
-> - Bastion Host はトラブルシューティングのためにのみ使用され、永続的な接続を維持する必要はありません。このチャネルはいつでも終了できます。
+> - 踏み台ホストはトラブルシューティングのためにのみ使用され、永続的な接続を維持する必要はありません。このチャネルはいつでも終了できます。
 
-デプロイおよび検証の手順については、[{{{ .byoc }}} の Bastion Host を設定する](/tidb-cloud/byoc/byoc-configure-bastion-host.md) を参照してください。
+デプロイおよび検証の手順については、[{{{ .byoc }}} の踏み台ホストを設定する](/tidb-cloud/byoc/byoc-configure-bastion-host.md) を参照してください。
 
 ## 次のステップ {#what-s-next}
 
-最初のリソースプールと {{{ .byoc }}} インスタンスを作成し、安全な管理アクセスを設定したら、[TiDB Cloud BYOC Joint Validation](/tidb-cloud/byoc/joint-validation.md) に進み、接続性、可観測性、セキュリティ、アラートを検証してください。
+最初のリソースプールと {{{ .byoc }}} インスタンスを作成し、安全な管理アクセスを設定したら、[TiDB Cloud BYOC 共同検証](/tidb-cloud/byoc/joint-validation.md) に進み、接続性、可観測性、セキュリティ、アラートを検証してください。

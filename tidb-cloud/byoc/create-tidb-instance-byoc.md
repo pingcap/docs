@@ -5,7 +5,7 @@ summary: "{{{ .byoc }}} インスタンスを作成する方法を説明しま�
 
 # {{{ .byoc }}} インスタンスを作成する
 
-このドキュメントでは、[TiDB Cloud console](https://tidbcloud.com/) で {{{ .byoc }}} インスタンスを作成する方法について説明します。
+このドキュメントでは、[TiDB Cloud コンソール](https://tidbcloud.com/) で {{{ .byoc }}} インスタンスを作成する方法について説明します。
 
 TiDB Cloud BYOC (Bring Your Own Cloud) では、コントロールプレーンは TiDB Cloud に保持したまま、データプレーンをお客様自身のクラウドアカウントにデプロイします。BYOC インスタンスを作成する前に、組織で BYOC のオンボーディングを完了し、対象のクラウド環境を準備しておく必要があります。
 
@@ -13,7 +13,7 @@ TiDB Cloud BYOC では、リソースプールが BYOC インスタンスの基�
 
 > **Note:**
 >
-> {{{ .premium }}} インスタンスの作成方法については、[Create a {{{ .premium }}} Instance](/tidb-cloud/premium/create-tidb-instance-premium.md) を参照してください。
+> {{{ .premium }}} インスタンスの作成方法については、[{{{ .premium }}} インスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md) を参照してください。
 
 ## 始める前に {#before-you-begin}
 
@@ -27,13 +27,13 @@ BYOC インスタンスを作成する前に、次の要件を満たしている
 
 BYOC 環境の準備ができていない場合、**Create Resource** ページに **Bring Your Own Cloud** タブは表示されません。組織で BYOC を有効にするには、TiDB Cloud のアカウントチームまたは [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
 
-利用可能な適切なリソースプールがない場合、`Organization Owner` は **BYOC Management** > **Resource Pools** またはインスタンス作成フローからリソースプールを作成できます。その他のロールではリソースプールを作成できません。詳細については、[Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) を参照してください。
+利用可能な適切なリソースプールがない場合、`Organization Owner` は **BYOC Management** > **Resource Pools** またはインスタンス作成フローからリソースプールを作成できます。その他のロールではリソースプールを作成できません。詳細については、[リソースプールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md) を参照してください。
 
 ## 手順 {#steps}
 
 必要な権限がある場合は、次のように {{{ .byoc }}} インスタンスを作成できます。
 
-1. [TiDB Cloud console](https://tidbcloud.com/tidbs) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、右上隅の **Create Resource** をクリックします。
+1. [TiDB Cloud コンソール](https://tidbcloud.com/tidbs) で [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、右上隅の **Create Resource** をクリックします。
 
 2. **Create Resource** ページで、**Bring Your Own Cloud** タブをクリックします。
 
@@ -56,7 +56,7 @@ BYOC 環境の準備ができていない場合、**Create Resource** ページ�
 
 7. **Capacity** エリアで、インスタンスの Request Capacity Units (RCUs) の最大数を設定します。RCU は、ワークロードに対してプロビジョニングされるコンピュートリソースを表します。TiDB Cloud は、需要に応じてこの範囲内でインスタンスを自動的にスケールします。
 
-8. {{{ .byoc }}} インスタンスでは、高可用性モードは選択したリソースプールから継承されます。リソースプールがリージョナル高可用性を使用している場合、インスタンスもリージョナル高可用性を使用します。リソースプールがゾーナル高可用性を使用している場合、インスタンスもゾーナル高可用性を使用します。BYOC インスタンスの作成時に高可用性モードを設定することはできません。詳細については、[TiDB Cloud BYOC architecture](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc) を参照してください。
+8. {{{ .byoc }}} インスタンスでは、高可用性モードは選択したリソースプールから継承されます。リソースプールがリージョナル高可用性を使用している場合、インスタンスもリージョナル高可用性を使用します。リソースプールがゾーナル高可用性を使用している場合、インスタンスもゾーナル高可用性を使用します。BYOC インスタンスの作成時に高可用性モードを設定することはできません。詳細については、[TiDB Cloud BYOC アーキテクチャ](/tidb-cloud/architecture-concepts.md#tidb-cloud-byoc) を参照してください。
 
 9. **Create** をクリックします。
 

@@ -1,42 +1,42 @@
 ---
-title: "{{{ .byoc }}} の Bastion Host を設定する"
-summary: "{{{ .byoc }}} 環境で、安全なメンテナンスアクセスのために bastion host をデプロイおよび管理する方法を説明します。"
+title: "{{{ .byoc }}} の踏み台ホストを設定する"
+summary: "{{{ .byoc }}} 環境で、安全なメンテナンスアクセスのために踏み台ホストをデプロイおよび管理する方法を説明します。"
 ---
 
-# {{{ .byoc }}} の Bastion Host を設定する
+# {{{ .byoc }}} の踏み台ホストを設定する
 
-このドキュメントでは、{{{ .byoc }}} 環境向けに bastion host をデプロイおよび管理する方法について説明します。bastion host は、お客様の AWS アカウント内の TiDB および observability EKS クラスターと安全にやり取りするための、制御されたアクセス経路を提供します。
+このドキュメントでは、{{{ .byoc }}} 環境向けに踏み台ホストをデプロイおよび管理する方法について説明します。踏み台ホストは、お客様の AWS アカウント内の TiDB および可観測性 EKS クラスターと安全にやり取りするための、制御されたアクセス経路を提供します。
 
-TiDB Cloud は、承認されたトラブルシューティングおよびメンテナンスのシナリオでのみ bastion host を使用します。bastion host は、安全な Tailscale トンネルを介して TiDB Cloud に接続します。必要に応じて、このアクセスを取り消したり復元したりできます。
+TiDB Cloud は、承認されたトラブルシューティングおよびメンテナンスのシナリオでのみ踏み台ホストを使用します。踏み台ホストは、安全な Tailscale トンネルを介して TiDB Cloud に接続します。必要に応じて、このアクセスを取り消したり復元したりできます。
 
 > **Note:**
 >
-> bastion host の設定は任意です。メンテナンスやトラブルシューティングのために、独自の安全なアクセス方法を提供することもできます。
+> 踏み台ホストの設定は任意です。メンテナンスやトラブルシューティングのために、独自の安全なアクセス方法を提供することもできます。
 
 ## 始める前に {#before-you-begin}
 
-bastion host をデプロイする前に、次の要件を満たしていることを確認してください。
+踏み台ホストをデプロイする前に、次の要件を満たしていることを確認してください。
 
 - Terraform がローカルにインストールされていること。
 - AWS CLI が、お使いの AWS アカウントの認証情報で設定されていること。
 - EC2、IAM、EKS リソースを含む、必要な AWS リソースを管理する権限を持っていること。
 - {{{ .byoc }}} 環境がデプロイ済みであること。
 - TiDB Cloud Support から次の情報を取得していること。
-    - TiDB Cloud tenant ID。
+    - TiDB Cloud テナント ID。
     - {{{ .byoc }}} 環境がデプロイされている AWS リージョン ID。
-    - TiDB および observability の EKS クラスター名。
-    - デプロイする bastion host 用の Tailscale authentication key。
-    - Single-AZ デプロイメントの場合、TiDB および observability EKS クラスターの subnet ID。
+    - TiDB および可観測性の EKS クラスター名。
+    - デプロイする踏み台ホスト用の Tailscale 認証キー。
+    - Single-AZ デプロイメントの場合、TiDB および可観測性 EKS クラスターのサブネット ID。
 
-## bastion host をデプロイする {#deploy-bastion-hosts}
+## 踏み台ホストをデプロイする {#deploy-bastion-hosts}
 
-bastion host をデプロイするには、次の手順を実行します。
+踏み台ホストをデプロイするには、次の手順を実行します。
 
-1. [PingCAP GitHub repository](https://github.com/tidbcloud/byoc-account-setup/tree/main/bastion) から bastion host デプロイスクリプトをダウンロードします。
+1. [PingCAP の GitHub リポジトリ](https://github.com/tidbcloud/byoc-account-setup/tree/main/bastion) から踏み台ホストデプロイスクリプトをダウンロードします。
 
-2. Terraform backend を設定します。
+2. Terraform バックエンドを設定します。
 
-    デフォルトの backend は Amazon S3 です。`terraform.tf` で、S3 backend の設定をお使いのバケット、state file path、リージョンで更新します。
+    デフォルトのバックエンドは Amazon S3 です。`terraform.tf` で、S3 バックエンドの設定をお使いのバケット、ステートファイルのパス、リージョンで更新します。
 
     ```hcl
     terraform {
@@ -55,7 +55,7 @@ bastion host をデプロイするには、次の手順を実行します。
     }
     ```
 
-    別の [Terraform backend](https://developer.hashicorp.com/terraform/language/backend) を使用する場合は、それに応じて `terraform.tf` を更新してください。
+    別の [Terraform バックエンド](https://developer.hashicorp.com/terraform/language/backend) を使用する場合は、それに応じて `terraform.tf` を更新してください。
 
 3. Terraform を初期化します。
 
@@ -73,13 +73,13 @@ bastion host をデプロイするには、次の手順を実行します。
 5. `terraform.tfvars` で、必要なフィールドを設定します。
 
     - `aws_region`: {{{ .byoc }}} 環境がデプロイされている AWS リージョン。たとえば `us-west-2`。
-    - `tidbcloud_tenant_id`: TiDB Cloud tenant ID。
-    - `bastions`: bastion host の設定。`tidb` と `o11y` の bastion を設定できます。
-    - `<bastion_type>.eks_cluster_name`: bastion type に対応する EKS クラスター名。たとえば `tidb.eks_cluster_name` または `o11y.eks_cluster_name`。
-    - `<bastion_type>.auth_key`: TiDB Cloud から提供される Tailscale authentication key。
-    - `<bastion_type>.subnet_id`: Single-AZ デプロイメントでのみ使用する、対応する EKS クラスターの subnet ID。
+    - `tidbcloud_tenant_id`: TiDB Cloud テナント ID。
+    - `bastions`: 踏み台ホストの設定。`tidb` と `o11y` の踏み台ホストを設定できます。
+    - `<bastion_type>.eks_cluster_name`: 踏み台ホストの種類に対応する EKS クラスター名。たとえば `tidb.eks_cluster_name` または `o11y.eks_cluster_name`。
+    - `<bastion_type>.auth_key`: TiDB Cloud から提供される Tailscale 認証キー。
+    - `<bastion_type>.subnet_id`: Single-AZ デプロイメントでのみ使用する、対応する EKS クラスターのサブネット ID。
 
-    次の例では、TiDB と observability の両方に対して bastion host を設定しています。
+    次の例では、TiDB と可観測性の両方に対して踏み台ホストを設定しています。
 
     ```hcl
     aws_region = "us-west-2"
@@ -100,7 +100,7 @@ bastion host をデプロイするには、次の手順を実行します。
     }
     ```
 
-    TiDB 用の bastion host のみが必要な場合は、`tidb` エントリだけを設定します。
+    TiDB 用の踏み台ホストのみが必要な場合は、`tidb` エントリだけを設定します。
 
     ```hcl
     aws_region = "us-west-2"
@@ -149,35 +149,35 @@ bastion_attributes = tomap({
 
 この出力を TiDB Cloud Support に提供してください。TiDB Cloud Support はこの出力を使用して接続性を確認し、必要なネットワーク設定を完了します。
 
-## bastion host を管理する {#manage-bastion-hosts}
+## 踏み台ホストを管理する {#manage-bastion-hosts}
 
-bastion host のデプロイ後は、AWS Systems Manager (SSM) を使用して管理できます。
+踏み台ホストのデプロイ後は、AWS Systems Manager (SSM) を使用して管理できます。
 
 ```shell
 aws ssm start-session --region <region> --target <instance_id> --reason <reason>
 ```
 
-TiDB Cloud から bastion host へのアクセスを一時的に取り消すには、bastion host 上で次のコマンドを実行します。
+TiDB Cloud から踏み台ホストへのアクセスを一時的に取り消すには、踏み台ホスト上で次のコマンドを実行します。
 
 ```shell
 tailscale down
 ```
 
-TiDB Cloud から bastion host へのアクセスを復元するには、bastion host 上で次のコマンドを実行します。
+TiDB Cloud から踏み台ホストへのアクセスを復元するには、踏み台ホスト上で次のコマンドを実行します。
 
 ```shell
 tailscale up
 ```
 
-## authentication key を管理する {#manage-authentication-keys}
+## 認証キーを管理する {#manage-authentication-keys}
 
-TiDB Cloud が提供する Tailscale authentication key は、単一使用かつ一時的なものです。通常は 3 日後に期限切れになります。
+TiDB Cloud が提供する Tailscale 認証キーは、1 回限りの一時的なものです。通常は 3 日後に期限切れになります。
 
-key の有効期限が切れても、すでにデプロイされ、有効な key で設定済みの bastion host には影響しません。ただし、新しい bastion host を作成する場合や既存の bastion host を再作成する場合など、key の期限切れ後に `terraform apply` を再実行する必要がある場合は、TiDB Cloud Support に新しい authentication key をリクエストし、設定を適用する前に `terraform.tfvars` 内の `auth_key` の値を更新してください。
+キーの有効期限が切れても、すでにデプロイされ、有効なキーで設定済みの踏み台ホストには影響しません。ただし、新しい踏み台ホストを作成する場合や既存の踏み台ホストを再作成する場合など、キーの期限切れ後に `terraform apply` を再実行する必要がある場合は、TiDB Cloud Support に新しい認証キーをリクエストし、設定を適用する前に `terraform.tfvars` 内の `auth_key` の値を更新してください。
 
 ## 監査ログ {#audit-logs}
 
-セキュリティとコンプライアンスのため、各 bastion host は [auditd service](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing) を通じて、実行されたコマンドの詳細な監査証跡を収集するよう設定されています。
+セキュリティとコンプライアンスのため、各踏み台ホストは [auditd サービス](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/6/html/security_guide/chap-system_auditing) を通じて、実行されたコマンドの詳細な監査証跡を収集するよう設定されています。
 
 監査ログはローカルの `/var/log/audit/audit.log` に保存され、次の AWS CloudWatch Log Group に自動的に転送されます。
 
@@ -189,9 +189,9 @@ key の有効期限が切れても、すでにデプロイされ、有効な key
 
 CloudWatch への監査ログ転送を無効にするには、`cloudwatch_audit_enable` を `false` に設定します。
 
-## bastion host をクリーンアップする {#clean-up-bastion-hosts}
+## 踏み台ホストをクリーンアップする {#clean-up-bastion-hosts}
 
-Terraform 設定によって作成された bastion host と関連リソースを削除するには、次のコマンドを実行します。
+Terraform 設定によって作成された踏み台ホストと関連リソースを削除するには、次のコマンドを実行します。
 
 ```shell
 terraform destroy
