@@ -100,9 +100,9 @@ SELECT
 | `DATE_TRUNC(field, value)` | 日付またはタイムスタンプを指定した単位で切り詰めます。 |
 | `DATE_PART(field, value)` | 日付または時刻の 1 つのフィールドを抽出します。 |
 | `EXTRACT(field FROM value)` | 日付または時刻のフィールドを抽出するための SQL 標準形式です。 |
-| `AGE(timestamp [, timestamp])` | タイムスタンプ間の記号的な間隔を返します。 |
+| `AGE(timestamp [, timestamp])` | タイムスタンプ間の記号的な時間間隔を返します。 |
 | `MAKE_DATE(year, month, day)` | 日付を構築します。 |
-| `MAKE_INTERVAL(...)` | 間隔を構築します。 |
+| `MAKE_INTERVAL(...)` | 時間間隔を構築します。 |
 
 例:
 
