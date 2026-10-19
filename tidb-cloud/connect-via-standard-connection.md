@@ -16,7 +16,7 @@ This document describes how to connect to your TiDB Cloud Dedicated cluster via 
 Before you connect to a TiDB Cloud Dedicated cluster via public connection, make sure that the following requirements are met:
 
 - The public endpoint is enabled for your cluster. For newly created TiDB Cloud Dedicated clusters, the public endpoint is disabled by default. To enable it, open the overview page of your cluster, click **Settings** > **Networking**, select the target TiDB node group if your cluster has multiple node groups, and then click **Enable** in the **Public Endpoint** section. If the public endpoint is already enabled for your cluster, no action is needed.
-- Your client IP address is in the IP access list. For public connections, TiDB Cloud Dedicated only allows client connections from addresses in the IP access list. If you have not configured the IP access list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to configure it before your first connection.
+- Your client IP address is in the IP access list. For public connections, TiDB Cloud Dedicated only allows client connections from addresses in the IP access list. If you have not configured the IP access list or your client IP address is not in the list, follow the steps in [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) to add it before your first connection.
 
 ## Connect to the cluster
 
