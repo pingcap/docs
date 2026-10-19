@@ -11,7 +11,7 @@ summary: Amazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object St
 >
 > - TiDB Cloud Dedicatedについては、[クラウドストレージからParquetファイルをTiDB Cloud Dedicatedにインポートする](/tidb-cloud/import-parquet-files.md)を参照してください。
 > - TiDB Cloud は、空のテーブルへの Parquet ファイルのインポートのみをサポートしています。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従って一時的な空のテーブルにデータをインポートし、 `INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
-> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 その他の Snappy 圧縮形式はサポートされていません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
