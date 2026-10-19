@@ -171,7 +171,7 @@ SET GLOBAL tidb_storage_class_transition_history_size = 500;
 
 ## Monitor IA reads at the SQL level
 
-This section describes the IA metrics available in `EXPLAIN ANALYZE`, statement summary tables, slow query logs, and the TiDB Cloud console.
+This section describes the IA metrics available in `EXPLAIN ANALYZE`, the statement summary tables, and the TiDB Cloud console.
 
 ### EXPLAIN ANALYZE
 
@@ -223,21 +223,24 @@ LIMIT 10;
 
 ### Slow queries
 
-`INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` includes the following IA columns:
+> **Note:**
+>
+> Because of the TiDB X architecture, the `ADMIN SHOW SLOW` statement and the `SLOW_QUERY` and `CLUSTER_SLOW_QUERY` tables in `INFORMATION_SCHEMA` are not supported on {{{ .premium }}} and {{{ .byoc }}}. Use the TiDB Cloud console to view slow queries. For the complete list of unsupported SQL features, see [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md).
+
+The following IA fields are recorded for each slow query and displayed in the slow query details in the TiDB Cloud console:
 
 - `IA_remote_read_segment_count`
 - `IA_remote_read_segment_size`
 - `IA_remote_read_segment_wait_time`
 
-The same fields are available in the `ADMIN SHOW SLOW` output:
+To view these fields:
 
-```sql
-ADMIN SHOW SLOW RECENT 10;
-ADMIN SHOW SLOW TOP INTERNAL 10;
-ADMIN SHOW SLOW TOP ALL 10;
-```
+1. Go to **Monitoring** > **Diagnosis** > **Slow Query**.
+2. Click a slow query in the list to open its details.
 
-The field semantics and units are the same as in the `SLOW_QUERY` table. For a query that does not involve IA tables, the values are `NULL` or `0`. The corresponding fields are also visible in the slow query details in the TiDB Cloud console.
+For more information about the slow query page, see [Slow Query](/tidb-cloud/tune-performance.md#slow-query).
+
+The field semantics and units are the same as the corresponding fields in the `EXPLAIN ANALYZE` output. For a query that does not involve IA tables, the values are `NULL` or `0`.
 
 ### SQL statement list in the console
 
