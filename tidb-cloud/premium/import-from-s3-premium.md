@@ -5,7 +5,7 @@ summary: コンソールウィザードを使用して、Amazon S3から{{{ .pre
 
 # Amazon S3から{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする {#import-data-from-amazon-s3-into-tidb-cloud-premium}
 
-このドキュメントでは、Amazon Simple Storage Service (Amazon S3) からTiDB Cloud Premium インスタンスに CSV ファイルをインポートする方法について説明します。
+このドキュメントでは、Amazon Simple Storage Service (Amazon S3) からTiDB Cloud Premium または {{{ .byoc }}} インスタンスに CSV ファイルをインポートする方法について説明します。
 
 > **Tip:**
 >
