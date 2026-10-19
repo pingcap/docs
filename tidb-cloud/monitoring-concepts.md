@@ -67,4 +67,8 @@ TiDB Cloud lets you integrate any of the following third-party metrics services 
 
 TiDB Cloud lets you integrate Datadog to receive TiDB Cloud alerts and view the performance metrics of your target instance. For more information, see [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md).
 
+## New Relic integration
+
+TiDB Cloud lets you send performance metrics of your target instance to New Relic and view them in New Relic dashboards. For more information, see [Integrate TiDB Cloud with New Relic (PREVIEW)](/tidb-cloud/monitor-new-relic-integration-for-tidb-x.md).
+
 </CustomContent>
