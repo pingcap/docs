@@ -264,9 +264,9 @@ SELECT
 
 詳細は、[全文検索](/tidb-cloud/starter/pg-full-text-search.md) を参照してください。
 
-## 型強制 {#type-coercion}
+## 暗黙的な型変換 {#type-coercion}
 
-PostgreSQL 互換の {{{ .starter }}} は、一般的な SQL コンテキストで PostgreSQL スタイルの型強制をサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、一般的な SQL コンテキストで PostgreSQL スタイルの暗黙的な型変換をサポートしています。
 
 ### `UNION`、`CASE`、`COALESCE`、`VALUES` {#union-case-coalesce-and-values}
 
@@ -282,7 +282,7 @@ SELECT 'a';
 
 ### 比較 {#comparisons}
 
-テキストリテラルが型付きの値と比較される場合、可能であれば、そのテキストリテラルはもう一方のオペランドの型に強制変換されます。
+テキストリテラルが型付きの値と比較される場合、可能であれば、そのテキストリテラルはもう一方のオペランドの型に暗黙的に変換されます。
 
 例:
 
@@ -296,7 +296,7 @@ FROM example
 WHERE id = '42';
 ```
 
-この例では、`'42'` は `INTEGER` に強制変換されます。
+この例では、`'42'` は `INTEGER` に暗黙的に変換されます。
 
 ### 数値型の昇格 {#numeric-type-promotion}
 
