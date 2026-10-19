@@ -46,7 +46,7 @@ Amazon S3 にバックアップファイルを準備した後、アクティブ�
 
 ## 安全な管理アクセスを設定する {#configure-secure-administrative-access}
 
-TiDB Cloud Support がトラブルシューティングや可観測性の支援を行えるようにするため、VPC 内に強化された踏み台ホストをデプロイして、安全なアクセスチャネルを設定できます。
+TiDB Cloud Support がトラブルシューティングやオブザーバビリティの支援を行えるようにするため、VPC 内に強化された踏み台ホストをデプロイして、安全なアクセスチャネルを設定できます。
 
 > **Note:**
 >
@@ -57,4 +57,4 @@ TiDB Cloud Support がトラブルシューティングや可観測性の支援�
 
 ## 次のステップ {#what-s-next}
 
-最初のリソースプールと {{{ .byoc }}} インスタンスを作成し、安全な管理アクセスを設定したら、[TiDB Cloud BYOC 共同検証](/tidb-cloud/byoc/joint-validation.md) に進み、接続性、可観測性、セキュリティ、アラートを検証してください。
+最初のリソースプールと {{{ .byoc }}} インスタンスを作成し、安全な管理アクセスを設定したら、[TiDB Cloud BYOC 共同検証](/tidb-cloud/byoc/joint-validation.md) に進み、接続性、オブザーバビリティ、セキュリティ、アラートを検証してください。
