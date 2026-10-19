@@ -2799,7 +2799,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
 - Default value: `ON`
 - Type: Boolean
-- This variable is a switch for [the resource control feature](/tidb-resource-control-ru-groups.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
+- This variable controls whether to enable [the resource control feature](/tidb-resource-control-ru-groups.md). When this variable is set to `ON`, the TiDB cluster can isolate application resources based on resource groups.
 
 ### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
 
