@@ -152,7 +152,7 @@ AWS サービスクォータの要件は、お客様の環境によって異な�
 
 ### クォータの引き上げを申請する方法 {#how-to-request-a-quota-increase}
 
-1. AWS Management Console にログインします。
+1. AWS マネジメントコンソールにログインします。
 2. Service Quotas に移動します。
 3. 関連するサービスを検索します: Amazon EC2、Amazon EBS、Amazon EKS。
 4. 必要なクォータを選択します。
