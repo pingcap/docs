@@ -1,11 +1,11 @@
 ---
 title: PostgreSQL DDL
-summary: PostgreSQL 互換の TiDB Cloud Starter でサポートされる PostgreSQL のデータ定義言語ステートメントについて説明します。
+summary: PostgreSQL 互換の TiDB Cloud Starter でサポートされる PostgreSQL のデータ定義言語の文について説明します。
 ---
 
 # PostgreSQL DDL
 
-PostgreSQL 互換の {{{ .starter }}} は、データベースオブジェクトの作成と管理に使用する一般的な PostgreSQL のデータ定義言語（DDL）ステートメントをサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、データベースオブジェクトの作成と管理に使用する一般的な PostgreSQL のデータ定義言語（DDL）文をサポートしています。
 
 ## テーブルを作成する {#create-a-table}
 
@@ -67,7 +67,7 @@ FROM users;
 
 > **Note:**
 >
-> `CREATE TABLE ... AS SELECT` または `SELECT ... INTO` を使用して作成されたテーブルには、追加の `_rowid` 主キー カラムが含まれます。その他の DDL 互換性の違いについては、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+> `CREATE TABLE ... AS SELECT` または `SELECT ... INTO` を使用して作成されたテーブルには、追加の `_rowid` 主キー カラムが含まれます。その他の DDL 互換性の違いについては、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ### IDENTITY カラム {#identity-columns}
 
@@ -161,7 +161,7 @@ ON users (created_at);
 
 HNSW インデックスの要件については、[ベクトル検索](/tidb-cloud/starter/pg-vector-search.md) を参照してください。
 
-サポートされていない PostgreSQL のインデックスアクセスメソッドについては、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+サポートされていない PostgreSQL のインデックスアクセスメソッドについては、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ### GIN インデックスの例 {#gin-index-example}
 
@@ -242,11 +242,11 @@ REFRESH MATERIALIZED VIEW user_summary;
 | 制約の削除 | `ALTER TABLE users DROP CONSTRAINT users_email_unique;` |
 | 制約名の変更 | `ALTER TABLE users RENAME CONSTRAINT old_name TO new_name;` |
 
-主キーのカラムの型、または外部キーが参照する側のカラムの型を変更することはサポートされていません。詳細は、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+主キーのカラムの型、または外部キーの参照元カラムの型を変更することはサポートされていません。詳細は、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## データベースオブジェクトの削除 {#drop-database-objects}
 
-データベースオブジェクトを削除するには、以下のステートメントを使用します。
+データベースオブジェクトを削除するには、以下の文を使用します。
 
 ```sql
 DROP TABLE IF EXISTS users;
@@ -261,7 +261,7 @@ DROP MATERIALIZED VIEW IF EXISTS user_summary;
 DROP TABLE users CASCADE;
 ```
 
-外部キー制約が宙に浮いた状態で残ることを避けるため、テーブルを削除する前に、そのテーブルを参照している外部キー制約を削除してください。外部キー依存関係の処理は PostgreSQL と異なります。詳細は、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+外部キー制約が宙に浮いた状態で残ることを避けるため、テーブルを削除する前に、そのテーブルを参照している外部キー制約を削除してください。外部キー依存関係の処理は PostgreSQL と異なります。詳細は、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## テーブルの切り詰め {#truncate-a-table}
 
@@ -327,13 +327,13 @@ SELECT nextval('invoice_seq');
 SELECT setval('invoice_seq', 2000);
 ```
 
-`ALTER SEQUENCE` は、`OWNER TO` や `OWNED BY` などの所有権操作をサポートしています。その他の PostgreSQL の `ALTER SEQUENCE` オプションはサポートされていません。詳細は、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+`ALTER SEQUENCE` は、`OWNER TO` や `OWNED BY` などの所有権操作をサポートしています。その他の PostgreSQL の `ALTER SEQUENCE` オプションはサポートされていません。詳細は、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
-## その他の DDL ステートメント {#other-ddl-statements}
+## その他の DDL 文 {#other-ddl-statements}
 
-以下の一般的な DDL ステートメントもサポートされています。
+以下の一般的な DDL 文もサポートされています。
 
-| ステートメント | 説明 |
+| 文 | 説明 |
 | --- | --- |
 | `CREATE DATABASE` / `DROP DATABASE` | データベースを作成または削除します。 |
 | `CREATE TYPE` | 互換性の制限付きで、enum 型または複合型を作成します。 |

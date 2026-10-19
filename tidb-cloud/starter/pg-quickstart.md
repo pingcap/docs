@@ -14,7 +14,7 @@ category: quick start
 
 また、[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start) で TiDB の機能を試すこともできます。
 
-## Step 1: {{{ .starter }}} インスタンスを作成する {#step-1-create-a-starter-instance}
+## ステップ 1. {{{ .starter }}} インスタンスを作成する {#step-1-create-a-starter-instance}
 
 {{{ .starter }}} インスタンスを作成するには、次の手順を実行します。
 
@@ -44,7 +44,7 @@ category: quick start
     >
     > PostgreSQL互換 {{{ .starter }}} インスタンスが無料枠に達すると、超過したリソース消費に対して使用制限またはサービス停止が適用される場合があります。これらの上限を超える見込みがある場合は、要件について相談するために <a href="mailto:support@pingcap.com">support@pingcap.com</a> までご連絡ください。
 
-## Step 2: {{{ .starter }}} インスタンスに接続する {#step-2-connect-to-your-starter-instance}
+## ステップ 2. {{{ .starter }}} インスタンスに接続する {#step-2-connect-to-your-starter-instance}
 
 PostgreSQL互換 {{{ .starter }}} インスタンスは PostgreSQL wire protocol をサポートしているため、ほとんどの PostgreSQL ツール、ドライバー、ORM を使用して接続できます。以下の手順では、例として PostgreSQL CLI クライアント `psql` を使用します。
 
@@ -59,5 +59,5 @@ PostgreSQL CLI クライアント `psql` が起動し、{{{ .starter }}} イン�
 
 ## 次のステップ {#what-s-next}
 
-- PostgreSQL 互換性については、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
-- TiDB Cloud が現在サポートしている PostgreSQL 拡張機能については、[PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md) を参照してください。
+- PostgreSQL 互換性については、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+- TiDB Cloud が現在サポートしている PostgreSQL 拡張機能については、[PostgreSQL 拡張機能](/tidb-cloud/starter/pg-extensions-overview.md) を参照してください。

@@ -1,24 +1,24 @@
 ---
-title: PostgreSQL から PostgreSQL-compatible TiDB Cloud Starter へ移行する
-summary: "`psql` と `\\copy` を使用して、PostgreSQL から PostgreSQL-compatible TiDB Cloud Starter インスタンスへスキーマとデータを移行する方法を説明します。"
+title: PostgreSQL から PostgreSQL 互換の TiDB Cloud Starter へ移行する
+summary: "`psql` と `\\copy` を使用して、PostgreSQL から PostgreSQL 互換の TiDB Cloud Starter インスタンスへスキーマとデータを移行する方法を説明します。"
 ---
 
-# PostgreSQL から PostgreSQL-compatible TiDB Cloud Starter へ移行する
+# PostgreSQL から PostgreSQL 互換の TiDB Cloud Starter へ移行する
 
-このドキュメントでは、既存の PostgreSQL データベースを PostgreSQL-compatible {{{ .starter }}} インスタンスに移行する方法について説明します。
+このドキュメントでは、既存の PostgreSQL データベースを PostgreSQL 互換の {{{ .starter }}} インスタンスに移行する方法について説明します。
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} は現在パブリックプレビューです。このプレビューは開発および評価を目的としており、本番ワークロードには推奨されません。
+> PostgreSQL 互換の {{{ .starter }}} は現在パブリックプレビューです。このプレビューは開発および評価を目的としており、本番ワークロードには推奨されません。
 >
-> パブリックプレビュー期間中、PostgreSQL-compatible {{{ .starter }}} は `psql` と `\copy` を使用した移行をサポートします。このガイドでは、ソース PostgreSQL データベースから `pg_dump` を使用してスキーマとデータをエクスポートし、ターゲットインスタンスへ `psql` と `\copy` を使用してインポートします。
+> パブリックプレビュー期間中、PostgreSQL 互換の {{{ .starter }}} は `psql` と `\copy` を使用した移行をサポートします。このガイドでは、ソース PostgreSQL データベースから `pg_dump` を使用してスキーマとデータをエクスポートし、ターゲットインスタンスへ `psql` と `\copy` を使用してインポートします。
 
 移行全体の手順は次のとおりです。
 
 1. ソースデータベース、ターゲットインスタンス、および移行ツールを準備します。
 2. ソース PostgreSQL データベースの互換性を確認します。
 3. ソーススキーマをエクスポートして確認します。
-4. PostgreSQL-compatible {{{ .starter }}} インスタンスにスキーマをインポートします。
+4. PostgreSQL 互換の {{{ .starter }}} インスタンスにスキーマをインポートします。
 5. `psql` と `\copy` を使用してデータを移行します。
 6. 移行後のスキーマとデータを検証します。
 
@@ -27,24 +27,24 @@ summary: "`psql` と `\\copy` を使用して、PostgreSQL から PostgreSQL-com
 移行前に、次の項目を満たしていることを確認してください。
 
 - ソース PostgreSQL データベースにアクセスできること。
-- PostgreSQL-compatible {{{ .starter }}} インスタンスがあること。
+- PostgreSQL 互換の {{{ .starter }}} インスタンスがあること。
 - ターゲットインスタンスの接続文字列を取得していること。接続文字列を取得するには、TiDB Cloud コンソールでターゲットインスタンスを開き、**Connect** をクリックして **PostgreSQL CLI** を選択します。
 - 移行コマンドを実行するマシンから、ソース PostgreSQL データベースとターゲットインスタンスの両方にネットワークアクセスできること。
 
-移行前に、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) と [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md) を確認してください。
+移行前に、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) と [PostgreSQL 拡張機能](/tidb-cloud/starter/pg-extensions-overview.md) を確認してください。
 
 ## ツールを準備する {#prepare-tools}
 
 移行を実行するマシンに、次の PostgreSQL クライアントツールをインストールします。
 
 - `pg_dump`: ソース PostgreSQL データベースからスキーマとデータをエクスポートします。
-- `psql`: PostgreSQL-compatible {{{ .starter }}} インスタンスにスキーマとデータをインポートします。
+- `psql`: PostgreSQL 互換の {{{ .starter }}} インスタンスにスキーマとデータをインポートします。
 
 `pg_dump` は、ソース PostgreSQL データベースと同じ PostgreSQL メジャーリリースのバージョンを使用することを推奨します。
 
 ## PostgreSQL 互換性を確認する {#check-postgresql-compatibility}
 
-PostgreSQL-compatible {{{ .starter }}} は一般的な PostgreSQL ワークロードをサポートしますが、一部の PostgreSQL 機能はサポートされていないか、動作が異なります。移行前に、ソースデータベースがこれらの機能に依存していないか確認してください。
+PostgreSQL 互換の {{{ .starter }}} は一般的な PostgreSQL ワークロードをサポートしますが、一部の PostgreSQL 機能はサポートされていないか、動作が異なります。移行前に、ソースデータベースがこれらの機能に依存していないか確認してください。
 
 ### データベースロールと権限を確認する {#check-database-roles-and-permissions}
 
@@ -82,11 +82,11 @@ FROM pg_publication;
 
 これらのクエリのいずれかが 0 以外の件数を返した場合は、移行前に影響を受けるオブジェクトを確認してください。
 
-PostgreSQL-compatible {{{ .starter }}} は、テーブルパーティショニング、テーブル継承、foreign data wrappers、および論理レプリケーションをサポートしていません。
+PostgreSQL 互換の {{{ .starter }}} は、テーブルパーティショニング、テーブル継承、外部データラッパー、および論理レプリケーションをサポートしていません。
 
 ### 遅延外部キー制約を確認する {#check-deferred-foreign-key-constraints}
 
-PostgreSQL-compatible {{{ .starter }}} は、遅延外部キー検証をサポートしていません。`DEFERRABLE` として宣言された外部キー制約は即時に検証されます。
+PostgreSQL 互換の {{{ .starter }}} は、遅延外部キー検証をサポートしていません。`DEFERRABLE` として宣言された外部キー制約は即時に検証されます。
 
 移行前に、ソース PostgreSQL データベースに対して次のクエリを実行し、遅延可能な外部キー制約を特定します。
 
@@ -111,13 +111,13 @@ FROM pg_extension
 ORDER BY extname;
 ```
 
-結果を [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md) と比較してください。
+結果を [PostgreSQL 拡張機能](/tidb-cloud/starter/pg-extensions-overview.md) と比較してください。
 
-カスタムまたはサードパーティの PostgreSQL 拡張機能は、PostgreSQL-compatible {{{ .starter }}} にはインストールできません。移行前に、サポートされていない拡張機能への依存を削除または置き換えてください。
+カスタムまたはサードパーティの PostgreSQL 拡張機能は、PostgreSQL 互換の {{{ .starter }}} にはインストールできません。移行前に、サポートされていない拡張機能への依存を削除または置き換えてください。
 
 ### PL/pgSQL を確認する {#check-pl-pgsql}
 
-PostgreSQL-compatible {{{ .starter }}} は一般的な PL/pgSQL 構文をサポートしますが、一部の構文はサポートされていません。
+PostgreSQL 互換の {{{ .starter }}} は一般的な PL/pgSQL 構文をサポートしますが、一部の構文はサポートされていません。
 
 次のクエリは、変更が必要になる可能性がある PL/pgSQL ルーチンを特定するのに役立ちます。
 
@@ -139,7 +139,7 @@ WHERE prolang = (SELECT oid FROM pg_language WHERE lanname = 'plpgsql')
 - `BEGIN ... EXCEPTION` を使用した例外処理は、`DO` ブロック内でのみサポートされます。
 - ネストされた手続きブロックは、`DO` ブロック内でのみサポートされます。
 
-互換性の詳細については、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+互換性の詳細については、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## データベース全体を移行する {#migrate-a-full-database}
 
@@ -147,7 +147,7 @@ PostgreSQL データベースの移行では、データをインポートする
 
 > **Important:**
 >
-> 標準の完全な `pg_dump` ファイルを、1 回の処理で PostgreSQL-compatible {{{ .starter }}} にインポートしないでください。標準の PostgreSQL ダンプでは、テーブルデータのロード後に主キーやその他の制約が追加されることがありますが、PostgreSQL-compatible {{{ .starter }}} では、空でないテーブルに主キーを追加できない場合があります。
+> 標準の完全な `pg_dump` ファイルを、1 回の処理で PostgreSQL 互換の {{{ .starter }}} にインポートしないでください。標準の PostgreSQL ダンプでは、テーブルデータのロード後に主キーやその他の制約が追加されることがありますが、PostgreSQL 互換の {{{ .starter }}} では、空でないテーブルに主キーを追加できない場合があります。
 >
 > テーブルが空の状態で先にスキーマをインポートし、その後でデータをインポートしてください。
 >
@@ -170,13 +170,13 @@ pg_dump \
   > schema.sql
 ```
 
-デフォルトのプレーン SQL 形式を使用してください。このワークフローでは、custom (`-Fc`) 形式または directory (`-Fd`) 形式は使用しないでください。
+デフォルトのプレーン SQL 形式を使用してください。このワークフローでは、カスタム (`-Fc`) 形式またはディレクトリ (`-Fd`) 形式は使用しないでください。
 
 ### ステップ 2: スキーマを確認して更新する {#step-2-review-and-update-the-schema}
 
 インポート前に、`schema.sql` に PostgreSQL の未サポート機能が含まれていないか確認します。
 
-例えば、次のように確認できます。
+例えば、次のとおりです。
 
 ```shell
 # Extensions
@@ -198,13 +198,13 @@ grep -Ei "CREATE PUBLICATION|CREATE SUBSCRIPTION" schema.sql
 grep -i "CREATE RULE" schema.sql
 ```
 
-スキーマをインポートする前に、未サポートのステートメントを削除するか、書き換えてください。
+スキーマをインポートする前に、未サポートの文を削除するか、書き換えてください。
 
-また、未サポートのデータ型、インデックスアクセスメソッド、PL/pgSQL 構文、拡張機能についてもスキーマを確認してください。詳細は、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+また、未サポートのデータ型、インデックスアクセスメソッド、PL/pgSQL 構文、拡張機能についてもスキーマを確認してください。詳細は、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 #### 行レベルセキュリティ {#row-level-security}
 
-エクスポートしたスキーマには、`ENABLE ROW LEVEL SECURITY`、`FORCE ROW LEVEL SECURITY`、`CREATE POLICY` を含む行レベルセキュリティ（RLS）ステートメントをそのまま残してください。
+エクスポートしたスキーマには、`ENABLE ROW LEVEL SECURITY`、`FORCE ROW LEVEL SECURITY`、`CREATE POLICY` を含む行レベルセキュリティ（RLS）の文をそのまま残してください。
 
 データをインポートする前に、`<TARGET_DATABASE_URL>` 内のロールに必要なテーブル権限があることを確認してください。このロールに RLS ポリシーが適用される場合、インポートされる各行は対象テーブルのポリシーを満たしている必要があります。そうでない場合、`COPY FROM STDIN` は `new row violates row-level security policy` で失敗します。
 
@@ -219,9 +219,9 @@ psql "<TARGET_DATABASE_URL>" \
   -c "CREATE ROLE app_user LOGIN PASSWORD '<PASSWORD>'"
 ```
 
-`--no-owner` オプションはオブジェクト所有権に関するステートメントを省略し、`--no-privileges` は `GRANT` および `REVOKE` ステートメントを省略します。
+`--no-owner` オプションはオブジェクト所有権に関する文を省略し、`--no-privileges` は `GRANT` および `REVOKE` 文を省略します。
 
-スキーマとデータをインポートした後、アプリケーションロールに必要なスキーマ、テーブル、シーケンスの権限、およびロールメンバーシップを復元してください。詳細は、[PostgreSQL Authentication and Roles](/tidb-cloud/starter/pg-auth-roles.md) を参照してください。
+スキーマとデータをインポートした後、アプリケーションロールに必要なスキーマ、テーブル、シーケンスの権限、およびロールメンバーシップを復元してください。詳細は、[PostgreSQL の認証とロール](/tidb-cloud/starter/pg-auth-roles.md) を参照してください。
 
 #### SERIAL と identity カラム {#serial-and-identity-columns}
 
@@ -241,7 +241,7 @@ DEFAULT nextval('public.users_id_seq')
 
 ### ステップ 3: スキーマをインポートする {#step-3-import-the-schema}
 
-確認済みのスキーマを、`psql` を使用してターゲットの PostgreSQL 互換 {{{ .starter }}} インスタンスにインポートします。
+確認済みのスキーマを、`psql` を使用してターゲットの PostgreSQL 互換の {{{ .starter }}} インスタンスにインポートします。
 
 ```shell
 psql \
@@ -250,7 +250,7 @@ psql \
   -f schema.sql
 ```
 
-`ON_ERROR_STOP=1` オプションを指定すると、インポートエラーが発生した時点で `psql` が停止するため、未サポートのステートメントを特定して修正しやすくなります。
+`ON_ERROR_STOP=1` オプションを指定すると、インポートエラーが発生した時点で `psql` が停止するため、未サポートの文を特定して修正しやすくなります。
 
 ### ステップ 4: データを移行する {#step-4-migrate-the-data}
 
@@ -265,9 +265,9 @@ pg_dump \
   | psql "<TARGET_DATABASE_URL>" -v ON_ERROR_STOP=1
 ```
 
-デフォルトでは、プレーンな `pg_dump` のデータストリームは PostgreSQL の `COPY` ステートメントを使用します。このストリームを `psql` にパイプすると、`COPY ... FROM stdin` ステートメントによって、PostgreSQL wire protocol 経由で PostgreSQL 互換 {{{ .starter }}} にデータがインポートされます。
+デフォルトでは、プレーンな `pg_dump` のデータストリームは PostgreSQL の `COPY` 文を使用します。このストリームを `psql` にパイプすると、`COPY ... FROM stdin` 文によって、PostgreSQL wire protocol 経由で PostgreSQL 互換の {{{ .starter }}} にデータがインポートされます。
 
-PostgreSQL 互換 {{{ .starter }}} は、text および CSV 形式の `COPY` データ転送をサポートします。binary `COPY` はサポートされていません。
+PostgreSQL 互換の {{{ .starter }}} は、text および CSV 形式の `COPY` データ転送をサポートします。バイナリ `COPY` はサポートされていません。
 
 ### `\copy` を使用して個別のテーブルを移行する {#migrate-individual-tables-using-copy}
 
@@ -356,17 +356,17 @@ SELECT max(id) FROM users;
 
 ### アプリケーションを検証する {#verify-your-application}
 
-アプリケーションを PostgreSQL 互換 {{{ .starter }}} インスタンスに接続し、アプリケーションのテストスイートを実行してください。
+アプリケーションを PostgreSQL 互換の {{{ .starter }}} インスタンスに接続し、アプリケーションのテストスイートを実行してください。
 
-特に、未サポートであるか、動作が異なる PostgreSQL 機能に依存するアプリケーションロジックに注意してください。詳細は、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+特に、未サポートであるか、動作が異なる PostgreSQL 機能に依存するアプリケーションロジックに注意してください。詳細は、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## 制限事項 {#limitations}
 
 移行を計画する際は、次の制限事項に注意してください。
 
-- パブリックプレビュー期間中、PostgreSQL 互換 {{{ .starter }}} は、`pg_dump` の `COPY` データストリームおよびテーブル形式の `\copy` を使った `psql` による移行をサポートします。
-- PostgreSQL の logical replication と streaming replication はサポートされていません。最終移行では、スキーマとデータをエクスポートする前にソースへの書き込みを停止し、移行の検証とアプリケーションの切り替えが完了するまで停止したままにしてください。
-- `COPY` プロトコルは text および CSV 形式をサポートします。binary `COPY` はサポートされていません。
+- パブリックプレビュー期間中、PostgreSQL 互換の {{{ .starter }}} は、`pg_dump` の `COPY` データストリームおよびテーブル形式の `\copy` を使った `psql` による移行をサポートします。
+- PostgreSQL の論理レプリケーションとストリーミングレプリケーションはサポートされていません。最終移行では、スキーマとデータをエクスポートする前にソースへの書き込みを停止し、移行の検証とアプリケーションの切り替えが完了するまで停止したままにしてください。
+- `COPY` プロトコルは text および CSV 形式をサポートします。バイナリ `COPY` はサポートされていません。
 - SQL レベルの `COPY (SELECT ...) TO STDOUT` 構文はサポートされていません。個別テーブルの移行では、テーブル形式の `\copy` を使用してください。
-- 一部の PostgreSQL スキーマオブジェクト、データ型、インデックスアクセスメソッド、拡張機能、PL/pgSQL 構文はサポートされていないか、動作が異なります。移行前に [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を確認してください。
+- 一部の PostgreSQL スキーマオブジェクト、データ型、インデックスアクセスメソッド、拡張機能、PL/pgSQL 構文はサポートされていないか、動作が異なります。移行前に [PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を確認してください。
 - 移行されるテキストデータは、有効な UTF-8 エンコーディングを使用している必要があります。

@@ -1,15 +1,15 @@
 ---
 title: Parquet データをインポート
-summary: PostgreSQL-compatible TiDB Cloud Starter に Parquet データをクエリおよびインポートする方法を学びます。
+summary: PostgreSQL 互換の TiDB Cloud Starter に Parquet データをクエリおよびインポートする方法を学びます。
 ---
 
 # Parquet データをインポート
 
-PostgreSQL-compatible {{{ .starter }}} は、Parquet データの読み取りと SQL テーブルへのインポートのために `parquet` 拡張機能をサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、Parquet データの読み取りと SQL テーブルへのインポートのために `parquet` 拡張機能をサポートしています。
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} は現在パブリックプレビューです。
+> PostgreSQL 互換の {{{ .starter }}} は現在パブリックプレビューです。
 
 このドキュメントでは、HTTP または HTTPS URL 経由での Parquet アクセスについて説明します。ソース URL は TiDB Cloud から到達可能である必要があります。
 
@@ -66,7 +66,7 @@ WITH (FORMAT parquet);
 
 ## 型マッピング {#type-mapping}
 
-以下の一般的な Parquet 型は、PostgreSQL-compatible の型にマッピングされます。
+以下の一般的な Parquet 型は、PostgreSQL 互換の型にマッピングされます。
 
 | Parquet 型 | PostgreSQL 型 |
 | --- | --- |

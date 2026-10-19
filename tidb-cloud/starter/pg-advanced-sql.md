@@ -1,9 +1,9 @@
 ---
-title: PostgreSQL Advanced SQL
+title: PostgreSQL の高度な SQL
 summary: PostgreSQL互換のTiDB Cloud StarterにおけるPL/pgSQL、トリガー、シーケンス、カスタム型、照合順序について学びます。
 ---
 
-# PostgreSQL Advanced SQL
+# PostgreSQL の高度な SQL
 
 PostgreSQL互換の{{{ .starter }}}は、PL/pgSQL 関数、トリガー、シーケンス、enum 型および複合型、カスタム照合順序など、一般的な高度な PostgreSQL 機能をサポートしています。
 
@@ -166,7 +166,7 @@ $$ LANGUAGE plpgsql;
 
 `RETURNING ... INTO` は `INSERT`、`UPDATE`、`DELETE` でサポートされています。
 
-### Dynamic SQL {#dynamic-sql}
+### 動的 SQL {#dynamic-sql}
 
 動的 SQL には `EXECUTE` を使用します。
 
@@ -202,7 +202,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### Exception handling {#exception-handling}
+### 例外処理 {#exception-handling}
 
 `DO` ブロックでは `BEGIN ... EXCEPTION` ブロックがサポートされています。
 
@@ -221,7 +221,7 @@ $$;
 
 `BEGIN ... EXCEPTION` とネストされた手続き型の `BEGIN ... END` ブロックは、`CREATE FUNCTION` 本文内ではサポートされていません。これらは `DO` ブロックでのみサポートされます。
 
-### PL/pgSQL limitations {#pl-pgsql-limitations}
+### PL/pgSQL の制限事項 {#pl-pgsql-limitations}
 
 以下の構文はサポートされていません。
 
@@ -230,7 +230,7 @@ $$;
 - カーソル操作
 - `REFCURSOR`
 
-## Triggers {#triggers}
+## トリガー {#triggers}
 
 行レベルの `BEFORE` トリガーと `AFTER` トリガーは、以下に対してサポートされています。
 
@@ -238,7 +238,7 @@ $$;
 - `UPDATE`
 - `DELETE`
 
-### Create an AFTER trigger {#create-an-after-trigger}
+### AFTER トリガーを作成する {#create-an-after-trigger}
 
 トリガー関数を作成します。
 
@@ -263,7 +263,7 @@ FOR EACH ROW
 EXECUTE FUNCTION audit_trigger();
 ```
 
-### Create a BEFORE trigger {#create-a-before-trigger}
+### BEFORE トリガーを作成する {#create-a-before-trigger}
 
 `BEFORE` トリガーは、`INSERT` または `UPDATE` イベントに対して `NEW` を変更したり、`RETURN NULL` で行をスキップしたり、`RAISE EXCEPTION` で行を拒否したりできます。
 
@@ -301,7 +301,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-### BEFORE trigger limitations {#before-trigger-limitations}
+### BEFORE トリガーの制限事項 {#before-trigger-limitations}
 
 `BEFORE` トリガー関数では、以下を含む一般的な検証および書き換えロジックがサポートされています。
 
@@ -326,9 +326,9 @@ $$ LANGUAGE plpgsql;
 
 `NEW.status := CASE WHEN ... END` のような `CASE` 式は、代入の中で引き続き使用できます。
 
-### AFTER trigger formatting {#after-trigger-formatting}
+### AFTER トリガーの書式 {#after-trigger-formatting}
 
-`AFTER` トリガー関数では、単独の `RETURN NEW;` または `RETURN OLD;` をそれぞれ1行に単独で記述してください。
+`AFTER` トリガー関数では、`RETURN NEW;` または `RETURN OLD;` だけを 1 行に記述してください。
 
 例:
 
@@ -341,13 +341,13 @@ END;
 
 `RETURN NEW;` または `RETURN OLD;` を別の文と同じ行に配置するコンパクトな関数本文は、実行時に失敗する可能性があります。
 
-### Statement-level triggers {#statement-level-triggers}
+### 文レベルのトリガー {#statement-level-triggers}
 
-`FOR EACH STATEMENT` 構文は受け付けられますが、現在は PostgreSQL の statement-level の動作ではなく、行ごとの動作として実行されます。
+`FOR EACH STATEMENT` 構文は受け付けられますが、現在は PostgreSQL の文レベルの動作ではなく、行ごとの動作として実行されます。
 
 予測可能な動作のために、`FOR EACH ROW` を明示的に使用してください。
 
-### Drop a trigger {#drop-a-trigger}
+### トリガーを削除する {#drop-a-trigger}
 
 トリガーを削除する際は `IF EXISTS` を使用します。
 
@@ -391,7 +391,7 @@ DROP SEQUENCE order_seq;
 
 ### Enum 型 {#enum-types}
 
-Enum 型を作成します。
+enum 型を作成します。
 
 ```sql
 CREATE TYPE mood AS ENUM (
@@ -401,7 +401,7 @@ CREATE TYPE mood AS ENUM (
 );
 ```
 
-Enum 値を追加します。
+enum 値を追加します。
 
 ```sql
 ALTER TYPE mood
@@ -419,7 +419,7 @@ CREATE TABLE user_mood (
 
 > **Note:**
 >
-> Enum の比較と並び順には、PostgreSQL の宣言順ではなく Enum ラベルのテキストが使用されます。等価比較、`IN`、およびグループ化には影響しません。アプリケーションロジックが Enum の順序に依存する場合は、明示的なランキング式を使用してください。
+> Enum の比較と並び順には、PostgreSQL の宣言順ではなく enum ラベルのテキストが使用されます。等価比較、`IN`、およびグループ化には影響しません。アプリケーションロジックが enum の順序に依存する場合は、明示的なランキング式を使用してください。
 
 たとえば、次のようになります。
 
@@ -475,6 +475,6 @@ DROP COLLATION my_collation;
 次の違いに注意してください。
 
 - 明示的なカスタム照合順序を指定していないテキストでは、バイト単位の順序が使用されます。
-- 集約関数内の `ORDER BY` には照合順序は適用されません。
+- 集計関数内の `ORDER BY` には照合順序は適用されません。
 - ウィンドウ関数の `ORDER BY` には照合順序は適用されません。
 - カスタム照合順序は使用できますが、`pg_collation` には一覧表示されません。

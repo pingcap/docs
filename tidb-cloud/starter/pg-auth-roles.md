@@ -1,9 +1,9 @@
 ---
-title: PostgreSQL Authentication and Roles
+title: PostgreSQL の認証とロール
 summary: PostgreSQL 互換の TiDB Cloud Starter でデータベースロールと権限を管理する方法を学びます。
 ---
 
-# PostgreSQL Authentication and Roles
+# PostgreSQL の認証とロール
 
 PostgreSQL 互換の {{{ .starter }}} は、データベースロール、ロール属性、オブジェクト権限、およびセッションロールの切り替えをサポートしています。
 

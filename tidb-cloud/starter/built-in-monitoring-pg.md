@@ -1,13 +1,13 @@
 ---
-title: PostgreSQL-Compatible TiDB Cloud Starter の組み込みメトリクス
-summary: PostgreSQL-compatible TiDB Cloud Starter インスタンスで利用可能な組み込みメトリクスについて説明します。
+title: PostgreSQL 互換 TiDB Cloud Starter の組み込みメトリクス
+summary: PostgreSQL 互換の TiDB Cloud Starter インスタンスで利用可能な組み込みメトリクスについて説明します。
 ---
 
-# PostgreSQL-Compatible TiDB Cloud Starter の組み込みメトリクス
+# PostgreSQL 互換 TiDB Cloud Starter の組み込みメトリクス
 
-TiDB Cloud は、TiDB リソースの標準メトリクス一式を収集し、**Metrics** ページに表示します。これらのメトリクスを確認することで、パフォーマンスの問題を簡単に特定し、現在のデータベースのデプロイが要件を満たしているかどうかを判断できます。
+TiDB Cloud は、TiDB リソースの標準メトリクス一式を収集し、Metrics ページに表示します。これらのメトリクスを確認することで、パフォーマンスの問題を簡単に特定し、現在のデータベースのデプロイが要件を満たしているかどうかを判断できます。
 
-## **Metrics** ページを表示する {#view-the-metrics-page}
+## Metrics ページを表示する {#view-the-metrics-page}
 
 **Metrics** ページでメトリクスを表示するには、次の手順を実行します。
 
@@ -23,9 +23,9 @@ TiDB Cloud は、TiDB リソースの標準メトリクス一式を収集し、*
 
 TiDB Cloud では、メトリクスデータは 7 日間保持されます。
 
-## PostgreSQL-compatible {{{ .starter }}} インスタンスのメトリクス {#metrics-for-postgresql-compatible-starter-instances}
+## PostgreSQL 互換 {{{ .starter }}} インスタンスのメトリクス {#metrics-for-postgresql-compatible-starter-instances}
 
-以下のセクションでは、PostgreSQL-compatible {{{ .starter }}} インスタンスの **Metrics** ページに表示されるメトリクスについて説明します。
+以下のセクションでは、PostgreSQL 互換の {{{ .starter }}} インスタンスの **Metrics** ページに表示されるメトリクスについて説明します。
 
 | メトリクス名 | ラベル | 説明 |
 | :------------| :------| :-------------------------------------------- |
@@ -38,10 +38,10 @@ TiDB Cloud では、メトリクスデータは 7 日間保持されます。
 
 **1. このページで一部のペインが空なのはなぜですか？**
 
-選択した時間範囲に、インスタンス上のアクティビティが含まれていることを確認してください。グラフが引き続き空のままの場合は、トラブルシューティングのために [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
+選択した時間範囲に、インスタンス上のアクティビティが含まれていることを確認してください。グラフが引き続き空のままの場合は、トラブルシューティングのために [PingCAP サポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
 
 **2. まれにメトリクスが不連続になるのはなぜですか？**
 
 ごくまれに、メトリクスシステムに高い負荷がかかった場合などに、メトリクスが失われることがあります。
 
-この問題が発生した場合は、トラブルシューティングのために [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
+この問題が発生した場合は、トラブルシューティングのために [PingCAP サポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。

@@ -20,7 +20,7 @@ PostgreSQL 互換の {{{ .starter }}} は、`tsvector`、`tsquery`、言語固�
 | 設定 | エイリアス | 説明 |
 | --- | --- | --- |
 | `jieba` | `chinese`, `zhparser` | 中国語の単語分割。 |
-| `chinese_ngram` | `zhparser_ngram` | 複数字の単語に対してバイグラムを重ねて適用する中国語の単語分割。 |
+| `chinese_ngram` | `zhparser_ngram` | 複数文字の単語に対してバイグラムを重ねて適用する中国語の単語分割。 |
 | `simple` | - | 英語およびラテン文字テキスト向けの空白ベースのトークン化。ステミングやストップワードの除去は行いません。 |
 | `english` | - | 最小限のストップワードリストを使用する空白ベースのトークン化。ステミングは行いません。 |
 | `english_stem` | - | PostgreSQL 互換の英語ストップワードを使用する English Snowball ステミング。 |

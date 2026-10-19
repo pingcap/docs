@@ -1,17 +1,17 @@
 ---
 title: PostgreSQL の制限事項と制約
-summary: PostgreSQL-compatible TiDB Cloud Starter の SQL エンジンにおける制限事項と制約について説明します。
+summary: PostgreSQL 互換の TiDB Cloud Starter の SQL エンジンにおける制限事項と制約について説明します。
 ---
 
 # PostgreSQL の制限事項と制約
 
-このドキュメントでは、PostgreSQL-compatible {{{ .starter }}} に適用される SQL エンジンの制限事項と制約について説明します。
+このドキュメントでは、PostgreSQL 互換の {{{ .starter }}} に適用される SQL エンジンの制限事項と制約について説明します。
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} は現在パブリックプレビューです。制限事項と制約は、プレビュー期間中に変更される可能性があります。
+> PostgreSQL 互換の {{{ .starter }}} は現在パブリックプレビューです。制限事項と制約は、プレビュー期間中に変更される可能性があります。
 
-このページでは、SQL エンジンの動作に焦点を当てています。PostgreSQL-compatible {{{ .starter }}} の月間無料クォータおよび製品レベルの制限については、[TiDB Cloud Starter プランのドキュメント](/tidb-cloud/select-cluster-tier.md#postgresql-compatible-starter)を参照してください。
+このページでは、SQL エンジンの動作に焦点を当てています。PostgreSQL 互換の {{{ .starter }}} の月間無料クォータおよび製品レベルの制限については、[TiDB Cloud Starter プランのドキュメント](/tidb-cloud/select-cluster-tier.md#postgresql-compatible-starter)を参照してください。
 
 ## エンジンの制限 {#engine-limits}
 
@@ -43,7 +43,7 @@ SET statement_timeout = 0;
 
 ## 文字エンコーディング {#character-encoding}
 
-PostgreSQL-compatible {{{ .starter }}} は、テキストを UTF-8 で保存します。
+PostgreSQL 互換の {{{ .starter }}} は、テキストを UTF-8 で保存します。
 
 サーバーエンコーディングは次のように表示されます。
 
@@ -61,7 +61,7 @@ UTF8
 
 ## 識別子の長さ {#identifier-length}
 
-PostgreSQL-compatible {{{ .starter }}} は、PostgreSQL 互換性のために識別子の最大長を 63 バイトとして報告します。ただし、この制限は現在は強制されません。
+PostgreSQL 互換の {{{ .starter }}} は、PostgreSQL 互換性のために識別子の最大長を 63 バイトとして報告します。ただし、この制限は現在は強制されません。
 
 報告される値は、次を使用して確認できます。
 
@@ -75,7 +75,7 @@ SHOW max_identifier_length;
 63
 ```
 
-PostgreSQL とは異なり、PostgreSQL-compatible {{{ .starter }}} は 63 バイトを超える識別子も自動的に切り詰めることなく受け入れることができます。
+PostgreSQL とは異なり、PostgreSQL 互換の {{{ .starter }}} は 63 バイトを超える識別子も自動的に切り詰めることなく受け入れることができます。
 
 移植性を考慮し、スキーマ、テーブル、カラム、インデックス、制約、関数、およびロールの名前は 63 バイト以内に収めてください。より長い識別子は PostgreSQL へ移行する際に切り詰められる可能性があり、名前の競合やスキーマ移行の失敗を引き起こすおそれがあります。
 
@@ -172,7 +172,7 @@ HNSW のプランニング要件を満たさないクエリは、厳密スキャ
 
 ## 全文検索の制約 {#full-text-search-constraints}
 
-PostgreSQL-compatible の全文検索には、以下の主な制約があります。
+PostgreSQL 互換の全文検索には、以下の主な制約があります。
 
 - ドキュメント化されているテキスト検索設定のみがサポートされます。
 - `:*` フラグを使用したプレフィックスマッチはサポートされていません。プレフィックスフラグは拒否されるのではなく暗黙的に無視されるため、プレフィックスクエリは完全一致クエリとして動作します。たとえば、`to_tsquery('english', 'qui:*')` は `to_tsquery('english', 'qui')` として解釈されるため、`quick` には一致しません。パブリックプレビュー期間中はプレフィックスマッチに依存しないでください。
@@ -195,9 +195,9 @@ PL/pgSQL は、一般的な変数、条件分岐、`FOR` ループ、動的 SQL�
 
 `BEFORE` トリガー関数には、追加の手続き上の制限があります。
 
-## Trigger の制約 {#trigger-constraints}
+## トリガーの制約 {#trigger-constraints}
 
-サポートされる trigger のタイミング:
+サポートされるトリガーのタイミング:
 
 - `BEFORE`
 - `AFTER`
@@ -208,7 +208,7 @@ PL/pgSQL は、一般的な変数、条件分岐、`FOR` ループ、動的 SQL�
 - `UPDATE`
 - `DELETE`
 
-`FOR EACH STATEMENT` は受け付けられますが、現在は行ごとの動作で実行されます。予測可能な trigger のセマンティクスが必要な場合は、`FOR EACH ROW` を使用してください。
+`FOR EACH STATEMENT` は受け付けられますが、現在は行ごとの動作で実行されます。予測可能なトリガーのセマンティクスが必要な場合は、`FOR EACH ROW` を使用してください。
 
 ## シーケンスの制約 {#sequence-constraints}
 
@@ -231,7 +231,7 @@ enum 型と複合型は、互換性の違いはあるもののサポートされ
 
 enum 型では、比較と順序付けに宣言順ではなくラベルテキストが使用されます。
 
-アプリケーションロジックが enum の順序に依存する場合は、enum の比較順序に依存するのではなく、明示的な rank を使用してください。
+アプリケーションロジックが enum の順序に依存する場合は、enum の比較順序に依存するのではなく、明示的なランクを使用してください。
 
 ## 照合順序の制約 {#collation-constraints}
 
@@ -243,12 +243,12 @@ enum 型では、比較と順序付けに宣言順ではなくラベルテキス
 
 ## システムカタログの制約 {#system-catalog-constraints}
 
-PostgreSQL 互換のシステムカタログは、一般的なイントロスペクションのワークフローを想定したものですが、upstream PostgreSQL と同一ではありません。
+PostgreSQL 互換のシステムカタログは、一般的なイントロスペクションのワークフローを想定したものですが、本家の PostgreSQL と同一ではありません。
 
 特に、次の点に注意してください。
 
-- upstream のすべてのシステムカタログのリレーションまたはビューが利用できるわけではありません。
-- 一部のシステムカタログのリレーションでは、upstream PostgreSQL のカラムの一部のみが公開されます。
+- 本家の PostgreSQL のすべてのシステムカタログのリレーションまたはビューが利用できるわけではありません。
+- 一部のシステムカタログのリレーションでは、本家の PostgreSQL のカラムの一部のみが公開されます。
 - 対応する PostgreSQL 機能がサポートされていない場合でも、互換性のために一部のカタログオブジェクトが存在することがあります。
 - `information_schema.views` は利用できません。
 
@@ -260,5 +260,5 @@ PostgreSQL 互換のシステムカタログは、一般的なイントロスペ
 
 - ベクトル検索には、HNSW インデックスおよびクエリ形状に関する制約があります。
 - 全文検索には、トークナイザーおよびクエリに関する制約があります。
-- Parquet import は、ドキュメント化されている URL スキームと型マッピングのみをサポートします。
+- Parquet インポートは、ドキュメント化されている URL スキームと型マッピングのみをサポートします。
 - TiDB Cloud によって明示的に提供される拡張機能のみがサポートされます。

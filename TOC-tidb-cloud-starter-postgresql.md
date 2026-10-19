@@ -8,7 +8,7 @@
 - TiDB Cloud を選ぶ理由
   - [概要](/tidb-cloud/tidb-cloud-intro.md)
   - [特徴](/tidb-cloud/features.md)
-  - [PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md)
+  - [PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md)
 - はじめに
   - [TiDB Cloud Starter を試す](/tidb-cloud/starter/pg-quickstart.md)
 
@@ -23,7 +23,7 @@
   - モニタリングとアラート
     - [概要](/tidb-cloud/monitor-tidb-cluster.md)
     - [組み込みメトリクス](/tidb-cloud/starter/built-in-monitoring-pg.md)
-    - [Events](/tidb-cloud/tidb-cloud-events.md)
+    - [イベント](/tidb-cloud/tidb-cloud-events.md)
   - [{{{ .starter }}} インスタンスを削除する](/tidb-cloud/delete-tidb-cluster.md)
 - [PostgreSQL から TiDB Cloud Starter に移行する](/tidb-cloud/starter/import-with-psql.md)
 - セキュリティ
@@ -42,7 +42,7 @@
 ## リファレンス
 
 - PostgreSQL 拡張機能
-  - [PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md)
+  - [概要](/tidb-cloud/starter/pg-extensions-overview.md)
   - [ベクトル検索](/tidb-cloud/starter/pg-vector-search.md)
   - [全文検索](/tidb-cloud/starter/pg-full-text-search.md)
   - [Parquet データをインポート](/tidb-cloud/starter/pg-parquet-import.md)
@@ -53,12 +53,12 @@
   - [データ型](/tidb-cloud/starter/pg-data-types.md)
   - [組み込み関数](/tidb-cloud/starter/pg-built-in-functions.md)
   - [高度な SQL](/tidb-cloud/starter/pg-advanced-sql.md)
-  - [PostgreSQL Authentication and Roles](/tidb-cloud/starter/pg-auth-roles.md)
+  - [認証とロール](/tidb-cloud/starter/pg-auth-roles.md)
   - [トランザクションと COPY](/tidb-cloud/starter/pg-transactions-copy.md)
   - [セッションパラメータ](/tidb-cloud/starter/pg-session-parameters.md)
   - [システムカタログ](/tidb-cloud/starter/pg-system-catalog.md)
-  - [PostgreSQL Row-Level Security](/tidb-cloud/starter/pg-row-level-security.md)
-  - [PostgreSQL の制限事項と制約](/tidb-cloud/starter/pg-limits-constraints.md)
+  - [行レベルセキュリティ](/tidb-cloud/starter/pg-row-level-security.md)
+  - [制限事項と制約](/tidb-cloud/starter/pg-limits-constraints.md)
 - 一般リファレンス
   - TiDB Classic アーキテクチャ
     - [概要](/tidb-architecture.md)
@@ -76,7 +76,7 @@
       - [ディスクへのスピル](/tiflash/tiflash-spill-disk.md)
   - TiDB Cloud Partner Web Console
     - [TiDB Cloud パートナー](/tidb-cloud/tidb-cloud-partners.md)
-    - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
+    - [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
     - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
   - [{{{ .starter }}} と Essential の制限事項](/tidb-cloud/serverless-limitations.md)
   - [TiDB X インスタンスで制限される SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md)
@@ -91,7 +91,7 @@
   - [Connected Careの概要](/tidb-cloud/connected-care-overview.md)
   - [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)
   - Connected Care サポートサービスの機能
-    - [Connected: IM の AI Chat](/tidb-cloud/connected-ai-chat-in-im.md)
+    - [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
     - TiDB Cloud アラート向け Connected: IM サブスクリプション
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
       - [Zoom経由で購読する](/tidb-cloud/monitor-alert-zoom.md)

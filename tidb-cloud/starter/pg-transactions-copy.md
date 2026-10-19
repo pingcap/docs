@@ -1,9 +1,9 @@
 ---
-title: PostgreSQL Transactions and COPY
+title: PostgreSQL のトランザクションと COPY
 summary: PostgreSQL互換のTiDB Cloud Starterにおけるトランザクション制御とCOPYサポートについて説明します。
 ---
 
-# PostgreSQL Transactions and COPY
+# PostgreSQL のトランザクションと COPY
 
 PostgreSQL互換の{{{ .starter }}}は、PostgreSQLのトランザクション制御、セーブポイント、一般的なトランザクション分離レベル、および一括データ転送のためのPostgreSQL `COPY`プロトコルをサポートしています。
 
@@ -68,11 +68,11 @@ WHERE id = 100;
 ROLLBACK;
 ```
 
-## Autocommit {#autocommit}
+## 自動コミット {#autocommit}
 
-明示的な `BEGIN` ブロックの外で実行されたステートメントは、autocommit モードで実行されます。
+明示的な `BEGIN` ブロックの外で実行された文は、自動コミットモードで実行されます。
 
-各ステートメントはそれぞれ独自のトランザクションで実行され、成功した場合は自動的にコミットされます。ステートメントが失敗した場合、そのトランザクションはロールバックされます。
+各文はそれぞれ独自のトランザクションで実行され、成功した場合は自動的にコミットされます。文が失敗した場合、そのトランザクションはロールバックされます。
 
 ## セーブポイント {#savepoints}
 
@@ -114,7 +114,7 @@ COMMIT;
 
 | 分離レベル | 動作 |
 | --- | --- |
-| `READ COMMITTED` | デフォルト。各ステートメントは、そのステートメントの開始前にコミットされた行を参照します。 |
+| `READ COMMITTED` | デフォルト。各文は、その文の開始前にコミットされた行を参照します。 |
 | `READ UNCOMMITTED` | `READ COMMITTED` として動作します。 |
 | `REPEATABLE READ` | トランザクションの存続期間中、1つのスナップショットを使用します。 |
 | `SERIALIZABLE` | PostgreSQL Serializable Snapshot Isolation は実装されていません。PostgreSQL wire protocol 経由では、このトランザクションは `REPEATABLE READ` にダウングレードされます。 |
@@ -138,7 +138,7 @@ SHOW transaction_isolation;
 
 > **Note:**
 >
-> PostgreSQL wire protocol 経由で `SERIALIZABLE` が要求された場合、PostgreSQL互換の{{{ .starter }}}は代わりに `REPEATABLE READ` を使用します。PostgreSQL Serializable Snapshot Isolation を必要とするアプリケーションは、移行前に確認する必要があります。詳細は、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+> PostgreSQL wire protocol 経由で `SERIALIZABLE` が要求された場合、PostgreSQL互換の{{{ .starter }}}は代わりに `REPEATABLE READ` を使用します。PostgreSQL Serializable Snapshot Isolation を必要とするアプリケーションは、移行前に確認する必要があります。詳細は、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## 読み取り専用トランザクション {#read-only-transactions}
 
@@ -192,9 +192,9 @@ ROLLBACK;
 
 ロールバック後もシーケンスは進んだままです。欠番のない連番が必要な用途にシーケンスを使用しないでください。
 
-## Failed transaction state {#failed-transaction-state}
+## トランザクションの失敗状態 {#failed-transaction-state}
 
-明示的なトランザクション内でステートメントが失敗すると、そのトランザクションは failed state に入ります。
+明示的なトランザクション内で文が失敗すると、そのトランザクションは失敗状態になります。
 
 例えば次のとおりです。
 
@@ -209,7 +209,7 @@ VALUES (1, 'Alice');
 ROLLBACK;
 ```
 
-トランザクションが failed state に入った後は、通常の SQL 操作を続行する前に、`ROLLBACK` を使用するか、以前の savepoint までロールバックしてください。
+トランザクションが失敗状態になった後は、通常の SQL 操作を続行する前に、`ROLLBACK` を使用するか、以前のセーブポイントまでロールバックしてください。
 
 ## COPY {#copy}
 
@@ -235,7 +235,7 @@ WITH (FORMAT csv);
 
 > **Note:**
 >
-> `\copy` は `psql` のクライアントコマンドであり、SQL ステートメントではありません。
+> `\copy` は `psql` のクライアントコマンドであり、SQL 文ではありません。
 
 ### COPY を使用してデータをエクスポートする {#export-data-with-copy}
 
@@ -272,6 +272,6 @@ Parquet のインポートは `parquet` 拡張機能を通じても利用でき�
 次の制限事項に注意してください。
 
 - テーブル形式 `COPY table_name [(columns)] ...` を使用してください。
-- Binary `COPY` はサポートされていません。
+- バイナリ `COPY` はサポートされていません。
 - `COPY (SELECT ...) TO STDOUT` はサポートされていません。
 - ローカルファイルについては、ファイルがクライアントによって読み取られ、PostgreSQL 接続を介して転送されるように、`psql` の `\copy` コマンドを使用してください。

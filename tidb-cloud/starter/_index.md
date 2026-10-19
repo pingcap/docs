@@ -151,7 +151,7 @@ summary: TiDB Cloudは、 TiDBの優れた機能すべてをクラウドに提�
 
 [TiDB Cloudを選ぶ理由](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-intro/?plan=starter&compatibility=postgresql)
 
-[PostgreSQL互換性](https://docs.pingcap.com/ja/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)
+[PostgreSQLとの互換性](https://docs.pingcap.com/ja/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)
 
 [FAQ](https://docs.pingcap.com/ja/tidbcloud/pg-faq/?plan=starter&compatibility=postgresql)
 

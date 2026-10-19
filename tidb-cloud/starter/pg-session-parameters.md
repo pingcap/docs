@@ -1,11 +1,11 @@
 ---
 title: PostgreSQL セッションパラメータ
-summary: PostgreSQL-compatible TiDB Cloud Starter で PostgreSQL 互換のセッションパラメータを表示および設定する方法を学びます。
+summary: PostgreSQL 互換の TiDB Cloud Starter で PostgreSQL のセッションパラメータを表示および設定する方法を学びます。
 ---
 
 # PostgreSQL セッションパラメータ
 
-PostgreSQL-compatible {{{ .starter }}} は、トランザクションの動作、スキーマ解決、タイムゾーン、クエリタイムアウト、出力形式、その他のセッション設定を制御する PostgreSQL 互換のセッションパラメータをサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、トランザクションの動作、スキーマ解決、タイムゾーン、クエリタイムアウト、出力形式、その他のセッション設定を制御する PostgreSQL 互換のセッションパラメータをサポートしています。
 
 ## パラメータの設定と表示 {#set-and-view-parameters}
 
@@ -81,26 +81,26 @@ SELECT set_config(
 
 | パラメータ | デフォルト | 変更可能 | 説明 |
 | --- | --- | --- | --- |
-| `application_name` | Empty | Yes | セッションに関連付けられたアプリケーション名。 |
-| `bytea_output` | `hex` | Yes | `BYTEA` 値の出力形式。 |
-| `client_encoding` | `UTF8` | Yes | クライアント文字エンコーディング。 |
-| `client_min_messages` | `notice` | Yes | クライアントに送信される最小メッセージ重大度。 |
-| `datestyle` | `ISO, MDY` | No | 日付の表示形式。 |
-| `default_transaction_isolation` | `read committed` | Yes | 新しいトランザクションのデフォルト分離レベル。 |
-| `default_transaction_read_only` | `off` | Yes | 新しいトランザクションのデフォルトの読み取り専用状態。 |
-| `extra_float_digits` | `1` | Yes | 浮動小数点出力の追加精度。 |
-| `search_path` | `$user, public` | Yes | スキーマの検索順序。 |
-| `server_encoding` | `UTF8` | No | サーバー側の文字エンコーディング。 |
-| `standard_conforming_strings` | `on` | No | 文字列定数内のバックスラッシュを文字どおりに扱います。 |
-| `statement_timeout` | `60000ms` | Yes | クエリタイムアウト。タイムアウトなしにするには `0` を設定します。 |
-| `timezone` | `UTC` | Yes | セッションのタイムゾーン。 |
-| `transaction_isolation` | `read committed` | Yes | 現在のトランザクション分離レベル。 |
-| `lock_timeout` | `0` | Yes | ロック取得タイムアウト。 |
-| `password_encryption` | `scram-sha-256` | Yes | パスワードハッシュアルゴリズム。 |
-| `max_identifier_length` | `63` | No | PostgreSQL 互換の識別子長 63 バイトを報告します。この制限は現在は適用されません。 |
-| `lc_messages` | `C` | Yes | サーバーメッセージに使用されるロケール。 |
+| `application_name` | 空 | はい | セッションに関連付けられたアプリケーション名。 |
+| `bytea_output` | `hex` | はい | `BYTEA` 値の出力形式。 |
+| `client_encoding` | `UTF8` | はい | クライアント文字エンコーディング。 |
+| `client_min_messages` | `notice` | はい | クライアントに送信される最小メッセージ重大度。 |
+| `datestyle` | `ISO, MDY` | いいえ | 日付の表示形式。 |
+| `default_transaction_isolation` | `read committed` | はい | 新しいトランザクションのデフォルト分離レベル。 |
+| `default_transaction_read_only` | `off` | はい | 新しいトランザクションのデフォルトの読み取り専用状態。 |
+| `extra_float_digits` | `1` | はい | 浮動小数点出力の追加精度。 |
+| `search_path` | `$user, public` | はい | スキーマの検索順序。 |
+| `server_encoding` | `UTF8` | いいえ | サーバー側の文字エンコーディング。 |
+| `standard_conforming_strings` | `on` | いいえ | 文字列定数内のバックスラッシュを文字どおりに扱います。 |
+| `statement_timeout` | `60000ms` | はい | クエリタイムアウト。タイムアウトなしにするには `0` を設定します。 |
+| `timezone` | `UTC` | はい | セッションのタイムゾーン。 |
+| `transaction_isolation` | `read committed` | はい | 現在のトランザクション分離レベル。 |
+| `lock_timeout` | `0` | はい | ロック取得タイムアウト。 |
+| `password_encryption` | `scram-sha-256` | はい | パスワードハッシュアルゴリズム。 |
+| `max_identifier_length` | `63` | いいえ | PostgreSQL 互換の識別子長 63 バイトを報告します。この制限は現在は適用されません。 |
+| `lc_messages` | `C` | はい | サーバーメッセージに使用されるロケール。 |
 
-現在の PostgreSQL-compatible {{{ .starter }}} インスタンスで利用可能な完全なパラメータセットを確認するには、`SHOW ALL` を使用するのが最適です。
+現在の PostgreSQL 互換の {{{ .starter }}} インスタンスで利用可能な完全なパラメータセットを確認するには、`SHOW ALL` を使用するのが最適です。
 
 ## 検索パス {#search-path}
 
@@ -213,7 +213,7 @@ SHOW transaction_read_only;
 - `transaction_deferrable`
 - `transaction_read_only`
 
-一部の値は、PostgreSQL クライアントおよびツールとの互換性のために公開されていますが、対応する PostgreSQL 上流サーバーのすべての機能が利用可能であることを意味するものではありません。
+一部の値は、PostgreSQL クライアントおよびツールとの互換性のために公開されていますが、対応する本家の PostgreSQL サーバーのすべての機能が利用可能であることを意味するものではありません。
 
 ## 互換性専用パラメータ {#compatibility-only-parameters}
 
@@ -268,7 +268,7 @@ SET default_text_search_config = 'simple';
 
 ## ベクトル検索パラメータ {#vector-search-parameter}
 
-`hnsw.ef_search` パラメータは、現在のセッションにおける HNSW Candidate リストサイズを制御します。
+`hnsw.ef_search` パラメータは、現在のセッションにおける HNSW の候補リストサイズを制御します。
 
 表示するには、次を実行します。
 

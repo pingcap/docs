@@ -1,9 +1,9 @@
 ---
-title: PostgreSQL Compatibility
+title: PostgreSQLとの互換性
 summary: PostgreSQL互換のTiDB Cloud StarterとPostgreSQLの互換性について、サポートされていない機能や動作の違いを含めて説明します。
 ---
 
-# PostgreSQL Compatibility
+# PostgreSQLとの互換性
 
 PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL wire protocol（pgwire v3）と、一般的なPostgreSQL SQL構文およびアプリケーションパターンをサポートします。ほとんどのPostgreSQLクライアント、ドライバー、ORMは、標準のPostgreSQL接続文字列を使用して接続できます。
 
@@ -19,15 +19,15 @@ PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL wire proto
 
 PostgreSQL互換の{{{ .starter }}}インスタンスは、以下のPostgreSQL機能をサポートします。
 
-+ **Wire protocol**: PostgreSQL wire protocol v3。Simple QueryおよびExtended Query（`Parse`/`Bind`/`Describe`/`Execute`）を含みます。
++ **ワイヤプロトコル**: PostgreSQL wire protocol v3。Simple QueryおよびExtended Query（`Parse`/`Bind`/`Describe`/`Execute`）を含みます。
 + **DDL**: テーブル、B-tree、GIN、HNSWインデックス、ビュー、マテリアライズドビュー、スキーマ、シーケンス、関数、トリガー、型、照合順序に対する`CREATE`、`ALTER`、`DROP`。
 + **DML**: `RETURNING`付きの`INSERT`、`UPDATE`、`DELETE`、および`INSERT ... ON CONFLICT`（upsert）。
-+ **Queries**: テーブル結合（inner、left、right、full outer、cross、lateral）、共通テーブル式（CTE）、再帰CTE、ウィンドウ関数、サブクエリ、集合演算（`UNION`、`INTERSECT`、`EXCEPT`）。
-+ **Transactions**: `BEGIN`、`COMMIT`、`ROLLBACK`、savepoint、autocommit。
-+ **Data types**: Boolean、integer、bigint、double precision、numeric、text、varchar、bytea、timestamp/timestamptz、date、time、interval、UUID、JSON/JSONB、配列、serial/bigserial、vector、tsvector、tsquery。
++ **クエリ**: テーブル結合（inner、left、right、full outer、cross、lateral）、共通テーブル式（CTE）、再帰CTE、ウィンドウ関数、サブクエリ、集合演算（`UNION`、`INTERSECT`、`EXCEPT`）。
++ **トランザクション**: `BEGIN`、`COMMIT`、`ROLLBACK`、セーブポイント、自動コミット。
++ **データ型**: Boolean、integer、bigint、double precision、numeric、text、varchar、bytea、timestamp/timestamptz、date、time、interval、UUID、JSON/JSONB、配列、serial/bigserial、vector、tsvector、tsquery。
 + **PL/pgSQL**: 関数、プロシージャ、制御フロー、動的`EXECUTE`を、一部制限付きでサポートします。`WHILE`、`FOREACH`、カーソルはサポートされません。`EXCEPTION`およびネストされたブロックには`DO`ブロックが必要です。
-+ **Triggers**: `INSERT`、`UPDATE`、`DELETE`に対する`BEFORE`および`AFTER`トリガーを、一部制限付きでサポートします。詳細は[Triggers](#triggers)を参照してください。
-+ **Indexes**: B-tree（デフォルト）、GIN、部分インデックス、式インデックス、`CREATE INDEX CONCURRENTLY`、HNSWベクトルインデックス。GiST、Hash、SP-GiST、BRINインデックスはサポートされません。
++ **トリガー**: `INSERT`、`UPDATE`、`DELETE`に対する`BEFORE`および`AFTER`トリガーを、一部制限付きでサポートします。詳細は[トリガー](#triggers)を参照してください。
++ **インデックス**: B-tree（デフォルト）、GIN、部分インデックス、式インデックス、`CREATE INDEX CONCURRENTLY`、HNSWベクトルインデックス。GiST、Hash、SP-GiST、BRINインデックスはサポートされません。
 
 ## サポートされない機能 {#unsupported-features}
 
@@ -35,16 +35,16 @@ PostgreSQL互換の{{{ .starter }}}インスタンスは、以下のPostgreSQL�
 
 + `RANGE`、`LIST`、`HASH`パーティショニングを含むテーブルパーティショニング。
 + テーブル継承。
-+ Foreign data wrapper（FDW）。
++ 外部データラッパー（FDW）。
 + テーブルスペース。
 + `CREATE RULE`で作成されるルール。
 + 論理レプリケーション。
 + ストリーミングレプリケーション。
 + 真の`SERIALIZABLE`分離レベル。
 + `DEFERRABLE`トランザクション。
-+ PostgreSQL large object（OIDベースのlarge objectストレージ）。代わりにバイナリデータには`BYTEA`を使用してください。
++ PostgreSQLのラージオブジェクト（OIDベースのラージオブジェクトストレージ）。代わりにバイナリデータには`BYTEA`を使用してください。
 + `XML`、`CIDR`、`MACADDR`データ型。
-+ PostgreSQL range型（`INT4RANGE`の部分サポートを除く）。
++ PostgreSQLの範囲型（`INT4RANGE`の部分サポートを除く）。
 + PL/pgSQL以外の手続き言語（PL/Python、PL/Perl、PL/v8など）。
 + PL/pgSQLの`WHILE`ループ、`FOREACH`ループ、カーソル操作。
 + カスタムまたはサードパーティのPostgreSQL拡張機能。
@@ -80,10 +80,10 @@ SHOW transaction_isolation;
 | `REAL` / `FLOAT4` | 受け付けられ、内部的には`DOUBLE PRECISION`として保存されます。PostgreSQLの単精度浮動小数点のセマンティクスは保持されません。 |
 | `CHAR(n)` / `CHARACTER(n)` | 受け付けられ、内部的には`VARCHAR`として保存されます。PostgreSQLのような空白埋めは行われないため、空白埋めされた文字列との比較で結果が異なる場合があります。 |
 | `INET` | IPv4およびIPv6のホストまたはネットワークアドレスについて、等価比較と順序比較をサポートします。PostgreSQLのネットワーク固有の演算子や関数はサポートされません。 |
-| `INT4RANGE` | 部分的にサポートされます。等価（`=`）および重なり（`&&`）演算子はサポートされます。包含演算子（`@>`および`<@`）はサポートされません。`upper()`や`isempty()`などのPostgreSQL rangeアクセサ関数は利用できないか、期待どおりに動作しません。 |
-| Composite types | 宣言でき、テキストリテラルを使って書き込むこともできますが、値をフィールド単位で読み取ることはできません。 |
+| `INT4RANGE` | 部分的にサポートされます。等価（`=`）および重なり（`&&`）演算子はサポートされます。包含演算子（`@>`および`<@`）はサポートされません。`upper()`や`isempty()`などのPostgreSQLの範囲型アクセサ関数は利用できないか、期待どおりに動作しません。 |
+| 複合型 | 宣言でき、テキストリテラルを使って書き込むこともできますが、値をフィールド単位で読み取ることはできません。 |
 | `BIT` / `VARBIT` | 互換性上の違いを伴って受け付けられます。値は`BYTEA`のセマンティクスを使用し、宣言されたビット長は強制されません。長すぎる値は拒否または切り捨てされず、そのまま保持されます。`B'1010'`のようなPostgreSQLのビット文字列リテラルはサポートされません。 |
-| Arrays | 1次元配列をサポートします。多次元配列はサポートされません。 |
+| 配列 | 1次元配列をサポートします。多次元配列はサポートされません。 |
 
 以下のPostgreSQLデータ型はサポートされていません。
 
@@ -158,7 +158,7 @@ PL/pgSQLは部分的にサポートされています。変数、代入、`SELEC
 >
 > 互換性を確認するには、作成後に関数を実行してテストしてください。
 
-### Triggers {#triggers}
+### トリガー {#triggers}
 
 `INSERT`、`UPDATE`、`DELETE`に対する`BEFORE`および`AFTER`トリガーはサポートされていますが、以下の互換性上の違いがあります。
 
@@ -172,13 +172,13 @@ PostgreSQL互換の{{{ .starter }}}インスタンスは、事前定義された
 
 任意のカスタムまたはサードパーティのPostgreSQL拡張機能はインストールできません。TiDB Cloudが明示的にサポートする拡張機能のみ利用できます。
 
-利用可能な拡張機能の一覧と、拡張機能固有の制限については、[PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md)を参照してください。
+利用可能な拡張機能の一覧と、拡張機能固有の制限については、[サポートされているPostgreSQL拡張機能](/tidb-cloud/starter/pg-extensions-overview.md)を参照してください。
 
 ### レプリケーション {#replication}
 
 PostgreSQLの論理レプリケーションおよびストリーミングレプリケーションはサポートされていません。
 
-PostgreSQL互換性のために、一部のpublicationやreplication slotのカタログオブジェクトまたは関数が存在する場合がありますが、実際に動作するレプリケーションや変更データキャプチャ（CDC）は提供しません。`CREATE SUBSCRIPTION`はサポートされていません。
+PostgreSQL互換性のために、一部のパブリケーションやレプリケーションスロットのカタログオブジェクトまたは関数が存在する場合がありますが、実際に動作するレプリケーションや変更データキャプチャ（CDC）は提供しません。`CREATE SUBSCRIPTION`はサポートされていません。
 
 ### システムカタログとツール {#system-catalogs-and-tooling}
 
@@ -193,7 +193,7 @@ PostgreSQL固有のカタログや統計情報の動作に依存するツール�
 既存の PostgreSQL アプリケーションを移行する前に、ワークロードが未サポートの機能、または動作が異なる機能に依存していないかを確認してください。該当するものには、以下が含まれます。
 
 + テーブルパーティショニングまたはテーブル継承。
-+ Foreign Data Wrapper。
++ 外部データラッパー。
 + 論理レプリケーションまたはストリーミングレプリケーション。
 + `SERIALIZABLE` トランザクション分離レベル。
 + 未サポートの PostgreSQL データ型。

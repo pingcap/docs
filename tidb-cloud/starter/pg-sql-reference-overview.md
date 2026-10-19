@@ -9,7 +9,7 @@ PostgreSQL 互換の {{{ .starter }}} は、PostgreSQL wire protocol と一般�
 
 このページでは、DDL、DML、DQL、DCL、およびトランザクション制御を含む基本的な SQL 操作について説明します。
 
-サポートされていない PostgreSQL 機能や動作が異なる機能については、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+サポートされていない PostgreSQL 機能や動作が異なる機能については、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## カテゴリ {#categories}
 
@@ -19,7 +19,7 @@ SQL 文は、その機能に応じて次のカテゴリに分類できます。
 - **DML (Data Manipulation Language)**: テーブルデータを挿入、更新、削除します。
 - **DQL (Data Query Language)**: `SELECT`、フィルタリング、テーブル結合、集計、サブクエリ、共通テーブル式（CTE）などのクエリ機能を使用してデータを問い合わせます。
 - **DCL (Data Control Language)**: 権限とロールメンバーシップを管理します。
-- **Transaction control**: `BEGIN`、`COMMIT`、`ROLLBACK`、`SAVEPOINT` などの文を使用してトランザクションを管理します。
+- **トランザクション制御**: `BEGIN`、`COMMIT`、`ROLLBACK`、`SAVEPOINT` などの文を使用してトランザクションを管理します。
 
 一般的な DDL 操作には、オブジェクトの作成、変更、削除があります。対応するコマンドは `CREATE`、`ALTER`、`DROP` です。
 
@@ -139,7 +139,7 @@ ORDER BY indexname;
 DROP INDEX person_name_idx;
 ```
 
-サポートされる PostgreSQL のインデックスメソッドと互換性の違いについては、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+サポートされる PostgreSQL のインデックスメソッドと互換性の違いについては、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## データの挿入、更新、削除 {#insert-update-and-delete-data}
 
@@ -294,7 +294,7 @@ ROLLBACK TO SAVEPOINT before_second_update;
 COMMIT;
 ```
 
-サポートされているトランザクション分離レベルと PostgreSQL 互換性の違いについては、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+サポートされているトランザクション分離レベルと PostgreSQL 互換性の違いについては、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## ロールを作成し、権限を付与し、削除する {#create-grant-privileges-to-and-drop-a-role}
 

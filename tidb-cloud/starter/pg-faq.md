@@ -29,15 +29,15 @@ PostgreSQL互換 {{{ .starter }}} はパブリックプレビューで利用可�
 
 プレビューの拡大に伴い、追加のリージョンが利用可能になる場合があります。新しいリージョンの提供開始時には案内されます。
 
-### 同じ TiDB Cloud organization 内で MySQL互換 Starter インスタンスと PostgreSQL互換 Starter インスタンスの両方を使用できますか？ {#can-i-use-both-mysql-compatible-and-postgresql-compatible-starter-instances-in-the-same-tidb-cloud-organization}
+### 同じ TiDB Cloud 組織内で MySQL互換 Starter インスタンスと PostgreSQL互換 Starter インスタンスの両方を使用できますか？ {#can-i-use-both-mysql-compatible-and-postgresql-compatible-starter-instances-in-the-same-tidb-cloud-organization}
 
-はい。同じ organization、project、リージョン内で、MySQL互換と PostgreSQL互換の {{{ .starter }}} インスタンスを両方使用できます。
+はい。同じ組織、プロジェクト、リージョン内で、MySQL互換と PostgreSQL互換の {{{ .starter }}} インスタンスを両方使用できます。
 
 TiDB Cloud では、リソース一覧とインスタンス概要にデータベースタイプが表示されるため、2種類のインスタンスを区別できます。
 
 ### Starter インスタンスはいくつ作成できますか？ {#how-many-starter-instances-can-i-create}
 
-有料 organization では、デフォルトで合計 **100 個の {{{ .starter }}} インスタンス** を作成できます。これには MySQL互換インスタンスと PostgreSQL互換インスタンスの両方が含まれます。MySQL互換インスタンスでは、各ブランチも 1 つのインスタンスとしてカウントされます。
+有料の組織では、デフォルトで合計 **100 個の {{{ .starter }}} インスタンス** を作成できます。これには MySQL互換インスタンスと PostgreSQL互換インスタンスの両方が含まれます。MySQL互換インスタンスでは、各ブランチも 1 つのインスタンスとしてカウントされます。
 
 無料インスタンス枠の対象は次のとおりです。
 
@@ -100,7 +100,7 @@ PostgreSQL互換 {{{ .starter }}} は TiDB Cloud Starter の使用量モデル�
 
 はい。PostgreSQL互換 {{{ .starter }}} は、使用量クォータの範囲内で、パブリックプレビュー期間中は無料で利用できます。この期間中は課金は有効になっていません。
 
-各 organization における最初の **10 個の PostgreSQL互換 {{{ .starter }}} インスタンス** について、各インスタンスの無料クォータは次のとおりです。
+各組織における最初の **10 個の PostgreSQL互換 {{{ .starter }}} インスタンス** について、各インスタンスの無料クォータは次のとおりです。
 
 - **行ベースのストレージ:** 50 GiB
 - **Request Units (RUs):** 月あたり 5 億
