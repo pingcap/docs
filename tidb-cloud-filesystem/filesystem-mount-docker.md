@@ -19,7 +19,7 @@ Docker コンテナ内から TiDB Cloud Filesystem のファイルシステム�
 
 - `/dev/fuse` が利用可能な Linux の Docker ホストを使用する。
 - `/dev/fuse` へのアクセス権と、マウントの作成に必要な capability を付与してコンテナを起動する権限がある。
-- 既存のファイルシステムに対する file system token とリージョンコードを用意している。[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
+- 既存のファイルシステムに対するファイルシステムトークンとリージョンコードを用意している。[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
 
 Docker Desktop や、管理されたコンテナ環境またはサンドボックス環境では、`/dev/fuse` が公開されていない場合や、必要な権限が許可されていない場合があります。
 
@@ -27,18 +27,18 @@ Docker Desktop や、管理されたコンテナ環境またはサンドボッ�
 >
 > このガイドの例では、コンテナに `SYS_ADMIN` を付与し、`apparmor=unconfined` によって AppArmor プロファイルを無効化しています。これらの設定により、コンテナには標準的な Docker コンテナよりも広い権限が与えられます。
 >
-> これらは、使用環境のセキュリティポリシーで許可されている場合にのみ使用してください。環境が適切な追加の分離境界を提供していない限り、これらの権限で信頼できないコードを実行しないでください。スコープ付きの file system token によってファイルシステムデータへのアクセスを制限することはできますが、Docker がコンテナに付与する権限自体は減りません。
+> これらは、使用環境のセキュリティポリシーで許可されている場合にのみ使用してください。環境が適切な追加の分離境界を提供していない限り、これらの権限で信頼できないコードを実行しないでください。スコープ付きのファイルシステムトークンによってファイルシステムデータへのアクセスを制限することはできますが、Docker がコンテナに付与する権限自体は減りません。
 
 ## コンテナにファイルシステムアクセスを提供する {#provide-file-system-access-to-the-container}
 
-Docker ホスト上で、file system token とリージョンコードを設定します。
+Docker ホスト上で、ファイルシステムトークンとリージョンコードを設定します。
 
 ```bash
 export TI_FS_TOKEN="<filesystem-token>"
 export TI_REGION_CODE="<filesystem-region-code>"
 ```
 
-file system token はシークレットとして扱ってください。Dockerfile に記述したり、ソース管理にコミットしたりしないでください。
+ファイルシステムトークンはシークレットとして扱ってください。Dockerfile に記述したり、ソース管理にコミットしたりしないでください。
 
 以下の Docker および Docker Compose の例では、これらの環境変数をホストからコンテナに渡します。
 
@@ -64,7 +64,7 @@ docker run --rm -it \
 
 - ホストの `/dev/fuse` デバイスをコンテナに公開する。
 - マウントの作成に必要な capability を付与する。
-- file system token とリージョンコードをコンテナに渡す。
+- ファイルシステムトークンとリージョンコードをコンテナに渡す。
 
 コンテナの起動後、[コンテナ内でインストールしてマウントする](#install-and-mount-inside-the-container) に進んでください。
 
@@ -130,7 +130,7 @@ docker compose exec agent bash
 
     Linux では、`ti` はデフォルトで FUSE を使用します。コマンドが成功すると、`$HOME/workspace` を通じてファイルシステムにアクセスできます。マウントの開始に失敗した場合は、`ti` が報告する診断ログのパスを確認してください。
 
-    file system token が特定のリモートパスへのアクセスのみを許可している場合は、前述のマウントコマンドの代わりに次のコマンドを使用してください。
+    ファイルシステムトークンが特定のリモートパスへのアクセスのみを許可している場合は、前述のマウントコマンドの代わりに次のコマンドを使用してください。
 
     ```bash
     ti fs mount-file-system \
@@ -210,4 +210,4 @@ drain が成功すると、マウントを維持したまま保留中の書き�
 
 - 読み取り専用マウント、レイヤーまたはチェックポイントのマウント、およびその他の一般的なマウントオプションについては、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
 - 別のユーザーまたは環境に同じファイルシステムへのアクセスを付与するには、[マシン間でファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md) を参照してください。
-- 特定のパスや操作へのアクセスを制限するには、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
+- 特定のパスや操作へのアクセスを制限するには、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。

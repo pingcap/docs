@@ -1,13 +1,13 @@
 ---
 title: CLI を使用して TiDB Cloud Filesystem を使い始める
-summary: 永続的な TiDB Cloud file system を作成し、ファイルの読み書きを行い、必要に応じてローカルマウント経由でアクセスする方法を学びます。
+summary: 永続的な TiDB Cloud ファイルシステムを作成し、ファイルの読み書きを行い、必要に応じてローカルマウント経由でアクセスする方法を学びます。
 ---
 
 # CLI を使用して TiDB Cloud Filesystem を使い始める
 
 [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md) は、アプリケーション、自動化、AI エージェント向けの永続的で共有可能なクラウドファイルシステムです。ファイルは、それを作成したマシンやプロセスとは独立して利用可能な状態が維持されるため、セッションや環境をまたいでワークスペースを再利用できます。
 
-このクイックスタートガイドでは、TiDB Cloud CLI を使用して file system を作成し、ファイルを書き込み・読み取りし、必要に応じてローカルディレクトリとしてマウントする方法を説明します。
+このクイックスタートガイドでは、TiDB Cloud CLI を使用してファイルシステムを作成し、ファイルを書き込み・読み取りし、必要に応じてローカルディレクトリとしてマウントする方法を説明します。
 
 > **Note:**
 >
@@ -15,13 +15,13 @@ summary: 永続的な TiDB Cloud file system を作成し、ファイルの読�
 
 ## 前提条件 {#prerequisites}
 
-開始する前に、[TiDB Cloud console](https://tidbcloud.com/) の [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API public key と private key を取得してください。これらのキーには、組織に対する `Organization Owner` アクセス権が必要です。
+開始する前に、[TiDB Cloud コンソール](https://tidbcloud.com/) の [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API の公開キーと秘密キーを取得してください。これらのキーには、組織に対する `Organization Owner` アクセス権が必要です。
 
-すでに誰かから file system token を受け取っている場合は、リソースの作成をスキップして、[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) に従ってください。
+すでに誰かからファイルシステムトークンを受け取っている場合は、リソースの作成をスキップして、[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) に従ってください。
 
 macOS および Linux では Bash または Zsh を、Windows では PowerShell を使用してください。チュートリアル全体を通して同じシェルを開いたままにしてください。エージェントがコマンドごとに新しいシェルを開始する場合は、環境変数と保存したパスの値を各シェルに渡してください。
 
-## Step 1. TiDB Cloud CLI をインストールする {#step-1-install-tidb-cloud-cli}
+## ステップ 1. TiDB Cloud CLI をインストールする {#step-1-install-tidb-cloud-cli}
 
 使用するオペレーティングシステムを選択してください。
 
@@ -77,9 +77,9 @@ macOS および Linux では Bash または Zsh を、Windows では PowerShell 
 
 Windows での永続的な `PATH` 設定やその他のインストール方法については、[TiDB Cloud CLI のインストール、設定、および更新](/ai/ti/reference/ti-install-configure-update.md) を参照してください。
 
-## Step 2. TiDB Cloud CLI を設定する {#step-2-configure-tidb-cloud-cli}
+## ステップ 2. TiDB Cloud CLI を設定する {#step-2-configure-tidb-cloud-cli}
 
-ファイルの保存先として使用する[サポートされるリージョン](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions)を選択します。たとえば `aws-us-west-2` です。無料利用枠では、1 リージョンあたり 1 つの file system を作成できます。組織ですでに 1 つ作成済みの場合は、それを[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md)するか、別のリージョンを選択するか、[支払い方法を追加](https://tidbcloud.com/org-settings/billing/payments)してください。
+ファイルの保存先として使用する[サポートされるリージョン](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions)を選択します。たとえば `aws-us-west-2` です。無料利用枠では、1 リージョンあたり 1 つのファイルシステムを作成できます。組織ですでに 1 つ作成済みの場合は、それを[再利用する](/tidb-cloud-filesystem/access-filesystem.md)か、別のリージョンを選択するか、[支払い方法を追加](https://tidbcloud.com/org-settings/billing/payments)してください。
 
 1. 対話形式の設定を実行します。
 
@@ -90,7 +90,7 @@ Windows での永続的な `PATH` 設定やその他のインストール方法�
 2. 次の情報を入力します。
 
     - 選択したリージョン
-    - TiDB Cloud API public key と private key
+    - TiDB Cloud API の公開キーと秘密キー
 
 CLI は認証情報とデフォルトリージョンをローカルに保存します。次のステップの作成コマンドでは、このリージョンが使用されます。
 
@@ -98,21 +98,21 @@ CLI は認証情報とデフォルトリージョンをローカルに保存し�
 >
 > CI やエージェントでは、代わりに非対話形式の設定を使用してください。シークレットマネージャーから `TIDB_CLOUD_PUBLIC_KEY` と `TIDB_CLOUD_PRIVATE_KEY` を注入し、`TI_REGION_CODE` を設定して、`ti configure --non-interactive` を実行します。詳細は、[自動化向けの設定](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) を参照してください。
 
-## Step 3. file system を作成して使用する {#step-3-create-and-use-a-file-system}
+## ステップ 3. ファイルシステムを作成して使用する {#step-3-create-and-use-a-file-system}
 
-1. file system を作成します。
+1. ファイルシステムを作成します。
 
     ```bash
     ti fs create-file-system --display-name agent-workspace --wait
     ```
 
-    次のステップで使用するため、返された `file_system_id` をコピーしてください。CLI は file system の owner token とリージョンをローカルに保存するため、同じマシンでは再度 token を入力する必要はありません。
+    次のステップで使用するため、返された `file_system_id` をコピーしてください。CLI はファイルシステムのオーナートークンとリージョンをローカルに保存するため、同じマシンでは再度トークンを入力する必要はありません。
 
     > **Note:**
     >
-    > 別のマシンから file system にアクセスする必要がある場合は、返された `fs_token` と `region_code` も保存してください。owner token はフルアクセス権を持ち、有効期限がないため、安全に保管してください。制限付きアクセスについては、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
+    > 別のマシンからファイルシステムにアクセスする必要がある場合は、返された `fs_token` と `region_code` も保存してください。オーナートークンはフルアクセス権を持ち、有効期限がないため、安全に保管してください。制限付きアクセスについては、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
 
-2. 新しい file system を選択します。`<file-system-id>` を返された `file_system_id` に置き換えてください。
+2. 新しいファイルシステムを選択します。`<file-system-id>` を返された `file_system_id` に置き換えてください。
 
     <SimpleTab groupId="operating-systems">
 
@@ -168,11 +168,11 @@ CLI は認証情報とデフォルトリージョンをローカルに保存し�
     Hello from TiDB Cloud Filesystem
     ```
 
-    これで、最初のファイルが TiDB Cloud Filesystem に保存されました。別の環境からアクセスするには、[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。別のユーザー、アプリケーション、またはエージェントにアクセス権を付与するには、[File System を共有する](/tidb-cloud-filesystem/filesystem-sharing.md) を参照してください。
+    これで、最初のファイルが TiDB Cloud Filesystem に保存されました。別の環境からアクセスするには、[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。別のユーザー、アプリケーション、またはエージェントにアクセス権を付与するには、[ファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md) を参照してください。
 
-## Step 4. ファイルシステムをマウントする（オプション） {#step-4-mount-the-file-system-optional}
+## ステップ 4. ファイルシステムをマウントする（オプション） {#step-4-mount-the-file-system-optional}
 
-アプリケーションでローカルファイルパスが必要な場合は、ファイルシステムをマウントします。Windows ではマウントはサポートされていません。Windows を使用している場合、または CLI アクセスのみが必要な場合は、[Step 5](#step-5-clean-up-the-example-optional) に進んでください。
+アプリケーションでローカルファイルパスが必要な場合は、ファイルシステムをマウントします。Windows ではマウントはサポートされていません。Windows を使用している場合、または CLI アクセスのみが必要な場合は、[ステップ 5](#step-5-clean-up-the-example-optional) に進んでください。
 
 1. マウント用の空のローカルディレクトリを作成します。
 
@@ -222,9 +222,9 @@ CLI は認証情報とデフォルトリージョンをローカルに保存し�
 
 書き込みの検証とトラブルシューティングについては、[使用前にマウントを検証する](/tidb-cloud-filesystem/filesystem-mount.md#verify-a-mount-before-using-it) を参照してください。
 
-## Step 5. サンプルをクリーンアップする（オプション） {#step-5-clean-up-the-example-optional}
+## ステップ 5. サンプルをクリーンアップする（オプション） {#step-5-clean-up-the-example-optional}
 
-Step 4 でディレクトリをマウントした場合は、それを使用しているアプリケーションを閉じてから、アンマウントし、空のローカルマウントディレクトリを削除します。
+ステップ 4 でディレクトリをマウントした場合は、それを使用しているアプリケーションを閉じてから、アンマウントし、空のローカルマウントディレクトリを削除します。
 
 ```bash
 ti fs unmount-file-system --mount-path "$mount_dir"

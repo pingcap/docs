@@ -110,7 +110,7 @@ ti fs-git remove-git-worktree \
 
 ## マシンを離れる前に作業内容を保持する {#preserve-work-before-leaving-a-machine}
 
-`--mount-profile coding-agent` を使用すると、`.git` などの Git メタデータはローカルマシンに保持されます。ローカルでコミットしただけでは、その履歴を別のマシンでリカバリ可能にはできません。drain や unmount を行っても、このローカル Git メタデータは転送されません。履歴を保持するには、Git リモートへの push、または以下のメタデータアーカイブのワークフローを使用してください。
+`--mount-profile coding-agent` を使用すると、`.git` などの Git メタデータはローカルマシンに保持されます。ローカルでコミットしただけでは、その履歴を別のマシンでリカバリ可能にはできません。drain やアンマウントを行っても、このローカル Git メタデータは転送されません。履歴を保持するには、Git リモートへの push、または以下のメタデータアーカイブのワークフローを使用してください。
 
 一時的なマシンを削除する前に、次を実施してください。
 
@@ -120,11 +120,11 @@ ti fs-git remove-git-worktree \
 2. 必要な untracked ファイルや ignored ファイルは別途保持してください。push で保持されるのはコミット済みの内容だけです。
 3. [安全にアンマウントする](/tidb-cloud-filesystem/filesystem-mount.md#unmount-when-you-are-finished)。リカバリ確認が完了するまでは元のディスクを保持してください。
 
-各プロファイルでローカルに保持されるデータについては、[mount profiles and local overlays](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を参照してください。
+各プロファイルでローカルに保持されるデータについては、[マウントプロファイルとローカルオーバーレイ](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を参照してください。
 
 ## push していないワークスペースを別のマシンにリカバリする {#recover-an-unpushed-workspace-to-another-machine}
 
-この例では、リンクされた worktree を含む作業途中の Git ワークスペースを、リモートに push せずに別のマシンへ移動します。ベースリポジトリの Git メタデータと、リンクされた worktree の worktree ごとのメタデータの両方をリモートアーカイブに pack し、2 台目のマシンで復元して worktree リンクを修復し、コミット ID を比較して転送を確認します。
+この例では、リンクされた worktree を含む作業途中の Git ワークスペースを、リモートに push せずに別のマシンへ移動します。ベースリポジトリの Git メタデータと、リンクされた worktree の worktree ごとのメタデータの両方をリモートアーカイブにパックし、2 台目のマシンで復元して worktree リンクを修復し、コミット ID を比較して転送を確認します。
 
 この例では、ソースマシンで `--mount-profile coding-agent` を使用し、このページの前半で説明した次のレイアウトが作成されていることを前提としています。
 
@@ -142,13 +142,13 @@ ti fs-git remove-git-worktree \
     (cd /path/to/workspace/tidb-feature && git rev-parse HEAD) | tee /tmp/tidb-feature.sha
     ```
 
-2. pack 前に、キャッシュされた blob が永続化されるよう、書き込みプロセスを停止し、保留中の書き込みを drain します。
+2. パック前に、キャッシュされた blob が永続化されるよう、書き込みプロセスを停止し、保留中の書き込みを drain します。
 
     ```shell
     ti fs drain-file-system --mount-path /path/to/workspace
     ```
 
-3. ローカル overlay にのみ存在する Git メタデータを pack します。`coding-agent` は `.git` をリモート namespace の外に保持するため、ベースリポジトリの `.git` ディレクトリと、各リンクされた worktree の `.git/worktrees/<name>` サブディレクトリの両方を明示的に指定する必要があります。`.env` や仮想環境など、保持したい untracked ファイルや ignored ファイルも同じアーカイブに含めてください。`--archive-path` はアーカイブを保存するリモートファイルシステム内のパスです。`/packs/` のように、作業ツリーの外の場所を選んでください。
+3. ローカルオーバーレイにのみ存在する Git メタデータをパックします。`coding-agent` は `.git` をリモート名前空間の外に保持するため、ベースリポジトリの `.git` ディレクトリと、各リンクされた worktree の `.git/worktrees/<name>` サブディレクトリの両方を明示的に指定する必要があります。`.env` や仮想環境など、保持したい untracked ファイルや ignored ファイルも同じアーカイブに含めてください。`--archive-path` はアーカイブを保存するリモートファイルシステム内のパスです。`/packs/` のように、作業ツリーの外の場所を選んでください。
 
     ```shell
     ti fs pack-file-system \

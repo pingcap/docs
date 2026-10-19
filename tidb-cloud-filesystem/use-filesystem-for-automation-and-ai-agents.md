@@ -19,9 +19,9 @@ AI エージェントのワークフローを支援するには、[TiDB for AI](
 
 | 実行したいこと | ガイド |
 | --- | --- |
-| エージェントのサンドボックスに共有ワークスペースへのアクセスを提供する | [エージェントのサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) |
-| 使い捨てサンドボックス間でエージェントの状態を保持する | [TiDB Cloud Filesystem を使用して使い捨てサンドボックス間でエージェントの状態を保持する](/ai/ti/guides/ti-persistent-agent-state-example.md) |
+| エージェントのサンドボックスに共有ワークスペースへのアクセスを提供する | [エージェントサンドボックスで TiDB Cloud Filesystem を使う](/ai/ti/guides/ti-agent-sandbox-example.md) |
+| 使い捨てサンドボックス間でエージェントの状態を保持する | [TiDB Cloud Filesystem を使用して使い捨てサンドボックス間でエージェントの状態を永続化する](/ai/ti/guides/ti-persistent-agent-state-example.md) |
 | 並列エージェント間で読み取り専用データセットを共有する | [TiDB Cloud Filesystem を使用して並列エージェント間で読み取り専用データセットを共有する](/ai/ti/guides/ti-parallel-agent-dataset-example.md) |
-| エージェント用の大規模な Git ワークスペースを準備する | [TiDB Cloud Filesystem 上でエージェント用の Git ワークスペースを準備する](/ai/ti/guides/ti-git-workspace-for-agents-example.md) |
-| エージェントのワークフローを記録して検証する | [ファイルシステムジャーナルにエージェントのワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md) |
-| エージェントに Vault シークレットへの限定的なアクセスを提供する | [ファイルシステムの Vault シークレットをエージェントに委任する](/ai/ti/guides/ti-vault-agent-secrets-example.md) |
+| エージェント用の大規模な Git ワークスペースを準備する | [TiDB Cloud Filesystem 上でエージェント向けの Git ワークスペースを準備する](/ai/ti/guides/ti-git-workspace-for-agents-example.md) |
+| エージェントのワークフローを記録して検証する | [ファイルシステムジャーナルにエージェントワークフローを記録する](/ai/ti/guides/ti-journal-agent-workflow-example.md) |
+| エージェントに Vault シークレットへの限定的なアクセスを提供する | [エージェントにファイルシステム Vault シークレットを委任する](/ai/ti/guides/ti-vault-agent-secrets-example.md) |

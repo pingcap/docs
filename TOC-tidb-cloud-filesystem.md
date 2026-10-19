@@ -5,7 +5,7 @@
 
 ## はじめに
 
-- [TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-intro.md)
+- [概要](/tidb-cloud-filesystem/filesystem-intro.md)
 - [コンソールでのクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start-console.md)
 - [CLI でのクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start.md)
 - 主要な概念
@@ -18,7 +18,7 @@
 - [ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md)
 - ファイルシステムをマウントする
-  - [ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md)
+  - [概要](/tidb-cloud-filesystem/filesystem-mount.md)
   - [Linux](/tidb-cloud-filesystem/filesystem-mount-linux.md)
   - [macOS](/tidb-cloud-filesystem/filesystem-mount-macos.md)
   - [Docker と Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md)
@@ -36,7 +36,7 @@
 ## リファレンス
 
 - [コマンドリファレンス](/tidb-cloud-filesystem/filesystem-command-reference.md)
-- [TiDB Cloud Filesystem SDKs](/tidb-cloud-filesystem/filesystem-sdks.md)
+- [SDK](/tidb-cloud-filesystem/filesystem-sdks.md)
 - [リージョンと制限事項](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md)
 - [FAQ](/tidb-cloud-filesystem/filesystem-faq.md)
 - [トラブルシューティング](/tidb-cloud-filesystem/filesystem-troubleshooting.md)

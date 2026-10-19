@@ -100,7 +100,7 @@ ti fs update-file-system-extract-configuration \
 
 埋め込みは、テキストコンテンツと抽出されたメディア説明を、セマンティック検索用のベクトルとして表現します。
 
-### 現在の設定を確認する {#check-the-current-configuration}
+### 現在の設定を確認する {#check-the-current-configuration-1}
 
 カスタム埋め込みプロバイダーを設定する前に、現在の埋め込み設定を確認してください。
 

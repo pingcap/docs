@@ -6,20 +6,20 @@ aliases: ['/ja/ai/manage-filesystem-layers']
 
 # ファイルシステムのレイヤーとチェックポイントを管理する
 
-TiDB Cloud Filesystem では、レイヤーは、コミットするまでファイルの変更をベースファイルシステムから分離します。チェックポイントを使用すると中間状態を保持でき、フォークを使用すると変更を独立して検証できます。基礎となる概念については、[Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を参照してください。
+TiDB Cloud Filesystem では、レイヤーは、コミットするまでファイルの変更をベースファイルシステムから分離します。チェックポイントを使用すると中間状態を保持でき、フォークを使用すると変更を独立して検証できます。基礎となる概念については、[レイヤーとチェックポイント](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を参照してください。
 
 ## 前提条件 {#prerequisites}
 
 開始する前に、以下を確認してください。
 
 - [TiDB Cloud CLI をインストールする](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli)。
-- 既存のディレクトリに対して `read,list,write,delete` 権限を持つ owner token または scoped token を用意します。この例では、その配下に子ディレクトリを作成して削除します。
-- ファイルシステムを選択し、その token を `ti` から利用できるようにします。利用可能なアクセス方法については、[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
+- 既存のディレクトリに対して `read,list,write,delete` 権限を持つオーナートークンまたはスコープ付きトークンを用意します。この例では、その配下に子ディレクトリを作成して削除します。
+- ファイルシステムを選択し、そのトークンを `ti` から利用できるようにします。利用可能なアクセス方法については、[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
 - Bash または Zsh を使用し、例の実行中は同じシェルを開いたままにします。
 
 ## レイヤーを作成する {#create-a-layer}
 
-token のスコープ内にある既存のディレクトリを選択します。owner token を使用する場合は `/` を使い、scoped token を使用する場合は `/workspace` のように、その token で許可されたディレクトリに置き換えてください。例用に一意な子ディレクトリを作成します。
+トークンのスコープ内にある既存のディレクトリを選択します。オーナートークンを使用する場合は `/` を使い、スコープ付きトークンを使用する場合は `/workspace` のように、そのトークンで許可されたディレクトリに置き換えてください。例用に一意な子ディレクトリを作成します。
 
 ```shell
 parent_path="/"
@@ -145,7 +145,7 @@ ti fs unmount-file-system --mount-path "$checkpoint_mount"
 
 > **Warning:**
 >
-> `ti` v0.2.6、および bundled runtime `60b63d6` を使用する v0.2.7 のインストールでは、バックグラウンドプロセスが異常終了していても、チェックポイントのアンマウントで `unmounted` が返ることがあります。続行する前にマウントログを確認してください。シャットダウンが異常だった場合は、キャッシュを保持したままチェックポイントの内容を再検証してください。ログの場所とリカバリ手順については、[Unmount returns success but the mount process exits abnormally](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally) を参照してください。
+> `ti` v0.2.6、およびバンドルされたランタイム `60b63d6` を使用する v0.2.7 のインストールでは、バックグラウンドプロセスが異常終了していても、チェックポイントのアンマウントで `unmounted` が返ることがあります。続行する前にマウントログを確認してください。シャットダウンが異常だった場合は、キャッシュを保持したままチェックポイントの内容を再検証してください。ログの場所とリカバリ手順については、[アンマウントは成功を返すが、マウントプロセスが異常終了する](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally) を参照してください。
 
 ## レイヤーをフォークする {#fork-a-layer}
 
@@ -164,7 +164,7 @@ ti fs fork-layer \
 forked_layer_id="<returned-forked-layer-id>"
 ```
 
-フォークの固定された ancestry を確認するには、次を実行します。
+フォークの固定された祖先チェーンを確認するには、次を実行します。
 
 ```shell
 ti fs list-layer-chain --layer-ref "$forked_layer_id"
@@ -181,13 +181,13 @@ ti fs unmount-file-system \
   --mount-path "$layer_mount"
 ```
 
-正常なアンマウントでは、保留中の書き込みは自動的に排出されます。
+正常なアンマウントでは、保留中の書き込みは自動的にフラッシュされます。
 
 > **Warning:**
 >
 > `ti` v0.2.6、およびバンドルされたランタイム `60b63d6` を使用する v0.2.7 のインストールでは、バックグラウンドプロセスが異常終了した場合でも、レイヤーのアンマウントが `unmounted` を返すことがあります。レイヤーをコミットまたは破棄する前にマウントログを確認してください。シャットダウンが異常だった場合は、キャッシュを保持し、必要なファイルを先に確認してください。ログの場所とリカバリ手順については、[アンマウントは成功を返すが、マウントプロセスが異常終了する](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally) を参照してください。
 
-結果を 1 つ選択します。**commit** は変更をベースファイルシステムに適用し、**rollback** は変更を破棄します。コミットするには、次を実行します。
+結果を 1 つ選択します。**コミット** は変更をベースファイルシステムに適用し、**ロールバック** は変更を破棄します。コミットするには、次を実行します。
 
 ```shell
 ti fs commit-layer --layer-id "$layer_id"
@@ -211,7 +211,7 @@ ti fs read-file --path "$base_path/proposal.md"
 ti fs rollback-layer --layer-id "$layer_id"
 ```
 
-rollback は現在のレイヤーの変更を破棄します。レイヤーを以前のチェックポイントにリセットするものではありません。チェックポイントから続行するには、そのチェックポイントから新しいレイヤーをフォークしてください。
+ロールバックは現在のレイヤーの変更を破棄します。レイヤーを以前のチェックポイントにリセットするものではありません。チェックポイントから続行するには、そのチェックポイントから新しいレイヤーをフォークしてください。
 
 ## レイヤーを削除する {#delete-a-layer}
 

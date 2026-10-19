@@ -16,11 +16,11 @@ TiDB Cloud Filesystem サービスでは、クレジットカードがなくて�
 - ファイルシステムごとに 2 GiB のストレージ
 - 1 つのファイルあたりの最大サイズは 500 MiB
 
-クレジットカードを追加すると、より高い制限を設定し、従量課金制で引き続き使用できます。課金の詳細については、[TiDB Cloud Filesystem pricing](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/) を参照してください。
+クレジットカードを追加すると、より高い制限を設定し、従量課金制で引き続き使用できます。課金の詳細については、[TiDB Cloud Filesystem の料金](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/) を参照してください。
 
 ## ファイルシステムの使用量を確認する {#view-file-system-usage}
 
-ファイルシステムの現在の使用量を確認するには、[TiDB Cloud console](https://tidbcloud.com/) でその概要ページに移動し、**Usage** エリアを確認します。使用量の詳細を確認するには、左側のナビゲーションペインで **Usage** をクリックします。
+ファイルシステムの現在の使用量を確認するには、[TiDB Cloud コンソール](https://tidbcloud.com/) でその概要ページに移動し、**Usage** エリアを確認します。使用量の詳細を確認するには、左側のナビゲーションペインで **Usage** をクリックします。
 
 ## ファイルシステムが使用量制限に達した場合 {#when-a-file-system-reaches-a-usage-limit}
 
