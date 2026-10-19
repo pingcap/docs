@@ -60,7 +60,7 @@ AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になって�
 
 ### ステップ2. AWS で VPC エンドポイントを作成する {#step-2-create-a-vpc-endpoint-in-aws}
 
-エンドポイントサービスの準備ができたら、AWS アカウントで VPC インターフェースエンドポイントを作成します。TiDB Cloud が生成した AWS CLI コマンドを使用することも、AWS Management Console でエンドポイントを手動で作成することもできます。
+エンドポイントサービスの準備ができたら、AWS アカウントで VPC インターフェースエンドポイントを作成します。TiDB Cloud が生成した AWS CLI コマンドを使用することも、AWS マネジメントコンソールでエンドポイントを手動で作成することもできます。
 
 TiDB Cloud で AWS CLI コマンドを生成するには、**Create AWS Private Endpoint Connection** ダイアログで **How to Generate VPC Endpoint ID** を展開し、次の操作を行います。
 
@@ -93,9 +93,9 @@ AWS CLI を使用して VPC エンドポイントを作成するには、次の�
 </div>
 <div label="Use AWS Console">
 
-AWS Management Console を使用して VPC エンドポイントを作成するには、次の手順を実行します。
+AWS マネジメントコンソールを使用して VPC エンドポイントを作成するには、次の手順を実行します。
 
-1. [AWS Management Console](https://aws.amazon.com/console/) にサインインし、[https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/) で Amazon VPC コンソールを開きます。
+1. [AWS マネジメントコンソール](https://aws.amazon.com/console/) にサインインし、[https://console.aws.amazon.com/vpc/](https://console.aws.amazon.com/vpc/) で Amazon VPC コンソールを開きます。
 2. ナビゲーションペインで **Endpoints** をクリックし、右上隅の **Create Endpoint** をクリックします。
 
     **Create endpoint** ページが表示されます。
