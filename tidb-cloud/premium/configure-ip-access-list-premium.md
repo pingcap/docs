@@ -10,7 +10,7 @@ TiDB Cloudの各TiDB Cloud Premium または BYOC インスタンスに対して
 > **Note:**
 >
 > - このドキュメントは**TiDB Cloud Premium**および**BYOC**に適用されます。 **TiDB Cloud Starter**または**TiDB Cloud Essential**の IP アクセス リストを構成する手順については、 [パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)を参照してください。
-> - BYOC の場合、パブリック接続を利用できるのは、BYOC のデプロイ時にパブリック hosted zone を指定した場合のみです。プライベート hosted zone を指定した場合は、プライベート接続を使用してインスタンスに接続してください。
+> - BYOC の場合、パブリック接続を利用できるのは、BYOC のデプロイ時にパブリックホストゾーンを指定した場合のみです。プライベートホストゾーンを指定した場合は、プライベート接続を使用してインスタンスに接続してください。
 
 TiDB Cloud PremiumまたはBYOCインスタンスのIPアクセスリストを設定するには、以下の手順に従ってください。
 

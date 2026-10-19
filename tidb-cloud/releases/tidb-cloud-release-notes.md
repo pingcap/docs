@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 ## 2026年10月15日 {#october-15-2026}
 
-**General changes**
+**一般的な変更**
 
 - **TiDB Cloud Starter**
 
@@ -34,7 +34,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         データプレーンが AWS アカウントと VPC 内で直接実行されるため、組織はクラウド環境をより細かく制御でき、厳格なデータ分離とシームレスなセキュリティ統合を実現できます。同時に、PingCAP がコントロールプレーンを管理します。これにより、プラットフォームを自ら全面的に運用管理する負担を負うことなく、TiDB の分散 SQL 機能、スケーラビリティ、互換性のメリットを得ることができます。
 
-        TiDB Cloud BYOC は AWS アカウントにデプロイされるため、オンボーディングには TiDB Cloud チームとの調整が必要です。BYOC のオンボーディングを開始するには、[Sales にお問い合わせください](https://www.pingcap.com/contact-us/)。
+        TiDB Cloud BYOC は AWS アカウントにデプロイされるため、オンボーディングには TiDB Cloud チームとの調整が必要です。BYOC のオンボーディングを開始するには、[営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)。
 
         詳細については、[TiDB Cloud BYOC ドキュメント](https://docs.pingcap.com/tidbcloud/byoc/?plan=byoc)を参照してください。
 

@@ -31,7 +31,7 @@ TiDB Cloudは、TiDBが提供するフルマネージド型のクラウドデー
 
 はい。PostgreSQL互換のTiDB Cloud Starterは現在パブリックプレビューで利用可能です。
 
-PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL wire protocol（pgwire v3）および一般的なPostgreSQL SQL構文をサポートしています。詳細については、[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md)を参照してください。
+PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL wire protocol（pgwire v3）および一般的なPostgreSQL SQL構文をサポートしています。詳細については、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md)を参照してください。
 
 ### TiDB Cloudを操作するには、どのようなプログラミング言語を使用できますか？ {#what-programming-languages-can-i-use-to-work-with-tidb-cloud}
 

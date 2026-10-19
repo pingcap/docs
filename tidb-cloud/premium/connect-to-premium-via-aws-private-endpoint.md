@@ -45,7 +45,7 @@ AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になって�
 
 複数のインスタンスがある場合は、AWS PrivateLinkを使用して接続したいインスタンスごとに、これらの手順を繰り返す必要があります。
 
-### Step 1. プライベートエンドポイント接続ダイアログを開く {#step-1-open-the-private-endpoint-connection-dialog}
+### ステップ1. プライベートエンドポイント接続ダイアログを開く {#step-1-open-the-private-endpoint-connection-dialog}
 
 1. TiDB Cloud コンソールの [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の {{{ .premium }}} または {{{ .byoc }}} インスタンス名をクリックして、その概要ページに移動します。
 2. 右上隅の **Connect** をクリックします。接続ダイアログが表示されます。
@@ -58,7 +58,7 @@ AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になって�
 > - すでにプライベートエンドポイント接続を作成している場合、アクティブなエンドポイントが接続ダイアログに表示されます。追加のプライベートエンドポイント接続を作成するには、左側のナビゲーションペインで **Settings** > **Networking** をクリックして **Networking** ページに移動します。
 > - 各 {{{ .premium }}} または {{{ .byoc }}} インスタンスについて、対応するエンドポイントサービスはインスタンス作成後 3 ～ 4分で自動的に作成されます。
 
-### Step 2. AWS で VPC endpoint を作成する {#step-2-create-a-vpc-endpoint-in-aws}
+### ステップ2. AWS で VPC endpoint を作成する {#step-2-create-a-vpc-endpoint-in-aws}
 
 endpoint service の準備ができたら、AWS アカウントで VPC interface endpoint を作成します。TiDB Cloud が生成した AWS CLI コマンドを使用することも、AWS Management Console で endpoint を手動で作成することもできます。
 
@@ -124,7 +124,7 @@ AWS Management Console を使用して VPC endpoint を作成するには、次�
 </div>
 </SimpleTab>
 
-### Step 3. TiDB Cloud で VPC endpoint ID を入力する {#step-3-enter-the-vpc-endpoint-id-in-tidb-cloud}
+### ステップ3. TiDB Cloud で VPC endpoint ID を入力する {#step-3-enter-the-vpc-endpoint-id-in-tidb-cloud}
 
 1. TiDB Cloud コンソールに戻ります。
 2. **Create AWS Private Endpoint Connection** ダイアログで、AWS で作成した VPC endpoint ID を **Your VPC Endpoint ID** フィールドに入力します。
@@ -172,7 +172,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 </div>
 </SimpleTab>
 
-### Step 5. {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続する {#step-5-connect-to-your-premium-or-byoc-instance}
+### ステップ5. {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続する {#step-5-connect-to-your-premium-or-byoc-instance}
 
 プライベートエンドポイント接続が作成されると、接続ダイアログにリダイレクトされます。
 

@@ -1,6 +1,6 @@
 ---
-title: Import Data from Amazon S3 into TiDB Cloud Premium
-summary: コンソールウィザードを使用して、Amazon S3からTiDB Cloud PremiumインスタンスにCSVファイルをインポートする方法を学びましょう。
+title: Amazon S3から{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする
+summary: コンソールウィザードを使用して、Amazon S3から{{{ .premium }}}または{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法を学びましょう。
 ---
 
 # Amazon S3から{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする {#import-data-from-amazon-s3-into-tidb-cloud-premium}
@@ -80,5 +80,5 @@ TiDB Cloud Premiumまたは{{{ .byoc }}}がバケットを読み取れるよう�
 
 ## 次のステップ {#next-steps}
 
-- スクリプトによるインポートについては[Import Data into {{{ .premium }}} or {{{ .byoc }}} using the MySQL Command-Line Client](/tidb-cloud/premium/import-with-mysql-cli-premium.md)を参照してください。
+- スクリプトによるインポートについては[MySQLコマンドラインクライアントを使用して{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする](/tidb-cloud/premium/import-with-mysql-cli-premium.md)を参照してください。
 - IAM関連の問題については[Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)を参照してください。

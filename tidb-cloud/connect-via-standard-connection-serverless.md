@@ -47,7 +47,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
     >
     > - 接続タイプを`Public`のままにすると、接続が標準の TLS 接続を介して行われることを意味します。詳細については、 [TiDB Cloud StarterまたはEssentialへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を参照してください。
     > - PostgreSQL互換の{{{ .starter }}}は現在、パブリックエンドポイントのみをサポートしています。プライベートエンドポイントはサポートされていません。
-    > - MySQL互換の{{{ .starter }}}および{{{ .essential }}}インスタンスでは、**Connection Type**ドロップダウンリストで**Private Endpoint**を選択することもできます。詳細については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します。](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+    > - MySQL互換の{{{ .starter }}}および{{{ .essential }}}インスタンスでは、**Connection Type**ドロップダウンリストで**Private Endpoint**を選択することもできます。詳細については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
     </CustomContent>
 

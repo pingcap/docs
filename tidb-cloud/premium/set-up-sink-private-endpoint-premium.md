@@ -93,7 +93,7 @@ AWS では、ダウンストリームサービスに応じて接続タイプを�
 
 1. **Networking**ページで、**AWS Private Endpoints for External Services**セクションの**Create Private Endpoint for External Services**をクリックします。
 2. 表示されたダイアログで、プライベートエンドポイントの名前を入力します。
-3. リマインダーに従って、エンドポイントを作成するためのTiDB Cloudの[AWS Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)を認可します。
+3. リマインダーに従って、エンドポイントを作成するためのTiDB Cloudの[AWSプリンシパル](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts)を認可します。
 4. [ネットワーク](#network)セクションで収集した**Endpoint Service Name**を入力し、接続タイプとして**AWS Endpoint Service**を選択します。
 5. **Number of AZs**を選択してください。AZの数とAZ IDが、Kafkaのデプロイメントと一致していることを確認してください。
 6. このプライベートエンドポイントがApache Kafka用に作成された場合は、**Configure Advertised Listener for Kafka**チェックボックスを選択します。

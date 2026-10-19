@@ -3,7 +3,7 @@ title: "{{{ .premium }}} または {{{ .byoc }}} のデータベース監査ロ�
 summary: "{{{ .premium }}} または {{{ .byoc }}} インスタンスでデータベース監査ログを有効にし、監査フィルターとクラウドストレージを設定する方法を学びましょう。"
 ---
 
-# {{{ .premium }}} or {{{ .byoc }}} Database Audit Logging
+# {{{ .premium }}} または {{{ .byoc }}} のデータベース監査ログ
 
 TiDB Cloud は、実行された SQL ステートメントなど、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 
@@ -47,7 +47,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 #### ステップ2. Amazon S3へのアクセスを設定する {#step-2-configure-amazon-s3-access}
 
-1. 監査ログを有効にする {{{ .premium }}} または {{{ .byoc }}} インスタンスの TiDB Cloud Account ID と External ID を取得します。
+1. 監査ログを有効にする {{{ .premium }}} または {{{ .byoc }}} インスタンスの TiDB CloudアカウントIDと外部IDを取得します。
 
     1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 

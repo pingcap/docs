@@ -7,7 +7,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 ユーザー制御のログ秘匿化により、<CustomContent plan="dedicated">[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>のログ内の機密データの可視性を管理できます。この秘匿化機能を切り替えることで、情報を保護し、運用上のニーズとセキュリティのバランスを取り、<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>のログに表示される内容を制御できます。
 
-ログのマスキングはデフォルトで有効になっており、実行ログや実行計画内の機密情報が隠蔽されます。<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の管理や SQL チューニングのために、より詳細なログ情報が必要な場合は、この機能をいつでも無効にできます。
+ログのマスキングはデフォルトで有効になっており、実行ログや実行計画内の機密情報が隠蔽されます。<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>のメンテナンスや SQL チューニングのために、より詳細なログ情報が必要な場合は、この機能をいつでも無効にできます。
 
 > **Note:**
 >
@@ -32,7 +32,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 > **Warning:**
 >
-> ログの秘匿化を無効にすると、機密情報が公開され、データ漏洩のリスクが高まる可能性があります。続行する前に、このリスクを理解し、認識していることを確認してください。診断または管理タスクが完了したら、できるだけ早く再度有効にしてください。
+> ログの秘匿化を無効にすると、機密情報が公開され、データ漏洩のリスクが高まる可能性があります。続行する前に、このリスクを理解し、認識していることを確認してください。診断またはメンテナンス作業が完了したら、できるだけ早く再度有効にしてください。
 
 ログの秘匿化を無効にするには、次の手順を実行します。
 
@@ -70,7 +70,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 
 ## ログの秘匿化を有効にする {#enable-log-redaction}
 
-データセキュリティを維持するため、診断または管理タスクが完了したら、次のように**ログの秘匿化を有効に**してください。
+データセキュリティを維持するため、診断またはメンテナンス作業が完了したら、次のように**ログの秘匿化を有効に**してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 2. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の名前をクリックして、その概要ページに移動します。

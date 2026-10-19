@@ -80,11 +80,11 @@ TiDB Cloud Starter は、MySQL互換インスタンスと PostgreSQL互換イン
 
 MySQL互換 {{{ .starter }}} インスタンスが使用量クォータに達すると、[クォータを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで、新しい接続試行は直ちにすべて拒否されます。クォータに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。
 
-さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク送信を含む）の RU 消費量、価格の詳細、スロットリング情報の詳細については、[{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
+さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク送信を含む）の RU 消費量、価格の詳細、スロットリング情報の詳細については、[TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
 追加のクォータを持つ {{{ .starter }}} インスタンスを作成する場合は、{{{ .starter }}} インスタンス作成ページで月間支出制限を設定できます。詳細については、[{{{ .starter }}} インスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
 
-{{{ .starter }}} インスタンスを作成した後でも、{{{ .starter }}} インスタンスの概要ページで支出制限を確認および編集できます。詳細については、[{{{ .starter }}} インスタンスの支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)を参照してください.
+{{{ .starter }}} インスタンスを作成した後でも、{{{ .starter }}} インスタンスの概要ページで支出制限を確認および編集できます。詳細については、[{{{ .starter }}} インスタンスの支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)を参照してください。
 
 ### PostgreSQL互換 Starter（パブリックプレビュー） {#postgresql-compatible-starter-public-preview}
 
