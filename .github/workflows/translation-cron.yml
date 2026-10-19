@@ -44,7 +44,8 @@ env:
     {
       "tidb-cloud-log-redaction.md": [
         "TOC-tidb-cloud.md",
-        "TOC-tidb-cloud-premium.md"
+        "TOC-tidb-cloud-premium.md",
+        "TOC-tidb-cloud-byoc.md"
       ]
     }
   INDEX_FILES: _index.md,ai/_index.md,api/_index.md,best-practices/_index.md,develop/_index.md,releases/_index.md,tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/byoc/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md,tidb-cloud-lake/_index.md,tidb-cloud-filesystem/_index.md
