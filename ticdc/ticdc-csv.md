@@ -114,7 +114,7 @@ ticdc-meta$operation,ticdc-meta$table,ticdc-meta$schema,ticdc-meta$commit-ts,tic
 | `NULL`                                                | Null     | `\N`                          | -                                      |
 | `TIMESTAMP`/`DATETIME`                                  | String   | `"1973-12-30 15:30:00.123456"` | Format: `yyyy-MM-dd HH:mm:ss.%06d`         |
 | `DATE`                                                | String   | `"2000-01-01"`                 | Format: `yyyy-MM-dd`                       |
-| `TIME`                                                | String   | `"23:59:59"`                   | Format: `yyyy-MM-dd`                         |
+| `TIME`                                                | String   | `"23:59:59"`                   | Format: `HH:mm:ss`                           |
 | `YEAR`                                                | Integer  | `1970`                         |  -                                     |
 | `VARCHAR`/`JSON`/`TINYTEXT`/`MEDIUMTEXT`/`LONGTEXT`/`TEXT`/`CHAR` | String   | `"test"`                       | UTF-8 encoded                       |
 | `VARBINARY`/`TINYBLOB`/`MEDIUMBLOB`/`LONGBLOB`/`BLOB`/`BINARY`  | String   | `"6Zi/5pav"` or `"e998bfe696af"`                  | Base64 or hex encoded                      |
