@@ -19,7 +19,7 @@ aliases: ['/tidb/stable/dev-guide-third-party-tools-compatibility/','/tidb/dev/d
 >
 > The preceding unsupported features are expected behavior and are not listed in this document. For more details, see [MySQL Compatibility](/mysql-compatibility.md).
 
-The incompatibility issues listed in this document are found in some [third-party tools supported by TiDB](/develop/dev-guide-third-party-tools-compatibility.md).
+The incompatibility issues listed in this document are found in some [third-party tools supported by TiDB](/develop/dev-guide-third-party-support.md).
 
 ## General incompatibility
 
