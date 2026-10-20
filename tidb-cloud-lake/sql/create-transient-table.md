@@ -7,7 +7,7 @@ summary: Time Travel 用の履歴データを保存しないテーブルを作�
 
 Time Travel 用の履歴データを保存しないテーブルを作成します。
 
-Transient table は、データ保護やリカバリの仕組みを必要としない一時的なデータを保持するために使用されます。Dataebend は transient table の履歴データを保持しないため、Time Travel 機能を使用して transient table の以前のバージョンをクエリすることはできません。たとえば、SELECT 文の [AT](/tidb-cloud-lake/sql/at.md) 句は transient table では機能しません。なお、transient table は引き続き [drop](/tidb-cloud-lake/sql/drop-table.md) および [undrop](/tidb-cloud-lake/sql/undrop-table.md) できます。
+Transient table は、データ保護やリカバリの仕組みを必要としない一時的なデータを保持するために使用されます。Dataebend は transient table の履歴データを保持しないため、Time Travel 機能を使用して transient table の以前のバージョンをクエリできません。たとえば、SELECT 文の [AT](/tidb-cloud-lake/sql/at.md) 句は transient table では機能しません。なお、transient table は引き続き [drop](/tidb-cloud-lake/sql/drop-table.md) および [undrop](/tidb-cloud-lake/sql/undrop-table.md) できます。
 
 > **Note:**
 >

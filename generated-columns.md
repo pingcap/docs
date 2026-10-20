@@ -19,7 +19,7 @@ summary: 生成列の使用方法を学習します。
 
 生成列の主な用途の 1つは、JSON データ型からデータを抽出し、そのデータにインデックスを付けることです。
 
-MySQL 8.0とTiDBの両方において、JSON型の列を直接インデックスすることはできません。つまり、以下のテーブルスキーマは**サポートされていません**。
+MySQL 8.0とTiDBの両方において、JSON型の列を直接インデックスできません。つまり、以下のテーブルスキーマは**サポートされていません**。
 
 ```sql
 CREATE TABLE person (
@@ -137,9 +137,9 @@ desc select a+1 from t where a+1=3;
 
 JSON と生成列の現在の制限は次のとおりです。
 
-- 保存生成列を`ALTER TABLE`経由で追加することはできません。
-- `ALTER TABLE`文を使用して、保存生成列を通常の列に変換したり、通常の列を保存生成列に変換したりすることはできません。
-- 保存生成列の式を`ALTER TABLE`文を通じて変更することはできません。
+- 保存生成列を`ALTER TABLE`経由で追加できません。
+- `ALTER TABLE`文を使用して、保存生成列を通常の列に変換したり、通常の列を保存生成列に変換したりできません。
+- 保存生成列の式を`ALTER TABLE`文を通じて変更できません。
 - [JSON関数](/functions-and-operators/json-functions.md)すべてがサポートされているわけではありません。
 - [`NULLIF()`関数](/functions-and-operators/control-flow-functions.md#nullif)はサポートされていません。代わりに[`CASE`関数](/functions-and-operators/control-flow-functions.md#case)を使用してください。
 - 現在、生成列インデックスの置換ルールは、生成列が仮想生成列である場合にのみ有効です。保存生成列には適用されませんが、生成列自体を直接使用することでインデックスを使用することは可能です。

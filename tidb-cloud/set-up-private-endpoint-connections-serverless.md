@@ -60,7 +60,7 @@ TiDB Cloudプランに応じて、適切なプライベートエンドポイン�
 
     > **Note:**
     >
-    > AWSリージョン内の各VPCにつき、作成する必要があるプライベートエンドポイントは1つだけです。このエンドポイントは、同じAWSリージョン内の同じVPCにあるすべてのTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスで使用できますが、VPC間で共有することはできません。
+    > AWSリージョン内の各VPCにつき、作成する必要があるプライベートエンドポイントは1つだけです。このエンドポイントは、同じAWSリージョン内の同じVPCにあるすべてのTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスで使用できますが、VPC間で共有できません。
 
 ### ステップ2. AWSインターフェースエンドポイントを作成する {#step-2-create-an-aws-interface-endpoint}
 

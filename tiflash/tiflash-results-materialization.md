@@ -14,7 +14,7 @@ TiDB v6.5.0以降、 TiFlashクエリ結果をテーブルに保存すること�
 > デフォルト（ [`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50) ）では、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。
 >
 > - 現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合（つまり、 `sql_mode`の値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれていない場合）、オプティマイザはTiFlashレプリカのコスト見積もりに基づいて、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定します。このモードでは、オプティマイザのコスト見積もりを無視し、クエリをTiFlashにプッシュダウンすることを強制するには、 [`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)システム変数を`ON`に設定できます。
-> - 現在のセッションの[SQLモード](/sql-mode.md)が厳密な場合 (つまり、 `sql_mode`の値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`のいずれかが含まれている場合)、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンすることはできません。
+> - 現在のセッションの[SQLモード](/sql-mode.md)が厳密な場合 (つまり、 `sql_mode`の値に`STRICT_TRANS_TABLES`または`STRICT_ALL_TABLES`のいずれかが含まれている場合)、 `INSERT INTO SELECT`の`SELECT`サブクエリをTiFlashにプッシュダウンできません。
 
 `INSERT INTO SELECT`の構文は次のとおりです。
 

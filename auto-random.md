@@ -182,7 +182,7 @@ ALTER TABLE t AUTO_RANDOM_BASE=0;
 
 > **Note:**
 >
-> `FORCE`キーワードを使用して`AUTO_RANDOM_BASE`を`0`に設定することはできません。これを試みるとエラーが発生します。
+> `FORCE`キーワードを使用して`AUTO_RANDOM_BASE`を`0`に設定できません。これを試みるとエラーが発生します。
 
 ### オプション2: 特定の基本値を手動で設定する {#option-2-manually-set-a-specific-base-value}
 
@@ -206,9 +206,9 @@ ALTER TABLE t FORCE AUTO_RANDOM_BASE = 1000;
 
 - 明示的に値を挿入するには、システム変数`@@allow_auto_random_explicit_insert`の値を`1` （デフォルトは`0` ）に設定する必要があります。データを挿入する際に、属性`AUTO_RANDOM`持つ列に明示的に値を指定することは推奨さ**れません**。そうしないと、このテーブルに自動的に割り当てられる数値が事前に使い果たされてしまう可能性があります。
 - この属性は、主キー列に**のみ**`BIGINT`型で指定してください。それ以外の場合はエラーが発生します。また、主キーの属性が`NONCLUSTERED`の場合、整数型の主キーであっても`AUTO_RANDOM`がサポートされません。`CLUSTERED`型の主キーの詳細については、 [クラスター化インデックス](/clustered-indexes.md)を参照してください。
-- `ALTER TABLE`を使用して`AUTO_RANDOM`属性を変更することはできません (この属性の追加や削除を含む)。
-- 最大値が列タイプの最大値に近い場合は、 `ALTER TABLE`を使用して`AUTO_INCREMENT`から`AUTO_RANDOM`に変更することはできません。
-- `AUTO_RANDOM`属性で指定された主キー列の列タイプを変更することはできません。
-- 同じ列に同時に`AUTO_RANDOM`と`AUTO_INCREMENT`を指定することはできません。
-- 同じ列に`AUTO_RANDOM`と`DEFAULT` (列のデフォルト値) を同時に指定することはできません。
+- `ALTER TABLE`を使用して`AUTO_RANDOM`属性を変更できません (この属性の追加や削除を含む)。
+- 最大値が列タイプの最大値に近い場合は、 `ALTER TABLE`を使用して`AUTO_INCREMENT`から`AUTO_RANDOM`に変更できません。
+- `AUTO_RANDOM`属性で指定された主キー列の列タイプを変更できません。
+- 同じ列に同時に`AUTO_RANDOM`と`AUTO_INCREMENT`を指定できません。
+- 同じ列に`AUTO_RANDOM`と`DEFAULT` (列のデフォルト値) を同時に指定できません。
 - 列に`AUTO_RANDOM`が使用されている場合、自動生成される値が非常に大きくなる可能性があるため、列属性を`AUTO_INCREMENT`に戻すのは困難です。

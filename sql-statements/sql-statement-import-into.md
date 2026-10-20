@@ -119,7 +119,7 @@ OptionItem ::=
 
 > **Note:**
 >
-> ターゲットクラスターで[SEM](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、 `fileLocation`をローカルファイルパスとして指定することはできません。
+> ターゲットクラスターで[SEM](/system-variables.md#tidb_enable_enhanced_security)が有効になっている場合、 `fileLocation`をローカルファイルパスとして指定できません。
 
 `fileLocation`パラメータでは、単一のファイルを指定するか、 `*`および`[]`ワイルドカードを使用して、インポートする複数のファイルに一致させることができます。ワイルドカードはファイル名にのみ使用できることに注意してください。ディレクトリには一致せず、サブディレクトリ内のファイルも再帰的に一致しません。Amazon S3 に保存されているファイルを例にとると、パラメータは次のように設定できます。
 
@@ -163,7 +163,7 @@ OptionItem ::=
 
 > **Note:**
 >
-> TiDB Cloud Premium では、 `DISK_QUOTA` 、 `THREAD` 、 `MAX_WRITE_SPEED` 、および`CLOUD_STORAGE_URI`の4つのオプションは、適切な値に自動的に調整されるため、ユーザーが変更することはできません。これらの設定を調整する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> TiDB Cloud Premium では、 `DISK_QUOTA` 、 `THREAD` 、 `MAX_WRITE_SPEED` 、および`CLOUD_STORAGE_URI`の4つのオプションは、適切な値に自動的に調整されるため、ユーザーが変更できません。これらの設定を調整する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 </CustomContent>
 
@@ -176,7 +176,7 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、
     - DXF が有効になっている場合 ( [tidb_enable_dist_task](/system-variables.md#tidb_enable_dist_task-new-in-v710)が`ON`の場合)、 `IMPORT INTO`はデータインポートジョブを複数のサブジョブに分割し、これらのサブジョブを異なる TiDB ノードに分散して実行することで、インポート効率を向上させます。
     - DXF が無効になっている場合、 `IMPORT INTO ... FROM FILE`は、現在のユーザーが接続している TiDB ノードでの実行のみをサポートします。
 
-- TiDBにローカルに保存されているデータファイルについては、 `IMPORT INTO ... FROM FILE`は、現在ユーザーが接続しているTiDBノードでのみ実行がサポートされます。そのため、データファイルは現在ユーザーが接続しているTiDBノードに配置する必要があります。プロキシまたはロードバランサー経由でTiDBにアクセスする場合、TiDBにローカルに保存されているデータファイルをインポートすることはできません。
+- TiDBにローカルに保存されているデータファイルについては、 `IMPORT INTO ... FROM FILE`は、現在ユーザーが接続しているTiDBノードでのみ実行がサポートされます。そのため、データファイルは現在ユーザーが接続しているTiDBノードに配置する必要があります。プロキシまたはロードバランサー経由でTiDBにアクセスする場合、TiDBにローカルに保存されているデータファイルをインポートできません。
 
 ### 圧縮ファイル {#compressed-files}
 

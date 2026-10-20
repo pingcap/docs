@@ -45,7 +45,7 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
 
 > **Note:**
 >
-> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 、または[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)Cloud Marketplace を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、Google Cloud アカウント、または Alibaba Cloud アカウントを通じて直接支払うことはできますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 、または[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)Cloud Marketplace を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、Google Cloud アカウント、または Alibaba Cloud アカウントを通じて直接支払うことはできますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
 
 </CustomContent>
 
@@ -53,7 +53,7 @@ TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウ�
 
 > **Note:**
 >
-> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudにサインアップした場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudにサインアップした場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
 
 </CustomContent>
 
@@ -184,7 +184,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 >
 > PoCプロセス中：
 >
-> - お支払い方法を追加する前にすべてのクレジットが期限切れになった場合、新しいTiDB Cloud Dedicatedクラスターを作成することはできません。3日後には、既存のすべてのTiDB Cloud Dedicatedクラスターがリサイクルされます。7日後には、すべてのバックアップがリサイクルされます。処理を再開するには、お支払い方法を追加してください。
+> - お支払い方法を追加する前にすべてのクレジットが期限切れになった場合、新しいTiDB Cloud Dedicatedクラスターを作成できません。3日後には、既存のすべてのTiDB Cloud Dedicatedクラスターがリサイクルされます。7日後には、すべてのバックアップがリサイクルされます。処理を再開するには、お支払い方法を追加してください。
 > - 支払い方法を追加した後にすべてのクレジットが期限切れになった場合でも、PoCプロセスは続行され、手数料は支払い方法から差し引かれます。
 
 ## 割引 {#discounts}
@@ -211,7 +211,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 
 > **Note:**
 >
-> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 、または[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)Cloud Marketplace を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、Google Cloud アカウント、または Alibaba Cloud アカウントを通じて直接支払うことはできますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、 [Google Cloud Marketplace](https://console.cloud.google.com/marketplace) 、または[アリババクラウドマーケットプレイス](https://marketplace.alibabacloud.com/)Cloud Marketplace を通じてTiDB Cloudにサインアップした場合、AWS アカウント、Azure アカウント、Google Cloud アカウント、または Alibaba Cloud アカウントを通じて直接支払うことはできますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
 
 </CustomContent>
 
@@ -219,7 +219,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 
 > **Note:**
 >
-> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudにサインアップした場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudにサインアップした場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
 
 </CustomContent>
 

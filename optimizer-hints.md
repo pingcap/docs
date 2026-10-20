@@ -579,7 +579,7 @@ SHOW WARNINGS;
 
 > **Note:**
 >
-> クエリ文に外部結合が含まれている場合、ヒントには結合順序を入れ替え可能なテーブルのみを指定できます。ヒントに結合順序を入れ替えられないテーブルが含まれている場合、ヒントは無効になります。例えば、 `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`で`t2` `t3` `t4`テーブルの結合順序を制御したい場合、 `LEADING`のヒントに`t1`を指定することはできません。
+> クエリ文に外部結合が含まれている場合、ヒントには結合順序を入れ替え可能なテーブルのみを指定できます。ヒントに結合順序を入れ替えられないテーブルが含まれている場合、ヒントは無効になります。例えば、 `SELECT * FROM t1 LEFT JOIN (t2 JOIN t3 JOIN t4) ON t1.a = t2.a;`で`t2` `t3` `t4`テーブルの結合順序を制御したい場合、 `LEADING`のヒントに`t1`を指定できません。
 
 ### MERGE() {#merge}
 
@@ -1005,7 +1005,7 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id AND SUBST
 
 #### `INL_JOIN` 、 `INL_HASH_JOIN` 、および`INL_MERGE_JOIN`ヒントは、照合順序の非互換性のため有効になりません。 {#inl_join-inl_hash_join-and-inl_merge_join-hints-do-not-take-effect-due-to-collation-incompatibility}
 
-2つのテーブル間で結合キーの照合順序に互換性がない場合、 `IndexJoin`オペレーターを使用してクエリを実行することはできません。この場合、 [`INL_JOIN`](#inl_joint1_name--tl_name-) 、 [`INL_HASH_JOIN`](#inl_hash_join) 、 [`INL_MERGE_JOIN`](#inl_merge_join)ヒントは効果がありません。例:
+2つのテーブル間で結合キーの照合順序に互換性がない場合、 `IndexJoin`オペレーターを使用してクエリを実行できません。この場合、 [`INL_JOIN`](#inl_joint1_name--tl_name-) 、 [`INL_HASH_JOIN`](#inl_hash_join) 、 [`INL_MERGE_JOIN`](#inl_merge_join)ヒントは効果がありません。例:
 
 ```sql
 CREATE TABLE t1 (k varchar(8), key(k)) COLLATE=utf8mb4_general_ci;

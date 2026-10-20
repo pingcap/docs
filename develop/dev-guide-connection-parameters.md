@@ -190,7 +190,7 @@ TiDBは両方の方法をサポートしていますが、実装がよりシン�
 
 ### MySQL JDBC パラメータ {#mysql-jdbc-parameters}
 
-JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提供します。このセクションでは、 [MySQL Connector/Jのパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) （MariaDBを使用する場合は[MariaDBのパラメータ設定](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#optional-url-parameters)参照）について説明します。このドキュメントではすべての設定項目を網羅することはできないため、主にパフォーマンスに影響を与える可能性のあるいくつかのパラメータに焦点を当てます。
+JDBCは通常、JDBC URLパラメータの形式で実装関連の設定を提供します。このセクションでは、 [MySQL Connector/Jのパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html) （MariaDBを使用する場合は[MariaDBのパラメータ設定](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#optional-url-parameters)参照）について説明します。このドキュメントではすべての設定項目を網羅できないため、主にパフォーマンスに影響を与える可能性のあるいくつかのパラメータに焦点を当てます。
 
 #### 準備関連パラメータ {#prepare-related-parameters}
 

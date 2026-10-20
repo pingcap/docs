@@ -36,7 +36,7 @@ ADMIN ALTER DDL JOBS 101 THREAD = 8;
 
 > **Note:**
 >
-> TiDB Cloud Premiumでは、 `THREAD`と`MAX_WRITE_SPEED`は自動的に適切な値に調整されるため、ユーザーが変更することはできません。これらの設定を調整する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> TiDB Cloud Premiumでは、 `THREAD`と`MAX_WRITE_SPEED`は自動的に適切な値に調整されるため、ユーザーが変更できません。これらの設定を調整する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 </CustomContent>
 

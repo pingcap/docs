@@ -87,4 +87,4 @@ SQL プロキシアカウントのロールは、 TiDB CloudユーザーのIAM�
 
 ## SQL プロキシアカウント アクセス制御 {#sql-proxy-account-access-control}
 
-SQLプロキシアカウントはJWTトークンベースであり、Data ServiceとSQLエディタからのみアクセスできます。ユーザー名とパスワードを使用してSQLプロキシアカウントを使用してTiDB Cloudクラスターにアクセスすることはできません。
+SQLプロキシアカウントはJWTトークンベースであり、Data ServiceとSQLエディタからのみアクセスできます。ユーザー名とパスワードを使用してSQLプロキシアカウントを使用してTiDB Cloudクラスターにアクセスできません。

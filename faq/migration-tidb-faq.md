@@ -156,7 +156,7 @@ Google Cloud Spanner には[同様の制限](https://cloud.google.com/spanner/do
 
 ### データをロードするときに、ターゲットテーブルで DDL 操作を実行できますか? {#can-i-execute-ddl-operations-on-the-target-table-when-loading-data}
 
-いいえ。データをロードするときに、ターゲットテーブルで DDL 操作を実行することはできません。そうしないと、データのロードに失敗します。
+いいえ。データをロードするときに、ターゲットテーブルで DDL 操作を実行できません。そうしないと、データのロードに失敗します。
 
 ### TiDB は`replace into`構文をサポートしていますか? {#does-tidb-support-the-replace-into-syntax}
 

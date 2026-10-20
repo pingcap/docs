@@ -208,7 +208,7 @@ FROM users
 WHERE active = true;
 ```
 
-`CREATE OR REPLACE VIEW` ではカラムを追加できますが、既存のビューのカラムを削除したり名前変更したりすることはできません。
+`CREATE OR REPLACE VIEW` ではカラムを追加できますが、既存のビューのカラムを削除したり名前変更したりできません。
 
 マテリアライズドビューを作成して更新します。
 

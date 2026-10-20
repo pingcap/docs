@@ -92,7 +92,7 @@ MySQL Connector/J の照合順序はクライアント側に保存され、サ�
 
 **説明**
 
-TiDBでは、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラメータを使用することはできません。詳細については、 [問題](https://github.com/pingcap/tidb/issues/35302)を参照してください。
+TiDBでは、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラメータを使用できません。詳細については、 [問題](https://github.com/pingcap/tidb/issues/35302)を参照してください。
 
 **回避方法**
 
@@ -202,7 +202,7 @@ TiDB がサポートする分離レベル`REPEATABLE-READ`または`READ-COMMITT
 
 **説明**
 
-デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`コマンドを使用して列の`AUTO_INCREMENT`の属性を追加または削除することはできません。
+デフォルトでは、 `ALTER TABLE MODIFY`または`ALTER TABLE CHANGE`コマンドを使用して列の`AUTO_INCREMENT`の属性を追加または削除できません。
 
 **回避方法**
 

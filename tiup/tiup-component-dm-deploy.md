@@ -13,7 +13,7 @@ summary: "`tiup dm deploy`コマンドは、新しいクラスタをデプロイ
 tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 ```
 
-- `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにすることはできません。
+- `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにできません。
 - `<version>` : デプロイする DM クラスターのバージョン番号 (例: `v2.0.0` )。
 - `<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md) 。
 

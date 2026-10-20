@@ -280,7 +280,7 @@ MySQL [test]> select @@last_plan_from_cache; -- The cached plan cannot be select
 1 row in set (0.00 sec)
 ```
 
-現在、TiDBは`GLOBAL`実行プランキャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされた実行プランをクリアすることはできません。`GLOBAL`実行プランキャッシュをクリアしようとすると、以下のエラーが報告されます。
+現在、TiDBは`GLOBAL`実行プランキャッシュのクリアをサポートしていません。つまり、TiDBクラスタ全体のキャッシュされた実行プランをクリアできません。`GLOBAL`実行プランキャッシュをクリアしようとすると、以下のエラーが報告されます。
 
 ```sql
 MySQL [test]> admin flush global plan_cache;

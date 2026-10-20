@@ -58,10 +58,10 @@ MySQL [test]> select * from tbl;
 
 - `schema` : 一致させる上流スキーマの名前。ワイルドカード一致や通常の一致はサポートされていません。
 - `table` : 照合するアップストリームテーブルの名前。ワイルドカードによる照合や通常の照合はサポートされていません。
-- `insert-value-expr` : `INSERT`種類のbinlogイベント (WRITE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は、同じ設定項目内で`update-old-value-expr` 、 `update-new-value-expr` 、または`delete-value-expr`と同時に使用することはできません。
-- `update-old-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって保持される古い値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用することはできません。
-- `update-new-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって送信される新しい値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用することはできません。
-- `delete-value-expr` : `DELETE`種類のbinlogイベント (DELETE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は`insert-value-expr` 、 `update-old-value-expr` 、または`update-new-value-expr`と同時に使用することはできません。
+- `insert-value-expr` : `INSERT`種類のbinlogイベント (WRITE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は、同じ設定項目内で`update-old-value-expr` 、 `update-new-value-expr` 、または`delete-value-expr`と同時に使用できません。
+- `update-old-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって保持される古い値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用できません。
+- `update-new-value-expr` : `UPDATE`種類のbinlogイベント（UPDATE_ROWS_EVENT）によって送信される新しい値に適用される式を設定します。この式は、同じ設定項目内で`insert-value-expr`または`delete-value-expr`と同時に使用できません。
+- `delete-value-expr` : `DELETE`種類のbinlogイベント (DELETE_ROWS_EVENT) によって伝達される値に適用される式を設定します。この式は`insert-value-expr` 、 `update-old-value-expr` 、または`update-new-value-expr`と同時に使用できません。
 
 > **Note:**
 >

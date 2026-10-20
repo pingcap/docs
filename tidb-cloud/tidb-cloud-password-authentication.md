@@ -12,7 +12,7 @@ summary: TiDB Cloudコンソールでパスワードを管理し、多要素認�
 電子メールとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)するか、 TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択できます。
 
 - メールアドレスとパスワードを使用してTiDB Cloudにサインアップすると、このドキュメントに従ってパスワードを管理できます。
-- TiDB Cloudへの Google、GitHub、または Microsoft SSO を選択した場合、パスワードは選択したプラットフォームによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+- TiDB Cloudへの Google、GitHub、または Microsoft SSO を選択した場合、パスワードは選択したプラットフォームによって管理され、 TiDB Cloudコンソールを使用して変更できません。
 
 電子メールとパスワードを使用してTiDB Cloudアカウントにサインアップするには、次の手順を実行します。
 
@@ -58,7 +58,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 
 > **Note:**
 >
-> このセクションは、メールアドレスとパスワードを使用したTiDB Cloudの登録にのみ適用されます。Google SSOまたはGitHub SSOを使用してTiDB Cloudにサインアップした場合、パスワードはGoogleまたはGitHubによって管理され、 TiDB Cloudコンソールを使用して変更することはできません。
+> このセクションは、メールアドレスとパスワードを使用したTiDB Cloudの登録にのみ適用されます。Google SSOまたはGitHub SSOを使用してTiDB Cloudにサインアップした場合、パスワードはGoogleまたはGitHubによって管理され、 TiDB Cloudコンソールを使用して変更できません。
 
 パスワードを忘れた場合は、次の手順に従って電子メールでリセットできます。
 

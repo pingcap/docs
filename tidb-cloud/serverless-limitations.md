@@ -27,7 +27,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 > **Note:**
 >
-> [AWS Global Acceleratorの制限](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)のため、AWS のパブリックエンドポイント接続のアイドルタイムアウトは 340秒です。同じ理由から、TCP キープアライブパケットを使用して接続を維持することはできません。
+> [AWS Global Acceleratorの制限](https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html#about-idle-timeout)のため、AWS のパブリックエンドポイント接続のアイドルタイムアウトは 340秒です。同じ理由から、TCP キープアライブパケットを使用して接続を維持できません。
 
 ### 暗号化 {#encryption}
 
@@ -46,7 +46,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### セルフサービスアップグレード {#self-service-upgrades}
 
-- TiDB Cloud StarterとTiDB Cloud Essentialは、TiDBのフルマネージドデプロイメントです。TiDB Cloud StarterとTiDB Cloud EssentialのメジャーバージョンとマイナーバージョンのアップグレードはTiDB Cloudによって処理されるため、ユーザーが開始することはできません。
+- TiDB Cloud StarterとTiDB Cloud Essentialは、TiDBのフルマネージドデプロイメントです。TiDB Cloud StarterとTiDB Cloud EssentialのメジャーバージョンとマイナーバージョンのアップグレードはTiDB Cloudによって処理されるため、ユーザーが開始できません。
 
 ### ストリームデータ {#stream-data}
 
@@ -59,7 +59,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### その他 {#others}
 
-- トランザクションは30分以上継続することはできません。
+- トランザクションは30分以上継続できません。
 - SQL の制限の詳細については、 [制限されたSQL機能](/tidb-cloud/limited-sql-features.md)を参照してください。
 
 ## 使用量クォータ {#usage-quota}

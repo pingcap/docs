@@ -47,7 +47,7 @@ Amazon S3 に保存されるのは 1 コピーだけで、3 つのレプリカ�
 
 変換が停止している原因として、TiKV のローリング再起動、一時的なリソース不足、短時間のオブジェクトストレージ利用不可などのシステム例外が考えられます。停止しているケースと正常進行中のケースは、`DURATION` と `COMPLETED_REPLICAS` をあわせて確認することで見分けられます。両方が増え続けている場合、変換は正常に進行しており、単にデータ量が大きいだけです。
 
-停止した変換を自分で解消することはできません。[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡してください。問題が解決すると、追加の操作を行わなくても変換は継続されます。
+停止した変換を自分で解消できません。[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡してください。問題が解決すると、追加の操作を行わなくても変換は継続されます。
 
 ## 前回の変換が完了する前に、逆方向の `ALTER TABLE` を実行するとどうなりますか？ {#what-happens-if-i-run-the-reverse-alter-table-before-the-previous-conversion-finishes}
 
