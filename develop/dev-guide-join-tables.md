@@ -252,7 +252,7 @@ WHERE b.id = ba.book_id AND ba.author_id = a.id;
 
 ## 参照 {#see-also}
 
-- [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
+- [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
 - [結合順序の並べ替えの概要](/join-reorder.md)
 
 ## ヘルプが必要ですか? {#need-help}
