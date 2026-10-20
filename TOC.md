@@ -155,7 +155,7 @@
     - [BRベースのDR](/dr-backup-restore.md)
   - リソースマネージャー
     - [リソース制御を使用して、リソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)
-    - [暴走クエリの管理](/tidb-resource-control-runaway-queries.md)
+    - [ランナウェイクエリの管理](/tidb-resource-control-runaway-queries.md)
     - [バックグラウンドタスクの管理](/tidb-resource-control-background-tasks.md)
   - [タイムゾーンを設定する](/configure-time-zone.md)
   - [毎日のチェックリスト](/daily-check.md)
