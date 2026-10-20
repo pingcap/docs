@@ -1,9 +1,9 @@
 ---
 title: Introduction to Join Reorder
-summary: 結合したテーブルの再配置アルゴリズムを使用して、TiDB 内の複数のテーブルを結合します。
+summary: 結合順序の並べ替えアルゴリズムを使用して、TiDB 内の複数のテーブルを結合します。
 ---
 
-# 結合したテーブルの再配置の概要 {#introduction-to-join-reorder}
+# 結合順序の並べ替えの概要 {#introduction-to-join-reorder}
 
 実際のアプリケーションシナリオでは、複数のテーブルを結合することが一般的です。結合の実行効率は、各テーブルの結合順序に左右されます。
 
@@ -20,12 +20,12 @@ SELECT * FROM t1, t2, t3 WHERE t1.a=t2.a AND t3.a=t2.a;
 
 t1 と t3 のデータ量と分布は異なるため、これら2つの実行順序では異なるパフォーマンスが現れる場合があります。
 
-したがって、オプティマイザは結合順序を決定するアルゴリズムを必要とします。現在、TiDBでは以下の2つの結合したテーブルの再配置アルゴリズムが使用されています。
+したがって、オプティマイザは結合順序を決定するアルゴリズムを必要とします。現在、TiDBでは以下の2つの結合順序の並べ替えアルゴリズムが使用されています。
 
 - 貪欲アルゴリズム：結合に含まれるすべてのノードの中で、TiDBは行数が最も少ないテーブルを選択し、他の各テーブルとの結合結果をそれぞれ推定します。そして、結合結果が最小となるペアを選択します。その後、TiDBは同様のプロセスを繰り返し、次のラウンドに向けて他のノードを選択して結合します。このプロセスは、すべてのノードが結合を完了するまで続きます。
 - 動的計画法アルゴリズム: 結合に含まれるすべてのノード間で、TiDB は可能なすべての結合順序を列挙し、最適な結合順序を選択します。
 
-## 例: 結合したテーブルの再配置の貪欲アルゴリズム {#example-the-greedy-algorithm-of-join-reorder}
+## 例: 結合順序の並べ替えの貪欲アルゴリズム {#example-the-greedy-algorithm-of-join-reorder}
 
 前述の3つのテーブル (t1、t2、t3) を例に挙げます。
 
@@ -43,7 +43,7 @@ t1 と t3 のデータ量と分布は異なるため、これら2つの実行順
 
 ![join-reorder-3](/media/join-reorder-3.png)
 
-## 例: 結合したテーブルの再配置の動的計画法アルゴリズム {#example-the-dynamic-programming-algorithm-of-join-reorder}
+## 例: 結合順序の並べ替えの動的計画法アルゴリズム {#example-the-dynamic-programming-algorithm-of-join-reorder}
 
 前述の3つのテーブル（t1、t2、t3）を例に挙げると、動的計画法アルゴリズムはすべての可能性を列挙できます。したがって、 `t1`テーブル（行数が最も少ないテーブル）から開始する必要がある貪欲アルゴリズムと比較すると、動的計画法アルゴリズムは次のように結合順序を列挙できます。
 
@@ -53,16 +53,16 @@ t1 と t3 のデータ量と分布は異なるため、これら2つの実行順
 
 すべての可能性が列挙されるため、動的プログラミングアルゴリズムはより多くの時間を消費し、統計の影響を受けやすくなります。
 
-## 結合したテーブルの再配置アルゴリズムの選択 {#selection-of-the-join-reorder-algorithms}
+## 結合順序の並べ替えアルゴリズムの選択 {#selection-of-the-join-reorder-algorithms}
 
-TiDBの結合したテーブルの再配置アルゴリズムの選択は、変数[`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)によって制御されます。結合したテーブルの再配置に参加するノードの数がこのしきい値を超える場合、TiDBは貪欲アルゴリズムを使用します。それ以外の場合は、TiDBは動的計画法アルゴリズムを使用します。
+TiDBの結合順序の並べ替えアルゴリズムの選択は、変数[`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)によって制御されます。結合順序の並べ替えに参加するノードの数がこのしきい値を超える場合、TiDBは貪欲アルゴリズムを使用します。それ以外の場合は、TiDBは動的計画法アルゴリズムを使用します。
 
-## 結合したテーブルの再配置アルゴリズムの制限 {#limitations-of-join-reorder-algorithms}
+## 結合順序の並べ替えアルゴリズムの制限 {#limitations-of-join-reorder-algorithms}
 
-現在の結合したテーブルの再配置アルゴリズムには次の制限があります。
+現在の結合順序の並べ替えアルゴリズムには次の制限があります。
 
 - 結果セットの計算方法によって制限されるため、アルゴリズムでは最適な結合順序を確実に選択することはできません。
-- 結合したテーブルの再配置アルゴリズムの外部結合のサポートは、 [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)システム変数によって制御されます。
-- 現在、動的計画法アルゴリズムでは、外部結合の結合したテーブルの再配置を実行できません。
+- 結合順序の並べ替えアルゴリズムの外部結合のサポートは、 [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)システム変数によって制御されます。
+- 現在、動的計画法アルゴリズムでは、外部結合の結合順序の並べ替えを実行できません。
 
 現在、TiDBでは結合順序を強制する`STRAIGHT_JOIN`構文がサポートされています。詳細については[構文要素の説明](/sql-statements/sql-statement-select.md#description-of-the-syntax-elements)を参照してください。

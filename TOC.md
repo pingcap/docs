@@ -279,7 +279,7 @@
         - [Predicate Push Down](/predicate-push-down.md)
         - [パーティションプルーニング](/partition-pruning.md)
         - [トップNとリミットプッシュダウン](/topn-limit-push-down.md)
-        - [結合したテーブルの再配置](/join-reorder.md)
+        - [結合順序の並べ替え](/join-reorder.md)
         - [ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)
       - 物理的最適化
         - [概要](/sql-physical-optimization.md)
