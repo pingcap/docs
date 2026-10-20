@@ -17,7 +17,7 @@ Linux では、TiDB Cloud Filesystem は FUSE を使用して、ローカルデ�
 
 - [TiDB Cloud CLI (`ti`) をインストールする](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli)。
 - ファイルシステムとそのトークンを `ti` から利用できるようにします。詳細は [既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
-- `fuse3` パッケージをインストールできる Linux ホストを使用します。コンテナの場合は、代わりに [Docker and Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md) に従ってください。
+- `fuse3` パッケージをインストールできる Linux ホストを使用します。コンテナの場合は、代わりに [Docker と Docker Compose](/tidb-cloud-filesystem/filesystem-mount-docker.md) に従ってください。
 
 マウントと、それにアクセスするアプリケーションは、同じ OS ユーザーとして実行してください。
 
@@ -189,9 +189,9 @@ drain が成功すると、マウントを維持したまま保留中の書き�
 
 AppArmor などの追加のセキュリティ制御があるシステムでは、ディレクトリ権限が正しく見えていても、オペレーティングシステムがマウントを拒否することがあります。
 
-追加のマウントエラーについては、[TiDB Cloud Filesystem をトラブルシュートする](/tidb-cloud-filesystem/filesystem-troubleshooting.md) を参照してください。
+追加のマウントエラーについては、[TiDB Cloud Filesystem のトラブルシューティング](/tidb-cloud-filesystem/filesystem-troubleshooting.md) を参照してください。
 
-## Ubuntu 26.04 の mount-path 制限 {#ubuntu-2604-mount-path-restrictions}
+## Ubuntu 26.04 のマウントパス制限 {#ubuntu-2604-mount-path-restrictions}
 
 Ubuntu 26.04 では、`fusermount3` の AppArmor プロファイルにより、一部のパスで FUSE マウントができないことがあります。特に、`/workspace` のようなトップレベルディレクトリでは、ファイル権限が正しく見えていても `Permission denied` で失敗する場合があります。
 
@@ -220,4 +220,4 @@ AppArmor が失敗の原因かどうかを確認する方法については、[U
 
 - 読み取り専用マウント、レイヤーまたはチェックポイントのマウント、およびその他の一般的なマウントオプションについては、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
 - レイヤーまたはチェックポイントをマウントして操作する方法については、[ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md) を参照してください。
-- 別のユーザーまたは環境にファイルシステムへのアクセスを提供する方法については、[複数のマシン間でファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md) を参照してください。
+- 別のユーザーまたは環境にファイルシステムへのアクセスを提供する方法については、[マシン間でファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md) を参照してください。

@@ -17,7 +17,7 @@ TiDB Cloud Filesystem は、アプリケーション、自動化、AI エージ�
 
 ワークフローが 1 つのサンドボックスプラットフォーム内で完結する場合は、そのプラットフォームのスナップショット、一時停止と再開機能、または永続ボリュームで十分なことがあります。同じ作業ディレクトリに別のプラットフォーム、マシン、エージェント、レビュアー、または CI ジョブからアクセスする必要がある場合は、TiDB Cloud Filesystem を検討してください。
 
-例については、[Automation and AI Agent Workflows](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md) を参照してください。
+例については、[自動化と AI エージェントのワークフロー](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md) を参照してください。
 
 ## ファイルの変更は他の環境ですぐに利用可能になりますか？ {#are-file-changes-immediately-available-to-other-environments}
 
@@ -31,7 +31,7 @@ FUSE マウントの場合は、アプリケーションによる書き込みを
 
 現在の一覧については、[サポートされるリージョン](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions) を参照してください。ファイルシステムの提供状況は、TiDB Cloud Starter の提供状況とは異なります。
 
-CLI を使用してファイルシステムを作成する場合は、`ti configure` でサポートされているリージョンを選択するか、コマンドに対して `--region` を使用して設定済みのデフォルトを上書きします。作成手順については、[Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md) を参照してください。
+CLI を使用してファイルシステムを作成する場合は、`ti configure` でサポートされているリージョンを選択するか、コマンドに対して `--region` を使用して設定済みのデフォルトを上書きします。作成手順については、[TiDB Cloud Filesystem を使い始める](/tidb-cloud-filesystem/filesystem-quick-start.md) を参照してください。
 
 ## ノートパソコンでファイルシステムをマウントできますか？ {#can-i-mount-a-file-system-on-my-laptop}
 
@@ -61,15 +61,15 @@ SDK の API キーとしてファイルシステムトークンを使用し、�
 
 `ti fs search-file-content` コマンドは、全文検索用のテキストクエリを受け付け、埋め込みが利用可能な場合はセマンティック検索も行えます。その `--pattern` の値は、正規表現でも glob でもありません。名前、タイプ、タグ、サイズ、更新時刻でパスを検索するには、`ti fs find-files` を使用してください。
 
-設定については、[ファイルシステムの AI プロバイダーを設定する](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) を参照してください。検索例については、[Work with Files and Directories](/tidb-cloud-filesystem/work-with-filesystem-data.md) を参照してください。
+設定については、[ファイルシステムの AI プロバイダーを設定する](/tidb-cloud-filesystem/configure-filesystem-ai-providers.md) を参照してください。検索例については、[ファイルとディレクトリを操作する](/tidb-cloud-filesystem/work-with-filesystem-data.md) を参照してください。
 
 ## パブリックプレビューではチェックポイントとロールバックをサポートしていますか？ {#does-the-public-preview-support-checkpoints-and-rollback}
 
 はい。レイヤーを使用すると、レイヤーをコミットするまで共有ベースファイルシステムを変更せずにファイルを変更できます。`ti fs create-layer-checkpoint` を使用して、レイヤー履歴内の時点を保存します。`ti fs rollback-layer` を使用して、未コミットの変更を破棄します。
 
-ロールバックでは、以前のチェックポイントは復元されません。チェックポイントから作業を続けるには、それを新しい書き込み可能なレイヤーに fork してください。チェックポイントはレイヤー履歴を保持しますが、ベースファイルシステム全体を固定するものではなく、バックアップの代わりにもなりません。複雑なレイヤー履歴には、パブリックプレビュー中に追加の制限があります。詳細は、[境界と制限事項](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md#boundaries-and-limitations) を参照してください。
+ロールバックでは、以前のチェックポイントは復元されません。チェックポイントから作業を続けるには、それを新しい書き込み可能なレイヤーにフォークしてください。チェックポイントはレイヤー履歴を保持しますが、ベースファイルシステム全体を固定するものではなく、バックアップの代わりにもなりません。複雑なレイヤー履歴には、パブリックプレビュー中に追加の制限があります。詳細は、[境界と制限事項](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md#boundaries-and-limitations) を参照してください。
 
-概念と制限事項については、[Layers and Checkpoints](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を参照してください。コマンドについては、[ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md) を参照してください。
+概念と制限事項については、[レイヤーとチェックポイント](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を参照してください。コマンドについては、[ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md) を参照してください。
 
 ## パブリックプレビュー期間中にサービスレベル契約（SLA）は利用できますか？ {#is-a-service-level-agreement-sla-available-during-public-preview}
 

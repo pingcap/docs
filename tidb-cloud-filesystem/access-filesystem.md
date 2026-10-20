@@ -12,7 +12,7 @@ TiDB Cloud Filesystem では、ローカルに保存されたトークン、ま�
 
 ## 前提条件 {#prerequisites}
 
-開始する前に、[TiDB Cloud CLI をインストール](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli)し、ファイルシステムにアクセスできることを確認してください。オーナートークンとスコープ付きトークン、およびそれらの権限については、[Authorization](/tidb-cloud-filesystem/filesystem-authorization.md) を参照してください。
+開始する前に、[TiDB Cloud CLI をインストール](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli)し、ファイルシステムにアクセスできることを確認してください。オーナートークンとスコープ付きトークン、およびそれらの権限については、[認可](/tidb-cloud-filesystem/filesystem-authorization.md) を参照してください。
 
 ## 同じマシンでファイルシステムを引き続き使用する {#continue-using-a-file-system-on-the-same-machine}
 
@@ -145,7 +145,7 @@ CLI は、選択したファイルシステム用に保存されているトー�
 2. `TI_FS_TOKEN`
 3. 選択したファイルシステム用にローカルに保存されたトークン
 
-ファイルシステムと認証情報の選択ルールの完全な説明については、[TiDB Cloud CLI Configuration and Credentials](/ai/ti/reference/ti-configuration-and-credentials.md#file-system-credentials-and-remote-inventory) を参照してください。
+ファイルシステムと認証情報の選択ルールの完全な説明については、[TiDB Cloud CLI の設定と認証情報](/ai/ti/reference/ti-configuration-and-credentials.md#file-system-credentials-and-remote-inventory) を参照してください。
 
 ## 次のステップ {#what-s-next}
 

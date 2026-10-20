@@ -8,7 +8,7 @@ aliases: ['/ja/ai/mount-filesystem']
 
 TiDB Cloud Filesystem では、エディタ、アプリケーション、エージェント、またはその他のツールでローカルファイルパスが必要な場合に、ファイルシステムをローカルディレクトリとしてマウントできます。マウントすると、これらのツールはローカルのファイル操作を使ってリモートファイルを読み書きできます。
 
-CLI のみでアクセスする場合は、マウントせずに [`ti fs` commands](/tidb-cloud-filesystem/work-with-filesystem-data.md) を使用して、ファイルの読み取り、コピー、整理、検索を行ってください。
+CLI のみでアクセスする場合は、マウントせずに [`ti fs` コマンド](/tidb-cloud-filesystem/work-with-filesystem-data.md) を使用して、ファイルの読み取り、コピー、整理、検索を行ってください。
 
 > **Note:**
 >
@@ -67,7 +67,7 @@ FUSE マウント経由の書き込みを防ぐには、`--driver fuse --read-on
 
 ### 作業が終わったらアンマウントする {#unmount-when-you-are-finished}
 
-アプリケーションがマウントされたディレクトリへ書き込むのを停止し、開いているファイルを閉じてから、プラットフォーム別ガイドに従って `ti fs unmount-file-system` を実行してください。通常の FUSE アンマウントでは、マウントを停止する前に保留中の書き込みが排出されます。マシンまたはそのローカルキャッシュを削除する前に、必要なファイルを直接 CLI で読み取って確認してください。アンマウントするとローカルマウントは削除されますが、ファイルシステムやそのデータは削除されません。
+アプリケーションがマウントされたディレクトリへ書き込むのを停止し、開いているファイルを閉じてから、プラットフォーム別ガイドに従って `ti fs unmount-file-system` を実行してください。通常の FUSE アンマウントでは、マウントを停止する前に保留中の書き込みがフラッシュされます。マシンまたはそのローカルキャッシュを削除する前に、必要なファイルを直接 CLI で読み取って確認してください。アンマウントするとローカルマウントは削除されますが、ファイルシステムやそのデータは削除されません。
 
 ### FUSE の書き込み動作 {#fuse-write-behavior}
 
@@ -89,4 +89,4 @@ WebDAV マウントは `drain-file-system` をサポートしていません。
 - [macOS でファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount-macos.md)
 - [Docker でファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount-docker.md)
 
-すべてのマウントオプションについては、[`mount-file-system` command reference](/ai/ti/reference/ti-fs-mount-file-system.md) を参照してください。
+すべてのマウントオプションについては、[`mount-file-system` コマンドリファレンス](/ai/ti/reference/ti-fs-mount-file-system.md) を参照してください。

@@ -8,25 +8,25 @@ aliases: ['/ja/ai/manage-filesystem-tokens']
 
 TiDB Cloud Filesystem では、TiDB Cloud API 認証情報を共有せずに、ファイルシステムトークンを使用してユーザー、アプリケーション、自動化にファイルシステムへのアクセスを付与できます。
 
-- [owner token](/tidb-cloud-filesystem/filesystem-authorization.md#owner-tokens) は、ファイルシステムへのフルアクセスを付与します。
-- [scoped token](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-tokens) は、特定のパスと操作にアクセスを制限します。
+- [オーナートークン](/tidb-cloud-filesystem/filesystem-authorization.md#owner-tokens) は、ファイルシステムへのフルアクセスを付与します。
+- [スコープ付きトークン](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-tokens) は、特定のパスと操作にアクセスを制限します。
 
 ## 前提条件 {#prerequisites}
 
 開始する前に、以下を確認してください。
 
-- TiDB Cloud Filesystem 内の既存のファイルシステムにアクセスできること。まだ持っていない場合は、[コンソールによるクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start-console.md) または [CLI によるクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start.md) に従って作成してください。
+- TiDB Cloud Filesystem 内の既存のファイルシステムにアクセスできること。まだ持っていない場合は、[コンソールでのクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start-console.md) または [CLI でのクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start.md) に従って作成してください。
 - CLI 操作の場合は、[TiDB Cloud CLI をインストール](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli) してください。
 
-CLI でトークンを一覧表示、有効化、無効化、または削除するには、`TI_FS_TOKEN` または `--fs-token` を通じて owner token を指定するか、明示的な `--file-system-id` とともに TiDB Cloud API 認証情報を使用します。これらの操作では、ローカルに保存されたトークンは自動的には使用されません。scoped token の生成では、ローカルに保存された owner token を使用できます。追加要件がある場合は、以下の各セクションで説明します。
+CLI でトークンを一覧表示、有効化、無効化、または削除するには、`TI_FS_TOKEN` または `--fs-token` を通じてオーナートークンを指定するか、明示的な `--file-system-id` とともに TiDB Cloud API 認証情報を使用します。これらの操作では、ローカルに保存されたトークンは自動的には使用されません。スコープ付きトークンの生成では、ローカルに保存されたオーナートークンを使用できます。追加要件がある場合は、以下の各セクションで説明します。
 
 > **Note:**
 >
-> ファイルシステムトークンは安全に保管してください。トークンを作成または更新すると、その平文は一度だけ返され、後から取得することはできません。
+> ファイルシステムトークンは安全に保管してください。トークンを作成または更新すると、その平文は一度だけ返され、後から取得できません。
 
 ## 既存のトークンをインポートする {#import-an-existing-token}
 
-TiDB Cloud コンソールでファイルシステムを作成したときに表示されるデフォルトの owner token を含め、すでにファイルシステムトークンを持っている場合は、その平文を安全なファイルに保存し、ローカルの CLI 認証情報ストアにインポートします。
+TiDB Cloud コンソールでファイルシステムを作成したときに表示されるデフォルトのオーナートークンを含め、すでにファイルシステムトークンを持っている場合は、その平文を安全なファイルに保存し、ローカルの CLI 認証情報ストアにインポートします。
 
 ```shell
 ti fs import-file-system-token --from-file ./fs-token --region "<file-system-region>"
@@ -34,27 +34,27 @@ ti fs import-file-system-token --from-file ./fs-token --region "<file-system-reg
 
 CLI はトークンを検証し、そこからファイルシステム ID を抽出し、接続性を確認して、トークンをローカルに保存します。トークンがまだ `TI_FS_TOKEN` から利用可能であれば、インポートしなくても CLI コマンドで使用できます。
 
-## owner token を生成する {#generate-an-owner-token}
+## オーナートークンを生成する {#generate-an-owner-token}
 
-TiDB Cloud コンソールでは、ファイルシステム作成時に owner token が提供されます。追加の owner token を生成するには、CLI を使用します。
+TiDB Cloud コンソールでは、ファイルシステム作成時にオーナートークンが提供されます。追加のオーナートークンを生成するには、CLI を使用します。
 
 <SimpleTab groupId="console-cli">
 
 <div label="Console" value="console">
 
-TiDB Cloud コンソールは、ファイルシステム作成時にデフォルトの owner token を作成します。その平文は **Your File System is Ready!** ダイアログにのみ表示されます。
+TiDB Cloud コンソールは、ファイルシステム作成時にデフォルトのオーナートークンを作成します。その平文は **Your File System is Ready!** ダイアログにのみ表示されます。
 
-追加の owner token が必要な場合は、**CLI** タブを使用してください。
+追加のオーナートークンが必要な場合は、**CLI** タブを使用してください。
 
 </div>
 
 <div label="CLI" value="cli">
 
-CLI でファイルシステムを作成すると、期限切れにならない owner token が返され、ローカルに保存され、以後のコマンドで使用されます。
+CLI でファイルシステムを作成すると、期限切れにならないオーナートークンが返され、ローカルに保存され、以後のコマンドで使用されます。
 
-別の信頼できる環境にフルアクセスが必要な場合は、追加の owner token を生成します。
+別の信頼できる環境にフルアクセスが必要な場合は、追加のオーナートークンを生成します。
 
-追加の owner token を生成するには、TiDB Cloud API 認証情報を設定し、ファイルシステム ID を取得します。
+追加のオーナートークンを生成するには、TiDB Cloud API 認証情報を設定し、ファイルシステム ID を取得します。
 
 トークンを生成し、一度だけ返される平文レスポンスを安全に保存します。
 
@@ -76,9 +76,9 @@ CLI は、生成したトークンをデフォルトではローカルに保存�
 
 </SimpleTab>
 
-## scoped token を生成して委任する {#generate-and-delegate-a-scoped-token}
+## スコープ付きトークンを生成して委任する {#generate-and-delegate-a-scoped-token}
 
-TiDB Cloud コンソールまたは TiDB Cloud CLI を使用して scoped token を生成し、それを別のユーザー、アプリケーション、またはエージェントに渡すことができます。
+TiDB Cloud コンソールまたは TiDB Cloud CLI を使用してスコープ付きトークンを生成し、それを別のユーザー、アプリケーション、またはエージェントに渡すことができます。
 
 <SimpleTab groupId="console-cli">
 
@@ -94,7 +94,7 @@ TiDB Cloud コンソールまたは TiDB Cloud CLI を使用して scoped token 
     - **Token name**: トークン名を入力します。
     - **Access path (optional)**: トークンのアクセスを特定のディレクトリに制限するためのアクセスパスを指定します。パスを空のままにすると、トークンは `/` に適用されます。
     - **Expiration**: トークンの有効期限を選択します。デフォルトは 1 時間です。
-    - **Permission**: トークンに必要な操作のみを選択します。詳細は [Authorization](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-tokens) を参照してください。
+    - **Permission**: トークンに必要な操作のみを選択します。詳細は [認可](/tidb-cloud-filesystem/filesystem-authorization.md#scoped-tokens) を参照してください。
 
 5. **Create** をクリックします。
 6. 表示されたダイアログで、**Done** をクリックする前にトークンをコピーして安全に保管します。平文は一度しか表示されません。
@@ -105,9 +105,9 @@ TiDB Cloud コンソールまたは TiDB Cloud CLI を使用して scoped token 
 
 <div label="CLI" value="cli">
 
-信頼できるマシン上で、owner token を使用して scoped token を生成します。owner token は `--fs-token` または `TI_FS_TOKEN` で指定するか、選択したファイルシステム用にローカルに保存された owner token を使用します。
+信頼できるマシン上で、オーナートークンを使用してスコープ付きトークンを生成します。オーナートークンは `--fs-token` または `TI_FS_TOKEN` で指定するか、選択したファイルシステム用にローカルに保存されたオーナートークンを使用します。
 
-この例を使用する前に、リモートの `/workspace` ディレクトリが存在しない場合は作成してください。ローカルに保存された owner token を使用して、エージェントにそのディレクトリ内のファイルの読み取り、一覧表示、書き込み権限を付与します。
+この例を使用する前に、リモートの `/workspace` ディレクトリが存在しない場合は作成してください。ローカルに保存されたオーナートークンを使用して、エージェントにそのディレクトリ内のファイルの読み取り、一覧表示、書き込み権限を付与します。
 
 ```shell
 SCOPED_TOKEN="$(ti fs generate-file-system-scoped-token \
@@ -118,7 +118,7 @@ SCOPED_TOKEN="$(ti fs generate-file-system-scoped-token \
   --query fs_token --output text)"
 ```
 
-シークレットマネージャーを通じてトークンを転送します。受信側の環境では、scoped token とファイルシステムのリージョンを指定します。
+シークレットマネージャーを通じてトークンを転送します。受信側の環境では、スコープ付きトークンとファイルシステムのリージョンを指定します。
 
 ```shell
 export TI_FS_TOKEN="<scoped-token>"
@@ -131,7 +131,7 @@ ti fs list-files --path /workspace
 
 このトークンでディレクトリをマウントするには、`--remote-path /workspace` を指定します。`/workspace` に制限されたトークンでは、ファイルシステムルート `/` をマウントできません。
 
-scoped 権限と認証情報の選択の詳細については、[Authorization](/tidb-cloud-filesystem/filesystem-authorization.md) を参照してください。
+スコープ付き権限と認証情報の選択の詳細については、[認可](/tidb-cloud-filesystem/filesystem-authorization.md) を参照してください。
 
 </div>
 
@@ -158,7 +158,7 @@ TiDB Cloud コンソールまたは TiDB Cloud CLI を使用して、トーク�
 
 <div label="CLI" value="cli">
 
-owner token のみを使用する環境では、以下のコマンドを実行する前に、`TI_FS_TOKEN` に owner token を、`TI_REGION_CODE` にファイルシステムのリージョンを設定します。管理用認証情報は、受信者に渡す scoped token とは分離して管理してください。scoped token では他のトークンを管理できません。
+オーナートークンのみを使用する環境では、以下のコマンドを実行する前に、`TI_FS_TOKEN` にオーナートークンを、`TI_REGION_CODE` にファイルシステムのリージョンを設定します。管理用認証情報は、受信者に渡すスコープ付きトークンとは分離して管理してください。スコープ付きトークンでは他のトークンを管理できません。
 
 ファイルシステムトークンのシークレットではないメタデータを一覧表示します。
 
@@ -168,11 +168,11 @@ ti fs list-file-system-tokens \
   --output text
 ```
 
-出力にはトークンの平文は含まれません。owner token を失った場合は、TiDB Cloud API 認証情報を使用して置き換えを生成してください。トークンを一覧表示しても元のトークンを復元することはできません。
+出力にはトークンの平文は含まれません。オーナートークンを失った場合は、TiDB Cloud API 認証情報を使用して置き換えを生成してください。トークンを一覧表示しても元のトークンを復元できません。
 
 [`disable-file-system-token`](/ai/ti/reference/ti-fs-disable-file-system-token.md) を使用してトークンを一時停止し、[`enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) を使用して復元します。これらはコンソールの **Deactivate** と **Activate** に対応します。
 
-owner token 認証では、これら 2 つのコマンドで変更できるのは scoped token のみです。owner token を有効化または無効化するには、TiDB Cloud API 認証情報を使用し、`--file-system-id` を指定し、`TI_FS_TOKEN` が API 認証情報を上書きしないように unset してください。そのリクエストでは `--fs-token` を指定しないでください。変更が反映されるまで約 10 秒待ってからアクセスを確認してください。
+オーナートークン認証では、これら 2 つのコマンドで変更できるのはスコープ付きトークンのみです。オーナートークンを有効化または無効化するには、TiDB Cloud API 認証情報を使用し、`--file-system-id` を指定し、`TI_FS_TOKEN` が API 認証情報を上書きしないように unset してください。そのリクエストでは `--fs-token` を指定しないでください。変更が反映されるまで約 10 秒待ってからアクセスを確認してください。
 
 </div>
 
@@ -188,7 +188,7 @@ owner token 認証では、これら 2 つのコマンドで変更できるの�
 
 TiDB Cloud コンソールでスコープ付きトークンを置き換えるには、必要なパス、権限、有効期限を指定して[新しいトークンを作成](#generate-and-delegate-a-scoped-token)します。古いトークンを廃止する前に、新しいトークンを配布して検証してください。次に、対象ファイルシステムの **Access Tokens** ページに移動し、古いトークンの行を見つけて **...** をクリックし、**Delete** を選択します。
 
-owner トークンを置き換えるには、TiDB Cloud コンソールで古いトークンを削除する前に、[CLI でもう 1 つ owner トークンを生成](#generate-an-owner-token)してください。
+オーナートークンを置き換えるには、TiDB Cloud コンソールで古いトークンを削除する前に、[CLI でもう 1 つオーナートークンを生成](#generate-an-owner-token)してください。
 
 </div>
 
@@ -200,7 +200,7 @@ owner トークンを置き換えるには、TiDB Cloud コンソールで古い
 
 > **Note:**
 >
-> 更新リクエストがタイムアウトした場合、サービス側ではトークンがローテーションされていても、新しい値が返されていない可能性があります。古いトークンで再試行しないでください。TiDB Cloud API 認証情報を使用して、新しい owner トークンを生成してください。
+> 更新リクエストがタイムアウトした場合、サービス側ではトークンがローテーションされていても、新しい値が返されていない可能性があります。古いトークンで再試行しないでください。TiDB Cloud API 認証情報を使用して、新しいオーナートークンを生成してください。
 
 トークンを廃止する前に、その置き換え用トークンを配布して検証してください。次に、トークン ID を指定して古いトークンを失効します。
 
@@ -212,7 +212,7 @@ ti fs delete-file-system-token \
 
 削除されたトークンがローカルに保存されているトークンと一致する場合、CLI はローカル認証情報を自動的に削除します。トークンの変更が認可キャッシュ全体に反映されるまでには時間がかかることがあります。
 
-owner トークンを無効化または失効しても、そこから生成されたスコープ付きトークンは自動的には失効されません。必要に応じて、それらのスコープ付きトークンも個別に確認して失効してください。
+オーナートークンを無効化または失効しても、そこから生成されたスコープ付きトークンは自動的には失効されません。必要に応じて、それらのスコープ付きトークンも個別に確認して失効してください。
 
 </div>
 
@@ -221,5 +221,5 @@ owner トークンを無効化または失効しても、そこから生成さ�
 ## 次のステップ {#what-s-next}
 
 - [ファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md)
-- [自動化と AI エージェントのワークフローを確認する](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
+- [自動化と AI エージェントのワークフローを探る](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md)
 - [TiDB Cloud Filesystem CLI コマンドリファレンス](/ai/ti/reference/ti-filesystem.md)

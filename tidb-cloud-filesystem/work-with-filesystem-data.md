@@ -6,13 +6,13 @@ aliases: ['/ja/ai/work-with-filesystem-data']
 
 # TiDB Cloud Filesystem でファイルとディレクトリを操作する
 
-TiDB Cloud Filesystem では、[TiDB Cloud console](https://tidbcloud.com/) でファイルおよびディレクトリのメタデータを参照したり、TiDB Cloud CLI (`ti`) を使用して、ファイルシステムをマウントせずにファイルのアップロード、ダウンロード、読み取り、整理、検索を行ったりできます。すべてのコマンドとオプションについては、[`ti fs` リファレンス](/ai/ti/reference/ti-filesystem.md)を参照してください。
+TiDB Cloud Filesystem では、[TiDB Cloud コンソール](https://tidbcloud.com/) でファイルおよびディレクトリのメタデータを参照したり、TiDB Cloud CLI (`ti`) を使用して、ファイルシステムをマウントせずにファイルのアップロード、ダウンロード、読み取り、整理、検索を行ったりできます。すべてのコマンドとオプションについては、[`ti fs` リファレンス](/ai/ti/reference/ti-filesystem.md)を参照してください。
 
-ファイルシステムをマシンに[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md)すると、ローカルファイルシステムと同じようにファイルやディレクトリを操作できます。
+ファイルシステムをマシンに[マウントする](/tidb-cloud-filesystem/filesystem-mount.md)と、ローカルファイルシステムと同じようにファイルやディレクトリを操作できます。
 
 ## 前提条件 {#prerequisites}
 
-以下の前提条件は CLI 操作に適用されます。TiDB Cloud console でファイルメタデータを参照するだけでよい場合は、[ファイルを表示する](#view-files)を参照してください。
+以下の前提条件は CLI 操作に適用されます。TiDB Cloud コンソールでファイルメタデータを参照するだけでよい場合は、[ファイルを表示する](#view-files)を参照してください。
 
 - [TiDB Cloud CLI をインストールする](/tidb-cloud-filesystem/filesystem-quick-start.md#step-1-install-tidb-cloud-cli)。
 - [ファイルシステムを作成する](/tidb-cloud-filesystem/manage-filesystem-resources.md)か、既存のファイルシステムへのアクセス権を取得します。
@@ -20,17 +20,17 @@ TiDB Cloud Filesystem では、[TiDB Cloud console](https://tidbcloud.com/) で�
 
 ## ファイルを表示する {#view-files}
 
-TiDB Cloud console または TiDB Cloud CLI を使用して、ファイルやディレクトリを参照し、そのメタデータを表示できます。
+TiDB Cloud コンソールまたは TiDB Cloud CLI を使用して、ファイルやディレクトリを参照し、そのメタデータを表示できます。
 
 <SimpleTab groupId="console-cli">
 
 <div label="Console" value="console">
 
-1. [TiDB Cloud console](https://tidbcloud.com/) で組織の [**File Systems**](https://tidbcloud.com/filesystems) ページに移動し、クラウドプロバイダーとリージョンを選択してから、対象のファイルシステム名をクリックします。
+1. [TiDB Cloud コンソール](https://tidbcloud.com/) で組織の [**File Systems**](https://tidbcloud.com/filesystems) ページに移動し、クラウドプロバイダーとリージョンを選択してから、対象のファイルシステム名をクリックします。
 2. 左側のナビゲーションペインで **Files** をクリックします。このページには、ディレクトリとファイルが、そのタイプ、サイズ、更新時刻とともに一覧表示されます。
 3. ディレクトリを展開して内容を参照したり、**Search** を使用して表示中のファイルツリーを絞り込んだり、ファイル名をクリックしてそのメタデータを表示したりできます。
 
-console にはファイルメタデータが表示されます。ファイル内容を読み取ったり、ファイルやディレクトリを変更したりするには、CLI コマンドを使用するか、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md)してください。
+コンソールにはファイルメタデータが表示されます。ファイル内容を読み取ったり、ファイルやディレクトリを変更したりするには、CLI コマンドを使用するか、[ファイルシステムをマウント](/tidb-cloud-filesystem/filesystem-mount.md)してください。
 
 </div>
 
@@ -171,5 +171,5 @@ ti fs find-files \
 
 - [ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md): ローカルディレクトリと既存のローカルツールを通じてファイルシステムデータを操作します。
 - [ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md): 分離された変更を作成して確認し、ベースファイルシステムに適用する前に検証します。
-- [複数のマシン間でファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md): 別のマシンまたは環境にファイルシステムへのアクセス権を付与します。
+- [マシン間でファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md): 別のマシンまたは環境にファイルシステムへのアクセス権を付与します。
 - [TiDB Cloud Filesystem CLI コマンドリファレンス](/ai/ti/reference/ti-filesystem.md): 完全なコマンド構文とオプションを確認します。

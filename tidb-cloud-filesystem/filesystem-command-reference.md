@@ -25,7 +25,7 @@ TiDB Cloud CLI (`ti`) は、TiDB Cloud Filesystem を操作するためのコマ
 
 実行したい操作に応じて、コマンドグループを選択してください。
 
-- ファイルシステムの作成と管理、およびファイルシステムデータの操作には [`ti fs` commands](/ai/ti/reference/ti-filesystem.md) を使用します。
-- ファイルシステム上の Git リポジトリおよび worktree の操作には [`ti fs-git` commands](/ai/ti/reference/ti-filesystem-git.md) を使用します。
-- ファイルシステムジャーナルの管理には [`ti fs-journal` commands](/ai/ti/reference/ti-filesystem-journal.md) を使用します。
-- ファイルシステムの Vault シークレットの管理には [`ti fs-vault` commands](/ai/ti/reference/ti-filesystem-vault.md) を使用します。
+- ファイルシステムの作成と管理、およびファイルシステムデータの操作には [`ti fs` コマンド](/ai/ti/reference/ti-filesystem.md) を使用します。
+- ファイルシステム上の Git リポジトリおよび worktree の操作には [`ti fs-git` コマンド](/ai/ti/reference/ti-filesystem-git.md) を使用します。
+- ファイルシステムジャーナルの管理には [`ti fs-journal` コマンド](/ai/ti/reference/ti-filesystem-journal.md) を使用します。
+- ファイルシステムの Vault シークレットの管理には [`ti fs-vault` コマンド](/ai/ti/reference/ti-filesystem-vault.md) を使用します。

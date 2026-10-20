@@ -30,7 +30,7 @@ summary: 1 つの Filesystem を作成し、2 台目のマシンから安全に�
 - マシン A に `jq` がインストールされていること。
 - 安全なシークレット転送チャネルがあること。
 
-## Step 1. マシン A で Filesystem を作成する {#step-1-create-the-filesystem-on-machine-a}
+## ステップ 1. マシン A で Filesystem を作成する {#step-1-create-the-filesystem-on-machine-a}
 
 ```bash
 umask 077
@@ -50,7 +50,7 @@ printf 'from machine A\n' | ti fs copy-file \
 
 `machine-b-token.json` の `fs_token` はシークレットマネージャーを通じて転送し、正規のリージョンコードを伝えてください。コントロールプレーン操作のために `FILE_SYSTEM_ID` はマシン A に保持し、トークンを安全に保管した後は両方の JSON ファイルを削除してください。
 
-## Step 2. マシン B をメモリ内で設定する {#step-2-configure-machine-b-in-memory}
+## ステップ 2. マシン B をメモリ内で設定する {#step-2-configure-machine-b-in-memory}
 
 ```bash
 export TI_FS_TOKEN="<owner-token-from-secret-manager>"
@@ -59,14 +59,14 @@ export TI_REGION_CODE="<filesystem-region-code>"
 
 `TI_REGION_CODE` には、Filesystem を作成したリージョンを設定します。`ti configure` は不要です。
 
-## Step 3. マシン B で直接可視性を確認する {#step-3-verify-direct-visibility-on-machine-b}
+## ステップ 3. マシン B で直接可視性を確認する {#step-3-verify-direct-visibility-on-machine-b}
 
 ```bash
 ti fs read-file --path /shared/origin.txt
 printf 'from machine B\n' | ti fs copy-file --from-stdin --to-remote /shared/second.txt
 ```
 
-## Step 4. マウントとデータプレーンの可視性を確認する {#step-4-verify-mount-and-data-plane-visibility}
+## ステップ 4. マウントとデータプレーンの可視性を確認する {#step-4-verify-mount-and-data-plane-visibility}
 
 ```bash
 mkdir -p /path/to/shared-workspace
@@ -87,7 +87,7 @@ ti fs read-file --path /shared/mounted.txt
 
 ### マシン B での作業 {#on-machine-b}
 
-Step 4 の graceful アンマウント後、現在のシェルから認証情報を削除します。
+ステップ 4 の正常なアンマウント後、現在のシェルから認証情報を削除します。
 
 ```bash
 unset TI_FS_TOKEN TI_REGION_CODE
@@ -110,7 +110,7 @@ ti fs delete-file-system \
 
 - 各 FS トークンはオーナーアクセスを付与します。チャットやコマンド履歴ではなく、シークレットとして転送し、マシンごとに別のトークンを使用してください。
 - 複数のライターが同じパスを上書きする可能性があるため、ワークフローレベルで所有権を調整してください。
-- graceful アンマウントが完了する前にマシンを終了しないでください。FUSE マウントをオンラインのまま維持しつつリモート永続性が必要な場合にのみ、明示的な drain を使用してください。
+- 正常なアンマウントが完了する前にマシンを終了しないでください。FUSE マウントをオンラインのまま維持しつつリモート永続性が必要な場合にのみ、明示的な drain を使用してください。
 
 ## 次のステップ {#what-s-next}
 

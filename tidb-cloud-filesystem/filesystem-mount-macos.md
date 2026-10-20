@@ -24,7 +24,7 @@ macOS では、TiDB Cloud ファイルシステムをローカルディレクト
 - 既存の TiDB Cloud ファイルシステムがあること。まだない場合は、[ファイルシステムを作成して使用する](/tidb-cloud-filesystem/filesystem-quick-start.md#step-3-create-and-use-a-file-system) を参照してください。
 - 有効なトークンを使用してファイルシステムにアクセスできるように `ti` が設定されていること。[既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
 
-    ファイルの一覧表示と読み取りを行うには、トークンにリモートディレクトリに対する `list` および `read` 権限が必要です。ファイルの作成または変更には `write` も必要で、ファイルの削除には `delete` が必要です。以下の WebDAV の確認手順では、owner token または 4 つすべての権限を持つ scoped token を使用します。読み取り専用アクセスについては、[読み取り専用アクセスに WebDAV を使用する](/tidb-cloud-filesystem/filesystem-mount-macos.md#use-webdav-for-read-only-access) を参照してください。
+    ファイルの一覧表示と読み取りを行うには、トークンにリモートディレクトリに対する `list` および `read` 権限が必要です。ファイルの作成または変更には `write` も必要で、ファイルの削除には `delete` が必要です。以下の WebDAV の確認手順では、オーナートークンまたは 4 つすべての権限を持つスコープ付きトークンを使用します。読み取り専用アクセスについては、[読み取り専用アクセスに WebDAV を使用する](/tidb-cloud-filesystem/filesystem-mount-macos.md#use-webdav-for-read-only-access) を参照してください。
 
 ## WebDAV でマウントする {#mount-with-webdav}
 
@@ -132,7 +132,7 @@ Bash または Zsh を使用し、WebDAV の手順全体を通して同じシェ
 
 WebDAV は `--read-only` オプションをサポートしていません。
 
-WebDAV 経由で読み取り専用アクセスを強制するには、`read` と `list` 権限のみを持つ scoped token を使用し、`--read-only` を付けずに通常どおりマウントしてください。サービス側でトークンにより読み取り専用アクセスが強制されます。
+WebDAV 経由で読み取り専用アクセスを強制するには、`read` と `list` 権限のみを持つスコープ付きトークンを使用し、`--read-only` を付けずに通常どおりマウントしてください。サービス側でトークンにより読み取り専用アクセスが強制されます。
 
 例については、[共有ディレクトリをマウントする](/tidb-cloud-filesystem/filesystem-sharing.md#mount-the-shared-directory-optional) を参照してください。
 
@@ -233,7 +233,7 @@ ti fs drain-file-system \
 
 drain が正常に完了すると、マウントを維持したまま保留中の書き込みがファイルシステムに到達したことを確認できます。
 
-drain がタイムアウトするかエラーを返した場合は、マウントとマシンを利用可能な状態のままにし、エラーを解決してファイルを確認してから、セッションを終了したり、別のユーザーまたは環境で更新内容を利用可能にしたりしてください。
+drain がタイムアウトするかエラーを返した場合は、マウントとマシンを利用可能な状態のままにし、セッションを終了したり、別のユーザーまたは環境で更新内容を利用可能にしたりする前に、エラーを解決してファイルを確認してください。
 
 WebDAV は `drain-file-system` をサポートしていません。コマンド構文については、[`drain-file-system`](/ai/ti/reference/ti-fs-drain-file-system.md) を参照してください。
 
@@ -257,7 +257,7 @@ FUSE マウントの開始に失敗した場合は、次を確認してくださ
 
 アンマウントに失敗した場合は、エラーを解決し、必要なファイルがファイルシステムに到達したことを確認するまで、マウントプロセスとマシンを実行したままにしてください。保留中の書き込みが残っている可能性がある間は、ローカルのマウントデータを削除しないでください。
 
-その他のマウントエラーについては、[TiDB Cloud Filesystem をトラブルシューティングする](/tidb-cloud-filesystem/filesystem-troubleshooting.md) を参照してください。
+その他のマウントエラーについては、[TiDB Cloud Filesystem のトラブルシューティング](/tidb-cloud-filesystem/filesystem-troubleshooting.md) を参照してください。
 
 ## 次のステップ {#what-s-next}
 
