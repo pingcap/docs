@@ -108,7 +108,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 
     ![Beekeeper Studio: configure a TiDB connection](/media/develop/beekeeper-studio-connection-settings.png)
 
-5. Turn on the **Enable SSL** toggle. Beekeeper Studio trusts the server's certificate by default, so providing a CA certificate is optional — if you want to verify against the CA certificate for your cluster, click **CA cert** in the TiDB Cloud connection dialog to download it, select the downloaded file in the **CA Cert (optional)** field, and check the **Reject Unauthorized** box so Beekeeper Studio actually validates the server against it.
+5. Turn on the **Enable SSL** toggle. Beekeeper Studio trusts the server's certificate by default, so providing a CA certificate is optional. If you want to verify against the CA certificate for your cluster, click **CA cert** in the TiDB Cloud connection dialog to download it, select the downloaded file in the **CA Cert (optional)** field, and check the **Reject Unauthorized** box so Beekeeper Studio actually validates the server against it.
 
 6. Click **Test** to validate the connection to the TiDB Cloud Dedicated cluster.
 
