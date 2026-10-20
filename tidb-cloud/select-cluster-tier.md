@@ -76,9 +76,9 @@ PostgreSQL-compatible {{{ .starter }}}インスタンスが無料クォータに
 
 TiDB Cloudの各組織につき、デフォルトでは、すべてのTiDB Cloud StarterおよびEssentialインスタンスを合わせて最大 5つの[ブランチ](/tidb-cloud/branch-overview.md)を作成できます。
 
-TiDB Cloudの有料組織ごとに、合計で最大100個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。
+TiDB Cloud を有料で利用している組織ごとに、合計で最大100個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。
 
-エージェントプラットフォームや、多数のインスタンスとブランチを必要とするその他のサービスを構築する有料組織向けに、 TiDB Cloud は**Instance Capacity Plan**を提供しています。このプランでは、有料のTiDB Cloud組織は 5つを超えるブランチを作成でき、 TiDB Cloud Starter のインスタンスとブランチの 100 個という制限を受けません。インスタンスキャパシティプランの詳細と申し込みについては、 [申込書](https://www.pingcap.com/programs/agentic-ai-instance-capacity)にご記入ください。
+エージェントプラットフォームや、多数のインスタンスとブランチを必要とするその他のサービスを構築する、有料で利用している組織向けに、 TiDB Cloud は**Instance Capacity Plan**を提供しています。このプランでは、TiDB Cloud を有料で利用している組織は 5つを超えるブランチを作成でき、 TiDB Cloud Starter のインスタンスとブランチの 100 個という制限を受けません。インスタンスキャパシティプランの詳細と申し込みについては、 [申込書](https://www.pingcap.com/programs/agentic-ai-instance-capacity)にご記入ください。
 
 TiDB Cloudインスタンスキャパシティプランの申請が承認されると、メールで通知が届きます。
 

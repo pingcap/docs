@@ -19,7 +19,7 @@ TiDB Cloud は、次の2種類の SSO 認証をサポートしています。
 
 > **Note:**
 >
-> Cloud Organization SSO 機能は有料組織でのみご利用いただけます。
+> Cloud Organization SSO 機能は有料で利用している組織でのみ使用できます。
 
 ## 始める前に {#before-you-begin}
 
