@@ -29,7 +29,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         Before connecting to a newly created cluster over the public internet, enable **Public Endpoint** under **Settings > Networking** in the [TiDB Cloud console](https://tidbcloud.com/), and then add your client IP address to the IP access list.
 
-        For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+        For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection/).
 
 - **TiDB Cloud BYOC**
 
