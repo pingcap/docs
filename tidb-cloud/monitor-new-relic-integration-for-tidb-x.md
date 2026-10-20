@@ -58,7 +58,7 @@ Currently, the TiDB Cloud dashboard for <CustomContent plan="essential">{{{ .ess
 
 3. Log in to [New Relic](https://one.newrelic.com/), click **Dashboards** in the left navigation bar, and then click **Import dashboard** in the upper-right corner.
 
-4. In the displayed dialog, paste the contents of the prepared JSON file into the text area, select the account and permission settings, and then click **Save**.
+4. In the displayed dialog, paste the contents of the prepared JSON file into the text area, select the permission settings, and then click **Save**.
 
 ### Step 2. Integrate with your New Relic API key
 
