@@ -18,16 +18,16 @@ DMは、さまざまなソースからTiDBクラスタへのデータ移行を�
 
 | データソース                   | 互換性レベル                           | 注記                                                                                                                                           |
 | ------------------------ | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| MySQL ≤ 5.5              | テストされていません                       |                                                                                                                                              |
+| MySQL ≤ 5.5              | 未テスト                       |                                                                                                                                              |
 | MySQL 5.6                | GA                               |                                                                                                                                              |
 | MySQL 5.7                | GA                               |                                                                                                                                              |
 | MySQL 8.0                | GA                               | [binlogトランザクション圧縮（ `Transaction_payload_event` ）](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)はサポートしません。 |
-| MySQL 8.1～8.3            | テストされていません                       | [binlogトランザクション圧縮（ `Transaction_payload_event` ）](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)はサポートしません。 |
+| MySQL 8.1～8.3            | 未テスト                       | [binlogトランザクション圧縮（ `Transaction_payload_event` ）](https://dev.mysql.com/doc/refman/8.0/en/binary-log-transaction-compression.html)はサポートしません。 |
 | MySQL 8.4                | Experimental（TiDB v8.5.6以降でサポート） | [binlogトランザクション圧縮（ `Transaction_payload_event` ）](https://dev.mysql.com/doc/refman/8.4/en/binary-log-transaction-compression.html)はサポートしません。[MySQL 8.4に関する注記](#mysql-84-notes)を参照してください。 |
-| MySQL 9.x                | テストされていません                       |                                                                                                                                              |
-| MariaDB &lt; 10.1.2      | 互換性がない                           | 時間型のbinlogとは互換性がありません。                                                                                                                       |
+| MySQL 9.x                | 未テスト                       |                                                                                                                                              |
+| MariaDB &lt; 10.1.2      | 互換性なし                           | 時間型のbinlogとは互換性がありません。                                                                                                                       |
 | MariaDB 10.1.2 ～ 10.5.10 | Experimental                     |                                                                                                                                              |
-| MariaDB &gt; 10.5.10     | テストされていません                       | [事前チェック](/dm/dm-precheck.md)をバイパスした後は、ほとんどの場合に機能すると予想されます。 [MariaDBに関する注記](#mariadb-notes)を参照してください。                                          |
+| MariaDB &gt; 10.5.10     | 未テスト                       | [事前チェック](/dm/dm-precheck.md)をバイパスした後は、ほとんどの場合に機能すると予想されます。 [MariaDBに関する注記](#mariadb-notes)を参照してください。                                          |
 
 ### MySQL 8.4に関する注記 {#mysql-84-notes}
 
@@ -66,7 +66,7 @@ MySQL 8.4ソースのサポートはGAではなく、**実験的**です。本�
 
 ### MariaDBに関する注記 {#mariadb-notes}
 
-- MariaDB **10.5.11 以降**では、権限名の**変更**(例: `BINLOG MONITOR` 、 `REPLICATION SLAVE ADMIN` 、 `REPLICATION MASTER ADMIN` ) により、DM の事前チェックが失敗します。このエラーは、レプリケーション権限、ダンプ権限、およびダンプ接続番号のチェッカーで`[code=26005] fail to check synchronization configuration`として表示されます。
+- MariaDB **10.5.11 以降**では、権限名の**変更**(例: `BINLOG MONITOR` 、 `REPLICATION SLAVE ADMIN` 、 `REPLICATION MASTER ADMIN` ) により、DM の事前チェックが失敗します。このエラーは、レプリケーション権限、ダンプ権限、およびダンプ接続数のチェッカーで`[code=26005] fail to check synchronization configuration`として表示されます。
 - DM タスクに`ignore-checking-items: ["all"]`を追加すると、**事前チェックをバイパス**できます。詳細は[DM事前チェック](/dm/dm-precheck.md)をご覧ください。
 
 ## 対象データベース {#target-databases}

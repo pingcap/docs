@@ -1860,7 +1860,7 @@ Titanに関連する設定項目。
 
 > **Note:**
 >
-> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)になければなりません。 Snappy 圧縮の他のバリアントはサポートされていません。
+> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)になければなりません。 その他の Snappy 圧縮形式はサポートされていません。
 > - TiDB v7.6.0以降、 `blob-file-compression`のデフォルト値が`"lz4"`から`"zstd"`に変更されます。
 
 - Blobファイルで使用される圧縮アルゴリズム

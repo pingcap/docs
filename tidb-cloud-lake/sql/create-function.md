@@ -71,7 +71,7 @@ if __name__ == '__main__':
 python udf_server.py
 ```
 
-### ステップ 2: サーバーを公開して許可する
+### ステップ 2: サーバーを公開して許可する {#step-2-expose-and-allow-the-server}
 
 UDF サーバーを gRPC/HTTP2 をサポートする HTTPS で公開し、右上隅の **Support** をクリックして **Submit a request** を選択し、サーバーのホスト名をテナントの **UDF server allowlist** に追加するよう依頼します。それまでは、`CREATE FUNCTION` は `Unallowed UDF server address` で失敗します。
 

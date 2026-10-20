@@ -190,7 +190,7 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、
 
 > **Note:**
 >
-> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+> - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 その他の Snappy 圧縮形式はサポートされていません。
 > - TiDB Lightningは単一の大きな圧縮ファイルを同時に解凍できないため、圧縮ファイルのサイズがインポート速度に影響します。解凍後のソースファイルのサイズは256MiB以下にすることをお勧めします。
 
 ### グローバルソート {#global-sort}

@@ -18,7 +18,7 @@ PRESIGN メソッドは、署名付きの有効期限付き URL を生成し、�
 
 ## Presigned URL を使用したアップロード {#uploading-with-presigned-url}
 
-以下の例では、presigned URL を使用して、サンプルファイル ([books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet)) を user stage、internal stage、および external stage にアップロードする方法を示します。
+以下の例では、事前署名付き URL を使用して、サンプルファイル ([books.parquet](https://lakesql-bin.tidbcloud.com/datasets/books.parquet)) を user stage、internal stage、および external stage にアップロードする方法を示します。
 
 <SimpleTab groupId="presign">
 

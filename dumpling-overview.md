@@ -159,7 +159,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'se
 
 > **Note:**
 >
-> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 Snappy 圧縮の他のバリアントはサポートされていません。
+> Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)に存在する必要があります。 その他の Snappy 圧縮形式はサポートされていません。
 
 ### エクスポートされたファイルの形式 {#format-of-exported-files}
 
