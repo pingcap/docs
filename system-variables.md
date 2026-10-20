@@ -2542,7 +2542,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON`
-- v6.1.0 以降、TiDB の[結合したテーブルの再配置](/join-reorder.md)アルゴリズムは、Outer Join をサポートしています。この変数は、TiDB が Outer Join に対する Join Reorder のサポートを有効にするかどうかを制御します。
+- v6.1.0 以降、TiDB の[結合順序の並べ替え](/join-reorder.md)アルゴリズムは、Outer Join をサポートしています。この変数は、TiDB が Outer Join に対する Join Reorder のサポートを有効にするかどうかを制御します。
 - TiDBの以前のバージョンからクラスターをアップグレードする場合は、以下の点に注意してください。
 
     - アップグレード前の TiDB バージョンが v6.1.0 より前の場合、アップグレード後のこの変数のデフォルト値は`ON`です。
@@ -4559,7 +4559,7 @@ mysql> desc select count(distinct a) from test.t;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、 [`HASH_JOIN()`ヒント](/optimizer-hints.md#hash_joint1_name--tl_name-)や[`MERGE_JOIN()`ヒント](/optimizer-hints.md#merge_joint1_name--tl_name-)などの結合方法ヒントが、 [`LEADING()`ヒント](/optimizer-hints.md#leadingt1_name--tl_name-)の使用を含む結合したテーブルの再配置最適化プロセスに影響を与えるかどうかを制御するために使用されます。 デフォルト値は`ON`で、これは影響を与えないことを意味します。 `OFF`に設定すると、結合方法ヒントと`LEADING()`ヒントが同時に使用されるシナリオで競合が発生する可能性があります。
+- この変数は、 [`HASH_JOIN()`ヒント](/optimizer-hints.md#hash_joint1_name--tl_name-)や[`MERGE_JOIN()`ヒント](/optimizer-hints.md#merge_joint1_name--tl_name-)などの結合方法ヒントが、 [`LEADING()`ヒント](/optimizer-hints.md#leadingt1_name--tl_name-)の使用を含む結合順序の並べ替え最適化プロセスに影響を与えるかどうかを制御するために使用されます。 デフォルト値は`ON`で、これは影響を与えないことを意味します。 `OFF`に設定すると、結合方法ヒントと`LEADING()`ヒントが同時に使用されるシナリオで競合が発生する可能性があります。
 
 > **Note:**
 >
@@ -4599,7 +4599,7 @@ mysql> desc select count(distinct a) from test.t;
 - 型: 整数
 - デフォルト値: `0`
 - 範囲: `[0, 2147483647]`
-- この変数は、TiDBの結合したテーブルの再配置アルゴリズムの選択を制御するために使用されます。結合したテーブルの再配置に含まれるノード数がこのしきい値を超えると、TiDBは貪欲アルゴリズムを選択し、このしきい値を下回ると、TiDBは動的計画法アルゴリズムを選択します。
+- この変数は、TiDBの結合順序の並べ替えアルゴリズムの選択を制御するために使用されます。結合順序の並べ替えに含まれるノード数がこのしきい値を超えると、TiDBは貪欲アルゴリズムを選択し、このしきい値を下回ると、TiDBは動的計画法アルゴリズムを選択します。
 - 現在、OLTPクエリの場合はデフォルト値を維持することを推奨します。OLAPクエリの場合は、OLAPシナリオでの接続順序を改善するために、変数の値を10～15に設定することをお勧めします。
 
 ### tidb_opt_join_reorder_through_sel <span class="version-mark">New in v8.5.6</span>
@@ -4609,7 +4609,7 @@ mysql> desc select count(distinct a) from test.t;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、特定の複数テーブル結合クエリの結合したテーブルの再配置最適化を改善します。この変数を`ON`に設定すると、安全条件が満たされている場合、オプティマイザは、連続する複数の結合間のフィルタ条件 ( `Selection` ) を結合したテーブルの再配置最適化の候補範囲に含めます。結合ツリーを再構築する際、オプティマイザはこれらの条件をより適切な位置にプッシュダウンし、より多くのテーブルが結合したテーブルの再配置最適化に参加できるようにします。
+- この変数は、特定の複数テーブル結合クエリの結合順序の並べ替え最適化を改善します。この変数を`ON`に設定すると、安全条件が満たされている場合、オプティマイザは、連続する複数の結合間のフィルタ条件 ( `Selection` ) を結合順序の並べ替え最適化の候補範囲に含めます。結合ツリーを再構築する際、オプティマイザはこれらの条件をより適切な位置にプッシュダウンし、より多くのテーブルが結合順序の並べ替え最適化に参加できるようにします。
 - この変数を有効にした後にパフォーマンスの低下や不安定な実行計画が見られる場合は、この変数を`OFF`に設定して、この機能を無効にしてください。
 - 式の評価意味論が変更されないようにするため、フィルタ条件に非決定的な関数や副作用のある関数 ( `RAND()`など) が含まれている場合、この変数が有効になっていてもオプティマイザは条件プッシュダウンを実行しません。
 

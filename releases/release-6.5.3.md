@@ -79,7 +79,7 @@ TiDB バージョン: 6.5.3
     - IPv6環境で誤ったTiDBアドレスが表示される問題を修正[#43260](https://github.com/pingcap/tidb/issues/43260) @[nexustar](https://github.com/nexustar)
     - 述語をプッシュダウンするときに CTE 結果が正しくない問題を修正しました [#43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
     - 非相関サブクエリを含むステートメントで共通テーブル式 (CTE) を使用すると誤った結果が返される可能性がある問題を修正しました [#44051](https://github.com/pingcap/tidb/issues/44051) @[winoros](https://github.com/winoros)
-    - 結合したテーブルの再配置により外部結合結果が不正確になる可能性がある問題を修正[#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid)
+    - 結合順序の並べ替えにより外部結合結果が不正確になる可能性がある問題を修正[#44314](https://github.com/pingcap/tidb/issues/44314) @[AilinKid](https://github.com/AilinKid)
     - 極端なケースで、悲観的トランザクションの最初のステートメントが再試行されるときに、このトランザクションのロックを解決するとトランザクションの正確性に影響する可能性がある問題を修正しました[#42937](https://github.com/pingcap/tidb/issues/42937) @[MyonKeminta](https://github.com/MyonKeminta)
     - GC がロックを解決するときに、まれに悲観的トランザクションの残余悲観的ロックがデータの正確性に影響を与える可能性がある問題を修正しました。 [#43243](https://github.com/pingcap/tidb/issues/43243) @[MyonKeminta](https://github.com/MyonKeminta)
     - `batch cop`実行中のスキャン詳細情報が不正確になる可能性がある問題を修正[#41582](https://github.com/pingcap/tidb/issues/41582) @[you06](https://github.com/you06)

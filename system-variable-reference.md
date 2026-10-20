@@ -1808,7 +1808,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [結合したテーブルの再配置の概要](/join-reorder.md)
+- [結合順序の並べ替えの概要](/join-reorder.md)
 - [システム変数](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)
 - [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 - [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
@@ -3121,7 +3121,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [結合したテーブルの再配置の概要](/join-reorder.md)
+- [結合順序の並べ替えの概要](/join-reorder.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_opt_join_reorder_threshold)
 - [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)

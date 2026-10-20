@@ -83,7 +83,7 @@ TiDBバージョン: 6.4.0-DMR
 
     以前のバージョンでは、TiDB はテーブルの結合順序を決定するために貪欲アルゴリズムを使用していました。v6.4.0 では、TiDB オプティマイザに[動的計画アルゴリズム](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder)が導入されました。動的計画アルゴリズムは、貪欲アルゴリズムよりも多くの可能な結合順序を列挙できるため、より良い実行計画を見つける可能性が高まり、一部のシナリオでは SQL 実行効率が向上します。
 
-    動的計画法アルゴリズムは処理に時間がかかるため、TiDBの結合したテーブルの再配置アルゴリズムの選択は、 [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)変数によって制御されます。結合したテーブルの再配置に参加するノード数がこの閾値を超えると、TiDBは貪欲法アルゴリズムを使用します。そうでない場合は、動的計画法アルゴリズムを使用します。
+    動的計画法アルゴリズムは処理に時間がかかるため、TiDBの結合順序の並べ替えアルゴリズムの選択は、 [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)変数によって制御されます。結合順序の並べ替えに参加するノード数がこの閾値を超えると、TiDBは貪欲法アルゴリズムを使用します。そうでない場合は、動的計画法アルゴリズムを使用します。
 
     詳細については、[ユーザー向けドキュメント](/join-reorder.md)を参照してください。
 
@@ -401,7 +401,7 @@ TiDBバージョン: 6.4.0-DMR
     - クエリ内の条件が誤ってプロジェクションにプッシュダウンされる問題を修正 [#35623](https://github.com/pingcap/tidb/issues/35623) @[Reminiscent](https://github.com/Reminiscent)
     - `AND`と`OR`に対する`isNullRejected`のチェック結果が間違っていたためにクエリ結果が間違っていた問題を修正しました [#38304](https://github.com/pingcap/tidb/issues/38304) @[Yisaer](https://github.com/Yisaer)
     - 外部結合が削除された際に`ORDER BY`内の`GROUP_CONCAT`が考慮されず、クエリ結果が誤る問題を修正しました [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
-    - 結合したテーブルの再配置により誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
+    - 結合順序の並べ替えにより誤ってプッシュダウンされた条件が破棄された際に発生する、誤ったクエリ結果の問題を修正しました。 [#38736](https://github.com/pingcap/tidb/issues/38736) @[winoros](https://github.com/winoros)
 
 - TiKV
 

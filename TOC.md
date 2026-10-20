@@ -278,8 +278,8 @@
         - [最大値/最小値を削除する](/max-min-eliminate.md)
         - [Predicate Push Down](/predicate-push-down.md)
         - [パーティションプルーニング](/partition-pruning.md)
-        - [トップNとリミットプッシュダウン](/topn-limit-push-down.md)
-        - [結合したテーブルの再配置](/join-reorder.md)
+        - [TopNとLimitのプッシュダウン](/topn-limit-push-down.md)
+        - [結合順序の並べ替え](/join-reorder.md)
         - [ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)
       - 物理的最適化
         - [概要](/sql-physical-optimization.md)
