@@ -112,8 +112,8 @@ To view {{{ .lake }}} lineage in [OpenMetadata](https://open-metadata.org), use 
 > **Note:**
 >
 > - The tool currently supports metadata and lineage ingestion only.
-> - Run `metadata` before `lineage`. A lineage edge is skipped if either of its endpoints does not yet exist in OpenMetadata.
-> - To keep OpenMetadata up to date, schedule both commands with cron or Airflow.
+> - For the initial sync, run `lake-om -c config.yaml metadata` to completion, and then run `lake-om -c config.yaml lineage --full`. A lineage edge is skipped if either of its endpoints does not yet exist in OpenMetadata.
+> - For ongoing synchronization, schedule a cron or Airflow workflow that runs `lake-om -c config.yaml metadata` to completion before `lake-om -c config.yaml lineage`. After a long outage, run `lake-om -c config.yaml lineage --full`.
 
 ## Limitations
 
