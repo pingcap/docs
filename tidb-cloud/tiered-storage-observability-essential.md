@@ -6,11 +6,6 @@
 >
 > Tiered storage is in **private preview** and is not offered on TiDB Cloud Essential by default. It is enabled on an Essential instance only through an allowlist. The behavior described in this note reflects the current preview implementation and might change before general availability (GA).
 
-## Observability scope on Essential
-
-- IA cache hit rate and cache miss rate data are not available on Essential. The local cache capacity is system-managed and fixed on Essential and cannot be tuned. Judge IA behavior from the statement-level signals described in [Monitor IA reads at the SQL level](#monitor-ia-reads-at-the-sql-level) and the cluster-level IA remote read panels.
-- All other monitoring capabilities — storage class transition tracking, `EXPLAIN ANALYZE` IA fields, statement summary IA columns, slow query IA fields, and the IA remote read panels — are fully available on Essential.
-
 ## Monitor storage class transitions
 
 This section describes how to track the progress of a storage class conversion and how to review past conversions.
