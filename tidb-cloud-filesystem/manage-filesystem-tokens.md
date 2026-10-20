@@ -22,7 +22,7 @@ CLI でトークンを一覧表示、有効化、無効化、または削除す�
 
 > **Note:**
 >
-> ファイルシステムトークンは安全に保管してください。トークンを作成または更新すると、その平文は一度だけ返され、後から取得することはできません。
+> ファイルシステムトークンは安全に保管してください。トークンを作成または更新すると、その平文は一度だけ返され、後から取得できません。
 
 ## 既存のトークンをインポートする {#import-an-existing-token}
 
@@ -168,7 +168,7 @@ ti fs list-file-system-tokens \
   --output text
 ```
 
-出力にはトークンの平文は含まれません。オーナートークンを失った場合は、TiDB Cloud API 認証情報を使用して置き換えを生成してください。トークンを一覧表示しても元のトークンを復元することはできません。
+出力にはトークンの平文は含まれません。オーナートークンを失った場合は、TiDB Cloud API 認証情報を使用して置き換えを生成してください。トークンを一覧表示しても元のトークンを復元できません。
 
 [`disable-file-system-token`](/ai/ti/reference/ti-fs-disable-file-system-token.md) を使用してトークンを一時停止し、[`enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) を使用して復元します。これらはコンソールの **Deactivate** と **Activate** に対応します。
 
