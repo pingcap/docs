@@ -3,15 +3,15 @@
 
 # 目次
 
-## さあ始めましょう
+## はじめに
 
 - TiDB Cloudを選ぶ理由
-  - [導入](/tidb-cloud/tidb-cloud-intro.md)
-  - [特徴](/tidb-cloud/features.md)
+  - [概要](/tidb-cloud/tidb-cloud-intro.md)
+  - [機能](/tidb-cloud/features.md)
   - [MySQLとの互換性](/mysql-compatibility.md)
-- さあ始めましょう
-  - [TiDB Cloudをお試しください](/tidb-cloud/tidb-cloud-quickstart.md)
-  - [HTAPを試してみてください](/tidb-cloud/tidb-cloud-htap-quickstart.md)
+- はじめに
+  - [TiDB Cloudを試す](/tidb-cloud/tidb-cloud-quickstart.md)
+  - [HTAPを試す](/tidb-cloud/tidb-cloud-htap-quickstart.md)
   - [PoC（概念実証）を実施する](/tidb-cloud/tidb-cloud-poc.md)
 - 主要概念
   - [概要](/tidb-cloud/key-concepts.md)
@@ -31,43 +31,43 @@
 ## ガイド
 
 - クラスタを計画する
-  - [プランを選択してください](/tidb-cloud/select-cluster-tier.md)
+  - [プランを選択する](/tidb-cloud/select-cluster-tier.md)
   - [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
   - [TiDB Cloudパフォーマンスリファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)
 - [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
 - TiDB Cloud Dedicatedクラスターの管理
   - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
-  - TiDB Cloud Dedicatedクラスタに接続します
+  - TiDB Cloud Dedicatedクラスタに接続する
     - [ネットワーク接続の概要](/tidb-cloud/connect-to-tidb-cluster.md)
     - [公共接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)
-    - [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/set-up-private-endpoint-connections.md)
-    - [プライベートエンドポイント経由でAzureに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
-    - [プライベートエンドポイント経由でGoogle Cloudに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+    - [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [Azure のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    - [Google Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
     - [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
     - [SQL Shell経由で接続する](/tidb-cloud/connect-via-sql-shell.md)
   - [TiDB Cloud Dedicatedクラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)
   - [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)
   - [TiDB Cloud Dedicatedクラスタの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [メンテナンスウィンドウの設定](/tidb-cloud/configure-maintenance-window.md)
-  - HTAPにはTiFlashを使用してください
+  - HTAPにTiFlashを使用する
     - [TiFlashの概要](/tiflash/tiflash-overview.md)
     - [TiFlashレプリカを作成する](/tiflash/create-tiflash-replicas.md)
     - [TiFlashからデータを読み取る](/tiflash/use-tidb-to-read-tiflash.md)
     - [MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
     - [FastScanを使用する](/tiflash/use-fastscan.md)
     - [サポートされているプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
-    - [TiFlashクエリ結果の具体化](/tiflash/tiflash-results-materialization.md)
-    - [TiFlashの遅延発生](/tiflash/tiflash-late-materialization.md)
+    - [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
+    - [TiFlash遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
     - [互換性](/tiflash/tiflash-compatibility.md)
     - [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
-  - 監視と警告
+  - 監視とアラート
     - [概要](/tidb-cloud/monitor-tidb-cluster.md)
     - [組み込みの指標](/tidb-cloud/built-in-monitoring.md)
-    - [内蔵アラート機能](/tidb-cloud/monitor-built-in-alerting.md)
+    - [組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)
     - アラート通知を購読する
       - [メールで購読する](/tidb-cloud/monitor-alert-email.md)
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
-      - [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
+      - [Zoom経由で購読する](/tidb-cloud/monitor-alert-zoom.md)
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
@@ -78,7 +78,7 @@
       - [DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)
       - [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)
     - [TiDB Cloud Clinic](/tidb-cloud/tidb-cloud-clinic.md)
-  - チューニングパフォーマンス
+  - パフォーマンスをチューニングする
     - [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - パフォーマンスを分析する
       - [診断ページを使用する](/tidb-cloud/tune-performance.md)
@@ -88,9 +88,9 @@
       - クエリ実行計画の理解
         - [概要](/explain-overview.md)
         - [`EXPLAIN`ウォークスルー](/explain-walkthrough.md)
-        - [索引](/explain-indexes.md)
+        - [インデックス](/explain-indexes.md)
         - [テーブル結合](/explain-joins.md)
-        - [MPPに関する問い合わせ](/explain-mpp.md)
+        - [MPPクエリ](/explain-mpp.md)
         - [サブクエリ](/explain-subqueries.md)
         - [集計](/explain-aggregation.md)
         - [ビュー](/explain-views.md)
@@ -98,16 +98,16 @@
         - [インデックスマージ](/explain-index-merge.md)
       - SQL最適化プロセス
         - [概要](/sql-optimization-concepts.md)
-        - ロジック最適化
+        - 論理最適化
           - [概要](/sql-logical-optimization.md)
           - [サブクエリ関連の最適化](/subquery-optimization.md)
           - [列プルーニング](/column-pruning.md)
-          - [相関サブクエリのデコヒーレンス](/correlated-subquery-optimization.md)
-          - [最大値/最小値を削除する](/max-min-eliminate.md)
+          - [相関サブクエリの非相関化](/correlated-subquery-optimization.md)
+          - [Max/Minの削除](/max-min-eliminate.md)
           - [Predicate Push Down](/predicate-push-down.md)
           - [パーティションプルーニング](/partition-pruning.md)
-          - [トップNとリミットプッシュダウン](/topn-limit-push-down.md)
-          - [結合したテーブルの再配置](/join-reorder.md)
+          - [TopNとLimitのプッシュダウン](/topn-limit-push-down.md)
+          - [結合順序の並べ替え](/join-reorder.md)
           - [ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)
         - 物理的最適化
           - [概要](/sql-physical-optimization.md)
@@ -115,7 +115,7 @@
           - [統計](/statistics.md)
           - [拡張統計](/extended-statistics.md)
           - [インデックス問題の解決方法](/wrong-index-solution.md)
-          - [クエリの最適化](/agg-distinct-optimization.md)
+          - [Distinct最適化](/agg-distinct-optimization.md)
           - [コストモデル](/cost-model.md)
           - [ランタイムフィルタ](/runtime-filter.md)
         - [プリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)
@@ -127,7 +127,7 @@
         - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
         - [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
       - [インデックスアドバイザー](/index-advisor.md)
-    - [TiKV Follower Readの調整](/follower-read.md)
+    - [TiKV Follower Read](/follower-read.md)
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
     - ガベージコレクション（GC）
       - [概要](/garbage-collection-overview.md)
@@ -175,9 +175,9 @@
   - [SQLプロキシアカウント](/tidb-cloud/sql-proxy-account.md)
 - Data Service ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概要](/tidb-cloud/data-service-overview.md)
-  - [さあ始めましょう](/tidb-cloud/data-service-get-started.md)
+  - [はじめに](/tidb-cloud/data-service-get-started.md)
   - Chat2Query API
-    - [さあ始めましょう](/tidb-cloud/use-chat2query-api.md)
+    - [はじめに](/tidb-cloud/use-chat2query-api.md)
     - [複数ラウンドのChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)
     - [知識ベースを活用する](/tidb-cloud/use-chat2query-knowledge.md)
   - [データ管理アプリ](/tidb-cloud/data-service-manage-data-app.md)
@@ -203,7 +203,7 @@
     - [Azureでセルフホスト型Kafkaプライベートリンクサービスをセットアップする](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md)
     - [Google Cloud でセルフホスト型の Kafka プライベートサービスコネクトを設定する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md)
     - [Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)
-    - [TiDB Cloud Lake 向け Data Pipeline SQL 互換性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
+    - [TiDB Cloud Lake 統合の SQL 互換性](/tidb-cloud/data-pipeline-lake-sql-compatibility.md)
 - セキュリティ
   - [セキュリティ概要](/tidb-cloud/security-overview.md)
   - IDアクセス制御
@@ -214,9 +214,9 @@
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - ネットワークアクセス制御
     - [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)
-    - [AWS のプライベートエンドポイント経由で接続します](/tidb-cloud/set-up-private-endpoint-connections.md)
-    - [プライベートエンドポイント経由でAzureに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
-    - [プライベートエンドポイント経由でGoogle Cloudに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
+    - [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
+    - [Azure のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)
+    - [Google Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
     - [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
     - [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)
   - データアクセス制御
@@ -442,21 +442,21 @@
     - [概要](/data-type-overview.md)
     - [デフォルト値](/data-type-default-values.md)
     - [数値型](/data-type-numeric.md)
-    - [日付と時刻の種類](/data-type-date-and-time.md)
+    - [日付と時刻の型](/data-type-date-and-time.md)
     - [文字列型](/data-type-string.md)
-    - [JSONタイプ](/data-type-json.md)
+    - [JSON型](/data-type-json.md)
   - 関数と演算子
     - [概要](/functions-and-operators/functions-and-operators-overview.md)
     - [式評価における型変換](/functions-and-operators/type-conversion-in-expression-evaluation.md)
-    - [オペレーター](/functions-and-operators/operators.md)
+    - [演算子](/functions-and-operators/operators.md)
     - [制御フロー関数](/functions-and-operators/control-flow-functions.md)
     - [文字列関数](/functions-and-operators/string-functions.md)
     - [数値関数と演算子](/functions-and-operators/numeric-functions-and-operators.md)
-    - [日付と時刻の機能](/functions-and-operators/date-and-time-functions.md)
+    - [日付と時刻の関数](/functions-and-operators/date-and-time-functions.md)
     - [ビット関数とビット演算子](/functions-and-operators/bit-functions-and-operators.md)
     - [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)
-    - [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
-    - [ロック機能](/functions-and-operators/locking-functions.md)
+    - [暗号化および圧縮関数](/functions-and-operators/encryption-and-compression-functions.md)
+    - [ロック関数](/functions-and-operators/locking-functions.md)
     - [情報関数](/functions-and-operators/information-functions.md)
     - JSON関数
       - [概要](/functions-and-operators/json-functions.md)
@@ -472,11 +472,11 @@
     - [ウィンドウ関数](/functions-and-operators/window-functions.md)
     - [シーケンス関数](/functions-and-operators/sequence-functions.md)
     - [ユーティリティ関数](/functions-and-operators/utility-functions.md)
-    - [その他の機能](/functions-and-operators/miscellaneous-functions.md)
-    - [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
+    - [その他の関数](/functions-and-operators/miscellaneous-functions.md)
+    - [TiDB固有の関数](/functions-and-operators/tidb-functions.md)
     - [ユーティリティ関数](/functions-and-operators/utility-functions.md)
     - [精密計算](/functions-and-operators/precision-math.md)
-    - [セット演算](/functions-and-operators/set-operators.md)
+    - [集合演算](/functions-and-operators/set-operators.md)
     - [プッシュダウンの式一覧](/functions-and-operators/expressions-pushed-down.md)
   - [クラスター化インデックス](/clustered-indexes.md)
   - [グローバルインデックス](/global-indexes.md)
@@ -486,7 +486,7 @@
   - [テーブル属性](/table-attributes.md)
   - トランザクション
     - [概要](/transaction-overview.md)
-    - [隔離レベル](/transaction-isolation-levels.md)
+    - [分離レベル](/transaction-isolation-levels.md)
     - [楽観的トランザクション](/optimistic-transaction.md)
     - [悲観的トランザクション](/pessimistic-transaction.md)
     - [非トランザクションDML文](/non-transactional-dml.md)
@@ -563,10 +563,10 @@
       - [`USER_PRIVILEGES`](/information-schema/information-schema-user-privileges.md)
       - [`VARIABLES_INFO`](/information-schema/information-schema-variables-info.md)
       - [`VIEWS`](/information-schema/information-schema-views.md)
-    - パフォーマンススキーマ
+    - PERFORMANCE_SCHEMA
       - [概要](/performance-schema/performance-schema.md)
       - [`SESSION_CONNECT_ATTRS`](/performance-schema/performance-schema-session-connect-attrs.md)
-    - システム
+    - SYS
       - [概要](/sys-schema/sys-schema.md)
       - [`schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)
   - [メタデータロック](/metadata-lock.md)
@@ -577,7 +577,7 @@
     - [概要](/tidb-architecture.md)
     - [ストレージ](/tidb-storage.md)
     - [コンピューティング](/tidb-computing.md)
-    - [スケジュール](/tidb-scheduling.md)
+    - [スケジューリング](/tidb-scheduling.md)
     - [TSO](/tso.md)
   - [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)
   - ストレージエンジン
@@ -586,13 +586,13 @@
       - [RocksDBの概要](/storage-engine/rocksdb-overview.md)
     - TiFlash
       - [TiFlashの概要](/tiflash/tiflash-overview.md)
-      - [ディスクに書き出す](/tiflash/tiflash-spill-disk.md)
+      - [ディスクへのスピル](/tiflash/tiflash-spill-disk.md)
   - TiDB CloudパートナーWebコンソール
     - [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
     - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
   - TiDB分散実行フレームワーク（DXF）
-    - [導入](/tidb-distributed-execution-framework.md)
+    - [概要](/tidb-distributed-execution-framework.md)
     - [TiDB グローバルソート](/tidb-global-sort.md)
   - [TiDB Cloud Dedicatedの制限事項と割り当て量](/tidb-cloud/limitations-and-quotas.md)
   - [TiDB Cloud Dedicated での制限付き SQL 機能](/tidb-cloud/limited-sql-features.md)
@@ -630,14 +630,14 @@
     - [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: TiDB CloudアラートのIMサブスクリプション
       - [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)
-      - [Zoom経由で登録する](/tidb-cloud/monitor-alert-zoom.md)
+      - [Zoom経由で購読する](/tidb-cloud/monitor-alert-zoom.md)
       - [Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
       - [Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)
       - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - Connected: IMチケットの作成と更新のサブスクリプション
       - [Slack経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
-      - [Lark経由でチケットを作成し、チケットの最新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
+      - [Lark経由でチケットを作成し、チケットの更新情報を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
     - Connected: サポートチケットのためのIMインタラクション
       - [Slack経由でサポートチケットを操作する](/tidb-cloud/connected-slack-ticket-interaction.md)
       - [Lark経由でサポートチケットを操作する](/tidb-cloud/connected-lark-ticket-interaction.md)
