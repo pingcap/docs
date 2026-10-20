@@ -322,7 +322,7 @@ alertmanager_servers:
 
 出力ログの最後に``Deployed cluster `tidb-test` successfully``と表示されます。これは、デプロイが成功したことを示しています。
 
-## ステップ5. TiUPによって管理されているクラスターを確認します {#step-5-check-the-clusters-managed-by-tiup}
+## ステップ5. TiUPによって管理されているクラスターを確認する {#step-5-check-the-clusters-managed-by-tiup}
 
 ```shell
 tiup cluster list
@@ -330,7 +330,7 @@ tiup cluster list
 
 TiUPは複数のTiDBクラスタの管理をサポートしています。上記のコマンドは、クラスタ名、デプロイメントユーザー、バージョン、秘密鍵情報など、現在TiUPによって管理されているすべてのクラスタの情報を出力します。
 
-## ステップ6. デプロイされたTiDBクラスタの状態を確認します {#step-6-check-the-status-of-the-deployed-tidb-cluster}
+## ステップ6. デプロイされたTiDBクラスタの状態を確認する {#step-6-check-the-status-of-the-deployed-tidb-cluster}
 
 例えば、次のコマンドを実行して、 `tidb-test`クラスターの状態を確認します。
 

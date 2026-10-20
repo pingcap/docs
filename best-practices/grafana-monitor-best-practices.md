@@ -125,7 +125,7 @@ Y 軸を線形スケールに切り替えます。
 
 ![Set the graphic presentation tool to Shared Tooltip](/media/best-practices/graph-tooltip-shared-tooltip.jpg)
 
-### ヒント5: 履歴のメトリックを確認するには、 `IP address:port number`を入力します {#tip-5-enter-ip-address-port-number-to-check-the-metrics-in-history}
+### ヒント5: `IP address:port number`を入力して履歴のメトリックを確認する {#tip-5-enter-ip-address-port-number-to-check-the-metrics-in-history}
 
 PDダッシュボードには、現在のリーダーの指標のみが表示されます。過去のPDリーダーのステータスを確認したいが、 `instance`フィールドのドロップダウンリストにそのリーダーが表示されていない場合は、手動で`IP address:2379`を入力してリーダーのデータを確認できます。
 

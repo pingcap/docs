@@ -293,7 +293,7 @@ EXPLAIN ANALYZE SELECT HOUR(`rated_at`), AVG(`score`) FROM `bookshop`.`ratings` 
 
 フィールド`cop[tiflash]`が表示された場合、タスクが処理のために**TiFlash**に送信されることを意味します。
 
-## `CREATE TABLE`文を実行します {#execute-the-create-table-statement}
+## `CREATE TABLE`文を実行する {#execute-the-create-table-statement}
 
 上記のルールに従ってすべてのテーブルを作成した後、[データベースの初期化](/develop/dev-guide-bookshop-schema-design.md#database-initialization-script-dbinitsql)スクリプトは次のようになります。テーブル情報を詳しく見たい場合は、 [表の説明](/develop/dev-guide-bookshop-schema-design.md#description-of-the-tables)を参照してください。
 

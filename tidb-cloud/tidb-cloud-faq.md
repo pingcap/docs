@@ -73,7 +73,7 @@ TiDB Cloudについて学ぶ最良の方法は、ステップバイステップ�
 
 - [TiDB Cloudの概要](/tidb-cloud/tidb-cloud-intro.md)
 - [さあ始めましょう](/tidb-cloud/tidb-cloud-quickstart.md)
-- [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
 - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 

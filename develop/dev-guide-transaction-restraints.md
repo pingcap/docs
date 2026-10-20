@@ -14,7 +14,7 @@ TiDBがサポートする分離レベルは、**RC（Read Committed）**と**SI�
 
 ![isolation level](/media/develop/transaction_isolation_level.png)
 
-## スナップショット分離により、ファントムリードを回避できます {#snapshot-isolation-can-avoid-phantom-reads}
+## スナップショット分離により、ファントムリードを回避できる {#snapshot-isolation-can-avoid-phantom-reads}
 
 TiDB の`SI`分離レベルでは**ファントム リード**を回避できますが、ANSI/ISO SQL 標準の`RR`では回避できません。
 

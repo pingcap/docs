@@ -109,7 +109,7 @@ git clone https://github.com/pingcap-inc/tidb-appflow-integration
 
 ![name flow](/media/develop/aws-appflow-step-name-flow.png)
 
-### ソーステーブルと宛先テーブルを設定します {#set-the-source-and-destination-tables}
+### ソーステーブルと宛先テーブルを設定する {#set-the-source-and-destination-tables}
 
 **Source details**と**Destination details**を選択してください。TiDBコネクタはどちらにも使用できます。
 

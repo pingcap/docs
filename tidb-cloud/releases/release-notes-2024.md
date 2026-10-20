@@ -170,7 +170,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベートエンドポイント接続を作成する際のユーザーエクスペリエンスを向上させるため、 **Create Private Endpoint Connection**ページのレイアウトを改良します。
 
-    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
 ## 2024年8月6日 {#august-6-2024}
 

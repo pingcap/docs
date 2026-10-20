@@ -81,7 +81,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 
 詳細については、Apache Pulsar ドキュメントの[トピックの作成方法](https://pulsar.apache.org/docs/4.0.x/tutorials-topic/)を参照してください。
 
-## ステップ1. Apache PulsarのChangefeedページを開きます {#step-1-open-the-changefeed-page-for-apache-pulsar}
+## ステップ1. Apache PulsarのChangefeedページを開く {#step-1-open-the-changefeed-page-for-apache-pulsar}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
 2. 変更フィードイベントの発生源となるTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。

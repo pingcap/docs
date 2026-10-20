@@ -271,19 +271,19 @@ CREATE TABLE `t` (`a` VARCHAR(255) PRIMARY KEY CLUSTERED, `b` INT);
 
 コプロセッサーキャッシュ機能を無効にするには、 `tikv-client.copr-cache`の設定項目`capacity-mb`を`0.0`に変更します。
 
-### `delete from table where id <? Limit ?`ステートメントの実行パフォーマンスを改善します {#improve-the-execution-performance-of-delete-from-table-where-id-x3c-limit-statement}
+### `delete from table where id <? Limit ?`ステートメントの実行パフォーマンスを改善する {#improve-the-execution-performance-of-delete-from-table-where-id-x3c-limit-statement}
 
 [#18028](https://github.com/pingcap/tidb/issues/18028)
 
 `delete from table where id <? limit ?`ステートメントの p99 パフォーマンスは 4 倍向上しました。
 
-### ロードベーススプリット戦略を最適化し、一部の小規模テーブルホットスポット読み取りシナリオでデータが分割できないというパフォーマンス問題を解決します {#optimize-load-base-split-strategy-to-solve-the-performance-problem-that-data-cannot-be-split-in-some-small-table-hotspot-read-scenarios}
+### ロードベーススプリット戦略を最適化し、一部の小規模テーブルホットスポット読み取りシナリオでデータが分割できないというパフォーマンス問題を解決する {#optimize-load-base-split-strategy-to-solve-the-performance-problem-that-data-cannot-be-split-in-some-small-table-hotspot-read-scenarios}
 
 [#18005](https://github.com/pingcap/tidb/issues/18005)
 
 ## 安定性を向上させる {#improve-stability}
 
-### 不完全なスケジューリングによって引き起こされるパフォーマンスのジッター問題を最適化します {#optimize-the-performance-jitter-issue-caused-by-imperfect-scheduling}
+### 不完全なスケジューリングによって引き起こされるパフォーマンスのジッター問題を最適化する {#optimize-the-performance-jitter-issue-caused-by-imperfect-scheduling}
 
 [#18005](https://github.com/pingcap/tidb/issues/18005)
 
@@ -303,7 +303,7 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 バージョン5.0より前は、TiDBはデフォルトでクロステーブルリージョンマージ機能を無効にしていました。バージョン5.0以降では、空のリージョンの数を減らし、ネットワーク、メモリ、CPUのオーバーヘッドを削減するために、この機能がデフォルトで有効になっています。この機能は`schedule.enable-cross-table-merge`設定項目を変更することで無効にできます。
 
-#### バックグラウンドタスクとフォアグラウンドの読み書き間のI/Oリソースの競合のバランスを取るために、システムがデフォルトでデータコンパクション速度を自動的に調整できるようにします {#enable-the-system-to-automatically-adjust-the-data-compaction-speed-by-default-to-balance-the-contention-for-i-o-resources-between-background-tasks-and-foreground-reads-and-writes}
+#### バックグラウンドタスクとフォアグラウンドの読み書き間のI/Oリソースの競合のバランスを取るために、システムがデフォルトでデータコンパクション速度を自動的に調整できるようにする {#enable-the-system-to-automatically-adjust-the-data-compaction-speed-by-default-to-balance-the-contention-for-i-o-resources-between-background-tasks-and-foreground-reads-and-writes}
 
 [ユーザー向けドキュメント](/tikv-configuration-file.md#rate-limiter-auto-tuned-new-in-v50)
 
@@ -311,7 +311,7 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 `rate-limiter-auto-tuned`設定項目を変更することで、この機能を無効にすることができます。
 
-#### GCのCPUおよびI/Oリソース消費を削減するために、GCコンパクションフィルタ機能をデフォルトで有効にします {#enable-the-gc-compaction-filter-feature-by-default-to-reduce-gc-s-consumption-of-cpu-and-i-o-resources}
+#### GCのCPUおよびI/Oリソース消費を削減するために、GCコンパクションフィルタ機能をデフォルトで有効にする {#enable-the-gc-compaction-filter-feature-by-default-to-reduce-gc-s-consumption-of-cpu-and-i-o-resources}
 
 [ユーザー向けドキュメント](/garbage-collection-configuration.md#gc-in-compaction-filter)、 [#18009](https://github.com/pingcap/tidb/issues/18009)
 
@@ -319,7 +319,7 @@ TiDBがガベージコレクション（GC）とデータコンパクション�
 
 GC の CPU および I/O リソースの消費を削減するために、GC コンパクション フィルタ機能は、これら2つのタスクを 1つに結合し、同じタスクで実行します。この機能はデフォルトで有効になっています。 `gc.enable-compaction-filter = false`を設定することで無効にできます。
 
-#### TiFlashは、圧縮とデータソートにおけるI/Oリソースの使用を制限します（**実験的機能**） {#tiflash-limits-the-compression-and-data-sorting-s-use-of-i-o-resources-experimental-feature}
+#### TiFlashは、圧縮とデータソートにおけるI/Oリソースの使用を制限する（**実験的機能**） {#tiflash-limits-the-compression-and-data-sorting-s-use-of-i-o-resources-experimental-feature}
 
 この機能は、バックグラウンドタスクとフォアグラウンドの読み書き処理の間で発生するI/Oリソースの競合を軽減します。
 
@@ -327,11 +327,11 @@ GC の CPU および I/O リソースの消費を削減するために、GC コ�
 
 #### 大規模クラスタにおけるスケジューリング制約のチェック性能と、異常リージョンの修復性能を向上させる {#improve-the-performance-of-checking-scheduling-constraints-and-the-performance-of-fixing-the-unhealthy-regions-in-a-large-cluster}
 
-### パフォーマンスの変動を避けるため、実行計画はできる限り変更しないようにしてください {#ensure-that-the-execution-plans-are-unchanged-as-much-as-possible-to-avoid-performance-jitter}
+### パフォーマンスの変動を避けるため、実行計画ができる限り変わらないようにする {#ensure-that-the-execution-plans-are-unchanged-as-much-as-possible-to-avoid-performance-jitter}
 
 [ユーザー向けドキュメント](/sql-plan-management.md)
 
-#### SQLバインディングは、 `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE`文をサポートします {#sql-binding-supports-the-insert-replace-update-delete-statements}
+#### SQLバインディングは、 `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE`文をサポートする {#sql-binding-supports-the-insert-replace-update-delete-statements}
 
 パフォーマンスの調整やデータベースの保守を行う際に、実行計画の不安定さが原因でシステムパフォーマンスが不安定になっていることが判明した場合、ご自身の判断または`EXPLAIN ANALYZE`によるテストに基づいて、手動で最適化されたSQL文を選択できます。最適化されたSQL文をアプリケーションコードで実行されるSQL文にバインドすることで、安定したパフォーマンスを確保できます。
 
@@ -422,7 +422,7 @@ TiDB v5.0では、パフォーマンスの問題をより効率的にトラブ�
 
 ## 導入と保守 {#deployment-and-maintenance}
 
-### クラスタデプロイ操作のロジックを最適化し、DBAが標準的なTiDB本番クラスタをより迅速にデプロイできるようにします {#optimize-the-logic-of-cluster-deployment-operations-to-help-dbas-deploy-a-set-of-standard-tidb-production-cluster-faster}
+### クラスタデプロイ操作のロジックを最適化し、DBAが標準的なTiDB本番クラスタをより迅速にデプロイできるようにする {#optimize-the-logic-of-cluster-deployment-operations-to-help-dbas-deploy-a-set-of-standard-tidb-production-cluster-faster}
 
 [ユーザー向けドキュメント](/production-deployment-using-tiup.md)
 

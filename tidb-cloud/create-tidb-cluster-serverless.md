@@ -3,7 +3,7 @@ title: Create a TiDB Cloud Starter or Essential Instance
 summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの作成方法を学びましょう。
 ---
 
-# TiDB Cloud StarterまたはEssentialインスタンスを作成します {#create-a-tidb-cloud-starter-or-essential-instance}
+# TiDB Cloud StarterまたはEssentialインスタンスを作成する {#create-a-tidb-cloud-starter-or-essential-instance}
 
 このドキュメントでは、[TiDB Cloudコンソール](https://tidbcloud.com/)でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成する方法について説明します。
 

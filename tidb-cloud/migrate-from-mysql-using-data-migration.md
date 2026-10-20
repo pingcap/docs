@@ -145,7 +145,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 移行する前に、データソースがサポートされているかどうかを確認し、MySQL 互換データベースでバイナリロギングを有効にし、ネットワーク接続を確認して、ソースデータベースとターゲット<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>データベースの両方に必要な権限を付与します。
 
-### データソースとバージョンがサポートされていることを確認してください {#make-sure-your-data-source-and-version-are-supported}
+### データソースとバージョンがサポートされていることを確認する {#make-sure-your-data-source-and-version-are-supported}
 
 <CustomContent plan="dedicated">
 
@@ -203,7 +203,7 @@ DM を使用して、ソースの MySQL 互換データベースからターゲ�
 | `binlog_expire_logs_seconds`     | ≥ `86400` （1日）、 `604800` （7日、推奨） | 移行中にDMが連続ログにアクセスできるようにします                 |
 | `binlog_transaction_compression` | `OFF`                            | DMはトランザクション圧縮をサポートしていません                  |
 
-#### 現在の値を確認し、ソースのMySQLインスタンスを設定します {#check-current-values-and-configure-the-source-mysql-instance}
+#### 現在の値を確認し、ソースのMySQLインスタンスを設定する {#check-current-values-and-configure-the-source-mysql-instance}
 
 現在の設定を確認するには、ソースのMySQLインスタンスに接続し、次のステートメントを実行します。
 
@@ -606,7 +606,7 @@ MySQLサービスがGoogle Cloud VPC内にある場合は、以下の手順を�
 
 移行を開始する前に、ソースデータベースとターゲットデータベースの両方で、必要な権限を持つ適切なデータベースユーザーを設定する必要があります。これらの権限により、TiDB Cloud DM は MySQL からデータを読み取り、変更を複製し、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に安全に書き込むことができます。移行には、既存データの完全なデータダンプと増分変更のbinlog複製の両方が含まれるため、移行ユーザーには基本的な読み取りアクセス以外の特定の権限が必要です。
 
-#### ソースMySQLデータベースで、移行ユーザーに必要な権限を付与します {#grant-required-privileges-to-the-migration-user-in-the-source-mysql-database}
+#### ソースMySQLデータベースで、移行ユーザーに必要な権限を付与する {#grant-required-privileges-to-the-migration-user-in-the-source-mysql-database}
 
 テスト目的では、ソースの MySQL データベースで管理者ユーザー ( `root`など) を使用できます。
 

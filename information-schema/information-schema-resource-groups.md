@@ -5,7 +5,7 @@ summary: "`RESOURCE_GROUPS` information_schema テーブルについて学習し
 
 # RESOURCE_GROUPS {#resource-groups}
 
-`RESOURCE_GROUPS`テーブルには、すべてのリソースグループに関する情報が表示されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現します](/tidb-resource-control-ru-groups.md)を参照してください。
+`RESOURCE_GROUPS`テーブルには、すべてのリソースグループに関する情報が表示されます。詳細については、[リソース制御を使用して、リソースグループの制限とフロー制御を実現する](/tidb-resource-control-ru-groups.md)を参照してください。
 
 > **Note:**
 >
