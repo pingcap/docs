@@ -97,7 +97,7 @@ TiDBクラスタは、オンラインサービスを中断することなくス�
 
 - CPU使用率が高いなど、コンピューティングリソースの不足。
 
-- 書き込みおよび読み込み容量が不足しています。
+- 書き込みおよび読み込みキャパシティが不足しています。
 
 TiDBは、ビジネスの成長に合わせて拡張できます。
 
@@ -105,7 +105,7 @@ TiDBは、ビジネスの成長に合わせて拡張できます。
 
 - コンピューティングリソースが不足している場合は、TiDBノードまたはTiKVノードを追加する前に、まずCPU使用率を確認してください。TiDBノードを追加したら、ロードバランサーで設定できます。
 
-- 容量が不足する場合は、TiDBノードとTiKVノードの両方を追加できます。
+- キャパシティが不足する場合は、TiDBノードとTiKVノードの両方を追加できます。
 
 ### Percolatorが分散ロックを使用し、クラッシュクライアントがロックを保持している場合、ロックは解放されないのでしょうか？ {#if-percolator-uses-distributed-locks-and-the-crash-client-keeps-the-lock-will-the-lock-not-be-released}
 
@@ -219,7 +219,7 @@ MySQLとの互換性の一環として、TiDBは多数の`INFORMATION_SCHEMA`テ
 
 ### TiDBバックオフタイプのシナリオの説明は何ですか？ {#what-s-the-explanation-of-the-tidb-backoff-type-scenario}
 
-TiDBサーバーとTiKVサーバー間の通信プロセスにおいて、大量のデータを処理する際に`Server is busy`または`backoff.maxsleep 20000ms`ログメッセージが表示されることがあります。これは、TiKVサーバーがデータを処理している間、システムがビジー状態になっているためです。通常、このときTiKVホストのリソース使用率が高くなっていることが確認できます。このような場合は、リソース使用状況に応じてサーバー容量を増やすことができます。
+TiDBサーバーとTiKVサーバー間の通信プロセスにおいて、大量のデータを処理する際に`Server is busy`または`backoff.maxsleep 20000ms`ログメッセージが表示されることがあります。これは、TiKVサーバーがデータを処理している間、システムがビジー状態になっているためです。通常、このときTiKVホストのリソース使用率が高くなっていることが確認できます。このような場合は、リソース使用状況に応じてサーバーキャパシティを増やすことができます。
 
 ### TiDB TiClientタイプの主な理由は何ですか？ {#what-is-the-main-reason-of-tidb-ticlient-type}
 
@@ -227,7 +227,7 @@ TiClientリージョンエラーインジケータは、TiDBサーバーがク�
 
 ### TiDBがサポートする同時接続の最大数はいくつですか？ {#what-s-the-maximum-number-of-concurrent-connections-that-tidb-supports}
 
-デフォルトでは、TiDBサーバーあたりの最大接続数に制限はありません。必要に応じて、 `config.toml`ファイルで`instance.max_connections`を設定するか、システム変数[`max_connections`](/system-variables.md#max_connections)の値を変更することで、最大接続数を制限できます。同時接続数が多すぎると応答時間が長くなる場合は、TiDBノードを追加して容量を増やすことをお勧めします。
+デフォルトでは、TiDBサーバーあたりの最大接続数に制限はありません。必要に応じて、 `config.toml`ファイルで`instance.max_connections`を設定するか、システム変数[`max_connections`](/system-variables.md#max_connections)の値を変更することで、最大接続数を制限できます。同時接続数が多すぎると応答時間が長くなる場合は、TiDBノードを追加してキャパシティを増やすことをお勧めします。
 
 ### テーブルの作成時刻を確認するにはどうすればよいですか？ {#how-to-view-the-creation-time-of-a-table}
 
@@ -429,15 +429,15 @@ TiDBのバージョンとTiKV API V2が有効になっているかどうか（ [
 
 TiDB v8.5.0 のパフォーマンスについて知るには、 TiDB Cloud Dedicatedクラスターの[性能テストレポート](https://docs.pingcap.com/tidbcloud/v8.5-performance-highlights)を参照してください。
 
-### TiDBのクラスタ容量（QPS）とノード数の関係はどうなっていますか？TiDBはMySQLと比べてどうですか？ {#what-s-the-relationship-between-the-tidb-cluster-capacity-qps-and-the-number-of-nodes-how-does-tidb-compare-to-mysql}
+### TiDBのクラスタキャパシティ（QPS）とノード数の関係はどうなっていますか？TiDBはMySQLと比べてどうですか？ {#what-s-the-relationship-between-the-tidb-cluster-capacity-qps-and-the-number-of-nodes-how-does-tidb-compare-to-mysql}
 
-- ノード数が10個以内の場合、TiDBの書き込み容量（挿入TPS）とノード数の関係は、おおよそ40%の線形増加を示します。MySQLはシングルノード書き込み方式を採用しているため、書き込み容量を拡張できません。
-- MySQLでは、セカンダリデータベースを追加することで読み取り容量を増やすことができますが、書き込み容量はシャーディングを使用しない限り増やすことはできません。しかし、シャーディングには多くの問題があります。
-- TiDBでは、ノードを追加することで、読み取り容量と書き込み容量の両方を容易に増やすことができます。
+- ノード数が10個以内の場合、TiDBの書き込みキャパシティ（挿入TPS）とノード数の関係は、おおよそ40%の線形増加を示します。MySQLはシングルノード書き込み方式を採用しているため、書き込みキャパシティを拡張できません。
+- MySQLでは、セカンダリデータベースを追加することで読み取りキャパシティを増やすことができますが、書き込みキャパシティはシャーディングを使用しない限り増やすことはできません。しかし、シャーディングには多くの問題があります。
+- TiDBでは、ノードを追加することで、読み取りキャパシティと書き込みキャパシティの両方を容易に増やすことができます。
 
 ### 当社のDBAによるMySQLとTiDBのパフォーマンステストの結果、スタンドアロンのTiDBのパフォーマンスはMySQLほど良くないことが分かりました。 {#the-performance-test-of-mysql-and-tidb-by-our-dba-shows-that-the-performance-of-a-standalone-tidb-is-not-as-good-as-mysql}
 
-TiDBは、MySQLスタンドアロンの容量が限られているためシャーディングが使用されるシナリオ、および強力な一貫性と完全な分散トランザクションが必要とされるシナリオ向けに設計されています。TiDBの利点の1つは、並列処理を実行するためにコンピューティング処理をストレージノードにプッシュダウンできることです。
+TiDBは、MySQLスタンドアロンのキャパシティが限られているためシャーディングが使用されるシナリオ、および強力な一貫性と完全な分散トランザクションが必要とされるシナリオ向けに設計されています。TiDBの利点の1つは、並列処理を実行するためにコンピューティング処理をストレージノードにプッシュダウンできることです。
 
 TiDBは、小規模なテーブル（例えば1,000万件未満）には適していません。データサイズが小さく、リージョン数が限られている場合、TiDBの並行処理能力を十分に発揮できないためです。典型的な例として、数行のレコードが頻繁に更新されるカウンターテーブルが挙げられます。TiDBでは、これらの行はストレージエンジン内で複数のキーバリューペアに変換され、単一ノード上のリージョンに格納されます。強力な一貫性を保証するためのバックグラウンドレプリケーションや、TiDBからTiKVへの操作によるオーバーヘッドのため、MySQLスタンドアロンよりもパフォーマンスが低下します。
 
