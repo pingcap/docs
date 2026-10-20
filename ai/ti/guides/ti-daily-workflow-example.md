@@ -14,7 +14,7 @@ summary: リソースを確認し、TiDB Cloud Starter インスタンスとフ�
 ## 前提条件 {#prerequisites}
 
 - `ti` をインストールし、`ti configure` を実行します。
-- 組織に、1 つの TiDB Cloud Starter インスタンスと 1 つのファイルシステムを作成できる容量があることを確認します。
+- 組織に、1 つの TiDB Cloud Starter インスタンスと 1 つのファイルシステムを作成できるキャパシティがあることを確認します。
 
 ## ステップ 1. 現在のリソースを確認する {#step-1-inspect-current-resources}
 

@@ -33,7 +33,7 @@ API キーで認証自体は成功しても、コマンドが要求する権限�
 
 ## Starter の作成がクォータに達する {#starter-creation-reaches-quota}
 
-クォータおよび容量エラーは、組織が無料の Starter 制限に達したことを意味する場合があります。別のものを作成する前に、既存の Starter リソースを一覧表示してください。
+クォータおよびキャパシティエラーは、組織が無料の Starter 制限に達したことを意味する場合があります。別のものを作成する前に、既存の Starter リソースを一覧表示してください。
 
 ```bash
 ti db list-db-clusters --db-cluster-type starter --output text
