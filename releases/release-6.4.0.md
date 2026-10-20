@@ -264,7 +264,7 @@ TiDBバージョン: 6.4.0-DMR
     - 下流データベースへのデータ書き込みに関するパフォーマンス指標の名前を、TPSからRPS（行/秒）に変更します。
     - DMの完全移行タスクにおけるデータエクスポートの進捗状況を示す進捗インジケーターを追加します。
 
-    これらの指標の詳細については、 [TiDB Data Migrationにおけるクエリタスクステータス](/dm/dm-query-status.md)を参照してください。
+    これらの指標の詳細については、 [TiDB Data Migrationでタスクのステータスを照会する](/dm/dm-query-status.md)を参照してください。
 
 ### TiDBデータ共有サブスクリプション {#tidb-data-share-subscription}
 

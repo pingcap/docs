@@ -147,7 +147,7 @@ monitored:
 
 - `tso` : `tso`マイクロサービス関連の設定。完全な設定については[TSO設定ファイル](/tso-configuration-file.md)を参照してください。
 
-- `scheduling` : `scheduling`マイクロサービス関連の設定。完全な設定については[スケジュール設定ファイル](/scheduling-configuration-file.md)を参照してください。
+- `scheduling` : `scheduling`マイクロサービス関連の設定。完全な設定については[スケジューリング設定ファイル](/scheduling-configuration-file.md)を参照してください。
 
 `server_configs`構成の例は次のとおりです。
 

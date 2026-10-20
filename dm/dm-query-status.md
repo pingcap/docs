@@ -3,7 +3,7 @@ title: Query Task Status in TiDB Data Migration
 summary: データ複製タスクのステータスを照会する方法を学習します。
 ---
 
-# TiDB データ移行におけるクエリタスクステータス {#query-task-status-in-tidb-data-migration}
+# TiDB データ移行でタスクのステータスを照会する {#query-task-status-in-tidb-data-migration}
 
 このドキュメントでは、 `query-status`コマンドを使用して、DM のタスク ステータスとサブタスク ステータスを照会する方法を紹介します。
 

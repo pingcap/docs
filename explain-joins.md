@@ -3,7 +3,7 @@ title: Explain Statements That Use Joins
 summary: TiDB のEXPLAIN文によって返される実行計画情報について学習します。
 ---
 
-# テーブル結合を使用する文を説明する {#explain-statements-that-use-joins}
+# テーブル結合を使用するステートメントの実行計画 {#explain-statements-that-use-joins}
 
 TiDBでは、SQLオプティマイザは、テーブルをどの順序で結合するか、そして特定のSQL文に対して最も効率的な結合アルゴリズムは何かを決定する必要があります。このドキュメントの例は、以下のサンプルデータに基づいています。
 

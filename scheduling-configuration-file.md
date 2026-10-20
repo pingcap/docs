@@ -3,7 +3,7 @@ title: Scheduling Configuration File
 summary: スケジューリング設定ファイルには、ノード名、データ パス、ノード URL などの複数の設定項目が含まれています。
 ---
 
-# スケジュール設定ファイル {#scheduling-configuration-file}
+# スケジューリング設定ファイル {#scheduling-configuration-file}
 
 <!-- markdownlint-disable MD001 -->
 

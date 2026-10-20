@@ -553,7 +553,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [MPPモードでステートメントを説明する](/explain-mpp.md)
+- [MPPモードのステートメントの実行計画](/explain-mpp.md)
 - [システム変数](/system-variables.md#mpp_exchange_compression_mode-new-in-v660)
 - [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
 
@@ -561,7 +561,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [MPPモードでステートメントを説明する](/explain-mpp.md)
+- [MPPモードのステートメントの実行計画](/explain-mpp.md)
 - [システム変数](/system-variables.md#mpp_version-new-in-v660)
 - [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
 
@@ -796,7 +796,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [MPPモードでステートメントを説明する](/explain-mpp.md)
+- [MPPモードのステートメントの実行計画](/explain-mpp.md)
 - [HTAPを探索する](/explore-htap.md)
 - [システム変数](/system-variables.md#tidb_allow_mpp-new-in-v50)
 - [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
@@ -1001,7 +1001,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [MPPモードでステートメントを説明する](/explain-mpp.md)
+- [MPPモードのステートメントの実行計画](/explain-mpp.md)
 - [システム変数](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)
 - [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
 - [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
@@ -1011,7 +1011,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [MPPモードでステートメントを説明する](/explain-mpp.md)
+- [MPPモードのステートメントの実行計画](/explain-mpp.md)
 - [システム変数](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)
 - [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
 - [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
@@ -1651,7 +1651,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [インデックスマージを使用したステートメントの説明](/explain-index-merge.md)
+- [インデックスマージを使用するステートメントの実行計画](/explain-index-merge.md)
 - [インデックスの選択](/choose-index.md)
 - [オプティマイザヒント](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
@@ -2053,8 +2053,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
 - [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
-- [ディスク流出時の暗号化機能を有効にする](/enable-disk-spill-encrypt.md)
-- [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
+- [ディスクスピルの暗号化を有効にする](/enable-disk-spill-encrypt.md)
+- [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
 - [システム変数](/system-variables.md#tidb_enable_tmp_storage_on_oom)
 - [TiDB設定ファイル](/tidb-configuration-file.md)
 - [TiDB メモリ制御](/configure-memory-usage.md)
@@ -2369,7 +2369,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [スロークエリを分析する](/analyze-slow-queries.md)
 - [3ノードハイブリッドデプロイのベストプラクティス](/best-practices/three-nodes-hybrid-deployment.md)
-- [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
+- [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_hash_join_concurrency)
 
@@ -2434,7 +2434,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
+- [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_index_join_batch_size)
 
@@ -2458,7 +2458,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [3ノードハイブリッドデプロイのベストプラクティス](/best-practices/three-nodes-hybrid-deployment.md)
-- [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
+- [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_index_lookup_join_concurrency)
 
@@ -2728,9 +2728,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [ディスク流出時の暗号化機能を有効にする](/enable-disk-spill-encrypt.md)
+- [ディスクスピルの暗号化を有効にする](/enable-disk-spill-encrypt.md)
 - [エラーコードとトラブルシューティング](/error-codes.md)
-- [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
+- [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
 - [コストの高いクエリを特定する](/identify-expensive-queries.md)
 - [非トランザクションDML文](/non-transactional-dml.md)
 - [オプティマイザヒント](/optimizer-hints.md)

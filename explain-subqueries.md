@@ -3,7 +3,7 @@ title: Explain Statements That Use Subqueries
 summary: TiDB のEXPLAIN文によって返される実行計画情報について学習します。
 ---
 
-# サブクエリを使用するステートメントの説明 {#explain-statements-that-use-subqueries}
+# サブクエリを使用するステートメントの実行計画 {#explain-statements-that-use-subqueries}
 
 TiDBはサブクエリのパフォーマンスを向上させるために[いくつかの最適化](/subquery-optimization.md)を実行します。このドキュメントでは、一般的なサブクエリに対するこれらの最適化のいくつかと、 `EXPLAIN`の出力の解釈方法について説明します。
 
@@ -261,10 +261,10 @@ tidb> EXPLAIN SELECT * FROM t WHERE (a, b) NOT IN (SELECT * FROM s);
 
 ## 他の種類のサブクエリを使用してステートメントを説明する {#explain-statements-using-other-types-of-subqueries}
 
-- [MPPモードでステートメントを説明する](/explain-mpp.md)
-- [インデックスを使用するステートメントを説明する](/explain-indexes.md)
-- [テーブル結合を使用する文を説明する](/explain-joins.md)
-- [集計を使用するステートメントを説明する](/explain-aggregation.md)
-- [ビューを使用してステートメントを説明する](/explain-views.md)
-- [パーティションを使用したステートメントの説明](/explain-partitions.md)
-- [インデックスマージを使用したステートメントの説明](/explain-index-merge.md)
+- [MPPモードのステートメントの実行計画](/explain-mpp.md)
+- [インデックスを使用するステートメントの実行計画](/explain-indexes.md)
+- [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
+- [集計を使用するステートメントの実行計画](/explain-aggregation.md)
+- [ビューを使用するステートメントの実行計画](/explain-views.md)
+- [パーティションを使用するステートメントの実行計画](/explain-partitions.md)
+- [インデックスマージを使用するステートメントの実行計画](/explain-index-merge.md)
