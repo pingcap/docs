@@ -13,7 +13,7 @@
 All capabilities described in the official documentation work the same on an allowlisted Essential instance:
 
 | Capability | Reference |
-|-|-|-|
+|-|-|
 | Table-level and partition-level IA storage class, `STORAGE_CLASS` / `ENGINE_ATTRIBUTE` DDL, partition selectors | [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md) |
 | Transparent SQL semantics; bidirectional IA ⇄ Standard conversion | [Tiered Storage Overview](/tidb-cloud/tiered-storage-overview.md) |
 | Conversion progress and history: `SHOW STORAGE_CLASS TRANSITIONS`, `mysql.tidb_storage_class_transition_history` | [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md) |
