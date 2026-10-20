@@ -670,7 +670,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [集計（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)
 - [DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)
 - [日付と時刻の型](/data-type-date-and-time.md)
-- [その他の機能](/functions-and-operators/miscellaneous-functions.md)
+- [その他の関数](/functions-and-operators/miscellaneous-functions.md)
 - [パーティショニング](/partitioned-table.md)
 - [精密計算](/functions-and-operators/precision-math.md)
 - [権限管理](/privilege-management.md)
@@ -1153,7 +1153,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [`tidb_external_ts`変数を使用して履歴データを読み取る](/tidb-external-ts.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_current_ts)
-- [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
+- [TiDB固有の関数](/functions-and-operators/tidb-functions.md)
 - [TiDB のタイムスタンプ Oracle (TSO)](/tso.md)
 - [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)
 
@@ -1964,7 +1964,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [システム変数](/system-variables.md#tidb_enable_row_level_checksum-new-in-v710)
 - [単一行データの TiCDC データ整合性検証](/ticdc/ticdc-integrity-check.md)
-- [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
+- [TiDB固有の関数](/functions-and-operators/tidb-functions.md)
 - [TiDB 8.0.0 リリースノート](/releases/release-8.0.0.md)
 - [TiDB 7.5.1 リリースノート](/releases/release-7.5.1.md)
 - [TiDB 7.1.0 リリースノート](/releases/release-7.1.0.md)
@@ -2317,7 +2317,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [システム変数](/system-variables.md#tidb_generate_binary_plan-new-in-v620)
-- [TiDB固有の機能](/functions-and-operators/tidb-functions.md)
+- [TiDB固有の関数](/functions-and-operators/tidb-functions.md)
 - [TiDB 6.2.0 リリースノート](/releases/release-6.2.0.md)
 
 ### tidb_gogc_tuner_max_value
@@ -2967,7 +2967,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
-- [クエリの最適化](/agg-distinct-optimization.md)
+- [Distinct最適化](/agg-distinct-optimization.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_opt_distinct_agg_push_down)
 - [TiDB設定ファイル](/tidb-configuration-file.md)

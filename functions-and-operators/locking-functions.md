@@ -3,7 +3,7 @@ title: Locking Functions
 summary: TiDB のユーザー レベルのロック関数について学習します。
 ---
 
-# ロック機能 {#locking-functions}
+# ロック関数 {#locking-functions}
 
 TiDB は、MySQL 8.0 で利用可能なユーザー レベル[ロック関数](https://dev.mysql.com/doc/refman/8.0/en/locking-functions.html)のほとんどをサポートしています。
 

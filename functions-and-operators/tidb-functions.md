@@ -3,7 +3,7 @@ title: TiDB Specific Functions
 summary: TiDB 固有の関数の使用法について学習します。
 ---
 
-# TiDB固有の機能 {#tidb-specific-functions}
+# TiDB固有の関数 {#tidb-specific-functions}
 
 次の関数は TiDB 拡張機能であり、MySQL には存在しません。
 

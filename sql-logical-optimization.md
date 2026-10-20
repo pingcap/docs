@@ -11,7 +11,7 @@ summary: "SQL論理最適化の章では、TiDBクエリプラン生成におけ
 
 - [サブクエリ関連の最適化](/subquery-optimization.md)
 - [列プルーニング](/column-pruning.md)
-- [相関サブクエリの非相関](/correlated-subquery-optimization.md)
+- [相関サブクエリの非相関化](/correlated-subquery-optimization.md)
 - [最大/最小を排除](/max-min-eliminate.md)
 - [Predicate Push Down](/predicate-push-down.md)
 - [パーティションプルーニング](/partition-pruning.md)

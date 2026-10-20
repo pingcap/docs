@@ -43,7 +43,7 @@ summary: TiDBの機能概要について学びましょう。
 | [集計関数](/functions-and-operators/aggregate-group-by-functions.md)               |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ウィンドウ関数](/functions-and-operators/window-functions.md)                        |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [その他の関数](/functions-and-operators/miscellaneous-functions.md)                  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
-| [オペレーター](/functions-and-operators/operators.md)                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
+| [演算子](/functions-and-operators/operators.md)                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [文字セットと照合順序](/character-set-and-collation.md)[^1]                                |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |
 | [ユーザーレベルのロック](/functions-and-operators/locking-functions.md)                   |  Y  |  Y  |  Y  |  Y  |  Y  |  Y  |  N  |
 

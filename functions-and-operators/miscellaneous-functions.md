@@ -3,7 +3,7 @@ title: Miscellaneous Functions
 summary: TiDBの様々な関数について学びましょう。
 ---
 
-# その他の機能 {#miscellaneous-functions}
+# その他の関数 {#miscellaneous-functions}
 
 TiDB は、MySQL 8.0 で利用可能な[その他の関数](https://dev.mysql.com/doc/refman/8.0/en/miscellaneous-functions.html)のほとんどをサポートしています。
 
