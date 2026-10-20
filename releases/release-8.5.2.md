@@ -94,7 +94,7 @@ TiDBバージョン：8.5.2
     - TSOを割り当てる際にメモリリークが発生する可能性がある問題を修正 [#9004](https://github.com/tikv/pd/issues/9004) @[rleungx](https://github.com/rleungx)
     - `tidb_enable_tso_follower_proxy`システム変数が有効にならない可能性がある問題を修正 [#8947](https://github.com/tikv/pd/issues/8947) @[JmPotato](https://github.com/JmPotato)
     - PDノードがLeaderではない場合でもTSOを生成する可能性がある問題を修正 [#9051](https://github.com/tikv/pd/issues/9051) @[rleungx](https://github.com/rleungx)
-    - PD Leader切り替え中にリージョンシンカーが時間内に終了しない可能性がある問題を修正 [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
+    - PD Leader切り替え中にリージョンシンカーが速やかに終了しない可能性がある問題を修正 [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
     - `lease`のデフォルト値が正しく設定されていない問題を修正 [#9156](https://github.com/tikv/pd/issues/9156) @[rleungx](https://github.com/rleungx)
     - `tidb_enable_tso_follower_proxy`を有効にするとTSOサービスが利用できなくなる可能性がある問題を修正しました [#9188](https://github.com/tikv/pd/issues/9188) @[Tema](https://github.com/Tema)
 
@@ -131,7 +131,7 @@ TiDBバージョン：8.5.2
 
         - レプリケーション トラフィックがダウンストリーム Kafka のトラフィックしきい値を超えた後に変更フィードが停止する可能性がある問題を修正 [#12110](https://github.com/pingcap/tiflow/issues/12110) @[3AceShowHand](https://github.com/3AceShowHand)
         - `pulsar+http`または`pulsar+https`プロトコルが使用されている場合に Kafka シンクのディスパッチ ルールが有効にならない問題を修正 [#12068](https://github.com/pingcap/tiflow/issues/12068) @[SandeepPadhi](https://github.com/SandeepPadhi)
-        - TiCDCがPDリーダーの移行を時間内に監視できず、レプリケーションレイテンシーが増加する問題を修正 [#11997](https://github.com/pingcap/tiflow/issues/11997) @[lidezhu](https://github.com/lidezhu)
+        - TiCDCがPDリーダーの移行を速やかに監視できず、レプリケーションレイテンシーが増加する問題を修正 [#11997](https://github.com/pingcap/tiflow/issues/11997) @[lidezhu](https://github.com/lidezhu)
         - TiCDCがAvroプロトコル経由で`default NULL` SQL文を複製する際にエラーを報告する問題を修正しました [#11994](https://github.com/pingcap/tiflow/issues/11994) @[wk989898](https://github.com/wk989898)
         - アップストリームで新しく追加された列のデフォルト値が`NOT NULL`から`NULL`に変更された後、ダウンストリームのその列のデフォルト値が正しくない問題を修正します [#12037](https://github.com/pingcap/tiflow/issues/12037) @[wk989898](https://github.com/wk989898)
         - PDスケールイン後にTiCDCがPDに正しく接続できない問題を修正 [#12004](https://github.com/pingcap/tiflow/issues/12004) @[lidezhu](https://github.com/lidezhu)

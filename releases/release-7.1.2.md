@@ -45,7 +45,7 @@ TiDB バージョン: 7.1.2
 - PD
 
     - PD 呼び出し元のバックオフ メカニズムを最適化して、呼び出しが失敗したときの RPC リクエストの頻度を減らします[#6556](https://github.com/tikv/pd/issues/6556) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[HuSharp](https://github.com/HuSharp)
-    - 発信者が切断されたときにCPUとメモリを時間内に解放するために、 `GetRegions`インターフェースにキャンセルメカニズムを導入する[#6835](https://github.com/tikv/pd/issues/6835) @[lhy1024](https://github.com/lhy1024)
+    - 発信者が切断されたときにCPUとメモリを速やかに解放するために、 `GetRegions`インターフェースにキャンセルメカニズムを導入する[#6835](https://github.com/tikv/pd/issues/6835) @[lhy1024](https://github.com/lhy1024)
 
 - TiFlash
 
@@ -115,7 +115,7 @@ TiDB バージョン: 7.1.2
     - 不正なMDL処理によりDDL操作が永続的にブロックされる可能性がある問題を修正 [#46920](https://github.com/pingcap/tidb/issues/46920) @[wjhuang2016](https://github.com/wjhuang2016)
     - テーブルの名前変更によって発生する`information_schema.columns`の重複行の問題を修正 [#47064](https://github.com/pingcap/tidb/issues/47064) @[jiyfhust](https://github.com/jiyfhust)
     - `client-go`の`batch-client`のpanic問題を修正 [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
-    - パーティション化されたテーブルの統計収集が、メモリ使用量がメモリ制限を超えたときに時間内に強制終了されない問題を修正しました。 [#45706](https://github.com/pingcap/tidb/issues/45706) @[hawkingrei](https://github.com/hawkingrei)
+    - パーティション化されたテーブルの統計収集が、メモリ使用量がメモリ制限を超えたときに速やかに強制終了されない問題を修正しました。 [#45706](https://github.com/pingcap/tidb/issues/45706) @[hawkingrei](https://github.com/hawkingrei)
     - クエリに`UNHEX`条件が含まれている場合にクエリ結果が不正確になる問題を修正しました [#45378](https://github.com/pingcap/tidb/issues/45378) @[qw4990](https://github.com/qw4990)
     - TiDBが`GROUP_CONCAT` のクエリに対して`Can't find column`を返す問題を修正 [#41957](https://github.com/pingcap/tidb/issues/41957) @[AilinKid](https://github.com/AilinKid)
 

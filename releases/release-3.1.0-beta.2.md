@@ -63,6 +63,6 @@ TiDB Ansible バージョン: 3.1.0-beta.2
     - TiDB Lightning
         - サーバーモード以外ではWebインターフェースが動作しないバグを修正 [#259](https://github.com/pingcap/tidb-lightning/pull/259)
     - BR (バックアップと復元)
-        - データの復元時に回復不能なエラーが発生し、 BR が時間内に終了できない問題を修正しました[#152](https://github.com/pingcap/br/pull/152)
+        - データの復元時に回復不能なエラーが発生し、 BR が速やかに終了できない問題を修正しました[#152](https://github.com/pingcap/br/pull/152)
 - TiDB Ansible
     - 一部のシナリオでPD Leaderを取得できないためにローリングアップデートコマンドが失敗する問題を修正しました[#1122](https://github.com/pingcap/tidb-ansible/pull/1122)

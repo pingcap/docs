@@ -35,7 +35,7 @@ TiDBバージョン：5.1.5
     - 同時実行される列型変更によってスキーマとデータの間に不整合が生じる問題を修正します [#31048](https://github.com/pingcap/tidb/issues/31048)
     - `KILL TIDB`がアイドル状態の接続で即座に有効にならない問題を修正します [#24031](https://github.com/pingcap/tidb/issues/24031)
     - セッション変数を設定すると`tidb_snapshot`が機能しなくなるバグを修正しました [#35515](https://github.com/pingcap/tidb/issues/35515)
-    - リージョンがマージされた際にリージョンキャッシュが時間内にクリーンアップされない問題を修正します [#37141](https://github.com/pingcap/tidb/issues/37141)
+    - リージョンがマージされた際にリージョンキャッシュが速やかにクリーンアップされない問題を修正します [#37141](https://github.com/pingcap/tidb/issues/37141)
     - KVクライアントの接続配列競合によって発生するpanic問題を修正 [#33773](https://github.com/pingcap/tidb/issues/33773)
     - TiDB Binlogが有効になっている場合、 `ALTER SEQUENCE`文を実行すると、メタデータのバージョンが間違っていて、 Drainerが終了する可能性がある問題を修正しました。 [#36276](https://github.com/pingcap/tidb/issues/36276)
     - TiDBがステートメントサマリーテーブルをクエリする際にpanicする可能性があるバグを修正しました [#35340](https://github.com/pingcap/tidb/issues/35340)

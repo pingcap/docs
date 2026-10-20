@@ -153,4 +153,4 @@ TiFlash v7.4.0以降、クエリレベルでの自動スピルをサポートし
     - クエリ内のその他の非スピルオペレーターはメモリを大量に消費します。
     - スピルオペレーターは、タイムリーにディスクにスピルしません。
 
-    スピルオペレーターが時間内にディスクにスピルしない状況に対処するには、メモリしきい値エラーを回避するために[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)を減らすことを試してください。
+    スピルオペレーターが速やかにディスクにスピルしない状況に対処するには、メモリしきい値エラーを回避するために[`tiflash_query_spill_ratio`](/system-variables.md#tiflash_query_spill_ratio-new-in-v740)を減らすことを試してください。

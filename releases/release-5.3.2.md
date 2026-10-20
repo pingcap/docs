@@ -28,7 +28,7 @@ TiDB バージョン: 5.3.2
 - TiKV
 
     - Raftクライアントによるシステムコールを減らしCPU効率を上げる[#11309](https://github.com/tikv/tikv/issues/11309)
-    - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを時間内に更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
+    - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを速やかに更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
     - レイテンシージッタを削減するためにリーダーシップをCDCオブザーバーに移譲する[#12111](https://github.com/tikv/tikv/issues/12111)
     - モジュールのパフォーマンスの問題を特定するために、 Raftログのガベージコレクションモジュールのメトリックを追加します。 [#11374](https://github.com/tikv/tikv/issues/11374)
 

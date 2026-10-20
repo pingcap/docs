@@ -50,4 +50,4 @@ TiDBバージョン: 3.0.19
 
     - TiDB Lightning
 
-        - 厳密モードでCSVに無効なUTF文字が検出された場合、 TiDB Lightningプロセスが時間内に終了しない問題を修正しました。 [#378](https://github.com/pingcap/tidb-lightning/pull/378)
+        - 厳密モードでCSVに無効なUTF文字が検出された場合、 TiDB Lightningプロセスが速やかに終了しない問題を修正しました。 [#378](https://github.com/pingcap/tidb-lightning/pull/378)

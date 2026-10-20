@@ -528,7 +528,7 @@ TiDB バージョン: 8.0.0
         - TiCDCが複数のチェンジフィードを同時に作成する際に`ErrChangeFeedAlreadyExists`エラーを返す問題を修正 [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - `ignore-event`で`add table partition`イベントをフィルタリングした後、TiCDC が関連パーティションの他のタイプの DML 変更を下流にレプリケートしない問題を修正します。 [#10524](https://github.com/pingcap/tiflow/issues/10524) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - アップストリームテーブルで`TRUNCATE PARTITION`が実行された後、changefeed がエラーを報告する問題を修正します [#10522](https://github.com/pingcap/tiflow/issues/10522) @[sdojjy](https://github.com/sdojjy)
-        - 変更フィードを再開する際に、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントより小さいと、 `snapshot lost caused by GC`が時間内に報告されない問題を修正します [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
+        - 変更フィードを再開する際に、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントより小さいと、 `snapshot lost caused by GC`が速やかに報告されない問題を修正します [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
         - 単一行データのデータ整合性検証が有効になった後、タイムゾーンの不一致により TiCDC が`TIMESTAMP`型のチェックサムを検証できない問題を修正 [#10573](https://github.com/pingcap/tiflow/issues/10573) @[3AceShowHand](https://github.com/3AceShowHand)
         - Syncpoint テーブルが正しく複製されない可能性がある問題を修正しました [#10576](https://github.com/pingcap/tiflow/issues/10576) @[asddongmen](https://github.com/asddongmen)
         - Apache Pulsarをダウンストリームとして使用する際に、OAuth2.0、TLS、mTLSが正しく有効化できない問題を修正 [#10602](https://github.com/pingcap/tiflow/issues/10602) @[asddongmen](https://github.com/asddongmen)

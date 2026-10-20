@@ -98,7 +98,7 @@ TiDB バージョン: 7.5.6
     - `tidb_enable_tso_follower_proxy`システム変数が有効になっているときに PD がpanicする可能性がある問題を修正[#8950](https://github.com/tikv/pd/issues/8950) @[okJiang](https://github.com/okJiang)
     - `tidb_enable_tso_follower_proxy`システム変数が有効にならない可能性がある問題を修正しました [#8947](https://github.com/tikv/pd/issues/8947) @[JmPotato](https://github.com/JmPotato)
     - TSO を割り当てるときにメモリリークが発生する可能性がある問題を修正しました [#9004](https://github.com/tikv/pd/issues/9004) @[rleungx](https://github.com/rleungx)
-    - PD Leaderの切り替え時にRegion syncer が時間内に終了しない可能性がある問題を修正しました [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
+    - PD Leaderの切り替え時にRegion syncer が速やかに終了しない可能性がある問題を修正しました [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
     - PDノードがLeaderでない場合でもTSOを生成する可能性がある問題を修正しました [#9051](https://github.com/tikv/pd/issues/9051) @[rleungx](https://github.com/rleungx)
 
 - TiFlash

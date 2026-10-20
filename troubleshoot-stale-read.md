@@ -174,7 +174,7 @@ CheckLeader の問題に対処するには、 [**TiKV-Details** > **Resolved-TS*
 
 ![Example: Max gap of resolved-ts](/media/stale-read/example-ts-gap.png)
 
-上記のメトリックから、リージョン`3121`と他のいくつかのリージョンが、resolved-ts を時間内に更新していないことがわかります。
+上記のメトリックから、リージョン`3121`と他のいくつかのリージョンが、resolved-ts を速やかに更新していないことがわかります。
 
 リージョン`3121`の状態に関する詳細を取得するには、次のコマンドを実行します。
 

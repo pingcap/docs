@@ -38,7 +38,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 ![TiCDC Summary Dashboard - Changefeed metrics](/media/ticdc/ticdc-summary-monitor-changefeed.png)
 
 - **Changefeed checkpoint lag**: 上流 TiDB クラスターと下流システム間のデータレプリケーションレイテンシーを時間で測定します。一般的に、この指標はデータレプリケーションタスクの全体的な健全性を反映します。通常、遅延が小さいほど、レプリケーションタスクの状態は良好です。遅延が大きくなる場合、通常、Changefeed のレプリケーション能力または下流システムの消費能力が上流の書き込み速度に追いついていないことを示します。
-- **Changefeed resolved ts lag**: 上流 TiDB クラスターと TiCDC ノード間のデータレイテンシーを時間で測定します。この指標は、変更フィードが上流からデータ変更をプルする能力を反映しています。遅延が増加すると、変更フィードが上流で生成されたデータ変更を時間内にプルできないことを意味します。
+- **Changefeed resolved ts lag**: 上流 TiDB クラスターと TiCDC ノード間のデータレイテンシーを時間で測定します。この指標は、変更フィードが上流からデータ変更をプルする能力を反映しています。遅延が増加すると、変更フィードが上流で生成されたデータ変更を速やかにプルできないことを意味します。
 
 ## Dataflow panel {#dataflow-panel}
 
