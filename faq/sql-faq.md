@@ -60,7 +60,7 @@ DROP GLOBAL BINDING for
 
 [システム変数](/system-variables.md)を参照してください。
 
-## `ORDER BY`を省略した場合、結果の順序はMySQLと異なります。 {#the-order-of-results-is-different-from-mysql-when-order-by-is-omitted}
+## `ORDER BY`を省略した場合、結果の順序はMySQLと異なる {#the-order-of-results-is-different-from-mysql-when-order-by-is-omitted}
 
 これはバグではありません。レコードのデフォルトの順序は様々な状況に依存し、一貫性は保証されません。
 

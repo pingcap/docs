@@ -35,11 +35,11 @@ TiDB Cloud Dedicatedクラスターの場合、クラスターのトラフィッ
 
 TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、デフォルトで全てのIPアドレスからの接続を許可するため、トラフィックフィルタを設定する必要はありません。
 
-## ステップ1. サンプルプロジェクトと接続文字列を取得します。 {#step-1-get-the-example-project-and-the-connection-string}
+## ステップ1. サンプルプロジェクトと接続文字列を取得する {#step-1-get-the-example-project-and-the-connection-string}
 
 TiDB Cloudは、すぐに開発を始められるように、TypeScriptとNext.js、React、Prisma Clientを使用したフルスタックのサンプルアプリを提供しています。これは、ブログ記事の投稿や削除ができるシンプルなブログサイトです。すべてのコンテンツはPrismaを介してTiDB Cloudに保存されます。
 
-### サンプルプロジェクトをフォークして、自分のスペースにクローンしてください。 {#fork-the-example-project-and-clone-it-to-your-own-space}
+### サンプルプロジェクトをフォークして、自分のスペースにクローンする {#fork-the-example-project-and-clone-it-to-your-own-space}
 
 1. [Next.jsとPrismaを使用したフルスタックの例](https://github.com/tidbcloud/nextjs-prisma-example)リポジトリを自分のGitHubリポジトリにフォークします。
 

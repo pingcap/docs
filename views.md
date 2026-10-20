@@ -18,7 +18,7 @@ TiDBはビューをサポートしています。ビューは仮想テーブル�
 
 ビューのメタデータを取得するには、次のいずれかの方法を選択します。
 
-### `SHOW CREATE TABLE view_name`または`SHOW CREATE VIEW view_name`ステートメントを使用します。 {#use-the-show-create-table-view-name-or-show-create-view-view-name-statement}
+### `SHOW CREATE TABLE view_name`または`SHOW CREATE VIEW view_name`ステートメントを使用する {#use-the-show-create-table-view-name-or-show-create-view-view-name-statement}
 
 使用例:
 

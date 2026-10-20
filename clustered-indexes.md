@@ -90,7 +90,7 @@ ALTER TABLE t DROP PRIMARY KEY;
 ALTER TABLE t DROP INDEX `PRIMARY`;
 ```
 
-### 主キーがクラスター化インデックスであるかどうかを確認してください。 {#check-whether-the-primary-key-is-a-clustered-index}
+### 主キーがクラスター化インデックスであるかどうかを確認する {#check-whether-the-primary-key-is-a-clustered-index}
 
 テーブルの主キーがクラスター化インデックスであるかどうかは、以下のいずれかの方法で確認できます。
 

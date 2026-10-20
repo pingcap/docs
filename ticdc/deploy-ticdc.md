@@ -41,7 +41,7 @@ cdc_servers:
 >
 > TiCDC をインストールする前に、 TiUPコントロールマシンと TiCDC ホストの間に[SSH相互信頼とパスワードなしのsudoを手動で設定](/check-before-deployment.md#manually-configure-the-ssh-mutual-trust-and-sudo-without-password)していることを確認してください。
 
-## TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします。 {#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup}
+## TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトする {#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup}
 
 TiCDCクラスタのスケールアウト方法は、新規デプロイ方法と同様です。スケールアウトにはTiUPを使用することをお勧めします。
 
@@ -104,7 +104,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
     - TiUPはバージョン1.11.3以降です。
     - クラスター内では、少なくとも2つのTiCDCインスタンスが稼働しています。
 
-## TiUPを使用してTiCDCクラスタ構成を変更します。 {#modify-ticdc-cluster-configurations-using-tiup}
+## TiUPを使用してTiCDCクラスタ構成を変更する {#modify-ticdc-cluster-configurations-using-tiup}
 
 このセクションでは[`tiup cluster edit-config`](/tiup/tiup-component-cluster-edit-config.md)コマンドを使用して TiCDC の設定を変更する方法について説明します。次の例では、 `gc-ttl`のデフォルト値を`86400`から`172800` (48時間) に変更する必要があると想定しています。
 
@@ -131,7 +131,7 @@ TiCDCクラスタをアップグレードする際には、以下の点に注意
 
 3. `tiup cluster reload <cluster-name> -R cdc`コマンドを実行して設定を再読み込みします。
 
-## TiUPを使用してTiCDCを停止および起動します。 {#stop-and-start-ticdc-using-tiup}
+## TiUPを使用してTiCDCを停止および起動する {#stop-and-start-ticdc-using-tiup}
 
 TiUPを使用すると、TiCDCノードを簡単に停止および起動できます。コマンドは次のとおりです。
 

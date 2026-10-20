@@ -115,7 +115,7 @@ TiDB Cloud Starterインスタンスをお持ちでない場合は、このノ�
 
 このトリガーは、毎朝午前8時にワークフローを実行します。
 
-#### データ挿入に使用するテーブルを作成します。 {#create-a-table-used-to-insert-data}
+#### データ挿入に使用するテーブルを作成する {#create-a-table-used-to-insert-data}
 
 1. 手動トリガーノードの右側にある**+**をクリックします。
 

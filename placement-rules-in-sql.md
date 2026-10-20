@@ -241,7 +241,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ## 基本的な例 {#basic-examples}
 
-### クラスターのレプリカ数をグローバルに指定します。 {#specify-the-number-of-replicas-globally-for-a-cluster}
+### クラスターのレプリカ数をグローバルに指定する {#specify-the-number-of-replicas-globally-for-a-cluster}
 
 クラスターが初期化されると、デフォルトのレプリカ数は`3`になります。クラスターでより多くのレプリカが必要な場合は、配置ポリシーを構成してこの数を増やし、 [`ALTER RANGE`](/sql-statements/sql-statement-alter-range.md)を使用してクラスターレベルでポリシーを適用できます。例:
 
@@ -252,7 +252,7 @@ ALTER RANGE global PLACEMENT POLICY five_replicas;
 
 TiDB ではリーダーの数がデフォルトで`1`に設定されているため、 `five replicas`は`4`つのフォロワーと`1`つのLeaderを意味します。
 
-### データベースのデフォルトの配置ポリシーを指定します。 {#specify-a-default-placement-policy-for-a-database}
+### データベースのデフォルトの配置ポリシーを指定する {#specify-a-default-placement-policy-for-a-database}
 
 データベースのデフォルトの配置ポリシーを指定できます。これは、データベースのデフォルトの文字セットや照合順序を設定するのと同様に機能します。データベース内のテーブルまたはパーティションに他の配置ポリシーが指定されていない場合、データベースの配置ポリシーがテーブルとパーティションに適用されます。例:
 
@@ -280,7 +280,7 @@ ALTER PLACEMENT POLICY p3 FOLLOWERS=3; -- `FOLLOWERS=3` applies to the table att
 
 テーブルからパーティションへのポリシー継承は、前述の例とは異なる点に注意してください。テーブルのデフォルトポリシーを変更すると、新しいポリシーはそのテーブル内のパーティションにも適用されます。ただし、テーブルがデータベースからポリシーを継承するのは、ポリシーを指定せずに作成された場合のみです。テーブルがデータベースからポリシーを継承すると、データベースのデフォルトポリシーを変更しても、そのテーブルには適用されません。
 
-### テーブルの配置ポリシーを指定します。 {#specify-a-placement-policy-for-a-table}
+### テーブルの配置ポリシーを指定する {#specify-a-placement-policy-for-a-table}
 
 テーブルのデフォルトの配置ポリシーを指定できます。例：
 
@@ -292,7 +292,7 @@ CREATE TABLE t (a INT) PLACEMENT POLICY=five_replicas;  -- Creates a table t and
 ALTER TABLE t PLACEMENT POLICY=default; -- Removes the placement policy 'five_replicas' from the table t and resets the placement policy to the default one.
 ```
 
-### パーティションテーブルの配置ポリシーを指定します。 {#specify-a-placement-policy-for-a-partitioned-table}
+### パーティションテーブルの配置ポリシーを指定する {#specify-a-placement-policy-for-a-partitioned-table}
 
 パーティションテーブルまたはパーティションに対して、配置ポリシーを指定することもできます。例：
 
@@ -380,7 +380,7 @@ CREATE PLACEMENT POLICY singleaz CONSTRAINTS="[+region=us-east-1]" SURVIVAL_PREF
 
 </CustomContent>
 
-### 複数のデータセンターに2:2:1の比率で分散された5つのレプリカを持つクラスターを指定します。 {#specify-a-cluster-with-5-replicas-distributed-2-2-1-across-multiple-data-centers}
+### 複数のデータセンターに2:2:1の比率で分散された5つのレプリカを持つクラスターを指定する {#specify-a-cluster-with-5-replicas-distributed-2-2-1-across-multiple-data-centers}
 
 2:2:1の比率で5つのレプリカを配布するなど、特定のデータ分布が必要な場合は、これらの`CONSTRAINTS`[辞書形式](#constraints-formats)で構成することにより、異なる制約に対して異なるレプリカ数を指定できます。
 

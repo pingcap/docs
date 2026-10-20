@@ -3,7 +3,7 @@ title: Connect to TiDB Cloud Starter or Essential via Alibaba Cloud Private Endp
 summary: Alibaba Cloudのプライベートエンドポイントを介して、TiDB Cloud StarterまたはEssentialインスタンスに接続する方法を学びましょう。
 ---
 
-# Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します。 {#connect-to-tidb-cloud-starter-or-essential-via-alibaba-cloud-private-endpoint}
+# Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続する {#connect-to-tidb-cloud-starter-or-essential-via-alibaba-cloud-private-endpoint}
 
 このチュートリアルでは、Alibaba Cloud のプライベートエンドポイントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続する手順を説明します。プライベートエンドポイントを介して接続することで、パブリックインターネットを使用せずに、サービスとTiDB Cloud StarterまたはEssentialインスタンス間の安全でプライベートな通信が可能になります。
 

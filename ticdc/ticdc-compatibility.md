@@ -88,7 +88,7 @@ TiCDC クラシック アーキテクチャと新しいアーキテクチャの�
 
 このセクションでは、TiCDCに関連する互換性の問題と、それらの対処方法について説明します。
 
-### TiCDC v5.0.0-rc `cdc cli`ツールを使用してv4.0.xクラスタを操作すると、互換性の問題が発生します。 {#incompatibility-issue-caused-by-using-the-ticdc-v5-0-0-rc-cdc-cli-tool-to-operate-a-v4-0-x-cluster}
+### TiCDC v5.0.0-rc `cdc cli`ツールを使用してv4.0.xクラスタを操作すると、互換性の問題が発生する {#incompatibility-issue-caused-by-using-the-ticdc-v5-0-0-rc-cdc-cli-tool-to-operate-a-v4-0-x-cluster}
 
 TiCDC v5.0.0-rc の`cdc cli`ツールを使用して v4.0.x TiCDC クラスターを操作する場合、次のような異常な状況が発生する可能性があります。
 

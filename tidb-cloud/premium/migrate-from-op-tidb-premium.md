@@ -113,7 +113,7 @@ TiDB Self-ManagedクラスターからAmazon S3へDumplingを使用してデー�
 
 TiDB Self-ManagedクラスターがローカルIDCにある場合、またはDumplingサーバーとAmazon S3間のネットワークが接続されていない場合は、まずファイルをローカルストレージにエクスポートしてから、後でAmazon S3にアップロードすることができます。
 
-#### ステップ1. アップストリームのTiDB Self-ManagedクラスタのGCメカニズムを一時的に無効にします。 {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
+#### ステップ1. アップストリームのTiDB Self-ManagedクラスタのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
 
 増分移行中に新しく書き込まれたデータが失われないようにするには、移行を開始する前にアップストリームクラスタのガベージコレクション（GC）メカニズムを無効にして、システムが履歴データをクリーンアップしないようにする必要があります。
 
@@ -149,7 +149,7 @@ AWS コンソールでアクセスキーを作成します。詳細について�
 
     ![Download CSV file](/media/tidb-cloud/op-to-cloud-create-access-key02.png)
 
-#### ステップ3. Dumplingを使用して、上流のTiDB Self-ManagedクラスターからAmazon S3にデータをエクスポートします。 {#step-3-export-data-from-the-upstream-tidb-self-managed-cluster-to-amazon-s3-using-dumpling}
+#### ステップ3. Dumplingを使用して、上流のTiDB Self-ManagedクラスターからAmazon S3にデータをエクスポートする {#step-3-export-data-from-the-upstream-tidb-self-managed-cluster-to-amazon-s3-using-dumpling}
 
 Dumplingを使用して、アップストリームのTiDB Self-ManagedクラスターからAmazon S3にデータをエクスポートするには、次の手順を実行します。
 

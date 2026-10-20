@@ -48,7 +48,7 @@ Amazon Aurora MySQL の場合、この事前チェック項目はエラーにな
 
 Amazon RDS の場合、次のパラメータを変更する必要があります: `replicate-do-db` 、 `replicate-do-table` 、 `replicate-ignore-db` 、および`replicate-ignore-table` 。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 
-### エラーメッセージ：接続同時接続数がデータベースの最大接続制限を超えていないか確認してください。 {#error-message-check-if-connection-concurrency-exceeds-database-s-maximum-connection-limit}
+### エラーメッセージ：接続同時接続数がデータベースの最大接続制限を超えていないか確認してください {#error-message-check-if-connection-concurrency-exceeds-database-s-maximum-connection-limit}
 
 上流のデータベースでエラーが発生した場合は、 `max_connections`を次のように設定してください。
 
@@ -72,7 +72,7 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 このエラーは、ソースデータベースへの接続に失敗したことを意味します。ソースデータベースが起動しており、指定されたパラメータを使用して接続できるかどうかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてタスクの復旧を試みてください。
 
-### 移行タスクが中断され、"driver: bad connection"または"invalid connection"というエラーが含まれています。 {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
+### 移行タスクが中断され、"driver: bad connection"または"invalid connection"というエラーが含まれる {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
 
 このエラーは、ダウンストリームの TiDB クラスタへの接続に失敗したことを意味します。ダウンストリームの TiDB クラスタが正常な状態（ `Available`および`Modifying`を含む）であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認してください。ダウンストリームの TiDB クラスタが利用可能であることを確認したら、 **Restart**をクリックしてタスクを再開してみてください。
 

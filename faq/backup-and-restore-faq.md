@@ -154,7 +154,7 @@ v6.0.0より前では、 BRは[配置ルール](/placement-rules-in-sql.md)サ�
 
 この問題に対処するには、クラスター リソースをスケールアウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
 
-### `the entry too large, the max entry size is 6291456, the size of data is 7690800`というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいでしょうか。 {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
+### `the entry too large, the max entry size is 6291456, the size of data is 7690800`というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいですか？ {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
 
 `--ddl-batch-size`を`128`またはそれより小さい値に設定することで、バッチで作成されるテーブルの数を減らすことができます。
 

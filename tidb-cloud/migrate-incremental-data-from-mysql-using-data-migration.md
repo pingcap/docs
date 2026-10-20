@@ -255,7 +255,7 @@ SHOW MASTER STATUS;
 
 GTID を有効にする方法については、[前提条件](#prerequisites)を参照してください。
 
-### binlogファイル名と位置を指定してください。 {#specify-binlog-file-name-and-position}
+### binlogファイル名と位置を指定する {#specify-binlog-file-name-and-position}
 
 このオプションを選択すると、ソースデータベースのbinlogファイル名（例： `binlog.000001` ）とbinlogの位置（例： `1307` ）を指定できます。移行ジョブは、指定されたbinlogファイル名と位置から開始され、ソースデータベースの進行中の変更をTiDB Cloudに移行します。
 

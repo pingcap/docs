@@ -4,7 +4,7 @@ summary: Rubyのmysql2を使ってTiDBに接続する方法を学びましょう
 aliases: ['/ja/tidb/stable/dev-guide-sample-application-ruby-mysql2/','/ja/tidb/dev/dev-guide-sample-application-ruby-mysql2/','/ja/tidbcloud/dev-guide-sample-application-ruby-mysql2/']
 ---
 
-# mysql2を使用してTiDBに接続します。 {#connect-to-tidb-with-mysql2}
+# mysql2を使用してTiDBに接続する {#connect-to-tidb-with-mysql2}
 
 TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/brianmario/mysql2)はRubyで最も人気のあるMySQLドライバの1つです。
 
@@ -32,7 +32,7 @@ TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
-## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
 このセクションでは、サンプルアプリケーションコードを実行してTiDBに接続する方法を説明します。
 

@@ -65,7 +65,7 @@ CREATE TABLE `table5` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1
 ```
 
-## ステップ1. Dumplingを使用して全データをエクスポートします。 {#step1-use-dumpling-to-export-full-data}
+## ステップ1. Dumplingを使用して全データをエクスポートする {#step1-use-dumpling-to-export-full-data}
 
 エクスポートする複数のシャーディングされたテーブルが同じ上流のMySQLインスタンスにある場合は、 Dumplingの`-f`パラメータを直接使用して、単一の操作でエクスポートできます。
 
@@ -106,7 +106,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db2 -f 'my
 
 増分レプリケーションに必要な開始位置情報は、 `metadata`ディレクトリの`my_db1`サブディレクトリと`my_db2`サブディレクトリにある`${data-path}`ファイルに格納されています。これらはDumplingによって自動的に生成されるメタ情報ファイルです。増分レプリケーションを実行するには、これらのファイルにbinlogの場所情報を記録する必要があります。
 
-## ステップ2. TiDB Lightningを起動して、エクスポートされたデータをすべてインポートします。 {#step-2-start-tidb-lightning-to-import-full-exported-data}
+## ステップ2. TiDB Lightningを起動して、エクスポートされたデータをすべてインポートする {#step-2-start-tidb-lightning-to-import-full-exported-data}
 
 TiDB Lightningによる移行を開始する前に、チェックポイントの処理方法を理解し、ニーズに応じて適切な手順を選択することをお勧めします。
 
@@ -214,7 +214,7 @@ TiDB Lightning はインポートが完了すると自動的に終了します�
 
 移行中に問題が発生した場合は、 [TiDB Lightningよくある質問](/tidb-lightning/tidb-lightning-faq.md)を参照してください。
 
-## ステップ3.（オプション）DMを使用して増分レプリケーションを実行します。 {#step-3-optional-use-dm-to-perform-incremental-replication}
+## ステップ3.（オプション）DMを使用して増分レプリケーションを実行する {#step-3-optional-use-dm-to-perform-incremental-replication}
 
 ソースデータベース内の指定された位置のbinlogに基づいてデータ変更をTiDBにレプリケートするには、TiDB DMを使用して増分レプリケーションを実行できます。
 

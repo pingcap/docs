@@ -47,7 +47,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 詳細については、以下の資料を参照してください。
 
-- [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 - [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
 

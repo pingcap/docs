@@ -14,7 +14,7 @@ MySQL CLI を介してTiDB Cloud StarterまたはTiDB Cloud Essentialにデー�
 - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにアクセスできます。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)の手順に従って作成します。
 - ローカルコンピュータにMySQL CLIをインストールしてください。
 
-## ステップ1. TiDB Cloud StarterまたはEssentialインスタンスに接続します。 {#step-1-connect-to-your-tidb-cloud-starter-or-essential-instance}
+## ステップ1. TiDB Cloud StarterまたはEssentialインスタンスに接続する {#step-1-connect-to-your-tidb-cloud-starter-or-essential-instance}
 
 TiDB Cloud StarterまたはEssentialインスタンスに接続してください。
 

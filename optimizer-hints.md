@@ -862,7 +862,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
 
 ## ヒントが効かない一般的な問題のトラブルシューティング {#troubleshoot-common-issues-that-hints-do-not-take-effect}
 
-### MySQLコマンドラインクライアントがヒントを削除するため、ヒントは有効になりません。 {#hints-do-not-take-effect-because-your-mysql-command-line-client-strips-hints}
+### MySQLコマンドラインクライアントがヒントを削除するため、ヒントは有効にならない {#hints-do-not-take-effect-because-your-mysql-command-line-client-strips-hints}
 
 MySQL 5.7.7より前のコマンドラインクライアントは、デフォルトでオプティマイザヒントを削除します。これらの以前のバージョンでヒント構文を使用する場合は、クライアントの起動時に`--comments`オプションを追加してください。例： `mysql -h 127.0.0.1 -P 4000 -uroot --comments`
 
@@ -888,7 +888,7 @@ TiDB はテーブル`t`のデータベースを識別できないため、ヒン
 1 row in set (0.00 sec)
 ```
 
-### クロステーブルクエリでデータベース名が明示的に指定されていないため、ヒントは有効になりません。 {#hints-do-not-take-effect-because-the-database-name-is-not-explicitly-specified-in-cross-table-queries}
+### クロステーブルクエリでデータベース名が明示的に指定されていないため、ヒントは有効にならない {#hints-do-not-take-effect-because-the-database-name-is-not-explicitly-specified-in-cross-table-queries}
 
 クロステーブルクエリを実行する際は、データベース名を明示的に指定する必要があります。そうしないと、ヒントが機能しない可能性があります。例：
 
@@ -938,7 +938,7 @@ SHOW WARNINGS;
 
 ### `INL_JOIN`ヒントは有効になりません {#inl_join-hint-does-not-take-effect}
 
-#### `INL_JOIN`ヒントは、テーブル結合の列に組み込み関数が使用されている場合には効果がありません。 {#inl_join-hint-does-not-take-effect-when-built-in-functions-are-used-on-columns-for-joining-tables}
+#### `INL_JOIN`ヒントは、テーブル結合の列に組み込み関数が使用されている場合には効果がない {#inl_join-hint-does-not-take-effect-when-built-in-functions-are-used-on-columns-for-joining-tables}
 
 場合によっては、テーブルを結合する列で組み込み関数を使用すると、オプティマイザが`IndexJoin`プランを選択できず、 `INL_JOIN`ヒントも有効にならないことがあります。
 
@@ -1003,7 +1003,7 @@ EXPLAIN SELECT /*+ INL_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id=t2.id AND SUBST
 7 rows in set (0.00 sec)
 ```
 
-#### `INL_JOIN` 、 `INL_HASH_JOIN` 、および`INL_MERGE_JOIN`ヒントは、照合順序の非互換性のため有効になりません。 {#inl_join-inl_hash_join-and-inl_merge_join-hints-do-not-take-effect-due-to-collation-incompatibility}
+#### `INL_JOIN` 、 `INL_HASH_JOIN` 、および`INL_MERGE_JOIN`ヒントは、照合順序の非互換性のため有効にならない {#inl_join-inl_hash_join-and-inl_merge_join-hints-do-not-take-effect-due-to-collation-incompatibility}
 
 2つのテーブル間で結合キーの照合順序に互換性がない場合、 `IndexJoin`オペレーターを使用してクエリを実行することはできません。この場合、 [`INL_JOIN`](#inl_joint1_name--tl_name-) 、 [`INL_HASH_JOIN`](#inl_hash_join) 、 [`INL_MERGE_JOIN`](#inl_merge_join)ヒントは効果がありません。例:
 
@@ -1082,7 +1082,7 @@ EXPLAIN SELECT /*+ leading(t1, t3), inl_join(t3) */ * FROM t1, t2, t3 WHERE t1.i
 9 rows in set (0.01 sec)
 ```
 
-### ヒントを使用すると`Can't find a proper physical plan for this query`というエラーが発生します。 {#using-hints-causes-the-cant-find-a-proper-physical-plan-for-this-query-error}
+### ヒントを使用すると`Can't find a proper physical plan for this query`というエラーが発生する {#using-hints-causes-the-cant-find-a-proper-physical-plan-for-this-query-error}
 
 `Can't find a proper physical plan for this query`エラーは次のシナリオで発生する可能性があります。
 

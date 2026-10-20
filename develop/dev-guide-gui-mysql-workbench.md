@@ -178,7 +178,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 
 ## よくある質問 {#faqs}
 
-### 接続タイムアウトエラー「Error Code: 2013. Lost connection to MySQL server during query」への対処方法を教えてください。 {#how-to-handle-the-connection-timeout-error-error-code-2013-lost-connection-to-mysql-server-during-query}
+### 接続タイムアウトエラー「Error Code: 2013. Lost connection to MySQL server during query」に対処するにはどうすればよいですか？ {#how-to-handle-the-connection-timeout-error-error-code-2013-lost-connection-to-mysql-server-during-query}
 
 このエラーは、クエリの実行時間がタイムアウト制限を超えたことを示しています。この問題を解決するには、以下の手順でタイムアウト設定を調整してください。
 

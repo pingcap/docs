@@ -65,7 +65,7 @@ TiDB Cloudにアカウントとクラスターが既に作成されている必�
 
 Vercelプロジェクトは、1つのTiDB Cloudデータアプリにしか接続できません。Vercelプロジェクトのデータアプリを変更するには、まず現在のアプリとの接続を解除してから、新しいアプリに接続する必要があります。
 
-## TiDB Cloud Vercelとの連携を介して接続します。 {#connect-via-the-tidb-cloud-vercel-integration}
+## TiDB Cloud Vercelとの連携を介して接続する {#connect-via-the-tidb-cloud-vercel-integration}
 
 TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケットプレイス](https://vercel.com/integrations)から[TiDB Cloud統合](https://vercel.com/integrations/tidb-cloud)ページに移動します。この方法を使用すると、接続するクラスターを選択でき、 TiDB Cloud はVercel プロジェクトに必要なすべての環境変数を自動的に生成します。
 

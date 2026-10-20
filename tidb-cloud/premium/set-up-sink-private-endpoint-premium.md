@@ -65,7 +65,7 @@ TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサ
 
 </SimpleTab>
 
-## ステップ1. インスタンスのネットワークページを開きます。 {#step-1-open-the-networking-page-for-your-instance}
+## ステップ1. インスタンスのネットワークページを開く {#step-1-open-the-networking-page-for-your-instance}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 

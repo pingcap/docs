@@ -58,7 +58,7 @@ OLTP (オンライントランザクション処理) シナリオの場合、プ
 >
 > ネットワーク転送をバッチ処理する場合は、JDBC 接続パラメータで`rewriteBatchedStatements = true`を構成する必要があります。詳細なパラメータ設定については、[バッチ関連パラメータ](#batch-related-parameters)を参照してください。
 
-#### `StreamingResult`を使用して実行結果を取得します。 {#use-streamingresult-to-get-the-execution-result}
+#### `StreamingResult`を使用して実行結果を取得する {#use-streamingresult-to-get-the-execution-result}
 
 ほとんどのシナリオでは、実行効率を向上させるために、JDBCはデフォルトでクエリ結果を事前に取得し、クライアントのメモリに保存します。しかし、クエリが非常に大きな結果セットを返す場合、クライアントはデータベースサーバーに一度に返されるレコード数を減らし、クライアントのメモリが準備できるまで待機し、次のバッチをリクエストすることがよくあります。
 
@@ -80,7 +80,7 @@ TiDBは両方の方法をサポートしていますが、実装がよりシン�
 
 ### MySQL JDBC パラメータ {#mysql-jdbc-parameters}
 
-JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式で提供します。このセクションでは[MySQL Connector/Jのパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は、 [MariaDBのパラメータ設定](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#optional-url-parameters)を参照してください)。このドキュメントではすべての設定項目をカバーすることはできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
+JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式で提供します。このセクションでは[MySQL Connector/Jのパラメータ設定](https://dev.mysql.com/doc/connector-j/en/connector-j-reference-configuration-properties.html)を紹介します (MariaDB を使用する場合は、 [MariaDBのパラメータ設定](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#optional-url-parameters)を参照してください)。このドキュメントではすべての設定項目をカバーできないため、パフォーマンスに影響を与える可能性のあるいくつかのパラメーターに主に焦点を当てています。
 
 #### 準備関連パラメータ {#prepare-related-parameters}
 

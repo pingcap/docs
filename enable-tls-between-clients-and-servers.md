@@ -100,7 +100,7 @@ CREATE USER 'u1'@'%' REQUIRE X509;
 >
 > ログイン ユーザーが[TiDBの証明書ベース認証によるログイン](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)を使用して設定した場合、ユーザーは TiDB への TLS 接続を有効にすることが暗黙的に要求されます。
 
-## 現在の接続が暗号化を使用しているかどうかを確認してください。 {#check-whether-the-current-connection-uses-encryption}
+## 現在の接続が暗号化を使用しているかどうかを確認する {#check-whether-the-current-connection-uses-encryption}
 
 `SHOW STATUS LIKE "%Ssl%";`ステートメントを使用すると、暗号化が使用されているかどうか、暗号化された接続で使用される暗号化プロトコル、TLS バージョン番号など、現在の接続の詳細を取得できます。
 
@@ -173,7 +173,7 @@ TiDBがサポートするTLSバージョン、鍵交換プロトコル、暗号�
 - TLS_AES_256_GCM_SHA384
 - TLS_CHACHA20_POLY1305_SHA256
 
-## 証明書、キー、およびCAを再読み込みします。 {#reload-certificate-key-and-ca}
+## 証明書、キー、およびCAを再読み込みする {#reload-certificate-key-and-ca}
 
 証明書、キー、または認証局 (CA) を交換するには、まず対応するファイルを置き換えてから、実行中の TiDB インスタンスで[`ALTER INSTANCE RELOAD TLS`](/sql-statements/sql-statement-alter-instance.md)ステートメントを実行し、元の構成パスから証明書 ( [`ssl-cert`](/tidb-configuration-file.md#ssl-cert) )、キー ( [`ssl-key`](/tidb-configuration-file.md#ssl-key) )、および認証局 ( [`ssl-ca`](/tidb-configuration-file.md#ssl-ca) ) を再ロードします。この方法であれば、TiDB インスタンスを再起動する必要はありません。
 

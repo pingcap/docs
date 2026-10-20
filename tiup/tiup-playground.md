@@ -79,7 +79,7 @@ tiup playground --db.binpath /xx/tidb-server
 tiup playground --db 3 --pd 3 --kv 3
 ```
 
-### TiDBクラスタの起動時に、データを保存するタグを指定します。 {#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data}
+### TiDBクラスタの起動時に、データを保存するタグを指定する {#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data}
 
 TiUP playground を使用して起動した TiDB クラスタを停止すると、クラスタデータもすべてクリーンアップされます。TiUP playground を使用してTiDBクラスタを起動し、クラスタデータが自動的にクリーンアップされないようにするには、クラスタ起動時にタグを指定できます。タグを指定すると、クラスタデータは`~/.tiup/data`ディレクトリに保存されます。タグを指定するには、次のコマンドを実行します。
 

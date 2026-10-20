@@ -102,7 +102,7 @@ MySQL コマンドライン クライアントがインストールされてい�
 
 [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)は、 TiDB Cloudを始めるための最適な方法です。このセクションでは、 TiDB Cloud CLIを使用してTiDB Cloud Starterインスタンスを作成する方法を学びます。
 
-### TiDB Cloudでユーザープロファイルを作成するか、ログインしてください。 {#create-a-user-profile-or-log-into-tidb-cloud}
+### ユーザープロファイルを作成するか、TiDB Cloudにログインする {#create-a-user-profile-or-log-into-tidb-cloud}
 
 TiDB Cloud CLI を使用して TiDB Cloud Starterインスタンスを作成する前に、ユーザープロファイルを作成するか、 TiDB Cloudにログインする必要があります。
 

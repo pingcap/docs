@@ -118,7 +118,7 @@ TiDB では、ID 情報やクレジットカード番号などの機密情報の
 
 関連問題: [#18065](https://github.com/pingcap/tidb/issues/18065)
 
-### 不完全なスケジューリングや不完全なI/Oフロー制御によって発生するパフォーマンスジッタを最適化します。 {#optimize-performance-jitter-caused-by-imperfect-scheduling-or-imperfect-i-o-flow-control}
+### 不完全なスケジューリングや不完全なI/Oフロー制御によって発生するパフォーマンスジッタを最適化する {#optimize-performance-jitter-caused-by-imperfect-scheduling-or-imperfect-i-o-flow-control}
 
 TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU、メモリなどのリソースを占有します。TiDBがスケジュールされたタスクを制御しない場合、リソースのプリエンプションによりQPSと遅延がパフォーマンスジッターを引き起こす可能性があります。以下の最適化を行った後、72時間テストにおいて、Sysbench TPSジッターの標準偏差は11.09%から3.36%に減少しました。
 
@@ -170,7 +170,7 @@ TiDBのスケジューリングプロセスは、I/O、ネットワーク、CPU�
 
 ## 診断 {#diagnostics}
 
-### より多くの情報を収集する最適化された`EXPLAIN`機能により、ユーザーはパフォーマンスの問題をトラブルシューティングできるようになります。 {#optimized-explain-features-with-more-collected-information-help-users-troubleshoot-performance-issues}
+### より多くの情報を収集する最適化された`EXPLAIN`機能により、ユーザーはパフォーマンスの問題をトラブルシューティングできるようになる {#optimized-explain-features-with-more-collected-information-help-users-troubleshoot-performance-issues}
 
 SQLパフォーマンスの問題をトラブルシューティングする際には、原因を特定するための詳細な診断情報が必要です。以前のTiDBバージョンでは、 `EXPLAIN`文で収集される情報は十分に詳細ではありませんでした。DBAはログ情報、監視情報、あるいは推測のみに基づいてトラブルシューティングを行っていましたが、これは非効率的でした。TiDB v5.0では、ユーザーがパフォーマンスの問題をより効率的にトラブルシューティングできるよう、以下の改善が行われました。
 

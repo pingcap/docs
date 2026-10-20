@@ -17,7 +17,7 @@ Pythonクライアントをインストールするには、次のコマンド�
 pip install pytidb
 ```
 
-## 接続パラメータを使用して接続します。 {#connect-with-connection-parameters}
+## 接続パラメータを使用して接続する {#connect-with-connection-parameters}
 
 TiDBの導入タイプに基づいて手順を選択してください。
 
@@ -76,7 +76,7 @@ db = TiDBClient.connect(
 
 接続が完了すると、 `db`オブジェクトを使用して、テーブルの操作、データのクエリなどを行うことができます。
 
-## 接続文字列を使用して接続します。 {#connect-with-connection-string}
+## 接続文字列を使用して接続する {#connect-with-connection-string}
 
 接続文字列（データベースURL）を使用する場合は、デプロイメントの種類に応じて以下の形式に従ってください。
 

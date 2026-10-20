@@ -4,7 +4,7 @@ summary: mysqlclientを使用してTiDBに接続する方法を学びましょ�
 aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-mysqlclient/','/ja/tidb/dev/dev-guide-sample-application-python-mysqlclient/','/ja/tidbcloud/dev-guide-sample-application-python-mysqlclient/']
 ---
 
-# mysqlclientを使用してTiDBに接続します。 {#connect-to-tidb-with-mysqlclient}
+# mysqlclientを使用してTiDBに接続する {#connect-to-tidb-with-mysqlclient}
 
 TiDBはMySQL互換のデータベースであり、 [mysqlclient](https://github.com/PyMySQL/mysqlclient)はPythonで広く使われているオープンソースのドライバです。
 
@@ -31,7 +31,7 @@ TiDBはMySQL互換のデータベースであり、 [mysqlclient](https://github
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
-## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
 このセクションでは、サンプルアプリケーションコードを実行してTiDBに接続する方法を説明します。
 

@@ -17,7 +17,7 @@ Data Service（PREVIEW）を使用すると、カスタムAPIエンドポイン�
 
 ## 始める前に {#before-you-begin}
 
-データアプリを作成する前に、AWS でホストされる[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md)インスタンスを作成していることを確認してください。お持ちでない場合は、 [TiDB Cloud StarterまたはEssentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)の手順に従って作成してください。
+データアプリを作成する前に、AWS でホストされる[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md)インスタンスを作成していることを確認してください。お持ちでない場合は、 [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)の手順に従って作成してください。
 
 > **Note:**
 >

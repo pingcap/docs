@@ -96,7 +96,7 @@ LIMIT
 
 2. エクスポートが完了すると、ディレクトリ`s3://my-bucket/sql-backup`でバックアップファイルを確認できます。
 
-## TiDB Lightningを使用して完全なデータを復元します。 {#use-tidb-lightning-to-restore-full-data}
+## TiDB Lightningを使用して完全なデータを復元する {#use-tidb-lightning-to-restore-full-data}
 
 1. `tidb-lightning.toml`ファイルを編集して、Dumplingを使用して`s3://my-bucket/sql-backup`にバックアップされた完全なデータを、ターゲットのTiDBクラスターにインポートします。
 

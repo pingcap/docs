@@ -7,7 +7,7 @@ summary: TiDB をデプロイする前に環境チェック操作について学
 
 このドキュメントでは、TiDB をデプロイする前に行う環境チェック手順について説明します。以下の手順は優先度順に説明されています。
 
-## TiKVをデプロイするターゲットマシンにオプション付きでデータディスクのext4ファイルシステムをマウントします。 {#mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv}
+## TiKVをデプロイするターゲットマシンにオプション付きでデータディスクのext4ファイルシステムをマウントする {#mount-the-data-disk-ext4-filesystem-with-options-on-the-target-machines-that-deploy-tikv}
 
 本番環境では、TiKVデータの保存にEXT4ファイルシステムのNVMe SSDを使用することをお勧めします。この構成はベストプラクティスであり、その信頼性、セキュリティ、安定性は多数のオンラインシナリオで実証されています。
 

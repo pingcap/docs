@@ -204,6 +204,6 @@ parallel-import = true
 
         Lightning の並列インポートタスクを再設定する際は、各 Lightning ノードの起動スクリプトに`checkpoint-error-destroy`コマンドを含めないでください。このコマンドを実行すると、複数の並列インポートタスクで使用されている共有メタデータが削除され、データインポート時に問題が発生する可能性があります。例えば、2つ目の Lightning インポートタスクを開始すると、最初のタスクによって書き込まれたメタデータが削除され、データインポートが正常に行われなくなります。
 
-### インポート中に、「ターゲットテーブルがチェックサムを計算中です。チェックサムが完了するまで待ってから再試行してください」というエラーが報告されます。 {#during-an-import-an-error-target-table-is-calculating-checksum-please-wait-until-the-checksum-is-finished-and-try-again-is-reported}
+### インポート中に、「ターゲットテーブルがチェックサムを計算中です。チェックサムが完了するまで待ってから再試行してください」というエラーが報告される {#during-an-import-an-error-target-table-is-calculating-checksum-please-wait-until-the-checksum-is-finished-and-try-again-is-reported}
 
 並列インポートには、多数のテーブルや少量のデータを含むテーブルが含まれる場合があります。このような場合、1つ以上のタスクがテーブルの処理を開始する前に、そのテーブルの他のタスクが終了し、データのチェックサムが進行中である可能性があります。このとき、エラー`Target table is calculating checksum. Please wait until the checksum is finished and try again`が報告されます。この場合、チェックサムの完了を待ってから、失敗したタスクを再開できます。エラーは消え、データの精度に影響はありません。

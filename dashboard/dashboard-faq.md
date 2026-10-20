@@ -17,9 +17,9 @@ summary: このドキュメントは、TiDB Dashboardに関するよくある質
 - リバースプロキシを正しく構成する方法については、 [リバースプロキシ経由でTiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 - ファイアウォールを正しく構成する方法については、 [TiDB Dashboardのセキュリティ保護](/dashboard/dashboard-ops-security.md)を参照してください。
 
-### TiDB Dashboardがデュアルネットワークインターフェースカード（NIC）でデプロイされている場合、別のNICを使用してTiDB Dashboardにアクセスすることはできません。 {#when-tidb-dashboard-is-deployed-with-dual-network-interface-cards-nics-tidb-dashboard-cannot-be-accessed-using-another-nic}
+### TiDB Dashboardがデュアルネットワークインターフェースカード（NIC）でデプロイされている場合、別のNICを使用してTiDB Dashboardにアクセスできない {#when-tidb-dashboard-is-deployed-with-dual-network-interface-cards-nics-tidb-dashboard-cannot-be-accessed-using-another-nic}
 
-セキュリティ上の理由から、PD上のTiDB Dashboardは、デプロイメント時に指定されたIPアドレスのみを監視します（つまり、1つのNICのみを監視します）。`0.0.0.0`ですべてのNICを監視するわけではありません。そのため、ホストに複数のNICがインストールされている場合、別のNICを使用してTiDB Dashboardにアクセスすることはできません。
+セキュリティ上の理由から、PD上のTiDB Dashboardは、デプロイメント時に指定されたIPアドレスのみを監視します（つまり、1つのNICのみを監視します）。`0.0.0.0`ですべてのNICを監視するわけではありません。そのため、ホストに複数のNICがインストールされている場合、別のNICを使用してTiDB Dashboardにアクセスできません。
 
 `tiup cluster`または`tiup playground`コマンドを使用して TiDB をデプロイした場合、現時点ではこの問題を解決できません。リバースプロキシを使用して、TiDB Dashboardを別の NIC に安全に公開することをお勧めします。詳細は[リバースプロキシの背後で TiDB Dashboardを使用する](/dashboard/dashboard-ops-reverse-proxy.md)を参照してください。
 

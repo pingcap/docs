@@ -43,7 +43,7 @@ TiCDCの新しいアーキテクチャは、アーキテクチャをステート
 
 ![Comparison between the TiCDC classic and new architectures](/media/ticdc/ticdc-new-arch-2.png)
 
-## クラシックアーキテクチャと新しいアーキテクチャからお選びください。 {#choose-between-the-classic-and-new-architectures}
+## クラシックアーキテクチャと新しいアーキテクチャのどちらかを選択する {#choose-between-the-classic-and-new-architectures}
 
 ワークロードが次のいずれかの条件を満たす場合は、パフォーマンスと安定性を向上させるために、[TiCDCクラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md)から新しいアーキテクチャに切り替えることをお勧めします。
 

@@ -103,7 +103,7 @@ http://192.168.0.123:2379/dashboard/
 
 TiDB Dashboardは、デフォルトで`/dashboard/`パス（例えば`http://example.com:8033/dashboard/` ）でサービスを提供します。これはリバースプロキシでも同様です。リバースプロキシを設定して、TiDB Dashboardサービスにデフォルト以外のパス（例えば`http://example.com:8033/foo/`や`http://example.com:8033/` ）を提供するには、以下の手順を実行してください。
 
-### ステップ1: PD構成を変更して、TiDB Dashboardサービスのパスプレフィックスを指定します。 {#step-1-modify-pd-configuration-to-specify-the-path-prefix-of-tidb-dashboard-service}
+### ステップ1: PD構成を変更して、TiDB Dashboardサービスのパスプレフィックスを指定する {#step-1-modify-pd-configuration-to-specify-the-path-prefix-of-tidb-dashboard-service}
 
 PD設定の`[dashboard]`のカテゴリにある`public-path-prefix`設定項目を変更し、TiDB Dashboardサービスのパスプレフィックスを指定します。この項目を変更した後、変更を有効にするにはPDインスタンスを再起動してください。
 

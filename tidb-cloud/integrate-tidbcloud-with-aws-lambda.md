@@ -109,7 +109,7 @@ AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョ
 
 </details>
 
-## ステップ1. AWS CloudFormationを使用して書店プロジェクトをセットアップします。 {#step-1-set-up-the-bookshop-project-using-aws-cloudformation}
+## ステップ1. AWS CloudFormationを使用して書店プロジェクトをセットアップする {#step-1-set-up-the-bookshop-project-using-aws-cloudformation}
 
 AWS CloudFormation を使用して書店プロジェクトを設定するには、次の手順を実行します。
 

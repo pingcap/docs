@@ -61,11 +61,11 @@ TiDB Cloud CLIは、一部のコマンドを簡単に使用できるよう、2�
 
 TiDB Cloud CLI では、ユーザープロファイルとは、プロファイル名、公開鍵、秘密鍵、OAuth トークンなど、ユーザーに関連付けられたプロパティの集合です。TiDB Cloud CLI を使用するには、ユーザープロファイルが必要です。
 
-### TiDB Cloud APIキーを使用してユーザープロファイルを作成します。 {#create-a-user-profile-with-tidb-cloud-api-key}
+### TiDB Cloud APIキーを使用してユーザープロファイルを作成する {#create-a-user-profile-with-tidb-cloud-api-key}
 
 [`ticloud config create`](/tidb-cloud/ticloud-config-create.md)を使用してユーザープロファイルを作成します。
 
-### OAuthトークンを使用してユーザープロファイルを作成します。 {#create-a-user-profile-with-oauth-token}
+### OAuthトークンを使用してユーザープロファイルを作成する {#create-a-user-profile-with-oauth-token}
 
 [`ticloud auth login`](/tidb-cloud/ticloud-auth-login.md)を使用して、現在のプロファイルに OAuth トークンを割り当てます。プロファイルが存在しない場合は、 `default`という名前のプロファイルが自動的に作成されます。
 

@@ -15,7 +15,7 @@ TiDB v8.5.0では、クエリパフォーマンスを向上させるインデッ
 
 [新しい指標を推奨する](#recommend-indexes-using-the-recommend-index-statement)ことに加えて、インデックスアドバイザーは効率的なインデックス管理を確保するために[非アクティブなインデックスの削除](#remove-unused-indexes)も提案します。
 
-## `RECOMMEND INDEX`文を使用してインデックスを推奨します。 {#recommend-indexes-using-the-recommend-index-statement}
+## `RECOMMEND INDEX`文を使用してインデックスを推奨する {#recommend-indexes-using-the-recommend-index-statement}
 
 TiDB では、インデックスアドバイザ タスク用の`RECOMMEND INDEX` SQL文が導入されました。 `RUN`サブコマンドは、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。 `FOR`オプションを使用すると、以前に実行されていない特定の SQL文を対象にすることができます。さらに、[オプション](#recommend-index-options)の を使用して高度な制御を行うこともできます。構文は次のとおりです。
 
@@ -167,7 +167,7 @@ Query OK, 1 row affected (0.00 sec)
 > SELECT START_TIME,UPTIME FROM INFORMATION_SCHEMA.CLUSTER_INFO WHERE TYPE='tidb';
 > ```
 
-### `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`を使用してください。 {#use-information_schemacluster_tidb_index_usage}
+### `INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`を使用する {#use-information_schemacluster_tidb_index_usage}
 
 [`INFORMATION_SCHEMA.CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md)テーブルには、選択バケット、最終アクセス時刻、アクセスされた行数などのメトリックが格納されています。以下の例は、このテーブルに基づいて未使用または非効率なインデックスを特定するクエリを示しています。
 

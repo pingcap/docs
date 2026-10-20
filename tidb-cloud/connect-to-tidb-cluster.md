@@ -30,7 +30,7 @@ TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかの
 
         - AWS でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は AWS PrivateLink を使用します。詳細については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
         - Azure 上でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は Azure Private Link を使用します。詳細については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)を参照してください。
-        - Google Cloud でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は Google Cloud Private Service Connect を使用します。詳細については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+        - Google Cloud でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は Google Cloud Private Service Connect を使用します。詳細については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
     - [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)
 

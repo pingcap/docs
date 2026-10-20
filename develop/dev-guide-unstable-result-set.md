@@ -170,7 +170,7 @@ mysql> select a.class, a.stuname, b.course, b.courscore from stu_info a join stu
 
 `ORDER BY`値が同じ場合、結果は不安定になります。ランダム性を低減するには、 `ORDER BY`値が一意である必要があります。一意性を保証できない場合は、 `ORDER BY`のフィールドのうち`ORDER BY`フィールドの組み合わせが一意になるまで、さらに`ORDER BY`フィールドを追加する必要があります。そうすれば、結果は安定します。
 
-## `GROUP_CONCAT()`で order by が使用されていないため、結果セットは不安定です。 {#the-result-set-is-unstable-because-order-by-is-not-used-in-group-concat}
+## `GROUP_CONCAT()`で order by が使用されていないため、結果セットが不安定になる {#the-result-set-is-unstable-because-order-by-is-not-used-in-group-concat}
 
 TiDB はストレージレイヤーからデータを並列に読み取るため、結果セットは不安定になります。そのため、 `ORDER BY`なしで`GROUP_CONCAT()`によって返される結果セットの順序は不安定であると簡単に認識されます。
 

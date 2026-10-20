@@ -126,7 +126,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEX_USAGE INTO OUTFILE '/backup/index_us
 
 これにより、時間の経過に伴うスナップショットの比較による履歴追跡が可能になり、インデックスの使用傾向を検出し、より情報に基づいたプルーニングの決定を行うことができます。
 
-## `CLUSTER_TIDB_INDEX_USAGE`を使用して TiDB ノード間でインデックス使用状況データを統合します。 {#consolidate-index-usage-data-across-tidb-nodes-using-cluster-tidb-index-usage}
+## `CLUSTER_TIDB_INDEX_USAGE`を使用して TiDB ノード間でインデックス使用状況データを統合する {#consolidate-index-usage-data-across-tidb-nodes-using-cluster-tidb-index-usage}
 
 TiDBは分散SQLデータベースであるため、クエリのワークロードは複数のノードに分散されます。各TiDBノードは、自身のローカルインデックスの使用状況を追跡します。インデックスパフォーマンスのグローバルビューとして、TiDBは[`CLUSTER_TIDB_INDEX_USAGE`](/information-schema/information-schema-tidb-index-usage.md#cluster_tidb_index_usage)システムテーブルを提供しています。このビューは、すべてのTiDBノードからのインデックス使用状況データを統合し、インデックス戦略の最適化において分散クエリのワークロードを完全に考慮します。
 

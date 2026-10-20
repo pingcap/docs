@@ -200,7 +200,7 @@ tiup cluster upgrade mycluster v8.2.0
 
 ## FAQ {#faq}
 
-### user@.service の起動時に`Trying to run as user instance, but $XDG_RUNTIME_DIR is not set.`エラーが発生します。 {#the-trying-to-run-as-user-instance-but-xdg-runtime-dir-is-not-set-error-occurs-when-starting-x3c-user-service}
+### user@.service の起動時に`Trying to run as user instance, but $XDG_RUNTIME_DIR is not set.`エラーが発生する {#the-trying-to-run-as-user-instance-but-xdg-runtime-dir-is-not-set-error-occurs-when-starting-x3c-user-service}
 
 この問題は、 `/etc/pam.d/system-auth.ued`ファイルに`pam_systemd.so`が存在しないために発生する可能性があります。
 

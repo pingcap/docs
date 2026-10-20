@@ -37,7 +37,7 @@ TiDBはMySQL互換データベース、 [AWS Lambda関数](https://aws.amazon.co
 
 AWSアカウントまたはユーザーをお持ちでない場合は、 [Lambda入門](https://docs.aws.amazon.com/lambda/latest/dg/getting-started.html)ガイドの手順に従って作成できます。
 
-## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
 このセクションでは、サンプルアプリケーションコードを実行してTiDBに接続する方法を説明します。
 

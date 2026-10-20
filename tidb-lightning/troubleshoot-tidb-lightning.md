@@ -50,7 +50,7 @@ strict-format = true
 
 また、 TiDB Lightningの最後のログに"Context canceled"というエラーが表示されている場合は、最初の"ERROR"レベルのログを探す必要があります。この"ERROR"レベルのログには通常、"got signal to exit"が続きます。これは、 TiDB Lightningが割り込み信号を受信して終了したことを示しています。
 
-## TiDB クラスターは多くの CPU リソースを消費し、 TiDB Lightningを使用すると非常に遅くなります。 {#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning}
+## TiDB クラスターは多くの CPU リソースを消費し、 TiDB Lightningを使用すると非常に遅くなる {#the-tidb-cluster-uses-lots-of-cpu-resources-and-runs-very-slowly-after-using-tidb-lightning}
 
 `tidb-lightning`が異常終了した場合、クラスターは本番には適さない"import mode"で停止している可能性があります。現在のモードは次のコマンドで取得できます。
 

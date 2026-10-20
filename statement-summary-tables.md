@@ -161,7 +161,7 @@ set global tidb_stmt_summary_history_size = 24;
 > - SQL タイプが毎分出現する場合、 `statements_summary_history`には直近 12時間分のデータが格納されます。SQL タイプが毎日 00:00 から 00:30 の間にのみ出現する場合、 `statements_summary_history`には直近 24 期間分のデータが格納されます。各期間は 1日です。したがって、 `statements_summary_history`にはこの SQL タイプに関する直近 24日分のデータが格納されます。
 > - `tidb_stmt_summary_history_size` 、 `tidb_stmt_summary_max_stmt_count` 、および`tidb_stmt_summary_max_sql_length`設定項目はメモリ使用量に影響します。これらの構成は、ニーズ、SQLサイズ、SQL数、およびマシン構成に基づいて調整することをお勧めします。大きすぎる値を設定することはお勧めしません。メモリ使用量は`tidb_stmt_summary_history_size` \* `tidb_stmt_summary_max_stmt_count` \* `tidb_stmt_summary_max_sql_length` \* `3` 。
 
-### ステートメントサマリーに適切なサイズを設定してください。 {#set-a-proper-size-for-statement-summary}
+### ステートメントサマリーに適切なサイズを設定する {#set-a-proper-size-for-statement-summary}
 
 システムが一定時間稼働した後（システム負荷に応じて）、 `statement_summary`テーブルを確認して、SQL の削除が発生したかどうかを確認できます。例:
 

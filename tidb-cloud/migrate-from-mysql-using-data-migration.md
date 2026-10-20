@@ -145,7 +145,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 移行する前に、データソースがサポートされているかどうかを確認し、MySQL 互換データベースでバイナリロギングを有効にし、ネットワーク接続を確認して、ソースデータベースとターゲット<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>データベースの両方に必要な権限を付与します。
 
-### データソースとバージョンがサポートされていることを確認してください。 {#make-sure-your-data-source-and-version-are-supported}
+### データソースとバージョンがサポートされていることを確認する {#make-sure-your-data-source-and-version-are-supported}
 
 <CustomContent plan="dedicated">
 
@@ -203,7 +203,7 @@ DM を使用して、ソースの MySQL 互換データベースからターゲ�
 | `binlog_expire_logs_seconds`     | ≥ `86400` （1日）、 `604800` （7日、推奨） | 移行中にDMが連続ログにアクセスできるようにします                 |
 | `binlog_transaction_compression` | `OFF`                            | DMはトランザクション圧縮をサポートしていません                  |
 
-#### 現在の値を確認し、ソースのMySQLインスタンスを設定します。 {#check-current-values-and-configure-the-source-mysql-instance}
+#### 現在の値を確認し、ソースのMySQLインスタンスを設定する {#check-current-values-and-configure-the-source-mysql-instance}
 
 現在の設定を確認するには、ソースのMySQLインスタンスに接続し、次のステートメントを実行します。
 
@@ -397,7 +397,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     - **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
     - **Availability Zones**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
     - **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
-    - **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
+    - **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録できないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
         [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
         > **Note:**
@@ -482,7 +482,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
     - **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
     - **Availability Zones**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
     - **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
-    - **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録することはできないため、代わりにデータベースのプライベートIPアドレスを登録してください。
+    - **Target group**：対象タイプは**IP addresses**、プロトコルは**TCP** 、ポートは**3306** 、データベースと同じVPC内。RDSエンドポイントを直接登録できないため、代わりにデータベースのプライベートIPアドレスを登録してください。
 
         [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
         > **Note:**
@@ -606,7 +606,7 @@ MySQLサービスがGoogle Cloud VPC内にある場合は、以下の手順を�
 
 移行を開始する前に、ソースデータベースとターゲットデータベースの両方で、必要な権限を持つ適切なデータベースユーザーを設定する必要があります。これらの権限により、TiDB Cloud DM は MySQL からデータを読み取り、変更を複製し、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に安全に書き込むことができます。移行には、既存データの完全なデータダンプと増分変更のbinlog複製の両方が含まれるため、移行ユーザーには基本的な読み取りアクセス以外の特定の権限が必要です。
 
-#### ソースMySQLデータベースで、移行ユーザーに必要な権限を付与します。 {#grant-required-privileges-to-the-migration-user-in-the-source-mysql-database}
+#### ソースMySQLデータベースで、移行ユーザーに必要な権限を付与する {#grant-required-privileges-to-the-migration-user-in-the-source-mysql-database}
 
 テスト目的では、ソースの MySQL データベースで管理者ユーザー ( `root`など) を使用できます。
 

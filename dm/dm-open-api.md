@@ -1513,7 +1513,7 @@ curl -X 'GET' \
 ]
 ```
 
-## レプリケーションタスクに関連付けられたデータソース内の指定されたスキーマのテーブル名のリストを取得します。 {#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task}
+## レプリケーションタスクに関連付けられたデータソース内の指定されたスキーマのテーブル名のリストを取得する {#get-the-list-of-table-names-of-a-specified-schema-in-the-data-source-that-is-associated-with-a-replication-task}
 
 このAPIは同期インターフェースです。リクエストが成功すると、対応するリストが返されます。
 
@@ -1535,7 +1535,7 @@ curl -X 'GET' \
 ]
 ```
 
-## レプリケーションタスクに関連付けられているデータソースのスキーマの CREATE文を取得します。 {#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task}
+## レプリケーションタスクに関連付けられているデータソースのスキーマの CREATE文を取得する {#get-the-create-statement-for-schemas-of-the-data-source-that-is-associated-with-a-replication-task}
 
 このAPIは同期インターフェースです。リクエストが成功すると、対応するCREATE文が返されます。
 

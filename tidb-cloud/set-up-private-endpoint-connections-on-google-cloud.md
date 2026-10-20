@@ -3,7 +3,7 @@ title: Connect to a TiDB Cloud Dedicated Cluster via Google Cloud Private Servic
 summary: Google Cloud Private Service Connectを使用してTiDB Cloudクラスターに接続する方法を学びましょう。
 ---
 
-# Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続します。 {#connect-to-a-tidb-cloud-dedicated-cluster-via-google-cloud-private-service-connect}
+# Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続する {#connect-to-a-tidb-cloud-dedicated-cluster-via-google-cloud-private-service-connect}
 
 このドキュメントでは[Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)を介してTiDB Cloud Dedicatedクラスターに接続する方法について説明します。 Google Cloud Private Service Connect は、Google Cloud が提供するプライベートエンドポイントサービスです。
 
@@ -15,7 +15,7 @@ summary: Google Cloud Private Service Connectを使用してTiDB Cloudクラス�
 > - Azure のプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する方法については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)を参照してください。
 > - プライベートエンドポイントを介してTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、以下のドキュメントを参照してください。
 >     - [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
->     - [Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+>     - [Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
 </CustomContent>
 
@@ -63,7 +63,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 - 高可用性を実現するために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスタを使用して、ソースTiDBクラスタからターゲットTiDBクラスタへリージョンをまたいでデータをレプリケートしています。現在、プライベートエンドポイントはリージョン間接続をサポートしていません。
 - TiCDCクラスタを使用してデータをダウンストリームクラスタ（Amazon Aurora、MySQL、Kafkaなど）に複製していますが、ダウンストリームのエンドポイントサービスを独自に維持することはできません。
 
-## Google Cloud Private Service Connect を使用してプライベートエンドポイントを設定します。 {#set-up-a-private-endpoint-with-google-cloud-private-service-connect}
+## Google Cloud Private Service Connect を使用してプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-google-cloud-private-service-connect}
 
 プライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続するには、[前提条件](#prerequisites)を完了し、以下の手順に従ってください。
 

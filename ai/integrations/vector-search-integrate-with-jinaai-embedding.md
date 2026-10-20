@@ -223,7 +223,7 @@ class Document(Base):
 > - ベクトル列の次元は、埋め込みモデルによって生成される埋め込みの次元と一致していなければなりません。
 > - この例では、 `jina-embeddings-v2-base-en`モデルによって生成される埋め込みの次元は`768`です。
 
-### Jina AIで埋め込みを作成し、TiDBに保存します。 {#create-embeddings-with-jina-ai-and-store-in-tidb}
+### Jina AIで埋め込みを作成し、TiDBに保存する {#create-embeddings-with-jina-ai-and-store-in-tidb}
 
 Jina AI Embeddings APIを使用して、各テキストの埋め込みを生成し、その埋め込みをTiDBに保存します。
 

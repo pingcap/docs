@@ -172,7 +172,7 @@ curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request POST 'https://<regio
 }
 ```
 
-#### 2. `/v2/jobs/{job_id}`を呼び出して分析ステータスを確認します。 {#2-check-the-analysis-status-by-calling-v2jobsjob_id}
+#### 2. `/v2/jobs/{job_id}`を呼び出して分析ステータスを確認する {#2-check-the-analysis-status-by-calling-v2jobsjob_id}
 
 `/v3/dataSummaries` APIは非同期です。大規模なデータセットを持つデータベースの場合、データベース分析を完了して完全なデータサマリーを返すまでに数分かかる場合があります。
 

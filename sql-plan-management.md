@@ -466,7 +466,7 @@ SHOW binding_cache status;
 1 row in set (0.00 sec)
 ```
 
-## ステートメントサマリーテーブルを利用して、バインドする必要があるクエリを取得します。 {#utilize-the-statement-summary-table-to-obtain-queries-that-need-to-be-bound}
+## ステートメントサマリーテーブルを利用して、バインドする必要があるクエリを取得する {#utilize-the-statement-summary-table-to-obtain-queries-that-need-to-be-bound}
 
 [ステートメントの要約](/statement-summary-tables.md)は、レイテンシー、実行時間、対応するクエリプランなど、最近のSQL実行情報を記録します。ステートメントサマリーテーブルにクエリを実行して条件を満たす`plan_digest`を取得し、[これらの履歴実行計画に従ってバインディングを作成する](/sql-plan-management.md#create-a-binding-according-to-a-historical-execution-plan)ことができます。
 

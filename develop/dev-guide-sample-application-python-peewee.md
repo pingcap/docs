@@ -4,7 +4,7 @@ summary: peeweeを使ってTiDBに接続する方法を学びましょう。こ�
 aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-peewee/','/ja/tidb/dev/dev-guide-sample-application-python-peewee/','/ja/tidbcloud/dev-guide-sample-application-python-peewee/']
 ---
 
-# peeweeを使用してTiDBに接続します。 {#connect-to-tidb-with-peewee}
+# peeweeを使用してTiDBに接続する {#connect-to-tidb-with-peewee}
 
 TiDBはMySQL互換のデータベースであり、[peewee](https://docs.peewee-orm.com/)はPythonで人気のオブジェクトリレーショナルマッパー（ORM）です。
 
@@ -31,7 +31,7 @@ TiDBはMySQL互換のデータベースであり、[peewee](https://docs.peewee-
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
-## TiDBに接続するには、サンプルアプリを実行してください。 {#run-the-sample-app-to-connect-to-tidb}
+## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
 このセクションでは、サンプルアプリケーションコードを実行してTiDBに接続する方法を説明します。
 

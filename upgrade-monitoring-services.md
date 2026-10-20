@@ -70,7 +70,7 @@ TiDBとの互換性を高めるため、TiDBインストールパッケージに
 
 次のアップグレード手順では、Grafana Web サイトから必要なバージョンの Grafana インストールパッケージをダウンロードし、それを使用してTiUPが使用できる Grafana パッケージを作成する必要があります。
 
-### ステップ1. Grafanaのウェブサイトから新しいGrafanaインストールパッケージをダウンロードします。 {#step-1-download-a-new-grafana-installation-package-from-the-grafana-website}
+### ステップ1. Grafanaのウェブサイトから新しいGrafanaインストールパッケージをダウンロードする {#step-1-download-a-new-grafana-installation-package-from-the-grafana-website}
 
 1. [Grafanaのダウンロードページ](https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1)から新しいインストールパッケージをダウンロードしてください。ニーズに応じて、 `OSS`または`Enterprise`エディションのいずれかを選択できます。
 2. ダウンロードしたパッケージを解凍します。
@@ -118,7 +118,7 @@ tiup cluster patch <cluster-name> grafana-v{new-version}.tar.gz -R grafana --ove
 
 TiDBインストールパッケージに含まれるAlertmanagerパッケージは、Prometheusウェブサイトから直接入手できます。そのため、Alertmanagerをアップグレードする場合は、Prometheusウェブサイトから新しいバージョンのAlertmanagerをダウンロードしてインストールするだけで済みます。
 
-### ステップ1. PrometheusのWebサイトから新しいAlertmanagerインストールパッケージをダウンロードします。 {#step-1-download-a-new-alertmanager-installation-package-from-the-prometheus-website}
+### ステップ1. PrometheusのWebサイトから新しいAlertmanagerインストールパッケージをダウンロードする {#step-1-download-a-new-alertmanager-installation-package-from-the-prometheus-website}
 
 [Prometheusのダウンロードページ](https://prometheus.io/download/#alertmanager)から`alertmanager`インストールパッケージをダウンロードします。
 
