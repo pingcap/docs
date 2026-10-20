@@ -2053,7 +2053,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
 - [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
-- [ディスク流出時の暗号化機能を有効にする](/enable-disk-spill-encrypt.md)
+- [ディスクスピルの暗号化を有効にする](/enable-disk-spill-encrypt.md)
 - [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
 - [システム変数](/system-variables.md#tidb_enable_tmp_storage_on_oom)
 - [TiDB設定ファイル](/tidb-configuration-file.md)
@@ -2728,7 +2728,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [ディスク流出時の暗号化機能を有効にする](/enable-disk-spill-encrypt.md)
+- [ディスクスピルの暗号化を有効にする](/enable-disk-spill-encrypt.md)
 - [エラーコードとトラブルシューティング](/error-codes.md)
 - [テーブル結合を使用するステートメントを説明する](/explain-joins.md)
 - [コストの高いクエリを特定する](/identify-expensive-queries.md)
