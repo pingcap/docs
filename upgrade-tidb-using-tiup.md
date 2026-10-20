@@ -212,7 +212,7 @@ tiup cluster upgrade <cluster-name> v8.5.4
 >
 > - TiFlash をv5.3.0 より前のバージョンから v5.3.0 以降にアップグレードするには、 TiFlash を停止してからアップグレードする必要があります。また、 TiUP のバージョンは v1.12.0 より前である必要があります。詳細については、 [TiUPを使用してTiFlashをアップグレードする](/tiflash-upgrade-guide.md#upgrade-tiflash-using-tiup)を参照してください。
 
-#### アップグレード時にコンポーネントのバージョンを指定してください。 {#specify-the-component-version-during-upgrade}
+#### アップグレード時にコンポーネントのバージョンを指定してください {#specify-the-component-version-during-upgrade}
 
 tiup-cluster v1.14.0以降では、クラスタのアップグレード時に特定のコンポーネントを特定のバージョンに指定できるようになりました。別のバージョンを指定しない限り、これらのコンポーネントは以降のアップグレードでも固定バージョンのままになります。
 

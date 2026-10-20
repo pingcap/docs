@@ -23,7 +23,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 
 ## 一般的な非互換性 {#general-incompatibility}
 
-### `SELECT CONNECTION_ID()`はTiDBで64ビット整数を返します。 {#select-connection-id-returns-a-64-bit-integer-in-tidb}
+### `SELECT CONNECTION_ID()`はTiDBで64ビット整数を返します {#select-connection-id-returns-a-64-bit-integer-in-tidb}
 
 **説明**
 
@@ -133,7 +133,7 @@ TiDB は`UpdatableResultSet`をサポートしていません。`ResultSet.CONCU
 
 ## MySQL JDBC のバグ {#mysql-jdbc-bugs}
 
-### `useLocalTransactionState`と`rewriteBatchedStatements`が同時にtrueの場合、トランザクションはコミットまたはロールバックに失敗します。 {#uselocaltransactionstate-and-rewritebatchedstatements-are-true-at-the-same-time-will-cause-the-transaction-to-fail-to-commit-or-roll-back}
+### `useLocalTransactionState`と`rewriteBatchedStatements`が同時にtrueの場合、トランザクションはコミットまたはロールバックに失敗します {#uselocaltransactionstate-and-rewritebatchedstatements-are-true-at-the-same-time-will-cause-the-transaction-to-fail-to-commit-or-roll-back}
 
 **説明**
 

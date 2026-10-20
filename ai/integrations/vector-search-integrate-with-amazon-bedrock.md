@@ -147,7 +147,7 @@ engine = create_engine(get_db_url(), pool_recycle=300)
 Base = declarative_base()
 ```
 
-### ステップ5. Bedrockランタイムクライアントを使用してAmazon Titan Text Embeddings V2モデルを呼び出します。 {#step-5-invoke-the-amazon-titan-text-embeddings-v2-model-using-the-bedrock-runtime-client}
+### ステップ5. Bedrockランタイムクライアントを使用してAmazon Titan Text Embeddings V2モデルを呼び出します {#step-5-invoke-the-amazon-titan-text-embeddings-v2-model-using-the-bedrock-runtime-client}
 
 Amazon Bedrock ランタイム クライアントは、次のパラメーターを受け入れる`invoke_model` API を提供します。
 
@@ -245,7 +245,7 @@ class Entity(Base):
 Base.metadata.create_all(engine)
 ```
 
-### ステップ7. ベクトルデータを{{{ .starter }}}に保存します。 {#step-7-save-the-vector-data-to-tidb-cloud-starter}
+### ステップ7. ベクトルデータを{{{ .starter }}}に保存します {#step-7-save-the-vector-data-to-tidb-cloud-starter}
 
 `demo.py`に、ベクトルデータを{{{ .starter }}}インスタンスに保存するための以下のコードを追加します。
 

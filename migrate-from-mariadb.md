@@ -332,7 +332,7 @@ ERROR 1062 (23000): Duplicate entry '\x984\x87m\xCF\xB0\\xB1g\xA5\xC2IS\xEB\xA5\
 tidb>
 ```
 
-## Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する。 {#dump-data-with-dumpling-and-restore-data-with-tidb-lightning}
+## Dumplingでデータをダンプし、 TiDB Lightningでデータを復元する {#dump-data-with-dumpling-and-restore-data-with-tidb-lightning}
 
 この方法は、アプリケーションをオフラインにしてデータを移行し、その後、移行したデータを使用するようにアプリケーションを再構成することを前提としています。
 

@@ -134,7 +134,7 @@ TiDB は、トランザクションで書き込まれるキーと値のペアが
 
 このセクションでは、PD 管理中に遭遇する可能性のある一般的な問題、その原因、および解決策について説明します。
 
-### PDにアクセスすると、 `TiKV cluster is not bootstrapped`メッセージが表示されます。 {#the-tikv-cluster-is-not-bootstrapped-message-is-displayed-when-i-access-pd}
+### PDにアクセスすると、 `TiKV cluster is not bootstrapped`メッセージが表示されます {#the-tikv-cluster-is-not-bootstrapped-message-is-displayed-when-i-access-pd}
 
 PD の API のほとんどは、TiKV クラスタが初期化されたときにのみ利用可能です。このメッセージは、新しいクラスタがデプロイされた際に TiKV が起動していない状態で PD にアクセスした場合に表示されます。このメッセージが表示された場合は、TiKV クラスタを起動してください。TiKV が初期化されると、PD にアクセスできるようになります。
 
@@ -142,7 +142,7 @@ PD の API のほとんどは、TiKV クラスタが初期化されたときに�
 
 これは、PD起動パラメータの`--initial-cluster`に、このクラスタに属さないメンバーが含まれているためです。この問題を解決するには、各メンバーに対応するクラスタを確認し、間違ったメンバーを削除してからPDを再起動してください。
 
-### PD の保存時の暗号化を有効にすると`[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)`というメッセージが表示されます。 {#the-pd-encryption-errencryptionnewmasterkey-fail-to-get-encryption-key-from-file-root-path-file-extra-string-open-root-path-file-permission-denied-message-is-displayed-when-enabling-encryption-at-rest-for-pd}
+### PD の保存時の暗号化を有効にすると`[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)`というメッセージが表示されます {#the-pd-encryption-errencryptionnewmasterkey-fail-to-get-encryption-key-from-file-root-path-file-extra-string-open-root-path-file-permission-denied-message-is-displayed-when-enabling-encryption-at-rest-for-pd}
 
 保存時の暗号化では、キー ファイルを`root`ディレクトリまたはそのサブディレクトリに保存することはサポートされていません。読み取り権限を付与しても、同じエラーが発生します。この問題を解決するには、キー ファイルを`root`ディレクトリ以外の場所に保存してください。
 
@@ -398,7 +398,7 @@ TiKVはインターフェースを個別に呼び出すことをサポートし�
 - TiDBとTiKV間のデータ伝送を削減する
 - TiKVの分散コンピューティングリソースを最大限に活用して、コンピューティングプッシュダウンを実行します。
 
-### エラーメッセージ`IO error: No space left on device While appending to file`が表示されます。 {#the-error-message-io-error-no-space-left-on-device-while-appending-to-file-is-displayed}
+### エラーメッセージ`IO error: No space left on device While appending to file`が表示されます {#the-error-message-io-error-no-space-left-on-device-while-appending-to-file-is-displayed}
 
 これはディスク容量が不足しているためです。ノードを追加するか、ディスク容量を拡張する必要があります。
 
@@ -435,7 +435,7 @@ TiDB v8.5.0 のパフォーマンスについて知るには、 TiDB Cloud Dedic
 - MySQLでは、セカンダリデータベースを追加することで読み取り容量を増やすことができますが、書き込み容量はシャーディングを使用しない限り増やすことはできません。しかし、シャーディングには多くの問題があります。
 - TiDBでは、ノードを追加することで、読み取り容量と書き込み容量の両方を容易に増やすことができます。
 
-### 当社のDBAによるMySQLとTiDBのパフォーマンステストの結果、スタンドアロンのTiDBのパフォーマンスはMySQLほど良くないことが分かりました。 {#the-performance-test-of-mysql-and-tidb-by-our-dba-shows-that-the-performance-of-a-standalone-tidb-is-not-as-good-as-mysql}
+### 当社のDBAによるMySQLとTiDBのパフォーマンステストの結果、スタンドアロンのTiDBのパフォーマンスはMySQLほど良くないことが分かりました {#the-performance-test-of-mysql-and-tidb-by-our-dba-shows-that-the-performance-of-a-standalone-tidb-is-not-as-good-as-mysql}
 
 TiDBは、MySQLスタンドアロンの容量が限られているためシャーディングが使用されるシナリオ、および強力な一貫性と完全な分散トランザクションが必要とされるシナリオ向けに設計されています。TiDBの利点の1つは、並列処理を実行するためにコンピューティング処理をストレージノードにプッシュダウンできることです。
 

@@ -4,7 +4,7 @@ summary: リソース制御機能を使用して、アプリケーションの�
 aliases: ['/ja/tidb/v8.5/tidb-resource-control/','/ja/tidb/stable/tidb-resource-control/']
 ---
 
-# リソース制御を使用して、リソースグループの制限とフロー制御を実現します。 {#use-resource-control-to-achieve-resource-group-limitation-and-flow-control}
+# リソース制御を使用して、リソースグループの制限とフロー制御を実現します {#use-resource-control-to-achieve-resource-group-limitation-and-flow-control}
 
 > **Note:**
 >
@@ -221,7 +221,7 @@ ALTER USER 'usr3'@'%' RESOURCE GROUP `default`;
 SET RESOURCE GROUP rg1;
 ```
 
-#### 現在のステートメントをリソースグループにバインドします。 {#bind-the-current-statement-to-a-resource-group}
+#### 現在のステートメントをリソースグループにバインドします {#bind-the-current-statement-to-a-resource-group}
 
 SQL文に[`RESOURCE_GROUP(resource_group_name)`](/optimizer-hints.md#resource_groupresource_group_name)ヒントを追加することで、文がバインドされるリソースグループを指定できます。このヒントは`SELECT` 、 `INSERT` 、 `UPDATE` 、および`DELETE`文をサポートします。
 
@@ -276,7 +276,7 @@ SQL文のRU消費量は、以下の方法で確認できます。
 - スロークエリとそれに対応するシステムテーブル
 - `statements_summary`
 
-#### システム変数`tidb_last_query_info`を照会することで、前回のSQL実行で消費されたRUを表示する。 {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-tidb-last-query-info}
+#### システム変数`tidb_last_query_info`を照会することで、前回のSQL実行で消費されたRUを表示する {#view-the-rus-consumed-by-the-last-sql-execution-by-querying-the-system-variable-tidb-last-query-info}
 
 TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)を提供します。このシステム変数には、最後に実行されたDML文の情報（SQL実行によって消費されたRUを含む）が記録されます。
 

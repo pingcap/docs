@@ -33,7 +33,7 @@ AWS PrivateLink を利用したエンドポイント接続は、安全かつプ�
 
 AWS VPC 設定で DNS ホスト名と DNS 解決の両方が有効になっていることを確認してください。 [AWS マネジメントコンソール](https://console.aws.amazon.com/)で VPC を作成すると、デフォルトでは無効になります。
 
-## プライベートエンドポイント接続を設定し、インスタンスに接続します。 {#set-up-a-private-endpoint-connection-and-connect-to-your-instance}
+## プライベートエンドポイント接続を設定し、インスタンスに接続します {#set-up-a-private-endpoint-connection-and-connect-to-your-instance}
 
 プライベートエンドポイント経由で {{{ .premium }}} または {{{ .byoc }}} インスタンスに接続するには、以下の手順に従ってください。
 

@@ -127,7 +127,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 - TiDBサーバーのグローバル変数: `max_allowed_packet` 。
 - タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
-## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`を処理する方法を教えてください。 {#how-to-handle-the-error-error-1054-unknown-column-binlog_gtid-in-field-list-that-occurs-when-existing-dm-migration-tasks-of-an-dm-10-cluster-are-running-on-a-dm-20-or-newer-cluster}
+## DM 1.0 クラスターの既存の DM 移行タスクが DM 2.0 以降のクラスターで実行されているときに発生するエラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`を処理する方法を教えてください {#how-to-handle-the-error-error-1054-unknown-column-binlog_gtid-in-field-list-that-occurs-when-existing-dm-migration-tasks-of-an-dm-10-cluster-are-running-on-a-dm-20-or-newer-cluster}
 
 DM v2.0 以降、増分データレプリケーションを続行するために DM 1.0 クラスターのタスク設定ファイルで`start-task`コマンドを直接実行すると、エラー`Error 1054: Unknown column 'binlog_gtid' in 'field list'`が発生します。
 
@@ -152,7 +152,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 
 DM 1.0では、監視データを生成するには`enable-heartbeat`を有効にする必要があります。DM 2.0以降のバージョンでは、この機能はサポートされていないため、監視メトリック`replicate lag`にはデータが存在しないことが想定されます。
 
-## DM がタスクを開始しているときに、 `context deadline exceeded`を示すエラーメッセージの`RawCause`で`fail to initial unit Sync of subtask`エラーを処理する方法を教えてください。 {#how-to-handle-the-error-fail-to-initial-unit-sync-of-subtask-when-dm-is-starting-a-task-with-the-rawcause-in-the-error-message-showing-context-deadline-exceeded}
+## DM がタスクを開始しているときに、 `context deadline exceeded`を示すエラーメッセージの`RawCause`で`fail to initial unit Sync of subtask`エラーを処理する方法を教えてください {#how-to-handle-the-error-fail-to-initial-unit-sync-of-subtask-when-dm-is-starting-a-task-with-the-rawcause-in-the-error-message-showing-context-deadline-exceeded}
 
 これはDM 2.0.0バージョンの既知の問題であり、DM 2.0.1バージョンで修正される予定です。レプリケーションタスクで処理するテーブル数が多い場合に発生する可能性があります。TiUPを使用してDMをデプロイしている場合は、DMをナイトリーバージョンにアップグレードすることでこの問題を修正できます。または、GitHubの[DMのリリースページ](https://github.com/pingcap/tiflow/releases)から2.0.0-hotfixバージョンをダウンロードし、実行ファイルを手動で置き換えることもできます。
 
