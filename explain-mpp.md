@@ -3,7 +3,7 @@ title: Explain Statements in the MPP Mode
 summary: TiDB のEXPLAIN文によって返される実行計画情報について学習します。
 ---
 
-# MPPモードでステートメントを説明する {#explain-statements-in-the-mpp-mode}
+# MPPモードのステートメントの実行計画 {#explain-statements-in-the-mpp-mode}
 
 TiDBは、 [MPPモード](/tiflash/use-tiflash-mpp-mode.md)を使用したクエリ実行をサポートしています。MPPモードでは、TiDBオプティマイザはMPP用の実行計画を生成します。MPPモードは、 [TiFlash](/tiflash/tiflash-overview.md)にレプリカを持つテーブルでのみ使用できることに注意してください。
 

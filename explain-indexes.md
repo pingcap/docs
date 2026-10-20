@@ -3,7 +3,7 @@ title: Explain Statements That Use Indexes
 summary: TiDB のEXPLAIN文によって返される実行計画情報について学習します。
 ---
 
-# インデックスを使用するステートメントを説明する {#explain-statements-that-use-indexes}
+# インデックスを使用するステートメントの実行計画 {#explain-statements-that-use-indexes}
 
 TiDB は、インデックスを利用してクエリの実行を高速化するいくつかのオペレーターをサポートしています。
 

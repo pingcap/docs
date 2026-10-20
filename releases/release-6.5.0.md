@@ -151,7 +151,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     v6.5.0より前のTiDBでは、 `OR`で連結されたフィルタ条件に対してのみインデックスマージがサポートされていました。v6.5.0以降、TiDBは`WHERE`句の`AND`で連結されたフィルタ条件に対してもインデックスマージがサポートされるようになりました。これにより、TiDBのインデックスマージは、より一般的なクエリフィルタ条件の組み合わせをカバーできるようになり、union( `OR` )関係に限定されなくなりました。現在のv6.5.0バージョンでは、オプティマイザによって自動的に選択された`OR`の条件でのインデックスマージのみがサポートされています。`AND`条件でインデックスマージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
 
-    インデックスマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)と[インデックスマージを使用したステートメントの説明](/explain-index-merge.md)を参照してください。
+    インデックスマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)と[インデックスマージを使用するステートメントの実行計画](/explain-index-merge.md)を参照してください。
 
 - 以下のJSON関数をTiFlash にプッシュダウンすることをサポートします [#39458](https://github.com/pingcap/tidb/issues/39458) @[yibin87](https://github.com/yibin87)
 

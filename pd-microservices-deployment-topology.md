@@ -87,7 +87,7 @@ grafana_servers:
 - `tso_servers`のインスタンスのレベル`host`構成では、ドメイン名ではなく IP アドレスのみがサポートされます。
 - TSO 設定項目の詳細については、 [TSO 設定ファイル](/tso-configuration-file.md)を参照してください。
 - `scheduling_servers`のインスタンスのレベル`host`構成では、ドメイン名ではなく IP アドレスのみがサポートされます。
-- スケジュール設定項目の詳細については、 [スケジュール設定ファイル](/scheduling-configuration-file.md)を参照してください。
+- スケジュール設定項目の詳細については、 [スケジューリング設定ファイル](/scheduling-configuration-file.md)を参照してください。
 
 > **Note:**
 >

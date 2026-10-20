@@ -3,7 +3,7 @@ title: Explain Statements Using Partitions
 summary: TiDB のEXPLAIN文によって返される実行計画情報について学習します。
 ---
 
-# パーティションを使用したステートメントの説明 {#explain-statements-using-partitions}
+# パーティションを使用するステートメントの実行計画 {#explain-statements-using-partitions}
 
 `EXPLAIN`文は、TiDBがクエリを実行するためにアクセスする必要があるパーティションを表示します。[パーティションプルーニング](/partition-pruning.md)のため、表示されるパーティションはパーティション全体のサブセットのみであることがよくあります。このドキュメントでは、一般的なパーティションテーブルに対する最適化のいくつかと、 `EXPLAIN`の出力の解釈方法について説明します。
 

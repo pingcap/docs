@@ -3,7 +3,7 @@ title: Explain Statements Using Index Merge
 summary: "TiDB の `EXPLAIN`文によって返される実行計画情報について学習します。"
 ---
 
-# インデックスマージを使用したステートメントの説明 {#explain-statements-using-index-merge}
+# インデックスマージを使用するステートメントの実行計画 {#explain-statements-using-index-merge}
 
 インデックスマージは、TiDB v4.0で導入されたテーブルアクセス手法です。この手法により、TiDBオプティマイザはテーブルごとに複数のインデックスを使用し、各インデックスから返される結果をマージすることができます。場合によっては、この手法によってテーブル全体のスキャンが回避され、クエリの効率が向上します。
 
