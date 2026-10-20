@@ -17,7 +17,7 @@ summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデ�
 
 ## 制限 {#restrictions}
 
-- <CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} instance</CustomContent>ごとに、最大 100 個の変更フィードを作成できます。
+- <CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>ごとに、最大 100 個の変更フィードを作成できます。
 - 現在、TiDB Cloud は、Kafka ブローカーに接続するための自己署名 TLS 証明書のアップロードをサポートしていません。
 - TiDB Cloud は TiCDC を使用して変更フィードを確立するため、[TiCDC と同じ制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
 - 複製対象のテーブルに主キーまたは NULL を許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
@@ -47,9 +47,9 @@ Apache Kafkaにデータをストリーミングするためのチェンジフ�
 
 ### ネットワーク {#network}
 
-<CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} instance</CustomContent> が Apache Kafka サービスに接続できることを確認します。次の接続方法のいずれかを選択できます。
+<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent> が Apache Kafka サービスに接続できることを確認します。次の接続方法のいずれかを選択できます。
 
-- Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の [Private Data Link Cost](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost) が発生します。
+- Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の [プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost) が発生します。
 - VPC Peering: 費用対効果の高い選択肢として適していますが、潜在的な VPC CIDR の競合やセキュリティ上の考慮事項を管理する必要があります。
 - Public IP: 迅速なセットアップに適しています。
 
@@ -71,10 +71,10 @@ TiDB Cloud は現在、セルフホスト型 Kafka のみで Private Connect を
 
 Apache Kafka サービスがインターネットにアクセスできない AWS VPC 内にある場合は、次の手順を実行します。
 
-1. Apache Kafka サービスの VPC と {{{ .dedicated }}} cluster の間で [VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
+1. Apache Kafka サービスの VPC と {{{ .dedicated }}} クラスターの間で [VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 2. Apache Kafka サービスに関連付けられているセキュリティグループの受信ルールを変更します。
 
-    {{{ .dedicated }}} cluster が配置されているリージョンの CIDR を受信ルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} cluster から Kafka ブローカーへのトラフィックが流れるようになります。
+    {{{ .dedicated }}} クラスターが配置されているリージョンの CIDR を受信ルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} クラスターから Kafka ブローカーへのトラフィックが流れるようになります。
 
 3. Apache Kafka の URL にホスト名が含まれている場合、TiDB Cloud が Apache Kafka ブローカーの DNS ホスト名を解決できるようにする必要があります。
 
@@ -83,10 +83,10 @@ Apache Kafka サービスがインターネットにアクセスできない AWS
 
 Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC 内にある場合は、次の手順を実行します。
 
-1. Apache Kafka サービスの VPC と {{{ .dedicated }}} cluster の間で [VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
+1. Apache Kafka サービスの VPC と {{{ .dedicated }}} クラスターの間で [VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 2. Apache Kafka が配置されている VPC のイングレス ファイアウォールルールを変更します。
 
-    {{{ .dedicated }}} cluster が配置されているリージョンの CIDR をイングレス ファイアウォールルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} cluster から Kafka ブローカーへのトラフィックが流れるようになります。
+    {{{ .dedicated }}} クラスターが配置されているリージョンの CIDR をイングレス ファイアウォールルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} クラスターから Kafka ブローカーへのトラフィックが流れるようになります。
 
 </div>
 <div label="Public IP">
@@ -106,7 +106,7 @@ Apache Kafka サービスに Public IP アクセスを提供する場合は、�
 
 Private Connect は、クラウドプロバイダーの **Private Link** または **Private Service Connect** 技術を活用し、VPC 内のリソースがプライベート IP アドレスを使用して他の VPC 内のサービスに接続できるようにします。これにより、あたかもそれらのサービスが VPC 内で直接ホストされているかのように動作します。
 
-{{{ .premium }}} または {{{ .byoc }}} instance で changefeeds 用のプライベートエンドポイントを作成するには、[Changefeeds のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってください。
+{{{ .premium }}} または {{{ .byoc }}} インスタンスで changefeed 用のプライベートエンドポイントを作成するには、[Changefeeds のプライベートエンドポイントを設定する](/tidb-cloud/set-up-sink-private-endpoint.md)に従ってください。
 
 TiDB Cloud は現在、セルフホスト型 Kafka のみで Private Connect をサポートしています。MSK、Confluent Kafka、またはその他の Kafka SaaS サービスとの直接統合はサポートされていません。これらの Kafka SaaS サービスに Private Connect 経由で接続するには、仲介として [kafka-proxy](https://github.com/grepplabs/kafka-proxy) をデプロイし、Kafka サービスをセルフホスト型 Kafka として効果的に公開できます。
 
@@ -123,7 +123,7 @@ Apache Kafka サービスに Public IP アクセスを提供する場合は、�
 
 <div label="VPC Peering">
 
-現在、{{{ .premium }}} または {{{ .byoc }}} instance の VPC Peering 機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、[TiDB Cloud console](https://tidbcloud.com) の右下隅にある **?** をクリックし、次に **Support Tickets** をクリックして [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for VPC Peering for {{{ .premium }}} or {{{ .byoc }}} instance" と入力してから、**Submit** をクリックします。
+現在、{{{ .premium }}} または {{{ .byoc }}} インスタンスの VPC Peering 機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、[TiDB Cloudコンソール](https://tidbcloud.com) の右下隅にある **?** をクリックし、次に **Support Tickets** をクリックして [ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for VPC Peering for {{{ .premium }}} or {{{ .byoc }}} instance" と入力してから、**Submit** をクリックします。
 
 </div>
 </SimpleTab>
@@ -141,7 +141,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 ## ステップ1. Apache KafkaのChangefeedページを開きます。 {#step-1-open-the-changefeed-page-for-apache-kafka}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2. ターゲットの<CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} instance</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
+2. ターゲットの<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
 3. **Create Changefeed**をクリックし、**Destination**として**Kafka**を選択します。
 
 ## ステップ2. changefeedターゲットを設定する {#step-2-configure-the-changefeed-target}
@@ -255,7 +255,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
-    - **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**領域で使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
+    - **Tables matching**：この列では、イベントフィルターを適用するテーブルを設定できます。ルールの構文は、前の**Table Filter**エリアで使用されているものと同じです。変更フィードごとに最大10個のイベントフィルタールールを追加できます。
     - **Event Filter**：以下のイベントフィルターを使用して、変更フィードから特定のイベントを除外できます。
         - **Ignore event**：指定されたイベントタイプを除外します。
         - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop`は`DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
@@ -271,7 +271,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
     マッチングルールの詳細については、 [カラムセレクター](https://docs.pingcap.com/tidb/stable/ticdc-sink-to-kafka/#column-selectors)を参照してください。
 
-4. **Data Format**領域で、希望するKafkaメッセージのフォーマットを選択してください。
+4. **Data Format**エリアで、希望するKafkaメッセージのフォーマットを選択してください。
 
     - Avroは、コンパクトで高速なバイナリデータフォーマットであり、豊富なデータ構造を備え、様々なフローシステムで広く利用されています。詳細については、 [Avroデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-avro-protocol)を参照してください。
     - Canal-JSONは、解析が容易なプレーンなJSONテキスト形式です。詳細については、 [Canal-JSONデータ形式](https://docs.pingcap.com/tidb/stable/ticdc-canal-json)を参照してください。
@@ -285,7 +285,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 6. データ形式として**Avro**を選択すると、ページにAvro固有の設定項目が表示されます。これらの設定項目は、以下のように入力できます。
 
     - **Decimal**および**Unsigned BigInt**の設定では、TiDB Cloud が Kafka メッセージ内の decimal 型および unsigned bigint 型データ型をどのように処理するかを指定します。
-    - **Schema Registry**領域で、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、<CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} instance</CustomContent> のエンドポイントとパスワードが自動的に入力されます。
+    - **Schema Registry**エリアで、スキーマレジストリエンドポイントを入力します。**HTTP Authentication**を有効にすると、ユーザー名とパスワードのフィールドが表示され、<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent> のエンドポイントとパスワードが自動的に入力されます。
 
 7. **Topic Distribution**エリアで配信モードを選択し、選択したモードに応じてトピック名の設定を入力します。
 
@@ -309,7 +309,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
         変更フィードで全ての変更ログに対して1つのKafkaトピックを作成する場合は、このモードを選択してください。そうすると、変更フィード内のすべてのKafkaメッセージが1つのKafkaトピックに送信されます。トピック名は**Topic Name**フィールドで指定できます。
 
-8. **Partition Distribution**領域では、Kafka メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャ**を定義することもできます。TiDB Cloudでは、次の4種類のディスパッチャが提供されています。
+8. **Partition Distribution**エリアでは、Kafka メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャ**を定義することもできます。TiDB Cloudでは、次の4種類のディスパッチャが提供されています。
 
     - **Distribute changelogs by primary key or index value to Kafka partition**
 
@@ -327,7 +327,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
         テーブルのKafkaメッセージを複数のパーティションに送信するように変更フィードを設定したい場合は、この配信方法を選択してください。行の変更ログで指定された列の値によって、変更ログの送信先パーティションが決まります。この配信方法では、各パーティション内の順序が確保され、同じ列の値を持つ変更ログが同じパーティションに送信されることが保証されます。
 
-9. **Topic Configuration**領域で、以下の数値を設定してください。changefeedは、これらの数値に基づいてKafkaトピックを自動的に作成します。
+9. **Topic Configuration**エリアで、以下の数値を設定してください。changefeedは、これらの数値に基づいてKafkaトピックを自動的に作成します。
 
     - **Replication Factor**：各KafkaメッセージがレプリケートされるKafkaサーバーの数を制御します。有効な値の範囲は、 [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)からKafkaブローカーの数までです。
     - **Partition Number**：トピックに存在するパーティションの数を制御します。有効な値の範囲は`[1, 10 * the number of Kafka brokers]`です。
@@ -338,8 +338,8 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
 ## ステップ4. 変更フィード仕様を設定します {#step-4-configure-your-changefeed-specification}
 
-1. **Changefeed Specification**領域で、チェンジフィードで使用する<CustomContent plan="dedicated">Replication Capacity Units (RCUs) の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent>を設定します。
-2. **Changefeed Name**領域で、変更フィードの名前を指定します。
+1. **Changefeed Specification**エリアで、チェンジフィードで使用する<CustomContent plan="dedicated">Replication Capacity Units (RCUs) の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent>を設定します。
+2. **Changefeed Name**エリアで、変更フィードの名前を指定します。
 3. **Next**をクリックして、設定した内容を確認し、次のページに進みます。
 
 ## ステップ5．設定内容を確認する {#step-5-review-the-configurations}

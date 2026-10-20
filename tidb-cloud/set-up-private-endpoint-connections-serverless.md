@@ -3,7 +3,7 @@ title: Connect to TiDB Cloud Starter or Essential via AWS PrivateLink
 summary: プライベートエンドポイントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続する方法を学びましょう。
 ---
 
-# AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します。 {#connect-to-tidb-cloud-starter-or-essential-via-aws-privatelink}
+# AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続します {#connect-to-tidb-cloud-starter-or-essential-via-aws-privatelink}
 
 このドキュメントでは、AWS PrivateLink を介してTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法について説明します。
 

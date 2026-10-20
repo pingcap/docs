@@ -7,7 +7,7 @@ summary: TiDB X インスタンスで制限される SQL 機能について説�
 
 TiDB X インスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md) 上に構築されたサービス指向の TiDB Cloud オファリングであり、{{{ .starter }}}、Essential、Premium、BYOC インスタンスなどが含まれます。
 
-TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに対応していますが、TiDB Self-Managed と TiDB Cloud の間には一部機能差があります。このドキュメントでは、TiDB Cloud Starter、Essential、Premium、BYOC における SQL 機能の制限事項について説明します。TiDB Self-Managed と TiDB Cloud の機能差は継続的に解消されています。これらの不足している機能や機能性が必要な場合は、機能リクエストとして [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) ください。
+TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに対応していますが、TiDB Self-Managed と TiDB Cloud の間には一部機能差があります。このドキュメントでは、TiDB Cloud Starter、Essential、Premium、BYOC における SQL 機能の制限事項について説明します。TiDB Self-Managed と TiDB Cloud の機能差は継続的に解消されています。これらの不足している機能や機能性が必要な場合は、機能リクエストとして [お問い合わせ](/tidb-cloud/tidb-cloud-support.md) ください。
 
 > **Note:**
 >
@@ -17,7 +17,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 ### Placement と range 管理 {#placement-and-range-management}
 
-| ステートメント | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
+| ステートメント | {{{ .premium }}} および {{{ .byoc }}} | {{{ .starter }}} および {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER PLACEMENT POLICY` | サポートされていません [^1] | サポートされていません [^1] |
 | `ALTER RANGE` | サポートされていません | サポートされていません |
@@ -32,7 +32,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 ### リソースグループ {#resource-groups}
 
-| Statement | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
+| ステートメント | {{{ .premium }}} および {{{ .byoc }}} | {{{ .starter }}} および {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER RESOURCE GROUP` | サポートされていません [^2] | サポートされていません [^2] |
 | `CALIBRATE RESOURCE` | サポートされていません [^2] | サポートされていません [^2] |
@@ -43,7 +43,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 ### その他 {#others}
 
-| ステートメント | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
+| ステートメント | {{{ .premium }}} および {{{ .byoc }}} | {{{ .starter }}} および {{{ .essential }}} |
 |:-|:-|:-|
 | `BACKUP` | サポートされていません [^3] | サポートされていません [^3] |
 | `SHOW BACKUPS` | サポートされていません [^3] | サポートされていません [^3] |
@@ -92,13 +92,13 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 ## 関数と演算子 {#functions-and-operators}
 
-| 関数と演算子 | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
+| 関数と演算子 | {{{ .premium }}} および {{{ .byoc }}} | {{{ .starter }}} および {{{ .essential }}} |
 |:-|:-|:-|
 | `SLEEP` | 制限はありません | [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) 関数は、最大 300秒のスリープ時間をサポートします。 |
 
 ## システムテーブル {#system-tables}
 
-| データベース | テーブル | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
+| データベース | テーブル | {{{ .premium }}} および {{{ .byoc }}} | {{{ .starter }}} および {{{ .essential }}} |
 |:-|:-|:-|:-|
 | `metrics_schema` | すべてのデータベース | サポートされていません | サポートされていません |
 | `information_schema` | `ATTRIBUTES` | サポートされています | サポートされていません [^1] |
@@ -150,7 +150,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 ## システム変数 {#system-variables}
 
-| 変数 | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
+| 変数 | {{{ .premium }}} および {{{ .byoc }}} | {{{ .starter }}} および {{{ .essential }}} |
 |:-|:-|:-|
 | `hostname` | 値は非表示です | 値は非表示です |
 | `datadir` | 値は非表示です | サポートされていません [^1] |

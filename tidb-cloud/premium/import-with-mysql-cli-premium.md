@@ -1,17 +1,17 @@
 ---
-title: Import Data into {{{ .premium }}} or {{{ .byoc }}} using the MySQL Command-Line Client
+title: MySQLコマンドラインクライアントを使用して{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする
 summary: "MySQLコマンドラインクライアント（`mysql`）を使用して、小さなCSVファイルまたはSQLファイルを{{{ .premium }}}または{{{ .byoc }}}インスタンスにインポートする方法を学びましょう。"
 ---
 
-# Import Data into {{{ .premium }}} or {{{ .byoc }}} using the MySQL Command-Line Client
+# MySQLコマンドラインクライアントを使用して{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする
 
-このドキュメントでは、[MySQL Command-Line Client](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)（`mysql`）を使用して{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする方法について説明します。以下のセクションでは、SQLファイルまたはCSVファイルからデータをインポートするための手順を順を追って説明します。このプロセスでは論理インポートが実行され、MySQLコマンドラインクライアントがローカルマシンからTiDB Cloudに対してSQLステートメントを再実行します。
+このドキュメントでは、[MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)（`mysql`）を使用して{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする方法について説明します。以下のセクションでは、SQLファイルまたはCSVファイルからデータをインポートするための手順を順を追って説明します。このプロセスでは論理インポートが実行され、MySQLコマンドラインクライアントがローカルマシンからTiDB Cloudに対してSQLステートメントを再実行します。
 
 > **Tip:**
 >
-> - 論理インポートは、比較的小さなSQLファイルまたはCSVファイルに最適です。クラウドストレージからより高速に並列インポートする場合、または[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)エクスポートの複数ファイルを処理する場合は、[Import CSV Files from Cloud Storage into TiDB Cloud Premium or {{{ .byoc }}}](/tidb-cloud/premium/import-csv-files-premium.md)を参照してください。
-> - {{{ .starter }}}またはEssentialについては、[Import Data into {{{ .starter }}} or Essential via MySQL CLI](/tidb-cloud/import-with-mysql-cli-serverless.md)を参照してください。
-> - {{{ .dedicated }}}については、[Import Data into {{{ .dedicated }}} via MySQL CLI](/tidb-cloud/import-with-mysql-cli.md)を参照してください。
+> - 論理インポートは、比較的小さなSQLファイルまたはCSVファイルに最適です。クラウドストレージからより高速に並列インポートする場合、または[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)エクスポートの複数ファイルを処理する場合は、[クラウドストレージからCSVファイルを{{{ .premium }}}または{{{ .byoc }}}にインポートする](/tidb-cloud/premium/import-csv-files-premium.md)を参照してください。
+> - {{{ .starter }}}またはEssentialについては、[MySQL CLI を介してTiDB Cloud StarterまたはEssentialにデータをインポートする](/tidb-cloud/import-with-mysql-cli-serverless.md)を参照してください。
+> - {{{ .dedicated }}}については、[MySQL CLI を介してTiDB Cloud Dedicatedにデータをインポートする](/tidb-cloud/import-with-mysql-cli.md)を参照してください。
 
 ## 前提条件 {#prerequisites}
 
@@ -24,13 +24,13 @@ MySQLコマンドラインクライアントを使用して{{{ .premium }}}ま�
 
 MySQLコマンドラインクライアントを使用して{{{ .premium }}}または{{{ .byoc }}}インスタンスに接続します。初めての場合は、以下の手順を実行してネットワーク接続を設定し、TiDB SQL `root` ユーザーのパスワードを生成してください。
 
-1. [TiDB Cloud console](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。次に、対象の{{{ .premium }}}または{{{ .byoc }}}インスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。次に、対象の{{{ .premium }}}または{{{ .byoc }}}インスタンスの名前をクリックして、その概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックします。接続ダイアログが表示されます。
 
 3. 接続ダイアログ内の設定が、ご使用の動作環境と一致していることを確認します。
 
-    - **Connection Type** は、BYOCデプロイメントに応じて `Public`<CustomContent plan="byoc"> または `Private`</CustomContent> に設定します。
+    - **Connection Type** は `Public`<CustomContent plan="byoc"> または `Private`（BYOC のデプロイに応じて）</CustomContent> に設定します。
     - **Connect With** は `MySQL CLI` に設定します。
     - **Operating System** がご使用の環境と一致していることを確認します。
 

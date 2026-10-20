@@ -50,7 +50,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     **Starter**または**Essential**を選択できます。
 
-    MySQL互換ワークロードの場合は、Starterインスタンスから開始し、後でニーズの増大に応じてEssentialインスタンスにアップグレードできます。詳細については、[プランを選択してください](/tidb-cloud/select-cluster-tier.md)をご覧ください。
+    MySQL互換ワークロードの場合は、Starterインスタンスから開始し、後でニーズの増大に応じてEssentialインスタンスにアップグレードできます。詳細については、[プランを選択する](/tidb-cloud/select-cluster-tier.md)をご覧ください。
 
 4. **Starter**を選択した場合は、**Compatibility Mode**セクションで次のいずれかのオプションを選択します。
 
@@ -61,14 +61,14 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 6. （オプション）このインスタンスを管理対象プロジェクトにグループ化するには、 **Group Your Instance in a Project**をクリックし、インスタンスのターゲットプロジェクトを選択します。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
 
-7. 選択したプランと互換モードに基づいて、容量と使用量クォータを設定または確認します。各Starter互換モードの無料使用量クォータについては、[{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter)をご覧ください。
+7. 選択したプランと互換モードに基づいて、キャパシティと使用量クォータを設定または確認します。各Starter互換モードの無料使用量クォータについては、[プランを選択する](/tidb-cloud/select-cluster-tier.md#starter)をご覧ください。
 
-    - **MySQL-compatible Starter**:
+    - **MySQL 互換 Starter**:
 
         - TiDB Cloud Starterインスタンスの利用限度額を更新できます。利用限度額を0に設定すると、インスタンスは無料のままです。利用限度額を0より大きい値に設定する場合は、インスタンスを作成する前にクレジットカードを追加する必要があります。
         - デフォルトでは、各組織は最大5つの無料のMySQL互換Starterインスタンスを作成できます。追加のインスタンスを作成するには、クレジットカードを追加し、利用限度額を指定する必要があります。
 
-    - **PostgreSQL-compatible Starter**:
+    - **PostgreSQL 互換 Starter**:
 
         パブリックプレビュー期間中、各組織は最大10個の無料のPostgreSQL互換Starterインスタンスを作成できます。
 

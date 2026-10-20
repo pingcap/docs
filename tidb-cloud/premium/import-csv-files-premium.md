@@ -1,9 +1,9 @@
 ---
-title: Import CSV Files from Cloud Storage into TiDB Cloud Premium or {{{ .byoc }}}
+title: クラウドストレージからCSVファイルを{{{ .premium }}}または{{{ .byoc }}}にインポートする
 summary: Amazon Simple Storage Service（Amazon S3）からTiDB Cloud Premiumおよび{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）からTiDB Cloud PremiumインスタンスにCSVファイルをインポートする方法を学びましょう。
 ---
 
-# Import CSV Files from Cloud Storage into TiDB Cloud Premium or {{{ .byoc }}}
+# クラウドストレージからCSVファイルを{{{ .premium }}}または{{{ .byoc }}}にインポートする
 
 このドキュメントでは、Amazon Simple Storage Service（Amazon S3）からTiDB Cloud Premiumおよび{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）からTiDB Cloud PremiumインスタンスにCSVファイルをインポートする方法について説明します。
 
@@ -24,7 +24,7 @@ summary: Amazon Simple Storage Service（Amazon S3）からTiDB Cloud Premiumお
 
 </CustomContent>
 
-## Step 1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
+## ステップ1. CSVファイルを準備する {#step-1-prepare-the-csv-files}
 
 1. CSVファイルが256 MiBを超える場合は、それぞれ約256 MiBのサイズの小さなファイルに分割することを検討してください。
 
@@ -39,8 +39,8 @@ summary: Amazon Simple Storage Service（Amazon S3）からTiDB Cloud Premiumお
     > **Note:**
     >
     > - より良いパフォーマンスを得るために、各圧縮ファイルのサイズは100 MiB以下に制限することを推奨します。
-    > - Snappy圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。Snappy圧縮の他のバリアントはサポートされていません。
-    > - 非圧縮ファイルの場合、状況によっては前述のルールに従ってCSVファイル名を更新できないことがあります（例えば、CSVファイルのリンクが他のプログラムでも使用されている場合）。その場合は、ファイル名を変更せずに、[Step 4](#step-4-import-csv-files)の**Mapping Settings**を使用してソースデータを単一のターゲットテーブルにインポートできます。
+    > - Snappy圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他の Snappy 圧縮形式はサポートされていません。
+    > - 非圧縮ファイルの場合、状況によっては前述のルールに従ってCSVファイル名を更新できないことがあります（例えば、CSVファイルのリンクが他のプログラムでも使用されている場合）。その場合は、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files)の**Mapping Settings**を使用してソースデータを単一のターゲットテーブルにインポートできます。
 
 ## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
@@ -101,7 +101,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
 </CustomContent>
 
-## Step 4. CSVファイルをインポートする {#step-4-import-csv-files}
+## ステップ4．CSVファイルをインポートする {#step-4-import-csv-files}
 
 CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートするには、以下の手順に従ってください。
 
@@ -126,7 +126,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     - **Source Files URI**:
         - 1つのファイルをインポートする場合は、ソースファイルのURIを`s3://[bucket_name]/[data_source_folder]/[file_name].csv`形式で入力します。例: `s3://sampledata/ingest/TableName.01.csv`。
         - 複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`形式で入力します。例: `s3://sampledata/ingest/`。
-    - **Credential**: AWS Role ARNまたはAWSアクセスキーのいずれかを使用してバケットにアクセスできます。詳細については、[Configure Amazon S3 access](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
+    - **Credential**: AWS Role ARNまたはAWSアクセスキーのいずれかを使用してバケットにアクセスできます。詳細については、[Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
         - **AWS Role ARN**: AWS Role ARNの値を入力します。新しいロールを作成する必要がある場合は、**Click here to create a new one with AWS CloudFormation**をクリックし、ガイド付きの手順に従って提供されたテンプレートを起動し、IAM警告を確認し、スタックを作成して、生成されたARNをTiDB Cloudにコピーして戻します。
         - **AWS Access Key**: AWSアクセスキーIDとAWSシークレットアクセスキーを入力します。
     - **Test Bucket Access**: 認証情報の入力後、このボタンをクリックして、{{{ .premium }}} または {{{ .byoc }}} がバケットにアクセスできることを確認します。
@@ -142,7 +142,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     >
     > **Source Files URI**で単一のファイルが指定されている場合、**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションは表示されず、{{{ .premium }}} または {{{ .byoc }}} は**Source**フィールドにファイル名を自動入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    - 自動マッピングを有効のままにして、[file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md)を{{{ .premium }}} または {{{ .byoc }}} インスタンス内のソースファイルとターゲットテーブルに適用します。データ形式として**CSV**を選択したままにします。
+    - 自動マッピングを有効のままにして、[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)を{{{ .premium }}} または {{{ .byoc }}} インスタンス内のソースファイルとターゲットテーブルに適用します。データ形式として**CSV**を選択したままにします。
 
     - **Advanced options**: パネルを展開して`Ignore compatibility checks (advanced)`トグルを表示します。スキーマ互換性の検証を意図的にバイパスしたい場合を除き、無効のままにしてください。
 
@@ -152,7 +152,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     > 手動マッピングは近日中に利用可能になります。トグルが利用可能になったら、自動マッピングオプションをオフにして、マッピングを手動で設定してください。
     >
     > - **Source**: `TableName.01.csv`のようなファイル名パターンを入力してください。ワイルドカード`*`と`?`がサポートされています（例: `my-data*.csv`）。
-    > - **Target Database** and **Target Table**: 一致したファイルの宛先オブジェクトを選択します。
+    > - **Target Database** と **Target Table**: 一致したファイルの宛先オブジェクトを選択します。
 
 6. {{{ .premium }}} または {{{ .byoc }}} はソースパスを自動的にスキャンします。スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、**Start Import**をクリックしてください。
 
@@ -182,7 +182,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     - **Source Files URI**:
         - 1つのファイルをインポートする場合は、ソースファイルのURIを`oss://[bucket_name]/[data_source_folder]/[file_name].csv`形式で入力します。例: `oss://sampledata/ingest/TableName.01.csv`。
         - 複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`形式で入力します。例: `oss://sampledata/ingest/`。
-    - **Credential**: AccessKeyペアを使用してバケットにアクセスできます。詳細については、[Configure Alibaba Cloud Object Storage Service (OSS) access](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
+    - **Credential**: AccessKeyペアを使用してバケットにアクセスできます。詳細については、[Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
     - **Test Bucket Access**: 認証情報の入力後、このボタンをクリックして、{{{ .premium }}} がバケットにアクセスできることを確認します。
     - **Target Connection**: インポートを実行するTiDBのユーザー名とパスワードを入力します。必要に応じて、**Test Connection**をクリックして認証情報を検証します。
 
@@ -196,7 +196,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     >
     > **Source Files URI**で単一のファイルが指定されている場合、**Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションは表示されず、{{{ .premium }}} は**Source**フィールドにファイル名を自動入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
-    - 自動マッピングを有効のままにして、[file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md)をソースファイルとターゲットテーブルに適用します。データ形式として**CSV**を選択したままにします。
+    - 自動マッピングを有効のままにして、[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)をソースファイルとターゲットテーブルに適用します。データ形式として**CSV**を選択したままにします。
 
     - **Advanced options**: パネルを展開して`Ignore compatibility checks (advanced)`トグルを表示します。スキーマ互換性の検証を意図的にバイパスしたい場合を除き、無効のままにしてください。
 
@@ -206,7 +206,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     > 手動マッピングは近日中に利用可能になります。トグルが利用可能になったら、自動マッピングオプションをオフにして、マッピングを手動で設定してください。
     >
     > - **Source**: `TableName.01.csv`のようなファイル名パターンを入力してください。ワイルドカード`*`と`?`がサポートされています（例: `my-data*.csv`）。
-    > - **Target Database** and **Target Table**: 一致したファイルの宛先オブジェクトを選択します。
+    > - **Target Database** と **Target Table**: 一致したファイルの宛先オブジェクトを選択します。
 
 6. {{{ .premium }}} はソースパスを自動的にスキャンします。スキャン結果を確認し、検出されたデータファイルと対応するターゲットテーブルをチェックしてから、**Start Import**をクリックしてください。
 

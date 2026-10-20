@@ -4,7 +4,7 @@ summary: TiDB Cloudでプランを選択する方法を学びましょう。
 aliases: ['/ja/tidbcloud/developer-tier-cluster']
 ---
 
-# プランを選択してください {#select-your-plan}
+# プランを選択する {#select-your-plan}
 
 プランによって、TiDBリソースのスループットとパフォーマンスが決まります。
 
@@ -27,52 +27,52 @@ TiDB Cloud Starterは、開発者や小規模チーム向けに、即座に利�
 
 TiDB Cloud Starterは、以下の互換モードをサポートしています。
 
-- **MySQL-compatible**: MySQLプロトコル互換性を提供します。対象となる各インスタンスには毎月の無料クォータが含まれており、無料クォータを超えた後もインスタンスを継続して使用できるように、従量課金を有効にできます。
+- **MySQL 互換**: MySQLプロトコル互換性を提供します。対象となる各インスタンスには毎月の無料クォータが含まれており、無料クォータを超えた後もインスタンスを継続して使用できるように、従量課金を有効にできます。
 
-- **PostgreSQL-compatible (Public Preview)**: PostgreSQL wire protocol互換性を提供します。PostgreSQL-compatible Starterインスタンスは、現在パブリックプレビュー期間中は無料です。
+- **PostgreSQL 互換（パブリックプレビュー）**: PostgreSQL ワイヤプロトコル互換性を提供します。PostgreSQL 互換の Starter インスタンスは、現在パブリックプレビュー期間中は無料です。
 
-無料プランは、{{{ .starter }}}を使い始める開発者や小規模チームに最適です。各互換モードには、ストレージとRequest Units（RUs）の毎月の無料クォータが含まれます。クォータは互換モードによって異なります。
+無料プランは、{{{ .starter }}}を使い始める開発者や小規模チームに最適です。各互換モードには、ストレージとリクエストユニット（RU）の毎月の無料クォータが含まれます。クォータは互換モードによって異なります。
 
 - **No cost**: 使用量が[無料クォータ](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)の範囲内であれば、このプランは無料です。始めるのにクレジットカードは必要ありません。
 
-- **Storage**: 毎月の無料ストレージクォータが含まれます。
-- **Request Units**: データベース操作用の[Request Units (RUs)](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
+- **ストレージ**: 毎月の無料ストレージクォータが含まれます。
+- **Request Units**: データベース操作用の[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)が含まれます。
 
-### MySQL-compatible Starter {#usage-quota}
+### MySQL 互換 Starter {#usage-quota}
 
-TiDB Cloudの各組織につき、デフォルトでは最大 5つの無料MySQL-compatible {{{ .starter }}}インスタンスを作成できます。さらに{{{ .starter }}}インスタンスを作成するには、クレジットカードを追加し、支出上限を指定する必要があります。
+TiDB Cloudの各組織につき、デフォルトでは最大 5つの MySQL 互換の無料 {{{ .starter }}}インスタンスを作成できます。さらに{{{ .starter }}}インスタンスを作成するには、クレジットカードを追加し、支出上限を指定する必要があります。
 
-組織内の最初の 5つのMySQL-compatible {{{ .starter }}}インスタンスについては、無料かスケーラブルかにかかわらず、TiDB Cloudは各インスタンスに対して以下の無料使用量クォータを提供します。
+組織内の最初の 5つの MySQL 互換の {{{ .starter }}}インスタンスについては、無料かスケーラブルかにかかわらず、TiDB Cloudは各インスタンスに対して以下の無料使用量クォータを提供します。
 
-- Row-based storage: 5 GiB
-- Columnar storage: 5 GiB
-- Request Units (RUs): 1か月あたり5,000万 RUs
+- 行ベースストレージ：5 GiB
+- 列指向ストレージ：5 GiB
+- リクエストユニット（RU）：月間5,000万RU
 
-Request Unit（RU）は、データベースへの単一のリクエストによって消費されるリソース量を表すために使用される測定単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータ量など、さまざまな要因によって異なります。
+リクエストユニット（RU）とは、データベースへの単一のリクエストによって消費されるリソース量を表す単位です。リクエストによって消費されるRUの量は、操作の種類や取得または変更されるデータの量など、さまざまな要因によって異なります。
 
-{{{ .starter }}}インスタンスが使用量クォータに達すると、[クォータを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで、以後の新しい接続試行は直ちに拒否されます。クォータ到達前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、無料の{{{ .starter }}}インスタンスでrow-based storageが 5 GiBを超えると、そのインスタンスは新しい接続試行を自動的に制限します。
+{{{ .starter }}}インスタンスが使用量クォータに達すると、[クォータを増やす](/tidb-cloud/manage-serverless-spend-limit.md#update-spending-limit)か、新しい月の開始時に使用量がリセットされるまで、以後の新しい接続試行は直ちに拒否されます。クォータ到達前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。たとえば、無料の{{{ .starter }}}インスタンスで行ベースのストレージが 5 GiBを超えると、そのインスタンスは新しい接続試行を自動的に制限します。
 
-さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク送信を含む）のRU消費量、料金の詳細、およびスロットリング情報については、[{{{ .starter }}} Pricing Details](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
+さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク送信を含む）のRU消費量、料金の詳細、およびスロットリング情報については、[TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
-### PostgreSQL-compatible Starter {#postgresql-compatible-starter}
+### PostgreSQL 互換 Starter {#postgresql-compatible-starter}
 
 > **Note:**
 >
-> PostgreSQL-compatible TiDB Cloud Starterは現在パブリックプレビュー中です。
+> PostgreSQL 互換の TiDB Cloud Starterは現在パブリックプレビュー中です。
 
-PostgreSQL-compatible {{{ .starter }}}インスタンスは、現在パブリックプレビュー期間中は無料です。
+PostgreSQL 互換の {{{ .starter }}}インスタンスは、現在パブリックプレビュー期間中は無料です。
 
-組織内の最初の 10個のPostgreSQL-compatible {{{ .starter }}}インスタンスについて、TiDB Cloudは各インスタンスに対して以下の毎月の無料クォータを提供します。
+組織内の最初の 10個の PostgreSQL 互換の {{{ .starter }}}インスタンスについて、TiDB Cloudは各インスタンスに対して以下の毎月の無料クォータを提供します。
 
-- Row-based storage: 50 GiB
+- 行ベースストレージ：50 GiB
 
-- Request Units (RUs): 1か月あたり5億 RUs
+- リクエストユニット（RU）：月間5億RU
 
-PostgreSQL-compatible {{{ .starter }}}インスタンスが無料クォータに達すると、過剰なリソース消費に対して使用制限またはサービス停止が適用される場合があります。これらの上限を超えることが予想される場合は、要件について相談するために<a href="mailto:support@pingcap.com">support@pingcap.com</a>までお問い合わせください。
+PostgreSQL 互換の {{{ .starter }}}インスタンスが無料クォータに達すると、過剰なリソース消費に対して使用制限またはサービス停止が適用される場合があります。これらの上限を超えることが予想される場合は、要件について相談するために<a href="mailto:support@pingcap.com">support@pingcap.com</a>までお問い合わせください。
 
 ### インスタンス容量計画 {#instance-capacity-plan}
 
-以下のインスタンス容量制限は、MySQL-compatible {{{ .starter }}}インスタンスに適用されます。
+以下のインスタンスキャパシティ制限は、MySQL 互換の {{{ .starter }}}インスタンスに適用されます。
 
 TiDB Cloudの各組織につき、デフォルトでは、すべてのTiDB Cloud StarterおよびEssentialインスタンスを合わせて最大 5つの[ブランチ](/tidb-cloud/branch-overview.md)を作成できます。
 
