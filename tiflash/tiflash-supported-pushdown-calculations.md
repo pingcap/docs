@@ -155,7 +155,7 @@ SHOW WARNINGS;
 3 rows in set (0.18 sec)
 ```
 
-前の例の式は、関数`Time`と`Cast`をTiFlashにプッシュダウンできないため、 TiFlashに完全にプッシュダウンすることはできません。
+前の例の式は、関数`Time`と`Cast`をTiFlashにプッシュダウンできないため、 TiFlashに完全にプッシュダウンできません。
 
 ### 例4: ウィンドウ関数 {#example-4-window-functions}
 

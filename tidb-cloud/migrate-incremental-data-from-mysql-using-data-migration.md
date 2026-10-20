@@ -87,7 +87,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 ### Azure Database for MySQL の場合 {#for-azure-database-for-mysql}
 
-Azure Database for MySQL（バージョン5.7以降）では、GTIDモードはデフォルトで有効になっており、GTIDモードを無効にすることはできません。
+Azure Database for MySQL（バージョン5.7以降）では、GTIDモードはデフォルトで有効になっており、GTIDモードを無効にできません。
 
 さらに、 `binlog_row_image`サーバーパラメーターが`FULL`に設定されていることを確認してください。これは、次の SQL文を実行することで確認できます。
 
@@ -237,7 +237,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 - GTID
 - Binlogファイル名と位置
 
-移行ジョブが開始されると、開始位置を変更することはできません。
+移行ジョブが開始されると、開始位置を変更できません。
 
 ### 増分移行ジョブが開始される時間 {#the-time-when-the-incremental-migration-job-starts}
 

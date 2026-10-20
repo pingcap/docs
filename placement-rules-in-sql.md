@@ -199,7 +199,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 > **Note:**
 >
-> `PRIMARY_REGION` 、 `REGIONS` 、および`SCHEDULE`オプションは、 `CONSTRAINTS`オプションと同時に指定することはできません。同時に指定するとエラーが発生します。
+> `PRIMARY_REGION` 、 `REGIONS` 、および`SCHEDULE`オプションは、 `CONSTRAINTS`オプションと同時に指定できません。同時に指定するとエラーが発生します。
 
 ### 通常の配置オプション {#regular-placement-options}
 

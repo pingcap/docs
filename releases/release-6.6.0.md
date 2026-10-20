@@ -138,7 +138,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 - MySQL互換の多値インデックスのサポート（実験的） [#39592](https://github.com/pingcap/tidb/issues/39592) @[xiongjiwei](https://github.com/xiongjiwei)@[qw4990](https://github.com/qw4990)
 
-    TiDB は v6.6.0 で MySQL 互換の多値インデックスを導入しました。JSON 列の配列の値をフィルタリングすることは一般的な操作ですが、通常のインデックスではこの操作を高速化することはできません。配列に多値インデックスを作成することで、フィルタリングのパフォーマンスを大幅に向上させることができます。JSON 列の配列に多値インデックスがある場合、その多値インデックスを使用して`MEMBER OF()` 、 `JSON_CONTAINS()` 、 `JSON_OVERLAPS()`関数で取得条件をフィルタリングすることで、I/O 消費を大幅に削減し、操作速度を向上させることができます。
+    TiDB は v6.6.0 で MySQL 互換の多値インデックスを導入しました。JSON 列の配列の値をフィルタリングすることは一般的な操作ですが、通常のインデックスではこの操作を高速化できません。配列に多値インデックスを作成することで、フィルタリングのパフォーマンスを大幅に向上させることができます。JSON 列の配列に多値インデックスがある場合、その多値インデックスを使用して`MEMBER OF()` 、 `JSON_CONTAINS()` 、 `JSON_OVERLAPS()`関数で取得条件をフィルタリングすることで、I/O 消費を大幅に削減し、操作速度を向上させることができます。
 
     多値インデックスの導入により、TiDBのJSONデータ型に対するサポートがさらに強化され、MySQL 8.0との互換性も向上します。
 
@@ -154,7 +154,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 - `store-io-pool-size`の動的な変更をサポート [#13964](https://github.com/tikv/tikv/issues/13964) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    TiKV の設定項目[`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)は、 Raft I/O タスクを処理するスレッドの許容数を指定します。この値は、TiKV のパフォーマンスをチューニングする際に調整できます。バージョン 6.6.0 より前のバージョンでは、この設定項目を動的に変更することはできませんでした。バージョン 6.6.0 以降では、サーバーを再起動せずにこの設定を変更できるため、より柔軟なパフォーマンス調整が可能になります。
+    TiKV の設定項目[`raftstore.store-io-pool-size`](/tikv-configuration-file.md#store-io-pool-size-new-in-v530)は、 Raft I/O タスクを処理するスレッドの許容数を指定します。この値は、TiKV のパフォーマンスをチューニングする際に調整できます。バージョン 6.6.0 より前のバージョンでは、この設定項目を動的に変更できませんでした。バージョン 6.6.0 以降では、サーバーを再起動せずにこの設定を変更できるため、より柔軟なパフォーマンス調整が可能になります。
 
     詳細については、[ドキュメント](/dynamic-config.md)を参照してください。
 
@@ -274,7 +274,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 - TiDB LightningはAWS IAMロールキーとセッショントークンを介してAmazon S3データへのアクセスをサポートします [#40750](https://github.com/pingcap/tidb/issues/40750) @[okJiang](https://github.com/okJiang)
 
-    バージョン6.6.0より前は、 TiDB LightningはAWS IAM**ユーザーのアクセスキー**（各アクセスキーはアクセスキーIDとシークレットアクセスキーで構成されます）によるS3データへのアクセスのみをサポートしていたため、一時的なセッショントークンを使用してS3データにアクセスすることはできませんでした。バージョン6.6.0以降では、データセキュリティを向上させるため、 TiDB LightningはAWS IAM**ロールのアクセスキーとセッショントークン**によるS3データへのアクセスもサポートするようになりました。
+    バージョン6.6.0より前は、 TiDB LightningはAWS IAM**ユーザーのアクセスキー**（各アクセスキーはアクセスキーIDとシークレットアクセスキーで構成されます）によるS3データへのアクセスのみをサポートしていたため、一時的なセッショントークンを使用してS3データにアクセスできませんでした。バージョン6.6.0以降では、データセキュリティを向上させるため、 TiDB LightningはAWS IAM**ロールのアクセスキーとセッショントークン**によるS3データへのアクセスもサポートするようになりました。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-data-source.md#import-data-from-amazon-s3)を参照してください。
 
@@ -337,7 +337,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiKV           | `rocksdb.enable-statistics`                                                                                                                                                                                                                                   | 削除済み     | この設定項目は、RocksDB の統計情報を有効にするかどうかを指定します。v6.6.0 以降、この項目は削除されました。RocksDB の統計情報は、診断を支援するために、デフォルトですべてのクラスタで有効になっています。詳細については、 [#13942](https://github.com/tikv/tikv/pull/13942)を参照してください。            |
 | TiKV           | `raftdb.enable-statistics`                                                                                                                                                                                                                                    | 削除済み     | この設定項目は、 Raft RocksDB の統計情報を有効にするかどうかを指定します。v6.6.0 以降、この項目は削除されました。Raft RocksDBの統計情報は、診断を支援するために、デフォルトですべてのクラスターで有効になっています。詳細については、 [#13942](https://github.com/tikv/tikv/pull/13942)を参照してください。 |
-| TiKV           | `storage.block-cache.shared`                                                                                                                                                                                                                                  | 削除済み     | バージョン6.6.0以降、この設定項目は削除され、ブロックキャッシュはデフォルトで有効になり、無効にすることはできません。詳細は[#12936](https://github.com/tikv/tikv/issues/12936)を参照してください。                                                                   |
+| TiKV           | `storage.block-cache.shared`                                                                                                                                                                                                                                  | 削除済み     | バージョン6.6.0以降、この設定項目は削除され、ブロックキャッシュはデフォルトで有効になり、無効にできません。詳細は[#12936](https://github.com/tikv/tikv/issues/12936)を参照してください。                                                                   |
 | DM             | `on-duplicate`                                                                                                                                                                                                                                                | 削除済み     | この設定項目は、完全インポートフェーズ中に競合を解決する方法を制御します。v6.6.0 では、 `on-duplicate`に代わる新しい設定項目`on-duplicate-logical`と`on-duplicate-physical`が導入されました。                                                                          |
 | TiDB           | [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)                                                                                                                                                                                | 変更     | バージョン6.6.0以降、デフォルト値が`true`から`false`に変更され、TiDBではデフォルトでテレメトリが無効になります。                                                                                                                             |
 | TiKV           | [`rocksdb.defaultcf.block-size`](/tikv-configuration-file.md#block-size)および[`rocksdb.writecf.block-size`](/tikv-configuration-file.md#block-size)                                                                                                             | 変更     | デフォルト値が`64K`から`32K`に変更されます。                                                                                                                                                                     |

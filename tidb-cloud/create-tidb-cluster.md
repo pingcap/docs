@@ -42,9 +42,9 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
         > **Note:**
         >
-        > - [AWS Marketplace](https://aws.amazon.com/marketplace)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは AWS となり、 TiDB Cloudで変更することはできません。
-        > - [Azure Marketplace](https://azuremarketplace.microsoft.com)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは Azure Cloud となり、 TiDB Cloudで変更することはできません。
-        > - [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudに登録した場合、クラウドプロバイダーは Google Cloud となり、 TiDB Cloudで変更することはできません。
+        > - [AWS Marketplace](https://aws.amazon.com/marketplace)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは AWS となり、 TiDB Cloudで変更できません。
+        > - [Azure Marketplace](https://azuremarketplace.microsoft.com)を通じてTiDB Cloudにサインアップした場合、クラウドプロバイダーは Azure Cloud となり、 TiDB Cloudで変更できません。
+        > - [Google Cloud Marketplace](https://console.cloud.google.com/marketplace)を通じてTiDB Cloudに登録した場合、クラウドプロバイダーは Google Cloud となり、 TiDB Cloudで変更できません。
 
     4. TiDB、TiKV、TiFlash (オプション) の[クラスターサイズ](/tidb-cloud/size-your-cluster.md)をそれぞれ設定します。
 
@@ -55,7 +55,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
         > **Note:**
         >
         > - TiDB Cloudは、このリージョンで最初のクラスターが作成される際に、このCIDRを持つVPCを作成します。このリージョン内の同じプロジェクトの以降のすべてのクラスターは、このVPCを使用します。
-        > - CIDRを設定する際は、アプリケーションが配置されているVPCのCIDRと競合しないようにしてください。VPCが作成されると、CIDRを変更することはできません。
+        > - CIDRを設定する際は、アプリケーションが配置されているVPCのCIDRと競合しないようにしてください。VPCが作成されると、CIDRを変更できません。
 
 4. 右側のクラスター情報と請求情報を確認してください。
 
@@ -63,7 +63,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     > **Note:**
     >
-    > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントから直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりすることはできません。
+    > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントから直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
 
 6. **Create**をクリックします。
 

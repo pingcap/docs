@@ -19,7 +19,7 @@ TiDB Dashboard UIは、v4.0以降のバージョンのPDコンポーネントに
 
 > **Note:**
 >
-> v4.0 より前の TiDB クラスターに TiDB Dashboardをデプロイすることはできません。
+> v4.0 より前の TiDB クラスターに TiDB Dashboardをデプロイできません。
 
 ## 複数のPDインスタンスを使用したデプロイメント {#deployment-with-multiple-pd-instances}
 

@@ -27,7 +27,7 @@ Cloud Organization SSO に移行する前に、組織についてこのセクシ
 
 > **Note:**
 >
-> - Cloud Organization SSO を有効にすると、無効にすることはできません。
+> - Cloud Organization SSO を有効にすると、無効にできません。
 > - Cloud Organization SSOを有効にするには、 TiDB Cloud組織の`Organization Owner`ロールに属している必要があります。ロールの詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)をご覧ください。
 
 ### 組織のTiDB Cloudログインページのカスタム URL を決定します {#decide-a-custom-url-for-the-tidb-cloud-login-page-of-your-organization}

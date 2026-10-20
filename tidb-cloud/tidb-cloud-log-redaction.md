@@ -18,7 +18,7 @@ summary: TiDB Cloudでユーザーが制御するログのマスキングを有�
 <CustomContent plan="dedicated">
 
 - TiDB Cloudでは、組織の**Organization Owner**または**Project Owner**の役割を担っている必要があります。
-- TiDB Cloud Dedicatedクラスターが`paused`状態にある場合、ログのマスキングを有効または無効にすることはできません。
+- TiDB Cloud Dedicatedクラスターが`paused`状態にある場合、ログのマスキングを有効または無効にできません。
 
 </CustomContent>
 

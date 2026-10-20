@@ -144,7 +144,7 @@ tiup dumpling -f '@config/filter.txt'
 tiup dumpling -f 'employees.*' -f '*.WorkOrder'
 ```
 
-フィルター ファイルでは、さらに別のファイルをインポートすることはできません。
+フィルター ファイルでは、さらに別のファイルをインポートできません。
 
 ### コメントと空白行 {#comments-and-blank-lines}
 

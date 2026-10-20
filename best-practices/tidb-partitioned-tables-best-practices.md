@@ -610,7 +610,7 @@ SHOW TABLE employees PARTITION (p4) regions;
 
 #### デメリット {#disadvantages}
 
-`DROP PARTITION`を使用して大量の履歴データを効率的に削除することはできません。
+`DROP PARTITION`を使用して大量の履歴データを効率的に削除できません。
 
 #### 適切なシナリオ {#suitable-scenarios}
 

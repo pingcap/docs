@@ -186,7 +186,7 @@ credential-file-path = "/path/to/external-account.json"
 ```
 
 - `vendor = "gcp_v2"` の場合、明示的な資格情報では Service Account と `external_account` のみがサポートされます。
-- ADC によって生成された `authorized_user` JSON を使用している場合、その JSON を `credential-file-path` として直接設定することはできません。この場合は、`credential-file-path` を省略し、TiKV が実行環境内の[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)を通じて認証情報を取得するようにします。
+- ADC によって生成された `authorized_user` JSON を使用している場合、その JSON を `credential-file-path` として直接設定できません。この場合は、`credential-file-path` を省略し、TiKV が実行環境内の[アプリケーションのデフォルト資格情報](https://cloud.google.com/docs/authentication/application-default-credentials)を通じて認証情報を取得するようにします。
 - 古い `vendor = "gcp"` では、明示的な資格情報として `external_account` を使用することがサポートされていないため、この方法では WIF を使用できません。
 
 </div>

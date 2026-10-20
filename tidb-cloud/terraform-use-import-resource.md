@@ -257,7 +257,7 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
 
 Terraform の場合、インポートタスクを削除すると、対応する`tidbcloud_import`リソースがキャンセルされます。
 
-`COMPLETED`インポートタスクをキャンセルすることはできません。キャンセルした場合は、次の例のように`Delete Error`が返されます。
+`COMPLETED`インポートタスクをキャンセルできません。キャンセルした場合は、次の例のように`Delete Error`が返されます。
 
 ```
 $ terraform destroy

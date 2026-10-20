@@ -83,7 +83,7 @@ select list は 3 つの構文をサポートしており、使用できるの�
 
 > **Note:**
 >
-> 現在、Parquet と ORC では、`Query rows as Variants` は `Query columns by name` より低速であり、この 2 つの方法を混在して使用することはできません。
+> 現在、Parquet と ORC では、`Query rows as Variants` は `Query columns by name` より低速であり、この 2 つの方法を混在して使用できません。
 
 構文:
 

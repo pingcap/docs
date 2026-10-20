@@ -337,7 +337,7 @@ SETTINGS (week_start = 1) SELECT DATE_TRUNC(WEEK, to_date('2024-04-05')); -- Mon
 
 - %Z: 解析されたデータからオフセットは設定されず、検証もされません。タイムゾーンは完全に無視されます。これは glibc の strptime におけるこのフォーマットコードの扱いに似ています。
 
-    省略形からオフセットへ確実に変換することはできません。たとえば、CDT は Central Daylight Time（北米）を意味する場合もあれば、China Daylight Time を意味する場合もあります。
+    省略形からオフセットへ確実に変換できません。たとえば、CDT は Central Daylight Time（北米）を意味する場合もあれば、China Daylight Time を意味する場合もあります。
 
 - %+: %Y-%m-%dT%H:%M:%S%.f%:z と同じです。つまり、秒の小数部は 0、3、6、9 桁で、タイムゾーンオフセットにはコロンが入ります。
 

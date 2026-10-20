@@ -83,7 +83,7 @@ WHERE TABLE_SCHEMA = 'db_name' AND TABLE_NAME = 'table_name';
 - `DURATION` は増え続けているのに、`COMPLETED_REPLICAS` が長時間増加しない場合: TiKV のローリング再起動、一時的なリソース不足、短時間のオブジェクトストレージ利用不可などのシステム例外により、変換が停止している可能性があります。
 - `TOTAL_REPLICAS`、`COMPLETED_REPLICAS`、`PROGRESS`、`LAST_UPDATE_TIME` がすべて `NULL` のままの場合: まだ成功した観測が行われていません。これらのカラムはまとめて設定・クリアされるため、`LAST_UPDATE_TIME` だけでは観測の試行が継続しているかどうかは判断できません。代わりに `DURATION` を確認してください。これは変換が追跡されている間は常に増加します。これらのカラムが `NULL` のままで `DURATION` だけが増え続けている場合、ポーリングは継続中ですが、有効な観測結果がまだ返ってきていません。
 
-停止した変換を自分で解消することはできません。[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡してください。問題が解消されると、`COMPLETED_REPLICAS` は `COMPLETED` に達するまで再び増加し続け、追加の操作は不要です。
+停止した変換を自分で解消できません。[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) に連絡してください。問題が解消されると、`COMPLETED_REPLICAS` は `COMPLETED` に達するまで再び増加し続け、追加の操作は不要です。
 
 ### まだ進行中の変換を逆方向に戻す {#reverse-a-conversion-that-is-still-in-progress}
 

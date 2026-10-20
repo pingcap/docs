@@ -60,7 +60,7 @@ FlashbackToTimestampStmt
 - `FLASHBACK CLUSTER`は、 `ALTER TABLE ATTRIBUTE` 、 `ALTER TABLE REPLICA` 、 `CREATE PLACEMENT POLICY`など、PD 関連の情報を変更する DDL 文のロールバックをサポートしていません。
 - `FLASHBACK`文で指定された時点では、完全に実行されていない DDL文は存在してはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
 - `FLASHBACK CLUSTER`を実行する前に、TiDB は関連するすべての接続を切断し、 `FLASHBACK CLUSTER`文が完了するまで、これらのテーブルに対する読み取りおよび書き込み操作を禁止します。
-- `FLASHBACK CLUSTER`文は、実行後にキャンセルすることはできません。TiDB は成功するまで再試行を続けます。
+- `FLASHBACK CLUSTER`文は、実行後にキャンセルできません。TiDB は成功するまで再試行を続けます。
 - `FLASHBACK CLUSTER`の実行中にデータをバックアップする必要がある場合は、[バックアップと復元](/br/br-snapshot-guide.md)を使用し、 `FLASHBACK CLUSTER`の開始時刻より前の`BackupTS`を指定することのみが可能です。さらに、 `FLASHBACK CLUSTER`の実行中、[ログバックアップ](/br/br-pitr-guide.md)の有効化は失敗します。したがって、 `FLASHBACK CLUSTER`が完了した後でログバックアップを有効にしてみてください。
 - `FLASHBACK CLUSTER`文によってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によって複製され**ません**。そのため、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ってから、上流と下流のスキーマ定義を手動で複製して、それらが整合していることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
 
@@ -72,7 +72,7 @@ FlashbackToTimestampStmt
 - `FLASHBACK CLUSTER`は、 `ALTER TABLE ATTRIBUTE` 、 `ALTER TABLE REPLICA` 、 `CREATE PLACEMENT POLICY`など、PD 関連の情報を変更する DDL 文のロールバックをサポートしていません。
 - `FLASHBACK`文で指定された時点では、完全に実行されていない DDL文は存在してはなりません。そのような DDL が存在する場合、TiDB はそれを拒否します。
 - `FLASHBACK CLUSTER`を実行する前に、TiDB は関連するすべての接続を切断し、 `FLASHBACK CLUSTER`文が完了するまで、これらのテーブルに対する読み取りおよび書き込み操作を禁止します。
-- `FLASHBACK CLUSTER`文は、実行後にキャンセルすることはできません。TiDB は成功するまで再試行を続けます。
+- `FLASHBACK CLUSTER`文は、実行後にキャンセルできません。TiDB は成功するまで再試行を続けます。
 - `FLASHBACK CLUSTER`文によってメタデータ (テーブル構造、データベース構造) のロールバックが発生した場合、関連する変更は TiCDC によって複製され**ません**。そのため、タスクを手動で一時停止し、 `FLASHBACK CLUSTER`の完了を待ってから、上流と下流のスキーマ定義を手動で複製して、それらが整合していることを確認する必要があります。その後、TiCDC 変更フィードを再作成する必要があります。
 
 </CustomContent>

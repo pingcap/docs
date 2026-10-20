@@ -61,7 +61,7 @@ Google Cloud Private Service Connect のアーキテクチャは以下のとお�
 ほとんどのシナリオでは、VPCピアリングよりもプライベートエンドポイント接続を使用することをお勧めします。ただし、以下のシナリオでは、プライベートエンドポイント接続の代わりにVPCピアリングを使用する必要があります。
 
 - 高可用性を実現するために、 [TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview)クラスタを使用して、ソースTiDBクラスタからターゲットTiDBクラスタへリージョンをまたいでデータをレプリケートしています。現在、プライベートエンドポイントはリージョン間接続をサポートしていません。
-- TiCDCクラスタを使用してデータをダウンストリームクラスタ（Amazon Aurora、MySQL、Kafkaなど）に複製していますが、ダウンストリームのエンドポイントサービスを独自に維持することはできません。
+- TiCDCクラスタを使用してデータをダウンストリームクラスタ（Amazon Aurora、MySQL、Kafkaなど）に複製していますが、ダウンストリームのエンドポイントサービスを独自に維持できません。
 
 ## Google Cloud Private Service Connect を使用してプライベートエンドポイントを設定する {#set-up-a-private-endpoint-with-google-cloud-private-service-connect}
 

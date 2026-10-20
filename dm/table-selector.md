@@ -22,7 +22,7 @@ summary: データ移行のテーブルルーティング、 binlogイベント�
 
 ## マッチングルール {#match-rules}
 
-- `schema-pattern`を空にすることはできません。
+- `schema-pattern`を空にできません。
 - `table-pattern`は空でも構いません。空に設定すると、 `schema-pattern`に従って`schema`のみが一致します。
 - `table-pattern`が空でない場合、 `schema`は`schema-pattern`に従ってマッチングされ、 `table`は`table-pattern`に従ってマッチングされます。 `schema`と`table`の両方が正常にマッチングされた場合にのみ、マッチング結果を取得できます。
 

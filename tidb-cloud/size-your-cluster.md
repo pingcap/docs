@@ -9,7 +9,7 @@ summary: TiDB Cloudクラスターのサイズを決定する方法を学びま�
 
 > **Note:**
 >
-> TiDB Cloud Starter またはTiDB Cloud Essential クラスターのサイズを変更することはできません。
+> TiDB Cloud Starter またはTiDB Cloud Essential クラスターのサイズを変更できません。
 
 ## サイズ TiDB {#size-tidb}
 

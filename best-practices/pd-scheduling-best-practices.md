@@ -264,7 +264,7 @@ PDの評価メカニズムでは、異なるストアのリーダー数とリー
 
 - 多数のテーブルが作成され、その後空になっています（切り捨てられたテーブルも含みます）。分割テーブル属性が有効になっている場合、これらの空のリージョンは結合できません。この属性を無効にするには、以下のパラメータを調整してください。
 
-    - TiKV: `split-region-on-table`から`false`に設定します。パラメータを動的に変更することはできません。
+    - TiKV: `split-region-on-table`から`false`に設定します。パラメータを動的に変更できません。
     - PD: PD Controlを使用して、クラスターの状況に応じて必要なパラメータを設定します。
 
         - クラスターにTiDBインスタンスがなく、 [`key-type`](/pd-control.md#config-show--set-option-value--placement-rules)の値が`raw`または`txn`に設定されているとします。この場合、PDは`enable-cross-table-merge setting`の値に関係なく、テーブル間でリージョンをマージできます。 `key-type`パラメータは動的に変更できます。

@@ -303,7 +303,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 - **TiDB Cloud Starter**
 
-    - 新しく作成された[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターでは、ゾーン高可用性のみが有効になっており、構成することはできません。
+    - 新しく作成された[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターでは、ゾーン高可用性のみが有効になっており、構成できません。
     - **2025年 9月 9日**より前にリージョン高可用性が有効にされた既存のTiDB Cloud Starter クラスターの場合、リージョン高可用性は引き続きサポートされ、影響を受けません。
 
 <CustomContent language="en,zh">
