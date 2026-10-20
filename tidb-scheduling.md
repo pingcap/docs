@@ -23,9 +23,9 @@ Now consider about the following situations:
     * Replicas of all Regions.
         * If the number of replicas is not enough for some Regions, PD needs to complete them.
         * If the number of replicas is more than expected (for example, the failed store re-joins into the cluster after recovery), PD needs to delete them.
-* Read/Write operations are performed on leaders, which cannot be distributed only on a few individual stores;
+* Read/Write operations are performed on leaders, so leaders cannot be concentrated on only a few individual stores;
 * Not all Regions are hot, so loads of all TiKV stores need to be balanced;
-* When Regions are in balancing, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
+* When Regions are being balanced, data transferring utilizes much network/disk traffic and CPU time, which can influence online services.
 
 These situations can occur at the same time, which makes it harder to resolve. Also, the whole system is changing dynamically, so a scheduler is needed to collect all information about the cluster, and then adjust the cluster. So, PD is introduced into the TiDB cluster.
 
