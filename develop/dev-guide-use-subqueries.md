@@ -86,7 +86,7 @@ WHERE (IFNULL(a1.death_year, YEAR(NOW())) - a1.birth_year) > 34;
 
 相関サブクエリの場合、内部サブクエリは外部クエリの列を参照するため、各サブクエリは外部クエリの各行に対して1回ずつ実行されます。つまり、外部クエリが1,000万件の結果を取得すると仮定すると、サブクエリも1,000万回実行され、より多くの時間とリソースを消費することになります。
 
-したがって、処理の過程で、TiDB は実行計画レベルでのクエリ効率を向上させるために、[相関サブクエリの非相関](/correlated-subquery-optimization.md)を試みます。
+したがって、処理の過程で、TiDB は実行計画レベルでのクエリ効率を向上させるために、[相関サブクエリの非相関化](/correlated-subquery-optimization.md)を試みます。
 
 次の文は、同じ性別の他の著者の平均年齢よりも年上の著者を問い合わせるためのものです。
 
@@ -127,7 +127,7 @@ WHERE
 ## 続きを読む {#read-more}
 
 - [サブクエリ関連の最適化](/subquery-optimization.md)
-- [相関サブクエリの非相関](/correlated-subquery-optimization.md)
+- [相関サブクエリの非相関化](/correlated-subquery-optimization.md)
 - [TiDBにおけるサブクエリの最適化](https://www.pingcap.com/blog/subquery-optimization-in-tidb/)
 
 ## ヘルプが必要ですか? {#need-help}

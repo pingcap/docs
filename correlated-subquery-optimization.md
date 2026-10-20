@@ -3,7 +3,7 @@ title: Decorrelation of Correlated Subquery
 summary: 相関サブクエリの相関を解除する方法を理解します。
 ---
 
-# 相関サブクエリの非相関 {#decorrelation-of-correlated-subquery}
+# 相関サブクエリの非相関化 {#decorrelation-of-correlated-subquery}
 
 [サブクエリ関連の最適化](/subquery-optimization.md) 、相関列がない場合のTiDBによるサブクエリの処理方法について説明します。相関サブクエリの非相関化は複雑なため、この記事ではいくつかの簡単なシナリオと、最適化ルールの適用範囲について説明します。
 
