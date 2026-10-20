@@ -827,7 +827,7 @@
       - [日付と時刻の機能](/functions-and-operators/date-and-time-functions.md)
       - [ビット関数とビット演算子](/functions-and-operators/bit-functions-and-operators.md)
       - [キャスト関数と演算子](/functions-and-operators/cast-functions-and-operators.md)
-      - [暗号化および圧縮機能](/functions-and-operators/encryption-and-compression-functions.md)
+      - [暗号化および圧縮関数](/functions-and-operators/encryption-and-compression-functions.md)
       - [ロック関数](/functions-and-operators/locking-functions.md)
       - [情報関数](/functions-and-operators/information-functions.md)
       - [ベクトル関数と演算子](https://docs.pingcap.com/ai/vector-search-functions-and-operators/)
