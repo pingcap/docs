@@ -146,9 +146,9 @@
   - [概要](/tidb-cloud/stream-data-overview.md)
   - [Changefeed](/tidb-cloud/changefeed-overview.md)
   - [Data Pipeline](/tidb-cloud/data-pipeline.md)
-  - [MySQL Sink へ](/tidb-cloud/changefeed-sink-to-mysql.md)
-  - [Kafka Sink へ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-  - [Cloud Storage へ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
+  - [Kafkaシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - [TiDB Cloud Lake へ](/tidb-cloud/data-pipeline-sink-to-lake.md)
   - リファレンス
     - [AWS でセルフホスト型 Kafka Private Link Service を設定する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
