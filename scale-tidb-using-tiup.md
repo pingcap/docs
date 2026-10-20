@@ -5,7 +5,7 @@ summary: TiUPを使用して TiDB クラスターをスケーリングする方�
 
 # TiUPを使用して TiDBクラスタをスケールする {#scale-a-tidb-cluster-using-tiup}
 
-TiDB クラスターの容量は、オンラインサービスを中断することなく増減できます。
+TiDB クラスターのキャパシティは、オンラインサービスを中断することなく増減できます。
 
 このドキュメントでは、 TiUPを使用して TiDB、TiKV、PD、TiCDC、またはTiFlashクラスターをスケーリングする方法について説明します。TiUPをインストールしていない場合は、 [ステップ2. 制御マシンにTiUPをデプロイ](/production-deployment-using-tiup.md#step-2-deploy-tiup-on-the-control-machine)の手順を参照してください。
 
