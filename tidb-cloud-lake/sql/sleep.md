@@ -21,7 +21,7 @@ SLEEP(seconds)
 
 | Arguments   | Description |
 | ----------- | ----------- |
-| seconds  | Must be a constant column of any nonnegative number or float.｜
+| seconds  | Must be a constant column of any nonnegative number or float.|
 
 ## Return Type
 

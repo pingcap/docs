@@ -203,7 +203,9 @@ AS
 
 In this example, a task named `process_orders` is created, and it is defined to run **after the successful completion** of **task1** and **task2**. This is useful for creating **dependencies** in a **Directed Acyclic Graph (DAG)** of tasks. The task uses the **etl** warehouse and transfers data from the staging area to the data warehouse.
 
-> Tip: Using the AFLTER parameter does not require setting the SCHEDULE parameter.
+> **Tip:**
+>
+> Using the `AFTER` parameter does not require setting the `SCHEDULE` parameter.
 
 ### Conditional Execution
 

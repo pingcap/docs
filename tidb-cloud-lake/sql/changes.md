@@ -61,7 +61,7 @@ This example demonstrates the use of the CHANGES clause, allowing for the tracki
     INSERT INTO user_profiles VALUES (2, 'jane_smith', 'Marketing Specialist');
     ```
 
-2. Create a stream to capture profile updates, then update an exiting profile and insert a new one.
+2. Create a stream to capture profile updates, then update an existing profile and insert a new one.
 
     ```sql
     CREATE STREAM profile_updates ON TABLE user_profiles APPEND_ONLY = TRUE;

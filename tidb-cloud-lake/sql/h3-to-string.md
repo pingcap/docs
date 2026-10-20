@@ -5,7 +5,7 @@ summary: Converts the representation of the given H3 index to the string represe
 
 # H3_TO_STRING
 
-Converts the representation of the given [H3](https://eng.uber.com/h3/) index to the string representation.
+Converts the representation of the given [H3](https://h3geo.org/) index to the string representation.
 
 ## Syntax
 
