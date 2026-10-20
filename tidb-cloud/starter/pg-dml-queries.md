@@ -1,11 +1,11 @@
 ---
 title: PostgreSQL DML とクエリ
-summary: PostgreSQL-compatible TiDB Cloud Starter でサポートされる PostgreSQL のデータ操作およびクエリ機能について説明します。
+summary: PostgreSQL 互換の TiDB Cloud Starter でサポートされる PostgreSQL のデータ操作およびクエリ機能について説明します。
 ---
 
 # PostgreSQL DML とクエリ
 
-PostgreSQL-compatible {{{ .starter }}} は、`INSERT`、`UPDATE`、`DELETE`、`RETURNING`、upsert、テーブル結合、集計、ウィンドウ関数、共通テーブル式（CTE）、サブクエリ、集合演算など、一般的な PostgreSQL の Data Manipulation Language（DML）文とクエリ機能をサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、`INSERT`、`UPDATE`、`DELETE`、`RETURNING`、upsert、テーブル結合、集計、ウィンドウ関数、共通テーブル式（CTE）、サブクエリ、集合演算など、一般的な PostgreSQL の Data Manipulation Language（DML）文とクエリ機能をサポートしています。
 
 ## サンプルテーブルを準備する {#prepare-sample-tables}
 
@@ -159,7 +159,7 @@ DO UPDATE SET name = excluded.name;
 
 ## データを更新する {#update-data}
 
-PostgreSQL-compatible {{{ .starter }}} では、`UPDATE` を実行するには対象テーブルに主キーが必要です。PostgreSQL とは異なり、主キーのないテーブルに対する更新は、`WHERE` 条件に一致する行が 0 件であっても、`ERROR: No PK` で失敗します。
+PostgreSQL 互換の {{{ .starter }}} では、`UPDATE` を実行するには対象テーブルに主キーが必要です。PostgreSQL とは異なり、主キーのないテーブルに対する更新は、`WHERE` 条件に一致する行が 0 件であっても、`ERROR: No PK` で失敗します。
 
 テーブルにすでにデータが存在し、かつ主キーがない場合、データが入ったままのテーブルに直接主キーを追加することはサポートされていません。更新を可能にするには、既存の行をバックアップするか別のテーブルにコピーし、元のテーブルから行を削除して主キーを追加した後、データを再挿入してください。行を復元する前に、主キーの値が一意であり、NULL でないことを確認してください。
 
@@ -234,16 +234,16 @@ LIMIT 10;
 
 次のテーブル結合および関連するクエリパターンをサポートしています。
 
-| テーブル結合またはクエリパターン | サポート有無 |
+| テーブル結合またはクエリパターン | サポート |
 | --- | --- |
-| `INNER JOIN` | Yes |
-| `LEFT [OUTER] JOIN` | Yes |
-| `RIGHT [OUTER] JOIN` | Yes |
-| `FULL [OUTER] JOIN` | Yes |
-| `CROSS JOIN` | Yes |
-| `LATERAL` サブクエリ | Yes |
-| `EXISTS` を使用したセミ結合 | Yes |
-| `NOT EXISTS` を使用したアンチ結合 | Yes |
+| `INNER JOIN` | はい |
+| `LEFT [OUTER] JOIN` | はい |
+| `RIGHT [OUTER] JOIN` | はい |
+| `FULL [OUTER] JOIN` | はい |
+| `CROSS JOIN` | はい |
+| `LATERAL` サブクエリ | はい |
+| `EXISTS` を使用したセミ結合 | はい |
+| `NOT EXISTS` を使用したアンチ結合 | はい |
 
 例:
 
@@ -493,7 +493,7 @@ FROM users
 ORDER BY name ASC NULLS LAST;
 ```
 
-## Limit と offset {#limit-and-offset}
+## LIMIT と OFFSET {#limit-and-offset}
 
 クエリ結果をページ分割するには、`LIMIT` と `OFFSET` を使用します。
 

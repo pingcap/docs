@@ -5,13 +5,13 @@ summary: PostgreSQL 互換の TiDB Cloud Starter でサポートされる組み�
 
 # PostgreSQL 組み込み関数
 
-PostgreSQL 互換の {{{ .starter }}} では、文字列、数値、日付と時刻、集約、ウィンドウ、JSON、配列、正規表現、シーケンス、およびシステム操作でよく使われる組み込み関数を提供しています。
+PostgreSQL 互換の {{{ .starter }}} では、文字列、数値、日付と時刻、集計、ウィンドウ、JSON、配列、正規表現、シーケンス、およびシステム操作でよく使われる組み込み関数を提供しています。
 
 ## 文字列関数 {#string-functions}
 
 以下の一般的な文字列関数がサポートされています。
 
-| Function | Description |
+| 関数 | 説明 |
 | --- | --- |
 | `UPPER(text)` | テキストを大文字に変換します。 |
 | `LOWER(text)` | テキストを小文字に変換します。 |
@@ -23,8 +23,8 @@ PostgreSQL 互換の {{{ .starter }}} では、文字列、数値、日付と時
 | `BTRIM(text [, chars])` | 両端から文字を削除します。 |
 | `LTRIM(text [, chars])` | 左側から文字を削除します。 |
 | `RTRIM(text [, chars])` | 右側から文字を削除します。 |
-| `LPAD(text, length [, fill])` | 左側を埋めてテキストを補完します。 |
-| `RPAD(text, length [, fill])` | 右側を埋めてテキストを補完します。 |
+| `LPAD(text, length [, fill])` | テキストの左側を埋めます。 |
+| `RPAD(text, length [, fill])` | テキストの右側を埋めます。 |
 | `REPEAT(text, n)` | 文字列を繰り返します。 |
 | `REVERSE(text)` | 文字列を逆順にします。 |
 | `INITCAP(text)` | 各単語の先頭文字を大文字に変換します。 |
@@ -89,7 +89,7 @@ SELECT
 
 以下の一般的な日付・時刻関数および式がサポートされています。
 
-| Function or expression | Description |
+| 関数または式 | 説明 |
 | --- | --- |
 | `CURRENT_DATE` | 現在の日付を返します。 |
 | `CURRENT_TIME` | 現在の時刻を返します。 |
@@ -100,9 +100,9 @@ SELECT
 | `DATE_TRUNC(field, value)` | 日付またはタイムスタンプを指定した単位で切り詰めます。 |
 | `DATE_PART(field, value)` | 日付または時刻の 1 つのフィールドを抽出します。 |
 | `EXTRACT(field FROM value)` | 日付または時刻のフィールドを抽出するための SQL 標準形式です。 |
-| `AGE(timestamp [, timestamp])` | タイムスタンプ間の記号的な間隔を返します。 |
+| `AGE(timestamp [, timestamp])` | タイムスタンプ間の記号的な時間間隔を返します。 |
 | `MAKE_DATE(year, month, day)` | 日付を構築します。 |
-| `MAKE_INTERVAL(...)` | interval を構築します。 |
+| `MAKE_INTERVAL(...)` | 時間間隔を構築します。 |
 
 例:
 
@@ -174,9 +174,9 @@ INSERT INTO profiles (id, settings) VALUES
 
 テーブルを使う例を実行する前に、このセットアップを一度実行してください。リテラル値を使用する例では、セットアップは不要です。
 
-## 集約関数 {#aggregate-functions}
+## 集計関数 {#aggregate-functions}
 
-以下の一般的な集約関数がサポートされています。
+以下の一般的な集計関数がサポートされています。
 
 | 関数 | 説明 |
 | --- | --- |
@@ -208,7 +208,7 @@ FROM employees
 GROUP BY department;
 ```
 
-集約 `FILTER` がサポートされています。
+集計 `FILTER` がサポートされています。
 
 ```sql
 SELECT
@@ -262,9 +262,9 @@ SELECT
 FROM events;
 ```
 
-### ウィンドウ関数としての集約関数 {#aggregate-functions-as-window-functions}
+### ウィンドウ関数としての集計関数 {#aggregate-functions-as-window-functions}
 
-以下の集約関数は `OVER` 句とともに使用できます。
+以下の集計関数は `OVER` 句とともに使用できます。
 
 - `SUM`
 - `AVG`
@@ -284,13 +284,13 @@ SELECT
 FROM employees;
 ```
 
-その他の集約関数はウィンドウ関数として使用できません。
+その他の集計関数はウィンドウ関数として使用できません。
 
 ## JSON および JSONB 関数 {#json-and-jsonb-functions}
 
 以下の一般的な JSON および JSONB 関数がサポートされています。
 
-| Function | Description |
+| 関数 | 説明 |
 | --- | --- |
 | `JSON_TYPEOF(json)` | 最上位の JSON 値の型を返します。 |
 | `JSONB_TYPEOF(jsonb)` | 最上位の JSONB 値の型を返します。 |
@@ -344,7 +344,7 @@ WHERE settings @> '{"active":true}';
 
 以下の一般的な配列関数がサポートされています。
 
-| Function | Description |
+| 関数 | 説明 |
 | --- | --- |
 | `ARRAY_LENGTH(array, dimension)` | 配列の次元の長さを返します。 |
 | `ARRAY_UPPER(array, dimension)` | 次元の上限を返します。 |
@@ -440,7 +440,7 @@ SELECT currval('order_seq');
 SELECT setval('order_seq', 2000);
 ```
 
-`NEXTVAL` などのシーケンス操作は、トランザクションではありません。
+`NEXTVAL` などのシーケンス操作は非トランザクション的です。
 
 ## 条件式 {#conditional-expressions}
 
@@ -517,4 +517,4 @@ FROM unnest(ARRAY['a', 'b', 'c']) AS t(value);
 - Parquet インポート
 - UUID 生成
 
-詳細は、[PostgreSQL Extensions](/tidb-cloud/starter/pg-extensions-overview.md) を参照してください。
+詳細は、[PostgreSQL 拡張機能](/tidb-cloud/starter/pg-extensions-overview.md) を参照してください。

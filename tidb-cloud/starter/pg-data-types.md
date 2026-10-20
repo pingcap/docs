@@ -22,7 +22,7 @@ PostgreSQL互換の {{{ .starter }}} は、数値、テキスト、バイナリ�
 | `VARCHAR(n)` | `CHARACTER VARYING(n)` | 最大 `n` 文字の可変長テキスト。 |
 | `BYTEA` | - | バイナリデータ。 |
 | `TIMESTAMP` | `TIMESTAMP WITHOUT TIME ZONE` | タイムゾーンなしの日付と時刻。 |
-| `TIMESTAMPTZ` | `TIMESTAMP WITH TIME ZONE` | タイムゾーンの意味論を持つ日付と時刻。 |
+| `TIMESTAMPTZ` | `TIMESTAMP WITH TIME ZONE` | タイムゾーンのセマンティクスを持つ日付と時刻。 |
 | `DATE` | - | 暦日。 |
 | `TIME` | `TIME WITHOUT TIME ZONE` | 時刻。 |
 | `INTERVAL` | - | 時間間隔。 |
@@ -41,8 +41,8 @@ PostgreSQL互換の {{{ .starter }}} は、数値、テキスト、バイナリ�
 以下の PostgreSQL データ型も受け付けられますが、互換性の違いがあります。
 
 - `SMALLINT` と `INT2`: 内部的には `INTEGER` として格納されます。PostgreSQL の `SMALLINT` の範囲は適用されません。
-- `REAL` と `FLOAT4`: PostgreSQL の単精度浮動小数点の意味論を持たず、内部的には `DOUBLE PRECISION` として格納されます。
-- `CHAR(n)` と `CHARACTER(n)`: PostgreSQL の固定長の空白埋めの意味論を持たず、内部的には `VARCHAR` として格納されます。
+- `REAL` と `FLOAT4`: PostgreSQL の単精度浮動小数点のセマンティクスを持たず、内部的には `DOUBLE PRECISION` として格納されます。
+- `CHAR(n)` と `CHARACTER(n)`: PostgreSQL の固定長の空白埋めのセマンティクスを持たず、内部的には `VARCHAR` として格納されます。
 
 ## 数値型 {#numeric-types}
 
@@ -149,11 +149,11 @@ SELECT
 
 たとえば、`TIMESTAMP(3)` でも小数部 6 桁を保持できます。
 
-## INTERVAL の演算 {#interval-operations}
+## 時間間隔の演算 {#interval-operations}
 
-`INTERVAL` は、月ベースの成分と月未満の成分を別々に保持するため、カレンダーを考慮した日付演算が可能です。
+時間間隔は、月ベースの成分と月未満の成分を別々に保持するため、カレンダーを考慮した日付演算が可能です。
 
-`INTERVAL` に対して加算、減算、乗算、除算を実行できます。
+時間間隔に対して加算、減算、乗算、除算を実行できます。
 
 ```sql
 SELECT
@@ -198,9 +198,9 @@ VALUES
     ('::1');
 ```
 
-等価比較と順序比較がサポートされています。一部の PostgreSQL ネットワーク演算子および関数はサポートされていません。[PostgreSQL Compatibility](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+等価比較と順序比較がサポートされています。一部の PostgreSQL ネットワーク演算子および関数はサポートされていません。[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
-## JSON and JSONB {#json-and-jsonb}
+## JSON と JSONB {#json-and-jsonb}
 
 元の JSON テキスト表現を保持することが重要な場合は、`JSON` を使用します。正規化された表現や JSON の包含などの操作には、`JSONB` を使用します。
 
@@ -220,7 +220,7 @@ FROM profiles
 WHERE settings @> '{"theme":"dark"}';
 ```
 
-## Arrays {#arrays}
+## 配列 {#arrays}
 
 配列を定義するには、`type[]` を使用します。
 
@@ -241,7 +241,7 @@ SELECT tags[1]
 FROM articles;
 ```
 
-## Vector and full-text search types {#vector-and-full-text-search-types}
+## ベクトル型と全文検索型 {#vector-and-full-text-search-types}
 
 ベクトル検索には `VECTOR(n)` を使用できます。
 
@@ -264,11 +264,11 @@ SELECT
 
 詳細は、[全文検索](/tidb-cloud/starter/pg-full-text-search.md) を参照してください。
 
-## Type coercion {#type-coercion}
+## 暗黙的な型変換 {#type-coercion}
 
-PostgreSQL 互換の {{{ .starter }}} は、一般的な SQL コンテキストで PostgreSQL スタイルの型強制をサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、一般的な SQL コンテキストで PostgreSQL スタイルの暗黙的な型変換をサポートしています。
 
-### `UNION`, `CASE`, `COALESCE`, and `VALUES` {#union-case-coalesce-and-values}
+### `UNION`、`CASE`、`COALESCE`、`VALUES` {#union-case-coalesce-and-values}
 
 テキストが別の型付きの値と組み合わされると、式はテキスト型に解決されることがあります。
 
@@ -280,9 +280,9 @@ UNION
 SELECT 'a';
 ```
 
-### Comparisons {#comparisons}
+### 比較 {#comparisons}
 
-テキストリテラルが型付きの値と比較される場合、可能であれば、そのテキストリテラルはもう一方のオペランドの型に強制変換されます。
+テキストリテラルが型付きの値と比較される場合、可能であれば、そのテキストリテラルはもう一方のオペランドの型に暗黙的に変換されます。
 
 例:
 
@@ -296,9 +296,9 @@ FROM example
 WHERE id = '42';
 ```
 
-この例では、`'42'` は `INTEGER` に強制変換されます。
+この例では、`'42'` は `INTEGER` に暗黙的に変換されます。
 
-### Numeric type promotion {#numeric-type-promotion}
+### 数値型の昇格 {#numeric-type-promotion}
 
 数値型が組み合わされると、結果は次の一般的な優先順位に従って昇格されます。
 
@@ -316,17 +316,17 @@ SELECT pg_typeof(1::double precision + 2::numeric);
 
 アプリケーションで `DOUBLE PRECISION` の結果が必要な場合は、`NUMERIC` オペランドを明示的に `DOUBLE PRECISION` にキャストしてください。
 
-### Temporal type promotion {#temporal-type-promotion}
+### 時間型の昇格 {#temporal-type-promotion}
 
 一般的な時間型の式は、次のように昇格されます。
 
 | 式の型 | 結果の型 |
 | --- | --- |
-| `DATE` and `TIMESTAMP` | `TIMESTAMP` |
-| `TIMESTAMP` and `TIMESTAMPTZ` | `TIMESTAMPTZ` |
-| `DATE` and `TIMESTAMPTZ` | `TIMESTAMPTZ` |
+| `DATE` と `TIMESTAMP` | `TIMESTAMP` |
+| `TIMESTAMP` と `TIMESTAMPTZ` | `TIMESTAMPTZ` |
+| `DATE` と `TIMESTAMPTZ` | `TIMESTAMPTZ` |
 
-## Type casts {#type-casts}
+## 型キャスト {#type-casts}
 
 PostgreSQL のキャスト構文は、次のいずれかを使用します。
 

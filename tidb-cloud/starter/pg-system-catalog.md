@@ -1,17 +1,17 @@
 ---
-title: PostgreSQL System Catalog
+title: PostgreSQL システムカタログ
 summary: PostgreSQL 互換の TiDB Cloud Starter でシステムカタログを使用してデータベースオブジェクトを調べる方法を学びます。
 ---
 
-# PostgreSQL System Catalog
+# PostgreSQL システムカタログ
 
 PostgreSQL 互換の {{{ .starter }}} では、データベース、スキーマ、テーブル、カラム、インデックス、制約、関数、ロール、その他のデータベースオブジェクトを調べるために、`pg_catalog` リレーションと `information_schema` ビューが提供されています。
 
-## `pg_catalog` relations {#pg-catalog-relations}
+## `pg_catalog` リレーション {#pg-catalog-relations}
 
 以下の、よく使用される `pg_catalog` リレーションを利用できます。
 
-| 関係 | 説明 |
+| リレーション | 説明 |
 | --- | --- |
 | `pg_tables` | ユーザーテーブル。 |
 | `pg_views` | ビュー。 |
@@ -46,13 +46,13 @@ PostgreSQL 互換の {{{ .starter }}} では、データベース、スキーマ
 | `pg_settings` | ランタイムパラメータ。 |
 | `pg_timezone_names` | タイムゾーン名と UTC オフセット。 |
 | `pg_rewrite` | ビューで使用される書き換えルール。 |
-| `pg_aggregate` | 集約関数メタデータ。 |
+| `pg_aggregate` | 集計関数メタデータ。 |
 
 一部のカタログリレーションは、対応する PostgreSQL 機能がサポートされていない場合でも、主に PostgreSQL 互換性のために存在します。カタログリレーションが存在することを、基盤となる PostgreSQL 機能が利用可能である証拠として扱わないでください。
 
 たとえば、レプリケーション関連のカタログオブジェクトが一部存在する場合でも、論理レプリケーションはサポートされていません。 
 
-## `information_schema` views {#information-schema-views}
+## `information_schema` ビュー {#information-schema-views}
 
 以下の `information_schema` ビューを利用できます。
 
@@ -77,7 +77,7 @@ PostgreSQL 互換の {{{ .starter }}} では、データベース、スキーマ
 
 カラムの NULL 許容性については、`information_schema.columns.is_nullable` または `pg_attribute.attnotnull` を使用してください。
 
-## List tables in a schema {#list-tables-in-a-schema}
+## スキーマ内のテーブルを一覧表示する {#list-tables-in-a-schema}
 
 `pg_tables` を使用します。
 
@@ -104,7 +104,7 @@ WHERE table_schema = 'public'
 ORDER BY table_name;
 ```
 
-## List columns of a table {#list-columns-of-a-table}
+## テーブルのカラムを一覧表示する {#list-columns-of-a-table}
 
 `information_schema.columns` を使用します。
 
@@ -142,7 +142,7 @@ WHERE n.nspname = 'public'
 ORDER BY a.attnum;
 ```
 
-## Find indexes on a table {#find-indexes-on-a-table}
+## テーブルのインデックスを見つける {#find-indexes-on-a-table}
 
 `pg_indexes` を使用します。
 
@@ -211,7 +211,7 @@ WHERE conrelid = 'public.my_table'::regclass
 ORDER BY contype, conname;
 ```
 
-`pg_constraint` では NOT NULL 制約も確認できます。PostgreSQL 互換の方法でカラムの NULL 許容性を確認するには、`information_schema.columns.is_nullable` を使用することを推奨します。
+`pg_constraint` では NOT NULL 制約も確認できます。PostgreSQL 間で移植性の高い方法でカラムの NULL 許容性を確認するには、`information_schema.columns.is_nullable` を使用することを推奨します。
 
 ## 外部キーを見つける {#find-foreign-keys}
 
@@ -341,13 +341,13 @@ ORDER BY extname;
 
 ## システムカタログの互換性 {#system-catalog-compatibility}
 
-PostgreSQL-compatible {{{ .starter }}} は、一般的な PostgreSQL ツールおよびイントロスペクションのワークフローに必要なカタログの表面を実装していますが、カタログの内容やカラムはアップストリームの PostgreSQL と異なる場合があります。
+PostgreSQL 互換の {{{ .starter }}} は、一般的な PostgreSQL ツールおよびイントロスペクションのワークフローに必要なカタログの表面を実装していますが、カタログの内容やカラムは PostgreSQL 本体と異なる場合があります。
 
 特に、次の点に注意してください。
 
-- アップストリームの `pg_catalog` または `information_schema` のすべてのリレーションが利用できるわけではありません。
+- 本来の `pg_catalog` または `information_schema` のすべてのリレーションが利用できるわけではありません。
 - 一部のカタログリレーションは、基盤となる PostgreSQL 機能がサポートされていない場合でも、互換性のために存在します。
-- 一部のカタログリレーションでは、アップストリーム PostgreSQL のカラムの一部のみが公開されています。
+- 一部のカタログリレーションでは、PostgreSQL 本体のカラムの一部のみが公開されています。
 - `information_schema.views` は利用できません。
 - カスタム照合順序は使用できますが、`pg_collation` には一覧表示されません。
 - トリガーのタイミングおよび行/文の向きは、`information_schema.triggers` から確認する必要があります。

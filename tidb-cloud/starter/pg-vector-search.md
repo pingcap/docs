@@ -1,25 +1,25 @@
 ---
 title: ベクトル検索
-summary: PostgreSQL-compatible TiDB Cloud Starter で、埋め込みの保存、類似検索の実行、HNSW インデックスの作成を行う方法を学びます。
+summary: PostgreSQL 互換の TiDB Cloud Starter で、埋め込みの保存、類似検索の実行、HNSW インデックスの作成を行う方法を学びます。
 ---
 
 # ベクトル検索
 
-PostgreSQL-compatible {{{ .starter }}} は、`VECTOR` 型、距離演算子、HNSW インデックス、サーバー側の埋め込み関数を含む、pgvector 互換のベクトル保存と類似検索を提供します。
+PostgreSQL 互換の {{{ .starter }}} は、`VECTOR` 型、距離演算子、HNSW インデックス、サーバー側の埋め込み関数を含む、pgvector 互換のベクトル保存と類似検索を提供します。
 
 > **Note:**
 >
-> PostgreSQL-compatible {{{ .starter }}} は現在パブリックプレビューです。
+> PostgreSQL 互換の {{{ .starter }}} は現在パブリックプレビューです。
 
 ## ベクトル検索を有効にする {#enable-vector-search}
 
-`VECTOR` 型とベクトル演算子は組み込みです。`vector` 拡張のメタデータを登録するには、次を実行します。
+`VECTOR` 型とベクトル演算子は組み込みです。`vector` 拡張機能のメタデータを登録するには、次を実行します。
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS vector;
 ```
 
-サーバー側の埋め込み関数を使用するには、`embedding` 拡張を有効にします。
+サーバー側の埋め込み関数を使用するには、`embedding` 拡張機能を有効にします。
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS embedding;
@@ -50,7 +50,7 @@ VALUES ('hello world', '[0.1, 0.2, 0.3]'::vector);
 
 ## 距離演算子 {#distance-operators}
 
-PostgreSQL-compatible {{{ .starter }}} は、以下の pgvector 互換距離演算子をサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、以下の pgvector 互換距離演算子をサポートしています。
 
 | 演算子 | 距離メトリック | 対応する関数 |
 | --- | --- | --- |
@@ -123,7 +123,7 @@ USING hnsw (embedding vector_cosine_ops)
 WITH (m = 16, ef_construction = 64);
 ```
 
-| パラメーター | Default | 説明 |
+| パラメーター | デフォルト | 説明 |
 | --- | --- | --- |
 | `m` | 16 | 各レイヤーあたりの最大接続数。値を大きくすると、追加のメモリを消費する代わりに再現率が向上する可能性があります。 |
 | `ef_construction` | 64 | インデックス構築中の検索幅。値を大きくすると、ビルドが遅くなる代わりにインデックス品質が向上する可能性があります。 |
@@ -140,7 +140,7 @@ SET hnsw.ef_search = 100;
 
 以下の条件をすべて満たす場合、オプティマイザは HNSW インデックスを使用できます。
 
-- クエリが、インデックス付きベクトルカラムと定数ベクトルに対する距離式で `ORDER BY` している、またはそのカラムに対して定数のクエリテキストを使って `vec_embed_cosine_distance()` を使用している。
+- クエリが、インデックス付きベクトルカラムと定数ベクトルに対する距離式で並べ替えている、またはそのカラムに対して定数のクエリテキストを使って `vec_embed_cosine_distance()` を使用している。
 - クエリに `LIMIT` 句が含まれている。
 - HNSW インデックスが、クエリ内の距離メトリックに一致する演算子クラスを使用している。
 - HNSW インデックスの構築が完了しており、クエリで利用可能である。
@@ -163,7 +163,7 @@ LIMIT 10;
 
 ## SQL で埋め込みを生成する {#generate-embeddings-in-sql}
 
-`embedding` 拡張は、サーバー側の埋め込み関数を提供します。
+`embedding` 拡張機能は、サーバー側の埋め込み関数を提供します。
 
 テキストから埋め込みを生成するには、次を実行します。
 
@@ -258,4 +258,4 @@ LIMIT 5;
 - 部分 HNSW インデックスはサポートされていません。
 - 距離演算では、次元数が一致するベクトルが必要です。
 - `embedding()` 関数と `embed_text()` 関数を使用するには、十分な権限を持つデータベースユーザーが必要です。
-- HNSW アクセラレーションにはクエリ形状に関する制限があります。[HNSW インデックスが使用される条件](#when-an-hnsw-index-is-used) で説明されている要件を満たさないクエリでは、代わりに正確なシーケンシャルスキャンが使用されます。
+- HNSW アクセラレーションにはクエリ形状に関する制限があります。[HNSW インデックスが使用される条件](#when-an-hnsw-index-is-used) で説明されている要件を満たさないクエリでは、代わりに正確な逐次スキャンが使用されます。

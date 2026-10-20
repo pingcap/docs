@@ -1,11 +1,11 @@
 ---
 title: PostgreSQL Row-Level Security
-summary: PostgreSQL-compatible TiDB Cloud Starter で PostgreSQL 互換の行レベルセキュリティポリシーを使用する方法を学びます。
+summary: PostgreSQL 互換の TiDB Cloud Starter で行レベルセキュリティポリシーを使用する方法を学びます。
 ---
 
 # PostgreSQL Row-Level Security
 
-PostgreSQL-compatible {{{ .starter }}} は、PostgreSQL 互換の Row-Level Security (RLS) をサポートしています。RLS は、ロールのテーブル権限に加えて、データベースロールがどの行を表示、挿入、更新、または削除できるかをさらに制限します。
+PostgreSQL 互換の {{{ .starter }}} は、PostgreSQL 互換の Row-Level Security (RLS) をサポートしています。RLS は、ロールのテーブル権限に加えて、データベースロールがどの行を表示、挿入、更新、または削除できるかをさらに制限します。
 
 RLS ポリシーは、該当する各クエリに対してデータベースによって評価されます。このため、RLS はマルチテナントアプリケーションや、行単位のアクセス制御を必要とするその他のワークロードに役立ちます。
 
@@ -86,7 +86,7 @@ CREATE POLICY policy_name ON table_name
 
 ## 例: ユーザーごとに行を制限する {#example-restrict-rows-by-user}
 
-次の例では、各ロールが `user_id` が `current_user` と一致する行にのみアクセスできるようにします。
+次の例では、各ロールが、`user_id` と `current_user` が一致する行にのみアクセスできるようにします。
 
 テーブルを作成します。
 
@@ -177,11 +177,11 @@ FOR SELECT
 USING (author = current_user);
 ```
 
-両方のポリシーはデフォルトで permissive であるため、SELECT 権限を持つロールは、適用可能ないずれかのポリシーで許可されていれば、その行を参照できます。
+両方のポリシーはデフォルトで許可的であるため、SELECT 権限を持つロールは、適用可能ないずれかのポリシーで許可されていれば、その行を参照できます。
 
-## permissive ポリシーと restrictive ポリシー {#permissive-and-restrictive-policies}
+## 許可的ポリシーと制限的ポリシー {#permissive-and-restrictive-policies}
 
-### permissive ポリシー {#permissive-policies}
+### 許可的ポリシー {#permissive-policies}
 
 同じコマンドに対する複数の `PERMISSIVE` ポリシーは、`OR` で結合されます。
 
@@ -191,11 +191,11 @@ USING (author = current_user);
 permissive_policy_1 OR permissive_policy_2 OR ...
 ```
 
-少なくとも 1 つの適用可能な permissive ポリシーが、その行を許可する必要があります。
+少なくとも 1 つの適用可能な許可的ポリシーが、その行を許可する必要があります。
 
 ### 制限的ポリシー {#restrictive-policies}
 
-一致するすべての制限的ポリシーが通過する必要がある場合は、`AS RESTRICTIVE` を使用します。
+一致するすべての制限的ポリシーを満たす必要がある場合は、`AS RESTRICTIVE` を使用します。
 
 ```sql
 CREATE POLICY must_be_published
