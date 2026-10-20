@@ -109,7 +109,7 @@ TiDB バージョン: 4.0.15
 
 - PD
 
-    - PDがダウンしたピアを時間内に修復しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
+    - PDがダウンしたピアを速やかに修復しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
     - TiKV をスケールアウトするときに PD がpanicする可能性があるバグを修正しました [#3868](https://github.com/tikv/pd/issues/3868)
 
 - TiFlash

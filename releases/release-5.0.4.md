@@ -147,7 +147,7 @@ TiDB バージョン: 5.0.4
 
 - PD
 
-    - PDがダウンしたピアを時間内に修復しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
+    - PDがダウンしたピアを速やかに修復しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
     - `replication.max-replicas`を更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[#3886](https://github.com/tikv/pd/issues/3886)
     - TiKV をスケールアウトするときに PD がpanicする可能性があるバグを修正しました [#3868](https://github.com/tikv/pd/issues/3868)
     - 複数のスケジューラが同時に実行されているときに発生するスケジュール競合の問題を修正[#3807](https://github.com/tikv/pd/issues/3807)

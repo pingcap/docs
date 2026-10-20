@@ -271,7 +271,7 @@ DDL操作がブロックされておらず、各TiDBサーバーがスキーマ�
 
 - TiDBが終了し、PDとの正常な通信が不可能になります（電源オフ時を含む）。または、TiDBがコマンド`kill -9`によって終了し、PDから登録データを適切なタイミングでクリアできなくなります。
 
-- クラスター内の特定の TiDB ノードと PD または TiKV の間で通信の問題が発生し、TiDB が最新のバージョン情報を時間内に取得できなくなります。
+- クラスター内の特定の TiDB ノードと PD または TiKV の間で通信の問題が発生し、TiDB が最新のバージョン情報を速やかに取得できなくなります。
 
 ### `Information schema is changed`エラーの原因は何ですか? {#what-triggers-the-information-schema-is-changed-error}
 

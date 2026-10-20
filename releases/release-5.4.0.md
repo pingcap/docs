@@ -418,7 +418,7 @@ TiDB バージョン: 5.4.0
 
         - `CREATE VIEW`文がデータ複製を中断する問題を修正 [#4173](https://github.com/pingcap/tiflow/issues/4173)
         - DDL文がスキップされた後にスキーマをリセットする必要がある問題を修正します [#4177](https://github.com/pingcap/tiflow/issues/4177)
-        - DDL文がスキップされた後、テーブルチェックポイントが時間内に更新されない問題を修正しました [#4184](https://github.com/pingcap/tiflow/issues/4184)
+        - DDL文がスキップされた後、テーブルチェックポイントが速やかに更新されない問題を修正しました [#4184](https://github.com/pingcap/tiflow/issues/4184)
         - TiDBのバージョンとパーサーのバージョン間の互換性の問題を修正しました [#4298](https://github.com/pingcap/tiflow/issues/4298)
         - 同期メトリクスがステータスを照会した時のみ更新される問題を修正 [#4281](https://github.com/pingcap/tiflow/issues/4281)
 

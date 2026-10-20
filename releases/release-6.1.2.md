@@ -41,7 +41,7 @@ TiDB バージョン: 6.1.2
     - 1つのPDノードがダウンした場合、他のPDノードを再試行しないため、 `information_schema.TIKV_REGION_STATUS`のクエリが失敗する問題を修正しました。 [#35708](https://github.com/pingcap/tidb/issues/35708) @[tangenta](https://github.com/tangenta)
     - `UNION`演算子が予期しない空の結果を返す可能性がある問題を修正しました [#36903](https://github.com/pingcap/tidb/issues/36903) @[tiancaiamao](https://github.com/tiancaiamao)
     - TiFlash のパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました [#37254](https://github.com/pingcap/tidb/issues/37254) @[wshwsh12](https://github.com/wshwsh12)
-    - リージョンがマージされたときにリージョンキャッシュが時間内にクリーンアップされない問題を修正しました [#37141](https://github.com/pingcap/tidb/issues/37141) @[sticnarf](https://github.com/sticnarf)
+    - リージョンがマージされたときにリージョンキャッシュが速やかにクリーンアップされない問題を修正しました [#37141](https://github.com/pingcap/tidb/issues/37141) @[sticnarf](https://github.com/sticnarf)
     - KVクライアントが不要なpingメッセージを送信する問題を修正しました [#36861](https://github.com/pingcap/tidb/issues/36861) @[jackysp](https://github.com/jackysp)
     - DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
     - `ORDER BY`句に相関サブクエリが含まれている場合に`ORDER BY`付きの`GROUP CONCAT`が失敗する可能性がある問題を修正しました。 [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)

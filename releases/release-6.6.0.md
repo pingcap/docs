@@ -470,7 +470,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
     - 生成された式にこのテーブルの名前が含まれている場合、名前が変更されたテーブルにデータを挿入できない問題を修正します [#39826](https://github.com/pingcap/tidb/issues/39826) @[Defined2014](https://github.com/Defined2014)
     - 列が書き込み専用の場合に`INSERT ignore`ステートメントがデフォルト値を入力できない問題を修正 [#40192](https://github.com/pingcap/tidb/issues/40192) @[YangKeao](https://github.com/YangKeao)
     - リソース管理モジュールを無効にしたときにリソースが解放されない問題を修正 [#40546](https://github.com/pingcap/tidb/issues/40546) @[zimulala](https://github.com/zimulala)
-    - TTLタスクが統計情報の更新を時間内にトリガーできない問題を修正 [#40109](https://github.com/pingcap/tidb/issues/40109) @[YangKeao](https://github.com/YangKeao)
+    - TTLタスクが統計情報の更新を速やかにトリガーできない問題を修正 [#40109](https://github.com/pingcap/tidb/issues/40109) @[YangKeao](https://github.com/YangKeao)
     - TiDBがキー範囲を構築する際に`NULL`値を適切に処理しないために予期しないデータが読み込まれる問題を修正しました [#40158](https://github.com/pingcap/tidb/issues/40158) @[tiancaiamao](https://github.com/tiancaiamao)
     - `MODIFY COLUMN`ステートメントが列のデフォルト値も変更する場合に、無効な値がテーブルに書き込まれる問題を修正します [#40164](https://github.com/pingcap/tidb/issues/40164) @[wjhuang2016](https://github.com/wjhuang2016)
     - テーブル内にリージョンが多数存在する場合に、リージョンキャッシュが無効になるためインデックス追加操作が非効率になる問題を修正しました [#38436](https://github.com/pingcap/tidb/issues/38436) @[tangenta](https://github.com/tangenta)

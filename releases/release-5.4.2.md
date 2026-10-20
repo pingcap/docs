@@ -22,7 +22,7 @@ TiDB バージョン: 5.4.2
 - TiKV
 
     - 可用性を向上させるために、更新ごとに TLS 証明書を自動的に再読み込みします[#12546](https://github.com/tikv/tikv/issues/12546)
-    - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを時間内に更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
+    - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを速やかに更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
     - レイテンシージッタを削減するためにリーダーシップをCDCオブザーバーに移譲する[#12111](https://github.com/tikv/tikv/issues/12111)
 
 - PD

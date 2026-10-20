@@ -113,7 +113,7 @@ TiDBバージョン: 6.5.12
     - PD がpanicを起こす可能性のある潜在的な問題を修正[#8915](https://github.com/tikv/pd/issues/8915) @[bufferflies](https://github.com/bufferflies)
     - 長時間実行クラスタでメモリリークが発生する可能性がある問題を修正 [#9047](https://github.com/tikv/pd/issues/9047) @[bufferflies](https://github.com/bufferflies)
     - PDノードがLeaderでない場合でもTSOを生成する可能性がある問題を修正しました [#9051](https://github.com/tikv/pd/issues/9051) @[rleungx](https://github.com/rleungx)
-    - PD Leaderの切り替え時にRegion syncer が時間内に終了しない問題を修正しました [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
+    - PD Leaderの切り替え時にRegion syncer が速やかに終了しない問題を修正しました [#9017](https://github.com/tikv/pd/issues/9017) @[rleungx](https://github.com/rleungx)
     - `evict-leader-scheduler`または`grant-leader-scheduler`の作成時にエラーが発生しても、エラーメッセージが pd-ctl に返されない問題を修正しました。 [#8759](https://github.com/tikv/pd/issues/8759) @[okJiang](https://github.com/okJiang)
     - ホットスポット キャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
     - 多数のリージョンが存在する場合にPDのリージョンAPIをリクエストできない問題を修正[#55872](https://github.com/pingcap/tidb/issues/55872) @[rleungx](https://github.com/rleungx)

@@ -171,7 +171,7 @@ TiDBバージョン: 7.1.4
         - `ignore-event`で`add table partition`イベントをフィルタリングするように設定した後、TiCDC が関連パーティションの他のタイプの DML 変更をダウンストリームに複製しない問題を修正しました。 [#10524](https://github.com/pingcap/tiflow/issues/10524) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - ストレージシンクの使用時に、ストレージサービスによって生成されたファイルシーケンス番号が正しく増加しない可能性がある問題を修正しました。 [#10352](https://github.com/pingcap/tiflow/issues/10352) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - 複数のチェンジフィードを同時に作成すると TiCDC が`ErrChangeFeedAlreadyExists`エラーを返す問題を修正しました [#10430](https://github.com/pingcap/tiflow/issues/10430) @[CharlesCheung96](https://github.com/CharlesCheung96)
-        - 変更フィードを再開するときに`snapshot lost caused by GC`が時間内に報告されず、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントよりも小さい問題を修正しました。 [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
+        - 変更フィードを再開するときに`snapshot lost caused by GC`が速やかに報告されず、変更フィードの`checkpoint-ts`が TiDB の GC セーフポイントよりも小さい問題を修正しました。 [#10463](https://github.com/pingcap/tiflow/issues/10463) @[sdojjy](https://github.com/sdojjy)
         - 単一行データのデータ整合性検証が有効になった後、タイムゾーンの不一致により TiCDC が`TIMESTAMP`型のチェックサムの検証に失敗する問題を修正[#10573](https://github.com/pingcap/tiflow/issues/10573) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Data Migration (DM)

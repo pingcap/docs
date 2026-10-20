@@ -336,7 +336,7 @@ TiDB バージョン: 6.1.0
 - TiKV
 
     - インメモリ悲観的ロック使用時の CDC の古い値のヒット率を改善 [#12279](https://github.com/tikv/tikv/issues/12279)
-    - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを時間内に更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
+    - ヘルスチェックを改善して、利用できないRaftstoreを検出し、TiKV クライアントがリージョンキャッシュを速やかに更新できるようにします[#12398](https://github.com/tikv/tikv/issues/12398)
     - Raft Engine のメモリ制限設定をサポート [#12255](https://github.com/tikv/tikv/issues/12255)
     - TiKVは、破損したSSTファイルを自動的に検出して削除し、製品の可用性を向上させます[#10578](https://github.com/tikv/tikv/issues/10578)
     - CDCはRawKV をサポートしています [#11965](https://github.com/tikv/tikv/issues/11965)

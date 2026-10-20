@@ -340,7 +340,7 @@ TiKVはRocksDBのカラムファミリー（CF）機能を実装しています�
 ### TiKVはなぜ頻繁にリージョンリーダーを切り替えるのか？ {#why-does-tikv-frequently-switch-region-leader}
 
 - ネットワークの問題により、ノード間の通信が停止します。障害レポートの監視状況を確認できます。
-- 元のメインLeaderのノードが停止したため、Followerへの接続が時間内に完了しませんでした。
+- 元のメインLeaderのノードが停止したため、Followerへの接続が速やかに完了しませんでした。
 - Raftstoreのスレッドが詰まってしまった。
 
 ### ノードがダウンした場合、サービスに影響はありますか？影響がある場合、どのくらいの期間影響しますか？ {#if-a-node-is-down-will-the-service-be-affected-if-yes-how-long}
