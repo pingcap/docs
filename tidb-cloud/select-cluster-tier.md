@@ -72,7 +72,7 @@ PostgreSQL 互換の {{{ .starter }}}インスタンスが無料クォータに�
 
 ### インスタンス容量計画 {#instance-capacity-plan}
 
-以下のインスタンス容量制限は、MySQL 互換の {{{ .starter }}}インスタンスに適用されます。
+以下のインスタンスキャパシティ制限は、MySQL 互換の {{{ .starter }}}インスタンスに適用されます。
 
 TiDB Cloudの各組織につき、デフォルトでは、すべてのTiDB Cloud StarterおよびEssentialインスタンスを合わせて最大 5つの[ブランチ](/tidb-cloud/branch-overview.md)を作成できます。
 

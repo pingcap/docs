@@ -61,7 +61,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
 6. （オプション）このインスタンスを管理対象プロジェクトにグループ化するには、 **Group Your Instance in a Project**をクリックし、インスタンスのターゲットプロジェクトを選択します。組織内にプロジェクトがない場合は、 **Create a Project**をクリックして作成できます。
 
-7. 選択したプランと互換モードに基づいて、容量と使用量クォータを設定または確認します。各Starter互換モードの無料使用量クォータについては、[プランを選択する](/tidb-cloud/select-cluster-tier.md#starter)をご覧ください。
+7. 選択したプランと互換モードに基づいて、キャパシティと使用量クォータを設定または確認します。各Starter互換モードの無料使用量クォータについては、[プランを選択する](/tidb-cloud/select-cluster-tier.md#starter)をご覧ください。
 
     - **MySQL 互換 Starter**:
 
