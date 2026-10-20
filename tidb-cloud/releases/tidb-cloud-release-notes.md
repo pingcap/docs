@@ -521,9 +521,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Starter**
 
-    - 多数の[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスとブランチを必要とする組織向けに[インスタンスキャパシティプラン](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を導入します。
+    - 多数の[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスとブランチを必要とする組織向けに[Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を導入します。
 
-        デフォルトでは、 TiDB Cloud を有料で利用している組織ごとに、合計で最大 100 個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。この制限を超える場合は[インスタンスキャパシティプラン](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
+        デフォルトでは、 TiDB Cloud を有料で利用している組織ごとに、合計で最大 100 個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。この制限を超える場合は[Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
 
 - **TiDB Cloud Essential**
 
@@ -554,10 +554,10 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Starter**
 
-    - 有料で利用している組織のうち、[インスタンスキャパシティプラン](https://www.pingcap.com/programs/agentic-ai-instance-capacity)に登録されていない組織の場合、 TiDB Cloud API では、 TiDB Cloud Starterインスタンスとブランチの合計数が 100 個という制限が適用され、各ブランチは個別のインスタンスとしてカウントされます。
+    - 有料で利用している組織のうち、[Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)に登録されていない組織の場合、 TiDB Cloud API では、 TiDB Cloud Starterインスタンスとブランチの合計数が 100 個という制限が適用され、各ブランチは個別のインスタンスとしてカウントされます。
 
         - 制限に達すると、新しいTiDB Cloud Starterインスタンスまたはブランチを作成するためのAPIリクエストは拒否されます。
-        - この制限を超える場合は[インスタンスキャパシティプラン](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
+        - この制限を超える場合は[Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
 
 ## 2026年5月26日 {#may-26-2026}
 
