@@ -78,7 +78,7 @@ In table split mode, pay attention to the following settings:
 
 ## Storage Sink file name changes and consumption instructions
 
-After switching to the new TiCDC architecture and enabling table-level task splitting, for [Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md), the file name format for recording data changes changes from `CDC_{num}.{extension}` to `CDC_{uuid}_{num}.{extension}`, and the Index file name format changes from `CDC.index` to `CDC_{uuid}.index`. Here, `uuid` identifies the sub replication task after table splitting, and `num` indicates the file sequence number.
+From v8.5.5, after switching to the new TiCDC architecture and enabling table-level task splitting, for [Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md), the file name format for recording data changes changes from `CDC{num}.{extension}` to `CDC_{uuid}_{num}.{extension}`, and the Index file name format changes from `CDC.index` to `CDC_{uuid}.index`. Here, `uuid` identifies the sub replication task after table splitting, and `num` indicates the file sequence number.
 
 - Data change record path
 
@@ -115,9 +115,9 @@ After table-level task splitting is enabled, under the `{schema}/{table}/{table-
 
 Because multiple sub replication tasks write files in parallel, a data file might be read by the downstream before it is fully written, causing part of the data to fail to be read successfully. To avoid this situation, when writing a downstream consumer program, read the data in the following order:
 
-1. Read the `meta/CDC_{uuid}.index` file (for example, `CDC_11.index`) to obtain the name of the file that has been completely written (for example, `CDC_11_000002.json`).
-2. Read the files whose sequence numbers are less than or equal to the sequence number in that file name in order (for example, `CDC_11_000001.json` and `CDC_11_000002.json`).
-3. After reading DML events from the files of all sub tasks, sort these files by the `commit-ts` of the DML events, and then process them downstream in a unified manner.
+1. Read the `meta/CDC_{uuid}.index` file corresponding to each sub replication task (for example, `CDC_11.index`) to obtain the name of the file that has been completely written (for example, `CDC_11_000002.json`).
+2. Read the files with the same `uuid` as the corresponding Index file and whose sequence numbers are less than or equal to the sequence number in that file name in order (for example, `CDC_11_000001.json` and `CDC_11_000002.json`).
+3. After reading DML events from the files of all sub tasks, sort the DML events by `commit-ts`, and then process them downstream in a unified manner.
 
 ## Compatibility
 
