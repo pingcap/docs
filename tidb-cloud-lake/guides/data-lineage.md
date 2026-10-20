@@ -105,6 +105,16 @@ REFRESH LINEAGE FOR ALL VIEWS;
 
 The refresh reconciles lineage for all views in the `default` catalog. It reports only views that need changes or could not be processed; unchanged views are omitted. The command requires the global `SUPER` privilege. See [`REFRESH LINEAGE`](/tidb-cloud-lake/sql/refresh-lineage.md) for output details.
 
+## Export to OpenMetadata
+
+To view {{{ .lake }}} lineage in [OpenMetadata](https://open-metadata.org), use [lake-openmetadata-ingestion](https://github.com/tidbcloud/lake-openmetadata-ingestion). The tool pushes metadata (databases, tables, views, and columns) and lineage (table-level and column-level) from {{{ .lake }}} to OpenMetadata through its REST API. For installation, configuration, and usage, see the project [README](https://github.com/tidbcloud/lake-openmetadata-ingestion).
+
+> **Note:**
+>
+> - The tool currently supports metadata and lineage ingestion only.
+> - Run `metadata` before `lineage`. A lineage edge is skipped if either of its endpoints does not yet exist in OpenMetadata.
+> - To keep OpenMetadata up to date, schedule both commands with cron or Airflow.
+
 ## Limitations
 
 - `GET_LINEAGE` traverses at most five hops.
