@@ -7,14 +7,14 @@
 
 - TiDB Cloud を選ぶ理由
   - [概要](/tidb-cloud/tidb-cloud-intro.md)
-  - [特徴](/tidb-cloud/features.md)
+  - [機能](/tidb-cloud/features.md)
   - [PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md)
 - はじめに
   - [TiDB Cloud Starter を試す](/tidb-cloud/starter/pg-quickstart.md)
 
 ## ガイド
 
-- [プランを選択してください](/tidb-cloud/select-cluster-tier.md)
+- [プランを選択する](/tidb-cloud/select-cluster-tier.md)
 - [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
 - {{{ .starter }}} インスタンスを管理する
   - [{{{ .starter }}} インスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
