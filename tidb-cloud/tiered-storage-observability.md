@@ -225,7 +225,7 @@ LIMIT 10;
 
 > **Note:**
 >
-> Because of the TiDB X architecture, the `ADMIN SHOW SLOW` statement and the `SLOW_QUERY` and `CLUSTER_SLOW_QUERY` tables in `INFORMATION_SCHEMA` are not supported on {{{ .premium }}} and {{{ .byoc }}}. Use the TiDB Cloud console to view slow queries. For the complete list of unsupported SQL features, see [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md).
+> Because of the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), the `ADMIN SHOW SLOW` statement and the `SLOW_QUERY` and `CLUSTER_SLOW_QUERY` tables in `INFORMATION_SCHEMA` are not supported on {{{ .premium }}} and {{{ .byoc }}}. Use the TiDB Cloud console to view slow queries. For the complete list of unsupported SQL features, see [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md).
 
 The following IA fields are recorded for each slow query and displayed in the slow query details in the TiDB Cloud console:
 
