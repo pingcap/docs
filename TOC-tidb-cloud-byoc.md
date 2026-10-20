@@ -59,7 +59,7 @@
     - [FastScan を使用する](/tiflash/use-fastscan.md)
     - [サポートされるプッシュダウン計算](/tiflash/tiflash-supported-pushdown-calculations.md)
     - [TiFlash クエリ結果のマテリアライズ](/tiflash/tiflash-results-materialization.md)
-    - [TiFlash Late Materialization](/tiflash/tiflash-late-materialization.md)
+    - [TiFlash 遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)
     - [互換性](/tiflash/tiflash-compatibility.md)
     - [パイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)
   - モニタリングとアラート
@@ -86,13 +86,13 @@
         - [集計](/explain-aggregation.md)
         - [ビュー](/explain-views.md)
         - [パーティション](/explain-partitions.md)
-        - [Index Merge](/explain-index-merge.md)
+        - [インデックスマージ](/explain-index-merge.md)
       - SQL 最適化プロセス
         - [概要](/sql-optimization-concepts.md)
         - 論理最適化
           - [概要](/sql-logical-optimization.md)
           - [サブクエリ関連の最適化](/subquery-optimization.md)
-          - [カラムの剪定](/column-pruning.md)
+          - [列プルーニング](/column-pruning.md)
           - [相関サブクエリの非相関化](/correlated-subquery-optimization.md)
           - [Max/Min の削除](/max-min-eliminate.md)
           - [述語のプッシュダウン](/predicate-push-down.md)
@@ -109,12 +109,12 @@
           - [Distinct 最適化](/agg-distinct-optimization.md)
           - [コストモデル](/cost-model.md)
           - [ランタイムフィルター](/runtime-filter.md)
-        - [Prepared 実行計画キャッシュ](/sql-prepared-plan-cache.md)
-        - [Non-Prepared 実行計画キャッシュ](/sql-non-prepared-plan-cache.md)
+        - [プリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)
+        - [非プリペアド実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
       - 実行計画を制御する
         - [概要](/control-execution-plan.md)
         - [オプティマイザヒント](/optimizer-hints.md)
-        - [SQL Plan Management](/sql-plan-management.md)
+        - [SQL プラン管理](/sql-plan-management.md)
         - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
         - [オプティマイザ修正制御](/optimizer-fix-controls.md)
     - [TiKV Follower Read](/follower-read.md)
@@ -130,11 +130,11 @@
     - [大規模データセットの MySQL シャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
     - [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - データを TiDB Cloud にインポート
-    - [Cloud Storage からサンプルデータ（SQL ファイル）をインポートする](/tidb-cloud/import-sample-data-serverless.md)
-    - [Cloud Storage から CSV ファイルをインポートする](/tidb-cloud/premium/import-csv-files-premium.md)
+    - [クラウドストレージからサンプルデータ（SQL ファイル）をインポートする](/tidb-cloud/import-sample-data-serverless.md)
+    - [クラウドストレージから CSV ファイルをインポートする](/tidb-cloud/premium/import-csv-files-premium.md)
     - [Amazon S3 から CSV ファイルをインポートする](/tidb-cloud/premium/import-from-s3-premium.md)
-    - [Cloud Storage から Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
-    - [Cloud Storage からスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files-serverless.md)
+    - [クラウドストレージから Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)
+    - [クラウドストレージからスナップショットファイルをインポートする](/tidb-cloud/import-snapshot-files-serverless.md)
     - [MySQL CLI を使用してデータをインポートする](/tidb-cloud/premium/import-with-mysql-cli-premium.md)
   - リファレンス
     - [TiDB Cloud の外部ストレージアクセスを設定する](/tidb-cloud/configure-external-storage-access.md)
@@ -146,9 +146,9 @@
   - [概要](/tidb-cloud/stream-data-overview.md)
   - [Changefeed](/tidb-cloud/changefeed-overview.md)
   - [Data Pipeline](/tidb-cloud/data-pipeline.md)
-  - [MySQL Sink へ](/tidb-cloud/changefeed-sink-to-mysql.md)
-  - [Kafka Sink へ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
-  - [Cloud Storage へ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
+  - [MySQLシンクへ](/tidb-cloud/changefeed-sink-to-mysql.md)
+  - [Kafkaシンクへ](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
+  - [クラウドストレージへ](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
   - [TiDB Cloud Lake へ](/tidb-cloud/data-pipeline-sink-to-lake.md)
   - リファレンス
     - [AWS でセルフホスト型 Kafka Private Link Service を設定する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md)
@@ -163,7 +163,7 @@
     - [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [標準 SSO 認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
     - [組織 SSO 認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
-    - [Identity Access Management](/tidb-cloud/manage-user-access.md)
+    - [ID アクセス管理](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - ネットワークアクセス制御
     - [IP アクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)
@@ -177,13 +177,13 @@
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
 - 請求
   - [請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)
-  - [請求の詳細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
-  - [Cost Explorer](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
+  - [請求明細](/tidb-cloud/tidb-cloud-billing.md#billing-details)
+  - [コストエクスプローラー](/tidb-cloud/tidb-cloud-billing.md#cost-explorer)
   - [請求プロファイル](/tidb-cloud/tidb-cloud-billing.md#billing-profile)
   - [クレジット](/tidb-cloud/tidb-cloud-billing.md#credits)
   - [支払い方法の設定](/tidb-cloud/tidb-cloud-billing.md#payment-method)
   - [クラウドプロバイダーマーケットプレイスからの請求](/tidb-cloud/tidb-cloud-billing.md#billing-from-cloud-provider-marketplace)
-  - [Changefeed の請求](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
+  - [Changefeed の課金](/tidb-cloud/premium/tidb-cloud-billing-ticdc-ccu.md)
   - [予算を管理する](/tidb-cloud/tidb-cloud-budget.md)
 - 統合
   - [Airbyte](/tidb-cloud/integrate-tidbcloud-with-airbyte.md)
@@ -196,7 +196,7 @@
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
-## REFERENCE
+## リファレンス
 
 - SQL リファレンス
   - [TiDB で SQL を学ぶ](/basic-sql-operations.md)
@@ -281,7 +281,7 @@
     - [`KILL [TIDB]`](/sql-statements/sql-statement-kill.md)
     - [`LOAD DATA`](/sql-statements/sql-statement-load-data.md)
     - [`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)
-    - [`LOCK TABLES` and `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
+    - [`LOCK TABLES` と `UNLOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md)
     - [`PREPARE`](/sql-statements/sql-statement-prepare.md)
     - [`RECOVER TABLE`](/sql-statements/sql-statement-recover-table.md)
     - [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)
@@ -369,7 +369,7 @@
       - [JSON を返す関数](/functions-and-operators/json-functions/json-functions-return.md)
       - [JSON ユーティリティ関数](/functions-and-operators/json-functions/json-functions-utility.md)
       - [JSON を集約する関数](/functions-and-operators/json-functions/json-functions-aggregate.md)
-    - [集約（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)
+    - [集計（GROUP BY）関数](/functions-and-operators/aggregate-group-by-functions.md)
     - [GROUP BY 修飾子](/functions-and-operators/group-by-modifier.md)
     - [ウィンドウ関数](/functions-and-operators/window-functions.md)
     - [その他の関数](/functions-and-operators/miscellaneous-functions.md)
@@ -475,7 +475,7 @@
   - TiDB Cloud Partner Web Console
     - [TiDB Cloud パートナー](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP Customer](/tidb-cloud/managed-service-provider-customer.md)
-    - [Reseller's Customer](/tidb-cloud/cppo-customer.md)
+    - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
   - [TiDB X インスタンスで制限される SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDB の制限事項](/tidb-limitations.md)
   - [システム変数](/system-variables.md)
@@ -490,13 +490,13 @@
   - Connected Care サポートサービスの機能
     - [Connected: IM の AI Chat](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: TiDB Cloud アラートの IM サブスクリプション
-      - [Slack 経由でサブスクライブする](/tidb-cloud/monitor-alert-slack.md)
-      - [Zoom 経由でサブスクライブする](/tidb-cloud/monitor-alert-zoom.md)
-      - [Flashduty 経由でサブスクライブする](/tidb-cloud/monitor-alert-flashduty.md)
-      - [PagerDuty 経由でサブスクライブする](/tidb-cloud/monitor-alert-pagerduty.md)
+      - [Slack 経由で購読する](/tidb-cloud/monitor-alert-slack.md)
+      - [Zoom 経由で購読する](/tidb-cloud/monitor-alert-zoom.md)
+      - [Flashduty 経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
+      - [PagerDuty 経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
     - Connected: IM チケット作成と更新サブスクリプション
-      - [Slack 経由でチケットを作成し、チケット更新をサブスクライブする](/tidb-cloud/connected-slack-ticket-creation.md)
-      - [Lark 経由でチケットを作成し、チケット更新をサブスクライブする](/tidb-cloud/connected-lark-ticket-creation.md)
+      - [Slack 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
+      - [Lark 経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
     - Connected: サポートチケット向け IM インタラクション
       - [Slack 経由でサポートチケットを操作する](/tidb-cloud/connected-slack-ticket-interaction.md)
       - [Lark 経由でサポートチケットを操作する](/tidb-cloud/connected-lark-ticket-interaction.md)
@@ -507,7 +507,7 @@
 
 ## _BUILD_ALLOWLIST
 
-- Tiered Storage を使用する
+- 階層型ストレージを使用する
   - [概要](/tidb-cloud/tiered-storage-overview.md)
   - [設定と管理](/tidb-cloud/tiered-storage-guide.md)
   - [可観測性](/tidb-cloud/tiered-storage-observability.md)
