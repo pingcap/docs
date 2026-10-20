@@ -3,7 +3,7 @@ title: Features
 summary: TiDB Cloudの各プランにおける機能サポート状況についてご確認ください。
 ---
 
-# 特徴 {#features}
+# 機能 {#features}
 
 このドキュメントでは、TiDB Cloud Starter、 Essential、Premium、 BYOC、 Dedicatedなど、さまざまなTiDB Cloudプランの機能サポート状況を一覧表示します。
 

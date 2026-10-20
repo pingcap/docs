@@ -4,7 +4,7 @@ summary: TiDB Cloudでプランを選択する方法を学びましょう。
 aliases: ['/ja/tidbcloud/developer-tier-cluster']
 ---
 
-# プランを選択してください {#select-your-plan}
+# プランを選択する {#select-your-plan}
 
 プランによって、TiDBリソースのスループットとパフォーマンスが決まります。
 
