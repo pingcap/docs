@@ -26,7 +26,7 @@ Consider the scenario where three roles are created: *manager*, *engineer*, and 
 | account-admin | Possesses all privileges, serves as the parent role for all other roles, and enables seamless switching to any role within the tenant. |
 | public        | Inherits no permissions, considers all roles as its parent roles, and allows any role to switch to the public role.                    |
 
-To assign the `account-admin` role to a user in {{{ .lake }}}, select the role when inviting the user. You can also assign the role to a user after they join. If you're using {{{ .lake }}} Community Edition or Enterprise Edition, configure an `account-admin` user during deployment first, and then assign the role to other users if needed.
+To assign the `account-admin` role to a user in {{{ .lake }}}, select the role when inviting the user. You can also assign the role to a user after they join.
 
 ## Setting Default Role
 
