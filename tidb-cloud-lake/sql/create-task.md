@@ -201,7 +201,7 @@ AS
  INSERT INTO data_warehouse.orders SELECT * FROM staging.orders;
 ```
 
-In this example, a task named `process_orders` is created, and it is defined to run **after the successful completion** of **task1** and **task2**. This is useful for creating **dependencies** in a **Directed Acyclic Graph (DAG)** of tasks. The task uses the **etl** warehouse and transfers data from the staging area to the data warehouse.
+In this example, a task named `process_orders` is created, and it is defined to run **after the successful completion** of **task1**. This is useful for creating **dependencies** in a **Directed Acyclic Graph (DAG)** of tasks. The task uses the **etl** warehouse and transfers data from the staging area to the data warehouse.
 
 > **Tip:**
 >

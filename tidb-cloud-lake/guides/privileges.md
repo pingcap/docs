@@ -144,7 +144,7 @@ SHOW GRANTS FOR ROLE writer;
 | SELECT    | Selects rows from a table. SHOW CREATE a table. DESCRIBE a table.                                                |
 | UPDATE    | Updates rows in a table.                                                                                         |
 | SUPER     | Optimizes or analyzes a table.                                                                                   |
-| OWNERSHIP | Grants full control over a database.  Only a single role can hold this privilege on a specific object at a time. |
+| OWNERSHIP | Grants full control over a table. Only a single role can hold this privilege on a specific object at a time. |
 
 ### View Privileges
 
@@ -163,7 +163,7 @@ Please note that you can use the [USE DATABASE](/tidb-cloud-lake/sql/use-databas
 | ALTER     | Renames a database.                                                                                              |
 | DROP      | Drops or undrops a database. Restores the recent version of a dropped database.                                  |
 | SELECT    | SHOW CREATE a database.                                                                                          |
-| OWNERSHIP | Grants full control over a database.  Only a single role can hold this privilege on a specific object at a time. |
+| OWNERSHIP | Grants full control over a database. Only a single role can hold this privilege on a specific object at a time. |
 | USAGE     | Allows entering a database using `USE <database>`, without granting access to any contained objects.             |
 
 > Note:
@@ -184,7 +184,7 @@ Please note that you can use the [USE DATABASE](/tidb-cloud-lake/sql/use-databas
 | WRITE     | Write into a stage. For example, copy into a stage, presign upload or removes a stage                         |
 | READ      | Read a stage. For example, list stage, query stage, copy into table from stage, presign download              |
 | ALL       | Grants READ, WRITE privileges for the specified object type.                                                  |
-| OWNERSHIP | Grants full control over a stage.  Only a single role can hold this privilege on a specific object at a time. |
+| OWNERSHIP | Grants full control over a stage. Only a single role can hold this privilege on a specific object at a time. |
 
 > Note:
 >
@@ -196,7 +196,7 @@ Please note that you can use the [USE DATABASE](/tidb-cloud-lake/sql/use-databas
 |:----------|:------------------------------------------------------------------------------------------------------------|
 | USAGE     | Can use UDF. For example, copy into a stage, presign upload                                                 |
 | ALL       | Grants READ, WRITE privileges for the specified object type.                                                |
-| OWNERSHIP | Grants full control over a UDF.  Only a single role can hold this privilege on a specific object at a time. |
+| OWNERSHIP | Grants full control over a UDF. Only a single role can hold this privilege on a specific object at a time. |
 
 > Note:
 >
@@ -220,7 +220,7 @@ Share privileges can be granted and revoked for share objects using the same SQL
 |:------------------|:-------------------------------------------------------------------------------------------------------------------|
 | Access Connection | Can access Connection.                                                                                             |
 | ALL               | Grants Access Connection privileges for the specified object type.                                                 |
-| OWNERSHIP         | Grants full control over a Connection.  Only a single role can hold this privilege on a specific object at a time. |
+| OWNERSHIP         | Grants full control over a Connection. Only a single role can hold this privilege on a specific object at a time. |
 
 ### Sequence Privileges
 
@@ -228,7 +228,7 @@ Share privileges can be granted and revoked for share objects using the same SQL
 |:----------------|:-----------------------------------------------------------------------------------------------------------------|
 | Access Sequence | Can access Sequence.(e.g. Drop,Desc)                                                                             |
 | ALL             | Grants Access Sequence privileges for the specified object type.                                                 |
-| OWNERSHIP       | Grants full control over a Sequence.  Only a single role can hold this privilege on a specific object at a time. |
+| OWNERSHIP       | Grants full control over a Sequence. Only a single role can hold this privilege on a specific object at a time. |
 
 ### Procedure Privileges
 
@@ -236,7 +236,7 @@ Share privileges can be granted and revoked for share objects using the same SQL
 |:-----------------|:------------------------------------------------------------------------------------------------------------------|
 | Access Procedure | Can access Procedure.(e.g. Drop,Call,Desc)                                                                        |
 | ALL              | Grants Access Procedure privileges for the specified object type.                                                 |
-| OWNERSHIP        | Grants full control over a Procedure.  Only a single role can hold this privilege on a specific object at a time. |
+| OWNERSHIP        | Grants full control over a Procedure. Only a single role can hold this privilege on a specific object at a time. |
 
 ### Masking Policy Privileges
 
