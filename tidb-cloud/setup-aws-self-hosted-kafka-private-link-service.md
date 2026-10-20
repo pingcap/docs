@@ -19,7 +19,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 ![Connect to AWS Self-Hosted Kafka Private Link Service](/media/tidb-cloud/changefeed/connect-to-aws-self-hosted-kafka-privatelink-service.jpeg)
 
-このドキュメントでは、AWS の 3つのアベイラビリティゾーン (AZ) にデプロイされた Kafka Private Link サービスへの接続例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Link サービスの基本的な設定手順について説明します。本番環境では、運用の保守性と可観測性を強化した、より耐障害性の高い Kafka Private Link サービスの使用をお勧めします。
+このドキュメントでは、AWS の 3つのアベイラビリティゾーン (AZ) にデプロイされた Kafka Private Link サービスへの接続例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Link サービスの基本的な設定手順について説明します。本番環境では、運用の保守性とオブザーバビリティを強化した、より耐障害性の高い Kafka Private Link サービスの使用をお勧めします。
 
 ## 前提条件 {#prerequisites}
 

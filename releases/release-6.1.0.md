@@ -45,7 +45,7 @@ TiDB バージョン: 6.1.0
 
     [ユーザードキュメント](/tiflash/tiflash-supported-pushdown-calculations.md) [#33072](https://github.com/pingcap/tidb/issues/33072)
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - 継続的なプロファイリングは、ARMアーキテクチャとTiFlash をサポートします。
 

@@ -120,7 +120,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     詳細については[ドキュメント](/password-management.md#failed-login-tracking-and-temporary-account-locking-policy)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - TiDB DashboardはKubernetes上に独立したPod としてデプロイできます [#1447](https://github.com/pingcap/tidb-dashboard/issues/1447) @[SabaPing](https://github.com/SabaPing)
 

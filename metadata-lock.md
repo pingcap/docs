@@ -67,7 +67,7 @@ TiDB v6.5.0以降、メタデータロックはデフォルトで有効になり
     |                                                                            | `ALTER TABLE t MODIFY COLUMN a CHAR(10);` |
     | `SELECT * FROM t;` ( `ERROR 8028 (HY000): public column a has changed`を返す) |                                           |
 
-## 可観測性 {#observability}
+## オブザーバビリティ {#observability}
 
 TiDB v6.3.0 では、現在ブロックされている DDL の情報を取得するのに役立つ`mysql.tidb_mdl_view`ビューが導入されています。
 

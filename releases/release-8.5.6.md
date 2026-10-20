@@ -33,7 +33,7 @@ TiDBバージョン：8.5.6
 
     詳細については、 [ドキュメント](https://docs.pingcap.com/tidb/v8.5/tidb-resource-control-background-tasks)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - スロークエリログに対する多次元で詳細なトリガールールの定義をサポートする[#62959](https://github.com/pingcap/tidb/issues/62959) 、 [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
 

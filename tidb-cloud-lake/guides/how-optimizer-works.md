@@ -245,7 +245,7 @@ customers ──⋈── recent_orders   recent_orders ──⋈── customer
 
 `CascadesOptimizer` は、{{{ .lake }}} のコストモデルを使用して、ハッシュ結合、マージ結合、またはネステッドループ結合の実装から選択します。このパイプラインでは、プランをローカルのまま維持するかどうかも決定します。warehouse クラスターが利用可能で、結合の規模が大きい場合は、exchange の方式がブロードキャストからハッシュシャッフルに書き換えられ、処理が均等に分散されます。最後のクリーンアップでは、冗長な射影と未使用の CTE が削除されます。
 
-## 可観測性 {#observability}
+## オブザーバビリティ {#observability}
 
 - `EXPLAIN` は最終的に最適化されたプランを表示します。
 - `EXPLAIN PIPELINE` は実行トポロジーを明らかにします。

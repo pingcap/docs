@@ -44,7 +44,7 @@ summary: TiDB Cloud Premium または BYOC における階層型ストレージ�
 
 **業務でコールドデータへの継続的かつ高負荷なアクセスがある場合、IA は推奨されません。テーブルを Standard ストレージに戻してください。** システムの安定性を確保するため、将来の技術リリースではコールドデータアクセスに対するハードスロットリングが追加される予定です。現時点では、上記の制約を順守する必要があります。
 
-単一 SQL によるコールドデータアクセス量は、Cloud Console → Monitoring → Diagnosis → Slow Query → Coprocessor の `IA Remote Read Segment Size` パネルで監視できます。クラスター全体の IA キャッシュ動作を監視するには、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) で説明されている **IA Cache Performance** パネルを使用してください。
+単一 SQL によるコールドデータアクセス量は、Cloud Console → Monitoring → Diagnosis → Slow Query → Coprocessor の `IA Remote Read Segment Size` パネルで監視できます。クラスター全体の IA キャッシュ動作を監視するには、[階層型ストレージのオブザーバビリティ](/tidb-cloud/tiered-storage-observability.md) で説明されている **IA Cache Performance** パネルを使用してください。
 
 ## 周辺ツールへの影響 {#impact-on-peripheral-tools}
 
@@ -85,7 +85,7 @@ IA テーブルで問題が発生した場合、ユーザーと TiDB Cloud チ�
 |-|-|-|-|
 | IA → Standard への切り戻し | 性能が許容できないと判断した場合 | **ユーザーの第一の選択肢** | システムがデータをローカルにリロードし、リモートパスをバイパスします |
 | **Flow Control (already available)** | IA テーブルとオブジェクトストレージ間のトラフィックを制御する | TiDB Cloud チームの選択肢 | レート制限によってクラスターの安定性を保護します。TiDB Cloud チームが管理します |
-| TiDB Cloud サポートに連絡する | ストレージクラス変換が停止している場合: `DURATION` が増え続ける一方で `COMPLETED_REPLICAS` が増加しない、または `NULL` のままである | 必須 | 停止した変換はユーザー自身では解決できません。検出方法については、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください |
+| TiDB Cloud サポートに連絡する | ストレージクラス変換が停止している場合: `DURATION` が増え続ける一方で `COMPLETED_REPLICAS` が増加しない、または `NULL` のままである | 必須 | 停止した変換はユーザー自身では解決できません。検出方法については、[階層型ストレージのオブザーバビリティ](/tidb-cloud/tiered-storage-observability.md) を参照してください |
 
 ## IA ローカルキャッシュとクエリ性能の不確実性 {#ia-local-cache-and-query-performance-uncertainty}
 

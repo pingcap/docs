@@ -66,7 +66,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     トランザクション実行時にデータインデックスの整合性チェックを追加します。これにより、リソースオーバーヘッドを非常に低く抑えながら、システムの安定性と堅牢性が向上します。チェックの動作は、変数`tidb_enable_mutation_checker`と`tidb_txn_assertion_level`を使用して制御できます。デフォルト設定では、ほとんどのシナリオでQPSの低下は2%以内に抑えられます。整合性チェックのエラーの説明については、 [ユーザードキュメント](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - Top SQL: 非専門家向けのパフォーマンス診断
 

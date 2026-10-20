@@ -80,4 +80,4 @@ Statement Insight は履歴分析ツールです。より多くの SQL文（収�
 
 ### Statement Insight に表示される RU は、請求対象の RU と同じですか？ {#is-the-ru-shown-in-statement-insight-the-same-as-the-billed-ru}
 
-いいえ。Statement Insight は、請求ではなく、可観測性と最適化を目的としています。請求およびコスト管理については、TiDB Cloud の請求コンソールを参照してください。
+いいえ。Statement Insight は、請求ではなく、オブザーバビリティと最適化を目的としています。請求およびコスト管理については、TiDB Cloud の請求コンソールを参照してください。

@@ -184,7 +184,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     詳細については[ドキュメント](/smooth-upgrade-tidb.md)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - オプティマイザ診断情報を強化 [#43122](https://github.com/pingcap/tidb/issues/43122) @[time-and-fate](https://github.com/time-and-fate)
 

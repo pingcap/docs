@@ -153,7 +153,7 @@ SET @@global.tidb_ttl_job_schedule_window_end_time = '05:00 +0000';
 
 上記のステートメントでは、TTLジョブをUTCの1:00から5:00の間にのみスケジュールできます。デフォルトでは、時間枠は`00:00 +0000`から`23:59 +0000`に設定されており、ジョブはいつでもスケジュールできます。
 
-## 可観測性 {#observability}
+## オブザーバビリティ {#observability}
 
 <CustomContent platform="tidb-cloud">
 

@@ -121,7 +121,7 @@ TiDBバージョン：8.5.5
 
     詳細については、 [ドキュメント](/br/br-pitr-manual.md#restore-data-using-filters)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - ステートメントサマリーテーブルとスロークエリログにストレージエンジン識別子を追加する [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw)
 

@@ -140,7 +140,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     QUERY WATCH REMOVE 1;
     ```
 
-## 可観測性 {#observability}
+## オブザーバビリティ {#observability}
 
 ランナウェイクエリに関する詳細情報は、次のシステムテーブルおよび`INFORMATION_SCHEMA`から取得できます。
 

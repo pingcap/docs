@@ -42,7 +42,7 @@ summary: TiDB-X-CLOUD.202603.1 カーネルの機能について説明します�
 
     詳細は、[ドキュメント](https://docs.pingcap.com/tidbcloud/sql-statement-modify-column/?plan=premium)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 * スロークエリに対して、多次元かつきめ細かなトリガールールの定義をサポートしました [#62959](https://github.com/pingcap/tidb/issues/62959) [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala) <!-- pr: https://github.com/pingcap/tidb/pull/66132, https://github.com/pingcap/tidb/pull/66064, https://github.com/pingcap/tidb/pull/65086 -->
 

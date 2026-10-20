@@ -176,9 +176,9 @@ TiDB バージョン: 7.6.0
 
     詳細については、[ドキュメント](/br/br-snapshot-guide.md)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
-- リソース制御に関する可観測性の強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)@[bufferflies](https://github.com/bufferflies)@[nolouch](https://github.com/nolouch)
+- リソース制御に関するオブザーバビリティの強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)@[bufferflies](https://github.com/bufferflies)@[nolouch](https://github.com/nolouch)
 
     アプリケーションのワークロードを分離するためにリソースグループを使用するユーザーが増えるにつれ、リソース コントロールはリソースグループに基づいた強化されたデータを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
 

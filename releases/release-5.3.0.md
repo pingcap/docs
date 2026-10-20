@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.3 Release Notes
-summary: TiDB 5.3.0では、TiDB Dashboardに一時テーブル、テーブル属性、ユーザー権限が導入され、パフォーマンスとセキュリティが向上しました。また、TiDB Data Migrationの強化、複数のTiDB Lightningインスタンスを使用した並列インポートのサポート、継続的なプロファイリングによる可観測性の向上も実現しました。互換性の変更と設定ファイルのパラメータが変更されました。このリリースには、新しいSQL機能、セキュリティ強化、安定性の向上、診断効率の向上も含まれています。さらに、TiDB、TiKV、PD、 TiFlash、TiCDCのバグ修正と改善も行われました。TiDBクラスター間の循環レプリケーション機能は削除されました。テレメトリに、TEMPORARY TABLE機能の使用状況に関する情報が含まれるようになりました。
+summary: TiDB 5.3.0では、TiDB Dashboardに一時テーブル、テーブル属性、ユーザー権限が導入され、パフォーマンスとセキュリティが向上しました。また、TiDB Data Migrationの強化、複数のTiDB Lightningインスタンスを使用した並列インポートのサポート、継続的なプロファイリングによるオブザーバビリティの向上も実現しました。互換性の変更と設定ファイルのパラメータが変更されました。このリリースには、新しいSQL機能、セキュリティ強化、安定性の向上、診断効率の向上も含まれています。さらに、TiDB、TiKV、PD、 TiFlash、TiCDCのバグ修正と改善も行われました。TiDBクラスター間の循環レプリケーション機能は削除されました。テレメトリに、TEMPORARY TABLE機能の使用状況に関する情報が含まれるようになりました。
 ---
 
 # TiDB 5.3 リリースノート {#tidb-5-3-release-notes}
@@ -331,7 +331,7 @@ TiCDC v5.3.0以降、TiDBクラスター間の循環レプリケーション機�
 
         - Kafka シンク設定項目`MaxMessageBytes`のデフォルト値を 64 MB から 1 MB に減らし、大きなメッセージが Kafka ブローカーによって拒否される問題を修正しました。 [#3104](https://github.com/pingcap/tiflow/pull/3104)
         - レプリケーションパイプラインのメモリ使用量を削減する[#2553](https://github.com/pingcap/tiflow/issues/2553) [#3037](https://github.com/pingcap/tiflow/pull/3037) [#2726](https://github.com/pingcap/tiflow/pull/2726)
-        - 監視項目とアラートルールを最適化して、同期リンク、メモリGC、および増分スキャンプロセスの可観測性を向上させる[#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
+        - 監視項目とアラートルールを最適化して、同期リンク、メモリGC、および増分スキャンプロセスのオブザーバビリティを向上させる[#2735](https://github.com/pingcap/tiflow/pull/2735) [#1606](https://github.com/pingcap/tiflow/issues/1606) [#3000](https://github.com/pingcap/tiflow/pull/3000) [#2985](https://github.com/pingcap/tiflow/issues/2985) [#2156](https://github.com/pingcap/tiflow/issues/2156)
         - 同期タスクのステータスが正常であれば、ユーザーの誤解を避けるために、過去のエラーメッセージは表示されなくなります[#2242](https://github.com/pingcap/tiflow/issues/2242)
 
 ## バグ修正 {#bug-fixes}

@@ -47,7 +47,7 @@ TiDBバージョン：8.5.7
 
     詳細は、[ドキュメント](https://docs.pingcap.com/tidb/v8.5/sql-statement-create-index#partial-indexes) を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 * TiDB Dashboard の Top SQL ページで、TiKV のネットワークトラフィックおよび論理 I/O メトリクスの収集と表示をサポート [#62916](https://github.com/pingcap/tidb/issues/62916) @[yibin87](https://github.com/yibin87)
 
@@ -158,7 +158,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
 + TiDB
 
     - `OR` 条件および `IN` 条件を含む `ORDER BY ... LIMIT` クエリのパフォーマンスを改善しました。オプティマイザが `IndexMerge` をより効果的に選択できるようになり、`IndexMerge` 内の `IN` 条件パスに対するマージソートもサポートしました。これにより、`Limit` を部分パスへプッシュダウンでき、不要な行読み取りと I/O オーバーヘッドを削減できます。[#65712](https://github.com/pingcap/tidb/issues/65712) @[time-and-fate](https://github.com/time-and-fate)
-    - スロークエリログにクライアント接続属性を記録し、`INFORMATION_SCHEMA.SLOW_QUERY` および `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` から問い合わせ可能にすることで、スロークエリの可観測性を向上しました。`performance_schema_session_connect_attrs_size` で属性の切り詰めを制御し、切り詰められたバイト数は `_truncated` に記録されます。[#66616](https://github.com/pingcap/tidb/issues/66616) @[jiong-nba](https://github.com/jiong-nba)
+    - スロークエリログにクライアント接続属性を記録し、`INFORMATION_SCHEMA.SLOW_QUERY` および `INFORMATION_SCHEMA.CLUSTER_SLOW_QUERY` から問い合わせ可能にすることで、スロークエリのオブザーバビリティを向上しました。`performance_schema_session_connect_attrs_size` で属性の切り詰めを制御し、切り詰められたバイト数は `_truncated` に記録されます。[#66616](https://github.com/pingcap/tidb/issues/66616) @[jiong-nba](https://github.com/jiong-nba)
     - 単一行の `INSERT` 文に対して TiDB が厳格な `NOT NULL` チェックを適用するかどうかを制御するシステム変数 `tidb_enable_strict_not_null_check` を追加しました。これにより、従来の非厳格な動作に依存するワークロードにおけるアップグレードリスクを低減できます。[#68108](https://github.com/pingcap/tidb/issues/68108) @[xhebox](https://github.com/xhebox)
     - runaway query watch 処理のパフォーマンスと安定性を改善しました。これには、TiDB インスタンス間でのより信頼性の高い watch 同期と、より効率的なバックグラウンドでのフラッシュおよび同期が含まれます。[#65746](https://github.com/pingcap/tidb/issues/65746) @[JmPotato](https://github.com/JmPotato)
     - TiDB が PD に対してバッチ化されたリージョンクエリを使用するかどうかを制御するグローバルシステム変数 `tidb_enable_batch_query_region` を追加しました。これによりリージョン情報取得の効率が向上します。この変数はデフォルトで無効です。[#58439](https://github.com/pingcap/tidb/issues/58439) [#8690](https://github.com/tikv/pd/issues/8690) @[JmPotato](https://github.com/JmPotato)
@@ -196,14 +196,14 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
     - ディスク I/O ハングを検出した TiKV ノードが自動的に fail-fast で終了するようにし、応答しないストアからのリカバリを高速化しました。[#19626](https://github.com/tikv/tikv/issues/19626) @[hbisheng](https://github.com/hbisheng)
     - TiKV 8.5 向けに脆弱なサードパーティ依存関係をアップグレードし、必要な互換性修正を upstream と整合させることで、TiKV の安定性とセキュリティを向上しました。[#19713](https://github.com/tikv/tikv/issues/19713) @[LykxSassinator](https://github.com/LykxSassinator)
     - truncate key 式を使用するクエリで、より正確な結果を返すために、TiKV で rank ベースの limit 処理をサポートしました。[#19388](https://github.com/tikv/tikv/issues/19388) @[xzhangxian1008](https://github.com/xzhangxian1008)
-    - デフォルトの split しきい値を緩和し、split key 選択および CPU フォールバック判断の可観測性を追加することで、TiKV の負荷ベースリージョン分割を改善しました。これにより、運用者はホットリージョンをより効果的に処理できます。[#18932](https://github.com/tikv/tikv/issues/18932) @[lhy1024](https://github.com/lhy1024)
+    - デフォルトの split しきい値を緩和し、split key 選択および CPU フォールバック判断のオブザーバビリティを追加することで、TiKV の負荷ベースリージョン分割を改善しました。これにより、運用者はホットリージョンをより効果的に処理できます。[#18932](https://github.com/tikv/tikv/issues/18932) @[lhy1024](https://github.com/lhy1024)
 
 + PD
 
     - PD のメンテナンス用エンドポイントと `pd-ctl` コマンドを追加し、TiKV のメンテナンスタスクを直列化できるようにしました。これにより、一度に 1つのメンテナンスタスクのみを有効にして Raft クォーラム喪失を防ぎます。[#9477](https://github.com/tikv/pd/issues/9477) @[SerjKol80](https://github.com/SerjKol80) @[HaoW30](https://github.com/HaoW30)
     - リージョン分割後の予期しないスケジューリングを避けるため、PD で split scatter をデフォルトで無効にしました。引き続き `schedule.split-scatter-schedule-limit` を正の値に設定することで有効化できます。[#10592](https://github.com/tikv/pd/issues/10592) @[lhy1024](https://github.com/lhy1024)
     - unsafe recovery の empty-region プラン生成を最適化し、多数のリージョンとギャップを持つ大規模クラスターでパフォーマンスを向上し、タイムアウトリスクを低減しました。[#10638](https://github.com/tikv/pd/issues/10638) @[Connor1996](https://github.com/Connor1996)
-    - PD のトランザクション継続時間メトリクスを改善し、本番環境のレイテンシー分布をより適切に反映できるようにして、ダッシュボードとアラートでの可観測性を向上しました。[#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies)
+    - PD のトランザクション継続時間メトリクスを改善し、本番環境のレイテンシー分布をより適切に反映できるようにして、ダッシュボードとアラートでのオブザーバビリティを向上しました。[#10705](https://github.com/tikv/pd/issues/10705) @[bufferflies](https://github.com/bufferflies)
 
 + TiFlash
 
@@ -223,7 +223,7 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
         - TiCDC event store の書き込みパスと iterator パスを最適化し、メモリ割り当てを削減してイベント処理パフォーマンスを向上しました。[#4928](https://github.com/pingcap/ticdc/issues/4928) @[lidezhu](https://github.com/lidezhu)
         - DDL 取得における TiCDC の `tidb_ddl_history` への依存を削除し、`tidb_ddl_job` に依存することで高速なテーブル作成をサポートしました。[#2272](https://github.com/pingcap/ticdc/issues/2272) @[wlwilliamx](https://github.com/wlwilliamx)
         - TiCDC のホットパスを最適化し、高スループットシナリオでの CPU オーバーヘッドを削減してレプリケーション性能を向上しました。[#5107](https://github.com/pingcap/ticdc/issues/5107) @[lidezhu](https://github.com/lidezhu)
-        - redo checkpoint および resolved timestamp のメトリクスを追加し、TiCDC redo log 進行状況の可観測性を向上しました。[#5264](https://github.com/pingcap/ticdc/issues/5264) @[wk989898](https://github.com/wk989898)
+        - redo checkpoint および resolved timestamp のメトリクスを追加し、TiCDC redo log 進行状況のオブザーバビリティを向上しました。[#5264](https://github.com/pingcap/ticdc/issues/5264) @[wk989898](https://github.com/wk989898)
         - 多数の TiCDC Changefeed が warning 状態に入った際の etcd への高負荷を、変更のないランタイム状態の不要な永続化を避けることで緩和しました。[#5268](https://github.com/pingcap/ticdc/issues/5268) @[wk989898](https://github.com/wk989898)
         - Changefeed Error Details Grafana パネルにエラー発生時刻を表示することで TiCDC の監視を強化し、運用者が changefeed 障害をより効率的に診断できるようにしました。[#5085](https://github.com/pingcap/ticdc/issues/5085) @[wlwilliamx](https://github.com/wlwilliamx)
         - 各 checker 実行でグループごとの merge operator を最大 8 個に制限することで、TiCDC の増分スキャンにおける CPU スパイクを緩和しました。[#5047](https://github.com/pingcap/ticdc/issues/5047) @[hongyunyan](https://github.com/hongyunyan)
@@ -233,10 +233,10 @@ v8.5.6 で新規にデプロイされた TiDB クラスター（つまり、以�
         - `max-retry` Kafka sink URI パラメーターを追加し、一時的な Kafka producer 送信失敗に対する上限付き再試行をデフォルトで有効にして、TiCDC Kafka sink の安定性を向上しました。[#12655](https://github.com/pingcap/tiflow/issues/12655) @[3AceShowHand](https://github.com/3AceShowHand)
         - TiCDC cloud storage sink にローカル spool を追加し、受理したエンコード済み DML を外部ストレージへ flush する前にローカルで一時保持することで、オブジェクトストレージが遅い場合のメモリ圧力を軽減し、安定性を向上しました。[#3745](https://github.com/pingcap/ticdc/issues/3745) @[3AceShowHand](https://github.com/3AceShowHand)
         - 部分インデックスの DDL 文のレプリケーションをサポートしました。[#3698](https://github.com/pingcap/ticdc/issues/3698) @[YangKeao](https://github.com/YangKeao)
-        - TiCDC blackhole sink のメトリクスを追加し、changefeed レプリケーションおよび DDL 処理の可観測性を向上しました。[#5362](https://github.com/pingcap/ticdc/issues/5362) @[wk989898](https://github.com/wk989898)
+        - TiCDC blackhole sink のメトリクスを追加し、changefeed レプリケーションおよび DDL 処理のオブザーバビリティを向上しました。[#5362](https://github.com/pingcap/ticdc/issues/5362) @[wk989898](https://github.com/wk989898)
         - resolved-ts が多いワークロード、特に小さなバッチにおいて、CPU 使用量とメモリ割り当てを削減するよう TiCDC log puller のパフォーマンスを最適化しました。[#4697](https://github.com/pingcap/ticdc/issues/4697) @[asddongmen](https://github.com/asddongmen)
         - TiCDC MySQL sink の競合検出を最適化し、レプリケーション性能を向上しました。[#4582](https://github.com/pingcap/ticdc/issues/4582) @[wk989898](https://github.com/wk989898)
-        - TiCDC の resolve lock の可観測性を改善し、同じリージョンに対する重複した resolve 試行を回避することで、不要なロック解決作業を削減し、新しいメトリクスとダッシュボードによってトラブルシューティングを容易にしました。[#5016](https://github.com/pingcap/ticdc/issues/5016) @[lidezhu](https://github.com/lidezhu)
+        - TiCDC の resolve lock のオブザーバビリティを改善し、同じリージョンに対する重複した resolve 試行を回避することで、不要なロック解決作業を削減し、新しいメトリクスとダッシュボードによってトラブルシューティングを容易にしました。[#5016](https://github.com/pingcap/ticdc/issues/5016) @[lidezhu](https://github.com/lidezhu)
         - TiCDC Grafana ダッシュボードに Changefeed Operation History パネルを追加し、create、update、pause、resume、delete など、最近のユーザー起因の changefeed 操作を調査しやすくしました。[#5087](https://github.com/pingcap/ticdc/issues/5087) @[wlwilliamx](https://github.com/wlwilliamx)
         - `WHERE` 句を含む `CREATE TABLE`、`CREATE INDEX`、`ALTER TABLE ... ADD INDEX` を含め、部分インデックスを使用する DDL 文の解析とレプリケーションをサポートしました。[#12503](https://github.com/pingcap/tiflow/issues/12503) @[YangKeao](https://github.com/YangKeao)
         - MySQL sink のテーブルルーティングをサポートし、ルーティングされた changefeed がターゲットのスキーマ名およびテーブル名に対して DDL と DML を適用できるようにしました。[#4818](https://github.com/pingcap/ticdc/issues/4818) @[3AceShowHand](https://github.com/3AceShowHand)

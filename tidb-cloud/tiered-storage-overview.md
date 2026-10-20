@@ -24,7 +24,7 @@ summary: TiDB Cloud Premium と BYOC における階層型ストレージの概�
 - **きめ細かな制御**: テーブルレベルとパーティションレベルの両方のストレージ階層化をサポートします。パーティションレベルの設定はテーブルレベルの設定より優先されます。
 - **柔軟な変換**: IA と Standard の各ストレージクラス間で、データ損失なく双方向に変換できます。
 - **シームレスな統合**: Raft リージョン、MVCC、BR によるバックアップとリストア、TiCDC、およびその他の TiDB コンポーネントと完全に統合されています。
-- **可観測性と調整可能性**: 変換の進行状況、IA 読み取りメトリクス、クラスター全体のキャッシュヒット率は SQL 出力および Cloud Console で確認でき、IA キャッシュレベルも設定可能です。
+- **オブザーバビリティと調整可能性**: 変換の進行状況、IA 読み取りメトリクス、クラスター全体のキャッシュヒット率は SQL 出力および Cloud Console で確認でき、IA キャッシュレベルも設定可能です。
 
 ## 使用シナリオ {#usage-scenarios}
 
@@ -192,4 +192,4 @@ Same chain as above + full object storage data download to local
 >
 > これらの数値はテスト環境から得られたものであり、実際の本番シナリオを表すものではありません。正確なデータは、自身の業務テストに基づいて取得してください。
 
-進行中の変換を `SHOW STORAGE_CLASS TRANSITIONS` で追跡する方法、または過去の変換時間を `mysql.tidb_storage_class_transition_history` で確認する方法については、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
+進行中の変換を `SHOW STORAGE_CLASS TRANSITIONS` で追跡する方法、または過去の変換時間を `mysql.tidb_storage_class_transition_history` で確認する方法については、[階層型ストレージのオブザーバビリティ](/tidb-cloud/tiered-storage-observability.md) を参照してください。

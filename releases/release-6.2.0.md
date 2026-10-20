@@ -42,7 +42,7 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/sql-statements/sql-statement-alter-table-compact.md#alter-table--compact) [#4145](https://github.com/pingcap/tiflash/issues/4145) @[breezewish](https://github.com/breezewish)
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - TiDB DashboardをPDから分離
 

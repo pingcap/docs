@@ -624,7 +624,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)は、**日本東部**および**米国東部 2**の Microsoft Azure で一般提供 (GA) になりました。
 
-        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとストレージのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。[Azure Marketplace](https://azuremarketplace.microsoft.com/)をご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
+        TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとストレージのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合されたオブザーバビリティを提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。[Azure Marketplace](https://azuremarketplace.microsoft.com/)をご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
 
         詳細については、 [プレビュー版から本番環境へ：Microsoft Azure 上のTiDB Cloud Dedicatedが一般提供開始](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/)を参照してください。
 

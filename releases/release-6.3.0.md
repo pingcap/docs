@@ -69,7 +69,7 @@ TiDBバージョン: 6.3.0-DMR
 
     ユーザーパスワードの認証には、クライアント側のサポートが必要です。 [JDBCはSM3アルゴリズムをサポートしています](/develop/dev-guide-choose-driver-or-orm.md#java-drivers)ので、TiDB-JDBC経由でSM3認証を使用してTiDBに接続できるようになります。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - TiDBはSQLクエリ実行時間の詳細なメトリクスを提供します [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 

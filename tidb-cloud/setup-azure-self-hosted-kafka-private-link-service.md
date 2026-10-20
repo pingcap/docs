@@ -18,7 +18,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 ![Connect to Azure Self-Hosted Kafka Private Link Service](/media/tidb-cloud/changefeed/connect-to-azure-self-hosted-kafka-privatelink-service.png)
 
-このドキュメントでは、Azure で Kafka Private Link サービスに接続する例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Link サービスの基本的なセットアップ手順について説明します。本番環境では、運用の保守性と可観測性を強化した、より回復力の高い Kafka Private Link サービスの使用をお勧めします。
+このドキュメントでは、Azure で Kafka Private Link サービスに接続する例を示します。同様のポートマッピング原則に基づいて他の構成も可能ですが、このドキュメントでは Kafka Private Link サービスの基本的なセットアップ手順について説明します。本番環境では、運用の保守性とオブザーバビリティを強化した、より回復力の高い Kafka Private Link サービスの使用をお勧めします。
 
 ## 前提条件 {#prerequisites}
 

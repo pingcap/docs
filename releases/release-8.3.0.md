@@ -130,7 +130,7 @@ TiDBバージョン：8.3.0
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_enable_shared_lock_promotion-new-in-v830)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - 初期統計の読み込みの進行状況を表示 [#53564](https://github.com/pingcap/tidb/issues/53564) @[hawkingrei](https://github.com/hawkingrei)
 

@@ -41,7 +41,7 @@ Amazon S3 に保存されるのは 1 コピーだけで、3 つのレプリカ�
 
 変換時間は主にデータ量と変換方向に依存します。テーブルを IA に設定する場合はメタデータの更新のみで済むため高速ですが、Standard に戻す場合はすべてのデータをオブジェクトストレージからダウンロードする必要があるため、はるかに時間がかかります。自身のクラスターで所要時間を見積もるには、`mysql.tidb_storage_class_transition_history` 内の、`state = 'COMPLETED'` で絞り込んだ過去の類似変換の `duration` を問い合わせてください。
 
-完全なカラムリファレンスとクエリ例については、[階層型ストレージの可観測性](/tidb-cloud/tiered-storage-observability.md) を参照してください。
+完全なカラムリファレンスとクエリ例については、[階層型ストレージのオブザーバビリティ](/tidb-cloud/tiered-storage-observability.md) を参照してください。
 
 ## 変換が `RUNNING` のままで、進行状況が進まない場合はどうすればよいですか？ {#what-if-a-conversion-stays-in-running-and-the-progress-does-not-increase}
 

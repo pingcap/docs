@@ -510,6 +510,6 @@
 - Tiered Storage を使用する
   - [概要](/tidb-cloud/tiered-storage-overview.md)
   - [設定と管理](/tidb-cloud/tiered-storage-guide.md)
-  - [可観測性](/tidb-cloud/tiered-storage-observability.md)
+  - [オブザーバビリティ](/tidb-cloud/tiered-storage-observability.md)
   - [制限事項](/tidb-cloud/tiered-storage-limitations.md)
   - [FAQ](/tidb-cloud/tiered-storage-faq.md)

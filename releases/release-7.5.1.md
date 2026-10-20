@@ -27,7 +27,7 @@ TiDB バージョン: 7.5.1
 
     - DDLスキーマの再ロードプロセス中に`tikv_client_read_timeout`を使用して、クラスタでのメタリージョンLeaderの読み取り不可の影響を軽減します。 [#48124](https://github.com/pingcap/tidb/issues/48124) @[cfzjywxk](https://github.com/cfzjywxk)
 
-    - リソース制御に関する可観測性を強化する[#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv) @[bufferflies](https://github.com/bufferflies) @[nolouch](https://github.com/nolouch)
+    - リソース制御に関するオブザーバビリティを強化する[#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv) @[bufferflies](https://github.com/bufferflies) @[nolouch](https://github.com/nolouch)
 
         リソースグループを使用してアプリケーションのワークロードを分離するユーザーが増えるにつれ、リソースコントロールはリソースグループに基づいた拡張データを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速に特定し、正確に診断できるようになります。
 

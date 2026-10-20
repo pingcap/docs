@@ -65,7 +65,7 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、[ユーザー向けドキュメント](/encryption-at-rest.md#tiflash)を参照してください。
 
-### 可観測性 {#observability}
+### オブザーバビリティ {#observability}
 
 - クラスタ診断が GA になります [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee)
 
