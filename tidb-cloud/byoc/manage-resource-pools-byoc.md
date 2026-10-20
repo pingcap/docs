@@ -65,7 +65,7 @@ summary: TiDB Cloud BYOC のリソースプールを表示および管理する�
 
 ## Pool vCPU Limit を更新する {#update-the-pool-vcpu-limit}
 
-Pool vCPU Limit は、リソースプールに対して許可される最大のプロビジョニング済み TiDB vCPU 容量について、顧客が任意で定義できる上限です。管理ノードや可観測性ノードなどの追加 vCPU プロビジョニングは、この上限には含まれません。
+Pool vCPU Limit は、リソースプールに対して許可される最大のプロビジョニング済み TiDB vCPU キャパシティについて、顧客が任意で定義できる上限です。管理ノードや可観測性ノードなどの追加 vCPU プロビジョニングは、この上限には含まれません。
 
 Pool vCPU Limit を更新するには、次の手順を実行します。
 
