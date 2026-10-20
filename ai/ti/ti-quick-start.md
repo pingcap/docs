@@ -17,7 +17,7 @@ summary: TiDB Cloud CLI をインストールして設定し、その後ファ�
 
 開始する前に、[TiDB Cloud コンソール](https://tidbcloud.com/) の [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API public キーと private キーを取得してください。これらのキーには、組織に対する `Organization Owner` アクセス権が必要です。
 
-## Step 1. TiDB Cloud CLI をインストールする {#step-1-install-tidb-cloud-cli}
+## ステップ 1. TiDB Cloud CLI をインストールする {#step-1-install-tidb-cloud-cli}
 
 お使いのオペレーティングシステムに応じて、以下の手順で TiDB Cloud CLI をインストールします。
 
@@ -76,7 +76,7 @@ summary: TiDB Cloud CLI をインストールして設定し、その後ファ�
 </div>
 </SimpleTab>
 
-## Step 2. TiDB Cloud CLI を設定する {#step-2-configure-tidb-cloud-cli}
+## ステップ 2. TiDB Cloud CLI を設定する {#step-2-configure-tidb-cloud-cli}
 
 1. 対話型設定を実行します。
 
@@ -104,7 +104,7 @@ summary: TiDB Cloud CLI をインストールして設定し、その後ファ�
     }
     ```
 
-## Step 3. ワークフローを選択する {#step-3-choose-a-workflow}
+## ステップ 3. ワークフローを選択する {#step-3-choose-a-workflow}
 
 ニーズに応じて、以下のいずれかのワークフローに進みます。
 
