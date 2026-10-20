@@ -50,7 +50,7 @@ env:
     }
   INDEX_FILES: _index.md,ai/_index.md,api/_index.md,best-practices/_index.md,develop/_index.md,releases/_index.md,tidb-cloud/dedicated/_index.md,tidb-cloud/essential/_index.md,tidb-cloud/premium/_index.md,tidb-cloud/byoc/_index.md,tidb-cloud/releases/_index.md,tidb-cloud/starter/_index.md,tidb-cloud-lake/_index.md,tidb-cloud-filesystem/_index.md
   AI_TRANSLATOR_REPO: qiancai/ai-markdown-translator
-  AI_TRANSLATOR_REF: main
+  AI_TRANSLATOR_REF: c52e9188383f8a2d7056a072da63310e8346a001 # main
   # Manual all-updated runs use the same global cursor behavior as scheduled runs.
   COMMIT_SYNC_RUN_TYPE: ${{ (github.event_name == 'schedule' || inputs.translation_scope == 'Translate all updated files') && 'schedule' || 'workflow_dispatch' }}
 

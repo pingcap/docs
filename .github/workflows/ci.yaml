@@ -66,7 +66,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
       - name: Vale Linter
-        uses: errata-ai/vale-action@reviewdog
+        uses: errata-ai/vale-action@518a9136acc6e6668ce7c00d367051e0941e87ff # reviewdog
         with:
           # Optional
           # Specify file path to lint
