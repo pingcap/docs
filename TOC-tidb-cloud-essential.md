@@ -473,7 +473,7 @@
     - [ログアウト](/tidb-cloud/ticloud-auth-logout.md)
     - [whoami](/tidb-cloud/ticloud-auth-whoami.md)
   - サーバーレス
-    - [キャパシティ](/tidb-cloud/ticloud-serverless-capacity.md)
+    - [容量](/tidb-cloud/ticloud-serverless-capacity.md)
     - [作成する](/tidb-cloud/ticloud-cluster-create.md)
     - [消去](/tidb-cloud/ticloud-cluster-delete.md)
     - [説明する](/tidb-cloud/ticloud-cluster-describe.md)
