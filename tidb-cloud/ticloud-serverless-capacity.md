@@ -5,7 +5,7 @@ summary: "`ticloud serverless capacity` のリファレンス。"
 
 # ticloud serverless capacity {#ticloud-serverless-capacity}
 
-TiDB Cloudクラスターの容量を、最大および最小のリクエストキャパシティユニット (RCU) に基づいて設定します。
+TiDB Cloudクラスターのキャパシティを、最大および最小のリクエストキャパシティユニット (RCU) に基づいて設定します。
 
 ```shell
 ticloud serverless capacity [flags]
@@ -13,13 +13,13 @@ ticloud serverless capacity [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloudクラスターの容量を設定します。
+対話モードでTiDB Cloudクラスターのキャパシティを設定します。
 
 ```shell
  ticloud serverless capacity
 ```
 
-非対話型モードでTiDB Cloudクラスターの容量を設定します。
+非対話型モードでTiDB Cloudクラスターのキャパシティを設定します。
 
 ```shell
 ticloud serverless capacity -c <cluster-id> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>

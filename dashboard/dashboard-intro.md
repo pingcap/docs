@@ -59,11 +59,11 @@ TiDB DashboardのSearch Logsページでは、クラスター内で実行中の�
 
 詳細は[Search Logsページ](/dashboard/dashboard-log-search.md)を参照してください。
 
-## リソース制御のためのクラスター容量の見積もり {#estimate-cluster-capacity-for-resource-control}
+## リソース制御のためのクラスターキャパシティの見積もり {#estimate-cluster-capacity-for-resource-control}
 
 [リソース管理](/tidb-resource-control-ru-groups.md)機能を使用してリソース分離を実装するには、クラスター管理者がリソースグループを作成し、各グループにクォータを設定できます。
 
-リソース計画を立てる前に、クラスター全体の容量を把握しておく必要があります。詳細については、 [リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を参照してください。
+リソース計画を立てる前に、クラスター全体のキャパシティを把握しておく必要があります。詳細については、 [リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を参照してください。
 
 ## 各インスタンスのプロファイリングデータを収集する {#collect-profiling-data-for-each-instance}
 

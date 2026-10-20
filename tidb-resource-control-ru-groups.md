@@ -117,14 +117,14 @@ TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`
 
 このセクションでは、リソース制御機能を使用してリソースグループを管理し、各リソースグループのリソース割り当てを制御する方法について説明します。
 
-### クラスター容量を推定する {#estimate-cluster-capacity}
+### クラスターキャパシティを推定する {#estimate-cluster-capacity}
 
 <CustomContent platform="tidb">
 
-リソース計画を行う前に、クラスタ全体の容量を把握しておく必要があります。TiDB では、クラスタ容量を推定するための[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)ステートメントが提供されています。以下のいずれかの方法を使用できます。
+リソース計画を行う前に、クラスタ全体のキャパシティを把握しておく必要があります。TiDB では、クラスタキャパシティを推定するための[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)ステートメントが提供されています。以下のいずれかの方法を使用できます。
 
-- [実際の作業負荷に基づいて容量を推定する](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
-- [ハードウェアの導入状況に基づいて容量を推定する](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
+- [実際の作業負荷に基づいてキャパシティを推定する](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
+- [ハードウェアの導入状況に基づいてキャパシティを推定する](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
 TiDB Dashboardで[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を表示できます。詳細については、 [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md#methods-for-estimating-capacity)を参照してください。
 
@@ -132,9 +132,9 @@ TiDB Dashboardで[リソースマネージャーページ](/dashboard/dashboard-
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Self-Managedの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスタ容量を推定できます。
+TiDB Self-Managedの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスタキャパシティを推定できます。
 
-TiDB Cloud Dedicated では、`CALIBRATE RESOURCE`文はサポートされていません。クラスターの RU 容量を見積もるには、代わりに TiDB Cloud コンソールの **Calibrate Resource** 機能を使用してください。詳細については、[Calibrate Resource](/tidb-cloud/calibrate-resource.md) を参照してください。
+TiDB Cloud Dedicated では、`CALIBRATE RESOURCE`文はサポートされていません。クラスターの RU キャパシティを見積もるには、代わりに TiDB Cloud コンソールの **Calibrate Resource** 機能を使用してください。詳細については、[Calibrate Resource](/tidb-cloud/calibrate-resource.md) を参照してください。
 
 </CustomContent>
 
@@ -192,7 +192,7 @@ CREATE USER 'usr1'@'%' IDENTIFIED BY '123' RESOURCE GROUP rg1;
 ALTER USER usr2 RESOURCE GROUP rg2;
 ```
 
-ユーザーをバインドすると、新しく作成されたセッションのリソース消費は、指定されたクォータ（リクエストユニット、RU）によって制御されます。システムのワークロードが比較的高く、余裕のある容量がない場合、 `usr2`のリソース消費率は、クォータを超えないように厳密に制御されます。 `usr1`は`rg1`によってバインドされ、 `BURSTABLE`が設定されているため、 `usr1`の消費率はクォータを超えることが許可されます。
+ユーザーをバインドすると、新しく作成されたセッションのリソース消費は、指定されたクォータ（リクエストユニット、RU）によって制御されます。システムのワークロードが比較的高く、余裕のあるキャパシティがない場合、 `usr2`のリソース消費率は、クォータを超えないように厳密に制御されます。 `usr1`は`rg1`によってバインドされ、 `BURSTABLE`が設定されているため、 `usr1`の消費率はクォータを超えることが許可されます。
 
 リソースグループに必要なリソースが不足するほどリクエストが多すぎる場合、クライアントのリクエストは待機状態になります。待機時間が長すぎると、リクエストはエラーを報告します。
 
@@ -397,9 +397,9 @@ TiKVは、Grafanaの**TiKV**ダッシュボードに、さまざまなリソー�
 
     いいえ。データベースユーザーは1つのリソースグループにしかバインドできません。ただし、セッション実行時には、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションで使用するリソースグループを設定できます。また、オプティマイザヒント[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を使用して、実行中のステートメントのリソースグループを設定することもできます。
 
-3. すべてのリソースグループの合計リソース割り当て（ `RU_PER_SEC` ）がシステム容量を超えた場合、どうなりますか？
+3. すべてのリソースグループの合計リソース割り当て（ `RU_PER_SEC` ）がシステムキャパシティを超えた場合、どうなりますか？
 
-    TiDB は、リソースグループを作成する際に容量を検証しません。システムに十分な利用可能なリソースがあれば、TiDB は各リソースグループのリソース要件を満たすことができます。システムリソースが制限を超えると、TiDB は優先度の高いリソースグループからのリクエストを満たすことを優先します。同じ優先度のリクエストすべてを満たすことができない場合、TiDB はリソース割り当て ( `RU_PER_SEC` ) に従ってリソースを比例的に割り当てます。
+    TiDB は、リソースグループを作成する際にキャパシティを検証しません。システムに十分な利用可能なリソースがあれば、TiDB は各リソースグループのリソース要件を満たすことができます。システムリソースが制限を超えると、TiDB は優先度の高いリソースグループからのリクエストを満たすことを優先します。同じ優先度のリクエストすべてを満たすことができない場合、TiDB はリソース割り当て ( `RU_PER_SEC` ) に従ってリソースを比例的に割り当てます。
 
 ## 参照 {#see-also}
 

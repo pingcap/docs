@@ -70,17 +70,17 @@ PostgreSQL 互換の {{{ .starter }}}インスタンスは、現在パブリッ�
 
 PostgreSQL 互換の {{{ .starter }}}インスタンスが無料クォータに達すると、過剰なリソース消費に対して使用制限またはサービス停止が適用される場合があります。これらの上限を超えることが予想される場合は、要件について相談するために<a href="mailto:support@pingcap.com">support@pingcap.com</a>までお問い合わせください。
 
-### インスタンス容量計画 {#instance-capacity-plan}
+### Instance Capacity Plan {#instance-capacity-plan}
 
 以下のインスタンスキャパシティ制限は、MySQL 互換の {{{ .starter }}}インスタンスに適用されます。
 
 TiDB Cloudの各組織につき、デフォルトでは、すべてのTiDB Cloud StarterおよびEssentialインスタンスを合わせて最大 5つの[ブランチ](/tidb-cloud/branch-overview.md)を作成できます。
 
-TiDB Cloudの有料組織ごとに、合計で最大100個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。
+TiDB Cloud を有料で利用している組織ごとに、合計で最大100個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。
 
-エージェントプラットフォームや、多数のインスタンスとブランチを必要とするその他のサービスを構築する有料組織向けに、 TiDB Cloud は**Instance Capacity Plan**を提供しています。このプランでは、有料のTiDB Cloud組織は 5つを超えるブランチを作成でき、 TiDB Cloud Starter のインスタンスとブランチの 100 個という制限を受けません。インスタンス容量プランの詳細と申し込みについては、 [申込書](https://www.pingcap.com/programs/agentic-ai-instance-capacity)にご記入ください。
+エージェントプラットフォームや、多数のインスタンスとブランチを必要とするその他のサービスを構築する、有料で利用している組織向けに、 TiDB Cloud は**Instance Capacity Plan**を提供しています。このプランでは、TiDB Cloud を有料で利用している組織は 5つを超えるブランチを作成でき、 TiDB Cloud Starter のインスタンスとブランチの 100 個という制限を受けません。Instance Capacity Planの詳細と申し込みについては、 [申込書](https://www.pingcap.com/programs/agentic-ai-instance-capacity)にご記入ください。
 
-TiDB Cloudインスタンス容量プランの申請が承認されると、メールで通知が届きます。
+TiDB Cloud Instance Capacity Planの申請が承認されると、メールで通知が届きます。
 
 ## TiDB Cloud Essential {#essential}
 
@@ -123,7 +123,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのプレフィ
 
 ## TiDB Cloud Premium {#premium}
 
-大規模な容量と一貫した高いパフォーマンスを必要とするミッションクリティカルなエンタープライズワークロード向けに、Premiumプランは以下の機能を備えたクラウドネイティブなエクスペリエンスを提供します。
+大規模なキャパシティと一貫した高いパフォーマンスを必要とするミッションクリティカルなエンタープライズワークロード向けに、Premiumプランは以下の機能を備えたクラウドネイティブなエクスペリエンスを提供します。
 
 - **即時的な拡張性**：トラフィックの急増に対応し、ピーク需要時にも安定したパフォーマンスを維持するために、コンピューティングリソースを自動的に拡張します。
 - **無制限の拡張性**：物理的なインフラストラクチャの制約を受けることなく、ビジネスの成長に合わせてストレージとスループットを拡張できます。

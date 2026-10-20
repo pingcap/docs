@@ -127,12 +127,12 @@ TiDB Cloudは、新しいTiDB Cloud StarterまたはEssentialインスタンス�
 
 4. 新しいインスタンスの名前を入力してください。
 
-5. 必要に応じて容量を更新してください。
+5. 必要に応じてキャパシティを更新してください。
 
     - MySQL互換のTiDB Cloud Starterインスタンスの場合、 [無料割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)よりも多くのリソースが必要な場合は、毎月の支出制限を設定してください。
-    - 新しいTiDB Cloud Essentialインスタンスの場合、TiDBカーネルバージョンに基づいて次の容量設定を構成し、その後必要に応じて詳細設定を構成してください。
+    - 新しいTiDB Cloud Essentialインスタンスの場合、TiDBカーネルバージョンに基づいて次のキャパシティ設定を構成し、その後必要に応じて詳細設定を構成してください。
 
-        - CLOUD.202603.x以降で実行される新しいTiDB Cloud Essentialインスタンスでは、デフォルトで**Elastic Mode**が選択され、2,000 RCUの固定**Baseline RCU**が使用されます。容量を制限する必要がある場合は、**Limited Mode**に切り替えて最大RCUを設定してください。最小課金RCUは自動的に計算されます。
+        - CLOUD.202603.x以降で実行される新しいTiDB Cloud Essentialインスタンスでは、デフォルトで**Elastic Mode**が選択され、2,000 RCUの固定**Baseline RCU**が使用されます。キャパシティを制限する必要がある場合は、**Limited Mode**に切り替えて最大RCUを設定してください。最小課金RCUは自動的に計算されます。
         - 以前のTiDBバージョンで実行される新しいTiDB Cloud Essentialインスタンスでは、最小RCUと最大RCUを設定してください。
 
 6. **Restore**をクリックして復元プロセスを開始してください。

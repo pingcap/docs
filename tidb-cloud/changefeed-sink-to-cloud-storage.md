@@ -340,7 +340,7 @@ access key を使用して認証するには、以下の手順に従ってくだ
 
 **Next**をクリックして、変更フィードの仕様を設定してください。
 
-1. **Changefeed Specification**領域で、変更フィードで使用するレプリケーション容量ユニット（RCU）の数を指定します。
+1. **Changefeed Specification**領域で、変更フィードで使用するレプリケーションキャパシティユニット（RCU）の数を指定します。
 2. **Changefeed Name**欄に、変更フィードの名前を指定します。
 
 ## ステップ4．構成を確認し、レプリケーションを開始する {#step-4-review-the-configuration-and-start-replication}

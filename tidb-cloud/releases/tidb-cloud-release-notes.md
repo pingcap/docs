@@ -52,10 +52,10 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Essential**
 
-    - TiDB Cloud Essential で、Max RCU を設定せずにインスタンスを作成したり、その容量を更新したりできるようになりました。この機能は、TiDB バージョン `CLOUD.202603.x` 以降を実行する TiDB Cloud Essential インスタンスで利用できます。
+    - TiDB Cloud Essential で、Max RCU を設定せずにインスタンスを作成したり、そのキャパシティを更新したりできるようになりました。この機能は、TiDB バージョン `CLOUD.202603.x` 以降を実行する TiDB Cloud Essential インスタンスで利用できます。
 
         - 新しい TiDB Cloud Essential インスタンスを作成するときのデフォルトモードは **Elastic Mode** です。このモードでは、TiDB Cloud がワークロードに基づいてバックエンドリソースを自動的に割り当てます。一貫して 100,000 RCU を超える RCU を必要とするワークロードの場合は、潜在的なパフォーマンスのボトルネックを回避するために TiDB Cloud Premium へのアップグレードを検討してください。
-        - 最大容量の制限を設定する必要がある場合は、**Limited Mode** に切り替えることができます。
+        - 最大キャパシティの制限を設定する必要がある場合は、**Limited Mode** に切り替えることができます。
 
       Max RCU が設定済みの既存の TiDB Cloud Essential インスタンスは、設定を変更しなくても引き続き実行されます。現在の値を維持することも、これをクリアして **Elastic Mode** に切り替えることもできます。
 
@@ -69,10 +69,10 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Premium**
 
-    - TiDB Cloud Premium で、Max RCU を設定せずにインスタンスを作成したり、その容量を更新したりできるようになりました。
+    - TiDB Cloud Premium で、Max RCU を設定せずにインスタンスを作成したり、そのキャパシティを更新したりできるようになりました。
 
-        - 新しい TiDB Cloud Premium インスタンスを作成するときのデフォルトモードは **Elastic Mode** です。このモードでは、TiDB Cloud がワークロードに基づいてバックエンドリソースを自動的に割り当てます。Elastic Mode では、ベースラインRCUを設定して、最小プロビジョニング容量と最小課金容量を指定できます。RCU 消費アラートがサポートされており、容量のスケーリングに応じた使用量を監視するためにカスタムしきい値を設定できます。
-        - 最大容量の制限を設定する必要がある場合でも、引き続き **Limited Mode** を使用できます。
+        - 新しい TiDB Cloud Premium インスタンスを作成するときのデフォルトモードは **Elastic Mode** です。このモードでは、TiDB Cloud がワークロードに基づいてバックエンドリソースを自動的に割り当てます。Elastic Mode では、ベースラインRCUを設定して、最小プロビジョニングキャパシティと最小課金キャパシティを指定できます。RCU 消費アラートがサポートされており、キャパシティのスケーリングに応じた使用量を監視するためにカスタムしきい値を設定できます。
+        - 最大キャパシティの制限を設定する必要がある場合でも、引き続き **Limited Mode** を使用できます。
 
       Max RCU が設定済みの既存の TiDB Cloud Premium インスタンスは、設定を変更しなくても引き続き実行されます。現在の値を維持することも、これをクリアして **Elastic Mode** に切り替えることもできます。
 
@@ -521,9 +521,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Starter**
 
-    - 多数の[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスとブランチを必要とする組織向けに[インスタンス容量計画](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を導入します。
+    - 多数の[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスとブランチを必要とする組織向けに[Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を導入します。
 
-        デフォルトでは、 TiDB Cloudの有料組織ごとに、合計で最大 100 個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。この制限を超える場合は[インスタンス容量計画](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
+        デフォルトでは、 TiDB Cloud を有料で利用している組織ごとに、合計で最大 100 個のTiDB Cloud Starterインスタンスとブランチを作成できます。各ブランチは個別のインスタンスとしてカウントされます。この制限を超える場合は[Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
 
 - **TiDB Cloud Essential**
 
@@ -554,10 +554,10 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Starter**
 
-    - [インスタンス容量計画](https://www.pingcap.com/programs/agentic-ai-instance-capacity)に登録されていない有料組織の場合、 TiDB Cloud API では、 TiDB Cloud Starterインスタンスとブランチの合計数が 100 個という制限が適用され、各ブランチは個別のインスタンスとしてカウントされます。
+    - 有料で利用している組織のうち、[Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)に登録されていない組織の場合、 TiDB Cloud API では、 TiDB Cloud Starterインスタンスとブランチの合計数が 100 個という制限が適用され、各ブランチは個別のインスタンスとしてカウントされます。
 
         - 制限に達すると、新しいTiDB Cloud Starterインスタンスまたはブランチを作成するためのAPIリクエストは拒否されます。
-        - この制限を超える場合は[インスタンス容量計画](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
+        - この制限を超える場合は[Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity)を申請してください。
 
 ## 2026年5月26日 {#may-26-2026}
 

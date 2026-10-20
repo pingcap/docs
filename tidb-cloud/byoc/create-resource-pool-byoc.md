@@ -5,7 +5,7 @@ summary: TiDB Cloud BYOC のリソースプールを作成する方法を学び�
 
 # リソースプールを作成する
 
-リソースプールは、TiDB Cloud BYOC デプロイにおける基盤となる物理リソース、ネットワーク、および容量の管理単位です。1 つのリソースプールで 1 つ以上の BYOC インスタンスをホストでき、各 BYOC インスタンスは 1 つのリソースプールに属します。
+リソースプールは、TiDB Cloud BYOC デプロイにおける基盤となる物理リソース、ネットワーク、およびキャパシティの管理単位です。1 つのリソースプールで 1 つ以上の BYOC インスタンスをホストでき、各 BYOC インスタンスは 1 つのリソースプールに属します。
 
 このドキュメントでは、TiDB Cloud コンソールでリソースプールを作成する方法について説明します。
 
@@ -17,7 +17,7 @@ summary: TiDB Cloud BYOC のリソースプールを作成する方法を学び�
 - 対象のクラウドプロバイダーおよびリージョンで BYOC デプロイが完了していること。
 - `Organization Owner` ロールを持っていること。リソースプールを作成および管理できるのは Organization Owner のみです。
 - リソースプール用の専用 CIDR 範囲を計画済みであること。
-- クラウドアカウントに、必要なリソースプール容量をプロビジョニングするための十分なサービスクォータがあること。
+- クラウドアカウントに、必要なリソースプールキャパシティをプロビジョニングするための十分なサービスクォータがあること。
 
 ## リソースプールを作成する {#create-a-resource-pool}
 
@@ -37,7 +37,7 @@ summary: TiDB Cloud BYOC のリソースプールを作成する方法を学び�
 
 4. （任意）**Pool vCPU Limit** エリアで、Pool vCPU Limit を有効にして設定します。
 
-    Pool vCPU Limit は、リソースプール内のすべてのデータベース関連リソースに対して許可される、プロビジョニング済み TiDB vCPU 容量の合計最大値です。これには TiDB、TiKV、TiFlash、PD などが含まれますが、これらに限定されません。Observability (O11Y) Nodes または Admin Nodes で使用される vCPU は含まれません。制限を設定しない場合、リソース使用量に制限はなく、使用量に基づいて課金されます。
+    Pool vCPU Limit は、リソースプール内のすべてのデータベース関連リソースに対して許可される、プロビジョニング済み TiDB vCPU キャパシティの合計最大値です。これには TiDB、TiKV、TiFlash、PD などが含まれますが、これらに限定されません。Observability (O11Y) Nodes または Admin Nodes で使用される vCPU は含まれません。制限を設定しない場合、リソース使用量に制限はなく、使用量に基づいて課金されます。
 
 5. **Pool Capacity** エリアで、初期 TiKV リソースを設定し、必要に応じて TiFlash リソースを設定します。
 
@@ -46,7 +46,7 @@ summary: TiDB Cloud BYOC のリソースプールを作成する方法を学び�
 
     リソースプールの作成後は、コンソールから TiKV のマシンタイプを手動で変更できません。自動スケールアウト中に、TiDB Cloud はワークロードの要件に応じて TiKV のマシンタイプを変更する場合があります。TiDB Cloud コンソールから TiFlash を無効にすることは可能です。TiFlash を無効にすると、リソースプール内のすべての BYOC インスタンスに影響します。TiFlash リソースは削除され、TiFlash に依存する分析ワークロードが利用できなくなったり、パフォーマンスが低下したりする可能性があります。
 
-    Pool vCPU Limit を設定する場合は、初期 TiKV および TiFlash リソースの合計 vCPU 数が Pool vCPU Limit の 50% を超えないようにしてください。これにより、将来のインスタンス作成や自動スケールアウトのための容量を確保しやすくなります。
+    Pool vCPU Limit を設定する場合は、初期 TiKV および TiFlash リソースの合計 vCPU 数が Pool vCPU Limit の 50% を超えないようにしてください。これにより、将来のインスタンス作成や自動スケールアウトのためのキャパシティを確保しやすくなります。
 
 6. **High Availability** エリアで、リソースプールの高可用性モードを選択します。
 
@@ -100,4 +100,4 @@ summary: TiDB Cloud BYOC のリソースプールを作成する方法を学び�
 リソースプールが **Active** になった後、次の操作を実行できます。
 
 - リソースプール内に [BYOC インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)。
-- 容量の更新、Pool vCPU Limit の更新、AWS リソースタグの管理など、[リソースプールを管理する](/tidb-cloud/byoc/manage-resource-pools-byoc.md)。
+- キャパシティの更新、Pool vCPU Limit の更新、AWS リソースタグの管理など、[リソースプールを管理する](/tidb-cloud/byoc/manage-resource-pools-byoc.md)。

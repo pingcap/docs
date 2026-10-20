@@ -171,7 +171,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
     - [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブで SQL 実行計画を確認します。
     - [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページの[**Key Visualizer**](/tidb-cloud/tune-performance.md#key-visualizer)タブでホットスポットの問題を確認します。
-    - [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページで TiDB クラスターの容量が不足していないかどうかを監視します。
+    - [**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページで TiDB クラスターのキャパシティが不足していないかどうかを監視します。
     - TiFlash機能を使用して分析処理を最適化します。[HTAPクラスタを使用する](/tiflash/tiflash-overview.md)を参照してください。
 
 ## ステップ7. その他の機能を調べる {#step-7-explore-more-features}
@@ -210,7 +210,7 @@ TiDB Cloud は、自動バックアップと手動バックアップの 2種類�
 
 スケーリングに関する考慮事項は次のとおりです。
 
-- ピーク時間中またはデータのインポート中に、ダッシュボードの容量メトリックが上限に達したことが確認された場合 ( [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照)、クラスターをスケールアウトする必要がある可能性があります。
+- ピーク時間中またはデータのインポート中に、ダッシュボードのキャパシティメトリックが上限に達したことが確認された場合 ( [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md)を参照)、クラスターをスケールアウトする必要がある可能性があります。
 - リソースの使用量が持続的に低い場合（たとえば、CPU 使用率が 10% ～ 20% のみ）は、クラスターをスケールインしてリソースを節約できます。
 
 コンソール上でクラスターをスケールアウトできます。クラスターをスケールインする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。スケーリングの詳細については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)をご覧ください。サポートチームに連絡して、正確な進捗状況を追跡することができます。スケーリング操作はデータの再バランス調整によってパフォーマンスに影響を与える可能性があるため、テストを開始する前に完了するまでお待ちください。
