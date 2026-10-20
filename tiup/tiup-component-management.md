@@ -54,7 +54,7 @@ tiup list tikv
 You can use the `tiup install` command to install components. This usage of this command is as follows:
 
 - `tiup install <component>`: installs the latest stable version of a specified component.
-- `tiup install <component>:[version]`: installs the specified version of a specified component.
+- `tiup install <component>[:version]`: installs the specified version of a specified component.
 
 Example 1: Use TiUP to install the latest stable version of TiDB.
 
