@@ -18,7 +18,7 @@ TiDB Cloudのリソースは、管理可能なデプロイ可能な単位です�
 
 <CustomContent plan="byoc">
 
-{{{ .byoc }}} では、リソースプールは、BYOCインスタンスに基盤となる物理リソース、ネットワーク、および容量を提供する、組織レベルのBYOCリソースです。リソースプールは **BYOC Management** > **Resource Pools** から管理され、プロジェクトには関連付けられません。詳細については、[Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md) を参照してください。
+{{{ .byoc }}} では、リソースプールは、BYOCインスタンスに基盤となる物理リソース、ネットワーク、およびキャパシティを提供する、組織レベルのBYOCリソースです。リソースプールは **BYOC Management** > **Resource Pools** から管理され、プロジェクトには関連付けられません。詳細については、[Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md) を参照してください。
 
 </CustomContent>
 

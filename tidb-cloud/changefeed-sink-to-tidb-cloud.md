@@ -98,7 +98,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 8. **Next**をクリックして、変更フィードの仕様を設定してください。
 
-    - **Changefeed Specification**領域で、変更フィードで使用するレプリケーション容量ユニット（RCU）の数を指定します。
+    - **Changefeed Specification**領域で、変更フィードで使用するレプリケーションキャパシティユニット（RCU）の数を指定します。
     - **Changefeed Name**欄に、変更フィードの名前を指定します。
 
 9. **Next**をクリックして、変更フィードの設定を確認してください。

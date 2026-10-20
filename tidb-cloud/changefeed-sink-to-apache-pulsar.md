@@ -193,7 +193,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 
 1. **Specification and Name**セクションで：
 
-    - チェンジフィードの[複製容量単位（RCU）](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)の数を指定します。
+    - チェンジフィードの[レプリケーションキャパシティユニット（RCU）](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md)の数を指定します。
     - 変更フィードの名前を入力してください。
 
 2. 変更フィードの設定をすべて確認してください。

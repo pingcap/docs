@@ -165,7 +165,7 @@ TiDBは、ISO/IEC SQL標準に準拠することを目的としたSQL文を使�
 | SQL文                                                                                  | 説明                                                                                                 |
 | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | [`ALTER RESOURCE GROUP`](/sql-statements/sql-statement-alter-resource-group.md)             | リソースグループを変更します。                                                                                    |
-| [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)                 | 現在のクラスターの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)容量を推定して出力します。 |
+| [`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)                 | 現在のクラスターの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)キャパシティを推定して出力します。 |
 | [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)           | 新しいリソースグループを作成します。                                                                                 |
 | [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)               | リソースグループを削除します。                                                                                    |
 | [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)                               | 暴走クエリの監視リストを管理します。                                                                                 |

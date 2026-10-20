@@ -88,7 +88,7 @@ TiDB Cloud Premium は、次の種類のイベントを記録します。
 | DeleteExport |  エクスポートを削除する |  
 | RestoreInstance |  インスタンスに復元する |  
 | UpdatePublicEndpoint |  パブリックエンドポイントを更新する |  
-| UpdateClusterCapacity |  インスタンス容量を更新する |  
+| UpdateClusterCapacity |  インスタンスキャパシティを更新する |  
 | CreatePrivateLink | PrivateLink Endpoint を作成する  |
 
 </CustomContent>

@@ -10,7 +10,7 @@ aliases: ['/ja/tidbcloud/tidb-cloud-billing-tcu']
 
 ## RCUコスト {#rcu-cost}
 
-TiDB Cloud Dedicatedは、[チェンジフィード](/tidb-cloud/changefeed-overview.md)の容量をTiCDCレプリケーション容量ユニット（RCU）で測定します。クラスターに[チェンジフィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)際に、適切な仕様を選択できます。RCUが大きいほど、レプリケーションパフォーマンスが向上します。これらのTiCDC変更フィードRCUに対して料金が発生します。
+TiDB Cloud Dedicatedは、[チェンジフィード](/tidb-cloud/changefeed-overview.md)のキャパシティをTiCDCレプリケーションキャパシティユニット（RCU）で測定します。クラスターに[チェンジフィードを作成する](/tidb-cloud/changefeed-overview.md#create-a-changefeed)際に、適切な仕様を選択できます。RCUが大きいほど、レプリケーションパフォーマンスが向上します。これらのTiCDC変更フィードRCUに対して料金が発生します。
 
 ### TiCDC RCUの数 {#number-of-ticdc-rcus}
 
