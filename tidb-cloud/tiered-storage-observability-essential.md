@@ -1,6 +1,6 @@
 # Tiered Storage Observability on TiDB Cloud Essential
 
-> This note describes how to monitor tiered storage on a TiDB Cloud Essential instance for which tiered storage has been enabled through a special allowlist request. For the capability differences between Essential and Premium, see [Tiered Storage on TiDB Cloud Essential — Capability Notes](/tidb-cloud/tiered-storage-essential-capability-notes.md).
+> This note describes how to monitor tiered storage on a TiDB Cloud Essential instance for which tiered storage has been enabled through a special allowlist request. 
 
 > **Note:**
 >
