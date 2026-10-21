@@ -9,7 +9,7 @@ Plan Replayer helps you package the information required to investigate a SQL ex
 
 When troubleshooting SQL performance issues on a TiDB Cloud Essential or Premium instance, you can use `PLAN REPLAYER DUMP` to generate a Plan Replayer file for a specific SQL statement and download the file from the returned URL. The Plan Replayer file is useful for investigating issues such as unexpected execution plans, plan regressions, inaccurate statistics, or problematic plans that occur only occasionally.
 
-If you need assistance from TiDB Cloud Support to troubleshoot the SQL performance issue, you can temporarily authorize TiDB Cloud Support to access Plan Replayer files for a limited period.
+If you need assistance from TiDB Cloud Support to troubleshoot the SQL performance issue, you can temporarily authorize TiDB Cloud Support to access Plan Replayer files for a limited period. For TiDB Cloud Essential, this authorization is available only for instances running TiDB version `CLOUD.202603.x` or later. For Essential instances running TiDB v8.5.x or earlier, download the file from the returned URL and send it to TiDB Cloud Support.
 
 > **Note:**
 >
@@ -59,6 +59,10 @@ EXPLAIN SELECT * FROM orders WHERE customer_id = 1001;
 You can also provide a Unix timestamp if required for your investigation. If no historical statistics are available before the specified time, TiDB uses the latest available statistics and records the relevant error information in the package.
 
 ## Manage access from TiDB Cloud Support
+
+> **Note:**
+>
+> For TiDB Cloud Essential, this feature is available only for instances running TiDB version `CLOUD.202603.x` or later. If your Essential instance runs TiDB v8.5.x or earlier, you need to download the Plan Replayer file yourself from the URL returned by `PLAN REPLAYER DUMP` and send the file to TiDB Cloud Support.
 
 Support access is controlled at the instance level. The authorization allows TiDB Cloud Support engineers to access generated Plan Replayer files for SQL performance troubleshooting during a limited period.
 
