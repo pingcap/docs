@@ -68,7 +68,7 @@ To create a resource pool, take the following steps:
     The resource pool CIDR must meet the following requirements:
 
     - It must be within one of the supported private network address ranges: `10.0.0.0/8`, `172.16.0.0/12`, or `192.168.0.0/16`.
-    - The prefix length must be between `/16` and `/22`.
+    - The prefix length must be between `/16` and `/20`.
     - It must not overlap with the O11Y CIDR or any existing resource pool CIDR in the same region.
     - It must not overlap with your application VPC CIDR or any other customer-managed network that needs to connect to this resource pool.
 
