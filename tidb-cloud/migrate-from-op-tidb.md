@@ -288,7 +288,7 @@ To replicate incremental data, do the following:
     3. Depending on your TiDB Cloud plan, do one of the following to allow TiCDC to connect to TiDB Cloud.
 
         - For {{{ .starter }}} or Essential, click **Add rule** in the **Authorized Networks** section. In the displayed dialog, add a firewall rule with the public IP address of the TiCDC component, and then click **Save**. For more information, see [Configure {{{ .starter }}} or Essential Firewall Rules for Public Endpoints](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule).
-        - For TiDB Cloud Dedicated, click **Add IP Address**. In the displayed dialog, select **Use IP addresses**, click **+**, enter the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+        - For TiDB Cloud Dedicated, enable **Public Endpoint** if it is disabled, and then click **Add IP Address**. In the displayed dialog, select **Use IP addresses**, click **+**, enter the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 
 3. Get the connection information of the downstream TiDB Cloud resource.
 

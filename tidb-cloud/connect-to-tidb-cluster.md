@@ -22,7 +22,7 @@ After your TiDB Cloud Dedicated cluster is created on TiDB Cloud, you can connec
 
     - [Public connection](/tidb-cloud/connect-via-standard-connection.md)
 
-        The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters. For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
+        The public connection exposes a public endpoint with traffic filters, so you can connect to your TiDB cluster via a SQL client from your laptop. For newly created TiDB Cloud Dedicated clusters, the public endpoint is disabled by default, and you can enable it in **Settings** > **Networking** after the cluster is created. You can connect to your TiDB clusters using TLS, which ensures the security of data transmission from your applications to TiDB clusters. For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md).
 
     - Private endpoint (recommended)
 

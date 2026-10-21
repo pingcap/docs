@@ -77,7 +77,7 @@ TiDB Cloud Dedicated does not provide the export feature in the TiDB Cloud conso
 
 ### 1. Prepare the network and SQL user
 
-1. Make sure your {{{ .dedicated }}} cluster is reachable from the machine that runs Dumpling. This guide uses a public connection. If you use a public connection, add the machine's IP address to the IP access list of the cluster. For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md) and [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+1. Make sure your {{{ .dedicated }}} cluster is reachable from the machine that runs Dumpling. This guide uses a public connection. If you use a public connection, enable the public endpoint if it is disabled, and add the machine's IP address to the IP access list of the cluster. For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md) and [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
 2. In the [TiDB Cloud console](https://tidbcloud.com/), click **Connect** on the overview page of your cluster, and record the host and port of the connection. You need them in the Dumpling command.
 3. Prepare a SQL user that has the privileges required by Dumpling. This guide uses `root` as an example. To use a dedicated user instead, grant it the [privileges required by Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#required-privileges).
 
