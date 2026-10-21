@@ -412,10 +412,10 @@ After confirming that the old metrics have expired, you can perform the followin
         use_vm_as_datasource: true
     ```
 
-3. Reload the configuration to apply the changes:
+3. Reload the configuration to apply the changes to Prometheus and Grafana:
 
     ```bash
-    tiup cluster reload ${cluster-name} -R prometheus
+    tiup cluster reload ${cluster-name} -R prometheus,grafana
     ```
 
 #### Remove expired data directories
