@@ -257,7 +257,7 @@ TiDBは、実行ステータスと失敗ステータスを含む、TiDBクラス
 
 - TiDB
 
-    - 投影結果が空の場合に、射影除去の実行結果が誤っている可能性がある問題を修正しました [#23887](https://github.com/pingcap/tidb/issues/23887)
+    - 射影結果が空の場合に、射影除去の実行結果が誤っている可能性がある問題を修正しました [#23887](https://github.com/pingcap/tidb/issues/23887)
     - 列に`NULL`値が含まれている場合に、クエリ結果が間違っている問題を修正しました [#23891](https://github.com/pingcap/tidb/issues/23891)
     - スキャンに仮想列が含まれている場合、MPPプランの生成を禁止する [#23886](https://github.com/pingcap/tidb/issues/23886)
     - プランキャッシュにおける`PointGet`と`TableDual`の誤った再利用を修正[#23187](https://github.com/pingcap/tidb/issues/23187) [#23144](https://github.com/pingcap/tidb/issues/23144) [#23304](https://github.com/pingcap/tidb/issues/23304) [#23290](https://github.com/pingcap/tidb/issues/23290)

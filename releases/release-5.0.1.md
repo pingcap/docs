@@ -38,7 +38,7 @@ TiDB バージョン: 5.0.1
 
 - TiDB
 
-    - 投影結果が空の場合に射影除去の実行結果が間違っている可能性がある問題を修正[#24093](https://github.com/pingcap/tidb/pull/24093)
+    - 射影結果が空の場合に射影除去の実行結果が間違っている可能性がある問題を修正[#24093](https://github.com/pingcap/tidb/pull/24093)
     - 列に`NULL`値が含まれている場合に間違ったクエリ結果が表示される問題を修正しました[#24063](https://github.com/pingcap/tidb/pull/24063)
     - スキャンに仮想列が含まれている場合、MPP プランの生成を禁止します。 [#24058](https://github.com/pingcap/tidb/pull/24058)
     - プランキャッシュの`PointGet`と`TableDual`の誤った再利用を修正 [#24043](https://github.com/pingcap/tidb/pull/24043)

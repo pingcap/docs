@@ -38,7 +38,7 @@ TiUPバージョン: 0.0.3
 
     - 内部レコードのジョブクエリが正しくないため、 `PREPARE`文を使用して DDL ジョブを実行すると、上流と下流間のレプリケーションが失敗する可能性がある問題を修正しました。 [#15435](https://github.com/pingcap/tidb/pull/15435)
     - `Read Committed`分離レベルでサブクエリ結果が不正確になる問題を修正 [#15471](https://github.com/pingcap/tidb/pull/15471)
-    - インライン投影の最適化によって誤った結果が発生する問題を修正[#15411](https://github.com/pingcap/tidb/pull/15411)
+    - インライン射影の最適化によって誤った結果が発生する問題を修正[#15411](https://github.com/pingcap/tidb/pull/15411)
     - SQLヒント`INL_MERGE_JOIN`が一部のケースで誤って実行される問題を修正しました[#15515](https://github.com/pingcap/tidb/pull/15515)
     - `AutoRandom`属性の列に負の数が明示的に書き込まれた場合に、それらの列がリベースされる問題を修正しました[#15397](https://github.com/pingcap/tidb/pull/15397)
 
@@ -83,7 +83,7 @@ TiUPバージョン: 0.0.3
     - `INSERT ... VALUES`を使用して`BIT(N)`データ型を指定するときに発生する可能性のある誤った動作の問題を修正しました [#15350](https://github.com/pingcap/tidb/pull/15350)
     - `ErrorCount`の値が正しく合計されないため、DDL ジョブの内部再試行で期待どおりの結果が完全に得られない問題を修正しました[#15373](https://github.com/pingcap/tidb/pull/15373)
     - TiDBがTiFlash に接続したときにガベージコレクションが異常動作する可能性がある問題を修正しました [#15505](https://github.com/pingcap/tidb/pull/15505)
-    - インライン投影の最適化によって誤った結果が発生する問題を修正[#15411](https://github.com/pingcap/tidb/pull/15411)
+    - インライン射影の最適化によって誤った結果が発生する問題を修正[#15411](https://github.com/pingcap/tidb/pull/15411)
     - SQLヒント`INL_MERGE_JOIN`が一部のケースで誤って実行される問題を修正しました[#15515](https://github.com/pingcap/tidb/pull/15515)
     - `AutoRandom`属性の列に負の数が明示的に書き込まれた場合に、それらの列がリベースされる問題を修正しました[#15397](https://github.com/pingcap/tidb/pull/15397)
 

@@ -360,7 +360,7 @@ TiDBバージョン: 6.3.0-DMR
     - 悲観的DML 操作が非一意インデックスキーをロックする問題を修正 [#36235](https://github.com/pingcap/tidb/issues/36235) @[ekexium](https://github.com/ekexium)
     - `auto-commit`の変更がトランザクションコミットの動作に影響を与える問題を修正 [#36581](https://github.com/pingcap/tidb/issues/36581) @[cfzjywxk](https://github.com/cfzjywxk)
     - DML実行エンジンを使用した`EXPLAIN ANALYZE`文がトランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました [#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
-    - UPDATE 文が場合によっては誤って投影を削除し、 `Can't find column` エラーが発生する問題を修正しました。 [#37568](https://github.com/pingcap/tidb/issues/37568) @[AilinKid](https://github.com/AilinKid)
+    - UPDATE 文が場合によっては誤って射影を削除し、 `Can't find column` エラーが発生する問題を修正しました。 [#37568](https://github.com/pingcap/tidb/issues/37568) @[AilinKid](https://github.com/AilinKid)
     - 結合順序の並べ替え操作が誤って外部結合条件をプッシュダウンする問題を修正 [#37238](https://github.com/pingcap/tidb/issues/37238) @[AilinKid](https://github.com/AilinKid)
     - 一部のパターンで `IN` と `NOT IN` サブクエリが `Can't find column` エラーを報告する問題を修正しました。 [#37032](https://github.com/pingcap/tidb/issues/37032) @[AilinKid](https://github.com/AilinKid)
     - `UPDATE`ステートメントに共通テーブル式 (CTE) が含まれている場合に`Can't find column`が報告される問題を修正 [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)

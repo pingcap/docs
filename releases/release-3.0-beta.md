@@ -20,7 +20,7 @@ summary: 2019年1月19日にリリースされたTiDB 3.0ベータ版は、安�
     - 新しいCascadesオプティマイザをサポートするために、変数`tidb_enable_cascades_planner`を追加します。現在、Cascadesオプティマイザはまだ完全に実装されておらず、デフォルトではオフになっています[#7879](https://github.com/pingcap/tidb/pull/7879)
     - トランザクションのインデックス結合の使用をサポート [#7877](https://github.com/pingcap/tidb/pull/7877)
     - 外部結合の定数伝播を最適化し、結合結果の外部テーブルに関連するフィルタリング条件を外部結合を介して外部テーブルにプッシュダウンできるようにすることで、外部結合の無駄な計算を減らし、実行パフォーマンスを向上させます[#7794](https://github.com/pingcap/tidb/pull/7794)
-    - 投影除去の最適化ルールを集計除去の後の位置に調整し、冗長な`Project`演算子を回避する [#7909](https://github.com/pingcap/tidb/pull/7909)
+    - 射影除去の最適化ルールを集計除去の後の位置に調整し、冗長な`Project`演算子を回避する [#7909](https://github.com/pingcap/tidb/pull/7909)
     - `IFNULL`関数を最適化し、入力パラメータに NULL 以外の属性がある場合はこの関数を削除します[#7924](https://github.com/pingcap/tidb/pull/7924)
     - `_tidb_rowid`構築クエリの範囲をサポートし、テーブル全体のスキャンを回避してクラスタのストレスを軽減します[#8047](https://github.com/pingcap/tidb/pull/8047)
     - `IN`サブクエリを最適化して集計後に内部結合を実行し、この最適化ルールを有効にしてデフォルトで開くかどうかを制御する`tidb_opt_insubq_to_join_and_agg`変数を追加します[#7531](https://github.com/pingcap/tidb/pull/7531)
