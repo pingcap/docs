@@ -145,7 +145,7 @@ TiDB Cloud 高度兼容 MySQL 8.0。如果你的数据源兼容 MySQL，或可�
 - 集群常用统计/指标（信息）可在集群概览页查看，包括 Total QPS、Latency、Connections、TiFlash Request QPS、TiFlash Request Duration、TiFlash Storage Size、TiKV Storage Size、TiDB CPU、TiKV CPU、TiKV IO Read、TiKV IO Write。参见 [监控 TiDB 集群](/tidb-cloud/monitor-tidb-cluster.md)。
 - 进入集群的 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) 页面，查看 **SQL Statement** 标签页，可以观察 SQL 执行并轻松定位性能问题，无需查询系统表。参见 [语句分析](/tidb-cloud/tune-performance.md#statement-analysis)。
 - 进入集群的 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page) 页面，查看 **Key Visualizer** 标签页，可以查看 TiDB 数据访问模式和数据热点。参见 [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)。
-- 你也可以将这些统计/指标（信息）集成到自己的 Datadog 和 Prometheus。参见 [第三方监控集成](/tidb-cloud/third-party-monitoring-integrations.md)。
+- 你也可以将这些统计/指标（信息）发送到 Datadog、Prometheus 或 New Relic。参见 [第三方监控集成](/tidb-cloud/third-party-monitoring-integrations.md)。
 
 现在可以评估测试结果了。
 

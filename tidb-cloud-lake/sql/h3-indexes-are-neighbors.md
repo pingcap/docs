@@ -5,7 +5,7 @@ summary: 返回所提供的 H3 索引是否为邻居。
 
 # H3_INDEXES_ARE_NEIGHBORS
 
-返回所提供的 [H3](https://eng.uber.com/h3/) 索引是否为邻居。
+返回所提供的 [H3](https://h3geo.org/) 索引是否为邻居。
 
 ## 语法 {#syntax}
 

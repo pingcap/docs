@@ -119,7 +119,7 @@ SHOW GRANTS FOR ROLE writer;
 | ALL               | 授予指定对象类型的所有权限。                                                                                      |
 | ALTER             | 添加或删除表列。修改 cluster key。对表重新执行 cluster。                                                          |
 | CREATEROLE        | 创建角色。                                                                                                        |
-| CREAT DATABASE    | 创建 DATABASE。                                                                                                   |
+| CREATE DATABASE   | 创建 DATABASE。                                                                                                   |
 | CREATE WAREHOUSE  | 创建 WAREHOUSE。                                                                                                  |
 | CREATE CONNECTION | 创建 CONNECTION。                                                                                                 |
 | DROPUSER          | 删除用户。                                                                                                        |
@@ -144,7 +144,7 @@ SHOW GRANTS FOR ROLE writer;
 | SELECT    | 从表中选择行。SHOW CREATE 表。DESCRIBE 表。                                                                      |
 | UPDATE    | 修改表中的行。                                                                                                   |
 | SUPER     | 优化或分析表。                                                                                                   |
-| OWNERSHIP | 授予对数据库的完全控制权。任一时刻，特定对象上的此权限只能由单个角色持有。                                       |
+| OWNERSHIP | 授予对表的完全控制权。任一时刻，特定对象上的此权限只能由单个角色持有。                                       |
 
 ### 视图权限 {#view-privileges}
 
@@ -196,7 +196,7 @@ SHOW GRANTS FOR ROLE writer;
 |:----------|:------------------------------------------------------------------------------------------------------------|
 | USAGE     | 可以使用 UDF。例如，copy into 一个 stage、presign upload                                                   |
 | ALL       | 为指定对象类型授予 READ、WRITE 权限。                                                                        |
-| OWNERSHIP | 授予对 UDF 的完全控制权。在任意时刻，特定对象上的此权限只能由单个角色持有。                                  |
+| OWNERSHIP | 授予对 UDF 的完全控制权。任一时刻，特定对象上的此权限只能由单个角色持有。                                  |
 
 > 注意：
 >
@@ -220,7 +220,7 @@ SHOW GRANTS FOR ROLE writer;
 |:------------------|:-------------------------------------------------------------------------------------------------------------------|
 | Access Connection | 可以访问 Connection。                                                                                              |
 | ALL               | 为指定对象类型授予访问 Connection 权限。                                                                        |
-| OWNERSHIP         | 授予对 Connection 的完全控制权。在任意时刻，特定对象上的此权限只能由单个角色持有。                                |
+| OWNERSHIP         | 授予对 Connection 的完全控制权。任一时刻，特定对象上的此权限只能由单个角色持有。                                |
 
 ### Sequence 权限 {#sequence-privileges}
 
@@ -228,7 +228,7 @@ SHOW GRANTS FOR ROLE writer;
 |:----------------|:-----------------------------------------------------------------------------------------------------------------|
 | Access Sequence | 可以访问 Sequence。（例如：Drop、Desc）                                                                          |
 | ALL             | 为指定对象类型授予访问 Sequence 权限。                                                                        |
-| OWNERSHIP       | 授予对 Sequence 的完全控制权。在任意时刻，特定对象上的此权限只能由单个角色持有。                                 |
+| OWNERSHIP       | 授予对 Sequence 的完全控制权。任一时刻，特定对象上的此权限只能由单个角色持有。                                 |
 
 ### Procedure 权限 {#procedure-privileges}
 
@@ -236,7 +236,7 @@ SHOW GRANTS FOR ROLE writer;
 |:-----------------|:------------------------------------------------------------------------------------------------------------------|
 | Access Procedure | 可以访问 Procedure。（例如：Drop、Call、Desc）                                                                    |
 | ALL              | 为指定对象类型授予访问 Procedure 权限。                                                                       |
-| OWNERSHIP        | 授予对 Procedure 的完全控制权。在任意时刻，特定对象上的此权限只能由单个角色持有。                                |
+| OWNERSHIP        | 授予对 Procedure 的完全控制权。任一时刻，特定对象上的此权限只能由单个角色持有。                                |
 
 ### Masking Policy 权限 {#masking-policy-privileges}
 

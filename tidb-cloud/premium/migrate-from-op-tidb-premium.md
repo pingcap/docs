@@ -196,7 +196,7 @@ SELECT @@global.tidb_gc_enable;
     - `{schema}.{table}-schema.sql`：用于创建表的 SQL 文件
     - `{schema}.{table}.{0001}.{sql|csv}`：数据文件
     - `*-schema-view.sql`, `*-schema-trigger.sql`, `*-schema-post.sql`：其他导出的 SQL 文件
-### 将数据从 Amazon S3 迁移到 {{{ .premium }}} {#migrate-data-from-amazon-s3-to-premium}
+### 将数据从 Amazon S3 迁移到 {{{ .premium }}} 或 {{{ .byoc }}} {#migrate-data-from-amazon-s3-to-premium-or-byoc}
 
 将数据从 TiDB Self-Managed 集群导出到 Amazon S3 后，你需要将这些数据迁移到 {{{ .premium }}} 或 {{{ .byoc }}}。
 
@@ -264,7 +264,7 @@ SELECT @@global.tidb_gc_enable;
 
 2. 创建一个信任 {{{ .premium }}} 或 {{{ .byoc }}} 的 IAM role，方法是提供你之前记下的 **Account ID** 和 **External ID**。然后，将上一步创建的策略附加到该 role。
 
-3. 复制生成的 Role ARN，并将其填入 {{{ .premium }}} 导入向导中。
+3. 复制生成的 Role ARN，并将其填入 {{{ .premium }}} 或 {{{ .byoc }}} 导入向导中。
 
 4. 按照[从 Amazon S3 导入数据到 {{{ .premium }}} 或 {{{ .byoc }}}](/tidb-cloud/premium/import-from-s3-premium.md)中的说明，将数据导入到 {{{ .premium }}} 或 {{{ .byoc }}}。
 
@@ -276,12 +276,12 @@ SELECT @@global.tidb_gc_enable;
 
     ![Metadata 中的开始时间](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. 授权 TiCDC 连接到 {{{ .premium }}}。
+2. 授权 TiCDC 连接到 {{{ .premium }}} 或 {{{ .byoc }}}。
 
     1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/tidbs)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其实例概览页面。
     2. 在左侧导航栏中，点击 **Settings** > **Networking**。
     3. 在 **Networking** 页面中，点击 **Add IP Address**。
-    4. 在弹出的对话框中，选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段中填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。现在 TiCDC 就可以访问 {{{ .premium }}}。更多信息，请参见[配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
+    4. 在弹出的对话框中，选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段中填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。现在 TiCDC 就可以访问 {{{ .premium }}} 或 {{{ .byoc }}}。更多信息，请参见[配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
 
 3. 获取下游 {{{ .premium }}} 或 {{{ .byoc }}} 实例的连接信息。
 

@@ -15,7 +15,7 @@ SQL 变量允许你在会话中存储和管理临时数据，使脚本更具动�
 | [UNSET VARIABLE](/tidb-cloud-lake/sql/unset-variable.md) | 删除用户定义的变量。 |
 | [SHOW VARIABLES](/tidb-cloud-lake/sql/show-variables.md) | 显示系统变量和用户变量的当前值。 |
 
-SHOW VARIABLES 命令还有一个对应的表函数 [`SHOW_VARIABLES`](/tidb-cloud-lake/sql/show-variables.md)，它以表格形式返回相同的信息，以便进行更丰富的过滤和查询。
+SHOW VARIABLES 命令还有一个对应的表函数 [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables-sql.md)，它以表格形式返回相同的信息，以便进行更丰富的过滤和查询。
 
 ## 使用变量进行查询 {#querying-with-variables}
 

@@ -1,6 +1,6 @@
 ---
 title: FUSE_STATISTIC
-summary: 注意：此函数已弃用。请改用 SHOW STATISTICS 查看表统计信息。
+summary: 此函数已弃用。请改用 SHOW STATISTICS 查看表统计信息。
 ---
 
 # FUSE_STATISTIC

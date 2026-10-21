@@ -1,11 +1,11 @@
 ---
 title: JSON & Search
-summary: 在场景 CityDrive 中，每个提取出的帧都会附带一个元信息 JSON 负载。这些 JSON 数据由后台工具从视频关键帧中提取，包含场景识别、目标检测等丰富的非结构化信息。我们需要在 {{{ .lake }}} 中使用 Elasticsearch 风格的语法过滤这些 JSON，而无需将其复制到外部系统。JSON 无需从 {{{ .lake }}} 中导出。
+summary: 在场景 CityDrive 中，每个提取出的帧都会附带一个元信息 JSON 负载。这些 JSON 数据由后台工具从视频关键帧中提取，包含场景识别、目标检测等丰富的非结构化信息。我们需要在 {{{ .lake }}} 中使用 Elasticsearch 风格的语法过滤这些 JSON，而无需将其复制到外部系统。
 ---
 
 # JSON & Search
 
-> **场景：** CityDrive 为每个提取出的帧附加一个元信息 JSON 负载。这些 JSON 数据由后台工具从视频关键帧中提取，包含场景识别、目标检测等丰富的非结构化信息。我们需要在 {{{ .lake }}} 中使用 Elasticsearch 风格的语法过滤这些 JSON，而无需将其复制到外部系统。JSON 无需从 {{{ .lake }}} 中导出。
+**场景：** CityDrive 为每个提取出的帧附加一个元信息 JSON 负载。这些 JSON 数据由后台工具从视频关键帧中提取，包含场景识别、目标检测等丰富的非结构化信息。我们需要在 {{{ .lake }}} 中使用 Elasticsearch 风格的语法过滤这些 JSON，而无需将其复制到外部系统。
 
 {{{ .lake }}} 将这些异构信号保存在同一个仓库中。倒排索引为 VARIANT 列提供 Elasticsearch 风格的搜索，位图表汇总标签覆盖情况，向量索引支持相似性查找，原生 GEOMETRY 列支持空间过滤。
 

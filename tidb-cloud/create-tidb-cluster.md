@@ -69,6 +69,10 @@ summary: 了解如何创建你的 TiDB Cloud Dedicated 集群。
     >
     > 集群创建时间因区域而异，可能会超过 30 分钟。如果创建过程明显超出预期，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
 
+> **注意：**
+>
+> 对于新创建的 TiDB Cloud Dedicated 集群，默认禁用公共端点。如果你需要通过公共互联网连接到集群，请在集群创建完成后启用公共端点。更多信息，请参见[通过公共连接接入 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md)。
+
 ## 第 2 步：设置 root 密码 {#step-2-set-the-root-password}
 
 TiDB Cloud Dedicated 集群创建完成后，按以下步骤设置 root 密码：

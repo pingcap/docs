@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_FIFTEEN_MINUTES
-summary: 将带时间的日期（timestamp/datetime）向下舍入到十五分钟间隔的起始时间。## 语法。
+summary: 将带时间的日期（timestamp/datetime）向下舍入到十五分钟间隔的起始时间。
 ---
 
 # TO_START_OF_FIFTEEN_MINUTES

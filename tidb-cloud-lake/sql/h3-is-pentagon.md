@@ -5,7 +5,7 @@ summary: 检查给定的 H3 索引是否表示一个五边形单元。
 
 # H3_IS_PENTAGON
 
-检查给定的 [H3](https://eng.uber.com/h3/) 索引是否表示一个五边形单元。
+检查给定的 [H3](https://h3geo.org/) 索引是否表示一个五边形单元。
 
 ## 语法 {#syntax}
 

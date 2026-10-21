@@ -22,7 +22,7 @@ summary: 了解如何通过 MySQL CLI 向 TiDB Cloud Dedicated 导入数据。
 
 2. 在左侧导航栏，点击 **Settings** > **Networking**。
 
-3. 在 **Networking** 页面，点击 **IP Access List** 区域的 **Add IP Address**。
+3. 在 **Networking** 页面，如果你的集群有多个[节点组](/tidb-cloud/tidb-node-group-overview.md)，请在右上角选择目标 TiDB 节点组；如果 **Public Endpoint** 已禁用，请将其启用，然后点击 **Add IP Address**。
 
 4. 在弹窗中，选择 **Allow access from anywhere**，然后点击 **Confirm**。
 

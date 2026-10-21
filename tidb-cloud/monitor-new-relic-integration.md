@@ -42,7 +42,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 1. 在 [TiDB Cloud 控制台](https://tidbcloud.com/)中，进入 [**My TiDB**](https://tidbcloud.com/tidbs) 页面，然后点击目标 TiDB Cloud Dedicated 集群名称，进入其概览页面。
 2. 在左侧导航栏，点击 **Settings** > **Integrations**。
 3. 在 **Integrations** 页面，点击 **Integration to New Relic**。
-4. 输入你的 New Relic API key，并选择 New Relic 的站点。
+4. 输入你的 New Relic API key，并选择托管你的 New Relic 账户的区域。
 5. 点击 **Test Integration**。
 
     - 如果测试成功，会显示 **Confirm** 按钮。
@@ -57,7 +57,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
 2. 在项目视图中，找到目标项目，然后点击该项目的 <MDSvgIcon name="icon-project-settings" />。
 3. 在左侧导航栏，点击 **Project Settings** 下的 **Integrations**。
 4. 在 **Integrations** 页面，点击 **Integration to New Relic (BETA)**。
-5. 输入你的 New Relic API key，并选择 New Relic 的站点。
+5. 输入你的 New Relic API key，并选择托管你的 New Relic 账户的区域。
 6. 点击 **Test Integration**。
 
     - 如果测试成功，会显示 **Confirm** 按钮。
@@ -91,7 +91,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
         }
         ```
 
-    3. 在 JSON 文件中所有 `"accountIds": []` 字段中添加你的 New Relic 账户 ID。
+    3. 在 JSON 文件中所有 `"accountIds": []` 字段中添加你的 [New Relic 账户 ID](https://docs.newrelic.com/docs/accounts/accounts-billing/account-structure/account-id/)。
 
         例如：
 
@@ -106,7 +106,7 @@ TiDB Cloud 支持与 New Relic 集成。你可以配置 TiDB Cloud，将你的 T
         > 为避免集成报错，请确保你的账户 ID 已添加到 JSON 文件中所有 `"accountIds"` 字段。
 
 2. 登录 [New Relic](https://one.newrelic.com/)，点击左侧导航栏的 **Dashboards**，然后点击右上角的 **Import dashboard**。
-3. 在弹出的对话框中，将准备好的 JSON 文件内容全部粘贴到文本区域，然后点击 **Import dashboard**。
+3. 在弹出的对话框中，将准备好的 JSON 文件内容粘贴到文本区域，选择权限设置，然后点击 **Save**。
 
 </div>
 <div label="旧版项目级 New Relic 集成（Beta）">

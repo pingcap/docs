@@ -1,6 +1,6 @@
 ---
 title: TIME_SLOT
-summary: 将时间舍入到半小时。## 语法。
+summary: 将时间舍入到半小时。
 ---
 
 # TIME_SLOT

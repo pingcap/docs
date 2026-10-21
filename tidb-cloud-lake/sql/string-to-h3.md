@@ -5,7 +5,7 @@ summary: 将字符串表示形式转换为 H3 (uint64) 表示形式。
 
 # STRING_TO_H3
 
-将字符串表示形式转换为 [H3](https://eng.uber.com/h3/)（uint64）表示形式。
+将字符串表示形式转换为 [H3](https://h3geo.org/)（uint64）表示形式。
 
 ## 语法 {#syntax}
 

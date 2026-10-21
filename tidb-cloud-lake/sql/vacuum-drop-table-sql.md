@@ -5,7 +5,7 @@ summary: 本页介绍 TiDB Cloud Lake 中的 VACUUM DROP TABLE。
 
 # VACUUM DROP TABLE
 
-`VACUUM DROP TABLE` 命令通过永久删除已删除表的数据文件来帮助节省存储空间，从而释放存储空间，并使你能够高效地管理这一过程。它提供了可选参数，用于指定特定数据库、预览结果，以及限制要执行 vacuum 的数据文件数量。要列出某个数据库中已删除的表，请使用 [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-databases.md)。
+`VACUUM DROP TABLE` 命令通过永久删除已删除表的数据文件来帮助节省存储空间，从而释放存储空间，并使你能够高效地管理这一过程。它提供了可选参数，用于指定特定数据库、预览结果，以及限制要执行 vacuum 的数据文件数量。要列出某个数据库中已删除的表，请使用 [SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md)。
 
 另请参阅：[VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table-sql.md)
 
@@ -90,7 +90,6 @@ SET GLOBAL DATA_RETENTION_TIME_IN_DAYS = 2;
 
 | 版本 | 默认保留时间 | 最大保留时间 |
 | ---------------------------------------- | ----------------- | ---------------- |
-| {{{ .lake }}} 社区版和企业版 | 1 天（24 小时） | 90 天 |
 | {{{ .lake }}} (Personal)                | 1 天（24 小时） | 1 天（24 小时） |
 | {{{ .lake }}} (Business)                | 1 天（24 小时） | 90 天 |
 

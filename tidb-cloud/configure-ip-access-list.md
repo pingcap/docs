@@ -22,7 +22,7 @@ summary: 了解如何配置允许访问你的 TiDB Cloud Dedicated 集群的 IP 
     > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
 2. 在左侧导航栏中，点击 **Settings** > **Networking**。
-3. 在 **Networking** 页面上，点击 **Add IP Address**。
+3. 在 **Networking** 页面上，如果你的集群有多个[节点组](/tidb-cloud/tidb-node-group-overview.md)，请先在右上角选择目标 TiDB 节点组；如果 **Public Endpoint** 已禁用，请先启用它，然后点击 **Add IP Address**。
 4. 在 **Add IP Address** 对话框中，添加 IP 地址，并可选择填写描述。对于每个 TiDB Cloud Dedicated 集群，最多可以添加 100 个 IP 地址。
 
     - 要添加自定义 IP 地址，点击 **+** 图标，以 CIDR 表示法输入 IP 地址（例如，`192.168.1.1/32`），并添加描述。

@@ -1,6 +1,6 @@
 ---
 title: system_history.login_history
-summary: 登录成功示例 sql SELECT * FROM system_history.login_history LIMIT 1;.
+summary: 使用 system_history.login_history 审计成功和失败的用户登录尝试，以进行安全监控和合规性审计。
 ---
 
 # system_history.login_history

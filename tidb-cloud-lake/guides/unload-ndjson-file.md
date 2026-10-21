@@ -5,7 +5,7 @@ summary: 了解如何卸载 NDJSON 文件。
 
 # 卸载 NDJSON 文件
 
-## 卸载 TSV 文件 {#unloading-tsv-file}
+## 语法 {#syntax}
 
 语法：
 

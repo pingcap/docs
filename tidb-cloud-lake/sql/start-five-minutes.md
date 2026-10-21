@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_FIVE_MINUTES
-summary: 将带时间的日期（timestamp/datetime）向下舍入到五分钟时间间隔的起始时间。## 语法。
+summary: 将带时间的日期（timestamp/datetime）向下舍入到五分钟时间间隔的起始时间。
 ---
 
 # TO_START_OF_FIVE_MINUTES

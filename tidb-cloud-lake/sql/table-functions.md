@@ -40,7 +40,7 @@ summary: 本页提供 {{{ .lake }}} 中表函数的参考信息。表函数返�
 | [SHOW_GRANTS](/tidb-cloud-lake/sql/show-grants.md) | 显示已授予的权限 | `SELECT * FROM SHOW_GRANTS()` |
 | [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables.md) | 显示系统变量 | `SELECT * FROM SHOW_VARIABLES()` |
 | [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md) | 显示流状态信息 | `SELECT * FROM STREAM_STATUS('mystream')` |
-| [TASK_HISTROY](/tidb-cloud-lake/sql/task-history.md) | 显示任务执行历史 | `SELECT * FROM TASK_HISTROY('mytask')` |
+| [TASK_HISTORY](/tidb-cloud-lake/sql/task-history.md) | 显示任务执行历史 | `SELECT * FROM TASK_HISTORY('mytask')` |
 | [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md) | 返回安全策略与表/视图之间的关联关系 | `SELECT * FROM POLICY_REFERENCES(POLICY_NAME => 'mypolicy')` |
 | [TAG_REFERENCES](/tidb-cloud-lake/sql/tag-references.md) | 返回分配给数据库对象的标签 | `SELECT * FROM TAG_REFERENCES('mydb.mytable', 'TABLE')` |
 | [GET_LINEAGE](/tidb-cloud-lake/sql/get-lineage.md) | 返回上游或下游对象及列血缘关系 | `SELECT * FROM GET_LINEAGE('mydb.mytable', 'TABLE', 'UPSTREAM')` |

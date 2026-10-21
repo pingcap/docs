@@ -26,7 +26,7 @@ summary: "{{{ .lake }}} 中的角色在简化权限管理方面发挥着关键�
 | account-admin | 拥有所有权限，作为所有其他角色的父角色，并支持在租户内无缝切换到任意角色。 |
 | public        | 不继承任何权限，将所有角色视为其父角色，并允许任何角色切换到 public 角色。                    |
 
-要在 {{{ .lake }}} 中将 `account-admin` 角色分配给用户，请在邀请用户时选择该角色。你也可以在用户加入后再将该角色分配给他们。如果你使用的是 {{{ .lake }}} Community Edition 或 Enterprise Edition，请先在部署期间配置一个 `account-admin` 用户，然后根据需要将该角色分配给其他用户。
+要在 {{{ .lake }}} 中将 `account-admin` 角色分配给用户，请在邀请用户时选择该角色。你也可以在用户加入后再将该角色分配给他们。
 
 ## 设置默认角色 {#setting-default-role}
 

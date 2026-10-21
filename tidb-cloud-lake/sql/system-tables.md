@@ -15,7 +15,7 @@ summary: "{{{ .lake }}} 提供了一组系统表，其中包含有关你的 {{{ 
 
 | 表                                                             | 描述                                                                                       |
 |-------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| [system.tables](/tidb-cloud-lake/sql/system-tables.md)                                 | 提供所有表的元信息，包括属性、创建时间、大小等。 |
+| [system.tables](/tidb-cloud-lake/sql/system-tables-sql.md)                                 | 提供所有表的元信息，包括属性、创建时间、大小等。 |
 | [system.tables_with_history](/tidb-cloud-lake/sql/system-tables-with-history.md)       | 提供表的历史元信息，包括已删除的表。                    |
 | [system.databases](/tidb-cloud-lake/sql/system-databases.md)                           | 包含系统中所有数据库的信息。                                           |
 | [system.views](/tidb-cloud-lake/sql/system-views.md)                                   | 包含系统中所有视图的信息。                                               |

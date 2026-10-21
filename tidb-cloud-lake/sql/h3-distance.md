@@ -5,7 +5,7 @@ summary: 返回给定两个 H3 索引之间的网格距离。
 
 # H3_DISTANCE
 
-返回给定两个 [H3](https://eng.uber.com/h3/) 索引之间的网格距离。
+返回给定两个 [H3](https://h3geo.org/) 索引之间的网格距离。
 
 ## 语法 {#syntax}
 

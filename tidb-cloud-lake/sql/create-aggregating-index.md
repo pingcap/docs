@@ -13,7 +13,7 @@ summary: 在 {{{ .lake }}} 中创建一个新的聚合索引。
 CREATE [ OR REPLACE ] AGGREGATING INDEX <index_name> AS SELECT ...
 ```
 
-- 创建聚合索引时，其使用范围仅限于标准的[聚合函数](/tidb-cloud-lake/_index.md)（例如 AVG、SUM、MIN、MAX、COUNT 和 GROUP BY）。请注意，不支持 GROUPING SETS、[窗口函数](/tidb-cloud-lake/_index.md)、[LIMIT](/tidb-cloud-lake/sql/select.md#limit-clause) 和 [ORDER BY](/tidb-cloud-lake/sql/select.md#order-by-clause)，否则会报错：`Currently create aggregating index just support simple query, like: SELECT ... FROM ... WHERE ... GROUP BY ...`。
+- 创建聚合索引时，其使用范围仅限于包含标准[聚合函数](/tidb-cloud-lake/sql/aggregate-functions.md)的查询（例如 AVG、SUM、MIN、MAX 和 COUNT），并且可以选择性地使用 GROUP BY。请注意，不支持 GROUPING SETS、[窗口函数](/tidb-cloud-lake/sql/window-functions-overview.md)、[LIMIT](/tidb-cloud-lake/sql/select.md#limit-clause) 和 [ORDER BY](/tidb-cloud-lake/sql/select.md#order-by-clause)，否则会报错：`Currently create aggregating index just support simple query, like: SELECT ... FROM ... WHERE ... GROUP BY ...`。
 
 - 创建聚合索引时定义的查询过滤作用域，应与实际查询的作用域一致，或覆盖实际查询的作用域。
 

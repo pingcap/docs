@@ -72,7 +72,7 @@ dsn = "lake://root:@localhost:8000/?sslmode=disable"
 client = tidbcloudlake_driver.BlockingLakeClient(dsn)
 conn = client.get_conn()
 query = "INSERT INTO book_db.books from @_databend_load file_format=(type=csv)"
-progress = conn.load_file(query, "book.csv")
+progress = conn.load_file(query, "books.csv")
 conn.close()
 ```
 
@@ -87,7 +87,7 @@ import java.sql.DriverManager;
 import com.tidbcloud.jdbc.LakeConnection;
 
 String url = "jdbc:lake://localhost:8000";
-File file = new File("book.csv");
+File file = new File("books.csv");
 
 try (FileInputStream fileInputStream = new FileInputStream(file);
      Connection connection = DriverManager.getConnection(url, "tidbcloud", "tidbcloud")) {

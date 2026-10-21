@@ -77,7 +77,7 @@ TiDB Cloud Dedicated 不在 TiDB Cloud 控制台中提供导出功能，因此�
 
 ### 1. 准备网络和 SQL 用户 {#1-prepare-the-network-and-sql-user}
 
-1. 确保运行 Dumpling 的机器可以访问你的 {{{ .dedicated }}} 集群。本文使用公网连接。如果你使用公网连接，请将该机器的 IP 地址添加到集群的 IP 访问列表中。更多信息，参见 [通过公共连接接入 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md) 和 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
+1. 确保运行 Dumpling 的机器可以访问你的 {{{ .dedicated }}} 集群。本文使用公网连接。如果你使用公网连接，请先启用公网端点（如果尚未启用），然后将该机器的 IP 地址添加到集群的 IP 访问列表中。更多信息，参见 [通过公共连接接入 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md) 和 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
 2. 在 [TiDB Cloud console](https://tidbcloud.com/) 中，进入集群概览页面并点击 **Connect**，记录连接的 host 和 port。你需要在 Dumpling 命令中使用它们。
 3. 准备一个具有 Dumpling 所需权限的 SQL 用户。本文以 `root` 为例。如果你想改用专用用户，请为其授予 [Dumpling 所需的权限](https://docs.pingcap.com/tidb/stable/dumpling-overview#required-privileges)。
 

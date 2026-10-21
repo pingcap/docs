@@ -5,7 +5,7 @@ summary: 将给定 H3 索引的表示形式转换为字符串表示形式。
 
 # H3_TO_STRING
 
-将给定的 [H3](https://eng.uber.com/h3/) 索引表示形式转换为字符串表示形式。
+将给定的 [H3](https://h3geo.org/) 索引表示形式转换为字符串表示形式。
 
 ## 语法 {#syntax}
 

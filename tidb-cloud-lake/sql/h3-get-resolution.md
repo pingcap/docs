@@ -5,7 +5,7 @@ summary: 返回给定 H3 索引的分辨率。
 
 # H3_GET_RESOLUTION
 
-返回给定 [H3](https://eng.uber.com/h3/) 索引的分辨率。
+返回给定 [H3](https://h3geo.org/) 索引的分辨率。
 
 ## 语法 {#syntax}
 

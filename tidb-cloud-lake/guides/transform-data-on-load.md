@@ -7,7 +7,7 @@ summary: "{{{ .lake }}} 的 `COPY INTO` 命令支持在加载过程中进行数�
 
 {{{ .lake }}} 的 `COPY INTO` 命令支持在加载过程中进行数据转换。通过集成基础转换能力，它可以简化你的 ETL 流水线，并免去使用临时表的需求。
 
-语法请参见 [查询与转换]( /tidb-cloud-lake/guides/query-stage.md)。
+语法请参见 [查询与转换](/tidb-cloud-lake/guides/query-stage.md)。
 
 你可以执行的关键转换包括：
 

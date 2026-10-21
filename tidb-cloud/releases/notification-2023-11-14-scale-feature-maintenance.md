@@ -19,7 +19,7 @@ summary: 了解 2023 年 11 月 14 日 TiDB Cloud Dedicated 扩展功能维护�
 
 ## 影响
 
-在维护窗口期间，[更改 vCPU 和 RAM](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram) 功能将被禁用，你无法为 Dedicated 集群更改 vCPU 和 RAM。不过，你仍然可以在 Modify Cluster 页面更改节点数量或存储。你的 TiDB 集群将保持正常的数据读写操作，确保不会对你的线上业务产生不良影响。
+在维护窗口期间，[更改 vCPU 和 RAM](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram) 功能将被禁用，你无法为 Dedicated 集群更改 vCPU 和 RAM。不过，你仍然可以在 Modify Cluster 页面更改节点数或存储。你的 TiDB 集群将保持正常的数据读写操作，确保不会对你的线上业务产生不良影响。
 
 ### TiDB Cloud 控制台 UI 受影响的功能
 

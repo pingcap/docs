@@ -1,11 +1,11 @@
 ---
 title: Lakehouse ETL
-summary: 场景：CityDrive 的数据工程团队将每一批行车记录仪数据导出为 Parquet（视频、帧事件、元信息 JSON、嵌入向量、GPS 轨迹、红绿灯距离）。这些 Parquet 文件汇总了从原始视频流中提取的所有多模态信号，构成了计算集群的基础。他们希望通过单个 COPY pipeline 来修改 {{{ .lake }}} 中的共享表，以刷新 {{{ .lake }}} 中的共享表。
+summary: 场景：CityDrive 的数据工程团队将每一批行车记录仪数据导出为 Parquet（视频、帧事件、元信息 JSON、嵌入向量、GPS 轨迹、红绿灯距离）。这些 Parquet 文件汇总了从原始视频流中提取的所有多模态信号，构成了计算集群的基础。他们希望通过单个 COPY pipeline 来刷新 {{{ .lake }}} 中的共享表。
 ---
 
 # Lakehouse ETL
 
-> **场景：** CityDrive 的数据工程团队将每一批行车记录仪数据导出为 Parquet（视频、帧事件、元信息 JSON、嵌入向量、GPS 轨迹、红绿灯距离）。这些 Parquet 文件汇总了从原始视频流中提取的所有多模态信号，构成了计算集群的基础。他们希望通过单个 COPY pipeline 来修改 {{{ .lake }}} 中的共享表，以刷新 {{{ .lake }}} 中的共享表。
+**场景：** CityDrive 的数据工程团队将每一批行车记录仪数据导出为 Parquet（视频、帧事件、元信息 JSON、嵌入向量、GPS 轨迹、红绿灯距离）。这些 Parquet 文件汇总了从原始视频流中提取的所有多模态信号，构成了计算集群的基础。他们希望通过单个 COPY pipeline 来刷新 {{{ .lake }}} 中的共享表。
 
 加载流程非常直接：
 
