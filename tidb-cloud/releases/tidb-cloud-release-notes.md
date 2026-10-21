@@ -8,6 +8,37 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## October 20, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential and Premium**
+
+    - TiDB Cloud Essential and Premium support [New Relic](https://newrelic.com/) metrics integration (public preview).
+
+        You can send key performance metrics from your TiDB Cloud Essential or Premium instances to New Relic and monitor them on your existing New Relic dashboards.
+
+        For more information, see the following documentation:
+
+        - [Integrate TiDB Cloud Essential with New Relic (PREVIEW)](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x/?plan=essential)
+        - [Integrate TiDB Cloud Premium with New Relic (PREVIEW)](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x/?plan=premium)
+
+- **TiDB Cloud Dedicated**
+
+    - Newly created TiDB Cloud Dedicated clusters now have public endpoints disabled by default. Existing clusters retain their current public endpoint settings.
+
+        Before connecting to a newly created cluster over the public internet, enable **Public Endpoint** under **Settings > Networking** in the [TiDB Cloud console](https://tidbcloud.com/), and then add your client IP address to the IP access list.
+
+        For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection/).
+
+- **TiDB Cloud BYOC**
+
+    - TiDB Cloud BYOC supports vCPU limit alerts to help you better monitor resource usage and control cloud costs.
+
+        TiDB Cloud BYOC now notifies you when provisioned vCPU usage approaches the configured regional limit or when a scale-up operation is blocked because the limit has been reached.
+
+        These alerts provide clear guidance on available scaling capacity and recommended actions.
+
 ## October 15, 2026
 
 **General changes**
