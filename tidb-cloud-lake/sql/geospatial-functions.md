@@ -88,7 +88,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 
 | 関数 | 説明 | 注記 | 例 |
 |----------|-------------|------|---------|
-| [ST_HILBERT](/tidb-cloud-lake/sql/st-hilbert.md) | geometry または geography を Hilbert curve index にエンコードします |  | `ST_HILBERT(TO_GEOMETRY('POINT(0.5 0.5)'), [0, 0, 1, 1])` → `715827882` |
+| [ST_HILBERT](/tidb-cloud-lake/sql/st-hilbert.md) | geometry または geography を Hilbert 曲線インデックスにエンコードします |  | `ST_HILBERT(TO_GEOMETRY('POINT(0.5 0.5)'), [0, 0, 1, 1])` → `715827882` |
 | [ST_SETSRID](/tidb-cloud-lake/sql/st-setsrid.md) | geometry に SRID を割り当てます | GEOMETRY のみ | `ST_SETSRID(ST_MAKEGEOMPOINT(-122.35, 37.55), 3857)` → `POINT(-122.35 37.55)` |
 | [ST_TRANSFORM](/tidb-cloud-lake/sql/st-transform.md) | geometry を新しい SRID に変換します | GEOMETRY のみ | `ST_TRANSFORM(ST_MAKEGEOMPOINT(-122.35, 37.55), 3857)` → `POINT(-13618288.8 4552395.0)` |
 
@@ -139,7 +139,7 @@ summary: "{{{ .lake }}} は、相互補完的な 2 つの地理空間機能セ�
 | [GEO_DISTANCE](/tidb-cloud-lake/sql/geo-distance.md) | WGS84 を使用した概算距離をメートルで返します | `GEO_DISTANCE(0, 0, 0, 0)` → `0` |
 | [GREAT_CIRCLE_DISTANCE](/tidb-cloud-lake/sql/great-circle-distance.md) | 大円距離をメートルで返します | `GREAT_CIRCLE_DISTANCE(0, 0, 0, 0)` → `0` |
 | [GREAT_CIRCLE_ANGLE](/tidb-cloud-lake/sql/great-circle-angle.md) | 大円中心角を度単位で返します | `GREAT_CIRCLE_ANGLE(0, 0, 45, 0)` → `45` |
-| [POINT_IN_POLYGON](/tidb-cloud-lake/sql/point-in-polygon.md) | 点が多角形の内側にあるかどうかを確認します | `POINT_IN_POLYGON([lon, lat], [[p1_lon, p1_lat], ...])` → `TRUE` |
+| [POINT_IN_POLYGON](/tidb-cloud-lake/sql/point-in-polygon.md) | 点が polygon の内側にあるかどうかを確認します | `POINT_IN_POLYGON([lon, lat], [[p1_lon, p1_lat], ...])` → `TRUE` |
 | [POINT_IN_ELLIPSES](/tidb-cloud-lake/sql/point-in-ellipses.md) | 点がいずれかの楕円の内側にあるかどうかを確認します | `POINT_IN_ELLIPSES(10, 10, 10, 9.1, 1, 0.9999)` → `1` |
 
 ## H3 の近傍 {#h3-neighborhoods}

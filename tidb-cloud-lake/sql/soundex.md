@@ -15,7 +15,7 @@ summary: 文字列の Soundex コードを生成します。
 >
 > Soundex は、英語で発音したときの音に基づいて英数字の文字列を 4 文字のコードに変換します。詳細は <https://en.wikipedia.org/wiki/Soundex> を参照してください。
 
-関連項目: [SOUNDS LIKE](/tidb-cloud-lake/sql/sounds-like.md)
+関連情報: [SOUNDS LIKE](/tidb-cloud-lake/sql/sounds-like.md)
 
 ## 構文 {#syntax}
 

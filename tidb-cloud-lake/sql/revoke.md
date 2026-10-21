@@ -70,7 +70,7 @@ privileges_level ::=
   | ROW ACCESS POLICY <policy_name>
 ```
 
-### Masking Policy 権限の取り消し {#revoking-masking-policy-privileges}
+### マスキングポリシー権限の取り消し {#revoking-masking-policy-privileges}
 
 ```sql
 REVOKE APPLY ON MASKING POLICY <policy_name> FROM ROLE <role_name>
@@ -78,9 +78,9 @@ REVOKE ALL [ PRIVILEGES ] ON MASKING POLICY <policy_name> FROM ROLE <role_name>
 REVOKE OWNERSHIP ON MASKING POLICY <policy_name> FROM ROLE '<role_name>'
 ```
 
-これらの形式を使用すると、個別の masking policy へのアクセスを削除できます。グローバルな `CREATE MASKING POLICY` および `APPLY MASKING POLICY` 権限は、`ON *.*` を使用した標準構文で取り消します。
+これらの形式を使用すると、個別のマスキングポリシーへのアクセスを削除できます。グローバルな `CREATE MASKING POLICY` および `APPLY MASKING POLICY` 権限は、`ON *.*` を使用した標準構文で取り消します。
 
-### Row Access Policy 権限の取り消し {#revoking-row-access-policy-privileges}
+### 行アクセスポリシー権限の取り消し {#revoking-row-access-policy-privileges}
 
 ```sql
 REVOKE APPLY ON ROW ACCESS POLICY <policy_name> FROM ROLE <role_name>
@@ -88,7 +88,7 @@ REVOKE ALL [ PRIVILEGES ] ON ROW ACCESS POLICY <policy_name> FROM ROLE <role_nam
 REVOKE OWNERSHIP ON ROW ACCESS POLICY <policy_name> FROM ROLE '<role_name>'
 ```
 
-これらの形式を使用すると、特定の row access policy へのアクセスを取り消せます。グローバルな `CREATE ROW ACCESS POLICY` および `APPLY ROW ACCESS POLICY` 権限は、`ON *.*` に対する標準構文で取り消します。
+これらの形式を使用すると、特定の行アクセスポリシーへのアクセスを取り消せます。グローバルな `CREATE ROW ACCESS POLICY` および `APPLY ROW ACCESS POLICY` 権限は、`ON *.*` に対する標準構文で取り消します。
 
 ### ロールの取り消し {#revoking-role}
 
@@ -222,7 +222,7 @@ SHOW GRANTS FOR user1;
 >
 > `roles` は空になっていますが、`default_role` はそのまま残っていることに注目してください。ユーザーはもはや `analyst` の権限を持っていません。これを整理するには、`ALTER USER bob WITH DEFAULT_ROLE = 'public'` を実行します。
 
-### 例 4: Masking Policy 権限を取り消す {#example-4-revoking-masking-policy-privileges}
+### 例 4: マスキングポリシー権限を取り消す {#example-4-revoking-masking-policy-privileges}
 
 ```sql
 -- Remove per-policy access from a role
@@ -232,7 +232,7 @@ REVOKE APPLY ON MASKING POLICY email_mask FROM ROLE pii_readers;
 REVOKE CREATE MASKING POLICY ON *.* FROM ROLE security_admin;
 ```
 
-### 例 5: Row Access Policy 権限を取り消す {#example-5-revoking-row-access-policy-privileges}
+### 例 5: 行アクセスポリシー権限を取り消す {#example-5-revoking-row-access-policy-privileges}
 
 ```sql
 -- Remove per-policy access from a role

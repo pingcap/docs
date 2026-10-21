@@ -31,8 +31,8 @@ SET_VAR は、単一の SQL 文内でオプティマイザヒントを指定す�
 
 - ヒントは、SQL 文の先頭となる [SELECT](/tidb-cloud-lake/sql/select.md)、[INSERT](/tidb-cloud-lake/sql/insert.md)、[UPDATE](/tidb-cloud-lake/sql/update.md)、[REPLACE](/tidb-cloud-lake/sql/replace.md)、[MERGE](/tidb-cloud-lake/sql/merge.md)、[DELETE](/tidb-cloud-lake/sql/dml.md)、または [COPY](/tidb-cloud-lake/sql/copy-into-table.md) (INTO) キーワードの直後に記述する必要があります。
 - 1 つの SET_VAR には 1 つの Key=Value ペアしか含められません。つまり、1 つの SET_VAR で構成できる設定は 1 つだけです。ただし、複数の SET_VAR ヒントを使用して複数の設定を構成できます。
-    - 同じ key を含む複数の SET_VAR ヒントがある場合、最初の Key=Value ペアが適用されます。
-    - key の解析またはバインドに失敗した場合、すべてのヒントが無視されます。
+    - 同じキーを含む複数の SET_VAR ヒントがある場合、最初の Key=Value ペアが適用されます。
+    - キーの解析またはバインドに失敗した場合、すべてのヒントが無視されます。
 
 ## 例 {#examples}
 

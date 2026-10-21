@@ -1,6 +1,6 @@
 ---
 title: JSON 演算子
-summary: このページでは、TiDB Cloud Lake の JSON Operators について説明します。
+summary: このページでは、TiDB Cloud Lake の JSON 演算子について説明します。
 ---
 
 # JSON 演算子

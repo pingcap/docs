@@ -1,11 +1,11 @@
 ---
 title: IS_FLOAT
-summary: 入力された JSON 値が float かどうかを確認します。
+summary: 入力された JSON 値が浮動小数点数かどうかを確認します。
 ---
 
 # IS_FLOAT
 
-入力された JSON 値が float かどうかを確認します。
+入力された JSON 値が浮動小数点数かどうかを確認します。
 
 ## 構文 {#syntax}
 
@@ -15,7 +15,7 @@ IS_FLOAT( <expr> )
 
 ## 戻り値の型 {#return-type}
 
-入力された JSON 値が float の場合は `true` を返し、それ以外の場合は `false` を返します。
+入力された JSON 値が浮動小数点数の場合は `true` を返し、それ以外の場合は `false` を返します。
 
 ## 例 {#examples}
 

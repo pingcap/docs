@@ -58,7 +58,7 @@ INSERT INTO orders (customer_id, product_name) VALUES
 (2, 'Headphones');
 ```
 
-次の例では、`LISTAGG` を `GROUP BY` とともに集計関数として使用し、各顧客が購入したすべての商品を 1 つの文字列に連結しています。
+次の例では、`LISTAGG` を GROUP BY とともに集計関数として使用し、各顧客が購入したすべての商品を 1 つの文字列に連結しています。
 
 ```sql
 SELECT

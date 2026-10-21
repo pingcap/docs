@@ -1,13 +1,13 @@
 ---
 title: Interval
-summary: INTERVAL は、自然言語テキスト (`'1 year 2 months'`、`'3 days ago'`) またはマイクロ秒数を表す整数として記述できる期間を表します。{{{ .lake }}} は、千年単位からマイクロ秒単位までの単位をサポートし、interval、日付、timestamp に対する算術演算を可能にします。
+summary: INTERVAL は、自然言語テキスト (`'1 year 2 months'`、`'3 days ago'`) またはマイクロ秒数を表す整数として記述できる期間を表します。{{{ .lake }}} は、千年単位からマイクロ秒単位までの単位をサポートし、interval、日付、タイムスタンプに対する算術演算を可能にします。
 ---
 
 # Interval
 
 ## 概要 {#overview}
 
-`INTERVAL` は、自然言語テキスト (`'1 year 2 months'`、`'3 days ago'`) またはマイクロ秒数を表す整数として記述できる期間を表します。{{{ .lake }}} は、千年単位からマイクロ秒単位までの単位をサポートし、interval、日付、timestamp に対する算術演算を可能にします。
+`INTERVAL` は、自然言語テキスト (`'1 year 2 months'`、`'3 days ago'`) またはマイクロ秒数を表す整数として記述できる期間を表します。{{{ .lake }}} は、千年単位からマイクロ秒単位までの単位をサポートし、interval、日付、タイムスタンプに対する算術演算を可能にします。
 
 > **Note:**
 >

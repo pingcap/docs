@@ -13,7 +13,7 @@ summary: スナップショット ID またはタイムスタンプを使用し�
 
 - このコマンドは、既存のテーブルのみを以前の状態に戻します。削除されたテーブルをリカバリするには、[UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) を使用します。
 
-- テーブルのフラッシュバックは、{{{ .lake }}} の time travel 機能の一部です。このコマンドを使用する前に、フラッシュバックしたいテーブルが time travel の対象であることを確認してください。たとえば、transient table では {{{ .lake }}} がそのようなテーブルのスナップショットを作成または保存しないため、このコマンドは機能しません。
+- テーブルのフラッシュバックは、{{{ .lake }}} のタイムトラベル機能の一部です。このコマンドを使用する前に、フラッシュバックしたいテーブルがタイムトラベルの対象であることを確認してください。たとえば、transient table では {{{ .lake }}} がそのようなテーブルのスナップショットを作成または保存しないため、このコマンドは機能しません。
 
 - テーブルを以前の状態にフラッシュバックした後でロールバックすることはできませんが、さらに以前の状態へ再度フラッシュバックすることはできます。
 
@@ -126,7 +126,7 @@ previous_snapshot_id: NULL
            timestamp: 2023-04-19 04:20:25.062854
 ```
 
-### ステップ 3: 削除操作前の snapshot ID を見つける {#step-3-find-the-snapshot-id-before-the-delete-operation}
+### ステップ 3: 削除操作前のスナップショット ID を見つける {#step-3-find-the-snapshot-id-before-the-delete-operation}
 
 ```sql
 -- Assume the snapshot_id from the previous query is 'xxxxxx'

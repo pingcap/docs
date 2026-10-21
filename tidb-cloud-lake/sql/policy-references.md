@@ -1,11 +1,11 @@
 ---
 title: POLICY_REFERENCES
-summary: セキュリティポリシー（Masking Policy または Row Access Policy）とテーブル/ビューの関連付けを返します。ポリシー名でクエリしてそのポリシーを使用しているすべてのテーブルを見つけることも、テーブル名でクエリしてそのテーブルに適用されているすべてのポリシーを見つけることもできます。
+summary: セキュリティポリシー（マスキングポリシーまたは行アクセスポリシー）とテーブル/ビューの関連付けを返します。ポリシー名でクエリしてそのポリシーを使用しているすべてのテーブルを見つけることも、テーブル名でクエリしてそのテーブルに適用されているすべてのポリシーを見つけることもできます。
 ---
 
 # POLICY_REFERENCES
 
-セキュリティポリシー（Masking Policy または Row Access Policy）とテーブル/ビューの関連付けを返します。ポリシー名でクエリしてそのポリシーを使用しているすべてのテーブルを見つけることも、テーブル名でクエリしてそのテーブルに適用されているすべてのポリシーを見つけることもできます。
+セキュリティポリシー（マスキングポリシーまたは行アクセスポリシー）とテーブル/ビューの関連付けを返します。ポリシー名でクエリしてそのポリシーを使用しているすべてのテーブルを見つけることも、テーブル名でクエリしてそのテーブルに適用されているすべてのポリシーを見つけることもできます。
 
 関連情報:
 
@@ -40,7 +40,7 @@ POLICY_REFERENCES(
 
 ## 例 {#examples}
 
-### Row Access Policy を使用しているテーブルを見つける {#find-tables-using-a-row-access-policy}
+### 行アクセスポリシーを使用しているテーブルを見つける {#find-tables-using-a-row-access-policy}
 
 ```sql
 -- Create a row access policy
@@ -90,7 +90,7 @@ SELECT * FROM policy_references(
 └──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### 複数の引数を持つ Masking Policy を使用しているテーブルを見つける {#find-tables-using-a-masking-policy-with-multiple-arguments}
+### 複数の引数を持つマスキングポリシーを使用しているテーブルを見つける {#find-tables-using-a-masking-policy-with-multiple-arguments}
 
 ```sql
 -- Create a masking policy with conditional arguments

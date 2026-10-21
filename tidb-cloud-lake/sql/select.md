@@ -143,7 +143,7 @@ SELECT * EXCLUDE (id,lastname) FROM allemployees;
 
 ### COLUMNS キーワード {#columns-keyword}
 
-`COLUMNS` キーワードは、リテラルの正規表現パターンおよびラムダ式に基づいてカラムを選択するための柔軟な仕組みを提供します。
+COLUMNS キーワードは、リテラルの正規表現パターンおよびラムダ式に基づいてカラムを選択するための柔軟な仕組みを提供します。
 
 ```sql
 CREATE TABLE employee (
@@ -184,7 +184,7 @@ SELECT COLUMNS(x -> x LIKE '%name%') FROM employee;
 └──────────────────┘
 ```
 
-`COLUMNS` キーワードは、`EXCLUDE` と組み合わせて使用することもでき、クエリ結果から特定のカラムを明示的に除外できます。
+COLUMNS キーワードは、EXCLUDE と組み合わせて使用することもでき、クエリ結果から特定のカラムを明示的に除外できます。
 
 ```sql
 -- Select all columns excluding 'salary' from the 'employee' table
@@ -202,7 +202,7 @@ SELECT COLUMNS(* EXCLUDE salary) FROM employee;
 
 ### カラム位置 {#column-position}
 
-`$N` を使用すると、`SELECT` 句内のカラムを表せます。たとえば、`$2` は 2 番目のカラムを表します。
+$N を使用すると、SELECT 句内のカラムを表せます。たとえば、$2 は 2 番目のカラムを表します。
 
 ```sql
 CREATE TABLE IF NOT EXISTS t1(a int, b varchar);
@@ -221,7 +221,7 @@ SELECT a, $2 FROM t1;
 
 `SELECT *` 文は、テーブルまたはクエリ結果からすべてのカラムを取得するために使用されます。個々のカラム名を指定せずに完全なデータセットを取得できる便利な方法です。
 
-次の例では、`my_table` からすべてのカラムを返します。
+次の例では、my_table からすべてのカラムを返します。
 
 ```sql
 SELECT * FROM my_table;
@@ -241,7 +241,7 @@ SELECT * FROM my_table;
 
 ## FROM 句 {#from-clause}
 
-`SELECT` 文の `FROM` 句は、データをクエリする元となるテーブルを指定します。特に `SELECT` リストが長い場合や、選択したカラムの由来をすばやく把握したい場合には、`SELECT` 句の前に `FROM` 句を置くことで、コードの可読性を向上させることもできます。
+SELECT 文の FROM 句は、データをクエリする元となるテーブルを指定します。特に SELECT リストが長い場合や、選択したカラムの由来をすばやく把握したい場合には、SELECT 句の前に FROM 句を置くことで、コードの可読性を向上させることもできます。
 
 ```sql
 -- The following two statements are equivalent:
@@ -261,11 +261,11 @@ FROM numbers(3) SELECT number;
 +--------+
 ```
 
-`FROM` 句では場所を指定することもでき、さまざまなソースのデータをテーブルに最初にロード (load) することなく直接クエリできます。詳細は、[stage 上のファイルのクエリ](/tidb-cloud-lake/sql/stage.md) を参照してください。
+FROM 句では場所を指定することもでき、さまざまなソースのデータをテーブルに最初にロード (load) することなく直接クエリできます。詳細は、[stage 上のファイルのクエリ](/tidb-cloud-lake/sql/stage.md) を参照してください。
 
 ## AT 句 {#at-clause}
 
-`AT` 句を使用すると、データの過去のバージョンをクエリできます。詳細は、[AT](/tidb-cloud-lake/sql/at.md) を参照してください。
+AT 句を使用すると、データの過去のバージョンをクエリできます。詳細は、[AT](/tidb-cloud-lake/sql/at.md) を参照してください。
 
 ## WHERE 句 {#where-clause}
 
@@ -460,11 +460,11 @@ SELECT number FROM numbers(100000) ORDER BY number LIMIT 2 OFFSET 10;
 +--------+
 ```
 
-大きな結果セットに対するクエリ性能を最適化するために、{{{ .lake }}} では `lazy_read_threshold` オプションがデフォルトで有効になっており、デフォルト値は 1,000 です。このオプションは、LIMIT 句を含むクエリ向けに設計されています。`lazy_read_threshold` が有効な場合、指定した LIMIT の数値が設定したしきい値以下のクエリで最適化が有効になります。このオプションを無効にするには、`0` に設定します。
+大きな結果セットに対するクエリ性能を最適化するために、{{{ .lake }}} では lazy_read_threshold オプションがデフォルトで有効になっており、デフォルト値は 1,000 です。このオプションは、LIMIT 句を含むクエリ向けに設計されています。lazy_read_threshold が有効な場合、指定した LIMIT の数値が設定したしきい値以下のクエリで最適化が有効になります。このオプションを無効にするには、0 に設定します。
 
 <details>
   <summary>仕組み</summary>
-    <div>この最適化は、ORDER BY 句と LIMIT 句を含むクエリの性能を向上させます。有効化されていて、かつクエリ内の LIMIT の数値が指定したしきい値より小さいか等しい場合、結果セット全体ではなく、ORDER BY 句に含まれるカラムだけを取得してソートします。</div><br/><div>システムは、ORDER BY 句に含まれるカラムを取得してソートした後、LIMIT 制約を適用して、ソート済み結果セットから必要な行数を選択します。その後、その制限された行セットをクエリ結果として返します。この方法では、必要なカラムだけを取得してソートすることでリソース使用量を削減し、さらに処理対象の行を必要なサブセットに限定することでクエリ実行を最適化します。</div>
+    <div>この最適化は、ORDER BY 句と LIMIT 句を含むクエリの性能を向上させます。有効化されていて、かつクエリ内の LIMIT の数値が指定したしきい値より小さい場合、結果セット全体ではなく、ORDER BY 句に含まれるカラムだけを取得してソートします。</div><br/><div>システムは、ORDER BY 句に含まれるカラムを取得してソートした後、LIMIT 制約を適用して、ソート済み結果セットから必要な行数を選択します。その後、その制限された行セットをクエリ結果として返します。この方法では、必要なカラムだけを取得してソートすることでリソース使用量を削減し、さらに処理対象の行を必要なサブセットに限定することでクエリ実行を最適化します。</div>
 </details>
 
 ```sql

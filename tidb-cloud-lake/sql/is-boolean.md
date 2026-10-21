@@ -1,11 +1,11 @@
 ---
 title: IS_BOOLEAN
-summary: 入力された JSON 値が boolean かどうかをチェックします。
+summary: 入力された JSON 値がブール値かどうかをチェックします。
 ---
 
 # IS_BOOLEAN
 
-入力された JSON 値が boolean かどうかをチェックします。
+入力された JSON 値がブール値かどうかをチェックします。
 
 ## 構文 {#syntax}
 
@@ -15,7 +15,7 @@ IS_BOOLEAN( <expr> )
 
 ## 戻り値の型 {#return-type}
 
-入力された JSON 値が boolean の場合は `true` を返し、それ以外の場合は `false` を返します。
+入力された JSON 値がブール値の場合は `true` を返し、それ以外の場合は `false` を返します。
 
 ## 例 {#examples}
 

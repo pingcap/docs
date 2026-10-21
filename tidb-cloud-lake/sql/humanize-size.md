@@ -21,7 +21,7 @@ HUMANIZE_SIZE(x);
 
 ## 戻り値の型 {#return-type}
 
-文字列。
+String。
 
 ## 例 {#examples}
 

@@ -27,7 +27,7 @@ MAX(<expr>)
 
 ## 例 {#example}
 
-**Create a Table and Insert Sample Data**
+**テーブルを作成してサンプルデータを挿入する**
 
 ```sql
 CREATE TABLE temperatures (
@@ -44,7 +44,7 @@ VALUES (1, 'New York', 30),
        (5, 'Los Angeles', 27);
 ```
 
-**Query Demo: Find Maximum Temperature for New York City**
+**クエリのデモ: ニューヨーク市の最高気温を検索する**
 
 ```sql
 SELECT city, MAX(temperature) AS max_temperature

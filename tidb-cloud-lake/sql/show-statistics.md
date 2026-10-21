@@ -31,7 +31,7 @@ SHOW STATISTICS [ FROM DATABASE <database_name> | FROM TABLE <database_name>.<ta
 | database | データベース名。                                |
 | table | テーブル名。                                |
 | column_name | カラム名。                                |
-| stats_row_count | 統計情報で考慮された累積行数。統計情報は insert 時に更新されますが、delete 時には減算されないため、この値は actual_row_count より **大きくなる** ことがあります。 |
+| stats_row_count | 統計情報で考慮された累積行数。統計情報は挿入時に更新されますが、削除時には減算されないため、この値は actual_row_count より **大きくなる** ことがあります。 |
 | actual_row_count | 現在のスナップショットにおけるテーブルの実際の行数。 |
 | distinct_count | HyperLogLog から計算された、一意な値の推定数（NDV）。 |
 | null_count | カラム内の NULL 値の数。 |

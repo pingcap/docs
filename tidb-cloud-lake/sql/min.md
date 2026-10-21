@@ -7,7 +7,7 @@ summary: 集計関数。
 
 集計関数。
 
-`MIN()` 関数は、値の集合の中から最小値を返します。
+MIN() 関数は、値の集合の中から最小値を返します。
 
 ## 構文 {#syntax}
 
@@ -27,7 +27,7 @@ MIN(<expr>)
 
 ## 例 {#example}
 
-**Create a Table and Insert Sample Data**
+**テーブルを作成してサンプルデータを挿入する**
 
 ```sql
 CREATE TABLE gas_prices (
@@ -44,7 +44,7 @@ VALUES (1, 1, 3.50),
        (5, 2, 3.35);
 ```
 
-**Query Demo: Find Minimum Gas Price for Station 1**
+**クエリのデモ: ステーション 1 の最低ガソリン価格を検索する**
 
 ```sql
 SELECT station_id, MIN(price) AS min_price
