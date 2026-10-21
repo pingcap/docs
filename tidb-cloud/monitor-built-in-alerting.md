@@ -11,7 +11,7 @@ This document describes how to do these operations and provides the TiDB Cloud b
 
 > **Note:**
 >
-> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances, [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances, and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+> Currently, alert subscription is available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances, [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances, [TiDB Cloud BYOC](/tidb-cloud/select-cluster-tier.md#byoc) instances, and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
 
 ## View alerts
 
@@ -32,7 +32,7 @@ In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page.
 
@@ -42,7 +42,7 @@ In TiDB Cloud, you can view both active and closed alerts on the **Alerts** page
     >
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
-2. Click the name of the target {{{ .premium }}} instance to go to its overview page.
+2. Click the name of the target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page.
 3. Click **Alerts** in the left navigation pane.
 4. The **Alerts** page displays the active alerts by default. You can view the information of each active alert such as the alert name, trigger time, and duration.
 5. If you also want to view the closed alerts, just click the **Status** drop-down list and select **Closed** or **All**.
@@ -147,6 +147,47 @@ TiDB Cloud provides different alert rules for each [TiDB Cloud plan](/tidb-cloud
 | The changefeed latency exceeds 600 seconds. | Check the changefeed status on the **Changefeed** page and **Changefeed Detail** page of the TiDB Cloud console, where you can find some error messages to help diagnose this issue. <br/> Possible reasons that can trigger this alert include:<ul><li>The overall traffic in the upstream has increased, causing the existing changefeed specification to be insufficient to handle it. If the traffic increase is temporary, the changefeed latency will automatically recover after the traffic returns to normal. If the traffic increase is continuous, you need to scale up the changefeed.</li><li>The downstream or network is abnormal. In this case, resolve this abnormality first.</li><li>Tables lack indexes if the downstream is RDS, which might cause low write performance and high latency. In this case, you need to add the necessary indexes to the upstream or downstream.</li></ul>If the problem cannot be fixed from your side, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance. |
 | The changefeed status is `FAILED`.                 | Check the changefeed status on the **Changefeed** page and **Changefeed Detail** page of the TiDB Cloud console, where you can find some error messages to help diagnose this issue. <br/> If the problem cannot be fixed from your side, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance.|
 | The changefeed status is `WARNING`.              | Check the changefeed status on the **Changefeed** page and **Changefeed Detail** page of the TiDB Cloud console, where you can find some error messages to help diagnose this issue. <br/> If the problem cannot be fixed from your side, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for further assistance.|
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+### Performance overview alerts for {{{ .byoc }}}
+
+| Condition | Recommended action |
+|:---|:---|
+| Request units per second (RU/s) exceed 80% of the maximum RCU | Review RU metrics and query duration to identify workload changes. Increase the maximum RCU if additional capacity is required. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| QPS drops by 20% | Check whether query latency has increased and whether your application is operating normally. If the drop is unexpected and you cannot identify the cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| Query P95 latency exceeds 200 ms | Investigate slow queries and review recent application deployments, schema changes, and data import jobs. If you cannot identify the cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| Query P99 latency exceeds 200 ms | Investigate slow queries and review recent application deployments, schema changes, and data import jobs. If you cannot identify the cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| Request error rate exceeds 10% | Review recent errors and the overall statement execution status of the instance. |
+| More than 20 SQL statements exceed a latency threshold of 256 ms within one minute | Review recent schema or index changes and check the slow query list. Corresponding slow query records might take several minutes to appear. If you cannot identify the cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| More than 20 SQL statements exceed a latency threshold of 512 ms within one minute | Review recent schema or index changes and check the slow query list. Corresponding slow query records might take several minutes to appear. If you cannot identify the cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| More than 20 SQL statements exceed a latency threshold of 4,096 ms within one minute | Review recent schema or index changes and check the slow query list. Corresponding slow query records might take several minutes to appear. If you cannot identify the cause, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+
+### Resource Pool vCPU limit alerts for {{{ .byoc }}}
+
+These alerts indicate when a resource pool has limited capacity for further scaling or when a scaling operation is blocked by its Pool vCPU Limit.
+
+The allocation percentage is the total provisioned TiDB workload vCPU across all instances in the resource pool divided by the Pool vCPU Limit. Admin and Observability node vCPU are excluded. These alerts apply only when a Pool vCPU Limit is configured.
+
+| Alert | Condition | Recommended action |
+|:---|:---|:---|
+| Resource Pool vCPU allocation is high | Allocation remains at or above the configured threshold for the configured duration. The default is 80% for 10 minutes. | Review recent workload changes and capacity usage across instances in the resource pool. Increase the Pool vCPU Limit if additional scaling capacity is required. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| Resource Pool vCPU allocation is approaching the limit | Allocation remains at or above the configured threshold for the configured duration. The default is 95% for 5 minutes. | Increase the Pool vCPU Limit. Review capacity usage across instances in the resource pool and investigate recent traffic spikes, import jobs, or abnormal workload changes. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| Resource Pool scaling was blocked by the vCPU limit | A scaling operation is rejected because the requested capacity would exceed the Pool vCPU Limit. | Increase the Pool vCPU Limit or reduce unnecessary provisioned capacity. Review workload and capacity usage across instances in the resource pool. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+
+The two allocation alerts are enabled by default. You can change their thresholds and durations, or disable them, on each instance's **Edit Rules** page. The threshold for **Resource Pool vCPU allocation is high** must be lower than that for **Resource Pool vCPU allocation is approaching the limit**. Settings apply per instance, while allocation is measured across the shared resource pool.
+
+**Resource Pool scaling was blocked by the vCPU limit** cannot be disabled. It indicates that a scaling request in the shared resource pool was rejected because it would exceed the Pool vCPU Limit. This alert can appear on an instance's **Alerts** page even when another instance in the same resource pool requested the blocked scaling operation.
+
+### Changefeed alerts for {{{ .byoc }}}
+
+| Condition | Recommended action |
+|:---|:---|
+| The changefeed latency exceeds 600 seconds. | Check the changefeed status and error messages on the **Changefeed** and **Changefeed Detail** pages. Review traffic increases, changefeed capacity, downstream health, network connectivity, and required indexes. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| The changefeed status is `FAILED`. | Check the changefeed status and error messages on the **Changefeed** and **Changefeed Detail** pages. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| The changefeed status is `WARNING`. | Check the changefeed status and error messages on the **Changefeed** and **Changefeed Detail** pages. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
 
 </CustomContent>
 
