@@ -1,6 +1,6 @@
 ---
 title: TO_UNIX_TIMESTAMP
-summary: 日付/時刻形式のタイムスタンプを Unix タイムスタンプ形式に変換します。Unix タイムスタンプは、1970 年 1 月 1 日 00:00:00 UTC からの経過秒数を表します。
+summary: 日付/時刻形式のタイムスタンプを Unix タイムスタンプ形式に変換します。
 ---
 
 # TO_UNIX_TIMESTAMP

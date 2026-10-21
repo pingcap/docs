@@ -5,7 +5,7 @@ summary: 指定された H3 インデックスの解像度を返します。
 
 # H3_GET_RESOLUTION
 
-指定された [H3](https://eng.uber.com/h3/) インデックスの解像度を返します。
+指定された [H3](https://h3geo.org/) インデックスの解像度を返します。
 
 ## 構文 {#syntax}
 

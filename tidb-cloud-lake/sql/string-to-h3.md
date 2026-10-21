@@ -5,7 +5,7 @@ summary: 文字列表現を H3 (uint64) 表現に変換します。
 
 # STRING_TO_H3
 
-文字列表現を [H3](https://eng.uber.com/h3/) の表現 (uint64) に変換します。
+文字列表現を [H3](https://h3geo.org/) の表現 (uint64) に変換します。
 
 ## 構文 {#syntax}
 

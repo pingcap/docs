@@ -45,7 +45,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 3. **Integrations**ページで、 **Integration to New Relic**をクリックします。
 
-4. New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
+4. New Relic APIキーを入力し、New Relicアカウントがホストされているリージョンを選択してください。
 
 5. **Test Integration**をクリックします。
 
@@ -65,7 +65,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 4. **Integrations**ページで、 **Integration to New Relic (BETA)**をクリックします。
 
-5. New RelicのAPIキーを入力し、New Relicのサイトを選択してください。
+5. New Relic APIキーを入力し、New Relicアカウントがホストされているリージョンを選択してください。
 
 6. **Test Integration**をクリックします。
 
@@ -101,7 +101,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
         }
         ```
 
-    3. JSON ファイル内のすべての`"accountIds": []`フィールドに New Relic アカウント ID を追加してください。
+    3. JSON ファイル内のすべての`"accountIds": []`フィールドに [New Relic アカウント ID](https://docs.newrelic.com/docs/accounts/accounts-billing/account-structure/account-id/) を追加してください。
 
         例えば：
 
@@ -117,7 +117,7 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 2. [New Relic](https://one.newrelic.com/)にログインし、左側のナビゲーションバーの**Dashboards**をクリックし、右上隅の**Import dashboard**をクリックします。
 
-3. 表示されたダイアログで、準備した JSON ファイルの内容をすべてテキスト エリアに貼り付け、次に**Import dashboard**をクリックします。
+3. 表示されたダイアログで、準備した JSON ファイルの内容をテキスト エリアに貼り付け、権限設定を選択してから、**Save**をクリックします。
 
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">

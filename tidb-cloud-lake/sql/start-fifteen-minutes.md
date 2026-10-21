@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_FIFTEEN_MINUTES
-summary: 日時（timestamp/datetime）を15分間隔の開始時刻に切り捨てます。## Syntax.
+summary: 日時（timestamp/datetime）を15分間隔の開始時刻に切り捨てます。
 ---
 
 # TO_START_OF_FIFTEEN_MINUTES

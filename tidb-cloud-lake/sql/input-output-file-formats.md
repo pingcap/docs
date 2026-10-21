@@ -199,7 +199,7 @@ NULL 値を表す文字列です。
 
 `Geometry` カラムのエンコード形式です。
 
-**利用可能な値**: `EWKT`, `WKB`, `WKB`, `EWKB`, `GEOJSON`
+**利用可能な値**: `EWKT`, `WKT`, `WKB`, `EWKB`, `GEOJSON`
 
 **デフォルト**: `EWKT`
 

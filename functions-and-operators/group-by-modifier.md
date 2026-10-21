@@ -44,7 +44,7 @@ v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-
 
 <CustomContent platform="tidb-cloud">
 
-v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行計画の生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [ノード番号を変更する](/tidb-cloud/scale-tidb-cluster.md#change-node-number)を参照してください。
+v8.3.0より前のTiDBでは、 [TiFlash MPPモード](/tiflash/use-tiflash-mpp-mode.md)の`WITH ROLLUP`構文に対してのみ有効な実行計画の生成がサポートされています。そのため、TiDBクラスターにはTiFlashノードが含まれており、ターゲットテーブルには正しいTiFlashレプリカが設定されている必要があります。詳細については、 [ノード数を変更する](/tidb-cloud/scale-tidb-cluster.md#change-node-count)を参照してください。
 
 </CustomContent>
 

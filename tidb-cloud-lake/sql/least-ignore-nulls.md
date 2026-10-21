@@ -1,11 +1,11 @@
 ---
 title: LEAST_IGNORE_NULLS
-summary: NULL 値を無視して、一連の値の中から最大値を返します。
+summary: NULL 値を無視して、一連の値の中から最小値を返します。
 ---
 
 # LEAST_IGNORE_NULLS
 
-NULL 値を無視して、一連の値の中から最大値を返します。
+NULL 値を無視して、一連の値の中から最小値を返します。
 
 関連情報: [LEAST](/tidb-cloud-lake/sql/least.md)
 

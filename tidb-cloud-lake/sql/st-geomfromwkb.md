@@ -1,8 +1,8 @@
 ---
 title: ST_GEOMFROMWKB
-summary: ST_GEOMTRYFROMWKB のエイリアス。
+summary: ST_GEOMETRYFROMWKB のエイリアス。
 ---
 
 # ST_GEOMFROMWKB
 
-[ST_GEOMTRYFROMWKB](/tidb-cloud-lake/sql/st-geometryfromwkb.md) のエイリアスです。
+[ST_GEOMETRYFROMWKB](/tidb-cloud-lake/sql/st-geometryfromwkb.md) のエイリアスです。

@@ -240,4 +240,4 @@ ORDER BY o.customer_id;
 **連携**
 
 - スケジュールされた増分ロード (load) には、ストリームを `task_history('<name>', <limit>)` と組み合わせて使用します。
-- 最新の差分のみを消費したい場合は [`WITH CONSUME`](/tidb-cloud-lake/sql/task.md) を使用します。
+- 最新の差分のみを消費したい場合は [`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md) を使用します。

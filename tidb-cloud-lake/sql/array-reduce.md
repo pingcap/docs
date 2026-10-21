@@ -15,7 +15,7 @@ ARRAY_REDUCE(<json_array>, <lambda_expression>)
 
 ## 例 {#examples}
 
-この例では、配列内のすべての要素 `(2, 3, 4)` を掛け合わせます。
+この例では、配列内のすべての要素 (`2 * 3 * 4`) を掛け合わせます。
 
 ```sql
 SELECT ARRAY_REDUCE(

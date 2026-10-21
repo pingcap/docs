@@ -136,6 +136,12 @@ TiDB Cloud Lake は、ANSI SQL、半構造化データ処理、ベクトル検�
 
 詳細については、[TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/) を参照してください。
 
+## TiDB Cloud Filesystem {#tidb-cloud-filesystem}
+
+TiDB Cloud Filesystem は、それにアクセスするマシンやプロセスから独立した、永続的な共有ファイルストレージを提供します。TiDB データベースをプロビジョニングまたは管理することなく、`ti fs` コマンドを使用してファイルにアクセスしたり、ファイルシステムをローカルディレクトリとしてマウントしたりできます。
+
+詳細については、[TiDB Cloud Filesystem](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/) を参照してください。
+
 ## TiDB Cloudコンソール {#tidb-cloud-console}
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)は、TiDB CloudリソースのWebベースの管理インターフェースです。単一の使いやすいプラットフォームから、 TiDB Cloudリソースの管理、データのインポートまたは移行、パフォーマンス指標の監視、バックアップの設定、セキュリティ制御の設定、および他のクラウドサービスとの統合を行うためのツールを提供します。

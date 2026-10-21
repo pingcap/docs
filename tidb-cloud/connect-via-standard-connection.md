@@ -11,9 +11,12 @@ summary: パブリック接続を使用してTiDB Cloudクラスターに接続�
 >
 > パブリック接続経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
 
-## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
+## 前提条件 {#prerequisites}
 
-パブリック接続の場合、 TiDB Cloud Dedicated はIP アクセス リスト内のアドレスからのクライアント接続のみを許可します。 IP アクセス リストを設定していない場合は、最初の接続の前に[IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)の手順に従って設定してください。
+TiDB Cloud Dedicated クラスターにパブリック接続で接続する前に、次の要件を満たしていることを確認してください。
+
+- クラスターでパブリックエンドポイントが有効になっていること。新しく作成した TiDB Cloud Dedicated クラスターでは、パブリックエンドポイントはデフォルトで無効になっています。有効にするには、クラスターの概要ページを開き、**Settings** > **Networking** をクリックし、クラスターに複数のノードグループがある場合は対象の TiDB ノードグループを選択してから、**Public Endpoint** セクションで **Enable** をクリックします。クラスターですでにパブリックエンドポイントが有効になっている場合は、操作は不要です。
+- クライアントの IP アドレスが IP アクセス リストに含まれていること。パブリック接続の場合、TiDB Cloud Dedicated は IP アクセス リスト内のアドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合、またはクライアントの IP アドレスがリストに含まれていない場合は、最初の接続の前に [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md) の手順に従って追加してください。
 
 ## クラスターに接続します {#connect-to-the-cluster}
 

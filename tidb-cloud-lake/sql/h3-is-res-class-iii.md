@@ -5,7 +5,7 @@ summary: 指定された H3 インデックスの解像度が Class III の向�
 
 # H3_IS_RES_CLASS_III
 
-指定された [H3](https://eng.uber.com/h3/) インデックスの解像度が Class III の向きかどうかを確認します。
+指定された [H3](https://h3geo.org/) インデックスの解像度が Class III の向きかどうかを確認します。
 
 ## 構文 {#syntax}
 

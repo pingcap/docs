@@ -1,6 +1,6 @@
 ---
 title: system_history.login_history
-summary: ログイン成功の SQL の例 `SELECT * FROM system_history.login_history LIMIT 1;`。
+summary: system_history.login_history を使用して、セキュリティ監視とコンプライアンスのために、成功および失敗したユーザーログイン試行を監査します。
 ---
 
 # system_history.login_history

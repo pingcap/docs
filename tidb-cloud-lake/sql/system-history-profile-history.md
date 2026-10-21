@@ -1,6 +1,6 @@
 ---
 title: system_history.profile_history
-summary: profiles フィールドを使用して、特定の情報を抽出できます。たとえば、すべての物理プランの OutputRows 値を取得するには、次のクエリを使用できます sql SELECT jq('[.[] | {id, output_rows.statistics[4]}]', profiles) AS result FROM system_history.profile_history LIMIT 1;.
+summary: system_history.profile_history を使用して、SQL クエリの詳細な実行プロファイルと統計を分析し、性能チューニングを行います。
 ---
 
 # system_history.profile_history

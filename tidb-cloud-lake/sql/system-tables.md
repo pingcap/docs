@@ -15,7 +15,7 @@ summary: "{{{ .lake }}} は、{{{ .lake }}} のデプロイ、データベース
 
 | テーブル                                                             | 説明                                                                                       |
 |-------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
-| [system.tables](/tidb-cloud-lake/sql/system-tables.md)                                 | プロパティ、作成時刻、サイズなどを含む、すべてのテーブルのメタデータ情報を提供します。 |
+| [system.tables](/tidb-cloud-lake/sql/system-tables-sql.md)                                 | プロパティ、作成時刻、サイズなどを含む、すべてのテーブルのメタデータ情報を提供します。 |
 | [system.tables_with_history](/tidb-cloud-lake/sql/system-tables-with-history.md)       | 削除されたテーブルを含む、テーブルの履歴メタデータ情報を提供します。                    |
 | [system.databases](/tidb-cloud-lake/sql/system-databases.md)                           | システム内のすべてのデータベースに関する情報を含みます。                                           |
 | [system.views](/tidb-cloud-lake/sql/system-views.md)                                   | システム内のすべてのビューに関する情報を含みます。                                               |

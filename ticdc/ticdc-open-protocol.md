@@ -205,7 +205,7 @@ TiCDC Open Protocolは、データ変更イベントを下流に複製するた�
 
 このセクションでは、イベント ストリームの出力ログを表示します。
 
-アップストリームで次の SQL文を実行し、MQ パーティション数が 2 であるとします。
+アップストリームで次の SQL文を実行し、MQ パーティションの数が 2 であるとします。
 
 ```sql
 CREATE TABLE test.t1(id int primary key, val varchar(16));

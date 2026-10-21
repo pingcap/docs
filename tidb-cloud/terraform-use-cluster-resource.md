@@ -264,7 +264,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 - `cloud_provider`は、TiDB クラスターをホストできるクラウドプロバイダーです。
 - `region`は`cloud_provider`の領域です。
-- `node_quantity_range`は、最小ノード数とノードをスケーリングするステップを示します。
+- `node_quantity_range`は、最小ノード数とノードをスケールするステップを示します。
 - `node_size`はノードのサイズです。
 - `storage_size_gib_range`は、ノードに設定できる最小および最大のストレージサイズを示します。
 

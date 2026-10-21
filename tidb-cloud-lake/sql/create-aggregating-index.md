@@ -13,7 +13,7 @@ summary: "{{{ .lake }}} で新しい集計インデックスを作成します�
 CREATE [ OR REPLACE ] AGGREGATING INDEX <index_name> AS SELECT ...
 ```
 
-- 集計インデックスを作成する際は、その用途を標準的な [集計関数](/tidb-cloud-lake/_index.md)（例: AVG、SUM、MIN、MAX、COUNT、および GROUP BY）に限定してください。GROUPING SETS、[ウィンドウ関数](/tidb-cloud-lake/_index.md)、[LIMIT](/tidb-cloud-lake/sql/select.md#limit-clause)、および [ORDER BY](/tidb-cloud-lake/sql/select.md#order-by-clause) は受け付けられず、使用すると次のエラーが返されます: `Currently create aggregating index just support simple query, like: SELECT ... FROM ... WHERE ... GROUP BY ...`.
+- 集計インデックスを作成する際は、その用途を標準的な [集計関数](/tidb-cloud-lake/sql/aggregate-functions.md) を使用するクエリ（例: AVG、SUM、MIN、MAX、および COUNT。必要に応じて GROUP BY を含む）に限定してください。GROUPING SETS、[ウィンドウ関数](/tidb-cloud-lake/sql/window-functions-overview.md)、[LIMIT](/tidb-cloud-lake/sql/select.md#limit-clause)、および [ORDER BY](/tidb-cloud-lake/sql/select.md#order-by-clause) は受け付けられず、使用すると次のエラーが返されます: `Currently create aggregating index just support simple query, like: SELECT ... FROM ... WHERE ... GROUP BY ...`.
 
 - 集計インデックスの作成時に定義するクエリのフィルタ範囲は、実際のクエリの範囲と一致するか、それを包含している必要があります。
 

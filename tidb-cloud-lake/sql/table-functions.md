@@ -40,7 +40,7 @@ summary: このページでは、{{{ .lake }}} のテーブル関数に関する
 | [SHOW_GRANTS](/tidb-cloud-lake/sql/show-grants.md) | 付与された権限を表示します | `SELECT * FROM SHOW_GRANTS()` |
 | [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables.md) | システム変数を表示します | `SELECT * FROM SHOW_VARIABLES()` |
 | [STREAM_STATUS](/tidb-cloud-lake/sql/stream-status.md) | ストリームのステータス情報を表示します | `SELECT * FROM STREAM_STATUS('mystream')` |
-| [TASK_HISTROY](/tidb-cloud-lake/sql/task-history.md) | タスク実行履歴を表示します | `SELECT * FROM TASK_HISTROY('mytask')` |
+| [TASK_HISTORY](/tidb-cloud-lake/sql/task-history.md) | タスク実行履歴を表示します | `SELECT * FROM TASK_HISTORY('mytask')` |
 | [POLICY_REFERENCES](/tidb-cloud-lake/sql/policy-references.md) | セキュリティポリシーとテーブル/ビューの関連付けを返します | `SELECT * FROM POLICY_REFERENCES(POLICY_NAME => 'mypolicy')` |
 | [TAG_REFERENCES](/tidb-cloud-lake/sql/tag-references.md) | データベースオブジェクトに割り当てられたタグを返します | `SELECT * FROM TAG_REFERENCES('mydb.mytable', 'TABLE')` |
 | [GET_LINEAGE](/tidb-cloud-lake/sql/get-lineage.md) | 上流または下流のオブジェクトおよびカラムのリネージを返します | `SELECT * FROM GET_LINEAGE('mydb.mytable', 'TABLE', 'UPSTREAM')` |

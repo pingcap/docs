@@ -1,11 +1,11 @@
 ---
 title: TO_YYYYMMDD
-summary: 日付または時刻を含む日付（timestamp/datetime）を、年・月・日を含む UInt32 の数値（YYYY * 10000 + MM * 100 + DD）に変換します。## Syntax.
+summary: 日付または時刻を含む日付（timestamp/datetime）を、年・月・日を含む UInt32 の数値（YYYY * 10000 + MM * 100 + DD）に変換します。
 ---
 
 # TO_YYYYMMDD
 
-日付または時刻を含む日付（timestamp/datetime）を、年・月・日を含む UInt32 の数値（YYYY *10000 + MM* 100 + DD）に変換します。
+日付または時刻を含む日付（timestamp/datetime）を、年・月・日を含む UInt32 の数値（`YYYY * 10000 + MM * 100 + DD`）に変換します。
 
 ## 構文 {#syntax}
 

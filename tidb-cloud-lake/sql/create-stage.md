@@ -170,7 +170,7 @@ CREATE STAGE iam_external_stage
 
 ### 例 4: Cloudflare R2 上に外部 stage を作成する {#example-4-create-external-stage-on-cloudflare-r2}
 
-[Cloudflare R2](https://www.cloudflare.com/en-ca/products/r2/) は、Cloudflare が提供するオブジェクトストレージサービスであり、Amazon の AWS S3 サービスと完全な互換性があります。この例では、Cloudflare R2 上に *r2_stage* という名前の外部 stage を作成します。
+[Cloudflare R2](https://www.cloudflare.com/products/r2/) は、Cloudflare が提供するオブジェクトストレージサービスであり、Amazon の AWS S3 サービスと完全な互換性があります。この例では、Cloudflare R2 上に *r2_stage* という名前の外部 stage を作成します。
 
 #### ステップ 1: バケットを作成する {#step-1-create-bucket}
 

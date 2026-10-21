@@ -5,9 +5,7 @@ summary: NDJSON ファイルをアンロードする方法について説明し�
 
 # NDJSON ファイルのアンロード
 
-## TSV ファイルのアンロード {#unloading-tsv-file}
-
-構文:
+## 構文 {#syntax}
 
 ```sql
 COPY INTO { internalStage | externalStage | externalLocation }
