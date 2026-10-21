@@ -93,7 +93,11 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-## Partial indexes <span class="version-mark">New in v8.5.7 and v9.0.0</span>
+## Partial indexes
+
+> **Note:**
+>
+> Partial indexes are supported starting from v8.5.7 for TiDB Self-Managed and TiDB Cloud Dedicated, and starting from CLOUD.202603.1 for TiDB Cloud Essential and Premium.
 
 A partial index is an index built on a subset of rows in a table. When adding a partial index, you can specify a conditional expression, also known as a predicate, to define that subset of rows. The index contains entries only for the rows that satisfy the predicate.
 
