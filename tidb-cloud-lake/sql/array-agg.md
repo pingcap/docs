@@ -25,7 +25,7 @@ LIST(<expr>)
 
 | オプション                            | 説明                                           |
 |-------------------------------------|-------------------------------------------------------|
-| WITHIN GROUP [&lt;orderby_clause&gt;](https://docs.pingcap.com/tidbcloudlake/select/#order-by-clause) | 順序付き集合集約における値の順序を定義します        |
+| WITHIN GROUP [&lt;orderby_clause&gt;](https://docs.pingcap.com/tidbcloudlake/select/#order-by-clause) | 順序付き集合集計における値の順序を定義します        |
 
 ## 戻り値の型 {#return-type}
 

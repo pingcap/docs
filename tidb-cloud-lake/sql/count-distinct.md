@@ -7,7 +7,7 @@ summary: 集計関数。
 
 集計関数。
 
-`count(distinct ...)` 関数は、値の集合における一意な値の数を計算します。
+count(distinct ...) 関数は、値の集合における一意な値の数を計算します。
 
 大規模なデータセットに対して、少ないメモリと時間で推定結果を取得するには、[APPROX_COUNT_DISTINCT](/tidb-cloud-lake/sql/approx-count-distinct.md) の使用を検討してください。
 
@@ -52,7 +52,7 @@ VALUES (1, 'Laptop', 'Electronics', 1000),
        (5, 'Table', 'Furniture', 300);
 ```
 
-**クエリ例: 異なる category の数をカウントする**
+**クエリのデモ: 異なるカテゴリの数をカウントする**
 
 ```sql
 SELECT COUNT(DISTINCT category) AS unique_categories

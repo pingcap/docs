@@ -1,6 +1,6 @@
 ---
 title: ALTER WAREHOUSE ASSIGN NODES
-summary: " {{{ .lake }}} の Warehouse 内のクラスターにノードを割り当てるための ALTER WAREHOUSE ASSIGN NODES コマンドの使用方法を学びます。"
+summary: "{{{ .lake }}} の Warehouse 内のクラスターにノードを割り当てるための ALTER WAREHOUSE ASSIGN NODES コマンドの使用方法を学びます。"
 ---
 
 # ALTER WAREHOUSE ASSIGN NODES

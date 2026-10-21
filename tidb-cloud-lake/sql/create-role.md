@@ -76,7 +76,7 @@ SHOW GRANTS FOR 'alice';
 SHOW GRANTS FOR 'admin_user';
 ```
 
-## 関連項目 {#see-also}
+## 関連情報 {#see-also}
 
 - [GRANT](/tidb-cloud-lake/sql/grant.md) - 権限とロールを付与します
 - [SHOW GRANTS](/tidb-cloud-lake/sql/show-grants.md) - 付与された権限を表示します

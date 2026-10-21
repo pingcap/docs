@@ -43,7 +43,7 @@ CONNECTION = (
 | ENDPOINT_URL                | `https://` で始まるバケットのエンドポイント URL。                                                                                                                                                                        | 任意   |
 | ACCESS_KEY_ID               | AWS S3 互換オブジェクトストレージに接続するためのアクセスキー ID です。指定しない場合、{{{ .lake }}} は匿名でバケットにアクセスします。                                                                                 | 任意   |
 | SECRET_ACCESS_KEY           | AWS S3 互換オブジェクトストレージに接続するためのシークレットアクセスキーです。                                                                                                                                               | 任意   |
-| ENABLE_VIRTUAL_HOST_STYLE   | バケットのアドレッシングに仮想ホスト形式を使用する場合は、`"true"` に設定します。                                                                                                                                     | 任意   |
+| ENABLE_VIRTUAL_HOST_STYLE   | バケットのアドレッシングに仮想ホスト形式を使用する場合は、"true" に設定します。                                                                                                                                     | 任意   |
 
 `CONNECTION_NAME` の詳細については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 

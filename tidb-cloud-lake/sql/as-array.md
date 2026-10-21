@@ -21,7 +21,7 @@ AS_ARRAY( <variant> )
 
 ## 戻り値の型 {#return-type}
 
-Variant には Array が含まれます
+Array を含む Variant
 
 ## 例 {#examples}
 

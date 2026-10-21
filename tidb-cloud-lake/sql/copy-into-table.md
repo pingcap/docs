@@ -7,7 +7,7 @@ summary: COPY INTO を使用すると、以下のいずれかの場所にある�
 
 COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロード (load) できます。
 
-- User / Internal / External stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
+- ユーザー / 内部 / 外部 stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
 - ストレージサービスで作成されたバケットまたはコンテナ。
 - URL（`https://` で始まる）でファイルにアクセスできるリモートサーバー。
 - [IPFS](https://ipfs.tech) および Hugging Face リポジトリ。
@@ -51,7 +51,7 @@ COPY INTO [<database_name>.]<table_name> [ ( <col_name> [ , <col_name> ... ] ) ]
 >
 > {{{ .lake }}} `v1.2.890-nightly` 以降では、`FILE_FORMAT` 内で `TEXT` を `TSV` のエイリアスとして使用できます。古いサーバーでは `TYPE = TEXT` が拒否される場合があるため、このページでは互換性を考慮して、構文と例で引き続き `TSV` を使用しています。
 
-Where:
+以下のとおりです。
 
 ```sql
 userStage ::= @~[/<path>]
@@ -300,7 +300,7 @@ copyOptions ::=
 
 `SCHEMA_EVOLUTION` は、{{{ .lake }}} がロード前に stage 上の NDJSON ファイルをどのようにサンプリングするかを制御します。ターゲットテーブルで `ENABLE_SCHEMA_EVOLUTION = true` が設定されている場合に、`FILE_FORMAT = (TYPE = NDJSON ...)` と組み合わせて使用します。
 
-stage または location のロードで schema evolution の推論が実行される場合、`COPY INTO <table>` を実行するロールには、ターゲットテーブルに対する `INSERT` 権限と `ALTER` 権限の両方が必要です。`COPY INTO <table> FROM (SELECT ... FROM @stage)` のようなクエリベースの COPY では、既存の権限要件が維持されます。
+stage またはロケーションからのロードで Schema Evolution の推論が実行される場合、`COPY INTO <table>` を実行するロールには、ターゲットテーブルに対する `INSERT` 権限と `ALTER` 権限の両方が必要です。`COPY INTO <table> FROM (SELECT ... FROM @stage)` のようなクエリベースの COPY では、既存の権限要件が維持されます。
 
 | オプション | 説明 | 値 |
 |--------|-------------|--------|
@@ -312,7 +312,7 @@ stage または location のロードで schema evolution の推論が実行さ�
 
 > **Tip:**
 >
-> ログのような大量のデータをインポートする場合は、`PURGE` と `FORCE` の両方を `true` に設定することを推奨します。これにより、Meta server とのやり取り（copied-files セットの更新）を必要とせず、効率的にデータをインポートできます。ただし、これにより重複データがインポートされる可能性がある点に注意してください。
+> ログのような大量のデータをインポートする場合は、`PURGE` と `FORCE` の両方を `true` に設定することを推奨します。これにより、Meta サーバーとのやり取り（copied-files セットの更新）を必要とせず、効率的にデータをインポートできます。ただし、これにより重複データがインポートされる可能性がある点に注意してください。
 
 ## 出力 {#output}
 
@@ -401,7 +401,7 @@ COPY INTO mytable
     );
 ```
 
-**IAM Role を使用する場合（本番環境では推奨）**
+**IAM ロールを使用する場合（本番環境では推奨）**
 
 ```sql
 -- Create connection using IAM role (more secure, recommended for production)
@@ -426,7 +426,7 @@ COPY INTO mytable
 
 <div label="Azure Blob Storage" value="Azure Blob Storage">
 
-この例では、Azure Blob Storage に接続し、`data.csv` から {{{ .lake }}} にデータをロードします。
+この例では、Azure Blob Storage に接続し、'data.csv' から {{{ .lake }}} にデータをロードします。
 
 ```sql
 -- Create connection for Azure Blob Storage
@@ -529,7 +529,7 @@ COPY INTO mytable
 
 ### 例 4: PATTERN を使用したファイルのフィルタリング {#example-4-filtering-files-with-pattern}
 
-この例では、PATTERN パラメータによるパターンマッチングを使用して、Amazon S3 から CSV ファイルをロードする方法を示します。ファイル名に `sales` を含み、拡張子が `.csv` のファイルをフィルタリングします。
+この例では、PATTERN パラメータによるパターンマッチングを使用して、Amazon S3 から CSV ファイルをロードする方法を示します。ファイル名に 'sales' を含み、拡張子が '.csv' のファイルをフィルタリングします。
 
 ```sql
 -- Create connection for pattern-based file loading
@@ -568,16 +568,16 @@ COPY INTO mytable
     );
 ```
 
-複数のフォルダを含むパス内の staged files に対してパターンを指定する場合、パターンは `@<stage_name>[/<path>]` より後のパス部分にのみ一致することに注意してください。たとえば、`FROM @sales_stage/raw/` の場合、ファイル `@sales_stage/raw/year=2025/month=01/sales_20250101.parquet` は `year=2025/month=01/sales_20250101.parquet` としてマッチされます。
+複数のフォルダを含むパス内の stage 上のファイルに対してパターンを指定する場合、パターンは `@<stage_name>[/<path>]` より後のパス部分にのみ一致することに注意してください。たとえば、`FROM @sales_stage/raw/` の場合、ファイル `@sales_stage/raw/year=2025/month=01/sales_20250101.parquet` は `year=2025/month=01/sales_20250101.parquet` としてマッチされます。
 
-- プレフィックスに続く特定のサブパスに一致させたい場合は、そのプレフィックスをパターンに含めて（例: `'year=2025/month=01/'`）、そのサブパス内で一致させたいパターン（例: `'sales_'`）を指定します。
+- プレフィックスに続く特定のサブパスに一致させたい場合は、そのプレフィックスをパターンに含めて（例: 'year=2025/month=01/'）、そのサブパス内で一致させたいパターン（例: 'sales_'）を指定します。
 
     ```sql
     -- File path: raw/year=2025/month=01/sales_20250101.parquet
     COPY INTO ... FROM @sales_stage/raw/ PATTERN = 'year=2025/month=01/.*sales_.*[.]parquet') ...
     ```
 
-- ファイルパス内の任意の場所に目的のパターンを含む部分に一致させたい場合は、パターンの前後に `.*` を付けて（例: `'.*sales_20250101.*'`）、パス内の `sales_20250101` の任意の出現箇所に一致させます。
+- ファイルパス内の任意の場所に目的のパターンを含む部分に一致させたい場合は、パターンの前後に '.*' を付けて（例: '.*sales_20250101.*'）、パス内の 'sales_20250101' の任意の出現箇所に一致させます。
 
     ```sql
     -- File path: raw/year=2025/month=01/sales_20250101.parquet
@@ -649,14 +649,14 @@ COPY INTO books_with_extra_columns
 
 ### 例 6: カスタム形式での JSON のロード {#example-6-loading-json-with-custom-format}
 
-この例では、次の内容を持つ CSV ファイル `data.csv` からデータをロードします。
+この例では、次の内容を持つ CSV ファイル "data.csv" からデータをロードします。
 
 ```json
 1,"U00010","{\"carPriceList\":[{\"carTypeId":10,\"distance":5860},{\"carTypeId":11,\"distance\":5861}]}"
-2,"U00011","{\"carPriceList\":[{\"carTypeId":12,\"distance\":5862},{\"carTypeId":13,\"distance\":5863}]}"
+2,"U00011","{\"carPriceList\":[{\"carTypeId":12,\"distance":5862},{\"carTypeId":13,\"distance\":5863}]}"
 ```
 
-各行には 3 つのカラムのデータが含まれており、3 番目のカラムは JSON データを含む文字列です。JSON フィールドを含む CSV データを正しくロードするには、適切なエスケープ文字を設定する必要があります。この例では、JSON データにダブルクォート `"` が含まれているため、バックスラッシュ `\` をエスケープ文字として使用します。
+各行には 3 つのカラムのデータが含まれており、3 番目のカラムは JSON データを含む文字列です。JSON フィールドを含む CSV データを正しくロードするには、適切なエスケープ文字を設定する必要があります。この例では、JSON データにダブルクォート " が含まれているため、バックスラッシュ \ をエスケープ文字として使用します。
 
 #### ステップ 1: カスタムファイル形式を作成する {#step-1-create-custom-file-format}
 
@@ -743,7 +743,7 @@ SELECT * FROM t2;
 
 ### 例 8: Schema Evolution を使用したロード {#example-8-loading-with-schema-evolution}
 
-スキーマにターゲットテーブルに存在しないカラムを含む Parquet または NDJSON ファイルをロードする場合、Schema Evolution を使用して不足しているカラムを自動的に追加できます。Schema Evolution の推論を実行する stage または location からのロードでは、ロードを実行するロールにターゲットテーブルに対する `INSERT` および `ALTER` 権限が必要です。まず、テーブルで Schema Evolution を有効にします。
+スキーマにターゲットテーブルに存在しないカラムを含む Parquet または NDJSON ファイルをロードする場合、Schema Evolution を使用して不足しているカラムを自動的に追加できます。Schema Evolution の推論を実行する stage またはロケーションからのロードでは、ロードを実行するロールにターゲットテーブルに対する `INSERT` および `ALTER` 権限が必要です。まず、テーブルで Schema Evolution を有効にします。
 
 ```sql
 CREATE OR REPLACE TABLE invoices(order_id INT);

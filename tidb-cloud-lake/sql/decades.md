@@ -1,11 +1,11 @@
 ---
 title: TO_DECADES
-summary: 指定した数の 10 年（decade）を Interval 型に変換します。
+summary: 指定した数の 10 年を Interval 型に変換します。
 ---
 
 # TO_DECADES
 
-指定した数の 10 年（decade）を Interval 型に変換します。
+指定した数の 10 年を Interval 型に変換します。
 
 - 入力として、正の整数、0、負の整数を受け付けます。
 

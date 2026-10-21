@@ -49,7 +49,7 @@ CREATE DATABASE test;
 
 ### デフォルトストレージ接続を使用したデータベースの作成 {#creating-a-database-with-a-default-storage-connection}
 
-次の例では、AWS IAM ロールを使用して接続を作成し、その後、この接続をデフォルトストレージとして使用するデータベースを作成します。IAM ロールを使用する方法は、{{{ .lake }}} に認証情報を保存する必要がないため、access keys よりも安全です。
+次の例では、AWS IAM ロールを使用して接続を作成し、その後、この接続をデフォルトストレージとして使用するデータベースを作成します。IAM ロールを使用する方法は、{{{ .lake }}} に認証情報を保存する必要がないため、アクセスキーよりも安全です。
 
 ```sql
 CREATE CONNECTION my_s3

@@ -31,7 +31,7 @@ float64
 
 ## 例 {#example}
 
-**テーブルを作成してサンプルデータを挿入**
+**テーブルを作成してサンプルデータを挿入する**
 
 ```sql
 CREATE TABLE product_sales (
@@ -49,7 +49,7 @@ VALUES (1, 1, 10, 1000),
        (5, 5, 50, 5000);
 ```
 
-**クエリ例: 販売数量と売上高の間の母共分散を計算**
+**クエリのデモ: 販売数量と売上高の間の母共分散を計算する**
 
 ```sql
 SELECT COVAR_POP(units_sold, revenue) AS covar_pop_units_revenue

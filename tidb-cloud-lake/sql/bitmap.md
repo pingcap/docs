@@ -1,6 +1,6 @@
 ---
 title: Bitmap
-summary: BITMAP は符号なし 64 ビット整数のメンバーシップ情報を格納し、高速な集合演算（count、union、intersection など）をサポートします。SELECT 文ではバイナリ blob として表示されるため、値を解釈するには Bitmap Functions を使用してください。
+summary: BITMAP は符号なし 64 ビット整数のメンバーシップ情報を格納し、高速な集合演算（count、union、intersection など）をサポートします。SELECT 文ではバイナリ blob として表示されるため、値を解釈するには Bitmap 関数を使用してください。
 ---
 
 # Bitmap

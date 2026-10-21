@@ -1,13 +1,13 @@
 ---
 title: CREATE INVERTED INDEX
-summary: "{{{ .lake }}} で新しい inverted index を作成します。"
+summary: "{{{ .lake }}} で新しい転置インデックスを作成します。"
 ---
 
 # CREATE INVERTED INDEX
 
-{{{ .lake }}} で新しい inverted index を作成します。
+{{{ .lake }}} で新しい転置インデックスを作成します。
 
-Inverted index は通常、`STRING` および `VARIANT` カラムに対して使用されます。クエリには、フィールドを意識した式、ブール演算子、ネストされたパスをサポートする [`QUERY()`](/tidb-cloud-lake/sql/query.md) 関数の使用を推奨します。一致した行の関連度スコアを返して順位付けするには、`QUERY()` とあわせて [`score()`](/tidb-cloud-lake/sql/score.md) を使用できます。
+転置インデックスは通常、`STRING` および `VARIANT` カラムに対して使用されます。クエリには、フィールドを意識した式、ブール演算子、ネストされたパスをサポートする [`QUERY()`](/tidb-cloud-lake/sql/query.md) 関数の使用を推奨します。一致した行の関連度スコアを返して順位付けするには、`QUERY()` とあわせて [`score()`](/tidb-cloud-lake/sql/score.md) を使用できます。
 
 ## 構文 {#syntax}
 
@@ -21,10 +21,10 @@ CREATE [ OR REPLACE ] INVERTED INDEX [IF NOT EXISTS] <index>
 |------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|
 | `[ OR REPLACE ]`       | 省略可能なパラメータです。インデックスがすでに存在する場合、それを置き換えることを示します。                                                                      |
 | `[ IF NOT EXISTS ]`    | 省略可能なパラメータです。インデックスがまだ存在しない場合にのみ作成されることを示します。                                                           |
-| `<index>`              | 作成する inverted index の名前です。                                                                                                             |
+| `<index>`              | 作成する転置インデックスの名前です。                                                                                                             |
 | `[<database>.]<table>` | インデックスを作成する対象カラムを含むデータベース名とテーブル名です。                                                            |
 | `<column>`             | インデックスに含めるカラム名です。実際には通常 `STRING` または `VARIANT` カラムです。同じテーブルに対して複数のインデックスを作成できますが、各カラムはインデックス間で一意である必要があります。 |
-| `<IndexOptions>`       | inverted index の構築方法を指定する省略可能なインデックスオプションです。                                                                                            |
+| `<IndexOptions>`       | 転置インデックスの構築方法を指定する省略可能なインデックスオプションです。                                                                                            |
 
 ### IndexOptions {#indexoptions}
 
@@ -56,7 +56,7 @@ IndexOptions ::=
 
 ## 例 {#examples}
 
-### 単一カラムに Inverted Index を作成する {#creating-an-inverted-index-on-a-single-column}
+### 単一カラムに転置インデックスを作成する {#creating-an-inverted-index-on-a-single-column}
 
 ```sql
 CREATE TABLE user_comments (
@@ -67,7 +67,7 @@ CREATE TABLE user_comments (
 CREATE INVERTED INDEX user_comments_idx ON user_comments(comment_text);
 ```
 
-### カスタム Tokenizer と Filters を使用して Inverted Index を作成する {#creating-an-inverted-index-with-custom-tokenizer-and-filters}
+### カスタム Tokenizer と Filters を使用して転置インデックスを作成する {#creating-an-inverted-index-with-custom-tokenizer-and-filters}
 
 ```sql
 CREATE TABLE product_reviews (
@@ -84,7 +84,7 @@ FILTERS = 'english_stop,english_stemmer,chinese_stop'
 INDEX_RECORD = 'basic';
 ```
 
-### 複数カラムに Inverted Index を作成する {#creating-an-inverted-index-on-multiple-columns}
+### 複数カラムに転置インデックスを作成する {#creating-an-inverted-index-on-multiple-columns}
 
 ```sql
 CREATE TABLE customer_feedback (
@@ -201,7 +201,7 @@ ORDER BY score() DESC;
 │ id │  score()  │       title      │
 ├────┼───────────┼──────────────────┤
 │  3 │ 1.8571336 │ Vue.js设计与实现 │
-│  4 │ 0.6785374 │ 前端架構设计     │
+│  4 │ 0.6785374 │ 前端架构设计     │
 ╰───────────────────────────────────╯
 ```
 

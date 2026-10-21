@@ -9,7 +9,7 @@ FUSE テーブルから名前付きスナップショットタグを削除しま
 
 > **Note:**
 >
-> - これは**実験的**機能です。使用する前に、まず `SET enable_experimental_table_ref = 1;` を有効にしてください。
+> - これは**実験的**機能です。使用する前に、まず有効にしてください: `SET enable_experimental_table_ref = 1;`。
 > - FUSE エンジンのテーブルでのみサポートされます。
 
 ## 構文 {#syntax}

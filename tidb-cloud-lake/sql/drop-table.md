@@ -27,7 +27,7 @@ DROP TABLE [ IF EXISTS ] [ <database_name>. ]<table_name>
 
 ### テーブルの削除 {#deleting-a-table}
 
-この例では、DROP TABLE コマンドを使用して `"test"` テーブルを削除する方法を示します。テーブルを削除した後にそのテーブルに対して SELECT を実行しようとすると、`"Unknown table"` エラーが発生します。また、UNDROP TABLE コマンドを使用して削除した `"test"` テーブルを復元し、再びそのデータを SELECT できるようにする方法も示しています。
+この例では、DROP TABLE コマンドを使用して "test" テーブルを削除する方法を示します。テーブルを削除した後にそのテーブルに対して SELECT を実行しようとすると、"Unknown table" エラーが発生します。また、UNDROP TABLE コマンドを使用して削除した "test" テーブルを復元し、再びそのデータを SELECT できるようにする方法も示しています。
 
 ```sql
 CREATE TABLE test(a INT, b VARCHAR);
