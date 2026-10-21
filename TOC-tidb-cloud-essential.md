@@ -402,7 +402,7 @@
   - [ビュー](/views.md)
   - [パーティショニング](/partitioned-table.md)
   - [一時テーブル](/temporary-tables.md)
-  - [キャッシュされたテーブル](/cached-tables.md)
+  - [キャッシュテーブル](/cached-tables.md)
   - [外部キー制約](/foreign-key.md)
   - 文字セットと照合順序
     - [概要](/character-set-and-collation.md)

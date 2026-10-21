@@ -5,13 +5,13 @@ summary: このドキュメントでは、OLTP ワークロードのパフォー
 
 # OLTPシナリオの性能チューニングの実践 {#performance-tuning-practices-for-oltp-scenarios}
 
-TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的なプロファイリング](/dashboard/continuous-profiling.md)機能や、TiDB [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)などの包括的なパフォーマンス診断および分析機能を提供します。
+TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的プロファイリング](/dashboard/continuous-profiling.md)機能や、TiDB [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)などの包括的なパフォーマンス診断および分析機能を提供します。
 
 このドキュメントでは、これらの機能を組み合わせて使用し、7つの異なるランタイム シナリオで同じ OLTP ワークロードのパフォーマンスを分析および比較する方法について説明します。これにより、TiDB のパフォーマンスを効率的に分析および調整するのに役立つパフォーマンスチューニング プロセスが示されます。
 
 > **Note:**
 >
-> [Top SQL](/dashboard/top-sql.md)と[継続的なプロファイリング](/dashboard/continuous-profiling.md)はデフォルトでは有効になっていません。事前に有効にする必要があります。
+> [Top SQL](/dashboard/top-sql.md)と[継続的プロファイリング](/dashboard/continuous-profiling.md)はデフォルトでは有効になっていません。事前に有効にする必要があります。
 
 このドキュメントでは、これらのシナリオで同じアプリケーションを異なる JDBC 構成で実行することにより、アプリケーションとデータベース間のさまざまな相互作用が全体的なシステムパフォーマンスにどのように影響するかを示し、パフォーマンスを向上させるために[TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)を適用できるようにします。
 
@@ -431,10 +431,10 @@ QPSは34.9kから40.9kに増加し、`execute`フェーズで最も時間がか�
     useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance
     ```
 
-- パフォーマンス分析とチューニングには、TiDB Dashboard (たとえば、 Top SQL機能や継続的なプロファイリング機能) とパフォーマンス概要ダッシュボードを使用することをお勧めします。
+- パフォーマンス分析とチューニングには、TiDB Dashboard (たとえば、 Top SQL機能や継続的プロファイリング機能) とパフォーマンス概要ダッシュボードを使用することをお勧めします。
 
     - [Top SQL](/dashboard/top-sql.md)機能を使用すると、実行中にデータベース内の各 SQL文の CPU 消費量を視覚的に監視および調査して、データベースのパフォーマンスの問題をトラブルシューティングできます。
-    - [継続的なプロファイリング](/dashboard/continuous-profiling.md)を使用すると、TiDB、TiKV、PD の各インスタンスからパフォーマンスデータを継続的に収集できます。アプリケーションが TiDB とやり取りするために異なるインターフェースを使用する場合、TiDB の CPU 消費量に大きな差が生じます。
+    - [継続的プロファイリング](/dashboard/continuous-profiling.md)を使用すると、TiDB、TiKV、PD の各インスタンスからパフォーマンスデータを継続的に収集できます。アプリケーションが TiDB とやり取りするために異なるインターフェースを使用する場合、TiDB の CPU 消費量に大きな差が生じます。
     - [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)を使用すると、データベース時間とSQL実行時間の内訳情報の概要を取得できます。データベース時間に基づいてパフォーマンスを分析・診断することで、システム全体のパフォーマンスボトルネックがTiDBにあるかどうかを判断できます。ボトルネックがTiDBにある場合は、データベース時間とレイテンシーの内訳、負荷プロファイル、リソース使用率を使用して、TiDB内のパフォーマンスボトルネックを特定し、それに応じてパフォーマンスを調整できます。
 
 これらの機能を組み合わせて使用することで、実際のアプリケーションのパフォーマンスを効率的に分析および調整できます。

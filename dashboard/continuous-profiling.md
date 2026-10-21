@@ -3,7 +3,7 @@ title: TiDB Dashboard Instance Profiling - Continuous Profiling
 summary: TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決することができます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
 ---
 
-# TiDB Dashboardインスタンスプロファイリング - 継続的なプロファイリング {#tidb-dashboard-instance-profiling-continuous-profiling}
+# TiDB Dashboardインスタンスプロファイリング - 継続的プロファイリング {#tidb-dashboard-instance-profiling-continuous-profiling}
 
 > **Note:**
 >
@@ -20,7 +20,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 - 手動プロファイリングでは、プロファイリングを開始した瞬間に短期間 (たとえば 30秒) のみパフォーマンスデータが収集されますが、継続プロファイリングが有効になっている場合は、継続的にデータが収集されます。
 - 手動プロファイリングは現在発生している問題を分析するためにのみ使用できますが、継続的プロファイリングは現在の問題と履歴の問題の両方を分析するために使用できます。
 - 手動プロファイリングでは特定のインスタンスの特定のパフォーマンスデータを収集できますが、継続的プロファイリングではすべてのインスタンスのすべてのパフォーマンスデータを収集します。
-- 継続的なプロファイリングでは、より多くのパフォーマンスデータが保存されるため、より多くのディスク領域が使用されます。
+- 継続的プロファイリングでは、より多くのパフォーマンスデータが保存されるため、より多くのディスク領域が使用されます。
 
 ## サポートされているパフォーマンスデータ {#supported-performance-data}
 
@@ -44,7 +44,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 - ブラウザで[http://127.0.0.1:2379/dashboard/#/continuous_profiling](http://127.0.0.1:2379/dashboard/#/continuous_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
-## 継続的なプロファイリングを有効にする {#enable-continuous-profiling}
+## 継続的プロファイリングを有効にする {#enable-continuous-profiling}
 
 > **Note:**
 >
@@ -54,7 +54,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 この機能を有効にするには:
 
-1. [継続的なプロファイリングページ](#access-the-page)をご覧ください。
+1. [継続的プロファイリングページ](#access-the-page)をご覧ください。
 2. **Open Settings**をクリックします。右側の**Settings**領域で、 **Enable Feature**をオンにし、必要に応じて**Retention Duration**のデフォルト値を変更します。
 3. **Save**をクリックします。
 
@@ -62,7 +62,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## 現在のパフォーマンスデータを表示する {#view-current-performance-data}
 
-継続的なプロファイリングが有効になっているクラスターでは、手動プロファイリングを開始できません。現時点でのパフォーマンスデータを表示するには、最新のプロファイリング結果をクリックしてください。
+継続的プロファイリングが有効になっているクラスターでは、手動プロファイリングを開始できません。現時点でのパフォーマンスデータを表示するには、最新のプロファイリング結果をクリックしてください。
 
 ## 過去のパフォーマンスデータを表示する {#view-historical-performance-data}
 
@@ -80,9 +80,9 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ![View profiling result](/media/dashboard/dashboard-conprof-single.png)
 
-## 継続的なプロファイリングを無効にする {#disable-continuous-profiling}
+## 継続的プロファイリングを無効にする {#disable-continuous-profiling}
 
-1. [継続的なプロファイリングページ](#access-the-page)をご覧ください。
+1. [継続的プロファイリングページ](#access-the-page)をご覧ください。
 2. 右上隅の歯車アイコンをクリックして設定ページを開きます。 **Enable Feature**をオフにします。
 3. **Save**をクリックします。
 4. ポップアップされたダイアログボックスで、 **Disable**をクリックします。
@@ -91,11 +91,11 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## よくある質問 {#frequently-asked-questions}
 
-**1. 継続的なプロファイリングを有効にできず、UI に「必要なコンポーネントNgMonitoring が開始されていません」と表示されます**。
+**1. 継続的プロファイリングを有効にできず、UI に「必要なコンポーネントNgMonitoring が開始されていません」と表示されます**。
 
 [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照してください。
 
-**2. 継続的なプロファイリングを有効にするとパフォーマンスに影響はありますか?**
+**2. 継続的プロファイリングを有効にするとパフォーマンスに影響はありますか?**
 
 当社のベンチマークによると、この機能を有効にすると、パフォーマンスへの平均的な影響は 1% 未満になります。
 

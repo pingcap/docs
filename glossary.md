@@ -51,9 +51,9 @@ TiDBでは、 `br`はバックアップまたはリストアに使用される[b
 
 ## <a id="C" class="letter" href="#C">C</a> {#c}
 
-### キャッシュされたテーブル（Cached Table） {#cached-table}
+### キャッシュテーブル（Cached Table） {#cached-table}
 
-キャッシュされたテーブル機能を使用すると、TiDBはテーブル全体のデータをTiDBサーバーのメモリにロードし、TiKVにアクセスすることなくメモリから直接テーブルデータを取得するため、読み取りパフォーマンスが向上します。
+キャッシュテーブル機能を使用すると、TiDBはテーブル全体のデータをTiDBサーバーのメモリにロードし、TiKVにアクセスすることなくメモリから直接テーブルデータを取得するため、読み取りパフォーマンスが向上します。
 
 ### クラスタ（Cluster） {#cluster}
 
@@ -79,9 +79,9 @@ RocksDBとTiKVでは、カラムファミリー（CF）は、データベース�
 
 共通テーブル式 (CTE) を使用すると、 [`WITH`](/sql-statements/sql-statement-with.md)句を使用して SQL文内で複数回参照できる一時的な結果セットを定義できます。これにより、文の可読性と実行効率が向上します。詳細については、 [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)を参照してください。
 
-### 継続的なプロファイリング（Continuous Profiling） {#continuous-profiling}
+### 継続的プロファイリング（Continuous Profiling） {#continuous-profiling}
 
-継続的なプロファイリングは、システムコールレベルでのリソースオーバーヘッドを監視する方法です。継続的なプロファイリングを使用すると、TiDB はパフォーマンスの問題をきめ細かく監視し、フレームグラフを使用して運用チームが根本原因を特定するのに役立ちます。詳細については、 [TiDB Dashboardインスタンスプロファイリング - 継続的なプロファイリング](/dashboard/continuous-profiling.md)を参照してください。
+継続的プロファイリングは、システムコールレベルでのリソースオーバーヘッドを監視する方法です。継続的プロファイリングを使用すると、TiDB はパフォーマンスの問題をきめ細かく監視し、フレームグラフを使用して運用チームが根本原因を特定するのに役立ちます。詳細については、 [TiDB Dashboardインスタンスプロファイリング - 継続的プロファイリング](/dashboard/continuous-profiling.md)を参照してください。
 
 ### コプロセッサー（Coprocessor） {#coprocessor}
 

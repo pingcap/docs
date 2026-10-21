@@ -255,7 +255,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
     - `newLocalColumnPool`で列が繰り返し割り当てられる問題を修正 [#63809](https://github.com/pingcap/tidb/issues/63809) @[hawkingrei](https://github.com/hawkingrei)
     - `syncload`の失敗に関する無効な警告ログが生成される問題を修正 [#63880](https://github.com/pingcap/tidb/issues/63880) @[0xPoe](https://github.com/0xPoe)
     - トランザクションを実行中の接続を手動で終了すると、TiDBがpanicして異常終了する可能性がある問題を修正しました [#63956](https://github.com/pingcap/tidb/issues/63956) @[wshwsh12](https://github.com/wshwsh12)
-    - TiFlashレプリカからキャッシュされたテーブルを読み取る際に、ゴルーチンとメモリリークが発生する可能性がある問題を修正しました [#63329](https://github.com/pingcap/tidb/issues/63329) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - TiFlashレプリカからキャッシュテーブルを読み取る際に、ゴルーチンとメモリリークが発生する可能性がある問題を修正しました [#63329](https://github.com/pingcap/tidb/issues/63329) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - `ALTER TABLE child CHANGE COLUMN`を実行して列を変更した後、外部キーが更新されない問題を修正しました [#59705](https://github.com/pingcap/tidb/issues/59705) @[fzzf678](https://github.com/fzzf678)
     - 以前の TiDB バージョンから`RENAME TABLE`ジョブ引数が正しくデコードされない問題を修正しました [#64413](https://github.com/pingcap/tidb/issues/64413) @[joechenrh](https://github.com/joechenrh)
     - BR復元が失敗した場合にAUTO_INCREMENT IDがリベースされない問題を修正 [#60804](https://github.com/pingcap/tidb/issues/60804) @[joechenrh](https://github.com/joechenrh)
