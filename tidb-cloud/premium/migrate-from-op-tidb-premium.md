@@ -1,30 +1,30 @@
 ---
-title: Migrate from TiDB Self-Managed to {{{ .premium }}}
-summary: Learn how to migrate data from TiDB Self-Managed to {{{ .premium }}}.
+title: Migrate from TiDB Self-Managed to {{{ .premium }}} or {{{ .byoc }}}
+summary: Learn how to migrate data from TiDB Self-Managed to {{{ .premium }}} or {{{ .byoc }}}.
 ---
 
-# Migrate from TiDB Self-Managed to {{{ .premium }}}
+# Migrate from TiDB Self-Managed to {{{ .premium }}} or {{{ .byoc }}}
 
-This document describes how to migrate data from your TiDB Self-Managed clusters to {{{ .premium }}} (on AWS) instances using Dumpling and TiCDC.
+This document describes how to migrate data from your TiDB Self-Managed clusters to {{{ .premium }}} or {{{ .byoc }}} instances on AWS using Dumpling and TiCDC.
 
 The overall procedure is as follows:
 
 1. Build the environment and prepare the tools.
 2. Migrate full data. The process is as follows:
    1. Export data from TiDB Self-Managed to Amazon S3 using Dumpling.
-   2. Import data from Amazon S3 to {{{ .premium }}}.
+   2. Import data from Amazon S3 to {{{ .premium }}} or {{{ .byoc }}}.
 3. Replicate incremental data using TiCDC.
 4. Verify the migrated data.
 
 ## Prerequisites
 
-It is recommended that you put the S3 bucket and the {{{ .premium }}} instance in the same region. Cross-region migration might incur additional cost for data conversion.
+It is recommended that you put the S3 bucket and the {{{ .premium }}} or {{{ .byoc }}} instance in the same region. Cross-region migration might incur additional cost for data conversion.
 
 Before migration, you need to prepare the following:
 
 - An [AWS account](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg) with administrator access
 - An [AWS S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target {{{ .premium }}} instance hosted on AWS
+- [A TiDB Cloud account](/tidb-cloud/tidb-cloud-quickstart.md) with at least the [`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles) access to your target {{{ .premium }}} or {{{ .byoc }}} instance hosted on AWS
 
 ## Prepare tools
 
@@ -39,7 +39,7 @@ You need to prepare the following tools:
 
 Before you deploy Dumpling, note the following:
 
-- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target {{{ .premium }}} instance.
+- It is recommended to deploy Dumpling on a new EC2 instance in the same VPC as your target {{{ .premium }}} or {{{ .byoc }}} instance.
 - The recommended EC2 instance type is **c6g.4xlarge** (16 vCPU and 32 GiB memory). You can choose other EC2 instance types based on your needs. The Amazon Machine Image (AMI) can be Amazon Linux, Ubuntu, or Red Hat.
 
 You can deploy Dumpling by using TiUP or using the installation package.
@@ -77,7 +77,7 @@ You need the following privileges to export data from the upstream database:
 
 ### Deploy TiCDC
 
-You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB Self-Managed cluster to {{{ .premium }}}.
+You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to replicate incremental data from the upstream TiDB Self-Managed cluster to {{{ .premium }}} or {{{ .byoc }}}.
 
 1. Confirm whether the current TiDB version supports TiCDC. TiDB v4.0.8.rc.1 and later versions support TiCDC. You can check the TiDB version by executing `select tidb_version();` in the TiDB Self-Managed cluster. If you need to upgrade it, see [Upgrade TiDB Using TiUP](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup).
 
@@ -102,10 +102,10 @@ You need to [deploy TiCDC](https://docs.pingcap.com/tidb/dev/deploy-ticdc) to re
 
 ## Migrate full data
 
-To migrate data from the TiDB Self-Managed cluster to {{{ .premium }}}, perform a full data migration as follows:
+To migrate data from the TiDB Self-Managed cluster to {{{ .premium }}} or {{{ .byoc }}}, perform a full data migration as follows:
 
 1. Migrate data from the TiDB Self-Managed cluster to Amazon S3.
-2. Migrate data from Amazon S3 to {{{ .premium }}}.
+2. Migrate data from Amazon S3 to {{{ .premium }}} or {{{ .byoc }}}.
 
 ### Migrate data from the TiDB Self-Managed cluster to Amazon S3
 
@@ -197,11 +197,11 @@ Do the following to export data from the upstream TiDB Self-Managed cluster to A
     - `{schema}.{table}.{0001}.{sql|csv}`: data files
     - `*-schema-view.sql`, `*-schema-trigger.sql`, `*-schema-post.sql`: other exported SQL files
 
-### Migrate data from Amazon S3 to {{{ .premium }}}
+### Migrate data from Amazon S3 to {{{ .premium }}} or {{{ .byoc }}}
 
-After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to {{{ .premium }}}.
+After you export data from the TiDB Self-Managed cluster to Amazon S3, you need to migrate the data to {{{ .premium }}} or {{{ .byoc }}}.
 
-1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target {{{ .premium }}} instance.
+1. In the [TiDB Cloud console](https://tidbcloud.com/), get the Account ID and External ID of your target {{{ .premium }}} or {{{ .byoc }}} instance.
 
     1. Navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and click the name of your target instance.
     2. In the left navigation pane, click **Data** > **Import**.
@@ -214,9 +214,11 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
     2. Provide a role name, review the permissions, and acknowledge the IAM warning.
     3. Create the stack and wait for the status to change to **CREATE_COMPLETE**.
     4. On the **Outputs** tab, copy the newly generated Role ARN.
-    5. Return to {{{ .premium }}}, paste the Role ARN, and click **Confirm**. The wizard stores the ARN for subsequent import jobs.
+    5. Return to {{{ .premium }}} or {{{ .byoc }}}, paste the Role ARN, and click **Confirm**. The wizard stores the ARN for subsequent import jobs.
 
 3. Continue with the remaining steps in the import wizard, and use the saved Role ARN when prompted.
+
+    For BYOC instances, add the `tidbcloud.com/allow-dataplane-access=true` tag to the IAM role before starting the import.
 
 #### Manually create the IAM role (optional)
 
@@ -263,11 +265,13 @@ If your organization cannot deploy CloudFormation stacks, create the access poli
     }
     ```
 
-2. Create an IAM role that trusts {{{ .premium }}} by providing the **Account ID** and **External ID** you have noted down earlier. Then, attach the policy created in the previous step to this role.
+2. Create an IAM role that trusts {{{ .premium }}} or {{{ .byoc }}} by providing the **Account ID** and **External ID** you have noted down earlier. Then, attach the policy created in the previous step to this role.
 
-3. Copy the resulting Role ARN and enter it in the {{{ .premium }}} import wizard.
+    For BYOC instances, add the `tidbcloud.com/allow-dataplane-access=true` tag to the IAM role before starting the import.
 
-4. Import data to {{{ .premium }}} by following [Import data from Amazon S3 into {{{ .premium }}}](/tidb-cloud/premium/import-from-s3-premium.md).
+3. Copy the resulting Role ARN and enter it in the {{{ .premium }}} or {{{ .byoc }}} import wizard.
+
+4. Import data to {{{ .premium }}} or {{{ .byoc }}} by following [Import data from Amazon S3 into {{{ .premium }}} or {{{ .byoc }}}](/tidb-cloud/premium/import-from-s3-premium.md).
 
 ## Replicate incremental data
 
@@ -277,19 +281,16 @@ To replicate incremental data, do the following:
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. Grant TiCDC to connect to {{{ .premium }}}.
+2. Configure network connectivity from the TiCDC servers to the target instance using either a public connection or AWS PrivateLink. For public connections, follow [Connect via Public Connection](/tidb-cloud/premium/connect-to-premium-via-public-connection.md). For private connections, follow [Connect via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
-    2. In the left navigation pane, click **Settings** > **Networking**.
-    3. On the **Networking** page, click **Add IP Address**.
-    4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access {{{ .premium }}}. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+    For BYOC instances, public connections are available only if you provided a public hosted zone during deployment. If you provided a private hosted zone, use a private connection.
 
-3. Get the connection information of the downstream {{{ .premium }}} instance.
+3. Get the connection information of the downstream {{{ .premium }}} or {{{ .byoc }}} instance.
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} instance to go to its overview page.
+    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page.
     2. Click **Connect** in the upper-right corner.
-    3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
-    4. From the connection information, you can get the host IP address and port of the instance. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
+    3. In the connection dialog, select the connection type configured in the previous step from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
+    4. From the connection information, get the host and port of the instance for the selected connection type.
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 
@@ -344,7 +345,7 @@ To replicate incremental data, do the following:
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream {{{ .premium }}} instance.
+    - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream {{{ .premium }}} or {{{ .byoc }}} instance.
 
 7. Set the same timezone for the upstream cluster and downstream instance. By default, {{{ .premium }}} sets the timezone to UTC. If the timezone is different between the upstream cluster and downstream instance, you need to set the same timezone for both.
 
@@ -405,4 +406,4 @@ To replicate incremental data, do the following:
     backup_user_priv
     ```
 
-    After you get the user and privilege information, run the generated SQL statements in the downstream {{{ .premium }}} instance to restore the user and privilege information.
+    After you get the user and privilege information, run the generated SQL statements in the downstream {{{ .premium }}} or {{{ .byoc }}} instance to restore the user and privilege information.
