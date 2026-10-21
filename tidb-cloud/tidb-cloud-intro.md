@@ -133,6 +133,10 @@ TiDB Cloud provides the following deployment options:
 
     TiDB Cloud Lake is a cloud-native data warehouse service for analytics workloads. It separates compute and storage, and supports ANSI SQL, semi-structured data processing, and AI-oriented workflows. For more details, see [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/).
 
+- TiDB Cloud Filesystem
+
+    TiDB Cloud Filesystem is a persistent, shared cloud file system for applications, automation, and AI agents. It is currently in public preview. For more details, see [TiDB Cloud Filesystem](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/).
+
 ## Architecture
 
 ![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)

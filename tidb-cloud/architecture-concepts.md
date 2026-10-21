@@ -135,6 +135,12 @@ TiDB Cloud Lake supports ANSI SQL, semi-structured data processing, vector searc
 
 For more details, see [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/).
 
+## TiDB Cloud Filesystem
+
+TiDB Cloud Filesystem provides persistent, shared file storage independently of the machines and processes that access it. You can access files using `ti fs` commands or mount a file system as a local directory, without provisioning or managing a TiDB database.
+
+For more details, see [TiDB Cloud Filesystem](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/).
+
 ## TiDB Cloud console
 
 The [TiDB Cloud console](https://tidbcloud.com/) is the web-based management interface for TiDB Cloud resources. It provides tools to manage TiDB Cloud resources, import or migrate data, monitor performance metrics, configure backups, set up security controls, and integrate with other cloud services, all from a single, user-friendly platform.
