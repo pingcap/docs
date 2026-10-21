@@ -13,7 +13,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
 
 このチュートリアルでは、Snowflake から Parquet 形式で Amazon S3 バケットにデータをエクスポートし、その後 {{{ .lake }}} にロードする手順を説明します。
 
-## 開始前に {#before-you-start}
+## 始める前に {#before-you-start}
 
 開始する前に、次の前提条件を満たしていることを確認してください。
 
@@ -67,7 +67,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
     ![alt text](/media/tidb-cloud-lake/trusted-entity.png)
 
     - ロールの作成後、ロール ARN をコピーして安全な場所に保存します。例: `arn:aws:iam::123456789012:role/lake-doc-role`
-    - Snowflake アカウントの IAM user ARN を取得した後で、このロールの **Trust Relationships** を更新します。
+    - Snowflake アカウントの IAM ユーザー ARN を取得した後で、このロールの **Trust Relationships** を更新します。
 
 3. Snowflake で SQL worksheet を開き、ロール ARN を使用して `my_s3_integration` という名前の storage integration を作成します。
 
@@ -80,7 +80,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
       ENABLED = TRUE;
     ```
 
-4. storage integration の詳細を表示し、結果内の `STORAGE_AWS_IAM_USER_ARN` プロパティの値を取得します。例: `arn:aws:iam::123456789012:user/example`。この値は、次のステップで role `lake-doc-role` の **Trust Relationships** を更新するために使用します。
+4. storage integration の詳細を表示し、結果内の `STORAGE_AWS_IAM_USER_ARN` プロパティの値を取得します。例: `arn:aws:iam::123456789012:user/example`。この値は、次のステップでロール `lake-doc-role` の **Trust Relationships** を更新するために使用します。
 
     ```sql
     DESCRIBE INTEGRATION my_s3_integration;
@@ -103,11 +103,11 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
     }
     ```
 
-    `arn:aws:iam::123456789012:user/example` という ARN は、前のステップで取得した Snowflake アカウントの IAM user ARN です。
+    `arn:aws:iam::123456789012:user/example` という ARN は、前のステップで取得した Snowflake アカウントの IAM ユーザー ARN です。
 
 ## ステップ 2: Amazon S3 へのデータの準備とエクスポート {#step-2-preparing-and-exporting-data-to-amazon-s3}
 
-1. Snowflake で、Snowflake storage integration `my_s3_integration` を使用して external stage を作成します。
+1. Snowflake で、Snowflake storage integration `my_s3_integration` を使用して外部 stage を作成します。
 
     ```sql
     CREATE OR REPLACE STAGE my_external_stage
@@ -136,7 +136,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
     (3, 'Charlie', 35);
     ```
 
-3. `COPY INTO` を使用して、テーブルデータを external stage にエクスポートします。
+3. `COPY INTO` を使用して、テーブルデータを外部 stage にエクスポートします。
 
     ```sql
     COPY INTO @my_external_stage/my_table_data_

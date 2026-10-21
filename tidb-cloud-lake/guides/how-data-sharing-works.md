@@ -5,7 +5,7 @@ summary: 異なるチームは、同じデータの異なる部分を必要と�
 
 # TiDB Cloud Lake のデータ共有の仕組み
 
-## Data Sharing とは何ですか？ {#what-is-data-sharing}
+## データ共有とは何ですか？ {#what-is-data-sharing}
 
 異なるチームは、同じデータの異なる部分を必要とします。従来のソリューションではデータを何度もコピーする必要があり、コストが高く、管理も困難です。
 
@@ -30,14 +30,14 @@ ATTACH TABLE は、コンピューターのショートカットのようなも�
 
 ## ATTACH TABLE の使い方 {#how-to-use-attach-table}
 
-**Step 1: データの場所を確認する**
+**ステップ 1: データの場所を確認する**
 
 ```sql
 SELECT snapshot_location FROM FUSE_SNAPSHOT('default', 'company_sales');
 -- Result: 1/23351/_ss/... → Data at s3://your-bucket/1/23351/
 ```
 
-**Step 2: チームごとのビューを作成する**
+**ステップ 2: チームごとのビューを作成する**
 
 ```sql
 -- Marketing: Customer behavior analysis
@@ -57,7 +57,7 @@ ATTACH TABLE dev_customers (customer_id, country, created_date)
 's3://data/1/23351/' CONNECTION = (...);
 ```
 
-**Step 3: それぞれ独立してクエリを実行する**
+**ステップ 3: それぞれ独立してクエリを実行する**
 
 ```sql
 -- Marketing analyzes trends
@@ -69,7 +69,7 @@ SELECT order_date, SUM(profit) FROM finance_view GROUP BY order_date;
 
 ## 主なメリット {#key-benefits}
 
-**リアルタイム更新**: ソースデータが変更されると、接続されたすべてのテーブルに即座に反映されます
+**リアルタイム更新**: ソースデータが変更されると、アタッチされたすべてのテーブルに即座に反映されます
 
 ```sql
 INSERT INTO company_sales VALUES (1001, 501, 'Laptop', 1299.99, 299.99, 'user@email.com', '2025-01-20');

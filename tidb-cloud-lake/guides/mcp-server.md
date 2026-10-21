@@ -1,18 +1,18 @@
 ---
 title: TiDB Cloud Lake MCP サーバー
-summary: transport、安全制御、利用可能なツールを含め、TiDB Cloud Lake MCP サーバーのインストール、実行、設定方法を学びます。
+summary: トランスポート、安全制御、利用可能なツールを含め、TiDB Cloud Lake MCP サーバーのインストール、実行、設定方法を学びます。
 ---
 
 # TiDB Cloud Lake MCP サーバー
 
-[TiDB Cloud Lake MCP サーバー](https://github.com/tidbcloud/lake-mcp) は、Model Context Protocol (MCP) をサポートするクライアントに対して {{{ .lake }}} の操作を公開します。`tidbcloudlake-mcp` パッケージは、standard input/output、HTTP、および server-sent events (SSE) の transport をサポートします。
+[TiDB Cloud Lake MCP サーバー](https://github.com/tidbcloud/lake-mcp) は、Model Context Protocol (MCP) をサポートするクライアントに対して {{{ .lake }}} の操作を公開します。`tidbcloudlake-mcp` パッケージは、standard input/output、HTTP、および server-sent events (SSE) のトランスポートをサポートします。
 
 ## 前提条件 {#prerequisites}
 
 開始する前に、以下を用意してください。
 
 - Python 3.12 以降
-- {{{ .lake }}} のアカウント、データベース、および warehouse
+- {{{ .lake }}} のアカウント、データベース、および Warehouse
 - 次の形式の {{{ .lake }}} DSN:
 
     ```text
@@ -44,7 +44,7 @@ python -m pip install tidbcloudlake-mcp
 export LAKE_DSN='lake://<username>:<password>@<host>:443/<database>?warehouse=<warehouse>'
 ```
 
-デフォルトの `stdio` transport でサーバーを実行します。
+デフォルトの `stdio` トランスポートでサーバーを実行します。
 
 ```shell
 lake-mcp
@@ -56,7 +56,7 @@ lake-mcp
 uv tool run --from tidbcloudlake-mcp@latest lake-mcp
 ```
 
-## transport を設定する {#configure-the-transport}
+## トランスポートを設定する {#configure-the-transport}
 
 `LAKE_MCP_SERVER_TRANSPORT` に、次のいずれかの値を設定します。
 
@@ -83,12 +83,12 @@ lake-mcp
 
 | 環境変数 | デフォルト | 説明 |
 | --- | --- | --- |
-| `LAKE_DSN` | {{{ .lake }}} では必須 | データベースおよび warehouse の接続文字列です。 |
+| `LAKE_DSN` | {{{ .lake }}} では必須 | データベースおよび Warehouse の接続文字列です。 |
 | `LAKE_MCP_SAFE_MODE` | `true` | セッションのサンドボックス検証を有効にします。 |
 | `LAKE_QUERY_TIMEOUT` | `300` | クエリのタイムアウト（秒）です。 |
-| `LAKE_MCP_SERVER_TRANSPORT` | `stdio` | サーバーの transport: `stdio`、`http`、または `sse`。 |
-| `LAKE_MCP_BIND_HOST` | `127.0.0.1` | `http` および `sse` transport のバインドアドレスです。 |
-| `LAKE_MCP_BIND_PORT` | `8001` | `http` および `sse` transport のバインドポートです。 |
+| `LAKE_MCP_SERVER_TRANSPORT` | `stdio` | サーバーのトランスポート: `stdio`、`http`、または `sse`。 |
+| `LAKE_MCP_BIND_HOST` | `127.0.0.1` | `http` および `sse` トランスポートのバインドアドレスです。 |
+| `LAKE_MCP_BIND_PORT` | `8001` | `http` および `sse` トランスポートのバインドポートです。 |
 
 ## 利用可能なツール {#available-tools}
 

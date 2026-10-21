@@ -30,7 +30,7 @@ TPC-H ベンチマークは、複雑なクエリとデータメンテナンス�
 
 > **Note:**
 >
-> このベンチマークでは、Snowflake と {{{ .lake }}} の両方で特別なチューニングを行わず、デフォルト設定を使用しています。この比較は Snowflake Gen1 standard warehouses（`GENERATION = '1'`）に基づいています。また、**私たちの言葉をうのみにせず、ぜひご自身で実行して結果を検証してください。**
+> このベンチマークでは、Snowflake と {{{ .lake }}} の両方で特別なチューニングを行わず、デフォルト設定を使用しています。この比較は Snowflake Gen1 の標準 Warehouse（`GENERATION = '1'`）に基づいています。また、**私たちの言葉をうのみにせず、ぜひご自身で実行して結果を検証してください。**
 
 ### データロードベンチマーク {#data-loading-benchmark}
 
@@ -131,38 +131,38 @@ TPC-H ベンチマークは、複雑なクエリとデータメンテナンス�
 
 ### ベンチマーク手法 {#benchmark-methodology}
 
-このベンチマークには、クエリ実行に対する Cold Run と Hot Run の両方が含まれます。
+このベンチマークには、クエリ実行に対するコールドランとホットランの両方が含まれます。
 
 1. **Cold Run**: クエリを実行する前に、データウェアハウスを一時停止してから再開しました。
 2. **Hot Run**: データウェアハウスは一時停止せず、ローカルディスクキャッシュを使用します。
 
 ### 前提条件 {#prerequisites}
 
-- [Snowflake account](https://signup.snowflake.com) を持っていること
-- [{{{ .lake }}} account](https://tidbcloud.com) を作成すること
+- [Snowflake アカウント](https://signup.snowflake.com) を持っていること
+- [{{{ .lake }}} アカウント](https://tidbcloud.com) を作成すること
 
 ### データロード {#data-loading}
 
 1. **Snowflake のデータロード**:
 
-    - [Snowflake account](https://app.snowflake.com/) にログインします。
-    - TPC-H スキーマに対応するテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
-    - `COPY INTO` コマンドを使用して AWS S3 からデータをロード (load) します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
+    - [Snowflake アカウント](https://app.snowflake.com/) にログインします。
+    - TPC-H スキーマに対応するテーブルを作成します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
+    - `COPY INTO` コマンドを使用して AWS S3 からデータをロード (load) します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
 
 2. **{{{ .lake }}} のデータロード**:
 
-    - [{{{ .lake }}} account](https://tidbcloud.com) にサインインします。
-    - TPC-H スキーマに従って必要なテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
-    - Snowflake と同様の方法で AWS S3 からデータをロードします。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
+    - [{{{ .lake }}} アカウント](https://tidbcloud.com) にサインインします。
+    - TPC-H スキーマに従って必要なテーブルを作成します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
+    - Snowflake と同様の方法で AWS S3 からデータをロードします。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
 
 ### TPC-H クエリ {#tpc-h-queries}
 
 1. **Snowflake のクエリ**:
 
-    - [Snowflake account](https://app.snowflake.com/) にログインします。
-    - TPC-H クエリを実行します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/queries.sql)。
+    - [Snowflake アカウント](https://app.snowflake.com/) にログインします。
+    - TPC-H クエリを実行します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/queries.sql)。
 
 2. **{{{ .lake }}} のクエリ**:
 
-    - [{{{ .lake }}} account](https://tidbcloud.com) にサインインします。
-    - TPC-H クエリを実行します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/queries.sql)。
+    - [{{{ .lake }}} アカウント](https://tidbcloud.com) にサインインします。
+    - TPC-H クエリを実行します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/queries.sql)。

@@ -47,7 +47,7 @@ summary: Alibaba Cloud のプライベートエンドポイントを設定し、
           "https://$LAKE_HOST"
         ```
 
-    3. Alibaba Cloud VPC コンソールでエンドポイント詳細ページを開き、エンドポイントの elastic network interfaces (ENI) に割り当てられたプライベート IP アドレスを確認します。`getent ahostsv4` が返すすべての IPv4 アドレスがエンドポイント ENI のプライベート IP アドレスであり、かつ `remote_ip` がそれらのいずれかのアドレスと一致することを確認してください。これにより、TiDB Cloud Lake へのテスト接続が Alibaba Cloud PrivateLink を使用しており、パブリックインターネットを経由していないことが確認できます。`tls_verify=0` の結果は、HTTPS 証明書の検証が成功したことを示します。
+    3. Alibaba Cloud VPC コンソールでエンドポイント詳細ページを開き、エンドポイントの Elastic Network Interface (ENI) に割り当てられたプライベート IP アドレスを確認します。`getent ahostsv4` が返すすべての IPv4 アドレスがエンドポイント ENI のプライベート IP アドレスであり、かつ `remote_ip` がそれらのいずれかのアドレスと一致することを確認してください。これにより、TiDB Cloud Lake へのテスト接続が Alibaba Cloud PrivateLink を使用しており、パブリックインターネットを経由していないことが確認できます。`tls_verify=0` の結果は、HTTPS 証明書の検証が成功したことを示します。
 
     4. リージョンゲートウェイの正常性を確認します。Japan (Tokyo) リージョンを例にします。
 

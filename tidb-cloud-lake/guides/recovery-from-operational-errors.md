@@ -15,7 +15,7 @@ summary: このガイドでは、{{{ .lake }}} における一般的な運用エ
 - **誤ってテーブルを削除した**
 - **誤ったデータ変更（UPDATE/DELETE 操作）**
 - **誤ってテーブルを TRUNCATE した**
-- **データのロード (load) ミス**
+- **データのロードミス**
 - **Schema Evolution のロールバック**（テーブル構造の変更を元に戻すこと）
 - **削除されたカラムまたは制約**
 
@@ -95,7 +95,7 @@ summary: このガイドでは、{{{ .lake }}} における一般的な運用エ
 
 テーブル内のデータを誤って変更または削除した場合は、`FLASHBACK TABLE` コマンドを使用して以前の状態に復元できます。
 
-1. 誤った操作を行う前の snapshot ID またはタイムスタンプを特定します。
+1. 誤った操作を行う前のスナップショット ID またはタイムスタンプを特定します。
 
     ```sql
     SELECT * FROM fuse_snapshot('sales_data', 'orders');
@@ -163,7 +163,7 @@ summary: このガイドでは、{{{ .lake }}} における一般的な運用エ
     └─────────┴─────────┴──────┴─────────┴─────────┘
     ```
 
-3. スキーマ変更前の snapshot ID を見つけます。
+3. スキーマ変更前のスナップショット ID を見つけます。
 
     ```sql
     SELECT * FROM fuse_snapshot('default', 'customers');
@@ -176,7 +176,7 @@ summary: このガイドでは、{{{ .lake }}} における一般的な運用エ
     snapshot_id: 01963ce9cc29735b87886a08d3ca7e2f  timestamp: 2025-04-16 04:44:37.289000  previous_snapshot_id: NULL
     ```
 
-4. 以前のスキーマに戻します（前の snapshot を使用）。
+4. 以前のスキーマに戻します（前のスナップショットを使用）。
 
     ```sql
     ALTER TABLE customers FLASHBACK TO (SNAPSHOT => '01963ce9cc29735b87886a08d3ca7e2f');
@@ -205,6 +205,6 @@ summary: このガイドでは、{{{ .lake }}} における一般的な運用エ
 - **時間の制約**: リカバリは保持期間内でのみ機能します（デフォルト: 24 時間）。
 - **名前の競合**: 同じ名前のオブジェクトが存在する場合、undrop はできません。先に[データベース名を変更](/tidb-cloud-lake/sql/alter-database.md)または[テーブル名を変更](/tidb-cloud-lake/sql/rename-table.md)してください。
 - **所有権**: 所有権は自動的には復元されないため、リカバリ後に手動で付与してください。
-- **Transient Tables**: transient table では Flashback は機能しません（snapshot が保存されないため）。
+- **Transient Tables**: transient table では Flashback は機能しません（スナップショットが保存されないため）。
 
 **緊急時**: 重大なデータ損失が発生した場合は、すぐに {{{ .lake }}} Support に連絡して支援を受けてください。

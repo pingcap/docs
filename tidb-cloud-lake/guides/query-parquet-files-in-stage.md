@@ -1,6 +1,6 @@
 ---
 title: stage 内の Parquet ファイルをクエリする
-summary: Parquet ファイルが保存されている独自の S3 バケットと認証情報を使用して external stage を作成します。
+summary: Parquet ファイルが保存されている独自の S3 バケットと認証情報を使用して外部 stage を作成します。
 ---
 
 # stage 内の Parquet ファイルをクエリする
@@ -13,9 +13,9 @@ summary: Parquet ファイルが保存されている独自の S3 バケット�
 
 ## チュートリアル {#tutorial}
 
-### ステップ 1. External Stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
-Parquet ファイルが保存されている独自の S3 バケットと認証情報を使用して external stage を作成します。
+Parquet ファイルが保存されている独自の S3 バケットと認証情報を使用して外部 stage を作成します。
 
 ```sql
 CREATE STAGE parquet_query_stage

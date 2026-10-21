@@ -29,7 +29,7 @@ TiDB Cloud Lake は、ANSI SQL、半構造化データ処理、ベクトル検�
 
 ## はじめに {#get-started}
 
-1. [**Quick Start**](/tidb-cloud-lake/lake-quick-start.md): アカウントを作成し、最初のワークフローを実行します。
+1. [**クイックスタート**](/tidb-cloud-lake/lake-quick-start.md): アカウントを作成し、最初のワークフローを実行します。
 2. [**TiDB Cloud Lake への接続**](/tidb-cloud-lake/guides/connection-overview.md): ワークフローに適したクライアントまたはドライバを選択します。
 3. [**アーキテクチャを学ぶ**](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md): メタデータ、コンピュート、ストレージの各レイヤーを理解します。
 4. [**製品機能を確認する**](/tidb-cloud-lake/guides/vector-search-guide.md): 分析、ベクトル、検索、地理空間の機能から使い始めます。

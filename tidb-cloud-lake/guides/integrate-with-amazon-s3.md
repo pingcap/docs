@@ -109,7 +109,7 @@ s3://mybucket/events/data.ndjson     # A single specific file
 | On                   | 継続的に実行され、30 秒ごとに S3 をポーリングして新しいファイルを検出し、自動的にインポートします。 |
 | Off                  | 一致するファイルを 1 回だけインポートして停止します。**Allow Duplicate Imports** が有効でない限り、すでにインポート済みのファイルはスキップされます。 |
 
-## 高度な設定 {#advanced-configuration}
+## 詳細設定 {#advanced-configuration}
 
 ### 継続的な取り込み {#continuous-ingestion}
 
@@ -133,4 +133,4 @@ s3://mybucket/events/data.ndjson     # A single specific file
 
 ### Allow Duplicate Imports (FORCE) {#allow-duplicate-imports-force}
 
-デフォルトでは、システムはどのファイルがインポート済みかを追跡し、後続の実行ではそれらをスキップします。このオプションを有効にすると、以前にインポートされたかどうかに関係なく、一致するすべてのファイルを強制的に再インポートします。これは、スキーマ変更やデータ修正の後にデータを再ロード (load) する必要がある場合に役立ちます。
+デフォルトでは、システムはどのファイルがインポート済みかを追跡し、後続の実行ではそれらをスキップします。このオプションを有効にすると、以前にインポートされたかどうかに関係なく、一致するすべてのファイルを強制的に再インポートします。これは、スキーマ変更やデータ修正の後にデータを再ロードする必要がある場合に役立ちます。

@@ -16,7 +16,7 @@ summary: 主要なクラウドが提供する PrivateLink スタイルのプラ�
 
 ## 仕組み {#how-it-works}
 
-**Connect to {{{ .lake }}}** ダイアログから PrivateLink のサービス名を取得し、それを指すプライベートエンドポイントを作成します。クラウドプロバイダーは自動的にプライベート IP アドレスを割り当ててエンドポイントを受け入れ、private DNS を有効にすると、{{{ .lake }}} のドメインはそれらのアドレスに解決されるため、すべてのセッションが安全なプライベート経路上に維持されます。
+**Connect to {{{ .lake }}}** ダイアログから PrivateLink のサービス名を取得し、それを指すプライベートエンドポイントを作成します。クラウドプロバイダーは自動的にプライベート IP アドレスを割り当ててエンドポイントを受け入れ、プライベート DNS を有効にすると、{{{ .lake }}} のドメインはそれらのアドレスに解決されるため、すべてのセッションが安全なプライベート経路上に維持されます。
 
 ## AWS PrivateLink の設定方法 {#how-to-setup-aws-privatelink}
 
@@ -48,11 +48,11 @@ summary: 主要なクラウドが提供する PrivateLink スタイルのプラ�
 
 5. PrivateLink の作成が完了するまで待ちます。
 
-6. private DNS name の設定を変更します。
+6. プライベート DNS 名の設定を変更します。
 
     ![DNS Menu](/media/tidb-cloud-lake/dns-1.png)
 
-    private DNS names を有効にします。
+    プライベート DNS 名を有効にします。
 
     ![DNS Sheet](/media/tidb-cloud-lake/dns-2.png)
 
@@ -60,7 +60,7 @@ summary: 主要なクラウドが提供する PrivateLink スタイルのプラ�
 
 7. PrivateLink 経由で {{{ .lake }}} にアクセスできることを確認します。
 
-    Gateway ドメインが VPC 内部 IP アドレスに解決されます。
+    ゲートウェイドメインが VPC 内部 IP アドレスに解決されます。
 
     > **Note:**
     >

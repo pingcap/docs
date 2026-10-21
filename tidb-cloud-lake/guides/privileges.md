@@ -21,7 +21,7 @@ summary: 権限とは、ある操作を実行するための許可です。ユ�
 
 ### ロールへの権限の付与 {#granting-privileges-to-roles}
 
-権限を付与するには、ロールを作成し、そのロールに権限を付与してから、その権限を必要とするユーザーにそのロールを付与します。次の例では、`writer` という名前の新しいロールを作成し、`default` スキーマ内のオブジェクトに対するすべての権限を付与しています。続いて、パスワード `abc123` を持つ新しいユーザー `david` を作成し、`writer` ロールを `david` に付与します。最後に、`writer` に付与された権限を表示します。
+権限を付与するには、ロールを作成し、そのロールに権限を付与してから、その権限を必要とするユーザーにそのロールを付与します。次の例では、'writer' という名前の新しいロールを作成し、'default' スキーマ内のオブジェクトに対するすべての権限を付与しています。続いて、パスワード 'abc123' を持つ新しいユーザー 'david' を作成し、'writer' ロールを 'david' に付与します。最後に、'writer' に付与された権限を表示します。
 
 ```sql title='Example:'
 -- Create a new role named 'writer'
@@ -48,7 +48,7 @@ SHOW GRANTS FOR ROLE writer;
 
 ### ロールからの権限の取り消し {#revoking-privileges-from-roles}
 
-アクセス制御の文脈では、権限はロールから取り消されます。次の例では、`default` スキーマ内のすべてのオブジェクトに対するすべての権限を `writer` ロールから取り消し、その後 `writer` ロールに付与されている権限を表示します。
+アクセス制御の文脈では、権限はロールから取り消されます。次の例では、'default' スキーマ内のすべてのオブジェクトに対するすべての権限を 'writer' ロールから取り消し、その後 'writer' ロールに付与されている権限を表示します。
 
 ```sql title='Example (Continued):'
 -- Revoke all privileges on all objects in the 'default' schema from role 'writer'
@@ -73,7 +73,7 @@ SHOW GRANTS FOR ROLE writer;
     - [UDF 権限](#udf-privileges)
     - [シーケンス権限](#sequence-privileges)
     - [Connection 権限](#connection-privileges)
-    - [Procedure 権限](#procedure-privileges)
+    - [プロシージャ権限](#procedure-privileges)
     - [Catalog 権限](#catalog-privileges)
     - [Share 権限](#share-privileges)
 
@@ -230,15 +230,15 @@ Share オブジェクトに対する権限は、同じ SQL 権限モデル（`GR
 | ALL             | 指定したオブジェクトタイプに対する Access Sequence 権限を付与します。                                     |
 | OWNERSHIP       | シーケンスに対する完全な制御を付与します。特定のオブジェクトに対して、この権限を同時に保持できるロールは 1 つだけです。 |
 
-### Procedure 権限 {#procedure-privileges}
+### プロシージャ権限 {#procedure-privileges}
 
 | 権限             | 説明                                                                                                       |
 |:-----------------|:-----------------------------------------------------------------------------------------------------------|
-| Access Procedure | Procedure にアクセスできます（例: Drop、Call、Desc）。                                                     |
+| Access Procedure | プロシージャにアクセスできます（例: Drop、Call、Desc）。                                                     |
 | ALL              | 指定したオブジェクトタイプに対する Access Procedure 権限を付与します。                                     |
-| OWNERSHIP        | Procedure に対する完全な制御を付与します。特定のオブジェクトに対して、この権限を同時に保持できるロールは 1 つだけです。 |
+| OWNERSHIP        | プロシージャに対する完全な制御を付与します。特定のオブジェクトに対して、この権限を同時に保持できるロールは 1 つだけです。 |
 
-### Masking Policy 権限 {#masking-policy-privileges}
+### マスキングポリシー権限 {#masking-policy-privileges}
 
 グローバルな `CREATE MASKING POLICY` 権限および `APPLY MASKING POLICY` 権限に加えて、個々のマスキングポリシーへのアクセスを付与できます。
 
@@ -247,7 +247,7 @@ Share オブジェクトに対する権限は、同じ SQL 権限モデル（`GR
 | APPLY     | マスキングポリシーをカラムにアタッチまたはデタッチし、ポリシーに対する DESC/DROP 操作を許可します。                                |
 | OWNERSHIP | マスキングポリシーに対する完全な制御を付与します。{{{ .lake }}} は、ポリシーを作成したロールに OWNERSHIP を付与し、ポリシーが削除されると自動的に取り消します。 |
 
-### Row Access Policy 権限 {#row-access-policy-privileges}
+### 行アクセスポリシー権限 {#row-access-policy-privileges}
 
 行アクセスポリシーは同じガバナンスモデルを共有します。グローバルな `CREATE ROW ACCESS POLICY` 権限および `APPLY ROW ACCESS POLICY` 権限に加えて、必要に応じてポリシーごとにアクセスを付与します。
 

@@ -25,7 +25,7 @@ summary: TiDB Cloud Lake は、データファイルをテーブルにロード�
 
 | データソース | 推奨ツール | 説明 | ドキュメント |
 |-------------|-----------------|-------------|---------------|
-| **stage 済みデータファイル** | **COPY INTO** | 内部 / 外部 stage または user stage から高速かつ効率的にロードします | [stage からのロード](/tidb-cloud-lake/guides/load-from-stage.md) |
+| **stage 済みデータファイル** | **COPY INTO** | 内部 / 外部 stage またはユーザー stage から高速かつ効率的にロードします | [stage からのロード](/tidb-cloud-lake/guides/load-from-stage.md) |
 | **クラウドストレージ** | **COPY INTO** | Amazon S3、Google Cloud Storage、Microsoft Azure からロードします | [バケットからのロード](/tidb-cloud-lake/guides/load-from-bucket.md) |
 | **ローカルファイル** | [**LakeSQL**](https://github.com/tidbcloud/lakesql) | ローカルファイルのロード向けに設計された {{{ .lake }}} ネイティブの CLI ツール | [ローカルファイルからのロード](/tidb-cloud-lake/guides/load-from-local-file.md) |
 | **リモートファイル** | **COPY INTO** | リモートの HTTP/HTTPS ロケーションからデータをロードします | [リモートファイルからのロード](/tidb-cloud-lake/guides/load-from-remote-file.md) |

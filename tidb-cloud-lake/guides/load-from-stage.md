@@ -1,11 +1,11 @@
 ---
 title: stage からのロード
-summary: "{{{ .lake }}} では、user stage または internal/external stage にアップロードされたファイルからデータを簡単にインポートできます。これを行うには、まず LakeSQL を使用してファイルを stage にアップロードし、その後 COPY INTO コマンドを使用して stage 上のファイルからデータをロードできます。ファイルは {{{ .lake }}} がサポートする形式である必要があり、そうでない場合はデータをインポートできません。{{{ .lake }}} がサポートするファイル形式の詳細については、入出力ファイル形式を参照してください。"
+summary: "{{{ .lake }}} では、ユーザー stage または内部/外部 stage にアップロードされたファイルからデータを簡単にインポートできます。これを行うには、まず LakeSQL を使用してファイルを stage にアップロードし、その後 COPY INTO コマンドを使用して stage 上のファイルからデータをロードできます。ファイルは {{{ .lake }}} がサポートする形式である必要があり、そうでない場合はデータをインポートできません。{{{ .lake }}} がサポートするファイル形式の詳細については、入出力ファイル形式を参照してください。"
 ---
 
 # stage からのロード
 
-{{{ .lake }}} では、user stage または internal/external stage にアップロードされたファイルからデータを簡単にインポートできます。これを行うには、まず [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) を使用してファイルを stage にアップロードし、その後 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) コマンドを使用して stage 上のファイルからデータをロードできます。ファイルは {{{ .lake }}} がサポートする形式である必要があり、そうでない場合はデータをインポートできません。{{{ .lake }}} がサポートするファイル形式の詳細については、[入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
+{{{ .lake }}} では、ユーザー stage または内部/外部 stage にアップロードされたファイルからデータを簡単にインポートできます。これを行うには、まず [LakeSQL](/tidb-cloud-lake/guides/connect-using-lakesql.md) を使用してファイルを stage にアップロードし、その後 [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) コマンドを使用して stage 上のファイルからデータをロードできます。ファイルは {{{ .lake }}} がサポートする形式である必要があり、そうでない場合はデータをインポートできません。{{{ .lake }}} がサポートするファイル形式の詳細については、[入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
 
 ![image](/media/tidb-cloud-lake/load-data-from-stage.png)
 
@@ -34,9 +34,9 @@ CREATE TABLE books
 );
 ```
 
-## チュートリアル 1: User Stage からのロード {#tutorial-1-loading-from-user-stage}
+## チュートリアル 1: ユーザー stage からのロード {#tutorial-1-loading-from-user-stage}
 
-このチュートリアルでは、サンプルファイルを user stage にアップロードし、stage 上のファイルから {{{ .lake }}} にデータをロードする方法を説明します。
+このチュートリアルでは、サンプルファイルをユーザー stage にアップロードし、stage 上のファイルから {{{ .lake }}} にデータをロードする方法を説明します。
 
 ### ステップ 1. サンプルファイルをアップロードする {#step-1-upload-sample-file}
 
@@ -83,13 +83,13 @@ Transaction Processing      |Jim Gray           |1992|
 Readings in Database Systems|Michael Stonebraker|2004|
 ```
 
-## チュートリアル 2: Internal Stage からのロード {#tutorial-2-loading-from-internal-stage}
+## チュートリアル 2: 内部 stage からのロード {#tutorial-2-loading-from-internal-stage}
 
-このチュートリアルでは、サンプルファイルを internal stage にアップロードし、stage 上のファイルから {{{ .lake }}} にデータをロードする方法を説明します。
+このチュートリアルでは、サンプルファイルを内部 stage にアップロードし、stage 上のファイルから {{{ .lake }}} にデータをロードする方法を説明します。
 
-### ステップ 1. Internal Stage を作成する {#step-1-create-an-internal-stage}
+### ステップ 1. 内部 stage を作成する {#step-1-create-an-internal-stage}
 
-1. [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドを使用して internal stage を作成します。
+1. [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドを使用して内部 stage を作成します。
 
     ```sql
     CREATE STAGE my_internal_stage;
@@ -161,13 +161,13 @@ Transaction Processing      |Jim Gray           |1992|
 Readings in Database Systems|Michael Stonebraker|2004|
 ```
 
-## チュートリアル 3: External Stage からのロード {#tutorial-3-loading-from-external-stage}
+## チュートリアル 3: 外部 stage からのロード {#tutorial-3-loading-from-external-stage}
 
-このチュートリアルでは、サンプルファイルを external stage にアップロードし、stage 上のファイルから {{{ .lake }}} にデータをロードする方法を説明します。
+このチュートリアルでは、サンプルファイルを外部 stage にアップロードし、stage 上のファイルから {{{ .lake }}} にデータをロードする方法を説明します。
 
-### ステップ 1. External Stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
-1. [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドを使用して external stage を作成します。
+1. [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドを使用して外部 stage を作成します。
 
     ```sql
     CREATE STAGE my_external_stage

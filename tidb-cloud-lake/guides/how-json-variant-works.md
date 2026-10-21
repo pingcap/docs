@@ -75,7 +75,7 @@ summary: TiDB Cloud Lake は、ネイティブなバイナリレイアウトと�
 
 ### 仮想カラムは自動 JSON インデックス {#virtual-columns-are-automatic-json-indexes}
 
-この文脈での「仮想カラム (virtual column)」は、単に **{{{ .lake }}} の JSON インデックス** を意味します。取り込みフローは、`data['items'][0]['price']` のようなパスが十分に安定しているかを判断し、ネイティブ型を推論し、それらの値をメタデータ付きのカラムナ形式の補助領域に書き込みます。DDL も設定項目も不要です。ネストされた JSON はコンパクトな JSONB 形式のまま保持され、プリミティブなパスはネイティブな数値、文字列、またはブール値になります。
+この文脈での「仮想カラム」は、単に **{{{ .lake }}} の JSON インデックス** を意味します。取り込みフローは、`data['items'][0]['price']` のようなパスが十分に安定しているかを判断し、ネイティブ型を推論し、それらの値をメタデータ付きのカラムナ形式の補助領域に書き込みます。DDL も設定項目も不要です。ネストされた JSON はコンパクトな JSONB 形式のまま保持され、プリミティブなパスはネイティブな数値、文字列、またはブール値になります。
 
 ```
 Raw JSON block ──(auto sampling)──▶ Candidate paths ──(stable?)──▶ JSON index
@@ -169,7 +169,7 @@ FROM orders;
 パスアクセサに加えて、{{{ .lake }}} には豊富な Variant ツールキットが用意されています。
 
 - **パースとキャスト**: `parse_json`, `try_parse_json`, `to_variant`, `to_jsonb_binary`
-- **ナビゲーションと射影**: `get_path`, `get_by_keypath`, `flatten`, arrow (`->`, `->>`), path (`#>`, `#>>`) および containment 演算子 (`@>`, `?`)
+- **ナビゲーションと射影**: `get_path`, `get_by_keypath`, `flatten`, アロー演算子 (`->`, `->>`)、パス演算子 (`#>`, `#>>`)、および包含演算子 (`@>`, `?`)
 - **変更**: `object_insert`, `object_remove_keys`, 連結 (`||`), `array_*` ヘルパー
 - **分析**: `json_extract_keys`, `json_length`, `jsonb_array_elements`, `json_array_agg` などの集計関数
 

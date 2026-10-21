@@ -74,7 +74,7 @@ ALTER TABLE sales CLUSTER BY (region, order_date);
 |---------------|------------------------|---------|
 | 単一カラムでフィルタする | そのカラム | `CLUSTER BY (region)` |
 | 複数カラムでフィルタする | 複数カラム | `CLUSTER BY (region, category)` |
-| 日付範囲クエリ | 日付 / timestamp カラム | `CLUSTER BY (order_date)` |
+| 日付範囲クエリ | 日付 / タイムスタンプカラム | `CLUSTER BY (order_date)` |
 | 高カーディナリティのカラム | 式を使って値の種類を減らす | `CLUSTER BY (DATE(created_at))` |
 
 ### 良いクラスターキーと悪いクラスターキー {#good-vs-bad-cluster-keys}
@@ -148,7 +148,7 @@ ALTER TABLE sales SET OPTIONS(
 **クラスターキーを使うべき場合:**
 
 - 大規模テーブル（数百万行以上）
-- クエリ性能が遅い
+- クエリ性能が低い
 - フィルタベースのクエリが多い
 - 分析ワークロード
 
