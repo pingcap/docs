@@ -352,7 +352,7 @@ column-selectors = [
 
 ## Scale out the load of a single large table to multiple TiCDC nodes
 
-This feature splits the data replication range of a single large table into multiple ranges and distributes them to multiple TiCDC nodes for parallel replication. TiCDC can split a table when its Region count exceeds `region-threshold` or when its write traffic exceeds `write-key-threshold`. In the TiCDC classic architecture, `write-key-threshold` uses the upstream PD Region `written_keys` statistics. In the TiCDC new architecture, `write-key-threshold` uses sink DML event bytes per second. This feature can solve the following two problems:
+This feature splits the data replication range of a single large table into multiple ranges and distributes them to multiple TiCDC nodes for parallel replication. When this feature is enabled, TiCDC can split the replication range based on the number of Regions in the table. When `write-key-threshold` is greater than `0`, TiCDC can also split the replication range based on write traffic. In the TiCDC classic architecture, `write-key-threshold` uses the upstream PD Region `written_keys` statistics. In the TiCDC new architecture, `write-key-threshold` uses sink DML event bytes per second. This feature can solve the following two problems:
 
 - A single TiCDC node cannot replicate a large single table in time.
 - The resources (such as CPU and memory) consumed by TiCDC nodes are not evenly distributed.
