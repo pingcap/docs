@@ -42,7 +42,7 @@ Depending on your [New Relic integration version](#new-relic-integration-version
 1. In the [TiDB Cloud console](https://tidbcloud.com/), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target TiDB Cloud Dedicated cluster to go to its overview page.
 2. In the left navigation pane, click **Settings** > **Integrations**.
 3. On the **Integrations** page, click **Integration to New Relic**.
-4. Enter your API key of New Relic and choose the site of New Relic.
+4. Enter your New Relic API key and select the region where your New Relic account is hosted.
 5. Click **Test Integration**.
 
     - If the test succeeds, the **Confirm** button is displayed.
@@ -57,7 +57,7 @@ Depending on your [New Relic integration version](#new-relic-integration-version
 2. In the project view, locate your target project, and then click <MDSvgIcon name="icon-project-settings" /> for the project.
 3. In the left navigation pane, click **Integrations** under **Project Settings**.
 4. On the **Integrations** page, click **Integration to New Relic (BETA)**.
-5. Enter your API key of New Relic and choose the site of New Relic.
+5. Enter your New Relic API key and select the region where your New Relic account is hosted.
 6. Click **Test Integration**.
 
     - If the test succeeds, the **Confirm** button is displayed.
@@ -91,7 +91,7 @@ A new TiDB Cloud dashboard will be available in New Relic after the pending [PR]
         }
         ```
 
-    3. Add your New Relic account ID to all `"accountIds": []` fields in the JSON file.
+    3. Add your [New Relic account ID](https://docs.newrelic.com/docs/accounts/accounts-billing/account-structure/account-id/) to all `"accountIds": []` fields in the JSON file.
 
         For example:
 
@@ -106,7 +106,7 @@ A new TiDB Cloud dashboard will be available in New Relic after the pending [PR]
         > To avoid integration errors, make sure your account ID is added in all `"accountIds"` fields in the JSON file.
 
 2. Log in to [New Relic](https://one.newrelic.com/), click **Dashboards** in the left navigation bar, and then click **Import dashboard** in the upper-right corner.
-3. In the displayed dialog, paste all the content in the prepared JSON file to the text area, and then click **Import dashboard**.
+3. In the displayed dialog, paste the contents of the prepared JSON file into the text area, select the permission settings, and then click **Save**.
 
 </div>
 <div label="Legacy project-level New Relic integration (Beta)">

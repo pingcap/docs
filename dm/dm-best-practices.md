@@ -20,10 +20,10 @@ This document introduces how to use DM in an elegant and efficient way, and how 
 | Performance item  | Limitation |
 | ----------------- | :--------: |
 |  Max work nodes              |  1000           |
-|  Max task number             |  600            |
+|  Max number of tasks         |  600            |
 |  Max QPS                     |  30k QPS/worker |
 |  Max Binlog throughput       |  20 MB/s/worker |
-|  Table number limit per task |  Unlimited      |
+|  Max number of tables per task |  Unlimited      |
 
 - DM supports managing 1000 work nodes simultaneously, and the maximum number of tasks is 600. To ensure the high availability of work nodes, you should reserve some work nodes as standby nodes. The recommended number of standby nodes is 20% to 50% of the number of the work nodes that have running migration tasks.
 - A single work node can theoretically support replication QPS of up to 30K QPS/worker. It varies for different schemas and workloads. The ability to handle upstream binlogs is up to 20 MB/s/worker.

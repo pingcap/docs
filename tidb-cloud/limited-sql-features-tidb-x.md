@@ -5,19 +5,19 @@ summary: Learn about the limited SQL features on TiDB X Instances.
 
 # Limited SQL features on TiDB X Instances
 
-A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, or Premium instance.
+A TiDB X instance is a service-oriented TiDB Cloud offering built on the [TiDB X architecture](/tidb-cloud/tidb-x-architecture.md), such as a {{{ .starter }}}, Essential, Premium, or BYOC instance.
 
-TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed and TiDB Cloud. This document describes the limitations of SQL features on TiDB Cloud Starter, Essential, and Premium. We are constantly filling in the feature gaps between TiDB Self-Managed and TiDB Cloud. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
+TiDB Cloud works with almost all workloads that TiDB supports, but there are some feature differences between TiDB Self-Managed and TiDB Cloud. This document describes the limitations of SQL features on TiDB Cloud Starter, Essential, Premium, and BYOC. We are constantly filling in the feature gaps between TiDB Self-Managed and TiDB Cloud. If you require these features or capabilities in the gap, [contact us](/tidb-cloud/tidb-cloud-support.md) for a feature request.
 
 > **Note:**
 >
-> This document applies only to {{{ .starter }}}, Essential, and Premium. For TiDB Cloud Dedicated, see [Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md).
+> This document applies only to {{{ .starter }}}, Essential, Premium, and BYOC. For TiDB Cloud Dedicated, see [Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md).
 
 ## Statements
 
 ### Placement and range management
 
-| Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Statement | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER PLACEMENT POLICY` | Not supported [^1] | Not supported [^1] |
 | `ALTER RANGE` | Not supported | Not supported |
@@ -32,7 +32,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Resource groups
 
-| Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Statement | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `ALTER RESOURCE GROUP` | Not supported [^2] | Not supported [^2] |
 | `CALIBRATE RESOURCE` | Not supported [^2] | Not supported [^2] |
@@ -43,7 +43,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ### Others
 
-| Statement | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Statement | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `BACKUP` | Not supported [^3] | Not supported [^3] |
 | `SHOW BACKUPS` | Not supported [^3] | Not supported [^3] |
@@ -92,13 +92,13 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ## Functions and operators
 
-| Function and operator | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Function and operator | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `SLEEP` | No limitation | The [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) function supports a maximum sleep time of 300 seconds. |
 
 ## System tables
 
-| Database | Table | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Database | Table | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|:-|
 | `metrics_schema` | All databases | Not supported | Not supported |
 | `information_schema` | `ATTRIBUTES` | Supported | Not supported [^1] |
@@ -150,7 +150,7 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 
 ## System variables
 
-| Variable | {{{ .premium }}} | {{{ .starter }}} and {{{ .essential }}} |
+| Variable | {{{ .premium }}} and {{{ .byoc }}} | {{{ .starter }}} and {{{ .essential }}} |
 |:-|:-|:-|
 | `hostname` | Value hidden | Value hidden |
 | `datadir` | Value hidden | Not supported [^1] |
@@ -346,21 +346,21 @@ TiDB Cloud works with almost all workloads that TiDB supports, but there are som
 | `validate_password.special_char_count` | No limitation | At least `1` [^9] |
 | `wait_timeout` | No limitation | Read-only [^10] |
 
-[^1]: Configuring data placement is not supported on {{{ .starter }}}, Essential, or Premium.
+[^1]: Configuring data placement is not supported on {{{ .starter }}}, Essential, Premium, and BYOC.
 
-[^2]: Configuring resource groups is not supported on {{{ .starter }}}, Essential, or Premium.
+[^2]: Configuring resource groups is not supported on {{{ .starter }}}, Essential, Premium, and BYOC.
 
-[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on {{{ .starter }}}, Essential, or Premium, you can use the TiDB Cloud console instead.
+[^3]: To perform [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) operations on {{{ .starter }}}, Essential, Premium, or BYOC, you can use the TiDB Cloud console instead.
 
 [^4]: The feature is unavailable in [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security).
 
-[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on {{{ .starter }}}, Essential, or Premium, you can use the TiDB Cloud console instead.
+[^5]: To track [Slow Query](/tidb-cloud/tune-performance.md#slow-query) on {{{ .starter }}}, Essential, Premium, or BYOC, you can use the TiDB Cloud console instead.
 
 [^6]: To perform [Statement Analysis](/tidb-cloud/tune-performance.md#statement-analysis) on {{{ .starter }}} or {{{ .essential }}}, you can use the TiDB Cloud console instead.
 
 [^7]: Drainer and Pump are not supported on TiDB Cloud.
 
-[^8]: Plugins are not supported on {{{ .starter }}}, Essential, or Premium.
+[^8]: Plugins are not supported on {{{ .starter }}}, Essential, Premium, and BYOC.
 
 [^9]: {{{ .starter }}} and {{{ .essential }}} enforce a strong password policy.
 

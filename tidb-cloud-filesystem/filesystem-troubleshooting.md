@@ -144,7 +144,7 @@ When a background mount starts successfully, the CLI prints the result without r
 - The FUSE prerequisites or WebDAV helper are installed.
 - The remote region is reachable.
 
-On macOS without macFUSE, `ti` uses WebDAV. If macFUSE is installed, automatic driver selection prefers FUSE. To explicitly request FUSE:
+On macOS, `ti` uses WebDAV by default, even when macFUSE is installed. Layer and checkpoint mounts require FUSE. To explicitly request FUSE for a file system mount:
 
 ```bash
 ti fs mount-file-system \
@@ -162,7 +162,7 @@ For a known small test file, use the following procedure:
 
 1. If the mounted read or write has not returned after 30 seconds, interrupt the command with Ctrl+C. If it remains blocked, open another terminal outside the mount for diagnosis. Do not start additional workloads on the mount.
 2. Read the same file through `ti fs read-file --path "<remote-file-path>"`, using the same token and region. If the mount uses `--remote-path`, include that prefix in the remote file path. If this read also fails, resolve the reported authentication, region, or service error first. If it succeeds, focus diagnosis on the local mount path.
-3. Record `ti --version`, the OS version, the selected driver, elapsed time, and the mount diagnostic log when available. Do not include tokens or file contents. On macOS, automatic selection can choose WebDAV or FUSE; specify `--driver webdav` or `--driver fuse` when reproducing the problem.
+3. Record `ti --version`, the OS version, the selected driver, elapsed time, and the mount diagnostic log when available. Do not include tokens or file contents. On macOS, file system mounts use WebDAV by default, even when macFUSE is installed; specify `--driver webdav` or `--driver fuse` when reproducing the problem. Layer and checkpoint mounts require FUSE.
 4. Stop applications using the mount, close open files, and change the working directory of any shell inside the mount to a path outside it. Then try normal unmount:
 
     ```bash

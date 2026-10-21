@@ -7,7 +7,7 @@ summary: "{{{ .lake }}}'s COPY INTO command allows data transformation during th
 
 {{{ .lake }}}'s `COPY INTO` command allows data transformation during the loading process. This streamlines your ETL pipeline by incorporating basic transformations, eliminating the need for temporary tables.
 
-See [Querying & Transforming]( /tidb-cloud-lake/guides/query-stage.md) for syntax.
+See [Querying & Transforming](/tidb-cloud-lake/guides/query-stage.md) for syntax.
 
 Key transformations you can perform:
 

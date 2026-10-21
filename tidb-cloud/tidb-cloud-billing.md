@@ -25,13 +25,11 @@ For {{{ .essential }}}, you are charged based on the number of provisioned Reque
 
 For {{{ .premium }}}, you are billed based on the actual [Request Capacity Unit (RCU)](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu) consumption and the storage that you actually use, rather than the underlying backend nodes or provisioned disk size. See [{{{ .premium }}} Pricing Details](https://www.pingcap.com/tidb-cloud-premium-pricing-details/).
 
-<CustomContent plan="byoc">
-
 ### Pricing for {{{ .byoc }}} {#pricing-for-byoc}
 
-For pricing information about {{{ .byoc }}}, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+{{{ .byoc}}} costs include infrastructure charges paid directly to your cloud provider, a PingCAP BYOC service fee based on provisioned vCPU capacity, and a separate support fee. BYOC requires the [Enterprise support plan or higher](/tidb-cloud/connected-care-overview.md#connected-care).
 
-</CustomContent>
+For pricing information about {{{ .byoc }}}, [contact Sales](https://www.pingcap.com/contact-us/).
 
 ### Pricing for {{{ .lake }}} {#pricing-for-lake}
 

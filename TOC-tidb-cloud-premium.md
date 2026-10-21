@@ -66,6 +66,7 @@
       - [Subscribe via Lark](/tidb-cloud/monitor-alert-lark.md)
     - [Events](/tidb-cloud/tidb-cloud-events.md)
     - [Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
+    - [Integrate TiDB Cloud with New Relic](/tidb-cloud/monitor-new-relic-integration-for-tidb-x.md)
   - Tune Performance
     - [Overview](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [Analyze Performance](/tidb-cloud/tune-performance.md)
@@ -191,6 +192,7 @@
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
+  - [New Relic](/tidb-cloud/monitor-new-relic-integration-for-tidb-x.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)

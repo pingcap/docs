@@ -13,7 +13,7 @@ Roles in {{{ .lake }}} play a pivotal role in simplifying the management of perm
 
 Role granting enables one role to inherit permissions and responsibilities from another. This contributes to the creation of a flexible hierarchy, similar to the organizational structure, where two [Built-in Roles](#built-in-roles) exist: the highest being `account-admin` and the lowest being `public`.
 
-Consider the scenario where three roles are created: *manager*, *engineer*, and *intern*. In this example, the role of *intern* is granted to the engineer *role*. Consequently, the *engineer* not only possesses their own set of privileges but also inherits those associated with the *intern* role. Extending this hierarchy further, if the *engineer* role is granted to the *manager*, the *manager* now acquires both the inherent privileges of the *engineer* and the *intern* roles.
+Consider the scenario where three roles are created: *manager*, *engineer*, and *intern*. In this example, the role of *intern* is granted to the *engineer* role. Consequently, the *engineer* not only possesses their own set of privileges but also inherits those associated with the *intern* role. Extending this hierarchy further, if the *engineer* role is granted to the *manager*, the *manager* now acquires both the inherent privileges of the *engineer* and the *intern* roles.
 
 ![Alt text](/media/tidb-cloud-lake/access-control-4.png)
 
@@ -26,7 +26,7 @@ Consider the scenario where three roles are created: *manager*, *engineer*, and 
 | account-admin | Possesses all privileges, serves as the parent role for all other roles, and enables seamless switching to any role within the tenant. |
 | public        | Inherits no permissions, considers all roles as its parent roles, and allows any role to switch to the public role.                    |
 
-To assign the `account-admin` role to a user in {{{ .lake }}}, select the role when inviting the user. You can also assign the role to a user after they join. If you're using {{{ .lake }}} Community Edition or Enterprise Edition, configure an `account-admin` user during deployment first, and then assign the role to other users if needed.
+To assign the `account-admin` role to a user in {{{ .lake }}}, select the role when inviting the user. You can also assign the role to a user after they join.
 
 ## Setting Default Role
 
