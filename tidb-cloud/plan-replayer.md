@@ -62,7 +62,7 @@ You can also provide a Unix timestamp if required for your investigation. If no 
 
 > **Note:**
 >
-> For TiDB Cloud Essential, this feature is available only for instances running TiDB version `CLOUD.202603.x` or later. If your Essential instance runs TiDB v8.5.x or earlier, you must download the Plan Replayer file yourself from the URL returned by `PLAN REPLAYER DUMP` and send the file to TiDB Cloud Support.
+> For TiDB Cloud Essential, this feature is available only for instances running TiDB version `CLOUD.202603.x` or later. If your Essential instance runs TiDB v8.5.x or earlier, you need to download the Plan Replayer file yourself from the URL returned by `PLAN REPLAYER DUMP` and send the file to TiDB Cloud Support.
 
 Support access is controlled at the instance level. The authorization allows TiDB Cloud Support engineers to access generated Plan Replayer files for SQL performance troubleshooting during a limited period.
 
