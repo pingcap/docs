@@ -267,7 +267,7 @@ If your organization cannot deploy CloudFormation stacks, create the access poli
 
 3. Copy the resulting Role ARN and enter it in the {{{ .premium }}} or {{{ .byoc }}} import wizard.
 
-4. Import data to {{{ .premium }}} or {{{ .byoc }}} by following [Import data from Amazon S3 into {{{ .premium }}}](/tidb-cloud/premium/import-from-s3-premium.md).
+4. Import data to {{{ .premium }}} or {{{ .byoc }}} by following [Import data from Amazon S3 into {{{ .premium }}} or {{{ .byoc }}}](/tidb-cloud/premium/import-from-s3-premium.md).
 
 ## Replicate incremental data
 
