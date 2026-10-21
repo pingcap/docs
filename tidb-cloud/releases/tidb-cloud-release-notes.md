@@ -35,9 +35,9 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - TiDB Cloud BYOC supports vCPU limit alerts to help you better monitor resource usage and control cloud costs.
 
-        TiDB Cloud BYOC now notifies you when provisioned vCPU usage approaches the configured regional limit or when scale-up is blocked because the limit has been reached.
+        TiDB Cloud BYOC now notifies you when provisioned vCPU usage approaches the configured regional limit or when a scale-up operation is blocked because the limit has been reached.
 
-        These alerts provide clear guidance on available scaling headroom and recommended actions.
+        These alerts provide clear guidance on available scaling capacity and recommended actions.
 
 ## October 15, 2026
 
