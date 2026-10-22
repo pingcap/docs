@@ -1,11 +1,11 @@
 ---
 title: TiDB Cloud API Temporary Maintenance Notice
-summary: Learn which TiDB Cloud APIs are temporarily unavailable during maintenance and which operations you can still perform in the TiDB Cloud console.
+summary: Learn which TiDB Cloud API endpoints are temporarily unavailable during maintenance and which operations you can still perform in the TiDB Cloud console.
 ---
 
 # TiDB Cloud API Temporary Maintenance Notice
 
-Due to temporary maintenance, the TiDB Cloud APIs listed in this document are currently unavailable. Requests to these APIs return HTTP status code `403`. You can continue to perform the corresponding operations in the TiDB Cloud console.
+Due to temporary maintenance, the TiDB Cloud API endpoints listed in this document are currently unavailable. Requests to these APIs return HTTP status code `403`. You can continue to perform the corresponding operations in the TiDB Cloud console.
 
 ## TiDB Cloud Dedicated (`dedicated.tidbapi.com`)
 
