@@ -5,7 +5,7 @@ summary: PostgreSQL互換のTiDB Cloud StarterとPostgreSQLの互換性につい
 
 # PostgreSQLとの互換性
 
-PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL wire protocol（pgwire v3）と、一般的なPostgreSQL SQL構文およびアプリケーションパターンをサポートします。ほとんどのPostgreSQLクライアント、ドライバー、ORMは、標準のPostgreSQL接続文字列を使用して接続できます。
+PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL ワイヤプロトコル（pgwire v3）と、一般的なPostgreSQL SQL構文およびアプリケーションパターンをサポートします。ほとんどのPostgreSQLクライアント、ドライバー、ORMは、標準のPostgreSQL接続文字列を使用して接続できます。
 
 ただし、この実装はPostgreSQLと同一ではありません。一部のPostgreSQL機能はサポートされていないか、動作が異なります。特に、PostgreSQL固有のストレージ、レプリケーション、拡張機能、またはトランザクションセマンティクスに依存する機能に違いがあります。
 
@@ -19,7 +19,7 @@ PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL wire proto
 
 PostgreSQL互換の{{{ .starter }}}インスタンスは、以下のPostgreSQL機能をサポートします。
 
-+ **ワイヤプロトコル**: PostgreSQL wire protocol v3。Simple QueryおよびExtended Query（`Parse`/`Bind`/`Describe`/`Execute`）を含みます。
++ **ワイヤプロトコル**: PostgreSQL ワイヤプロトコル v3。Simple QueryおよびExtended Query（`Parse`/`Bind`/`Describe`/`Execute`）を含みます。
 + **DDL**: テーブル、B-tree、GIN、HNSWインデックス、ビュー、マテリアライズドビュー、スキーマ、シーケンス、関数、トリガー、型、照合順序に対する`CREATE`、`ALTER`、`DROP`。
 + **DML**: `RETURNING`付きの`INSERT`、`UPDATE`、`DELETE`、および`INSERT ... ON CONFLICT`（upsert）。
 + **クエリ**: テーブル結合（inner、left、right、full outer、cross、lateral）、共通テーブル式（CTE）、再帰CTE、ウィンドウ関数、サブクエリ、集合演算（`UNION`、`INTERSECT`、`EXCEPT`）。
@@ -57,7 +57,7 @@ PostgreSQL互換の{{{ .starter }}}インスタンスは、以下のPostgreSQL�
 
 `READ UNCOMMITTED`は、PostgreSQLの動作と同様に`READ COMMITTED`として動作します。
 
-PostgreSQL Serializable Snapshot Isolation（SSI）はサポートされていません。PostgreSQL wire protocol経由で`SERIALIZABLE`を要求した場合、トランザクションは`REPEATABLE READ`にダウングレードされ、警告が返されます。
+PostgreSQL Serializable Snapshot Isolation（SSI）はサポートされていません。PostgreSQL ワイヤプロトコル経由で`SERIALIZABLE`を要求した場合、トランザクションは`REPEATABLE READ`にダウングレードされ、警告が返されます。
 
 例:
 
@@ -105,7 +105,7 @@ SHOW transaction_isolation;
 + `ALTER SEQUENCE`は、`OWNER TO`や`OWNED BY`などの所有権関連の操作のみをサポートします。`RESTART`、`INCREMENT BY`、`RENAME TO`を含むその他の句はサポートされません。シーケンスの現在値を変更するには、`setval()`を使用してください。
 + `TRUNCATE`は基本的な単一テーブル形式のみをサポートします。複数テーブルの`TRUNCATE`や、`CASCADE`、`RESTRICT`、`ONLY`、`RESTART IDENTITY`、`CONTINUE IDENTITY`などのオプション句はサポートされません。
 + 外部キーは、`CASCADE`、`SET NULL`、`SET DEFAULT`、`RESTRICT`、`NO ACTION`の参照アクションをサポートします。
-+ 外部キー依存関係の扱いはPostgreSQLと異なります。参照先テーブルを、`CASCADE`または`RESTRICT`付きで削除した場合も含めて削除すると、孤立した外部キー制約が残ることがあります。これらの制約により、`pg_constraint`および`information_schema.referential_constraints`に対するクエリが失敗する可能性があります。この問題を避けるには、参照先テーブルを削除する前に、参照元の外部キー制約を削除してください。
++ 外部キー依存関係の扱いはPostgreSQLと異なります。参照先テーブルを削除すると、`CASCADE`または`RESTRICT`を付けた場合でも、孤立した外部キー制約が残ることがあります。これらの制約により、`pg_constraint`および`information_schema.referential_constraints`に対するクエリが失敗する可能性があります。この問題を避けるには、参照先テーブルを削除する前に、参照元の外部キー制約を削除してください。
 + 遅延外部キー検証はサポートされていません。`DEFERRABLE INITIALLY DEFERRED`で宣言された外部キー制約は受け付けられますが、トランザクションコミット時ではなく即時に検証されます。遅延外部キー検査に依存するアプリケーションでは、トランザクション失敗が発生する可能性があります。
 + enum型はサポートされますが、enum値は宣言順ではなくラベル文字列でソートされます。
 + PostgreSQLのテーブルパーティショニングとテーブル継承はサポートされていません。
@@ -133,7 +133,7 @@ TiDB Cloudで提供されていないその他のpgvectorインデックス型�
 
 ### `COPY` {#copy}
 
-`COPY ... FROM STDIN`は、PostgreSQL wire protocol経由でtext形式およびCSV形式をサポートします。
+`COPY ... FROM STDIN`は、PostgreSQL ワイヤプロトコル経由でテキスト形式およびCSV形式をサポートします。
 
 以下のPostgreSQL `COPY`機能はサポートされていません。
 

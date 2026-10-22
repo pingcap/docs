@@ -31,7 +31,7 @@
   - ID とアクセス制御
     - [パスワード認証](/tidb-cloud/tidb-cloud-password-authentication.md)
     - [標準SSO認証](/tidb-cloud/tidb-cloud-sso-authentication.md)
-    - [Cloud Organization SSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
+    - [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)
     - [IDアクセス管理](/tidb-cloud/manage-user-access.md)
     - [OAuth 2.0](/tidb-cloud/oauth2.md)
   - ネットワークアクセス制御
@@ -45,7 +45,7 @@
   - [概要](/tidb-cloud/starter/pg-extensions-overview.md)
   - [ベクトル検索](/tidb-cloud/starter/pg-vector-search.md)
   - [全文検索](/tidb-cloud/starter/pg-full-text-search.md)
-  - [Parquet データをインポート](/tidb-cloud/starter/pg-parquet-import.md)
+  - [Parquet データをインポートする](/tidb-cloud/starter/pg-parquet-import.md)
 - SQL リファレンス
   - [概要](/tidb-cloud/starter/pg-sql-reference-overview.md)
   - [DDL](/tidb-cloud/starter/pg-ddl.md)
@@ -80,7 +80,7 @@
     - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
   - [{{{ .starter }}} と Essential の制限事項](/tidb-cloud/serverless-limitations.md)
   - [TiDB X インスタンスで制限される SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md)
-  - [TiDB の制限](/tidb-limitations.md)
+  - [TiDB の制限事項](/tidb-limitations.md)
   - [システム変数](/system-variables.md)
   - [サーバーステータス変数](/status-variables.md)
   - [テーブルフィルター](/table-filter.md)
@@ -101,11 +101,11 @@
       - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - Connected: IM チケット作成および更新サブスクリプション
       - [Slack 経由でチケットを作成し、チケット更新を購読する](/tidb-cloud/connected-slack-ticket-creation.md)
-      - [Larkでチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
+      - [Lark経由でチケットを作成し、チケットの更新を購読する](/tidb-cloud/connected-lark-ticket-creation.md)
     - Connected: サポートチケット向け IM インタラクション
       - [Slack経由でサポートチケットとやり取りする](/tidb-cloud/connected-slack-ticket-interaction.md)
       - [Lark経由でサポートチケットとやり取りする](/tidb-cloud/connected-lark-ticket-interaction.md)
-  - [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)
+  - [サポートを受ける](/tidb-cloud/tidb-cloud-support.md)
 - FAQ
   - [TiDB Cloudよくある質問](/tidb-cloud/tidb-cloud-faq.md)
   - [PostgreSQL互換 TiDB Cloud Starter FAQ](/tidb-cloud/starter/pg-faq.md)

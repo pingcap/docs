@@ -67,7 +67,7 @@ FROM users;
 
 > **Note:**
 >
-> `CREATE TABLE ... AS SELECT` または `SELECT ... INTO` を使用して作成されたテーブルには、追加の `_rowid` 主キー カラムが含まれます。その他の DDL 互換性の違いについては、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+> `CREATE TABLE ... AS SELECT` または `SELECT ... INTO` を使用して作成されたテーブルには、追加の `_rowid` 主キーカラムが含まれます。その他の DDL 互換性の違いについては、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ### IDENTITY カラム {#identity-columns}
 
@@ -280,7 +280,7 @@ TRUNCATE TABLE users;
 - `RESTART IDENTITY`
 - `CONTINUE IDENTITY`
 
-外部キーから参照されているテーブルは切り詰めできません。
+外部キーから参照されているテーブルは切り詰められません。
 
 ## スキーマの作成と管理 {#create-and-manage-schemas}
 

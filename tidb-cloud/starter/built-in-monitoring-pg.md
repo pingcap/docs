@@ -29,7 +29,7 @@ TiDB Cloud では、メトリクスデータは 7 日間保持されます。
 
 | メトリクス名 | ラベル | 説明 |
 | :------------| :------| :-------------------------------------------- |
-| Used Storage Size | Row-based storage, Row-based standard storage, Columnar storage | 行ベースストレージ、行ベース標準ストレージ、およびカラムナー ストレージのサイズです。TiDB Cloud は、各ストレージタイプのサイズが 50 MiB 以上の場合にのみ、このメトリクスを表示します。**Row-based standard storage** は **Row-based storage** と同じ意味です。 |
+| Used Storage Size | Row-based storage, Row-based standard storage, Columnar storage | 行ベースストレージ、行ベース標準ストレージ、および列指向ストレージのサイズです。TiDB Cloud は、各ストレージタイプのサイズが 50 MiB 以上の場合にのみ、このメトリクスを表示します。**Row-based standard storage** は **Row-based storage** と同じ意味です。 |
 | Query Per Second | All, {SQL type} | 1 秒あたりに実行される SQL 文の数です。`SELECT`、`INSERT`、`UPDATE` などの SQL タイプごとに収集されます。 |
 | Query Duration | Avg, P99, P99-{SQL type} | クライアントから {{{ .starter }}} インスタンスがリクエストを受信してから、そのインスタンスがリクエストを実行し、結果をクライアントに返すまでの所要時間です。 |
 | Total Connection | All | {{{ .starter }}} インスタンスへの接続数です。 |

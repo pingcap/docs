@@ -265,9 +265,9 @@ pg_dump \
   | psql "<TARGET_DATABASE_URL>" -v ON_ERROR_STOP=1
 ```
 
-デフォルトでは、プレーンな `pg_dump` のデータストリームは PostgreSQL の `COPY` 文を使用します。このストリームを `psql` にパイプすると、`COPY ... FROM stdin` 文によって、PostgreSQL wire protocol 経由で PostgreSQL 互換の {{{ .starter }}} にデータがインポートされます。
+デフォルトでは、プレーンな `pg_dump` のデータストリームは PostgreSQL の `COPY` 文を使用します。このストリームを `psql` にパイプすると、`COPY ... FROM stdin` 文によって、PostgreSQL ワイヤプロトコル経由で PostgreSQL 互換の {{{ .starter }}} にデータがインポートされます。
 
-PostgreSQL 互換の {{{ .starter }}} は、text および CSV 形式の `COPY` データ転送をサポートします。バイナリ `COPY` はサポートされていません。
+PostgreSQL 互換の {{{ .starter }}} は、テキストおよび CSV 形式の `COPY` データ転送をサポートします。バイナリ `COPY` はサポートされていません。
 
 ### `\copy` を使用して個別のテーブルを移行する {#migrate-individual-tables-using-copy}
 
@@ -366,7 +366,7 @@ SELECT max(id) FROM users;
 
 - パブリックプレビュー期間中、PostgreSQL 互換の {{{ .starter }}} は、`pg_dump` の `COPY` データストリームおよびテーブル形式の `\copy` を使った `psql` による移行をサポートします。
 - PostgreSQL の論理レプリケーションとストリーミングレプリケーションはサポートされていません。最終移行では、スキーマとデータをエクスポートする前にソースへの書き込みを停止し、移行の検証とアプリケーションの切り替えが完了するまで停止したままにしてください。
-- `COPY` プロトコルは text および CSV 形式をサポートします。バイナリ `COPY` はサポートされていません。
+- `COPY` プロトコルはテキストおよび CSV 形式をサポートします。バイナリ `COPY` はサポートされていません。
 - SQL レベルの `COPY (SELECT ...) TO STDOUT` 構文はサポートされていません。個別テーブルの移行では、テーブル形式の `\copy` を使用してください。
 - 一部の PostgreSQL スキーマオブジェクト、データ型、インデックスアクセスメソッド、拡張機能、PL/pgSQL 構文はサポートされていないか、動作が異なります。移行前に [PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を確認してください。
 - 移行されるテキストデータは、有効な UTF-8 エンコーディングを使用している必要があります。
