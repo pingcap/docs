@@ -461,7 +461,7 @@
         - [SHOW WORKERS](/tidb-cloud-lake/sql/show-workers.md)
         - [Worker の例](/tidb-cloud-lake/sql/worker-examples.md)
       - Workload Group
-        - [Workload Group](/tidb-cloud-lake/sql/workload-group.md)
+        - [ワークロードグループ](/tidb-cloud-lake/sql/workload-group.md)
         - [ALTER WORKLOAD GROUP](/tidb-cloud-lake/sql/alter-workload-group.md)
         - [CREATE WORKLOAD GROUP](/tidb-cloud-lake/sql/create-workload-group.md)
         - [DROP WORKLOAD GROUP](/tidb-cloud-lake/sql/drop-workload-group.md)
