@@ -32,7 +32,7 @@
   - [オンボーディングの概要](/tidb-cloud/byoc/byoc-onboarding-overview.md)
   - [AWS 環境を準備する](/tidb-cloud/byoc/byoc-prepare-environment-aws.md)
   - [IAM 権限を設定する](/tidb-cloud/byoc/byoc-configure-iam-permissions.md)
-  - [リージョンの自動デプロイ](/tidb-cloud/byoc/byoc-automated-deployment.md)
+  - [自動リージョンデプロイ](/tidb-cloud/byoc/byoc-automated-deployment.md)
   - [サービスを初期化する](/tidb-cloud/byoc/byoc-initialize-service.md)
   - [踏み台ホストを設定する](/tidb-cloud/byoc/byoc-configure-bastion-host.md)
   - [共同検証](/tidb-cloud/byoc/joint-validation.md)
@@ -373,7 +373,7 @@
     - [GROUP BY 修飾子](/functions-and-operators/group-by-modifier.md)
     - [ウィンドウ関数](/functions-and-operators/window-functions.md)
     - [その他の関数](/functions-and-operators/miscellaneous-functions.md)
-    - [高精度演算](/functions-and-operators/precision-math.md)
+    - [精密計算](/functions-and-operators/precision-math.md)
     - [集合演算](/functions-and-operators/set-operators.md)
     - [シーケンス関数](/functions-and-operators/sequence-functions.md)
     - [プッシュダウン可能な式の一覧](/functions-and-operators/expressions-pushed-down.md)
@@ -400,7 +400,7 @@
     - [GBK](/character-set-gbk.md)
   - 履歴データの読み取り
     - ステイル読み取りを使用する（推奨）
-      - [ステイル読み取りの利用シナリオ](/stale-read.md)
+      - [ステイル読み取りの使用シナリオ](/stale-read.md)
       - [`As OF TIMESTAMP` を使用してステイル読み取りを実行する](/as-of-timestamp.md)
       - [`tidb_read_staleness` を使用してステイル読み取りを実行する](/tidb-read-staleness.md)
       - [`tidb_external_ts` を使用してステイル読み取りを実行する](/tidb-external-ts.md)
@@ -458,7 +458,7 @@
   - [メタデータロック](/metadata-lock.md)
   - [TiDB 高速テーブル作成](/accelerated-table-creation.md)
 - 一般リファレンス
-  - TiDB Classic アーキテクチャ
+  - TiDBクラシックアーキテクチャ
     - [概要](/tidb-architecture.md)
     - [ストレージ](/tidb-storage.md)
     - [コンピューティング](/tidb-computing.md)

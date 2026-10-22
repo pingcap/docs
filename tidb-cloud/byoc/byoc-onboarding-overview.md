@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud BYOC オンボーディング概要
-summary: TiDB Cloud BYOC のオンボーディングプロセスの概要。顧客と TiDB Cloud チームそれぞれの責任と手順について説明します。
+summary: TiDB Cloud BYOC のオンボーディングプロセスの概要。お客様と TiDB Cloud チームそれぞれの責任と手順について説明します。
 ---
 
 # TiDB Cloud BYOC オンボーディング概要
@@ -17,7 +17,7 @@ TiDB Cloud BYOC のデプロイプロセスは、お客様の組織と TiDB Clou
 | :---- | :---- | :---- |
 | [フェーズ 1: 環境の準備](/tidb-cloud/byoc/byoc-prepare-environment-aws.md) | お客様 | デプロイに必要な AWS の基盤を準備します。これには、専用の AWS アカウントの作成、TiDB 用のパブリックまたはプライベート Route 53 ホストゾーンの設定、およびプライベート認証局 (PCA) のセットアップが含まれます。 |
 | [フェーズ 2: IAM のブートストラップ](/tidb-cloud/byoc/byoc-configure-iam-permissions.md) | お客様 | 提供されたブートストラップスクリプトを実行して、必要な IAM ロールとポリシーをインストールします。これにより、TiDB Cloud コントロールプレーンが AWS アカウント内のリソースを安全に管理できるようになります。 |
-| [フェーズ 3: リージョンの自動デプロイ](/tidb-cloud/byoc/byoc-automated-deployment.md) | TiDB Cloud | IAM 権限の検証後、TiDB Cloud が VPC、EKS クラスター、およびコントロールプレーンリソースを自動的にプロビジョニングします。注: このプロセスは **完全に自動化** されており、お客様による操作は不要です。 |
+| [フェーズ 3: 自動リージョンデプロイ](/tidb-cloud/byoc/byoc-automated-deployment.md) | TiDB Cloud | IAM 権限の検証後、TiDB Cloud が VPC、EKS クラスター、およびコントロールプレーンリソースを自動的にプロビジョニングします。注: このプロセスは **完全に自動化** されており、お客様による操作は不要です。 |
 | [フェーズ 4: サービスの初期化](/tidb-cloud/byoc/byoc-initialize-service.md) | お客様 | まずリソースプールを作成し、その後コンソールからリソースプール内に TiDB インスタンスを作成します。その後、[踏み台ホストを設定](/tidb-cloud/byoc/byoc-configure-bastion-host.md) し、認証スクリプトを構成して、安全なメンテナンスチャネル (Tailscale) と可観測性パイプラインを確立します。注: 独自のカスタム方式を使用してメンテナンスチャネルを確立することもできます。 |
 | [フェーズ 5: 検証](/tidb-cloud/byoc/joint-validation.md) | 共同 | 両チームが連携して接続性を検証し、メトリクス収集を確認し、システムの健全性を確認することで、BYOC 環境が利用可能な状態であることを保証します。 |
 

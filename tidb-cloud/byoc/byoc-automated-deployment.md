@@ -36,7 +36,7 @@ TiDB Cloud は、必要なコンテナイメージを中央イメージリポジ
 
 新しい AWS リージョンでの初回デプロイは、必要なすべてのイメージを同期する必要があるため、より時間がかかる場合があります。同じリージョンでの後続のデプロイでは、同期済みのイメージを再利用するため、通常はより早く完了します。
 
-## ステップ 2: リージョン管理プレーンをデプロイ {#step-2-deploy-the-regional-management-plane}
+## ステップ 2: リージョン管理プレーンをデプロイする {#step-2-deploy-the-regional-management-plane}
 
 TiDB Cloud は、TiDB Cloud が管理する AWS アカウント内にリージョン管理プレーンをデプロイします。
 
@@ -50,7 +50,7 @@ TiDB Cloud は、TiDB Cloud が管理する AWS アカウント内にリージ�
 
 リージョン管理プレーンには、TiDB アプリケーションデータは保存されません。
 
-## ステップ 3: お客様側の関連インフラをデプロイ {#step-3-deploy-customer-side-supporting-infrastructure}
+## ステップ 3: お客様側の関連インフラをデプロイする {#step-3-deploy-customer-side-supporting-infrastructure}
 
 TiDB Cloud は、アカウントのブートストラップ時に作成された IAM ロールを引き受け、お客様の AWS アカウント内に必要な関連リソースをデプロイします。
 
@@ -67,7 +67,7 @@ TiDB Cloud は、アカウントのブートストラップ時に作成された
 >
 > このステップで作成される Amazon EKS クラスターは、可観測性およびその他の関連サービスをホストします。これは TiDB インスタンスの TiDB データプレーンでは**ありません**。TiDB データプレーンは、TiDB Cloud コンソールで最初の BYOC インスタンスを作成するときに初期化されます。
 
-## ステップ 4: BYOC リージョンを登録して検証 {#step-4-register-and-validate-the-byoc-region}
+## ステップ 4: BYOC リージョンを登録して検証する {#step-4-register-and-validate-the-byoc-region}
 
 インフラストラクチャとサービスのデプロイ後、TiDB Cloud は次の処理を行います。
 
