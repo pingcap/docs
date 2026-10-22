@@ -170,6 +170,6 @@ ti fs find-files \
 ## 次のステップ {#what-s-next}
 
 - [ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md): ローカルディレクトリと既存のローカルツールを通じてファイルシステムデータを操作します。
-- [ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md): 分離された変更を作成して確認し、ベースファイルシステムに適用する前に検証します。
+- [ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md): ベースファイルシステムに適用する前に、分離された変更を作成して確認します。
 - [マシン間でファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md): 別のマシンまたは環境にファイルシステムへのアクセス権を付与します。
 - [TiDB Cloud Filesystem CLI コマンドリファレンス](/ai/ti/reference/ti-filesystem.md): 完全なコマンド構文とオプションを確認します。

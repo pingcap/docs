@@ -75,5 +75,5 @@ Linux では、FUSE が正常にアンマウントされるまで書き込みを
 ## 次のステップ {#what-s-next}
 
 - [ファイルシステムを管理する](/tidb-cloud-filesystem/manage-filesystem-resources.md): ファイルシステムの確認、名前変更、削除を行います。
-- [ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md): 制限付きアクセスのトークンを作成します。
+- [ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md): 制限付きアクセスのトークンを作成します。
 - [CLI でのクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start.md): CLI のみで作成するワークフローを確認します。

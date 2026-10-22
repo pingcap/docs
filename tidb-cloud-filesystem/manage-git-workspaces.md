@@ -110,30 +110,30 @@ ti fs-git remove-git-worktree \
 
 ## マシンを離れる前に作業内容を保持する {#preserve-work-before-leaving-a-machine}
 
-`--mount-profile coding-agent` を使用すると、`.git` などの Git メタデータはローカルマシンに保持されます。ローカルでコミットしただけでは、その履歴を別のマシンでリカバリ可能にはできません。drain やアンマウントを行っても、このローカル Git メタデータは転送されません。履歴を保持するには、Git リモートへの push、または以下のメタデータアーカイブのワークフローを使用してください。
+`--mount-profile coding-agent` を使用すると、`.git` などの Git メタデータはローカルマシンに保持されます。ローカルでコミットしただけでは、その履歴を別のマシンでリカバリ可能にはできません。ドレインやアンマウントを行っても、このローカル Git メタデータは転送されません。履歴を保持するには、Git リモートへのプッシュ、または以下のメタデータアーカイブのワークフローを使用してください。
 
 一時的なマシンを削除する前に、次を実施してください。
 
 1. 次のいずれかの方法で Git 履歴を保持します。
-    - 書き込み可能な Git リモートにコミットして push します。独立した clone または fetch から、想定したコミット ID が利用可能であることを確認してください。
-    - push できない場合は、リンクされた worktree のベースリポジトリのメタデータを含む、必要なローカル Git メタデータに対して明示的な `--path` 値を指定して [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) を使用します。別の環境で [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) を使って復元し、コミット ID と作業ファイルを比較してください。パスが変わる場合は、まず [`git worktree repair` で worktree 接続を修復](https://git-scm.com/docs/git-worktree) してください。実行可能な例については、[push していないワークスペースを別のマシンにリカバリする](#recover-an-unpushed-workspace-to-another-machine) を参照してください。
-2. 必要な untracked ファイルや ignored ファイルは別途保持してください。push で保持されるのはコミット済みの内容だけです。
+    - 書き込み可能な Git リモートにコミットしてプッシュします。独立したクローンまたはフェッチから、想定したコミット ID が利用可能であることを確認してください。
+    - プッシュできない場合は、リンクされた worktree のベースリポジトリのメタデータを含む、必要なローカル Git メタデータに対して明示的な `--path` 値を指定して [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) を使用します。別の環境で [`unpack-file-system`](/ai/ti/reference/ti-fs-unpack-file-system.md) を使って復元し、コミット ID と作業ファイルを比較してください。パスが変わる場合は、まず [`git worktree repair` で worktree 接続を修復](https://git-scm.com/docs/git-worktree) してください。実行可能な例については、[プッシュしていないワークスペースを別のマシンにリカバリする](#recover-an-unpushed-workspace-to-another-machine) を参照してください。
+2. 必要な未追跡ファイルや無視されたファイルは別途保持してください。プッシュで保持されるのはコミット済みの内容だけです。
 3. [安全にアンマウントする](/tidb-cloud-filesystem/filesystem-mount.md#unmount-when-you-are-finished)。リカバリ確認が完了するまでは元のディスクを保持してください。
 
 各プロファイルでローカルに保持されるデータについては、[マウントプロファイルとローカルオーバーレイ](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を参照してください。
 
-## push していないワークスペースを別のマシンにリカバリする {#recover-an-unpushed-workspace-to-another-machine}
+## プッシュしていないワークスペースを別のマシンにリカバリする {#recover-an-unpushed-workspace-to-another-machine}
 
-この例では、リンクされた worktree を含む作業途中の Git ワークスペースを、リモートに push せずに別のマシンへ移動します。ベースリポジトリの Git メタデータと、リンクされた worktree の worktree ごとのメタデータの両方をリモートアーカイブにパックし、2 台目のマシンで復元して worktree リンクを修復し、コミット ID を比較して転送を確認します。
+この例では、リンクされた worktree を含む作業途中の Git ワークスペースを、リモートにプッシュせずに別のマシンへ移動します。ベースリポジトリの Git メタデータと、リンクされた worktree の worktree ごとのメタデータの両方をリモートアーカイブにパックし、2 台目のマシンで復元して worktree リンクを修復し、コミット ID を比較して転送を確認します。
 
-この例では、ソースマシンで `--mount-profile coding-agent` を使用し、このページの前半で説明した次のレイアウトが作成されていることを前提としています。
+この例では、移行元マシンで `--mount-profile coding-agent` を使用し、このページの前半で説明した次のレイアウトが作成されていることを前提としています。
 
 ```text
 /path/to/workspace/tidb              (base repository, contains .git/)
 /path/to/workspace/tidb-feature      (linked worktree, contains .git file pointing at the base)
 ```
 
-### ソースマシンで {#on-the-source-machine}
+### 移行元マシンで {#on-the-source-machine}
 
 1. 後で比較できるようにコミット ID を記録します。
 
@@ -142,13 +142,13 @@ ti fs-git remove-git-worktree \
     (cd /path/to/workspace/tidb-feature && git rev-parse HEAD) | tee /tmp/tidb-feature.sha
     ```
 
-2. パック前に、キャッシュされた blob が永続化されるよう、書き込みプロセスを停止し、保留中の書き込みを drain します。
+2. パック前に、キャッシュされた blob が永続化されるよう、書き込みプロセスを停止し、保留中の書き込みをドレインします。
 
     ```shell
     ti fs drain-file-system --mount-path /path/to/workspace
     ```
 
-3. ローカルオーバーレイにのみ存在する Git メタデータをパックします。`coding-agent` は `.git` をリモート名前空間の外に保持するため、ベースリポジトリの `.git` ディレクトリと、各リンクされた worktree の `.git/worktrees/<name>` サブディレクトリの両方を明示的に指定する必要があります。`.env` や仮想環境など、保持したい untracked ファイルや ignored ファイルも同じアーカイブに含めてください。`--archive-path` はアーカイブを保存するリモートファイルシステム内のパスです。`/packs/` のように、作業ツリーの外の場所を選んでください。
+3. ローカルオーバーレイにのみ存在する Git メタデータをパックします。`coding-agent` は `.git` をリモート名前空間の外に保持するため、ベースリポジトリの `.git` ディレクトリと、各リンクされた worktree の `.git/worktrees/<name>` サブディレクトリの両方を明示的に指定する必要があります。`.env` や仮想環境など、保持したい未追跡ファイルや無視されたファイルも同じアーカイブに含めてください。`--archive-path` はアーカイブを保存するリモートファイルシステム内のパスです。`/packs/` のように、作業ツリーの外の場所を選んでください。
 
     ```shell
     ti fs pack-file-system \
@@ -161,11 +161,11 @@ ti fs-git remove-git-worktree \
       --path tidb/.env
     ```
 
-    `--path` の値はマウントパスからの相対パスです。保持したいディレクトリまたはファイルごとに `--path` を繰り返し指定してください。指定されていない untracked ファイルや ignored ファイルは、移行先マシンでは復元されません。
+    `--path` の値はマウントパスからの相対パスです。保持したいディレクトリまたはファイルごとに `--path` を繰り返し指定してください。指定されていない未追跡ファイルや無視されたファイルは、移行先マシンでは復元されません。
 
 4. [安全にアンマウントする](/tidb-cloud-filesystem/filesystem-mount.md#unmount-when-you-are-finished)。移行先マシンでリカバリが確認されるまでは、ソースディスクを利用可能な状態で保持してください。
 
-### 対象マシン上で {#on-the-target-machine}
+### 移行先マシンで {#on-the-target-machine}
 
 1. 宛先パスに、同じプロファイルで同じファイルシステムをマウントします。宛先パスはソースと異なっていてもかまいません。以下の修復手順で、リンクされた worktree に保存されているパスを修正できます。
 
@@ -196,16 +196,16 @@ ti fs-git remove-git-worktree \
 
     `git worktree list` には、新しいパスで `tidb` と `tidb-feature` の両方が表示され、`prunable` マーカーが付いていないことを確認してください。ベースリポジトリも移動している場合は、ベースリポジトリ内で引数なしの `git worktree repair` を実行し、登録されているすべての worktree を更新してください。
 
-4. コミット ID が、ソースマシンで記録したものと一致することを確認します。
+4. コミット ID が、移行元マシンで記録したものと一致することを確認します。
 
     ```shell
     (cd /new/path/to/workspace/tidb && git rev-parse HEAD)
     (cd /new/path/to/workspace/tidb-feature && git rev-parse HEAD)
     ```
 
-    両方の出力は、ソースマシンで取得した対応する `.sha` ファイルと一致している必要があります。どちらかが異なる場合は、ソースディスクを削除しないでください。アーカイブが不完全であり、通常は追加の `--path` 値が原因です。ソース側で不足しているパスを指定して `pack-file-system` を再実行し、もう一度 unpack してください。
+    両方の出力は、移行元マシンで取得した対応する `.sha` ファイルと一致している必要があります。どちらかが異なる場合は、ソースディスクを削除しないでください。アーカイブが不完全であり、通常は追加の `--path` 値が原因です。ソース側で不足しているパスを指定して `pack-file-system` を再実行し、もう一度アンパックしてください。
 
-5. 両方のコミット ID が一致し、保持した未追跡ファイルが対象ワークスペースで読み取れることを確認してから、ソースマシンを削除してください。
+5. 両方のコミット ID が一致し、保持した未追跡ファイルが対象ワークスペースで読み取れることを確認してから、移行元マシンを削除してください。
 
 > **Warning:**
 >

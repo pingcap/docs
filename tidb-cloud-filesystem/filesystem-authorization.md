@@ -59,7 +59,7 @@ TiDB Cloud API 認証情報は、ファイルシステムの作成、一覧表�
 
 1 つのファイルシステムには、複数の有効なオーナートークンを持たせることができます。これにより、異なるユーザー、アプリケーション、または環境で、同じトークンを共有する代わりに個別の認証情報を使用できます。
 
-オーナートークンの生成と管理の手順については、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md)を参照してください。
+オーナートークンの生成と管理の手順については、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md)を参照してください。
 
 ## スコープ付きトークン {#scoped-tokens}
 
@@ -86,7 +86,7 @@ TiDB Cloud API 認証情報は、ファイルシステムの作成、一覧表�
 
 ファイルシステムへのフルアクセスを必要としないユーザー、アプリケーション、エージェント、または他のマシンにファイルシステムアクセスを付与する場合は、スコープ付きトークンを使用してください。
 
-スコープ付きトークンの作成と委任の手順については、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md#generate-and-delegate-a-scoped-token)を参照してください。
+スコープ付きトークンの作成と委任の手順については、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md#generate-and-delegate-a-scoped-token)を参照してください。
 
 ## 認証情報の境界 {#credential-boundaries}
 
@@ -102,6 +102,6 @@ TiDB Cloud CLI は、利便性のために選択したファイルシステム�
 
 ## 次のステップ {#what-s-next}
 
-- [ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [マシン間でファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md)
 - [ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md)

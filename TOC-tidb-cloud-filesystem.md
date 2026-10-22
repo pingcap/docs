@@ -15,7 +15,7 @@
 ## ガイド
 
 - [ファイルシステムを管理する](/tidb-cloud-filesystem/manage-filesystem-resources.md)
-- [ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+- [ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 - [既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md)
 - ファイルシステムをマウントする
   - [概要](/tidb-cloud-filesystem/filesystem-mount.md)

@@ -5,7 +5,7 @@ summary: ファイルシステムのトークン、リージョン、ランタ�
 
 # TiDB Cloud Filesystem のトラブルシューティング
 
-以下の症状を使用して、ファイルシステムのアクセス障害やマウント障害を診断します。`--debug` は必要な場合にのみ追加し、共有する前にマスク済みの出力を確認してください。CLI のインストール、API キー認証、Starter、または SQL の障害については、[TiDB Cloud CLI のトラブルシューティング](/ai/ti/reference/ti-troubleshooting.md) を参照してください。
+以下の症状を使用して、ファイルシステムのアクセス障害やマウント障害を診断します。`--debug` は必要な場合にのみ追加し、共有する前に秘匿情報を除去した出力を確認してください。CLI のインストール、API キー認証、Starter、または SQL の障害については、[TiDB Cloud CLI のトラブルシューティング](/ai/ti/reference/ti-troubleshooting.md) を参照してください。
 
 > **Note:**
 >
@@ -32,7 +32,7 @@ ti fs import-file-system-token --from-file ./fs-token --region <filesystem-regio
 ti fs list-files --file-system-id <file-system-id> --path /
 ```
 
-既知のすべてのトークンが失われた、または失効した場合は、TiDB Cloud API キーを使用して別のオーナートークンを生成します。
+既知のすべてのトークンが失われた、または取り消された場合は、TiDB Cloud API キーを使用して別のオーナートークンを生成します。
 
 ```bash
 ti fs generate-file-system-token \
@@ -45,7 +45,7 @@ ti fs generate-file-system-token \
 
 ## ファイルシステムトークンが拒否される {#file-system-token-is-rejected}
 
-ファイル操作で HTTP 401 または `invalid API key` エラーが返る場合、ファイルシステムトークンが無効化されている、期限切れである、別のマシンで更新された、または失効したことを示している可能性があります。この文脈では、`API key` はファイルシステムトークンを指す場合があり、必ずしも TiDB Cloud API キーに問題があることを意味しません。TiDB Cloud API キーを使用してトークンメタデータを確認してください。
+ファイル操作で HTTP 401 または `invalid API key` エラーが返る場合、ファイルシステムトークンが無効化されている、期限切れである、別のマシンで更新された、または取り消されたことを示している可能性があります。この文脈では、`API key` はファイルシステムトークンを指す場合があり、必ずしも TiDB Cloud API キーに問題があることを意味しません。TiDB Cloud API キーを使用してトークンメタデータを確認してください。
 
 ```bash
 ti fs list-file-system-tokens \
@@ -68,7 +68,7 @@ ti fs list-file-system-tokens \
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-CLI のエラーメッセージでは最初に `drain-file-system` を実行するよう提案されますが、正常な FUSE アンマウントでは保留中の書き込みがすでにフラッシュされるため、別途 drain は不要です。`0` の終了ステータスを drain の証拠として扱う前に、マウントログで `reason=force_quit` を確認してください。詳細は [アンマウントは成功を返すが、マウントプロセスが異常終了する](#unmount-returns-success-but-the-mount-process-exits-abnormally) を参照してください。WebDAV は `drain-file-system` をサポートしていないため、WebDAV では正常なアンマウントを使用してください。
+CLI のエラーメッセージでは最初に `drain-file-system` を実行するよう提案されますが、正常な FUSE アンマウントでは保留中の書き込みがすでにフラッシュされるため、別途ドレインは不要です。`0` の終了ステータスをドレインの証拠として扱う前に、マウントログで `reason=force_quit` を確認してください。詳細は [アンマウントは成功を返すが、マウントプロセスが異常終了する](#unmount-returns-success-but-the-mount-process-exits-abnormally) を参照してください。WebDAV は `drain-file-system` をサポートしていないため、WebDAV では正常なアンマウントを使用してください。
 
 その後、トークン操作を再試行してください。別のマシン上のマウントはローカルからは見えないため、そのマシンとのローテーション調整は別途行う必要があります。
 
@@ -109,7 +109,7 @@ export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 
 ## ファイルシステムランタイムがない、または互換性がない {#file-system-runtime-is-missing-or-incompatible}
 
-リリースインストーラーは、バンドルされたファイルシステムランタイム コンポーネントを `ti` の隣に配置します。このランタイムを直接呼び出すことはありません。CLI がランタイム コンポーネントの欠落を報告した場合は、現在のインストーラーを再実行してください。
+リリースインストーラーは、バンドルされたファイルシステムランタイムコンポーネントを `ti` の隣に配置します。このランタイムを直接呼び出すことはありません。CLI がランタイムコンポーネントの欠落を報告した場合は、現在のインストーラーを再実行してください。
 
 ```bash
 curl -fsSL https://github.com/tidbcloud/ti-cli/releases/latest/download/install.sh | sh -s -- --yes
@@ -197,7 +197,7 @@ ti fs mount-file-system --mount-path "$HOME/workspace"
 
 `/workspace` の所有者やモードを変更しても AppArmor は回避できません。パスを変更できない場合は、[Ubuntu 26.04 のマウントパス制限](/tidb-cloud-filesystem/filesystem-mount-linux.md#ubuntu-2604-mount-path-restrictions) に記載されているように、`/etc/apparmor.d/local/fusermount3` に明示的な `/workspace` の mount および unmount ルールを追加してください。
 
-## プロセスクラッシュ後にマウントが stale になる {#mount-becomes-stale-after-a-process-crash}
+## プロセスクラッシュ後にマウントが古い状態になる {#mount-becomes-stale-after-a-process-crash}
 
 正常なアンマウントを行わずにコンパニオンが強制終了された場合、FUSE アクセスで `EIO` または `Transport endpoint is not connected` が返されることがあります。開いているファイルを持つプロセスを停止してから、次を試してください。
 
@@ -207,7 +207,7 @@ ti fs unmount-file-system \
   --force
 ```
 
-locator が残っていない場合でもクリーンアップを成功させる必要があるときは、`--ignore-absent` を使用します。強制的なクリーンアップでは、削除されたローカルディスク上の保留中の書き込みのリカバリは保証されません。
+ロケーターが残っていない場合でもクリーンアップを成功させる必要があるときは、`--ignore-absent` を使用します。強制的なクリーンアップでは、削除されたローカルディスク上の保留中の書き込みのリカバリは保証されません。
 
 ## アンマウントで busy が報告される {#unmount-reports-busy}
 
@@ -217,11 +217,11 @@ locator が残っていない場合でもクリーンアップを成功させる
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-正常な FUSE アンマウントでは保留中の書き込みが自動的にフラッシュされますが、それはマウントプロセスが正常終了した場合に限られます。`unmount-file-system` の終了ステータス `0` を信用する前に、マウントログで `reason=force_quit` を確認してください。詳細は [アンマウントは成功を返すが、マウントプロセスが異常終了する](#unmount-returns-success-but-the-mount-process-exits-abnormally) を参照してください。`drain-file-system` を個別に実行しても、開いているファイルは閉じられず、busy なマウントも解消されません。これは、マウントを動作させたまま保留中の書き込みをフラッシュするために使用します。WebDAV は drain をサポートしていません。
+正常な FUSE アンマウントでは保留中の書き込みが自動的にフラッシュされますが、それはマウントプロセスが正常終了した場合に限られます。`unmount-file-system` の終了ステータス `0` を信用する前に、マウントログで `reason=force_quit` を確認してください。詳細は [アンマウントは成功を返すが、マウントプロセスが異常終了する](#unmount-returns-success-but-the-mount-process-exits-abnormally) を参照してください。`drain-file-system` を個別に実行しても、開いているファイルは閉じられず、busy なマウントも解消されません。これは、マウントを動作させたまま保留中の書き込みをフラッシュするために使用します。WebDAV はドレインをサポートしていません。
 
 ## アンマウントは成功を返すが、マウントプロセスが異常終了する {#unmount-returns-success-but-the-mount-process-exits-abnormally}
 
-`ti v0.2.6` では、レイヤーまたはチェックポイントのマウントで、バックグラウンドプロセスが `late pending drain` に続いて `reason=force_quit` を報告し、終了コード `1` で終了している場合でも、約 30 秒後に `unmounted` が返されることがあります。この動作は、レイヤーから小さなファイルを読み取った後、およびレイヤーマウントに対して書き込み、fsync、drain を行った後に観測されています。
+`ti v0.2.6` では、レイヤーまたはチェックポイントのマウントで、バックグラウンドプロセスが `late pending drain` に続いて `reason=force_quit` を報告し、終了コード `1` で終了している場合でも、約 30 秒後に `unmounted` が返されることがあります。この動作は、レイヤーから小さなファイルを読み取った後、およびレイヤーマウントに対して書き込み、fsync、ドレインを行った後に観測されています。
 
 この問題は、`ti` v0.2.7 で使用される同梱ランタイム `60b63d6` にも存在します。CLI と同梱ランタイムは別々にバージョン管理されているため、CLI バージョンだけではマウントが影響を受けるかどうかは判断できません。修正状況については、[同梱マウントランタイムの修正 (Drive9 #1002)](https://github.com/mem9-ai/drive9/pull/1002) を参照してください。
 
