@@ -92,7 +92,7 @@ TiDB バージョン: 7.5.2
     - 述語における`Longlong`型のオーバーフローの問題を修正 [#45783](https://github.com/pingcap/tidb/issues/45783) @[hawkingrei](https://github.com/hawkingrei)
     - クラスター化インデックスを述語として使用すると`SELECT INTO OUTFILE`が機能しない問題を修正[#42093](https://github.com/pingcap/tidb/issues/42093) @[qw4990](https://github.com/qw4990)
     - TopNオペレーターが誤ってプッシュダウンされる可能性がある問題を修正しました [#37986](https://github.com/pingcap/tidb/issues/37986) @[qw4990](https://github.com/qw4990)
-    - 空の投影により TiDB がpanicを引き起こす問題を修正しました [#49109](https://github.com/pingcap/tidb/issues/49109) @[winoros](https://github.com/winoros)
+    - 空の射影により TiDB がpanicを引き起こす問題を修正しました [#49109](https://github.com/pingcap/tidb/issues/49109) @[winoros](https://github.com/winoros)
     - インデックス プランの順序が保たれている場合に、インデックスマージによって部分的な制限が誤ってプッシュダウンされる問題を修正しました。 [#52947](https://github.com/pingcap/tidb/issues/52947) @[AilinKid](https://github.com/AilinKid)
     - 再帰CTE でビューの使用が機能しない問題を修正 [#49721](https://github.com/pingcap/tidb/issues/49721) @[hawkingrei](https://github.com/hawkingrei)
     - 列の不安定な一意のIDにより、 `UPDATE`文がエラーを返す可能性がある問題を修正しました。 [#53236](https://github.com/pingcap/tidb/issues/53236) @[winoros](https://github.com/winoros)
