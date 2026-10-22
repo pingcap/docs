@@ -33,7 +33,7 @@ TiDB Cloudのリソース1つで、複数のNetlifyサイトに接続できま�
 
 TiDB Cloud Dedicatedクラスターの場合、**Settings** > **Networking** で **Public Endpoint** が無効になっている場合は有効にし、クラスターのトラフィックフィルターで、すべての IP アドレスからの接続を許可する設定（ `0.0.0.0/0`に設定）になっていることを確認してください。これは、Netlify のデプロイメントでは動的 IP アドレスが使用されるためです。
 
-TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、デフォルトで全てのIPアドレスからの接続を許可するため、トラフィックフィルタを設定する必要はありません.
+TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、デフォルトで全てのIPアドレスからの接続を許可するため、トラフィックフィルタを設定する必要はありません。
 
 ## ステップ1. サンプルプロジェクトと接続文字列を取得する {#step-1-get-the-example-project-and-the-connection-string}
 
