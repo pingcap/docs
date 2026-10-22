@@ -641,7 +641,7 @@ scheduling_servers:
 
 - `host` : 監視サービスがデプロイされているマシンを指定します。このフィールド値はIPアドレスで、必須です。
 
-- `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUP v1.7.0で導入されたこのフィールドは、 [継続的なプロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
+- `ng_port` : NgMonitoringがリッスンするポートを指定します。TiUP v1.7.0で導入されたこのフィールドは、 [継続的プロファイリング](/dashboard/dashboard-profiling.md)と[Top SQL](/dashboard/top-sql.md)をサポートします。デフォルト値は`12020`です。
 
 - `ssh_port` : 操作のために対象マシンに接続するためのSSHポートを指定します。指定されていない場合は、 `global`セクションの`ssh_port`が使用されます。
 

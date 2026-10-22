@@ -21,7 +21,7 @@
     - [MySQL Workbench](/develop/dev-guide-gui-mysql-workbench.md)
     - [Navicat](/develop/dev-guide-gui-navicat.md)
   - ドライバーとORM
-    - [DriverまたはORMを選択してください](/develop/dev-guide-choose-driver-or-orm.md)
+    - [ドライバーまたはORMを選択する](/develop/dev-guide-choose-driver-or-orm.md)
     - Java
       - [JDBC](/develop/dev-guide-sample-application-java-jdbc.md)
       - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
@@ -29,7 +29,7 @@
       - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
       - [接続プールと接続パラメータの設定](/develop/dev-guide-connection-parameters.md)
       - [Javaアプリケーション開発におけるベストプラクティス](/develop/java-app-best-practices.md)
-    - 行く
+    - Go
       - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
       - [GORM](/develop/dev-guide-sample-application-golang-gorm.md)
     - Python
@@ -37,7 +37,7 @@
       - [MySQL Connector/Python](/develop/dev-guide-sample-application-python-mysql-connector.md)
       - [PyMySQL](/develop/dev-guide-sample-application-python-pymysql.md)
       - [SQLAlchemy](/develop/dev-guide-sample-application-python-sqlalchemy.md)
-      - [Peewee](/develop/dev-guide-sample-application-python-peewee.md)
+      - [peewee](/develop/dev-guide-sample-application-python-peewee.md)
       - [Django](/develop/dev-guide-sample-application-python-django.md)
     - Node.js
       - [node-mysql2](/develop/dev-guide-sample-application-nodejs-mysql2.md)
@@ -94,7 +94,7 @@
   - [インデックス作成のベストプラクティス](/develop/dev-guide-index-best-practice.md)
   - 追加の最適化手法
     - [暗黙的な型変換を避ける](/develop/dev-guide-implicit-type-conversion.md)
-    - [固有シリアル番号生成](/develop/dev-guide-unique-serial-number-generation.md)
+    - [ユニークなシリアル番号の生成](/develop/dev-guide-unique-serial-number-generation.md)
 - トラブルシューティング
   - [SQLまたはトランザクションの問題](/develop/dev-guide-troubleshoot-overview.md)
   - [不安定な結果セット](/develop/dev-guide-unstable-result-set.md)
