@@ -1,9 +1,9 @@
 ---
-title: 将 TiDB Cloud 与 New Relic 集成（PREVIEW）
+title: 集成 TiDB Cloud 与 New Relic（PREVIEW）
 summary: 了解如何使用 New Relic 集成监控你的 TiDB Cloud 实例。
 ---
 
-# 将 TiDB Cloud 与 New Relic 集成（PREVIEW）
+# 集成 TiDB Cloud 与 New Relic（PREVIEW）
 
 TiDB Cloud 支持与 New Relic 集成。你可以将 TiDB Cloud 配置为把你的 <CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 实例的指标发送到 [New Relic](https://newrelic.com/)。完成后，你可以直接在 New Relic 仪表板中查看这些指标。
 
