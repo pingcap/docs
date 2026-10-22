@@ -517,7 +517,7 @@
   - [upgrade](/tidb-cloud/ticloud-upgrade.md)
   - [help](/tidb-cloud/ticloud-help.md)
 - 一般参考資料
-  - TiDBクラシックアーキテクチャ
+  - TiDB Classic アーキテクチャ
     - [概要](/tidb-architecture.md)
     - [ストレージ](/tidb-storage.md)
     - [コンピューティング](/tidb-computing.md)

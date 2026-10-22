@@ -5,7 +5,7 @@ summary: このドキュメントでは、TiDB Cloud BYOC コントローラー�
 
 # TiDB Cloud BYOC IAM 権限を設定する
 
-AWS 環境の準備が完了したら、TiDB Cloud Control Plane がお客様のアカウント内のリソースを管理できるように認可する必要があります。これは、最小権限の原則に基づいて必要な IAM ロールを作成するブートストラップスクリプトを実行することで実現します。
+AWS 環境の準備が完了したら、TiDB Cloud コントロールプレーンがお客様のアカウント内のリソースを管理できるように認可する必要があります。これは、最小権限の原則に基づいて必要な IAM ロールを作成するブートストラップスクリプトを実行することで実現します。
 
 ## 準備 {#preparation}
 
@@ -20,7 +20,7 @@ AWS 環境の準備が完了したら、TiDB Cloud Control Plane がお客様の
 
 | パラメーター | ソース | 説明 |
 | :---- | :---- | :---- |
-| `<ControlPlaneAccountId>` | **TiDB Support** | TiDB Control Plane の AWS Account ID。 |
+| `<ControlPlaneAccountId>` | **TiDB Support** | TiDB コントロールプレーンの AWS Account ID。 |
 | `<ClinicAccountId>` | **TiDB Support** | TiDB Clinic サービス用の AWS Account ID。 |
 | `<TidbHostedZoneId>` | [必要な情報](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#summary-required-information) | 作成した TiDB クラスターのホストゾーンの ID。 |
 | `<TidbPCAArn>` | [必要な情報](/tidb-cloud/byoc/byoc-prepare-environment-aws.md#summary-required-information) | 作成した Private CA の ARN。 |
