@@ -35,7 +35,3 @@
   - [[2023-11-14] TiDB Cloud Dedicated Scale Feature Maintenance Notification](/tidb-cloud/releases/notification-2023-11-14-scale-feature-maintenance.md)
   - [[2023-09-26] TiDB Cloud Console Maintenance Notification](/tidb-cloud/releases/notification-2023-09-26-console-maintenance.md)
   - [[2023-08-31] TiDB Cloud Console Maintenance Notification](/tidb-cloud/releases/notification-2023-08-31-console-maintenance.md)
-
-## _BUILD_ALLOWLIST
-
-- [TiDB Cloud API Temporary Maintenance Notice](/tidb-cloud/api-temporary-maintenance.md)
