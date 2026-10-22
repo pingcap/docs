@@ -25,7 +25,7 @@ TiDB Cloud Filesystem は、アプリケーション、自動化、AI エージ�
 
 FUSE マウントの場合は、アプリケーションによる書き込みを停止し、開いているファイルを閉じてから、[`ti fs drain-file-system --mount-path <local-mount-path>`](/ai/ti/reference/ti-fs-drain-file-system.md) を使用して、マウントを維持したまま保留中の書き込みをアップロードします。通常の FUSE アンマウントでも保留中の書き込みはアップロードされます。WebDAV はこのコマンドをサポートしていないため、アプリケーションによる書き込みを停止し、開いているファイルを閉じてからアンマウントしてください。
 
-マシンまたはそのローカルキャッシュを削除する前に、`ti fs read-file` を使用して、必要な変更がリモートファイルシステムに到達していることを確認してください。drain またはアンマウントに失敗した場合は、リカバリのためにマシンとそのローカルデータを利用可能な状態で保持してください。詳細は、[安全に終了する](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely) を参照してください。
+マシンまたはそのローカルキャッシュを削除する前に、`ti fs read-file` を使用して、必要な変更がリモートファイルシステムに到達していることを確認してください。ドレインまたはアンマウントに失敗した場合は、リカバリのためにマシンとそのローカルデータを利用可能な状態で保持してください。詳細は、[安全に終了する](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely) を参照してください。
 
 ## どのリージョンが TiDB Cloud Filesystem をサポートしていますか？ {#which-regions-support-tidb-cloud-filesystem}
 

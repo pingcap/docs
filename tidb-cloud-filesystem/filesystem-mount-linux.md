@@ -147,7 +147,7 @@ Linux では、TiDB Cloud Filesystem は FUSE を使用して、ローカルデ�
 
 ## アンマウントせずに FUSE 書き込みをフラッシュする {#flush-fuse-writes-without-unmounting}
 
-マウントを維持したまま保留中の書き込みをファイルシステムに到達させる必要がある場合は、まず対象ファイルへの書き込みを行うアプリケーションを停止し、それらのファイルを閉じてください。その後、マウントを drain します。
+マウントを維持したまま保留中の書き込みをファイルシステムに到達させる必要がある場合は、まず対象ファイルへの書き込みを行うアプリケーションを停止し、それらのファイルを閉じてください。その後、マウントをドレインします。
 
 ```bash
 ti fs drain-file-system \
@@ -155,7 +155,7 @@ ti fs drain-file-system \
   --timeout 30s
 ```
 
-drain が成功すると、マウントを維持したまま保留中の書き込みがファイルシステムに到達したことを確認できます。drain がタイムアウトした場合やエラーを返した場合は、マウントとマシンを利用可能な状態に保ち、エラーを解消し、セッションを終了したり他のユーザーに更新の準備ができたと伝えたりする前に、ファイルを確認してください。コマンド構文については、[`drain-file-system`](/ai/ti/reference/ti-fs-drain-file-system.md) を参照してください。
+ドレインが成功すると、マウントを維持したまま保留中の書き込みがファイルシステムに到達したことを確認できます。ドレインがタイムアウトした場合やエラーを返した場合は、マウントとマシンを利用可能な状態に保ち、エラーを解消し、セッションを終了したり他のユーザーに更新の準備ができたと伝えたりする前に、ファイルを確認してください。コマンド構文については、[`drain-file-system`](/ai/ti/reference/ti-fs-drain-file-system.md) を参照してください。
 
 ## マウント権限エラーをトラブルシュートする {#troubleshoot-mount-permission-errors}
 
@@ -206,7 +206,7 @@ mount fstype=@{fuse_types} options=(nosuid,nodev) options in (ro,rw,noatime,dirs
 umount /workspace/{,**/},
 ```
 
-その後、管理者は AppArmor プロファイルを再読み込みできます。
+その後、管理者は AppArmor プロファイルをリロードできます。
 
 ```shell
 sudo apparmor_parser -r /etc/apparmor.d/fusermount3
@@ -218,6 +218,6 @@ AppArmor が失敗の原因かどうかを確認する方法については、[U
 
 ## 次のステップ {#what-s-next}
 
-- 読み取り専用マウント、レイヤーまたはチェックポイントのマウント、およびその他の一般的なマウントオプションについては、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
+- 読み取り専用マウント、レイヤーまたはチェックポイントのマウント、およびその他の共通のマウントオプションについては、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
 - レイヤーまたはチェックポイントをマウントして操作する方法については、[ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md) を参照してください。
 - 別のユーザーまたは環境にファイルシステムへのアクセスを提供する方法については、[マシン間でファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md) を参照してください。

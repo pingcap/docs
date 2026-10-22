@@ -64,4 +64,4 @@ TiDB Cloud Filesystem はオーナートークンとスコープ付きトーク�
 - **新しいファイルシステムを作成する:** [コンソールでのクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start-console.md) または [CLI でのクイックスタート](/tidb-cloud-filesystem/filesystem-quick-start.md) に従ってください。
 - **他のユーザーから共有されたファイルシステムを使用する:** [既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) を参照してください。
 - **サポートされているリージョン、プラットフォーム、および現在の制限事項を確認する:** [リージョンと制限事項](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md) を参照してください。
-- **クライアント SDK をアプリケーションに統合する:** [TiDB Cloud Filesystem SDKs](/tidb-cloud-filesystem/filesystem-sdks.md) を参照してください。
+- **クライアント SDK をアプリケーションに統合する:** [SDK](/tidb-cloud-filesystem/filesystem-sdks.md) を参照してください。

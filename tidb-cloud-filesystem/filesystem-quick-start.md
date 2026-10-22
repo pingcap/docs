@@ -96,7 +96,7 @@ CLI は認証情報とデフォルトリージョンをローカルに保存し�
 
 > **Tip:**
 >
-> CI やエージェントでは、代わりに非対話形式の設定を使用してください。シークレットマネージャーから `TIDB_CLOUD_PUBLIC_KEY` と `TIDB_CLOUD_PRIVATE_KEY` を注入し、`TI_REGION_CODE` を設定して、`ti configure --non-interactive` を実行します。詳細は、[自動化向けの設定](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) を参照してください。
+> CI やエージェントでは、代わりに非対話形式の設定を使用してください。シークレットマネージャーから `TIDB_CLOUD_PUBLIC_KEY` と `TIDB_CLOUD_PRIVATE_KEY` を注入し、`TI_REGION_CODE` を設定して、`ti configure --non-interactive` を実行します。詳細は、[自動化向けに設定する](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) を参照してください。
 
 ## ステップ 3. ファイルシステムを作成して使用する {#step-3-create-and-use-a-file-system}
 
@@ -110,7 +110,7 @@ CLI は認証情報とデフォルトリージョンをローカルに保存し�
 
     > **Note:**
     >
-    > 別のマシンからファイルシステムにアクセスする必要がある場合は、返された `fs_token` と `region_code` も保存してください。オーナートークンはフルアクセス権を持ち、有効期限がないため、安全に保管してください。制限付きアクセスについては、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
+    > 別のマシンからファイルシステムにアクセスする必要がある場合は、返された `fs_token` と `region_code` も保存してください。オーナートークンはフルアクセス権を持ち、有効期限がないため、安全に保管してください。制限付きアクセスについては、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
 
 2. 新しいファイルシステムを選択します。`<file-system-id>` を返された `file_system_id` に置き換えてください。
 
@@ -214,7 +214,7 @@ CLI は認証情報とデフォルトリージョンをローカルに保存し�
     cat "$mount_dir/hello.txt"
     ```
 
-    期待される出力:
+    想定出力:
 
     ```text
     Hello from TiDB Cloud Filesystem
@@ -246,7 +246,7 @@ ti fs delete-file --path /quick-start --recursive
 - [既存のファイルシステムにアクセスする](/tidb-cloud-filesystem/access-filesystem.md) では、ローカルに保存された認証情報を再利用したり、別の環境から接続したりできます。
 - [自動化向けに設定する](/ai/ti/reference/ti-install-configure-update.md#configure-for-automation) では、CI ジョブやエージェント用の CLI 認証情報を設定できます。
 - [TiDB Cloud Filesystem でファイルシステムを管理する](/tidb-cloud-filesystem/manage-filesystem-resources.md) では、ファイルシステムの確認と管理を行えます。
-- [ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) では、ファイルシステムアクセス用トークンの作成、確認、管理を行えます。
+- [ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) では、ファイルシステムアクセス用トークンの作成、確認、管理を行えます。
 - [ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) では、ローカルディレクトリを通じてそのファイルにアクセスできます。
 - [ファイルシステムを共有する](/tidb-cloud-filesystem/filesystem-sharing.md) では、同じファイルを別のマシン、ユーザー、アプリケーション、またはエージェントから利用できるようにできます。
 - [ファイルシステムのレイヤーとチェックポイントを管理する](/tidb-cloud-filesystem/manage-filesystem-layers.md) では、ファイル変更の分離、確認、適用を行えます。

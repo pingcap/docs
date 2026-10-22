@@ -26,7 +26,7 @@ TiDB Cloud コンソールまたは TiDB Cloud CLI を使用してファイル�
 1. [TiDB Cloud コンソール](https://tidbcloud.com) の左側のナビゲーションペインで組織を選択し、**File Systems** をクリックします。
 2. 右上隅で **Create File System** をクリックします。
 3. **Create File System** ページで、ファイルシステム名を入力し、**Cloud Provider** と **Region** を選択します。
-4. （任意）概要で使用量制限を確認し、編集します。
+4. （オプション）概要で使用量制限を確認し、編集します。
 
     使用量制限を編集するには、組織にクレジットカードを追加してください。クレジットカードがない場合、作成時に無料枠の制限は編集できません。詳細は [使用量制限を管理する](/tidb-cloud-filesystem/manage-filesystem-limits.md) を参照してください。
 
@@ -57,7 +57,7 @@ export TI_FS_FILE_SYSTEM_ID="<file-system-id>"
 
 > **Warning:**
 >
-> `fs_token` 内のファイルシステムオーナートークンの平文は、トークンが発行されたときにのみ返されます。これをシークレットとして扱い、ログ、issue、ソース管理に公開しないでください。別のマシンでトークンを使用したり、バックアップを保存したりする必要がある場合は、シークレットマネージャーに安全に保存してください。詳細は [ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
+> `fs_token` 内のファイルシステムオーナートークンの平文は、トークンが発行されたときにのみ返されます。これをシークレットとして扱い、ログ、issue、ソース管理に公開しないでください。別のマシンでトークンを使用したり、バックアップを保存したりする必要がある場合は、シークレットマネージャーに安全に保存してください。詳細は [ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
 
 > **Note:**
 >
@@ -162,7 +162,7 @@ ti fs delete-file-system --file-system-id "<file-system-id>"
 
 ## 次のステップ {#what-s-next}
 
-- ファイルシステムアクセスを生成、委任、ローテーション、または取り消すには、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
+- ファイルシステムアクセスを生成、委任、ローテーション、または取り消すには、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
 - ファイルシステムデータのコピー、読み取り、整理、検索を行うには、[ファイルとディレクトリを操作する](/tidb-cloud-filesystem/work-with-filesystem-data.md) を参照してください。
 - ローカルディレクトリを通じてリモートファイルにアクセスするには、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
 - コマンド構文、フラグ、出力フィールドについては、[TiDB Cloud Filesystem CLI コマンドリファレンス](/ai/ti/reference/ti-filesystem.md) を参照してください。
