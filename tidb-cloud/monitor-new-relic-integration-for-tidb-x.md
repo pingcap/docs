@@ -25,7 +25,7 @@ TiDB Cloud は New Relic との統合をサポートしています。TiDB Cloud
 
 ### 手順 1. 事前構築済みの New Relic ダッシュボードをインポートする {#step-1-import-the-pre-built-new-relic-dashboard}
 
-現在、<CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 用の TiDB Cloud ダッシュボードは、まだ New Relic marketplace では利用できません。公開されるまでは、ダッシュボード JSON ファイルを手動でダウンロードし、New Relic にインポートする必要があります。
+現在、<CustomContent plan="essential">{{{ .essential }}}</CustomContent><CustomContent plan="premium">{{{ .premium }}}</CustomContent> 用の TiDB Cloud ダッシュボードは、まだ New Relic マーケットプレイスでは利用できません。公開されるまでは、ダッシュボード JSON ファイルを手動でダウンロードし、New Relic にインポートする必要があります。
 
 1. インスタンスタイプに応じた New Relic ダッシュボード JSON ファイルをダウンロードします。
 
@@ -42,7 +42,7 @@ TiDB Cloud は New Relic との統合をサポートしています。TiDB Cloud
 
     </CustomContent>
 
-2. JSON ファイル内のすべての `"accountIds": []` フィールドに、[New Relic account ID](https://docs.newrelic.com/docs/accounts/accounts-billing/account-structure/account-id/) を追加します。
+2. JSON ファイル内のすべての `"accountIds": []` フィールドに、[New Relic アカウント ID](https://docs.newrelic.com/docs/accounts/accounts-billing/account-structure/account-id/) を追加します。
 
     例:
 
@@ -54,7 +54,7 @@ TiDB Cloud は New Relic との統合をサポートしています。TiDB Cloud
 
     > **Note:**
     >
-    > 統合エラーを回避するため、JSON ファイル内のすべての `"accountIds"` フィールドに account ID が追加されていることを確認してください。
+    > 統合エラーを回避するため、JSON ファイル内のすべての `"accountIds"` フィールドにアカウント ID が追加されていることを確認してください。
 
 3. [New Relic](https://one.newrelic.com/) にログインし、左側のナビゲーションバーで **Dashboards** をクリックしてから、右上隅の **Import dashboard** をクリックします。
 
@@ -119,7 +119,7 @@ New Relic は、<CustomContent plan="essential">{{{ .essential }}}</CustomConten
 | `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | ネットワークリクエストが TiDB に送信されてから、レスポンスがクライアントに返されるまでの時間 |
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1 秒あたりに実行されたトランザクション数 |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .essential }}} インスタンスの行ベースストレージサイズ（バイト） |
-| `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .essential }}} インスタンスのカラムナー ストレージサイズ（バイト）。TiFlash が有効になっていない場合は 0 を返します |
+| `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .essential }}} インスタンスの列指向ストレージサイズ（バイト）。TiFlash が有効になっていない場合は 0 を返します |
 | `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 消費された合計 Request Units/s (RU/s) |
 | `tidb_cloud.cdc_changefeed_latency` | gauge | `changefeed_id: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | changefeed の上流と下流の間のデータレプリケーションレイテンシー |
 | `tidb_cloud.cdc_changefeed_status` | gauge | `changefeed_id: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | Changefeed のステータス:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |
@@ -141,7 +141,7 @@ New Relic は、<CustomContent plan="essential">{{{ .essential }}}</CustomConten
 | `tidb_cloud.db_average_query_duration` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | ネットワークリクエストが TiDB に送信されてから、レスポンスがクライアントに返されるまでの時間 |
 | `tidb_cloud.db_transaction_per_second` | gauge | `type: Commit\|Rollback\|...`<br/>`txn_mode: optimistic\|pessimistic`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 1 秒あたりに実行されたトランザクション数 |
 | `tidb_cloud.db_row_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスの行ベースストレージサイズ（バイト） |
-| `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスのカラムナー ストレージサイズ（バイト） |
+| `tidb_cloud.db_columnar_storage_used_bytes` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | {{{ .premium }}} インスタンスの列指向ストレージサイズ（バイト） |
 | `tidb_cloud.resource_manager_resource_request_unit_total` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | 消費された合計 Request Units/s (RU/s) |
 | `tidb_cloud.cdc_changefeed_latency` | gauge | `changefeed_id: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | changefeed の上流と下流の間のデータレプリケーションレイテンシー |
 | `tidb_cloud.cdc_changefeed_status` | gauge | `changefeed_id: <changefeed-id>`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | Changefeed のステータス:<br/>`-1`: Unknown<br/>`0`: Normal<br/>`1`: Warning<br/>`2`: Failed<br/>`3`: Stopped<br/>`4`: Finished<br/>`6`: Warning<br/>`7`: Other |

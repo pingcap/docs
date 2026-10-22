@@ -12,7 +12,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 **一般的な変更**
 
-- **TiDB Cloud Essential and Premium**
+- **TiDB Cloud Essential と Premium**
 
     - TiDB Cloud Essential と Premium は、[New Relic](https://newrelic.com/) メトリクス統合をサポートしました（パブリックプレビュー）。
 
