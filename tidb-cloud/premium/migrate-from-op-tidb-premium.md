@@ -1,18 +1,18 @@
 ---
-title: Migrate from TiDB Self-Managed to TiDB Cloud Premium
-summary: TiDB Self-ManagedからTiDB Cloud Premiumへのデータ移行方法を学びましょう。
+title: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行
+summary: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}へのデータ移行方法を学びましょう。
 ---
 
-# TiDB Self-Managedから{{{ .premium }}}または{{{ .byoc }}}への移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium}
+# TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium}
 
-このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスタからTiDB Cloud Premium（AWS上）インスタンスにデータを移行する方法について説明します。
+このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスタからTiDB Cloud Premiumまたは{{{ .byoc }}}（AWS上）インスタンスにデータを移行する方法について説明します。
 
 全体の手順は以下のとおりです。
 
 1. 環境を構築し、ツールを準備します。
 2. 全データを移行します。手順は以下のとおりです。
     1. Dumplingを使用して、TiDB Self-ManagedからAmazon S3にデータをエクスポートします。
-    2. Amazon S3からTiDB Cloud Premiumにデータをインポートします。
+    2. Amazon S3からTiDB Cloud Premiumまたは{{{ .byoc }}}にデータをインポートします。
 3. TiCDCを使用して増分データを複製します。
 4. 移行されたデータを確認してください。
 
