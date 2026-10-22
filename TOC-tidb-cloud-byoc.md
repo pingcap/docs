@@ -170,8 +170,6 @@
     - [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)
     - [Alibaba Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/premium/connect-to-premium-via-alibaba-cloud-private-endpoint.md)
     - [TiDB Cloud への TLS 接続](/tidb-cloud/premium/tidb-cloud-tls-connect-to-premium.md)
-  - データアクセス制御
-    - [ユーザー制御ログ秘匿化](/tidb-cloud/tidb-cloud-log-redaction.md)
   - 監査管理
     - [データベース監査ログ](/tidb-cloud/premium/tidb-cloud-auditing-premium.md)
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
