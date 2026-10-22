@@ -1,9 +1,9 @@
 ---
-title: Parquet データをインポート
+title: Parquet データをインポートする
 summary: PostgreSQL 互換の TiDB Cloud Starter に Parquet データをクエリおよびインポートする方法を学びます。
 ---
 
-# Parquet データをインポート
+# Parquet データをインポートする
 
 PostgreSQL 互換の {{{ .starter }}} は、Parquet データの読み取りと SQL テーブルへのインポートのために `parquet` 拡張機能をサポートしています。
 

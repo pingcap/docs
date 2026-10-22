@@ -22,7 +22,7 @@ PostgreSQL 互換の {{{ .starter }}} では、データベース、スキーマ
 | `pg_type` | データ型。 |
 | `pg_index` | インデックスメタデータ。 |
 | `pg_indexes` | `indexdef` を含むインデックス定義。 |
-| `pg_constraint` | 主キー、外部キー、check、一意、および not-null 制約。 |
+| `pg_constraint` | 主キー、外部キー、検査、一意、および NOT NULL 制約。 |
 | `pg_proc` | 関数およびプロシージャ。 |
 | `pg_trigger` | トリガーメタデータ。 |
 | `pg_enum` | Enum 値。 |
@@ -63,10 +63,10 @@ PostgreSQL 互換の {{{ .starter }}} では、データベース、スキーマ
 | `schemata` | スキーマ。 |
 | `sequences` | シーケンス。 |
 | `routines` | 関数およびプロシージャ。 |
-| `table_constraints` | 主キー、外部キー、check、および一意制約。 |
+| `table_constraints` | 主キー、外部キー、検査、および一意制約。 |
 | `key_column_usage` | 主キー、一意、および外部キー制約内のカラム。 |
 | `referential_constraints` | 外部キー関係。 |
-| `check_constraints` | check 制約。 |
+| `check_constraints` | 検査制約。 |
 | `constraint_column_usage` | 制約によって参照されるカラム。 |
 | `table_privileges` | テーブル権限。 |
 | `triggers` | トリガー定義、タイミング、および向き。 |
@@ -211,11 +211,11 @@ WHERE conrelid = 'public.my_table'::regclass
 ORDER BY contype, conname;
 ```
 
-`pg_constraint` では NOT NULL 制約も確認できます。PostgreSQL 間で移植性の高い方法でカラムの NULL 許容性を確認するには、`information_schema.columns.is_nullable` を使用することを推奨します。
+`pg_constraint` では NOT NULL 制約も確認できます。PostgreSQL への移植性が高い方法でカラムの NULL 許容性を確認するには、`information_schema.columns.is_nullable` を使用することを推奨します。
 
 ## 外部キーを見つける {#find-foreign-keys}
 
-送信側の外部キーを調べるには、`information_schema` を使用します。
+テーブルが参照元となっている外部キーを調べるには、`information_schema` を使用します。
 
 ```sql
 SELECT
@@ -341,7 +341,7 @@ ORDER BY extname;
 
 ## システムカタログの互換性 {#system-catalog-compatibility}
 
-PostgreSQL 互換の {{{ .starter }}} は、一般的な PostgreSQL ツールおよびイントロスペクションのワークフローに必要なカタログの表面を実装していますが、カタログの内容やカラムは PostgreSQL 本体と異なる場合があります。
+PostgreSQL 互換の {{{ .starter }}} は、一般的な PostgreSQL ツールおよびイントロスペクションのワークフローに必要なカタログを実装していますが、カタログの内容やカラムは PostgreSQL 本体と異なる場合があります。
 
 特に、次の点に注意してください。
 

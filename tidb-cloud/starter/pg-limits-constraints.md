@@ -116,13 +116,13 @@ CREATE TABLE articles (
 
 ## COPY の制約 {#copy-constraints}
 
-PostgreSQL の `COPY` プロトコルは、text および CSV データをサポートします。
+PostgreSQL の `COPY` プロトコルは、テキストおよび CSV データをサポートします。
 
 | COPY 機能 | サポート |
 | --- | --- |
 | テーブル形式の `COPY FROM` | サポート |
 | テーブル形式の `COPY TO STDOUT` | サポート |
-| text 形式 | サポート |
+| テキスト形式 | サポート |
 | CSV 形式 | サポート |
 | バイナリ形式 | 非サポート |
 | `COPY (SELECT ...) TO STDOUT` | 非サポート |
@@ -137,7 +137,7 @@ PostgreSQL の `COPY` プロトコルは、text および CSV データをサポ
 
 `READ UNCOMMITTED` は `READ COMMITTED` として動作します。
 
-PostgreSQL Serializable Snapshot Isolation はサポートされていません。PostgreSQL wire protocol 経由で `SERIALIZABLE` が要求された場合、実効的な分離レベルは `REPEATABLE READ` になります。
+PostgreSQL Serializable Snapshot Isolation はサポートされていません。PostgreSQL ワイヤプロトコル経由で `SERIALIZABLE` が要求された場合、実効的な分離レベルは `REPEATABLE READ` になります。
 
 `DEFERRABLE` トランザクションセマンティクスはサポートされていません。
 
@@ -175,8 +175,8 @@ HNSW のプランニング要件を満たさないクエリは、厳密スキャ
 PostgreSQL 互換の全文検索には、以下の主な制約があります。
 
 - ドキュメント化されているテキスト検索設定のみがサポートされます。
-- `:*` フラグを使用したプレフィックスマッチはサポートされていません。プレフィックスフラグは拒否されるのではなく暗黙的に無視されるため、プレフィックスクエリは完全一致クエリとして動作します。たとえば、`to_tsquery('english', 'qui:*')` は `to_tsquery('english', 'qui')` として解釈されるため、`quick` には一致しません。パブリックプレビュー期間中はプレフィックスマッチに依存しないでください。
-- `:A` などの `tsquery` 式における lexeme の重み修飾子も、暗黙的に無視されます。たとえば、`to_tsquery('english', 'qui:A')` は重み修飾子なしで解釈されます。重み付きクエリマッチングのためにこれらの修飾子に依存しないでください。
+- `:*` フラグを使用したプレフィックス一致はサポートされていません。プレフィックスフラグは拒否されるのではなく暗黙的に無視されるため、プレフィックスクエリは完全一致クエリとして動作します。たとえば、`to_tsquery('english', 'qui:*')` は `to_tsquery('english', 'qui')` として解釈されるため、`quick` には一致しません。パブリックプレビュー期間中はプレフィックス一致に依存しないでください。
+- `:A` などの `tsquery` 式における語彙素の重み修飾子も、暗黙的に無視されます。たとえば、`to_tsquery('english', 'qui:A')` は重み修飾子なしで解釈されます。重み付きクエリマッチングのためにこれらの修飾子に依存しないでください。
 - `ts_headline()` は中国語の漢字語句をハイライトしません。
 - `TSVECTOR` 値の最大サイズは 1 MiB です。
 
@@ -238,7 +238,7 @@ enum 型では、比較と順序付けに宣言順ではなくラベルテキス
 カスタム照合順序はサポートされていますが、次の制限があります。
 
 - 明示的なカスタム照合順序を指定していないテキストでは、バイト単位の順序付けが使用されます。
-- 集約およびウィンドウの `ORDER BY` 式では、カスタム照合順序による順序付けは適用されません。
+- 集計およびウィンドウの `ORDER BY` 式では、カスタム照合順序による順序付けは適用されません。
 - カスタム照合順序は、PostgreSQL のシステムカタログに完全には表現されません。
 
 ## システムカタログの制約 {#system-catalog-constraints}

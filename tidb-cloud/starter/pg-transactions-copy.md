@@ -117,7 +117,7 @@ COMMIT;
 | `READ COMMITTED` | デフォルト。各文は、その文の開始前にコミットされた行を参照します。 |
 | `READ UNCOMMITTED` | `READ COMMITTED` として動作します。 |
 | `REPEATABLE READ` | トランザクションの存続期間中、1つのスナップショットを使用します。 |
-| `SERIALIZABLE` | PostgreSQL Serializable Snapshot Isolation は実装されていません。PostgreSQL wire protocol 経由では、このトランザクションは `REPEATABLE READ` にダウングレードされます。 |
+| `SERIALIZABLE` | PostgreSQL Serializable Snapshot Isolation は実装されていません。PostgreSQL ワイヤプロトコル経由では、このトランザクションは `REPEATABLE READ` にダウングレードされます。 |
 
 特定の分離レベルでトランザクションを開始するには、次のようにします。
 
@@ -130,7 +130,7 @@ FROM accounts;
 COMMIT;
 ```
 
-有効な分離レベルは次のように確認できます。
+実効的な分離レベルは次のように確認できます。
 
 ```sql
 SHOW transaction_isolation;
@@ -138,7 +138,7 @@ SHOW transaction_isolation;
 
 > **Note:**
 >
-> PostgreSQL wire protocol 経由で `SERIALIZABLE` が要求された場合、PostgreSQL互換の{{{ .starter }}}は代わりに `REPEATABLE READ` を使用します。PostgreSQL Serializable Snapshot Isolation を必要とするアプリケーションは、移行前に確認する必要があります。詳細は、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
+> PostgreSQL ワイヤプロトコル経由で `SERIALIZABLE` が要求された場合、PostgreSQL互換の{{{ .starter }}}は代わりに `REPEATABLE READ` を使用します。PostgreSQL Serializable Snapshot Isolation を必要とするアプリケーションは、移行前に確認する必要があります。詳細は、[PostgreSQLとの互換性](/tidb-cloud/starter/postgresql-compatibility.md) を参照してください。
 
 ## 読み取り専用トランザクション {#read-only-transactions}
 
@@ -213,7 +213,7 @@ ROLLBACK;
 
 ## COPY {#copy}
 
-PostgreSQL の `COPY` プロトコルは、PostgreSQL wire protocol を介した効率的な一括データ転送を提供します。
+PostgreSQL の `COPY` プロトコルは、PostgreSQL ワイヤプロトコルを介した効率的な一括データ転送を提供します。
 
 PostgreSQL 互換の {{{ .starter }}} は、テキストデータおよび CSV データに対する `COPY` のテーブル形式をサポートしています。
 
@@ -261,11 +261,11 @@ WITH (FORMAT csv, HEADER);
 
 | 形式 | サポート |
 | --- | --- |
-| Text | サポート |
+| テキスト | サポート |
 | CSV | サポート |
-| Binary | 非サポート |
+| バイナリ | 非サポート |
 
-Parquet のインポートは `parquet` 拡張機能を通じても利用できます。詳細は [Parquet データをインポート](/tidb-cloud/starter/pg-parquet-import.md) を参照してください。
+Parquet のインポートは `parquet` 拡張機能を通じても利用できます。詳細は [Parquet データをインポートする](/tidb-cloud/starter/pg-parquet-import.md) を参照してください。
 
 ### COPY の制限事項 {#copy-limitations}
 

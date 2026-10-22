@@ -302,4 +302,4 @@ TO app_user
 USING (user_id = current_user);
 ```
 
-RLS の完全な構文と動作については、[PostgreSQL Row-Level Security](/tidb-cloud/starter/pg-row-level-security.md) を参照してください。
+RLS の完全な構文と動作については、[PostgreSQL の行レベルセキュリティ](/tidb-cloud/starter/pg-row-level-security.md) を参照してください。
