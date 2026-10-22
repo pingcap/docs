@@ -93,40 +93,40 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
-## Partial indexes
+## 部分インデックス {#partial-indexes}
 
 > **Note:**
 >
-> Partial indexes は、TiDB Self-Managed および TiDB Cloud Dedicated では v8.5.7 以降、TiDB Cloud Essential および Premium では CLOUD.202603.1 以降でサポートされます。
+> 部分インデックスは、TiDB Self-Managed および TiDB Cloud Dedicated では v8.5.7 以降、TiDB Cloud Essential および Premium では CLOUD.202603.1 以降でサポートされます。
 
-Partial index は、テーブル内の行のサブセットに対して構築されるインデックスです。Partial index を追加する際には、条件式（predicate とも呼ばれます）を指定して、その行のサブセットを定義できます。インデックスには、その predicate を満たす行に対するエントリのみが含まれます。
+部分インデックスは、テーブル内の行のサブセットに対して構築されるインデックスです。部分インデックスを追加する際には、条件式（述語とも呼ばれます）を指定して、その行のサブセットを定義できます。インデックスには、その述語を満たす行に対するエントリのみが含まれます。
 
-### Usage scenarios
+### 使用シナリオ {#usage-scenarios}
 
-次のシナリオでは、partial index を使用することで、クエリ性能の向上やインデックス管理オーバーヘッドの削減に役立ちます。
+次のシナリオでは、部分インデックスを使用することで、クエリ性能の向上やインデックス管理オーバーヘッドの削減に役立ちます。
 
-- **Selective filtering**: 特定の条件に基づいて少数の行のサブセットを頻繁にクエリする場合、partial index を使用できます。partial index の predicate を満たすクエリでは、TiDB は partial index を使用して無関係な行のスキャンを回避し、インデックスが占有するストレージ容量を削減できます。
-- **Conditional uniqueness**: 特定の条件を満たす行に対してのみ一意性制約を適用する必要がある場合、unique partial index を使用して、テーブル全体に一意性制約を適用することを避けられます。
-- **Reduced DML overhead**: 多数の `INSERT`、`UPDATE`、または `DELETE` 操作が、インデックス化する必要のない行に影響する場合、partial index を使用できます。完全なインデックスを管理する場合と比べて、partial index を管理することでインデックス管理オーバーヘッドを削減できます。
+- **選択的フィルタリング**: 特定の条件に基づいて少数の行のサブセットを頻繁にクエリする場合、部分インデックスを使用できます。部分インデックスの述語を満たすクエリでは、TiDB は部分インデックスを使用して無関係な行のスキャンを回避し、インデックスが占有するストレージ容量を削減できます。
+- **条件付き一意性**: 特定の条件を満たす行に対してのみ一意性制約を適用する必要がある場合、ユニーク部分インデックスを使用して、テーブル全体に一意性制約を適用することを避けられます。
+- **DML オーバーヘッドの削減**: 多数の `INSERT`、`UPDATE`、または `DELETE` 操作が、インデックス化する必要のない行に影響する場合、部分インデックスを使用できます。完全なインデックスを管理する場合と比べて、部分インデックスを管理することでインデックス管理オーバーヘッドを削減できます。
 
-### Add partial indexes
+### 部分インデックスの追加 {#add-partial-indexes}
 
-インデックス定義に `WHERE` 句を追加することで、partial index を追加できます。例:
+インデックス定義に `WHERE` 句を追加することで、部分インデックスを追加できます。例:
 
 ```sql
 CREATE TABLE t1 (c1 INT, c2 INT, c3 TEXT);
 ALTER TABLE t1 ADD INDEX idx1 (c1) WHERE c2 > 10;
 ```
 
-unique partial index を追加することもできます。
+ユニーク部分インデックスを追加することもできます。
 
 ```sql
 ALTER TABLE t1 ADD UNIQUE INDEX idx2 (c1, c2) WHERE c3 = 'abc';
 ```
 
-### Usage examples
+### 使用例 {#usage-examples}
 
-以下の例は、partial index を効果的に使用する方法を示しています。
+以下の例は、部分インデックスを効果的に使用する方法を示しています。
 
 ユーザーデータを含むテーブルを作成します。
 
@@ -140,7 +140,7 @@ CREATE TABLE users (
 );
 ```
 
-一般的なクエリパターンに対して partial index を追加します。
+一般的なクエリパターンに対して部分インデックスを追加します。
 
 ```sql
 ALTER TABLE users ADD INDEX idx_active_users (name) WHERE status = 'active';
@@ -148,7 +148,7 @@ ALTER TABLE users ADD INDEX idx_high_score_users (created_at) WHERE score > 1000
 ALTER TABLE users ADD INDEX idx_pending_status (status) WHERE status = 'pending';
 ```
 
-その後、次のクエリで partial index を使用できます。
+その後、次のクエリで部分インデックスを使用できます。
 
 ```sql
 mysql> EXPLAIN SELECT * FROM users WHERE status = 'active' AND name = 'John';
@@ -195,7 +195,7 @@ mysql> EXPLAIN SELECT * FROM users WHERE status = 'pending';
 3 rows in set (0.00 sec)
 ```
 
-クエリの predicate が partial index で定義された条件を満たさない場合、TiDB はヒントを指定していても partial index を選択しません。たとえば、次のステートメントでは partial index `idx_high_score_users` を使用できません。これは、クエリ predicate `score > 100` が partial index 定義 `score > 1000` を満たさないためです。
+クエリの述語が部分インデックスで定義された条件を満たさない場合、TiDB はヒントを指定していても部分インデックスを選択しません。たとえば、次のステートメントでは部分インデックス `idx_high_score_users` を使用できません。これは、クエリ述語 `score > 100` が部分インデックス定義 `score > 1000` を満たさないためです。
 
 ```sql
 mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score > 100 ORDER BY created_at;
@@ -209,12 +209,12 @@ mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score >
 +---------------------------+----------+-----------+---------------+--------------------------------+
 ```
 
-### Limitations
+### 制限事項 {#limitations}
 
-- partial index の `WHERE` 句では、基本的な比較演算子（`=`、`!=`、`<`、`<=`、`>`、`>=`）、`IS NULL`、`IS NOT NULL`、および定数値を使用した `IN` predicate をサポートします。
-- predicate 内のカラムと定数値は、同じデータ型である必要があります。
-- predicate は同じテーブルのカラムのみを参照できます。
-- 式インデックスに partial index を作成することはできません。
+- 部分インデックスの `WHERE` 句では、基本的な比較演算子（`=`、`!=`、`<`、`<=`、`>`、`>=`）、`IS NULL`、`IS NOT NULL`、および定数値を使用した `IN` 述語をサポートします。
+- 述語内のカラムと定数値は、同じデータ型である必要があります。
+- 述語は同じテーブルのカラムのみを参照できます。
+- 式インデックスに部分インデックスを作成することはできません。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
