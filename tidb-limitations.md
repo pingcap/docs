@@ -87,6 +87,15 @@ You can adjust this limit using the [`max-index-length`](/tidb-configuration-fil
 | VARCHAR    | 16383 characters    |
 | TEXT       | 65535 bytes    |
 | BLOB       | 65535 bytes    |
+| MEDIUMTEXT | Single-row size limit: 6 MiB by default, adjustable to 120 MiB via `txn-entry-size-limit` |
+| LONGTEXT   | Single-row size limit: 6 MiB by default, adjustable to 120 MiB via `txn-entry-size-limit` |
+| MEDIUMBLOB | Single-row size limit: 6 MiB by default, adjustable to 120 MiB via `txn-entry-size-limit` |
+| LONGBLOB   | Single-row size limit: 6 MiB by default, adjustable to 120 MiB via `txn-entry-size-limit` |
+| JSON       | Single-row size limit: 6 MiB by default, adjustable to 120 MiB via `txn-entry-size-limit` |
+
+> **Note:**
+>
+> The `TEXT` and `BLOB` limits in the preceding table match the corresponding MySQL type limits. To store values larger than 65,535 bytes, use `MEDIUMTEXT`, `LONGTEXT`, `MEDIUMBLOB`, or `LONGBLOB`. The size of `JSON` values is also bounded by the single-row size limit.
 
 ## Limitations on SQL statements
 
