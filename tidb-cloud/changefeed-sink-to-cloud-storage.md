@@ -5,7 +5,7 @@ summary: This document explains how to create a changefeed to stream data from T
 
 # Sink to Cloud Storage
 
-This document describes how to create a changefeed to stream data from <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC</CustomContent> to cloud storage.
+This document describes how to create a changefeed to stream data from <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="essential">TiDB Cloud Essential</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC</CustomContent> to cloud storage.
 
 <CustomContent plan="dedicated">
 
@@ -16,6 +16,18 @@ This document describes how to create a changefeed to stream data from <CustomCo
 > - For [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) instances, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
 > - For [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
 > - For [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc).
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+> **Note:**
+>
+> - The changefeed feature for {{{ .essential }}} is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
+> - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
+> - For [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
+> - For [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc).
+> - For [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/).
 
 </CustomContent>
 
@@ -43,7 +55,7 @@ This document describes how to create a changefeed to stream data from <CustomCo
 
 ## Restrictions
 
-- For each <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent>, you can create up to 100 changefeeds.
+- For each <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="essential">TiDB Cloud Essential instance</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent>, you can create up to <CustomContent plan="essential">10</CustomContent><CustomContent plan="dedicated,premium,byoc">100</CustomContent> changefeeds.
 - Because TiDB Cloud uses TiCDC to establish changefeeds, it has the same [restrictions as TiCDC](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios).
 - If the table to be replicated does not have a primary key or a non-null unique index, the absence of a unique constraint during replication could result in duplicated data being inserted downstream in some retry scenarios.
 
@@ -52,6 +64,12 @@ This document describes how to create a changefeed to stream data from <CustomCo
 <CustomContent plan="dedicated">
 
 Navigate to the overview page of the target TiDB Cloud Dedicated cluster. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3**, **GCS**, or **Azure Blob Storage** as the destination, depending on the cloud provider on which your TiDB Cloud Dedicated cluster is hosted. The configuration process varies depending on the destination you choose.
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+Navigate to the overview page of the target TiDB Cloud Essential instance. Click **Data** > **Changefeed** in the left navigation pane, click **Create Changefeed** to go to the **Destination** page, and then select **Amazon S3** or **Alibaba Cloud OSS** as the destination, depending on the cloud provider on which your TiDB Cloud Essential instance is hosted. The configuration process varies depending on the destination you choose.
 
 </CustomContent>
 
@@ -76,7 +94,7 @@ For **Amazon S3**, you can use either **AWS Role ARN** or **AWS access key** for
 
 To use an IAM Role for authentication, follow these steps:
 
-1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent>.
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="essential">TiDB Cloud Essential instance</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent>.
 2. Under **Bucket Access**, select **AWS Role ARN**.
 3. To create a new Role ARN, click **Click here to create new one with AWS CloudFormation**. This template automatically configures the required permissions.
 
@@ -99,7 +117,7 @@ To use an IAM Role for authentication, follow these steps:
 
 To use an access key for authentication, follow these steps:
 
-1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent>.
+1. On the **Destination** page for Amazon S3, enter the **S3 URI**. Make sure that the S3 bucket is in the same AWS region as your <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="essential">TiDB Cloud Essential instance</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent>.
 2. Under **Bucket Access**, select **AWS Access Key**.
 3. Fill in the following fields:
 
@@ -213,7 +231,7 @@ For **Azure Blob Storage**, you must configure the container and get a SAS token
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,essential">
 
 <div label="Alibaba Cloud OSS">
 
@@ -221,16 +239,33 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
 1. In the [Alibaba Cloud console](https://www.alibabacloud.com/), perform the following prerequisite steps:
 
-    1. Create an OSS bucket in the same region as your TiDB Cloud Premium instance. For detailed instructions, see [Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4).
+    1. Create an OSS bucket in the same region as your <CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="essential">TiDB Cloud Essential instance</CustomContent>. For detailed instructions, see [Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4).
     2. Create a RAM user for the changefeed and generate an AccessKey pair. For detailed instructions, see [Create an AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair).
     3. Create and attach a custom RAM policy to the RAM user to grant only the minimum permissions required by the changefeed. For more information, see [Control access to OSS resources with RAM policies](https://www.alibabacloud.com/help/en/oss/user-guide/ram-policy).
 
+        <CustomContent plan="premium">
+
+        - `oss:HeadBucket`
         - `oss:ListObjects`
         - `oss:GetObject`
         - `oss:PutObject`
         - `oss:DeleteObject`
 
+        </CustomContent>
+
+        <CustomContent plan="essential">
+
+        - `oss:GetBucketInfo`
+        - `oss:ListObjects`
+        - `oss:GetObject`
+        - `oss:PutObject`
+        - `oss:DeleteObject`
+
+        </CustomContent>
+
     The following JSON example shows a policy with the required permissions. Replace `<Your bucket name>` with the name of your OSS bucket.
+
+    <CustomContent plan="premium">
 
     ```json
     {
@@ -239,6 +274,7 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
         {
           "Effect": "Allow",
           "Action": [
+            "oss:HeadBucket",
             "oss:ListObjects",
             "oss:GetObject",
             "oss:PutObject",
@@ -253,6 +289,34 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
     }
     ```
 
+    </CustomContent>
+
+    <CustomContent plan="essential">
+
+    ```json
+    {
+      "Version": "1",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "oss:GetBucketInfo",
+            "oss:ListObjects",
+            "oss:GetObject",
+            "oss:PutObject",
+            "oss:DeleteObject"
+          ],
+          "Resource": [
+            "acs:oss:*:*:<Your bucket name>",
+            "acs:oss:*:*:<Your bucket name>/*"
+          ]
+        }
+      ]
+    }
+    ```
+
+    </CustomContent>
+
 2. On the **Destination** page for Alibaba Cloud OSS, fill in the following fields:
 
     - **Bucket URI**: enter the OSS URI in the format `oss://<Your bucket name>/<prefix>/`.
@@ -265,7 +329,7 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
 </SimpleTab>
 
-Click **Next** to establish the connection from the <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent> to your cloud storage. TiDB Cloud will automatically test and verify if the connection is successful.
+Click **Next** to establish the connection from the <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="essential">TiDB Cloud Essential instance</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent> to your cloud storage. TiDB Cloud will automatically test and verify if the connection is successful.
 
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
