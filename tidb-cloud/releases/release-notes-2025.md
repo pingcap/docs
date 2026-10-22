@@ -538,12 +538,6 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Request Support**をクリックします。次に、「説明」フィールドに「 TiDB Cloud Serverless データベース監査ログの申請」と入力し、 **Submit**をクリックします。
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)は、ユーザーによるログの秘匿化をサポートします。
-
-    TiDB Cloud Dedicatedクラスターのログの秘匿化を有効または無効にして、クラスターログの秘匿化の状態を自分で管理できるようになりました。
-
-    詳細については、 [ユーザーによるログの秘匿化](/tidb-cloud/tidb-cloud-log-redaction.md)を参照してください。
-
 - 顧客管理の暗号化キー (CMEK) を使用した保存時の暗号化が、AWS でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで一般提供 (GA) されました。
 
     この機能を使用すると、キー管理サービス (KMS) を通じて管理する対称暗号化キーを活用して、保存中のデータを保護できます。
