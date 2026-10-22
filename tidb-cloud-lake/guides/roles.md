@@ -66,18 +66,6 @@ ALTER USER eric WITH DEFAULT_ROLE = 'account_admin';
 
 - 次要角色是提供额外权限的附加角色，默认处于激活状态。用户可以使用 [SET SECONDARY ROLES](/tidb-cloud-lake/sql/set-secondary-roles.md) 命令启用或停用次要角色，以临时调整其权限作用域。
 
-## 计费角色 {#billing-role}
-
-除了标准内置角色之外，你还可以在 {{{ .lake }}} 中创建一个名为 `billing` 的自定义角色，以专门满足财务人员的需求。`billing` 角色仅提供对计费相关信息的访问，确保财务人员能够查看必要的财务数据，而不会接触到其他业务相关页面。
-
-要设置并使用 `billing` 角色，可以使用以下命令创建它：
-
-```sql
-CREATE ROLE billing;
-```
-
-角色名称不区分大小写，因此 `billing` 和 `Billing` 被视为相同。有关设置和分配 `billing` 角色的详细步骤，请参见[向财务人员授予访问权限](/tidb-cloud-lake/guides/manage-costs.md#granting-access-to-finance-personnel)。
-
 ## 使用示例（基础） {#usage-examples-basic}
 
 本示例展示了基于角色的权限管理。首先，创建一个 `writer` 角色并授予其权限。随后，将这些权限分配给用户 `eric`，使其继承这些权限。最后，从该角色回收这些权限，以展示其对用户权限的影响。
