@@ -503,7 +503,7 @@ root@localhost:8000/default> SELECT *
 
 ### `replace_newline`
 
-The `replace_newline` setting determines whether newline characters (\n) are replaced with the literal string (\\n) in the output. In the example below, the `replace_newline` setting is set to `true`. As a result, when the string 'Hello\nWorld' is selected, the newline character (\n) is replaced with the literal string (\\n). So, instead of displaying the newline character, the output displays 'Hello\nWorld' as 'Hello\\nWorld':
+The `replace_newline` setting determines whether newline characters (`\n`) are replaced with the literal string (`\\n`) in the output. In the example below, the `replace_newline` setting is set to `true`. As a result, when the string `'Hello\nWorld'` is selected, the newline character (`\n`) is replaced with the literal string (`\\n`). So, instead of displaying the newline character, the output displays `'Hello\nWorld'` as `'Hello\\nWorld'`:
 
 ```shell title='Example:'
 // highlight-next-line
