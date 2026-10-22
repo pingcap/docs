@@ -1,30 +1,30 @@
 ---
-title: Migrate from TiDB Self-Managed to TiDB Cloud Premium
-summary: TiDB Self-ManagedからTiDB Cloud Premiumへのデータ移行方法を学びましょう。
+title: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行
+summary: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}へのデータ移行方法を学びましょう。
 ---
 
-# TiDB Self-ManagedからTiDB Cloud Premiumへの移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium}
+# TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium}
 
-このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスタからTiDB Cloud Premium（AWS上）インスタンスにデータを移行する方法について説明します。
+このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスタからTiDB Cloud Premiumまたは{{{ .byoc }}}（AWS上）インスタンスにデータを移行する方法について説明します。
 
 全体の手順は以下のとおりです。
 
 1. 環境を構築し、ツールを準備します。
 2. 全データを移行します。手順は以下のとおりです。
     1. Dumplingを使用して、TiDB Self-ManagedからAmazon S3にデータをエクスポートします。
-    2. Amazon S3からTiDB Cloud Premiumにデータをインポートします。
+    2. Amazon S3からTiDB Cloud Premiumまたは{{{ .byoc }}}にデータをインポートします。
 3. TiCDCを使用して増分データを複製します。
 4. 移行されたデータを確認してください。
 
 ## 前提条件 {#prerequisites}
 
-S3バケットとTiDB Cloud Premiumインスタンスは同じリージョンに配置することをお勧めします。リージョンをまたいでの移行には、データ変換のための追加コストが発生する可能性があります。
+S3バケットとTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスは同じリージョンに配置することをお勧めします。リージョンをまたいでの移行には、データ変換のための追加コストが発生する可能性があります。
 
 移行前に、以下のものを準備する必要があります。
 
 - 管理者アクセス権を持つ[AWSアカウント](https://docs.aws.amazon.com/AmazonS3/latest/userguide/setting-up-s3.html#sign-up-for-aws-gsg)
 - [AWS S3バケット](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html)
-- [TiDB Cloudアカウント](/tidb-cloud/tidb-cloud-quickstart.md)には、AWSでホストされている対象のTiDB Cloud Premiumインスタンスへの[`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles)アクセス権が少なくとも必要です。
+- [TiDB Cloudアカウント](/tidb-cloud/tidb-cloud-quickstart.md)には、AWSでホストされている対象のTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスへの[`Project Data Access Read-Write`](/tidb-cloud/manage-user-access.md#user-roles)アクセス権が少なくとも必要です。
 
 ## ツールを準備する {#prepare-tools}
 
@@ -39,7 +39,7 @@ S3バケットとTiDB Cloud Premiumインスタンスは同じリージョンに
 
 Dumpling をデプロイする前に、以下の点にご注意ください。
 
-- TiDB Cloud Premiumのターゲットインスタンスと同じVPC内の新しいEC2インスタンスにDumplingをデプロイすることをお勧めします。
+- TiDB Cloud Premiumまたは{{{ .byoc }}}のターゲットインスタンスと同じVPC内の新しいEC2インスタンスにDumplingをデプロイすることをお勧めします。
 - 推奨されるEC2インスタンスタイプは**c6g.4xlarge** （16 vCPU、32 GiBメモリ）です。必要に応じて他のEC2インスタンスタイプを選択することもできます。Amazonマシンイメージ（AMI）は、Amazon Linux、Ubuntu、またはRed Hatから選択可能です。
 
 TiUPを使用するか、インストールパッケージを使用することで、 Dumplingをデプロイできます。
@@ -77,7 +77,7 @@ tiup update --self && tiup update dumpling
 
 ### TiCDCをデプロイ {#deploy-ticdc}
 
-上流の TiDB Self-Managed クラスターからTiDB Cloud Premium に増分データを複製するには、 [TiCDCをデプロイする](https://docs.pingcap.com/tidb/dev/deploy-ticdc)必要があります。
+上流の TiDB Self-Managed クラスターからTiDB Cloud Premium または {{{ .byoc }}} に増分データを複製するには、 [TiCDCをデプロイする](https://docs.pingcap.com/tidb/dev/deploy-ticdc)必要があります。
 
 1. 現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB のバージョンを確認するには、TiDB Self-Managed クラスターで`select tidb_version();`を実行します。アップグレードする必要がある場合は、 [TiUPを使用してTiDBをアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)を参照してください。
 
@@ -102,10 +102,10 @@ tiup update --self && tiup update dumpling
 
 ## 全てのデータを移行する {#migrate-full-data}
 
-TiDB Self-ManagedクラスタからTiDB Cloud Premiumにデータを移行するには、以下の手順で完全なデータ移行を実行します。
+TiDB Self-ManagedクラスタからTiDB Cloud Premiumまたは{{{ .byoc }}}にデータを移行するには、以下の手順で完全なデータ移行を実行します。
 
 1. TiDB Self-ManagedクラスターからAmazon S3へデータを移行します。
-2. Amazon S3からTiDB Cloud Premiumへデータを移行します。
+2. Amazon S3からTiDB Cloud Premiumまたは{{{ .byoc }}}へデータを移行します。
 
 ### TiDB Self-ManagedクラスターからAmazon S3へデータを移行する {#migrate-data-from-the-tidb-self-managed-cluster-to-amazon-s3}
 
@@ -197,11 +197,11 @@ Dumplingを使用して、アップストリームのTiDB Self-Managedクラス�
     - `{schema}.{table}.{0001}.{sql|csv}` : データファイル
     - `*-schema-view.sql` 、 `*-schema-trigger.sql` 、 `*-schema-post.sql` ：その他のエクスポートされたSQLファイル
 
-### Amazon S3からTiDB Cloud Premiumへデータを移行する {#migrate-data-from-amazon-s3-to-tidb-cloud-premium}
+### Amazon S3からTiDB Cloud Premiumまたは{{{ .byoc }}}へデータを移行する {#migrate-data-from-amazon-s3-to-premium-or-byoc}
 
-TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポートした後、そのデータをTiDB Cloud Premiumに移行する必要があります。
+TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポートした後、そのデータをTiDB Cloud Premiumまたは{{{ .byoc }}}に移行する必要があります。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、対象のTiDB Cloud Premium インスタンスのアカウント ID と外部 ID を取得します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、対象のTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスのアカウント ID と外部 ID を取得します。
 
     1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象インスタンスの名前をクリックします。
     2. 左側のナビゲーションペインで、 **Data** > **Import**をクリックします。
@@ -214,7 +214,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     2. ロール名を入力し、権限を確認し、 IAM警告を承認してください。
     3. スタックを作成し、ステータスが**CREATE_COMPLETE**に変わるまで待ちます。
     4. **Outputs**タブで、新しく生成されたロールARNをコピーします。
-    5. TiDB Cloud Premiumに戻り、ロールARNを貼り付けて**Confirm**をクリックします。ウィザードは、以降のインポートジョブのためにARNを保存します。
+    5. TiDB Cloud Premiumまたは{{{ .byoc }}}に戻り、ロールARNを貼り付けて**Confirm**をクリックします。ウィザードは、以降のインポートジョブのためにARNを保存します。
 
 3. インポートウィザードの残りの手順に進み、プロンプトが表示されたら保存したロールARNを使用してください。
 
@@ -263,11 +263,11 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     }
     ```
 
-2. 先にメモしておいた**Account ID**と**External ID**を指定して、 TiDB Cloud Premiumを信頼するIAMロールを作成します。次に、前の手順で作成したポリシーをこのロールにアタッチします。
+2. 先にメモしておいた**Account ID**と**External ID**を指定して、 TiDB Cloud Premiumまたは{{{ .byoc }}}を信頼するIAMロールを作成します。次に、前の手順で作成したポリシーをこのロールにアタッチします。
 
-3. 生成されたロールARNをコピーし、 TiDB Cloud Premiumインポートウィザードに入力します。
+3. 生成されたロールARNをコピーし、 TiDB Cloud Premiumまたは{{{ .byoc }}}インポートウィザードに入力します。
 
-4. [Amazon S3からTiDB Cloud Premiumにデータをインポートする](/tidb-cloud/premium/import-from-s3-premium.md)の手順に従って、TiDB Cloud Premiumにデータをインポートします。
+4. [Amazon S3からTiDB Cloud Premiumまたは{{{ .byoc }}}にデータをインポートする](/tidb-cloud/premium/import-from-s3-premium.md)の手順に従って、TiDB Cloud Premiumまたは{{{ .byoc }}}にデータをインポートします。
 
 ## 増分データを複製する {#replicate-incremental-data}
 
@@ -277,16 +277,16 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. TiCDCがTiDB Cloud Premiumに接続できるように許可します。
+2. TiCDCがTiDB Cloud Premiumまたは{{{ .byoc }}}に接続できるように許可します。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスの名前をクリックして、その概要ページに移動します。
     2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
     3. **Networking**ページで、 **Add IP Address**をクリックします。
-    4. 表示されたダイアログで、 **Use IP addresses**を選択し、 **+**をクリックし、 **IP Address**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **Confirm**をクリックします。これで、TiCDC はTiDB Cloud Premium にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+    4. 表示されたダイアログで、 **Use IP addresses**を選択し、 **+**をクリックし、 **IP Address**フィールドに TiCDCコンポーネントのパブリック IP アドレスを入力して、 **Confirm**をクリックします。これで、TiCDC はTiDB Cloud Premiumまたは{{{ .byoc }}} にアクセスできるようになりました。詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
-3. 下流のTiDB Cloud Premiumインスタンスの接続情報を取得します。
+3. 下流のTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスの接続情報を取得します。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumインスタンスの名前をクリックして、その概要ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスの名前をクリックして、その概要ページに移動します。
     2. 右上隅の**Connect**をクリックしてください。
     3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **Connect With**ドロップダウンリストから**General**を選択します。
     4. 接続情報から、インスタンスのホスト IP アドレスとポートを取得できます。詳細については、 [パブリック接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
@@ -347,9 +347,9 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - レプリケーションを確認します。アップストリームのクラスタに新しいレコードを書き込み、そのレコードがダウンストリームのTiDB Cloud Premiumインスタンスにレプリケートされているかどうかを確認します。
+    - レプリケーションを確認します。アップストリームのクラスタに新しいレコードを書き込み、そのレコードがダウンストリームのTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスにレプリケートされているかどうかを確認します。
 
-7. アップストリームクラスターとダウンストリームインスタンスで同じタイムゾーンを設定してください。デフォルトでは、 TiDB Cloud PremiumはタイムゾーンをUTCに設定します。アップストリームクラスターとダウンストリームインスタンスのタイムゾーンが異なる場合は、両方で同じタイムゾーンを設定する必要があります。
+7. アップストリームクラスターとダウンストリームインスタンスで同じタイムゾーンを設定してください。デフォルトでは、 TiDB Cloud Premiumまたは{{{ .byoc }}}はタイムゾーンをUTCに設定します。アップストリームクラスターとダウンストリームインスタンスのタイムゾーンが異なる場合は、両方で同じタイムゾーンを設定する必要があります。
 
     1. アップストリームクラスターで、以下のコマンドを実行してタイムゾーンを確認します。
 
@@ -408,4 +408,4 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     backup_user_priv
     ```
 
-    ユーザー情報と権限情報を取得したら、生成されたSQL文を下流のTiDB Cloud Premiumインスタンスで実行して、ユーザー情報と権限情報を復元します。
+    ユーザー情報と権限情報を取得したら、生成されたSQL文を下流のTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスで実行して、ユーザー情報と権限情報を復元します。

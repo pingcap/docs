@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_FIVE_MINUTES
-summary: 時刻を含む日付（timestamp/datetime）を 5 分間隔の開始時刻に切り捨てます。## Syntax.
+summary: 時刻を含む日付（timestamp/datetime）を 5 分間隔の開始時刻に切り捨てます。
 ---
 
 # TO_START_OF_FIVE_MINUTES

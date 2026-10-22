@@ -73,6 +73,10 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
     >
     > クラスターの作成時間は地域によって異なり、30分以上かかる場合があります。処理に予想以上に時間がかかる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
+> **Note:**
+>
+> 新しく作成された TiDB Cloud Dedicatedクラスターでは、パブリックエンドポイントはデフォルトで無効になっています。パブリックインターネット経由でクラスターに接続する必要がある場合は、クラスターの作成後にパブリックエンドポイントを有効にしてください。詳細については、[パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+
 ## ステップ2. ルートパスワードを設定する {#step-2-set-the-root-password}
 
 TiDB Cloud Dedicatedクラスターの作成が完了したら、以下の手順に従ってルートパスワードを設定してください。

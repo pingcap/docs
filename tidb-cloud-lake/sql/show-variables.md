@@ -7,7 +7,7 @@ summary: 名前、値、型など、すべてのセッション変数とその�
 
 名前、値、型など、すべてのセッション変数とその詳細を表示します。
 
-関連情報: [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables.md)
+関連情報: [SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables-sql.md)
 
 ## 構文 {#syntax}
 

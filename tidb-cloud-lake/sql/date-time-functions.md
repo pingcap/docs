@@ -58,7 +58,7 @@ summary: このページでは、{{{ .lake }}} の日付・時刻関数につい
 | [DATE_DIFF](/tidb-cloud-lake/sql/date-diff.md)                | 2 つの日付の差を返します                                                                     | `DATE_DIFF(DAY, '2024-06-01', '2024-06-04')` → `3`                                   |
 | [TIMESTAMP_DIFF](/tidb-cloud-lake/sql/timestamp-diff.md)      | 2 つの timestamp の差を返します                                                              | `TIMESTAMP_DIFF(HOUR, '2024-06-04 10:00:00', '2024-06-04 15:00:00')` → `5`           |
 | [MONTHS_BETWEEN](/tidb-cloud-lake/sql/months-between.md)      | 2 つの日付の間の月数を返します                                                               | `MONTHS_BETWEEN('2024-06-04', '2024-01-04')` → `5`                                   |
-| [DATE_BETWEEN](/tidb-cloud-lake/sql/date-between.md)          | ある日付が他の 2 つの日付の間にあるかを確認します                                            | `DATE_BETWEEN('2024-06-04', '2024-06-01', '2024-06-10')` → `true`                    |
+| [DATE_BETWEEN](/tidb-cloud-lake/sql/date-between.md)          | 2 つの日付の間の完全な単位数を整数で返します                                                 | `DATE_BETWEEN(MONTH, '2025-07-31', '2025-10-01')` → `2`                              |
 | [AGE](/tidb-cloud-lake/sql/age.md)                            | timestamp 同士、または timestamp と現在の日付/時刻との差を計算します                         | `AGE('2000-01-01'::TIMESTAMP, '1990-05-15'::TIMESTAMP)` → `9 years 7 months 17 days` |
 | [ADD_MONTHS](/tidb-cloud-lake/sql/add-months.md)              | 月末日を維持しながら、日付に月を加算します。                                                 | `ADD_MONTHS('2025-04-30',1)` → `2025-05-31`                                          |
 

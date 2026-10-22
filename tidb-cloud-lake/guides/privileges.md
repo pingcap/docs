@@ -119,7 +119,7 @@ SHOW GRANTS FOR ROLE writer;
 | ALL               | 指定したオブジェクトタイプに対するすべての権限を付与します。                                                          |
 | ALTER             | テーブルカラムを追加または削除します。クラスターキーを変更します。テーブルを再クラスタリングします。                                          |
 | CREATEROLE        | ロールを作成します。                                                                                                   |
-| CREAT DATABASE    | DATABASE を作成します。                                                                                               |
+| CREATE DATABASE   | DATABASE を作成します。                                                                                               |
 | CREATE WAREHOUSE  | WAREHOUSE を作成します。                                                                                              |
 | CREATE CONNECTION | CONNECTION を作成します。                                                                                             |
 | DROPUSER          | ユーザーを削除します。                                                                                                     |
@@ -144,7 +144,7 @@ SHOW GRANTS FOR ROLE writer;
 | SELECT    | テーブルから行を選択します。テーブルの SHOW CREATE を実行します。テーブルの DESCRIBE を実行します。                                                |
 | UPDATE    | テーブル内の行を更新します。                                                                                         |
 | SUPER     | テーブルを最適化または分析します。                                                                                   |
-| OWNERSHIP | データベースに対する完全な制御を付与します。特定のオブジェクトに対して、この権限を同時に保持できるロールは 1 つだけです。 |
+| OWNERSHIP | テーブルに対する完全な制御を付与します。特定のオブジェクトに対して、この権限を同時に保持できるロールは 1 つだけです。 |
 
 ### ビュー権限 {#view-privileges}
 

@@ -67,6 +67,7 @@
       - [Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)
     - [イベント](/tidb-cloud/tidb-cloud-events.md)
     - [TiDB CloudをDatadogと統合する](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md)
+    - [TiDB Cloud と New Relic を統合する](/tidb-cloud/monitor-new-relic-integration-for-tidb-x.md)
   - パフォーマンスをチューニングする
     - [概要](/tidb-cloud/tidb-cloud-tune-performance-overview.md)
     - [パフォーマンスを分析する](/tidb-cloud/tune-performance.md)
@@ -192,6 +193,7 @@
   - [Gitpod](/develop/dev-guide-playground-gitpod.md)
   - [n8n](/tidb-cloud/integrate-tidbcloud-with-n8n.md)
   - [Netlify](/tidb-cloud/integrate-tidbcloud-with-netlify.md)
+  - [New Relic](/tidb-cloud/monitor-new-relic-integration-for-tidb-x.md)
   - [ProxySQL](/develop/dev-guide-proxysql-integration.md)
   - Terraform
     - [Terraform統合の概要](/tidb-cloud/terraform-tidbcloud-provider-overview.md)

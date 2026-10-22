@@ -5,7 +5,7 @@ summary: 指定された 2 つの H3 インデックス間のエッジを返し�
 
 # H3_GET_UNIDIRECTIONAL_EDGE
 
-指定された 2 つの [H3](https://eng.uber.com/h3/) インデックス間のエッジを返します。
+指定された 2 つの [H3](https://h3geo.org/) インデックス間のエッジを返します。
 
 ## 構文 {#syntax}
 

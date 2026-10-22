@@ -5,7 +5,7 @@ summary: 指定された H3 インデックスが隣接しているかどうか�
 
 # H3_INDEXES_ARE_NEIGHBORS
 
-指定された [H3](https://eng.uber.com/h3/) インデックスが隣接しているかどうかを返します。
+指定された [H3](https://h3geo.org/) インデックスが隣接しているかどうかを返します。
 
 ## 構文 {#syntax}
 

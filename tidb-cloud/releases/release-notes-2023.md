@@ -898,7 +898,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでスケールするために TiKV ノードとTiFlashノードの数を減らすことをサポートします。
 
-    ノード番号を[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-node-number)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らすことができます。
+    ノード数を[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-node-count)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らすことができます。
 
 **コンソールの変更**
 

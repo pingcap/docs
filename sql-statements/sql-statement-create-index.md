@@ -368,7 +368,9 @@ Query OK, 1 row affected (0.00 sec)
 
 ## 部分インデックス {#partial-indexes}
 
-<span class="version-mark">TiDB Self-Managed と TiDB Cloud Dedicated では v8.5.7 の新機能であり、TiDB Cloud Essential と Premium では CLOUD.202603.1 の新機能です</span>
+> **Note:**
+>
+> 部分インデックスは、TiDB Self-Managed と TiDB Cloud Dedicated では v8.5.7 以降、TiDB Cloud Essential と Premium では CLOUD.202603.1 以降でサポートされています。
 
 部分インデックスは、テーブル内の行のサブセットに対して構築されるインデックスです。部分インデックスを作成する際には、その行のサブセットを定義するために、述語とも呼ばれる条件式を指定できます。インデックスには、その述語を満たす行に対するエントリのみが含まれます。
 

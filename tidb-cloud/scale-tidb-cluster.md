@@ -26,7 +26,7 @@ TiDB クラスターのサイズを決定する方法については、 [TiDBの
 > - 4 vCPU TiDB は 4 vCPU TiKV でのみ使用でき、4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
 > - TiFlashは利用できません。
 
-## ノード数を変更する {#change-node-number}
+## ノード数を変更する {#change-node-count}
 
 TiDB、TiKV、またはTiFlashノードの数を増減できます。
 

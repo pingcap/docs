@@ -1,6 +1,6 @@
 ---
 title: system_history.log_history
-summary: Note このテーブルには、他の特化した履歴テーブルに取り込まれる生のログデータが含まれます。その他のテーブルは、このデータの構造化されたクエリ固有のビューを提供します。
+summary: system_history.log_history を使用して、他の構造化されたシステム履歴テーブルにデータを提供する生のログデータをクエリします。
 ---
 
 # system_history.log_history

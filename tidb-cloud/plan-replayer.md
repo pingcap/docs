@@ -9,7 +9,7 @@ Plan Replayer は、SQL 実行プランの調査に必要な情報をファイ�
 
 TiDB Cloud Essential または Premium インスタンスで SQL パフォーマンスの問題をトラブルシュートする場合は、`PLAN REPLAYER DUMP` を使用して特定の SQL 文に対する Plan Replayer ファイルを生成し、返された URL からそのファイルをダウンロードできます。Plan Replayer ファイルは、予期しない実行プラン、プランのリグレッション、不正確な統計情報、またはたまにしか発生しない問題のあるプランなどの問題を調査するのに役立ちます。
 
-SQL パフォーマンスの問題のトラブルシューティングで TiDB Cloudサポートの支援が必要な場合は、限られた期間、TiDB Cloudサポートが Plan Replayer ファイルにアクセスできるよう一時的に許可できます。
+SQL パフォーマンスの問題のトラブルシューティングで TiDB Cloudサポートの支援が必要な場合は、限られた期間、TiDB Cloudサポートが Plan Replayer ファイルにアクセスできるよう一時的に許可できます。TiDB Cloud Essential の場合、この許可は TiDB バージョン `CLOUD.202603.x` 以降を実行しているインスタンスでのみ利用できます。TiDB v8.5.x 以前を実行している Essential インスタンスの場合は、返された URL からファイルをダウンロードして TiDB Cloudサポートに送信してください。
 
 > **Note:**
 >
@@ -59,6 +59,10 @@ EXPLAIN SELECT * FROM orders WHERE customer_id = 1001;
 調査に必要な場合は、Unix タイムスタンプを指定することもできます。指定した時刻より前に利用可能な履歴統計情報がない場合、TiDB は利用可能な最新の統計情報を使用し、関連するエラー情報をパッケージに記録します。
 
 ## TiDB Cloudサポートからのアクセスを管理する {#manage-access-from-tidb-cloud-support}
+
+> **Note:**
+>
+> TiDB Cloud Essential の場合、この機能は TiDB バージョン `CLOUD.202603.x` 以降を実行しているインスタンスでのみ利用できます。Essential インスタンスで TiDB v8.5.x 以前を実行している場合は、`PLAN REPLAYER DUMP` によって返された URL から Plan Replayer ファイルを自分でダウンロードし、そのファイルを TiDB Cloudサポートに送信する必要があります。
 
 サポートアクセスはインスタンスレベルで制御されます。この許可により、TiDB Cloudサポートのエンジニアは、限られた期間中、SQL パフォーマンスのトラブルシューティングのために生成された Plan Replayer ファイルにアクセスできます。
 

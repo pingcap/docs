@@ -16,6 +16,7 @@ TiDB Cloudでは、以下のプランをご用意しています。新規導入�
 - [{{{ .byoc }}}](#byoc)
 - [{{{ .dedicated }}}](#tidb-cloud-dedicated)
 - [{{{ .lake }}}](#lake)
+- [TiDB Cloud Filesystem](#tidb-cloud-filesystem)
 
 > **Note:**
 >
@@ -162,3 +163,9 @@ TiDB Cloud Dedicatedクラスターを作成するには、 [支払い方法を�
 TiDB Cloud Lakeは、ANSI SQL、半構造化データ処理、ベクトル検索、AI指向のワークフローを1つのプラットフォームでサポートします。基盤となるインフラストラクチャを自分で運用することなく、マネージドな分析エクスペリエンスを求めるチーム向けに設計されています。
 
 [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)および[TiDB Cloud Lake Quick Start](https://docs.pingcap.com/tidbcloudlake/lake-quick-start/)を参照してください。
+
+## TiDB Cloud Filesystem {#tidb-cloud-filesystem}
+
+TiDB Cloud Filesystemは、アプリケーション、自動化、AIエージェント向けの永続的な共有クラウドファイルシステムです。ファイルをセッションや環境をまたいで利用可能な状態に保つ必要がある場合や、複数のユーザーまたはワークロードが同じファイルに対して制御されたアクセスを必要とする場合に使用します。これを使用するために、TiDBデータベースをプロビジョニングまたは管理する必要はありません。
+
+TiDB Cloud Filesystemは現在パブリックプレビューです。詳細については、[TiDB Cloud Filesystem ドキュメント](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/)を参照してください。

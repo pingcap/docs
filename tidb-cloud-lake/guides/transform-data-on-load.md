@@ -7,7 +7,7 @@ summary: "{{{ .lake }}} の `COPY INTO` コマンドでは、ロード処理中�
 
 {{{ .lake }}} の `COPY INTO` コマンドでは、ロード処理中にデータ変換を実行できます。これにより、基本的な変換を取り込んで ETL パイプラインを簡素化し、一時テーブルが不要になります。
 
-構文については、[クエリと変換]( /tidb-cloud-lake/guides/query-stage.md) を参照してください。
+構文については、[クエリと変換](/tidb-cloud-lake/guides/query-stage.md) を参照してください。
 
 実行できる主な変換は次のとおりです。
 

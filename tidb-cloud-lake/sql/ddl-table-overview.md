@@ -42,8 +42,8 @@ summary: このページでは、{{{ .lake }}} におけるテーブル操作の
 |---------|-------------|----------------|
 | [TRUNCATE TABLE](/tidb-cloud-lake/sql/truncate-table.md) | テーブルのスキーマを保持したまま、テーブル内のすべてのデータを削除します | [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md) |
 | [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md) | テーブルを削除します | [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) |
-| [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | テーブルの履歴データファイルを完全に削除します（Enterprise Edition） | リカバリ不可 |
-| [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) | 削除済みテーブルのデータファイルを完全に削除します（Enterprise Edition） | リカバリ不可 |
+| [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | テーブルの履歴データファイルを完全に削除します | リカバリ不可 |
+| [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) | 削除済みテーブルのデータファイルを完全に削除します | リカバリ不可 |
 
 ## テーブルの最適化 {#table-optimization}
 

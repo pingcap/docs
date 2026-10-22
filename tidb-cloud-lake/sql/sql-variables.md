@@ -15,7 +15,7 @@ SQL 変数を使用すると、セッション内で一時データを保存お�
 | [UNSET VARIABLE](/tidb-cloud-lake/sql/unset-variable.md) | ユーザー定義変数を削除します。 |
 | [SHOW VARIABLES](/tidb-cloud-lake/sql/show-variables.md) | システム変数とユーザー変数の現在の値を表示します。 |
 
-SHOW VARIABLES コマンドには、対応するテーブル関数 [`SHOW_VARIABLES`](/tidb-cloud-lake/sql/show-variables.md) もあり、より高度なフィルタリングやクエリのために、同じ情報を表形式で返します。
+SHOW VARIABLES コマンドには、対応するテーブル関数 [`SHOW_VARIABLES`](/tidb-cloud-lake/sql/show-variables-sql.md) もあり、より高度なフィルタリングやクエリのために、同じ情報を表形式で返します。
 
 ## 変数を使ったクエリ {#querying-with-variables}
 

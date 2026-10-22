@@ -133,6 +133,10 @@ TiDB Cloudは、以下の導入オプションを提供します。
 
     TiDB Cloud Lakeは、分析ワークロード向けのクラウドネイティブなデータウェアハウスサービスです。コンピューティングとストレージを分離し、ANSI SQL、半構造化データ処理、およびAI指向のワークフローをサポートします。詳細については、[TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)を参照してください。
 
+- TiDB Cloud Filesystem
+
+    TiDB Cloud Filesystemは、アプリケーション、自動化、およびAIエージェント向けの永続的な共有クラウドファイルシステムです。現在、パブリックプレビューで提供されています。詳細については、[TiDB Cloud Filesystem](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/)を参照してください。
+
 ## アーキテクチャ {#architecture}
 
 ![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)

@@ -35,6 +35,10 @@ TiDB Cloud Premium の場合、基礎となるバックエンド ノードやプ
 
 TiDB Cloud Lake の料金は、ウェアハウス、ストレージ、クラウドサービスの各料金で構成されます。詳細については、[TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/) を参照してください。
 
+### TiDB Cloud Filesystem の料金 {#pricing-for-tidb-cloud-filesystem}
+
+TiDB Cloud Filesystem では、読み取り、書き込み、ストレージ、およびインターネットエグレスに対して従量課金制を採用しており、組織のファイルシステムとリージョン全体で共有される月次の無料利用枠が提供されます。詳細については、[TiDB Cloud Filesystem Pricing Details](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/) を参照してください。
+
 ## 請求書 {#invoices}
 
 組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB Cloudの請求書情報を管理できます。それ以外の場合は、このセクションをスキップしてください。

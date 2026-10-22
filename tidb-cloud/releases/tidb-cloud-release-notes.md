@@ -8,6 +8,37 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年10月20日 {#october-20-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Essential と Premium**
+
+    - TiDB Cloud Essential と Premium は、[New Relic](https://newrelic.com/) メトリクス統合をサポートしました（パブリックプレビュー）。
+
+        TiDB Cloud Essential または Premium インスタンスの主要なパフォーマンスメトリクスを New Relic に送信し、既存の New Relic ダッシュボードで監視できます。
+
+        詳細については、以下のドキュメントを参照してください。
+
+        - [TiDB Cloud Essential と New Relic の統合（PREVIEW）](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x/?plan=essential)
+        - [TiDB Cloud Premium と New Relic の統合（PREVIEW）](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x/?plan=premium)
+
+- **TiDB Cloud Dedicated**
+
+    - 新しく作成された TiDB Cloud Dedicated クラスターでは、パブリックエンドポイントがデフォルトで無効になりました。既存のクラスターでは、現在のパブリックエンドポイント設定が維持されます。
+
+        新しく作成されたクラスターにパブリックインターネット経由で接続する前に、[TiDB Cloud コンソール](https://tidbcloud.com/) の **Settings > Networking** で **Public Endpoint** を有効にし、その後クライアント IP アドレスを IP アクセスリストに追加してください。
+
+        詳細については、[Public Connection 経由で TiDB Cloud Dedicated に接続する](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection/) を参照してください。
+
+- **TiDB Cloud BYOC**
+
+    - TiDB Cloud BYOC は、リソース使用量の監視強化とクラウドコストの管理に役立つ vCPU 制限アラートをサポートしました。
+
+        TiDB Cloud BYOC は、プロビジョニングされた vCPU 使用量が設定されたリージョン制限に近づいたとき、または制限に達したためにスケールアップ操作がブロックされたときに通知するようになりました。
+
+        これらのアラートにより、利用可能なスケーリング容量と推奨される対応について明確なガイダンスが提供されます。
+
 ## 2026年10月15日 {#october-15-2026}
 
 **一般的な変更**

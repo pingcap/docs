@@ -1,6 +1,6 @@
 ---
 title: FUSE_STATISTIC
-summary: note この関数は非推奨です。テーブル統計を表示するには、代わりに SHOW STATISTICS を使用してください。
+summary: この関数は非推奨です。テーブル統計を表示するには、代わりに SHOW STATISTICS を使用してください。
 ---
 
 # FUSE_STATISTIC

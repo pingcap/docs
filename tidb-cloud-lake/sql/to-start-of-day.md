@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_DAY
-summary: 時刻を含む日付（timestamp/datetime）をその日の開始時刻に切り下げます。## 構文。
+summary: 時刻を含む日付（timestamp/datetime）をその日の開始時刻に切り下げます。
 ---
 
 # TO_START_OF_DAY

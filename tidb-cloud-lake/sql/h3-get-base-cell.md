@@ -5,7 +5,7 @@ summary: 指定された H3 インデックスのベースセル番号を返し�
 
 # H3_GET_BASE_CELL
 
-指定された [H3](https://eng.uber.com/h3/) インデックスのベースセル番号を返します。
+指定された [H3](https://h3geo.org/) インデックスのベースセル番号を返します。
 
 ## 構文 {#syntax}
 

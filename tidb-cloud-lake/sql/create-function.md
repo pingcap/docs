@@ -25,8 +25,8 @@ CREATE [ OR REPLACE ] FUNCTION [ IF NOT EXISTS ] <function_name>
 | `<function_name>`     | 関数の名前です。                                                                        |
 | `<lambda_expression>` | 関数の動作を定義するラムダ式またはコードスニペットです。                          |
 | `DESC='<description>'`  | UDF の説明です。|
-| `<<input_param_names>`| 入力パラメーター名の一覧です。カンマで区切ります。|
-| `<<input_param_types>`| 入力パラメーター型の一覧です。カンマで区切ります。|
+| `<input_param_names>`| 入力パラメーター名の一覧です。カンマで区切ります。|
+| `<input_param_types>`| 入力パラメーター型の一覧です。カンマで区切ります。|
 | `<return_type>`       | 関数の戻り値の型です。                                                                  |
 | `LANGUAGE`            | 関数の記述に使用する言語を指定します。使用可能な値: `python`。                    |
 | `HANDLER = '<handler_name>'` | 関数のハンドラー名を指定します。                                               |

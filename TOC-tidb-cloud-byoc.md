@@ -126,7 +126,7 @@
   - データを TiDB Cloud に移行
     - [Data Migration を使用して既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
     - [Data Migration を使用して増分データを移行する](/tidb-cloud/migrate-incremental-data-from-mysql-using-data-migration.md)
-    - [TiDB Self-Managed から TiDB Cloud Premium に移行する](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
+    - [TiDB Self-Managed から TiDB Cloud BYOC への移行](/tidb-cloud/premium/migrate-from-op-tidb-premium.md)
     - [大規模データセットの MySQL シャードを移行およびマージする](/tidb-cloud/migrate-sql-shards.md)
     - [AWS DMS を使用して Amazon RDS for Oracle から移行する](/tidb-cloud/migrate-from-oracle-using-aws-dms.md)
   - データを TiDB Cloud にインポート
@@ -488,8 +488,8 @@
   - Connected Care サポートサービスの機能
     - [Connected: IM の AI Chat](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected: TiDB Cloud アラートの IM サブスクリプション
-      - [Slack 経由で購読する](/tidb-cloud/monitor-alert-slack.md)
-      - [Zoom 経由で購読する](/tidb-cloud/monitor-alert-zoom.md)
+      - [Slack で購読する](/tidb-cloud/monitor-alert-slack.md)
+      - [Zoom で購読する](/tidb-cloud/monitor-alert-zoom.md)
       - [Flashduty 経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)
       - [PagerDuty 経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)
     - Connected: IM チケット作成と更新サブスクリプション

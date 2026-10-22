@@ -34,8 +34,8 @@ summary: このページでは、{{{ .lake }}} の集計関数について、機
 
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
-| [VAR_POP](/tidb-cloud-lake/sql/var-pop.md) / [VARIANCE_POP](/tidb-cloud-lake/sql/variance-pop.md) | 母分散 | `VAR_POP(height)` → `10.25` |
-| [VAR_SAMP](/tidb-cloud-lake/sql/var-samp.md) / [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md) | 標本分散 | `VAR_SAMP(height)` → `12.3` |
+| [VAR_POP](/tidb-cloud-lake/sql/var-pop.md) / [VARIANCE_POP](/tidb-cloud-lake/sql/variance-pop.md) | COVAR_POP のエイリアス（母共分散） | `VAR_POP(x, y)` → `2.5` |
+| [VAR_SAMP](/tidb-cloud-lake/sql/var-samp.md) / [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md) | COVAR_SAMP のエイリアス（標本共分散） | `VAR_SAMP(x, y)` → `2.7` |
 | [STDDEV_POP](/tidb-cloud-lake/sql/stddev-pop.md) | 母標準偏差 | `STDDEV_POP(height)` → `3.2` |
 | [STDDEV_SAMP](/tidb-cloud-lake/sql/stddev-samp.md) | 標本標準偏差 | `STDDEV_SAMP(height)` → `3.5` |
 | [COVAR_POP](/tidb-cloud-lake/sql/covar-pop.md) | 母共分散 | `COVAR_POP(x, y)` → `2.5` |

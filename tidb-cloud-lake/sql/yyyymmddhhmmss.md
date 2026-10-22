@@ -5,7 +5,7 @@ summary: 日付または時刻付きの日付（timestamp/datetime）を、年�
 
 # TO_YYYYMMDDHHMMSS
 
-日付または時刻付きの日付（timestamp/datetime）を、年・月・日・時・分・秒を含む UInt64 数値（YYYY *10000000000 + MM* 100000000 + DD *1000000 + hh* 10000 + mm * 100 + ss）に変換します。
+日付または時刻付きの日付（timestamp/datetime）を、年・月・日・時・分・秒を含む UInt64 数値（`YYYY * 10000000000 + MM * 100000000 + DD * 1000000 + hh * 10000 + mm * 100 + ss`）に変換します。
 
 ## 構文 {#syntax}
 

@@ -5,4 +5,4 @@ summary: TO_STRING のエイリアス。
 
 # TO_VARCHAR
 
-[TO_STRING](/tidb-cloud-lake/sql/string.md) のエイリアスです。
+[TO_STRING](/tidb-cloud-lake/sql/to-string.md) のエイリアスです。

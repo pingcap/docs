@@ -1,6 +1,6 @@
 ---
 title: TIME_SLOT
-summary: 時刻を30分単位に丸めます。## Syntax。
+summary: 時刻を30分単位に丸めます。
 ---
 
 # TIME_SLOT

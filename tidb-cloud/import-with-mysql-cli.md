@@ -22,7 +22,7 @@ TiDB Cloud Dedicatedクラスターに接続してください。
 
 2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
-3. **Networking**ページで、 **IP Access List**領域の**Add IP Address**をクリックします。
+3. **Networking**ページで、クラスターに複数の[ノードグループ](/tidb-cloud/tidb-node-group-overview.md)がある場合は右上隅で対象のTiDBノードグループを選択し、無効になっている場合は**Public Endpoint**を有効にしてから、**Add IP Address**をクリックします。
 
 4. ダイアログで**Allow access from anywhere**を選択し、 **Confirm**をクリックします。
 

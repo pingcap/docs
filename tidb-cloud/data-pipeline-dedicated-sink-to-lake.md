@@ -77,7 +77,7 @@ TiDB Cloud Dedicated では TiDB Cloud コンソールでエクスポート機�
 
 ### 1. ネットワークと SQL ユーザーを準備する {#1-prepare-the-network-and-sql-user}
 
-1. {{{ .dedicated }}} クラスターに、Dumpling を実行するマシンから到達できることを確認します。このガイドではパブリック接続を使用します。パブリック接続を使用する場合は、そのマシンの IP アドレスをクラスターの IP アクセスリストに追加してください。詳細は、[パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md) および [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md) を参照してください。
+1. {{{ .dedicated }}} クラスターに、Dumpling を実行するマシンから到達できることを確認します。このガイドではパブリック接続を使用します。パブリック接続を使用する場合は、パブリックエンドポイントが無効になっていれば有効にし、そのマシンの IP アドレスをクラスターの IP アクセスリストに追加してください。詳細は、[パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md) および [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md) を参照してください。
 2. [TiDB Cloud コンソール](https://tidbcloud.com/) で、クラスターの概要ページにある **Connect** をクリックし、接続先のホストとポートを記録します。これらは Dumpling コマンドで必要です。
 3. Dumpling に必要な権限を持つ SQL ユーザーを準備します。このガイドでは例として `root` を使用します。専用ユーザーを使用する場合は、そのユーザーに [Dumpling に必要な権限](https://docs.pingcap.com/tidb/stable/dumpling-overview#required-privileges) を付与してください。
 

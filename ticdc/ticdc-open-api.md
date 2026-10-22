@@ -121,7 +121,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 | `ignore_ineligible_table` | `BOOLEAN`型。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) |
 | `filter_rules` | `STRING`型の配列。テーブルスキーマのフィルタリングのルール。(オプション) |
 | `ignore_txn_start_ts` | `UINT64`型の配列。指定された start_ts のトランザクションを無視します。(オプション) |
-| `mounter_worker_num` | `INT`型。Mounter のスレッド数。(オプション) |
+| `mounter_worker_num` | `INT`型。Mounter スレッドの数。(オプション) |
 | `sink_config` | シンクの設定パラメータ。(オプション) |
 
 `changefeed_id`、`start_ts`、`target_ts`、`sink_uri`の意味と形式は、[`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これらのパラメータの詳細については、このドキュメントを参照してください。なお、`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
@@ -225,7 +225,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 | `sink_uri` | `STRING`型。レプリケーションタスクのダウンストリーム アドレス。(オプション) |
 | `filter_rules` | `STRING`型の配列。テーブルスキーマフィルタリングのルール。(オプション) |
 | `ignore_txn_start_ts` | `UINT64`型の配列。指定された start_ts のトランザクションを無視します。(オプション) |
-| `mounter_worker_num` | `INT`型。Mounter のスレッド数。(オプション) |
+| `mounter_worker_num` | `INT`型。Mounter スレッドの数。(オプション) |
 | `sink_config` | シンクの設定パラメータ。(オプション) |
 
 上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、そのセクションを参照してください。

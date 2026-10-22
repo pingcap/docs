@@ -22,7 +22,7 @@ TiDB Cloud Dedicated クラスターの IP アクセスリストに IP アドレ
     > 複数の組織に所属している場合は、まず左上隅のコンボボックスを使用して対象の組織に切り替えてください。
 
 2. 左側のナビゲーションペインで、**Settings** > **Networking** をクリックします。
-3. **Networking** ページで、**Add IP Address** をクリックします。
+3. **Networking** ページで、クラスターに複数の [ノードグループ](/tidb-cloud/tidb-node-group-overview.md) がある場合は右上隅で対象の TiDB ノードグループを選択し、**Public Endpoint** が無効になっている場合は有効にしてから、**Add IP Address** をクリックします。
 4. **Add IP Address** ダイアログで、必要に応じて説明を付けて IP アドレスを追加します。TiDB Cloud Dedicated クラスターごとに、最大 100 個の IP アドレスを追加できます。
 
     - カスタム IP アドレスを追加するには、**+** アイコンをクリックし、CIDR 表記の IP アドレス（例: `192.168.1.1/32`）を入力して、説明を追加します。

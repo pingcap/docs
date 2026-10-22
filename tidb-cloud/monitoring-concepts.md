@@ -67,4 +67,8 @@ TiDB Cloudでは、以下のサードパーティ製メトリクスサービス�
 
 TiDB Cloud では、Datadog と統合して TiDB Cloud のアラートを受信し、対象インスタンスのパフォーマンスメトリクスを表示できます。詳細については、[Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md) を参照してください。
 
+## New Relic との統合 {#new-relic-integration}
+
+TiDB Cloud では、対象インスタンスのパフォーマンスメトリクスを New Relic に送信し、New Relic のダッシュボードで表示できます。詳細については、[TiDB Cloud と New Relic を統合する (PREVIEW)](/tidb-cloud/monitor-new-relic-integration-for-tidb-x.md) を参照してください。
+
 </CustomContent>

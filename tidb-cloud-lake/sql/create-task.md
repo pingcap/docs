@@ -201,9 +201,11 @@ AS
  INSERT INTO data_warehouse.orders SELECT * FROM staging.orders;
 ```
 
-この例では、`process_orders` という名前のタスクを作成し、**task1** と **task2** が**正常に完了した後**に実行されるよう定義しています。これは、タスクの **Directed Acyclic Graph (DAG)** における**依存関係**を作成するのに役立ちます。このタスクは **etl** Warehouse を使用し、ステージング領域からデータウェアハウスにデータを転送します。
+この例では、`process_orders` という名前のタスクを作成し、**task1** が**正常に完了した後**に実行されるよう定義しています。これは、タスクの **Directed Acyclic Graph (DAG)** における**依存関係**を作成するのに役立ちます。このタスクは **etl** Warehouse を使用し、ステージング領域からデータウェアハウスにデータを転送します。
 
-> Tip: AFLTER パラメータを使用する場合、SCHEDULE パラメータを設定する必要はありません。
+> **Tip:**
+>
+> `AFTER` パラメータを使用する場合、`SCHEDULE` パラメータを設定する必要はありません。
 
 ### 条件付き実行 {#conditional-execution}
 

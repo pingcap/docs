@@ -1,6 +1,6 @@
 ---
 title: TO_START_OF_HOUR
-summary: 時刻を含む日付（timestamp/datetime）を、その時間の開始時刻に切り捨てます。## 構文。
+summary: 時刻を含む日付（timestamp/datetime）を、その時間の開始時刻に切り捨てます。
 ---
 
 # TO_START_OF_HOUR
