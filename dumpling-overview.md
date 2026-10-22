@@ -131,7 +131,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'se
 
 In the command above:
 
-- The `--sql` option can be used only for exporting to CSV files. In this example, Dumpling executes ``SELECT * FROM `test`.`sbtest1` WHERE id < 100`` and exports the query result to CSV files. If the SQL statement references a column that does not exist, the export fails.
+- It executes ``SELECT * FROM `test`.`sbtest1` WHERE id < 100`` and exports the query result to CSV files. If the SQL statement references a column that does not exist, the export fails.
 
 <CustomContent platform="tidb">
 
