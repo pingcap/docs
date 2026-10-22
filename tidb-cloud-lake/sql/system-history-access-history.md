@@ -85,4 +85,4 @@ direct_objects_accessed: []
  object_modified_by_ddl: []
 ```
 
-テーブル `t` から internal stage `s` への `COPY INTO` 操作には、読み取りと書き込みの両方のアクションが含まれます。このクエリの実行後、ソーステーブルは `base_objects_accessed` フィールドに記録され、ターゲット stage は `objects_modified` フィールドに記録されます。
+テーブル `t` から内部 stage `s` への `COPY INTO` 操作には、読み取りと書き込みの両方のアクションが含まれます。このクエリの実行後、ソーステーブルは `base_objects_accessed` フィールドに記録され、ターゲット stage は `objects_modified` フィールドに記録されます。

@@ -56,8 +56,8 @@ summary: このページでは、{{{ .lake }}} のテーブル関数に関する
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
-| [ICEBERG_MANIFEST](/tidb-cloud-lake/sql/iceberg-manifest.md) | Iceberg テーブルの manifest 情報を表示します | `SELECT * FROM ICEBERG_MANIFEST('mytable')` |
-| [ICEBERG_SNAPSHOT](/tidb-cloud-lake/sql/iceberg-snapshot.md) | Iceberg テーブルの snapshot 情報を表示します | `SELECT * FROM ICEBERG_SNAPSHOT('mytable')` |
+| [ICEBERG_MANIFEST](/tidb-cloud-lake/sql/iceberg-manifest.md) | Iceberg テーブルのマニフェスト情報を表示します | `SELECT * FROM ICEBERG_MANIFEST('mytable')` |
+| [ICEBERG_SNAPSHOT](/tidb-cloud-lake/sql/iceberg-snapshot.md) | Iceberg テーブルのスナップショット情報を表示します | `SELECT * FROM ICEBERG_SNAPSHOT('mytable')` |
 
 ## 匿名化 {#anonymization}
 

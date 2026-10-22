@@ -23,7 +23,7 @@ FROM <stream_name> WITH CONSUME [ AS <alias> ]
 
 ## 例 {#examples}
 
-`s` という名前のストリームがあり、次のデータをキャプチャしているとします。
+'s' という名前のストリームがあり、次のデータをキャプチャしているとします。
 
 ```sql
 SELECT * FROM s;

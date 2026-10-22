@@ -19,5 +19,5 @@ summary: TiDB Cloud Lake におけるタグ管理と割り当ての概要。
 
 | コマンド | 説明 |
 |---------|-------------|
-| [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md) | データベースオブジェクトにタグを割り当てる、または削除します |
+| [SET TAG / UNSET TAG](/tidb-cloud-lake/sql/set-tag.md) | データベースオブジェクトにタグを割り当てまたは削除します |
 | [TAG_REFERENCES](/tidb-cloud-lake/sql/tag-references.md) | 特定のオブジェクトに対するタグの割り当てをクエリします |

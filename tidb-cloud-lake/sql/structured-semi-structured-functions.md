@@ -96,7 +96,7 @@ summary: "{{{ .lake }}} の構造化関数および半構造化関数を使用�
 | [ARRAY_STDDEV_SAMP](/tidb-cloud-lake/sql/array-stddev-samp.md) | 標本標準偏差を返します | `ARRAY_STDDEV_SAMP([1,2,3])` |
 | [ARRAY_KURTOSIS](/tidb-cloud-lake/sql/array-kurtosis.md) | 過剰尖度を返します | `ARRAY_KURTOSIS([1,2,3,4])` |
 | [ARRAY_SKEWNESS](/tidb-cloud-lake/sql/array-skewness.md) | 歪度を返します | `ARRAY_SKEWNESS([1,2,3,10])` |
-| [ARRAY_APPROX_COUNT_DISTINCT](/tidb-cloud-lake/sql/array-approx-count-distinct.md) | 近似の distinct 件数を返します | `ARRAY_APPROX_COUNT_DISTINCT([1,1,2])` |
+| [ARRAY_APPROX_COUNT_DISTINCT](/tidb-cloud-lake/sql/array-approx-count-distinct.md) | 重複を除いた件数の近似値を返します | `ARRAY_APPROX_COUNT_DISTINCT([1,1,2])` |
 | [ARRAY_SORT](/tidb-cloud-lake/sql/array-sort.md) | 値をソートします。バリアントにより順序や null の扱いを制御します | `ARRAY_SORT([3,1,2])` |
 | [ARRAY_TO_STRING](/tidb-cloud-lake/sql/array-to-string.md) | 配列要素を連結します | `ARRAY_TO_STRING(['a','b'], ',')` |
 | [ARRAY_COMPACT](/tidb-cloud-lake/sql/array-compact.md) | 配列から null 値を削除します | `ARRAY_COMPACT([1, NULL, 2, NULL, 3])` |
@@ -146,7 +146,7 @@ summary: "{{{ .lake }}} の構造化関数および半構造化関数を使用�
 | [AS_ARRAY](/tidb-cloud-lake/sql/as-array.md) | VARIANT 値を ARRAY に変換します | `AS_ARRAY(PARSE_JSON('[1,2,3]'))` |
 | [AS_OBJECT](/tidb-cloud-lake/sql/as-object.md) | VARIANT 値を OBJECT に変換します | `AS_OBJECT(PARSE_JSON('{"a":1}'))` |
 
-## 型判定関数 {#type-predicate-functions}
+## 型述語関数 {#type-predicate-functions}
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|

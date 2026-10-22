@@ -61,7 +61,7 @@ SETTINGS (date_format_style = 'MySQL') SELECT to_string('2024-04-05'::DATE, '%Y-
 - [JSON_TO_STRING](/tidb-cloud-lake/sql/json-to-string.md)
 - [TO_TEXT](/tidb-cloud-lake/sql/to-text.md)
 - [TO_VARCHAR](/tidb-cloud-lake/sql/to-varchar.md)
-- TO_CHAR (Oracle compatibility)
+- TO_CHAR（Oracle 互換）
 
 ## 戻り値の型 {#return-type}
 

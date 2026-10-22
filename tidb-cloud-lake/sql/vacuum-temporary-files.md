@@ -1,11 +1,11 @@
 ---
 title: VACUUM TEMPORARY FILES
-summary: spill ファイルなど、{{{ .lake }}} によって作成された一時ファイルを削除します。
+summary: スピルファイルなど、{{{ .lake }}} によって作成された一時ファイルを削除します。
 ---
 
 # VACUUM TEMPORARY FILES
 
-spill ファイルなど、{{{ .lake }}} によって作成された一時ファイルを削除します。
+スピルファイルなど、{{{ .lake }}} によって作成された一時ファイルを削除します。
 
 関連情報: [system.temp_files](/tidb-cloud-lake/sql/system-temp-files.md)
 

@@ -24,7 +24,7 @@ TRIM(<string>)
 
 ## 例 {#examples}
 
-この例では、文字列 `'xxxdatalakexxx'` の先頭と末尾の両方から、指定した文字のすべての出現を削除します。
+この例では、文字列 'xxxdatalakexxx' の先頭と末尾の両方から、指定した文字のすべての出現を削除します。
 
 ```sql
 SELECT TRIM(BOTH 'xxx' FROM 'xxxdatalakexxx'), TRIM(BOTH 'xx' FROM 'xxxdatalakexxx'), TRIM(BOTH 'x' FROM 'xxxdatalakexxx');
@@ -36,7 +36,7 @@ SELECT TRIM(BOTH 'xxx' FROM 'xxxdatalakexxx'), TRIM(BOTH 'xx' FROM 'xxxdatalakex
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-この例では、入力文字列 `'xxxdatalake'` の先頭から、指定した文字のすべての出現を削除します。
+この例では、入力文字列 'xxxdatalake' の先頭から、指定した文字のすべての出現を削除します。
 
 ```sql
 SELECT TRIM(LEADING 'xxx' FROM 'xxxdatalake'), TRIM(LEADING 'xx' FROM 'xxxdatalake'), TRIM(LEADING 'x' FROM 'xxxdatalake');
@@ -48,7 +48,7 @@ SELECT TRIM(LEADING 'xxx' FROM 'xxxdatalake'), TRIM(LEADING 'xx' FROM 'xxxdatala
 └───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-この例では、入力文字列 `'datalakexxx'` の末尾から、指定した文字のすべての出現を削除します。
+この例では、入力文字列 'datalakexxx' の末尾から、指定した文字のすべての出現を削除します。
 
 ```sql
 SELECT TRIM(TRAILING 'xxx' FROM 'datalakexxx' ), TRIM(TRAILING 'xx' FROM 'datalakexxx' ), TRIM(TRAILING 'x' FROM 'datalakexxx' );

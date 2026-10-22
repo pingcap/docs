@@ -7,7 +7,7 @@ summary: 指定したトリム文字列のすべての出現を、文字列の�
 
 指定したトリム文字列のすべての出現を、文字列の先頭、末尾、または両端から削除します。
 
-関連項目: [TRIM](/tidb-cloud-lake/sql/trim.md)
+関連情報: [TRIM](/tidb-cloud-lake/sql/trim.md)
 
 ## 構文 {#syntax}
 
