@@ -107,6 +107,12 @@ The following describes the configuration file specified by the `config` option 
 
 <!-- Example: `["username_1", "username_2"]` -->
 
+#### `redact-info-log` <span class="version-mark">New in v8.5.6</span>
+
+- Controls log redaction. This parameter is supported only in the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
+- Default value: `false`, which disables log redaction
+- Set the value to `true` to replace sensitive values in logs with `?`, or set it to `"marker"` to enclose sensitive values in markers.
+
 ### `capture-session-ttl`
 
 - Specifies the session duration between TiCDC and etcd services. This parameter is optional.
