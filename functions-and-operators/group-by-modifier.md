@@ -44,7 +44,7 @@ SELECT count(1) FROM t GROUP BY a,b,c WITH ROLLUP;
 
 <CustomContent platform="tidb-cloud">
 
-在 v8.3.0 版本之前，TiDB 仅支持在 [TiFlash MPP 模式](/tiflash/use-tiflash-mpp-mode.md)下生成 `WITH ROLLUP` 语法的有效执行计划。因此，你的 TiDB 集群需要包含 TiFlash 节点，并且目标表必须配置正确的 TiFlash 副本。更多信息请参见 [更改节点数](/tidb-cloud/scale-tidb-cluster.md#change-node-number)。
+在 v8.3.0 版本之前，TiDB 仅支持在 [TiFlash MPP 模式](/tiflash/use-tiflash-mpp-mode.md)下生成 `WITH ROLLUP` 语法的有效执行计划。因此，你的 TiDB 集群需要包含 TiFlash 节点，并且目标表必须配置正确的 TiFlash 副本。更多信息请参见 [更改节点数量](/tidb-cloud/scale-tidb-cluster.md#change-node-count)。
 
 </CustomContent>
 

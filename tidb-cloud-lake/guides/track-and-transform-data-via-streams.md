@@ -240,4 +240,4 @@ ORDER BY o.customer_id;
 **集成**
 
 - 将 stream 与 task 结合使用，并通过 `task_history('<name>', <limit>)` 实现按调度执行的增量 load。
-- 当你只想清空最新的增量 delta 时，使用 [`WITH CONSUME`](/tidb-cloud-lake/sql/task.md)。
+- 当你只想清空最新的增量 delta 时，使用 [`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md)。

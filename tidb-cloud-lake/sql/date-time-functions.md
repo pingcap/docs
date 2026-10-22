@@ -58,7 +58,7 @@ summary: 本页按功能分类，全面概述了 {{{ .lake }}} 中的日期与�
 | [DATE_DIFF](/tidb-cloud-lake/sql/date-diff.md)                | 返回两个日期之间的差值                                               | `DATE_DIFF(DAY, '2024-06-01', '2024-06-04')` → `3`                                   |
 | [TIMESTAMP_DIFF](/tidb-cloud-lake/sql/timestamp-diff.md)      | 返回两个时间戳之间的差值                                             | `TIMESTAMP_DIFF(HOUR, '2024-06-04 10:00:00', '2024-06-04 15:00:00')` → `5`           |
 | [MONTHS_BETWEEN](/tidb-cloud-lake/sql/months-between.md)      | 返回两个日期之间相差的月数                                           | `MONTHS_BETWEEN('2024-06-04', '2024-01-04')` → `5`                                   |
-| [DATE_BETWEEN](/tidb-cloud-lake/sql/date-between.md)          | 检查某个日期是否位于另外两个日期之间                                 | `DATE_BETWEEN('2024-06-04', '2024-06-01', '2024-06-10')` → `true`                    |
+| [DATE_BETWEEN](/tidb-cloud-lake/sql/date-between.md)          | 返回两个日期之间相隔的完整单位数（以整数表示）                       | `DATE_BETWEEN(MONTH, '2025-07-31', '2025-10-01')` → `2`                              |
 | [AGE](/tidb-cloud-lake/sql/age.md)                            | 计算两个时间戳之间，或某个时间戳与当前日期/时间之间的差值           | `AGE('2000-01-01'::TIMESTAMP, '1990-05-15'::TIMESTAMP)` → `9 years 7 months 17 days` |
 | [ADD_MONTHS](/tidb-cloud-lake/sql/add-months.md)              | 在保留月末日期的情况下为日期增加月数。                               | `ADD_MONTHS('2025-04-30',1)` → `2025-05-31`                                          |
 

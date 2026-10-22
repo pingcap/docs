@@ -7,7 +7,7 @@ summary: 创建一个不为 Time Travel 存储历史数据的表。
 
 创建一个不为 Time Travel 存储历史数据的表。
 
-Transient table 用于保存临时性数据，这类数据不需要数据保护或恢复机制。Dataebend 不会为 transient table 保存历史数据，因此你无法使用 Time Travel 功能查询 transient table 的先前版本。例如，SELECT 语句中的 [AT](/tidb-cloud-lake/sql/at.md) 子句不适用于 transient table。请注意，你仍然可以 [删除](/tidb-cloud-lake/sql/drop-table.md) 和 [恢复删除](/tidb-cloud-lake/sql/undrop-table.md) transient table。
+Transient table 用于保存临时性数据，这类数据不需要数据保护或恢复机制。{{{ .lake }}} 不会为 transient table 保存历史数据，因此你无法使用 Time Travel 功能查询 transient table 的先前版本。例如，SELECT 语句中的 [AT](/tidb-cloud-lake/sql/at.md) 子句不适用于 transient table。请注意，你仍然可以 [删除](/tidb-cloud-lake/sql/drop-table.md) 和 [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) transient table。
 
 > **Note:**
 >

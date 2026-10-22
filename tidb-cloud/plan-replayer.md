@@ -9,7 +9,7 @@ Plan Replayer 可帮助你将排查 SQL 执行计划所需的信息打包到一�
 
 在排查 TiDB Cloud Essential 或 Premium 实例上的 SQL 性能问题时，你可以使用 `PLAN REPLAYER DUMP` 为特定 SQL 语句生成一个 Plan Replayer 文件，并通过返回的 URL 下载该文件。Plan Replayer 文件适用于排查诸如意外的执行计划、计划回退、统计信息不准确，或仅偶发出现的问题计划等问题。
 
-如果你需要 TiDB Cloud Support 协助排查 SQL 性能问题，可以在有限时间内临时授予 TiDB Cloud Support 访问 Plan Replayer 文件的权限。
+如果你需要 TiDB Cloud Support 协助排查 SQL 性能问题，可以在有限时间内临时授予 TiDB Cloud Support 访问 Plan Replayer 文件的权限。对于 TiDB Cloud Essential，此授权仅适用于运行 TiDB 版本 `CLOUD.202603.x` 或更高版本的实例。对于运行 TiDB v8.5.x 或更早版本的 Essential 实例，请从返回的 URL 下载该文件并将其发送给 TiDB Cloud Support。
 
 > **Note:**
 >
@@ -59,6 +59,10 @@ EXPLAIN SELECT * FROM orders WHERE customer_id = 1001;
 如果排查需要，你也可以提供 Unix 时间戳。如果在指定时间之前没有可用的历史统计信息，TiDB 会使用最新可用的统计信息，并在生成的包中记录相关错误信息。
 
 ## 管理 TiDB Cloud Support 的访问权限 {#manage-access-from-tidb-cloud-support}
+
+> **Note:**
+>
+> 对于 TiDB Cloud Essential，此功能仅适用于运行 TiDB 版本 `CLOUD.202603.x` 或更高版本的实例。如果你的 Essential 实例运行的是 TiDB v8.5.x 或更早版本，则需要你自行从 `PLAN REPLAYER DUMP` 返回的 URL 下载 Plan Replayer 文件，并将该文件发送给 TiDB Cloud Support。
 
 Support 访问权限在实例级别进行控制。该授权允许 TiDB Cloud Support 工程师在有限时间内访问已生成的 Plan Replayer 文件，以排查 SQL 性能问题。
 

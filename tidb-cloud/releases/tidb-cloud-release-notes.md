@@ -8,6 +8,37 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 10 月 20 日 {#october-20-2026}
+
+**常规变更**
+
+- **TiDB Cloud Essential and Premium**
+
+    - TiDB Cloud Essential and Premium 支持 [New Relic](https://newrelic.com/) 指标集成（公测中）。
+
+        你可以将 TiDB Cloud Essential 或 Premium 实例中的关键性能指标发送到 New Relic，并在现有的 New Relic 仪表板上进行监控。
+
+        更多信息，请参阅以下文档：
+
+        - [将 TiDB Cloud Essential 与 New Relic 集成（PREVIEW）](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x/?plan=essential)
+        - [将 TiDB Cloud Premium 与 New Relic 集成（PREVIEW）](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x/?plan=premium)
+
+- **TiDB Cloud Dedicated**
+
+    - 新创建的 TiDB Cloud Dedicated 集群现在默认禁用公共端点。现有集群将保留其当前的公共端点设置。
+
+        在通过公共互联网连接到新创建的集群之前，请先在 [TiDB Cloud 控制台](https://tidbcloud.com/) 的 **Settings > Networking** 下启用 **Public Endpoint**，然后将你的客户端 IP 地址添加到 IP 访问列表中。
+
+        更多信息，请参阅 [通过公共连接连接到 TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection/)。
+
+- **TiDB Cloud BYOC**
+
+    - TiDB Cloud BYOC 支持 vCPU 限制告警，帮助你更好地监控资源使用情况并控制云成本。
+
+        当已配置的 vCPU 使用量接近所配置的区域限制，或者由于已达到该限制而导致扩容操作被阻止时，TiDB Cloud BYOC 现在会通知你。
+
+        这些告警可为你清晰地说明可用的扩展容量以及建议采取的操作。
+
 ## 2026 年 10 月 15 日 {#october-15-2026}
 
 **常规变更**

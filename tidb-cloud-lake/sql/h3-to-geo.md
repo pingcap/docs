@@ -5,7 +5,7 @@ summary: 返回与给定 H3 索引对应的经度和纬度。
 
 # H3_TO_GEO
 
-返回与给定 [H3](https://eng.uber.com/h3/) 索引对应的经度和纬度。
+返回与给定 [H3](https://h3geo.org/) 索引对应的经度和纬度。
 
 ## 语法 {#syntax}
 

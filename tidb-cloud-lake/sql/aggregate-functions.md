@@ -34,8 +34,8 @@ summary: 本页按功能对 {{{ .lake }}} 中的聚合函数进行了全面概�
 
 | 函数 | 描述 | 示例 |
 |----------|-------------|---------|
-| [VAR_POP](/tidb-cloud-lake/sql/var-pop.md) / [VARIANCE_POP](/tidb-cloud-lake/sql/variance-pop.md) | 总体方差 | `VAR_POP(height)` → `10.25` |
-| [VAR_SAMP](/tidb-cloud-lake/sql/var-samp.md) / [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md) | 样本方差 | `VAR_SAMP(height)` → `12.3` |
+| [VAR_POP](/tidb-cloud-lake/sql/var-pop.md) / [VARIANCE_POP](/tidb-cloud-lake/sql/variance-pop.md) | COVAR_POP（总体协方差）的别名 | `VAR_POP(x, y)` → `2.5` |
+| [VAR_SAMP](/tidb-cloud-lake/sql/var-samp.md) / [VARIANCE_SAMP](/tidb-cloud-lake/sql/variance-samp.md) | COVAR_SAMP（样本协方差）的别名 | `VAR_SAMP(x, y)` → `2.7` |
 | [STDDEV_POP](/tidb-cloud-lake/sql/stddev-pop.md) | 总体标准差 | `STDDEV_POP(height)` → `3.2` |
 | [STDDEV_SAMP](/tidb-cloud-lake/sql/stddev-samp.md) | 样本标准差 | `STDDEV_SAMP(height)` → `3.5` |
 | [COVAR_POP](/tidb-cloud-lake/sql/covar-pop.md) | 总体协方差 | `COVAR_POP(x, y)` → `2.5` |

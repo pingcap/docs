@@ -48,7 +48,7 @@ summary: 了解如何将 TiDB Cloud 集群连接到 Vercel 项目。
 
     > **注意：**
     >
-    > 对于 TiDB Cloud Dedicated 集群，请确保集群的流量过滤器允许所有 IP 地址（设置为 `0.0.0.0/0`）进行连接，因为 Vercel 部署使用 [动态 IP 地址](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)。
+    > 对于 TiDB Cloud Dedicated 集群，如果 **Settings** > **Networking** 中的 **Public Endpoint** 已禁用，请先启用它，并确保集群的流量过滤器允许所有 IP 地址（设置为 `0.0.0.0/0`）进行连接，因为 Vercel 部署使用 [动态 IP 地址](https://vercel.com/guides/how-to-allowlist-deployment-ip-address)。
 
 要[通过 TiDB Cloud Vercel 集成与 Vercel 集成](#connect-via-the-tidb-cloud-vercel-integration)，你需要是 TiDB Cloud 组织的 `Organization Owner` 角色，或目标项目的 `Project Owner` 角色。更多信息参见 [用户角色](/tidb-cloud/manage-user-access.md#user-roles)。
 

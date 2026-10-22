@@ -42,8 +42,8 @@ summary: 本页按功能分类，全面概述了 {{{ .lake }}} 中的表操作�
 |---------|-------------|----------------|
 | [TRUNCATE TABLE](/tidb-cloud-lake/sql/truncate-table.md) | 删除表中的所有数据，同时保留表结构 | [FLASHBACK TABLE](/tidb-cloud-lake/sql/flashback-table.md) |
 | [DROP TABLE](/tidb-cloud-lake/sql/drop-table.md) | 删除表 | [UNDROP TABLE](/tidb-cloud-lake/sql/undrop-table.md) |
-| [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | 永久删除表的历史数据文件（企业版） | 不可恢复 |
-| [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) | 永久删除已删除表的数据文件（企业版） | 不可恢复 |
+| [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table.md) | 永久删除表的历史数据文件 | 不可恢复 |
+| [VACUUM DROP TABLE](/tidb-cloud-lake/sql/vacuum-drop-table.md) | 永久删除已删除表的数据文件 | 不可恢复 |
 
 ## 表优化 {#table-optimization}
 

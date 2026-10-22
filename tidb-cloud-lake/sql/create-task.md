@@ -201,9 +201,11 @@ AS
  INSERT INTO data_warehouse.orders SELECT * FROM staging.orders;
 ```
 
-在此示例中，创建了一个名为 `process_orders` 的任务，并将其定义为在 **task1** 和 **task2** **成功完成之后**运行。这对于在任务的**有向无环图（DAG）**中创建**依赖关系**非常有用。该任务使用 **etl** 计算集群，并将数据从暂存区传输到数据仓库。
+在此示例中，创建了一个名为 `process_orders` 的任务，并将其定义为在 **task1** **成功完成之后**运行。这对于在任务的**有向无环图（DAG）**中创建**依赖关系**非常有用。该任务使用 **etl** 计算集群，并将数据从暂存区传输到数据仓库。
 
-> 提示：使用 AFLTER 参数时，无需设置 SCHEDULE 参数。
+> **提示：**
+>
+> 使用 `AFTER` 参数时，无需设置 `SCHEDULE` 参数。
 
 ### 条件执行 {#conditional-execution}
 

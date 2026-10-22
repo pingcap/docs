@@ -1,11 +1,11 @@
 ---
 title: TO_YYYYMMDD
-summary: 将日期或带时间的日期（timestamp/datetime）转换为包含年月日数字的 UInt32 数值（YYYY * 10000 + MM * 100 + DD）。## 语法。
+summary: 将日期或带时间的日期（timestamp/datetime）转换为包含年、月和日的 UInt32 数值（YYYY * 10000 + MM * 100 + DD）。
 ---
 
 # TO_YYYYMMDD
 
-将日期或带时间的日期（timestamp/datetime）转换为包含年月日数字的 UInt32 数值（YYYY * 10000 + MM * 100 + DD）。
+将日期或带时间的日期（timestamp/datetime）转换为包含年月日数字的 UInt32 数值（`YYYY * 10000 + MM * 100 + DD`）。
 
 ## 语法 {#syntax}
 

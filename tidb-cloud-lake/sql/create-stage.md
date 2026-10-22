@@ -170,7 +170,7 @@ CREATE STAGE iam_external_stage
 
 ### 示例 4：在 Cloudflare R2 上创建外部 stage {#example-4-create-external-stage-on-cloudflare-r2}
 
-[Cloudflare R2](https://www.cloudflare.com/en-ca/products/r2/) 是 Cloudflare 推出的一种对象存储服务，与 Amazon 的 AWS S3 服务完全兼容。以下示例在 Cloudflare R2 上创建一个名为 *r2_stage* 的外部 stage。
+[Cloudflare R2](https://www.cloudflare.com/products/r2/) 是 Cloudflare 推出的一种对象存储服务，与 Amazon 的 AWS S3 服务完全兼容。以下示例在 Cloudflare R2 上创建一个名为 *r2_stage* 的外部 stage。
 
 #### 步骤 1：创建 bucket {#step-1-create-bucket}
 

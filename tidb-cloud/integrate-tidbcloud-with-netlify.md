@@ -31,7 +31,7 @@ summary: 学习如何将 TiDB Cloud 集群连接到 Netlify 项目。
 
 ### TiDB Cloud 中流量过滤器允许所有 IP 地址
 
-对于 TiDB Cloud Dedicated 集群，请确保集群的流量过滤器允许所有 IP 地址（设置为 `0.0.0.0/0`）进行连接。这是因为 Netlify 部署使用动态 IP 地址。
+对于 TiDB Cloud Dedicated 集群，如果 **Settings** > **Networking** 中的 **Public Endpoint** 已禁用，请先启用它，并确保集群的流量过滤器允许所有 IP 地址（设置为 `0.0.0.0/0`）进行连接。这是因为 Netlify 部署使用动态 IP 地址。
 
 TiDB Cloud Starter 和 TiDB Cloud Essential 集群默认允许所有 IP 地址连接，因此无需配置任何流量过滤器。
 

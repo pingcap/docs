@@ -199,7 +199,7 @@ formatTypeOptions ::=
 
 `Geometry` 列的编码格式。
 
-**可用值**：`EWKT`、`WKB`、`WKB`、`EWKB`、`GEOJSON`
+**可用值**：`EWKT`、`WKT`、`WKB`、`EWKB`、`GEOJSON`
 
 **默认值**：`EWKT`
 

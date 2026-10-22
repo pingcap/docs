@@ -5,7 +5,7 @@ summary: 返回给定两个 H3 索引之间的边。
 
 # H3_GET_UNIDIRECTIONAL_EDGE
 
-返回给定两个 [H3](https://eng.uber.com/h3/) 索引之间的边。
+返回给定两个 [H3](https://h3geo.org/) 索引之间的边。
 
 ## 语法 {#syntax}
 

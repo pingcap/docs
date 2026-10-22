@@ -5,7 +5,7 @@ summary: 列出 stage 中的文件。你可以根据文件扩展名筛选 stage 
 
 # LIST_STAGE
 
-列出 stage 中的文件。你可以根据文件扩展名筛选 stage 中的文件，并获取每个文件的详细信息。该函数类似于 DDL 命令 [LIST STAGE FILES](/tidb-cloud-lake/sql/list-stage.md)，但它允许你通过 SELECT 语句灵活地获取特定文件信息，例如文件名、大小、MD5 哈希、最后修改时间戳和创建者，而不是返回所有文件信息。
+列出 stage 中的文件。你可以根据文件扩展名筛选 stage 中的文件，并获取每个文件的详细信息。该函数类似于 DDL 命令 [LIST STAGE FILES](/tidb-cloud-lake/sql/list-stage-files.md)，但它允许你通过 SELECT 语句灵活地获取特定文件信息，例如文件名、大小、MD5 哈希、最后修改时间戳和创建者，而不是返回所有文件信息。
 
 ## 语法 {#syntax}
 

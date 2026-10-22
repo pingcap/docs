@@ -1,6 +1,6 @@
 ---
 title: system_history.log_history
-summary: 注意：此表包含原始日志数据，并作为其他专用历史表的数据来源。其他表会基于这些数据提供结构化的、面向特定查询的视图。
+summary: 使用 system_history.log_history 查询为其他结构化系统历史表提供数据的原始日志数据。
 ---
 
 # system_history.log_history

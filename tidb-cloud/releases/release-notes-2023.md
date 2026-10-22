@@ -898,7 +898,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
 - 支持缩减 TiKV、TiFlash 节点数量，实现 TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群的缩容。
 
-    你可以通过 [TiDB Cloud 控制台](/tidb-cloud/scale-tidb-cluster.md#change-node-number) 或 [TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 缩减节点数量。
+    你可以通过 [更改节点数量](/tidb-cloud/scale-tidb-cluster.md#change-node-count) 或 [TiDB Cloud API (beta)](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster) 缩减节点数量。
 
 **控制台变更**
 

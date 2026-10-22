@@ -5,7 +5,7 @@ summary: 检查给定的 H3 索引是否具有 Class III 方向的分辨率。
 
 # H3_IS_RES_CLASS_III
 
-检查给定的 [H3](https://eng.uber.com/h3/) 索引是否具有 Class III 方向的分辨率。
+检查给定的 [H3](https://h3geo.org/) 索引是否具有 Class III 方向的分辨率。
 
 ## 语法 {#syntax}
 

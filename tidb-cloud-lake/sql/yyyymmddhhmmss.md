@@ -5,7 +5,7 @@ summary: 将日期或带时间的日期（timestamp/datetime）转换为包含�
 
 # TO_YYYYMMDDHHMMSS
 
-将日期或带时间的日期（timestamp/datetime）转换为包含年月日时分秒的 UInt64 数字（YYYY *10000000000 + MM* 100000000 + DD *1000000 + hh* 10000 + mm * 100 + ss）。
+将日期或带时间的日期（timestamp/datetime）转换为包含年月日时分秒的 UInt64 数字（`YYYY * 10000000000 + MM * 100000000 + DD * 1000000 + hh * 10000 + mm * 100 + ss`）。
 
 ## 语法 {#syntax}
 

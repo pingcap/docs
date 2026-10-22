@@ -1,11 +1,11 @@
 ---
 title: QUALIFY
-summary: QUALIFY 是一个用于过滤窗口函数结果的子句。因此，要成功使用 QUALIFY 子句，SELECT 列表或 QUALIFY 子句中必须至少包含一个窗口函数（每种情况请参见示例）。换句话说，QUALIFY 会在窗口函数计算完成后再进行求值。以下是包含 QUALIFY 语句子句的查询的典型执行顺序。
+summary: QUALIFY 是一个用于过滤窗口函数结果的子句。
 ---
 
 # QUALIFY
 
-QUALIFY 是一个用于过滤窗口函数结果的子句。因此，要成功使用 QUALIFY 子句，SELECT 列表或 QUALIFY 子句中必须至少包含一个窗口函数（每种情况请参见[示例](#examples)）。换句话说，QUALIFY 会在窗口函数计算完成后再进行求值。以下是包含 QUALIFY 语句子句的查询的典型执行顺序：
+QUALIFY 是一个用于过滤窗口函数结果的子句。因此，要成功使用 QUALIFY 子句，SELECT 列表或 QUALIFY 子句中必须至少包含一个窗口函数（每种情况请参见[示例](#examples)）。换句话说，QUALIFY 会在窗口函数计算完成后再进行求值。以下是包含 QUALIFY 子句的查询的典型执行顺序：
 
 1. FROM
 2. WHERE

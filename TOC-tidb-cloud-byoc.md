@@ -470,7 +470,7 @@
       - [TiKV 概述](/tikv-overview.md)
       - [RocksDB 概述](/storage-engine/rocksdb-overview.md)
     - TiFlash
-      - [TiFlash 概述](/tiflash/tiflash-overview.md)
+      - [TiFlash 概览](/tiflash/tiflash-overview.md)
       - [落盘](/tiflash/tiflash-spill-disk.md)
   - TiDB Cloud 合作伙伴 Web 控制台
     - [TiDB Cloud 合作伙伴](/tidb-cloud/tidb-cloud-partners.md)

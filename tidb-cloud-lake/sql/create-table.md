@@ -52,7 +52,7 @@ CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] [ <database_name>. ]<table_name>
 
 ## CREATE TABLE ... LIKE {#create-table-like}
 
-使用与现有表相同的列定义创建表。现有表的列名、数据类型及其非 NULL 约束将被复制到新表中。
+使用与现有表相同的列定义创建表。现有表的列名、数据类型及其 NOT NULL 约束将被复制到新表中。
 
 语法：
 

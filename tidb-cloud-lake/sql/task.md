@@ -22,7 +22,7 @@ summary: 本页按功能分类，全面概述 {{{ .lake }}} 中的任务操作�
 |---------|-------------|
 | [SHOW TASKS](/tidb-cloud-lake/sql/show-tasks.md) | 列出当前角色可见的任务 |
 | [TASK HISTORY](/tidb-cloud-lake/sql/task-history.md) | 显示一个或多个任务的运行历史 |
-| [TASK ERROR INTEGRATION PAYLOAD](/tidb-cloud-lake/sql/task-error-notification-payload.md) | 显示任务错误通知的错误负载格式 |
+| [TASK ERROR NOTIFICATION PAYLOAD](/tidb-cloud-lake/sql/task-error-notification-payload.md) | 显示任务错误通知的错误负载格式 |
 
 > **Note:**
 >

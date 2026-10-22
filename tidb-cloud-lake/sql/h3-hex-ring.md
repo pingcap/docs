@@ -5,7 +5,7 @@ summary: 返回给定 [H3](https://eng.uber.com/h3/) 索引在网格距离恰好
 
 # H3_HEX_RING
 
-返回给定 [H3](https://eng.uber.com/h3/) 索引在网格距离恰好为 `k` 处的“空心”六边形环。
+返回给定 [H3](https://h3geo.org/) 索引在网格距离恰好为 `k` 处的“空心”六边形环。
 
 ## 语法 {#syntax}
 

@@ -21,7 +21,7 @@ SLEEP(seconds)
 
 | 参数 | 描述 |
 | ----------- | ----------- |
-| seconds  | 必须是任意非负数或 float 的常数列。｜
+| seconds  | 必须是任意非负数或 float 的常数列。|
 
 ## 返回类型 {#return-type}
 

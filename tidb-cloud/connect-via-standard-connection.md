@@ -11,9 +11,12 @@ summary: 了解如何通过公共连接接入你的 TiDB Cloud 集群。
 >
 > 如果你想了解如何通过公共连接接入 {{{ .starter }}} 或 {{{ .essential }}} 实例，请参见 [Connect to {{{ .starter }}} or Essential via Public Endpoint](/tidb-cloud/connect-via-standard-connection-serverless.md)。
 
-## 前置条件：配置 IP 访问列表
+## 前置条件 {#prerequisites}
 
-对于公共连接，TiDB Cloud Dedicated 只允许来自 IP 访问列表中的地址的客户端连接。如果你还没有配置 IP 访问列表，请按照 [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md) 中的步骤，在首次连接前进行配置。
+在通过公共连接连接到 TiDB Cloud Dedicated 集群之前，请确保满足以下要求：
+
+- 已为你的集群启用公共端点。对于新创建的 TiDB Cloud Dedicated 集群，公共端点默认处于禁用状态。要启用它，请打开集群的概览页面，点击 **Settings** > **Networking**，如果你的集群有多个节点组，则选择目标 TiDB 节点组，然后在 **Public Endpoint** 部分点击 **Enable**。如果你的集群已启用公共端点，则无需执行任何操作。
+- 你的客户端 IP 地址已在 IP 访问列表中。对于公共连接，TiDB Cloud Dedicated 只允许来自 IP 访问列表中的地址的客户端连接。如果你还没有配置 IP 访问列表，或者你的客户端 IP 地址不在列表中，请按照 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md) 中的步骤，在首次连接前将其添加到列表中。
 
 ## 连接到集群
 

@@ -26,7 +26,7 @@ summary: 了解如何扩容你的 TiDB Cloud 集群。
 > - 4 vCPU 的 TiDB 只能与 4 vCPU 的 TiKV 搭配使用，4 vCPU 的 TiKV 也只能与 4 vCPU 的 TiDB 搭配使用。
 > - TiFlash 不可用。
 
-## 更改节点数量
+## 更改节点数量 {#change-node-count}
 
 你可以增加或减少 TiDB、TiKV 或 TiFlash 的节点数量。
 

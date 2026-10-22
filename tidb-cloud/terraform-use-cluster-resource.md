@@ -265,7 +265,7 @@ summary: 了解如何使用 cluster 资源创建和修改 TiDB Cloud 集群。
 
 - `cloud_provider` 表示 TiDB 集群可部署的云服务商。
 - `region` 表示 `cloud_provider` 的区域。
-- `node_quantity_range` 显示节点数量的最小值和扩容步长。
+- `node_quantity_range` 显示节点数量的最小值和节点扩展步长。
 - `node_size` 表示节点规格。
 - `storage_size_gib_range` 显示你可为节点设置的最小和最大存储空间。
 

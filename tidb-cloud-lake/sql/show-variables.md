@@ -7,7 +7,7 @@ summary: 显示所有会话变量及其详细信息，例如名称、值和类�
 
 显示所有会话变量及其详细信息，例如名称、值和类型。
 
-另请参阅：[SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables.md)
+另请参阅：[SHOW_VARIABLES](/tidb-cloud-lake/sql/show-variables-sql.md)
 
 ## 语法 {#syntax}
 

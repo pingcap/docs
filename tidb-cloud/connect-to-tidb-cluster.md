@@ -22,7 +22,7 @@ summary: 了解如何通过不同方法连接到你的 TiDB Cloud Dedicated 集�
 
     - [公网连接](/tidb-cloud/connect-via-standard-connection.md)
 
-        公网连接通过流量过滤器暴露一个公网端点，因此你可以通过 SQL 客户端从你的笔记本电脑连接到 TiDB 集群。你可以使用 TLS 连接到 TiDB 集群，确保应用到 TiDB 集群间数据传输的安全性。更多信息请参阅 [Connect to TiDB Cloud Dedicated via Public Connection](/tidb-cloud/connect-via-standard-connection.md)。
+        公网连接通过流量过滤器暴露一个公网端点，因此你可以通过 SQL 客户端从你的笔记本电脑连接到 TiDB 集群。对于新创建的 TiDB Cloud Dedicated 集群，公网端点默认处于禁用状态，你可以在集群创建后前往 **Settings** > **Networking** 启用它。你可以使用 TLS 连接到 TiDB 集群，确保应用到 TiDB 集群间数据传输的安全性。更多信息请参阅 [通过公共连接接入 TiDB Cloud Dedicated](/tidb-cloud/connect-via-standard-connection.md)。
 
     - 私有端点（推荐）
 

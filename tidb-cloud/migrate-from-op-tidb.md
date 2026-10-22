@@ -288,7 +288,7 @@ SELECT @@global.tidb_gc_enable;
     3. 根据你的 TiDB Cloud 方案，执行以下操作之一以允许 TiCDC 连接到 TiDB Cloud。
 
         - 对于 {{{ .starter }}} 或 Essential，在 **Authorized Networks** 区域点击 **Add rule**。在弹出的对话框中，添加一条包含 TiCDC 组件公网 IP 地址的防火墙规则，然后点击 **Save**。更多信息参见 [为 {{{ .starter }}} 或 Essential 的公网端点配置防火墙规则](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule)。
-        - 对于 TiDB Cloud Dedicated，点击 **Add IP Address**。在弹窗中选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。更多信息参见 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
+        - 对于 TiDB Cloud Dedicated，如果 **Public Endpoint** 已禁用，请先启用它，然后点击 **Add IP Address**。在弹窗中选择 **Use IP addresses**，点击 **+**，在 **IP Address** 字段填写 TiCDC 组件的公网 IP 地址，然后点击 **Confirm**。更多信息参见 [配置 IP 访问列表](/tidb-cloud/configure-ip-access-list.md)。
 
 3. 获取下游 TiDB Cloud 资源的连接信息。
 

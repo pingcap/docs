@@ -15,7 +15,7 @@ ARRAY_REDUCE(<json_array>, <lambda_expression>)
 
 ## 示例 {#examples}
 
-以下示例将数组中的所有元素相乘（2 _3_ 4）：
+以下示例将数组中的所有元素相乘（`2 * 3 * 4`）：
 
 ```sql
 SELECT ARRAY_REDUCE(

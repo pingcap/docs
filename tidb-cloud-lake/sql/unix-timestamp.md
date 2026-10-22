@@ -1,6 +1,6 @@
 ---
 title: TO_UNIX_TIMESTAMP
-summary: 将日期/时间格式的时间戳转换为 Unix 时间戳格式。Unix 时间戳表示自 1970 年 1 月 1 日 00:00:00 UTC 以来经过的秒数。
+summary: 将日期/时间格式的时间戳转换为 Unix 时间戳格式。
 ---
 
 # TO_UNIX_TIMESTAMP
