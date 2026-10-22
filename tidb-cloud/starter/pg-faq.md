@@ -37,7 +37,7 @@ TiDB Cloud displays the database type in the resource list and instance overview
 
 ### How many Starter instances can I create?
 
-A paid organization can create up to **100 {{{ .starter }}} instances** in total by default, including both MySQL-compatible and PostgreSQL-compatible instances. For MySQL-compatible instances, each branch is also counted as a instance.
+A paid organization can create up to **100 {{{ .starter }}} instances** in total by default, including both MySQL-compatible and PostgreSQL-compatible instances. For MySQL-compatible instances, each branch is also counted as an instance.
 
 The free-instance allowance covers:
 

@@ -28,7 +28,7 @@ You can create a file system using the TiDB Cloud console or TiDB Cloud CLI.
 3. On the **Create File System** page, enter a file system name, and select a **Cloud Provider** and **Region**.
 4. (Optional) Review and edit the usage limits in the summary.
 
-    To edit the usage limits, add a credit card to your organization. Without a credit card, the free limits cannot be edited during creation. For more information, see [Manage Usage Limit](/tidb-cloud-filesystem/manage-filesystem-limits.md).
+    To edit the usage limits, add a credit card to your organization. Without a credit card, the free limits cannot be edited during creation. For more information, see [Manage Usage Limits](/tidb-cloud-filesystem/manage-filesystem-limits.md).
 
 5. Click **Create**. The **Your File System is Ready!** dialog offers optional steps to install TiDB Cloud CLI and mount the file system on macOS or Linux. The default owner token in the mount command is shown only once; save it securely before closing the dialog.
 
