@@ -573,7 +573,7 @@
   - [TiDB高速テーブル作成](/accelerated-table-creation.md)
   - [スキーマキャッシュ](/schema-cache.md)
 - 一般参考資料
-  - TiDBクラシックアーキテクチャ
+  - TiDB Classic アーキテクチャ
     - [概要](/tidb-architecture.md)
     - [ストレージ](/tidb-storage.md)
     - [コンピューティング](/tidb-computing.md)

@@ -458,7 +458,7 @@
   - [メタデータロック](/metadata-lock.md)
   - [TiDB 高速テーブル作成](/accelerated-table-creation.md)
 - 一般リファレンス
-  - TiDBクラシックアーキテクチャ
+  - TiDB Classic アーキテクチャ
     - [概要](/tidb-architecture.md)
     - [ストレージ](/tidb-storage.md)
     - [コンピューティング](/tidb-computing.md)
