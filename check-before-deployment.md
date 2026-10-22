@@ -560,7 +560,7 @@ The steps to check and configure these parameters are as follows:
 
             The output `include=balanced` means to add the optimization configuration of the operating system to the current `balanced` profile.
 
-            After saving the configuration, run the following command and confirm that the list includes `balanced-tidb-optimal`. If the profile is missing, check that `tuned.conf` is saved under an actual profile search directory.
+            After saving the configuration, run the following command and confirm that the list includes `balanced-tidb-optimal`. If the profile is missing, check that `tuned.conf` is saved in the correct profile search directory.
 
             ```bash
             tuned-adm list
