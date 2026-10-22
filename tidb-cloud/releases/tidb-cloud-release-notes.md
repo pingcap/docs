@@ -14,7 +14,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 - **TiDB Cloud Essential and Premium**
 
-    - TiDB Cloud Essential and Premium 支持 [New Relic](https://newrelic.com/) 指标集成（公测）。
+    - TiDB Cloud Essential and Premium 支持 [New Relic](https://newrelic.com/) 指标集成（公测中）。
 
         你可以将 TiDB Cloud Essential 或 Premium 实例中的关键性能指标发送到 New Relic，并在现有的 New Relic 仪表板上进行监控。
 
