@@ -50,8 +50,8 @@ tokio = { version = "1", features = ["full"] }
 
 | {{{ .lake }}} | Rust                  | 注記                     |
 | --------- | --------------------- | ------------------------ |
-| DATE      | chrono::NaiveDate     | chrono クレートが必要      |
-| TIMESTAMP | chrono::NaiveDateTime | chrono クレートが必要      |
+| DATE      | chrono::NaiveDate     | chrono crate が必要      |
+| TIMESTAMP | chrono::NaiveDateTime | chrono crate が必要      |
 
 ### 複合型 {#complex-types}
 
