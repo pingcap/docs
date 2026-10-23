@@ -176,7 +176,7 @@ Quick access: [Quick start](https://docs-archive.pingcap.com/tidb/v7.6/quick-sta
 
     ```sql
     FLASHBACK CLUSTER TO TSO 445494839813079041;
-    ````
+    ```
 
     For more information, see [documentation](/sql-statements/sql-statement-flashback-cluster.md).
 

@@ -325,7 +325,7 @@ To replicate incremental data, do the following:
     SET GLOBAL tidb_gc_enable = TRUE;
     ```
 
-    The following is an example output, in which `1` indicates that GC is disabled.
+    The following is an example output, in which `1` indicates that GC is enabled.
 
     ```sql
     SELECT @@global.tidb_gc_enable;
