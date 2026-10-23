@@ -89,7 +89,7 @@ FROM contracts;
 
 ```
 
-## 関連項目 {#see-also}
+## 関連情報 {#see-also}
 
 - [DATE_ADD](/tidb-cloud-lake/sql/date-add.md): 特定の時間間隔を加算するための代替関数
 - [DATE_SUB](/tidb-cloud-lake/sql/date-sub.md): 時間間隔を減算する関数

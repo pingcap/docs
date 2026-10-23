@@ -50,7 +50,7 @@ ALTER TASK [ IF EXISTS ] <name> MODIFY WHEN <boolean_expr>
 ALTER TASK IF EXISTS mytask SUSPEND;
 ```
 
-このコマンドは、`mytask` という名前のタスクが存在する場合に、そのタスクを一時停止します。
+このコマンドは、mytask という名前のタスクが存在する場合に、そのタスクを一時停止します。
 
 ```sql
 ALTER TASK IF EXISTS mytask SET
@@ -58,7 +58,7 @@ ALTER TASK IF EXISTS mytask SET
   SCHEDULE = USING CRON '0 12 * * * *' 'UTC';
 ```
 
-この例では、`mytask` タスクを変更し、その Warehouse を `new_warehouse` に変更し、スケジュールを UTC の正午に毎日実行されるよう更新しています。
+この例では、mytask タスクを変更し、その Warehouse を new_warehouse に変更し、スケジュールを UTC の正午に毎日実行されるよう更新しています。
 
 ```sql
 ALTER TASK IF EXISTS mytask MODIFY
@@ -66,22 +66,22 @@ AS
 INSERT INTO new_table SELECT * FROM source_table;
 ```
 
-ここでは、`mytask` によって実行される SQL ステートメントを、`source_table` から `new_table` にデータを挿入するものへ変更しています。
+ここでは、mytask によって実行される SQL ステートメントを、source_table から new_table にデータを挿入するものへ変更しています。
 
 ```sql
 ALTER TASK mytaskchild MODIFY WHEN STREAM_STATUS('stream3') = False;
 ```
 
-この例では、`mytaskchild` タスクを変更して、その WHEN 条件を変更しています。このタスクは、`'stream3'` に対する `STREAM_STATUS` 関数の評価結果が `False` の場合にのみ実行されます。これは、`'stream3'` に変更データが含まれていないときにタスクが実行されることを意味します。
+この例では、mytaskchild タスクを変更して、その WHEN 条件を変更しています。このタスクは、'stream3' に対する STREAM_STATUS 関数の評価結果が False の場合にのみ実行されます。これは、'stream3' に変更データが含まれていないときにタスクが実行されることを意味します。
 
 ```sql
 ALTER TASK MyTask1 ADD AFTER 'task2';
 ```
 
-この例では、`MyTask1` タスクに依存関係を追加しています。これにより、このタスクは `'task2'` と `'task3'` の両方が正常に完了した後に実行されるようになります。これは、タスクの有向非巡回グラフ（DAG）内に依存関係を作成します。
+この例では、MyTask1 タスクに依存関係を追加しています。これにより、このタスクは 'task2' と 'task3' の両方が正常に完了した後に実行されるようになります。これは、タスクの有向非巡回グラフ（DAG）内に依存関係を作成します。
 
 ```sql
 ALTER TASK MyTask1 REMOVE AFTER 'task2';
 ```
 
-ここでは、`MyTask1` タスクの特定の依存関係を削除しています。このタスクは今後 `'task2'` の後には実行されません。これは、タスク DAG 内の依存関係を変更したい場合に役立ちます。
+ここでは、MyTask1 タスクの特定の依存関係を削除しています。このタスクは今後 'task2' の後には実行されません。これは、タスク DAG 内の依存関係を変更したい場合に役立ちます。

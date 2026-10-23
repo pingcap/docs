@@ -1,6 +1,6 @@
 ---
 title: ARRAY_FILTER
-summary: 指定した Lambda 式に基づいて JSON 配列から要素をフィルタリングし、条件を満たす要素のみを返します。Lambda 式の詳細については、Lambda Expressions を参照してください。
+summary: 指定した Lambda 式に基づいて JSON 配列から要素をフィルタリングし、条件を満たす要素のみを返します。Lambda 式の詳細については、ラムダ式を参照してください。
 ---
 
 # ARRAY_FILTER

@@ -140,8 +140,8 @@ CREATE STAGE my_gcs_stage
 
 | パラメーター          | 必須?      | 説明                                                     |
 |---------------------- |----------- |--------------------------------------------------------- |
-| access_key_id         | はい        | 認証用の Alibaba Cloud OSS access key ID。                |
-| access_key_secret     | はい        | 認証用の Alibaba Cloud OSS access key secret。            |
+| access_key_id         | はい        | 認証用の Alibaba Cloud OSS アクセスキー ID。                |
+| access_key_secret     | はい        | 認証用の Alibaba Cloud OSS アクセスキーシークレット。            |
 | endpoint_url          | はい        | Alibaba Cloud OSS のエンドポイント URL。                  |
 | presign_endpoint_url  | いいえ         | Alibaba Cloud OSS URL の事前署名に使用するエンドポイント URL。 |
 
@@ -168,8 +168,8 @@ CREATE STAGE my_oss_stage
 | パラメーター     | 必須?  | 説明                                                  |
 |-------------- |----------- |------------------------------------------------------------- |
 | endpoint_url  | はい        | Tencent Cloud Object Storage のエンドポイント URL。            |
-| secret_id     | はい        | 認証用の Tencent Cloud Object Storage secret ID。             |
-| secret_key    | はい        | 認証用の Tencent Cloud Object Storage secret key。            |
+| secret_id     | はい        | 認証用の Tencent Cloud Object Storage シークレット ID。             |
+| secret_key    | はい        | 認証用の Tencent Cloud Object Storage シークレットキー。            |
 
 ```sql title='Examples'
 -- Create a connection for Tencent COS

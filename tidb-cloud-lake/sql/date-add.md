@@ -90,7 +90,7 @@ SELECT DATE_ADD(month, 1, '2023-02-28'::DATE);
 
 ```
 
-## 関連項目 {#see-also}
+## 関連情報 {#see-also}
 
 - [ADD_MONTH](/tidb-cloud-lake/sql/add-months.md): 月を加算する関数
 - [DATE_SUB](/tidb-cloud-lake/sql/date-sub.md): 時間間隔を減算する関数

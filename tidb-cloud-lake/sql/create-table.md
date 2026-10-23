@@ -326,7 +326,7 @@ SELECT * FROM books_backup;
 
 ### Create Table ... Column As STORED | VIRTUAL {#create-table--column-as-stored--virtual}
 
-次の例は、"price" または "quantity" カラムの更新に基づいて自動的に再計算される、stored 計算カラムを持つテーブルを示しています。
+次の例は、"price" または "quantity" カラムの更新に基づいて自動的に再計算される、保存計算カラムを持つテーブルを示しています。
 
 ```sql
 -- Create the table with a stored computed column
@@ -357,7 +357,7 @@ FROM products;
 +------+-------+----------+-------------+
 ```
 
-この例では、JSON データを保存するために、profile という名前の Variant 型カラムを持つ student_profiles というテーブルを作成しています。また、profile カラムから age プロパティを抽出して整数にキャストする、_age_ という名前の virtual 計算カラムも追加しています。
+この例では、JSON データを保存するために、profile という名前の Variant 型カラムを持つ student_profiles というテーブルを作成しています。また、profile カラムから age プロパティを抽出して整数にキャストする、_age_ という名前の仮想計算カラムも追加しています。
 
 ```sql
 -- Create the table with a virtual computed column

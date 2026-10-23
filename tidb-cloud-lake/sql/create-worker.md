@@ -46,7 +46,7 @@ CREATE WORKER [ IF NOT EXISTS ] <worker_name>
 - `WITH` は最大 1 回だけ指定できます。
 - オプションはカンマで区切ります。
 - オプション名は、リクエスト送信前に小文字へ正規化されます。
-- `option_value` は、文字列リテラル、裸の識別子、符号なし整数、または boolean として記述できます。
+- `option_value` は、文字列リテラル、裸の識別子、符号なし整数、またはブール値として記述できます。
 - `CREATE WORKER` は `TAG` 句をサポートしていません。
 
 ## 例 {#examples}

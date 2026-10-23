@@ -5,7 +5,7 @@ summary: "{{{ .lake }}} で DROP PIPE コマンドを使用して取り込みパ
 
 # DROP PIPE
 
-pipe を削除します。
+パイプを削除します。
 
 ## 構文 {#syntax}
 

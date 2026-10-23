@@ -1,11 +1,11 @@
 ---
 title: TO_DAY_OF_WEEK
-summary: 日付または時刻を含む日付（timestamp/datetime）を、曜日番号を表す UInt8 の数値に変換します（Monday は 1、Sunday は 7）。
+summary: 日付または時刻を含む日付（timestamp/datetime）を、曜日番号を表す UInt8 の数値に変換します（月曜日は 1、日曜日は 7）。
 ---
 
 # TO_DAY_OF_WEEK
 
-日付または時刻を含む日付（timestamp/datetime）を、曜日番号を表す UInt8 の数値に変換します（Monday は 1、Sunday は 7）。
+日付または時刻を含む日付（timestamp/datetime）を、曜日番号を表す UInt8 の数値に変換します（月曜日は 1、日曜日は 7）。
 
 ## 構文 {#syntax}
 

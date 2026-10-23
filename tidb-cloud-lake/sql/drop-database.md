@@ -19,7 +19,7 @@ DROP { DATABASE | SCHEMA } [ IF EXISTS ] <database_name>
 
 ## 例 {#examples}
 
-この例では、`orders_2024` という名前のデータベースを作成してから削除します。
+この例では、"orders_2024" という名前のデータベースを作成してから削除します。
 
 ```sql
 root@localhost:8000/default> CREATE DATABASE orders_2024;

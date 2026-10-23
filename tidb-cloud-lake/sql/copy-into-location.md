@@ -7,7 +7,7 @@ summary: COPY INTO を使用すると、テーブルまたはクエリからデ�
 
 COPY INTO を使用すると、テーブルまたはクエリからデータを、以下のいずれかの場所にある 1 つ以上のファイルへアンロードできます。
 
-- User / Internal / External stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
+- ユーザー / 内部 / 外部 stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
 - ストレージサービスで作成されたバケットまたはコンテナ。
 
 関連情報: [`COPY INTO <table>`](/tidb-cloud-lake/sql/copy-into-table.md)
@@ -151,7 +151,7 @@ copyOptions ::=
 | ---------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | SINGLE           | false                  | `true` の場合、このコマンドはデータを 1 つの単一ファイルにアンロードします。                                                                                                   |
 | MAX_FILE_SIZE    | 67108864 bytes (64 MB) | 作成される各ファイルの最大サイズ（バイト単位）です。`SINGLE` が false の場合に有効です。                                                                                       |
-| OVERWRITE        | false                  | `true` の場合、対象パスに同名の既存ファイルがあると上書きされます。Note: `OVERWRITE = true` には `USE_RAW_PATH = true` と `INCLUDE_QUERY_ID = false` が必要です。            |
+| OVERWRITE        | false                  | `true` の場合、対象パスに同名の既存ファイルがあると上書きされます。注: `OVERWRITE = true` には `USE_RAW_PATH = true` と `INCLUDE_QUERY_ID = false` が必要です。            |
 | INCLUDE_QUERY_ID | true                   | `true` の場合、エクスポートされるファイル名に一意の UUID が含まれます。                                                                                                       |
 | USE_RAW_PATH     | false                  | `true` の場合、ユーザーが指定したパスそのもの（完全なファイル名を含む）がデータのエクスポートに使用されます。`false` に設定した場合、ユーザーはディレクトリパスを指定する必要があります。 |
 
@@ -210,9 +210,9 @@ VALUES
 ('Halifax', 403390);
 ```
 
-### 例 1: Internal stage へのアンロード (unload) {#example-1-unloading-to-internal-stage}
+### 例 1: 内部 stage へのアンロード (unload) {#example-1-unloading-to-internal-stage}
 
-この例では、データを internal stage にアンロードします。
+この例では、データを内部 stage にアンロードします。
 
 ```sql
 -- Create an internal stage

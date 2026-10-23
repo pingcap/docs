@@ -82,7 +82,7 @@ DESC STAGE my_internal_stage;
 
 ### 例 2: Connection を使用して外部 stage を作成する {#example-2-create-external-stage-with-connection}
 
-この例では、connection を使用して Amazon S3 上に *my_s3_stage* という名前の外部 stage を作成します。
+この例では、Connection を使用して Amazon S3 上に *my_s3_stage* という名前の外部 stage を作成します。
 
 ```sql
 -- First create a connection
@@ -148,8 +148,8 @@ DESC STAGE my_s3_stage;
     - ユーザーの権限を設定する際に、**Attach policies directly** をクリックし、アクセスポリシー *lake-access* を検索して選択します。
 3. ユーザーの作成後、ユーザー名をクリックして詳細ページを開き、**Security credentials** タブを選択します。
 4. **Access keys** セクションで、**Create access key** をクリックします。
-5. ユースケースとして **Third-party service** を選択し、その下のチェックボックスをオンにして access key の作成を確認します。
-6. 生成された access key と secret access key をコピーし、安全な場所に保存します。
+5. ユースケースとして **Third-party service** を選択し、その下のチェックボックスをオンにしてアクセスキーの作成を確認します。
+6. 生成されたアクセスキーとシークレットアクセスキーをコピーし、安全な場所に保存します。
 
 #### ステップ 3: 外部 stage を作成する {#step-3-create-external-stage}
 
@@ -177,15 +177,15 @@ CREATE STAGE iam_external_stage
 以下の手順では、Cloudflare R2 上に *lake* という名前のバケットを作成します。
 
 1. Cloudflare ダッシュボードにログインし、左側のナビゲーションペインで **R2** を選択します。
-2. **Create bucket** をクリックしてバケットを作成し、バケット名を *lake* に設定します。バケットの作成に成功すると、バケット詳細ページでバケット名のすぐ下にバケット endpoint が表示されます。
+2. **Create bucket** をクリックしてバケットを作成し、バケット名を *lake* に設定します。バケットの作成に成功すると、バケット詳細ページでバケット名のすぐ下にバケットエンドポイントが表示されます。
 
 #### ステップ 2: R2 API Token を作成する {#step-2-create-r2-api-token}
 
-以下の手順では、Access Key ID と Secret Access Key を含む R2 API token を作成します。
+以下の手順では、Access Key ID と Secret Access Key を含む R2 API トークンを作成します。
 
 1. **R2** > **Overview** で **Manage R2 API Tokens** をクリックします。
-2. **Create API token** をクリックして API token を作成します。
-3. API token を設定する際に、必要な権限を選択し、必要に応じて **TTL** を設定します。
+2. **Create API token** をクリックして API トークンを作成します。
+3. API トークンを設定する際に、必要な権限を選択し、必要に応じて **TTL** を設定します。
 4. **Create API Token** をクリックして Access Key ID と Secret Access Key を取得します。これらをコピーし、安全な場所に保存します。
 
 #### ステップ 3: 外部 stage を作成する {#step-3-create-external-stage-1}

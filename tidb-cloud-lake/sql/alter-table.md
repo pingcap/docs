@@ -62,15 +62,15 @@ DROP [ COLUMN ] <column_name>
 **Note:**
 
 - カラムを追加または変更する際、デフォルト値として受け入れられるのは定数値のみです。非定数式を使用するとエラーになります。
-- `ALTER TABLE` による stored computed column の追加は、まだサポートされていません。
+- ALTER TABLE による保存計算カラムの追加は、まだサポートされていません。
 - テーブルのカラムのデータ型を変更する場合、変換エラーのリスクがあります。たとえば、テキスト（String）を含むカラムを数値（Float）に変換しようとすると、問題が発生する可能性があります。
-- カラムに masking policy を設定する場合は、ポリシーで定義されているデータ型（[CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md) の構文にあるパラメータ *arg_type_to_mask* を参照）がそのカラムと一致していることを確認してください。
+- カラムにマスキングポリシーを設定する場合は、ポリシーで定義されているデータ型（[CREATE MASKING POLICY](/tidb-cloud-lake/sql/create-masking-policy.md) の構文にあるパラメータ *arg_type_to_mask* を参照）がそのカラムと一致していることを確認してください。
 - ポリシー定義が追加パラメータを想定している場合は、任意の `USING` 句を使用します。各ポリシー引数に対応するカラムを順番に列挙してください。最初の引数は常にマスク対象のカラムを表します。
 - `USING` を含める場合は、少なくともマスク対象カラムと、ポリシーで必要な追加カラムを指定してください。`USING (...)` 内の最初の識別子は、変更対象のカラムと一致している必要があります。
-- masking policy を関連付けられるのは通常のテーブルのみです。ビュー、stream、一時テーブルでは `SET MASKING POLICY` を使用できません。
-- 1 つのカラムに関連付けられるセキュリティポリシー（masking または row-level）は最大 1 つです。新しいポリシーを関連付ける前に、既存のポリシーを削除してください。
-- masking policy の関連付け、関連解除、表示、削除には、グローバルな `APPLY MASKING POLICY` 権限、または対象の masking policy に対する APPLY/OWNERSHIP が必要です。
-- row access policy の追加または削除には、対象テーブルに対する `ALTER` 権限に加え、グローバルな `APPLY ROW ACCESS POLICY` 権限、またはそのポリシーに対する APPLY/OWNERSHIP が必要です。ポリシーの表示または削除にも同じポリシー権限が必要です。
+- マスキングポリシーを関連付けられるのは通常のテーブルのみです。ビュー、ストリーム、一時テーブルでは `SET MASKING POLICY` を使用できません。
+- 1 つのカラムに関連付けられるセキュリティポリシー（マスキングまたは行レベル）は最大 1 つです。新しいポリシーを関連付ける前に、既存のポリシーを削除してください。
+- マスキングポリシーの関連付け、関連解除、表示、削除には、グローバルな `APPLY MASKING POLICY` 権限、または対象のマスキングポリシーに対する APPLY/OWNERSHIP が必要です。
+- 行アクセスポリシーの追加または削除には、対象テーブルに対する `ALTER` 権限に加え、グローバルな `APPLY ROW ACCESS POLICY` 権限、またはそのポリシーに対する APPLY/OWNERSHIP が必要です。ポリシーの表示または削除にも同じポリシー権限が必要です。
 
 > **Note:**
 >
@@ -80,7 +80,7 @@ DROP [ COLUMN ] <column_name>
 
 #### 例 1: カラムの追加、名前変更、削除 {#example-1-adding-renaming-and-removing-a-column}
 
-この例では、`username`、`email`、`age` の各カラムを持つ `default.users` というテーブルを作成します。さらに、さまざまな制約付きで `id` と `middle_name` のカラムを追加します。また、`age` カラムの名前を変更し、その後削除する方法も示します。
+この例では、'username'、'email'、'age' の各カラムを持つ "default.users" というテーブルを作成します。さらに、さまざまな制約付きで 'id' と 'middle_name' のカラムを追加します。また、"age" カラムの名前を変更し、その後削除する方法も示します。
 
 ```sql
 -- Create a table
@@ -161,7 +161,7 @@ middle_name   |VARCHAR|YES |NULL                 |     |
 email         |VARCHAR|YES |NULL                 |     |
 ```
 
-#### 例 2: カラムの変更と Masking Policy {#example-2-modify-columns-and-masking-policies}
+#### 例 2: カラムの変更とマスキングポリシー {#example-2-modify-columns-and-masking-policies}
 
 ```sql
 -- Change column types and defaults
@@ -178,9 +178,9 @@ ALTER TABLE users
 MODIFY COLUMN email UNSET MASKING POLICY;
 ```
 
-## Row Access Policy 操作 {#row-access-policy-operations}
+## 行アクセスポリシー操作 {#row-access-policy-operations}
 
-テーブルに row access policy を関連付ける、または関連解除します。row access policy は、クエリ実行時および DML の対象行マッチング時に行をフィルタリングします。
+テーブルに行アクセスポリシーを関連付ける、または関連解除します。行アクセスポリシーは、クエリ実行時および DML の対象行マッチング時に行をフィルタリングします。
 
 ### 構文 {#syntax-1}
 
@@ -200,16 +200,16 @@ DROP ALL ROW ACCESS POLICIES
 
 > **Note:**
 >
-> - Row access policy は現在、実験的機能です。`SET enable_experimental_row_access_policy = 1` または `SET GLOBAL enable_experimental_row_access_policy = 1` で有効にします。
-> - 1 つのテーブルに同時に設定できる row access policy は最大 1 つです。
+> - 行アクセスポリシーは現在、実験的機能です。`SET enable_experimental_row_access_policy = 1` または `SET GLOBAL enable_experimental_row_access_policy = 1` で有効にします。
+> - 1 つのテーブルに同時に設定できる行アクセスポリシーは最大 1 つです。
 > - `ON (...)` 内のカラムは、位置に基づいてポリシー引数にバインドされます。カラム数とそのデータ型は、ポリシーシグネチャと一致している必要があります。
-> - Row access policy をアタッチできるのは通常のテーブルのみです。ビュー、stream、一時テーブルでは `ADD ROW ACCESS POLICY` は使用できません。
-> - 1 つのカラムが属せる security policy は最大 1 つで、masking または row access のいずれかです。
-> - Row access policy の追加または削除には、対象テーブルに対する `ALTER` 権限に加えて、グローバルな `APPLY ROW ACCESS POLICY` 権限、またはそのポリシーに対する APPLY/OWNERSHIP 権限が必要です。ポリシーの記述または削除にも同じポリシー権限が必要です。
+> - 行アクセスポリシーを関連付けられるのは通常のテーブルのみです。ビュー、ストリーム、一時テーブルでは `ADD ROW ACCESS POLICY` は使用できません。
+> - 1 つのカラムが属せるセキュリティポリシーは最大 1 つで、マスキングまたは行アクセスのいずれかです。
+> - 行アクセスポリシーの追加または削除には、対象テーブルに対する `ALTER` 権限に加えて、グローバルな `APPLY ROW ACCESS POLICY` 権限、またはそのポリシーに対する APPLY/OWNERSHIP 権限が必要です。ポリシーの表示または削除にも同じポリシー権限が必要です。
 
 > **Warning:**
 >
-> 保護されたカラムを変更または削除する前に、row access policy をデタッチする必要があります。そうしないと、そのカラムがまだ security policy から参照されているため、ステートメントは失敗します。
+> 保護されたカラムを変更または削除する前に、行アクセスポリシーの関連付けを解除する必要があります。そうしないと、そのカラムがまだセキュリティポリシーから参照されているため、ステートメントは失敗します。
 
 ### 例 {#example}
 
@@ -347,9 +347,9 @@ ALTER TABLE [ <database_name>. ]<table_name> CONNECTION = ( connection_name = '<
 
 **セキュリティのベストプラクティス**
 
-外部テーブルを扱う場合、AWS IAM ロールは access key と比べて大きなセキュリティ上の利点があります。
+外部テーブルを扱う場合、AWS IAM ロールはアクセスキーと比べて大きなセキュリティ上の利点があります。
 
-- 認証情報を保存しない: 設定内に access key を保存する必要がなくなります
+- 認証情報を保存しない: 設定内にアクセスキーを保存する必要がなくなります
 - 自動ローテーション: 認証情報のローテーションを自動的に処理します
 - きめ細かな制御: より正確なアクセス制御が可能です
 
@@ -437,7 +437,7 @@ ALTER TABLE [ IF EXISTS ] <source_table_name> SWAP WITH <target_table_name>
 ### 使用上の注意 {#usage-notes}
 
 - Fuse Engine テーブルでのみ使用できます。外部テーブル、システムテーブル、およびその他の非 Fuse テーブルはサポートされません。
-- 一時テーブルは、永続テーブルまたは transient テーブルと入れ替えることはできません。
+- 一時テーブルは、永続テーブルまたはトランジェントテーブルと入れ替えることはできません。
 - 入れ替え操作を実行するには、現在のロールが両方のテーブルの所有者である必要があります。
 - 両方のテーブルは同じデータベース内に存在する必要があります。データベースをまたぐ入れ替えはサポートされません。
 - 入れ替え操作はアトミックです。両方のテーブルが正常に入れ替えられるか、どちらも変更されないかのいずれかです。
