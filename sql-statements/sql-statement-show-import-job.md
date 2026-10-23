@@ -29,9 +29,9 @@ The output fields of the `SHOW IMPORT` statement are described as follows:
 | Job_ID           | The ID of the task                  |
 | Data_Source      | Information about the data source                  |
 | Target_Table     | The name of the target table                     |
-| Phase            | The current phase of the job, including `importing`, `validating`, and `add-index` |
+| Phase            | The current phase of the job, including `preparing`, `global-sorting`, `importing`, `resolving-conflicts`, and `validating` |
 | Status           | The current status of the job, including `pending` (means created but not started yet), `running`, `canceled`, `failed`, and `finished` |
-| Source_File_Size | The size of the source file  |
+| Source_File_Size | The total size of the source files. If the source files have not been listed yet, this column is `N/A`, which can happen while an import job on a TiDB X instance is waiting for or running the [asynchronous preparation](/sql-statements/sql-statement-import-into.md#asynchronous-preparation) |
 | Imported_Rows | The number of data rows that have been read and written to the target table  |
 | Result_Message   | If the import fails, this field returns the error message. Otherwise, it is empty.|
 | Create_Time      | The time when the task is created                 |
