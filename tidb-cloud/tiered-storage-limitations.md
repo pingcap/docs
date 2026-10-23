@@ -27,6 +27,7 @@ This document describes the current limitations and operational impact of Infreq
 | Cache level provisioning | A cache level change takes effect as a hot update, but the underlying resources are provisioned automatically by TiDB Cloud, which might take some time |
 | Transition progress visibility | A row in `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` is visible only if you have the `ALL` privilege on the table. Rows for tables that you cannot access are skipped without an error |
 | Transition progress freshness | Conversion progress is collected every 10 seconds, so the values in `INFORMATION_SCHEMA.TIKV_STORAGE_CLASS_TRANSITIONS` are not real-time |
+| Slow query access from SQL | `ADMIN SHOW SLOW` and the `SLOW_QUERY` and `CLUSTER_SLOW_QUERY` tables in `INFORMATION_SCHEMA` are not supported on {{{ .premium }}} and {{{ .byoc }}} because of the TiDB X architecture. The IA fields of a slow query are available only in the slow query details in the Cloud Console. For details, see [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md) and [Limited SQL Features on TiDB X Instances](/tidb-cloud/limited-sql-features-tidb-x.md) |
 
 ## Access throttling constraints
 
