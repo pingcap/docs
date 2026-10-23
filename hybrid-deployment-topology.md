@@ -69,7 +69,7 @@ This section introduces the key parameters when you deploy multiple instances on
 
 - The label scheduling configuration
 
-    Since multiple instances of TiKV are deployed on a single machine, if the physical machines go down, the Raft Group might lose two of the default three replicas, which causes the cluster unavailability. To address this issue, you can use the label to enable the smart scheduling of PD, which ensures that the Raft Group has more than two replicas in multiple TiKV instances on the same machine.
+    Since multiple instances of TiKV are deployed on a single machine, if a physical machine goes down, the Raft Group might lose two of the default three replicas, which causes cluster unavailability. To address this issue, you can configure labels to enable PD to schedule replicas across different physical machines, which helps prevent multiple replicas of the same Raft Group from being placed on the same machine.
 
     - The TiKV configuration
 
@@ -96,7 +96,7 @@ This section introduces the key parameters when you deploy multiple instances on
     
     - Before using NUMA to bind cores, make sure that the numactl tool is installed, and confirm the information of CPUs in the physical machines. After that, configure the parameters.
 
-    - The `numa_node` parameter corresponds to the `numactl --membind` configuration.
+    - The `numa_node` parameter corresponds to the CPU and memory binding policies configured by `numactl`.
 
 > **Note:**
 >
