@@ -82,7 +82,7 @@ DESC STAGE my_internal_stage;
 
 ### 例 2: Connection を使用して外部 stage を作成する {#example-2-create-external-stage-with-connection}
 
-この例では、接続を使用して Amazon S3 上に *my_s3_stage* という名前の外部 stage を作成します。
+この例では、Connection を使用して Amazon S3 上に *my_s3_stage* という名前の外部 stage を作成します。
 
 ```sql
 -- First create a connection

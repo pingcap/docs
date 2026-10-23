@@ -20,7 +20,7 @@ LOCATION = 's3://<path_to_table>'
 CONNECTION_NAME = '<connection_name>'
 ```
 
-Delta Lake エンジンを使用してテーブルを作成する前に、S3 ストレージへの接続を確立するために使用する接続オブジェクトを作成する必要があります。{{{ .lake }}} で接続を作成するには、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) コマンドを使用します。
+Delta Lake エンジンを使用してテーブルを作成する前に、S3 ストレージへの接続を確立するために使用する Connection オブジェクトを作成する必要があります。{{{ .lake }}} で Connection を作成するには、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) コマンドを使用します。
 
 ## 例 {#examples}
 

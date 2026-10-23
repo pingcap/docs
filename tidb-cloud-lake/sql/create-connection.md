@@ -9,7 +9,7 @@ summary: 外部ストレージへの接続を作成します。
 
 > **Warning:**
 >
-> 重要: オブジェクト（stage、テーブルなど）が接続を使用する場合、その接続のパラメータはコピーされ、永続的に保存されます。後で CREATE OR REPLACE CONNECTION を使用して接続を変更しても、既存のオブジェクトは引き続き古いパラメータを使用します。新しい接続パラメータでオブジェクトを更新するには、それらのオブジェクトを削除して再作成する必要があります。
+> 重要: オブジェクト（stage、テーブルなど）が Connection を使用する場合、その Connection のパラメータはコピーされ、永続的に保存されます。後で CREATE OR REPLACE CONNECTION を使用して Connection を変更しても、既存のオブジェクトは引き続き古いパラメータを使用します。新しい接続パラメータでオブジェクトを更新するには、それらのオブジェクトを削除して再作成する必要があります。
 
 ## 構文 {#syntax}
 
@@ -157,7 +157,7 @@ CREATE CONNECTION <connection_name>
 
 ### Access Keys を使用する {#using-access-keys}
 
-この例では、'toronto' という名前の Amazon S3 への接続を作成し、その 'toronto' 接続を使用して、's3://lake-toronto' URL にリンクされた 'my_s3_stage' という名前の外部 stage を作成します。接続に関するより実践的な例については、[使用例](/tidb-cloud-lake/sql/connection.md#usage-examples) を参照してください。
+この例では、'toronto' という名前の Amazon S3 への Connection を作成し、その 'toronto' Connection を使用して、's3://lake-toronto' URL にリンクされた 'my_s3_stage' という名前の外部 stage を作成します。Connection に関するより実践的な例については、[使用例](/tidb-cloud-lake/sql/connection.md#usage-examples) を参照してください。
 
 ```sql
 CREATE CONNECTION toronto
