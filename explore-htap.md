@@ -85,7 +85,7 @@ With TiDB, you can simply enter SQL statements for query or write requests. For 
 >
 > The MPP mode of TiFlash is enabled by default. When an SQL statement is executed, TiDB automatically determines whether to run in the MPP mode through the optimizer.
 >
-> - To disable the MPP mode of TiFlash, set the value of the [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) system variable to `OFF`.
+> - To disable the MPP mode of TiFlash, set the value of the [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) system variable to `OFF`. For TiDB v7.3.0 or later, if you still want TiFlash to execute queries without MPP, also set [tidb_allow_tiflash_cop](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730) to `ON` so TiDB can use the Cop or BatchCop protocol. Otherwise, queries might return errors.
 > - To forcibly enable MPP mode of TiFlash for query execution, set the values of [tidb_allow_mpp](/system-variables.md#tidb_allow_mpp-new-in-v50) and [tidb_enforce_mpp](/system-variables.md#tidb_enforce_mpp-new-in-v51) to `ON`.
 > - To check whether TiDB chooses the MPP mode to execute a specific query, see [Explain Statements in the MPP Mode](/explain-mpp.md#explain-statements-in-the-mpp-mode). If the output of `EXPLAIN` statement includes the `ExchangeSender` and `ExchangeReceiver` operators, the MPP mode is in use.
 
