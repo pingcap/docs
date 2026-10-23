@@ -28,7 +28,7 @@ ICEBERG_SNAPSHOT('<database_name>', '<table_name>');
     - `total-records`: スナップショット内のレコード総数。
     - `total-files-size`: すべてのデータファイルの合計サイズ（バイト単位）。
     - `total-data-files`: スナップショット内のデータファイル総数。
-    - `total-delete-files`: スナップショット内の delete ファイル総数。
+    - `total-delete-files`: スナップショット内の削除ファイル総数。
 
 ## 例 {#examples}
 

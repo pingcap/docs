@@ -1,11 +1,11 @@
 ---
 title: REFRESH VECTOR INDEX
-summary: インデックス作成前に挿入された既存データに対して Vector index を構築します。
+summary: インデックス作成前に挿入された既存データに対してベクトルインデックスを構築します。
 ---
 
 # REFRESH VECTOR INDEX
 
-インデックス作成前に挿入された既存データに対して Vector index を構築します。
+インデックス作成前に挿入された既存データに対してベクトルインデックスを構築します。
 
 ## 構文 {#syntax}
 
@@ -15,7 +15,7 @@ REFRESH VECTOR INDEX <index_name> ON [<database>.]<table_name>
 
 ## REFRESH を使用するタイミング {#when-to-use-refresh}
 
-`REFRESH VECTOR INDEX` が**必要になるのは、特定の 1 つのシナリオのみ**です。つまり、**すでにデータが含まれている**テーブルに Vector index を作成する場合です。
+`REFRESH VECTOR INDEX` が**必要になるのは、特定の 1 つのシナリオのみ**です。つまり、**すでにデータが含まれている**テーブルにベクトルインデックスを作成する場合です。
 
 既存の行（インデックス作成前に書き込まれたデータ）は、自動的にはインデックス化されません。この既存データに対してインデックスを構築するには、`REFRESH VECTOR INDEX` を実行する必要があります。リフレッシュが完了すると、それ以降に書き込まれるすべてのデータについては自動的にインデックスが生成されます。
 

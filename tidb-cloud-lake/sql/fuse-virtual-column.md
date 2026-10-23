@@ -1,6 +1,6 @@
 ---
 title: FUSE_VIRTUAL_COLUMN
-summary: テーブルの最新または指定したスナップショットの仮想カラム情報を返します。詳細は、Virtual Column を参照してください。
+summary: テーブルの最新または指定したスナップショットの仮想カラム情報を返します。詳細は、仮想カラムを参照してください。
 ---
 
 # FUSE_VIRTUAL_COLUMN

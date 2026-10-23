@@ -1,6 +1,6 @@
 ---
 title: EXPLAIN PERF
-summary: クエリの CPU 使用状況をプロファイリングし、すべてのクラスター ノードから収集した HTML フレームグラフを返します。
+summary: クエリの CPU 使用状況をプロファイリングし、すべてのクラスターノードから収集した HTML フレームグラフを返します。
 ---
 
 # EXPLAIN PERF

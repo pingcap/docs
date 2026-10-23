@@ -1,11 +1,11 @@
 ---
 title: TO_MINUTE
-summary: 時刻を含む日付（timestamp/datetime）を、時の中の分数（0-59）を含む UInt8 数値に変換します。
+summary: 時刻を含む日付（timestamp/datetime）を、時の分（0-59）を表す UInt8 数値に変換します。
 ---
 
 # TO_MINUTE
 
-時刻を含む日付（timestamp/datetime）を、時の中の分数（0-59）を含む UInt8 数値に変換します。
+時刻を含む日付（timestamp/datetime）を、時の分（0-59）を表す UInt8 数値に変換します。
 
 ## 構文 {#syntax}
 

@@ -33,7 +33,7 @@ VALUES ('Laptop', '{"brand": "Dell", "colors": ["Black", "Silver"], "price": 120
        ('Headphones', '{"brand": "Sony", "colors": ["Black", "Blue", "Red"], "price": 150, "features": {"battery": "20h", "bluetooth": "5.0"}}');
 ```
 
-**クエリのデモ: 製品詳細からすべての features を配列として抽出する**
+**クエリのデモ: 製品詳細からすべての機能を配列として抽出する**
 
 ```sql
 SELECT

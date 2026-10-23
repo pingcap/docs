@@ -25,7 +25,7 @@ GET_LINEAGE(
 | `object_name` | 開始対象のオブジェクトです。テーブルまたはビューには `[catalog.]database.object`、stage には `stage_name`、カラムには `[catalog.]database.object.column` を使用します。catalog または database を省略した名前では、現在のセッション値が使用されます。 |
 | `object_domain` | オブジェクトタイプ: `TABLE`、`VIEW`、`STAGE`、または `COLUMN`。 |
 | `direction` | `UPSTREAM` はソース方向へ追跡し、`DOWNSTREAM` は利用先方向へ追跡します。 |
-| `distance` | 省略可能な、たどる hop 数の最大値です。`1` から `5` まで指定でき、デフォルトは `5` です。 |
+| `distance` | 省略可能な、たどるホップ数の最大値です。`1` から `5` まで指定でき、デフォルトは `5` です。 |
 
 引数は位置指定です。
 
@@ -34,19 +34,19 @@ GET_LINEAGE(
 | カラム | 型 | 説明 |
 |--------|------|-------|
 | `source_object_catalog` | Nullable(String) | ソースオブジェクトを含む catalog。stage の場合は `NULL`。 |
-| `source_object_database` | Nullable(String) | ソースオブジェクトを含む database。stage の場合は `NULL`。 |
+| `source_object_database` | Nullable(String) | ソースオブジェクトを含むデータベース。stage の場合は `NULL`。 |
 | `source_object_name` | Nullable(String) | ソースオブジェクトの名前。 |
 | `source_object_domain` | Nullable(String) | ソースオブジェクトのドメイン: `TABLE`、`VIEW`、または `STAGE`。 |
 | `source_column_name` | Nullable(String) | カラムリネージにおけるソースカラム。それ以外は `NULL`。 |
-| `source_status` | String | `ACTIVE`、またはソースカラムに masking policy がある場合は `MASKED`。 |
+| `source_status` | String | `ACTIVE`、またはソースカラムにマスキングポリシーがある場合は `MASKED`。 |
 | `target_object_catalog` | Nullable(String) | ターゲットオブジェクトを含む catalog。stage の場合は `NULL`。 |
-| `target_object_database` | Nullable(String) | ターゲットオブジェクトを含む database。stage の場合は `NULL`。 |
+| `target_object_database` | Nullable(String) | ターゲットオブジェクトを含むデータベース。stage の場合は `NULL`。 |
 | `target_object_name` | Nullable(String) | ターゲットオブジェクトの名前。 |
 | `target_object_domain` | Nullable(String) | ターゲットオブジェクトのドメイン: `TABLE`、`VIEW`、または `STAGE`。 |
 | `target_column_name` | Nullable(String) | カラムリネージにおけるターゲットカラム。それ以外は `NULL`。 |
-| `target_status` | String | `ACTIVE`、またはターゲットカラムに masking policy がある場合は `MASKED`。 |
-| `distance` | Int32 | 要求されたオブジェクトからの hop 数です。直接の関係は距離 `1` です。 |
-| `process` | Nullable(String) | 関係を作成した操作に関する JSON 形式のメタデータです。たとえば、query ID、query text、user、time、lineage kind などが含まれます。 |
+| `target_status` | String | `ACTIVE`、またはターゲットカラムにマスキングポリシーがある場合は `MASKED`。 |
+| `distance` | Int32 | 要求されたオブジェクトからのホップ数です。直接の関係は距離 `1` です。 |
+| `process` | Nullable(String) | 関係を作成した操作に関する JSON 形式のメタデータです。たとえば、クエリ ID、クエリテキスト、ユーザー、時刻、リネージの種類などが含まれます。 |
 
 ## 例 {#examples}
 
@@ -54,7 +54,7 @@ GET_LINEAGE(
 
 ### 上流テーブルを探す {#find-upstream-tables}
 
-このクエリは、`agg_customer_sales` に対して最大 2 hop 上流までを返します。
+このクエリは、`agg_customer_sales` に対して最大 2 ホップ上流までを返します。
 
 ```sql
 SELECT

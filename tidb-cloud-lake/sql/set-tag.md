@@ -58,7 +58,7 @@ ALTER DATABASE default SET TAG env = 'prod';
 ALTER TABLE default.my_table SET TAG env = 'staging', owner = 'team_a';
 ```
 
-### stage と connection にタグを付ける {#tag-a-stage-and-connection}
+### stage と Connection にタグを付ける {#tag-a-stage-and-connection}
 
 ```sql
 ALTER STAGE data_stage SET TAG env = 'dev', owner = 'data_team';

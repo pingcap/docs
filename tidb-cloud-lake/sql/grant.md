@@ -22,7 +22,7 @@ summary: 特定のデータベースオブジェクトに対する権限、ロ�
 
 ### 権限の付与 {#granting-privileges}
 
-権限とは何か、およびその仕組みについては、[Privileges](/tidb-cloud-lake/guides/privileges.md) を参照してください。
+権限とは何か、およびその仕組みについては、[権限](/tidb-cloud-lake/guides/privileges.md) を参照してください。
 
 > **Note:**
 >
@@ -51,7 +51,7 @@ GRANT {
 TO ROLE <role_name>
 ```
 
-以下のとおりです。
+各要素の定義は次のとおりです。
 
 ```sql
 schemaObjectPrivileges ::=
@@ -118,7 +118,7 @@ GRANT OWNERSHIP ON ROW ACCESS POLICY <policy_name> TO ROLE '<role_name>'
 
 - `CREATE ROW ACCESS POLICY` は、ロールが新しい行アクセスポリシーを作成できるようにします。
 - `APPLY ROW ACCESS POLICY` は、任意の行アクセスポリシーをテーブルにアタッチまたはデタッチする権限を付与し、DESCRIBE/DROP コマンドもあわせて許可します。
-- `GRANT APPLY ON ROW ACCESS POLICY ...` は、特定の行アクセスポリシーへのアクセスに制限します。
+- `GRANT APPLY ON ROW ACCESS POLICY ...` は、アクセスを特定の行アクセスポリシーに限定します。
 - OWNERSHIP は行アクセスポリシーに対する完全な制御を提供します。作成者ロールは OWNERSHIP を自動的に受け取り、ポリシーが削除されるとそれを失います。
 
 ### ロールの付与 {#granting-role}
@@ -139,7 +139,7 @@ GRANT ROLE <role_name> TO ROLE <role_name>
 
 ### 所有権の付与 {#granting-ownership}
 
-所有権とは何か、およびその仕組みについては、[Ownership](/tidb-cloud-lake/guides/ownership.md) を参照してください。
+所有権とは何か、およびその仕組みについては、[所有権](/tidb-cloud-lake/guides/ownership.md) を参照してください。
 
 ```sql
 -- Grant ownership of a specific table within a database to a role

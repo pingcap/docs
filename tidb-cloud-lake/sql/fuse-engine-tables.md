@@ -114,7 +114,7 @@ CREATE TABLE <table_name> (
 ### `change_tracking` {#change_tracking}
 
 - **構文:** `change_tracking = True / False`
-- **説明:** Fuse Engine でこのオプションを `True` に設定すると、テーブルの変更を追跡できます。テーブルに対して stream を作成すると、自動的に `change_tracking` が `True` に設定され、変更追跡メタデータとして追加の隠しカラムがテーブルに導入されます。詳細については、[stream の管理](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md) を参照してください。
+- **説明:** Fuse Engine でこのオプションを `True` に設定すると、テーブルの変更を追跡できます。テーブルに対してストリームを作成すると、自動的に `change_tracking` が `True` に設定され、変更追跡メタデータとして追加の隠しカラムがテーブルに導入されます。詳細については、[ストリームの仕組み](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md) を参照してください。
 
 ### `data_retention_period_in_hours` {#data_retention_period_in_hours}
 

@@ -19,7 +19,7 @@ MAP_TRANSFORM_KEYS(<json_object>, (<key>, <value>) -> <key_transformation>)
 
 ## 例 {#examples}
 
-この例では、各キーに `"_v1"` を追加して、キーが変更された新しい JSON オブジェクトを作成します。
+この例では、各キーに "_v1" を追加して、キーが変更された新しい JSON オブジェクトを作成します。
 
 ```sql
 SELECT MAP_TRANSFORM_KEYS('{"name":"John", "role":"admin"}'::VARIANT, (k, v) -> CONCAT(k, '_v1')) AS versioned_metadata;

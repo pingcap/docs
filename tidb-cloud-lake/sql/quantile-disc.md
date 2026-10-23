@@ -31,7 +31,7 @@ level の数に応じて、InputType または InputType の配列を返しま�
 
 ## 例 {#example}
 
-**Create a Table and Insert Sample Data**
+**テーブルを作成してサンプルデータを挿入する**
 
 ```sql
 CREATE TABLE salary_data (
@@ -48,7 +48,7 @@ VALUES (1, 1, 50000),
        (5, 5, 70000);
 ```
 
-**Query Demo: Calculate 25th and 75th Percentile of Salaries**
+**クエリのデモ: 給与の 25 パーセンタイルと 75 パーセンタイルを計算する**
 
 ```sql
 SELECT QUANTILE_DISC(0.25, 0.75)(salary) AS salary_quantiles

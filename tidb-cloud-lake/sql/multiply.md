@@ -66,7 +66,7 @@ FROM numbers(5);
 +--------+------------+
 ```
 
-## 関連項目 {#see-also}
+## 関連情報 {#see-also}
 
 - [PLUS](/tidb-cloud-lake/sql/plus.md) / [ADD](/tidb-cloud-lake/sql/add.md)
 - [MINUS](/tidb-cloud-lake/sql/minus.md) / [SUBTRACT](/tidb-cloud-lake/sql/subtract.md)

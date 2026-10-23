@@ -1,11 +1,11 @@
 ---
 title: SHOW STAGES
-summary: 作成された stage の一覧を返します。出力される一覧には user stage は含まれません。
+summary: 作成された stage の一覧を返します。出力される一覧にはユーザー stage は含まれません。
 ---
 
 # SHOW STAGES
 
-作成された stage の一覧を返します。出力される一覧には user stage は含まれません。
+作成された stage の一覧を返します。出力される一覧にはユーザー stage は含まれません。
 
 ## 構文 {#syntax}
 

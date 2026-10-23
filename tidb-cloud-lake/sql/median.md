@@ -29,7 +29,7 @@ MEDIAN(<expr>)
 
 ## 例 {#example}
 
-**Create a Table and Insert Sample Data**
+**テーブルを作成してサンプルデータを挿入する**
 
 ```sql
 CREATE TABLE exam_scores (
@@ -46,7 +46,7 @@ VALUES (1, 1, 80),
        (5, 5, 85);
 ```
 
-**Query Demo: Calculate Median Exam Score**
+**クエリのデモ: 試験スコアの中央値を計算する**
 
 ```sql
 SELECT MEDIAN(score) AS median_score

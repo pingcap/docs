@@ -1,6 +1,6 @@
 ---
 title: Information_Schema テーブル
-summary: このページでは、TiDB Cloud Lake の Information_Schema Tables について説明します。
+summary: このページでは、TiDB Cloud Lake の Information_Schema テーブルについて説明します。
 ---
 
 # Information_Schema テーブル

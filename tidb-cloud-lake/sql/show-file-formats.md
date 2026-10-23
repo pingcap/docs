@@ -1,11 +1,11 @@
 ---
 title: SHOW FILE FORMATS
-summary: 作成済みの file format の一覧を返します。
+summary: 作成済みのファイル形式の一覧を返します。
 ---
 
 # SHOW FILE FORMATS
 
-作成済みの file format の一覧を返します。
+作成済みのファイル形式の一覧を返します。
 
 ## 構文 {#syntax}
 

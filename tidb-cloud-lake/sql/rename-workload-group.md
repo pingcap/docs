@@ -1,11 +1,11 @@
 ---
 title: RENAME WORKLOAD GROUP
-summary: 既存の workload group の名前を新しい名前に変更します。
+summary: 既存のワークロードグループの名前を新しい名前に変更します。
 ---
 
 # RENAME WORKLOAD GROUP
 
-既存の workload group の名前を新しい名前に変更します。
+既存のワークロードグループの名前を新しい名前に変更します。
 
 ## 構文 {#syntax}
 

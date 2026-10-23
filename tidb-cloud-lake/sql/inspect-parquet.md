@@ -12,10 +12,10 @@ stage 上の Parquet ファイルから包括的なメタデータのテーブ�
 | created_by                       | Parquet ファイルの作成元となるエンティティまたはソース |
 | num_columns                      | Parquet ファイル内のカラム数 |
 | num_rows                         | Parquet ファイル内の行またはレコードの総数 |
-| num_row_groups                   | Parquet ファイル内の row group の数 |
+| num_row_groups                   | Parquet ファイル内の行グループの数 |
 | serialized_size                  | ディスク上の Parquet ファイルのサイズ（圧縮後） |
-| max_row_groups_size_compressed   | 最大の row group のサイズ（圧縮後） |
-| max_row_groups_size_uncompressed | 最大の row group のサイズ（非圧縮） |
+| max_row_groups_size_compressed   | 最大の行グループのサイズ（圧縮後） |
+| max_row_groups_size_uncompressed | 最大の行グループのサイズ（非圧縮） |
 
 ## 構文 {#syntax}
 

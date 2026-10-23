@@ -19,7 +19,7 @@ stage 内のファイルを一覧表示します。
 LIST { userStage | internalStage | externalStage } [ PATTERN = '<regex_pattern>' ]
 ```
 
-`PATTERN` は、正規表現を使用して stage 済みファイルをフィルタリングします。これは `@<stage_name>[/<path>]` の後のファイルパス部分にマッチします。詳細は [PATTERN を使用した stage ファイルのフィルタリング](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern) を参照してください。
+`PATTERN` は、正規表現を使用して stage 内のファイルをフィルタリングします。これは `@<stage_name>[/<path>]` の後のファイルパス部分にマッチします。詳細は [PATTERN を使用した stage ファイルのフィルタリング](/tidb-cloud-lake/guides/stage-overview.md#filtering-staged-files-with-pattern) を参照してください。
 
 ## 例 {#examples}
 

@@ -68,6 +68,6 @@ summary: このページでは、{{{ .lake }}} の数値関数の包括的な概
 | [ABS](/tidb-cloud-lake/sql/abs.md) | x の絶対値を返します | `ABS(-5)` → `5` |
 | [SIGN](/tidb-cloud-lake/sql/sign.md) | x の符号を返します | `SIGN(-5)` → `-1` |
 | [FACTORIAL](/tidb-cloud-lake/sql/factorial.md) | x の階乗を返します | `FACTORIAL(5)` → `120` |
-| [RAND](/tidb-cloud-lake/sql/rand.md) | 0 から 1 の間の乱数を返します | `RAND()` → `0.123...` (random) |
-| [RANDN](/tidb-cloud-lake/sql/rand-n.md) | 標準正規分布に従う乱数を返します | `RANDN()` → `-0.123...` (random) |
+| [RAND](/tidb-cloud-lake/sql/rand.md) | 0 から 1 の間の乱数を返します | `RAND()` → `0.123...` (ランダム) |
+| [RANDN](/tidb-cloud-lake/sql/rand-n.md) | 標準正規分布に従う乱数を返します | `RANDN()` → `-0.123...` (ランダム) |
 | [CRC32](/tidb-cloud-lake/sql/crc.md) | 文字列の CRC32 チェックサムを返します | `CRC32('datalake')` → `2878859588` |

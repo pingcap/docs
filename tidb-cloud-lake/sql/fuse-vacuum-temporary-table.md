@@ -1,13 +1,13 @@
 ---
 title: FUSE_VACUUM_TEMPORARY_TABLE
-summary: 一時テーブルは通常、セッション終了時に自動的にクリーンアップされます（詳細は CREATE TEMP TABLE を参照）。ただし、query node のクラッシュや異常なセッション終了などのイベントにより、この処理が失敗し、孤立した一時ファイルが残ることがあります。
+summary: 一時テーブルは通常、セッション終了時に自動的にクリーンアップされます（詳細は CREATE TEMP TABLE を参照）。ただし、クエリノードのクラッシュや異常なセッション終了などのイベントにより、この処理が失敗し、孤立した一時ファイルが残ることがあります。
 ---
 
 # FUSE_VACUUM_TEMPORARY_TABLE
 
 ## 概要 {#overview}
 
-一時テーブルは通常、セッション終了時に自動的にクリーンアップされます（詳細は [CREATE TEMP TABLE](/tidb-cloud-lake/sql/create-temp-table.md) を参照）。ただし、query node のクラッシュや異常なセッション終了などのイベントにより、この処理が失敗し、孤立した一時ファイルが残ることがあります。
+一時テーブルは通常、セッション終了時に自動的にクリーンアップされます（詳細は [CREATE TEMP TABLE](/tidb-cloud-lake/sql/create-temp-table.md) を参照）。ただし、クエリノードのクラッシュや異常なセッション終了などのイベントにより、この処理が失敗し、孤立した一時ファイルが残ることがあります。
 
 `FUSE_VACUUM_TEMPORARY_TABLE()` は、これらの残存ファイルを手動で削除してストレージを回収します。
 

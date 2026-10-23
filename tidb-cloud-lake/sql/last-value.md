@@ -30,7 +30,7 @@ OVER (
 - `ORDER BY`: 必須。ウィンドウ内の並び順を決定します。
 - `window_frame`: 任意。ウィンドウフレームを定義します。デフォルトは `RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` です。
 
-**注:**
+**注意:**
 
 - 並び替えられたウィンドウフレーム内の最後の値を返します。
 - `IGNORE NULLS` を使用して null 値をスキップでき、`RESPECT NULLS` を使用するとデフォルトの動作を維持します。
@@ -118,7 +118,7 @@ Bob      |     1006 | 2024-05-03 10:00:00  |     95 |                   95
 Carol    |     1007 | 2024-05-04 09:45:00  |     80 |                   80
 ```
 
-**例 3. 最後の sales rep を前方に走査するときに null をスキップする**
+**例 3. 最後の営業担当者を前方に走査するときに null をスキップする**
 
 ```sql
 SELECT customer,
