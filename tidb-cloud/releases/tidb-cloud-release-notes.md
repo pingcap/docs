@@ -39,6 +39,8 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
         These alerts provide clear guidance on available scaling capacity and recommended actions.
 
+        For more information, see [TiDB Cloud Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting/?plan=byoc).
+
 ## October 15, 2026
 
 **General changes**
