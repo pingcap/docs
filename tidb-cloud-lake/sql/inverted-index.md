@@ -17,7 +17,7 @@ summary: このページでは、{{{ .lake }}} における転置インデック
 
 ## 関連トピック {#related-topics}
 
-- [Full-Text Index](/tidb-cloud-lake/guides/full-text-index.md)
+- [フルテキストインデックス](/tidb-cloud-lake/guides/full-text-index.md)
 
 > **Note:**
 >
