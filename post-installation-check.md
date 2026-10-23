@@ -56,6 +56,12 @@ Log in to the database by running the following command:
 mysql -u root -h ${tidb_server_host_IP_address} -P 4000
 ```
 
+If you started the cluster using `tiup cluster start tidb-test --init`, append `-p` and enter the generated password:
+
+```shell
+mysql -u root -p -h ${tidb_server_host_IP_address} -P 4000
+```
+
 `${tidb_server_host_IP_address}` is one of the IP addresses set for `tidb_servers` when you [initialize the cluster topology file](/production-deployment-using-tiup.md#step-3-initialize-the-cluster-topology-file), such as `10.0.1.7`.
 
 The following information indicates successful login:
