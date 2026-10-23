@@ -169,7 +169,7 @@ TiDB Cloud provides different alert rules for each [TiDB Cloud plan](/tidb-cloud
 
 These alerts indicate when a resource pool has limited capacity for further scaling or when a scaling operation is blocked by its **Pool vCPU Limit**.
 
-The allocation percentage is the total provisioned TiDB workload vCPU across all instances in the resource pool divided by the **Pool vCPU Limit**. Admin and Observability node vCPU are excluded. These alerts apply only when a **Pool vCPU Limit** is configured.
+The allocation percentage is the total provisioned vCPU for all database-related resources across all instances in the resource pool divided by the **Pool vCPU Limit**. Admin and Observability node vCPU are excluded. These alerts apply only when a **Pool vCPU Limit** is configured.
 
 | Alert | Condition | Recommended action |
 |:---|:---|:---|
