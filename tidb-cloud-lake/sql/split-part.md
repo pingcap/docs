@@ -50,7 +50,7 @@ split_part('datalake cloud', ',', 1)|
 ------------------------------------+
 Datalake Cloud                      |
 
--- Use '    ' (tab) as the delimiter
+-- Use '   ' (three spaces) as the delimiter
 -- SPLIT_PART returns individual fields.
 SELECT SPLIT_PART('2023-10-19 15:30:45   INFO   Log message goes here', '   ', 3);
 
