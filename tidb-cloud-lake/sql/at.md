@@ -55,7 +55,7 @@ FROM   FUSE_SNAPSHOT('<database_name>', '<table_name>');
     INSERT INTO t VALUES(2);
     ```
 
-2. テーブル `t` に対して `s` という名前のストリームを作成し、値 3 の行をさらに 1 行テーブルに追加します。
+2. テーブル `t` に対して `s` という名前のストリームを作成し、テーブルに値 3 の行をさらに 1 行追加します。
 
     ```sql
     CREATE STREAM s ON TABLE t;
