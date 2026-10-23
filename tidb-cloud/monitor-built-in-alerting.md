@@ -167,19 +167,19 @@ TiDB Cloud provides different alert rules for each [TiDB Cloud plan](/tidb-cloud
 
 ### Resource Pool vCPU limit alerts for {{{ .byoc }}}
 
-These alerts indicate when a resource pool has limited capacity for further scaling or when a scaling operation is blocked by its Pool vCPU Limit.
+These alerts indicate when a resource pool has limited capacity for further scaling or when a scaling operation is blocked by its **Pool vCPU Limit**.
 
-The allocation percentage is the total provisioned TiDB workload vCPU across all instances in the resource pool divided by the Pool vCPU Limit. Admin and Observability node vCPU are excluded. These alerts apply only when a Pool vCPU Limit is configured.
+The allocation percentage is the total provisioned TiDB workload vCPU across all instances in the resource pool divided by the **Pool vCPU Limit**. Admin and Observability node vCPU are excluded. These alerts apply only when a **Pool vCPU Limit** is configured.
 
 | Alert | Condition | Recommended action |
 |:---|:---|:---|
-| Resource Pool vCPU allocation is high | Allocation remains at or above the configured threshold for the configured duration. The default is 80% for 10 minutes. | Review recent workload changes and capacity usage across instances in the resource pool. Increase the Pool vCPU Limit if additional scaling capacity is required. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
-| Resource Pool vCPU allocation is approaching the limit | Allocation remains at or above the configured threshold for the configured duration. The default is 95% for 5 minutes. | Increase the Pool vCPU Limit. Review capacity usage across instances in the resource pool and investigate recent traffic spikes, import jobs, or abnormal workload changes. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
-| Resource Pool scaling was blocked by the vCPU limit | A scaling operation is rejected because the requested capacity would exceed the Pool vCPU Limit. | Increase the Pool vCPU Limit or reduce unnecessary provisioned capacity. Review workload and capacity usage across instances in the resource pool. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| Resource Pool vCPU allocation is high | Allocation remains at or above the configured threshold for the configured duration. The default is 80% for 10 minutes. | Review recent workload changes and capacity usage across instances in the resource pool. Increase the **Pool vCPU Limit** if additional scaling capacity is required. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| Resource Pool vCPU allocation is approaching the limit | Allocation remains at or above the configured threshold for the configured duration. The default is 95% for 5 minutes. | Increase the **Pool vCPU Limit**. Review capacity usage across instances in the resource pool and investigate recent traffic spikes, import jobs, or abnormal workload changes. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
+| Resource Pool scaling was blocked by the vCPU limit | A scaling operation is rejected because the requested capacity would exceed the **Pool vCPU Limit**. | Increase the **Pool vCPU Limit** or reduce unnecessary provisioned capacity. Review workload and capacity usage across instances in the resource pool. If you cannot resolve the issue, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md). |
 
 The two allocation alerts are enabled by default. You can change their thresholds and durations, or disable them, on each instance's **Edit Rules** page. The threshold for **Resource Pool vCPU allocation is high** must be lower than that for **Resource Pool vCPU allocation is approaching the limit**. Settings apply per instance, while allocation is measured across the shared resource pool.
 
-**Resource Pool scaling was blocked by the vCPU limit** cannot be disabled. It indicates that a scaling request in the shared resource pool was rejected because it would exceed the Pool vCPU Limit. This alert can appear on an instance's **Alerts** page even when another instance in the same resource pool requested the blocked scaling operation.
+**Resource Pool scaling was blocked by the vCPU limit** cannot be disabled. It indicates that a scaling request in the shared resource pool was rejected because it would exceed the **Pool vCPU Limit**. This alert can appear on an instance's **Alerts** page even when another instance in the same resource pool requested the blocked scaling operation.
 
 ### Changefeed alerts for {{{ .byoc }}}
 
