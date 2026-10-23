@@ -23,7 +23,7 @@ This document describes how to create a changefeed to stream data from <CustomCo
 
 > **Note:**
 >
-> - The changefeed feature for {{{ .essential }}} is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
+> - For {{{ .essential }}}, the changefeed feature is only available upon request. For more information, see [Changefeed](/tidb-cloud/essential-changefeed-overview.md).
 > - For [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances, the changefeed feature is unavailable.
 > - For [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
 > - For [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) instances, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc).
@@ -329,7 +329,7 @@ For **Alibaba Cloud OSS**, follow these steps to configure the changefeed:
 
 </SimpleTab>
 
-Click **Next** to establish the connection from the <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="essential">TiDB Cloud Essential instance</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent> to your cloud storage. TiDB Cloud will automatically test and verify if the connection is successful.
+Click **Next** to establish the connection from the <CustomContent plan="dedicated">TiDB Cloud Dedicated cluster</CustomContent><CustomContent plan="essential">TiDB Cloud Essential instance</CustomContent><CustomContent plan="premium">TiDB Cloud Premium instance</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC instance</CustomContent> to your cloud storage. TiDB Cloud will automatically test whether the connection is successful.
 
 - If yes, you are directed to the next step of configuration.
 - If not, a connectivity error is displayed, and you need to handle the error. After the error is resolved, click **Next** to retry the connection.
