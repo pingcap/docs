@@ -237,6 +237,7 @@ In the TiDB Cloud console, you can create a cloud storage changefeed for your Ti
 - **Bucket Access**: select **AWS Role ARN** and enter the role ARN from [Method 1: Use a Role ARN](#method-1-use-a-role-arn), or select **AWS Access Key** and enter the Access Key ID and Secret Access Key from [Method 2: Use an Access Key](#method-2-use-an-access-key). Make sure the permissions cover the `incremental/` path.
 - **Start Replication Position**: select **Start replication from a specific TSO**, and enter the snapshot TSO recorded in [Step 2. Export full snapshot to Amazon S3](#step-2-export-full-snapshot-to-amazon-s3).
 - **Data Format**: select **Canal-JSON**, and enable both **Enable TiDB Extension** and **Enable Canal Content Compatibility**. These settings produce data in a format that is compatible with the TiDB Cloud Lake integration.
+- **Changefeed Specification**: select a capacity that meets your replication throughput requirements.
 
 ## Step 4. Configure TiDB Cloud Lake
 
