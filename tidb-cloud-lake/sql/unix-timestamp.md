@@ -19,7 +19,7 @@ TO_UNIX_TIMESTAMP(<expr>)
 | ----------- | ------------------- |
 | `<expr>`    | タイムスタンプ      |
 
-timestamp データ型の詳細については、[Date & Time](/tidb-cloud-lake/sql/datetime.md) を参照してください。
+タイムスタンプデータ型の詳細については、[Date & Time](/tidb-cloud-lake/sql/datetime.md) を参照してください。
 
 ## 戻り値の型 {#return-type}
 

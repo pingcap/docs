@@ -13,7 +13,7 @@ cloud control が有効なデプロイ向けの Worker 関連 SQL コマンド�
 
 ## サポートされるステートメント {#supported-statements}
 
-| 文 | 目的 |
+| ステートメント | 目的 |
 |-----------|---------|
 | `CREATE WORKER` | オプションのキーと値のオプションリストを指定して worker を作成します |
 | `ALTER WORKER` | worker のタグまたはオプションを更新するか、worker の状態を変更します |

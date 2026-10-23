@@ -5,7 +5,7 @@ summary: このページでは、TiDB Cloud Lake の VACUUM DROP TABLE につい
 
 # VACUUM DROP TABLE
 
-`VACUUM DROP TABLE` コマンドは、削除済みテーブルのデータファイルを完全に削除することでストレージ容量を節約し、空き容量を確保しながら、その処理を効率的に管理できるようにします。特定のデータベースを対象にしたり、プレビューしたり、vacuum 対象のデータファイル数を制限したりするためのオプションパラメータも用意されています。データベース内の削除済みテーブルを一覧表示するには、[SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md) を使用します。
+VACUUM DROP TABLE コマンドは、削除済みテーブルのデータファイルを完全に削除することでストレージ容量を節約し、空き容量を確保しながら、その処理を効率的に管理できるようにします。特定のデータベースを対象にしたり、プレビューしたり、vacuum 対象のデータファイル数を制限したりするためのオプションパラメータも用意されています。データベース内の削除済みテーブルを一覧表示するには、[SHOW DROP TABLES](/tidb-cloud-lake/sql/show-drop-tables.md) を使用します。
 
 関連情報: [VACUUM TABLE](/tidb-cloud-lake/sql/vacuum-table-sql.md)
 
@@ -32,13 +32,13 @@ VACUUM DROP TABLE
 
 - `DRY RUN [SUMMARY]`: このパラメータを指定すると、データファイルは削除されません。代わりに、このパラメータを指定しなかった場合に削除されるデータファイルを示す結果が返されます。例については、[出力](#output) セクションを参照してください。
 
-- `LIMIT <file_count>`: このパラメータは、`DRY RUN` パラメータの有無にかかわらず使用できます。`DRY RUN` と併用した場合は、`DRY RUN` の結果に表示されるデータファイル数を制限します。`DRY RUN` を指定しない場合は、vacuum 対象となるデータファイル数を制限します。
+- `LIMIT <file_count>`: このパラメータは、DRY RUN パラメータの有無にかかわらず使用できます。DRY RUN と併用した場合は、`DRY RUN` の結果に表示されるデータファイル数を制限します。`DRY RUN` を指定しない場合は、vacuum 対象となるデータファイル数を制限します。
 
 ### 出力 {#output}
 
-`VACUUM DROP TABLE` コマンドは、`DRY RUN` または `DRY RUN SUMMARY` パラメータが指定された場合に結果を返します。
+VACUUM DROP TABLE コマンドは、`DRY RUN` または `DRY RUN SUMMARY` パラメータが指定された場合に結果を返します。
 
-- `DRY RUN`: 各削除済みテーブルについて、最大 1,000 件の 削除候補ファイルとそのサイズ（バイト単位）の一覧を返します。
+- `DRY RUN`: 各削除済みテーブルについて、最大 1,000 件の削除候補ファイルとそのサイズ（バイト単位）の一覧を返します。
 - `DRY RUN SUMMARY`: 各削除済みテーブルについて、削除対象ファイルの総数と合計サイズを返します。
 
 ```sql title='Example:'
@@ -80,7 +80,7 @@ VACUUM DROP TABLE DRY RUN SUMMARY;
 
 ### データ保持期間の調整 {#adjusting-data-retention-time}
 
-`VACUUM DROP TABLE` コマンドは、`DATA_RETENTION_TIME_IN_DAYS` 設定より古いデータファイルを削除します。この保持期間は必要に応じて調整でき、たとえば 2 日に設定できます。
+VACUUM DROP TABLE コマンドは、`DATA_RETENTION_TIME_IN_DAYS` 設定より古いデータファイルを削除します。この保持期間は必要に応じて調整でき、たとえば 2 日に設定できます。
 
 ```sql
 SET GLOBAL DATA_RETENTION_TIME_IN_DAYS = 2;

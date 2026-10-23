@@ -15,7 +15,7 @@ TODAY()
 
 ## 戻り値の型 {#return-type}
 
-`DATE`、`YYYY-MM-DD` 形式の日付を返します。
+`DATE`、“YYYY-MM-DD” 形式の日付を返します。
 
 ## 例 {#examples}
 

@@ -1,11 +1,11 @@
 ---
 title: ST_SIMPLIFY
-summary: 指定した許容値以内で結果の辺までの距離に収まる頂点を削除し、GEOMETRY オブジェクトを単純化したバージョンを返します。Ramer-Douglas-Peucker アルゴリズムを使用します。
+summary: 結果の辺までの距離が指定した許容値以内である頂点を削除し、GEOMETRY オブジェクトを単純化したバージョンを返します。Ramer-Douglas-Peucker アルゴリズムを使用します。
 ---
 
 # ST_SIMPLIFY
 
-指定した許容値以内で結果の辺までの距離に収まる頂点を削除し、GEOMETRY オブジェクトを単純化したバージョンを返します。Ramer-Douglas-Peucker アルゴリズムを使用します。
+結果の辺までの距離が指定した許容値以内である頂点を削除し、GEOMETRY オブジェクトを単純化したバージョンを返します。Ramer-Douglas-Peucker アルゴリズムを使用します。
 
 ## 構文 {#syntax}
 

@@ -17,11 +17,11 @@ time_slot(<expr>)
 
 | 引数 | 説明 |
 | ----------- | ----------- |
-| `<expr>`    | timestamp   |
+| `<expr>`    | タイムスタンプ |
 
 ## 戻り値の型 {#return-type}
 
-`TIMESTAMP`。`YYYY-MM-DD hh:mm:ss.ffffff` 形式で返します。
+`TIMESTAMP`。“YYYY-MM-DD hh:mm:ss.ffffff” 形式で返します。
 
 ## 例 {#examples}
 

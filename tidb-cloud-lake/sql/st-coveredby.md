@@ -7,7 +7,7 @@ summary: 最初の GEOMETRY オブジェクトのどの点も、2 番目の GEOM
 
 最初の GEOMETRY オブジェクトのどの点も、2 番目の GEOMETRY オブジェクトの外側に存在しない場合に TRUE を返します。
 
-関連項目: [ST_COVERS](/tidb-cloud-lake/sql/st-covers.md)
+関連情報: [ST_COVERS](/tidb-cloud-lake/sql/st-covers.md)
 
 ## 構文 {#syntax}
 

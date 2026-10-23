@@ -1,25 +1,25 @@
 ---
 title: ストリーム
-summary: このページでは、{{{ .lake }}} における stream 操作の全体像を、参照しやすいよう機能別に整理して説明します。
+summary: このページでは、{{{ .lake }}} におけるストリーム操作の全体像を、参照しやすいよう機能別に整理して説明します。
 ---
 
 # ストリーム
 
-このページでは、{{{ .lake }}} における stream 操作の全体像を、参照しやすいよう機能別に整理して説明します。
+このページでは、{{{ .lake }}} におけるストリーム操作の全体像を、参照しやすいよう機能別に整理して説明します。
 
-## stream の管理 {#stream-management}
-
-| コマンド | 説明 |
-|---------|-------------|
-| [CREATE STREAM](/tidb-cloud-lake/sql/create-stream.md) | テーブル内の変更を追跡するための新しい stream を作成します |
-| [DROP STREAM](/tidb-cloud-lake/sql/drop-stream.md) | stream を削除します |
-
-## stream 情報 {#stream-information}
+## ストリームの管理 {#stream-management}
 
 | コマンド | 説明 |
 |---------|-------------|
-| [DESC STREAM](/tidb-cloud-lake/sql/desc-stream.md) | stream の詳細情報を表示します |
-| [SHOW STREAMS](/tidb-cloud-lake/sql/show-streams.md) | 現在または指定したデータベース内のすべての stream を一覧表示します |
+| [CREATE STREAM](/tidb-cloud-lake/sql/create-stream.md) | テーブル内の変更を追跡するための新しいストリームを作成します |
+| [DROP STREAM](/tidb-cloud-lake/sql/drop-stream.md) | ストリームを削除します |
+
+## ストリーム情報 {#stream-information}
+
+| コマンド | 説明 |
+|---------|-------------|
+| [DESC STREAM](/tidb-cloud-lake/sql/desc-stream.md) | ストリームの詳細情報を表示します |
+| [SHOW STREAMS](/tidb-cloud-lake/sql/show-streams.md) | 現在または指定したデータベース内のすべてのストリームを一覧表示します |
 
 ## 関連トピック {#related-topics}
 
@@ -27,4 +27,4 @@ summary: このページでは、{{{ .lake }}} における stream 操作の全�
 
 > **Note:**
 >
-> {{{ .lake }}} の stream は、テーブルに対する変更を追跡および取得するために使用され、継続的なデータパイプラインとリアルタイムデータ処理を実現します。
+> {{{ .lake }}} のストリームは、テーブルに対する変更を追跡および取得するために使用され、継続的なデータパイプラインとリアルタイムデータ処理を実現します。

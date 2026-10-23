@@ -21,7 +21,7 @@ TO_START_OF_TEN_MINUTES(<expr>)
 
 ## 戻り値の型 {#return-type}
 
-`TIMESTAMP`。日付を `YYYY-MM-DD hh:mm:ss.ffffff` 形式で返します。
+`TIMESTAMP`。日付を “YYYY-MM-DD hh:mm:ss.ffffff” 形式で返します。
 
 ## 例 {#examples}
 
