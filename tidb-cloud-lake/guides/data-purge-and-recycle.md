@@ -47,7 +47,7 @@ VACUUM TEMPORARY FILES
 
 ---
 
-> **🚨 Critical**: meta service に影響するのは `VACUUM DROP TABLE` のみです。その他のコマンドはストレージファイルのみをクリーンアップします。
+> **🚨 Critical**: メタサービスに影響するのは `VACUUM DROP TABLE` のみです。その他のコマンドはストレージファイルのみをクリーンアップします。
 
 ## VACUUM コマンドの使用 {#using-vacuum-commands}
 
@@ -110,7 +110,7 @@ VACUUM TABLE my_table;
 
 ### VACUUM TEMPORARY FILES {#vacuum-temporary-files}
 
-クエリ実行中に作成された一時 spill ファイルを削除します。
+クエリ実行中に作成された一時スピルファイルを削除します。
 
 ```sql
 VACUUM TEMPORARY FILES;

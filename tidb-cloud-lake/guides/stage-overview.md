@@ -11,7 +11,7 @@ summary: stage は、データファイルが存在する仮想的な場所で�
 
 ## stage の種類 {#stage-types}
 
-実際の保存場所とアクセス性に基づいて、stage は Internal Stage、External Stage、User Stage の 3 種類に分類できます。次の表は、{{{ .lake }}} における各 stage 種類の特徴を、保存場所、アクセス性、推奨される利用シナリオの観点からまとめたものです。
+実際の保存場所とアクセス性に基づいて、stage は内部 stage、外部 stage、ユーザー stage の 3 種類に分類できます。次の表は、{{{ .lake }}} における各種類の stage の特徴を、保存場所、アクセス性、推奨される利用シナリオの観点からまとめたものです。
 
 |                      | ユーザー stage                         | 内部 stage                                   | 外部 stage                                                                                                |
 |----------------------|------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
@@ -23,22 +23,22 @@ summary: stage は、データファイルが存在する仮想的な場所で�
 | **利用シナリオ**   | 個人用 / 非公開データ              | チーム用 / 共有データ                                 | 外部データ統合またはアンロード                                                                        |
 | **パス形式**      | `@~/`                              | `@stage_name/`                                   | `@stage_name/`                                                                                                |
 
-### Internal Stage {#internal-stage}
+### 内部 stage {#internal-stage}
 
-Internal Stage 内のファイルは、実際には {{{ .lake }}} が存在するオブジェクトストレージに保存されます。Internal Stage は組織内のすべてのユーザーが利用でき、各ユーザーは自分のデータロードやエクスポート作業にその stage を使用できます。フォルダを作成するのと同様に、stage を作成する際には名前の指定が必要です。以下は、[CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドを使用して Internal Stage を作成する例です。
+内部 stage 内のファイルは、実際には {{{ .lake }}} が存在するオブジェクトストレージに保存されます。内部 stage は組織内のすべてのユーザーが利用でき、各ユーザーは自分のデータロードやエクスポート作業にその stage を使用できます。フォルダを作成するのと同様に、stage を作成する際には名前の指定が必要です。以下は、[CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドを使用して内部 stage を作成する例です。
 
 ```sql
 -- Create an internal stage named my_internal_stage
 CREATE STAGE my_internal_stage;
 ```
 
-### External Stage {#external-stage}
+### 外部 stage {#external-stage}
 
-External Stage を使用すると、{{{ .lake }}} が存在する場所の外部にあるオブジェクトストレージの場所を指定できます。たとえば、Google Cloud Storage コンテナにデータセットがある場合、そのコンテナを使って External Stage を作成できます。External Stage を作成する際には、{{{ .lake }}} がその外部ロケーションに接続するための接続情報を指定する必要があります。
+外部 stage を使用すると、{{{ .lake }}} が存在する場所の外部にあるオブジェクトストレージの場所を指定できます。たとえば、Google Cloud Storage コンテナにデータセットがある場合、そのコンテナを使って外部 stage を作成できます。外部 stage を作成する際には、{{{ .lake }}} がその外部ロケーションに接続するための接続情報を指定する必要があります。
 
-以下は External Stage を作成する例です。ここでは、`lake-doc` という名前の Amazon S3 バケットにデータセットがあるとします。
+以下は外部 stage を作成する例です。ここでは、`lake-doc` という名前の Amazon S3 バケットにデータセットがあるとします。
 
-[CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドを使用して、{{{ .lake }}} をそのバケットに接続する External Stage を作成できます。
+[CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドを使用して、{{{ .lake }}} をそのバケットに接続する外部 stage を作成できます。
 
 ```sql
 -- Create an external stage named my_external_stage
@@ -50,7 +50,7 @@ CREATE STAGE my_external_stage
     );
 ```
 
-External Stage を作成すると、{{{ .lake }}} からそのデータセットにアクセスできます。たとえば、ファイルを一覧表示するには次のようにします。
+外部 stage を作成すると、{{{ .lake }}} からそのデータセットにアクセスできます。たとえば、ファイルを一覧表示するには次のようにします。
 
 ```sql
 LIST @my_external_stage;
@@ -65,11 +65,11 @@ LIST @my_external_stage;
 
 外部ストレージは、{{{ .lake }}} がサポートするオブジェクトストレージソリューションのいずれかである必要がある点に注意してください。[CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) コマンドのページには、一般的によく使われるオブジェクトストレージソリューション向けの接続情報の指定例が記載されています。
 
-### User Stage {#user-stage}
+### ユーザー stage {#user-stage}
 
-User Stage は、特殊な種類の Internal Stage と考えることができます。User Stage 内のファイルは {{{ .lake }}} が存在するオブジェクトストレージに保存されますが、他のユーザーからアクセスできません。各ユーザーには最初から専用の User Stage が用意されており、使用前に作成したり名前を付けたりする必要はありません。また、User Stage を削除することもできません。
+ユーザー stage は、特殊な種類の内部 stage と考えることができます。ユーザー stage 内のファイルは {{{ .lake }}} が存在するオブジェクトストレージに保存されますが、他のユーザーからアクセスできません。各ユーザーには最初から専用のユーザー stage が用意されており、使用前に作成したり名前を付けたりする必要はありません。また、ユーザー stage を削除することもできません。
 
-User Stage は、他のユーザーと共有する必要のないデータファイルを保存するための便利な保管場所として利用できます。User Stage にアクセスするには、`@~` を使用します。たとえば、自分の stage 内のすべてのファイルを一覧表示するには次のようにします。
+ユーザー stage は、他のユーザーと共有する必要のないデータファイルを保存するための便利な保管場所として利用できます。ユーザー stage にアクセスするには、`@~` を使用します。たとえば、自分の stage 内のすべてのファイルを一覧表示するには次のようにします。
 
 ```sql
 LIST @~;
@@ -99,11 +99,11 @@ LIST @my_stage PATTERN = '.*[.]log';
 
 {{{ .lake }}} には、stage およびその中に stage されたファイルを管理するためのさまざまなコマンドが用意されています。
 
-| コマンド                                                      | 説明                                                                                                                                                                                                                          | User Stage に適用 | Internal Stage に適用 | External Stage に適用 |
+| コマンド                                                      | 説明                                                                                                                                                                                                                          | ユーザー stage に適用 | 内部 stage に適用 | 外部 stage に適用 |
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------- | ------------------------- | ------------------------- |
-| [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) | Internal Stage または External Stage を作成します。                                                                                                                                                                                               | No                    | Yes                       | Yes                       |
-| [DROP STAGE](/tidb-cloud-lake/sql/drop-stage.md)     | Internal Stage または External Stage を削除します。                                                                                                                                                                                               | No                    | Yes                       | Yes                       |
-| [DESC STAGE](/tidb-cloud-lake/sql/desc-stage.md)     | Internal Stage または External Stage のプロパティを表示します。                                                                                                                                                                               | No                    | Yes                       | Yes                       |
+| [CREATE STAGE](/tidb-cloud-lake/sql/create-stage.md) | 内部 stage または外部 stage を作成します。                                                                                                                                                                                               | No                    | Yes                       | Yes                       |
+| [DROP STAGE](/tidb-cloud-lake/sql/drop-stage.md)     | 内部 stage または外部 stage を削除します。                                                                                                                                                                                               | No                    | Yes                       | Yes                       |
+| [DESC STAGE](/tidb-cloud-lake/sql/desc-stage.md)     | 内部 stage または外部 stage のプロパティを表示します。                                                                                                                                                                               | No                    | Yes                       | Yes                       |
 | [LIST](/tidb-cloud-lake/sql/list-stage-files.md)           | stage 内のファイルの一覧を返します。あるいは、テーブル関数 [LIST_STAGE](/tidb-cloud-lake/sql/list-stage.md) を使用すると、特定のファイル情報を取得するための柔軟性が追加された同様の機能を利用できます | Yes                   | Yes                       | Yes                       |
 | [REMOVE](/tidb-cloud-lake/sql/remove-stage-files.md)       | stage からファイルを削除します。                                                                                                                                                                                                   | Yes                   | Yes                       | Yes                       |
-| [SHOW STAGES](/tidb-cloud-lake/sql/show-stages.md)   | 作成済みの Internal Stage および External Stage の一覧を返します。                                                                                                                                                                          | No                    | Yes                       | Yes                       |
+| [SHOW STAGES](/tidb-cloud-lake/sql/show-stages.md)   | 作成済みの内部 stage および外部 stage の一覧を返します。                                                                                                                                                                          | No                    | Yes                       | Yes                       |

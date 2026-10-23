@@ -25,7 +25,7 @@
   - AI ツール
     - [外部 AI 関数](/tidb-cloud-lake/guides/external-ai-functions.md)
     - [MCP クライアント連携](/tidb-cloud-lake/guides/mcp-client-integration.md)
-    - [MCP Server](/tidb-cloud-lake/guides/mcp-server.md)
+    - [MCP サーバー](/tidb-cloud-lake/guides/mcp-server.md)
   - 可視化
     - [Tableau](/tidb-cloud-lake/guides/tableau.md)
     - [Deepnote](/tidb-cloud-lake/guides/deepnote.md)
@@ -44,11 +44,11 @@
   - データソース
     - [概要](/tidb-cloud-lake/guides/data-sources.md)
     - [Amazon S3 - Credentials](/tidb-cloud-lake/guides/aws-credentials.md)
-    - [Amazon SQS (S3) - IAM ロール](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [Amazon SQS (S3) - IAM Role](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md)
     - [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md)
     - [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md)
-    - [Kafka - 認証情報](/tidb-cloud-lake/guides/kafka-credentials.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+    - [Kafka - Credentials](/tidb-cloud-lake/guides/kafka-credentials.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [TiDB データソース](/tidb-cloud-lake/guides/tidb-data-source.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - 統合タスク
     - [概要](/tidb-cloud-lake/guides/integration-tasks.md)
@@ -91,7 +91,7 @@
     - [Schema Evolution](/tidb-cloud-lake/guides/schema-evolution.md)
   - 継続的データパイプライン
     - [概要](/tidb-cloud-lake/guides/continuous-data-pipelines.md)
-    - [Stream によるデータの追跡と変換](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)
+    - [ストリームによるデータの追跡と変換](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)
     - [Task によるデータロードの自動化](/tidb-cloud-lake/guides/automate-data-loading-with-tasks.md)
 - データのアンロード
   - [概要](/tidb-cloud-lake/guides/unload-data.md)
@@ -112,7 +112,7 @@
   - [クラスターキー](/tidb-cloud-lake/guides/cluster-key-performance.md)
   - [仮想カラム](/tidb-cloud-lake/guides/virtual-column.md)
   - [集計インデックス](/tidb-cloud-lake/guides/aggregating-index.md)
-  - [Full-Text Index](/tidb-cloud-lake/guides/full-text-index.md)
+  - [フルテキストインデックス](/tidb-cloud-lake/guides/full-text-index.md)
   - [Ngram インデックス](/tidb-cloud-lake/guides/ngram-index.md)
   - [クエリ結果キャッシュ](/tidb-cloud-lake/guides/query-result-cache.md)
 - セキュリティと信頼性
@@ -121,7 +121,7 @@
     - [概要](/tidb-cloud-lake/guides/access-control.md)
     - [権限](/tidb-cloud-lake/guides/privileges.md)
     - [ロール](/tidb-cloud-lake/guides/roles.md)
-    - [Ownership](/tidb-cloud-lake/guides/ownership.md)
+    - [所有権](/tidb-cloud-lake/guides/ownership.md)
   - データ保護ポリシー
     - [概要](/tidb-cloud-lake/guides/data-protection-policies.md)
     - [マスキングポリシー](/tidb-cloud-lake/guides/masking-policy.md)
@@ -220,7 +220,7 @@
       - [system_history.query_history](/tidb-cloud-lake/sql/system-history-query-history.md)
     - [SQL 識別子](/tidb-cloud-lake/sql/sql-identifiers.md)
     - [入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md)
-    - [Connection Parameters](/tidb-cloud-lake/sql/connection-parameters.md)
+    - [接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md)
     - [SQL 方言と準拠](/tidb-cloud-lake/sql/sql-dialects-conformance.md)
   - SQL 文
     - [概要](/tidb-cloud-lake/sql/sql-statements-reference.md)
@@ -299,7 +299,7 @@
         - [DESC SEQUENCE](/tidb-cloud-lake/sql/desc-sequence.md)
         - [DROP SEQUENCE](/tidb-cloud-lake/sql/drop-sequence.md)
         - [SHOW SEQUENCES](/tidb-cloud-lake/sql/show-sequences.md)
-      - Stream
+      - ストリーム
         - [概要](/tidb-cloud-lake/sql/stream.md)
         - [CREATE STREAM](/tidb-cloud-lake/sql/create-stream.md)
         - [DESC STREAM](/tidb-cloud-lake/sql/desc-stream.md)
@@ -325,13 +325,13 @@
         - [DROP TAG](/tidb-cloud-lake/sql/drop-tag.md)
         - [SHOW TAGS](/tidb-cloud-lake/sql/show-tags.md)
         - [SET TAG](/tidb-cloud-lake/sql/set-tag.md)
-      - 接続
+      - Connection
         - [概要](/tidb-cloud-lake/sql/connection.md)
         - [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
         - [DESC CONNECTION](/tidb-cloud-lake/sql/desc-connection.md)
         - [DROP CONNECTION](/tidb-cloud-lake/sql/drop-connection.md)
         - [SHOW CONNECTIONS](/tidb-cloud-lake/sql/show-connections.md)
-      - カタログ
+      - Catalog
         - [概要](/tidb-cloud-lake/sql/catalog.md)
         - [SHOW CATALOGS](/tidb-cloud-lake/sql/show-catalogs.md)
         - [SHOW CREATE CATALOG](/tidb-cloud-lake/sql/show-create-catalog.md)
@@ -413,7 +413,7 @@
         - [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md)
         - [DESC ROW ACCESS POLICY](/tidb-cloud-lake/sql/desc-row-access-policy.md)
         - [DROP ROW ACCESS POLICY](/tidb-cloud-lake/sql/drop-row-access-policy.md)
-      - ディクショナリ
+      - Dictionary
         - [概要](/tidb-cloud-lake/sql/dictionary.md)
         - [CREATE DICTIONARY](/tidb-cloud-lake/sql/create-dictionary.md)
         - [DROP DICTIONARY](/tidb-cloud-lake/sql/drop-dictionary.md)
@@ -461,7 +461,7 @@
         - [SHOW WORKERS](/tidb-cloud-lake/sql/show-workers.md)
         - [Worker の例](/tidb-cloud-lake/sql/worker-examples.md)
       - Workload Group
-        - [Workload Group](/tidb-cloud-lake/sql/workload-group.md)
+        - [ワークロードグループ](/tidb-cloud-lake/sql/workload-group.md)
         - [ALTER WORKLOAD GROUP](/tidb-cloud-lake/sql/alter-workload-group.md)
         - [CREATE WORKLOAD GROUP](/tidb-cloud-lake/sql/create-workload-group.md)
         - [DROP WORKLOAD GROUP](/tidb-cloud-lake/sql/drop-workload-group.md)
@@ -731,7 +731,7 @@
       - [YEAR](/tidb-cloud-lake/sql/year.md)
       - [YEARWEEK](/tidb-cloud-lake/sql/yearweek.md)
       - [YESTERDAY](/tidb-cloud-lake/sql/yesterday.md)
-    - インターバル関数
+    - Interval 関数
       - [概要](/tidb-cloud-lake/sql/interval-functions.md)
       - [EPOCH](/tidb-cloud-lake/sql/epoch.md)
       - [TO_CENTURIES](/tidb-cloud-lake/sql/to-centuries.md)

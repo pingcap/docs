@@ -19,7 +19,7 @@ summary: "{{{ .lake }}} は、使い慣れた Data Definition Language (DDL) お
 - インデックス
 - Stage
 - ファイル形式
-- 接続
+- Connection
 - ユーザー定義関数 (UDF)
 - 外部関数
 - ユーザー

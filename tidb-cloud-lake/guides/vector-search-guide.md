@@ -7,7 +7,7 @@ summary: "シナリオ: CityDrive は各フレームの埋め込みを {{{ .lake
 
 > **シナリオ:** CityDrive は各フレームの埋め込みを {{{ .lake }}} に直接保持しています。これらのベクトル埋め込みは、動画キーフレームに対して AI モデルが推論を実行し、視覚的な意味特徴を捉えた結果です。意味的類似検索（「これに似たフレームを探す」）は、従来の SQL 分析と並行して実行でき、別個のベクトルサービスは不要です。
 
-`frame_embeddings` テーブルは、`frame_events`、`frame_metadata_catalog`、`frame_geo_points` と同じ `frame_id` キーを共有しているため、意味検索と従来の SQL を密接に連携させることができます。
+`frame_embeddings` テーブルは、`frame_events`、`frame_metadata_catalog`、`frame_geo_points` と同じ `frame_id` キーを共有しているため、セマンティック検索と従来の SQL を密接に連携させることができます。
 
 ## 1. 埋め込みテーブルを準備する {#1-prepare-the-embedding-table}
 
@@ -61,7 +61,7 @@ FROM demo_random_vector('FRAME-0401');
 
 > この配列ジェネレーターは、チュートリアルを自己完結させるためだけのものです。本番では、これをモデルから得た実際の埋め込みに置き換えてください。
 
-まだ SQL Analytics ガイドを実行していない場合は、補助となる `frame_events` テーブルを作成し、このベクトル検索の手順で結合する同じサンプル行を投入してください。
+まだ SQL 分析ガイドを実行していない場合は、補助となる `frame_events` テーブルを作成し、このベクトル検索の手順で結合する同じサンプル行を投入してください。
 
 ```sql
 CREATE OR REPLACE TABLE frame_events (
@@ -117,7 +117,7 @@ FRAME-0102| VID-20250101-001 | 0.9842
 
 距離が小さいほど、より類似しています。`VECTOR INDEX` により、数百万フレーム規模でもレイテンシーを低く保てます。
 
-ベクトル比較の前後で、従来の述語（route、video、sensor view）を追加して 候補集合を絞り込めます。
+ベクトル比較の前後で、従来の述語（ルート、動画、センサービュー）を追加して候補集合を絞り込めます。
 
 ```sql
 WITH query_embedding AS (

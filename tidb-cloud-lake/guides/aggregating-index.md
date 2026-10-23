@@ -60,9 +60,9 @@ EXPLAIN SELECT region, SUM(revenue) FROM sales GROUP BY region;
 
 | 戦略 | 使用する場面 | 設定 |
 |----------|-------------|---------------|
-| **Automatic (SYNC)** | リアルタイム分析、小規模データセット | `CREATE AGGREGATING INDEX ... SYNC` |
-| **Manual** | 大規模データセット、バッチ処理 | `CREATE AGGREGATING INDEX ...`（デフォルト） |
-| **Background (Cloud)** | 本番ワークロード | {{{ .lake }}} で自動 |
+| **自動 (SYNC)** | リアルタイム分析、小規模データセット | `CREATE AGGREGATING INDEX ... SYNC` |
+| **手動** | 大規模データセット、バッチ処理 | `CREATE AGGREGATING INDEX ...`（デフォルト） |
+| **バックグラウンド (Cloud)** | 本番ワークロード | {{{ .lake }}} で自動 |
 
 ### 自動更新と手動更新の比較 {#automatic-vs-manual-refresh}
 
@@ -110,7 +110,7 @@ EXPLAIN SELECT MIN(a), MAX(c) FROM agg;
 | **手動更新を使用する** | 更新タイミングをより適切に制御できる |
 | **インデックス使用状況を監視する** | EXPLAIN を使用してインデックス利用を確認できる |
 | **未使用のインデックスをクリーンアップする** | 使用されていないインデックスを削除できる |
-| **クエリパターンを一致させる** | インデックスのフィルターを実際のクエリに合わせられる |
+| **クエリパターンを一致させる** | インデックスのフィルターを実際のクエリに合わせる必要がある |
 
 ## 管理コマンド {#management-commands}
 

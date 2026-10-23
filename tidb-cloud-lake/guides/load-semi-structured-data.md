@@ -15,5 +15,5 @@ summary: 半構造化データには、厳密なデータベース構造には�
 | **CSV** | カンマ区切り値 | [CSV のロード](/tidb-cloud-lake/guides/load-csv.md) |
 | **TSV** | タブ区切り値 | [TSV のロード](/tidb-cloud-lake/guides/load-tsv.md) |
 | **NDJSON** | 改行区切り JSON | [NDJSON のロード](/tidb-cloud-lake/guides/load-ndjson.md) |
-| **ORC** | 最適化された行カラム形式 | [ORC のロード](/tidb-cloud-lake/guides/load-orc.md) |
+| **ORC** | Optimized Row Columnar 形式 | [ORC のロード](/tidb-cloud-lake/guides/load-orc.md) |
 | **Avro** | スキーマ定義を持つ行ベース形式 | [Avro のロード](/tidb-cloud-lake/guides/load-avro.md) |

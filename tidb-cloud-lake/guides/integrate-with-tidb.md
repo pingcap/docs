@@ -14,7 +14,7 @@ TiDB 統合タスクは、TiDB クラスターから TiDB Cloud Lake にデー�
 - 分析のために TiDB データベースとテーブルを TiDB Cloud Lake に移行する
 - TiCDC を通じて TiDB Cloud Lake を TiDB と継続的に同期させる
 - シャーディングされたデータベースを、1 つのタスク内でソースごとのターゲットデータベースに統合する
-- フルロード (load) を 1 回だけ実行する、またはフルロードと継続的な変更キャプチャを組み合わせる
+- フルロードを 1 回だけ実行する、またはフルロードと継続的な変更キャプチャを組み合わせる
 
 ## 同期モード {#sync-modes}
 
@@ -32,7 +32,7 @@ TiDB 統合タスクを作成する前に、以下を確認してください。
 - データソースで設定したオブジェクトストレージのバケットに、TiDB Cloud Lake から到達できること。
 - 同期したいテーブルの TiCDC / Dumpling エクスポートが、タスクで参照するプレフィックス配下のバケットに書き込まれていること。
 
-## TiDB Integration Task の作成 {#creating-a-tidb-integration-task}
+## TiDB 統合タスクの作成 {#creating-a-tidb-integration-task}
 
 このセクションでは、TiDB Cloud Lake で TiDB 統合タスクを作成する手順を説明します。
 
@@ -44,7 +44,7 @@ TiDB 統合タスクを作成する前に、以下を確認してください。
 | フィールド | 必須 | 説明 |
 |-------|----------|-------------|
 | **Data Source** | はい | 既存の **TiDB - Credentials** データソースを選択します。ここから新規作成することもできます |
-| **Name** | はい | このデータ統合タスクの名前 |
+| **Name** | はい | この統合タスクの名前 |
 | **Sync Mode** | はい | **Snapshot**、**CDC Only**、または **Snapshot + CDC** を選択します |
 | **Table Rules** | はい | 同期するソースオブジェクトを選択するルールです。[Table Rules](#table-rules) を参照してください |
 | **Max Matched Tables** | いいえ | ルールが一致できるテーブル数の上限です。空欄のままにすると、システムのデフォルト値 (500) が使用されます |
@@ -81,22 +81,22 @@ shard_*.*              every table of every shard_ database
 | **Skip Header Rows**           | Yes     | 先頭行にカラム名が含まれているかどうかを指定します。エクスポートにヘッダー行がある場合は **YES** を選択します                             |
 | **Export Escaped Backslashes** | No      | Dumpling の `--escape-backslash` 設定と一致している必要があります。 |
 
-### ターゲット名の接頭辞と接尾辞 {#target-name-affixes}
+### ターゲット名のプレフィックスとサフィックス {#target-name-affixes}
 
-ターゲットのデータベース名とテーブル名は、ソース名から導出され、必要に応じて接頭辞や接尾辞を付けられます。
+ターゲットのデータベース名とテーブル名は、ソース名から導出され、必要に応じてプレフィックスやサフィックスを付けられます。
 
 ```text
 target database = targetDatabasePrefix + sourceDatabase + targetDatabaseSuffix
 target table    = targetTablePrefix    + sourceTable    + targetTableSuffix
 ```
 
-接頭辞と接尾辞を空のままにすると、ソース名がそのまま使用されます。接頭辞と接尾辞には、英字、数字、アンダースコアのみを使用できます。
+プレフィックスとサフィックスを空のままにすると、ソース名がそのまま使用されます。プレフィックスとサフィックスには、英字、数字、アンダースコアのみを使用できます。
 
-たとえば、データベース接頭辞が `src_` の場合、ソースデータベース `shard_1` とテーブル `orders` は `src_shard_1.orders` に書き込まれます。
+たとえば、データベースプレフィックスが `src_` の場合、ソースデータベース `shard_1` とテーブル `orders` は `src_shard_1.orders` に書き込まれます。
 
 ### ステップ 2: タスクを作成する {#step-2-create-the-task}
 
-設定を確認し、**Create** をクリックしてデータ統合タスクを作成します。
+設定を確認し、**Create** をクリックして統合タスクを作成します。
 
 ## 同期モードごとのタスク動作 {#task-behavior-by-sync-mode}
 

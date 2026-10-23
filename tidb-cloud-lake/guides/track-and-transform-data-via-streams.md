@@ -1,15 +1,15 @@
 ---
-title: Streams によるデータの追跡と変換
+title: ストリームによるデータの追跡と変換
 summary: "{{{ .lake }}} のストリームは常時稼働する変更テーブルであり、コミットされたすべての INSERT、UPDATE、DELETE は、消費されるまでキャプチャされます。このページは簡潔にまとめています。まず概要をすばやく確認し、その後に実際の出力を含む 1 つのラボで、ストリームの動作を確認できます。"
 ---
 
-# Streams によるデータの追跡と変換
+# ストリームによるデータの追跡と変換
 
 {{{ .lake }}} のストリームは常時稼働する変更テーブルです。コミットされたすべての INSERT、UPDATE、DELETE は、消費されるまでキャプチャされます。このページは簡潔にまとめています。まず概要をすばやく確認し、その後に実際の出力を含む 1 つのラボで、ストリームの動作を確認できます。
 
-## Stream の概要 {#stream-overview}
+## ストリームの概要 {#stream-overview}
 
-- Stream はテーブルストレージを複製しません。消費されるまで、影響を受けた各行について最新の変更を一覧表示します。
+- ストリームはテーブルストレージを複製しません。消費されるまで、影響を受けた各行について最新の変更を一覧表示します。
 - 消費（タスク、INSERT ... SELECT、`WITH CONSUME` など）を行うと、ストリームはクリアされますが、新しいデータを受け取れる状態は維持されます。
 - `APPEND_ONLY` のデフォルトは `true` です。UPDATE/DELETE イベントをキャプチャする必要がある場合にのみ、`APPEND_ONLY = false` を設定してください。
 
@@ -18,9 +18,9 @@ summary: "{{{ .lake }}} のストリームは常時稼働する変更テーブ�
 | Standard (`APPEND_ONLY = false`) | INSERT + UPDATE + DELETE。行ごとに最新状態へ集約されます。 | 緩やかに変化するディメンション、コンプライアンス監査。 |
 | Append-Only (`APPEND_ONLY = true`、デフォルト) | INSERT のみ。 | 追記専用のファクト/イベント取り込み。 |
 
-## 例 1: Append-Only Stream {#example-1-append-only-stream}
+## 例 1: Append-Only ストリーム {#example-1-append-only-stream}
 
-以下のステートメントを任意の {{{ .lake }}} デプロイメント（Cloud worksheet またはローカル）で実行し、デフォルトの append-only モードが insert をどのようにキャプチャして消費するかを確認します。
+以下のステートメントを任意の {{{ .lake }}} デプロイメント（Cloud worksheet またはローカル）で実行し、デフォルトの append-only モードが INSERT をどのようにキャプチャして消費するかを確認します。
 
 ### 1. テーブルとストリームを作成する {#1-create-table-and-stream}
 
@@ -66,7 +66,7 @@ SELECT * FROM sensor_readings_stream; -- now empty
 
 `WITH CONSUME` はストリームを 1 回読み取り、差分をクリアするため、次のラウンドでは新しい INSERT をキャプチャできます。
 
-## 例 2: Standard Stream（UPDATE と DELETE） {#example-2-standard-stream-updates--deletes}
+## 例 2: Standard ストリーム（UPDATE と DELETE） {#example-2-standard-stream-updates--deletes}
 
 UPDATE や DELETE を含むすべての変更に反応する必要がある場合は、Standard モードに切り替えます。
 
@@ -108,9 +108,9 @@ ORDER BY change$row_id;
 
 Standard ストリームは、コンテキスト付きで各変更をキャプチャします。更新は同じ `sensor_id` に対する DELETE+INSERT として表示され、単独の削除/挿入は個別に表示されます。Append-Only ストリームは挿入のみを追跡するため、空のままです。
 
-## 例 3: 増分 Stream Join {#example-3-incremental-stream-join}
+## 例 3: 増分ストリーム結合 {#example-3-incremental-stream-join}
 
-複数の append-only ストリームを結合して、増分 KPI を生成します。{{{ .lake }}} のストリームは消費されるまで新しい行を保持するため、各ロード (load) の後に同じクエリを実行できます。各実行では、[`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md) により新しい行だけがドレインされるため、異なるタイミングで到着した更新も次の反復で引き続きマッチします。
+複数の append-only ストリームを結合して、増分 KPI を生成します。{{{ .lake }}} のストリームは消費されるまで新しい行を保持するため、各ロード (load) の後に同じクエリを実行できます。各実行では、[`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md) により新しい行だけが消費されるため、異なるタイミングで到着した更新も次の反復で引き続きマッチします。
 
 ### 1. テーブルとストリームを作成する {#1-create-tables-and-streams}
 
@@ -230,7 +230,7 @@ ORDER BY o.customer_id;
 **モード**
 
 - Append-Only ストリームは INSERT のみをキャプチャし、追記が多いワークロードに最適です。
-- Standard ストリームは、消費し続ける限り update と delete を出力します。遅れて到着した update は次回の実行まで保持されます。
+- Standard ストリームは、消費し続ける限り更新と削除を出力します。遅れて到着した更新は次回の実行まで保持されます。
 
 **隠しカラム**
 
@@ -239,5 +239,5 @@ ORDER BY o.customer_id;
 
 **連携**
 
-- スケジュールされた増分ロード (load) には、ストリームを `task_history('<name>', <limit>)` と組み合わせて使用します。
+- スケジュールされた増分ロードには、ストリームを `task_history('<name>', <limit>)` と組み合わせて使用します。
 - 最新の差分のみを消費したい場合は [`WITH CONSUME`](/tidb-cloud-lake/sql/with-consume.md) を使用します。

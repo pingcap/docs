@@ -1,9 +1,9 @@
 ---
-title: stage 内のステージ済み ORC ファイルをクエリする
-summary: このチュートリアルでは、ORC 形式の Iris データセットをダウンロードし、Amazon S3 バケットにアップロードし、external stage を作成して、ORC ファイルから直接データをクエリする手順を説明します。
+title: stage 内の stage 済み ORC ファイルをクエリする
+summary: このチュートリアルでは、ORC 形式の Iris データセットをダウンロードし、Amazon S3 バケットにアップロードし、外部 stage を作成して、ORC ファイルから直接データをクエリする手順を説明します。
 ---
 
-# stage 内のステージ済み ORC ファイルをクエリする
+# stage 内の stage 済み ORC ファイルをクエリする
 
 ## 構文 {#syntax}
 
@@ -13,7 +13,7 @@ summary: このチュートリアルでは、ORC 形式の Iris データセッ�
 
 ## チュートリアル {#tutorial}
 
-このチュートリアルでは、ORC 形式の Iris データセットをダウンロードし、Amazon S3 バケットにアップロードし、external stage を作成して、ORC ファイルから直接データをクエリする手順を説明します。
+このチュートリアルでは、ORC 形式の Iris データセットをダウンロードし、Amazon S3 バケットにアップロードし、外部 stage を作成して、ORC ファイルから直接データをクエリする手順を説明します。
 
 ## ステップ 1: Iris データセットをダウンロードする {#step-1-download-iris-dataset}
 
@@ -21,9 +21,9 @@ summary: このチュートリアルでは、ORC 形式の Iris データセッ�
 
 iris データセットには、それぞれ 50 個のインスタンスを持つ 3 つのクラスが含まれており、各クラスはアイリス植物の種類を表します。4 つの属性があります: (1) sepal length、(2) sepal width、(3) petal length、(4) petal width。最後のカラムにはクラスラベルが含まれます。
 
-## ステップ 2: External Stage を作成する {#step-2-create-external-stage}
+## ステップ 2: 外部 stage を作成する {#step-2-create-external-stage}
 
-iris データセットファイルが保存されている Amazon S3 バケットを使用して external stage を作成します。
+iris データセットファイルが保存されている Amazon S3 バケットを使用して外部 stage を作成します。
 
 ```sql
 CREATE STAGE orc_query_stage

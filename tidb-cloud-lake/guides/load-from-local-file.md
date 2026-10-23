@@ -15,7 +15,7 @@ summary: ローカルのデータファイルを {{{ .lake }}} にロードす�
 
 ローカルファイルからデータをロードする方法は 2 つあります。
 
-1. **Stage**: ローカルファイルを内部 stage にアップロードし、その後 stage 済みファイルからテーブルへデータをコピーします。ファイルのアップロードは、`presigned_url_disabled` 接続オプション（デフォルト: `false`）に応じて、lake-query 経由または presigned URL を使用して行われます。
+1. **Stage**: ローカルファイルを内部 stage にアップロードし、その後 stage 済みファイルからテーブルへデータをコピーします。ファイルのアップロードは、`presigned_url_disabled` 接続オプション（デフォルト: `false`）に応じて、lake-query 経由または事前署名付き URL を使用して行われます。
 2. **Streaming**: アップロード中にファイルを直接テーブルへロードします。オブジェクトストレージに単一オブジェクトとして保存するにはファイルが大きすぎる場合は、この方法を使用します。
 
 ## チュートリアル 1: ローカルファイルからロードする {#tutorial-1-load-from-a-local-file}
@@ -134,7 +134,7 @@ root@localhost:8000/book_db> SELECT * FROM books;
 
 ### ステップ 1. テーブルを作成する {#step-1-create-table}
 
-テーブル `books` と比べて、`comments` という追加カラムを含むテーブルを作成します。
+テーブル "books" と比べて、"comments" という追加カラムを含むテーブルを作成します。
 
 ```shell
 root@localhost:8000/book_db> CREATE TABLE bookcomments

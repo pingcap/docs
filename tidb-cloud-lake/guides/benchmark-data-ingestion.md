@@ -25,7 +25,7 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 
 > **Note:**
 >
-> この比較は、Snowflake Gen1 standard warehouses（`GENERATION = '1'`）に基づいています。
+> この比較は、Snowflake Gen1 の標準ウェアハウス（`GENERATION = '1'`）に基づいています。
 
 ## 性能とコストの比較 {#performance-and-cost-comparison}
 
@@ -101,8 +101,8 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 
 ### 前提条件 {#prerequisites}
 
-- [Snowflake account](https://signup.snowflake.com) を持っていること
-- [{{{ .lake }}} account](https://tidbcloud.com/) を作成すること
+- [Snowflake アカウント](https://signup.snowflake.com) を持っていること
+- [{{{ .lake }}} アカウント](https://tidbcloud.com/) を作成すること
 
 ### データ取り込みベンチマーク {#data-ingestion-benchmark}
 
@@ -113,15 +113,15 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 
 1. **Snowflake のデータロード**:
 
-    - [Snowflake account](https://app.snowflake.com/) にログインします。
-    - TPC-H スキーマに対応するテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
-    - `COPY INTO` コマンドを使用して AWS S3 からデータをロードします。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
+    - [Snowflake アカウント](https://app.snowflake.com/) にログインします。
+    - TPC-H スキーマに対応するテーブルを作成します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
+    - `COPY INTO` コマンドを使用して AWS S3 からデータをロードします。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/snowflake/setup.sql)。
 
 2. **{{{ .lake }}} のデータロード**:
 
-    - [{{{ .lake }}} account](https://tidbcloud.com) にサインインします。
-    - TPC-H スキーマに従って必要なテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
-    - Snowflake と同様の方法で AWS S3 からデータをロードします。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
+    - [{{{ .lake }}} アカウント](https://tidbcloud.com) にサインインします。
+    - TPC-H スキーマに従って必要なテーブルを作成します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
+    - Snowflake と同様の方法で AWS S3 からデータをロードします。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/tpch-100/lake/setup.sql)。
 
 </details>
 
@@ -130,15 +130,15 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 
 1. **Snowflake のデータロード**:
 
-    - [Snowflake account](https://app.snowflake.com/) にログインします。
-    - `hits` スキーマに対応するテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/snowflake/schema.sql)。
-    - `COPY INTO` コマンドを使用して AWS S3 からデータをロードします。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/snowflake/copy.sql)。
+    - [Snowflake アカウント](https://app.snowflake.com/) にログインします。
+    - `hits` スキーマに対応するテーブルを作成します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/snowflake/schema.sql)。
+    - `COPY INTO` コマンドを使用して AWS S3 からデータをロードします。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/snowflake/copy.sql)。
 
 2. **{{{ .lake }}} のデータロード**:
 
-    - [{{{ .lake }}} account](https://tidbcloud.com) にサインインします。
-    - `hits` スキーマに従って必要なテーブルを作成します。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/lake/schema.sql)。
-    - Snowflake と同様の方法で AWS S3 からデータをロードします。[SQL Script](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/lake/copy.sql)。
+    - [{{{ .lake }}} アカウント](https://tidbcloud.com) にサインインします。
+    - `hits` スキーマに従って必要なテーブルを作成します。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/lake/schema.sql)。
+    - Snowflake と同様の方法で AWS S3 からデータをロードします。[SQL スクリプト](https://lakesql-bin.tidbcloud.com/datasets/tpch/hits/lake/copy.sql)。
 
 </details>
 
@@ -146,7 +146,7 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 
 鮮度ベンチマークのデータ生成とデータ取り込みは、次の手順で再現できます。
 
-1. {{{ .lake }}} で [external stage](/tidb-cloud-lake/sql/create-stage.md#example-2-create-external-stage-with-connection) を作成します。
+1. {{{ .lake }}} で [外部 stage](/tidb-cloud-lake/sql/create-stage.md#example-2-create-external-stage-with-connection) を作成します。
 
     ```sql
     CREATE STAGE hits_unload_stage
@@ -157,7 +157,7 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
     );
     ```
 
-2. データを external stage にアンロード (unload) します。
+2. データを外部 stage にアンロード (unload) します。
 
     ```sql
     CREATE or REPLACE FILE FORMAT tsv_unload_format_gzip
@@ -173,7 +173,7 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
     DETAILED_OUTPUT = true;
     ```
 
-3. external stage から `hits` テーブルにデータをロード (load) します。
+3. 外部 stage から `hits` テーブルにデータをロード (load) します。
 
     ```sql
     COPY INTO hits

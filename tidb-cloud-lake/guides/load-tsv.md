@@ -40,9 +40,9 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 
 ## チュートリアル: TSV ファイルからのデータのロード {#tutorial-loading-data-from-tsv-files}
 
-### ステップ 1. Internal Stage を作成する {#step-1-create-an-internal-stage}
+### ステップ 1. 内部 stage を作成する {#step-1-create-an-internal-stage}
 
-TSV ファイルを保存するための internal stage を作成します。
+TSV ファイルを保存するための内部 stage を作成します。
 
 ```sql
 CREATE STAGE my_tsv_stage;
@@ -117,7 +117,7 @@ FILE_FORMAT = (
 
 ### ステップ 4（オプション）. SELECT を使用してデータをコピーする {#step-4-option-using-select-to-copy-data}
 
-コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT 文を使用します。詳細は [`TSV からの SELECT`](/tidb-cloud-lake/guides/query-tsv-files-in-stage.md) を参照してください。
+コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT 文を使用します。詳細は [`SELECT from TSV`](/tidb-cloud-lake/guides/query-tsv-files-in-stage.md) を参照してください。
 
 ```sql
 COPY INTO books (title, author)

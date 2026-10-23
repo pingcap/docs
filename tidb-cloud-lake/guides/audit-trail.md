@@ -9,9 +9,9 @@ summary: "{{{ .lake }}} のシステム履歴テーブルは、データベー�
 
 ユーザーに対して次の監査を実行できます。
 
-- **Query execution** - SQL 実行の完全な監査証跡 (`query_history`)
-- **Data access** - データベースオブジェクトへのアクセスと変更 (`access_history`)
-- **Authentication** - ログイン試行とセッショントラッキング (`login_history`)
+- **クエリ実行** - SQL 実行の完全な監査証跡 (`query_history`)
+- **データアクセス** - データベースオブジェクトへのアクセスと変更 (`access_history`)
+- **認証** - ログイン試行とセッショントラッキング (`login_history`)
 
 ## 利用可能な監査テーブル {#available-audit-tables}
 
