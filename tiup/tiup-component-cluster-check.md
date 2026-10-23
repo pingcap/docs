@@ -108,7 +108,7 @@ Check the CPU information of the target machine. For a production cluster, it is
 
 > **Note:**
 >
-> CPU core count is not checked by default. To enable the check, you need to add the `-enable-cpu` option to the command.
+> CPU core count is not checked by default. To enable the check, you need to add the `--enable-cpu` option to the command.
 
 ### Memory size
 
@@ -116,7 +116,7 @@ Check the memory size of the target machine. For a production cluster, it is rec
 
 > **Note:**
 >
-> Memory size is not checked by default. To enable the check, you need to add the `-enable-mem` option to the command.
+> Memory size is not checked by default. To enable the check, you need to add the `--enable-mem` option to the command.
 
 ### Fio disk performance test
 
@@ -128,7 +128,7 @@ Use flexible I/O tester (fio) to test the performance of the disk where `data_di
 
 > **Note:**
 >
-> The fio disk performance test is not performed by default. To perform the test, you need to add the `-enable-disk` option to the command.
+> The fio disk performance test is not performed by default. To perform the test, you need to add the `--enable-disk` option to the command.
 
 ## Syntax
 
@@ -162,9 +162,9 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 >
 > `tiup cluster check` also supports repairing the `scale-out.yml` file for an existing cluster with the following command format:
 >
->```shell
+> ```shell
 > tiup cluster check <cluster-name> scale-out.yml --cluster --apply --user root [-p] [-i /home/root/.ssh/gcp_rsa]
->```
+> ```
 
 ### --cluster
 
@@ -232,7 +232,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> This option is valid only if the `-cluster` option is false. Otherwise, the value of this option is fixed to the username specified in the topology file for the cluster deployment.
+> This option is valid only if the `--cluster` option is false. Otherwise, the value of this option is fixed to the username specified in the topology file for the cluster deployment.
 
 ### -i, --identity_file
 
