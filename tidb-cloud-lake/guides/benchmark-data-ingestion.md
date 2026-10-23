@@ -25,7 +25,7 @@ summary: このページでは、TPC-H SF100 データセットのロード、Cl
 
 > **Note:**
 >
-> この比較は、Snowflake Gen1 の標準 Warehouse（`GENERATION = '1'`）に基づいています。
+> この比較は、Snowflake Gen1 の標準ウェアハウス（`GENERATION = '1'`）に基づいています。
 
 ## 性能とコストの比較 {#performance-and-cost-comparison}
 
