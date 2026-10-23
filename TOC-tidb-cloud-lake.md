@@ -112,7 +112,7 @@
   - [クラスターキー](/tidb-cloud-lake/guides/cluster-key-performance.md)
   - [仮想カラム](/tidb-cloud-lake/guides/virtual-column.md)
   - [集計インデックス](/tidb-cloud-lake/guides/aggregating-index.md)
-  - [Full-Text Index](/tidb-cloud-lake/guides/full-text-index.md)
+  - [フルテキストインデックス](/tidb-cloud-lake/guides/full-text-index.md)
   - [Ngram インデックス](/tidb-cloud-lake/guides/ngram-index.md)
   - [クエリ結果キャッシュ](/tidb-cloud-lake/guides/query-result-cache.md)
 - セキュリティと信頼性

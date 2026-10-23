@@ -15,7 +15,7 @@ summary: "{{{ .lake }}} は、データクラスタリング、結果キャッ�
 | [**クエリ結果キャッシュ**](/tidb-cloud-lake/guides/query-result-cache.md) | 同一クエリの結果を自動的に保存して再利用する | ダッシュボードや定期レポートなどで、アプリケーションが同じ分析クエリを繰り返し実行する場合 |
 | [**仮想カラム**](/tidb-cloud-lake/guides/virtual-column.md) | JSON/VARIANT データ内のフィールドへのアクセスを自動的に高速化する | 半構造化データ内の特定パスを頻繁にクエリし、1 秒未満の応答時間が必要な場合 |
 | [**集計インデックス**](/tidb-cloud-lake/guides/aggregating-index.md) | 一般的な集計結果を事前計算して保存する | 分析ワークロードで、大規模データセットに対する SUM、COUNT、AVG クエリを頻繁に実行する場合 |
-| [**Full-Text Index**](/tidb-cloud-lake/guides/full-text-index.md) | 超高速なセマンティックテキスト検索機能を有効にする | 関連度スコアリングやあいまい一致など、高度なテキスト検索機能が必要な場合 |
+| [**フルテキストインデックス**](/tidb-cloud-lake/guides/full-text-index.md) | 超高速なセマンティックテキスト検索機能を有効にする | 関連度スコアリングやあいまい一致など、高度なテキスト検索機能が必要な場合 |
 | [**Ngram インデックス**](/tidb-cloud-lake/guides/ngram-index.md) | ワイルドカードを使ったパターンマッチングを高速化する | 大規模なテキストカラムに対して、LIKE 演算子とワイルドカード（特に '%keyword%'）を使用するクエリがある場合 |
 
 ## 機能の提供状況 {#feature-availability}
@@ -26,5 +26,5 @@ summary: "{{{ .lake }}} は、データクラスタリング、結果キャッ�
 | クエリ結果キャッシュ | ✅ | ✅ | ✅ |
 | 仮想カラム | ❌ | ✅ | ✅ |
 | 集計インデックス | ✅ | ✅ | ✅ |
-| Full-Text Index | ✅ | ✅ | ✅ |
+| フルテキストインデックス | ✅ | ✅ | ✅ |
 | Ngram インデックス | ✅ | ✅ | ✅ |
