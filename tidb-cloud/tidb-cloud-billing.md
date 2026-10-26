@@ -35,6 +35,10 @@ For pricing information about {{{ .byoc }}}, [contact Sales](https://www.pingcap
 
 For TiDB Cloud Lake, your costs consist of warehouse, storage, and cloud service fees. For details, see [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/).
 
+### Pricing for TiDB Cloud Filesystem
+
+TiDB Cloud Filesystem uses pay-as-you-go pricing for reads, writes, storage, and internet egress, with a monthly free-tier allowance shared across your organization's file systems and regions. For details, see [TiDB Cloud Filesystem Pricing Details](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/).
+
 ## Invoices
 
 If you are in the `Organization Owner` or `Organization Billing Manager` role of your organization, you can manage the invoice information of TiDB Cloud. Otherwise, skip this section.

@@ -347,7 +347,7 @@ To replicate incremental data, do the following:
 
     - Verify the replication. Write a new record to the upstream cluster, and then check whether the record is replicated to the downstream {{{ .premium }}} or {{{ .byoc }}} instance.
 
-7. Set the same timezone for the upstream cluster and downstream instance. By default, {{{ .premium }}} sets the timezone to UTC. If the timezone is different between the upstream cluster and downstream instance, you need to set the same timezone for both.
+7. Set the same timezone for the upstream cluster and downstream instance. By default, {{{ .premium }}} or {{{ .byoc }}} sets the timezone to UTC. If the timezone is different between the upstream cluster and downstream instance, you need to set the same timezone for both.
 
     1. In the upstream cluster, run the following command to check the timezone:
 
