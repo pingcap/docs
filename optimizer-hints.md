@@ -591,7 +591,6 @@ The hint has the following conditions and limitations:
 - The hint only applies to TiFlash scans. It does not select the storage engine. To request a TiFlash scan, combine it with `READ_FROM_STORAGE(TIFLASH[...])` as in the preceding example.
 - The hint does not take effect for scans that preserve order (`keep order:true`). Late materialization also does not take effect in [fast scan mode](/tiflash/use-fastscan.md).
 - The hint can select late materialization filters even for small tables that the optimizer would otherwise skip.
-- Predicates handled by a TiFlash inverted index are not also selected as late materialization filters. Scans that use a full-text index do not push down late materialization filters.
 
 If the hint specifies no columns, cannot match the table, or includes a nonexistent column, TiDB issues a warning and ignores that hint. To check these warnings, execute `SHOW WARNINGS` immediately after `EXPLAIN` or the query.
 

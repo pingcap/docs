@@ -116,7 +116,7 @@ EXPLAIN SELECT /*+ READ_FROM_STORAGE(TIFLASH[t1]), TIFLASH_LM_FILTER(t1, a) */
 
 In this example, `a > 1` is evaluated during late materialization, and `b > 1` remains in the Selection operator. A condition that references multiple columns must have all those columns listed in the hint. For example, listing only `a` does not select `a + b > 100` for late materialization.
 
-The hint replaces cost-based late materialization filter selection for the scan, including on small tables. If no filter conditions match the listed columns, TiDB does not select other late materialization filters automatically. The hint still requires late materialization to be enabled and does not take effect for scans that preserve order (`keep order:true`) or in fast scan mode. For query-block syntax, warnings, and index-related limitations, see [`TIFLASH_LM_FILTER`](/optimizer-hints.md#tiflash_lm_filtert1_name-col1_name--col2_name-).
+The hint replaces cost-based late materialization filter selection for the scan, including on small tables. If no filter conditions match the listed columns, TiDB does not select other late materialization filters automatically. The hint still requires late materialization to be enabled and does not take effect for scans that preserve order (`keep order:true`) or in fast scan mode. For query-block syntax and warnings, see [`TIFLASH_LM_FILTER`](/optimizer-hints.md#tiflash_lm_filtert1_name-col1_name--col2_name-).
 
 ## Implementation mechanism
 
