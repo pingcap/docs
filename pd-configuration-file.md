@@ -215,7 +215,10 @@ Configuration items related to security
 
 + Controls whether to enable log redaction in the PD log
 + Optional value: `false`, `true`, `"marker"`
-+ Default value: `false`
++ Default value: starting from v9.0.0, the default value is `true`. Before v9.0.0, the default value is `false`.
++ Redaction applies only to logs and outputs that support redaction, including PD logs, operator additional info, [Online Unsafe Recovery](/online-unsafe-recovery.md) plans, and some error messages returned to clients. Keys in operator additional info are displayed as a redaction placeholder rather than the raw key.
++ Audit logs are not affected by this configuration item and still record the original request content. A small number of other logs might still contain raw keys. See [#11406](https://github.com/tikv/pd/issues/11406).
++ This configuration item cannot be changed online. Restart PD after changing it. To disable redaction, set it to `false`.
 + For details on how to use it, see [Log redaction in PD side](/log-redaction.md#log-redaction-in-pd-side).
 
 ## `log`
