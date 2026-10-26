@@ -44,11 +44,17 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 | [`RENAME TABLE`](/sql-statements/sql-statement-rename-table.md)                    | Renames a table.                                                                                       |
 | [`SHOW COLUMNS FROM`](/sql-statements/sql-statement-show-columns-from.md)          | Shows the columns from a table.                                                                        |
 | [`SHOW CREATE DATABASE`](/sql-statements/sql-statement-show-create-database.md)    | Shows the CREATE statement for a database.                                                             |
+| [`SHOW CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-show-create-materialized-view.md) | Shows the creation statement for a materialized view. |
+| [`SHOW CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-show-create-materialized-view-log.md) | Shows the creation statement for a materialized view log. |
 | [`SHOW CREATE SEQUENCE`](/sql-statements/sql-statement-show-create-sequence.md)    | Shows the CREATE statement for a sequence.                                                             |
 | [`SHOW CREATE TABLE`](/sql-statements/sql-statement-show-create-table.md)          | Shows the CREATE statement for a table.                                                                |
 | [`SHOW DATABASES`](/sql-statements/sql-statement-show-databases.md)                | Shows a list of databases that the current user has privileges to.                                     |
 | [`SHOW FIELDS FROM`](/sql-statements/sql-statement-show-fields-from.md)            | Shows columns of a table.                                                                              |
 | [`SHOW INDEXES`](/sql-statements/sql-statement-show-indexes.md)                    | Shows indexes of a table.                                                                              |
+| [`SHOW MATERIALIZED VIEW LOG WAIT_PURGE`](/sql-statements/sql-statement-show-materialized-view-log-wait-purge.md) | Shows information about log records waiting to be purged. |
+| [`SHOW MATERIALIZED VIEW LOGS`](/sql-statements/sql-statement-show-materialized-view-logs.md) | Lists materialized view logs. |
+| [`SHOW MATERIALIZED VIEW REMAIN_LOGS`](/sql-statements/sql-statement-show-materialized-view-remain-logs.md) | Shows information about remaining refresh logs. |
+| [`SHOW MATERIALIZED VIEWS`](/sql-statements/sql-statement-show-materialized-views.md) | Lists materialized views. |
 | [`SHOW SCHEMAS`](/sql-statements/sql-statement-show-schemas.md)                    | An alias to `SHOW DATABASES`, which shows a list of databases that the current user has privileges to. |
 | [`SHOW TABLE NEXT_ROW_ID`](/sql-statements/sql-statement-show-table-next-rowid.md) | Shows the next row ID for a table.                                                                     |
 | [`SHOW TABLE REGIONS`](/sql-statements/sql-statement-show-table-regions.md)        | Shows the Region information of a table in TiDB.                                                       |
@@ -203,6 +209,7 @@ TiDB uses SQL statements that aim to follow ISO/IEC SQL standards, with extensio
 
 | SQL Statement                                           | Description                                                   |
 | ------------------------------------------------------- | ------------------------------------------------------------- |
+| [`COMPARE MATERIALIZED VIEW`](/sql-statements/sql-statement-compare-materialized-view.md) | Compares a materialized view with a snapshot of its defining query result. |
 | [`DESC`](/sql-statements/sql-statement-desc.md)         | An alias to `DESCRIBE`, which shows the structure of a table. |
 | [`DESCRIBE`](/sql-statements/sql-statement-describe.md) | Shows the structure of a table.                               |
 | [`DO`](/sql-statements/sql-statement-do.md)             | Executes an expression but does not return any results.       |

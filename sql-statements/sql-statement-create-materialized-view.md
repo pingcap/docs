@@ -11,7 +11,9 @@ The `CREATE MATERIALIZED VIEW` statement defines a materialized view from a `SEL
 
 ```ebnf+diagram
 CreateMaterializedViewStmt ::=
-    'CREATE' 'MATERIALIZED' 'VIEW' TableName '(' ColumnList ')' MViewTableOptionListOpt MViewRefreshClauseOpt MViewAttributesOpt 'AS' CreateViewSelectOpt
+    'CREATE' 'MATERIALIZED' 'VIEW' MViewName '(' ColumnList ')' MViewTableOptionListOpt MViewRefreshClauseOpt MViewAttributesOpt 'AS' CreateViewSelectOpt
+
+MViewName ::= TableName
 
 MViewTableOptionListOpt ::=
     MViewTableOptionList?

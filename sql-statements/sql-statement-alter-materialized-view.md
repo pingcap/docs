@@ -11,7 +11,9 @@ The `ALTER MATERIALIZED VIEW` statement modifies the comment, refresh schedule, 
 
 ```ebnf+diagram
 AlterMaterializedViewStmt ::=
-    'ALTER' 'MATERIALIZED' 'VIEW' TableName AlterMaterializedViewActionList
+    'ALTER' 'MATERIALIZED' 'VIEW' MViewName AlterMaterializedViewActionList
+
+MViewName ::= TableName
 
 AlterMaterializedViewActionList ::=
     AlterMaterializedViewAction ( ',' AlterMaterializedViewAction )*

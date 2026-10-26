@@ -15,7 +15,9 @@ To refresh a materialized view, you need the `OPERATE VIEW` privilege on the mat
 
 ```ebnf+diagram
 RefreshMaterializedViewStmt ::=
-    'REFRESH' 'MATERIALIZED' 'VIEW' TableName RefreshWithAsyncModeOpt ( FastRefresh | CompleteRefresh ) RefreshObserveOpt
+    'REFRESH' 'MATERIALIZED' 'VIEW' MViewName RefreshWithAsyncModeOpt ( FastRefresh | CompleteRefresh ) RefreshObserveOpt
+
+MViewName ::= TableName
 
 RefreshWithAsyncModeOpt ::=
     ( 'WITH' 'ASYNC' 'MODE' )?

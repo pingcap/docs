@@ -11,8 +11,10 @@ The `DROP MATERIALIZED VIEW` statement removes a materialized view.
 
 ```ebnf+diagram
 DropMaterializedViewStmt ::=
-    'DROP' 'MATERIALIZED' 'VIEW' TableName
-|   'DROP' 'MATERIALIZED' 'VIEW' 'IF' 'EXISTS' TableName
+    'DROP' 'MATERIALIZED' 'VIEW' MViewName
+|   'DROP' 'MATERIALIZED' 'VIEW' 'IF' 'EXISTS' MViewName
+
+MViewName ::= TableName
 ```
 
 ## Examples

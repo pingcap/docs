@@ -64,6 +64,22 @@ Use `DRY RUN` to view the planned refresh steps without refreshing the materiali
 
 This section will describe how queries resolve to the stored result and any optimizer behavior. <!-- TODO: fill in from the spec. -->
 
+### Inspect and compare materialized views
+
+Use the following statements to inspect materialized views and their logs, and compare a materialized view with its defining query result.
+
+| Statement | Description |
+| --- | --- |
+| [`SHOW MATERIALIZED VIEWS`](/sql-statements/sql-statement-show-materialized-views.md) | List materialized views in a database. |
+| [`SHOW MATERIALIZED VIEW LOGS`](/sql-statements/sql-statement-show-materialized-view-logs.md) | List materialized view logs in a database. |
+| [`SHOW CREATE MATERIALIZED VIEW`](/sql-statements/sql-statement-show-create-materialized-view.md) | Inspect the creation statement for a materialized view. |
+| [`SHOW CREATE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-show-create-materialized-view-log.md) | Inspect the creation statement for a materialized view log on a base table. |
+| [`SHOW MATERIALIZED VIEW ... REMAIN_LOGS`](/sql-statements/sql-statement-show-materialized-view-remain-logs.md) | Inspect the remaining refresh logs for a materialized view. |
+| [`SHOW MATERIALIZED VIEW LOG ... WAIT_PURGE`](/sql-statements/sql-statement-show-materialized-view-log-wait-purge.md) | Inspect the purge backlog for a materialized view log. |
+| [`COMPARE MATERIALIZED VIEW`](/sql-statements/sql-statement-compare-materialized-view.md) | Compare a materialized view with a snapshot of its defining query result. |
+
+`COMPARE MATERIALIZED VIEW` runs on TiDB without MPP support. For large materialized views, the comparison can fail with an out-of-memory (OOM) error.
+
 ### Alter a materialized view
 
 For the syntax of this statement, see [`ALTER MATERIALIZED VIEW`](/sql-statements/sql-statement-alter-materialized-view.md).
