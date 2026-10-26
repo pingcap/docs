@@ -290,7 +290,7 @@ To replicate incremental data, do the following:
     1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page.
     2. Click **Connect** in the upper-right corner.
     3. In the connection dialog, select the connection type configured in the previous step from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
-    4. From the connection information, get the host and port of the instance for the selected connection type.
+    4. From the connection information, get the host and port of the instance for the selected connection type. In step 4, replace `172.16.6.125:4000` in `--sink-uri` with these values.
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 
