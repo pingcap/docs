@@ -1,11 +1,11 @@
 ---
 title: JSON_PATH_QUERY_FIRST
-summary: 指定した JSON 値に対して、JSON path が返す最初の JSON 項目を取得します。
+summary: 指定した JSON 値に対して、JSON パスが返す最初の JSON 項目を取得します。
 ---
 
 # JSON_PATH_QUERY_FIRST
 
-指定した JSON 値に対して、JSON path が返す最初の JSON 項目を取得します。
+指定した JSON 値に対して、JSON パスが返す最初の JSON 項目を取得します。
 
 ## 構文 {#syntax}
 
@@ -19,7 +19,7 @@ VARIANT
 
 ## 例 {#example}
 
-**Create a Table and Insert Sample Data**
+**テーブルを作成してサンプルデータを挿入する**
 
 ```sql
 CREATE TABLE products (
@@ -33,7 +33,7 @@ VALUES ('Laptop', '{"brand": "Dell", "colors": ["Black", "Silver"], "price": 120
        ('Headphones', '{"brand": "Sony", "colors": ["Black", "Blue", "Red"], "price": 150, "features": {"battery": "20h", "bluetooth": "5.0"}}');
 ```
 
-**製品詳細から最初の feature を抽出するクエリのデモ**
+**クエリのデモ: 製品詳細から最初の機能を抽出する**
 
 ```sql
 SELECT

@@ -15,7 +15,7 @@ JSON_TYPEOF(<json_string>)
 
 ## 戻り値の型 {#return-type}
 
-json_typeof 関数（または同様の関数）の戻り値の型は、解析された JSON 値のデータ型を示す文字列です。返される可能性のある値は、`'null'`、`'boolean'`、`'string'`、`'number'`、`'array'`、`'object'` です。
+json_typeof 関数（または同様の関数）の戻り値の型は、解析された JSON 値のデータ型を示す文字列です。返される可能性のある値は、'null'、'boolean'、'string'、'number'、'array'、'object' です。
 
 ## 例 {#examples}
 

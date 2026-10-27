@@ -36,7 +36,7 @@ SET SECONDARY ROLES { ALL | NONE }
 
 2. 権限を付与します。
 
-    次に、各ロールにいくつかの権限を付与します。たとえば、`admin` ロールにはデータベースを作成する権限を、`analyst` ロールにはテーブルに対して select する権限を付与します。
+    次に、各ロールにいくつかの権限を付与します。たとえば、`admin` ロールにはデータベースを作成する権限を、`analyst` ロールにはテーブルから選択する権限を付与します。
 
     ```sql
     GRANT CREATE DATABASE ON *.* TO ROLE admin;

@@ -34,10 +34,10 @@ SHOW TASKS [LIKE '<pattern>' | WHERE <expr>]
 - `condition_text`: タスクの WHEN 条件。
 - `after`: DAG 内の上流タスクのカンマ区切りリスト。
 - `suspend_task_after_num_failures`: 一時停止されるまでの連続失敗回数。
-- `error_integration`: 失敗時の通知インテグレーション。
+- `error_integration`: 失敗時の通知統合。
 - `next_schedule_time`: 次回のスケジュール実行時刻のタイムスタンプ。
 - `last_committed_on`: タスク定義が最後に更新された時刻のタイムスタンプ。
-- `last_suspended_on`: タスクが最後に一時停止された時刻のタイムスタンプ。存在する場合。
+- `last_suspended_on`: タスクが最後に一時停止された時刻のタイムスタンプ（存在する場合）。
 - `session_parameters`: タスク実行時に適用されるセッションパラメータ。
 
 ## 例 {#examples}

@@ -60,7 +60,7 @@ MERGE は、データマージ結果の概要を次のカラムで返します�
 
 ### 例 1: 複数の MATCHED 句を使用したマージ {#example-1-merge-with-multiple-matched-clauses}
 
-この例では、MERGE を使用して `employees` から `salaries` へ従業員データを同期し、指定した条件に基づいて給与情報の挿入と更新を行います。
+この例では、MERGE を使用して 'employees' から 'salaries' へ従業員データを同期し、指定した条件に基づいて給与情報の挿入と更新を行います。
 
 ```sql
 -- Create the 'employees' table as the source for merging

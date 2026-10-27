@@ -20,7 +20,7 @@ MAP_INSERT( <map>, <key>, <value> [, <updateFlag> ] )
 | `<map>`        | 入力 MAP。                                                                               |
 | `<key>`        | MAP に挿入する新しいキー。                                                          |
 | `<value>`      | MAP に挿入する新しい値。                                                        |
-| `<updateFlag>` | 既存のキーを上書きできるかどうかを示す boolean フラグです。デフォルトは FALSE です。 |
+| `<updateFlag>` | 既存のキーを上書きできるかどうかを示すブール型フラグです。デフォルトは FALSE です。 |
 
 ## 戻り値の型 {#return-type}
 

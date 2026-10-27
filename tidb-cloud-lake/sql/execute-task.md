@@ -5,7 +5,7 @@ summary: EXECUTE TASK ステートメントは、既存のタスクを手動で�
 
 # EXECUTE TASK
 
-`EXECUTE TASK` ステートメントは、既存のタスクを手動で実行するために使用されます。
+EXECUTE TASK ステートメントは、既存のタスクを手動で実行するために使用されます。
 
 **NOTICE:** この機能は、{{{ .lake }}} でのみそのまま利用できます。
 
@@ -29,4 +29,4 @@ EXECUTE TASK  <name>
 EXECUTE TASK  mytask;
 ```
 
-このコマンドは、`mytask` という名前のタスクを実行します。
+このコマンドは、mytask という名前のタスクを実行します。

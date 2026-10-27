@@ -5,7 +5,7 @@ summary: 2 つの文字列間の Jaro-Winkler 距離を計算します。これ�
 
 # JARO_WINKLER
 
-2 つの文字列間の [Jaro-Winkler distance](https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) を計算します。これは文字列間の類似度を測定するためによく使用され、値の範囲は 0.0（完全に異なる）から 1.0（同一の文字列）です。
+2 つの文字列間の [Jaro-Winkler 距離](https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance) を計算します。これは文字列間の類似度を測定するためによく使用され、値の範囲は 0.0（完全に異なる）から 1.0（同一の文字列）です。
 
 ## 構文 {#syntax}
 
@@ -15,7 +15,7 @@ JARO_WINKLER(<string1>, <string2>)
 
 ## 戻り値の型 {#return-type}
 
-`JARO_WINKLER` 関数は、2 つの入力文字列間の類似度を表す `FLOAT64` 値を返します。戻り値は次のルールに従います。
+JARO_WINKLER 関数は、2 つの入力文字列間の類似度を表す FLOAT64 値を返します。戻り値は次のルールに従います。
 
 - 類似度の範囲: 結果は 0.0（完全に異なる）から 1.0（同一）までの範囲です。
 

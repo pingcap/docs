@@ -1,6 +1,6 @@
 ---
 title: EXECUTE IMMEDIATE
-summary: SQL スクリプトを実行します。{{{ .lake }}} 向けの SQL スクリプトの書き方については、Stored Procedure & SQL Scripting を参照してください。
+summary: SQL スクリプトを実行します。{{{ .lake }}} 向けの SQL スクリプトの書き方については、ストアドプロシージャと SQL スクリプトを参照してください。
 ---
 
 # EXECUTE IMMEDIATE

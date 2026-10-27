@@ -132,7 +132,7 @@ SELECT * FROM employee_history;
 
 この例では、条件付き INSERT ALL を使用して、特定の条件に基づいて売上データを別々のテーブルに挿入する方法を示します。複数の条件を満たすレコードは、対応するすべてのテーブルに挿入されます。
 
-1. 3 つのテーブル `products`、`high_quantity_sales`、`high_price_sales`、および `sales_data_source` を作成します。次に、`sales_data_source` テーブルに 3 件の売上レコードを挿入します。
+1. 3 つのテーブル products、`high_quantity_sales`、`high_price_sales`、および `sales_data_source` を作成します。次に、`sales_data_source` テーブルに 3 件の売上レコードを挿入します。
 
     ```sql
     -- Create the high_quantity_sales table
@@ -199,7 +199,7 @@ SELECT * FROM employee_history;
     └─────────────────────────────────────────────────────────────────────────────────────────────────┘
     ```
 
-3. `high_quantity_sales` テーブルと `high_price_sales` テーブルのデータを空にします。
+3. high_quantity_sales テーブルと high_price_sales テーブルのデータを空にします。
 
     ```sql
     TRUNCATE TABLE high_quantity_sales;
@@ -207,7 +207,7 @@ SELECT * FROM employee_history;
     TRUNCATE TABLE high_price_sales;
     ```
 
-4. 条件付き INSERT FIRST を使用して、特定の条件に基づいて複数のテーブルに行を挿入します。各行について、最初の挿入が成功した時点で処理を停止します。そのため、ID が 1 と 3 の売上レコードは、手順 2 の条件付き INSERT ALL の結果とは異なり、`high_quantity_sales` テーブルにのみ挿入されます。
+4. 条件付き INSERT FIRST を使用して、特定の条件に基づいて複数のテーブルに行を挿入します。各行について、最初の挿入が成功した時点で処理を停止します。そのため、ID が 1 と 3 の売上レコードは、ステップ 2 の条件付き INSERT ALL の結果とは異なり、`high_quantity_sales` テーブルにのみ挿入されます。
 
 ```sql
 -- Conditional INSERT FIRST: Inserts each row into multiple tables, but stops after the first successful insertion.
@@ -236,7 +236,7 @@ SELECT * FROM high_price_sales;
 
 ### 例 3: 明示的なエイリアスを使用した挿入 {#example-3-insert-with-explicit-alias}
 
-この例では、VALUES 句でエイリアスを使用して、`employees` テーブルから `employee_history` テーブルへ、雇用日が '2023-02-01' より後の行を条件付きで挿入する方法を示します。
+この例では、VALUES 句でエイリアスを使用して、employees テーブルから `employee_history` テーブルへ、雇用日が '2023-02-01' より後の行を条件付きで挿入する方法を示します。
 
 1. `employees` と `employee_history` の 2 つのテーブルを作成し、`employees` テーブルにサンプルの従業員データを挿入します。
 
@@ -262,7 +262,7 @@ SELECT * FROM high_price_sales;
         (3, 'Michael', 'Johnson', '2023-03-01');
     ```
 
-2. エイリアスを使用した条件付き挿入により、`employees` テーブルから `employee_history` テーブルへレコードを転送し、雇用日が '2023-02-01' より後のものを対象に絞り込みます。
+2. エイリアスを使用した条件付き挿入により、employees テーブルから `employee_history` テーブルへレコードを転送し、雇用日が '2023-02-01' より後のものを対象に絞り込みます。
 
 ```sql
 INSERT ALL

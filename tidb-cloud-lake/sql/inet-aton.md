@@ -19,7 +19,7 @@ INET_ATON( '<ip>' )
 
 ## 戻り値の型 {#return-type}
 
-整数。
+Integer。
 
 ## 例 {#examples}
 

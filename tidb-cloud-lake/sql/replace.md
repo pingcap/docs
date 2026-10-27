@@ -28,7 +28,7 @@ REPLACE INTO <table_name> [ ( <col_name> [ , ... ] ) ]
     ON (<CONFLICT KEY>) ...
 ```
 
-REPLACE INTO は、指定した conflict key がテーブル内で見つかった場合は既存の行を更新し、conflict key が存在しない場合は新しい行を挿入します。conflict key とは、テーブル内の行を一意に識別するカラム、または複数カラムの組み合わせであり、REPLACE INTO 文を使用して新しい行を挿入するか既存の行を更新するかを判断するために使用されます。以下の例を参照してください。
+REPLACE INTO は、指定した競合キーがテーブル内で見つかった場合は既存の行を更新し、競合キーが存在しない場合は新しい行を挿入します。競合キーとは、テーブル内の行を一意に識別するカラム、または複数カラムの組み合わせであり、REPLACE INTO 文を使用して新しい行を挿入するか既存の行を更新するかを判断するために使用されます。以下の例を参照してください。
 
 ```sql
 CREATE TABLE employees (
@@ -51,7 +51,7 @@ VALUES (123, 'John Doe', 60000, 'john.doe@example.com');
 
 ## 分散 REPLACE INTO {#distributed-replace-into}
 
-`REPLACE INTO` は、クラスター環境での分散実行をサポートしています。分散 REPLACE INTO を有効にするには、ENABLE_DISTRIBUTED_REPLACE_INTO を 1 に設定します。これにより、クラスター環境でのデータロード (load) のパフォーマンスとスケーラビリティを向上させることができます。
+`REPLACE INTO` は、クラスター環境での分散実行をサポートしています。分散 REPLACE INTO を有効にするには、ENABLE_DISTRIBUTED_REPLACE_INTO を 1 に設定します。これにより、クラスター環境でのデータロードのパフォーマンスとスケーラビリティを向上させることができます。
 
 ```sql
 SET enable_distributed_replace_into = 1;
@@ -147,7 +147,7 @@ SELECT  * FROM Employees;
 
     > **Tip:**
     >
-    > [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) コマンドで使用できる FILE_FORMAT と COPY_OPTIONS を使って、ファイル形式や各種 copy 関連設定を指定できます。
+    > [COPY INTO](/tidb-cloud-lake/sql/copy-into-table.md) コマンドで使用できる FILE_FORMAT と COPY_OPTIONS を使って、ファイル形式や各種コピー関連設定を指定できます。
 
     ```sql
     REPLACE INTO sample

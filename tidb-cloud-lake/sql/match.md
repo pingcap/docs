@@ -27,7 +27,7 @@ MATCH('<columns>', '<keywords>'[, '<options>'])
 |--------|--------|-------------|---------|
 | `fuzziness` | `1` または `2` | 指定した Levenshtein 距離内でキーワードを一致させます。 | `MATCH('summary, tags', 'pedestrain', 'fuzziness=1')` は、正しいスペルの `pedestrian` を含む行に一致します。 |
 | `operator` | `OR` (デフォルト) または `AND` | ブール演算子が指定されていない場合に、複数のキーワードをどのように組み合わせるかを制御します。 | `MATCH('summary, tags', 'traffic light red', 'operator=AND')` は両方の単語を必要とします。 |
-| `lenient` | `true` または `false` | `true` の場合、解析エラーを抑制し、空の結果セットを返します。 | `MATCH('summary, tags', '()', 'lenient=true')` は、エラーの代わりに行を返しません。 |
+| `lenient` | `true` または `false` | `true` の場合、解析エラーを抑制し、空の結果セットを返します。 | `MATCH('summary, tags', '()', 'lenient=true')` は、エラーにならずに 0 行を返します。 |
 
 ## 例 {#examples}
 
@@ -56,7 +56,7 @@ INSERT INTO frame_notes VALUES
       'school-zone caution pedestrian');
 ```
 
-### 例: Boolean AND {#example-boolean-and}
+### 例: ブール AND {#example-boolean-and}
 
 ```sql
 SELECT id, summary

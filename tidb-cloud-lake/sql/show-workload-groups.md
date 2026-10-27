@@ -1,11 +1,11 @@
 ---
 title: SHOW WORKLOAD GROUPS
-summary: 既存のすべての workload group とその quota の一覧を返します。
+summary: 既存のすべてのワークロードグループとそのクォータの一覧を返します。
 ---
 
 # SHOW WORKLOAD GROUPS
 
-既存のすべての workload group とその quota の一覧を返します。
+既存のすべてのワークロードグループとそのクォータの一覧を返します。
 
 ## 構文 {#syntax}
 

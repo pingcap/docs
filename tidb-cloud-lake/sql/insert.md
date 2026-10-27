@@ -185,7 +185,7 @@ SELECT * FROM staff_records;
 
 ### 例 4: stage 内のファイルを使った挿入 {#example-4-insert-with-staged-files}
 
-{{{ .lake }}} では、INSERT INTO 文を使用して stage 内のファイルからテーブルにデータを挿入できます。これは、{{{ .lake }}} が [Query Staged Files](/tidb-cloud-lake/sql/stage.md) を実行し、そのクエリ結果をテーブルに取り込める機能によって実現されています。
+{{{ .lake }}} では、INSERT INTO 文を使用して stage 内のファイルからテーブルにデータを挿入できます。これは、{{{ .lake }}} が [stage 上のファイルをクエリ](/tidb-cloud-lake/sql/stage.md)し、そのクエリ結果をテーブルに取り込める機能によって実現されています。
 
 1. `sample` という名前のテーブルを作成します。
 

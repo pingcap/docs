@@ -50,7 +50,7 @@ split_part('datalake cloud', ',', 1)|
 ------------------------------------+
 Datalake Cloud                      |
 
--- 区切り文字として '   ' (tab) を使用
+-- 区切り文字として '    ' (tab) を使用
 -- SPLIT_PART は個々のフィールドを返します。
 SELECT SPLIT_PART('2023-10-19 15:30:45   INFO   Log message goes here', '   ', 3);
 

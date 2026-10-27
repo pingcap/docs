@@ -82,7 +82,7 @@ FROM data;
 └──────────────┘
 ```
 
-## 関連項目 {#see-also}
+## 関連情報 {#see-also}
 
 - [SPLIT](/tidb-cloud-lake/sql/split.md): 単純な文字列分割用
 - [REGEXP_SPLIT_TO_ARRAY](/tidb-cloud-lake/sql/regexp-split-array.md): 文字列を配列に分割します

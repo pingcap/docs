@@ -1,11 +1,11 @@
 ---
 title: JSON_PATH_QUERY
-summary: 指定した JSON 値に対して、JSON path によって返されるすべての JSON 項目を取得します。
+summary: 指定した JSON 値に対して、JSON パスによって返されるすべての JSON 項目を取得します。
 ---
 
 # JSON_PATH_QUERY
 
-指定した JSON 値に対して、JSON path によって返されるすべての JSON 項目を取得します。
+指定した JSON 値に対して、JSON パスによって返されるすべての JSON 項目を取得します。
 
 ## 構文 {#syntax}
 

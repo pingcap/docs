@@ -1,6 +1,6 @@
 ---
 title: FUSE_TAG
-summary: テーブルのスナップショットタグを返します。スナップショットタグの詳細については、Snapshot Tags を参照してください。
+summary: テーブルのスナップショットタグを返します。スナップショットタグの詳細については、スナップショットタグを参照してください。
 ---
 
 # FUSE_TAG
@@ -19,7 +19,7 @@ FUSE_TAG('<database_name>', '<table_name>')
 |---------------------|----------------------|-----------------------------------------------------------------------------|
 | name                | STRING               | タグ名                                                                      |
 | snapshot_location   | STRING               | タグが指しているスナップショットファイル                                    |
-| expire_at           | TIMESTAMP (nullable) | 有効期限のタイムスタンプ。`CREATE SNAPSHOT TAG` で `RETAIN` を使用した場合に設定されます |
+| expire_at           | TIMESTAMP (nullable) | 有効期限のタイムスタンプ。CREATE SNAPSHOT TAG で `RETAIN` を使用した場合に設定されます |
 
 ## 例 {#examples}
 

@@ -50,7 +50,7 @@ SHOW TAGS WHERE comment IS NOT NULL;
 SHOW TAGS LIMIT 5;
 ```
 
-system テーブルを使用した等価なクエリ:
+システムテーブルを使用した等価なクエリ:
 
 ```sql
 SELECT * FROM system.tags;
