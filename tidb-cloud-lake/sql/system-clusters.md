@@ -1,11 +1,11 @@
 ---
 title: system.clusters
-summary: クラスター ノードに関する情報を含みます。
+summary: クラスターノードに関する情報を含みます。
 ---
 
 # system.clusters
 
-クラスター ノードに関する情報を含みます。
+クラスターノードに関する情報を含みます。
 
 > **Note:**
 >

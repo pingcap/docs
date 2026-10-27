@@ -164,7 +164,7 @@ SHOW WORKERS;
 
 - 開発およびテストでは `size='small'` から始める
 - 使用頻度の低い worker のコストを節約するために `auto_suspend` を使用する
-- 想定されるロード (load) に基づいて適切な `min_cluster_count` を設定する
+- 想定される負荷に基づいて適切な `min_cluster_count` を設定する
 
 ### 3. タグ戦略 {#3-tag-strategy}
 
@@ -236,7 +236,7 @@ Worker が想定どおりに起動しない場合は、次の点を確認して�
 
 1. UDF が存在し、適切に設定されているか確認する
 2. 環境変数がクラウドコンソールで設定されていることを確認する
-3. 現在の Worker メタデータを確認し、必要に応じて再開する
+3. 現在の worker メタデータを確認し、必要に応じて再開する
 
 ```sql
 -- Inspect current worker metadata
@@ -273,4 +273,4 @@ ALTER WORKER my_worker SET
 
 - [ユーザー定義関数 (UDF)](/tidb-cloud-lake/sql/user-defined-function.md) - UDF の作成方法と使用方法について説明します
 - [Warehouse 管理](/tidb-cloud-lake/sql/warehouse-overview.md) - クエリ実行用のコンピュートリソースを管理します
-- [Workload Groups](/tidb-cloud-lake/sql/workload-group.md) - リソース割り当てと優先度を制御します
+- [ワークロードグループ](/tidb-cloud-lake/sql/workload-group.md) - リソース割り当てと優先度を制御します

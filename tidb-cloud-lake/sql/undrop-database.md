@@ -42,7 +42,7 @@ UNDROP DATABASE <database_name>
 
 ## 例 {#examples}
 
-この例では、`orders_2024` という名前のデータベースを作成し、削除してから復元します。
+この例では、"orders_2024" という名前のデータベースを作成し、削除してから復元します。
 
 ```sql
 root@localhost:8000/default> CREATE DATABASE orders_2024;

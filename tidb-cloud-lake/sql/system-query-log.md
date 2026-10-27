@@ -23,7 +23,7 @@ show users;
 select query_tag, query_text from system.query_log where query_tag='eric' limit 1;
 ```
 
-返された結果では、`eric` というタグが付いたクエリのレコードを確認できます。
+返された結果では、'eric' というタグが付いたクエリのレコードを確認できます。
 
 ```sql
 -[ RECORD 1 ]-----------------------------------

@@ -1,11 +1,11 @@
 ---
 title: TRY_TO_TIMESTAMP
-summary: "{{{ .lake }}} における TO_TIMESTAMP のバリアントで、入力式を timestamp に変換する点は同じですが、変換に失敗した場合はエラーを発生させる代わりに NULL を返すことで、エラーハンドリングをサポートします。"
+summary: "{{{ .lake }}} における TO_TIMESTAMP のバリアントで、入力式をタイムスタンプに変換する点は同じですが、変換に失敗した場合はエラーを発生させる代わりに NULL を返すことで、エラーハンドリングをサポートします。"
 ---
 
 # TRY_TO_TIMESTAMP
 
-{{{ .lake }}} における [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md) のバリアントで、入力式を timestamp に変換する点は同じですが、変換に失敗した場合はエラーを発生させる代わりに NULL を返すことで、エラーハンドリングをサポートします。
+{{{ .lake }}} における [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md) のバリアントで、入力式をタイムスタンプに変換する点は同じですが、変換に失敗した場合はエラーを発生させる代わりに NULL を返すことで、エラーハンドリングをサポートします。
 
 関連情報: [TO_TIMESTAMP](/tidb-cloud-lake/sql/to-timestamp.md)
 
@@ -19,7 +19,7 @@ TRY_TO_TIMESTAMP(<expr>)
 TRY_TO_TIMESTAMP(<expr>, <pattern>)
 ```
 
-2 つの引数が指定された場合、この関数は 1 つ目の文字列を、2 つ目の文字列で指定されたパターンに基づいて timestamp に変換します。パターンを指定するには、フォーマット指定子を使用します。フォーマット指定子を使うことで、日付および時刻の値に対して目的の形式を定義できます。サポートされているフォーマット指定子の一覧については、[日付と時刻の書式設定](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time) を参照してください。
+2 つの引数が指定された場合、この関数は 1 つ目の文字列を、2 つ目の文字列で指定されたパターンに基づいてタイムスタンプに変換します。パターンを指定するには、フォーマット指定子を使用します。フォーマット指定子を使うことで、日付および時刻の値に対して目的の形式を定義できます。サポートされているフォーマット指定子の一覧については、[日付と時刻の書式設定](/tidb-cloud-lake/sql/date-time.md#formatting-date-and-time) を参照してください。
 
 ## エイリアス {#aliases}
 

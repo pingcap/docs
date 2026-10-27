@@ -17,7 +17,7 @@ TO_START_OF_MINUTE( <expr> )
 
 | 引数 | 説明 |
 |-----------|-------------|
-| `<expr>`  | timestamp   |
+| `<expr>`  | タイムスタンプ |
 
 ## 戻り値の型 {#return-type}
 

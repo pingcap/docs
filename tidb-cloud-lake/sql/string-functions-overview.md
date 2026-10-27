@@ -80,7 +80,7 @@ summary: このページでは、{{{ .lake }}} の文字列関数について、
 | [NOT_LIKE](/tidb-cloud-lake/sql/not-like.md) | LIKE の否定 | `'datalake' NOT LIKE 'cloud%'` → `true` |
 | [REGEXP](/tidb-cloud-lake/sql/regexp.md) / [RLIKE](/tidb-cloud-lake/sql/rlike.md) | 正規表現を使ったパターンマッチング | `'datalake' REGEXP '^data'` → `true` |
 | [NOT_REGEXP](/tidb-cloud-lake/sql/not-regexp.md) / [NOT_RLIKE](/tidb-cloud-lake/sql/not-rlike.md) | 正規表現マッチングの否定 | `'datalake' NOT REGEXP '^cloud'` → `true` |
-| [REGEXP_LIKE](/tidb-cloud-lake/sql/regexp-like.md) | 正規表現に一致するかどうかを boolean で返します | `REGEXP_LIKE('datalake', '^data')` → `true` |
+| [REGEXP_LIKE](/tidb-cloud-lake/sql/regexp-like.md) | 正規表現に一致するかどうかをブール値で返します | `REGEXP_LIKE('datalake', '^data')` → `true` |
 | [REGEXP_INSTR](/tidb-cloud-lake/sql/regexp-instr.md) | 正規表現に一致した位置を返します | `REGEXP_INSTR('datalake', 'lake')` → `5` |
 | [REGEXP_SUBSTR](/tidb-cloud-lake/sql/regexp-substr.md) | 正規表現に一致する部分文字列を返します | `REGEXP_SUBSTR('datalake', 'lake')` → `'lake'` |
 | [REGEXP_REPLACE](/tidb-cloud-lake/sql/regexp-replace.md) | 正規表現に一致した部分を置換します | `REGEXP_REPLACE('datalake', 'lake', 'cloud')` → `'datacloud'` |

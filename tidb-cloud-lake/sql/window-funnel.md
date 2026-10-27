@@ -19,22 +19,22 @@ summary: ファネル分析。
 WINDOW_FUNNEL( <window> )( <timestamp>, <cond1>, <cond2>, ..., <condN> )
 ```
 
-**Arguments**
+**引数**
 
 - `<timestamp>` — タイムスタンプを含むカラム名です。サポートされるデータ型: 整数型および datetime 型。
 - `<cond>` — イベントチェーンを表す条件またはデータです。`Boolean` データ型である必要があります。
 
-**Parameters**
+**パラメータ**
 
 - `<window>` — スライディングウィンドウの長さで、最初の条件と最後の条件の間の時間間隔です。`window` の単位は `timestamp` 自体に依存し、状況によって異なります。`timestamp of cond1 <= timestamp of cond2 <= ... <= timestamp of condN <= timestamp of cond1 + window` という式によって決定されます。
 
-**Returned value**
+**戻り値**
 
 スライディング時間ウィンドウ内で、チェーンから連続して成立した条件の最大数です。選択されたすべてのチェーンが分析されます。
 
 型: `UInt8`。
 
-**Example**
+**例**
 
 オンラインストアで、ユーザーがスマートフォンを選択して 2 回購入するのに、一定の時間が十分かどうかを判定します。
 

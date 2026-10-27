@@ -22,7 +22,7 @@ ST_WITHIN(<geometry1>, <geometry2>)
 
 > **Note:**
 >
-> 2 つの入力 GEOMETRY オブジェクトの SRID が異なる場合、この関数はエラーを返します。
+> 2 つの入力 GEOMETRY オブジェクトの SRID が異なる場合、この関数はエラーを報告します。
 
 ## 戻り値の型 {#return-type}
 

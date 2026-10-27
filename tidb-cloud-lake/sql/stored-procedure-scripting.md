@@ -473,7 +473,7 @@ CALL PROCEDURE sp_total_active_salary();
 
 ### カーソル {#cursors}
 
-必要に応じて行を取得する必要がある場合は、カーソルを宣言します。
+オンデマンドで行を取得する必要がある場合は、カーソルを宣言します。
 
 ```sql
 CREATE OR REPLACE PROCEDURE sp_fetch_two()

@@ -59,7 +59,7 @@ summary: ウィンドウ関数は、関連する行の集合に対して計算�
 
 **エイリアス:**
 
-| 関数 | 別名 |
+| 関数 | エイリアス元 |
 |----------|----------|
 | [FIRST](/tidb-cloud-lake/sql/first.md) | FIRST_VALUE |
 | [LAST](/tidb-cloud-lake/sql/last.md) | LAST_VALUE |

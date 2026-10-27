@@ -21,7 +21,7 @@ summary: "{{{ .lake }}} の Warehouse 関連 SQL コマンド。"
 タグは、AWS リソースタグと同様に、Warehouse の分類や整理に役立つキーと値のペアです。一般的に、次の用途で使用されます。
 
 - **コスト配分**: チーム、プロジェクト、またはコストセンターごとに Warehouse のコストを追跡する
-- **環境の識別**: Warehouse を dev、staging、または 本番 としてマークする
+- **環境の識別**: Warehouse を dev、staging、または production としてマークする
 - **チーム所有権**: どのチームが Warehouse を所有または管理しているかを識別する
 - **カスタムメタデータ**: 組織上の目的のために任意のメタデータを追加する
 
@@ -41,7 +41,7 @@ summary: "{{{ .lake }}} の Warehouse 関連 SQL コマンド。"
 
 ## サポートされるステートメント {#supported-statements}
 
-| 文 | 目的                         | 注記                                                       |
+| ステートメント | 目的                         | 注記                                                       |
 | ------------------ | ---------------------------- | ---------------------------------------------------------- |
 | `CREATE WAREHOUSE` | Warehouse を作成             | `IF NOT EXISTS` とオプションリストをサポート               |
 | `ALTER WAREHOUSE`  | 一時停止/再開/変更/名前変更  | `SUSPEND`/`RESUME`、`SET <options>`、または `RENAME TO <name>` |
