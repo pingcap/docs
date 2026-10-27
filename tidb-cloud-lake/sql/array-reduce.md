@@ -1,6 +1,6 @@
 ---
 title: ARRAY_REDUCE
-summary: 指定した Lambda 式を適用して JSON 配列を単一の値に縮約します。Lambda 式の詳細については、Lambda Expressions を参照してください。
+summary: 指定した Lambda 式を適用して JSON 配列を単一の値に縮約します。Lambda 式の詳細については、ラムダ式を参照してください。
 ---
 
 # ARRAY_REDUCE

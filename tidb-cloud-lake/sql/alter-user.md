@@ -136,7 +136,7 @@ show roles;
 └───────────────────────────────────────────────────────┘
 ```
 
-### 例 2: Workload Group の設定と解除 {#example-2-setting--unsetting-workload-group}
+### 例 2: ワークロードグループの設定と解除 {#example-2-setting--unsetting-workload-group}
 
 ```sql
 CREATE USER user1 IDENTIFIED BY 'abc123';

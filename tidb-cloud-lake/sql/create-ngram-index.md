@@ -23,7 +23,7 @@ CREATE [OR REPLACE] TABLE <table_name> (
 )...
 ```
 
-- `gram_size`（デフォルトは 3）は、カラムのテキストをインデックス化する際に、文字ベースの各部分文字列（n-gram）の長さを指定します。たとえば、`gram_size = 3` の場合、テキスト `"hello world"` は次のような重なり合う部分文字列に分割されます。
+- `gram_size`（デフォルトは 3）は、カラムのテキストをインデックス化する際に、文字ベースの各部分文字列（n-gram）の長さを指定します。たとえば、`gram_size = 3` の場合、テキスト "hello world" は次のような重なり合う部分文字列に分割されます。
 
   ```text
   "hel", "ell", "llo", "lo ", "o w", " wo", "wor", "orl", "rld"

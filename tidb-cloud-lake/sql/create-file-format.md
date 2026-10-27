@@ -67,4 +67,4 @@ USE_RAW_PATH = TRUE
 OVERWRITE = TRUE;
 ```
 
-Lance 固有の動作と制限事項については、[入力および出力ファイルフォーマット](/tidb-cloud-lake/sql/input-output-file-formats.md#lance-options) および [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください。
+Lance 固有の動作と制限事項については、[入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md#lance-options) および [`COPY INTO <location>`](/tidb-cloud-lake/sql/copy-into-location.md) を参照してください。

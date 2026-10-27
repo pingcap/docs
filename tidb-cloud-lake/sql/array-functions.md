@@ -94,7 +94,7 @@ summary: このセクションでは、{{{ .lake }}} の配列関数に関する
 | 関数 | 説明 | 例 |
 |----------|-------------|---------|
 | [ARRAY_COMPACT](/tidb-cloud-lake/sql/array-compact.md) | 配列から null 値を削除します | `ARRAY_COMPACT([1,null,2,null,3])` → `[1,2,3]` |
-| [ARRAY_FLATTEN](/tidb-cloud-lake/sql/array-flatten.md) | ネストされた配列を 1 つの配列に平坦化します | `ARRAY_FLATTEN([[1,2],[3,4]])` → `[1,2,3,4]` |
+| [ARRAY_FLATTEN](/tidb-cloud-lake/sql/array-flatten.md) | ネストされた配列を 1 つの配列にフラット化します | `ARRAY_FLATTEN([[1,2],[3,4]])` → `[1,2,3,4]` |
 | [ARRAY_REVERSE](/tidb-cloud-lake/sql/array-reverse.md) | 配列要素の順序を反転します | `ARRAY_REVERSE([1,2,3])` → `[3,2,1]` |
 | [ARRAY_INDEXOF](/tidb-cloud-lake/sql/array-indexof.md) | 要素が最初に出現するインデックスを返します | `ARRAY_INDEXOF([1,2,3,2], 2)` → `1` |
 | [UNNEST](/tidb-cloud-lake/sql/unnest.md) | 配列を個別の行に展開します | `UNNEST([1,2,3])` → `1, 2, 3`（それぞれ別の行として） |

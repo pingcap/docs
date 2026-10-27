@@ -45,7 +45,7 @@ ALTER PASSWORD POLICY [ IF EXISTS ] <name> UNSET
 
 ## 例 {#examples}
 
-この例では、最小パスワード長を 10 文字に設定した `SecureLogin` という名前のパスワードポリシーを作成し、その後、10 文字から 16 文字までのパスワードを許可するように更新します。
+この例では、最小パスワード長を 10 文字に設定した 'SecureLogin' という名前のパスワードポリシーを作成し、その後、10 文字から 16 文字までのパスワードを許可するように更新します。
 
 ```sql
 CREATE PASSWORD POLICY SecureLogin

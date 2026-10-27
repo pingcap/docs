@@ -28,7 +28,7 @@ ARG_MIN(<arg>, <val>)
 
 ## 例 {#example}
 
-`id`、`name`、`score` の各カラムを持つ `students` テーブルを作成し、いくつかのデータを挿入します。
+id、name、score の各カラムを持つ students テーブルを作成し、いくつかのデータを挿入します。
 
 ```sql
 CREATE TABLE students (

@@ -1,6 +1,6 @@
 ---
 title: Catalog
-summary: " {{{ .lake }}} における Catalog 操作の概要。"
+summary: "{{{ .lake }}} における Catalog 操作の概要。"
 ---
 
 # Catalog

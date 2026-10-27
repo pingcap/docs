@@ -43,7 +43,7 @@ CONNECTION = (
 | `CONNECTION` | はい | Iceberg カタログおよびそのストレージの接続プロパティ。 |
 | `CONNECTION` 内の `TYPE` | はい | Iceberg カタログタイプ: `rest`、`glue`、`storage`、または `hive`。 |
 | `ADDRESS` | カタログタイプによる | カタログサービスのエンドポイント、または Hive Metastore のアドレス。 |
-| `WAREHOUSE` | カタログタイプによる | カタログで使用される Warehouse の場所。 |
+| `WAREHOUSE` | カタログタイプによる | カタログで使用される warehouse の場所。 |
 | `<connection_parameter>` | カタログタイプによる | カタログ、認証、およびオブジェクトストレージのプロパティ。 |
 
 以下の接続パラメータは、S3 互換ストレージで使用できます。
@@ -73,10 +73,10 @@ CONNECTION = (
 
 | カタログタイプ | `TYPE` 値 | 接続要件 |
 | --- | --- | --- |
-| REST | `rest` | REST カタログアドレス、Warehouse の場所、およびストレージプロパティ。 |
+| REST | `rest` | REST カタログアドレス、warehouse の場所、およびストレージプロパティ。 |
 | AWS Glue | `glue` | Glue リージョンと認証プロパティに加え、S3 ストレージプロパティ。 |
 | Storage (Amazon S3 Tables) | `storage` | テーブルバケット ARN と AWS クライアント認証プロパティ。 |
-| Hive Metastore | `hive` | Hive Metastore アドレス、Warehouse の場所、およびストレージプロパティ。 |
+| Hive Metastore | `hive` | Hive Metastore アドレス、warehouse の場所、およびストレージプロパティ。 |
 
 Storage カタログは、以下の AWS クライアントプロパティをサポートします。
 

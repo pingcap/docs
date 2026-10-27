@@ -1,11 +1,11 @@
 ---
 title: DESCRIBE NOTIFICATION INTEGRATION
-summary: 通知インテグレーションのプロパティを表示します。
+summary: 通知統合のプロパティを表示します。
 ---
 
 # DESCRIBE NOTIFICATION INTEGRATION
 
-通知インテグレーションのプロパティを表示します。
+通知統合のプロパティを表示します。
 
 > **Note:**
 >

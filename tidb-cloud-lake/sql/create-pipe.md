@@ -5,7 +5,7 @@ summary: "{{{ .lake }}} の取り込みパイプラインで CREATE PIPE コマ�
 
 # CREATE PIPE
 
-`COPY INTO <table>` ステートメントを基盤とする pipe を作成します。
+`COPY INTO <table>` ステートメントを基盤とするパイプを作成します。
 
 ## 構文 {#syntax}
 
@@ -21,10 +21,10 @@ COPY INTO <table> ...
 
 | パラメータ | 説明 |
 |-----------|-------------|
-| `IF NOT EXISTS` | オプション。pipe がすでに存在する場合は、変更を加えずに成功します。 |
+| `IF NOT EXISTS` | オプション。パイプがすでに存在する場合は、変更を加えずに成功します。 |
 | `AUTO_INGEST = TRUE` | オプション。自動取り込みを有効にします。 |
-| `COMMENT` / `COMMENTS` | オプションの pipe コメントです。 |
-| `AS COPY INTO ...` | pipe によって実行される `COPY INTO <table>` ステートメントです。 |
+| `COMMENT` / `COMMENTS` | オプションのパイプコメントです。 |
+| `AS COPY INTO ...` | パイプによって実行される `COPY INTO <table>` ステートメントです。 |
 
 ## 例 {#example}
 

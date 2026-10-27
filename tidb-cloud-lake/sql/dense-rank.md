@@ -77,7 +77,7 @@ Charlie | Science |    85 | 5
 Bob     | Science |    80 | 6
 ```
 
-**各 student 内でスコアに対して dense rank を付与する:**
+**各学生内でスコアに対して dense rank を付与する:**
 
 ```sql
 SELECT student, subject, score,

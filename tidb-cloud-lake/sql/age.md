@@ -30,7 +30,7 @@ INTERVAL 型を返します。
 2. 残りの月の差分（月ごとの日数の違いを考慮）
 3. 残りの日の差分（時刻コンポーネントを含む）
 
-`<end_timestamp>` が `<start_timestamp>` より前の場合は、負の interval が返されます。
+`<end_timestamp>` が `<start_timestamp>` より前の場合は、負の間隔が返されます。
 
 ## 例 {#examples}
 
@@ -87,6 +87,6 @@ FROM projects;
 ╰─────────────────────────────────────────────╯
 ```
 
-## 関連項目 {#see-also}
+## 関連情報 {#see-also}
 
 - [DATE_DIFF](/tidb-cloud-lake/sql/date-diff.md): 特定の時間単位の差分を計算するための代替関数

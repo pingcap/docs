@@ -31,4 +31,4 @@ DROP TASK [ IF EXISTS ] <name>
 DROP TASK IF EXISTS mytask;
 ```
 
-このコマンドは、`mytask` という名前のタスクが存在する場合に削除します。
+このコマンドは、mytask という名前のタスクが存在する場合に削除します。
