@@ -8,6 +8,716 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes']
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+<<<<<<< HEAD
+=======
+## October 20, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Chat2Query is no longer supported in [SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor/?plan=starter&compatibility=mysql) and [Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview/?plan=starter&compatibility=mysql).
+
+        Starting from October 20, 2026, TiDB Cloud no longer supports Chat2Query in SQL Editor and Data Service. This change only affects Chat2Query and the Chat2Query API. All other features in SQL Editor and Data Service remain available.
+
+- **TiDB Cloud Essential and Premium**
+
+    - TiDB Cloud Essential and Premium support [New Relic](https://newrelic.com/) metrics integration (public preview).
+
+        You can send key performance metrics from your TiDB Cloud Essential or Premium instances to New Relic and monitor them on your existing New Relic dashboards.
+
+        For more information, see the following documentation:
+
+        - [Integrate TiDB Cloud Essential with New Relic (PREVIEW)](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x/?plan=essential)
+        - [Integrate TiDB Cloud Premium with New Relic (PREVIEW)](https://docs.pingcap.com/tidbcloud/monitor-new-relic-integration-for-tidb-x/?plan=premium)
+
+- **TiDB Cloud Dedicated**
+
+    - Newly created TiDB Cloud Dedicated clusters now have public endpoints disabled by default. Existing clusters retain their current public endpoint settings.
+
+        Before connecting to a newly created cluster over the public internet, enable **Public Endpoint** under **Settings > Networking** in the [TiDB Cloud console](https://tidbcloud.com/), and then add your client IP address to the IP access list.
+
+        For more information, see [Connect to TiDB Cloud Dedicated via Public Connection](https://docs.pingcap.com/tidbcloud/connect-via-standard-connection/).
+
+- **TiDB Cloud BYOC**
+
+    - TiDB Cloud BYOC supports vCPU limit alerts to help you better monitor resource usage and control cloud costs.
+
+        TiDB Cloud BYOC now notifies you when provisioned vCPU usage approaches the configured regional limit or when a scale-up operation is blocked because the limit has been reached.
+
+        These alerts provide clear guidance on available scaling capacity and recommended actions.
+
+        For more information, see [TiDB Cloud Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting/?plan=byoc).
+
+## October 15, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - PostgreSQL-compatible TiDB Cloud Starter is now in public preview on AWS.
+
+      When creating a TiDB Cloud Starter instance, you can now choose between MySQL and PostgreSQL compatibility based on your application needs and technology stack.
+
+      PostgreSQL-compatible TiDB Cloud Starter instances support core instance management operations, including connection, monitoring, backup, and restore. It also supports pgvector-compatible vector search and selected PostgreSQL extensions, enabling you to build a wide range of applications using familiar PostgreSQL ecosystem tools and capabilities.
+
+      Currently, the public preview of PostgreSQL-compatible TiDB Cloud Starter is intended for development and evaluation and is not recommended for production workloads.
+
+      To get started, see [PostgreSQL-compatible TiDB Cloud Starter documentation](https://docs.pingcap.com/tidbcloud/starter/?plan=starter&compatibility=postgresql).
+
+- **TiDB Cloud BYOC**
+
+    - TiDB Cloud BYOC is now in public preview on AWS.
+
+        Powered by the TiDB X kernel, [TiDB Cloud BYOC](https://docs.pingcap.com/tidbcloud/architecture-concepts/?plan=byoc#tidb-cloud-byoc) is specifically designed for mission-critical and AI workloads that require a scalable, reliable database platform while keeping the data plane within your own cloud environment.
+
+        TiDB Cloud BYOC combines the flexibility of customer-managed infrastructure with the operational simplicity of a managed TiDB Cloud service.
+
+        With the data plane running directly in your AWS account and VPC, your organization retains greater control over the cloud environment, ensuring strict data isolation and seamless security integration. At the same time, PingCAP manages the control plane. This allows you to benefit from TiDB's distributed SQL capabilities, scalability, and compatibility, without the full operational burden of managing the platform yourself.
+
+        Because TiDB Cloud BYOC is deployed in your AWS account, onboarding requires coordination with the TiDB Cloud team. To start BYOC onboarding, [contact Sales](https://www.pingcap.com/contact-us/).
+
+        For more information, see [TiDB Cloud BYOC documentation](https://docs.pingcap.com/tidbcloud/byoc/?plan=byoc).
+
+- **TiDB Cloud Filesystem**
+
+    - TiDB Cloud Filesystem is now in public preview.
+
+        TiDB Cloud Filesystem is a distributed file system designed specifically for AI coding agents. Built on the same TiDB Cloud Starter infrastructure that already powers millions of AI agents in production, it provides Git-aware, persistent workspaces across sandbox lifecycles, with always-on availability and seamless scalability.
+
+        To get started, see [TiDB Cloud Filesystem documentation](https://docs.pingcap.com/tidbcloud-filesystem/).
+
+## October 13, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential now lets you create an instance or update its capacity without setting Max RCU. This feature is available for TiDB Cloud Essential instances running TiDB version `CLOUD.202603.x` or later.
+
+        - **Elastic Mode** is the default mode when you create a new TiDB Cloud Essential instance. In this mode, TiDB Cloud automatically allocates backend resources based on your workload. For workloads that consistently require more than 100,000 RCUs, consider upgrading to TiDB Cloud Premium to avoid potential performance bottlenecks.
+        - If you need to set a maximum capacity limit, you can switch to **Limited Mode**.
+
+      Existing TiDB Cloud Essential instances with a configured Max RCU continue to run without any configuration changes. You can keep the current value or clear it to switch to **Elastic Mode**.
+
+      For more information, see [Create a TiDB Cloud Essential instance](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=essential).
+
+    - TiDB Cloud Essential now supports manual backups. These manual backups are retained until you explicitly delete them.
+
+      This feature is available for TiDB Cloud Essential instances running TiDB version `CLOUD.202603.x` or later.
+
+      To create a manual backup, see [Manual backups](https://docs.pingcap.com/tidbcloud/backup-and-restore-serverless/?plan=essential#manual-backups).
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium now lets you create an instance or update its capacity without setting Max RCU.
+
+        - **Elastic Mode** is the default mode when you create a new TiDB Cloud Premium instance: TiDB Cloud automatically allocates backend resources based on your workload. In Elastic Mode, you can set Baseline RCU to specify the minimum provisioned capacity and minimum billable capacity. RCU consumption alerts are supported, and you can set a custom threshold to monitor usage as capacity scales.
+        - If you need to set a maximum capacity limit, you can still use **Limited Mode**.
+
+      Existing TiDB Cloud Premium instances with a configured Max RCU continue to run without any configuration changes. You can keep the current value or clear it to switch to **Elastic Mode**.
+
+      For more information, see [Create a TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium).
+
+## September 29, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium adds query latency count threshold alerts.
+
+        TiDB Cloud Premium now provides three built-in alert rules that notify you when more than 20 SQL statements exceed a latency threshold of 256 ms, 512 ms, or 4096 ms within one minute. These alerts help you detect periods with unusually high numbers of slow SQL statements.
+
+        For more information, see [TiDB Cloud Built-in Alerting](https://docs.pingcap.com/tidbcloud/built-in-monitoring-premium/?plan=premium).
+
+- **TiDB Cloud Dedicated**
+
+    - TiDB Cloud Dedicated supports cross-region AWS PrivateLink connections.
+
+        With this feature, you can create an AWS interface endpoint in one region and privately connect it to a TiDB Cloud Dedicated cluster in another region. Cross-region connections use the same connection string.
+
+        Currently, this feature is available upon request. A cross-region PrivateLink service fee applies per added region, and removing a region does not affect existing connections. To request this feature, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md).
+
+        For more information, see [Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections/).
+
+## September 22, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) now supports inbound IPv6 connectivity over AWS PrivateLink, so you can connect to your cluster over either IPv4 or IPv6.
+
+        Currently, this feature is available upon request. To access IPv6 connectivity, contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) to request it, and then create a dual-stack AWS interface endpoint.
+
+        For more information, see [Use IPv6 connectivity over a private endpoint](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint).
+
+## September 15, 2026
+
+**General changes**
+
+* **TiDB Cloud CLI**
+
+  [TiDB Cloud CLI (`ti`)](https://github.com/tidbcloud/ti-cli) is now available in public preview for managing [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and file systems in TiDB Cloud Filesystem. TiDB Cloud Filesystem is a serverless distributed file system designed for AI agents and automation workloads.
+
+  You can use `ti` directly or let your scripts, CI jobs, and AI agents run it to automate TiDB Cloud workflows. With `ti`, you can create and manage TiDB Cloud Starter instances, execute SQL statements, and create and access persistent file system workspaces through file commands or supported mounts. JSON output by default, JMESPath output queries, and support for `--wait` and `--dry-run` on applicable commands simplify automation.
+
+  For more information, see [Get Started with TiDB Cloud CLI](/ai/ti/ti-quick-start.md) and [TiDB Cloud CLI (`ti`) Overview](/ai/ti/ti-overview.md).
+
+## September 8, 2026
+
+**Console changes**
+
+- **TiDB Cloud Essential**
+
+    - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances that include the enhancements announced on [June 30, 2026](#june-30-2026) now display `CLOUD.202603.x` as their TiDB version on the instance overview page in the TiDB Cloud console.
+
+        For more information about these enhancements, see the [June 30, 2026 release notes](#june-30-2026).
+
+**API changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce the changefeed API endpoints for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium), providing programmatic management of change data capture (CDC) changefeeds.
+
+        You can use these endpoints to create, list, get, delete, pause, resume, and scale changefeeds for real-time data replication to downstream systems, including Apache Kafka, MySQL, Amazon S3, and Alibaba Cloud OSS.
+
+        For more information, see [Changefeed API v1beta2 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Changefeed).
+
+## September 1, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential now lets you temporarily authorize TiDB Cloud Support to access Plan Replayer files for SQL performance troubleshooting.
+
+        You can choose the access duration, extend it if needed, or revoke access at any time. Access is automatically revoked when the authorization expires.
+
+        Plan Replayer files contain SQL text, table schemas, and optimizer statistics, but no actual table row data.
+
+        For more information, see [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential).
+
+- **TiDB Cloud Premium**
+
+    - The **Events** page is now available for TiDB Cloud Premium instances.
+
+        You can view historical events that record changes to your Premium instance on this page, along with information such as the event type, status, message, trigger time, and trigger user. Event data is retained for 7 days.
+
+        For more information, see [Events](https://docs.pingcap.com/tidbcloud/tidb-cloud-events/?plan=premium).
+
+    - TiDB Cloud Premium now lets you configure filter rules for database audit logging.
+
+        You can filter audit events by SQL user, event class, table, and execution status to control which database activities are logged, helping you focus on relevant events for security auditing and compliance.
+
+        For more information, see [Specify audit filter rules](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules).
+
+    - TiDB Cloud Premium now lets you temporarily authorize TiDB Cloud Support to access Plan Replayer files for SQL performance troubleshooting.
+
+        You can choose the access duration, extend it if needed, or revoke access at any time. Access is automatically revoked when the authorization expires.
+
+        Plan Replayer files contain SQL text, table schemas, and optimizer statistics, but no actual table row data.
+
+        For more information, see [Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium).
+
+**Billing adjustments**
+
+- **TiDB Cloud Essential**
+
+    - Starting September 1, 2026, billing for backup usage and network egress on [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances is gradually taking effect.
+
+        Network egress is billed as a separate line item rather than being included in RCU charges.
+
+        For more information, see [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
+## August 28, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/) to [v8.5.8](https://docs.pingcap.com/tidb/stable/release-8.5.8/).
+
+## August 25, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - TiDB Cloud Premium now supports streaming changefeed data directly to Amazon S3 and Alibaba Cloud Object Storage Service (OSS).
+
+        This feature enables you to archive change data to cloud storage for downstream analytics and long-term retention, while reducing costs by eliminating the need for intermediate message queues.
+
+        For more information, see [Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium).
+
+## August 18, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce **Statement Insight** (PREVIEW) for TiDB Cloud Premium instances.
+
+        This feature provides an actionable view into SQL resource consumption in your TiDB Cloud Premium instances.
+
+        Now you can analyze RU consumption, latency, and execution counts of SQL statements in multiple dimensions, such as DB User, SQL type, DB, table, or SQL digest. In addition, you can see top contributors at a glance, making it easier to identify the sources of high resource consumption or slowdowns.
+
+        Currently, this feature is in public preview and available only for a limited number of TiDB Cloud Premium instances created on or after August 19.
+
+        For more information, see [Statement Insight (PREVIEW)](https://docs.pingcap.com/tidbcloud/statement-insight/?plan=premium).
+
+- **TiDB Cloud Lake**
+
+    - [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) is now available on Alibaba Cloud in Japan (Tokyo) (`ap-northeast-1`). 
+
+        For more supported regions, see [Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/).
+
+    - Expand Python extensibility and analytics engineering workflows for TiDB Cloud Lake with the new external Python UDF SDK and dbt adapter.
+
+        - With the new external Python UDF SDK, you can implement custom scalar and table functions in Python, deploy them on a UDF server, register the endpoint in TiDB Cloud Lake, and call the functions directly from SQL. The SDK supports common and complex data types, NULL handling, I/O parallelism, and per-function concurrency controls.
+        - With the new dbt adapter, you can connect dbt to TiDB Cloud Lake to build, test, and document data transformation workflows. The adapter supports table, view, and incremental materializations, as well as seeds, sources, custom data tests, documentation generation, snapshots, and connection retries.
+
+      For more information, see the following documentation:
+
+        - [External Function](https://docs.pingcap.com/tidbcloudlake/external-function/)
+        - [Choose a User-Defined Function Type](https://docs.pingcap.com/tidbcloudlake/choose-a-udf-type/)
+        - [Load Data with dbt](https://docs.pingcap.com/tidbcloudlake/load-with-dbt/)
+
+## August 11, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential, Premium, and Dedicated**
+
+    - Support subscribing to alert notifications from TiDB Cloud via [Lark](https://www.larksuite.com/).
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via Lark.
+
+        For more information, see the following documentation:
+
+        - TiDB Cloud Essential: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=essential)
+        - TiDB Cloud Premium: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=premium)
+        - TiDB Cloud Dedicated: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/)
+
+- **TiDB Cloud Lake**
+
+    - Expand AI, Python, and BI integrations for [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) with the new MCP server and SQLAlchemy dialect.
+
+        - With the new MCP server, you can now connect MCP-compatible AI tools to explore database objects, inspect table schemas, and run SQL using natural-language instructions. Built-in session sandbox protection is enabled by default, keeping production objects read-only while restricting writes to session-specific sandbox objects.
+        - With the new SQLAlchemy dialect, you can connect Python applications and SQLAlchemy-compatible tools to TiDB Cloud Lake through the dialect. You can use tools such as Jupyter Notebook for querying and visualizing data, and Apache Superset for building charts and dashboards.
+
+      For more information, see the following documentation:
+
+        - [TiDB Cloud Lake MCP Server](https://docs.pingcap.com/tidbcloudlake/mcp-server)
+        - [Connect AI Tools to TiDB Cloud Lake Using MCP](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
+        - [Connect to TiDB Cloud Lake with Jupyter Notebook](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
+        - [Connect to TiDB Cloud Lake with Apache Superset](https://docs.pingcap.com/tidbcloudlake/superset)
+
+**Console changes**
+
+- Improve the networking experience across TiDB Cloud plans with the following updates in the [TiDB Cloud console](https://tidbcloud.com/):
+
+    - The **Networking** page now uses more consistent naming for endpoint configurations across TiDB Cloud plans.
+    - For endpoint types with no configured endpoints, the **Networking** page now displays only the corresponding action button instead of an empty table.
+    - For TiDB Cloud Starter and Essential instances, you can now click **Connect** in the upper-right corner of the **Networking** page to connect to your instance after configuring network access.
+    - For TiDB Cloud Essential, Premium, and Dedicated, managing allowed IP addresses for public endpoints is now more intuitive. You can click **Add IP Address** to add an IP address, or click **...** for an existing IP address to edit or delete it.
+
+## August 5, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce **Custom Retention Mode** for automatic backups on TiDB Cloud Premium instances.
+
+        TiDB Cloud Premium now offers two automatic backup modes:
+
+        - **Custom Retention Mode:** lets you specify the retention period from 3 to 33 days and choose when daily snapshots are created.
+        - **Standard Bundle Mode:** preserves the previous default automatic backup settings for PITR, hourly snapshots, and daily snapshots.
+
+      For more information, see [Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes).
+
+## August 4, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support subscribing to alert notifications from TiDB Cloud Essential via generic webhooks.
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
+
+        For more information, see [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=essential).
+
+- **TiDB Cloud Premium**
+
+    - Support [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) clusters as changefeed sinks for TiDB Cloud Premium instances.
+
+        For TiDB Cloud Premium instances hosted on AWS, you can now stream row change events to Amazon MSK Provisioned clusters over AWS PrivateLink.
+
+        For more information, see [Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) and [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md).
+
+    - Support subscribing to alert notifications from TiDB Cloud Premium via generic webhooks.
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
+
+        For more information, see [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/?plan=premium).
+
+- **TiDB Cloud Dedicated**
+
+    - Update pause requirements for TiDB Cloud Dedicated clusters.
+
+        Before [pausing a TiDB Cloud Dedicated cluster](/tidb-cloud/pause-or-resume-tidb-cluster.md), you must turn off [Point-in-Time Restore (PITR)](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore) and ensure that no Data Migration (DM) job is running. If either condition is not met, TiDB Cloud rejects the pause request and displays an error message.
+
+    - Support subscribing to alert notifications from TiDB Cloud Dedicated via generic webhooks.
+
+        If the [support plan](/tidb-cloud/connected-care-overview.md#connected-care) of your organization is **Enterprise** or **Premium**, you can now receive alert notifications via a generic webhook. For services that require custom payload formats, such as Telegram or Microsoft Teams, use a lightweight relay to transform and forward the notifications.
+
+        For more information, see [Subscribe via Webhook](https://docs.pingcap.com/tidbcloud/monitor-alert-webhook/).
+
+## July 28, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Database audit logging is now available in public preview for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters running TiDB v7.5.6 or later, or v8.5.2 or later.
+
+        This feature records user access activities, including executed SQL statements, supports writing audit logs to Amazon S3, Google Cloud Storage (GCS), or Azure Blob Storage, and lets you configure filter rules to control which events are captured for specific SQL users.
+
+        For more information, see [TiDB Cloud Dedicated Database Audit Logging (Preview)](/tidb-cloud/tidb-cloud-auditing.md).
+
+## July 21, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - [Top RU](/tidb-cloud/top-ru.md) (public preview) for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) now supports the following additional region:
+
+        - Alibaba Cloud: `Jakarta (ap-southeast-5)`
+
+      This feature displays minute-level top RU-consuming SQLs, helping you quickly identify the most resource-intensive queries to reduce costs.
+
+## July 14, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Enhance cross-region restore for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+
+        When the target restore region has no pre-allocated CIDR block, you can now create a CIDR block directly on the **Restore** page, eliminating the need to manually create a cluster in that region before starting the restore.
+
+## July 9, 2026
+
+**General changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Upgrade the default TiDB version of new [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters from [v8.5.6](https://docs.pingcap.com/tidb/stable/release-8.5.6/) to [v8.5.7](https://docs.pingcap.com/tidb/stable/release-8.5.7/).
+
+## July 7, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Support the Datadog integration (public preview).
+
+        You can now configure TiDB Cloud to send key metrics from your [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances to [Datadog](https://www.datadoghq.com/) for centralized monitoring and alerting.
+
+        For more information, see [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential).
+
+- **TiDB Cloud Premium**
+
+    - Support the Datadog integration (public preview).
+
+        You can now configure TiDB Cloud to send key metrics from your [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances to [Datadog](https://www.datadoghq.com/) for centralized monitoring and alerting.
+
+        For more information, see [Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium).
+
+**Console changes**
+
+- Standardize the label used in the [TiDB Cloud console](https://tidbcloud.com/) for public preview features as `PREVIEW`, replacing the previous mixed use of `BETA` and `PREVIEW`.
+
+**API changes**
+
+- **TiDB Cloud Dedicated**
+
+    - Introduce the changefeed API endpoints for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated), providing programmatic management of change data capture (CDC) changefeeds.
+
+        You can use these endpoints to create, list, get, delete, pause, resume, and scale changefeeds for real-time data replication to downstream systems, including Apache Kafka, MySQL, Amazon S3, Google Cloud Storage (GCS), and Azure Blob Storage.
+
+        For more information, see [Changefeed API v1beta1 Reference](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated/#tag/Changefeed).
+
+## June 30, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Enhance the stability, security, and operational experience of [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). The following enhancements and changes are rolling out gradually to newly created TiDB Cloud Essential instances.
+
+        - **Improve the connection experience**: support standalone endpoints for newly created TiDB Cloud Essential instances, so you no longer need to include the mandatory [account prefix](/tidb-cloud/select-cluster-tier.md#user-name-prefix) when connecting to these instances.
+        - **Support changing the root password**: you can change the root password directly from the TiDB Cloud console.
+        - **Enhance the data import experience**: after entering the source destination fields on the import data page, you can click **Test Bucket Access** to verify access to the specified object storage bucket before importing data. In addition, the import page now displays the size of files to be imported to improve visibility and management of import operations.
+        - **Update the availability of the Branch feature**: starting from **July 14, 2026**, newly created TiDB Cloud Essential instances no longer support the [Branch](/tidb-cloud/branch-overview.md) feature. Existing TiDB Cloud Essential instances created before this date are not affected. The Branch feature remains available in [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter).
+        - **Update import and export capabilities**: to enhance security, importing data from local files and exporting data to local files are no longer supported.
+        - **Update DB audit log storage requirements**: for security and compliance reasons, you must specify an external storage location for audit log retention.
+        - [Changefeed](/tidb-cloud/essential-changefeed-overview.md) will be available as a billable feature starting from **July 1, 2026**.
+
+      These features are rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
+
+    - [Top RU](/tidb-cloud/top-ru.md) is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following regions:
+
+        - Alibaba Cloud: `Singapore (ap-southeast-1)` and `Tokyo (ap-northeast-1)`
+
+      This feature displays minute-level top RU-consuming SQL statements, helping you quickly identify the most resource-intensive queries to reduce costs.
+
+      This feature is rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
+
+- **TiDB Cloud Dedicated**
+
+    - Refine the backup and restore flow for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters.
+
+        - The **Restore** page for TiDB Cloud Dedicated no longer includes the **Restore From Region** option. Because TiDB Cloud Dedicated implicitly stores backup data in the same region as the cluster, you no longer need to select the region to restore from.
+        - The **Restore to Region** option is renamed to **Cloud Provider & Region**.
+
+      For more information, see [Restore data to a new cluster](/tidb-cloud/backup-and-restore.md).
+
+- **TiDB Cloud Lake**
+
+    - TiDB Cloud Lake is now in public preview.
+
+        TiDB Cloud Lake is a cloud-native analytics warehouse in TiDB Cloud for modern analytics and AI-oriented data workflows. It provides elastic warehouses, ANSI SQL analytics, object storage, full-text search, vector search, and geospatial analysis in one managed service, helping teams analyze structured and semi-structured data without managing separate analytics infrastructure.
+
+        With this public preview, you can run SQL analytics with elastic warehouses and use built-in search capabilities for BI, log analytics, semantic retrieval, and other modern analytics and AI use cases.
+
+        To try TiDB Cloud Lake, log in to the [TiDB Cloud console](https://tidbcloud.com/), click **My Lake** in the left navigation pane, and then click **Try TiDB Cloud Lake** in the upper-right corner.
+
+        For more information, see [TiDB Cloud Lake documentation](https://docs.pingcap.com/tidbcloudlake/).
+
+**Upcoming billing adjustments**
+
+- The following billing adjustments will take effect for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential):
+
+    - **Minimum RCU billing updates**: starting from **August 1, 2026**, the minimum RCU value is automatically determined based on your configured maximum RCU value (Minimum RCU = 0.1 × configured maximum RCU, with a lower bound of 2,000 RCUs). If your actual usage remains below the minimum RCU threshold, TiDB Cloud calculates charges based on the minimum RCU value. For **existing instances created before July 1, 2026**, the implementation of this minimum RCU billing policy is postponed, and the exact effective date will be announced later.
+    - **Additional billable features**: charges for backup usage and network egress will take effect on **September 1, 2026**. For more information, see [TiDB Cloud Essential pricing](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
+## June 16, 2026
+
+**General changes**
+
+- Add domain verification for [Cloud Organization SSO](/tidb-cloud/tidb-cloud-org-sso-authentication.md).
+
+    In the following scenarios, the **Allowed Email Domains** field is required. To improve security, you must verify domains before entering them in this field:
+
+    - Enabling auto-provisioning for the OIDC or SAML authentication method
+    - Enabling SCIM provisioning for the SAML authentication method
+
+  For more information, see [Add and verify domains for OIDC and SAML](/tidb-cloud/tidb-cloud-org-sso-authentication.md#add-and-verify-domains-for-oidc-and-saml).
+
+## June 9, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Add a new AWS region for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter): `N. Virginia (us-east-1)`. The feature is now available in the following AWS regions:
+
+        - `Tokyo (ap-northeast-1)`
+        - `Oregon (us-west-2)`
+        - `N. Virginia (us-east-1)`
+        - `Frankfurt (eu-central-1)`
+        - `Singapore (ap-southeast-1)`
+
+<CustomContent language="en,zh">
+
+**High availability changes**
+
+- **TiDB Cloud Essential**
+
+    - Starting from June 9, 2026, newly created [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) instances are deployed in a single Availability Zone and do not support regional high availability.
+
+        If you need regional high availability and cross-AZ failover, consider choosing [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium).
+
+        This change does not affect TiDB Cloud Essential instances created before June 9, 2026.
+        
+</CustomContent>
+
+**API changes**
+
+- **TiDB Cloud Premium**
+
+    - Introduce the following backup API endpoints for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium), enabling unified management for both active and deleted instances within your organization.
+
+        - [List backups](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_ListBackups): lists backups for both active and deleted TiDB Cloud Premium instances (in the recycle bin) within your organization.
+        - [Delete a backup](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/#tag/Backup/operation/BackupService_DeleteBackup): deletes a specific backup within your organization by `backupId`.
+
+## June 2, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Introduce the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity) for organizations that require a large number of [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter) instances and branches.
+
+        By default, for each paid organization in TiDB Cloud, you can create up to 100 TiDB Cloud Starter instances and branches in total, with each branch counted as a separate instance. To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+
+- **TiDB Cloud Essential**
+
+    - Top RU is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following regions:
+
+        - AWS: `N. Virginia (us-east-1)`, `Tokyo (ap-northeast-1)`
+
+      This feature displays minute-level top RU-consuming SQL statements, helping you quickly identify the most resource-intensive queries to reduce costs.
+
+        This feature is rolling out in phases. Contact [support@pingcap.com](mailto:support@pingcap.com) for early access.
+
+- **TiDB Cloud Premium**
+
+    - Support Dual-Layer Data Encryption on Alibaba Cloud for [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) instances.
+
+        You can use your own keys in Alibaba Cloud Key Management Service (KMS) to encrypt data at rest, giving you greater control over data security and compliance.
+
+        This feature is now available upon request. For more information, see [Dual-Layer Data Encryption](/tidb-cloud/premium/dual-layer-data-encryption-premium.md).
+
+    - Provide two new TTL monitoring metrics on the **Metrics** page (**Instance Overview** tab) for TiDB Cloud Premium instances.
+
+        - Table Count by TTL Schedule Delay
+        - TTL Insert/Delete Rows by Day
+
+      These metrics help you observe TTL job health and detect data retention issues. For more information, see [{{{ .premium }}} Built-in Metrics](/tidb-cloud/premium/built-in-monitoring-premium.md).
+
+**API changes**
+
+- **TiDB Cloud Starter**
+
+    - For a paid organization not enrolled in the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity), TiDB Cloud API now enforces a limit of 100 TiDB Cloud Starter instances and branches in total, with each branch counted as a separate instance.
+
+        - When the limit is reached, API requests to create new TiDB Cloud Starter instances or branches are rejected.
+        - To exceed this limit, apply for the [Instance Capacity Plan](https://www.pingcap.com/programs/agentic-ai-instance-capacity).
+
+## May 26, 2026
+
+**General changes**
+
+- **TiDB Cloud Starter**
+
+    - Add two new AWS regions for [full-text search](https://docs.pingcap.com/ai/vector-search-full-text-search-python/) (public preview) on [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter): `Tokyo (ap-northeast-1)` and `Oregon (us-west-2)`. The feature is now available in the following AWS regions:
+
+        - `Tokyo (ap-northeast-1)`
+        - `Oregon (us-west-2)`
+        - `Frankfurt (eu-central-1)`
+        - `Singapore (ap-southeast-1)`
+
+- **TiDB Cloud Essential**
+
+    - Top RU is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following regions:
+
+        - AWS: `Oregon (us-west-2)`, `Frankfurt (eu-central-1)`, `Singapore (ap-southeast-1)`
+
+      This feature shows the top RU-consuming SQL statements at minute-level granularity, helping you quickly identify resource-intensive queries to reduce costs.
+
+      The feature is rolling out in phases. To request early access, contact [support@pingcap.com](mailto:support@pingcap.com).
+
+**API changes**
+
+- TiDB Cloud IAM API (v1beta1) supports managing organization members programmatically.
+
+    The new `/members` endpoints let you manage organization membership and role assignments. You can use these endpoints to automate user lifecycle management tasks, such as onboarding new members with specific roles, adjusting permissions as responsibilities change, and removing members who leave the organization.
+
+    For more information, see [TiDB Cloud IAM API](https://docs.pingcap.com/tidbcloud/api/v1beta1/iam/#tag/Member).
+
+## May 19, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - Recycle Bin is now available for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential). It stores data of deleted TiDB Cloud resources that have valid backups.
+
+        When a TiDB Cloud Essential instance with existing backups is deleted, its backup files are moved to the Recycle Bin. Backup files created by automatic backups are retained in the Recycle Bin for a specified period. To avoid data loss, restore the data to a new TiDB Cloud Essential instance before the retention period expires. Note that if a TiDB Cloud Essential instance **has no backup**, the deleted instance is not displayed in the Recycle Bin.
+
+        For more information, see [Backup and Restore](/tidb-cloud/backup-and-restore-serverless.md#restore-from-recycle-bin).
+
+    - Top RU is now available in public preview for [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) in the following region:
+
+        - Alibaba Cloud: `Mexico (na-south-1)`
+
+      This feature shows the top RU-consuming SQL statements at minute-level granularity, helping you quickly identify resource-intensive queries to reduce costs.
+
+        The feature is rolling out in phases. To request early access, contact [support@pingcap.com](mailto:support@pingcap.com).
+
+## May 12, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - Add the `AVG RU/s` metric to the [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) **Metrics** page.
+    
+        `AVG RU/s` displays the average number of RUs consumed per second over the selected time range, helping you better understand resource consumption.
+
+- **TiDB Cloud Dedicated**
+
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) is now generally available (GA) on Microsoft Azure in **Japan East** and **East US 2**.
+
+        It delivers three-AZ high availability with a 99.99% uptime SLA, full HTAP powered by TiFlash, independent compute and storage scaling, fully managed operations by PingCAP SRE, seamless data import and migration, continuous backup with PITR, enterprise-grade security, and integrated observability. It also supports bulk data import, migration from MySQL and other sources, and real-time replication to downstream systems. If you use [Azure Marketplace](https://azuremarketplace.microsoft.com/), you can also subscribe to TiDB Cloud Dedicated through Azure Marketplace.
+
+        For more information, see [From Preview to Production: TiDB Cloud Dedicated on Microsoft Azure is Now Generally Available](https://www.pingcap.com/blog/tidb-cloud-dedicated-ga-microsoft-azure/).
+
+## April 28, 2026
+
+**General changes**
+
+- **TiDB Cloud Premium**
+
+    - [TiDB Cloud Premium](https://docs.pingcap.com/tidbcloud/premium/?plan=premium) is now in public preview on AWS<CustomContent language="en,zh"> and Alibaba Cloud</CustomContent>.
+
+        Powered by the [TiDB X](/tidb-cloud/tidb-x-architecture.md) kernel, TiDB Cloud Premium is specifically designed for mission-critical enterprise workloads that require hyperscale, uncompromising performance, and the cost efficiency of a cloud-native consumption model.
+
+        TiDB Cloud Premium bridges the gap between [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) and [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated).
+
+        - Compared with TiDB Cloud Essential, TiDB Cloud Premium delivers significantly stronger isolation across the compute, storage, and network layers, ensuring predictable performance for critical workloads. At the same time, it retains an elastic, on-demand scaling model, allowing compute capacity to scale independently without operational overhead.
+        - Compared with TiDB Cloud Dedicated, TiDB Cloud Premium improves cost efficiency by eliminating idle headroom, so you only pay for the performance you actually use.
+
+      For more information about TiDB Cloud Premium, see [TiDB Cloud Premium: Public Preview for Mission-Critical SQL](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/).
+
+      To try TiDB Cloud Premium, go to the [TiDB Cloud console](https://tidbcloud.com/), click **Create Resource**, and select **Premium** as your plan. For more information, see [Create a TiDB Cloud Premium instance](/tidb-cloud/premium/create-tidb-instance-premium.md).
+
+- **TiDB Cloud Dedicated**
+
+    - TiProxy is now generally available for [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters on AWS. It provides enhanced connection management and load balancing to improve database reliability and performance.
+
+        Key features of TiProxy:
+
+        - Maintains persistent client connections during scaling operations and rolling upgrades.
+        - Distributes traffic evenly across TiDB nodes for better resource utilization.
+
+      For implementation details, see [Overview of TiProxy](/tidb-cloud/tiproxy-overview-for-cloud.md).
+
+**Console changes**
+
+- Improve the firewall rule management experience for public endpoints of TiDB Cloud Starter and Essential.
+
+    The TiDB Cloud console now provides a streamlined dialog for managing firewall rules for public endpoints in TiDB Cloud Starter and Essential. You can add your current IP address, allow access from all AWS IP addresses for AWS-hosted instances, or manually specify an IP address or IP address range in one place.
+
+    For more information, see [Create and manage a firewall rule](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md#create-and-manage-a-firewall-rule).
+
+**API changes**
+
+- Introduce TiDB Cloud Premium API (v1beta2) for managing the following resources automatically and efficiently:
+
+    - **TiDB Cloud Premium Instance**: manage the lifecycle and configuration of TiDB Cloud Premium instances, including passwords, CA certificates, and cloud provider information.
+    - **Backup**: manage backups for TiDB Cloud Premium instances, including backup-based restore.
+    - **Region**: retrieve available regions for creating TiDB Cloud Premium instances.
+
+  For more information, see [TiDB Cloud Premium API](https://docs.pingcap.com/tidbcloud/api/v1beta2/premium/).
+
+>>>>>>> d96fa6c87c (tidb-cloud: remove Chat2Query documentation (#24549))
 ## April 14, 2026
 
 **General changes**

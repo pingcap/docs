@@ -135,15 +135,15 @@
     - [Troubleshoot Access Denied Errors during Data Import from Amazon S3](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [Connect AWS DMS to TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - Explore Data
+<<<<<<< HEAD
   - [Chat2Query in SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
+=======
+  - [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+>>>>>>> d96fa6c87c (tidb-cloud: remove Chat2Query documentation (#24549))
   - [SQL Proxy Account](/tidb-cloud/sql-proxy-account.md)
 - Data Service ![BETA](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [Overview](/tidb-cloud/data-service-overview.md)
   - [Get Started](/tidb-cloud/data-service-get-started.md)
-  - Chat2Query API
-    - [Get Started](/tidb-cloud/use-chat2query-api.md)
-    - [Start Multi-round Chat2Query](/tidb-cloud/use-chat2query-sessions.md)
-    - [Use Knowledge Bases](/tidb-cloud/use-chat2query-knowledge.md)
   - [Manage Data App](/tidb-cloud/data-service-manage-data-app.md)
   - [Manage Endpoint](/tidb-cloud/data-service-manage-endpoint.md)
   - [API Key](/tidb-cloud/data-service-api-key.md)

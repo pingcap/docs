@@ -201,7 +201,6 @@ In the SQL file, you can write statements such as table join queries, complex qu
 ```sql
 /* Getting Started:
 Enter "USE {database};" before entering your SQL statements.
-Type "--your question" + Enter to try out AI-generated SQL queries in the TiDB Cloud console.
 Declare a parameter like "Where id = ${arg}".
 */
 USE sample_data;
