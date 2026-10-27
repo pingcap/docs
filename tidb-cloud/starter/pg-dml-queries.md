@@ -5,7 +5,7 @@ summary: PostgreSQL 互換の TiDB Cloud Starter でサポートされる Postgr
 
 # PostgreSQL DML とクエリ
 
-PostgreSQL 互換の {{{ .starter }}} は、`INSERT`、`UPDATE`、`DELETE`、`RETURNING`、upsert、テーブル結合、集計、ウィンドウ関数、共通テーブル式（CTE）、サブクエリ、集合演算など、一般的な PostgreSQL の Data Manipulation Language（DML）文とクエリ機能をサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、`INSERT`、`UPDATE`、`DELETE`、`RETURNING`、upsert、テーブル結合、集計、ウィンドウ関数、共通テーブル式（CTE）、サブクエリ、集合演算など、一般的な PostgreSQL のデータ操作言語（DML）文とクエリ機能をサポートしています。
 
 ## サンプルテーブルを準備する {#prepare-sample-tables}
 
@@ -218,7 +218,7 @@ CREATE TABLE orders_with_cascade (
 
 PostgreSQL 互換の {{{ .starter }}} では、デフォルトで `MATCH SIMPLE` セマンティクスを使用します。参照しているいずれかのカラムが `NULL` の場合、その行に対する外部キーチェックはスキップされます。
 
-## データのクエリ {#query-data}
+## データをクエリする {#query-data}
 
 データをクエリするには `SELECT` を使用します。
 
@@ -405,7 +405,7 @@ FROM category_tree;
 
 ### データ変更 CTE {#data-modifying-ctes}
 
-`RETURNING` を伴う `INSERT`、`UPDATE`、または `DELETE` を使用するデータ変更 CTE は、PostgreSQL wire protocol 経由でサポートされています。
+`RETURNING` を伴う `INSERT`、`UPDATE`、または `DELETE` を使用するデータ変更 CTE は、PostgreSQL ワイヤプロトコル経由でサポートされています。
 
 例:
 

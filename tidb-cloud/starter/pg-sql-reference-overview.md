@@ -5,7 +5,7 @@ summary: PostgreSQL 互換の TiDB Cloud Starter でサポートされる基本�
 
 # TiDB Cloud で PostgreSQL 互換 SQL を試す
 
-PostgreSQL 互換の {{{ .starter }}} は、PostgreSQL wire protocol と一般的な PostgreSQL 構文をサポートしています。ほとんどの PostgreSQL クライアント、ドライバ、ORM を使用してインスタンスを操作できます。
+PostgreSQL 互換の {{{ .starter }}} は、PostgreSQL ワイヤプロトコルと一般的な PostgreSQL 構文をサポートしています。ほとんどの PostgreSQL クライアント、ドライバ、ORM を使用してインスタンスを操作できます。
 
 このページでは、DDL、DML、DQL、DCL、およびトランザクション制御を含む基本的な SQL 操作について説明します。
 
