@@ -1,21 +1,21 @@
 ---
-title: 使用 SQL Editor（Preview）探索您的数据
+title: 使用 SQL Editor（Preview）探索你的数据
 summary: 了解如何在 TiDB Cloud 控制台中使用 SQL Editor 编写和运行 SQL 查询、管理 SQL 文件以及查看查询结果。
 aliases: ['/zh/tidbcloud/explore-data-with-chat2query','/zh/tidbcloud/use-chat2query-api','/zh/tidbcloud/use-chat2query-knowledge','/zh/tidbcloud/use-chat2query-sessions']
 ---
 
-# 使用 SQL Editor（Preview）探索您的数据
+# 使用 SQL Editor（Preview）探索你的数据
 
-您可以使用 [TiDB Cloud 控制台](https://tidbcloud.com/)内置的 SQL Editor，最大化挖掘数据价值。
+你可以使用 [TiDB Cloud 控制台](https://tidbcloud.com/)内置的 SQL Editor，最大化挖掘数据价值。
 
-在 SQL Editor 中，您无需本地 SQL 客户端即可针对数据库编写和运行 SQL 查询。您可以直观地以表格或图表形式查看查询结果，并轻松检查查询日志。
+在 SQL Editor 中，你无需本地 SQL 客户端即可针对数据库编写和运行 SQL 查询。你可以直观地以表格或图表形式查看查询结果，并轻松检查查询日志。
 
 ## 使用场景 {#use-cases}
 
 SQL Editor 的推荐使用场景如下：
 
 - 快速测试 TiDB 的 MySQL 兼容性。
-- 使用您自己的数据集轻松探索 TiDB 中的 SQL 功能。
+- 使用你自己的数据集轻松探索 TiDB 中的 SQL 功能。
 
 ## 限制 {#limitations}
 
@@ -27,21 +27,21 @@ SQL Editor 的推荐使用场景如下：
 
     > **Tip:**
     >
-    > 如果您属于多个组织，请先使用左上角的下拉框切换到目标组织。
+    > 如果你属于多个组织，请先使用左上角的下拉框切换到目标组织。
 
-2. 点击您的 {{{ .starter }}} 实例或 TiDB Cloud Dedicated 集群名称，然后在左侧导航栏中点击 **SQL Editor**。
+2. 点击你的 {{{ .starter }}} 实例或 TiDB Cloud Dedicated 集群名称，然后在左侧导航栏中点击 **SQL Editor**。
 
     > **Note:**
     >
     > 在以下情况下，**SQL Editor** 入口会显示为灰色且不可点击。
     >
-    > - 您的 TiDB Cloud Dedicated 集群版本早于 v6.5.0。要使用 SQL Editor，您需要联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 升级集群。
-    > - 您的 TiDB Cloud Dedicated 集群刚刚创建，SQL Editor 的运行环境仍在准备中。在这种情况下，请等待几分钟，SQL Editor 即可使用。
-    > - 您的 TiDB Cloud Dedicated 集群已[暂停](/tidb-cloud/pause-or-resume-tidb-cluster.md)。
+    > - 你的 TiDB Cloud Dedicated 集群版本早于 v6.5.0。要使用 SQL Editor，你需要联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 升级集群。
+    > - 你的 TiDB Cloud Dedicated 集群刚刚创建，SQL Editor 的运行环境仍在准备中。在这种情况下，请等待几分钟，SQL Editor 即可使用。
+    > - 你的 TiDB Cloud Dedicated 集群已[暂停](/tidb-cloud/pause-or-resume-tidb-cluster.md)。
 
 ## 编写并运行 SQL 查询 {#write-and-run-sql-queries}
 
-在 SQL Editor 中，您可以使用自己的数据集编写并运行 SQL 查询。
+在 SQL Editor 中，你可以使用自己的数据集编写并运行 SQL 查询。
 
 1. 编写 SQL 查询。
 
@@ -73,7 +73,7 @@ SQL Editor 的推荐使用场景如下：
     </div>
     </SimpleTab>
 
-运行查询后，您可以立即在页面底部看到查询日志和结果。
+运行查询后，你可以立即在页面底部看到查询日志和结果。
 
 > **Note:**
 >
@@ -81,15 +81,15 @@ SQL Editor 的推荐使用场景如下：
 
 ## 管理 SQL 文件 {#manage-sql-files}
 
-在 SQL Editor 中，您可以将 SQL 查询保存到不同的 SQL 文件中，并按如下方式管理 SQL 文件：
+在 SQL Editor 中，你可以将 SQL 查询保存到不同的 SQL 文件中，并按如下方式管理 SQL 文件：
 
 - 要添加 SQL 文件，请在 **SQL Files** 选项卡上点击 **+**。
 - 要重命名 SQL 文件，请将光标移动到文件名上，点击文件名旁边的 **...**，然后选择 **Rename**。
-- 要删除 SQL 文件，请将光标移动到文件名上，点击文件名旁边的 **...**，然后选择 **Delete**。请注意，当 **SQL Files** 选项卡上只有一个 SQL 文件时，您无法将其删除。
+- 要删除 SQL 文件，请将光标移动到文件名上，点击文件名旁边的 **...**，然后选择 **Delete**。请注意，当 **SQL Files** 选项卡上只有一个 SQL 文件时，你无法将其删除。
 
 ## 管理 SQL Editor 设置 {#manage-sql-editor-settings}
 
-在 SQL Editor 中，您可以更改以下设置：
+在 SQL Editor 中，你可以更改以下设置：
 
 - 查询结果中的最大行数
 - 是否在 **Schemas** 选项卡上显示系统数据库模式
