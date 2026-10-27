@@ -368,7 +368,9 @@ Query OK, 1 row affected (0.00 sec)
 
 ## 部分索引 {#partial-indexes}
 
-<span class="version-mark">TiDB Self-Managed 和 TiDB Cloud Dedicated 从 v8.5.7 版本开始引入，TiDB Cloud Essential 和 Premium 从 CLOUD.202603.1 开始引入</span>
+> **注意：**
+>
+> TiDB Self-Managed 和 TiDB Cloud Dedicated 从 v8.5.7 开始支持部分索引，TiDB Cloud Essential 和 Premium 从 CLOUD.202603.1 开始支持部分索引。
 
 部分索引是建立在表中部分行子集上的索引。创建部分索引时，你可以指定一个条件表达式，也称为谓词，用于定义这个行子集。索引中仅包含满足该谓词的行的条目。
 

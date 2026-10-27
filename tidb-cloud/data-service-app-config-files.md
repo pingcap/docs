@@ -201,7 +201,6 @@ SQL 文件的名称格式为 `<method>-<endpoint-path>.sql`，其中 `<method>` 
 ```sql
 /* 入门：
 在输入 SQL 语句之前，输入 "USE {database};"。
-输入 "--你的问题" + Enter 可以在 TiDB Cloud 控制台中尝试 AI 生成的 SQL 查询。
 声明参数的格式为 "Where id = ${arg}"。
 */
 USE sample_data;

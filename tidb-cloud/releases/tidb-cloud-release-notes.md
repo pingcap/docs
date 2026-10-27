@@ -12,6 +12,12 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 **常规变更**
 
+- **TiDB Cloud Starter**
+
+    - [SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor/?plan=starter&compatibility=mysql) 和 [Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview/?plan=starter&compatibility=mysql) 不再支持 Chat2Query。
+
+        从 2026 年 10 月 20 日起，TiDB Cloud 不再在 SQL Editor 和 Data Service 中提供 Chat2Query 功能。此变更仅影响 Chat2Query 和 Chat2Query API。SQL Editor 和 Data Service 中的所有其他功能仍然可用。
+
 - **TiDB Cloud Essential and Premium**
 
     - TiDB Cloud Essential and Premium 支持 [New Relic](https://newrelic.com/) 指标集成（公测中）。
@@ -38,6 +44,8 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
         当已配置的 vCPU 使用量接近所配置的区域限制，或者由于已达到该限制而导致扩容操作被阻止时，TiDB Cloud BYOC 现在会通知你。
 
         这些告警可为你清晰地说明可用的扩展容量以及建议采取的操作。
+
+        更多信息，请参阅 [TiDB Cloud 内置告警](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting/?plan=byoc)。
 
 ## 2026 年 10 月 15 日 {#october-15-2026}
 

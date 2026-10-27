@@ -19,7 +19,7 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 响应主体包含以下字段：
 
-- `type`：_string_。此端点的类型。值可能是 `"sql_endpoint"` 或 `"chat2data_endpoint"`。不同的端点返回不同类型的响应。
+- `type`：_string_。此端点的类型。值为 `"sql_endpoint"`。
 - `data`：_object_。执行结果，包括三个部分：
 
     - `columns`：_array_。返回字段的架构信息。
@@ -33,9 +33,6 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
     - `result`：_object_。SQL 语句的执行相关信息，包括成功/失败状态、执行时间、返回的行数和用户配置。
 
 以下是一个示例响应：
-
-<SimpleTab>
-<div label="SQL 端点">
 
 ```json
 {
@@ -69,51 +66,6 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
     }
 }
 ```
-
-</div>
-
-<div label="Chat2Data 端点">
-
-```json
-{
-  "type": "chat2data_endpoint",
-  "data": {
-    "columns": [
-      {
-        "col": "id",
-        "data_type": "BIGINT",
-        "nullable": false
-      },
-      {
-        "col": "type",
-        "data_type": "VARCHAR",
-        "nullable": false
-      }
-    ],
-    "rows": [
-      {
-        "id": "20008295419",
-        "type": "CreateEvent"
-      }
-    ],
-    "result": {
-      "code": 200,
-      "message": "Query OK!",
-      "start_ms": 1678965476709,
-      "end_ms": 1678965476839,
-      "latency": "130ms",
-      "row_count": 1,
-      "row_affect": 0,
-      "limit": 50
-      "sql": "select id,type from sample_data.github_events limit 1;",
-      "ai_latency": "30ms"
-    }
-  }
-}
-```
-
-</div>
-</SimpleTab>
 
 ## 状态码
 
@@ -279,9 +231,6 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
 
 以下是一个示例响应：
 
-<SimpleTab>
-<div label="SQL 端点">
-
 ```json
 {
   "type": "",
@@ -301,33 +250,6 @@ Data Service 返回带有 JSON 主体的 HTTP 响应。
   }
 }
 ```
-
-</div>
-
-<div label="Chat2Data 端点">
-
-```json
-{
-  "type": "chat2data_endpoint",
-  "data": {
-    "columns": [],
-    "rows": [],
-    "result": {
-      "code": 429,
-      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://tidb.support.pingcap.com/",
-      "start_ms": "",
-      "end_ms": "",
-      "latency": "",
-      "row_count": 0,
-      "row_affect": 0,
-      "limit": 0
-    }
-  }
-}
-```
-
-</div>
-</SimpleTab>
 
 ### 500
 

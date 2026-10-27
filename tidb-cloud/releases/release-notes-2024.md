@@ -257,8 +257,6 @@ summary: 了解 2024 年 TiDB Cloud 的发布说明。
 
     通过 Chat2Query API v3 端点，你可以使用会话开启多轮 Chat2Query。
 
-    更多信息，参见 [开始使用 Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
-
 **控制台变更**
 
 - 将 Chat2Query（测试版）重命名为 SQL Editor（测试版）。
@@ -267,8 +265,6 @@ summary: 了解 2024 年 TiDB Cloud 的发布说明。
 
     - **SQL Editor**：TiDB Cloud 控制台中用于手动编写和执行 SQL 查询的默认界面。
     - **Chat2Query**：AI 辅助的文本转查询功能，支持你通过自然语言与数据库交互，生成、重写和优化 SQL 查询。
-
-  更多信息，参见 [使用 AI 辅助 SQL Editor 探索数据](/tidb-cloud/explore-data-with-chat2query.md)。
 
 ## 2024 年 6 月 18 日
 

@@ -22,7 +22,7 @@ summary: 学习如何使用 Data App 的 OpenAPI 规范生成客户端代码并�
 
 首先，在你的 {{{ .starter }}} 实例或 {{{ .dedicated }}} 集群中创建表 `test.repository`，并插入一些示例数据。以下示例插入了由 PingCAP 开发的一些开源项目，作为演示数据。
 
-你可以在 [TiDB Cloud 控制台](https://tidbcloud.com)的 [SQL 编辑器](/tidb-cloud/explore-data-with-chat2query.md)中执行这些 SQL 语句。
+你可以在 [TiDB Cloud 控制台](https://tidbcloud.com)的 [SQL 编辑器](/tidb-cloud/explore-data-with-sql-editor.md)中执行这些 SQL 语句。
 
 ```sql
 -- 选择数据库

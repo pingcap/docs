@@ -61,10 +61,6 @@ Data Service（预览版）使你能够通过自定义 API 端点以 HTTPS 请�
 
 3. 在 **Create Data App** 对话框中，输入名称、描述，并选择你希望 Data App access 的 {{{ .starter }}} 实例。
 
-    > **注意：**
-    >
-    > 默认情况下，Data App 类型为 **Standard Data App**。如果你想创建 **Chat2Query Data App**，请参考 [快速开始使用 Chat2Query API](/tidb-cloud/use-chat2query-api.md)，而不是本文档。
-
 4. （可选）如需将 Data App 的端点自动 deploy 到你指定的 GitHub repository 和分支，请启用 **Connect to GitHub**，然后执行以下操作：
 
     1. 点击 **Install on GitHub**，并按照页面指引将 **TiDB Cloud Data Service** 作为应用安装到目标 repository。
@@ -116,11 +112,7 @@ Data Service（预览版）使你能够通过自定义 API 端点以 HTTPS 请�
 
     在 query 或 update 数据前，需要先在 SQL statement 中指定数据库。例如：`USE database_name;`。
 
-    在 SQL editor 中，你可以编写表关联查询、复杂查询、aggregate function 等 statement。你也可以直接输入 `--` 加上你的指令，让 AI 自动生成 SQL statement。
-
-    > **注意：**
-    >
-    > 如需体验 TiDB Cloud 的 AI 能力，你需要允许 PingCAP 和 Amazon Bedrock 使用你的代码片段进行研究和服务改进。详细信息，参见 [启用或禁用 AI 生成 SQL 查询](/tidb-cloud/explore-data-with-chat2query.md#enable-or-disable-ai-to-generate-sql-queries)。
+    在 SQL editor 中，你可以编写表关联查询、复杂查询、aggregate function 等 statement。
 
     如需定义 parameter，可以在 SQL statement 中以 `${ID}` 形式插入 variable 占位符。例如：`SELECT * FROM table_name WHERE id = ${ID}`。然后，你可以点击右侧面板的 **Params** 标签页，修改 parameter 定义和 test 值。
 
@@ -303,6 +295,5 @@ TiDB Cloud 会生成代码示例，帮助你调用端点。要获取代码示例
 ## 了解更多
 
 - [Data Service 概览](/tidb-cloud/data-service-overview.md)
-- [快速开始使用 Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 - [管理 Data App](/tidb-cloud/data-service-manage-data-app.md)
 - [管理端点](/tidb-cloud/data-service-manage-endpoint.md)

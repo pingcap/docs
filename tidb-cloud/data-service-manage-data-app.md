@@ -21,10 +21,6 @@ Data Service (PREVIEW) 中的 Data App 是一组用于访问特定应用程序�
 
 2. 输入名称、描述，并选择你希望 Data App 访问的集群。
 
-    > **注意：**
-    >
-    > 默认情况下，Data App 类型为 **Standard Data App**。如果你想创建 **Chat2Query Data App**，请参考 [Chat2Query API 入门](/tidb-cloud/use-chat2query-api.md)，而不是本文档。
-
 3. （可选）要将 Data App 的端点自动部署到你首选的 GitHub 仓库和分支，请启用 **Connect to GitHub**，然后执行以下操作：
 
     1. 点击 **Install on GitHub**，然后按照屏幕上的说明将 **TiDB Cloud Data Service** 作为应用程序安装到你的目标仓库。

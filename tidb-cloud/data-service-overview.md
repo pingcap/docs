@@ -35,6 +35,5 @@ Data Service 允许你将 TiDB Cloud 无缝集成到任何兼容 HTTPS 的应用
 ## 后续步骤
 
 - [Get Started with Data Service](/tidb-cloud/data-service-get-started.md)
-- [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 - [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md)
 - [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md)

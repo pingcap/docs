@@ -133,6 +133,10 @@ TiDB Cloud 提供以下部署选项：
 
     TiDB Cloud Lake 是一项面向分析负载的云原生数据仓库服务。它将计算与存储分离，并支持 ANSI SQL、半结构化数据处理和面向 AI 的工作流。更多详情，参见 [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)。
 
+- TiDB Cloud Filesystem
+
+    TiDB Cloud Filesystem 是一个面向应用程序、自动化流程和 AI 代理的持久化共享云文件系统。目前处于公测阶段。更多详情，参见 [TiDB Cloud Filesystem](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/)。
+
 ## 架构
 
 ![TiDB Cloud architecture](/media/tidb-cloud/tidb-cloud-architecture.png)
