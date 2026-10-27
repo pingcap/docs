@@ -40,7 +40,7 @@ Example versions:
 - 6.1.0
 - 5.4.0
 
-During the lifecycle of LTS, patch releases are made available on demand. Patch releases contain bug fixes and security vulnerability fixes, and do not introduce new features.
+During the lifecycle of LTS, patch releases are made available on demand. Except for the v8.5 series, patch releases primarily contain improvements and bug fixes, and do not introduce new features. Due to the versioning policy adjustment for the v8.5 series, v8.5.x patch releases might also contain new features.
 
 Patch releases are versioned as `X.Y.Z`. `X.Y` is consistent with the corresponding LTS versioning. The patch number `Z` increments from 1.
 
