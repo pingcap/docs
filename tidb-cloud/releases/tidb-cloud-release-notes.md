@@ -12,6 +12,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 **General changes**
 
+- **TiDB Cloud Starter**
+
+    - Chat2Query is no longer supported in [SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor/?plan=starter&compatibility=mysql) and [Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview/?plan=starter&compatibility=mysql).
+
+        Starting from October 20, 2026, TiDB Cloud no longer supports Chat2Query in SQL Editor and Data Service. This change only affects Chat2Query and the Chat2Query API. All other features in SQL Editor and Data Service remain available.
+
 - **TiDB Cloud Essential and Premium**
 
     - TiDB Cloud Essential and Premium support [New Relic](https://newrelic.com/) metrics integration (public preview).
