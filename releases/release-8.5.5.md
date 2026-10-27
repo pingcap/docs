@@ -161,6 +161,7 @@ For TiDB clusters newly deployed in v8.5.4 (that is, not upgraded from versions 
 
 * Starting from v8.5.5, TiDB automatically sets target tables to `restore` mode during data restore. Tables in `restore` mode prohibit any user read or write operations. Once the restore completes, TiDB automatically switches the mode back to `normal` for these tables, allowing users to read and write the tables normally. This behavior ensures task stability and data consistency during the restore process.
 * Starting from v8.5.5, when the `--load-stats` parameter is set to `false`, BR no longer writes statistics for restored tables into the `mysql.stats_meta` table. To update the relevant statistics, you can manually execute [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) after the restore.
+* Starting from v8.5.5, when table-level task splitting (`scheduler.enable-table-across-nodes = true`) is enabled in the [new TiCDC architecture](/ticdc/ticdc-architecture.md), Storage Sink data file names change from `CDC{num}.{extension}` to `CDC_{uuid}_{num}.{extension}`, and Index file names change from `CDC.index` to `CDC_{uuid}.index`. For more information, see [Storage Sink file name changes and consumption instructions](/ticdc/ticdc-architecture.md#storage-sink-file-name-changes-and-consumption-instructions).
 
 ### MySQL compatibility
 

@@ -7,7 +7,6 @@
 | 12xlarge | 12xlarge | Instance type, keep in English. |
 | 16xlarge | 16xlarge | Instance type, keep in English. |
 | ACID | ACID | Do not translate to 「酸」. |
-| Aggregation | 集計 |  |
 | architecture | アーキテクチャ | Do not translate to 「建築」. |
 | atomic | アトミック |  |
 | Aurora | Aurora | Product name, keep in English. |
@@ -25,7 +24,7 @@
 | collation | 照合順序 |  |
 | Column | カラム | Do not translate to 「桁」. |
 | column family | カラムファミリー |  |
-| Column Pruning | カラムの剪定 |  |
+| Column Pruning | 列プルーニング |  |
 | component | コンポーネント | Do not translate to 「成分」. |
 | Configuration | 設定 |  |
 | Coprocessor | コプロセッサー |  |

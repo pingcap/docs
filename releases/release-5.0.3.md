@@ -116,7 +116,7 @@ TiDB version: 5.0.3
     - Fix a bug that TiFlash adds wrong padding for non-binary characters in the `CAST` function
     - Fix the issue of incorrect results when handling aggregation queries with complex `GROUP BY` columns
     - Fix the TiFlash panic issue that occurs under heavy write pressure
-    - Fix the panic that occurs when the right jon key is not nullalbe and the left join key is nullable
+    - Fix the panic that occurs when the right join key is not nullable and the left join key is nullable
     - Fix the potential issue that the `read-index` requests take a long time
     - Fix the panic issue that occurs when the read load is heavy
     - Fix the panic issue that might occur when the `Date_Format` function is called with the `STRING` type argument and `NULL` values

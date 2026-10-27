@@ -430,7 +430,7 @@ Before you use partitioned tables, consider the following limitations:
     SELECT * FROM server_info WHERE `serial_no` = ?;
     ```
 
-- To reduce scan overhead for queries that do not use the partition key, you need to create a global index. Although global indexes can slow down `DROP PARTITION` operations, Hash and Key partitioned tables do not support `DROP PARTITION`. Therefore, global indexes are a practical solution because these partitions are rarely truncated. For example:
+- To reduce scan overhead for queries that do not use the partition key, you need to create a global index. Although global indexes can slow down `DROP PARTITION` operations, Hash and Key partitioned tables do not support `DROP PARTITION` at all, so this trade-off does not apply to them. Therefore, global indexes are a practical solution for these tables. For example:
 
     ```sql
     ALTER TABLE server_info ADD UNIQUE INDEX(serial_no, id) GLOBAL;

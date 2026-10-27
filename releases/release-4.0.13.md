@@ -80,7 +80,7 @@ TiDB version: 4.0.13
     - Fix the issue that no error is reported when inserting invalid strings to the `DECIMAL` type column [#23196](https://github.com/pingcap/tidb/pull/23196)
     - Fix the issue of parsing error occurred when inserting data to the `DECIMAL` type columns [#23152](https://github.com/pingcap/tidb/pull/23152)
     - Fix the issue that the `USE_INDEX_MERGE` hint does not take effect [#22924](https://github.com/pingcap/tidb/pull/22924)
-    - Fix a bug that the query returns wrong results when using `ENUM` or `SET` columns in the `WHERE` clause as an filter [#22814](https://github.com/pingcap/tidb/pull/22814)
+    - Fix a bug that the query returns wrong results when using `ENUM` or `SET` columns in the `WHERE` clause as a filter [#22814](https://github.com/pingcap/tidb/pull/22814)
     - Fix a bug that the query returns wrong results when using the clustered index and the new collation at the same time [#21408](https://github.com/pingcap/tidb/pull/21408)
     - Fix the panic that occurs when executing `ANALYZE` with `enable_new_collation` enabled [#21299](https://github.com/pingcap/tidb/pull/21299)
     - Fix the issue that SQL views does not correctly handle the default roles associated with the SQL DEFINER [#24531](https://github.com/pingcap/tidb/pull/24531)

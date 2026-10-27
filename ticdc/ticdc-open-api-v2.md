@@ -307,7 +307,7 @@ The `sink` parameters are described as follows:
 | `column_selectors`      | The column selector configuration. (Optional)                                                                                                                                                                  |
 | `csv`                   | The CSV configuration. (Optional)                                                                                                                                                                              |
 | `date_separator`        | `STRING` type. Indicates the date separator type of the file directory. Value options are `none`, `year`, `month`, and `day`. `none` is the default value and means that the date is not separated. (Optional) |
-| `dispatchers`           | An configuration array for event dispatching. (Optional)                                                                                                                                                       |
+| `dispatchers`           | A configuration array for event dispatching. (Optional)                                                                                                                                                       |
 | `encoder_concurrency`   | `INT` type. The number of encoder threads in the MQ sink. The default value is `16`. (Optional)                                                                                                                |
 | `protocol`              | `STRING` type. For MQ sinks, you can specify the protocol format of the message. The following protocols are currently supported: `canal-json`, `open-protocol`, `avro`, `debezium`, and `simple`.               |
 | `schema_registry`       | `STRING` type. The schema registry address. (Optional)                                                                                                                                                         |
@@ -376,7 +376,7 @@ The `sink.csv` parameters are described as follows:
 
 ### Example
 
-The following request creates a replication task with an ID of `test5` and `sink_uri` of `blackhome://`.
+The following request creates a replication task with an ID of `test5` and `sink_uri` of `blackhole://`.
 
 ```shell
 curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/changefeeds -d '{"changefeed_id":"test5","sink_uri":"blackhole://"}'

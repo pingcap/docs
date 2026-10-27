@@ -91,7 +91,7 @@ The left outer join returns all the rows in the left table and the values in the
 
 ![Left Outer Join](/media/develop/left-outer-join.png)
 
-In some cases, you want to use multiple tables to complete the data query, but do not want the data set to become too small because the join condition are not met.
+In some cases, you want to use multiple tables to complete the data query, but do not want the data set to become too small because the join condition is not met.
 
 For example, on the homepage of the Bookshop app, you want to display a list of new books with average ratings. In this case, the new books may not have been rated by anyone yet. Using inner joins will cause the information of these unrated books to be filtered out, which is not what you expect.
 

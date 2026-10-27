@@ -522,10 +522,27 @@ The steps to check and configure these parameters are as follows:
 
         2. Create a new tuned profile:
 
+            First, use `man tuned.conf` on your system to confirm the default directory for custom profiles. If `profile_dirs` is explicitly set in `/etc/tuned/tuned-main.conf`, use the search directories specified by that setting. Run only the command block below that matches your custom profile directory. If your system uses a different directory, replace `/etc/tuned/` or `/etc/tuned/profiles/` in the commands with that directory.
+
+            > **Note:**
+            >
+            > Starting from v2.23.0, upstream TuneD changed the default directory for custom profiles to `/etc/tuned/profiles/`, but some distributions (such as RHEL 9 and Rocky Linux 9) still use `/etc/tuned/`. Therefore, do not choose the directory based solely on the TuneD version.
+
+            If the custom profile directory is `/etc/tuned/`:
+
             ```bash
-            mkdir /etc/tuned/balanced-tidb-optimal/
+            mkdir -p /etc/tuned/balanced-tidb-optimal/
             vi /etc/tuned/balanced-tidb-optimal/tuned.conf
             ```
+
+            If the custom profile directory is `/etc/tuned/profiles/`:
+
+            ```bash
+            mkdir -p /etc/tuned/profiles/balanced-tidb-optimal/
+            vi /etc/tuned/profiles/balanced-tidb-optimal/tuned.conf
+            ```
+
+            Add the following content to `tuned.conf` and save the file:
 
             ```
             [main]
@@ -543,6 +560,12 @@ The steps to check and configure these parameters are as follows:
             ```
 
             The output `include=balanced` means to add the optimization configuration of the operating system to the current `balanced` profile.
+
+            After saving the configuration, run the following command and confirm that the list includes `balanced-tidb-optimal`. If the profile is missing, check that `tuned.conf` is saved in the correct profile search directory.
+
+            ```bash
+            tuned-adm list
+            ```
 
         3. Apply the new tuned profile:
 

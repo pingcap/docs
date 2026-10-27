@@ -265,7 +265,7 @@ In the results:
 
 - `cloud_provider` is the cloud provider on which a TiDB cluster can be hosted.
 - `region` is the region of `cloud_provider`.
-- `node_quantity_range` shows the minimum node number and the step to scale a node.
+- `node_quantity_range` shows the minimum node count and the step to scale a node.
 - `node_size` is the size of a node.
 - `storage_size_gib_range` shows the minimum and maximum storage size you can set for a node.
 
@@ -832,7 +832,7 @@ You can pause a cluster when its status is `AVAILABLE` or resume a cluster when 
    }
    ```
 
-6. Wait for a moment, then use the `terraform refersh` command to update the state. The status will be changed to `AVAILABLE` finally.
+6. Wait for a moment, then use the `terraform refresh` command to update the state. The status will be changed to `AVAILABLE` finally.
 
 Now, you have created and managed a TiDB Cloud Dedicated cluster with Terraform. Next, you can try creating a backup of the cluster by the [`tidbcloud_backup`](/tidb-cloud/terraform-use-backup-resource.md) resource.
 

@@ -34,7 +34,7 @@ On October 16, 2017, TiDB 1.0 is now released! This release is focused on MySQL 
 - Add a Debug API for debugging
 - TiSpark Beta Release:
 - Support configuration framework
-- Support ThriftSever/JDBC and Spark SQL
+- Support ThriftServer/JDBC and Spark SQL
 
 ## Acknowledgement
 

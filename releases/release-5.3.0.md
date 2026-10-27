@@ -54,7 +54,7 @@ In v5.3, the key new features or improvements are as follows:
 | PD | [`patrol-region-interval`](/pd-configuration-file.md#patrol-region-interval) | Modified | Controls the running frequency at which replicaChecker checks the health state of a Region. The smaller this value is, the faster replicaChecker runs. Normally, you do not need to adjust this parameter. The default value is changed from `100ms` to `10ms`. |
 | PD | [`max-snapshot-count`](/pd-configuration-file.md#max-snapshot-count) | Modified | Controls the maximum number of snapshots that a single store receives or sends at the same time. PD schedulers depend on this configuration to prevent the resources used for normal traffic from being preempted. The default value is changed from `3` to `64`. |
 | PD | [`max-pending-peer-count`](/pd-configuration-file.md#max-pending-peer-count) | Modified | Controls the maximum number of pending peers in a single store. PD schedulers depend on this configuration to prevent too many Regions with outdated logs from being generated on some nodes. The default value is changed from `16` to `64`. |
-| TiD Lightning | `meta-schema-name` | Newly added | The schema name where the meta information for each TiDB Lightning instance is stored in the target cluster. The default value is "lightning_metadata". |
+| TiDB Lightning | `meta-schema-name` | Newly added | The schema name where the meta information for each TiDB Lightning instance is stored in the target cluster. The default value is "lightning_metadata". |
 
 ### Others
 
@@ -88,7 +88,7 @@ In v5.3, the key new features or improvements are as follows:
 
     - Merge multiple databases of different applications to reduce the cost on database maintenance, and achieve application resource isolation through the rule configuration
     - Increase replica count for important data to improve the application availability and data reliability
-    - Store new data into SSDs and store old data into HHDs to lower the cost on data archiving and storage
+    - Store new data into SSDs and store old data into HDDs to lower the cost on data archiving and storage
     - Schedule the leaders of hotspot data to high-performance TiKV instances
     - Separate cold data to lower-cost storage mediums to improve cost efficiency
 
