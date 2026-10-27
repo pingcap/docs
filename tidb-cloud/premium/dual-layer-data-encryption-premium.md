@@ -70,7 +70,7 @@ TiDB Cloud Premiumは、より高いレベルのデータセキュリティを�
 
 ## 二重層データ暗号化を有効にする {#enable-dual-layer-data-encryption}
 
-TiDB Cloud Premiumインスタンスを作成する際、またはインスタンス作成後に、二重層データ暗号化を有効にすることができます。
+TiDB Cloud Premiumインスタンスを作成する際、またはインスタンス作成後に、二重層データ暗号化を有効にできます。
 
 ### インスタンス作成時に暗号化を有効にする {#enable-encryption-during-instance-creation}
 
