@@ -135,7 +135,7 @@ TiDB Cloud 提供以下部署选项：
 
 - TiDB Cloud Filesystem
 
-    TiDB Cloud Filesystem 是一个面向应用、自动化和 AI 代理的持久化共享云文件系统。目前处于公测阶段。更多详情，参见 [TiDB Cloud Filesystem](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/)。
+    TiDB Cloud Filesystem 是一个面向应用程序、自动化流程和 AI 代理的持久化共享云文件系统。目前处于公测阶段。更多详情，参见 [TiDB Cloud Filesystem](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/)。
 
 ## 架构
 
