@@ -39,7 +39,7 @@ export TI_REGION_CODE="<filesystem-region-code>"
 
 その後、使用する環境向けのガイドに従ってください。トークンはファイルシステムを識別し、現在の環境で利用可能なパスと操作を制限します。トークンは秘密情報として扱ってください。
 
-## 一般的なマウント機能 {#common-mount-capabilities}
+## 共通のマウント機能 {#common-mount-capabilities}
 
 ファイルシステムのマウントでは、ローカルマウントを通じて公開される内容を変更するための複数のオプションがサポートされています。
 
@@ -71,7 +71,7 @@ FUSE マウント経由の書き込みを防ぐには、`--driver fuse --read-on
 
 ### FUSE の書き込み動作 {#fuse-write-behavior}
 
-FUSE マウントでは、サービスへ送信する前に書き込みがローカルでバッファされることがあります。通常のアンマウントには drain が含まれるため、事前に `drain-file-system` を実行する必要はありません。アンマウント後にマウントログで `force_quit` または保留中の書き込みが報告された場合は、[アンマウントは成功を返すがマウントプロセスが異常終了する](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally) に従ってください。
+FUSE マウントでは、サービスへ送信する前に書き込みがローカルでバッファされることがあります。通常のアンマウントにはドレインが含まれるため、事前に `drain-file-system` を実行する必要はありません。アンマウント後にマウントログで `force_quit` または保留中の書き込みが報告された場合は、[アンマウントは成功を返すがマウントプロセスが異常終了する](/tidb-cloud-filesystem/filesystem-troubleshooting.md#unmount-returns-success-but-the-mount-process-exits-abnormally) に従ってください。
 
 `drain-file-system` は、マウントを維持したまま保留中の書き込みをファイルシステムに到達させる必要がある場合にのみ使用してください。たとえば、チェックポイントを作成する前や、更新済みファイルを別の環境で利用可能にする前などです。
 
@@ -79,7 +79,7 @@ WebDAV マウントは `drain-file-system` をサポートしていません。
 
 > **Warning:**
 >
-> FUSE の drain またはアンマウントに失敗した場合は、エラーを解決し、必要なファイルがファイルシステムに到達したことを確認するまで、マウントとマシンを利用可能な状態に保ってください。一部の保留中の書き込みは、まだそのマシン上にしか存在していない可能性があります。
+> FUSE のドレインまたはアンマウントに失敗した場合は、エラーを解決し、必要なファイルがファイルシステムに到達したことを確認するまで、マウントとマシンを利用可能な状態に保ってください。一部の保留中の書き込みは、まだそのマシン上にしか存在していない可能性があります。
 
 ## 次のステップ {#what-s-next}
 

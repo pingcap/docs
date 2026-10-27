@@ -123,7 +123,7 @@ ti fs update-file-system-embedding-configuration \
   --provider-model "<embedding-model>"
 ```
 
-プロバイダーは、OpenAI 互換 embeddings API を通じて、正確に 1024 次元のベクトルを返す必要があります。他のベクトル次元はサポートされていません。
+プロバイダーは、OpenAI 互換の埋め込み API を通じて、正確に 1024 次元のベクトルを返す必要があります。他のベクトル次元はサポートされていません。
 
 利用可能なすべてのオプションについては、[`update-file-system-embedding-configuration`](/ai/ti/reference/ti-fs-update-file-system-embedding-configuration.md) を参照してください。
 

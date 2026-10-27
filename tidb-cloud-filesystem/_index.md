@@ -49,7 +49,7 @@ summary: TiDB Cloud Filesystem は、アプリケーション、自動化、AI �
 
 [認可](/tidb-cloud-filesystem/filesystem-authorization.md)
 
-[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
+[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md)
 
 [ファイルシステムの Vault シークレットを管理する](/tidb-cloud-filesystem/manage-filesystem-vault-secrets.md)
 

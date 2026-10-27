@@ -35,7 +35,7 @@ printf 'Owner token: '
 read -rs TI_FS_TOKEN && export TI_FS_TOKEN && printf '\n'
 ```
 
-アクセスの取り消しが完了するまで、オーナートークンは `TI_FS_TOKEN` に保持してください。これはファイル操作とトークン管理の両方の認証に使用されます。その他の認証方法については、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md#inspect-and-change-token-status) を参照してください。
+アクセスの取り消しが完了するまで、オーナートークンは `TI_FS_TOKEN` に保持してください。これはファイル操作とトークン管理の両方の認証に使用されます。その他の認証方法については、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md#inspect-and-change-token-status) を参照してください。
 
 ## 特定のファイルへのアクセスを付与する {#give-access-to-specific-files}
 
@@ -70,7 +70,7 @@ read -rs TI_FS_TOKEN && export TI_FS_TOKEN && printf '\n'
 
 3. 安全なチャネルを通じて、スコープ付きトークン、リージョンコード、および `share_path` の正確な値を受信者に送信します。オーナートークンは非公開のままにしてください。マウント経由でファイルを更新した場合は、アクセス情報を送る前に、[更新内容が共有可能な状態になっていることを確認](#make-sure-updates-are-ready-to-share)してください。
 
-受信者ごとに個別のスコープ付きトークンを作成すると、アクセスを個別に取り消せます。その他の権限の組み合わせについては、[ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
+受信者ごとに個別のスコープ付きトークンを作成すると、アクセスを個別に取り消せます。その他の権限の組み合わせについては、[ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
 
 ## 別のマシンから共有ファイルにアクセスする {#access-the-shared-files-from-another-machine}
 
@@ -109,7 +109,7 @@ read -rs TI_FS_TOKEN && export TI_FS_TOKEN && printf '\n'
 
 所有者シェルで、`ti fs describe-file --path "$share_path/denied-write.txt"` を実行し、ファイルが存在しないことが報告されることを確認します。
 
-### 共有ディレクトリをマウントする（任意） {#mount-the-shared-directory-optional}
+### 共有ディレクトリをマウントする（オプション） {#mount-the-shared-directory-optional}
 
 以下のコマンドは Linux FUSE または macFUSE を使用する macOS 向けです。macFUSE がない Mac では、`--driver webdav` を使用し、このコマンドから `--read-only` を省略してください。WebDAV はそのオプションを受け付けません。スコープ付きトークンにより、サービス側では引き続き読み取り専用アクセスが強制されます。[マウントの前提条件](/tidb-cloud-filesystem/filesystem-mount.md#choose-a-mount-method) も参照してください。
 
@@ -136,7 +136,7 @@ cat "$review_mount/summary.txt"
 
 ## 更新内容が共有可能な状態になっていることを確認する {#make-sure-updates-are-ready-to-share}
 
-後続のワークフローでマウント経由の書き込みを行う場合は、別のユーザーに渡す前にファイルを閉じ、[安全に書き込みを完了](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely)してください。FUSE の場合は、マウントを drain するか、正常にアンマウントしてください。WebDAV の場合は通常どおりアンマウントします。drain はサポートされていません。更新されたファイルは、直接 `ti fs read-file` リクエストで確認してください。
+後続のワークフローでマウント経由の書き込みを行う場合は、別のユーザーに渡す前にファイルを閉じ、[安全に書き込みを完了](/tidb-cloud-filesystem/filesystem-mount.md#finish-safely)してください。FUSE の場合は、マウントをドレインするか、正常にアンマウントしてください。WebDAV の場合は通常どおりアンマウントします。ドレインはサポートされていません。更新されたファイルは、直接 `ti fs read-file` リクエストで確認してください。
 
 同じファイルへの同時書き込みは避けてください。変更は自動的にはマージされません。ユーザーごとに分離されたワークスペースが必要な場合は、[レイヤーとチェックポイント](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を使用してください。
 
@@ -185,10 +185,10 @@ cat "$review_mount/summary.txt"
 
     `describe-file` では not-found エラーが返ることを想定しています。
 
-取り消しによって、ファイルシステム本体や他のトークンはそのまま維持されます。受信者がすでにダウンロードまたはキャッシュしたファイルを消去できません。環境変数をクリアするだけでは、トークンは取り消されません。
+取り消しによって、ファイルシステム本体や他のトークンはそのまま維持されます。受信者がすでにダウンロードまたはキャッシュしたファイルは消去できません。環境変数をクリアするだけでは、トークンは取り消されません。
 
 ## 次のステップ {#what-s-next}
 
-- トークンの作成、ローテーション、無効化、取り消しについては [ファイルシステムトークンの管理](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
+- トークンの作成、ローテーション、無効化、取り消しについては [ファイルシステムトークンを管理する](/tidb-cloud-filesystem/manage-filesystem-tokens.md) を参照してください。
 - ベースファイルシステムに適用する前に変更を個別に行う方法については、[TiDB Cloud Filesystem のレイヤーとチェックポイント](/tidb-cloud-filesystem/filesystem-layers-checkpoints.md) を参照してください。
 - 共有ファイルシステムデータを使用するワークフローについては、[自動化と AI エージェントのワークフロー](/tidb-cloud-filesystem/use-filesystem-for-automation-and-ai-agents.md) を参照してください。
