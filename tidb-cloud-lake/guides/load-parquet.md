@@ -102,7 +102,7 @@ COPY INTO books
 
 ### ステップ 5 (任意). SELECT を使用してデータをコピーする {#step-5-optional-using-select-to-copy-data}
 
-コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT ステートメントを使用します。詳細は [`Parquet からの SELECT`](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md) を参照してください。
+コピー中にデータを変換するなど、より細かく制御したい場合は、SELECT ステートメントを使用します。詳細は [`SELECT from Parquet`](/tidb-cloud-lake/guides/query-parquet-files-in-stage.md) を参照してください。
 
 ```sql
 COPY INTO books (title, author)

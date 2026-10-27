@@ -5,7 +5,7 @@ summary: このページでは、PostgreSQL データベースから {{{ .lake }
 
 # PostgreSQL 統合タスク
 
-このページでは、PostgreSQL データベースから {{{ .lake }}} にデータを同期する PostgreSQL 統合タスクを作成する方法について説明します。PostgreSQL タスクは、完全な `Snapshot` ロード (load)、継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートします。
+このページでは、PostgreSQL データベースから {{{ .lake }}} にデータを同期する PostgreSQL 統合タスクを作成する方法について説明します。PostgreSQL タスクは、完全な `Snapshot` ロード、継続的な `Change Data Capture (CDC)`、またはその両方の組み合わせをサポートします。
 
 まず再利用可能な PostgreSQL 接続設定を作成する必要がある場合は、[PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md) を参照してください。
 
@@ -82,7 +82,7 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 
 ## PostgreSQL 統合タスクの作成 {#creating-a-postgresql-integration-task}
 
-### ステップ 1: Basic Info {#step-1-basic-info}
+### ステップ 1: 基本情報 {#step-1-basic-info}
 
 1. **Data** > **Data Integration** に移動し、**Create Task** をクリックします。
 
@@ -106,13 +106,13 @@ PostgreSQL インスタンスに {{{ .lake }}} からアクセスできること
 
 - **Snapshot WHERE Condition**: スナップショット中にデータをフィルタリングする SQL WHERE 句です（例: `created_at > '2024-01-01'`）。これにより、ソースデータの一部のみをロードできます。
 
-### ステップ 2: Preview Data {#step-2-preview-data}
+### ステップ 2: データのプレビュー {#step-2-preview-data}
 
 基本設定を構成した後、**Next** をクリックしてソースデータをプレビューします。
 
 システムは選択した PostgreSQL テーブルからサンプル行を取得し、カラム名とデータ型を表示します。続行する前に、正しいテーブルとカラムが選択されていることを確認してください。
 
-### ステップ 3: Set Target Table {#step-3-set-target-table}
+### ステップ 3: ターゲットテーブルの設定 {#step-3-set-target-table}
 
 {{{ .lake }}} 内の宛先を構成します。
 
@@ -163,9 +163,9 @@ CDC モードでは、論理レプリケーションを介して PostgreSQL WAL 
 
 **仕組み:**
 
-1. 論理レプリケーション slot を使用して PostgreSQL に接続します
+1. 論理レプリケーションスロットを使用して PostgreSQL に接続します
 2. `pgoutput` プラグインを介してリアルタイムに行レベルの変更を取得します
-3. 変更を {{{ .lake }}} 内の raw ステージングテーブルに書き込みます
+3. 変更を {{{ .lake }}} 内の生のステージングテーブルに書き込みます
 4. 主キーを使用して、変更を定期的にターゲットテーブルへマージします
 5. クラッシュリカバリのためにチェックポイント（LSN 位置）を保存します
 

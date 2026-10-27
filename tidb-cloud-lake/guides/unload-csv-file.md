@@ -29,7 +29,7 @@ FILE_FORMAT = (
 
 ## チュートリアル {#tutorial}
 
-### ステップ 1. External Stage を作成する {#step-1-create-an-external-stage}
+### ステップ 1. 外部 stage を作成する {#step-1-create-an-external-stage}
 
 ```sql
 CREATE STAGE csv_unload_stage
@@ -74,7 +74,7 @@ DETAILED_OUTPUT = true;
 └──────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### ステップ 4. アンロードした CSV ファイルを検証する {#step-4-verify-the-unloaded-csv-files}
+### ステップ 4. アンロードした CSV ファイルを確認する {#step-4-verify-the-unloaded-csv-files}
 
 ```sql
 SELECT COUNT($1)

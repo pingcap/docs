@@ -5,7 +5,7 @@ summary: MCP 対応の AI ツールを TiDB Cloud Lake に接続し、安全な�
 
 # MCP を使用して AI ツールを TiDB Cloud Lake に接続する
 
-[TiDB Cloud Lake MCP server](https://github.com/tidbcloud/lake-mcp) は、[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) を通じて AI アシスタントを {{{ .lake }}} に接続します。MCP 対応ツールを使用すると、自然言語の指示でデータベースオブジェクトの探索、テーブルスキーマの確認、SQL の実行ができます。
+[TiDB Cloud Lake MCP サーバー](https://github.com/tidbcloud/lake-mcp) は、[Model Context Protocol (MCP)](https://modelcontextprotocol.io/) を通じて AI アシスタントを {{{ .lake }}} に接続します。MCP 対応ツールを使用すると、自然言語の指示でデータベースオブジェクトの探索、テーブルスキーマの確認、SQL の実行ができます。
 
 ## 前提条件 {#prerequisites}
 
@@ -18,7 +18,7 @@ summary: MCP 対応の AI ツールを TiDB Cloud Lake に接続し、安全な�
 
 ## 接続文字列を取得する {#get-a-connection-string}
 
-{{{ .lake }}} の Warehouse から host、username、password、database、および warehouse 名を取得します。詳細は、[Warehouse に接続する](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse) を参照してください。
+{{{ .lake }}} の Warehouse からホスト、ユーザー名、パスワード、データベース、および Warehouse 名を取得します。詳細は、[Warehouse に接続する](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse) を参照してください。
 
 次の形式で DSN を作成します。
 
@@ -28,7 +28,7 @@ lake://<username>:<password>@<host>:443/<database>?warehouse=<warehouse>
 
 ## MCP クライアントを設定する {#configure-an-mcp-client}
 
-以下の設定では、`uv` を使用して最新の `tidbcloudlake-mcp` パッケージを実行します。各例では safe mode を明示的に有効にしています。
+以下の設定では、`uv` を使用して最新の `tidbcloudlake-mcp` パッケージを実行します。各例ではセーフモードを明示的に有効にしています。
 
 <SimpleTab groupId="lake-mcp-clients">
 

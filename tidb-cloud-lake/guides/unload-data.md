@@ -1,9 +1,9 @@
 ---
-title: TiDB Cloud Lake からデータをアンロード
+title: TiDB Cloud Lake からデータをアンロードする
 summary: "`COPY INTO` コマンドを使用して、TiDB Cloud Lake からさまざまなファイル形式およびストレージ保存先にデータをアンロードする方法を学びます。"
 ---
 
-# TiDB Cloud Lake からデータをアンロード
+# TiDB Cloud Lake からデータをアンロードする
 
 {{{ .lake }}} の `COPY INTO` コマンドを使用すると、柔軟なフォーマットオプションを指定して、さまざまなファイル形式やストレージ保存先にデータをエクスポートできます。
 

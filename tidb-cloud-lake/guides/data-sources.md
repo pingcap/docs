@@ -14,11 +14,11 @@ summary: "{{{ .lake }}} のデータソースは、外部システムへの接�
 | 種類 | 用途 |
 |------|---------|
 | [Amazon S3 - Credentials](/tidb-cloud-lake/guides/aws-credentials.md) | Amazon S3 へのアクセスに必要な Access Key と Secret Key を保存します。これらの認証情報は、複数の S3 インポートタスクで再利用できます。 |
-| [Amazon SQS (S3) - IAM Role (Preview)](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) | SQS (S3) の取り込みに必要な queue URL、リージョン、IAM Role、および S3 パススコープを保存します。S3 オブジェクト作成イベントの消費に使用できます。 |
-| [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md) | MySQL へのアクセスに必要な host、port、username、password、および database 情報を保存します。これらの設定は、複数の MySQL 同期タスクで再利用できます。 |
-| [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md) | PostgreSQL へのアクセスに必要な host、port、username、password、および database 情報を保存します。これらの設定は、複数の PostgreSQL 同期タスクで再利用できます。 |
-| [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md) | タスク失敗通知や類似のシナリオ向けに、FeiShu bot webhook とメッセージテンプレートを保存します。 |
-| [Kafka - Credentials（プレビュー）](/tidb-cloud-lake/guides/kafka-credentials.md) | Kafka へのアクセスに必要な broker アドレス、認証方式、および接続認証情報を保存します。これらの設定は Kafka Consumer タスクで再利用できます。 |
+| [Amazon SQS (S3) - IAM Role (Preview)](/tidb-cloud-lake/guides/amazon-sqs-s3-iam-role.md) | SQS (S3) の取り込みに必要なキューの URL、リージョン、IAM Role、および S3 パススコープを保存します。S3 オブジェクト作成イベントの消費に使用できます。 |
+| [MySQL - Credentials](/tidb-cloud-lake/guides/mysql-credentials.md) | MySQL へのアクセスに必要なホスト、ポート、ユーザー名、パスワード、およびデータベース情報を保存します。これらの設定は、複数の MySQL 同期タスクで再利用できます。 |
+| [PostgreSQL - Credentials](/tidb-cloud-lake/guides/postgresql-credentials.md) | PostgreSQL へのアクセスに必要なホスト、ポート、ユーザー名、パスワード、およびデータベース情報を保存します。これらの設定は、複数の PostgreSQL 同期タスクで再利用できます。 |
+| [FeiShuBot](/tidb-cloud-lake/guides/feishubot.md) | タスク失敗通知や類似のシナリオ向けに、FeiShu ボットの Webhook とメッセージテンプレートを保存します。 |
+| [Kafka - Credentials (Preview)](/tidb-cloud-lake/guides/kafka-credentials.md) | Kafka へのアクセスに必要なブローカーアドレス、認証方式、および接続認証情報を保存します。これらの設定は Kafka Consumer タスクで再利用できます。 |
 | [TiDB - Credentials (Preview)](/tidb-cloud-lake/guides/integrate-with-tidb.md) | TiDB Cloud Lake が TiDB クラスターによって stage に配置されたデータを読み取るために使用する、オブジェクトストレージの場所、認証情報、およびオプションのイベントキューを保存します。これらの設定は、複数の TiDB 同期タスクで再利用できます。 |
 
 すべてのデータソースが統合タスクに対応しているわけではありません。たとえば、`FeiShuBot` は通知設定に使用されます。一方、`Amazon S3 - Credentials`、`Amazon SQS (S3) - IAM Role`、`MySQL - Credentials`、`PostgreSQL - Credentials`、`TiDB - Credentials`、および `Kafka - Credentials` は、実際のインポート、同期、またはイベント消費タスクから参照されます。

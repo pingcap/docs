@@ -1,13 +1,13 @@
 ---
 title: Lakehouse ETL
-summary: "シナリオ: CityDrive のデータエンジニアリングチームは、各バッチのダッシュカムデータを Parquet（動画、フレームイベント、メタデータ JSON、埋め込み、GPS トレース、信号機までの距離）としてエクスポートしています。これらの Parquet ファイルは、生の動画ストリームから抽出されたすべてのマルチモーダル信号を集約し、Warehouse の基盤を形成します。チームは、単一の COPY パイプラインを通じて {{{ .lake }}} の共有テーブルをリフレッシュしたいと考えています。"
+summary: "シナリオ: CityDrive のデータエンジニアリングチームは、各バッチのダッシュカムデータを Parquet（動画、フレームイベント、メタデータ JSON、埋め込み、GPS トレース、信号機までの距離）としてエクスポートしています。これらの Parquet ファイルは、生の動画ストリームから抽出されたすべてのマルチモーダル信号を集約し、データウェアハウスの基盤を形成します。チームは、単一の COPY パイプラインを通じて {{{ .lake }}} の共有テーブルをリフレッシュしたいと考えています。"
 ---
 
 # Lakehouse ETL
 
-**シナリオ:** CityDrive のデータエンジニアリングチームは、各バッチのダッシュカムデータを Parquet（動画、フレームイベント、メタデータ JSON、埋め込み、GPS トレース、信号機までの距離）としてエクスポートしています。これらの Parquet ファイルは、生の動画ストリームから抽出されたすべてのマルチモーダル信号を集約し、Warehouse の基盤を形成します。チームは、単一の COPY パイプラインを通じて {{{ .lake }}} の共有テーブルをリフレッシュしたいと考えています。
+**シナリオ:** CityDrive のデータエンジニアリングチームは、各バッチのダッシュカムデータを Parquet（動画、フレームイベント、メタデータ JSON、埋め込み、GPS トレース、信号機までの距離）としてエクスポートしています。これらの Parquet ファイルは、生の動画ストリームから抽出されたすべてのマルチモーダル信号を集約し、データウェアハウスの基盤を形成します。チームは、単一の COPY パイプラインを通じて {{{ .lake }}} の共有テーブルをリフレッシュしたいと考えています。
 
-ロード (load) ループはシンプルです。
+ロードループはシンプルです。
 
 ```
 Object storage → STAGE → COPY INTO tables → (optional) STREAMS/TASKS
@@ -171,7 +171,7 @@ FILE_FORMAT = (TYPE = 'PARQUET');
 
 ---
 
-## 4. 増分処理のための Streams（オプション） {#4-streams-for-incremental-reactions-optional}
+## 4. 増分処理のためのストリーム（任意） {#4-streams-for-incremental-reactions-optional}
 
 下流ジョブで前回のバッチ以降に追加された行だけを消費したい場合は、ストリームを使用します。
 
@@ -183,7 +183,7 @@ SELECT * FROM frame_events_stream;   -- shows newly copied rows
 SELECT * FROM frame_events_stream WITH CONSUME;  -- advance the offset
 ```
 
-`WITH CONSUME` により、行の処理後にストリームカーソルが先へ進むことが保証されます。参考: [Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md).
+`WITH CONSUME` により、行の処理後にストリームカーソルが先へ進むことが保証されます。参考: [Streams](/tidb-cloud-lake/guides/track-and-transform-data-via-streams.md)
 
 ---
 

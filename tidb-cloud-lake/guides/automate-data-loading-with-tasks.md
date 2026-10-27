@@ -9,7 +9,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
 
 ![alt text](/media/tidb-cloud-lake/task.png)
 
-- **Name & warehouse** – すべてのタスクには warehouse が必要です。
+- **名前と Warehouse** – すべてのタスクには Warehouse が必要です。
 
     ```sql
     CREATE TASK ingest_orders
@@ -17,7 +17,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
     AS SELECT 1;
     ```
 
-- **Trigger** – 固定間隔、CRON、または `AFTER another_task` を指定できます。
+- **トリガー** – 固定間隔、CRON、または `AFTER another_task` を指定できます。
 
     ```sql
     CREATE TASK mytask
@@ -26,7 +26,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
     AS ...;
     ```
 
-- **Guards** – 条件式が true の場合にのみ実行します。
+- **ガード** – 条件式が true の場合にのみ実行します。
 
     ```sql
     CREATE TASK mytask
@@ -35,7 +35,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
     AS ...;
     ```
 
-- **Error handling** – N 回失敗した後に一時停止する、または通知を送信します。
+- **エラー処理** – N 回失敗した後に一時停止する、または通知を送信します。
 
     ```sql
     CREATE TASK mytask
@@ -44,7 +44,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
     AS ...;
     ```
 
-- **SQL payload** – `AS` の後に記述した内容が、そのタスクによって実行されます。
+- **SQL ペイロード** – `AS` の後に記述した内容が、そのタスクによって実行されます。
 
     ```sql
     CREATE TASK bump_age
@@ -55,7 +55,7 @@ Tasks は SQL をラップし、{{{ .lake }}} がスケジュールに従って�
 
 ## 例 1: スケジュールされたコピー {#example-1-scheduled-copy}
 
-センサーデータを継続的に生成し、Parquet として保存して、テーブルにロード (load) します。すべての `CREATE/ALTER TASK` 文で、`'etl_wh_small'` を**あなたの** warehouse 名に置き換えてください。
+センサーデータを継続的に生成し、Parquet として保存して、テーブルにロード (load) します。すべての `CREATE/ALTER TASK` 文で、`'etl_wh_small'` を**ご自身の** Warehouse 名に置き換えてください。
 
 ### ステップ 1. デモ用オブジェクトを準備する {#step-1-prepare-demo-objects}
 
@@ -112,7 +112,7 @@ FILE_FORMAT = (TYPE = PARQUET)
 PURGE = TRUE;
 ```
 
-### ステップ 4. Tasks を再開する {#step-4-resume-tasks}
+### ステップ 4. タスクを再開する {#step-4-resume-tasks}
 
 ```sql
 ALTER TASK task_generate_data RESUME;
@@ -148,9 +148,9 @@ ALTER TASK task_consume_data
 
 テストが完了したら、`ALTER TASK ... SUSPEND` を使ってどちらのタスクも一時停止できます。
 
-### ステップ 6. Tasks を更新する {#step-6-update-tasks}
+### ステップ 6. タスクを更新する {#step-6-update-tasks}
 
-タスクを削除しなくても、スケジュール、warehouse、さらには SQL payload まで変更できます。
+タスクを削除しなくても、スケジュール、Warehouse、さらには SQL ペイロードまで変更できます。
 
 ```sql
 -- Tweak the schedule and warehouse
@@ -180,7 +180,7 @@ ORDER BY completed_time DESC;
 
 `WHEN STREAM_STATUS(...)` を使用すると、ストリームに新しい行がある場合にのみ実行できます。例 1 の `sensor_events` テーブルを再利用します。
 
-### ステップ 1. ストリームと latest テーブルを作成する {#step-1-create-stream--latest-table}
+### ステップ 1. ストリームと最新テーブルを作成する {#step-1-create-stream--latest-table}
 
 ```sql
 -- Create a stream on the sensor table (Standard mode to capture every mutation)

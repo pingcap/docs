@@ -78,7 +78,7 @@ INSERT INTO frame_metadata_catalog VALUES
   ('FRAME-0401', PARSE_JSON('{"scene":{"weather_code":"lightfog","lighting":"night"},"camera":{"sensor_view":"rear"},"vehicle":{"speed_kmh":38.9},"detections":{"objects":[{"type":"traffic_light","confidence":0.78},{"type":"vehicle","confidence":0.36}]},"media_meta":{"tagging":{"labels":["night_lowlight","traffic_light"]}}}'), '2025-01-03 21:18:07');
 ```
 
-ドキュメント: [Geospatial types](/tidb-cloud-lake/sql/geospatial.md)。
+ドキュメント: [地理空間型](/tidb-cloud-lake/sql/geospatial.md)。
 
 ---
 
@@ -142,7 +142,7 @@ FRAME-0102| VID-20250101-001 | pedestrian
 
 ---
 
-## 3. Hex 集計 {#3-hex-aggregations}
+## 3. 六角形の集計 {#3-hex-aggregations}
 
 ダッシュボード向けに、リスクの高いフレームを六角形のバケットに集計します。
 
@@ -167,7 +167,7 @@ h3_cell         | frame_count | avg_risk
 613635011309993983| 1          | 0.59
 ```
 
-ドキュメント: [H3 functions](/tidb-cloud-lake/sql/geospatial-functions.md#h3-indexing--conversion)。
+ドキュメント: [H3 関数](/tidb-cloud-lake/sql/geospatial-functions.md#h3-indexing--conversion)。
 
 ---
 
@@ -226,7 +226,7 @@ FRAME-0301| hard_brake  | ["hard_brake","highway"]
 
 ---
 
-## 5. ヒートマップ ビューを公開する {#5-publish-a-heatmap-view}
+## 5. ヒートマップビューを公開する {#5-publish-a-heatmap-view}
 
 重い SQL を再実行することなく、地理ヒートマップを BI ツールや GIS ツールに公開できます。
 

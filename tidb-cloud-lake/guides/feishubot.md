@@ -1,16 +1,16 @@
 ---
 title: FeiShuBot
-summary: このページでは、`FeiShuBot` データソースを作成する方法について説明します。このデータソースには、タスク失敗通知などのシナリオで使用する FeiShu bot の webhook とメッセージテンプレートが保存されます。
+summary: このページでは、`FeiShuBot` データソースを作成する方法について説明します。このデータソースには、タスク失敗通知などのシナリオで使用する FeiShu ボットの Webhook とメッセージテンプレートが保存されます。
 ---
 
 # FeiShuBot
 
-このページでは、`FeiShuBot` データソースを作成する方法について説明します。このデータソースには FeiShu bot の webhook とメッセージテンプレートが保存され、通常はタスク失敗通知に使用されます。
+このページでは、`FeiShuBot` データソースを作成する方法について説明します。このデータソースには FeiShu ボットの Webhook とメッセージテンプレートが保存され、通常はタスク失敗通知に使用されます。
 
 ## ユースケース {#use-cases}
 
 - タスク実行が失敗したときに、FeiShu グループへ通知を送信する
-- 複数のタスク間で同じ bot 設定とメッセージテンプレートを再利用する
+- 複数のタスク間で同じボット設定とメッセージテンプレートを再利用する
 - 通知エンドポイントとメッセージ形式を一元管理する
 
 ## FeiShuBot を作成する {#create-feishubot}
@@ -21,16 +21,16 @@ summary: このページでは、`FeiShuBot` データソースを作成する�
     | フィールド | 必須 | 説明 |
     |-------|----------|-------------|
     | **Name** | はい | このデータソースの説明的な名前です。使用できるのは英字、数字、アンダースコアのみです |
-    | **URL** | はい | カスタム FeiShu bot webhook URL |
+    | **URL** | はい | カスタム FeiShu ボットの Webhook URL |
     | **Warehouse** | はい | `NOTIFICATION INTEGRATION` の作成に使用する Warehouse |
-    | **Payload** | はい | メッセージ payload の種類です。現在は `Task Error` のみサポートされています |
+    | **Payload** | はい | メッセージペイロードの種類です。現在は `Task Error` のみサポートされています |
     | **Template** | はい | カスタムメッセージテンプレート |
 
 3. **Test Connectivity** をクリックして設定を検証します。テストが成功したら、**OK** をクリックしてデータソースを保存します。
 
 ## 使用方法 {#usage}
 
-`FeiShuBot` は、SQL Task の `ERROR_INTEGRATION` プロパティとともに使用するか、コンソールのタスクフロー (task flow) UI の **Error Notification** から参照できます。
+`FeiShuBot` は、SQL Task の `ERROR_INTEGRATION` プロパティとともに使用するか、コンソールのタスクフロー UI の **Error Notification** から参照できます。
 
 ### SQL Task プロパティを設定する {#set-a-sql-task-property}
 

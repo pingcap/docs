@@ -9,13 +9,13 @@ summary: Kafka トピックからメッセージを継続的に消費し、メ�
 
 S3、MySQL、PostgreSQL のデータ統合タスクとは異なり、Kafka Consumer タスクは通常のターゲットテーブルに直接書き込みません。タスクを作成して開始した後、`@kafka_consumer/<task_name>/` の stage パスを使用して保存されたメッセージオブジェクトを確認し、SQL でその内容をクエリできます。
 
-先に再利用可能な Kafka 接続設定を作成する必要がある場合は、[Kafka - Credentials（プレビュー）](/tidb-cloud-lake/guides/kafka-credentials.md) を参照してください。
+先に再利用可能な Kafka 接続設定を作成する必要がある場合は、[Kafka - Credentials (Preview)](/tidb-cloud-lake/guides/kafka-credentials.md) を参照してください。
 
 ## ユースケース {#use-cases}
 
-- Kafka トピックから JSON メッセージを継続的に取り込み
-- まず Kafka メッセージを内部オブジェクトストレージに保存し、その後 SQL でクエリまたは処理
-- リアルタイムまたはニアリアルタイムのデータパイプライン向けに、生の Kafka メッセージオブジェクトを保持
+- Kafka トピックから JSON メッセージを継続的に取り込む
+- まず Kafka メッセージを内部オブジェクトストレージに保存し、その後、後続の SQL でクエリまたは処理する
+- リアルタイムまたはニアリアルタイムのデータパイプライン向けに、生の Kafka メッセージオブジェクトを保持する
 
 ## ワークフロー {#workflow}
 
@@ -120,7 +120,7 @@ FROM @kafka_consumer (
 
 メッセージを業務テーブルに書き込む必要がある場合は、クエリ結果に基づいて後続の変換またはロードを続行してください。
 
-## 高度な設定 {#advanced-configuration}
+## 詳細設定 {#advanced-configuration}
 
 ### Runtime Size {#runtime-size}
 

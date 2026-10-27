@@ -92,7 +92,7 @@ ORDER BY flagged_frames DESC;
 
 ドキュメント: [DATEADD](/tidb-cloud-lake/sql/date-add.md), [GROUP BY](/tidb-cloud-lake/sql/select.md#group-by-clause)。
 
-サンプル出力:
+出力例:
 
 ```
 video_id        | route_name         | weather   | flagged_frames
@@ -119,7 +119,7 @@ JOIN citydrive_videos AS v USING (video_id)
 ORDER BY f.collected_at;
 ```
 
-サンプル出力:
+出力例:
 
 ```
 frame_id  | event_tag      | risk_score | route_name        | camera_source
@@ -142,7 +142,7 @@ WHERE NOT EXISTS (
 );
 ```
 
-サンプル出力:
+出力例:
 
 ```
 frame_id
@@ -162,7 +162,7 @@ WHERE f.event_tag = 'pedestrian'
 ORDER BY confidence DESC;
 ```
 
-サンプル出力:
+出力例:
 
 ```
 frame_id  | detected_type | confidence

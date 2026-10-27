@@ -5,7 +5,7 @@ summary: 行アクセスポリシーは、クエリ時にテーブルの行を�
 
 # 行アクセスポリシー
 
-行アクセスポリシーは、クエリ時にテーブルの行をフィルタリングします。ブール述語を一度定義してテーブルに関連付けると、ユーザーにはそのポリシーを通過した行だけが表示されます。
+行アクセスポリシーは、クエリ時にテーブルの行をフィルタリングします。ブール述語を一度定義してテーブルにアタッチすると、ユーザーにはそのポリシーを通過した行だけが表示されます。
 
 行を非表示にするのではなく、カラムレベルでマスキングしたい場合は、[マスキングポリシー](/tidb-cloud-lake/guides/masking-policy.md) を使用してください。
 
@@ -81,7 +81,7 @@ ADD ROW ACCESS POLICY rap_region_dept ON (office_region, department);
 
 ### ベクトル / RAG ドキュメント可視性 {#vector--rag-document-visibility}
 
-共有ナレッジベース テーブルとベクトル検索を組み合わせた例です。可視性を一度設定すれば、検索 SQL にドキュメント ID フィルタを含める必要はありません。[ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) を参照してください。
+共有ナレッジベーステーブルとベクトル検索を組み合わせた例です。可視性を一度設定すれば、検索 SQL にドキュメント ID フィルタを含める必要はありません。[ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) を参照してください。
 
 | ロール | 参照可能な内容 |
 |------|------|
@@ -301,4 +301,4 @@ ALTER TABLE employees DROP ALL ROW ACCESS POLICIES;
 - [User & Role](/tidb-cloud-lake/sql/user-role.md)
 - [CREATE ROW ACCESS POLICY](/tidb-cloud-lake/sql/create-row-access-policy.md)
 - [ALTER TABLE](/tidb-cloud-lake/sql/alter-table.md#row-access-policy-operations)
-- [Row Access Policy コマンド](/tidb-cloud-lake/sql/row-access-policy-overview.md)
+- [行アクセスポリシーコマンド](/tidb-cloud-lake/sql/row-access-policy-overview.md)

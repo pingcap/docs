@@ -68,7 +68,7 @@ ALTER USER eric WITH DEFAULT_ROLE = 'account_admin';
 
 ## 使用例（基本） {#usage-examples-basic}
 
-この例では、ロールベースの権限管理を示します。まず、`writer` ロールを作成して権限を付与します。次に、これらの権限をユーザー `eric` に割り当て、`eric` がそれらを継承します。最後に、ロールから権限を取り消し、それがユーザーの権限に与える影響を示します。
+この例では、ロールベースの権限管理を示します。まず、'writer' ロールを作成して権限を付与します。次に、これらの権限をユーザー 'eric' に割り当て、'eric' がそれらを継承します。最後に、ロールから権限を取り消し、それがユーザーの権限に与える影響を示します。
 
 ```sql title='Example:'
 -- Create a new role named 'writer'
@@ -102,7 +102,7 @@ SHOW GRANTS FOR ROLE writer;
 
 ## ビジネスに整合したロールモデル {#business-aligned-role-model}
 
-各ドメインが自分のデータのみにアクセスできるよう、ロールをビジネスシステムに合わせて設計し、ドメインをまたぐアクセスはコラボレーション用ロールを通じて付与します。
+各ドメインが自分のデータのみにアクセスできるよう、ロールを業務システムに合わせて設計し、ドメインをまたぐアクセスはコラボレーション用ロールを通じて付与します。
 
 ### 参照アーキテクチャ {#reference-architecture}
 
@@ -149,11 +149,11 @@ SHOW GRANTS FOR ROLE writer;
 
 ### 所有権の動作 {#ownership-behavior}
 
-オブジェクトは、作成時にアクティブだったロールによって所有されます。オブジェクトを作成する前に、必ず `SET ROLE <biz>_owner` を実行してください。詳細については、[Ownership](/tidb-cloud-lake/guides/ownership.md) を参照してください。
+オブジェクトは、作成時にアクティブだったロールによって所有されます。オブジェクトを作成する前に、必ず `SET ROLE <biz>_owner` を実行してください。詳細については、[所有権](/tidb-cloud-lake/guides/ownership.md) を参照してください。
 
 ### 使用例（業務ドメイン） {#usage-examples-business-domains}
 
-```sql title='例:'
+```sql title='Example:'
 -- 1) 業務システムのロール
 CREATE ROLE identity_owner;
 CREATE ROLE identity_rw;

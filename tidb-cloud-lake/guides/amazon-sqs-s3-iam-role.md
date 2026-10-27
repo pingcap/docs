@@ -7,14 +7,14 @@ summary: "{{{ .lake }}} で \"Amazon SQS (S3) - IAM Role\" データソースを
 
 このページでは、`Amazon SQS (S3) - IAM Role` データソースを作成する方法について説明します。このデータソースには、Amazon SQS キューおよび対応する S3 バケットにアクセスするために必要な設定が保存され、Amazon S3 から SQS に配信される S3 オブジェクト作成イベントを消費するために使用されます。
 
-`Amazon SQS (S3) - IAM Role` は、SQS (S3) 取り込みに必要な接続情報と認可情報のみを保存します。メッセージ自体を消費することはありません。SQS メッセージの読み取り、S3 ObjectCreated イベントの解析、およびデータの {{{ .lake }}} への書き込みという実際の処理は、[Amazon SQS (S3) Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) によって実行されます。
+`Amazon SQS (S3) - IAM Role` は、SQS (S3) 取り込みに必要な接続情報と認可情報のみを保存します。メッセージ自体を消費することはありません。SQS メッセージの読み取り、S3 ObjectCreated イベントの解析、およびデータの {{{ .lake }}} への書き込みという実際の処理は、[Amazon SQS (S3) 統合タスク](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) によって実行されます。
 
 ## ユースケース {#use-cases}
 
-- SQS (S3) 取り込みに必要な queue URL、リージョン、IAM Role、パススコープを一元管理する
+- SQS (S3) 取り込みに必要なキューの URL、リージョン、IAM Role、パススコープを一元管理する
 - S3 `ObjectCreated` イベントを消費し、対応するオブジェクトデータを {{{ .lake }}} に書き込む
 - S3 パスのポーリングのみに依存せず、S3 イベント通知を使用してデータ取り込みを駆動する
-- 複数のタスクから参照されている場合に、IAM Role、queue URL、またはパススコープを 1 か所で更新する
+- 複数のタスクから参照されている場合に、IAM Role、キューの URL、またはパススコープを 1 か所で更新する
 
 ## Amazon SQS (S3) - IAM Role を作成する {#create-amazon-sqs-s3---iam-role}
 
@@ -83,7 +83,7 @@ aws sqs create-queue \
   --queue-name "$QUEUE_NAME"
 ```
 
-後続の手順で必要になる queue URL と queue ARN を取得します。
+後続の手順で必要になるキューの URL とキューの ARN を取得します。
 
 ```bash
 export QUEUE_URL=$(
@@ -231,9 +231,9 @@ aws s3api get-bucket-notification-configuration \
 
 `QueueArn` が対象の SQS キューを指していること、`Events` に `s3:ObjectCreated:*` が含まれていること、`FilterRules` が {{{ .lake }}} データソースで設定した `Object Key Prefix` / `Object Key Suffix` と一致していることを確認してください。
 
-## ステップ 4: {{{ .lake }}} が引き受ける IAM ロールを作成する {#step-4-create-an-iam-role-for--lake--to-assume}
+## ステップ 4: {{{ .lake }}} が引き受ける IAM Role を作成する {#step-4-create-an-iam-role-for--lake--to-assume}
 
-`trust-policy.json` を生成します。`ExternalId` は {{{ .lake }}} (platform) コンソールの organization ID です。
+`trust-policy.json` を生成します。`ExternalId` は {{{ .lake }}} (プラットフォーム) コンソールの Organization ID です。
 
 ```bash
 jq -n \
@@ -274,7 +274,7 @@ jq -n \
   > trust-policy.json
 ```
 
-IAM ロールを作成します。
+IAM Role を作成します。
 
 ```bash
 aws iam create-role \
@@ -419,4 +419,4 @@ aws iam get-role \
 
 ## 次のステップ {#next-steps}
 
-このデータソースを作成した後は、これを使用して [Amazon SQS (S3) Integration Task](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) を作成できます。
+このデータソースを作成した後は、これを使用して [Amazon SQS (S3) 統合タスク](/tidb-cloud-lake/guides/integrate-with-amazon-sqs-s3.md) を作成できます。

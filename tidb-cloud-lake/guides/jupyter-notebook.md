@@ -12,8 +12,8 @@ summary: SQLAlchemy を使用して Jupyter Notebook を TiDB Cloud Lake に接�
 開始する前に、次のものを用意してください。
 
 - Python 3.8 以降
-- {{{ .lake }}} のアカウント、データベース、および warehouse
-- 接続に使用する host、username、password、database、および warehouse 名
+- {{{ .lake }}} のアカウント、データベース、および Warehouse
+- 接続に使用するホスト、ユーザー名、パスワード、データベース、および Warehouse 名
 
 接続情報の取得方法については、[Warehouse に接続する](/tidb-cloud-lake/guides/warehouse.md#connecting-to-a-warehouse) を参照してください。
 

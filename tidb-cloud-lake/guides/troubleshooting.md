@@ -5,7 +5,7 @@ summary: このページでは、TiDB Cloud Lake における一般的な問題�
 
 # トラブルシューティング
 
-`system_history` テーブルを使用して、低速クエリ、エラー、リソース使用量、ログインの問題を診断できます。演算子ごとの実行分析（CPU time、I/O、spill、出力行数）には `profile_history` を使用します。すべてのテーブルはテナントごとに分離されています。
+`system_history` テーブルを使用して、低速クエリ、エラー、リソース使用量、ログインの問題を診断できます。演算子ごとの実行分析（CPU 時間、I/O、スピル、出力行数）には `profile_history` を使用します。すべてのテーブルはテナントごとに分離されています。
 
 ## テーブル {#tables}
 
@@ -37,12 +37,12 @@ summary: このページでは、TiDB Cloud Lake における一般的な問題�
 | current_database | VARCHAR | 使用中のデータベース |
 | written_rows | BIGINT UNSIGNED | 書き込まれた行数 |
 | written_bytes | BIGINT UNSIGNED | 書き込まれたバイト数 |
-| join_spilled_rows | BIGINT UNSIGNED | テーブル結合中に spill した行数 |
-| join_spilled_bytes | BIGINT UNSIGNED | テーブル結合中に spill したバイト数 |
-| agg_spilled_rows | BIGINT UNSIGNED | 集計中に spill した行数 |
-| agg_spilled_bytes | BIGINT UNSIGNED | 集計中に spill したバイト数 |
-| group_by_spilled_rows | BIGINT UNSIGNED | group by 中に spill した行数 |
-| group_by_spilled_bytes | BIGINT UNSIGNED | group by 中に spill したバイト数 |
+| join_spilled_rows | BIGINT UNSIGNED | テーブル結合中にスピルした行数 |
+| join_spilled_bytes | BIGINT UNSIGNED | テーブル結合中にスピルしたバイト数 |
+| agg_spilled_rows | BIGINT UNSIGNED | 集計中にスピルした行数 |
+| agg_spilled_bytes | BIGINT UNSIGNED | 集計中にスピルしたバイト数 |
+| group_by_spilled_rows | BIGINT UNSIGNED | group by 中にスピルした行数 |
+| group_by_spilled_bytes | BIGINT UNSIGNED | group by 中にスピルしたバイト数 |
 | written_io_bytes | BIGINT UNSIGNED | IO に書き込まれたバイト数 |
 | written_io_bytes_cost_ms | BIGINT UNSIGNED | IO 書き込みコスト（ms） |
 | scan_rows | BIGINT UNSIGNED | スキャンされた行数 |
@@ -132,7 +132,7 @@ JSON オブジェクトのフィールド: `object_domain` (Database/Table/Stage
 | node_id | VARCHAR | ノード ID |
 | error_message | VARCHAR | 失敗した場合のエラーメッセージ |
 
-## クイック例 {#quick-examples}
+## 簡単な例 {#quick-examples}
 
 直近 1 時間の低速クエリ（>5s）を見つけます。
 

@@ -65,7 +65,7 @@ SELECT * FROM @my_parquet_stage;
 
 ### チュートリアル 1 - データカラムの一部をロードする {#tutorial-1---loading-a-subset-of-data-columns}
 
-ソースファイルより少ないカラム数のテーブルにデータをロードします（例: `age` を除外）。
+ソースファイルより少ないカラム数のテーブルにデータをロードします（例: 'age' を除外）。
 
 ```sql
 CREATE TABLE employees_no_age (
@@ -101,7 +101,7 @@ SELECT * FROM employees_no_age;
 
 ### チュートリアル 2 - ロード時にカラムを並べ替える {#tutorial-2---reordering-columns-during-load}
 
-カラム順が異なるテーブルにデータをロードします（例: `name` の前に `age` を配置）。
+カラム順が異なるテーブルにデータをロードします（例: 'name' の前に 'age' を配置）。
 
 ```sql
 CREATE TABLE employees_new_order (
@@ -140,7 +140,7 @@ SELECT * FROM employees_new_order;
 
 ### チュートリアル 3 - ロード時にデータ型を変換する {#tutorial-3---converting-datatypes-during-load}
 
-データをロードしながら、カラムのデータ型を変換します（例: `onboarded` を `DATE` に変換）。
+データをロードしながら、カラムのデータ型を変換します（例: 'onboarded' を `DATE` に変換）。
 
 ```sql
 CREATE TABLE employees_date (
@@ -179,7 +179,7 @@ SELECT * FROM employees_date;
 
 ### チュートリアル 4 - ロード中に算術演算を実行する {#tutorial-4---performing-arithmetic-operations-during-load}
 
-データをロードし、算術演算を実行します（例: `age` を 1 増やす）。
+データをロードし、算術演算を実行します（例: 'age' を 1 増やす）。
 
 ```sql
 CREATE TABLE employees_new_age (
@@ -216,7 +216,7 @@ SELECT * FROM employees_new_age;
 └────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### チュートリアル 5 - 追加カラムを持つテーブルへのロード {#tutorial-5---loading-to-a-table-with-additional-columns}
+### チュートリアル 5 - 追加カラムを持つテーブルにロードする {#tutorial-5---loading-to-a-table-with-additional-columns}
 
 ソースファイルよりも多くのカラムを持つテーブルにデータをロードします。
 

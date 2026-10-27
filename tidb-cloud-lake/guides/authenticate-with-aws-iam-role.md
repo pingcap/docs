@@ -98,4 +98,4 @@ summary: クラウドネイティブな ID 委任（AWS IAM Role、Azure Managed
 
 > **Note:**
 >
-> これで、IAM Role を使用して {{{ .lake }}} からご自身の AWS S3 バケットにアクセスできるようになりました。
+> おめでとうございます。これで、IAM Role を使用して {{{ .lake }}} からご自身の AWS S3 バケットにアクセスできるようになりました。

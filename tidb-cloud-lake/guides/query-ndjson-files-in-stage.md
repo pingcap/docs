@@ -71,8 +71,8 @@ FROM @ndjson_query_stage
 **説明:**
 
 - `$1:title` と `$1:author`: JSON オブジェクトから特定のフィールドを抽出します。`$1` は JSON オブジェクト全体を variant として表し、`:field_name` で個々のフィールドにアクセスします
-- `@ndjson_query_stage`: Step 1 で作成した外部 stage を参照します
-- `FILE_FORMAT => 'ndjson_query_format'`: Step 2 で定義したカスタムファイル形式を使用します
+- `@ndjson_query_stage`: ステップ 1 で作成した外部 stage を参照します
+- `FILE_FORMAT => 'ndjson_query_format'`: ステップ 2 で定義したカスタムファイル形式を使用します
 - `PATTERN => '.*[.]ndjson'`: `.ndjson` で終わるすべてのファイルに一致する正規表現パターンです
 
 ### 圧縮ファイルをクエリする {#querying-compressed-files}

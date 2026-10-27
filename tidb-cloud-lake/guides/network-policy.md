@@ -91,4 +91,4 @@ DROP NETWORK POLICY corp_vpn_policy;
 
 ---
 
-完全な構文の詳細については、[Network Policy SQL reference](/tidb-cloud-lake/sql/network-policy-sql.md) を参照してください。`CREATE`、`ALTER`、`SHOW`、`DESC`、`DROP` を扱っています。
+完全な構文の詳細については、[ネットワークポリシーの SQL リファレンス](/tidb-cloud-lake/sql/network-policy-sql.md) を参照してください。`CREATE`、`ALTER`、`SHOW`、`DESC`、`DROP` を扱っています。

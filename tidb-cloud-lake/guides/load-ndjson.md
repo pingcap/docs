@@ -35,9 +35,9 @@ FROM { userStage | internalStage | externalStage | externalLocation }
 
 ## チュートリアル: NDJSON ファイルからのデータのロード {#tutorial-loading-data-from-ndjson-files}
 
-### ステップ 1. internal stage を作成する {#step-1-create-an-internal-stage}
+### ステップ 1. 内部 stage を作成する {#step-1-create-an-internal-stage}
 
-NDJSON ファイルを保存するための internal stage を作成します。
+NDJSON ファイルを保存するための内部 stage を作成します。
 
 ```sql
 CREATE STAGE my_ndjson_stage;

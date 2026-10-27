@@ -68,7 +68,7 @@ Role ARN は AssumeRole モデルを使用します。TiDB Cloud Lake は AWS �
 | **Authentication Method** | はい | **Access Key / Secret Key** を選択 |
 | **S3 Access Key** | はい | stage 用バケットにアクセスできるアクセスキー ID |
 | **S3 Secret Key** | はい | アクセスキー ID に対応するシークレットアクセスキー |
-| **S3 Bucket Name** | はい | TiCDC / Dumpling が TiDB Cloud Lake がロードするデータを stage するバケット |
+| **S3 Bucket Name** | はい | TiCDC / Dumpling が TiDB Cloud Lake によってロードされるデータを stage するバケット |
 | **S3 Region** | はい | バケットの AWS リージョン |
 | **S3 Endpoint** | いいえ | S3 互換ストレージでのみ使用します。Amazon S3 の場合は空のままにします |
 | **SQS Queue URL** | いいえ | イベント駆動モード用のオプションの SQS 標準キュー URL |
@@ -90,7 +90,7 @@ Role ARN は AssumeRole モデルを使用します。TiDB Cloud Lake は AWS �
 
 **SQS Queue URL** フィールドはオプションであり、Amazon S3 にのみ適用されます。stage 用バケットに対する S3 `ObjectCreated` イベントを受信する標準 SQS キューを指定すると、TiDB Cloud Lake は次回のポーリングを待つ代わりに、そのキューから新しく書き込まれた changefeed / export オブジェクトを検出できます。
 
-- キューは **standard** キューである必要があります。FIFO キューはサポートされません。S3 のイベント通知をそれらに配信できないためです。
+- キューは**標準**キューである必要があります。FIFO キューはサポートされません。S3 のイベント通知をそれらに配信できないためです。
 - S3 バケットと SQS キューは同じリージョンに配置することを推奨します。
 - バケットのポーリングは引き続き正式な検出経路であり、SQS は置き換えではなくレイテンシー最適化です。
 - このフィールドを空のままにすると、タスクはポーリングによってオブジェクトを検出します。

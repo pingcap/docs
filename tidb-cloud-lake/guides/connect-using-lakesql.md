@@ -15,11 +15,11 @@ LakeSQL には、さまざまなプラットフォームや好みに対応する
 
 ### シェルスクリプト {#shell-script}
 
-LakeSQL では、便利な Shell script によるインストール方法を提供しています。次の 2 つのオプションから選択できます。
+LakeSQL では、便利なシェルスクリプトによるインストール方法を提供しています。次の 2 つのオプションから選択できます。
 
 #### デフォルトのインストール {#default-installation}
 
-ユーザーのホームディレクトリ (`~/.lakesql`) に LakeSQL をインストールします。
+ユーザーのホームディレクトリ (~/.lakesql) に LakeSQL をインストールします。
 
 ```bash
 curl -fsSL https://lakesql-bin.tidbcloud.com/install/lakesql.sh | bash
@@ -60,7 +60,7 @@ Github: https://github.com/tidbcloud/lakesql
 
 #### `--prefix` を使用したカスタムインストール {#custom-installation-with---prefix}
 
-指定したディレクトリ (例: `/usr/local`) に LakeSQL をインストールします。
+指定したディレクトリ (例: /usr/local) に LakeSQL をインストールします。
 
 ```bash
 curl -fsSL https://lakesql-bin.tidbcloud.com/install/lakesql.sh | bash -s -- -y --prefix /usr/local
@@ -135,7 +135,7 @@ cargo install lakesql
 
 ## ユーザー認証 {#user-authentication}
 
-{{{ .lake }}} への接続には、デフォルトの `cloudapp` ユーザー、または [CREATE USER](/tidb-cloud-lake/sql/create-user.md) コマンドで作成した SQL ユーザーを使用できます。[{{{ .lake }}} console](https://app.lake.tidbcloud.com) へのログインに使用するユーザーアカウントは、{{{ .lake }}} への接続には使用できないことに注意してください。
+{{{ .lake }}} への接続には、デフォルトの `cloudapp` ユーザー、または [CREATE USER](/tidb-cloud-lake/sql/create-user.md) コマンドで作成した SQL ユーザーを使用できます。[{{{ .lake }}} コンソール](https://app.lake.tidbcloud.com) へのログインに使用するユーザーアカウントは、{{{ .lake }}} への接続には使用できないことに注意してください。
 
 ## LakeSQL で接続する {#connecting-with-lakesql}
 
