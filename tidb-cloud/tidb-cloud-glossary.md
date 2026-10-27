@@ -154,7 +154,7 @@ Currently, only the following types of TiDB Cloud resources support the Recycle 
 
 - TiDB Region
 
-    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. The default estimated size for a newly split Region is 256 MiB for TiDB v8.4.0 and later, and [96 MiB](https://docs.pingcap.com/tidb/stable/tikv-configuration-file/#region-split-size) for TiDB versions earlier than v8.4.0.
+    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. The [default estimated size for a newly split Region](https://docs.pingcap.com/tidb/stable/tikv-configuration-file/#region-split-size) is 256 MiB for TiDB v8.4.0 and later, and 96 MiB for TiDB versions earlier than v8.4.0.
 
 ### replica
 
