@@ -17,7 +17,7 @@ This document introduces the rules to name database objects, such as database, t
 
 ## Database naming convention
 
-It is recommended to differentiate database names by business, product, or other metrics and use no more than 20 characters in a database name. For example, you can name a temporary library as `tmp_crm` or a test library as `test_crm`.
+It is recommended to differentiate database names by business, product, or other criteria and use no more than 20 characters in a database name. For example, you can name a temporary database as `tmp_crm` or a test database as `test_crm`.
 
 ## Table naming convention
 
