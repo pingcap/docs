@@ -248,7 +248,7 @@ const conn = connect({
   }
 })
 
-// You can also configure the decoder option at the SQL level to override the decoders with the same keys at the connection level.
+// You can also configure the decoders option at the SQL level to override the decoders with the same keys at the connection level.
 conn.execute(`select ...`, [], {
   decoders: {
     // ...
