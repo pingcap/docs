@@ -257,8 +257,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     With Chat2Query API v3 endpoints, you can start multi-round Chat2Query by using sessions.
 
-    For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
-
 **Console changes**
 
 - Rename Chat2Query (beta) to SQL Editor (beta).
@@ -267,8 +265,6 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - **SQL Editor**: the default interface for manually writing and executing SQL queries in the TiDB Cloud console.
     - **Chat2Query**: the AI-assisted text-to-query feature, which enables you to interact with your databases using natural language to generate, rewrite, and optimize SQL queries.
-
-  For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
 
 ## June 18, 2024
 

@@ -758,13 +758,12 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
     - Integrate TiDB Cloud with data visualization projects by using Data Service as a data source.
     - Connect to your database from an environment that MySQL interface does not support.
 
-    In addition, TiDB Cloud provides the [Chat2Query API](/tidb-cloud/use-chat2query-api.md), a RESTful interface that allows you to generate and execute SQL statements using AI.
+    In addition, TiDB Cloud provides the Chat2Query API, a RESTful interface that allows you to generate and execute SQL statements using AI.
 
     To access Data Service, navigate to the [**Data Service**](https://tidbcloud.com/project/data-service) page in the left navigation pane. For more information, see the following documentation:
 
     - [Data Service Overview](/tidb-cloud/data-service-overview.md)
     - [Get Started with Data Service](/tidb-cloud/data-service-get-started.md)
-    - [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 
 - Support decreasing the size of TiDB, TiKV, and TiFlash nodes to scale in a [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) cluster that is hosted on AWS and created after December 31, 2022.
 
@@ -948,7 +947,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
     - To upload a CSV file, now you can simply drag and drop it to the upload area on the **Import** page.
     - When creating an import task, if your target database or table does not exist, you can enter a name to let TiDB Cloud create it for you automatically. For the target table to be created, you can specify a primary key or select multiple fields to form a composite primary key.
-    - After the import is completed, you can explore your data with [AI-powered Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) by clicking **Explore your data by Chat2Query** or clicking the target table name in the task list.
+    - After the import is completed, you can explore your data with AI-powered Chat2Query by clicking **Explore your data by Chat2Query** or clicking the target table name in the task list.
 
   For more information, see [Import local files to TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md).
 
