@@ -1,6 +1,6 @@
 ---
-title: Delete a TiDB Cloud Premium instance
-summary: TiDB Cloud Premiumインスタンスを削除する方法を学びましょう。
+title: Delete a TiDB Cloud Premium or {{{ .byoc }}} instance
+summary: TiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスを削除する方法を学びましょう。
 ---
 
 # {{{ .premium }}} または {{{ .byoc }}} インスタンスを削除する
@@ -27,7 +27,7 @@ summary: TiDB Cloud Premiumインスタンスを削除する方法を学びま�
 
     バックアップ済みの {{{ .premium }}} または {{{ .byoc }}} インスタンスを削除すると、そのインスタンスの既存のバックアップファイルはごみ箱に移動されます。
 
-    自動バックアップは、保存期間が終了すると期限切れとなり、自動的に削除されます。保存期間は、変更しない場合はデフォルトで 7日間です。
+    自動バックアップは、保持期間が終了すると期限切れとなり、自動的に削除されます。保持期間は、変更しない場合はデフォルトで 7日間です。
 
     <CustomContent plan="premium">
 

@@ -1,6 +1,6 @@
 ---
-title: Export Data from TiDB Cloud Premium
-summary: TiDB Cloud Premiumインスタンスからデータをエクスポートする方法を学びましょう。
+title: Export Data from TiDB Cloud Premium or {{{ .byoc }}}
+summary: TiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスからデータをエクスポートする方法を学びましょう。
 ---
 
 # {{{ .premium }}} または {{{ .byoc }}} からデータをエクスポートする
@@ -15,7 +15,7 @@ TiDB Cloud では、{{{ .premium }}} または {{{ .byoc }}} インスタンス�
 
 > **Note:**
 >
-> - 現在、この機能はリクエストベースでのみ利用可能です。この機能をリクエストするには、[TiDB Cloud console](https://tidbcloud.com) の右下隅にある **?** をクリックし、次に **Support Tickets** をクリックして [Help Center](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for data export for {{{ .premium }}} or {{{ .byoc }}} instance" と入力して、**Submit** をクリックします。
+> - 現在、この機能はリクエストベースでのみ利用可能です。この機能をリクエストするには、[TiDB Cloudコンソール](https://tidbcloud.com) の右下隅にある **?** をクリックし、次に **Support Tickets** をクリックして [ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals) に移動します。チケットを作成し、**Description** フィールドに "Apply for data export for {{{ .premium }}} or {{{ .byoc }}} instance" と入力して、**Submit** をクリックします。
 > - エクスポートの最大サイズは 1 TiB です。この制限を超えるエクスポートは失敗する可能性があります。より多くのデータをエクスポートする場合、またはより高いエクスポート速度をリクエストする場合は、[TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md) にお問い合わせください。
 
 ## エクスポート先 {#export-locations}

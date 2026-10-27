@@ -11,7 +11,7 @@ summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}
 
 > **Note:**
 >
-> パブリック接続を利用できるのは、BYOC のデプロイ時に public hosted zone を指定した場合のみです。private hosted zone を指定した場合は、プライベート接続を使用してインスタンスに接続してください。
+> パブリック接続を利用できるのは、BYOC のデプロイ時にパブリックホストゾーンを指定した場合のみです。プライベートホストゾーンを指定した場合は、プライベート接続を使用してインスタンスに接続してください。
 
 </CustomContent>
 
@@ -24,7 +24,7 @@ summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}
 
 パブリック接続の場合、TiDB Cloud は、IP アクセス リスト内の IP アドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合は、最初の接続の前に [IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って設定してください。
 
-## インスタンスに接続します {#connect-to-the-instance}
+## インスタンスに接続する {#connect-to-the-instance}
 
 パブリック接続を介してインスタンスに接続するには、以下の手順を実行してください。
 
@@ -56,7 +56,7 @@ summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}
 
 1. 対象インスタンスの概要ページを開きます。
 
-    1. [TiDB Cloud console](https://tidbcloud.com/) にログインし、[**My TiDB**](https://tidbcloud.com/tidbs) ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/) にログインし、[**My TiDB**](https://tidbcloud.com/tidbs) ページに移動します。
 
         > **Tip:**
         >

@@ -1,5 +1,5 @@
 ---
-title: Back Up and Restore TiDB Cloud Premium Data
+title: Back Up and Restore TiDB Cloud Premium or {{{ .byoc }}} Data
 summary: TiDB Cloud Premiumインスタンスまたは{{{ .byoc }}}インスタンスのバックアップと復元方法を学びましょう。
 aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 ---
@@ -174,7 +174,7 @@ TiDB Cloudコンソールでは、外部ストレージの認証情報を入力�
 
 ## 復元する {#restore}
 
-TiDB Cloudは、偶発的なデータ損失や破損が発生した場合にデータを復旧するための復元機能を提供します。アクティブなインスタンスのバックアップ、またはごみ箱から削除されたインスタンスから復元できます。
+TiDB Cloudは、偶発的なデータ損失や破損が発生した場合にデータを復旧するための復元機能を提供します。アクティブなインスタンスのバックアップ、またはごみ箱内の削除されたインスタンスから復元できます。
 
 ### 復元モード {#restore-mode}
 
@@ -225,7 +225,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
     <CustomContent plan="byoc">
 
-    {{{ .byoc }}} の場合は、バックアップと同じクラウドプロバイダーおよびリージョンにあるアクティブなリソースプールを選択します。復元されたインスタンスは、選択したリソースプールの高可用性モードを継承します。同じバックアップをゾーンリソースプールまたはリージョンリソースプールに復元できます。適切なリソースプールがない場合は、`Organization Owner` がインスタンスを復元する前に作成できます。その他のロールではリソースプールを作成できません。詳細については、[Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md) を参照してください。
+    {{{ .byoc }}} の場合は、バックアップと同じクラウドプロバイダーおよびリージョンにあるアクティブなリソースプールを選択します。復元されたインスタンスは、選択したリソースプールの高可用性モードを継承します。同じバックアップをゾーンリソースプールまたはリージョンリソースプールに復元できます。適切なリソースプールがない場合は、`Organization Owner` がインスタンスを復元する前に作成できます。その他のロールではリソースプールを作成できません。詳細については、[リソースプールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md) を参照してください。
 
     選択したリソースプールに Pool vCPU Limit が設定されており、現在プロビジョニングされている vCPU がその制限以上である場合、TiDB Cloud は警告を表示し、そのリソースプールにはインスタンスを復元できません。続行するには、リソースプールの詳細ページに移動して Pool vCPU Limit を増やすか無効にするか、別のリソースプールを選択してください。
 
@@ -245,7 +245,7 @@ TiDB Cloudは、新しいインスタンスへのデータ復元をサポート�
 
 ### ごみ箱から復元 {#restore-from-recycle-bin}
 
-ごみ箱から削除した {{{ .premium }}} または {{{ .byoc }}} インスタンスを復元するには、以下の手順を実行してください。
+削除した {{{ .premium }}} または {{{ .byoc }}} インスタンスをごみ箱から復元するには、以下の手順を実行してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、右上隅の**...**をクリックして、 **Recycle Bin**をクリックします。
 
@@ -351,11 +351,11 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 3. **Verify Backup and Next**をクリックします。
 
-4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、<CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[Create a {{{ .byoc }}} Instance](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>の手順に従って、バックアップを新しいインスタンスに復元します。
+4. 検証が成功すると、**Restore to a New Instance**ページが表示されます。ページ上部に表示されるバックアップ情報を確認し、<CustomContent plan="premium">[{{{ .premium }}} インスタンスの作成](/tidb-cloud/premium/create-tidb-instance-premium.md)</CustomContent><CustomContent plan="byoc">[{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)</CustomContent>の手順に従って、バックアップを新しいインスタンスに復元します。
 
     <CustomContent plan="byoc">
 
-    {{{ .byoc }}} では、対象のクラウドプロバイダーとリージョンに一致するアクティブなリソースプールを選択してください。復元されたインスタンスは、選択したリソースプールの高可用性モードを継承します。同じバックアップをゾーンリソースプールまたはリージョンリソースプールに復元できます。適切なリソースプールがない場合は、`Organization Owner` がインスタンスを復元する前に作成できます。その他のロールではリソースプールを作成できません。詳細については、[Create a Resource Pool](/tidb-cloud/byoc/create-resource-pool-byoc.md)を参照してください。
+    {{{ .byoc }}} では、対象のクラウドプロバイダーとリージョンに一致するアクティブなリソースプールを選択してください。復元されたインスタンスは、選択したリソースプールの高可用性モードを継承します。同じバックアップをゾーンリソースプールまたはリージョンリソースプールに復元できます。適切なリソースプールがない場合は、`Organization Owner` がインスタンスを復元する前に作成できます。その他のロールではリソースプールを作成できません。詳細については、[リソースプールを作成する](/tidb-cloud/byoc/create-resource-pool-byoc.md)を参照してください。
 
     選択したリソースプールに Pool vCPU Limit が設定されており、現在プロビジョニングされている vCPU がその制限以上である場合、TiDB Cloud は警告を表示し、そのリソースプールにはインスタンスを復元できません。続行するには、リソースプールの詳細ページに移動して Pool vCPU Limit を増やすか無効にするか、別のリソースプールを選択してください。
 
@@ -426,7 +426,7 @@ TiDB Cloud Dedicatedクラスターによって生成されたバックアップ
 
 > **Note:**
 >
-> TiDB Cloudはアクセスキーを保存しません。セキュリティを維持するため、インポートまたはエクスポートのタスクが完了した後[アクセスキーを削除する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)。
+> TiDB Cloudはアクセスキーを保存しません。セキュリティを維持するため、インポートまたはエクスポートのタスクが完了した後に[アクセスキーを削除](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)してください。
 
 <CustomContent plan="premium">
 

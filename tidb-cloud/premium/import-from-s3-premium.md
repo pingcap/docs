@@ -3,7 +3,7 @@ title: Amazon S3から{{{ .premium }}}または{{{ .byoc }}}にデータをイ�
 summary: コンソールウィザードを使用して、Amazon S3から{{{ .premium }}}または{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法を学びましょう。
 ---
 
-# Amazon S3から{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする {#import-data-from-amazon-s3-into-tidb-cloud-premium}
+# Amazon S3から{{{ .premium }}}または{{{ .byoc }}}にデータをインポートする {#import-data-from-amazon-s3-into-tidb-cloud-premium-or-tidb-cloud-byoc}
 
 このドキュメントでは、Amazon Simple Storage Service (Amazon S3) からTiDB Cloud Premium または {{{ .byoc }}} インスタンスに CSV ファイルをインポートする方法について説明します。
 
@@ -22,7 +22,7 @@ summary: コンソールウィザードを使用して、Amazon S3から{{{ .pre
 
 1. CSVファイルが256MiBを超える場合は、 TiDB Cloud Premiumまたは{{{ .byoc }}}が並列処理できるように、256MiB程度の小さなファイルに分割することを検討してください。
 2. CSVファイルの名前は、 Dumplingの命名規則に従ってください。
-    - 完全な表ファイルの場合： `${db_name}.${table_name}.csv`形式を使用してください。
+    - テーブル全体のファイルの場合： `${db_name}.${table_name}.csv`形式を使用してください。
     - シャーディングされたファイル: `${db_name}.${table_name}.000001.csv`のような数値サフィックスを追加します。
     - 圧縮ファイル: `${db_name}.${table_name}.${suffix}.csv.${compress}`形式を使用してください。
 3. オプションのスキーマファイル（ `${db_name}-schema-create.sql` 、 `${db_name}.${table_name}-schema.sql` ）を使用すると、 TiDB Cloud Premium または {{{ .byoc }}} はデータベースとテーブルを自動的に作成できます。
@@ -31,7 +31,7 @@ summary: コンソールウィザードを使用して、Amazon S3から{{{ .pre
 These naming conventions are identical to the TiDB Cloud Serverless workflow. Update this section after we validate the Premium defaults.
 -->
 
-## ステップ2．ターゲットスキーマを作成する（オプション） {#step-2-create-target-schemas-optional}
+## ステップ2. ターゲットスキーマを作成する（オプション） {#step-2-create-target-schemas-optional}
 
 TiDB Cloud Premiumまたは{{{ .byoc }}}でデータベースとテーブルを自動的に作成する場合は、 Dumplingで生成されたスキーマファイルを同じS3ディレクトリに配置してください。そうでない場合は、インポートを実行する前に、 TiDB Cloud Premiumまたは{{{ .byoc }}}でデータベースとテーブルを手動で作成してください。
 
@@ -60,7 +60,7 @@ TiDB Cloud Premiumまたは{{{ .byoc }}}がバケットを読み取れるよう�
     - **Storage Provider**を**Amazon S3**に設定します。
     - 単一ファイル（ `s3://bucket/path/file.csv` ）またはフォルダ（ `s3://bucket/path/` ）の**Source Files URI**を入力します。
     - **AWS Role ARN**または**AWS Access Key**を選択し、認証情報を入力してください。
-    - 接続を確認するには、 **Test Bucket Access**をクリックしてください。<!--Todo-- 既知のプレビューの問題: ボタンをクリックすると、成功のトーストが表示されずにアイドル状態に戻ります。-->
+    - 接続を確認するには、 **Test Bucket Access**をクリックしてください。<!--Todo-- Known preview issue: the button returns to the idle state without a success toast.-->
 
 4. **Next**をクリックし、インポートジョブに使用するTiDB SQLのユーザー名とパスワードを入力してください。必要に応じて、接続テストを実行してください。
 

@@ -11,7 +11,7 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 [TiDB Cloudを選ぶ理由](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-intro/?plan=premium)
 
-[主要概念](https://docs.pingcap.com/ja/tidbcloud/key-concepts/?plan=premium)
+[重要な概念](https://docs.pingcap.com/ja/tidbcloud/key-concepts/?plan=premium)
 
 [FAQ](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-faq/?plan=premium)
 
@@ -19,9 +19,9 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 <LearningPath label="試す" icon="cloud5">
 
-[TiDB Cloudをお試しください](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart/?plan=premium)
+[TiDB Cloudを試してみる](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-quickstart/?plan=premium)
 
-[HTAPを試してみてください](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-htap-quickstart/?plan=premium)
+[HTAPを試してみる](https://docs.pingcap.com/ja/tidbcloud/tidb-cloud-htap-quickstart/?plan=premium)
 
 </LearningPath>
 
@@ -39,19 +39,19 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 [TiDB Cloud Premiumインスタンスを作成する](https://docs.pingcap.com/ja/tidbcloud/create-tidb-instance-premium/?plan=premium)
 
-[TiDB Cloud Premiumインスタンスに接続します](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-instance/?plan=premium)
+[TiDB Cloud Premiumインスタンスに接続する](https://docs.pingcap.com/ja/tidbcloud/connect-to-tidb-instance/?plan=premium)
 
 [HTAPクラスタを使用する](https://docs.pingcap.com/ja/tidbcloud/tiflash-overview/?plan=premium)
 
 [データのバックアップと復元](https://docs.pingcap.com/ja/tidbcloud/backup-and-restore-premium/?plan=premium)
 
-[API を使用する（PREVIEW）](https://docs.pingcap.com/ja/api/)
+[API を使用する（プレビュー）](https://docs.pingcap.com/ja/api/)
 
 </LearningPath>
 
 <LearningPath label="移行" icon="cloud3">
 
-[Amazon RDS for Oracleより](https://docs.pingcap.com/ja/tidbcloud/migrate-from-oracle-using-aws-dms/?plan=premium)
+[Amazon RDS for Oracleから](https://docs.pingcap.com/ja/tidbcloud/migrate-from-oracle-using-aws-dms/?plan=premium)
 
 [サンプルデータのインポート](https://docs.pingcap.com/ja/tidbcloud/import-sample-data-serverless/?plan=premium)
 
@@ -65,9 +65,9 @@ summary: TiDB Cloudは、TiDBの優れた機能をすべてクラウド上で提
 
 <LearningPath label="監視" icon="cloud6">
 
-[ステータスと指標](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster/?plan=premium)
+[ステータスとメトリクス](https://docs.pingcap.com/ja/tidbcloud/monitor-tidb-cluster/?plan=premium)
 
-[内蔵監視機能](https://docs.pingcap.com/ja/tidbcloud/built-in-monitoring-premium/?plan=premium)
+[組み込み監視](https://docs.pingcap.com/ja/tidbcloud/built-in-monitoring-premium/?plan=premium)
 
 </LearningPath>
 
