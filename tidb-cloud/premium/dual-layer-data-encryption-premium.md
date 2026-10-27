@@ -74,7 +74,7 @@ TiDB Cloud Premiumインスタンスを作成する際、またはインスタ�
 
 ### インスタンス作成時に暗号化を有効にする {#enable-encryption-during-instance-creation}
 
-TiDB Cloud Premiumインスタンスを作成する際に、二重層データ暗号化を有効にすることができます。セキュリティおよび運用要件に応じて、**Customer-Managed Encryption Key (CMEK)**または**Service-Managed Encryption Key**のいずれかを選択してください。
+TiDB Cloud Premiumインスタンスを作成する際に、二重層データ暗号化を有効にできます。セキュリティおよび運用要件に応じて、**Customer-Managed Encryption Key (CMEK)**または**Service-Managed Encryption Key**のいずれかを選択してください。
 
 #### オプション1：顧客管理暗号化キー（CMEK） {#option-1-customer-managed-encryption-key-cmek}
 
@@ -122,7 +122,7 @@ TiDB Cloudに暗号化キーの管理を代行させるには、以下の手順�
 
 ### 既存のインスタンスで暗号化を有効にする {#enable-encryption-for-an-existing-instance}
 
-インスタンス作成時に暗号化を有効にしなかった場合でも、後から有効にすることができます。要件に応じて、顧客管理暗号化キー（CMEK）またはサービス管理暗号化キーのいずれかを選択してください。
+インスタンス作成時に暗号化を有効にしなかった場合でも、後から有効にできます。要件に応じて、顧客管理暗号化キー（CMEK）またはサービス管理暗号化キーのいずれかを選択してください。
 
 > **Note:**
 >
