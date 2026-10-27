@@ -36,15 +36,15 @@ ti fs-git add-git-worktree
 - `--blobless`: ベースワークスペースが blobless Git ストレージを使用していることを検証します。このオプションは、blobless でないワークスペースを変換しません。
 - `--branch-name <string>`: リンクされた worktree 用のブランチを作成します。
 - `--commit-ish <string>`: リンクされた worktree 用の任意の commit-ish です。
-- `--detach`: detached なリンク済み worktree を作成します。
+- `--detach`: デタッチされたリンク済み worktree を作成します。
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されたトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
-- `--hydrate <string>`: クリーンデータの hydration モード: `auto`、`background`、`sync`、または `off`。`auto` では、blobless ベースにリンクされた worktree はバックグラウンドで hydration され、blobless でないベースにリンクされた worktree では個別の hydration ステップは実行されません。`background` と `sync` には blobless ベースが必要です。`off` は hydration をスキップします。\[default: auto]
+- `--hydrate <string>`: クリーンデータの hydration モード: `auto`、`background`、`sync`、または `off`。`auto` では、blobless ベースにリンクされた worktree はバックグラウンドで hydrate され、blobless でないベースにリンクされた worktree では個別の hydration ステップは実行されません。`background` と `sync` には blobless ベースが必要です。`off` は hydration をスキップします。\[default: auto]
 - `--version`: バージョン情報を表示します。
 
-すべてのコマンドで共有されるオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
+すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
 ## 例 {#examples}
 
@@ -55,7 +55,7 @@ ti fs-git add-git-worktree
     ti fs-git add-git-worktree --file-system-id <file-system-id> --base-path /path/to/workspace/tidb --worktree-path /path/to/workspace/tidb-feature --branch-name feature-x
     ```
 
-- detached worktree を作成します。
+- デタッチされた worktree を作成します。
 
     ```bash
     # Inspect a commit without creating or switching a branch.

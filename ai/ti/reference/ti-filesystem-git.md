@@ -19,4 +19,4 @@ summary: クローン、hydrate、リンクされた Git worktree の管理を�
 ## 関連情報 {#see-also}
 
 - [TiDB Cloud Filesystem 上で Git ワークスペースを管理する](/tidb-cloud-filesystem/manage-git-workspaces.md)
-- [TiDB Cloud Filesystem 上で Agents 用の Git ワークスペースを準備する](/ai/ti/guides/ti-git-workspace-for-agents-example.md)
+- [TiDB Cloud Filesystem 上でエージェント向けの Git ワークスペースを準備する](/ai/ti/guides/ti-git-workspace-for-agents-example.md)

@@ -55,10 +55,10 @@ ti fs mount-file-system
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
 - `--fs-token <string>`: ファイルシステムトークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。
 - `--help`: ヘルプ情報を表示します。
-- `--layer-ref <string>`: 書き込み可能なレイヤー ID、一意の名前、または [tag reference](/ai/ti/reference/ti-filesystem.md#layer-references) を介してマウントします。FUSE が必要です。
+- `--layer-ref <string>`: 書き込み可能なレイヤー ID、一意の名前、または [タグ参照](/ai/ti/reference/ti-filesystem.md#layer-references) を介してマウントします。FUSE が必要です。
 - `--local-root <string>`: ローカルオーバーレイルート。省略した場合は `~/.ti/local/fs/<mount-hash>` を使用します。
 - `--mount-profile <string>`: [マウントプロファイル](/ai/ti/reference/ti-filesystem.md#mount-profiles-and-local-overlays) を選択します: `coding-agent`、`portable`、または `none`。省略した場合は `none` を使用します。
-- `--no-auto-unpack`: マウント前に `portable` マウントプロファイルのデフォルトの自動 unpack をスキップします。
+- `--no-auto-unpack`: マウント前に portable マウントプロファイルのデフォルトの自動 unpack をスキップします。
 - `--pack-path <string>`: 自動または手動のパックに含めるローカルオーバーレイパス。繰り返し指定できます。
 - `--read-cache-max-file-mb <int64>`: FUSE 読み取りキャッシュに格納できる最大ファイルサイズ（MiB）。0 を指定するとデフォルト値を使用します。\[default: 4]
 - `--read-cache-size-mb <int64>`: FUSE 読み取りキャッシュサイズ（MiB）。0 を指定するとデフォルト値を使用します。\[default: 128]
@@ -70,7 +70,7 @@ ti fs mount-file-system
 - `--version`: バージョン情報を表示します。
 - `--write-back-cache`: フラッシュ時にファイルシステムへ書き込む前に、FUSE の書き込みをローカルに永続化します。この動作はデフォルトで有効です。無効にするには `--write-back-cache=false` を指定します。常に読み取り専用であるチェックポイントマウントでは使用できません。\[default: true]
 
-すべてのコマンドで共有されるオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
+すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
 ## 例 {#examples}
 

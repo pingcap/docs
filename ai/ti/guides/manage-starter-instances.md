@@ -45,7 +45,7 @@ ti db create-db-cluster-branch \
 
 ## SQL アクセスを設定する {#configure-sql-access}
 
-インスタンス用の読み取り専用、読み取り/書き込み、および管理者 SQL ユーザーを作成または修復します。
+インスタンス用の読み取り専用、読み書き、および管理者 SQL ユーザーを作成または修復します。
 
 ```shell
 ti db create-db-sql-users --db-cluster-id "<instance-id>"
@@ -71,7 +71,7 @@ ti db execute-sql-statement \
   --sql "SELECT 1"
 ```
 
-読み取り専用、読み取り/書き込み、および管理操作を分離するワークフローについては、[明示的な SQL ロールで TiDB Cloud Starter をクエリする](/ai/ti/guides/ti-query-sql-with-roles-example.md)を参照してください。
+読み取り専用、読み書き、および管理操作を分離するワークフローについては、[明示的な SQL ロールで TiDB Cloud Starter をクエリする](/ai/ti/guides/ti-query-sql-with-roles-example.md)を参照してください。
 
 ## インスタンスを削除する {#delete-an-instance}
 

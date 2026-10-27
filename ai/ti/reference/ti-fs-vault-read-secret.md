@@ -9,7 +9,7 @@ summary: ファイルシステム Vault からシークレットを読み取り�
 
 > **Note:**
 >
-> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェイスは、予告なく変更される場合があります。
+> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
 ## 構文 {#syntax}
 
@@ -30,13 +30,13 @@ ti fs-vault read-secret
 - `--secret-name <string>`: Vault シークレット名。\[required]
 - `--field <string>`: 読み取るオプションのフィールド名。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
-- `--format <string>`: 読み取り出力形式: `json`、`raw`、または `env`。\[デフォルト: json]
+- `--format <string>`: 読み取り出力形式: `json`、`raw`、または `env`。\[default: json]
 - `--fs-token <string>`: ファイルシステムオーナートークンを設定します。省略した場合、このコマンドは `TI_FS_TOKEN` 環境変数を使用します。どちらも指定されていない場合、このコマンドは選択したファイルシステム用にローカルに保存されているトークンを使用します。委任された認証には、代わりに `--vault-token` または `TI_VAULT_TOKEN` を使用します。
 - `--help`: ヘルプ情報を表示します。
 - `--vault-token <string>`: 委任された `ti fs-vault` トークン。`TI_VAULT_TOKEN` の使用を推奨します。
 - `--version`: バージョン情報を表示します。
 
-すべてのコマンドで共有されるオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
+すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
 ## 例 {#examples}
 

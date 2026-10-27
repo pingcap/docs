@@ -79,13 +79,13 @@ ti fs mount-file-system \
 cat "$HOME/workspace/sandbox/status.txt"
 ```
 
-macOS では、FUSE のインストールが不要な WebDAV を使用するため、`--driver fuse` を省略します。Git ワークスペース、レイヤー、online drain などの FUSE 固有の機能が必要な場合は、macFUSE をインストールして FUSE を選択してください。プラットフォーム要件とマウントパスの制限については、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
+macOS では、FUSE のインストールが不要な WebDAV を使用するため、`--driver fuse` を省略します。Git ワークスペース、レイヤー、オンラインドレインなどの FUSE 固有の機能が必要な場合は、macFUSE をインストールして FUSE を選択してください。プラットフォーム要件とマウントパスの制限については、[ファイルシステムをマウントする](/tidb-cloud-filesystem/filesystem-mount.md) を参照してください。
 
 マウント後は、同じ FS 環境で `ti fs-git`、`ti fs-journal`、およびオーナーに認可された `ti fs-vault` コマンドを使用できます。エージェントが一部のシークレットフィールドだけを必要とする場合は、オーナートークンの代わりに委任された `TI_VAULT_TOKEN` を渡してください。
 
 ## クリーンアップ {#cleanup}
 
-ライターを停止してアンマウントします。正常な FUSE アンマウントでは、保留中の作業が自動的にフラッシュおよび drain されます。
+ライターを停止してアンマウントします。正常な FUSE アンマウントでは、保留中の作業が自動的にフラッシュおよびドレインされます。
 
 ```bash
 ti fs unmount-file-system --mount-path "$HOME/workspace"
@@ -103,7 +103,7 @@ ti fs delete-file-system \
 - `TI_FS_TOKEN` はオーナー認証情報として扱ってください。
 - イメージ、リポジトリ、コマンドフラグ、または操作ログに配置しないでください。
 - サンドボックスを削除しても、リモートのファイルシステムは削除されません。
-- 正常なアンマウントでは保留中の FUSE 書き込みが drain されますが、アンマウントせずにサンドボックスを削除しても drain されません。
+- 正常なアンマウントでは保留中の FUSE 書き込みがドレインされますが、アンマウントせずにサンドボックスを削除してもドレインされません。
 
 ## 次のステップ {#what-s-next}
 

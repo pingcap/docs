@@ -11,7 +11,7 @@ summary: ファイルシステム Vault シークレットを使用してプロ�
 
 > **Note:**
 >
-> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェイスは、予告なく変更される場合があります。
+> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
 ## 構文 {#syntax}
 
@@ -35,7 +35,7 @@ ti fs-vault run-with-secret
 - `--vault-token <string>`: 委任された `ti fs-vault` トークンです。`TI_VAULT_TOKEN` の使用を推奨します。
 - `--version`: バージョン情報を表示します。
 
-すべてのコマンドで共有されるオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
+すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。
 
 ## 例 {#examples}
 

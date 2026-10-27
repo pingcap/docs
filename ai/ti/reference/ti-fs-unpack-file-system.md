@@ -9,7 +9,7 @@ summary: ローカルファイルシステムオーバーレイ状態を復元�
 
 > **Note:**
 >
-> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェイスは、予告なく変更される場合があります。
+> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
 ## 構文 {#syntax}
 
@@ -46,14 +46,14 @@ ti fs unpack-file-system
 
 ## 例 {#examples}
 
-- マウントされたワークスペースに展開する場合:
+- マウントされたワークスペースに unpack する場合:
 
     ```bash
     # Restore the portable archive associated with an existing mount.
     ti fs unpack-file-system --file-system-id <file-system-id> --mount-path /path/to/workspace
     ```
 
-- 置き換えを行わずに明示的なルートへ展開する場合:
+- 置き換えを行わずに明示的なルートへ unpack する場合:
 
     ```bash
     # Restore missing files while preserving existing destination entries.

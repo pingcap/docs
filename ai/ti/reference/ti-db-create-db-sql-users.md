@@ -5,11 +5,11 @@ summary: TiDB Cloud Starter インスタンス用に、TiDB Cloud CLI が管理�
 
 # ti db create-db-sql-users
 
-TiDB Cloud Starter インスタンス用に、`ti` が管理する 3 つの SQL ユーザー（read-only、read-write、admin）を作成または修復します。これらの認証情報はローカルに保存されるため、後続のコマンドで `--read-only`、`--read-write`、または `--admin` を使用して適切なユーザーを選択できます。
+TiDB Cloud Starter インスタンス用に、`ti` が管理する 3 つの SQL ユーザー（読み取り専用、読み書き、管理者）を作成または修復します。これらの認証情報はローカルに保存されるため、後続のコマンドで `--read-only`、`--read-write`、または `--admin` を使用して適切なユーザーを選択できます。
 
 これらのユーザーには、以下の事前定義されたアクセスレベルと組み込みの TiDB Cloud ロールがあります。
 
-| `ti` access mode | TiDB Cloud built-in role | 想定用途 |
+| `ti` アクセスモード | TiDB Cloud 組み込みロール | 想定用途 |
 | --- | --- | --- |
 | `read_only` | `role_readonly` | データを変更せずにクエリおよび検証を行う |
 | `read_write` | `role_readwrite` | アプリケーションデータのクエリおよび変更を行う |
@@ -21,7 +21,7 @@ TiDB Cloud のロールモデルについては、[データベースユーザ�
 
 > **Note:**
 >
-> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェイスは、予告なく変更される場合があります。
+> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
 ## 構文 {#syntax}
 

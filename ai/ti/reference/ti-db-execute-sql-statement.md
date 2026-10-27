@@ -30,11 +30,11 @@ ti db execute-sql-statement
 
 - `--db-cluster-id <string>`: Starter DB クラスター ID。\[required]
 - `--sql <string>`: 実行する 1 つの SQL ステートメント。\[required]
-- `--admin`: 用意された admin DB SQL 認証情報を使用します。
+- `--admin`: 準備済みの管理者 DB SQL 認証情報を使用します。
 - `--database <string>`: データベース / デフォルトスキーマ名。
 - `--help`: ヘルプ情報を表示します。
-- `--read-only`: 用意された `read_only` DB SQL 認証情報を使用します。
-- `--read-write`: 用意された `read_write` DB SQL 認証情報を使用します。
+- `--read-only`: 準備済みの `read_only` DB SQL 認証情報を使用します。
+- `--read-write`: 準備済みの `read_write` DB SQL 認証情報を使用します。
 - `--transport <string>`: SQL 実行トランスポート: `https` または `mysql`。\[default: https]
 - `--version`: バージョン情報を表示します。
 
@@ -49,7 +49,7 @@ ti db execute-sql-statement
     ti db execute-sql-statement --db-cluster-id "<cluster-id>" --sql "INSERT INTO app.events(message) VALUES ('ready')"
     ```
 
-- read-only クエリを実行する:
+- 読み取り専用クエリを実行する:
 
     ```bash
     # Prevent the statement from using read-write or admin credentials.

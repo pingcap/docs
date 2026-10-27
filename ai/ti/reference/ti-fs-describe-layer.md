@@ -1,11 +1,11 @@
 ---
 title: ti fs describe-layer
-summary: ファイルシステムのレイヤーを記述します。
+summary: ファイルシステムのレイヤーの詳細を表示します。
 ---
 
 # ti fs describe-layer
 
-1 つのファイルシステムレイヤーを記述します。
+1 つのファイルシステムレイヤーの詳細を表示します。
 
 > **Note:**
 >
@@ -34,7 +34,7 @@ ti fs describe-layer
 
 ## 例 {#examples}
 
-- レイヤーを記述するには、次のようにします。
+- レイヤーの詳細を表示する:
 
     ```bash
     # Inspect one layer's base root, state, durability, and metadata.

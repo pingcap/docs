@@ -14,7 +14,7 @@ summary: TiDB Cloud Starter インスタンスと TiDB Cloud Filesystem 内の�
 
 ## TiDB Cloud Filesystem {#tidb-cloud-filesystem}
 
-TiDB Cloud Filesystem は、AI エージェントおよび自動化ワークロード向けに設計されたサーバーレス分散ファイルシステムです。ローカルマシン、サンドボックス、または CI ランナーとは独立して利用可能な、永続的で共有可能なファイル名前空間を提供します。そのため、永続ストレージ、共有ワークスペース、AI エージェントのワークフローに役立ちます。
+TiDB Cloud Filesystem は、AI エージェントおよび自動化ワークロード向けに設計されたサーバーレス分散ファイルシステムです。それにアクセスするローカルマシン、サンドボックス、または CI ランナーとは独立して利用可能な、永続的で共有可能なファイル名前空間を提供します。そのため、永続ストレージ、共有ワークスペース、AI エージェントのワークフローに役立ちます。
 
 ## TiDB Cloud CLI (`ti`) を使用するタイミング {#when-to-use-tidb-cloud-cli-ti}
 
@@ -88,4 +88,4 @@ TiDB Cloud CLI を初めて使用する場合は、[TiDB Cloud CLI を使い始�
 - **エンドツーエンドのワークフローに従う**: [日次の TiDB Cloud CLI ワークフローを実行する](/ai/ti/guides/ti-daily-workflow-example.md) または [エージェントサンドボックスで TiDB Cloud Filesystem を使用する](/ai/ti/guides/ti-agent-sandbox-example.md) から始めてください
 - **特定のコマンドを調べる**: [TiDB Cloud CLI コマンドリファレンス](/ai/ti/reference/ti-cli-reference.md) を確認してください
 - **TiDB Cloud CLI の新機能を確認する**: [TiDB Cloud CLI (`ti`) Release Notes](https://github.com/tidbcloud/ti-cli/releases) を確認してください
-- **問題を報告する**: [TiDB Cloud CLI GitHub repository](https://github.com/tidbcloud/ti-cli/issues) で issue を作成してください。
+- **問題を報告する**: [TiDB Cloud CLI GitHub リポジトリ](https://github.com/tidbcloud/ti-cli/issues) で issue を作成してください。

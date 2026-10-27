@@ -9,7 +9,7 @@ summary: ファイルシステムからファイルを読み取ります。
 
 > **Note:**
 >
-> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェイスは、予告なく変更される場合があります。
+> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
 ## 構文 {#syntax}
 
@@ -38,7 +38,7 @@ ti fs read-file
 
 ## 例 {#examples}
 
-- 完全なファイルを読み取る:
+- ファイル全体を読み取る:
 
     ```bash
     # Write the remote file contents directly to standard output.

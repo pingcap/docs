@@ -5,7 +5,7 @@ summary: 委任されたファイルシステム Vault grant を作成します�
 
 # ti fs-vault create-grant
 
-1 つの agent と scope に対して、期限付きの委任 grant を作成します。
+1 つのエージェントとスコープに対して、期限付きの委任 grant を作成します。
 
 > **Note:**
 >
@@ -30,9 +30,9 @@ ti fs-vault create-grant
 
 ## オプション {#options}
 
-- `--agent-id <string>`: 委任 grant の Agent ID。\[required]
+- `--agent-id <string>`: 委任 grant のエージェント ID。\[required]
 - `--permission <string>`: grant 権限: `read` または `write`。現在の権限の動作については、[付与可能な権限](#grant-permissions) を参照してください。\[required]
-- `--scope <string>`: すべてのフィールドを対象とする場合は `<secret-name>`、1 つのフィールドを対象とする場合は `<secret-name>/<field-name>` 形式の secret scope。繰り返し指定できます。同等の正規 Vault パス `/n/vault/<secret-name>` および `/n/vault/<secret-name>/<field-name>` も使用できます。\[required]
+- `--scope <string>`: すべてのフィールドを対象とする場合は `<secret-name>`、1 つのフィールドを対象とする場合は `<secret-name>/<field-name>` 形式のシークレットスコープ。繰り返し指定できます。同等の正規 Vault パス `/n/vault/<secret-name>` および `/n/vault/<secret-name>/<field-name>` も使用できます。\[required]
 - `--ttl <duration>`: grant の有効期間。たとえば `1h`。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--file-system-id <string>`: ファイルシステムを選択します。`TI_FS_FILE_SYSTEM_ID` を設定することもできます。
@@ -48,8 +48,8 @@ ti fs-vault create-grant
 
 | 権限 | 現在の `ti` の動作 |
 | --- | --- |
-| `read` | grant scope 内で、委任された `list-secrets`、`read-secret`、`run-with-secret`、および `mount-vault` 操作を許可します。 |
-| `write` | サービスはこの権限を受け付けますが、read 権限は含まれません。現在の `ti` コマンドでは、委任トークンを使用して secret を書き込む操作は公開されていません。 |
+| `read` | grant のスコープ内で、委任された `list-secrets`、`read-secret`、`run-with-secret`、および `mount-vault` 操作を許可します。 |
+| `write` | サービスはこの権限を受け付けますが、読み取り権限は含まれません。現在の `ti` コマンドでは、委任トークンを使用してシークレットを書き込む操作は公開されていません。 |
 
 ## 例 {#examples}
 
