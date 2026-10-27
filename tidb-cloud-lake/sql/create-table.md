@@ -357,7 +357,7 @@ FROM products;
 +------+-------+----------+-------------+
 ```
 
-In this example, we create a table called student*profiles with a Variant type column named profile to store JSON data. We also add a virtual computed column named \_age* that extracts the age property from the profile column and casts it to an integer.
+In this example, we create a table called `student_profiles` with a Variant type column named `profile` to store JSON data. We also add a virtual computed column named `age` that extracts the age property from the profile column and casts it to an integer.
 
 ```sql
 -- Create the table with a virtual computed column
