@@ -1,10 +1,10 @@
 ---
-title: Explore Your Data with SQL Editor
+title: Explore Your Data with SQL Editor (Preview)
 summary: Learn how to use SQL Editor in the TiDB Cloud console to write and run SQL queries, manage SQL files, and view query results.
 aliases: ['/tidbcloud/explore-data-with-chat2query', '/tidbcloud/use-chat2query-api', '/tidbcloud/use-chat2query-knowledge', '/tidbcloud/use-chat2query-sessions']
 ---
 
-# Explore Your Data with SQL Editor
+# Explore Your Data with SQL Editor (Preview)
 
 You can use the built-in SQL Editor in the [TiDB Cloud console](https://tidbcloud.com/) to maximize your data value.
 
@@ -19,7 +19,7 @@ The recommended use cases of SQL Editor are as follows:
 
 ## Limitations
 
-- SQL Editor is available only for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances hosted on AWS. To use SQL Editor on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
+- SQL Editor is in public preview for [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) instances hosted on AWS. To use SQL Editor on [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) clusters, contact [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md).
 
 ## Access SQL Editor
 
