@@ -13,9 +13,9 @@ summary: サポートされているローカル状態と自動化を tdc v0.1.x
 
 ## 開始前に {#before-you-begin}
 
-- `tdc` によって開始されたすべてのファイルシステムマウントおよび Vault マウントをアンマウントし、書き込みプロセスを停止します。古いマウントがまだアクティブな場合、実行中の FUSE または WebDAV プロセスを移行できないため、移行は停止します。
+- ライターを停止し、`tdc` によって開始されたすべてのファイルシステムマウントおよび Vault マウントをアンマウントします。古いマウントがまだアクティブな場合、実行中の FUSE または WebDAV プロセスを移行できないため、移行は停止します。
 
-    アクティブな各マウントに対応するコマンドを実行してください。FUSE ファイルシステムマウントの場合は、まず `drain-file-system` を実行して保留中の書き込みをフラッシュし、その後 `unmount-file-system` を実行してマウントを切り離します。WebDAV ファイルシステムマウントの場合は、書き込みプロセスを停止し、`unmount-file-system` のみを実行します。Vault マウントでは `unmount-vault` のみが必要です。
+    アクティブな各マウントに対応するコマンドを実行してください。FUSE ファイルシステムマウントの場合は、まず `drain-file-system` を実行して保留中の書き込みをフラッシュし、その後 `unmount-file-system` を実行してマウントを切り離します。WebDAV ファイルシステムマウントの場合は、ライターを停止し、`unmount-file-system` のみを実行します。Vault マウントでは `unmount-vault` のみが必要です。
 
     ```bash
     # FUSE file system mount
@@ -35,7 +35,7 @@ summary: サポートされているローカル状態と自動化を tdc v0.1.x
 
 古い `tdc update` コマンドでは、名前が変更された `ti` 実行ファイルをインストールできず、`ti` も `tdc` コマンドエイリアスを提供しません。[TiDB Cloud CLI をインストールする](/ai/ti/reference/ti-install-configure-update.md#install-tidb-cloud-cli) に従って、`ti` を直接インストールしてください。
 
-`~/.tdc/` が存在し、`~/.ti/` が存在しない場合、インストーラーおよび最初の `update` 以外の `ti` コマンドは、サポートされているローカル状態を自動的に移行します。移行では、ロールバック用コピーとして `~/.tdc/` を保持し、移行完了を記録するための所有者専用マーカーを `~/.ti/` 配下に作成します。
+`~/.tdc/` が存在し、`~/.ti/` が存在しない場合、インストーラーおよび update 以外の最初の `ti` コマンドは、サポートされているローカル状態を自動的に移行します。移行では、ロールバック用コピーとして `~/.tdc/` を保持し、移行完了を記録するための所有者専用マーカーを `~/.ti/` 配下に作成します。
 
 次の表は、どの状態が移行されるかをまとめたものです。
 
@@ -44,7 +44,7 @@ summary: サポートされているローカル状態と自動化を tdc v0.1.x
 | プロファイルと TiDB Cloud API 認証情報 | バイナリ |
 | グローバル設定とテレメトリーのインストール ID | ログとキャッシュ |
 | データベース SQL 認証情報 | ローカルオーバーレイ |
-| ファイルシステムの登録情報と認証情報 | マウントロケーターおよび付随するランタイム状態 |
+| ファイルシステムの登録情報と認証情報 | マウントロケーターおよび companion ランタイム状態 |
 
 インストール後、新しい実行ファイルを確認し、使用しているリソースに対して読み取り専用コマンドを実行してください。例:
 
@@ -89,7 +89,7 @@ v0.2.x の移行期間中、`ti` は対応する新しい変数が設定され�
 
 ## 次のステップ {#what-s-next}
 
-- [TiDB Cloud CLI のインストール、設定、更新](/ai/ti/reference/ti-install-configure-update.md)
+- [TiDB Cloud CLI のインストール、設定、および更新](/ai/ti/reference/ti-install-configure-update.md)
 - [TiDB Cloud CLI の設定と認証情報](/ai/ti/reference/ti-configuration-and-credentials.md)
 - [TiDB Cloud Starter インスタンスを管理する](/ai/ti/guides/manage-starter-instances.md)
 - [TiDB Cloud Filesystem を管理する](/ai/ti/guides/manage-filesystems-via-cli.md)

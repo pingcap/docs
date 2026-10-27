@@ -24,12 +24,12 @@ summary: ファイルシステムリソース、ファイル、レイヤー、�
 | [`list-file-system-tokens`](/ai/ti/reference/ti-fs-list-file-system-tokens.md) | シークレットを含まないトークンメタデータを一覧表示します。 |
 | [`enable-file-system-token`](/ai/ti/reference/ti-fs-enable-file-system-token.md) | 無効化されたトークンを再度有効にします。 |
 | [`disable-file-system-token`](/ai/ti/reference/ti-fs-disable-file-system-token.md) | トークンを一時的に無効にします。 |
-| [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token.md) | トークンを完全に失効させます。 |
+| [`delete-file-system-token`](/ai/ti/reference/ti-fs-delete-file-system-token.md) | トークンを完全に取り消します。 |
 | [`refresh-file-system-token`](/ai/ti/reference/ti-fs-refresh-file-system-token.md) | トークンをローテーションし、その置き換えトークンを 1 回だけ返します。 |
 
 ### トークン管理の認可 {#token-management-authorization}
 
-オーナートークンがトークン管理を認可している場合、そのトークンはトークンの一覧表示、スコープ付きトークンの作成、およびオーナートークンまたはスコープ付きトークンの失効を実行できます。有効化または無効化できるのはスコープ付きトークンのみです。TiDB Cloud API 認証情報は、どちらの種類のトークンでも有効化、無効化、または失効できます。
+オーナートークンがトークン管理を認可している場合、そのトークンはトークンの一覧表示、スコープ付きトークンの作成、およびオーナートークンまたはスコープ付きトークンの取り消しを実行できます。有効化または無効化できるのはスコープ付きトークンのみです。TiDB Cloud API 認証情報は、どちらの種類のトークンでも有効化、無効化、または取り消すことができます。
 
 ## AI プロバイダー設定コマンド {#ai-provider-configuration-commands}
 
@@ -70,7 +70,7 @@ summary: ファイルシステムリソース、ファイル、レイヤー、�
 | [`describe-layer`](/ai/ti/reference/ti-fs-describe-layer.md) | ID でレイヤーの詳細を表示します。 |
 | [`diff-layer`](/ai/ti/reference/ti-fs-diff-layer.md) | レイヤーに記録された変更を一覧表示します。 |
 | [`create-layer-checkpoint`](/ai/ti/reference/ti-fs-create-layer-checkpoint.md) | レイヤー内に永続的なチェックポイントを作成します。 |
-| [`delete-layer`](/ai/ti/reference/ti-fs-delete-layer.md) | レイヤーを論理的に破棄します。 |
+| [`delete-layer`](/ai/ti/reference/ti-fs-delete-layer.md) | レイヤーを論理的に放棄します。 |
 | [`rollback-layer`](/ai/ti/reference/ti-fs-rollback-layer.md) | 変更をコミットせずにレイヤーをロールバックします。 |
 | [`commit-layer`](/ai/ti/reference/ti-fs-commit-layer.md) | レイヤーの変更をベースファイルシステムに適用します。 |
 | [`pack-file-system`](/ai/ti/reference/ti-fs-pack-file-system.md) | 選択したローカルオーバーレイ状態をファイルシステムにアーカイブします。 |

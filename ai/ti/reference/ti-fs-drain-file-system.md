@@ -27,7 +27,7 @@ ti fs drain-file-system
 - `--mount-path <string>`: ローカル FUSE マウントパス。\[required]
 - `--dry-run`: 変更を適用せずにリクエストを検証します。
 - `--help`: ヘルプ情報を表示します。
-- `--timeout <duration>`: ダーティハンドルと保留中の書き込みがドレインされるまで待機する時間。\[デフォルト: `30s`]
+- `--timeout <duration>`: ダーティハンドルと保留中の書き込みがドレインされるまで待機する時間。\[default: `30s`]
 - `--version`: バージョン情報を表示します。
 
 すべてのコマンドで共通のオプションについては、[グローバルオプション](/ai/ti/reference/ti-cli-reference.md#global-options) を参照してください。

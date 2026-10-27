@@ -63,13 +63,13 @@ ti fs-journal append-journal-entries
 | `subjects` | array of strings | `type:id` 形式のサブジェクト。`--subject` で指定した値はこの配列に追加されます。 |
 | `summary` | JSON value | オプションのインラインイベントペイロード。 |
 
-artifact 参照は現在サポートされていません。エントリに `artifacts` または `artifact_refs` を含めないでください。
+アーティファクト参照は現在サポートされていません。エントリに `artifacts` または `artifact_refs` を含めないでください。
 
 `--source` を指定すると、すべての入力オブジェクトの `source` 値が置き換えられます。`--entry-type` は `type` が省略されているオブジェクトにのみ適用されます。
 
 > **Important:**
 >
-> 追加操作を安全に再試行できるようにするには、論理リクエストに対する idempotency key を選択し、再試行のたびに同じキーを再利用してください。`--idempotency-key` を省略すると、再試行時に新しいキーが割り当てられ、重複したエントリが追加される可能性があります。
+> 追加操作を安全に再試行できるようにするには、論理リクエストに対する冪等性キーを選択し、再試行のたびに同じキーを再利用してください。`--idempotency-key` を省略すると、再試行時に新しいキーが割り当てられ、重複したエントリが追加される可能性があります。
 
 ## 例 {#examples}
 

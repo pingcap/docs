@@ -9,7 +9,7 @@ summary: 追記専用のファイルシステムジャーナルを作成しま�
 
 > **Note:**
 >
-> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェイスは、予告なく変更される場合があります。
+> TiDB Cloud CLI (`ti`) は現在パブリックプレビューです。機能およびコマンドラインインターフェースは、予告なく変更される場合があります。
 
 ## 構文 {#syntax}
 
@@ -44,14 +44,14 @@ ti fs-journal create-journal
 
 ## 例 {#examples}
 
-- agent ジャーナルを作成する:
+- エージェントジャーナルを作成する:
 
     ```bash
     # Create an append-only journal for one agent task.
     ti fs-journal create-journal --file-system-id <file-system-id> --journal-id jrn-demo --journal-kind agent --title "demo task"
     ```
 
-- ラベル付き deployment ジャーナルを作成する:
+- ラベル付きデプロイジャーナルを作成する:
 
     ```bash
     # Attach actor and environment metadata for later searches.

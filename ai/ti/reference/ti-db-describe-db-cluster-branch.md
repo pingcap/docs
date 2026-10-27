@@ -1,11 +1,11 @@
 ---
 title: ti db describe-db-cluster-branch
-summary: TiDB Cloud Starter クラスターのブランチを記述します。
+summary: TiDB Cloud Starter クラスターのブランチの詳細を表示します。
 ---
 
 # ti db describe-db-cluster-branch
 
-クラスター ID とブランチ ID を指定して、1 つのブランチを記述します。デフォルトの `FULL` ビューでは、TiDB Cloud API から取得可能な完全なブランチ詳細を返します。基本情報のみを取得するには、`--view BASIC` を使用します。このコマンドは、ブランチを読み取る前に親クラスターが Starter であることを確認します。
+クラスター ID とブランチ ID を指定して、1 つのブランチの詳細を表示します。デフォルトの `FULL` ビューでは、TiDB Cloud API から取得可能な完全なブランチ詳細を返します。基本情報のみを取得するには、`--view BASIC` を使用します。このコマンドは、ブランチを読み取る前に親クラスターが Starter であることを確認します。
 
 > **Note:**
 >
@@ -34,7 +34,7 @@ ti db describe-db-cluster-branch
 
 ## 例 {#examples}
 
-- ブランチを記述する:
+- ブランチの詳細を表示する:
 
     ```bash
     # Return full lifecycle and connection details for one branch.

@@ -13,7 +13,7 @@ summary: TiDB Cloud CLI のリリースをインストールし、プロファ�
 
 ## 前提条件 {#prerequisites}
 
-TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API public キーと private キーを取得してください。
+TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API 公開鍵と秘密鍵を取得してください。
 
 > **Note:**
 >
@@ -84,7 +84,7 @@ TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiD
 
 ## プロファイルを設定する {#configure-a-profile}
 
-プロファイルとは、TiDB Cloud API public キー、private キー、およびリージョンコードの名前付きセットです。
+プロファイルとは、TiDB Cloud API 公開鍵、秘密鍵、およびリージョンコードの名前付きセットです。
 
 このセクションでは、TiDB Cloud CLI 用のプロファイルを設定する方法を説明します。
 
@@ -96,7 +96,7 @@ TiDB Cloud CLI を設定するには、まず TiDB Cloud コンソールの [TiD
 ti configure
 ```
 
-`ti configure` は、TiDB Cloud API public キー、private キー、およびデフォルトのリージョンコードの入力を求めます。CLI は、個別のコマンドで上書きしない限り、このリージョンをコマンド実行時に使用します。利用可能なリージョンについては、[サポートされているリージョン](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) を参照してください。
+`ti configure` は、TiDB Cloud API 公開鍵、秘密鍵、およびデフォルトのリージョンコードの入力を求めます。CLI は、個別のコマンドで上書きしない限り、このリージョンをコマンド実行時に使用します。利用可能なリージョンについては、[サポートされているリージョン](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) を参照してください。
 
 このコマンドは入力形式をローカルで検証し、TiDB Cloud へのリクエストを行わずにプロファイルを保存します。認証情報は、TiDB Cloud にアクセスするコマンドを実行したときに検証されます。デフォルトプロファイルを変更するには、再度 `ti configure` を実行してください。名前付きプロファイルを変更するには、たとえば `ti configure --profile staging` のように、その名前を指定します。
 
@@ -131,7 +131,7 @@ ti --profile staging --region aws-us-west-2 db list-db-clusters --db-cluster-typ
 
 プロファイル、認証情報、およびリージョンの優先順位ルールの詳細については、[TiDB Cloud CLI の設定と認証情報](/ai/ti/reference/ti-configuration-and-credentials.md) を参照してください。
 
-## ヘルプの取得とバージョンの確認 {#get-help-and-check-the-version}
+## ヘルプを取得してバージョンを確認する {#get-help-and-check-the-version}
 
 コマンドを確認するには `help` または `--help` を使用し、インストール済みバージョンを確認するには `--version` を使用します。
 
@@ -195,9 +195,9 @@ ti update --target-version <version>
 
 移行される状態と除外される状態、ディレクトリ競合の解決、レガシー環境変数との互換性を含む完全な移行手順については、[tdc から TiDB Cloud CLI への移行](/ai/ti/reference/ti-migrate-from-tdc.md) を参照してください。
 
-## TiDB Cloud CLI のアンインストール {#uninstall-tidb-cloud-cli}
+## TiDB Cloud CLI をアンインストールする {#uninstall-tidb-cloud-cli}
 
-アンインストールする前に、writer を停止し、アクティブなファイルシステムまたは Vault のマウントをすべてアンマウントしてください。
+アンインストールする前に、ライターを停止し、アクティブなファイルシステムまたは Vault のマウントをすべてアンマウントしてください。
 
 たとえば、マウントの種類に応じて次のコマンドを実行します。
 
@@ -245,7 +245,7 @@ ti fs-vault unmount-vault --mount-path <vault-mount-path>
 </div>
 </SimpleTab>
 
-### ローカル状態の削除 {#remove-local-state}
+### ローカル状態を削除する {#remove-local-state}
 
 バイナリを削除しても、プロファイル、認証情報、ファイルシステムの登録、DB SQL 認証情報、ログ、およびマウントロケーターは保持されます。
 

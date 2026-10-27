@@ -5,7 +5,7 @@ summary: TiDB Cloud CLI の API 認証、Starter クォータ、SQL 認証情報
 
 # TiDB Cloud CLI のトラブルシューティング
 
-このリファレンスを使用して、CLI の認証、Starter、SQL、および中断されたコマンドの失敗を診断します。ファイルシステムトークン、リージョン、companion プロセス、およびマウントについては、[TiDB Cloud Filesystem のトラブルシューティング](/tidb-cloud-filesystem/filesystem-troubleshooting.md) を参照してください。`--debug` は必要な場合にのみ追加し、共有する前にマスク済みの出力を確認してください。
+このリファレンスを使用して、CLI の認証、Starter、SQL、および中断されたコマンドの失敗を診断します。ファイルシステムトークン、リージョン、companion プロセス、およびマウントについては、[TiDB Cloud Filesystem のトラブルシューティング](/tidb-cloud-filesystem/filesystem-troubleshooting.md) を参照してください。`--debug` は必要な場合にのみ追加し、共有する前に秘匿情報を除去した出力を確認してください。
 
 > **Note:**
 >
@@ -60,7 +60,7 @@ ti db execute-sql-statement \
 
 `~/.ti/db_users/<cluster-id>/credentials` を削除すると、ローカルパスワードも削除されます。認証情報を作り出すのではなく、create/repair コマンドを実行してください。
 
-## 中断されたコマンドによってリソースが残ります {#an-interrupted-command-leaves-resources}
+## 中断されたコマンドによってリソースが残る {#an-interrupted-command-leaves-resources}
 
 リソースを一覧表示し、自分のワークフローで作成されたものだけを特定してください。削除前に describe を使用します。
 

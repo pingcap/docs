@@ -84,7 +84,7 @@ TiDB Cloud CLI は、プロジェクトセレクターを受け付けず、保�
 ~/.ti/fs_credentials/<profile-key>/<file-system-id-key>/credentials
 ```
 
-この認証情報には、サーバーが割り当てたファイルシステム ID、正規のリージョンコード、選択された `api_key`、および任意の正式なトークンメタデータが含まれ、所有者のみがアクセスできる権限を使用します。`ti fs list-file-systems` はリモートリソースを読み取り、機密情報ではない `has_local_token` ヒントのみをテーブル結合します。
+この認証情報には、サーバーが割り当てたファイルシステム ID、正規のリージョンコード、選択された `api_key`、および任意の正式なトークンメタデータが含まれ、所有者のみがアクセスできる権限を使用します。`ti fs list-file-systems` はリモートリソースを読み取り、機密情報ではない `has_local_token` ヒントのみを結合します。
 
 1 つのリモートファイルシステムに複数のトークンを持たせることはできますが、各プロファイルがファイルシステムごとに保存する選択済みトークンは最大 1 つです。ローカルストアは運用上の選択情報であり、リモートのトークンインベントリのレプリカではありません。プロビジョニングまたは古いインポートによって作成された認証情報には、`token_id`、`scope_kind`、`token_name`、`expires_at`、または `scopes` が含まれていない場合がありますが、それでもデータプレーン用途では有効です。また、`ti` は不足しているメタデータをトークン一覧の行から推測しません。
 
@@ -148,7 +148,7 @@ password = "..."
 
 3 つのアクセスモードは、TiDB Cloud の組み込みデータベースロールに対応します。
 
-| `ti` access mode | TiDB Cloud built-in role | 想定用途 |
+| `ti` アクセスモード | TiDB Cloud 組み込みロール | 想定用途 |
 | --- | --- | --- |
 | `read_only` | `role_readonly` | データを変更せずにクエリおよび検証を行う |
 | `read_write` | `role_readwrite` | アプリケーションデータのクエリおよび変更を行う |
@@ -158,7 +158,7 @@ TiDB Cloud の完全なロールモデルについては、[データベース�
 
 ## Companion 状態とマウントロケーター {#companion-state-and-mount-locators}
 
-インストーラーには `ti-drive9` が含まれており、これは `ti fs`、`ti fs-git`、`ti fs-journal`、および `ti fs-vault` の操作を実行する companion runtime です。これを直接呼び出すことはありません。登録された各ファイルシステムには、分離された companion home があります。
+インストーラーには `ti-drive9` が含まれており、これは `ti fs`、`ti fs-git`、`ti fs-journal`、および `ti fs-vault` の操作を実行する companion ランタイムです。これを直接呼び出すことはありません。登録された各ファイルシステムには、分離された companion ホームがあります。
 
 ```text
 ~/.ti/drive9-home/<profile-key>/<resource-key>/
@@ -172,7 +172,7 @@ TiDB Cloud の完全なロールモデルについては、[データベース�
 ~/.ti/mounts/<mount-hash>.locator.json
 ```
 
-このロケーターには、同じ `HOME` から drain およびアンマウントを行うために必要な配置先情報と companion-home 情報が記録されます。ファイルシステムトークンは含まれません。アンマウントが成功すると削除されます。
+このロケーターには、同じ `HOME` からドレインおよびアンマウントを行うために必要な配置先情報と companion ホーム情報が記録されます。ファイルシステムトークンは含まれません。アンマウントが成功すると削除されます。
 
 ## 操作ログ {#operation-logs}
 

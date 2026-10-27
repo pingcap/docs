@@ -37,7 +37,7 @@ ti fs list-files
 - リモートディレクトリを一覧表示する場合:
 
     ```bash
-    # 特定のファイルシステムパス配下のエントリを返します。
+    # Return the entries under a specific file system path.
     ti fs list-files --file-system-id <file-system-id> --path /reports
     ```
 

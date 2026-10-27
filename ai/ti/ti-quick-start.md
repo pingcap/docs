@@ -15,7 +15,7 @@ summary: TiDB Cloud CLI をインストールして設定し、その後ファ�
 
 ## 前提条件 {#prerequisites}
 
-開始する前に、[TiDB Cloud コンソール](https://tidbcloud.com/) の [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API public キーと private キーを取得してください。これらのキーには、組織に対する `Organization Owner` アクセス権が必要です。
+開始する前に、[TiDB Cloud コンソール](https://tidbcloud.com/) の [TiDB Cloud API Keys](https://tidbcloud.com/org-settings/api-keys) ページから TiDB Cloud API 公開鍵と秘密鍵を取得してください。これらのキーには、組織に対する `Organization Owner` アクセス権が必要です。
 
 ## ステップ 1. TiDB Cloud CLI をインストールする {#step-1-install-tidb-cloud-cli}
 
@@ -87,7 +87,7 @@ summary: TiDB Cloud CLI をインストールして設定し、その後ファ�
 2. 次の情報を入力します。
 
     - CLI 操作のデフォルトリージョン。リージョンコード（`aws-us-west-2` など）で指定します。TiDB Cloud CLI がサポートするリージョンの一覧については、[サポートされるリージョン](/ai/ti/reference/ti-regions-security-and-limitations.md#supported-regions) を参照してください。
-    - TiDB Cloud API public キーと private キー。
+    - TiDB Cloud API 公開鍵と秘密鍵。
 
 3. 読み取り専用コマンドを実行し、保存した認証情報を使用して CLI が TiDB Cloud にアクセスできることを確認します。
 
@@ -130,7 +130,7 @@ TiDB Cloud Filesystem は、ローカルマシン、CI ジョブ、サンドボ�
 2. ファイルシステムを使用する環境で、前の手順のオーナートークンを `TI_FS_TOKEN` として設定し、次のようにファイルシステムをローカルパスにマウントします。この環境は、ファイルシステムを作成した同じマシン、別のマシン、または AI エージェントのサンドボックスのいずれでもかまいません。
 
     ```bash
-    # export TI_FS_TOKEN="<owner-token>" # 手順 1 とは別の環境で続行する場合は、ここで手順 1 で取得した TI_FS_TOKEN を渡します。
+    # export TI_FS_TOKEN="<owner-token>" # If you are continuing on a different environment as step 1, pass in the TI_FS_TOKEN you get from step 1 here.
     mkdir ~/mnt-test
     ti fs mount-file-system --mount-path ~/mnt-test --region aws-us-west-2
     echo 'Hello from TiDB Cloud Filesystem' >> ~/mnt-test/hello.txt

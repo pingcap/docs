@@ -13,7 +13,7 @@ summary: 大規模な Git リポジトリのダウンロードが完了する前
 
 ## 仕組み {#how-it-works}
 
-`ti fs-git clone-git-workspace --blobless --hydrate background` は Git ワークスペースを登録し、すべてのクリーンブロブのダウンロードが完了する前にそのファイルツリーを公開します。`ti` が残りのクリーンなファイル内容をダウンロードしてローカル Git オブジェクトデータベースにデータを格納している間に、エージェントは作業を開始できます。hydration と呼ばれるこのバックグラウンドプロセスにより、繰り返し発生するオンデマンドフェッチが減ります。hydration が完了する前の読み取りでは、不足しているデータを取得するために Git の lazy fetch が使用されます。
+`ti fs-git clone-git-workspace --blobless --hydrate background` は Git ワークスペースを登録し、すべてのクリーンな blob のダウンロードが完了する前にそのファイルツリーを公開します。`ti` が残りのクリーンなファイル内容をダウンロードしてローカル Git オブジェクトデータベースに格納している間に、エージェントは作業を開始できます。hydration と呼ばれるこのバックグラウンドプロセスにより、繰り返し発生するオンデマンドフェッチが減ります。hydration が完了する前の読み取りでは、不足しているデータを取得するために Git の lazy fetch が使用されます。
 
 置き換え後のエージェントランタイムは、登録済みのワークスペースにアクセスできます。元のマシンを破棄する前に、以下のクリーンアップガイダンスで説明されているように、ローカル Git 履歴を保持してください。ファイルの編集には通常のツールを使用し、コミット、フェッチ、プッシュには Git コマンドを使用します。
 
@@ -50,7 +50,7 @@ find /path/to/workspace/tidb -maxdepth 2 -type f | head
 git -C /path/to/workspace/tidb status
 ```
 
-決定的なベンチマークを実行する前、またはマウントを drain する前に、必要に応じて明示的に hydration の完了を待機できます。
+決定的なベンチマークを実行する前、またはマウントをドレインする前に、明示的に hydration の完了を待機できます。
 
 ```bash
 ti fs-git hydrate-git-workspace \
@@ -84,7 +84,7 @@ ti fs-git remove-git-worktree \
 ti fs unmount-file-system --mount-path /path/to/workspace
 ```
 
-未コミットの変更を破棄してよい場合にのみ、worktree の削除で `--force` を使用してください。ファイルシステムのアンマウントでは自動的にグレースフルな drain が実行されます。アンマウントせずにリモート作業をフラッシュする必要がある場合にのみ、`ti fs drain-file-system` を個別に使用してください。
+未コミットの変更を破棄してよい場合にのみ、worktree の削除で `--force` を使用してください。ファイルシステムのアンマウントでは自動的に正常なドレインが実行されます。アンマウントせずにリモート作業をフラッシュする必要がある場合にのみ、`ti fs drain-file-system` を個別に使用してください。
 
 ## セキュリティおよび運用上の注意 {#security-and-operational-notes}
 
