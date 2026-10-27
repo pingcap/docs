@@ -40,7 +40,7 @@ TiDB Cloudでは、TLS接続の確立は、 TiDB Cloud Premiumインスタンス
 
 ## TiDB Cloud Premium のルート証明書を管理する {#manage-root-certificates-for-tidb-cloud-premium}
 
-TiDB Cloud Premium は、クライアントとTiDB Cloud Premium インスタンス間の TLS 接続の CA として[AWSプライベート認証局](https://aws.amazon.com/private-ca/)からの証明書を使用します。通常、CA 証明書の秘密キーは[FIPS 140-2 レベル3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ標準を満たす AWS 管理のハードウェア セキュリティ モジュール (HSM) に安全に保存されます。
+TiDB Cloud Premium は、クライアントとTiDB Cloud Premium インスタンス間の TLS 接続の CA として[AWSプライベート認証局](https://aws.amazon.com/private-ca/)からの証明書を使用します。通常、CA 証明書の秘密鍵は[FIPS 140-2 レベル3](https://csrc.nist.gov/projects/cryptographic-module-validation-program/Certificate/3139)セキュリティ標準を満たす AWS 管理のハードウェア セキュリティ モジュール (HSM) に安全に保存されます。
 
 ## よくある質問 {#faqs}
 

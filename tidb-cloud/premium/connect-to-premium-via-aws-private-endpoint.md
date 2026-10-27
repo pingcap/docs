@@ -102,7 +102,7 @@ AWS マネジメントコンソールを使用して VPC エンドポイント�
 
     ![Verify endpoint service](/media/tidb-cloud/private-endpoint/create-endpoint-2.png)
 
-3. **Endpoint settings** エリアで、必要に応じて name tag を入力し、**Endpoint services that use NLBs and GWLBs** オプションを選択します。
+3. **Endpoint settings** エリアで、必要に応じて名前タグを入力し、**Endpoint services that use NLBs and GWLBs** オプションを選択します。
 4. **Service settings** エリアで、TiDB Cloud からコピーした **Endpoint Service Name** を入力します。
 5. **Verify service** をクリックします。
 6. **Network settings** エリアで、ドロップダウンリストから VPC を選択します。
@@ -112,11 +112,11 @@ AWS マネジメントコンソールを使用して VPC エンドポイント�
     >
     > サービスが 3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、**Subnets** エリアで AZ を選択できないことがあります。この問題は、選択したリージョンに、{{{ .premium }}} または {{{ .byoc }}} インスタンスが配置されている AZ に加えて、余分な AZ が存在する場合に発生します。この場合は、[PingCAP Technical Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) にお問い合わせください。
 
-8. **Security groups** エリアで、適切な security group を選択します。
+8. **Security groups** エリアで、適切なセキュリティグループを選択します。
 
     > **Note:**
     >
-    > 選択した security group が、EC2 インスタンスからポート `4000` またはユーザー定義ポートへの inbound access を許可していることを確認してください。
+    > 選択したセキュリティグループが、EC2 インスタンスからポート `4000` またはユーザー定義ポートへの受信アクセスを許可していることを確認してください。
 
 9. **Create endpoint** をクリックします。
 10. エンドポイントの作成後、その VPC エンドポイント ID を記録します。VPC エンドポイント ID は `vpce-` で始まります。

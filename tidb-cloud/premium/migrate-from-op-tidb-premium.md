@@ -3,7 +3,7 @@ title: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移�
 summary: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}へのデータ移行方法を学びましょう。
 ---
 
-# TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium}
+# TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium-or-tidb-cloud-byoc}
 
 このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスタからTiDB Cloud Premiumまたは{{{ .byoc }}}（AWS上）インスタンスにデータを移行する方法について説明します。
 
@@ -111,7 +111,7 @@ TiDB Self-ManagedクラスタからTiDB Cloud Premiumまたは{{{ .byoc }}}に�
 
 TiDB Self-ManagedクラスターからAmazon S3へDumplingを使用してデータを移行する必要があります。
 
-TiDB Self-ManagedクラスターがローカルIDCにある場合、またはDumplingサーバーとAmazon S3間のネットワークが接続されていない場合は、まずファイルをローカルストレージにエクスポートしてから、後でAmazon S3にアップロードすることができます。
+TiDB Self-ManagedクラスターがローカルIDCにある場合、またはDumplingサーバーとAmazon S3間のネットワークが接続されていない場合は、まずファイルをローカルストレージにエクスポートしてから、後でAmazon S3にアップロードできます。
 
 #### ステップ1. アップストリームのTiDB Self-ManagedクラスタのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
 
@@ -135,7 +135,7 @@ SELECT @@global.tidb_gc_enable;
 1 row in set (0.01 sec)
 ```
 
-#### ステップ2. Dumpling用のAmazon S3バケットへのアクセス権限を設定します {#step-2-configure-access-permissions-to-the-amazon-s3-bucket-for-dumpling}
+#### ステップ2. Dumpling用のAmazon S3バケットへのアクセス権限を設定する {#step-2-configure-access-permissions-to-the-amazon-s3-bucket-for-dumpling}
 
 AWS コンソールでアクセスキーを作成します。詳細については[アクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
 
@@ -166,7 +166,7 @@ Dumplingを使用して、アップストリームのTiDB Self-Managedクラス�
 
     ![Get the S3 URI](/media/tidb-cloud/op-to-cloud-copy-s3-uri.png)
 
-    以下のスクリーンショットは、地域情報を取得する方法を示しています。
+    以下のスクリーンショットは、リージョン情報を取得する方法を示しています。
 
     ![Get the region information](/media/tidb-cloud/op-to-cloud-copy-region-info.png)
 

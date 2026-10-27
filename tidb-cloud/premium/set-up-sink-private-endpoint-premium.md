@@ -14,7 +14,7 @@ summary: 変更フィード用のプライベートエンドポイントを設�
 
 ### 権限 {#permissions}
 
-変更フィード用のプライベートエンドポイントを作成できるのは、組織内で以下のいずれか1つの役割を持つユーザーのみです。
+変更フィード用のプライベートエンドポイントを作成できるのは、組織内で以下のいずれか1つのロールを持つユーザーのみです。
 
 - `Organization Owner`
 - 対応するインスタンスの`Instance Manager`
@@ -77,7 +77,7 @@ TiDB Cloud VPCへのアクセスを許可するには、エンドポイントサ
 
 3. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
-## ステップ2．変更フィード用のプライベートエンドポイントを設定する {#step-2-configure-the-private-endpoint-for-changefeeds}
+## ステップ2. 変更フィード用のプライベートエンドポイントを設定する {#step-2-configure-the-private-endpoint-for-changefeeds}
 
 設定手順は、インスタンスがデプロイされているクラウドプロバイダーによって異なります。
 
