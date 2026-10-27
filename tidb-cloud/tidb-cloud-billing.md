@@ -35,6 +35,10 @@ TiDB Cloud 根据你所消耗的资源进行收费。
 
 对于 TiDB Cloud Lake，你的费用由 warehouse、storage 和 cloud service fee 构成。详情请参见 [TiDB Cloud Lake Pricing & Billing](https://docs.pingcap.com/tidbcloudlake/pricing-billing/)。
 
+### TiDB Cloud Filesystem 的定价 {#pricing-for-tidb-cloud-filesystem}
+
+TiDB Cloud Filesystem 对读、写、存储和互联网出口流量采用按量付费定价，并提供按月计算的免费额度，该额度在您组织的各个文件系统和 Region 之间共享。有关详细信息，请参见 [TiDB Cloud Filesystem 定价详情](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)。
+
 ## 发票 {#invoices}
 
 如果你在组织中拥有 `Organization Owner` 或 `Organization Billing Manager` 角色，则可以管理 TiDB Cloud 的发票信息。否则，请跳过本节。

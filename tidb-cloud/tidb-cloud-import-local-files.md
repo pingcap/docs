@@ -75,7 +75,7 @@ summary: 了解如何将本地文件导入 TiDB Cloud Starter。
 
     你可以在 **Import Task Detail** 页面查看导入进度。如果有警告或失败的任务，可以查看详情并进行处理。
 
-9. 导入任务完成后，你可以点击 **Explore your data by SQL Editor**，通过 SQL 查询已导入的数据。关于如何使用 SQL Editor 的更多信息，请参见 [使用 AI 辅助 SQL Editor 探索数据](/tidb-cloud/explore-data-with-chat2query.md)。
+9. 导入任务完成后，你可以点击 **Explore your data by SQL Editor**，通过 SQL 查询已导入的数据。关于如何使用 SQL Editor 的更多信息，请参见 [使用 SQL Editor 探索数据](/tidb-cloud/explore-data-with-sql-editor.md)。
 
 10. 在 **Import** 页面，你可以点击 **...** > **View**，在 **Action** 列查看导入任务详情。
 

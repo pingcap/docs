@@ -141,8 +141,8 @@ TiDB Cloud 定义了不同的用户角色，用于管理组织、项目和实例
 | 从备份中将实例或集群恢复为新资源。 | ✅ | ❌ | ❌ | ❌ |
 | 管理 [Data Service](/tidb-cloud/data-service-overview.md) 的只读操作，如使用或创建端点读取数据。 | ✅ | ✅ | ✅ | ❌ |
 | 管理 [Data Service](/tidb-cloud/data-service-overview.md) 的读写操作。 | ✅ | ✅ | ❌ | ❌ |
-| 使用 [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) 查看资源数据（如果资源类型支持）。 | ✅ | ✅ | ✅ | ❌ |
-| 使用 [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) 修改和删除资源数据（如果资源类型支持）。 | ✅ | ✅ | ❌ | ❌ |
+| 使用 [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md) 查看资源数据（如果资源类型支持）。 | ✅ | ✅ | ✅ | ❌ |
+| 使用 [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md) 修改和删除资源数据（如果资源类型支持）。 | ✅ | ✅ | ❌ | ❌ |
 | 管理 [changefeeds](/tidb-cloud/changefeed-overview.md)。 | ✅ | ✅ | ✅ | ❌ |
 | 审核和重置资源密码（如果资源类型支持）。 | ✅ | ❌ | ❌ | ❌ |
 | 查看项目中的资源概览、备份记录、指标、事件和 [changefeeds](/tidb-cloud/changefeed-overview.md)。 | ✅ | ✅ | ✅ | ✅ |
@@ -161,8 +161,8 @@ TiDB X 实例支持实例级角色，因此你可以授予对单个 TiDB X 实�
 | 权限  | `Instance Manager` | `TiDB X Instance Data Access Read-Write` | `TiDB X Instance Data Access Read-Only` | `TiDB X Instance Viewer` |
 |---|---|---|---|---|
 | 管理实例操作，例如实例创建、修改和删除。 | ✅ | ❌ | ❌ | ❌ |
-| 使用 [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) 查看和修改实例数据。 | ✅ | ✅ | ❌ | ❌ |
-| 使用 [SQL Editor](/tidb-cloud/explore-data-with-chat2query.md) 查看实例数据。 | ✅ | ✅ | ✅ | ❌ |
+| 使用 [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md) 查看和修改实例数据。 | ✅ | ✅ | ❌ | ❌ |
+| 使用 [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md) 查看实例数据。 | ✅ | ✅ | ✅ | ❌ |
 | 管理实例作用域的角色。 | ✅ | ❌ | ❌ | ❌ |
 | 查看 TiDB X 实例的备份记录。 | ✅ | ❌ | ❌ | ✅ |
 | 从备份恢复 TiDB X 实例。 | ✅ | ❌ | ❌ | ❌ |

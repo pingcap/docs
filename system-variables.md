@@ -6270,6 +6270,26 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 </CustomContent>
 
+<CustomContent platform="tidb-cloud">
+
+### tidb_stmt_summary_group_by_user <span class="version-mark">在 CLOUD.202603.1 中引入</span> {#tidb_stmt_summary_group_by_user}
+
+> **Note:**
+>
+> - 对于 TiDB Cloud Starter，此变量不受支持。
+> - 对于 TiDB Cloud Essential 和 Premium，此变量为只读。
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制： No
+- Type: Boolean
+- Default value: TiDB Cloud Essential 和 TiDB Cloud Premium 为 `ON`
+- 此变量控制是否将执行 SQL 语句的用户作为 [statement summary tables](/statement-summary-tables.md) 中的聚合维度之一。当此变量设置为 `OFF` 时，TiDB 会将不同用户执行的相同 SQL digest 聚合到同一行中，`SAMPLE_USER` 字段显示一个采样用户。当此变量设置为 `ON` 时，TiDB 会将不同用户执行的相同 SQL digest 分别聚合到不同的行中，每一行的 `SAMPLE_USER` 字段表示执行该语句的用户。
+- 修改此变量会清除当前内存中的 statement summary 数据，因为修改前后的数据使用了不同的维度进行聚合。这不会影响持久化到磁盘的历史数据。
+- 启用此变量后，statement summary 记录数可能会随着同一 SQL digest 的不同执行用户数量增加而增加，从而增加内存使用量。
+
+</CustomContent>
+
 ### tidb_stmt_summary_history_size <span class="version-mark">从 v4.0 版本开始引入</span>
 
 > **注意：**
@@ -6342,6 +6362,26 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > **注意：**
 >
 > 当 [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#持久化-statements-summary) 开启时，`tidb_stmt_summary_max_stmt_count` 仅限制 [`statements_summary`](/statement-summary-tables.md#statements_summary) 表在内存中可存储的 SQL digest 数量。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+### tidb_stmt_summary_persist_evicted <span class="version-mark">在 CLOUD.202603.1 中引入</span> {#tidb_stmt_summary_persist_evicted}
+
+> **Note:**
+>
+> - 对于 TiDB Cloud Starter，此变量不受支持。
+> - 对于 TiDB Cloud Essential 和 Premium，此变量为只读。
+
+- Scope: GLOBAL
+- Persists to cluster: Yes
+- 是否受 Hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) 控制： No
+- Type: Boolean
+- Default value: `OFF`
+- 此变量控制在启用[语句摘要持久化](/statement-summary-tables.md#persist-statements-summary)后，是否将被 LRU 淘汰的 statement summary 记录写入 statement summary 日志。TiDB 会将这些 JSON 记录标记为 `"evicted": true`，以便下游日志消费者识别它们。
+- 此变量仅在启用 [tidb_stmt_summary_enable_persistent](/system-variables.md#tidb_stmt_summary_enable_persistent-new-in-v660) 时生效。TiDB 不会将标记为 `"evicted": true` 的记录作为 `statements_summary_history` 或 `cluster_statements_summary_history` 的查询结果返回。
+- 启用此变量后，随着 LRU 淘汰变得更频繁，日志量会增加。TiDB 使用异步缓冲机制写入被淘汰的记录。当缓冲队列已满时，TiDB 可能会丢弃新的被淘汰记录。
 
 </CustomContent>
 

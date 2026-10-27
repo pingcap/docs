@@ -758,13 +758,12 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
     - 通过 Data Service 作为数据源集成数据可视化项目。
     - 从不支持 MySQL interface 的环境连接数据库。
 
-    此外，TiDB Cloud 提供 [Chat2Query API](/tidb-cloud/use-chat2query-api.md)，可通过 RESTful 接口结合 AI 生成并执行 SQL statement。
+    此外，TiDB Cloud 提供 Chat2Query API，可通过 RESTful 接口结合 AI 生成并执行 SQL statement。
 
     访问方法：左侧导航栏进入 [**Data Service**](https://tidbcloud.com/project/data-service) 页面。更多信息参见：
 
     - [Data Service 概览](/tidb-cloud/data-service-overview.md)
     - [Data Service 入门](/tidb-cloud/data-service-get-started.md)
-    - [Chat2Query API 入门](/tidb-cloud/use-chat2query-api.md)
 
 - 支持对 2022 年 12 月 31 日后在 AWS 上创建的 [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群缩容 TiDB、TiKV、TiFlash 节点规格。
 
@@ -948,7 +947,7 @@ summary: 了解 2023 年 TiDB Cloud 的发布说明。
 
     - 你现在可以直接拖拽 CSV 文件到 **Import** 页的上传区域。
     - 创建导入任务时，如目标数据库或表不存在，可输入名称让 TiDB Cloud 自动创建。对于新建目标表，你可指定主键或选择多个字段组成复合主键。
-    - 导入完成后，可点击 **Explore your data by Chat2Query** 或任务列表中的目标表名，使用 [AI 驱动的 Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) 探索数据。
+    - 导入完成后，可点击 **Explore your data by Chat2Query** 或任务列表中的目标表名，使用 AI 驱动的 Chat2Query 探索数据。
 
   详情参见 [导入本地文件到 TiDB Cloud](/tidb-cloud/tidb-cloud-import-local-files.md)。
 

@@ -199,7 +199,7 @@ Data Service 提供了一个包含预定义系统 endpoint 的 endpoint 库，�
 
 ### 编写 SQL 语句
 
-在 endpoint 详情页的 SQL editor 中，你可以为 endpoint 编写并运行 SQL 语句。你也可以直接输入 `--` 加指令，让 AI 自动生成 SQL 语句。
+在 endpoint 详情页的 SQL editor 中，你可以为 endpoint 编写并运行 SQL 语句。
 
 1. 选择 {{{ .starter }}} 实例。
 
@@ -216,7 +216,7 @@ Data Service 提供了一个包含预定义系统 endpoint 的 endpoint 库，�
 
 3. 编写 SQL 语句。
 
-    在 SQL editor 中，你可以编写如表关联查询、复杂查询、aggregate function 等语句。你也可以直接输入 `--` 加指令，让 AI 自动生成 SQL 语句。
+    在 SQL editor 中，你可以编写如表关联查询、复杂查询、聚合函数等语句。
 
     若要定义参数，可以在 SQL 语句中以变量占位符形式插入，如 `${ID}`。例如，`SELECT * FROM table_name WHERE id = ${ID}`。然后，你可以点击右侧面板的 **Params** 标签页，修改参数定义和测试值。更多信息，参见 [参数](#configure-parameters)。
 

@@ -9,9 +9,9 @@ TiDB Cloud 为你提供了便捷的方式来查看告警、编辑告警规则，
 
 本文档介绍了如何进行这些操作，并为你提供了 TiDB Cloud 内置告警条件以供参考。
 
-> **注意：**
+> **Note:**
 >
-> 目前，告警订阅适用于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例、[TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 实例和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
+> 目前，告警订阅适用于 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) 实例、[TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) 实例、[TiDB Cloud BYOC](/tidb-cloud/select-cluster-tier.md#byoc) 实例和 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群。
 
 ## 查看告警
 
@@ -32,7 +32,7 @@ TiDB Cloud 为你提供了便捷的方式来查看告警、编辑告警规则，
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,byoc">
 
 在 TiDB Cloud 中，你可以在 **Alerts** 页面查看活跃和已关闭的告警。
 
@@ -42,7 +42,7 @@ TiDB Cloud 为你提供了便捷的方式来查看告警、编辑告警规则，
     >
     > 如果你属于多个组织，请使用左上角的下拉框先切换到目标组织。
 
-2. 点击目标 {{{ .premium }}} 实例的名称，进入其概览页面。
+2. 点击目标 {{{ .premium }}} 或 {{{ .byoc }}} 实例的名称，进入其概览页面。
 3. 在左侧导航栏点击 **Alerts**。
 4. **Alerts** 页面默认显示活跃告警。你可以查看每个活跃告警的信息，如告警名称、触发时间和持续时间。
 5. 如果你还想查看已关闭的告警，只需点击 **Status** 下拉列表并选择 **Closed** 或 **All**。
@@ -133,18 +133,59 @@ TiDB Cloud 会根据不同的 [TiDB Cloud 方案](/tidb-cloud/select-cluster-tie
 | 每秒请求单元数（RU/s）超过最大 RCU 的 80% | <ol><li>查看 RU 指标，判断增长是逐步上升还是突然激增。</li><li>如果增长是逐步发生的，请检查查询持续时间是否增加。如果是，则当前最大 RCU 可能不足。</li><li>在 TiDB Cloud 控制台中手动增加最大 RCU，以扩展容量。</li></ol><br/>如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
 | RCU 消耗（Request Unit/s）超过 100,000 RCU | <ol><li>查看 RU 指标中的流量模式，判断增长是逐步上升还是突然激增。</li><li>在 Elastic Mode 下，TiDB Cloud 会根据你的工作负载自动扩展后端容量。如果该使用水平符合预期，请调整告警阈值以匹配你的工作负载。请注意，持续较高的 RU/s 可能会增加你的成本。</li><li>如果该使用水平不符合预期，请使用 Top RU 功能识别并优化消耗最多 RU 的查询。</li></ol><br/>如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
 | QPS 下降 80% | <ol><li>检查下降是否由查询延时增加导致。</li><li>验证你的应用是否运行正常。如果该下降是预期行为，请忽略此告警。如果该下降并非预期且你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。</li></ol>|
-| 查询 P99 延时超过 200 ms | <ol><li>排查慢查询：前往 Slow Query 页面，并按最近时间范围进行筛选，以识别新引入的查询或运行变慢的查询。</li><li>检查最近的变更，例如应用部署、schema 变更或数据导入任务，这些变更可能影响了流量模式。</li></ol><br/>如果你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
-| 查询 P95 延时超过 200 ms | <ol><li>排查慢查询：前往 Slow Query 页面，并按最近时间范围进行筛选，以识别新引入的查询或运行变慢的查询。</li><li>检查最近的变更，例如应用部署、schema 变更或数据导入任务，这些变更可能影响了流量模式。</li></ol><br/>如果你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 查询 P99 延时超过 200 ms | <ol><li>排查慢查询：前往 Slow Query 页面，并按最近时间范围进行筛选，以识别新引入的查询或运行变慢的查询。</li><li>检查最近的变更，例如应用部署、数据库模式变更或数据导入任务，这些变更可能影响了流量模式。</li></ol><br/>如果你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 查询 P95 延时超过 200 ms | <ol><li>排查慢查询：前往 Slow Query 页面，并按最近时间范围进行筛选，以识别新引入的查询或运行变慢的查询。</li><li>检查最近的变更，例如应用部署、数据库模式变更或数据导入任务，这些变更可能影响了流量模式。</li></ol><br/>如果你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
 | 请求错误率超过 10%  | 查看最近的错误以及集群整体的语句执行状态。|
-| 1 分钟内超过 20 条 SQL 语句的延时超过 256 ms 阈值 | 检查最近是否有 schema 或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
-| 1 分钟内超过 20 条 SQL 语句的延时超过 512 ms 阈值 | 检查最近是否有 schema 或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
-| 1 分钟内超过 20 条 SQL 语句的延时超过 4,096 ms 阈值 | 检查最近是否有 schema 或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 1 分钟内超过 20 条 SQL 语句的延时超过 256 ms 阈值 | 检查最近是否有数据库模式或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 1 分钟内超过 20 条 SQL 语句的延时超过 512 ms 阈值 | 检查最近是否有数据库模式或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 1 分钟内超过 20 条 SQL 语句的延时超过 4,096 ms 阈值 | 检查最近是否有数据库模式或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
 
 ### {{{ .premium }}} 的 Changefeed 告警 {#changefeed-alerts-for-premium}
 
 | 条件                                   | 推荐操作                   |
 |:----------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Changefeed 延时超过 600 秒 | 在 TiDB Cloud 控制台的 **Changefeed** 页面和 **Changefeed Detail** 页面检查 changefeed 状态，你可以在这些页面找到一些错误信息以帮助诊断问题。<br/>可能触发该告警的原因包括：<ul><li>上游整体流量增加，导致现有 changefeed 规格无法承载。如果流量增加是暂时的，changefeed 延时会在流量恢复正常后自动恢复。如果流量持续增加，则需要扩展 changefeed。</li><li>下游或网络异常，此时应先排查并解决异常。</li><li>如果下游为 RDS，表缺少索引，可能导致写入性能低、延时高，此时需要为上游或下游添加必要索引。</li></ul>如果你无法自行解决问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 获取进一步协助。|
+| Changefeed 状态为 `FAILED`                 | 在 TiDB Cloud 控制台的 **Changefeed** 页面和 **Changefeed Detail** 页面检查 changefeed 状态，你可以在这些页面找到一些错误信息以帮助诊断问题。<br/>如果你无法自行解决问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 获取进一步协助。|
+| Changefeed 状态为 `WARNING`              | 在 TiDB Cloud 控制台的 **Changefeed** 页面和 **Changefeed Detail** 页面检查 changefeed 状态，你可以在这些页面找到一些错误信息以帮助诊断问题。<br/>如果你无法自行解决问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 获取进一步协助。|
+
+</CustomContent>
+
+<CustomContent plan="byoc">
+
+### {{{ .byoc }}} 的性能概览告警 {#performance-overview-alerts-for-byoc}
+
+| 条件 | 建议操作 |
+|:---|:---|
+| 每秒请求单元数（RU/s）超过最大 RCU 的 80% | <ol><li>查看 RU 指标，判断增长是逐步上升还是突然激增。</li><li>如果增长是逐步发生的，请检查查询持续时间是否增加。如果是，则当前最大 RCU 可能不足。</li><li>在 TiDB Cloud 控制台中手动增加最大 RCU，以扩展容量。</li></ol><br/>如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| QPS 下降 80% | <ol><li>检查下降是否由查询延时增加导致。</li><li>验证你的应用是否运行正常。如果该下降是预期行为，请忽略此告警。如果该下降并非预期且你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。</li></ol>|
+| 查询 P95 延时超过 200 ms | <ol><li>排查慢查询：前往 Slow Query 页面，并按最近时间范围进行筛选，以识别新引入的查询或运行变慢的查询。</li><li>检查最近的变更，例如应用部署、数据库模式变更或数据导入任务，这些变更可能影响了流量模式。</li></ol><br/>如果你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 查询 P99 延时超过 200 ms | <ol><li>排查慢查询：前往 Slow Query 页面，并按最近时间范围进行筛选，以识别新引入的查询或运行变慢的查询。</li><li>检查最近的变更，例如应用部署、数据库模式变更或数据导入任务，这些变更可能影响了流量模式。</li></ol><br/>如果你无法确定根因，请立即联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 请求错误率超过 10%  | 查看最近的错误以及集群整体的语句执行状态。|
+| 1 分钟内超过 20 条 SQL 语句的延时超过 256 ms 阈值 | 检查最近是否有数据库模式或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 1 分钟内超过 20 条 SQL 语句的延时超过 512 ms 阈值 | 检查最近是否有数据库模式或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+| 1 分钟内超过 20 条 SQL 语句的延时超过 4,096 ms 阈值 | 检查最近是否有数据库模式或索引变更。查看 TiDB Cloud 控制台中的慢查询列表。对应的慢查询记录可能需要几分钟后才会出现。如果你无法确定根因，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。|
+
+### {{{ .byoc }}} 的 Resource Pool vCPU 限制告警 {#resource-pool-vcpu-limit-alerts-for-byoc}
+
+这些告警用于指示资源池的进一步扩展容量受限，或者扩展操作被其 **Pool vCPU Limit** 阻止。
+
+分配百分比是指资源池中所有实例的所有数据库相关资源已分配 vCPU 总量除以 **Pool vCPU Limit**。Admin 和 Observability 节点的 vCPU 不计入其中。这些告警仅在配置了 **Pool vCPU Limit** 时适用。
+
+| 告警 | 条件 | 建议操作 |
+|:---|:---|:---|
+| Resource Pool vCPU 分配过高 | 分配比例在配置的持续时间内保持在配置阈值或以上。默认值为 10 分钟内达到 80%。 | 查看资源池中各实例最近的工作负载变化和容量使用情况。如果需要额外的扩展容量，请提高 **Pool vCPU Limit**。如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。 |
+| Resource Pool vCPU 分配接近上限 | 分配比例在配置的持续时间内保持在配置阈值或以上。默认值为 5 分钟内达到 95%。 | 提高 **Pool vCPU Limit**。查看资源池中各实例的容量使用情况，并排查最近的流量激增、导入任务或异常工作负载变化。如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。 |
+| Resource Pool 扩缩容因 vCPU 限制而被阻止 | 由于请求的容量会超过 **Pool vCPU Limit**，扩展操作被拒绝。 | 提高 **Pool vCPU Limit** 或减少不必要的已分配容量。查看资源池中各实例的工作负载和容量使用情况。如果你无法解决该问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。 |
+
+这两个分配类告警默认启用。你可以在每个实例的 **Edit Rules** 页面更改其阈值和持续时间，或将其禁用。**Resource Pool vCPU allocation is high** 的阈值必须低于 **Resource Pool vCPU allocation is approaching the limit** 的阈值。设置按实例生效，而分配比例则是在共享资源池范围内进行度量。
+
+**Resource Pool scaling was blocked by the vCPU limit** 不能被禁用。它表示共享资源池中的某个扩展请求因会超过 **Pool vCPU Limit** 而被拒绝。即使是同一资源池中的另一个实例发起了被阻止的扩展操作，此告警也可能出现在某个实例的 **Alerts** 页面上。
+
+### {{{ .byoc }}} 的 Changefeed 告警 {#changefeed-alerts-for-byoc}
+
+| 条件 | 建议操作 |
+|:---|:---|
+| Changefeed 延时超过 600 秒 | 在 TiDB Cloud 控制台的 **Changefeed** 页面和 **Changefeed Detail** 页面检查 changefeed 状态，你可以在这些页面找到一些错误信息以帮助诊断问题。<br/>可能触发该告警的原因包括：<ul><li>上游整体流量增加，导致现有 changefeed 规格无法承载。如果流量增加是暂时的，changefeed 延时会在流量恢复正常后自动恢复。如果流量持续增加，则需要扩展 changefeed。</li><li>下游或网络异常，此时应先排查并解决异常。</li><li>如果下游为 RDS，表缺少索引，可能导致写入性能低、延时高，此时需要为上游或下游添加必要索引。</li></ul>如果你无法自行解决问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 获取进一步协助。 |
 | Changefeed 状态为 `FAILED`                 | 在 TiDB Cloud 控制台的 **Changefeed** 页面和 **Changefeed Detail** 页面检查 changefeed 状态，你可以在这些页面找到一些错误信息以帮助诊断问题。<br/>如果你无法自行解决问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 获取进一步协助。|
 | Changefeed 状态为 `WARNING`              | 在 TiDB Cloud 控制台的 **Changefeed** 页面和 **Changefeed Detail** 页面检查 changefeed 状态，你可以在这些页面找到一些错误信息以帮助诊断问题。<br/>如果你无法自行解决问题，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md) 获取进一步协助。|
 

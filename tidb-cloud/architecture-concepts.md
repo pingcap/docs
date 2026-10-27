@@ -134,6 +134,12 @@ TiDB Cloud Lake 在一个平台中支持 ANSI SQL、半结构化数据处理、�
 
 更多详情，请参见 [TiDB Cloud Lake Overview](https://docs.pingcap.com/tidbcloudlake/lake-overview/)。
 
+## TiDB Cloud Filesystem {#tidb-cloud-filesystem}
+
+TiDB Cloud Filesystem 提供持久、共享的文件存储，独立于访问它的机器和进程。你可以使用 `ti fs` 命令访问文件，或将文件系统挂载为本地目录，而无需预配或管理 TiDB 数据库。
+
+更多详细信息，请参见 [TiDB Cloud Filesystem](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/)。
+
 ## TiDB Cloud 控制台
 
 [TiDB Cloud 控制台](https://tidbcloud.com/) 是 TiDB Cloud 资源的基于 Web 的管理界面。你可以通过该平台管理 TiDB Cloud 资源、导入或迁移数据、监控性能指标、配置备份、设置安全控制，并与其他云服务集成，所有操作均可在一个用户友好的平台上完成。

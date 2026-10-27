@@ -5,15 +5,9 @@ summary: 了解 TiDB Cloud 的 AI 功能。
 
 # AI 功能
 
-TiDB Cloud 的 AI 功能使你能够充分利用先进技术进行数据探索、搜索和集成。从基于自然语言驱动的 SQL 查询生成，到高性能向量搜索，TiDB 将数据库能力与现代 AI 功能相结合，为创新应用提供动力。TiDB 支持主流 AI 框架、embedding 模型，并可与 ORM 库无缝集成，为语义搜索和 AI 驱动分析等场景提供了多样化的平台。
+TiDB Cloud 的 AI 功能使你能够充分利用先进技术进行数据探索、搜索和集成。TiDB 将数据库能力与现代 AI 功能相结合，为创新应用提供动力。TiDB 支持主流 AI 框架、嵌入模型，并可与 ORM 库无缝集成，为语义搜索和 AI 驱动分析等场景提供了多样化的平台。
 
 本文档将重点介绍这些 AI 功能及其如何提升 TiDB 体验。
-
-## Chat2Query（PREVIEW） {#chat2query-preview}
-
-Chat2Query 是集成在 SQL Editor 中的 AI 驱动功能，能够帮助用户通过自然语言指令生成、调试或重写 SQL 查询。更多信息，参见 [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)。
-
-此外，TiDB Cloud 为 TiDB Cloud Starter 实例提供了 Chat2Query API。启用后，TiDB Cloud 会自动创建一个名为 Chat2Query 的系统 Data App，以及一个 Data Service 中的 Chat2Data endpoint。你可以调用该 endpoint，通过提供指令让 AI 生成并执行 SQL 语句。更多信息，参见 [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
 
 ## 向量搜索（PREVIEW） {#vector-search-preview}
 

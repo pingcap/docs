@@ -36,15 +36,15 @@ summary: 了解如何通过不同方法连接到你的 TiDB Cloud Dedicated 集�
 
         如果你需要更低的延时和更高的安全性，可以设置 VPC Peering，并通过你云账户中相应云服务商的 VM 实例使用私有端点进行连接。更多信息请参阅 [Connect to TiDB Cloud Dedicated via VPC Peering](/tidb-cloud/set-up-vpc-peering-connections.md)。
 
-- [内置 SQL 编辑器](/tidb-cloud/explore-data-with-chat2query.md)
+- [内置 SQL 编辑器](/tidb-cloud/explore-data-with-sql-editor.md)
 
     > **注意：**
     >
     > 如需在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用 SQL 编辑器，请联系 [TiDB Cloud support](/tidb-cloud/tidb-cloud-support.md)。
 
-    如果你的集群托管在 AWS 且 TiDB 版本为 v6.5.0 或更高版本，你可以在 [TiDB Cloud 控制台](https://tidbcloud.com/)中使用 AI 辅助的 SQL 编辑器，最大化数据价值。
+    如果你的集群托管在 AWS 且 TiDB 版本为 v6.5.0 或更高版本，你可以在 [TiDB Cloud 控制台](https://tidbcloud.com/)中使用 SQL 编辑器，最大化数据价值。
 
-    在 SQL 编辑器中，你可以手动编写 SQL 查询语句，或直接在 macOS 上按 <kbd>⌘</kbd> + <kbd>I</kbd>（或在 Windows 或 Linux 上按 <kbd>Control</kbd> + <kbd>I</kbd>），让 [Chat2Query (PREVIEW)](/tidb-cloud/tidb-cloud-glossary.md#chat2query) 自动生成 SQL 查询语句。这样你无需本地 SQL 客户端即可对数据库执行 SQL 查询。你可以直观地以表格或图表形式查看查询结果，并轻松查看查询日志。
+    在 SQL 编辑器中，你可以编写并运行 SQL 查询。这样你无需本地 SQL 客户端即可对数据库执行 SQL 查询。你可以直观地以表格或图表形式查看查询结果，并轻松查看查询日志。
 
 ## 后续操作
 

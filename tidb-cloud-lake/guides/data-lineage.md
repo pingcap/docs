@@ -105,6 +105,16 @@ REFRESH LINEAGE FOR ALL VIEWS;
 
 刷新操作会为 `default` catalog 中的所有视图校正血缘信息。它只会报告需要变更或无法处理的视图；未发生变化的视图不会显示。该命令需要全局 `SUPER` 权限。有关输出详情，请参见 [`REFRESH LINEAGE`](/tidb-cloud-lake/sql/refresh-lineage.md)。
 
+## 导出到 OpenMetadata {#export-to-openmetadata}
+
+要在 [OpenMetadata](https://open-metadata.org) 中查看 {{{ .lake }}} 血缘，请使用 [lake-openmetadata-ingestion](https://github.com/tidbcloud/lake-openmetadata-ingestion)。该工具通过 REST API 将 {{{ .lake }}} 中的元信息（数据库、表、视图和列）和血缘（表级别和列级别）推送到 OpenMetadata。有关安装、配置和使用方法，请参阅该项目的 [README](https://github.com/tidbcloud/lake-openmetadata-ingestion)。
+
+> **注意：**
+>
+> - 该工具当前仅支持元信息和血缘导入。
+> - 对于初始同步，请先运行 `lake-om -c config.yaml metadata` 直至完成，然后运行 `lake-om -c config.yaml lineage --full`。如果某条血缘边的任一端点在 OpenMetadata 中尚不存在，则会跳过该血缘边。
+> - 对于持续同步，请调度 cron 或 Airflow 工作流，先运行 `lake-om -c config.yaml metadata` 直至完成，再运行 `lake-om -c config.yaml lineage`。长时间中断后，请运行 `lake-om -c config.yaml lineage --full`。
+
 ## 限制 {#limitations}
 
 - `GET_LINEAGE` 最多只能遍历五跳。

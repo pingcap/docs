@@ -23,12 +23,6 @@ ACID 指的是事务的四个关键属性：原子性（atomicity）、一致性
 
 ## C
 
-### Chat2Query
-
-Chat2Query 是集成在 SQL Editor 中的 AI 驱动功能，帮助用户通过自然语言指令生成、调试或重写 SQL 查询。更多信息，参见 [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md)。
-
-此外，TiDB Cloud 为托管在 AWS 上的 TiDB Cloud Starter 实例提供 Chat2Query API。启用后，TiDB Cloud 会自动创建一个名为 **Chat2Query** 的系统 Data App，并在 Data Service 中创建一个 Chat2Data endpoint。你可以调用该 endpoint，通过指令让 AI 生成并执行 SQL 语句。更多信息，参见 [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)。
-
 ### Cluster
 
 在 TiDB Cloud 中，cluster 是一种专用云部署，包含明确的基础设施细节，例如节点拓扑、实例类型、存储配置和扩缩容模型。
@@ -154,7 +148,7 @@ project members 是被邀请加入 organization 下一个或多个 project 的�
 
 - TiDB Region
 
-    TiDB 中数据的基本单元。TiKV 将 Key-Value 空间划分为一系列连续的 Key 段，每个段称为 Region。每个 Region 的默认大小上限为 96 MB，可配置。
+    TiDB 中数据的基本单元。TiKV 将 Key-Value 空间划分为一系列连续的 Key 段，每个段称为 Region。默认情况下，[新切分 Region 的预估大小](https://docs.pingcap.com/tidb/stable/tikv-configuration-file/#region-split-size) 在 TiDB v8.4.0 及以上版本中为 256 MiB，在早于 v8.4.0 的 TiDB 版本中为 96 MiB。
 
 ### replica
 

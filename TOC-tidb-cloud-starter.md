@@ -135,15 +135,11 @@
     - [排查从 Amazon S3 导入数据期间的访问被拒绝错误](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - 探索数据
-  - [SQL 编辑器中的 Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL 编辑器](/tidb-cloud/explore-data-with-sql-editor.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL 代理账户](/tidb-cloud/sql-proxy-account.md)
 - 数据服务 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/data-service-overview.md)
   - [快速上手](/tidb-cloud/data-service-get-started.md)
-  - Chat2Query API
-    - [快速上手](/tidb-cloud/use-chat2query-api.md)
-    - [启动多轮 Chat2Query](/tidb-cloud/use-chat2query-sessions.md)
-    - [使用知识库](/tidb-cloud/use-chat2query-knowledge.md)
   - [管理数据应用](/tidb-cloud/data-service-manage-data-app.md)
   - [管理端点](/tidb-cloud/data-service-manage-endpoint.md)
   - [API 密钥](/tidb-cloud/data-service-api-key.md)

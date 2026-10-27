@@ -171,15 +171,11 @@
     - [数据迁移的预检查错误、迁移错误和警报](/tidb-cloud/tidb-cloud-dm-precheck-and-troubleshooting.md)
     - [将 AWS DMS 连接到 TiDB Cloud](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - 探索数据
-  - [SQL 编辑器中的 Chat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL 编辑器](/tidb-cloud/explore-data-with-sql-editor.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQL 代理账户](/tidb-cloud/sql-proxy-account.md)
 - 数据服务 ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概述](/tidb-cloud/data-service-overview.md)
   - [快速上手](/tidb-cloud/data-service-get-started.md)
-  - Chat2Query API
-    - [快速上手](/tidb-cloud/use-chat2query-api.md)
-    - [启动多轮 Chat2Query](/tidb-cloud/use-chat2query-sessions.md)
-    - [使用知识库](/tidb-cloud/use-chat2query-knowledge.md)
   - [管理数据应用](/tidb-cloud/data-service-manage-data-app.md)
   - [管理端点](/tidb-cloud/data-service-manage-endpoint.md)
   - [API 密钥](/tidb-cloud/data-service-api-key.md)
@@ -627,7 +623,7 @@
   - [Connected Care 概述](/tidb-cloud/connected-care-overview.md)
   - [Connected Care 详情](/tidb-cloud/connected-care-detail.md)
   - Connected Care 支持服务
-    - [Connected：Clinic 服务](/tidb-cloud/tidb-cloud-clinic.md)
+    - [已连接：诊所服务](/tidb-cloud/tidb-cloud-clinic.md)
     - [Connected：IM 中的 AI 聊天](/tidb-cloud/connected-ai-chat-in-im.md)
     - Connected：通过 IM 订阅 TiDB Cloud 告警
       - [通过 Slack 订阅](/tidb-cloud/monitor-alert-slack.md)
