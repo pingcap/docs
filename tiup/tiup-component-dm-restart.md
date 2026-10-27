@@ -17,13 +17,13 @@ The command `tiup dm restart` is used to restart all or some of the services of 
 tiup dm restart <cluster-name> [flags]
 ```
 
-`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [cluster list](/tiup/tiup-component-cluster-list.md) command.
+`<cluster-name>`: the name of the cluster to operate on. If you forget the cluster name, you can check it with the [tiup dm list](/tiup/tiup-component-dm-list.md) command.
 
 ## Options
 
 ### -N, --node
 
-- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
+- Specifies the nodes to be restarted. The value of this option is a comma-separated list of node IDs. You can get the node IDs from the first column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
 - Data type: `STRING`
 - If this option is not specified, TiUP restarts all nodes by default.
 
@@ -33,7 +33,7 @@ tiup dm restart <cluster-name> [flags]
 
 ### -R, --role
 
-- Specifies the roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the `[tiup dm display](/tiup/tiup-component-dm-display.md)` command.
+- Specifies the roles of nodes to be restarted. The value of this option is a comma-separated list of the roles of the nodes. You can get the roles of the nodes from the second column of the cluster status table returned by the [`tiup dm display`](/tiup/tiup-component-dm-display.md) command.
 - Data type: `STRING`
 - If this option is not specified, TiUP restarts nodes of all roles by default.
 
