@@ -31,7 +31,7 @@ Before deleting the machine or its local cache, use `ti fs read-file` to verify 
 
 See [Supported regions](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions) for the current list. File system availability differs from TiDB Cloud Starter availability.
 
-When creating a file system through the CLI, select a supported region with `ti configure`, or override the configured default for the command with `--region`. For the creation workflow, see [Get Started with TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md).
+When creating a file system through the CLI, select a supported region with `ti configure`, or override the configured default for the command with `--region`. For the creation workflow, see [Get Started with TiDB Cloud Filesystem via CLI](/tidb-cloud-filesystem/filesystem-quick-start.md).
 
 ## Can I mount a file system on my laptop?
 

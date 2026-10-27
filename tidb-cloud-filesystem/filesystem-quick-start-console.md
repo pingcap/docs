@@ -23,7 +23,7 @@ This quick start guide walks you through how to create a file system via the [Ti
 
     > **Tip:**
     >
-    > For organizations without a credit card, the file system limits are fixed. To edit the usage limit, add a credit card to your organization. For more information, see [Manage TiDB Cloud Filesystem Usage Limit](/tidb-cloud-filesystem/manage-filesystem-limits.md).
+    > For organizations without a credit card, the file system limits are fixed. To edit the usage limit, add a credit card to your organization. For more information, see [Manage TiDB Cloud Filesystem Usage Limits](/tidb-cloud-filesystem/manage-filesystem-limits.md).
 
 6. Click **Create**. When the **Your File System is Ready!** dialog appears, keep the dialog open for the next step.
 
