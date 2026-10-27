@@ -66,7 +66,7 @@ The meaning of each parameter is as follows:
 
 ### --hide
 
-- Specifies whether the component is hidden. If it is a hidden component, it can be seen in the result list of `tiup list -all`, but not in that of `tiup list`.
+- Specifies whether the component is hidden. If it is a hidden component, it can be seen in the result list of `tiup list --all`, but not in that of `tiup list`.
 - Data type: `STRING`
 - Default: NULL
 
