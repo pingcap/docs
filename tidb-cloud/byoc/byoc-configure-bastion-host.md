@@ -26,7 +26,7 @@ TiDB Cloud は、承認されたトラブルシューティングおよびメン
     - {{{ .byoc }}} 環境がデプロイされている AWS リージョン ID。
     - TiDB および可観測性の EKS クラスター名。
     - デプロイする踏み台ホスト用の Tailscale 認証キー。
-    - Single-AZ デプロイメントの場合、TiDB および可観測性 EKS クラスターのサブネット ID。
+    - Single-AZ デプロイの場合、TiDB および可観測性 EKS クラスターのサブネット ID。
 
 ## 踏み台ホストをデプロイする {#deploy-bastion-hosts}
 
@@ -77,7 +77,7 @@ TiDB Cloud は、承認されたトラブルシューティングおよびメン
     - `bastions`: 踏み台ホストの設定。`tidb` と `o11y` の踏み台ホストを設定できます。
     - `<bastion_type>.eks_cluster_name`: 踏み台ホストの種類に対応する EKS クラスター名。たとえば `tidb.eks_cluster_name` または `o11y.eks_cluster_name`。
     - `<bastion_type>.auth_key`: TiDB Cloud から提供される Tailscale 認証キー。
-    - `<bastion_type>.subnet_id`: Single-AZ デプロイメントでのみ使用する、対応する EKS クラスターのサブネット ID。
+    - `<bastion_type>.subnet_id`: Single-AZ デプロイでのみ使用する、対応する EKS クラスターのサブネット ID。
 
     次の例では、TiDB と可観測性の両方に対して踏み台ホストを設定しています。
 

@@ -43,7 +43,7 @@ summary: TiDB Cloud はフルマネージドの Database-as-a-Service (DBaaS) �
 
 [IAM 権限を設定する](https://docs.pingcap.com/ja/tidbcloud/byoc-configure-iam-permissions/?plan=byoc)
 
-[リージョンの自動デプロイ](https://docs.pingcap.com/ja/tidbcloud/byoc-automated-deployment/?plan=byoc)
+[自動リージョンデプロイ](https://docs.pingcap.com/ja/tidbcloud/byoc-automated-deployment/?plan=byoc)
 
 [サービスを初期化する](https://docs.pingcap.com/ja/tidbcloud/byoc-initialize-service/?plan=byoc)
 
