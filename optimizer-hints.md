@@ -471,7 +471,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 
 `INDEX_LOOKUP_PUSHDOWN`ヒントには現在次の制限があります。
 
-- キャッシュされたテーブルと一時テーブルはサポートされていません。
+- キャッシュテーブルと一時テーブルはサポートされていません。
 - [グローバルインデックス](/global-indexes.md)を使用したクエリはサポートされていません。
 - [多値インデックス](/choose-index.md#use-multi-valued-indexes)を使用したクエリはサポートされていません。
 - `REPEATABLE-READ`以外の分離レベルはサポートされていません。

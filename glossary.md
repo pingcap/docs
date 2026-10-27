@@ -51,7 +51,7 @@ TiDBでは、 `br`はバックアップまたはリストアに使用される[b
 
 ## <a id="C" class="letter" href="#C">C</a> {#c}
 
-### キャッシュされたテーブル（Cached Table） {#cached-table}
+### キャッシュテーブル（Cached Table） {#cached-table}
 
 キャッシュテーブル機能を使用すると、TiDBはテーブル全体のデータをTiDBサーバーのメモリにロードし、TiKVにアクセスすることなくメモリから直接テーブルデータを取得するため、読み取りパフォーマンスが向上します。
 
@@ -79,7 +79,7 @@ RocksDBとTiKVでは、カラムファミリー（CF）は、データベース�
 
 共通テーブル式 (CTE) を使用すると、 [`WITH`](/sql-statements/sql-statement-with.md)句を使用して SQL文内で複数回参照できる一時的な結果セットを定義できます。これにより、文の可読性と実行効率が向上します。詳細については、 [共通テーブル式](/develop/dev-guide-use-common-table-expression.md)を参照してください。
 
-### 継続的なプロファイリング（Continuous Profiling） {#continuous-profiling}
+### 継続的プロファイリング（Continuous Profiling） {#continuous-profiling}
 
 継続的プロファイリングは、システムコールレベルでのリソースオーバーヘッドを監視する方法です。継続的プロファイリングを使用すると、TiDB はパフォーマンスの問題をきめ細かく監視し、フレームグラフを使用して運用チームが根本原因を特定するのに役立ちます。詳細については、 [TiDB Dashboardインスタンスプロファイリング - 継続的プロファイリング](/dashboard/continuous-profiling.md)を参照してください。
 
@@ -199,7 +199,7 @@ Raftグループ（ [ピア](#regionpeerraft-group)構成）では、Leader、Fo
 
 ### 超並列処理（MPP） {#massively-parallel-processing-mpp}
 
-TiDBはv5.0以降、 TiFlashノードを介して大規模並列処理（MPP）アーキテクチャを導入し、大規模な結合クエリの実行ワークロードをTiFlashノード間で共有します。MPPモードが有効になっている場合、TiDBはコストに基づいて、計算を実行するためにMPPフレームワークを使用するかどうかを決定します。MPPモードでは、結合キーは計算中にExchange操作によって再分配され、計算負荷が各TiFlashノードに分散され、計算が高速化されます。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
+TiDBはv5.0以降、 TiFlashノードを介して超並列処理（MPP）アーキテクチャを導入し、大規模な結合クエリの実行ワークロードをTiFlashノード間で共有します。MPPモードが有効になっている場合、TiDBはコストに基づいて、計算を実行するためにMPPフレームワークを使用するかどうかを決定します。MPPモードでは、結合キーは計算中にExchange操作によって再分配され、計算負荷が各TiFlashノードに分散され、計算が高速化されます。詳細については、 [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)を参照してください。
 
 ### マルチバージョン同時実行制御 (MVCC) {#multi-version-concurrency-control-mvcc}
 

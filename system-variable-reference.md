@@ -3837,7 +3837,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [キャッシュされたテーブル](/cached-tables.md)
+- [キャッシュテーブル](/cached-tables.md)
 - [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
 - [FLUSH TABLES](/sql-statements/sql-statement-flush-tables.md)
 - [IMPORT INTO](/sql-statements/sql-statement-import-into.md)
@@ -4063,7 +4063,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [キャッシュされたテーブル](/cached-tables.md)
+- [キャッシュテーブル](/cached-tables.md)
 - [システム変数](/system-variables.md#tidb_table_cache_lease-new-in-v600)
 - [TiDB 6.0.0 リリースノート](/releases/release-6.0.0-dmr.md)
 

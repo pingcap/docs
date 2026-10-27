@@ -47,7 +47,7 @@ TiDB バージョン: 6.1.0
 
 ### 可観測性 {#observability}
 
-- 継続的なプロファイリングは、ARMアーキテクチャとTiFlash をサポートします。
+- 継続的プロファイリングは、ARMアーキテクチャとTiFlash をサポートします。
 
     [ユーザードキュメント](/dashboard/continuous-profiling.md)
 

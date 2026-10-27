@@ -74,9 +74,9 @@ summary: TiDBのシステムテーブルについて学びましょう。
 - `gc_delete_range` : 削除する KV 範囲
 - `gc_delete_range_done` : 削除された KV 範囲
 
-## キャッシュされたテーブルに関連するシステムテーブル {#system-tables-related-to-cached-tables}
+## キャッシュテーブルに関連するシステムテーブル {#system-tables-related-to-cached-tables}
 
-- `table_cache_meta`は、キャッシュされたテーブルのメタデータを保存します。
+- `table_cache_meta`は、キャッシュテーブルのメタデータを保存します。
 
 ## TTL関連のシステムテーブル {#ttl-related-system-tables}
 

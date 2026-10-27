@@ -33,4 +33,4 @@
 - [SaaS マルチテナントシナリオで数百万のテーブルを処理](/best-practices/saas-best-practices.md)
 - [高同時実行書き込みの処理](/best-practices/high-concurrency-best-practices.md)
 - [大規模リージョンで TiKV のパフォーマンスをチューニングする](/best-practices/massive-regions-best-practices.md)
-- [PDスケジュールの調整](/best-practices/pd-scheduling-best-practices.md)
+- [PDスケジューリングの調整](/best-practices/pd-scheduling-best-practices.md)

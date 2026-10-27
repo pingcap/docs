@@ -195,7 +195,7 @@
     - [リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)
     - インスタンスプロファイリング
       - [手動プロファイリング](/dashboard/dashboard-profiling.md)
-      - [継続的なプロファイリング](/dashboard/continuous-profiling.md)
+      - [継続的プロファイリング](/dashboard/continuous-profiling.md)
     - セッション管理と設定
       - [セッションを共有](/dashboard/dashboard-session-share.md)
       - [SSOの設定](/dashboard/dashboard-session-sso.md)
@@ -868,7 +868,7 @@
     - [ビュー](/views.md)
     - [パーティショニング](/partitioned-table.md)
     - [一時テーブル](/temporary-tables.md)
-    - [キャッシュされたテーブル](/cached-tables.md)
+    - [キャッシュテーブル](/cached-tables.md)
     - [外部キー制約](/foreign-key.md)
     - [テーブルレベルのデータ親和性](/table-affinity.md)
     - 文字セットと照合順序
