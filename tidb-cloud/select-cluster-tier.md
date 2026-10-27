@@ -166,6 +166,6 @@ TiDB Cloud Lake 在一个平台中支持 ANSI SQL、半结构化数据处理、�
 
 ## TiDB Cloud Filesystem {#tidb-cloud-filesystem}
 
-TiDB Cloud Filesystem 是一个持久化、共享的云文件系统，适用于应用程序、自动化和 AI 代理。当文件需要在不同会话和环境之间保持可用，或者多个用户或工作负载需要以受控方式访问同一组文件时，可以使用它。你无需预配或管理 TiDB 数据库即可使用它。
+TiDB Cloud Filesystem 是一个面向应用程序、自动化流程和 AI 代理的持久化共享云文件系统。当文件需要在不同会话和环境之间保持可用，或者多个用户或工作负载需要以受控方式访问同一组文件时，可以使用它。你无需预配或管理 TiDB 数据库即可使用它。
 
 TiDB Cloud Filesystem 目前处于公测阶段。更多信息，请参见 [TiDB Cloud Filesystem 文档](https://docs.pingcap.com/tidbcloud-filesystem/filesystem-intro/)。

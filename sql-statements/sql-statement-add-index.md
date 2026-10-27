@@ -97,7 +97,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 > **注意：**
 >
-> 从 v8.5.7 开始，TiDB Self-Managed 和 TiDB Cloud Dedicated 支持部分索引；从 CLOUD.202603.1 开始，TiDB Cloud Essential 和 Premium 支持部分索引。
+> TiDB Self-Managed 和 TiDB Cloud Dedicated 从 v8.5.7 开始支持部分索引，TiDB Cloud Essential 和 Premium 从 CLOUD.202603.1 开始支持部分索引。
 
 部分索引是建立在表中部分行上的索引。添加部分索引时，你可以指定一个条件表达式（也称为谓词）来定义这部分行。索引仅包含满足该谓词的行的条目。
 

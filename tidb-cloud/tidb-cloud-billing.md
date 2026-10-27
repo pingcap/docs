@@ -37,7 +37,7 @@ TiDB Cloud 根据你所消耗的资源进行收费。
 
 ### TiDB Cloud Filesystem 的定价 {#pricing-for-tidb-cloud-filesystem}
 
-TiDB Cloud Filesystem 对读、写、存储和互联网出口流量采用按量付费定价，并提供按月计算的免费额度，该额度在你组织的各个文件系统和 Region 之间共享。有关详细信息，请参见 [TiDB Cloud Filesystem 定价详情](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)。
+TiDB Cloud Filesystem 对读、写、存储和互联网出口流量采用按量付费定价，并提供按月计算的免费额度，该额度在你组织的各个文件系统和 Region 之间共享。详情请参见 [TiDB Cloud Filesystem Pricing Details](https://www.pingcap.com/tidb-cloud-filesystem-pricing-details/)。
 
 ## 发票 {#invoices}
 

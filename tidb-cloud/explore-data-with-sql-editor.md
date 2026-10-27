@@ -1,10 +1,10 @@
 ---
-title: 使用 SQL Editor（Preview）探索你的数据
+title: 使用 SQL Editor (PREVIEW) 探索你的数据
 summary: 了解如何在 TiDB Cloud 控制台中使用 SQL Editor 编写和运行 SQL 查询、管理 SQL 文件以及查看查询结果。
 aliases: ['/zh/tidbcloud/explore-data-with-chat2query','/zh/tidbcloud/use-chat2query-api','/zh/tidbcloud/use-chat2query-knowledge','/zh/tidbcloud/use-chat2query-sessions']
 ---
 
-# 使用 SQL Editor（Preview）探索你的数据
+# 使用 SQL Editor (PREVIEW) 探索你的数据
 
 你可以使用 [TiDB Cloud 控制台](https://tidbcloud.com/)内置的 SQL Editor，最大化挖掘数据价值。
 
@@ -19,7 +19,7 @@ SQL Editor 的推荐使用场景如下：
 
 ## 限制 {#limitations}
 
-- SQL Editor 目前对托管在 AWS 上的 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例处于公测阶段。要在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用 SQL Editor，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
+- SQL Editor 目前处于公测阶段，可以在 AWS 上的 [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) 实例上使用。如需在 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) 集群上使用 SQL Editor，请联系 [TiDB Cloud 支持](/tidb-cloud/tidb-cloud-support.md)。
 
 ## 访问 SQL Editor {#access-sql-editor}
 

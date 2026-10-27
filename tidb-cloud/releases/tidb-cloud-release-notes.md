@@ -16,7 +16,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
     - [SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor/?plan=starter&compatibility=mysql) 和 [Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview/?plan=starter&compatibility=mysql) 不再支持 Chat2Query。
 
-        从 2026 年 10 月 20 日起，TiDB Cloud 不再在 SQL Editor 和 Data Service 中支持 Chat2Query。此变更仅影响 Chat2Query 和 Chat2Query API。SQL Editor 和 Data Service 中的所有其他功能仍然可用。
+        从 2026 年 10 月 20 日起，TiDB Cloud 不再在 SQL Editor 和 Data Service 中提供 Chat2Query 功能。此变更仅影响 Chat2Query 和 Chat2Query API。SQL Editor 和 Data Service 中的所有其他功能仍然可用。
 
 - **TiDB Cloud Essential and Premium**
 
