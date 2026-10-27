@@ -14,7 +14,7 @@ This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-c
 
 - **TiDB Cloud Essential**
 
-    - TiDB Cloud Essential now supports **Regional High Availability** in `Tokyo (ap-northeast-1)`, with support for additional regions rolling out gradually.
+    - TiDB Cloud Essential now supports **Regional High Availability** (public preview) in `Tokyo (ap-northeast-1)`, with support for additional regions rolling out gradually.
 
         When creating a new TiDB Cloud Essential instance in a supported region, you can choose between **Zonal** (single Availability Zone) and **Regional** (multiple Availability Zones) high availability.
 
