@@ -23,12 +23,6 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ## C
 
-### Chat2Query
-
-Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
-
-In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
-
 ### Cluster
 
 In TiDB Cloud, a cluster is a dedicated cloud deployment that includes explicit infrastructure details such as node topology, instance types, storage configuration, and scaling model.
@@ -154,7 +148,7 @@ Currently, only the following types of TiDB Cloud resources support the Recycle 
 
 - TiDB Region
 
-    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. The default size limit for each Region is 96 MB and can be configured.
+    The basic unit of data in TiDB. TiKV divides the Key-Value space into a series of consecutive Key segments, and each segment is called a Region. By default, the [estimated size for a newly split Region](https://docs.pingcap.com/tidb/stable/tikv-configuration-file/#region-split-size) is 256 MiB for TiDB v8.4.0 and later versions, and 96 MiB for TiDB versions earlier than v8.4.0.
 
 ### replica
 

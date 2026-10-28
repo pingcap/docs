@@ -19,7 +19,7 @@ Data Service returns an HTTP response with a JSON body.
 
 The response body contains the following fields:
 
-- `type`: _string_. The type of this endpoint. The value might be `"sql_endpoint"` or `"chat2data_endpoint"`. Different endpoints return different types of responses.
+- `type`: _string_. The type of this endpoint. The value is `"sql_endpoint"`.
 - `data`: _object_. The execution results, which include three parts:
 
     - `columns`: _array_. Schema information for the returned fields.
@@ -33,9 +33,6 @@ The response body contains the following fields:
     - `result`: _object_. The execution-related information of the SQL statement, including success/failure status, execution time, number of rows returned, and user configuration.
 
 An example response is as follows:
-
-<SimpleTab>
-<div label="SQL Endpoint">
 
 ```json
 {
@@ -69,51 +66,6 @@ An example response is as follows:
     }
 }
 ```
-
-</div>
-
-<div label="Chat2Data Endpoint">
-
-```json
-{
-  "type": "chat2data_endpoint",
-  "data": {
-    "columns": [
-      {
-        "col": "id",
-        "data_type": "BIGINT",
-        "nullable": false
-      },
-      {
-        "col": "type",
-        "data_type": "VARCHAR",
-        "nullable": false
-      }
-    ],
-    "rows": [
-      {
-        "id": "20008295419",
-        "type": "CreateEvent"
-      }
-    ],
-    "result": {
-      "code": 200,
-      "message": "Query OK!",
-      "start_ms": 1678965476709,
-      "end_ms": 1678965476839,
-      "latency": "130ms",
-      "row_count": 1,
-      "row_affect": 0,
-      "limit": 50
-      "sql": "select id,type from sample_data.github_events limit 1;",
-      "ai_latency": "30ms"
-    }
-  }
-}
-```
-
-</div>
-</SimpleTab>
 
 ## Status code
 
@@ -279,9 +231,6 @@ This status code indicates that the request exceeds the rate limit of the API ke
 
 An example response is as follows:
 
-<SimpleTab>
-<div label="SQL Endpoint">
-
 ```json
 {
   "type": "",
@@ -301,33 +250,6 @@ An example response is as follows:
   }
 }
 ```
-
-</div>
-
-<div label="Chat2Data Endpoint">
-
-```json
-{
-  "type": "chat2data_endpoint",
-  "data": {
-    "columns": [],
-    "rows": [],
-    "result": {
-      "code": 429,
-      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://tidb.support.pingcap.com/",
-      "start_ms": "",
-      "end_ms": "",
-      "latency": "",
-      "row_count": 0,
-      "row_affect": 0,
-      "limit": 0
-    }
-  }
-}
-```
-
-</div>
-</SimpleTab>
 
 ### 500
 

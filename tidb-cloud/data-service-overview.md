@@ -17,12 +17,6 @@ An endpoint in Data Service is a web API that you can customize to execute SQL s
 
 To manage endpoints more efficiently, you can use Data Apps. A Data App in Data Service is a collection of endpoints that you can use to access data for a specific application. By creating a Data App, you can group your endpoints and configure authorization settings using API keys to restrict access to endpoints. In this way, you can ensure that only authorized users can access and manipulate your data, making your application more secure.
 
-> **Tip:**
->
-> TiDB Cloud provides a Chat2Query API for TiDB clusters. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
->
-> For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
-
 ## Scenarios
 
 Data Service allows you to seamlessly integrate TiDB Cloud with any application or service that is compatible with HTTPS. The following are some typical usage scenarios:
@@ -35,6 +29,5 @@ Data Service allows you to seamlessly integrate TiDB Cloud with any application 
 ## What's next
 
 - [Get Started with Data Service](/tidb-cloud/data-service-get-started.md)
-- [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 - [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md)
 - [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md)

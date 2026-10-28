@@ -30,8 +30,8 @@ ti fs list-file-system-tokens
 - `--fs-token <string>`: Authorize the request with a file system owner token. If omitted, the command uses the `TI_FS_TOKEN` environment variable. If neither is provided, the command requires TiDB Cloud API credentials and `--file-system-id`. It does not automatically use a locally stored owner token. Scoped tokens cannot list token metadata.
 - `--include-expired`: Include expired token metadata. Revoked tokens are not returned by the service.
 - `--help`: Display help information.
-- `--offset <int32>`: Set the zero-based token offset [default: 0].
-- `--limit <int32>`: Set the maximum number of tokens to return, from 1 through 200 [default: 50].
+- `--offset <int32>`: Set the zero-based token offset \[default: 0].
+- `--limit <int32>`: Set the maximum number of tokens to return, from 1 through 200 \[default: 50].
 - `--version`: Display version information.
 
 For options shared by all commands, see [Global options](/ai/ti/reference/ti-cli-reference.md#global-options).
