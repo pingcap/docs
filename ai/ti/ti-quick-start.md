@@ -130,7 +130,7 @@ TiDB Cloud Filesystem は、ローカルマシン、CI ジョブ、サンドボ�
 2. ファイルシステムを使用する環境で、前の手順のオーナートークンを `TI_FS_TOKEN` として設定し、次のようにファイルシステムをローカルパスにマウントします。この環境は、ファイルシステムを作成した同じマシン、別のマシン、または AI エージェントのサンドボックスのいずれでもかまいません。
 
     ```bash
-    # export TI_FS_TOKEN="<owner-token>" # If you are continuing on a different environment as step 1, pass in the TI_FS_TOKEN you get from step 1 here.
+    # export TI_FS_TOKEN="<owner-token>" # If you are continuing in a different environment from step 1, pass in the TI_FS_TOKEN you get from step 1 here.
     mkdir ~/mnt-test
     ti fs mount-file-system --mount-path ~/mnt-test --region aws-us-west-2
     echo 'Hello from TiDB Cloud Filesystem' >> ~/mnt-test/hello.txt

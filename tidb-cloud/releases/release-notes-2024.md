@@ -257,8 +257,6 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     Chat2Query API v3のエンドポイントを使用すると、セッションを利用して複数ラウンドのChat2Queryを開始できます。
 
-    詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。
-
 **コンソールの変更**
 
 - Chat2Query（ベータ版）をSQL Editor（ベータ版）に名称変更します。
@@ -267,8 +265,6 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     - **SQL Editor**： TiDB CloudコンソールでSQLクエリを手動で記述および実行するためのデフォルトインターフェース。
     - **Chat2Query** ：AIを活用したテキストクエリ機能で、自然言語を使ってデータベースと対話し、SQLクエリを生成、書き換え、最適化することができます。
-
-    詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
 
 ## 2024年6月18日 {#june-18-2024}
 

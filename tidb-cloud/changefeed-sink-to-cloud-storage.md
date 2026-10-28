@@ -5,7 +5,7 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 
 # クラウドストレージへのシンク {#sink-to-cloud-storage}
 
-このドキュメントでは、<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC</CustomContent> からクラウドストレージにデータをストリーミングするためのチェンジフィードを作成する方法について説明します。
+このドキュメントでは、<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="essential">TiDB Cloud Essential</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC</CustomContent> からクラウドストレージにデータをストリーミングするためのチェンジフィードを作成する方法について説明します。
 
 <CustomContent plan="dedicated">
 
@@ -16,6 +16,18 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 > - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエスト時のみ利用できます。詳細については、[Changefeed](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
 > - [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
 > - [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc) を参照してください。
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+> **Note:**
+>
+> - {{{ .essential }}} では、changefeed 機能はリクエスト時のみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
+> - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
+> - [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
+> - [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc) を参照してください。
+> - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/) を参照してください。
 
 </CustomContent>
 
@@ -43,7 +55,7 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 
 ## 制限 {#restrictions}
 
-- 各<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOCインスタンス</CustomContent>では、最大 100 個のチェンジフィードを作成できます。
+- 各<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOCインスタンス</CustomContent>では、最大 <CustomContent plan="essential">10</CustomContent><CustomContent plan="dedicated,premium,byoc">100</CustomContent> 個のチェンジフィードを作成できます。
 - TiDB Cloud は TiCDC を使用してチェンジフィードを確立するため、[TiCDC と同じ制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
 - 複製対象のテーブルに主キーまたは NULL を許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
 
@@ -52,6 +64,12 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 <CustomContent plan="dedicated">
 
 対象のTiDB Cloud Dedicatedクラスターの概要ページに移動します。左側のナビゲーションペインで**Data** > **Changefeed**をクリックし、**Create Changefeed**をクリックして**Destination**ページに移動します。次に、TiDB Cloud Dedicatedクラスターがホストされているクラウドプロバイダーに応じて、宛先として**Amazon S3**、**GCS**、または**Azure Blob Storage**を選択します。設定プロセスは、選択した宛先によって異なります。
+
+</CustomContent>
+
+<CustomContent plan="essential">
+
+対象のTiDB Cloud Essentialインスタンスの概要ページに移動します。左側のナビゲーションペインで**Data** > **Changefeed**をクリックし、**Create Changefeed**をクリックして**Destination**ページに移動します。次に、TiDB Cloud Essentialインスタンスがホストされているクラウドプロバイダーに応じて、宛先として**Amazon S3**または**Alibaba Cloud OSS**を選択します。設定プロセスは、選択した宛先によって異なります。
 
 </CustomContent>
 
@@ -76,7 +94,7 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 
 認証にIAMロールを使用するには、以下の手順に従ってください。
 
-1. Amazon S3 の**Destination**ページで、**S3 URI**を入力します。S3 バケットが <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOCインスタンス</CustomContent> と同じ AWS リージョンにあることを確認してください。
+1. Amazon S3 の**Destination**ページで、**S3 URI**を入力します。S3 バケットが <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOCインスタンス</CustomContent> と同じ AWS リージョンにあることを確認してください。
 2. **Bucket Access**で、**AWS Role ARN**を選択します。
 3. 新しい Role ARN を作成するには、**Click here to create new one with AWS CloudFormation**をクリックします。このテンプレートは必要な権限を自動的に設定します。
 
@@ -99,7 +117,7 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 
 access key を使用して認証するには、以下の手順に従ってください。
 
-1. Amazon S3 の**Destination**ページで、**S3 URI**を入力します。S3 バケットが <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent> と同じ AWS リージョンにあることを確認してください。
+1. Amazon S3 の**Destination**ページで、**S3 URI**を入力します。S3 バケットが <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent> と同じ AWS リージョンにあることを確認してください。
 2. **Bucket Access**で、**AWS Access Key**を選択します。
 3. 以下のフィールドに入力します。
 
@@ -213,7 +231,7 @@ access key を使用して認証するには、以下の手順に従ってくだ
 
 </CustomContent>
 
-<CustomContent plan="premium">
+<CustomContent plan="premium,essential">
 
 <div label="Alibaba Cloud OSS">
 
@@ -221,16 +239,33 @@ access key を使用して認証するには、以下の手順に従ってくだ
 
 1. [Alibaba Cloud console](https://www.alibabacloud.com/)で、以下の事前準備を行います。
 
-    1. TiDB Cloud Premiumインスタンスと同じリージョンに OSS バケットを作成します。詳細な手順については、[Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4)を参照してください。
+    1. <CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>と同じリージョンに OSS バケットを作成します。詳細な手順については、[Create a bucket](https://www.alibabacloud.com/help/en/oss/user-guide/create-a-bucket-4)を参照してください。
     2. changefeed 用の RAM ユーザーを作成し、AccessKey ペアを生成します。詳細な手順については、[Create an AccessKey pair](https://www.alibabacloud.com/help/en/ram/user-guide/create-an-accesskey-pair)を参照してください。
     3. カスタム RAM ポリシーを作成して RAM ユーザーにアタッチし、changefeed に必要な最小限の権限のみを付与します。詳細については、[Control access to OSS resources with RAM policies](https://www.alibabacloud.com/help/en/oss/user-guide/ram-policy)を参照してください。
 
+        <CustomContent plan="premium">
+
+        - `oss:HeadBucket`
         - `oss:ListObjects`
         - `oss:GetObject`
         - `oss:PutObject`
         - `oss:DeleteObject`
 
+        </CustomContent>
+
+        <CustomContent plan="essential">
+
+        - `oss:GetBucketInfo`
+        - `oss:ListObjects`
+        - `oss:GetObject`
+        - `oss:PutObject`
+        - `oss:DeleteObject`
+
+        </CustomContent>
+
     以下の JSON 例は、必要な権限を持つポリシーを示しています。`<Your bucket name>`を OSS バケット名に置き換えてください。
+
+    <CustomContent plan="premium">
 
     ```json
     {
@@ -239,6 +274,7 @@ access key を使用して認証するには、以下の手順に従ってくだ
         {
           "Effect": "Allow",
           "Action": [
+            "oss:HeadBucket",
             "oss:ListObjects",
             "oss:GetObject",
             "oss:PutObject",
@@ -253,6 +289,34 @@ access key を使用して認証するには、以下の手順に従ってくだ
     }
     ```
 
+    </CustomContent>
+
+    <CustomContent plan="essential">
+
+    ```json
+    {
+      "Version": "1",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "oss:GetBucketInfo",
+            "oss:ListObjects",
+            "oss:GetObject",
+            "oss:PutObject",
+            "oss:DeleteObject"
+          ],
+          "Resource": [
+            "acs:oss:*:*:<Your bucket name>",
+            "acs:oss:*:*:<Your bucket name>/*"
+          ]
+        }
+      ]
+    }
+    ```
+
+    </CustomContent>
+
 2. Alibaba Cloud OSS の**Destination**ページで、以下のフィールドに入力します。
 
     - **Bucket URI**: `oss://<Your bucket name>/<prefix>/` 形式で OSS URI を入力します。
@@ -265,7 +329,7 @@ access key を使用して認証するには、以下の手順に従ってくだ
 
 </SimpleTab>
 
-**Next**をクリックして、<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOCインスタンス</CustomContent> からクラウドストレージへの接続を確立します。TiDB Cloudは、接続が成功したかどうかを自動的にテストして検証します。
+**Next**をクリックして、<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOCインスタンス</CustomContent> からクラウドストレージへの接続を確立します。TiDB Cloudは、接続が成功したかどうかを自動的にテストします。
 
 - 成功した場合は、次の設定ステップに進みます。
 - 失敗した場合は、接続エラーが表示されるため、エラーに対処する必要があります。エラーを解消したら、**Next**をクリックして接続を再試行してください。

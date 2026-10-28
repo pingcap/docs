@@ -35,6 +35,5 @@ Data Serviceを使用すると、TiDB CloudをHTTPS対応のあらゆるアプ�
 ## 次は何か {#what-s-next}
 
 - [Data Serviceを始める](/tidb-cloud/data-service-get-started.md)
-- [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
 - [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
 - [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)

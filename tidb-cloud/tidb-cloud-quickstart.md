@@ -50,25 +50,33 @@ category: quick start
 
         </CustomContent>
 
-## ステップ2: AI支援SQLエディターを試す {#step-2-try-ai-assisted-sql-editor}
+## ステップ2: SQL エディターを試す {#step-2-try-sql-editor}
 
-AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB Cloudコンソールに組み込まれた AI 支援型 SQL エディタを使用して、データの価値を最大限に高めることができます。これにより、ローカル SQL クライアントを使用せずに、データベースに対して SQL クエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
+AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB Cloudコンソールに組み込まれた SQL エディターを使用して、データの価値を最大限に高めることができます。これにより、ローカル SQL クライアントを使用せずに、データベースに対して SQL クエリを実行できます。クエリ結果は表やグラフで直感的に表示され、クエリログも簡単に確認できます。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、クラスター名をクリックして概要ページに移動し、左側のナビゲーションペインで**SQL Editor**をクリックします。
 
-2. TiDB Cloudの AI 機能を試すには、画面上の指示に従って、PingCAP と AWS Bedrock が研究とサービスの改善のためにコードスニペットを使用することを許可し、 **Save and Get Started** をクリックします。
+2. SQL エディターで SQL クエリを記述します。
 
-3. SQL エディターで、macOS の場合は<kbd>⌘</kbd> + <kbd>I</kbd> (Windows または Linux の場合は<kbd>Control</kbd> + <kbd>I</kbd> ) を押して、 [Chat2Query（PREVIEW）](/tidb-cloud/tidb-cloud-glossary.md#chat2query)に SQL クエリを自動的に生成するように指示します。
+    たとえば、次の SQL 文を実行して、テーブルの作成、データの挿入、およびデータのクエリを行うことができます。
 
-    たとえば、2つの列 (列`id`と列`name` ) を持つ新しいテーブル`test.t`を作成するには、 `use test;`と入力してデータベースを指定し、 <kbd>⌘</kbd> + <kbd>I</kbd>を押して、指示として`create a new table t with id and name`を入力し、 **Enter**を押すと、AI によってそれに応じた SQL文が生成されます。
+    ```sql
+    USE test;
 
-    生成されたSQL文については、 **Accept**をクリックして承認し、必要に応じてさらに編集するか、 **Discard**をクリックして拒否することができます。
+    -- create a new table t with id and name
+    CREATE TABLE `t` (`id` INT, `name` VARCHAR(255));
 
-    > **Note:**
-    >
-    > AI によって生成された SQL クエリは 100% 正確ではないため、さらに調整が必要になる場合があります。
+    -- add 3 rows
+    INSERT INTO `t` (`id`, `name`) VALUES
+      (1, 'row1'),
+      (2, 'row2'),
+      (3, 'row3');
 
-4. SQL クエリを実行します。
+    -- query all
+    SELECT `id`, `name` FROM `t`;
+    ```
+
+3. SQL クエリを実行します。
 
     <SimpleTab>
      <div label="macOS">
@@ -98,31 +106,6 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 
 クエリを実行すると、ページの下部にクエリのログと結果がすぐに表示されます。
 
-AI にさらに多くの SQL文を生成させるには、次の例に示すように、さらに命令を入力します。
-
-```sql
-use test;
-
--- create a new table t with id and name 
-CREATE TABLE
-  `t` (`id` INT, `name` VARCHAR(255));
-
--- add 3 rows 
-INSERT INTO
-  `t` (`id`, `name`)
-VALUES
-  (1, 'row1'),
-  (2, 'row2'),
-  (3, 'row3');
-
--- query all
-SELECT
-  `id`,
-  `name`
-FROM
-  `t`;
-```
-
 ## ステップ3: コンソールでガイドツアーを試す {#step-3-try-guided-tour-on-the-console}
 
 TiDB Cloud は、 TiDB Cloudをすぐに使い始めるのに役立つ、丁寧に作成されたサンプルデータセットを含むインタラクティブなチュートリアルを提供しています。AWS でホストされているTiDB Cloud Starter クラスターの場合は、このチュートリアルを試して、 TiDB Cloud を高性能データ分析に使用する方法を学習できます。
@@ -147,7 +130,7 @@ MySQL CLI クライアントが開き、{{{ .starter }}} インスタンスに�
 ## 次は何か {#what-s-next}
 
 - さまざまな方法を使用してクラスターに接続する方法については、 [TiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
-- SQL エディターと Chat2Query を使用してデータを探索する方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
+- SQL エディターを使用してデータを探索する方法の詳細については、 [SQL エディターでデータを探索](/tidb-cloud/explore-data-with-sql-editor.md)を参照してください。
 - TiDB SQL の使用法については、 [TiDB で SQL を探索する](/basic-sql-operations.md)を参照してください。
 - ゾーン間の高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番で使用する場合は、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 - TiDB Cloud CLIを使用してインスタンスを管理する方法については、 [TiDB Cloud CLI Reference (PREVIEW)](/tidb-cloud/cli-reference.md)を参照してください。

@@ -31,7 +31,7 @@ FUSE マウントの場合は、アプリケーションによる書き込みを
 
 現在の一覧については、[サポートされるリージョン](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions) を参照してください。ファイルシステムの提供状況は、TiDB Cloud Starter の提供状況とは異なります。
 
-CLI を使用してファイルシステムを作成する場合は、`ti configure` でサポートされているリージョンを選択するか、コマンドに対して `--region` を使用して設定済みのデフォルトを上書きします。作成手順については、[TiDB Cloud Filesystem を使い始める](/tidb-cloud-filesystem/filesystem-quick-start.md) を参照してください。
+CLI を使用してファイルシステムを作成する場合は、`ti configure` でサポートされているリージョンを選択するか、コマンドに対して `--region` を使用して設定済みのデフォルトを上書きします。作成手順については、[CLI を使用して TiDB Cloud Filesystem を使い始める](/tidb-cloud-filesystem/filesystem-quick-start.md) を参照してください。
 
 ## ノートパソコンでファイルシステムをマウントできますか？ {#can-i-mount-a-file-system-on-my-laptop}
 

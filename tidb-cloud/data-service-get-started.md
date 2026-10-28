@@ -61,10 +61,6 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
 3. **Create Data App**ダイアログで、名前と説明を入力し、データアプリがアクセスするTiDB Cloud Starterインスタンスを選択します。
 
-    > **Note:**
-    >
-    > デフォルトでは、データアプリのタイプは**Standard Data App**です。 **Chat2Query Data App**を作成したい場合は、本書の代わりに[Chat2Query API を使い始めよう](/tidb-cloud/use-chat2query-api.md)を参照してください。
-
 4. （オプション）データアプリのエンドポイントを、お好みのGitHubリポジトリとブランチに自動的にデプロイするには、 **Connect to GitHub**を有効にしてから、以下の手順を実行してください。
 
     1. **Install on GitHub**をクリックし、画面の指示に従って、 **TiDB Cloud Data Service**をアプリケーションとして対象のリポジトリにインストールしてください。
@@ -118,11 +114,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
     データのクエリや変更を行う前に、まず SQL文でデータベースを指定する必要があります。たとえば、 `USE database_name;`のように指定します。
 
-    SQLエディタでは、テーブル結合クエリ、複雑なクエリ、集計関数などのステートメントを記述できます。また、 `--`と入力して指示を続けるだけで、AIがSQL文を自動的に生成することもできます。
-
-    > **Note:**
-    >
-    > TiDB Cloudの AI 機能を試すには、PingCAP と Amazon Bedrock が研究とサービス向上のためにコード スニペットを使用できるようにする必要があります。詳細については、 [AIによるSQLクエリ生成を有効または無効にする](/tidb-cloud/explore-data-with-chat2query.md#enable-or-disable-ai-to-generate-sql-queries)を参照してください。
+    SQLエディタでは、テーブル結合クエリ、複雑なクエリ、集計関数などのステートメントを記述できます。
 
     パラメータを定義するには、SQL文に`${ID}`のような変数プレースホルダーとして挿入します。例えば、 `SELECT * FROM table_name WHERE id = ${ID}`のように記述します。その後、右側のペインにある**Params**タブをクリックして、パラメータの定義とテスト値を変更できます。
 
@@ -308,6 +300,5 @@ TiDB Cloudは、エンドポイントを呼び出すのに役立つコード例�
 ## もっと詳しく知る {#learn-more}
 
 - [Data Service概要](/tidb-cloud/data-service-overview.md)
-- [Chat2Query API を使い始めよう](/tidb-cloud/use-chat2query-api.md)
 - [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
 - [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)

@@ -1,7 +1,7 @@
 ---
 title: TiDB Cloud API Overview
 summary: TiDB Cloud APIとは何か、その機能、そしてAPIを使用してTiDB Cloudクラスタを管理する方法について学びましょう。
-aliases: ['/ja/tidbcloud/api-overview/']
+aliases: ['/ja/tidbcloud/api-overview/','/ja/tidbcloud/api-temporary-maintenance/']
 ---
 
 # TiDB Cloud APIの概要 {#tidb-cloud-api-overview}

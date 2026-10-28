@@ -23,12 +23,6 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 ## C {#c}
 
-### Chat2Query {#chat2query}
-
-Chat2Query は、SQL エディターに統合された AI を活用した機能で、ユーザーが自然言語命令を使用して SQL クエリを生成、デバッグ、または書き換えるのを支援します。詳細については、[AI支援型SQLエディタでデータを探索しよう](/tidb-cloud/explore-data-with-chat2query.md)を参照してください。
-
-さらに、 TiDB Cloud は、AWS でホストされているTiDB Cloud Starterインスタンス向けに Chat2Query API を提供しています。有効化すると、 TiDB Cloud は自動的に**Chat2Query**というシステムデータアプリと、Data Serviceに Chat2Data エンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより AI に SQL文を生成および実行させることができます。詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。
-
 ### クラスタ {#cluster}
 
 TiDB Cloudでは、クラスターとは、ノードトポロジー、インスタンスタイプ、ストレージ構成、スケーリングモデルなどの明確なインフラストラクチャの詳細を含む、専用のクラウドデプロイメントのことです。
@@ -154,7 +148,7 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 - TiDBリージョン
 
-    TiDBにおけるデータの基本単位。TiKVはキーバリュー空間を連続するキーセグメントに分割し、各セグメントをリージョンと呼びます。各リージョンのデフォルトのサイズ制限は96MBで、設定可能です。
+    TiDBにおけるデータの基本単位。TiKVはキーバリュー空間を連続するキーセグメントに分割し、各セグメントをリージョンと呼びます。デフォルトでは、[新しく分割されたリージョンの推定サイズ](https://docs.pingcap.com/tidb/stable/tikv-configuration-file/#region-split-size)は、TiDB v8.4.0以降では256 MiB、TiDB v8.4.0より前のバージョンでは96 MiBです。
 
 ### レプリカ {#replica}
 

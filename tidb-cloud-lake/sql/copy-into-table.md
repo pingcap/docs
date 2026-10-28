@@ -651,9 +651,9 @@ COPY INTO books_with_extra_columns
 
 この例では、次の内容を持つ CSV ファイル "data.csv" からデータをロードします。
 
-```json
-1,"U00010","{\"carPriceList\":[{\"carTypeId":10,\"distance":5860},{\"carTypeId":11,\"distance\":5861}]}"
-2,"U00011","{\"carPriceList\":[{\"carTypeId":12,\"distance":5862},{\"carTypeId":13,\"distance\":5863}]}"
+```csv
+1,"U00010","{\"carPriceList\":[{\"carTypeId\":10,\"distance\":5860},{\"carTypeId\":11,\"distance\":5861}]}"
+2,"U00011","{\"carPriceList\":[{\"carTypeId\":12,\"distance\":5862},{\"carTypeId\":13,\"distance\":5863}]}"
 ```
 
 各行には 3 つのカラムのデータが含まれており、3 番目のカラムは JSON データを含む文字列です。JSON フィールドを含む CSV データを正しくロードするには、適切なエスケープ文字を設定する必要があります。この例では、JSON データにダブルクォート " が含まれているため、バックスラッシュ \ をエスケープ文字として使用します。

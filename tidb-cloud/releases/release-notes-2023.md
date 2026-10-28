@@ -758,13 +758,12 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
     - Data Serviceをデータソースとして使用して、 TiDB Cloud をデータ視覚化プロジェクトと統合します。
     - MySQL インターフェースがサポートしていない環境からデータベースに接続します。
 
-    さらに、 TiDB Cloud は、AI を使用して SQL文を生成および実行できる RESTful インターフェースである[チャット2クエリAPI](/tidb-cloud/use-chat2query-api.md)を提供します。
+    さらに、 TiDB Cloud は、AI を使用して SQL文を生成および実行できる RESTful インターフェースであるChat2Query APIを提供します。
 
     Data Serviceにアクセスするには、左側のナビゲーションペインの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。詳細については、以下のドキュメントをご覧ください。
 
     - [Data Serviceの概要](/tidb-cloud/data-service-overview.md)
     - [Data Serviceを始める](/tidb-cloud/data-service-get-started.md)
-    - [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
 
 - AWS でホストされ、2022年 12月 31日以降に作成される[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでスケールするために、TiDB、TiKV、およびTiFlashノードのサイズを縮小することをサポートします。
 
@@ -948,7 +947,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     - CSV ファイルをアップロードするには、**Import**ページのアップロード領域にドラッグ アンド ドロップするだけです。
     - インポートタスクを作成する際に、対象のデータベースまたはテーブルが存在しない場合は、名前を入力することでTiDB Cloudが自動的に作成します。作成する対象テーブルには、主キーを指定するか、複数のフィールドを選択して複合主キーを形成することができます。
-    - インポートが完了したら、 **Explore your data by Chat2Query**をクリックするか、タスクリストでターゲットテーブル名をクリックして、 [AI搭載のChat2Query](/tidb-cloud/explore-data-with-chat2query.md)でデータを探索できます。
+    - インポートが完了したら、 **Explore your data by Chat2Query**をクリックするか、タスクリストでターゲットテーブル名をクリックして、 AI搭載のChat2Queryでデータを探索できます。
 
     詳細については[ローカルファイルをTiDB Cloudにインポートする](/tidb-cloud/tidb-cloud-import-local-files.md)を参照してください。
 

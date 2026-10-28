@@ -98,7 +98,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 1. TiDB Cloud Starterインスタンスにテーブルを作成します。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`users` (
@@ -208,7 +208,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 1. TiDB Cloud Starterインスタンスにテーブルを作成します。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query.md)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`users` (
