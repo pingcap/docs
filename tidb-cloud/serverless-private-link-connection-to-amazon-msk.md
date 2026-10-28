@@ -32,8 +32,8 @@ AWS アカウント ID とアベイラビリティゾーンを表示するには
 
 Amazon MSK Provisioned クラスターがない場合は、 TiDB Cloud Essentialインスタンスと同じリージョンおよび同じアベイラビリティゾーンに[1つ作成](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)し、作成されたクラスターに[SASL/SCRAM認証を設定](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)します。
 
-- **Secret name**: シークレット名は`AmazonMSK_`で始まる必要があります。
-- **暗号化**：デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
+- **シークレット名**: シークレット名は`AmazonMSK_`で始まる必要があります。
+- **暗号化**: デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
 
 ## ステップ1. TiDB Cloudアクセス用にKafka ACLを設定する {#step-1-set-up-kafka-acls-for-tidb-cloud-access}
 
