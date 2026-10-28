@@ -7,7 +7,6 @@ summary: Learn how to use TiDB Cloud Data Service to access your data with HTTPS
 
 Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request using a custom API endpoint and allows you to seamlessly integrate with any application or service that is compatible with HTTPS.
 
-<<<<<<< HEAD
 > **Tip:**
 >
 > TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions.
@@ -15,9 +14,6 @@ Data Service (beta) enables you to access TiDB Cloud data via an HTTPS request u
 > For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
 
 This document introduces how to quickly get started with TiDB Cloud Data Service (beta) by creating a Data App, developing, testing, deploying, and calling an endpoint. A Data App is a collection of endpoints that you can use to access data for a specific application.
-=======
-This document introduces how to quickly get started with TiDB Cloud Data Service (PREVIEW) by creating a Data App, developing, testing, deploying, and calling an endpoint. A Data App is a collection of endpoints that you can use to access data for a specific application.
->>>>>>> d96fa6c87c (tidb-cloud: remove Chat2Query documentation (#24549))
 
 ## Before you begin
 
@@ -64,6 +60,10 @@ To get started with Data Service, you can also create your own Data App, and the
     > If this is the first Data App in your project, click **Create Data App** in the middle of the page.
 
 3. In the **Create Data App** dialog, enter a name, a description, and select {{{ .starter }}} instances that you want the Data App to access.
+
+    > **Note:**
+    >
+    > By default, the Data App type is **Standard Data App**. If you want to create a **Chat2Query Data App**, refer to [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md) instead of this document.
 
 4. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
@@ -116,7 +116,11 @@ You can customize SQL statements for the endpoint in the <Tooltip id="sql-editor
 
     Before querying or modifying data, you need to first specify the database in the SQL statements. For example, `USE database_name;`.
 
-    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions.
+    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
+
+    > **Note:**
+    >
+    > To try the AI capacity of TiDB Cloud, you need to allow PingCAP and Amazon Bedrock to use your code snippets for research and service improvement. For more information, see [Enable or disable AI to generate SQL queries](/tidb-cloud/explore-data-with-chat2query.md#enable-or-disable-ai-to-generate-sql-queries).
 
     To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values.
 
@@ -299,5 +303,6 @@ For more information about the response, see [Response of an endpoint](/tidb-clo
 ## Learn more
 
 - [Data Service Overview](/tidb-cloud/data-service-overview.md)
+- [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md)
 - [Manage a Data App](/tidb-cloud/data-service-manage-data-app.md)
 - [Manage an Endpoint](/tidb-cloud/data-service-manage-endpoint.md)

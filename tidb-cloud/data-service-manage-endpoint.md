@@ -22,6 +22,10 @@ This document describes how to manage your endpoints in a Data App in the TiDB C
 
 In Data Service, you can automatically generate endpoints, manually create endpoints, or add predefined system endpoints.
 
+> **Tip:**
+>
+> You can also create an endpoint from a SQL file in SQL Editor. For more information, see [Generate an endpoint from a SQL file](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file).
+
 ### Generate an endpoint automatically
 
 In TiDB Cloud Data Service, you can generate one or multiple endpoints automatically in one go as follows:
@@ -195,7 +199,7 @@ On the right pane of the endpoint details page, you can click the **Properties**
 
 ### Write SQL statements
 
-On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint.
+On the SQL editor of the endpoint details page, you can write and run the SQL statements for an endpoint. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
 1. Select a {{{ .starter }}} instance.
 
@@ -212,7 +216,7 @@ On the SQL editor of the endpoint details page, you can write and run the SQL st
 
 3. Write SQL statements.
 
-    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions.
+    In the SQL editor, you can write statements such as table join queries, complex queries, and aggregate functions. You can also simply type `--` followed by your instructions to let AI generate SQL statements automatically.
 
     To define a parameter, you can insert it as a variable placeholder like `${ID}` in the SQL statement. For example, `SELECT * FROM table_name WHERE id = ${ID}`. Then, you can click the **Params** tab on the right pane to change the parameter definition and test values. For more information, see [Parameters](#configure-parameters).
 

@@ -21,6 +21,10 @@ To create a Data App for your project, perform the following steps:
 
 2. Enter a name, a description, and select clusters that you want the Data App to access.
 
+    > **Note:**
+    >
+    > By default, the Data App type is **Standard Data App**. If you want to create a **Chat2Query Data App**, refer to [Get Started with Chat2Query API](/tidb-cloud/use-chat2query-api.md) instead of this document.
+
 3. (Optional) To automatically deploy endpoints of the Data App to your preferred GitHub repository and branch, enable **Connect to GitHub**, and then do the following:
 
     1. Click **Install on GitHub**, and then follow the on-screen instructions to install **TiDB Cloud Data Service** as an application on your target repository.

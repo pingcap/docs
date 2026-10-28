@@ -23,6 +23,12 @@ ACID refers to the four key properties of a transaction: atomicity, consistency,
 
 ## C
 
+### Chat2Query
+
+Chat2Query is an AI-powered feature integrated into SQL Editor that assists users in generating, debugging, or rewriting SQL queries using natural language instructions. For more information, see [Explore your data with AI-assisted SQL Editor](/tidb-cloud/explore-data-with-chat2query.md).
+
+In addition, TiDB Cloud provides a Chat2Query API for {{{ .starter }}} instances hosted on AWS. After it is enabled, TiDB Cloud will automatically create a system Data App called **Chat2Query** and a Chat2Data endpoint in Data Service. You can call this endpoint to let AI generate and execute SQL statements by providing instructions. For more information, see [Get started with Chat2Query API](/tidb-cloud/use-chat2query-api.md).
+
 ### Cluster
 
 In TiDB Cloud, a cluster is a dedicated cloud deployment that includes explicit infrastructure details such as node topology, instance types, storage configuration, and scaling model.
