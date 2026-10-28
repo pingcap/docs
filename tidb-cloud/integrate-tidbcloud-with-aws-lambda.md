@@ -38,7 +38,7 @@ AWS CloudFormationは、Secrets Manager、API Gateway、Lambda関数など、プ
     - [S3](https://aws.amazon.com/s3/)
     - [IAMロール](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 
-- [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Starterインスタンスが必要です。TiDB Cloud Starterインスタンスの接続情報を取得するには、以下の手順に従ってください。
+- [TiDB Cloud](https://tidbcloud.com)アカウントとTiDB Cloud Starterインスタンスが必要です。TiDB Cloud Starterインスタンスの接続情報を取得します。
 
     ![TiDB Cloud connection information](/media/develop/aws-lambda-tidbcloud-connection-info.png)
 
@@ -65,7 +65,7 @@ AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョ
 
     - [Gitpod](https://gitpod.io/#/https://github.com/pingcap/TiDB-Lambda-integration)ワークスペースを開き、GitHubアカウントでログインしてください。
 
-2. ラムダ関数のコードを修正してください。
+2. Lambda関数のコードを修正してください。
 
     1. 左側のサイドバーで`aws-lambda-cloudformation/src/secretManager.ts`ファイルを開きます。
     2. 22行目を見つけて、 `region`変数を自分のリージョンに合わせて変更してください。
@@ -202,7 +202,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
         curl -X DELETE https://<your-api-endpoint>/book/<book-id>
         ```
 
-## ステップ3．リソースをクリーンアップする {#step-3-clean-up-resources}
+## ステップ3. リソースをクリーンアップする {#step-3-clean-up-resources}
 
 不要な料金が発生しないように、作成されたすべてのリソースをクリーンアップしてください。
 

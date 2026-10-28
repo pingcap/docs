@@ -29,11 +29,11 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 - [GitHubアカウント](https://github.com/login)。
 - [TiDB Cloudアカウント](https://tidbcloud.com/signup)と TiDB Cloud Starterインスタンス。詳細については、 [TiDB Cloudクイックスタート](https://docs.pingcap.com/tidbcloud/tidb-cloud-quickstart#step-1-create-a-starter-instance)を参照してください。
 
-### ステップ1：テンプレートを入手する {#step-1-get-the-template}
+### ステップ1. テンプレートを入手する {#step-1-get-the-template}
 
-[TiDB CloudアプリをZapierで利用](https://zapier.com/apps/tidb-cloud/integrations)へ。 **Add new Github global events to TiDB rows**テンプレートを選択し、 **Try it**をクリックします。これにより、エディターページが開きます。
+[Zapier上のTiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)に移動します。 **Add new Github global events to TiDB rows**テンプレートを選択し、 **Try it**をクリックします。これにより、エディターページが開きます。
 
-### ステップ2：トリガーを設定する {#step-2-set-up-the-trigger}
+### ステップ2. トリガーを設定する {#step-2-set-up-the-trigger}
 
 エディターページでは、トリガーとアクションを確認できます。トリガーをクリックして設定してください。
 
@@ -53,7 +53,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     **Test trigger**をクリックします。トリガーが正常に設定されると、GitHubアカウントから新しいグローバルイベントのデータが表示されます。 **Continue**をクリックします。
 
-### ステップ3： `Find Table in TiDB Cloud`アクションを設定する {#step-3-set-up-the-find-table-in-tidb-cloud-action}
+### ステップ3. `Find Table in TiDB Cloud`アクションを設定する {#step-3-set-up-the-find-table-in-tidb-cloud-action}
 
 1. アプリとイベントを選択
 
@@ -91,7 +91,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
     **Test action**をクリックすると、Zapierがテーブルを作成します。テストをスキップすることも可能で、その場合はワークフローが初めて実行されるときにテーブルが作成されます。
 
-### ステップ4： `Create Row in TiDB Cloud`アクションを設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
+### ステップ4. `Create Row in TiDB Cloud`アクションを設定する {#step-4-set-up-the-create-row-in-tidb-cloud-action}
 
 1. アプリとイベントを選択
 
@@ -129,7 +129,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
     1 row in set (0.17 sec)
     ```
 
-### ステップ5：Zapを公開する {#step-5-publish-your-zap}
+### ステップ5. Zapを公開する {#step-5-publish-your-zap}
 
 **Publish**をクリックして、作成したZapを公開します。[ホームページ](https://zapier.com/app/zaps)でZapが実行されていることを確認できます。
 
@@ -203,7 +203,7 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 
 **New Row トリガー**
 
-`New Row`トリガーは、フェッチごとに10,000件の結果を制限します。そのため、新しい行が10,000件の結果に含まれていない場合、Zapierはトリガーされません。
+`New Row`トリガーは、フェッチごとの結果を10,000件に制限します。そのため、新しい行が10,000件の結果に含まれていない場合、Zapierはトリガーされません。
 
 これを回避する方法の一つは、トリガーで`Order By`設定を指定することです。例えば、行を生成時刻でソートすると、新しい行は常に 10,000件の結果に含まれるようになります。
 
@@ -213,11 +213,11 @@ API 内のアイテムが複数の異なるポーリングに存在する場合�
 2. トリガー構成で`Dedupe Key`を指定する場合は、 `Dedupe Key`を使用してください。
 3. テーブルに主キーがある場合は、その主キーを使用します。主キーが複数ある場合は、最初の列を使用します。
 4. テーブルに一意キーがある場合は、その一意キーを使用してください。
-5. 表の最初の列を使用してください。
+5. テーブルの最初の列を使用してください。
 
 **New Row (Custom Query) トリガー**
 
-`New Row (Custom Query)`トリガーは、フェッチごとに 1,000,000件の結果を制限します。1,000,000 は大きな数値であり、システム全体を保護するためにのみ設定されています。クエリには`ORDER BY`と`LIMIT`を含めることをお勧めします。
+`New Row (Custom Query)`トリガーは、フェッチごとの結果を1,000,000件に制限します。1,000,000 は大きな数値であり、システム全体を保護するためにのみ設定されています。クエリには`ORDER BY`と`LIMIT`を含めることをお勧めします。
 
 重複排除を実行するには、クエリ結果に一意のIDフィールドが必要です。そうでない場合、 `You must return the results with id field`エラーが発生します。
 

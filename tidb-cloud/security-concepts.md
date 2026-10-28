@@ -15,7 +15,7 @@ TiDB Cloudは、データの保護、アクセス制御の徹底、最新のコ�
 
 - **データアクセス制御**：保存されているデータを保護するための、顧客管理暗号化キー（CMEK）などの高度な暗号化機能。
 
-- **Audit logging**：コンソール操作とデータベース操作の両方について包括的なアクティビティ追跡を行い、説明責任と透明性を確保します。
+- **監査ログ**：コンソール操作とデータベース操作の両方について包括的なアクティビティ追跡を行い、説明責任と透明性を確保します。
 
 TiDB Cloudはこれらの機能を統合することで、組織が機密データを保護し、アクセス制御を効率化し、セキュリティ運用を最適化できるよう支援します。
 
@@ -67,7 +67,7 @@ TiDB Cloudは、ユーザーベースおよびロールベースの権限設定�
 
 データベースのユーザーアカウントは`mysql.user`システムテーブルに格納され、ユーザー名とクライアントホストによって一意に識別されます。
 
-データベースの初期化中に、TiDB は自動的にデフォルト アカウント`'root'@'%'`を作成します。
+データベースの初期化中に、TiDB は自動的にデフォルトアカウント`'root'@'%'`を作成します。
 
 詳細については、 [TiDBユーザーアカウント管理](https://docs.pingcap.com/tidb/stable/user-account-management#user-names-and-passwords)を参照してください。
 
@@ -115,7 +115,7 @@ TiDB Cloudは、組織、プロジェクト、リソースという階層構造�
 
 - 組織の所有者は、プロジェクトの作成や役割の割り当てなど、すべての権限を持っています。
 
-**Projects**
+**プロジェクト**
 
 - TiDB Cloudのリソースをグループ化および管理するためのコンテナ。
 
@@ -164,11 +164,11 @@ TiDB Cloudは、組織、プロジェクト、リソースという階層構造�
 
 TiDB Cloudは、組織、プロジェクト、インスタンス全体にわたる権限管理のためのロールベースのアクセス制御を提供します。
 
-- **<a href="/tidb-cloud/manage-user-access.md#organization-roles">組織レベルの役割</a>**：請求処理やプロジェクト作成など、組織全体を管理するための権限を付与します。
+- **[組織レベルのロール](/tidb-cloud/manage-user-access.md#organization-roles)**：請求処理やプロジェクト作成など、組織全体を管理するための権限を付与します。
 
-- **<a href="/tidb-cloud/manage-user-access.md#project-roles">プロジェクトレベルの役割</a>**：プロジェクトスコープのリソースや構成など、特定のプロジェクトを管理するための権限を割り当てます。
+- **[プロジェクトレベルのロール](/tidb-cloud/manage-user-access.md#project-roles)**：プロジェクトスコープのリソースや構成など、特定のプロジェクトを管理するための権限を割り当てます。
 
-- **<a href="/tidb-cloud/manage-user-access.md#instance-roles">インスタンスレベルのロール</a>**：特定のTiDB Xインスタンスに対して、きめ細かなアクセス権限を付与します。
+- **[インスタンスレベルのロール](/tidb-cloud/manage-user-access.md#instance-roles)**：特定のTiDB Xインスタンスに対して、きめ細かなアクセス権限を付与します。
 
 ## ネットワークアクセス制御 {#network-access-control}
 
@@ -180,7 +180,7 @@ TiDB Cloudは、堅牢なネットワークアクセス制御により、安全�
 
 - 仮想プライベートクラウド（VPC）内のSQLクライアントとTiDB Cloud Dedicatedクラスター間の安全な接続を可能にします。
 
-- [AWSプライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 、 [Alibaba Cloudプライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)でサポートされています。
+- [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md) 、 [Alibaba Cloudプライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)でサポートされています。
 
 </CustomContent>
 
@@ -188,7 +188,7 @@ TiDB Cloudは、堅牢なネットワークアクセス制御により、安全�
 
 - 仮想プライベートクラウド（VPC）内のSQLクライアントとTiDB Cloud Dedicatedクラスター間の安全な接続を可能にします。
 
-- [AWSプライベートリンク](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)でサポートされています。
+- [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)でサポートされています。
 
 </CustomContent>
 
@@ -235,7 +235,7 @@ TiDB Cloudは、高度な暗号化機能で静的データを保護し、セキ�
 
 - CMEKを使用しないTiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudはエスクローキーを使用します。TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、エスクローキーのみに依存します。
 
-**Dual-layer encryption**
+**二重層暗号化**
 
 - 二重層暗号化は、2つの独立した暗号化レイヤーでデータを保護します。この方法により、いずれか1つの暗号化レイヤーが侵害された場合でも、セキュリティが強化されます。
 

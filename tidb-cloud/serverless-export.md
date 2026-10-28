@@ -1,15 +1,15 @@
 ---
 title: Export Data from TiDB Cloud Starter or Essential
-summary: TiDB Cloud Starter またはTiDB Cloud Essential クラスターからデータをエクスポートする方法を学習します。
+summary: TiDB Cloud Starter またはTiDB Cloud Essential インスタンスからデータをエクスポートする方法を学習します。
 ---
 
 # TiDB Cloud StarterまたはEssentialからデータをエクスポートする {#export-data-from-tidb-cloud-starter-or-essential}
 
-TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialクラスターからローカルファイルまたは外部ストレージサービスにデータをエクスポートできます。エクスポートしたデータは、バックアップ、移行、データ分析などの用途に使用できます。
+TiDB Cloudを使用すると、 TiDB Cloud StarterまたはEssentialインスタンスからローカルファイルまたは外部ストレージサービスにデータをエクスポートできます。エクスポートしたデータは、バックアップ、移行、データ分析などの用途に使用できます。
 
-[mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、 TiDB Cloudが提供するエクスポート機能は、クラスターからデータをエクスポートするためのより便利で効率的な方法を提供します。これには、次のような利点があります。
+[mysqldump](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html)や TiDB [Dumpling](https://docs.pingcap.com/tidb/dev/dumpling-overview)などのツールを使用してデータをエクスポートすることもできますが、 TiDB Cloudが提供するエクスポート機能は、TiDB Cloud StarterまたはEssentialインスタンスからデータをエクスポートするためのより便利で効率的な方法を提供します。これには、次のような利点があります。
 
-- 利便性: エクスポートサービスは、クラスターからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
+- 利便性: エクスポートサービスは、TiDB Cloud StarterまたはEssentialインスタンスからデータをエクスポートするためのシンプルで使いやすい方法を提供するため、追加のツールやリソースは必要ありません。
 - 分離: エクスポートサービスは個別のコンピューティングリソースを使用するため、オンラインサービスで使用されるリソースからの分離が保証されます。
 - 一貫性: エクスポートサービスは、ロックを発生させることなくエクスポートされたデータの一貫性を確保するため、オンラインサービスには影響しません。
 
@@ -134,7 +134,7 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
 データを Parquet 形式にエクスポートする場合、TiDB と Parquet 間のデータ変換は次のようになります。
 
-| TiDB Cloud Serverlessの型 | Parquet プリミティブ型 | Parquet 論理型                              |
+| TiDB データ型 | Parquet プリミティブ型 | Parquet 論理型                              |
 |----------------------------|------------------------|--------------------------------------------|
 | VARCHAR                    | BYTE_ARRAY             | String(UTF8)                               |
 | TIME                       | BYTE_ARRAY             | String(UTF8)                               |
@@ -185,7 +185,7 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
     > **Tip:**
     >
-    > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
 2. ターゲット {{{ .starter }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
@@ -205,13 +205,13 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
 4. **Export**をクリックします。
 
-5. エクスポート タスクが成功したら、エクスポート タスクの詳細に表示されるダウンロード コマンドをコピーし、 [TiDB Cloud CLI](/tidb-cloud/cli-reference.md)でコマンドを実行してエクスポートされたデータをダウンロードできます。
+5. エクスポートタスクが成功したら、エクスポートタスクの詳細に表示されるダウンロードコマンドをコピーし、 [TiDB Cloud CLI](/tidb-cloud/cli-reference.md)でコマンドを実行してエクスポートされたデータをダウンロードできます。
 
 </div>
 
 <div label="CLI">
 
-1. エクスポート タスクを作成します。
+1. エクスポートタスクを作成します。
 
     ```shell
     ticloud serverless export create -c <cluster-id>
@@ -219,13 +219,13 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
     出力からエクスポート ID が取得されます。
 
-2. エクスポート タスクが成功したら、エクスポートされたデータをローカルファイルにダウンロードします。
+2. エクスポートタスクが成功したら、エクスポートされたデータをローカルファイルにダウンロードします。
 
     ```shell
     ticloud serverless export download -c <cluster-id> -e <export-id>
     ```
 
-    ダウンロード コマンドの詳細については、 [ticloud serverless export download](/tidb-cloud/ticloud-serverless-export-download.md)を参照してください。
+    ダウンロードコマンドの詳細については、 [ticloud serverless export download](/tidb-cloud/ticloud-serverless-export-download.md)を参照してください。
 
 </div>
 </SimpleTab>
@@ -239,9 +239,9 @@ Alibaba Cloud OSS にデータをエクスポートするには、次の情報�
 
     > **Tip:**
     >
-    > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
+2. ターゲット {{{ .starter }}} または Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 3. **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Amazon S3**を選択します。以下のパラメータを入力します。
 
@@ -268,7 +268,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 
 - `s3.uri` : `s3://<bucket-name>/<folder-path>/`形式の Amazon S3 URI。
 - `s3.access-key-id` : バケットにアクセスする権限を持つユーザーのアクセスキー ID。
-- `s3.secret-access-key` : バケットにアクセスする権限を持つユーザーのアクセスキー シークレット。
+- `s3.secret-access-key` : バケットにアクセスする権限を持つユーザーのアクセスキーシークレット。
 - `s3.role-arn` : バケットにアクセスする権限を持つロール ARN。
 
 </div>
@@ -283,7 +283,7 @@ ticloud serverless export create -c <cluster-id> --target-type S3 --s3.uri <uri>
 
     > **Tip:**
     >
-    > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
 2. ターゲット {{{ .starter }}} インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
@@ -307,7 +307,7 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 ```
 
 - `gcs.uri` : `gs://<bucket-name>/<folder-path>/`形式の Google Cloud Storage バケットの URI。
-- `gcs.service-account-key` : base64 でエンコードされたサービスアカウント キー。
+- `gcs.service-account-key` : base64 でエンコードされたサービスアカウントキー。
 
 </div>
 </SimpleTab>
@@ -321,9 +321,9 @@ ticloud serverless export create -c <cluster-id> --target-type GCS --gcs.uri <ur
 
     > **Tip:**
     >
-    > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
+2. ターゲット {{{ .starter }}} または Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 3. **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Azure Blob Storage**を選択します。以下のパラメータを入力します。
 
@@ -359,9 +359,9 @@ ticloud serverless export create -c <cluster-id> --target-type AZURE_BLOB --azbl
 
     > **Tip:**
     >
-    > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
+2. ターゲット {{{ .starter }}} または Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
 3. **Import**ページで、右上隅の**Export Data to**をクリックし、ドロップダウンリストから**Alibaba Cloud OSS**を選択します。
 
@@ -393,7 +393,7 @@ ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <ur
 
 ### エクスポートタスクをキャンセルする {#cancel-an-export-task}
 
-進行中のエクスポート タスクをキャンセルするには、次の手順を実行します。
+進行中のエクスポートタスクをキャンセルするには、次の手順を実行します。
 
 <SimpleTab>
 <div label="Console">
@@ -402,13 +402,13 @@ ticloud serverless export create -c <cluster-id> --target-type OSS --oss.uri <ur
 
     > **Tip:**
     >
-    > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
+2. ターゲット {{{ .starter }}} または Essential インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
-3. **Import**ページで**Export**をクリックして、エクスポート タスク リストを表示します。
+3. **Import**ページで**Export**をクリックして、エクスポートタスクリストを表示します。
 
-4. キャンセルするエクスポート タスクを選択し、 **Action**をクリックします。
+4. キャンセルするエクスポートタスクを選択し、 **Action**をクリックします。
 
 5. ドロップダウンリストから**Cancel**を選択します。キャンセルできるのは、**Running**中のエクスポートタスクのみです。
 
@@ -425,11 +425,11 @@ ticloud serverless export cancel -c <cluster-id> -e <export-id>
 
 ## エクスポート速度 {#export-speed}
 
-エクスポート速度は[クラスタープラン](/tidb-cloud/select-cluster-tier.md)によって異なります:
+エクスポート速度は {{{ .starter }}} と {{{ .essential }}} で異なります:
 
 - **TiDB Cloud Starter**:
 
-    - 使用制限を0に設定すると、エクスポート速度は最大 25 MiB/s になります。
+    - 支出限度額を0に設定すると、エクスポート速度は最大 25 MiB/s になります。
     - 支出限度額が 0 より大きい場合、エクスポート速度は最大 100 MiB/s になります。
 
 - **TiDB Cloud Essential** : 最大 100 MiB/秒。

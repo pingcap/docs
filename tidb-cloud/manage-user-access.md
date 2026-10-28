@@ -5,7 +5,7 @@ summary: TiDB Cloudで ID アクセスを管理する方法を学びましょう
 
 # IDアクセス管理 {#identity-access-management}
 
-このドキュメントでは、TiDB Cloudにおける組織、プロジェクト、リソース、役割、およびユーザープロファイルへのアクセスを管理する方法について説明します。
+このドキュメントでは、TiDB Cloudにおける組織、プロジェクト、リソース、ロール、およびユーザープロファイルへのアクセスを管理する方法について説明します。
 
 TiDB Cloudにアクセスする前に、 [TiDB Cloudアカウントを作成](https://tidbcloud.com/free-trial)してください。 [TiDB Cloudを使用してパスワードを管理](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップすることも、 TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択することもできます。
 
@@ -51,7 +51,7 @@ TiDB Cloudは、組織、プロジェクト、リソースに基づいた階層�
 - 特定のTiDB Xインスタンスにアクセスするには、プロジェクトロールまたはインスタンスロールのいずれかを通じてユーザーにアクセス権を付与することができます。
 - TiDB Cloud Dedicatedクラスターにアクセスするには、ユーザーはクラスターが配置されているプロジェクトへの読み取りアクセス権を持っている必要があります。
 
-ユーザーの役割と権限の詳細については、[ユーザーロール](#user-roles)を参照してください。
+ユーザーのロールと権限の詳細については、[ユーザーロール](#user-roles)を参照してください。
 
 ### 組織 {#organizations}
 
@@ -74,7 +74,7 @@ TiDB Cloudは組織レベルで課金計算を行い、各プロジェクトお�
 TiDB Cloudには、3種類のプロジェクトがあります。
 
 - **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
-- **TiDB X project**: このプロジェクト タイプは、TiDB X インスタンス ( TiDB Cloud Starter、 Essential、Premium インスタンスを含む) でのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは[**My TiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクト タイプです。
+- **TiDB Xプロジェクト**: このプロジェクトタイプは、TiDB X インスタンス ( TiDB Cloud Starter、 Essential、Premium インスタンスを含む) でのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは[**My TiDB**](https://tidbcloud.com/tidbs)ページでプロジェクトを作成する際のデフォルトのプロジェクト タイプです。
 - **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用してTiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)エンドポイントから取得できます。
 
 以下の表は、これらのプロジェクトタイプ間の違いを示しています。
@@ -95,16 +95,16 @@ TiDB Cloudには、3種類のプロジェクトがあります。
 
 TiDB Cloudは、組織、プロジェクト、インスタンスの各レベルで権限を管理するために、さまざまなユーザーロールを定義しています。
 
-組織レベル、プロジェクトレベル、インスタンスレベルでユーザーに役割を付与できます。セキュリティ上の考慮事項を踏まえ、組織、プロジェクト、リソースの階層構造を慎重に計画してください。
+組織レベル、プロジェクトレベル、インスタンスレベルでユーザーにロールを付与できます。セキュリティ上の考慮事項を踏まえ、組織、プロジェクト、リソースの階層構造を慎重に計画してください。
 
-### 組織における役割 {#organization-roles}
+### 組織ロール {#organization-roles}
 
-組織レベルでは、 TiDB Cloud は5つの役割を定義しており、 `Organization Owner`はメンバーを招待したり、メンバーに組織の役割を付与したりできます。
+組織レベルでは、 TiDB Cloud は5つのロールを定義しており、 `Organization Owner`はメンバーを招待したり、メンバーに組織ロールを付与したりできます。
 
-| 許可                                                                                               | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Manager` | `Organization Viewer` |
+| 権限                                                                                               | `Organization Owner` | `Organization Billing Manager` | `Organization Billing Viewer` | `Organization Console Audit Manager` | `Organization Viewer` |
 | ------------------------------------------------------------------------------------------------ | -------------------- | ------------------------------ | ----------------------------- | ------------------------------------ | --------------------- |
 | プロジェクト、APIキー、タイムゾーンなどの組織設定を管理します。                                                                | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
-| 組織へのユーザーの招待や削除、およびユーザーの組織内役割の編集を行います。                                                            | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
+| 組織へのユーザーの招待や削除、およびユーザーの組織内ロールの編集を行います。                                                            | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
 | 組織内のすべてのプロジェクトに対する`Project Owner`のすべての権限、および組織内のすべての TiDB X インスタンスに対する TiDB X インスタンスロールのすべての権限。 | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
 | 顧客管理暗号化キー（CMEK）を有効にしたプロジェクトを作成します。                                                               | ✅                    | ❌                              | ❌                             | ❌                                    | ❌                     |
 | 組織の支払い情報を編集します。                                                                                  | ✅                    | ✅                              | ❌                             | ❌                                    | ❌                     |
@@ -117,22 +117,22 @@ TiDB Cloudは、組織、プロジェクト、インスタンスの各レベル�
 > - `Organization Console Audit Manager`ロール（以前は`Organization Console Audit Admin`でした）は、データベース監査ログではなく、 TiDB Cloudコンソールでの監査ログの管理に使用されます。データベース監査を管理するには、プロジェクトレベルで`Project Owner`ロールを使用してください。
 > - `Organization Billing Manager`ロールは`Organization Billing Admin`から名前が変更され、 `Organization Viewer`ロールは`Organization Member`から名前が変更されました。
 
-### プロジェクトの役割 {#project-roles}
+### プロジェクトロール {#project-roles}
 
-プロジェクトレベルでは、 TiDB Cloud は4つの役割を定義しており、 `Project Owner`はメンバーを招待したり、メンバーにプロジェクトの役割を付与したりできます。
+プロジェクトレベルでは、 TiDB Cloud は4つのロールを定義しており、 `Project Owner`はメンバーを招待したり、メンバーにプロジェクトロールを付与したりできます。
 
 > **Note:**
 >
-> - `Organization Owner`は、すべてのプロジェクトに対して`Project Owner`のすべての権限を持っているため、 `Organization Owner`もプロジェクトメンバーを招待したり、メンバーにプロジェクトの役割を付与したりできます。
+> - `Organization Owner`は、すべてのプロジェクトに対して`Project Owner`のすべての権限を持っているため、 `Organization Owner`もプロジェクトメンバーを招待したり、メンバーにプロジェクトロールを付与したりできます。
 > - 各プロジェクトロールには、デフォルトで`Organization Viewer`のすべての権限が付与されています。
 > - 組織内のユーザーがどのプロジェクトにも所属していない場合、そのユーザーにはプロジェクトに関する権限は一切ありません。
 > - TiDB XプロジェクトとTiDB Dedicatedプロジェクトの両方において、プロジェクトロールはプロジェクト内のリソースへのアクセスを制御します。TiDB Dedicatedプロジェクトの場合、プロジェクトロールはDedicated固有のプロジェクト設定も制御します。
 > - TiDB X 仮想プロジェクトには管理機能がないため、プロジェクトロールは TiDB X 仮想プロジェクトには適用されません。どの TiDB X プロジェクトにもグループ化されていない特定の TiDB X インスタンスの RBAC を管理するには、[インスタンスロール](#instance-roles)を使用してください。
 
-| 許可                                                                                                   | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` | `Project Viewer` |
+| 権限                                                                                                   | `Project Owner` | `Project Data Access Read-Write` | `Project Data Access Read-Only` | `Project Viewer` |
 | ---------------------------------------------------------------------------------------------------- | --------------- | -------------------------------- | ------------------------------- | ---------------- |
 | プロジェクト設定の管理                                                                                          | ✅               | ❌                                | ❌                               | ❌                |
-| プロジェクトへのユーザーの招待や削除、およびユーザーのプロジェクトにおける役割の編集を行います。                                                     | ✅               | ❌                                | ❌                               | ❌                |
+| プロジェクトへのユーザーの招待や削除、およびユーザーのプロジェクトにおけるロールの編集を行います。                                                     | ✅               | ❌                                | ❌                               | ❌                |
 | プロジェクトの[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を管理します。                                        | ✅               | ❌                                | ❌                               | ❌                |
 | プロジェクト内のすべてのTiDB Cloud Starterインスタンスの[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を管理します。    | ✅               | ❌                                | ❌                               | ❌                |
 | プロジェクトの種類に応じてサポートされるインスタンスやクラスタの作成、変更、移動、削除など、プロジェクト内のリソース操作を管理します。                                  | ✅               | ❌                                | ❌                               | ❌                |
@@ -158,7 +158,7 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 > - 各インスタンスロールは、デフォルトで`Organization Viewer`ロールのすべての権限を継承します。
 > - プロジェクトロールとインスタンスロールは加算式です。ユーザーはプロジェクトロールからアクセス権を継承できるだけでなく、個々のインスタンスに対してより具体的なロールを持つこともできます。
 
-| 許可                                                                                 | `Instance Manager` | `TiDB X Instance Data Access Read-Write` | `TiDB X Instance Data Access Read-Only` | `TiDB X Instance Viewer` |
+| 権限                                                                                 | `Instance Manager` | `TiDB X Instance Data Access Read-Write` | `TiDB X Instance Data Access Read-Only` | `TiDB X Instance Viewer` |
 | ---------------------------------------------------------------------------------- | ------------------ | ---------------------------------------- | --------------------------------------- | ------------------------ |
 | インスタンスの作成、変更、削除などのインスタンス操作を管理します。                                                  | ✅                  | ❌                                        | ❌                                       | ❌                        |
 | [SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用してインスタンス データを確認および変更します。 | ✅                  | ✅                                        | ❌                                       | ❌                        |
@@ -188,9 +188,9 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 2. 組織IDやタイムゾーンなどの組織の詳細情報を表示するには、組織名をクリックし、左側のナビゲーションペインで**Organization Settings** > **General**をクリックします。
 
-### 組織のタイムゾーンを設定してください {#set-the-time-zone-for-your-organization}
+### 組織のタイムゾーンを設定する {#set-the-time-zone-for-your-organization}
 
-`Organization Owner`役割を担っている場合は、タイムゾーンに合わせてシステム表示時刻を変更できます。
+`Organization Owner`ロールを担っている場合は、タイムゾーンに合わせてシステム表示時刻を変更できます。
 
 現地のタイムゾーン設定を変更するには、以下の手順に従ってください。
 
@@ -204,7 +204,7 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 ### ユーザーを組織に招待する {#invite-a-user-to-your-organization}
 
-`Organization Owner`の役割をお持ちの場合は、組織にユーザーを招待できます。
+`Organization Owner`ロールをお持ちの場合は、組織にユーザーを招待できます。
 
 > **Note:**
 >
@@ -226,8 +226,8 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 5. （オプション）招待されたユーザーには、デフォルトではプロジェクトまたはインスタンスの権限が一切付与されていません。ユーザーにプロジェクトまたはインスタンスのロールを付与するには、以下の手順を実行してください。
 
-    - ユーザーにプロジェクトレベルのアクセス権を付与するには、 **[役割の追加] をクリックし、[プロジェクトの選択] を選択して**、役割を付与し、対象とするプロジェクトを選択します。
-    - ユーザーに特定の TiDB X インスタンスへのアクセス権を付与するには、 **[役割の追加] をクリックし、[インスタンスの選択] を選択して**、役割を付与し、ユーザーに割り当てる対象の TiDB X インスタンスを選択します。
+    - ユーザーにプロジェクトレベルのアクセス権を付与するには、 **Add Roles and Select Project**をクリックし、ロールを付与して、対象とするプロジェクトを選択します。
+    - ユーザーに特定の TiDB X インスタンスへのアクセス権を付与するには、 **Add Roles and Select Instance**をクリックし、ロールを付与して、ユーザーに割り当てる対象の TiDB X インスタンスを選択します。
 
 6. **Invite**をクリックしてください。すると、新しいユーザーがユーザーリストに正常に追加されます。同時に、招待されたメールアドレスに確認リンク付きのメールが送信されます。
 
@@ -241,7 +241,7 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 ### 組織メンバーを削除する {#remove-an-organization-member}
 
-`Organization Owner`の役割を持っている場合、組織から組織メンバーを削除できます。
+`Organization Owner`ロールを持っている場合、組織から組織メンバーを削除できます。
 
 組織からメンバーを削除するには、以下の手順に従ってください。
 
@@ -281,7 +281,7 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 ### プロジェクトメンバーを招待する {#invite-a-project-member}
 
-`Organization Owner`または`Project Owner`の役割をお持ちの場合は、プロジェクトにメンバーを招待できます。
+`Organization Owner`または`Project Owner`ロールをお持ちの場合は、プロジェクトにメンバーを招待できます。
 
 > **Note:**
 >
@@ -315,7 +315,7 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 ### ユーザーのプロジェクトアクセス権を削除する {#remove-project-access-for-a-user}
 
-`Organization Owner`または`Project Owner`の役割を担っている場合は、プロジェクトメンバーを削除できます。
+`Organization Owner`または`Project Owner`ロールを担っている場合は、プロジェクトメンバーを削除できます。
 
 プロジェクトからメンバーを削除するには、以下の手順を実行してください。
 
@@ -355,9 +355,9 @@ TiDB Xインスタンスへのアクセス権を付与するには、以下の�
 
 5. **Save**をクリックしてください。
 
-### ユーザーのインスタンスアクセス権を削除します {#remove-instance-access-for-a-user}
+### ユーザーのインスタンスアクセス権を削除する {#remove-instance-access-for-a-user}
 
-`Organization Owner`または`Project Owner`役割を担っている場合は、ユーザーのインスタンスアクセス権を削除できます。
+`Organization Owner`または`Project Owner`ロールを担っている場合は、ユーザーのインスタンスアクセス権を削除できます。
 
 ユーザーのインスタンスアクセス権を削除するには、以下の手順を実行してください。
 
@@ -371,9 +371,9 @@ TiDB Xインスタンスへのアクセス権を付与するには、以下の�
 
 5. **Save**をクリックしてください。
 
-## ユーザーの役割を変更する {#modify-roles-of-a-user}
+## ユーザーのロールを変更する {#modify-roles-of-a-user}
 
-TiDB Cloudでユーザーの役割を変更するには、以下の手順を実行してください。
+TiDB Cloudでユーザーのロールを変更するには、以下の手順を実行してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
 
@@ -386,7 +386,7 @@ TiDB Cloudでユーザーの役割を変更するには、以下の手順を実�
 
 4. **Save**をクリックしてください。
 
-## ユーザープロファイルの管理 {#manage-user-profiles}
+## ユーザープロファイルを管理する {#manage-user-profiles}
 
 TiDB Cloudでは、氏名（姓、名）、電話番号など、プロフィール情報を簡単に管理できます。
 

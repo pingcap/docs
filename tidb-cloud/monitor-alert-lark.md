@@ -5,7 +5,7 @@ summary: Lark経由でアラート通知を受信して TiDB クラスターを�
 
 # Lark経由で購読する
 
-TiDB Cloud では、Lark、[email](/tidb-cloud/monitor-alert-email.md)、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[Flashduty](/tidb-cloud/monitor-alert-flashduty.md)、[PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)、および [Webhook](/tidb-cloud/monitor-alert-webhook.md) を介してアラート通知を購読するための簡単な方法を提供しています。このドキュメントでは、Lark経由でアラート通知を購読する方法について説明します。
+TiDB Cloud では、Lark、[メール](/tidb-cloud/monitor-alert-email.md)、[Slack](/tidb-cloud/monitor-alert-slack.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[Flashduty](/tidb-cloud/monitor-alert-flashduty.md)、[PagerDuty](/tidb-cloud/monitor-alert-pagerduty.md)、および [Webhook](/tidb-cloud/monitor-alert-webhook.md) を介してアラート通知を購読するための簡単な方法を提供しています。このドキュメントでは、Lark経由でアラート通知を購読する方法について説明します。
 
 > **Note:**
 >
@@ -41,12 +41,12 @@ TiDB Cloud では、Lark、[email](/tidb-cloud/monitor-alert-email.md)、[Slack]
 >
 > {{{ .dedicated }}} では、アラートの購読は現在のプロジェクト内のすべてのアラートに対して適用されます。プロジェクト内に複数の {{{ .dedicated }}} クラスターがある場合でも、購読は 1回だけで済みます。
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、**Project view** タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、**Project view** タブをクリックします。
 2. プロジェクトビューで対象のプロジェクトを見つけ、プロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックします。
 3. 左側のナビゲーションペインで、**Project Settings** の下にある **Alert Subscription** をクリックします。
 4. **Alert Subscription** ページの右上にある **Add Subscriber** をクリックします。
 5. **Subscriber Type** ドロップダウンリストから **Lark Webhook** を選択します。
-6. **Name** フィールドに名前を入力し、**Webhook URL** フィールドに Lark webhook URL を、**Secret** フィールドに Lark secret を入力します。secret token は、Lark グループで "Sign Verification" を有効にした後にのみ生成される点に注意してください。
+6. **Name** フィールドに名前を入力し、**Webhook URL** フィールドに Lark webhook URL を、**Secret** フィールドに Lark のシークレットを入力します。シークレットトークンは、Lark グループで "Sign Verification" を有効にした後にのみ生成される点に注意してください。
 7. **Save** をクリックします。バックエンドで接続テストが実行され、保存されます。
 
     テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従って問題をトラブルシュートし、接続を再試行してください。
@@ -61,11 +61,11 @@ TiDB Cloud では、Lark、[email](/tidb-cloud/monitor-alert-email.md)、[Slack]
 >
 > {{{ .essential }}} では、アラートの購読は現在のインスタンス内のすべてのアラートに対して適用されます。複数の {{{ .essential }}} インスタンスがある場合は、各インスタンスごとに個別に購読する必要があります。
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックしてその概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックしてその概要ページに移動します。
 2. 左側のナビゲーションペインで、**Settings** > **Alert Subscription** をクリックします。
 3. **Alert Subscription** ページの右上にある **Add Subscriber** をクリックします。
 4. **Subscriber Type** ドロップダウンリストから **Lark** を選択します。
-5. **Name** フィールドに名前を入力し、**Webhook URL** フィールドに Lark webhook URL を、**Secret** フィールドに Lark secret を入力します。secret token は、Lark グループで "Sign Verification" を有効にした後にのみ生成される点に注意してください。
+5. **Name** フィールドに名前を入力し、**Webhook URL** フィールドに Lark webhook URL を、**Secret** フィールドに Lark のシークレットを入力します。シークレットトークンは、Lark グループで "Sign Verification" を有効にした後にのみ生成される点に注意してください。
 6. **Save** をクリックします。バックエンドで接続テストが実行され、保存されます。
 
     テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従って問題をトラブルシュートし、接続を再試行してください。
@@ -80,11 +80,11 @@ TiDB Cloud では、Lark、[email](/tidb-cloud/monitor-alert-email.md)、[Slack]
 >
 > {{{ .premium }}} では、アラートの購読は現在のインスタンス内のすべてのアラートに対して適用されます。複数の {{{ .premium }}} インスタンスがある場合は、各インスタンスごとに個別に購読する必要があります。
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックしてその概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックしてその概要ページに移動します。
 2. 左側のナビゲーションペインで、**Settings** > **Alert Subscription** をクリックします。
 3. **Alert Subscription** ページの右上にある **Add Subscriber** をクリックします。
 4. **Subscriber Type** ドロップダウンリストから **Lark** を選択します。
-5. **Name** フィールドに名前を入力し、**Webhook URL** フィールドに Lark webhook URL を、**Secret** フィールドに Lark secret を入力します。secret token は、Lark グループで "Sign Verification" を有効にした後にのみ生成される点に注意してください。
+5. **Name** フィールドに名前を入力し、**Webhook URL** フィールドに Lark webhook URL を、**Secret** フィールドに Lark のシークレットを入力します。シークレットトークンは、Lark グループで "Sign Verification" を有効にした後にのみ生成される点に注意してください。
 6. **Save** をクリックします。バックエンドで接続テストが実行され、保存されます。
 
     テストに失敗した場合は、エラーメッセージが表示されます。メッセージに従って問題をトラブルシュートし、接続を再試行してください。
@@ -97,11 +97,11 @@ TiDB Cloud では、Lark、[email](/tidb-cloud/monitor-alert-email.md)、[Slack]
 
 ## アラート通知の購読を解除する {#unsubscribe-from-alert-notifications}
 
-アラート通知を受信しなくなった場合は、次の手順を実行します。手順は [TiDB Cloud のプラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
+アラート通知の受信を停止したい場合は、次の手順を実行します。手順は [TiDB Cloud のプラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
 
 <CustomContent plan="dedicated">
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、**Project view** タブをクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、**Project view** タブをクリックします。
 2. プロジェクトビューで対象のプロジェクトを見つけ、プロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックします。
 3. 左側のナビゲーションペインで、**Project Settings** の下にある **Alert Subscription** をクリックします。
 4. **Alert Subscription** ページで、削除する対象の購読者の行を見つけ、**...** > **Unsubscribe** をクリックします。
@@ -111,7 +111,7 @@ TiDB Cloud では、Lark、[email](/tidb-cloud/monitor-alert-email.md)、[Slack]
 
 <CustomContent plan="essential">
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックしてその概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .essential }}} インスタンス名をクリックしてその概要ページに移動します。
 2. 左側のナビゲーションペインで、**Settings** > **Alert Subscription** をクリックします。
 3. **Alert Subscription** ページで、削除する対象の購読者の行を見つけ、**...** > **Unsubscribe** をクリックします。
 4. **Unsubscribe** をクリックして購読解除を確認します。
@@ -120,7 +120,7 @@ TiDB Cloud では、Lark、[email](/tidb-cloud/monitor-alert-email.md)、[Slack]
 
 <CustomContent plan="premium">
 
-1. [TiDB Cloud console](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックしてその概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com) で、組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象の {{{ .premium }}} インスタンス名をクリックしてその概要ページに移動します。
 2. 左側のナビゲーションペインで、**Settings** > **Alert Subscription** をクリックします。
 3. **Alert Subscription** ページで、削除する対象の購読者の行を見つけ、**...** > **Unsubscribe** をクリックします。
 4. **Unsubscribe** をクリックして購読解除を確認します。

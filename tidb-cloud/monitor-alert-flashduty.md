@@ -13,7 +13,7 @@ TiDB Cloudでは、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[�
 
 ## 前提条件 {#prerequisites}
 
-- Flashduty 機能による購読機能は、 **Enterprise**または**Premium**[サポートプラン](/tidb-cloud/connected-care-overview.md)に加入している組織のみが利用できます。
+- Flashduty 経由での購読機能は、 **Enterprise**または**Premium**[サポートプラン](/tidb-cloud/connected-care-overview.md)に加入している組織のみが利用できます。
 
 <CustomContent plan="dedicated">
 
@@ -38,7 +38,7 @@ TiDB Cloudでは、Flashduty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[�
 
 ### ステップ2. TiDB Cloudから購読する {#step-2-subscribe-from-tidb-cloud}
 
-アラート通知のサブスクリプションは[TiDB Cloudプラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
+アラート通知の購読は[TiDB Cloudプラン](/tidb-cloud/select-cluster-tier.md)によって異なります。
 
 <CustomContent plan="dedicated">
 

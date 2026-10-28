@@ -7,7 +7,7 @@ summary: Airbyte TiDBコネクタの使い方を学びましょう。
 
 [Airbyte](https://airbyte.com/)は、データウェアハウス、データレイク、データベース内のデータを統合し、抽出、ロード、変換（ELT）パイプラインを構築するためのオープンソースのデータ統合エンジンです。このドキュメントでは、Airbyteをソースまたは宛先としてTiDB Cloudに接続する方法について説明します。
 
-## Airbyteをデプロイ {#deploy-airbyte}
+## Airbyteをデプロイする {#deploy-airbyte}
 
 Airbyteは、わずか数ステップでローカル環境にデプロイできます。
 
@@ -56,7 +56,7 @@ airbyte-server      | --------------------------------------
 
     TiDB Cloudコンソールの接続ダイアログからパラメーター値を取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの<CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>の名前をクリックして概要ページに移動し、右上隅の**Connect**をクリックします。
 
-3. **SSL Connection**を有効にし、 **JDBC URLパラメータ**でTLSプロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
+3. **SSL Connection**を有効にし、 **JDBC URL Params**でTLSプロトコルを**TLSv1.2**または**TLSv1.3**に設定します。
 
     > **Note:**
     >
@@ -64,7 +64,7 @@ airbyte-server      | --------------------------------------
     > - JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
     > - TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
 
-4. コネクタの作成を完了するには、**Set up source**または**宛先の設定**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
+4. コネクタの作成を完了するには、**Set up source**または**destination**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
@@ -74,13 +74,13 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 ## 接続を設定する {#set-up-the-connection}
 
-送信元と送信先を設定したら、接続を構築して構成できます。
+ソースと宛先を設定したら、接続を構築して構成できます。
 
 以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクタでは、パラメータが異なる場合があります。
 
 1. サイドバーの**Connections**をクリックし、次に**New Connection**をクリックします。
 
-2. 事前に設定した送信元と送信先を選択してください。
+2. 事前に設定したソースと宛先を選択してください。
 
 3. 接続**Set up**パネルに移動し、 `${source_name} - ${destination-name}`などの接続名を作成します。
 
@@ -99,7 +99,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
     ![Set up connection](/media/tidb-cloud/integration-airbyte-connection.jpg)
 
-7. デフォルトの正規化モードを使用するには、 **Normalization & Transformation**を**Normalized tabular data**に設定するか、ジョブのdbtファイルを設定してください。
+7. **Normalization & Transformation**を**Normalized tabular data**に設定してデフォルトの正規化モードを使用するか、ジョブのdbtファイルを設定してください。
 
 8. **Set up connection**をクリックしてください。
 

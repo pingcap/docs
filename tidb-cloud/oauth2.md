@@ -13,30 +13,30 @@ OAuthの最新バージョンである[OAuth 2.0](https://oauth.net/2/)は、認
 
 - セキュリティ: トークンベースの認証を使用することで、OAuth 2.0 はパスワードの盗難や不正アクセスのリスクを最小限に抑えます。
 - 利便性: 複数の資格情報を管理することなく、データへのアクセスを許可および取り消すことができます。
-- アクセス制御: サードパーティ アプリケーションに付与するアクセス レベルを正確に指定して、必要な権限のみが付与されるようにすることができます。
+- アクセス制御: サードパーティアプリケーションに付与するアクセスレベルを正確に指定して、必要な権限のみが付与されるようにすることができます。
 
 ## OAuth 付与タイプ {#oauth-grant-types}
 
-OAuthフレームワークは、さまざまなユースケースに合わせて複数の権限付与タイプを指定します。TiDB Cloudは、デバイスコードと認証コードという2つの最も一般的なOAuth権限付与タイプをサポートしています。
+OAuthフレームワークは、さまざまなユースケースに合わせて複数の権限付与タイプを指定します。TiDB Cloudは、デバイスコードと認可コードという2つの最も一般的なOAuth権限付与タイプをサポートしています。
 
 ### デバイスコード付与タイプ {#device-code-grant-type}
 
-これは通常、デバイス フロー内のブラウザーレス デバイスまたは入力が制限されたデバイスによって、以前に取得したデバイス コードをアクセストークンと交換するために使用されます。
+これは通常、デバイスフロー内のブラウザーレスデバイスまたは入力が制限されたデバイスによって、以前に取得したデバイスコードをアクセストークンと交換するために使用されます。
 
 ### 認可コード付与タイプ {#authorization-code-grant-type}
 
-これは最も一般的な OAuth 2.0 付与タイプであり、ユーザーがアプリを承認した後、Web アプリとネイティブ アプリの両方がアクセストークンを取得できるようになります。
+これは最も一般的な OAuth 2.0 付与タイプであり、ユーザーがアプリを承認した後、Web アプリとネイティブアプリの両方がアクセストークンを取得できるようになります。
 
 ## OAuth を使用してTiDB Cloudにアクセスする {#use-oauth-to-access-tidb-cloud}
 
 OAuth 2.0 デバイスコード付与タイプを使用して、 TiDB Cloud CLI にアクセスできます。
 
-- [ticloud認証ログイン](/tidb-cloud/ticloud-auth-login.md) : TiDB Cloudで認証する
-- [ticloud 認証ログアウト](/tidb-cloud/ticloud-auth-logout.md) : TiDB Cloudからログアウト
+- [ticloud auth login](/tidb-cloud/ticloud-auth-login.md) : TiDB Cloudで認証する
+- [ticloud auth logout](/tidb-cloud/ticloud-auth-logout.md) : TiDB Cloudからログアウト
 
 アプリがOAuthを使用してTiDB Cloudにアクセスする必要がある場合は、 [クラウド＆テクノロジーパートナーになる](https://www.pingcap.com/partners/become-a-partner/) （**Partner Program**で**Cloud & Technology Partner**を選択）にリクエストを送信してください。担当者からご連絡いたします。
 
-## 承認された OAuth アプリのビューと取り消し {#view-and-revoke-authorized-oauth-apps}
+## 承認された OAuth アプリを表示および取り消す {#view-and-revoke-authorized-oauth-apps}
 
 次のように、 TiDB Cloudコンソールで承認された OAuth アプリケーションのレコードを表示できます。
 

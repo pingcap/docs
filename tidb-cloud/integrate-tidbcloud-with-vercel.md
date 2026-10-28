@@ -13,8 +13,8 @@ TiDB CloudとVercelを組み合わせることで、MySQL互換のリレーシ�
 
 このガイドでは、以下のいずれかの方法を使用して、 TiDB CloudのリソースをVercelプロジェクトに接続する方法について説明します。
 
-- [TiDB Cloud Vercelとの連携を介して接続します](#connect-via-the-tidb-cloud-vercel-integration)
-- [環境変数を手動で設定して接続します](#connect-via-manually-setting-environment-variables)
+- [TiDB Cloud Vercelとの連携を介して接続する](#connect-via-the-tidb-cloud-vercel-integration)
+- [環境変数を手動で設定して接続する](#connect-via-manually-setting-environment-variables)
 
 上記2つの方法のいずれにおいても、 TiDB Cloudはデータベースにプログラムで接続するための以下のオプションを提供します。
 
@@ -38,7 +38,7 @@ Vercelプロジェクトは、1つのTiDB Cloudクラスターにしか接続で
 
 TiDB Cloudにアカウントとクラスターが既に作成されている必要があります。アカウントとクラスターをお持ちでない場合は、以下の手順に従って作成してください。
 
-- [TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 
     > **Note:**
     >
@@ -67,11 +67,11 @@ Vercelプロジェクトは、1つのTiDB Cloudデータアプリにしか接続
 
 ## TiDB Cloud Vercelとの連携を介して接続する {#connect-via-the-tidb-cloud-vercel-integration}
 
-TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケットプレイス](https://vercel.com/integrations)から[TiDB Cloud統合](https://vercel.com/integrations/tidb-cloud)ページに移動します。この方法を使用すると、接続するクラスターを選択でき、 TiDB Cloud はVercel プロジェクトに必要なすべての環境変数を自動的に生成します。
+TiDB Cloud Vercel 統合経由で接続するには、 [VercelのIntegrations Marketplace](https://vercel.com/integrations)から[TiDB Cloud統合](https://vercel.com/integrations/tidb-cloud)ページに移動します。この方法を使用すると、接続するクラスターを選択でき、 TiDB Cloud はVercel プロジェクトに必要なすべての環境変数を自動的に生成します。
 
 > **Note:**
 >
-> この方法は、 TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスでのみ利用可能です。TiDB Cloud DedicatedクラスターまたはTiDB Cloud Premium インスタンスに接続する場合は、 [手動法](#connect-via-manually-setting-environment-variables)を使用してください。
+> この方法は、 TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスでのみ利用可能です。TiDB Cloud DedicatedクラスターまたはTiDB Cloud Premium インスタンスに接続する場合は、 [手動の方法](#connect-via-manually-setting-environment-variables)を使用してください。
 
 ### 統合ワークフロー {#integration-workflow}
 
@@ -80,7 +80,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 <SimpleTab>
 <div label="Cluster">
 
-1. [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**Add Integration**をクリックします。 **TiDB Cloudの追加**ダイアログが表示されます。
+1. [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**Add Integration**をクリックします。 **Add TiDB Cloud**ダイアログが表示されます。
 2. ドロップダウンリストから統合の範囲を選択し、 **Continue**をクリックしてください。
 3. 統合を追加するVercelプロジェクトを選択し、 **Continue**をクリックします。
 4. 統合に必要な権限を確認し、 **Add Integration**をクリックしてください。すると、 TiDB Cloudコンソールの統合ページに移動します。
@@ -127,7 +127,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
 <div label="Data App">
 
-1. [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**Add Integration**をクリックします。 **TiDB Cloudの追加**ダイアログが表示されます。
+1. [TiDB Cloud Vercelとの統合](https://vercel.com/integrations/tidb-cloud)ページの右上領域にある**Add Integration**をクリックします。 **Add TiDB Cloud**ダイアログが表示されます。
 2. ドロップダウンリストから統合の範囲を選択し、 **Continue**をクリックしてください。
 3. 統合を追加するVercelプロジェクトを選択し、 **Continue**をクリックします。
 4. 統合に必要な権限を確認し、 **Add Integration**をクリックしてください。すると、 TiDB Cloudコンソールの統合ページに移動します。
@@ -167,13 +167,13 @@ TiDB Cloud Vercel 統合経由で接続するには、 [Vercelの統合マーケ
 
     接続を削除すると、統合ワークフローによって設定された環境変数もVercelプロジェクトから削除されます。ただし、この操作はTiDB Cloudクラスタのデータには影響しません。
 
-### TiDB Cloudのブランチ機能に接続します {#connect-with-branching}
+### TiDB Cloud Branchingを使用して接続する {#connect-with-branching}
 
 Vercel の[プレビューデプロイメント](https://vercel.com/docs/deployments/preview-deployments)機能を使用すると、変更を Git プロジェクトの本番ブランチにマージすることなく、ライブデプロイメントでアプリの変更をプレビューできます。[TiDB Cloud Branching](/tidb-cloud/branch-overview.md)を使用すると、Vercel プロジェクトのブランチごとに新しいインスタンスを作成できます。これにより、本番データに影響を与えることなく、ライブデプロイメントでアプリの変更をプレビューできます。
 
 > **Note:**
 >
-> 現在、 TiDB Cloud Branching は[VercelプロジェクトとGitHubリポジトリの関連付け](https://vercel.com/docs/deployments/git/vercel-for-github)のみをサポートしています。
+> 現在、 TiDB Cloud Branching は[GitHubリポジトリに関連付けられたVercelプロジェクト](https://vercel.com/docs/deployments/git/vercel-for-github)のみをサポートしています。
 
 TiDB Cloud Branching を有効にするには、 [TiDB Cloud Vercel統合ワークフロー](#integration-workflow)で次のことを確認する必要があります。
 
@@ -215,7 +215,7 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 >
 > TiDB Cloudの各組織では、デフォルトではTiDB Cloud Starterインスタンス用に最大 5つのブランチを作成できます。制限を超えないようにするには、不要になったTiDB Cloud Starterインスタンスのブランチを削除してください。詳細については、 [TiDB Cloudブランチを管理する](/tidb-cloud/branch-manage.md)を参照してください。
 
-## 環境変数を手動で設定して接続します {#connect-via-manually-setting-environment-variables}
+## 環境変数を手動で設定して接続する {#connect-via-manually-setting-environment-variables}
 
 <SimpleTab>
 <div label="Cluster">

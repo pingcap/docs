@@ -1,12 +1,12 @@
 ---
 title: Migrate MySQL-Compatible Databases to TiDB Cloud Using Data Migration
-summary: データ移行機能を使用して、Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、またはSelf-ManagedのMySQLインスタンスから、ダウンタイムを最小限に抑えながらMySQLデータベースをTiDB Cloudにシームレスに移行する方法を学びましょう。
+summary: データ移行機能を使用して、Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、または自己管理型MySQLインスタンスから、ダウンタイムを最小限に抑えながらMySQLデータベースをTiDB Cloudにシームレスに移行する方法を学びましょう。
 aliases: ['/ja/tidbcloud/migrate-data-into-tidb','/ja/tidbcloud/migrate-incremental-data-from-mysql']
 ---
 
 # データ移行を使用してMySQL互換データベースをTiDB Cloudに移行する {#migrate-mysql-compatible-databases-to-tidb-cloud-using-data-migration}
 
-このドキュメントでは、TiDB Cloud のデータ移行機能を使用して、Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、またはSelf-Managed MySQL インスタンスから<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent> 、 <CustomContent plan="essential">TiDB Cloud Essential</CustomContent> 、または <CustomContent plan="premium">TiDB Cloud Premium</CustomContent> へ MySQL データベースを移行する手順を説明します。
+このドキュメントでは、[TiDB Cloudコンソール](https://tidbcloud.com/)のデータ移行機能を使用して、Amazon Aurora MySQL、Amazon RDS、Azure Database for MySQL - Flexible Server、Google Cloud SQL for MySQL、または自己管理型MySQLインスタンスから<CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="essential">TiDB Cloud Essential</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent>へ MySQL データベースを移行する手順を説明します。
 
 <CustomContent plan="essential">
 
@@ -94,7 +94,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="dedicated">
 
-- TiDB Cloud Dedicatedの場合、データセット サイズが 1 TiB より小さい場合は、論理モード (デフォルト モード) を使用することをお勧めします。データセットのサイズが 1 TiB より大きい場合、または既存のデータをより速く移行したい場合は、物理モードを使用できます。詳細については、[既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)を参照してください。
+- TiDB Cloud Dedicatedの場合、データセットサイズが 1 TiB より小さい場合は、論理モード (デフォルトモード) を使用することをお勧めします。データセットのサイズが 1 TiB より大きい場合、または既存のデータをより速く移行したい場合は、物理モードを使用できます。詳細については、[既存データと増分データを移行する](#migrate-existing-data-and-incremental-data)を参照してください。
 
 </CustomContent>
 <CustomContent plan="essential">
@@ -126,12 +126,12 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 </CustomContent>
 <CustomContent plan="dedicated">
 
-- 増分データ移行 (進行中の変更をTiDB Cloud Dedicatedクラスターに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`文を`REPLACE`に、 `UPDATE`文を`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Dedicatedクラスターに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Dedicated Dedicated クラスターで重複した行が発生する可能性があります。
+- 増分データ移行 (進行中の変更をTiDB Cloud Dedicatedクラスターに移行する) 中に、移行ジョブが突然のエラーから回復した場合、60秒間セーフモードに入ることがあります。セーフモード中、 TiDB Cloudは`INSERT`文を`REPLACE`に、 `UPDATE`文を`DELETE`および`REPLACE`に移行し、これらのトランザクションをターゲットのTiDB Cloud Dedicatedクラスターに適用して、突然のエラー中に発生したすべてのデータが安全にターゲットに到達するようにします。ソーステーブルに主キーまたは null 以外の一意インデックスがない場合、ターゲットのTiDB Cloud Dedicatedクラスターで重複した行が発生する可能性があります。
 
 - 以下のシナリオでは、移行ジョブに24時間以上かかる場合、ソースデータベースのバイナリログを削除しないでください。これにより、データ移行ツールは増分データ移行のために連続したバイナリログを取得できます。
 
     - 既存のデータ移行中に。
-    - 既存のデータ移行が完了し、増分データ移行が初めて開始された後、レイテンシーは0msになりません。
+    - 既存のデータ移行が完了し、増分データ移行が初めて開始された後、レイテンシーが0msではない場合。
 
 </CustomContent>
 
@@ -178,7 +178,7 @@ TiDB Cloud Essentialのデータ移行機能は、以下のデータソースと
 
 <CustomContent plan="premium">
 
-TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソースデータベースをサポートしており、 **MySQL**は移行ジョブウィザードで使用できる唯一のデータソース タイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
+TiDB Cloud Premium の場合、データ移行機能は次の MySQL 互換ソースデータベースをサポートしており、 **MySQL**は移行ジョブウィザードで使用できる唯一のデータソースタイプです。サポートされている接続方法については、[ネットワーク接続を確保する](#ensure-network-connectivity)を参照してください。
 
 | データソース                             | サポートされているバージョン |
 | :--------------------------------- | :------------- |
@@ -242,7 +242,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 <details><summary>AWS RDSまたはAurora MySQLの設定</summary>
 
-1. AWS マネジメントコンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタムパラメータ グループを作成または編集します。
+1. AWS マネジメントコンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタムパラメータグループを作成または編集します。
 2. 上記の4つのパラメータを必要な値に設定してください。
 3. パラメータグループをインスタンスまたはクラスターにアタッチし、再起動して変更を適用してください。
 4. 再起動後、インスタンスに接続し、 `SHOW VARIABLES`文を実行して構成を確認します。
@@ -251,7 +251,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 </details>
 
-<details><summary>Azure Database for MySQL の構成 - Flexible Server</summary>
+<details><summary>Azure Database for MySQL - Flexible Server の構成</summary>
 
 1. [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL servers**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーションペインで**Setting** > **Server parameters**をクリックします。
 
@@ -338,12 +338,12 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
 
 #### TLS/SSLによるエンドツーエンド暗号化 {#end-to-end-encryption-over-tlsssl}
 
-接続方法に関わらず、エンドツーエンド暗号化にはTLS/SSLの使用を強く推奨します。プライベートエンドポイント<CustomContent plan="dedicated">およびVPCピアリング</CustomContent>ネットワークパスを保護しますが、TLS/SSLはデータ自体を保護し、コンプライアンス要件を満たすのに役立ちます。
+接続方法に関わらず、エンドツーエンド暗号化にはTLS/SSLの使用を強く推奨します。プライベートエンドポイント<CustomContent plan="dedicated">およびVPCピアリング</CustomContent>はネットワークパスを保護しますが、TLS/SSLはデータ自体を保護し、コンプライアンス要件を満たすのに役立ちます。
 
 <details><summary>TLS/SSL暗号化接続用のクラウドプロバイダーの証明書をダウンロードして保存する</summary>
 
 - Amazon Aurora MySQL または Amazon RDS MySQL: [SSL/TLSを使用してDBインスタンスまたはクラスタへの接続を暗号化する](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
-- Azure Database for MySQL - フレキシブル サーバー: [暗号化された接続で接続します](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
+- Azure Database for MySQL - Flexible Server: [暗号化された接続で接続します](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
 - Google Cloud SQL for MySQL: [SSL/TLS証明書の管理](https://cloud.google.com/sql/docs/mysql/manage-ssl-instance)
 - Alibaba Cloud RDS MySQL: [SSL暗号化機能を設定する](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/configure-a-cloud-certificate-to-enable-ssl-encryption)
 
@@ -351,7 +351,7 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
 
 #### 公開エンドポイントまたはIPアドレス {#public-endpoints-or-ip-addresses}
 
-パブリックエンドポイントを使用する場合、ネットワーク接続とアクセスは、DMジョブ作成プロセス中、現在と後の両方で確認できます。TiDB Cloudは、その時点で特定の送信IPアドレスと指示を提供します。
+パブリックエンドポイントを使用する場合、ネットワーク接続とアクセスは、今すぐ確認することも、後でDMジョブの作成プロセス中に確認することもできます。TiDB Cloudは、その時点で特定の送信IPアドレスと指示を提供します。
 
 <CustomContent plan="dedicated">
 
@@ -370,7 +370,7 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
 2. データベースのファイアウォールまたはセキュリティグループのルールを変更するには、必要な権限が付与されていることを確認してください。詳細については、クラウドプロバイダーのドキュメントを参照してください。
 
     - Amazon Aurora MySQL または Amazon RDS MySQL: [セキュリティグループによるアクセス制御](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Overview.RDSSecurityGroups.html)。
-    - Azure Database for MySQL - フレキシブル サーバー: [公共ネットワークアクセス](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
+    - Azure Database for MySQL - Flexible Server: [公共ネットワークアクセス](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/concepts-networking-public)
     - Google Cloud SQL for MySQL: [認証済みネットワーク](https://cloud.google.com/sql/docs/mysql/configure-ip?__hstc=86493575.39bd75fe158e3a694e276e9709c7bc82.1766498597248.1768349165136.1768351956126.50&__hssc=86493575.1.1768351956126&__hsfp=3e9153f1372737b813f3fefb5bbb2ddf#authorized-networks)。
 
 3. オプション：適切な証明書を使用して転送中の暗号化を行い、パブリックインターネットアクセスを備えたマシンからソースデータベースへの接続を確認します。
@@ -379,7 +379,7 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
     mysql -h <public-host> -P <port> -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. 後ほど、データ移行ジョブの設定時に、 TiDB Cloud送信元IPアドレス範囲が提供されます。その際、上記と同じ手順に従って、このIPアドレス範囲をデータベースのファイアウォールまたはセキュリティグループのルールに追加する必要があります。
+4. 後ほど、データ移行ジョブの設定時に、 TiDB Cloudから送信元IPアドレス範囲が提供されます。その際、上記と同じ手順に従って、このIPアドレス範囲をデータベースのファイアウォールまたはセキュリティグループのルールに追加する必要があります。
 
 #### プライベートリンクまたはプライベートエンドポイント {#private-link-or-private-endpoint}
 
@@ -393,7 +393,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 1. [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)で、データベースのプライベート IP アドレスを含むターゲットグループに転送する TCP リスナーをポート`3306`で持つ内部 NLB を作成します。以下のキー設定を構成します。
 
-    - **スキーム**:**内部**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
+    - **Scheme**: **Internal**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
     - **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
     - **Availability Zones**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
     - **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
@@ -402,7 +402,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
         [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
         > **Note:**
         >
-        > RDS プライベート IP は、フェールオーバー、メンテナンス、またはストレージの拡張時に変更される可能性があります。実稼働デプロイメントについては、IP の自動ローテーションパターンについて、AWS データベース ブログの[AWS PrivateLinkとネットワークロードバランサーを使用して、VPCをまたいでAmazon RDSにアクセスします](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/)を参照してください。
+        > RDS プライベート IP は、フェールオーバー、メンテナンス、またはストレージの拡張時に変更される可能性があります。実稼働デプロイメントについては、IP の自動ローテーションパターンについて、AWS データベースブログの[AWS PrivateLinkとネットワークロードバランサーを使用して、VPCをまたいでAmazon RDSにアクセスします](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/)を参照してください。
 
     詳細な手順については、AWS ドキュメントの[ネットワークロードバランサーを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html)を参照してください。
 
@@ -456,7 +456,7 @@ Azure Database for MySQL - Flexible Server は、ネイティブのプライベ�
     mysql -h <private‑host> -P 3306 -u <user> -p --ssl-ca=<path-to-provider-ca.pem> -e "SELECT version();"
     ```
 
-4. [Azureポータル](https://portal.azure.com/)で、MySQL Flexible Server インスタンスの概要ページ (プライベートエンドポイント オブジェクトではありません) に戻り、 **Essentials**セクションで**JSON ビュー**をクリックして、後で使用するためにリソース ID をコピーします。リソース ID は`/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`形式です。このリソース ID (プライベートエンドポイント ID ではありません) を使用して、 TiDB Cloud DM を構成します。
+4. [Azureポータル](https://portal.azure.com/)で、MySQL Flexible Server インスタンスの概要ページ (プライベートエンドポイントオブジェクトではありません) に戻り、 **Essentials**セクションで**JSON View**をクリックして、後で使用するためにリソース ID をコピーします。リソース ID は`/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`形式です。このリソース ID (プライベートエンドポイント ID ではありません) を使用して、 TiDB Cloud DM を構成します。
 
 5. 後ほど、 TiDB Cloud DMをPrivateLink経由で接続するように構成する際には、Azureポータルに戻り、 TiDB Cloudからこのプライベートエンドポイントへの保留中の接続リクエストを承認する必要があります。
 
@@ -478,7 +478,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 1. [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)で、データベースのプライベート IP アドレスを含むターゲットグループに転送する TCP リスナーをポート`3306`で持つ内部 NLB を作成します。以下のキー設定を構成します。
 
-    - **スキーム**:**内部**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
+    - **Scheme**: **Internal**。ロードバランサーはVPC内に留まります。次のステップのエンドポイントサービスのみが、ロードバランサーをTiDB Cloudに公開します。
     - **VPC** ：RDSまたはAuroraインスタンスと同じVPCを指定します。フォームはデフォルトでアカウントのデフォルトVPCを選択しますが、データベースが配置されている場所は通常このVPCではないため、続行する前に**VPC**のドロップダウンリストを変更してください。
     - **Availability Zones**：**少なくとも2つのアベイラビリティゾーン**でサブネットを選択してください。NLBでは、エンドポイントサービスの可用性を確保するためにマルチAZ構成が必要です。RDSがシングルAZ構成の場合でも、同じVPC内の別のAZに2つ目のサブネットが必要になります。
     - **Listener port**： `3306` 。ウィザードのデフォルト値は`80`です。リスナーを作成する前に変更してください。
@@ -487,7 +487,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
         [Amazon EC2 コンソール](https://console.aws.amazon.com/ec2/)でデータベースのプライベート IP アドレスを見つけるには、 左側のナビゲーションペインで**Network Interfaces**をクリックし、 **Description** = `RDSNetworkInterface`と**VPC** = ご使用の VPC でフィルタリングします。一致するネットワークインターフェイスに表示されている**Primary private IPv4 address**を使用します。
         > **Note:**
         >
-        > RDS プライベート IP は、フェールオーバー、メンテナンス、またはストレージの拡張時に変更される可能性があります。実稼働デプロイメントについては、IP の自動ローテーションパターンについて、AWS データベース ブログの[AWS PrivateLinkとネットワークロードバランサーを使用して、VPCをまたいでAmazon RDSにアクセスします](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/)を参照してください。
+        > RDS プライベート IP は、フェールオーバー、メンテナンス、またはストレージの拡張時に変更される可能性があります。実稼働デプロイメントについては、IP の自動ローテーションパターンについて、AWS データベースブログの[AWS PrivateLinkとネットワークロードバランサーを使用して、VPCをまたいでAmazon RDSにアクセスします](https://aws.amazon.com/blogs/database/access-amazon-rds-across-vpcs-using-aws-privatelink-and-network-load-balancer/)を参照してください。
 
     詳細な手順については、AWS ドキュメントの[ネットワークロードバランサーを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html)を参照してください。
 
@@ -565,7 +565,7 @@ MySQLサービスがAWS VPC内にある場合は、以下の手順を実行し�
 
     <CustomContent plan="essential">
 
-    [TiDB Cloud Essentialインスタンスが配置されているリージョンのCIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)をルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Essentialインスタンスから MySQL インスタンスに流れるようになります。
+    [TiDB Cloud Essentialインスタンスが配置されているリージョンのCIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を受信ルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Essentialインスタンスから MySQL インスタンスに流れるようになります。
 
     </CustomContent>
 
@@ -588,13 +588,13 @@ MySQLサービスがGoogle Cloud VPC内にある場合は、以下の手順を�
 
     <CustomContent plan="dedicated">
 
-    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)をイングレス ファイアウォールルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れることが可能になります。
+    [TiDB Cloud Dedicatedクラスターが配置されているリージョンの CIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)をイングレスファイアウォールルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Dedicatedクラスターから MySQL エンドポイントに流れることが可能になります。
 
     </CustomContent>
 
     <CustomContent plan="essential">
 
-    [TiDB Cloud Essentialインスタンスが配置されているリージョンのCIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)をイングレス ファイアウォールルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Essentialインスタンスから MySQL エンドポイントに流れることが可能になります。
+    [TiDB Cloud Essentialインスタンスが配置されているリージョンのCIDR](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)をイングレスファイアウォールルールに追加する必要があります。これにより、トラフィックがTiDB Cloud Essentialインスタンスから MySQL エンドポイントに流れることが可能になります。
 
     </CustomContent>
 
@@ -614,11 +614,11 @@ MySQLサービスがGoogle Cloud VPC内にある場合は、以下の手順を�
 
 | 特権                   | 範囲    | 目的                                                                                                                                                                                                                                                                         |
 | :------------------- | :---- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SELECT`             | 表     | すべてのテーブルからデータを読み取ることができます                                                                                                                                                                                                                                                  |
+| `SELECT`             | テーブル     | すべてのテーブルからデータを読み取ることができます                                                                                                                                                                                                                                                  |
 | `RELOAD`             | グローバル | フルダンプ中に一貫性のあるスナップショットを保証します                                                                                                                                                                                                                                                |
 | `REPLICATION SLAVE`  | グローバル | 増分データ移行のためのbinlogストリーミングを有効にする                                                                                                                                                                                                                                             |
 | `REPLICATION CLIENT` | グローバル | binlogの位置とサーバーの状態へのアクセスを提供します                                                                                                                                                                                                                                              |
-| `LOCK TABLES`        | 表     | ソースがマネージド MySQL サービス (Amazon RDS、 Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など) であり、 `FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていない場合に必要です。この場合、DM は`LOCK TABLES`にフォールバックし、完全なデータエクスポート中の一貫性を確保します。FTWRL が利用可能なSelf-Managed MySQL インスタンスには不要です。 |
+| `LOCK TABLES`        | テーブル     | ソースがマネージド MySQL サービス (Amazon RDS、 Aurora、ApsaraDB RDS for MySQL、Azure Database for MySQL、Google Cloud SQL など) であり、 `FLUSH TABLES WITH READ LOCK` (FTWRL) が許可されていない場合に必要です。この場合、DM は`LOCK TABLES`にフォールバックし、完全なデータエクスポート中の一貫性を確保します。FTWRL が利用可能な自己管理型MySQLインスタンスには不要です。 |
 
 例えば、ソースのMySQLインスタンスで次の`GRANT`文を使用すると、対応する権限を付与できます。
 
@@ -639,22 +639,22 @@ GRANT SELECT, RELOAD, LOCK TABLES, REPLICATION SLAVE, REPLICATION CLIENT ON *.* 
 | 特権            | 範囲          | 目的                      |
 | :------------ | :---------- | :---------------------- |
 | `CREATE`      | データベース、テーブル | ターゲットにスキーマオブジェクトを作成します  |
-| `SELECT`      | 表           | 移行中にデータを検証する            |
-| `INSERT`      | 表           | 移行されたデータを書き込む           |
-| `UPDATE`      | 表           | 増分データ移行中に既存の行を変更します     |
-| `DELETE`      | 表           | レプリケーションまたは更新中に行を削除します  |
-| `ALTER`       | 表           | スキーマ変更時にテーブル定義を修正します    |
+| `SELECT`      | テーブル           | 移行中にデータを検証する            |
+| `INSERT`      | テーブル           | 移行されたデータを書き込む           |
+| `UPDATE`      | テーブル           | 増分データ移行中に既存の行を変更します     |
+| `DELETE`      | テーブル           | レプリケーションまたは更新中に行を削除します  |
+| `ALTER`       | テーブル           | スキーマ変更時にテーブル定義を修正します    |
 | `DROP`        | データベース、テーブル | スキーマ同期中にオブジェクトを削除します    |
-| `INDEX`       | 表           | インデックスを作成および変更します       |
+| `INDEX`       | テーブル           | インデックスを作成および変更します       |
 | `CREATE VIEW` | ビュー         | マイグレーションで使用されるビューを作成します |
 
-たとえば、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent>次の`GRANT`文を実行して、対応する<CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>を付与できます。
+たとえば、ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>で次の`GRANT`文を実行して、対応する権限を付与できます。
 
 ```sql
 GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON *.* TO 'dm_target_user'@'%';
 ```
 
-## ステップ1：データ移行ページに移動します {#step-1-go-to-the-data-migration-page}
+## ステップ1：データ移行ページに移動する {#step-1-go-to-the-data-migration-page}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -666,7 +666,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 **Create Migration Job**ページで、ソースとターゲットの接続を設定します。
 
-1. ジョブ名を入力してください。ジョブ名は文字で始まり、60文字以内である必要があります。文字（AZ、az）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
+1. ジョブ名を入力してください。ジョブ名は文字で始まり、60文字未満である必要があります。文字（A-Z、a-z）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
 
 2. ソース接続プロファイルを入力してください。
 
@@ -678,7 +678,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
         - **Public IP** ：すべてのクラウドプロバイダーで利用可能（テストおよび概念実証移行に推奨）。
         - **Private Link**：AWSおよびAzureでのみ利用可能（プライベート接続を必要とする本番ワークロードに推奨）。
-        - **VPC Peering**：AWSとGoogle Cloudでのみ利用可能です（低遅延でリージョン内接続が必要で、VPC/VNet CIDRが重複しない本番ロードに推奨されます）。
+        - **VPC Peering**：AWSとGoogle Cloudでのみ利用可能です（低遅延でリージョン内接続が必要で、VPC/VNet CIDRが重複しない本番ワークロードに推奨されます）。
 
     </CustomContent>
     <CustomContent plan="essential">
@@ -741,7 +741,7 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
         - オプション2：クライアント証明書認証
 
             - MySQLサーバーがクライアント証明書認証用に構成されている場合は、**Client Certificate**と**Client private key**をアップロードしてください。
-            - このオプションでは、 TiDB Cloudは認証のためにMySQLサーバーに証明書を提示しますが、 TiDB Cloudサーバーの証明書を検証しません。
+            - このオプションでは、 TiDB Cloudは認証のためにMySQLサーバーに証明書を提示しますが、 TiDB CloudはMySQLサーバーの証明書を検証しません。
             - このオプションは通常、MySQLサーバーが`REQUIRE SUBJECT '...'`や`REQUIRE ISSUER '...'`などのオプションで構成されているが、 `REQUIRE X509`が含まれていない場合に使用され、クライアント証明書の完全な CA 検証を行わずに、クライアント証明書の特定の属性をチェックできるようにします。
             - このオプションは、MySQLサーバーが自己署名証明書またはカスタムPKI環境でクライアント証明書を受け入れる場合によく使用されます。ただし、この構成は中間者攻撃に対して脆弱であるため、他のネットワークレベルの制御によってサーバーの信頼性が保証されない限り、本番環境での使用は推奨されません。
 
@@ -811,11 +811,11 @@ GRANT CREATE, SELECT, INSERT, UPDATE, DELETE, ALTER, DROP, INDEX, CREATE VIEW ON
 
 TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing data migration**と**Incremental data migration**の両方を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
 
-**既存データ**と**増分データ**の移行には、**physical mode**または**logical mode**を使用できます。
+**既存データ**と**増分データ**の移行には、**物理モード**または**論理モード**を使用できます。
 
-- デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。ただし、物理モードよりもパフォーマンスは低下します。
+- デフォルトモードは**論理モード**です。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。ただし、物理モードよりもパフォーマンスは低下します。
 
-- 大規模なデータセットの場合は、**physical mode**の使用をお勧めします。このモードでは、MySQLソースデータベースからデータをエクスポートし、KVペアとしてエンコードしてTiKVに直接書き込むことで、パフォーマンスを向上させます。このモードでは、移行前にターゲットテーブルが空である必要があります。16 RCU（レプリケーションキャパシティユニット）の仕様の場合、パフォーマンスは論理モードの約2.5倍高速です。その他の仕様では、論理モードと比較してパフォーマンスが20%～50%向上する可能性があります。なお、パフォーマンスデータは参考値であり、シナリオによって異なる場合がありますのでご注意ください。
+- 大規模なデータセットの場合は、**物理モード**の使用をお勧めします。このモードでは、MySQLソースデータベースからデータをエクスポートし、KVペアとしてエンコードしてTiKVに直接書き込むことで、パフォーマンスを向上させます。このモードでは、移行前にターゲットテーブルが空である必要があります。16 RCU（レプリケーションキャパシティユニット）の仕様の場合、パフォーマンスは論理モードの約2.5倍高速です。その他の仕様では、論理モードと比較してパフォーマンスが20%～50%向上する可能性があります。なお、パフォーマンスデータは参考値であり、シナリオによって異なる場合がありますのでご注意ください。
 
 > **Note:**
 >
@@ -826,8 +826,8 @@ TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing d
 
 | 移行仕様   | 最大エクスポート速度      | MySQLソースデータベースのパフォーマンス低下 |
 | ------ | ----------- | ------------------------ |
-| RCU 2台 | 80.84 MiB/秒 | 15.6%                    |
-| 4つのRCU | 214.2 MiB/秒 | 20.0%                    |
+| 2 RCU | 80.84 MiB/秒 | 15.6%                    |
+| 4 RCU | 214.2 MiB/秒 | 20.0%                    |
 | 8 RCU  | 365.5 MiB/秒 | 28.9%                    |
 | 16 RCU | 424.6 MiB/秒 | 46.7%                    |
 
@@ -836,7 +836,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing d
 
 TiDB Cloudへのデータ移行を一度で完了させるには、ソースデータベースとターゲットデータベース間のデータの一貫性を確保するため、 **Full + Incremental**と**Incremental data migration**を選択してください。
 
-現在、**既存データ**の移行には**logical mode**のみを使用できます。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
+現在、**既存データ**の移行には**論理モード**のみを使用できます。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、TiDB上で実行します。このモードでは、移行前のターゲットテーブルは空でも空でなくても構いません。
 
 </CustomContent>
 
@@ -844,11 +844,11 @@ TiDB Cloudへのデータ移行を一度で完了させるには、ソースデ�
 
 TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Full + Incremental**を選択してください。これにより、ソースデータベースとターゲットデータベース間のデータの一貫性が確保されます。
 
-**既存データの移行**には、**physical mode**または**logical mode**のいずれかを使用できます。
+**既存データの移行**には、**物理モード**または**論理モード**のいずれかを使用できます。
 
-- デフォルトモードは**logical mode**です。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、ターゲットのTiDB Cloud Premiumインスタンス上で実行します。このモードでは、移行前にターゲットテーブルが空でも空でなくても構いませんが、物理モードよりもパフォーマンスが低下します。
+- デフォルトモードは**論理モード**です。このモードでは、MySQLソースデータベースからSQL文としてデータをエクスポートし、ターゲットのTiDB Cloud Premiumインスタンス上で実行します。このモードでは、移行前にターゲットテーブルが空でも空でなくても構いませんが、物理モードよりもパフォーマンスが低下します。
 
-- 大規模なデータセットの場合は、**physical mode**を選択できます。このモードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用してロードを高速化します。物理モードでは、移行前にターゲットテーブルが空である必要があります。事前チェックで選択したターゲットテーブルが空でないことが検出された場合、移行ジョブは自動的に論理モードに切り替わります。
+- 大規模なデータセットの場合は、**物理モード**を選択できます。このモードでは、ターゲットのTiDB Cloud Premium インスタンスで`IMPORT INTO`を使用してロードを高速化します。物理モードでは、移行前にターゲットテーブルが空である必要があります。事前チェックで選択したターゲットテーブルが空でないことが検出された場合、移行ジョブは自動的に論理モードに切り替わります。
 
 > **Note:**
 >
@@ -878,8 +878,8 @@ TiDB Cloud Premiumへのデータ移行を一度で完了させるには、 **Fu
 1. **Choose Objects to Migrate**ページで、移行するオブジェクトを選択します。 **All**をクリックするとすべてのオブジェクトを選択できます。 **Customize**をクリックしてから、オブジェクト名の横にあるチェックボックスをクリックしてオブジェクトを選択することもできます。
 
     - **All**をクリックすると、移行ジョブはソースデータベースインスタンス全体から既存のデータをTiDB Cloudに移行し、完全移行後に進行中の変更も移行します。ただし、これは前の手順で**Existing data migration**と**Incremental data migration**のチェックボックスを選択した場合にのみ実行されます。
-    - **Customize**をクリックしてデータベースを選択すると、移行ジョブによって既存のデータと選択したデータベースの進行中の変更がTiDB Cloudに移行されます。ただし、これは前の手順で**Existing data migration**と**Incremental data migration**のチェックボックスを選択した場合にのみ実行されます。
-    - **Customize**をクリックしてデータベース名の下のテーブルを選択すると、移行ジョブは既存のデータと選択したテーブルの進行中の変更のみを移行します。同じデータベースで後から作成されたテーブルは移行されません。
+    - **Customize**をクリックしてデータベースを選択すると、移行ジョブによって、選択したデータベースの既存データと進行中の変更がTiDB Cloudに移行されます。ただし、これは前の手順で**Existing data migration**と**Incremental data migration**のチェックボックスを選択した場合にのみ実行されます。
+    - **Customize**をクリックしてデータベース名の下のテーブルを選択すると、移行ジョブは選択したテーブルの既存データと進行中の変更のみを移行します。同じデータベースで後から作成されたテーブルは移行されません。
 
 2. **Next**をクリックしてください。
 
@@ -971,7 +971,7 @@ TiDB Cloud Dedicatedは、さまざまなシナリオにおけるパフォーマ
 
 2. 対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
 
-3. **Data Migration**ページで、スケールアップする移行ジョブを探します。**Action**列で、 **...** > **Scale Up/Down**をクリックします。
+3. **Data Migration**ページで、スケールする移行ジョブを探します。**Action**列で、 **...** > **Scale Up/Down**をクリックします。
 
 4. **Scale Up/Down**ウィンドウで、使用する新しい仕様を選択し、 **Submit**をクリックします。ウィンドウの下部に、その仕様の新しい価格が表示されます。
 

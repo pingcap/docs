@@ -3,7 +3,7 @@ title: Integrate TiDB Cloud with Prometheus and Grafana (PREVIEW)
 summary: PrometheusとGrafanaの連携機能を使って、 TiDB Cloudインスタンスを監視する方法を学びましょう。
 ---
 
-# TiDB CloudとPrometheusおよびGrafanaの統合（プレビュー版） {#integrate-tidb-cloud-with-prometheus-and-grafana-preview}
+# TiDB CloudをPrometheusおよびGrafanaと統合する (PREVIEW) {#integrate-tidb-cloud-with-prometheus-and-grafana-preview}
 
 TiDB Cloudは[Prometheus](https://prometheus.io/)APIエンドポイントを提供しています。Prometheusサービスをお持ちの場合は、このエンドポイントからTiDB Cloudの主要なメトリクスを簡単に監視できます。
 
@@ -13,7 +13,7 @@ TiDB Cloudは[Prometheus](https://prometheus.io/)APIエンドポイントを提�
 
 - TiDB CloudをPrometheusと統合するには、自己ホスト型またはマネージド型のPrometheusサービスが必要です。
 
-- TiDB Cloudのサードパーティ メトリクス統合を設定するには、TiDB Cloud で`Organization Owner`または`Instance Manager`アクセス権が必要です。統合ページを表示するには、 TiDB Cloud の組織内の対象の<CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスにアクセスするための`Project Viewer`または`Instance Viewer`ロール以上が必要です。
+- TiDB Cloudのサードパーティメトリクス統合を設定するには、TiDB Cloud で`Organization Owner`または`Instance Manager`アクセス権が必要です。統合ページを表示するには、 TiDB Cloud の組織内の対象の<CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスにアクセスするための`Project Viewer`または`Instance Viewer`ロール以上が必要です。
 
 ## 制限 {#limitation}
 
@@ -24,7 +24,7 @@ TiDB Cloudは[Prometheus](https://prometheus.io/)APIエンドポイントを提�
 
 ### ステップ1. Prometheus用の`scrape_config`ファイルを取得する {#step-1-get-a-scrape_config-file-for-prometheus}
 
-Prometheus サービスでTiDB Cloudのメトリクスを読み取るように設定する前に、まずTiDB Cloudで`scrape_config` YAML ファイルを生成する必要があります。 `scrape_config`ファイルには、Prometheus サービスが対象の<CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスを監視できるようにする一意のベアラー トークンが含まれています。
+Prometheus サービスでTiDB Cloudのメトリクスを読み取るように設定する前に、まずTiDB Cloudで`scrape_config` YAML ファイルを生成する必要があります。 `scrape_config`ファイルには、Prometheus サービスが対象の<CustomContent plan="essential">TiDB Cloud Essential</CustomContent> <CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスを監視できるようにする一意のベアラートークンが含まれています。
 
 <CustomContent plan="essential">
 
@@ -46,10 +46,10 @@ Prometheus サービスでTiDB Cloudのメトリクスを読み取るように�
 
 > **Note:**
 >
-> - セキュリティ上の理由から、 TiDB Cloud新しく生成された`scrape_config`ファイルは一度しか表示されません。ファイルウィンドウを閉じる前に、必ず内容をコピーしてください。
+> - セキュリティ上の理由から、 TiDB Cloudでは、新しく生成された`scrape_config`ファイルは一度しか表示されません。ファイルウィンドウを閉じる前に、必ず内容をコピーしてください。
 > - 忘れた場合は、 TiDB Cloudの`scrape_config`ファイルを削除して、新しいファイルを生成してください。 `scrape_config`ファイルを削除するには、ファイルを選択し、**...**をクリックしてから**Delete**をクリックします。
 
-### ステップ2．Prometheusとの統合 {#step-2-integrate-with-prometheus}
+### ステップ2. Prometheusと統合する {#step-2-integrate-with-prometheus}
 
 1. Prometheusサービスで指定された監視ディレクトリ内で、Prometheusの設定ファイルを探してください。
 
@@ -81,7 +81,7 @@ PrometheusサービスがTiDB Cloudからメトリクスを読み取った後、
 
     > **Note:**
     >
-    > 既にPrometheusとGrafanaを使用して<CustomContent plan="essential">TiDB Cloud Essential</CustomContent>および<CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスを監視しており、新たに利用可能になったメトリクスを組み込みたい場合は、既存のダッシュボードのJSONを直接更新するのではなく、新しいダッシュボードを作成することをお勧めします。
+    > 既にPrometheusとGrafanaを使用して<CustomContent plan="essential">TiDB Cloud Essential</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent>インスタンスを監視しており、新たに利用可能になったメトリクスを組み込みたい場合は、既存のダッシュボードのJSONを直接更新するのではなく、新しいダッシュボードを作成することをお勧めします。
 
 3. （オプション）パネルの追加や削除、データソースの変更、表示オプションの修正などにより、必要に応じてダッシュボードをカスタマイズできます。
 

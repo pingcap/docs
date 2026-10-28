@@ -24,7 +24,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 - [Cloudflare Workersアカウント](https://dash.cloudflare.com/login)。
 - [npm](https://docs.npmjs.com/about-npm)がインストールされています。
 
-## ステップ1：Wranglerをセットアップする {#step-1-set-up-wrangler}
+## ステップ1. Wranglerをセットアップする {#step-1-set-up-wrangler}
 
 [Wrangler](https://developers.cloudflare.com/workers/wrangler/)は、Cloudflare Worker の公式 CLI です。これを使用して、Worker の生成、構築、プレビュー、および公開を行うことができます。
 
@@ -48,7 +48,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 
 4. 端末に、プロジェクトに関する一連の質問が表示されます。すべての質問に対して、デフォルト値を選択してください。
 
-## ステップ2：TiDB Cloud Serverless Driverをインストールする {#step-2-install-the-serverless-driver}
+## ステップ2. TiDB Cloud Serverless Driverをインストールする {#step-2-install-the-serverless-driver}
 
 1. プロジェクトディレクトリに移動します：
 
@@ -64,7 +64,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 
     これにより`package.json`にサーバーレスドライバの依存関係が追加されます。
 
-## ステップ3：Cloudflare Worker関数を開発する {#step-3-develop-the-cloudflare-worker-function}
+## ステップ3. Cloudflare Worker関数を開発する {#step-3-develop-the-cloudflare-worker-function}
 
 `src/index.ts`は必要に応じて変更する必要があります。
 
@@ -87,7 +87,7 @@ export default {
 };
 ```
 
-## ステップ4：環境設定でDATABASE_URLを設定します {#step-4-set-the-database-url-in-your-environment}
+## ステップ4. 環境でDATABASE_URLを設定する {#step-4-set-the-database-url-in-your-environment}
 
 `DATABASE_URL`は`mysql://username:password@host/database`の形式に従います。環境変数は wrangler cli を使用して設定できます。
 
@@ -97,7 +97,7 @@ wrangler secret put <DATABASE_URL>
 
 Cloudflare Workers ダッシュボードから`DATABASE_URL`シークレットを編集することもできます。
 
-## ステップ5：Cloudflare Workersに公開する {#step-5-publish-to-cloudflare-workers}
+## ステップ5. Cloudflare Workersに公開する {#step-5-publish-to-cloudflare-workers}
 
 これでCloudflare Workersへのデプロイ準備が整いました。
 
@@ -107,7 +107,7 @@ Cloudflare Workers ダッシュボードから`DATABASE_URL`シークレット�
 npx wrangler deploy
 ```
 
-## ステップ6：Cloudflare Workersを試してみる {#step-6-try-your-cloudflare-workers}
+## ステップ6. Cloudflare Workersを試してみる {#step-6-try-your-cloudflare-workers}
 
 1. [Cloudflareダッシュボード](https://dash.cloudflare.com)に移動してワーカーを見つけます。ワーカーの URL は概要ページで確認できます。
 

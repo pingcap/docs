@@ -1,17 +1,17 @@
 ---
 title: Manage Spending Limit for TiDB Cloud Starter Instances
-summary: TiDB Cloud Starterインスタンスの利用限度額を管理する方法を学びましょう。
+summary: TiDB Cloud Starterインスタンスの支出限度額を管理する方法を学びましょう。
 ---
 
-# TiDB Cloud Starterインスタンスの利用限度額を管理する {#manage-spending-limit-for-tidb-cloud-starter-instances}
+# TiDB Cloud Starterインスタンスの支出限度額を管理する {#manage-spending-limit-for-tidb-cloud-starter-instances}
 
 > **Note:**
 >
-> 支出制限は、 TiDB Cloud Starterインスタンスにのみ適用されます。
+> 支出限度額は、 TiDB Cloud Starterインスタンスにのみ適用されます。
 
-支出制限とは、特定のワークロードに対して1か月間に支出できる最大金額のことです。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。
+支出限度額とは、特定のワークロードに対して1か月間に支出できる最大金額のことです。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。
 
-TiDB Cloudの各組織につき、最大 5つの [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)をデフォルトで作成できます。TiDB Cloud Starterインスタンスをさらに作成するには、クレジットカードを追加し、月間利用限度額を設定する必要があります。ただし、新しいインスタンスを作成する前に以前のTiDB Cloud Starterインスタンスを削除した場合、新しいTiDB Cloud Starterインスタンスはクレジットカードなしで作成できます。
+TiDB Cloudの各組織につき、最大 5つの [無料のTiDB Cloud Starterインスタンス](/tidb-cloud/select-cluster-tier.md#starter)をデフォルトで作成できます。TiDB Cloud Starterインスタンスをさらに作成するには、クレジットカードを追加し、月間支出限度額を設定する必要があります。ただし、新しいインスタンスを作成する前に以前のTiDB Cloud Starterインスタンスを削除した場合、新しいTiDB Cloud Starterインスタンスはクレジットカードなしで作成できます。
 
 ## 使用クォータ {#usage-quota}
 
@@ -25,13 +25,13 @@ TiDB Cloud Starterインスタンスが使用クォータに達すると、[ク�
 
 さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク出力など）のRU消費量、価格の詳細、およびスロットリング情報の詳細については、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
-追加のクォータを使用してTiDB Cloud Starterインスタンスを作成する場合は、 TiDB Cloud Starterインスタンスの作成ページで支出制限を編集できます。詳細については、 [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
+追加のクォータを使用してTiDB Cloud Starterインスタンスを作成する場合は、 TiDB Cloud Starterインスタンスの作成ページで支出限度額を編集できます。詳細については、 [TiDB Cloud Starterインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
 
 ## 支出限度額を更新する {#update-spending-limit}
 
-無料のTiDB Cloud Starterインスタンスの場合、インスタンス作成時に月間利用限度額を設定することで、利用クォータを増やすことができます。既存のTiDB Cloud Starterインスタンスの場合は、月間利用限度額を直接調整できます。
+無料のTiDB Cloud Starterインスタンスの場合、インスタンス作成時に月間支出限度額を設定することで、使用クォータを増やすことができます。既存のTiDB Cloud Starterインスタンスの場合は、月間支出限度額を直接調整できます。
 
-TiDB Cloud Starterインスタンスの支出制限を更新するには、以下の手順を実行してください。
+TiDB Cloud Starterインスタンスの支出限度額を更新するには、以下の手順を実行してください。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Starterインスタンスの名前をクリックすると、その概要ページに移動します。
 

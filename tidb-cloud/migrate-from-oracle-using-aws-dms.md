@@ -27,7 +27,7 @@ PostgreSQL、Oracle、SQL Serverなどの異種データベースからTiDB Clou
 
 大まかに言うと、以下の手順に従ってください。
 
-1. Oracle用のAmazon RDSソースを設定します。
+1. ソースのAmazon RDS for Oracleを設定します。
 2. TiDB Cloud Starterインスタンスを作成します。
 3. AWS DMSを使用してデータ移行（フルロード）を設定します。
 
@@ -56,13 +56,13 @@ VPC の作成方法については、 [VPCの作成](https://docs.aws.amazon.com
 
 ## ステップ2. Oracle DBインスタンスを作成する {#step-2-create-an-oracle-db-instance}
 
-先ほど作成したVPC内にOracle DBインスタンスを作成し、パスワードを控えてパブリックアクセス権限を付与してください。AWSスキーマ変換ツールを使用するには、パブリックアクセスを有効にする必要があります。なお、本番環境でパブリックアクセス権限を付与することは推奨されません。
+先ほど作成したVPC内にOracle DBインスタンスを作成し、パスワードを控えてパブリックアクセス権限を付与してください。AWS Schema Conversion Toolを使用するには、パブリックアクセスを有効にする必要があります。なお、本番環境でパブリックアクセス権限を付与することは推奨されません。
 
 Oracle DB インスタンスの作成方法については、[Oracle DBインスタンスを作成し、Oracle DBインスタンス上のデータベースに接続する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.Oracle.html)を参照してください。
 
 ![Create Oracle RDS](/media/tidb-cloud/aws-dms-from-oracle-to-tidb-2.png)
 
-## ステップ3．Oracleでテーブルデータを準備する {#step-3-prepare-the-table-data-in-oracle}
+## ステップ3. Oracleでテーブルデータを準備する {#step-3-prepare-the-table-data-in-oracle}
 
 以下のスクリプトを使用して、github_events テーブルに 10,000 行のデータを作成し、データを投入します。GitHub イベントデータセットは[GHアーカイブ](https://gharchive.org/)からダウンロードできます。 10,000 行のデータが含まれています。以下の SQL スクリプトを使用して Oracle で実行します。
 
@@ -97,7 +97,7 @@ SQLスクリプトの実行が完了したら、Oracleのデータを確認し�
 >
 > TiDB Cloud Starterで動作する AWS DMS レプリケーションインスタンスを作成する詳細な手順については、 [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)を参照してください。
 
-## ステップ6．DMSエンドポイントを作成する {#step-6-create-dms-endpoints}
+## ステップ6. DMSエンドポイントを作成する {#step-6-create-dms-endpoints}
 
 1. [AWS DMSコンソール](https://console.aws.amazon.com/dms/v2/home)で、左側のペインにある`Endpoints`メニュー項目をクリックします。
 
@@ -115,7 +115,7 @@ SQLスクリプトの実行が完了したら、Oracleのデータを確認し�
 >
 > TiDB Cloud Starter DMS エンドポイントを作成する詳細な手順については、 [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)を参照してください。
 
-## ステップ7．スキーマを移行する {#step-7-migrate-the-schema}
+## ステップ7. スキーマを移行する {#step-7-migrate-the-schema}
 
 この例では、スキーマ定義が単純なため、AWS DMS がスキーマを自動的に処理します。
 

@@ -5,25 +5,25 @@ summary: Alibaba Cloud Endpoint Service プライベートリンク接続を使�
 
 # プライベートリンク接続を介して Alibaba Cloud ApsaraDB RDS for MySQL に接続する {#connect-to-alibaba-cloud-apsaradb-rds-for-mysql-via-a-private-link-connection}
 
-このドキュメントでは、 [Alibaba Cloud Endpoint Service プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)を使用してTiDB Cloud Essential クラスターを[Alibaba Cloud ApsaraDB RDS for MySQL](https://www.alibabacloud.com/en/product/apsaradb-for-rds-mysql)インスタンスに接続する方法について説明します。
+このドキュメントでは、 [Alibaba Cloud Endpoint Service プライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md)を使用してTiDB Cloud Essential インスタンスを[Alibaba Cloud ApsaraDB RDS for MySQL](https://www.alibabacloud.com/en/product/apsaradb-for-rds-mysql)インスタンスに接続する方法について説明します。
 
 ## 前提条件 {#prerequisites}
 
 - 既存の ApsaraDB RDS for MySQL インスタンスがあるか、インスタンスを作成するために必要な権限があります。
 
-- アカウントにネットワーク コンポーネントを管理するための次の権限があることを確認します。
+- アカウントにネットワークコンポーネントを管理するための次の権限があることを確認します。
 
     - ロードバランサーの管理
     - エンドポイントサービスの管理
 
-- TiDB Cloud Essential クラスターは Alibaba Cloud 上に存在し、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
+- TiDB Cloud Essential インスタンスは Alibaba Cloud 上に存在し、アクティブです。後で使用するために、以下の詳細情報を取得して保存してください。
 
     - Alibaba CloudアカウントID
     - アベイラビリティゾーン（AZ）
 
 Alibaba Cloud アカウント ID とアベイラビリティゾーンを表示するには、次の手順を実行します。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB Cloud Essential インスタンスの概要ページに移動し、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
 2. **Alibaba Cloud Private Endpoints for External Services** 領域で、**Create Private Endpoint for External Services** をクリックします。
 3. 表示されたダイアログで、Alibaba Cloud アカウント ID とアベイラビリティゾーンを見つけることができます。
 
@@ -33,8 +33,8 @@ Alibaba Cloud アカウント ID とアベイラビリティゾーンを表示�
 
 ApsaraDB RDS for MySQL インスタンスは次の要件を満たしている必要があります。
 
-- リージョンの一致: インスタンスは、 TiDB Cloud Essential クラスターと同じ Alibaba Cloud リージョンに存在する必要があります。
-- AZ (アベイラビリティゾーン) の可用性: アベイラビリティゾーンは、 TiDB Cloud Essential クラスターのアベイラビリティゾーンと重複する必要があります。
+- リージョンの一致: インスタンスは、 TiDB Cloud Essential インスタンスと同じ Alibaba Cloud リージョンに存在する必要があります。
+- AZ (アベイラビリティゾーン) の可用性: アベイラビリティゾーンは、 TiDB Cloud Essential インスタンスのアベイラビリティゾーンと重複する必要があります。
 - ネットワークのアクセシビリティ: インスタンスは適切な IP 許可リストで構成され、VPC 内でアクセス可能である必要があります。
 
 > **Note**
@@ -55,7 +55,7 @@ Alibaba Cloud コンソールでロードバランサーとエンドポイント
     - **VPC** : ApsaraDB RDS for MySQL が配置されている VPC を入力します。
     - **Backend Server Protocol**: `TCP`を選択
 
-2. 作成されたサーバーグループをクリックしてバックエンド サーバーを追加し、ApsaraDB RDS for MySQL インスタンスの IP アドレスを追加します。
+2. 作成されたサーバーグループをクリックしてバックエンドサーバーを追加し、ApsaraDB RDS for MySQL インスタンスの IP アドレスを追加します。
 
     RDS エンドポイントに ping を実行して IP アドレスを取得できます。
 
@@ -63,7 +63,7 @@ Alibaba Cloud コンソールでロードバランサーとエンドポイント
 
     - **Network Type**: `Internal-facing`を選択
     - **VPC** : ApsaraDB RDS for MySQL が配置されている VPC を選択します。
-    - **Zone**: TiDB Cloud Essential クラスタと重複する必要があります
+    - **Zone**: TiDB Cloud Essential インスタンスと重複する必要があります
     - **IP Version**: `IPv4`を選択
 
 4. 作成したロードバランサーを見つけて、 **Create Listener**をクリックします。以下の情報を入力します。
