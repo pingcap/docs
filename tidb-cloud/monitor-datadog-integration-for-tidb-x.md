@@ -101,7 +101,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 |:--- |:--- |:--- |:--- |
 | `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB サーバーにおける現在の接続数 |
 | `tidb_cloud.db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | アクティブな接続数 |
-| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 接続結果ごとに切断されたクライアント数 |
+| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 切断されたクライアント数（接続結果別） |
 | `tidb_cloud.db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB で実行中のすべての SQL 文が 1秒あたりに消費した合計時間。すべてのプロセスの CPU 時間と、アイドル状態ではない待機時間を含みます |
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 文の種類ごとに集計された、1秒あたりに実行された SQL 文の数 |
 | `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | SQL 文の実行時に 1秒あたりに発生したエラー種別（構文エラーや主キー競合など）の統計 |
@@ -121,7 +121,7 @@ Datadog は、<CustomContent plan="essential">{{{ .essential }}}</CustomContent>
 |:--- |:--- |:--- |:--- |
 | `tidb_cloud.db_total_connection` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB サーバーにおける現在の接続数 |
 | `tidb_cloud.db_active_connections` | gauge | `instance_id: <instance id>`<br/>`instance_name: <instance name>` | アクティブな接続数 |
-| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 接続結果ごとに切断されたクライアント数 |
+| `tidb_cloud.db_disconnections` | gauge | `result: Error\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 切断されたクライアント数（接続結果別） |
 | `tidb_cloud.db_database_time` | gauge | `sql_type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | TiDB で実行中のすべての SQL 文が 1秒あたりに消費した合計時間。すべてのプロセスの CPU 時間と、アイドル状態ではない待機時間を含みます |
 | `tidb_cloud.db_query_per_second` | gauge | `type: Select\|Insert\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | 文の種類ごとに集計された、1秒あたりに実行された SQL 文の数 |
 | `tidb_cloud.db_failed_queries` | gauge | `type: planner:xxx\|executor:2345\|...`<br/>`instance_id: <instance id>`<br/>`instance_name: <instance name>` | SQL 文の実行時に 1秒あたりに発生したエラー種別（構文エラーや主キー競合など）の統計 |
