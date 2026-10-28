@@ -7,7 +7,7 @@ summary: TiDB Cloudのブランチ機能をGitHubと連携させる方法を学�
 
 > **Note:**
 >
-> この統合は[TiDB Cloud Branching](/tidb-cloud/branch-overview.md)ベースに構築されています。このドキュメントを読む前に、 TiDB Cloud Branching について理解していることを確認してください。
+> この統合は[TiDB Cloud Branching](/tidb-cloud/branch-overview.md)をベースに構築されています。このドキュメントを読む前に、 TiDB Cloud Branching について理解していることを確認してください。
 
 アプリケーション開発にGitHubを使用している場合、 TiDB Cloud BranchingをGitHubのCI/CDパイプラインに統合することで、本番データベースに影響を与えることなく、ブランチを使用したプルリクエストを自動的にテストできます。
 
@@ -38,7 +38,7 @@ TiDB Cloud BranchingをGitHubリポジトリと統合するには、以下の手
 3. **Branches**ページの右上隅にある**Connect to GitHub**をクリックします。
 
     - GitHubにログインしていない場合は、まずGitHubにログインするよう求められます。
-    - 初めてこの連携機能を使用する場合は、 **TiDB Cloud Branching**アプリの認証を求められます。
+    - 初めてこの連携機能を使用する場合は、 **TiDB Cloud Branching**アプリの承認を求められます。
 
     <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/branch/github-authorize.png" width="80%" />
 
@@ -65,7 +65,7 @@ TiDB Cloud Starterインスタンスを GitHub リポジトリに接続すると
 
 ## TiDB Cloud Branchingアプリの設定 {#configure-tidb-cloud-branching-app}
 
-[TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)の動作を設定するには リポジトリのルートディレクトリに`tidbcloud.yml`ファイルを追加し、以下の手順に従って必要な設定をこのファイルに追加します。
+[TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)アプリの動作を設定するには、リポジトリのルートディレクトリに`tidbcloud.yml`ファイルを追加し、以下の手順に従って必要な設定をこのファイルに追加します。
 
 ### branch.blockList {#branchblocklist}
 
@@ -121,7 +121,7 @@ github:
         autoDestroy: true
 ```
 
-## 分岐型CIワークフローを作成する {#create-a-branching-ci-workflow}
+## ブランチングCIワークフローを作成する {#create-a-branching-ci-workflow}
 
 ブランチを活用するためのベストプラクティスの1つは、ブランチングCIワークフローを作成することです。このワークフローを使用すると、プルリクエストをマージする前に、本番インスタンス自体を使用する代わりに、 TiDB Cloud Starterインスタンスのブランチを使用してコードをテストできます。ライブデモは[ここ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)をご覧ください。
 

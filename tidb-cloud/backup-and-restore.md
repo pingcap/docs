@@ -16,7 +16,7 @@ aliases: ['/ja/tidbcloud/restore-deleted-tidb-cluster']
 
 - TiDB Cloud Dedicatedは、v6.2.0以降のバージョンのクラスタでは、デフォルトでバックアップからのユーザーアカウントとSQLバインディングの復元をサポートしています。
 - TiDB Cloud Dedicated は、 `mysql`スキーマに保存されているシステム変数の復元をサポートしていません。
-- 最初にデータをインポートし、次に**手動**スナップショットバックアップを実行し、最後にポイントインタイムリストアを有効にすることをお勧めします。 TiDB Cloudコンソールを通じてインポートされたデータは変更ログを生成**しない**ため、自動的に検出してバックアップできません。詳細については、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
+- 最初にデータをインポートし、次に**手動**スナップショットバックアップを実行し、最後にポイントインタイム復元を有効にすることをお勧めします。 TiDB Cloudコンソールを通じてインポートされたデータは変更ログを生成**しない**ため、自動的に検出してバックアップできません。詳細については、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 - ポイントインタイム復元を複数回オン/オフした場合、復元可能な期間内で選択できるのは、直近のポイントインタイム復元が有効になった時点以降の時点のみです。それ以前の復元可能な期間にはアクセスできません。
 - **Point-in-time Restore**と**Dual Region Backup**のスイッチを同時に変更しないでください。
 
@@ -62,7 +62,7 @@ TiDB Cloud Dedicatedクラスターでこの機能を有効にするには、以
 
     > **Warning**
     >
-    > ポイントインタイムリストアは、次のバックアップタスクが完了した後にのみ有効になります。より早く有効にするには、有効にした後に[手動でバックアップを実行する](#perform-a-manual-backup)ことができます。
+    > ポイントインタイム復元は、次のバックアップタスクが完了した後にのみ有効になります。より早く有効にするには、有効にした後に[手動でバックアップを実行する](#perform-a-manual-backup)ことができます。
 
 5. 変更を保存するには、 **Save**をクリックしてください。
 
@@ -70,7 +70,7 @@ TiDB Cloud Dedicatedクラスターでこの機能を有効にするには、以
 
 TiDB Cloud Dedicatedは、日次および週次のバックアップスケジュールをサポートしています。デフォルトでは、バックアップスケジュールは日次に設定されています。スナップショットバックアップを開始する、1日または1週間のうちの特定の時刻を選択することもできます。
 
-TiDB Cloud Dedicatedクラスターのバックアップ スケジュールを設定するには、次の手順を実行します。
+TiDB Cloud Dedicatedクラスターのバックアップスケジュールを設定するには、次の手順を実行します。
 
 1. TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
@@ -101,7 +101,7 @@ TiDB Cloud Dedicatedクラスターのバックアップ スケジュールを�
         > **Note**
         >
         > - 最新の自動バックアップを除くすべての自動バックアップは、保存期間を超過すると削除されます。最新の自動バックアップは、手動で削除しない限り削除されません。これにより、誤って削除してしまった場合でもクラスタデータを復元できます。
-        > - クラスターを削除すると、保持期間内に有効期限が設定されている自動バックアップはごみ箱に移動されます。
+        > - クラスターを削除すると、保持期間内にある自動バックアップはごみ箱に移動されます。
 
 ### デュアルリージョンバックアップを有効にする {#turn-on-dual-region-backup}
 
@@ -112,7 +112,7 @@ TiDB Cloud Dedicatedクラスターのバックアップ スケジュールを�
 
 TiDB Cloud Dedicatedは、クラスタリージョンから別のリージョンにバックアップを複製することで、デュアルリージョンバックアップをサポートします。この機能を有効にすると、すべてのバックアップが指定されたリージョンに自動的に複製されます。これにより、リージョンをまたいだデータ保護とディザスタリカバリ機能が実現します。データの約99%は1時間以内にセカンダリリージョンに複製されると推定されます。
 
-デュアル リージョンのバックアップ コストには、バックアップストレージの使用量とリージョン間のデータ転送料金の両方が含まれます。詳細については、 [データバックアップ費用](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost)を参照してください。
+デュアルリージョンのバックアップコストには、バックアップストレージの使用量とリージョン間のデータ転送料金の両方が含まれます。詳細については、 [データバックアップ費用](https://www.pingcap.com/tidb-dedicated-pricing-details#backup-storage-cost)を参照してください。
 
 TiDB Cloud Dedicatedクラスターでデュアルリージョンバックアップを有効にするには、次の手順を実行します。
 
@@ -146,7 +146,7 @@ TiDB Cloud Dedicatedクラスターの自動バックアップを無効にする
 
 > **Tip**
 >
-> デュアル リージョンのバックアップを無効にしても、セカンダリ リージョンのバックアップはすぐには削除されません。これらのバックアップは、バックアップ保持スケジュールに従って後でクリーンアップされます。すぐに削除するには、手動で[バックアップを削除](#delete-backups)できます。
+> デュアルリージョンのバックアップを無効にしても、セカンダリリージョンのバックアップはすぐには削除されません。これらのバックアップは、バックアップ保持スケジュールに従って後でクリーンアップされます。すぐに削除するには、手動で[バックアップを削除](#delete-backups)できます。
 
 TiDB Cloud Dedicatedクラスターのデュアルリージョンバックアップを無効にするには、次の手順を実行します。
 
@@ -171,7 +171,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 1. TiDB Cloud Dedicatedクラスターの[**Backup**](#view-the-backup-page)ページに移動します。
 
-2. 右上隅で、 **…** > **Manual Backup**をクリックします。
+2. 右上隅で、 **...** > **Manual Backup**をクリックします。
 
 3. 表示されたダイアログに**Name**を入力してください。
 
@@ -183,7 +183,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 > **Note:**
 >
-> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**？**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、**Description**フィールドに"Apply for the export backups feature"と入力して、 **Submit**をクリックします。
+> 現在、この機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、**Description**フィールドに"Apply for the export backups feature"と入力して、 **Submit**をクリックします。
 
 <SimpleTab>
 
@@ -195,7 +195,7 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
 
 2. エクスポートしたいバックアップファイルを見つけて、 **Action**列の**...** > **Export**をクリックします。
 
-3. **Export Backup to Amazon S3**ダイアログで、 **Folder URI**フィールドに入力し、バックアップ バケットのバケット リージョンを選択します。
+3. **Export Backup to Amazon S3**ダイアログで、 **Folder URI**フィールドに入力し、バックアップバケットのバケットリージョンを選択します。
 
 4. **Generate Command**をクリックすると、権限設定用のコマンドが表示されます。
 
@@ -232,9 +232,9 @@ TiDB Cloud Dedicatedクラスターに手動バックアップを適用するに
     - `storage.objects.create`
     - `storage.objects.delete`
 
-5. **Cloud Storage** > **バケット**に移動し、対象のバケットを選択してから、**Permissions** > **Grant Access**をクリックします。
+5. **Cloud Storage** > **Buckets**に移動し、対象のバケットを選択してから、**Permissions** > **Grant Access**をクリックします。
 
-6. **New principals**で、手順3の**Service Account ID**を入力し、手順4の役割を割り当ててから、 **Save**をクリックします。
+6. **New principals**で、手順3の**Service Account ID**を入力し、手順4のロールを割り当ててから、 **Save**をクリックします。
 
 7. **Configuration**タブを開き、 **gsutil URI**をコピーして、 **Export Backup to Google Cloud Storage**ダイアログの**Export Path**フィールドに貼り付けます。サブディレクトリにエクスポートする場合は、URIにパスサフィックスを追加します。
 
@@ -281,10 +281,10 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
      <SimpleTab>
      <div label="Select Time Point">
 
-    バックアップ保持期間内の任意の時点のデータを新しいクラスタに復元するには、**Point-in-time Restore**の**Backup Setting**がオンになっていることを確認し、以下の手順を実行してください。
+    バックアップ保持期間内の任意の時点のデータを新しいクラスタに復元するには、**Backup Setting**の**Point-in-time Restore**がオンになっていることを確認し、以下の手順を実行してください。
 
     - **Select Time Point**をクリックしてください。
-    - 復元したい**日時**を選択してください。
+    - 復元したい**Date**と**Time**を選択してください。
 
     </div>
 
@@ -293,7 +293,7 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
     選択したバックアップを新しいクラスターに復元するには、次の手順を実行します。
 
     - **Select Backup Name**をクリックします。
-    - 復元先のバックアップを選択してください。
+    - 復元するバックアップを選択してください。
 
     </div>
      </SimpleTab>
@@ -303,7 +303,7 @@ TiDB Cloud Dedicatedクラスタのデータをバックアップから新しい
     > **Note**
     >
     > - デフォルトでは、新しいクラスターはソースクラスターと同じリージョンに復元されます。
-    > - **バックアップ設定**で [**Dual Region Backup**](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) が有効になっている場合は、デュアルリージョンバックアップ用に構成された**Secondary Region**に新しいクラスターを復元することもできます。
+    > - **Backup Setting**で [**Dual Region Backup**](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup) が有効になっている場合は、デュアルリージョンバックアップ用に構成された**Secondary Region**に新しいクラスターを復元することもできます。
 
 5. **Restore**ウィンドウでは、必要に応じて以下の変更を行うこともできます。
 

@@ -3,7 +3,7 @@ title: Manage TiDB Cloud Branches
 summary: TiDB Cloudブランチの管理方法を学びましょう。
 ---
 
-# TiDB Cloudブランチの管理 {#manage-tidb-cloud-branches}
+# TiDB Cloudブランチを管理する {#manage-tidb-cloud-branches}
 
 このドキュメントでは、[TiDB Cloud コンソール](https://tidbcloud.com)を使用してTiDB Cloud Starterインスタンスのブランチを管理する方法について説明します。 TiDB Cloud CLI を使用してブランチを管理するには、[`ticloud branch`](/tidb-cloud/ticloud-branch-create.md)を参照してください。
 
@@ -57,8 +57,8 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2. 左側のナビゲーションペインで**Branches**をクリックします。
-3. 接続する対象ブランチの行で、 **Action**列の**…**をクリックします。
-4. ドロップダウンリストから**Connect**をクリックします。接続情報の入力ダイアログが表示されます。
+3. 接続する対象ブランチの行で、 **Action**列の**...**をクリックします。
+4. ドロップダウンリストから**Connect**をクリックします。接続情報のダイアログが表示されます。
 5. ルートパスワードを作成またはリセットするには、 **Generate Password**または**Reset Password**をクリックしてください。
 6. 接続情報を使用してブランチに接続します。
 
@@ -76,7 +76,7 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2. 左側のナビゲーションペインで**Branches**をクリックします。
-3. 削除する対象ブランチの行で、 **Action**列の**…**をクリックします。
+3. 削除する対象ブランチの行で、 **Action**列の**...**をクリックします。
 4. ドロップダウンリストの**Delete**をクリックしてください。
 5. 削除を確認してください。
 
@@ -92,7 +92,7 @@ TiDB Cloud Starterインスタンスのブランチを表示するには、以�
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
 2. 左側のナビゲーションペインで**Branches**をクリックします。
-3. リセットする対象ブランチの行で、 **Action**列の**…**をクリックします。
+3. リセットする対象ブランチの行で、 **Action**列の**...**をクリックします。
 4. ドロップダウンリストの**Reset**をクリックしてください。
 5. リセットを確認してください。
 

@@ -91,7 +91,7 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
     1. [AWS マネジメントコンソール](https://console.aws.amazon.com/)にサインインし、 [Amazon S3コンソール](https://console.aws.amazon.com/s3/)を開きます。
 
-    2. **バケット**一覧から対象バケットの名前を選択し、 **Copy ARN**をクリックしてS3バケットのARNを取得します（例： `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットのARNをメモしておいてください。
+    2. **Buckets**一覧から対象バケットの名前を選択し、 **Copy ARN**をクリックしてS3バケットのARNを取得します（例： `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットのARNをメモしておいてください。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
@@ -172,13 +172,13 @@ AWS CloudFormationでロールARNを作成する際に問題が発生した場�
 
         - **Trusted entity type**で**AWS account**を選択します。
         - **An AWS account**で**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
-        - **オプション**で、 **外部 ID が必要 (サードパーティがこの役割を引き受ける場合のベストプラクティス)**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
+        - **Options**で、 **Require external ID (Best practice when a third party will assume this role)**をクリックし、 TiDB Cloud外部 ID を**External ID**フィールドに貼り付けます。<CustomContent plan="starter,essential">ロールが外部IDを必須とせずに作成された場合、プロジェクト内のいずれかのTiDB Cloud StarterまたはEssentialインスタンスの設定が完了すると、そのプロジェクト内のすべてのTiDB Cloud StarterおよびEssentialインスタンスは同じロールARNを使用してAmazon S3バケットにアクセスできます。ロールがアカウントIDと外部IDの両方を使用して作成された場合、対応するTiDB Cloud StarterまたはEssentialインスタンスのみがバケットにアクセスできます。</CustomContent>
 
     3. **Next**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**Next**をクリックします。
 
-    4. **Role details**で役割の名前を設定し、右下隅の**Create role**をクリックします。役割が作成されると、役割の一覧が表示されます。
+    4. **Role details**でロールの名前を設定し、右下隅の**Create role**をクリックします。ロールが作成されると、ロールの一覧が表示されます。
 
-    5. 役割の一覧から、先ほど作成した役割の名前をクリックして概要ページに移動すると、役割のARNを取得できます。
+    5. ロールの一覧から、先ほど作成したロールの名前をクリックして概要ページに移動すると、ロールのARNを取得できます。
 
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
@@ -233,7 +233,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
     ![service-account-key](/media/tidb-cloud/serverless-external-storage/gcs-service-account-key.png)
 
-3. デフォルトのキータイプ`JSON`を選択し、 **作成**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud StarterまたはEssentialインスタンスの GCS アクセスを設定する際に使用する必要のあるサービスアカウント キーが含まれています。
+3. デフォルトのキータイプ`JSON`を選択し、 **CREATE**をクリックして Google Cloud 認証情報ファイルをダウンロードします。このファイルには、TiDB Cloud StarterまたはEssentialインスタンスの GCS アクセスを設定する際に使用する必要のあるサービスアカウントキーが含まれています。
 
 </CustomContent>
 
@@ -286,7 +286,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     2. Azureにログインすると、Azure**Custom deployment**ページにリダイレクトされます。
 
-    3. **Resource group**ページで、**リソースグループ**と**ストレージアカウント名**を入力してください。コンテナが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
+    3. **Custom deployment**ページで、**Resource group**と**Storage Account Name**を入力してください。コンテナが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 
@@ -300,7 +300,7 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
 
 1. [Azureストレージアカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するストレージアカウントをクリックします。
 
-2. **Storage account**ページで、**セキュリティ + ネットワーク**をクリックし、 **Shared access signature**をクリックします。
+2. **Storage account**ページで、**Security+network**をクリックし、 **Shared access signature**をクリックします。
 
     ![sas-position](/media/tidb-cloud/serverless-external-storage/azure-sas-position.png)
 
@@ -313,7 +313,7 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
     3. **Allowed permissions**セクションで、必要に応じて権限を選択してください。
 
         - TiDB Cloud StarterまたはEssentialインスタンスからデータをエクスポートするには、**Read**権限と**Write**権限が必要です。
-        - TiDB Cloud StarterまたはEssentialインスタンスにデータをインポートするには、**Read**権限と**一覧表示**権限が必要です。
+        - TiDB Cloud StarterまたはEssentialインスタンスにデータをインポートするには、**Read**権限と**List**権限が必要です。
 
     4. 必要に応じて**Start and expiry date/time**を調整してください。
 
@@ -329,9 +329,9 @@ Azure ARMテンプレートを使用してSASトークンを作成する際に�
 
 ## Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する {#configure-alibaba-cloud-object-storage-service-oss-access}
 
-TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにするには、そのバケットのアクセスキーペアを作成する必要があります。
+TiDB CloudがAlibaba Cloud OSSバケットにアクセスできるようにするには、そのバケットのAccessKey ペアを作成する必要があります。
 
-アクセスキーペアを設定するには、以下の手順に従ってください。
+AccessKey ペアを設定するには、以下の手順に従ってください。
 
 1. RAM ユーザーを作成し、AccessKey ペアを取得します。詳細については、 [RAMユーザーを作成する](https://www.alibabacloud.com/help/en/ram/user-guide/create-a-ram-user)を参照してください。
 

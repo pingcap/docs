@@ -44,9 +44,9 @@ TiDB Cloud StarterとTiDB Cloud Essentialには、2種類のネットワーク�
 
     プライベートエンドポイント接続は、VPC内のSQLクライアントがAWS PrivateLink経由でサービスに安全にアクセスできるようにするプライベートエンドポイントを提供します。AWS PrivateLinkは、簡素化されたネットワーク管理で、データベースサービスへの高度に安全な一方向アクセスを提供します。
 
-- [公開エンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
+- [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
-    標準接続では公開エンドポイントが提供されるため、ノートパソコンからSQLクライアントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続できます。
+    標準接続ではパブリックエンドポイントが提供されるため、ノートパソコンからSQLクライアントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続できます。
 
     TiDB Cloud StarterとTiDB Cloud Essentialは[TLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を必要とします。TLSは、アプリケーションからTiDB Cloud StarterまたはEssentialインスタンスへのデータ送信のセキュリティを保証します。
 
@@ -56,7 +56,7 @@ TiDB Cloud StarterとTiDB Cloud Essentialには、2種類のネットワーク�
 | ------------------ | --------------------- | --------------------------------------------------------------------------------- |
 | 直接接続               | パブリックまたはプライベートエンドポイント | 直接接続は、パブリックエンドポイントとプライベートエンドポイントの両方を介して行うことができます。                                 |
 | Data Service（PREVIEW）      | /                     | AWS上でホストされているTiDB Cloud StarterにData Service (PREVIEW)経由でアクセスする場合、ネットワークの種類を指定する必要はありません。 |
-| Serverless Driver（PREVIEW） | 公開エンドポイント             | Serverless Driverは、パブリックエンドポイント経由の接続のみをサポートしています。                                 |
+| Serverless Driver（PREVIEW） | パブリックエンドポイント             | Serverless Driverは、パブリックエンドポイント経由の接続のみをサポートしています。                                 |
 
 ## 次は？ {#what-s-next}
 

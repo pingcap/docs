@@ -3,7 +3,7 @@ title: TiDB Cloud CLI (ticloud) Reference (PREVIEW)
 summary: TiDB Cloud StarterおよびEssential向けのticloud CLIの概要を説明します。
 ---
 
-# TiDB Cloud CLI (ticloud) リファレンス (PREVIEW) {#tidb-cloud-cli-reference-beta}
+# TiDB Cloud CLI (ticloud) リファレンス (PREVIEW) {#tidb-cloud-cli-ticloud-reference-preview}
 
 > **Note:**
 >
@@ -33,17 +33,17 @@ summary: TiDB Cloud StarterおよびEssential向けのticloud CLIの概要を説
 | コマンド            | サブコマンド                             | 説明                                                               |
 | ------------- | ---------------------------------- | ---------------------------------------------------------------- |
 | auth            | login, logout, whoami                  | ログインとログアウト                                                       |
-| serverless (alias: s)  | create, delete, describe, list, update, spend-limit, region, shell    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを管理する             |
+| serverless (alias: s)  | create, delete, describe, list, update, spending-limit, region, shell    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを管理する             |
 | serverless branch    | create, delete, describe, list, shell                  | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのブランチを管理します。      |
 | serverless import   | cancel, describe, list, start                    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのインポートタスクを管理します。  |
 | serverless export  | create, describe, list, cancel, download            | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのエクスポートタスクを管理します。 |
 | serverless sql-user | create, list, delete, update                      | TiDB Cloud StarterまたはTiDB Cloud EssentialインスタンスのSQLユーザーを管理する     |
-| serverless audit-log    | set, describe, filter-rule (alias: filter), download      | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータベース監査ログを管理する  |
+| serverless audit-log    | config, describe, filter-rule (alias: filter), download      | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータベース監査ログを管理する  |
 | completion            | bash, fish, powershell, zsh           | 指定されたシェル用の補完スクリプトを生成する                                           |
 | config            | create, delete, describe, edit, list, set, use             | ユーザープロファイルの設定                                                    |
 | project        | list                                | プロジェクトを管理する                                                      |
 | upgrade       | -                                  | CLIを最新バージョンにアップデートしてください                                         |
-| help           | auth, config, serverless, project, upgrade, completion | 任意のコマンドのヘルプを確認する                                                  |
+| help           | auth, config, serverless, project, upgrade, help, completion | 任意のコマンドのヘルプを確認する                                                  |
 
 ## コマンドモード {#command-modes}
 
@@ -57,7 +57,7 @@ TiDB Cloud CLIは、一部のコマンドを簡単に使用できるよう、2�
 
     `ticloud config create --profile-name <profile-name> --public-key <public-key> --private-key <private-key>`のように、コマンドを実行する際に必要なすべての引数とフラグを指定する必要があります。
 
-## ユーザープロフィール {#user-profile}
+## ユーザープロファイル {#user-profile}
 
 TiDB Cloud CLI では、ユーザープロファイルとは、プロファイル名、公開鍵、秘密鍵、OAuth トークンなど、ユーザーに関連付けられたプロパティの集合です。TiDB Cloud CLI を使用するには、ユーザープロファイルが必要です。
 
@@ -130,8 +130,8 @@ Current profile has been changed to default
 | フラグ                 | 説明                                  | 必須  | 注記                                                         |
 | ------------------- | ----------------------------------- | --- | ---------------------------------------------------------- |
 | --no-color               | 出力における色の使用を無効にします。                  | いいえ | 非対話モードでのみ動作します。対話モードでは、一部のUIコンポーネントで色の無効化が正しく機能しない場合があります。 |
-| -P、--profile string | このコマンドで使用されるアクティブなユーザープロファイルを指定します。 | いいえ | 非対話モードと対話モードの両方で動作します。                                     |
-| -D、--debug          | デバッグモードを有効にする                       | いいえ | 非対話モードと対話モードの両方で動作します。                                     |
+| -P, --profile string | このコマンドで使用されるアクティブなユーザープロファイルを指定します。 | いいえ | 非対話モードと対話モードの両方で動作します。                                     |
+| -D, --debug          | デバッグモードを有効にする                       | いいえ | 非対話モードと対話モードの両方で動作します。                                     |
 
 ## フィードバック {#feedback}
 

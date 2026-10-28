@@ -113,9 +113,9 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 
 > **Note:**
 >
-> access key と secret key（AK/SK）を使用する場合、認証情報の管理とローテーションを手動で行う必要があり、セキュリティリスクが高まります。より強力なセキュリティを確保するには、代わりに**AWS Role ARN**を使用することをお勧めします。
+> アクセスキーとシークレットキー（AK/SK）を使用する場合、認証情報の管理とローテーションを手動で行う必要があり、セキュリティリスクが高まります。より強力なセキュリティを確保するには、代わりに**AWS Role ARN**を使用することをお勧めします。
 
-access key を使用して認証するには、以下の手順に従ってください。
+アクセスキーを使用して認証するには、以下の手順に従ってください。
 
 1. Amazon S3 の**Destination**ページで、**S3 URI**を入力します。S3 バケットが <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent> と同じ AWS リージョンにあることを確認してください。
 2. **Bucket Access**で、**AWS Access Key**を選択します。
@@ -352,8 +352,8 @@ access key を使用して認証するには、以下の手順に従ってくだ
         - **Ignore event**：指定されたイベントタイプを除外します。
         - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop`は`DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
         - **Ignore insert value expression**: 特定の条件を満たす`INSERT`文を除外します。たとえば、`id >= 100`は、`id`が 100 以上である`INSERT`文を除外します。
-        - **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
-        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
+        - **Ignore update new value expression**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
+        - **Ignore update old value expression**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
         - **Ignore delete value expression**: 指定された条件を満たす`DELETE`文を除外します。たとえば、`name = 'john'`は`name`が`'john'`である`DELETE`文を除外します。
 
 3. **Start Replication Position**領域で、以下のいずれかのレプリケーション位置を選択します。
@@ -369,7 +369,7 @@ access key を使用して認証するには、以下の手順に従ってくだ
 
     **CSV**形式を設定するには、以下の項目を入力してください。
 
-    - **Binary Encode Method**：バイナリデータのエンコード方式。base64（デフォルト）または**hex**を選択できます。AWS DMSと連携する場合は、 **hex**を使用してください。
+    - **Binary Encode Method**：バイナリデータのエンコード方式。**base64**（デフォルト）または**hex**を選択できます。AWS DMSと連携する場合は、 **hex**を使用してください。
     - **Date Separator**：年、月、日に基づいてデータをローテーションするか、ローテーションしないかを選択します。
     - **Delimiter**：CSVファイル内の値を区切る文字を指定します。最も一般的に使用される区切り文字はカンマ（ `,` ）です。
     - **Quote**：区切り文字または特殊文字を含む値を囲むために使用する文字を指定します。通常、引用符には二重引用符（ `"` ）が使用されます。
@@ -396,18 +396,18 @@ access key を使用して認証するには、以下の手順に従ってくだ
 
     > **Note:**
     >
-    > これら2つのパラメータは、各データベーステーブルごとにクラウドストレージに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドストレージAPIの呼び出しコストが上昇します。そのため、リカバリポイント目標（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
+    > これら2つのパラメータは、各データベーステーブルごとにクラウドストレージに生成されるオブジェクトの数に影響します。テーブル数が多い場合、同じ設定を使用すると生成されるオブジェクトの数が増加し、結果としてクラウドストレージAPIの呼び出しコストが上昇します。そのため、目標復旧時点（RPO）とコスト要件に基づいて、これらのパラメータを適切に設定することをお勧めします。
 
-6. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
+6. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクの主キーまたは一意キーのUPDATEイベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
-## ステップ3．仕様の設定 {#step-3-configure-specification}
+## ステップ3. 仕様の設定 {#step-3-configure-specification}
 
 **Next**をクリックして、変更フィードの仕様を設定してください。
 
 1. **Changefeed Specification**領域で、変更フィードで使用するレプリケーションキャパシティユニット（RCU）の数を指定します。
 2. **Changefeed Name**欄に、変更フィードの名前を指定します。
 
-## ステップ4．構成を確認し、レプリケーションを開始する {#step-4-review-the-configuration-and-start-replication}
+## ステップ4. 構成を確認し、レプリケーションを開始する {#step-4-review-the-configuration-and-start-replication}
 
 **Next**をクリックして、変更フィードの設定を確認してください。
 

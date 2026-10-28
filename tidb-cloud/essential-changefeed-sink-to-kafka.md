@@ -1,6 +1,6 @@
 ---
 title: Sink to Apache Kafka
-summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィードの構成が含まれます。
+summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認可のための権限の追加、およびチェンジフィードの構成が含まれます。
 ---
 
 # Apache Kafkaへのシンク {#sink-to-apache-kafka}
@@ -28,7 +28,7 @@ summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafk
 Apache Kafkaにデータをストリーミングするためのチェンジフィードを作成する前に、以下の前提条件を満たす必要があります。
 
 - ネットワーク接続を設定する
-- Kafka ACL認証の権限を追加する
+- Kafka ACL認可の権限を追加する
 
 ### ネットワーク {#network}
 
@@ -62,7 +62,7 @@ Apache Kafkaサービスへのパブリックアクセスを提供する場合�
 </div>
 </SimpleTab>
 
-### Kafka ACL認証 {#kafka-acl-authorization}
+### Kafka ACL認可 {#kafka-acl-authorization}
 
 TiDB Cloud Essential の変更フィードが Apache Kafka にデータをストリーミングし、Kafka トピックを自動的に作成できるようにするには、Kafka に次の権限が追加されていることを確認してください。
 
