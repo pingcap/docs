@@ -208,7 +208,7 @@ For Fuse table partition expressions:
 
 > **Tip:**
 >
-> **Good Candidates:**
+> Good Candidates:
 >
 > - Event and log tables filtered by day or month
 > - Multi-tenant tables filtered by tenant
