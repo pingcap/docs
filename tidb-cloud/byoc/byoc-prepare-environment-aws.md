@@ -130,7 +130,7 @@ subordinate CA 证书的有效期必须至少为 **20 年**。请确保用于签
 | **TiDB Cloud Organization ID** | 你的 TiDB Cloud 组织的唯一标识符 | `1372813089209270552` | Step 1 |
 | **AWS Account ID** | 12 位 AWS 账户编号 | `123456789012` | Step 2 |
 | **AWS Region** | 选择用于部署的 Region | `us-west-2`, `us-east-1`, `us-east-2` | Step 3。对于多 Region 部署，请列出所有 Region。 |
-| **Availability Zones** | 每个 Region 提供 3 个 AZ 或单个 AZ（请注明名称和 ID） | **Us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **Us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **Us-west-2:** `us-west-2a`, `usw2-az1` | Step 3。注意对**每个**所选 Region 都要满足 AZ 数量要求。 |
+| **Availability Zones** | 每个 Region 提供 3 个 AZ 或单个 AZ（请注明名称和 ID） | **us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **us-west-2:** `us-west-2a`, `usw2-az1` | Step 3。注意对**每个**所选 Region 都要满足 AZ 数量要求。 |
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | Step 5。该 ARN 可在多个 Region 之间共享。 |
 | **Hosted Zone Name & Hosted Zone ID** | TiDB hosted zone。你可以提供 public hosted zone 或 private hosted zone。 | **Hosted TiDB zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB zone ID:** `Z1039122VAY4T8UNWR8E`. | Step 4。该 hosted zone 可在多个 Region 之间共享。 |
 | **CIDR** | 客户规划的用于 O11Y 基础设施和资源池的 CIDR 范围 | **O11Y CIDR:** `10.1.0.0/22`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |

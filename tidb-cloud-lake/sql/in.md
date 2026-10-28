@@ -1,9 +1,9 @@
 ---
-title: NOT ] IN
+title: "[ NOT ] IN"
 summary: 检查某个值是否（或是否不）在显式列表中。
 ---
 
-# NOT ] IN
+# [ NOT ] IN
 
 检查某个值是否（或是否不）在显式列表中。
 

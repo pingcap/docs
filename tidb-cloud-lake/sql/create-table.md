@@ -357,7 +357,7 @@ FROM products;
 +------+-------+----------+-------------+
 ```
 
-在此示例中，我们创建了一个名为 student*profiles 的表，其中包含一个名为 profile 的 Variant 类型列，用于存储 JSON 数据。我们还添加了一个名为 \_age* 的 virtual 计算列，用于从 profile 列中提取 age 属性并将其转换为整数型。
+在此示例中，我们创建了一个名为 `student_profiles` 的表，其中包含一个名为 `profile` 的 Variant 类型列，用于存储 JSON 数据。我们还添加了一个名为 `age` 的 virtual 计算列，用于从 profile 列中提取 age 属性并将其转换为整数型。
 
 ```sql
 -- Create the table with a virtual computed column
