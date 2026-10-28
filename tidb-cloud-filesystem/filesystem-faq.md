@@ -31,7 +31,7 @@ TiDB Cloud Filesystem 为应用程序、自动化流程和 AI agent 提供持久
 
 当前列表请参见 [支持的区域](/tidb-cloud-filesystem/filesystem-regions-and-limitations.md#supported-regions)。文件系统的可用性与 TiDB Cloud Starter 的可用性不同。
 
-通过 CLI 创建文件系统时，可使用 `ti configure` 选择受支持的 Region，或通过 `--region` 覆盖该命令的默认配置。创建流程请参见 [TiDB Cloud Filesystem 快速开始](/tidb-cloud-filesystem/filesystem-quick-start.md)。
+通过 CLI 创建文件系统时，可使用 `ti configure` 选择受支持的 Region，或通过 `--region` 覆盖该命令的默认配置。创建流程请参见 [通过 CLI 开始使用 TiDB Cloud Filesystem](/tidb-cloud-filesystem/filesystem-quick-start.md)。
 
 ## 我可以在自己的笔记本电脑上挂载文件系统吗？ {#can-i-mount-a-file-system-on-my-laptop}
 

@@ -50,7 +50,7 @@ split_part('datalake cloud', ',', 1)|
 ------------------------------------+
 Datalake Cloud                      |
 
--- 使用 '    '（tab）作为分隔符
+-- 使用 '   '（三个空格）作为分隔符
 -- SPLIT_PART 返回各个字段。
 SELECT SPLIT_PART('2023-10-19 15:30:45   INFO   Log message goes here', '   ', 3);
 

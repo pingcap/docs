@@ -43,7 +43,7 @@ CONNECTION = (
 | ENDPOINT_URL                | 存储桶的 endpoint URL，必须以 `https://` 开头。                                                                                                                                                                          | Optional   |
 | ACCESS_KEY_ID               | 用于连接 AWS S3 兼容对象存储的 access key ID。如果未提供，{{{ .lake }}} 将以匿名方式访问该存储桶。                                                                                                                      | Optional   |
 | SECRET_ACCESS_KEY           | 用于连接 AWS S3 兼容对象存储的 secret access key。                                                                                                                                                                       | Optional   |
-| ENABLE_VIRTUAL_HOST_STYLE   | 如果你使用虚拟主机方式来访问存储桶，请将其设置为 `"true"`。                                                                                                                                                              | Optional   |
+| ENABLE_VIRTUAL_HOST_STYLE   | 如果你使用虚拟主机方式来访问存储桶，请将其设置为 `'true'`。                                                                                                                                                              | Optional   |
 
 关于 `CONNECTION_NAME` 的更多信息，请参见 [CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md)
 

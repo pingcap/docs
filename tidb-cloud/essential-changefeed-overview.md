@@ -5,7 +5,7 @@ summary: TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到�
 
 # Changefeed
 
-TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，{{{ .essential }}} 支持将数据流式传输到 Apache Kafka 和 MySQL。
+TiDB Cloud changefeed 帮助你将数据从 TiDB Cloud 流式传输到其他数据服务。目前，{{{ .essential }}} 支持将数据流式传输到 Apache Kafka、MySQL 和云存储。
 
 > **注意：**
 >
@@ -53,8 +53,9 @@ changefeed 功能目前在以下区域可用：
 
 要创建 changefeed，请参考以下教程：
 
-- [Sink to Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
-- [Sink to MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
+- [同步到 Apache Kafka](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
+- [同步到 MySQL](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
+- [同步到 Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
 ## 查看 changefeed
 

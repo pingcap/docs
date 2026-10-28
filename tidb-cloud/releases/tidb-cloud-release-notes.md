@@ -8,6 +8,23 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 本页面列出了 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) 在 2026 年的发布说明。
 
+## 2026 年 10 月 27 日 {#october-27-2026}
+
+**常规变更**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential 现已在 `Tokyo (ap-northeast-1)` 支持 **Regional High Availability**（公测中），并将逐步扩展到更多 Region。
+
+        在受支持的 Region 中创建新的 TiDB Cloud Essential 实例时，你可以在 **Zonal**（单可用区）和 **Regional**（多可用区）高可用之间进行选择。
+
+        Regional High Availability 可增强对可用区故障的弹性。对于 TiDB Cloud Essential，新的 Regional RCU 价格现已高于之前的价格，而 Zonal RCU 定价保持不变。新的 Regional 价格生效时间如下：
+
+        - 对于在 2026 年 10 月 26 日之前创建且启用了 Regional High Availability 的 TiDB Cloud Essential 实例，新价格将于 2027 年 1 月生效。
+        - 对于在 2026 年 10 月 26 日及之后创建的 TiDB Cloud Essential 实例，新价格在创建时立即生效。
+
+      有关 RCU 定价的详细信息，请参见 [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)。
+
 ## 2026 年 10 月 20 日 {#october-20-2026}
 
 **常规变更**

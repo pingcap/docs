@@ -651,9 +651,9 @@ COPY INTO books_with_extra_columns
 
 本示例从一个名为 `"data.csv"` 的 CSV 文件中加载数据，其内容如下：
 
-```json
-1,"U00010","{\"carPriceList\":[{\"carTypeId":10,\"distance":5860},{\"carTypeId":11,\"distance\":5861}]}"
-2,"U00011","{\"carPriceList\":[{\"carTypeId":12,\"distance\":5862},{\"carTypeId":13,\"distance\":5863}]}"
+```csv
+1,"U00010","{\"carPriceList\":[{\"carTypeId\":10,\"distance\":5860},{\"carTypeId\":11,\"distance\":5861}]}"
+2,"U00011","{\"carPriceList\":[{\"carTypeId\":12,\"distance\":5862},{\"carTypeId\":13,\"distance\":5863}]}"
 ```
 
 每一行包含三列数据，其中第三列是一个包含 JSON 数据的字符串。为了正确加载带有 JSON 字段的 CSV 数据，我们需要设置正确的转义字符。本示例使用反斜杠 `\` 作为转义字符，因为 JSON 数据中包含双引号 `"`。

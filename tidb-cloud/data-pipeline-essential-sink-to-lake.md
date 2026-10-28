@@ -231,75 +231,13 @@ Data Pipeline 组件（export、changefeed 和 TiDB Cloud Lake）都需要访问
 
 ## 步骤 3. 为增量数据创建 changefeed {#step-3-create-a-changefeed-for-incremental-data}
 
-目前，TiDB Cloud Essential 不支持通过 TiDB Cloud 控制台创建 cloud-storage sink，因此你需要使用 TiDB Cloud API。
+在 TiDB Cloud 控制台中，你可以为 TiDB Cloud Essential 实例创建 cloud storage changefeed。完整操作步骤请参见 [同步到 Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)。配置 changefeed 时，请注意以下设置：
 
-调用 changefeed 创建 API 时，需要包含以下必填字段：
-
-| 字段 | 必填值 |
-|-------|---------------|
-| `sink.cloudStorage.dataFormat.protocol` | `CANAL_JSON` |
-| `sink.cloudStorage.dataFormat.canalJsonConfig.enableTidbExtension` | `true` |
-| `sink.cloudStorage.dataFormat.contentCompatible` | `true` |
-| `startPosition.mode` | `FROM_TSO` |
-| `startPosition.tso` | `<snapshot_tso from the export step>` |
-
-**请求示例：**
-
-```shell
-curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/changefeeds' \
-  -H 'Content-Type: application/json' \
-  -u '<Public Key>:<Private Key>' --digest \
-  -d '{
-    "displayName": "<changefeed-name>",
-    "sink": {
-      "type": "CLOUD_STORAGE",
-      "cloudStorage": {
-        "storage": {
-          "type": "S3",
-          "s3": {
-            "uri": "s3://<bucket>/<prefix>/incremental/",
-            "authType": "ROLE_ARN",
-            "roleArn": "<role-arn>"
-          }
-        },
-        "dataFormat": {
-          "protocol": "CANAL_JSON",
-          "contentCompatible": true,
-          "canalJsonConfig": {
-            "enableTidbExtension": true
-          }
-        }
-      }
-    },
-    "filter": {
-      "mode": "IGNORE_NOT_SUPPORT_TABLE",
-      "filterRule": ["*.*"]
-    },
-    "startPosition": {
-      "mode": "FROM_TSO",
-      "tso": "<snapshot_tso>"
-    },
-    "rcu": 2
-  }'
-```
-
-> **注意：**
->
-> changefeed 的 URI 必须使用与导出快照相同前缀下的 `incremental/` 子路径。IAM 角色的权限（来自[3. 扩展权限以覆盖整个管道前缀](#3-expand-permissions-to-cover-the-full-pipeline-prefix)）必须覆盖该路径。
->
-> 如果你使用的是 **Access Key** 而不是 Role ARN，请将请求体中的 `s3` 代码块替换为：
->
-> ```json
-> "s3": {
->   "uri": "s3://<bucket>/<prefix>/incremental/",
->   "authType": "ACCESS_KEY",
->   "accessKey": {
->     "id": "<access-key-id>",
->     "secret": "<access-key-secret>"
->   }
-> }
-> ```
->
+- **S3 URI**：使用与快照相同前缀下的 `incremental/` 子路径，例如 `s3://<bucket>/<prefix>/incremental/`。
+- **Bucket Access**：选择 **AWS Role ARN** 并输入[方法 1：使用 Role ARN](#method-1-use-a-role-arn)中的 role ARN，或者选择 **AWS Access Key** 并输入[方法 2：使用 Access Key](#method-2-use-an-access-key)中的 Access Key ID 和 Secret Access Key。确保权限覆盖 `incremental/` 路径。
+- **Start Replication Position**：选择 **Start replication from a specific TSO**，并输入在[步骤 2. 将完整快照导出到 Amazon S3](#step-2-export-full-snapshot-to-amazon-s3)中记录的快照 TSO。
+- **Data Format**：选择 **Canal-JSON**，并同时启用 **Enable TiDB Extension** 和 **Enable Canal Content Compatibility**。这些设置会生成与 TiDB Cloud Lake 集成兼容的数据格式。
+- **Changefeed Specification**：选择满足复制吞吐要求的容量。
 
 ## 步骤 4. 配置 TiDB Cloud Lake {#step-4-configure-tidb-cloud-lake}
 
