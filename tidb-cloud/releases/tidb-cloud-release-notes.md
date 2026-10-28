@@ -8,6 +8,23 @@ aliases: ['/tidbcloud/supported-tidb-versions','/tidbcloud/release-notes','/ai/v
 
 This page lists the release notes of [TiDB Cloud](https://www.pingcap.com/tidb-cloud/) in 2026.
 
+## October 27, 2026
+
+**General changes**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential now supports **Regional High Availability** (public preview) in `Tokyo (ap-northeast-1)`, with support for additional regions rolling out gradually.
+
+        When creating a new TiDB Cloud Essential instance in a supported region, you can choose between **Zonal** (single Availability Zone) and **Regional** (multiple Availability Zones) high availability.
+
+        Regional High Availability provides enhanced resilience against Availability Zone failures. For TiDB Cloud Essential, the new regional RCU price is now higher than the previous price, while zonal RCU pricing remains unchanged. The new Regional price takes effect as follows:
+
+        - For TiDB Cloud Essential instances with Regional High Availability created before October 26, 2026, the new pricing will take effect in January 2027.
+        - For TiDB Cloud Essential instances created on or after October 26, 2026, the new pricing applies immediately upon creation.
+
+      For RCU pricing details, see [TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/).
+
 ## October 20, 2026
 
 **General changes**
