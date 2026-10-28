@@ -32,7 +32,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
     - 異なるデータレプリケーションタスクを管理するために、必要な数だけ変更フィードを作成できるようになりました。現在、各クラスタには最大10個の変更フィードを設定できます。詳細については、 [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
     - 一時停止状態の既存の変更フィードの設定を編集できます。詳細については、 [変更フィードを編集する](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)を参照してください。
 
-- Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、またはセルフホスト型MySQL互換データベースからTiDB Cloudへのデータのオンライン直接移行をサポートします。この機能は現在、一般提供中です。
+- Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、またはセルフホスト型MySQL互換データベースから、データをTiDB Cloudへオンラインで直接移行できるようにします。この機能は現在、一般提供中です。
 
     - 以下の6つのリージョンでサービスを提供します。
         - AWS オレゴン (us-west-2)
@@ -116,7 +116,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、またはセルフホスト型 MySQL 互換データベースからTiDB Cloudへのデータのオンライン直接移行 (ベータ版) をサポートします。
+- Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、またはセルフホスト型 MySQL 互換データベースから、データをTiDB Cloudへオンラインで直接移行できるようにします (ベータ版)。
 
     これまでは、業務を一時停止してオフラインでデータをインポートするか、サードパーティ製のツールを使用してTiDB Cloudにデータを移行する必要があり、これは煩雑でした。しかし、**データ移行**機能を使用すると、 TiDB Cloudコンソールで操作するだけで、最小限のダウンタイムで安全にデータをTiDB Cloudに移行できます。
 
