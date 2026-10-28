@@ -3,7 +3,7 @@ title: TiDB-X-CLOUD.202510.1 リリースノート
 summary: TiDB-X-CLOUD.202510.1 カーネルの機能について説明します。
 ---
 
-# TiDB-X-CLOUD.202510.1 Release Notes
+# TiDB-X-CLOUD.202510.1 リリースノート
 
 **リリース日**: 2026年4月28日
 
@@ -28,11 +28,11 @@ summary: TiDB-X-CLOUD.202510.1 カーネルの機能について説明します�
 
     このアーキテクチャにより、AI 時代のワークロードに向けて、弾力的なスケーラビリティ、予測可能なパフォーマンス、そして最適化された総保有コスト（TCO）を実現します。
 
-    TiDB X は、[従来の TiDB](https://docs.pingcap.com/tidbcloud/tidb-architecture/?plan=premium) の shared-nothing アーキテクチャから、クラウドネイティブな共有ストレージアーキテクチャへの本質的な進化を表しています。shared-nothing から共有ストレージアーキテクチャへ移行することで、TiDB X は結合されたノードの物理的な制約に対処し、次の技術目標を達成します。
+    TiDB X は、[クラシック TiDB](https://docs.pingcap.com/tidbcloud/tidb-architecture/?plan=premium) の shared-nothing アーキテクチャから、クラウドネイティブな共有ストレージアーキテクチャへの本質的な進化を表しています。shared-nothing から共有ストレージアーキテクチャへ移行することで、TiDB X は結合されたノードの物理的な制約に対処し、次の技術目標を達成します。
 
     - **スケーリングの高速化**: 物理データ移行の必要をなくすことで、スケーリング性能を最大 10 倍向上させます。
-    - **タスク分離**: バックグラウンドのメンテナンスタスク（compaction など）とオンラインのトランザクション処理トラフィックの間で、干渉が発生しないようにします。
-    - **リソースの弾力性**: コンピュートリソースがストレージ容量とは独立してスケールする、真の"pay-as-you-go"モデルを実現します。
+    - **タスク分離**: バックグラウンドのメンテナンスタスク（コンパクションなど）とオンラインのトランザクション処理トラフィックの間で、干渉が発生しないようにします。
+    - **リソースの弾力性**: コンピュートリソースがストレージ容量とは独立してスケールする、真の「従量課金制」モデルを実現します。
 
     詳細は、[TiDB X アーキテクチャ](https://docs.pingcap.com/tidbcloud/tidb-x-architecture/?plan=premium) を参照してください。
 
@@ -61,7 +61,7 @@ summary: TiDB-X-CLOUD.202510.1 カーネルの機能について説明します�
 
 ## 制限事項 {#limitations}
 
-TiDB X と 従来の TiDB のアーキテクチャの違いにより、TiDB X カーネルは 従来の TiDB カーネルの次のストレージ機能をサポートしていません。
+TiDB X と クラシック TiDB のアーキテクチャの違いにより、TiDB X カーネルは クラシック TiDB カーネルの次のストレージ機能をサポートしていません。
 
 - [TiKV MVCC In-Memory Engine (IME)](https://docs.pingcap.com/tidb/v8.5/tikv-in-memory-engine)
 - [Follower Read](https://docs.pingcap.com/tidb/v8.5/follower-read)

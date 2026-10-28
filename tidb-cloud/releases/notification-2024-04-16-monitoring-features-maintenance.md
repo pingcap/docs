@@ -15,9 +15,9 @@ summary: 2024年4月16日に実施されるTiDB Cloud監視機能のメンテナ
 
 ## インパクト {#impact}
 
-### 影響を受ける地域 {#affected-regions}
+### 影響を受けるリージョン {#affected-regions}
 
-メンテナンス期間中は、以下の地域における監視機能に影響が出ます。
+メンテナンス期間中は、以下のリージョンにおける監視機能に影響が出ます。
 
 - TiDB Cloud Dedicatedクラスター：
     - クラウドプロバイダー：AWS、リージョン：東京（ap-northeast-1）

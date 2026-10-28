@@ -22,7 +22,7 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 一般的な変更:
 
-- TiDB Cloud をDeveloper Tier [TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0)にアップグレード
+- Developer Tier の TiDB Cloud を[TiDB v5.3.0](https://docs.pingcap.com/tidb/stable/release-5.3.0)にアップグレード
 
 新機能:
 
@@ -62,11 +62,11 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 ## 2021年9月16日 {#september-16-2021}
 
-- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを5.2.0から5.2.1にアップグレードしてください。5.2.1の詳細な変更点については、リリースノート[5.2.1](https://docs.pingcap.com/tidb/stable/release-5.2.1)をご覧ください。
+- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを5.2.0から5.2.1にアップグレードしました。5.2.1の詳細な変更点については、リリースノート[5.2.1](https://docs.pingcap.com/tidb/stable/release-5.2.1)をご覧ください。
 
 ## 2021年9月2日 {#september-2-2021}
 
-- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを5.0.2から5.2.0にアップグレードしてください。TiDB 5.1.0および5.2.0の機能の詳細については、リリースノート[5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)ご覧ください。
+- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを5.0.2から5.2.0にアップグレードしました。TiDB 5.1.0および5.2.0の機能の詳細については、リリースノート[5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)をご覧ください。
 - TiDB Cloud内部機能のいくつかの問題を修正しました。
 
 ## 2021年8月19日 {#august-19-2021}
@@ -83,15 +83,15 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 - クレジットカード追加のユーザーエクスペリエンスを最適化
 - クレジットカードのセキュリティ管理強化
-- バックアップから回復したクラスターが正常に充電できない問題を修正しました
+- バックアップから回復したクラスターが正常に課金できない問題を修正しました
 
 ## 2021年7月6日 {#july-6-2021}
 
-- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを4.0.11から5.0.2にアップグレードしてください。このアップグレードにより、パフォーマンスと機能が大幅に向上します。詳細は[ここ](https://docs.pingcap.com/tidb/stable/release-5.0.0)ご覧ください。
+- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを4.0.11から5.0.2にアップグレードしました。このアップグレードにより、パフォーマンスと機能が大幅に向上します。詳細は[ここ](https://docs.pingcap.com/tidb/stable/release-5.0.0)をご覧ください。
 
 ## 2021年6月25日 {#june-25-2021}
 
-- [TiDB Cloudの価格](https://www.pingcap.com/pricing/)ページの**リージョン選択**が機能しない問題を修正
+- [TiDB Cloudの価格](https://www.pingcap.com/pricing/)ページの**Select Region**が機能しない問題を修正
 
 ## 2021年6月24日 {#june-24-2021}
 
@@ -100,7 +100,7 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 ## 2021年6月16日 {#june-16-2021}
 
-- アカウント登録時に**国/リージョンの**ドロップダウンリストに**中国**が追加されます
+- アカウント登録時に**Country/Region**ドロップダウンリストに**China**が追加されます
 
 ## 2021年6月14日 {#june-14-2021}
 
@@ -110,7 +110,7 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 一般
 
-- TiDB Cloudは現在パブリックプレビュー中です。[サインアップ](https://tidbcloud.com/signup)をクリックして、以下のトライアルオプションのいずれかを選択してください。
+- TiDB Cloudは現在パブリックプレビュー中です。[サインアップ](https://tidbcloud.com/signup)して、以下のトライアルオプションのいずれかを選択してください。
 
     - 48時間無料トライアル
     - 2週間のPoC無料トライアル

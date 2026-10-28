@@ -19,7 +19,7 @@ TiDB Cloud には、[クラウドプラットフォーム リリース](#cloud-p
 
 データベース カーネルは、SQL クエリを処理し、データを管理するコア エンジンです。TiDB Cloud プランに応じて、ご利用のリソースは異なるカーネルで実行され、それぞれ独自のリリース サイクルを持ちます。
 
-| Plan | Kernel | Default kernel version for newly created instances or clusters |
+| プラン | カーネル | 新規作成されたインスタンスまたはクラスターのデフォルトのカーネルバージョン |
 | --- | --- | --- |
 | TiDB Cloud **Starter** | クラシック TiDB カーネルをベースにしたカスタマイズ版 [TiDB X](/tidb-cloud/tidb-x-architecture.md) エンジンで実行されます。 | [TiDB v8.5.3](https://docs.pingcap.com/tidb/stable/release-8.5.3/) |
 | TiDB Cloud **Essential** | 2026 年 6 月 30 日以降に作成された TiDB Cloud Essential インスタンスは、[TiDB X](/tidb-cloud/tidb-x-architecture.md) カーネルで実行されます。 | [TiDB-X-CLOUD.202603.1](/tidb-cloud/releases/tidb-x-cloud.202603.1.md) |
