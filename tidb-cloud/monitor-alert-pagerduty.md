@@ -5,7 +5,7 @@ summary: PagerDuty経由でアラート通知を受け取ることで、TiDBを�
 
 # PagerDuty経由で購読する {#subscribe-via-pagerduty}
 
-TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[FlashDuty](/tidb-cloud/monitor-alert-flashduty.md)経由でアラート通知を購読する簡単な方法を提供します。このドキュメントでは、PagerDuty 経由でアラート通知を購読する方法について説明します。
+TiDB Cloud は、PagerDuty、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール](/tidb-cloud/monitor-alert-email.md)、[Zoom](/tidb-cloud/monitor-alert-zoom.md)、[Flashduty](/tidb-cloud/monitor-alert-flashduty.md)経由でアラート通知を購読する簡単な方法を提供します。このドキュメントでは、PagerDuty 経由でアラート通知を購読する方法について説明します。
 
 > **Note:**
 >
