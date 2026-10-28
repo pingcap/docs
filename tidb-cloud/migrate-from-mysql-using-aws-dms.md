@@ -119,9 +119,9 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 8. [AWS DMSコンソール](https://console.aws.amazon.com/dms/v2/home)で、 **Create endpoint**をクリックしてターゲットデータベースエンドポイントを作成し、次の情報を設定します。
 
-    - **Server name**: 記録した`-h`情報である TiDB クラスターのホスト名を入力してください。
-    - **Port**：記録した`-P`情報と同じTiDBクラスタのポート番号を入力してください。TiDBクラスタのデフォルトポートは4000です。
-    - **User name**: TiDB クラスターのユーザー名を入力してください。これは、記録した`-u`情報です。
+    - **Server name**: 記録した`-h`の値である TiDB クラスターのホスト名を入力してください。
+    - **Port**：記録した`-P`の値である TiDB クラスターのポート番号を入力してください。TiDBクラスタのデフォルトポートは4000です。
+    - **User name**: 記録した`-u`の値である TiDB クラスターのユーザー名を入力してください。
     - **Password**：TiDBクラスタのパスワードを入力してください。
     - **Secure Socket Layer (SSL) mode**： **Verify-ca**を選択します。
     - **Add new CA certificate**をクリックして、前の手順でTiDB CloudコンソールからダウンロードしたCAファイルをインポートします。
