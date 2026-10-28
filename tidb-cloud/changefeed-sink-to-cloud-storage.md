@@ -3,7 +3,7 @@ title: Sink to Cloud Storage
 summary: 本文档介绍如何创建 changefeed，将数据从 TiDB Cloud 流式同步到云存储。内容包括限制、目标端配置、同步与规范配置，以及启动同步流程。
 ---
 
-# Sink to Cloud Storage
+# 同步到 Cloud Storage
 
 本文档介绍如何创建 changefeed，将数据从 <CustomContent plan="dedicated">TiDB Cloud Dedicated</CustomContent><CustomContent plan="essential">TiDB Cloud Essential</CustomContent><CustomContent plan="premium">TiDB Cloud Premium</CustomContent><CustomContent plan="byoc">TiDB Cloud BYOC</CustomContent> 同步到云存储。
 

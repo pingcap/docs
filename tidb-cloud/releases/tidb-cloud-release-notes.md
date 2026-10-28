@@ -14,7 +14,7 @@ aliases: ['/zh/tidbcloud/supported-tidb-versions','/zh/tidbcloud/release-notes',
 
 - **TiDB Cloud Essential**
 
-    - TiDB Cloud Essential 现已在 `Tokyo (ap-northeast-1)` 支持 **Regional High Availability**（公测），并将逐步扩展到更多 Region。
+    - TiDB Cloud Essential 现已在 `Tokyo (ap-northeast-1)` 支持 **Regional High Availability**（公测中），并将逐步扩展到更多 Region。
 
         在受支持的 Region 中创建新的 TiDB Cloud Essential 实例时，你可以在 **Zonal**（单可用区）和 **Regional**（多可用区）高可用之间进行选择。
 

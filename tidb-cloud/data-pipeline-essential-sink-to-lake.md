@@ -231,7 +231,7 @@ Data Pipeline 组件（export、changefeed 和 TiDB Cloud Lake）都需要访问
 
 ## 步骤 3. 为增量数据创建 changefeed {#step-3-create-a-changefeed-for-incremental-data}
 
-在 TiDB Cloud 控制台中，你可以为 TiDB Cloud Essential 实例创建 cloud storage changefeed。完整操作步骤请参见 [Sink to Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)。配置 changefeed 时，请注意以下设置：
+在 TiDB Cloud 控制台中，你可以为 TiDB Cloud Essential 实例创建 cloud storage changefeed。完整操作步骤请参见 [同步到 Cloud Storage](/tidb-cloud/changefeed-sink-to-cloud-storage.md)。配置 changefeed 时，请注意以下设置：
 
 - **S3 URI**：使用与快照相同前缀下的 `incremental/` 子路径，例如 `s3://<bucket>/<prefix>/incremental/`。
 - **Bucket Access**：选择 **AWS Role ARN** 并输入[方法 1：使用 Role ARN](#method-1-use-a-role-arn)中的 role ARN，或者选择 **AWS Access Key** 并输入[方法 2：使用 Access Key](#method-2-use-an-access-key)中的 Access Key ID 和 Secret Access Key。确保权限覆盖 `incremental/` 路径。
