@@ -9,15 +9,15 @@ summary: TiDB Cloudクラスターのサイズを決定する方法を学びま�
 
 > **Note:**
 >
-> TiDB Cloud Starter またはTiDB Cloud Essential クラスターのサイズを変更できません。
+> TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのサイズを変更できません。
 
-## サイズ TiDB {#size-tidb}
+## TiDB のサイズを決定する {#size-tidb}
 
 TiDBはコンピューティング専用であり、データの保存は行いません。水平方向にスケーラブルです。
 
 TiDB のノード数、vCPU、RAM を構成できます。
 
-さまざまなクラスター規模のパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
+さまざまなクラスター規模のパフォーマンステスト結果については、 [TiDB Cloudパフォーマンスリファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
 
 ### TiDB vCPU と RAM {#tidb-vcpu-and-ram}
 
@@ -32,7 +32,7 @@ TiDB のノード数、vCPU、RAM を構成できます。
 
 > **Note:**
 >
-> **32 vCPU、128 GiB**サイズの TiDB を使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+> **32 vCPU、128 GiB**サイズの TiDB を使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 >
 > TiDB の vCPU と RAM サイズが**4 vCPU、16 GiB**に設定されている場合、次の制限に注意してください。
 >
@@ -40,7 +40,7 @@ TiDB のノード数、vCPU、RAM を構成できます。
 > - 4 vCPU TiDB は 4 vCPU TiKV でのみ使用できます。
 > - TiFlashは利用できません。
 >
-> **4 vCPU、16 GiB**の TiDB は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
+> **4 vCPU、16 GiB**の TiDB は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境での使用は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)プランのご利用をご検討ください。
 
 ### TiDBノード数 {#tidb-node-count}
 
@@ -59,9 +59,9 @@ TiDB ノードの指定されたレイテンシーでは、TiDB のパフォー�
 
 | 作業負荷 | QPS（P95 ≈ 100ms） | QPS（P99 ≈ 300ms） | QPS（P99 ≈ 100ms） |
 | ---- | ---------------- | ---------------- | ---------------- |
-| 読む   | 18,900           | 9,450            | 6,300            |
+| 読み取り   | 18,900           | 9,450            | 6,300            |
 | 混合   | 15,500           | 7,750            | 5,200            |
-| 書く   | 18,000           | 9,000            | 6,000            |
+| 書き込み   | 18,000           | 9,000            | 6,000            |
 
 TiDBノード数が8未満の場合、パフォーマンス偏差係数はほぼ0%であるため、16 vCPU、32 GiB TiDBノードのTiDBパフォーマンスは、8 vCPU、16 GiB TiDBノードの約2倍になります。TiDBノード数が8を超える場合は、必要なノード数が少なくなり、パフォーマンス偏差係数が小さくなるため、16 vCPU、32 GiB TiDBノードを選択することをお勧めします。
 
@@ -79,13 +79,13 @@ TiDBノード数が8未満の場合、パフォーマンス偏差係数はほぼ
 
 したがって、8つの TiDB ノード (8 vCPU、16 GiB) が推奨されます。
 
-## サイズ TiKV {#size-tikv}
+## TiKV のサイズを決定する {#size-tikv}
 
 TiKVはデータの保存を担当し、水平方向に拡張可能です。
 
 TiKV のノード数、vCPU と RAM、ストレージを構成できます。
 
-さまざまなクラスター規模のパフォーマンス テスト結果については、 [TiDB Cloudパフォーマンス リファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
+さまざまなクラスター規模のパフォーマンステスト結果については、 [TiDB Cloudパフォーマンスリファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)を参照してください。
 
 ### TiKV vCPU と RAM {#tikv-vcpu-and-ram}
 
@@ -106,11 +106,11 @@ TiKV のノード数、vCPU と RAM、ストレージを構成できます。
 > - 4 vCPU TiKV は 4 vCPU TiDB でのみ使用できます。
 > - TiFlashは利用できません。
 >
-> **4 vCPU、16 GiB**の TiKV は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境への本番は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)クラスタープランのご利用をご検討ください。
+> **4 vCPU、16 GiB**の TiKV は、学習、テスト、およびトライアル用途向けに設計されています。プレプロダクション環境や、小規模でクリティカルでないワークロードに適しています。ただし、パフォーマンスの制限があるため、本格的な本番環境での使用は推奨され**ません**。本番でのコスト削減と SLA 保証が必要な場合は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)プランのご利用をご検討ください。
 
 ### TiKVノード数 {#tikv-node-count}
 
-TiKV ノードの数は**少なくとも 1 セット (3つの異なる利用可能ゾーン内の 3つのノード)** である必要があります。
+TiKV ノードの数は**少なくとも 1 セット (3つの異なるアベイラビリティゾーン内の 3つのノード)** である必要があります。
 
 TiDB Cloudは、耐久性と高可用性を実現するために、選択したリージョン内のすべてのアベイラビリティゾーン（少なくとも3つ）にTiKVノードを均等にデプロイします。典型的な3レプリカ構成では、データはすべてのアベイラビリティゾーンのTiKVノードに均等に分散され、各TiKVノードのディスクに永続化されます。
 
@@ -149,9 +149,9 @@ TiKV ノードの指定されたレイテンシーでは、TiKV のパフォー�
 
 | 作業負荷 | QPS（P95 ≈ 100ms） | QPS（P99 ≈ 300ms） | QPS（P99 ≈ 100ms） |
 | ---- | ---------------- | ---------------- | ---------------- |
-| 読む   | 2万8000           | 14,000           | 7,000            |
+| 読み取り   | 28,000           | 14,000           | 7,000            |
 | 混合   | 17,800           | 8,900            | 4,450            |
-| 書く   | 14,500           | 7,250            | 3,625            |
+| 書き込み   | 14,500           | 7,250            | 3,625            |
 
 TiKVノード数が8未満の場合、パフォーマンス偏差係数はほぼ0%であるため、16 vCPU、64 GiBのTiKVノードのパフォーマンスは、8 vCPU、32 GiBのTiKVノードの約2倍になります。TiKVノード数が8を超える場合は、必要なノード数が少なくなり、パフォーマンス偏差係数が小さくなるため、16 vCPU、64 GiBのTiKVノードを選択することをお勧めします。
 
@@ -192,7 +192,7 @@ TiDB Cloud は、AWS でホストされる[TiDB Cloud Dedicated](/tidb-cloud/sel
 
 - [Basicストレージ](#basic-storage)
 - [Standardストレージ](#standard-storage)
-- [Performance+Plusストレージ](#performance-and-plus-storage)
+- [PerformanceストレージとPlusストレージ](#performance-and-plus-storage)
 
 #### Basicストレージ {#basic-storage}
 
@@ -213,7 +213,7 @@ Standardストレージタイプは、AWS でホストされ、TiDB バージョ
 
 PerformanceストレージとPlusストレージは、より高いパフォーマンスと安定性を提供し、これらの拡張機能を反映した価格設定となっています。現在、これらの2つのストレージタイプは、AWSにデプロイされたクラスターに対してのみ、リクエストに応じて利用可能です。PerformanceストレージまたはPlusストレージをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**?**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、**Description**フィールドに"Apply for TiKV storage type"と入力して、 **Submit**をクリックします。
 
-## サイズTiFlash {#size-tiflash}
+## TiFlash のサイズを決定する {#size-tiflash}
 
 TiFlashはTiKVからのデータをリアルタイムで同期し、すぐにリアルタイム分析ワークロードをサポートします。水平方向に拡張可能です。
 

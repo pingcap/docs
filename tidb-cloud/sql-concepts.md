@@ -55,7 +55,7 @@ TiDBは、行IDの生成とデータ分散を最適化するための3つのSQL�
 
 ### AUTO_RANDOM {#auto-random}
 
-`AUTO_RANDOM`は`BIGINT`列に値を自動的に割り当てるために使用される列属性です。自動的に割り当てられる値はランダムで一意です。 `AUTO_RANDOM`の値はランダムで一意であるため、TiDB が連続する ID を割り当てることによって単一のストレージノードで発生する書き込みホットスポットを回避するために、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`よく使用されます。
+`AUTO_RANDOM`は`BIGINT`列に値を自動的に割り当てるために使用される列属性です。自動的に割り当てられる値はランダムで一意です。 `AUTO_RANDOM`の値はランダムで一意であるため、TiDB が連続する ID を割り当てることによって単一のストレージノードで発生する書き込みホットスポットを回避するために、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`がよく使用されます。
 
 `AUTO_RANDOM`の値はランダムかつ一意であるため、TiDB が連続する ID を割り当てることによって単一のストレージノードで発生する書き込みホットスポットを回避するために、 [`AUTO_INCREMENT`](/auto-increment.md)の代わりに`AUTO_RANDOM`がよく使用されます。現在の`AUTO_INCREMENT`列が主キーであり、型が`BIGINT`の場合、 `ALTER TABLE t MODIFY COLUMN id BIGINT AUTO_RANDOM(5);`ステートメントを実行して、 `AUTO_INCREMENT`から`AUTO_RANDOM`に切り替えることができます。
 

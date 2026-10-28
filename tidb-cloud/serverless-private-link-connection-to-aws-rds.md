@@ -30,7 +30,7 @@ AWSアカウントIDとアベイラビリティゾーンを表示するには、
 
 ## ステップ1. Amazon RDSインスタンスをセットアップする {#step-1-set-up-the-amazon-rds-instance}
 
-使用する Amazon RDS インスタンスを特定するか、 [新しいものを作成する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)。
+使用する Amazon RDS インスタンスを特定するか、 [新しいものを作成](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)します。
 
 Amazon RDSインスタンスは、以下の要件を満たす必要があります。
 
@@ -53,11 +53,11 @@ Amazon RDSインスタンスは、以下の要件を満たす必要がありま�
 
 AWSコンソールでロードバランサーとAWSエンドポイントサービスを設定する必要があります。
 
-### ステップ2.1. ロードバランサーの設定 {#step-2-1-set-up-the-load-balancer}
+### ステップ2.1. ロードバランサーを設定する {#step-2-1-set-up-the-load-balancer}
 
 ロードバランサーをRDSと同じリージョンに設定するには、以下の手順を実行してください。
 
-1. [対象グループ](https://console.aws.amazon.com/ec2/home#CreateTargetGroup)に移動して、対象グループを作成します。次の情報を入力してください。
+1. [ターゲットグループ](https://console.aws.amazon.com/ec2/home#CreateTargetGroup)に移動して、ターゲットグループを作成します。次の情報を入力してください。
 
     - **Target type**: `IP addresses`を選択してください。
     - **Protocol and Port**: プロトコルを`TCP`に、ポートをデータベースのポートに設定します。たとえば、MySQL の場合は`3306`です。
@@ -88,11 +88,11 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     - **Listeners and routing**：
         - **Protocol and Port**：プロトコルを`TCP`に、ポートをデータベースのポート番号に設定します。例えば、MySQLの場合は`3306`です。
-        - **Target group**: 前の手順で作成した対象グループを選択してください。
+        - **Target group**: 前の手順で作成したターゲットグループを選択してください。
 
 詳細については、 [ネットワークロードバランサーを作成する](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html)を参照してください。
 
-### ステップ2.2. AWSエンドポイントサービスの設定 {#step-2-2-set-up-the-aws-endpoint-service}
+### ステップ2.2. AWSエンドポイントサービスを設定する {#step-2-2-set-up-the-aws-endpoint-service}
 
 エンドポイントサービスをRDSと同じリージョンに設定するには、以下の手順を実行してください。
 
@@ -100,7 +100,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     - **Load balancer type**： `Network`を選択
     - **Available load balancers**：前の手順で作成したロードバランサーを入力してください。
-    - **Supported Regions**：地域をまたぐ要件がない場合は空欄のままにしてください。
+    - **Supported Regions**：リージョン間の要件がない場合は空欄のままにしてください。
     - **Require acceptance for endpoint**： `Acceptance required`を選択することをお勧めします
     - **Supported IP address types**： `IPv4`を選択してください
 
@@ -108,7 +108,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
 3. エンドポイントサービスの詳細ページで、 **Allow principals**タブをクリックし、[前提条件](#prerequisites)で取得したAWSアカウントIDを許可リストに追加します。例えば、 `arn:aws:iam::<account_id>:root`のように追加します。
 
-## ステップ3. TiDB CloudでAWSエンドポイントサービスのプライベートリンク接続を作成します {#step-3-create-an-aws-endpoint-service-private-link-connection-in-tidb-cloud}
+## ステップ3. TiDB CloudでAWSエンドポイントサービスのプライベートリンク接続を作成する {#step-3-create-an-aws-endpoint-service-private-link-connection-in-tidb-cloud}
 
 TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、プライベートリンク接続を作成できます。
 

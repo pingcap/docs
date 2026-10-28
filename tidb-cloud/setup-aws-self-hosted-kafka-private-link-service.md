@@ -13,7 +13,7 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 1. TiDB Cloud VPC は、プライベートエンドポイントを介して Kafka VPC に接続します。
 2. Kafka クライアントはすべての Kafka ブローカーと直接通信する必要があります。
 3. 各 Kafka ブローカーは、 TiDB Cloud VPC 内のエンドポイントの一意のポートにマッピングされます。
-4. マッピングを実現するには、Kafka ブートストラップ メカニズムと AWS リソースを活用します。
+4. マッピングを実現するには、Kafka ブートストラップメカニズムと AWS リソースを活用します。
 
 次の図にその仕組みを示します。
 
@@ -39,16 +39,16 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3. TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
-    2. 概要ページで、TiDB クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB Cloud Dedicated クラスターの概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
+    2. 概要ページで、TiDB Cloud Dedicated クラスターのリージョンを確認します。Kafka クラスターが同じリージョンにデプロイされることを確認してください。
     3. **Create Changefeed**をクリックします。
         1. **Destination**で、 **Kafka**を選択します。
         2. **Connectivity Method**で**Private Link**を選択します。
-    4. **続行する前に、** TiDB Cloud AWS アカウントの情報をリマインダーに書き留めておいてください。この情報は、TiDB Cloud がKafka Private Link サービスのエンドポイントを作成することを承認する際に使用されます。
+    4. **Reminders before proceeding**で TiDB Cloud AWS アカウントの情報をメモしておいてください。この情報は、TiDB Cloud がKafka Private Link サービスのエンドポイントを作成することを承認する際に使用されます。
     5. **Number of AZs**を選択します。この例では、 **3 AZs**を選択します。KafkaクラスターをデプロイするAZのIDをメモしておいてください。AZ名とAZ IDの関係を知りたい場合は、 [AWS リソースのアベイラビリティゾーン ID](https://docs.aws.amazon.com/ram/latest/userguide/working-with-az-ids.html)を参照してください。
     6. Kafka プライベートリンクサービスに固有の**Kafka Advertised Listener Pattern**を入力します。
         1. 一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
-        2. **Check usage and generate**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
+        2. **Check usage and generate**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの EXTERNAL アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
 
 </CustomContent>
 <CustomContent plan="premium">
@@ -67,8 +67,8 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 3. TiDB Cloud Premium インスタンスから Kafka デプロイメント情報を取得します。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB インスタンスのインスタンス概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
-    2. 概要ページで、TiDBインスタンスのリージョンを確認します。Kafkaクラスターが同じリージョンにデプロイされることを確認してください。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB Cloud Premium インスタンスのインスタンス概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
+    2. 概要ページで、TiDB Cloud Premium インスタンスのリージョンを確認します。Kafkaクラスターが同じリージョンにデプロイされることを確認してください。
     3. チェンジフィードを作成するには、チュートリアルを参照してください。
 
         - [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)
@@ -88,18 +88,18 @@ aliases: ['/ja/tidbcloud/setup-self-hosted-kafka-private-link-service']
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 
-新しいクラスターをデプロイする必要がある場合は、 [新しいKafkaクラスターをデプロイ](#deploy-a-new-kafka-cluster)手順に従ってください。
+新しい Kafka クラスターをデプロイする必要がある場合は、 [新しいKafkaクラスターをデプロイする](#deploy-a-new-kafka-cluster)手順に従ってください。
 
-既存のクラスターを公開する必要がある場合は、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)手順に従ってください。
+既存の Kafka クラスターを公開する必要がある場合は、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)手順に従ってください。
 
-### 新しいKafkaクラスターをデプロイ {#deploy-a-new-kafka-cluster}
+### 新しいKafkaクラスターをデプロイする {#deploy-a-new-kafka-cluster}
 
 #### 1. Kafka VPC を設定する {#1-set-up-the-kafka-vpc}
 
 Kafka VPC には次のものが必要です。
 
 - ブローカー用のプライベートサブネットが 3つ (AZ ごとに 1つ)。
-- 任意の AZ に 1つのパブリックサブネットがあり、インターネットに接続できる要塞ノードと 3つのプライベートサブネットがあるため、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の要塞ノードが必要になる場合があります。
+- 任意の AZ に 1つのパブリックサブネット。このサブネットには、インターネットと 3つのプライベートサブネットに接続できる要塞ノードを配置します。これにより、Kafka クラスターを簡単にセットアップできます。本番環境では、Kafka VPC に接続できる独自の要塞ノードが必要になる場合があります。
 
 サブネットを作成する前に、AZ IDとAZ名のマッピングに基づいてAZ内にサブネットを作成します。以下のマッピングを例に挙げます。
 
@@ -117,12 +117,12 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **1.1. Kafka VPCを作成する**
 
-1. [AWSコンソール &gt; VPCダッシュボード](https://console.aws.amazon.com/vpcconsole/home?#vpcs:)に進み、Kafka をデプロイするリージョンに切り替えます。
+1. [AWSコンソール > VPCダッシュボード](https://console.aws.amazon.com/vpcconsole/home?#vpcs:)に進み、Kafka をデプロイするリージョンに切り替えます。
 
 2. **Create VPC**をクリックします。**VPC settings**ページで以下の情報を入力します。
 
     1. **VPC only**を選択します。
-    2. **Name tag**にタグを入力します (例: `Kafka VPC` 。
+    2. **Name tag**にタグを入力します (例: `Kafka VPC` )。
     3. **IPv4 CIDR manual input**を選択し、 IPv4 CIDR を入力します (例: `10.0.0.0/16` )。
     4. その他のオプションはデフォルト値を使用します。 **Create VPC**をクリックします。
     5. VPC の詳細ページで、VPC ID (例: `vpc-01f50b790fa01dffa` ) をメモします。
@@ -137,17 +137,17 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 4. 以下の情報を含む3つのサブネットを追加します。TiDB Cloudでは、ブローカーの`advertised.listener`設定でAZ IDをエンコードする必要があるため、後でブローカーを設定する際に便利なように、サブネット名にAZ IDを含めることをお勧めします。
 
-    - サブネット1 in `us-west-2a`
+    - `us-west-2a` のサブネット1
         - **Subnet name**: `broker-usw2-az1`
         - **Availability Zone**: `us-west-2a`
         - **IPv4 subnet CIDR block**： `10.0.0.0/18`
 
-    - サブネット2 in `us-west-2c`
+    - `us-west-2c` のサブネット2
         - **Subnet name**: `broker-usw2-az2`
         - **Availability Zone**: `us-west-2c`
         - **IPv4 subnet CIDR block**： `10.0.64.0/18`
 
-    - サブネット3 in `us-west-2b`
+    - `us-west-2b` のサブネット3
         - **Subnet name**: `broker-usw2-az3`
         - **Availability Zone**: `us-west-2b`
         - **IPv4 subnet CIDR block**： `10.0.128.0/18`
@@ -167,11 +167,11 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 4. 要塞サブネットをパブリックサブネットに構成します。
 
-    1. [VPCダッシュボード &gt; インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`という名前のインターネットゲートウェイを作成します。
+    1. [VPCダッシュボード > インターネットゲートウェイ](https://console.aws.amazon.com/vpcconsole/home#igws:)に進みます。`kafka-vpc-igw`という名前のインターネットゲートウェイを作成します。
 
-    2. **Internet gateways Detail**ページの**Actions**で、 **Attach to VPC**をクリックして、インターネット ゲートウェイを Kafka VPC に接続します。
+    2. **Internet gateways Detail**ページの**Actions**で、 **Attach to VPC**をクリックして、インターネットゲートウェイを Kafka VPC に接続します。
 
-    3. [VPCダッシュボード &gt; ルートテーブル](https://console.aws.amazon.com/vpcconsole/home#CreateRouteTable:)に進みます。Kafka VPC のインターネット ゲートウェイへのルート テーブルを作成し、次の情報を含む新しいルートを追加します。
+    3. [VPCダッシュボード > ルートテーブル](https://console.aws.amazon.com/vpcconsole/home#CreateRouteTable:)に進みます。Kafka VPC のインターネットゲートウェイへのルートテーブルを作成し、次の情報を含む新しいルートを追加します。
 
         - **Name**: `kafka-vpc-igw-route-table`
         - **VPC** : `Kafka VPC`
@@ -200,7 +200,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **2.2. ブローカーノードを作成する**
 
-[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカー サブネットに、各 AZ に 1つずつ、合計3つのブローカーノードを作成します。
+[EC2 リストページ](https://console.aws.amazon.com/ec2/home#Instances:)に進みます。ブローカーサブネットに、各 AZ に 1つずつ、合計3つのブローカーノードを作成します。
 
 - サブネット`broker-usw2-az1`のブローカー 1
 
@@ -252,7 +252,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 
 **2.3. Kafkaランタイムバイナリの準備**
 
-1. 要塞ノードの詳細ページに移動します。**パブリックIPv4アドレス**を取得します。SSHを使用して、先ほどダウンロードした`kafka-vpc-key-pair.pem`を使用してノードにログインします。
+1. 要塞ノードの詳細ページに移動します。**Public IPv4 address**を取得します。SSHを使用して、先ほどダウンロードした`kafka-vpc-key-pair.pem`を使用してノードにログインします。
 
     ```shell
     chmod 400 kafka-vpc-key-pair.pem
@@ -306,7 +306,7 @@ Kafka VPC を作成するには、次の手順を実行します。
 2. `advertised.listeners`項目については、次の操作を行います。
 
     1. 各ブローカーに対して、ブローカーノードの内部IPアドレスを使用して、INTERNALアドバタイズリスナーを設定します。アドバタイズされた内部Kafkaクライアントは、このアドレスを使用してブローカーにアクセスします。
-    2. TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードに外部アドバタイズリスナーを設定することで、 TiDB Cloudが複数のブローカーを区別できるようになります。異なる外部アドバタイズリスナーを設定することで、 TiDB CloudのKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
+    2. TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードに EXTERNAL アドバタイズリスナーを設定することで、 TiDB Cloudが複数のブローカーを区別できるようになります。異なる EXTERNAL アドバタイズリスナーを設定することで、 TiDB CloudのKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
 
         - `<port>`は、Kafka プライベートリンクサービスのアクセスポイントでブローカーを区別します。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらは、リクエストを異なるブローカーに転送するプライベートリンクサービスのロードバランサーがリッスンするポートです。
         - **Kafka Advertised Listener Pattern**の`AZ ID`は、ブローカーがデプロイされている場所を示します。TiDB Cloud は、 AZ ID に基づいてリクエストを異なるエンドポイント DNS 名にルーティングします。
@@ -428,7 +428,7 @@ $KAFKA_STORAGE_CMD format -t "BRl69zcmTFmiPaoaANybiw" -c "$KAFKA_CONFIG_DIR/serv
 LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properties" &
 ```
 
-**2.5. 要塞ノードでクラスター設定をテストする**
+**2.5. 要塞ノードで Kafka クラスター設定をテストする**
 
 1. Kafka ブートストラップをテストします。
 
@@ -452,7 +452,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
-2. 要塞ノードにプロデューサー スクリプト`produce.sh`を作成します。
+2. 要塞ノードにプロデューサースクリプト`produce.sh`を作成します。
 
     ```shell
     #!/bin/bash
@@ -485,7 +485,7 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
     produce_messages
     ```
 
-3. 要塞ノードにコンシューマー スクリプト`consume.sh`を作成します。
+3. 要塞ノードにコンシューマースクリプト`consume.sh`を作成します。
 
     ```shell
     #!/bin/bash
@@ -559,16 +559,16 @@ LOG_DIR=$KAFKA_LOG_DIR nohup $KAFKA_START_CMD "$KAFKA_CONFIG_DIR/server.properti
 
 <CustomContent plan="dedicated">
 
-Kafka クラスターが TiDB クラスターと同じリージョンおよび AZ にデプロイされていることを確認してください。ブローカーが異なる AZ にある場合は、正しい AZ に移動してください。
+Kafka クラスターが TiDB Cloud Dedicated クラスターと同じリージョンおよび AZ にデプロイされていることを確認してください。ブローカーが異なる AZ にある場合は、正しい AZ に移動してください。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-Kafka クラスターが TiDB インスタンスと同じリージョンおよび AZ にデプロイされていることを確認してください。ブローカーが異なる AZ にある場合は、正しい AZ に移動してください。
+Kafka クラスターが TiDB Cloud Premium インスタンスと同じリージョンおよび AZ にデプロイされていることを確認してください。ブローカーが異なる AZ にある場合は、正しい AZ に移動してください。
 
 </CustomContent>
 
-#### 1. ブローカーの外部リスナーを構成する {#1-configure-the-external-listener-for-brokers}
+#### 1. ブローカーの EXTERNAL リスナーを構成する {#1-configure-the-external-listener-for-brokers}
 
 以下の設定はKafka KRaftクラスターに適用されます。ZKモードの設定も同様です。
 
@@ -631,9 +631,9 @@ Kafka クラスターが TiDB インスタンスと同じリージョンおよ�
 
 3. すべてのブローカーを再構成したら、Kafka ブローカーを 1つずつ再起動します。
 
-#### 2. 内部ネットワークで外部リスナーの設定をテストする {#2-test-external-listener-settings-in-your-internal-network}
+#### 2. 内部ネットワークで EXTERNAL リスナーの設定をテストする {#2-test-external-listener-settings-in-your-internal-network}
 
-Kafka と OpenJDK を Kafka クライアント ノードにダウンロードできます。
+Kafka と OpenJDK を Kafka クライアントノードにダウンロードできます。
 
 ```shell
 # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -731,7 +731,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
         - `usw2-az2`と`broker-usw2-az2 subnet`
         - `usw2-az3`と`broker-usw2-az3 subnet`
     - **Security groups**: 次のルールで新しいセキュリティグループを作成します。
-        - 受信ルールは、Kafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}` 。リージョン内のTiDB CloudのCIDRを取得するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の左上隅にあるコンボボックスを使用してターゲットプロジェクトに切り替え、左側のナビゲーションペインで**Project Settings** > **Network Access**をクリックし、 **Project CIDR** > **AWS**をクリックします。
+        - 受信ルールは、Kafka VPCからのすべてのTCPを許可します：タイプ - `{ports of target groups}` （例： `9092-9095` ）、ソース - `{CIDR of TiDB Cloud}` 。リージョン内のTiDB CloudのCIDRを取得するには、 [TiDB Cloudコンソール](https://tidbcloud.com)で組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view**タブをクリックして対象プロジェクトを見つけ、プロジェクトの<MDSvgIcon name="icon-project-settings" />をクリックし、**Project Settings**の下にある**Network Access**をクリックしてから、**Project CIDR** > **AWS**をクリックします。
         - アウトバウンドルールは、Kafka VPC へのすべての TCP を許可します: タイプ - `All TCP` 、宛先 - `Anywhere-IPv4`
     - リスナーとルーティング:
         - プロトコル: `TCP` ; ポート: `9092` ; 転送先: `bootstrap-target-group`
@@ -779,7 +779,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
     - **Kafka Type**: `3 AZs`。クラスターが同じ 3つの AZ にデプロイされていることを確認します。
     - **Kafka Advertised Listener Pattern**: `abc` 。これは、 [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列と同じです。
     - **Endpoint Service Name**: Kafka サービス名。
-    - **Bootstrap Ports**: `9092`。背後に専用のブートストラップ ターゲットグループを構成するため、1つのポートで十分です。
+    - **Bootstrap Ports**: `9092`。背後に専用のブートストラップターゲットグループを構成するため、1つのポートで十分です。
 
 3. [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)の手順に進みます。
 
@@ -795,7 +795,7 @@ b3.usw2-az3.abc.us-west-2.aws.3199015.tidbcloud.com:9095 (id: 3 rack: null) -> E
 
 2. [ステップ1. Kafkaクラスターをセットアップする](#step-1-set-up-a-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)に従って、EXTERNAL リスナーとアドバタイズリスナーの別のグループを作成します。このグループの名前は**EXTERNAL2**とします。EXTERNAL2 のポート範囲は**EXTERNAL**と重複できないことに注意してください。
 
-3. ブローカーを再構成した後、ブートストラップおよびブローカー ターゲットグループを含む別のターゲットグループをロードバランサーに追加します。
+3. ブローカーを再構成した後、ブートストラップおよびブローカーターゲットグループを含む別のターゲットグループをロードバランサーに追加します。
 
 4. 次の情報を使用してTiDB Cloud接続を構成します。
 

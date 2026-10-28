@@ -53,9 +53,9 @@ summary: "`tidbcloud_dedicated_private_endpoint_connection` リソースを使�
     }
     ```
 
-    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
+    `resource`ブロックを使用して、リソースタイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - `tidbcloud_dedicated_private_endpoint_connection`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_private_endpoint_connection`に設定します。
+    - `tidbcloud_dedicated_private_endpoint_connection`リソースを使用するには、リソースタイプを`tidbcloud_dedicated_private_endpoint_connection`に設定します。
     - リソース名は必要に応じて定義できます。例： `example` 。
     - 必要な引数の値を取得する方法がわからない場合は、 [AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
     - TiDB Cloud Dedicated プライベートエンドポイント接続仕様情報を取得するには、 [tidbcloud_private_endpoint_connection (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)を参照してください。
@@ -148,9 +148,9 @@ summary: "`tidbcloud_dedicated_private_endpoint_connection` リソースを使�
 
 Terraform によって管理されていないTiDB Cloud Dedicated プライベートエンドポイント接続の場合は、インポートすることで Terraform による管理を開始できます。
 
-1. 新しい`tidbcloud_dedicated_private_endpoint_connection`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_dedicated_private_endpoint_connection`リソースのインポートブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,node_group_id,private_endpoint_connection_id`の形式に置き換えます。
+    次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,node_group_id,private_endpoint_connection_id`の形式に置き換えます。
 
     ```
     import {
@@ -161,13 +161,13 @@ Terraform によって管理されていないTiDB Cloud Dedicated プライベ�
 
 2. 新しい設定ファイルを生成します。
 
-    インポート ブロックに従って、新しい`tidbcloud_dedicated_private_endpoint_connection`リソースの新しい設定ファイルを生成します。
+    インポートブロックに従って、新しい`tidbcloud_dedicated_private_endpoint_connection`リソースの新しい設定ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
+    上記のコマンドでは、既存の`.tf`ファイル名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
     次に、インポートされたリソースの構成を含む`generated.tf`ファイルが現在のディレクトリに作成されます。
 

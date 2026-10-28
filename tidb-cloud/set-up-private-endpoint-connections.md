@@ -3,15 +3,15 @@ title: Connect to a TiDB Cloud Dedicated Cluster via AWS PrivateLink
 summary: AWS を使用してプライベートエンドポイント経由でTiDB Cloudクラスターに接続する方法を学習します。
 ---
 
-# AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスタに接続する {#connect-to-a-tidb-cloud-dedicated-cluster-via-aws-privatelink}
+# AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスターに接続する {#connect-to-a-tidb-cloud-dedicated-cluster-via-aws-privatelink}
 
 このドキュメントでは、 [AWS PrivateLink](https://aws.amazon.com/privatelink)経由でTiDB Cloud Dedicated クラスターに接続する方法について説明します。
 
 > **Tip:**
 >
-> - AWS PrivateLink 経由でTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
-> - Azure のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)を参照してください。
-> - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスタに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)をご覧ください。
+> - AWS PrivateLink 経由でTiDB Cloud Starter またはTiDB Cloud Essential インスタンスに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Starter または Essential に接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+> - Azure のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Azure Private Link 経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)を参照してください。
+> - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続する方法については、 [Google Cloud Private Service Connect 経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)をご覧ください。
 
 TiDB Cloudは、 AWS VPCでホストされているTiDB Cloudサービスへの、 [AWS PrivateLink](https://aws.amazon.com/privatelink)経由の高度に安全な一方向アクセスをサポートします。まるでお客様のVPC内にあるかのように機能します。VPC内にプライベートエンドポイントが公開されており、権限があればエンドポイント経由でTiDB Cloudサービスへの接続を作成できます。
 
@@ -45,11 +45,11 @@ AWS VPC設定でDNSホスト名とDNS解決の両方が有効になっている�
 
 プライベートエンドポイント経由でTiDB Cloud Dedicated クラスターに接続するには、次の手順を実行します。
 
-1. [TiDBクラスタを選択](#step-1-select-a-tidb-cluster)
+1. [TiDBクラスターを選択](#step-1-select-a-tidb-cluster)
 2. [AWSインターフェースエンドポイントを作成する](#step-2-create-an-aws-interface-endpoint)
 3. [プライベートエンドポイント接続を作成する](#step-3-create-a-private-endpoint-connection)
 4. [プライベートDNSを有効にする](#step-4-enable-private-dns)
-5. [TiDBクラスタに接続する](#step-5-connect-to-your-tidb-cluster)
+5. [TiDBクラスターに接続する](#step-5-connect-to-your-tidb-cluster)
 
 複数のクラスターがある場合は、AWS PrivateLink を使用して接続するクラスターごとにこれらの手順を繰り返す必要があります。
 
@@ -94,7 +94,7 @@ AWS CLI を使用して VPC インターフェースエンドポイントを作�
 >
 > - コマンドを実行する前に、AWS CLI をインストールして設定しておく必要があります。詳細は[AWS CLI 設定の基本](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html)を参照してください。
 >
-> - サービスが3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、VPCエンドポイントサービスがサブネットのAZをサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。この場合、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
+> - サービスが3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、VPCエンドポイントサービスがサブネットのAZをサポートしていないことを示すエラーメッセージが表示されます。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。この場合、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)にお問い合わせください。
 
 </div>
 <div label="Use AWS Console">
@@ -121,13 +121,13 @@ AWS マネジメントコンソールを使用して VPC インターフェー�
 
     > **Tip:**
     >
-    > サービスが3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、 **Subnets**エリアでAZを選択できない場合があります。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。その場合は、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)お問い合わせください。
+    > サービスが3つを超えるアベイラビリティゾーン（AZ）にまたがっている場合、 **Subnets**エリアでAZを選択できない場合があります。この問題は、選択したリージョンに、TiDBクラスターが配置されているAZに加えて、追加のAZが存在する場合に発生します。その場合は、 [PingCAP テクニカルサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support)にお問い合わせください。
 
 8. **Security groups**領域で、セキュリティグループを適切に選択します。
 
     > **Note:**
     >
-    > 選択したセキュリティグループが、ポート`4000`または顧客定義のポート上の EC2 インスタンスからのインバウンド アクセスを許可していることを確認します。
+    > 選択したセキュリティグループが、ポート`4000`または顧客定義のポート上の EC2 インスタンスからのインバウンドアクセスを許可していることを確認します。
 
 9. **Create endpoint**をクリックします。
 
@@ -200,7 +200,7 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 - クラスターレベルの**Networking**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 - プロジェクトレベルの**Network Access**ページ: 組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、**Project view** タブをクリックして対象のプロジェクトを見つけ、そのプロジェクトの <MDSvgIcon name="icon-project-settings" /> をクリックし、**Project Settings** の下にある **Network Access** をクリックします。
 
-プライベートエンドポイントの可能なステータスについては、次のように説明されます。
+プライベートエンドポイントの考えられるステータスは次のとおりです。
 
 - **Not Configured**: エンドポイントサービスは作成されていますが、プライベートエンドポイントはまだ作成されていません。
 - **Pending**: 処理を待機中です。
@@ -208,10 +208,10 @@ AWS マネジメントコンソールでプライベート DNS を有効にす�
 - **Deleting**: プライベートエンドポイントを削除しています。
 - **Failed**: プライベートエンドポイントの作成に失敗しました。その行の**Edit**をクリックすると、作成を再試行できます。
 
-プライベートエンドポイントサービスの可能なステータスについては、次のように説明されます。
+プライベートエンドポイントサービスの考えられるステータスは次のとおりです。
 
 - **Creating**: エンドポイントサービスを作成中です。これには 3 ～ 5分かかります。
-- **Active**: プライベートエンドポイントが作成されたかどうかに関係なく、エンドポイントサービスが作成されます。
+- **Active**: プライベートエンドポイントが作成されたかどうかに関係なく、エンドポイントサービスは作成済みです。
 - **Deleting**: エンドポイントサービスまたはクラスターを削除中です。これには 3 ～ 5分かかります。
 
 ## プライベートエンドポイント経由で IPv6 接続を使用する {#use-ipv6-connectivity-over-a-private-endpoint}
@@ -220,13 +220,13 @@ TiDB Cloud Dedicated は、AWS PrivateLink 経由のインバウンド IPv6 接�
 
 > **Note:**
 >
-> 現在、IPv6 接続機能はリクエストに応じて利用可能です。この機能を利用するには、[TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) に連絡し、組織 ID を提供してください。
+> 現在、IPv6 接続機能はリクエストに応じて利用可能です。この機能を利用するには、[TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) に連絡し、組織 ID を提供してください。
 
 TiDB Cloud では、各 [TiDB ノードグループ](/tidb-cloud/tidb-node-group-management.md) の IP プロトコルタイプを個別に設定できます。IPv6 経由で TiDB Cloud Dedicated クラスターに接続するには、対象ノードグループの IP プロトコルタイプをデュアルスタックに切り替えてから、次のようにデュアルスタックの AWS インターフェースエンドポイントを作成します。
 
 ### ステップ1. IP プロトコルタイプをデュアルスタックに切り替える {#step-1-switch-the-ip-protocol-type-to-dual-stack}
 
-[TiDB Cloud Support](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) が組織に対して IPv6 接続機能を有効にした後、[TiDB Cloud コンソール](https://tidbcloud.com/) で IP プロトコルタイプを切り替えることができます。
+[TiDB Cloudサポート](https://docs.pingcap.com/tidbcloud/tidb-cloud-support) が組織に対して IPv6 接続機能を有効にした後、[TiDB Cloud コンソール](https://tidbcloud.com/) で IP プロトコルタイプを切り替えることができます。
 
 1. 組織の [**My TiDB**](https://tidbcloud.com/tidbs) ページに移動し、対象クラスターの名前をクリックして概要ページを開き、左側のナビゲーションペインで **Settings** > **Networking** をクリックします。
 2. 各 TiDB Cloud Dedicated クラスターにはデフォルトの [TiDB ノードグループ](/tidb-cloud/tidb-node-group-management.md) があります。クラスターに複数のノードグループがある場合は、右上の **TiDB Node Group** リストから対象の TiDB ノードグループを選択します。

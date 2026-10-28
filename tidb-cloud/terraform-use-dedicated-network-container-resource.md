@@ -56,9 +56,9 @@ summary: "`tidbcloud_dedicated_network_container` リソースを使用して、
     }
     ```
 
-    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
+    `resource`ブロックを使用して、リソースタイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - `tidbcloud_dedicated_network_container`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_network_container`に設定します。
+    - `tidbcloud_dedicated_network_container`リソースを使用するには、リソースタイプを`tidbcloud_dedicated_network_container`に設定します。
     - リソース名は、必要に応じて定義できます（例： `example` ）。
     - 必要な引数の値を取得する方法がわからない場合は、 [リージョンの CIDR を設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
     - TiDB Cloud Dedicated ネットワークコンテナ仕様の詳細については、 [tidbcloud_dedicated_network_container (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_network_container)を参照してください。
@@ -114,7 +114,7 @@ summary: "`tidbcloud_dedicated_network_container` リソースを使用して、
     tidbcloud_dedicated_network_container.example: Creation complete after 4s
     ```
 
-    TiDB Cloud Dedicated ネットワークコンテナのリージョンにTiDB Cloud Dedicated クラスターを作成するまで、リソースのステータスは`INACTIVE`ままです。その後、ステータスは`ACTIVE`に変わります。
+    TiDB Cloud Dedicated ネットワークコンテナのリージョンにTiDB Cloud Dedicated クラスターを作成するまで、リソースのステータスは`INACTIVE`のままです。その後、ステータスは`ACTIVE`に変わります。
 
 5. リソースの状態を確認するには、コマンド`terraform show`または`terraform state show tidbcloud_dedicated_network_container.${resource-name}`を使用します。前者のコマンドは、すべてのリソースとデータソースの状態を表示します。
 
@@ -142,9 +142,9 @@ Terraform によって管理されていないTiDB Cloud Dedicated ネットワ�
 
 たとえば、Terraform によって作成されていないネットワークコンテナーをインポートできます。
 
-1. 新しい`tidbcloud_dedicated_network_container`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_dedicated_network_container`リソースのインポートブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をネットワークコンテナ ID に置き換えます。
+    次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をネットワークコンテナ ID に置き換えます。
 
     ```
     import {
@@ -155,13 +155,13 @@ Terraform によって管理されていないTiDB Cloud Dedicated ネットワ�
 
 2. 新しい設定ファイルを生成します。
 
-    インポート ブロックに従って、新しい`tidbcloud_dedicated_network_container`リソースの新しい設定ファイルを生成します。
+    インポートブロックに従って、新しい`tidbcloud_dedicated_network_container`リソースの新しい設定ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
+    上記のコマンドでは、既存の`.tf`ファイル名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
     次に、インポートされたリソースの構成を含む`generated.tf`ファイルが現在のディレクトリに作成されます。
 

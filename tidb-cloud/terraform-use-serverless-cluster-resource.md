@@ -1,20 +1,20 @@
 ---
 title: Use the `tidbcloud_serverless_cluster` Resource
-summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Starter クラスターを作成および変更する方法を学習します。"
+summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud Starter インスタンスを作成および変更する方法を学習します。"
 ---
 
 # `tidbcloud_serverless_cluster`リソースを使用する {#use-the-tidbcloud-serverless-cluster-resource}
 
-このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_serverless_cluster`リソースを使用して[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスを管理する方法について説明します。
 
 また、 `tidbcloud_projects`データソースを使用して必要な情報を取得する方法も学習します。
 
 `tidbcloud_serverless_cluster`リソースの機能は次のとおりです。
 
-- TiDB Cloud Starter クラスターを作成します。
-- TiDB Cloud Starter クラスターを変更します。
-- TiDB Cloud Starter クラスターをインポートします。
-- TiDB Cloud Starter クラスターを削除します。
+- TiDB Cloud Starter インスタンスを作成します。
+- TiDB Cloud Starter インスタンスを変更します。
+- TiDB Cloud Starter インスタンスをインポートします。
+- TiDB Cloud Starter インスタンスを削除します。
 
 ## 前提条件 {#prerequisites}
 
@@ -22,7 +22,7 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud S
 
 ## `tidbcloud_projects`データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud-projects-data-source}
 
-各TiDBクラスタはプロジェクトに属します。TiDB Cloud Starterクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDB Cloud Starterインスタンスはプロジェクトに属します。TiDB Cloud Starterインスタンスを作成する前に、TiDB Cloud Starterインスタンスを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データソースを使用します。
 
@@ -52,9 +52,9 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud S
     }
     ```
 
-    - `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
+    - `data`ブロックを使用して、データソースタイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
 
-        - プロジェクト データソースを使用するには、データソース タイプを`tidbcloud_projects`に設定します。
+        - プロジェクトデータソースを使用するには、データソースタイプを`tidbcloud_projects`に設定します。
         - データソース名は必要に応じて定義できます。例： `"example_project"` 。
         - `tidbcloud_projects`データソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
@@ -119,11 +119,11 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud S
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## TiDB Cloud Starter クラスターを作成する {#create-a-tidb-cloud-starter-cluster}
+## TiDB Cloud Starter インスタンスを作成する {#create-a-tidb-cloud-starter-instance}
 
-`tidbcloud_serverless_cluster`リソースを使用して、 TiDB Cloud Starter クラスターを作成できます。
+`tidbcloud_serverless_cluster`リソースを使用して、 TiDB Cloud Starter インスタンスを作成できます。
 
-1. クラスターのディレクトリを作成してそこに入ります。
+1. TiDB Cloud Starterインスタンスのディレクトリを作成してそこに入ります。
 
 2. `cluster.tf`ファイルを作成します。
 
@@ -155,9 +155,9 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud S
     }
     ```
 
-    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
+    `resource`ブロックを使用して、リソースタイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - `tidbcloud_serverless_cluster`リソースを使用するには、リソース タイプを`tidbcloud_serverless_cluster`に設定します。
+    - `tidbcloud_serverless_cluster`リソースを使用するには、リソースタイプを`tidbcloud_serverless_cluster`に設定します。
     - リソース名は必要に応じて定義できます。例： `example` 。
     - リソースの詳細については、プロジェクト ID と[`tidbcloud_serverless_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_cluster)に応じて設定できます。
 
@@ -288,16 +288,16 @@ summary: "`tidbcloud_serverless_cluster` リソースを使用してTiDB Cloud S
     }
     ```
 
-## TiDB Cloud Starter クラスターを変更する {#modify-a-tidb-cloud-starter-cluster}
+## TiDB Cloud Starter インスタンスを変更する {#modify-a-tidb-cloud-starter-instance}
 
-TiDB Cloud Starterクラスタでは、Terraformを使用してリソースを管理できます。変更可能な引数は次のとおりです。
+TiDB Cloud Starterインスタンスでは、Terraformを使用してリソースを管理できます。変更可能な引数は次のとおりです。
 
-- `display_name` : クラスターの表示名。
-- `spending_limit` : クラスターの使用制限。
+- `display_name` : TiDB Cloud Starterインスタンスの表示名。
+- `spending_limit` : TiDB Cloud Starterインスタンスの支出限度額。
 - `endpoints.public.disabled` : パブリックエンドポイントを無効にするかどうか。
 - `automated_backup_policy.start_time` : 自動バックアップが開始される時点の UTC 時刻 ( `HH:mm`形式)。
 
-TiDB Cloud Starterクラスターを変更するには、 `tidbcloud_serverless_cluster`のリソースの構成を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`spending_limit`を次のように変更できます。
+TiDB Cloud Starterインスタンスを変更するには、 `tidbcloud_serverless_cluster`のリソースの構成を変更し、 `terraform apply`コマンドを使用して変更を適用します。例えば、 `display_name`と`spending_limit`を次のように変更できます。
 
 ```
 resource "tidbcloud_serverless_cluster" "example" {
@@ -417,13 +417,13 @@ resource "tidbcloud_serverless_cluster" "example" {
 }
 ```
 
-## TiDB Cloud Starter クラスターをインポートする {#import-a-tidb-cloud-starter-cluster}
+## TiDB Cloud Starter インスタンスをインポートする {#import-a-tidb-cloud-starter-instance}
 
-Terraform によって管理されていないTiDB Cloud Starter クラスターの場合は、インポートすることで Terraform の管理下に置くことができます。
+Terraform によって管理されていないTiDB Cloud Starter インスタンスの場合は、インポートすることで Terraform の管理下に置くことができます。
 
-1. 新しい`tidbcloud_serverless_cluster`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_serverless_cluster`リソースのインポートブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をクラスター ID に置き換えます。
+    次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をクラスター ID に置き換えます。
 
     ```
     import {
@@ -434,13 +434,13 @@ Terraform によって管理されていないTiDB Cloud Starter クラスター
 
 2. 新しい設定ファイルを生成します。
 
-    インポート ブロックに従って、新しい`tidbcloud_serverless_cluster`リソースの新しい設定ファイルを生成します。
+    インポートブロックに従って、新しい`tidbcloud_serverless_cluster`リソースの新しい設定ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
+    上記のコマンドでは、既存の`.tf`ファイル名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
 3. 生成された構成を確認して適用します。
 
@@ -455,11 +455,11 @@ Terraform によって管理されていないTiDB Cloud Starter クラスター
     Apply complete! Resources: 1 imported, 0 added, 0 changed, 0 destroyed.
     ```
 
-これで、インポートしたクラスターを Terraform で管理できるようになりました。
+これで、インポートしたTiDB Cloud Starterインスタンスを Terraform で管理できるようになりました。
 
-## TiDB Cloud Starter クラスターを削除する {#delete-a-tidb-cloud-starter-cluster}
+## TiDB Cloud Starter インスタンスを削除する {#delete-a-tidb-cloud-starter-instance}
 
-TiDB Cloud Starter クラスターを削除するには、 `tidbcloud_serverless_cluster`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
+TiDB Cloud Starter インスタンスを削除するには、 `tidbcloud_serverless_cluster`リソースの構成を削除してから、 `terraform apply`コマンドを使用してリソースを破棄します。
 
 ```shell
 $ terraform apply

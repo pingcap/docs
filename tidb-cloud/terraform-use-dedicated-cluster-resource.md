@@ -52,9 +52,9 @@ summary: "`tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud De
     }
     ```
 
-    - `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
+    - `data`ブロックを使用して、データソースタイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
 
-        - プロジェクト データソースを使用するには、データソース タイプを`tidbcloud_projects`に設定します。
+        - プロジェクトデータソースを使用するには、データソースタイプを`tidbcloud_projects`に設定します。
         - データソース名は必要に応じて定義できます。例： `"example_project"` 。
         - `tidbcloud_projects`データソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
@@ -124,7 +124,7 @@ summary: "`tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud De
 > **Note:**
 >
 > - 始める前に、 [TiDB Cloudコンソール](https://tidbcloud.com)で CIDR が設定されていることを確認してください。詳細については、 [CIDRを設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
-> - CIDR を管理するには[`dedicated_network_container`リソースを作成する](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)も使用できます。
+> - [`dedicated_network_container`リソースを作成](/tidb-cloud/terraform-use-dedicated-network-container-resource.md)して CIDR を管理することもできます。
 
 次のように、 `tidbcloud_dedicated_cluster`リソースを使用してTiDB Cloud Dedicated クラスターを作成できます。
 
@@ -166,9 +166,9 @@ summary: "`tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud De
     }
     ```
 
-    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
+    `resource`ブロックを使用して、リソースタイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - `tidbcloud_dedicated_cluster`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_cluster`に設定します。
+    - `tidbcloud_dedicated_cluster`リソースを使用するには、リソースタイプを`tidbcloud_dedicated_cluster`に設定します。
     - リソース名は必要に応じて定義できます。例： `example_cluster` 。
     - リソースの詳細については、プロジェクト ID と[`tidbcloud_dedicated_cluster`仕様](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_cluster)に応じて設定できます。
 
@@ -570,7 +570,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
 
 1. [クラスターを作成する](#create-a-tidb-cloud-dedicated-cluster)際に使用する`cluster.tf`ファイルで、 `tidb_node_setting` 、 `tikv_node_setting` 、 `tiflash_node_setting`の設定を編集します。
 
-    たとえば、TiDB ノードを 1つ、TiKV ノードを 3つ (スケーリング ステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります)、およびTiFlashノードを 1つ追加するには、次のように構成を編集します。
+    たとえば、TiDB ノードを 1つ、TiKV ノードを 3つ (スケーリングステップが 3 であるため、TiKV ノードの数は 3 の倍数である必要があります)、およびTiFlashノードを 1つ追加するには、次のように構成を編集します。
 
     ```
      tidb_node_setting = {
@@ -982,7 +982,7 @@ TiDB Cloud Dedicated クラスターの場合、次のように Terraform を使
     Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
     ```
 
-### クラスターの TiDB ノードグループを削除します {#delete-a-tidb-node-group-of-the-cluster}
+### クラスターの TiDB ノードグループを削除する {#delete-a-tidb-node-group-of-the-cluster}
 
 クラスターの TiDB ノードグループを削除するには、 `dedicated_node_group`リソースの構成を削除し、 `terraform apply`コマンドを使用してリソースを破棄します。
 
@@ -1055,9 +1055,9 @@ Terraform によって管理されていない TiDB クラスターの場合は�
 
 次のように、Terraform によって作成されていないクラスターをインポートします。
 
-1. 新しい`tidbcloud_dedicated_cluster`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_dedicated_cluster`リソースのインポートブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をクラスター ID に置き換えます。
+    次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`をクラスター ID に置き換えます。
 
     ```
     import {
@@ -1068,13 +1068,13 @@ Terraform によって管理されていない TiDB クラスターの場合は�
 
 2. 新しい設定ファイルを生成します。
 
-    インポート ブロックに従って、新しい`tidbcloud_dedicated_cluster`リソースの新しい設定ファイルを生成します。
+    インポートブロックに従って、新しい`tidbcloud_dedicated_cluster`リソースの新しい設定ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
+    上記のコマンドでは、既存の`.tf`ファイル名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
 3. 生成された構成を確認して適用します。
 

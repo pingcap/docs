@@ -15,7 +15,7 @@ summary: "`tidbcloud_backup`リソースを使用してTiDB Cloudクラスター
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
-- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter またはTiDB Cloud Essential クラスターではご利用いただけません。`tidbcloud_backup`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
+- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter またはTiDB Cloud Essential インスタンスではご利用いただけません。`tidbcloud_backup`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
 
 ## `tidbcloud_backup`リソースを使用してバックアップを作成する {#create-a-backup-with-the-tidbcloud-backup-resource}
 
@@ -48,7 +48,7 @@ summary: "`tidbcloud_backup`リソースを使用してTiDB Cloudクラスター
 
     ファイル内のリソース値 (プロジェクト ID やクラスタ ID など) を独自のものに置き換える必要があります。
 
-    Terraform を使用してクラスター リソース (たとえば、 `example_cluster` ) を管理している場合は、実際のプロジェクト ID とクラスター ID を指定せずに、次のように`tidbcloud_backup`リソースを構成することもできます。
+    Terraform を使用してクラスターリソース (たとえば、 `example_cluster` ) を管理している場合は、実際のプロジェクト ID とクラスター ID を指定せずに、次のように`tidbcloud_backup`リソースを構成することもできます。
 
     ```
     resource "tidbcloud_backup" "example_backup" {
