@@ -188,7 +188,7 @@ TiDB Cloudは、堅牢なネットワークアクセス制御により、安全�
 
 - 仮想プライベートクラウド（VPC）内のSQLクライアントとTiDB Cloud Dedicatedクラスター間の安全な接続を可能にします。
 
-- [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)、[Alibaba Cloudプライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)でサポートされています。
+- [AWS PrivateLink](/tidb-cloud/set-up-private-endpoint-connections.md)、 [Azure プライベートリンク](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)、 [Google Cloud Private Service Connect](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)でサポートされています。
 
 </CustomContent>
 
