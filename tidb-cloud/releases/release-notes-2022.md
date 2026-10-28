@@ -199,7 +199,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     変数が`GLOBAL`レベルで設定された場合、その変数はクラスターに適用され、永続的（サーバーの再起動またはリロード後も有効）になります。`SESSION`レベルの変数は永続的ではなく、現在のセッションでのみ有効です。
 
-    **この機能はまだベータ版であり**、サポートされている変数は限られています。副作用が不確実なため、他の[システム変数](/system-variables.md)を変更することは推奨されません。TiDB v6.1に基づいてサポートされているすべての変数については、以下のリストをご覧ください。
+    **この機能はまだベータ版であり**、サポートされている変数は限られています。他の[システム変数](/system-variables.md)を変更することは、副作用を予測できないため推奨されません。TiDB v6.1に基づいてサポートされているすべての変数については、以下のリストをご覧ください。
 
     - [`require_secure_transport`](/system-variables.md#require_secure_transport-new-in-v610)
     - [`tidb_committer_concurrency`](/system-variables.md#tidb_committer_concurrency-new-in-v610)
@@ -217,7 +217,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **統合の変更**
 
-- [Vercel 統合マーケットプレイス](https://vercel.com/integrations#databases)で[TiDB Cloud Vercel 統合](https://vercel.com/integrations/tidb-cloud)を公開します。
+- [Vercel Integration Marketplace](https://vercel.com/integrations#databases)で[TiDB Cloud Vercel 統合](https://vercel.com/integrations/tidb-cloud)を公開します。
 
     [Vercel](https://vercel.com)はフロントエンド開発者向けのプラットフォームであり、イノベーターがインスピレーションの瞬間に創造するために必要なスピードと信頼性を提供します。TiDB Cloud Vercel Integrationを使用すると、VercelプロジェクトをTiDB Cloudクラスタに簡単に接続できます。詳細については、ドキュメント[TiDB CloudとVercelの統合](/tidb-cloud/integrate-tidbcloud-with-vercel.md)をご覧ください。
 
