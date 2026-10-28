@@ -114,7 +114,7 @@ TiDB Cloud Data Service provides the following Chat2Query v3 endpoints and v2 en
 | POST   | `/v3/knowledgeBases/{knowledge_base_id}/data` | This endpoint adds data to a specific knowledge base. |
 | GET    | `/v3/knowledgeBases/{knowledge_base_id}/data` | This endpoint retrieves data from a specific knowledge base. |
 | PUT    | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | This endpoint updates specific data in a knowledge base. |
-| DELETE | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | This endpoint deletes specific data from a knowledge base. |
+| DEL    | `/v3/knowledgeBases/{knowledge_base_id}/data/{knowledge_data_id}` | This endpoint deletes specific data from a knowledge base. |
 | POST   | `/v3/sessions` | This endpoint creates a new session. For more information about the usage of session-related endpoints, see [Start multi-round Chat2Query](/tidb-cloud/use-chat2query-sessions.md). |
 | GET    | `/v3/sessions` | This endpoint retrieves a list of all sessions. |
 | GET    | `/v3/sessions/{session_id}` | This endpoint retrieves the details of a specific session. |
