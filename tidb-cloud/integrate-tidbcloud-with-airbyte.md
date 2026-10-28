@@ -61,7 +61,7 @@ airbyte-server      | --------------------------------------
     > **Note:**
     >
     > - TiDB Cloud はTLS 接続をサポートしています。**TLSv1.2** および**TLSv1.3**から TLS プロトコルを選択できます。たとえば、 `enabledTLSProtocols=TLSv1.2`。
-    > - JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL パラメータで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
+    > - JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL Paramsで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
     > - TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
 
 4. コネクタの作成を完了するには、**Set up source**または**destination**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
