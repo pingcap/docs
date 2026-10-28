@@ -196,7 +196,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         現在、データベース監査ログをサポートしているのは[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のみです。データベース監査ログを使用している既存のTiDB Cloud Starter クラスターには影響しません。
 
-    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)ではインプレースリストア機能が削除され、バックアップを同じクラスタに直接リストアできなくなります。この変更により、アクティブな本番データの誤った上書きや潜在的なデータ損失を防ぐことができます。
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)ではインプレースリストア機能が削除され、バックアップを同じクラスタに直接リストアできなくなります。この変更は、アクティブな本番データの誤った上書きや潜在的なデータ損失の防止に役立ちます。
 
         データを復元するには、 [バックアップを新しいクラスターに復元](/tidb-cloud/backup-and-restore-serverless.md#restore-to-a-new-instance)できます。復元されたデータを検証した後、アプリケーションを新しいクラスターに切り替えます。既存のクラスターに復元されたデータはそのまま残り、新たな復元を実行しない限り、特別な操作は必要ありません。
 
