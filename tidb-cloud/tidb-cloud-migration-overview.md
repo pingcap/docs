@@ -1,6 +1,6 @@
 ---
 title: Migration and Import Overview
-summary: TiDB Cloudのデータ移行およびインポート シナリオの概要について説明します。
+summary: TiDB Cloudのデータ移行およびインポートシナリオの概要について説明します。
 aliases: ['/ja/tidbcloud/export-data-from-tidb-cloud']
 ---
 
@@ -25,7 +25,7 @@ MySQL互換データベースからデータを移行する場合、完全デー
 
 - MySQLシャードの移行とマージ
 
-    アプリケーションでデータストレージにMySQLシャードを使用している場合は、これらのシャードを1つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模データセットの MySQL シャードをTiDB Cloudに移行および統合する](/tidb-cloud/migrate-sql-shards.md)をご覧ください。
+    アプリケーションでデータストレージにMySQLシャードを使用している場合は、これらのシャードを1つのテーブルとしてTiDB Cloudに移行できます。詳細については、 [大規模データセットのMySQLシャードをTiDB Cloudに移行およびマージする](/tidb-cloud/migrate-sql-shards.md)をご覧ください。
 
 - TiDB Self-Managedからの移行
 
@@ -49,7 +49,7 @@ SQL、CSV、Parquet、またはAurora Snapshot形式のデータファイルを�
 
 - Amazon S3、Google Cloud Storage (GCS)、Azure Blob Storage、または Alibaba Cloud OSS から Apache Parquet ファイルをTiDB Cloudにインポートします。
 
-    Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはAlibaba Cloud OSSからParquetファイルをTiDB Cloudにインポートできます。詳細については、 [Cloud Storage からTiDB Cloud Starter または Essential に Apache Parquet ファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)と[Apache Parquet ファイルを Cloud Storage からTiDB Cloud Dedicated にインポートする](/tidb-cloud/import-parquet-files.md)をご覧ください。
+    Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、またはAlibaba Cloud OSSからParquetファイルをTiDB Cloudにインポートできます。詳細については、 [クラウドストレージからTiDB Cloud StarterまたはEssentialにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files-serverless.md)と[クラウドストレージからTiDB Cloud DedicatedにApache Parquetファイルをインポートする](/tidb-cloud/import-parquet-files.md)をご覧ください。
 
 ## 参照 {#reference}
 

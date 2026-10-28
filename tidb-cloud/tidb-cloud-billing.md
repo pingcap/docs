@@ -13,17 +13,17 @@ TiDB Cloudは、お客様が使用したリソースに応じて課金されま�
 
 [TiDB Cloud Dedicatedの料金詳細](https://www.pingcap.com/tidb-dedicated-pricing-details/)を参照してください。
 
-### TiDB Cloud Starterの料金プラン {#pricing-for-starter} {#pricing-for-starter}
+### TiDB Cloud Starterの料金プラン {#pricing-for-starter}
 
 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
-### TiDB Cloud Essentialの価格設定 {#pricing-for-essential} {#pricing-for-essential}
+### TiDB Cloud Essentialの価格設定 {#pricing-for-essential}
 
 TiDB Cloud Essentialでは、アプリケーションの実際の使用量で**はなく**、プロビジョニングされたリクエストキャパシティユニット (RCU) の数に基づいて課金されます。[TiDB Cloud Essential の価格詳細](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)をご覧ください。
 
-### TiDB Cloud Premium の価格設定 {#pricing-for-premium} {#pricing-for-premium}
+### TiDB Cloud Premium の価格設定 {#pricing-for-premium}
 
-TiDB Cloud Premium の場合、基礎となるバックエンド ノードやプロビジョニングされたディスク サイズではなく、実際の[リクエストキャパシティユニット（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)の消費量と実際に使用するストレージに基づいて請求されます。 [TiDB Cloud Premiumの料金詳細](https://www.pingcap.com/tidb-cloud-premium-pricing-details/)をご覧ください。
+TiDB Cloud Premium の場合、基礎となるバックエンドノードやプロビジョニングされたディスクサイズではなく、実際の[リクエストキャパシティユニット（RCU）](/tidb-cloud/tidb-cloud-glossary.md#request-capacity-unit-rcu)の消費量と実際に使用するストレージに基づいて請求されます。 [TiDB Cloud Premiumの料金詳細](https://www.pingcap.com/tidb-cloud-premium-pricing-details/)をご覧ください。
 
 ### {{{ .byoc }}} の料金 {#pricing-for-byoc}
 
@@ -114,7 +114,7 @@ TiDB Cloud Filesystem では、読み取り、書き込み、ストレージ、�
 
 - **Columnar storage**: 列指向ストレージは **TiFlash** エンジンによって提供されます。 <!--**Use case:** Online analytical processing (OLAP) workloads that benefit from real-time columnar acceleration without requiring additional ETL.-->
 
-- **Dual-layer encryption**: 行ベースのストレージと列指向ストレージはどちらもデュアルレイヤー暗号化をサポートしています。このメカニズムは、2つの独立した暗号化レイヤーでデータを保護し、1つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
+- **Dual-layer encryption**: 行ベースのストレージと列指向ストレージはどちらも二重層暗号化をサポートしています。このメカニズムは、2つの独立した暗号化レイヤーでデータを保護し、1つのレイヤーが侵害された場合でもデータが保護された状態を維持できるようにします。
 
     - Storage-layer encryption: 基盤となるクラウドプロバイダーは、ネイティブのストレージ暗号化メカニズムを使用して、保存中のすべてのデータを暗号化します。
     - Database-layer encryption: クラウドプロバイダーの暗号化に加えて、TiDB Cloud は顧客管理暗号化キー (CMEK) またはエスクロー鍵のいずれかを使用して、自動的に第 2 の暗号化レイヤーを適用します。
@@ -130,7 +130,7 @@ TiDB Cloud Filesystem では、読み取り、書き込み、ストレージ、�
 1. [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
 2. 左側のナビゲーションペインで、 **Billing**をクリックします。
 3. **Billing**ページで、 **Cost Explorer**タブをクリックします。
-4. **Cost Explorer**タブで、右上隅の**Filter**セクションを展開してレポートをカスタマイズします。期間を設定したり、グループ化オプション（サービス、プロジェクト、クラスター、地域、製品タイプ、料金タイプなど）を選択したり、特定のサービス、プロジェクト、クラスター、または地域を選択してフィルターを適用したりできます。コストエクスプローラーには、次の情報が表示されます。
+4. **Cost Explorer**タブで、右上隅の**Filter**セクションを展開してレポートをカスタマイズします。期間を設定したり、グループ化オプション（サービス、プロジェクト、クラスター、リージョン、製品タイプ、料金タイプなど）を選択したり、特定のサービス、プロジェクト、クラスター、またはリージョンを選択してフィルターを適用したりできます。コストエクスプローラーには、次の情報が表示されます。
 
     - **Cost Graph**：選択した期間におけるコストの推移を視覚化します。**Monthly**、**Daily**、**Total**の各表示を切り替えることができます。
     - **Cost Breakdown**：選択したグループ分けオプションに基づいて、コストの詳細な内訳を表示します。さらに分析したい場合は、データをCSV形式でダウンロードできます。
@@ -173,7 +173,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 
 クレジットに関する詳細情報は、**Credits**タブで確認できます。そこには、合計クレジット数、利用可能なクレジット数、現在の使用状況、およびステータスが含まれます。
 
-信用情報を確認するには、以下の手順を実行してください。
+クレジット情報を確認するには、以下の手順を実行してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
 2. 左側のナビゲーションペインで、 **Billing**をクリックします。
@@ -266,7 +266,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 1. [TiDB Cloudコンソール](https://tidbcloud.com)では、左上隅のコンボボックスを使用して、対象の組織に切り替えてください。
 2. 左側のナビゲーションペインで、 **Billing**をクリックします。
 3. **Billing**ページで、 **Contract**タブをクリックします。
-4. **Contract**タブで、確認したい契約を見つけ、その契約の行にある**…**をクリックします。
+4. **Contract**タブで、確認したい契約を見つけ、その契約の行にある**...**をクリックします。
 
 契約について詳しく知りたい場合は、[営業担当者にお問い合わせください](https://www.pingcap.com/contact-us/)。
 
@@ -324,7 +324,7 @@ TiDB CloudアカウントをAWSの請求アカウントにリンクするには�
 
 4. サインアップページの上部にある通知を確認し、 **Sign in**をクリックしてください。
 
-5. TiDB Cloudアカウントでサインインしてください。AWS**請求アカウントへのリンクページ**が表示されます。
+5. TiDB Cloudアカウントでサインインしてください。**Link to Your AWS Billing Account**ページが表示されます。
 
 6. **Link to Your AWS Billing Account**ページで、対象の組織を選択し、 **Link**をクリックしてAWS請求アカウントにリンクします。
 
@@ -352,7 +352,7 @@ TiDB CloudアカウントをAzureの請求アカウントにリンクするに�
 
 5. サインアップページの上部にある通知を確認し、 **Sign in**をクリックしてください。
 
-6. TiDB Cloudアカウントでサインインしてください。Azure**請求アカウントへのリンクページ**が表示されます。
+6. TiDB Cloudアカウントでサインインしてください。**Link to Your Azure Billing Account**ページが表示されます。
 
 7. **Link to Your Azure Billing Account**ページで、対象の組織を選択し、 **Link**をクリックして AWS 請求アカウントにリンクします。
 
@@ -366,7 +366,7 @@ TiDB CloudアカウントをAzureの請求アカウントにリンクするに�
 
 TiDB CloudアカウントをGoogle Cloudの請求アカウントにリンクするには、以下の手順に従ってください。
 
-1. [Google Cloud Marketplace のページ](https://console.cloud.google.com/marketplace)を開きます`TiDB Cloud`を検索し、検索結果から**TiDB Cloud**を選択します。TiDB Cloudの製品ページが表示されます。
+1. [Google Cloud Marketplace のページ](https://console.cloud.google.com/marketplace)を開き、 `TiDB Cloud`を検索し、検索結果から**TiDB Cloud**を選択します。TiDB Cloudの製品ページが表示されます。
 
 2. TiDB Cloud製品ページで、 **SUBSCRIBE**をクリックします。購読ページが表示されます。
 

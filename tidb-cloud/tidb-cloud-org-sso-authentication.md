@@ -5,7 +5,7 @@ summary: カスタマイズされた組織認証を使用してTiDB Cloudコン�
 
 # Cloud Organization SSO認証 {#organization-sso-authentication}
 
-シングル サインオン (SSO) は、 TiDB Cloud [組織](/tidb-cloud/tidb-cloud-glossary.md#organization)のメンバーが電子メール アドレスとパスワードの代わりに ID プロバイダー (IdP) の ID を使用してTiDB Cloudにログインできるようにする認証スキームです。
+シングルサインオン (SSO) は、 TiDB Cloud [組織](/tidb-cloud/tidb-cloud-glossary.md#organization)のメンバーが電子メールアドレスとパスワードの代わりに ID プロバイダー (IdP) の ID を使用してTiDB Cloudにログインできるようにする認証スキームです。
 
 TiDB Cloud は、次の2種類の SSO 認証をサポートしています。
 
@@ -30,9 +30,9 @@ Cloud Organization SSO に移行する前に、組織についてこのセクシ
 > - Cloud Organization SSO を有効にすると、無効にできません。
 > - Cloud Organization SSOを有効にするには、 TiDB Cloud組織の`Organization Owner`ロールに属している必要があります。ロールの詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)をご覧ください。
 
-### 組織のTiDB Cloudログインページのカスタム URL を決定します {#decide-a-custom-url-for-the-tidb-cloud-login-page-of-your-organization}
+### 組織のTiDB Cloudログインページのカスタム URL を決定する {#decide-a-custom-url-for-the-tidb-cloud-login-page-of-your-organization}
 
-Cloud Organization SSO が有効になっている場合、メンバーはTiDB Cloudにログインするために、パブリック ログイン URL ( `https://tidbcloud.com` ) ではなくカスタム URL を使用する必要があります。
+Cloud Organization SSO が有効になっている場合、メンバーはTiDB Cloudにログインするために、パブリックログイン URL ( `https://tidbcloud.com` ) ではなくカスタム URL を使用する必要があります。
 
 カスタム URL は有効化後に変更できないため、事前に使用する URL を決定する必要があります。
 
@@ -64,7 +64,7 @@ OIDC および SAML 認証方式では、 [認証方法の詳細を設定する]
 
 その他の認証方法では、自動プロビジョニングを有効にする場合は、認証に許可される電子メールドメインを制限することをお勧めします。
 
-### Cloud Organization SSO 移行計画についてメンバーに通知します {#notify-your-members-about-the-cloud-organization-sso-migration-plan}
+### Cloud Organization SSO 移行計画についてメンバーに通知する {#notify-your-members-about-the-cloud-organization-sso-migration-plan}
 
 Cloud Organization SSO を有効にする前に、次の点についてメンバーに必ず通知してください。
 
@@ -99,7 +99,7 @@ Cloud Organization SSO を有効にするには、次の手順を実行します
 
 TiDB Cloudで認証方法を有効にすると、その方法を使用するメンバーはカスタム URL を使用してTiDB Cloudにログインできるようになります。
 
-### ユーザー名とパスワード、Google、GitHub、またはMicrosoftの認証方法を設定します {#configure-username-and-password-google-github-or-microsoft-authentication-methods}
+### ユーザー名とパスワード、Google、GitHub、またはMicrosoftの認証方法を設定する {#configure-username-and-password-google-github-or-microsoft-authentication-methods}
 
 Cloud Organization SSO を有効にした後、次のようにユーザー名とパスワード、Google、GitHub、または Microsoft の認証方法を構成できます。
 
@@ -160,7 +160,7 @@ TiDB Cloudでは、OIDC認証方式はデフォルトで無効になっていま
 
     - **Name**
 
-        カスタム ログインページに表示される OIDC 認証方法の名前を指定します。
+        カスタムログインページに表示される OIDC 認証方法の名前を指定します。
 
     - **Issuer URL** 、**Client ID** 、**Client Secret**
 
@@ -209,7 +209,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
     - **Name**
 
-        カスタム ログインページに表示される SAML 認証方法の名前を指定します。
+        カスタムログインページに表示される SAML 認証方法の名前を指定します。
 
     - **Sign on URL**
 
@@ -243,7 +243,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
 #### SCIMプロビジョニングを構成する {#configure-scim-provisioning}
 
-[クロスドメイン ID 管理システム (SCIM)](https://www.rfc-editor.org/rfc/rfc7644)は、アイデンティティドメインとITシステム間のユーザーID情報の交換を自動化するオープンスタンダードです。SCIMプロビジョニングを設定することで、アイデンティティプロバイダーのユーザーグループをTiDB Cloudに自動的に同期し、 TiDB Cloudでこれらのグループのロールを一元管理できるようになります。
+[クロスドメイン ID 管理システム (SCIM)](https://www.rfc-editor.org/rfc/rfc7644)は、アイデンティティドメインとITシステム間のユーザーID情報の交換を自動化するオープンスタンダードです。SCIMプロビジョニングを設定することで、ID プロバイダーのユーザーグループをTiDB Cloudに自動的に同期し、 TiDB Cloudでこれらのグループのロールを一元管理できるようになります。
 
 > **Note:**
 >
@@ -265,18 +265,18 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
         たとえば、ID プロバイダーが Okta の場合は、 [アプリ統合をグループに割り当てる](https://help.okta.com/en-us/content/topics/provisioning/lcm/lcm-assign-app-groups.htm)を参照してください。
 
-    3. アイデンティティ プロバイダーからTiDB Cloudにユーザー グループをプッシュします。
+    3. ID プロバイダーからTiDB Cloudにユーザーグループをプッシュします。
 
         たとえば、ID プロバイダーが Okta の場合は、 [グループプッシュを管理する](https://help.okta.com/en-us/content/topics/users-groups-profiles/usgp-group-push-main.htm)を参照してください。
 
-3. TiDB Cloudで、アイデンティティ プロバイダーからプッシュされたグループを表示します。
+3. TiDB Cloudで、ID プロバイダーからプッシュされたグループを表示します。
 
     1. [TiDB Cloudコンソール](https://tidbcloud.com)で、左上隅のコンボボックスを使用して対象の組織に切り替えます。
     2. 左側のナビゲーションペインで、 **Organization Settings** > **Authentication**をクリックします。
     3. **Groups**タブをクリックします。IDプロバイダーから同期されたグループが表示されます。
     4. グループ内のユーザーを表示するには、 **View**をクリックします。
 
-4. TiDB Cloudで、アイデンティティ プロバイダーからプッシュされたグループにロールを付与します。
+4. TiDB Cloudで、ID プロバイダーからプッシュされたグループにロールを付与します。
 
     > **Note:**
     >
@@ -285,7 +285,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
     1. グループに組織ロールを付与するには、 **By organization**をクリックし、 **Organization Role**列でロールを設定します。組織ロールの権限については、 [組織の役割](/tidb-cloud/manage-user-access.md#organization-roles)を参照してください。
     2. グループにプロジェクトロールを付与するには、 **By project**をクリックし、 **Project Role**列でロールを設定します。プロジェクトロールの権限については、 [プロジェクトの役割](/tidb-cloud/manage-user-access.md#project-roles)を参照してください。
 
-5. アイデンティティ プロバイダーでプッシュされたグループのメンバーを変更すると、これらの変更はTiDB Cloud内の対応するグループに動的に同期されます。
+5. ID プロバイダーでプッシュされたグループのメンバーを変更すると、これらの変更はTiDB Cloud内の対応するグループに動的に同期されます。
 
-    - アイデンティティ プロバイダー内のグループに新しいメンバーが追加されると、これらのメンバーは対応するグループのロールを取得します。
-    - アイデンティティ プロバイダー内のグループから一部のメンバーが削除されると、これらのメンバーはTiDB Cloud内の対応するグループからも削除されます。
+    - ID プロバイダー内のグループに新しいメンバーが追加されると、これらのメンバーは対応するグループのロールを取得します。
+    - ID プロバイダー内のグループから一部のメンバーが削除されると、これらのメンバーはTiDB Cloud内の対応するグループからも削除されます。

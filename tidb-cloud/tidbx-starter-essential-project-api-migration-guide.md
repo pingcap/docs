@@ -5,14 +5,14 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 # {{{ .starter }}} と Essential のための Project API 移行ガイド
 
-2026 年 4月 15日より、TiDB Cloud はリソースタイプごとに個別のプロジェクトタイプを導入します。{{{ .starter }}} と Essential インスタンスについては、TiDB X プロジェクト内、または組織レベルで管理できるようになります。詳細は、[TiDB X Instances の Project Migration FAQ](/tidb-cloud/tidbx-instance-move-faq.md) を参照してください。
+2026 年 4月 15日より、TiDB Cloud はリソースタイプごとに個別のプロジェクトタイプを導入します。{{{ .starter }}} と Essential インスタンスについては、TiDB X プロジェクト内、または組織レベルで管理できるようになります。詳細は、[TiDB Xインスタンスのプロジェクト移行に関するFAQ](/tidb-cloud/tidbx-instance-move-faq.md) を参照してください。
 
 このガイドは、既存の `v1beta` 呼び出しの大部分を引き続き動作させつつ、{{{ .starter }}} と Essential インスタンスに対するプロジェクト検索およびクラスタ作成にのみ最小限の変更を加えたい API 呼び出し元を対象としています。
 
 これらのプロジェクトモデルの変更により、以下の API 変更に注意してください。
 
 - {{{ .starter }}} と Essential インスタンスの `project_id` 値は、TiDB Cloud コンソールでこれらのインスタンスをプロジェクト間で移動できるため、**変更される可能性があります**。`project_id` の値をハードコードしないでください。
-- プロジェクトのレスポンスには `type` フィールドが含まれるようになりました。指定可能な値については、[Project type values](#project-type-values) を参照してください。
+- プロジェクトのレスポンスには `type` フィールドが含まれるようになりました。指定可能な値については、[プロジェクトタイプの値](#project-type-values) を参照してください。
 
 ## Project API の変更 {#project-api-changes}
 
@@ -20,9 +20,9 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 `GET /api/v1beta/projects` は、各プロジェクトに対して `type` フィールドを返すようになりました。
 
-#### Project type values {#project-type-values}
+#### プロジェクトタイプの値 {#project-type-values}
 
-| Value | Description |
+| 値 | 説明 |
 |---|---|
 | `dedicated` | TiDB Cloud Dedicated クラスタのみを含むプロジェクトです。 |
 | `tidbx` | {{{ .starter }}} や Essential など、TiDB X インスタンスのみを含むプロジェクトです。 |
@@ -34,7 +34,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 **アプリケーションがプロジェクトレスポンスから `id` と `name` フィールドのみを読み取る場合**、変更は不要です。
 
-**アプリケーションでプロジェクトタイプを区別する必要がある場合**（たとえば、dedicated プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルタリングする場合）は、`type` フィールドの読み取りを開始してください。
+**アプリケーションでプロジェクトタイプを区別する必要がある場合**（たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルタリングする場合）は、`type` フィールドの読み取りを開始してください。
 
 ### POST /api/v1beta/projects {#post-api-v1beta-projects}
 
@@ -43,7 +43,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 - プロジェクト作成時に有効な `type` 値は `dedicated` と `tidbx` のみです。
 - `type` を省略すると、API はデフォルトで `dedicated` プロジェクトを作成します。
 
-## 既存インスタンスの project ID を取得する方法 {#how-to-get-a-project-id-for-an-existing-instance}
+## 既存インスタンスのプロジェクト ID を取得する方法 {#how-to-get-a-project-id-for-an-existing-instance}
 
 すでに {{{ .starter }}} または Essential インスタンスを所有しており、現在の `project_id` のみが必要な場合は、その値をハードコードする代わりに、以下の方法を使用してください。
 
@@ -79,7 +79,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 ## 必要な変更の概要 {#summary-of-required-changes}
 
-| Scenario | Action required |
+| シナリオ | 必要な対応 |
 |---|---|
 | プロジェクトレスポンスから `id` と `name` のみを読み取る | 変更は不要です。 |
 | {{{ .starter }}} または Essential インスタンスの `project_id` をハードコードしている | ハードコードした値を、`labels["tidb.cloud/project"]` を使用した動的な取得に置き換えてください。 |

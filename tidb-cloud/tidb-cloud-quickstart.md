@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Quick Start
-summary: すぐにサインアップしてTiDB Cloudを試し、TiDB クラスターを作成してください。
+summary: すぐにサインアップしてTiDB Cloudを試し、{{{ .starter }}} インスタンスを作成してください。
 category: quick start
 ---
 
@@ -12,9 +12,9 @@ category: quick start
 
 さらに、 [TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_quick_start)で TiDB 機能を試すこともできます。
 
-## ステップ1: TiDBクラスターを作成する {#step-1-create-a-tidb-cluster}
+## ステップ1: {{{ .starter }}} インスタンスを作成する {#step-1-create-a-starter-instance}
 
-[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)は、TiDB Cloudを使い始めるのに最適な方法です。TiDB Cloud Starter クラスターを作成するには、以下の手順に従ってください。
+[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)は、TiDB Cloudを使い始めるのに最適な方法です。{{{ .starter }}} インスタンスを作成するには、以下の手順に従ってください。
 
 1. TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてサインアップしてください。
 
@@ -30,7 +30,7 @@ category: quick start
     - 独自に新しいTiDB Cloud Starter クラスターを作成するには、次の手順に従います。
 
         1. **Create Resource**をクリックします。
-        2. **Create Resource**ページでは、デフォルトで**Starter**が選択されています。クラスターのクラウドプロバイダーとターゲットリージョンを選択し、必要に応じてデフォルトのクラスター名を更新して、 **Create**をクリックします。TiDB Cloud Starterクラスターは約30秒で作成されます。
+        2. **Create Resource**ページでは、デフォルトで**Starter**が選択されています。{{{ .starter }}} インスタンスの名前を入力し、クラウドプロバイダーとターゲットリージョンを選択して、 **Create**をクリックします。{{{ .starter }}} インスタンスは約30秒で作成されます。
 
         <CustomContent language="en,zh">
 
@@ -111,7 +111,7 @@ AWS でホストされているTiDB Cloud Starter クラスターでは、 TiDB 
 TiDB Cloud は、 TiDB Cloudをすぐに使い始めるのに役立つ、丁寧に作成されたサンプルデータセットを含むインタラクティブなチュートリアルを提供しています。AWS でホストされているTiDB Cloud Starter クラスターの場合は、このチュートリアルを試して、 TiDB Cloud を高性能データ分析に使用する方法を学習できます。
 
 1. コンソールの右下隅にある**?**アイコンをクリックし、 **Guided tour of SQL Editor**を選択します。
-2. ツアーで使用するTiDB Cloud Starterクラスターを選択し、 **Import Dataset**をクリックします。インポート処理には約1分かかる場合があります。
+2. ツアーで使用する{{{ .starter }}} インスタンスを選択し、 **Import Dataset**をクリックします。インポート処理には約1分かかる場合があります。
 3. サンプルデータをインポートしたら、画面の指示に従ってツアーを完了します。
 
 ## ステップ4: {{{ .starter }}} インスタンスに接続する {#step-4-connect-to-your-starter-instance}

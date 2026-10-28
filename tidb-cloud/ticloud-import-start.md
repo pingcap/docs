@@ -12,7 +12,7 @@ aliases: ['/ja/tidbcloud/ticloud-import-start-local','/ja/tidbcloud/ticloud-impo
 ticloud serverless import start [flags]
 ```
 
-または、次のエイリアス コマンドを使用します。
+または、次のエイリアスコマンドを使用します。
 
 ```shell
 ticloud serverless import create [flags]
@@ -70,30 +70,30 @@ ticloud serverless import start --source-type AZURE_BLOB --azblob.uri <azure-blo
 
 非対話型モードでは、必要なフラグを手動で入力する必要があります。対話型モードでは、CLIプロンプトに従って入力するだけです。
 
-| フラグ                         | 説明                                                                                                            | 必須  | 注記                       |   |     |                          |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------- | --- | ------------------------ | - | --- | ------------------------ |
-| --azblob.sas-token string      | Azure Blob の SAS トークンを指定します。                                                                                  | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --azblob.uri string            | Azure Blob URI を`azure://<account>.blob.core.windows.net/<container>/<path>`形式で指定します。                         | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --gcs.service-account-key string        | GCS の base64 でエンコードされたサービスアカウント キーを指定します。                                                                    | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --gcs.uri string               | GCS URIを`gcs://<bucket>/<path>`形式で指定します。ソースタイプがGCSの場合は必須です。                                                   | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
-| --s3.access-key-id string            | Amazon S3のアクセスキーIDを指定します。`s3.role-arn`と[ `s3.access-key-id` , `s3.secret-access-key` ]のいずれか1つだけを設定する必要があります。       | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --s3.role-arn string           | Amazon S3のロールARNを指定します。`s3.role-arn`と[ `s3.access-key-id` , `s3.secret-access-key` ]のいずれか1つだけを設定する必要があります。        | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --s3.secret-access-key string  | Amazon S3のシークレットアクセスキーを指定します。`s3.role-arn`と[ `s3.access-key-id` , `s3.secret-access-key` ]のいずれか1つだけを設定する必要があります。   | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --s3.uri string                | S3 URIを`s3://<bucket>/<path>`形式で指定します。ソースタイプがS3の場合は必須です。                                                      | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
-| --source-type string       | インポートソースの種類を [ `"LOCAL"` `"S3"` `"GCS"` `"AZURE_BLOB"` ] のいずれかで指定します。デフォルト値は`"LOCAL"`です。                      | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| -c, --cluster-id string        | クラスター ID を指定します。                                                                                              | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
-| --local.concurrency int     | ファイルのアップロードの同時実行数を指定します。デフォルト値は`5`です。                                                                         | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --local.file-path string       | インポートするローカルファイルのパスを指定します。                                                                                    | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --local.target-database string | データのインポート先のターゲットデータベースを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --local.target-table string    | データのインポート先のターゲットテーブルを指定します。                                                                                  | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --file-type string         | インポート ファイルの種類を ["CSV" "SQL" "AURORA_SNAPSHOT" "PARQUET"] のいずれかで指定します。 | はい  | 非対話型モードでのみ動作します。         |   |     |                          |
-| --csv.backslash-escape         | CSVファイル内のフィールド内のバックスラッシュをエスケープ文字として解析するかどうかを指定します。デフォルト値は`true`です。                                            | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --csv.delimiter string          | CSVファイルを引用する際に使用する区切り文字を指定します。デフォルト値は`\`です。                                                                   | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --csv.separator string         | CSVファイルのフィールドセパレーターを指定します。デフォルト値は`,`です。                                                                       | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --csv.skip-header              | CSV ファイルにヘッダー行が含まれているかどうかを指定します。                                                                              | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --csv.trim-last-separator   | 区切り文字を行末文字として扱い、CSV ファイル内の末尾の区切り文字をすべてトリミングするかどうかを指定します。                                                      | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --csv.not-null              | CSV ファイルに NULL 値を含めることができるかどうかを指定します。                                                                         | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
-| --csv.null-value string              | CSV ファイル内の NULL 値の表現を指定します。(デフォルトは "\N")                                                            | いいえ | 非対話型モードでのみ動作します。         |   |     |                          |
+| フラグ                         | 説明                                                                                                            | 必須  | 注記                       |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------- | --- | ------------------------ |
+| --azblob.sas-token string      | Azure Blob の SAS トークンを指定します。                                                                                  | いいえ | 非対話型モードでのみ動作します。         |
+| --azblob.uri string            | Azure Blob URI を`azure://<account>.blob.core.windows.net/<container>/<path>`形式で指定します。                         | いいえ | 非対話型モードでのみ動作します。         |
+| --gcs.service-account-key string        | GCS の base64 でエンコードされたサービスアカウントキーを指定します。                                                                    | いいえ | 非対話型モードでのみ動作します。         |
+| --gcs.uri string               | GCS URIを`gcs://<bucket>/<path>`形式で指定します。ソースタイプがGCSの場合は必須です。                                                   | はい  | 非対話型モードでのみ動作します。         |
+| --s3.access-key-id string            | Amazon S3のアクセスキーIDを指定します。`s3.role-arn`と[ `s3.access-key-id` , `s3.secret-access-key` ]のいずれか1つだけを設定する必要があります。       | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.role-arn string           | Amazon S3のロールARNを指定します。`s3.role-arn`と[ `s3.access-key-id` , `s3.secret-access-key` ]のいずれか1つだけを設定する必要があります。        | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.secret-access-key string  | Amazon S3のシークレットアクセスキーを指定します。`s3.role-arn`と[ `s3.access-key-id` , `s3.secret-access-key` ]のいずれか1つだけを設定する必要があります。   | いいえ | 非対話型モードでのみ動作します。         |
+| --s3.uri string                | S3 URIを`s3://<bucket>/<path>`形式で指定します。ソースタイプがS3の場合は必須です。                                                      | はい  | 非対話型モードでのみ動作します。         |
+| --source-type string       | インポートソースの種類を [ `"LOCAL"` `"S3"` `"GCS"` `"AZURE_BLOB"` ] のいずれかで指定します。デフォルト値は`"LOCAL"`です。                      | いいえ | 非対話型モードでのみ動作します。         |
+| -c, --cluster-id string        | クラスター ID を指定します。                                                                                              | はい  | 非対話型モードでのみ動作します。         |
+| --local.concurrency int     | ファイルのアップロードの同時実行数を指定します。デフォルト値は`5`です。                                                                         | いいえ | 非対話型モードでのみ動作します。         |
+| --local.file-path string       | インポートするローカルファイルのパスを指定します。                                                                                    | いいえ | 非対話型モードでのみ動作します。         |
+| --local.target-database string | データのインポート先のターゲットデータベースを指定します。                                                                                | いいえ | 非対話型モードでのみ動作します。         |
+| --local.target-table string    | データのインポート先のターゲットテーブルを指定します。                                                                                  | いいえ | 非対話型モードでのみ動作します。         |
+| --file-type string         | インポートファイルの種類を ["CSV" "SQL" "AURORA_SNAPSHOT" "PARQUET"] のいずれかで指定します。 | はい  | 非対話型モードでのみ動作します。         |
+| --csv.backslash-escape         | CSVファイル内のフィールド内のバックスラッシュをエスケープ文字として解析するかどうかを指定します。デフォルト値は`true`です。                                            | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.delimiter string          | CSVファイルを引用する際に使用する区切り文字を指定します。デフォルト値は`\`です。                                                                   | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.separator string         | CSVファイルのフィールドセパレーターを指定します。デフォルト値は`,`です。                                                                       | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.skip-header              | CSV ファイルにヘッダー行が含まれているかどうかを指定します。                                                                              | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.trim-last-separator   | 区切り文字を行末文字として扱い、CSV ファイル内の末尾の区切り文字をすべてトリミングするかどうかを指定します。                                                      | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.not-null              | CSV ファイルに NULL 値を含めることができるかどうかを指定します。                                                                         | いいえ | 非対話型モードでのみ動作します。         |
+| --csv.null-value string              | CSV ファイル内の NULL 値の表現を指定します。(デフォルトは "\N")                                                            | いいえ | 非対話型モードでのみ動作します。         |
 | -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                           | いいえ | 非対話型モードと対話型モードの両方で動作します。 |   | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
@@ -102,8 +102,8 @@ ticloud serverless import start --source-type AZURE_BLOB --azblob.uri <azure-blo
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
 | --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
 | -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
-| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグモードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

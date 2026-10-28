@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/ticloud-connect']
 
 # ticloud serverless branch shell {#ticloud-serverless-branch-shell}
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチに接続します。
+TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのブランチに接続します。
 
 ```shell
 ticloud serverless branch shell [flags]
@@ -44,20 +44,20 @@ ticloud serverless branch shell -c <cluster-id> -b <branch-id> -u <user-name> --
 
 | フラグ                  | 説明                  | 必須  | 注記                       |
 | -------------------- | ------------------- | --- | ------------------------ |
-| -b, --branch-id 文字列  | ブランチの ID を指定します。    | はい  | 非対話型モードでのみ動作します。         |
-| -c, --cluster-id 文字列 | クラスターの ID を指定します。   | はい  | 非対話型モードでのみ動作します。         |
+| -b, --branch-id string  | ブランチの ID を指定します。    | はい  | 非対話型モードでのみ動作します。         |
+| -c, --cluster-id string | クラスターの ID を指定します。   | はい  | 非対話型モードでのみ動作します。         |
 | -h, --help           | このコマンドのヘルプ情報を表示します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 | --password              | ユーザーのパスワードを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
-| -u, --user 文字列       | ログインするユーザーを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
+| -u, --user string       | ログインするユーザーを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                                                                             | 必須  | 注記                                                      |
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
 | --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
-| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグモードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

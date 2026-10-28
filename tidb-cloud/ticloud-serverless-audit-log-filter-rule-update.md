@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule update` のリファレン�
 
 # ticloud serverless audit-log filter-rule update {#ticloud-serverless-audit-log-filter-rule-update}
 
-TiDB Cloud Essential クラスターの監査ログフィルタールールを更新します。
+TiDB Cloud Essential インスタンスの監査ログフィルタールールを更新します。
 
 ```shell
 ticloud serverless audit-log filter-rule update [flags]
@@ -52,10 +52,10 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug        | デバッグ モードを有効にします。          | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -D, --debug        | デバッグモードを有効にします。          | いいえ | 対話モードと非対話モードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
 | -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

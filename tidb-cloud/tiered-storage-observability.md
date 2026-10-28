@@ -161,12 +161,12 @@ SET GLOBAL tidb_storage_class_transition_history_size = 500;
 
 #### tidb_storage_class_transition_history_size {#tidb_storage_class_transition_history_size}
 
-- Scope: GLOBAL
-- Persists to cluster: Yes
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
-- Type: Integer
-- Default value: `1000`
-- Range: `[100, 100000]`
+- 対象範囲：グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
+- 型: 整数
+- デフォルト値: `1000`
+- 範囲: `[100, 100000]`
 - この変数は、`mysql.tidb_storage_class_transition_history` テーブルに保持するストレージクラス移行レコードの最大数を設定するために使用されます。値を大きくすると、より長期間履歴を保持できますが、`mysql` データベースで使用する領域も増えます。
 
 ## SQL レベルで IA 読み取りを監視する {#monitor-ia-reads-at-the-sql-level}

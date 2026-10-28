@@ -45,7 +45,7 @@ TiProxyノードのサイズと数は、 TiDB Cloud DedicatedクラスタのQPS�
 既存のクラスタで TiProxy を有効にするには、次の手順を実行します。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2. 右上隅の**…**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
+2. 右上隅の**...**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
 3. **Modify Cluster**ページで、TiProxyのトグルをクリックし、TiProxyのサイズと数を選択します。
 
 ![Enable TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)
@@ -54,7 +54,7 @@ TiProxyノードのサイズと数は、 TiDB Cloud DedicatedクラスタのQPS�
 
 - TiDBノードグループには、少なくとも2つのTiDBノードが必要です。
 - TiDBノードのサイズは、少なくとも4つのvCPUである必要があります。
-- 組織内の TiProxy ノードのデフォルトの最大数は`10`です。詳細については、[制限と割り当て](/tidb-cloud/limitations-and-quotas.md)を参照してください。
+- 組織内の TiProxy ノードのデフォルトの最大数は`10`です。詳細については、[TiDB Cloud Dedicated制限とクォータ](/tidb-cloud/limitations-and-quotas.md)を参照してください。
 - TiDBクラスタのバージョンはv6.5.0以降である必要があります。
 
 ## TiProxyを無効にする {#disable-tiproxy}
@@ -66,7 +66,7 @@ TiProxyノードのサイズと数は、 TiDB Cloud DedicatedクラスタのQPS�
 TiProxyを無効にするには、以下の手順を実行してください。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2. 右上隅の**…**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
+2. 右上隅の**...**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
 3. **Modify Cluster**ページで、TiProxyのトグルをクリックしてTiProxyを無効にします。
 
 ![Disable TiProxy](/media/tidb-cloud/tiproxy-disable-tiproxy.png)
@@ -118,7 +118,7 @@ TiProxyの請求書を表示するには、以下の手順を実行してくだ�
 TiProxyをスケールインまたはスケールアウトするには、以下の手順を実行します。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして、その概要ページに移動します。
-2. 右上隅の**…**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
+2. 右上隅の**...**をクリックし、ドロップダウンメニューから**Modify**をクリックします。 **Modify Cluster**ページが表示されます。
 3. **Modify Cluster**ページで、TiProxyノードの数を変更します。
 
 ![Modify TiProxy](/media/tidb-cloud/tiproxy-enable-tiproxy.png)

@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log download` のリファレンス。"
 
 # ticloud serverless audit-log download {#ticloud-serverless-audit-log-download}
 
-TiDB Cloud Essential クラスターからデータベース監査ログファイルをダウンロードします。
+TiDB Cloud Essential インスタンスからデータベース監査ログファイルをダウンロードします。
 
 ```shell
 ticloud serverless audit-log download [flags]
@@ -29,7 +29,7 @@ ticloud serverless audit-log download -c <cluster-id> --start-date <start-date> 
 
 | フラグ                  | 説明                                                   | 必須  | 注記                                   |
 | -------------------- | ---------------------------------------------------- | --- | ------------------------------------ |
-| -c, --cluster-id 文字列 | クラスターの ID。                                           | はい  | 非対話型モードでのみ動作します。                     |
+| -c, --cluster-id string | クラスターの ID。                                           | はい  | 非対話型モードでのみ動作します。                     |
 | --start-date string      | ダウンロードする監査ログの開始日（ `YYYY-MM-DD`の形式、例： `2025-01-01` ）。 | はい  | 非対話型モードでのみ動作します。                     |
 | --end-date string        | ダウンロードする監査ログの終了日（ `YYYY-MM-DD`の形式、例： `2025-01-01` ）。 | はい  | 非対話型モードでのみ動作します。                     |
 | --output-path string     | 監査ログをダウンロードするパス。指定しない場合は、ログは現在のディレクトリにダウンロードされます。    | いいえ | 非対話型モードでのみ動作します。                     |
@@ -41,10 +41,10 @@ ticloud serverless audit-log download -c <cluster-id> --start-date <start-date> 
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug        | デバッグ モードを有効にします。          | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -D, --debug        | デバッグモードを有効にします。          | いいえ | 対話モードと非対話モードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile 文字列 | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

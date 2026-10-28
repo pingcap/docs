@@ -5,7 +5,7 @@ summary: "`ticloud serverless export download` のリファレンス。"
 
 # ticloud serverless export download {#ticloud-serverless-export-download}
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスターからエクスポートされたデータをローカルストレージにダウンロードします。
+TiDB Cloud Starter またはTiDB Cloud Essential インスタンスからエクスポートされたデータをローカルストレージにダウンロードします。
 
 ```shell
 ticloud serverless export download [flags]
@@ -31,9 +31,9 @@ ticloud serverless export download -c <cluster-id> -e <export-id>
 
 | フラグ                  | 説明                                                         | 必須  | 注記                       |
 | -------------------- | ---------------------------------------------------------- | --- | ------------------------ |
-| -c, --cluster-id 文字列 | クラスターの ID を指定します。                                          | はい  | 非対話型モードでのみ動作します。         |
-| -e, --export-id 文字列  | エクスポート タスクの ID を指定します。                                     | はい  | 非対話型モードでのみ動作します。         |
-| --output-path            | ダウンロードしたデータの保存先パスを指定します。指定しない場合は、データは現在のディレクトリにダウンロードされます。 | いいえ | 非対話型モードでのみ動作します。         |
+| -c, --cluster-id string | クラスターの ID を指定します。                                          | はい  | 非対話型モードでのみ動作します。         |
+| -e, --export-id string  | エクスポートタスクの ID を指定します。                                     | はい  | 非対話型モードでのみ動作します。         |
+| --output-path string     | ダウンロードしたデータの保存先パスを指定します。指定しない場合は、データは現在のディレクトリにダウンロードされます。 | いいえ | 非対話型モードでのみ動作します。         |
 | --concurrency int          | ダウンロードの同時実行数を指定します。デフォルト値は`3`です。                           | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 |  --force             | 確認なしでエクスポートされたデータをダウンロードします。                               | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                                        | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
@@ -43,9 +43,9 @@ ticloud serverless export download -c <cluster-id> -e <export-id>
 | フラグ               | 説明                                                                             | 必須  | 注記                                                      |
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
 | --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
-| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグモードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

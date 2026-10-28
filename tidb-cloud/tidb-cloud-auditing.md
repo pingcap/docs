@@ -5,7 +5,7 @@ summary: TiDB Cloudでクラスターを監査する方法について説明し�
 
 # TiDB Cloud Dedicatedデータベース監査ログ (Preview) {#tidb-cloud-dedicated-database-audit-logging}
 
-TiDB Cloud は、実行された SQL文など、データベースへのユーザーアクセス アクティビティを記録する監査ログ機能を提供します。
+TiDB Cloud は、実行された SQL文など、データベースへのユーザーアクセスアクティビティを記録する監査ログ機能を提供します。
 
 > **Note:**
 >
@@ -14,9 +14,9 @@ TiDB Cloud は、実行された SQL文など、データベースへのユー�
 > - AWS および Google Cloud でホストされるクラスターの場合: TiDB バージョンが v7.5.6 以降、または v8.5.2 以降である必要があります。
 > - Azure でホストされるクラスターの場合: TiDB バージョンが v7.5.6 以降、または v8.5.2 以降であり、クラスターが 2026年 4月 15日以降に作成されている必要があります。
 >
-> その他のすべての TiDB バージョンまたはクラスター構成では、データベース監査ログはリクエストに応じて利用できます。対象外のクラスターへのアクセスをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**？**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **Description**欄に"Apply for database audit logging"と入力して、 **Submit**をクリックしてください。
+> その他のすべての TiDB バージョンまたはクラスター構成では、データベース監査ログはリクエストに応じて利用できます。対象外のクラスターへのアクセスをリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下にある**?**をクリックし、 **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に進みます。チケットを作成し、 **Description**欄に"Apply for database audit logging"と入力して、 **Submit**をクリックしてください。
 >
-> このドキュメントは、監査ログ機能のパブリックプレビュー版にのみ適用されます。以前のバージョンのデータベース監査ログを使用している場合は、 [TiDB Cloud Database Audit Logging (Legacy)](/tidb-cloud/tidb-cloud-auditing-legacy.md)を参照してください。
+> このドキュメントは、監査ログ機能のパブリックプレビュー版にのみ適用されます。以前のバージョンのデータベース監査ログを使用している場合は、 [TiDB Cloud Dedicatedデータベース監査ログ（レガシー）](/tidb-cloud/tidb-cloud-auditing-legacy.md)を参照してください。
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティのベストプラクティスです。
 
@@ -35,7 +35,7 @@ TiDB Cloud は、実行された SQL文など、データベースへのユー�
     > - データベース監査ログは、 TiDB Cloud Starter では使用できません。
     > - TiDB Cloud Essential については、 [TiDB Cloud Essential のデータベース監査ログ (PREVIEW)](/tidb-cloud/essential-database-audit-logging.md)を参照してください。
 
-- 組織内で`Organization Owner`または`Project Owner`ロールに所属しています。それ以外の場合、 TiDB Cloudコンソールでデータベース監査関連のオプションは表示されません。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)ご覧ください。
+- 組織内で`Organization Owner`または`Project Owner`ロールに所属しています。それ以外の場合、 TiDB Cloudコンソールでデータベース監査関連のオプションは表示されません。詳細については、 [ユーザーロール](/tidb-cloud/manage-user-access.md#user-roles)をご覧ください。
 
 ## 監査ログを有効にする {#enable-audit-logging}
 
@@ -67,9 +67,9 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 
         > **Tip:**
         >
-        > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+        > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+    2. ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
     3. **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
@@ -78,7 +78,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の AWS �
 2. [AWS Management Console](https://console.aws.amazon.com/)で、 **IAM** > **Access Management** > **Policies**に移動し、書き込み専用権限`s3:PutObject`を持つIAMポリシーがあるかどうかを確認します。
 
     - はいの場合は、後で使用するために一致したポリシーを記録します。
-    - そうでない場合は、 **IAM** > **Access Management** > **Policies** > **Create Policy**に移動し、次のポリシー テンプレートに従ってIAMポリシーを定義します。
+    - そうでない場合は、 **IAM** > **Access Management** > **Policies** > **Create Policy**に移動し、次のポリシーテンプレートに従ってIAMポリシーを定義します。
 
         ```json
         {
@@ -130,7 +130,7 @@ Google Cloud の監査ログを有効にするには、次の手順に従いま�
 
 TiDB Cloud が監査ログを書き込む宛先として、組織所有の Google Cloud アカウント内の Google Cloud Storage（GCS）バケットを指定します。
 
-詳細については、Google Cloud Storage ドキュメントの[ストレージバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)ご覧ください。
+詳細については、Google Cloud Storage ドキュメントの[ストレージバケットの作成](https://cloud.google.com/storage/docs/creating-buckets)をご覧ください。
 
 #### ステップ2. GCSアクセスを構成する {#step-2-configure-gcs-access}
 
@@ -140,9 +140,9 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 
         > **Tip:**
         >
-        > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+        > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+    2. ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
     3. **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
@@ -155,7 +155,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
 
     はいの場合は、後で使用するためにTiDBクラスターの一致したロールを記録してください。いいえの場合は、 **IAM & Admin** > **Roles** > **CREATE ROLE**に移動して、TiDBクラスターのロールを定義してください。
 
-3. **Cloud Storage** > **ブラウザ**に移動し、 TiDB Cloudがアクセスする GCS バケットを選択して、 **SHOW INFO PANEL**をクリックします。
+3. **Cloud Storage** > **Browser**に移動し、 TiDB Cloudがアクセスする GCS バケットを選択して、 **SHOW INFO PANEL**をクリックします。
 
     パネルが表示されます。
 
@@ -198,30 +198,30 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
 1. [Azureポータル](https://portal.azure.com/)で、データベース監査ログを保存するために使用するコンテナを作成します。
 
-    1. Azure ポータルの左側のナビゲーション ウィンドウで、 **Storage Accounts**をクリックし、データベース監査ログを保存するストレージアカウントをクリックします。
+    1. Azure ポータルの左側のナビゲーションウィンドウで、 **Storage Accounts**をクリックし、データベース監査ログを保存するストレージアカウントをクリックします。
 
         > **Tip:**
         >
-        > 左側のナビゲーションペインが非表示になっている場合は、左上隅のメニュー ボタンをクリックして表示を切り替えます。
+        > 左側のナビゲーションペインが非表示になっている場合は、左上隅のメニューボタンをクリックして表示を切り替えます。
 
-    2. 選択したストレージアカウントのナビゲーション ウィンドウで、 **Data storage > Containers**をクリックし、 **+ Container**をクリックして**New container**ウィンドウを開きます。
+    2. 選択したストレージアカウントのナビゲーションウィンドウで、 **Data storage > Containers**をクリックし、 **+ Container**をクリックして**New container**ウィンドウを開きます。
 
     3. **New container**ペインで、新しいコンテナの名前を入力し、匿名アクセスレベル（推奨レベルは**Private** （匿名アクセスなし））を設定して、 **Create**をクリックします。数秒以内に新しいコンテナが作成され、コンテナリストに表示されます。
 
-2. ターゲット コンテナの URL を取得します。
+2. ターゲットコンテナの URL を取得します。
 
-    1. コンテナー リストで、対象のコンテナーを選択し、コンテナーの**...**をクリックして、 **Container properties**を選択します。
-    2. 表示されたプロパティ ページで、後で使用するために**URL**値をコピーし、コンテナー リストに戻ります。
+    1. コンテナーリストで、対象のコンテナーを選択し、コンテナーの**...**をクリックして、 **Container properties**を選択します。
+    2. 表示されたプロパティページで、後で使用するために**URL**値をコピーし、コンテナーリストに戻ります。
 
-3. ターゲット コンテナーの SAS トークンを生成します。
+3. ターゲットコンテナーの SAS トークンを生成します。
 
-    1. コンテナー リストで、ターゲット コンテナーを選択し、コンテナーの**...**をクリックして、 **Generate SAS**を選択します。
+    1. コンテナーリストで、ターゲットコンテナーを選択し、コンテナーの**...**をクリックして、 **Generate SAS**を選択します。
 
     2. 表示された**Generate SAS**ペインで、**Signing method**として**Account key**を選択します。
 
     3. **Permissions**ドロップダウンリストで、 **Read** 、 **Write** 、 **Create**を選択して、監査ログファイルの書き込みを許可します。
 
-    4. **開始**フィールドと**有効期限**フィールドで、SAS トークンの有効期間を指定します。
+    4. **Start**フィールドと**Expiry**フィールドで、SAS トークンの有効期間を指定します。
 
         > **Note:**
         >
@@ -231,7 +231,7 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
     5. **Allowed protocols**については、安全なアクセスを確保するために**HTTPS only**を選択します。
 
-    6. **SAS トークンと URL の生成**をクリックし、表示される**Blob SAS token**を後で使用するためにコピーします。
+    6. **Generate SAS token and URL**をクリックし、表示される**Blob SAS token**を後で使用するためにコピーします。
 
 #### ステップ3. 監査ログを有効にする {#step-3-enable-audit-logging}
 
@@ -239,9 +239,9 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
     > **Tip:**
     >
-    > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-2. ターゲットクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
+2. ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
 3. **DB Audit Logging**ページで、右上隅の**Enable**をクリックします。
 
@@ -254,7 +254,7 @@ TiDB Cloudがデータベース監査ログを書き込む宛先として、組�
 
 > **Note:**
 >
-> 監査ログを有効にした後、 **BLOB URL**または**SAS Token**フィールドに新しい変更を加えた場合は、監査ログを無効にしてから再度有効にする必要があります。
+> 監査ログを有効にした後、 **Blob URL**または**SAS Token**フィールドに新しい変更を加えた場合は、監査ログを無効にしてから再度有効にする必要があります。
 
 ## データベース監査ログ設定を構成する {#configure-database-audit-logging-settings}
 
@@ -320,7 +320,7 @@ TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ�
 
 > **Note:**
 >
-> ログファイルのサイズが10MiBに達するたびに、ログファイルはクラウドストレージバケットにプッシュされます。そのため、監査ログを無効化した後は、10MiB未満のログファイルはクラウドストレージバケットに自動的にプッシュされなくなります。この状況でログファイルを取得するには、 [PingCAPサポート](/tidb-cloud/tidb-cloud-support.md)お問い合わせください。
+> ログファイルのサイズが10MiBに達するたびに、ログファイルはクラウドストレージバケットにプッシュされます。そのため、監査ログを無効化した後は、10MiB未満のログファイルはクラウドストレージバケットに自動的にプッシュされなくなります。この状況でログファイルを取得するには、 [PingCAPサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## 監査フィルタイベント {#audit-filter-events}
 
@@ -414,4 +414,4 @@ TiDB Cloud監査ログは、クラスター ID、ノード ID、およびログ�
 
 ## データベース監査ログ（レガシー）のリファレンス {#legacy-database-audit-logging-reference}
 
-現在レガシー監査ログプラグインを利用している場合は、[Database Audit Logging (Legacy)](/tidb-cloud/tidb-cloud-auditing-legacy.md) を参照してください。
+現在レガシー監査ログプラグインを利用している場合は、[TiDB Cloud Dedicatedデータベース監査ログ（レガシー）](/tidb-cloud/tidb-cloud-auditing-legacy.md) を参照してください。

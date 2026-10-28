@@ -5,13 +5,13 @@ summary: "`ticloud serverless export list` のリファレンス。"
 
 # ticloud serverless export list {#ticloud-serverless-export-list}
 
-TiDB Cloud Starter およびTiDB Cloud Essential クラスターのデータエクスポート タスクを一覧表示します。
+TiDB Cloud Starter およびTiDB Cloud Essential インスタンスのデータエクスポートタスクを一覧表示します。
 
 ```shell
 ticloud serverless export list [flags]
 ```
 
-または、次のエイリアス コマンドを使用します。
+または、次のエイリアスコマンドを使用します。
 
 ```shell
 ticloud serverless export ls [flags]
@@ -19,19 +19,19 @@ ticloud serverless export ls [flags]
 
 ## 例 {#examples}
 
-対話モードですべてのエクスポート タスクを一覧表示します。
+対話モードですべてのエクスポートタスクを一覧表示します。
 
 ```shell
 ticloud serverless export list
 ```
 
-非対話型モードで指定されたクラスターのエクスポート タスクを一覧表示します。
+非対話型モードで指定されたTiDB Cloud Starter またはEssential インスタンスのエクスポートタスクを一覧表示します。
 
 ```shell
 ticloud serverless export list -c <cluster-id>
 ```
 
-非対話型モードで、指定されたクラスターのエクスポート タスクを JSON 形式で一覧表示します。
+非対話型モードで、指定されたTiDB Cloud Starter またはEssential インスタンスのエクスポートタスクを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless export list -c <cluster-id> -o json
@@ -43,8 +43,8 @@ ticloud serverless export list -c <cluster-id> -o json
 
 | フラグ                  | 説明                                                                                | 必須  | 注記                       |
 | -------------------- | --------------------------------------------------------------------------------- | --- | ------------------------ |
-| -c, --cluster-id 文字列 | クラスターの ID を指定します。                                                                 | はい  | 非対話型モードでのみ動作します。         |
-| -o, --output          | 出力形式を指定します（デフォルトは`human` ）。有効な値は`human`または`json`です。完全な結果を得るには、 `json`形式を使用してください。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
+| -c, --cluster-id string | クラスターの ID を指定します。                                                                 | はい  | 非対話型モードでのみ動作します。         |
+| -o, --output string   | 出力形式を指定します（デフォルトは`human` ）。有効な値は`human`または`json`です。完全な結果を得るには、 `json`形式を使用してください。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
@@ -52,9 +52,9 @@ ticloud serverless export list -c <cluster-id> -o json
 | フラグ               | 説明                                                                             | 必須  | 注記                                                      |
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
 | --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
-| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグモードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
