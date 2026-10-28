@@ -87,7 +87,7 @@ export default {
 };
 ```
 
-## ステップ4. 環境でDATABASE_URLを設定する {#step-4-set-the-database-url-in-your-environment}
+## ステップ4. 環境にDATABASE_URLを設定する {#step-4-set-the-database-url-in-your-environment}
 
 `DATABASE_URL`は`mysql://username:password@host/database`の形式に従います。環境変数は wrangler cli を使用して設定できます。
 
