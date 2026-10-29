@@ -59,9 +59,9 @@ ticloud serverless audit-log config update -c <cluster-id> --enabled=false
 | --oss.uri string               | `oss://<bucket>/<path>`形式の Alibaba Cloud OSS URI。                                                            | いいえ | 非対話型モードでのみ動作します。                     |
 | --rotation-interval-minutes int32             | ローテーション間隔（分）。有効な範囲： `[10, 1440]` 。                                                                           | いいえ | 非対話型モードでのみ動作します。                     |
 | --rotation-size-mib int32           | ローテーションサイズ（MiB）。有効な範囲： `[1, 1024]` 。                                                                              | いいえ | 非対話型モードでのみ動作します。                     |
-| --s3.access-key-id string            | Amazon S3のアクセスキーID。 `--s3.role-arn`、または`--s3.access-key-id`と`--s3.secret-access-key`の両方、のいずれかを設定するだけで済みます。      | いいえ | 非対話型モードでのみ動作します。                     |
-| --s3.role-arn string           | Amazon S3 のロール ARN。 `--s3.role-arn`、または`--s3.access-key-id`と`--s3.secret-access-key`の両方、のいずれかを設定するだけで済みます。      | いいえ | 非対話型モードでのみ動作します。                     |
-| --s3.secret-access-key string  | Amazon S3のシークレットアクセスキー。`--s3.role-arn`、または`--s3.access-key-id`と`--s3.secret-access-key`の両方、のいずれかを設定するだけで済みます。 | いいえ | 非対話型モードでのみ動作します。                     |
+| --s3.access-key-id string            | Amazon S3のアクセスキーID。 `--s3.role-arn`を設定するか、`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定するか、どちらか一方だけで済みます。      | いいえ | 非対話型モードでのみ動作します。                     |
+| --s3.role-arn string           | Amazon S3 のロール ARN。 `--s3.role-arn`を設定するか、`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定するか、どちらか一方だけで済みます。      | いいえ | 非対話型モードでのみ動作します。                     |
+| --s3.secret-access-key string  | Amazon S3のシークレットアクセスキー。`--s3.role-arn`を設定するか、`--s3.access-key-id`と`--s3.secret-access-key`の両方を設定するか、どちらか一方だけで済みます。 | いいえ | 非対話型モードでのみ動作します。                     |
 | --s3.uri string                | `s3://<bucket>/<path>`形式の Amazon S3 URI。                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
 | --unredacted                      | データベース監査ログを秘匿化解除または秘匿化します。                                                                                     | いいえ | 非対話型モードでのみ動作します。                     |
 | -h, --help                  | このコマンドのヘルプ情報を表示します。                                                                                          | いいえ | 対話モードと非対話モードの両方で動作します。 |
