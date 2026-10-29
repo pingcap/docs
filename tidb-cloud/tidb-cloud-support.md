@@ -7,6 +7,10 @@ summary: Learn how to contact the support team of TiDB Cloud.
 
 TiDB Cloud offers tiered support plan offerings tailored to meet customers' needs. For more information about our support offerings, see [Connected Care Details](/tidb-cloud/connected-care-detail.md).
 
+> **Warning:**
+>
+> Before submitting a support ticket or attaching logs, remove or mask all personally identifiable information (PII) and other sensitive data from the ticket content and attachments, such as passwords, credentials, and API keys. Replace sensitive values with asterisks (*) or other placeholders.
+
 ## Support channels
 
 TiDB Cloud provides multiple support channels. The available options depend on the type of issue and your [support plan](/tidb-cloud/connected-care-detail.md).
