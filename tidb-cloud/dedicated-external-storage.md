@@ -202,7 +202,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
 5. バケットへのアクセス権を付与するには、以下の情報を入力し、 **SAVE**をクリックしてください。
 
-    - **New Principals**フィールドに、対象のTiDBクラスターのGoogle Cloud ServiceアカウントIDを貼り付けます。
+    - **New Principals**フィールドに、対象のTiDBクラスターのGoogle CloudサービスアカウントIDを貼り付けます。
 
     - **Select a role**ドロップダウンリストに、先ほど作成したIAMロールの名前を入力し、フィルター結果からその名前を選択します。
 
@@ -222,7 +222,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
 
-7. TiDB Cloudコンソールで、Google Cloud Service アカウント ID を取得する**Data Import**ページに移動し、GCS バケットの gsutil URI を**Bucket gsutil URI**フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。
+7. TiDB Cloudコンソールで、Google CloudサービスアカウントID を取得する**Data Import**ページに移動し、GCS バケットの gsutil URI を**Bucket gsutil URI**フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。
 
 ## Azure Blob Storageへのアクセスを構成する {#configure-azure-blob-storage-access}
 
