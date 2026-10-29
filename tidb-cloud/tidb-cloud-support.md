@@ -3,7 +3,7 @@ title: TiDB Cloud Support
 summary: TiDB Cloudのサポートチームに連絡する方法について説明します。
 ---
 
-# TiDB Cloudサポート {#tidb-cloud-support} <!--Corresponding EN commit: cb739e73746dda8bc117b62d1c5126b27b7eb4c2-->
+# TiDB Cloudサポート <!--Corresponding EN commit: cb739e73746dda8bc117b62d1c5126b27b7eb4c2-->
 
 TiDB Cloudは、お客様のニーズに合わせてカスタマイズされた段階的なサポートプランを提供しています。サポートプランの詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
