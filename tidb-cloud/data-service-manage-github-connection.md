@@ -28,7 +28,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 アプリを作成するときに、データアプリを GitHub に接続できます。詳細については、[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md)を参照してください。
 
-アプリ作成時にGitHub接続を有効にしなかった場合でも、以下の手順で有効にすることができます。
+アプリ作成時にGitHub接続を有効にしなかった場合でも、以下の手順で有効にできます。
 
 1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
@@ -61,7 +61,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md)ときに GitHub 接続が有効になっている場合、 TiDB Cloud はアプリの作成直後にこのデータアプリの設定ファイルを GitHub にプッシュします。
 
-アプリ作成後にGitHub接続が有効になっている場合は、データアプリの設定をGitHubと同期するためにデプロイ操作を実行する必要があります。たとえば、 **Deployments**タブをクリックし、このデータアプリのデプロイを再デプロイすることができます。
+アプリ作成後にGitHub接続が有効になっている場合は、データアプリの設定をGitHubと同期するためにデプロイ操作を実行する必要があります。たとえば、 **Deployments**タブをクリックし、このデータアプリのデプロイを再デプロイできます。
 
 デプロイ操作後、指定したGitHubディレクトリを確認してください。 `tidb-cloud-data-service`によってデータアプリの設定ファイルがディレクトリにコミットされていることが確認できます。これは、データアプリがGitHubに正常に接続されたことを意味します。ディレクトリ構造は以下のとおりです。
 

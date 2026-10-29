@@ -132,7 +132,7 @@ Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供
 
 ### 監査ログを有効にする {#enable-audit-logging}
 
-TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Essentialインスタンスの監査ログを有効にすることができます。
+TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Essentialインスタンスの監査ログを有効にできます。
 
 > **Note:**
 >
@@ -204,7 +204,7 @@ ticloud serverless audit-log config update -c <cluster-id> --rotation-size-mib <
 
 ### 監査ログを無効にする {#disable-audit-logging}
 
-TiDB Cloud Essentialインスタンスの監査ログを無効にすることができます。
+TiDB Cloud Essentialインスタンスの監査ログを無効にできます。
 
 <SimpleTab>
 <div label="Console">

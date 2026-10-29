@@ -48,7 +48,7 @@ TiDB Cloud EssentialインスタンスがMySQLサービスに接続できるこ�
 
 <div label="Public Network">
 
-MySQLサービスがパブリックネットワーク経由でアクセスできる場合は、パブリックIPアドレスまたはドメイン名を使用してMySQLに接続することができます。
+MySQLサービスがパブリックネットワーク経由でアクセスできる場合は、パブリックIPアドレスまたはドメイン名を使用してMySQLに接続できます。
 
 </div>
 
@@ -56,7 +56,7 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
 
 ### 既存データの読み込み（オプション） {#load-existing-data-optional}
 
-**Sink to MySQL**コネクタは、特定のタイムスタンプ以降のTiDB Cloud EssentialインスタンスからMySQLへの増分データのみをシンクできます。TiDB Cloud Essentialインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Essentialインスタンスの既存データをエクスポートしてMySQLにロードすることができます。
+**Sink to MySQL**コネクタは、特定のタイムスタンプ以降のTiDB Cloud EssentialインスタンスからMySQLへの増分データのみをシンクできます。TiDB Cloud Essentialインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Essentialインスタンスの既存データをエクスポートしてMySQLにロードできます。
 
 既存のデータを読み込むには：
 
