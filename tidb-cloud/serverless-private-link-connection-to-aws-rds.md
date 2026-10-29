@@ -100,7 +100,7 @@ AWSコンソールでロードバランサーとAWSエンドポイントサー�
 
     - **Load balancer type**： `Network`を選択
     - **Available load balancers**：前の手順で作成したロードバランサーを入力してください。
-    - **Supported Regions**：リージョン間の要件がない場合は空欄のままにしてください。
+    - **Supported Regions**：クロスリージョンの要件がない場合は空欄のままにしてください。
     - **Require acceptance for endpoint**： `Acceptance required`を選択することをお勧めします
     - **Supported IP address types**： `IPv4`を選択してください
 
