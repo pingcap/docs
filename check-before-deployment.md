@@ -525,7 +525,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > upstream TuneD は v2.23.0 以降、カスタムプロファイルのデフォルトディレクトリを `/etc/tuned/profiles/` に変更しましたが、一部のディストリビューション（RHEL 9 や Rocky Linux 9 など）では引き続き `/etc/tuned/` を使用しています。そのため、TuneD のバージョンだけでディレクトリを選択しないでください。
+            > アップストリームの TuneD は v2.23.0 以降、カスタムプロファイルのデフォルトディレクトリを `/etc/tuned/profiles/` に変更しましたが、一部のディストリビューション（RHEL 9 や Rocky Linux 9 など）では引き続き `/etc/tuned/` を使用しています。そのため、TuneD のバージョンだけでディレクトリを選択しないでください。
 
             カスタムプロファイルディレクトリが `/etc/tuned/` の場合:
 
