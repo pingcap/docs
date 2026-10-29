@@ -13,7 +13,7 @@ ticloud serverless audit-log filter-rule create [flags]
 
 ## 例 {#examples}
 
-対話モードでフィルタルールを作成します。
+対話型モードでフィルタルールを作成します。
 
 ```shell
 ticloud serverless audit-log filter-rule create
@@ -38,15 +38,15 @@ ticloud serverless audit-log filter-rule create --cluster-id <cluster-id> --disp
 | -c, --cluster-id string | クラスターの ID。                                                                            | はい  | 非対話型モードでのみ動作します。                     |
 | --display-name string   | フィルタールールの表示名。                                                                        | はい  | 非対話型モードでのみ動作します。                     |
 | --rule string             | フィルタールール式。フィルターテンプレートを表示するには`ticloud serverless audit-log filter-rule template`を使用します。 | はい  | 非対話型モードでのみ動作します。                     |
-| -h, --help           | このコマンドのヘルプ情報を表示します。                                                                   | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -h, --help           | このコマンドのヘルプ情報を表示します。                                                                   | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug       | デバッグモードを有効にします。          | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -D, --debug       | デバッグモードを有効にします。          | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 

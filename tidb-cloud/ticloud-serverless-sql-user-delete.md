@@ -13,7 +13,7 @@ ticloud serverless sql-user delete [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスから SQL ユーザーを削除します。
+対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスから SQL ユーザーを削除します。
 
 ```shell
 ticloud serverless sql-user delete
@@ -39,7 +39,7 @@ ticloud serverless sql-user delete -c <cluster-id> --user <user-name>
 
 | フラグ               | 説明                                                                             | 必須  | 注記                                                      |
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
-| --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
 | -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 | -D, --debug       | デバッグモードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
