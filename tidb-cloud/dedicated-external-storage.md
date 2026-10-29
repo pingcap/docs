@@ -222,7 +222,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
 
-7. TiDB Cloudコンソールで、Google CloudサービスアカウントID を取得する**Data Import**ページに移動し、GCS バケットの gsutil URI を**Bucket gsutil URI**フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。
+7. TiDB Cloudコンソールで、Google CloudサービスアカウントID を取得した**Data Import**ページに移動し、GCS バケットの gsutil URI を**Bucket gsutil URI**フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。
 
 ## Azure Blob Storageへのアクセスを構成する {#configure-azure-blob-storage-access}
 
