@@ -63,7 +63,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 >
 > Cloud CLI をインストールしていない場合は、次の手順を実行する前に、 [TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)を参照して簡単にインストールしてください。
 
-1. TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの接続文字列を対話モードで取得します。
+1. TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの接続文字列を対話型モードで取得します。
 
     ```shell
     ticloud cluster connect-info
