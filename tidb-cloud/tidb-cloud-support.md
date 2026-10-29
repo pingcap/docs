@@ -3,9 +3,13 @@ title: TiDB Cloud Support
 summary: TiDB Cloudのサポートチームに連絡する方法について説明します。
 ---
 
-# TiDB Cloudサポート {#tidb-cloud-support}
+# TiDB Cloudサポート {#tidb-cloud-support} <!--Corresponding EN commit: cb739e73746dda8bc117b62d1c5126b27b7eb4c2-->
 
 TiDB Cloudは、お客様のニーズに合わせてカスタマイズされた段階的なサポートプランを提供しています。サポートプランの詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
+
+> **Warning:**
+>
+> サポートチケットを送信したりログを添付したりする前に、チケットの内容と添付ファイルから、パスワード、認証情報、APIキーなどのすべての個人を特定できる情報（PII）やその他の機密データを削除するかマスクしてください。機密値はアスタリスク（*）またはその他のプレースホルダーに置き換えてください。
 
 ## サポートチャンネル {#support-channels}
 
