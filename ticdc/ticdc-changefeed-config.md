@@ -220,8 +220,11 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 #### `encoder-concurrency`
 
 - Specifies the number of encoder threads used when encoding data.
-- This configuration item only takes effect if the downstream is MQ.
-- Default value: `32`
+- For message queue downstreams: both the new and old architectures support configuring the number of encoder threads, with a default value of `32`.
+- For storage service downstreams ([TiCDC Classic Architecture](/ticdc/ticdc-classic-architecture.md)): `8` encoder threads are always used, and this parameter does not control them.
+- For storage service downstreams ([TiCDC New Architecture](/ticdc/ticdc-architecture.md)): support for configuring the number of encoder threads is planned starting from v8.5.9. Before support is available, `8` encoder threads are always used; after support is available, the number of threads is set according to the configured value of this parameter, and `32` is used with the default configuration.
+
+After the new architecture supports this parameter, for existing storage service tasks where this configuration value is missing or is `0`, `8` encoder threads are still used.
 
 #### `enable-kafka-sink-v2`
 
