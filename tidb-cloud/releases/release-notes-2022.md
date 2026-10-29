@@ -23,7 +23,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     PITRは、任意の時点のデータを新しいクラスターに復元することをサポートします。PITR機能を使用するには、TiDBクラスターのバージョンがv6.4.0以上であり、TiKVノードのサイズが8 vCPU以上、16 GiB以上であることを確認してください。
 
-    [TiDB Cloudコンソール](https://tidbcloud.com)の**Backup Settings**で PITR 機能を有効または無効にすることができます。
+    [TiDB Cloudコンソール](https://tidbcloud.com)の**Backup Settings**で PITR 機能を有効または無効にできます。
 
     詳細については[TiDB クラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
@@ -235,7 +235,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloudサブスクリプションをカスタマイズし、コンプライアンス要件を満たすためにオンライン契約を導入します。
 
-    TiDB Cloudコンソールの**Billing**ページに[**Contract**タブ](/tidb-cloud/tidb-cloud-billing.md#contract)が追加されました。当社の営業担当と契約について合意し、契約手続きをオンラインで進めるためのメールを受け取った場合は、 **Contract**タブで契約内容を確認し、同意することができます。契約について詳しくは、お気軽に[営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)。
+    TiDB Cloudコンソールの**Billing**ページに[**Contract**タブ](/tidb-cloud/tidb-cloud-billing.md#contract)が追加されました。当社の営業担当と契約について合意し、契約手続きをオンラインで進めるためのメールを受け取った場合は、 **Contract**タブで契約内容を確認し、同意できます。契約について詳しくは、お気軽に[営業担当にお問い合わせください](https://www.pingcap.com/contact-us/)。
 
 **ドキュメントの変更**
 

@@ -120,7 +120,7 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 - サインアッププロセスにメール認証とロボット対策のreCAPTCHAが追加されました
 - [TiDB Cloudサービス契約](https://pingcap.com/legal/tidb-cloud-services-agreement)と[PingCAPプライバシーポリシー](https://pingcap.com/legal/privacy-policy/)が更新されました
-- コンソールの申請フォームに記入して[概念実証](/tidb-cloud/tidb-cloud-poc.md)を申請することができます
+- コンソールの申請フォームに記入して[概念実証](/tidb-cloud/tidb-cloud-poc.md)を申請できます
 - UIを介してサンプルデータをTiDB Cloudクラスタにインポートできます
 - 混乱を避けるため、同じ名前のクラスターは許可されません。
 - **Support**メニューの**Give Feedback**をクリックするとフィードバックを送信できます。
