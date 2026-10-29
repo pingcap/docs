@@ -5,7 +5,7 @@ summary: 大規模データセットのMySQLシャードをTiDB Cloudに移行�
 
 # 大規模データセットのMySQLシャードをTiDB Cloudに移行およびマージする {#migrate-and-merge-mysql-shards-of-large-datasets-to-tidb-cloud}
 
-このドキュメントでは、異なるパーティションに分散した大規模な MySQL データセット (例えば、1 TiB 以上) をTiDB Cloudに移行およびマージする方法について説明します。完全なデータ移行が完了したら、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/stable/dm-overview)を使用して、ビジネスニーズに応じて増分移行を実行できます。
+このドキュメントでは、異なるパーティションに分散した大規模な MySQL データセット (例えば、1 TiB 以上) をTiDB Cloudに移行およびマージする方法について説明します。完全データ移行が完了したら、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/stable/dm-overview)を使用して、ビジネスニーズに応じて増分移行を実行できます。
 
 このドキュメントの例では、複数のMySQLインスタンスにまたがる複雑なシャード移行タスクを使用しており、AUTO_INCREMENT主キーの競合処理が含まれています。この例のシナリオは、単一のMySQLインスタンス内の異なるシャードテーブルのデータをマージする場合にも適用できます。
 
@@ -48,7 +48,7 @@ DM のバージョンは v5.3.0 です。 TiDB DM を手動でデプロイする
 
 シャーディングされたスキーマとテーブルは、テーブル`store.sales`にマージされます。
 
-## MySQLからTiDB Cloudへの完全なデータ移行を実行する {#perform-full-data-migration-from-mysql-to-tidb-cloud}
+## MySQLからTiDB Cloudへの完全データ移行を実行する {#perform-full-data-migration-from-mysql-to-tidb-cloud}
 
 以下は、MySQLシャードの全データをTiDB Cloudに移行およびマージする手順です。
 

@@ -102,7 +102,7 @@ tiup update --self && tiup update dumpling
 
 ## 全てのデータを移行する {#migrate-full-data}
 
-TiDB Self-ManagedクラスタからTiDB Cloudへデータを移行するには、以下の手順で完全なデータ移行を実行します。
+TiDB Self-ManagedクラスタからTiDB Cloudへデータを移行するには、以下の手順で完全データ移行を実行します。
 
 1. TiDB Self-ManagedクラスターからAmazon S3へデータを移行します。
 2. Amazon S3からTiDB Cloudへデータを移行します。
