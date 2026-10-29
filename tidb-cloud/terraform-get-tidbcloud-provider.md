@@ -13,7 +13,7 @@ summary: TiDB Cloud Terraform Provider を取得する方法を学びます。
 
 ## ステップ1. Terraformをインストールする {#step-1-install-terraform}
 
-TiDB Cloud Terraform Provider が[Terraform レジストリ](https://registry.terraform.io/)にリリースされました。Terraform (&gt;=1.0) をインストールするだけです。
+TiDB Cloud Terraform Provider が[Terraform レジストリ](https://registry.terraform.io/)にリリースされました。Terraform (>=1.0) をインストールするだけです。
 
 macOS の場合、次の手順に従ってHomebrewを使用して Terraform をインストールできます。
 
@@ -35,7 +35,7 @@ macOS の場合、次の手順に従ってHomebrewを使用して Terraform を�
 
 TiDB Cloud APIはHTTPダイジェスト認証を使用します。これにより、秘密鍵がネットワーク経由で送信されるのを防ぎます。
 
-現在、 TiDB Cloud Terraform Provider は API キーの管理をサポートしていません。そのため、 [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)で API キーを作成する必要があります。
+現在、 TiDB Cloud Terraform Provider は API キーの管理をサポートしていません。そのため、 [TiDB Cloudコンソール](https://tidbcloud.com/)で API キーを作成する必要があります。
 
 詳細な手順については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta#section/Authentication/API-Key-Management)を参照してください。
 

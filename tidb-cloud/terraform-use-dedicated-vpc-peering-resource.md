@@ -5,7 +5,7 @@ summary: "`tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB 
 
 # `tidbcloud_dedicated_vpc_peering`リソースを使用する {#use-the-tidbcloud-dedicated-vpc-peering-resource}
 
-このドキュメントでは、 `tidbcloud_dedicated_vpc_peering`リソースとの[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC ピアリングを管理する方法について説明します。
+このドキュメントでは、 `tidbcloud_dedicated_vpc_peering`リソースを使用して[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) VPC ピアリングを管理する方法について説明します。
 
 `tidbcloud_dedicated_vpc_peering`リソースの機能は次のとおりです。
 
@@ -54,14 +54,14 @@ summary: "`tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB 
     }
     ```
 
-    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
+    `resource`ブロックを使用して、リソースタイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - `tidbcloud_dedicated_vpc_peering`リソースを使用するには、リソース タイプを`tidbcloud_dedicated_vpc_peering`に設定します。
+    - `tidbcloud_dedicated_vpc_peering`リソースを使用するには、リソースタイプを`tidbcloud_dedicated_vpc_peering`に設定します。
     - リソース名は必要に応じて定義できます。例： `example` 。
     - 必要な引数の値を取得する方法がわからない場合は、 [VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
-    - TiDB Cloud Dedicated VPC ピアリング仕様情報を取得するには、 [tidbcloud_dedicated_vpc_peering (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)を参照してください。
+    - TiDB Cloud Dedicated VPC ピアリングの仕様情報を取得するには、 [tidbcloud_dedicated_vpc_peering (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_vpc_peering)を参照してください。
 
-3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`使用は推奨されません。
+3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
     ```shell
     $ terraform apply
@@ -150,9 +150,9 @@ Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリ
 
 たとえば、Terraform によって作成されていない VPC ピアリングをインポートできます。
 
-1. 新しい`tidbcloud_dedicated_vpc_peering`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_dedicated_vpc_peering`リソースのインポートブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${vpc_peering_id}`を実際の VPC ピアリング ID に置き換えます。
+    次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${vpc_peering_id}`を実際の VPC ピアリング ID に置き換えます。
 
     ```
     import {
@@ -163,13 +163,13 @@ Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリ
 
 2. 新しい設定ファイルを生成します。
 
-    インポート ブロックに従って、新しい`tidbcloud_dedicated_vpc_peering`リソースの新しい設定ファイルを生成します。
+    インポートブロックに従って、新しい`tidbcloud_dedicated_vpc_peering`リソースの新しい設定ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
+    上記のコマンドでは、既存の`.tf`ファイル名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
     次に、インポートされたリソースの構成を含む`generated.tf`ファイルが現在のディレクトリに作成されます。
 

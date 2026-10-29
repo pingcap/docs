@@ -1,6 +1,6 @@
 ---
 title: Use the `tidbcloud_cluster` Resource (Deprecated)
-summary: クラスター リソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習します。
+summary: クラスターリソースを使用してTiDB Cloudクラスターを作成および変更する方法を学習します。
 ---
 
 # `tidbcloud_cluster`リソースを使用する（非推奨） {#use-the-tidbcloud_cluster-resource-deprecated}
@@ -15,9 +15,9 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 `tidbcloud_cluster`リソースの機能は次のとおりです。
 
-- TiDB Cloud Starter クラスターとTiDB Cloud Dedicated クラスターを作成します。
+- TiDB Cloud Starter インスタンスとTiDB Cloud Dedicated クラスターを作成します。
 - TiDB Cloud Dedicated クラスターを変更します。
-- TiDB Cloud Starter クラスターとTiDB Cloud Dedicated クラスターを削除します。
+- TiDB Cloud Starter インスタンスとTiDB Cloud Dedicated クラスターを削除します。
 
 ## 前提条件 {#prerequisites}
 
@@ -56,9 +56,9 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
    }
    ```
 
-    - `data`ブロックを使用して、データソース タイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
+    - `data`ブロックを使用して、データソースタイプやデータソース名など、 TiDB Cloudのデータソースを定義します。
 
-        - プロジェクト データソースを使用するには、データソース タイプを`tidbcloud_projects`に設定します。
+        - プロジェクトデータソースを使用するには、データソースタイプを`tidbcloud_projects`に設定します。
         - データソース名は、必要に応じて定義できます。例："example_project"。
         - `tidbcloud_projects`データソースの場合、 `page`および`page_size`属性を使用して、チェックするプロジェクトの最大数を制限できます。
 
@@ -123,11 +123,11 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## `tidbcloud_cluster_specs`データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
+## `tidbcloud_cluster_specs`データソースを使用してクラスターの仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
 
-クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウドプロバイダー、リージョン、ノードサイズなど) が含まれるクラスター仕様情報を取得する必要があります。
+クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウドプロバイダー、リージョン、ノードサイズなど) が含まれるクラスターの仕様情報を取得する必要があります。
 
-クラスター仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データソースを使用できます。
+クラスターの仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データソースを使用できます。
 
 1. `main.tf`ファイルを次のように編集します。
 
@@ -263,7 +263,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 結果は次のとおりです。
 
 - `cloud_provider`は、TiDB クラスターをホストできるクラウドプロバイダーです。
-- `region`は`cloud_provider`の領域です。
+- `region`は`cloud_provider`のリージョンです。
 - `node_quantity_range`は、最小ノード数とノードをスケールするステップを示します。
 - `node_size`はノードのサイズです。
 - `storage_size_gib_range`は、ノードに設定できる最小および最大のストレージサイズを示します。
@@ -321,11 +321,11 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
     }
     ```
 
-    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
+    `resource`ブロックを使用して、リソースタイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - クラスター リソースを使用するには、リソース タイプを`tidbcloud_cluster`に設定します。
+    - クラスターリソースを使用するには、リソースタイプを`tidbcloud_cluster`に設定します。
     - リソース名は必要に応じて定義できます。例： `example_cluster` 。
-    - リソースの詳細については、プロジェクト ID とクラスター仕様情報に従って設定できます。
+    - リソースの詳細については、プロジェクト ID とクラスターの仕様情報に従って設定できます。
 
 3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
@@ -477,7 +477,7 @@ summary: クラスター リソースを使用してTiDB Cloudクラスターを
 
 ## TiDB Cloud Dedicated クラスターを変更する {#modify-a-tidb-cloud-dedicated-cluster}
 
-TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次のようにクラスター リソースを管理できます。
+TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次のようにクラスターリソースを管理できます。
 
 - クラスターにTiFlashコンポーネントを追加します。
 - クラスターをスケールします。
@@ -610,7 +610,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 1. [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)際に使用される`cluster.tf`ファイルで、 `components`構成を編集します。
 
-    たとえば、TiDB 用にさらに 1つのノード、TiKV 用にさらに 3つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスタ仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)することができます)、およびTiFlash用にさらに 1つのノードを追加するには、次のように構成を編集します。
+    たとえば、TiDB 用にさらに 1つのノード、TiKV 用にさらに 3つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスタ仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)できます)、およびTiFlash用にさらに 1つのノードを追加するには、次のように構成を編集します。
 
    ```
    components = {
@@ -963,7 +963,7 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
 
 ## クラスターを削除する {#delete-a-cluster}
 
-クラスターを削除するには、対応する`cluster.tf`ファイルが配置されているクラスター ディレクトリに移動し、 `terraform destroy`コマンドを実行してクラスター リソースを破棄します。
+クラスターを削除するには、対応する`cluster.tf`ファイルが配置されているクラスターディレクトリに移動し、 `terraform destroy`コマンドを実行してクラスターリソースを破棄します。
 
 ```
 $ terraform destroy

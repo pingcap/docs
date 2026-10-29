@@ -34,11 +34,11 @@ SQL プロキシアカウントの主な利点は次のとおりです。
 
 ## SQLプロキシアカウントの作成方法 {#how-the-sql-proxy-account-is-created}
 
-SQL プロキシアカウントは、TiDB Cloud クラスターの初期化中に、クラスター内で権限を持つロールが付与されたTiDB Cloudユーザーに対して自動的に作成されます。
+SQL プロキシアカウントは、TiDB Cloud Starter インスタンスまたは TiDB Cloud Dedicated クラスターの初期化中に、インスタンスまたはクラスター内で権限を持つロールが付与されたTiDB Cloudユーザーに対して自動的に作成されます。
 
 ## SQLプロキシアカウントを削除する方法 {#how-the-sql-proxy-account-is-deleted}
 
-ユーザーが[組織](/tidb-cloud/manage-user-access.md#remove-an-organization-member)または[プロジェクト](/tidb-cloud/manage-user-access.md#remove-a-project-member)から削除されるか、そのロールがクラスターにアクセスできないロールに変更されると、SQL プロキシアカウントは自動的に削除されます。
+ユーザーが[組織](/tidb-cloud/manage-user-access.md#remove-an-organization-member)または[プロジェクト](/tidb-cloud/manage-user-access.md#remove-project-access-for-a-user)から削除されるか、そのロールがTiDB Cloud Starter インスタンスまたは TiDB Cloud Dedicated クラスターにアクセスできないロールに変更されると、SQL プロキシアカウントは自動的に削除されます。
 
 SQL プロキシアカウントを手動で削除した場合、ユーザーが次回TiDB Cloudコンソールにログインしたときに自動的に再作成されることに注意してください。
 
@@ -50,8 +50,8 @@ SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー
 | ---------------- | ------ | ------------------------------------------------------------------------------------ |
 | TiDB Cloud Dedicated     | 32文字以下 | 完全なメールアドレス                                                                           |
 | TiDB Cloud Dedicated     | 32文字超 | `prefix($email, 23)_prefix(base58(sha1($email)), 8)`                                 |
-| TiDB Cloud Serverless | 15文字以下 | `serverless_unique_prefix + "." + email`                                             |
-| TiDB Cloud Serverless | 15文字超 | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
+| TiDB Cloud Starter | 15文字以下 | `serverless_unique_prefix + "." + email`                                             |
+| TiDB Cloud Starter | 15文字超 | `serverless_unique_prefix + "." + prefix($email, 6)_prefix(base58(sha1($email)), 8)` |
 
 例:
 
@@ -59,32 +59,32 @@ SQLプロキシアカウントのユーザー名は、 TiDB Cloudのユーザー
 | ---------------- | ------------------------------------- | ------------------------------------ |
 | TiDB Cloud Dedicated     | `user@pingcap.com`                    | `user@pingcap.com`                   |
 | TiDB Cloud Dedicated     | `longemailaddressexample@pingcap.com` | `longemailaddressexample_48k1jwL9`   |
-| TiDB Cloud Serverless | `u1@pingcap.com`                      | `{user_name_prefix}.u1@pingcap.com`  |
-| TiDB Cloud Serverless | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9` |
+| TiDB Cloud Starter | `u1@pingcap.com`                      | `{user_name_prefix}.u1@pingcap.com`  |
+| TiDB Cloud Starter | `longemailaddressexample@pingcap.com` | `{user_name_prefix}.longem_48k1jwL9` |
 
 > **Note:**
 >
-> 上記の表の`{user_name_prefix}`は、 TiDB Cloud Serverless クラスターを区別するためにTiDB Cloudによって生成される一意のプレフィックスです。詳細については、 TiDB Cloud Serverless クラスターの[ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
+> 上記の表の`{user_name_prefix}`は、 TiDB Cloud Starter インスタンスを区別するためにTiDB Cloudによって生成される一意のプレフィックスです。詳細については、 TiDB Cloud Starter インスタンスの[ユーザー名のプレフィックス](/tidb-cloud/select-cluster-tier.md#user-name-prefix)を参照してください。
 
 ## SQLプロキシアカウントのパスワード {#sql-proxy-account-password}
 
 SQL プロキシアカウントは JWT トークンベースであるため、これらのアカウントのパスワードを管理する必要はありません。セキュリティトークンはシステムによって自動的に管理されます。
 
-## SQL プロキシアカウント ロール {#sql-proxy-account-roles}
+## SQL プロキシアカウントロール {#sql-proxy-account-roles}
 
 SQL プロキシアカウントのロールは、 TiDB CloudユーザーのIAMロールによって異なります。
 
 - 組織レベル:
-    - 組織の所有者: role_admin
-    - 組織の請求管理者: プロキシアカウントなし
-    - 組織閲覧者: プロキシアカウントなし
-    - 組織コンソール監査マネージャ: プロキシアカウントなし
+    - Organization Owner: role_admin
+    - Organization Billing Manager: プロキシアカウントなし
+    - Organization Viewer: プロキシアカウントなし
+    - Organization Console Audit Manager: プロキシアカウントなし
 
 - プロジェクトレベル:
-    - プロジェクトオーナー: role_admin
-    - プロジェクトデータアクセスの読み取り/書き込み: role_readwrite
-    - プロジェクトデータアクセス読み取り専用: role_readonly
+    - Project Owner: role_admin
+    - Project Data Access Read-Write: role_readwrite
+    - Project Data Access Read-Only: role_readonly
 
-## SQL プロキシアカウント アクセス制御 {#sql-proxy-account-access-control}
+## SQL プロキシアカウントアクセス制御 {#sql-proxy-account-access-control}
 
-SQLプロキシアカウントはJWTトークンベースであり、Data ServiceとSQLエディタからのみアクセスできます。ユーザー名とパスワードを使用してSQLプロキシアカウントを使用してTiDB Cloudクラスターにアクセスできません。
+SQLプロキシアカウントはJWTトークンベースであり、Data ServiceとSQLエディタからのみアクセスできます。SQLプロキシアカウントでは、ユーザー名とパスワードを使用してTiDB Cloud Starter インスタンスまたは TiDB Cloud Dedicated クラスターにアクセスできません。

@@ -1,6 +1,6 @@
 ---
 title: Use `tidbcloud_serverless_branch` Resource
-summary: サーバーレス ブランチ リソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成および変更する方法を学習します。
+summary: サーバーレスブランチリソースを使用して、 TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成および変更する方法を学習します。
 ---
 
 # `tidbcloud_serverless_branch`リソースを使用する {#use-the-tidbcloud-serverless-branch-resource}
@@ -20,7 +20,7 @@ summary: サーバーレス ブランチ リソースを使用して、 TiDB Clo
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
-- [TiDB Cloud Starter またはTiDB Cloud Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
+- [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md) 。
 
 ## TiDB Cloud Starter またはTiDB Cloud Essential ブランチを作成する {#create-a-tidb-cloud-starter-or-tidb-cloud-essential-branch}
 
@@ -53,12 +53,12 @@ summary: サーバーレス ブランチ リソースを使用して、 TiDB Clo
     }
     ```
 
-    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
+    `resource`ブロックを使用して、リソースタイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - サーバーレス ブランチ リソースを使用するには、リソース タイプを`tidbcloud_serverless_branch`に設定します。
+    - サーバーレスブランチリソースを使用するには、リソースタイプを`tidbcloud_serverless_branch`に設定します。
     - リソース名は必要に応じて定義できます。例： `example` 。
-    - リソースの詳細については、サーバーレス ブランチの仕様情報に従って設定できます。
-    - サーバーレス ブランチの仕様情報を取得するには、 [tidbcloud_serverless_branch (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_branch)を参照してください。
+    - リソースの詳細については、サーバーレスブランチの仕様情報に従って設定できます。
+    - サーバーレスブランチの仕様情報を取得するには、 [tidbcloud_serverless_branch (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/serverless_branch)を参照してください。
 
 3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
@@ -164,9 +164,9 @@ Terraform によって管理されていないTiDB Cloud Starter またはTiDB C
 
 次のように、Terraform によって作成されていないTiDB Cloud Starter またはTiDB Cloud Essential ブランチをインポートします。
 
-1. 新しい`tidbcloud_serverless_branch`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_serverless_branch`リソースのインポートブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,branch_id`の形式に置き換えます。
+    次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,branch_id`の形式に置き換えます。
 
     ```
     import {
@@ -177,13 +177,13 @@ Terraform によって管理されていないTiDB Cloud Starter またはTiDB C
 
 2. 新しい設定ファイルを生成します。
 
-    インポート ブロックに従って、新しい`tidbcloud_serverless_branch`リソースの新しい設定ファイルを生成します。
+    インポートブロックに従って、新しい`tidbcloud_serverless_branch`リソースの新しい設定ファイルを生成します。
 
     ```shell
       terraform plan -generate-config-out=generated.tf
     ```
 
-    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
+    上記のコマンドでは、既存の`.tf`ファイル名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
 3. 生成された構成を確認して適用します。
 

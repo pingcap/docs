@@ -1,6 +1,6 @@
 ---
 title: Statement Insight (PREVIEW)
-summary: Statement Insight を使用して、DB user、DB、table、SQL type、または SQL digest ごとの過去の RU 消費量、レイテンシー、実行回数を分析し、TiDB Cloud インスタンスの RU およびパフォーマンスのベースラインを構築する方法を説明します。
+summary: Statement Insight を使用して、DB ユーザー、DB、テーブル、SQL タイプ、または SQL digest ごとの過去の RU 消費量、レイテンシー、実行回数を分析し、TiDB Cloud インスタンスの RU およびパフォーマンスのベースラインを構築する方法を説明します。
 ---
 
 # Statement Insight (PREVIEW)
@@ -50,12 +50,12 @@ Statement Insight は、インスタンスで有効化された後にのみデ�
 - **Mean latency**: 総レイテンシーを実行回数で割った値。
 - **Execution count**: SQL文が実行された回数。
 
-### DB user、SQL type、SQL digest、DB、table ごとの主要な要因 {#top-contributors-by-db-user-sql-type-sql-digest-db-and-table}
+### DB ユーザー、SQL タイプ、SQL digest、DB、テーブルごとの主要な要因 {#top-contributors-by-db-user-sql-type-sql-digest-db-and-table}
 
 各次元（DB User、SQL Type、SQL Digest、DB、または Table）について、パネルには次の情報が表示されます。
 
-- **Total count**: 選択した SQL文の中で、その次元における異なる値の総数。たとえば、選択した SQL文を実行した異なる DB user の総数です。
-- **Top values**: **Measured by** で選択した指標に基づく上位の値。たとえば、**Measured by** が **Total RU** に設定されている場合、最も多くの RU を消費した DB user、SQL type、SQL digest、DB、または Table が表示されます。
+- **Total count**: 選択した SQL文の中で、その次元における異なる値の総数。たとえば、選択した SQL文を実行した異なる DB ユーザーの総数です。
+- **Top values**: **Measured by** で選択した指標に基づく上位の値。たとえば、**Measured by** が **Total RU** に設定されている場合、最も多くの RU を消費した DB ユーザー、SQL タイプ、SQL digest、DB、またはテーブルが表示されます。
 
 ### トレンドチャート {#trend-charts}
 

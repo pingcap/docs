@@ -9,7 +9,7 @@ summary: Alibaba Cloudのプライベートエンドポイントを介して、T
 
 > **Tip:**
 >
-> AWS PrivateLink 経由でTiDB Cloud StarterまたはEssentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloudに接続します](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+> AWS PrivateLink 経由でTiDB Cloud StarterまたはEssentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloudに接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
 ## 制限 {#restrictions}
 
@@ -20,12 +20,12 @@ summary: Alibaba Cloudのプライベートエンドポイントを介して、T
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにプライベートエンドポイント経由で接続するには、以下の手順に従ってください。
 
-1. [TiDB Cloud StarterまたはEssentialインスタンスを選択してください](#step-1-choose-a-tidb-instance)
+1. [TiDB Cloud StarterまたはEssentialインスタンスを選択する](#step-1-choose-a-tidb-instance)
 2. [Alibaba Cloud上にプライベートエンドポイントを作成する](#step-2-create-a-private-endpoint-on-alibaba-cloud)
 3. [TiDB Cloudでプライベートエンドポイントを認可する（オプション）](#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional)
-4. [プライベートエンドポイントを使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します](#step-4-connect-to-your-instance-using-the-private-endpoint)
+4. [プライベートエンドポイントを使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続する](#step-4-connect-to-your-instance-using-the-private-endpoint)
 
-### ステップ1. TiDB Cloud StarterまたはEssentialインスタンスを選択します {#step-1-choose-a-tidb-instance}
+### ステップ1. TiDB Cloud StarterまたはEssentialインスタンスを選択する {#step-1-choose-a-tidb-instance}
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックすると、その概要ページに移動します。
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
@@ -43,7 +43,7 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
 3. **Interface Endpoints**タブで、 **Create Endpoint**をクリックします。
 
 4. エンドポイント情報を入力してください。
-    - **リージョン**： TiDB Cloud StarterまたはEssentialインスタンスと同じリージョンを選択してください。
+    - **Region**： TiDB Cloud StarterまたはEssentialインスタンスと同じリージョンを選択してください。
     - **Endpoint Name**：エンドポイントの名前を選択してください。
     - **Endpoint Type**：**Interface Endpoint**を選択します。
     - **Endpoint Service**： **Other Endpoint Services**を選択します。
@@ -58,7 +58,7 @@ Alibaba Cloud管理コンソールを使用してVPCインターフェースエ�
 
 9. エンドポイントの状態が**Active**になり、接続状態が**Connected**になるまで待ちます。
 
-### ステップ3．TiDB Cloudでプライベートエンドポイントを認可する（オプション） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
+### ステップ3. TiDB Cloudでプライベートエンドポイントを認可する（オプション） {#step-3-authorize-your-private-endpoint-in-tidb-cloud-optional}
 
 > **Note:**
 >
@@ -87,7 +87,7 @@ Alibaba Cloud上にインターフェースエンドポイントを作成した�
 
 5. **Submit**をクリックしてください。
 
-### ステップ4. プライベートエンドポイントを使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します {#step-4-connect-to-your-instance-using-the-private-endpoint}
+### ステップ4. プライベートエンドポイントを使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続する {#step-4-connect-to-your-instance-using-the-private-endpoint}
 
 インターフェースエンドポイントを作成したら、 TiDB Cloudコンソールに戻り、以下の手順を実行してください。
 
@@ -99,6 +99,6 @@ Alibaba Cloud上にインターフェースエンドポイントを作成した�
 
 4. **Connect With**ドロップダウンリストから、希望する接続方法を選択してください。対応する接続文字列がダイアログの下部に表示されます。
 
-    ホストについては、Alibaba Cloudの**Endpoint Details**ページに移動し、**エンドポイントサービスのドメイン名**をホストとしてコピーしてください。
+    ホストについては、Alibaba Cloudの**Endpoint Details**ページに移動し、**Domain Name of Endpoint Service**をホストとしてコピーしてください。
 
 5. 接続文字列を使用して、 TiDB Cloud StarterまたはEssentialインスタンスに接続します。

@@ -12,7 +12,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 1. TiDB Cloud仮想ネットワークは、プライベートエンドポイントを介して Kafka 仮想ネットワークに接続します。
 2. Kafka クライアントはすべての Kafka ブローカーと直接通信する必要があります。
 3. 各 Kafka ブローカーは、 TiDB Cloud仮想ネットワーク内のエンドポイントの一意のポートにマップされます。
-4. マッピングを実現するには、Kafka ブートストラップ メカニズムと Azure リソースを活用します。
+4. マッピングを実現するには、Kafka ブートストラップメカニズムと Azure リソースを活用します。
 
 次の図にその仕組みを示します。
 
@@ -34,15 +34,15 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 3. [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com)で[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットクラスターの名前をクリックして概要ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com)で[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの TiDB Cloud Dedicated クラスターの名前をクリックして概要ページに移動します。
     2. 左側のナビゲーションペインで、 **Data** > **Changefeed**をクリックします。
     3. **Changefeed**ページで、右上隅の**Create Changefeed**をクリックし、次の情報を入力します。
         1. **Destination**で、 **Kafka**を選択します。
         2. **Connectivity Method**で**Private Link**を選択します。
-    4. 続行する前に、 TiDB Cloud Azureアカウントのリージョン情報とサブスクリプションを**リマインダー**に書き留めておいてください。この情報は、TiDB CloudがKafka Private Linkサービスにアクセスできるように承認する際に使用します。
+    4. **Reminders before proceeding**で TiDB Cloud Azureアカウントのリージョン情報とサブスクリプションをメモしておいてください。この情報は、TiDB CloudがKafka Private Linkサービスにアクセスできるように承認する際に使用します。
     5. 一意のランダム文字列を指定して、Kafka プライベートリンクサービス用の**Kafka Advertised Listener Pattern**を生成します。
         1. 一意のランダム文字列を入力してください。数字または小文字のみ使用できます。この文字列は、後ほど**Kafka Advertised Listener Pattern**を生成する際に使用します。
-        2. **Check usage and generate**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの外部アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
+        2. **Check usage and generate**をクリックすると、ランダム文字列が一意であるかどうかが確認され、Kafka ブローカーの EXTERNAL アドバタイズリスナーを組み立てるために使用される**Kafka Advertised Listener Pattern**が生成されます。
 
 すべてのデプロイメント情報をメモしてください。後でKafka Private Linkサービスを設定する際に必要になります。
 
@@ -52,31 +52,31 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 | ------------------------------- | -------------------------------------- | ------------------------------------------------------------------------ |
 | リージョン                           | バージニア ( `eastus` )                     | 該当なし                                                                     |
 | TiDB Cloud Azureアカウントのサブスクリプション | `99549169-6cee-4263-8491-924a3011ee31` | 該当なし                                                                     |
-| Kafka アドバタイズド リスナー パターン         | 一意のランダム文字列: `abc`                      | 生成されたパターン: `<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>` ; |
+| Kafka Advertised Listener Pattern         | 一意のランダム文字列: `abc`                      | 生成されたパターン: `<broker_id>.abc.eastus.azure.3199745.tidbcloud.com:<port>` ; |
 
 ## ステップ1. Kafkaクラスターをセットアップする {#step-1-set-up-a-kafka-cluster}
 
-新しいクラスターをデプロイする必要がある場合は、 [新しいKafkaクラスターをデプロイ](#deploy-a-new-kafka-cluster)の手順に従ってください。
+新しいクラスターをデプロイする必要がある場合は、 [新しいKafkaクラスターをデプロイする](#deploy-a-new-kafka-cluster)の手順に従ってください。
 
 既存のクラスターを公開する必要がある場合は、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)の手順に従ってください。
 
-### 新しいKafkaクラスターをデプロイ {#deploy-a-new-kafka-cluster}
+### 新しいKafkaクラスターをデプロイする {#deploy-a-new-kafka-cluster}
 
 #### 1. Kafka仮想ネットワークを設定する {#1-set-up-the-kafka-virtual-network}
 
 1. [Azureポータル](https://portal.azure.com/)にログインし、 [仮想ネットワーク](https://portal.azure.com/#browse/Microsoft.Network%2FvirtualNetworks)ページに移動して、 **+ Create**をクリックして仮想ネットワークを作成します。
 
-2. **Basic**タブで、 **Subscription** 、 **Resource group** 、および**Region**を選択し、 **仮想ネットワーク名**フィールドに名前 (たとえば、 `kafka-pls-vnet` ) を入力して、 **Next**をクリックします。
+2. **Basic**タブで、 **Subscription** 、 **Resource group** 、および**Region**を選択し、 **Virtual network name**フィールドに名前 (たとえば、 `kafka-pls-vnet` ) を入力して、 **Next**をクリックします。
 
 3. **Security**タブで、Azure Bastion を有効にし、 **Next**をクリックします。
 
 4. **IP addresses**タブで、次の操作を行います。
 
     1. 仮想ネットワークのアドレス空間を設定します (例: `10.0.0.0/16` )。
-    2. ブローカーのサブネットを作成するには、 **サブネットの追加**をクリックし、次の情報を入力して、 **追加**をクリックします。
+    2. ブローカーのサブネットを作成するには、 **Add a subnet**をクリックし、次の情報を入力して、 **Add**をクリックします。
 
         - **Name**: `brokers-subnet`
-        - **IPアドレス範囲**: `10.0.0.0/24`
+        - **IP address range**: `10.0.0.0/24`
         - **Size**: `/24 (256 addresses)`
 
         デフォルトでは`AzureBastionSubnet`が作成されます。
@@ -89,9 +89,9 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 **2.1. ブローカーノードを作成する**
 
-1. [Azureポータル](https://portal.azure.com/)にログインし、 [仮想マシン](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse)ページに移動して**+ Create**をクリックし、 **Azure 仮想マシン**を選択します。
-2. **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次の情報を入力して、 **次へ: ディスク**をクリックします。
-    - **仮想マシン名**: `broker-node`
+1. [Azureポータル](https://portal.azure.com/)にログインし、 [仮想マシン](https://portal.azure.com/#view/Microsoft_Azure_ComputeHub/ComputeHubMenuBlade/~/virtualMachinesBrowse)ページに移動して**+ Create**をクリックし、 **Azure virtual machine**を選択します。
+2. **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次の情報を入力して、 **Next : Disks**をクリックします。
+    - **Virtual machine name**: `broker-node`
     - **Availability options**: `Availability zone`
     - **Zone options**: `Self-selected zone`
     - **Availability zone**: `Zone 1` 、 `Zone 2` 、 `Zone 3`
@@ -106,7 +106,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     - **Select inbound ports**: `SSH (22)`
 3. **Next : Networking**をクリックし、 **Networking**タブに次の情報を入力します。
     - **Virtual network**： `kafka-pls-vnet`
-    - **サブネット**: `brokers-subnet`
+    - **Subnet**: `brokers-subnet`
     - **Public IP** : `None`
     - **NIC network security group**: `Basic`
     - **Public inbound ports**: `Allow selected ports`
@@ -129,7 +129,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     - **Local File**: 以前にダウンロードした秘密鍵ファイルを選択します
     - **Open in new browser tab**オプションを選択します
 
-3. ブローカーノードの各ページで**Connect**をクリックすると、Linuxターミナルで新しいブラウザタブが開きます。3つのブローカーノードごとに、Linuxターミナルで3つのブラウザタブを開く必要があります。
+3. ブローカーノードの各ページで**Connect**をクリックすると、Linuxターミナルを表示する新しいブラウザタブが開きます。3つのブローカーノード用に、Linuxターミナルを表示するブラウザタブを3つ開く必要があります。
 
 4. 各 Linux ターミナルで次のコマンドを実行して、各ブローカーノードにバイナリをダウンロードします。
 
@@ -147,18 +147,18 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
     1. `listeners`を構成します。3つのブローカーはすべて同じであり、ブローカーとコントローラーのロールとして機能します。
         1. すべての**コントローラー**ロールノードに同じ CONTROLLER リスナーを設定します。ブローカーロールノードのみを追加する場合は、 `server.properties`の CONTROLLER リスナーを省略できます。
-        2. 2 つのブローカー リスナーを構成します。内部 Kafka クライアント アクセス用の**INTERNAL**と、 TiDB Cloudからのアクセス用の**EXTERNAL**です。
+        2. 2 つのブローカーリスナーを構成します。内部 Kafka クライアントアクセス用の**INTERNAL**と、 TiDB Cloudからのアクセス用の**EXTERNAL**です。
 
     2. `advertised.listeners`については、次の操作を行います。
-        1. ブローカーノードの内部 IP アドレスを使用して、各ブローカーの内部アドバタイズリスナーを構成します。これにより、内部 Kafka クライアントはアドバタイズ アドレスを介してブローカーに接続できるようになります。
+        1. ブローカーノードの内部 IP アドレスを使用して、各ブローカーの INTERNAL アドバタイズリスナーを構成します。これにより、内部 Kafka クライアントはアドバタイズアドレスを介してブローカーに接続できるようになります。
         2. TiDB Cloudから取得した**Kafka Advertised Listener Pattern**に基づいて、各ブローカーノードにEXTERNALアドバタイズリスナーを設定することで、TiDB Cloudが異なるブローカーを区別できるようになります。異なるEXTERNALアドバタイズリスナーを設定することで、 TiDB Cloud側のKafkaクライアントはリクエストを適切なブローカーにルーティングできるようになります。
             - Kafka Private Link サービスへのアクセスにおいて、ブローカーを区別するために異なる`<port>`値を使用してください。すべてのブローカーの EXTERNAL アドバタイズリスナーのポート範囲を計画してください。これらのポートは、ブローカーが実際にリッスンするポートである必要はありません。これらのポートは、Private Link サービス内のロードバランサーがリッスンするポートであり、ロードバランサーはリクエストを異なるブローカーに転送します。
             - トラブルシューティングを容易にするために、ブローカーごとに異なるブローカー ID を構成することをお勧めします。
 
     3. 計画値:
-        - コントローラーポート: `29092`
-        - 内部ポート: `9092`
-        - 外部ポート: `39092`
+        - CONTROLLER ポート: `29092`
+        - INTERNAL ポート: `9092`
+        - EXTERNAL ポート: `39092`
         - EXTERNALアドバタイズリスナーポートの範囲: `9093~9095`
 
 2. SSHを使用して各ブローカーノードにログインします。各ブローカーノードごとに、以下の内容を含む設定ファイル`~/config/server.properties`を作成します。
@@ -271,7 +271,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.apache.kafka.common.errors.DisconnectException
     ```
 
-2. 要塞ノードにプロデューサー スクリプト`produce.sh`を作成します。
+2. 要塞ノードにプロデューサースクリプト`produce.sh`を作成します。
 
     ```shell
     BROKER_LIST=$1
@@ -298,7 +298,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     produce_messages
     ```
 
-3. 要塞ノードにコンシューマー スクリプト`consume.sh`を作成します。
+3. 要塞ノードにコンシューマースクリプト`consume.sh`を作成します。
 
     ```shell
     BROKER_LIST=$1
@@ -365,7 +365,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
 
 Kafka クラスターが TiDB クラスターと同じリージョンにデプロイされていることを確認します。
 
-**1. ブローカーの外部リスナーを構成する**
+**1. ブローカーの EXTERNAL リスナーを構成する**
 
 以下の設定はKafka KRaftクラスターに適用されます。ZKモードの設定も同様です。
 
@@ -394,9 +394,9 @@ Kafka クラスターが TiDB クラスターと同じリージョンにデプ�
 
 3. すべてのブローカーを再構成したら、Kafka ブローカーを 1つずつ再起動します。
 
-**2. 内部ネットワークで外部リスナーの設定をテストする**
+**2. 内部ネットワークで EXTERNAL リスナーの設定をテストする**
 
-Kafka と OpenJDK を Kafka クライアント ノードにダウンロードできます。
+Kafka と OpenJDK を Kafka クライアントノードにダウンロードできます。
 
 ```shell
 # Download Kafka and OpenJDK, and then extract the files. You can choose the binary version based on your preference.
@@ -428,14 +428,14 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1. [Azureポータル](https://portal.azure.com/)にログインし、 [負荷分散](https://portal.azure.com/#view/Microsoft_Azure_Network/LoadBalancingHubMenuBlade/~/loadBalancers)ページに移動して、 **+ Create**をクリックしてロードバランサーを作成します。
 
-2. **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次のインスタンス情報を入力して、 **次へ: フロントエンド IP 構成 >**をクリックします。
+2. **Basic**タブで、**Subscription**、**Resource group**、**Region**を選択し、次のインスタンス情報を入力して、 **Next : Frontend IP configuration >**をクリックします。
 
     - **Name**: `kafka-lb`
     - **SKU** : `Standard`
     - **Type**: `Internal`
     - **Tier**: `Regional`
 
-3. **Frontend IP configuration**タブで、 **+ フロントエンド IP 構成の追加**をクリックし、次の情報を入力して**Save**をクリックし、 **次へ: バックエンド プール >**をクリックします。
+3. **Frontend IP configuration**タブで、 **+ Add a frontend IP configuration**をクリックし、次の情報を入力して**Save**をクリックし、 **Next : Backend pools >**をクリックします。
 
     - **Name**: `kafka-lb-ip`
     - **IP version**: `IPv4`
@@ -444,11 +444,11 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
     - **Assignment**： `Dynamic`
     - **Availability zone**: `Zone-redundant`
 
-4. **Backend pools**タブで、次の3つのバックエンド プールを追加し、 **Next : Inbound rules**をクリックします。
+4. **Backend pools**タブで、次の3つのバックエンドプールを追加し、 **Next : Inbound rules**をクリックします。
 
-    - 名前: `pool1` ; バックエンド プール設定: `NIC` ; IP 構成: `broker-node-1`
-    - 名前: `pool2` ; バックエンド プール設定: `NIC` ; IP 構成: `broker-node-2`
-    - 名前: `pool3` ; バックエンド プール設定: `NIC` ; IP 構成: `broker-node-3`
+    - 名前: `pool1` ; バックエンドプール設定: `NIC` ; IP 構成: `broker-node-1`
+    - 名前: `pool2` ; バックエンドプール設定: `NIC` ; IP 構成: `broker-node-2`
+    - 名前: `pool3` ; バックエンドプール設定: `NIC` ; IP 構成: `broker-node-3`
 
 5. **Inbound rules**タブで、次の3つの負荷分散規則を追加します。
 
@@ -494,7 +494,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
             - **Protocol**： `TCP`
             - **Port**: `39092`
 
-6. **Next : Outbound rule**をクリックし、 **Next : Tags >**をクリックしてから、 **次へ: 確認と作成**をクリックして情報を確認します。
+6. **Next : Outbound rule**をクリックし、 **Next : Tags >**をクリックしてから、 **Next : Review + create**をクリックして情報を確認します。
 
 7. **Create**をクリックします。
 
@@ -502,20 +502,20 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1. [Azureポータル](https://portal.azure.com/)にログインし、 [プライベートリンクサービス](https://portal.azure.com/#view/Microsoft_Azure_Network/PrivateLinkCenterBlade/~/privatelinkservices)ページに移動して、 **+ Create**をクリックし、Kafka ロードバランサーのプライベートリンクサービスを作成します。
 
-2. **Basic**タブで、 **Subscription** 、 **Resource group** 、 **Region**を選択し、 **Name**フィールドに`kafka-pls`と入力して、 **次へ: 送信設定 >**をクリックします。
+2. **Basic**タブで、 **Subscription** 、 **Resource group** 、 **Region**を選択し、 **Name**フィールドに`kafka-pls`と入力して、 **Next : Outbound settings >**をクリックします。
 
-3. **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security > **をクリックします。
+3. **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security >**をクリックします。
 
     - **Load balancer**： `kafka-lb`
-    - **ロードバランサのフロントエンド IP アドレス**: `kafka-lb-ip`
+    - **Load balancer frontend IP address**: `kafka-lb-ip`
     - **Source NAT subnet**: `kafka-pls-vnet/brokers-subnet`
 
 4. **Access security**タブで、次の操作を行います。
 
-    - **表示**については、 **Restricted by subscription**または**Anyone with your alias**を選択します。
+    - **Visibility**については、 **Restricted by subscription**または**Anyone with your alias**を選択します。
     - **Subscription-level access and auto-approval**については、**Add subscriptions**をクリックして、 [前提条件](#prerequisites)で取得したTiDB Cloud Azure アカウントのサブスクリプションを追加します。
 
-5. **Next : Tags >**をクリックし、 **Next : Review + create > **をクリックして情報を確認します。
+5. **Next : Tags >**をクリックし、 **Next : Review + create >**をクリックして情報を確認します。
 
 6. **Create**をクリックします。操作が完了したら、後で使用するためにプライベートリンクサービスのエイリアスを書き留めておきます。
 
@@ -526,7 +526,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 2. **Configure the changefeed target** > **Connectivity Method** > **Private Link**に進むときは、次のフィールドに対応する値を入力し、必要に応じてその他のフィールドを入力します。
 
     - **Kafka Advertised Listener Pattern**: [前提条件](#prerequisites)で**Kafka Advertised Listener Pattern**を生成するために使用する一意のランダム文字列。
-    - **プライベートリンクサービスのエイリアス**: [2. プライベートリンクサービスを設定する](#2-set-up-private-link-service)で取得したプライベートリンクサービスのエイリアス。
+    - **Alias of the Private Link Service**: [2. プライベートリンクサービスを設定する](#2-set-up-private-link-service)で取得したプライベートリンクサービスのエイリアス。
     - **Bootstrap Ports**: `9093,9094,9095` 。
 
 3. [Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)の手順に進みます。
@@ -541,7 +541,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 1. このドキュメントの冒頭の指示に従ってください。
 
-2. [ステップ1. Kafkaクラスターをセットアップする](#step-1-set-up-a-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)に進み、EXTERNAL リスナーとアドバタイズリスナーの別のグループを作成します。このグループの名前は**EXTERNAL2**とします。**EXTERNAL2**のポート範囲は**EXTERNAL**と重複する可能性があることに注意してください。
+2. [ステップ1. Kafkaクラスターをセットアップする](#step-1-set-up-a-kafka-cluster)に進んだら、 [実行中の Kafka クラスターを再構成する](#reconfigure-a-running-kafka-cluster)に進み、EXTERNAL リスナーとアドバタイズリスナーの別のグループを作成します。このグループの名前は**EXTERNAL2**とします。**EXTERNAL2**のポート範囲は**EXTERNAL**と重複しても構わないことに注意してください。
 
 3. ブローカーを再構成した後、新しいロードバランサーと新しいプライベートリンクサービスを作成します。
 

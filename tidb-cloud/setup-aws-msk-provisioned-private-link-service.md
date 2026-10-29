@@ -7,9 +7,9 @@ summary: このドキュメントでは、Amazon MSK Provisioned クラスター
 
 TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用に[プライベートエンドポイントを作成する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md)前に、AWS PrivateLink を介して TiDB Cloud Premium インスタンスから接続できるように MSK クラスターを設定します。
 
-このドキュメントでは、[multi-VPC connectivity](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html) と [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) を使用して、TiDB Cloud Premium インスタンスを [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) クラスターに接続する方法を説明します。
+このドキュメントでは、[マルチ VPC 接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html) と [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html) を使用して、TiDB Cloud Premium インスタンスを [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html) クラスターに接続する方法を説明します。
 
-このガイドでは、セットアップ全体の流れを扱います。具体的には、ネットワークと認証情報の準備、MSK クラスターの作成と設定、multi-VPC connectivity の有効化、クラスター ポリシーのアタッチ、そして TiDB Cloud からの PrivateLink 接続の確立です。
+このガイドでは、セットアップ全体の流れを扱います。具体的には、ネットワークと認証情報の準備、MSK クラスターの作成と設定、マルチ VPC 接続の有効化、クラスターポリシーのアタッチ、そして TiDB Cloud からの PrivateLink 接続の確立です。
 
 ## 前提条件 {#prerequisites}
 
@@ -49,15 +49,15 @@ TiDB Cloud で Amazon MSK Provisioned のダウンストリームサービス用
 
 - **Region**: TiDB Cloud Premium インスタンスと同じ AWS リージョン。
 - **Availability Zones**: TiDB Cloud Premium インスタンスの AZ と一致している必要があります（AZ 名ではなく AZ ID で確認）。
-- **Authentication**: TiDB Cloud 接続用に [SASL/SCRAM](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) を有効にします。AWS MSK の multi-VPC connectivity は IAM および TLS 認証もサポートしていますが、このセットアップでは SASL/SCRAM を使用します。
-- **Broker type**: `t3.small` はサポートされていません。より大きい broker type を選択してください。
+- **Authentication**: TiDB Cloud 接続用に [SASL/SCRAM](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html) を有効にします。AWS MSK のマルチ VPC 接続は IAM および TLS 認証もサポートしていますが、このセットアップでは SASL/SCRAM を使用します。
+- **Broker type**: `t3.small` はサポートされていません。より大きいブローカータイプを選択してください。
 - **Public access**: 無効にする必要があります。
 - [Amazon MSK multi-VPC private connectivity documentation](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements) に記載されている追加要件。
 
 上記の要件を満たす MSK クラスターがない場合は、[Amazon MSK コンソール](https://console.aws.amazon.com/msk/)に移動し、[ステップ 1](#step-1-set-up-the-amazon-vpc-and-subnets) でセットアップしたものと同じリージョン、VPC、サブネットを使用して[クラスターを作成](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)し、次の設定に従ってください。
 
 - **Kafka version**: TiDB Cloud がサポートするバージョンを使用します（例: 3.7.x）。
-- **Broker type**: multi-VPC private connectivity でサポートされる broker type を選択します（`t3.small` は不可）。
+- **Broker type**: multi-VPC private connectivity でサポートされるブローカータイプを選択します（`t3.small` は不可）。
 - **Authentication**: SASL/SCRAM 認証を有効にします。
 - **Public access**: このオプションを無効にします。
 - **Number of brokers**: アベイラビリティゾーンごとに少なくとも 1つ（最小 3）。
@@ -115,15 +115,15 @@ sasl.jaas.config=org.apache.kafka.common.security.scram.ScramLoginModule require
     password="<your-scram-password>";
 ```
 
-### 5.3 bootstrap broker string を取得する {#53-get-the-bootstrap-broker-string}
+### 5.3 ブートストラップブローカー文字列を取得する {#53-get-the-bootstrap-broker-string}
 
 1. [Amazon MSK コンソール](https://console.aws.amazon.com/msk/)で、MSK クラスターの **Summary** セクションを開きます。
 2. 右上の **View client information** をクリックします。
-3. ダイアログで **SASL/SCRAM Private endpoint** エントリを見つけます。これが bootstrap broker string です。後で [ステップ 5.4](#54-create-the-acls) で使用するためにコピーしておきます。
+3. ダイアログで **SASL/SCRAM Private endpoint** エントリを見つけます。これがブートストラップブローカー文字列です。後で [ステップ 5.4](#54-create-the-acls) で使用するためにコピーしておきます。
 
 ### 5.4 ACL を作成する {#54-create-the-acls}
 
-EC2 インスタンスで、次のコマンドを実行して、SCRAM ユーザーにすべてのトピック、consumer group、およびクラスターへのフルアクセスを付与します。
+EC2 インスタンスで、次のコマンドを実行して、SCRAM ユーザーにすべてのトピック、コンシューマーグループ、およびクラスターへのフルアクセスを付与します。
 
 ```bash
 export BOOTSTRAP=<sasl-scram-private-endpoint>
@@ -141,7 +141,7 @@ export BOOTSTRAP=<sasl-scram-private-endpoint>
   --add --allow-principal User:<scram-username> --operation All --cluster
 ```
 
-認証エラーが断続的に発生する場合は、数秒待ってから再試行してください。新しい SCRAM 認証情報がすべての broker に反映されるまで、少し時間がかかることがあります。
+認証エラーが断続的に発生する場合は、数秒待ってから再試行してください。新しい SCRAM 認証情報がすべてのブローカーに反映されるまで、少し時間がかかることがあります。
 
 ## ステップ 6. クラスター設定を更新する {#step-6-update-the-cluster-configuration}
 
@@ -152,12 +152,12 @@ ACL を作成した後、クラスター設定を次のように更新します�
 
 [Amazon MSK コンソール](https://console.aws.amazon.com/msk/)で、**Cluster configuration** の下に更新した設定を適用します。クラスターのステータスが **Active** に戻るまで待ちます。
 
-## ステップ 7. multi-VPC connectivity を有効にする {#step-7-turn-on-multi-vpc-connectivity}
+## ステップ 7. マルチ VPC 接続を有効にする {#step-7-turn-on-multi-vpc-connectivity}
 
-multi-VPC connectivity は、MSK クラスターへの PrivateLink アクセスを可能にする AWS の機能です。明示的に有効にする必要があります。
+マルチ VPC 接続は、MSK クラスターへの PrivateLink アクセスを可能にする AWS の機能です。明示的に有効にする必要があります。
 
-1. [Amazon MSK コンソール](https://console.aws.amazon.com/msk/)で、MSK クラスターの **Properties** タブに移動します。**Network settings** > **Multi-VPC connectivity** で、[multi-VPC connectivity を有効にします](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html)。
-2. VPC connectivity のクライアント認証は **SASL/SCRAM** 認証のみを使用するように設定します（TiDB Cloud 接続には IAM および mutual TLS (mTLS) 認証は不要です）。
+1. [Amazon MSK コンソール](https://console.aws.amazon.com/msk/)で、MSK クラスターの **Properties** タブに移動します。**Network settings** > **Multi-VPC connectivity** で、[マルチ VPC 接続を有効に](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-turn-on.html)します。
+2. VPC 接続のクライアント認証は **SASL/SCRAM** 認証のみを使用するように設定します（TiDB Cloud 接続には IAM および mutual TLS (mTLS) 認証は不要です）。
 
     クラスター更新が完了するまで待ちます。この操作には通常約 40 ～ 60分かかります。進行状況は MSK コンソールの **Cluster operations** タブで確認できます。クラスターのステータスが **Active** に戻るまで待ってください。
 
@@ -165,19 +165,19 @@ multi-VPC connectivity は、MSK クラスターへの PrivateLink アクセス�
 
     - Multi-VPC connectivity が有効になっていること。
     - `PublicAccess` が無効になっていること。
-    - VPC connectivity で SASL/SCRAM 認証が有効になっていること。
+    - VPC 接続で SASL/SCRAM 認証が有効になっていること。
 
-## ステップ 8. クラスター ポリシーをアタッチする {#step-8-attach-a-cluster-policy}
+## ステップ 8. クラスターポリシーをアタッチする {#step-8-attach-a-cluster-policy}
 
-リソースベースのクラスター ポリシーを MSK クラスターにアタッチして、TiDB Cloud Premium インスタンスに接続権限を付与します。
+リソースベースのクラスターポリシーを MSK クラスターにアタッチして、TiDB Cloud Premium インスタンスに接続権限を付与します。
 
 1. [Amazon MSK コンソール](https://console.aws.amazon.com/msk/) で、対象の MSK クラスターに移動します。
 2. **Security settings** で、**Edit cluster policy** をクリックします。
-3. クラスター ポリシー エディターに、リソースベースのクラスター ポリシーの JSON を貼り付け、**Save changes** をクリックします。
+3. クラスターポリシーエディターに、リソースベースのクラスターポリシーの JSON を貼り付け、**Save changes** をクリックします。
 
     > **Warning:**
     >
-    > ポリシー内の `Principal` には、TiDB Cloud Premium インスタンスの AWS アカウント ID（[前提条件](#prerequisites) で取得）を指定する必要があります。自分の AWS アカウント ID ではありません。誤った principal を指定すると、接続は失敗します。
+    > ポリシー内の `Principal` には、TiDB Cloud Premium インスタンスの AWS アカウント ID（[前提条件](#prerequisites) で取得）を指定する必要があります。自分の AWS アカウント ID ではありません。誤ったプリンシパルを指定すると、接続は失敗します。
 
     以下は参考用のポリシー例です。
 
@@ -223,6 +223,6 @@ multi-VPC connectivity は、MSK クラスターへの PrivateLink アクセス�
 
 ## ステップ 9. TiDB Cloud で PrivateLink 接続を作成する {#step-9-create-the-privatelink-connection-in-tidb-cloud}
 
-[TiDB Cloud コンソール](https://tidbcloud.com) で、MSK クラスターの ARN を使用して private link 接続を作成します。
+[TiDB Cloud コンソール](https://tidbcloud.com) で、MSK クラスターの ARN を使用してプライベートリンク接続を作成します。
 
 詳細については、[Amazon MSK Provisioned プライベートリンク接続を作成する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md#step-2-configure-the-private-endpoint-for-changefeeds) を参照してください。
