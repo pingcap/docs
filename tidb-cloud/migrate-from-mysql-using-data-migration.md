@@ -356,7 +356,7 @@ AWS does not support direct PrivateLink access to RDS or Aurora. Therefore, you 
 </details>
 
 <details>
-<summary> Set up Azure PrivateLink and private endpoint for the MySQL source database </summary>
+<summary> Set up Azure Private Link and private endpoint for the MySQL source database </summary>
 
 Azure Database for MySQL - Flexible Server supports native private endpoints. You can either enable private access (VNet Integration) during MySQL instance creation or add a private endpoint later.
 
@@ -377,7 +377,7 @@ To add a new private endpoint, take the following steps:
 
 4. In the [Azure portal](https://portal.azure.com/), return to the overview page of your MySQL Flexible Server instance (not the private endpoint object), click **JSON View** for the **Essentials** section, and then copy the resource ID for later use. The resource ID is in the `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>` format. You will use this resource ID (not the private endpoint ID) to configure TiDB Cloud DM.
 
-5. Later, when configuring TiDB Cloud DM to connect via PrivateLink, you will need to return to the Azure portal and approve the pending connection request from TiDB Cloud to this private endpoint.
+5. Later, when configuring TiDB Cloud DM to connect via Private Link, you will need to return to the Azure portal and approve the pending connection request from TiDB Cloud to this private endpoint.
 
 </details>
 
