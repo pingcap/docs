@@ -438,7 +438,7 @@ AWS は RDS またはAuroraへの PrivateLink による直接アクセスをサ�
 
 <details><summary>Azure PrivateLink と MySQL ソースデータベース用のプライベートエンドポイントを設定します。</summary>
 
-Azure Database for MySQL - Flexible Server は、ネイティブのプライベートエンドポイントをサポートしています。MySQL インスタンスの作成時にプライベートアクセス (VNet 統合) を有効にするか、後からプライベートエンドポイントを追加することができます。
+Azure Database for MySQL - Flexible Server は、ネイティブのプライベートエンドポイントをサポートしています。MySQL インスタンスの作成時にプライベートアクセス (VNet 統合) を有効にするか、後からプライベートエンドポイントを追加できます。
 
 新しいプライベートエンドポイントを追加するには、以下の手順を実行してください。
 

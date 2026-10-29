@@ -5,7 +5,7 @@ summary: New Relicとの連携により、TiDBクラスタを監視する方法�
 
 # TiDB CloudとNew Relicを統合する {#integrate-tidb-cloud-with-new-relic}
 
-TiDB CloudはNew Relicとの連携をサポートしています。TiDB Cloudを設定して、TiDBクラスタのメトリクスを[New Relic](https://newrelic.com/)に送信することができます。その後、New Relicダッシュボードでこれらのメトリクスを直接確認できます。
+TiDB CloudはNew Relicとの連携をサポートしています。TiDB Cloudを設定して、TiDBクラスタのメトリクスを[New Relic](https://newrelic.com/)に送信できます。その後、New Relicダッシュボードでこれらのメトリクスを直接確認できます。
 
 ## New Relic統合バージョン {#new-relic-integration-version}
 

@@ -111,7 +111,7 @@ TiDB Self-ManagedクラスタからTiDB Cloudへデータを移行するには�
 
 TiDB Self-ManagedクラスターからAmazon S3へDumplingを使用してデータを移行する必要があります。
 
-TiDB Self-ManagedクラスターがローカルIDCにある場合、またはDumplingサーバーとAmazon S3間のネットワークが接続されていない場合は、まずファイルをローカルストレージにエクスポートしてから、後でAmazon S3にアップロードすることができます。
+TiDB Self-ManagedクラスターがローカルIDCにある場合、またはDumplingサーバーとAmazon S3間のネットワークが接続されていない場合は、まずファイルをローカルストレージにエクスポートしてから、後でAmazon S3にアップロードできます。
 
 #### ステップ1. アップストリームのTiDB Self-ManagedクラスタのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
 

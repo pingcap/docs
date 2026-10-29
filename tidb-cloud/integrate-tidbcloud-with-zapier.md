@@ -193,7 +193,7 @@ TiDB Cloud API キーを取得するには、 [TiDB Cloud APIドキュメント]
 
 ### TiDB Cloudのトリガーはどのように重複排除を実行するのですか？ {#how-do-tidb-cloud-triggers-perform-de-duplication}
 
-Zapierのトリガーは、ポーリングAPI呼び出しと連携して、定期的に新しいデータをチェックすることができます（間隔はZapierのプランによって異なります）。
+Zapierのトリガーは、ポーリングAPI呼び出しと連携して、定期的に新しいデータをチェックできます（間隔はZapierのプランによって異なります）。
 
 TiDB Cloudのトリガーは、多数の結果を返すポーリングAPI呼び出しを提供します。しかし、その結果のほとんどはZapierによって既に確認されているものであり、つまり、ほとんどの結果は重複しています。
 
