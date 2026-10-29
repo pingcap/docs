@@ -15,7 +15,7 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 
 ### エラーメッセージ: Check whether mysql server_id has been greater than 0 {#error-message-check-whether-mysql-server-id-has-been-greater-than-0}
 
-- Amazon Aurora MySQL または Amazon RDS: `server_id`はデフォルトで設定されています。設定する必要はありません。フルデータ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
+- Amazon Aurora MySQL または Amazon RDS: `server_id`はデフォルトで設定されています。設定する必要はありません。完全データ移行と増分データ移行の両方をサポートするには、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
 - MySQL: MySQL 用に`server_id`を構成するには、 [レプリケーションソースの設定](https://dev.mysql.com/doc/refman/8.0/en/replication-howto-masterbaseconfig.html)を参照してください。
 
 ### エラーメッセージ: Check whether mysql binlog is enabled {#error-message-check-whether-mysql-binlog-is-enabled}
