@@ -35,6 +35,12 @@ DESC mysql.tidb_mlog_purge_hist;
 | `CANCEL_REQUESTED_BY` | `VARCHAR(512)` | The user or session that requested cancellation. |
 | `LAST_HEARTBEAT_TIME` | `DATETIME(6)` | The time of the latest heartbeat from the purge job. |
 
+## History retention
+
+[`tidb_mlog_purge_hist_time`](/system-variables.md#tidb_mlog_purge_hist_time) controls the retention time for purge history records. The default value is `168` hours (7 days). TiDB periodically deletes expired records for jobs that are no longer running.
+
+Cleanup also deletes the oldest non-running records when this table exceeds 1,000,000 rows. Records can therefore be removed before the configured retention time expires. To purge data from a materialized view log, use [`PURGE MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-purge-materialized-view-log.md) or configure a purge schedule.
+
 ## Examples
 
 To query the most recent materialized view log purge jobs, run the following statement:

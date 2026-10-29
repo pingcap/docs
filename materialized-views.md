@@ -46,6 +46,27 @@ TiDB uses an internal maintenance session to build a materialized view. You can 
 
 When you submit `CREATE MATERIALIZED VIEW`, TiDB records the current values of these variables in the DDL job and uses them for the initial build.
 
+### Configure background maintenance
+
+TiDB schedules automatic materialized view refresh and materialized view log purge tasks in the background. Use the following global system variables to control their concurrency on each TiDB server:
+
+- [`tidb_mview_task_max`](/system-variables.md#tidb_mview_task_max): Sets the total concurrency limit for refresh and purge tasks. The default value `0` uses the Go runtime's `GOMAXPROCS` value, with a minimum of `2`. Setting this variable to `1` also uses an effective limit of `2`.
+- [`tidb_mview_task_refresh_ratio`](/system-variables.md#tidb_mview_task_refresh_ratio): Sets the fraction of the total concurrency allocated to refresh tasks. The default value is `0.6`. TiDB allocates the remaining concurrency to purge tasks and gives each task type at least one execution slot.
+
+For example, the following configuration allows up to six background refresh tasks and four background purge tasks to run concurrently on each TiDB server:
+
+```sql
+SET GLOBAL tidb_mview_task_max = 10;
+SET GLOBAL tidb_mview_task_refresh_ratio = 0.6;
+```
+
+You can also delay new background tasks when resource usage is high:
+
+- [`tidb_mview_task_threshold_cpu`](/system-variables.md#tidb_mview_task_threshold_cpu): Sets the CPU utilization threshold relative to the CPU capacity available to the TiDB process. The default value is `0.8` (80%).
+- [`tidb_mview_task_threshold_memory`](/system-variables.md#tidb_mview_task_threshold_memory): Sets the threshold for the TiDB instance's heap memory usage as a fraction of the total memory available to the host or container. The default value is `0.8` (80%).
+
+When either enabled threshold is reached, TiDB temporarily stops starting background refresh, purge, and materialized view log statistics collection tasks. Running tasks continue to execute. Setting a threshold to `0` disables the corresponding resource check.
+
 ### Refresh a materialized view
 
 Use [`REFRESH MATERIALIZED VIEW`](/sql-statements/sql-statement-refresh-materialized-view.md) to refresh a materialized view manually. You can use `FAST` refresh to apply changes from materialized view logs, or `COMPLETE` refresh to recompute the complete result of the materialized view query.
@@ -119,6 +140,18 @@ You can configure materialized view log purge jobs using the following system va
 - [`tidb_mlog_purge_delete_tiflash_threads`](/system-variables.md#tidb_mlog_purge_delete_tiflash_threads): Sets the TiFlash thread count used by purge `DELETE` statements.
 - [`tidb_mlog_log_slow_purge`](/system-variables.md#tidb_mlog_log_slow_purge): Controls whether TiDB records purge statements in the slow query log.
 
+### Collect statistics on materialized view logs
+
+TiDB automatically collects statistics on materialized view logs. [`tidb_mlog_auto_analyze_ratio`](/system-variables.md#tidb_mlog_auto_analyze_ratio) controls when TiDB updates statistics for a log that has already been analyzed:
+
+```text
+modification ratio = modifications since the last analysis / row count at the last analysis
+```
+
+If the last analyzed row count is unavailable or zero, TiDB uses the current estimated row count as the denominator. TiDB schedules analysis when the ratio is greater than `tidb_mlog_auto_analyze_ratio`. The default value `10` means that the modification count must exceed ten times the row count. Lowering this value causes more frequent statistics collection.
+
+TiDB skips logs with fewer than 1,000 estimated rows. Logs that have never been analyzed are eligible for initial analysis once they reach this minimum, regardless of the modification ratio. Background statistics collection is also subject to the [CPU and memory thresholds](#configure-background-maintenance).
+
 ### Drop a materialized view
 
 For the syntax of these statements, see [`DROP MATERIALIZED VIEW`](/sql-statements/sql-statement-drop-materialized-view.md) and [`DROP MATERIALIZED VIEW LOG`](/sql-statements/sql-statement-drop-materialized-view-log.md).
@@ -134,6 +167,15 @@ TiDB stores materialized view maintenance metadata in the `mysql` schema. The fo
 - [`mysql.tidb_mlog_purge_hist`](/mysql-schema/mysql-schema-tidb-mlog-purge-hist.md): Stores materialized view log purge history for user queries.
 
 The `_info` tables are internal maintenance metadata tables. Do not modify TiDB system tables directly.
+
+### Configure history retention
+
+Use the following global system variables to control how long TiDB retains job history:
+
+- [`tidb_mview_refresh_hist_time`](/system-variables.md#tidb_mview_refresh_hist_time): Sets the retention time for materialized view refresh history.
+- [`tidb_mlog_purge_hist_time`](/system-variables.md#tidb_mlog_purge_hist_time): Sets the retention time for materialized view log purge history.
+
+Both variables default to `168` hours (7 days) and accept values from `1` to `8760` hours. TiDB periodically deletes expired history records for jobs that are no longer running. It also deletes the oldest non-running records when either history table exceeds 1,000,000 rows, so records can be removed before the configured retention time expires. These settings control job history retention; materialized view log data is managed by [purge jobs](#purge-a-materialized-view-log).
 
 ## Limitations
 

@@ -35,6 +35,12 @@ DESC mysql.tidb_mview_refresh_hist;
 | `CANCEL_REQUESTED_BY` | `VARCHAR(512)` | The user or session that requested cancellation. |
 | `LAST_HEARTBEAT_TIME` | `DATETIME(6)` | The time of the latest heartbeat from the refresh job. |
 
+## History retention
+
+[`tidb_mview_refresh_hist_time`](/system-variables.md#tidb_mview_refresh_hist_time) controls the retention time for refresh history records. The default value is `168` hours (7 days). TiDB periodically deletes expired records for jobs that are no longer running.
+
+Cleanup also deletes the oldest non-running records when this table exceeds 1,000,000 rows. Records can therefore be removed before the configured retention time expires.
+
 ## Examples
 
 To query the most recent materialized view refresh jobs, run the following statement:

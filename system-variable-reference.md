@@ -2617,6 +2617,13 @@ Referenced in:
 - [System Variables](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800)
 - [TiDB 8.0.0 Release Notes](/releases/release-8.0.0.md)
 
+### tidb_mlog_auto_analyze_ratio
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mlog_auto_analyze_ratio)
+
 ### tidb_mlog_log_slow_purge
 
 Referenced in:
@@ -2637,6 +2644,14 @@ Referenced in:
 
 - [Materialized Views](/materialized-views.md)
 - [System Variables](/system-variables.md#tidb_mlog_purge_delete_tiflash_threads)
+
+### tidb_mlog_purge_hist_time
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [`mysql.tidb_mlog_purge_hist`](/mysql-schema/mysql-schema-tidb-mlog-purge-hist.md)
+- [System Variables](/system-variables.md#tidb_mlog_purge_hist_time)
 
 ### tidb_mlog_purge_min_rate
 
@@ -2933,6 +2948,42 @@ Referenced in:
 
 - [Materialized Views](/materialized-views.md)
 - [System Variables](/system-variables.md#tidb_mview_maintain_import_threads)
+
+### tidb_mview_refresh_hist_time
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [`mysql.tidb_mview_refresh_hist`](/mysql-schema/mysql-schema-tidb-mview-refresh-hist.md)
+- [System Variables](/system-variables.md#tidb_mview_refresh_hist_time)
+
+### tidb_mview_task_max
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_task_max)
+
+### tidb_mview_task_refresh_ratio
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_task_refresh_ratio)
+
+### tidb_mview_task_threshold_cpu
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_task_threshold_cpu)
+
+### tidb_mview_task_threshold_memory
+
+Referenced in:
+
+- [Materialized Views](/materialized-views.md)
+- [System Variables](/system-variables.md#tidb_mview_task_threshold_memory)
 
 ### tidb_non_prepared_plan_cache_size
 
