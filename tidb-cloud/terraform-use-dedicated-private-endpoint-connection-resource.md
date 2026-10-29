@@ -58,7 +58,7 @@ The following example shows how to create a TiDB Cloud Dedicated private endpoin
     - To use the `tidbcloud_dedicated_private_endpoint_connection` resource, set the resource type as `tidbcloud_dedicated_private_endpoint_connection`.
     - For the resource name, you can define it as needed. For example, `example`.
     - If you do not know how to get the values of the required arguments, see [Connect to a TiDB Cloud Dedicated Cluster via Private Endpoint with AWS](/tidb-cloud/set-up-private-endpoint-connections.md).
-    - To get the TiDB Cloud Dedicated private endpoint connection specification information, see [tidbcloud_private_endpoint_connection (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection).
+    - To get the TiDB Cloud Dedicated private endpoint connection specification information, see [tidbcloud_dedicated_private_endpoint_connection (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
 
