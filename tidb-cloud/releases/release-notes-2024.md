@@ -433,7 +433,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     詳細については、 [リージョンの CIDR を設定する](/tidb-cloud/set-up-vpc-peering-connections.md#prerequisite-set-a-cidr-for-a-region)を参照してください。
 
-- TiDB Cloud Serverlessのユーザーは、クラスターのパブリックエンドポイントを無効にすることができるようになりました。
+- TiDB Cloud Serverlessのユーザーは、クラスターのパブリックエンドポイントを無効にできるようになりました。
 
     詳細については、 [公開エンドポイントを無効にする](/tidb-cloud/connect-via-standard-connection-serverless.md#disable-a-public-endpoint)をご覧ください。
 
