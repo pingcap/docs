@@ -222,7 +222,7 @@ For more information, see [Event filter rules](/ticdc/ticdc-filter.md#event-filt
 - Specifies the number of encoder threads used when encoding data.
 - For message queue downstreams: both the new and old architectures support configuring the number of encoder threads, with a default value of `32`.
 - For storage service downstreams ([TiCDC Classic Architecture](/ticdc/ticdc-classic-architecture.md)): `8` encoder threads are always used, and this parameter does not control them.
-- For storage service downstreams ([TiCDC New Architecture](/ticdc/ticdc-architecture.md)): support for configuring the number of encoder threads is planned starting from v8.5.9. Before v8.5.9, the number of encoder threads is fixed at `8`. Starting from v8.5.9, the number of threads is determined by the configured parameter value, which defaults to `32`.
+- For storage service downstreams ([TiCDC New Architecture](/ticdc/ticdc-architecture.md)): Starting from v8.5.9, you can configure the number of encoder threads. Before v8.5.9, the number of encoder threads is fixed at `8`. Starting from v8.5.9, the number of threads is determined by the configured parameter value, which defaults to `32`.
 
 After the new architecture supports this parameter, for existing storage service tasks where this configuration value is missing or is `0`, `8` encoder threads are still used.
 
