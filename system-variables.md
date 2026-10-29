@@ -6008,9 +6008,9 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この変数は TiDB Cloud Starter ではサポートされていません。
 
-- スコープ
-    - TiDB Self-Managed および TiDB Cloud Dedicated: SESSION | GLOBAL
-    - TiDB Cloud Essential および Premium: SESSION
+- 対象範囲
+    - TiDB Self-Managed および TiDB Cloud Dedicated: セッション | グローバル
+    - TiDB Cloud Essential および Premium: セッション
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
