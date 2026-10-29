@@ -130,7 +130,7 @@ MySQL CLI クライアントが開き、{{{ .starter }}} インスタンスに�
 ## 次は何か {#what-s-next}
 
 - さまざまな方法を使用してクラスターに接続する方法については、 [TiDB Cloud Starter または Essential クラスターに接続する](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
-- SQL エディターを使用してデータを探索する方法の詳細については、 [SQL エディターでデータを探索](/tidb-cloud/explore-data-with-sql-editor.md)を参照してください。
+- SQL エディターを使用してデータを探索する方法の詳細については、 [SQL Editor でデータを探索する](/tidb-cloud/explore-data-with-sql-editor.md)を参照してください。
 - TiDB SQL の使用法については、 [TiDB で SQL を探索する](/basic-sql-operations.md)を参照してください。
 - ゾーン間の高可用性、水平スケーリング、および[HTAP](https://en.wikipedia.org/wiki/Hybrid_transactional/analytical_processing)の利点を備えた本番で使用する場合は、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 - TiDB Cloud CLIを使用してインスタンスを管理する方法については、 [TiDB Cloud CLI Reference (PREVIEW)](/tidb-cloud/cli-reference.md)を参照してください。

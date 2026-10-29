@@ -234,7 +234,7 @@ TiDB Cloud コンソールで **Data > Import** に移動し、右上の **Expor
 TiDB Cloud コンソールでは、TiDB Cloud Essential インスタンス用のクラウドストレージ changefeed を作成できます。完全な手順については、[クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md) を参照してください。changefeed を設定する際は、次の設定に注意してください。
 
 - **S3 URI**: スナップショットと同じプレフィックス配下の `incremental/` サブパスを使用します。たとえば、`s3://<bucket>/<prefix>/incremental/` です。
-- **Bucket Access**: **AWS Role ARN** を選択し、[方法 1: Role ARN を使用する](#method-1-use-a-role-arn) の role ARN を入力するか、**AWS Access Key** を選択し、[方法 2: Access Key を使用する](#method-2-use-an-access-key) の Access Key ID と Secret Access Key を入力します。権限が `incremental/` パスを対象に含んでいることを確認してください。
+- **Bucket Access**: **AWS Role ARN** を選択し、[方法 1: Role ARN を使用する](#method-1-use-a-role-arn) のロール ARN を入力するか、**AWS Access Key** を選択し、[方法 2: Access Key を使用する](#method-2-use-an-access-key) の Access Key ID と Secret Access Key を入力します。権限が `incremental/` パスを対象に含んでいることを確認してください。
 - **Start Replication Position**: **Start replication from a specific TSO** を選択し、[ステップ 2. Amazon S3 に完全スナップショットをエクスポートする](#step-2-export-full-snapshot-to-amazon-s3) で記録したスナップショット TSO を入力します。
 - **Data Format**: **Canal-JSON** を選択し、**Enable TiDB Extension** と **Enable Canal Content Compatibility** の両方を有効にします。これらの設定により、TiDB Cloud Lake 統合と互換性のある形式でデータが生成されます。
 - **Changefeed Specification**: レプリケーションスループットの要件を満たす容量を選択します。

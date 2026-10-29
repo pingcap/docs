@@ -5,7 +5,7 @@ summary: TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデー
 
 # 変更フィード {#changefeed}
 
-TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサービスへデータをストリーミングできます。現在、 TiDB Cloud EssentialはApache Kafka と MySQL、および cloud storage へのデータストリーミングをサポートしています。
+TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサービスへデータをストリーミングできます。現在、 TiDB Cloud EssentialはApache Kafka と MySQL、およびクラウドストレージへのデータストリーミングをサポートしています。
 
 > **Note:**
 >

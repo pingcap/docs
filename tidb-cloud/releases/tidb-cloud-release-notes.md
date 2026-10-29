@@ -16,14 +16,14 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - TiDB Cloud Essential は、`Tokyo (ap-northeast-1)` で **Regional High Availability**（パブリックプレビュー）をサポートするようになりました。追加のリージョンのサポートは今後段階的に展開されます。
 
-        サポートされているリージョンで新しい TiDB Cloud Essential インスタンスを作成する際に、**Zonal**（単一の Availability Zone）高可用性と **Regional**（複数の Availability Zones）高可用性のいずれかを選択できます。
+        サポートされているリージョンで新しい TiDB Cloud Essential インスタンスを作成する際に、**Zonal**（単一のアベイラビリティゾーン）高可用性と **Regional**（複数のアベイラビリティゾーン）高可用性のいずれかを選択できます。
 
-        Regional High Availability により、Availability Zone 障害に対する耐障害性が強化されます。TiDB Cloud Essential では、新しい regional RCU 価格は以前の価格より高くなり、zonal RCU の価格は変更されません。新しい Regional 価格の適用時期は次のとおりです。
+        Regional High Availability により、アベイラビリティゾーン障害に対する耐障害性が強化されます。TiDB Cloud Essential では、新しいリージョナル RCU の価格は以前の価格より高くなり、ゾーナル RCU の価格は変更されません。新しい Regional 価格の適用時期は次のとおりです。
 
         - 2026年10月26日より前に作成された Regional High Availability を備えた TiDB Cloud Essential インスタンスについては、新しい価格は 2027年1月に適用されます。
         - 2026年10月26日以降に作成された TiDB Cloud Essential インスタンスについては、新しい価格は作成時に直ちに適用されます。
 
-      RCU の価格の詳細については、[TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください.
+      RCU の価格の詳細については、[TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください。
 
 ## 2026年10月20日 {#october-20-2026}
 
