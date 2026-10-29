@@ -168,20 +168,60 @@ This mode hashes the evaluated partition key and routes rows with the same parti
 
 Hash redistribution adds a network shuffle. Enable it for distributed or parallel loads where improved block layout outweighs the shuffle cost; it may not benefit small, single-writer inserts.
 
-## Adding Partitioning to an Existing Table
+> **Note:**
+>
+> Unsorted input is slow without hash distribution. With the default `WRITE_DISTRIBUTION_MODE = 'none'`, rows are written in the order they arrive. If the input mixes partition values row by row, {{{ .lake }}} writes many very small blocks and the load becomes slow. Either set `WRITE_DISTRIBUTION_MODE = 'hash'` on the table, or sort the input by the partition key:
+>
+> ```sql
+> INSERT INTO events SELECT ... FROM source ORDER BY DATE_TRUNC(day, event_time);
+> ```
 
-Add a partition key to an existing Fuse table with `ALTER TABLE`:
+## Adding a Partition Key to an Existing Table
+
+`ALTER TABLE ... PARTITION BY` changes only the table definition. Existing data is not redistributed, and `OPTIMIZE TABLE` or `RECLUSTER` does not redistribute it later. Only data written after the change is partitioned.
+
+| Table | Result |
+|---|---|
+| Empty | Recommended. All data loaded afterwards is partitioned. |
+| Has data | Succeeds, but existing data is not pruned, and `UPDATE`, `DELETE`, or `MERGE INTO` on existing rows fails with `serialized block contains more than one partition`. Rewrite the data as shown below. |
+| Has the same key | No change. |
+| Has a different key | Fails with `PARTITION BY is already defined ...; changing it is not supported`. Drop the key first. |
+| Not a Fuse table | Fails with `ALTER TABLE PARTITION BY is not supported for engine ...`. |
+
+**Empty table:** add the key, then load.
 
 ```sql
-ALTER TABLE events
-PARTITION BY (DATE_TRUNC(day, event_time));
+ALTER TABLE events PARTITION BY (DATE_TRUNC(month, event_time));
+INSERT INTO events SELECT * FROM source;
 ```
 
-Rows written before this statement remain visible, but their existing segments do not gain partition metadata or get physically reorganized. New writes use the partitioned layout.
+**Table with data:** add the key, then rewrite the table. Keep the `ORDER BY`; without it, the rewrite writes very small blocks and is slow.
 
-> **Important:**
->
-> A partition key can be added only once. Repeating the same normalized definition is harmless, but changing an existing partition key is not supported. Choose the key carefully before applying it to a production table.
+```sql
+ALTER TABLE events PARTITION BY (DATE_TRUNC(month, event_time));
+INSERT OVERWRITE events SELECT * FROM events ORDER BY DATE_TRUNC(month, event_time);
+```
+
+**Change the key:** drop it, add the new one, then rewrite the table.
+
+```sql
+ALTER TABLE events DROP PARTITION KEY;
+ALTER TABLE events PARTITION BY (DATE_TRUNC(day, event_time));
+INSERT OVERWRITE events SELECT * FROM events ORDER BY DATE_TRUNC(day, event_time);
+```
+
+`DROP PARTITION KEY` does not rewrite data. It stops partition pruning and resets `WRITE_DISTRIBUTION_MODE` to `'none'`.
+
+## Updating the Partition Key Value of a Row
+
+`UPDATE` and `MERGE INTO` can change the partition key value of a row. The row moves to the partition of its new value. No extra action is needed.
+
+```sql
+-- Moves the row from the September partition to the October partition.
+UPDATE events SET event_time = '2026-10-05 12:00:00' WHERE event_id = 42;
+```
+
+Moving a row rewrites it, so it costs more than an in-place update.
 
 ## Expression Rules and Table Changes
 
