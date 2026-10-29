@@ -106,18 +106,34 @@ If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc
 - If your PD version is v4.0.8 or earlier, refer to [PD issue #3128](https://github.com/tikv/pd/issues/3128) for details.
 - If your PD is upgraded from v4.0.8 or an earlier version to a later version, refer to [PD issue #3366](https://github.com/tikv/pd/issues/3366) for details.
 
-## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error. Why?
+## How do I handle the `ErrMessageTooLarge` error returned by Kafka sink?
 
-To control the size of messages that TiCDC sends to Kafka, you can configure the `max-message-bytes` parameter in the Sink URI. However, you must also ensure that your Kafka server is configured to accept messages of that size. If a message from TiCDC exceeds the Kafka server's limit, Kafka returns a `Message was too large` error. To increase the message size limit on the Kafka server, add the following configuration to its configuration file.
+How you handle this error depends on the TiCDC version:
 
+**v8.5.8 and later versions**: increase the Kafka topic's `max.message.bytes` value based on the message size reported in the error. When the Kafka sink is rebuilt, it reads the configuration again, and the changefeed automatically resumes replication.
+
+If the changefeed does not resume automatically, make sure that the Kafka account used by the changefeed has permission to read the topic and broker configurations. For more information, see [Kafka message size limit](/ticdc/ticdc-sink-to-kafka.md#kafka-message-size-limit).
+
+**Versions earlier than v8.5.8**:
+
+1. Determine the size of the message to be sent from the error message.
+2. Set the Kafka topic's `max.message.bytes` value to at least the message size.
+3. Pause the changefeed, set `max-message-bytes` to the same value as `max.message.bytes`, and then resume the changefeed.
+
+When adjusting the Kafka message size limit, also check the following related configurations:
+
+```ini
+# The maximum message size accepted by the topic
+max.message.bytes=<a value no smaller than the message to be sent>
+# The maximum message size accepted by the broker; configure this when using the broker default limit
+message.max.bytes=<a value no smaller than the message to be sent>
+# The maximum message size that the broker can replicate
+replica.fetch.max.bytes=<a value no smaller than message.max.bytes>
+# The maximum message size that the consumer can read
+fetch.message.max.bytes=<a value no smaller than the effective Kafka message size limit>
 ```
-# The maximum byte number of a message that the broker receives
-message.max.bytes=2147483648
-# The maximum byte number of a message that the broker copies
-replica.fetch.max.bytes=2147483648
-# The maximum message byte number that the consumer side reads
-fetch.message.max.bytes=2147483648
-```
+
+If you do not want to increase the Kafka message size limit, configure `large-message-handle-option` to handle large messages using Claim-Check or by sending only the Handle Key. For more information, see [Handle messages that exceed the Kafka topic limit](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit).
 
 ## How can I find out whether a DDL statement fails to execute in downstream during TiCDC replication? How to resume the replication?
 
@@ -151,5 +167,5 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://roo
 This error is typically caused by the connection failure between TiCDC and the Kafka cluster. To troubleshoot, you can check the Kafka logs and network status. One possible reason is that you did not specify the correct `kafka-version` parameter when creating the replication task, causing the Kafka client inside TiCDC to use the wrong Kafka API version when accessing the Kafka server. You can fix this issue by specifying the correct `kafka-version` parameter in the [`--sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka) configuration. For example:
 
 ```shell
-cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri "kafka://127.0.0.1:9092/test?topic=test&protocol=open-protocol&kafka-version=2.4.0" 
+cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri "kafka://127.0.0.1:9092/test?topic=test&protocol=open-protocol&kafka-version=2.4.0"
 ```
