@@ -123,11 +123,11 @@ summary: クラスターリソースを使用してTiDB Cloudクラスターを�
 
 これで、出力から利用可能なすべてのプロジェクトを取得できます。必要なプロジェクトIDを1つコピーしてください。
 
-## `tidbcloud_cluster_specs`データソースを使用してクラスター仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
+## `tidbcloud_cluster_specs`データソースを使用してクラスターの仕様情報を取得する {#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source}
 
-クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウドプロバイダー、リージョン、ノードサイズなど) が含まれるクラスター仕様情報を取得する必要があります。
+クラスターを作成する前に、使用可能なすべての構成値 (サポートされているクラウドプロバイダー、リージョン、ノードサイズなど) が含まれるクラスターの仕様情報を取得する必要があります。
 
-クラスター仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データソースを使用できます。
+クラスターの仕様情報を取得するには、次のように`tidbcloud_cluster_specs`データソースを使用できます。
 
 1. `main.tf`ファイルを次のように編集します。
 
@@ -325,7 +325,7 @@ summary: クラスターリソースを使用してTiDB Cloudクラスターを�
 
     - クラスターリソースを使用するには、リソースタイプを`tidbcloud_cluster`に設定します。
     - リソース名は必要に応じて定義できます。例： `example_cluster` 。
-    - リソースの詳細については、プロジェクト ID とクラスター仕様情報に従って設定できます。
+    - リソースの詳細については、プロジェクト ID とクラスターの仕様情報に従って設定できます。
 
 3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
