@@ -610,7 +610,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 1. [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)際に使用される`cluster.tf`ファイルで、 `components`構成を編集します。
 
-    たとえば、TiDB 用にさらに 1つのノード、TiKV 用にさらに 3つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスタ仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)することができます)、およびTiFlash用にさらに 1つのノードを追加するには、次のように構成を編集します。
+    たとえば、TiDB 用にさらに 1つのノード、TiKV 用にさらに 3つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスタ仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)できます)、およびTiFlash用にさらに 1つのノードを追加するには、次のように構成を編集します。
 
    ```
    components = {
