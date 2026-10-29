@@ -22,10 +22,6 @@ Data Service (PREVIEW) のエンドポイントは、SQL文を実行するよう
 
 Data Serviceでは、エンドポイントを自動生成したり、手動で作成したり、定義済みのシステムエンドポイントを追加したりできます。
 
-> **Tip:**
->
-> SQL エディターで SQL ファイルからエンドポイントを作成することもできます。詳細については、 [SQLファイルからエンドポイントを生成する](/tidb-cloud/explore-data-with-chat2query.md#generate-an-endpoint-from-a-sql-file)を参照してください。
-
 ### エンドポイントを自動的に生成する {#generate-an-endpoint-automatically}
 
 TiDB Cloud Data Serviceでは、以下のようにして1つまたは複数のエンドポイントを一度に自動的に生成できます。

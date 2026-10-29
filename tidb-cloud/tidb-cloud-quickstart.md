@@ -26,7 +26,7 @@ category: quick start
 
 3. 新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
 
-    - このデフォルト クラスターでTiDB Cloud機能をすぐに試すには、 [ステップ2: AI支援SQLエディターを試す](#step-2-try-ai-assisted-sql-editor)に進みます。
+    - このデフォルト クラスターでTiDB Cloud機能をすぐに試すには、 [ステップ2: SQL エディターを試す](#step-2-try-sql-editor)に進みます。
     - 独自に新しいTiDB Cloud Starter クラスターを作成するには、次の手順に従います。
 
         1. **Create Resource**をクリックします。

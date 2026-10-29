@@ -7,12 +7,6 @@ summary: TiDB Cloud Data Serviceを使用してHTTPSリクエストでデータ�
 
 Data Service（PREVIEW）を使用すると、カスタムAPIエンドポイントを使用してHTTPSリクエスト経由でTiDB Cloudデータにアクセスでき、HTTPSに対応したあらゆるアプリケーションやサービスとシームレスに統合できます。
 
-> **Tip:**
->
-> TiDB Cloudは、 TiDB Cloud Starterインスタンス向けにChat2Query APIを提供しています。有効化すると、 TiDB Cloudは自動的に**Chat2Query**という名前のシステムデータアプリと、Data Service内にChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えることにより、AIにSQL文を生成および実行させることができます。
->
-> 詳細については、 [Chat2Query API を使い始めましょう](/tidb-cloud/use-chat2query-api.md)を参照してください。
-
 このドキュメントでは、データアプリの作成、開発、テスト、デプロイ、エンドポイントの呼び出しなど、 TiDB Cloud Data Service（PREVIEW）を迅速に使い始める方法について説明します。データアプリとは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントの集合です。
 
 ## 始める前に {#before-you-begin}
