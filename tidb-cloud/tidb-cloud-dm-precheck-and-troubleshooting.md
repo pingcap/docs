@@ -116,7 +116,7 @@ The following are alerts about Data Migration:
 
     Recommended action: resume the data migration job or ignore this alert.     
 
-- "Replication lag is larger than 10 minutes and stilling increasing for more than 20 minutes"
+- "Replication lag is larger than 10 minutes and still increasing for more than 20 minutes"
 
     - Recommended action: contact [TiDB Cloud Support](/tidb-cloud/tidb-cloud-support.md) for help.
 
