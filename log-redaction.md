@@ -65,7 +65,11 @@ To enable log redaction in the TiKV side, set the value of [`security.redact-inf
 
 ## Log redaction in PD side
 
-To enable log redaction in the PD side, set the value of [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) to `true` or `"marker"`. This configuration value defaults to `false`, which means that log redaction is disabled.
+To enable log redaction in the PD side, set the value of [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50) to `true` or `"marker"`. Starting from v9.0.0, if this configuration item is not explicitly set in the configuration file, it defaults to `true`, which means that log redaction is enabled. Before v9.0.0, the default value is `false`.
+
+Redaction applies only to logs and outputs that support redaction, including PD logs, operator additional info, [Online Unsafe Recovery](/online-unsafe-recovery.md) plans, and some error messages returned to clients. Keys in operator additional info are displayed as a redaction placeholder rather than the raw key. Audit logs are not affected by this configuration item and still record the original request content. A small number of other logs might still contain raw keys. See [#11406](https://github.com/tikv/pd/issues/11406).
+
+This configuration item cannot be changed online. Restart PD after changing it. TSO, Scheduling, and other PD microservices use the same setting, and each service takes the default value of `true` when the item is not explicitly set in its configuration. TiKV and TiDB log redaction still default to disabled; when troubleshooting, disable redaction for each component and restart it as needed.
 
 ## Log redaction in TiFlash side
 
