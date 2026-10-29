@@ -28,7 +28,7 @@ AWS アカウント ID とアベイラビリティゾーンを表示するには
 
 ## ステップ1. Confluent Cloudネットワークをセットアップする {#step-1-set-up-a-confluent-cloud-network}
 
-使用する Confluent Cloud ネットワークを特定するか、[AWS 上に新しい Confluent Cloud ネットワークを作成](https://docs.confluent.io/cloud/current/networking/ccloud-network/aws.html#create-ccloud-network-aws)します。
+使用する Confluent Cloud ネットワークを決めるか、[AWS 上に新しい Confluent Cloud ネットワークを作成](https://docs.confluent.io/cloud/current/networking/ccloud-network/aws.html#create-ccloud-network-aws)します。
 
 Confluent Cloud ネットワークは次の要件を満たしている必要があります。
 

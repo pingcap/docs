@@ -30,7 +30,7 @@ AWSアカウントIDとアベイラビリティゾーンを表示するには、
 
 ## ステップ1. Amazon RDSインスタンスをセットアップする {#step-1-set-up-the-amazon-rds-instance}
 
-使用する Amazon RDS インスタンスを特定するか、 [新しいものを作成](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)します。
+使用する Amazon RDS インスタンスを決めるか、 [新しいものを作成](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html)します。
 
 Amazon RDSインスタンスは、以下の要件を満たす必要があります。
 
