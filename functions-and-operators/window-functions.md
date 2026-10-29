@@ -10,8 +10,8 @@ TiDBにおけるウィンドウ関数の使用方法は、MySQL 8.0と同様で�
 TiDB では、次のシステム変数を使用してウィンドウ関数を制御できます。
 
 - [`tidb_enable_window_function`](/system-variables.md#tidb_enable_window_function) : ウィンドウ関数はパーサー内で追加の[キーワード](/keywords.md)予約するため、TiDB はこの変数を使用してウィンドウ関数を無効化します。TiDB のアップグレード後に SQL 文の解析エラーが発生する場合は、この変数を`OFF`に設定してみてください。
-- [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function) : この変数を使用して、ウィンドウ関数のパイプライン実行アルゴリズムを無効にすることができます。
-- [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision) : この変数を使用して、ウィンドウ関数の高精度モードを無効にすることができます。
+- [`tidb_enable_pipelined_window_function`](/system-variables.md#tidb_enable_pipelined_window_function) : この変数を使用して、ウィンドウ関数のパイプライン実行アルゴリズムを無効にできます。
+- [`windowing_use_high_precision`](/system-variables.md#windowing_use_high_precision) : この変数を使用して、ウィンドウ関数の高精度モードを無効にできます。
 
 [ここに記載されている](/tiflash/tiflash-supported-pushdown-calculations.md)ウィンドウ関数は、TiFlashにプッシュダウンできます。
 

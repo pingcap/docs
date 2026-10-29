@@ -173,7 +173,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
     数分以内に、 TiFlashノードのCPUとディスクIOリソース使用量が大幅に増加し、 TiFlashによるレプリカ作成速度が速くなります。同時に、TiKVノードのCPUとディスクIOリソース使用量も増加します。
 
-    この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンラインサービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にすることができます。
+    この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンラインサービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にできます。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer

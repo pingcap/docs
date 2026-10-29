@@ -189,7 +189,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-このタイプのエラーの原因は、TiDBパーサーがアップストリームから送信されたDDL文（例えば`ALTER EVENT`）を解析できないため、 `sql-skip`が期待どおりに機能しないことです。設定ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を追加してこれらの文をフィルタリングし、 `schema-pattern: "*"`を設定することができます。DM v2.0.1以降、DMは`EVENT`に関連する文を事前にフィルタリングします。
+このタイプのエラーの原因は、TiDBパーサーがアップストリームから送信されたDDL文（例えば`ALTER EVENT`）を解析できないため、 `sql-skip`が期待どおりに機能しないことです。設定ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を追加してこれらの文をフィルタリングし、 `schema-pattern: "*"`を設定できます。DM v2.0.1以降、DMは`EVENT`に関連する文を事前にフィルタリングします。
 
 DM v6.0以降、 `sql-skip`と`handle-error`が`binlog`に置き換えられました。この問題を回避するには、代わりに`binlog`コマンドを使用してください。
 

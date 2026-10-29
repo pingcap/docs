@@ -99,7 +99,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 
 ## 公開エンドポイントを無効にする {#disable-a-public-endpoint}
 
-TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパブリックエンドポイントを使用する必要がない場合は、インターネットからの接続を防止するために、そのエンドポイントを無効にすることができます。
+TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパブリックエンドポイントを使用する必要がない場合は、インターネットからの接続を防止するために、そのエンドポイントを無効にできます。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
@@ -115,7 +115,7 @@ TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパブリッ
 >
 > パブリックエンドポイントを無効にしても、既存の接続には影響しません。インターネットからの新規接続のみを防止します。
 
-パブリックエンドポイントを無効化した後、再度有効化することができます。
+パブリックエンドポイントを無効化した後、再度有効化できます。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 

@@ -186,7 +186,7 @@ mysql> select table_name,index_name,key_data,row_data from conflict_error_v3 lim
 10 rows in set (0.14 sec)
 ```
 
-保持する必要のあるレコードを手動で特定し、それらのレコードをテーブルに挿入することができます。
+保持する必要のあるレコードを手動で特定し、それらのレコードをテーブルに挿入できます。
 
 ## インポート中のスケジュール一時停止の範囲 {#scope-of-pausing-scheduling-during-import}
 

@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-paginate-results/','/ja/tidbcloud/dev-guide
 
 ## クエリ結果をページ区切りする {#paginate-query-results}
 
-TiDBでは、 `LIMIT`文を使ってクエリ結果をページ区切りすることができます。例えば：
+TiDBでは、 `LIMIT`文を使ってクエリ結果をページ区切りできます。例えば：
 
 ```sql
 SELECT * FROM table_a t ORDER BY gmt_modified DESC LIMIT offset, row_count;
@@ -260,7 +260,7 @@ ORDER BY page_num;
 
 クラスター化インデックステーブル (「インデックス構成テーブル」とも呼ばれます) の場合、 `concat`関数を使用して複数の列の値をキーとして連結し、ウィンドウ関数を使用してページング情報を照会できます。
 
-この時点ではキーは文字列であり、 `min`と`max`集約関数を介したスライスで正しい`start_key`と`end_key`を取得するには、文字列の長さが常に一定であることを確認する必要があります。文字列連結のフィールドの長さが固定でない場合は、 `LPAD`関数を使用してパディングすることができます。
+この時点ではキーは文字列であり、 `min`と`max`集約関数を介したスライスで正しい`start_key`と`end_key`を取得するには、文字列の長さが常に一定であることを確認する必要があります。文字列連結のフィールドの長さが固定でない場合は、 `LPAD`関数を使用してパディングできます。
 
 たとえば、次のようにして`ratings`テーブル内のデータのページング バッチを実装できます。
 

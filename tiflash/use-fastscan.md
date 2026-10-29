@@ -84,7 +84,7 @@ set session tiflash_fastscan=ON;
 set global tiflash_fastscan=ON;
 ```
 
-次のステートメントを使用して FastScan を無効にすることができます。
+次のステートメントを使用して FastScan を無効にできます。
 
 ```
 set session tiflash_fastscan=OFF;

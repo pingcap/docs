@@ -294,7 +294,7 @@ INSERT INTO tickets VALUES (2, "Ticket 2", 1);
 INSERT INTO tickets VALUES (3, "Ticket 3", 2);
 ```
 
-サブクエリを使用して作成者名に基づいて一致するユーザーIDを検索し、これらのIDを外部クエリで使用して関連するチケット情報を取得および結合することができます。
+サブクエリを使用して作成者名に基づいて一致するユーザーIDを検索し、これらのIDを外部クエリで使用して関連するチケット情報を取得および結合できます。
 
 ```sql
 SELECT t.title AS TICKET_TITLE, u.id AS AUTHOR_ID, u.name AS AUTHOR_NAME FROM tickets t

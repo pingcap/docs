@@ -279,7 +279,7 @@ mysql> CREATE TABLE customers (
 );
 ```
 
-多値インデックスを一意インデックスとして定義することができます。
+多値インデックスを一意インデックスとして定義できます。
 
 ```sql
 mysql> CREATE TABLE customers (
