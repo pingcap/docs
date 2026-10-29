@@ -67,7 +67,7 @@ TiFlash Proxyはv6.1.0（TiKV v6.0.0と連動）にアップグレードされ�
 
 **テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
 
-対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製できます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 ### 動的プルーニング {#dynamic-pruning}
 
@@ -121,7 +121,7 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 
 **テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
 
-対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製できます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 ## v6.x または v7.x から`storage.format_version = 5`が設定された v7.3 へ {#from-v6-x-or-v7-x-to-v7-3-with-storage-format-version-5-configured}
 

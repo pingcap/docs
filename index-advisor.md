@@ -17,7 +17,7 @@ TiDB v8.5.0では、クエリパフォーマンスを向上させるインデッ
 
 ## `RECOMMEND INDEX`文を使用してインデックスを推奨する {#recommend-indexes-using-the-recommend-index-statement}
 
-TiDB では、インデックスアドバイザ タスク用の`RECOMMEND INDEX` SQL文が導入されました。 `RUN`サブコマンドは、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。 `FOR`オプションを使用すると、以前に実行されていない特定の SQL文を対象にすることができます。さらに、[オプション](#recommend-index-options)の を使用して高度な制御を行うこともできます。構文は次のとおりです。
+TiDB では、インデックスアドバイザ タスク用の`RECOMMEND INDEX` SQL文が導入されました。 `RUN`サブコマンドは、過去のワークロードを分析し、推奨事項をシステムテーブルに保存します。 `FOR`オプションを使用すると、以前に実行されていない特定の SQL文を対象にできます。さらに、[オプション](#recommend-index-options)の を使用して高度な制御を行うこともできます。構文は次のとおりです。
 
 ```sql
 RECOMMEND INDEX RUN [ FOR <SQL> ] [<Options>] 

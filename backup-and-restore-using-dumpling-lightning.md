@@ -7,7 +7,7 @@ summary: DumplingとTiDB Lightningを使用して、TiDBの完全なデータを
 
 このドキュメントでは、 DumplingとTiDB Lightningを使用してTiDBの完全なデータをバックアップおよび復元する方法について説明します。
 
-少量のデータ（例えば、50 GiB未満）をバックアップする必要があり、高速なバックアップ速度を必要としない場合は、 [Dumpling](/dumpling-overview.md)を使用してTiDBデータベースからデータをエクスポートし、その後[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して別のTiDBデータベースにデータを復元することができます。
+少量のデータ（例えば、50 GiB未満）をバックアップする必要があり、高速なバックアップ速度を必要としない場合は、 [Dumpling](/dumpling-overview.md)を使用してTiDBデータベースからデータをエクスポートし、その後[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して別のTiDBデータベースにデータを復元できます。
 
 大規模なデータベースをバックアップする必要がある場合は、 [BR](/br/backup-and-restore-overview.md)を使用することをお勧めします。Dumplingは大規模なデータベースもエクスポートできますが、 BRの方が適しています。
 

@@ -21,9 +21,9 @@ TiDB バージョン: 7.3.0
 
 - TiFlashはレプリカ選択戦略をサポートしています [#44106](https://github.com/pingcap/tidb/issues/44106) @[XuHuaiyu](https://github.com/XuHuaiyu)
 
-    バージョン 7.3.0 より前のTiFlashでは、パフォーマンスを最大化するために、すべてのノードのレプリカを使用してデータスキャンと MPP 計算を行っていました。バージョン 7.3.0 以降では、 TiFlash はレプリカ選択戦略を導入し、システム変数[`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を使用して設定できるようになりました。この戦略では、ノードの[ゾーン属性](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)に基づいて特定のレプリカを選択し、データスキャンと MPP 計算のために特定のノードをスケジュールすることができます。
+    バージョン 7.3.0 より前のTiFlashでは、パフォーマンスを最大化するために、すべてのノードのレプリカを使用してデータスキャンと MPP 計算を行っていました。バージョン 7.3.0 以降では、 TiFlash はレプリカ選択戦略を導入し、システム変数[`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を使用して設定できるようになりました。この戦略では、ノードの[ゾーン属性](/schedule-replicas-by-topology-labels.md#optional-configure-labels-for-tidb)に基づいて特定のレプリカを選択し、データスキャンと MPP 計算のために特定のノードをスケジュールできます。
 
-    複数のデータセンターにデプロイされ、各データセンターに完全なTiFlashデータレプリカが存在するクラスターの場合、この戦略を設定して、現在のデータセンターのTiFlashレプリカのみを選択することができます。これにより、データスキャンとMPP計算は現在のデータセンター内のTiFlashノードでのみ実行されるため、データセンター間での過剰なネットワークデータ転送を回避できます。
+    複数のデータセンターにデプロイされ、各データセンターに完全なTiFlashデータレプリカが存在するクラスターの場合、この戦略を設定して、現在のデータセンターのTiFlashレプリカのみを選択できます。これにより、データスキャンとMPP計算は現在のデータセンター内のTiFlashノードでのみ実行されるため、データセンター間での過剰なネットワークデータ転送を回避できます。
 
     詳細については、 [ドキュメント](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 

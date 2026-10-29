@@ -5,7 +5,7 @@ summary: PingCAP Clinic診断サービス (PingCAP Clinic) は、 TiUPを使用�
 
 # PingCAP Clinicを使用したクラスターのトラブルシューティング {#troubleshoot-clusters-using-pingcap-clinic}
 
-TiUPを使用して導入された TiDB クラスターおよび DM クラスターの場合、 PingCAP Clinic診断サービス (PingCAP Clinic) を使用してクラスターの問題をリモートでトラブルシューティングし、 [Diag](https://github.com/pingcap/diag)および Clinic Server を使用してクラスターの状態をローカルで簡単にチェックすることができます。
+TiUPを使用して導入された TiDB クラスターおよび DM クラスターの場合、 PingCAP Clinic診断サービス (PingCAP Clinic) を使用してクラスターの問題をリモートでトラブルシューティングし、 [Diag](https://github.com/pingcap/diag)および Clinic Server を使用してクラスターの状態をローカルで簡単にチェックできます。
 
 > **Note:**
 >
@@ -18,7 +18,7 @@ TiUPを使用して導入された TiDB クラスターおよび DM クラスタ
 - [クラスタの問題をリモートでトラブルシューティングする](#troubleshoot-cluster-problems-remotely)
 
     - クラスターに問題があり、PingCAP から[サポートを受ける](/support.md)必要がある場合は、リモート トラブルシューティングを容易にするために、Diag を使用して診断データを収集し、収集したデータを Clinic Server にアップロードし、データアクセス リンクをテクニカルサポート スタッフに提供するための次の操作を実行できます。
-    - クラスターに何らかの問題があり、すぐに問題を分析できない場合は、Diag を使用してデータを収集し、後で分析できるように保存することができます。
+    - クラスターに何らかの問題があり、すぐに問題を分析できない場合は、Diag を使用してデータを収集し、後で分析できるように保存できます。
 
 - [ローカルでクラスタのステータスをクイックチェックする](#perform-a-quick-check-on-the-cluster-status-locally)
 
@@ -118,7 +118,7 @@ PingCAP Clinicを使用する前に、Diag（ PingCAP Clinicが提供するデ�
 
 4. (オプション) ログの秘匿化を有効にします。
 
-    TiDBが詳細なログ情報を提供する場合、ログに機密情報（ユーザーデータなど）が出力される可能性があります。ローカルログおよびClinic Serverへの機密情報の漏洩を防ぎたい場合は、TiDB側でログの秘匿化を有効にすることができます。詳細については、 [ログの秘匿化](/log-redaction.md#log-redaction-in-tidb-side)をご覧ください。
+    TiDBが詳細なログ情報を提供する場合、ログに機密情報（ユーザーデータなど）が出力される可能性があります。ローカルログおよびClinic Serverへの機密情報の漏洩を防ぎたい場合は、TiDB側でログの秘匿化を有効にできます。詳細については、 [ログの秘匿化](/log-redaction.md#log-redaction-in-tidb-side)をご覧ください。
 
 ## クラスタの問題をリモートでトラブルシューティングする {#troubleshoot-cluster-problems-remotely}
 
@@ -280,7 +280,7 @@ tiup diag upload
     Download URL: "https://clinic.pingcap.com.cn/portal/#/orgs/4/clusters/XXXX"
     ```
 
-3. アップロードが完了したら、 `Download URL`のリンクを開いてアップロードされたデータを確認するか、以前に連絡した PingCAP テクニカルサポート スタッフにリンクを送信することができます。
+3. アップロードが完了したら、 `Download URL`のリンクを開いてアップロードされたデータを確認するか、以前に連絡した PingCAP テクニカルサポート スタッフにリンクを送信できます。
 
 ## ローカルでクラスタのステータスをクイックチェックする {#perform-a-quick-check-on-the-cluster-status-locally}
 

@@ -70,7 +70,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - `INSERT INTO SELECT`文を使用したTiFlashクエリ結果の保存をサポート (実験的) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi)
 
-    TiDB v6.5.0以降、 `INSERT INTO SELECT`文の`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`で指定したTiDBテーブルに簡単に保存して、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。例えば、次のようになります。
+    TiDB v6.5.0以降、 `INSERT INTO SELECT`文の`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`で指定したTiDBテーブルに簡単に保存して、さらに分析できます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。例えば、次のようになります。
 
     ```sql
     INSERT INTO t2 SELECT Mod(x,y) FROM t1;

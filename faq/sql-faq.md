@@ -26,7 +26,7 @@ summary: TiDB SQLに関連する FAQ について説明します。
 
 ## 適切なクエリプランを選択するにはどうすればよいですか？ヒントを使用する必要がありますか？それとも、ヒントを使用できますか？ {#how-to-choose-the-right-query-plan-do-i-need-to-use-hints-or-can-i-use-hints}
 
-TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入することができます。
+TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入できます。
 
 さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL文のクエリプランを修正することもできます。
 
@@ -34,7 +34,7 @@ TiDBにはコストベースのオプティマイザが搭載されています�
 
 TiDB v7.5.0以降のバージョンでは、 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)ステートメントを使用して特定のSQL文を終了できます。詳細については、 [予想以上にリソースを消費するクエリ（ランナウェイクエリ）を管理する](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
 
-TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限することができます。これにより、ステートメントはしきい値によって自動的に終了します。
+TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限できます。これにより、ステートメントはしきい値によって自動的に終了します。
 
 たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用して、ステートメントの実行時間を 1 ミリ秒に制限できます。
 
@@ -211,7 +211,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
 >
 > TiDB v6.6.0以降、 [リソース管理](/tidb-resource-control-ru-groups.md)サポートされます。この機能を使用すると、異なるリソースグループで異なる優先度のSQL文を実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、優先度の異なるSQL文のスケジュールをより適切に制御できます。リソース制御を有効にすると、文の優先度は適用されなくなります。異なるSQL文のリソース使用量を管理するには、リソース制御を使用することをお勧めします。
 
-上記の2つのパラメータをTiDBのDMLと組み合わせて使用することができます。例えば：
+上記の2つのパラメータをTiDBのDMLと組み合わせて使用できます。例えば：
 
 1. データベースに SQL文を記述して優先順位を調整します。
 

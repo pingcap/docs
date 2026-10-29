@@ -172,7 +172,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
     | トピック    | `Create`         | チェンジフィードの開始時にトピックを作成しようとします  |
     | トピック    | `Write`          | トピックにデータを送信する                |
 
-    変更フィードを作成または開始するときに、指定された Kafka トピックがすでに存在する場合は、 `Describe`および`Create`権限を無効にすることができます。
+    変更フィードを作成または開始するときに、指定された Kafka トピックがすでに存在する場合は、 `Describe`および`Create`権限を無効にできます。
 
 ### TiCDC を Kafka Connect (Confluent Platform) と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 

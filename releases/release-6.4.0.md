@@ -381,7 +381,7 @@ TiDBバージョン: 6.4.0-DMR
     - TiDB Data Migration (DM)
 
         - 役に立たない`operate-source update`コマンドを dmctl から削除します [#7246](https://github.com/pingcap/tiflow/issues/7246) @[buchuitoudegou](https://github.com/buchuitoudegou)
-        - 上流データベースが TiDB と互換性のない DDL文を使用している場合に DM の完全インポートが失敗する問題を修正しました。TiDB でサポートされている DDL文を使用して、事前に TiDB でターゲットテーブルのスキーマを手動で作成することで、インポートの成功を確実にすることができます [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716)
+        - 上流データベースが TiDB と互換性のない DDL文を使用している場合に DM の完全インポートが失敗する問題を修正しました。TiDB でサポートされている DDL文を使用して、事前に TiDB でターゲットテーブルのスキーマを手動で作成することで、インポートの成功を確実にできます [#37984](https://github.com/pingcap/tidb/issues/37984) @[lance6716](https://github.com/lance6716)
 
     - TiDB Lightning
 

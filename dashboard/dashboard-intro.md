@@ -31,7 +31,7 @@ TiDB Dashboardを使用すると、クラスター全体の TiDB、TiKV、PD、 
 
 ## 読み取りおよび書き込みトラフィックの分布と傾向を表示します {#show-distribution-and-trends-of-read-and-write-traffic}
 
-TiDB DashboardのKey Visualizer機能は、クラスター全体の読み取り/書き込みトラフィックの経時的な変化をヒートマップ形式で視覚的に表示します。この機能を利用することで、アプリケーションモードの変化をタイムリーに把握したり、パフォーマンスの不均一性を示すホットスポットの問題を特定したりすることができます。
+TiDB DashboardのKey Visualizer機能は、クラスター全体の読み取り/書き込みトラフィックの経時的な変化をヒートマップ形式で視覚的に表示します。この機能を利用することで、アプリケーションモードの変化をタイムリーに把握したり、パフォーマンスの不均一性を示すホットスポットの問題を特定したりできます。
 
 詳細は[Key Visualizerページ](/dashboard/dashboard-key-visualizer.md)を参照。
 

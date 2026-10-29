@@ -85,7 +85,7 @@ TiDB バージョン: 5.2.0
 
 - **HashAggのスピルをサポート**
 
-    HashAgg をディスクに書き出す機能をサポートします。HashAgg オペレーターを含む SQL 文でメモリ不足 (OOM) が発生した場合、このオペレーターの同時実行数を`1`に設定してディスクへの書き出しをトリガーし、メモリ負荷を軽減することができます。
+    HashAgg をディスクに書き出す機能をサポートします。HashAgg オペレーターを含む SQL 文でメモリ不足 (OOM) が発生した場合、このオペレーターの同時実行数を`1`に設定してディスクへの書き出しをトリガーし、メモリ負荷を軽減できます。
 
     [ユーザー向けドキュメント](/configure-memory-usage.md#other-memory-control-behaviors-of-tidb-server)、 [#25882](https://github.com/pingcap/tidb/issues/25882)
 

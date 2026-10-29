@@ -23,7 +23,7 @@ WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_N
 
 ウィンドウ関数からTopNまたはLimitを導出することはデフォルトで無効になっています。この機能を有効にするには、セッション変数[`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`ON`に設定します。
 
-この機能を有効にした後、次のいずれかの操作を実行して無効にすることができます。
+この機能を有効にした後、次のいずれかの操作を実行して無効にできます。
 
 - セッション変数[`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`OFF`に設定します。
 - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)に記載されている手順に従います。

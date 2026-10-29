@@ -145,7 +145,7 @@ PLAN REPLAYER LOAD 'plan_replayer.zip';
 >
 > auto analyzeを無効にする必要があります。無効にしないと、インポートされた統計情報が分析によって上書きされてしまいます。
 
-[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)システム変数を`OFF`に設定すると、auto analyzeを無効にすることができます。
+[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)システム変数を`OFF`に設定すると、auto analyzeを無効にできます。
 
 ```sql
 set @@global.tidb_enable_auto_analyze = OFF;

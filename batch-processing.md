@@ -59,7 +59,7 @@ summary: "パイプライン DML、非トランザクション DML、`IMPORT INT
 
 - Streams data to the storage layer during transaction execution instead of buffering it entirely in memory, allowing transaction size no longer limited by TiDB memory and supporting ultra-large-scale data processing
 - 標準のDMLに比べて優れたパフォーマンスを実現
-- SQL を変更せずにシステム変数を通じて有効にすることができます
+- SQL を変更せずにシステム変数を通じて有効にできます
 
 #### 制限事項 {#limitations}
 

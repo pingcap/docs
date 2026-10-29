@@ -44,7 +44,7 @@ The password complexity policies of TiDB and MySQL have the following difference
 
     - MySQL v5.7では、この機能は`validate_password`プラグインを使用して実装されています。プラグインをインストールすることで、この機能を有効化できます。
     - MySQL v8.0では、この機能は`validate_password`コンポーネントを使用して実装されています。この機能を有効にするには、コンポーネントをインストールしてください。
-    - TiDBにはこの機能が組み込まれています。システム変数[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)を使用してこの機能を有効にすることができます。
+    - TiDBにはこの機能が組み込まれています。システム変数[`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)を使用してこの機能を有効にできます。
 
 - 辞書チェック:
 

@@ -45,9 +45,9 @@ MVCC (Multi-Version Concurrency Control) メカニズムを使用しているた
 
 ログの復元中、復元されたデータの順序は不規則です。つまり、キーの削除レコードが書き込みレコードよりも先に復元される可能性があります。この時にGCがトリガーされると、キーのすべてのデータが削除され、GCはキーの後続の書き込みレコードを処理できなくなります。このような状況を回避するため、 `br`はログの復元中にGCを一時停止します。`br`が途中で終了した場合、GCは一時停止状態のままになります。
 
-ログの復元が完了すると、GCは手動で起動することなく自動的に再起動されます。ただし、復元を続行しない場合は、以下の手順でGCを手動で有効にすることができます。
+ログの復元が完了すると、GCは手動で起動することなく自動的に再起動されます。ただし、復元を続行しない場合は、以下の手順でGCを手動で有効にできます。
 
-`br`は、 `SET config tikv gc.ratio-threshold = -1.0`を実行して`gc.ratio-threshold`を負の値に設定することで、GCを一時停止します。 [`gc.ratio-threshold`](/tikv-configuration-file.md#ratio-threshold)の値を変更することで、GCを手動で有効にすることができます。例えば、デフォルト値にリセットするには、 `SET config tikv gc.ratio-threshold = 1.1`を実行します。
+`br`は、 `SET config tikv gc.ratio-threshold = -1.0`を実行して`gc.ratio-threshold`を負の値に設定することで、GCを一時停止します。 [`gc.ratio-threshold`](/tikv-configuration-file.md#ratio-threshold)の値を変更することで、GCを手動で有効にできます。例えば、デフォルト値にリセットするには、 `SET config tikv gc.ratio-threshold = 1.1`を実行します。
 
 ### 一部のデータは再度復元する必要があります {#some-data-needs-to-be-restored-again}
 

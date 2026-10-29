@@ -200,7 +200,7 @@ TiDB バージョン: 7.4.0
 
 - `IMPORT INTO`機能を強化する [#46704](https://github.com/pingcap/tidb/issues/46704) @[D3Hunter](https://github.com/D3Hunter)
 
-    バージョン7.4.0以降では、 `IMPORT INTO`文に`CLOUD_STORAGE_URI`のオプションを追加することで、インポートのパフォーマンスと安定性を向上させる[グローバルソート](/tidb-global-sort.md)機能（実験的）を有効にすることができます。 `CLOUD_STORAGE_URI`オプションでは、エンコードされたデータの保存先となるクラウドストレージのアドレスを指定できます。
+    バージョン7.4.0以降では、 `IMPORT INTO`文に`CLOUD_STORAGE_URI`のオプションを追加することで、インポートのパフォーマンスと安定性を向上させる[グローバルソート](/tidb-global-sort.md)機能（実験的）を有効にできます。 `CLOUD_STORAGE_URI`オプションでは、エンコードされたデータの保存先となるクラウドストレージのアドレスを指定できます。
 
     さらに、v7.4.0 では、 `IMPORT INTO`機能に次の機能が導入されています。
 

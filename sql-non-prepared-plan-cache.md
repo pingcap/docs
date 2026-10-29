@@ -74,7 +74,7 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
 
 TiDBは、パラメータ化されたクエリに対して1つのプランのみをキャッシュします。例えば、クエリ`SELECT * FROM t WHERE a < 1`と`SELECT * FROM t WHERE a < 100000`同じパラメータ化された形式（ `SELECT * FROM t WHERE a < ?` ）を共有しているため、同じプランを共有します。
 
-これがパフォーマンスの問題を引き起こす場合は、 `ignore_plan_cache()`ヒントを使用してキャッシュ内のプランを無視し、オプティマイザが毎回SQLの新しい実行計画を生成するようにすることができます。SQLを変更できない場合は、バインディングを作成して問題を解決できます。例えば、 `CREATE BINDING FOR SELECT ... USING SELECT /*+ ignore_plan_cache() */ ...`ように指定します。
+これがパフォーマンスの問題を引き起こす場合は、 `ignore_plan_cache()`ヒントを使用してキャッシュ内のプランを無視し、オプティマイザが毎回SQLの新しい実行計画を生成するようにできます。SQLを変更できない場合は、バインディングを作成して問題を解決できます。例えば、 `CREATE BINDING FOR SELECT ... USING SELECT /*+ ignore_plan_cache() */ ...`ように指定します。
 
 ### 使用制限 {#usage-restrictions}
 

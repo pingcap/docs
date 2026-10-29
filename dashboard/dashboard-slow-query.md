@@ -11,7 +11,7 @@ TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のす
 
 > **Note:**
 >
-> スロークエリログが無効になっている場合、この機能は利用できません。スロークエリログはデフォルトで有効になっており、システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を使用して有効または無効にすることができます。
+> スロークエリログが無効になっている場合、この機能は利用できません。スロークエリログはデフォルトで有効になっており、システム変数[`tidb_enable_slow_log`](/system-variables.md#tidb_enable_slow_log)を使用して有効または無効にできます。
 
 ## ページにアクセスする {#access-the-page}
 

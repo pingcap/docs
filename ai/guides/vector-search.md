@@ -445,7 +445,7 @@ results = (
 </div>
 <div label="SQL" value="sql">
 
-テーブル内に複数のベクトル列を作成し、適切な距離関数を使用してそれらを検索することができます。
+テーブル内に複数のベクトル列を作成し、適切な距離関数を使用してそれらを検索できます。
 
 ```sql
 -- Create a table with multiple vector fields

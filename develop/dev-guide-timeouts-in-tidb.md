@@ -20,7 +20,7 @@ TiDBのトランザクション実装では、MVCC（Multiple Version Concurrenc
 
     24時間を超えない実行中のトランザクションの場合、トランザクション実行中はガベージコレクション（GC）がブロックされます。エラー`GC life time is shorter than transaction duration`は発生しません。
 
-一時的に読み取り時間を長くする必要がある場合は、MVCC バージョンの保持時間を長くすることができます。
+一時的に読み取り時間を長くする必要がある場合は、MVCC バージョンの保持時間を長くできます。
 
 - v5.0 より前の TiDB バージョンの場合: TiDB の`mysql.tidb`のテーブルの`tikv_gc_life_time`を調整します。
 - TiDB v5.0 以降のバージョンの場合: システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)を調整します。

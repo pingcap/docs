@@ -17,7 +17,7 @@ DataGripは2つの方法で使用できます。
 - [DataGrip IDE](https://www.jetbrains.com/datagrip/download)のスタンドアロンツールとして。
 - IntelliJ、PhpStorm、PyCharm などの JetBrains IDE の[データベースツールとSQLプラグイン](https://www.jetbrains.com/help/idea/relational-databases.html)として。
 
-このチュートリアルは主にスタンドアロン版のDataGrip IDEに焦点を当てています。JetBrains IDEのJetBrains Database ToolsおよびSQLプラグインを使用してTiDBに接続する手順も同様です。また、どのJetBrains IDEからTiDBに接続する場合でも、このドキュメントの手順を参考にすることができます。
+このチュートリアルは主にスタンドアロン版のDataGrip IDEに焦点を当てています。JetBrains IDEのJetBrains Database ToolsおよびSQLプラグインを使用してTiDBに接続する手順も同様です。また、どのJetBrains IDEからTiDBに接続する場合でも、このドキュメントの手順を参考にできます。
 
 ## 前提条件 {#prerequisites}
 

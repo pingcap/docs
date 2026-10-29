@@ -156,7 +156,7 @@ sysbench --config-file=config oltp_read_only --tables=32 --table-size=10000000 -
 
 ### TiDB と TiKV は両方とも高い同時実行性で適切に構成されているのに、全体的なパフォーマンスがまだ低いのはなぜですか? {#tidb-and-tikv-are-both-properly-configured-under-high-concurrency-why-is-the-overall-performance-still-low}
 
-この問題は多くの場合、プロキシの使用に関係しています。単一のTiDBサーバーに負荷をかけ、それぞれの結果を合計し、プロキシを使用した結果と比較することができます。
+この問題は多くの場合、プロキシの使用に関係しています。単一のTiDBサーバーに負荷をかけ、それぞれの結果を合計し、プロキシを使用した結果と比較できます。
 
 HAproxyを例に挙げましょう。パラメータ`nbproc`を指定すると、起動できるプロセスの最大数を増やすことができます。HAproxyの最新バージョンでは、 `nbthread`と`cpu-map`がサポートされています。これらはすべて、プロキシの使用によるパフォーマンスへの悪影響を軽減します。
 

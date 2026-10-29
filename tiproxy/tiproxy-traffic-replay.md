@@ -9,7 +9,7 @@ summary: TiProxy トラフィック再生機能の使用例と手順を紹介し
 >
 > 現在、TiProxy トラフィックリプレイ機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tiproxy/issues)報告を行ってください。
 
-TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのアクセストラフィックをキャプチャし、指定したレートでテストクラスタに再生することができます。この機能により、本番クラスタの実際のワークロードをテスト環境で再現し、SQL文の実行結果とパフォーマンスを検証できます。
+TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのアクセストラフィックをキャプチャし、指定したレートでテストクラスタに再生できます。この機能により、本番クラスタの実際のワークロードをテスト環境で再現し、SQL文の実行結果とパフォーマンスを検証できます。
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-traffic-replay.png" alt="TiProxyトラフィックリプレイ" width="800" />
 
