@@ -29,7 +29,7 @@ Alibaba Cloud アカウント ID とアベイラビリティゾーンを表示�
 
 ## ステップ1. ApsaraDB RDS for MySQLインスタンスをセットアップする {#step-1-set-up-an-apsaradb-rds-for-mysql-instance}
 
-使用する Alibaba Cloud ApsaraDB RDS for MySQL を特定するか、 [新しいRDSを作成する](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/step-1-create-an-apsaradb-rds-for-mysql-instance-and-configure-databases) 。
+使用する Alibaba Cloud ApsaraDB RDS for MySQL を決めるか、 [新しいRDSを作成する](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/step-1-create-an-apsaradb-rds-for-mysql-instance-and-configure-databases) 。
 
 ApsaraDB RDS for MySQL インスタンスは次の要件を満たしている必要があります。
 
