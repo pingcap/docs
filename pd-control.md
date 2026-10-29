@@ -43,7 +43,7 @@ PD Controlを使用するには、 `tiup ctl:v<CLUSTER_VERSION> pd -u http://<pd
 tiup ctl:v<CLUSTER_VERSION> pd store -u http://127.0.0.1:2379
 ```
 
-対話モード:
+対話型モード:
 
 ```bash
 tiup ctl:v<CLUSTER_VERSION> pd -i -u http://127.0.0.1:2379
@@ -86,7 +86,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 ### `--interact` / `-i` {#--interact---i}
 
-- 対話モードを使用する（readlineに入る）
+- 対話型モードを使用する（readlineに入る）
 - デフォルト: false
 
 ### `--key` {#--key}

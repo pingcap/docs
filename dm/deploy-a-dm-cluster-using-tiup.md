@@ -216,7 +216,7 @@ tiup dm display dm-test
 
 dmctl は、DM クラスタを制御するためのコマンドラインツールです。 [TiUP経由でdmctlを使用する](/dm/maintain-dm-using-tiup.md#dmctl)ことをお勧めします。
 
-dmctlはコマンドモードと対話モードの両方をサポートしています。詳細については[dmctl を使用して DM クラスターを管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。
+dmctlはコマンドモードと対話型モードの両方をサポートしています。詳細については[dmctl を使用して DM クラスターを管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。
 
 ## ステップ9: データベースのパスワードを暗号化する {#step-9-encrypt-the-database-password}
 
