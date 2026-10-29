@@ -479,7 +479,7 @@
   - TiDB CloudパートナーWebコンソール
     - [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
-    - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
+    - [販売代理店の顧客](/tidb-cloud/cppo-customer.md)
   - [TiDB X インスタンスで制限される SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDBの制限事項](/tidb-limitations.md)
   - [システム変数](/system-variables.md)

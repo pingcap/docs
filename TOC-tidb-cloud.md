@@ -177,7 +177,7 @@
   - [概要](/tidb-cloud/data-service-overview.md)
   - [はじめに](/tidb-cloud/data-service-get-started.md)
   - [データ管理アプリ](/tidb-cloud/data-service-manage-data-app.md)
-  - [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)
+  - [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)
   - [APIキー](/tidb-cloud/data-service-api-key.md)
   - [カスタムドメイン](/tidb-cloud/data-service-custom-domain.md)
   - [統合](/tidb-cloud/data-service-integrations.md)
@@ -586,7 +586,7 @@
   - TiDB CloudパートナーWebコンソール
     - [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
-    - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
+    - [販売代理店の顧客](/tidb-cloud/cppo-customer.md)
   - TiDB分散実行フレームワーク（DXF）
     - [概要](/tidb-distributed-execution-framework.md)
     - [TiDB グローバルソート](/tidb-global-sort.md)
