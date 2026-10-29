@@ -322,7 +322,7 @@ The behavior of `sink.encoder_concurrency` varies by downstream type and TiCDC a
 
 - Message queue downstreams: Both the new and old architectures support configuring the number of encoder threads. The default value is `32`.
 - Storage service downstreams (old TiCDC architecture): `8` encoder threads are always used, and this parameter does not take effect.
-- Storage service downstreams (new TiCDC architecture): Support for configuring the number of encoder threads is planned starting from v8.5.9. Before support is available, `8` encoder threads are always used. After support is available, the number of threads is set according to the configured value of this parameter, and `32` is used with the default configuration.
+- Storage service downstreams (new TiCDC architecture): Starting from v8.5.9, you can configure the number of encoder threads. Before v8.5.9, the number of encoder threads is fixed at `8`. Starting from v8.5.9, the number of threads is determined by the configured parameter value, which defaults to `32`.
 
 After the new architecture supports this parameter, for existing storage service replication tasks where this configuration is missing or set to `0`, `8` encoder threads are still used. For more information, see [`encoder-concurrency`](/ticdc/ticdc-changefeed-config.md#encoder-concurrency).
 
