@@ -34,13 +34,16 @@ The results corresponding to all values of these two variables are as follows:
 | tidb_enforce_mpp=off (by default) | The MPP mode is not used. | The optimizer selects the MPP mode based on cost estimation. (by default)|
 | tidb_enforce_mpp=on  | The MPP mode is not used.   | TiDB ignores the cost estimation and selects the MPP mode.      |
 
-For example, if you do not want to use the MPP mode, you can execute the following statements:
+For example, if you do not want to use the MPP mode but still want TiFlash to execute queries in TiDB v7.3.0 or later, you can execute the following statements:
 
 {{< copyable "sql" >}}
 
 ```sql
 set @@session.tidb_allow_mpp=0;
+set @@session.tidb_allow_tiflash_cop=1;
 ```
+
+If you do not need TiFlash to execute queries after disabling the MPP mode, setting only `tidb_allow_mpp=0` is sufficient.
 
 If you want TiDB's cost-based optimizer to automatically decide whether to use the MPP mode (by default), you can execute the following statements:
 
