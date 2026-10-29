@@ -3,13 +3,13 @@ title: TiDB Cloud 支持
 summary: 了解如何联系 TiDB Cloud 支持团队。
 ---
 
-# TiDB Cloud 支持 <!--Corresponding EN commit: cb739e73746dda8bc117b62d1c5126b27b7eb4c2-->
+# TiDB Cloud 支持 <!--Corresponding EN commit: 4001a10e9314531baeea772396cc311f9c8732fd-->
 
 TiDB Cloud 提供分层支持计划，旨在满足客户的不同需求。关于我们的支持服务详情，请参见 [Connected Care 详情](/tidb-cloud/connected-care-detail.md)。
 
 > **警告：**
 >
-> 在提交支持工单或附加日志之前，请从工单内容和附件中删除或遮蔽所有个人身份信息（PII）及其他敏感数据，例如密码、凭证和 API 密钥。请使用星号 (*) 或其他占位符替换敏感值。
+> 在创建支持工单或附加日志、文件之前，请删除或屏蔽密码、API 密钥等凭据、个人身份信息 (PII) 以及其他敏感数据。请使用星号 (****) 或其他占位符替换这些信息。如果不慎提交了此类信息，请立即联系支持团队并请求其删除。
 
 ## 支持渠道
 
