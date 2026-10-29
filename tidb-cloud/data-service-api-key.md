@@ -8,7 +8,7 @@ summary: データアプリのAPIキーの作成、編集、削除方法を学�
 TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)と[ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)の両方をサポートしています。
 
 - [基本認証](https://en.wikipedia.org/wiki/Basic_access_authentication)は、暗号化されていない Base64 エンコーディングを使用して、公開鍵と秘密鍵を送信します。 HTTPS により通信のセキュリティが確保されます。詳細については、 [RFC 7617 - 'Basic'HTTP認証方式](https://datatracker.ietf.org/doc/html/rfc7617)を参照してください。
-- [ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)は、ネットワーク送信前に公開鍵、秘密鍵、サーバー提供のノンス値、HTTP メソッド、およびリクエストされた URI をハッシュすることにより、追加のセキュリティレイヤーを提供します。これにより、秘密キー自体が平文で送信されることはありません。詳細については、 [RFC 7616 - HTTPダイジェストアクセス認証](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
+- [ダイジェスト認証](https://en.wikipedia.org/wiki/Digest_access_authentication)は、ネットワーク送信前に公開鍵、秘密鍵、サーバー提供のノンス値、HTTP メソッド、およびリクエストされた URI をハッシュすることにより、追加のセキュリティレイヤーを提供します。これにより、秘密鍵自体が平文で送信されることはありません。詳細については、 [RFC 7616 - HTTPダイジェストアクセス認証](https://datatracker.ietf.org/doc/html/rfc7616)を参照してください。
 
 > **Note:**
 >
