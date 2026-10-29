@@ -5,7 +5,7 @@ summary: TiDB CloudのData Serviceとそのシナリオについて学習しま�
 
 # TiDB Cloud Data Service (PREVIEW) の概要 {#tidb-cloud-data-service-beta-overview}
 
-TiDB Cloud [Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードの Backend-as-a-Service ソリューションです。
+TiDB Cloud [Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)は、バックエンドアプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードの Backend-as-a-Service ソリューションです。
 
 Data Service を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能はサーバーレスアーキテクチャを採用し、コンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 
@@ -21,13 +21,13 @@ Data Service のエンドポイントは、SQL 文を実行するためにカス
 
 Data Serviceを使用すると、TiDB CloudをHTTPS対応のあらゆるアプリケーションやサービスとシームレスに統合できます。以下に、典型的な使用シナリオをいくつかご紹介します。
 
-- モバイル アプリケーションまたは Web アプリケーションから TiDB クラスターのデータベースに直接アクセスします。
-- サーバーレス エッジ関数を使用してエンドポイントを呼び出し、データベース接続プールによって発生するスケーラビリティの問題を回避します。
+- モバイルアプリケーションまたは Web アプリケーションから TiDB クラスターのデータベースに直接アクセスします。
+- サーバーレスエッジ関数を使用してエンドポイントを呼び出し、データベース接続プールによって発生するスケーラビリティの問題を回避します。
 - データソースとしてData Serviceを使用することで、 TiDB Cloudをデータ可視化プロジェクトに統合できます。これにより、データベース接続のユーザー名とパスワードの漏洩を防ぎ、APIのセキュリティと使いやすさが向上します。
 - MySQLインターフェースがサポートしていない環境からデータベースに接続します。これにより、データへのアクセスにおける柔軟性と選択肢が広がります。
 
 ## 次は何か {#what-s-next}
 
-- [Data Serviceを始める](/tidb-cloud/data-service-get-started.md)
+- [Data Serviceの利用開始](/tidb-cloud/data-service-get-started.md)
 - [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
-- [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)
+- [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)

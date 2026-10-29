@@ -5,11 +5,11 @@ summary: データアプリのOpenAPI仕様を使用してクライアントコ�
 
 # Next.jsでデータアプリのOpenAPI仕様を使用する {#use-the-openapi-specification-of-a-data-app-with-next-js}
 
-このドキュメントでは[データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)の OpenAPI 仕様を使用してクライアント コードを生成し、Next.js アプリケーションを開発する方法を紹介します。
+このドキュメントでは[データアプリ](/tidb-cloud/tidb-cloud-glossary.md#data-app)の OpenAPI 仕様を使用してクライアントコードを生成し、Next.js アプリケーションを開発する方法を紹介します。
 
 ## 始める前に {#before-you-begin}
 
-Next.jsでOpenAPI Specificationを使用する前に、以下のものが用意されていることを確認してください。
+Next.jsでOpenAPI仕様を使用する前に、以下のものが用意されていることを確認してください。
 
 - [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)または[TiDB Cloud Dedicatedクラスター](/tidb-cloud/create-tidb-cluster.md)。
 - [Node.js](https://nodejs.org/en/download)
@@ -53,7 +53,7 @@ SELECT * FROM test.repository;
 
 詳細については、[Data Serviceの利用開始](/tidb-cloud/data-service-get-started.md)をご覧ください。
 
-## ステップ3．クライアントコードを生成する {#step-3-generate-client-code}
+## ステップ3. クライアントコードを生成する {#step-3-generate-client-code}
 
 以下では、Next.jsを例として、データアプリのOpenAPI仕様を使用してクライアントコードを生成する方法を説明します。
 
@@ -87,7 +87,7 @@ SELECT * FROM test.repository;
     2. **API Specification**エリアで**Download**をクリックし、JSON形式を選択して、プロンプトが表示されたら**Authorize**をクリックします。
     3. ダウンロードしたファイルを`hello-repos`プロジェクトディレクトリに`oas/doc.json`という名前で保存してください。
 
-    詳細については、 [OpenAPI仕様書をダウンロードする](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification)を参照してください。
+    詳細については、 [OpenAPI仕様をダウンロードする](/tidb-cloud/data-service-manage-data-app.md#download-the-openapi-specification)を参照してください。
 
     `oas/doc.json`ファイルの構造は以下のとおりです。
 
@@ -141,7 +141,7 @@ SELECT * FROM test.repository;
 
     このコマンドは`oas/doc.json`仕様を入力として使用してクライアントコードを生成し、 `gen/api`ディレクトリに出力します。
 
-## ステップ4．Next.jsアプリケーションを開発する {#step-4-develop-your-next-js-application}
+## ステップ4. Next.jsアプリケーションを開発する {#step-4-develop-your-next-js-application}
 
 生成されたクライアントコードを使用して、Next.jsアプリケーションを開発できます。
 
@@ -182,7 +182,7 @@ SELECT * FROM test.repository;
 
     > **Note:**
     >
-    > データアプリにリンクされているTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターが異なるリージョンでホストされている場合、ダウンロードした OpenAPI 仕様ファイルの`servers`セクションに複数の項目が表示されます。この場合、 `config`オブジェクトのエンドポイント パスを次のように構成する必要があります。
+    > データアプリにリンクされているTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターが異なるリージョンでホストされている場合、ダウンロードした OpenAPI 仕様ファイルの`servers`セクションに複数の項目が表示されます。この場合、 `config`オブジェクトのエンドポイントパスを次のように構成する必要があります。
     >
     > ```js
     > const config = new Configuration({
@@ -194,7 +194,7 @@ SELECT * FROM test.repository;
     >
     > `basePath`をデータアプリの実際のエンドポイントパスに置き換えてください。 `${YOUR_REGION}`と`${YOUR_DATA_APP_ID}`を取得するには、エンドポイントの**Properties**パネルで**Endpoint URL**を確認してください。
 
-## ステップ5．Next.jsアプリケーションをプレビューする {#step-5-preview-your-next-js-application}
+## ステップ5. Next.jsアプリケーションをプレビューする {#step-5-preview-your-next-js-application}
 
 > **Note:**
 >

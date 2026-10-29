@@ -10,7 +10,7 @@ TiDB Cloud Essentialは、実行されたSQL文など、データベースへの
 
 > **Note:**
 >
-> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに「 TiDB Cloud Essentialデータベース監査ログの申請」と入力して、 **Submit**をクリックします。
+> 現在、データベース監査ログ機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、 [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックし、 次に**Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。チケットを作成し、 **Description**フィールドに"Apply for TiDB Cloud Essential database audit logging"と入力して、 **Submit**をクリックします。
 
 組織のユーザーアクセスポリシーやその他の情報セキュリティ対策の有効性を評価するには、データベース監査ログを定期的に分析することがセキュリティ上のベストプラクティスです。
 
@@ -20,7 +20,7 @@ TiDB Cloud Essentialは、実行されたSQL文など、データベースへの
 
 ### データの秘匿化 {#data-redaction}
 
-TiDB Cloud Essentialは、デフォルトでは監査ログ内の機密データをマスキングします。以下のSQL文を例に挙げます。
+TiDB Cloud Essentialは、デフォルトでは監査ログ内の機密データを秘匿化します。以下のSQL文を例に挙げます。
 
 ```sql
 INSERT INTO `test`.`users` (`id`, `name`, `password`) VALUES (1, 'Alice', '123456');
@@ -153,7 +153,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
 
 4. 監査ログのストレージの場所を選択し、必要な情報を入力します。次に、 **Test Connection and Next**または**Next**をクリックします。利用可能なストレージの場所の詳細については、[監査ログの場所](#audit-logging-locations)を参照してください。
 
-5. **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションとログのマスキング設定を入力し、 **Save**をクリックします。
+5. **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションとログの秘匿化設定を入力し、 **Save**をクリックします。
 
 </div>
 
@@ -187,7 +187,7 @@ TiDB Cloud Essentialインスタンスの監査ログは、有効化後に編集
 
 3. **DB Audit Logging**ページで、 **Settings**をクリックします。
 
-4. **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションまたはログのマスキング設定を更新し、 **Save**をクリックします。
+4. **Database Audit Logging Settings**ダイアログで、ログファイルのローテーションまたはログの秘匿化設定を更新し、 **Save**をクリックします。
 
 </div>
 
@@ -370,7 +370,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | `TIME`                  | 監査記録のタイムスタンプ。                                  |
 | `EVENT`                 | 監査記録のイベントクラス。複数のイベントタイプはカンマで区切られます（ `,` ）。     |
 | `USER`                  | 監査記録のユーザー名。                                    |
-| `ROLES`                 | 操作時のユーザーの役割。                                   |
+| `ROLES`                 | 操作時のユーザーのロール。                                   |
 | `CONNECTION_ID`         | ユーザーの接続を識別する識別子。                               |
 | `TABLES`                | この監査記録に関連するアクセスされたテーブル。                        |
 | `STATUS_CODE`           | 監査記録のステータスコード。 `1`は成功、 `0`は失敗を意味します。           |

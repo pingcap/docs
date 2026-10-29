@@ -15,7 +15,7 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
 
 - データの一貫性を確保するため、 TiDB Cloud では Parquet ファイルを空のテーブルにのみインポートできます。既にデータが含まれている既存のテーブルにデータをインポートするには、このドキュメントの手順に従ってTiDB Cloud を使用して一時的な空のテーブルにデータをインポートし、その後`INSERT SELECT`文を使用してデータを対象の既存のテーブルにコピーします。
 
-- TiDB Cloud Dedicatedクラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)があるか、 [特定時点への復元](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません (**Import Data**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム リストアはインポートされたデータを検出できません。
+- TiDB Cloud Dedicatedクラスターに[変更フィード](/tidb-cloud/changefeed-overview.md)があるか、 [特定時点への復元](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)が有効になっている場合、現在のデータインポート機能は[物理インポートモード](https://docs.pingcap.com/tidb/stable/tidb-lightning-physical-import-mode)を使用しているため、クラスターにデータをインポートできません (**Import Data**ボタンが無効になります)。このモードでは、インポートされたデータは変更ログを生成しないため、変更フィードとポイントインタイム復元はインポートされたデータを検出できません。
 
 ## ステップ1. Parquetファイルを準備する {#step-1-prepare-the-parquet-files}
 
@@ -41,10 +41,10 @@ summary: Amazon S3、GCS、またはAzure Blob StorageからTiDB Cloud Dedicated
 
     > **Note:**
     >
-    > - 前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイル リンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)の**Destination Mapping**サブステップで**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**の選択を解除して、ソースファイルを単一のターゲットテーブルに手動でマッピングできます。
+    > - 前述のルールに従って Parquet ファイル名を更新できない場合 (たとえば、Parquet ファイルリンクが他のプログラムでも使用されている場合)、ファイル名を変更せずに、 [ステップ4](#step-4-import-parquet-files-to-tidb-cloud)の**Destination Mapping**サブステップで**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**の選択を解除して、ソースファイルを単一のターゲットテーブルに手動でマッピングできます。
     > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 その他の Snappy 圧縮形式はサポートされていません。
 
-## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
+## ステップ2. 対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
 Parquetファイルにはスキーマ情報が含まれていないため、ParquetファイルからTiDB Cloudにデータをインポートする前に、以下のいずれかの方法を使用してテーブルスキーマを作成する必要があります。
 
@@ -83,7 +83,7 @@ Parquetファイルにはスキーマ情報が含まれていないため、Parq
         >
         > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL文のみを含める必要があります。ファイルに複数の DDL文が含まれている場合、最初の文のみが有効になります。
 
-## ステップ3．アカウント間アクセスの設定 {#step-3-configure-cross-account-access}
+## ステップ3. アカウント間アクセスの設定 {#step-3-configure-cross-account-access}
 
 TiDB CloudがAmazon S3バケット、GCSバケット、またはAzure Blob Storageコンテナ内のParquetファイルにアクセスできるようにするには、次のいずれかの操作を行います。
 
@@ -132,7 +132,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     - TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
@@ -183,7 +183,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     - TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
@@ -247,7 +247,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     3. TiDB Cloudからの保留中の接続リクエストを見つけて、 **Approve**をクリックします。
 
-    4. [TiDB Cloudコンソール](https://tidbcloud.com/)に戻ります。エンドポイントが承認されると、インポート ウィザードが自動的に続行されます。
+    4. [TiDB Cloudコンソール](https://tidbcloud.com/)に戻ります。エンドポイントが承認されると、インポートウィザードが自動的に続行されます。
 
     > **Note:**
     >
@@ -259,7 +259,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
     > **Note:**
     >
-    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">TiDBファイル命名規則</a>を使用する**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
+    > **Source URI**で単一のファイルを指定すると、 TiDB Cloudは**Use [TiDB file naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションを表示せず、**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを入力するだけで済みます。
 
     - TiDB Cloud が[TiDBファイルの命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**Parquet**を選択します。ソースフォルダにスキーマファイル ( `${db_name}-schema-create.sql`や`${db_name}.${table_name}-schema.sql`など) が含まれている場合、 TiDB Cloud は、ターゲットデータベースとテーブルがまだ存在しない場合に、それらを使用して作成します。
 
@@ -298,7 +298,7 @@ TiDB CloudにParquetファイルをインポートするには、以下の手順
 
 ## サポートされているデータ型 {#supported-data-types}
 
-以下の表は、TiDB Cloudにインポート可能なサポートされているParquetデータタイプの一覧です。
+以下の表は、TiDB Cloudにインポート可能なサポートされているParquetデータ型の一覧です。
 
 | Parquet プリミティブ型 | Parquet 論理型 | TiDBまたはMySQLの型                                                                                                                                                    |
 | -------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |

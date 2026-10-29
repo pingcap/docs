@@ -41,17 +41,17 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
     1. AWS マネジメントコンソールにサインインし、 [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/)で Amazon S3 コンソールを開きます。
 
-    2. **バケット**一覧から、ソースデータが入っているバケットの名前を選択し、 **Copy ARN**をクリックしてS3バケットのARNを取得します（例： `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットのARNをメモしておいてください。
+    2. **Buckets**一覧から、ソースデータが入っているバケットの名前を選択し、 **Copy ARN**をクリックしてS3バケットのARNを取得します（例： `arn:aws:s3:::tidb-cloud-source-data` ）。後で使用するために、バケットのARNをメモしておいてください。
 
         ![Copy bucket ARN](/media/tidb-cloud/copy-bucket-arn.png)
 
-    3. [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーションペインで**ポリシー**をクリックし、 **Create Policy**をクリックします。
+    3. [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)でIAMコンソールを開き、左側のナビゲーションペインで**Policies**をクリックし、 **Create Policy**をクリックします。
 
         ![Create a policy](/media/tidb-cloud/aws-create-policy.png)
 
     4. **Create policy**ページで、 **JSON**タブをクリックします。
 
-    5. 以下のアクセスポリシー テンプレートをコピーして、ポリシー テキスト フィールドに貼り付けてください。
+    5. 以下のアクセスポリシーテンプレートをコピーして、ポリシーテキストフィールドに貼り付けてください。
 
         ````json
         {
@@ -111,21 +111,21 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
 3. AWS マネジメントコンソールで、 TiDB Cloudのアクセスロールを作成し、ロール ARN を取得します。
 
-    1. [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)のIAMコンソールで、左側のナビゲーションペインの**[ロール]**をクリックし、 **Create role**をクリックします。
+    1. [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/)のIAMコンソールで、左側のナビゲーションペインの**Roles**をクリックし、 **Create role**をクリックします。
 
         ![Create a role](/media/tidb-cloud/aws-create-role.png)
 
-    2. 役割を作成するには、以下の情報を入力してください。
+    2. ロールを作成するには、以下の情報を入力してください。
 
         - **Trusted entity type**で**AWS account**を選択します。
         - **An AWS account**の下にある**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
-        - **オプション**で**Require external ID**をクリックして[混乱した代理問題](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)を回避し、 TiDB Cloud外部IDを**External ID**フィールドに貼り付けます。"Require external ID"を選択せずにロールを作成すると、S3バケットURIとIAMロールARNを持つユーザーであれば誰でもAmazon S3バケットにアクセスできる可能性があります。アカウントIDと外部IDの両方を使用してロールを作成すると、同じプロジェクトおよび同じリージョンで実行されているTiDBクラスタのみがバケットにアクセスできます。
+        - **Options**で**Require external ID**をクリックして[混乱した代理問題](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)を回避し、 TiDB Cloud外部IDを**External ID**フィールドに貼り付けます。"Require external ID"を選択せずにロールを作成すると、S3バケットURIとIAMロールARNを持つユーザーであれば誰でもAmazon S3バケットにアクセスできる可能性があります。アカウントIDと外部IDの両方を使用してロールを作成すると、同じプロジェクトおよび同じリージョンで実行されているTiDBクラスタのみがバケットにアクセスできます。
 
     3. **Next**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**Next**をクリックします。
 
-    4. **Role details**で役割の名前を設定し、右下隅の**Create role**をクリックします。役割が作成されると、役割の一覧が表示されます。
+    4. **Role details**でロールの名前を設定し、右下隅の**Create role**をクリックします。ロールが作成されると、ロールの一覧が表示されます。
 
-    5. 役割の一覧から、先ほど作成した役割の名前をクリックして概要ページに移動し、役割のARNをコピーします。
+    5. ロールの一覧から、先ほど作成したロールの名前をクリックして概要ページに移動し、ロールのARNをコピーします。
 
         ![Copy AWS role ARN](/media/tidb-cloud/aws-role-arn.png)
 
@@ -176,27 +176,27 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     1. [Google Cloud Console](https://console.cloud.google.com/)にサインインしてください。
 
-    2. [役割](https://console.cloud.google.com/iam-admin/roles)ページに移動し、**CREATE ROLE**をクリックしてください。
+    2. [ロール](https://console.cloud.google.com/iam-admin/roles)ページに移動し、**CREATE ROLE**をクリックしてください。
 
         ![Create a role](/media/tidb-cloud/gcp-create-role.png)
 
-    3. 役割の名前、説明、ID、および役割の起動ステージを入力してください。役割名は、作成後に変更できません。
+    3. ロールの名前、説明、ID、およびロールの起動ステージを入力してください。ロール名は、作成後に変更できません。
 
     4. **ADD PERMISSIONS**をクリックしてください。
 
-    5. ロールに以下の読み取り専用権限を追加し、 **[追加]**をクリックします。
+    5. ロールに以下の読み取り専用権限を追加し、 **Add**をクリックします。
 
         - storage.buckets.get
         - storage.objects.get
         - storage.objects.list
 
-        権限名をフィルタークエリとして**プロパティ名または値を入力**フィールドにコピーし、フィルター結果からその名前を選択できます。3つの権限を追加するには、権限名の間に**OR**を使用します。
+        権限名をフィルタークエリとして**Enter property name or value**フィールドにコピーし、フィルター結果からその名前を選択できます。3つの権限を追加するには、権限名の間に**OR**を使用します。
 
         ![Add permissions](/media/tidb-cloud/gcp-add-permissions.png)
 
 3. [Bucket](https://console.cloud.google.com/storage/browser)ページに移動し、 TiDB CloudがアクセスするGCSバケットの名前をクリックします。
 
-4. **Bucket details**ページで、 **[権限]**タブをクリックし、 **GRANT ACCESS**をクリックします。
+4. **Bucket details**ページで、 **PERMISSIONS**タブをクリックし、 **GRANT ACCESS**をクリックします。
 
     ![Grant Access to the bucket ](/media/tidb-cloud/gcp-bucket-permissions.png)
 
@@ -212,7 +212,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
 6. **Bucket details**ページで、**OBJECTS**タブをクリックします。
 
-    ファイルの gsutil URI をコピーするには、ファイルを選択し、 **[オブジェクトを開く] オーバーフロー メニュー**をクリックして、 **Copy gsutil URI**をクリックします。
+    ファイルの gsutil URI をコピーするには、ファイルを選択し、 **Open object overflow menu**をクリックして、 **Copy gsutil URI**をクリックします。
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
 
@@ -222,7 +222,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
 
-7. TiDB Cloudコンソールで、Google Cloud Service アカウント ID を取得する**Data Import**ページに移動し、GCS バケットの gsutil URI を**バケット gsutil URI**フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。
+7. TiDB Cloudコンソールで、Google Cloud Service アカウント ID を取得する**Data Import**ページに移動し、GCS バケットの gsutil URI を**Bucket gsutil URI**フィールドに貼り付けます。たとえば、 `gs://tidb-cloud-source-data/`を貼り付けます。
 
 ## Azure Blob Storageへのアクセスを構成する {#configure-azure-blob-storage-access}
 
@@ -239,7 +239,7 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
     1. **Allowed services**で**Blob**を選択します。
     2. **Allowed resource types**で、 **Container**と**Object**を選択します。
     3. **Allowed permissions**で、必要な権限を選択します。たとえば、 TiDB Cloud Dedicatedにデータをインポートするには、 **Read**と**List**の権限が必要です。
-    4. 必要に応じて**開始日時と有効期限日時**を調整してください。セキュリティ上の理由から、有効期限はデータインポートのスケジュールに合わせて設定することをお勧めします。
+    4. 必要に応じて**Start and expiry date/time**を調整してください。セキュリティ上の理由から、有効期限はデータインポートのスケジュールに合わせて設定することをお勧めします。
     5. その他の設定については、デフォルト値を維持してください。
 
     ![sas-create](/media/tidb-cloud/dedicated-external-storage/azure-sas-create.png)

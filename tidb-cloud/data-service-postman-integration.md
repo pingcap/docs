@@ -21,9 +21,9 @@ Postmanにデータアプリをインポートする前に、以下のものを�
 
 - 明確に定義された[エンドポイント](/tidb-cloud/data-service-manage-endpoint.md)が少なくとも 1つある[データアプリ](/tidb-cloud/data-service-manage-data-app.md)。次の要件を満たすエンドポイントのみを Postman にインポートできます。
 
-    - 対象のTiDB Cloud Starterインスタンスが選択されました。
-    - エンドポイントパスとリクエストメソッドが設定されました。
-    - SQL文が記述されました。
+    - 対象のTiDB Cloud Starterインスタンスが選択されている。
+    - エンドポイントパスとリクエストメソッドが設定されている。
+    - SQL文が記述されている。
 
 - データアプリ用の[APIキー](/tidb-cloud/data-service-api-key.md#create-an-api-key)。
 
@@ -56,11 +56,11 @@ Postmanにデータアプリをインポートする前に、以下のものを�
 
     コレクション内では、デプロイ済みのエンドポイントは**Deployed**フォルダーに、デプロイされていないエンドポイントは**Draft**フォルダーにグループ化されます。
 
-## ステップ2. PostmanでデータアプリAPIキーを設定します {#step-2-configure-your-data-app-api-key-in-postman}
+## ステップ2. PostmanでデータアプリのAPIキーを設定する {#step-2-configure-your-data-app-api-key-in-postman}
 
 Postmanでインポートしたデータアプリを実行する前に、PostmanでデータアプリのAPIキーを次のように設定する必要があります。
 
-1. Postman の左側のナビゲーション メニューで`TiDB Data Service - <Your App Name>`をクリックすると、右側にタブが開きます。
+1. Postman の左側のナビゲーションメニューで`TiDB Data Service - <Your App Name>`をクリックすると、右側にタブが開きます。
 2. `TiDB Data Service - <Your App Name>`タブの下にある**Variables**タブをクリックします。
 3. 変数テーブルの**Current value**列に、データアプリの公開鍵と秘密鍵を入力してください。
 4. `TiDB Data Service - <Your App Name>`タブの右上隅にある**Save**をクリックします。
@@ -76,7 +76,7 @@ Postmanでデータアプリを実行するには、以下の手順に従って�
     - パラメータのないエンドポイントの場合は、 **Send**をクリックして直接呼び出すことができます。
     - パラメータ付きのエンドポイントの場合は、まずパラメータ値を入力してから**Send**をクリックする必要があります。
 
-        - `GET`または`DELETE`リクエストの場合は、**Query Params**テーブルのパラメータ値を入力してください。
+        - `GET`または`DELETE`リクエストの場合は、**Query Params**テーブルにパラメータ値を入力してください。
         - `POST`または`PUT`リクエストの場合は、 **Body**タブをクリックし、パラメーター値を JSON オブジェクトとして入力します。TiDB Cloud Data Service のエンドポイントで**Batch Operation**が有効になっている場合は、パラメーター値を JSON オブジェクトの配列として`items`フィールドに入力します。
 
 3. 下部のペインで応答を確認してください。
