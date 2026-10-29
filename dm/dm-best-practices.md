@@ -151,7 +151,7 @@ MySQLシャードの移行とマージを行う際、上流のシャードの種
 
 #### アップストリームデータソースを選択して構成する {#choose-and-configure-the-upstream-data-source}
 
-DM は、フルデータ移行を実行する際にデータベース全体のデータをバックアップし、並列論理バックアップ方式を採用しています。MySQL のバックアップ中に、グローバル読み取りロック[`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock)が追加されます。上流データベースの DML および DDL 操作は短時間ブロックされます。そのため、上流のバックアップデータベースを使用してフルデータバックアップを実行し、データソースの GTID 機能を有効にすることを強くお勧めします ( `enable-gtid: true` )。これにより、上流からの影響を回避し、上流のマスターノードに切り替えて増分移行中のレイテンシーを削減できます。上流の MySQL データソースを切り替える手順については、 [アップストリーム MySQL インスタンス間の DM-worker接続を切り替える](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip)を参照してください。
+DM は、完全データ移行を実行する際にデータベース全体のデータをバックアップし、並列論理バックアップ方式を採用しています。MySQL のバックアップ中に、グローバル読み取りロック[`FLUSH TABLES WITH READ LOCK`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock)が追加されます。上流データベースの DML および DDL 操作は短時間ブロックされます。そのため、上流のバックアップデータベースを使用してフルデータバックアップを実行し、データソースの GTID 機能を有効にすることを強くお勧めします ( `enable-gtid: true` )。これにより、上流からの影響を回避し、上流のマスターノードに切り替えて増分移行中のレイテンシーを削減できます。上流の MySQL データソースを切り替える手順については、 [アップストリーム MySQL インスタンス間の DM-worker接続を切り替える](/dm/usage-scenario-master-slave-switch.md#switch-dm-worker-connection-via-virtual-ip)を参照してください。
 
 次の点に注意してください。
 
@@ -159,7 +159,7 @@ DM は、フルデータ移行を実行する際にデータベース全体の�
 
     このシナリオでは、設定ファイル内の`consistency`パラメータを`none`（`mydumpers.global.extra-args: "--consistency none"`）に設定することで、マスターノードへのグローバル読み取りロックの追加を回避できます。ただし、これはフルバックアップのデータ整合性に影響を与え、アップストリームとダウンストリーム間でデータの不整合が生じる可能性があります。
 
-- バックアップ スナップショットを使用して完全なデータ移行を実行します (AWS 上の MySQL RDS およびAurora RDS の移行にのみ適用されます)
+- バックアップ スナップショットを使用して完全データ移行を実行します (AWS 上の MySQL RDS およびAurora RDS の移行にのみ適用されます)
 
     移行対象のデータベースがAWS MySQL RDSまたはAurora RDSの場合、RDSスナップショットを使用してAmazon S3のバックアップデータをTiDBに直接移行し、データの整合性を確保できます。詳細については、 [Amazon Auroraから TiDB へのデータ移行](/migrate-aurora-to-tidb.md)をご覧ください。
 
