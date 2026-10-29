@@ -71,10 +71,10 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - 以下のリソース使用状況アラートを追加します。新しいアラートはデフォルトで無効になっています。必要に応じて有効にすることができます。
 
-    - TiDB ノード全体の最大メモリ使用率が 10分間 70% を超えました
-    - TiKVノード全体の最大メモリ使用率が10分間70%を超えました
-    - TiDB ノード全体の最大 CPU 使用率が 10分間 80% を超えました
-    - TiKVノード全体の最大CPU使用率が10分間80%を超えました
+    - Max memory utilization across TiDB nodes exceeded 70% for 10 minutes
+    - Max memory utilization across TiKV nodes exceeded 70% for 10 minutes
+    - Max CPU utilization across TiDB nodes exceeded 80% for 10 minutes
+    - Max CPU utilization across TiKV nodes exceeded 80% for 10 minutes
 
     詳細については[TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#resource-usage-alerts)を参照してください。
 
@@ -680,8 +680,8 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - 誤検知を防ぐため、 [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md#tidb-cloud-built-in-alert-conditions)から以下の2つのアラートを削除します。これは、ノードの 1つで一時的なオフラインまたはメモリ不足 (OOM) が発生しても、クラスター全体の健全性に大きな影響を与えないためです。
 
-    - クラスター内の少なくとも 1つの TiDB ノードでメモリ不足が発生しました。
-    - 1 つ以上のクラスター ノードがオフラインです。
+    - At least one TiDB node in the cluster has run out of memory.
+    - One or more cluster nodes are offline.
 
 **コンソールの変更**
 
