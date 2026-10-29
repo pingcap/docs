@@ -51,7 +51,7 @@ changefeed ダウンストリームサービスが AWS でホストされてい�
 
 changefeed ダウンストリームサービスが Google Cloud でホストされている場合は、ダウンストリームサービスのサービスアタッチメント情報を収集します。
 
-ダウンストリームサービスでサービスアタッチメントが利用できない場合は、[ステップ2. Kafka-proxyをプライベートサービス接続サービスとして公開する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#step-2-expose-kafka-proxy-as-private-service-connect-service)に従ってサービスアタッチメント情報を取得します。
+ダウンストリームサービスでサービスアタッチメントが利用できない場合は、[ステップ2. Kafka-proxyをPrivate Service Connect サービスとして公開する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#step-2-expose-kafka-proxy-as-private-service-connect-service)に従ってサービスアタッチメント情報を取得します。
 
 </div>
 
