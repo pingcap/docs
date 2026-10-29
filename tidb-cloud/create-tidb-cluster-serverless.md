@@ -65,8 +65,8 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     - **MySQL 互換 Starter**:
 
-        - TiDB Cloud Starterインスタンスの利用限度額を更新できます。利用限度額を0に設定すると、インスタンスは無料のままです。利用限度額を0より大きい値に設定する場合は、インスタンスを作成する前にクレジットカードを追加する必要があります。
-        - デフォルトでは、各組織は最大5つの無料のMySQL互換Starterインスタンスを作成できます。追加のインスタンスを作成するには、クレジットカードを追加し、利用限度額を指定する必要があります。
+        - TiDB Cloud Starterインスタンスの支出限度額を更新できます。支出限度額を0に設定すると、インスタンスは無料のままです。支出限度額を0より大きい値に設定する場合は、インスタンスを作成する前にクレジットカードを追加する必要があります。
+        - デフォルトでは、各組織は最大5つの無料のMySQL互換Starterインスタンスを作成できます。追加のインスタンスを作成するには、クレジットカードを追加し、支出限度額を指定する必要があります。
 
     - **PostgreSQL 互換 Starter**:
 
@@ -94,4 +94,4 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
     >
     > パスワードを設定しないと、 TiDB Cloud StarterまたはEssentialインスタンスに接続できません。
 
-- TiDB Cloud CLI を使用してインスタンスを管理するには、[TiDB Cloud CLI Reference (PREVIEW)](/tidb-cloud/cli-reference.md) を参照してください。
+- TiDB Cloud CLI を使用してインスタンスを管理するには、[TiDB Cloud CLI (ticloud) リファレンス (PREVIEW)](/tidb-cloud/cli-reference.md) を参照してください。

@@ -20,13 +20,13 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 
 > **Note**
 >
-> **Basic** 、 **Enterprise** 、および**Premium**のサポートプランでは、従来のプランと同じプラン名が使用されていますが、サービス コミットメントが異なる異なるプランを指します。
+> **Basic** 、 **Enterprise** 、および**Premium**のサポートプランでは、従来のプランと同じプラン名が使用されていますが、異なるサービスコミットメントを持つ別のプランを指します。
 
 以下の表は、Connected Careサービスの各サポートプランの概要を示しています。詳細については、 [Connected Careの詳細](/tidb-cloud/connected-care-detail.md)をご覧ください。
 
 | サポートプラン                                                                                                                                           | Basic | Developer | Enterprise | Premium                 |
 | :------------------------------------------------------------------------------------------------------------------------------------------------ | :--------------- | :--------- | :--------- | :-------------------- |
-| 推奨されるワークロード                                                                                                                                       | 個人または初心者向けプロジェクト | 開発中のワークロード | 本番中のワークロード | 本番中のビジネスクリティカルなワークロード |
+| 推奨されるワークロード                                                                                                                                       | 個人または初心者向けプロジェクト | 開発中のワークロード | 本番環境のワークロード | 本番環境のビジネスクリティカルなワークロード |
 | 請求とアカウントサポート                                                                                                                                      | ✔                | ✔          | ✔          | ✔                     |
 | テクニカルサポート                                                                                                                                         | -        | ✔          | ✔          | ✔                     |
 | 初期応答時間                                                                                                                                            | -        | 営業時間       | 7x24       | 7x24                  |
@@ -55,7 +55,7 @@ Connected Care サービスのサポートプランでは、次のようなま�
 
 - Connected: TiDB Cloudアラートの IM サブスクリプション
 
-    この機能を使用すると、IMツール経由でアラート通知を簡単に購読でき、重要な更新情報を常に把握できます。詳細については、 [Slackで登録する](/tidb-cloud/monitor-alert-slack.md)、[Zoomで登録する](/tidb-cloud/monitor-alert-zoom.md)、[Flashdutyで登録する](/tidb-cloud/monitor-alert-flashduty.md)、[PagerDutyで登録する](/tidb-cloud/monitor-alert-pagerduty.md)、[Webhookで登録する](/tidb-cloud/monitor-alert-webhook.md)、および[Larkで登録する](/tidb-cloud/monitor-alert-lark.md)をご覧ください。
+    この機能を使用すると、IMツール経由でアラート通知を簡単に購読でき、重要な更新情報を常に把握できます。詳細については、 [Slack経由で購読する](/tidb-cloud/monitor-alert-slack.md)、[Zoom経由で購読する](/tidb-cloud/monitor-alert-zoom.md)、[Flashduty経由で購読する](/tidb-cloud/monitor-alert-flashduty.md)、[PagerDuty経由で購読する](/tidb-cloud/monitor-alert-pagerduty.md)、[Webhook経由で購読する](/tidb-cloud/monitor-alert-webhook.md)、および[Lark経由で購読する](/tidb-cloud/monitor-alert-lark.md)をご覧ください。
 
 - Connected: IMチケットの作成と更新のサブスクリプション
 
@@ -91,7 +91,7 @@ Connected Care サービスのサポートプランでは、次のようなま�
 
 [TiDB Cloudコンソール](https://tidbcloud.com/)で、左下隅の**Support**をクリックします。**Support** ページが表示され、現在のサポートプランが**CURRENT**タグで強調表示されます。
 
-**Premium**サポートプランを除き、**Support** ページから新しいサポートプランに移行できます。**Premium**プランにアップグレードするには、 [営業担当者に問い合わせる](https://www.pingcap.com/contact-us)をクリックしてください。
+**Premium**サポートプランを除き、**Support** ページから新しいサポートプランに移行できます。**Premium**プランにアップグレードするには、 [営業担当者にお問い合わせ](https://www.pingcap.com/contact-us)ください。
 
 ### 同様のサービスには追加料金を支払う必要がありますか? {#do-i-need-to-pay-more-for-similar-services}
 

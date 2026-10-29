@@ -21,7 +21,7 @@ Data Service を使用すると、カスタム API エンドポイントを使�
 
 [Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)のエンドポイントは、SQL 文を実行するためにカスタマイズできる Web API です。SQL 文には、 `WHERE`句で使用される値などのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL でパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL 文を実行し、結果を HTTP レスポンスの一部として返します。
 
-詳細については[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
+詳細については[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
 
 ## AI統合 {#ai-integrations}
 
@@ -39,4 +39,4 @@ TiDB Cloud は、 JSON 構文を使用してデータアプリの設定全体を
 
 GitHub接続で自動同期とデプロイが有効になっている場合は、GitHub上の設定ファイルを更新することでデータアプリを変更することもできます。設定ファイルの変更をGitHubにプッシュすると、新しい設定がTiDB Cloudに自動的にデプロイされます。
 
-詳細については[GitHub でデータアプリを自動デプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。
+詳細については[GitHub を使用してデータアプリを自動的にデプロイ](/tidb-cloud/data-service-manage-github-connection.md)を参照してください。

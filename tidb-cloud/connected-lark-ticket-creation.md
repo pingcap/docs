@@ -21,7 +21,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
     ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
-チケットが作成されると、ボットはスレッド内のチケットリンクを返信します。リンクをクリックすると、 [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)でチケットの詳細を確認できます。
+チケットが作成されると、ボットはスレッドにチケットリンクを返信します。リンクをクリックすると、 [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)でチケットの詳細を確認できます。
 
 ![lark-ticket-creation-3](/media/tidb-cloud/connected-lark-ticket-creation-3.png)
 
@@ -41,4 +41,4 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。
+ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">support@pingcap.com</a>にお問い合わせください。

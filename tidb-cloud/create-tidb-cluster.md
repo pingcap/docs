@@ -71,7 +71,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     > **Note:**
     >
-    > クラスターの作成時間は地域によって異なり、30分以上かかる場合があります。処理に予想以上に時間がかかる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+    > クラスターの作成時間はリージョンによって異なり、30分以上かかる場合があります。処理に予想以上に時間がかかる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 > **Note:**
 >
