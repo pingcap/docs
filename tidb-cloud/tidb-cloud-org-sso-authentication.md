@@ -49,7 +49,7 @@ TiDB Cloud は、Cloud Organization SSO に次の認証方法を提供します�
 - OIDC
 - SAML
 
-Cloud Organization SSO を有効にすると、最初の 4つの認証方法がデフォルトで有効になります。組織で SSO の使用を強制したい場合は、ユーザー名とパスワードによる認証方法を無効にすることができます。
+Cloud Organization SSO を有効にすると、最初の 4つの認証方法がデフォルトで有効になります。組織で SSO の使用を強制したい場合は、ユーザー名とパスワードによる認証方法を無効にできます。
 
 有効になっているすべての認証方法はカスタムTiDB Cloudログインページに表示されるため、事前に有効または無効にする認証方法を決定する必要があります。
 
@@ -111,7 +111,7 @@ Cloud Organization SSO を有効にした後、次のようにユーザー名と
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        デフォルトでは無効になっています。必要に応じて有効にすることができます。セキュリティ上の理由から、自動プロビジョニングを有効にする場合は、認証に許可するメールドメインを制限することをお勧めします。
+        デフォルトでは無効になっています。必要に応じて有効にできます。セキュリティ上の理由から、自動プロビジョニングを有効にする場合は、認証に許可するメールドメインを制限することをお勧めします。
 
     - **Allowed Email Domains**
 
@@ -144,7 +144,7 @@ OIDC または SAML で **Auto-provision Accounts** を有効にする場合、�
 
 ### OIDC認証方法を設定する {#configure-the-oidc-authentication-method}
 
-OIDC ID プロトコルを使用する ID プロバイダーがある場合は、 TiDB Cloudログインに OIDC 認証方法を有効にすることができます。
+OIDC ID プロトコルを使用する ID プロバイダーがある場合は、 TiDB Cloudログインに OIDC 認証方法を有効にできます。
 
 TiDB Cloudでは、OIDC認証方式はデフォルトで無効になっています。Cloud Organization SSOを有効にした後、以下の手順でOIDC認証方式を有効にして設定できます。
 
@@ -168,7 +168,7 @@ TiDB Cloudでは、OIDC認証方式はデフォルトで無効になっていま
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        デフォルトでは無効になっています。必要に応じて有効にすることができます。
+        デフォルトでは無効になっています。必要に応じて有効にできます。
 
     - **Allowed Email Domains**
 
@@ -184,7 +184,7 @@ TiDB Cloudでは、OIDC認証方式はデフォルトで無効になっていま
 
 ### SAML認証方法を設定する {#configure-the-saml-authentication-method}
 
-SAML ID プロトコルを使用する ID プロバイダーがある場合は、 TiDB Cloudログインに SAML 認証方法を有効にすることができます。
+SAML ID プロトコルを使用する ID プロバイダーがある場合は、 TiDB Cloudログインに SAML 認証方法を有効にできます。
 
 > **Note:**
 >
@@ -221,7 +221,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
     - [**Auto-provision Accounts**](#decide-whether-to-enable-auto-provision)
 
-        デフォルトでは無効になっています。必要に応じて有効にすることができます。
+        デフォルトでは無効になっています。必要に応じて有効にできます。
 
     - **Allowed Email Domains**
 
@@ -235,7 +235,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
     - **SCIM Provisioning Accounts**
 
-        デフォルトでは無効になっています。TiDB Cloud組織のユーザーとグループのプロビジョニング、デプロビジョニング、およびID管理をIDプロバイダーから一元化・自動化したい場合は、有効にすることができます。詳細な設定手順については、 [SCIMプロビジョニングを構成する](#configure-scim-provisioning)をご覧ください。
+        デフォルトでは無効になっています。TiDB Cloud組織のユーザーとグループのプロビジョニング、デプロビジョニング、およびID管理をIDプロバイダーから一元化・自動化したい場合は、有効にできます。詳細な設定手順については、 [SCIMプロビジョニングを構成する](#configure-scim-provisioning)をご覧ください。
 
         **SCIM Provisioning Accounts** を有効にする前に、プロビジョニングするユーザーのメールドメインを追加して検証し、 **Allowed Email Domains** フィールドで設定してください。
 

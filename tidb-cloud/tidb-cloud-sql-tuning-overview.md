@@ -23,7 +23,7 @@ TiDB Cloudには、スロークエリを分析するのに役立つツールが�
 
 ### 診断ページで Statement を使用する {#use-statement-on-the-diagnosis-page}
 
-TiDB Cloudコンソールには、 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ上に[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL文の実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL文を特定し、分析することができます。
+TiDB Cloudコンソールには、 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ上に[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL文の実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL文を特定し、分析できます。
 
 このページでは、構造が同じ SQL クエリ (クエリパラメータが一致しない場合でも) は、同じ SQL文にグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は、どちらも同じ SQL文`select * from employee where id in (...)`の一部です。
 

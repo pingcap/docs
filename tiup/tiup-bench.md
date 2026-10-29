@@ -202,7 +202,7 @@ YCSB を介して TiDB と TiKV の両方をストレス テストできます�
 
 ## TiUPを使用してRawSQLテストを実行する {#run-rawsql-test-using-tiup}
 
-任意のクエリを SQL ファイルに記述し、次のように`tiup bench rawsql`を実行してテストに使用することができます。
+任意のクエリを SQL ファイルに記述し、次のように`tiup bench rawsql`を実行してテストに使用できます。
 
 1. データとクエリを準備します。
 
