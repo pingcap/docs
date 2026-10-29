@@ -76,9 +76,9 @@ TiCDCの新しいアーキテクチャは、アーキテクチャをステート
 - [`scheduler.region-count-per-span`](/ticdc/ticdc-changefeed-config.md#region-count-per-span-new-in-v854) : デフォルト値は`100`です。変更フィードの初期化中に、TiCDC はこのパラメータに従って分割条件を満たすテーブルを分割します。分割後、各サブテーブルには最大で`region-count-per-span`個のリージョンが含まれます。
 - [`scheduler.write-key-threshold`](/ticdc/ticdc-changefeed-config.md#write-key-threshold) : デフォルト値は`0` (無効) です。テーブルのシンク書き込みスループットがこのしきい値を超えると、TiCDC はテーブル分割をトリガーします。ほとんどの場合、このパラメータは`0`に設定してください。
 
-## Storage Sink のファイル名の変更と消費時の注意事項 {#storage-sink-file-name-changes-and-consumption-instructions}
+## ストレージシンクのファイル名の変更と消費時の注意事項 {#storage-sink-file-name-changes-and-consumption-instructions}
 
-v8.5.5 以降、新しい TiCDC アーキテクチャでテーブルレベルのタスク分割が有効になっている場合、[Storage Sink](/ticdc/ticdc-sink-to-cloud-storage.md) のデータファイルは `CDC{num}.{extension}` ではなく `CDC_{uuid}_{num}.{extension}` という命名形式を使用し、Index ファイルは `CDC.index` ではなく `CDC_{uuid}.index` を使用します。ここで、`uuid` はテーブル分割後のレプリケーションサブタスクを識別し、`num` はファイルのシーケンス番号を示します。
+v8.5.5 以降、新しい TiCDC アーキテクチャでテーブルレベルのタスク分割が有効になっている場合、[ストレージシンク](/ticdc/ticdc-sink-to-cloud-storage.md) のデータファイルは `CDC{num}.{extension}` ではなく `CDC_{uuid}_{num}.{extension}` という命名形式を使用し、インデックスファイルは `CDC.index` ではなく `CDC_{uuid}.index` を使用します。ここで、`uuid` はテーブル分割後のレプリケーションサブタスクを識別し、`num` はファイルのシーケンス番号を示します。
 
 - データ変更レコードのパス
 
@@ -86,7 +86,7 @@ v8.5.5 以降、新しい TiCDC アーキテクチャでテーブルレベルの
   {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/CDC_{uuid}_{num}.{extension}
   ```
 
-- Index ファイルのパス
+- インデックスファイルのパス
 
   ```
   {scheme}://{prefix}/{schema}/{table}/{table-version-separator}/{partition-separator}/{date-separator}/meta/CDC_{uuid}.index
@@ -116,7 +116,7 @@ v8.5.5 以降、新しい TiCDC アーキテクチャでテーブルレベルの
 複数のレプリケーションサブタスクが並列にファイルを書き込むため、ダウンストリームのコンシューマーが完全に書き込まれる前のデータファイルを読み取り、一部のデータが欠落する可能性があります。この状況を避けるため、ダウンストリームのコンシューマープログラムを作成する際は、次の順序でデータを読み取ってください。
 
 1. 各レプリケーションサブタスクに対応する `meta/CDC_{uuid}.index` ファイル（たとえば `CDC_11.index`）を読み取り、完全に書き込まれたファイル名（たとえば `CDC_11_000002.json`）を取得します。
-2. シーケンス番号順にデータファイルを読み取り、Index ファイルと同じ `uuid` を持ち、かつその Index ファイルに記録されたファイル名のシーケンス番号以下のファイルのみを選択します（たとえば `CDC_11_000001.json` と `CDC_11_000002.json`）。
+2. シーケンス番号順にデータファイルを読み取り、インデックスファイルと同じ `uuid` を持ち、かつそのインデックスファイルに記録されたファイル名のシーケンス番号以下のファイルのみを選択します（たとえば `CDC_11_000001.json` と `CDC_11_000002.json`）。
 3. すべてのレプリケーションサブタスクから DML イベントを読み取った後、`commit-ts` でソートし、その結果の順序でダウンストリームシステム内で処理します。
 
 ## 互換性 {#compatibility}
