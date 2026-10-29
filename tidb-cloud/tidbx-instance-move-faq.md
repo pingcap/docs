@@ -11,7 +11,7 @@ TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-
 
 ## TiDB Cloudコンソールで、TiDB Cloud StarterとEssentialインスタンスを移動するように促されるのはなぜですか？ {#why-does-the-tidb-cloud-console-prompt-me-to-move-my-tidb-cloud-starter-and-essential-instances}
 
-2026年4月15日以前は、 TiDB Cloudは単一の**TiDB dedicated project**タイプを使用してすべてのTiDB Cloudリソースを管理していました。このようなプロジェクトには、TiDB Cloud DedicatedクラスタとTiDB Xインスタンスが混在することができました。しかし、1つのプロジェクトに異なるリソースタイプを混在させると、次のような理由で管理が複雑化しました。
+2026年4月15日以前は、 TiDB Cloudは単一の**TiDB dedicated project**タイプを使用してすべてのTiDB Cloudリソースを管理していました。このようなプロジェクトには、TiDB Cloud DedicatedクラスタとTiDB Xインスタンスが混在できました。しかし、1つのプロジェクトに異なるリソースタイプを混在させると、次のような理由で管理が複雑化しました。
 
 - TiDB専用プロジェクトは、元々 TiDB Cloud Dedicatedクラスター向けに設計されたものです。
 - TiDB XインスタンスとTiDB Cloud Dedicatedクラスタは、動作と管理モデルが異なります。
