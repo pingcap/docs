@@ -105,6 +105,16 @@ REFRESH LINEAGE FOR ALL VIEWS;
 
 この更新では、`default` カタログ内のすべてのビューのリネージが整合されます。変更が必要なビュー、または処理できなかったビューのみが報告され、変更不要のビューは出力されません。このコマンドにはグローバル `SUPER` 権限が必要です。出力の詳細については、[`REFRESH LINEAGE`](/tidb-cloud-lake/sql/refresh-lineage.md) を参照してください。
 
+## OpenMetadata へのエクスポート {#export-to-openmetadata}
+
+[OpenMetadata](https://open-metadata.org) で {{{ .lake }}} のリネージを表示するには、[lake-openmetadata-ingestion](https://github.com/tidbcloud/lake-openmetadata-ingestion) を使用します。このツールは、REST API を通じて、{{{ .lake }}} から OpenMetadata にメタデータ（データベース、テーブル、ビュー、カラム）とリネージ（テーブルレベルおよびカラムレベル）をプッシュします。インストール、設定、および使用方法については、プロジェクトの [README](https://github.com/tidbcloud/lake-openmetadata-ingestion) を参照してください。
+
+> **Note:**
+>
+> - このツールは現在、メタデータとリネージの取り込みのみをサポートしています。
+> - 初回同期では、`lake-om -c config.yaml metadata` を完了まで実行してから、`lake-om -c config.yaml lineage --full` を実行します。リネージエッジのいずれかのエンドポイントが OpenMetadata にまだ存在しない場合、そのリネージエッジはスキップされます。
+> - 継続的な同期では、`lake-om -c config.yaml lineage` の前に `lake-om -c config.yaml metadata` を完了まで実行する cron または Airflow ワークフローをスケジュールします。長時間の停止後は、`lake-om -c config.yaml lineage --full` を実行します。
+
 ## 制限事項 {#limitations}
 
 - `GET_LINEAGE` がたどれるのは最大 5 ホップです。

@@ -78,7 +78,7 @@ summary: ローカルファイルをTiDB Cloud Starter にインポートする�
 
     **Import Task Detail**ページでインポートの進行状況を確認できます。警告や失敗したタスクがある場合は、詳細を確認して解決できます。
 
-9. インポートタスクが完了したら、 **Explore your data by SQL Editor**をクリックして、インポートしたデータに対してクエリを実行できます。SQLエディタの使用方法の詳細については、 [AI支援SQLエディターでデータを探索](/tidb-cloud/explore-data-with-chat2query.md)をご覧ください。
+9. インポートタスクが完了したら、 **Explore your data by SQL Editor**をクリックして、インポートしたデータに対してクエリを実行できます。SQLエディタの使用方法の詳細については、 [SQL Editor でデータを探索する](/tidb-cloud/explore-data-with-sql-editor.md)をご覧ください。
 
 10. **Import**ページで、 **Action**列の**...** > **View**をクリックして、インポートタスクの詳細を確認できます。
 

@@ -201,7 +201,6 @@ SQLファイルには、テーブル結合クエリ、複雑なクエリ、集�
 ```sql
 /* Getting Started:
 Enter "USE {database};" before entering your SQL statements.
-Type "--your question" + Enter to try out AI-generated SQL queries in the TiDB Cloud console.
 Declare a parameter like "Where id = ${arg}".
 */
 USE sample_data;

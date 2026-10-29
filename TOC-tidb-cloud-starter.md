@@ -135,15 +135,11 @@
     - [Amazon S3からのデータインポート中に発生するアクセス拒否エラーのトラブルシューティング](/tidb-cloud/troubleshoot-import-access-denied-error.md)
     - [AWS DMSをTiDB Cloudに接続する](/tidb-cloud/tidb-cloud-connect-aws-dms.md)
 - データ探索
-  - [SQLエディタでのChat2Query](/tidb-cloud/explore-data-with-chat2query.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
+  - [SQL Editor](/tidb-cloud/explore-data-with-sql-editor.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [SQLプロキシアカウント](/tidb-cloud/sql-proxy-account.md)
 - Data Service ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
   - [概要](/tidb-cloud/data-service-overview.md)
   - [はじめに](/tidb-cloud/data-service-get-started.md)
-  - Chat2Query API
-    - [はじめに](/tidb-cloud/use-chat2query-api.md)
-    - [複数ラウンドのChat2Queryを開始する](/tidb-cloud/use-chat2query-sessions.md)
-    - [知識ベースを活用する](/tidb-cloud/use-chat2query-knowledge.md)
   - [データ管理アプリ](/tidb-cloud/data-service-manage-data-app.md)
   - [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)
   - [APIキー](/tidb-cloud/data-service-api-key.md)

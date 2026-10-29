@@ -231,75 +231,13 @@ TiDB Cloud コンソールで **Data > Import** に移動し、右上の **Expor
 
 ## ステップ 3. 増分データ用の changefeed を作成する {#step-3-create-a-changefeed-for-incremental-data}
 
-現在、TiDB Cloud Essential では TiDB Cloud コンソールからクラウドストレージシンクを作成できないため、TiDB Cloud API を使用する必要があります。
+TiDB Cloud コンソールでは、TiDB Cloud Essential インスタンス用のクラウドストレージ changefeed を作成できます。完全な手順については、[クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md) を参照してください。changefeed を設定する際は、次の設定に注意してください。
 
-以下の必須フィールドを指定して changefeed 作成 API を呼び出します。
-
-| フィールド | 必須の値 |
-|-------|---------------|
-| `sink.cloudStorage.dataFormat.protocol` | `CANAL_JSON` |
-| `sink.cloudStorage.dataFormat.canalJsonConfig.enableTidbExtension` | `true` |
-| `sink.cloudStorage.dataFormat.contentCompatible` | `true` |
-| `startPosition.mode` | `FROM_TSO` |
-| `startPosition.tso` | `<snapshot_tso from the export step>` |
-
-**リクエスト例:**
-
-```shell
-curl -L -X POST 'https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}/changefeeds' \
-  -H 'Content-Type: application/json' \
-  -u '<Public Key>:<Private Key>' --digest \
-  -d '{
-    "displayName": "<changefeed-name>",
-    "sink": {
-      "type": "CLOUD_STORAGE",
-      "cloudStorage": {
-        "storage": {
-          "type": "S3",
-          "s3": {
-            "uri": "s3://<bucket>/<prefix>/incremental/",
-            "authType": "ROLE_ARN",
-            "roleArn": "<role-arn>"
-          }
-        },
-        "dataFormat": {
-          "protocol": "CANAL_JSON",
-          "contentCompatible": true,
-          "canalJsonConfig": {
-            "enableTidbExtension": true
-          }
-        }
-      }
-    },
-    "filter": {
-      "mode": "IGNORE_NOT_SUPPORT_TABLE",
-      "filterRule": ["*.*"]
-    },
-    "startPosition": {
-      "mode": "FROM_TSO",
-      "tso": "<snapshot_tso>"
-    },
-    "rcu": 2
-  }'
-```
-
-> **Note:**
->
-> changefeed の URI では、エクスポートスナップショットと同じプレフィックス配下の `incremental/` サブパスを使用する必要があります。IAM ロールの権限（[3. パイプライン全体のプレフィックスを対象とするように権限を拡張する](#3-expand-permissions-to-cover-the-full-pipeline-prefix) を参照）は、このパスを対象に含めている必要があります。
->
-> **Access Key** を Role ARN の代わりに使用する場合は、リクエストボディ内の `s3` ブロックを次の内容に置き換えてください。
->
-> ```json
-> "s3": {
->   "uri": "s3://<bucket>/<prefix>/incremental/",
->   "authType": "ACCESS_KEY",
->   "accessKey": {
->     "id": "<access-key-id>",
->     "secret": "<access-key-secret>"
->   }
-> }
-> ```
->
+- **S3 URI**: スナップショットと同じプレフィックス配下の `incremental/` サブパスを使用します。たとえば、`s3://<bucket>/<prefix>/incremental/` です。
+- **Bucket Access**: **AWS Role ARN** を選択し、[方法 1: Role ARN を使用する](#method-1-use-a-role-arn) のロール ARN を入力するか、**AWS Access Key** を選択し、[方法 2: Access Key を使用する](#method-2-use-an-access-key) の Access Key ID と Secret Access Key を入力します。権限が `incremental/` パスを対象に含んでいることを確認してください。
+- **Start Replication Position**: **Start replication from a specific TSO** を選択し、[ステップ 2. Amazon S3 に完全スナップショットをエクスポートする](#step-2-export-full-snapshot-to-amazon-s3) で記録したスナップショット TSO を入力します。
+- **Data Format**: **Canal-JSON** を選択し、**Enable TiDB Extension** と **Enable Canal Content Compatibility** の両方を有効にします。これらの設定により、TiDB Cloud Lake 統合と互換性のある形式でデータが生成されます。
+- **Changefeed Specification**: レプリケーションスループットの要件を満たす容量を選択します。
 
 ## ステップ 4. TiDB Cloud Lake を設定する {#step-4-configure-tidb-cloud-lake}
 

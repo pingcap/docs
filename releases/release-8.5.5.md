@@ -161,6 +161,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 
 - バージョン8.5.5以降、TiDBはデータ復元時に対象テーブルを自動的に`restore`モードに設定します。 `restore`モードのテーブルでは、ユーザーによる読み取りまたは書き込み操作が禁止されます。復元が完了すると、TiDBはこれらのテーブルのモードを自動的に`normal`に戻し、ユーザーが通常どおりテーブルを読み書きできるようにします。この動作により、復元プロセス中のタスクの安定性とデータの一貫性が確保されます。
 - バージョン8.5.5以降、 `--load-stats`パラメータが`false`に設定されている場合、 BRは復元されたテーブルの統計情報を`mysql.stats_meta`テーブルに書き込まなくなりました。関連する統計情報を更新するには、復元後に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を手動で実行してください。
+- バージョン8.5.5以降、[TiCDCの新アーキテクチャ](/ticdc/ticdc-architecture.md)でテーブルレベルのタスク分割（`scheduler.enable-table-across-nodes = true`）が有効になっている場合、ストレージシンクのデータファイル名は`CDC{num}.{extension}`から`CDC_{uuid}_{num}.{extension}`に変更され、インデックスファイル名は`CDC.index`から`CDC_{uuid}.index`に変更されます。詳細については、[ストレージシンクのファイル名の変更と消費時の注意事項](/ticdc/ticdc-architecture.md#storage-sink-file-name-changes-and-consumption-instructions)を参照してください。
 
 ### MySQLとの互換性 {#mysql-compatibility}
 

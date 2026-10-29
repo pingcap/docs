@@ -357,7 +357,7 @@ FROM products;
 +------+-------+----------+-------------+
 ```
 
-この例では、JSON データを保存するために、profile という名前の Variant 型カラムを持つ student_profiles というテーブルを作成しています。また、profile カラムから age プロパティを抽出して整数にキャストする、_age_ という名前の仮想計算カラムも追加しています。
+この例では、JSON データを保存するために、`profile` という名前の Variant 型カラムを持つ `student_profiles` というテーブルを作成しています。また、profile カラムから age プロパティを抽出して整数にキャストする、`age` という名前の仮想計算カラムも追加しています。
 
 ```sql
 -- Create the table with a virtual computed column

@@ -90,7 +90,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 1. TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -202,7 +202,7 @@ mysql://[username]:[password]@[host]/[database]
 
 1. TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-chat2query)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`person`  (

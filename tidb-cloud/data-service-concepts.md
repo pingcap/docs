@@ -23,12 +23,6 @@ Data Service を使用すると、カスタム API エンドポイントを使�
 
 詳細については[エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
 
-## Chat2Query API {#chat2query-api}
-
-TiDB Cloudの Chat2Query API は、指示を与えることで、AI を使用して SQL 文を生成・実行できる RESTful インターフェースです。その後、API がクエリ結果を返します。
-
-詳細については[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
-
 ## AI統合 {#ai-integrations}
 
 サードパーティ製ツールをデータアプリに統合することで、サードパーティ製ツールが提供する高度な自然言語処理機能と人工知能（AI）機能をアプリケーションに導入し、強化することができます。この統合により、アプリケーションはより複雑なタスクを実行し、インテリジェントなソリューションを提供できるようになります。

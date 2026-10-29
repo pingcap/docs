@@ -6271,6 +6271,26 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 </CustomContent>
 
+<CustomContent platform="tidb-cloud">
+
+### tidb_stmt_summary_group_by_user <span class="version-mark">CLOUD.202603.1 で新規追加</span> {#tidb_stmt_summary_group_by_user}
+
+> **Note:**
+>
+> - TiDB Cloud Starter では、この変数はサポートされていません。
+> - TiDB Cloud Essential および Premium では、この変数は読み取り専用です。
+
+- スコープ: GLOBAL
+- クラスターへの永続化: Yes
+- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
+- 型: Boolean
+- デフォルト値: TiDB Cloud Essential および TiDB Cloud Premium では `ON`
+- この変数は、[ステートメントサマリーテーブル](/statement-summary-tables.md) で集計次元として SQL 文を実行するユーザーを含めるかどうかを制御します。この変数が `OFF` に設定されている場合、TiDB は異なるユーザーによって実行された同じ SQL ダイジェストを同じ行に集計し、`SAMPLE_USER` フィールドにはサンプリングされた 1 人のユーザーが表示されます。この変数が `ON` に設定されている場合、TiDB は異なるユーザーによって実行された同じ SQL ダイジェストを別々の行に集計し、各行の `SAMPLE_USER` フィールドはその文を実行したユーザーを示します。
+- この変数を変更すると、変更前後で異なる次元を使用してデータが集計されるため、現在メモリ内にあるステートメントサマリーデータはクリアされます。これはディスクに永続化された履歴データには影響しません。
+- この変数を有効にすると、同じ SQL ダイジェストに対する異なる実行ユーザー数に応じてステートメントサマリーレコード数が増加し、メモリ使用量が増える可能性があります。
+
+</CustomContent>
+
 ### tidb_stmt_summary_history_size <span class="version-mark">New in v4.0</span>
 
 > **Note:**
@@ -6343,6 +6363,26 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > **Note:**
 >
 > [`tidb_stmt_summary_enable_persistent`](/statement-summary-tables.md#persist-statements-summary)が有効になっている場合、 `tidb_stmt_summary_max_stmt_count`は[`statements_summary`](/statement-summary-tables.md#statements_summary)テーブルがメモリに格納できる SQL ダイジェストの数を制限するだけです。
+
+</CustomContent>
+
+<CustomContent platform="tidb-cloud">
+
+### tidb_stmt_summary_persist_evicted <span class="version-mark">CLOUD.202603.1 で新規追加</span> {#tidb_stmt_summary_persist_evicted}
+
+> **Note:**
+>
+> - TiDB Cloud Starter では、この変数はサポートされていません。
+> - TiDB Cloud Essential および Premium では、この変数は読み取り専用です。
+
+- スコープ: GLOBAL
+- クラスターへの永続化: Yes
+- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
+- 型: Boolean
+- デフォルト値: `OFF`
+- この変数は、[ステートメントサマリーの永続化](/statement-summary-tables.md#persist-statements-summary) を有効にした後、LRU によって退避されたステートメントサマリーレコードをステートメントサマリーログに書き込むかどうかを制御します。TiDB はこれらの JSON レコードに `"evicted": true` を付けて、下流のログコンシューマーがそれらを識別できるようにします。
+- この変数は、[tidb_stmt_summary_enable_persistent](/system-variables.md#tidb_stmt_summary_enable_persistent-new-in-v660) が有効な場合にのみ有効になります。TiDB は、`statements_summary_history` または `cluster_statements_summary_history` からのクエリ結果として、`"evicted": true` が付いたレコードを返しません。
+- この変数を有効にすると、LRU による退避がより頻繁になるにつれてログ量が増加します。TiDB は非同期バッファメカニズムを使用して退避されたレコードを書き込みます。バッファキューがいっぱいの場合、TiDB は新しい退避レコードを破棄する可能性があります。
 
 </CustomContent>
 

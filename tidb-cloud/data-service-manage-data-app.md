@@ -21,10 +21,6 @@ Data Service（プレビュー版）のデータアプリは、特定のアプ�
 
 2. 名前と説明を入力し、データアプリがアクセスするクラスターを選択します。
 
-    > **Note:**
-    >
-    > デフォルトでは、データアプリの種類は**Standard Data App**です。**Chat2Query Data App**を作成する場合は、このドキュメントではなく[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
-
 3. (オプション) データアプリのエンドポイントを任意の GitHub リポジトリとブランチに自動的にデプロイするには、 **Connect to GitHub**を有効にして、次の操作を行います。
 
     1. **Install on GitHub**をクリックし、画面の指示に従って、 **TiDB Cloud Data Service**をアプリケーションとしてターゲット リポジトリにインストールします。

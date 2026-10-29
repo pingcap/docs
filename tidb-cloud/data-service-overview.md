@@ -17,12 +17,6 @@ Data Service のエンドポイントは、SQL 文を実行するためにカス
 
 エンドポイントをより効率的に管理するには、データアプリを使用できます。Data Serviceにおけるデータアプリは、特定のアプリケーションのデータにアクセスするために使用できるエンドポイントのコレクションです。データアプリを作成することで、エンドポイントをグループ化し、APIキーを使用してエンドポイントへのアクセスを制限する認証設定を構成できます。これにより、承認されたユーザーのみがデータにアクセスして操作できるようにし、アプリケーションのセキュリティを強化できます。
 
-> **Tip:**
->
-> TiDB Cloudは、TiDBクラスタ用のChat2Query APIを提供します。有効にすると、 TiDB Cloudは自動的に**Chat2Query**と呼ばれるシステムデータアプリと、Data ServiceにChat2Dataエンドポイントを作成します。このエンドポイントを呼び出すことで、指示を与えるだけで、AIにSQL文を生成・実行させることができます。
->
-> 詳細については[Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)を参照してください。
-
 ## シナリオ {#scenarios}
 
 Data Serviceを使用すると、TiDB CloudをHTTPS対応のあらゆるアプリケーションやサービスとシームレスに統合できます。以下に、典型的な使用シナリオをいくつかご紹介します。
@@ -35,6 +29,5 @@ Data Serviceを使用すると、TiDB CloudをHTTPS対応のあらゆるアプ�
 ## 次は何か {#what-s-next}
 
 - [Data Serviceを始める](/tidb-cloud/data-service-get-started.md)
-- [Chat2Query APIを使い始める](/tidb-cloud/use-chat2query-api.md)
 - [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
 - [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)

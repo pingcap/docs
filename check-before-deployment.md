@@ -521,10 +521,27 @@ sudo systemctl enable ntpd.service
 
         2. 新しい調整プロファイルを作成します。
 
+            まず、システムで `man tuned.conf` を使用して、カスタムプロファイルのデフォルトディレクトリを確認します。`/etc/tuned/tuned-main.conf` で `profile_dirs` が明示的に設定されている場合は、その設定で指定された検索ディレクトリを使用します。以下では、カスタムプロファイルディレクトリに一致するコマンドブロックのみを実行してください。システムで別のディレクトリを使用している場合は、コマンド内の `/etc/tuned/` または `/etc/tuned/profiles/` をそのディレクトリに置き換えてください。
+
+            > **Note:**
+            >
+            > アップストリームの TuneD は v2.23.0 以降、カスタムプロファイルのデフォルトディレクトリを `/etc/tuned/profiles/` に変更しましたが、一部のディストリビューション（RHEL 9 や Rocky Linux 9 など）では引き続き `/etc/tuned/` を使用しています。そのため、TuneD のバージョンだけでディレクトリを選択しないでください。
+
+            カスタムプロファイルディレクトリが `/etc/tuned/` の場合:
+
             ```bash
-            mkdir /etc/tuned/balanced-tidb-optimal/
+            mkdir -p /etc/tuned/balanced-tidb-optimal/
             vi /etc/tuned/balanced-tidb-optimal/tuned.conf
             ```
+
+            カスタムプロファイルディレクトリが `/etc/tuned/profiles/` の場合:
+
+            ```bash
+            mkdir -p /etc/tuned/profiles/balanced-tidb-optimal/
+            vi /etc/tuned/profiles/balanced-tidb-optimal/tuned.conf
+            ```
+
+            次の内容を `tuned.conf` に追加して、ファイルを保存します。
 
             ```
             [main]
@@ -542,6 +559,12 @@ sudo systemctl enable ntpd.service
             ```
 
             出力`include=balanced`は、オペレーティングシステムの最適化構成を現在の`balanced`プロファイルに追加することを意味します。
+
+            設定を保存した後、次のコマンドを実行し、一覧に `balanced-tidb-optimal` が含まれていることを確認します。プロファイルが表示されない場合は、`tuned.conf` が正しいプロファイル検索ディレクトリに保存されているか確認してください。
+
+            ```bash
+            tuned-adm list
+            ```
 
         3. 新しく調整されたプロファイルを適用します。
 

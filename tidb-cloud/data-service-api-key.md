@@ -51,8 +51,6 @@ TiDB Cloud Data API は[基本認証](https://en.wikipedia.org/wiki/Basic_access
     {"type":"","data":{"columns":[],"rows":[],"result":{"latency":"","row_affect":0,"code":49900007,"row_count":0,"end_ms":0,"limit":0,"message":"API key rate limit exceeded. The limit can be increased up to 1000 requests per minute per API key in TiDB Cloud console. For an increase in quota beyond 1000 rpm, please contact us: https://tidb.support.pingcap.com/","start_ms":0}}}
     ```
 
-- TiDB Cloud Data Serviceでは、Chat2Queryデータアプリごとに1日あたり最大100件のリクエストが可能です。
-
 ## APIキーの有効期限 {#api-key-expiration}
 
 デフォルトでは、API キーは期限切れになりません。ただし、セキュリティを考慮して、キーを[作成する](#create-an-api-key)または[編集](#edit-an-api-key)するときに API キーの有効期限を指定できます。

@@ -176,3 +176,12 @@ func (tc *TableVersionConsumer) ExecuteDML() {}
 DDL イベントが適切に処理された後、特定のファイル形式 (CSV または Canal-JSON) とファイル番号に基づいて、 `{schema}/{table}/{table-version-separator}/`ディレクトリ内の DML イベントを処理できます。
 
 TiCDCは、データが少なくとも1回は複製されることを保証します。そのため、重複データが存在する可能性があります。変更データのコミットtsをコンシューマーチェックポイントと比較する必要があります。コミットtsがコンシューマーチェックポイントより小さい場合は、重複排除を実行する必要があります。
+
+ファイルを処理する際、ダウンストリームコンシューマーがデータファイルの書き込み完了前にそのファイルを読み取り、一部のデータが欠落する可能性があります。この問題を回避するため、ダウンストリームコンシューマーを作成する際は、次の順序でデータを読み取ってください。
+
+1. `{schema}/{table}/{table-version-separator}/` ディレクトリ内のインデックスファイルを読み取り、各インデックスファイルに記録されているファイル名を取得します。テーブルレベルのタスク分割が有効でない場合は、`meta/CDC.index` を読み取ります。新しい TiCDC アーキテクチャでテーブルレベルのタスク分割が有効 (`scheduler.enable-table-across-nodes = true`) な場合は、各レプリケーションサブタスクに対応する `meta/CDC_{uuid}.index` ファイルを読み取ります。
+2. [TiCDCの新アーキテクチャ](/ticdc/ticdc-architecture.md) では、各 `CDC_{uuid}.index` ファイルについて、シーケンス番号順にデータファイルを読み取り、インデックスファイルと同じ `uuid` を持ち、かつそのインデックスファイルに記録されているファイル名のシーケンス番号以下のファイルのみを選択します。[TiCDC クラシックアーキテクチャ](/ticdc/ticdc-classic-architecture.md) では、シーケンス番号順にデータファイルを読み取り、そのインデックスファイルに記録されているファイル名のシーケンス番号より小さいシーケンス番号を持つファイルのみを選択します。
+
+> **Note:**
+>
+> v8.5.5 以降、[TiCDCの新アーキテクチャ](/ticdc/ticdc-architecture.md) で `scheduler.enable-table-across-nodes` が有効な場合、データファイル名の形式は `CDC{num}.{extension}` から `CDC_{uuid}_{num}.{extension}` に変更され、インデックスファイル名の形式は `CDC.index` から `CDC_{uuid}.index` に変更されます。この場合、`{schema}/{table}/{table-version-separator}/` ディレクトリ内に、UUID は異なるがファイルシーケンス番号は同じデータファイルが存在する可能性があります。ダウンストリームコンシューマーを作成する際は、[ストレージシンクのファイル名の変更と消費時の注意事項](/ticdc/ticdc-architecture.md#storage-sink-file-name-changes-and-consumption-instructions) に記載されている読み取り順序に従ってください。

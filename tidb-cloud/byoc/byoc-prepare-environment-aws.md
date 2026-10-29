@@ -130,7 +130,7 @@ CIDR 範囲を計画する際は、次の接続ルールに従ってください
 | **TiDB Cloud Organization ID** | TiDB Cloud 組織の一意識別子 | `1372813089209270552` | ステップ 1 |
 | **AWS Account ID** | 12 桁の AWS アカウント番号 | `123456789012` | ステップ 2 |
 | **AWS Region** | デプロイ用に選択したリージョン | `us-west-2`, `us-east-1`, `us-east-2` | ステップ 3. マルチリージョンデプロイの場合は、すべてのリージョンを列挙してください。 |
-| **Availability Zones** | リージョンごとに 3 つの AZ または単一 AZ (名前と ID を指定) | **Us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **Us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **Us-west-2:** `us-west-2a`, `usw2-az1` | ステップ 3. 選択した**各**リージョンで AZ 数の要件を満たすよう注意してください。 |
+| **Availability Zones** | リージョンごとに 3 つの AZ または単一 AZ (名前と ID を指定) | **us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **us-west-2:** `us-west-2a`, `usw2-az1` | ステップ 3. 選択した**各**リージョンで AZ 数の要件を満たすよう注意してください。 |
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | ステップ 5. この ARN は複数リージョンで共有できます。 |
 | **Hosted Zone Name & Hosted Zone ID** | TiDB ホストゾーン。パブリックホストゾーンまたはプライベートホストゾーンのいずれかを指定できます。 | **Hosted TiDB zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB zone ID:** `Z1039122VAY4T8UNWR8E`. | ステップ 4. ホストゾーンは複数リージョンで共有できます。 |
 | **CIDR** | O11Y インフラストラクチャおよびリソースプール用にお客様が計画した CIDR 範囲 | **O11Y CIDR:** `10.1.0.0/22`; **Resource pool CIDR:** `10.10.0.0/16` | ステップ 6 |

@@ -8,9 +8,32 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 このページには、2026年の[TiDB Cloud](https://www.pingcap.com/tidb-cloud/)のリリースノートが掲載されています。
 
+## 2026年10月27日 {#october-27-2026}
+
+**一般的な変更**
+
+- **TiDB Cloud Essential**
+
+    - TiDB Cloud Essential は、`Tokyo (ap-northeast-1)` で **Regional High Availability**（パブリックプレビュー）をサポートするようになりました。追加のリージョンのサポートは今後段階的に展開されます。
+
+        サポートされているリージョンで新しい TiDB Cloud Essential インスタンスを作成する際に、**Zonal**（単一のアベイラビリティゾーン）高可用性と **Regional**（複数のアベイラビリティゾーン）高可用性のいずれかを選択できます。
+
+        Regional High Availability により、アベイラビリティゾーン障害に対する耐障害性が強化されます。TiDB Cloud Essential では、新しいリージョナル RCU の価格は以前の価格より高くなり、ゾーナル RCU の価格は変更されません。新しい Regional 価格の適用時期は次のとおりです。
+
+        - 2026年10月26日より前に作成された Regional High Availability を備えた TiDB Cloud Essential インスタンスについては、新しい価格は 2027年1月に適用されます。
+        - 2026年10月26日以降に作成された TiDB Cloud Essential インスタンスについては、新しい価格は作成時に直ちに適用されます。
+
+      RCU の価格の詳細については、[TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください。
+
 ## 2026年10月20日 {#october-20-2026}
 
 **一般的な変更**
+
+- **TiDB Cloud Starter**
+
+    - [SQL Editor](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor/?plan=starter&compatibility=mysql) と [Data Service](https://docs.pingcap.com/tidbcloud/data-service-overview/?plan=starter&compatibility=mysql) では、Chat2Query はサポートされなくなりました。
+
+        2026年10月20日以降、TiDB Cloud は SQL Editor と Data Service で Chat2Query をサポートしなくなりました。この変更は Chat2Query と Chat2Query API にのみ影響します。SQL Editor と Data Service のその他のすべての機能は引き続き利用できます。
 
 - **TiDB Cloud Essential と Premium**
 
@@ -38,6 +61,8 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
         TiDB Cloud BYOC は、プロビジョニングされた vCPU 使用量が設定されたリージョン制限に近づいたとき、または制限に達したためにスケールアップ操作がブロックされたときに通知するようになりました。
 
         これらのアラートにより、利用可能なスケーリング容量と推奨される対応について明確なガイダンスが提供されます。
+
+        詳細については、[TiDB Cloud Built-in Alerting](https://docs.pingcap.com/tidbcloud/monitor-built-in-alerting/?plan=byoc) を参照してください。
 
 ## 2026年10月15日 {#october-15-2026}
 

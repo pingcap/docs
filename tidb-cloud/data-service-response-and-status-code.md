@@ -19,7 +19,7 @@ Data Serviceは、JSON形式のボディを持つHTTPレスポンスを返しま
 
 レスポンスボディには以下のフィールドが含まれます。
 
-- `type` :*文字列*。このエンドポイントのタイプ。値は`"sql_endpoint"`または`"chat2data_endpoint"`のいずれかになります。エンドポイントによって返されるレスポンスのタイプが異なります。
+- `type` :*文字列*。このエンドポイントのタイプ。値は`"sql_endpoint"`です。
 - `data` :*オブジェクト*。実行結果は、次の3つの部分から構成されます。
 
     - `columns` :*配列*。返されるフィールドのスキーマ情報。
@@ -34,9 +34,6 @@ Data Serviceは、JSON形式のボディを持つHTTPレスポンスを返しま
     - `result` :*オブジェクト*。SQL文の実行関連情報。成功/失敗ステータス、実行時間、返された行数、ユーザー構成などが含まれます。
 
 応答の例は以下のとおりです。
-
-<SimpleTab>
-<div label="SQL Endpoint">
 
 ```json
 {
@@ -70,51 +67,6 @@ Data Serviceは、JSON形式のボディを持つHTTPレスポンスを返しま
     }
 }
 ```
-
-</div>
-
-<div label="Chat2Data Endpoint">
-
-```json
-{
-  "type": "chat2data_endpoint",
-  "data": {
-    "columns": [
-      {
-        "col": "id",
-        "data_type": "BIGINT",
-        "nullable": false
-      },
-      {
-        "col": "type",
-        "data_type": "VARCHAR",
-        "nullable": false
-      }
-    ],
-    "rows": [
-      {
-        "id": "20008295419",
-        "type": "CreateEvent"
-      }
-    ],
-    "result": {
-      "code": 200,
-      "message": "Query OK!",
-      "start_ms": 1678965476709,
-      "end_ms": 1678965476839,
-      "latency": "130ms",
-      "row_count": 1,
-      "row_affect": 0,
-      "limit": 50
-      "sql": "select id,type from sample_data.github_events limit 1;",
-      "ai_latency": "30ms"
-    }
-  }
-}
-```
-
-</div>
-</SimpleTab>
 
 ## ステータスコード {#status-code}
 
@@ -280,9 +232,6 @@ HTTPステータスコードが`200`で、 `data.result.code`フィールドに�
 
 応答の例は以下のとおりです。
 
-<SimpleTab>
-<div label="SQL Endpoint">
-
 ```json
 {
   "type": "",
@@ -302,33 +251,6 @@ HTTPステータスコードが`200`で、 `data.result.code`フィールドに�
   }
 }
 ```
-
-</div>
-
-<div label="Chat2Data Endpoint">
-
-```json
-{
-  "type": "chat2data_endpoint",
-  "data": {
-    "columns": [],
-    "rows": [],
-    "result": {
-      "code": 429,
-      "message": "The AI request exceeded the limit of 100 times per day. For more quota, please contact us: https://tidb.support.pingcap.com/",
-      "start_ms": "",
-      "end_ms": "",
-      "latency": "",
-      "row_count": 0,
-      "row_affect": 0,
-      "limit": 0
-    }
-  }
-}
-```
-
-</div>
-</SimpleTab>
 
 ### 500 {#500}
 

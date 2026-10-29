@@ -21,7 +21,7 @@ REFRESH VIRTUAL COLUMN FOR <table>
 
 ## 例 {#examples}
 
-次の例では、'test' という名前のテーブルに対して仮想カラムをリフレッシュします。
+次の例では、`test` という名前のテーブルに対して仮想カラムをリフレッシュします。
 
 ```sql
 CREATE TABLE test(id int, val variant);
