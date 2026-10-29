@@ -765,7 +765,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
     - [Data Serviceの概要](/tidb-cloud/data-service-overview.md)
     - [Data Serviceを始める](/tidb-cloud/data-service-get-started.md)
 
-- AWS でホストされ、2022年 12月 31日以降に作成される[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターをスケールインするために、TiDB、TiKV、およびTiFlashノードのサイズを縮小することをサポートします。
+- AWS でホストされ、2022年 12月 31日より後に作成された[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターをスケールインするために、TiDB、TiKV、およびTiFlashノードのサイズを縮小することをサポートします。
 
     ノードサイズを[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らすことができます。
 
