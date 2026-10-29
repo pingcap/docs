@@ -38,6 +38,8 @@ CREATE TABLE `select` (BEGIN int, END int);
 Query OK, 0 rows affected (0.09 sec)
 ```
 
+Starting from v9.0.0, `AUTO` is a non-reserved keyword used by [`PRE_SPLIT_REGIONS AUTO`](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting). You can still use it without backticks as a table, column, index, or alias name. For a role named `auto`, use backticks, for example, ``CREATE ROLE `auto`;`` and ``SET ROLE `auto`;``. SQL normalization treats unquoted `AUTO` as a keyword, so the normalized SQL text and SQL digest of statements that use an unquoted `auto` identifier change after upgrading.
+
 In the special case, the reserved keywords do not need backticks if they are used with the `.` delimiter:
 
 ```sql
@@ -84,6 +86,7 @@ The following list shows the keywords in TiDB. Reserved keywords are marked with
 - ASCII
 - ATTRIBUTE
 - ATTRIBUTES
+- AUTO
 - AUTO_ID_CACHE
 - AUTO_INCREMENT
 - AUTO_RANDOM

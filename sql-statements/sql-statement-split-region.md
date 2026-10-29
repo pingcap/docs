@@ -355,6 +355,8 @@ You can specify the partition to be split.
 
 ## pre_split_regions
 
+When adding an index to an existing table, you can use `PRE_SPLIT_REGIONS AUTO` to derive index Region split boundaries from existing column statistics. This per-index option differs from the table option described in this section and cannot be used as a `CREATE TABLE` table option. For details, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
+
 When creating a table with the `AUTO_RANDOM` or `SHARD_ROW_ID_BITS` attribute, you can also specify the `PRE_SPLIT_REGIONS` option if you want to evenly pre-split the table into Regions immediately after the table is created. The number of pre-split Regions for a table is `2^(PRE_SPLIT_REGIONS)`.
 
 > **Note:**
