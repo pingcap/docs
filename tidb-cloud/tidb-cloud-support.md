@@ -9,7 +9,7 @@ TiDB Cloud offers tiered support plan offerings tailored to meet customers' need
 
 > **Warning:**
 >
-> Before creating a support ticket or attaching logs or files, remove or mask credentials such as passwords and API keys, personally identifiable information (PII), and other sensitive data. Replace them with asterisks (****) or other placeholders. If you accidentally submit such information, contact Support immediately and ask them to delete it.
+> Before creating a support ticket or attaching logs or files, remove or mask credentials such as passwords and API keys, personally identifiable information (PII), and other sensitive data. Replace them with asterisks (****) or other placeholders. If you accidentally submit such information, contact TiDB Cloud Support immediately and ask them to delete it. <CustomContent language="en,zh">If TiDB Cloud Support still needs information from the deleted attachment to resolve the ticket, you can reattach a sanitized version to the original ticket.</CustomContent>
 
 ## Support channels
 
