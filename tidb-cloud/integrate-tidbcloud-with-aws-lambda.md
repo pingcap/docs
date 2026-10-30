@@ -102,7 +102,7 @@ To rebuild and upload the code bundle to your own S3 bucket, do the following:
     1. Visit the [S3 service](https://console.aws.amazon.com/s3) in the AWS Management Console.
     2. Create a new bucket in your selected region.
     3. Upload the `index.zip` file to the bucket.
-    4. Note down the S3 bucket name and region for later use.
+    4. Note down the S3 bucket name and the object key of the uploaded `index.zip` file for later use.
 
 </details>
 
@@ -130,8 +130,8 @@ To set up the bookshop project using AWS CloudFormation, do the following:
             - **Stack name**: enter the stack name.
             - **S3Bucket**: enter the S3 bucket where you store the zip file.
             - **S3Key**: enter the S3 key.
-            - **TiDBDatabase**: enter the {{{ .starter }}} instance name.
-            - **TiDBHost**: enter the host URL for TiDB Cloud database access. Enter `localhost`.
+            - **TiDBDatabase**: enter the database name for TiDB Cloud database access, for example, `test`.
+            - **TiDBHost**: enter the hostname shown as `HOST` in the connection information of your {{{ .starter }}} instance.
             - **TiDBPassword**: enter the password for TiDB Cloud database access.
             - **TiDBPort**: enter the port for TiDB Cloud database access.
             - **TiDBUser**: enter the user name for TiDB Cloud database access.
@@ -139,7 +139,7 @@ To set up the bookshop project using AWS CloudFormation, do the following:
         - If you use a different AWS region other than `us-east-1`, follow these steps:
 
             1. Refer to [Modify and rebuild the Lambda function code if you use a region other than `us-east-1`](#prerequisites) to modify the Lambda function code, rebuild it, and upload the code bundle to your own S3 bucket.
-            2. In the stack details fields, specify the S3 bucket name and region in the `S3Bucket` and `S3Key` parameters according to your own configuration.
+            2. In the stack details fields, specify the S3 bucket name and the object key of the uploaded `index.zip` file in the `S3Bucket` and `S3Key` parameters according to your own configuration.
             3. Fill in other fields as in the preceding screenshot.
 
     4. Configure stack options. You can use the default configurations.
@@ -183,7 +183,7 @@ After the stack has been created, you can use the project as follows:
     - Create a book:
 
         ```shell
-        curl -X POST -H "Content-Type: application/json" -d '{ "title": "Book Title", "type": "Test", "publishAt": "2022-12-15T21:01:49.000Z", "stock": 123, "price": 12.34, "authors": "Test Test" }' https://  <your-api-endpoint>/book
+        curl -X POST -H "Content-Type: application/json" -d '{ "title": "Book Title", "type": "Test", "publishAt": "2022-12-15T21:01:49.000Z", "stock": 123, "price": 12.34, "authors": "Test Test" }' https://<your-api-endpoint>/book
         ```
 
     - Update a book:
