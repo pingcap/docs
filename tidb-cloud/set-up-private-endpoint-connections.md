@@ -296,6 +296,6 @@ Then complete [Step 3. Create a private endpoint connection](#step-3-create-a-pr
 
 ### I cannot connect to a TiDB cluster via a private endpoint after enabling private DNS. Why?
 
-You might need to properly set the security group for your VPC endpoint in the AWS Management Console. Go to **VPC** > **Endpoints**. To do so, go to **VPC** > **Endpoints**, right-click your VPC endpoint, and select **Manage security groups**. Ensure that the selected security group allows inbound access from your EC2 instances on port `4000` or a customer-defined port.
+You might need to properly set the security group for your VPC endpoint in the AWS Management Console. To do so, go to **VPC** > **Endpoints**, right-click your VPC endpoint, and select **Manage security groups**. Ensure that the selected security group allows inbound access from your EC2 instances on port `4000` or a customer-defined port.
 
 ![Manage security groups](/media/tidb-cloud/private-endpoint/manage-security-groups.png)
