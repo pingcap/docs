@@ -1,6 +1,6 @@
 ---
 title: 2024-04-09 TiDB Cloud Monitoring Features Maintenance Notification
-summary: 2024年4月9日に実施されるTiDB Cloud監視機能のメンテナンスの詳細（メンテナンス期間、理由、影響など）についてご確認ください。
+summary: 2024年4月9日に実施されるTiDB Cloud監視機能のメンテナンスの詳細（メンテナンスウィンドウ、理由、影響など）についてご確認ください。
 ---
 
 # [2024-04-09] TiDB Cloud監視機能メンテナンスのお知らせ {#2024-04-09-tidb-cloud-monitoring-features-maintenance-notification}
@@ -15,9 +15,9 @@ summary: 2024年4月9日に実施されるTiDB Cloud監視機能のメンテナ�
 
 ## インパクト {#impact}
 
-### 影響を受ける地域 {#affected-regions}
+### 影響を受けるリージョン {#affected-regions}
 
-メンテナンス期間中は、以下の地域における監視機能に影響が出ます。
+メンテナンスウィンドウ中は、以下のリージョンにおける監視機能に影響が出ます。
 
 - TiDB Cloud Dedicatedクラスター：
     - クラウドプロバイダー：AWS、リージョン：オレゴン（us-west-2）

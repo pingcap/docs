@@ -15,7 +15,7 @@ summary: 2024年 4月 11日のTiDB Cloud Data Migration (DM) 機能メンテナ�
 
 ## インパクト {#impact}
 
-メンテナンス期間中、次のリージョンのTiDB Cloud Dedicated クラスターの DM 機能が影響を受けます。
+メンテナンスウィンドウ中、次のリージョンのTiDB Cloud Dedicated クラスターの DM 機能が影響を受けます。
 
 - クラウドプロバイダー: AWS、リージョン: オレゴン (us-west-2)
 - クラウドプロバイダー: AWS、リージョン: 北バージニア (us-east-1)

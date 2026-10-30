@@ -14,13 +14,13 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Essential**
 
-    - TiDB Cloud Essential は、`Tokyo (ap-northeast-1)` で **Regional High Availability**（パブリックプレビュー）をサポートするようになりました。追加のリージョンのサポートは今後段階的に展開されます。
+    - TiDB Cloud Essential は、`Tokyo (ap-northeast-1)` で **リージョン高可用性**（パブリックプレビュー）をサポートするようになりました。追加のリージョンのサポートは今後段階的に展開されます。
 
         サポートされているリージョンで新しい TiDB Cloud Essential インスタンスを作成する際に、**Zonal**（単一のアベイラビリティゾーン）高可用性と **Regional**（複数のアベイラビリティゾーン）高可用性のいずれかを選択できます。
 
-        Regional High Availability により、アベイラビリティゾーン障害に対する耐障害性が強化されます。TiDB Cloud Essential では、新しいリージョナル RCU の価格は以前の価格より高くなり、ゾーナル RCU の価格は変更されません。新しい Regional 価格の適用時期は次のとおりです。
+        リージョン高可用性により、アベイラビリティゾーン障害に対する耐障害性が強化されます。TiDB Cloud Essential では、新しいリージョン RCU の価格は以前の価格より高くなり、ゾーン RCU の価格は変更されません。新しいリージョン価格の適用時期は次のとおりです。
 
-        - 2026年10月26日より前に作成された Regional High Availability を備えた TiDB Cloud Essential インスタンスについては、新しい価格は 2027年1月に適用されます。
+        - 2026年10月26日より前に作成されたリージョン高可用性を備えた TiDB Cloud Essential インスタンスについては、新しい価格は 2027年1月に適用されます。
         - 2026年10月26日以降に作成された TiDB Cloud Essential インスタンスについては、新しい価格は作成時に直ちに適用されます。
 
       RCU の価格の詳細については、[TiDB Cloud Essential Pricing Details](https://www.pingcap.com/tidb-cloud-essential-pricing-details/) を参照してください。
@@ -115,7 +115,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
       Max RCU が設定済みの既存の TiDB Cloud Essential インスタンスは、設定を変更しなくても引き続き実行されます。現在の値を維持することも、これをクリアして **Elastic Mode** に切り替えることもできます。
 
-      詳細は、[Create a TiDB Cloud Essential instance](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=essential) を参照してください。
+      詳細は、[TiDB Cloud Essentialインスタンスを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-cluster-serverless/?plan=essential) を参照してください。
 
     - TiDB Cloud Essential で手動バックアップがサポートされるようになりました。これらの手動バックアップは、明示的に削除するまで保持されます。
 
@@ -132,7 +132,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
       Max RCU が設定済みの既存の TiDB Cloud Premium インスタンスは、設定を変更しなくても引き続き実行されます。現在の値を維持することも、これをクリアして **Elastic Mode** に切り替えることもできます。
 
-      詳細は、[Create a TiDB Cloud Premium instance](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium) を参照してください。
+      詳細は、[TiDB Cloud Premiumインスタンスを作成する](https://docs.pingcap.com/tidbcloud/create-tidb-instance-premium/?plan=premium) を参照してください。
 
 ## 2026年9月29日 {#september-29-2026}
 
@@ -164,7 +164,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) で、AWS PrivateLink 経由のインバウンド IPv6 接続がサポートされるようになり、IPv4 または IPv6 のいずれかを使用してクラスターに接続できるようになりました。
 
-        現在、この機能はリクエストに応じて利用可能です。IPv6 接続を利用するには、[TiDB Cloud サポート](/tidb-cloud/tidb-cloud-support.md) に連絡してリクエストし、その後デュアルスタックの AWS インターフェイスエンドポイントを作成してください。
+        現在、この機能はリクエストに応じて利用可能です。IPv6 接続を利用するには、[TiDB Cloud サポート](/tidb-cloud/tidb-cloud-support.md) に連絡してリクエストし、その後デュアルスタックの AWS インターフェースエンドポイントを作成してください。
 
         詳細は、[プライベートエンドポイント経由で IPv6 接続を使用する](https://docs.pingcap.com/tidbcloud/set-up-private-endpoint-connections#use-ipv6-connectivity-over-a-private-endpoint) を参照してください。
 
@@ -212,7 +212,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         Plan Replayer ファイルには SQL テキスト、テーブルスキーマ、オプティマイザ統計情報が含まれますが、実際のテーブル行データは含まれません。
 
-        詳細は、[Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential) を参照してください。
+        詳細は、[Plan Replayer を使用して SQL パフォーマンスをトラブルシュートする](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential) を参照してください。
 
 - **TiDB Cloud Premium**
 
@@ -226,7 +226,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         SQL ユーザー、イベントクラス、テーブル、実行ステータスで監査イベントをフィルタリングして、どのデータベースアクティビティをログに記録するかを制御できるため、セキュリティ監査とコンプライアンスに関連するイベントに集中できます。
 
-        詳細は、[Specify audit filter rules](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules) を参照してください。
+        詳細は、[監査フィルタルールを指定する](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules) を参照してください。
 
     - TiDB Cloud Premium で、SQL パフォーマンスのトラブルシューティングのために、TiDB Cloud Support に Plan Replayer ファイルへのアクセスを一時的に許可できるようになりました。
 
@@ -234,7 +234,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         Plan Replayer ファイルには SQL テキスト、テーブルスキーマ、オプティマイザ統計情報が含まれますが、実際のテーブル行データは含まれません。
 
-        詳細は、[Use Plan Replayer to Troubleshoot SQL Performance](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium) を参照してください。
+        詳細は、[Plan Replayer を使用して SQL パフォーマンスをトラブルシュートする](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium) を参照してください。
 
 **課金の調整**
 
@@ -264,7 +264,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         この機能により、中間メッセージキューが不要になることでコストを削減しながら、下流の分析や長期保持のために変更データをクラウドストレージにアーカイブできます。
 
-        詳細については、[Sink to Cloud Storage](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
+        詳細については、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
 
 ## 2026年8月18日 {#august-18-2026}
 
@@ -286,7 +286,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Lake](https://docs.pingcap.com/tidbcloudlake/) が、日本 (Tokyo) の Alibaba Cloud (`ap-northeast-1`) で利用可能になりました。
 
-        サポートされているその他のリージョンについては、[Platforms & Regions](https://docs.pingcap.com/tidbcloudlake/platforms-regions/) を参照してください。
+        サポートされているその他のリージョンについては、[プラットフォームとリージョン](https://docs.pingcap.com/tidbcloudlake/platforms-regions/) を参照してください。
 
     - 新しい外部 Python UDF SDK と dbtアダプターにより、TiDB Cloud Lake の Python 拡張性と analytics engineering ワークフローを拡張しました。
 
@@ -295,15 +295,15 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
       詳細については、以下のドキュメントを参照してください。
 
-        - [External Function](https://docs.pingcap.com/tidbcloudlake/external-function/)
-        - [Choose a User-Defined Function Type](https://docs.pingcap.com/tidbcloudlake/choose-a-udf-type/)
-        - [Load Data with dbt](https://docs.pingcap.com/tidbcloudlake/load-with-dbt/)
+        - [外部関数](https://docs.pingcap.com/tidbcloudlake/external-function/)
+        - [ユーザー定義関数タイプを選択する](https://docs.pingcap.com/tidbcloudlake/choose-a-udf-type/)
+        - [dbt を使用したデータのロード](https://docs.pingcap.com/tidbcloudlake/load-with-dbt/)
 
 ## 2026年8月11日 {#august-11-2026}
 
 **全般的な変更**
 
-- **TiDB Cloud Essential, Premium, and Dedicated**
+- **TiDB Cloud Essential、Premium、Dedicated**
 
     - [Lark](https://www.larksuite.com/) 経由で TiDB Cloud からのアラート通知を購読できるようになりました。
 
@@ -311,9 +311,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         詳細については、以下のドキュメントを参照してください。
 
-        - TiDB Cloud Essential: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=essential)
-        - TiDB Cloud Premium: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=premium)
-        - TiDB Cloud Dedicated: [Subscribe via Lark](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/)
+        - TiDB Cloud Essential: [Lark経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=essential)
+        - TiDB Cloud Premium: [Lark経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/?plan=premium)
+        - TiDB Cloud Dedicated: [Lark経由で購読する](https://docs.pingcap.com/tidbcloud/monitor-alert-lark/)
 
 - **TiDB Cloud Lake**
 
@@ -324,10 +324,10 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
       詳細については、以下のドキュメントを参照してください。
 
-        - [TiDB Cloud Lake MCP Server](https://docs.pingcap.com/tidbcloudlake/mcp-server)
-        - [Connect AI Tools to TiDB Cloud Lake Using MCP](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
-        - [Connect to TiDB Cloud Lake with Jupyter Notebook](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
-        - [Connect to TiDB Cloud Lake with Apache Superset](https://docs.pingcap.com/tidbcloudlake/superset)
+        - [TiDB Cloud Lake MCP サーバー](https://docs.pingcap.com/tidbcloudlake/mcp-server)
+        - [MCP を使用して AI ツールを TiDB Cloud Lake に接続する](https://docs.pingcap.com/tidbcloudlake/mcp-client-integration)
+        - [Jupyter Notebook で TiDB Cloud Lake に接続する](https://docs.pingcap.com/tidbcloudlake/jupyter-notebook)
+        - [Apache Superset で TiDB Cloud Lake に接続する](https://docs.pingcap.com/tidbcloudlake/superset)
 
 **コンソールの変更**
 
@@ -351,7 +351,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
         - **Custom Retention Mode:** 保持期間を 3日から 33日まで指定し、日次スナップショットを作成するタイミングを選択できます。
         - **Standard Bundle Mode:** PITR、時間単位のスナップショット、および日次スナップショットに対する従来のデフォルト自動バックアップ設定を維持します。
 
-      詳細については、[Automatic backup modes](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes) を参照してください。
+      詳細については、[自動バックアップモード](/tidb-cloud/premium/backup-and-restore-premium.md#automatic-backup-modes) を参照してください。
 
 ## 2026年8月4日 {#august-4-2026}
 
@@ -371,7 +371,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         AWS でホストされる TiDB Cloud Premium インスタンスでは、AWS PrivateLink 経由で Amazon MSK Provisioned クラスターに行変更イベントをストリーミングできるようになりました。
 
-        詳細については、[Set Up Private Endpoint for Changefeeds](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) および [Set Up an Amazon MSK Provisioned Cluster via AWS PrivateLink](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md) を参照してください。
+        詳細については、[Changefeeds用のプライベートエンドポイントを設定する](/tidb-cloud/premium/set-up-sink-private-endpoint-premium.md) および [AWS PrivateLink を使用して Amazon MSK Provisioned クラスターをセットアップする](/tidb-cloud/setup-aws-msk-provisioned-private-link-service.md) を参照してください。
 
     - TiDB Cloud Premium から 汎用webhook経由でアラート通知を購読できるようになりました。
 
@@ -443,7 +443,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
 
-        詳細については、[Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential) を参照してください。
+        詳細については、[TiDB CloudとDatadogを統合する](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=essential) を参照してください。
 
 - **TiDB Cloud Premium**
 
@@ -451,11 +451,11 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) インスタンスの主要なメトリクスを [Datadog](https://www.datadoghq.com/) に送信し、一元的な監視とアラートを行うように TiDB Cloud を設定できるようになりました。
 
-        詳細については、[Integrate TiDB Cloud with Datadog](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium) を参照してください。
+        詳細については、[TiDB CloudとDatadogを統合する](https://docs.pingcap.com/tidbcloud/monitor-datadog-integration-for-tidb-x/?plan=premium) を参照してください。
 
 **コンソールの変更**
 
-- [TiDB Cloud console](https://tidbcloud.com/) でパブリックプレビュー機能に使用するラベルを `PREVIEW` に標準化し、これまで混在していた `BETA` と `PREVIEW` の使用を置き換えました。
+- [TiDB Cloud コンソール](https://tidbcloud.com/) でパブリックプレビュー機能に使用するラベルを `PREVIEW` に標準化し、これまで混在していた `BETA` と `PREVIEW` の使用を置き換えました。
 
 **API の変更**
 
@@ -512,7 +512,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         TiDB Cloud Lake を試すには、[TiDB Cloud コンソール](https://tidbcloud.com/) にログインし、左側のナビゲーションペインで **My Lake** をクリックしてから、右上隅の **Try TiDB Cloud Lake** をクリックします。
 
-        詳細については、[TiDB Cloud Lake documentation](https://docs.pingcap.com/tidbcloudlake/) を参照してください。
+        詳細については、[TiDB Cloud Lake ドキュメント](https://docs.pingcap.com/tidbcloudlake/) を参照してください。
 
 **今後の課金調整**
 
@@ -554,9 +554,9 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Essential**
 
-    - 2026年6月9日以降に新たに作成される[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスは、単一のアベイラビリティゾーンにデプロイされ、リージョンごとの高可用性はサポートされません。
+    - 2026年6月9日以降に新たに作成される[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスは、単一のアベイラビリティゾーンにデプロイされ、リージョン高可用性はサポートされません。
 
-        リージョンの高可用性とクロスAZフェイルオーバーが必要な場合は、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)を選択することを検討してください。
+        リージョン高可用性とクロスAZフェイルオーバーが必要な場合は、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)を選択することを検討してください。
 
         この変更は、2026年6月9日より前に作成されたTiDB Cloud Essentialインスタンスには影響しません。
 
@@ -595,7 +595,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンスの Alibaba Cloud で二重層データ暗号化をサポートします。
 
-        Alibaba Cloud Key Management Service (KMS) では、独自のキーを使用して保存データを暗号化できるため、データセキュリティとコンプライアンスをより詳細に管理できます。
+        Alibaba Cloud Key Management Service (KMS) にある独自のキーを使用して保存データを暗号化できるため、データセキュリティとコンプライアンスをより詳細に管理できます。
 
         この機能はリクエストに応じて利用できるようになりました。詳細については、 [二重層データ暗号化](/tidb-cloud/premium/dual-layer-data-encryption-premium.md)を参照してください。
 
@@ -678,7 +678,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Dedicated**
 
-    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)は、**日本東部**および**米国東部 2**の Microsoft Azure で一般提供 (GA) になりました。
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)は、**Japan East** および **East US 2** の Microsoft Azure で一般提供 (GA) になりました。
 
         TiDB Cloud Dedicatedは、99.99%の稼働率SLAを備えた3つのAZ構成による高可用性、 TiFlashによる完全なHTAP、独立したコンピューティングとストレージのスケーリング、PingCAP SREによる完全マネージド運用、シームレスなデータインポートと移行、PITRによる継続的なバックアップ、エンタープライズグレードのセキュリティ、および統合された可観測性を提供します。また、一括データインポート、MySQLやその他のソースからの移行、ダウンストリームシステムへのリアルタイムレプリケーションもサポートしています。[Azure Marketplace](https://azuremarketplace.microsoft.com/)をご利用の場合は、Azure MarketplaceからTiDB Cloud Dedicatedをサブスクライブすることもできます。
 
@@ -696,7 +696,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         TiDB Cloud Premium は[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の間のギャップを埋めるものです。
 
-        - TiDB Cloud Essentialと比較して、 TiDB Cloud Premiumはコンピューティング、ストレージ、ネットワークの各レイヤーにおいて大幅に強化された分離性を提供し、重要なワークロードに対して予測可能なパフォーマンスを保証します。同時に、柔軟性の高いオンデマンドのスケーリングモデルを維持しており、運用上のオーバーヘッドなしにコンピューティング能力を個別に拡張できます。
+        - TiDB Cloud Essentialと比較して、 TiDB Cloud Premiumはコンピューティング、ストレージ、ネットワークの各レイヤーにおいて大幅に強化された分離性を提供し、重要なワークロードに対して予測可能なパフォーマンスを保証します。同時に、柔軟性の高いオンデマンドのスケーリングモデルを維持しており、運用上のオーバーヘッドなしにコンピューティングキャパシティを個別に拡張できます。
         - TiDB Cloud Dedicatedと比較して、 TiDB Cloud Premiumはアイドル状態の余裕を排除することでコスト効率を向上させ、実際に使用したパフォーマンスに対してのみ料金を支払うことができます。
 
         TiDB Cloud Premium の詳細については、 [TiDB Cloud Premium: ミッションクリティカルなSQLのパブリックプレビュー](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/)を参照してください。
@@ -770,7 +770,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 - [アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)エンドポイントに`type`フィールドを追加します。
 
     - アプリケーションがプロジェクト応答から`id`および`name`フィールドのみを読み取る場合は、変更は必要ありません。
-    - [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、専用プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターするため)、 `type`フィールドの読み取りを開始します。
+    - [プロジェクトの種類](/tidb-cloud/tidbx-instance-move-faq.md#what-project-types-are-available-in-tidb-cloud)を区別する必要がある場合 (たとえば、Dedicated プロジェクト、TiDB X プロジェクト、または TiDB X 仮想プロジェクトをフィルターするため)、 `type`フィールドの読み取りを開始します。
 
 詳細については、 [TiDB Cloud StarterおよびEssential向けプロジェクトAPI移行ガイド](/tidb-cloud/tidbx-starter-essential-project-api-migration-guide.md)を参照してください。
 
@@ -830,7 +830,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - データフローシナリオにおけるプライベートリンク接続でのAmazon MSK Provisionedをサポートします。
 
-        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)は、 [Amazon MSK プロビジョニング済み](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK プロビジョニングされたクラスターへの変更フィードのプライベートネットワーク接続が可能になります。
+        [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)は、 [Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターへのプライベートリンク接続の作成をサポートするようになりました。この機能により、トラフィックを公共のインターネットに公開することなく、Amazon MSK Provisioned クラスターへの変更フィードのプライベートネットワーク接続が可能になります。
 
         詳細については、 [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)を参照してください。
 
@@ -944,7 +944,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、**Actions**列の**Get Support**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**Support Plan**パネルに、有料プランのユーザーは**Support Portal**に誘導されます。
     - **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**Support Options**と**Support Tickets**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
-    - **明確なコミュニティ サポート アクセス**:**Support Plan**オプション内では、Slack と Discord がBasic プラン ユーザーの主要なテクニカルサポート チャネルとして明確に識別されます。次のドキュメントは、サポート チャネル ポリシーとコミュニティ アクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[Connected Careの概要](/tidb-cloud/connected-care-overview.md)、および[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)。
+    - **明確なコミュニティサポートアクセス**:**Support Plan**オプション内では、Slack と Discord がBasic プランユーザーの主要なテクニカルサポートチャネルとして明確に識別されます。次のドキュメントは、サポートチャネルポリシーとコミュニティアクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[Connected Careの概要](/tidb-cloud/connected-care-overview.md)、および[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)。
     - **アクション指向のSupport Plan UI** ：**Support Plan**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。
 
     詳細については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)を参照してください。
