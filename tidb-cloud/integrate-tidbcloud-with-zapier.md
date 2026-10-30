@@ -19,7 +19,7 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 [Zapテンプレート](https://docs.zapier.com/integrations/publish/zap-templates)は、公開されているZapier連携機能向けに、アプリとコアフィールドが事前に選択された、すぐに使える連携機能またはZapです。
 
-このセクションでは、 **Add new Github global events to TiDB rows**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバル イベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
+このセクションでは、 **Add new Github global events to TiDB rows**テンプレートを例として、ワークフローを作成します。このワークフローでは、GitHub アカウントから新しいグローバルイベント (任意のリポジトリで、あなたからまたはあなたに対して発生する[GitHubイベント](https://docs.github.com/en/developers/webhooks-and-events/events/github-event-types)) が作成されるたびに、Zapier がTiDB Cloudクラスターに新しい行を追加します。
 
 ### 前提条件 {#prerequisites}
 

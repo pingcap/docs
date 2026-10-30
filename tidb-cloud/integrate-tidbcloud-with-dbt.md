@@ -59,9 +59,9 @@ cd jaffle_shop
 
 - `dbt_project.yml`は dbt プロジェクト設定ファイルであり、プロジェクト名とデータベース設定ファイルの情報が含まれています。
 
-- `models`ディレクトリには、プロジェクトの SQL モデルとテーブルスキーマが含まれています。このセクションはデータ アナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
+- `models`ディレクトリには、プロジェクトの SQL モデルとテーブルスキーマが含まれています。このセクションはデータアナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
-- `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポート](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)し、CSV ファイルにできます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
+- `seeds`ディレクトリには、データベースエクスポートツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポート](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)し、CSV ファイルにできます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
 
 ## ステップ3. プロジェクトを設定する {#step-3-configure-the-project}
 
@@ -69,7 +69,7 @@ cd jaffle_shop
 
 1. グローバル設定を完了してください。
 
-    [プロフィール項目の説明](#description-of-profile-fields)を参照し、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`を編集して、 TiDB Cloudとの接続を構成できます。
+    [プロフィール項目の説明](#description-of-profile-fields)を参照し、デフォルトのグローバルプロファイル`~/.dbt/profiles.yml`を編集して、 TiDB Cloudとの接続を構成できます。
 
     ```shell
     sudo vi ~/.dbt/profiles.yml

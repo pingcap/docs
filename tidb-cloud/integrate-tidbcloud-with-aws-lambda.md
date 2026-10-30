@@ -5,7 +5,7 @@ summary: TiDB Cloud StarterをAmazon LambdaおよびCloudFormationと統合す�
 
 # AWS CloudFormationを使用してTiDB Cloud StarterをAmazon Lambdaと統合する {#integrate-tidb-cloud-starter-with-amazon-lambda-using-aws-cloudformation}
 
-このドキュメントでは、 [AWS CloudFormation](https://aws.amazon.com/cloudformation/)を使用して、クラウドネイティブな分散 SQL データベースである[TiDB Cloud Starter](https://www.pingcap.com/tidb-cloud-starter/)と、サーバーレスでイベント駆動型のコンピューティング サービスである[AWS Lambda](https://aws.amazon.com/lambda/)を統合する手順を段階的に説明します。TiDB Cloud Starter をAmazon Lambda と統合することで、 TiDB Cloud Starterと AWS Lambda を通じてマイクロサービスの拡張性とコスト効率を活用できます。AWS CloudFormation は、Lambda関数、API Gateway、Secrets Manager などの AWS リソースの作成と管理を自動化します。
+このドキュメントでは、 [AWS CloudFormation](https://aws.amazon.com/cloudformation/)を使用して、クラウドネイティブな分散 SQL データベースである[TiDB Cloud Starter](https://www.pingcap.com/tidb-cloud-starter/)と、サーバーレスでイベント駆動型のコンピューティングサービスである[AWS Lambda](https://aws.amazon.com/lambda/)を統合する手順を段階的に説明します。TiDB Cloud Starter をAmazon Lambda と統合することで、 TiDB Cloud Starterと AWS Lambda を通じてマイクロサービスの拡張性とコスト効率を活用できます。AWS CloudFormation は、Lambda関数、API Gateway、Secrets Manager などの AWS リソースの作成と管理を自動化します。
 
 > **Note:**
 >
@@ -55,7 +55,7 @@ AWS CloudFormationは、Secrets Manager、API Gateway、Lambda関数など、プ
 
 リージョンとして`us-east-1`を使用する場合は、このセクションをスキップして、 [ステップ1：AWS CloudFormationを使用してプロジェクトをセットアップする](#step-1-set-up-the-bookshop-project-using-aws-cloudformation)に進みます。
 
-AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョンを使用する場合は、Lambda 関数のコードを変更し、再構築して、コード バンドルを独自の S3 バケットにアップロードする必要があります。
+AWS リソースを作成する際に`us-east-1`以外の別の AWS リージョンを使用する場合は、Lambda 関数のコードを変更し、再構築して、コードバンドルを独自の S3 バケットにアップロードする必要があります。
 
 ローカル開発環境の問題を回避するため、 [Gitpod](https://www.gitpod.io/)などのクラウドネイティブ開発環境を使用することをお勧めします。
 
@@ -119,7 +119,7 @@ AWS CloudFormation を使用して書店プロジェクトを設定するには�
 
     1. **Prerequisite**の領域で、 **Choose an existing template**を選択します。
 
-    2. **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレート ファイル (YAML または JSON) をアップロードし、 **Next**をクリックします。
+    2. **Specify template**領域で、 **Upload a template file**を選択し、 **Choose file**をクリックしてテンプレートファイル (YAML または JSON) をアップロードし、 **Next**をクリックします。
 
         まだファイルをお持ちでない場合は、 [GitHub](https://github.com/pingcap/TiDB-Lambda-integration/releases/latest)からダウンロードしてください。このファイルには、プロジェクトに必要なリソースを作成するAWS CloudFormationテンプレートが含まれています。
 

@@ -7,7 +7,7 @@ summary: TiDB Cloudで ID アクセスを管理する方法を学びましょう
 
 このドキュメントでは、TiDB Cloudにおける組織、プロジェクト、リソース、ロール、およびユーザープロファイルへのアクセスを管理する方法について説明します。
 
-TiDB Cloudにアクセスする前に、 [TiDB Cloudアカウントを作成](https://tidbcloud.com/free-trial)してください。 [TiDB Cloudを使用してパスワードを管理](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップすることも、 TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択することもできます。
+TiDB Cloudにアクセスする前に、 [TiDB Cloudアカウントを作成](https://tidbcloud.com/free-trial)してください。 [TiDB Cloudを使用してパスワードを管理](/tidb-cloud/tidb-cloud-password-authentication.md)できるように電子メールとパスワードでサインアップすることも、 TiDB Cloudへのシングルサインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択することもできます。
 
 ## 組織、プロジェクト、およびリソース {#organizations-projects-and-resources}
 
@@ -141,11 +141,11 @@ TiDB Cloudは、組織、プロジェクト、インスタンスの各レベル�
 | バックアップからインスタンスまたはクラスターを新しいリソースとして復元します。                                                           | ✅               | ❌                                | ❌                               | ❌                |
 | データを読み取るためのエンドポイントの使用または作成など、データ読み取り専用操作の[Data Service](/tidb-cloud/data-service-overview.md)を管理します。      | ✅               | ✅                                | ✅                               | ❌                |
 | データの読み取りおよび書き込み操作のための[Data Service](/tidb-cloud/data-service-overview.md)を管理します。                          | ✅               | ✅                                | ❌                               | ❌                |
-| リソース タイプでサポートされている場合は、[SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用してリソースデータを確認する。       | ✅               | ✅                                | ✅                               | ❌                |
+| リソースタイプでサポートされている場合は、[SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用してリソースデータを確認する。       | ✅               | ✅                                | ✅                               | ❌                |
 | リソースの種類でサポートされている場合は、[SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用してリソースデータを変更および削除します。 | ✅               | ✅                                | ❌                               | ❌                |
 | [変更フィード](/tidb-cloud/changefeed-overview.md)を管理します。                                                  | ✅               | ✅                                | ✅                               | ❌                |
 | リソースの種類が対応している場合は、リソースのパスワードを確認し、リセットしてください。                                                         | ✅               | ❌                                | ❌                               | ❌                |
-| プロジェクト内のリソースの概要、バックアップ レコード、メトリック、イベント、および[変更フィード](/tidb-cloud/changefeed-overview.md)を確認する。          | ✅               | ✅                                | ✅                               | ✅                |
+| プロジェクト内のリソースの概要、バックアップレコード、メトリック、イベント、および[変更フィード](/tidb-cloud/changefeed-overview.md)を確認する。          | ✅               | ✅                                | ✅                               | ✅                |
 
 ### インスタンスロール {#instance-roles}
 
@@ -161,8 +161,8 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 | 権限                                                                                 | `Instance Manager` | `TiDB X Instance Data Access Read-Write` | `TiDB X Instance Data Access Read-Only` | `TiDB X Instance Viewer` |
 | ---------------------------------------------------------------------------------- | ------------------ | ---------------------------------------- | --------------------------------------- | ------------------------ |
 | インスタンスの作成、変更、削除などのインスタンス操作を管理します。                                                  | ✅                  | ❌                                        | ❌                                       | ❌                        |
-| [SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用してインスタンス データを確認および変更します。 | ✅                  | ✅                                        | ❌                                       | ❌                        |
-| [SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用してインスタンス データを確認する。         | ✅                  | ✅                                        | ✅                                       | ❌                        |
+| [SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用してインスタンスデータを確認および変更します。 | ✅                  | ✅                                        | ❌                                       | ❌                        |
+| [SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用してインスタンスデータを確認する。         | ✅                  | ✅                                        | ✅                                       | ❌                        |
 | インスタンススコープのロールを管理します。                                                              | ✅                  | ❌                                        | ❌                                       | ❌                        |
 | TiDB Xインスタンスのバックアップレコードを確認する。                                                       | ✅                  | ❌                                        | ❌                                       | ✅                        |
 | バックアップからTiDB Xインスタンスを復元します。                                                        | ✅                  | ❌                                        | ❌                                       | ❌                        |
@@ -259,7 +259,7 @@ TiDB Xインスタンスはインスタンスレベルのロールをサポー�
 
 ## プロジェクトへのアクセスを管理する {#manage-project-access}
 
-このセクションでは、プロジェクトの名前を変更する方法と、プロジェクト メンバーを招待および削除する方法について説明します。プロジェクトを作成または管理する方法については、 [プロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md#manage-tidb-cloud-projects)を参照してください。
+このセクションでは、プロジェクトの名前を変更する方法と、プロジェクトメンバーを招待および削除する方法について説明します。プロジェクトを作成または管理する方法については、 [プロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md#manage-tidb-cloud-projects)を参照してください。
 
 ### プロジェクト名を変更する {#rename-a-project}
 
