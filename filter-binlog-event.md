@@ -105,18 +105,17 @@ filters:
 
 ### Filter out SQL statements that TiDB or the TiDB parser does not support
 
-To filter out `PROCEDURE` statements that TiDB does not support, configure a `filter-procedure-rule`, as shown below:
+You do not need to configure filters for `CREATE PROCEDURE`, `DROP PROCEDURE`, or `ALTER PROCEDURE`. DM skips these statements automatically.
 
-```
-filters:
-  filter-procedure-rule:
-    schema-pattern: "test_*"
-    table-pattern: "t_*"
-    sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
-    action: Ignore
-```
+When you add or drop a partition in MySQL, DM normally replicates the change to TiDB. You do not need a filter for partition operations that both DM and TiDB support. To check which operations TiDB supports for your table's partition type, see [Partition management](/partitioned-table.md#partition-management).
 
-If you need to filter out `PARTITION` statements that the TiDB parser does not support in some versions, configure a global filtering rule, as shown below:
+If DM reports a parsing error for an `ADD PARTITION` or `DROP PARTITION` statement and you do not need to replicate these partition changes to TiDB, you can use the following rule to skip them. A parsing error in DM does not necessarily mean that TiDB does not support the operation.
+
+When DM cannot parse a statement, it cannot identify the database or table involved. In this case, you need a global filtering rule with `schema-pattern: "*"` and no `table-pattern`. This rule applies to matching statements for all tables in the migration task.
+
+> **Warning:**
+>
+> To avoid filtering out data that needs to be migrated, configure the global filtering rule as strictly as possible.
 
 ```
 filters:
@@ -125,10 +124,6 @@ filters:
     sql-pattern: ["ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
     action: Ignore
 ```
-
-> **Warning:**
->
-> To avoid filtering out data that needs to be migrated, configure the global filtering rule as strictly as possible.
 
 ## See also
 
