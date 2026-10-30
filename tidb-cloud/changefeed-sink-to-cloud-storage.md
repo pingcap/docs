@@ -172,11 +172,11 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 
 6. **Bucket details**ページで、**Objects**タブをクリックします。
 
-    - バケットの gsutil URI を取得するには、コピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
+    - バケットの gsutil URI を取得するには、コピーボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`の場合、URI は`gs://test-sink-gcs/`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri01.png)
 
-    - フォルダの gsutil URI を取得するには、フォルダを開き、コピー ボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`で、フォルダ名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx/`になります。
+    - フォルダの gsutil URI を取得するには、フォルダを開き、コピーボタンをクリックし、プレフィックスとして`gs://`を追加します。たとえば、バケット名が`test-sink-gcs`で、フォルダ名が`changefeed-xxx`の場合、URI は`gs://test-sink-gcs/changefeed-xxx/`になります。
 
         ![Get bucket URI](/media/tidb-cloud/changefeed/sink-to-cloud-storage-gcs-uri02.png)
 

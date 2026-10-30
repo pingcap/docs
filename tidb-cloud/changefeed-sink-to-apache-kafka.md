@@ -49,7 +49,7 @@ Apache Kafkaにデータをストリーミングするためのチェンジフ�
 
 <CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent> が Apache Kafka サービスに接続できることを確認します。次の接続方法のいずれかを選択できます。
 
-- Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の [プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost) が発生します。
+- Private Connect: VPC CIDR の競合を回避し、セキュリティコンプライアンスを満たすのに最適ですが、追加の [プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost) が発生します。
 - VPC Peering: 費用対効果の高い選択肢として適していますが、潜在的な VPC CIDR の競合やセキュリティ上の考慮事項を管理する必要があります。
 - Public IP: 迅速なセットアップに適しています。
 
@@ -84,9 +84,9 @@ Apache Kafka サービスがインターネットにアクセスできない AWS
 Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC 内にある場合は、次の手順を実行します。
 
 1. Apache Kafka サービスの VPC と {{{ .dedicated }}} クラスターの間で [VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
-2. Apache Kafka が配置されている VPC のイングレス ファイアウォールルールを変更します。
+2. Apache Kafka が配置されている VPC のイングレスファイアウォールルールを変更します。
 
-    {{{ .dedicated }}} クラスターが配置されているリージョンの CIDR をイングレス ファイアウォールルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} クラスターから Kafka ブローカーへのトラフィックが流れるようになります。
+    {{{ .dedicated }}} クラスターが配置されているリージョンの CIDR をイングレスファイアウォールルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} クラスターから Kafka ブローカーへのトラフィックが流れるようになります。
 
 </div>
 <div label="Public IP">
@@ -133,8 +133,8 @@ Apache Kafka サービスに Public IP アクセスを提供する場合は、�
 
 TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミングし、Kafkaトピックを自動的に作成できるようにするには、Kafkaに以下の権限が追加されていることを確認してください。
 
-- Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
-- Kafka のクラスタリソース タイプに`DescribeConfigs`権限が追加されます。
+- Kafka のトピックリソースタイプに`Create`および`Write`権限が追加されます。
+- Kafka のクラスタリソースタイプに`DescribeConfigs`権限が追加されます。
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
 

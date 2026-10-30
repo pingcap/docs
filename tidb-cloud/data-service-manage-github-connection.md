@@ -22,7 +22,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 > **Note:**
 >
-> GitHub リポジトリは、データアプリを接続した後、[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。設定ファイル内の情報 ( TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID、エンドポイント URL など) が機密である場合は、パブリック リポジトリではなくプライベートリポジトリを必ず使用してください。
+> GitHub リポジトリは、データアプリを接続した後、[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。設定ファイル内の情報 ( TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID、エンドポイント URL など) が機密である場合は、パブリックリポジトリではなくプライベートリポジトリを必ず使用してください。
 
 ## ステップ1. データアプリをGitHubに接続する {#step-1-connect-your-data-app-to-github}
 
@@ -125,7 +125,7 @@ TiDB Cloudコンソールで[データアプリのエンドポイントを変更
 
 2. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、GitHub に接続せずに[新しいデータアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)。
 
-3. **Auto Sync & Deployment**を有効にして、[新しいデータアプリをGitHubに接続します](#step-1-connect-your-data-app-to-github)。新しいデータアプリのターゲット リポジトリ、ブランチ、ディレクトリを指定するときは、コピーした設定ファイルを含む新しいパスを使用します。
+3. **Auto Sync & Deployment**を有効にして、[新しいデータアプリをGitHubに接続します](#step-1-connect-your-data-app-to-github)。新しいデータアプリのターゲットリポジトリ、ブランチ、ディレクトリを指定するときは、コピーした設定ファイルを含む新しいパスを使用します。
 
 4. 新しいデータアプリのIDと名前を取得します。左側のペインで新しいデータアプリの名前をクリックすると、右側のペインの**Data App Properties**領域にアプリのIDと名前が表示されます。
 

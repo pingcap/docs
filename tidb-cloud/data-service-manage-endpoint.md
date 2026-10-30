@@ -167,7 +167,7 @@ Data Serviceでは、データアプリに直接追加できる事前定義済�
     >
     >     `GET /var/123`が優先されるため、これら2つのパスは競合しません。
     >
-    > - パス パラメーターは SQL で直接使用できます。詳細については、[パラメータを設定する](#configure-parameters)を参照してください。
+    > - パスパラメーターは SQL で直接使用できます。詳細については、[パラメータを設定する](#configure-parameters)を参照してください。
 
 - **Endpoint URL** : (読み取り専用) デフォルト URL は、対応するTiDB Cloud Starterインスタンスが配置されているリージョン、データアプリのサービス URL、およびエンドポイントのパスに基づいて自動的に生成されます。たとえば、エンドポイントのパスが`/my_endpoint/get_id`の場合、エンドポイント URL は`https://<region>.data.tidbcloud.com/api/v1beta/app/<App ID>/endpoint/my_endpoint/get_id`です。データアプリのカスタムドメインを構成するには、 [Data Serviceのカスタムドメイン](/tidb-cloud/data-service-custom-domain.md)を参照してください。
 

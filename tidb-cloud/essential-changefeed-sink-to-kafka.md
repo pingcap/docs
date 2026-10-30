@@ -66,8 +66,8 @@ Apache Kafkaサービスへのパブリックアクセスを提供する場合�
 
 TiDB Cloud Essential の変更フィードが Apache Kafka にデータをストリーミングし、Kafka トピックを自動的に作成できるようにするには、Kafka に次の権限が追加されていることを確認してください。
 
-- Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
-- Kafka のクラスタリソース タイプに`DescribeConfigs`権限が追加されます。
+- Kafka のトピックリソースタイプに`Create`および`Write`権限が追加されます。
+- Kafka のクラスタリソースタイプに`DescribeConfigs`権限が追加されます。
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については、Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/security/authorization/acls/manage-acls.html#add-acls)を参照してください。
 

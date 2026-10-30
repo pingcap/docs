@@ -14,7 +14,7 @@ aliases: ['/ja/tidbcloud/connected-care-announcement']
 
 ## Connected Care {#connected-care}
 
-Connected Care サービスは、最新のコミュニケーション ツール、プロアクティブなサポート、高度な AI 機能を通じてTiDB Cloudとの接続を強化し、シームレスで顧客中心のエクスペリエンスを実現するように設計されています。
+Connected Care サービスは、最新のコミュニケーションツール、プロアクティブなサポート、高度な AI 機能を通じてTiDB Cloudとの接続を強化し、シームレスで顧客中心のエクスペリエンスを実現するように設計されています。
 
 Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Standard**プランに相当)、 **Enterprise** 、 **Premium**の4つのサポートプランがあります。
 
@@ -39,7 +39,7 @@ Connected Care サービスには、 **Basic** 、 **Developer** (従来の**Sta
 
 > **Note**
 >
-> 4 つのサポートプランすべてのお客様は、サービス リクエストに[PingCAPサポートポータル](https://tidb.support.pingcap.com/)を利用できます。
+> 4 つのサポートプランすべてのお客様は、サービスリクエストに[PingCAPサポートポータル](https://tidb.support.pingcap.com/)を利用できます。
 
 ## 従来のサポートサービスとConnected Careサポートサービスの違い {#differences-between-legacy-support-services-and-connected-care-support-services}
 
@@ -67,15 +67,15 @@ Connected Care サービスのサポートプランでは、次のようなま�
 
 これらの新機能により、Connected Care サービスは、より優れた接続性、よりパーソナライズされたサポート、さまざまな顧客ニーズに対応するコスト効率の高いソリューションを提供します。
 
-- 新しい**Enterprise**および**Premium**プラン: Clinic の高度な監視サービス、 TiDB Cloudアラートの IM サブスクリプション、チケット更新の IM サブスクリプション、IM での AI チャット、サポートチケットの IM 対話を通じて、最新のコミュニケーション ツールと高度な AI 機能を提供します。
+- 新しい**Enterprise**および**Premium**プラン: Clinic の高度な監視サービス、 TiDB Cloudアラートの IM サブスクリプション、チケット更新の IM サブスクリプション、IM での AI チャット、サポートチケットの IM 対話を通じて、最新のコミュニケーションツールと高度な AI 機能を提供します。
 
-- 新しい**Developer**プラン:**Basic**プランと同じコミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) と[TiDB.AI](https://tidb.ai/)サポートへのアクセスに加え、直接接続とテクニカルサポートへの無制限のアクセスが提供されます。
+- 新しい**Developer**プラン:**Basic**プランと同じコミュニティチャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) と[TiDB.AI](https://tidb.ai/)サポートへのアクセスに加え、直接接続とテクニカルサポートへの無制限のアクセスが提供されます。
 
-- 新しい**Basic**プラン: コミュニティ チャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) に参加して他のコミュニティ メンバーと交流したり、 [TiDB.AI](https://tidb.ai/)を使用して技術的な支援を受けることができます。
+- 新しい**Basic**プラン: コミュニティチャネル ( [Slack](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=pingcap)と[Discord](https://discord.com/invite/KVRZBR2DrG) ) に参加して他のコミュニティメンバーと交流したり、 [TiDB.AI](https://tidb.ai/)を使用して技術的な支援を受けることができます。
 
 ## Connected Careへの移行 {#transition-to-connected-care}
 
-次の表に、従来のサポートプランのシャットダウン スケジュールを示します。
+次の表に、従来のサポートプランのシャットダウンスケジュールを示します。
 
 | サポートプラン                        | シャットダウン日   |
 | :----------------------------- | :--------- |

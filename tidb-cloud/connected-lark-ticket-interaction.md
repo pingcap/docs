@@ -5,7 +5,7 @@ summary: サポートチケットのLarkインタラクションに関する詳�
 
 # Lark経由でサポートチケットとやり取りする {#interact-with-support-tickets-via-lark}
 
-**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポートチケットのより包括的なやり取りと管理をサポートするために、 [Lark](https://www.larksuite.com/)で**PingCAP Support Bot**と呼ばれるチケット ボットを提供します。
+**Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)に加入している顧客向けに、 TiDB Cloud は、サポートチケットのより包括的なやり取りと管理をサポートするために、 [Lark](https://www.larksuite.com/)で**PingCAP Support Bot**と呼ばれるチケットボットを提供します。
 
 > **Note:**
 >
@@ -13,7 +13,7 @@ summary: サポートチケットのLarkインタラクションに関する詳�
 
 ## サポートチケットでやり取りする {#interact-with-support-tickets}
 
-Lark の**PingCAP Support Group**に[サポートチケットを作成](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket)すると、ボットがメッセージ スレッドにチケット リンクを付けて返信します。
+Lark の**PingCAP Support Group**に[サポートチケットを作成](/tidb-cloud/connected-lark-ticket-creation.md#create-a-support-ticket)すると、ボットがメッセージスレッドにチケットリンクを付けて返信します。
 
 ![lark-ticket-interaction-1](/media/tidb-cloud/connected-lark-ticket-interaction-1.png)
 
