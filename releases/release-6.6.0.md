@@ -37,9 +37,9 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 ### パフォーマンス {#performance}
 
-- 悲観的ロック キューの安定したウェイクアップ モデルをサポート [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)
+- 悲観的ロックキューの安定したウェイクアップモデルをサポート [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)
 
-    アプリケーションで頻繁に単一ポイントの悲観的ロック競合が発生する場合、既存のウェイクアップメカニズムではトランザクションがロックを取得する時間を保証できず、ロングテールレイテンシーが大きくなり、ロック取得タイムアウトが発生することもあります。v6.6.0 以降では、システム変数[`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660)の値を`ON`に設定することで、悲観的ロック用の安定したウェイクアップ モデルを有効にできます。このウェイクアップ モデルでは、無効なウェイクアップによるリソースの浪費を回避するために、キューのウェイクアップ シーケンスを厳密に制御できます。深刻なロック競合が発生するシナリオでは、この安定したウェイクアップ モデルにより、ロングテールレイテンシーと P99 応答時間を短縮できます。
+    アプリケーションで頻繁に単一ポイントの悲観的ロック競合が発生する場合、既存のウェイクアップメカニズムではトランザクションがロックを取得する時間を保証できず、ロングテールレイテンシーが大きくなり、ロック取得タイムアウトが発生することもあります。v6.6.0 以降では、システム変数[`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660)の値を`ON`に設定することで、悲観的ロック用の安定したウェイクアップモデルを有効にできます。このウェイクアップモデルでは、無効なウェイクアップによるリソースの浪費を回避するために、キューのウェイクアップシーケンスを厳密に制御できます。深刻なロック競合が発生するシナリオでは、この安定したウェイクアップモデルにより、ロングテールレイテンシーと P99 応答時間を短縮できます。
 
     テスト結果によると、これによりテールレイテンシーが40～60%削減されることが示されています。
 
@@ -148,7 +148,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 - リソースを大量に消費するタスク向けに読み取り専用ストレージノードを構成する機能をサポート @[v01dstar](https://github.com/v01dstar)
 
-    本番環境では、バックアップや大規模なデータ読み取りと分析など、読み取り専用操作が定期的に大量のリソースを消費し、クラスタ全体のパフォーマンスに影響を与える場合があります。TiDB v6.6.0 では、リソースを消費する読み取り専用タスク用に読み取り専用ストレージノードを構成して、オンラインアプリケーションへの影響を軽減できます。現在、TiDB、TiSpark、およびBR は、読み取り専用ストレージノードからのデータ読み取りをサポートしています。 [手順](/best-practices/readonly-nodes.md#procedures)に従って読み取り専用ストレージ ノードを構成し、システム変数`tidb_replica_read` 、TiSpark 設定項目`spark.tispark.replica_read` 、または br コマンドライン引数`--replica-read-label`で読み取り先を指定することで、クラスターのパフォーマンスの安定性を確保できます。
+    本番環境では、バックアップや大規模なデータ読み取りと分析など、読み取り専用操作が定期的に大量のリソースを消費し、クラスタ全体のパフォーマンスに影響を与える場合があります。TiDB v6.6.0 では、リソースを消費する読み取り専用タスク用に読み取り専用ストレージノードを構成して、オンラインアプリケーションへの影響を軽減できます。現在、TiDB、TiSpark、およびBR は、読み取り専用ストレージノードからのデータ読み取りをサポートしています。 [手順](/best-practices/readonly-nodes.md#procedures)に従って読み取り専用ストレージノードを構成し、システム変数`tidb_replica_read` 、TiSpark 設定項目`spark.tispark.replica_read` 、または br コマンドライン引数`--replica-read-label`で読み取り先を指定することで、クラスターのパフォーマンスの安定性を確保できます。
 
     詳細については、[ドキュメント](/best-practices/readonly-nodes.md)を参照してください。
 
@@ -409,7 +409,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
     - OOM問題を軽減するためのグローバルメモリしきい値の管理をサポート（実験的） [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
     - GC圧力を軽減するためにGCチューナーを追加（実験的） [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
     - 異常なノードを検出してスケジュールするための`evict-slow-trend-scheduler`スケジューラを追加します [#5808](https://github.com/tikv/pd/pull/5808) @[innerr](https://github.com/innerr)
-    - キースペースを管理するためにキースペース マネージャーを追加 [#5293](https://github.com/tikv/pd/issues/5293) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
+    - キースペースを管理するためにキースペースマネージャーを追加 [#5293](https://github.com/tikv/pd/issues/5293) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
 
 - TiFlash
 

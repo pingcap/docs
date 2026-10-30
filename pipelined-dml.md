@@ -137,7 +137,7 @@ TiDBがパイプラインDMLを使用したステートメントの実行を拒�
 一般的な理由:
 
 - DML文は自動コミットされません。
-- ステートメントには、 [一時テーブル](/temporary-tables.md)や[キャッシュテーブル](/cached-tables.md)などのサポートされていないテーブル タイプが含まれています。
+- ステートメントには、 [一時テーブル](/temporary-tables.md)や[キャッシュテーブル](/cached-tables.md)などのサポートされていないテーブルタイプが含まれています。
 - 操作には外部キーが関係し、外部キーのチェックが有効になっています。
 
 ### パイプライン DML はトランザクションの分離レベルに影響しますか? {#does-pipelined-dml-affect-the-isolation-level-of-transactions}

@@ -77,7 +77,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - コプロセッサタスクの同時実行適応メカニズムを導入します [#37724](https://github.com/pingcap/tidb/issues/37724) @[you06](https://github.com/you06)
 
-    TiKV の処理速度に基づいて、コプロセッサタスクの数が増えると、TiDB は自動的に並列度を上げて ( [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)の値を調整して)、コプロセッサタスク キューを減らし、レイテンシーを削減します。
+    TiKV の処理速度に基づいて、コプロセッサタスクの数が増えると、TiDB は自動的に並列度を上げて ( [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)の値を調整して)、コプロセッサタスクキューを減らし、レイテンシーを削減します。
 
 - テーブル結合順序を決定するための動的計画アルゴリズムを追加 [#37825](https://github.com/pingcap/tidb/issues/37825) @[winoros](https://github.com/winoros)
 
@@ -95,7 +95,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - TiDBチャンク再利用メカニズムの強化 [#38606](https://github.com/pingcap/tidb/issues/38606) @[keeplearning20221](https://github.com/keeplearning20221)
 
-    以前のバージョンでは、TiDB は`writechunk`関数内でのみチャンクを再利用していました。TiDB v6.4.0 では、チャンク再利用メカニズムが Executor の演算子に拡張されました。チャンクを再利用することで、TiDB はメモリ解放を頻繁にリクエストする必要がなくなり、一部のシナリオでは SQL クエリの実行効率が向上します。システム変数[`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を使用して、チャンク オブジェクトを再利用するかどうかを制御できます。この機能はデフォルトで有効になっています。
+    以前のバージョンでは、TiDB は`writechunk`関数内でのみチャンクを再利用していました。TiDB v6.4.0 では、チャンク再利用メカニズムが Executor の演算子に拡張されました。チャンクを再利用することで、TiDB はメモリ解放を頻繁にリクエストする必要がなくなり、一部のシナリオでは SQL クエリの実行効率が向上します。システム変数[`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を使用して、チャンクオブジェクトを再利用するかどうかを制御できます。この機能はデフォルトで有効になっています。
 
     詳細については、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を参照してください。
 
@@ -139,7 +139,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - バッチ書き込みリクエストが軽量トランザクション書き込みの応答時間に与える影響を軽減する [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
 
-    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライントランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロード シナリオでの読み取りリクエストのスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)設定項目を有効にすると、TiKV がすべての読み取りリクエストに対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込みリクエストも動的に識別して優先順位を付け、1回のポーリングで Apply スレッドが 1つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込みリクエストがトランザクション書き込みの応答時間に与える影響を軽減できます。
+    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライントランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロードシナリオでの読み取りリクエストのスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)設定項目を有効にすると、TiKV がすべての読み取りリクエストに対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込みリクエストも動的に識別して優先順位を付け、1回のポーリングで Apply スレッドが 1つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込みリクエストがトランザクション書き込みの応答時間に与える影響を軽減できます。
 
 ### 使いやすさ {#ease-of-use}
 
@@ -225,7 +225,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - EBS ボリュームスナップショットを使用した TiDB クラスターのバックアップをサポート [#33849](https://github.com/pingcap/tidb/issues/33849) @[fengou1](https://github.com/fengou1)
 
-    TiDB クラスターが EKS 上にデプロイされ、AWS EBS ボリュームを使用している場合、TiDB クラスター データのバックアップ時に以下の要件を満たす必要がある場合は、 TiDB Operatorを使用してボリュームスナップショットとメタデータによるデータを AWS S3 にバックアップできます。
+    TiDB クラスターが EKS 上にデプロイされ、AWS EBS ボリュームを使用している場合、TiDB クラスターデータのバックアップ時に以下の要件を満たす必要がある場合は、 TiDB Operatorを使用してボリュームスナップショットとメタデータによるデータを AWS S3 にバックアップできます。
 
     - バックアップの影響を最小限に抑えます。例えば、QPSとトランザクションレイテンシーへの影響を5%未満に抑え、クラスタのCPUとメモリを消費しないようにします。
     - 短時間でデータのバックアップと復元が可能です。例えば、1時間以内にバックアップを完了し、2時間以内にデータを復元できます。
@@ -289,11 +289,11 @@ TiDBバージョン: 6.4.0-DMR
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                   | 変更     | SESSIONスコープを追加します。この変数は、セッション内でキャッシュできるプランの最大数を制御します。                                                                                                                                                                               |
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)                                           | 変更     | デフォルト値を`0`から`100`に変更します。これは、SQL 実行がデフォルトで最大 100 ミリ秒待機して、完全な列統計を同期的にロードできることを意味します。                                                                                                                                                  |
 | [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)                                 | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、完全な列統計を同期的に読み込むタイムアウトに達した後、SQL 最適化が擬似統計を使用するように戻ることを意味します。                                                                                                                                             |
-| [`last_sql_use_alloc`](/system-variables.md#last_sql_use_alloc-new-in-v640)                                                         | 新しく追加された | 前のステートメントがキャッシュされたチャンク オブジェクト (チャンク割り当て) を使用しているかどうかを示します。この変数は読み取り専用で、デフォルト値は`OFF`です。                                                                                                                                              |
+| [`last_sql_use_alloc`](/system-variables.md#last_sql_use_alloc-new-in-v640)                                                         | 新しく追加された | 前のステートメントがキャッシュされたチャンクオブジェクト (チャンク割り当て) を使用しているかどうかを示します。この変数は読み取り専用で、デフォルト値は`OFF`です。                                                                                                                                              |
 | [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640)                 | 新しく追加された | パーティションテーブルを分析するときに TiDB が一度に[自動的に分析](/statistics.md#automatic-update)できるパーティションの数を指定します (つまり、パーティションテーブルに関する統計を自動的に収集します)。デフォルト値は`1`です。                                                                                         |
 | [`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)                                     | 新しく追加された | TiDB が[`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)で指定されたタイムスタンプを持つデータを読み取るかどうかを制御します。デフォルト値は`OFF`です。                                                                                                     |
 | [`tidb_enable_gogc_tuner`](/system-variables.md#tidb_enable_gogc_tuner-new-in-v640)                                                 | 新しく追加された | GOGC Tuner を有効にするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                                                                                          |
-| [`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)                                               | 新しく追加された | TiDB がチャンク オブジェクトのキャッシュを有効にするかどうかを制御します。デフォルト値は`ON`で、これは TiDB がキャッシュされたチャンク オブジェクトの使用を優先し、リクエストされたオブジェクトがキャッシュにない場合にのみシステムにリクエストすることを意味します。値が`OFF`の場合、TiDB はシステムから直接チャンク オブジェクトをリクエストします。                                                    |
+| [`tidb_enable_reuse_chunk`](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)                                               | 新しく追加された | TiDB がチャンクオブジェクトのキャッシュを有効にするかどうかを制御します。デフォルト値は`ON`で、これは TiDB がキャッシュされたチャンクオブジェクトの使用を優先し、リクエストされたオブジェクトがキャッシュにない場合にのみシステムにリクエストすることを意味します。値が`OFF`の場合、TiDB はシステムから直接チャンクオブジェクトをリクエストします。                                                    |
 | [`tidb_enable_prepared_plan_cache_memory_monitor`](/system-variables.md#tidb_enable_prepared_plan_cache_memory_monitor-new-in-v640) | 新しく追加された | プリペアドプランキャッシュにキャッシュされた実行計画によって消費されたメモリをカウントするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                                                             |
 | [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)                                                             | 新しく追加された | デフォルト値は`0`です。[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)が`ON`に設定されている場合、TiDB はこの変数で指定されたタイムスタンプを持つデータを読み取ります。                                      |
 | [`tidb_gogc_tuner_threshold`](/system-variables.md#tidb_gogc_tuner_threshold-new-in-v640)                                           | 新しく追加された | GOGC のチューニングにおける最大メモリしきい値を指定します。メモリがこのしきい値を超えると、GOGC Tuner は動作を停止します。デフォルト値は`0.6`です。                                                                                                                                                |
@@ -348,7 +348,7 @@ TiDBバージョン: 6.4.0-DMR
 - PD
 
     - ホットリージョンスケジューラのv2アルゴリズムがGAになります。一部のシナリオでは、v2アルゴリズムは、設定された両方の次元でより良いバランスを実現し、無効なスケジューリングを減らすことができます。 [#5021](https://github.com/tikv/pd/issues/5021) @[hundundm](https://github.com/hundundm)
-    - 早期のタイムアウトを回避するためにオペレーター ステップのタイムアウト メカニズムを最適化します [#5596](https://github.com/tikv/pd/issues/5596) @[bufferflies](https://github.com/bufferflies)
+    - 早期のタイムアウトを回避するためにオペレーターステップのタイムアウトメカニズムを最適化します [#5596](https://github.com/tikv/pd/issues/5596) @[bufferflies](https://github.com/bufferflies)
     - 大規模クラスターでのスケジューラーのパフォーマンスを向上 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
     - PD で提供されていない外部タイムスタンプの使用をサポートする [#5637](https://github.com/tikv/pd/issues/5637) @[lhy1024](https://github.com/lhy1024)
 
@@ -413,7 +413,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - PD
 
-    - 不正確なストリーム タイムアウトを修正し、リーダーの切り替えを加速します [#5207](https://github.com/tikv/pd/issues/5207) @[CabinfeverB](https://github.com/CabinfeverB)
+    - 不正確なストリームタイムアウトを修正し、リーダーの切り替えを加速します [#5207](https://github.com/tikv/pd/issues/5207) @[CabinfeverB](https://github.com/CabinfeverB)
 
 - TiFlash
 

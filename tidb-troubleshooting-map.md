@@ -195,7 +195,7 @@ TiDB は、ホットスポットのトラブルシューティング、解決、
 
 ### 3.7 ディスクI/O使用率が高い {#37-high-disk-io-usage}
 
-CPU ボトルネックとトランザクションの競合によって引き起こされるボトルネックのトラブルシューティングを行った後に TiDB の応答が遅くなった場合は、現在のシステム ボトルネックを特定するために I/O メトリックを確認する必要があります。 TiDB での高い I/O 使用率の問題を特定して処理する方法については、[ディスクI/O使用率が高い場合のトラブルシューティング](/troubleshoot-high-disk-io.md)を参照してください。
+CPU ボトルネックとトランザクションの競合によって引き起こされるボトルネックのトラブルシューティングを行った後に TiDB の応答が遅くなった場合は、現在のシステムボトルネックを特定するために I/O メトリックを確認する必要があります。 TiDB での高い I/O 使用率の問題を特定して処理する方法については、[ディスクI/O使用率が高い場合のトラブルシューティング](/troubleshoot-high-disk-io.md)を参照してください。
 
 ### 3.8 ロックの競合 {#38-lock-conflicts}
 
@@ -265,7 +265,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     - `append log`は停止に遭遇します[4.3.1](#43-the-client-reports-the-server-is-busy-error)を参照してください。
     - `append log duration`値が高いため、メッセージの処理が遅くなります。 `append log duration`値が高い理由については、 [4.5](#45-tikv-write-is-slow)を参照してください。
-    - raftstore は、大量のメッセージを瞬時に受信し (TiKV Raftメッセージ ダッシュボードで確認できます)、処理に失敗します。通常、この一時的な`channel full`ステータスはサービスに影響を与えません。
+    - raftstore は、大量のメッセージを瞬時に受信し (TiKV Raftメッセージダッシュボードで確認できます)、処理に失敗します。通常、この一時的な`channel full`ステータスはサービスに影響を与えません。
 
 - 4.3.4 TiKV コプロセッサがキューに入っています。スタックされたタスクの数が`coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`を超えています。大きなクエリが多すぎると、コプロセッサでタスクがスタックされます。実行計画の変更によってテーブルスキャン操作が大量に発生していないか確認する必要があります[3.3](#33-wrong-execution-plan)を参照してください。
 
@@ -324,7 +324,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 4.5.6 Raftのコミットログが遅いです。
 
-    TiKV Grafana の**Raft IO** / `commit log duration`が高い (このメトリックは Grafana v4.x 以降でのみサポートされています)。各リージョンは独立したRaftグループに対応します。Raftには、TCP のスライディング ウィンドウ メカニズムと同様のフロー制御メカニズムがあります。スライディング ウィンドウのサイズは`[raftstore] raft-max-inflight-msgs = 256`パラメータを設定することで制御できます。書き込みホットスポットがあり、 `commit log duration`が高い場合は、 `1024`に増やすなど、パラメータを調整できます。
+    TiKV Grafana の**Raft IO** / `commit log duration`が高い (このメトリックは Grafana v4.x 以降でのみサポートされています)。各リージョンは独立したRaftグループに対応します。Raftには、TCP のスライディングウィンドウメカニズムと同様のフロー制御メカニズムがあります。スライディングウィンドウのサイズは`[raftstore] raft-max-inflight-msgs = 256`パラメータを設定することで制御できます。書き込みホットスポットがあり、 `commit log duration`が高い場合は、 `1024`に増やすなど、パラメータを調整できます。
 
 - 4.5.7 その他の場合は、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)上の書き込みパスを参照し、原因を分析してください。
 
@@ -507,7 +507,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 7.1.3 `region_cache.go`は`switch region peer to next due to send request fail`を多数報告し、エラーメッセージは`context deadline exceeded`です。
 
-    TiKV へのリクエストがタイムアウトし、リージョン キャッシュがリクエストを他のノードに切り替えるようにトリガーされました。ログの`grep "<addr> cancelled`フィールドで`addr`コマンドを引き続き実行し、 `grep`の結果に応じて以下の手順を実行してください。
+    TiKV へのリクエストがタイムアウトし、リージョンキャッシュがリクエストを他のノードに切り替えるようにトリガーされました。ログの`grep "<addr> cancelled`フィールドで`addr`コマンドを引き続き実行し、 `grep`の結果に応じて以下の手順を実行してください。
 
     - `send request is cancelled` : 送信フェーズ中にリクエストがタイムアウトしました。Grafana -> **TiDB** -> **Batch Client** / `Pending Request Count by TiKV`の監視**画面**で、保留中のリクエスト数が 128 を超えているかどうかを確認してください。
 

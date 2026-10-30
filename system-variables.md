@@ -893,7 +893,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb">
 
-- この変数により、TiDB へのすべての接続がローカル ソケット上か TLS を使用するようになります。詳細については、 [TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
+- この変数により、TiDB へのすべての接続がローカルソケット上か TLS を使用するようになります。詳細については、 [TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
 
 </CustomContent>
 
@@ -936,7 +936,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- `tidb-server`が MySQL プロトコルと通信する際にリッスンしているローカル Unix ソケット ファイル。
+- `tidb-server`が MySQL プロトコルと通信する際にリッスンしているローカル Unix ソケットファイル。
 
 ### sql_mode
 
@@ -1113,7 +1113,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
     - `0`または`OFF`に設定すると、MPP モードは使用されません。v7.3.0 以降のバージョンでは、この変数の値を`0`または`OFF`に設定する場合は、 [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730)変数も有効にする必要があります。そうしないと、クエリでエラーが発生する可能性があります。
     - `1`または`ON`は、オプティマイザがコスト見積もりに基づいて MPP モードを使用するかどうかを決定することを意味します (デフォルト)。
 
-MPP は、 TiFlashエンジンによって提供される分散コンピューティング フレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットの SQL アルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
+MPP は、 TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットの SQL アルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
 
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
@@ -1504,7 +1504,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - デフォルト値: `4`
 - 範囲: `[1, 256]`
 - 単位：スレッド
-- この変数は、 [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)ステートメントを実行する際のスキャン インデックスの同時実行数を設定するために使用されます。
+- この変数は、 [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)ステートメントを実行する際のスキャンインデックスの同時実行数を設定するために使用されます。
 - 変数をより大きな値に設定すると、他のクエリの実行パフォーマンスに影響が出ます。
 
 ### tidb_committer_concurrency <span class="version-mark">New in v6.1.0</span>
@@ -1634,7 +1634,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - デフォルト値: `2`
 - 値のオプション：
     - `1` : TiDB v6.4.0 以前のバージョンでデフォルトで使用されているコストモデルバージョン 1 を有効にします。
-    - `2` :[コストモデル バージョン2](/cost-model.md#cost-model-version-2)を有効にします。これは TiDB v6.5.0 で一般提供されており、内部テストではバージョン 1 よりも正確です。
+    - `2` :[コストモデルバージョン2](/cost-model.md#cost-model-version-2)を有効にします。これは TiDB v6.5.0 で一般提供されており、内部テストではバージョン 1 よりも正確です。
 - コストモデルのバージョンは、オプティマイザの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
 
 ### tidb_current_ts
@@ -1692,7 +1692,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> 現在、この機能は[単一の`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)完全な互換性はありません。インデックス アクセラレーションを使用して一意インデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。
+> 現在、この機能は[単一の`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)完全な互換性はありません。インデックスアクセラレーションを使用して一意インデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。
 
 </CustomContent>
 
@@ -1724,7 +1724,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> 現在、[グローバルソート](/tidb-global-sort.md)プロセスは TiDB ノードのコンピューティングリソースとメモリリソースを大量に消費します。ユーザー業務アプリケーションの実行中にオンラインでインデックスを追加するなどのシナリオでは、クラスタに新しい TiDB ノードを追加し、これらのノードの[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)変数を構成して、これらのノードに接続してタスクを作成することをお勧めします。このようにして、分散フレームワークはタスクをこれらのノードにスケジュールし、ワークロードを他の TiDB ノードから分離することで、 `ADD INDEX`や`IMPORT INTO`などのバックエンド タスクの実行がユーザー業務アプリケーションに与える影響を軽減します。
+> 現在、[グローバルソート](/tidb-global-sort.md)プロセスは TiDB ノードのコンピューティングリソースとメモリリソースを大量に消費します。ユーザー業務アプリケーションの実行中にオンラインでインデックスを追加するなどのシナリオでは、クラスタに新しい TiDB ノードを追加し、これらのノードの[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)変数を構成して、これらのノードに接続してタスクを作成することをお勧めします。このようにして、分散フレームワークはタスクをこれらのノードにスケジュールし、ワークロードを他の TiDB ノードから分離することで、 `ADD INDEX`や`IMPORT INTO`などのバックエンドタスクの実行がユーザー業務アプリケーションに与える影響を軽減します。
 
 - 対象範囲：グローバル
 - クラスターに保持される: はい
@@ -2469,7 +2469,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、DML文の実行中にデータとインデックス間の一貫性をチェックするために使用されるツールである TiDB ミューテーション チェッカーを有効にするかどうかを制御するために使用されます。チェッカーがステートメントに対してエラーを返した場合、TiDB はステートメントの実行をロールバックします。この変数を有効にすると、CPU 使用率がわずかに増加します。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
+- この変数は、DML文の実行中にデータとインデックス間の一貫性をチェックするために使用されるツールである TiDB ミューテーションチェッカーを有効にするかどうかを制御するために使用されます。チェッカーがステートメントに対してエラーを返した場合、TiDB はステートメントの実行をロールバックします。この変数を有効にすると、CPU 使用率がわずかに増加します。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 - v6.0.0以降のバージョンの新規クラスターの場合、デフォルト値は`ON`です。v6.0.0より前のバージョンからアップグレードする既存のクラスターの場合、デフォルト値は`OFF`です。
 
 ### tidb_enable_new_cost_interface <span class="version-mark">New in v6.2.0</span>
@@ -2784,7 +2784,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `ON`
 - 値のオプション: `OFF` 、 `ON`
-- この変数は、TiDB がチャンク オブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`の場合、TiDB はキャッシュされたチャンク オブジェクトの使用を優先し、要求されたオブジェクトがキャッシュにない場合のみシステムにリクエストします。値が`OFF`の場合、TiDB はシステムから直接チャンク オブジェクトをリクエストします。
+- この変数は、TiDB がチャンクオブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`の場合、TiDB はキャッシュされたチャンクオブジェクトの使用を優先し、要求されたオブジェクトがキャッシュにない場合のみシステムにリクエストします。値が`OFF`の場合、TiDB はシステムから直接チャンクオブジェクトをリクエストします。
 
 ### tidb_enable_shared_lock_promotion <span class="version-mark">New in v8.3.0</span>
 
@@ -3048,7 +3048,7 @@ Query OK, 0 rows affected (0.09 sec)
     - `0`または`OFF`は、MPP モードが強制的に使用されないことを意味します (デフォルトでは)。
     - `1`または`ON`の場合、コスト見積もりは無視され、MPP モードが強制的に使用されます。この設定は`tidb_allow_mpp=true`の場合にのみ有効になることに注意してください。
 
-MPP は、 TiFlashエンジンによって提供される分散コンピューティング フレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットの SQL アルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
+MPP は、 TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットの SQL アルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
 
 ### tidb_evolve_plan_baselines <span class="version-mark">New in v4.0</span>
 
@@ -3384,7 +3384,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `ON`
 - この変数は、スローログとステートメントサマリーにバイナリエンコードされた実行計画を生成するかどうかを制御します。
 - この変数を`ON`に設定すると、TiDB Dashboardで実行計画を視覚的に表示できます。ただし、TiDB Dashboardでは、この変数が有効になった後に生成された実行計画のみを視覚的に表示できることに注意してください。
-- [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行すると、バイナリ プランから特定のプランを解析できます。
+- [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行すると、バイナリプランから特定のプランを解析できます。
 
 ### tidb_gogc_tuner_max_value <span class="version-mark">New in v7.5.0</span>
 
@@ -4303,7 +4303,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `1`
 - 範囲: `[0, 2]`
 - ブロードキャストによる直交座標結合を許可するかどうかを示します。
-- `0`は、ブロードキャスト カルテシアン ジョインが許可されていないことを意味します。 `1`は、 [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されていることを意味します。 `2`は、テーブル サイズがしきい値を超えても常に許可されていることを意味します。
+- `0`は、ブロードキャストカルテシアンジョインが許可されていないことを意味します。 `1`は、 [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されていることを意味します。 `2`は、テーブルサイズがしきい値を超えても常に許可されていることを意味します。
 - この変数はTiDB内部で使用されているため、その値を変更することは推奨さ**れません**。
 
 ### tidb_opt_concurrency_factor
@@ -5471,7 +5471,7 @@ SHOW WARNINGS;
 - 型: Enumeration
 - デフォルト値: `STRICT`
 - 指定可能な値: `STRICT` 、 `IGNORE`
-- この変数は、DDL文が[SQLで指定された配置ルール](/placement-rules-in-sql.md)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルール オプションは無視されます。
+- この変数は、DDL文が[SQLで指定された配置ルール](/placement-rules-in-sql.md)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルールオプションは無視されます。
 - これは、論理ダンプ/リストアツールが、無効な配置ルールが割り当てられた場合でもテーブルが常に作成できるようにするために使用することを目的としています。これは、mysqldumpがすべてのダンプファイルの先頭に`SET FOREIGN_KEY_CHECKS=0;`を書き込む方法と同様です。
 
 ### `tidb_plan_cache_invalidation_on_fresh_stats` <span class="version-mark">New in v7.1.0</span>
@@ -5587,7 +5587,7 @@ SHOW WARNINGS;
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数はタイムスタンプの取得を最適化するために使用され、read-committed分離レベルが採用され、読み書きの競合がまれなシナリオに適しています。この変数を有効にすることで、グローバルタイムスタンプの取得に伴うレイテンシーとコストを回避し、トランザクションレベルの読み取りレイテンシーを最適化できます。
-- 読み取り/書き込み競合が深刻な場合、この機能を有効にすると、グローバル タイムスタンプを取得するコストとレイテンシーが増加し、パフォーマンスの低下を引き起こす可能性があります。詳細については、 [Read Committed分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
+- 読み取り/書き込み競合が深刻な場合、この機能を有効にすると、グローバルタイムスタンプを取得するコストとレイテンシーが増加し、パフォーマンスの低下を引き起こす可能性があります。詳細については、 [Read Committed分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
 
 ### tidb_rc_write_check_ts <span class="version-mark">New in v6.3.0</span>
 
@@ -5756,7 +5756,7 @@ SHOW WARNINGS;
 - デフォルト値: `2`
 - 範囲: `[1, 2]`
 - テーブルに新しく保存されたデータの形式バージョンを制御します。 TiDB v4.0 では、 [新しいストレージ行フォーマット](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2018-07-19-row-format.md)バージョン`2`がデフォルトで新しいデータの保存に使用されます。
-- TiDB のバージョンを v4.0.0 より前のバージョンから v4.0.0 以降のバージョンにアップグレードした場合、フォーマット バージョンは変更されず、TiDB は引き続き古いフォーマット`1`を使用してテーブルにデータを書き込みます。つまり、**新しく作成されたクラスタのみがデフォルトで新しいデータ フォーマットを使用します**。
+- TiDB のバージョンを v4.0.0 より前のバージョンから v4.0.0 以降のバージョンにアップグレードした場合、フォーマットバージョンは変更されず、TiDB は引き続き古いフォーマット`1`を使用してテーブルにデータを書き込みます。つまり、**新しく作成されたクラスタのみがデフォルトで新しいデータフォーマットを使用します**。
 - この変数を変更しても、既に保存されている古いデータには影響しませんが、この変数を変更した後に新たに書き込まれるデータにのみ、対応するバージョン形式が適用されます。
 
 ### tidb_runtime_filter_mode <span class="version-mark">New in v7.2.0</span>
@@ -5817,7 +5817,7 @@ SHOW WARNINGS;
 - デフォルト値: `16`
 - 範囲: `[2, 255]`
 - この変数は、TiDBインスタンスにキャッシュできる履歴スキーマバージョンの数を制限します。デフォルト値は`16`で、これはTiDBがデフォルトで16個の履歴スキーマバージョンをキャッシュすることを意味します。
-- 通常、この変数を変更する必要はありません。[ステイル読み取り](/stale-read.md)機能を使用し、DDL 操作が非常に頻繁に実行されると、スキーマバージョンが頻繁に変更されます。その結果、ステイル読み取りがスナップショットからスキーマ情報を取得しようとすると、スキーマキャッシュ ミスにより情報の再構築に時間がかかる場合があります。この場合、 `tidb_schema_version_cache_limit`の値を増やすことで (例えば、 `32` )、スキーマキャッシュ ミスの問題を回避できます。
+- 通常、この変数を変更する必要はありません。[ステイル読み取り](/stale-read.md)機能を使用し、DDL 操作が非常に頻繁に実行されると、スキーマバージョンが頻繁に変更されます。その結果、ステイル読み取りがスナップショットからスキーマ情報を取得しようとすると、スキーマキャッシュミスにより情報の再構築に時間がかかる場合があります。この場合、 `tidb_schema_version_cache_limit`の値を増やすことで (例えば、 `32` )、スキーマキャッシュミスの問題を回避できます。
 - この変数を変更すると、TiDBのメモリ使用量がわずかに増加します。メモリ不足の問題を回避するため、TiDBのメモリ使用量を監視してください。
 
 ### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
@@ -5876,7 +5876,7 @@ SHOW WARNINGS;
 - 型: String
 - デフォルト値: ""
 - オプション値: 最大 64 文字の文字列。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-` 。v8.5.6 以降、この変数の値は大文字と小文字を区別しません。TiDB は、ストレージおよび比較のために入力値を小文字に変換します。
-- この変数はインスタンスレベルのシステム変数です。これを使用して[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービス スコープを制御できます。 DXF は、この変数の値に基づいて、どの TiDB ノードが分散タスクを実行するようにスケジュールできるかを決定します。特定のルールについては、 [タスクスケジューリング](/tidb-distributed-execution-framework.md#task-scheduling)を参照してください。
+- この変数はインスタンスレベルのシステム変数です。これを使用して[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービススコープを制御できます。 DXF は、この変数の値に基づいて、どの TiDB ノードが分散タスクを実行するようにスケジュールできるかを決定します。特定のルールについては、 [タスクスケジューリング](/tidb-distributed-execution-framework.md#task-scheduling)を参照してください。
 
 ### tidb_session_alias <span class="version-mark">New in v7.4.0</span>
 
@@ -6709,7 +6709,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `4`
 - 範囲: `[1, 256]`
-- この変数は、各 TiDB ノードでの TTL スキャン ジョブの最大同時実行数を設定するために使用されます。詳細については、[TTL (Time to Live)](/time-to-live.md)を参照してください。
+- この変数は、各 TiDB ノードでの TTL スキャンジョブの最大同時実行数を設定するために使用されます。詳細については、[TTL (Time to Live)](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
 
@@ -6765,7 +6765,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 - 指定可能な値: `OFF` 、 `FAST` 、 `STRICT`
 
-- この変数はアサーション レベルを制御するために使用されます。アサーションは、データとインデックス間の整合性チェックであり、書き込まれるキーがトランザクションのコミット プロセスに存在するかどうかをチェックします。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
+- この変数はアサーションレベルを制御するために使用されます。アサーションは、データとインデックス間の整合性チェックであり、書き込まれるキーがトランザクションのコミットプロセスに存在するかどうかをチェックします。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 
     - `OFF` : このチェックを無効にします。
     - `FAST` : パフォーマンスへの影響はほとんどなく、ほとんどのチェック項目を有効にします。
@@ -6791,7 +6791,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb-cloud">
 
-- この変数は、TiDB が TiKV に送信するトランザクションコミット リクエストのバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションの大部分で書き込み操作が多数発生する場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数を大きすぎる値に設定して TiKV の単一ログの最大サイズ (デフォルトでは 8 MiB) の制限を超えると、コミットが失敗する可能性があります。
+- この変数は、TiDB が TiKV に送信するトランザクションコミットリクエストのバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションの大部分で書き込み操作が多数発生する場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数を大きすぎる値に設定して TiKV の単一ログの最大サイズ (デフォルトでは 8 MiB) の制限を超えると、コミットが失敗する可能性があります。
 
 </CustomContent>
 

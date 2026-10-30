@@ -42,7 +42,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
     [Confluent Cloud](https://confluent.cloud)にサインインします。**Data integration** > **APIキー** > **キーの作成**を選択します。表示される**APIキーのスコープの選択**ページで、**グローバルアクセス**を選択します。
 
-    作成後、以下に示すようにキーペア ファイルが生成されます。
+    作成後、以下に示すようにキーペアファイルが生成されます。
 
     ```
     === Confluent Cloud API key: xxx-xxxxx ===
@@ -57,7 +57,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
     xxx-xxxxx.ap-east-1.aws.confluent.cloud:9092
     ```
 
-2. スキーマレジストリ エンドポイントを記録します。
+2. スキーマレジストリエンドポイントを記録します。
 
     Confluent Cloud Console で、 **Schema Registry** > **API endpoint**を選択します。スキーマレジストリエンドポイントを記録します。以下は例です。
 
@@ -69,7 +69,7 @@ TiDB v6.1.0以降、TiCDCはAvro形式でConfluentへの増分データのレプ
 
     Confluent Cloud Console で、 **Schema Registry** > **API credentials**を選択します。 **Edit**をクリックし、 **Create key**をクリックします。
 
-    作成後、次に示すようにキーペア ファイルが生成されます。
+    作成後、次に示すようにキーペアファイルが生成されます。
 
     ```
     === Confluent Cloud API key: yyy-yyyyy ===

@@ -51,7 +51,7 @@ TiDB バージョン: 5.2.0
 | TiKV設定ファイル     | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)                                                                | 新しく追加された | リクエストのバッチ処理を有効にするかどうかを制御します。有効にすると、書き込みパフォーマンスが大幅に向上します。デフォルト値は`true`です。                                                        |
 | TiKV設定ファイル     | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                  | 新しく追加された | TiKV は一定間隔でRaftstoreコンポーネントのレイテンシーを検査します。この設定項目は検査間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。デフォルト値は`500ms`です。              |
 | TiKV設定ファイル     | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)                                      | 変更     | ピアに許可される最長の非アクティブ期間を示します。タイムアウトしたピアは`down`とマークされ、PD は後でそれを削除しようとします。デフォルト値は`5m`から`10m`に変更されます。                                  |
-| TiKV設定ファイル     | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新しく追加された | TiKV のRaftメッセージのキュー サイズを指定します。デフォルト値は`8192`です。                                                                                  |
+| TiKV設定ファイル     | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新しく追加された | TiKV のRaftメッセージのキューサイズを指定します。デフォルト値は`8192`です。                                                                                  |
 | TiKV設定ファイル     | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新しく追加された | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                     |
 | TiKV設定ファイル     | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)                                 | 新しく追加された | kvDB の memtable の数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`5`です。                                                                |
 | TiKV設定ファイル     | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                   | 新しく追加された | kvDB L0 ファイルの数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`9`です。                                                                    |
@@ -204,13 +204,13 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - リージョンに基づいて、異なるTiFlashノード間でMPPクエリワークロードのバランスを取ることをサポートする [#24724](https://github.com/pingcap/tidb/pull/24724)
     - MPPクエリ実行後にキャッシュ内の古いリージョンを無効化する機能をサポートする [#24432](https://github.com/pingcap/tidb/pull/24432)
     - フォーマット指定子`%b/%M/%r/%T`に対する組み込み関数`str_to_date` の MySQL 互換性を向上させる [#25767](https://github.com/pingcap/tidb/pull/25767)
-    - 同じクエリに対して異なるバインディングを再作成した後に、複数の TiDB で一貫性のないバインディング キャッシュが作成される可能性がある問題を修正します [#26015](https://github.com/pingcap/tidb/pull/26015)
+    - 同じクエリに対して異なるバインディングを再作成した後に、複数の TiDB で一貫性のないバインディングキャッシュが作成される可能性がある問題を修正します [#26015](https://github.com/pingcap/tidb/pull/26015)
     - アップグレード後に既存のバインディングをキャッシュにロードできない問題を修正しました [#23295](https://github.com/pingcap/tidb/pull/23295)
     - `SHOW BINDINGS`の結果を ( `original_sql` 、 `update_time` ) で並べ替えることをサポートする [#26139](https://github.com/pingcap/tidb/pull/26139)
     - バインディングが存在する場合のクエリ最適化ロジックを改善し、クエリの最適化時間を短縮する [#26141](https://github.com/pingcap/tidb/pull/26141)
     - "deleted"ステータスのバインディングに対してガベージコレクションを自動的に完了する機能をサポートする [#26206](https://github.com/pingcap/tidb/pull/26206)
     - `EXPLAIN VERBOSE`の結果で、バインディングがクエリ最適化に使用されているかどうかを表示する機能のサポート [#26930](https://github.com/pingcap/tidb/pull/26930)
-    - 現在の TiDB インスタンスのバインディング キャッシュに対応するタイムスタンプを表示するための新しいステータス バリエーション`last_plan_binding_update_time`を追加します [#26340](https://github.com/pingcap/tidb/pull/26340)
+    - 現在の TiDB インスタンスのバインディングキャッシュに対応するタイムスタンプを表示するための新しいステータスバリエーション`last_plan_binding_update_time`を追加します [#26340](https://github.com/pingcap/tidb/pull/26340)
     - バインディング進化の開始時、またはベースライン進化を禁止する`admin evolve bindings`実行時にエラーを報告する機能をサポートする（現在、実験的機能であるため、TiDB Self-Managed バージョンでは無効になっている）。これにより、他の機能に影響が出る。 [#26333](https://github.com/pingcap/tidb/pull/26333)
 
 - PD

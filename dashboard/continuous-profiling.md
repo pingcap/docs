@@ -36,9 +36,9 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## ページにアクセスする {#access-the-page}
 
-継続的プロファイリング ページには、次のいずれかの方法でアクセスできます。
+継続的プロファイリングページには、次のいずれかの方法でアクセスできます。
 
-- TiDB Dashboardにログインした後、左側のナビゲーション メニューで**Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**をクリックします。
+- TiDB Dashboardにログインした後、左側のナビゲーションメニューで**Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**をクリックします。
 
     ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
@@ -66,7 +66,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## 過去のパフォーマンスデータを表示する {#view-historical-performance-data}
 
-リスト ページでは、この機能を有効にしてから収集されたすべてのパフォーマンスデータを確認できます。
+リストページでは、この機能を有効にしてから収集されたすべてのパフォーマンスデータを確認できます。
 
 ![History results](/media/dashboard/dashboard-conprof-history.png)
 

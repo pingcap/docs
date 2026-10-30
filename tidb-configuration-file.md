@@ -119,7 +119,7 @@ TiDB 設定ファイルは、コマンドラインパラメーターよりも多
 
 - 以下の状況において、TiDBが返すバージョン文字列を変更します。
     - 組み込み関数`VERSION()`を使用する場合。
-    - TiDB がクライアントへの最初の接続を確立し、サーバーのバージョン文字列を含む最初のハンドシェイク パケットを返すとき。詳細については、 [MySQL 初期ハンドシェイクパケット](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake)を参照してください。
+    - TiDB がクライアントへの最初の接続を確立し、サーバーのバージョン文字列を含む最初のハンドシェイクパケットを返すとき。詳細については、 [MySQL 初期ハンドシェイクパケット](https://dev.mysql.com/doc/dev/mysql-server/latest/page_protocol_connection_phase.html#sect_protocol_connection_phase_initial_handshake)を参照してください。
 - デフォルト値: ""
 - デフォルトでは、TiDB バージョン文字列の形式は`8.0.11-TiDB-${tidb_version}`です。
 
@@ -1045,7 +1045,7 @@ PROXYプロトコルに関連する設定項目。
 
 ### `networks` {#networks}
 
-- [プロキシプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)プロトコルを使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト
+- [プロキシプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)プロトコルを使用して TiDB に接続できるプロキシサーバーの IP アドレスのリスト
 - デフォルト値: ""
 - 一般的に、リバースプロキシ経由でTiDBにアクセスする場合、TiDBはリバースプロキシサーバーのIPアドレスをクライアントのIPアドレスとして認識します。HAProxyなど、PROXYプロトコルをサポートするリバースプロキシは、PROXYプロトコルを有効にすることで、実際のクライアントIPアドレスをTiDBに渡すことができます。
 - このパラメータを設定すると、TiDB は設定された送信元 IP アドレスが PROXY プロトコルを使用して TiDB に接続することを許可します。PROXY 以外のプロトコルが使用されると、この接続は拒否されます。このパラメータを空のままにすると、どの IP アドレスも PROXY プロトコルを使用して TiDB に接続できません。値は`,`を区切り文字とする IP アドレス (192.168.1.50) または CIDR (192.168.1.0/24) です。 `*`は任意の IP アドレスを意味します。

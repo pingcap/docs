@@ -1,6 +1,6 @@
 ---
 title: Tune TiFlash Performance
-summary: マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
+summary: マシンリソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
 ---
 
 # TiFlash のパフォーマンスを調整する {#tune-tiflash-performance}
@@ -229,7 +229,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 ### シャッフルハッシュ結合をブロードキャストハッシュ結合に置き換える {#replace-shuffled-hash-join-with-broadcast-hash-join}
 
-小さなテーブルでの`Join`操作の場合、ブロードキャスト ハッシュ結合アルゴリズムにより大きなテーブルの転送を回避できるため、コンピューティング パフォーマンスが向上します。
+小さなテーブルでの`Join`操作の場合、ブロードキャストハッシュ結合アルゴリズムにより大きなテーブルの転送を回避できるため、コンピューティングパフォーマンスが向上します。
 
 - 変数[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかを制御します。テーブルサイズ（単位：バイト）がこの変数の値より小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 

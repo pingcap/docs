@@ -23,7 +23,7 @@ DataGripは2つの方法で使用できます。
 
 このチュートリアルを完了するには、以下が必要です。
 
-- [DataGrip **2023.2.1**以降](https://www.jetbrains.com/datagrip/download/)、または非コミュニティ エディションの[JetBrains](https://www.jetbrains.com/)IDE。
+- [DataGrip **2023.2.1**以降](https://www.jetbrains.com/datagrip/download/)、または非コミュニティエディションの[JetBrains](https://www.jetbrains.com/)IDE。
 - TiDBクラスタ。
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
@@ -126,7 +126,7 @@ DataGripは2つの方法で使用できます。
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 

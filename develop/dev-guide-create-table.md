@@ -74,7 +74,7 @@ CREATE TABLE `bookshop`.`users` (
 
 次に、 `nickname`という名前のフィールドが定義されます。これは[varchar](/data-type-string.md#varchar-type)型で、長さの制限は 100 文字です。つまり、ユーザーの`nicknames`は`varchar`型を使用し、100 文字を超えないということです。
 
-最後に、 `balance`という名前のフィールドが追加されます。これは[decimal](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2` 。**精度**はフィールド内の桁数の合計を表し、**スケール**は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5` 、スケールが`2`で、範囲は`-999.99`から`999.99`となります。 `decimal(6,1)`は、精度が`6` 、スケールが`1`で、範囲が`-99999.9`から`99999.9`であることを意味します。**decimal**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (たとえば、ユーザー プロパティ関連) では、 **decimal**型を使用するようにしてください。
+最後に、 `balance`という名前のフィールドが追加されます。これは[decimal](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2` 。**精度**はフィールド内の桁数の合計を表し、**スケール**は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5` 、スケールが`2`で、範囲は`-999.99`から`999.99`となります。 `decimal(6,1)`は、精度が`6` 、スケールが`1`で、範囲が`-99999.9`から`99999.9`であることを意味します。**decimal**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (たとえば、ユーザープロパティ関連) では、 **decimal**型を使用するようにしてください。
 
 TiDB は、[整数型](/data-type-numeric.md#integer-types)、 [浮動小数点型](/data-type-numeric.md#floating-point-types)、[固定小数点型](/data-type-numeric.md#fixed-point-types)、[日付と時刻の種類](/data-type-date-and-time.md)、[列挙型](/data-type-string.md#enum-type)など、他の多くの列データ型をサポートしています。サポートされている列の[データ型](/data-type-overview.md)を参照し、データベースに保存したいデータに一致する**データ型**を使用できます。
 

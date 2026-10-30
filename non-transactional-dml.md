@@ -413,7 +413,7 @@ WHERE t.c1 IS NULL;
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-非トランザクション ステートメントは TiDB 固有であり、MySQL とは互換性がありません。
+非トランザクションステートメントは TiDB 固有であり、MySQL とは互換性がありません。
 
 ## 参照 {#see-also}
 

@@ -28,7 +28,7 @@ MySQLと同様に、TiDBは同じTCPポート上でTLS接続と非TLS接続の�
 
 > **Note:**
 >
-> ログイン ユーザーが[TiDBの証明書ベース認証によるログイン](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)を使用して設定した場合、ユーザーは TiDB への暗号化された接続を有効にすることが暗黙的に要求されます。
+> ログインユーザーが[TiDBの証明書ベース認証によるログイン](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)を使用して設定した場合、ユーザーは TiDB への暗号化された接続を有効にすることが暗黙的に要求されます。
 
 ## TiDBサーバーをセキュア接続を使用するように設定する {#configure-tidb-server-to-use-secure-connections}
 
@@ -98,7 +98,7 @@ CREATE USER 'u1'@'%' REQUIRE X509;
 
 > **Note:**
 >
-> ログイン ユーザーが[TiDBの証明書ベース認証によるログイン](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)を使用して設定した場合、ユーザーは TiDB への TLS 接続を有効にすることが暗黙的に要求されます。
+> ログインユーザーが[TiDBの証明書ベース認証によるログイン](/certificate-authentication.md#configure-the-user-certificate-information-for-login-verification)を使用して設定した場合、ユーザーは TiDB への TLS 接続を有効にすることが暗黙的に要求されます。
 
 ## 現在の接続が暗号化を使用しているかどうかを確認する {#check-whether-the-current-connection-uses-encryption}
 

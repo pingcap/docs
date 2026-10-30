@@ -13,11 +13,11 @@ SQL Statementsページには、クラスター内のすべてのSQL文の実行
 
 SQL Statementsページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**SQL Statements**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**SQL Statements**をクリックします。
 
 - ブラウザで[http://127.0.0.1:2379/dashboard/#/statement](http://127.0.0.1:2379/dashboard/#/statement)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
-SQL Statementsページに表示されるすべてのデータは、TiDB ステートメントサマリー テーブルから取得されます。テーブルの詳細については、 [TiDB ステートメントサマリー テーブル](/statement-summary-tables.md)を参照してください。
+SQL Statementsページに表示されるすべてのデータは、TiDB ステートメントサマリーテーブルから取得されます。テーブルの詳細については、 [TiDB ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
 
 > **Note:**
 >
@@ -43,7 +43,7 @@ SQL Statementsページの上部で、表示するSQL実行の時間範囲を変
 
 ### 設定を変更する {#change-settings}
 
-リスト ページで、右上にある**Settings**ボタンをクリックして、SQL Statements機能の設定を変更します。
+リストページで、右上にある**Settings**ボタンをクリックして、SQL Statements機能の設定を変更します。
 
 ![Settings entry](/media/dashboard/dashboard-statement-setting-entry.png)
 
@@ -60,7 +60,7 @@ SQL Statementsページの上部で、表示するSQL実行の時間範囲を変
 
 > **Note:**
 >
-> - ステートメント システムテーブルはメモリ内にのみ保存されるため、SQL Statements機能が無効にされると、システムテーブル内のデータはクリアされます。
+> - ステートメントシステムテーブルはメモリ内にのみ保存されるため、SQL Statements機能が無効にされると、システムテーブル内のデータはクリアされます。
 >
 > - `Collect interval`と`retain duration`の値はメモリ使用量に影響するため、実際の状況に応じて調整することをお勧めします。 `retain duration`の値は大きすぎないようにしてください。
 

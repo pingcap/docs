@@ -68,7 +68,7 @@ TiDBバージョン: 6.2.0-DMR
 
 - Lock ビューは、楽観的トランザクションの待機情報の表示をサポートしています。
 
-    ロックの競合が多すぎると、深刻なパフォーマンスの問題を引き起こす可能性があり、そのような問題のトラブルシューティングにはロックの競合を検出することが不可欠です。v6.2.0 より前の TiDB では、 `INFORMATION_SCHEMA.DATA_LOCK_WAITS`システム ビューを使用してロックの競合関係を表示することはできましたが、楽観的トランザクションの待機情報は表示されませんでした。TiDB v6.2.0 では`DATA_LOCK_WAITS`ビューが拡張され、悲観的ロックによってブロックされている楽観的トランザクションがビューに一覧表示されます。この機能により、ユーザーはロックの競合を迅速に検出でき、アプリケーションの改善の基礎となるため、ロックの競合の頻度を減らし、全体的なパフォーマンスを向上させることができます。
+    ロックの競合が多すぎると、深刻なパフォーマンスの問題を引き起こす可能性があり、そのような問題のトラブルシューティングにはロックの競合を検出することが不可欠です。v6.2.0 より前の TiDB では、 `INFORMATION_SCHEMA.DATA_LOCK_WAITS`システムビューを使用してロックの競合関係を表示することはできましたが、楽観的トランザクションの待機情報は表示されませんでした。TiDB v6.2.0 では`DATA_LOCK_WAITS`ビューが拡張され、悲観的ロックによってブロックされている楽観的トランザクションがビューに一覧表示されます。この機能により、ユーザーはロックの競合を迅速に検出でき、アプリケーションの改善の基礎となるため、ロックの競合の頻度を減らし、全体的なパフォーマンスを向上させることができます。
 
     [ユーザー向けドキュメント](/information-schema/information-schema-data-lock-waits.md) [#34609](https://github.com/pingcap/tidb/issues/34609) @[longfangsong](https://github.com/longfangsong)
 
@@ -272,7 +272,7 @@ TiDBバージョン: 6.2.0-DMR
 | TiDB           | query-feedback-limit                                                                                                              | 削除済み     | この設定はもはや有効ではなく、推奨されません。                                                                             |
 | TiKV           | [server.simplify-metrics](/tikv-configuration-file.md#simplify-metrics-new-in-v620)                                         | 新しく追加された | この設定では、返される監視メトリクスを簡略化するかどうかを指定します。                                                                 |
 | TiKV           | [quota.background-cpu-time](/tikv-configuration-file.md#background-cpu-time-new-in-v620)                                  | 新しく追加された | この設定では、TiKVのバックグラウンド処理で読み取りおよび書き込みリクエストを処理するために使用されるCPUリソースのソフトリミットを指定します。                             |
-| TiKV           | [quota.background-write-bandwidth](/tikv-configuration-file.md#background-write-bandwidth-new-in-v620)                    | 新しく追加された | この設定では、バックグラウンド トランザクションがデータを書き込む際の帯域幅のソフト リミットを指定します (現在は有効ではありません)。                               |
+| TiKV           | [quota.background-write-bandwidth](/tikv-configuration-file.md#background-write-bandwidth-new-in-v620)                    | 新しく追加された | この設定では、バックグラウンドトランザクションがデータを書き込む際の帯域幅のソフトリミットを指定します (現在は有効ではありません)。                               |
 | TiKV           | [quota.background-read-bandwidth](/tikv-configuration-file.md#background-read-bandwidth-new-in-v620)                                 | 新しく追加された | この設定では、バックグラウンドトランザクションとコプロセッサーがデータを読み取る際の帯域幅のソフトリミットを指定します（現在は有効ではありません）。                          |
 | TiKV           | [quota.enable-auto-tune](/tikv-configuration-file.md#enable-auto-tune-new-in-v620)                                        | 新しく追加された | この設定では、クォータの自動調整を有効にするかどうかを指定します。この設定項目を有効にすると、TiKVはTiKVインスタンスの負荷に基づいて、バックグラウンドリクエストのクォータを動的に調整します。 |
 | TiKV           | rocksdb.enable-pipelined-commit                                                                                           | 削除済み     | この設定はもはや有効ではありません。                                                                                  |
@@ -421,7 +421,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 - TiKV
 
     - 悲観的トランザクションで`WriteConflict`エラーを報告しないようにします [#11612](https://github.com/tikv/tikv/issues/11612) @[sticnarf](https://github.com/sticnarf)
-    - 非同期コミットが有効になっている場合に、悲観的トランザクションで発生する可能性のある重複コミット レコードを修正 [#12615](https://github.com/tikv/tikv/issues/12615) @[sticnarf](https://github.com/sticnarf)
+    - 非同期コミットが有効になっている場合に、悲観的トランザクションで発生する可能性のある重複コミットレコードを修正 [#12615](https://github.com/tikv/tikv/issues/12615) @[sticnarf](https://github.com/sticnarf)
     - `storage.api-version`を`1`から`2`に変更した際に TiKV がパニックする問題を修正 [#12600](https://github.com/tikv/tikv/issues/12600) @[pingyu](https://github.com/pingyu)
     - TiKVとPD間のリージョンサイズ構成の不整合の問題を修正 [#12518](https://github.com/tikv/tikv/issues/12518) @[5kbpers](https://github.com/5kbpers)
     - TiKV が PD クライアントに再接続し続ける問題を修正[#12506](https://github.com/tikv/tikv/issues/12506) 、 [#12827](https://github.com/tikv/tikv/issues/12827) @[Connor1996](https://github.com/Connor1996)

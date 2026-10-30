@@ -287,7 +287,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set hot-region-schedule-limit 4       // 4 tasks of hot Region scheduling at the same time at most
     ```
 
-- `hot-region-cache-hits-threshold`は、ホットリージョンを識別するために必要な分数を設定するために使用されます。PD は、リージョンがこの分数を超えてホットスポット状態になった後にのみ、ホットスポット スケジューリングに参加できます。
+- `hot-region-cache-hits-threshold`は、ホットリージョンを識別するために必要な分数を設定するために使用されます。PD は、リージョンがこの分数を超えてホットスポット状態になった後にのみ、ホットスポットスケジューリングに参加できます。
 
 - `tolerant-size-ratio`はバランスバッファ領域のサイズを制御します。2つのストアのリーダーまたはリージョン間のスコア差が、指定されたリージョンサイズの倍数未満の場合、PDはバランスが取れているとみなします。
 
@@ -359,7 +359,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 > **Note:**
 >
-> リクエスト レート制限と同時実行制限が PD パフォーマンスに与える影響を回避するために、 `service-middleware`の設定を変更することはお勧めしません。
+> リクエストレート制限と同時実行制限が PD パフォーマンスに与える影響を回避するために、 `service-middleware`の設定を変更することはお勧めしません。
 
 `service-middleware`の構成情報を表示します:
 
@@ -548,7 +548,7 @@ config set service-middleware rate-limit GetRegion concurrency 0
 }
 ```
 
-v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`flow_cpu`フィールドが含まれ、 `hot store`コマンドの出力に`cpu-read-rate`フィールドが含まれます。これらのフィールドは、CPU を認識した読み取りホットスポット スケジューリングのための読み取り CPU 使用率を示します。
+v8.5.7 以降では、 `hot read`および`hot history`コマンドの出力に`flow_cpu`フィールドが含まれ、 `hot store`コマンドの出力に`cpu-read-rate`フィールドが含まれます。これらのフィールドは、CPU を認識した読み取りホットスポットスケジューリングのための読み取り CPU 使用率を示します。
 
 ### `label [store <name> <value>]` {#label-store-name-value}
 
@@ -934,7 +934,7 @@ pd-ctl resource-manager config controller set ltb-max-wait-duration 30m
 
 ### `scheduler [show | add | remove | pause | resume | config | describe]` {#scheduler-show--add--remove--pause--resume--config--describe}
 
-このコマンドを使用して、スケジュール ポリシーを表示および制御します。
+このコマンドを使用して、スケジュールポリシーを表示および制御します。
 
 使用法：
 
@@ -971,7 +971,7 @@ TiDB v6.3.0以降、PDは`balance-region-scheduler`と`balance-leader-scheduler`
 
 ### `scheduler config evict-slow-store-scheduler` {#scheduler-config-evict-slow-store-scheduler}
 
-`evict-slow-store-scheduler`は、PD がリーダーを異常な TiKV ノードにスケジュールすることを制限し、必要に応じてリーダーを積極的に排除することで、TiKV ノードでディスク I/O またはネットワーク ジッターが発生したときに、低速ノードがクラスターに与える影響を軽減します。
+`evict-slow-store-scheduler`は、PD がリーダーを異常な TiKV ノードにスケジュールすることを制限し、必要に応じてリーダーを積極的に排除することで、TiKV ノードでディスク I/O またはネットワークジッターが発生したときに、低速ノードがクラスターに与える影響を軽減します。
 
 #### 低速ディスクノード {#slow-disk-nodes}
 
@@ -1116,9 +1116,9 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
 
     > **Note:**
     >
-    > クラスター内のいずれかのコンポーネントが v5.2 より前の場合、 `query`ディメンションの設定は有効になりません。一部のコンポーネントを v5.2 以降にアップグレードした後も、スケジューラはデフォルトで`byte`および`key`ディメンションに基づいてホットスポット バランシングを優先します。クラスター内のすべてのコンポーネントを v5.2 以降にアップグレードした後も、このような設定は互換性のために引き続き有効になります。
+    > クラスター内のいずれかのコンポーネントが v5.2 より前の場合、 `query`ディメンションの設定は有効になりません。一部のコンポーネントを v5.2 以降にアップグレードした後も、スケジューラはデフォルトで`byte`および`key`ディメンションに基づいてホットスポットバランシングを優先します。クラスター内のすべてのコンポーネントを v5.2 以降にアップグレードした後も、このような設定は互換性のために引き続き有効になります。
     >
-    > v8.5.7 以降では、TiKV はホットリージョン スケジューリングのために読み取り CPU 使用率を報告します。読み取り CPU レポートをサポートするクラスターでは、デフォルトの`read-priorities`の値は`cpu,byte`です。読み取り CPU レポートをサポートしないクラスターでは、PD は自動的に`query,byte`にフォールバックし、クラスターが`query`ディメンションもサポートしない場合は`byte,key`にフォールバックします。 `pd-ctl`を使用してリアルタイム設定を表示できます。通常、これらの設定を変更する必要はありません。
+    > v8.5.7 以降では、TiKV はホットリージョンスケジューリングのために読み取り CPU 使用率を報告します。読み取り CPU レポートをサポートするクラスターでは、デフォルトの`read-priorities`の値は`cpu,byte`です。読み取り CPU レポートをサポートしないクラスターでは、PD は自動的に`query,byte`にフォールバックし、クラスターが`query`ディメンションもサポートしない場合は`byte,key`にフォールバックします。 `pd-ctl`を使用してリアルタイム設定を表示できます。通常、これらの設定を変更する必要はありません。
 
     ```bash
     scheduler config balance-hot-region-scheduler set read-priorities cpu,byte
@@ -1277,7 +1277,7 @@ store remove-tombstone
 
 #### ストアのウェイトを設定する {#configure-store-weight}
 
-ID が 1 のストアのリーダー ウェイトを`5`に、リージョンウェイトを`10`に設定するには、次のコマンドを実行します。
+ID が 1 のストアのリーダーウェイトを`5`に、リージョンウェイトを`10`に設定するには、次のコマンドを実行します。
 
 ```bash
 store weight 1 5 10

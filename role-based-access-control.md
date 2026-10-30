@@ -314,7 +314,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 DROP ROLE 'app_read', 'app_write';
 ```
 
-この操作により、 `mysql.user`テーブル内の`app_read`と`app_write`ロール レコードと、承認テーブル内の関連レコードが削除され、2つのロールに関連する承認が終了します。
+この操作により、 `mysql.user`テーブル内の`app_read`と`app_write`ロールレコードと、承認テーブル内の関連レコードが削除され、2つのロールに関連する承認が終了します。
 
 ロールを削除するには、 `DROP ROLE`または`DROP USER`権限が必要です。
 

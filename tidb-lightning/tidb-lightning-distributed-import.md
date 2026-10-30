@@ -7,7 +7,7 @@ summary: TiDB Lightningを使用する際のデータの並列インポートの
 
 TiDB Lightning v5.3.0以降、 [物理インポートモード](/tidb-lightning/tidb-lightning-physical-import-mode.md)は単一テーブルまたは複数テーブルの並列インポートをサポートしています。複数のTiDB Lightningインスタンスを同時に実行することで、単一または複数のテーブルからデータを並列インポートできます。これにより、 TiDB Lightningは水平スケーリングが可能になり、大量のデータのインポートにかかる時間を大幅に短縮できます。
 
-技術的な実装では、 TiDB Lightning は各インスタンスのメタデータと各インポートされたテーブルのデータをターゲット TiDB に記録し、異なるインスタンスの Row ID 割り当て範囲、グローバル チェックサムの記録、TiKV と PD の構成変更と回復を調整します。
+技術的な実装では、 TiDB Lightning は各インスタンスのメタデータと各インポートされたテーブルのデータをターゲット TiDB に記録し、異なるインスタンスの Row ID 割り当て範囲、グローバルチェックサムの記録、TiKV と PD の構成変更と回復を調整します。
 
 TiDB Lightning を使用すると、次のシナリオでデータを並列にインポートできます。
 
@@ -190,9 +190,9 @@ parallel-import = true
 
 - エラーが通常の終了 (たとえば、kill コマンドに応答して終了) または OOM によるオペレーティングシステムによる終了を示している場合は、構成を調整してから、 TiDB Lightningノードを再起動します。
 
-- ネットワーク タイムアウトなどのエラーがデータの精度に影響を与えない場合は、次の手順を実行します。
+- ネットワークタイムアウトなどのエラーがデータの精度に影響を与えない場合は、次の手順を実行します。
 
-    1. チェックポイント ソースデータのエラーを消去するには、失敗したすべてのノードで設定`--checkpoint-error-ignore=all`で[`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore)コマンドを実行します。
+    1. チェックポイントソースデータのエラーを消去するには、失敗したすべてのノードで設定`--checkpoint-error-ignore=all`で[`checkpoint-error-ignore`](/tidb-lightning/tidb-lightning-checkpoints.md#--checkpoint-error-ignore)コマンドを実行します。
 
     2. チェックポイントからのデータのインポートを続行するには、これらのノードを再起動します。
 

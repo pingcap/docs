@@ -184,7 +184,7 @@ TiDB バージョン: 7.4.0
 
 ### 可観測性 {#observability}
 
-- ログにセッション接続 ID とセッション エイリアスを追加することをサポート [#46071](https://github.com/pingcap/tidb/issues/46071) @[lcwangchao](https://github.com/lcwangchao)
+- ログにセッション接続 ID とセッションエイリアスを追加することをサポート [#46071](https://github.com/pingcap/tidb/issues/46071) @[lcwangchao](https://github.com/lcwangchao)
 
     SQL実行の問題をトラブルシューティングする際には、根本原因を特定するために、TiDBコンポーネントログの内容を相関させる必要があることがよくあります。v7.4.0以降、TiDBはセッション接続ID（ `CONNECTION_ID` ）をセッション関連ログ（TiDBログ、スロークエリログ、TiKVコプロセッサからのスローログなど）に書き込むことができます。セッション接続IDに基づいて複数の種類のログの内容を相関させることで、トラブルシューティングと診断の効率を向上させることができます。
 
@@ -429,7 +429,7 @@ TiDB バージョン: 7.4.0
 
         - DM が大文字と小文字を区別しない照合順序で競合を正しく処理できない問題を修正しました [#9489](https://github.com/pingcap/tiflow/issues/9489) @[hihihuhu](https://github.com/hihihuhu)
         - DM バリデーターのデッドロック問題を修正し、再試行を強化しました。 [#9257](https://github.com/pingcap/tiflow/issues/9257) @[D3Hunter](https://github.com/D3Hunter)
-        - 失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[#9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
+        - 失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーションラグが増大し続ける問題を修正しました[#9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
         - オンライン DDL をスキップするときに DM が上流のテーブルスキーマを適切に追跡できない問題を修正しました [#9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
         - 楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [#9588](https://github.com/pingcap/tiflow/issues/9588) @[GMHDBJD](https://github.com/GMHDBJD)
         - DMが楽観的モードでパーティションDDLをスキップする問題を修正 [#9788](https://github.com/pingcap/tiflow/issues/9788) @[GMHDBJD](https://github.com/GMHDBJD)

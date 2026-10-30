@@ -128,7 +128,7 @@ SELECT /*+ NO_INDEX_JOIN(t1, t2) */ * FROM t1, t2 WHERE t1.id = t2.id;
 
 ### NO_INDEX_HASH_JOIN(t1_name [, tl_name ...]) {#no_index_hash_joint1_name--tl_name-}
 
-ヒント`NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックス ネスト ループ ハッシュ結合アルゴリズムを使用しないようオプティマイザに指示します。
+ヒント`NO_INDEX_HASH_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックスネストループハッシュ結合アルゴリズムを使用しないようオプティマイザに指示します。
 
 ### INL_MERGE_JOIN {#inl_merge_join}
 
@@ -140,7 +140,7 @@ TiDB v8.3.0 より前では、ヒント`INL_MERGE_JOIN(t1_name [, tl_name])`は�
 
 ### NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...]) {#no_index_merge_joint1_name--tl_name-}
 
-ヒント`NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックス ネスト ループ マージ結合アルゴリズムを使用しないようオプティマイザに指示します。
+ヒント`NO_INDEX_MERGE_JOIN(t1_name [, tl_name ...])`は、指定されたテーブルに対してインデックスネストループマージ結合アルゴリズムを使用しないようオプティマイザに指示します。
 
 ### HASH_JOIN(t1_name [, tl_name ...]) {#hash_joint1_name--tl_name-}
 
@@ -478,7 +478,7 @@ EXPLAIN SELECT /*+ INDEX_LOOKUP_PUSHDOWN(t1, a) */ a, b FROM t1;
 - [Follower Read](/follower-read.md)はサポートされていません。
 - [ステイル読み取り](/stale-read.md)と[`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)はサポートされていません。
 - プッシュダウンされた`LocalIndexLookUp`演算子は`keep order`をサポートしていません。実行計画にインデックス列に基づく`ORDER BY`が含まれている場合、クエリは通常の`IndexLookUp`にフォールバックします。
-- プッシュダウンされた`LocalIndexLookUp`演算子は、ページング モードでのコプロセッサーリクエストの送信をサポートしていません。
+- プッシュダウンされた`LocalIndexLookUp`演算子は、ページングモードでのコプロセッサーリクエストの送信をサポートしていません。
 - プッシュダウンされた`LocalIndexLookUp`演算子は[コプロセッサーキャッシュ](/coprocessor-cache.md)をサポートしません。
 
 ### NO_INDEX_LOOKUP_PUSHDOWN(t1_name)<span class="version-mark">バージョン8.5.5の新機能</span> {#no_index_lookup_pushdownt1_name-new-in-v855}
@@ -534,7 +534,7 @@ select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 wher
 SELECT /*+ USE_INDEX_MERGE(t1, idx_a, idx_b, idx_c) */ * FROM t1 WHERE t1.a > 10 OR t1.b > 10;
 ```
 
-同じテーブルに複数の`USE_INDEX_MERGE`ヒントが指定されている場合、オプティマイザはこれらのヒントによって指定されたインデックス セットの結合からインデックスを選択しようとします。
+同じテーブルに複数の`USE_INDEX_MERGE`ヒントが指定されている場合、オプティマイザはこれらのヒントによって指定されたインデックスセットの結合からインデックスを選択しようとします。
 
 > **Note:**
 >
@@ -834,7 +834,7 @@ SELECT /*+ STRAIGHT_JOIN() */ * FROM t t1, t t2 WHERE t1.a = t2.a;
 
 指定された`N`が物理最適化の検索範囲を超える場合、TiDB は警告を返し、このヒントを無視する戦略に基づいて最適な物理プランを選択します。
 
-カスケード プランナーが有効な場合、このヒントは効果がありません。
+カスケードプランナーが有効な場合、このヒントは効果がありません。
 
 次の例では、オプティマイザは物理的な最適化中に見つかった 3 番目の物理プランを選択するように強制されます。
 

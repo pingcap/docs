@@ -41,11 +41,11 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 ## ステップ2: 初期化設定ファイルを編集する {#step-2-edit-the-initialization-configuration-file}
 
-意図したクラスター トポロジに応じて、クラスター初期化設定ファイルを手動で作成および編集する必要があります。
+意図したクラスタートポロジに応じて、クラスター初期化設定ファイルを手動で作成および編集する必要があります。
 
 [設定ファイルテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)に従って、YAML 設定ファイル（例： `topology.yaml` ）を作成する必要があります。その他のシナリオでは、設定を適宜編集してください。
 
-コマンド`tiup dm template > topology.yaml`を使用すると、設定ファイル テンプレートをすばやく生成できます。
+コマンド`tiup dm template > topology.yaml`を使用すると、設定ファイルテンプレートをすばやく生成できます。
 
 3 つの DM-master、3つの DM-worker、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 

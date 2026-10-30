@@ -23,7 +23,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 - 分散実行フレームワーク (DXF) が有効になっている場合に`ADD INDEX`または`IMPORT INTO`タスクを分散実行するために TiDB ノードを指定および分離する機能をサポートする [#46258](https://github.com/pingcap/tidb/issues/46258) @[ywqzzy](https://github.com/ywqzzy)
 
-    リソース集約型のクラスタで`ADD INDEX`または`IMPORT INTO`タスクを並列実行すると、大量の TiDB ノード リソースが消費され、クラスタのパフォーマンスが低下する可能性があります。既存のサービスのパフォーマンスへの影響を回避するため、v7.4.0 では、 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービス スコープを制御する実験的機能としてシステム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を導入しました。既存の TiDB ノードを複数選択するか、新しい TiDB ノードの TiDB サービス スコープを設定すると、分散実行される`ADD INDEX`および`IMPORT INTO`タスクは、これらのノードでのみ実行されます。この機能は、v7.5.0 で一般提供 (GA) されます。
+    リソース集約型のクラスタで`ADD INDEX`または`IMPORT INTO`タスクを並列実行すると、大量の TiDB ノードリソースが消費され、クラスタのパフォーマンスが低下する可能性があります。既存のサービスのパフォーマンスへの影響を回避するため、v7.4.0 では、 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービススコープを制御する実験的機能としてシステム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を導入しました。既存の TiDB ノードを複数選択するか、新しい TiDB ノードの TiDB サービススコープを設定すると、分散実行される`ADD INDEX`および`IMPORT INTO`タスクは、これらのノードでのみ実行されます。この機能は、v7.5.0 で一般提供 (GA) されます。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_service_scope-new-in-v740)を参照してください。
 
@@ -68,9 +68,9 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 ### 可観測性 {#observability}
 
-- TiDB Dashboardは TiKV のヒープ プロファイリングをサポートします [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
+- TiDB Dashboardは TiKV のヒーププロファイリングをサポートします [#15927](https://github.com/tikv/tikv/issues/15927) @[Connor1996](https://github.com/Connor1996)
 
-    従来、TiKV の OOM やメモリ使用量過多の問題に対処するには、インスタンス環境でヒーププロファイルを生成するために`jeprof`を手動で実行する必要がありました。v7.5.0 以降、TiKV はヒーププロファイルのリモート処理に対応しました。ヒーププロファイルのフレーム グラフとコール グラフに直接アクセスできるようになりました。この機能により、Go のヒープ プロファイリングと同様に、シンプルで使いやすい操作性を実現しています。
+    従来、TiKV の OOM やメモリ使用量過多の問題に対処するには、インスタンス環境でヒーププロファイルを生成するために`jeprof`を手動で実行する必要がありました。v7.5.0 以降、TiKV はヒーププロファイルのリモート処理に対応しました。ヒーププロファイルのフレームグラフとコールグラフに直接アクセスできるようになりました。この機能により、Go のヒーププロファイリングと同様に、シンプルで使いやすい操作性を実現しています。
 
     詳細については、[ドキュメント](/dashboard/dashboard-profiling.md)を参照してください。
 
@@ -86,7 +86,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
     v7.5.0 より前の DM Binlog Filter 機能は、指定されたイベントを移行またはフィルタリングすることしかできず、粒度が比較的粗いものでした。たとえば、 `ALTER`のような DDL イベントの大きな粒度しかフィルタリングできませんでした。この方法は、いくつかのシナリオで制限がありました。たとえば、アプリケーションは`ADD COLUMN`は許可しますが、 `DROP COLUMN`は許可しませんが、以前の DM バージョンでは両方とも`ALTER`イベントでフィルタリングされていました。
 
-    このような問題に対処するため、v7.5.0 では、 `MODIFY COLUMN` (列のデータ型の変更)、 `DROP COLUMN` などのフィルタリングや、データ損失、データの切り捨て、精度低下につながるその他の細かい DDL イベントなど、サポートされる DDL イベントの粒度を細かくしています。必要に応じて設定できます。この機能は、互換性のない DDL 変更をブロックし、そのような変更のエラーを報告することもサポートしているため、下流のアプリケーション データへの影響を回避するために、タイムリーに手動で介入できます。
+    このような問題に対処するため、v7.5.0 では、 `MODIFY COLUMN` (列のデータ型の変更)、 `DROP COLUMN` などのフィルタリングや、データ損失、データの切り捨て、精度低下につながるその他の細かい DDL イベントなど、サポートされる DDL イベントの粒度を細かくしています。必要に応じて設定できます。この機能は、互換性のない DDL 変更をブロックし、そのような変更のエラーを報告することもサポートしているため、下流のアプリケーションデータへの影響を回避するために、タイムリーに手動で介入できます。
 
     詳細については、 [ドキュメント](/dm/dm-binlog-event-filter.md#parameter-descriptions)を参照してください。
 
@@ -125,7 +125,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 | TiKV           | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                       | 変更     | 低速ノード検出の感度を向上させるためにアルゴリズムを最適化した後、デフォルト値を`500ms`から`100ms`に変更します。                                                                         |
 | TiKV           | [`raftstore.region-compact-min-redundant-rows`](/tikv-configuration-file.md#region-compact-min-redundant-rows-new-in-v710)         | 変更     | RocksDB のコンパクションをトリガーするために必要な冗長 MVCC 行の数を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`ストレージエンジンに対して有効になります。                                           |
 | TiKV           | [`raftstore.region-compact-redundant-rows-percent`](/tikv-configuration-file.md#region-compact-redundant-rows-percent-new-in-v710) | 変更     | RocksDB のコンパクションをトリガーするために必要な冗長 MVCC 行の割合を設定します。v7.5.0 以降、この設定項目は`"raft-kv"`ストレージエンジンに対して有効になります。                                          |
-| TiKV           | [`raftstore.evict-cache-on-memory-ratio`](/tikv-configuration-file.md#evict-cache-on-memory-ratio-new-in-v750)                     | 新しく追加された | TiKV のメモリ使用量がシステムで使用可能なメモリの 90% を超え、Raftエントリ キャッシュによって占有されているメモリが使用済みメモリの`evict-cache-on-memory-ratio`を超えると、TiKV はRaftエントリ キャッシュを削除します。 |
+| TiKV           | [`raftstore.evict-cache-on-memory-ratio`](/tikv-configuration-file.md#evict-cache-on-memory-ratio-new-in-v750)                     | 新しく追加された | TiKV のメモリ使用量がシステムで使用可能なメモリの 90% を超え、Raftエントリキャッシュによって占有されているメモリが使用済みメモリの`evict-cache-on-memory-ratio`を超えると、TiKV はRaftエントリキャッシュを削除します。 |
 | TiKV           | [`memory.enable-heap-profiling`](/tikv-configuration-file.md#enable-heap-profiling-new-in-v750)                                    | 新しく追加された | TiKVのメモリ使用量を追跡するためにヒーププロファイリングを有効にするかどうかを制御します。                                                                                         |
 | TiKV           | [`memory.profiling-sample-per-bytes`](/tikv-configuration-file.md#profiling-sample-per-bytes-new-in-v750)                          | 新しく追加された | ヒーププロファイリングによって毎回サンプリングされるデータ量を指定します。値は2のべき乗に切り上げられます。                                                                                  |
 | BR             | [`--ignore-stats`](/br/br-snapshot-manual.md#back-up-statistics)                                                                   | 新しく追加された | データベース統計情報のバックアップと復元を行うかどうかを制御します。このパラメーターを`false`に設定すると、br コマンドラインツールは列、インデックス、およびテーブルの統計情報のバックアップと復元をサポートします。                          |
@@ -189,7 +189,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
     - 非整数クラスター化インデックスでの分割テーブル操作を禁止 [#47350](https://github.com/pingcap/tidb/issues/47350) @[tangenta](https://github.com/tangenta)
     - タイムゾーン情報が間違っているタイムフィールドのエンコード問題を修正 [#46033](https://github.com/pingcap/tidb/issues/46033) @[tangenta](https://github.com/tangenta)
-    - Sort オペレーターがスピル プロセス中に TiDB をクラッシュさせる可能性がある問題を修正 [#47538](https://github.com/pingcap/tidb/issues/47538) @[windtalker](https://github.com/windtalker)
+    - Sort オペレーターがスピルプロセス中に TiDB をクラッシュさせる可能性がある問題を修正 [#47538](https://github.com/pingcap/tidb/issues/47538) @[windtalker](https://github.com/windtalker)
     - TiDB が`GROUP_CONCAT`を使用したクエリに対して`Can't find column`を返す問題を修正 [#41957](https://github.com/pingcap/tidb/issues/41957) @[AilinKid](https://github.com/AilinKid)
     - `client-go`の`batch-client`のpanic問題を修正 [#47691](https://github.com/pingcap/tidb/issues/47691) @[crazycs520](https://github.com/crazycs520)
     - `INDEX_LOOKUP_HASH_JOIN` のメモリ使用量推定の誤りを修正 [#47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)

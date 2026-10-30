@@ -152,7 +152,7 @@ tiup install dm tidb-lightning
 
 ### ステップ3. TiUPとそのコンポーネントを更新する（オプション） {#step-3-update-tiup-and-its-components-optional}
 
-新しいバージョンのリリース ログと互換性に関する注意事項を確認することをお勧めします。
+新しいバージョンのリリースログと互換性に関する注意事項を確認することをお勧めします。
 
 ```shell
 tiup update --self && tiup update dm
