@@ -53,8 +53,15 @@ IndexOption ::=
 |   'COMMENT' stringLit
 |   ("VISIBLE" | "INVISIBLE")
 |   ("GLOBAL" | "LOCAL")
-|   'PRE_SPLIT_REGIONS' '='? 'AUTO'
+|   'PRE_SPLIT_REGIONS' '='? ( 'AUTO' | Int64Num | '(' SplitOption ')' )
 |   'WHERE' Expression
+
+SplitOption ::=
+    'BETWEEN' RowValue 'AND' RowValue 'REGIONS' Int64Num
+|   'BY' RowValue ( ',' RowValue )*
+
+RowValue ::=
+    '(' ValuesOpt ')'
 
 IndexTypeName ::=
     'BTREE'
@@ -113,19 +120,36 @@ mysql> CREATE UNIQUE INDEX c1 ON t1 (c1);
 Query OK, 0 rows affected (0.31 sec)
 ```
 
+## Manual Region pre-splitting
+
+You can specify `PRE_SPLIT_REGIONS` to choose split boundaries before index backfilling begins. The manual forms accept a Region count, a range with a Region count, or a list of split values. For example, to split at the specified index values when adding `idx_a` to an existing table `t`:
+
+```sql
+CREATE INDEX idx_a ON t (a) PRE_SPLIT_REGIONS = (BY (10000), (20000), (30000));
+```
+
+For details on the manual forms and their syntax, see [Manual Region pre-splitting](/sql-statements/sql-statement-add-index.md#manual-region-pre-splitting).
+
 ## Automatic Region pre-splitting
 
 <span class="version-mark">New in v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
 
-You can specify `PRE_SPLIT_REGIONS [=] AUTO` to derive Region split boundaries from existing Version 2 statistics on the leading index column. For an existing non-partitioned table `t` with at least 1,000,000 rows and a statistics health score of at least 80, the following example collects statistics and enables automatic pre-splitting for `idx_a`:
+You can specify `PRE_SPLIT_REGIONS [=] AUTO` to derive Region split boundaries from existing Version 2 statistics on the leading index column.
+
+When [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is `ON`, TiDB uses the `ingest` or `txn-merge` backfill mode. In these modes, `AUTO` pre-splits only temporary index Regions to reduce hotspots from concurrent DML writes and the later merge of temporary index data. If there are no concurrent DML writes during index creation, TiDB can still pre-split temporary index Regions, but this is not expected to speed up building the index from existing table data.
+
+When `tidb_ddl_enable_fast_reorg` is `OFF`, TiDB uses the `txn` backfill mode. In this mode, `AUTO` pre-splits the normal index Regions used to build the index from existing table data.
+
+For an existing non-partitioned table `t` with at least 1,000,000 rows, use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check that the statistics health score is at least 80. If needed, run `ANALYZE TABLE` to collect or refresh statistics before adding the index:
 
 ```sql
-SET SESSION tidb_analyze_version = 2;
-ANALYZE TABLE t COLUMNS a;
+SHOW STATS_HEALTHY WHERE Table_name = 't';
+-- Refresh statistics if needed.
+ANALYZE TABLE t;
 CREATE INDEX idx_a ON t (a) PRE_SPLIT_REGIONS AUTO;
 ```
 
-This option is experimental and disabled unless explicitly specified for the index. It is best-effort: TiDB can skip pre-splitting and continue creating the index if the statistics are ineligible or if pre-splitting fails. For requirements, limitations, backfilling modes, and log messages, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
+This option is disabled unless explicitly specified for the index. It is best-effort: TiDB can skip pre-splitting and continue creating the index if the statistics are ineligible or if pre-splitting fails. For requirements, limitations, backfilling modes, and log messages, see [Automatic Region pre-splitting](/sql-statements/sql-statement-add-index.md#automatic-region-pre-splitting).
 
 ## Expression index
 

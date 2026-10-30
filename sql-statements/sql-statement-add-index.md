@@ -53,8 +53,15 @@ IndexOption
            | 'INVISIBLE'
            | 'GLOBAL'
            | 'LOCAL'
-           | 'PRE_SPLIT_REGIONS' '='? 'AUTO'
+           | 'PRE_SPLIT_REGIONS' '='? ( 'AUTO' | Int64Num | '(' SplitOption ')' )
            | 'WHERE' Expression
+
+SplitOption
+         ::= 'BETWEEN' RowValue 'AND' RowValue 'REGIONS' Int64Num
+           | 'BY' RowValue ( ',' RowValue )*
+
+RowValue
+         ::= '(' ValuesOpt ')'
 
 IndexType
          ::= 'BTREE'
@@ -95,25 +102,46 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 2 rows in set (0.00 sec)
 ```
 
+## Manual Region pre-splitting
+
+When adding an index with `ALTER TABLE ... ADD INDEX` or `CREATE INDEX`, you can specify `PRE_SPLIT_REGIONS` to choose split boundaries before index backfilling begins. The following manual forms are supported, and the equals sign (`=`) is optional:
+
+- `PRE_SPLIT_REGIONS [=] N`: calculates evenly spaced split points across the index key range for `N` Regions.
+- `PRE_SPLIT_REGIONS [=] (BETWEEN (lower_value) AND (upper_value) REGIONS N)`: calculates evenly spaced split points between the specified lower and upper index values for `N` Regions.
+- `PRE_SPLIT_REGIONS [=] (BY (value_list) [, (value_list)] ...)`: uses the specified index values as split boundaries.
+
+For example, to pre-split the index range between `0` and `1000000` when adding `idx_a` to an existing table `t`:
+
+```sql
+ALTER TABLE t ADD INDEX idx_a (a)
+    PRE_SPLIT_REGIONS = (BETWEEN (0) AND (1000000) REGIONS 4);
+```
+
+These manual forms use encoded index keys to calculate split points rather than statistics. For more information about range and value-list splitting, see [Split Index Region](/sql-statements/sql-statement-split-region.md#split-index-region). The index option differs from the [`CREATE TABLE` table option](/sql-statements/sql-statement-split-region.md#pre_split_regions), which pre-splits table Regions into `2^N` Regions.
+
 ## Automatic Region pre-splitting
 
 <span class="version-mark">New in v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
 
 When adding an index to a large existing table, you can specify `PRE_SPLIT_REGIONS AUTO` to let TiDB derive Region split boundaries from existing column statistics. This can reduce initial write hotspots without requiring you to choose split boundaries manually.
 
-> **Note:**
->
-> Automatic Region pre-splitting is an experimental feature.
+The target Regions depend on the index backfilling mode, following the behavior of manual `PRE_SPLIT_REGIONS`:
+
+- When [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) is `ON`, TiDB uses the `ingest` or `txn-merge` backfill mode. In these modes, `AUTO` pre-splits temporary index Regions used by concurrent DML. It does not additionally pre-split the normal index Regions used to build the index from existing table data.
+- When `tidb_ddl_enable_fast_reorg` is `OFF`, TiDB uses the `txn` backfill mode. In this mode, `AUTO` pre-splits the normal index Regions used to build the index from existing table data.
+
+In `ingest` and `txn-merge` modes, this optimization aims to reduce hotspots from concurrent DML writes and the later merge of temporary index data. If there are no concurrent DML writes during index creation, TiDB can still pre-split temporary index Regions, but this is not expected to speed up building the index from existing table data.
 
 ### Usage
 
 The `PRE_SPLIT_REGIONS [=] AUTO` option is supported by `ALTER TABLE ... ADD INDEX`, `ALTER TABLE ... ADD PRIMARY KEY`, and [`CREATE INDEX`](/sql-statements/sql-statement-create-index.md). The equals sign (`=`) is optional. For primary keys, the existing restriction that only `NONCLUSTERED` primary keys can be added still applies.
 
-For an existing non-partitioned table `t` with at least 1,000,000 rows, collect Version 2 statistics on the leading index column before adding the index:
+For an existing non-partitioned table `t` with at least 1,000,000 rows, use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check that the statistics health score is at least 80. If needed, run [`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md) to collect or refresh Version 2 statistics before adding the index:
 
 ```sql
-SET SESSION tidb_analyze_version = 2;
-ANALYZE TABLE t COLUMNS a;
+SHOW STATS_HEALTHY WHERE Table_name = 't';
+-- Refresh statistics if needed.
+ANALYZE TABLE t;
 ALTER TABLE t ADD INDEX idx_a (a) PRE_SPLIT_REGIONS AUTO;
 ```
 
@@ -125,7 +153,7 @@ ALTER TABLE t
     ADD INDEX idx_b (b);
 ```
 
-Automatic pre-splitting is disabled for indexes that omit this option. Existing manual `PRE_SPLIT_REGIONS` options remain available. If both a manual option and `AUTO` are specified for the same index, the manual option takes precedence regardless of their order.
+Automatic pre-splitting is disabled for indexes that omit this option. Existing [manual `PRE_SPLIT_REGIONS` options](#manual-region-pre-splitting) remain available. If both a manual option and `AUTO` are specified for the same index, the manual option takes precedence regardless of their order.
 
 ### Requirements and limitations
 
@@ -134,19 +162,14 @@ TiDB skips automatic pre-splitting for an index if any of the following conditio
 - The table is partitioned, or the index is a partial index.
 - The leading index column is a string column with an index prefix, such as `INDEX idx (a(10))`.
 - The table has fewer than 1,000,000 rows according to statistics, or its [statistics health score](/statistics.md#health-state-of-tables) is unavailable or below 80. You can use [`SHOW STATS_HEALTHY`](/sql-statements/sql-statement-show-stats-healthy.md) to check the health score.
-- The leading index column does not have usable [Version 2 statistics](/statistics.md#versions-of-statistics). Missing, pseudo, or outdated statistics cannot provide reliable split boundaries. If needed, run `ANALYZE TABLE ... COLUMNS ...` to refresh the statistics before adding the index.
+- The leading index column does not have usable [Version 2 statistics](/statistics.md#versions-of-statistics). Missing, pseudo, or outdated statistics cannot provide reliable split boundaries. If needed, run `ANALYZE TABLE` to refresh the statistics before adding the index.
 - The leading column distribution does not provide a usable split boundary.
 
 Automatic pre-splitting uses only the leading column of a composite index. It does not use later columns to further split rows that share the same leading-column value. Columnar, vector, and full-text indexes are outside the scope of this option. `AUTO` cannot be used as a `CREATE TABLE` table option.
 
 ### Split behavior
 
-TiDB combines NULL counts, Top-N value counts, and histogram bucket counts from the leading column statistics into an ordered distribution. It selects split boundaries at fixed 2% cumulative intervals, producing at most 49 distribution-derived boundaries per index. Repeated values contribute at most one boundary, so the actual number can be smaller. TiDB also adds index keyspace boundaries as needed.
-
-The target Regions depend on the index backfilling mode, following the behavior of manual `PRE_SPLIT_REGIONS`:
-
-- Transactional backfilling splits normal index Regions.
-- Ingest and transactional-merge backfilling split temporary index Regions used by concurrent DML. This step does not additionally split normal index Regions.
+TiDB combines NULL counts, Top-N value counts, and histogram bucket counts from the leading column statistics into an ordered distribution. It selects split boundaries at fixed 2% cumulative intervals, producing at most 49 distribution-derived boundaries per index. Repeated values contribute at most one boundary, so the actual number can be smaller. This does not guarantee a fixed number of Regions.
 
 Each index that specifies `AUTO` is split and scattered separately, even when multiple indexes share the same leading column. With fast reorganization, after garbage collection removes the temporary index data, empty Regions can remain until PD's [`split-merge-interval`](/pd-configuration-file.md#split-merge-interval) has elapsed (one hour by default). Actual merging also depends on PD's normal Region merge conditions.
 
@@ -154,7 +177,7 @@ All `AUTO` indexes in a DDL job share a time budget of 30 seconds plus [`tidb_wa
 
 Automatic pre-splitting is best-effort. If loading or decoding any part of the complete leading-column distribution fails, TiDB skips `AUTO` for that index instead of using partial statistics. Planning, split, scatter, or timeout failures do not cancel index creation. DDL pause and cancellation requests still take effect. Successful index creation does not guarantee that any Regions were pre-split.
 
-To check the outcome, inspect the TiDB server log for `skip auto presplit index region`, `auto presplit index region failed, continue add-index`, or `split table index region finished`. The log entries include the table and index names and, depending on the outcome, a skip reason, an error, or split and scatter counts. These decisions and outcomes are not recorded in [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
+To check the outcome, inspect the DDL owner's TiDB server log for `skip auto presplit index region`, `auto presplit index region failed, continue add-index`, or `split table index region finished`. The log entries include the table and index names and, depending on the outcome, a skip reason, an error, or split and scatter counts. These decisions and outcomes are not reported by `SHOW WARNINGS` or [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md).
 
 ## Partial indexes <span class="version-mark">New in v8.5.7 and v9.0.0</span>
 
