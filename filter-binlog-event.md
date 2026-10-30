@@ -22,7 +22,6 @@ filters:
     schema-pattern: "test_*"
     table-pattern: "t_*"
     events: ["truncate table", "drop table"]
-    sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
     action: Ignore
 ```
 
@@ -103,15 +102,15 @@ filters:
     action: Do
 ```
 
-### Filter out SQL statements that TiDB or the TiDB parser does not support
+### Handle SQL statements that TiDB does not support or that DM cannot parse
 
 You do not need to configure filters for `CREATE PROCEDURE`, `DROP PROCEDURE`, or `ALTER PROCEDURE`. DM skips these statements automatically.
 
 When you add or drop a partition in MySQL, DM normally replicates the change to TiDB. You do not need a filter for partition operations that both DM and TiDB support. To check which operations TiDB supports for your table's partition type, see [Partition management](/partitioned-table.md#partition-management).
 
-If DM reports a parsing error for an `ADD PARTITION` or `DROP PARTITION` statement and you do not need to replicate these partition changes to TiDB, you can use the following rule to skip them. A parsing error in DM does not necessarily mean that TiDB does not support the operation.
+If DM reports a parsing error for an `ALTER TABLE` statement that uses `ADD PARTITION` or `DROP PARTITION` and you do not need to replicate the partition change to TiDB, you can use the following rule to skip the statement. A parsing error in DM does not necessarily mean that TiDB does not support the operation.
 
-When DM cannot parse a statement, it cannot identify the database or table involved. In this case, you need a global filtering rule with `schema-pattern: "*"` and no `table-pattern`. This rule applies to matching statements for all tables in the migration task.
+When DM cannot parse a statement, it cannot apply filters that target a specific schema or table. In this case, you need a global filtering rule with `schema-pattern: "*"` and no `table-pattern`. This rule applies to matching statements for all tables in the migration task.
 
 > **Warning:**
 >
