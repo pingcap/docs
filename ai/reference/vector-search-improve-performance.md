@@ -8,6 +8,8 @@ aliases: ['/tidb/stable/vector-search-improve-performance/','/tidb/dev/vector-se
 
 TiDB Vector Search enables you to perform Approximate Nearest Neighbor (ANN) queries that search for results similar to an image, document, or other input. To improve the query performance, review the following best practices.
 
+If queries remain slow after you create a vector index, see [Troubleshoot Slow Queries with Vector Indexes](/ai/guides/vector-search-troubleshooting.md) to check execution plans, unindexed data, and cold-access overhead.
+
 > **Note:**
 >
 > - The vector search feature in public preview. It might be changed without prior notice. If you find a bug, you can report an [issue](https://github.com/pingcap/tidb/issues) on GitHub.
