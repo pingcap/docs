@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Dedicated Limitations and Quotas
-summary: TiDB Cloudの制限と割り当てについて説明します。
+summary: TiDB Cloudの制限とクォータについて説明します。
 ---
 
 # TiDB Cloud Dedicated制限とクォータ {#tidb-cloud-dedicated-limitations-and-quotas}
@@ -9,7 +9,7 @@ TiDB Cloudでは、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#ti
 
 > **Note:**
 >
-> これらの制限または割り当てが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> これらの制限またはクォータが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 ## クラスタの制限 {#cluster-limits}
 
@@ -33,4 +33,4 @@ TiDB Cloudでは、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#ti
 
 > **Note:**
 >
-> これらの制限または割り当てが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> これらの制限またはクォータが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。

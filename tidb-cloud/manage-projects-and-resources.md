@@ -18,7 +18,7 @@ TiDB Cloudのリソースは、管理可能なデプロイ可能な単位です�
 
 <CustomContent plan="byoc">
 
-{{{ .byoc }}} では、リソースプールは、BYOCインスタンスに基盤となる物理リソース、ネットワーク、およびキャパシティを提供する、組織レベルのBYOCリソースです。リソースプールは **BYOC Management** > **Resource Pools** から管理され、プロジェクトには関連付けられません。詳細については、[Manage Resource Pools](/tidb-cloud/byoc/manage-resource-pools-byoc.md) を参照してください。
+{{{ .byoc }}} では、リソースプールは、BYOCインスタンスに基盤となる物理リソース、ネットワーク、およびキャパシティを提供する、組織レベルのBYOCリソースです。リソースプールは **BYOC Management** > **Resource Pools** から管理され、プロジェクトには関連付けられません。詳細については、[リソースプールを管理する](/tidb-cloud/byoc/manage-resource-pools-byoc.md) を参照してください。
 
 </CustomContent>
 
@@ -51,7 +51,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 - [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
 
-- [TiDB Cloud {{{ .byoc }}}インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
+- [{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
 
 - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
 
@@ -86,7 +86,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 > - 無料トライアルユーザーは新規プロジェクトを作成できません。
 > - TiDB Xインスタンスの場合、プロジェクトの作成は任意です。TiDB Cloud Dedicatedクラスタの場合は、デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成して管理する必要があります。
 
-`Organization Owner`の役割をお持ちの場合は、組織内でプロジェクトを作成できます。
+`Organization Owner`ロールをお持ちの場合は、組織内でプロジェクトを作成できます。
 
 新しいプロジェクトを作成するには、以下の手順に従ってください。
 
@@ -100,7 +100,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 3. プロジェクトを作成する対象となるTiDB Cloudリソースの種類に応じて、次のいずれかの操作を行います。
 
-    - プロジェクトが TiDB X インスタンス用に作成されている場合は、 **Confirm**をクリックします。
+    - TiDB X インスタンス用にプロジェクトを作成する場合は、 **Confirm**をクリックします。
 
         <CustomContent plan="starter,essential,premium,dedicated">
 
@@ -119,11 +119,11 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
         </CustomContent>
 
-    - プロジェクトがTiDB Cloud Dedicatedクラスター用に作成されている場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **Confirm**をクリックします。
+    - TiDB Cloud Dedicatedクラスター用にプロジェクトを作成する場合は、 **Create for Dedicated Cluster**オプションを選択し、プロジェクトの [顧客管理型暗号化キー（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)と[メンテナンスウィンドウ](/tidb-cloud/configure-maintenance-window.md)を構成して、 **Confirm**をクリックします。
 
 ### プロジェクトを管理する {#manage-a-project}
 
-`Organization Owner`または`Project Owner`の役割を担っている場合は、プロジェクトを管理できます。
+`Organization Owner`または`Project Owner`ロールを担っている場合は、プロジェクトを管理できます。
 
 プロジェクトを管理するには、以下の手順に従ってください。
 
@@ -135,12 +135,12 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 2. プロジェクトビューで、対象のプロジェクトを見つけて、次のように管理します。
 
-    - TiDB X プロジェクトとTiDB Dedicatedプロジェクトの両方で、ターゲット プロジェクトの行にある**...**をクリックして、プロジェクトの名前変更やプロジェクトへのメンバーの招待など、プロジェクトに対してクイック アクションを実行できます。詳細については、[プロジェクトへのアクセスを管理する](/tidb-cloud/manage-user-access.md)を参照してください。
+    - TiDB X プロジェクトとTiDB Dedicatedプロジェクトの両方で、ターゲットプロジェクトの行にある**...**をクリックして、プロジェクトの名前変更やプロジェクトへのメンバーの招待など、プロジェクトに対してクイックアクションを実行できます。詳細については、[プロジェクトへのアクセスを管理する](/tidb-cloud/manage-user-access.md)を参照してください。
     - TiDB Dedicatedプロジェクトの場合、対象プロジェクトの行にある<MDSvgIcon name="icon-project-settings" />アイコンをクリックすると、プロジェクトごとにTiDB Cloud Dedicatedクラスターのネットワーク、メンテナンス、アラートの購読、暗号化アクセスなどの設定を管理できます。
 
 ### TiDB Xインスタンスをプロジェクト間で移動する {#move-a-tidb-x-instance-between-projects}
 
-`Organization Owner`または`Project Owner`の役割を担っている場合、TiDB X インスタンスをプロジェクトに移動したり、プロジェクトの外に移動したりできます。
+`Organization Owner`または`Project Owner`ロールを担っている場合、TiDB X インスタンスをプロジェクトに移動したり、プロジェクトの外に移動したりできます。
 
 > **Note:**
 >

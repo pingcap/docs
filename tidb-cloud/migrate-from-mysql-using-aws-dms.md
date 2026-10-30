@@ -17,8 +17,8 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 移行を開始する前に、以下の内容を必ずお読みください。
 
-- ソースデータベースが Amazon RDS または Amazon Auroraの場合、 `binlog_format`パラメータを`ROW`に設定する必要があります。データベースがデフォルトのパラメータ グループを使用する場合、 `binlog_format`パラメータはデフォルトで`MIXED`となり、変更できません。この場合、 [新しいパラメータグループを作成する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params)必要があります (例: `newset` )。その`binlog_format`を`ROW`に設定します。次に、 [デフォルトパラメータグループを変更する](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying)`newset`に変更します。パラメータ グループを変更するとデータベースが再起動されることに注意してください。
-- ソースデータベースが TiDB と互換性のある照合順序を使用していることを確認してください。TiDB の utf8mb4 文字セットのデフォルトの照合順序は`utf8mb4_bin`です。しかし、MySQL 8.0 では、デフォルトの照合順序は`utf8mb4_0900_ai_ci`です。アップストリームの MySQL がデフォルトの照合順序を使用している場合、TiDB は`utf8mb4_0900_ai_ci`と互換性がないため、AWS DMS は TiDB にターゲットテーブルを作成できず、データを移行できません。この問題を解決するには、移行前にソースデータベースの照合順序を`utf8mb4_bin`に変更する必要があります。TiDB でサポートされている文字セットと照合順序の完全なリストについては、 [文字セットと照合](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
+- ソースデータベースが Amazon RDS または Amazon Auroraの場合、 `binlog_format`パラメータを`ROW`に設定する必要があります。データベースがデフォルトのパラメータグループを使用する場合、 `binlog_format`パラメータはデフォルトで`MIXED`となり、変更できません。この場合、 [新しいパラメータグループを作成する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params)必要があります (例: `newset` )。その`binlog_format`を`ROW`に設定します。次に、 [デフォルトパラメータグループを変更](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying)して`newset`にします。パラメータグループを変更するとデータベースが再起動されることに注意してください。
+- ソースデータベースが TiDB と互換性のある照合順序を使用していることを確認してください。TiDB の utf8mb4 文字セットのデフォルトの照合順序は`utf8mb4_bin`です。しかし、MySQL 8.0 では、デフォルトの照合順序は`utf8mb4_0900_ai_ci`です。アップストリームの MySQL がデフォルトの照合順序を使用している場合、TiDB は`utf8mb4_0900_ai_ci`と互換性がないため、AWS DMS は TiDB にターゲットテーブルを作成できず、データを移行できません。この問題を解決するには、移行前にソースデータベースの照合順序を`utf8mb4_bin`に変更する必要があります。TiDB でサポートされている文字セットと照合順序の完全なリストについては、 [文字セットと照合順序](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
 - AWS DMS 移行タスクを作成するときは、データベースの選択にデフォルトの `%` ワイルドカードを使用しないでください。代わりに、移行するデータベースとテーブルのみを明示的に指定してください。そうしないと、AWS DMS が `INFORMATION_SCHEMA`、`PERFORMANCE_SCHEMA`、`mysql`、`sys` などのシステムデータベースをソース MySQL データベースから TiDB に移行しようとして、移行タスクが失敗する可能性があります。
 - AWS DMSのパブリックネットワークIPアドレスとプライベートネットワークIPアドレスを、ソースデータベースとターゲットデータベースの両方のIPアクセスリストに追加してください。そうしないと、状況によってはネットワーク接続が失敗する可能性があります。
 - [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md#set-up-vpc-peering-on-aws)または[プライベートエンドポイント接続](/tidb-cloud/set-up-private-endpoint-connections.md)を使用して、AWS DMS と TiDB クラスターを接続します。
@@ -44,13 +44,13 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 4. インスタンス構成を入力してください。
     - **Instance class**：適切なインスタンスクラスを選択してください。パフォーマンスを向上させるには、 `dms.t3.large`またはそれより高いインスタンスクラスを使用することをお勧めします。
     - **Engine version**：デフォルト設定を使用します。
-    - **マルチAZ** ：ビジネスニーズに応じて、**Single-AZ**または**マルチAZ**を選択してください。
+    - **Multi-AZ** ：ビジネスニーズに応じて、**Single-AZ**または**Multi-AZ**を選択してください。
 
 5. ストレージは**Allocated storage (GiB)**フィールドで設定します。デフォルト設定を使用してください。
 
 6. 接続性とセキュリティを設定します。
     - **Network type - new**: **IPv4**を選択してください。
-    - **IPv4 用仮想プライベートクラウド (VPC)** ：必要な VPC を選択してください。ネットワーク構成を簡素化するため、アップストリームデータベースと同じ VPC を使用することをお勧めします。
+    - **Virtual private cloud (VPC) for IPv4** ：必要な VPC を選択してください。ネットワーク構成を簡素化するため、アップストリームデータベースと同じ VPC を使用することをお勧めします。
     - **Replication subnet group**：レプリケーションインスタンスに使用するサブネットグループを選択してください。
     - **Public accessible**：デフォルト設定を使用します。
 
@@ -77,12 +77,12 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 5. 以下の情報を設定してください。
 
     - **Endpoint identifier**：後続のタスク構成で識別しやすくするために、ソースエンドポイントにラベルを作成します。
-    - **記述的な Amazon リソース名 (ARN) - オプション**: デフォルトの DMS ARN に分かりやすい名前を作成します。
+    - **Descriptive Amazon Resource Name (ARN) - optional**: デフォルトの DMS ARN に分かりやすい名前を作成します。
     - **Source engine**: **MySQL**を選択してください。
     - **Access to endpoint database**:**Provide access information manually**を選択します。
     - **Server name**：データプロバイダーのデータサーバー名を入力してください。データベースコンソールからコピーできます。アップストリームがAmazon RDSまたはAmazon Auroraの場合は、名前が自動的に入力されます。ドメイン名のないセルフホスト型MySQLの場合は、IPアドレスを入力してください。
     - ソースデータベースの**Port**、**Username**、**Password**を入力してください。
-    - **セキュリティソケットレイヤー（SSL）モード**：必要に応じてSSLモードを有効にできます。
+    - **Secure Socket Layer (SSL) mode**：必要に応じてSSLモードを有効にできます。
 
     ![Fill in the endpoint configurations](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-endpoint-config.png)
 
@@ -112,18 +112,18 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
     - **Endpoint type**：**Target endpoint**を選択してください。
     - **Endpoint identifier**：エンドポイントの名前を入力してください。
-    - **記述的な Amazon リソース名 (ARN) - オプション**: デフォルトの DMS ARN に分かりやすい名前を作成します。
+    - **Descriptive Amazon Resource Name (ARN) - optional**: デフォルトの DMS ARN に分かりやすい名前を作成します。
     - **Target engine**: **MySQL**を選択してください。
 
     ![Configure the target endpoint](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint.png)
 
 8. [AWS DMSコンソール](https://console.aws.amazon.com/dms/v2/home)で、 **Create endpoint**をクリックしてターゲットデータベースエンドポイントを作成し、次の情報を設定します。
 
-    - **Server name**: 記録した`-h`情報である TiDB クラスターのホスト名を入力してください。
-    - **Port**：記録した`-P`情報と同じTiDBクラスタのポート番号を入力してください。TiDBクラスタのデフォルトポートは4000です。
-    - **User name**: TiDB クラスターのユーザー名を入力してください。これは、記録した`-u`情報です。
+    - **Server name**: 記録した`-h`の値である TiDB クラスターのホスト名を入力してください。
+    - **Port**：記録した`-P`の値である TiDB クラスターのポート番号を入力してください。TiDBクラスタのデフォルトポートは4000です。
+    - **User name**: 記録した`-u`の値である TiDB クラスターのユーザー名を入力してください。
     - **Password**：TiDBクラスタのパスワードを入力してください。
-    - **セキュリティソケットレイヤー（SSL）モード**： **Verify-ca**を選択します。
+    - **Secure Socket Layer (SSL) mode**： **Verify-ca**を選択します。
     - **Add new CA certificate**をクリックして、前の手順でTiDB CloudコンソールからダウンロードしたCAファイルをインポートします。
 
     ![Fill in the target endpoint information](/media/tidb-cloud/aws-dms-tidb-cloud/aws-dms-to-tidb-cloud-target-endpoint2.png)
@@ -147,7 +147,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 2. 以下の情報を設定してください。
 
     - **Task identifier**: タスクの名前を入力してください。覚えやすい名前を使用することをお勧めします。
-    - **記述的な Amazon リソース名 (ARN) - オプション**: デフォルトの DMS ARN に分かりやすい名前を作成します。
+    - **Descriptive Amazon Resource Name (ARN) - optional**: デフォルトの DMS ARN に分かりやすい名前を作成します。
     - **Replication instance**：先ほど作成したAWS DMSインスタンスを選択します。
     - **Source database endpoint**：先ほど作成したソースデータベースエンドポイントを選択してください。
     - **Target database endpoint**：先ほど作成したターゲットデータベースエンドポイントを選択してください。
@@ -157,12 +157,12 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 3. 以下の情報を設定してください。
 
-    - **Editing mode**：**ウィザード**を選択してください。
-    - **ソーストランザクションのカスタムCDC停止モード**：デフォルト設定を使用します。
+    - **Editing mode**：**Wizard**を選択してください。
+    - **Custom CDC stop mode for source transactions**：デフォルト設定を使用します。
     - **Target table preparation mode**：必要に応じて**Do nothing**またはその他のオプションを選択してください。この例では、 **Do nothing**を選択します。
-    - **フルロード完了後にタスクを停止する**：デフォルト設定を使用します。
-    - **LOB列をレプリケーションに含める**：**Limited LOB mode**を選択します。
-    - **LOBの最大サイズ（KB）** ：デフォルト値の**32**を使用します。
+    - **Stop task after full load completes**：デフォルト設定を使用します。
+    - **Include LOB columns in replication**：**Limited LOB mode**を選択します。
+    - **Maximum LOB size in (KB)** ：デフォルト値の**32**を使用します。
     - **Turn on validation**：必要に応じて選択してください。
     - **Task logs**: 今後のトラブルシューティングのために、 **Turn on CloudWatch logs**を選択してください。関連する設定については、デフォルト設定を使用してください。
 

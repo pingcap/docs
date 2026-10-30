@@ -34,7 +34,7 @@ TiDB Cloud StarterまたはEssentialインスタンスに接続してくださ�
     >
     > 以前にパスワードを作成したことがある場合は、元のパスワードを使用するか、 **Reset Password**をクリックして新しいパスワードを生成してください。
 
-## ステップ2：テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
+## ステップ2. テーブルを定義し、サンプルデータを挿入する {#step-2-define-the-table-and-insert-sample-data}
 
 データをインポートする前に、テーブル構造を準備し、実際のサンプルデータを挿入する必要があります。以下は、テーブルを作成してサンプルデータを挿入するために使用できるSQLファイルの例です（ `product_data.sql` ）。
 

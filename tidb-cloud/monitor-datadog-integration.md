@@ -17,7 +17,7 @@ TiDB CloudはDatadogとの連携をサポートしています。TiDB Cloudを�
 
 ## Datadog統合バージョン {#datadog-integration-version}
 
-TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合（ベータ版）をサポートしてきました。2025年7月31日より、TiDB CloudレベルのDatadog統合（PREVIEW）を導入します。2025年9月30日より、クラスターレベルのDatadog統合が一般提供（GA）となります。
+TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合（ベータ版）をサポートしてきました。2025年7月31日より、クラスタレベルのDatadog統合（PREVIEW）を導入します。2025年9月30日より、クラスタレベルのDatadog統合が一般提供（GA）となります。
 
 - **クラスタレベルのDatadog統合**：2025年7月31日までに組織内に削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのDatadog統合を提供します。
 - **従来のプロジェクトレベルの Datadog 統合 (ベータ版)** : 2025年 7月 31日時点で組織内に少なくとも 1つの従来のプロジェクトレベルの Datadog または New Relic 統合が削除されずに残っている場合、 TiDB Cloudは、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。従来のプロジェクトレベルの Datadog 統合は、2025年 10月 31日に廃止されました。組織がこれらの従来の統合をまだ使用している場合は、[DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)手順に従って、新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
@@ -28,7 +28,7 @@ TiDB Cloudは、2022年3月4日よりプロジェクトレベルのDatadog統合
 
     Datadogアカウントをお持ちでない場合は、 [https://app.datadoghq.com/signup](https://app.datadoghq.com/signup)でサインアップしてください。
 
-- TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示したり、提供されたリンクから設定済みのダッシュボードにアクセスしたりするには、TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
+- TiDB Cloudのサードパーティメトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。統合ページを表示したり、提供されたリンクから設定済みのダッシュボードにアクセスしたりするには、TiDB Cloudのプロジェクト内の対象のTiDB Cloud Dedicatedクラスターにアクセスするための`Project Viewer`ロール以上が必要です。
 
 ## 制限 {#limitations}
 
@@ -138,14 +138,14 @@ Datadogは、TiDBクラスタに関して以下のメトリクスを追跡しま
 | tidb_cloud.node_disk_write_latency                                      | gauge      | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv\|tiflash`<br/>cluster_name: `<cluster name>`<br/>`device`: `nvme.*\|dm.*` | ストレージデバイスごとの書き込みレイテンシー（秒）。                                                                                                 |
 | tidb_cloud.db_kv_request_duration                                       | gauge      | instance: `tidb-0\|tidb-1\|...`<br/>component: `tikv`<br/>cluster_name: `<cluster name>`<br/>`type`: `BatchGet\|Commit\|Prewrite\|...` | TiKVリクエストの種類別の所要時間（秒）。                                                                                                       |
 | tidb_cloud.db_component_uptime                                          | gauge      | instance: `tidb-0\|tidb-1\|...`<br/>component: `tidb\|tikv\|tiflash`<br/>cluster_name: `<cluster name>` | TiDBコンポーネントの稼働時間（秒単位）。                                                                                                       |
-| tidb_cloud.cdc_changefeed_latency (別名 cdc_changefeed_checkpoint_ts_lag) | gauge      | changefeed_id: `<changefeed-id>`<br/>クラスター名: `<cluster name>`                                                                  | 変更フィード所有者のチェックポイントタイムスタンプの遅延（秒単位）。                                                                                           |
+| tidb_cloud.cdc_changefeed_latency (別名 cdc_changefeed_checkpoint_ts_lag) | gauge      | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>`                                                                  | 変更フィード所有者のチェックポイントタイムスタンプの遅延（秒単位）。                                                                                           |
 | tidb_cloud.cdc_changefeed_resolved_ts_lag                               | gauge      | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | 変更フィード所有者の解決済みタイムスタンプ遅延（秒単位）。                                                                                                |
 | tidb_cloud.cdc_changefeed_status                                        | gauge      | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | 変更フィードのステータス:<br/> `-1` : Unknown<br/>`0` : Normal<br/>`1` : Warning<br/>`2` : Failed<br/>`3` : Stopped<br/>`4` : Finished<br/>`6` : Warning<br/>`7` : Other |
 | tidb_cloud.resource_manager_resource_unit_read_request_unit             | gauge      | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | リソースマネージャによって消費された読み取りリクエストユニット（RU）。                                                                                         |
 | tidb_cloud.resource_manager_resource_unit_write_request_unit            | gauge      | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>` | リソースマネージャによって消費される書き込みリクエストユニット（RU）。                                                                                         |
-| tidb_cloud.dm_task_state                                                | gauge      | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | データ移行のタスク状態:<br/> 0: 無効<br/>1: 新着<br/>2：ランニング<br/>3：一時停止<br/>4：停止<br/>5：完了<br/>15: エラー                                       |
-| tidb_cloud.dm_syncer_replication_lag_bucket                             | gauge      | instance: `instance`<br/>cluster_name: `<cluster name>` | データ移行の遅延（バケット）を複製します。                                                                                                        |
-| tidb_cloud.dm_syncer_replication_lag_gauge                              | gauge      | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | データ移行の遅延（gauge）を複製します。                                                                                                         |
+| tidb_cloud.dm_task_state                                                | gauge      | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | データ移行のタスク状態:<br/> 0: Invalid<br/>1: New<br/>2: Running<br/>3: Paused<br/>4: Stopped<br/>5: Finished<br/>15: Error                                       |
+| tidb_cloud.dm_syncer_replication_lag_bucket                             | gauge      | instance: `instance`<br/>cluster_name: `<cluster name>` | データ移行のレプリケーション遅延（バケット）。                                                                                                        |
+| tidb_cloud.dm_syncer_replication_lag_gauge                              | gauge      | instance: `instance`<br/>task: `task`<br/>cluster_name: `<cluster name>` | データ移行のレプリケーション遅延（gauge）。                                                                                                         |
 | tidb_cloud.dm_relay_read_error_count                                    | gauge      | instance: `instance`<br/>cluster_name: `<cluster name>` | マスターからのbinlogの読み取りに失敗しました。                                                                                                   |
 | tidb_cloud.node_memory_available_bytes                                  | gauge      | cluster_name: `<cluster name>`<br/>instance: tidb-0\|tidb-1…\|tikv-0…\|tiflash-0…<br/>component: tidb\|tikv\|tiflash | TiDB/TiKV/ TiFlashノードで使用可能なメモリ（バイト単位）。                                                                                       |
 | tidb_cloud.cdc_changefeed_replica_rows                                  | gauge      | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>` | TiCDCノードが1秒あたりにダウンストリームに書き込むイベントの数。                                                                                          |

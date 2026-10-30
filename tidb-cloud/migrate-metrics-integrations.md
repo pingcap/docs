@@ -5,15 +5,15 @@ summary: DatadogとNew Relicにおける、従来のプロジェクトレベル�
 
 # DatadogとNew Relicの統合を移行する {#migrate-datadog-and-new-relic-integrations}
 
-TiDB Cloudは、DatadogおよびNew Relicとの連携をクラスタレベルで管理するようになり、よりきめ細かな制御と設定が可能になりました。従来のプロジェクトレベルのDatadogおよびNew Relic連携は、2025年10月31日に廃止されました。組織でこれらの従来の連携をまだ使用している場合は、このガイドに従って新しいクラスタレベルの連携に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
+TiDB Cloudは、DatadogおよびNew Relicとの統合をクラスタレベルで管理するようになり、よりきめ細かな制御と設定が可能になりました。従来のプロジェクトレベルのDatadogおよびNew Relic統合は、2025年10月31日に廃止されました。組織でこれらの従来の統合をまだ使用している場合は、このガイドに従って新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 
-- TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。
+- TiDB Cloudのサードパーティメトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。
 
 ## 移行手順 {#migration-steps}
 
-### ステップ1：従来のプロジェクトレベルのDatadogおよびNew Relic統合を削除する {#step-1-delete-the-legacy-project-level-datadog-and-new-relic-integrations}
+### ステップ1. 従来のプロジェクトレベルのDatadogおよびNew Relic統合を削除する {#step-1-delete-the-legacy-project-level-datadog-and-new-relic-integrations}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
@@ -39,7 +39,7 @@ TiDB Cloudは、DatadogおよびNew Relicとの連携をクラスタレベルで
 
 3. **Integrations**ページで、必要に応じて新しい統合を作成します。詳細については、 [TiDB CloudとDatadogを統合する](/tidb-cloud/monitor-datadog-integration.md)および[TiDB CloudとNew Relicを統合する](/tidb-cloud/monitor-new-relic-integration.md)を参照してください。
 
-## インパクトステートメント {#impact-statement}
+## 影響 {#impact-statement}
 
 プロジェクトレベルの統合を削除すると、プロジェクト内のすべてのクラスターからのメトリクス送信が即座に停止します。これにより、下流データが一時的に失われ、新しいクラスターレベルの統合を作成するまで、統合関連のサービス（監視やアラートなど）が中断されます。
 

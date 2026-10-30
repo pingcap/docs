@@ -22,13 +22,13 @@ TiDB Cloudのモニタリング機能は、TiDBのパフォーマンスを監視
 
 </CustomContent>
 
-## 内蔵アラート機能 {#built-in-alerting}
+## 組み込みアラート機能 {#built-in-alerting}
 
 組み込みアラートとは、 TiDB Cloud EssentialインスタンスおよびTiDB Cloud Dedicatedクラスタの監視を支援するためにTiDB Cloudが提供するアラートメカニズムのことです。現在、 TiDB Cloudは以下の3種類のアラートを提供しています。
 
 - リソース使用状況アラート
 
-- データ移行に関する警告
+- データ移行アラート
 
 - 変更フィードアラート
 
@@ -65,7 +65,7 @@ TiDB Cloudでは、以下のサードパーティ製メトリクスサービス�
 
 ## Datadog との統合 {#datadog-integration}
 
-TiDB Cloud では、Datadog と統合して TiDB Cloud のアラートを受信し、対象インスタンスのパフォーマンスメトリクスを表示できます。詳細については、[Integrate TiDB Cloud with Datadog](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md) を参照してください。
+TiDB Cloud では、Datadog と統合して TiDB Cloud のアラートを受信し、対象インスタンスのパフォーマンスメトリクスを表示できます。詳細については、[TiDB CloudとDatadogを統合する (PREVIEW)](/tidb-cloud/monitor-datadog-integration-for-tidb-x.md) を参照してください。
 
 ## New Relic との統合 {#new-relic-integration}
 

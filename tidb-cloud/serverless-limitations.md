@@ -16,14 +16,14 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### 監査ログ {#audit-logs}
 
-- [データベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)は現在、 TiDB Cloud Starter クラスターでは使用できません。
+- [データベース監査ログ](/tidb-cloud/essential-database-audit-logging.md)は現在、 TiDB Cloud Starter インスタンスでは使用できません。
 
 ### 接続 {#connection}
 
-- [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。[VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)は TiDB Cloud StarterまたはTiDB Cloud Essentialクラスターに接続するためには使用できません。
+- [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)と[プライベートエンドポイント](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)のみ使用できます。[VPC ピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)は TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するためには使用できません。
 - プライベートエンドポイントは[ファイアウォールルール](/tidb-cloud/configure-serverless-firewall-rules-for-public-endpoints.md)をサポートしていません。
 - データベースクライアント接続は、30分以上開いたままになっていると、予期せず終了する可能性があります。これは、TiDBサーバーのシャットダウン、再起動、またはメンテナンス時に発生する可能性があり、アプリケーションの中断につながる可能性があります。この問題を回避するには、最大接続有効期間を設定してください。最初は5分から始め、テールレイテンシーに影響がある場合は徐々に増やすことを推奨します。詳細については、 [接続プールの推奨設定](/develop/dev-guide-connection-parameters.md)を参照してください。
-- TiDB Cloud Starterクラスターでは、最大400の同時接続が可能です。[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定すると、この制限は5,000に増加します。
+- TiDB Cloud Starterインスタンスでは、最大400の同時接続が可能です。[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定すると、この制限は5,000に増加します。
 
 > **Note:**
 >
@@ -31,7 +31,7 @@ TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを�
 
 ### 暗号化 {#encryption}
 
-- TiDB Cloud Starter またはTiDB Cloud Essential クラスターに保存されるデータは、クラスターを管理するクラウドプロバイダーが提供する暗号化ツールを使用して暗号化されます。TiDB Cloud Starter（使用制限が 0 より大きい）およびTiDB Cloud Essential クラスターでは、クラスター作成プロセス中にオプションで第 2レイヤーの暗号化を利用できます。これにより、保存時のデフォルトの暗号化よりも高いレベルのセキュリティが確保されます。
+- TiDB Cloud Starter またはTiDB Cloud Essential インスタンスに保存されるデータは、インスタンスを管理するクラウドプロバイダーが提供する暗号化ツールを使用して暗号化されます。TiDB Cloud Starter（支出限度額が 0 より大きい）およびTiDB Cloud Essential インスタンスでは、インスタンス作成プロセス中にオプションで第 2レイヤーの暗号化を利用できます。これにより、保存時のデフォルトの暗号化よりも高いレベルのセキュリティが確保されます。
 - [顧客管理暗号鍵（CMEK）](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)の使用は現在利用できません。
 
 ### メンテナンスウィンドウ {#maintenance-window}
@@ -68,7 +68,7 @@ TiDB Cloud Starter は、MySQL互換インスタンスと PostgreSQL互換イン
 
 ### MySQL互換 Starter {#mysql-compatible-starter}
 
-デフォルトでは、各組織は最大 5 つの無料の MySQL互換 {{{ .starter }}} インスタンスを作成できます。追加のインスタンスを作成するには、クレジットカードを追加し、[月間支出制限を設定する](/tidb-cloud/manage-serverless-spend-limit.md)必要があります。
+デフォルトでは、各組織は最大 5 つの無料の MySQL互換 {{{ .starter }}} インスタンスを作成できます。追加のインスタンスを作成するには、クレジットカードを追加し、[月間支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)必要があります。
 
 組織内の最初の 5 つの {{{ .starter }}} インスタンスについて、TiDB Cloud はそれぞれに対して次の無料使用量クォータを提供します。
 
@@ -82,9 +82,9 @@ MySQL互換 {{{ .starter }}} インスタンスが使用量クォータに達す
 
 さまざまなリソース（読み取り、書き込み、SQL CPU、ネットワーク送信を含む）の RU 消費量、価格の詳細、スロットリング情報の詳細については、[TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
-追加のクォータを持つ {{{ .starter }}} インスタンスを作成する場合は、{{{ .starter }}} インスタンス作成ページで月間支出制限を設定できます。詳細については、[{{{ .starter }}} インスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
+追加のクォータを持つ {{{ .starter }}} インスタンスを作成する場合は、{{{ .starter }}} インスタンス作成ページで月間支出限度額を設定できます。詳細については、[{{{ .starter }}} インスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)を参照してください。
 
-{{{ .starter }}} インスタンスを作成した後でも、{{{ .starter }}} インスタンスの概要ページで支出制限を確認および編集できます。詳細については、[{{{ .starter }}} インスタンスの支出制限を管理する](/tidb-cloud/manage-serverless-spend-limit.md)を参照してください。
+{{{ .starter }}} インスタンスを作成した後でも、{{{ .starter }}} インスタンスの概要ページで支出限度額を確認および編集できます。詳細については、[{{{ .starter }}} インスタンスの支出限度額を管理する](/tidb-cloud/manage-serverless-spend-limit.md)を参照してください。
 
 ### PostgreSQL互換 Starter（パブリックプレビュー） {#postgresql-compatible-starter-public-preview}
 

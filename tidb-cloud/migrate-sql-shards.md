@@ -5,7 +5,7 @@ summary: 大規模データセットのMySQLシャードをTiDB Cloudに移行�
 
 # 大規模データセットのMySQLシャードをTiDB Cloudに移行およびマージする {#migrate-and-merge-mysql-shards-of-large-datasets-to-tidb-cloud}
 
-このドキュメントでは、異なるパーティションに分散した大規模な MySQL データセット (例えば、1 TiB 以上) をTiDB Cloudに移行および統合する方法について説明します。データ移行が完了したら、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/stable/dm-overview)を使用して、ビジネスニーズに応じて増分移行を実行できます。
+このドキュメントでは、異なるパーティションに分散した大規模な MySQL データセット (例えば、1 TiB 以上) をTiDB Cloudに移行およびマージする方法について説明します。完全データ移行が完了したら、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb/stable/dm-overview)を使用して、ビジネスニーズに応じて増分移行を実行できます。
 
 このドキュメントの例では、複数のMySQLインスタンスにまたがる複雑なシャード移行タスクを使用しており、AUTO_INCREMENT主キーの競合処理が含まれています。この例のシナリオは、単一のMySQLインスタンス内の異なるシャードテーブルのデータをマージする場合にも適用できます。
 
@@ -48,7 +48,7 @@ DM のバージョンは v5.3.0 です。 TiDB DM を手動でデプロイする
 
 シャーディングされたスキーマとテーブルは、テーブル`store.sales`にマージされます。
 
-## MySQLからTiDB Cloudへの完全なデータ移行を実行する {#perform-full-data-migration-from-mysql-to-tidb-cloud}
+## MySQLからTiDB Cloudへの完全データ移行を実行する {#perform-full-data-migration-from-mysql-to-tidb-cloud}
 
 以下は、MySQLシャードの全データをTiDB Cloudに移行およびマージする手順です。
 
@@ -110,7 +110,7 @@ CSVファイルの名前は以下のようにしてください。
 
 詳細な手順については、 [データをAmazon S3クラウドストレージにエクスポートする](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-data-to-amazon-s3-cloud-storage)を参照してください。
 
-### ステップ3. <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>でスキーマを作成します {#step-3-create-schemas-in-customcontent-plan-starter-tidb-cloud-starter-instance-customcontent-customcontent-plan-essential-tidb-cloud-essential-instance-customcontent-customcontent-plan-premium-tidb-cloud-premium-instance-customcontent-customcontent-plan-dedicated-tidb-cloud-dedicated-cluster-customcontent}
+### ステップ3. <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>でスキーマを作成する {#step-3-create-schemas-in-customcontent-plan-starter-tidb-cloud-starter-instance-customcontent-customcontent-plan-essential-tidb-cloud-essential-instance-customcontent-customcontent-plan-premium-tidb-cloud-premium-instance-customcontent-customcontent-plan-dedicated-tidb-cloud-dedicated-cluster-customcontent}
 
 <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>でスキーマを次のように作成します。
 
@@ -171,7 +171,7 @@ Query OK, 0 rows affected (0.17 sec)
 }
 ```
 
-### ステップ5．データインポートタスクを実行する {#step-5-perform-the-data-import-task}
+### ステップ5. データインポートタスクを実行する {#step-5-perform-the-data-import-task}
 
 Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次のようにデータインポートタスクを実行できます。
 
@@ -187,7 +187,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
 2. **Import data from Cloud Storage**を選択し、次に**Amazon S3**をクリックします。
 
-3. **Amazon S3からデータをインポートする**ページで、以下の情報を入力してください。
+3. **Import Data from Amazon S3**ページで、以下の情報を入力してください。
 
     - **Import File Count**： TiDB Cloud StarterまたはTiDB Cloud Essentialの場合は、 **Multiple files**を選択してください。このフィールドはTiDB Cloud Dedicatedでは利用できません。
     - **Included Schema Files**:**No**を選択します。
@@ -211,7 +211,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
     - `s3://[bucket_name]/[data_source_folder]/my-data?.csv` : そのフォルダ内の`my-data`で始まり、その後に 1 文字が続くすべての CSV ファイル (例えば`my-data1.csv`や`my-data2.csv` ) は、同じターゲットテーブルにインポートされます。
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv` : `my-data`で始まるフォルダ内のすべての CSV ファイルは、同じターゲットテーブルにインポートされます。
+    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv` : そのフォルダ内の`my-data`で始まるすべての CSV ファイルは、同じターゲットテーブルにインポートされます。
 
     `?`と`*`のみがサポートされていることに注意してください。
 
@@ -458,7 +458,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 }
 ```
 
-### ステップ3. レプリケーションタスクを開始します {#step-3-start-the-replication-task}
+### ステップ3. レプリケーションタスクを開始する {#step-3-start-the-replication-task}
 
 `tiup dmctl`を使用して、次のコマンドを実行し、データレプリケーションタスクを開始します。
 
@@ -506,7 +506,7 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 
 問題が発生した場合は、 [DMエラー処理](https://docs.pingcap.com/tidb/stable/dm-error-handling)および[DMに関するFAQ](https://docs.pingcap.com/tidb/stable/dm-faq)を参照してください。
 
-### ステップ4．レプリケーションタスクのステータスを確認する {#step-4-check-the-replication-task-status}
+### ステップ4. レプリケーションタスクのステータスを確認する {#step-4-check-the-replication-task-status}
 
 DM クラスターでレプリケーションタスクが進行中かどうかを確認し、タスクの状態を表示するには、 `tiup dmctl`を使用して`query-status`コマンドを実行します。
 

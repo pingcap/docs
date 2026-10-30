@@ -9,13 +9,13 @@ TiDB Cloud は、 [Prometheusとの統合](/tidb-cloud/monitor-prometheus-and-gr
 
 ## 前提条件 {#prerequisites}
 
-- TiDB Cloudのサードパーティ メトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。
+- TiDB Cloudのサードパーティメトリクス統合を設定するには、 TiDB Cloudで`Organization Owner`または`Project Owner`アクセス権が必要です。
 
 ## 移行手順 {#migration-steps}
 
-Prometheusとの連携を移行するには、以下の手順を実行してください。
+Prometheus統合を移行するには、以下の手順を実行してください。
 
-### ステップ1. 従来のプロジェクトレベルのPrometheus統合を削除します（ベータ版） {#step-1-delete-the-legacy-project-level-prometheus-integrations-beta}
+### ステップ1. 従来のプロジェクトレベルのPrometheus統合（ベータ版）を削除する {#step-1-delete-the-legacy-project-level-prometheus-integrations-beta}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 

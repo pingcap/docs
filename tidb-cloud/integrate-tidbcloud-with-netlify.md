@@ -24,7 +24,7 @@ NetlifyアカウントとCLIをお持ちであることが前提となります�
 
 アカウントとTiDB Cloudリソースをお持ちであることが前提となります。お持ちでない場合は、以下の手順に従って作成してください。
 
-- [TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスを作成します](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 TiDB Cloudのリソース1つで、複数のNetlifyサイトに接続できます。
@@ -50,7 +50,7 @@ TiDB Cloudは、すぐに開発を始められるように、TypeScriptとNext.j
     cd nextjs-prisma-example/
     ```
 
-### TiDB Cloud接続文字列を取得します {#get-the-tidb-cloud-connection-string}
+### TiDB Cloud接続文字列を取得する {#get-the-tidb-cloud-connection-string}
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの場合、接続文字列は[TiDB Cloud CLI](/tidb-cloud/cli-reference.md)または[TiDB Cloudコンソール](https://tidbcloud.com/)から取得できます。
 
@@ -63,7 +63,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 >
 > Cloud CLI をインストールしていない場合は、次の手順を実行する前に、 [TiDB Cloud CLI クイックスタート](/tidb-cloud/get-started-with-cli.md)を参照して簡単にインストールしてください。
 
-1. TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの接続文字列を対話モードで取得します。
+1. TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスの接続文字列を対話型モードで取得します。
 
     ```shell
     ticloud cluster connect-info
@@ -122,7 +122,7 @@ TiDB Cloud Dedicatedクラスタの場合、接続文字列はTiDB Cloudコン�
 </div>
 </SimpleTab>
 
-## ステップ2. サンプルアプリをNetlifyにデプロイ {#step-2-deploy-the-example-app-to-netlify}
+## ステップ2. サンプルアプリをNetlifyにデプロイする {#step-2-deploy-the-example-app-to-netlify}
 
 1. Netlify CLIで、Netlifyアカウントを認証し、アクセストークンを取得します。
 

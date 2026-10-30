@@ -14,7 +14,7 @@ TiDB Cloudは、さまざまなワークロードのニーズに対応できる�
 
 > **Tip:**
 >
-> TiDB Cloud Dedicatedクラスターのサイズを決定する方法については、 [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
+> TiDB Cloud Dedicatedクラスターのサイズを決定する方法については、 [TiDBのサイズを決定する](/tidb-cloud/size-your-cluster.md)を参照してください。
 
 ## 垂直方向および水平方向のスケーリング {#vertical-and-horizontal-scaling}
 

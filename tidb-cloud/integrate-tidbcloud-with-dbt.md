@@ -9,7 +9,7 @@ summary: TiDB Cloudにおけるdbtのユースケースについて学びまし�
 
 このドキュメントでは、dbtプロジェクトを例として、 TiDB Cloudでdbtを使用する方法を紹介します。
 
-## ステップ1：dbtとdbt-tidbをインストールする {#step-1-install-dbt-and-dbt-tidb}
+## ステップ1. dbtとdbt-tidbをインストールする {#step-1-install-dbt-and-dbt-tidb}
 
 dbtとdbt-tidbは、たった1つのコマンドでインストールできます。以下のコマンドでは、dbt-tidbをインストールする際に、dbtが依存関係としてインストールされます。
 
@@ -19,7 +19,7 @@ pip install dbt-tidb
 
 dbt を個別にインストールすることもできます。 dbt ドキュメントの[dbtのインストール方法](https://docs.getdbt.com/docs/get-started/installation)を参照してください。
 
-## ステップ2：デモプロジェクトを作成する {#step-2-create-a-demo-project}
+## ステップ2. デモプロジェクトを作成する {#step-2-create-a-demo-project}
 
 dbt の機能を試すには、dbt-lab が提供するデモプロジェクト[jaffle_shop](https://github.com/dbt-labs/jaffle_shop)を利用できます。 GitHub から直接プロジェクトのクローンを作成できます。
 
@@ -59,17 +59,17 @@ cd jaffle_shop
 
 - `dbt_project.yml`は dbt プロジェクト設定ファイルであり、プロジェクト名とデータベース設定ファイルの情報が含まれています。
 
-- `models`ディレクトリには、プロジェクトの SQL モデルとテーブルスキーマが含まれています。このセクションはデータ アナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
+- `models`ディレクトリには、プロジェクトの SQL モデルとテーブルスキーマが含まれています。このセクションはデータアナリストが作成します。モデルの詳細については、 [SQLモデル](https://docs.getdbt.com/docs/build/sql-models)を参照してください。
 
-- `seeds`ディレクトリには、データベース エクスポート ツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポート](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)し、CSV ファイルにできます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
+- `seeds`ディレクトリには、データベースエクスポートツールによってダンプされた CSV ファイルが保存されます。たとえば、 Dumplingを通じて[TiDB Cloudデータをエクスポート](https://docs.pingcap.com/tidbcloud/export-data-from-tidb-cloud)し、CSV ファイルにできます。 `jaffle_shop`プロジェクトでは、これらの CSV ファイルが処理される生データとして使用されます。
 
-## ステップ3：プロジェクトの設定 {#step-3-configure-the-project}
+## ステップ3. プロジェクトを設定する {#step-3-configure-the-project}
 
 プロジェクトを設定するには、以下の手順に従ってください。
 
 1. グローバル設定を完了してください。
 
-    [プロフィール項目の説明](#description-of-profile-fields)を参照し、デフォルトのグローバル プロファイル`~/.dbt/profiles.yml`を編集して、 TiDB Cloudとの接続を構成できます。
+    [プロフィール項目の説明](#description-of-profile-fields)を参照し、デフォルトのグローバルプロファイル`~/.dbt/profiles.yml`を編集して、 TiDB Cloudとの接続を構成できます。
 
     ```shell
     sudo vi ~/.dbt/profiles.yml
@@ -139,7 +139,7 @@ cd jaffle_shop
     dbt debug
     ```
 
-## ステップ4：（オプション）CSVファイルを読み込む {#step-4-optional-load-csv-files}
+## ステップ4. （オプション）CSVファイルを読み込む {#step-4-optional-load-csv-files}
 
 > **Note:**
 >
@@ -220,7 +220,7 @@ cd jaffle_shop
     10 rows in set (0.10 sec)
     ```
 
-## ステップ5：データの変換 {#step-5-transform-data}
+## ステップ5. データを変換する {#step-5-transform-data}
 
 これで、設定済みのプロジェクトを実行してデータ変換を完了する準備が整いました。
 
@@ -297,7 +297,7 @@ cd jaffle_shop
 
     出力結果を見ると、新たに5つのテーブルまたはビューが追加され、それらのテーブルまたはビュー内のデータが変換されたことがわかります。この例では、顧客テーブルのデータの一部のみが表示されています。
 
-## ステップ6：ドキュメントを生成する {#step-6-generate-the-document}
+## ステップ6. ドキュメントを生成する {#step-6-generate-the-document}
 
 dbtを使用すると、プロジェクト全体の構造を表示し、すべてのテーブルとビューを説明する視覚的なドキュメントを生成できます。
 

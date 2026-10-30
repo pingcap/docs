@@ -1,9 +1,9 @@
 ---
-title: TiDB X インスタンスで制限される SQL 機能
+title: Limited SQL Features on TiDB X Instances
 summary: TiDB X インスタンスで制限される SQL 機能について説明します。
 ---
 
-# TiDB X インスタンスで制限される SQL 機能
+# TiDB X インスタンスで制限される SQL 機能 {#limited-sql-features-on-tidb-x-instances}
 
 TiDB X インスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md) 上に構築されたサービス指向の TiDB Cloud オファリングであり、{{{ .starter }}}、Essential、Premium、BYOC インスタンスなどが含まれます。
 
@@ -11,11 +11,11 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 > **Note:**
 >
-> このドキュメントは {{{ .starter }}}、Essential、Premium、BYOC にのみ適用されます。TiDB Cloud Dedicated については、[Limited SQL Features on TiDB Cloud Dedicated](/tidb-cloud/limited-sql-features.md) を参照してください。
+> このドキュメントは {{{ .starter }}}、Essential、Premium、BYOC にのみ適用されます。TiDB Cloud Dedicated については、[TiDB Cloud Dedicatedで制限されたSQL機能](/tidb-cloud/limited-sql-features.md) を参照してください。
 
 ## ステートメント {#statements}
 
-### Placement と range 管理 {#placement-and-range-management}
+### 配置と範囲管理 {#placement-and-range-management}
 
 | ステートメント | {{{ .premium }}} および {{{ .byoc }}} | {{{ .starter }}} および {{{ .essential }}} |
 |:-|:-|:-|
@@ -94,7 +94,7 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 | 関数と演算子 | {{{ .premium }}} および {{{ .byoc }}} | {{{ .starter }}} および {{{ .essential }}} |
 |:-|:-|:-|
-| `SLEEP` | 制限はありません | [`SLEEP()` function](https://docs.pingcap.com/tidbcloud/miscellaneous-functions) 関数は、最大 300秒のスリープ時間をサポートします。 |
+| `SLEEP` | 制限はありません | [`SLEEP()`関数](https://docs.pingcap.com/tidbcloud/miscellaneous-functions)は、最大 300秒のスリープ時間をサポートします。 |
 
 ## システムテーブル {#system-tables}
 
@@ -350,9 +350,9 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 [^2]: リソースグループの設定は {{{ .starter }}}、Essential、Premium、BYOC ではサポートされていません。
 
-[^3]: {{{ .starter }}}、Essential、Premium、BYOC で [Back up and Restore](/tidb-cloud/backup-and-restore-serverless.md) 操作を実行するには、代わりに TiDB Cloud コンソールを使用できます。
+[^3]: {{{ .starter }}}、Essential、Premium、BYOC で [バックアップと復元](/tidb-cloud/backup-and-restore-serverless.md) 操作を実行するには、代わりに TiDB Cloud コンソールを使用できます。
 
-[^4]: この機能は [Security Enhanced Mode (SEM)](/system-variables.md#tidb_enable_enhanced_security) では利用できません。
+[^4]: この機能は [セキュリティ強化モード（SEM）](/system-variables.md#tidb_enable_enhanced_security) では利用できません。
 
 [^5]: {{{ .starter }}}、Essential、Premium、BYOC で [Slow Query](/tidb-cloud/tune-performance.md#slow-query) を追跡するには、代わりに TiDB Cloud コンソールを使用できます。
 
@@ -366,4 +366,4 @@ TiDB Cloud は TiDB がサポートするほぼすべてのワークロードに
 
 [^10]: この変数は {{{ .starter }}} と {{{ .essential }}} では読み取り専用です。
 
-[^11]: {{{ .starter }}} と {{{ .essential }}} では、[example](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information) に示されているように、`${tidb-server-status-port}` を介して `PLAN REPLAYER` がエクスポートしたファイルをダウンロードすることはサポートされていません。代わりに、{{{ .starter }}} と {{{ .essential }}} では、ファイルをダウンロードするための [presigned URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) が生成されます。この URL は生成後 10時間有効です。
+[^11]: {{{ .starter }}} と {{{ .essential }}} では、[例](https://docs.pingcap.com/tidb/stable/sql-plan-replayer#examples-of-exporting-cluster-information) に示されているように、`${tidb-server-status-port}` を介して `PLAN REPLAYER` がエクスポートしたファイルをダウンロードすることはサポートされていません。代わりに、{{{ .starter }}} と {{{ .essential }}} では、ファイルをダウンロードするための [事前署名付き URL](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) が生成されます。この URL は生成後 10時間有効です。

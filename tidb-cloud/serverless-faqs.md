@@ -20,7 +20,7 @@ TiDB Cloud Starterは、お客様と組織に完全なHTAP機能を備えたTiDB
 
 TiDB Cloud Starter は、2025年 8月 12日よりTiDB Cloud Serverless の新しい名前になります。
 
-Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千人もの開発者のエントリ ポイントとして機能し、自動的にスケーリングされ、数秒で起動し、十分な無料割り当てを超えるまでコストがかからない、本番環境対応のデータベースを提供していました。
+Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千人もの開発者のエントリポイントとして機能し、自動的にスケーリングされ、数秒で起動し、十分な無料割り当てを超えるまでコストがかからない、本番環境対応のデータベースを提供していました。
 
 「サーバーレス」は、サービスが舞台裏でどのように動作するかを正確に反映していますが、初めて使用するユーザーの多くは、この用語が抽象的で、さまざまな意味が詰め込まれていると感じました。
 
@@ -29,35 +29,35 @@ Starter に名前が変更される前、 TiDB Cloudの Serverless 層は何千�
 - 行ベースと列指向の両方のストレージを備えた完全に管理されたデータベースで、ハイブリッド OLTP および OLAP ワークロードに最適です。
 - 自動かつリクエスト主導型のスケーリング。キャパシティプランニングや手動の調整は必要ありません。
 - ベクトル検索とフルテキスト検索が組み込まれており、GenAI 検索、チャットボット、その他の AI アプリケーションを強化します。
-- 組織ごとに最大 5つのクラスターまで、月間クォータが常時無料です (5 GiB の行データ + 5 GiB の列データ + クラスターあたり 5,000 万[RU](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) )。
+- 組織ごとに最大 5つのTiDB Cloud Starter インスタンスまで、月間クォータが常時無料です (5 GiB の行データ + 5 GiB の列データ + TiDB Cloud Starter インスタンスあたり 5,000 万[RU](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) )。
 
 ### TiDB Cloud Starter を使い始めるにはどうすればよいですか? {#how-do-i-get-started-with-tidb-cloud-starter}
 
 5分間の[TiDB Cloudクイックスタート](/tidb-cloud/tidb-cloud-quickstart.md)から始めましょう
 
-### TiDB Cloudで作成できるTiDB Cloud Starter クラスターの数はいくつですか? {#how-many-tidb-cloud-starter-clusters-can-i-create-in-tidb-cloud}
+### TiDB Cloudで作成できるTiDB Cloud Starter インスタンスの数はいくつですか? {#how-many-tidb-cloud-starter-instances-can-i-create-in-tidb-cloud}
 
-TiDB Cloudでは、組織ごとにデフォルトで最大5つの[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)クラスターを作成できます。TiDB Cloud Starter クラスターをさらに作成するには、クレジットカードを追加し、使用量に対する[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定する必要があります。
+TiDB Cloudでは、組織ごとにデフォルトで最大5つの[TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスを作成できます。TiDB Cloud Starter インスタンスをさらに作成するには、クレジットカードを追加し、使用量に対する[支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)を設定する必要があります。
 
 ### TiDB Cloud Starter ではすべてのTiDB Cloud機能が完全にサポートされていますか? {#are-all-tidb-cloud-features-fully-supported-on-tidb-cloud-starter}
 
 TiDB Cloudの一部の機能は、 TiDB Cloud Starterでは部分的にサポートされるか、サポートされていません。詳細については、 [TiDB Cloud Starter の制限とクォータ](/tidb-cloud/serverless-limitations.md)をご覧ください。
 
-### TiDB Cloud Starter は、Google Cloud や Azure など、AWS 以外のクラウド プラットフォームでいつ利用できるようになりますか? {#when-will-tidb-cloud-starter-be-available-on-cloud-platforms-other-than-aws-such-as-google-cloud-or-azure}
+### TiDB Cloud Starter は、Google Cloud や Azure など、AWS 以外のクラウドプラットフォームでいつ利用できるようになりますか? {#when-will-tidb-cloud-starter-be-available-on-cloud-platforms-other-than-aws-such-as-google-cloud-or-azure}
 
 TiDB Cloud StarterをGoogle CloudやAzureを含む他のクラウドプラットフォームに拡張すべく、積極的に取り組んでいます。ただし、現状ではギャップを埋め、あらゆる環境でシームレスな機能を実現することに注力しているため、具体的なスケジュールは未定です。ご安心ください。TiDB Cloud Starterをより多くのクラウドプラットフォームでご利用いただけるよう、鋭意取り組んでおり、進捗状況についてはコミュニティの皆様に随時お知らせいたします。
 
-### TiDB Cloud Starterが利用可能になる前にDeveloper Tierクラスターを作成しました。このクラスターは引き続き使用できますか？ {#i-created-a-developer-tier-cluster-before-tidb-cloud-starter-was-available-can-i-still-use-my-cluster}
+### TiDB Cloud Starterが利用可能になる前にDeveloper Tierクラスターを作成しました。TiDB Cloud Starter インスタンスは引き続き使用できますか？ {#i-created-a-developer-tier-cluster-before-tidb-cloud-starter-was-available-can-i-still-use-my-tidb-cloud-starter-instance}
 
-はい、 Developer TierクラスターはTiDB Cloud Starter クラスターに自動的に移行されており、以前の使用状況に支障をきたすことなく、ユーザーエクスペリエンスが向上します。
+はい、 Developer TierクラスターはTiDB Cloud Starter インスタンスに自動的に移行されており、以前の使用状況に支障をきたすことなく、ユーザーエクスペリエンスが向上します。
 
 ### TiDB Cloud Starter の列指向ストレージとは何ですか? {#what-is-columnar-storage-in-tidb-cloud-starter}
 
 TiDB Cloud Starterの列指向ストレージは、行ベースストレージの追加レプリカとして機能し、強力な一貫性を確保します。従来の行ベースストレージはデータを行単位で保存しますが、列指向ストレージはデータを列単位で整理し、データ分析タスクに最適化します。
 
-列指向ストレージは、トランザクション ワークロードと分析ワークロードをシームレスに融合することで、TiDB のハイブリッドトランザクションおよび分析処理 (HTAP) 機能を有効にする重要な機能です。
+列指向ストレージは、トランザクションワークロードと分析ワークロードをシームレスに融合することで、TiDB のハイブリッドトランザクションおよび分析処理 (HTAP) 機能を有効にする重要な機能です。
 
-列指向ストレージデータを効率的に管理するために、 TiDB Cloud Starterは独立したElastic TiFlashエンジンを使用します。クエリ実行中、オプティマイザはクラスターに対し、行ベースストレージと列指向ストレージのどちらからデータを取得するかを自動的に決定するよう指示します。
+列指向ストレージデータを効率的に管理するために、 TiDB Cloud Starterは独立したElastic TiFlashエンジンを使用します。クエリ実行中、オプティマイザはTiDB Cloud Starter インスタンスに対し、行ベースストレージと列指向ストレージのどちらからデータを取得するかを自動的に決定するよう指示します。
 
 ### TiDB Cloud Starter で列指向ストレージを使用するのはいつですか? {#when-should-i-use-columnar-storage-in-tidb-cloud-starter}
 
@@ -74,7 +74,7 @@ TiDB Cloud Starterの列指向ストレージは、行ベースストレージ�
 TiDB Cloud Starter での列指向ストレージの使用は、 TiFlashでの使用と同様です。列指向ストレージは、テーブルレベルとデータベースレベルの両方で有効にできます。
 
 - テーブルレベル: TiFlashレプリカをテーブルに割り当てて、特定のテーブルの列指向ストレージを有効にします。
-- データベースレベル: データベース全体で列型ストレージを使用するように、データベース内のすべてのテーブルに対してTiFlashレプリカを構成します。
+- データベースレベル: データベース全体で列指向ストレージを使用するように、データベース内のすべてのテーブルに対してTiFlashレプリカを構成します。
 
 テーブルにTiFlashレプリカが設定されると、TiDBは行ベースストレージからそのテーブルの列指向ストレージにデータを自動的に複製します。これにより、データの一貫性が確保され、分析クエリのパフォーマンスが最適化されます。
 
@@ -86,43 +86,43 @@ TiFlashレプリカの設定方法の詳細については、 [TiFlashレプリ�
 
 ### 「Connection limit exceeded」というエラーが表示されるのはなぜですか? {#why-did-i-receive-a-connection-limit-exceeded-error}
 
-このエラーは、クラスターが最大同時接続数を超えた場合に発生します。詳細については、 [接続制限](/tidb-cloud/serverless-limitations.md#connection)を参照してください。
+このエラーは、TiDB Cloud Starter インスタンスが最大同時接続数を超えた場合に発生します。詳細については、 [接続制限](/tidb-cloud/serverless-limitations.md#connection)を参照してください。
 
 ## 請求と計測に関するよくある質問 {#billing-and-metering-faqs}
 
 ### リクエストユニットとは何ですか? {#what-are-request-units}
 
-TiDB Cloud Starterは従量課金モデルを採用しており、ストレージ容量とクラスターの使用量に対してのみ料金が発生します。このモデルでは、SQLクエリ、一括操作、バックグラウンドジョブなど、すべてのクラスターアクティビティが[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)で定量化されます。RUは、クラスターで開始されたリクエストのサイズと複雑さを表す抽象的な指標です。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)ご覧ください。
+TiDB Cloud Starterは従量課金モデルを採用しており、ストレージ容量とTiDB Cloud Starter インスタンスの使用量に対してのみ料金が発生します。このモデルでは、SQLクエリ、一括操作、バックグラウンドジョブなど、すべてのTiDB Cloud Starter インスタンスのアクティビティが[リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru)で定量化されます。RUは、TiDB Cloud Starter インスタンスで開始されたリクエストのサイズと複雑さを表す抽象的な指標です。詳細については、 [TiDB Cloud Starter の価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)をご覧ください。
 
 ### TiDB Cloud Starter には無料プランはありますか? {#is-there-any-free-plan-available-for-tidb-cloud-starter}
 
-組織内の最初の 5つのTiDB Cloud Starter クラスターについては、 TiDB Cloud は次のようにクラスターごとに無料使用量割り当てを提供します。
+組織内の最初の 5つのTiDB Cloud Starter インスタンスについては、 TiDB Cloud は次のようにインスタンスごとに無料使用量割り当てを提供します。
 
 - 行ベースのストレージ: 5 GiB
 - 列指向ストレージ: 5 GiB
 - [リクエストユニット（RU）](/tidb-cloud/tidb-cloud-glossary.md#request-unit-ru) : 月間5000万RU
 
-TiDB Cloud Starter クラスターに月間使用制限が設定されている場合、無料割り当て量を超えた使用量には課金されます。無料クラスターの場合、無料割り当て量に達すると、月間使用制限を設定するか、新しい月の開始時に使用量がリセットされるまで、このクラスターの読み取りおよび書き込み操作は制限されます。
+TiDB Cloud Starter インスタンスに月間支出限度額が設定されている場合、無料割り当て量を超えた使用量には課金されます。無料のTiDB Cloud Starter インスタンスの場合、無料割り当て量に達すると、月間支出限度額を設定するか、新しい月の開始時に使用量がリセットされるまで、このインスタンスの読み取りおよび書き込み操作は制限されます。
 
 詳細については[TiDB Cloud Starter の使用割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)を参照してください。
 
 ### 無料プランの制限は何ですか? {#what-are-the-limitations-of-the-free-plan}
 
-無料プランでは、スケーラブルでないリソースのため、クラスターのパフォーマンスが制限されます。そのため、クエリあたりのメモリ割り当てが256MiBに制限され、1秒あたりのリクエストユニット（RU）に顕著なボトルネックが発生する可能性があります。クラスターのパフォーマンスを最大化し、これらの制限を回避するには、 TiDB Cloud Starterクラスターに[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)ことができます。
+無料プランでは、スケーラブルでないリソースのため、TiDB Cloud Starter インスタンスのパフォーマンスが制限されます。そのため、クエリあたりのメモリ割り当てが256MiBに制限され、1秒あたりのリクエストユニット（RU）に顕著なボトルネックが発生する可能性があります。TiDB Cloud Starter インスタンスのパフォーマンスを最大化し、これらの制限を回避するには、 TiDB Cloud Starterインスタンスに[毎月の支出限度額を設定する](/tidb-cloud/manage-serverless-spend-limit.md)ことができます。
 
 ### ワークロードに必要な RU の数を見積もって、月間予算を計画するにはどうすればよいですか? {#how-can-i-estimate-the-number-of-rus-required-by-my-workloads-and-plan-my-monthly-budget}
 
 個々のSQL文のRU消費量を取得するには、SQL文[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)を使用できます。ただし、 `EXPLAIN ANALYZE`で返されるRU使用量には、出力RUは含まれていないことに注意してください。出力使用量はゲートウェイで個別に測定され、TiDBサーバーには認識されないためです。
 
-クラスターで使用されているRUとストレージを確認するには、クラスターの概要ページの**Usage this month**ペインをご覧ください。このペインに表示される過去のリソース使用量データとリアルタイムのリソース使用量を参考に、クラスターのリソース消費量を追跡し、適切な利用限度額を見積もることができます。無料割り当てで要件を満たせない場合は、追加リソースの利用限度額を編集できます。詳細については、 [TiDB Cloud Starter の使用割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)ご覧ください。
+TiDB Cloud Starter インスタンスで使用されているRUとストレージを確認するには、TiDB Cloud Starter インスタンスの概要ページに移動し、**Usage this month**ペインをご覧ください。このペインに表示される過去のリソース使用量データとリアルタイムのリソース使用量を参考に、TiDB Cloud Starter インスタンスのリソース消費量を追跡し、適切な支出限度額を見積もることができます。無料割り当てで要件を満たせない場合は、追加リソースの支出限度額を編集できます。詳細については、 [TiDB Cloud Starter の使用割り当て](/tidb-cloud/select-cluster-tier.md#usage-quota)をご覧ください。
 
 ### 消費される RU の数を最小限に抑えるためにワークロードを最適化するにはどうすればよいでしょうか? {#how-can-i-optimize-my-workload-to-minimize-the-number-of-rus-consumed}
 
-[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、クエリが最適なパフォーマンスを得るために注意深く最適化されていることを確認してください。 RU を最も多く消費する SQL文を特定するには、クラスターの[**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **SQL Statements**タブを確認します。ここで、SQL 実行を観察し、**Total RU**または**Mean RU**でソートされた上位のSQL文を表示できます。 詳細については、 [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。 また、出力トラフィックの量を最小限に抑えることも、RU の消費量を削減するために重要です。 これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワークの出力トラフィックが削減されます。 これは、返される列と行を慎重に選択してフィルター処理することで実現でき、それによってネットワーク使用率が最適化されます。
+[SQLパフォーマンスの最適化](/develop/dev-guide-optimize-sql-overview.md)のガイドラインに従って、クエリが最適なパフォーマンスを得るために注意深く最適化されていることを確認してください。 RU を最も多く消費する SQL文を特定するには、TiDB Cloud Starter インスタンスの[**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページに移動し、 **SQL Statements**タブを確認します。ここで、SQL 実行を観察し、**Total RU**または**Mean RU**でソートされた上位のSQL文を表示できます。 詳細については、 [ステートメント分析](/tidb-cloud/tune-performance.md#statement-analysis)を参照してください。 また、出力トラフィックの量を最小限に抑えることも、RU の消費量を削減するために重要です。 これを実現するには、クエリで必要な列と行のみを返すことをお勧めします。これにより、ネットワークの出力トラフィックが削減されます。 これは、返される列と行を慎重に選択してフィルター処理することで実現でき、それによってネットワーク使用率が最適化されます。
 
 ### TiDB Cloud Starter のストレージはどのように計測されますか? {#how-storage-is-metered-for-tidb-cloud-starter}
 
-ストレージは、 TiDB Cloud Starter クラスターに保存されるデータ量（月間GiB単位）に基づいて課金されます。これは、すべてのテーブルとインデックスの合計サイズ（データ圧縮とレプリカを除く）と、その月のデータの保存時間数を掛けて算出されます。
+ストレージは、 TiDB Cloud Starter インスタンスに保存されるデータ量（月間GiB単位）に基づいて課金されます。これは、すべてのテーブルとインデックスの合計サイズ（データ圧縮とレプリカを除く）と、その月のデータの保存時間数を掛けて算出されます。
 
 ### テーブルまたはデータベースをすぐに削除した後でも、ストレージ使用量のサイズが変更されないのはなぜですか? {#why-does-the-storage-usage-size-remain-unchanged-after-dropping-a-table-or-database-immediately}
 
@@ -130,23 +130,23 @@ TiDB Cloud Starter クラスターに月間使用制限が設定されている�
 
 ### アクティブにクエリを実行していないのに RU が消費されるのはなぜですか? {#why-are-there-ru-consumptions-when-i-m-not-actively-running-any-queries}
 
-RU の消費は様々なシナリオで発生する可能性があります。一般的なシナリオの一つは、バックグラウンドクエリの実行時です。これには、TiDB インスタンス間のスキーマ変更の同期、DDL ジョブの実行、権限の更新、SQL バインディングの更新、グローバル変数の更新などが含まれますが、これらに限定されません。別のシナリオとしては、スキーマの読み込みなど、特定の Web コンソール機能がクエリを生成する場合が挙げられます。これらのプロセスは、明示的なユーザートリガーがなくても RU を使用します。
+RU の消費は様々なシナリオで発生する可能性があります。一般的なシナリオの一つは、バックグラウンドクエリの実行時です。これには、TiDB ノード間のスキーマ変更の同期、DDL ジョブの実行、権限の更新、SQL バインディングの更新、グローバル変数の更新などが含まれますが、これらに限定されません。別のシナリオとしては、スキーマの読み込みなど、特定の Web コンソール機能がクエリを生成する場合が挙げられます。これらのプロセスは、明示的なユーザートリガーがなくても RU を使用します。
 
 ### ワークロードが安定しているのに RU 使用量が急増するのはなぜですか? {#why-is-there-a-spike-in-ru-usage-when-my-workload-is-steady}
 
 TiDB の必須バックグラウンドジョブが原因で、RU 使用量が急増する可能性があります。これらのジョブ（テーブルの自動分析や統計の再構築など）は、最適化されたクエリプランを生成するために必要です。
 
-### クラスターの無料割り当てを使い果たしたり、使用制限を超えたりするとどうなりますか? {#what-happens-when-my-cluster-exhausts-its-free-quota-or-exceeds-its-spending-limit}
+### TiDB Cloud Starter インスタンスの無料割り当てを使い果たしたり、支出限度額を超えたりするとどうなりますか? {#what-happens-when-my-tidb-cloud-starter-instance-exhausts-its-free-quota-or-exceeds-its-spending-limit}
 
-クラスターが無料割り当てまたは使用制限に達すると、割り当てが増加するか、新しい月の開始時に使用量がリセットされるまで、クラスターは新しい接続試行を直ちに拒否します。割り当てに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。詳細については、 [TiDB Cloud Starter の制限とクォータ](/tidb-cloud/serverless-limitations.md#usage-quota)を参照してください。
+TiDB Cloud Starter インスタンスが無料割り当てまたは支出限度額に達すると、割り当てが増加するか、新しい月の開始時に使用量がリセットされるまで、インスタンスは新しい接続試行を直ちに拒否します。割り当てに達する前に確立された既存の接続はアクティブなままですが、スロットリングが発生します。詳細については、 [TiDB Cloud Starter の制限とクォータ](/tidb-cloud/serverless-limitations.md#usage-quota)を参照してください。
 
 ### データのインポート中に RU 使用量が急増するのはなぜですか? {#why-do-i-observe-spikes-in-ru-usage-while-importing-data}
 
-TiDB Cloud Starter クラスターのデータインポートプロセス中、データが正常にインポートされた場合にのみ RU 消費が発生するため、RU 使用量が急増します。
+TiDB Cloud Starter インスタンスのデータインポートプロセス中、データが正常にインポートされた場合にのみ RU 消費が発生するため、RU 使用量が急増します。
 
 ### TiDB Cloud Starter で列指向ストレージを使用する場合、どのようなコストがかかりますか? {#what-costs-are-involved-when-using-columnar-storage-in-tidb-cloud-starter}
 
-TiDB Cloud Starter の列指向ストレージの料金は、行指向ストレージの料金とほぼ同じです。列指向ストレージを使用すると、データ（インデックスなし）を保存するための追加のレプリカが作成されます。行指向ストレージから列指向ストレージへのデータのレプリケーションには追加料金は発生しません。
+TiDB Cloud Starter の列指向ストレージの料金は、行ベースストレージの料金とほぼ同じです。列指向ストレージを使用すると、データ（インデックスなし）を保存するための追加のレプリカが作成されます。行ベースストレージから列指向ストレージへのデータのレプリケーションには追加料金は発生しません。
 
 詳細な価格情報については、 [TiDB Cloud Starterの価格詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 
@@ -167,10 +167,10 @@ TPC-H ベンチマークテストによると、列指向のストレージで�
 ### TiDB Cloud Starter はどのようにしてセキュリティを確保しますか? {#how-does-tidb-cloud-starter-ensure-security}
 
 - 接続はTransport Layer Security（TLS）によって暗号化されます。TLSを使用してTiDB Cloud Starterに接続する方法の詳細については、 [TiDB Cloud StarterへのTLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)をご覧ください。
-- TiDB Cloud Starter に保存されるすべてのデータは、クラスターが実行されているクラウドプロバイダーのツールを使用して保存時に暗号化されます。
+- TiDB Cloud Starter に保存されるすべてのデータは、TiDB Cloud Starter インスタンスが実行されているクラウドプロバイダーのツールを使用して保存時に暗号化されます。
 
 ## メンテナンスに関するFAQ {#maintenance-faq}
 
-### クラスターが実行されている TiDB のバージョンをアップグレードできますか? {#can-i-upgrade-the-version-of-tidb-that-my-cluster-is-running-on}
+### TiDB Cloud Starter インスタンスが実行されている TiDB のバージョンをアップグレードできますか? {#can-i-upgrade-the-version-of-tidb-that-my-tidb-cloud-starter-instance-is-running-on}
 
-いいえ。TiDB Cloud Starterクラスターは、 TiDB Cloudに新しいバージョンの TiDB がロールアウトされるたびに自動的にアップグレードされます。クラスターで実行されている TiDB のバージョンは、 [TiDB Cloudコンソール](https://tidbcloud.com/project/clusters)または最新の[リリースノート](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)で確認できます。または、クラスターに接続して`SELECT version()`または`SELECT tidb_version()`を使用して TiDB のバージョンを確認することもできます。
+いいえ。TiDB Cloud Starterインスタンスは、 TiDB Cloudに新しいバージョンの TiDB がロールアウトされるたびに自動的にアップグレードされます。TiDB Cloud Starter インスタンスで実行されている TiDB のバージョンは、 [TiDB Cloudコンソール](https://tidbcloud.com/tidbs)または最新の[リリースノート](https://docs.pingcap.com/tidbcloud/tidb-cloud-release-notes)で確認できます。または、TiDB Cloud Starter インスタンスに接続して`SELECT version()`または`SELECT tidb_version()`を使用して TiDB のバージョンを確認することもできます。

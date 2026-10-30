@@ -102,7 +102,7 @@ tiup update --self && tiup update dumpling
 
 ## 全てのデータを移行する {#migrate-full-data}
 
-TiDB Self-ManagedクラスタからTiDB Cloudへデータを移行するには、以下の手順で完全なデータ移行を実行します。
+TiDB Self-ManagedクラスタからTiDB Cloudへデータを移行するには、以下の手順で完全データ移行を実行します。
 
 1. TiDB Self-ManagedクラスターからAmazon S3へデータを移行します。
 2. Amazon S3からTiDB Cloudへデータを移行します。
@@ -111,7 +111,7 @@ TiDB Self-ManagedクラスタからTiDB Cloudへデータを移行するには�
 
 TiDB Self-ManagedクラスターからAmazon S3へDumplingを使用してデータを移行する必要があります。
 
-TiDB Self-ManagedクラスターがローカルIDCにある場合、またはDumplingサーバーとAmazon S3間のネットワークが接続されていない場合は、まずファイルをローカルストレージにエクスポートしてから、後でAmazon S3にアップロードすることができます。
+TiDB Self-ManagedクラスターがローカルIDCにある場合、またはDumplingサーバーとAmazon S3間のネットワークが接続されていない場合は、まずファイルをローカルストレージにエクスポートしてから、後でAmazon S3にアップロードできます。
 
 #### ステップ1. アップストリームのTiDB Self-ManagedクラスタのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
 
@@ -135,7 +135,7 @@ SELECT @@global.tidb_gc_enable;
 1 row in set (0.01 sec)
 ```
 
-#### ステップ2. Dumpling用のAmazon S3バケットへのアクセス権限を設定します {#step-2-configure-access-permissions-to-the-amazon-s3-bucket-for-dumpling}
+#### ステップ2. Dumpling用のAmazon S3バケットへのアクセス権限を設定する {#step-2-configure-access-permissions-to-the-amazon-s3-bucket-for-dumpling}
 
 AWS コンソールでアクセスキーを作成します。詳細については[アクセスキーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)を参照してください。
 
@@ -217,7 +217,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     - kms:Decrypt
 
-3. アクセスポリシーを設定します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)してリージョンに切り替えて、 TiDB Cloudのアクセスポリシーが既に存在するかどうかを確認します。存在しない場合は、このドキュメントに従ってポリシーを作成します。 [JSONタブでポリシーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)。
+3. アクセスポリシーを設定します。 [AWSコンソール > IAM > アクセス管理 > ポリシー](https://console.aws.amazon.com/iamv2/home#/policies)に移動し、リージョンに切り替えて、 TiDB Cloudのアクセスポリシーが既に存在するかどうかを確認します。存在しない場合は、[JSONタブでポリシーを作成する](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html)に従ってポリシーを作成します。
 
     以下は、JSONポリシーのテンプレート例です。
 
@@ -266,12 +266,12 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 4. ロールを設定します。 [IAMロールの作成（コンソール）](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html)を参照してください。 「アカウント ID」フィールドに、ステップ 1 で書き留めたTiDB Cloudアカウント ID とTiDB Cloud外部 ID を入力します。
 
-5. ロール ARN を取得します。 [AWSコンソール &gt; IAM &gt; アクセス管理 &gt; ロール](https://console.aws.amazon.com/iamv2/home#/roles)。リージョンに切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
+5. ロール ARN を取得します。 [AWSコンソール > IAM > アクセス管理 > ロール](https://console.aws.amazon.com/iamv2/home#/roles)に移動します。リージョンに切り替えてください。作成したロールをクリックし、ARN をメモします。これは、データをTiDB Cloudにインポートするときに使用します。
 
 6. TiDB Cloudにデータをインポートします。
 
-    - TiDB Cloud Dedicatedクラスターについては、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)。
-    - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)。
+    - TiDB Cloud Dedicatedクラスターについては、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
+    - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスについては、 [TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)を参照してください。
 
 ## 増分データを複製する {#replicate-incremental-data}
 
@@ -283,7 +283,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
 2. TiCDCがTiDB Cloudに接続できるようにします。
 
-    1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲット リソースの名前をクリックして、その概要ページに移動します。
+    1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットリソースの名前をクリックして、その概要ページに移動します。
     2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
     3. TiDB Cloudのプランに応じて、TiCDCがTiDB Cloudに接続できるようにするために、以下のいずれかの操作を行ってください。
 
@@ -295,7 +295,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloudリソースの名前をクリックして、その概要ページに移動します。
     2. 右上隅の**Connect**をクリックしてください。
     3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **Connect With**ドロップダウンリストから**General**を選択します。
-    4. 接続情報から、 TiDB Cloudリソースのホスト IP アドレスとポートを取得できます。詳細については、 [公共回線経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
+    4. 接続情報から、 TiDB Cloudリソースのホスト IP アドレスとポートを取得できます。詳細については、 [パブリック接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 4. 増分レプリケーションタスクを作成して実行します。アップストリームクラスターで、以下を実行します。
 

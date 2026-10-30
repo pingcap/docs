@@ -60,7 +60,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 ### Amazon RDS および Amazon Aurora MySQL の場合 {#for-amazon-rds-and-amazon-aurora-mysql}
 
-Amazon RDS および Amazon Aurora MySQL の場合、新しい変更可能なパラメータ グループ (デフォルトのパラメータ グループではない) を作成し、そのパラメータ グループ内の以下のパラメータを変更してから、インスタンスを再起動して変更を適用する必要があります。
+Amazon RDS および Amazon Aurora MySQL の場合、新しい変更可能なパラメータグループ (デフォルトのパラメータグループではない) を作成し、そのパラメータグループ内の以下のパラメータを変更してから、インスタンスを再起動して変更を適用する必要があります。
 
 - `gtid_mode`
 - `enforce_gtid_consistency`
@@ -148,7 +148,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
     結果が`ON`または`ON_PERMISSIVE`の場合、GTID モードは正常に有効化されています。
 
-## ステップ1：データ移行ページに移動します {#step-1-go-to-the-data-migration-page}
+## ステップ1：データ移行ページに移動する {#step-1-go-to-the-data-migration-page}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -164,7 +164,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 **Create Migration Job**ページで、ソースとターゲットの接続を設定します。
 
-1. ジョブ名を入力してください。ジョブ名は文字で始まり、60文字以内である必要があります。文字（AZ、az）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
+1. ジョブ名を入力してください。ジョブ名は文字で始まり、60文字未満である必要があります。文字（A-Z、a-z）、数字（0～9）、アンダースコア（_）、ハイフン（-）が使用可能です。
 
 2. ソース接続プロファイルを入力してください。
 
@@ -243,7 +243,7 @@ SHOW VARIABLES LIKE 'binlog_row_image';
 
 このオプションを選択すると、移行ジョブは、移行ジョブの開始後にソースデータベースで生成された増分データのみを移行します。
 
-### GTIDを指定してください {#specify-gtid}
+### GTIDを指定する {#specify-gtid}
 
 このオプションを選択すると、ソースデータベースの GTID を指定できます（例: `3E11FA47-71CA-11E1-9E33-C80AA9429562:1-23`）。移行ジョブは、指定された GTID セットを除いたトランザクションを複製し、ソースデータベースの進行中の変更をTiDB Cloudに移行します。
 
