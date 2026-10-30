@@ -85,7 +85,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **コンソールの変更**
 
-- [TiDB Cloudコンソール](https://tidbcloud.com)のナビゲーション レイアウトを最適化して、ユーザーに新しいナビゲーション エクスペリエンスを提供します。
+- [TiDB Cloudコンソール](https://tidbcloud.com)のナビゲーションレイアウトを最適化して、ユーザーに新しいナビゲーションエクスペリエンスを提供します。
 
     新しいレイアウトには次の変更が含まれます。
 
@@ -135,7 +135,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
     PITRは、任意の時点のデータを新しいクラスターに復元する機能をサポートしています。PITRを使用すると、次のことが可能になります。
 
     - 災害復旧における RPO を削減します。
-    - エラー イベント前の時点を復元することで、データ書き込みエラーを解決します。
+    - エラーイベント前の時点を復元することで、データ書き込みエラーを解決します。
     - ビジネスの履歴データを監査します。
 
     PITR 機能を使用するには、TiDB クラスターのバージョンが少なくとも v6.3.0 であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
@@ -253,7 +253,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - [請求詳細ページ](/tidb-cloud/tidb-cloud-billing.md#billing-details)の請求情報を最適化します:
 
-    - **Summary By Service**セクションで、ノード レベルでより詳細な課金情報を提供します。
+    - **Summary By Service**セクションで、ノードレベルでより詳細な課金情報を提供します。
     - **Usage Details**セクションを追加します。使用状況の詳細はCSVファイルとしてダウンロードすることもできます。
 
 ## 2022年9月27日 {#september-27-2022}
@@ -276,7 +276,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- セルフサービス ユーザー向けに[コストクォータベースの請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)を導入します。
+- セルフサービスユーザー向けに[コストクォータベースの請求書](/tidb-cloud/tidb-cloud-billing.md#invoices)を導入します。
 
     TiDB Cloudは、ご利用料金がクォータに達すると請求書を発行します。クォータの引き上げ、または月ごとの請求書の受け取りをご希望の場合は、 [当社の営業担当](https://www.pingcap.com/contact-us/)にご連絡ください。
 
@@ -399,7 +399,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
         - PoCおよびステージング環境
         - 開発環境
 
-- PoC ユーザー向けに[クレジット](/tidb-cloud/tidb-cloud-billing.md#credits) (以前はトレイル ポイントと呼ばれていました) を導入します。
+- PoC ユーザー向けに[クレジット](/tidb-cloud/tidb-cloud-billing.md#credits) (以前はトレイルポイントと呼ばれていました) を導入します。
 
     **Billing**ページの**Credits**タブで、組織のクレジット情報を確認できるようになりました。クレジットはTiDB Cloudの料金のお支払いにご利用いただけます。クレジットの取得については、<a href="mailto:tidbcloud-support@pingcap.com">お問い合わせ</a>ください。
 
@@ -455,7 +455,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - [Developer Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターのストレージサイズを 500 MiB から 1 GiB に増やします。
 
-- ナビゲーション エクスペリエンスを向上させるために、 TiDB Cloudコンソールにパンくずリストを追加します。
+- ナビゲーションエクスペリエンスを向上させるために、 TiDB Cloudコンソールにパンくずリストを追加します。
 
 - TiDB Cloudにデータをインポートするときに複数のフィルタールールを構成することをサポートします。
 
@@ -466,7 +466,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 - [TiKVノードサイズ](/tidb-cloud/size-your-cluster.md#tikv-vcpu-and-ram) : `8 vCPU, 32 GiB`の新しいオプションを提供します。8 vCPU TiKVノードの場合は、 `8 vCPU, 32 GiB`または`8 vCPU, 64 GiB`を選択できます。
 - [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md)ダイアログに提供されるサンプルコードで構文のハイライト表示をサポートし、コードの可読性を向上させました。サンプルコード内で置換が必要なパラメータを簡単に特定できます。
 - [**Data Import Task**](/tidb-cloud/import-sample-data.md)ページでインポートタスクを確認した後、 TiDB Cloud がソースデータにアクセスできるかどうかを自動的に検証することをサポートします。
-- TiDB Cloudコンソールのテーマ カラーを[PingCAPウェブサイト](https://www.pingcap.com/)のテーマ カラーと一致するように変更します。
+- TiDB Cloudコンソールのテーマカラーを[PingCAPウェブサイト](https://www.pingcap.com/)のテーマカラーと一致するように変更します。
 
 ## 2022年7月12日 {#july-12-2022}
 
@@ -484,7 +484,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - Dedicated Tierクラスターに対して TiKV とTiFlashの[ストレージサイズの増加](/tidb-cloud/scale-tidb-cluster.md#change-storage)をサポートします。
 
-- ノードサイズ フィールドにメモリ情報を表示する機能をサポートします。
+- ノードサイズフィールドにメモリ情報を表示する機能をサポートします。
 
 ## 2022年6月28日 {#june-28-2022}
 
@@ -604,7 +604,7 @@ TiDB Cloudが一般提供を開始しました。[サインアップ](https://ti
 
 改善：
 
-- [CSVファイル](/tidb-cloud/import-csv-files.md)または[Apache Parquet ファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートするときにカスタム ファイル名の使用をサポートします。
+- [CSVファイル](/tidb-cloud/import-csv-files.md)または[Apache Parquet ファイル](/tidb-cloud/import-parquet-files.md)をTiDB Cloudにインポートするときにカスタムファイル名の使用をサポートします。
 
 ## 2022年1月11日 {#january-11-2022}
 

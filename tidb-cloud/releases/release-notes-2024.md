@@ -28,7 +28,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - AWS上にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのディザスタリカバリのためのリカバリグループ機能（ベータ版）を導入します。
 
-    この機能を使用すると、TiDB Cloud Dedicatedクラスター間でデータベースを複製できるため、地域的な災害が発生した場合でも迅速なリカバリが可能になります。プロジェクト オーナーの役割をお持ちの場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効にできます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性 SLA を満たし、より積極的な目標復旧時点 (RPO) および目標復旧時間 (RTO) を実現できます。
+    この機能を使用すると、TiDB Cloud Dedicatedクラスター間でデータベースを複製できるため、地域的な災害が発生した場合でも迅速なリカバリが可能になります。プロジェクトオーナーの役割をお持ちの場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効にできます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性 SLA を満たし、より積極的な目標復旧時点 (RPO) および目標復旧時間 (RTO) を実現できます。
 
 ## 2024年11月26日 {#november-26-2024}
 
@@ -82,7 +82,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - 新しいメトリック: Prometheus との統合のために`tidbcloud_changefeed_checkpoint_ts`を追加します。
 
-    このメトリックは、変更フィードのチェックポイント タイムスタンプを追跡し、ダウンストリームに正常に書き込まれた最大の TSO (Timestamp Oracle) を表します。利用可能なメトリクスの詳細については、 [TiDB CloudとPrometheusおよびGrafanaの統合（ベータ版）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)を参照してください。
+    このメトリックは、変更フィードのチェックポイントタイムスタンプを追跡し、ダウンストリームに正常に書き込まれた最大の TSO (Timestamp Oracle) を表します。利用可能なメトリクスの詳細については、 [TiDB CloudとPrometheusおよびGrafanaの統合（ベータ版）](/tidb-cloud/monitor-prometheus-and-grafana-integration.md#metrics-available-to-prometheus)を参照してください。
 
 ## 2024年10月22日 {#october-22-2024}
 
@@ -126,7 +126,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     - [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)では、 `--s3.bucket-uri`フラグが`--s3.uri`に置き換えられます。
     - [`ticloud serverless export create`](/tidb-cloud/ticloud-serverless-export-create.md)では、 `--database`および`--table`フラグが削除されました。代わりに、 `--sql` 、 `--where` 、および`--filter`フラグを使用できます。
-    - [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)では、アノテーション フィールドを更新できなくなりました。
+    - [`ticloud serverless update`](/tidb-cloud/ticloud-serverless-update.md)では、アノテーションフィールドを更新できなくなりました。
 
 ## 2024年9月10日 {#september-10-2024}
 
@@ -134,7 +134,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - TiDB Cloudパートナー向けのリソースおよび請求管理を強化するため、 TiDB CloudパートナーWebコンソールとオープンAPIをリリースしました。
 
-    AWS Marketplace Channel Partner Private Offer (CPPO) を通じてマネージドサービス プロバイダー (MSP) と販売代理店は[TiDB CloudパートナーWebコンソール](https://partner-console.tidbcloud.com/)とオープン API を活用して日常業務を合理化できるようになりました。
+    AWS Marketplace Channel Partner Private Offer (CPPO) を通じてマネージドサービスプロバイダー (MSP) と販売代理店は[TiDB CloudパートナーWebコンソール](https://partner-console.tidbcloud.com/)とオープン API を活用して日常業務を合理化できるようになりました。
 
     詳細については、 [TiDB CloudパートナーWebコンソール](/tidb-cloud/tidb-cloud-partners.md)を参照してください。
 
@@ -360,7 +360,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
-- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター向けに、**無料プラン**と**スケーラブルプラン**の 2つのサービス プランを導入します。
+- [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスター向けに、**無料プラン**と**スケーラブルプラン**の 2つのサービスプランを導入します。
 
     TiDB Cloud Serverlessは、多様なユーザーニーズに対応するため、無料プランと拡張可能なサービスプランを提供しています。これからサービスを開始する場合でも、アプリケーションの需要増加に合わせて規模を拡大する場合でも、これらのプランは必要な柔軟性と機能を提供します。
 
@@ -449,7 +449,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - 企業の認証プロセスを効率化するために、 [Cloud Organization SSO](https://tidbcloud.com/org-settings/authentication)をサポートします。
 
-    この機能を使用すると、 [Security Assertion Markup Language（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)または[OpenID Connect (OIDC)](https://openid.net/developers/how-connect-works/)を使用して、 TiDB Cloud を任意のアイデンティティ プロバイダー (IdP) とシームレスに統合できます。
+    この機能を使用すると、 [Security Assertion Markup Language（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)または[OpenID Connect (OIDC)](https://openid.net/developers/how-connect-works/)を使用して、 TiDB Cloud を任意のアイデンティティプロバイダー (IdP) とシームレスに統合できます。
 
     詳細については、 [組織のSSO認証](/tidb-cloud/tidb-cloud-org-sso-authentication.md)を参照してください。
 
