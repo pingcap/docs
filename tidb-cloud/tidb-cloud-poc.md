@@ -74,7 +74,7 @@ PoC 用の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-d
     >
     > - クラスター作成ページの画面上の指示に従って、クレジットカードを追加します。
     > - 電信送金で支払う場合は、 TiDB Cloudサポートチームにお問い合わせください。
-    > - クラウド マーケットプレイス (AWS、Azure、または Google Cloud) を通じてTiDB Cloudにサインアップし、クラウドプロバイダー アカウントを使用して支払います。
+    > - クラウドマーケットプレイス (AWS、Azure、または Google Cloud) を通じてTiDB Cloudにサインアップし、クラウドプロバイダーアカウントを使用して支払います。
     >
     > PoC クレジットは、PoC 期間中に発生した対象費用を相殺するために自動的に使用されます。
 
@@ -111,7 +111,7 @@ TiDB CloudはMySQL 8.0との互換性が非常に高くなっています。MySQ
 
 - スキーマ設定に非効率性がないか確認します。
 - 不要なインデックスを削除します。
-- 効果的なパーティショニングのためにパーティショニング ポリシーを計画します。
+- 効果的なパーティショニングのためにパーティショニングポリシーを計画します。
 - タイムスタンプ上のインデックスなど、右側のインデックスの増加によって発生する[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を回避します。
 - [SHARD_ROW_ID_BITS](https://docs.pingcap.com/tidb/stable/shard-row-id-bits)と[AUTO_RANDOM](https://docs.pingcap.com/tidb/stable/auto-random)を使って[ホットスポットの問題](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues#identify-hotspot-issues)を回避します。
 
@@ -190,7 +190,7 @@ TiDB Cloudにはさまざまな形式のデータをインポートできます�
 
 実際のワークロードを使用してTiDB Cloudをテストし、テスト結果を取得することで、PoCサイクル全体が完了しました。これらの結果は、TiDB Cloudが期待どおりに機能しているかどうかを判断するのに役立ちます。同時に、 TiDB Cloudの活用に関するベストプラクティスも蓄積されました。
 
-TiDB Cloud をより大規模に試して、 TiDB Cloudが提供する他のノードストレージサイズを使用してデプロイするなど、新しい一連のデプロイとテストを行う場合は、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを作成してTiDB Cloudへのフル アクセスを取得してください。
+TiDB Cloud をより大規模に試して、 TiDB Cloudが提供する他のノードストレージサイズを使用してデプロイするなど、新しい一連のデプロイとテストを行う場合は、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターを作成してTiDB Cloudへのフルアクセスを取得してください。
 
 クレジットがなくなり、PoC を継続したい場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)に連絡してご相談ください。
 

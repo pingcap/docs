@@ -158,7 +158,7 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 }
 ```
 
-このサンプル ポリシーでは、次の点に注意してください。
+このサンプルポリシーでは、次の点に注意してください。
 
 - `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`の`"arn:aws:s3:::tidb-cloud-source-data"`はサンプルの S3 バケット ARN で、 `/mydata/*`はデータストレージ用に S3 バケットのルートレベルでカスタマイズできるディレクトリです。ディレクトリの末尾は`/*` （例： `"<Your S3 bucket ARN>/<Directory of your source data>/*"` ）でなければなりません。 `/*`が追加されていない場合、 `AccessDenied`エラーが発生します。
 

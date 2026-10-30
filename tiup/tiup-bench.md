@@ -1,6 +1,6 @@
 ---
 title: Stress Test TiDB Using TiUP Bench Component
-summary: TiUPを使用して、TPC-C、TPC-H、CH、RawSQL、および YCSB ワークロードで TiDB のストレス テストを実行する方法を学習します。
+summary: TiUPを使用して、TPC-C、TPC-H、CH、RawSQL、および YCSB ワークロードで TiDB のストレステストを実行する方法を学習します。
 ---
 
 # TiUP Benchコンポーネントを使用したTiDBのストレステスト {#stress-test-tidb-using-tiup-bench-component}
@@ -168,7 +168,7 @@ Flags:
 
 ## TiUPを使用してYCSBテストを実行する {#run-ycsb-test-using-tiup}
 
-YCSB を介して TiDB と TiKV の両方をストレス テストできます。
+YCSB を介して TiDB と TiKV の両方をストレステストできます。
 
 ### ストレステスト TiDB {#stress-test-tidb}
 

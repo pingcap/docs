@@ -18,13 +18,13 @@ category: quick start
 
 1. TiDB Cloudアカウントをお持ちでない場合は、 [ここ](https://tidbcloud.com/free-trial)をクリックしてサインアップしてください。
 
-    メールアドレスとパスワードでサインアップして、 TiDB Cloudを使用してパスワードを管理するか、Google、GitHub、または Microsoft アカウントでサインインして、 TiDB Cloudへのシングル サインオン (SSO) を選択することもできます。
+    メールアドレスとパスワードでサインアップして、 TiDB Cloudを使用してパスワードを管理するか、Google、GitHub、または Microsoft アカウントでサインインして、 TiDB Cloudへのシングルサインオン (SSO) を選択することもできます。
 
 2. TiDB Cloudアカウントに[ログイン](https://tidbcloud.com/)します。
 
     デフォルトでは[**My TiDB**](https://tidbcloud.com/tidbs)ページが表示されます。
 
-3. 新規サインアップ ユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
+3. 新規サインアップユーザーの場合、 TiDB Cloud は`Cluster0`という名前のデフォルトのTiDB Cloud Starter クラスターを自動的に作成します。
 
     - このデフォルトクラスターでTiDB Cloud機能をすぐに試すには、 [ステップ2: SQL エディターを試す](#step-2-try-sql-editor)に進みます。
     - 独自に新しいTiDB Cloud Starter クラスターを作成するには、次の手順に従います。
