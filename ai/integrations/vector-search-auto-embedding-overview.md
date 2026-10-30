@@ -139,13 +139,27 @@ Internally, [`VEC_EMBED_COSINE_DISTANCE()`](#vec_embed_cosine_distance) and [`VE
 
 ### `EMBED_TEXT()`
 
-Converts text to vector embeddings:
+Converts text to a vector embedding and returns a `VECTOR` value. This function is available only in Starter deployment mode.
 
 ```sql
-EMBED_TEXT("model_name", text_content[, additional_json_options])
+EMBED_TEXT("provider/model", text_content[, additional_json_options])
 ```
 
-Use this function in `GENERATED ALWAYS AS` clauses to automatically generate embeddings when inserting or updating text data.
+The parameters are as follows:
+
+- `provider/model`: the embedding model name in the `<provider>/<model>` format. Supported provider prefixes are `tidbcloud_free`, `jina_ai`, `openai`, `cohere`, `huggingface`, `nvidia_nim`, and `gemini`. The `tidbcloud_free` provider is available when the TiDB Cloud hosted embedding service is enabled.
+- `text_content`: the text to convert into an embedding.
+- `additional_json_options`: an optional JSON object passed to the embedding provider. An empty string or `NULL` means that no additional options are provided. For supported options, see the documentation of the corresponding provider in [Available text embedding models](#available-text-embedding-models).
+
+You can call `EMBED_TEXT()` directly in a query or use it as the direct expression of a stored generated column. When you use it in a generated column, the following restrictions apply:
+
+- The generated column must be `STORED`. `VIRTUAL` generated columns are not supported.
+- `EMBED_TEXT()` must be the direct generated-column expression and cannot be nested in another expression.
+- The model name and additional options must be string constants.
+- You cannot use `ALTER TABLE ... ADD COLUMN` to add a generated column that uses `EMBED_TEXT()`.
+- Another generated column cannot depend on a generated column that uses `EMBED_TEXT()`.
+
+For the complete SQL function reference, see [`EMBED_TEXT()`](/ai/reference/vector-search-functions-and-operators.md#embed_text).
 
 ### `VEC_EMBED_COSINE_DISTANCE()`
 
