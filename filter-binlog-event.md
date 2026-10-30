@@ -103,15 +103,26 @@ filters:
     action: Do
 ```
 
-### Filter out SQL statements not supported by TiDB
+### Filter out SQL statements that TiDB or the TiDB parser does not support
 
-To filter out SQL statements not supported by TiDB, configure a `filter-procedure-rule`, as shown below:
+To filter out `PROCEDURE` statements that TiDB does not support, configure a `filter-procedure-rule`, as shown below:
 
 ```
 filters:
   filter-procedure-rule:
+    schema-pattern: "test_*"
+    table-pattern: "t_*"
+    sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
+    action: Ignore
+```
+
+If you need to filter out `PARTITION` statements that the TiDB parser does not support in some versions, configure a global filtering rule, as shown below:
+
+```
+filters:
+  filter-partition-rule:
     schema-pattern: "*"
-    sql-pattern: [".*\\s+DROP\\s+PROCEDURE", ".*\\s+CREATE\\s+PROCEDURE", "ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
+    sql-pattern: ["ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
     action: Ignore
 ```
 
