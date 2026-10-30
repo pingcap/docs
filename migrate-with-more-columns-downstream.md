@@ -79,7 +79,7 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
     |Parameter |Description|
     |:-- |:---|
     |`--master-addr` |Specifies `${advertise-addr}` of any DM-master node in the cluster where dmctl is to be connected. `${advertise-addr}` indicates the address that DM-master advertises to the outside world.|
-    |`binlog-schema set`| Manually set the schema information.|
+    |`binlog-schema update`| Manually updates the schema information.|
     |`-s` | Specifies the source. `${source-id}` indicates the source ID of MySQL data.|
     |`${task-name}`| Specifies the name of the migration task defined in the `task.yaml` configuration file of the data migration task.|
     |`${database-name}`| Specifies the database. `${database-name}` indicates the name of the upstream database. |
@@ -91,7 +91,7 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
     {{< copyable "shell-regular" >}}
 
     ```
-    tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test -d log -t message log.message.sql
+    tiup dmctl --master-addr 172.16.10.71:8261 binlog-schema update -s mysql-01 task-test log messages log.messages.sql
     ```
 
 3. Use the `resume-task` command to resume the migration task in the Paused state.
