@@ -3,15 +3,15 @@ title: Configure TiDB Cloud Starter or Essential Firewall Rules for Public Endpo
 summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスへのパブリックアクセスを安全に設定および管理するためのファイアウォールルールの構成方法を学びましょう。
 ---
 
-# パブリックエンドポイント向けにTiDB Cloud StarterまたはEssential Firewallルールを設定する {#configure-tidb-cloud-starter-or-essential-firewall-rules-for-public-endpoints}
+# パブリックエンドポイント向けにTiDB Cloud StarterまたはEssentialファイアウォールルールを設定する {#configure-tidb-cloud-starter-or-essential-firewall-rules-for-public-endpoints}
 
 このドキュメントでは、 TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスのパブリック接続オプションについて説明します。インターネット経由でアクセス可能なTiDB Cloud StarterまたはEssentialインスタンスを安全に管理するための重要な概念を習得できます。
 
 > **Note:**
 >
-> このドキュメントは**TiDB Cloud Starter**および**TiDB Cloud Essential**に適用されます。 **TiDB Cloud Dedicated**の IP アクセス リストを設定する手順については、 [TiDB Cloud Dedicatedの IP アクセス リストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
+> このドキュメントは**TiDB Cloud Starter**および**TiDB Cloud Essential**に適用されます。 **TiDB Cloud Dedicated**の IP アクセスリストを設定する手順については、 [TiDB Cloud Dedicatedの IP アクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
-## 公開エンドポイント {#public-endpoints}
+## パブリックエンドポイント {#public-endpoints}
 
 TiDB Cloud StarterまたはEssentialインスタンスでパブリックアクセスを設定すると、パブリックエンドポイント経由でインスタンスにアクセスできるようになります。つまり、 TiDB Cloud StarterまたはEssentialインスタンスはインターネット経由でアクセス可能になります。パブリックエンドポイントは、公開されている DNS アドレスです。「承認済みネットワーク」とは、TiDB Cloud StarterまたはEssentialインスタンスへのアクセスを許可する IP アドレスの範囲を指します。これらのアクセス許可は、**ファイアウォールルール**によって適用されます。
 
@@ -31,7 +31,7 @@ IPファイアウォールルールは最大200個まで作成できます。
 
 ### AWSへのアクセスを許可する {#allow-aws-access}
 
-TiDB Cloud Starterインスタンスが AWS でホストされている場合は、公式[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参照して、**すべての AWS IP アドレス**からのアクセスを有効にすることができます。
+TiDB Cloud Starterインスタンスが AWS でホストされている場合は、公式[AWS IPアドレスリスト](https://docs.aws.amazon.com/vpc/latest/userguide/aws-ip-ranges.html)を参照して、**すべての AWS IP アドレス**からのアクセスを有効にできます。
 
 TiDB Cloud はこのリストを定期的に更新し、予約済みの IP アドレス**169.254.65.87**を使用してすべての AWS IP アドレスを表します。
 

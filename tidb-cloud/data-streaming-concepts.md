@@ -1,17 +1,17 @@
 ---
 title: Data Streaming
-summary: TiDB Cloudのデータ ストリーミングの概念について学習します。
+summary: TiDB Cloudのデータストリーミングの概念について学習します。
 ---
 
 # データストリーミング {#data-streaming}
 
 TiDB Cloud を使用すると、TiDB クラスタからのデータ変更を Kafka、MySQL、オブジェクトストレージなどの他のシステムにストリーミングできます。
 
-現在、 TiDB Cloud は、Apache Kafka、MySQL、 TiDB Cloud、クラウドストレージへのストリーミング データをサポートしています。
+現在、 TiDB Cloud は、Apache Kafka、MySQL、 TiDB Cloud、クラウドストレージへのストリーミングデータをサポートしています。
 
 ## チェンジフィード {#changefeed}
 
-TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータサービスにデータの変更を複製するのに役立つ継続的なデータ ストリームです。
+TiDB Cloudチェンジフィードは、 TiDB Cloudから他のデータサービスにデータの変更を複製するのに役立つ継続的なデータストリームです。
 
 TiDB Cloudコンソールの**Changefeed**ページでは、変更フィードを作成したり、既存の変更フィードの一覧を表示したり、既存の変更フィードを操作したり (変更フィードのスケーリング、一時停止、再開、編集、削除など) できます。
 

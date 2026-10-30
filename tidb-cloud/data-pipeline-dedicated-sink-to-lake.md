@@ -126,7 +126,7 @@ TiDB Cloud Lake では、S3 バケットからデータをロードするため�
 
 ### 1. データソースを作成する {#1-create-a-data-source}
 
-1. [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で、**Data > Data Sources > Create** に移動します。
+1. [TiDB Cloud Lake コンソール](https://lake.tidbcloud.com/) で、**Data > Data Sources > Create** に移動します。
 2. **Service: TiDB** を選択します。
 3. アクセスキー認証を選択し、以下を入力します。
     - **Access Key ID** と **Secret Access Key**: [ステップ 1. S3 バケットへのアクセスを準備する](#step-1-prepare-s3-bucket-access) の認証情報。
@@ -136,7 +136,7 @@ TiDB Cloud Lake では、S3 バケットからデータをロードするため�
 
 ### 2. 統合を作成する {#2-create-an-integration}
 
-1. [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で、**Data > Integration > Create** に移動します。
+1. [TiDB Cloud Lake コンソール](https://lake.tidbcloud.com/) で、**Data > Integration > Create** に移動します。
 2. 次のフィールドを入力します。
     - **Data Source**: 上で作成したデータソースを選択します。
     - **Name**: この統合タスクの名前。

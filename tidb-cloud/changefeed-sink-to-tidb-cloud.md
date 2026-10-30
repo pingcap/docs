@@ -36,7 +36,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 変更フィードを作成する前に、ソースのTiDB Cloud Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにロードする必要があります。
 
-1. [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を以下の2つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
+1. [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を以下の2つの操作の合計時間よりも長く設定することで、その期間中の履歴データが TiDB によってガベージコレクションされないようにします。
 
     - 既存データのエクスポートとインポートにかかる時間
     - **Sink to TiDB Cloud**を作成する時間
@@ -90,8 +90,8 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
         - **Ignore event**：指定されたイベントタイプを除外します。
         - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop`は`DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
         - **Ignore insert value expression**: 特定の条件を満たす`INSERT`文を除外します。たとえば、`id >= 100`は、`id`が 100 以上である`INSERT`文を除外します。
-        - **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
-        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
+        - **Ignore update new value expression**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
+        - **Ignore update old value expression**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
         - **Ignore delete value expression**: 指定された条件を満たす`DELETE`文を除外します。たとえば、`name = 'john'`は`name`が`'john'`である`DELETE`文を除外します。
 
 7. **Start Replication Position**領域に、Dumplingでエクスポートしたメタデータファイルから取得したTSOを入力します。
@@ -111,7 +111,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
     変更フィード名をクリックすると、チェックポイント、レプリケーションレイテンシー、その他のメトリックなど、変更フィードに関する詳細情報が表示されます。
 
-11. シンクが作成された後、 [`tidb_gc_life_time`](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を元の値（デフォルト値は`10m` ）に戻します。
+11. シンクが作成された後、 [tidb_gc_life_time](https://docs.pingcap.com/tidb/stable/system-variables#tidb_gc_life_time-new-in-v50)を元の値（デフォルト値は`10m` ）に戻します。
 
     ```sql
     SET GLOBAL tidb_gc_life_time = '10m';

@@ -174,7 +174,7 @@ MySQL サービスがパブリックインターネットアクセスを持た�
 
 9. **Next** をクリックして、変更フィードの仕様を設定します。
 
-    - **Changefeed Specification** 領域で、変更フィードで使用する <CustomContent plan="dedicated">Replication Capacity Units (RCUs) の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent> を設定します。
+    - **Changefeed Specification** 領域で、変更フィードで使用する <CustomContent plan="dedicated">レプリケーションキャパシティユニット（RCU）の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent> を設定します。
     - **Changefeed Name** 領域で、変更フィードの名前を指定します。
 
 10. **Next** をクリックして、変更フィードの設定を確認します。

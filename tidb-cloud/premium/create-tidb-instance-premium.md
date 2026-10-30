@@ -57,7 +57,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
     > - **Limited Mode**では、RCUの最大値は100刻みで設定する必要があります。
     > - **Limited Mode**では、お客様には**Minimum Billing RCU**と呼ばれる最低限のRCU数に基づいて課金されます。この値は、設定された最大RCUの25%と5,000RCUのうち大きい方です。最低請求RCUは、ベースラインキャパシティを維持するために専用リソースが確保されることを保証します。実際の使用量がこれより少ない場合でも、この最低額が課金されます。
 
-6. TiDB Cloud Premiumインスタンスでは、リージョンごとの高可用性のみが有効になっており、設定変更はできません。詳細については、[高可用性](/tidb-cloud/serverless-high-availability.md)を参照してください。
+6. TiDB Cloud Premiumインスタンスでは、リージョン高可用性のみが有効になっており、設定変更はできません。詳細については、[高可用性](/tidb-cloud/serverless-high-availability.md)を参照してください。
 
 7. **Create**をクリックします。
 

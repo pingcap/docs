@@ -3,7 +3,7 @@ title: Delete a TiDB Cloud Resource
 summary: TiDB Cloudリソースを削除する方法を学びましょう。
 ---
 
-# TiDB Cloudリソースを削除します {#delete-a-tidb-cloud-resource}
+# TiDB Cloudリソースを削除する {#delete-a-tidb-cloud-resource}
 
 このドキュメントでは、以下のTiDB Cloudリソースを削除する方法について説明します。
 

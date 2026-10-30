@@ -3,7 +3,7 @@ title: TiDB Cloud Branching (PREVIEW) Overview
 summary: TiDB Cloudのブランチの概念を学びましょう。
 ---
 
-# TiDB Cloud Branching（PREVIEW）の概要 {#tidb-cloud-branching-beta-overview}
+# TiDB Cloud Branching（PREVIEW）の概要 {#tidb-cloud-branching-preview-overview}
 
 TiDB Cloudでは、TiDB Cloud Starterインスタンスのブランチを作成できます。TiDB Cloud Starterインスタンスのブランチは、元のTiDB Cloud Starterインスタンスから分岐したデータコピーを含む独立したインスタンスです。これにより、隔離された環境が提供され、元のTiDB Cloud Starterインスタンスへの影響を気にすることなく、自由に実験を行うことができます。
 
@@ -43,18 +43,18 @@ TiDB Cloudは、高速かつシームレスなブランチ作成を実現する�
 
     > **Note:**
     >
-    > エージェント プラットフォームや多数のブランチを必要とするその他のサービスを構築している、有料で利用している組織向けに、 TiDB Cloud は5つを超えるブランチを作成できる**Instance Capacity Plan**を提供します。詳細については、 [Instance Capacity Plan](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan)を参照してください。
+    > エージェントプラットフォームや多数のブランチを必要とするその他のサービスを構築している、有料で利用している組織向けに、 TiDB Cloud は5つを超えるブランチを作成できる**Instance Capacity Plan**を提供します。詳細については、 [Instance Capacity Plan](/tidb-cloud/select-cluster-tier.md#instance-capacity-plan)を参照してください。
 
-- 無料のTiDB Cloud Starterインスタンスの各ブランチには、10 GiB のストレージが許可されます。利用制限が 0 より大きいTiDB Cloud Starterインスタンスの各ブランチには、100 GiB のストレージが許可されます。ストレージ容量が上限に達すると、ストレージを減らすまで、このブランチでの読み取りおよび書き込み操作が制限されます。
+- 無料のTiDB Cloud Starterインスタンスの各ブランチには、10 GiB のストレージが許可されます。支出限度額が 0 より大きいTiDB Cloud Starterインスタンスの各ブランチには、100 GiB のストレージが許可されます。ストレージ容量が上限に達すると、ストレージを減らすまで、このブランチでの読み取りおよび書き込み操作が制限されます。
 
-- ブランチは、短期的な機能開発と機能テストを目的としています。ブランチには自動スケーリング機能がないため、パフォーマンス テストには適していません。
+- ブランチは、短期的な機能開発と機能テストを目的としています。ブランチには自動スケーリング機能がないため、パフォーマンステストには適していません。
 
 - TiDB Cloud StarterインスタンスにTiFlashレプリカを持つテーブルがある場合、 TiFlashがレプリカデータを再構築する必要があるため、新しいブランチを作成した後、これらのレプリカは一時的に新しいブランチでは利用できなくなります。
 
 - 特定の時点から[ブランチを作成する](/tidb-cloud/branch-manage.md#create-a-branch)場合:
 
     - 無料のTiDB Cloud Starterインスタンスの場合、過去24時間以内の任意の時点を選択できます。
-    - TiDB Cloud Starter （利用限度額が0より大きい場合）インスタンスの場合、過去14日間の任意の時点を選択できます。
+    - TiDB Cloud Starter （支出限度額が0より大きい場合）インスタンスの場合、過去14日間の任意の時点を選択できます。
 
 さらに多くのクォータが必要な場合は、 [TiDB Cloudサポートにお問い合わせください](/tidb-cloud/tidb-cloud-support.md)。
 

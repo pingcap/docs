@@ -5,7 +5,7 @@ summary: エクスポート、changefeed、および TiDB Cloud Lake 統合を�
 
 # TiDB Cloud Lake へのシンク
 
-このガイドでは、TiDB Cloud Essential インスタンスから TiDB Cloud Lake へのデータパイプラインをエンドツーエンドで設定する方法を説明します。Amazon S3 に完全スナップショットをエクスポートし、同じ S3 ロケーションに増分変更を継続的に書き込むための [変更フィード](/tidb-cloud/changefeed-overview.md) を作成し、スナップショットデータと増分データの両方をロード (load) するように TiDB Cloud Lake を設定します。
+このガイドでは、TiDB Cloud Essential インスタンスから TiDB Cloud Lake へのデータパイプラインをエンドツーエンドで設定する方法を説明します。Amazon S3 に完全スナップショットをエクスポートし、同じ S3 ロケーションに増分変更を継続的に書き込むための [変更フィード](/tidb-cloud/changefeed-overview.md) を作成し、スナップショットデータと増分データの両方をロードするように TiDB Cloud Lake を設定します。
 
 ## 制限事項 {#restrictions}
 
@@ -62,7 +62,7 @@ summary: エクスポート、changefeed、および TiDB Cloud Lake 統合を�
 
     レスポンスから `tidbCloudAccountId` と `tidbCloudAccountExternalId` を記録します。
 
-- **TiDB Cloud Lake**: [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で **Data > Data Sources > Create** に移動します。**Basic Info** セクションで **Service: TiDB** を選択し、**Trust Cloud Platform roles** の下に表示される以下の値を記録します。
+- **TiDB Cloud Lake**: [TiDB Cloud Lake コンソール](https://lake.tidbcloud.com/) で **Data > Data Sources > Create** に移動します。**Basic Info** セクションで **Service: TiDB** を選択し、**Trust Cloud Platform roles** の下に表示される以下の値を記録します。
     - Lake Setup & Validation Role ARN
     - Lake Data Loading Role ARN
     - Lake External ID
@@ -241,11 +241,11 @@ TiDB Cloud コンソールでは、TiDB Cloud Essential インスタンス用の
 
 ## ステップ 4. TiDB Cloud Lake を設定する {#step-4-configure-tidb-cloud-lake}
 
-TiDB Cloud Lake では、S3 バケットからデータをロード (load) するために、データソースと統合を作成する必要があります。
+TiDB Cloud Lake では、S3 バケットからデータをロードするために、データソースと統合を作成する必要があります。
 
 ### 1. データソースを作成する {#1-create-a-data-source}
 
-1. [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で **Data > Data Sources > Create** に移動します。
+1. [TiDB Cloud Lake コンソール](https://lake.tidbcloud.com/) で **Data > Data Sources > Create** に移動します。
 2. **Service: TiDB** を選択します。
 3. **Role ARN** または **Access Key** 認証を選択し、以下を入力します。
     - **Role ARN**: [1. Export CloudFormation でロールを作成する](#1-create-the-role-with-export-cloudformation) の ARN、または [方法 2: Access Key を使用する](#method-2-use-an-access-key) の **Access Key ID** / **Secret Access Key**。
@@ -256,7 +256,7 @@ TiDB Cloud Lake では、S3 バケットからデータをロード (load) す�
 
 ### 2. 統合を作成する {#2-create-an-integration}
 
-1. [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で **Data > Integration > Create** に移動します。
+1. [TiDB Cloud Lake コンソール](https://lake.tidbcloud.com/) で **Data > Integration > Create** に移動します。
 2. 以下のフィールドを入力します。
     - **Data Source**: 上で作成したデータソースを選択します。
     - **Name**: この統合タスクの名前。

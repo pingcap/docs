@@ -1,6 +1,6 @@
 ---
 title: Sink to Apache Kafka
-summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィードの構成が含まれます。
+summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認可のための権限の追加、およびチェンジフィードの構成が含まれます。
 ---
 
 # Apache Kafkaへのシンク {#sink-to-apache-kafka}
@@ -28,7 +28,7 @@ summary: このドキュメントでは、TiDB Cloud Essentialから Apache Kafk
 Apache Kafkaにデータをストリーミングするためのチェンジフィードを作成する前に、以下の前提条件を満たす必要があります。
 
 - ネットワーク接続を設定する
-- Kafka ACL認証の権限を追加する
+- Kafka ACL認可の権限を追加する
 
 ### ネットワーク {#network}
 
@@ -46,10 +46,10 @@ TiDB Cloud Essentialは現在、セルフホスト型Kafka、Confluent Cloud Ded
 
 Kafkaのデプロイメントとクラウドプロバイダーに基づいてプライベートリンク接続を設定するには、以下のガイドを参照してください。
 
-- [プライベートリンク接続を介してAWS上のConfluent Cloudに接続します](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
-- [プライベートリンク接続を介してAWSセルフホスト型Kafkaに接続します](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
+- [プライベートリンク接続を介してAWS上のConfluent Cloudに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-confluent.md)
+- [プライベートリンク接続を介してAWSセルフホストKafkaに接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-aws.md)
 - [プライベートリンク接続を介してAlibaba Cloudセルフホスト型Kafkaに接続する](/tidb-cloud/serverless-private-link-connection-to-self-hosted-kafka-in-alicloud.md)
-- [プライベートリンク接続を介してAmazon MSK Provisionedに接続します](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
+- [プライベートリンク接続経由でAmazon MSK Provisionedに接続する](/tidb-cloud/serverless-private-link-connection-to-amazon-msk.md)
 
 </div>
 
@@ -62,12 +62,12 @@ Apache Kafkaサービスへのパブリックアクセスを提供する場合�
 </div>
 </SimpleTab>
 
-### Kafka ACL認証 {#kafka-acl-authorization}
+### Kafka ACL認可 {#kafka-acl-authorization}
 
 TiDB Cloud Essential の変更フィードが Apache Kafka にデータをストリーミングし、Kafka トピックを自動的に作成できるようにするには、Kafka に次の権限が追加されていることを確認してください。
 
-- Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
-- Kafka のクラスタリソース タイプに`DescribeConfigs`権限が追加されます。
+- Kafka のトピックリソースタイプに`Create`および`Write`権限が追加されます。
+- Kafka のクラスタリソースタイプに`DescribeConfigs`権限が追加されます。
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については、Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/security/authorization/acls/manage-acls.html#add-acls)を参照してください。
 
@@ -126,15 +126,15 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 </div>
 </SimpleTab>
 
-## ステップ3．チェンジフィードを設定する {#step-3-set-the-changefeed}
+## ステップ3. チェンジフィードを設定する {#step-3-set-the-changefeed}
 
 1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/table-filter/#syntax)を参照してください。
 
     - **Replication Scope**：有効なキーを持つテーブルのみをレプリケートするか、選択したすべてのテーブルをレプリケートするかを選択できます。
     - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加して**Apply**をクリックすると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、**Filter results**の下にルールに一致するテーブルのみを表示します。
     - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    - **有効なキーで結果をフィルタリングする**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    - **有効なキーのない結果をフィルタリングする**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
+    - **Filter results with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
+    - **Filter results without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
 
 2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
@@ -170,39 +170,39 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
     配信モードは、変更フィードがKafkaトピックを作成する方法を制御します。テーブルごと、データベースごと、またはすべての変更ログに対して1つのトピックを作成するかを選択できます。
 
-    - **テーブルごとに変更ログをKafkaトピックに配信する**
+    - **Distribute changelogs by table to Kafka Topics**
 
         変更フィードでテーブルごとに専用のKafkaトピックを作成する場合は、このモードを選択します。そうすると、テーブルのすべてのKafkaメッセージが専用のKafkaトピックに送信されます。トピックのプレフィックス、データベース名とテーブル名の間の区切り文字、およびサフィックスを設定することで、テーブルのトピック名をカスタマイズできます。たとえば、区切り文字を`_`に設定すると、トピック名は`<Prefix><DatabaseName>_<TableName><Suffix>`の形式になります。
 
         スキーマ作成イベントなど、行以外のイベントの変更ログについては、 **Default Topic Name**フィールドにトピック名を指定できます。変更フィードは、指定されたトピックに基づいて、これらの変更ログを収集するためのトピックを作成します。
 
-    - **データベースごとに変更ログをKafkaトピックに配信する**
+    - **Distribute changelogs by database to Kafka Topics**
 
         変更フィードでデータベースごとに専用のKafkaトピックを作成する場合は、このモードを選択してください。そうすると、データベースのすべてのKafkaメッセージが専用のKafkaトピックに送信されます。トピックのプレフィックスとサフィックスを設定することで、データベースのトピック名をカスタマイズできます。
 
         Resolved Tsイベントなど、行以外のイベントの変更ログについては、 **Default Topic Name**フィールドにトピック名を指定できます。変更フィードは、指定されたトピックに基づいて、これらの変更ログを収集するためのトピックを作成します。
 
-    - **すべての変更ログを、指定された1つのKafkaトピックに送信する**
+    - **Send all changelogs to one specified Kafka Topic**
 
         変更フィードで全ての変更ログに対して1つのKafkaトピックを作成する場合は、このモードを選択してください。そうすると、変更フィード内のすべてのKafkaメッセージが1つのKafkaトピックに送信されます。トピック名は**Topic Name**フィールドで指定できます。
 
 8. **Partition Distribution**領域では、Kafkaメッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャ**を定義することもできます。TiDB Cloudは、次の4種類のディスパッチャを提供しています。
 
-    - **主キーまたはインデックス値に基づいて変更ログをKafkaパーティションに分散します。**
+    - **Distribute changelogs by primary key or index value to Kafka partition**
 
         変更フィードでテーブルのKafkaメッセージを異なるパーティションに送信する場合は、この分散方法を選択してください。行の変更ログの主キーまたはインデックス値によって、変更ログの送信先パーティションが決まります。主キーを使用する場合は、 **Index Name**フィールドを空のままにしてください。この分散方法は、パーティションのバランスを改善し、行レベルの順序性を確保します。
 
-    - **変更ログをテーブルごとにKafkaパーティションに分散する**
+    - **Distribute changelogs by table to Kafka partition**
 
         変更フィードによってテーブルのKafkaメッセージを1つのKafkaパーティションに送信する場合は、この分散方法を選択してください。行の変更ログのテーブル名によって、変更ログが送信されるパーティションが決まります。この分散方法はテーブルの順序性を保証しますが、パーティションのバランスが崩れる可能性があります。
 
-    - **変更ログをタイムスタンプに基づいてKafkaパーティションに分散する**
+    - **Distribute changelogs by timestamp to Kafka partition**
 
         変更フィードがKafkaメッセージをランダムに異なるKafkaパーティションに送信するようにするには、この分散方法を選択してください。行の変更ログの commitTs によって、変更ログが送信されるパーティションが決まります。この分散方法は、パーティションのバランスを改善し、各パーティションの順序性を確保します。ただし、データ項目の複数の変更が異なるパーティションに送信され、異なるコンシューマーのコンシューマー処理の進行状況が異なる場合があり、データの不整合が発生する可能性があります。そのため、コンシューマーは、複数のパーティションからのデータを消費する前に commitTs でソートする必要があります。
 
-    - **変更ログを列の値に基づいてKafkaパーティションに分散する**
+    - **Distribute changelogs by column value to Kafka partition**
 
-        テーブルのKafkaメッセージを異なるパーティションに送信するように変更フィードを設定したい場合は、この配信方法を選択してください。行の変更ログで指定された列の値によって、変更ログの送信先パーティションが決まります。この配信方法は、各パーティション内の順序性を保証し、同じ列値を持つ変更ログが同じパーティションに送信されることを保証します。
+        テーブルのKafkaメッセージを異なるパーティションに送信するように変更フィードを設定したい場合は、この分散方法を選択してください。行の変更ログで指定された列の値によって、変更ログの送信先パーティションが決まります。この分散方法は、各パーティション内の順序性を保証し、同じ列値を持つ変更ログが同じパーティションに送信されることを保証します。
 
 9. **Topic Configuration**領域で、以下の数値を設定してください。changefeedは、これらの数値に基づいてKafkaトピックを自動的に作成します。
 
@@ -213,7 +213,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 11. **Next**をクリックしてください。
 
-## ステップ4．変更フィードを確認して作成する {#step-4-review-and-create-your-changefeed}
+## ステップ4. 変更フィードを確認して作成する {#step-4-review-and-create-your-changefeed}
 
 1. **Changefeed Name**欄に、変更フィードの名前を指定します。
 2. 設定した変更フィードの設定をすべて確認してください。必要に応じて**Previous**をクリックして変更してください。

@@ -153,7 +153,7 @@ Data Serviceの利用を開始するには、独自のデータアプリを作�
 
     ステートメントを実行すると、ページ下部の**Result**タブにクエリ結果がすぐに表示されます。
 
-### ステップ3．エンドポイントのテスト（オプション） {#step-3-test-the-endpoint-optional}
+### ステップ3. エンドポイントのテスト（オプション） {#step-3-test-the-endpoint-optional}
 
 エンドポイントを設定した後、デプロイ前にエンドポイントをテストして、期待どおりに動作するかどうかを確認できます。
 
@@ -183,9 +183,9 @@ HTTPSリクエストを送信することでエンドポイントを呼び出す
 
 3. **Create API Key**ダイアログボックスで、以下の操作を行います。
 
-    1. （任意）APIキーの説明を入力してください。
+    1. （オプション）APIキーの説明を入力してください。
 
-    2. APIキーの役割を選択してください。
+    2. APIキーのロールを選択してください。
 
         このロールは、APIキーがデータアプリにリンクされたTiDB Cloud Starterインスタンスに対してデータの読み取りまたは書き込みを行えるかどうかを制御するために使用されます。 `ReadOnly`または`ReadAndWrite`ロールを選択できます。
 
@@ -295,4 +295,4 @@ TiDB Cloudは、エンドポイントを呼び出すのに役立つコード例�
 
 - [Data Service概要](/tidb-cloud/data-service-overview.md)
 - [データアプリを管理する](/tidb-cloud/data-service-manage-data-app.md)
-- [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)
+- [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)

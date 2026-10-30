@@ -22,13 +22,13 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 > **Note:**
 >
-> GitHub リポジトリは、データアプリを接続した後、[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。設定ファイル内の情報 ( TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID、エンドポイント URL など) が機密である場合は、パブリック リポジトリではなくプライベートリポジトリを必ず使用してください。
+> GitHub リポジトリは、データアプリを接続した後、[データアプリの設定ファイル](/tidb-cloud/data-service-app-config-files.md)を保存するために使用されます。設定ファイル内の情報 ( TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターの ID、エンドポイント URL など) が機密である場合は、パブリックリポジトリではなくプライベートリポジトリを必ず使用してください。
 
-## ステップ1：データアプリをGitHubに接続する {#step-1-connect-your-data-app-to-github}
+## ステップ1. データアプリをGitHubに接続する {#step-1-connect-your-data-app-to-github}
 
 アプリを作成するときに、データアプリを GitHub に接続できます。詳細については、[データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md)を参照してください。
 
-アプリ作成時にGitHub接続を有効にしなかった場合でも、以下の手順で有効にすることができます。
+アプリ作成時にGitHub接続を有効にしなかった場合でも、以下の手順で有効にできます。
 
 1. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページに移動します。
 
@@ -61,9 +61,9 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 
 [データアプリを作成する](/tidb-cloud/data-service-manage-data-app.md)ときに GitHub 接続が有効になっている場合、 TiDB Cloud はアプリの作成直後にこのデータアプリの設定ファイルを GitHub にプッシュします。
 
-アプリ作成後にGitHub接続が有効になっている場合は、データアプリの設定をGitHubと同期するためにデプロイ操作を実行する必要があります。たとえば、 **Deployments**タブをクリックし、このデータアプリのデプロイを再デプロイすることができます。
+アプリ作成後にGitHub接続が有効になっている場合は、データアプリの設定をGitHubと同期するためにデプロイ操作を実行する必要があります。たとえば、 **Deployments**タブをクリックし、このデータアプリのデプロイを再デプロイできます。
 
-デプロイ操作後、指定したGitHubディレクトリを確認してください。 `tidb-cloud-data-service`によってData Appの設定ファイルがディレクトリにコミットされていることが確認できます。これは、Data AppがGitHubに正常に接続されたことを意味します。ディレクトリ構造は以下のとおりです。
+デプロイ操作後、指定したGitHubディレクトリを確認してください。 `tidb-cloud-data-service`によってデータアプリの設定ファイルがディレクトリにコミットされていることが確認できます。これは、データアプリがGitHubに正常に接続されたことを意味します。ディレクトリ構造は以下のとおりです。
 
 ```
 ├── <Your Data App directory on GitHub>
@@ -78,7 +78,7 @@ GitHub接続で**Auto Sync & Deployment**が有効になっている場合、Git
 │   │       └── <method>-<endpoint-path3>.sql
 ```
 
-## ステップ3．データアプリを変更する {#step-3-modify-your-data-app}
+## ステップ3. データアプリを変更する {#step-3-modify-your-data-app}
 
 **Auto Sync & Deployment**が有効になっている場合、GitHubまたはTiDB Cloudコンソールのいずれかを使用してデータアプリを変更できます。
 
@@ -113,7 +113,7 @@ TiDB Cloudコンソールで[データアプリのエンドポイントを変更
 
     - 現在の草稿に基づいてさらに変更を加えたい場合は、このダイアログを閉じて変更を行ってください。
     - 現在の変更を前回のデプロイメントの状態に戻したい場合は、 **Discard Draft**をクリックしてください。
-    - 変更内容に問題がなければ、変更内容の説明（任意）を入力し、 **Deploy and Push to GitHub**をクリックします。デプロイ状況は上部のバナーに表示されます。
+    - 変更内容に問題がなければ、変更内容の説明（オプション）を入力し、 **Deploy and Push to GitHub**をクリックします。デプロイ状況は上部のバナーに表示されます。
 
 デプロイが成功すると、 TiDB Cloudコンソールで行われた変更は自動的にGitHubにプッシュされます。
 
@@ -125,7 +125,7 @@ TiDB Cloudコンソールで[データアプリのエンドポイントを変更
 
 2. プロジェクトの[**Data Service**](https://tidbcloud.com/project/data-service)ページで、GitHub に接続せずに[新しいデータアプリを作成する](/tidb-cloud/data-service-manage-data-app.md#create-a-data-app)。
 
-3. **Auto Sync & Deployment**を有効にして、[新しいデータアプリをGitHubに接続します](#step-1-connect-your-data-app-to-github)。新しいデータアプリのターゲット リポジトリ、ブランチ、ディレクトリを指定するときは、コピーした設定ファイルを含む新しいパスを使用します。
+3. **Auto Sync & Deployment**を有効にして、[新しいデータアプリをGitHubに接続します](#step-1-connect-your-data-app-to-github)。新しいデータアプリのターゲットリポジトリ、ブランチ、ディレクトリを指定するときは、コピーした設定ファイルを含む新しいパスを使用します。
 
 4. 新しいデータアプリのIDと名前を取得します。左側のペインで新しいデータアプリの名前をクリックすると、右側のペインの**Data App Properties**領域にアプリのIDと名前が表示されます。
 

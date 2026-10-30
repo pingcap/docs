@@ -5,7 +5,7 @@ summary: RAM ユーザーとアクセスキーを含め、Alibaba Cloud OSS バ�
 
 # TiDB Cloud Data Pipeline 用の外部 stage を設定する (Alibaba Cloud)
 
-このガイドでは、[TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline.md) の外部 stage として Alibaba Cloud Object Storage Service (OSS) バケットを準備する方法を説明します。外部 stage は、TiDB Cloud がエクスポートしたスナップショットと行変更を書き込み、TiDB Cloud Lake がそこから読み取って対象の Warehouse にデータをロード (load) するための中間バケットです。
+このガイドでは、[TiDB Cloud Data Pipeline](/tidb-cloud/data-pipeline.md) の外部 stage として Alibaba Cloud Object Storage Service (OSS) バケットを準備する方法を説明します。外部 stage は、TiDB Cloud がエクスポートしたスナップショットと行変更を書き込み、TiDB Cloud Lake がそこから読み取って対象の Warehouse にデータをロードするための中間バケットです。
 
 TiDB Cloud は増分データとスナップショットを OSS バケットに書き込み、TiDB Cloud Lake はそのバケットからデータを読み取ります。
 

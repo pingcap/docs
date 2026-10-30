@@ -182,7 +182,7 @@ TiDB Cloud Dedicated の changefeed の請求については、[TiDB Cloud Dedic
 状態は以下のように説明されます。
 
 - `CREATING` : レプリケーションタスクが作成されています。
-- `RUNNING` : レプリケーションタスクは正常に実行され、チェックポイント ts も正常に進行します。
+- `RUNNING` : レプリケーションタスクは正常に実行され、checkpoint-ts も正常に進行します。
 - `EDITING` : レプリケーションタスクが編集されています。
 - `PAUSING` : レプリケーションタスクが一時停止されています。
 - `PAUSED` : レプリケーションタスクが一時停止されました。

@@ -23,7 +23,7 @@ TiDB Cloud はデータをお使いの S3 バケットに書き込み、TiDB Clo
 
 1. [AWS S3 Console](https://console.aws.amazon.com/s3/) を開き、新しいバケットを作成します。
 2. リージョンを選択し、そのリージョンが TiDB Cloud インスタンスのリージョンと一致していることを確認します。
-3. （任意）バケット内にフォルダ（プレフィックス）を作成して、TiDB Cloud データを整理します（例: `s3://tidb-cloud-lake-data/my-cluster/`）。
+3. （オプション）バケット内にフォルダ（プレフィックス）を作成して、TiDB Cloud データを整理します（例: `s3://tidb-cloud-lake-data/my-cluster/`）。
 
 ## ステップ 2. バケットアクセスを設定する {#step-2-configure-bucket-access}
 
@@ -58,7 +58,7 @@ TiDB Cloud はデータをお使いの S3 バケットに書き込み、TiDB Clo
     - **Role ARN**: `RoleARN` の値
     - **SQS queue URL**（SQS を有効にした場合のみ）: `https://sqs.<region>.amazonaws.com/<account-id>/<queue-name>` 形式のキュー URL
 
-#### 1.2 （任意）S3 バケット通知を設定する {#12-optional-configure-the-s3-bucket-notification}
+#### 1.2 （オプション）S3 バケット通知を設定する {#12-optional-configure-the-s3-bucket-notification}
 
 [1.1](#11-create-the-role-with-cloudformation) で SQS を有効にした場合、キューとそのポリシーはすでにスタックによって作成されています。残る手順は、既存のバケットに対する通知設定のみです。提供されている CloudFormation スタックは、バケットがすでに存在するためこの設定は行いません。[2.3.2](#232-configure-the-s3-bucket-notification) の手動通知設定手順に従ってください。
 
@@ -145,7 +145,7 @@ CloudFormation を使用できない場合、または組織の要件により�
 6. ポリシー名を入力し（例: `tidb-cloud-lake-access`）、**Create policy** をクリックします。
 7. ロール詳細ページから ロール ARN をコピーします。これは TiDB Cloud コンソールで External Stage を設定する際に必要です。例: `arn:aws:iam::123456789012:role/tidb-cloud-lake-role`
 
-#### 2.3 （任意）SQS でイベント駆動の取り込みを有効にする {#23-optional-enable-event-driven-ingestion-with-sqs}
+#### 2.3 （オプション）SQS でイベント駆動の取り込みを有効にする {#23-optional-enable-event-driven-ingestion-with-sqs}
 
 ワークロードで定期スキャンを許容できる場合は、このセクションをスキップしてください。SQS を使用するタイミングの詳細については、[ステップ 2. バケットアクセスを設定する](#step-2-configure-bucket-access) の Tip を参照してください。
 
@@ -245,7 +245,7 @@ S3 イベント通知を設定して、バケットからのオブジェクト�
     >
     > Secret Access Key は作成時に一度だけ表示されます。必ずすぐに保存してください。
 
-#### 3.2 （任意）SQS でイベント駆動の取り込みを有効にする {#32-optional-enable-event-driven-ingestion-with-sqs}
+#### 3.2 （オプション）SQS でイベント駆動の取り込みを有効にする {#32-optional-enable-event-driven-ingestion-with-sqs}
 
 ワークロードで定期スキャンを許容できる場合は、このセクションをスキップしてください。
 
@@ -288,6 +288,6 @@ AWS の設定が完了すると、External Stage の設定に必要な値がす�
 
 - **S3 URI**: **ステップ 1. S3 バケットを作成する** で取得します。
 - **Bucket access**: Role ARN（オプション 1 と 2）、または Access Key ID と Secret Access Key（オプション 3）。
-- **SQS queue URL**（任意）。
+- **SQS queue URL**（オプション）。
 
 [TiDB Cloud コンソール](https://tidbcloud.com) で TiDB Cloud インスタンスの Data Pipeline 設定ページに移動し、**External Stage** 設定にこれらの値を入力して、データパイプラインのセットアップを完了してください。

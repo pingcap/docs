@@ -5,7 +5,7 @@ summary: TiDB Cloud Dedicated クラスターの RU キャパシティを見積�
 
 # リソースのキャリブレーション
 
-[Request Unit (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) は、システムリソースの消費を表すリソース抽象化単位です。[リソースグループ](/tidb-resource-control-ru-groups.md) にリソースを割り当てる前に、まずクラスター全体の RU キャパシティを見積もることを推奨します。
+[リクエストユニット (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) は、システムリソースの消費を表すリソース抽象化単位です。[リソースグループ](/tidb-resource-control-ru-groups.md) にリソースを割り当てる前に、まずクラスター全体の RU キャパシティを見積もることを推奨します。
 
 TiDB Cloud Dedicated クラスターでは、TiDB Cloud コンソールの **Monitoring** ページにある **Calibrate Resource** 機能を使用して RU キャパシティを見積もることができます。この機能は、すべての TiDB Cloud Dedicated クラスターで利用できます。
 
@@ -43,8 +43,8 @@ TiDB Cloud Dedicated クラスターでは、TiDB Cloud コンソールの **Mon
 
 このページには、クラスターの現在のリソース消費を把握するのに役立つ次のメトリクスチャートも表示されます。
 
-- **Total RU Consumed**: リアルタイムで集計された Request Units の総消費量です。
-- **RU Consumed by Resource Groups**: リソースグループごとにリアルタイムで消費された Request Units の数です。
+- **Total RU Consumed**: リアルタイムで集計されたリクエストユニットの総消費量です。
+- **RU Consumed by Resource Groups**: リソースグループごとにリアルタイムで消費されたリクエストユニットの数です。
 
 ## リソース割り当てを変更する {#change-the-resource-allocation}
 

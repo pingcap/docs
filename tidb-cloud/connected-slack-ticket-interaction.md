@@ -9,7 +9,7 @@ summary: サポートチケットの Slack でのやり取りに関する詳細�
 
 > **Note:**
 >
-> Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
+> Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">support@pingcap.com</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
 **PingCAP Support Bot**を使用して Slack でサポートチケットを作成できます。
 
@@ -35,7 +35,7 @@ Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンショ
 
 **Premium** [サポートプラン](/tidb-cloud/connected-care-detail.md)にご加入のお客様は、Slack とチケットシステム間の双方向の情報同期がサポートされます。
 
-サポートエンジニアのチケットへのコメントはSlackのメッセージスレッドに同期されるため、ユーザーはサポートポータルに移動してコメントを確認する必要はありません。ユーザーはこのメッセージスレッドに直接返信することができ、返信はチケットシステムに同期されます。
+サポートエンジニアのチケットへのコメントはSlackのメッセージスレッドに同期されるため、ユーザーはサポートポータルに移動してコメントを確認する必要はありません。ユーザーはこのメッセージスレッドに直接返信でき、返信はチケットシステムに同期されます。
 
 これにより、**Premium**サポートプランに加入している顧客は、Slack を離れることなく、チケットをすばやく作成、対応、管理できるようになります。
 
@@ -49,4 +49,4 @@ Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンショ
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポートチームにお問い合わせください。
+ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">support@pingcap.com</a>のサポートチームにお問い合わせください。

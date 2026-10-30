@@ -25,7 +25,7 @@ summary: TiDB Cloudコンソールで、 TiDB CloudデータアプリをGPTsやD
 
 4. 表示されたダイアログボックスには、以下の項目が表示されます。
 
-    ａ． **API Specification URL** : データアプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)を参照してください。
+    a. **API Specification URL** : データアプリの OpenAPI 仕様の URL をコピーします。詳細については、 [OpenAPI仕様を使用する](/tidb-cloud/data-service-manage-data-app.md#use-the-openapi-specification)を参照してください。
 
     b. **API Key**: データアプリの API キーを入力します。 API キーをまだ持っていない場合は、 **Create API Key**をクリックして作成します。詳細については、 [APIキーを作成する](/tidb-cloud/data-service-api-key.md#create-an-api-key)を参照してください。
 
