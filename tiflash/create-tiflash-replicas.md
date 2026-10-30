@@ -182,7 +182,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 3. TiFlashレプリケーションが完了したら、オンラインサービスへの影響を軽減するために、デフォルト構成に戻します。
 
-    デフォルトのレプリカ スケジューリング速度制限を復元するには、次のPD Controlコマンドを実行します。
+    デフォルトのレプリカスケジューリング速度制限を復元するには、次のPD Controlコマンドを実行します。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer

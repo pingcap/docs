@@ -1,6 +1,6 @@
 ---
 title: TiDB basics for Developers
-summary: トランザクション メカニズムやアプリケーションが TiDB と対話する方法など、開発者向けの TiDB の基礎を学習します。
+summary: トランザクションメカニズムやアプリケーションが TiDB と対話する方法など、開発者向けの TiDB の基礎を学習します。
 ---
 
 # 開発者向けTiDBの基礎 {#tidb-basics-for-developers}
@@ -9,7 +9,7 @@ TiDB を使い始める前に、TiDB がどのように動作するかに関す�
 
 - TiDB でのトランザクションの仕組みを理解するには[TiDBトランザクションの概要](/transaction-overview.md) 、アプリケーション開発に必要なトランザクションの知識については[アプリケーション開発者向けトランザクションノート](/develop/dev-guide-transaction-overview.md)をお読みください。
 - [アプリケーションがTiDBと対話する方法](#the-way-applications-interact-with-tidb)を理解してください。
-- 分散データベース TiDB およびTiDB Cloud を構築するためのコア コンポーネントと概念を学習するには、無料のオンライン コース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
+- 分散データベース TiDB およびTiDB Cloud を構築するためのコアコンポーネントと概念を学習するには、無料のオンラインコース[TiDBの紹介](https://eng.edu.pingcap.com/catalog/info/id:203/?utm_source=docs-dev-guide)を参照してください。
 
 ## TiDBトランザクションメカニズム {#tidb-transaction-mechanisms}
 

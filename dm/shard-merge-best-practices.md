@@ -5,7 +5,7 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 # シャード統合シナリオにおけるデータ移行のベストプラクティス {#best-practices-of-data-migration-in-the-shard-merge-scenario}
 
-このドキュメントでは、シャードマージ シナリオにおける[TiDB Data Migration (DM)](/dm/dm-overview.md)の機能と制限について説明し、アプリケーションのデータ移行のベストプラクティス ガイドを提供します (デフォルトの"pessimistic"モードが使用されます)。
+このドキュメントでは、シャードマージシナリオにおける[TiDB Data Migration (DM)](/dm/dm-overview.md)の機能と制限について説明し、アプリケーションのデータ移行のベストプラクティスガイドを提供します (デフォルトの"pessimistic"モードが使用されます)。
 
 ## 別のデータ移行タスクを使用する {#use-a-separate-data-migration-task}
 
@@ -30,7 +30,7 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 複数のシャードテーブルのデータにより、主キーまたは一意インデックス間で競合が発生する可能性があります。シャードテーブルのシャーディングロジックに基づいて、それぞれの主キーまたは一意インデックスを確認する必要があります。以下は、主キーまたは一意インデックスに関連する3つのケースです。
 
-- シャード キー: 通常、同じシャード キーは 1つのシャードテーブルにのみ存在するため、シャード キーでデータの競合は発生しません。
+- シャードキー: 通常、同じシャードキーは 1つのシャードテーブルにのみ存在するため、シャードキーでデータの競合は発生しません。
 - AUTO_INCREMENT主キー：各シャードテーブルのAUTO_INCREMENT主キーは個別にカウントされるため、範囲が重複する可能性があります。この場合、次のセクション[AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決してください。
 - その他の主キーまたは一意インデックスについては、ビジネスロジックに基づいて分析する必要があります。データの競合が発生した場合は、次のセクション[AUTO_INCREMENT主キーの競合を処理する](/dm/shard-merge-best-practices.md#handle-conflicts-of-auto-increment-primary-key)を参照して解決してください。
 
@@ -40,7 +40,7 @@ summary: シャードマージのシナリオにおけるデータ移行のベ�
 
 ### 列から`PRIMARY KEY`属性を削除します {#remove-the-primary-key-attribute-from-the-column}
 
-アップストリーム スキーマが次のとおりであると仮定します。
+アップストリームスキーマが次のとおりであると仮定します。
 
 ```sql
 CREATE TABLE `tbl_no_pk` (
@@ -55,7 +55,7 @@ CREATE TABLE `tbl_no_pk` (
 以下の要件を満たしている場合:
 
 - `auto_pk_c1`列はアプリケーションに影響を与えず、列の`PRIMARY KEY`属性に依存しません。
-- `uk_c2`列には`UNIQUE KEY`属性があり、すべてのアップストリーム シャードテーブル内でグローバルに一意です。
+- `uk_c2`列には`UNIQUE KEY`属性があり、すべてのアップストリームシャードテーブル内でグローバルに一意です。
 
 次に、次の手順を実行して、シャードテーブルをマージするときに`auto_pk_c1`列によって発生する可能性のある`ERROR 1062 (23000): Duplicate entry '***' for key 'PRIMARY'`エラーを修正できます。
 
@@ -83,7 +83,7 @@ CREATE TABLE `tbl_no_pk` (
 
 ### 複合主キーを使用する {#use-a-composite-primary-key}
 
-アップストリーム スキーマが次のとおりであると仮定します。
+アップストリームスキーマが次のとおりであると仮定します。
 
 ```sql
 CREATE TABLE `tbl_multi_pk` (

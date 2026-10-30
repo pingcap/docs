@@ -250,7 +250,7 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 
             次の手順では、TiKV ポート`24000`と systemd サービス名`tikv-24000`例として使用します。
 
-            1. 次のコマンドを実行して、systemd サービス エディターを開きます。
+            1. 次のコマンドを実行して、systemd サービスエディターを開きます。
 
                 ```shell
                 systemctl edit tikv-24000

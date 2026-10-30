@@ -261,7 +261,7 @@ dot xx.dot -T png -O
 The xx.dot is the result returned by the above statement.
 ```
 
-コンピュータに`dot`プログラムがインストールされていない場合は、結果を[このウェブサイト](http://www.webgraphviz.com/)にコピーしてツリー ダイアグラムを取得します。
+コンピュータに`dot`プログラムがインストールされていない場合は、結果を[このウェブサイト](http://www.webgraphviz.com/)にコピーしてツリーダイアグラムを取得します。
 
 ![Explain Dot](/media/explain_dot.png)
 
@@ -328,7 +328,7 @@ EXPLAIN FORMAT = "tidb_json" SELECT id FROM t WHERE a = 1;
 
 - 接続がスリープ状態の場合、MySQL は空の結果を返しますが、TiDB は最後に実行されたクエリプランを返します。
 - 現在のセッションの実行計画を取得しようとすると、MySQL はエラーを返しますが、TiDB は通常どおり結果を返します。
-- MySQL では、ログイン ユーザーがクエリ対象の接続と同じであるか、ログイン ユーザーが**`PROCESS`**権限を持っている必要があります。一方、TiDB では、ログイン ユーザーがクエリ対象の接続と同じであるか、ログイン ユーザーが**`SUPER`**権限を持っている必要があります。
+- MySQL では、ログインユーザーがクエリ対象の接続と同じであるか、ログインユーザーが**`PROCESS`**権限を持っている必要があります。一方、TiDB では、ログインユーザーがクエリ対象の接続と同じであるか、ログインユーザーが**`SUPER`**権限を持っている必要があります。
 
 ## 参照 {#see-also}
 

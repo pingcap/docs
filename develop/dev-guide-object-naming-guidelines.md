@@ -28,7 +28,7 @@ aliases: ['/ja/tidb/stable/dev-guide-object-naming-guidelines/','/ja/tidbcloud/d
     - バックアップテーブル: `bak_t_crm_relation_20170425`
     - 事業運営の暫定表： `tmp_st_{business code}_{creator abbreviation}_{date}`
     - 会計期間の記録表: `t_crm_ec_record_YYYY{MM}{dd}`
-- 異なるビジネス モジュールのテーブルごとに個別のデータベースを作成し、それに応じて注釈を追加します。
+- 異なるビジネスモジュールのテーブルごとに個別のデータベースを作成し、それに応じて注釈を追加します。
 
 ## カラムの命名規則 {#column-naming-convention}
 

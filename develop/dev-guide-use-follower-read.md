@@ -20,10 +20,10 @@ TiDBは、 [リージョン](/tidb-storage.md#region)を基本単位として、
 
 次のいずれかを実行すると、アプリケーションにホットスポットリージョンがあるかどうかを視覚的に分析できます。
 
-- TiDB Cloud: [TiDB Cloudコンソールのキー ビジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)に移動し、「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択して、読み取りホットスポットが発生するかどうかを確認します。
+- TiDB Cloud: [TiDB Cloudコンソールのキービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)に移動し、「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択して、読み取りホットスポットが発生するかどうかを確認します。
 - TiDB Self-Managed: [TiDB DashboardのKey Visualizer](/dashboard/dashboard-key-visualizer.md)に移動し、「メトリック選択ボックス」を`Read (bytes)`または`Read (keys)`に選択して、読み取りホットスポットが発生するかどうかを確認します。
 
-ホットスポットの問題が存在する場合は、 [TiDBホットスポットの問題の処理](/troubleshoot-hot-spot-issues.md)を参照してトラブルシューティングを行うことができます。これにより、アプリケーション レベルでのホットスポットの生成を回避できます。
+ホットスポットの問題が存在する場合は、 [TiDBホットスポットの問題の処理](/troubleshoot-hot-spot-issues.md)を参照してトラブルシューティングを行うことができます。これにより、アプリケーションレベルでのホットスポットの生成を回避できます。
 
 読み取りホットスポットが避けられない場合、または変更コストが非常に高い場合は、Follower Read機能を使用して、フォロワーリージョンへの読み取りリクエストの負荷をより適切に分散できます。
 
@@ -139,7 +139,7 @@ public static class AuthorDAO {
 
 - [Follower Read](/follower-read.md)
 - [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)
-- [TiDB Cloudコンソールのキー ビジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
+- [TiDB Cloudコンソールのキービジュアライザー](/tidb-cloud/tune-performance.md#key-visualizer)
 - [TiDB Self-Managed向けTiDB DashboardのKey Visualizer](/dashboard/dashboard-key-visualizer.md)
 
 ## ヘルプが必要ですか? {#need-help}

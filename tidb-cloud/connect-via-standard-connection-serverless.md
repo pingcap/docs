@@ -90,7 +90,7 @@ TiDB Cloudプランに応じて、適切なエンドポイントモデルを選�
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
     - パブリック接続が無効になっている場合は、左側のペインで**Settings** > **Networking**をクリックし、 **Networking**ページで**Public Endpoint**オプションを有効にします。
-    - IP アクセス リストを設定していない場合は、最初の接続の前に**Configure IP Access List**をクリックして設定します。
+    - IP アクセスリストを設定していない場合は、最初の接続の前に**Configure IP Access List**をクリックして設定します。
     - {{{ .essential }}} インスタンスの root パスワードを設定していない場合は、 **Set Root Password**をクリックして設定します。
 
 4. **CA cert**をクリックして、 {{{ .essential }}} インスタンスへの TLS 接続用の CA cert をダウンロードします。CA cert はデフォルトで TLS 1.2 をサポートしています。

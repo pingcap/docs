@@ -13,14 +13,14 @@ TiUPは、環境変数`TIUP_MIRRORS`を介してミラーソースを指定す�
 
 非公式ミラーを使用した後、公式ミラーに戻して使用する場合は、以下のいずれかの措置を講じてください。
 
-- `TIUP_MIRRORS`変数を公式ミラー アドレス`https://tiup-mirrors.pingcap.com`に設定します。
+- `TIUP_MIRRORS`変数を公式ミラーアドレス`https://tiup-mirrors.pingcap.com`に設定します。
 - `TIUP_MIRRORS`変数が設定されていないことを確認してから、 `tiup mirror set https://tiup-mirrors.pingcap.com`コマンドを実行します。
 
 ## 独自のコンポーネントをTiUPミラーに組み込むにはどうすればよいでしょうか? {#how-do-i-put-my-own-component-into-the-tiup-mirrors}
 
 TiUPは現時点ではサードパーティ製コンポーネントをサポートしていませんが、 TiUPチームはTiUPコンポーネント開発仕様を策定し、tiup-publishコンポーネントを開発中です。準備が整ったら、貢献者は`tiup publish <comp> <version>`コマンドを使用して、独自のコンポーネントをTiUPの公式ミラーに公開できます。
 
-## TiUP PlaygroundとTiUPクラスター コンポーネントの違いは何ですか? {#what-is-the-difference-between-the-tiup-playground-and-tiup-cluster-components}
+## TiUP PlaygroundとTiUPクラスターコンポーネントの違いは何ですか? {#what-is-the-difference-between-the-tiup-playground-and-tiup-cluster-components}
 
 TiUP Playgroundコンポーネントは、主にLinuxまたはmacOSオペレーティングシステム上でスタンドアロン開発環境を構築するために使用されます。これにより、 TiUPクラスタの特定のバージョンを迅速に開始し、簡単に実行できます。TiUPクラスタコンポーネントは、主に本番環境クラスタ（通常は大規模クラスタ）のデプロイと保守に使用されます。TiUP PlaygroundでデプロイされたTiDBクラスタには、一部の機能と運用能力が不足している可能性があるため、完全な機能テストや安定性テストには推奨されません。
 
