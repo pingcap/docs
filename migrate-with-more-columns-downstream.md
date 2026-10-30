@@ -77,13 +77,8 @@ In such cases, you can use the `binlog-schema` command to set a table schema for
 
     |Parameter |Description|
     |:-- |:---|
-<<<<<<< HEAD
     |`-master-addr` |Specifies `${advertise-addr}` of any DM-master node in the cluster where dmctl is to be connected. `${advertise-addr}` indicates the address that DM-master advertises to the outside world.|
-    |`binlog-schema set`| Manually set the schema information.|
-=======
-    |`--master-addr` |Specifies `${advertise-addr}` of any DM-master node in the cluster where dmctl is to be connected. `${advertise-addr}` indicates the address that DM-master advertises to the outside world.|
     |`binlog-schema update`| Manually updates the schema information.|
->>>>>>> 12e4ae9a2e (docs(dm): fix stale event-filter and binlog-schema examples (#24598))
     |`-s` | Specifies the source. `${source-id}` indicates the source ID of MySQL data.|
     |`${task-name}`| Specifies the name of the migration task defined in the `task.yaml` configuration file of the data migration task.|
     |`${database-name}`| Specifies the database. `${database-name}` indicates the name of the upstream database. |
