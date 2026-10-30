@@ -115,7 +115,7 @@ Query OK, 0 rows affected (0.31 sec)
 
 ## Automatic Region pre-splitting
 
-<span class="version-mark">New in v9.0.0</span>
+<span class="version-mark">New in v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
 
 You can specify `PRE_SPLIT_REGIONS [=] AUTO` to derive Region split boundaries from existing Version 2 statistics on the leading index column. For an existing non-partitioned table `t` with at least 1,000,000 rows and a statistics health score of at least 80, the following example collects statistics and enables automatic pre-splitting for `idx_a`:
 

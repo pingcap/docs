@@ -97,7 +97,7 @@ mysql> EXPLAIN SELECT * FROM t1 WHERE c1 = 3;
 
 ## Automatic Region pre-splitting
 
-<span class="version-mark">New in v9.0.0</span>
+<span class="version-mark">New in v9.0.0 for classic TiDB and in CLOUD.202609 for TiDB X</span>
 
 When adding an index to a large existing table, you can specify `PRE_SPLIT_REGIONS AUTO` to let TiDB derive Region split boundaries from existing column statistics. This can reduce initial write hotspots without requiring you to choose split boundaries manually.
 
