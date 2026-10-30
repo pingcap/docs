@@ -110,7 +110,7 @@ If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc
 
 Configure the TiCDC Kafka Sink URI parameter `max-message-bytes` together with the Kafka Topic configuration `max.message.bytes`. The Sink URI uses `max-message-bytes`, while each Kafka Topic uses `max.message.bytes`.
 
-TiCDC determines the message size limit from the `max.message.bytes` setting of the default Topic in the Sink URI path. If you configure [Topic dispatchers](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers), TiCDC might send data to another Topic. The Topic that receives the message must also permit messages of that size. Changing only the Sink URI or one Topic can still result in a message size error.
+TiCDC limits the message size sent to Kafka with `max-message-bytes`, while Kafka applies the `max.message.bytes` limit of the receiving Topic. If you configure [Topic dispatchers](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers), TiCDC might send data to another Topic. The receiving Topic must also permit messages of that size. Changing only the Sink URI or one Topic can still result in a message size error.
 
 First, run `cdc cli changefeed query` to find the default Topic in the current Sink URI. Check the Topic dispatch rules in the changefeed configuration to identify the Topic that receives the messages:
 
