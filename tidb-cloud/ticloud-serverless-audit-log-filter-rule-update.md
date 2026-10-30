@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule update` のリファレン�
 
 # ticloud serverless audit-log filter-rule update {#ticloud-serverless-audit-log-filter-rule-update}
 
-TiDB Cloud Essential クラスターの監査ログフィルタールールを更新します。
+TiDB Cloud Essential インスタンスの監査ログフィルタールールを更新します。
 
 ```shell
 ticloud serverless audit-log filter-rule update [flags]
@@ -13,7 +13,7 @@ ticloud serverless audit-log filter-rule update [flags]
 
 ## 例 {#examples}
 
-対話モードで監査ログフィルタルールを更新します。
+対話型モードで監査ログフィルタルールを更新します。
 
 ```shell
 ticloud serverless audit-log filter-rule update
@@ -46,16 +46,16 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 | --enabled                 | フィルタールールを有効または無効にします。                                                                                                                                   | いいえ | 非対話型モードでのみ動作します。                     |
 | --filter-rule-id string | フィルタールールの ID。                                                                                                                                           | はい  | 非対話型モードでのみ動作します。                     |
 | --rule string             | 完全なフィルタルール式。フィルタテンプレートを表示するには[`ticloud serverless audit-log filter template`](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)を使用します。 | いいえ | 非対話型モードでのみ動作します。                     |
-| -h, --help           | このコマンドのヘルプ情報を表示します。                                                                                                                                      | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -h, --help           | このコマンドのヘルプ情報を表示します。                                                                                                                                      | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug        | デバッグ モードを有効にします。          | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -D, --debug        | デバッグモードを有効にします。          | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

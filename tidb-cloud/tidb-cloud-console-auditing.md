@@ -74,7 +74,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 
 ## コンソール監査イベントの種類 {#console-audit-event-types}
 
-コンソール監査ログには、イベントタイプを通じてTiDB Cloudコンソール上のさまざまなユーザー アクティビティが記録されます。
+コンソール監査ログには、イベントタイプを通じてTiDB Cloudコンソール上のさまざまなユーザーアクティビティが記録されます。
 
 > **Note:**
 >
@@ -138,7 +138,7 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | DownloadTiDBClusterCA | CA証明書をダウンロード                                                         |
 | OpenWebSQLConsole | Web SQL 経由で TiDB クラスターに接続する                                          |
 | SetRootPassword | TiDBクラスタのルートパスワードを設定する                                               |
-| UpdateIPAccessList | TiDB クラスタの IP アクセス リストを更新する                                          |
+| UpdateIPAccessList | TiDB クラスタの IP アクセスリストを更新する                                          |
 | SetAutoBackup | TiDBクラスタの自動バックアップメカニズムを設定する                                          |
 | DoManualBackup | TiDBクラスタの手動バックアップを実行する                                               |
 | BackupCompleted | バックアップタスクが完了しました                                                     |
@@ -162,19 +162,19 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | BindSupportPlan | サポートプランを締結する                                                         |
 | CancelSupportPlan | サポートプランをキャンセルする                                                      |
 | UpdateOrganizationName | 組織名を更新する                                                             |
-| SetSpendLimit | TiDB Cloud Starter クラスターの支出制限を編集する                                   |
+| SetSpendLimit | TiDB Cloud Starter インスタンスの支出限度額を編集する                                   |
 | UpdateMaintenanceWindow | メンテナンスウィンドウの開始時刻を変更する                                                |
 | DeferMaintenanceTask | メンテナンスタスクを延期する                                                       |
-| CreateBranch | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを作成する           |
-| DeleteBranch | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチを削除します          |
-| SetBranchRootPassword | TiDB Cloud Starter またはTiDB Cloud Essential クラスターのブランチのルートパスワードを設定する |
-| ConnectBranchGitHub | クラスターをGitHubリポジトリに接続してブランチ統合を有効にする                                   |
-| DisconnectBranchGitHub | ブランチ統合を無効にするには、クラスターを GitHub リポジトリから切断します。                           |
+| CreateBranch | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのブランチを作成する           |
+| DeleteBranch | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのブランチを削除します          |
+| SetBranchRootPassword | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのブランチのルートパスワードを設定する |
+| ConnectBranchGitHub | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスをGitHubリポジトリに接続してブランチ統合を有効にする                                   |
+| DisconnectBranchGitHub | TiDB Cloud Starter またはTiDB Cloud Essential インスタンスを GitHub リポジトリから切断してブランチ統合を無効にする                           |
 | UpdateAuthenticationMethod | Cloud Organization SSO の認証方法を更新する                                    |
 
 ## コンソール監査ログフィールド {#console-audit-log-fields}
 
-ユーザー アクティビティを追跡できるように、 TiDB Cloud各コンソール監査ログに次のフィールドが用意されています。
+ユーザーアクティビティを追跡できるように、 TiDB Cloudは各コンソール監査ログに次のフィールドが用意されています。
 
 | フィールド名       | データ型    | 説明                                                             |
 | ------------ | --------- | -------------------------------------------------------------- |

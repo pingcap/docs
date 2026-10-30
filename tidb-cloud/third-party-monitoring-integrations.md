@@ -5,7 +5,7 @@ summary: サードパーティのメトリクス統合の使用方法を学習�
 
 # サードパーティのメトリクス統合 {#third-party-metrics-integrations}
 
-TiDB Cloud を次のサードパーティ メトリック サービスと統合して、 TiDB Cloudアラートを受信し、これらのサービスで TiDB クラスターのパフォーマンスメトリックを表示できます。
+TiDB Cloud を次のサードパーティメトリックサービスと統合して、 TiDB Cloudアラートを受信し、これらのサービスで TiDB クラスターのパフォーマンスメトリックを表示できます。
 
 - [Datadog統合](#datadog-integration)
 - [PrometheusとGrafanaの統合](#prometheus-and-grafana-integration)
@@ -13,9 +13,9 @@ TiDB Cloud を次のサードパーティ メトリック サービスと統合�
 
 ## Datadog統合 {#datadog-integration}
 
-Datadog 統合を使用すると、TiDB クラスターに関するメトリック データを[Datadog](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成し、これらのメトリックを Datadog ダッシュボードで表示できます。
+Datadog 統合を使用すると、TiDB クラスターに関するメトリックデータを[Datadog](https://www.datadoghq.com/)に送信するようにTiDB Cloudを構成し、これらのメトリックを Datadog ダッシュボードで表示できます。
 
-詳細な統合手順と Datadog が追跡するメトリクスのリストについては、 [TiDB CloudとDatadogの統合](/tidb-cloud/monitor-datadog-integration.md)を参照してください。
+詳細な統合手順と Datadog が追跡するメトリクスのリストについては、 [TiDB CloudとDatadogを統合する](/tidb-cloud/monitor-datadog-integration.md)を参照してください。
 
 ## PrometheusとGrafanaの統合 {#prometheus-and-grafana-integration}
 
@@ -25,6 +25,6 @@ PrometheusとGrafanaの統合により、 TiDB CloudからPrometheus用の`scrap
 
 ## New Relicとの統合 {#new-relic-integration}
 
-New Relic 統合を使用すると、 TiDB Cloudを構成して、TiDB クラスターに関するメトリック データを[New Relic](https://newrelic.com/)に送信し、これらのメトリックを New Relic ダッシュボードで表示できます。
+New Relic 統合を使用すると、 TiDB Cloudを構成して、TiDB クラスターに関するメトリックデータを[New Relic](https://newrelic.com/)に送信し、これらのメトリックを New Relic ダッシュボードで表示できます。
 
-詳細な統合手順と New Relic が追跡するメトリックのリストについては、 [TiDB CloudとNew Relicの統合](/tidb-cloud/monitor-new-relic-integration.md)を参照してください。
+詳細な統合手順と New Relic が追跡するメトリックのリストについては、 [TiDB CloudとNew Relicを統合する](/tidb-cloud/monitor-new-relic-integration.md)を参照してください。

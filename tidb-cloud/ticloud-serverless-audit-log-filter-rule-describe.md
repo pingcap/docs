@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule describe` のリファレン
 
 # ticloud serverless audit-log filter-rule describe {#ticloud-serverless-audit-log-filter-rule-describe}
 
-TiDB Cloud Essential クラスターの監査ログフィルタールールについて説明します。
+TiDB Cloud Essential インスタンスの監査ログフィルタールールの詳細を表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule describe [flags]
@@ -13,13 +13,13 @@ ticloud serverless audit-log filter-rule describe [flags]
 
 ## 例 {#examples}
 
-対話モードで監査ログフィルタルールを記述します。
+対話型モードで監査ログフィルタルールの詳細を表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule describe
 ```
 
-非対話型モードで監査ログフィルタルールを記述します。
+非対話型モードで監査ログフィルタルールの詳細を表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule describe --cluster-id <cluster-id> --filter-rule-id <rule-id>
@@ -31,16 +31,16 @@ ticloud serverless audit-log filter-rule describe --cluster-id <cluster-id> --fi
 | -------------------- | ------------------- | --- | ------------------------------------ |
 | -c, --cluster-id string | クラスターの ID。          | はい  | 非対話型モードでのみ動作します。                     |
 | --filter-rule-id string | フィルタールールの ID。      | はい  | 非対話型モードでのみ動作します。                     |
-| -h, --help           | このコマンドのヘルプ情報を表示します。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -h, --help           | このコマンドのヘルプ情報を表示します。 | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug        | デバッグ モードを有効にします。          | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -D, --debug        | デバッグモードを有効にします。          | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

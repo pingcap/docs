@@ -54,7 +54,7 @@ TiDB Cloud は、次の種類のイベントを記録します。
 | ScaleChangefeed |   changefeed の仕様をスケールする |  
 | FailedChangefeed |   changefeed の障害 |  
 | ImportData |   クラスターにデータをインポートする |  
-| UpdateSpendingLimit |   {{{ .starter }}} インスタンスの支出上限を更新する |  
+| UpdateSpendingLimit |   {{{ .starter }}} インスタンスの支出限度額を更新する |  
 | ResourceLimitation |   {{{ .starter }}} または {{{ .essential }}} インスタンスのリソース制限を更新する |  
 
 </CustomContent>

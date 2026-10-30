@@ -18,7 +18,7 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 
 </CustomContent>
 
-- Slow Query では、<CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> 内のすべてのスロークエリを検索して表示できます。また、実行計画、SQL 実行情報、その他の詳細を確認することで、各スロークエリのボトルネックを調査できます。
+- Slow Query では、<CustomContent plan="starter">{{{ .starter }}} インスタンス</CustomContent><CustomContent plan="essential">{{{ .essential }}} インスタンス</CustomContent><CustomContent plan="premium">{{{ .premium }}} インスタンス</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent> 内のすべてのスロークエリを検索して表示できます。また、実行計画、SQL 実行情報、その他の詳細を確認することで、各スロークエリのボトルネックを調査できます。
 
 - <CustomContent plan="starter,essential,dedicated">Statement Analysis</CustomContent><CustomContent plan="premium">SQL Statement</CustomContent> を使用すると、システムテーブルをクエリしなくても、ページ上で SQL の実行状況を直接確認し、パフォーマンスの問題を簡単に特定できます。
 
@@ -34,7 +34,7 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 
 ## Diagnosis ページを表示する {#view-the-diagnosis-page}
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の <CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> の名前をクリックして、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs) ページで、対象の <CustomContent plan="starter">{{{ .starter }}} インスタンス</CustomContent><CustomContent plan="essential">{{{ .essential }}} インスタンス</CustomContent><CustomContent plan="premium">{{{ .premium }}} インスタンス</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent> の名前をクリックして、その概要ページに移動します。
 
     > **Tip:**
     >
@@ -54,7 +54,7 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 
 </CustomContent>
 
-<CustomContent plan="starter">{{{ .starter }}} instance</CustomContent><CustomContent plan="essential">{{{ .essential }}} instance</CustomContent><CustomContent plan="premium">{{{ .premium }}} instance</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} cluster</CustomContent> でスロークエリを表示するには、次の手順を実行します。
+<CustomContent plan="starter">{{{ .starter }}} インスタンス</CustomContent><CustomContent plan="essential">{{{ .essential }}} インスタンス</CustomContent><CustomContent plan="premium">{{{ .premium }}} インスタンス</CustomContent><CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent> でスロークエリを表示するには、次の手順を実行します。
 
 1. [**Diagnosis** ページに移動します](#view-the-diagnosis-page)。
 
@@ -109,11 +109,11 @@ Statement Analysis を使用するには、次の手順を実行します。
 
 キー分析を表示するには、次の手順を実行します。
 
-1. {{{ .dedicated }}} cluster の [**Diagnosis**](#view-the-diagnosis-page) ページに移動します。
+1. {{{ .dedicated }}} クラスターの [**Diagnosis**](#view-the-diagnosis-page) ページに移動します。
 
 2. **Key Visualizer** タブをクリックします。
 
-**Key Visualizer** ページでは、大きなヒートマップにより、アクセス トラフィックが時間の経過とともにどのように変化するかを確認できます。ヒートマップの各軸に沿った平均値は、下部と右側に表示されます。左側には、テーブル名、インデックス名、およびその他の関連情報が表示されます。
+**Key Visualizer** ページでは、大きなヒートマップにより、アクセストラフィックが時間の経過とともにどのように変化するかを確認できます。ヒートマップの各軸に沿った平均値は、下部と右側に表示されます。左側には、テーブル名、インデックス名、およびその他の関連情報が表示されます。
 
 詳細については、[Key Visualizer](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer) を参照してください。
 

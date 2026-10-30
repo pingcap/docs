@@ -6,7 +6,7 @@ aliases: ['/ja/tidbcloud/ticloud-connect']
 
 # ticloud serverless shell {#ticloud-serverless-shell}
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
+TiDB Cloud Starter またはTiDB Cloud Essential インスタンスに接続します。
 
 ```shell
 ticloud serverless shell [flags]
@@ -14,25 +14,25 @@ ticloud serverless shell [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
+対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスに接続します。
 
 ```shell
 ticloud serverless shell
 ```
 
-非対話型モードでデフォルトのユーザーを使用してTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
+非対話型モードでデフォルトのユーザーを使用してTiDB Cloud Starter またはTiDB Cloud Essential インスタンスに接続します。
 
 ```shell
 ticloud serverless shell -c <cluster-id>
 ```
 
-非対話型モードでデフォルトのユーザー名とパスワードを使用して、TiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
+非対話型モードでデフォルトのユーザー名とパスワードを使用して、TiDB Cloud Starter またはTiDB Cloud Essential インスタンスに接続します。
 
 ```shell
 ticloud serverless shell -c <cluster-id> --password <password>
 ```
 
-非対話型モードで特定のユーザー名とパスワードを使用してTiDB Cloud Starter またはTiDB Cloud Essential クラスターに接続します。
+非対話型モードで特定のユーザー名とパスワードを使用してTiDB Cloud Starter またはTiDB Cloud Essential インスタンスに接続します。
 
 ```shell
 ticloud serverless shell -c <cluster-id> -u <user-name> --password <password>
@@ -44,19 +44,19 @@ ticloud serverless shell -c <cluster-id> -u <user-name> --password <password>
 
 | フラグ                  | 説明                  | 必須  | 注記                       |
 | -------------------- | ------------------- | --- | ------------------------ |
-| -c, --cluster-id 文字列 | クラスターの ID を指定します。   | はい  | 非対話型モードでのみ動作します。         |
+| -c, --cluster-id string | クラスターの ID を指定します。   | はい  | 非対話型モードでのみ動作します。         |
 | -h, --help           | このコマンドのヘルプ情報を表示します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 | --password              | ユーザーのパスワードを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
-| -u, --user 文字列       | ログインするユーザーを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
+| -u, --user string       | ログインするユーザーを指定します。   | いいえ | 非対話型モードでのみ動作します。         |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                                                                             | 必須  | 注記                                                      |
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
-| --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
-| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグモードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

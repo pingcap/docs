@@ -25,18 +25,18 @@ TiDB Cloud Clinic は、**Enterprise**または**Premium**サポートプラン�
 
 2. 組織リストから対象の組織を選択します。選択したプロジェクト内のクラスターが表示されます。
 
-3. ターゲットクラスタの名前をクリックします。クラスタの概要ページが表示され、クラスタに関する以下の詳細情報を確認できます。
+3. ターゲットのTiDB Cloud Dedicatedクラスターの名前をクリックします。クラスタの概要ページが表示され、クラスタに関する以下の詳細情報を確認できます。
 
     - 高度なメトリクス
     - スロークエリ上位（クラスターの TiDB バージョンが v8.1.1 以降、v7.5.4 以降の場合にのみサポートされます）
-    - TopSQL (クラスターの TiDB バージョンが v8.1.1 以降、v7.5.4 以降の場合にのみサポートされます)
+    - Top SQL (クラスターの TiDB バージョンが v8.1.1 以降、v7.5.4 以降の場合にのみサポートされます)
     - ベンチマークレポート
 
 ## 高度な指標を監視する {#monitor-advanced-metrics}
 
 TiDB Cloud ClinicはGrafanaを使用して、TiDBクラスターの包括的なメトリクスセットを提供します。高度なメトリクスの保持ポリシーは90日間です。
 
-メトリクス ダッシュボードを表示するには、次の手順を実行します。
+メトリクスダッシュボードを表示するには、次の手順を実行します。
 
 1. [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**Cluster**ページに移動します。
 
@@ -91,21 +91,21 @@ TiDB Cloudコンソールのデフォルトの[**Slow Queries**](/tidb-cloud/tun
 
 詳細については[TiDB Dashboardのスロークエリ](https://docs.pingcap.com/tidb/stable/dashboard-slow-query)を参照してください。
 
-## TopSQLを監視する {#monitor-top-sql}
+## Top SQLを監視する {#monitor-top-sql}
 
-TiDB Cloud ClinicはTopSQL情報を提供し、データベース内の各SQL文のCPUオーバーヘッドをリアルタイムで監視し、視覚的に調査することができます。これにより、データベースのパフォーマンスに関する問題の最適化と解決に役立ちます。
+TiDB Cloud ClinicはTop SQL情報を提供し、一定期間における特定のTiDBまたはTiKVノード上で最もリソースを消費するクエリを視覚的に分析できるようにします。デフォルトでは、Top SQLはCPU負荷データを継続的に収集します。TiKVノードの場合、TiKVネットワークIO収集が有効になっていれば、`Network Bytes`と`Logical IO Bytes`も確認でき、`Query`、`Table`、`DB`、または`Region`ごとにホットスポットを分析できます。これにより、CPUだけでなく複数のリソース次元にわたるパフォーマンスの問題を特定し、トラブルシューティングできます。
 
-TopSQL を表示するには、次の手順を実行します。
+Top SQL を表示するには、次の手順を実行します。
 
 1. [TiDB Cloud Clinic コンソール](https://clinic.pingcap.com/)で、クラスターの**Cluster**ページに移動します。
 
-2. **TopSQL**をクリックします。
+2. **Top SQL**をクリックします。
 
-3. 特定のTiDBまたはTiKVインスタンスを選択して、その負荷を監視します。時間ピッカーを使用するか、チャートで時間範囲を選択して、分析を絞り込むことができます。
+3. 特定のTiDBまたはTiKVノードを選択して、その負荷を監視します。時間ピッカーを使用するか、チャートで時間範囲を選択して、分析を絞り込むことができます。
 
-4. TopSQL によって表示されるグラフと表を分析します。
+4. Top SQL によって表示されるグラフと表を分析します。選択したノードと有効になっているメトリクスに応じて、`Order By`と利用可能な集計次元を使用して、CPU、ネットワーク、または論理I/Oのホットスポットを調べることができます。
 
-詳細については[TiDB DashboardのTopSQL](https://docs.pingcap.com/tidb/stable/top-sql)を参照してください。
+詳細については[TiDB DashboardのTop SQL](https://docs.pingcap.com/tidb/stable/top-sql)を参照してください。
 
 ## ベンチマークレポートを生成する {#generate-benchmark-reports}
 

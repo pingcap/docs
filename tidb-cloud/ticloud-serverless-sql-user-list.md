@@ -5,7 +5,7 @@ summary: "`ticloud serverless sql-user list` のリファレンス。"
 
 # ticloud serverless sql-user list {#ticloud-serverless-sql-user-list}
 
-TiDB Cloud Starter またはTiDB Cloud Essential クラスター内の SQL ユーザーを一覧表示します。
+TiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを一覧表示します。
 
 ```shell
 ticloud serverless sql-user list [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user list [flags]
 
 ## 例 {#examples}
 
-対話モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスター内の SQL ユーザーを一覧表示します。
+対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを一覧表示します。
 
 ```shell
 ticloud serverless sql-user list
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential クラスター内の SQL ユーザーを一覧表示します。
+非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンス内の SQL ユーザーを一覧表示します。
 
 ```shell
 ticloud serverless sql-user list -c <cluster-id>
@@ -31,7 +31,7 @@ ticloud serverless sql-user list -c <cluster-id>
 
 | フラグ                  | 説明                                                                                                                    | 必須  | 注記                       |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------- | --- | ------------------------ |
-| -c, --cluster-id 文字列 | クラスターの ID を指定します。                                                                                                     | はい  | 非対話型モードでのみ動作します。         |
+| -c, --cluster-id string | クラスターの ID を指定します。                                                                                                     | はい  | 非対話型モードでのみ動作します。         |
 | -o, --output string   | 出力形式を["human" "json"]のいずれかで指定します。完全な結果を得るには、"json"形式を使用してください。(デフォルトは"human") | いいえ | 非対話型モードでのみ動作します。         |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                                                                                                   | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
@@ -39,10 +39,10 @@ ticloud serverless sql-user list -c <cluster-id>
 
 | フラグ               | 説明                                                                             | 必須  | 注記                                                      |
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
-| --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
-| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグモードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

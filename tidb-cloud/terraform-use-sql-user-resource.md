@@ -18,7 +18,7 @@ summary: "`tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユー�
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
 - TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
-    - [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
     - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## SQLユーザーを作成する {#create-a-sql-user}
@@ -53,12 +53,12 @@ summary: "`tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユー�
     }
     ```
 
-    `resource`ブロックを使用して、リソース タイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
+    `resource`ブロックを使用して、リソースタイプ、リソース名、リソースの詳細など、 TiDB Cloudのリソースを定義します。
 
-    - `tidbcloud_sql_user`リソースを使用するには、リソース タイプを`tidbcloud_sql_user`に設定します。
+    - `tidbcloud_sql_user`リソースを使用するには、リソースタイプを`tidbcloud_sql_user`に設定します。
     - リソース名は必要に応じて定義できます。例： `example` 。
-    - TiDB Cloud Starter またはTiDB Cloud Essential クラスターの SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`ユーザー プレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データソースを実行することでユーザー プレフィックスを取得できます。
-    - SQL ユーザー指定情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)を参照してください。
+    - TiDB Cloud Starter またはTiDB Cloud Essential インスタンスの SQL ユーザーの場合、 `user_name`と組み込みロール`role_readonly`および`role_readwrite`は、ユーザープレフィックスで始まる必要があり、 `tidbcloud_serverless_cluster`データソースを実行することでユーザープレフィックスを取得できます。
+    - SQL ユーザーの仕様情報を取得するには、 [`tidbcloud_sql_user` (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user)を参照してください。
 
 3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
 
@@ -122,9 +122,9 @@ summary: "`tidbcloud_sql_user` リソースを使用してTiDB Cloud SQL ユー�
       }
     ```
 
-## SQL ユーザーのパスワードまたはユーザー ロールを変更する {#change-the-password-or-user-roles-of-a-sql-user}
+## SQL ユーザーのパスワードまたはユーザーロールを変更する {#change-the-password-or-user-roles-of-a-sql-user}
 
-次のように、Terraform を使用して SQL ユーザーのパスワードまたはユーザー ロールを変更できます。
+次のように、Terraform を使用して SQL ユーザーのパスワードまたはユーザーロールを変更できます。
 
 1. [SQLユーザーを作成する](#create-a-sql-user)ときに使用する`sql_user.tf`ファイルで、 `password` 、 `builtin_role` 、および`custom_roles` (該当する場合) を変更します。
 
@@ -203,9 +203,9 @@ Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、T
 
 たとえば、Terraform によって作成されていない SQL ユーザーを次のようにインポートできます。
 
-1. 新しい`tidbcloud_sql_user`リソースのインポート ブロックを追加します。
+1. 新しい`tidbcloud_sql_user`リソースのインポートブロックを追加します。
 
-    次のインポート ブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,user_name`の形式に置き換えます。
+    次のインポートブロックを`.tf`ファイルに追加し、 `example`を目的のリソース名に置き換え、`${id}`を`cluster_id,user_name`の形式に置き換えます。
 
     ```
     import {
@@ -216,13 +216,13 @@ Terraform で管理されていないTiDB Cloud SQL ユーザーの場合は、T
 
 2. 新しい設定ファイルを生成します。
 
-    インポート ブロックに従って、新しい`tidbcloud_sql_user`リソースの新しい設定ファイルを生成します。
+    インポートブロックに従って、新しい`tidbcloud_sql_user`リソースの新しい設定ファイルを生成します。
 
     ```shell
     terraform plan -generate-config-out=generated.tf
     ```
 
-    上記のコマンドでは、既存の`.tf`名を指定しないでください。指定した場合、Terraform はエラーを返します。
+    上記のコマンドでは、既存の`.tf`ファイル名を指定しないでください。指定した場合、Terraform はエラーを返します。
 
     その後、カレントディレクトリに`generated.tf`ファイルが作成され、そこにインポートされたリソースの設定が含まれます。ただし、必須の引数`password`が設定されていないため、プロバイダーはエラーをスローします。生成された設定ファイルで、引数`password`の値を`tidbcloud_sql_user`リソースに置き換えることができます。
 

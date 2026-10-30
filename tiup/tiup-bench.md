@@ -1,6 +1,6 @@
 ---
 title: Stress Test TiDB Using TiUP Bench Component
-summary: TiUPを使用して、TPC-C、TPC-H、CH、RawSQL、および YCSB ワークロードで TiDB のストレス テストを実行する方法を学習します。
+summary: TiUPを使用して、TPC-C、TPC-H、CH、RawSQL、および YCSB ワークロードで TiDB のストレステストを実行する方法を学習します。
 ---
 
 # TiUP Benchコンポーネントを使用したTiDBのストレステスト {#stress-test-tidb-using-tiup-bench-component}
@@ -75,7 +75,7 @@ Flags:
 
 TPC-Cテストを実行するための簡略化された手順を以下に示します。詳細な手順については、 [TiDBでTPC-Cテストを実行する方法](/benchmark/benchmark-tidb-using-tpcc.md)を参照してください。
 
-1. ハッシュを使用して 4つのパーティションを使用して 4つの倉庫を作成します。
+1. ハッシュを使用して 4つのパーティションを使用して 4つのウェアハウスを作成します。
 
     ```shell
     tiup bench tpcc --warehouses 4 --parts 4 prepare
@@ -168,7 +168,7 @@ Flags:
 
 ## TiUPを使用してYCSBテストを実行する {#run-ycsb-test-using-tiup}
 
-YCSB を介して TiDB と TiKV の両方をストレス テストできます。
+YCSB を介して TiDB と TiKV の両方をストレステストできます。
 
 ### ストレステスト TiDB {#stress-test-tidb}
 
@@ -202,7 +202,7 @@ YCSB を介して TiDB と TiKV の両方をストレス テストできます�
 
 ## TiUPを使用してRawSQLテストを実行する {#run-rawsql-test-using-tiup}
 
-任意のクエリを SQL ファイルに記述し、次のように`tiup bench rawsql`を実行してテストに使用することができます。
+任意のクエリを SQL ファイルに記述し、次のように`tiup bench rawsql`を実行してテストに使用できます。
 
 1. データとクエリを準備します。
 

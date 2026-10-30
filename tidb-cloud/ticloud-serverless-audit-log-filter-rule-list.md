@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log filter-rule list` のリファレンス�
 
 # ticloud serverless audit-log filter-rule list {#ticloud-serverless-audit-log-filter-rule-list}
 
-TiDB Cloud Essential クラスターの監査ログフィルタールールを一覧表示します。
+TiDB Cloud Essential インスタンスの監査ログフィルタールールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list [flags]
@@ -13,7 +13,7 @@ ticloud serverless audit-log filter-rule list [flags]
 
 ## 例 {#examples}
 
-対話モードですべての監査ログフィルタルールを一覧表示します。
+対話型モードですべての監査ログフィルタルールを一覧表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule list
@@ -35,18 +35,18 @@ ticloud serverless audit-log filter-rule list -c <cluster-id> -o json
 
 | フラグ                  | 説明                                                                        | 必須  | 注記                                   |
 | -------------------- | ------------------------------------------------------------------------- | --- | ------------------------------------ |
-| -c, --cluster-id 文字列 | クラスターの ID。                                                                | いいえ | 非対話型モードでのみ動作します。                     |
-| -o, --output          | 出力形式を指定します。有効な値は`human` （デフォルト）または`json`です。完全な結果を得るには、 `json`形式を使用してください。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
-| -h, --help           | このコマンドのヘルプ情報を表示します。                                                       | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -c, --cluster-id string | クラスターの ID。                                                                | いいえ | 非対話型モードでのみ動作します。                     |
+| -o, --output string   | 出力形式を指定します。有効な値は`human` （デフォルト）または`json`です。完全な結果を得るには、 `json`形式を使用してください。 | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
+| -h, --help           | このコマンドのヘルプ情報を表示します。                                                       | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}
 
 | フラグ               | 説明                        | 必須  | 注記                                   |
 | ----------------- | ------------------------- | --- | ------------------------------------ |
-| -D, --debug       | デバッグ モードを有効にします。          | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -D, --debug       | デバッグモードを有効にします。          | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 | --no-color             | カラー出力を無効にします。             | いいえ | 非対話型モードでのみ動作します。                     |
-| -P, --profile 文字列 | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話モードと非対話モードの両方で動作します。 |
+| -P, --profile string | 設定ファイルから使用するプロファイルを指定します。 | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

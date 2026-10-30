@@ -23,7 +23,7 @@ TiDB Cloudには、スロークエリを分析するのに役立つツールが�
 
 ### 診断ページで Statement を使用する {#use-statement-on-the-diagnosis-page}
 
-TiDB Cloudコンソールには、 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ上に[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL文の実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL文を特定し、分析することができます。
+TiDB Cloudコンソールには、 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ上に[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL文の実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL文を特定し、分析できます。
 
 このページでは、構造が同じ SQL クエリ (クエリパラメータが一致しない場合でも) は、同じ SQL文にグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は、どちらも同じ SQL文`select * from employee where id in (...)`の一部です。
 
@@ -57,7 +57,7 @@ TiDBによって選択された実行計画が最適でない場合は、 EXPLAI
 
 これらの等価性の変更により、クエリは論理実行計画で扱いやすくなります。等価性の変更後、TiDB は元のクエリと等価なクエリプラン構造を取得し、データ分布と演算子の特定の実行オーバーヘッドに基づいて最終的な実行計画を取得します。詳細については、 [SQLの物理的最適化](/sql-physical-optimization.md)を参照してください。
 
-また、プリペアドプランキャッシュで紹介したように、TiDB は、 `PREPARE`文の実行時に実行計画の作成オーバーヘッドを削減するために、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を提供しています。
+また、[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)で紹介されているように、TiDB は `PREPARE`文の実行時に実行計画の作成オーバーヘッドを削減するために、実行計画キャッシュを有効にすることを選択できます。
 
 ### フルテーブルスキャンを最適化 {#optimize-full-table-scan}
 
@@ -113,7 +113,7 @@ Key Visualizerでは、以下の情報を確認できます。まず、いくつ
 
 - 時間の経過に伴う全体のトラフィックを示す大きなヒートマップ
 - ヒートマップの座標に関する詳細情報
-- 左側に表示される表や索引などの識別情報
+- 左側に表示されるテーブルやインデックスなどの識別情報
 
 Key Visualizerには[4つの一般的なヒートマップ結果](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#common-heatmap-types)があります。
 

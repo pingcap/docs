@@ -13,7 +13,7 @@ summary: TiDB Cloudに関するよくある質問（FAQ）について学びま�
 
 ### TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
-TiDB Cloudは、直感的なコンソールを通じて制御できるフルマネージドのクラウド インスタンスにより、TiDB クラスターのデプロイ、管理、保守がさらに簡単になります。 <CustomContent language="en,zh">Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、またはAlibaba Cloudに簡単にデプロイして、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">Amazon Web Services (AWS)、Google Cloud、またはMicrosoft Azureに簡単にデプロイすることで、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
+TiDB Cloudは、直感的なコンソールを通じて制御できるフルマネージドのクラウドインスタンスにより、TiDB クラスターのデプロイ、管理、保守がさらに簡単になります。 <CustomContent language="en,zh">Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、またはAlibaba Cloudに簡単にデプロイして、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">Amazon Web Services (AWS)、Google Cloud、またはMicrosoft Azureに簡単にデプロイすることで、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
 
 TiDB Cloud を利用すれば、開発者や DBA は、トレーニングをほとんど受けていないか、全く受けていない場合でも、インフラストラクチャ管理やクラスタのデプロイといった、かつては複雑だったタスクを容易に処理できるようになり、データベースの複雑さではなく、アプリケーションの開発に集中できます。また、ボタンをクリックするだけで TiDB クラスタをスケールインまたはスケールアウトできるため、必要な量と期間だけデータベースをプロビジョニングでき、高価なリソースを無駄に消費することがなくなります。
 
