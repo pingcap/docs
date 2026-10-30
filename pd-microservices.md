@@ -33,6 +33,7 @@ In addition, when the scheduling module is changed, you can update the `scheduli
 - Microservices are not compatible with the [Data Replication Auto Synchronous (DR Auto-Sync)](/two-data-centers-in-one-city-deployment.md) feature.
 - Microservices are not compatible with the TiDB system variable [`tidb_enable_tso_follower_proxy`](/system-variables.md#tidb_enable_tso_follower_proxy-new-in-v530).
 - Because [hibernate Regions](/tikv-configuration-file.md#hibernate-regions) might exist in a cluster, during a primary and secondary switchover of the `scheduling` microservice, the scheduling function of the cluster might be unavailable for a certain period (up to [`peer-stale-state-check-interval`](/tikv-configuration-file.md#peer-stale-state-check-interval), which is five minutes by default) to avoid redundant scheduling.
+- The `scheduling` microservice does not support the deprecated `label-property` configuration, so `reject-leader` label properties do not take effect when the `scheduling` microservice is enabled. To keep leaders off specific stores, use [Placement Rules](/configure-placement-rules.md) or `evict-leader-scheduler`. If no `scheduling` microservice is available and PD schedules by itself through `enable-scheduling-fallback` (enabled by default), `label-property` takes effect again.
 
 ## Usage
 
