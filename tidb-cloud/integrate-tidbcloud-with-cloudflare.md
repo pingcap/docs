@@ -37,13 +37,13 @@ Before you try the steps in this article, you need to prepare the following thin
 2. To authenticate Wrangler, run wrangler login:
 
     ```
-    wrangler login
+    npx wrangler login
     ```
 
 3. Use Wrangler to create a worker project:
 
     ```
-    wrangler init tidb-cloud-cloudflare
+    npx wrangler init tidb-cloud-cloudflare
     ```
 
 4. In your terminal, you will be asked a series of questions related to your project. Choose the default values for all questions.
@@ -92,8 +92,10 @@ export default {
 The `DATABASE_URL` follows the `mysql://username:password@host/database` format. You can set the environment variable with wrangler cli:
 
 ```
-wrangler secret put <DATABASE_URL>
+npx wrangler secret put DATABASE_URL
 ```
+
+When prompted, enter the connection string as the secret value.
 
 You can also edit the `DATABASE_URL` secret via the Cloudflare Workers dashboard.
 
