@@ -325,7 +325,7 @@ To link your TiDB Cloud account to an Azure billing account, take the following 
 
 6. Sign in with your TiDB Cloud account. The **Link to Your Azure Billing Account** page is displayed.
 
-7. On the **Link to Your Azure Billing Account** page, select your target organization and click **Link** to link to your AWS billing account.
+7. On the **Link to Your Azure Billing Account** page, select your target organization and click **Link** to link to your Azure billing account.
 
     > **Note:**
     >
