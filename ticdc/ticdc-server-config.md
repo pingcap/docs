@@ -111,7 +111,7 @@ The following describes the configuration file specified by the `config` option 
 
 - Controls log redaction. This parameter is supported only in the [TiCDC new architecture](/ticdc/ticdc-architecture.md).
 - Default value: `false`, which disables log redaction
-- Set the value to `true` to replace sensitive values in logs with `?`, or set it to `"marker"` to enclose sensitive values in markers.
+- Set the value to `true` to replace sensitive values in logs with `?`, or set it to `"marker"` to enclose sensitive values in `‹` and `›` while preserving their original values.
 
 ### `capture-session-ttl`
 
