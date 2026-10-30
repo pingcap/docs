@@ -115,6 +115,8 @@ When DM cannot parse a statement, it cannot apply filters that target a specific
 > **Warning:**
 >
 > To avoid filtering out data that needs to be migrated, configure the global filtering rule as strictly as possible.
+>
+> The following patterns match SQL text, including string literals, and might unintentionally filter out other DDL statements. For example, an `ALTER TABLE ... ADD COLUMN` statement containing `ADD PARTITION` in a default value might also be skipped. Before using this rule, make sure the patterns do not match any DDL statements you need to replicate.
 
 ```
 filters:
