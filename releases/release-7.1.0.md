@@ -15,7 +15,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 以前の LTS 6.5.0 と比較して、7.1.0 には、 [6.6.0-DMR](/releases/release-6.6.0.md) 、 [7.0.0-DMR](/releases/release-7.0.0.md)でリリースされた新機能、改善、バグ修正が含まれているだけでなく、次の主要な機能と改善も導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">スケーラビリティとパフォーマンス</td><td>TiFlash は<a href="https://docs.pingcap.com/tidb/v7.1/tiflash-disaggregated-and-s3" target="_blank">ストレージとコンピューティングの分離アーキテクチャ、および S3 共有ストレージ</a>(実験的、v7.0.0 で導入) をサポートします。</td><td> TiFlash は、オプションとしてクラウドネイティブアーキテクチャを導入します。<ul><li> TiFlash のコンピューティングとストレージを分離します。これは、弾力的な HTAP リソース利用のマイルストーンとなります。</li><li>低コストで共有ストレージを提供できる S3 ベースのストレージエンジンを導入します。</li></ul></td></tr><tr><td> TiKV は<a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_store_batch_size" target="_blank">バッチ集約データリクエスト</a>をサポートします (v6.6.0 で導入)</td><td>この機能強化により、TiKVバッチゲット操作におけるRPCの総数が大幅に削減されます。データが広範囲に分散し、gRPCスレッドプールのリソースが不足している状況では、コプロセッサリクエストをバッチ処理することでパフォーマンスを50%以上向上させることができます。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.1/troubleshoot-hot-spot-issues#scatter-read-hotspots" target="_blank">負荷ベースのレプリカ読み取り</a></td><td>読み取りホットスポットのシナリオでは、TiDBはホットスポットTiKVノードへの読み取りリクエストをそのレプリカにリダイレクトできます。この機能により、読み取りホットスポットが効率的に分散され、クラスタリソースの利用が最適化されます。負荷ベースのレプリカ読み取りをトリガーするしきい値を制御するには、システム変数<a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_load_based_replica_read_threshold-new-in-v700" target="_blank"><code>tidb_load_based_replica_read_threshold</code></a>を調整します。</td></tr><tr><td> TiKV は<a href="https://docs.pingcap.com/tidb/v7.1/partitioned-raft-kv" target="_blank">パーティション化されたRaft KVストレージエンジン</a>をサポートします (実験的)</td><td> TiKVは、新世代のストレージエンジンであるパーティション型Raft KVを導入します。各データリージョンに専用のRocksDBインスタンスを割り当てることで、クラスターのストレージ容量をテラバイトレベルからペタバイトレベルに拡張し、より安定した書き込みレイテンシーと強力なスケーラビリティを実現します。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs.pingcap.com/tidb/v7.1/tidb-resource-control" target="_blank">リソースグループによるリソース制御</a>（GA）</td><td>リソースグループに基づくリソース管理をサポートします。これにより、同一クラスター内の異なるワークロードにリソースを割り当て、分離することができます。この機能は、マルチアプリケーションクラスターの安定性を大幅に向上させ、マルチテナンシーの基盤を構築します。v7.1.0では、この機能により、実際のワークロードまたはハードウェア構成に基づいてシステム容量を見積もる機能が導入されました。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.1/tiflash-spill-disk" target="_blank">ディスクへの書き込み</a>をサポートします (v7.0.0 で導入)</td><td> TiFlash は、集計、ソート、ハッシュ結合などのデータ集約型操作における OOM を軽減するために、ディスクへの中間結果のスピルをサポートします。</td></tr><tr><td rowspan="3"> SQL</td><td> <a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-indexes" target="_blank">多値インデックス</a>（GA）</td><td> MySQL互換の多値インデックスをサポートし、JSON型を拡張することでMySQL 8.0との互換性を向上させました。この機能により、多値列のメンバーシップチェックの効率が向上します。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/time-to-live" target="_blank">行レベルの TTL</a> (v7.0.0 で GA)</td><td>一定の期間を経過したデータを自動的に期限切れにすることで、データベース サイズの管理をサポートし、パフォーマンスを向上します。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/generated-columns" target="_blank">生成列</a>（GA）</td><td>生成列の値は、列定義内のSQL式によってリアルタイムで計算されます。この機能により、一部のアプリケーションロジックがデータベースレベルにプッシュされ、クエリの効率が向上します。</td></tr><tr><td rowspan="2">Security</td><td><a href="https://docs.pingcap.com/tidb/v7.1/security-compatibility-with-mysql" target="_blank">LDAP認証</a></td><td>TiDB は、 <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL 8.0</a>と互換性のある LDAP 認証をサポートしています。</td></tr><tr><td> <a href="https://static.pingcap.com/files/2023/09/18204824/TiDB-Database-Auditing-User-Guide1.pdf" target="_blank">監査ログの強化</a>（<a href="https://www.pingcap.com/tidb-enterprise" target="_blank">Enterprise Edition</a>のみ）</td><td> TiDB Enterprise Editionは、データベース監査機能を強化しました。よりきめ細かなイベントフィルタリング制御、よりユーザーフレンドリーなフィルタ設定、JSON形式の新しいファイル出力形式、監査ログのライフサイクル管理を提供することで、システム監査能力を大幅に向上させます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>特徴</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">スケーラビリティとパフォーマンス</td><td>TiFlash は<a href="https://docs.pingcap.com/tidb/v7.1/tiflash-disaggregated-and-s3" target="_blank">ストレージとコンピューティングの分離アーキテクチャ、および S3 共有ストレージ</a>(実験的、v7.0.0 で導入) をサポートします。</td><td> TiFlash は、オプションとしてクラウドネイティブアーキテクチャを導入します。<ul><li> TiFlash のコンピューティングとストレージを分離します。これは、弾力的な HTAP リソース利用のマイルストーンとなります。</li><li>低コストで共有ストレージを提供できる S3 ベースのストレージエンジンを導入します。</li></ul></td></tr><tr><td> TiKV は<a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_store_batch_size" target="_blank">バッチ集約データリクエスト</a>をサポートします (v6.6.0 で導入)</td><td>この機能強化により、TiKVバッチゲット操作におけるRPCの総数が大幅に削減されます。データが広範囲に分散し、gRPCスレッドプールのリソースが不足している状況では、コプロセッサリクエストをバッチ処理することでパフォーマンスを50%以上向上させることができます。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/v7.1/troubleshoot-hot-spot-issues#scatter-read-hotspots" target="_blank">負荷ベースのレプリカ読み取り</a></td><td>読み取りホットスポットのシナリオでは、TiDBはホットスポットTiKVノードへの読み取りリクエストをそのレプリカにリダイレクトできます。この機能により、読み取りホットスポットが効率的に分散され、クラスタリソースの利用が最適化されます。負荷ベースのレプリカ読み取りをトリガーするしきい値を制御するには、システム変数<a href="https://docs.pingcap.com/tidb/v7.1/system-variables#tidb_load_based_replica_read_threshold-new-in-v700" target="_blank"><code>tidb_load_based_replica_read_threshold</code></a>を調整します。</td></tr><tr><td> TiKV は<a href="https://docs.pingcap.com/tidb/v7.1/partitioned-raft-kv" target="_blank">パーティション化されたRaft KVストレージエンジン</a>をサポートします (実験的)</td><td> TiKVは、新世代のストレージエンジンであるパーティション型Raft KVを導入します。各データリージョンに専用のRocksDBインスタンスを割り当てることで、クラスターのストレージ容量をテラバイトレベルからペタバイトレベルに拡張し、より安定した書き込みレイテンシーと強力なスケーラビリティを実現します。</td></tr><tr><td rowspan="2">信頼性と可用性</td><td><a href="https://docs.pingcap.com/tidb/v7.1/tidb-resource-control" target="_blank">リソースグループによるリソース制御</a>（GA）</td><td>リソースグループに基づくリソース管理をサポートします。これにより、同一クラスター内の異なるワークロードにリソースを割り当て、分離できます。この機能は、マルチアプリケーションクラスターの安定性を大幅に向上させ、マルチテナンシーの基盤を構築します。v7.1.0では、この機能により、実際のワークロードまたはハードウェア構成に基づいてシステム容量を見積もる機能が導入されました。</td></tr><tr><td> TiFlash は<a href="https://docs.pingcap.com/tidb/v7.1/tiflash-spill-disk" target="_blank">ディスクへの書き込み</a>をサポートします (v7.0.0 で導入)</td><td> TiFlash は、集計、ソート、ハッシュ結合などのデータ集約型操作における OOM を軽減するために、ディスクへの中間結果のスピルをサポートします。</td></tr><tr><td rowspan="3"> SQL</td><td> <a href="https://docs.pingcap.com/tidb/v7.1/sql-statement-create-index#multi-valued-indexes" target="_blank">多値インデックス</a>（GA）</td><td> MySQL互換の多値インデックスをサポートし、JSON型を拡張することでMySQL 8.0との互換性を向上させました。この機能により、多値列のメンバーシップチェックの効率が向上します。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/time-to-live" target="_blank">行レベルの TTL</a> (v7.0.0 で GA)</td><td>一定の期間を経過したデータを自動的に期限切れにすることで、データベースサイズの管理をサポートし、パフォーマンスを向上します。</td></tr><tr><td><a href="https://docs.pingcap.com/tidb/v7.1/generated-columns" target="_blank">生成列</a>（GA）</td><td>生成列の値は、列定義内のSQL式によってリアルタイムで計算されます。この機能により、一部のアプリケーションロジックがデータベースレベルにプッシュされ、クエリの効率が向上します。</td></tr><tr><td rowspan="2">Security</td><td><a href="https://docs.pingcap.com/tidb/v7.1/security-compatibility-with-mysql" target="_blank">LDAP認証</a></td><td>TiDB は、 <a href="https://dev.mysql.com/doc/refman/8.0/en/ldap-pluggable-authentication.html" target="_blank">MySQL 8.0</a>と互換性のある LDAP 認証をサポートしています。</td></tr><tr><td> <a href="https://static.pingcap.com/files/2023/09/18204824/TiDB-Database-Auditing-User-Guide1.pdf" target="_blank">監査ログの強化</a>（<a href="https://www.pingcap.com/tidb-enterprise" target="_blank">Enterprise Edition</a>のみ）</td><td> TiDB Enterprise Editionは、データベース監査機能を強化しました。よりきめ細かなイベントフィルタリング制御、よりユーザーフレンドリーなフィルタ設定、JSON形式の新しいファイル出力形式、監査ログのライフサイクル管理を提供することで、システム監査能力を大幅に向上させます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -140,7 +140,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - `INSERT INTO SELECT`文を使用したTiFlashクエリ結果の保存をサポート (GA) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi)
 
-    TiDB v6.5.0以降、 `INSERT INTO SELECT`文の`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`の句で指定されたTiDBテーブルに簡単に保存し、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。
+    TiDB v6.5.0以降、 `INSERT INTO SELECT`文の`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`の句で指定されたTiDBテーブルに簡単に保存し、さらに分析できます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。
 
     この機能はバージョン7.1.0で一般公開されています。`INSERT INTO SELECT`の`SELECT`句の実行中、オプティマイザは、 [SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに決定できます。そのため、実験的段階で導入された`tidb_enable_tiflash_read_for_write_stmt`システム変数は非推奨となりました。TiFlashの`INSERT INTO SELECT`文の計算規則は`STRICT SQL Mode`要件を満たしていないため、TiDBは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合にのみ、 `INSERT INTO SELECT`文の`SELECT`句をTiFlashにプッシュダウンすることを許可します。つまり、 `sql_mode`値に`STRICT_TRANS_TABLES`と`STRICT_ALL_TABLES`が含まれません。
 
@@ -156,7 +156,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - ハッシュおよびキーパーティションテーブルのパーティション管理を改善[#42728](https://github.com/pingcap/tidb/issues/42728) @[mjonss](https://github.com/mjonss)
 
-    v7.1.0より前では、TiDBのハッシュおよびキーパーティションテーブルは、パーティション管理ステートメント`TRUNCATE PARTITION`をサポートしていました。v7.1.0以降では、ハッシュおよびキーパーティションテーブルは、パーティション管理ステートメント`ADD PARTITION`および`COALESCE PARTITION`もサポートするようになりました。そのため、必要に応じてハッシュおよびキーパーティションテーブルのパーティション数を柔軟に調整できます。例えば、パーティション管理ステートメント`ADD PARTITION`でパーティション数を増やしたり、パーティション管理ステートメント`COALESCE PARTITION`でパーティション数を減らしたりすることができます。
+    v7.1.0より前では、TiDBのハッシュおよびキーパーティションテーブルは、パーティション管理ステートメント`TRUNCATE PARTITION`をサポートしていました。v7.1.0以降では、ハッシュおよびキーパーティションテーブルは、パーティション管理ステートメント`ADD PARTITION`および`COALESCE PARTITION`もサポートするようになりました。そのため、必要に応じてハッシュおよびキーパーティションテーブルのパーティション数を柔軟に調整できます。例えば、パーティション管理ステートメント`ADD PARTITION`でパーティション数を増やしたり、パーティション管理ステートメント`COALESCE PARTITION`でパーティション数を減らしたりできます。
 
     詳細については[ドキュメント](/partitioned-table.md#manage-hash-and-key-partitions)を参照してください。
 
@@ -176,7 +176,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 ### DB操作 {#db-operations}
 
-- DDL 操作を手動でキャンセルせずに、スムーズなクラスタ アップグレードをサポート (実験的) [#39751](https://github.com/pingcap/tidb/issues/39751) @[zimulala](https://github.com/zimulala)
+- DDL 操作を手動でキャンセルせずに、スムーズなクラスタアップグレードをサポート (実験的) [#39751](https://github.com/pingcap/tidb/issues/39751) @[zimulala](https://github.com/zimulala)
 
     TiDB v7.1.0 より前のバージョンでは、クラスターをアップグレードするには、アップグレード前に実行中またはキューに入れられた DDL タスクを手動でキャンセルし、アップグレード後に再度追加する必要があります。
 
@@ -210,7 +210,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - データベース監査機能の強化（Enterprise Edition）
 
-    v7.1.0 では、TiDB Enterprise Edition でデータベース監査機能が強化され、その機能が大幅に拡張され、ユーザーエクスペリエンスが向上して、企業のデータベース セキュリティ コンプライアンスのニーズに対応できるようになりました。
+    v7.1.0 では、TiDB Enterprise Edition でデータベース監査機能が強化され、その機能が大幅に拡張され、ユーザーエクスペリエンスが向上して、企業のデータベースセキュリティコンプライアンスのニーズに対応できるようになりました。
 
     - より詳細な監査イベント定義とよりきめ細かな監査設定のために、「フィルター」と「ルール」の概念を導入します。
     - JSON 形式でのルールの定義をサポートし、よりユーザーフレンドリーな構成方法を提供します。
@@ -218,7 +218,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - 監査ログをTEXTと JSON 形式の両方で出力できるようにすることで、サードパーティツールとの統合が容易になります。
     - 監査ログの秘匿化をサポートします。セキュリティ強化のため、すべてのリテラルを置き換えることができます。
 
-    データベース監査は、TiDB Enterprise Editionの重要な機能です。この機能は、企業のデータセキュリティとコンプライアンスを確保するための強力な監視・監査ツールを提供します。企業の管理者は、データベース操作の発生源と影響を追跡し、不正なデータ盗難や改ざんを防止することができます。さらに、データベース監査は、企業が様々な規制やコンプライアンス要件を満たし、法的および倫理的コンプライアンスを確保するのにも役立ちます。この機能は、企業の情報セキュリティにとって重要なアプリケーション価値を持っています。
+    データベース監査は、TiDB Enterprise Editionの重要な機能です。この機能は、企業のデータセキュリティとコンプライアンスを確保するための強力な監視・監査ツールを提供します。企業の管理者は、データベース操作の発生源と影響を追跡し、不正なデータ盗難や改ざんを防止できます。さらに、データベース監査は、企業が様々な規制やコンプライアンス要件を満たし、法的および倫理的コンプライアンスを確保するのにも役立ちます。この機能は、企業の情報セキュリティにとって重要なアプリケーション価値を持っています。
 
     詳細については、 [ユーザーガイド](https://static.pingcap.com/files/2023/09/18204824/TiDB-Database-Auditing-User-Guide1.pdf)をご覧ください。この機能はTiDB Enterprise Editionに含まれています。この機能を使用するには、 [TiDB Enterprise](https://www.pingcap.com/tidb-enterprise)ページに移動してTiDB Enterprise Editionを入手してください。
 
@@ -234,7 +234,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステムテーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取ることができません。
 
-- TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスター バージョン >= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
+- TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスターバージョン >= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメータの値を`"global"`に変更して再試行できます。
 
 - TiDB v7.1.0で[`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)を使用すると、FLASHBACK操作が完了した後も、一部のリージョンがFLASHBACKプロセスに残る可能性があります。v7.1.0ではこの機能の使用を避けることをお勧めします。詳細については、 issue [#44292](https://github.com/pingcap/tidb/issues/44292)を参照してください。この問題が発生した場合は、 [TiDBスナップショットのバックアップと復元](/br/br-snapshot-guide.md)機能を使用してデータを復元できます。
 
@@ -293,7 +293,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 | TiKV           | [`region-compact-check-step`](/tikv-configuration-file.md#region-compact-check-step)                                           | 変更     | Partitioned Raft KVが有効な場合（ `storage.engine="partitioned-raft-kv"` ）、デフォルト値を`100`から`5`に変更します。                                                                                       |
 | PD             | [`store-limit-version`](/pd-configuration-file.md#store-limit-version-new-in-v710)                                             | 新しく追加された | ストア制限のモードを制御します。値のオプションは`"v1"`と`"v2"`です。                                                                                                                                           |
 | PD             | [`schedule.enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                        | 変更     | デフォルト値を`false`から`true`に変更します。これは、スケジューラの診断機能がデフォルトで有効であることを意味します。                                                                                                                  |
-| TiFlash        | `http_port`                                                                                                                    | 削除済み     | HTTP サービス ポート (デフォルト`8123` ) を廃止します。                                                                                                                                               |
+| TiFlash        | `http_port`                                                                                                                    | 削除済み     | HTTP サービスポート (デフォルト`8123` ) を廃止します。                                                                                                                                               |
 | TiDB Lightning | [`tikv-importer.pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)                                    | 新しく追加された | TiDB LightningがPDスケジュールを一時停止する範囲を制御します。デフォルト値は`"table"`で、値のオプションは`"global"`と`"table"`です。                                                                                           |
 | TiDB Lightning | [`tikv-importer.region-check-backoff-limit`](/tidb-lightning/tidb-lightning-configuration.md)                                  | 新しく追加された | 分割および分散処理後にリージョンがオンラインになるまでの再試行回数を制御します。デフォルト値は`1800`です。最大再試行間隔は 2秒です。再試行の間にいずれかのリージョンがオンラインになった場合、再試行回数は増加しません。                                                                  |
 | TiDB Lightning | [`tikv-importer.region-split-batch-size`](/tidb-lightning/tidb-lightning-configuration.md)                                     | 新しく追加された | バッチでリージョンを分割する際のリージョン数を制御します。デフォルト値は`4096`です。                                                                                                                                      |
@@ -324,7 +324,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 - PD
 
     - スナップショットの実行内容に基づいてストア制限のサイズを自動調整するコントローラを追加します。このコントローラを有効にするには、 `store-limit-version`を`v2` （実験的）に設定してください。有効にすると、スケールインまたはスケールアウトの速度を制御するために`store limit`設定を手動で調整する必要がなくなります。 [#6147](https://github.com/tikv/pd/issues/6147) @[bufferflies](https://github.com/bufferflies)
-    - ストレージエンジンが raft-kv2 の場合、ホットスポット スケジューラによって不安定な負荷のリージョンが頻繁にスケジュールされるのを避けるために、履歴負荷情報を追加します。 [#6297](https://github.com/tikv/pd/issues/6297) @[bufferflies](https://github.com/bufferflies)
+    - ストレージエンジンが raft-kv2 の場合、ホットスポットスケジューラによって不安定な負荷のリージョンが頻繁にスケジュールされるのを避けるために、履歴負荷情報を追加します。 [#6297](https://github.com/tikv/pd/issues/6297) @[bufferflies](https://github.com/bufferflies)
     - リーダーのヘルスチェックメカニズムを追加します。etcdリーダーが配置されているPDサーバーがリーダーとして選出できない場合、PDはetcdリーダーをアクティブに切り替え、PDリーダーが利用可能であることを確認します。 [#6403](https://github.com/tikv/pd/issues/6403) @[nolouch](https://github.com/nolouch)
 
 - TiFlash
@@ -360,7 +360,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     - パーティションを再編成した後、手動で`ANALYZE TABLE`を実行するプロンプトが表示されない問題を修正しました。 [#42183](https://github.com/pingcap/tidb/issues/42183) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - `DROP TABLE`操作が実行されているときに`ADMIN SHOW DDL JOBS`結果にテーブル名が表示されない問題を修正[#42268](https://github.com/pingcap/tidb/issues/42268) @[tiancaiamao](https://github.com/tiancaiamao)
-    - Grafana モニタリング パネルで`Ignore Event Per Minute`と`Stats Cache LRU Cost`チャートが正常に表示されないことがある問題を修正しました [#42562](https://github.com/pingcap/tidb/issues/42562) @[pingandb](https://github.com/pingandb)
+    - Grafana モニタリングパネルで`Ignore Event Per Minute`と`Stats Cache LRU Cost`チャートが正常に表示されないことがある問題を修正しました [#42562](https://github.com/pingcap/tidb/issues/42562) @[pingandb](https://github.com/pingandb)
     - `INFORMATION_SCHEMA.COLUMNS`テーブルをクエリするときに`ORDINAL_POSITION`列が誤った結果を返す問題を修正しました [#43379](https://github.com/pingcap/tidb/issues/43379) @[bb7133](https://github.com/bb7133)
     - キャッシュテーブルに新しい列が追加された後、列のデフォルト値ではなく値が`NULL`になる問題を修正しました。 [#42928](https://github.com/pingcap/tidb/issues/42928) @[lqs](https://github.com/lqs)
     - 述語をプッシュダウンするときに CTE 結果が正しくない問題を修正しました [#43645](https://github.com/pingcap/tidb/issues/43645) @[winoros](https://github.com/winoros)
@@ -411,7 +411,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
     - `tidb_pessimistic_txn_fair_locking`を有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れになったリクエストが、解決ロック操作中にデータの正確性に影響を与える可能性がある問題を修正しました。 [#14551](https://github.com/tikv/tikv/issues/14551) @[MyonKeminta](https://github.com/MyonKeminta)
     - `tidb_pessimistic_txn_fair_locking`を有効にすると、極端なケースで、失敗した RPC 再試行によって期限切れのリクエストが発生し、トランザクションの競合が無視され、トランザクションの一貫性に影響する可能性がある問題を修正しました。 [#14311](https://github.com/tikv/tikv/issues/14311) @[MyonKeminta](https://github.com/MyonKeminta)
     - 暗号化キーIDの競合により古いキーが削除される可能性がある問題を修正しました [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
-    - クラスタを以前のバージョンから v6.5 以降のバージョンにアップグレードしたときに、累積したロック レコードによって発生するパフォーマンス低下の問題を修正しました。 [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
+    - クラスタを以前のバージョンから v6.5 以降のバージョンにアップグレードしたときに、累積したロックレコードによって発生するパフォーマンス低下の問題を修正しました。 [#14780](https://github.com/tikv/tikv/issues/14780) @[MyonKeminta](https://github.com/MyonKeminta)
     - PITRリカバリプロセス中に`raft entry is too large`エラーが発生する問題を修正 [#14313](https://github.com/tikv/tikv/issues/14313) @[YuJuncen](https://github.com/YuJuncen)
     - PITRリカバリプロセス中に`log_batch`が2GBを超えることによりTiKVがパニックになる問題を修正 [#13848](https://github.com/tikv/tikv/issues/13848) @[YuJuncen](https://github.com/YuJuncen)
 

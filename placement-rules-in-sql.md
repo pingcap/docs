@@ -111,7 +111,7 @@ SHOW PLACEMENT LABELS;
     ALTER TABLE t2 PLACEMENT POLICY=myplacementpolicy;
     ```
 
-    `PLACEMENT POLICY`どのデータベーススキーマにも関連付けられておらず、グローバル スコープに添付できます。したがって、 `CREATE TABLE`を使用して配置ポリシーを指定する場合、追加の権限は必要ありません。
+    `PLACEMENT POLICY`どのデータベーススキーマにも関連付けられておらず、グローバルスコープに添付できます。したがって、 `CREATE TABLE`を使用して配置ポリシーを指定する場合、追加の権限は必要ありません。
 
 ### 配置ポリシーを表示する {#view-placement-policies}
 
@@ -414,7 +414,7 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 
 この配置ポリシーが作成され、目的のデータに適用されると、データのRaftLeaderレプリカは`LEADER_CONSTRAINTS`オプションで指定された`us-east-1`リージョンに配置され、その他のデータのレプリカは`FOLLOWER_CONSTRAINTS`オプションで指定されたリージョンに配置されます。クラスターが障害を起こした場合（たとえば、 `us-east-1`リージョンでノードが停止した場合など）、これらのリージョン`FOLLOWER_CONSTRAINTS`で指定されていても、他のリージョンから新しいLeaderが選出されることに注意してください。つまり、サービスの可用性を確保することが最優先事項となります。
 
-`us-east-1`領域で障害が発生した場合、 `us-west-1`に新しいリーダーを配置したくない場合は、特別な`evict-leader`属性を設定して、その領域で新たに選出されたリーダーを排除することができます。
+`us-east-1`領域で障害が発生した場合、 `us-west-1`に新しいリーダーを配置したくない場合は、特別な`evict-leader`属性を設定して、その領域で新たに選出されたリーダーを排除できます。
 
 ```sql
 CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-east-1]" FOLLOWER_CONSTRAINTS='{"+region=us-east-1": 1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}';

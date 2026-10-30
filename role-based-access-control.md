@@ -186,7 +186,7 @@ SET DEFAULT ROLE app_read, app_write TO 'rw_user1'@'localhost';
 SET DEFAULT ROLE ALL TO 'dev1'@'localhost';
 ```
 
-次のステートメントを使用して、 `dev1@localhost`のすべてのデフォルトロールを無効にすることができます。
+次のステートメントを使用して、 `dev1@localhost`のすべてのデフォルトロールを無効にできます。
 
 ```sql
 SET DEFAULT ROLE NONE TO 'dev1'@'localhost';
@@ -198,7 +198,7 @@ SET DEFAULT ROLE NONE TO 'dev1'@'localhost';
 
 ### 現在のセッションでロールを有効にする {#enable-a-role-in-the-current-session}
 
-現在のセッションでいくつかのロールを有効にすることができます。
+現在のセッションでいくつかのロールを有効にできます。
 
 ```sql
 SET ROLE {
@@ -314,7 +314,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 DROP ROLE 'app_read', 'app_write';
 ```
 
-この操作により、 `mysql.user`テーブル内の`app_read`と`app_write`ロール レコードと、承認テーブル内の関連レコードが削除され、2つのロールに関連する承認が終了します。
+この操作により、 `mysql.user`テーブル内の`app_read`と`app_write`ロールレコードと、承認テーブル内の関連レコードが削除され、2つのロールに関連する承認が終了します。
 
 ロールを削除するには、 `DROP ROLE`または`DROP USER`権限が必要です。
 

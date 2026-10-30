@@ -114,7 +114,7 @@ public class AuthorDAO {
 }
 ```
 
-[JDBCドライバを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `conn.createStatement()`を使用して`Statement`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベース クエリ リクエストを開始できます。
+[JDBCドライバを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `conn.createStatement()`を使用して`Statement`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベースクエリリクエストを開始できます。
 
 クエリ結果は`ResultSet`オブジェクトに格納されます。 `ResultSet`を走査することで、返された結果を`Author`オブジェクトにマッピングできます。
 
@@ -304,7 +304,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
 
 データの全体的な状況をよりよく理解するために、 `GROUP BY`ステートメントを使用してクエリ結果を集計できます。
 
-例えば、どの年に作家の出生数が多いかを知りたい場合は、 `authors`テーブルを`birth_year`列でグループ化し、各年ごとにカウントすることができます。
+例えば、どの年に作家の出生数が多いかを知りたい場合は、 `authors`テーブルを`birth_year`列でグループ化し、各年ごとにカウントできます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">

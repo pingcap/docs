@@ -51,7 +51,7 @@ TiDB バージョン: 7.6.0
 
     TiDB v7.6.0以降では、特にJSONをサポートするTiDBワイドテーブル書き込みシナリオをより適切にサポートするために、Titanエンジンがデフォルトで有効になっています。Titanエンジンは、RocksDBのLSMツリーから32KBを超える大きな値を自動的に分離し、Titanに個別に保存することで、大きな値の処理を最適化します。Titanエンジンは、TiKVで使用されているRocksDBの機能と完全に互換性があります。この戦略的な変更により、書き込み増幅効果が軽減されるだけでなく、大きな値を含む書き込み、更新、およびポイントクエリのシナリオにおけるパフォーマンスも向上します。さらに、レンジスキャンシナリオでは、Titanエンジンの最適化により、デフォルト構成のRocksDBと同等のパフォーマンスを実現しています。
 
-    この構成変更は、以前のバージョンとの互換性を維持しています。既存のTiDBクラスタの場合、TiDB v7.6.0以降のバージョンにアップグレードすると、Titanエンジンはデフォルトで無効になります。お客様の特定の要件に基づいて、Titanエンジンを手動で有効または無効にすることができます。
+    この構成変更は、以前のバージョンとの互換性を維持しています。既存のTiDBクラスタの場合、TiDB v7.6.0以降のバージョンにアップグレードすると、Titanエンジンはデフォルトで無効になります。お客様の特定の要件に基づいて、Titanエンジンを手動で有効または無効にできます。
 
     詳細については、[ドキュメント](/storage-engine/titan-overview.md)を参照してください。
 
@@ -146,7 +146,7 @@ TiDB バージョン: 7.6.0
 
 - 長時間実行されているアイドル状態のトランザクションを自動的に終了させる機能のサポート [#48714](https://github.com/pingcap/tidb/pull/48714) @[crazycs520](https://github.com/crazycs520)
 
-    ネットワーク切断やアプリケーション障害が発生するシナリオでは、 `COMMIT` / `ROLLBACK`文がデータベースに送信されない可能性があります。これにより、データベース ロックの解放が遅延し、トランザクション ロック待機が発生し、データベース接続が急増する可能性があります。このような問題はテスト環境ではよく発生しますが、本番環境でも時折発生する可能性があり、迅速な診断が難しい場合があります。これらの問題を回避するために、TiDB v7.6.0 では、長時間実行されているアイドル状態のトランザクションを自動的に終了する[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)システム変数が導入されました。トランザクション状態のユーザーセッションがこの変数の値を超える期間アイドル状態になると、TiDB はトランザクションのデータベース接続を終了し、トランザクションをロールバックします。
+    ネットワーク切断やアプリケーション障害が発生するシナリオでは、 `COMMIT` / `ROLLBACK`文がデータベースに送信されない可能性があります。これにより、データベースロックの解放が遅延し、トランザクションロック待機が発生し、データベース接続が急増する可能性があります。このような問題はテスト環境ではよく発生しますが、本番環境でも時折発生する可能性があり、迅速な診断が難しい場合があります。これらの問題を回避するために、TiDB v7.6.0 では、長時間実行されているアイドル状態のトランザクションを自動的に終了する[`tidb_idle_transaction_timeout`](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)システム変数が導入されました。トランザクション状態のユーザーセッションがこの変数の値を超える期間アイドル状態になると、TiDB はトランザクションのデータベース接続を終了し、トランザクションをロールバックします。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)を参照してください。
 
@@ -180,9 +180,9 @@ TiDB バージョン: 7.6.0
 
 - リソース制御に関する可観測性の強化 [#49318](https://github.com/pingcap/tidb/issues/49318) @[glorv](https://github.com/glorv)@[bufferflies](https://github.com/bufferflies)@[nolouch](https://github.com/nolouch)
 
-    アプリケーションのワークロードを分離するためにリソースグループを使用するユーザーが増えるにつれ、リソース コントロールはリソースグループに基づいた強化されたデータを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
+    アプリケーションのワークロードを分離するためにリソースグループを使用するユーザーが増えるにつれ、リソースコントロールはリソースグループに基づいた強化されたデータを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速かつ正確に特定して診断できるようになります。
 
-    - [スロークエリ](/identify-slow-queries.md): リソースグループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
+    - [スロークエリ](/identify-slow-queries.md): リソースグループ名、リソースユニット (RU) の消費量、およびリソースの待機時間を追加します。
     - [ステートメントサマリーテーブル](/statement-summary-tables.md): リソースグループ名、RU 消費量、リソースの待機時間を追加します。
     - システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL文によって消費された[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後のステートメントのリソース消費量を取得できます。
     - リソースグループに基づいてデータベースのメトリックを追加します。具体的には、QPS/TPS、実行時間（P999/P99/P95）、失敗回数、接続数などです。
@@ -274,7 +274,7 @@ TiDB バージョン: 7.6.0
 
 ## オフラインパッケージの変更 {#offline-package-changes}
 
-v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-package.md)には、プロキシ コンポーネント[TiProxy](/tiproxy/tiproxy-overview.md)のインストールパッケージである`tiproxy-{version}-linux-{arch}.tar.gz`が含まれるようになりました。
+v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-package.md)には、プロキシコンポーネント[TiProxy](/tiproxy/tiproxy-overview.md)のインストールパッケージである`tiproxy-{version}-linux-{arch}.tar.gz`が含まれるようになりました。
 
 ## 非推奨機能 {#deprecated-features}
 
@@ -302,7 +302,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 - TiKV
 
     - 非同期タスクを照会するためのAPIエンドポイント`/async_tasks`を追加 [#15759](https://github.com/tikv/tikv/issues/15759) @[YuJuncen](https://github.com/YuJuncen)
-    - gRPC モニタリングに優先度ラベルを追加して、異なる優先度のリソースグループ データを表示します [#49318](https://github.com/pingcap/tidb/issues/49318) @[bufferflies](https://github.com/bufferflies)
+    - gRPC モニタリングに優先度ラベルを追加して、異なる優先度のリソースグループデータを表示します [#49318](https://github.com/pingcap/tidb/issues/49318) @[bufferflies](https://github.com/bufferflies)
     - `readpool.unified.max-tasks-per-worker`の値の動的な調整をサポートします。この設定により、優先度に基づいて実行中のタスク数を個別に計算できます [#16026](https://github.com/tikv/tikv/issues/16026) @[glorv](https://github.com/glorv)
     - GCスレッド数を動的に調整する機能をサポート。デフォルト値は`1` [#16101](https://github.com/tikv/tikv/issues/16101) @[tonyxuqqi](https://github.com/tonyxuqqi)
 
@@ -312,7 +312,7 @@ v7.6.0 以降、 `TiDB-community-server`[バイナリパッケージ](/binary-pa
 
 - TiFlash
 
-    - 読み取りレイテンシーに対するディスク パフォーマンス ジッターの影響を軽減 [#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - 読み取りレイテンシーに対するディスクパフォーマンスジッターの影響を軽減 [#8583](https://github.com/pingcap/tiflash/issues/8583) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - バックグラウンド GC タスクの読み取りおよび書き込みタスクのレイテンシーへの影響を軽減 [#8650](https://github.com/pingcap/tiflash/issues/8650) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - ストレージとコンピューティングを分離したアーキテクチャで同一のデータ読み取り操作をマージして、高並行処理下でのデータスキャン性能を向上させるサポート [#6834](https://github.com/pingcap/tiflash/issues/6834) @[JinheLin](https://github.com/JinheLin)
     - `SEMI JOIN`と`LEFT OUTER SEMIJOIN`の実行パフォーマンスを最適化する（`JOIN ON`に JOIN KEY 等価条件のみが含まれる場合） [#47424](https://github.com/pingcap/tidb/issues/47424) @[gengliqi](https://github.com/gengliqi)

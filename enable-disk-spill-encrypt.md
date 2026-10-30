@@ -5,13 +5,13 @@ summary: TiDB でディスクスピルの暗号化を有効にする方法を学
 
 # ディスクスピルの暗号化を有効にする {#enable-encryption-for-disk-spill}
 
-システム変数[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) `ON`に設定されている場合、単一の SQL文のメモリ使用量がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の制限を超えると、一部の演算子は実行中に中間結果を一時ファイルとしてディスクに保存し、クエリの完了後にそのファイルを削除することができます。
+システム変数[`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) `ON`に設定されている場合、単一の SQL文のメモリ使用量がシステム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の制限を超えると、一部の演算子は実行中に中間結果を一時ファイルとしてディスクに保存し、クエリの完了後にそのファイルを削除できます。
 
 ディスクスピルの暗号化を有効にすると、攻撃者がこれらの一時ファイルを読み取ってデータにアクセスするのを防ぐことができます。
 
 ## 設定 {#configure}
 
-ディスクスピル ファイルの暗号化を有効にするには、TiDB 設定ファイルのセクション`[security]`の項目[`spilled-file-encryption-method`](/tidb-configuration-file.md#spilled-file-encryption-method)を構成します。
+ディスクスピルファイルの暗号化を有効にするには、TiDB 設定ファイルのセクション`[security]`の項目[`spilled-file-encryption-method`](/tidb-configuration-file.md#spilled-file-encryption-method)を構成します。
 
 ```toml
 [security]

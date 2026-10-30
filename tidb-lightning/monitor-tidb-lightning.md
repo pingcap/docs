@@ -21,7 +21,7 @@ pprof-port = 8289
 ...
 ```
 
-Prometheusがサーバーを検出するように設定する必要があります。例えば、 `scrape_configs`セクションにサーバーのアドレスを直接追加することができます。
+Prometheusがサーバーを検出するように設定する必要があります。例えば、 `scrape_configs`セクションにサーバーのアドレスを直接追加できます。
 
 ```yaml
 ...
@@ -226,7 +226,7 @@ scrape_configs:
 
 - **`lightning_chunk_parser_read_block_seconds`** (ヒストグラム)
 
-    データファイル パーサーがブロックを読み取るために必要な時間のバケット化されたヒストグラム。
+    データファイルパーサーがブロックを読み取るために必要な時間のバケット化されたヒストグラム。
 
 - **`lightning_checksum_seconds`** （ヒストグラム）
 

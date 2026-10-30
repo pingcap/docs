@@ -10,7 +10,7 @@ aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/doc
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
-[Prometheus](https://prometheus.io/)は、多次元データモデルと柔軟なクエリ言語を備えた時系列データベースです。[Grafana](https://grafana.com/)は、メトリックを分析および視覚化するためのオープン ソースの監視システムです。
+[Prometheus](https://prometheus.io/)は、多次元データモデルと柔軟なクエリ言語を備えた時系列データベースです。[Grafana](https://grafana.com/)は、メトリックを分析および視覚化するためのオープンソースの監視システムです。
 
 ![The monitoring architecture in the TiDB cluster](/media/prometheus-in-tidb.png)
 
@@ -99,7 +99,7 @@ Y 軸を線形スケールに切り替えます。
 
 ### ヒント3: Y軸のベースラインを変更して変化を強調する {#tip-3-modify-the-baseline-of-the-y-axis-to-amplify-changes}
 
-線形スケールに切り替えても、トレンドがまだ見えない場合があります。例えば、次の図では、クラスターをスケーリングした後の`Store size`のリアルタイムの変化を観察したいのですが、ベースラインが大きいため、小さな変化が見えません。このような状況では、Y軸のベースラインを`0`から`auto`に変更して、上部を拡大表示することができます。下の2つの図を確認すると、データ移行が始まっていることがわかります。
+線形スケールに切り替えても、トレンドがまだ見えない場合があります。例えば、次の図では、クラスターをスケーリングした後の`Store size`のリアルタイムの変化を観察したいのですが、ベースラインが大きいため、小さな変化が見えません。このような状況では、Y軸のベースラインを`0`から`auto`に変更して、上部を拡大表示できます。下の2つの図を確認すると、データ移行が始まっていることがわかります。
 
 ベースラインのデフォルトは`0`です。
 

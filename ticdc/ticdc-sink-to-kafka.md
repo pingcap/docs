@@ -87,13 +87,13 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 | `enable-tls`                         | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか (オプション、デフォルトは`false` )。                                                                                                                                                                                                                                                                                                                         |
 | `ca`                                 | ダウンストリーム Kafka インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                     |
 | `cert`                               | ダウンストリーム Kafka インスタンスに接続するために必要な証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                         |
-| `key`                                | ダウンストリーム Kafka インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                      |
+| `key`                                | ダウンストリーム Kafka インスタンスに接続するために必要な証明書キーファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                      |
 | `insecure-skip-verify`               | ダウンストリーム Kafka インスタンスに接続するときに証明書の検証をスキップするかどうか (オプション、デフォルトは`false` )。                                                                                                                                                                                                                                                                                                                      |
 | `sasl-user`                          | ダウンストリーム Kafka インスタンスに接続するために必要な SASL/PLAIN または SASL/SCRAM 認証の ID (authcid) (オプション)。                                                                                                                                                                                                                                                                                                        |
 | `sasl-password`                      | 下流のKafkaインスタンスに接続するために必要なSASL/PLAINまたはSASL/SCRAM認証のパスワード（オプション）。特殊文字が含まれている場合は、URLエンコードする必要があります。                                                                                                                                                                                                                                                                                           |
 | `sasl-mechanism`                     | 下流のKafkaインスタンスに接続するために必要なSASL認証の名前。値は`plain` 、 `scram-sha-256` 、 `scram-sha-512` 、または`gssapi`です。                                                                                                                                                                                                                                                                                            |
 | `sasl-gssapi-auth-type`              | gssapi認証タイプ。値は`user`または`keytab` （オプション）です。                                                                                                                                                                                                                                                                                                                                                  |
-| `sasl-gssapi-keytab-path`            | gssapi キータブ パス (オプション)。                                                                                                                                                                                                                                                                                                                                                                     |
+| `sasl-gssapi-keytab-path`            | gssapi キータブパス (オプション)。                                                                                                                                                                                                                                                                                                                                                                     |
 | `sasl-gssapi-kerberos-config-path`   | gssapi kerberos 構成パス (オプション)。                                                                                                                                                                                                                                                                                                                                                               |
 | `sasl-gssapi-service-name`           | gssapi サービス名 (オプション)。                                                                                                                                                                                                                                                                                                                                                                       |
 | `sasl-gssapi-user`                   | gssapi 認証のユーザー名 (オプション)。                                                                                                                                                                                                                                                                                                                                                                    |
@@ -161,7 +161,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
     TiCDC が適切に機能するために必要な最小限の権限セットは次のとおりです。
 
     - トピック[リソースタイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create` 、 `Write` 、および`Describe`権限。
-    - クラスタリソース タイプに対する`DescribeConfig`の権限。
+    - クラスタリソースタイプに対する`DescribeConfig`の権限。
 
     各権限の使用シナリオは次のとおりです。
 
@@ -172,7 +172,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
     | トピック    | `Create`         | チェンジフィードの開始時にトピックを作成しようとします  |
     | トピック    | `Write`          | トピックにデータを送信する                |
 
-    変更フィードを作成または開始するときに、指定された Kafka トピックがすでに存在する場合は、 `Describe`および`Create`権限を無効にすることができます。
+    変更フィードを作成または開始するときに、指定された Kafka トピックがすでに存在する場合は、 `Describe`および`Create`権限を無効にできます。
 
 ### TiCDC を Kafka Connect (Confluent Platform) と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
@@ -306,7 +306,7 @@ dispatchers = [
 - `test3`データベース内のテーブルは`table`ディスパッチャーを使用します。
 - `test4`データベース内のテーブルは、前述のルールのいずれにも一致しないため、 `default`ディスパッチャ、つまり`table`ディスパッチャを使用します。
 
-テーブルが複数のディスパッチャ ルールに一致する場合、最初に一致するルールが優先されます。
+テーブルが複数のディスパッチャルールに一致する場合、最初に一致するルールが優先されます。
 
 > **Note:**
 >
@@ -408,7 +408,7 @@ Kafkaトピックは、受信できるメッセージのサイズに制限を設
 large-message-handle-compression = "none"
 ```
 
-`large-message-handle-compression`が有効になっている場合、コンシューマーが受信するメッセージは特定の圧縮プロトコルを使用してエンコードされ、コンシューマー アプリケーションは指定された圧縮プロトコルを使用してデータをデコードする必要があります。
+`large-message-handle-compression`が有効になっている場合、コンシューマーが受信するメッセージは特定の圧縮プロトコルを使用してエンコードされ、コンシューマーアプリケーションは指定された圧縮プロトコルを使用してデータをデコードする必要があります。
 
 この機能は、Kafka プロデューサーの圧縮機能とは異なります。
 

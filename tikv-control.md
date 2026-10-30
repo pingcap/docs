@@ -109,7 +109,7 @@ SUBCOMMANDS:
 
 - ローカルモード:
 
-    - ローカル TiKV データディレクトリ パスを指定するには、 `--data-dir`オプションを使用します。
+    - ローカル TiKV データディレクトリパスを指定するには、 `--data-dir`オプションを使用します。
     - ローカル TiKV 設定ファイルパスを指定するには、 `--config`オプションを使用します。
 
     このモードでは、実行中の TiKV インスタンスを停止する必要があります。
@@ -328,8 +328,8 @@ middle_key_by_approximate_size:
 
 `compact-cluster`コマンドを使用して、TiKV クラスタ全体のデータを手動でコンパクションします。このコマンドのフラグは、 `compact`コマンドと同じ意味と使用法を持ちます。唯一の違いは次のとおりです。
 
-- `compact-cluster`コマンドでは、 `--pd`を使用して PD のアドレスを指定し、 `tikv-ctl`クラスター内のすべての TiKV ノードをコンパクト ターゲットとして見つけられるようにします。
-- `compact`コマンドでは、 `--data-dir`または`--host`を使用して、単一の TiKV をコンパクト ターゲットとして指定します。
+- `compact-cluster`コマンドでは、 `--pd`を使用して PD のアドレスを指定し、 `tikv-ctl`クラスター内のすべての TiKV ノードをコンパクトターゲットとして見つけられるようにします。
+- `compact`コマンドでは、 `--data-dir`または`--host`を使用して、単一の TiKV をコンパクトターゲットとして指定します。
 
 ### リージョンをtombstoneに設定する {#set-a-region-to-tombstone}
 
@@ -353,7 +353,7 @@ tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>
 success!
 ```
 
-ただし、場合によっては、このリージョンのこのピアを PD から簡単に削除できないため、 `tikv-ctl`の`--force`のオプションを指定して、ピアを強制的にtombstoneに設定することができます。
+ただし、場合によっては、このリージョンのこのピアを PD から簡単に削除できないため、 `tikv-ctl`の`--force`のオプションを指定して、ピアを強制的にtombstoneに設定できます。
 
 ```shell
 tikv-ctl --data-dir /path/to/tikv tombstone -p 127.0.0.1:2379 -r <region_id>,<region_id> --force
@@ -387,7 +387,7 @@ DebugClient::check_region_consistency: RpcFailure(RpcStatus { status: Unknown, d
 
 ### スナップショットのメタをダンプ {#dump-snapshot-meta}
 
-このサブコマンドは、指定されたパスにあるスナップショット メタファイルを解析し、結果を印刷するために使用されます。
+このサブコマンドは、指定されたパスにあるスナップショットメタファイルを解析し、結果を印刷するために使用されます。
 
 ### Raftステートマシンが破損したリージョンを印刷する {#print-the-regions-where-the-raft-state-machine-corrupts}
 
@@ -527,7 +527,7 @@ success!
 
 `ldb`コマンドラインツールは、複数のデータアクセスおよびデータベース管理コマンドを提供します。以下にいくつかの例を示します。詳細については、 `tikv-ctl ldb`実行時に表示されるヘルプメッセージを参照するか、RocksDB のドキュメントをご確認ください。
 
-データアクセス シーケンスの例:
+データアクセスシーケンスの例:
 
 既存の RocksDB を HEX でダンプするには:
 

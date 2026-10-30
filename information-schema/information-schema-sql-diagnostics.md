@@ -30,8 +30,8 @@ SQL 診断システムは、次の3つの主要部分で構成されます。
 
 - クラスタートポロジテーブル[`information_schema.cluster_info`](/information-schema/information-schema-cluster-info.md)からは、クラスターの現在のトポロジ情報、各インスタンスのバージョン、バージョンに対応する Git ハッシュ、各インスタンスの開始時刻、および各インスタンスの実行時間を取得できます。
 - クラスター構成テーブル[`information_schema.cluster_config`](/information-schema/information-schema-cluster-config.md)から、クラスター内のすべてのインスタンスの構成を取得できます。4.0より前のバージョンでは、これらの構成情報を取得するには、各インスタンスのHTTP APIに個別にアクセスする必要があります。
-- クラスター ハードウェア テーブル[`information_schema.cluster_hardware`](/information-schema/information-schema-cluster-hardware.md)では、クラスター ハードウェア情報を簡単に照会できます。
-- クラスター負荷テーブル[`information_schema.cluster_load`](/information-schema/information-schema-cluster-load.md)では、クラスターのさまざまなインスタンスとハードウェア タイプの負荷情報を照会できます。
+- クラスターハードウェアテーブル[`information_schema.cluster_hardware`](/information-schema/information-schema-cluster-hardware.md)では、クラスターハードウェア情報を簡単に照会できます。
+- クラスター負荷テーブル[`information_schema.cluster_load`](/information-schema/information-schema-cluster-load.md)では、クラスターのさまざまなインスタンスとハードウェアタイプの負荷情報を照会できます。
 - カーネルパラメータテーブル[`information_schema.cluster_systeminfo`](/information-schema/information-schema-cluster-systeminfo.md)では、クラスター内の異なるインスタンスのカーネル構成情報を照会できます。現在、TiDBはsysctl情報の照会をサポートしています。
 - クラスターログテーブル[`information_schema.cluster_log`](/information-schema/information-schema-cluster-log.md)では、クラスターログをクエリできます。クエリ条件を各インスタンスにプッシュダウンすることで、クエリがクラスターのパフォーマンスに与える影響は、 `grep`コマンドよりも小さくなります。
 
@@ -43,7 +43,7 @@ TiDB v4.0より前のシステムテーブルでは、現在のインスタン�
 
 - [`information_schema.metrics_tables`](/information-schema/information-schema-metrics-tables.md) : 現在、多くのシステムテーブルが存在するため、 `information_schema.metrics_tables`テーブルでこれらの監視テーブルのメタ情報を照会できます。
 
-TiDB クラスターには多くの監視メトリックがあるため、TiDB は v4.0 で次の監視サマリー テーブルを提供します。
+TiDB クラスターには多くの監視メトリックがあるため、TiDB は v4.0 で次の監視サマリーテーブルを提供します。
 
 - 監視サマリーテーブル[`information_schema.metrics_summary`](/information-schema/information-schema-metrics-summary.md)は、すべての監視データを要約しており、各監視メトリックをより効率的に確認できます。
 - [`information_schema.metrics_summary_by_label`](/information-schema/information-schema-metrics-summary.md)もすべての監視データを要約します。特に、このテーブルは各監視メトリックの異なるラベルを使用して統計情報を集計します。
@@ -53,4 +53,4 @@ TiDB クラスターには多くの監視メトリックがあるため、TiDB �
 上記のクラスタ情報テーブルおよびクラスタ監視テーブルでは、クラスタのトラブルシューティングを行うために手動でSQL文を実行する必要があります。TiDB v4.0は自動診断をサポートしています。既存の基本情報テーブルをベースにした診断関連のシステムテーブルを使用することで、診断を自動実行できます。自動診断に関連するシステムテーブルは以下のとおりです。
 
 - 診断結果テーブル[`information_schema.inspection_result`](/information-schema/information-schema-inspection-result.md)には、システムの診断結果が表示されます。診断は受動的にトリガーされます。`select * from inspection_result`を実行すると、すべての診断ルールがトリガーされ、システムが診断され、システム内の障害またはリスクが結果に表示されます。
-- 診断サマリーテーブル[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md)は、特定のリンクまたはモジュールの監視情報を要約したものです。モジュールまたはリンク全体のコンテキストに基づいて、トラブルシューティングを行い、問題を特定することができます。
+- 診断サマリーテーブル[`information_schema.inspection_summary`](/information-schema/information-schema-inspection-summary.md)は、特定のリンクまたはモジュールの監視情報を要約したものです。モジュールまたはリンク全体のコンテキストに基づいて、トラブルシューティングを行い、問題を特定できます。

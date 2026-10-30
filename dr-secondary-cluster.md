@@ -253,7 +253,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
 
 3. GCを有効にする。
 
-    TiCDCは、履歴データがレプリケートされる前にガベージコレクションされないようにします。そのため、プライマリクラスタからセカンダリクラスタに変更フィードを作成した後、次のステートメントを実行してGCを再度有効にすることができます。
+    TiCDCは、履歴データがレプリケートされる前にガベージコレクションされないようにします。そのため、プライマリクラスタからセカンダリクラスタに変更フィードを作成した後、次のステートメントを実行してGCを再度有効にできます。
 
     GCを有効にするには、次のステートメントを実行してください。
 
@@ -369,7 +369,7 @@ TiDBのプライマリクラスタとセカンダリクラスタを再構築す�
 
 - [プライマリクラスターとセカンダリクラスターを設定する](#set-up-primary-and-secondary-clusters-based-on-ticdc)
 - [プライマリークラスターからセカンダリークラスターへデータを複製する](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
-- 上記の手順が完了したら、新しいプライマリー クラスターを作成するには、 [プライマリおよびセカンダリの切り替え](#planned-primary-and-secondary-switchover)を参照してください。
+- 上記の手順が完了したら、新しいプライマリークラスターを作成するには、 [プライマリおよびセカンダリの切り替え](#planned-primary-and-secondary-switchover)を参照してください。
 
 > **Note:**
 >

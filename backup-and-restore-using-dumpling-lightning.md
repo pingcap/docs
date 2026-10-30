@@ -7,7 +7,7 @@ summary: DumplingとTiDB Lightningを使用して、TiDBの完全なデータを
 
 このドキュメントでは、 DumplingとTiDB Lightningを使用してTiDBの完全なデータをバックアップおよび復元する方法について説明します。
 
-少量のデータ（例えば、50 GiB未満）をバックアップする必要があり、高速なバックアップ速度を必要としない場合は、 [Dumpling](/dumpling-overview.md)を使用してTiDBデータベースからデータをエクスポートし、その後[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して別のTiDBデータベースにデータを復元することができます。
+少量のデータ（例えば、50 GiB未満）をバックアップする必要があり、高速なバックアップ速度を必要としない場合は、 [Dumpling](/dumpling-overview.md)を使用してTiDBデータベースからデータをエクスポートし、その後[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用して別のTiDBデータベースにデータを復元できます。
 
 大規模なデータベースをバックアップする必要がある場合は、 [BR](/br/backup-and-restore-overview.md)を使用することをお勧めします。Dumplingは大規模なデータベースもエクスポートできますが、 BRの方が適しています。
 
@@ -31,7 +31,7 @@ summary: DumplingとTiDB Lightningを使用して、TiDBの完全なデータを
 
 ## リソース要件 {#resource-requirements}
 
-**オペレーティングシステム**: このドキュメントの例では、新規の CentOS 7 インスタンスを使用しています。仮想マシンは、ローカル ホストまたはクラウドにデプロイできます。TiDB Lightning はデフォルトで必要なだけの CPU リソースを消費するため、専用サーバーにデプロイすることをお勧めします。それが不可能な場合は、他の TiDB コンポーネント (たとえば`tikv-server` ) と一緒に単一のサーバーにデプロイし、 `region-concurrency`を構成して、 TiDB Lightningの CPU 使用率を制限できます。通常、論理 CPU の 75% にサイズを設定できます。
+**オペレーティングシステム**: このドキュメントの例では、新規の CentOS 7 インスタンスを使用しています。仮想マシンは、ローカルホストまたはクラウドにデプロイできます。TiDB Lightning はデフォルトで必要なだけの CPU リソースを消費するため、専用サーバーにデプロイすることをお勧めします。それが不可能な場合は、他の TiDB コンポーネント (たとえば`tikv-server` ) と一緒に単一のサーバーにデプロイし、 `region-concurrency`を構成して、 TiDB Lightningの CPU 使用率を制限できます。通常、論理 CPU の 75% にサイズを設定できます。
 
 **メモリとCPU** ： TiDB Lightningは多くのリソースを消費するため、64 GiB以上のメモリと32以上のCPUコアを割り当てることを推奨します。最高のパフォーマンスを得るには、CPUコアとメモリ（GiB）の比率が1:2以上であることを確認してください。
 

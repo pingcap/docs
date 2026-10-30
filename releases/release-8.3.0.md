@@ -43,7 +43,7 @@ TiDBバージョン：8.3.0
 
     クラスターをv8.3.0より前のバージョンからv8.3.0以降にアップグレードすると、TiDBはデフォルトで元の動作、つまりすべての列の統計情報を収集する動作を維持します。この機能を有効にするには、システム変数[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を`PREDICATE`に手動で設定する必要があります。新しくデプロイされたクラスターでは、この機能はデフォルトで有効になっています。
 
-    ランダムクエリを多数実行する分析システムの場合、ランダムクエリのパフォーマンスを確保するために、システム変数[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を`ALL`に設定して、すべての列の統計情報を収集することができます。その他のタイプのシステムでは、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)のデフォルト設定（`PREDICATE`）を維持して、必要な列のみの統計情報を収集することをお勧めします。
+    ランダムクエリを多数実行する分析システムの場合、ランダムクエリのパフォーマンスを確保するために、システム変数[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を`ALL`に設定して、すべての列の統計情報を収集できます。その他のタイプのシステムでは、 [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)のデフォルト設定（`PREDICATE`）を維持して、必要な列のみの統計情報を収集することをお勧めします。
 
     詳細については、 [ドキュメント](/statistics.md#collect-statistics-on-some-columns)を参照してください。
 
@@ -201,7 +201,7 @@ TiDBバージョン：8.3.0
 | TiDB           | [`tikv-client.batch-policy`](/tidb-configuration-file.md#batch-policy-new-in-v830)                     | 新しく追加された | TiDBからTiKVへのリクエストのバッチ処理戦略を制御します。                                                                                                                        |
 | PD             | [`security.redact-info-log`](/pd-configuration-file.md#redact-info-log-new-in-v50)                     | 変更     | PD設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                    |
 | TiKV           | [`security.redact-info-log`](/tikv-configuration-file.md#redact-info-log-new-in-v408)                  | 変更     | TiKV 設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。                 |
-| TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 変更     | TiFlash Learnerの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークすることができます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
+| TiFlash        | [`security.redact-info-log`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file) | 変更     | TiFlash Learnerの設定項目`security.redact-info-log`の値を`"marker"`に設定することで、ログ内の機密情報を直接シールドする代わりに`‹ ›`でマークできます。 `"marker"`オプションを使用すると、マスキングルールをカスタマイズできます。 |
 | BR             | [`--allow-pitr-from-incremental`](/br/br-incremental-guide.md#limitations)                             | 新しく追加された | 増分バックアップが後続のログバックアップと互換性があるかどうかを制御します。デフォルト値は`true`で、これは増分バックアップが後続のログバックアップと互換性があることを意味します。デフォルト値`true`のままにすると、増分リストアが開始される前に、再生が必要な DDL が厳密にチェックされます。  |
 
 ### システムテーブル {#system-tables}
@@ -233,7 +233,7 @@ TiDBバージョン：8.3.0
 - TiDB
 
     - `SELECT ... STRAIGHT_JOIN ... USING ( ... )` ステートメントをサポートします [#54162](https://github.com/pingcap/tidb/issues/54162) @[dveeden](https://github.com/dveeden)
-    - `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))`のようなフィルター条件のより正確なインデックス アクセス範囲を構築します [#54337](https://github.com/pingcap/tidb/issues/54337) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
+    - `((idx_col_1 > 1) or (idx_col_1 = 1 and idx_col_2 > 10)) and ((idx_col_1 < 10) or (idx_col_1 = 10 and idx_col_2 < 20))`のようなフィルター条件のより正確なインデックスアクセス範囲を構築します [#54337](https://github.com/pingcap/tidb/issues/54337) @[ghazalfamilyusa](https://github.com/ghazalfamilyusa)
     - インデックス順序を使用して、 `WHERE idx_col_1 IS NULL ORDER BY idx_col_2`のような SQL クエリの余分なソート操作を回避します [#54188](https://github.com/pingcap/tidb/issues/54188) @[ari-e](https://github.com/ari-e)
     - `mysql.analyze_jobs`システムテーブルに分析済みインデックスを表示します [#53567](https://github.com/pingcap/tidb/issues/53567) @[hi-rustin](https://github.com/Rustin170506)
     - `EXPLAIN`ステートメントの出力に`tidb_redact_log`設定を適用することをサポートし、ログ処理ロジックをさらに最適化します [#54565](https://github.com/pingcap/tidb/issues/54565) @[hawkingrei](https://github.com/hawkingrei)
@@ -271,7 +271,7 @@ TiDBバージョン：8.3.0
 
 - TiFlash
 
-    - SVG 形式でのアドホック ヒープ プロファイリングの生成をサポート [#9320](https://github.com/pingcap/tiflash/issues/9320) @[CalvinNeo](https://github.com/CalvinNeo)
+    - SVG 形式でのアドホックヒーププロファイリングの生成をサポート [#9320](https://github.com/pingcap/tiflash/issues/9320) @[CalvinNeo](https://github.com/CalvinNeo)
 
 - ツール
 

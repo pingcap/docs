@@ -31,7 +31,7 @@ TiDB バージョン: 6.1.0
 
     ユーザードキュメント: [リストパーティショニング](/partitioned-table.md#list-partitioning)、[リストCOLUMNSパーティショニング](/partitioned-table.md#list-columns-partitioning)
 
-- TiFlash は、コンパクト コマンドの開始をサポートしています。(実験的)
+- TiFlash は、コンパクトコマンドの開始をサポートしています。(実験的)
 
     TiFlash v6.1.0 では`ALTER TABLE ... COMPACT`ステートメントが導入されました。このステートメントは、既存のバックグラウンドのコンパクションメカニズムに基づいて、物理データを手動でコンパクションする方法を提供します。このステートメントを使用すると、以前の形式のデータを更新し、必要に応じていつでも読み取り/書き込みのパフォーマンスを向上できます。クラスターを v6.1.0 にアップグレードした後、このステートメントを実行してデータをコンパクションすることをお勧めします。このステートメントは標準 SQL 構文の拡張であるため、MySQL クライアントと互換性があります。TiFlash のアップグレード以外のシナリオでは、通常、このステートメントを使用する必要はありません。
 
@@ -51,7 +51,7 @@ TiDB バージョン: 6.1.0
 
     [ユーザードキュメント](/dashboard/continuous-profiling.md)
 
-- Grafana は、全体的なパフォーマンス診断のためのシステム レベルのエントリを提供するPerformance Overview ダッシュボードを追加します。
+- Grafana は、全体的なパフォーマンス診断のためのシステムレベルのエントリを提供するPerformance Overview ダッシュボードを追加します。
 
     TiDB可視化監視コンポーネントGrafanaの新しいダッシュボードである「Performance Overview」は、システム全体のパフォーマンス診断のためのエントリーを提供します。トップダウン型パフォーマンス分析手法に基づき、「Performance Overview」ダッシュボードは、TiDBのパフォーマンスメトリクスをデータベース時間の内訳に基づいて整理し、異なる色で表示します。これらの色を確認することで、システム全体のパフォーマンスボトルネックを一目で特定できるため、パフォーマンス診断時間を大幅に短縮し、パフォーマンス分析と診断を簡素化します。
 
@@ -82,7 +82,7 @@ TiDB バージョン: 6.1.0
     - `LEADING`ヒントは、指定した順序を結合操作のプレフィックスとして使用するようにオプティマイザに指示します。適切な結合のプレフィックスにより、結合の初期段階でデータ量を素早く削減し、クエリのパフォーマンスを向上できます。
     - `STRAIGHT_JOIN`ヒントは、 `FROM`句内のテーブルの順序と一致する順序でテーブルを結合するようにオプティマイザに通知します。
 
-    これにより、テーブル結合の順序を固定することができます。ヒントを適切に使用することで、SQLパフォーマンスとクラスタの安定性を効果的に向上させることができます。
+    これにより、テーブル結合の順序を固定できます。ヒントを適切に使用することで、SQLパフォーマンスとクラスタの安定性を効果的に向上させることができます。
 
     ユーザードキュメント: [`LEADING`](/optimizer-hints.md#leadingt1_name--tl_name-) 、 [`STRAIGHT_JOIN`](/optimizer-hints.md#straight_join) 、 [#29932](https://github.com/pingcap/tidb/issues/29932)
 
@@ -151,18 +151,18 @@ TiDB バージョン: 6.1.0
     - 一部のTiKVパラメータのオンライン設定をサポートします。パラメータの詳細なリストについては、 [その他](#others)を参照してください。
     - TiFlash設定項目`max_threads`をシステム変数`tidb_max_tiflash_threads`に変換し、構成を動的に変更して永続化できるようにします。変換後も元の設定項目は保持されることに注意してください。
 
-    以前のバージョンからアップグレードされた v6.1.0 クラスター (オンライン アップグレードとオフライン アップグレードを含む) については、次の点に注意してください。
+    以前のバージョンからアップグレードされた v6.1.0 クラスター (オンラインアップグレードとオフラインアップグレードを含む) については、次の点に注意してください。
 
     - アップグレード前に設定ファイルに指定された設定項目が既に存在する場合、TiDBはアップグレードプロセス中に、設定された項目の値を対応するシステム変数の値に自動的に更新します。これにより、パラメータの最適化により、アップグレード後もシステムの動作は変わりません。
     - 上記の自動更新はアップグレード中に1回のみ実行されます。アップグレード後は、廃止された設定項目は無効になります。
 
-    この機能により、システムを再起動したりサービスを中断したりすることなく、パラメータを動的に変更し、検証して永続化することができます。これにより、日々のメンテナンスが容易になります。
+    この機能により、システムを再起動したりサービスを中断したりすることなく、パラメータを動的に変更し、検証して永続化できます。これにより、日々のメンテナンスが容易になります。
 
     [ユーザードキュメント](/dynamic-config.md)
 
 - クエリや接続をグローバルに強制終了する機能をサポート
 
-    `enable-global-kill`構成 (デフォルトで有効) を使用して、グローバル キル機能を制御できます。
+    `enable-global-kill`構成 (デフォルトで有効) を使用して、グローバルキル機能を制御できます。
 
     TiDB v6.1.0より前のバージョンでは、操作が大量のリソースを消費し、クラスタの安定性に問題が発生する場合、対象のTiDBインスタンスに接続してから`KILL TIDB ${id};`のコマンドを実行して対象の接続と操作を終了する必要がありました。多くのTiDBインスタンスの場合、この方法は使いにくく、誤操作が発生しやすいという問題がありました。v6.1.0以降では、 `enable-global-kill`構成が導入され、デフォルトで有効になっています。クライアントとTiDBの間にプロキシがある場合、他のクエリやセッションを誤って終了してしまう心配なく、任意のTiDBインスタンスでkillコマンドを実行して、指定した接続と操作を終了できます。現在、TiDBはCtrl+Cを使用してクエリまたはセッションを終了することをサポートしていません。
 
@@ -172,7 +172,7 @@ TiDB バージョン: 6.1.0
 
     v6.1.0 より前では、TiKV が Raw Key Valueストレージとして使用される場合、TiKV はクライアントから渡された生データのみを保存するため、基本的な Key Value の読み取りおよび書き込み機能のみを提供します。
 
-    TiKV API V2 は、次のような新しい Raw Key Valueストレージ形式とアクセス インターフェイスを提供します。
+    TiKV API V2 は、次のような新しい Raw Key Valueストレージ形式とアクセスインターフェイスを提供します。
 
     - データはMVCCに保存され、データの変更タイムスタンプが記録されます。この機能は、変更データキャプチャ（CDC）と増分バックアップおよびリストアの実装の基盤となります。
     - データはさまざまな使用法に応じてスコープ設定され、単一の TiDB クラスター、トランザクション KV、RawKV アプリケーションの共存をサポートします。
@@ -277,14 +277,14 @@ TiDB バージョン: 6.1.0
 | TiKV           | [`max-snapshot-file-raw-size`](/tikv-configuration-file.md#max-snapshot-file-raw-size-new-in-v610)                                                                                                     | 新しく追加された | スナップショットファイルのサイズがこの値を超えると、スナップショットファイルは複数のファイルに分割されます。                                                                                      |
 | TiKV           | [`raft-engine.memory-limit`](/tikv-configuration-file.md#memory-limit)                                                                                                                                 | 新しく追加された | Raft Engineのメモリ使用量の制限を指定します。                                                                                                                  |
 | TiKV           | [`storage.background-error-recovery-window`](/tikv-configuration-file.md#background-error-recovery-window-new-in-v610)                                                                                 | 新しく追加された | RocksDB が回復可能なバックグラウンドエラーを検出した後に許容される最大回復時間です。                                                    |
-| TiKV           | [`storage.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                           | 新しく追加された | TiKV が RawKV ストアとして機能するときに TiKV によって使用されるストレージ形式とインターフェース バージョン。                                                                              |
+| TiKV           | [`storage.api-version`](/tikv-configuration-file.md#api-version-new-in-v610)                                                                                                                           | 新しく追加された | TiKV が RawKV ストアとして機能するときに TiKV によって使用されるストレージ形式とインターフェースバージョン。                                                                              |
 | PD             | [`schedule.max-store-preparing-time`](/pd-configuration-file.md#max-store-preparing-time-new-in-v610)                                                                                                  | 新しく追加された | ストアがオンラインになるまでの最大待機時間を制御します。                                                                                                                  |
 | TiCDC          | [`enable-tls`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)                                                                                                                             | 新しく追加された | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか。                                                                                                  |
 | TiCDC          | `sasl-gssapi-user`<br/>`sasl-gssapi-password`<br/>`sasl-gssapi-auth-type`<br/>`sasl-gssapi-service-name`<br/>`sasl-gssapi-realm`<br/>`sasl-gssapi-key-tab-path`<br/>`sasl-gssapi-kerberos-config-path` | 新しく追加された | Kafka の SASL/GSSAPI 認証をサポートするために使用されます。詳細については[`kafka`でシンクURIを設定する](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)を参照してください。      |
 | TiCDC          | [`avro-decimal-handling-mode`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)<br/>[`avro-bigint-unsigned-handling-mode`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)      | 新しく追加された | Avro 形式の出力の詳細を決定します。                                                                                                 |
 | TiCDC          | [`dispatchers.topic`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                             | 新しく追加された | TiCDC が増分データをさまざまな Kafka トピックに送信する方法を制御します。                                                                                                   |
 | TiCDC          | [`dispatchers.partition`](/ticdc/ticdc-sink-to-kafka.md#customize-the-rules-for-topic-and-partition-dispatchers-of-kafka-sink)                                                                         | 新しく追加された | `dispatchers.partition`は`dispatchers.dispatcher`の別名です。TiCDC が増分データを Kafka パーティションに送信する方法を制御します。                                               |
-| TiCDC          | [`schema-registry`](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-kafka-connect-confluent-platform)                                                                                               | 新しく追加された | Avro スキーマを保存するスキーマレジストリ エンドポイントを指定します。                                                                                                       |
+| TiCDC          | [`schema-registry`](/ticdc/ticdc-sink-to-kafka.md#integrate-ticdc-with-kafka-connect-confluent-platform)                                                                                               | 新しく追加された | Avro スキーマを保存するスキーマレジストリエンドポイントを指定します。                                                                                                       |
 | DM             | `dmctl start-relay`コマンドの`worker`                                                                                                                                                                       | 削除済み     | このパラメータの使用は推奨されません。よりシンプルな実装を提供します。                                                                                                           |
 | DM             | ソース設定ファイル内の`relay-dir`                                                                                                                                                           | 削除済み     | ワーカー設定ファイル内の同じ設定項目に置き換えられます。                                                                                                                  |
 | DM             | タスク設定ファイル内の`is-sharding`                                                                                                                                                                               | 削除済み     | `shard-mode`設定項目に置き換えられました。                                                                                                                   |
@@ -317,7 +317,7 @@ TiDB バージョン: 6.1.0
     - アップグレード前に設定ファイルに指定された設定項目が既に存在する場合、TiDBはアップグレードプロセス中に、設定された項目の値を対応するシステム変数の値に自動的に更新します。これにより、パラメータの最適化により、アップグレード後もシステムの動作は変わりません。
     - 上記の自動更新はアップグレード中に1回のみ実行されます。アップグレード後は、廃止された設定項目は無効になります。
 
-- ダッシュボード ページはDM WebUIから削除されます。
+- ダッシュボードページはDM WebUIから削除されます。
 
 - `dispatchers.topic`と`dispatchers.partition`が有効になっている場合、TiCDC を v6.1.0 より前のバージョンにダウングレードできません。
 
@@ -418,14 +418,14 @@ TiDB バージョン: 6.1.0
 
     - TiDB Data Migration (DM)
 
-        - `start-time`タイムゾーンの問題を修正し、DM の動作をダウンストリーム タイムゾーンの使用からアップストリーム タイムゾーンの使用に変更します[#5471](https://github.com/pingcap/tiflow/issues/5471)
+        - `start-time`タイムゾーンの問題を修正し、DM の動作をダウンストリームタイムゾーンの使用からアップストリームタイムゾーンの使用に変更します[#5471](https://github.com/pingcap/tiflow/issues/5471)
         - タスクが自動的に再開された後にDMがより多くのディスクスペースを占有する問題を修正[#3734](https://github.com/pingcap/tiflow/issues/3734) [#5344](https://github.com/pingcap/tiflow/issues/5344)
         - チェックポイントフラッシュにより失敗した行のデータがスキップされる可能性がある問題を修正[#5279](https://github.com/pingcap/tiflow/issues/5279)
         - 一部のケースでダウンストリームでフィルタリングされた DDL を手動で実行するとタスクの再開に失敗する可能性がある問題を修正しました [#5272](https://github.com/pingcap/tiflow/issues/5272)
         - `case-sensitive: true`が設定されていない場合、大文字テーブルを複製できない問題を修正[#5255](https://github.com/pingcap/tiflow/issues/5255)
         - DM-workerが、`SHOW CREATE TABLE`文によって返されるインデックスの先頭に主キーがない場合にpanicする問題を修正しました。 [#5159](https://github.com/pingcap/tiflow/issues/5159)
         - GTID が有効になっているときやタスクが自動的に再開されたときに CPU 使用率が上昇し、大量のログが出力される問題を修正しました[#5063](https://github.com/pingcap/tiflow/issues/5063)
-        - DM WebUI のオフライン オプションとその他の使用上の問題を修正しました [#4993](https://github.com/pingcap/tiflow/issues/4993)
+        - DM WebUI のオフラインオプションとその他の使用上の問題を修正しました [#4993](https://github.com/pingcap/tiflow/issues/4993)
         - アップストリームでGTIDが空の場合に増分タスクの開始に失敗する問題を修正 [#3731](https://github.com/pingcap/tiflow/issues/3731)
         - 空の設定により dm-master がpanicを起こす可能性がある問題を修正[#3732](https://github.com/pingcap/tiflow/issues/3732)
 

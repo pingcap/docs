@@ -17,7 +17,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 バージョン6.6.0-DMRの主な新機能と改善点は以下のとおりです。
 
-<table><thead><tr><th>カテゴリ</th><th>機能</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス<br /></td><td>TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/partitioned-raft-kv" target="_blank">パーティション化されたRaft KVストレージエンジン</a>をサポートしています（実験的）。</td><td> TiKVはパーティション化されたRaft KVストレージエンジンを導入しており、各リージョンは独立したRocksDBインスタンスを使用するため、クラスターのストレージ容量をテラバイトからペタバイトまで容易に拡張でき、より安定した書き込みレイテンシーと強力なスケーラビリティを実現します。</td></tr><tr><td> TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">データリクエストのバッチ集計</a>をサポートしています</td><td>この機能強化により、TiKVのバッチ取得操作におけるRPCの総数が大幅に削減されます。データが高度に分散しており、gRPCスレッドプールのリソースが不足している状況では、コプロセッサリクエストをバッチ処理することで、パフォーマンスを50%以上向上させることができます。</td></tr><tr><td> TiFlashは、 <a href="https://docs-archive.pingcap.com/tidb/v6.6/stale-read" target="_blank">ステイル読み取り</a>と<a href="https://docs-archive.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">圧縮交換</a>をサポートしています。</td><td> TiFlashは、リアルタイム要件に制約がないシナリオにおいてクエリ性能を向上させることができる、ステイル読み取り機能をサポートしています。また、 TiFlashはデータ圧縮をサポートしており、並列データ交換の効率を向上させ、TPC-H全体のパフォーマンスを10%向上させ、ネットワーク使用量を50%以上削減できます。</td></tr><tr><td rowspan="2">信頼性と可用性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/tidb-resource-control" target="_blank">リソース制御</a>（実験的）</td><td>リソースグループに基づいたリソース管理をサポートします。これにより、データベースユーザーを対応するリソースグループにマッピングし、実際のニーズに基づいて各リソースグループの割り当て量を設定します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">履歴SQLバインディング</a></td><td>TiDB Dashboard上で、過去の実行計画のバインドと、実行計画の迅速なバインドをサポートします。</td></tr><tr><td rowspan="2"> SQLの機能<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/foreign-key" target="_blank">外部キー</a>（実験的）</td><td>データの一貫性を維持し、データ品質を向上させるために、MySQL互換の外部キー制約をサポートします。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">多値インデックス</a>（実験的）</td><td> MySQL互換の多値インデックスを導入し、JSON型を拡張することで、TiDBのMySQL 8.0との互換性を向上させます。</td></tr><tr><td> DB操作と可観測性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DMは物理的なインポートをサポートします</a>（実験的）</td><td> TiDBデータ移行（DM）は、TiDB Lightningの物理インポートモードを統合することで、フルデータ移行のパフォーマンスを向上させ、最大10倍高速化します。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">拡張性とパフォーマンス<br /></td><td>TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/partitioned-raft-kv" target="_blank">パーティション化されたRaft KVストレージエンジン</a>をサポートしています（実験的）。</td><td> TiKVはパーティション化されたRaft KVストレージエンジンを導入しており、各リージョンは独立したRocksDBインスタンスを使用するため、クラスターのストレージ容量をテラバイトからペタバイトまで容易に拡張でき、より安定した書き込みレイテンシーと強力なスケーラビリティを実現します。</td></tr><tr><td> TiKVは<a href="https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_store_batch_size" target="_blank">データリクエストのバッチ集計</a>をサポートしています</td><td>この機能強化により、TiKVのバッチ取得操作におけるRPCの総数が大幅に削減されます。データが高度に分散しており、gRPCスレッドプールのリソースが不足している状況では、コプロセッサリクエストをバッチ処理することで、パフォーマンスを50%以上向上させることができます。</td></tr><tr><td> TiFlashは、 <a href="https://docs-archive.pingcap.com/tidb/v6.6/stale-read" target="_blank">ステイル読み取り</a>と<a href="https://docs-archive.pingcap.com/tidb/v6.6/explain-mpp#mpp-version-and-exchange-data-compression" target="_blank">圧縮交換</a>をサポートしています。</td><td> TiFlashは、リアルタイム要件に制約がないシナリオにおいてクエリ性能を向上させることができる、ステイル読み取り機能をサポートしています。また、 TiFlashはデータ圧縮をサポートしており、並列データ交換の効率を向上させ、TPC-H全体のパフォーマンスを10%向上させ、ネットワーク使用量を50%以上削減できます。</td></tr><tr><td rowspan="2">信頼性と可用性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/tidb-resource-control" target="_blank">リソース制御</a>（実験的）</td><td>リソースグループに基づいたリソース管理をサポートします。これにより、データベースユーザーを対応するリソースグループにマッピングし、実際のニーズに基づいて各リソースグループの割り当て量を設定します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-plan-management#create-a-binding-according-to-a-historical-execution-plan" target="_blank">履歴SQLバインディング</a></td><td>TiDB Dashboard上で、過去の実行計画のバインドと、実行計画の迅速なバインドをサポートします。</td></tr><tr><td rowspan="2"> SQLの機能<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/foreign-key" target="_blank">外部キー</a>（実験的）</td><td>データの一貫性を維持し、データ品質を向上させるために、MySQL互換の外部キー制約をサポートします。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v6.6/sql-statement-create-index#multi-valued-indexes" target="_blank">多値インデックス</a>（実験的）</td><td> MySQL互換の多値インデックスを導入し、JSON型を拡張することで、TiDBのMySQL 8.0との互換性を向上させます。</td></tr><tr><td> DB操作と可観測性<br /></td><td><a href="https://docs-archive.pingcap.com/tidb/v6.6/dm-precheck#check-items-for-physical-import" target="_blank">DMは物理的なインポートをサポートします</a>（実験的）</td><td> TiDBデータ移行（DM）は、TiDB Lightningの物理インポートモードを統合することで、完全データ移行のパフォーマンスを向上させ、最大10倍高速化します。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -37,9 +37,9 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 ### パフォーマンス {#performance}
 
-- 悲観的ロック キューの安定したウェイクアップ モデルをサポート [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)
+- 悲観的ロックキューの安定したウェイクアップモデルをサポート [#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)
 
-    アプリケーションで頻繁に単一ポイントの悲観的ロック競合が発生する場合、既存のウェイクアップメカニズムではトランザクションがロックを取得する時間を保証できず、ロングテールレイテンシーが大きくなり、ロック取得タイムアウトが発生することもあります。v6.6.0 以降では、システム変数[`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660)の値を`ON`に設定することで、悲観的ロック用の安定したウェイクアップ モデルを有効にできます。このウェイクアップ モデルでは、無効なウェイクアップによるリソースの浪費を回避するために、キューのウェイクアップ シーケンスを厳密に制御できます。深刻なロック競合が発生するシナリオでは、この安定したウェイクアップ モデルにより、ロングテールレイテンシーと P99 応答時間を短縮できます。
+    アプリケーションで頻繁に単一ポイントの悲観的ロック競合が発生する場合、既存のウェイクアップメカニズムではトランザクションがロックを取得する時間を保証できず、ロングテールレイテンシーが大きくなり、ロック取得タイムアウトが発生することもあります。v6.6.0 以降では、システム変数[`tidb_pessimistic_txn_aggressive_locking`](https://docs-archive.pingcap.com/tidb/v6.6/system-variables#tidb_pessimistic_txn_aggressive_locking-new-in-v660)の値を`ON`に設定することで、悲観的ロック用の安定したウェイクアップモデルを有効にできます。このウェイクアップモデルでは、無効なウェイクアップによるリソースの浪費を回避するために、キューのウェイクアップシーケンスを厳密に制御できます。深刻なロック競合が発生するシナリオでは、この安定したウェイクアップモデルにより、ロングテールレイテンシーと P99 応答時間を短縮できます。
 
     テスト結果によると、これによりテールレイテンシーが40～60%削減されることが示されています。
 
@@ -86,7 +86,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
     - 異なるシステムに存在する複数の中小規模アプリケーションを単一のTiDBクラスタに統合します。アプリケーションのワークロードが増加しても、他のアプリケーションの正常な動作には影響しません。システムワークロードが低い場合、ビジー状態のアプリケーションは、設定された読み取り/書き込みクォータを超えても必要なシステムリソースを割り当てられるため、リソースを最大限に活用できます。
     - すべてのテスト環境を単一のTiDBクラスタに統合するか、より多くのリソースを消費するバッチタスクを単一のリソースグループにまとめるかを選択できます。これにより、ハードウェア利用率を向上させ、運用コストを削減しながら、重要なアプリケーションが常に必要なリソースを確保できるようになります。
 
-    さらに、リソース制御機能を合理的に活用することで、クラスタ数を削減し、運用・保守の難易度を下げ、管理コストを削減することができます。
+    さらに、リソース制御機能を合理的に活用することで、クラスタ数を削減し、運用・保守の難易度を下げ、管理コストを削減できます。
 
     v6.6 では、リソース制御を有効にするには、TiDB のグローバル変数[`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)と TiKV 設定項目[`resource-control.enabled`](/tikv-configuration-file.md#resource-control)の両方を有効にする必要があります。現在サポートされているクォータ方式は「 [リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) 」に基づいています。RU は、CPU や IO などのシステムリソースに対する TiDB の統一抽象化ユニットです。
 
@@ -124,7 +124,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 - `FLASHBACK CLUSTER TO TIMESTAMP`ステートメントによる DDL 操作のロールバックのサポート [#14045](https://github.com/tikv/tikv/issues/14045) @[Defined2014](https://github.com/Defined2014) @[JmPotato](https://github.com/JmPotato)
 
-    [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)ステートメントは、ガベージコレクション (GC) の有効期間内の指定された時点にクラスタ全体を復元することをサポートします。TiDB v6.6.0 では、この機能に DDL 操作のロールバック機能が追加されました。これにより、クラスタ上で発生した DML または DDL 操作の誤りを迅速に取り消したり、クラスタを数分以内にロールバックしたり、タイムライン上でクラスタを複数回ロールバックして特定のデータ変更が発生したタイミングを特定したりすることができます。
+    [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)ステートメントは、ガベージコレクション (GC) の有効期間内の指定された時点にクラスタ全体を復元することをサポートします。TiDB v6.6.0 では、この機能に DDL 操作のロールバック機能が追加されました。これにより、クラスタ上で発生した DML または DDL 操作の誤りを迅速に取り消したり、クラスタを数分以内にロールバックしたり、タイムライン上でクラスタを複数回ロールバックして特定のデータ変更が発生したタイミングを特定したりできます。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-flashback-cluster.md)を参照してください。
 
@@ -148,7 +148,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
 - リソースを大量に消費するタスク向けに読み取り専用ストレージノードを構成する機能をサポート @[v01dstar](https://github.com/v01dstar)
 
-    本番環境では、バックアップや大規模なデータ読み取りと分析など、読み取り専用操作が定期的に大量のリソースを消費し、クラスタ全体のパフォーマンスに影響を与える場合があります。TiDB v6.6.0 では、リソースを消費する読み取り専用タスク用に読み取り専用ストレージノードを構成して、オンラインアプリケーションへの影響を軽減できます。現在、TiDB、TiSpark、およびBR は、読み取り専用ストレージノードからのデータ読み取りをサポートしています。 [手順](/best-practices/readonly-nodes.md#procedures)に従って読み取り専用ストレージ ノードを構成し、システム変数`tidb_replica_read` 、TiSpark 設定項目`spark.tispark.replica_read` 、または br コマンドライン引数`--replica-read-label`で読み取り先を指定することで、クラスターのパフォーマンスの安定性を確保できます。
+    本番環境では、バックアップや大規模なデータ読み取りと分析など、読み取り専用操作が定期的に大量のリソースを消費し、クラスタ全体のパフォーマンスに影響を与える場合があります。TiDB v6.6.0 では、リソースを消費する読み取り専用タスク用に読み取り専用ストレージノードを構成して、オンラインアプリケーションへの影響を軽減できます。現在、TiDB、TiSpark、およびBR は、読み取り専用ストレージノードからのデータ読み取りをサポートしています。 [手順](/best-practices/readonly-nodes.md#procedures)に従って読み取り専用ストレージノードを構成し、システム変数`tidb_replica_read` 、TiSpark 設定項目`spark.tispark.replica_read` 、または br コマンドライン引数`--replica-read-label`で読み取り先を指定することで、クラスターのパフォーマンスの安定性を確保できます。
 
     詳細については、[ドキュメント](/best-practices/readonly-nodes.md)を参照してください。
 
@@ -168,7 +168,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
 
     バージョン6.6.0では、DMの完全移行機能がTiDB Lightningの物理インポートモードと統合され、DMによる完全データ移行のパフォーマンスが最大10倍向上し、大容量データシナリオにおける移行時間を大幅に短縮できるようになりました。
 
-    バージョン6.6.0より前は、大容量データの場合、高速なフルデータ移行のためにTiDB Lightningで物理インポートタスクを個別に設定し、その後DMを使用して増分データ移行を行う必要があり、複雑な設定が必要でした。バージョン6.6.0以降では、 TiDB Lightningタスクを設定することなく大容量データを移行できます。1つのDMタスクで移行を完了できます。
+    バージョン6.6.0より前は、大容量データの場合、高速な完全データ移行のためにTiDB Lightningで物理インポートタスクを個別に設定し、その後DMを使用して増分データ移行を行う必要があり、複雑な設定が必要でした。バージョン6.6.0以降では、 TiDB Lightningタスクを設定することなく大容量データを移行できます。1つのDMタスクで移行を完了できます。
 
     詳細については、 [ドキュメント](/dm/dm-precheck.md#check-items-for-physical-import)を参照してください。
 
@@ -409,7 +409,7 @@ TiDB バージョン: 6.6.0-[DMR](/releases/versioning.md#development-milestone-
     - OOM問題を軽減するためのグローバルメモリしきい値の管理をサポート（実験的） [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
     - GC圧力を軽減するためにGCチューナーを追加（実験的） [#5827](https://github.com/tikv/pd/issues/5827) @[hnes](https://github.com/hnes)
     - 異常なノードを検出してスケジュールするための`evict-slow-trend-scheduler`スケジューラを追加します [#5808](https://github.com/tikv/pd/pull/5808) @[innerr](https://github.com/innerr)
-    - キースペースを管理するためにキースペース マネージャーを追加 [#5293](https://github.com/tikv/pd/issues/5293) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
+    - キースペースを管理するためにキースペースマネージャーを追加 [#5293](https://github.com/tikv/pd/issues/5293) @[AmoebaProtozoa](https://github.com/AmoebaProtozoa)
 
 - TiFlash
 

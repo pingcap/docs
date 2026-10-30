@@ -43,7 +43,7 @@ TiDB バージョン: 5.4.0
 | TiKV           | `log.file.max-size` 、 `log.file.max-days` 、 `log.file.max-backups`                                              | 新しく追加された | 詳細については、 [TiKV設定ファイル - `log.file`](/tikv-configuration-file.md#logfile-new-in-v540)を参照してください。                                                                                                                                                                                                                 |
 | TiKV           | `raft-engine`                                                                                                   | 新しく追加された | `enable` 、 `dir` 、 `batch-compression-threshold` 、 `bytes-per-sync` 、 `target-file-size` 、 `purge-threshold` 、 `recovery-mode` 、 `recovery-read-block-size` 、 `recovery-read-block-size` 、および`recovery-threads`が含まれます。詳細は、 [TiKV設定ファイル - `raft-engine`](/tikv-configuration-file.md#raft-engine)を参照してください。     |
 | TiKV           | [`backup.enable-auto-tune`](/tikv-configuration-file.md#enable-auto-tune-new-in-v540)                           | 新しく追加された | v5.3.0 では、デフォルト値は`false`です。v5.4.0 以降では、デフォルト値は`true`に変更されました。このパラメータは、クラスタのリソース使用率が高い場合に、バックアップタスクで使用されるリソースを制限してクラスタへの影響を軽減するかどうかを制御します。デフォルト設定では、バックアップタスクの速度が低下する可能性があります。                                                                                                                                       |
-| TiKV           | `log-level` 、 `log-format` 、 `log-file` 、 `log-rotation-size`                                                   | 変更     | TiKV ログ パラメータの名前は、TiDB ログ パラメータと一貫した名前`log.level` 、 `log.format` 、 `log.file.filename` 、および`log.enable-timestamp`に置き換えられます。古いパラメータのみを設定し、その値をデフォルト値以外に設定した場合、古いパラメータは新しいパラメータと互換性があります。古いパラメータと新しいパラメータの両方を設定した場合、新しいパラメータが有効になります。詳細については、[TiKV設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。 |
+| TiKV           | `log-level` 、 `log-format` 、 `log-file` 、 `log-rotation-size`                                                   | 変更     | TiKV ログパラメータの名前は、TiDB ログパラメータと一貫した名前`log.level` 、 `log.format` 、 `log.file.filename` 、および`log.enable-timestamp`に置き換えられます。古いパラメータのみを設定し、その値をデフォルト値以外に設定した場合、古いパラメータは新しいパラメータと互換性があります。古いパラメータと新しいパラメータの両方を設定した場合、新しいパラメータが有効になります。詳細については、[TiKV設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)を参照してください。 |
 | TiKV           | `log-rotation-timespan`                                                                                         | 削除済み     | ログファイルのローテーション間隔。この間隔が経過すると、ログファイルがローテーションされます。これは、現在のログファイルのファイル名にタイムスタンプが追加され、新しいログファイルが作成されることを意味します。                                                                                                                                                                                                              |
 | TiKV           | `allow-remove-leader`                                                                                           | 削除済み     | メインスイッチの削除を許可するかどうかを決定します。                                                                                                                                                                                                                                                                                            |
 | TiKV           | `raft-msg-flush-interval`                                                                                       | 削除済み     | Raftメッセージがバッチで送信される間隔を決定します。Raftメッセージは、この設定項目で指定された間隔ごとにバッチで送信されます。                                                                                                                                                                                                                                                   |
@@ -66,7 +66,7 @@ TiDB バージョン: 5.4.0
 - TiDBとPDの間にインターフェースが追加されました。 `information_schema.TIDB_HOT_REGIONS_HISTORY`システムテーブルを使用する場合、TiDBは対応するバージョンのPDを使用する必要があります。
 - TiDB サーバー、PD サーバー、および TiKV サーバーは、ログ名、出力形式、ローテーションと有効期限のルールを管理するために、ログ関連パラメーターに統一された命名方法を使用し始めます。詳しくは[TiKV設定ファイル - ログ](/tikv-configuration-file.md#log-new-in-v540)をご覧ください。
 - バージョン5.4.0以降、プランキャッシュによってキャッシュされた実行計画に対してSQLバインディングを作成すると、対応するクエリに対して既にキャッシュされているプランが無効化されます。この新しいバインディングは、バージョン5.4.0より前にキャッシュされた実行計画には影響しません。
-- v5.3 以前のバージョンでは、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DM ドキュメント サイトにアクセスせずに、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
+- v5.3 以前のバージョンでは、 [TiDB Data Migration (DM)](https://docs.pingcap.com/tidb-data-migration/v5.3/)ドキュメントは TiDB ドキュメントから独立しています。 v5.4 以降、DM ドキュメントは同じバージョンの TiDB ドキュメントに統合されています。 DM ドキュメントサイトにアクセスせずに、 [DMドキュメント](/dm/dm-overview.md)を直接読むことができます。
 - ポイントインタイムリカバリ（PITR）の実験的機能をcdclogとともに削除しました。バージョン5.4.0以降、cdclogベースのPITRおよびcdclogはサポートされなくなりました。
 - システム変数を"DEFAULT"に設定する際の動作のMySQL互換性を高める [#29680](https://github.com/pingcap/tidb/pull/29680)
 - システム変数`lc_time_names`を読み取り専用に設定する [#30084](https://github.com/pingcap/tidb/pull/30084)
@@ -122,7 +122,7 @@ TiDB バージョン: 5.4.0
 
 - **セッション変数を使用して、指定された期間内の履歴データを読み取ります。**
 
-    TiDBは、 Raftコンセンサスアルゴリズムに基づいたマルチレプリカ分散データベースです。高並行性および高スループットのアプリケーションシナリオにおいて、TiDBはフォロワーレプリカによって読み取りパフォーマンスをスケールアウトし、読み取りリクエストと書き込みリクエストを分離することができます。
+    TiDBは、 Raftコンセンサスアルゴリズムに基づいたマルチレプリカ分散データベースです。高並行性および高スループットのアプリケーションシナリオにおいて、TiDBはフォロワーレプリカによって読み取りパフォーマンスをスケールアウトし、読み取りリクエストと書き込みリクエストを分離できます。
 
     TiDBは、さまざまなアプリケーションシナリオに対応するため、フォロワー読み取りに「強一貫性読み取り」と「弱一貫性履歴読み取り」の2つのモードを提供しています。「強一貫性読み取り」モードは、リアルタイムデータを必要とするアプリケーションシナリオに適しています。ただし、このモードでは、リーダーとフォロワー間のデータ複製レイテンシーとスループットの低下により、特に地理的に分散したデプロイメントの場合、読み取りリクエストのレイテンシーが大きくなる可能性があります。
 
@@ -282,7 +282,7 @@ TiDB バージョン: 5.4.0
 
     - サポートされているデプロイメント環境がさらに増えました: TiDB Operatorを使用してデプロイされたクラスターでも、継続的プロファイリングを使用できます。
 
-    継続的プロファイリングはデフォルトでは無効になっており、TiDB Dashboardで有効にすることができます。
+    継続的プロファイリングはデフォルトでは無効になっており、TiDB Dashboardで有効にできます。
 
     継続的プロファイリングは、 TiUP v1.9.0以降、またはTiDB Operator v1.3.0以降を使用してデプロイまたはアップグレードされたクラスタに適用可能です。
 

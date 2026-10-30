@@ -26,7 +26,7 @@ summary: TiDB SQLに関連する FAQ について説明します。
 
 ## 適切なクエリプランを選択するにはどうすればよいですか？ヒントを使用する必要がありますか？それとも、ヒントを使用できますか？ {#how-to-choose-the-right-query-plan-do-i-need-to-use-hints-or-can-i-use-hints}
 
-TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入することができます。
+TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入できます。
 
 さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL文のクエリプランを修正することもできます。
 
@@ -34,7 +34,7 @@ TiDBにはコストベースのオプティマイザが搭載されています�
 
 TiDB v7.5.0以降のバージョンでは、 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)ステートメントを使用して特定のSQL文を終了できます。詳細については、 [予想以上にリソースを消費するクエリ（ランナウェイクエリ）を管理する](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
 
-TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限することができます。これにより、ステートメントはしきい値によって自動的に終了します。
+TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限できます。これにより、ステートメントはしきい値によって自動的に終了します。
 
 たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用して、ステートメントの実行時間を 1 ミリ秒に制限できます。
 
@@ -190,7 +190,7 @@ Sqoopでは、 `--batch`各バッチで100文をコミットすることを意�
 
 TiDBはマルチバージョン同時実行制御（MVCC）を使用しているため、古いデータが新しいデータで上書きされる際、古いデータは置き換えられず、新しいデータと共に保持されます。データのバージョンを識別するためにタイムスタンプが使用されます。データを削除しても、すぐに領域が解放されるわけではありません。同時実行トランザクションが以前のバージョンの行を参照できるように、ガベージコレクションは遅延されます。これは、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) （デフォルト： `10m0s` ）で設定できます。
 
-## `SHOW PROCESSLIST`システム プロセス ID を表示しますか? {#does-show-processlist-display-the-system-process-id}
+## `SHOW PROCESSLIST`システムプロセス ID を表示しますか? {#does-show-processlist-display-the-system-process-id}
 
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。TiDB `SHOW PROCESSLIST`ではシステムプロセスIDが表示されません。表示されるのは現在のセッションIDです。TiDB `SHOW PROCESSLIST`と MySQL `SHOW PROCESSLIST`の違いは次のとおりです。
 
@@ -211,7 +211,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
 >
 > TiDB v6.6.0以降、 [リソース管理](/tidb-resource-control-ru-groups.md)サポートされます。この機能を使用すると、異なるリソースグループで異なる優先度のSQL文を実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、優先度の異なるSQL文のスケジュールをより適切に制御できます。リソース制御を有効にすると、文の優先度は適用されなくなります。異なるSQL文のリソース使用量を管理するには、リソース制御を使用することをお勧めします。
 
-上記の2つのパラメータをTiDBのDMLと組み合わせて使用することができます。例えば：
+上記の2つのパラメータをTiDBのDMLと組み合わせて使用できます。例えば：
 
 1. データベースに SQL文を記述して優先順位を調整します。
 
@@ -223,7 +223,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
     REPLACE HIGH_PRIORITY | LOW_PRIORITY | DELAYED INTO table_name;
     ```
 
-2. フルテーブルスキャン ステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
+2. フルテーブルスキャンステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
 
 ## TiDB での`auto analyze`のトリガー戦略は何ですか? {#whats-the-trigger-strategy-for-auto-analyze-in-tidb}
 
@@ -461,9 +461,9 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 ### TiDBクエリプランでは、 `cop`タスクは同じルートにあります。それらは同時に実行されますか？ {#in-the-tidb-query-plan-cop-tasks-are-in-the-same-root-are-they-executed-concurrently}
 
-現在、 TiDB のコンピューティング タスクは、タスク`cop task`と`root task`の 2つの異なるタイプに属しています。
+現在、 TiDB のコンピューティングタスクは、タスク`cop task`と`root task`の 2つの異なるタイプに属しています。
 
-`cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。`root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティング タスクです。
+`cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティングタスクです。`root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティングタスクです。
 
 通常、 `root task`の入力データは`cop task`から取得されます。`root task`がデータを処理している間、TiKVの`cop task`が同時にデータを処理し、TiDBの`root task`からのプルを待機します。したがって、 `cop`タスクは`root task`と並行して実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間並行して実行されます。たとえば、最初の`cop task`は[100, 200]のデータを処理し、2番目の`cop task`は[1, 100]のデータを処理します。詳細は[TiDBクエリプランの理解](/explain-overview.md)を参照してください。
 
@@ -481,7 +481,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 - [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)属性は、AUTO_INCREMENT主キーによってもたらされるホットスポットを解決するのに役立ちます。
 - [コプロセッサーキャッシュ](/coprocessor-cache.md) 、小さなテーブル上の読み取りホットスポットの場合。
 - [ロードベーススプリット](/configure-load-base-split.md) 、小さなテーブルの完全なテーブルスキャンなど、リージョン間の不均衡なアクセスによって発生するホットスポットの場合。
-- [キャッシュテーブル](/cached-tables.md) 、頻繁にアクセスされるが、めったに更新されない小さなホットスポット テーブル用。
+- [キャッシュテーブル](/cached-tables.md) 、頻繁にアクセスされるが、めったに更新されない小さなホットスポットテーブル用。
 
 ホットスポットによってパフォーマンスの問題が発生した場合は、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照して解決してください。
 

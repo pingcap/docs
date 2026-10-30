@@ -38,7 +38,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --changefeed-id="kafka-
 
 ## メッセージ形式の定義 {#definitions-of-message-formats}
 
-このセクションでは、DDL イベント、DML イベント、ウォーターマーク イベントの形式と、コンシューマー側でデータが解析される方法について説明します。
+このセクションでは、DDL イベント、DML イベント、ウォーターマークイベントの形式と、コンシューマー側でデータが解析される方法について説明します。
 
 ### DDLイベント {#ddl-event}
 
@@ -260,7 +260,7 @@ Java SQL 型の詳細については、 [Java SQL クラス型](https://docs.ora
 TiCDC は、次のように各バイトを文字表現に変換して、 [バイナリ型](/data-type-string.md#binary-type)を Canal-JSON 形式でエンコードします。
 
 - 印刷可能な文字は、ISO/IEC 8859-1 文字エンコーディングを使用して表されます。
-- 印刷できない文字および HTML で特別な意味を持つ特定の文字は、UTF-8 エスケープ シーケンスを使用して表されます。
+- 印刷できない文字および HTML で特別な意味を持つ特定の文字は、UTF-8 エスケープシーケンスを使用して表されます。
 
 次の表に詳細な表現情報を示します。
 
@@ -305,9 +305,9 @@ TiCDCにおけるCanal-JSONデータ形式の実装方法（ `Update`イベン�
 
 ### 公式Canalとの互換性 {#compatibility-with-the-official-canal}
 
-v6.5.6、v7.1.3、v7.6.0以降、 TiCDC Canal-JSONは公式Canalのデータ形式との互換性をサポートしています。チェンジフィードを作成する際に、 `sink-uri`のうち`content-compatible=true`を設定することでこの機能を有効にすることができます。このモードでは、TiCDCは公式Canalと互換性のあるCanal-JSON形式のデータを出力します。具体的な変更点は以下の通りです。
+v6.5.6、v7.1.3、v7.6.0以降、 TiCDC Canal-JSONは公式Canalのデータ形式との互換性をサポートしています。チェンジフィードを作成する際に、 `sink-uri`のうち`content-compatible=true`を設定することでこの機能を有効にできます。このモードでは、TiCDCは公式Canalと互換性のあるCanal-JSON形式のデータを出力します。具体的な変更点は以下の通りです。
 
-- `mysqlType`フィールドには、各タイプのタイプ パラメータの完全な情報が含まれています。
+- `mysqlType`フィールドには、各タイプのタイプパラメータの完全な情報が含まれています。
 - `Update`タイプのイベントは、変更された列データのみを出力します。
 
 ### `Update`タイプのイベント {#event-of-update-type}

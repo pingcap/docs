@@ -39,9 +39,9 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - TiFlashは、null対応セミジョイン演算子とnull対応アンチセミジョイン演算子をサポートしています [#6674](https://github.com/pingcap/tiflash/issues/6674) @[gengliqi](https://github.com/gengliqi)
 
-    相関サブクエリで`IN` 、 `NOT IN` 、 `= ANY` 、または`!= ALL`演算子を使用する場合、TiDB はそれらをセミジョインまたはアンチセミジョインに変換することでコンピューティング パフォーマンスを最適化します。結合キー列が`NULL`になる可能性がある場合は、 [NULL値対応セミジョイン](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries)や[ヌル値対応アンチセミジョイン](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)などの、null 対応結合アルゴリズムが必要です。
+    相関サブクエリで`IN` 、 `NOT IN` 、 `= ANY` 、または`!= ALL`演算子を使用する場合、TiDB はそれらをセミジョインまたはアンチセミジョインに変換することでコンピューティングパフォーマンスを最適化します。結合キー列が`NULL`になる可能性がある場合は、 [NULL値対応セミジョイン](/explain-subqueries.md#null-aware-semi-join-in-and--any-subqueries)や[ヌル値対応アンチセミジョイン](/explain-subqueries.md#null-aware-anti-semi-join-not-in-and--all-subqueries)などの、null 対応結合アルゴリズムが必要です。
 
-    バージョン 7.0.0 より前のTiFlashでは、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターがサポートされていなかったため、これらのサブクエリをTiFlashに直接プッシュダウンすることができませんでした。バージョン 7.0.0 以降では、 TiFlash はNULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをサポートしています。SQL 文にこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、かつ[MPPモード](/tiflash/use-tiflash-mpp-mode.md)が有効になっている場合、オプティマイザは全体的なパフォーマンスを向上させるために、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをTiFlashにプッシュダウンするかどうかを自動的に判断します。
+    バージョン 7.0.0 より前のTiFlashでは、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターがサポートされていなかったため、これらのサブクエリをTiFlashに直接プッシュダウンできませんでした。バージョン 7.0.0 以降では、 TiFlash はNULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをサポートしています。SQL 文にこれらの相関サブクエリが含まれており、クエリ内のテーブルにTiFlashレプリカがあり、かつ[MPPモード](/tiflash/use-tiflash-mpp-mode.md)が有効になっている場合、オプティマイザは全体的なパフォーマンスを向上させるために、NULL 対応セミ結合オペレーターと NULL 対応アンチセミ結合オペレーターをTiFlashにプッシュダウンするかどうかを自動的に判断します。
 
     詳細については、 [ドキュメント](/tiflash/tiflash-supported-pushdown-calculations.md)を参照してください。
 
@@ -89,7 +89,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - Fast Online DDL による一意インデックス作成のサポート [#40730](https://github.com/pingcap/tidb/issues/40730) @[tangenta](https://github.com/tangenta)
 
-    TiDB v6.5.0 では、Fast Online DDL による通常のセカンダリインデックスの作成がサポートされています。TiDB v7.0.0 では、Fast Online DDL によるユニーク インデックスの作成がサポートされています。v6.1.0 と比較して、大規模テーブルへのユニーク インデックスの追加は、パフォーマンスの向上により数倍高速化されることが期待されます。
+    TiDB v6.5.0 では、Fast Online DDL による通常のセカンダリインデックスの作成がサポートされています。TiDB v7.0.0 では、Fast Online DDL によるユニークインデックスの作成がサポートされています。v6.1.0 と比較して、大規模テーブルへのユニークインデックスの追加は、パフォーマンスの向上により数倍高速化されることが期待されます。
 
     詳細については、[ドキュメント](/best-practices/ddl-introduction.md)を参照してください。
 
@@ -156,7 +156,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - `prefer-leader`オプションをサポートします。このオプションは、読み取り操作の可用性を高め、不安定なネットワーク状況での応答レイテンシーを低減します。 [#40905](https://github.com/pingcap/tidb/issues/40905) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    TiDB のデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)で制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。この変数を`prefer-leader`に設定すると、TiDB はリーダーレプリカを選択して読み取り操作を実行することを優先します。ディスクやネットワークのパフォーマンス変動などによりリーダーレプリカの処理速度が著しく低下した場合、TiDB は利用可能な他のフォロワー レプリカを選択して読み取り操作を実行し、可用性を高め、応答レイテンシーを削減します。
+    TiDB のデータ読み取り動作は、システム変数[`tidb_replica_read`](/system-variables.md#tidb_replica_read-new-in-v40)で制御できます。v7.0.0 では、この変数に`prefer-leader`オプションが追加されました。この変数を`prefer-leader`に設定すると、TiDB はリーダーレプリカを選択して読み取り操作を実行することを優先します。ディスクやネットワークのパフォーマンス変動などによりリーダーレプリカの処理速度が著しく低下した場合、TiDB は利用可能な他のフォロワーレプリカを選択して読み取り操作を実行し、可用性を高め、応答レイテンシーを削減します。
 
     詳細については、[ドキュメント](/develop/dev-guide-use-follower-read.md)を参照してください。
 
@@ -363,7 +363,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
         - テーブルのスケジューリングを改善して、単一のテーブルをさまざまな TiCDC ノード間でより均等に分割します [#8247](https://github.com/pingcap/tiflow/issues/8247) @[overvenus](https://github.com/overvenus)
 
-        - MQ シンクに Large Row モニタリング メトリクスを追加します [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/Rustin170506)
+        - MQ シンクに Large Row モニタリングメトリクスを追加します [#8286](https://github.com/pingcap/tiflow/issues/8286) @[hi-rustin](https://github.com/Rustin170506)
 
         - リージョンに複数のテーブルのデータが含まれるシナリオで、TiKV ノードと TiCDC ノード間のネットワークトラフィックを削減します [#6346](https://github.com/pingcap/tiflow/issues/6346) @[overvenus](https://github.com/overvenus)
 
@@ -375,7 +375,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
     - TiDB Lightning
 
-        - TiDB Lightning物理インポートモードは、データインポートとインデックス インポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
+        - TiDB Lightning物理インポートモードは、データインポートとインデックスインポートの分離をサポートし、インポート速度と安定性を向上させます [#42132](https://github.com/pingcap/tidb/issues/42132) @[sleepymole](https://github.com/sleepymole)
 
             `add-index-by-sql`パラメータを追加します。デフォルト値は`false`で、これはTiDB Lightning が行データとインデックスデータの両方を KV ペアにエンコードし、それらをまとめて TiKV にインポートすることを意味します。これを`true`に設定すると、 TiDB Lightningは行データのインポート後に`ADD INDEX` SQL文を使用してインデックスを追加し、インポートの速度と安定性を向上させます。
 
@@ -404,7 +404,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
     - 非 BIGINT 符号なし整数が文字列/10 進数と比較したときに誤った結果を生成する可能性がある問題を修正 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     - メモリ制限超過により以前の`ANALYZE`文が強制終了されると、同じセッション内の現在の`ANALYZE`文も強制終了される可能性がある問題を修正しました [#41825](https://github.com/pingcap/tidb/issues/41825) @[XuHuaiyu](https://github.com/XuHuaiyu)
     - バッチコプロセッサの情報収集プロセス中にデータ競合が発生する可能性がある問題を修正しました [#41412](https://github.com/pingcap/tidb/issues/41412) @[you06](https://github.com/you06)
-    - アサーション エラーによりパーティションテーブルの MVCC 情報を出力できない問題を修正 [#40629](https://github.com/pingcap/tidb/issues/40629) @[ekexium](https://github.com/ekexium)
+    - アサーションエラーによりパーティションテーブルの MVCC 情報を出力できない問題を修正 [#40629](https://github.com/pingcap/tidb/issues/40629) @[ekexium](https://github.com/ekexium)
     - フェアロックモードで存在しないキーにロックが追加される問題を修正 [#41527](https://github.com/pingcap/tidb/issues/41527) @[ekexium](https://github.com/ekexium)
     - `INSERT IGNORE`および`REPLACE`文が値を変更しないキーをロックしない問題を修正 [#42121](https://github.com/pingcap/tidb/issues/42121) @[zyguan](https://github.com/zyguan)
 

@@ -13,11 +13,11 @@ SQL Statementsページには、クラスター内のすべてのSQL文の実行
 
 SQL Statementsページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**SQL Statements**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**SQL Statements**をクリックします。
 
 - ブラウザで[http://127.0.0.1:2379/dashboard/#/statement](http://127.0.0.1:2379/dashboard/#/statement)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
-SQL Statementsページに表示されるすべてのデータは、TiDB ステートメントサマリー テーブルから取得されます。テーブルの詳細については、 [TiDB ステートメントサマリー テーブル](/statement-summary-tables.md)を参照してください。
+SQL Statementsページに表示されるすべてのデータは、TiDB ステートメントサマリーテーブルから取得されます。テーブルの詳細については、 [TiDB ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
 
 > **Note:**
 >
@@ -43,7 +43,7 @@ SQL Statementsページの上部で、表示するSQL実行の時間範囲を変
 
 ### 設定を変更する {#change-settings}
 
-リスト ページで、右上にある**Settings**ボタンをクリックして、SQL Statements機能の設定を変更します。
+リストページで、右上にある**Settings**ボタンをクリックして、SQL Statements機能の設定を変更します。
 
 ![Settings entry](/media/dashboard/dashboard-statement-setting-entry.png)
 
@@ -51,7 +51,7 @@ SQL Statementsページの上部で、表示するSQL実行の時間範囲を変
 
 ![Settings](/media/dashboard/dashboard-statement-settings.png)
 
-設定ページでは、SQL Statements機能を有効または無効にすることができます。SQL Statements機能を有効にすると、以下の設定を変更できます。
+設定ページでは、SQL Statements機能を有効または無効にできます。SQL Statements機能を有効にすると、以下の設定を変更できます。
 
 - 収集間隔：各SQL文の分析期間。デフォルトでは30分です。SQL Statements機能は、一定期間内のすべてのSQL文を集計し、カウントします。期間が長すぎると集計の粒度が粗くなり、問題の特定に適さなくなります。期間が短すぎると統計の粒度が細かくなり、問題の特定には適しますが、同じデータ保持期間内でのレコード数とメモリ使用量が増加します。したがって、実際の状況に応じてこの値を調整し、問題の特定時には適切にこの値を下げる必要があります。
 - データ保持期間：概要情報の保持期間。デフォルトでは1日です。この期間を超えて保持されたデータは、システムテーブルから削除されます。
@@ -60,7 +60,7 @@ SQL Statementsページの上部で、表示するSQL実行の時間範囲を変
 
 > **Note:**
 >
-> - ステートメント システムテーブルはメモリ内にのみ保存されるため、SQL Statements機能が無効にされると、システムテーブル内のデータはクリアされます。
+> - ステートメントシステムテーブルはメモリ内にのみ保存されるため、SQL Statements機能が無効にされると、システムテーブル内のデータはクリアされます。
 >
 > - `Collect interval`と`retain duration`の値はメモリ使用量に影響するため、実際の状況に応じて調整することをお勧めします。 `retain duration`の値は大きすぎないようにしてください。
 

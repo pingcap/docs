@@ -23,11 +23,11 @@ HAProxyは、LinuxカーネルのコアコントリビューターであるWilly
 ## 基本機能 {#basic-features}
 
 - [高可用性](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.4) : HAProxy は、正常なシャットダウンとシームレスな切り替えをサポートする高可用性を提供します。
-- [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2つの主要なプロキシ モード (レイヤー4 とも呼ばれる TCP とレイヤー7 とも呼ばれる HTTP) がサポートされています。ラウンドロビン、Leastconn、ランダムなど、9種類以上の負荷分散アルゴリズムがサポートされています。
+- [負荷分散](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#4.2-balance) : 2つの主要なプロキシモード (レイヤー4 とも呼ばれる TCP とレイヤー7 とも呼ばれる HTTP) がサポートされています。ラウンドロビン、Leastconn、ランダムなど、9種類以上の負荷分散アルゴリズムがサポートされています。
 - [ヘルスチェック](http://cbonte.github.io/haproxy-dconv/2.6/configuration.html#5.2-check) : HAProxy はサーバーの HTTP または TCP モードのステータスを定期的にチェックします。
-- [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : アプリケーションがスティッキーセッションをサポートしていない間、HAProxy はクライアントを特定のサーバーに固定することができます。
+- [スティッキーセッション](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.6) : アプリケーションがスティッキーセッションをサポートしていない間、HAProxy はクライアントを特定のサーバーに固定できます。
 - [SSL](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.2) : HTTPS 通信と解決がサポートされます。
-- [監視と統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) ：Web ページを通じて、サービスの状態とトラフィック フローをリアルタイムで監視できます。
+- [監視と統計](http://cbonte.github.io/haproxy-dconv/2.6/intro.html#3.3.3) ：Web ページを通じて、サービスの状態とトラフィックフローをリアルタイムで監視できます。
 
 ## 始める前に {#before-you-begin}
 
@@ -124,9 +124,9 @@ haproxy --help
 | オプション                           | 説明                                                                                                                                                              |
 | :------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `-v`                            | バージョンとビルドの日付を報告します。                                                                                                                                             |
-| `-vv`                           | バージョン、ビルド オプション、ライブラリ バージョン、使用可能なポーラーを表示します。                                                                                                                    |
-| `-d`                            | デバッグ モードを有効にします。                                                                                                                                                |
-| `-db`                           | バックグラウンド モードとマルチプロセス モードを無効にします。                                                                                                                                |
+| `-vv`                           | バージョン、ビルドオプション、ライブラリバージョン、使用可能なポーラーを表示します。                                                                                                                    |
+| `-d`                            | デバッグモードを有効にします。                                                                                                                                                |
+| `-db`                           | バックグラウンドモードとマルチプロセスモードを無効にします。                                                                                                                                |
 | `-dM [<byte>]`                  | メモリポイズニングを強制します。つまり、malloc() または pool_alloc2() で割り当てられたすべてのメモリ領域は、呼び出し元に渡される前に`<byte>`で埋められます。                                                                  |
 | `-V`                            | 詳細モードを有効にします (静音モードを無効にします)。                                                                                                                                    |
 | `-D`                            | デーモンとして起動します。                                                                                                                                                   |
@@ -137,7 +137,7 @@ haproxy --help
 | `-n <limit>`                    | プロセスごとの接続制限を`<limit>`に制限します。                                                                                                                                    |
 | `-m <limit>`                    | すべてのプロセスにわたって割り当て可能なメモリのメモリを`<limit>`メガバイトに制限します。                                                                                                               |
 | `-N <limit>`                    | 組み込みのデフォルト値 (通常は 2000) ではなく、プロキシごとのデフォルトの maxconn を`<limit>`に設定します。                                                                                             |
-| `-L <name>`                     | ローカル ピア名を`<name>`に変更します。これはデフォルトでローカル ホスト名になります。                                                                                                                |
+| `-L <name>`                     | ローカルピア名を`<name>`に変更します。これはデフォルトでローカルホスト名になります。                                                                                                                |
 | `-p <file>`                     | 起動時にすべてのプロセスの PID を`<file>`に書き込みます。                                                                                                                             |
 | `-de`                           | epoll(7)の使用を無効にします。epoll(7)はLinux 2.6および一部のカスタムLinux 2.4システムでのみ利用可能です。                                                                                          |
 | `-dp`                           | poll(2) の使用を無効にします。代わりに select(2) が使用される場合があります。                                                                                                                |
@@ -150,7 +150,7 @@ haproxy --help
 | `-x <unix_socket>`              | 指定されたソケットに接続し、古いプロセスからすべてのリスニングソケットを取得します。その後、新しいソケットをバインドする代わりに、これらのソケットを使用します。                                                                                |
 | `-S <bind>[,<bind_options>...]` | マスターワーカーモードでは、マスターCLIを作成します。このCLIは、すべてのワーカーのCLIへのアクセスを可能にします。デバッグに役立ち、離脱中のプロセスにアクセスする便利な方法です。                                                                   |
 
-HAProxy コマンドライン オプションの詳細については、 [HAProxyの管理ガイド](http://cbonte.github.io/haproxy-dconv/2.6/management.html)と[HAProxyの一般コマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
+HAProxy コマンドラインオプションの詳細については、 [HAProxyの管理ガイド](http://cbonte.github.io/haproxy-dconv/2.6/management.html)と[HAProxyの一般コマンドマニュアル](https://manpages.debian.org/buster-backports/haproxy/haproxy.1.en.html)を参照してください。
 
 ### HAProxyを設定する {#configure-haproxy}
 

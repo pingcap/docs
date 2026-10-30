@@ -39,7 +39,7 @@ TiDB Lightning物理インポートモードでインポートされたデータ
 
 ### TiCDC で使用される {#used-with-ticdc}
 
-TiCDC を物理インポートモードで使用することは、短期的には互換性がありません。これは、TiCDC がTiDB Lightning物理インポートモードの書き込み速度に追いつけず、クラスター レプリケーションのレイテンシーが長くなる可能性があるためです。
+TiCDC を物理インポートモードで使用することは、短期的には互換性がありません。これは、TiCDC がTiDB Lightning物理インポートモードの書き込み速度に追いつけず、クラスターレプリケーションのレイテンシーが長くなる可能性があるためです。
 
 次のようにさまざまなシナリオで実行できます。
 
@@ -73,6 +73,6 @@ TiCDC を物理インポートモードで使用することは、短期的に�
 
 - シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。その文の[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信することができます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。その文の[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信できます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
 
     上流 TiDB クラスターのインポートタスクが完了したら、 `IMPORT INTO`を使用して下流 TiDB クラスターに同じデータをインポートします。下流に Redshift や Snowflake などのデータベースがある場合は、クラウドストレージサービスから CSV、SQL、または Parquet ファイルを読み取り、データベースに書き込むように設定できます。

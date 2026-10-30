@@ -40,7 +40,7 @@ TiDB は、インポートとエクスポート、バックアップと復元、
 
 ### データ移行 - TiDB Data Migration (DM) {#data-migration-tidb-data-migration-dm}
 
-[TiDB Data Migration](/dm/dm-overview.md) (DM) は、MySQL/MariaDB から TiDB への完全なデータ移行と増分データレプリケーションをサポートするツールです。
+[TiDB Data Migration](/dm/dm-overview.md) (DM) は、MySQL/MariaDB から TiDB への完全データ移行と増分データレプリケーションをサポートするツールです。
 
 DM の基本は次のとおりです。
 
@@ -49,7 +49,7 @@ DM の基本は次のとおりです。
 - サポートされている TiDB バージョン: すべてのバージョン
 - Kubernetes サポート: Kubernetes に TiDB DM をデプロイするには[TiDB Operator](https://github.com/pingcap/tidb-operator)を使用します。
 
-データ量が1TB未満の場合は、DMを使用してMySQL/MariaDBからTiDBに直接データを移行することをお勧めします。移行プロセスには、完全なデータ移行と増分データレプリケーションが含まれます。
+データ量が1TB未満の場合は、DMを使用してMySQL/MariaDBからTiDBに直接データを移行することをお勧めします。移行プロセスには、完全データ移行と増分データレプリケーションが含まれます。
 
 データ量が 1 TB を超える場合は、次の手順を実行します。
 

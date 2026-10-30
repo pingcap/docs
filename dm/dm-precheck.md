@@ -60,7 +60,7 @@ tiup dmctl check-task ./task.yaml
     > - アップストリームで互換性のない文字セットが使用されている場合でも、ダウンストリームでutf8mb4文字セットを使用してテーブルを作成することで、レプリケーションを続行できます。ただし、この方法は推奨されません。アップストリームで使用されている互換性のない文字セットを、ダウンストリームでサポートされている別の文字セットに置き換えることをお勧めします。
     > - 上流テーブルに主キー制約または一意キー制約がない場合、同じデータ行が下流テーブルに複数回複製される可能性があり、レプリケーションのパフォーマンスに影響を与える可能性があります。本番環境では、上流テーブルに主キー制約または一意キー制約を指定することをお勧めします。
 
-### 完全なデータ移行のためのチェック項目 {#check-items-for-full-data-migration}
+### 完全データ移行のためのチェック項目 {#check-items-for-full-data-migration}
 
 完全データ移行モード ( `task-mode: full` ) の場合、事前チェックには[一般的なチェック項目](#common-check-items)に加えて、次のチェック項目も含まれます。
 
@@ -152,7 +152,7 @@ tiup dmctl check-task ./task.yaml
 
 ### 完全データ移行および増分データ移行のチェック項目 {#check-items-for-full-and-incremental-data-migration}
 
-完全および増分データ移行モード ( `task-mode: all` ) の場合、事前チェックには[一般的なチェック項目](#common-check-items)に加えて、[完全なデータ移行チェック項目](#check-items-for-full-data-migration)と[増分データ移行チェック項目](#check-items-for-incremental-data-migration)も含まれます。
+完全および増分データ移行モード ( `task-mode: all` ) の場合、事前チェックには[一般的なチェック項目](#common-check-items)に加えて、[完全データ移行チェック項目](#check-items-for-full-data-migration)と[増分データ移行チェック項目](#check-items-for-incremental-data-migration)も含まれます。
 
 ### 無視できるチェック項目 {#ignorable-check-items}
 

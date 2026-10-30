@@ -145,7 +145,7 @@ PLAN REPLAYER LOAD 'plan_replayer.zip';
 >
 > auto analyzeを無効にする必要があります。無効にしないと、インポートされた統計情報が分析によって上書きされてしまいます。
 
-[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)システム変数を`OFF`に設定すると、auto analyzeを無効にすることができます。
+[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)システム変数を`OFF`に設定すると、auto analyzeを無効にできます。
 
 ```sql
 set @@global.tidb_enable_auto_analyze = OFF;
@@ -195,7 +195,7 @@ TiDBの実行計画を特定する場合、対象となるSQL文と実行計画�
 `PLAN REPLAYER CAPTURE`は主に次の機能があります。
 
 - 対象となるSQL文と対象実行計画のダイジェストを事前にTiDBクラスタに登録し、対象クエリとのマッチングを開始します。
-- ターゲット クエリが正常に一致すると、そのオプティマイザ関連の情報を直接キャプチャし、ZIP ファイルとしてエクスポートします。
+- ターゲットクエリが正常に一致すると、そのオプティマイザ関連の情報を直接キャプチャし、ZIP ファイルとしてエクスポートします。
 - 一致した SQL と実行計画ごとに、情報は 1回だけキャプチャされます。
 - システムテーブルを通じて、進行中の一致するタスクと生成されたファイルを表示します。
 - 履歴ファイルを定期的にクリーンアップします。
@@ -220,7 +220,7 @@ PLAN REPLAYER CAPTURE 'sql_digest' '*';
 
 ### キャプチャタスクを表示する {#view-the-capture-tasks}
 
-次のステートメントを使用して、TiDB クラスター内の`PLAN REPLAYER CAPTURE`実行中のキャプチャ タスクを表示できます。
+次のステートメントを使用して、TiDB クラスター内の`PLAN REPLAYER CAPTURE`実行中のキャプチャタスクを表示できます。
 
 ```sql
 mysql> PLAN REPLAYER CAPTURE 'example_sql' 'example_plan';

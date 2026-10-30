@@ -1,6 +1,6 @@
 ---
 title: Tune TiFlash Performance
-summary: マシン リソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
+summary: マシンリソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
 ---
 
 # TiFlash のパフォーマンスを調整する {#tune-tiflash-performance}
@@ -25,7 +25,7 @@ summary: マシン リソースを計画し、TiDB パラメータを調整す�
 
 ### MPPモードを強制的に有効にする {#forcibly-enable-the-mpp-mode}
 
-MPP実行計画は分散コンピューティングリソースを最大限に活用できるため、バッチデータクエリの効率を大幅に向上させます。オプティマイザがクエリに対してMPP実行計画を生成しない場合は、MPPモードを強制的に有効にすることができます。
+MPP実行計画は分散コンピューティングリソースを最大限に活用できるため、バッチデータクエリの効率を大幅に向上させます。オプティマイザがクエリに対してMPP実行計画を生成しない場合は、MPPモードを強制的に有効にできます。
 
 変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)は、オプティマイザのコスト見積もりを無視し、クエリ実行時にTiFlashのMPPモードを強制的に使用するかどうかを制御します。MPPモードを強制的に有効にするには、次のコマンドを実行します。
 
@@ -169,7 +169,7 @@ mysql> explain analyze select count(*) from t1 join t2 where t1.a = t2.b group b
 
 TiFlashは、 `Sum`列など、 `Distinct`列を受け入れる一部の集計関数をサポートしていません。デフォルトでは、集計関数全体がTiDBで計算されます。 `Distinct`最適化を有効にすると、一部の操作をTiFlashにプッシュダウンできるため、クエリパフォーマンスが向上します。
 
-クエリ内で`distinct`操作を含む集計関数が遅い場合は、 [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)変数の値を`ON`に設定することで、 `Distinct`操作を含む集計関数 ( `select sum(distinct a) from t`など) をコプロセッサーにプッシュダウンする最適化操作を有効にすることができます。
+クエリ内で`distinct`操作を含む集計関数が遅い場合は、 [`tidb_opt_distinct_agg_push_down`](/system-variables.md#tidb_opt_distinct_agg_push_down)変数の値を`ON`に設定することで、 `Distinct`操作を含む集計関数 ( `select sum(distinct a) from t`など) をコプロセッサーにプッシュダウンする最適化操作を有効にできます。
 
 ```sql
 set @@tidb_opt_distinct_agg_push_down = ON;
@@ -229,7 +229,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
 
 ### シャッフルハッシュ結合をブロードキャストハッシュ結合に置き換える {#replace-shuffled-hash-join-with-broadcast-hash-join}
 
-小さなテーブルでの`Join`操作の場合、ブロードキャスト ハッシュ結合アルゴリズムにより大きなテーブルの転送を回避できるため、コンピューティング パフォーマンスが向上します。
+小さなテーブルでの`Join`操作の場合、ブロードキャストハッシュ結合アルゴリズムにより大きなテーブルの転送を回避できるため、コンピューティングパフォーマンスが向上します。
 
 - 変数[`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかを制御します。テーブルサイズ（単位：バイト）がこの変数の値より小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 

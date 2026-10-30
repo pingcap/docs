@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Instance Profiling - Continuous Profiling
-summary: TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決することができます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
+summary: TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決できます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
 ---
 
 # TiDB Dashboardインスタンスプロファイリング - 継続的プロファイリング {#tidb-dashboard-instance-profiling-continuous-profiling}
@@ -36,9 +36,9 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## ページにアクセスする {#access-the-page}
 
-継続的プロファイリング ページには、次のいずれかの方法でアクセスできます。
+継続的プロファイリングページには、次のいずれかの方法でアクセスできます。
 
-- TiDB Dashboardにログインした後、左側のナビゲーション メニューで**Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**をクリックします。
+- TiDB Dashboardにログインした後、左側のナビゲーションメニューで**Advanced Debugging** > **Profiling Instances** > **Continuous Profiling**をクリックします。
 
     ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
@@ -66,7 +66,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
 ## 過去のパフォーマンスデータを表示する {#view-historical-performance-data}
 
-リスト ページでは、この機能を有効にしてから収集されたすべてのパフォーマンスデータを確認できます。
+リストページでは、この機能を有効にしてから収集されたすべてのパフォーマンスデータを確認できます。
 
 ![History results](/media/dashboard/dashboard-conprof-history.png)
 

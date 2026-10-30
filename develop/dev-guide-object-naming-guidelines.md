@@ -28,14 +28,14 @@ aliases: ['/ja/tidb/stable/dev-guide-object-naming-guidelines/','/ja/tidbcloud/d
     - バックアップテーブル: `bak_t_crm_relation_20170425`
     - 事業運営の暫定表： `tmp_st_{business code}_{creator abbreviation}_{date}`
     - 会計期間の記録表: `t_crm_ec_record_YYYY{MM}{dd}`
-- 異なるビジネス モジュールのテーブルごとに個別のデータベースを作成し、それに応じて注釈を追加します。
+- 異なるビジネスモジュールのテーブルごとに個別のデータベースを作成し、それに応じて注釈を追加します。
 
 ## カラムの命名規則 {#column-naming-convention}
 
 - 列の命名は、列の実際の意味または略語です。
 - 同じ意味を持つテーブル間では同じ列名を使用することをお勧めします。
 - 列に注釈を追加し、"0: offline, 1: online"などの列挙型の名前付きの値を指定することをお勧めします。
-- ブール列の名前は`is_{description}`にすることをお勧めします。例えば、 `member`テーブルの、メンバーが有効かどうかを示す列の名前は`is_enabled`にすることができます。
+- ブール列の名前は`is_{description}`にすることをお勧めします。例えば、 `member`テーブルの、メンバーが有効かどうかを示す列の名前は`is_enabled`にできます。
 - 列名を 30 文字を超える長さにすることは推奨されません。また、列の数は 60 未満にする必要があります。
 - `order` 、 `from` 、 `desc`などのTiDB予約語を列名として使用しないでください。キーワードが予約されているかどうかを確認するには、 [TiDBキーワード](/keywords.md)を参照してください。
 

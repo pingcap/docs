@@ -29,7 +29,7 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 
 ### -i, --identity_file {#i-identity-file}
 
-- ターゲットマシンに接続するために使用するキー ファイルを指定します。
+- ターゲットマシンに接続するために使用するキーファイルを指定します。
 - データ型: `STRING`
 - コマンドでこのオプションを指定しない場合は、デフォルトで`~/.ssh/id_rsa`ファイルを使用してターゲットマシンに接続します。
 
@@ -41,8 +41,8 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 
 ### --no-labels {#no-labels}
 
-- このオプションはラベル チェックをスキップするために使用されます。
-- 2つ以上のTiKVノードを同じ物理マシンにデプロイすると、リスクが生じます。PDはクラスタトポロジを把握していないため、同じ物理マシン上の異なるTiKVノードにリージョンのレプリカを複数スケジュールしてしまう可能性があり、その結果、この物理マシンが単一障害点となります。このリスクを回避するには、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないようにPDに指示することができます。ラベルの設定については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
+- このオプションはラベルチェックをスキップするために使用されます。
+- 2つ以上のTiKVノードを同じ物理マシンにデプロイすると、リスクが生じます。PDはクラスタトポロジを把握していないため、同じ物理マシン上の異なるTiKVノードにリージョンのレプリカを複数スケジュールしてしまう可能性があり、その結果、この物理マシンが単一障害点となります。このリスクを回避するには、ラベルを使用して、同じリージョンを同じマシンにスケジュールしないようにPDに指示できます。ラベルの設定については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
 - テスト環境では、このリスクは問題にならない可能性があり、 `--no-labels`を使用してチェックをスキップできます。
 - データ型: `BOOLEAN`
 - デフォルト: false
@@ -63,4 +63,4 @@ tiup cluster scale-out <cluster-name> <topology.yaml> [flags]
 
 スケールアウトのログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

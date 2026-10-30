@@ -18,7 +18,7 @@ summary: TiFlash をアップグレードする際の注意事項を説明しま
 >
 > - TiFlashを含む TiDB をメジャーバージョン間でアップグレードすることは推奨されません（例：v4.x から v6.x）。代わりに、まず v4.x から v5.x にアップグレードし、その後 v6.x にアップグレードする必要があります。
 >
-> - v4.x のライフサイクルは終了に近づいています。できるだけ早く v5.x 以降にアップグレードすることをお勧めします。詳細については、 [TiDB リリース サポート ポリシー](https://www.pingcap.com/tidb-release-support-policy/)ご覧ください。
+> - v4.x のライフサイクルは終了に近づいています。できるだけ早く v5.x 以降にアップグレードすることをお勧めします。詳細については、 [TiDB リリースサポートポリシー](https://www.pingcap.com/tidb-release-support-policy/)ご覧ください。
 >
 > - PingCAPは、v6.0などのLTS以外のバージョンに対するバグ修正を提供していません。可能な限り、v6.1以降のLTSバージョンにアップグレードすることをお勧めします。
 
@@ -67,7 +67,7 @@ TiFlash Proxyはv6.1.0（TiKV v6.0.0と連動）にアップグレードされ�
 
 **テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
 
-対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製できます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 ### 動的プルーニング {#dynamic-pruning}
 
@@ -121,7 +121,7 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 
 **テストやその他の特別なシナリオでTiFlash をダウングレードするための回避策**
 
-対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製することができます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
+対象のTiFlashノードを強制的にスケールインし、TiKVからデータを再度複製できます。詳細な手順については、 [TiFlashクラスターのスケールイン](/scale-tidb-using-tiup.md#scale-in-a-tiflash-cluster)を参照してください。
 
 ## v6.x または v7.x から`storage.format_version = 5`が設定された v7.3 へ {#from-v6-x-or-v7-x-to-v7-3-with-storage-format-version-5-configured}
 

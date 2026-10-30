@@ -23,7 +23,7 @@ TiDBはMySQLプロトコルと高い互換性を持ち、 MySQL 5.7およびMySQ
 
 TiDBはMySQLレプリケーションプロトコルをサポートしていない点に注意が必要です。代わりに、MySQLでデータをレプリケートするための専用ツールが提供されています。
 
-- MySQL からデータを複製する: [TiDB Data Migration (DM)](/dm/dm-overview.md)は、MySQL または MariaDB から TiDB への完全なデータ移行と増分データレプリケーションをサポートするツールです。
+- MySQL からデータを複製する: [TiDB Data Migration (DM)](/dm/dm-overview.md)は、MySQL または MariaDB から TiDB への完全データ移行と増分データレプリケーションをサポートするツールです。
 - データをMySQLに複製する: [TiCDC](/ticdc/ticdc-overview.md)は、TiKV変更ログを取得してTiDBの増分データを複製するためのツールです。TiCDCは[MySQLシンク](/ticdc/ticdc-overview.md#replication-consistency)を使用して、TiDBの増分データをMySQLに複製します。
 
 </CustomContent>
@@ -283,7 +283,7 @@ TiDBは、MySQL 5.7およびMySQL 8.0と比較して、デフォルト設定に�
 TiDBは、以下の点を考慮して、名前付きタイムゾーンをサポートしています。
 
 - TiDBは、計算にシステムに現在インストールされているすべてのタイムゾーンルール（通常は`tzdata`パッケージ）を使用します。これにより、タイムゾーンテーブルデータをインポートすることなく、すべてのタイムゾーン名を使用できます。タイムゾーンテーブルデータをインポートしても、計算ルールは変更されません。
-- 現在、MySQL はデフォルトでローカル タイムゾーンを使用し、システムに組み込まれている現在のタイムゾーン ルール (夏時間の開始時など) に基づいて計算します。 [タイムゾーンテーブルデータのインポート](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation)インポートがないと、MySQL は名前でタイムゾーンを指定できません。
+- 現在、MySQL はデフォルトでローカルタイムゾーンを使用し、システムに組み込まれている現在のタイムゾーンルール (夏時間の開始時など) に基づいて計算します。 [タイムゾーンテーブルデータのインポート](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation)インポートがないと、MySQL は名前でタイムゾーンを指定できません。
 
 ### タイプシステムの違い {#type-system-differences}
 

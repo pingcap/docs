@@ -1,6 +1,6 @@
 ---
 title: Backup Storages
-summary: TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップストレージをサポートしています。各ストレージサービスのURIと認証情報を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはデフォルトでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にすることができます。各ストレージサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
+summary: TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFSへのバックアップストレージをサポートしています。各ストレージサービスのURIと認証情報を指定できます。S3、GCS、またはAzure Blob Storageを使用する場合、 BRはデフォルトでTiKVに認証情報を送信します。クラウド環境では、この機能を無効にできます。各ストレージサービスのURI形式と認証方法を指定します。Amazon S3とAzure Blob Storageでは、サーバー側暗号化がサポートされています。BR v6.3.0はAWS S3オブジェクトロックもサポートしています。
 ---
 
 # バックアップストレージ {#backup-storages}
@@ -250,7 +250,7 @@ TiKV で GCS WIF または ADC を使用する場合は、 `gcp_v2`外部スト�
 
             次の手順では、TiKV ポート`24000`と systemd サービス名`tikv-24000`例として使用します。
 
-            1. 次のコマンドを実行して、systemd サービス エディターを開きます。
+            1. 次のコマンドを実行して、systemd サービスエディターを開きます。
 
                 ```shell
                 systemctl edit tikv-24000
