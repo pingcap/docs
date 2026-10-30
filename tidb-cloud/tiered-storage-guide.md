@@ -299,7 +299,7 @@ These figures are from test environments and do not represent real-world product
 
 - Queries spanning IA partitions are recommended to cover **no more than 3 partitions**; exceeding this may cause significant response time degradation
 - Avoid running concurrent `SELECT *` full-table scans on IA tables simultaneously
-- Monitor IA remote read volume via `EXPLAIN ANALYZE` and slow queries, and adjust accordingly
+- Monitor IA remote read volume via `EXPLAIN ANALYZE` and the slow query details in the console, and adjust accordingly
 
 ### Tune the IA cache level
 
