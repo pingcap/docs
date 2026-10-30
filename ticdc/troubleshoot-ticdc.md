@@ -118,7 +118,7 @@ First, run `cdc cli changefeed query` to find the default Topic in the current S
 cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
 ```
 
-The following example sets the limit to 10 MiB for both the default Topic `default-topic` and the receiving Topic `routed-topic`. Replace the Kafka address and Topic names with your actual values. If you have not configured a Topic dispatcher, you only need to update the default Topic.
+The following example sets the limit to 10 MiB for the default Topic `default-topic` and one routed Topic `routed-topic`. Replace the Kafka address and Topic names with your actual values. If Topic dispatchers route messages to multiple Topics, update every possible receiving Topic. If you have not configured a Topic dispatcher, you only need to update the default Topic.
 
 ```shell
 bin/kafka-configs.sh --bootstrap-server localhost:9092 \
