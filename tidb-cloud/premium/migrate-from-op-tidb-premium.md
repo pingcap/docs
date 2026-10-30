@@ -5,7 +5,7 @@ summary: Learn how to migrate data from TiDB Self-Managed to {{{ .premium }}} or
 
 # Migrate from TiDB Self-Managed to {{{ .premium }}} or {{{ .byoc }}}
 
-This document describes how to migrate data from your TiDB Self-Managed clusters to {{{ .premium }}} or {{{ .byoc }}} (on AWS) instances using Dumpling and TiCDC.
+This document describes how to migrate data from your TiDB Self-Managed clusters to {{{ .premium }}} or {{{ .byoc }}} instances on AWS using Dumpling and TiCDC.
 
 The overall procedure is as follows:
 
@@ -218,6 +218,8 @@ After you export data from the TiDB Self-Managed cluster to Amazon S3, you need 
 
 3. Continue with the remaining steps in the import wizard, and use the saved Role ARN when prompted.
 
+    For BYOC instances, add the `tidbcloud.com/allow-dataplane-access=true` tag to the IAM role before starting the import.
+
 #### Manually create the IAM role (optional)
 
 If your organization cannot deploy CloudFormation stacks, create the access policy and IAM role manually:
@@ -265,6 +267,8 @@ If your organization cannot deploy CloudFormation stacks, create the access poli
 
 2. Create an IAM role that trusts {{{ .premium }}} or {{{ .byoc }}} by providing the **Account ID** and **External ID** you have noted down earlier. Then, attach the policy created in the previous step to this role.
 
+    For BYOC instances, add the `tidbcloud.com/allow-dataplane-access=true` tag to the IAM role before starting the import.
+
 3. Copy the resulting Role ARN and enter it in the {{{ .premium }}} or {{{ .byoc }}} import wizard.
 
 4. Import data to {{{ .premium }}} or {{{ .byoc }}} by following [Import data from Amazon S3 into {{{ .premium }}} or {{{ .byoc }}}](/tidb-cloud/premium/import-from-s3-premium.md).
@@ -277,19 +281,16 @@ To replicate incremental data, do the following:
 
     ![Start Time in Metadata](/media/tidb-cloud/start_ts_in_metadata.png)
 
-2. Grant TiCDC to connect to {{{ .premium }}} or {{{ .byoc }}}.
+2. Configure network connectivity from the TiCDC servers to the target instance using either a public connection or AWS PrivateLink. For public connections, follow [Connect via Public Connection](/tidb-cloud/premium/connect-to-premium-via-public-connection.md). For private connections, follow [Connect via AWS PrivateLink](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md).
 
-    1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page.
-    2. In the left navigation pane, click **Settings** > **Networking**.
-    3. On the **Networking** page, click **Add IP Address**.
-    4. In the displayed dialog, select **Use IP addresses**, click **+**, fill in the public IP address of the TiCDC component in the **IP Address** field, and then click **Confirm**. Now TiCDC can access {{{ .premium }}} or {{{ .byoc }}}. For more information, see [Configure an IP Access List](/tidb-cloud/configure-ip-access-list.md).
+    For BYOC instances, public connections are available only if you provided a public hosted zone during deployment. If you provided a private hosted zone, use a private connection.
 
 3. Get the connection information of the downstream {{{ .premium }}} or {{{ .byoc }}} instance.
 
     1. In the [TiDB Cloud console](https://tidbcloud.com/tidbs), navigate to the [**My TiDB**](https://tidbcloud.com/tidbs) page, and then click the name of your target {{{ .premium }}} or {{{ .byoc }}} instance to go to its overview page.
     2. Click **Connect** in the upper-right corner.
-    3. In the connection dialog, select **Public** from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
-    4. From the connection information, you can get the host IP address and port of the instance. For more information, see [Connect via public connection](/tidb-cloud/connect-via-standard-connection.md).
+    3. In the connection dialog, select the connection type configured in the previous step from the **Connection Type** drop-down list and select **General** from the **Connect With** drop-down list.
+    4. From the connection information, get the host and port of the instance for the selected connection type. In step 4, replace `172.16.6.125:4000` in `--sink-uri` with these values.
 
 4. Create and run the incremental replication task. In the upstream cluster, run the following:
 

@@ -91,7 +91,7 @@ Perform the following steps:
 
 ## Step 6. Plan network CIDR ranges
 
-Before starting the BYOC deployment, plan dedicated private CIDR ranges for observability (O11Y) infrastructure and resource pools. Use a prefix length between `/16` and `/22`.
+Before starting the BYOC deployment, plan dedicated private CIDR ranges for observability (O11Y) infrastructure and resource pools. Use a prefix length between `/16` and `/20`.
 
 Each BYOC deployment region has one O11Y CIDR. Resource pool CIDR is configured for each resource pool when you create it. Plan these CIDR ranges before deployment so that the BYOC environment and future resource pools can be provisioned without network conflicts.
 
@@ -99,7 +99,7 @@ Prepare the following information:
 
 | Item | Description | Example |
 | ----- | ----- | ----- |
-| O11Y CIDR | CIDR range reserved for observability infrastructure and related services in the deployment region. | `10.1.0.0/22` |
+| O11Y CIDR | CIDR range reserved for observability infrastructure and related services in the deployment region. | `10.1.0.0/20` |
 | Resource pool CIDR | CIDR range reserved for a resource pool. Each resource pool has its own CIDR, which cannot be modified after the resource pool is created. | `10.10.0.0/16` |
 
 **CIDR planning rules & constraints**
@@ -133,7 +133,7 @@ Fill out the table below with the information gathered in steps above and share 
 | **Availability Zones** | 3 AZs or single AZ per region (specify names and ID) | **us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **us-west-2:** `us-west-2a`, `usw2-az1` | Step 3. Note to meet the AZ quantity requirement for **each** selected region. |
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | Step 5. The ARN can be shared across multiple regions. |
 | **Hosted Zone Name & Hosted Zone ID** | TiDB hosted zone. You can provide either a public or private hosted zone. | **Hosted TiDB zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB zone ID:** `Z1039122VAY4T8UNWR8E`. | Step 4. The hosted zone can be shared across multiple regions. |
-| **CIDR** | Customer-planned CIDR ranges for O11Y infrastructure and resource pools | **O11Y CIDR:** `10.1.0.0/22`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |
+| **CIDR** | Customer-planned CIDR ranges for O11Y infrastructure and resource pools | **O11Y CIDR:** `10.1.0.0/20`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |
 | **Image Sync Region** | Region ID chosen for image synchronization | `us-west-2` | Refer to [image synchronization](/tidb-cloud/byoc/byoc-automated-deployment.md#step-1-image-synchronization) for details. |
 
 ## Review and increase AWS service quotas
