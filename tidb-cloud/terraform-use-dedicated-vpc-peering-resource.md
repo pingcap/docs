@@ -146,7 +146,7 @@ summary: "`tidbcloud_dedicated_vpc_peering` リソースを使用して、 TiDB 
 
 ## TiDB Cloud Dedicated VPC ピアリングをインポートする {#import-a-tidb-cloud-dedicated-vpc-peering}
 
-Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリングの場合は、インポートすることで Terraform の管理下に置くことができます。
+Terraform によって管理されていないTiDB Cloud Dedicated VPC ピアリングの場合は、インポートすることで Terraform の管理下に置けます。
 
 たとえば、Terraform によって作成されていない VPC ピアリングをインポートできます。
 

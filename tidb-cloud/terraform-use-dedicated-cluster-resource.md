@@ -1051,7 +1051,7 @@ $ terraform show
 
 ## クラスターをインポートする {#import-a-cluster}
 
-Terraform によって管理されていない TiDB クラスターの場合は、インポートすることで Terraform の管理下に置くことができます。
+Terraform によって管理されていない TiDB クラスターの場合は、インポートすることで Terraform の管理下に置けます。
 
 次のように、Terraform によって作成されていないクラスターをインポートします。
 

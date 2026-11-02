@@ -425,7 +425,7 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 ## TiDB Cloud Essential インスタンスをインポートする {#import-a-tidb-cloud-essential-instance}
 
-Terraform によって管理されていないTiDB Cloud Essential インスタンスの場合は、インポートすることで Terraform の管理下に置くことができます。
+Terraform によって管理されていないTiDB Cloud Essential インスタンスの場合は、インポートすることで Terraform の管理下に置けます。
 
 1. 新しい`tidbcloud_serverless_cluster`リソースのインポートブロックを追加します。
 

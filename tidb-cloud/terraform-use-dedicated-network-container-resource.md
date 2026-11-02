@@ -138,7 +138,7 @@ summary: "`tidbcloud_dedicated_network_container` リソースを使用して、
 
 ## TiDB Cloud Dedicatedネットワークコンテナーをインポートする {#import-a-tidb-cloud-dedicated-network-container}
 
-Terraform によって管理されていないTiDB Cloud Dedicated ネットワークコンテナーの場合は、インポートすることで Terraform の管理下に置くことができます。
+Terraform によって管理されていないTiDB Cloud Dedicated ネットワークコンテナーの場合は、インポートすることで Terraform の管理下に置けます。
 
 たとえば、Terraform によって作成されていないネットワークコンテナーをインポートできます。
 

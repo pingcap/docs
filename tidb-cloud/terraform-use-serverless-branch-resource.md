@@ -160,7 +160,7 @@ summary: サーバーレスブランチリソースを使用して、 TiDB Cloud
 
 ## TiDB Cloud Starter またはTiDB Cloud Essential ブランチをインポートする {#import-a-tidb-cloud-starter-or-tidb-cloud-essential-branch}
 
-Terraform によって管理されていないTiDB Cloud Starter またはTiDB Cloud Essential ブランチの場合は、インポートすることで Terraform の管理下に置くことができます。
+Terraform によって管理されていないTiDB Cloud Starter またはTiDB Cloud Essential ブランチの場合は、インポートすることで Terraform の管理下に置けます。
 
 次のように、Terraform によって作成されていないTiDB Cloud Starter またはTiDB Cloud Essential ブランチをインポートします。
 

@@ -159,7 +159,7 @@ Kafka VPC を作成するには、次の手順を実行します。
     - **VPC** : `Kafka VPC`
     - **Subnet**: `bastion`
     - **Auto-assign public IP**: `Enable`
-    - **Security Group**：どこからでもSSHログインを許可する新しいセキュリティグループを作成します。本番環境の安全性を考慮して、ルールを絞り込むことができます。
+    - **Security Group**：どこからでもSSHログインを許可する新しいセキュリティグループを作成します。本番環境の安全性を考慮して、ルールを絞り込めます。
 
 **2.2. ブローカーノードを作成する**
 
@@ -176,7 +176,7 @@ Kafka VPC を作成するには、次の手順を実行します。
         - **VPC** : `Kafka VPC`
         - **Subnet**: `broker-usw2-az1`
         - **Auto-assign public IP**: `Disable`
-        - **Security Group**: Kafka VPCからのTCPをすべて許可する新しいセキュリティグループを作成します。本番環境での安全性を考慮して、ルールを絞り込むことができます。
+        - **Security Group**: Kafka VPCからのTCPをすべて許可する新しいセキュリティグループを作成します。本番環境での安全性を考慮して、ルールを絞り込めます。
             - **Protocol**： `TCP`
             - **Port range**: `0 - 65535`
             - **Source**: `10.0.0.0/16`
@@ -192,7 +192,7 @@ Kafka VPC を作成するには、次の手順を実行します。
         - **VPC** : `Kafka VPC`
         - **Subnet**: `broker-usw2-az2`
         - **Auto-assign public IP**: `Disable`
-        - **Security Group**: Kafka VPCからのTCPをすべて許可する新しいセキュリティグループを作成します。本番環境での安全性を考慮して、ルールを絞り込むことができます。
+        - **Security Group**: Kafka VPCからのTCPをすべて許可する新しいセキュリティグループを作成します。本番環境での安全性を考慮して、ルールを絞り込めます。
             - **Protocol**： `TCP`
             - **Port range**: `0 - 65535`
             - **Source**: `10.0.0.0/16`
@@ -208,7 +208,7 @@ Kafka VPC を作成するには、次の手順を実行します。
         - **VPC** : `Kafka VPC`
         - **Subnet**: `broker-usw2-az3`
         - **Auto-assign public IP**: `Disable`
-        - **Security Group**: Kafka VPCからのTCPをすべて許可する新しいセキュリティグループを作成します。本番環境での安全性を考慮して、ルールを絞り込むことができます。
+        - **Security Group**: Kafka VPCからのTCPをすべて許可する新しいセキュリティグループを作成します。本番環境での安全性を考慮して、ルールを絞り込めます。
             - **Protocol**： `TCP`
             - **Port range**: `0 - 65535`
             - **Source**: `10.0.0.0/16`

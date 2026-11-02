@@ -419,7 +419,7 @@ resource "tidbcloud_serverless_cluster" "example" {
 
 ## TiDB Cloud Starter インスタンスをインポートする {#import-a-tidb-cloud-starter-instance}
 
-Terraform によって管理されていないTiDB Cloud Starter インスタンスの場合は、インポートすることで Terraform の管理下に置くことができます。
+Terraform によって管理されていないTiDB Cloud Starter インスタンスの場合は、インポートすることで Terraform の管理下に置けます。
 
 1. 新しい`tidbcloud_serverless_cluster`リソースのインポートブロックを追加します。
 
