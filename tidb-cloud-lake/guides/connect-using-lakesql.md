@@ -13,10 +13,6 @@ LakeSQL is particularly useful for those who prefer a command line interface and
 
 LakeSQL offers multiple installation options to suit different platforms and preferences. Choose your preferred method from the sections below or download the installation package from the [LakeSQL release page](https://github.com/tidbcloud/lakesql/releases) to install it manually.
 
-> **Note:**
->
-> On x86_64 Linux systems that use glibc, the LakeSQL installer downloads the `x86_64-unknown-linux-gnu` build, which requires glibc 2.39 or later. To check your glibc version, run `ldd --version`. If your glibc version is earlier than 2.39, for example, on CentOS, RHEL 8, or Alibaba Cloud Linux, the installation succeeds but running `lakesql` fails with an error such as ``version `GLIBC_2.39' not found``. In this case, use the statically linked musl build instead: download `lakesql-x86_64-unknown-linux-musl.tar.gz` of the same version from `https://lakesql-bin.tidbcloud.com/lakesql/<version>/` and extract it to `~/.lakesql/bin`.
-
 ### Shell Script
 
 LakeSQL provides a convenient Shell script for installation. You can choose between two options:
