@@ -200,7 +200,7 @@ SHOW transaction_read_only;
 - `row_security`
 - `xmloption`
 
-以下の追加パラメーターは、`SHOW` で読み取ることができます。
+以下の追加パラメーターは、`SHOW` で読み取れます。
 
 - `is_superuser`
 - `listen_addresses`

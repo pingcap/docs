@@ -51,7 +51,7 @@ Connected Care サービスのサポートプランでは、次のようなま�
 
 - Connected: IMでのAIチャット
 
-    この機能を使用すると、インスタントメッセージ（IM）ツールを介してAIアシスタントとチャットし、質問への回答をすぐに受け取ることができます。詳細については、 [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)をご覧ください。
+    この機能を使用すると、インスタントメッセージ（IM）ツールを介してAIアシスタントとチャットし、質問への回答をすぐに受け取れます。詳細については、 [Connected: IMでのAIチャット](/tidb-cloud/connected-ai-chat-in-im.md)をご覧ください。
 
 - Connected: TiDB Cloudアラートの IM サブスクリプション
 

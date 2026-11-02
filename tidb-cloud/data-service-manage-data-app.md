@@ -134,7 +134,7 @@ Data Service（PREVIEW）は、各データアプリ向けのOpenAPI仕様3.0の
 
 ### OpenAPIドキュメントを確認する {#view-the-openapi-documentation}
 
-Data Service（PREVIEW）では、各データアプリごとに自動生成されたOpenAPIドキュメントを提供しています。ドキュメントでは、エンドポイント、パラメーター、レスポンスを確認し、エンドポイントを試すことができます。
+Data Service（PREVIEW）では、各データアプリごとに自動生成されたOpenAPIドキュメントを提供しています。ドキュメントでは、エンドポイント、パラメーター、レスポンスを確認し、エンドポイントを試せます。
 
 OpenAPI ドキュメントにアクセスするには、次の手順を実行します。
 

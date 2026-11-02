@@ -11,7 +11,7 @@ summary: TiDB Cloudのブランチ機能をGitHubと連携させる方法を学�
 
 アプリケーション開発にGitHubを使用している場合、 TiDB Cloud BranchingをGitHubのCI/CDパイプラインに統合することで、本番データベースに影響を与えることなく、ブランチを使用したプルリクエストを自動的にテストできます。
 
-統合プロセスでは、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)GitHub アプリのインストールを求められます。このアプリは、GitHub リポジトリのプルリクエストに基づいて、 TiDB Cloud Starterインスタンスのブランチを自動的に管理できます。たとえば、プルリクエストを作成すると、アプリはTiDB Cloud Starterインスタンスに対応するブランチを作成します。このブランチでは、本番データベースに影響を与えることなく、新機能の開発やバグ修正を個別に行うことができます。
+統合プロセスでは、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)GitHub アプリのインストールを求められます。このアプリは、GitHub リポジトリのプルリクエストに基づいて、 TiDB Cloud Starterインスタンスのブランチを自動的に管理できます。たとえば、プルリクエストを作成すると、アプリはTiDB Cloud Starterインスタンスに対応するブランチを作成します。このブランチでは、本番データベースに影響を与えることなく、新機能の開発やバグ修正を個別に行えます。
 
 この文書では、以下のトピックについて説明します。
 

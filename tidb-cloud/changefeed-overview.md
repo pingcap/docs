@@ -35,7 +35,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloud から他のデータサ�
 
 2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicated クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の名前をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Changefeed** をクリックします。changefeed ページが表示されます。
 
-**Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの拡大縮小、一時停止、再開、編集、削除など）を行うことができます。
+**Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの拡大縮小、一時停止、再開、編集、削除など）を行えます。
 
 ## 変更フィードを作成する {#create-a-changefeed}
 

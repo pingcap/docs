@@ -86,7 +86,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-宣言は複数行にまたがることができます。
+宣言は複数行にまたがれます。
 
 ### 条件分岐 {#conditional-logic}
 

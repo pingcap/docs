@@ -63,7 +63,7 @@ TiDB Cloudアカウントをお持ちでない場合は、[ここ](https://tidbc
 
     > **Note:**
     >
-    > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントから直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
+    > [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudに登録した場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントから直接支払いを行えますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
 
 6. **Create**をクリックします。
 

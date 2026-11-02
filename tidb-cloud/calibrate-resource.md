@@ -7,7 +7,7 @@ summary: TiDB Cloud Dedicated クラスターの RU キャパシティを見積�
 
 [リクエストユニット (RU)](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru) は、システムリソースの消費を表すリソース抽象化単位です。[リソースグループ](/tidb-resource-control-ru-groups.md) にリソースを割り当てる前に、まずクラスター全体の RU キャパシティを見積もることを推奨します。
 
-TiDB Cloud Dedicated クラスターでは、TiDB Cloud コンソールの **Monitoring** ページにある **Calibrate Resource** 機能を使用して RU キャパシティを見積もることができます。この機能は、すべての TiDB Cloud Dedicated クラスターで利用できます。
+TiDB Cloud Dedicated クラスターでは、TiDB Cloud コンソールの **Monitoring** ページにある **Calibrate Resource** 機能を使用して RU キャパシティを見積もれます。この機能は、すべての TiDB Cloud Dedicated クラスターで利用できます。
 
 > **Note:**
 >
