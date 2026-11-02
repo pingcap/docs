@@ -113,10 +113,10 @@
         - [非プリペアド実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
       - 実行計画を制御する
         - [概要](/control-execution-plan.md)
-        - [オプティマイザヒント](/optimizer-hints.md)
+        - [オプティマイザーヒント](/optimizer-hints.md)
         - [SQL プラン管理](/sql-plan-management.md)
         - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
-        - [オプティマイザ修正制御](/optimizer-fix-controls.md)
+        - [オプティマイザー修正制御](/optimizer-fix-controls.md)
     - [TiKV Follower Read](/follower-read.md)
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
     - [TiFlash パフォーマンスをチューニングする](/tiflash/tune-tiflash-performance.md)

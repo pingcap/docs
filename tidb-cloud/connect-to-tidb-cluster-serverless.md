@@ -9,8 +9,8 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにさ
 
 > **Tip:**
 >
-> - TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
-> - このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)を参照してください。
+> - TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスターに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+> - このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法について説明します。特定のツール、ドライバー、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)を参照してください。
 
 ## ネットワーク接続方法 {#network-connection-methods}
 
@@ -26,14 +26,14 @@ TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタン�
 
 - [Serverless Driver（PREVIEW）](/develop/serverless-driver.md)
 
-    TiDB CloudはJavaScript用のサーバーレスドライバを提供しており、これにより、エッジ環境にあるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに、直接接続時と同様の操作感で接続できます。
+    TiDB CloudはJavaScript用のサーバーレスドライバーを提供しており、これにより、エッジ環境にあるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに、直接接続時と同様の操作感で接続できます。
 
 上記の接続方法の中から、ご自身のニーズに合わせてお好みの方法をお選びください。
 
 | 接続方法         | ユーザーインターフェース | シナリオ                                                                                                                                       |
 | ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | 直接接続         | SQL/ORM      | Java、Node.js、Pythonなどの長時間稼働環境。                                                                                                             |
-| Data Service      | RESTful API  | すべてのブラウザおよびアプリケーションとのやり取り。                                                                                                                 |
+| Data Service      | RESTful API  | すべてのブラウザーおよびアプリケーションとのやり取り。                                                                                                                 |
 | Serverless Driver | SQL/ORM      | [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)や[Cloudflare Workers](https://workers.cloudflare.com/)などのサーバーレスおよびエッジ環境。 |
 
 ## ネットワーク {#network}

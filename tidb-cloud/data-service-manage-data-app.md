@@ -134,7 +134,7 @@ Data Service（PREVIEW）は、各データアプリ向けのOpenAPI仕様3.0の
 
 ### OpenAPIドキュメントを確認する {#view-the-openapi-documentation}
 
-Data Service（PREVIEW）では、各データアプリごとに自動生成されたOpenAPIドキュメントを提供しています。ドキュメントでは、エンドポイント、パラメータ、レスポンスを確認し、エンドポイントを試すことができます。
+Data Service（PREVIEW）では、各データアプリごとに自動生成されたOpenAPIドキュメントを提供しています。ドキュメントでは、エンドポイント、パラメーター、レスポンスを確認し、エンドポイントを試すことができます。
 
 OpenAPI ドキュメントにアクセスするには、次の手順を実行します。
 
@@ -157,7 +157,7 @@ OpenAPI ドキュメントにアクセスするには、次の手順を実行し
 
         詳細については[APIキーを管理する](/tidb-cloud/data-service-api-key.md)を参照してください。
 
-    2. ターゲットエンドポイントを見つけ、必要なパラメータを入力して**Try it out**をクリックします。レスポンスは**Response body**領域に表示されます。
+    2. ターゲットエンドポイントを見つけ、必要なパラメーターを入力して**Try it out**をクリックします。レスポンスは**Response body**領域に表示されます。
 
 OpenAPI ドキュメントの使用方法の詳細については、 [Swagger UI](https://swagger.io/tools/swagger-ui/)を参照してください。
 

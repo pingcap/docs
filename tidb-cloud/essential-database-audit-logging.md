@@ -86,14 +86,14 @@ Alibaba Cloud OSSに監査ログを保存するには、以下の情報を提供
 
 詳細については、 [Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 
-## 監査ログフィルタルール {#audit-logging-filter-rules}
+## 監査ログフィルタールール {#audit-logging-filter-rules}
 
-監査ログをフィルタリングするには、ログに記録するイベントを指定するフィルタルールを作成する必要があります。
+監査ログをフィルタリングするには、ログに記録するイベントを指定するフィルタールールを作成する必要があります。
 
-フィルタルールには以下のフィールドが含まれます。
+フィルタールールには以下のフィールドが含まれます。
 
 - `users` : 監査イベントをフィルタリングするためのユーザー名のリスト。ワイルドカード`%`を使用すると、任意のユーザー名に一致させることができます。
-- `filters` : フィルタオブジェクトのリスト。各フィルタオブジェクトには、次のフィールドが含まれます。
+- `filters` : フィルターオブジェクトのリスト。各フィルターオブジェクトには、次のフィールドが含まれます。
 
     - `classes` : 監査イベントをフィルタリングするためのイベントクラスのリスト。例: `["QUERY", "EXECUTE"]` 。
     - `tables` : テーブルフィルターのリスト。詳細については、 [テーブルフィルター](https://docs.pingcap.com/tidb/stable/table-filter/)を参照してください。
@@ -136,7 +136,7 @@ TiDB CloudコンソールまたはTiDB Cloud CLIを使用して、 TiDB Cloud Es
 
 > **Note:**
 >
-> 監査ログを有効にするだけでは監査ログは生成されません。また、ログに記録するイベントを指定するフィルターを構成する必要があります。詳細については、[監査ログフィルタルールの管理](#manage-audit-logging-filter-rules)を参照してください。
+> 監査ログを有効にするだけでは監査ログは生成されません。また、ログに記録するイベントを指定するフィルターを構成する必要があります。詳細については、[監査ログフィルタールールの管理](#manage-audit-logging-filter-rules)を参照してください。
 
 <SimpleTab>
 <div label="Console">
@@ -165,7 +165,7 @@ Amazon S3ストレージを例にとってみましょう。監査ログを有�
 ticloud serverless audit-log config update -c <cluster-id> --enabled --cloud-storage S3 --s3.uri <s3-url> --s3.access-key-id <s3-access-key-id> --s3.secret-access-key <s3-secret-access-key> --rotation-size-mib <size-in-mb> --rotation-interval-minutes <interval-in-minutes> --unredacted=<true|false>
 ```
 
-`--rotation-size-mib` 、 `--rotation-interval-minutes` 、および`--unredacted`パラメータはオプションです。これらを指定しない場合、デフォルト値が使用されます。
+`--rotation-size-mib` 、 `--rotation-interval-minutes` 、および`--unredacted`パラメーターはオプションです。これらを指定しない場合、デフォルト値が使用されます。
 
 </div>
 </SimpleTab>
@@ -234,13 +234,13 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 </div>
 </SimpleTab>
 
-## 監査ログフィルタルールの管理 {#manage-audit-logging-filter-rules}
+## 監査ログフィルタールールの管理 {#manage-audit-logging-filter-rules}
 
-監査ログフィルタルールを作成、編集、無効化、削除できます。
+監査ログフィルタールールを作成、編集、無効化、削除できます。
 
-### フィルタルールを作成する {#create-a-filter-rule}
+### フィルタールールを作成する {#create-a-filter-rule}
 
-フィルタルールを作成するには、監査ログに記録するユーザーとイベントを定義します。ユーザー、イベントクラス、テーブル、ステータスコードを指定することで、ログ記録をニーズに合わせてカスタマイズできます。
+フィルタールールを作成するには、監査ログに記録するユーザーとイベントを定義します。ユーザー、イベントクラス、テーブル、ステータスコードを指定することで、ログ記録をニーズに合わせてカスタマイズできます。
 
 <SimpleTab>
 <div label="Console">
@@ -255,13 +255,13 @@ ticloud serverless audit-log config update -c <cluster-id> --disabled=true
 
 3. **DB Audit Logging**ページで、 **Add Filter Rule**をクリックします。
 
-4. **Add Filter Rule**ダイアログで、 **Filter Name** 、 **SQL Users** 、および**Filter Rule**フィールドに入力し、 **Confirm**をクリックします。これらのフィールドの詳細については、[監査ログフィルタルール](#audit-logging-filter-rules)を参照してください。
+4. **Add Filter Rule**ダイアログで、 **Filter Name** 、 **SQL Users** 、および**Filter Rule**フィールドに入力し、 **Confirm**をクリックします。これらのフィールドの詳細については、[監査ログフィルタールール](#audit-logging-filter-rules)を参照してください。
 
 </div>
 
 <div label="CLI">
 
-TiDB Cloud CLI を使用してフィルタルールを作成するには、次のコマンドを実行します。
+TiDB Cloud CLI を使用してフィルタールールを作成するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-name <rule-name> --rule '{"users":["%@%"],"filters":[{}]}'
@@ -283,7 +283,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
-3. **DB Audit Logging**ページで、編集するフィルタルールを見つけ、その行の**...**をクリックしてから、 **Edit**をクリックします。
+3. **DB Audit Logging**ページで、編集するフィルタールールを見つけ、その行の**...**をクリックしてから、 **Edit**をクリックします。
 
 4. **Edit Filter Rule**ダイアログで、 **Filter Name**または**Filter Rule**フィールドを更新し、 **Confirm**をクリックします。
 
@@ -291,7 +291,7 @@ ticloud serverless audit-log filter create --cluster-id <cluster-id> --display-n
 
 <div label="CLI">
 
-TiDB Cloud CLI を使用してフィルタルールを編集するには、次のコマンドを実行します。
+TiDB Cloud CLI を使用してフィルタールールを編集するには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
@@ -300,7 +300,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 </div>
 </SimpleTab>
 
-### フィルタルールを無効にする {#disable-a-filter-rule}
+### フィルタールールを無効にする {#disable-a-filter-rule}
 
 <SimpleTab>
 <div label="Console">
@@ -313,13 +313,13 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
-3. **DB Audit Logging**ページで、無効にしたいフィルタルールを見つけ、トグルをオフにしてフィルタルールを無効にします。
+3. **DB Audit Logging**ページで、無効にしたいフィルタールールを見つけ、トグルをオフにしてフィルタールールを無効にします。
 
 </div>
 
 <div label="CLI">
 
-TiDB Cloud CLI を使用してフィルタルールを無効にするには、次のコマンドを実行します。
+TiDB Cloud CLI を使用してフィルタールールを無効にするには、次のコマンドを実行します。
 
 ```shell
 ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-rule-id <rule-id> --enabled=false
@@ -328,7 +328,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 </div>
 </SimpleTab>
 
-### フィルタルールを削除する {#delete-a-filter-rule}
+### フィルタールールを削除する {#delete-a-filter-rule}
 
 <SimpleTab>
 <div label="Console">
@@ -341,7 +341,7 @@ ticloud serverless audit-log filter update --cluster-id <cluster-id> --filter-ru
 
 2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。
 
-3. **DB Audit Logging**ページで、削除するフィルタルールを見つけて、 **...**をクリックします。
+3. **DB Audit Logging**ページで、削除するフィルタールールを見つけて、 **...**をクリックします。
 
 4. **Delete**をクリックし、次に**I understand. Delete it**をクリックしてください。
 
@@ -388,7 +388,7 @@ TiDB Cloudは、監査ログ内の各データベースイベントレコード�
 | ---------------- | ---------------------------------------------------------------------- |
 | `CURRENT_DB`     | 現在使用しているデータベースの名前。                                                     |
 | `SQL_TEXT`       | 実行されたSQL文。監査ログの秘匿化が有効になっている場合は、秘匿化されたSQL文が記録されます。      |
-| `EXECUTE_PARAMS` | `EXECUTE`文のパラメータ。イベントクラスに`EXECUTE`が含まれ、かつ秘匿化が無効になっている場合にのみ記録されます。 |
+| `EXECUTE_PARAMS` | `EXECUTE`文のパラメーター。イベントクラスに`EXECUTE`が含まれ、かつ秘匿化が無効になっている場合にのみ記録されます。 |
 | `AFFECTED_ROWS`  | SQL文の影響を受ける行数。イベントクラスに`QUERY_DML`が含まれている場合にのみ記録されます。           |
 
 ### 接続情報 {#connection-information}

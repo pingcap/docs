@@ -67,7 +67,7 @@ Apache Kafkaサービスへのパブリックアクセスを提供する場合�
 TiDB Cloud Essential の変更フィードが Apache Kafka にデータをストリーミングし、Kafka トピックを自動的に作成できるようにするには、Kafka に次の権限が追加されていることを確認してください。
 
 - Kafka のトピックリソースタイプに`Create`および`Write`権限が追加されます。
-- Kafka のクラスタリソースタイプに`DescribeConfigs`権限が追加されます。
+- Kafka のクラスターリソースタイプに`DescribeConfigs`権限が追加されます。
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については、Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/security/authorization/acls/manage-acls.html#add-acls)を参照してください。
 
@@ -128,13 +128,13 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
 ## ステップ3. チェンジフィードを設定する {#step-3-set-the-changefeed}
 
-1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタルール](https://docs.pingcap.com/tidb/stable/table-filter/#syntax)を参照してください。
+1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、 [テーブルフィルタールール](https://docs.pingcap.com/tidb/stable/table-filter/#syntax)を参照してください。
 
     - **Replication Scope**：有効なキーを持つテーブルのみをレプリケートするか、選択したすべてのテーブルをレプリケートするかを選択できます。
-    - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加して**Apply**をクリックすると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、**Filter results**の下にルールに一致するテーブルのみを表示します。
-    - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    - **Filter Rules**：この列でフィルタールールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加して**Apply**をクリックすると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、**Filter results**の下にルールに一致するテーブルのみを表示します。
+    - **Case Sensitive**：フィルタールールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
     - **Filter results with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    - **Filter results without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
+    - **Filter results without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタールールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
 
 2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
@@ -186,7 +186,7 @@ TiDB Cloud Essential の変更フィードが Apache Kafka にデータをスト
 
         変更フィードで全ての変更ログに対して1つのKafkaトピックを作成する場合は、このモードを選択してください。そうすると、変更フィード内のすべてのKafkaメッセージが1つのKafkaトピックに送信されます。トピック名は**Topic Name**フィールドで指定できます。
 
-8. **Partition Distribution**領域では、Kafkaメッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャ**を定義することもできます。TiDB Cloudは、次の4種類のディスパッチャを提供しています。
+8. **Partition Distribution**領域では、Kafkaメッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャー**を定義することも、**テーブルごとに異なるパーティションディスパッチャー**を定義することもできます。TiDB Cloudは、次の4種類のディスパッチャーを提供しています。
 
     - **Distribute changelogs by primary key or index value to Kafka partition**
 

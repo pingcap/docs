@@ -5,7 +5,7 @@ summary: TiDB Cloudのデータストリーミングの概念について学習�
 
 # データストリーミング {#data-streaming}
 
-TiDB Cloud を使用すると、TiDB クラスタからのデータ変更を Kafka、MySQL、オブジェクトストレージなどの他のシステムにストリーミングできます。
+TiDB Cloud を使用すると、TiDB クラスターからのデータ変更を Kafka、MySQL、オブジェクトストレージなどの他のシステムにストリーミングできます。
 
 現在、 TiDB Cloud は、Apache Kafka、MySQL、 TiDB Cloud、クラウドストレージへのストリーミングデータをサポートしています。
 

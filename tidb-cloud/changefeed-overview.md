@@ -19,7 +19,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloud から他のデータサ�
 > **Note:**
 >
 > - 現在、TiDB Cloud では、<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>ごとに最大 100 件の変更フィードのみが許可されます。
-> - 現在、TiDB Cloud では、変更フィードごとに最大 100 個のテーブルフィルタルールのみが許可されます。
+> - 現在、TiDB Cloud では、変更フィードごとに最大 100 個のテーブルフィルタールールのみが許可されます。
 > - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
 > - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストがあった場合にのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
 

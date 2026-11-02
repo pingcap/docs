@@ -98,15 +98,15 @@
           - [インデックス問題の解決方法](/wrong-index-solution.md)
           - [Distinct最適化](/agg-distinct-optimization.md)
           - [コストモデル](/cost-model.md)
-          - [ランタイムフィルタ](/runtime-filter.md)
+          - [ランタイムフィルター](/runtime-filter.md)
         - [プリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)
         - [非プリペアド実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
       - 実行計画の制御
         - [概要](/control-execution-plan.md)
-        - [オプティマイザのヒント](/optimizer-hints.md)
+        - [オプティマイザーのヒント](/optimizer-hints.md)
         - [SQLプラン管理](/sql-plan-management.md)
         - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
-        - [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
+        - [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
     - [TiKV Follower Read](/follower-read.md)
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
     - ガベージコレクション（GC）
@@ -192,7 +192,7 @@
     - [`tidbcloud_serverless_export`リソースを使用する](/tidb-cloud/terraform-use-serverless-export-resource.md)
     - [`tidbcloud_sql_user`リソースを使用する](/tidb-cloud/terraform-use-sql-user-resource.md)
     - [`tidbcloud_import`リソースを使用する](/tidb-cloud/terraform-use-import-resource.md)
-    - [クラスタリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
+    - [クラスターリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 

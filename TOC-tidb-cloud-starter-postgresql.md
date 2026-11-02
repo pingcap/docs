@@ -55,7 +55,7 @@
   - [高度な SQL](/tidb-cloud/starter/pg-advanced-sql.md)
   - [認証とロール](/tidb-cloud/starter/pg-auth-roles.md)
   - [トランザクションと COPY](/tidb-cloud/starter/pg-transactions-copy.md)
-  - [セッションパラメータ](/tidb-cloud/starter/pg-session-parameters.md)
+  - [セッションパラメーター](/tidb-cloud/starter/pg-session-parameters.md)
   - [システムカタログ](/tidb-cloud/starter/pg-system-catalog.md)
   - [行レベルセキュリティ](/tidb-cloud/starter/pg-row-level-security.md)
   - [制限事項と制約](/tidb-cloud/starter/pg-limits-constraints.md)

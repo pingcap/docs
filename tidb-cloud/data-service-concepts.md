@@ -19,7 +19,7 @@ Data Service を使用すると、カスタム API エンドポイントを使�
 
 ## データアプリのエンドポイント {#data-app-endpoints}
 
-[Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)のエンドポイントは、SQL 文を実行するためにカスタマイズできる Web API です。SQL 文には、 `WHERE`句で使用される値などのパラメータを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL でパラメータの値を指定すると、エンドポイントは指定されたパラメータを使用して対応する SQL 文を実行し、結果を HTTP レスポンスの一部として返します。
+[Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)のエンドポイントは、SQL 文を実行するためにカスタマイズできる Web API です。SQL 文には、 `WHERE`句で使用される値などのパラメーターを指定できます。クライアントがエンドポイントを呼び出し、リクエスト URL でパラメーターの値を指定すると、エンドポイントは指定されたパラメーターを使用して対応する SQL 文を実行し、結果を HTTP レスポンスの一部として返します。
 
 詳細については[エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)を参照してください。
 

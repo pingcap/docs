@@ -241,7 +241,7 @@ TiDB Cloud StarterまたはEssentialインスタンスがGCSバケットにア�
 
 ## Azure Blob Storageへのアクセスを構成する {#configure-azure-blob-storage-access}
 
-TiDB CloudがAzure Blobコンテナにアクセスできるようにするには、コンテナ用のサービスSASトークンを作成する必要があります。
+TiDB CloudがAzure Blobコンテナーにアクセスできるようにするには、コンテナー用のサービスSASトークンを作成する必要があります。
 
 SAS トークンは、 [Azure ARM テンプレート](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview)(推奨) または手動構成を使用して作成できます。
 
@@ -286,7 +286,7 @@ Azure ARMテンプレートを使用してSASトークンを作成するには�
 
     2. Azureにログインすると、Azure**Custom deployment**ページにリダイレクトされます。
 
-    3. **Custom deployment**ページで、**Resource group**と**Storage Account Name**を入力してください。コンテナが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
+    3. **Custom deployment**ページで、**Resource group**と**Storage Account Name**を入力してください。コンテナーが配置されているストレージアカウントの概要ページから、すべての情報を取得できます。
 
         ![azure-storage-account-overview](/media/tidb-cloud/serverless-external-storage/azure-storage-account-overview.png)
 

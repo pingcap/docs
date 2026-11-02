@@ -9,7 +9,7 @@ summary: TiDB Cloud Premiumインスタンスの作成方法を学びましょ�
 
 > **Note:**
 >
-> TiDB Cloud Dedicatedクラスターを作成する方法については、 [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
+> TiDB Cloud Dedicatedクラスターを作成する方法については、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
 ## 始める前に {#before-you-begin}
 

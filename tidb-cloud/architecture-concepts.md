@@ -124,7 +124,7 @@ TiDB Cloud BYOC のデプロイには、次の主要なコンポーネントが�
 
 TiDB Cloud Dedicatedは、ミッションクリティカルなビジネス向けに設計されており、複数のアベイラビリティゾーンにわたる高可用性、水平スケーリング、および完全なHTAP機能を提供します。
 
-VPC、VM、マネージドKubernetesサービス、クラウドストレージなどの独立したクラウドリソース上に構築されており、主要なクラウドプロバイダーのインフラストラクチャを活用します。TiDB Cloud Dedicatedクラスターは、TiDBの全機能セットをサポートし、迅速なスケーリング、信頼性の高いバックアップ、特定のVPC内でのデプロイ、および地理的レベルのディザスタリカバリを実現します。
+VPC、VM、マネージドKubernetesサービス、クラウドストレージなどの独立したクラウドリソース上に構築されており、主要なクラウドプロバイダーのインフラストラクチャを活用します。TiDB Cloud Dedicatedクラスターは、TiDBの全機能セットをサポートし、迅速なスケーリング、信頼性の高いバックアップ、特定のVPC内でのデプロイ、および地理的レベルのディザスターリカバリを実現します。
 
 ![TiDB Cloud Dedicated Architecture](/media/tidb-cloud/tidb-cloud-dedicated-architecture.png)
 
@@ -158,7 +158,7 @@ TiDB Cloud CLI `ticloud`を使用すると、簡単なコマンドでターミ�
 
 ## TiDB Cloud API（PREVIEW） {#tidb-cloud-api-preview}
 
-TiDB Cloud APIは、RESTベースのインターフェースであり、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、およびTiDB Cloud Dedicatedの各プランにわたるリソースをプログラムから管理するためのアクセスを提供します。これにより、 [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md)におけるプロジェクト、クラスタ、バックアップ、リストア、データインポート、課金、その他のリソースの管理といったタスクを自動化し、効率的に処理することが可能になります。
+TiDB Cloud APIは、RESTベースのインターフェースであり、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、およびTiDB Cloud Dedicatedの各プランにわたるリソースをプログラムから管理するためのアクセスを提供します。これにより、 [TiDB Cloud Data Service](/tidb-cloud/data-service-overview.md)におけるプロジェクト、クラスター、バックアップ、リストア、データインポート、課金、その他のリソースの管理といったタスクを自動化し、効率的に処理することが可能になります。
 
 詳細については、 [TiDB Cloud APIの概要](https://docs.pingcap.com/api/tidb-cloud-api-overview)を参照してください。
 

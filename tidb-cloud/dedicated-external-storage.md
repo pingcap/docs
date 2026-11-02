@@ -6,7 +6,7 @@ aliases: ['/ja/tidb-cloud/config-s3-and-gcs-access']
 
 # TiDB Cloud Dedicatedの外部ストレージアクセスを構成する {#configure-external-storage-access-for-tidb-cloud-dedicated}
 
-ソースデータがAmazon S3バケット、Azure Blob Storageコンテナ、またはGoogle Cloud Storage（GCS）バケットに保存されている場合、データをTiDB Cloudにインポートまたは移行する前に、バケットへのクロスアカウントアクセスを設定する必要があります。このドキュメントでは、TiDB Cloud Dedicatedクラスターでこの設定を行う方法について説明します。
+ソースデータがAmazon S3バケット、Azure Blob Storageコンテナー、またはGoogle Cloud Storage（GCS）バケットに保存されている場合、データをTiDB Cloudにインポートまたは移行する前に、バケットへのクロスアカウントアクセスを設定する必要があります。このドキュメントでは、TiDB Cloud Dedicatedクラスターでこの設定を行う方法について説明します。
 
 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンス用にこれらの外部ストレージを構成する必要がある場合は、 [TiDB Cloud StarterまたはEssentialの外部ストレージアクセスを設定する](/tidb-cloud/configure-external-storage-access.md)を参照してください。
 
@@ -119,7 +119,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
         - **Trusted entity type**で**AWS account**を選択します。
         - **An AWS account**の下にある**Another AWS account**を選択し、 TiDB CloudアカウントIDを**Account ID**フィールドに貼り付けます。
-        - **Options**で**Require external ID**をクリックして[混乱した代理問題](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)を回避し、 TiDB Cloud外部IDを**External ID**フィールドに貼り付けます。"Require external ID"を選択せずにロールを作成すると、S3バケットURIとIAMロールARNを持つユーザーであれば誰でもAmazon S3バケットにアクセスできる可能性があります。アカウントIDと外部IDの両方を使用してロールを作成すると、同じプロジェクトおよび同じリージョンで実行されているTiDBクラスタのみがバケットにアクセスできます。
+        - **Options**で**Require external ID**をクリックして[混乱した代理問題](https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html)を回避し、 TiDB Cloud外部IDを**External ID**フィールドに貼り付けます。"Require external ID"を選択せずにロールを作成すると、S3バケットURIとIAMロールARNを持つユーザーであれば誰でもAmazon S3バケットにアクセスできる可能性があります。アカウントIDと外部IDの両方を使用してロールを作成すると、同じプロジェクトおよび同じリージョンで実行されているTiDBクラスターのみがバケットにアクセスできます。
 
     3. **Next**をクリックしてポリシー一覧を開き、先ほど作成したポリシーを選択してから**Next**をクリックします。
 
@@ -156,7 +156,7 @@ TiDB Cloudのバケットアクセスを設定し、以下の手順でロールA
 
 ## GCSへのアクセスを設定する {#configure-gcs-access}
 
-TiDB CloudがGCSバケット内のソースデータにアクセスできるようにするには、バケットのGCSアクセスを設定する必要があります。プロジェクト内の1つのTiDBクラスタの設定が完了すると、そのプロジェクト内のすべてのTiDBクラスタがGCSバケットにアクセスできるようになります。
+TiDB CloudがGCSバケット内のソースデータにアクセスできるようにするには、バケットのGCSアクセスを設定する必要があります。プロジェクト内の1つのTiDBクラスターの設定が完了すると、そのプロジェクト内のすべてのTiDBクラスターがGCSバケットにアクセスできるようになります。
 
 1. TiDB Cloudコンソールで、対象のTiDBクラスターのGoogle CloudサービスアカウントIDを取得します。
 
@@ -166,7 +166,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
         >
         > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
-    2. 対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
+    2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
     3. **Import data from Cloud Storage**をクリックします。
 
@@ -216,9 +216,9 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri01.png)
 
-    フォルダのgsutil URIを使用する場合は、フォルダを開き、フォルダ名の横にあるコピーボタンをクリックしてフォルダ名をコピーします。その後、フォルダ名の先頭に`gs://` 、末尾に`/`を追加して、フォルダの正しいURIを取得する必要があります。
+    フォルダーのgsutil URIを使用する場合は、フォルダーを開き、フォルダー名の横にあるコピーボタンをクリックしてフォルダー名をコピーします。その後、フォルダー名の先頭に`gs://` 、末尾に`/`を追加して、フォルダーの正しいURIを取得する必要があります。
 
-    例えば、フォルダ名が`tidb-cloud-source-data`の場合、URI としては`gs://tidb-cloud-source-data/`を使用する必要があります。
+    例えば、フォルダー名が`tidb-cloud-source-data`の場合、URI としては`gs://tidb-cloud-source-data/`を使用する必要があります。
 
     ![Get bucket URI](/media/tidb-cloud/gcp-bucket-uri02.png)
 
@@ -226,7 +226,7 @@ TiDB CloudがGCSバケット内のソースデータにアクセスできるよ�
 
 ## Azure Blob Storageへのアクセスを構成する {#configure-azure-blob-storage-access}
 
-TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるようにするには、コンテナのAzure Blobアクセスを設定する必要があります。アカウントSASトークンを使用してコンテナアクセスを設定できます。
+TiDB Cloud DedicatedがAzure Blobコンテナーにアクセスできるようにするには、コンテナーのAzure Blobアクセスを設定する必要があります。アカウントSASトークンを使用してコンテナーアクセスを設定できます。
 
 1. [Azureストレージアカウント](https://portal.azure.com/#browse/Microsoft.Storage%2FStorageAccounts)ページで、コンテナーが属するストレージアカウントをクリックします。
 
@@ -250,4 +250,4 @@ TiDB Cloud DedicatedがAzure Blobコンテナにアクセスできるように�
 
 > **Note:**
 >
-> データインポートを開始する前に、接続とアクセス許可をテストして、 TiDB Cloud Dedicatedが指定されたAzure Blobコンテナとファイルにアクセスできることを確認してください。
+> データインポートを開始する前に、接続とアクセス許可をテストして、 TiDB Cloud Dedicatedが指定されたAzure Blobコンテナーとファイルにアクセスできることを確認してください。

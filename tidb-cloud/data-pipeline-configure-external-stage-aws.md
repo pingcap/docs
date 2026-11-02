@@ -23,7 +23,7 @@ TiDB Cloud はデータをお使いの S3 バケットに書き込み、TiDB Clo
 
 1. [AWS S3 Console](https://console.aws.amazon.com/s3/) を開き、新しいバケットを作成します。
 2. リージョンを選択し、そのリージョンが TiDB Cloud インスタンスのリージョンと一致していることを確認します。
-3. （オプション）バケット内にフォルダ（プレフィックス）を作成して、TiDB Cloud データを整理します（例: `s3://tidb-cloud-lake-data/my-cluster/`）。
+3. （オプション）バケット内にフォルダー（プレフィックス）を作成して、TiDB Cloud データを整理します（例: `s3://tidb-cloud-lake-data/my-cluster/`）。
 
 ## ステップ 2. バケットアクセスを設定する {#step-2-configure-bucket-access}
 
@@ -50,7 +50,7 @@ TiDB Cloud はデータをお使いの S3 バケットに書き込み、TiDB Clo
 
 1. TiDB Cloud コンソールで **Create Data Pipeline** ページを開き、**External Stage** エリアに移動して **Bucket URI** を入力します。
 2. **Bucket Access** で **AWS Role ARN** を選択し、フィールドの下にある CloudFormation リンクをクリックしてダイアログを開きます。
-3. **AWS Console with CloudFormation Template** をクリックします。すべてのパラメータが事前入力された状態で、AWS CloudFormation コンソールが新しいブラウザタブで開きます。
+3. **AWS Console with CloudFormation Template** をクリックします。すべてのパラメーターが事前入力された状態で、AWS CloudFormation コンソールが新しいブラウザータブで開きます。
 4. 新しいタブで **stack name** を入力し、イベント駆動の取り込みが必要な場合は任意で **SQS queue name** を入力します。CloudFormation はキューとその通知ポリシーを自動的に作成します。不要な場合は SQS フィールドを空のままにしてください。
 5. スタックを作成し、ステータスが `CREATE_COMPLETE` になるまで待ちます。
 6. スタックの **Outputs** タブで、TiDB Cloud コンソールで External Stage を設定する際に必要な以下の値を記録します。

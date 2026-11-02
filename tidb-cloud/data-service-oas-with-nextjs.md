@@ -22,7 +22,7 @@ Next.jsでOpenAPI仕様を使用する前に、以下のものが用意されて
 
 まず、 TiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターにテーブル`test.repository`を作成し、サンプルデータを挿入します。以下の例では、デモンストレーション用のデータとして、PingCAP が開発したオープンソースプロジェクトをいくつか挿入します。
 
-SQL文を実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[SQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)を使用できます。
+SQL文を実行するには、 [TiDB Cloudコンソール](https://tidbcloud.com)の[SQLエディター](/tidb-cloud/explore-data-with-sql-editor.md)を使用できます。
 
 ```sql
 -- Select the database
@@ -206,4 +206,4 @@ SELECT * FROM test.repository;
 yarn dev
 ```
 
-その後、ブラウザで[http://localhost:3000](http://localhost:3000)を開くと、 `test.repository`データベースのデータがページに表示されます。
+その後、ブラウザーで[http://localhost:3000](http://localhost:3000)を開くと、 `test.repository`データベースのデータがページに表示されます。

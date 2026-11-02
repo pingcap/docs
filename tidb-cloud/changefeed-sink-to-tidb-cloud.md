@@ -1,6 +1,6 @@
 ---
 title: Sink to TiDB Cloud
-summary: このドキュメントでは、TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。この機能で使用できる変更フィードとリージョンの数には制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、およびTiDB Cloudシンクの開始位置の取得が必要です。TiDB Cloudシンクを作成するには、クラスタの概要ページに移動し、接続を確立し、テーブルとイベントのフィルタをカスタマイズし、レプリケーションの開始位置を入力し、変更フィードの仕様を指定し、構成を確認して、シンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
+summary: このドキュメントでは、TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングする方法について説明します。この機能で使用できる変更フィードとリージョンの数には制限があります。前提条件として、tidb_gc_life_time の拡張、データのバックアップ、およびTiDB Cloudシンクの開始位置の取得が必要です。TiDB Cloudシンクを作成するには、クラスターの概要ページに移動し、接続を確立し、テーブルとイベントのフィルターをカスタマイズし、レプリケーションの開始位置を入力し、変更フィードの仕様を指定し、構成を確認して、シンクを作成します。最後に、tidb_gc_life_time を元の値に戻します。
 ---
 
 # TiDB Cloudにシンクする {#sink-to-tidb-cloud}
@@ -9,7 +9,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 > **Note:**
 >
-> Changefeed機能を使用するには、 TiDB Cloud Dedicatedクラスタのバージョンがv6.1.3以降であることを確認してください。
+> Changefeed機能を使用するには、 TiDB Cloud Dedicatedクラスターのバージョンがv6.1.3以降であることを確認してください。
 
 ## 制限 {#restrictions}
 
@@ -28,11 +28,11 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 - ソースとなるTiDB Cloud Dedicatedクラスターと、宛先となるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスは、同じプロジェクトおよび同じリージョンに属している必要があります。
 
-- **Sink to TiDB Cloud**機能は、プライベートエンドポイント経由のネットワーク接続のみをサポートしています。TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2つのクラスタ間のプライベートエンドポイント接続を自動的に設定します。
+- **Sink to TiDB Cloud**機能は、プライベートエンドポイント経由のネットワーク接続のみをサポートしています。TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにデータをストリーミングするためのチェンジフィードを作成すると、 TiDB Cloudは2つのクラスター間のプライベートエンドポイント接続を自動的に設定します。
 
 ## 前提条件 {#prerequisites}
 
-**Sink to TiDB Cloud**コネクタは、特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)の後、 TiDB Cloud DedicatedクラスタからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに増分データをシンクすることのみが可能です。
+**Sink to TiDB Cloud**コネクターは、特定の[TSO](https://docs.pingcap.com/tidb/stable/glossary#tso)の後、 TiDB Cloud DedicatedクラスターからTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに増分データをシンクすることのみが可能です。
 
 変更フィードを作成する前に、ソースのTiDB Cloud Dedicatedクラスターから既存のデータをエクスポートし、そのデータを宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにロードする必要があります。
 
@@ -65,7 +65,7 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
 
 前提条件を満たしたら、データを宛先のTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにシンクできます。
 
-1. 対象のTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
+1. 対象のTiDBクラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
 
 2. **Create Changefeed**をクリックし、宛先として**TiDB Cloud**を選択します。
 
@@ -76,12 +76,12 @@ summary: このドキュメントでは、TiDB Cloud Dedicatedクラスタから
     - はいの場合、次の設定手順に進みます。
     - そうでない場合は、接続エラーが表示されますので、エラーを処理してください。エラーが解決したら、もう一度**Next**をクリックしてください。
 
-5. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
+5. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタールール](/table-filter.md)を参照してください。
 
-    - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
+    - **Case Sensitive**：フィルタールールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    - **Filter Rules**：この列でフィルタールールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタールールは最大 100 個まで追加できます。
     - **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
+    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタールールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
 
 6. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
