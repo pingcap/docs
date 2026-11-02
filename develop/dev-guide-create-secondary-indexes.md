@@ -4,7 +4,7 @@ summary: セカンダリインデックスを作成するための手順、ル�
 aliases: ['/ja/tidb/stable/dev-guide-create-secondary-indexes/','/ja/tidb/dev/dev-guide-create-secondary-indexes/','/ja/tidbcloud/dev-guide-create-secondary-indexes/']
 ---
 
-# セカンダリーインデックスを作成する {#create-a-secondary-index}
+# セカンダリインデックスを作成する {#create-a-secondary-index}
 
 このドキュメントでは、SQLと各種プログラミング言語を使用してセカンダリインデックスを作成する方法と、インデックス作成のルールについて説明します。このドキュメントでは、 [Bookshop](/develop/dev-guide-bookshop-schema-design.md)を例として、セカンダリインデックス作成の手順を順を追って説明します。
 
