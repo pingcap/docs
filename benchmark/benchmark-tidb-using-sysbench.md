@@ -96,7 +96,7 @@ db-driver=mysql
 
 > **Note:**
 >
-> If you switch TiDB to the optimistic transaction mode, starting from v8.0.0, TiDB no longer supports automatic retries of optimistic transactions. If transaction conflicts cause Sysbench to quit, use the default pessimistic transaction mode or retry transactions in your application.
+> Starting from v8.0.0, TiDB no longer supports automatic retries of explicit optimistic transactions. If optimistic transaction conflicts cause Sysbench to stop, switch to pessimistic transaction mode or implement transaction retries in the client application.
 
 Execute the following SQL statement in the MySQL client to create a database named `sbtest`:
 
