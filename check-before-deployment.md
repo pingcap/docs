@@ -109,7 +109,7 @@ Swapping TiDB memory out to disk and back can cause latency spikes. For stable p
 
 - Option 1: Disable swap for latency-sensitive workloads:
 
-    1. When installing the operating system, do not create swap partitions or swap files. If swap is already enabled, run the following command to disable it immediately:
+    1. When installing the operating system, do not create swap partitions or swap files. If swap is already enabled, first ensure that enough memory is available to reload the swapped-out data, then run the following command to disable swap:
 
         ```bash
         swapoff -a
@@ -117,13 +117,13 @@ Swapping TiDB memory out to disk and back can cause latency spikes. For stable p
 
     2. To prevent swap from being enabled at boot, remove or comment out all swap entries in `/etc/fstab`.
 
-        On hosts that use `systemd-gpt-auto-generator`, GPT swap partitions on the same disk as the root partition can be activated automatically even without an `/etc/fstab` entry. On these hosts, list the swap units:
+        On hosts that use `systemd-gpt-auto-generator`, GPT swap partitions on the same disk as the root partition can be activated automatically even without an `/etc/fstab` entry. On these hosts, list the swap unit files:
 
         ```bash
-        systemctl list-units --type=swap --all
+        systemctl list-unit-files --type=swap
         ```
 
-        For each corresponding swap unit, run the following command to prevent automatic activation. Replace `<swap-unit>` with the actual unit name from the output, such as `dev-sda2.swap`:
+        For each swap unit you want to disable permanently, run the following command to prevent automatic activation. Replace `<swap-unit>` with the actual unit name from the output, such as `dev-sda2.swap`:
 
         ```bash
         systemctl mask <swap-unit>
@@ -133,7 +133,7 @@ Swapping TiDB memory out to disk and back can cause latency spikes. For stable p
 
     3. After disabling swap, and again after the next reboot, run `cat /proc/swaps`. If swap is disabled, the output contains only the header row.
 
-- Option 2: Keep swap enabled when memory is insufficient:
+- Option 2: For hosts with limited memory, keep swap enabled and reduce the kernel's tendency to swap:
 
     Set `vm.swappiness=0` to reduce the kernel's tendency to swap. This setting does not disable swap: the kernel can still use it under memory pressure. Run the following commands to save the setting in `/etc/sysctl.conf` and apply it immediately:
 
