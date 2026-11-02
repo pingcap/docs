@@ -28,8 +28,8 @@ TiDB Cloudコンソールのメタデータベースサービスをアップグ�
 
 ### TiDB Cloudコンソール UI の影響を受ける機能 {#affected-features-of-tidb-cloud-console-ui}
 
-- クラスタレベル
-    - クラスタ管理
+- クラスターレベル
+    - クラスター管理
         - クラスターを作成する
         - クラスターを削除する
         - クラスターをスケールする
@@ -68,7 +68,7 @@ TiDB Cloudコンソールのメタデータベースサービスをアップグ�
 
 ### TiDB Cloud API の影響を受ける機能 {#affected-features-of-tidb-cloud-api}
 
-- クラスタ管理
+- クラスター管理
     - [CreateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/CreateCluster)
     - [DeleteCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/DeleteCluster)
     - [UpdateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)

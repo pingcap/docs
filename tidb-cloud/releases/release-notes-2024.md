@@ -26,7 +26,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
-- AWS上にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのディザスタリカバリのためのリカバリグループ機能（ベータ版）を導入します。
+- AWS上にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのディザスターリカバリのためのリカバリグループ機能（ベータ版）を導入します。
 
     この機能を使用すると、TiDB Cloud Dedicatedクラスター間でデータベースを複製できるため、地域的な災害が発生した場合でも迅速なリカバリが可能になります。プロジェクトオーナーの役割をお持ちの場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効にできます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性 SLA を満たし、より積極的な目標復旧時点 (RPO) および目標復旧時間 (RTO) を実現できます。
 
@@ -54,7 +54,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     - **ブランチのリセット**：ブランチをリセットして、親の最新の状態と同期させることができます。
 
-    - **GitHubとの連携機能の改善**： [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHubアプリでは、プルリクエストの同期時の動作を制御する[`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode)パラメータが導入されました。デフォルトモードの`reset`では、アプリはプルリクエストの最新の変更に合わせてブランチをリセットします。
+    - **GitHubとの連携機能の改善**： [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching) GitHubアプリでは、プルリクエストの同期時の動作を制御する[`branch.mode`](/tidb-cloud/branch-github-integration.md#branchmode)パラメーターが導入されました。デフォルトモードの`reset`では、アプリはプルリクエストの最新の変更に合わせてブランチをリセットします。
 
     詳細については、 [TiDB Cloud Serverless ブランチの管理](/tidb-cloud/branch-manage.md)および[TiDB Cloud Serverless Branching (ベータ版) を GitHub と統合する](/tidb-cloud/branch-github-integration.md)を参照してください。
 
@@ -68,7 +68,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
     この変更は、**2024年11月12日より後に作成された組織**にのみ適用されます。この日付以前に作成された組織は、事前通知の上、段階的に新しい一時停止動作に移行します。
 
-    詳細については、[TiDB Cloud Dedicatedクラスタの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)を参照してください。
+    詳細については、[TiDB Cloud Dedicatedクラスターの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)を参照してください。
 
 - [Datadogとの連携（ベータ版）](/tidb-cloud/monitor-datadog-integration.md)では、新しいリージョン`AP1` (日本) のサポートが追加されました。
 
@@ -170,7 +170,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで新しいプライベートエンドポイント接続を作成する際のユーザーエクスペリエンスを向上させるため、 **Create Private Endpoint Connection**ページのレイアウトを改良します。
 
-    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+    詳細については、 [AWSのプライベートエンドポイントを介してTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)および[Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
 ## 2024年8月6日 {#august-6-2024}
 
@@ -186,7 +186,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **コンソールの変更**
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスタサイズ構成エクスペリエンスを向上させます。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のクラスターサイズ構成エクスペリエンスを向上させます。
 
     TiDB Cloud Dedicatedクラスターの [**Create Cluster**](/tidb-cloud/create-tidb-cluster.md)ページと[**Modify Cluster**](/tidb-cloud/scale-tidb-cluster.md)ページの**Cluster Size**セクションのレイアウトを調整します。さらに、 **Cluster Size**セクションには、適切なクラスターサイズの選択に役立つノードサイズの推奨ドキュメントへのリンクが含まれるようになりました。
 
@@ -226,7 +226,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)は、データアプリに直接追加できる事前定義されたシステムエンドポイントを含むエンドポイントライブラリを提供し、エンドポイント開発の労力を軽減します。
 
-    現在、このライブラリには`/system/query`エンドポイントのみが含まれています。このエンドポイントを使用すると、定義済みの`sql`パラメータにSQL文を渡すだけで、任意のSQL文を実行できます。このエンドポイントにより、SQLクエリを即座に実行できるため、柔軟性と効率性が向上します。
+    現在、このライブラリには`/system/query`エンドポイントのみが含まれています。このエンドポイントを使用すると、定義済みの`sql`パラメーターにSQL文を渡すだけで、任意のSQL文を実行できます。このエンドポイントにより、SQLクエリを即座に実行できるため、柔軟性と効率性が向上します。
 
     詳細については、 [定義済みのシステムエンドポイントを追加します](/tidb-cloud/data-service-manage-endpoint.md#add-a-predefined-system-endpoint)を参照してください。
 
@@ -270,9 +270,9 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの16 vCPU TiFlashおよび32 vCPU TiFlashの最大ノードストレージを2048 GiBから4096 GiBに増加します。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの16 vCPU TiFlashおよび32 vCPU TiFlashの最大ノードストレージを2048 GiBから4096 GiBに増加します。
 
-    この機能強化により、TiDB Cloud Dedicatedクラスタの分析データストレージ容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
+    この機能強化により、TiDB Cloud Dedicatedクラスターの分析データストレージ容量が増加し、ワークロードのスケーリング効率が向上し、増大するデータ要件に対応できるようになります。
 
     詳細については、 [TiFlashノードストレージ](/tidb-cloud/size-your-cluster.md#tiflash-node-storage)を参照してください。
 
@@ -282,7 +282,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
-- AWS上にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのディザスタリカバリのためのリカバリグループ機能（ベータ版）を導入します。
+- AWS上にデプロイされた[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのディザスターリカバリのためのリカバリグループ機能（ベータ版）を導入します。
 
     この機能を使用すると、TiDB Cloud Dedicatedクラスター間でデータベースを複製できるため、地域的な災害が発生した場合でも迅速なリカバリが可能になります。 `Project Owner`ロールをお持ちの場合は、新しいリカバリグループを作成し、データベースをそのグループに割り当てることで、この機能を有効にできます。リカバリグループを使用してデータベースを複製することで、災害対策を強化し、より厳格な可用性 SLA を満たし、より積極的な目標復旧時点 (RPO) および目標復旧時間 (RTO) を達成できます。
 
@@ -322,7 +322,7 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 **全般的な変更**
 
-- Google Cloud でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しい[TiDBノードサイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を提供します: `8 vCPU, 16 GiB`
+- Google Cloud でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに新しい[TiDBノードサイズ](/tidb-cloud/size-your-cluster.md#tidb-vcpu-and-ram)を提供します: `8 vCPU, 16 GiB`
 
 ## 2024年5月14日 {#may-14-2024}
 
@@ -457,6 +457,6 @@ summary: TiDB Cloudの2024年のリリースノートについてご確認くだ
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のデュアルリージョンバックアップ機能が、一般提供（GA）を開始しました。
 
-    この機能を使用すると、AWSまたはGoogle Cloud内の地理的に離れたリージョン間でバックアップを複製できます。この機能は、データ保護とディザスタリカバリ機能の追加レイヤーを提供します。
+    この機能を使用すると、AWSまたはGoogle Cloud内の地理的に離れたリージョン間でバックアップを複製できます。この機能は、データ保護とディザスターリカバリ機能の追加レイヤーを提供します。
 
     詳細については、 [デュアルリージョンバックアップ](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)を参照してください。

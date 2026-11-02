@@ -23,14 +23,14 @@ summary: 2023年 11月 14日のTiDB Cloud Dedicated Scale 機能メンテナン�
 
 ### TiDB Cloudコンソール UI の影響を受ける機能 {#affected-features-of-tidb-cloud-console-ui}
 
-- クラスタレベル
-    - クラスタ管理
+- クラスターレベル
+    - クラスター管理
         - クラスターを変更する
             - TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更します。
 
 ### TiDB Cloud API の影響を受ける機能 {#affected-features-of-tidb-cloud-api}
 
-- クラスタ管理
+- クラスター管理
     - [UpdateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
 
 ## 完了と再開 {#completion-and-resumption}

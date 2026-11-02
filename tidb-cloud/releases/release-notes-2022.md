@@ -25,11 +25,11 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     [TiDB Cloudコンソール](https://tidbcloud.com)の**Backup Settings**で PITR 機能を有効または無効にできます。
 
-    詳細については[TiDB クラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+    詳細については[TiDB クラスターデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
 - 複数の変更フィード管理と既存の変更フィード編集をサポートします。
 
-    - 異なるデータレプリケーションタスクを管理するために、必要な数だけ変更フィードを作成できるようになりました。現在、各クラスタには最大10個の変更フィードを設定できます。詳細については、 [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
+    - 異なるデータレプリケーションタスクを管理するために、必要な数だけ変更フィードを作成できるようになりました。現在、各クラスターには最大10個の変更フィードを設定できます。詳細については、 [チェンジフィードの概要](/tidb-cloud/changefeed-overview.md)を参照してください。
     - 一時停止状態の既存の変更フィードの設定を編集できます。詳細については、 [変更フィードを編集する](/tidb-cloud/changefeed-overview.md#edit-a-changefeed)を参照してください。
 
 - Amazon Aurora MySQL、Amazon Relational Database Service (RDS) MySQL、またはセルフホスト型MySQL互換データベースから、データをTiDB Cloudへオンラインで直接移行できるようにします。この機能は現在、一般提供中です。
@@ -63,9 +63,9 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- Serverless Tier向けのTiDB Cloud SQL エディタ (ベータ版) を導入します。
+- Serverless Tier向けのTiDB Cloud SQL エディター (ベータ版) を導入します。
 
-    これは、Serverless Tierのデータベースに対してSQLクエリを直接編集・実行できるWebベースのSQLエディタです。Serverless Tierクラスターの左側のナビゲーションバーから簡単に見つけることができます。
+    これは、Serverless Tierのデータベースに対してSQLクエリを直接編集・実行できるWebベースのSQLエディターです。Serverless Tierクラスターの左側のナビゲーションバーから簡単に見つけることができます。
 
     Serverless Tierでは、Web SQL Shell は SQL エディターに置き換えられます。
 
@@ -140,9 +140,9 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
     PITR 機能を使用するには、TiDB クラスターのバージョンが少なくとも v6.3.0 であり、TiKV ノードのサイズが少なくとも 8 vCPU および 16 GiB であることを確認してください。
 
-    デフォルトでは、バックアップデータはクラスタが作成されたリージョンに保存されます。日本では、GCP 上でホストされ PITR が有効になっている TiDB クラスタの場合、バックアップデータを 1つまたは 2つのリージョン（東京または大阪、あるいはその両方）に保存することを選択できます。別のリージョンからデータを復元することで、より高いレベルのデータ安全性が確保され、リージョン障害にも耐えることができます。
+    デフォルトでは、バックアップデータはクラスターが作成されたリージョンに保存されます。日本では、GCP 上でホストされ PITR が有効になっている TiDB クラスターの場合、バックアップデータを 1つまたは 2つのリージョン（東京または大阪、あるいはその両方）に保存することを選択できます。別のリージョンからデータを復元することで、より高いレベルのデータ安全性が確保され、リージョン障害にも耐えることができます。
 
-    詳細については[TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+    詳細については[TiDBクラスターデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
     この機能はまだベータ版であり、リクエストに応じてのみ利用可能です。
 
@@ -174,7 +174,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
     - Serverless Tierクラスターには、Dedicated Tierクラスターと同様に完全に機能する HTAP 機能が引き続き含まれています。
     - Serverless Tierでは、クラスターの作成時間が短縮され、瞬時にコールドスタートできます。Developer Tierと比較して、作成時間は数分から数秒に短縮されます。
     - 展開トポロジについて心配する必要はありません。Serverless Tierは、お客様のリクエストに応じて自動的に調整されます。
-    - Serverless Tierは[セキュリティのためにクラスタへのTLS接続を強制します](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
+    - Serverless Tierは[セキュリティのためにクラスターへのTLS接続を強制します](/tidb-cloud/secure-connections-to-serverless-clusters.md)。
     - 既存のDeveloper Tierクラスターは、今後数か月以内にServerless Tierに自動的に移行されます。クラスターのご利用には影響はなく、ベータ版のServerless Tierクラスターのご利用に対して料金は発生しません。
 
     [こちら](/tidb-cloud/tidb-cloud-quickstart.md)から始めましょう。
@@ -219,7 +219,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - [Vercel Integration Marketplace](https://vercel.com/integrations#databases)で[TiDB Cloud Vercel 統合](https://vercel.com/integrations/tidb-cloud)を公開します。
 
-    [Vercel](https://vercel.com)はフロントエンド開発者向けのプラットフォームであり、イノベーターがインスピレーションの瞬間に創造するために必要なスピードと信頼性を提供します。TiDB Cloud Vercel Integrationを使用すると、VercelプロジェクトをTiDB Cloudクラスタに簡単に接続できます。詳細については、ドキュメント[TiDB CloudとVercelの統合](/tidb-cloud/integrate-tidbcloud-with-vercel.md)をご覧ください。
+    [Vercel](https://vercel.com)はフロントエンド開発者向けのプラットフォームであり、イノベーターがインスピレーションの瞬間に創造するために必要なスピードと信頼性を提供します。TiDB Cloud Vercel Integrationを使用すると、VercelプロジェクトをTiDB Cloudクラスターに簡単に接続できます。詳細については、ドキュメント[TiDB CloudとVercelの統合](/tidb-cloud/integrate-tidbcloud-with-vercel.md)をご覧ください。
 
 - [Vercelテンプレートリスト](https://vercel.com/templates)で[TiDB Cloud Starter テンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)を公開します。
 
@@ -241,7 +241,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - [TiDB Cloud Terraform プロバイダー](https://registry.terraform.io/providers/tidbcloud/tidbcloud)の[ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)を追加しました。
 
-    TiDB Cloud Terraform Providerは、 [Terraform](https://www.terraform.io/)を使用してクラスタ、バックアップ、リストアなどのTiDB Cloudリソースを管理できるプラグインです。リソースのプロビジョニングとインフラストラクチャワークフローを自動化するシンプルな方法をお探しの場合は、 [ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)に従ってTiDB Cloud Terraform Providerをお試しください。
+    TiDB Cloud Terraform Providerは、 [Terraform](https://www.terraform.io/)を使用してクラスター、バックアップ、リストアなどのTiDB Cloudリソースを管理できるプラグインです。リソースのプロビジョニングとインフラストラクチャワークフローを自動化するシンプルな方法をお探しの場合は、 [ドキュメント](/tidb-cloud/terraform-tidbcloud-provider-overview.md)に従ってTiDB Cloud Terraform Providerをお試しください。
 
 ## 2022年10月11日 {#october-11-2022}
 
@@ -318,7 +318,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに対して新しい Google Cloud リージョンをサポートします: `N. Virginia (us-east4)` 。
+- [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して新しい Google Cloud リージョンをサポートします: `N. Virginia (us-east4)` 。
 
 ## 2022年9月9日 {#september-9-2022}
 
@@ -380,7 +380,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloud API をベータ版として導入します。
 
-    このAPIを通じて、クラスタなどのTiDB Cloudリソースを自動的かつ効率的に管理できます。詳細については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)をご覧ください。
+    このAPIを通じて、クラスターなどのTiDB Cloudリソースを自動的かつ効率的に管理できます。詳細については、 [TiDB Cloud API ドキュメント](https://docs.pingcap.com/tidbcloud/api/v1beta)をご覧ください。
 
     現在、 TiDB Cloud APIはベータ版であり、リクエストに応じてのみご利用いただけます。APIアクセスを申請するには、リクエストを送信してください。
 
@@ -437,7 +437,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 ## 2022年7月28日 {#july-28-2022}
 
-- **Security Quick Start**ダイアログに**Allow Access from Anywhere**ボタンを追加します。これにより、任意のIPアドレスからクラスタにアクセスできるようになります。詳細については、 [クラスタのセキュリティ設定を構成する](/tidb-cloud/configure-security-settings.md)を参照してください。
+- **Security Quick Start**ダイアログに**Allow Access from Anywhere**ボタンを追加します。これにより、任意のIPアドレスからクラスターにアクセスできるようになります。詳細については、 [クラスターのセキュリティ設定を構成する](/tidb-cloud/configure-security-settings.md)を参照してください。
 
 ## 2022年7月26日 {#july-26-2022}
 
@@ -464,7 +464,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 ## 2022年7月19日 {#july-19-2022}
 
 - [TiKVノードサイズ](/tidb-cloud/size-your-cluster.md#tikv-vcpu-and-ram) : `8 vCPU, 32 GiB`の新しいオプションを提供します。8 vCPU TiKVノードの場合は、 `8 vCPU, 32 GiB`または`8 vCPU, 64 GiB`を選択できます。
-- [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md)ダイアログに提供されるサンプルコードで構文のハイライト表示をサポートし、コードの可読性を向上させました。サンプルコード内で置換が必要なパラメータを簡単に特定できます。
+- [**Connect to TiDB**](/tidb-cloud/connect-via-standard-connection.md)ダイアログに提供されるサンプルコードで構文のハイライト表示をサポートし、コードの可読性を向上させました。サンプルコード内で置換が必要なパラメーターを簡単に特定できます。
 - [**Data Import Task**](/tidb-cloud/import-sample-data.md)ページでインポートタスクを確認した後、 TiDB Cloud がソースデータにアクセスできるかどうかを自動的に検証することをサポートします。
 - TiDB Cloudコンソールのテーマカラーを[PingCAPウェブサイト](https://www.pingcap.com/)のテーマカラーと一致するように変更します。
 
@@ -478,7 +478,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 - 列指向ストレージ[TiFlash](/tiflash/tiflash-overview.md)が一般提供 (GA) になりました。
 
     - TiFlashにより、TiDBは本質的にハイブリッドトランザクション／分析処理（HTAP）データベースとなります。アプリケーションデータはまずTiKVに保存され、その後Raftコンセンサスアルゴリズムを介してTiFlashに複製されます。つまり、行ストレージから列ストレージへのリアルタイムレプリケーションが実現されます。
-    - TiFlashレプリカを持つテーブルの場合、TiDB オプティマイザはコスト見積もりに基づいて TiKV レプリカとTiFlashレプリカのどちらを使用するかを自動的に決定します。
+    - TiFlashレプリカを持つテーブルの場合、TiDB オプティマイザーはコスト見積もりに基づいて TiKV レプリカとTiFlashレプリカのどちらを使用するかを自動的に決定します。
 
     TiFlashがもたらすメリットを体験するには、 [TiDB Cloud HTAP クイックスタートガイド](/tidb-cloud/tidb-cloud-htap-quickstart.md)をご覧ください。
 
@@ -570,7 +570,7 @@ TiDB Cloudが一般提供を開始しました。[サインアップ](https://ti
 
 一般的な変更点:
 
-- 固定サイズのクラスタ層はもうありません。TiDB、TiKV、 TiFlashの[クラスターサイズ](/tidb-cloud/size-your-cluster.md)を簡単にカスタマイズできます。
+- 固定サイズのクラスター層はもうありません。TiDB、TiKV、 TiFlashの[クラスターサイズ](/tidb-cloud/size-your-cluster.md)を簡単にカスタマイズできます。
 - TiFlashのない既存のクラスターに[TiFlash](/tiflash/tiflash-overview.md)ノードを追加することをサポートします。
 - [新しいクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)場合、ストレージサイズ（500～2048 GiB）の指定をサポートします。クラスターの作成後はストレージサイズを変更できません。
 - 新しいパブリックリージョン`eu-central-1`を導入します。
@@ -586,7 +586,7 @@ TiDB Cloudが一般提供を開始しました。[サインアップ](https://ti
 
 - 新しいクラスターの選択したリージョンに基づいてデフォルトのバックアップ時間を割り当てることをサポートします。
 
-    詳細については[TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
+    詳細については[TiDBクラスターデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)を参照してください。
 
 ## 2022年3月4日 {#march-04-2022}
 

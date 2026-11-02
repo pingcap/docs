@@ -56,7 +56,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         TiDB Cloud Starter は MCP をサポートし、 TiDB Cloud Starter クラスターを Cursor、Claude Code、VS Code、WindSurf などの一般的な AI ツールに統合的かつ安全に接続できるようになりました。一度接続を設定すれば、数分で AI ツールによるデータクエリを開始できます。
 
-        この機能にアクセスするには、 [クラスタ](https://tidbcloud.com/project/clusters)概要ページの右上隅にある**Use with AI Tools**をクリックします。
+        この機能にアクセスするには、 [クラスター](https://tidbcloud.com/project/clusters)概要ページの右上隅にある**Use with AI Tools**をクリックします。
 
 ## 2025年12月9日 {#december-9-2025}
 
@@ -136,7 +136,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 - **TiDB Cloud Dedicated**
 
-    - Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに VPC ピアリング経由で接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP 範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要がなくなりました。
+    - Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに VPC ピアリング経由で接続する場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)で`/16` ～ `/18` IP 範囲サイズを直接設定できるようになりました。この設定についてTiDB Cloudサポートに連絡する必要がなくなりました。
 
         詳細については[VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
@@ -196,7 +196,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         現在、データベース監査ログをサポートしているのは[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)のみです。データベース監査ログを使用している既存のTiDB Cloud Starter クラスターには影響しません。
 
-    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)ではインプレースリストア機能が削除され、バックアップを同じクラスタに直接リストアできなくなります。この変更は、アクティブな本番データの誤った上書きや潜在的なデータ損失の防止に役立ちます。
+    - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)ではインプレースリストア機能が削除され、バックアップを同じクラスターに直接リストアできなくなります。この変更は、アクティブな本番データの誤った上書きや潜在的なデータ損失の防止に役立ちます。
 
         データを復元するには、 [バックアップを新しいクラスターに復元](/tidb-cloud/backup-and-restore-serverless.md#restore-to-a-new-instance)できます。復元されたデータを検証した後、アプリケーションを新しいクラスターに切り替えます。既存のクラスターに復元されたデータはそのまま残り、新たな復元を実行しない限り、特別な操作は必要ありません。
 
@@ -229,7 +229,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         使用量の上限を超えると、処理能力が制限される可能性があります。サービスへの影響を避けるため、最大RCUを増やすことをご検討ください。
 
-        イベントの詳細については、 [TiDB Cloudクラスタイベント](/tidb-cloud/tidb-cloud-events.md)を参照してください。
+        イベントの詳細については、 [TiDB Cloudクラスターイベント](/tidb-cloud/tidb-cloud-events.md)を参照してください。
 
     - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)の[**Metrics**](/tidb-cloud/built-in-monitoring.md#view-the-metrics-page)ページでは、より迅速な診断とキャパシティ計画のために次のメトリックが追加されます。
 
@@ -267,7 +267,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         分割動作の詳細については、 [MySQL以外のシンクの主キーまたは一意キーの`UPDATE`イベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
-    - Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノードサイズ`32 vCPU, 64 GiB`を提供します。
+    - Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに新しいノードサイズ`32 vCPU, 64 GiB`を提供します。
 
         この新しいノードサイズは、TiDB ノードで使用できます。
 
@@ -287,7 +287,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
         - データセキュリティ: 暗号化キーを所有および管理することで、データが保護され、制御されることが保証されます。
         - コンプライアンス: CMEK を使用すると、データ暗号化に関する規制およびコンプライアンスの要件を満たすことができます。
-        - 柔軟性: プロジェクトを作成するときに CMEK を有効にし、クラスタを作成する前に CMEK 構成を完了できます。
+        - 柔軟性: プロジェクトを作成するときに CMEK を有効にし、クラスターを作成する前に CMEK 構成を完了できます。
 
         この機能を有効にするには、次の手順を実行します。
 
@@ -376,7 +376,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     - "TiDB Cloud Serverless"の名前を"TiDB Cloud Starter"に変更します。
 
-        オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、"TiDB Cloud Starter"に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
+        オートスケーリングのエントリプランは、新規ユーザーにとっての役割をより明確にするため、"TiDB Cloud Starter"に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
 
         2025年8月12日（PDT）より、既存のServerless クラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にStarterとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
 
@@ -418,7 +418,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     "TiDB Cloud Serverless"の名前を"TiDB Cloud Starter"に変更します。
 
-    オートスケーリングのエントリープランは、新規ユーザーにとっての役割をより明確にするため、"TiDB Cloud Starter"に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
+    オートスケーリングのエントリプランは、新規ユーザーにとっての役割をより明確にするため、"TiDB Cloud Starter"に名称が変更されました。すべての機能、料金、無料利用枠に変更はありません。
 
     2025年8月12日（PDT）より、既存のServerless クラスターは[TiDB Cloudコンソール](https://tidbcloud.com)にStarterとして表示されます。接続文字列、エンドポイント、データは変更されないため、コードを変更したり、ダウンタイムをスケジュールしたりする必要はありません。
 
@@ -487,7 +487,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに新しいノードサイズ`32 vCPU, 128 GiB`を提供します。
+- Google Cloud でホストされている[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに新しいノードサイズ`32 vCPU, 128 GiB`を提供します。
 
     この新しいサイズは、TiDB、TiKV、およびTiFlashノードで使用できます。
 
@@ -606,7 +606,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの変更フィードを使用して[Apache Pulsar](https://pulsar.apache.org)へのデータのストリーミングをサポートします。
 
-    この機能により、 TiDB Cloud Dedicated クラスタをより幅広い下流システムと統合できるようになり、追加のデータ統合要件にも対応できます。この機能を使用するには、 TiDB Cloud Dedicated クラスタのバージョンが v7.5.1 以降であることを確認してください。
+    この機能により、 TiDB Cloud Dedicated クラスターをより幅広い下流システムと統合できるようになり、追加のデータ統合要件にも対応できます。この機能を使用するには、 TiDB Cloud Dedicated クラスターのバージョンが v7.5.1 以降であることを確認してください。
 
     詳細については[Apache Pulsar へのシンク](/tidb-cloud/changefeed-sink-to-apache-pulsar.md)を参照してください。
 
@@ -804,7 +804,7 @@ summary: 2025年のTiDB Cloudのリリースノートについて説明します
 
     - すべてのテーブルに対して単一のパーティションディスパッチャーを定義することも、テーブルごとに異なるパーティションディスパッチャーを定義することもサポートします。
 
-    - Kafka メッセージのパーティション分散用に、タイムスタンプと列値という 2つの新しいディスパッチャタイプを導入しました。
+    - Kafka メッセージのパーティション分散用に、タイムスタンプと列値という 2つの新しいディスパッチャータイプを導入しました。
 
     詳細については[Apache Kafka にシンクする](/tidb-cloud/changefeed-sink-to-apache-kafka.md)を参照してください。
 

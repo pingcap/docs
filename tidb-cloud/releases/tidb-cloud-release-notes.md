@@ -210,7 +210,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         アクセス期間を選択し、必要に応じて延長したり、いつでもアクセスを取り消したりできます。認可の有効期限が切れると、アクセスは自動的に取り消されます。
 
-        Plan Replayer ファイルには SQL テキスト、テーブルスキーマ、オプティマイザ統計情報が含まれますが、実際のテーブル行データは含まれません。
+        Plan Replayer ファイルには SQL テキスト、テーブルスキーマ、オプティマイザー統計情報が含まれますが、実際のテーブル行データは含まれません。
 
         詳細は、[Plan Replayer を使用して SQL パフォーマンスをトラブルシュートする](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=essential) を参照してください。
 
@@ -226,13 +226,13 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
         SQL ユーザー、イベントクラス、テーブル、実行ステータスで監査イベントをフィルタリングして、どのデータベースアクティビティをログに記録するかを制御できるため、セキュリティ監査とコンプライアンスに関連するイベントに集中できます。
 
-        詳細は、[監査フィルタルールを指定する](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules) を参照してください。
+        詳細は、[監査フィルタールールを指定する](https://docs.pingcap.com/tidbcloud/tidb-cloud-auditing-premium/?plan=premium#specify-audit-filter-rules) を参照してください。
 
     - TiDB Cloud Premium で、SQL パフォーマンスのトラブルシューティングのために、TiDB Cloud Support に Plan Replayer ファイルへのアクセスを一時的に許可できるようになりました。
 
         アクセス期間を選択し、必要に応じて延長したり、いつでもアクセスを取り消したりできます。認可の有効期限が切れると、アクセスは自動的に取り消されます。
 
-        Plan Replayer ファイルには SQL テキスト、テーブルスキーマ、オプティマイザ統計情報が含まれますが、実際のテーブル行データは含まれません。
+        Plan Replayer ファイルには SQL テキスト、テーブルスキーマ、オプティマイザー統計情報が含まれますが、実際のテーブル行データは含まれません。
 
         詳細は、[Plan Replayer を使用して SQL パフォーマンスをトラブルシュートする](https://docs.pingcap.com/tidbcloud/plan-replayer/?plan=premium) を参照してください。
 
@@ -705,7 +705,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Dedicated**
 
-    - TiProxyがAWS上の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで一般提供開始となりました。接続管理と負荷分散機能が強化され、データベースの信頼性とパフォーマンスが向上します。
+    - TiProxyがAWS上の[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで一般提供開始となりました。接続管理と負荷分散機能が強化され、データベースの信頼性とパフォーマンスが向上します。
 
         TiProxyの主な特徴：
 
@@ -780,7 +780,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
 - **TiDB Cloud Dedicated**
 
-    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタにおけるクラウドストレージデータのインポートエクスペリエンスを向上させます。
+    - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにおけるクラウドストレージデータのインポートエクスペリエンスを向上させます。
 
         インポートプロセスは、接続、宛先マッピング、事前チェックの3ステップウィザードに簡素化され、Amazon S3、Google Cloud Storage、Azure Blob Storageに対応した**Import data from Cloud Storage**のエントリポイントが統一されました。新しいフローでは、単一ファイルURIとワイルドカードパターンによる手動ファイルマッピングがサポートされ、事前チェックステップではインポート実行前にソースファイルをスキャンしてマッピングをプレビューするため、構成上の問題を早期に発見し、インポートの失敗を減らすことができます。
 
@@ -942,7 +942,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     [TiDB Cloudコンソール](https://tidbcloud.com/)では、すべてのサブスクリプションプランにおいてサポート体験を向上させるため、プランに応じたサポートオプションを提供開始しました。これらのアップデートには以下が含まれます。
 
-    - **プランに応じたサポートのリダイレクト**：クラスタ概要ページで、**Actions**列の**Get Support**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**Support Plan**パネルに、有料プランのユーザーは**Support Portal**に誘導されます。
+    - **プランに応じたサポートのリダイレクト**：クラスター概要ページで、**Actions**列の**Get Support**を選択すると、サブスクリプションプランに基づいて最も適切なリソースにリダイレクトされます。Basicプランのユーザーは**Support Plan**パネルに、有料プランのユーザーは**Support Portal**に誘導されます。
     - **ヘルプセンターメニューの改善**：ヘルプメニュー項目名を**Support Options**と**Support Tickets**に変更し、利用可能なサービスをより適切に反映させます。また、有料プランでのみテクニカルサポートチケットが利用できることを明確にするツールチップを追加します。
     - **明確なコミュニティサポートアクセス**:**Support Plan**オプション内では、Slack と Discord がBasic プランユーザーの主要なテクニカルサポートチャネルとして明確に識別されます。次のドキュメントは、サポートチャネルポリシーとコミュニティアクセスを明確にするために合理化されています: [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)、[Connected Careの概要](/tidb-cloud/connected-care-overview.md)、および[Connected Careの詳細](/tidb-cloud/connected-care-detail.md)。
     - **アクション指向のSupport Plan UI** ：**Support Plan**ウィンドウを再設計し、一般的なプラン比較ではなく、現在ご利用のプランで利用可能なサポートオプションを優先的に表示するようにしました。この変更により、現在ご利用のプランに基づいてサポートを受ける方法をすばやく特定できます。

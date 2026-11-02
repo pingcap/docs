@@ -45,9 +45,9 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)は、Google Cloud にデプロイされた TiDB クラスタの高速物理モードをサポートします。
+- [データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)は、Google Cloud にデプロイされた TiDB クラスターの高速物理モードをサポートします。
 
-    AWSおよびGoogle CloudにデプロイされたTiDBクラスタで物理モードがご利用いただけるようになりました。物理モードの移行速度は最大110MiB/sに達し、論理モードの2.4倍の速度です。このパフォーマンス向上は、大規模なデータセットをTiDB Cloudに迅速に移行する場合に最適です。
+    AWSおよびGoogle CloudにデプロイされたTiDBクラスターで物理モードがご利用いただけるようになりました。物理モードの移行速度は最大110MiB/sに達し、論理モードの2.4倍の速度です。このパフォーマンス向上は、大規模なデータセットをTiDB Cloudに迅速に移行する場合に最適です。
 
     詳細については[既存データと増分データを移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md#migrate-existing-data-and-incremental-data)を参照してください。
 
@@ -92,7 +92,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)は、Google Cloud でのデュアルリージョンバックアップ (ベータ版) をサポートします。
 
-    Google Cloud でホストされるTiDB Cloud Dedicated クラスタは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage の[デュアルリージョン](https://cloud.google.com/storage/docs/locations#location-dr)機能と同様に、 TiDB Cloud Dedicated のデュアルリージョンで使用するリージョンのペアは、同じマルチリージョン内になければなりません。例えば、東京と大阪は同じマルチリージョン`ASIA`内にあるため、デュアルリージョンストレージとして一緒に使用できます。
+    Google Cloud でホストされるTiDB Cloud Dedicated クラスターは、Google Cloud Storage とシームレスに連携します。Google Cloud Storage の[デュアルリージョン](https://cloud.google.com/storage/docs/locations#location-dr)機能と同様に、 TiDB Cloud Dedicated のデュアルリージョンで使用するリージョンのペアは、同じマルチリージョン内になければなりません。例えば、東京と大阪は同じマルチリージョン`ASIA`内にあるため、デュアルリージョンストレージとして一緒に使用できます。
 
     詳細については[TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-dual-region-backup)を参照してください。
 
@@ -193,9 +193,9 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタに対して Google Cloud [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)をサポートします。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターに対して Google Cloud [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect)をサポートします。
 
-    プライベートエンドポイントを作成し、Google Cloud でホストされているTiDB Cloud Dedicated クラスタへの安全な接続を確立できるようになりました。
+    プライベートエンドポイントを作成し、Google Cloud でホストされているTiDB Cloud Dedicated クラスターへの安全な接続を確立できるようになりました。
 
     主な利点:
 
@@ -217,7 +217,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [Data Service（ベータ版）](https://tidbcloud.com/project/data-service)は、開発エクスペリエンスを向上させるために`GET`リクエストのページ分割をサポートします。
 
-    `GET`リクエストの場合、**Advance Properties**で**Pagination**を有効にし、エンドポイントを呼び出す際にクエリパラメータとして`page`と`page_size`を指定することで、結果をページ分けできます。例えば、1 ページあたり 10 項目の 2 ページ目を取得するには、次のコマンドを使用します。
+    `GET`リクエストの場合、**Advance Properties**で**Pagination**を有効にし、エンドポイントを呼び出す際にクエリパラメーターとして`page`と`page_size`を指定することで、結果をページ分けできます。例えば、1 ページあたり 10 項目の 2 ページ目を取得するには、次のコマンドを使用します。
 
     ```bash
     curl --digest --user '<Public Key>:<Private Key>' \
@@ -259,7 +259,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)でデータアプリの OpenAPI 仕様をサポートします。
 
-    TiDB Cloud Data Service は、各データアプリ向けに自動生成された OpenAPI ドキュメントを提供します。ドキュメントでは、エンドポイント、パラメータ、レスポンスを確認し、エンドポイントを試すことができます。
+    TiDB Cloud Data Service は、各データアプリ向けに自動生成された OpenAPI ドキュメントを提供します。ドキュメントでは、エンドポイント、パラメーター、レスポンスを確認し、エンドポイントを試すことができます。
 
     データアプリとそのデプロイ済みエンドポイントのOpenAPI仕様（OAS）をYAMLまたはJSON形式でダウンロードすることもできます。OASは標準化されたAPIドキュメント、簡素化された統合、そして容易なコード生成を提供し、開発の迅速化とコラボレーションの向上を実現します。
 
@@ -339,7 +339,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     - TiDB Cloud Serverless の統合インポートエントリ: データのインポートのエントリを統合し、ローカルファイルのインポートと Amazon S3 からのファイルのインポートをシームレスに切り替えることができます。
     - 合理化された構成: Amazon S3 からのデータのインポートは 1つのステップだけで済むため、時間と労力を節約できます。
-    - 強化された CSV 構成: CSV 構成設定がファイルタイプオプションの下に配置されるようになり、必要なパラメータを簡単にすばやく構成できるようになりました。
+    - 強化された CSV 構成: CSV 構成設定がファイルタイプオプションの下に配置されるようになり、必要なパラメーターを簡単にすばやく構成できるようになりました。
     - ターゲットテーブルの選択機能強化：チェックボックスをクリックすることで、データインポートの対象となるターゲットテーブルを選択できるようになりました。この改善により、複雑な式を入力する必要がなくなり、ターゲットテーブルの選択が簡素化されます。
     - 表示情報の改良：インポート処理中に表示される不正確な情報に関する問題を解決しました。また、不完全なデータ表示や誤解を招く情報を避けるため、プレビュー機能を削除しました。
     - ソースファイルマッピングの改善：ソースファイルとターゲットテーブル間のマッピング関係の定義をサポートします。これにより、特定の命名要件を満たすためにソースファイル名を変更するという課題に対処できます。
@@ -368,7 +368,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     アプリケーション開発にGitHubをご利用の場合、 TiDB Cloud Serverlessブランチ機能をGitHub CI/CDパイプラインに統合することで、本番のデータベースに影響を与えることなく、ブランチを使用してプルリクエストを自動的にテストできます。詳細については、 [TiDB Cloud Serverless Branching（ベータ版）をGitHubと統合する](/tidb-cloud/branch-github-integration.md)をご覧ください。
 
-- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの週次バックアップをサポートします。詳細については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を参照してください。
+- [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの週次バックアップをサポートします。詳細については、 [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md#turn-on-auto-backup)を参照してください。
 
 ## 2023年7月4日 {#july-4-2023}
 
@@ -527,7 +527,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 **一般的な変更**
 
-- 2023 年 4月 26日以降に作成された GCP ホストクラスタのノードサイズの変更をサポートします。
+- 2023 年 4月 26日以降に作成された GCP ホストクラスターのノードサイズの変更をサポートします。
 
     この機能により、需要の増加に合わせて高パフォーマンスノードにアップグレードしたり、コスト削減のために低パフォーマンスノードにダウングレードしたりできます。この柔軟性の向上により、ワークロードに合わせてクラスターの容量を調整し、コストを最適化できます。
 
@@ -588,7 +588,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloud [Serverless Tier](/tidb-cloud/select-cluster-tier.md#starter)クラスターのバックアップと復元をサポートします。
 
-    詳細については[TiDBクラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
+    詳細については[TiDBクラスターデータのバックアップと復元](/tidb-cloud/backup-and-restore-serverless.md)を参照してください。
 
 - 新しい[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのデフォルトの TiDB バージョンを[v6.5.1](https://docs.pingcap.com/tidb/stable/release-6.5.1)から[v6.5.2](https://docs.pingcap.com/tidb/stable/release-6.5.2)にアップグレードします。
 
@@ -711,7 +711,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [Data Service（ベータ版）](/tidb-cloud/data-service-overview.md)は、データアプリに対するよりきめ細かいアクセス制御をサポートします。
 
-    データアプリの詳細ページで、クラスタをデータアプリにリンクし、各APIキーのロールを指定できるようになりました。ロールは、APIキーがリンクされたクラスタへのデータの読み取りまたは書き込みを許可するかどうかを制御し、 `ReadOnly`または`ReadAndWrite`に設定できます。この機能により、データアプリに対してクラスタレベルおよび権限レベルのアクセス制御が可能になり、ビジネスニーズに応じてアクセス範囲をより柔軟に制御できるようになります。
+    データアプリの詳細ページで、クラスターをデータアプリにリンクし、各APIキーのロールを指定できるようになりました。ロールは、APIキーがリンクされたクラスターへのデータの読み取りまたは書き込みを許可するかどうかを制御し、 `ReadOnly`または`ReadAndWrite`に設定できます。この機能により、データアプリに対してクラスターレベルおよび権限レベルのアクセス制御が可能になり、ビジネスニーズに応じてアクセス範囲をより柔軟に制御できるようになります。
 
     詳細については、 [リンクされたクラスターを管理する](/tidb-cloud/data-service-manage-data-app.md#manage-linked-data-sources)および[APIキーを管理する](/tidb-cloud/data-service-api-key.md)を参照してください。
 
@@ -771,7 +771,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能に対して新しい GCP リージョンをサポートします: `Tokyo (asia-northeast1)` 。
 
-    この機能を使用すると、Google Cloud Platform (GCP) の MySQL 互換データベースから TiDB クラスタにデータを簡単かつ効率的に移行できます。
+    この機能を使用すると、Google Cloud Platform (GCP) の MySQL 互換データベースから TiDB クラスターにデータを簡単かつ効率的に移行できます。
 
     詳細については[Data Migration を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)を参照してください。
 
@@ -937,7 +937,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     - [Data Migration を使用して MySQL 互換データベースをTiDB Cloudに移行する](/tidb-cloud/migrate-from-mysql-using-data-migration.md)
     - [ChangeFeed を使用してTiDB Cloudから他のデータサービスにデータをストリーミングする](/tidb-cloud/changefeed-overview.md)
-    - [TiDB クラスタデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)
+    - [TiDB クラスターデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)
 
 ## 2023年1月10日 {#january-10-2023}
 

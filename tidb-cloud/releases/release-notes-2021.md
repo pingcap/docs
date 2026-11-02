@@ -31,7 +31,7 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 改善点:
 
 - Developer Tierの監視能力の向上
-- 自動バックアップ時間をDeveloper Tierクラスタの作成時刻と同じに設定することをサポート
+- 自動バックアップ時間をDeveloper Tierクラスターの作成時刻と同じに設定することをサポート
 
 バグ修正:
 
@@ -62,11 +62,11 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 ## 2021年9月16日 {#september-16-2021}
 
-- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを5.2.0から5.2.1にアップグレードしました。5.2.1の詳細な変更点については、リリースノート[5.2.1](https://docs.pingcap.com/tidb/stable/release-5.2.1)をご覧ください。
+- 新規にデプロイされたクラスターのデフォルトのTiDBバージョンを5.2.0から5.2.1にアップグレードしました。5.2.1の詳細な変更点については、リリースノート[5.2.1](https://docs.pingcap.com/tidb/stable/release-5.2.1)をご覧ください。
 
 ## 2021年9月2日 {#september-2-2021}
 
-- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを5.0.2から5.2.0にアップグレードしました。TiDB 5.1.0および5.2.0の機能の詳細については、リリースノート[5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)をご覧ください。
+- 新規にデプロイされたクラスターのデフォルトのTiDBバージョンを5.0.2から5.2.0にアップグレードしました。TiDB 5.1.0および5.2.0の機能の詳細については、リリースノート[5.2.0](https://docs.pingcap.com/tidb/stable/release-5.2.0)および[5.1.0](https://docs.pingcap.com/tidb/stable/release-5.1.0)をご覧ください。
 - TiDB Cloud内部機能のいくつかの問題を修正しました。
 
 ## 2021年8月19日 {#august-19-2021}
@@ -87,7 +87,7 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 
 ## 2021年7月6日 {#july-6-2021}
 
-- 新規にデプロイされたクラスタのデフォルトのTiDBバージョンを4.0.11から5.0.2にアップグレードしました。このアップグレードにより、パフォーマンスと機能が大幅に向上します。詳細は[こちら](https://docs.pingcap.com/tidb/stable/release-5.0.0)をご覧ください。
+- 新規にデプロイされたクラスターのデフォルトのTiDBバージョンを4.0.11から5.0.2にアップグレードしました。このアップグレードにより、パフォーマンスと機能が大幅に向上します。詳細は[こちら](https://docs.pingcap.com/tidb/stable/release-5.0.0)をご覧ください。
 
 ## 2021年6月25日 {#june-25-2021}
 
@@ -121,7 +121,7 @@ summary: 2021年のTiDB Cloudのリリースノートについて説明します
 - サインアッププロセスにメール認証とロボット対策のreCAPTCHAが追加されました
 - [TiDB Cloudサービス契約](https://pingcap.com/legal/tidb-cloud-services-agreement)と[PingCAPプライバシーポリシー](https://pingcap.com/legal/privacy-policy/)が更新されました
 - コンソールの申請フォームに記入して[概念実証](/tidb-cloud/tidb-cloud-poc.md)を申請できます
-- UIを介してサンプルデータをTiDB Cloudクラスタにインポートできます
+- UIを介してサンプルデータをTiDB Cloudクラスターにインポートできます
 - 混乱を避けるため、同じ名前のクラスターは許可されません。
 - **Support**メニューの**Give Feedback**をクリックするとフィードバックを送信できます。
 - データのバックアップと復元機能は、PoCおよびオンデマンドのトライアルオプションでご利用いただけます。

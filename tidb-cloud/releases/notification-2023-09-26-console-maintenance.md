@@ -28,8 +28,8 @@ TiDB Cloud Starterの管理インフラストラクチャをアップグレー�
 
 ### TiDB Cloudコンソール UI の影響を受ける機能 {#affected-features-of-tidb-cloud-console-ui}
 
-- クラスタレベル
-    - クラスタ管理
+- クラスターレベル
+    - クラスター管理
         - クラスターを作成する
         - クラスターを削除する
         - クラスターをスケールする
