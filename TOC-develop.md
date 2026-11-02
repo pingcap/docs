@@ -62,7 +62,7 @@
   - [概要](/develop/dev-guide-schema-design-overview.md)
   - [データベースを作成する](/develop/dev-guide-create-database.md)
   - [テーブルを作成する](/develop/dev-guide-create-table.md)
-  - [セカンダリーインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)
+  - [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)
 - データを書き込む
   - [データを挿入する](/develop/dev-guide-insert-data.md)
   - [データの更新](/develop/dev-guide-update-data.md)
