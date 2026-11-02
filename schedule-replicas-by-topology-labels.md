@@ -158,7 +158,7 @@ tiflash_servers:
 
 > **Note:**
 >
-> 設定ファイルで`replication.location-labels`設定されていない場合、このトポロジーファイルを使用してクラスターをデプロイするとエラーが発生する可能性があります。クラスターをデプロイする前に、設定ファイルで`replication.location-labels`が設定されていることを確認することをお勧めします。
+> 設定ファイルで`replication.location-labels`が設定されていない場合、このトポロジーファイルを使用してクラスターをデプロイするとエラーが発生する可能性があります。クラスターをデプロイする前に、設定ファイルで`replication.location-labels`が設定されていることを確認することをお勧めします。
 
 ### コマンドラインまたは設定ファイルを使用してクラスターを構成する {#configure-a-cluster-using-command-lines-or-configuration-files}
 
