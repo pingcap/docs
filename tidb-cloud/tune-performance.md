@@ -28,7 +28,7 @@ TiDB Cloud では、パフォーマンスを分析するために [スローク�
 
 > **Note:**
 >
-> 現在、**Key Visualizer** は TiDB Cloud Dedicated クラスタでのみ利用できます。
+> 現在、**Key Visualizer** は TiDB Cloud Dedicated クラスターでのみ利用できます。
 
 </CustomContent>
 
@@ -105,7 +105,7 @@ Statement Analysis を使用するには、次の手順を実行します。
 
 > **Note:**
 >
-> Key Visualizer は [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスタでのみ利用できます。
+> Key Visualizer は [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターでのみ利用できます。
 
 キー分析を表示するには、次の手順を実行します。
 

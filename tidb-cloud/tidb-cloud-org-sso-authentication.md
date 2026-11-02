@@ -251,7 +251,7 @@ TiDB Cloudでは、SAML認証方式はデフォルトで無効になっていま
 
 1. TiDB Cloudで、 [SAML認証方法](#configure-the-saml-authentication-method)の**SCIM Provisioning Accounts**オプションを有効にし、後で使用するために次の情報を記録します。
 
-    - SCIMコネクタのベースURL
+    - SCIMコネクターのベースURL
     - ユーザーの一意の識別子フィールド
     - 認証モード
 

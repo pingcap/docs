@@ -13,13 +13,13 @@ ticloud serverless audit-log filter-rule describe [flags]
 
 ## 例 {#examples}
 
-対話型モードで監査ログフィルタルールの詳細を表示します。
+対話型モードで監査ログフィルタールールの詳細を表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule describe
 ```
 
-非対話型モードで監査ログフィルタルールの詳細を表示します。
+非対話型モードで監査ログフィルタールールの詳細を表示します。
 
 ```shell
 ticloud serverless audit-log filter-rule describe --cluster-id <cluster-id> --filter-rule-id <rule-id>

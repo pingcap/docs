@@ -15,13 +15,13 @@ summary: TiDB Cloudに関するよくある質問（FAQ）について学びま�
 
 TiDB Cloudは、直感的なコンソールを通じて制御できるフルマネージドのクラウドインスタンスにより、TiDB クラスターのデプロイ、管理、保守がさらに簡単になります。 <CustomContent language="en,zh">Amazon Web Services (AWS)、Google Cloud、Microsoft Azure、またはAlibaba Cloudに簡単にデプロイして、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent> <CustomContent language="ja">Amazon Web Services (AWS)、Google Cloud、またはMicrosoft Azureに簡単にデプロイすることで、ミッションクリティカルなアプリケーションを迅速に構築できます。</CustomContent>
 
-TiDB Cloud を利用すれば、開発者や DBA は、トレーニングをほとんど受けていないか、全く受けていない場合でも、インフラストラクチャ管理やクラスタのデプロイといった、かつては複雑だったタスクを容易に処理できるようになり、データベースの複雑さではなく、アプリケーションの開発に集中できます。また、ボタンをクリックするだけで TiDB クラスタをスケールインまたはスケールアウトできるため、必要な量と期間だけデータベースをプロビジョニングでき、高価なリソースを無駄に消費することがなくなります。
+TiDB Cloud を利用すれば、開発者や DBA は、トレーニングをほとんど受けていないか、全く受けていない場合でも、インフラストラクチャ管理やクラスターのデプロイといった、かつては複雑だったタスクを容易に処理できるようになり、データベースの複雑さではなく、アプリケーションの開発に集中できます。また、ボタンをクリックするだけで TiDB クラスターをスケールインまたはスケールアウトできるため、必要な量と期間だけデータベースをプロビジョニングでき、高価なリソースを無駄に消費することがなくなります。
 
 ### TiDBとTiDB Cloudの関係は何ですか？ {#what-is-the-relationship-between-tidb-and-tidb-cloud}
 
 TiDBはオープンソースのデータベースであり、自社のデータセンター、自己管理型のクラウド環境、またはその両方を組み合わせたハイブリッド環境でTiDB Self-Managedを実行したい組織にとって最適な選択肢です。
 
-TiDB Cloudは、TiDBが提供するフルマネージド型のクラウドデータベースサービスです。使いやすいWebベースの管理コンソールを備えており、ミッションクリティカルな本番環境向けのTiDBクラスタを管理できます。
+TiDB Cloudは、TiDBが提供するフルマネージド型のクラウドデータベースサービスです。使いやすいWebベースの管理コンソールを備えており、ミッションクリティカルな本番環境向けのTiDBクラスターを管理できます。
 
 ### TiDB CloudはMySQLと互換性がありますか？ {#is-tidb-cloud-compatible-with-mysql}
 
@@ -35,9 +35,9 @@ PostgreSQL互換の{{{ .starter }}}インスタンスは、PostgreSQL wire proto
 
 ### TiDB Cloudを操作するには、どのようなプログラミング言語を使用できますか？ {#what-programming-languages-can-i-use-to-work-with-tidb-cloud}
 
-MySQL互換のTiDB Cloudリソースでは、MySQLクライアントまたはドライバがサポートする任意のプログラミング言語を使用できます。
+MySQL互換のTiDB Cloudリソースでは、MySQLクライアントまたはドライバーがサポートする任意のプログラミング言語を使用できます。
 
-PostgreSQL互換の{{{ .starter }}}インスタンスでは、標準のPostgreSQLクライアントまたはドライバをサポートするプログラミング言語およびフレームワークを使用できます。
+PostgreSQL互換の{{{ .starter }}}インスタンスでは、標準のPostgreSQLクライアントまたはドライバーをサポートするプログラミング言語およびフレームワークを使用できます。
 
 ### TiDB Cloudはどこで実行できますか？ {#where-can-i-run-tidb-cloud}
 
@@ -75,7 +75,7 @@ TiDB Cloudについて学ぶ最良の方法は、ステップバイステップ�
 - [さあ始めましょう](/tidb-cloud/tidb-cloud-quickstart.md)
 - [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
 - [TiDB Cloud Premiumインスタンスを作成する](/tidb-cloud/premium/create-tidb-instance-premium.md)
-- [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
+- [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 ### クラスターを削除する際に、 `XXX's Org/default project/Cluster0`は何を指しているのでしょうか？ {#what-does-xxx-s-org-default-project-cluster0-refer-to-when-deleting-a-cluster}
 
@@ -83,9 +83,9 @@ TiDB Cloudでは、クラスターは組織名、プロジェクト名、クラ�
 
 ## アーキテクチャよくある質問 {#architecture-faqs}
 
-### 私のTiDBクラスタには様々なコンポーネントがあります。TiDB、TiKV、 TiFlashノードとは何ですか？ {#there-are-different-components-in-my-tidb-cluster-what-are-tidb-tikv-and-tiflash-nodes}
+### 私のTiDBクラスターには様々なコンポーネントがあります。TiDB、TiKV、 TiFlashノードとは何ですか？ {#there-are-different-components-in-my-tidb-cluster-what-are-tidb-tikv-and-tiflash-nodes}
 
-TiDBは、TiKVまたはTiFlashストアから返されたクエリのデータを集約するSQLコンピューティングレイヤーです。TiDBは水平方向に拡張可能であり、TiDBノードの数を増やすことで、クラスタが処理できる同時クエリの数を増やすことができます。
+TiDBは、TiKVまたはTiFlashストアから返されたクエリのデータを集約するSQLコンピューティングレイヤーです。TiDBは水平方向に拡張可能であり、TiDBノードの数を増やすことで、クラスターが処理できる同時クエリの数を増やすことができます。
 
 TiKVは、OLTPデータを格納するために使用されるトランザクションストアです。TiKV内のすべてのデータは、複数のレプリカ（デフォルトでは3つのレプリカ）で自動的に管理されるため、TiKVはネイティブな高可用性を備え、自動フェイルオーバーをサポートします。TiKVは水平方向に拡張可能であり、トランザクションストアの数を増やすことでOLTPスループットが向上します。
 
@@ -95,7 +95,7 @@ Placement Driver（PD）は、クラスターのメタデータを格納する�
 
 ### TiDBはTiKVノード間でどのようにデータを複製するのですか？ {#how-does-tidb-replicate-data-between-the-tikv-nodes}
 
-TiKVはキーと値のペアの空間をキー範囲に分割し、各キー範囲を「リージョン」として扱います。TiKVでは、データはクラスタ内のすべてのノードに分散され、リージョンを基本単位として使用します。PDは、リージョンをクラスタ内のすべてのノードにできるだけ均等に分散（スケジューリング）する役割を担います。
+TiKVはキーと値のペアの空間をキー範囲に分割し、各キー範囲を「リージョン」として扱います。TiKVでは、データはクラスター内のすべてのノードに分散され、リージョンを基本単位として使用します。PDは、リージョンをクラスター内のすべてのノードにできるだけ均等に分散（スケジューリング）する役割を担います。
 
 TiDBは、 Raftコンセンサスアルゴリズムを使用して、リージョンごとにデータを複製します。異なるノードに保存されたリージョンの複数のレプリカがRaftグループを形成します。
 
@@ -146,11 +146,11 @@ HTAP シナリオの詳細については、 [データプラットフォーム�
 TiDB Cloudでは、保存されているすべてのデータは暗号化され、すべてのネットワークトラフィックはTransport Layer Security（TLS）を使用して暗号化されます。
 
 - 保存データの暗号化は、暗号化されたストレージボリュームを使用して自動化されます。
-- クライアントとTiDBクラスタまたはインスタンス間のデータ転送における暗号化は、 TiDB CloudウェブサーバーのTLSとTiDBクラスタのTLSを使用して自動化されています。
+- クライアントとTiDBクラスターまたはインスタンス間のデータ転送における暗号化は、 TiDB CloudウェブサーバーのTLSとTiDBクラスターのTLSを使用して自動化されています。
 
 ### TiDB Cloudはどのようにして私のビジネスデータを暗号化するのですか？ {#how-does-tidb-cloud-encrypt-my-business-data}
 
-TiDB Cloudは、データベースデータやバックアップデータを含む、保存されているビジネスデータに対して、デフォルトでストレージボリューム暗号化を使用します。TiDB Cloudは、転送中のデータに対してTLS暗号化を要求し、さらに、TiDB、PD、TiKV、 TiFlash間のデータベースクラスタ内のデータに対して、コンポーネントレベルのTLS暗号化も要求します。
+TiDB Cloudは、データベースデータやバックアップデータを含む、保存されているビジネスデータに対して、デフォルトでストレージボリューム暗号化を使用します。TiDB Cloudは、転送中のデータに対してTLS暗号化を要求し、さらに、TiDB、PD、TiKV、 TiFlash間のデータベースクラスター内のデータに対して、コンポーネントレベルのTLS暗号化も要求します。
 
 TiDB Cloudにおけるビジネスデータ暗号化に関するより詳細な情報については、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
@@ -166,7 +166,7 @@ TiDB CloudはTLS 1.2またはTLS 1.3をサポートしています。
 
 TiDB Cloudでは、ニーズに応じて、 TiDB Cloud Dedicatedクラスター、 TiDB Cloud Premiumインスタンス、 TiDB Cloud Starterインスタンス、またはTiDB Cloud Essentialインスタンスを使用できます。
 
-TiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudは以下の対策によってクラスタのセキュリティを確保します。
+TiDB Cloud Dedicatedクラスターの場合、 TiDB Cloudは以下の対策によってクラスターのセキュリティを確保します。
 
 - 各クラスターごとに独立したサブアカウントとVPCを作成します。
 - 外部接続を隔離するためのファイアウォールルールを設定します。
@@ -188,10 +188,10 @@ TiDB Cloud Dedicatedクラスターの場合、クラスターへの接続手順
 
 1. ネットワークを認可してください。
 2. データベースのユーザーとログイン認証情報を設定してください。
-3. クラスタサーバー用にTLSをダウンロードして設定してください。
+3. クラスターサーバー用にTLSをダウンロードして設定してください。
 4. SQLクライアントを選択し、 TiDB Cloud UIに自動生成された接続文字列を表示させた後、その文字列を使用してSQLクライアント経由でクラスターに接続します。
 
-詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 </div>
 

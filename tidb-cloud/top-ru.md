@@ -53,7 +53,7 @@ TiDB Cloudプランによって、Top RUの機能は異なります。
 
 ### SQLリストを読む {#read-the-sql-list}
 
-**Top N SQL list**は、選択されたフィルタに対して最もRUを消費するSQL文を表示します。
+**Top N SQL list**は、選択されたフィルターに対して最もRUを消費するSQL文を表示します。
 
 | カラム        | 説明                                                                                                                                                                                   |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -145,7 +145,7 @@ RUスパイクを調査するには、以下のワークフローを使用して
 
 ### Top RUとTop SQLの違いは何ですか？ {#what-is-the-difference-between-top-ru-and-top-sql}
 
-[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql)は、特定のTiDBまたはTiKVノードにおけるCPU時間に基づいてSQL文をランク付けします。これはTiDB Cloud Dedicatedクラスタに適用されます。
+[Top SQL](/tidb-cloud/tidb-cloud-clinic.md#monitor-top-sql)は、特定のTiDBまたはTiKVノードにおけるCPU時間に基づいてSQL文をランク付けします。これはTiDB Cloud Dedicatedクラスターに適用されます。
 
 Top RUは、インスタンスレベルでのリクエストユニット（RU）消費量に基づいてSQL文をランク付けし、ユーザーレベルでの内訳をサポートします。TiDB Cloud PremiumインスタンスとTiDB Cloud Essentialインスタンスに適用されます。
 

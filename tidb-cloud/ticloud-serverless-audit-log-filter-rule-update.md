@@ -13,25 +13,25 @@ ticloud serverless audit-log filter-rule update [flags]
 
 ## 例 {#examples}
 
-対話型モードで監査ログフィルタルールを更新します。
+対話型モードで監査ログフィルタールールを更新します。
 
 ```shell
 ticloud serverless audit-log filter-rule update
 ```
 
-非対話型モードで監査ログフィルタルールを有効にする:
+非対話型モードで監査ログフィルタールールを有効にする:
 
 ```shell
 ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filter-rule-id <rule-id> --enabled
 ```
 
-非対話型モードで監査ログフィルタルールを無効にする:
+非対話型モードで監査ログフィルタールールを無効にする:
 
 ```shell
 ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filter-rule-id <rule-id> --enabled=false
 ```
 
-非対話型モードで監査ログフィルタルールのフィルタを更新します。
+非対話型モードで監査ログフィルタールールのフィルターを更新します。
 
 ```shell
 ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filter-rule-id <rule-id> --rule '{"users":["%@%"],"filters":[{"classes":["QUERY"],"tables":["test.t"]}]}'
@@ -45,7 +45,7 @@ ticloud serverless audit-log filter-rule update --cluster-id <cluster-id> --filt
 | --display-name string   | フィルタールールの表示名。                                                                                                                                           | いいえ | 非対話型モードでのみ動作します。                     |
 | --enabled                 | フィルタールールを有効または無効にします。                                                                                                                                   | いいえ | 非対話型モードでのみ動作します。                     |
 | --filter-rule-id string | フィルタールールの ID。                                                                                                                                           | はい  | 非対話型モードでのみ動作します。                     |
-| --rule string             | 完全なフィルタルール式。フィルタテンプレートを表示するには[`ticloud serverless audit-log filter template`](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)を使用します。 | いいえ | 非対話型モードでのみ動作します。                     |
+| --rule string             | 完全なフィルタールール式。フィルターテンプレートを表示するには[`ticloud serverless audit-log filter template`](/tidb-cloud/ticloud-serverless-audit-log-filter-rule-template.md)を使用します。 | いいえ | 非対話型モードでのみ動作します。                     |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                                                                                                                                      | いいえ | 対話型モードと非対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

@@ -16,7 +16,7 @@ SQL文のパフォーマンスを向上させるには、以下の原則を考�
 
 - スキャン対象データの範囲を最小限に抑えましょう。常に、必要最小限のデータのみをスキャンし、すべてのデータをスキャンすることは避けるのが最善策です。
 - 適切なインデックスを使用してください。SQL文の`WHERE`句の各列には、対応するインデックスが存在することを確認してください。そうでない場合、 `WHERE`句はテーブル全体をスキャンするため、パフォーマンスが低下します。
-- 適切な結合タイプを使用してください。クエリ内の各テーブルのサイズと相関関係に応じて、適切な結合タイプを選択することが非常に重要です。一般に、TiDB のコストベースのオプティマイザは、最適な結合タイプを自動的に選択します。ただし、場合によっては、結合タイプを手動で指定する必要がある場合があります。詳細については、[テーブル結合を使用するステートメントの実行計画](/explain-joins.md)を参照してください。
+- 適切な結合タイプを使用してください。クエリ内の各テーブルのサイズと相関関係に応じて、適切な結合タイプを選択することが非常に重要です。一般に、TiDB のコストベースのオプティマイザーは、最適な結合タイプを自動的に選択します。ただし、場合によっては、結合タイプを手動で指定する必要がある場合があります。詳細については、[テーブル結合を使用するステートメントの実行計画](/explain-joins.md)を参照してください。
 - 適切なストレージエンジンを使用してください。ハイブリッドトランザクションおよび分析処理（HTAP）ワークロードには、 TiFlashストレージエンジンを使用することをお勧めします。[HTAPクエリ](/develop/dev-guide-hybrid-oltp-and-olap-queries.md)を参照してください。
 
 TiDB Cloudには、スロークエリを分析するのに役立つツールがいくつか用意されています。以下のセクションでは、スロークエリを最適化するためのいくつかの方法について説明します。
@@ -25,7 +25,7 @@ TiDB Cloudには、スロークエリを分析するのに役立つツールが�
 
 TiDB Cloudコンソールには、 [**Diagnosis**](/tidb-cloud/tune-performance.md#view-the-diagnosis-page)ページ上に[**SQL Statement**](/tidb-cloud/tune-performance.md#statement-analysis)タブが用意されています。このタブでは、TiDB Cloudリソース上のすべてのデータベースの SQL文の実行統計情報を収集します。これを使用して、合計または単一の実行に長い時間を要する SQL文を特定し、分析できます。
 
-このページでは、構造が同じ SQL クエリ (クエリパラメータが一致しない場合でも) は、同じ SQL文にグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は、どちらも同じ SQL文`select * from employee where id in (...)`の一部です。
+このページでは、構造が同じ SQL クエリ (クエリパラメーターが一致しない場合でも) は、同じ SQL文にグループ化されることに注意してください。たとえば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は、どちらも同じ SQL文`select * from employee where id in (...)`の一部です。
 
 **SQL Statement**でいくつかの重要な情報を確認できます。
 
@@ -65,7 +65,7 @@ SQLクエリが遅くなる最も一般的な原因は、 `SELECT`文がフル�
 
 - セカンダリインデックスを使用する
 - カバリングインデックスを使用する
-- プライマリーインデックスを使用する
+- プライマリインデックスを使用する
 
 ### DMLのベストプラクティス {#dml-best-practices}
 
@@ -107,7 +107,7 @@ SQLパフォーマンスチューニングを行ってもパフォーマンス�
 
 [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)を使用してホットスポットの問題を分析できます。
 
-Key Visualizerを使用すると、 TiDB Cloud Dedicatedクラスタの使用パターンを分析し、トラフィックのホットスポットをトラブルシューティングできます。このページでは、TiDB Cloud Dedicatedクラスタのトラフィックの推移を視覚的に表示します。
+Key Visualizerを使用すると、 TiDB Cloud Dedicatedクラスターの使用パターンを分析し、トラフィックのホットスポットをトラブルシューティングできます。このページでは、TiDB Cloud Dedicatedクラスターのトラフィックの推移を視覚的に表示します。
 
 Key Visualizerでは、以下の情報を確認できます。まず、いくつかの[基本概念](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts)を理解しておく必要があるかもしれません。
 

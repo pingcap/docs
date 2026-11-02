@@ -13,7 +13,7 @@ ticloud serverless audit-log filter-rule create [flags]
 
 ## 例 {#examples}
 
-対話型モードでフィルタルールを作成します。
+対話型モードでフィルタールールを作成します。
 
 ```shell
 ticloud serverless audit-log filter-rule create

@@ -23,11 +23,11 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 ## C {#c}
 
-### クラスタ {#cluster}
+### クラスター {#cluster}
 
 TiDB Cloudでは、クラスターとは、ノードトポロジー、インスタンスタイプ、ストレージ構成、スケーリングモデルなどの明確なインフラストラクチャの詳細を含む、専用のクラウドデプロイメントのことです。
 
-TiDB Cloudのプランの中で、このデプロイメントモデルを採用しているのはTiDB Cloud Dedicatedクラスタのみです。
+TiDB Cloudのプランの中で、このデプロイメントモデルを採用しているのはTiDB Cloud Dedicatedクラスターのみです。
 
 ### クレジット {#credit}
 
@@ -116,9 +116,9 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 プロジェクトの機能はプロジェクトの種類によって異なります。現在、プロジェクトには以下の3種類があります。
 
-- **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
+- **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスターの設定をプロジェクトごとに個別に管理できます。
 - **TiDB X プロジェクト**: このプロジェクトタイプは TiDB X インスタンスでのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは [**My TiDB**](https://tidbcloud.com/tidbs) ページでプロジェクトを作成する際のデフォルトのプロジェクトタイプです。
-- **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用して TiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) エンドポイントから取得できます。
+- **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナーとして機能するため、これらのインスタンスには、プロジェクト ID を使用して TiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) エンドポイントから取得できます。
 
 これらのプロジェクトタイプの違いの詳細については、 [プロジェクト](/tidb-cloud/manage-user-access.md#projects)を参照してください。
 
@@ -152,7 +152,7 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 ### レプリカ {#replica}
 
-同一または異なるリージョンに配置される、同じデータを含む独立したデータベース。レプリカは、ディザスタリカバリ目的やパフォーマンス向上のためによく使用されます。
+同一または異なるリージョンに配置される、同じデータを含む独立したデータベース。レプリカは、ディザスターリカバリ目的やパフォーマンス向上のためによく使用されます。
 
 ### レプリケーションキャパシティユニット（RCU） {#replication-capacity-unit-rcu}
 
@@ -189,7 +189,7 @@ TiDB Cloudでは、クラスターはクラウド上に専用デプロイされ�
 
 ### TiDBノード {#tidb-node}
 
-トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、TiDB Cloud Dedicatedクラスタが処理できる同時クエリの数が増加します。
+トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、TiDB Cloud Dedicatedクラスターが処理できる同時クエリの数が増加します。
 
 ### TiDB Cloudリソース {#tidb-cloud-resource}
 
@@ -206,7 +206,7 @@ TiDB Xアーキテクチャは、 TiDB Cloud Starter、 Essential、および Pr
 
 ### TiDB Xインスタンス {#tidb-x-instance}
 
-TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudサービスです。基盤となるクラスタトポロジーの管理や理解は不要です。
+TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudサービスです。基盤となるクラスタートポロジーの管理や理解は不要です。
 
 TiDB Cloudのプランのうち、 TiDB Cloud Starter、 Essential、およびPremiumはTiDB Xアーキテクチャを使用しています。したがって、「TiDB Xインスタンス」という表現は、 TiDB Cloud Starter、 Essential、またはPremiumインスタンスを指します。
 
@@ -220,7 +220,7 @@ TiKVからリアルタイムでデータを複製し、リアルタイムの分�
 
 ### トラフィックフィルター {#traffic-filter}
 
-SQLクライアント経由でTiDB Cloudリソースへのアクセスが許可されているIPアドレスとクラスレスドメイン間ルーティング（CIDR）アドレスのリスト。トラフィックフィルタはデフォルトでは空です。
+SQLクライアント経由でTiDB Cloudリソースへのアクセスが許可されているIPアドレスとクラスレスドメイン間ルーティング（CIDR）アドレスのリスト。トラフィックフィルターはデフォルトでは空です。
 
 ## V {#v}
 

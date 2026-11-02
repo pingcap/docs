@@ -13,13 +13,13 @@ ticloud serverless audit-log filter-rule delete [flags]
 
 ## 例 {#examples}
 
-対話型モードで監査ログフィルタルールを削除します。
+対話型モードで監査ログフィルタールールを削除します。
 
 ```shell
 ticloud serverless audit-log filter-rule delete
 ```
 
-非対話型モードで監査ログフィルタルールを削除します。
+非対話型モードで監査ログフィルタールールを削除します。
 
 ```shell
 ticloud serverless audit-log filter-rule delete --cluster-id <cluster-id> --filter-rule-id <rule-id>

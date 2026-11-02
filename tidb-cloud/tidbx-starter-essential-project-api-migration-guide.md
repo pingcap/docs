@@ -7,7 +7,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 2026 年 4月 15日より、TiDB Cloud はリソースタイプごとに個別のプロジェクトタイプを導入します。{{{ .starter }}} と Essential インスタンスについては、TiDB X プロジェクト内、または組織レベルで管理できるようになります。詳細は、[TiDB Xインスタンスのプロジェクト移行に関するFAQ](/tidb-cloud/tidbx-instance-move-faq.md) を参照してください。
 
-このガイドは、既存の `v1beta` 呼び出しの大部分を引き続き動作させつつ、{{{ .starter }}} と Essential インスタンスに対するプロジェクト検索およびクラスタ作成にのみ最小限の変更を加えたい API 呼び出し元を対象としています。
+このガイドは、既存の `v1beta` 呼び出しの大部分を引き続き動作させつつ、{{{ .starter }}} と Essential インスタンスに対するプロジェクト検索およびクラスター作成にのみ最小限の変更を加えたい API 呼び出し元を対象としています。
 
 これらのプロジェクトモデルの変更により、以下の API 変更に注意してください。
 
@@ -24,7 +24,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 | 値 | 説明 |
 |---|---|
-| `dedicated` | TiDB Cloud Dedicated クラスタのみを含むプロジェクトです。 |
+| `dedicated` | TiDB Cloud Dedicated クラスターのみを含むプロジェクトです。 |
 | `tidbx` | {{{ .starter }}} や Essential など、TiDB X インスタンスのみを含むプロジェクトです。 |
 | `tidbx_virtual` | どのプロジェクトにも割り当てられていない TiDB X インスタンス用の、デフォルトの組織レベルプロジェクトです。各組織には 1つの `tidbx_virtual` プロジェクトのみ存在します。 |
 
@@ -47,7 +47,7 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 すでに {{{ .starter }}} または Essential インスタンスを所有しており、現在の `project_id` のみが必要な場合は、その値をハードコードする代わりに、以下の方法を使用してください。
 
-1. クラスタ詳細エンドポイントを呼び出します。
+1. クラスター詳細エンドポイントを呼び出します。
 
     ```http
     GET https://serverless.tidbapi.com/v1beta1/clusters/{clusterId}
@@ -73,9 +73,9 @@ summary: TiDB Cloud が TiDB X インスタンス向けに個別のプロジェ�
 
 > **Note:**
 >
-> - この方法は、`POST /api/v1beta/projects/{project_id}/clusters` を使用したクラスタ作成には適用されません。
-> - `v1beta` で作成できるのは {{{ .starter }}} インスタンスと TiDB Cloud Dedicated クラスタのみです。{{{ .essential }}} インスタンスを作成するには、代わりに `v1beta1` API を使用してください。詳細は、[TiDB Cloud API documentation](https://docs.pingcap.com/api/) を参照してください。 
-> - 新しい {{{ .starter }}} または Essential インスタンスを作成する場合は、クラスタ作成ワークフローが `tidbx` プロジェクトを対象としていることを確認してください。
+> - この方法は、`POST /api/v1beta/projects/{project_id}/clusters` を使用したクラスター作成には適用されません。
+> - `v1beta` で作成できるのは {{{ .starter }}} インスタンスと TiDB Cloud Dedicated クラスターのみです。{{{ .essential }}} インスタンスを作成するには、代わりに `v1beta1` API を使用してください。詳細は、[TiDB Cloud API documentation](https://docs.pingcap.com/api/) を参照してください。 
+> - 新しい {{{ .starter }}} または Essential インスタンスを作成する場合は、クラスター作成ワークフローが `tidbx` プロジェクトを対象としていることを確認してください。
 
 ## 必要な変更の概要 {#summary-of-required-changes}
 

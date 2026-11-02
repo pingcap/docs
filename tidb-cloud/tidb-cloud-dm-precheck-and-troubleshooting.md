@@ -34,7 +34,7 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 ### エラーメッセージ: Check whether mysql binlog_row_image is FULL {#error-message-check-whether-mysql-binlog-row-image-is-full}
 
 - Amazon Aurora MySQL: `binlog_row_image`は設定できません。この事前チェック項目は Amazon Aurora MySQL では失敗しません。完全データ移行と増分データ移行の両方をサポートするために、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
-- Amazon RDS: 手順は`binlog_format`パラメータの設定と似ています。唯一の違いは、変更する必要のあるパラメータが`binlog_format`ではなく`binlog_row_image`であることです。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
+- Amazon RDS: 手順は`binlog_format`パラメーターの設定と似ています。唯一の違いは、変更する必要のあるパラメーターが`binlog_format`ではなく`binlog_row_image`であることです。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 - MySQL: `set global binlog_row_image = FULL;` 。 [バイナリログのオプションと変数](https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_row_image)を参照してください。
 
 ### エラーメッセージ: Check whether migrated dbs are in binlog_do_db/binlog_ignore_db {#error-message-check-whether-migrated-dbs-are-in-binlog-do-db-binlog-ignore-db}
@@ -46,14 +46,14 @@ summary: データ移行時に発生する事前チェックエラー、移行�
 
 Amazon Aurora MySQL の場合、この事前チェック項目はエラーになりません。完全データ移行と増分データ移行の両方をサポートするために、Amazon Aurora MySQL ライターインスタンスを使用していることを確認してください。
 
-Amazon RDS の場合、次のパラメータを変更する必要があります: `replicate-do-db` 、 `replicate-do-table` 、 `replicate-ignore-db` 、および`replicate-ignore-table` 。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
+Amazon RDS の場合、次のパラメーターを変更する必要があります: `replicate-do-db` 、 `replicate-do-table` 、 `replicate-ignore-db` 、および`replicate-ignore-table` 。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 
 ### エラーメッセージ：Check if connection concurrency exceeds database's maximum connection limit {#error-message-check-if-connection-concurrency-exceeds-database-s-maximum-connection-limit}
 
 上流のデータベースでエラーが発生した場合は、 `max_connections`を次のように設定してください。
 
-- Amazon Aurora MySQL: このプロセスは、 `binlog_format`の設定と似ています。唯一の違いは、変更するパラメータが`binlog_format`ではなく`max_connections`であることです。 [Amazon Aurora MySQL互換クラスターでバイナリログを有効にするにはどうすればよいですか？](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。
-- Amazon RDS: 手順は`binlog_format`の設定と似ています。唯一の違いは、変更するパラメータが`binlog_format`ではなく`max_connections`であることです。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
+- Amazon Aurora MySQL: このプロセスは、 `binlog_format`の設定と似ています。唯一の違いは、変更するパラメーターが`binlog_format`ではなく`max_connections`であることです。 [Amazon Aurora MySQL互換クラスターでバイナリログを有効にするにはどうすればよいですか？](https://aws.amazon.com/premiumsupport/knowledge-center/enable-binary-logging-aurora/?nc1=h_ls)を参照してください。
+- Amazon RDS: 手順は`binlog_format`の設定と似ています。唯一の違いは、変更するパラメーターが`binlog_format`ではなく`max_connections`であることです。[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 - MySQL: ドキュメント[max_connections](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections)に従って`max_connections`を設定します。
 
 TiDB Cloudクラスターでエラーが発生した場合は、ドキュメントの[max_connections](https://docs.pingcap.com/tidb/stable/system-variables#max_connections)に従って`max_connections`を設定します。
@@ -70,11 +70,11 @@ TiDB Cloudクラスターでエラーが発生した場合は、ドキュメン�
 
 ### エラーメッセージ："Failed to connect to the source database using given parameters. Please make sure the source database is up and can be connected using the given parameters." {#error-message-failed-to-connect-to-the-source-database-using-given-parameters-please-make-sure-the-source-database-is-up-and-can-be-connected-using-the-given-parameters}
 
-このエラーは、ソースデータベースへの接続に失敗したことを意味します。ソースデータベースが起動しており、指定されたパラメータを使用して接続できるかどうかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてタスクの復旧を試みてください。
+このエラーは、ソースデータベースへの接続に失敗したことを意味します。ソースデータベースが起動しており、指定されたパラメーターを使用して接続できるかどうかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてタスクの復旧を試みてください。
 
 ### 移行タスクが中断され、"driver: bad connection"または"invalid connection"というエラーが含まれる {#the-migration-task-is-interrupted-and-contains-the-error-driver-bad-connection-or-invalid-connection}
 
-このエラーは、ダウンストリームの TiDB クラスタへの接続に失敗したことを意味します。ダウンストリームの TiDB クラスタが正常な状態（ `Available`および`Modifying`を含む）であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認してください。ダウンストリームの TiDB クラスタが利用可能であることを確認したら、 **Restart**をクリックしてタスクを再開してみてください。
+このエラーは、ダウンストリームの TiDB クラスターへの接続に失敗したことを意味します。ダウンストリームの TiDB クラスターが正常な状態（ `Available`および`Modifying`を含む）であり、ジョブで指定されたユーザー名とパスワードで接続できるかどうかを確認してください。ダウンストリームの TiDB クラスターが利用可能であることを確認したら、 **Restart**をクリックしてタスクを再開してみてください。
 
 ### エラーメッセージ："Failed to connect to the TiDB cluster using the given user and password. Please make sure TiDB Cluster is up and can be connected to using the given user and password." {#error-message-failed-to-connect-to-the-tidb-cluster-using-the-given-user-and-password-please-make-sure-tidb-cluster-is-up-and-can-be-connected-to-using-the-given-user-and-password}
 
@@ -86,11 +86,11 @@ TiDB クラスターのストレージが不足しています。 [TiKVノード
 
 ### エラーメッセージ："Failed to connect to the source database. Please check whether the database is available or the maximum connections have been reached." {#error-message-failed-to-connect-to-the-source-database-please-check-whether-the-database-is-available-or-the-maximum-connections-have-been-reached}
 
-ソースデータベースへの接続に失敗しました。ソースデータベースが起動しているか、データベース接続数が上限に達していないか、ジョブで指定されたパラメータを使用して接続できるかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてジョブを再開してください。
+ソースデータベースへの接続に失敗しました。ソースデータベースが起動しているか、データベース接続数が上限に達していないか、ジョブで指定されたパラメーターを使用して接続できるかを確認してください。ソースデータベースが利用可能であることを確認したら、 **Restart**をクリックしてジョブを再開してください。
 
 ### エラーメッセージ："Error 1273: Unsupported collation when new collation is enabled: 'utf8mb4_0900_ai_ci'" {#error-message-error-1273-unsupported-collation-when-new-collation-is-enabled-utf8mb4-0900-ai-ci}
 
-ダウンストリームのTiDBクラスタでスキーマを作成できませんでした。このエラーは、アップストリームのMySQLで使用されている照合順序がTiDBクラスタでサポートされていないことを意味します。
+ダウンストリームのTiDBクラスターでスキーマを作成できませんでした。このエラーは、アップストリームのMySQLで使用されている照合順序がTiDBクラスターでサポートされていないことを意味します。
 
 この問題を解決するには、 [サポートされている照合順序](/character-set-and-collation.md#character-sets-and-collations-supported-by-tidb)に基づいて TiDB クラスターにスキーマを作成し、 **Restart**をクリックしてタスクを再開します。
 

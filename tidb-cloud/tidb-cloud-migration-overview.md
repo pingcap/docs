@@ -55,7 +55,7 @@ SQL、CSV、Parquet、またはAurora Snapshot形式のデータファイルを�
 
 ### クラウドストレージアクセスを構成する {#configure-cloud-storage-access}
 
-ソースデータがAmazon S3、Google Cloud Storage（GCS）バケット、Azure Blob Storageコンテナ、またはAlibaba Cloud OSSバケットに保存されている場合、 TiDB Cloudにデータをインポートまたは移行する前に、ストレージへのアクセスを設定する必要があります。詳細については、 [TiDB Cloud Starter または Essential の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)と[TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)を参照してください。
+ソースデータがAmazon S3、Google Cloud Storage（GCS）バケット、Azure Blob Storageコンテナー、またはAlibaba Cloud OSSバケットに保存されている場合、 TiDB Cloudにデータをインポートまたは移行する前に、ストレージへのアクセスを設定する必要があります。詳細については、 [TiDB Cloud Starter または Essential の外部ストレージアクセスを構成する](/tidb-cloud/configure-external-storage-access.md)と[TiDB Cloud Dedicatedの外部ストレージアクセスを構成する](/tidb-cloud/dedicated-external-storage.md)を参照してください。
 
 ### データインポートの命名規則 {#naming-conventions-for-data-import}
 

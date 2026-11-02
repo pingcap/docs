@@ -137,15 +137,15 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | ScaleCluster | クラスターをスケールする                                                         |
 | DownloadTiDBClusterCA | CA証明書をダウンロード                                                         |
 | OpenWebSQLConsole | Web SQL 経由で TiDB クラスターに接続する                                          |
-| SetRootPassword | TiDBクラスタのルートパスワードを設定する                                               |
-| UpdateIPAccessList | TiDB クラスタの IP アクセスリストを更新する                                          |
-| SetAutoBackup | TiDBクラスタの自動バックアップメカニズムを設定する                                          |
-| DoManualBackup | TiDBクラスタの手動バックアップを実行する                                               |
+| SetRootPassword | TiDBクラスターのルートパスワードを設定する                                               |
+| UpdateIPAccessList | TiDB クラスターの IP アクセスリストを更新する                                          |
+| SetAutoBackup | TiDBクラスターの自動バックアップメカニズムを設定する                                          |
+| DoManualBackup | TiDBクラスターの手動バックアップを実行する                                               |
 | BackupCompleted | バックアップタスクが完了しました                                                     |
 | DeleteBackupTask | バックアップタスクを削除する                                                       |
 | DeleteBackup | バックアップファイルを削除する                                                      |
-| RestoreFromBackup | バックアップファイルに基づいてTiDBクラスタに復元する                                         |
-| RestoreFromTrash | ゴミ箱内のバックアップファイルに基づいてTiDBクラスタに復元する                                    |
+| RestoreFromBackup | バックアップファイルに基づいてTiDBクラスターに復元する                                         |
+| RestoreFromTrash | ゴミ箱内のバックアップファイルに基づいてTiDBクラスターに復元する                                    |
 | ImportDataFromAWS | AWSからデータをインポートする                                                     |
 | ImportDataFromGCP | Google Cloud からデータをインポートする                                           |
 | ImportDataFromLocal | ローカルディスクからデータをインポートする                                                |
@@ -155,8 +155,8 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | DeleteMigrationJob | 移行ジョブを削除する                                                           |
 | ShowDiagnose | 診断情報を表示                                                              |
 | DBAuditLogAction | データベース監査ログのアクティビティを設定する                                              |
-| AddDBAuditFilter | データベース監査ログフィルタを追加する                                                  |
-| DeleteDBAuditFilter | データベース監査ログフィルタを削除する                                                  |
+| AddDBAuditFilter | データベース監査ログフィルターを追加する                                                  |
+| DeleteDBAuditFilter | データベース監査ログフィルターを削除する                                                  |
 | EditProject | プロジェクトの情報を編集する                                                       |
 | DeleteProject | プロジェクトを削除する                                                          |
 | BindSupportPlan | サポートプランを締結する                                                         |
@@ -189,8 +189,8 @@ TiDB Cloudは、 [TiDB Cloudコンソール](https://tidbcloud.com)上のユー�
 | org_name      | string    | イベントが属する組織名                                                    |
 | project_id    | uint64    | イベントが属するプロジェクトID                                               |
 | project_name  | string    | イベントが属するプロジェクト名                                                |
-| cluster_id    | uint64    | イベントが属するクラスタID                                                 |
-| cluster_name  | string    | イベントが属するクラスタ名                                                  |
+| cluster_id    | uint64    | イベントが属するクラスターID                                                 |
+| cluster_name  | string    | イベントが属するクラスター名                                                  |
 | trace_id      | string    | オペレーターによって開始されたリクエストのトレースID。このフィールドは現在空ですが、将来のリリースで利用可能になる予定です。 |
 | result        | enum      | イベント結果: `success`または`failure`                                  |
 | details       | json      | イベントの詳細な説明                                                     |

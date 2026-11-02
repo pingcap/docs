@@ -140,7 +140,7 @@ TiDB Cloud が監査ログを書き込む宛先として、組織所有の Googl
     3. **DB Audit Logging** ページで、右上の **Enable** をクリックします。
     4. **Enable Database Audit Logging** ダイアログで、**Google Cloud Server Account ID** セクションを見つけ、後で使用するために **Service Account ID** を記録します。
 
-2. Google Cloud コンソールで **IAM & Admin** > **Roles** に移動し、ストレージコンテナに対して次の書き込み専用権限を持つロールが存在するか確認します。
+2. Google Cloud コンソールで **IAM & Admin** > **Roles** に移動し、ストレージコンテナーに対して次の書き込み専用権限を持つロールが存在するか確認します。
 
     - storage.objects.create
     - storage.objects.delete

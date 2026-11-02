@@ -18,7 +18,7 @@ summary: ビジネスワークロードを分離するために TiDB ノード�
     - 各 TiDB ノードグループには一意のエンドポイントがあります。
     - TiDB ノードグループを削除すると、関連するネットワーク設定 (プライベートリンクや IP アクセスリストなど) も削除されます。
 
-- デフォルトグループ: クラスタを作成すると、デフォルトのTiDBノードグループが作成されます。そのため、各クラスタにはデフォルトグループが存在します。デフォルトグループは削除できません。
+- デフォルトグループ: クラスターを作成すると、デフォルトのTiDBノードグループが作成されます。そのため、各クラスターにはデフォルトグループが存在します。デフォルトグループは削除できません。
 
 ## 前提条件 {#prerequisites}
 
@@ -27,7 +27,7 @@ summary: ビジネスワークロードを分離するために TiDB ノード�
 
 > **Note:**
 >
-> TiDBノードグループはクラスタ作成中に作成できません。クラスタが作成され、 **Available**状態になった後にグループを追加する必要があります。
+> TiDBノードグループはクラスター作成中に作成できません。クラスターが作成され、 **Available**状態になった後にグループを追加する必要があります。
 
 ## TiDBノードグループを作成する {#create-a-tidb-node-group}
 
@@ -101,9 +101,9 @@ TiDBノードグループを作成しても、デフォルトグループのエ�
 
 6. このノードグループの新しい接続を作成するには、 **Create Private Endpoint Connection**をクリックします。
 
-    - AWS にデプロイされたクラスターについては、 [AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+    - AWS にデプロイされたクラスターについては、 [AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
 
-    - Google Cloud にデプロイされたクラスタについては、 [Google Cloud Private Service Connect 経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+    - Google Cloud にデプロイされたクラスターについては、 [Google Cloud Private Service Connect 経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
     > **Note:**
     >

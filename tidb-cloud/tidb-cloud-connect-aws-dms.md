@@ -21,7 +21,7 @@ DMS関連リソースを管理するための十分なアクセス権を持つAW
 TiDB Cloudアカウントと、 TiDB Cloud Starter、 TiDB Cloud Essential、またはTiDB Cloud Dedicated クラスターをお持ちであることが前提となります。お持ちでない場合は、以下のドキュメントを参照して作成してください。
 
 - [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
-- [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
+- [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 ## ネットワークを構成する {#configure-network}
 
@@ -144,7 +144,7 @@ TiDB Cloud Dedicated の場合、クライアントはパブリックエンド�
 
     - **Server name**: TiDB Cloud Dedicatedクラスターの`HOST` 。
     - **Port**: TiDB Cloud Dedicated クラスターの`PORT` 。
-    - **User name**：移行用のTiDB Cloud Dedicatedクラスタのユーザー。DMS要件を満たしていることを確認してください。
+    - **User name**：移行用のTiDB Cloud Dedicatedクラスターのユーザー。DMS要件を満たしていることを確認してください。
     - **Password**: TiDB Cloud Dedicated クラスターユーザーのパスワード。
     - **Secure Socket Layer (SSL) mode**：パブリックエンドポイント経由で接続する場合は、トランスポートセキュリティを確保するために、モードを**verify-full**に設定することを強くお勧めします。プライベートエンドポイント経由で接続する場合は、 **none**に設定できます。
     - (オプション) **CA certificate**: [TiDB Cloud DedicatedへのTLS接続](/tidb-cloud/tidb-cloud-tls-connect-to-dedicated.md)に従って CA 証明書を取得します。
