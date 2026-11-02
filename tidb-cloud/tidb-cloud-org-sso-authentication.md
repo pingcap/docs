@@ -13,7 +13,7 @@ TiDB Cloud は、次の2種類の SSO 認証をサポートしています。
 
 - Cloud Organization SSO: メンバーは、組織で指定された認証方法を使用して、 TiDB Cloudのカスタムログインページにログインできます。Cloud Organization SSO はデフォルトで無効になっています。
 
-標準SSOと比較して、Cloud Organization SSOはより柔軟でカスタマイズ性に優れているため、組織のセキュリティとコンプライアンス要件をより適切に満たすことができます。例えば、ログインページに表示される認証方法を指定したり、ログインに使用できるメールアドレスドメインを制限したり、メンバーが[OpenID Connect（OIDC）](https://openid.net/connect/)または[Security Assertion Markup Language（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)アイデンティティプロトコルを使用するIDプロバイダー（IdP）を使用してTiDB Cloudにログインできるようにしたりできます。
+標準SSOと比較して、Cloud Organization SSOはより柔軟でカスタマイズ性に優れているため、組織のセキュリティとコンプライアンス要件をより適切に満たせます。例えば、ログインページに表示される認証方法を指定したり、ログインに使用できるメールアドレスドメインを制限したり、メンバーが[OpenID Connect（OIDC）](https://openid.net/connect/)または[Security Assertion Markup Language（SAML）](https://en.wikipedia.org/wiki/Security_Assertion_Markup_Language)アイデンティティプロトコルを使用するIDプロバイダー（IdP）を使用してTiDB Cloudにログインできるようにしたりできます。
 
 このドキュメントでは、組織の認証スキームを標準SSOから Cloud Organization SSO に移行する方法について説明します。
 

@@ -144,7 +144,7 @@ summary: "`tidbcloud_serverless_export` リソースを使用して、 TiDB Clou
 
 ## TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクをインポートする {#import-a-data-export-task-for-a-tidb-cloud-starter-or-tidb-cloud-essential-instance}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクが Terraform によって管理されていない場合は、インポートすることで Terraform 管理下に置くことができます。
+TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのデータエクスポートタスクが Terraform によって管理されていない場合は、インポートすることで Terraform 管理下に置けます。
 
 1. 新しい`tidbcloud_serverless_export`リソースのインポートブロックを追加します。
 

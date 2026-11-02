@@ -57,7 +57,7 @@ TiDB Cloud Filesystem では、読み取り、書き込み、ストレージ、�
 
 > **Note:**
 >
-> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudにサインアップした場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
+> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudにサインアップした場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行えますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
 
 </CustomContent>
 
@@ -223,7 +223,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 
 > **Note:**
 >
-> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudにサインアップした場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行うことができますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
+> [AWS Marketplace](https://aws.amazon.com/marketplace) 、 [Azure Marketplace](https://azuremarketplace.microsoft.com/) 、または[Google Cloud Marketplace](https://console.cloud.google.com/marketplace)経由でTiDB Cloudにサインアップした場合、AWSアカウント、Azureアカウント、またはGoogle Cloudアカウントを通じて直接支払いを行えますが、 TiDB Cloudコンソールで支払い方法を追加したり、請求書をダウンロードしたりできません。
 
 </CustomContent>
 
@@ -259,7 +259,7 @@ TiDB Cloudは、概念実証（PoC）ユーザー向けに一定数のクレジ�
 
 ## 契約 {#contract}
 
-組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB CloudコンソールでカスタマイズされたTiDB Cloudサブスクリプションを管理して、コンプライアンス要件を満たすことができます。それ以外の場合は、このセクションをスキップしてください。
+組織内で`Organization Owner`または`Organization Billing Manager`の役割を担っている場合は、 TiDB CloudコンソールでカスタマイズされたTiDB Cloudサブスクリプションを管理して、コンプライアンス要件を満たせます。それ以外の場合は、このセクションをスキップしてください。
 
 弊社営業担当者と契約内容について合意し、オンラインで契約内容を確認して承認するためのメールを受け取った場合は、以下の手順を実行してください。
 
