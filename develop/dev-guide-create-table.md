@@ -30,7 +30,7 @@ aliases: ['/ja/tidb/stable/dev-guide-create-table/','/ja/tidb/dev/dev-guide-crea
 CREATE TABLE {table_name} ( {elements} );
 ```
 
-**パラメータの説明**
+**パラメーターの説明**
 
 - `{table_name}` : 作成するテーブルの名前。
 - `{elements}` : 列定義や主キー定義など、テーブル要素をカンマで区切ったリスト。
@@ -54,7 +54,7 @@ CREATE TABLE `bookshop`.`users` (
 {column_name} {data_type} {column_qualification}
 ```
 
-**パラメータの説明**
+**パラメーターの説明**
 
 - `{column_name}` : 列名。
 - `{data_type}` : 列の[データ型](/data-type-overview.md)。
@@ -111,7 +111,7 @@ CREATE TABLE `bookshop`.`books` (
 
 **主キー**は`CREATE TABLE`文で定義されます。[主キー制約](/constraints.md#primary-key)は、制約付き列すべてに NULL 以外の値のみが含まれることを要求します。
 
-テーブルは、**主キー**なし、または非整数の**主キー**を使用して作成できます。この場合、TiDB は**暗黙の主キー**として`_tidb_rowid`を作成します。暗黙の主キー`_tidb_rowid`は単調増加する性質を持つため、書き込み負荷の高いシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み負荷の高い場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)および[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメータを使用してデータをシャーディングすることを検討してください。ただし、これにより読み取り増幅が発生する可能性があるため、トレードオフを独自に判断する必要があります。
+テーブルは、**主キー**なし、または非整数の**主キー**を使用して作成できます。この場合、TiDB は**暗黙の主キー**として`_tidb_rowid`を作成します。暗黙の主キー`_tidb_rowid`は単調増加する性質を持つため、書き込み負荷の高いシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み負荷の高い場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)および[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメーターを使用してデータをシャーディングすることを検討してください。ただし、これにより読み取り増幅が発生する可能性があるため、トレードオフを独自に判断する必要があります。
 
 テーブルの**主キー**が[整数型](/data-type-numeric.md#integer-types)で`AUTO_INCREMENT`が使用されている場合、 `SHARD_ROW_ID_BITS`を使用してもホットスポットを回避できません。ホットスポットを回避する必要があり、かつ連続的かつ増分的な主キーが必要ない場合は、 `AUTO_INCREMENT`の代わりに[`AUTO_RANDOM`](/auto-random.md)を使用して行 ID の連続性を排除できます。
 
@@ -246,7 +246,7 @@ TiFlashはデプロイ後にデータを自動的に複製しません。その�
 ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 ```
 
-**パラメータの説明**
+**パラメーターの説明**
 
 - `{table_name}` : テーブル名。
 - `{count}` : 複製されたレプリカの数。0 の場合、複製されたレプリカは削除されます。

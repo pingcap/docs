@@ -5,7 +5,7 @@ summary: パブリックエンドポイントを介して、 TiDB Cloud Starter�
 
 # パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します {#connect-to-tidb-cloud-starter-or-essential-via-public-endpoint}
 
-このドキュメントでは、コンピュータ上のSQLクライアントを使用してパブリックエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法、およびパブリックエンドポイントを無効にする方法について説明します。
+このドキュメントでは、コンピューター上のSQLクライアントを使用してパブリックエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法、およびパブリックエンドポイントを無効にする方法について説明します。
 
 ## エンドポイントモデルを選択する {#choose-an-endpoint-model}
 

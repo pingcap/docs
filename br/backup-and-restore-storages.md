@@ -5,15 +5,15 @@ summary: TiDBは、Amazon S3、Google Cloud Storage、Azure Blob Storage、NFS�
 
 # バックアップストレージ {#backup-storages}
 
-TiDBは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、NFSへのバックアップデータの保存をサポートしています。具体的には、 `br`コマンドの`--storage`または`-s`のパラメータでバックアップストレージのURIを指定できます。このドキュメントでは、さまざまな外部ストレージサービスの[URI形式](#uri-format)、[認証](#authentication)、および[サーバー側の暗号化](#server-side-encryption)について紹介します。
+TiDBは、Amazon S3、Google Cloud Storage（GCS）、Azure Blob Storage、NFSへのバックアップデータの保存をサポートしています。具体的には、 `br`コマンドの`--storage`または`-s`のパラメーターでバックアップストレージのURIを指定できます。このドキュメントでは、さまざまな外部ストレージサービスの[URI形式](#uri-format)、[認証](#authentication)、および[サーバー側の暗号化](#server-side-encryption)について紹介します。
 
 ## TiKVに資格情報を送信する {#send-credentials-to-tikv}
 
-| CLIパラメータ                     | 説明                                     | デフォルト値 |
+| CLIパラメーター                     | 説明                                     | デフォルト値 |
 | :--------------------------- | :------------------------------------- | :----- |
 | `--send-credentials-to-tikv` | BRによって取得された資格情報を TiKV に送信するかどうかを制御します。 | `true` |
 
-デフォルトでは、 BRはAmazon S3、GCS、またはAzure Blob Storageをストレージシステムとして使用する場合、各TiKVノードに認証情報を送信します。この動作は設定を簡素化し、パラメータ`--send-credentials-to-tikv` （または短縮形`-c` ）によって制御されます。
+デフォルトでは、 BRはAmazon S3、GCS、またはAzure Blob Storageをストレージシステムとして使用する場合、各TiKVノードに認証情報を送信します。この動作は設定を簡素化し、パラメーター`--send-credentials-to-tikv` （または短縮形`-c` ）によって制御されます。
 
 この操作はクラウド環境には適用されないことに注意してください。IAMロール認証を使用する場合、各ノードには独自のロールと権限が付与されます。この場合、認証情報の送信を無効にするには、 `--send-credentials-to-tikv=false` （または`-c=0` ）を設定する必要があります。
 
@@ -41,7 +41,7 @@ URI 形式の詳細については、 [外部ストレージサービスのURI�
 
 ### URIの例 {#uri-examples}
 
-このセクションでは、 `host`パラメータとして`external` (前のセクションでは`bucket name`または`container name` ) を使用した URI の例をいくつか示します。
+このセクションでは、 `host`パラメーターとして`external` (前のセクションでは`bucket name`または`container name` ) を使用した URI の例をいくつか示します。
 
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
@@ -99,7 +99,7 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 
 ## 認証 {#authentication}
 
-クラウドストレージシステムにバックアップデータを保存する場合、クラウドサービスプロバイダーに応じて認証パラメータを設定する必要があります。このセクションでは、Amazon S3、GCS、Azure Blob Storageで使用される認証方法と、それぞれのストレージサービスにアクセスするために使用するアカウントの設定方法について説明します。
+クラウドストレージシステムにバックアップデータを保存する場合、クラウドサービスプロバイダーに応じて認証パラメーターを設定する必要があります。このセクションでは、Amazon S3、GCS、Azure Blob Storageで使用される認証方法と、それぞれのストレージサービスにアクセスするために使用するアカウントの設定方法について説明します。
 
 <SimpleTab groupId="storage">
 <div label="Amazon S3" value="amazon">
@@ -109,7 +109,7 @@ tiup br restore db --db test -u "${PD_IP}:2379" \
 - バックアップ中に TiKV とバックアップ＆リストア（BR）がバックアップディレクトリにアクセスするための最小権限: `s3:ListBucket`、 `s3:GetObject`、 `s3:DeleteObject`、 `s3:PutObject`、および`s3:AbortMultipartUpload`
 - 復元中に TiKV とBRがバックアップディレクトリにアクセスするための最小権限: `s3:ListBucket`と`s3:GetObject` 。
 
-バックアップディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して指定のリージョンに S3 バケットを作成してください。必要に応じて、 [フォルダを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダを作成することもできます。
+バックアップディレクトリをまだ作成していない場合は、 [バケットを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html)を参照して指定のリージョンに S3 バケットを作成してください。必要に応じて、 [フォルダーを作成する](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)を参照してバケット内にフォルダーを作成することもできます。
 
 > **Note:**
 >

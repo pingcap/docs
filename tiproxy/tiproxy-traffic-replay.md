@@ -9,7 +9,7 @@ summary: TiProxy トラフィック再生機能の使用例と手順を紹介し
 >
 > 現在、TiProxy トラフィックリプレイ機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tiproxy/issues)報告を行ってください。
 
-TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのアクセストラフィックをキャプチャし、指定したレートでテストクラスタに再生できます。この機能により、本番クラスタの実際のワークロードをテスト環境で再現し、SQL文の実行結果とパフォーマンスを検証できます。
+TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスターのアクセストラフィックをキャプチャし、指定したレートでテストクラスターに再生できます。この機能により、本番クラスターの実際のワークロードをテスト環境で再現し、SQL文の実行結果とパフォーマンスを検証できます。
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-traffic-replay.png" alt="TiProxyトラフィックリプレイ" width="800" />
 
@@ -31,9 +31,9 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
 
 1. テスト環境を準備します。
 
-    1. テストクラスタを作成します。詳細については、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)を参照してください。
+    1. テストクラスターを作成します。詳細については、 [TiUPを使用して TiDBクラスターをデプロイ](/production-deployment-using-tiup.md)を参照してください。
     2. `tiproxyctl`インストールし、 `tiproxyctl`インストールされているホストが本番とテスト環境の両方の TiProxy インスタンスに接続できることを確認します。詳細については、 [TiProxyコントロールをインストールする](/tiproxy/tiproxy-command-line-flags.md#install-tiproxy-control)を参照してください。
-    3. 本番クラスタからテスト環境クラスタにデータを複製します。詳細については、 [データ移行の概要](/migration-overview.md)を参照してください。
+    3. 本番クラスターからテスト環境クラスターにデータを複製します。詳細については、 [データ移行の概要](/migration-overview.md)を参照してください。
     4. テストクラスターで[`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントを実行して統計を更新します。
 
 2. [`tiproxyctl traffic capture`](/tiproxy/tiproxy-command-line-flags.md#traffic-capture)コマンドを使用して、本番クラスターの TiProxy インスタンスに接続し、トラフィックのキャプチャを開始します。
@@ -43,7 +43,7 @@ TiProxy v1.3.0以降では、TiProxyを使用してTiDB本番クラスタのア�
     > - TiProxy は、既存の接続と新しく作成された接続を含むすべての接続のトラフィックをキャプチャします。
     > - TiProxy プライマリ/セカンダリモードで、プライマリ TiProxy インスタンスに接続します。
     > - TiProxy が仮想 IP で構成されている場合は、仮想 IP アドレスに接続することをお勧めします。
-    > - TiProxyのCPU使用率が高いほど、トラフィックキャプチャによるQPSへの影響が大きくなります。本番クラスタへの影響を軽減するには、CPUキャパシティの少なくとも30%を予約することをお勧めします。これにより、平均QPSが約3%低下します。詳細なパフォーマンスデータについては、 [トラフィックキャプチャテスト](/tiproxy/tiproxy-performance-test.md#traffic-capture-test)ご覧ください。
+    > - TiProxyのCPU使用率が高いほど、トラフィックキャプチャによるQPSへの影響が大きくなります。本番クラスターへの影響を軽減するには、CPUキャパシティの少なくとも30%を予約することをお勧めします。これにより、平均QPSが約3%低下します。詳細なパフォーマンスデータについては、 [トラフィックキャプチャテスト](/tiproxy/tiproxy-performance-test.md#traffic-capture-test)ご覧ください。
     > - TiProxyはトラフィックを再度キャプチャする際に、以前のキャプチャファイルを自動的に削除しません。手動で削除する必要があります。
 
     たとえば、次のコマンドは、 `10.0.1.10:3080`の TiProxy インスタンスに接続し、1時間のトラフィックをキャプチャし、それを TiProxy インスタンスの`/tmp/traffic`ディレクトリに保存します。
@@ -184,7 +184,7 @@ tiproxyctl traffic cancel --host 10.0.1.10 --port 3080
 
 ## 制限事項 {#limitations}
 
-- TiProxyは、TiProxyによってキャプチャされたトラフィックファイルの再生のみをサポートしており、他のファイル形式はサポートしていません。そのため、まずはTiProxyを使用して本番クラスタからトラフィックをキャプチャしてください。
+- TiProxyは、TiProxyによってキャプチャされたトラフィックファイルの再生のみをサポートしており、他のファイル形式はサポートしていません。そのため、まずはTiProxyを使用して本番クラスターからトラフィックをキャプチャしてください。
 - TiProxyトラフィックの再生はSQLタイプのフィルタリングをサポートしておらず、DMLおよびDDL文が再生されます。そのため、再度再生する前に、クラスターデータを再生前の状態に復元する必要があります。
 - TiProxy トラフィック再生では、トラフィックの再生に同じユーザー名が使用されるため、[リソース管理](/tidb-resource-control-ru-groups.md)と[権限管理](/privilege-management.md)のテストはサポートされません。
 - TiProxy は[`LOAD DATA`](/sql-statements/sql-statement-load-data.md)ステートメントの再生をサポートしていません。

@@ -136,7 +136,7 @@ TiCDC は、DML データ変更イベントの行を次のようにエンコー�
 
 ### ウォーターマークイベント {#watermark-event}
 
-TiCDCは、 `enable-tidb-extension`を`true`に設定した場合のみ、WATERMARKイベントを送信します。 `type`フィールドの値は`TIDB_WATERMARK`です。イベントには`_tidb`フィールドが含まれており、このフィールドにはパラメータ`watermarkTs`のみが含まれます。 `watermarkTs`の値は、イベント送信時に記録されるTSOです。
+TiCDCは、 `enable-tidb-extension`を`true`に設定した場合のみ、WATERMARKイベントを送信します。 `type`フィールドの値は`TIDB_WATERMARK`です。イベントには`_tidb`フィールドが含まれており、このフィールドにはパラメーター`watermarkTs`のみが含まれます。 `watermarkTs`の値は、イベント送信時に記録されるTSOです。
 
 このタイプのイベントを受信すると、 `commitTs`が`watermarkTs`より小さいすべてのイベントが送信されています。TiCDC は"At Least Once"のセマンティクスを提供するため、データが繰り返し送信される可能性があります。その後に`commitTs`が`watermarkTs`より小さいイベントを受信した場合は、このイベントを無視しても問題ありません。
 
@@ -301,13 +301,13 @@ TiCDCにおけるCanal-JSONデータ形式の実装方法（ `Update`イベン�
 | 項目              | TiCDC Canal-JSON                                                                                             | Canal                               |
 | :--------------- | :----------------------------------------------------------------------------------------------------------- | :------------------------------- |
 | `Update`タイプのイベント  | デフォルトでは、 `old`フィールドにはすべての列データが含まれます。`only_output_updated_columns`が`true`の場合、 `old`フィールドには変更された列データのみが含まれます。 | `old`フィールドは変更された列データのみを含みます      |
-| `mysqlType`フィールド | パラメータを持つ型の場合、型パラメータの情報は含まれません。                                                                               | パラメータを持つ型の場合、型パラメータの完全な情報が含まれます。 |
+| `mysqlType`フィールド | パラメーターを持つ型の場合、型パラメーターの情報は含まれません。                                                                               | パラメーターを持つ型の場合、型パラメーターの完全な情報が含まれます。 |
 
 ### 公式Canalとの互換性 {#compatibility-with-the-official-canal}
 
 v6.5.6、v7.1.3、v7.6.0以降、 TiCDC Canal-JSONは公式Canalのデータ形式との互換性をサポートしています。チェンジフィードを作成する際に、 `sink-uri`のうち`content-compatible=true`を設定することでこの機能を有効にできます。このモードでは、TiCDCは公式Canalと互換性のあるCanal-JSON形式のデータを出力します。具体的な変更点は以下の通りです。
 
-- `mysqlType`フィールドには、各タイプのタイプパラメータの完全な情報が含まれています。
+- `mysqlType`フィールドには、各タイプのタイプパラメーターの完全な情報が含まれています。
 - `Update`タイプのイベントは、変更された列データのみを出力します。
 
 ### `Update`タイプのイベント {#event-of-update-type}
@@ -410,9 +410,9 @@ update tp_int set c_int = 0, c_tinyint = 0 where c_smallint = 32767;
 
 ### `mysqlType`フィールド {#mysqltype-field}
 
-`mysqlType`フィールドについては、型にパラメータが含まれる場合、公式の Canal には型パラメータの完全な情報が含まれます。TiCDC にはそのような情報は含まれません。
+`mysqlType`フィールドについては、型にパラメーターが含まれる場合、公式の Canal には型パラメーターの完全な情報が含まれます。TiCDC にはそのような情報は含まれません。
 
-以下の例では、テーブル定義SQL文に、 `decimal` 、 `char` 、 `varchar` 、 `enum`といった各列のパラメータが含まれています。TiCDCによって生成されたCanal-JSON形式と公式Canalを比較すると、TiCDCでは`mysqlType`フィールドにMySQLの基本情報のみが含まれていることがわかります。typeパラメータの完全な情報が必要な場合は、別の方法で実装する必要があります。
+以下の例では、テーブル定義SQL文に、 `decimal` 、 `char` 、 `varchar` 、 `enum`といった各列のパラメーターが含まれています。TiCDCによって生成されたCanal-JSON形式と公式Canalを比較すると、TiCDCでは`mysqlType`フィールドにMySQLの基本情報のみが含まれていることがわかります。typeパラメーターの完全な情報が必要な場合は、別の方法で実装する必要があります。
 
 次の SQL文がアップストリーム TiDB で順番に実行されると仮定します。
 

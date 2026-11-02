@@ -124,7 +124,7 @@ SELECT year, month, SUM(profit) AS profit FROM bank GROUP BY year, month WITH RO
 3 rows in set (0.02 sec)
 ```
 
-`GROUP BY`の列にネイティブ`NULL`値が含まれている場合、 `WITH ROLLUP`の集計結果がクエリ結果を誤解させる可能性があることに注意してください。この問題に対処するには、 `GROUPING()`関数を使用して、ネイティブ`NULL`値と`WITH ROLLUP`によって生成された`NULL`値を区別できます。この関数はグループ化式をパラメータとして受け取り、現在の結果でグループ化式が集計されているかどうかを示す`0`または`1`を返します。`1`は集計されていることを表し、 `0`は集計されていないことを表します。
+`GROUP BY`の列にネイティブ`NULL`値が含まれている場合、 `WITH ROLLUP`の集計結果がクエリ結果を誤解させる可能性があることに注意してください。この問題に対処するには、 `GROUPING()`関数を使用して、ネイティブ`NULL`値と`WITH ROLLUP`によって生成された`NULL`値を区別できます。この関数はグループ化式をパラメーターとして受け取り、現在の結果でグループ化式が集計されているかどうかを示す`0`または`1`を返します。`1`は集計されていることを表し、 `0`は集計されていないことを表します。
 
 次の例は、 `GROUPING()`関数の使用方法を示しています。
 
@@ -145,7 +145,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 
 この出力では、 `grp_year`と`grp_month`結果から行の集計ディメンションを直接把握でき、 `year`と`month`グループ化式におけるネイティブの`NULL`値からの干渉を防ぐことができます。
 
-`GROUPING()`関数は、最大 64 個のグループ化式をパラメータとして受け入れることができます。複数のパラメータが出力された場合、各パラメータは`0`または`1`という結果を生成し、これらのパラメータは合計で 64 ビットの`UNSIGNED LONGLONG`を形成し、各ビットは`0`または`1`となります。各パラメータのビット位置を取得するには、次の式を使用します。
+`GROUPING()`関数は、最大 64 個のグループ化式をパラメーターとして受け入れることができます。複数のパラメーターが出力された場合、各パラメーターは`0`または`1`という結果を生成し、これらのパラメーターは合計で 64 ビットの`UNSIGNED LONGLONG`を形成し、各ビットは`0`または`1`となります。各パラメーターのビット位置を取得するには、次の式を使用します。
 
 ```go
 GROUPING(day, month, year):
@@ -154,7 +154,7 @@ GROUPING(day, month, year):
 + result for GROUPING(day) << 2
 ```
 
-`GROUPING()`関数で複数のパラメータを使用することで、任意の高次元で集計結果を効率的にフィルタリングできます。例えば、 `GROUPING(year, month)`を使用すると、各年と全年の集計結果を素早くフィルタリングできます。
+`GROUPING()`関数で複数のパラメーターを使用することで、任意の高次元で集計結果を効率的にフィルタリングできます。例えば、 `GROUPING(year, month)`を使用すると、各年と全年の集計結果を素早くフィルタリングできます。
 
 ```sql
 SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(month) as grp_month FROM bank GROUP BY year, month WITH ROLLUP HAVING GROUPING(year, month) <> 0 ORDER BY year DESC, month DESC;

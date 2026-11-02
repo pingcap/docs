@@ -253,7 +253,7 @@ label = "cop"
 1 row in set (0.00 sec)
 ```
 
-コンピュータに`dot`プログラムがある場合は、次の方法で PNG ファイルを生成できます。
+コンピューターに`dot`プログラムがある場合は、次の方法で PNG ファイルを生成できます。
 
 ```bash
 dot xx.dot -T png -O
@@ -261,7 +261,7 @@ dot xx.dot -T png -O
 The xx.dot is the result returned by the above statement.
 ```
 
-コンピュータに`dot`プログラムがインストールされていない場合は、結果を[このウェブサイト](http://www.webgraphviz.com/)にコピーしてツリーダイアグラムを取得します。
+コンピューターに`dot`プログラムがインストールされていない場合は、結果を[このウェブサイト](http://www.webgraphviz.com/)にコピーしてツリーダイアグラムを取得します。
 
 ![Explain Dot](/media/explain_dot.png)
 

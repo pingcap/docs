@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Introduction
-summary: TiDB Dashboardは、TiDBクラスタの監視、診断、管理のためのWeb UIです。クラスタ全体の稼働状況、コンポーネントとホストのステータス、トラフィック分布、SQL文の実行情報、スロークエリ、クラスタ診断、ログ検索、リソース制御、プロファイリングデータ収集などを表示します。
+summary: TiDB Dashboardは、TiDBクラスターの監視、診断、管理のためのWeb UIです。クラスター全体の稼働状況、コンポーネントとホストのステータス、トラフィック分布、SQL文の実行情報、スロークエリ、クラスター診断、ログ検索、リソース制御、プロファイリングデータ収集などを表示します。
 ---
 
 # TiDB Dashboardの紹介 {#tidb-dashboard-introduction}
@@ -17,7 +17,7 @@ TiDB Dashboardは[GitHub](https://github.com/pingcap-incubator/tidb-dashboard)�
 
 このドキュメントでは、TiDB Dashboardの主な機能を紹介します。詳細については、以下のセクションのリンクをクリックしてください。
 
-## TiDBクラスタの全体的な実行ステータスを表示します {#show-the-overall-running-status-of-the-tidb-cluster}
+## TiDBクラスターの全体的な実行ステータスを表示します {#show-the-overall-running-status-of-the-tidb-cluster}
 
 TiDB Dashboardを使用すると、TiDB クラスターの 1秒あたりのクエリ数 (QPS)、実行時間、最も多くのリソースを消費する SQL文の種類などの概要情報を確認できます。
 
@@ -27,7 +27,7 @@ TiDB Dashboardを使用すると、TiDB クラスターの 1秒あたりのク�
 
 TiDB Dashboardを使用すると、クラスター全体の TiDB、TiKV、PD、 TiFlashコンポーネントの実行状態と、これらのコンポーネントが配置されているホストの実行状態を表示できます。
 
-詳細は[TiDB Dashboardのクラスタ情報ページ](/dashboard/dashboard-cluster-info.md)を参照してください。
+詳細は[TiDB Dashboardのクラスター情報ページ](/dashboard/dashboard-cluster-info.md)を参照してください。
 
 ## 読み取りおよび書き込みトラフィックの分布と傾向を表示します {#show-distribution-and-trends-of-read-and-write-traffic}
 
@@ -51,7 +51,7 @@ TiDB DashboardのSlow Queriesページには、実行に時間のかかるすべ
 
 TiDB Dashboardの診断機能は、クラスター内に一般的なリスク (不一致な構成など) や問題が存在するかどうかを自動的に判断し、レポートを生成して操作の提案を行ったり、異なる時間範囲で各クラスターメトリックの状態を比較して、起こりうる問題を分析したりします。
 
-詳細は[TiDB Dashboardのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
+詳細は[TiDB Dashboardのクラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
 
 ## すべてのコンポーネントのクエリログ {#query-logs-of-all-components}
 

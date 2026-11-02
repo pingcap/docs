@@ -41,7 +41,7 @@ Top SQLは、パフォーマンスの問題を分析するのに適していま�
 
     ![Top SQL](/media/dashboard/v8.5-top-sql-access.png)
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/topsql](http://127.0.0.1:2379/dashboard/#/topsql)にアクセスします。 `127.0.0.1:2379`を実際の PD ノードのアドレスとポートに置き換えます。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/topsql](http://127.0.0.1:2379/dashboard/#/topsql)にアクセスします。 `127.0.0.1:2379`を実際の PD ノードのアドレスとポートに置き換えます。
 
 ## Top SQLを有効にする {#enable-top-sql}
 
@@ -49,7 +49,7 @@ Top SQLは、パフォーマンスの問題を分析するのに適していま�
 >
 > Top SQLを使用するには、クラスターが最新バージョンのTiUP （v1.9.0以降）またはTiDB Operator （v1.3.0以降）を使用してデプロイまたはアップグレードされている必要があります。以前のバージョンのTiUPまたはTiDB Operatorを使用してクラスターをアップグレードした場合は、 [FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmonitoring-is-not-started-error-is-shown)を参照して手順を確認してください。
 
-Top SQLは、有効にするとクラスタのパフォーマンスにわずかな影響（平均で3%以内）を与えるため、デフォルトでは有効になっていません。Top SQLを有効にするには、以下の手順に従ってください。
+Top SQLは、有効にするとクラスターのパフォーマンスにわずかな影響（平均で3%以内）を与えるため、デフォルトでは有効になっていません。Top SQLを有効にするには、以下の手順に従ってください。
 
 1. [Top SQLページ](#access-the-page)にアクセスしてください。
 2. **Open Settings**をクリックします。ページ右側の**Settings**領域で、**Enable Feature**スイッチを有効にします。

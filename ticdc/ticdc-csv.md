@@ -45,7 +45,7 @@ output-field-header = false # New in v8.5.6 (only available in the TiCDC new arc
 
 CSVファイルでは、各列は次のように定義されています。
 
-- カラム1: 操作タイプインジケータ。 `I` 、 `U` 、 `D`を含む。 `I`は`INSERT`を意味し、 `U`は`UPDATE`を意味し、 `D`は`DELETE`を意味する。
+- カラム1: 操作タイプインジケーター。 `I` 、 `U` 、 `D`を含む。 `I`は`INSERT`を意味し、 `U`は`UPDATE`を意味し、 `D`は`DELETE`を意味する。
 - 2カラム：テーブル名。
 - 3カラム：スキーマ名。
 - 4カラム：ソーストランザクションの`commit-ts` 。この列は省略可能です。

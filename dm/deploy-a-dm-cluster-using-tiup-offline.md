@@ -3,7 +3,7 @@ title: Deploy a DM Cluster Offline Using TiUP
 summary: TiUPを使用して DM クラスターをオフラインでデプロイする方法を紹介します。
 ---
 
-# TiUPを使用して DMクラスタをオフラインでデプロイ {#deploy-a-dm-cluster-offline-using-tiup}
+# TiUPを使用して DMクラスターをオフラインでデプロイ {#deploy-a-dm-cluster-offline-using-tiup}
 
 このドキュメントでは、 TiUPを使用して DM クラスターをオフラインでデプロイする方法について説明します。
 
@@ -70,7 +70,7 @@ source /home/tidb/.bash_profile
 
 さまざまなクラスタートポロジに応じて、クラスター初期化設定ファイルを編集する必要があります。
 
-完全な設定テンプレートについては、[TiUP設定パラメータテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。`topology.yaml`という設定ファイルを作成し、その他の複合シナリオでは、テンプレートに従って必要に応じて設定ファイルを編集してください。
+完全な設定テンプレートについては、[TiUP設定パラメーターテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。`topology.yaml`という設定ファイルを作成し、その他の複合シナリオでは、テンプレートに従って必要に応じて設定ファイルを編集してください。
 
 3 つの DM-master、3つの DM-worker、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
@@ -109,13 +109,13 @@ alertmanager_servers:
 >
 > - DM クラスターの高可用性を確保するには、3つの DM-masterノードをデプロイすることをお勧めします。また、デプロイする DM-workerノードの数は、移行するアップストリーム MySQL/MariaDB インスタンスの数より多くする必要があります (たとえば、DM-workerノードの数は、アップストリームインスタンスの数より 2つ多くなります)。
 >
-> - グローバルに有効にする必要があるパラメータについては、設定ファイルの`server_configs`セクションで対応するコンポーネントのこれらのパラメータを構成します。
+> - グローバルに有効にする必要があるパラメーターについては、設定ファイルの`server_configs`セクションで対応するコンポーネントのこれらのパラメーターを構成します。
 >
-> - 特定のノードで有効にするパラメータについては、このノードの`config`でこれらのパラメータを設定します。
+> - 特定のノードで有効にするパラメーターについては、このノードの`config`でこれらのパラメーターを設定します。
 >
 > - `.`は構成のサブカテゴリ（例： `log.slow-threshold`）を示します。その他の形式については、 [TiUP構成テンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。
 >
-> - 詳細なパラメータの説明については、 [マスター`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)と[ワーカー`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
+> - 詳細なパラメーターの説明については、 [マスター`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)と[ワーカー`config.toml.example`](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
 >
 > - 次のコンポーネント間のポートが相互接続されていることを確認します。
 >     - DM-masterノードのうち`peer_port` (デフォルトでは`8291` ) が相互接続されています。
@@ -141,10 +141,10 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 上記のコマンドでは、
 
 - デプロイされた DM クラスターの名前は`dm-test`です。
-- DMクラスタのバージョンは`${version}`です。TiUPでサポートされている最新バージョンを確認するには、 `tiup list dm-master`を実行します。
+- DMクラスターのバージョンは`${version}`です。TiUPでサポートされている最新バージョンを確認するには、 `tiup list dm-master`を実行します。
 - 初期化設定ファイルは`topology.yaml`です。
 - `--user root` : `root`キーを使用してターゲットマシンにログインし、クラスターのデプロイを完了するか、 `ssh`および`sudo`権限を持つ他のユーザーを使用してデプロイを完了できます。
-- `[-i]`と`[-p]` : オプション。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメータは不要です。そうでない場合は、2つのパラメータのいずれかを選択してください。`[-i]`は、ターゲットマシンにアクセスできる`root`ユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。`[-p]`は、ユーザーパスワードを対話的に入力するために使用されます。
+- `[-i]`と`[-p]` : オプション。ターゲットマシンへのログインをパスワードなしで設定している場合、これらのパラメーターは不要です。そうでない場合は、2つのパラメーターのいずれかを選択してください。`[-i]`は、ターゲットマシンにアクセスできる`root`ユーザー（または`--user`で指定された他のユーザー）の秘密鍵です。`[-p]`は、ユーザーパスワードを対話的に入力するために使用されます。
 - TiUP DMは組み込みのSSHクライアントを使用します。制御マシンシステムにネイティブのSSHクライアントを使用する場合は、 [システムのネイティブSSHクライアントを使用してクラスターに接続する](/dm/maintain-dm-using-tiup.md#use-the-systems-native-ssh-client-to-connect-to-cluster)に従って設定を編集してください。
 
 出力ログの最後に``Deployed cluster `dm-test` successfully``が表示されます。これは、デプロイメントが成功したことを示します。
@@ -155,7 +155,7 @@ tiup dm deploy dm-test ${version} ./topology.yaml --user root [-p] [-i /home/roo
 tiup dm list
 ```
 
-TiUP は複数の DM クラスタの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスタの情報を出力します。これには、名前、デプロイメントユーザー、バージョン、秘密鍵の情報が含まれます。
+TiUP は複数の DM クラスターの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスターの情報を出力します。これには、名前、デプロイメントユーザー、バージョン、秘密鍵の情報が含まれます。
 
 ```log
 Name  User  Version  Path                                  PrivateKey
@@ -163,7 +163,7 @@ Name  User  Version  Path                                  PrivateKey
 dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
-## ステップ6: デプロイされたDMクラスタのステータスを確認する {#step-6-check-the-status-of-the-deployed-dm-cluster}
+## ステップ6: デプロイされたDMクラスターのステータスを確認する {#step-6-check-the-status-of-the-deployed-dm-cluster}
 
 `dm-test`クラスターのステータスを確認するには、次のコマンドを実行します。
 
