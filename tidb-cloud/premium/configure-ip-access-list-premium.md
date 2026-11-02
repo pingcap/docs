@@ -20,7 +20,7 @@ To configure an IP access list for your {{{ .premium }}} instance, take the foll
     > If you are in multiple organizations, use the combo box in the upper-left corner to switch to your target organization first.
 
 2. In the left navigation pane, click **Settings** > **Networking**.
-3. On the **Networking** page, click **Enable** for **Public Endpoint** to to make the instance accessible via a public endpoint, and then click **Add IP Address**.
+3. On the **Networking** page, click **Enable** for **Public Endpoint** to make the instance accessible via a public endpoint, and then click **Add IP Address**.
 4. In the displayed dialog, choose one of the following options:
 
     - **Allow access from anywhere**: allows all IP addresses to access TiDB Cloud. This option exposes your instance to the internet completely and is highly risky.
