@@ -154,7 +154,7 @@ tiflash_servers:
         host: tiflash-host-machine-6
 ```
 
-詳細は[地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)参照。
+詳細は[地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)を参照してください。
 
 > **Note:**
 >
