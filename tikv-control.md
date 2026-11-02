@@ -83,7 +83,7 @@ SUBCOMMANDS:
     unsafe-recover        Unsafely recover the cluster when the majority replicas are failed
 ```
 
-`tiup ctl:v<CLUSTER_VERSION> tikv`の後に対応するパラメータとサブコマンドを追加できます。
+`tiup ctl:v<CLUSTER_VERSION> tikv`の後に対応するパラメーターとサブコマンドを追加できます。
 
 ## 一般オプション {#general-options}
 
@@ -324,9 +324,9 @@ middle_key_by_approximate_size:
     tikv-ctl --host ip:port compact -d kv
     ```
 
-### TiKVクラスタ全体のデータを手動でコンパクションする {#compact-data-of-the-whole-tikv-cluster-manually}
+### TiKVクラスター全体のデータを手動でコンパクションする {#compact-data-of-the-whole-tikv-cluster-manually}
 
-`compact-cluster`コマンドを使用して、TiKV クラスタ全体のデータを手動でコンパクションします。このコマンドのフラグは、 `compact`コマンドと同じ意味と使用法を持ちます。唯一の違いは次のとおりです。
+`compact-cluster`コマンドを使用して、TiKV クラスター全体のデータを手動でコンパクションします。このコマンドのフラグは、 `compact`コマンドと同じ意味と使用法を持ちます。唯一の違いは次のとおりです。
 
 - `compact-cluster`コマンドでは、 `--pd`を使用して PD のアドレスを指定し、 `tikv-ctl`クラスター内のすべての TiKV ノードをコンパクトターゲットとして見つけられるようにします。
 - `compact`コマンドでは、 `--data-dir`または`--host`を使用して、単一の TiKV をコンパクトターゲットとして指定します。
@@ -483,7 +483,7 @@ success
 > **Warning:**
 >
 > - 誤った操作が行われた場合、クラスターの復旧が困難になる可能性があります。潜在的なリスクを認識し、本番環境ではこの機能の使用を避けてください。
-> - `--all-regions`オプションを使用する場合、このコマンドはクラスタに接続されている残りのすべてのストアに対して実行する必要があります。損傷したストアを復旧する前に、これらの正常なストアがサービスの提供を停止していることを確認する必要があります。そうしないと、リージョンレプリカ内のピアリストの不整合により、 `split-region`または`remove-peer`を実行した際にエラーが発生します。これにより、他のメタデータ間の不整合も発生し、最終的にはリージョンが利用できなくなります。
+> - `--all-regions`オプションを使用する場合、このコマンドはクラスターに接続されている残りのすべてのストアに対して実行する必要があります。損傷したストアを復旧する前に、これらの正常なストアがサービスの提供を停止していることを確認する必要があります。そうしないと、リージョンレプリカ内のピアリストの不整合により、 `split-region`または`remove-peer`を実行した際にエラーが発生します。これにより、他のメタデータ間の不整合も発生し、最終的にはリージョンが利用できなくなります。
 > - `remove-fail-stores`を実行した後は、削除したノードを再起動したり、クラスターに追加したりできません。そうしないと、メタデータに不整合が生じ、最終的にはリージョンが利用できなくなります。
 
 ```shell
@@ -652,9 +652,9 @@ corruption analysis has completed
 
 ### リージョンの`RegionReadProgress`の状態を取得する {#get-the-state-of-a-regions-regionreadprogress}
 
-v6.5.4およびv7.3.0以降、TiKVはリゾルバの最新の詳細情報を取得するためのサブコマンド`get-region-read-progress`と`RegionReadProgress`導入しました。リージョンIDとTiKVを指定する必要があります。これらはGrafana（ `Min Resolved TS Region`と`Min Safe TS Region` ）または`DataIsNotReady`ログから取得できます。
+v6.5.4およびv7.3.0以降、TiKVはリゾルバーの最新の詳細情報を取得するためのサブコマンド`get-region-read-progress`と`RegionReadProgress`導入しました。リージョンIDとTiKVを指定する必要があります。これらはGrafana（ `Min Resolved TS Region`と`Min Safe TS Region` ）または`DataIsNotReady`ログから取得できます。
 
-- `--log` （オプション）: 指定すると、TiKVはリージョンのリゾルバ内のロックのうち、最も小さい`start_ts`をレベル`INFO`でこのTiKVに記録します。このオプションは、resolved-tsをブロックする可能性のあるロックを事前に特定するのに役立ちます。
+- `--log` （オプション）: 指定すると、TiKVはリージョンのリゾルバー内のロックのうち、最も小さい`start_ts`をレベル`INFO`でこのTiKVに記録します。このオプションは、resolved-tsをブロックする可能性のあるロックを事前に特定するのに役立ちます。
 
 - `--min-start-ts` (オプション): 指定すると、TiKV はログからこの値より小さい`start_ts`のロックを除外します。ログに記録するトランザクションを指定する場合に使用できます。デフォルトは`0`で、フィルターなしを意味します。
 

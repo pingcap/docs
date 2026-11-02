@@ -78,9 +78,9 @@ LIMIT
 
     DumplingはデフォルトでデータをSQLファイルにエクスポートします。 `--filetype`オプションを追加することで、別のファイル形式を指定できます。
 
-    上記で使用したパラメータは以下のとおりです。 Dumplingパラメータの詳細については、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
+    上記で使用したパラメーターは以下のとおりです。 Dumplingパラメーターの詳細については、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
 
-    | パラメータ                | 説明                                                                                  |
+    | パラメーター                | 説明                                                                                  |
     | -------------------- | ----------------------------------------------------------------------------------- |
     | `-u`または`--user`      | MySQLユーザー                                                                           |
     | `-p`または`--password`  | MySQLユーザーのパスワード                                                                     |
@@ -191,11 +191,11 @@ LIMIT
     tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
     ```
 
-    上記のコマンドで使用されるパラメータは、以下のように説明されます。
+    上記のコマンドで使用されるパラメーターは、以下のように説明されます。
 
-    | パラメータ                   | 説明                                                                          |
+    | パラメーター                   | 説明                                                                          |
     | ----------------------- | --------------------------------------------------------------------------- |
-    | `--master-addr`         | `{advertise-addr}`が接続されるクラスタ内の任意の DM-master の`dmctl` (例: 172.16.10.71:8261) |
+    | `--master-addr`         | `{advertise-addr}`が接続されるクラスター内の任意の DM-master の`dmctl` (例: 172.16.10.71:8261) |
     | `operate-source create` | データソースをDMクラスターにロードします。                                                      |
 
 ### レプリケーションタスクを追加する {#add-a-replication-task}
@@ -249,11 +249,11 @@ LIMIT
     tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
     ```
 
-    上記のコマンドで使用されるパラメータは、以下のように説明されます。
+    上記のコマンドで使用されるパラメーターは、以下のように説明されます。
 
-    | パラメータ           | 説明                                                                       |
+    | パラメーター           | 説明                                                                       |
     | --------------- | ------------------------------------------------------------------------ |
-    | `--master-addr` | `dmctl`が接続されるクラスタ内の任意の DM-master の {advertise-addr}。例: 172.16.10.71:8261 |
+    | `--master-addr` | `dmctl`が接続されるクラスター内の任意の DM-master の {advertise-addr}。例: 172.16.10.71:8261 |
     | `start-task`    | 移行タスクを開始します。                                                             |
 
     タスクの開始に失敗した場合は、プロンプトメッセージを確認し、設定を修正してください。その後、上記のコマンドを再度実行してタスクを開始できます。
@@ -278,8 +278,8 @@ TiUPを使用してDMをデプロイした際に、Prometheus、Alertmanager、�
 
 DMが実行されている間、DM-worker、DM-master、およびdmctlは関連情報をログに出力します。これらのコンポーネントのログディレクトリは以下のとおりです。
 
-- DM-master: DM-master プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
-- DM-worker: DM-worker プロセスパラメータ`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
+- DM-master: DM-master プロセスパラメーター`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-master-8261/log/`になります。
+- DM-worker: DM-worker プロセスパラメーター`--log-file`で指定されます。TiUPを使用して DM をデプロイする場合、ログディレクトリはデフォルトで`/dm-deploy/dm-worker-8262/log/`になります。
 
 ## 次は？ {#what-s-next}
 

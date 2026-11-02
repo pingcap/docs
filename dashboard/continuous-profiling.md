@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Instance Profiling - Continuous Profiling
-summary: TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決できます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
+summary: TiDB Dashboardの継続的プロファイリングにより、専門家は各インスタンスからパフォーマンスデータを継続的に収集・分析し、高度なパフォーマンス問題を特定・解決できます。手動プロファイリングよりも多くのデータを保存できるため、現在の問題と過去の問題の両方を分析できます。この機能はダッシュボードまたはブラウザーからアクセスでき、必要に応じて有効化/無効化できます。パフォーマンスへの影響は最小限に抑えられるため、本番環境にも最適です。
 ---
 
 # TiDB Dashboardインスタンスプロファイリング - 継続的プロファイリング {#tidb-dashboard-instance-profiling-continuous-profiling}
@@ -42,7 +42,7 @@ summary: TiDB Dashboardの継続的プロファイリングにより、専門家
 
     ![Access page](/media/dashboard/dashboard-conprof-access.png)
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/continuous_profiling](http://127.0.0.1:2379/dashboard/#/continuous_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/continuous_profiling](http://127.0.0.1:2379/dashboard/#/continuous_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 ## 継続的プロファイリングを有効にする {#enable-continuous-profiling}
 

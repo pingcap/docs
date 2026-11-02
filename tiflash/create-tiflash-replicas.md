@@ -15,7 +15,7 @@ TiFlashがTiKVクラスターに接続されても、デフォルトではデー
 ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
-上記コマンドのパラメータは以下のとおりです。
+上記コマンドのパラメーターは以下のとおりです。
 
 - `count`はレプリカの数を示します。値が`0`の場合、レプリカは削除されます。
 

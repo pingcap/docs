@@ -7,7 +7,7 @@ summary: TiDB DashboardのSQL Statementsページには、クラスター内の�
 
 SQL Statementsページには、クラスター内のすべてのSQL文の実行状況が表示されます。このページは、合計実行時間または単一の実行時間が長いSQL文を分析するためによく使用されます。
 
-このページでは、構造が一貫しているSQLクエリ（クエリパラメータが不一致であっても）は、同じSQL文として分類されます。例えば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は同じSQL文`select * from employee where id in (...)`として分類されます。
+このページでは、構造が一貫しているSQLクエリ（クエリパラメーターが不一致であっても）は、同じSQL文として分類されます。例えば、 `SELECT * FROM employee WHERE id IN (1, 2, 3)`と`select * from EMPLOYEE where ID in (4, 5)`は同じSQL文`select * from employee where id in (...)`として分類されます。
 
 ## ページにアクセスする {#access-the-page}
 
@@ -15,7 +15,7 @@ SQL Statementsページにアクセスするには、次の2つの方法のい�
 
 - TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**SQL Statements**をクリックします。
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/statement](http://127.0.0.1:2379/dashboard/#/statement)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/statement](http://127.0.0.1:2379/dashboard/#/statement)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 SQL Statementsページに表示されるすべてのデータは、TiDB ステートメントサマリーテーブルから取得されます。テーブルの詳細については、 [TiDB ステートメントサマリーテーブル](/statement-summary-tables.md)を参照してください。
 

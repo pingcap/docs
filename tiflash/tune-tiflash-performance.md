@@ -1,19 +1,19 @@
 ---
 title: Tune TiFlash Performance
-summary: マシンリソースを計画し、TiDB パラメータを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
+summary: マシンリソースを計画し、TiDB パラメーターを調整することで、 TiFlashのパフォーマンスを調整する方法を学習します。
 ---
 
 # TiFlash のパフォーマンスを調整する {#tune-tiflash-performance}
 
-このドキュメントでは、マシンリソースを適切に計画し、TiDBパラメータを調整することで、 TiFlashのパフォーマンスをチューニングする方法を紹介します。これらの方法に従うことで、 TiFlashクラスターは最適なパフォーマンスを実現できます。
+このドキュメントでは、マシンリソースを適切に計画し、TiDBパラメーターを調整することで、 TiFlashのパフォーマンスをチューニングする方法を紹介します。これらの方法に従うことで、 TiFlashクラスターは最適なパフォーマンスを実現できます。
 
 ## リソースを計画する {#plan-resources}
 
 マシンリソースを節約したい場合や、分離の必要がない場合は、TiKVとTiFlashの両方の導入を組み合わせる方法があります。TiKVとTiFlashにそれぞれ十分なリソースを確保し、ディスクを共有しないことを推奨します。
 
-## TiDBパラメータを調整する {#tune-tidb-parameters}
+## TiDBパラメーターを調整する {#tune-tidb-parameters}
 
-このセクションでは、次のような TiDB パラメータを調整してTiFlash のパフォーマンスを向上させる方法について説明します。
+このセクションでは、次のような TiDB パラメーターを調整してTiFlash のパフォーマンスを向上させる方法について説明します。
 
 - [MPPモードを強制的に有効にする](#forcibly-enable-the-mpp-mode)
 - [集計関数を`Join`または`Union`前の位置へプッシュダウンします](#push-down-aggregate-functions-to-a-position-before-join-or-union)
@@ -25,15 +25,15 @@ summary: マシンリソースを計画し、TiDB パラメータを調整する
 
 ### MPPモードを強制的に有効にする {#forcibly-enable-the-mpp-mode}
 
-MPP実行計画は分散コンピューティングリソースを最大限に活用できるため、バッチデータクエリの効率を大幅に向上させます。オプティマイザがクエリに対してMPP実行計画を生成しない場合は、MPPモードを強制的に有効にできます。
+MPP実行計画は分散コンピューティングリソースを最大限に活用できるため、バッチデータクエリの効率を大幅に向上させます。オプティマイザーがクエリに対してMPP実行計画を生成しない場合は、MPPモードを強制的に有効にできます。
 
-変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)は、オプティマイザのコスト見積もりを無視し、クエリ実行時にTiFlashのMPPモードを強制的に使用するかどうかを制御します。MPPモードを強制的に有効にするには、次のコマンドを実行します。
+変数[`tidb_enforce_mpp`](/system-variables.md#tidb_enforce_mpp-new-in-v51)は、オプティマイザーのコスト見積もりを無視し、クエリ実行時にTiFlashのMPPモードを強制的に使用するかどうかを制御します。MPPモードを強制的に有効にするには、次のコマンドを実行します。
 
 ```sql
 set @@tidb_enforce_mpp = ON;
 ```
 
-以下の例は、 `tidb_enforce_mpp`を有効にする前後のクエリ結果を示しています。この変数を有効にする前は、TiDB は TiKV からデータを読み取り、 `Join`と`Aggregation`をTiDB で実行する必要があります。`tidb_enforce_mpp`を有効にすると、 `Join`と`Aggregation`がTiFlashにプッシュダウンされます。また、オプティマイザは必ずしも MPP 実行計画を生成するとは限らないため、 `tidb_enforce_mpp`を有効にすることで、オプティマイザに MPP 実行計画を強制的に生成させることができます。
+以下の例は、 `tidb_enforce_mpp`を有効にする前後のクエリ結果を示しています。この変数を有効にする前は、TiDB は TiKV からデータを読み取り、 `Join`と`Aggregation`をTiDB で実行する必要があります。`tidb_enforce_mpp`を有効にすると、 `Join`と`Aggregation`がTiFlashにプッシュダウンされます。また、オプティマイザーは必ずしも MPP 実行計画を生成するとは限らないため、 `tidb_enforce_mpp`を有効にすることで、オプティマイザーに MPP 実行計画を強制的に生成させることができます。
 
 MPP モードを有効にする前:
 
@@ -97,7 +97,7 @@ mysql> explain analyze select o_orderpriority, count(*) as order_count from orde
 
 集計演算を`Join`または`Union`前の位置までプッシュダウンすることで、 `Join`または`Union`演算で処理されるデータを削減でき、パフォーマンスが向上します。
 
-変数[`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down)は、オプティマイザが集計関数を`Join`または`Union`前の位置までプッシュダウンする最適化操作を実行するかどうかを制御します。クエリ内で集計操作が非常に遅い場合は、この変数を`ON`に設定できます。
+変数[`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down)は、オプティマイザーが集計関数を`Join`または`Union`前の位置までプッシュダウンする最適化操作を実行するかどうかを制御します。クエリ内で集計操作が非常に遅い場合は、この変数を`ON`に設定できます。
 
 ```sql
 set @@tidb_opt_agg_push_down = ON;
@@ -237,7 +237,7 @@ ALTER TABLE employees COMPACT PARTITION pNorth, pEast TIFLASH REPLICA;
     set @@tidb_broadcast_join_threshold_size = 2000000;
     ```
 
-- 変数[`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかも制御します。結合操作のオブジェクトがサブクエリに属する場合、オプティマイザはサブクエリの結果セットのサイズを推定できません。この場合、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値より少ない場合、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+- 変数[`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50)は、ブロードキャストハッシュ結合アルゴリズムを使用するかどうかも制御します。結合操作のオブジェクトがサブクエリに属する場合、オプティマイザーはサブクエリの結果セットのサイズを推定できません。この場合、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値より少ない場合、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 
     ```sql
     set @@tidb_broadcast_join_threshold_count = 100000;

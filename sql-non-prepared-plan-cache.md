@@ -13,10 +13,10 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
 
 非プリペアドプランキャッシュは、 [プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)とキャッシュを共有するセッションレベルの機能です。非プリペアドプランキャッシュの基本原理は次のとおりです。
 
-1. 非プリペアドプランキャッシュを有効にすると、TiDBはまず抽象構文木（AST）に基づいてクエリをパラメータ化します。例えば、 `SELECT * FROM t WHERE b < 10 AND a = 1` `SELECT * FROM t WHERE b < ? and a = ?`としてパラメータ化されます。
-2. 次に、TiDB はパラメータ化されたクエリを使用してプランキャッシュを検索します。
+1. 非プリペアドプランキャッシュを有効にすると、TiDBはまず抽象構文木（AST）に基づいてクエリをパラメーター化します。例えば、 `SELECT * FROM t WHERE b < 10 AND a = 1` `SELECT * FROM t WHERE b < ? and a = ?`としてパラメーター化されます。
+2. 次に、TiDB はパラメーター化されたクエリを使用してプランキャッシュを検索します。
 3. 再利用可能なプランが見つかった場合は、それが直接使用され、最適化フェーズはスキップされます。
-4. それ以外の場合、オプティマイザは新しいプランを生成し、それをキャッシュに戻して、後続のクエリで再利用します。
+4. それ以外の場合、オプティマイザーは新しいプランを生成し、それをキャッシュに戻して、後続のクエリで再利用します。
 
 ## 使用法 {#usage}
 
@@ -72,9 +72,9 @@ TiDBは、 [ステートメント`Prepare` / `Execute`](/sql-prepared-plan-cache
 
 ### 最適でない計画をキャッシュする {#cache-suboptimal-plans}
 
-TiDBは、パラメータ化されたクエリに対して1つのプランのみをキャッシュします。例えば、クエリ`SELECT * FROM t WHERE a < 1`と`SELECT * FROM t WHERE a < 100000`同じパラメータ化された形式（ `SELECT * FROM t WHERE a < ?` ）を共有しているため、同じプランを共有します。
+TiDBは、パラメーター化されたクエリに対して1つのプランのみをキャッシュします。例えば、クエリ`SELECT * FROM t WHERE a < 1`と`SELECT * FROM t WHERE a < 100000`同じパラメーター化された形式（ `SELECT * FROM t WHERE a < ?` ）を共有しているため、同じプランを共有します。
 
-これがパフォーマンスの問題を引き起こす場合は、 `ignore_plan_cache()`ヒントを使用してキャッシュ内のプランを無視し、オプティマイザが毎回SQLの新しい実行計画を生成するようにできます。SQLを変更できない場合は、バインディングを作成して問題を解決できます。例えば、 `CREATE BINDING FOR SELECT ... USING SELECT /*+ ignore_plan_cache() */ ...`ように指定します。
+これがパフォーマンスの問題を引き起こす場合は、 `ignore_plan_cache()`ヒントを使用してキャッシュ内のプランを無視し、オプティマイザーが毎回SQLの新しい実行計画を生成するようにできます。SQLを変更できない場合は、バインディングを作成して問題を解決できます。例えば、 `CREATE BINDING FOR SELECT ... USING SELECT /*+ ignore_plan_cache() */ ...`ように指定します。
 
 ### 使用制限 {#usage-restrictions}
 
@@ -86,7 +86,7 @@ TiDBは、パラメータ化されたクエリに対して1つのプランのみ
 - `ORDER BY 1`や`GROUP BY a+1`など、 `ORDER BY`または`GROUP BY`直後に数字や式が含まれるクエリはサポートされていません`ORDER BY column_name`と`GROUP BY column_name`のみがサポートされています。
 - `SELECT * FROM t WHERE json_col = '{}'`など、 `JSON` 、 `ENUM` 、 `SET` 、または`BIT`タイプの列でフィルタリングするクエリはサポートされていません。
 - `SELECT * FROM t WHERE a is NULL`など、 `NULL`値でフィルタリングするクエリはサポートされていません。
-- パラメータ化後のパラメータ数が200を超えるクエリ（例： `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)` ）は、デフォルトではサポートされません。v7.3.0以降では、システム変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)に[`44823`](/optimizer-fix-controls.md#44823-new-in-v730)を設定することで、この制限を変更できます。
+- パラメーター化後のパラメーター数が200を超えるクエリ（例： `SELECT * FROM t WHERE a in (1, 2, 3, ... 201)` ）は、デフォルトではサポートされません。v7.3.0以降では、システム変数[`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)に[`44823`](/optimizer-fix-controls.md#44823-new-in-v730)を設定することで、この制限を変更できます。
 - 仮想列、一時テーブル、ビュー、またはメモリテーブルにアクセスするクエリはサポートされていません (例: `SELECT * FROM INFORMATION_SCHEMA.COLUMNS` 、 `COLUMNS`は TiDBメモリテーブル)。
 - ヒントまたはバインディングを含むクエリはサポートされていません。
 - DML文、または`FOR UPDATE`句を含む`SELECT`文はデフォルトではサポートされていません。この制限を解除するには、 `SET tidb_enable_non_prepared_plan_cache_for_dml = ON`を実行してください。
@@ -97,7 +97,7 @@ After you enable this feature, the optimizer quickly evaluates the query. If it 
 
 社内テストでは、非プリペアドプランキャッシュ機能を有効にすると、ほとんどのTPシナリオで大幅なパフォーマンス向上が見られました。例えば、TPC-Cテストでは約4%、一部の銀行業務ワークロードでは10%以上、Sysbench RangeScanでは15%のパフォーマンス向上が見られました。
 
-ただし、この機能は、クエリがサポートされているかどうかの判断、クエリのパラメータ化、キャッシュ内のプランの検索など、メモリとCPUのオーバーヘッドを増加させます。ワークロード内のクエリの大部分をキャッシュで処理できない場合、この機能を有効にするとパフォーマンスに悪影響を与える可能性があります。
+ただし、この機能は、クエリがサポートされているかどうかの判断、クエリのパラメーター化、キャッシュ内のプランの検索など、メモリとCPUのオーバーヘッドを増加させます。ワークロード内のクエリの大部分をキャッシュで処理できない場合、この機能を有効にするとパフォーマンスに悪影響を与える可能性があります。
 
 この場合、Grafanaの**Queries Using Plan Cache OPS**パネルの`non-prepared`メトリックと**Plan Cache Miss OPS**パネルの`non-prepared-unsupported`メトリックを確認する必要があります。ほとんどのクエリがサポートされておらず、プランキャッシュにヒットできるクエリがごくわずかである場合は、この機能を無効にできます。
 

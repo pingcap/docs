@@ -65,7 +65,7 @@ TiDB Lightning がインポート中にエラーに遭遇した場合、終了�
     [2022/03/13 05:33:57.736 +08:00] [WARN] [errormanager.go:459] ["Detect 1000 data type errors in total, please refer to table `lightning_task_info`.`type_error_v1` for more details"]
     ```
 
-すべてのエラーは、下流TiDBクラスタの`lightning_task_info`のデータベース内のテーブルに書き込まれます。インポートが完了した後、エラーデータが収集されていれば、データベース内のエラーを確認し、手動で処理できます。
+すべてのエラーは、下流TiDBクラスターの`lightning_task_info`のデータベース内のテーブルに書き込まれます。インポートが完了した後、エラーデータが収集されていれば、データベース内のエラーを確認し、手動で処理できます。
 
 `lightning.task-info-schema-name`を設定することでデータベース名を変更できます。
 

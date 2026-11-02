@@ -63,7 +63,7 @@ insert into t select * from t;
 - `Txn_start_ts` : トランザクションの開始タイムスタンプと一意のID。この値を使用して、トランザクション関連のログを検索できます。
 - `Is_internal` : SQL文が TiDB 内部で実行されるかどうか。 `true`は、SQL文が TiDB 内部で実行されることを示し、 `false`は、SQL文がユーザーによって実行されることを示します。
 - `Index_names` : ステートメントで使用されるインデックス名。
-- `Stats` : このクエリ中に使用される統計情報の健全性状態、内部バージョン、総行数、変更された行数、およびロード状態。 `pseudo`統計情報が健全でないことを示します。オプティマイザが完全にロードされていない統計情報を使用しようとすると、内部状態も出力されます。たとえば、 `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]`の意味は次のように理解できます。
+- `Stats` : このクエリ中に使用される統計情報の健全性状態、内部バージョン、総行数、変更された行数、およびロード状態。 `pseudo`統計情報が健全でないことを示します。オプティマイザーが完全にロードされていない統計情報を使用しようとすると、内部状態も出力されます。たとえば、 `t1:439478225786634241[105000;5000][col1:allEvicted][idx1:allEvicted]`の意味は次のように理解できます。
     - `t1` : テーブル`t1`の統計情報は、クエリ最適化中に使用されます。
     - `439478225786634241` : 内部バージョン。
     - `105000` : 統計情報における行の総数。
@@ -442,7 +442,7 @@ plan_digest: 6afbbd21f60ca6c6fdf3d3cd94f7c7a49dd93c00fcf8774646da492e50e204ee
               └─TableScan_11    cop     1.2440069558121831      table:sbtest25, range:[472745,472844], keep order:false
 ```
 
-### クラスタ内の各TiDBノードにおけるスロークエリの数を照会する {#query-the-number-of-slow-queries-for-each-tidb-node-in-a-cluster}
+### クラスター内の各TiDBノードにおけるスロークエリの数を照会する {#query-the-number-of-slow-queries-for-each-tidb-node-in-a-cluster}
 
 ```sql
 select instance, count(*) from information_schema.cluster_slow_query where time >= "2020-03-06 00:00:00" and time < now() group by instance;

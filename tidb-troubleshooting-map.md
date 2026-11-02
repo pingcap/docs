@@ -77,7 +77,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
     - DDL所有者の移行:
 
         - TiDBサーバーに接続できる場合は、所有者選出コマンドを再度実行してください： `curl -X POST http://{TiDBIP}:10080/ddl/owner/resign`
-        - TiDBサーバーに接続できない場合は、 `tidb-ctl`を使用してPDクラスタのetcdからDDLオーナーを削除し、再選出をトリガーしてください： `tidb-ctl etcd delowner [LeaseID] [flags] + ownerKey`
+        - TiDBサーバーに接続できない場合は、 `tidb-ctl`を使用してPDクラスターのetcdからDDLオーナーを削除し、再選出をトリガーしてください： `tidb-ctl etcd delowner [LeaseID] [flags] + ownerKey`
 
 - 3.1.3 TiDB のログに`information schema is changed`エラーが報告される
 
@@ -125,7 +125,7 @@ summary: TiDBでよく発生するエラーのトラブルシューティング�
 
     > **Note:**
     >
-    > 単一の SQLメモリ使用量のデフォルトのしきい値は`1GB`です。このパラメータは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を設定することで設定できます。
+    > 単一の SQLメモリ使用量のデフォルトのしきい値は`1GB`です。このパラメーターは、システム変数[`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)を設定することで設定できます。
 
 - 3.2.3 メモリ不足問題の軽減
 
@@ -223,9 +223,9 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     問題の原因を確認するには、モニター**Grafana** -> **TiKV-details**で該当するインスタンスを選択して RocksDB の`block cache size`を確認してください。
 
-    一方、 `[storage.block-cache] capacity = # "1GB"`パラメータが正しく設定されているか確認してください。デフォルトでは、TiKV の`block-cache`はマシンの総メモリの`45%`に設定されています。TiKV は物理マシンのメモリを取得するため、コンテナのメモリ制限を超える可能性があるため、コンテナに TiKV をデプロイする際にはこのパラメータを明示的に指定する必要があります。
+    一方、 `[storage.block-cache] capacity = # "1GB"`パラメーターが正しく設定されているか確認してください。デフォルトでは、TiKV の`block-cache`はマシンの総メモリの`45%`に設定されています。TiKV は物理マシンのメモリを取得するため、コンテナーのメモリ制限を超える可能性があるため、コンテナーに TiKV をデプロイする際にはこのパラメーターを明示的に指定する必要があります。
 
-- 4.2.2コプロセッサーが多数の大きなクエリを受信し、大量のデータを返します。gRPC は、コプロセッサがデータを返す速度に追いつかず、結果としてメモリ不足エラーが発生します。
+- 4.2.2コプロセッサーが多数の大きなクエリを受信し、大量のデータを返します。gRPC は、コプロセッサーがデータを返す速度に追いつかず、結果としてメモリ不足エラーが発生します。
 
     原因を確認するには、モニター**Grafana** -> **TiKV-details** -> coprocessor overview を表示して`response size`が`network outbound`のトラフィックを超えているかどうかを確認でき**ます**。
 
@@ -241,15 +241,15 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     TiKV インスタンスには 2つの RocksDB インスタンスがあり、1つは`data/raft`にありRaftログを格納し、もう 1つは`data/db`にあり実際のデータを格納します。ログで`grep "Stalling" RocksDB`を実行すると、停止の具体的な原因を確認できます。RocksDB ログは`LOG`で始まるファイルで、 `LOG`が現在のログです。 `write stall`は RocksDB にネイティブに組み込まれたパフォーマンス低下メカニズムです。RocksDB で`write stall`が発生すると、システムのパフォーマンスが大幅に低下します。バージョン 5.2.0 より前のバージョンでは、TiDB は`ServerIsBusy`に遭遇すると、 `write stall`エラーをクライアントに直接返すことで、すべての書き込みリクエストをブロックしようとしますが、これにより QPS パフォーマンスが急激に低下する可能性があります。バージョン 5.2.0 以降、TiKV は、スケジューリングレイヤーで書き込みリクエストを動的に遅延させることで書き込みを抑制する新しいフロー制御メカニズムを導入し、 `server is busy`が発生したときにクライアントに`write stall`を返す以前のメカニズムに取って代わります。新しいフロー制御メカニズムはデフォルトで有効になっており、TiKV は`write stall`および`KvDB` (memtable を除く) の`RaftDB`メカニズムを自動的に無効にします。ただし、保留中のリクエスト数が一定のしきい値を超えると、フロー制御メカニズムは引き続き有効になり、一部またはすべての書き込みリクエストを拒否し、 `server is busy`エラーをクライアントに返します。詳細な説明としきい値については、 [フロー制御構成](/tikv-configuration-file.md#storageflow-control)を参照してください。
 
-    - `server is busy`エラーが、保留中のコンパクションバイト数が多すぎるために発生する場合は、 [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)および[`hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)パラメータの値を増やすことで、この問題を軽減できます。
+    - `server is busy`エラーが、保留中のコンパクションバイト数が多すぎるために発生する場合は、 [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)および[`hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)パラメーターの値を増やすことで、この問題を軽減できます。
 
-        - 保留中のコンパクションバイト数が`soft-pending-compaction-bytes-limit`パラメータの値 (デフォルトでは`192GiB` ) に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。この場合、このパラメータの値を増やすことができます。たとえば、 `[storage.flow-control] soft-pending-compaction-bytes-limit = "384GiB"`のようにです。
+        - 保留中のコンパクションバイト数が`soft-pending-compaction-bytes-limit`パラメーターの値 (デフォルトでは`192GiB` ) に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。この場合、このパラメーターの値を増やすことができます。たとえば、 `[storage.flow-control] soft-pending-compaction-bytes-limit = "384GiB"`のようにです。
 
-        - 保留中のコンパクションバイト数が`hard-pending-compaction-bytes-limit`パラメータの値 (デフォルトでは`1024GiB` ) に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。フロー制御メカニズムは`soft-pending-compaction-bytes-limit`のしきい値に達した後に書き込み速度を遅くするため、このシナリオが発生する可能性は低くなります。発生した場合は、このパラメータの値を増やすことができます (たとえば`[storage.flow-control] hard-pending-compaction-bytes-limit = "2048GiB"`など)。
+        - 保留中のコンパクションバイト数が`hard-pending-compaction-bytes-limit`パラメーターの値 (デフォルトでは`1024GiB` ) に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。フロー制御メカニズムは`soft-pending-compaction-bytes-limit`のしきい値に達した後に書き込み速度を遅くするため、このシナリオが発生する可能性は低くなります。発生した場合は、このパラメーターの値を増やすことができます (たとえば`[storage.flow-control] hard-pending-compaction-bytes-limit = "2048GiB"`など)。
 
         - ディスクのI/O容量が長時間にわたって書き込み速度に追いつかない場合は、ディスクの容量を増やすことをお勧めします。ディスクのスループットが上限に達し、書き込みが停止する場合（例えば、SATA SSDはNVMe SSDよりも大幅に低い）、CPUリソースが十分であれば、より高い圧縮率の圧縮アルゴリズムを適用できます。こうすることで、CPUリソースをディスクリソースに振り向け、ディスクへの負荷を軽減できます。
 
-        - デフォルトのCFコンパクションで高圧が検出された場合は、 `[rocksdb.defaultcf] compression-per-level`パラメータを`["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]`から`["no", "no", "zstd", "zstd", "zstd", "zstd", "zstd"]`に変更します。
+        - デフォルトのCFコンパクションで高圧が検出された場合は、 `[rocksdb.defaultcf] compression-per-level`パラメーターを`["no", "no", "lz4", "lz4", "lz4", "zstd", "zstd"]`から`["no", "no", "zstd", "zstd", "zstd", "zstd", "zstd"]`に変更します。
 
     - memtable が多すぎると、処理が停止します。これは通常、インスタント書き込みの量が多く、memtable がディスクにフラッシュされるのが遅い場合に発生します。ディスク書き込み速度を改善できない場合、またこの問題が業務のピーク時にのみ発生する場合は、対応する CF の`max-write-buffer-number`を増やすことで軽減できます。
 
@@ -257,7 +257,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 4.3.2 `scheduler too busy`
 
-    - 深刻な書き込み競合が発生しています。 `latch wait duration`値が高くなります。モニター**Grafana** -> **TiKV-details** -> **scheduler prewrite** / **scheduler commit**で`latch wait duration`を確認できます。スケジューラで書き込みタスクが蓄積されると、保留中の書き込みタスクが`[storage] scheduler-pending-write-threshold` (100MB) で設定されたしきい値を超えます。 `MVCC_CONFLICT_COUNTER`に対応するメトリックを確認することで、原因を検証できます。
+    - 深刻な書き込み競合が発生しています。 `latch wait duration`値が高くなります。モニター**Grafana** -> **TiKV-details** -> **scheduler prewrite** / **scheduler commit**で`latch wait duration`を確認できます。スケジューラーで書き込みタスクが蓄積されると、保留中の書き込みタスクが`[storage] scheduler-pending-write-threshold` (100MB) で設定されたしきい値を超えます。 `MVCC_CONFLICT_COUNTER`に対応するメトリックを確認することで、原因を検証できます。
 
     - 書き込み速度が遅いと、書き込みタスクが蓄積されます。TiKV に書き込まれるデータが`[storage] scheduler-pending-write-threshold` (100MB) で設定されたしきい値を超えています[4.5](#45-tikv-write-is-slow)を参照してください。
 
@@ -267,7 +267,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
     - `append log duration`値が高いため、メッセージの処理が遅くなります。 `append log duration`値が高い理由については、 [4.5](#45-tikv-write-is-slow)を参照してください。
     - raftstore は、大量のメッセージを瞬時に受信し (TiKV Raftメッセージダッシュボードで確認できます)、処理に失敗します。通常、この一時的な`channel full`ステータスはサービスに影響を与えません。
 
-- 4.3.4 TiKV コプロセッサがキューに入っています。スタックされたタスクの数が`coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`を超えています。大きなクエリが多すぎると、コプロセッサでタスクがスタックされます。実行計画の変更によってテーブルスキャン操作が大量に発生していないか確認する必要があります[3.3](#33-wrong-execution-plan)を参照してください。
+- 4.3.4 TiKV コプロセッサーがキューに入っています。スタックされたタスクの数が`coprocessor threads * readpool.coprocessor.max-tasks-per-worker-[normal|low|high]`を超えています。大きなクエリが多すぎると、コプロセッサーでタスクがスタックされます。実行計画の変更によってテーブルスキャン操作が大量に発生していないか確認する必要があります[3.3](#33-wrong-execution-plan)を参照してください。
 
 ### 4.4 一部のTiKVノードは頻繁にLeaderをドロップする {#44-some-tikv-nodes-drop-leader-frequently}
 
@@ -289,9 +289,9 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 4.5.1 TiKV gRPC の`prewrite/commit/raw-put`の継続時間を表示して、TiKV 書き込みが遅いかどうかを確認します (RawKV クラスターの場合のみ)。一般に、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)に従って遅い段階を特定できます。よくある状況のいくつかを以下に示します。
 
-- 4.5.2 スケジューラのCPUがビジー状態です（トランザクションkvのみ）。
+- 4.5.2 スケジューラーのCPUがビジー状態です（トランザクションkvのみ）。
 
-    prewrite/commit の`scheduler command duration`が`scheduler latch wait duration`と`storage async write duration`の合計よりも長くなっています。スケジューラワーカーの CPU 要求が高く、例えば`scheduler-worker-pool-size` * 100% の 80% を超えているか、マシン全体の CPU リソースが比較的限られています。書き込みワークロードが大きい場合は、 `[storage] scheduler-worker-pool-size`の設定が小さすぎないか確認してください。
+    prewrite/commit の`scheduler command duration`が`scheduler latch wait duration`と`storage async write duration`の合計よりも長くなっています。スケジューラーワーカーの CPU 要求が高く、例えば`scheduler-worker-pool-size` * 100% の 80% を超えているか、マシン全体の CPU リソースが比較的限られています。書き込みワークロードが大きい場合は、 `[storage] scheduler-worker-pool-size`の設定が小さすぎないか確認してください。
 
     その他の状況については、 [バグを報告してください](https://github.com/tikv/tikv/issues/new?template=bug-report.md)。
 
@@ -324,7 +324,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 4.5.6 Raftのコミットログが遅いです。
 
-    TiKV Grafana の**Raft IO** / `commit log duration`が高い (このメトリックは Grafana v4.x 以降でのみサポートされています)。各リージョンは独立したRaftグループに対応します。Raftには、TCP のスライディングウィンドウメカニズムと同様のフロー制御メカニズムがあります。スライディングウィンドウのサイズは`[raftstore] raft-max-inflight-msgs = 256`パラメータを設定することで制御できます。書き込みホットスポットがあり、 `commit log duration`が高い場合は、 `1024`に増やすなど、パラメータを調整できます。
+    TiKV Grafana の**Raft IO** / `commit log duration`が高い (このメトリックは Grafana v4.x 以降でのみサポートされています)。各リージョンは独立したRaftグループに対応します。Raftには、TCP のスライディングウィンドウメカニズムと同様のフロー制御メカニズムがあります。スライディングウィンドウのサイズは`[raftstore] raft-max-inflight-msgs = 256`パラメーターを設定することで制御できます。書き込みホットスポットがあり、 `commit log duration`が高い場合は、 `1024`に増やすなど、パラメーターを調整できます。
 
 - 4.5.7 その他の場合は、 [パフォーマンスマップ](https://github.com/pingcap/tidb-map/blob/master/maps/performance-map.png)上の書き込みパスを参照し、原因を分析してください。
 
@@ -334,7 +334,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 5.1.1 マージ
 
-    - テーブルをまたいで空のリージョンはマージできません。TiKV の`[coprocessor] split-region-on-table`パラメータを変更する必要があります。このパラメータは、v4.x ではデフォルトで`false`に設定されています。詳細は中国語の[ケース896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)を参照してください。
+    - テーブルをまたいで空のリージョンはマージできません。TiKV の`[coprocessor] split-region-on-table`パラメーターを変更する必要があります。このパラメーターは、v4.x ではデフォルトで`false`に設定されています。詳細は中国語の[ケース896](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case896.md)を参照してください。
 
     - リージョンのマージは遅いです。マージされたオペレーターが生成されているかどうかは、 **Grafana** -> **PD** -> **operator**のモニターダッシュボードにアクセスして確認できます。マージを高速化するには、 `merge-schedule-limit`の値を増やしてください。
 
@@ -346,7 +346,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 5.1.3 バランス
 
-    - Leader/リージョンの数が均等に分布していません。中国語の[ケース394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md)と[ケース759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、バランス調整がリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、数の分布が不均等になる可能性があることです。TiDB 4.0では、 `[leader-schedule-policy]`パラメータが導入され、Leaderのスケジューリングポリシーを`count`ベースまたは`size`ベースに設定できるようになりました。
+    - Leader/リージョンの数が均等に分布していません。中国語の[ケース394](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case394.md)と[ケース759](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case759.md)を参照してください。主な原因は、バランス調整がリージョン/Leaderのサイズに基づいてスケジューリングを実行するため、数の分布が不均等になる可能性があることです。TiDB 4.0では、 `[leader-schedule-policy]`パラメーターが導入され、Leaderのスケジューリングポリシーを`count`ベースまたは`size`ベースに設定できるようになりました。
 
 ### 5.2 PD選挙 {#52-pd-election}
 
@@ -440,11 +440,11 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
 - 6.1.7 DM レプリケーションプロセスでエラー`Error 1366: incorrect utf8 value eda0bdedb29d(\ufffd\ufffd\ufffd\ufffd\ufffd\ufffd)`が返されます。
 
-    - この値は MySQL 8.0 または TiDB には正常に書き込めませんが、 MySQL 5.7には書き込めます。 `tidb_skip_utf8_check`パラメータを有効にすることで、データ形式のチェックをスキップできます。
+    - この値は MySQL 8.0 または TiDB には正常に書き込めませんが、 MySQL 5.7には書き込めます。 `tidb_skip_utf8_check`パラメーターを有効にすることで、データ形式のチェックをスキップできます。
 
 ### 6.2 TiDB Lightning {#62-tidb-lightning}
 
-- 6.2.1 TiDB Lightningは、大量のデータを TiDB クラスタに高速に完全インポートするためのツールです。TiDB [TiDB Lightning （GitHub）](https://github.com/pingcap/tidb/tree/release-8.5/lightning)を参照してください。
+- 6.2.1 TiDB Lightningは、大量のデータを TiDB クラスターに高速に完全インポートするためのツールです。TiDB [TiDB Lightning （GitHub）](https://github.com/pingcap/tidb/tree/release-8.5/lightning)を参照してください。
 
 - 6.2.2 インポート速度が遅すぎる。
 
@@ -462,7 +462,7 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     - 原因１：テーブルに既にデータが存在する可能性があります。これらの古いデータは最終的なチェックサムに影響を与える可能性があります。
 
-    - 原因2：ターゲットデータベースのチェックサムが0（つまり何もインポートされていない）の場合、クラスタが過熱していてデータの取り込みに失敗している可能性があります。
+    - 原因2：ターゲットデータベースのチェックサムが0（つまり何もインポートされていない）の場合、クラスターが過熱していてデータの取り込みに失敗している可能性があります。
 
     - 原因3：データソースがマシンによって生成され、 [Dumpling](/dumpling-overview.md)によってバックアップされていない場合は、テーブルの制約を遵守していることを確認してください。例：
 
@@ -497,13 +497,13 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     トランザクションの実行時間がGCの有効期間（デフォルトでは10分）を超えています。
 
-    [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)システム変数を変更することで、GC の有効期間を延長できます。ただし、このパラメータを変更することは一般的に推奨されません。このトランザクションに`UPDATE`および`DELETE`文が多数含まれている場合、このパラメータを変更すると、多くの古いバージョンが蓄積される可能性があるためです。
+    [`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50)システム変数を変更することで、GC の有効期間を延長できます。ただし、このパラメーターを変更することは一般的に推奨されません。このトランザクションに`UPDATE`および`DELETE`文が多数含まれている場合、このパラメーターを変更すると、多くの古いバージョンが蓄積される可能性があるためです。
 
 - 7.1.2 `coprocessor.go`は`request outdated`を報告します。
 
-    このエラーは、TiKVに送信されたコプロセッサリクエストがTiKVのキューで60秒以上待機した場合に返されます。
+    このエラーは、TiKVに送信されたコプロセッサーリクエストがTiKVのキューで60秒以上待機した場合に返されます。
 
-    TiKVコプロセッサが長いキューに入っている理由を調査する必要があります。
+    TiKVコプロセッサーが長いキューに入っている理由を調査する必要があります。
 
 - 7.1.3 `region_cache.go`は`switch region peer to next due to send request fail`を多数報告し、エラーメッセージは`context deadline exceeded`です。
 

@@ -78,7 +78,7 @@ scrape_configs:
 | Idle workers | table | 未使用の数は`table-concurrency` 、通常はプロセス終了まで 0 |
 | Idle workers | index | 未使用の数は`index-concurrency` 、通常はプロセス終了まで 0 |
 | Idle workers | region | 未使用の数は`region-concurrency` 、通常はプロセス終了まで 0 |
-| External resources | KV Encoder | アクティブなKVエンコーダをカウントします。通常はプロセス終了まで`region-concurrency`と同じです。 |
+| External resources | KV Encoder | アクティブなKVエンコーダーをカウントします。通常はプロセス終了まで`region-concurrency`と同じです。 |
 | External resources | Importer Engines | 開かれたエンジンファイルの数をカウントします`max-open-engines`設定を超えないようにしてください。 |
 
 ### 5行目: Read speed {#row-5-read-speed}

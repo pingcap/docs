@@ -220,9 +220,9 @@ BATCH ON id LIMIT 2 DRY RUN DELETE FROM t WHERE v < 6;
 2 rows in set
 ```
 
-### オプティマイザヒントを使用する {#use-the-optimizer-hint}
+### オプティマイザーヒントを使用する {#use-the-optimizer-hint}
 
-オプティマイザヒントが元々 `DELETE`文でサポートされている場合、そのオプティマイザヒントは非トランザクション`DELETE`文でもサポートされます。ヒントの位置は通常の`DELETE`文と同じです。
+オプティマイザーヒントが元々 `DELETE`文でサポートされている場合、そのオプティマイザーヒントは非トランザクション`DELETE`文でもサポートされます。ヒントの位置は通常の`DELETE`文と同じです。
 
 ```sql
 BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
@@ -246,9 +246,9 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 5. エラーが報告された場合は、エラーメッセージまたはログから特定の失敗したデータ範囲を取得し、再試行するか手動で処理します。
 
-## パラメータの説明 {#parameter-description}
+## パラメーターの説明 {#parameter-description}
 
-| パラメータ  | 説明                                                                                                                                                        | デフォルト値                               | 必須かどうか | 推奨値                                             |
+| パラメーター  | 説明                                                                                                                                                        | デフォルト値                               | 必須かどうか | 推奨値                                             |
 | :----- | :-------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------- | :----- | :---------------------------------------------- |
 | シャード列  | 上記の非トランザクション DML文`BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`の`id`列など、バッチをシャーディングするために使用される列。                                                   | TiDB はシャード列を自動的に選択しようとします (推奨されません)。 | いいえ    | 最も効率的に`WHERE`条件を満たす列を選択します。                     |
 | バッチサイズ | 各バッチのサイズを制御するために使用されます。バッチ数は、DML操作を分割するSQL文の数です。例えば、上記の非トランザクションDML文`BATCH ON id LIMIT 2 DELETE FROM t WHERE v < 6`では`LIMIT 2` 。バッチ数が多いほど、バッチサイズは小さくなります。 | 該当なし                                 | はい     | 1000～1000000。バッチが小さすぎたり大きすぎたりすると、パフォーマンスが低下します。 |
@@ -298,7 +298,7 @@ BATCH ON id LIMIT 2 DELETE /*+ USE_INDEX(t)*/ FROM t WHERE v < 6;
 
 非トランザクション DML `BATCH ON $C$ LIMIT $N$ DELETE FROM ... WHERE $P$`の場合、$C$ は分割に使用される列、$N$ はバッチサイズ、$P$ はフィルター条件です。
 
-1. TiDBは、元のステートメントのフィルタ条件$P$と分割対象として指定された列$C$に基づいて、$P$を満たすすべての$C$をクエリします。TiDBはこれらの$C$を$N$に基づいてグループ$B_1 \dots B_k$に分類します。すべての$B_i$について、TiDBは最初と最後の$C$を$S_i$と$E_i$として保持します。このステップで実行されたクエリステートメントは、 [`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement)を通して確認できます。
+1. TiDBは、元のステートメントのフィルター条件$P$と分割対象として指定された列$C$に基づいて、$P$を満たすすべての$C$をクエリします。TiDBはこれらの$C$を$N$に基づいてグループ$B_1 \dots B_k$に分類します。すべての$B_i$について、TiDBは最初と最後の$C$を$S_i$と$E_i$として保持します。このステップで実行されたクエリステートメントは、 [`DRY RUN QUERY`](/non-transactional-dml.md#query-the-batch-dividing-statement)を通して確認できます。
 2. $B_i$に含まれるデータは、$P_i$を満たすサブセットです: $C$ BETWEEN $S_i$ AND $E_i$。$P_i$を使用することで、各バッチで処理する必要があるデータの範囲を絞り込むことができます。
 3. $B_i$ の場合、TiDBは上記の条件を元の文の`WHERE`条件に埋め込み、WHERE ($P_i$) AND ($P$) とします。このステップの実行結果は[`DRY RUN`](/non-transactional-dml.md#query-the-statements-corresponding-to-the-first-and-the-last-batches)で確認できます。
 4. すべてのバッチに対して、新しいステートメントを順番に実行します。各グループのエラーは収集および結合され、すべてのグループが完了した後に、非トランザクションDML文全体の結果として返されます。

@@ -58,7 +58,7 @@ summary: "`openssl` を使用して自己署名証明書を生成します。"
 
 ## 個々のコンポーネントの証明書を発行する {#issue-certificates-for-individual-components}
 
-### クラスタで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
+### クラスターで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
 
 - DM-master が他のコンポーネントに対して DM-master を認証するために使用する`master`証明書。
 - DM-worker が他のコンポーネントに対して DM-worker を認証するために使用する`worker`証明書。
@@ -86,7 +86,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     find / -name openssl.cnf
     ```
 
-3. `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタトポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
+3. `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタートポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
 
     ```
     [ alt_names ]

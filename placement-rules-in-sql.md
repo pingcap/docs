@@ -5,7 +5,7 @@ summary: SQL文を使用してテーブルとパーティションの配置を�
 
 # SQLにおける配置ルール {#placement-rules-in-sql}
 
-SQLの配置ルールは、SQL文を使用してTiKVクラスタ内のデータの保存場所を指定できる機能です。この機能を使用すると、クラスタ、データベース、テーブル、またはパーティションのデータを、特定のリージョン、データセンター、ラック、またはホストにスケジュールできます。
+SQLの配置ルールは、SQL文を使用してTiKVクラスター内のデータの保存場所を指定できる機能です。この機能を使用すると、クラスター、データベース、テーブル、またはパーティションのデータを、特定のリージョン、データセンター、ラック、またはホストにスケジュールできます。
 
 この機能は、以下のユースケースに対応できます。
 
@@ -23,7 +23,7 @@ SQL の配置ルール機能を使用すると、[配置ポリシーを作成し
 
 | レベル     | 説明                                                                                                                                                                        |
 | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| クラスタ    | デフォルトでは、TiDB はクラスターに対して 3つのレプリカのポリシーを構成します。クラスターのグローバル配置ポリシーを構成できます。詳細については、 [クラスターのレプリカ数をグローバルに指定します](#specify-the-number-of-replicas-globally-for-a-cluster)を参照してください。 |
+| クラスター    | デフォルトでは、TiDB はクラスターに対して 3つのレプリカのポリシーを構成します。クラスターのグローバル配置ポリシーを構成できます。詳細については、 [クラスターのレプリカ数をグローバルに指定します](#specify-the-number-of-replicas-globally-for-a-cluster)を参照してください。 |
 | データベース  | 特定のデータベースの配置ポリシーを構成できます。詳細については、 [データベースのデフォルトの配置ポリシーを指定します](#specify-a-default-placement-policy-for-a-database)を参照してください。                                                |
 | テーブル    | 特定のテーブルの配置ポリシーを構成できます。詳細については、[テーブルの配置ポリシーを指定します](#specify-a-placement-policy-for-a-table)を参照してください。                                                                      |
 | パーティション | テーブル内のさまざまな行にパーティションを作成し、パーティションの配置ポリシーを個別に構成できます。詳細については、 [パーティションテーブルの配置ポリシーを指定します](#specify-a-placement-policy-for-a-partitioned-table)を参照してください。                      |
@@ -44,7 +44,7 @@ SQL の配置ルール機能を使用すると、[配置ポリシーを作成し
 
 <CustomContent platform="tidb">
 
-配置ポリシーを作成する際、TiDB はポリシーで指定されたラベルが存在するかどうかをチェックしません。代わりに、TiDB はポリシーをアタッチする際にチェックを実行します。したがって、配置ポリシーをアタッチする前に、各 TiKV ノードに正しいラベルが設定されていることを確認してください。TiDB Self-Managed クラスタの構成方法は以下のとおりです。
+配置ポリシーを作成する際、TiDB はポリシーで指定されたラベルが存在するかどうかをチェックしません。代わりに、TiDB はポリシーをアタッチする際にチェックを実行します。したがって、配置ポリシーをアタッチする前に、各 TiKV ノードに正しいラベルが設定されていることを確認してください。TiDB Self-Managed クラスターの構成方法は以下のとおりです。
 
 ```
 tikv-server --labels region=<region>,zone=<zone>,host=<host>
@@ -56,7 +56,7 @@ tikv-server --labels region=<region>,zone=<zone>,host=<host>
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | 手動デプロイ                    | [トポロジーラベルに基づいてレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)                                                            |
 | TiUPを使用したデプロイ             | [地理的に分散した展開トポロジ](/geo-distributed-deployment-topology.md)                                                                        |
-| TiDB Operatorを使用したデプロイメント | [KubernetesでTiDBクラスタを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data) |
+| TiDB Operatorを使用したデプロイメント | [KubernetesでTiDBクラスターを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data) |
 
 > **Note:**
 >
@@ -137,7 +137,7 @@ SHOW PLACEMENT LABELS;
     1 row in set (0.00 sec)
     ```
 
-- クラスタ内の配置ポリシーの定義を表示するには、 [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)システムテーブルをクエリします。
+- クラスター内の配置ポリシーの定義を表示するには、 [`INFORMATION_SCHEMA.PLACEMENT_POLICIES`](/information-schema/information-schema-placement-policies.md)システムテーブルをクエリします。
 
     ```sql
     SELECT * FROM information_schema.placement_policies\G
@@ -157,13 +157,13 @@ SHOW PLACEMENT LABELS;
     1 row in set
     ```
 
-- クラスタ内の配置ポリシーに関連付けられているすべてのテーブルを表示するには、 `information_schema.tables`システムテーブルの`tidb_placement_policy_name`列をクエリします。
+- クラスター内の配置ポリシーに関連付けられているすべてのテーブルを表示するには、 `information_schema.tables`システムテーブルの`tidb_placement_policy_name`列をクエリします。
 
     ```sql
     SELECT * FROM information_schema.tables WHERE tidb_placement_policy_name IS NOT NULL;
     ```
 
-- クラスタ内の配置ポリシーが関連付けられているすべてのパーティションを表示するには、 `information_schema.partitions`システムテーブルの`tidb_placement_policy_name`列をクエリします。
+- クラスター内の配置ポリシーが関連付けられているすべてのパーティションを表示するには、 `information_schema.partitions`システムテーブルの`tidb_placement_policy_name`列をクエリします。
 
     ```sql
     SELECT * FROM information_schema.partitions WHERE tidb_placement_policy_name IS NOT NULL;
@@ -214,7 +214,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 
 ### 高度な配置オプション {#advanced-placement-options}
 
-高度な設定オプションを使用すると、複雑なシナリオの要件を満たすために、データの配置に関してより柔軟な設定が可能になります。ただし、高度なオプションの設定は通常のオプションよりも複雑であり、クラスタトポロジーとTiDBのデータシャーディングに関する深い理解が必要です。
+高度な設定オプションを使用すると、複雑なシナリオの要件を満たすために、データの配置に関してより柔軟な設定が可能になります。ただし、高度なオプションの設定は通常のオプションよりも複雑であり、クラスタートポロジーとTiDBのデータシャーディングに関する深い理解が必要です。
 
 | オプション名                 | 説明                                                                           |
 | ---------------------- | ---------------------------------------------------------------------------- |
@@ -232,7 +232,7 @@ DROP PLACEMENT POLICY myplacementpolicy;
 | 制約形式  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | リスト形式 | 指定する制約がすべてのレプリカに適用される場合は、キーと値のリスト形式を使用できます。各キーは`+`または`-`で始まります。例:<br/><ul><li> `[+region=us-east-1]`は、 `region`ラベルを持つノードに`us-east-1`としてデータを配置することを意味します。</li><li> `[+region=us-east-1,-type=fault]`は、 `region`という`us-east-1`ラベルを持つノードにデータを配置することを意味しますが、 `type`という`fault`ラベルは持っていません。</li></ul><br/>                                                                                                                                                                                                                                                                                                                                                                                     |
-| 辞書形式  | 異なる制約に対して異なるレプリカ数を指定する必要がある場合は、辞書形式を使用できます。例：<br/><ul><li> `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";`は、 `us-east-1`にFollowerを 1つ、 `us-east-2`にFollowerを1つ、 `us-west-1`にFollowerを 1つ配置することを意味します。</li><li> `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';`は、 `us-east-1`リージョンに位置し、 `type`ラベルが`scale-node`であるノードに 1つのFollowerを配置し、 `us-west-1`に 1つのFollowerを配置することを意味します。</li></ul>辞書形式は`+`または`-`で始まる各キーをサポートし、特別な`#evict-leader`属性を設定できます。たとえば、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'`は、 `us-west-1`で選出されたリーダーが、ディザスタリカバリ中に可能な限り排除されることを意味します。 |
+| 辞書形式  | 異なる制約に対して異なるレプリカ数を指定する必要がある場合は、辞書形式を使用できます。例：<br/><ul><li> `FOLLOWER_CONSTRAINTS="{+region=us-east-1: 1,+region=us-east-2: 1,+region=us-west-1: 1}";`は、 `us-east-1`にFollowerを 1つ、 `us-east-2`にFollowerを1つ、 `us-west-1`にFollowerを 1つ配置することを意味します。</li><li> `FOLLOWER_CONSTRAINTS='{"+region=us-east-1,+type=scale-node": 1,"+region=us-west-1": 1}';`は、 `us-east-1`リージョンに位置し、 `type`ラベルが`scale-node`であるノードに 1つのFollowerを配置し、 `us-west-1`に 1つのFollowerを配置することを意味します。</li></ul>辞書形式は`+`または`-`で始まる各キーをサポートし、特別な`#evict-leader`属性を設定できます。たとえば、 `FOLLOWER_CONSTRAINTS='{"+region=us-east-1":1, "+region=us-east-2": 2, "+region=us-west-1,#evict-leader": 1}'`は、 `us-west-1`で選出されたリーダーが、ディザスターリカバリ中に可能な限り排除されることを意味します。 |
 
 > **Note:**
 >
@@ -350,9 +350,9 @@ SELECT store_id,address,label from INFORMATION_SCHEMA.TIKV_STORE_STATUS;
 
 ### 生存に関する希望条件を指定してください {#specify-survival-preferences}
 
-データの正確な分散方法には特にこだわらず、ディザスタリカバリ要件を満たすことを優先する場合は、 `SURVIVAL_PREFERENCES`オプションを使用して、データの生存に関する設定を指定できます。
+データの正確な分散方法には特にこだわらず、ディザスターリカバリ要件を満たすことを優先する場合は、 `SURVIVAL_PREFERENCES`オプションを使用して、データの生存に関する設定を指定できます。
 
-前述の例と同様に、TiDB クラスタは 3つのリージョンに分散され、各リージョンには 3つのゾーンが含まれています。このクラスタの配置ポリシーを作成する場合、 `SURVIVAL_PREFERENCES`を次のように構成することを想定します。
+前述の例と同様に、TiDB クラスターは 3つのリージョンに分散され、各リージョンには 3つのゾーンが含まれています。このクラスターの配置ポリシーを作成する場合、 `SURVIVAL_PREFERENCES`を次のように構成することを想定します。
 
 ```sql
 CREATE PLACEMENT POLICY multiaz SURVIVAL_PREFERENCES="[region, zone, host]";
@@ -422,7 +422,7 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 
 #### `PRIMARY_REGION`を使用する {#use-primary-region}
 
-クラスタトポロジに`region`ラベルが設定されている場合、 `PRIMARY_REGION`および`REGIONS`オプションを使用して、フォロワーの配置ポリシーを指定することもできます。
+クラスタートポロジに`region`ラベルが設定されている場合、 `PRIMARY_REGION`および`REGIONS`オプションを使用して、フォロワーの配置ポリシーを指定することもできます。
 
 ```sql
 CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;

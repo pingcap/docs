@@ -26,9 +26,9 @@ TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCP
     > **Warning:**
     >
     > - [CentOS Linux サポート終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)よると、CentOS Linux 7 のアップストリームサポートは 2024年 6月 30日に終了しました。
-    >     - TiDBをアップグレードする前に、オペレーティングシステムのバージョンを確認してください。TiDB v8.4.0 DMRおよびv8.5.0では、glibc 2.17のサポートが終了し、CentOS Linux 7のサポートとテストも終了しました。Rocky Linux 9.1以降のバージョンを使用することをお勧めします。CentOS 7上のTiDBクラスタをv8.4.0またはv8.5.0にアップグレードすると、クラスタが利用できなくなるリスクがあります。
+    >     - TiDBをアップグレードする前に、オペレーティングシステムのバージョンを確認してください。TiDB v8.4.0 DMRおよびv8.5.0では、glibc 2.17のサポートが終了し、CentOS Linux 7のサポートとテストも終了しました。Rocky Linux 9.1以降のバージョンを使用することをお勧めします。CentOS 7上のTiDBクラスターをv8.4.0またはv8.5.0にアップグレードすると、クラスターが利用できなくなるリスクがあります。
     >     - CentOS Linux 7 をまだ使用しているユーザーを支援するために、v8.5.1 以降、TiDB は glibc 2.17 のサポートを再開し、CentOS Linux 7 のテストを再開し、CentOS Linux 7 と互換性を持つようになりました。ただし、CentOS Linux の EOL ステータスのため、CentOS Linux 7 の[公式発表およびセキュリティに関するガイダンス](https://www.redhat.com/en/blog/centos-linux-has-reached-its-end-life-eol)を確認し、Rocky Linux 9.1 や TiDB が本番用にサポートするオペレーティングシステムに移行することを強くお勧めします。 後で。
-    > - [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024年 6月 30日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスタを v8.4.0 以降にアップグレードすると、クラスタが使用できなくなります。TiDB をアップグレードする前に、オペレーティングシステムのバージョンを確認してください。
+    > - [Red Hat Enterprise Linux ライフサイクル](https://access.redhat.com/support/policy/updates/errata/#Life_Cycle_Dates)によると、Red Hat Enterprise Linux 7 のメンテナンスサポートは 2024年 6月 30日に終了しました。TiDB は、8.4 DMR バージョン以降、Red Hat Enterprise Linux 7 のサポートを終了します。Rocky Linux 9.1 以降のバージョンを使用することをお勧めします。Red Hat Enterprise Linux 7 上の TiDB クラスターを v8.4.0 以降にアップグレードすると、クラスターが使用できなくなります。TiDB をアップグレードする前に、オペレーティングシステムのバージョンを確認してください。
 
     > **Note:**
     >
@@ -127,7 +127,7 @@ TiDBは、Intel x86-64アーキテクチャの64ビット汎用ハードウェ�
 > - 本番環境では、TiDBとPDのインスタンスを同じサーバーにデプロイできます。ただし、より高いパフォーマンスと信頼性を求める場合は、それぞれを別々にデプロイすることをお勧めします。
 > - 本番環境では、TiDB、TiKV、およびTiFlashをそれぞれ最低8コアのCPUで構成することを強く推奨します。より高いパフォーマンスを得るには、さらに高い構成をお勧めします。
 > - PCIe SSDを使用する場合はTiKVハードディスクの容量を4TB以内に、通常のSSDを使用する場合は1.5TB以内に抑えることをお勧めします。
-> - AWS、Google Cloud、Azureなどのクラウドプロバイダー上にTiDBクラスタをデプロイする場合は、インスタンスストアではなくクラウドディスクをTiKVノードに使用することをお勧めします。
+> - AWS、Google Cloud、Azureなどのクラウドプロバイダー上にTiDBクラスターをデプロイする場合は、インスタンスストアではなくクラウドディスクをTiKVノードに使用することをお勧めします。
 >
 >     - インスタンスストアボリュームのデータ耐久性は比較的低いです。インスタンスストアのライフサイクルは仮想マシンのライフサイクルと連動しています。インスタンスの再起動、停止、移行、ハードウェア障害、またはメンテナンスが行われると、データが失われる可能性があります。ほとんどのクラウドプロバイダーは、インスタンスストアを一時的なストレージとして明示的に分類しています。たとえば、 [AWSドキュメント](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html)によると、「インスタンスストアボリューム上のデータは、関連付けられたインスタンスの存続期間中のみ保持されます。インスタンスを停止、休止状態、または終了すると、インスタンスストアボリューム上のデータはすべて失われます。」
 >     - インスタンスストアボリュームは通常、スナップショットやノード間・リージョン間のレプリケーションをサポートしていません。そのため、データの破損やハードウェア障害が発生した場合、迅速なデータ復旧は困難です。
@@ -161,7 +161,7 @@ TiCDCを導入する前に、500GB以上のPCIe SSDディスクにTiCDCを導入
 |       TiKV      |   20160  | TiKV通信ポート                                        |
 |       TiKV      |   20180  | TiKVの状態を報告するための通信ポート                             |
 |        PD       |   2379   | TiDBとPD間の通信ポート                                   |
-|        PD       |   2380   | PDクラスタ内のノード間通信ポート                                |
+|        PD       |   2380   | PDクラスター内のノード間通信ポート                                |
 |     TiFlash     |   9000   | TiFlash TCPサービスポート                               |
 |     TiFlash     |   3930   | TiFlash RAFTおよびコプロセッサーサービスポート                    |
 |     TiFlash     |   20170  | TiFlashプロキシサービスポート                               |
@@ -170,9 +170,9 @@ TiCDCを導入する前に、500GB以上のPCIe SSDディスクにTiCDCを導入
 |      TiCDC      |   8300   | TiCDC通信ポート                                       |
 |        監視       |   9090   | Prometheusサービス用の通信ポート                            |
 |        監視       |   12020  | NgMonitoringサービス用の通信ポート                          |
-|    Node Exporter   |   9100   | 各TiDBクラスタノードのシステム情報を報告するための通信ポート                 |
-| Blackbox Exporter |   9115   | TiDBクラスタ内のポートを監視するために使用されるBlackbox_exporter通信ポート |
-|      Grafana      |   3000   | 外部Web監視サービスおよびクライアント（ブラウザ）アクセス用のポート              |
+|    Node Exporter   |   9100   | 各TiDBクラスターノードのシステム情報を報告するための通信ポート                 |
+| Blackbox Exporter |   9115   | TiDBクラスター内のポートを監視するために使用されるBlackbox_exporter通信ポート |
+|      Grafana      |   3000   | 外部Web監視サービスおよびクライアント（ブラウザー）アクセス用のポート              |
 |    Alertmanager   |   9093   | アラートWebサービスのポート                                  |
 |    Alertmanager   |   9094   | アラート通信ポート                                        |
 
@@ -182,7 +182,7 @@ TiCDCを導入する前に、500GB以上のPCIe SSDディスクにTiCDCを導入
 
 TiDBはXFSおよびExt4ファイルシステムをサポートしています。その他のファイルシステムは、本番は推奨されません。
 
-## ウェブブラウザの要件 {#web-browser-requirements}
+## ウェブブラウザーの要件 {#web-browser-requirements}
 
 TiDBは、データベースメトリクスの可視化に[Grafana](https://grafana.com/)利用しています。JavaScriptが有効になっている最新バージョンのMicrosoft Edge、Safari、Chrome、またはFirefoxがあれば十分です。
 
@@ -193,7 +193,7 @@ TiDBは、データベースメトリクスの可視化に[Grafana](https://graf
 - ソフトウェア: ストレージとコンピューティングの結合アーキテクチャと同じままです。 [OSおよびプラットフォームの要件](#os-and-platform-requirements)を参照してください。
 - ネットワークポート: ストレージとコンピューティングの結合アーキテクチャと同じままです。[ネットワーク](#network-requirements)を参照してください。
 - ディスク容量:
-    - TiFlash書き込みノード： TiFlashレプリカの追加時およびリージョンレプリカの移行時に、データをAmazon S3にアップロードする前にローカルバッファとして使用されるディスク容量は、少なくとも200GB以上設定することをお勧めします。また、Amazon S3と互換性のあるオブジェクトストレージが必要です。
+    - TiFlash書き込みノード： TiFlashレプリカの追加時およびリージョンレプリカの移行時に、データをAmazon S3にアップロードする前にローカルバッファーとして使用されるディスク容量は、少なくとも200GB以上設定することをお勧めします。また、Amazon S3と互換性のあるオブジェクトストレージが必要です。
     - TiFlash計算ノード：パフォーマンス向上のため、主に書き込みノードから読み取ったデータをキャッシュする目的で、最低でも100GBのディスク容量を設定することをお勧めします。計算ノードのキャッシュが満杯になる場合がありますが、これは正常な動作です。
 - CPUとメモリの要件については、以下のセクションで説明します。
 

@@ -22,7 +22,7 @@ TiUPは現時点ではサードパーティ製コンポーネントをサポー�
 
 ## TiUP PlaygroundとTiUPクラスターコンポーネントの違いは何ですか? {#what-is-the-difference-between-the-tiup-playground-and-tiup-cluster-components}
 
-TiUP Playgroundコンポーネントは、主にLinuxまたはmacOSオペレーティングシステム上でスタンドアロン開発環境を構築するために使用されます。これにより、 TiUPクラスタの特定のバージョンを迅速に開始し、簡単に実行できます。TiUPクラスタコンポーネントは、主に本番環境クラスタ（通常は大規模クラスタ）のデプロイと保守に使用されます。TiUP PlaygroundでデプロイされたTiDBクラスタには、一部の機能と運用能力が不足している可能性があるため、完全な機能テストや安定性テストには推奨されません。
+TiUP Playgroundコンポーネントは、主にLinuxまたはmacOSオペレーティングシステム上でスタンドアロン開発環境を構築するために使用されます。これにより、 TiUPクラスターの特定のバージョンを迅速に開始し、簡単に実行できます。TiUPクラスターコンポーネントは、主に本番環境クラスター（通常は大規模クラスター）のデプロイと保守に使用されます。TiUP PlaygroundでデプロイされたTiDBクラスターには、一部の機能と運用能力が不足している可能性があるため、完全な機能テストや安定性テストには推奨されません。
 
 ## TiUPクラスターコンポーネントのトポロジファイルを作成するにはどうすればよいでしょうか? {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
 
@@ -44,9 +44,9 @@ TiUPクラスターコンポーネントを使用すると、同じホストに�
 
 ## 異なるクラスター間でポートとディレクトリの競合が検出されますか? {#are-port-and-directory-conflicts-detected-among-different-clusters}
 
-複数の異なるクラスタが同じTiUP制御マシンにデプロイされている場合、デプロイおよびスケーリング中にこれらのクラスタ間のポートおよびディレクトリの競合が検出されます。クラスタが異なるTiUP制御マシンにデプロイされている場合、現在、競合検出はサポートされていません。
+複数の異なるクラスターが同じTiUP制御マシンにデプロイされている場合、デプロイおよびスケーリング中にこれらのクラスター間のポートおよびディレクトリの競合が検出されます。クラスターが異なるTiUP制御マシンにデプロイされている場合、現在、競合検出はサポートされていません。
 
-## クラスタのデプロイ中に、 TiUPは`ssh: handshake failed: read tcp 10.10.10.34:38980 -> 10.10.10.34:3600: read: connection reset by peer`エラーを受信しました {#during-cluster-deployment-tiup-received-an-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-error}
+## クラスターのデプロイ中に、 TiUPは`ssh: handshake failed: read tcp 10.10.10.34:38980 -> 10.10.10.34:3600: read: connection reset by peer`エラーを受信しました {#during-cluster-deployment-tiup-received-an-ssh-handshake-failed-read-tcp-10-10-10-34-38980-10-10-10-34-3600-read-connection-reset-by-peer-error}
 
 このエラーは、 TiUPのデフォルトの同時スレッド数が SSH 接続の最大数を超えているために発生する可能性があります。この問題を解決するには、デフォルトの SSH 接続数を増やしてから、sshd サービスを再起動してください。
 

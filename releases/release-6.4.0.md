@@ -1,6 +1,6 @@
 ---
 title: TiDB 6.4.0 Release Notes
-summary: "TiDB 6.4.0-DMRでは、クラスタを特定の時点に復元する機能、線形ハッシュパーティショニング構文との互換性、高性能な`AUTO_INCREMENT`モードなど、新機能と改善点が導入されています。また、障害リカバリ、メモリ使用量制御、統計情報の収集機能も強化されています。TiFlashは保存時の暗号化にSM4アルゴリズムをサポートし、TiCDCはKafkaへのデータレプリケートに対応しました。さらに、各種ツールやコンポーネントにおけるバグ修正と改善も含まれています。"
+summary: "TiDB 6.4.0-DMRでは、クラスターを特定の時点に復元する機能、線形ハッシュパーティショニング構文との互換性、高性能な`AUTO_INCREMENT`モードなど、新機能と改善点が導入されています。また、障害リカバリ、メモリ使用量制御、統計情報の収集機能も強化されています。TiFlashは保存時の暗号化にSM4アルゴリズムをサポートし、TiCDCはKafkaへのデータレプリケートに対応しました。さらに、各種ツールやコンポーネントにおけるバグ修正と改善も含まれています。"
 ---
 
 # TiDB 6.4.0 リリースノート {#tidb-6-4-0-release-notes}
@@ -24,11 +24,11 @@ TiDBバージョン: 6.4.0-DMR
 - [JSON型](/data-type-json.md)の配列データの範囲選択をサポートします。
 - ディスク障害やI/Oスタックなどの極端な状況下での障害リカバリを加速します。
 - [動的計画アルゴリズム](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder)を追加して、テーブルの結合順序を決定します。
-- [新しいオプティマイザヒント`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate)を導入して、相関サブクエリの非相関化を実行するかどうかを制御します。
+- [新しいオプティマイザーヒント`NO_DECORRELATE`](/optimizer-hints.md#no_decorrelate)を導入して、相関サブクエリの非相関化を実行するかどうかを制御します。
 - [クラスター診断](/dashboard/dashboard-diagnostics-access.md)機能が GA になります。
 - TiFlash は[保存時の暗号化](/encryption-at-rest.md#tiflash)のための SM4 アルゴリズムをサポートしています。
 - SQL文を使用して[テーブル内の指定されたパーティションのTiFlashレプリカを即座にコンパクションする](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)ことをサポートします。
-- [EBSボリュームスナップショットを使用したTiDBクラスタのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)サポートします。
+- [EBSボリュームスナップショットを使用したTiDBクラスターのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)サポートします。
 - DM は[上流のデータソース情報を下流のマージ済みテーブルの拡張列に書き込む](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)サポートしています。
 
 ## 新機能 {#new-features}
@@ -45,7 +45,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - `FLASHBACK CLUSTER TO TIMESTAMP`を使用した特定の時点へのクラスターの復元のサポート (実験的) [#37197](https://github.com/pingcap/tidb/issues/37197) [#13303](https://github.com/tikv/tikv/issues/13303) @[Defined2014](https://github.com/Defined2014) @[bb7133](https://github.com/bb7133) @[JmPotato](https://github.com/JmPotato) @[Connor1996](https://github.com/Connor1996) @[HuSharp](https://github.com/HuSharp) @[CalvinNeo](https://github.com/CalvinNeo)
 
-    `FLASHBACK CLUSTER TO TIMESTAMP`構文を使用すると、ガベージコレクション（GC）の有効期間内に、クラスタを特定の時点に迅速に復元できます。この機能は、DML操作の誤りを簡単かつ迅速に取り消すのに役立ちます。たとえば、 `WHERE`句なしで誤って`DELETE`を実行した後、この構文を使用して数分で元のクラスタを復元できます。この機能はデータベースのバックアップに依存せず、異なる時点のデータをロールバックして、データが変更された正確な時刻を特定できます。 `FLASHBACK CLUSTER TO TIMESTAMP`はデータベースのバックアップの代わりにはならないことに注意してください。
+    `FLASHBACK CLUSTER TO TIMESTAMP`構文を使用すると、ガベージコレクション（GC）の有効期間内に、クラスターを特定の時点に迅速に復元できます。この機能は、DML操作の誤りを簡単かつ迅速に取り消すのに役立ちます。たとえば、 `WHERE`句なしで誤って`DELETE`を実行した後、この構文を使用して数分で元のクラスターを復元できます。この機能はデータベースのバックアップに依存せず、異なる時点のデータをロールバックして、データが変更された正確な時刻を特定できます。 `FLASHBACK CLUSTER TO TIMESTAMP`はデータベースのバックアップの代わりにはならないことに注意してください。
 
     `FLASHBACK CLUSTER TO TIMESTAMP`を実行する前に、TiCDC などのツールで実行されている PITR およびレプリケーションタスクを一時停止し、 `FLASHBACK`が完了した後に再開する必要があります。そうしないと、レプリケーションタスクが失敗する可能性があります。
 
@@ -67,21 +67,21 @@ TiDBバージョン: 6.4.0-DMR
 
 ### 可観測性 {#observability}
 
-- クラスタ診断が GA になります [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee)
+- クラスター診断が GA になります [#1438](https://github.com/pingcap/tidb-dashboard/issues/1438) @[Hawkson-jee](https://github.com/Hawkson-jee)
 
-    TiDB Dashboardの [クラスター診断](/dashboard/dashboard-diagnostics-access.md)は、指定された時間範囲内でクラスタに存在する可能性のある問題を診断し、診断結果とクラスタ関連の負荷監視情報を[診断レポート](/dashboard/dashboard-diagnostics-report.md)にまとめます。この診断レポートはWebページ形式です。ブラウザからページを保存した後、オフラインでページを閲覧したり、このページのリンクを共有したりできます。
+    TiDB Dashboardの [クラスター診断](/dashboard/dashboard-diagnostics-access.md)は、指定された時間範囲内でクラスターに存在する可能性のある問題を診断し、診断結果とクラスター関連の負荷監視情報を[診断レポート](/dashboard/dashboard-diagnostics-report.md)にまとめます。この診断レポートはWebページ形式です。ブラウザーからページを保存した後、オフラインでページを閲覧したり、このページのリンクを共有したりできます。
 
-    診断レポートを使用すると、負荷、コンポーネントの状態、処理時間、構成など、クラスタの基本的な状態情報をすばやく把握できます。クラスタに一般的な問題がある場合は、 [診断情報](/dashboard/dashboard-diagnostics-report.md#diagnostic-information)セクションにある組み込みの自動診断結果から原因を特定できます。
+    診断レポートを使用すると、負荷、コンポーネントの状態、処理時間、構成など、クラスターの基本的な状態情報をすばやく把握できます。クラスターに一般的な問題がある場合は、 [診断情報](/dashboard/dashboard-diagnostics-report.md#diagnostic-information)セクションにある組み込みの自動診断結果から原因を特定できます。
 
 ### パフォーマンス {#performance}
 
-- コプロセッサタスクの同時実行適応メカニズムを導入します [#37724](https://github.com/pingcap/tidb/issues/37724) @[you06](https://github.com/you06)
+- コプロセッサータスクの同時実行適応メカニズムを導入します [#37724](https://github.com/pingcap/tidb/issues/37724) @[you06](https://github.com/you06)
 
-    TiKV の処理速度に基づいて、コプロセッサタスクの数が増えると、TiDB は自動的に並列度を上げて ( [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)の値を調整して)、コプロセッサタスクキューを減らし、レイテンシーを削減します。
+    TiKV の処理速度に基づいて、コプロセッサータスクの数が増えると、TiDB は自動的に並列度を上げて ( [`tidb_distsql_scan_concurrency`](/system-variables.md#tidb_distsql_scan_concurrency)の値を調整して)、コプロセッサータスクキューを減らし、レイテンシーを削減します。
 
 - テーブル結合順序を決定するための動的計画アルゴリズムを追加 [#37825](https://github.com/pingcap/tidb/issues/37825) @[winoros](https://github.com/winoros)
 
-    以前のバージョンでは、TiDB はテーブルの結合順序を決定するために貪欲アルゴリズムを使用していました。v6.4.0 では、TiDB オプティマイザに[動的計画アルゴリズム](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder)が導入されました。動的計画アルゴリズムは、貪欲アルゴリズムよりも多くの可能な結合順序を列挙できるため、より良い実行計画を見つける可能性が高まり、一部のシナリオでは SQL 実行効率が向上します。
+    以前のバージョンでは、TiDB はテーブルの結合順序を決定するために貪欲アルゴリズムを使用していました。v6.4.0 では、TiDB オプティマイザーに[動的計画アルゴリズム](/join-reorder.md#example-the-dynamic-programming-algorithm-of-join-reorder)が導入されました。動的計画アルゴリズムは、貪欲アルゴリズムよりも多くの可能な結合順序を列挙できるため、より良い実行計画を見つける可能性が高まり、一部のシナリオでは SQL 実行効率が向上します。
 
     動的計画法アルゴリズムは処理に時間がかかるため、TiDBの結合順序の並べ替えアルゴリズムの選択は、 [`tidb_opt_join_reorder_threshold`](/system-variables.md#tidb_opt_join_reorder_threshold)変数によって制御されます。結合順序の並べ替えに参加するノード数がこの閾値を超えると、TiDBは貪欲法アルゴリズムを使用します。そうでない場合は、動的計画法アルゴリズムを使用します。
 
@@ -99,9 +99,9 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、 [ユーザー向けドキュメント](/system-variables.md#tidb_enable_reuse_chunk-new-in-v640)を参照してください。
 
-- 相関サブクエリの非相関化を実行するかどうかを制御する新しいオプティマイザヒント`NO_DECORRELATE`を導入します [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
+- 相関サブクエリの非相関化を実行するかどうかを制御する新しいオプティマイザーヒント`NO_DECORRELATE`を導入します [#37789](https://github.com/pingcap/tidb/issues/37789) @[time-and-fate](https://github.com/time-and-fate)
 
-    TiDB はデフォルトでは、相関のあるサブクエリを書き換えて相関解除を実行しようとします。これにより、通常は実行効率が向上します。しかし、シナリオによっては相関解除によって実行効率が低下する場合があります。v6.4.0 では、オプティマイザヒント`NO_DECORRELATE`が導入され、特定のクエリブロックに対して相関解除を実行しないようにオプティマイザに指示することで、シナリオによってはクエリのパフォーマンスが向上します。
+    TiDB はデフォルトでは、相関のあるサブクエリを書き換えて相関解除を実行しようとします。これにより、通常は実行効率が向上します。しかし、シナリオによっては相関解除によって実行効率が低下する場合があります。v6.4.0 では、オプティマイザーヒント`NO_DECORRELATE`が導入され、特定のクエリブロックに対して相関解除を実行しないようにオプティマイザーに指示することで、シナリオによってはクエリのパフォーマンスが向上します。
 
     詳細については、[ユーザー向けドキュメント](/optimizer-hints.md#no_decorrelate)を参照してください。
 
@@ -113,7 +113,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - ディスク障害やI/Oスタックなどの極端な状況における障害リカバリを加速する [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    エンタープライズユーザーにとって、データベースの可用性は最も重要な指標の一つです。複雑なハードウェア環境では、障害を迅速に検知して復旧する方法が、データベース可用性における課題の一つとなっています。v6.4.0では、TiDBはTiKVノードの状態検出メカニズムを完全に最適化しました。ディスク障害やI/Oスタックといった極端な状況下でも、TiDBはノードの状態を迅速に報告し、アクティブウェイクアップメカニズムを使用してLeader選出を事前に開始することで、クラスタの自己修復を加速します。この最適化により、TiDBはディスク障害発生時のクラスタリカバリ時間を約50%短縮できます。
+    エンタープライズユーザーにとって、データベースの可用性は最も重要な指標の一つです。複雑なハードウェア環境では、障害を迅速に検知して復旧する方法が、データベース可用性における課題の一つとなっています。v6.4.0では、TiDBはTiKVノードの状態検出メカニズムを完全に最適化しました。ディスク障害やI/Oスタックといった極端な状況下でも、TiDBはノードの状態を迅速に報告し、アクティブウェイクアップメカニズムを使用してLeader選出を事前に開始することで、クラスターの自己修復を加速します。この最適化により、TiDBはディスク障害発生時のクラスターリカバリ時間を約50%短縮できます。
 
 - TiDBのメモリ使用量に関するグローバル制御 [#37816](https://github.com/pingcap/tidb/issues/37816) @[wshwsh12](https://github.com/wshwsh12)
 
@@ -125,9 +125,9 @@ TiDBバージョン: 6.4.0-DMR
 
     詳細については、[ユーザー向けドキュメント](/configure-memory-usage.md)を参照してください。
 
-- 範囲構築オプティマイザのメモリ使用量を制御する [#37176](https://github.com/pingcap/tidb/issues/37176) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
+- 範囲構築オプティマイザーのメモリ使用量を制御する [#37176](https://github.com/pingcap/tidb/issues/37176) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
 
-    バージョン6.4.0では、範囲を構築するオプティマイザの最大メモリ使用量を制限するために、システム変数[`tidb_opt_range_max_size`](/system-variables.md#tidb_opt_range_max_size-new-in-v640)が導入されました。メモリ使用量がこの制限を超えると、オプティマイザはメモリ消費量を削減するために、より正確な範囲ではなく、より粗い粒度の範囲を構築します。SQL文に`IN`条件が多数ある場合、この最適化によりコンパイル時のメモリ使用量を大幅に削減し、システムの安定性を確保できます。
+    バージョン6.4.0では、範囲を構築するオプティマイザーの最大メモリ使用量を制限するために、システム変数[`tidb_opt_range_max_size`](/system-variables.md#tidb_opt_range_max_size-new-in-v640)が導入されました。メモリ使用量がこの制限を超えると、オプティマイザーはメモリ消費量を削減するために、より正確な範囲ではなく、より粗い粒度の範囲を構築します。SQL文に`IN`条件が多数ある場合、この最適化によりコンパイル時のメモリ使用量を大幅に削減し、システムの安定性を確保できます。
 
     詳細については、 [ユーザー向けドキュメント](/system-variables.md#tidb_opt_range_max_size-new-in-v640)を参照してください。
 
@@ -145,12 +145,12 @@ TiDBバージョン: 6.4.0-DMR
 
 - TiKV API V2 が一般公開 (GA) [#11745](https://github.com/tikv/tikv/issues/11745) @[pingyu](https://github.com/pingyu)
 
-    バージョン6.1.0より前のTiKVは、クライアントから渡された生データのみを保存するため、基本的なキーバリューの読み書き機能しか提供していませんでした。さらに、異なるコーディング方式とスコープのないデータ範囲のため、TiDB、トランザクションKV、およびRawKVを同じTiKVクラスタで同時に使用できません。そのため、複数のクラスタが必要となり、マシンコストと導入コストが増加します。
+    バージョン6.1.0より前のTiKVは、クライアントから渡された生データのみを保存するため、基本的なキーバリューの読み書き機能しか提供していませんでした。さらに、異なるコーディング方式とスコープのないデータ範囲のため、TiDB、トランザクションKV、およびRawKVを同じTiKVクラスターで同時に使用できません。そのため、複数のクラスターが必要となり、マシンコストと導入コストが増加します。
 
     TiKV API V2は、新しいRawKVストレージフォーマットとアクセスインターフェースを提供し、以下の利点をもたらします。
 
     - MVCCにデータを保存する際に、記録されたデータの変更タイムスタンプを付加します。このタイムスタンプに基づいて変更データキャプチャ（CDC）が実装されます。この機能は実験的であり、詳細は[TiKV-CDC](https://github.com/tikv/migration/blob/main/cdc/README.md)に記載されています。
-    - データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスタ内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。
+    - データはさまざまな用途に応じて範囲が定められており、API V2では、単一のクラスター内でTiDB、トランザクションKV、およびRawKVアプリケーションが共存することをサポートしています。
     - マルチテナントなどの機能をサポートするために、キースペースフィールドを予約します。
 
     TiKV API V2を有効にするには、TiKV設定ファイルの`[storage]`セクションで`api-version = 2`を設定します。
@@ -227,7 +227,7 @@ TiDBバージョン: 6.4.0-DMR
 
     TiDB クラスターが EKS 上にデプロイされ、AWS EBS ボリュームを使用している場合、TiDB クラスターデータのバックアップ時に以下の要件を満たす必要がある場合は、 TiDB Operatorを使用してボリュームスナップショットとメタデータによるデータを AWS S3 にバックアップできます。
 
-    - バックアップの影響を最小限に抑えます。例えば、QPSとトランザクションレイテンシーへの影響を5%未満に抑え、クラスタのCPUとメモリを消費しないようにします。
+    - バックアップの影響を最小限に抑えます。例えば、QPSとトランザクションレイテンシーへの影響を5%未満に抑え、クラスターのCPUとメモリを消費しないようにします。
     - 短時間でデータのバックアップと復元が可能です。例えば、1時間以内にバックアップを完了し、2時間以内にデータを復元できます。
 
     詳細については、 [ユーザー向けドキュメント](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)を参照してください。
@@ -250,7 +250,7 @@ TiDBバージョン: 6.4.0-DMR
     - 上流テーブルに主キー制約または一意キー制約があるかどうかを確認してください。
     - プライマリ/セカンダリ構成で、アップストリームデータベースのデータベースID `server_id`が指定されているかどうかを確認してください。
 
-- DMは、増分移行タスクのオプションパラメータとしてbinlogの位置とGTIDを設定することをサポートします [#7393](https://github.com/pingcap/tiflow/issues/7393) @[GMHDBJD](https://github.com/GMHDBJD)
+- DMは、増分移行タスクのオプションパラメーターとしてbinlogの位置とGTIDを設定することをサポートします [#7393](https://github.com/pingcap/tiflow/issues/7393) @[GMHDBJD](https://github.com/GMHDBJD)
 
     バージョン6.4.0以降では、binlogの位置やGTIDを指定せずに、増分移行を直接実行できます。DMは、タスク開始後にアップストリームから生成されたbinlogファイルを自動的に取得し、これらの増分データをダウンストリームに移行します。これにより、ユーザーは面倒な理解や複雑な設定から解放されます。
 
@@ -282,10 +282,10 @@ TiDBバージョン: 6.4.0-DMR
 | [`tidb_constraint_check_in_place_pessimistic`](/system-variables.md#tidb_constraint_check_in_place_pessimistic-new-in-v630)         | 変更     | グローバルスコープを削除し、 [`pessimistic-txn.constraint-check-in-place-pessimistic`](/tidb-configuration-file.md#constraint-check-in-place-pessimistic-new-in-v640)設定項目を使用してデフォルト値を変更できるようにします。この変数は、TiDB が悲観的トランザクション内の一意制約をチェックするタイミングを制御します。 |
 | [`tidb_ddl_flashback_concurrency`](/system-variables.md#tidb_ddl_flashback_concurrency-new-in-v630)                                 | 変更     | バージョン6.4.0以降で有効になり、 [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)の同時実行を制御します。デフォルト値は`64`です。                                                                                                |
 | [`tidb_enable_clustered_index`](/system-variables.md#tidb_enable_clustered_index-new-in-v50)                                        | 変更     | デフォルト値を`INT_ONLY`から`ON`に変更します。これは、主キーがデフォルトでクラスター化インデックスとして作成されることを意味します。                                                                                                                                                        |
-| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                                                         | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、コプロセッサリクエストを送信するためのページング方式がデフォルトで使用されることを意味します。                                                                                                                                                           |
+| [`tidb_enable_paging`](/system-variables.md#tidb_enable_paging-new-in-v540)                                                         | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、コプロセッサーリクエストを送信するためのページング方式がデフォルトで使用されることを意味します。                                                                                                                                                           |
 | [`tidb_enable_prepared_plan_cache`](/system-variables.md#tidb_enable_prepared_plan_cache-new-in-v610)                               | 変更     | SESSION スコープを追加します。この変数は[プリペアドプランキャッシュ](/sql-prepared-plan-cache.md)を有効にするかどうかを制御します。                                                                                                                                               |
 | [`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)                                               | 変更     | デフォルト値を`0.8`から`0.7`に変更します。この変数は、tidb-server のメモリアラームをトリガーするメモリ使用率を制御します。                                                                                                                                                            |
-| [`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down)                                                             | 変更     | グローバルスコープを追加します。この変数は、オプティマイザが集計関数をJoin、Projection、およびUnionAllの前にプッシュダウンする最適化操作を実行するかどうかを制御します。                                                                                                                                     |
+| [`tidb_opt_agg_push_down`](/system-variables.md#tidb_opt_agg_push_down)                                                             | 変更     | グローバルスコープを追加します。この変数は、オプティマイザーが集計関数をJoin、Projection、およびUnionAllの前にプッシュダウンする最適化操作を実行するかどうかを制御します。                                                                                                                                     |
 | [`tidb_prepared_plan_cache_size`](/system-variables.md#tidb_prepared_plan_cache_size-new-in-v610)                                   | 変更     | SESSIONスコープを追加します。この変数は、セッション内でキャッシュできるプランの最大数を制御します。                                                                                                                                                                               |
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)                                           | 変更     | デフォルト値を`0`から`100`に変更します。これは、SQL 実行がデフォルトで最大 100 ミリ秒待機して、完全な列統計を同期的にロードできることを意味します。                                                                                                                                                  |
 | [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)                                 | 変更     | デフォルト値を`OFF`から`ON`に変更します。これは、完全な列統計を同期的に読み込むタイムアウトに達した後、SQL 最適化が擬似統計を使用するように戻ることを意味します。                                                                                                                                             |
@@ -298,15 +298,15 @@ TiDBバージョン: 6.4.0-DMR
 | [`tidb_external_ts`](/system-variables.md#tidb_external_ts-new-in-v640)                                                             | 新しく追加された | デフォルト値は`0`です。[`tidb_enable_external_ts_read`](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)が`ON`に設定されている場合、TiDB はこの変数で指定されたタイムスタンプを持つデータを読み取ります。                                      |
 | [`tidb_gogc_tuner_threshold`](/system-variables.md#tidb_gogc_tuner_threshold-new-in-v640)                                           | 新しく追加された | GOGC のチューニングにおける最大メモリしきい値を指定します。メモリがこのしきい値を超えると、GOGC Tuner は動作を停止します。デフォルト値は`0.6`です。                                                                                                                                                |
 | [`tidb_memory_usage_alarm_keep_record_num`](/system-variables.md#tidb_memory_usage_alarm_keep_record_num-new-in-v640)               | 新しく追加された | tidb-serverのメモリ使用量がメモリアラームのしきい値を超えてアラームが発生した場合、TiDBはデフォルトでは直近5件のアラーム発生時に生成されたステータスファイルのみを保持します。この件数は、この変数で調整できます。                                                                                                                   |
-| [`tidb_opt_prefix_index_single_scan`](/system-variables.md#tidb_opt_prefix_index_single_scan-new-in-v640)                           | 新しく追加された | TiDB オプティマイザが不要なテーブル検索を回避し、クエリのパフォーマンスを向上させるために、一部のフィルタ条件をプレフィックスインデックスにプッシュダウンするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                         |
-| [`tidb_opt_range_max_size`](/system-variables.md#tidb_opt_range_max_size-new-in-v640)                                               | 新しく追加された | オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を指定します。デフォルト値は`67108864` (64 MiB) です。                                                                                                                                                                |
+| [`tidb_opt_prefix_index_single_scan`](/system-variables.md#tidb_opt_prefix_index_single_scan-new-in-v640)                           | 新しく追加された | TiDB オプティマイザーが不要なテーブル検索を回避し、クエリのパフォーマンスを向上させるために、一部のフィルター条件をプレフィックスインデックスにプッシュダウンするかどうかを制御します。デフォルト値は`ON`です。                                                                                                                         |
+| [`tidb_opt_range_max_size`](/system-variables.md#tidb_opt_range_max_size-new-in-v640)                                               | 新しく追加された | オプティマイザーがスキャン範囲を構築するためのメモリ使用量の上限を指定します。デフォルト値は`67108864` (64 MiB) です。                                                                                                                                                                |
 | [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)                                             | 新しく追加された | TiDB インスタンスのメモリ制限を制御します（実験的）。デフォルト値は`0`で、メモリ制限がないことを意味します。                                                                                                                                                            |
 | [`tidb_server_memory_limit_gc_trigger`](/system-variables.md#tidb_server_memory_limit_gc_trigger-new-in-v640)                       | 新しく追加された | TiDB が GC をトリガーしようとするしきい値を制御します (実験的)。デフォルト値は`70%`です。                                                                                                                                                                               |
 | [`tidb_server_memory_limit_sess_min_size`](/system-variables.md#tidb_server_memory_limit_sess_min_size-new-in-v640)                 | 新しく追加された | メモリ制限を有効にすると、TiDB は現在のインスタンスで最もメモリ使用量の多い SQL文を終了します。この変数は、終了する SQL文の最小メモリ使用量を指定します。デフォルト値は`134217728` (128 MiB) です。                                                                                                   |
 
-### 設定ファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメーター {#configuration-file-parameters}
 
-| 設定ファイル | 設定パラメータ                                                                                                                                   | 変更の種類  | 説明                                                                                                                                                                      |
+| 設定ファイル | 設定パラメーター                                                                                                                                   | 変更の種類  | 説明                                                                                                                                                                      |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | `tidb_memory_usage_alarm_ratio`                                                                                                                   | 削除済み     | この設定項目は無効になりました。                                                                                                                                                        |
 | TiDB           | `memory-usage-alarm-ratio`                                                                                                                        | 削除済み     | システム変数[`tidb_memory_usage_alarm_ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)に置き換えられました。この設定項目が TiDB バージョン v6.4.0 より前のバージョンで設定されていた場合、アップグレード後には有効になりません。 |
@@ -319,9 +319,9 @@ TiDBバージョン: 6.4.0-DMR
 | TiKV           | [`raftstore.apply-yield-write-size`](/tikv-configuration-file.md#apply-yield-write-size-new-in-v640)                                              | 新しく追加された | Applyスレッドが1回のポーリングで1つのFSM（有限状態機械）に対して書き込める最大バイト数を制御します。デフォルト値は`32KiB`です。これはソフトリミットです。                                                                                   |
 | PD             | [`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval)                                                          | 新しく追加された | バージョン6.4.0以降で有効になり、PDがTSOの物理時刻を更新する間隔を制御します。デフォルト値は`50ms`です。                                                                                                            |
 | TiFlash        | [`data-encryption-method`](/tiflash/tiflash-configuration.md#configure-the-tiflash-learnertoml-file)                                              | 変更     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                     |
-| DM             | [`routes.route-rule-1.extract-table`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                              | 新しく追加された | オプション。シャーディングシナリオにおいて、シャーディングされたテーブルのソース情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメータを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。    |
-| DM             | [`routes.route-rule-1.extract-schema`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                             | 新しく追加された | オプション。シャーディングシナリオにおいて、シャーディングされたスキーマのソース情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメータを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。    |
-| DM             | [`routes.route-rule-1.extract-source`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                             | 新しく追加された | オプション。シャーディングシナリオにおいて、ソースインスタンス情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメータを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。             |
+| DM             | [`routes.route-rule-1.extract-table`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                              | 新しく追加された | オプション。シャーディングシナリオにおいて、シャーディングされたテーブルのソース情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメーターを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。    |
+| DM             | [`routes.route-rule-1.extract-schema`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                             | 新しく追加された | オプション。シャーディングシナリオにおいて、シャーディングされたスキーマのソース情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメーターを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。    |
+| DM             | [`routes.route-rule-1.extract-source`](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                             | 新しく追加された | オプション。シャーディングシナリオにおいて、ソースインスタンス情報を抽出するために使用します。抽出された情報は、ダウンストリームのマージ済みテーブルに書き込まれ、データソースを識別するために使用されます。このパラメーターを設定する場合は、事前にダウンストリームにマージ済みテーブルを手動で作成する必要があります。             |
 | TiCDC          | [`transaction-atomicity`](/ticdc/ticdc-sink-to-mysql.md#configure-sink-uri-for-mysql-or-tidb)                                                     | 変更     | デフォルト値を`table`から`none`に変更します。この変更により、レプリケーションのレイテンシーとメモリ不足（OOM）のリスクが軽減されます。さらに、TiCDC はすべてのトランザクションを分割するのではなく、一部のトランザクション（単一のトランザクションのサイズが 1024 行を超える場合）のみを分割するようになります。  |
 
 ### その他 {#others}
@@ -347,7 +347,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - PD
 
-    - ホットリージョンスケジューラのv2アルゴリズムがGAになります。一部のシナリオでは、v2アルゴリズムは、設定された両方の次元でより良いバランスを実現し、無効なスケジューリングを減らすことができます。 [#5021](https://github.com/tikv/pd/issues/5021) @[hundundm](https://github.com/hundundm)
+    - ホットリージョンスケジューラーのv2アルゴリズムがGAになります。一部のシナリオでは、v2アルゴリズムは、設定された両方の次元でより良いバランスを実現し、無効なスケジューリングを減らすことができます。 [#5021](https://github.com/tikv/pd/issues/5021) @[hundundm](https://github.com/hundundm)
     - 早期のタイムアウトを回避するためにオペレーターステップのタイムアウトメカニズムを最適化します [#5596](https://github.com/tikv/pd/issues/5596) @[bufferflies](https://github.com/bufferflies)
     - 大規模クラスターでのスケジューラーのパフォーマンスを向上 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
     - PD で提供されていない外部タイムスタンプの使用をサポートする [#5637](https://github.com/tikv/pd/issues/5637) @[lhy1024](https://github.com/lhy1024)
@@ -445,7 +445,7 @@ TiDBバージョン: 6.4.0-DMR
 
     - TiDB Data Migration (DM)
 
-        - DM WebUI が間違った`allow-list`パラメータを生成する問題を修正 [#7096](https://github.com/pingcap/tiflow/issues/7096) @[zoubingwu](https://github.com/zoubingwu)
+        - DM WebUI が間違った`allow-list`パラメーターを生成する問題を修正 [#7096](https://github.com/pingcap/tiflow/issues/7096) @[zoubingwu](https://github.com/zoubingwu)
         - DM-workerが起動または停止時にデータ競合を引き起こす確率がある問題を修正します [#6401](https://github.com/pingcap/tiflow/issues/6401) @[liumengya94](https://github.com/liumengya94)
         - DM が`UPDATE`または`DELETE`文を複製する際に、対応する行データが存在しない場合、DM がイベントをサイレントに無視する問題を修正します。 [#6383](https://github.com/pingcap/tiflow/issues/6383) @[GMHDBJD](https://github.com/GMHDBJD)
         - `query-status`コマンドを実行した後、 `secondsBehindMaster`フィールドが表示されない問題を修正しました [#7189](https://github.com/pingcap/tiflow/issues/7189) @[GMHDBJD](https://github.com/GMHDBJD)

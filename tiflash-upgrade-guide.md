@@ -26,7 +26,7 @@ summary: TiFlash をアップグレードする際の注意事項を説明しま
 
 TiFlashをv5.3.0より前のバージョンからv5.3.0以降にアップグレードするには、 TiFlashを停止してからアップグレードする必要があります。TiUPを使用してTiFlashをアップグレードする際は、以下の点にご注意ください。
 
-- TiUPクラスタのバージョンがv1.12.0以降の場合、 TiFlashを停止してからアップグレードできません。アップグレード先のバージョンでTiUPクラスタのバージョンがv1.12.0以降が必要な場合は、まず`tiup cluster:v1.11.3 <subcommand>`を使用してTiFlashを中間バージョンにアップグレードし、TiDBクラスタのオンラインアップグレードを実行した後、 TiUPバージョンをアップグレードし、その後TiDBクラスタを停止せずに直接アップグレード先のバージョンにアップグレードすることをお勧めします。
+- TiUPクラスターのバージョンがv1.12.0以降の場合、 TiFlashを停止してからアップグレードできません。アップグレード先のバージョンでTiUPクラスターのバージョンがv1.12.0以降が必要な場合は、まず`tiup cluster:v1.11.3 <subcommand>`を使用してTiFlashを中間バージョンにアップグレードし、TiDBクラスターのオンラインアップグレードを実行した後、 TiUPバージョンをアップグレードし、その後TiDBクラスターを停止せずに直接アップグレード先のバージョンにアップグレードすることをお勧めします。
 - TiUPクラスターのバージョンが v1.12.0 より前の場合は、次の手順を実行してTiFlash をアップグレードします。
 
 次の手順に従うと、 TiUPを使用して他のコンポーネントを中断せずにTiFlash をアップグレードできます。
@@ -125,7 +125,7 @@ TiFlash v6.2.0はデフォルトでPageStorage V3バージョン[`format_version
 
 ## v6.x または v7.x から`storage.format_version = 5`が設定された v7.3 へ {#from-v6-x-or-v7-x-to-v7-3-with-storage-format-version-5-configured}
 
-TiFlash v7.3 以降、新しい DTFile バージョン DTFile V3 (実験的) が導入されました。この新しい DTFile バージョンでは、複数の小さなファイルを 1つの大きなファイルに結合することで、ファイル総数を削減できます。v7.3 では、デフォルトの DTFile バージョンは引き続き V2 です。V3 を使用するには、 [TiFlash設定パラメータ](/tiflash/tiflash-configuration.md) `storage.format_version = 5`を設定します。設定後もTiFlash はV2 DTFile を読み取り可能で、その後のデータコンパクション時に既存の V2 DTFile を徐々に V3 DTFile に書き換えます。
+TiFlash v7.3 以降、新しい DTFile バージョン DTFile V3 (実験的) が導入されました。この新しい DTFile バージョンでは、複数の小さなファイルを 1つの大きなファイルに結合することで、ファイル総数を削減できます。v7.3 では、デフォルトの DTFile バージョンは引き続き V2 です。V3 を使用するには、 [TiFlash設定パラメーター](/tiflash/tiflash-configuration.md) `storage.format_version = 5`を設定します。設定後もTiFlash はV2 DTFile を読み取り可能で、その後のデータコンパクション時に既存の V2 DTFile を徐々に V3 DTFile に書き換えます。
 
 TiFlashをv7.3にアップグレードし、V3 DTFilesを使用するように設定した後、 TiFlashを以前のバージョンに戻す必要がある場合は、DTToolをオフラインで使用してV3 DTFilesをV2 DTFilesに書き換えることができます。詳細については、 [DTTool 移行ツール](/tiflash/tiflash-command-line-flags.md#dttool-migrate)を参照してください。
 

@@ -23,7 +23,7 @@ TiDB v7.6.0 では、テーブル作成の高速化をサポートするシス�
 
 システム変数[`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)の値を指定することで、テーブル作成時のパフォーマンス最適化を有効または無効にできます。
 
-TiDB v8.5.0以降、新しく作成されたクラスタでは、高速テーブル作成機能がデフォルトで有効になり、 `tidb_enable_fast_create_table`が`ON`に設定されます。v8.4.0以前のバージョンからアップグレードされたクラスタの場合、 `tidb_enable_fast_create_table`のデフォルト値は変更されません。
+TiDB v8.5.0以降、新しく作成されたクラスターでは、高速テーブル作成機能がデフォルトで有効になり、 `tidb_enable_fast_create_table`が`ON`に設定されます。v8.4.0以前のバージョンからアップグレードされたクラスターの場合、 `tidb_enable_fast_create_table`のデフォルト値は変更されません。
 
 テーブル作成時のパフォーマンス最適化を有効にするには、この変数の値を`ON`に設定してください。
 

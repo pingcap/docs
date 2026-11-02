@@ -1,6 +1,6 @@
 ---
 title: Best Practices for Using HAProxy in TiDB
-summary: HAProxyは、TCPおよびHTTPベースのアプリケーション向けの無料のオープンソースロードバランサおよびプロキシサーバーです。高可用性、負荷分散、ヘルスチェック、スティッキーセッション、SSLサポート、監視機能を提供します。HAProxyを導入するには、ハードウェアとソフトウェアの要件を満たしていることを確認の上、インストールと設定を行ってください。最適な結果を得るには、最新の安定バージョンをご使用ください。
+summary: HAProxyは、TCPおよびHTTPベースのアプリケーション向けの無料のオープンソースロードバランサーおよびプロキシサーバーです。高可用性、負荷分散、ヘルスチェック、スティッキーセッション、SSLサポート、監視機能を提供します。HAProxyを導入するには、ハードウェアとソフトウェアの要件を満たしていることを確認の上、インストールと設定を行ってください。最適な結果を得るには、最新の安定バージョンをご使用ください。
 aliases: ['/ja/docs/dev/best-practices/haproxy-best-practices/','/ja/docs/dev/reference/best-practices/haproxy/','/ja/tidb/stable/haproxy-best-practices/','/ja/tidb/dev/haproxy-best-practices/']
 ---
 
@@ -16,7 +16,7 @@ aliases: ['/ja/docs/dev/best-practices/haproxy-best-practices/','/ja/docs/dev/re
 
 ## HAProxyの概要 {#haproxy-overview}
 
-HAProxyは、C言語で書かれた無料のオープンソースソフトウェアで、TCPおよびHTTPベースのアプリケーション向けの高可用性ロードバランサおよびプロキシサーバーを提供します。CPUとメモリを高速かつ効率的に使用できるため、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS（Amazon Web Services）など、多くの著名なウェブサイトで広く利用されています。
+HAProxyは、C言語で書かれた無料のオープンソースソフトウェアで、TCPおよびHTTPベースのアプリケーション向けの高可用性ロードバランサーおよびプロキシサーバーを提供します。CPUとメモリを高速かつ効率的に使用できるため、GitHub、Bitbucket、Stack Overflow、Reddit、Tumblr、Twitter、Tuenti、AWS（Amazon Web Services）など、多くの著名なウェブサイトで広く利用されています。
 
 HAProxyは、LinuxカーネルのコアコントリビューターであるWilly Tarreauによって2000年に作成されました。彼は現在もプロジェクトのメンテナンスを担当し、オープンソースコミュニティに無料のソフトウェアアップデートを提供しています。このガイドでは、HAProxy [2.6](https://www.haproxy.com/blog/announcing-haproxy-2-6/)を使用しています。最新の安定版の使用を推奨します。詳細は[HAProxyのリリースバージョン](http://www.haproxy.org/)をご覧ください。
 

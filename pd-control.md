@@ -174,13 +174,13 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 "8.5.5"
 ```
 
-- `max-snapshot-count`は単一のストアが同時に受信または送信するスナップショットの最大数を制御します。スケジューラは、通常のアプリケーションリソースの消費を回避するために、この設定によって制限されます。レプリカの追加やバランシングの速度を向上させる必要がある場合は、この値を大きくしてください。
+- `max-snapshot-count`は単一のストアが同時に受信または送信するスナップショットの最大数を制御します。スケジューラーは、通常のアプリケーションリソースの消費を回避するために、この設定によって制限されます。レプリカの追加やバランシングの速度を向上させる必要がある場合は、この値を大きくしてください。
 
     ```bash
     config set max-snapshot-count 64  // Set the maximum number of snapshots to 64
     ```
 
-- `max-pending-peer-count`は単一ストア内の保留中のピアの最大数を制御します。この設定により、一部のノードで最新のログがないリージョンが多数生成されるのを防ぐため、スケジューラは制限されます。レプリカの追加やバランシングの速度を向上させる必要がある場合は、この値を増やしてください。0 に設定すると、制限はありません。
+- `max-pending-peer-count`は単一ストア内の保留中のピアの最大数を制御します。この設定により、一部のノードで最新のログがないリージョンが多数生成されるのを防ぐため、スケジューラーは制限されます。レプリカの追加やバランシングの速度を向上させる必要がある場合は、この値を増やしてください。0 に設定すると、制限はありません。
 
     ```bash
     config set max-pending-peer-count 64  // Set the maximum number of pending peers to 64
@@ -249,7 +249,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set max-store-down-time 30m  // Set the time within which PD receives no heartbeats and after which PD starts to add replicas to 30 minutes
     ```
 
-- `max-store-preparing-time`はストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン状態の間、PD はストアのオンライン進行状況を照会できます。指定された時間を超えると、PD はストアがオンライン状態になったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどのシナリオでは、このパラメータを調整する必要はありません。
+- `max-store-preparing-time`はストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン状態の間、PD はストアのオンライン進行状況を照会できます。指定された時間を超えると、PD はストアがオンライン状態になったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどのシナリオでは、このパラメーターを調整する必要はありません。
 
     次のコマンドは、ストアがオンラインになるまでの最大待機時間が 4時間であることを指定します。
 
@@ -289,7 +289,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 - `hot-region-cache-hits-threshold`は、ホットリージョンを識別するために必要な分数を設定するために使用されます。PD は、リージョンがこの分数を超えてホットスポット状態になった後にのみ、ホットスポットスケジューリングに参加できます。
 
-- `tolerant-size-ratio`はバランスバッファ領域のサイズを制御します。2つのストアのリーダーまたはリージョン間のスコア差が、指定されたリージョンサイズの倍数未満の場合、PDはバランスが取れているとみなします。
+- `tolerant-size-ratio`はバランスバッファー領域のサイズを制御します。2つのストアのリーダーまたはリージョン間のスコア差が、指定されたリージョンサイズの倍数未満の場合、PDはバランスが取れているとみなします。
 
     ```bash
     config set tolerant-size-ratio 20        // Set the size of the buffer area to about 20 times of the average Region Size
@@ -317,7 +317,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
 
 - `leader-schedule-policy`はリーダーのスケジューリング戦略を選択するために使用されます。`size`または`count`に従ってリーダーをスケジュールできます。
 
-- `scheduler-max-waiting-operator`は、各スケジューラ内の待機オペレーターの数を制御するために使用されます。
+- `scheduler-max-waiting-operator`は、各スケジューラー内の待機オペレーターの数を制御するために使用されます。
 
 - `enable-remove-down-replica`はダウンタイムレプリカの自動削除機能を有効にするために使用されます。`false`に設定すると、PDはダウンタイムレプリカを自動的にクリーンアップしません。
 
@@ -393,7 +393,7 @@ config set service-middleware audit enable-audit false
 
 - `GetRegion` : 指定されたリージョンに関する情報を取得する
 - `GetStore` : 指定されたストアの情報を取得する
-- `GetMembers` : PDクラスタメンバーに関する情報を取得する
+- `GetMembers` : PDクラスターメンバーに関する情報を取得する
 
 gRPC API リクエストの最大レート（ `GetRegion` API リクエストなど）を制御するには、次のコマンドを実行します。
 
@@ -760,7 +760,7 @@ time: 43.12698ms
 
 このコマンドを使用して、指定された範囲`[startkey, endkey)`内のすべてのリージョンを照会します。 `endKey`のない範囲もサポートされています。
 
-パラメータ`limit`はキーの数を制限します。`limit`のデフォルト値は`16`で、値`-1`はキーの数を無制限にすることを意味します。
+パラメーター`limit`はキーの数を制限します。`limit`のデフォルト値は`16`で、値`-1`はキーの数を無制限にすることを意味します。
 
 使用法：
 
@@ -898,7 +898,7 @@ time: 43.12698ms
 
 ### `resource-manager [command]` {#resource-manager-command}
 
-#### リソース制御のコントローラ構成を表示する {#view-the-controller-configuration-of-resource-control}
+#### リソース制御のコントローラー構成を表示する {#view-the-controller-configuration-of-resource-control}
 
 ```bash
 resource-manager config controller show
@@ -959,14 +959,14 @@ pd-ctl resource-manager config controller set ltb-max-wait-duration 30m
 
 このコマンドを使用して、 `balance-region-scheduler`の実行状態と関連する診断情報を表示します。
 
-TiDB v6.3.0以降、PDは`balance-region-scheduler`と`balance-leader-scheduler`の実行状態と簡単な診断情報を提供します。他のスケジューラとチェッカーはまだサポートされていません。この機能を有効にするには、 `pd-ctl`を使用して[`enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)設定項目を変更します。
+TiDB v6.3.0以降、PDは`balance-region-scheduler`と`balance-leader-scheduler`の実行状態と簡単な診断情報を提供します。他のスケジューラーとチェッカーはまだサポートされていません。この機能を有効にするには、 `pd-ctl`を使用して[`enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)設定項目を変更します。
 
-スケジューラの状態は次のいずれかになります。
+スケジューラーの状態は次のいずれかになります。
 
-- `disabled` : スケジューラは使用できないか削除されています。
-- `paused` : スケジューラは一時停止されています。
-- `scheduling` : スケジューラはスケジューリング演算子を生成しています。
-- `pending` : スケジューラはスケジューリング演算子を生成できません。状態`pending`のスケジューラには、簡単な診断情報が返されます。この簡単な情報は、ストアの状態と、これらのストアをスケジューリング対象として選択できない理由を説明します。
+- `disabled` : スケジューラーは使用できないか削除されています。
+- `paused` : スケジューラーは一時停止されています。
+- `scheduling` : スケジューラーはスケジューリング演算子を生成しています。
+- `pending` : スケジューラーはスケジューリング演算子を生成できません。状態`pending`のスケジューラーには、簡単な診断情報が返されます。この簡単な情報は、ストアの状態と、これらのストアをスケジューリング対象として選択できない理由を説明します。
 - `normal` : スケジューリング演算子を生成する必要はありません。
 
 ### `scheduler config evict-slow-store-scheduler` {#scheduler-config-evict-slow-store-scheduler}
@@ -993,7 +993,7 @@ v8.5.5以降、TiKVはストアハートビートで`NetworkSlowScore`をPDに�
 
 #### 回復時間制御 {#recovery-time-control}
 
-`recovery-duration`パラメータを使用して、低速ノードが回復したとみなされるまでにどれだけの時間安定状態を維持する必要があるかを指定できます。
+`recovery-duration`パラメーターを使用して、低速ノードが回復したとみなされるまでにどれだけの時間安定状態を維持する必要があるかを指定できます。
 
 例：
 
@@ -1009,7 +1009,7 @@ v8.5.5以降、TiKVはストアハートビートで`NetworkSlowScore`をPDに�
 
 このコマンドを使用して、 `balance-leader-scheduler`ポリシーを表示および制御します。
 
-TiDB v6.0.0以降、PDはバランスリーダーがタスクを処理する速度を制御するための`balance-leader-scheduler`のパラメータ`Batch`を導入しました。このパラメータを使用するには、pd-ctlを使用して設定項目`balance-leader batch`を変更します。
+TiDB v6.0.0以降、PDはバランスリーダーがタスクを処理する速度を制御するための`balance-leader-scheduler`のパラメーター`Batch`を導入しました。このパラメーターを使用するには、pd-ctlを使用して設定項目`balance-leader batch`を変更します。
 
 v6.0.0より前のPDにはこの設定項目がないため、 `balance-leader batch=1`となります。v6.0.0以降のバージョンでは、 `balance-leader batch`のデフォルト値は`4`です。この設定項目を`4`より大きい値に設定するには、同時に[`scheduler-max-waiting-operator`](#config-show--set-option-value--placement-rules) （デフォルト値は`5` ）にもより大きな値を設定する必要があります。両方の設定項目を変更することで、期待される高速化効果が得られます。
 
@@ -1089,7 +1089,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set max-zombie-rounds 3
     ```
 
-- `max-peer-number`は解決するピアの最大数を意味し、これによりスケジューラが遅くなりすぎるのを防ぎます。
+- `max-peer-number`は解決するピアの最大数を意味し、これによりスケジューラーが遅くなりすぎるのを防ぎます。
 
     ```bash
     scheduler config balance-hot-region-scheduler set max-peer-number 1000
@@ -1101,22 +1101,22 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set byte-rate-rank-step-ratio 0.05
     ```
 
-- `src-tolerance-ratio`と`dst-tolerance-ratio`は期待値スケジューラの設定項目です。`tolerance-ratio`が小さいほど、スケジューリングが容易になります。冗長なスケジューリングが発生する場合は、この値を適切に増やしてください。
+- `src-tolerance-ratio`と`dst-tolerance-ratio`は期待値スケジューラーの設定項目です。`tolerance-ratio`が小さいほど、スケジューリングが容易になります。冗長なスケジューリングが発生する場合は、この値を適切に増やしてください。
 
     ```bash
     scheduler config balance-hot-region-scheduler set src-tolerance-ratio 1.1
     ```
 
-- `read-priorities` 、 `write-leader-priorities` 、 `write-peer-priorities`はホットリージョンスケジューリングにおいてスケジューラがどのディメンションを優先するかを制御します。設定では2つのディメンションがサポートされています。
+- `read-priorities` 、 `write-leader-priorities` 、 `write-peer-priorities`はホットリージョンスケジューリングにおいてスケジューラーがどのディメンションを優先するかを制御します。設定では2つのディメンションがサポートされています。
 
-    - `read-priorities`は読み取りタイプのホットリージョンをスケジューリングする際に、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`cpu` 、 `query` 、 `byte` 、 `key`です。
-    - `write-leader-priorities`は書き込みリーダータイプのホットリージョンをスケジューリングする際に、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`query` 、 `byte` 、 `key`です。
+    - `read-priorities`は読み取りタイプのホットリージョンをスケジューリングする際に、スケジューラーがどのディメンションを優先するかを制御します。ディメンションのオプションは`cpu` 、 `query` 、 `byte` 、 `key`です。
+    - `write-leader-priorities`は書き込みリーダータイプのホットリージョンをスケジューリングする際に、スケジューラーがどのディメンションを優先するかを制御します。ディメンションのオプションは`query` 、 `byte` 、 `key`です。
 
-    - `write-peer-priorities`は書き込みピアタイプのホットリージョンのスケジュールにおいて、スケジューラがどのディメンションを優先するかを制御します。ディメンションのオプションは`byte`と`key`です。
+    - `write-peer-priorities`は書き込みピアタイプのホットリージョンのスケジュールにおいて、スケジューラーがどのディメンションを優先するかを制御します。ディメンションのオプションは`byte`と`key`です。
 
     > **Note:**
     >
-    > クラスター内のいずれかのコンポーネントが v5.2 より前の場合、 `query`ディメンションの設定は有効になりません。一部のコンポーネントを v5.2 以降にアップグレードした後も、スケジューラはデフォルトで`byte`および`key`ディメンションに基づいてホットスポットバランシングを優先します。クラスター内のすべてのコンポーネントを v5.2 以降にアップグレードした後も、このような設定は互換性のために引き続き有効になります。
+    > クラスター内のいずれかのコンポーネントが v5.2 より前の場合、 `query`ディメンションの設定は有効になりません。一部のコンポーネントを v5.2 以降にアップグレードした後も、スケジューラーはデフォルトで`byte`および`key`ディメンションに基づいてホットスポットバランシングを優先します。クラスター内のすべてのコンポーネントを v5.2 以降にアップグレードした後も、このような設定は互換性のために引き続き有効になります。
     >
     > v8.5.7 以降では、TiKV はホットリージョンスケジューリングのために読み取り CPU 使用率を報告します。読み取り CPU レポートをサポートするクラスターでは、デフォルトの`read-priorities`の値は`cpu,byte`です。読み取り CPU レポートをサポートしないクラスターでは、PD は自動的に`query,byte`にフォールバックし、クラスターが`query`ディメンションもサポートしない場合は`byte,key`にフォールバックします。 `pd-ctl`を使用してリアルタイム設定を表示できます。通常、これらの設定を変更する必要はありません。
 
@@ -1130,10 +1130,10 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config balance-hot-region-scheduler set strict-picking-store true
     ```
 
-- `rank-formula-version`は、ホットリージョンスケジューリングで使用するスケジューラアルゴリズムのバージョンを制御します。値の選択肢は`v1`と`v2`です。デフォルト値は`v2`です。
+- `rank-formula-version`は、ホットリージョンスケジューリングで使用するスケジューラーアルゴリズムのバージョンを制御します。値の選択肢は`v1`と`v2`です。デフォルト値は`v2`です。
 
-    - `v1`アルゴリズムは、TiDB v6.3.0以前のバージョンで使用されていたスケジューラ戦略です。このアルゴリズムは、主にストア間の負荷差を軽減することに重点を置いており、他のディメンションへの副作用の発生を回避します。
-    - `v2`アルゴリズムは、TiDB v6.3.0 で導入された実験的スケジューラ戦略であり、TiDB v6.4.0 で一般提供（GA）されました。このアルゴリズムは、ストア間の公平性の向上を主な目的としつつ、副作用も考慮しています。`strict-picking-store`が`true`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第1次元の均等化をより重視しています。`strict-picking-store`が`false`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第2次元のバランスを考慮しています。
+    - `v1`アルゴリズムは、TiDB v6.3.0以前のバージョンで使用されていたスケジューラー戦略です。このアルゴリズムは、主にストア間の負荷差を軽減することに重点を置いており、他のディメンションへの副作用の発生を回避します。
+    - `v2`アルゴリズムは、TiDB v6.3.0 で導入された実験的スケジューラー戦略であり、TiDB v6.4.0 で一般提供（GA）されました。このアルゴリズムは、ストア間の公平性の向上を主な目的としつつ、副作用も考慮しています。`strict-picking-store`が`true`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第1次元の均等化をより重視しています。`strict-picking-store`が`false`である`v1`アルゴリズムと比較すると、 `v2`アルゴリズムは第2次元のバランスを考慮しています。
     - `strict-picking-store`を`true`とする`v1`アルゴリズムは保守的であり、両次元に高負荷のストアがある場合にのみスケジューリングが生成されます。特定のシナリオでは、次元の競合によりバランス調整を継続できなくなる可能性があります。第1次元でより適切なバランス調整を実現するには、 `strict-picking-store`を`false`に設定する必要があります。`v2`アルゴリズムは両次元でより適切なバランス調整を実現し、無効なスケジューリングを削減します。
 
   ```bash
@@ -1162,7 +1162,7 @@ scheduler config balance-leader-scheduler set batch 3 // Set the size of the ope
     scheduler config evict-leader-scheduler delete-store 2    // Remove leader eviction scheduling for store 2
     ```
 
-    `evict-leader-scheduler`のすべてのストア構成が削除されると、スケジューラ自体も自動的に削除されます。
+    `evict-leader-scheduler`のすべてのストア構成が削除されると、スケジューラー自体も自動的に削除されます。
 
 - `evict-leader-scheduler`が既に存在する場合は、 `set batch`サブコマンドを使用して`batch`値を変更します。 `batch`は、単一のスケジューリングプロセスで生成されるオペレーターの数を制御します。デフォルト値は`3`で、範囲は`[1, 10]`です。 `batch`値が大きいほど、スケジューリング速度が速くなります。
 

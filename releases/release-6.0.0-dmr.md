@@ -106,7 +106,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - 実行計画を共有するためにプリペアドステートメントを強化する
 
-    SQL 実行計画を再利用すると、SQL 文の解析時間を効果的に短縮し、CPU リソースの消費を抑え、SQL 実行効率を向上させることができます。SQL チューニングの重要な方法の 1つは、SQL 実行計画を効果的に再利用することです。TiDB は、プリペアドステートメントと実行計画の共有をサポートしています。ただし、プリペアドステートメントが閉じられると、TiDB は対応するプランキャッシュを自動的にクリアします。その後、TiDB は繰り返される SQL 文を不必要に解析し、実行効率に影響を与える可能性があります。v6.0.0 以降、TiDB は`tidb_ignore_prepared_cache_close_stmt`パラメータ (デフォルトでは無効) によって`COM_STMT_CLOSE`のコマンドを無視するかどうかを制御できるようになりました。パラメータを有効にすると、TiDB はプリペアドステートメントを閉じるコマンドを無視し、実行計画をキャッシュに保持するため、実行計画の再利用率が向上します。
+    SQL 実行計画を再利用すると、SQL 文の解析時間を効果的に短縮し、CPU リソースの消費を抑え、SQL 実行効率を向上させることができます。SQL チューニングの重要な方法の 1つは、SQL 実行計画を効果的に再利用することです。TiDB は、プリペアドステートメントと実行計画の共有をサポートしています。ただし、プリペアドステートメントが閉じられると、TiDB は対応するプランキャッシュを自動的にクリアします。その後、TiDB は繰り返される SQL 文を不必要に解析し、実行効率に影響を与える可能性があります。v6.0.0 以降、TiDB は`tidb_ignore_prepared_cache_close_stmt`パラメーター (デフォルトでは無効) によって`COM_STMT_CLOSE`のコマンドを無視するかどうかを制御できるようになりました。パラメーターを有効にすると、TiDB はプリペアドステートメントを閉じるコマンドを無視し、実行計画をキャッシュに保持するため、実行計画の再利用率が向上します。
 
     [ユーザードキュメント](/sql-prepared-plan-cache.md#ignore-the-com_stmt_close-command-and-the-deallocate-prepare-statement) [#31056](https://github.com/pingcap/tidb/issues/31056)
 
@@ -148,7 +148,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - 実行計画のベースラインキャプチャを強化する
 
-    テーブル名、頻度、ユーザー名などのディメンションを含むブロックリストを追加することで、実行計画のベースラインキャプチャの使いやすさを向上させました。バインディングのキャッシュのメモリ管理を最適化する新しいアルゴリズムを導入しました。ベースラインキャプチャを有効にすると、ほとんどのOLTPクエリのバインディングが自動的に作成されます。バインドされたステートメントの実行計画は固定されるため、実行計画の変更によるパフォーマンスの問題を回避できます。ベースラインキャプチャは、メジャーバージョンのアップグレードやクラスタの移行などのシナリオに適用でき、実行計画の回帰によって引き起こされるパフォーマンスの問題を軽減するのに役立ちます。
+    テーブル名、頻度、ユーザー名などのディメンションを含むブロックリストを追加することで、実行計画のベースラインキャプチャの使いやすさを向上させました。バインディングのキャッシュのメモリ管理を最適化する新しいアルゴリズムを導入しました。ベースラインキャプチャを有効にすると、ほとんどのOLTPクエリのバインディングが自動的に作成されます。バインドされたステートメントの実行計画は固定されるため、実行計画の変更によるパフォーマンスの問題を回避できます。ベースラインキャプチャは、メジャーバージョンのアップグレードやクラスターの移行などのシナリオに適用でき、実行計画の回帰によって引き起こされるパフォーマンスの問題を軽減するのに役立ちます。
 
     [ユーザードキュメント](/sql-plan-management.md#baseline-capturing) [#32466](https://github.com/pingcap/tidb/issues/32466)
 
@@ -160,7 +160,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - TiFlashのzstd圧縮アルゴリズムをサポート
 
-    TiFlashでは、 `profiles.default.dt_compression_method`と`profiles.default.dt_compression_level`の2つのパラメータが導入されており、ユーザーはパフォーマンスと容量のバランスに基づいて最適な圧縮アルゴリズムを選択できます。
+    TiFlashでは、 `profiles.default.dt_compression_method`と`profiles.default.dt_compression_level`の2つのパラメーターが導入されており、ユーザーはパフォーマンスと容量のバランスに基づいて最適な圧縮アルゴリズムを選択できます。
 
     [ユーザードキュメント](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)
 
@@ -200,7 +200,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     移行タスクを中断させる問題に対処するためのコマンドが追加されました。例:
 
-    - スキーマエラーが発生した場合は、スキーマファイルを個別に編集するのではなく、 `binlog-schema update`コマンドの`--from-source/--from-target`パラメータを使用してスキーマファイルを更新できます。
+    - スキーマエラーが発生した場合は、スキーマファイルを個別に編集するのではなく、 `binlog-schema update`コマンドの`--from-source/--from-target`パラメーターを使用してスキーマファイルを更新できます。
     - binlog の位置を指定して、DDL文を挿入、置換、スキップ、または元に戻すことができます。
 
     [ユーザードキュメント](/dm/dm-manage-schema.md)
@@ -213,9 +213,9 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - 指定した時間から移行タスクを開始することをサポート
 
-    移行タスクに新しいパラメータ`--start-time`が追加されました。'2021-10-21 00:01:00'または'2021-10-21T00:01:00'の形式で時間を定義できます。
+    移行タスクに新しいパラメーター`--start-time`が追加されました。'2021-10-21 00:01:00'または'2021-10-21T00:01:00'の形式で時間を定義できます。
 
-    この機能は、シャードMySQLインスタンスから増分データを移行およびマージするシナリオで特に役立ちます。具体的には、増分移行タスクで各ソースにbinlog開始ポイントを設定する必要はありません。代わりに、 `safe-mode`の`--start-time`パラメータを使用することで、増分移行タスクを迅速に作成できます。
+    この機能は、シャードMySQLインスタンスから増分データを移行およびマージするシナリオで特に役立ちます。具体的には、増分移行タスクで各ソースにbinlog開始ポイントを設定する必要はありません。代わりに、 `safe-mode`の`--start-time`パラメーターを使用することで、増分移行タスクを迅速に作成できます。
 
     [ユーザードキュメント](/dm/dm-create-task.md#flags-description)
 
@@ -235,19 +235,19 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - 100,000 個のテーブルを同時に複製することをサポート
 
-    TiCDCはデータ処理フローを最適化することで、各テーブルの増分データ処理におけるリソース消費を削減し、大規模クラスタにおけるデータレプリケーションの安定性と効率性を大幅に向上させます。社内テストの結果、TiCDCは10万テーブルの同時レプリケーションを安定的にサポートできることが示されています。
+    TiCDCはデータ処理フローを最適化することで、各テーブルの増分データ処理におけるリソース消費を削減し、大規模クラスターにおけるデータレプリケーションの安定性と効率性を大幅に向上させます。社内テストの結果、TiCDCは10万テーブルの同時レプリケーションを安定的にサポートできることが示されています。
 
 ### デプロイと保守 {#deployment-and-maintenance}
 
 - 新しい照合順序ルールをデフォルトで有効にする
 
-    TiDB v4.0以降、大文字小文字を区別しない、アクセントを区別しない、およびパディングルールにおいてMySQLと同様に動作する新しい照合順序ルールがTiDBでサポートされています。新しい照合順序ルールは`new_collations_enabled_on_first_bootstrap`パラメータで制御されますが、このパラメータはデフォルトで無効になっています。v6.0以降、TiDBは新しい照合順序ルールをデフォルトで有効にします。この設定はTiDBクラスタの初期化時にのみ有効になることに注意してください。
+    TiDB v4.0以降、大文字小文字を区別しない、アクセントを区別しない、およびパディングルールにおいてMySQLと同様に動作する新しい照合順序ルールがTiDBでサポートされています。新しい照合順序ルールは`new_collations_enabled_on_first_bootstrap`パラメーターで制御されますが、このパラメーターはデフォルトで無効になっています。v6.0以降、TiDBは新しい照合順序ルールをデフォルトで有効にします。この設定はTiDBクラスターの初期化時にのみ有効になることに注意してください。
 
     [ユーザードキュメント](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)
 
 - TiKVノードの再起動後のリーダーバランシングを高速化
 
-    TiKVノードの再起動後、不均一に分散されたリーダーを負荷分散のために再配置する必要があります。大規模クラスターでは、リーダーのバランス調整時間はリージョン数と正の相関関係にあります。例えば、10万リージョンのリーダーのバランス調整には20～30分かかる場合があり、負荷の不均一性によるパフォーマンスの問題や安定性リスクが生じやすくなります。TiDB v6.0.0では、バランス調整の同時実行性を制御するパラメータが追加され、デフォルト値が従来の4倍に拡張されました。これにより、リーダーのバランス調整時間が大幅に短縮され、TiKVノードの再起動後の業務復旧が加速されます。
+    TiKVノードの再起動後、不均一に分散されたリーダーを負荷分散のために再配置する必要があります。大規模クラスターでは、リーダーのバランス調整時間はリージョン数と正の相関関係にあります。例えば、10万リージョンのリーダーのバランス調整には20～30分かかる場合があり、負荷の不均一性によるパフォーマンスの問題や安定性リスクが生じやすくなります。TiDB v6.0.0では、バランス調整の同時実行性を制御するパラメーターが追加され、デフォルト値が従来の4倍に拡張されました。これにより、リーダーのバランス調整時間が大幅に短縮され、TiKVノードの再起動後の業務復旧が加速されます。
 
     [ユーザードキュメント](/pd-control.md#scheduler-config-balance-leader-scheduler) [#4610](https://github.com/tikv/pd/issues/4610)
 
@@ -259,7 +259,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 - PingCAP Clinic診断サービス（テクニカルプレビュー版）
 
-    PingCAP Clinic は、 TiDB クラスタ向けの診断サービスです。このサービスは、クラスタの問題をリモートでトラブルシューティングし、ローカルでクラスタの状態を迅速に確認するのに役立ちます。PingCAP Clinicを利用することで、TiDB クラスタのライフサイクル全体にわたる安定した運用を確保し、潜在的な問題を予測し、問題発生の可能性を低減し、クラスタの問題を迅速にトラブルシューティングできます。
+    PingCAP Clinic は、 TiDB クラスター向けの診断サービスです。このサービスは、クラスターの問題をリモートでトラブルシューティングし、ローカルでクラスターの状態を迅速に確認するのに役立ちます。PingCAP Clinicを利用することで、TiDB クラスターのライフサイクル全体にわたる安定した運用を確保し、潜在的な問題を予測し、問題発生の可能性を低減し、クラスターの問題を迅速にトラブルシューティングできます。
 
     クラスターの問題のトラブルシューティングのために PingCAP テクニカルサポートにリモートアシスタンスを依頼する場合、 PingCAP Clinic Serviceを使用して診断データを収集およびアップロードすることで、トラブルシューティングの効率を向上させることができます。
 
@@ -269,7 +269,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     TiDB Enterprise Manager (TiEM) は、TiDB データベースに基づくエンタープライズレベルのデータベース管理プラットフォームであり、ユーザーがセルフホスト環境またはパブリッククラウド環境で TiDB クラスターを管理できるようにすることを目的としています。
 
-    TiEMは、TiDBクラスタのライフサイクル全体を視覚的に管理するだけでなく、パラメータ管理、バージョンアップ、クラスタクローン、アクティブ/スタンバイクラスタ切り替え、データのインポート/エクスポート、データレプリケーション、データのバックアップ/リストアといったワンストップサービスも提供します。TiEMは、TiDBにおけるDevOpsの効率を向上させ、企業のDevOpsコストを削減します。
+    TiEMは、TiDBクラスターのライフサイクル全体を視覚的に管理するだけでなく、パラメーター管理、バージョンアップ、クラスタークローン、アクティブ/スタンバイクラスター切り替え、データのインポート/エクスポート、データレプリケーション、データのバックアップ/リストアといったワンストップサービスも提供します。TiEMは、TiDBにおけるDevOpsの効率を向上させ、企業のDevOpsコストを削減します。
 
     現在、TiEMは[TiDB Enterprise Edition](https://www.pingcap.com/tidb-enterprise/)のみで提供されています。TiEMを入手するには、 [TiDB Enterprise](https://www.pingcap.com/tidb-enterprise/)ページからお問い合わせください。
 
@@ -289,9 +289,9 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
 <table><thead><tr><th>変数名</th><th>タイプを変更</th><th>説明</th></tr></thead><tbody><tr><td><code>placement_checks</code></td><td>削除済み</td><td>DDL文が<a href="https://docs.pingcap.com/tidb/dev/placement-rules-in-sql">SQL の配置ルール</a>で指定された配置ルールを検証するかどうかを制御します。<code>tidb_placement_mode</code>に置き換えられました。</td></tr><tr><td> <code>tidb_enable_alter_placement</code></td><td>削除済み</td><td><a href="https://docs.pingcap.com/tidb/dev/placement-rules-in-sql">SQL で配置ルール</a>を有効にするかどうかを制御します。</td></tr><tr><td> <code>tidb_mem_quota_hashjoin</code><br/> <code>tidb_mem_quota_indexlookupjoin</code><br/> <code>tidb_mem_quota_indexlookupreader</code><br/> <code>tidb_mem_quota_mergejoin</code><br/> <code>tidb_mem_quota_sort</code><br/> <code>tidb_mem_quota_topn</code></td><td>削除済み</td><td>v5.0以降、これらの変数は<code>tidb_mem_quota_query</code>に置き換えられ、<a href="https://docs.pingcap.com/tidb/dev/system-variables">システム変数</a>ドキュメントから削除されました。互換性を確保するため、これらの変数はソースコードに残されていました。TiDB 6.0.0以降、これらの変数はコードからも削除されています。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_enable_mutation_checker-new-in-v600"><code>tidb_enable_mutation_checker</code></a></td><td>新しく追加された</td><td>ミューテーションチェッカーを有効にするかどうかを制御します。デフォルト値は<code>ON</code>です。v6.0.0より前のバージョンからアップグレードする既存のクラスターの場合、ミューテーションチェッカーはデフォルトで無効になっています。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_ignore_prepared_cache_close_stmt-new-in-v600"><code>tidb_ignore_prepared_cache_close_stmt</code></a></td><td>新しく追加された</td><td>プリペアドステートメントを閉じるコマンドを無視するかどうかを制御します。デフォルト値は<code>OFF</code>です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_mem_quota_binding_cache-new-in-v600"><code>tidb_mem_quota_binding_cache</code></a></td><td>新しく追加された</td><td>バインディングを保持するキャッシュのメモリ使用量のしきい値を設定します。デフォルト値は<code>67108864</code> （64 MiB）です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_placement_mode-new-in-v600"><code>tidb_placement_mode</code></a></td><td>新しく追加された</td><td>DDL文が<a href="https://docs.pingcap.com/tidb/dev/placement-rules-in-sql">SQLの配置ルール</a>で指定された配置ルールを無視するかどうかを制御します。デフォルト値は<code>strict</code>で、DDL文は配置ルールを無視しません。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_rc_read_check_ts-new-in-v600"><code>tidb_rc_read_check_ts</code></a></td><td>新しく追加された</td><td><ul><li>トランザクション内の読み取りステートメントのレイテンシーを最適化します。読み取り/書き込みの競合が深刻な場合、この変数をオンにするとオーバーヘッドとレイテンシーが増加し、パフォーマンスが低下します。デフォルト値は<code>off</code>です。</li><li>この変数はまだ<a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_replica_read-new-in-v40">replica-read</a>と互換性がありません。読み取りリクエストで<code>tidb_rc_read_check_ts</code>がオンになっている場合、 replica-read を使用できない可能性があります。両方の変数を同時にオンにしないでください。</li></ul></td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_sysdate_is_now-new-in-v600"><code>tidb_sysdate_is_now</code></a></td><td>新しく追加された</td><td><code>SYSDATE</code>関数を<code>NOW</code>関数に置き換えるかどうかを制御します。この設定項目は、MySQLオプション<a href="https://dev.mysql.com/doc/refman/8.0/en/server-options.html#option_mysqld_sysdate-is-now"><code>sysdate-is-now</code></a>と同じ効果があります。デフォルト値は<code>OFF</code>です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_table_cache_lease-new-in-v600"><code>tidb_table_cache_lease</code></a></td><td>新しく追加された</td><td><a href="https://docs.pingcap.com/tidb/dev/cached-tables">テーブルキャッシュ</a>のリース時間を秒単位で制御します。デフォルト値は<code>3</code>です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_top_sql_max_meta_count-new-in-v600"><code>tidb_top_sql_max_meta_count</code></a></td><td>新しく追加された</td><td><a href="https://docs.pingcap.com/tidb/dev/top-sql">Top SQL</a>によって1分間に収集されるSQL文タイプの最大数を制御します。デフォルト値は<code>5000</code>です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_top_sql_max_time_series_count-new-in-v600"><code>tidb_top_sql_max_time_series_count</code></a></td><td>新しく追加された</td><td>負荷に最も寄与するSQL文（つまり、上位N文）を1分あたりに<a href="https://docs.pingcap.com/tidb/dev/top-sql">Top SQL</a>で記録できる回数を制御します。デフォルト値は<code>100</code>です。</td></tr><tr><td> <a href="https://docs.pingcap.com/tidb/dev/system-variables#tidb_txn_assertion_level-new-in-v600"><code>tidb_txn_assertion_level</code></a></td><td>新しく追加された</td><td>アサーションレベルを制御します。アサーションは、データとインデックス間の整合性チェックであり、トランザクションのコミットプロセスにおいて、書き込まれるキーが存在するかどうかを確認します。デフォルトでは、ほとんどのチェック項目が有効になっており、パフォーマンスへの影響はほとんどありません。v6.0.0より前のバージョンからアップグレードした既存のクラスターでは、このチェックはデフォルトで無効になっています。</td></tr></tbody></table>
 
-### 設定ファイルのパラメータ {#configuration-file-parameters}
+### 設定ファイルのパラメーター {#configuration-file-parameters}
 
-<table><thead><tr><th>設定ファイル</th><th>設定</th><th>タイプを変更</th><th>説明</th></tr></thead><tbody><tr><td>TiDB</td><td><code>stmt-summary.enable</code><br/> <code>stmt-summary.enable-internal-query</code><br/> <code>stmt-summary.history-size</code><br/> <code>stmt-summary.max-sql-length</code><br/> <code>stmt-summary.max-stmt-count</code><br/> <code>stmt-summary.refresh-interval</code></td><td>削除済み</td><td><a href="https://docs.pingcap.com/tidb/dev/statement-summary-tables">ステートメントサマリーテーブル</a>に関連する設定。これらの設定項目はすべて削除されました。ステートメントサマリーテーブルを制御するには、SQL変数を使用する必要があります。</td></tr><tr><td>TiDB</td><td><a href="https://docs.pingcap.com/tidb/dev/tidb-configuration-file#new_collations_enabled_on_first_bootstrap"><code>new_collations_enabled_on_first_bootstrap</code></a></td><td>変更</td><td>新しい照合順序のサポートを有効にするかどうかを制御します。バージョン6.0以降、デフォルト値は<code>false</code>から<code>true</code>に変更されました。この設定項目は、クラスターが初めて初期化されたときにのみ有効になります。最初のブートストラップ後は、この設定項目を使用して新しい照合順序フレームワークを有効化または無効化できません。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#num-threads-1"><code>backup.num-threads</code></a></td><td>変更</td><td>値の範囲は<code>[1, CPU]</code>に変更されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#apply-max-batch-size"><code>raftstore.apply-max-batch-size</code></a></td><td>変更</td><td>最大値は<code>10240</code>に変更されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#raft-max-size-per-msg"><code>raftstore.raft-max-size-per-msg</code></a></td><td>変更</td><td>最小値が<code>0</code>から<code>0</code>より大きい値に変更されます。<br/>最大値は<code>3GB</code>に設定されています。<br/>単位が<code>MB</code>から<code>KB|MB|GB</code>に変更されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#store-max-batch-size"><code>raftstore.store-max-batch-size</code></a></td><td>変更</td><td>最大値は<code>10240</code>に設定されています。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#max-thread-count"><code>readpool.unified.max-thread-count</code></a></td><td>変更</td><td>調整可能な範囲は<code>[min-thread-count, MAX(4, CPU)]</code>に変更されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#enable-pipelined-write"><code>rocksdb.enable-pipelined-write</code></a></td><td>変更</td><td>デフォルト値が<code>true</code>から<code>false</code>に変更されました。この設定を有効にすると、従来のパイプライン書き込みが使用されます。この設定を無効にすると、新しいパイプラインコミットメカニズムが使用されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#max-background-flushes"><code>rocksdb.max-background-flushes</code></a></td><td>変更</td><td>CPU コア数が 10 の場合、デフォルト値は<code>3</code>です。<br/> CPU コア数が 8 の場合、デフォルト値は<code>2</code>です。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#max-background-jobs"><code>rocksdb.max-background-jobs</code></a></td><td>変更</td><td>CPU コア数が 10 の場合、デフォルト値は<code>9</code>です。<br/> CPU コア数が 8 の場合、デフォルト値は<code>7</code>です。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>profiles.default.dt_enable_logical_split</code></a></td><td>変更</td><td>DeltaTreeストレージエンジンのセグメントが論理分割を使用するかどうかを決定します。デフォルト値は<code>true</code>から<code>false</code>に変更されます。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>profiles.default.enable_elastic_threadpool</code></a></td><td>変更</td><td>エラスティックスレッドプールを有効にするかどうかを制御します。デフォルト値は<code>false</code>から<code>true</code>に変更されます。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>storage.format_version</code></a></td><td>変更</td><td>TiFlashのデータ検証機能を制御します。デフォルト値は<code>2</code>から<code>3</code>に変更されます。<br/> <code>format_version</code>を<code>3</code>に設定すると、ハードウェア障害による誤った読み取りを回避するために、すべてのTiFlashデータの読み取り操作に対して一貫性チェックが実行されます。<br/>新しい形式のバージョンは、v5.4 より前のバージョンにそのままダウングレードできないことに注意してください。</td></tr><tr><td>TiDB</td><td><a href="https://docs.pingcap.com/tidb/dev/tidb-configuration-file#pessimistic-auto-commit-new-in-v600"><code>pessimistic-txn.pessimistic-auto-commit</code></a></td><td>新しく追加された</td><td>悲観的トランザクションモードがグローバルに有効になっている場合 ( <code>tidb_txn_mode='pessimistic'</code> )、自動コミットトランザクションが使用するトランザクションモードを決定します。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-new-in-v600"><code>pessimistic-txn.in-memory</code></a></td><td>新しく追加された</td><td>インメモリ悲観的ロックを有効にするかどうかを制御します。この機能を有効にすると、悲観的トランザクションは、悲観的ロックをディスクに書き込んだり他のレプリカに複製したりするのではなく、可能な限りTiKVメモリに悲観的ロックを保存します。これにより、悲観的トランザクションのパフォーマンスが向上しますが、悲観的ロックが失われる可能性がわずかながらあり、その結果、悲観的トランザクションがコミットに失敗する可能性があります。デフォルト値は<code>true</code>です。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#quota"><code>quota</code></a></td><td>新しく追加された</td><td>フロントエンドリクエストが占有するリソースを制限するQuota Limiter関連の設定項目を追加しました。Quota Limiterは実験的機能であり、デフォルトでは無効になっています。新しいクォータ関連の設定項目は、 <code>foreground-cpu-time</code> 、 <code>foreground-write-bandwidth</code> 、 <code>foreground-read-bandwidth</code> 、 <code>max-delay-duration</code>です。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>profiles.default.dt_compression_method</code></a></td><td>新しく追加された</td><td>TiFlashの圧縮アルゴリズムを指定します。オプションの値は<code>LZ4</code> 、 <code>zstd</code> 、 <code>LZ4HC</code>で、いずれも大文字と小文字は区別されません。デフォルト値は<code>LZ4</code>です。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>profiles.default.dt_compression_level</code></a></td><td>新しく追加された</td><td>TiFlashの圧縮レベルを指定します。デフォルト値は<code>1</code>です。</td></tr><tr><td> DM</td><td> <a href="https://docs.pingcap.com/tidb/dev/task-configuration-file-full#task-configuration-file-template-advanced"><code>loaders.&lt;name&gt;.import-mode</code></a></td><td>新しく追加された</td><td>フルインポートフェーズにおけるインポートモード。v6.0以降、DMはフルインポートフェーズでTiDB LightningのTiDBバックエンドモードを使用してデータをインポートします。以前のLoaderコンポーネントは使用されなくなりました。これは内部的な置き換えであり、日常業務への影響は見られません。<br/>デフォルト値は<code>sql</code>に設定されており、これはtidb-backendモードを使用することを意味します。稀に、tidb-backendは完全な互換性を持たない場合があります。このパラメータを<code>loader</code>に設定することで、Loaderモードにフォールバックできます。</td></tr><tr><td> DM</td><td> <a href="https://docs.pingcap.com/tidb/dev/task-configuration-file-full#task-configuration-file-template-advanced"><code>loaders.&lt;name&gt;.on-duplicate</code></a></td><td>新しく追加された</td><td>フルインポートフェーズで競合を解決する方法を指定します。デフォルト値は<code>replace</code>で、これは新しいデータを使用して既存のデータを置き換えることを意味します。</td></tr><tr><td> TiCDC</td><td> <a href="https://docs.pingcap.com/tidb/dev/ticdc-sink-to-kafka#configure-sink-uri-for-kafka"><code>dial-timeout</code></a></td><td>新しく追加された</td><td>下流のKafkaとの接続を確立する際のタイムアウト。デフォルト値は<code>10s</code>です。</td></tr><tr><td> TiCDC</td><td> <a href="https://docs.pingcap.com/tidb/dev/ticdc-sink-to-kafka#configure-sink-uri-for-kafka"><code>read-timeout</code></a></td><td>新しく追加された</td><td>下流のKafkaから返されるレスポンスを取得する際のタイムアウト。デフォルト値は<code>10s</code>です。</td></tr><tr><td> TiCDC</td><td> <a href="https://docs.pingcap.com/tidb/dev/ticdc-sink-to-kafka#configure-sink-uri-for-kafka"><code>write-timeout</code></a></td><td>新しく追加された</td><td>下流のKafkaにリクエストを送信する際のタイムアウト。デフォルト値は<code>10s</code>です。</td></tr></tbody></table>
+<table><thead><tr><th>設定ファイル</th><th>設定</th><th>タイプを変更</th><th>説明</th></tr></thead><tbody><tr><td>TiDB</td><td><code>stmt-summary.enable</code><br/> <code>stmt-summary.enable-internal-query</code><br/> <code>stmt-summary.history-size</code><br/> <code>stmt-summary.max-sql-length</code><br/> <code>stmt-summary.max-stmt-count</code><br/> <code>stmt-summary.refresh-interval</code></td><td>削除済み</td><td><a href="https://docs.pingcap.com/tidb/dev/statement-summary-tables">ステートメントサマリーテーブル</a>に関連する設定。これらの設定項目はすべて削除されました。ステートメントサマリーテーブルを制御するには、SQL変数を使用する必要があります。</td></tr><tr><td>TiDB</td><td><a href="https://docs.pingcap.com/tidb/dev/tidb-configuration-file#new_collations_enabled_on_first_bootstrap"><code>new_collations_enabled_on_first_bootstrap</code></a></td><td>変更</td><td>新しい照合順序のサポートを有効にするかどうかを制御します。バージョン6.0以降、デフォルト値は<code>false</code>から<code>true</code>に変更されました。この設定項目は、クラスターが初めて初期化されたときにのみ有効になります。最初のブートストラップ後は、この設定項目を使用して新しい照合順序フレームワークを有効化または無効化できません。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#num-threads-1"><code>backup.num-threads</code></a></td><td>変更</td><td>値の範囲は<code>[1, CPU]</code>に変更されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#apply-max-batch-size"><code>raftstore.apply-max-batch-size</code></a></td><td>変更</td><td>最大値は<code>10240</code>に変更されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#raft-max-size-per-msg"><code>raftstore.raft-max-size-per-msg</code></a></td><td>変更</td><td>最小値が<code>0</code>から<code>0</code>より大きい値に変更されます。<br/>最大値は<code>3GB</code>に設定されています。<br/>単位が<code>MB</code>から<code>KB|MB|GB</code>に変更されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#store-max-batch-size"><code>raftstore.store-max-batch-size</code></a></td><td>変更</td><td>最大値は<code>10240</code>に設定されています。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#max-thread-count"><code>readpool.unified.max-thread-count</code></a></td><td>変更</td><td>調整可能な範囲は<code>[min-thread-count, MAX(4, CPU)]</code>に変更されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#enable-pipelined-write"><code>rocksdb.enable-pipelined-write</code></a></td><td>変更</td><td>デフォルト値が<code>true</code>から<code>false</code>に変更されました。この設定を有効にすると、従来のパイプライン書き込みが使用されます。この設定を無効にすると、新しいパイプラインコミットメカニズムが使用されます。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#max-background-flushes"><code>rocksdb.max-background-flushes</code></a></td><td>変更</td><td>CPU コア数が 10 の場合、デフォルト値は<code>3</code>です。<br/> CPU コア数が 8 の場合、デフォルト値は<code>2</code>です。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#max-background-jobs"><code>rocksdb.max-background-jobs</code></a></td><td>変更</td><td>CPU コア数が 10 の場合、デフォルト値は<code>9</code>です。<br/> CPU コア数が 8 の場合、デフォルト値は<code>7</code>です。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>profiles.default.dt_enable_logical_split</code></a></td><td>変更</td><td>DeltaTreeストレージエンジンのセグメントが論理分割を使用するかどうかを決定します。デフォルト値は<code>true</code>から<code>false</code>に変更されます。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>profiles.default.enable_elastic_threadpool</code></a></td><td>変更</td><td>エラスティックスレッドプールを有効にするかどうかを制御します。デフォルト値は<code>false</code>から<code>true</code>に変更されます。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>storage.format_version</code></a></td><td>変更</td><td>TiFlashのデータ検証機能を制御します。デフォルト値は<code>2</code>から<code>3</code>に変更されます。<br/> <code>format_version</code>を<code>3</code>に設定すると、ハードウェア障害による誤った読み取りを回避するために、すべてのTiFlashデータの読み取り操作に対して一貫性チェックが実行されます。<br/>新しい形式のバージョンは、v5.4 より前のバージョンにそのままダウングレードできないことに注意してください。</td></tr><tr><td>TiDB</td><td><a href="https://docs.pingcap.com/tidb/dev/tidb-configuration-file#pessimistic-auto-commit-new-in-v600"><code>pessimistic-txn.pessimistic-auto-commit</code></a></td><td>新しく追加された</td><td>悲観的トランザクションモードがグローバルに有効になっている場合 ( <code>tidb_txn_mode='pessimistic'</code> )、自動コミットトランザクションが使用するトランザクションモードを決定します。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#in-memory-new-in-v600"><code>pessimistic-txn.in-memory</code></a></td><td>新しく追加された</td><td>インメモリ悲観的ロックを有効にするかどうかを制御します。この機能を有効にすると、悲観的トランザクションは、悲観的ロックをディスクに書き込んだり他のレプリカに複製したりするのではなく、可能な限りTiKVメモリに悲観的ロックを保存します。これにより、悲観的トランザクションのパフォーマンスが向上しますが、悲観的ロックが失われる可能性がわずかながらあり、その結果、悲観的トランザクションがコミットに失敗する可能性があります。デフォルト値は<code>true</code>です。</td></tr><tr><td>TiKV</td><td><a href="https://docs.pingcap.com/tidb/dev/tikv-configuration-file#quota"><code>quota</code></a></td><td>新しく追加された</td><td>フロントエンドリクエストが占有するリソースを制限するQuota Limiter関連の設定項目を追加しました。Quota Limiterは実験的機能であり、デフォルトでは無効になっています。新しいクォータ関連の設定項目は、 <code>foreground-cpu-time</code> 、 <code>foreground-write-bandwidth</code> 、 <code>foreground-read-bandwidth</code> 、 <code>max-delay-duration</code>です。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>profiles.default.dt_compression_method</code></a></td><td>新しく追加された</td><td>TiFlashの圧縮アルゴリズムを指定します。オプションの値は<code>LZ4</code> 、 <code>zstd</code> 、 <code>LZ4HC</code>で、いずれも大文字と小文字は区別されません。デフォルト値は<code>LZ4</code>です。</td></tr><tr><td>TiFlash</td><td><a href="https://docs.pingcap.com/tidb/dev/tiflash-configuration#configure-the-tiflashtoml-file"><code>profiles.default.dt_compression_level</code></a></td><td>新しく追加された</td><td>TiFlashの圧縮レベルを指定します。デフォルト値は<code>1</code>です。</td></tr><tr><td> DM</td><td> <a href="https://docs.pingcap.com/tidb/dev/task-configuration-file-full#task-configuration-file-template-advanced"><code>loaders.&lt;name&gt;.import-mode</code></a></td><td>新しく追加された</td><td>フルインポートフェーズにおけるインポートモード。v6.0以降、DMはフルインポートフェーズでTiDB LightningのTiDBバックエンドモードを使用してデータをインポートします。以前のLoaderコンポーネントは使用されなくなりました。これは内部的な置き換えであり、日常業務への影響は見られません。<br/>デフォルト値は<code>sql</code>に設定されており、これはtidb-backendモードを使用することを意味します。稀に、tidb-backendは完全な互換性を持たない場合があります。このパラメーターを<code>loader</code>に設定することで、Loaderモードにフォールバックできます。</td></tr><tr><td> DM</td><td> <a href="https://docs.pingcap.com/tidb/dev/task-configuration-file-full#task-configuration-file-template-advanced"><code>loaders.&lt;name&gt;.on-duplicate</code></a></td><td>新しく追加された</td><td>フルインポートフェーズで競合を解決する方法を指定します。デフォルト値は<code>replace</code>で、これは新しいデータを使用して既存のデータを置き換えることを意味します。</td></tr><tr><td> TiCDC</td><td> <a href="https://docs.pingcap.com/tidb/dev/ticdc-sink-to-kafka#configure-sink-uri-for-kafka"><code>dial-timeout</code></a></td><td>新しく追加された</td><td>下流のKafkaとの接続を確立する際のタイムアウト。デフォルト値は<code>10s</code>です。</td></tr><tr><td> TiCDC</td><td> <a href="https://docs.pingcap.com/tidb/dev/ticdc-sink-to-kafka#configure-sink-uri-for-kafka"><code>read-timeout</code></a></td><td>新しく追加された</td><td>下流のKafkaから返されるレスポンスを取得する際のタイムアウト。デフォルト値は<code>10s</code>です。</td></tr><tr><td> TiCDC</td><td> <a href="https://docs.pingcap.com/tidb/dev/ticdc-sink-to-kafka#configure-sink-uri-for-kafka"><code>write-timeout</code></a></td><td>新しく追加された</td><td>下流のKafkaにリクエストを送信する際のタイムアウト。デフォルト値は<code>10s</code>です。</td></tr></tbody></table>
 
 ### その他 {#others}
 
@@ -310,7 +310,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 - DMはOpenAPIインターフェースを変更する
     - 内部メカニズムの変更により、タスク管理関連のインターフェースは以前の実験的版との互換性がありません。適応には新しい[DM OpenAPIドキュメント](/dm/dm-open-api.md)を参照してください。
 - DMは、完全なインポートフェーズ中に競合を解決する方法を変更します。
-    - `loader.<name>.on-duplicate`パラメータが追加されました。デフォルト値は`replace`で、これは新しいデータを使用して既存のデータを置き換えることを意味します。以前の動作を維持したい場合は、値を`error`に設定できます。このパラメータは、フルインポートフェーズでの動作のみを制御します。
+    - `loader.<name>.on-duplicate`パラメーターが追加されました。デフォルト値は`replace`で、これは新しいデータを使用して既存のデータを置き換えることを意味します。以前の動作を維持したい場合は、値を`error`に設定できます。このパラメーターは、フルインポートフェーズでの動作のみを制御します。
 - DMを使用するには、 `dmctl`の対応するバージョンを使用する必要があります。
     - 内部メカニズムの変更により、DM を v6.0.0 にアップグレードした後、 `dmctl`も v6.0.0 にアップグレードする必要があります。
 - v5.4以前のバージョンでは、TiDBは一部のnoopシステム変数に不正な値を許可していました。v6.0.0以降では、TiDBはシステム変数に不正な値を設定することを禁止します[#31538](https://github.com/pingcap/tidb/issues/31538)
@@ -369,10 +369,10 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - `raftstore.apply_max_batch_size`と`raftstore.store_max_batch_size` の動的変更をサポート [#11982](https://github.com/tikv/tikv/issues/11982)
     - RawKV V2は`raw_get`または`raw_scan`リクエストを受信すると最新バージョンを返します[#11965](https://github.com/tikv/tikv/issues/11965)
     - RCCheckTS一貫性読み取りをサポート [#12097](https://github.com/tikv/tikv/issues/12097)
-    - `storage.scheduler-worker-pool-size` (スケジューラプールのスレッド数) の動的変更をサポート [#12067](https://github.com/tikv/tikv/issues/12067)
-    - グローバルフォアグラウンドフローコントローラを使用してCPUと帯域幅の使用を制御し、TiKV のパフォーマンス安定性を向上させます。 [#11855](https://github.com/tikv/tikv/issues/11855)
+    - `storage.scheduler-worker-pool-size` (スケジューラープールのスレッド数) の動的変更をサポート [#12067](https://github.com/tikv/tikv/issues/12067)
+    - グローバルフォアグラウンドフローコントローラーを使用してCPUと帯域幅の使用を制御し、TiKV のパフォーマンス安定性を向上させます。 [#11855](https://github.com/tikv/tikv/issues/11855)
     - `readpool.unified.max-thread-count` (UnifyReadPool のスレッド数) の動的変更をサポート [#11781](https://github.com/tikv/tikv/issues/11781)
-    - TiKV内部パイプラインを使用してRocksDBパイプラインを置き換え、 `rocksdb.enable-multibatch-write`パラメータを廃止します。 [#12059](https://github.com/tikv/tikv/issues/12059)
+    - TiKV内部パイプラインを使用してRocksDBパイプラインを置き換え、 `rocksdb.enable-multibatch-write`パラメーターを廃止します。 [#12059](https://github.com/tikv/tikv/issues/12059)
 
 - PD
 
@@ -383,7 +383,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 - TiFlash
 
     - TiFlashファイルの論理分割を禁止し (`profiles.default.dt_enable_logical_split`のデフォルト値を`false`に調整します。詳細については[ユーザードキュメント](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)を参照してください)、 TiFlash列ストレージのスペース使用効率を改善して、 TiFlashに同期されたテーブルのスペース占有が TiKV のテーブルのスペース占有と同等になるようにします。
-    - 以前のクラスタ管理モジュールをTiDBに統合することで、 TiFlashのクラスタ管理とレプリカレプリケーションのメカニズムを最適化し、小さなテーブルのレプリカ作成を高速化します[#29924](https://github.com/pingcap/tidb/issues/29924)
+    - 以前のクラスター管理モジュールをTiDBに統合することで、 TiFlashのクラスター管理とレプリカレプリケーションのメカニズムを最適化し、小さなテーブルのレプリカ作成を高速化します[#29924](https://github.com/pingcap/tidb/issues/29924)
 
 - ツール
 
@@ -391,7 +391,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
         - バックアップデータの復元速度を向上しました。シミュレーションテストでは、 BRが15ノード（各ノードに16個のCPUコア）のTiKVクラスターに16TBのデータを復元した場合、スループットは2.66GiB/秒に達しました[#27036](https://github.com/pingcap/tidb/issues/27036)
 
-        - 配置ルールのインポートとエクスポートをサポートします。データのインポート時に配置ルールを無視するかどうかを制御するパラメータ`--with-tidb-placement-mode`を追加します[#32290](https://github.com/pingcap/tidb/issues/32290)
+        - 配置ルールのインポートとエクスポートをサポートします。データのインポート時に配置ルールを無視するかどうかを制御するパラメーター`--with-tidb-placement-mode`を追加します[#32290](https://github.com/pingcap/tidb/issues/32290)
 
     - TiCDC
 
@@ -400,8 +400,8 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
         - HTTP API処理の同期[#1710](https://github.com/pingcap/tiflow/issues/1710)
         - チェンジフィードを再開するための指数バックオフメカニズムを追加します。 [#3329](https://github.com/pingcap/tiflow/issues/3329)
         - MySQL でのデッドロックを減らすために、MySQL シンクのデフォルトの分離レベルをread-committedに設定します。 [#3589](https://github.com/pingcap/tiflow/issues/3589)
-        - 作成時に変更フィードパラメータを検証し、エラーメッセージを改善する[#1716](https://github.com/pingcap/tiflow/issues/1716) [#1718](https://github.com/pingcap/tiflow/issues/1718) [#1719](https://github.com/pingcap/tiflow/issues/1719) [#4472](https://github.com/pingcap/tiflow/issues/4472)
-        - Kafka プロデューサーの設定パラメータを公開して、TiCDC で設定できるようにします。 [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - 作成時に変更フィードパラメーターを検証し、エラーメッセージを改善する[#1716](https://github.com/pingcap/tiflow/issues/1716) [#1718](https://github.com/pingcap/tiflow/issues/1718) [#1719](https://github.com/pingcap/tiflow/issues/1719) [#4472](https://github.com/pingcap/tiflow/issues/4472)
+        - Kafka プロデューサーの設定パラメーターを公開して、TiCDC で設定できるようにします。 [#4385](https://github.com/pingcap/tiflow/issues/4385)
 
     - TiDB Data Migration (DM)
 
@@ -488,7 +488,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     - PDがジョイントコンセンサスの意味のないステップを含む演算子を生成する問題を修正 [#4362](https://github.com/tikv/pd/issues/4362)
     - PDクライアントを閉じるときにTSO取り消しプロセスが停止する可能性があるバグを修正 [#4549](https://github.com/tikv/pd/issues/4549)
-    - リージョンスキャッタラーのスケジューリングで一部のピアが失われる問題を修正[#4565](https://github.com/tikv/pd/issues/4565)
+    - リージョンスキャッターラーのスケジューリングで一部のピアが失われる問題を修正[#4565](https://github.com/tikv/pd/issues/4565)
     - `dr-autosync`の`Duration`フィールドが動的に構成できない問題を修正[#4651](https://github.com/tikv/pd/issues/4651)
 
 - TiFlash
@@ -540,7 +540,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
     - TiDB Lightning
 
         - 一部のインポートタスクにソースファイルが含まれていない場合にTiDB Lightningがメタデータスキーマを削除しない可能性があるバグを修正しました[#28144](https://github.com/pingcap/tidb/issues/28144)
-        - ソースファイルとターゲットクラスタ内のテーブル名が異なる場合に発生するpanicを修正[#31771](https://github.com/pingcap/tidb/issues/31771)
+        - ソースファイルとターゲットクラスター内のテーブル名が異なる場合に発生するpanicを修正[#31771](https://github.com/pingcap/tidb/issues/31771)
         - チェックサムエラー「GC life time is shorter than transaction duration」を修正[#32733](https://github.com/pingcap/tidb/issues/32733)
         - 空のテーブルのチェックに失敗した場合、 TiDB Lightning が停止する問題を修正しました。 [#31797](https://github.com/pingcap/tidb/issues/31797)
 

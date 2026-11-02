@@ -131,7 +131,7 @@ TiDBの一部の操作では、サーバーへの一時ファイルの書き込�
 
 - TiDB作業領域
 
-    ハッシュテーブルの構築やソートなど、大量のメモリを消費する操作では、メモリ消費量を削減し、安定性を向上させるために、一時データをディスクに書き込むことがあります。書き込み先のディスク上の場所は、設定項目[`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path)で定義されます。デフォルト設定では、TiDBを実行するユーザーに、オペレーティングシステムの一時フォルダ（通常は`/tmp` ）への読み取りおよび書き込み権限があることを確認してください。
+    ハッシュテーブルの構築やソートなど、大量のメモリを消費する操作では、メモリ消費量を削減し、安定性を向上させるために、一時データをディスクに書き込むことがあります。書き込み先のディスク上の場所は、設定項目[`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path)で定義されます。デフォルト設定では、TiDBを実行するユーザーに、オペレーティングシステムの一時フォルダー（通常は`/tmp` ）への読み取りおよび書き込み権限があることを確認してください。
 
 - `Fast Online DDL`作業領域
 
@@ -227,7 +227,7 @@ firewall-cmd --zone=trusted --list-all
 
 ### ファイアウォールを設定する {#configure-the-firewall}
 
-TiDBクラスタコンポーネントのファイアウォールを設定するには、以下のコマンドを使用します。これらの例は参考用です。ゾーン名、ポート、サービスは、実際の環境に合わせて調整してください。
+TiDBクラスターコンポーネントのファイアウォールを設定するには、以下のコマンドを使用します。これらの例は参考用です。ゾーン名、ポート、サービスは、実際の環境に合わせて調整してください。
 
 TiDBコンポーネントのファイアウォールを構成します。
 
@@ -399,20 +399,20 @@ sudo systemctl start ntpd.service && \
 sudo systemctl enable ntpd.service
 ```
 
-## オペレーティングシステムの最適なパラメータを確認して構成する {#check-and-configure-the-optimal-parameters-of-the-operating-system}
+## オペレーティングシステムの最適なパラメーターを確認して構成する {#check-and-configure-the-optimal-parameters-of-the-operating-system}
 
 本番環境の TiDB の場合、次の方法でオペレーティングシステム構成を最適化することをお勧めします。
 
 - [透過的巨大ページ（THP）](/tune-operating-system.md#memorytransparent-huge-page-thp)を無効にします。データベースのメモリアクセスは通常、スパースです。高位メモリが著しく断片化されると、THP によるメモリ割り当てのレイテンシーが増大する可能性があります。したがって、パフォーマンスの変動を避けるため、THP を無効にすることをお勧めします。
 
-- ストレージ媒体の[I/Oスケジューラ](/tune-operating-system.md#io-scheduler)を設定します。
+- ストレージ媒体の[I/Oスケジューラー](/tune-operating-system.md#io-scheduler)を設定します。
 
-    - 高速SSDストレージの場合、カーネルのデフォルトのI/Oスケジューリング操作によってパフォーマンスが低下する可能性があります。 I/Oスケジューラを`noop`や`none`などの先入先出（FIFO）に設定することをお勧めします。この設定により、カーネルはI/Oリクエストをスケジューリングなしで直接ハードウェアに渡すことができるため、パフォーマンスが向上します。
-    - NVMeストレージの場合、デフォルトのI/Oスケジューラは`none`なので、調整は必要ありません。
+    - 高速SSDストレージの場合、カーネルのデフォルトのI/Oスケジューリング操作によってパフォーマンスが低下する可能性があります。 I/Oスケジューラーを`noop`や`none`などの先入先出（FIFO）に設定することをお勧めします。この設定により、カーネルはI/Oリクエストをスケジューリングなしで直接ハードウェアに渡すことができるため、パフォーマンスが向上します。
+    - NVMeストレージの場合、デフォルトのI/Oスケジューラーは`none`なので、調整は必要ありません。
 
 - CPU周波数を動的に制御する[cpufreqモジュール](/tune-operating-system.md#cpufrequency-scaling)の`performance`モードを選択します。CPU周波数を動的な調整なしでサポートされている最高動作周波数に固定すると、パフォーマンスが最大限に発揮されます。
 
-これらのパラメータを確認して構成する手順は次のとおりです。
+これらのパラメーターを確認して構成する手順は次のとおりです。
 
 1. THP が有効か無効かを確認するには、次のコマンドを実行します。
 
@@ -430,7 +430,7 @@ sudo systemctl enable ntpd.service
 
 2. 次のコマンドを実行して、データディレクトリが配置されているディスクのI/O Scheduler を確認します。
 
-    データディレクトリで SD または VD デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
+    データディレクトリで SD または VD デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラーを確認します。
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -443,9 +443,9 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `noop [deadline] cfq`が出力された場合、ディスクのI/Oスケジューラは`deadline`モードになっています。これを`noop`に変更する必要があります。
+    > `noop [deadline] cfq`が出力された場合、ディスクのI/Oスケジューラーは`deadline`モードになっています。これを`noop`に変更する必要があります。
 
-    データディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラを確認します。
+    データディレクトリで NVMe デバイスを使用している場合は、次のコマンドを実行してI/Oスケジューラーを確認します。
 
     ```bash
     cat /sys/block/nvme[01]*/queue/scheduler
@@ -458,7 +458,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > `[none] mq-deadline kyber bfq`は、NVMe デバイスが`none` I/Oスケジューラを使用しており、変更の必要がないことを示します。
+    > `[none] mq-deadline kyber bfq`は、NVMe デバイスが`none` I/Oスケジューラーを使用しており、変更の必要がないことを示します。
 
 3. ディスクの`ID_SERIAL`を確認するには、次のコマンドを実行します。
 
@@ -474,7 +474,7 @@ sudo systemctl enable ntpd.service
     > **Note:**
     >
     > - 複数のディスクにデータディレクトリが割り当てられている場合は、各ディスクの`ID_SERIAL`を記録するために、各ディスクに対して上記のコマンドを実行する必要があります。
-    > - デバイスが`noop`または`none`スケジューラを使用している場合は、 `ID_SERIAL`を記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
+    > - デバイスが`noop`または`none`スケジューラーを使用している場合は、 `ID_SERIAL`を記録したり、udev ルールや調整されたプロファイルを構成したりする必要はありません。
 
 4. cpufreq モジュールの電源ポリシーを確認するには、次のコマンドを実行します。
 
@@ -492,7 +492,7 @@ sudo systemctl enable ntpd.service
     >
     > `The governor "powersave"`が出力された場合、 cpufreq モジュールの電源ポリシーは`powersave`です。これを`performance`に変更する必要があります。仮想マシンまたはクラウドホストを使用している場合、出力は通常`Unable to determine current policy`であり、何も変更する必要はありません。
 
-5. オペレーティングシステムの最適なパラメータを構成します。
+5. オペレーティングシステムの最適なパラメーターを構成します。
 
     - 方法 1:tuned を使用する (推奨)
 
@@ -570,7 +570,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > デバイスがI/O `noop`または`none`スケジューラを使用している場合は、この手順をスキップしてください。tuned プロファイルではスケジューラの設定は必要ありません。
+            > デバイスがI/O `noop`または`none`スケジューラーを使用している場合は、この手順をスキップしてください。tuned プロファイルではスケジューラーの設定は必要ありません。
 
             ```bash
             tuned-adm profile balanced-tidb-optimal
@@ -628,7 +628,7 @@ sudo systemctl enable ntpd.service
             echo never > /sys/kernel/mm/transparent_hugepage/defrag
             ```
 
-        5. udev スクリプトでI/Oスケジューラを設定します。
+        5. udev スクリプトでI/Oスケジューラーを設定します。
 
             ```bash
             vi /etc/udev/rules.d/60-tidb-schedulers.rules
@@ -644,7 +644,7 @@ sudo systemctl enable ntpd.service
 
             > **Note:**
             >
-            > デバイスがI/Oスケジューラ`noop`または`none`を使用している場合は、この手順をスキップしてください。udev ルールの設定は必要ありません。
+            > デバイスがI/Oスケジューラー`noop`または`none`を使用している場合は、この手順をスキップしてください。udev ルールの設定は必要ありません。
 
             ```bash
             udevadm control --reload-rules
@@ -683,7 +683,7 @@ sudo systemctl enable ntpd.service
     always madvise [never]
     ```
 
-7. 次のコマンドを実行して、データディレクトリが配置されているディスクのI/Oスケジューラを確認します。
+7. 次のコマンドを実行して、データディレクトリが配置されているディスクのI/Oスケジューラーを確認します。
 
     ```bash
     cat /sys/block/sd[bc]/queue/scheduler
@@ -706,7 +706,7 @@ sudo systemctl enable ntpd.service
                   The governor "performance" may decide which speed to use within this range.
     ```
 
-9. `sysctl`パラメータを変更するには、次のコマンドを実行します。
+9. `sysctl`パラメーターを変更するには、次のコマンドを実行します。
 
     ```bash
     echo "fs.file-max = 1000000">> /etc/sysctl.conf
@@ -723,7 +723,7 @@ sudo systemctl enable ntpd.service
 
     > **Note:**
     >
-    > - `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネルパラメータです。
+    > - `vm.min_free_kbytes`は、システムによって予約される空きメモリの最小量 (KiB 単位) を制御する Linux カーネルパラメーターです。
     > - `vm.min_free_kbytes`に設定すると、メモリ回収メカニズムに影響します。設定値が大きすぎると利用可能なメモリが減少し、小さすぎるとメモリリクエスト速度がバックグラウンド回収速度を超え、メモリ回収が発生し、結果としてメモリ割り当てが遅延する可能性があります。
     > - `vm.min_free_kbytes`を少なくとも`1048576` KiB（1 GiB）に設定することをお勧めします。[NUMAがインストールされている](/check-before-deployment.md#install-the-numactl-tool)場合は、 `number of NUMA nodes * 1048576` KiBに設定することをお勧めします。
     > - Linux カーネル 4.11 以前を実行しているシステムの場合は、 `net.ipv4.tcp_tw_recycle = 0`を設定することをお勧めします。
@@ -813,7 +813,7 @@ sudo yum -y install numactl
 
 **方法 2** : `tiup cluster exec`コマンドを実行して、既存のクラスターに NUMA を一括インストールします。
 
-1. [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)に従ってクラスター`tidb-test`をデプロイします。TiDB クラスターをインストールしている場合は、この手順をスキップできます。
+1. [TiUPを使用して TiDBクラスターをデプロイ](/production-deployment-using-tiup.md)に従ってクラスター`tidb-test`をデプロイします。TiDB クラスターをインストールしている場合は、この手順をスキップできます。
 
     ```bash
     tiup cluster deploy tidb-test v6.1.0 ./topology.yaml --user root [-p] [-i /home/root/.ssh/gcp_rsa]

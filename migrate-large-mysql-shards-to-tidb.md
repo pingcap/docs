@@ -5,7 +5,7 @@ summary: DumplingとTiDB Lightningを使用して、MySQLからTiDBへ大規模�
 
 # 大規模データセットのMySQLシャードをTiDBに移行およびマージする {#migrate-and-merge-mysql-shards-of-large-datasets-to-tidb}
 
-異なるパーティションに分散した大規模な MySQL データセット (例えば 1 TiB 以上) を TiDB に移行する場合、移行中に業務上の TiDB クラスタ書き込み操作をすべて停止できるのであれば、 TiDB Lightning を使用して迅速に移行を実行できます。移行後、業務ニーズに応じて TiDB DM を使用して増分レプリケーションを実行することもできます。このドキュメントにおける「大規模データセット」とは、通常 1 TiB 以上程度のデータを指します。
+異なるパーティションに分散した大規模な MySQL データセット (例えば 1 TiB 以上) を TiDB に移行する場合、移行中に業務上の TiDB クラスター書き込み操作をすべて停止できるのであれば、 TiDB Lightning を使用して迅速に移行を実行できます。移行後、業務ニーズに応じて TiDB DM を使用して増分レプリケーションを実行することもできます。このドキュメントにおける「大規模データセット」とは、通常 1 TiB 以上程度のデータを指します。
 
 この文書では、例を用いて、このような移行の全手順を説明します。
 
@@ -28,7 +28,7 @@ MySQL シャードのデータサイズが 1 TiB 未満の場合は、[小規模
 
 作業を開始する前に、移行作業の準備として以下のドキュメントを参照してください。
 
-- [TiUPを使用してDMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
+- [TiUPを使用してDMクラスターをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)
 - [TiUPを使用してDumplingとライトニングをデプロイ](/migration-tools.md)
 - [Dumplingに必要なターゲットデータベース権限](/dumpling-overview.md#export-data-from-tidb-or-mysql)
 - [TiDB Lightningに必要なターゲットデータベース権限](/tidb-lightning/tidb-lightning-requirements.md)
@@ -67,7 +67,7 @@ CREATE TABLE `table5` (
 
 ## ステップ1. Dumplingを使用して全データをエクスポートする {#step1-use-dumpling-to-export-full-data}
 
-エクスポートする複数のシャーディングされたテーブルが同じ上流のMySQLインスタンスにある場合は、 Dumplingの`-f`パラメータを直接使用して、単一の操作でエクスポートできます。
+エクスポートする複数のシャーディングされたテーブルが同じ上流のMySQLインスタンスにある場合は、 Dumplingの`-f`パラメーターを直接使用して、単一の操作でエクスポートできます。
 
 シャーディングされたテーブルが異なるMySQLインスタンスに保存されている場合は、 Dumplingを使用してそれぞれをエクスポートし、エクスポートされた結果を同じ親ディレクトリに配置できます。
 
@@ -79,9 +79,9 @@ CREATE TABLE `table5` (
 tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my_db1.table[12]' -o ${data-path}/my_db1
 ```
 
-以下の表は、上記のコマンドで使用されるパラメータについて説明しています。Dumplingのパラメータの詳細については、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
+以下の表は、上記のコマンドで使用されるパラメーターについて説明しています。Dumplingのパラメーターの詳細については、 [Dumplingの概要](/dumpling-overview.md)を参照してください。
 
-| パラメータ               | 説明                                                                                                                                      |
+| パラメーター               | 説明                                                                                                                                      |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `-u`または`--user`     | 使用するユーザー名を指定します。                                                                                                                        |
 | `-p`または`--password` | 使用するパスワードを指定します。                                                                                                                        |
@@ -89,7 +89,7 @@ tiup dumpling -h ${ip} -P 3306 -u root -t 16 -r 200000 -F 256MB -B my_db1 -f 'my
 | `-h`または`--host`     | データソースのIPアドレスを指定します。                                                                                                                    |
 | `-t`または`--thread`   | エクスポートに使用するスレッド数を指定します。スレッド数を増やすと、Dumplingの並列処理能力とエクスポート速度が向上しますが、データベースのメモリ使用量も増加します。そのため、スレッド数をあまり大きく設定することは推奨されません。通常は64未満に設定してください。 |
 | `-o`または`--output`   | ストレージのエクスポートディレクトリを指定します。ローカルファイルパスまたは[外部ストレージURI](/external-storage-uri.md)がサポートされます。                                              |
-| `-r`または`--row`      | 単一ファイル内の最大行数を指定します。このパラメータを使用すると、Dumplingはテーブル内同時実行を有効にして、エクスポートを高速化し、メモリ使用量を削減します。                                                     |
+| `-r`または`--row`      | 単一ファイル内の最大行数を指定します。このパラメーターを使用すると、Dumplingはテーブル内同時実行を有効にして、エクスポートを高速化し、メモリ使用量を削減します。                                                     |
 | `-F`                | 単一ファイルの最大サイズを指定します。単位は`MiB`です。値は 256 MiB に設定することをお勧めします。                                                                                |
 | `-B`または`--database` | エクスポートするデータベースを指定します。                                                                                                                   |
 | `-f`または`--filter`   | フィルターパターンに一致するテーブルをエクスポートします。フィルターの構文については、[テーブルフィルター](/table-filter.md)を参照してください。                                                      |
@@ -238,17 +238,17 @@ from:
   port: ${port}             # For example: 3306
 ```
 
-ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、データソース構成をDMクラスタにロードします。
+ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、データソース構成をDMクラスターにロードします。
 
 ```shell
 tiup dmctl --master-addr ${advertise-addr} operate-source create source1.yaml
 ```
 
-パラメータは以下のように説明されます。
+パラメーターは以下のように説明されます。
 
-| パラメータ                   | 説明                                                                |
+| パラメーター                   | 説明                                                                |
 | ----------------------- | ----------------------------------------------------------------- |
-| `--master-addr`         | dmctlが接続するクラスタ内の任意のDM-masterノードの{advertise-addr}。例：172.16.10.71:8261 |
+| `--master-addr`         | dmctlが接続するクラスター内の任意のDM-masterノードの{advertise-addr}。例：172.16.10.71:8261 |
 | `operate-source create` | データソースをDMクラスターにロードします。                                            |
 
 上記の手順を繰り返して、すべてのMySQL上流インスタンスをデータソースとしてDMに追加します。
@@ -334,11 +334,11 @@ tiup dmctl --master-addr ${advertise-addr} check-task task.yaml
 tiup dmctl --master-addr ${advertise-addr} start-task task.yaml
 ```
 
-このコマンドのパラメータは、以下のように説明されます。
+このコマンドのパラメーターは、以下のように説明されます。
 
-| パラメータ      | 説明                                                                |
+| パラメーター      | 説明                                                                |
 | ---------- | ----------------------------------------------------------------- |
-| --master-addr | dmctlが接続するクラスタ内の任意のDM-masterノードの{advertise-addr}。例：172.16.10.71:8261 |
+| --master-addr | dmctlが接続するクラスター内の任意のDM-masterノードの{advertise-addr}。例：172.16.10.71:8261 |
 | タスクの開始     | データ移行タスクを開始します。                                                   |
 
 タスクの開始に失敗した場合は、返された結果のプロンプトメッセージに従って構成を変更し、次に`start-task task.yaml`の`tiup dmctl`サブコマンドを実行してタスクを再開します。問題が発生した場合は、[エラーを処理する](/dm/dm-error-handling.md)および[TiDB Data Migrationに関するFAQ](/dm/dm-faq.md)を参照してください。
@@ -359,14 +359,14 @@ tiup dmctl --master-addr ${advertise-addr} query-status ${task-name}
 
 - Grafana経由
 
-    TiUPを使用してDMクラスタをデプロイする際に、Prometheus、Alertmanager、およびGrafanaが正しくデプロイされていれば、GrafanaでDMの監視メトリクスを表示できます。具体的には、デプロイ時に指定したIPアドレスとポートをGrafanaに入力し、DMダッシュボードを選択してください。
+    TiUPを使用してDMクラスターをデプロイする際に、Prometheus、Alertmanager、およびGrafanaが正しくデプロイされていれば、GrafanaでDMの監視メトリクスを表示できます。具体的には、デプロイ時に指定したIPアドレスとポートをGrafanaに入力し、DMダッシュボードを選択してください。
 
 - ログ経由
 
     DMが実行されている場合、DM-master、DM-worker、およびdmctlは、移行タスクに関する情報を含むログを出力します。各コンポーネントのログディレクトリは以下のとおりです。
 
-    - DM-master ログディレクトリ: これは、DM-master コマンドラインパラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
-    - DM-worker のログディレクトリ: これは、DM-worker コマンドラインパラメータ`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
+    - DM-master ログディレクトリ: これは、DM-master コマンドラインパラメーター`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-master-8261/log/`です。
+    - DM-worker のログディレクトリ: これは、DM-worker コマンドラインパラメーター`--log-file`で指定されます。DM がTiUPを使用してデプロイされている場合、ログディレクトリは`/dm-deploy/dm-worker-8262/log/`です。
 
 ## 関連項目 {#see-also}
 

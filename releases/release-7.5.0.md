@@ -23,7 +23,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 - 分散実行フレームワーク (DXF) が有効になっている場合に`ADD INDEX`または`IMPORT INTO`タスクを分散実行するために TiDB ノードを指定および分離する機能をサポートする [#46258](https://github.com/pingcap/tidb/issues/46258) @[ywqzzy](https://github.com/ywqzzy)
 
-    リソース集約型のクラスタで`ADD INDEX`または`IMPORT INTO`タスクを並列実行すると、大量の TiDB ノードリソースが消費され、クラスタのパフォーマンスが低下する可能性があります。既存のサービスのパフォーマンスへの影響を回避するため、v7.4.0 では、 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービススコープを制御する実験的機能としてシステム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を導入しました。既存の TiDB ノードを複数選択するか、新しい TiDB ノードの TiDB サービススコープを設定すると、分散実行される`ADD INDEX`および`IMPORT INTO`タスクは、これらのノードでのみ実行されます。この機能は、v7.5.0 で一般提供 (GA) されます。
+    リソース集約型のクラスターで`ADD INDEX`または`IMPORT INTO`タスクを並列実行すると、大量の TiDB ノードリソースが消費され、クラスターのパフォーマンスが低下する可能性があります。既存のサービスのパフォーマンスへの影響を回避するため、v7.4.0 では、 [TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービススコープを制御する実験的機能としてシステム変数[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)を導入しました。既存の TiDB ノードを複数選択するか、新しい TiDB ノードの TiDB サービススコープを設定すると、分散実行される`ADD INDEX`および`IMPORT INTO`タスクは、これらのノードでのみ実行されます。この機能は、v7.5.0 で一般提供 (GA) されます。
 
     詳細については、 [ドキュメント](/system-variables.md#tidb_service_scope-new-in-v740)を参照してください。
 
@@ -31,7 +31,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 - TiDB 分散実行フレームワーク (DXF) が一般提供 (GA) となり、 `ADD INDEX`および`IMPORT INTO`タスクの並列実行におけるパフォーマンスと安定性が向上しました [#45719](https://github.com/pingcap/tidb/issues/45719) @[wjhuang2016](https://github.com/wjhuang2016)
 
-    v7.1.0 で導入された DXF が GA になりました。TiDB v7.1.0 より前のバージョンでは、同時に DDL タスクを実行できる TiDB ノードは 1つだけでした。v7.1.0 以降では、DXF の下で複数の TiDB ノードが同じ DDL タスクを並列実行できます。v7.2.0 以降では、DXF は複数の TiDB ノードが同じ`IMPORT INTO`タスクを並列実行することをサポートし、TiDB クラスタのリソースをより有効に活用し、DDL および`IMPORT INTO`タスクのパフォーマンスを大幅に向上させます。さらに、TiDB ノードを増やすことで、これらのタスクのパフォーマンスを線形的に向上させることもできます。
+    v7.1.0 で導入された DXF が GA になりました。TiDB v7.1.0 より前のバージョンでは、同時に DDL タスクを実行できる TiDB ノードは 1つだけでした。v7.1.0 以降では、DXF の下で複数の TiDB ノードが同じ DDL タスクを並列実行できます。v7.2.0 以降では、DXF は複数の TiDB ノードが同じ`IMPORT INTO`タスクを並列実行することをサポートし、TiDB クラスターのリソースをより有効に活用し、DDL および`IMPORT INTO`タスクのパフォーマンスを大幅に向上させます。さらに、TiDB ノードを増やすことで、これらのタスクのパフォーマンスを線形的に向上させることもできます。
 
     DXFを使用するには、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)値を`ON`に設定します。
 
@@ -62,7 +62,7 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 
 - BRは統計情報のバックアップと復元をサポートします [#48008](https://github.com/pingcap/tidb/issues/48008) @[Leavrth](https://github.com/Leavrth)
 
-    TiDB v7.5.0以降、brコマンドラインツールでは、データベース統計のバックアップと復元を行うための`--ignore-stats`パラメータが導入されました。このパラメータを`false`に設定すると、brコマンドラインツールは列、インデックス、およびテーブルの統計のバックアップと復元をサポートします。この場合、バックアップから復元されたTiDBデータベースの統計収集タスクを手動で実行したり、自動収集タスクの完了を待ったりする必要はありません。この機能により、データベースのメンテナンス作業が簡素化され、クエリのパフォーマンスが向上します。
+    TiDB v7.5.0以降、brコマンドラインツールでは、データベース統計のバックアップと復元を行うための`--ignore-stats`パラメーターが導入されました。このパラメーターを`false`に設定すると、brコマンドラインツールは列、インデックス、およびテーブルの統計のバックアップと復元をサポートします。この場合、バックアップから復元されたTiDBデータベースの統計収集タスクを手動で実行したり、自動収集タスクの完了を待ったりする必要はありません。この機能により、データベースのメンテナンス作業が簡素化され、クエリのパフォーマンスが向上します。
 
     詳細については、 [ドキュメント](/br/br-snapshot-manual.md#back-up-statistics)を参照してください。
 
@@ -117,9 +117,9 @@ TiDB 7.5.0は長期サポートリリース（LTS）です。
 | [`tidb_gogc_tuner_max_value`](/system-variables.md#tidb_gogc_tuner_max_value-new-in-v750)                         | 新しく追加された | GOGCチューナーが調整できるGOGCの最大値を制御します。                                                        |
 | [`tidb_gogc_tuner_min_value`](/system-variables.md#tidb_gogc_tuner_min_value-new-in-v750)                         | 新しく追加された | GOGCチューナーが調整できるGOGCの最小値を制御します。                                                        |
 
-### 設定ファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメーター {#configuration-file-parameters}
 
-| 設定ファイル | 設定パラメータ                                                                                                                    | 変更の種類  | 説明                                                                                                                                      |
+| 設定ファイル | 設定パラメーター                                                                                                                    | 変更の種類  | 説明                                                                                                                                      |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`tikv-client.copr-req-timeout`](/tidb-configuration-file.md#copr-req-timeout-new-in-v750)                                         | 新しく追加された | 単一のコプロセッサーリクエストのタイムアウトを設定します。                                                                                                              |
 | TiKV           | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                       | 変更     | 低速ノード検出の感度を向上させるためにアルゴリズムを最適化した後、デフォルト値を`500ms`から`100ms`に変更します。                                                                         |
@@ -174,13 +174,13 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
 
 - PD
 
-    - `evict-slow-trend`スケジューラの安定性と使いやすさを改善 [#7156](https://github.com/tikv/pd/issues/7156) @[LykxSassinator](https://github.com/LykxSassinator)
+    - `evict-slow-trend`スケジューラーの安定性と使いやすさを改善 [#7156](https://github.com/tikv/pd/issues/7156) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - ツール
 
     - Backup & Restore (BR)
 
-        - スナップショットバックアップ用の新しいテーブル間バックアップパラメータ`table-concurrency`を追加します。このパラメータは、統計バックアップやデータ検証などのメタ情報のテーブル間同時実行を制御するために使用されます。 [#48571](https://github.com/pingcap/tidb/issues/48571) @[3pointer](https://github.com/3pointer)
+        - スナップショットバックアップ用の新しいテーブル間バックアップパラメーター`table-concurrency`を追加します。このパラメーターは、統計バックアップやデータ検証などのメタ情報のテーブル間同時実行を制御するために使用されます。 [#48571](https://github.com/pingcap/tidb/issues/48571) @[3pointer](https://github.com/3pointer)
         - スナップショットバックアップの復元中に、 BR は特定のネットワークエラーに遭遇すると再試行します [#48528](https://github.com/pingcap/tidb/issues/48528) @[Leavrth](https://github.com/Leavrth)
 
 ## バグ修正 {#bug-fixes}
@@ -195,11 +195,11 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
     - `INDEX_LOOKUP_HASH_JOIN` のメモリ使用量推定の誤りを修正 [#47788](https://github.com/pingcap/tidb/issues/47788) @[SeaRise](https://github.com/SeaRise)
     - 長期間オフラインだったTiFlashノードの再参加によって生じる不均一なワークロードの問題を修正 [#35418](https://github.com/pingcap/tidb/issues/35418) @[windtalker](https://github.com/windtalker)
     - HashJoin オペレーターがプローブを実行する際にチャンクを再利用できない問題を修正します [#48082](https://github.com/pingcap/tidb/issues/48082) @[wshwsh12](https://github.com/wshwsh12)
-    - `COALESCE()`関数が`DATE`型のパラメータに対して誤った結果型を返す問題を修正しました [#46475](https://github.com/pingcap/tidb/issues/46475) @[xzhangxian1008](https://github.com/xzhangxian1008)
+    - `COALESCE()`関数が`DATE`型のパラメーターに対して誤った結果型を返す問題を修正しました [#46475](https://github.com/pingcap/tidb/issues/46475) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - サブクエリを含む`UPDATE`文が誤って PointGet に変換される問題を修正 [#48171](https://github.com/pingcap/tidb/issues/48171) @[hi-rustin](https://github.com/Rustin170506)
     - キャッシュされた実行計画に日付型と`unix_timestamp`の比較が含まれている場合に誤った結果が返される問題を修正します [#48165](https://github.com/pingcap/tidb/issues/48165) @[qw4990](https://github.com/qw4990)
     - 集計関数またはウィンドウ関数を含むデフォルトのインライン共通テーブル式（CTE）が再帰CTEによって参照された場合にエラーが報告される問題を修正します [#47881](https://github.com/pingcap/tidb/issues/47881) @[elsa0520](https://github.com/elsa0520)
-    - ウィンドウ関数によって導入されたソートを削減するために、オプティマイザが誤って IndexFullScan を選択する問題を修正しました [#46177](https://github.com/pingcap/tidb/issues/46177) @[qw4990](https://github.com/qw4990)
+    - ウィンドウ関数によって導入されたソートを削減するために、オプティマイザーが誤って IndexFullScan を選択する問題を修正しました [#46177](https://github.com/pingcap/tidb/issues/46177) @[qw4990](https://github.com/qw4990)
     - CTEの条件プッシュダウンにより、複数のCTE参照によって誤った結果が生じる問題を修正 [#47881](https://github.com/pingcap/tidb/issues/47881) @[winoros](https://github.com/winoros)
     - MySQLの圧縮プロトコルが大量のデータ（>=16M）を処理できない問題を修正[#47152](https://github.com/pingcap/tidb/issues/47152) [#47157](https://github.com/pingcap/tidb/issues/47157) [#47161](https://github.com/pingcap/tidb/issues/47161) @[dveeden](https://github.com/dveeden)
     - TiDBが`systemd`で起動されたときに`cgroup`のリソース制限を読み取らない問題を修正 [#47442](https://github.com/pingcap/tidb/issues/47442) @[hawkingrei](https://github.com/hawkingrei)
@@ -239,7 +239,7 @@ v7.5.0 以降、次のコンテンツが`TiDB-community-toolkit`[バイナリパ
         - `claim-check`が有効な場合にストレージパスのスペルが間違っている問題を修正 [#10036](https://github.com/pingcap/tiflow/issues/10036) @[3AceShowHand](https://github.com/3AceShowHand)
         - TiCDCのスケジューリングのバランスが崩れる場合がある問題を修正 [#9845](https://github.com/pingcap/tiflow/issues/9845) @[3AceShowHand](https://github.com/3AceShowHand)
         - TiCDCがKafkaへのデータ複製時に停止する可能性がある問題を修正 [#9855](https://github.com/pingcap/tiflow/issues/9855) @[hicqu](https://github.com/hicqu)
-        - 場合によっては TiCDC プロセッサがpanicになる問題を修正[#9849](https://github.com/pingcap/tiflow/issues/9849) [#9915](https://github.com/pingcap/tiflow/issues/9915) @[hicqu](https://github.com/hicqu)@[3AceShowHand](https://github.com/3AceShowHand)
+        - 場合によっては TiCDC プロセッサーがpanicになる問題を修正[#9849](https://github.com/pingcap/tiflow/issues/9849) [#9915](https://github.com/pingcap/tiflow/issues/9915) @[hicqu](https://github.com/hicqu)@[3AceShowHand](https://github.com/3AceShowHand)
         - `kv-client.enable-multiplexing`を有効にするとレプリケーションタスクが停止する問題を修正 [#9673](https://github.com/pingcap/tiflow/issues/9673) @[fubinzh](https://github.com/fubinzh)
         - REDOログが有効な場合にNFS障害によりオーナーノードがスタックする問題を修正 [#9886](https://github.com/pingcap/tiflow/issues/9886) @[3AceShowHand](https://github.com/3AceShowHand)
 

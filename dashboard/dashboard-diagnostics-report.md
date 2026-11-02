@@ -5,7 +5,7 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 
 # TiDB Dashboard診断レポート {#tidb-dashboard-diagnostic-report}
 
-このドキュメントでは、診断レポートの内容と表示に関するヒントを紹介します。クラスター診断ページにアクセスしてレポートを生成するには、 [TiDB Dashboardのクラスタ診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
+このドキュメントでは、診断レポートの内容と表示に関するヒントを紹介します。クラスター診断ページにアクセスしてレポートを生成するには、 [TiDB Dashboardのクラスター診断ページ](/dashboard/dashboard-diagnostics-access.md)を参照してください。
 
 ## レポートを表示する {#view-report}
 
@@ -44,9 +44,9 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 
 ![Report time range](/media/dashboard/dashboard-diagnostics-report-time-range.png)
 
-#### クラスタハードウェア情報 {#cluster-hardware-info}
+#### クラスターハードウェア情報 {#cluster-hardware-info}
 
-クラスタハードウェア情報には、クラスター内の各サーバーの CPU、メモリ、ディスクなどの情報が含まれます。
+クラスターハードウェア情報には、クラスター内の各サーバーの CPU、メモリ、ディスクなどの情報が含まれます。
 
 ![Cluster hardware report](/media/dashboard/dashboard-diagnostics-cluster-hardware.png)
 
@@ -59,9 +59,9 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 - `DISK` :サーバーのディスクサイズを示します。単位はGBです。
 - `UPTIME` :サーバーの稼働時間。単位は日です。
 
-#### クラスタトポロジ情報 {#cluster-topology-info}
+#### クラスタートポロジ情報 {#cluster-topology-info}
 
-表`Cluster Info`はクラスタトポロジ情報を示しています。この表の情報はTiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システムテーブルから取得されています。
+表`Cluster Info`はクラスタートポロジ情報を示しています。この表の情報はTiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システムテーブルから取得されています。
 
 ![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
 
@@ -306,7 +306,7 @@ TiKV モジュールの監視情報に関連するテーブルは次のとおり
 
 ![Scheduler Config Change History report](/media/dashboard/dashboard-diagnostics-config-change.png)
 
-上記の表は、レポート時間範囲内で`leader-schedule-limit`設定パラメータが変更されたことを示しています。
+上記の表は、レポート時間範囲内で`leader-schedule-limit`設定パラメーターが変更されたことを示しています。
 
 - `2020-05-22T20:00:00+08:00` : レポートの開始時刻では、構成値`leader-schedule-limit`は`4`です。これは、構成が変更されたことを意味するのではなく、レポート時間範囲の開始時刻では、構成値が`4`あることを意味します。
 - `2020-05-22T20:07:00+08:00` : `leader-schedule-limit`構成値は`8`であり、この構成の値が`2020-05-22T20:07:00+08:00`付近で変更されたことを示します。

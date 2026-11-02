@@ -30,7 +30,7 @@ npm install @tidbcloud/serverless
 
 ## `driverAdapters`を有効にする {#enable-driveradapters}
 
-Prismaアダプタを使用するには、 `schema.prisma`ファイルで`driverAdapters`機能を有効にする必要があります。例：
+Prismaアダプターを使用するには、 `schema.prisma`ファイルで`driverAdapters`機能を有効にする必要があります。例：
 
 ```prisma
 generator client {
@@ -129,7 +129,7 @@ const prisma = new PrismaClient({ adapter });
     mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict
     ```
 
-2. プロジェクトのルートディレクトリに、 `.env`という名前のファイルを作成し、次のように`DATABASE_URL`という名前の環境変数を定義し、この変数内のプレースホルダー`[]`を接続文字列内の対応するパラメータに置き換えます。
+2. プロジェクトのルートディレクトリに、 `.env`という名前のファイルを作成し、次のように`DATABASE_URL`という名前の環境変数を定義し、この変数内のプレースホルダー`[]`を接続文字列内の対応するパラメーターに置き換えます。
 
     ```dotenv
     DATABASE_URL='mysql://[username]:[password]@[host]:4000/[database]?sslaccept=strict'
@@ -276,7 +276,7 @@ const prisma = new PrismaClient({ adapter });
    }
    ```
 
-## エッジ環境ではPrismaアダプタを使用する {#use-the-prisma-adapter-in-edge-environments}
+## エッジ環境ではPrismaアダプターを使用する {#use-the-prisma-adapter-in-edge-environments}
 
 Vercel Edge FunctionsやCloudflare Workersなどのエッジ環境では`@tidbcloud/prisma-adapter` v5.11.0以降のバージョンを使用できます。
 

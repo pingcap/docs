@@ -122,7 +122,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 ## フルインポート中に発生するエラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`をどのように処理すればよいですか? {#how-to-handle-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable-that-occurs-during-the-full-import}
 
-以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
+以下のパラメーターをデフォルトの 67108864 (64M) より大きい値に設定します。
 
 - TiDBサーバーのグローバル変数: `max_allowed_packet` 。
 - タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
@@ -241,7 +241,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     1. コマンド`tiup update --self && tiup update dm`を使用して、 TiUP を新しいバージョンにアップグレードします。
     2. クラスター内の Grafana ノードをスケールインからスケールアウトして、Grafana サービスを再起動します。
 - 解決策2:
-    1. `deploy/grafana-$port/bin/public`フォルダをバックアップします。
+    1. `deploy/grafana-$port/bin/public`フォルダーをバックアップします。
     2. [TiUP DMオフラインパッケージ](https://download.pingcap.com/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
     3. オフラインパッケージの`grafana-v4.0.3-**.tar.gz`を解凍します。
     4. フォルダー`deploy/grafana-$port/bin/public`を `grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
@@ -251,7 +251,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 
 これはDMの既知のバグで、DM v2.0.2で修正されています。このバグは、以下の2つの条件が同時に満たされた場合に発生します。
 
-1. ソース設定ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
+1. ソース設定ファイルでは、パラメーター`enable-relay`と`enable-gtid`は`true`に設定されています。
 2. アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`をクエリすると、次の例のように結果が不連続になります。
 
 ```
@@ -364,7 +364,7 @@ DM-masterが起動すると、DMはetcd情報をカレントディレクトリ�
 
 ## dmctl を使用してコマンドを実行すると、DM-masterに接続できないのはなぜですか? {#why-dm-master-cannot-be-connected-when-i-use-dmctl-to-execute-commands}
 
-dmctl execute コマンドを使用すると、DM-masterへの接続に失敗し（コマンドでパラメータ値`--master-addr`を指定している場合でも）、エラーメッセージ`RawCause: context deadline exceeded, Workaround: please check your network connection.`が表示される場合があります。ただし、コマンド`telnet <master-addr>`などを使用してネットワーク接続を確認すると、例外は見つかりません。
+dmctl execute コマンドを使用すると、DM-masterへの接続に失敗し（コマンドでパラメーター値`--master-addr`を指定している場合でも）、エラーメッセージ`RawCause: context deadline exceeded, Workaround: please check your network connection.`が表示される場合があります。ただし、コマンド`telnet <master-addr>`などを使用してネットワーク接続を確認すると、例外は見つかりません。
 
 この場合、環境変数`https_proxy` （ **https** ）を確認してください。この変数が設定されている場合、dmctl は`https_proxy`で指定されたホストとポートに自動的に接続します。ホストに対応する`proxy`転送サービスがない場合、接続は失敗します。
 
@@ -372,7 +372,7 @@ dmctl execute コマンドを使用すると、DM-masterへの接続に失敗し
 
 > **Note:**
 >
-> `proxy`に関連する環境変数には`http_proxy` 、 `https_proxy` 、 `no_proxy`があります。上記の手順を実行しても接続エラーが解決しない場合は、 `http_proxy`と`no_proxy`の設定パラメータが正しいかどうかを確認してください。
+> `proxy`に関連する環境変数には`http_proxy` 、 `https_proxy` 、 `no_proxy`があります。上記の手順を実行しても接続エラーが解決しない場合は、 `http_proxy`と`no_proxy`の設定パラメーターが正しいかどうかを確認してください。
 
 ## DM バージョン 2.0.2 から 2.0.6 で start-relay コマンドを実行したときに返されるエラーを処理するにはどうすればよいですか? {#how-to-handle-the-returned-error-when-executing-start-relay-command-for-dm-versions-from-202-to-206}
 

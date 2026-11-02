@@ -1,13 +1,13 @@
 ---
 title: Slow Queries Page of TiDB Dashboard
-summary: TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のスロークエリを検索して表示できます。実行時間が300ミリ秒を超えるクエリはスロークエリとみなされます。ユーザーはしきい値を調整したり、ダッシュボードまたはブラウザからこのページにアクセスしたりできます。また、フィルタの変更、表示する列の追加、クエリのエクスポート、実行の詳細の表示も可能です。
+summary: TiDB Dashboardの「スロークエリ」ページでは、クラスター内のスロークエリを検索して表示できます。実行時間が300ミリ秒を超えるクエリはスロークエリとみなされます。ユーザーはしきい値を調整したり、ダッシュボードまたはブラウザーからこのページにアクセスしたりできます。また、フィルターの変更、表示する列の追加、クエリのエクスポート、実行の詳細の表示も可能です。
 ---
 
 # TiDB Dashboardのスロークエリページ {#slow-queries-page-of-tidb-dashboard}
 
-TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のすべてのスロークエリを検索して表示できます。
+TiDB Dashboardの「スロークエリ」ページでは、クラスター内のすべてのスロークエリを検索して表示できます。
 
-デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリはスロークエリとみなされます。これらのクエリは[スロークエリログ](/identify-slow-queries.md)に記録され、TiDB Dashboardから検索できます。スロークエリのしきい値は、セッション変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)またはTiDBパラメータ[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)で調整できます。
+デフォルトでは、実行時間が300ミリ秒を超えるSQLクエリはスロークエリとみなされます。これらのクエリは[スロークエリログ](/identify-slow-queries.md)に記録され、TiDB Dashboardから検索できます。スロークエリのしきい値は、セッション変数[`tidb_slow_log_threshold`](/system-variables.md#tidb_slow_log_threshold)またはTiDBパラメーター[`instance.tidb_slow_log_threshold`](/tidb-configuration-file.md#tidb_slow_log_threshold)で調整できます。
 
 > **Note:**
 >
@@ -19,7 +19,7 @@ TiDB Dashboardの「スロークエリ」ページでは、クラスタ内のす
 
 - TiDB Dashboardにログイン後、左側のナビゲーションメニューにある**Slow Queries**をクリックします。
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/slow_query](http://127.0.0.1:2379/dashboard/#/slow_query)にアクセスしてください。 `127.0.0.1:2379`を実際の PD アドレスとポートに置き換えてください。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/slow_query](http://127.0.0.1:2379/dashboard/#/slow_query)にアクセスしてください。 `127.0.0.1:2379`を実際の PD アドレスとポートに置き換えてください。
 
 スロークエリページに表示されるすべてのデータは、TiDB スロークエリシステムテーブルおよびスロークエリログから取得されます。詳細については[スロークエリログ](/identify-slow-queries.md)を参照してください。
 
