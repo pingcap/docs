@@ -57,7 +57,7 @@ The following example shows how to create a TiDB Cloud SQL user.
 
     - To use the `tidbcloud_sql_user` resource, set the resource type as `tidbcloud_sql_user`.
     - For the resource name, you can define it as needed. For example, `example`.
-    - For SQL users in the {{{ .starter }}} or {{{ .essential }}} instance, the `user_name` and built-in role `role_readonly` and `role_readwrite` must start with the user prefix, you can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
+    - For SQL users in the {{{ .starter }}} or {{{ .essential }}} instance, the `user_name` and built-in roles `role_readonly` and `role_readwrite` must start with the user prefix. You can get the user prefix by running the `tidbcloud_serverless_cluster` data source.
     - To get the SQL user specification information, see [`tidbcloud_sql_user` (Resource)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/sql_user).
 
 3. Run the `terraform apply` command. It is not recommended to use `terraform apply --auto-approve` when you apply a resource.
