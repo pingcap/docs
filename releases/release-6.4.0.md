@@ -28,7 +28,7 @@ TiDBバージョン: 6.4.0-DMR
 - [クラスター診断](/dashboard/dashboard-diagnostics-access.md)機能が GA になります。
 - TiFlash は[保存時の暗号化](/encryption-at-rest.md#tiflash)のための SM4 アルゴリズムをサポートしています。
 - SQL文を使用して[テーブル内の指定されたパーティションのTiFlashレプリカを即座にコンパクションする](/sql-statements/sql-statement-alter-table-compact.md#compact-tiflash-replicas-of-specified-partitions-in-a-table)ことをサポートします。
-- [EBSボリュームスナップショットを使用したTiDBクラスターのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)サポートします。
+- [EBSボリュームスナップショットを使用したTiDBクラスターのバックアップ](https://docs.pingcap.com/tidb-in-kubernetes/v1.4/backup-to-aws-s3-by-snapshot)をサポートします。
 - DM は[上流のデータソース情報を下流のマージ済みテーブルの拡張列に書き込む](/dm/dm-table-routing.md#extract-table-schema-and-source-information-and-write-into-the-merged-table)サポートしています。
 
 ## 新機能 {#new-features}
