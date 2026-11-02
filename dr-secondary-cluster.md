@@ -31,7 +31,7 @@ summary: TiCDCに基づいたプライマリセカンダリディザスターリ
 前述のアーキテクチャは、プライマリクラスターとセカンダリクラスターという2つのTiDBクラスターで構成されています。
 
 - プライマリクラスター：リージョン1で稼働するアクティブなクラスターで、3つのレプリカを持ちます。このクラスターは読み取りおよび書き込みリクエストを処理します。
-- セカンダリークラスター：リージョン2で稼働し、TiCDCを介してプライマリクラスターからデータを複製するスタンバイクラスター。
+- セカンダリクラスター：リージョン2で稼働し、TiCDCを介してプライマリクラスターからデータを複製するスタンバイクラスター。
 
 このDRアーキテクチャはシンプルで使いやすいです。リージョン障害に対応できるため、プライマリクラスターの書き込みパフォーマンスが低下しないことが保証され、セカンダリクラスターはレイテンシーに影響されない読み取り専用処理を処理できます。このソリューションのリカバリポイント目標（RPO）は秒単位、リカバリ時間目標（RTO）は数分、あるいはそれ以下となります。多くのデータベースベンダーが重要な本番システム向けに推奨しているソリューションです。
 
@@ -103,7 +103,7 @@ TiCDCを導入する際は、セカンダリクラスターとTiCDCを一緒に�
         ticdc_cluster_id: "DR_TiCDC"
     ```
 
-### プライマリクラスターからセカンダリークラスターへデータを複製する {#replicate-data-from-the-primary-cluster-to-the-secondary-cluster}
+### プライマリクラスターからセカンダリクラスターへデータを複製する {#replicate-data-from-the-primary-cluster-to-the-secondary-cluster}
 
 TiDBのプライマリクラスターとセカンダリクラスターを設定した後、まずプライマリクラスターからセカンダリクラスターへデータを移行し、次にプライマリクラスターからセカンダリクラスターへリアルタイムの変更データを複製するためのレプリケーションタスクを作成します。
 
@@ -278,7 +278,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
     1 row in set (0.00 sec)
     ```
 
-### プライマリクラスターとセカンダリークラスターを監視する {#monitor-the-primary-and-secondary-clusters}
+### プライマリクラスターとセカンダリクラスターを監視する {#monitor-the-primary-and-secondary-clusters}
 
 現在、TiDBにはDRダッシュボードは用意されていません。以下のダッシュボードを使用してTiDBのプライマリクラスターとセカンダリクラスターの状態を確認し、DR切り替えを実行するかどうかを判断してください。
 
@@ -368,7 +368,7 @@ s3://backup?access-key=minio&secret-access-key=miniostorage&endpoint=http://10.0
 TiDBのプライマリクラスターとセカンダリクラスターを再構築するには、新しいクラスターをデプロイして新しいDRシステムを構築できます。詳細については、以下のドキュメントを参照してください。
 
 - [プライマリクラスターとセカンダリクラスターを設定する](#set-up-primary-and-secondary-clusters-based-on-ticdc)
-- [プライマリクラスターからセカンダリークラスターへデータを複製する](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
+- [プライマリクラスターからセカンダリクラスターへデータを複製する](#replicate-data-from-the-primary-cluster-to-the-secondary-cluster)
 - 上記の手順が完了したら、新しいプライマリクラスターを作成するには、 [プライマリおよびセカンダリの切り替え](#planned-primary-and-secondary-switchover)を参照してください。
 
 > **Note:**
