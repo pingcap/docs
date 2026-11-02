@@ -488,7 +488,7 @@ TiDB v6.0.0 は DMR であり、そのバージョンは 6.0.0-DMR です。
 
     - PDがジョイントコンセンサスの意味のないステップを含む演算子を生成する問題を修正 [#4362](https://github.com/tikv/pd/issues/4362)
     - PDクライアントを閉じるときにTSO取り消しプロセスが停止する可能性があるバグを修正 [#4549](https://github.com/tikv/pd/issues/4549)
-    - リージョンスキャッターラーのスケジューリングで一部のピアが失われる問題を修正[#4565](https://github.com/tikv/pd/issues/4565)
+    - リージョンスキャッタラーのスケジューリングで一部のピアが失われる問題を修正[#4565](https://github.com/tikv/pd/issues/4565)
     - `dr-autosync`の`Duration`フィールドが動的に構成できない問題を修正[#4651](https://github.com/tikv/pd/issues/4651)
 
 - TiFlash
