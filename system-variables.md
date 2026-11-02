@@ -4065,6 +4065,10 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 
 ### tidb_mem_oom_action <span class="version-mark">New in v6.1.0</span>
 
+> **Note:**
+>
+> This variable is read-only for TiDB Cloud Starter, TiDB Cloud Essential, TiDB Cloud Premium, and TiDB Cloud BYOC instances.
+
 - Scope: GLOBAL
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): No
