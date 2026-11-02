@@ -652,7 +652,7 @@ corruption analysis has completed
 
 ### リージョンの`RegionReadProgress`の状態を取得する {#get-the-state-of-a-regions-regionreadprogress}
 
-v6.5.4およびv7.3.0以降、TiKVはリゾルバーの最新の詳細情報を取得するためのサブコマンド`get-region-read-progress`と`RegionReadProgress`導入しました。リージョンIDとTiKVを指定する必要があります。これらはGrafana（ `Min Resolved TS Region`と`Min Safe TS Region` ）または`DataIsNotReady`ログから取得できます。
+v6.5.4およびv7.3.0以降、TiKVはリゾルバーと`RegionReadProgress`の最新の詳細情報を取得するためのサブコマンド`get-region-read-progress`を導入しました。リージョンIDとTiKVを指定する必要があります。これらはGrafana（ `Min Resolved TS Region`と`Min Safe TS Region` ）または`DataIsNotReady`ログから取得できます。
 
 - `--log` （オプション）: 指定すると、TiKVはリージョンのリゾルバー内のロックのうち、最も小さい`start_ts`をレベル`INFO`でこのTiKVに記録します。このオプションは、resolved-tsをブロックする可能性のあるロックを事前に特定するのに役立ちます。
 
