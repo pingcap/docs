@@ -107,7 +107,7 @@ Take the `/dev/nvme0n1` data disk as an example:
 
 Swapping TiDB memory out to disk and back can cause latency spikes. For stable performance, it is recommended that you permanently disable system swap. However, disabling swap can increase the risk of out-of-memory (OOM) issues when memory is insufficient. Choose one of the following options based on your memory capacity and latency requirements:
 
-- Disable swap for latency-sensitive workloads:
+- Option 1: Disable swap for latency-sensitive workloads:
 
     1. When installing the operating system, do not create swap partitions or swap files. If swap is already enabled, run the following command to disable it immediately:
 
@@ -133,7 +133,7 @@ Swapping TiDB memory out to disk and back can cause latency spikes. For stable p
 
     3. After disabling swap, and again after the next reboot, run `cat /proc/swaps`. If swap is disabled, the output contains only the header row.
 
-- Keep swap enabled when memory is insufficient:
+- Option 2: Keep swap enabled when memory is insufficient:
 
     Set `vm.swappiness=0` to reduce the kernel's tendency to swap. This setting does not disable swap: the kernel can still use it under memory pressure. Run the following commands to save the setting in `/etc/sysctl.conf` and apply it immediately:
 
