@@ -79,7 +79,7 @@ After TiFlash is deployed, TiKV does not replicate data to TiFlash automatically
 
 ## Data processing
 
-With TiDB, you can simply enter SQL statements for query or write requests. For the tables with TiFlash replicas, TiDB uses the frontend optimizer to automatically choose the optimal execution plan.
+With TiDB, you can simply enter SQL statements for query or write requests. For the tables with TiFlash replicas, TiDB uses the front-end optimizer to automatically choose the optimal execution plan.
 
 > **Note:**
 >

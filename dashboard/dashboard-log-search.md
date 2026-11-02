@@ -34,7 +34,7 @@ This page consists of the following three areas:
 - Parameter options (area 1 in the image above): These options are the same as the parameter options on the search homepage. You can re-select the parameters in the boxes and start a new search.
 - Progress (area 2 in the image above): The current search progress is shown on the right side of this page, including the log search status and statistics of each node.
 - Search results (area 3 in the image above):
-    - Time: The time at which the log is generated. The time zone is the same as the time zone of the frontend user.
+    - Time: The time at which the log is generated. The time zone is the same as the time zone of the front-end user.
     - Level: log level.
     - Component: Shows the component name and its address.
     - Log: The body part of each log record, excluding the log time and log level. Logs that are too long are automatically truncated. Click a row to expand the full content. The full log can show up to 512 characters.

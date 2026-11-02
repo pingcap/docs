@@ -29,7 +29,7 @@ On June 28, 2019, TiDB 3.0 GA is released. The corresponding TiDB Ansible versio
     - Improve Table Partition
         - Support Range Partition
         - Support Hash Partition
-    - Add the plugin framework, supporting plugins such as IP Whitelist (**Enterprise**) and Audit Log (**Enterprise**).
+    - Add the plug-in framework, supporting plugins such as IP Whitelist (**Enterprise**) and Audit Log (**Enterprise**).
     - Support the SQL Plan Management function to create SQL execution plan binding to ensure query stability (**Experimental**)
 + SQL Optimizer
     - Optimize the `NOT EXISTS` subquery and convert it to `Anti Semi Join` to improve performance

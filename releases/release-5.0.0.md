@@ -82,7 +82,7 @@ In v5.0, the key new features or improvements are as follows:
 
 With the list partitioning feature, you can effectively query and maintain tables with a large amount of data.
 
-With this feature enabled, partitions and how data is distributed among partitions are defined according to the `PARTITION BY LIST(expr) PARTITION part_name VALUES IN (...)` expression. The partitioned tables' dataset supports at most 1024 distinct integer values. You can define the values using the `PARTITION ... VALUES IN (...)` clause.
+With this feature enabled, partitions and how data is distributed among partitions are defined according to the `PARTITION BY LIST(expr) PARTITION part_name VALUES IN (...)` expression. The partitioned tables' data set supports at most 1024 distinct integer values. You can define the values using the `PARTITION ... VALUES IN (...)` clause.
 
 To enable list partitioning, set the session variable [`tidb_enable_list_partition`](/system-variables.md#tidb_enable_list_partition-new-in-v50) to `ON`.
 
