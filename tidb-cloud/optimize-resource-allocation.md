@@ -11,7 +11,7 @@ TiDB Cloud Dedicatedは、 [リソース制御](/tidb-resource-control-ru-groups
 
 ## リソース制御を使用する {#use-resource-control}
 
-[リソース制御](/tidb-resource-control-ru-groups.md)を使用すると、 TiDB Cloud Dedicatedクラスターのストレージノード（TiKVまたはTiFlash ）を複数の論理グループに分割できます。混在ワークロードを持つシステムでは、ワークロードを個別のリソースグループに割り当てることで、リソースの分離を確保し、QoS要件を満たすことができます。
+[リソース制御](/tidb-resource-control-ru-groups.md)を使用すると、 TiDB Cloud Dedicatedクラスターのストレージノード（TiKVまたはTiFlash ）を複数の論理グループに分割できます。混在ワークロードを持つシステムでは、ワークロードを個別のリソースグループに割り当てることで、リソースの分離を確保し、QoS要件を満たせます。
 
 クラスターで予期しない SQL パフォーマンスの問題が発生した場合は、リソースグループと併せて[SQLバインディング](/sql-statements/sql-statement-create-binding.md)または[暴走クエリを管理する](/tidb-resource-control-runaway-queries.md)を使用して、特定の SQL文のリソース消費を一時的に制限できます。
 

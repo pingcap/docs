@@ -30,7 +30,7 @@ TiDB CloudとVercelを組み合わせることで、MySQL互換のリレーシ�
 Vercelにアカウントとプロジェクトをお持ちであることが前提となります。お持ちでない場合は、以下のVercelドキュメントを参照して作成してください。
 
 - [新しい個人アカウントを作成する](https://vercel.com/docs/teams-and-accounts#creating-a-personal-account)、 [新しいチームを作る](https://vercel.com/docs/teams-and-accounts/create-or-join-a-team#creating-a-team)。
-- Vercel で[プロジェクトを作成](https://vercel.com/docs/concepts/projects/overview#creating-a-project)していること。デプロイするアプリケーションがない場合は、 [TiDB Cloud Starterテンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)を使用して試すことができます。
+- Vercel で[プロジェクトを作成](https://vercel.com/docs/concepts/projects/overview#creating-a-project)していること。デプロイするアプリケーションがない場合は、 [TiDB Cloud Starterテンプレート](https://vercel.com/templates/next.js/tidb-cloud-starter)を使用して試せます。
 
 Vercelプロジェクトは、1つのTiDB Cloudクラスターにしか接続できません。統合を変更するには、まず現在のクラスターとの接続を解除してから、新しいクラスターに接続する必要があります。
 

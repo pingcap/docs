@@ -604,7 +604,7 @@ MySQLサービスがGoogle Cloud VPC内にある場合は、以下の手順を�
 
 ### 移行に必要な権限を付与する {#grant-required-privileges-for-migration}
 
-移行を開始する前に、ソースデータベースとターゲットデータベースの両方で、必要な権限を持つ適切なデータベースユーザーを設定する必要があります。これらの権限により、TiDB Cloud DM は MySQL からデータを読み取り、変更を複製し、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に安全に書き込むことができます。移行には、既存データの完全なデータダンプと増分変更のbinlog複製の両方が含まれるため、移行ユーザーには基本的な読み取りアクセス以外の特定の権限が必要です。
+移行を開始する前に、ソースデータベースとターゲットデータベースの両方で、必要な権限を持つ適切なデータベースユーザーを設定する必要があります。これらの権限により、TiDB Cloud DM は MySQL からデータを読み取り、変更を複製し、 <CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent>に安全に書き込めます。移行には、既存データの完全なデータダンプと増分変更のbinlog複製の両方が含まれるため、移行ユーザーには基本的な読み取りアクセス以外の特定の権限が必要です。
 
 #### ソースMySQLデータベースで、移行ユーザーに必要な権限を付与する {#grant-required-privileges-to-the-migration-user-in-the-source-mysql-database}
 
@@ -614,7 +614,7 @@ MySQLサービスがGoogle Cloud VPC内にある場合は、以下の手順を�
 
 | 特権                   | 範囲    | 目的                                                                                                                                                                                                                                                                         |
 | :------------------- | :---- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `SELECT`             | テーブル     | すべてのテーブルからデータを読み取ることができます                                                                                                                                                                                                                                                  |
+| `SELECT`             | テーブル     | すべてのテーブルからデータを読み取れます                                                                                                                                                                                                                                                  |
 | `RELOAD`             | グローバル | フルダンプ中に一貫性のあるスナップショットを保証します                                                                                                                                                                                                                                                |
 | `REPLICATION SLAVE`  | グローバル | 増分データ移行のためのbinlogストリーミングを有効にする                                                                                                                                                                                                                                             |
 | `REPLICATION CLIENT` | グローバル | binlogの位置とサーバーの状態へのアクセスを提供します                                                                                                                                                                                                                                              |

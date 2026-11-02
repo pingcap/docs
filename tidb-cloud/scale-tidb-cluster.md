@@ -85,7 +85,7 @@ TiDB Cloud APIを使用して、 [TiDB Cloud Dedicated クラスターを変更�
 
 ## ストレージの変更 {#change-storage}
 
-TiKV またはTiFlashのストレージを増やすことができます。
+TiKV またはTiFlashのストレージを増やせます。
 
 > **Warning:**
 >

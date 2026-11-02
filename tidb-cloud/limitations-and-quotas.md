@@ -5,7 +5,7 @@ summary: TiDB Cloudの制限とクォータについて説明します。
 
 # TiDB Cloud Dedicated制限とクォータ {#tidb-cloud-dedicated-limitations-and-quotas}
 
-TiDB Cloudでは、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター内で作成できる各コンポーネントの数と、TiDBの一般的な使用が制限されています。さらに、組織レベルのクォータによってユーザーが作成できるリソースの量を制限し、実際に必要な量を超えるリソースの作成を防ぐことができます。以下の表は、制限とクォータの概要を示しています。
+TiDB Cloudでは、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスター内で作成できる各コンポーネントの数と、TiDBの一般的な使用が制限されています。さらに、組織レベルのクォータによってユーザーが作成できるリソースの量を制限し、実際に必要な量を超えるリソースの作成を防げます。以下の表は、制限とクォータの概要を示しています。
 
 > **Note:**
 >

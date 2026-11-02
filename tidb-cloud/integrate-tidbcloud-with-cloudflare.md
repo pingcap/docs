@@ -26,7 +26,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
 
 ## ステップ1. Wranglerをセットアップする {#step-1-set-up-wrangler}
 
-[Wrangler](https://developers.cloudflare.com/workers/wrangler/)は、Cloudflare Worker の公式 CLI です。これを使用して、Worker の生成、構築、プレビュー、および公開を行うことができます。
+[Wrangler](https://developers.cloudflare.com/workers/wrangler/)は、Cloudflare Worker の公式 CLI です。これを使用して、Worker の生成、構築、プレビュー、および公開を行えます。
 
 1. Wranglerをインストールする：
 
