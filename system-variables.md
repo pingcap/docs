@@ -3995,6 +3995,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
 - Unit: Threads
 - This variable is used to set the maximum concurrency for TiFlash to execute a request. The default value is `-1`, indicating that this system variable is invalid and the maximum concurrency depends on the setting of the TiFlash configuration `profiles.default.max_threads`. When the value is `0`, the maximum number of threads is automatically configured by TiFlash.
 
+<CustomContent platform="tidb-cloud">
+
 ### tidb_mem_arbitrator_mode <span class="version-mark">New in CLOUD.202609.1</span>
 
 > **Warning:**
@@ -4058,6 +4060,8 @@ For a system upgraded to v5.0 from an earlier version, if you have not modified 
     - `0` (default): Disables this feature, and the variable does not take effect.
     - `1`: Takes effect only in `priority` mode. SQL is automatically bound to high priority when subscribing to memory resources. When global memory resources are insufficient, the SQL execution is terminated instead of being blocked waiting.
     - `nolimit`: The memory usage of SQL is not limited by the arbitrator. This value might increase the risk of OOM on the TiDB instance.
+
+</CustomContent>
 
 ### tidb_mem_oom_action <span class="version-mark">New in v6.1.0</span>
 

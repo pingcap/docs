@@ -70,6 +70,8 @@ To view the memory usage of the current instance or cluster, you can query the s
 
 To view the memory-related operations and execution basis of the current instance or cluster, you can query the system table [`INFORMATION_SCHEMA.(CLUSTER_)MEMORY_USAGE_OPS_HISTORY`](/information-schema/information-schema-memory-usage-ops-history.md). For each instance, this table retains the latest 50 records.
 
+<CustomContent platform="tidb">
+
 ## Trigger the alarm of excessive memory usage
 
 When the memory usage of a tidb-server instance exceeds its memory threshold (70% of its total memory by default) and any of the following conditions is met, TiDB records the related status files and prints an alarm log.
@@ -129,6 +131,8 @@ The following example constructs a memory-intensive SQL statement that triggers 
 
 5. By checking the directory of status files (In the preceding example, the directory is `/tiup/deploy/tidb-4000/log/oom_record`), you can see a record directory with the corresponding timestamp (for example, `record2022-10-09T17:18:38+08:00`). The record directory includes three files: `goroutinue`, `heap`, and `running_sql`. These three files are suffixed with the time when status files are logged. They respectively record goroutine stack information, the usage status of heap memory, and the running SQL information when the alarm is triggered. For the content in `running_sql`, refer to [`expensive-queries`](/identify-expensive-queries.md).
 
+</CustomContent>
+
 ## Reduce the memory usage for write transactions in tidb-server
 
 The transaction model used by TiDB requires that all write operations of transactions are first cached in memory before being committed. When TiDB writes large transactions, memory usage might increase and become a bottleneck. To reduce or avoid high memory usage by large transactions under various constraints, you can adjust the [`tidb_dml_type`](/system-variables.md#tidb_dml_type-new-in-v800) system variable to `"bulk"` or use [Non-transactional DML statements](/non-transactional-dml.md).
@@ -150,7 +154,7 @@ TiDB supports disk spill for execution operators. When the memory usage of a SQL
 - When the disk spill is triggered, TiDB outputs a log containing the keywords `memory exceeds quota, spill to disk now` or `memory exceeds quota, set aggregate mode to spill-mode`.
 - Disk spill for the Sort, MergeJoin, and HashJoin operators is introduced in v4.0.0. Disk spill for the non-parallel algorithm of the HashAgg operator is introduced in v5.2.0. Disk spill for the parallel algorithm of the HashAgg operator is introduced in v8.0.0 as an experimental feature and becomes generally available (GA) in v8.2.0. Disk spill for the TopN operator is introduced in v8.3.0.
 - You can control whether to enable the parallel HashAgg algorithm that supports disk spill using the [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800) system variable. This variable will be deprecated in a future release.
-- When the SQL executions containing Sort, MergeJoin, HashJoin, HashAgg, or TopN cause OOM, TiDB triggers disk spill by default. 
+- When the SQL executions containing Sort, MergeJoin, HashJoin, HashAgg, or TopN cause OOM, TiDB triggers disk spill by default.
 
 > **Note:**
 >
@@ -224,6 +228,8 @@ To verify the performance of `GOMEMLIMIT`, a test is performed to compare the sp
 - In TiDB v6.1.3, `GOMEMLIMIT` is set to 40000 MiB. It is found that the simulated workload runs stably for a long time, OOM does not occur in the TiDB server, and the maximum memory usage of the process is stable at around 40.8 GiB:
 
     ![v6.1.3 workload no oom with GOMEMLIMIT](/media/configure-memory-usage-613-no-oom.png)
+
+<CustomContent platform="tidb-cloud">
 
 ## Memory arbitrator mode
 
@@ -366,3 +372,5 @@ You can take the following measures to ensure the execution of important SQL:
 - Bind important SQL to high-priority resource groups.
 - Set `tidb_mem_quota_query` to a larger value to reduce the probability that a single SQL is interrupted because it exceeds the memory quota.
 - If you can accept the OOM risk, set `tidb_mem_arbitrator_wait_averse` to `nolimit` so that the related SQL bypasses the memory arbitrator limitation.
+
+</CustomContent>
