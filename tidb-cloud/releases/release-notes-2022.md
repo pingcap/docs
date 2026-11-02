@@ -151,7 +151,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 - データベース監査ログ機能が GA になりました。
 
-    データベース監査ログを使用すると、ユーザーアクセスの詳細 (実行された SQL文など) の履歴をログに記録し、データベース監査ログを定期的に分析して、データベースを安全に保つことができます。
+    データベース監査ログを使用すると、ユーザーアクセスの詳細 (実行された SQL文など) の履歴をログに記録し、データベース監査ログを定期的に分析して、データベースを安全に保てます。
 
     詳細については[データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
 
@@ -340,7 +340,7 @@ summary: 2022年のTiDB Cloudのリリースノートについて説明します
 
 **APIの変更**
 
-- [TiDB Cloud API](https://docs.pingcap.com/api/tidb-cloud-api-overview)を通じて TiKV またはTiFlashノードのストレージを増やすことができます。スケーリングには API エンドポイントの`storage_size_gib`フィールドを使用できます。
+- [TiDB Cloud API](https://docs.pingcap.com/api/tidb-cloud-api-overview)を通じて TiKV またはTiFlashノードのストレージを増やせます。スケーリングには API エンドポイントの`storage_size_gib`フィールドを使用できます。
 
     現在、 TiDB Cloud API はまだベータ版であり、リクエストに応じてのみ利用可能です。
 
@@ -564,7 +564,7 @@ TiDB Cloudが一般提供を開始しました。[サインアップ](https://ti
 
 - [TiDB Cloud組み込みアラート](/tidb-cloud/monitor-built-in-alerting.md)をサポート。
 
-    TiDB Cloudの組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスターがTiDB Cloud の組み込みアラート条件のいずれかをトリガーするたびに、電子メールで通知を受け取ることができます。
+    TiDB Cloudの組み込みアラート機能を使用すると、プロジェクト内のTiDB CloudクラスターがTiDB Cloud の組み込みアラート条件のいずれかをトリガーするたびに、電子メールで通知を受け取れます。
 
 ## 2022年3月15日 {#march-15-2022}
 

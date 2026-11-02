@@ -259,7 +259,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB Cloud [Data Service](https://tidbcloud.com/project/data-service)でデータアプリの OpenAPI 仕様をサポートします。
 
-    TiDB Cloud Data Service は、各データアプリ向けに自動生成された OpenAPI ドキュメントを提供します。ドキュメントでは、エンドポイント、パラメーター、レスポンスを確認し、エンドポイントを試すことができます。
+    TiDB Cloud Data Service は、各データアプリ向けに自動生成された OpenAPI ドキュメントを提供します。ドキュメントでは、エンドポイント、パラメーター、レスポンスを確認し、エンドポイントを試せます。
 
     データアプリとそのデプロイ済みエンドポイントのOpenAPI仕様（OAS）をYAMLまたはJSON形式でダウンロードすることもできます。OASは標準化されたAPIドキュメント、簡素化された統合、そして容易なコード生成を提供し、開発の迅速化とコラボレーションの向上を実現します。
 
@@ -362,7 +362,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - [TiDB Cloud Serverless](/tidb-cloud/select-cluster-tier.md#starter)クラスターに対して[ブランチ機能（ベータ版）](/tidb-cloud/branch-overview.md)をサポートします。
 
-    TiDB Cloud では、TiDB Cloud Serverless クラスターのブランチを作成できます。クラスターのブランチとは、元のクラスターから分岐したデータのコピーを含む独立したインスタンスです。これにより分離された環境が提供され、元のクラスターへの影響を心配することなく、自由に接続して実験を行うことができます。
+    TiDB Cloud では、TiDB Cloud Serverless クラスターのブランチを作成できます。クラスターのブランチとは、元のクラスターから分岐したデータのコピーを含む独立したインスタンスです。これにより分離された環境が提供され、元のクラスターへの影響を心配することなく、自由に接続して実験を行えます。
 
     [TiDB Cloudコンソール](/tidb-cloud/branch-manage.md)または[TiDB Cloud CLI](/tidb-cloud/ticloud-branch-create.md)のいずれかを使用して、2023年 7月 5日以降に作成されたTiDB Cloud Serverless クラスターのブランチを作成できます。
 
@@ -387,7 +387,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 - 次の変更を加えることで、全体的なナビゲーションエクスペリエンスが向上します。
 
     - 右上隅にある<MDSvgIcon name="icon-top-organization" />**Organization**と<MDSvgIcon name="icon-top-account-settings" />**Account**を左のナビゲーションバーに統合します。
-    - 左のナビゲーションバーの<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5H7.5C6.10444 14.5 5.40665 14.5 4.83886 14.6722C3.56045 15.06 2.56004 16.0605 2.17224 17.3389C2 17.9067 2 18.6044 2 20M14.5 6.5C14.5 8.98528 12.4853 11 10 11C7.51472 11 5.5 8.98528 5.5 6.5C5.5 4.01472 7.51472 2 10 2C12.4853 2 14.5 4.01472 14.5 6.5ZM22 16.516C22 18.7478 19.6576 20.3711 18.8054 20.8878C18.7085 20.9465 18.6601 20.9759 18.5917 20.9911C18.5387 21.003 18.4613 21.003 18.4083 20.9911C18.3399 20.9759 18.2915 20.9465 18.1946 20.8878C17.3424 20.3711 15 18.7478 15 16.516V14.3415C15 13.978 15 13.7962 15.0572 13.6399C15.1077 13.5019 15.1899 13.3788 15.2965 13.2811C15.4172 13.1706 15.5809 13.1068 15.9084 12.9791L18.2542 12C18.3452 11.9646 18.4374 11.8 18.4374 11.8H18.5626C18.5626 11.8 18.6548 11.9646 18.7458 12L21.0916 12.9791C21.4191 13.1068 21.5828 13.1706 21.7035 13.2811C21.8101 13.3788 21.8923 13.5019 21.9428 13.6399C22 13.7962 22 13.978 22 14.3415V16.516Z" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg>**Admin**を左のナビゲーションバーの<MDSvgIcon name="icon-left-projects" />**Project**に統合し、左上隅の☰ホバーメニューを削除します。これで、<MDSvgIcon name="icon-left-projects" />をクリックして、プロジェクトの切り替えやプロジェクト設定の変更を行うことができます。
+    - 左のナビゲーションバーの<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg"><path d="M12 14.5H7.5C6.10444 14.5 5.40665 14.5 4.83886 14.6722C3.56045 15.06 2.56004 16.0605 2.17224 17.3389C2 17.9067 2 18.6044 2 20M14.5 6.5C14.5 8.98528 12.4853 11 10 11C7.51472 11 5.5 8.98528 5.5 6.5C5.5 4.01472 7.51472 2 10 2C12.4853 2 14.5 4.01472 14.5 6.5ZM22 16.516C22 18.7478 19.6576 20.3711 18.8054 20.8878C18.7085 20.9465 18.6601 20.9759 18.5917 20.9911C18.5387 21.003 18.4613 21.003 18.4083 20.9911C18.3399 20.9759 18.2915 20.9465 18.1946 20.8878C17.3424 20.3711 15 18.7478 15 16.516V14.3415C15 13.978 15 13.7962 15.0572 13.6399C15.1077 13.5019 15.1899 13.3788 15.2965 13.2811C15.4172 13.1706 15.5809 13.1068 15.9084 12.9791L18.2542 12C18.3452 11.9646 18.4374 11.8 18.4374 11.8H18.5626C18.5626 11.8 18.6548 11.9646 18.7458 12L21.0916 12.9791C21.4191 13.1068 21.5828 13.1706 21.7035 13.2811C21.8101 13.3788 21.8923 13.5019 21.9428 13.6399C22 13.7962 22 13.978 22 14.3415V16.516Z" stroke="currentColor" stroke-width="inherit" stroke-linecap="round" stroke-linejoin="round"></path></svg>**Admin**を左のナビゲーションバーの<MDSvgIcon name="icon-left-projects" />**Project**に統合し、左上隅の☰ホバーメニューを削除します。これで、<MDSvgIcon name="icon-left-projects" />をクリックして、プロジェクトの切り替えやプロジェクト設定の変更を行えます。
     - ドキュメント、対話型チュートリアル、自習型トレーニング、サポート導線など、 TiDB Cloudのすべてのヘルプとサポート情報を、右下隅の**?**アイコンのメニューに統合します。
 
 - TiDB Cloudコンソールは、より快適で目に優しいダークモードをサポートするようになりました。左ナビゲーションバーの下部から、ライトモードとダークモードを切り替えることができます。
@@ -449,7 +449,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
     TiDB Playground は、スケーラビリティ、MySQL 互換性、リアルタイム分析などの TiDB の機能をワンストップで探索できるエクスペリエンスを提供するように設計されたインタラクティブプラットフォームです。
 
-    TiDB Playground を使用すると、複雑な構成のない制御された環境で TiDB の機能をリアルタイムで試すことができるため、TiDB の機能を理解するのに最適です。
+    TiDB Playground を使用すると、複雑な構成のない制御された環境で TiDB の機能をリアルタイムで試せるため、TiDB の機能を理解するのに最適です。
 
     TiDB Playground を使い始めるには、 [**TiDB Playground**](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_cloud_release_notes)ページに移動し、探索する機能を選択して探索を開始します。
 
@@ -767,7 +767,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - AWS でホストされ、2022年 12月 31日より後に作成された[Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターをスケールインするために、TiDB、TiKV、およびTiFlashノードのサイズを縮小することをサポートします。
 
-    ノードサイズを[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らすことができます。
+    ノードサイズを[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らせます。
 
 - [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md)機能に対して新しい GCP リージョンをサポートします: `Tokyo (asia-northeast1)` 。
 
@@ -897,7 +897,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - TiDB [Dedicated Tier](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターをスケールインするために、TiKV ノードとTiFlashノードの数を減らすことをサポートします。
 
-    ノード数を[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-node-count)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らすことができます。
+    ノード数を[TiDB Cloudコンソール経由](/tidb-cloud/scale-tidb-cluster.md#change-node-count)または[TiDB Cloud API（ベータ版）経由](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)で減らせます。
 
 **コンソールの変更**
 
@@ -976,7 +976,7 @@ summary: 2023年のTiDB Cloudのリリースノートについて説明します
 
 - AWS でホストされ、2022年 12月 31日以降に作成されたTiDB Cloud Dedicated クラスターの**Node Size(vCPU + RAM)** を増やすことで、TiDB、TiKV、およびTiFlashノードのスケールアップをサポートします。
 
-    ノードサイズを[TiDB Cloudコンソールを使用](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）を使用](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)して増やすことができます。
+    ノードサイズを[TiDB Cloudコンソールを使用](/tidb-cloud/scale-tidb-cluster.md#change-vcpu-and-ram)または[TiDB Cloud API（ベータ版）を使用](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)して増やせます。
 
 - [**Monitoring**](/tidb-cloud/built-in-monitoring.md)ページのメトリックの保持期間を 2日間に延長します。
 

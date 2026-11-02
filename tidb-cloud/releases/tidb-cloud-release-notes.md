@@ -290,8 +290,8 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - 新しい外部 Python UDF SDK と dbtアダプターにより、TiDB Cloud Lake の Python 拡張性と analytics engineering ワークフローを拡張しました。
 
-        - 新しい外部 Python UDF SDK を使用すると、Python でカスタムのスカラー関数およびテーブル関数を実装し、それらを UDF サーバーにデプロイし、TiDB Cloud Lake にエンドポイントを登録して、SQL から直接これらの関数を呼び出すことができます。この SDK は、一般的なデータ型と複雑なデータ型、NULL 処理、I/O 並列処理、および関数ごとの同時実行制御をサポートします。
-        - 新しい dbtアダプターを使用すると、dbt を TiDB Cloud Lake に接続して、データ変換ワークフローの構築、テスト、ドキュメント化を行うことができます。このアダプターは、table、view、incremental materialization に加え、seeds、sources、カスタムデータテスト、ドキュメント生成、snapshots、接続の再試行をサポートします。
+        - 新しい外部 Python UDF SDK を使用すると、Python でカスタムのスカラー関数およびテーブル関数を実装し、それらを UDF サーバーにデプロイし、TiDB Cloud Lake にエンドポイントを登録して、SQL から直接これらの関数を呼び出せます。この SDK は、一般的なデータ型と複雑なデータ型、NULL 処理、I/O 並列処理、および関数ごとの同時実行制御をサポートします。
+        - 新しい dbtアダプターを使用すると、dbt を TiDB Cloud Lake に接続して、データ変換ワークフローの構築、テスト、ドキュメント化を行えます。このアダプターは、table、view、incremental materialization に加え、seeds、sources、カスタムデータテスト、ドキュメント生成、snapshots、接続の再試行をサポートします。
 
       詳細については、以下のドキュメントを参照してください。
 
@@ -697,7 +697,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
         TiDB Cloud Premium は[TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)と[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)の間のギャップを埋めるものです。
 
         - TiDB Cloud Essentialと比較して、 TiDB Cloud Premiumはコンピューティング、ストレージ、ネットワークの各レイヤーにおいて大幅に強化された分離性を提供し、重要なワークロードに対して予測可能なパフォーマンスを保証します。同時に、柔軟性の高いオンデマンドのスケーリングモデルを維持しており、運用上のオーバーヘッドなしにコンピューティングキャパシティを個別に拡張できます。
-        - TiDB Cloud Dedicatedと比較して、 TiDB Cloud Premiumはアイドル状態の余裕を排除することでコスト効率を向上させ、実際に使用したパフォーマンスに対してのみ料金を支払うことができます。
+        - TiDB Cloud Dedicatedと比較して、 TiDB Cloud Premiumはアイドル状態の余裕を排除することでコスト効率を向上させ、実際に使用したパフォーマンスに対してのみ料金を支払えます。
 
         TiDB Cloud Premium の詳細については、 [TiDB Cloud Premium: ミッションクリティカルなSQLのパブリックプレビュー](https://www.pingcap.com/blog/tidb-cloud-premium-public-preview/)を参照してください。
 
@@ -782,7 +782,7 @@ aliases: ['/ja/tidbcloud/supported-tidb-versions','/ja/tidbcloud/release-notes',
 
     - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターにおけるクラウドストレージデータのインポートエクスペリエンスを向上させます。
 
-        インポートプロセスは、接続、宛先マッピング、事前チェックの3ステップウィザードに簡素化され、Amazon S3、Google Cloud Storage、Azure Blob Storageに対応した**Import data from Cloud Storage**のエントリポイントが統一されました。新しいフローでは、単一ファイルURIとワイルドカードパターンによる手動ファイルマッピングがサポートされ、事前チェックステップではインポート実行前にソースファイルをスキャンしてマッピングをプレビューするため、構成上の問題を早期に発見し、インポートの失敗を減らすことができます。
+        インポートプロセスは、接続、宛先マッピング、事前チェックの3ステップウィザードに簡素化され、Amazon S3、Google Cloud Storage、Azure Blob Storageに対応した**Import data from Cloud Storage**のエントリポイントが統一されました。新しいフローでは、単一ファイルURIとワイルドカードパターンによる手動ファイルマッピングがサポートされ、事前チェックステップではインポート実行前にソースファイルをスキャンしてマッピングをプレビューするため、構成上の問題を早期に発見し、インポートの失敗を減らせます。
 
         詳細については、以下の資料を参照してください。
 
