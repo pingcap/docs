@@ -1406,7 +1406,7 @@ SELECT store_id, COUNT(department_id) AS c
 - [`ALTER TABLE ... CACHE`](/cached-tables.md)ステートメントを使用してパーティションテーブルをキャッシュテーブルに設定することはサポートされていません。
 - TiDB の[一時テーブル](/temporary-tables.md)パーティション化されたテーブルと互換性**がありません**。
 - パーティションテーブルでの[外部キー](/foreign-key.md)の作成はサポートされていません。
-- [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-)ヒントは、パーティション化されたテーブルとその関連インデックスには機能しません。パーティション化されたテーブルのインデックスは順番に読み取ることができないためです。
+- [`ORDER_INDEX(t1_name, idx1_name [, idx2_name ...])`](/optimizer-hints.md#order_indext1_name-idx1_name--idx2_name-)ヒントは、パーティション化されたテーブルとその関連インデックスには機能しません。パーティション化されたテーブルのインデックスは順番に読み取れないためです。
 
 ### パーティショニングキー、主キー、一意キー {#partitioning-keys-primary-keys-and-unique-keys}
 
@@ -1506,7 +1506,7 @@ PARTITION BY HASH(col1 + col3)
     PARTITIONS 4;
 ```
 
-以下の表は、パーティションキーに両方の固有キーに属する列を含める方法がないため、パーティション分割を一切行うことができません。
+以下の表は、パーティションキーに両方の固有キーに属する列を含める方法がないため、パーティション分割を一切行えません。
 
 ```sql
 CREATE TABLE t4 (

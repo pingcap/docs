@@ -139,7 +139,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - バッチ書き込みリクエストが軽量トランザクション書き込みの応答時間に与える影響を軽減する [#13313](https://github.com/tikv/tikv/issues/13313) @[glorv](https://github.com/glorv)
 
-    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライントランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロードシナリオでの読み取りリクエストのスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)設定項目を有効にすると、TiKV がすべての読み取りリクエストに対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込みリクエストも動的に識別して優先順位を付け、1回のポーリングで Apply スレッドが 1つの FSM (有限状態機械) に対して書き込むことができる最大バイト数を制御できるため、バッチ書き込みリクエストがトランザクション書き込みの応答時間に与える影響を軽減できます。
+    一部のシステムのビジネスロジックでは、定期的なバッチ DML タスクが必要ですが、これらのバッチ書き込みタスクを処理すると、オンライントランザクションのレイテンシーが増加します。v6.3.0 では、TiKV はハイブリッドワークロードシナリオでの読み取りリクエストのスケジューリングを最適化するため、 [`readpool.unified.auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)設定項目を有効にすると、TiKV がすべての読み取りリクエストに対して UnifyReadPool スレッドプールのサイズを自動的に調整します。v6.4.0 では、TiKV は書き込みリクエストも動的に識別して優先順位を付け、1回のポーリングで Apply スレッドが 1つの FSM (有限状態機械) に対して書き込める最大バイト数を制御できるため、バッチ書き込みリクエストがトランザクション書き込みの応答時間に与える影響を軽減できます。
 
 ### 使いやすさ {#ease-of-use}
 
@@ -347,7 +347,7 @@ TiDBバージョン: 6.4.0-DMR
 
 - PD
 
-    - ホットリージョンスケジューラーのv2アルゴリズムがGAになります。一部のシナリオでは、v2アルゴリズムは、設定された両方の次元でより良いバランスを実現し、無効なスケジューリングを減らすことができます。 [#5021](https://github.com/tikv/pd/issues/5021) @[hundundm](https://github.com/hundundm)
+    - ホットリージョンスケジューラーのv2アルゴリズムがGAになります。一部のシナリオでは、v2アルゴリズムは、設定された両方の次元でより良いバランスを実現し、無効なスケジューリングを減らせます。 [#5021](https://github.com/tikv/pd/issues/5021) @[hundundm](https://github.com/hundundm)
     - 早期のタイムアウトを回避するためにオペレーターステップのタイムアウトメカニズムを最適化します [#5596](https://github.com/tikv/pd/issues/5596) @[bufferflies](https://github.com/bufferflies)
     - 大規模クラスターでのスケジューラーのパフォーマンスを向上 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
     - PD で提供されていない外部タイムスタンプの使用をサポートする [#5637](https://github.com/tikv/pd/issues/5637) @[lhy1024](https://github.com/lhy1024)

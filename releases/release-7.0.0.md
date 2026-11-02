@@ -184,7 +184,7 @@ TiDB バージョン: 7.0.0- [DMR](/releases/versioning.md#development-milestone
 
 - TiCDC はストレージサービスへの変更データのレプリケーションをサポート (GA) [#6797](https://github.com/pingcap/tiflow/issues/6797) @[zhaoxinyu](https://github.com/zhaoxinyu)
 
-    TiCDCは、変更されたデータをAmazon S3、GCS、Azure Blob Storage、NFS、およびその他のS3互換ストレージサービスに複製することをサポートしています。ストレージサービスは手頃な価格で使いやすく、Kafkaを使用していない場合は、ストレージサービスを利用できます。TiCDCは変更ログをファイルに保存し、それをストレージサービスに送信します。ストレージサービスから、独自のコンシューマープログラムが新しく生成された変更ログファイルを定期的に読み取ることができます。現在、TiCDCはcanal-jsonおよびCSV形式の変更ログをストレージサービスに複製することをサポートしています。
+    TiCDCは、変更されたデータをAmazon S3、GCS、Azure Blob Storage、NFS、およびその他のS3互換ストレージサービスに複製することをサポートしています。ストレージサービスは手頃な価格で使いやすく、Kafkaを使用していない場合は、ストレージサービスを利用できます。TiCDCは変更ログをファイルに保存し、それをストレージサービスに送信します。ストレージサービスから、独自のコンシューマープログラムが新しく生成された変更ログファイルを定期的に読み取れます。現在、TiCDCはcanal-jsonおよびCSV形式の変更ログをストレージサービスに複製することをサポートしています。
 
     詳細については、[ドキュメント](/ticdc/ticdc-sink-to-cloud-storage.md)を参照してください。
 

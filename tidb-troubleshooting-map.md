@@ -243,9 +243,9 @@ TiDB は、トランザクションの実行時または[`ADMIN CHECK [TABLE|IND
 
     - `server is busy`エラーが、保留中のコンパクションバイト数が多すぎるために発生する場合は、 [`soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)および[`hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit)パラメーターの値を増やすことで、この問題を軽減できます。
 
-        - 保留中のコンパクションバイト数が`soft-pending-compaction-bytes-limit`パラメーターの値 (デフォルトでは`192GiB` ) に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。この場合、このパラメーターの値を増やすことができます。たとえば、 `[storage.flow-control] soft-pending-compaction-bytes-limit = "384GiB"`のようにです。
+        - 保留中のコンパクションバイト数が`soft-pending-compaction-bytes-limit`パラメーターの値 (デフォルトでは`192GiB` ) に達すると、フロー制御メカニズムは一部の書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。この場合、このパラメーターの値を増やせます。たとえば、 `[storage.flow-control] soft-pending-compaction-bytes-limit = "384GiB"`のようにです。
 
-        - 保留中のコンパクションバイト数が`hard-pending-compaction-bytes-limit`パラメーターの値 (デフォルトでは`1024GiB` ) に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。フロー制御メカニズムは`soft-pending-compaction-bytes-limit`のしきい値に達した後に書き込み速度を遅くするため、このシナリオが発生する可能性は低くなります。発生した場合は、このパラメーターの値を増やすことができます (たとえば`[storage.flow-control] hard-pending-compaction-bytes-limit = "2048GiB"`など)。
+        - 保留中のコンパクションバイト数が`hard-pending-compaction-bytes-limit`パラメーターの値 (デフォルトでは`1024GiB` ) に達すると、フロー制御メカニズムはすべての書き込みリクエストを拒否し始めます ( `ServerIsBusy`をクライアントに返します)。フロー制御メカニズムは`soft-pending-compaction-bytes-limit`のしきい値に達した後に書き込み速度を遅くするため、このシナリオが発生する可能性は低くなります。発生した場合は、このパラメーターの値を増やせます (たとえば`[storage.flow-control] hard-pending-compaction-bytes-limit = "2048GiB"`など)。
 
         - ディスクのI/O容量が長時間にわたって書き込み速度に追いつかない場合は、ディスクの容量を増やすことをお勧めします。ディスクのスループットが上限に達し、書き込みが停止する場合（例えば、SATA SSDはNVMe SSDよりも大幅に低い）、CPUリソースが十分であれば、より高い圧縮率の圧縮アルゴリズムを適用できます。こうすることで、CPUリソースをディスクリソースに振り向け、ディスクへの負荷を軽減できます。
 

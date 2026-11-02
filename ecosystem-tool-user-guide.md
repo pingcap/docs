@@ -15,7 +15,7 @@ TiDB は、さまざまなシステム環境でのデプロイおよび運用の
 
 [TiUP](/tiup/tiup-overview.md)は、物理マシンまたは仮想マシン上のTiDBパッケージマネージャーです。TiUPは、TiDB、PD、TiKVなどの複数のTiDBコンポーネントを管理できます。TiDBエコシステム内の任意のコンポーネントを起動するには、 TiUPコマンドを1行実行するだけです。
 
-TiUPは、 Golangで記述されたクラスター管理コンポーネントで[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)提供します。TiUPクラスターを使用することで、 TiUPクラスターのデプロイ、起動、停止、破棄、スケーリング、アップグレードといった日常的なデータベース操作や、TiDBクラスターパラメーターの管理を容易に行うことができます。
+TiUPは、 Golangで記述されたクラスター管理コンポーネントで[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)提供します。TiUPクラスターを使用することで、 TiUPクラスターのデプロイ、起動、停止、破棄、スケーリング、アップグレードといった日常的なデータベース操作や、TiDBクラスターパラメーターの管理を容易に行えます。
 
 TiUPの基本は次のとおりです。
 

@@ -49,7 +49,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - 読み取りホットスポットを軽減するために負荷ベースのレプリカ読み取りをサポートする[#14151](https://github.com/tikv/tikv/issues/14151) @[sticnarf](https://github.com/sticnarf) @[you06](https://github.com/you06)
 
-    読み取りホットスポットが発生すると、ホットスポット TiKV ノードは読み取りリクエストを速やかに処理できず、読み取りリクエストがキューイングされます。ただし、この時点ですべての TiKV リソースが使い果たされるわけではありません。レイテンシーを短縮するために、TiDB v7.1.0 では負荷ベースのレプリカ読み取り機能が導入されました。この機能により、TiDB はホットスポット TiKV ノードでキューイングすることなく、他の TiKV ノードからデータを読み取ることができます。読み取りリクエストのキューの長さは、 [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)システム変数を使用して制御できます。リーダーノードの推定キュー時間がこのしきい値を超えると、TiDB はフォロワーノードからのデータの読み取りを優先します。この機能により、読み取りホットスポットが発生すると、読み取りホットスポットを分散させない場合と比較して、読み取りスループットが 70% ～ 200% 向上します。
+    読み取りホットスポットが発生すると、ホットスポット TiKV ノードは読み取りリクエストを速やかに処理できず、読み取りリクエストがキューイングされます。ただし、この時点ですべての TiKV リソースが使い果たされるわけではありません。レイテンシーを短縮するために、TiDB v7.1.0 では負荷ベースのレプリカ読み取り機能が導入されました。この機能により、TiDB はホットスポット TiKV ノードでキューイングすることなく、他の TiKV ノードからデータを読み取れます。読み取りリクエストのキューの長さは、 [`tidb_load_based_replica_read_threshold`](/system-variables.md#tidb_load_based_replica_read_threshold-new-in-v700)システム変数を使用して制御できます。リーダーノードの推定キュー時間がこのしきい値を超えると、TiDB はフォロワーノードからのデータの読み取りを優先します。この機能により、読み取りホットスポットが発生すると、読み取りホットスポットを分散させない場合と比較して、読み取りスループットが 70% ～ 200% 向上します。
 
     詳細については[ドキュメント](/troubleshoot-hot-spot-issues.md#scatter-read-hotspots)を参照してください。
 
@@ -87,7 +87,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
     TiDB v7.1.0では、実際のワークロードやハードウェア構成に基づいてシステム容量を見積もる機能が導入されました。この見積機能は、キャパシティプランニングのためのより正確な基準を提供し、エンタープライズレベルのシナリオにおける安定性のニーズを満たすためにTiDBのリソース割り当てをより適切に管理するのに役立ちます。
 
-    ユーザーエクスペリエンスを向上させるために、TiDB Dashboardは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を提供します。このページでは、リソースグループの構成を表示し、クラスターの容量を視覚的に見積もることができるため、適切なリソース割り当てが容易になります。
+    ユーザーエクスペリエンスを向上させるために、TiDB Dashboardは[リソースマネージャーページ](/dashboard/dashboard-resource-manager.md)を提供します。このページでは、リソースグループの構成を表示し、クラスターの容量を視覚的に見積もれるため、適切なリソース割り当てが容易になります。
 
     詳細については[ドキュメント](/tidb-resource-control-ru-groups.md)を参照してください。
 
@@ -232,7 +232,7 @@ TiDB 7.1.0 は長期サポートリリース (LTS) です。
 
 - セキュリティを向上させるために、 TiFlashはHTTPサービスポート（デフォルト`8123` ）を廃止し、代わりにgRPCポートを使用します。
 
-    TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステムテーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取ることができません。
+    TiFlash をv7.1.0 にアップグレードした場合、TiDB を v7.1.0 にアップグレードする際に、TiDB はTiFlashシステムテーブル ( [`INFORMATION_SCHEMA.TIFLASH_TABLES`](/information-schema/information-schema-tiflash-tables.md)と[`INFORMATION_SCHEMA.TIFLASH_SEGMENTS`](/information-schema/information-schema-tiflash-segments.md) ) を読み取れません。
 
 - TiDB バージョン v6.2.0 から v7.0.0 のTiDB Lightning は、TiDB クラスターのバージョンに基づいてグローバルスケジューリングを一時停止するかどうかを決定します。TiDB クラスターバージョン >= v6.1.0 の場合、スケジュールはターゲットテーブルデータを格納するリージョンに対してのみ一時停止され、ターゲットテーブルのインポートが完了すると再開されます。その他のバージョンの場合、 TiDB Lightning はグローバルスケジューリングを一時停止します。TiDB v7.1.0 以降では、 [`pause-pd-scheduler-scope`](/tidb-lightning/tidb-lightning-configuration.md)を設定することで、グローバルスケジューリングを一時停止するかどうかを制御できます。デフォルトでは、 TiDB Lightning はターゲットテーブルデータを格納するリージョンのスケジュールを一時停止します。ターゲットクラスターのバージョンが v6.1.0 より前の場合、エラーが発生します。この場合、パラメーターの値を`"global"`に変更して再試行できます。
 

@@ -36,7 +36,7 @@ TiDBはMySQLレプリケーションプロトコルをサポートしていな�
 
 </CustomContent>
 
-[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=mysql_compatibility)でTiDBの機能を試すことができます。
+[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=mysql_compatibility)でTiDBの機能を試せます。
 
 ## サポートされていない機能 {#unsupported-features}
 

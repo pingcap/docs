@@ -62,7 +62,7 @@ TiCDCは、TiDBクラスター間の増分データレプリケーションに�
 
 ## より高度な移行ソリューション {#more-advanced-migration-solutions}
 
-次の機能により移行プロセスが改善され、アプリケーションのより多くのニーズを満たすことができる可能性があります。
+次の機能により移行プロセスが改善され、アプリケーションのより多くのニーズを満たせる可能性があります。
 
 - [gh-ost または pt-osc を使用するデータベースからの継続的なレプリケーション](/migrate-with-pt-ghost.md)
 - [より多くの列を持つ下流の TiDB テーブルにデータを移行する](/migrate-with-more-columns-downstream.md)

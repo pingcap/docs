@@ -695,7 +695,7 @@ INSERT INTO mysql.capture_plan_baselines_blacklist(filter_type, filter_value) VA
 
 ### アップグレード中の実行計画の回帰を防ぐ {#prevent-regression-of-execution-plans-during-an-upgrade}
 
-TiDB クラスターをアップグレードする前に、次の手順を実行して、ベースラインキャプチャを使用して実行計画の回帰を防ぐことができます。
+TiDB クラスターをアップグレードする前に、次の手順を実行して、ベースラインキャプチャを使用して実行計画の回帰を防げます。
 
 1. ベースラインキャプチャを有効にして動作を継続します。
 

@@ -211,7 +211,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - JSON形式での実行計画の出力をサポート[#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678)
 
-    TiDB v6.5.0では、実行計画の出力形式が拡張されました。`EXPLAIN`に`FORMAT = "tidb_json"`を指定することで、SQL実行計画をJSON形式で出力できます。この機能により、SQLデバッグツールや診断ツールは実行計画をより便利かつ正確に読み取ることができるため、SQL診断やチューニングの利便性が向上します。
+    TiDB v6.5.0では、実行計画の出力形式が拡張されました。`EXPLAIN`に`FORMAT = "tidb_json"`を指定することで、SQL実行計画をJSON形式で出力できます。この機能により、SQLデバッグツールや診断ツールは実行計画をより便利かつ正確に読み取れるため、SQL診断やチューニングの利便性が向上します。
 
     詳細については[ドキュメント](/sql-statements/sql-statement-explain.md)を参照してください。
 

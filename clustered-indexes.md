@@ -171,7 +171,7 @@ TiDB v5.0 以降、クラスター化インデックス機能はすべてのタ�
 
 ### MySQLとの互換性 {#compatibility-with-mysql}
 
-TiDB固有のコメント構文では、キーワード`CLUSTERED`と`NONCLUSTERED`をコメントで囲むことができます。 `SHOW CREATE TABLE`の結果にも、TiDB固有のSQLコメントが含まれます。MySQLデータベースおよび以前のバージョンのTiDBデータベースでは、これらのコメントは無視されます。
+TiDB固有のコメント構文では、キーワード`CLUSTERED`と`NONCLUSTERED`をコメントで囲めます。 `SHOW CREATE TABLE`の結果にも、TiDB固有のSQLコメントが含まれます。MySQLデータベースおよび以前のバージョンのTiDBデータベースでは、これらのコメントは無視されます。
 
 ### TiDB移行ツールとの互換性 {#compatibility-with-tidb-migration-tools}
 

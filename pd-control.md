@@ -257,7 +257,7 @@ tiup ctl:v<CLUSTER_VERSION> pd -u https://127.0.0.1:2379 --cacert="path/to/ca" -
     config set max-store-preparing-time 4h
     ```
 
-- `leader-schedule-limit`はリーダータスクを同時にスケジュールするタスクの数を制御します。この値はリーダータスクのバランス調整の速度に影響します。値が大きいほど速度が速くなり、値を0に設定するとスケジューリングが閉じられます。通常、リーダータスクのスケジューリングの負荷は小さいため、必要に応じて値を増やすことができます。
+- `leader-schedule-limit`はリーダータスクを同時にスケジュールするタスクの数を制御します。この値はリーダータスクのバランス調整の速度に影響します。値が大きいほど速度が速くなり、値を0に設定するとスケジューリングが閉じられます。通常、リーダータスクのスケジューリングの負荷は小さいため、必要に応じて値を増やせます。
 
     ```bash
     config set leader-schedule-limit 4         // 4 tasks of leader scheduling at the same time at most
