@@ -68,7 +68,7 @@ source /home/tidb/.bash_profile
 
 ## ステップ3: 初期化設定ファイルを編集する {#step-3-edit-the-initialization-configuration-file}
 
-さまざまなクラスタートポロジに応じて、クラスター初期化設定ファイルを編集する必要があります。
+さまざまなクラスタートポロジーに応じて、クラスター初期化設定ファイルを編集する必要があります。
 
 完全な設定テンプレートについては、[TiUP設定パラメーターテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)を参照してください。`topology.yaml`という設定ファイルを作成し、その他の複合シナリオでは、テンプレートに従って必要に応じて設定ファイルを編集してください。
 

@@ -24,15 +24,15 @@ TiUPは現時点ではサードパーティ製コンポーネントをサポー�
 
 TiUP Playgroundコンポーネントは、主にLinuxまたはmacOSオペレーティングシステム上でスタンドアロン開発環境を構築するために使用されます。これにより、 TiUPクラスターの特定のバージョンを迅速に開始し、簡単に実行できます。TiUPクラスターコンポーネントは、主に本番環境クラスター（通常は大規模クラスター）のデプロイと保守に使用されます。TiUP PlaygroundでデプロイされたTiDBクラスターには、一部の機能と運用能力が不足している可能性があるため、完全な機能テストや安定性テストには推奨されません。
 
-## TiUPクラスターコンポーネントのトポロジファイルを作成するにはどうすればよいでしょうか? {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
+## TiUPクラスターコンポーネントのトポロジーファイルを作成するにはどうすればよいでしょうか? {#how-do-i-write-the-topology-file-for-the-tiup-cluster-component}
 
-トポロジファイルの作成方法については、 [これらのテンプレート](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster)を参照してください。テンプレートには以下が含まれます。
+トポロジーファイルの作成方法については、 [これらのテンプレート](https://github.com/pingcap/tiup/tree/master/embed/examples/cluster)を参照してください。テンプレートには以下が含まれます。
 
-- マルチDC展開トポロジ
-- 最小限の展開トポロジ
-- 完全なトポロジファイル
+- マルチDC展開トポロジー
+- 最小限の展開トポロジー
+- 完全なトポロジーファイル
 
-テンプレートとニーズに基づいてトポロジファイルを編集できます。
+テンプレートとニーズに基づいてトポロジーファイルを編集できます。
 
 ## 同じホストに複数のインスタンスをデプロイできますか? {#can-multiple-instances-be-deployed-on-the-same-host}
 

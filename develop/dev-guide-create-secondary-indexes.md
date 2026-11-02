@@ -33,7 +33,7 @@ TiDB では、[既存のテーブルにセカンダリインデックスを追�
 CREATE INDEX {index_name} ON {table_name} ({column_names});
 ```
 
-パラメータの説明:
+パラメーターの説明:
 
 - `{index_name}` : セカンダリインデックスの名前。
 - `{table_name}` : テーブル名。
@@ -47,7 +47,7 @@ CREATE INDEX {index_name} ON {table_name} ({column_names});
 KEY `{index_name}` (`{column_names}`)
 ```
 
-パラメータの説明:
+パラメーターの説明:
 
 - `{index_name}` : セカンダリインデックスの名前。
 - `{column_names}` : インデックスを作成する列の名前をセミコロンとカンマで区切ります。
@@ -146,7 +146,7 @@ SQLパフォーマンスチューニングの詳細については、以下の�
 
 > **Note:**
 >
-> TiDB はクエリ時のインデックスの明示的な使用もサポートしており、[オプティマイザのヒント](/optimizer-hints.md)や[SQLプラン管理（SPM）](/sql-plan-management.md)を使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザヒント、または SPM についてよく知らない場合は、予期しない結果を避けるためにこの機能を使用**しないでください**。
+> TiDB はクエリ時のインデックスの明示的な使用もサポートしており、[オプティマイザーのヒント](/optimizer-hints.md)や[SQLプラン管理（SPM）](/sql-plan-management.md)を使用してインデックスの使用を人為的に制御できます。ただし、インデックス、オプティマイザーヒント、または SPM についてよく知らない場合は、予期しない結果を避けるためにこの機能を使用**しないでください**。
 
 テーブルのインデックスをクエリするには、[SHOW INDEXES](/sql-statements/sql-statement-show-indexes.md)ステートメントを使用できます。
 

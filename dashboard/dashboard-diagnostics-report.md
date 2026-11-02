@@ -11,7 +11,7 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 
 診断レポートは次の部分で構成されます。
 
-- 基本情報: 診断レポートの時間範囲、クラスターのハードウェア情報、クラスタートポロジのバージョン情報が含まれます。
+- 基本情報: 診断レポートの時間範囲、クラスターのハードウェア情報、クラスタートポロジーのバージョン情報が含まれます。
 - 診断情報: 自動診断の結果を表示します。
 - 負荷情報:サーバー、TiDB、PD、または TiKV の CPU、メモリ、その他の負荷情報が含まれます。
 - 概要情報: 各 TiDB、PD、または TiKV モジュールの消費時間とエラー情報が含まれます。
@@ -59,9 +59,9 @@ summary: TiDB Dashboard診断レポートでは、基本情報、診断情報、
 - `DISK` :サーバーのディスクサイズを示します。単位はGBです。
 - `UPTIME` :サーバーの稼働時間。単位は日です。
 
-#### クラスタートポロジ情報 {#cluster-topology-info}
+#### クラスタートポロジー情報 {#cluster-topology-info}
 
-表`Cluster Info`はクラスタートポロジ情報を示しています。この表の情報はTiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システムテーブルから取得されています。
+表`Cluster Info`はクラスタートポロジー情報を示しています。この表の情報はTiDB [information_schema.cluster_info](/information-schema/information-schema-cluster-info.md)システムテーブルから取得されています。
 
 ![Cluster info](/media/dashboard/dashboard-diagnostics-cluster-info.png)
 

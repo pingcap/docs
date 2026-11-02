@@ -7,7 +7,7 @@ summary: "`openssl` を使用して自己署名証明書を生成します。"
 
 このドキュメントでは、 `openssl`を使用して TiDB Data Migration (DM) 用の自己署名証明書を生成する例を示します。また、必要に応じて、要件を満たす証明書と鍵を生成することもできます。
 
-インスタンスクラスターのトポロジが次のとおりであると仮定します。
+インスタンスクラスターのトポロジーが次のとおりであると仮定します。
 
 | 名前   | ホストIP        | サービス    |
 | ---- | ------------ | ------- |
@@ -86,7 +86,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     find / -name openssl.cnf
     ```
 
-3. `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタートポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
+3. `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタートポロジーの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
 
     ```
     [ alt_names ]

@@ -245,7 +245,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     ALTER TABLE t SET TIFLASH REPLICA 2;
     ```
 
-3. PDは、 TiFlashノードの`learner_config`の`server.labels`と、テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
+3. PDは、 TiFlashノードの`learner_config`の`server.labels`と、テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジーラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
 
     ```sql
     -- Non-partitioned table
@@ -281,7 +281,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 <CustomContent platform="tidb">
 
-ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1つの地域デプロイにおける複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2つの地域に配置された 3つのデータセンター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
+ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジーラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1つの地域デプロイにおける複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2つの地域に配置された 3つのデータセンター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
 TiFlashは、異なるゾーンに対するレプリカ選択戦略の設定をサポートしています。詳細については、 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 
