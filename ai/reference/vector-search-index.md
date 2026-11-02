@@ -166,7 +166,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
 - デルタレイヤーの行数は`ROWS_DELTA_NOT_INDEXED`列で確認できます。TiFlashのストレージレイヤーのデータは、デルタレイヤーとステーブルレイヤーの2つのレイヤーに保存されます。デルタレイヤーには最近挿入または更新された行が保存され、書き込みワークロードに応じて定期的にステーブルレイヤーにマージされます。このマージプロセスはコンパクションと呼ばれます。
 
-    Deltaレイヤーは常にインデックス化されません。最適なパフォーマンスを実現するには、DeltaレイヤーをStableレイヤーに強制的にマージし、すべてのデータがインデックス化されるようにできます。
+    Deltaレイヤーは常にインデックス化されません。最適なパフォーマンスを実現するには、DeltaレイヤーをStableレイヤーに強制的にマージし、すべてのデータがインデックス化されるようにすることができます。
 
     ```sql
     ALTER TABLE <TABLE_NAME> COMPACT;
@@ -178,7 +178,7 @@ SELECT * FROM INFORMATION_SCHEMA.TIFLASH_INDEXES;
 
 ## ベクトルインデックスが使用されているかどうかを確認する {#check-whether-the-vector-index-is-used}
 
-クエリがベクトルインデックスを使用しているかどうかを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用します。`TableFullScan`エグゼキューターの`operator info`列に`annIndex:`が表示されている場合、このテーブルスキャンはベクトルインデックスを使用していることを意味します。
+クエリがベクトルインデックスを使用しているかどうかを確認するには、 [`EXPLAIN`](/sql-statements/sql-statement-explain.md)または[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md)ステートメントを使用します。`TableFullScan`エグゼキュータの`operator info`列に`annIndex:`が表示されている場合、このテーブルスキャンはベクトルインデックスを使用していることを意味します。
 
 **例: ベクトルインデックスが使用される**
 

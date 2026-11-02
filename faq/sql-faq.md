@@ -26,7 +26,7 @@ summary: TiDB SQLに関連する FAQ について説明します。
 
 ## 適切なクエリプランを選択するにはどうすればよいですか？ヒントを使用する必要がありますか？それとも、ヒントを使用できますか？ {#how-to-choose-the-right-query-plan-do-i-need-to-use-hints-or-can-i-use-hints}
 
-TiDBにはコストベースのオプティマイザーが搭載されています。ほとんどの場合、オプティマイザーが最適なクエリプランを選択します。オプティマイザーがうまく機能しない場合でも、 [オプティマイザーヒント](/optimizer-hints.md)を使用してオプティマイザーに介入できます。
+TiDBにはコストベースのオプティマイザが搭載されています。ほとんどの場合、オプティマイザが最適なクエリプランを選択します。オプティマイザがうまく機能しない場合でも、 [オプティマイザヒント](/optimizer-hints.md)を使用してオプティマイザに介入することができます。
 
 さらに、 [SQLバインディング](/sql-plan-management.md#sql-binding)を使用して、特定の SQL文のクエリプランを修正することもできます。
 
@@ -34,7 +34,7 @@ TiDBにはコストベースのオプティマイザーが搭載されていま�
 
 TiDB v7.5.0以降のバージョンでは、 [`QUERY WATCH`](/sql-statements/sql-statement-query-watch.md)ステートメントを使用して特定のSQL文を終了できます。詳細については、 [予想以上にリソースを消費するクエリ（ランナウェイクエリ）を管理する](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
 
-TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限できます。これにより、ステートメントはしきい値によって自動的に終了します。
+TiDB v7.5.0より前のバージョンでは、 [`MAX_EXECUTION_TIME`](/optimizer-hints.md#max_execution_timen)ヒントを使用して[SQLバインディング](/sql-plan-management.md#sql-binding)を作成し、特定のステートメントの実行時間を小さな値（例えば1ミリ秒）に制限することができます。これにより、ステートメントはしきい値によって自動的に終了します。
 
 たとえば、 `SELECT * FROM t1, t2 WHERE t1.id = t2.id`の実行を防ぐには、次の SQL バインディングを使用して、ステートメントの実行時間を 1 ミリ秒に制限できます。
 
@@ -140,7 +140,7 @@ TiDBのデフォルトの文字セットは`utf8mb4`です。文字列はmemcomp
 
 トランザクション内のステートメントの最大数は、デフォルトでは 5000 です。
 
-楽観的トランザクションモードでトランザクションの再試行が有効になっている場合、デフォルトの上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメーターを使用して制限を調整できます。
+楽観的トランザクションモードでトランザクションの再試行が有効になっている場合、デフォルトの上限は 5000 です[`stmt-count-limit`](/tidb-configuration-file.md#stmt-count-limit)パラメータを使用して制限を調整できます。
 
 ## TiDB で、後から挿入されたデータのAUTO_INCREMENT ID が、前に挿入されたデータのAUTO_INCREMENT ID よりも小さくなるのはなぜですか? {#why-does-the-auto-increment-id-of-the-later-inserted-data-is-smaller-than-that-of-the-earlier-inserted-data-in-tidb}
 
@@ -190,11 +190,11 @@ Sqoopでは、 `--batch`各バッチで100文をコミットすることを意�
 
 TiDBはマルチバージョン同時実行制御（MVCC）を使用しているため、古いデータが新しいデータで上書きされる際、古いデータは置き換えられず、新しいデータと共に保持されます。データのバージョンを識別するためにタイムスタンプが使用されます。データを削除しても、すぐに領域が解放されるわけではありません。同時実行トランザクションが以前のバージョンの行を参照できるように、ガベージコレクションは遅延されます。これは、システム変数[`tidb_gc_life_time`](/system-variables.md#tidb_gc_life_time-new-in-v50) （デフォルト： `10m0s` ）で設定できます。
 
-## `SHOW PROCESSLIST`システムプロセス ID を表示しますか? {#does-show-processlist-display-the-system-process-id}
+## `SHOW PROCESSLIST`システム プロセス ID を表示しますか? {#does-show-processlist-display-the-system-process-id}
 
 TiDB `SHOW PROCESSLIST`の表示内容は MySQL `SHOW PROCESSLIST`とほぼ同じです。TiDB `SHOW PROCESSLIST`ではシステムプロセスIDが表示されません。表示されるのは現在のセッションIDです。TiDB `SHOW PROCESSLIST`と MySQL `SHOW PROCESSLIST`の違いは次のとおりです。
 
-- TiDBは分散データベースであるため、 `tidb-server`インスタンスはSQL文を解析および実行するためのステートレスエンジンです（詳細は[TiDBアーキテクチャ](/tidb-architecture.md)を参照）。`SHOW PROCESSLIST` 、ユーザーがMySQLクライアントからログインした`tidb-server`インスタンスで実行されたセッションリストを表示します。クラスター内で実行されているすべてのセッションのリストではありません。ただし、MySQLはスタンドアロンデータベースであり、 `SHOW PROCESSLIST`はMySQLで実行されたすべてのSQL文を表示します。
+- TiDBは分散データベースであるため、 `tidb-server`インスタンスはSQL文を解析および実行するためのステートレスエンジンです（詳細は[TiDBアーキテクチャ](/tidb-architecture.md)を参照）。`SHOW PROCESSLIST` 、ユーザーがMySQLクライアントからログインした`tidb-server`インスタンスで実行されたセッションリストを表示します。クラスタ内で実行されているすべてのセッションのリストではありません。ただし、MySQLはスタンドアロンデータベースであり、 `SHOW PROCESSLIST`はMySQLで実行されたすべてのSQL文を表示します。
 - TiDBの`State`列は、クエリ実行中に継続的に更新されるわけではありません。TiDBは並列クエリをサポートしているため、各ステートメントが複数の*状態*にある場合があり、単一の値に単純化することが困難です。
 
 ## SQL コミットの実行優先度を制御または変更するにはどうすればよいですか? {#how-to-control-or-change-the-execution-priority-of-sql-commits}
@@ -211,7 +211,7 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
 >
 > TiDB v6.6.0以降、 [リソース管理](/tidb-resource-control-ru-groups.md)サポートされます。この機能を使用すると、異なるリソースグループで異なる優先度のSQL文を実行できます。これらのリソースグループに適切なクォータと優先度を設定することで、優先度の異なるSQL文のスケジュールをより適切に制御できます。リソース制御を有効にすると、文の優先度は適用されなくなります。異なるSQL文のリソース使用量を管理するには、リソース制御を使用することをお勧めします。
 
-上記の2つのパラメーターをTiDBのDMLと組み合わせて使用できます。例えば：
+上記の2つのパラメータをTiDBのDMLと組み合わせて使用することができます。例えば：
 
 1. データベースに SQL文を記述して優先順位を調整します。
 
@@ -223,19 +223,19 @@ TiDBは、 [グローバル](/system-variables.md#tidb_force_priority)単位ま�
     REPLACE HIGH_PRIORITY | LOW_PRIORITY | DELAYED INTO table_name;
     ```
 
-2. フルテーブルスキャンステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
+2. フルテーブルスキャン ステートメントは、自動的に低い優先度に調整されます。 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md) 、デフォルトで低い優先度を持ちます。
 
 ## TiDB での`auto analyze`のトリガー戦略は何ですか? {#whats-the-trigger-strategy-for-auto-analyze-in-tidb}
 
 テーブル内の行数またはパーティションテーブルの単一パーティションの行数が 1000 に達し、テーブルまたはパーティションの比率 (変更された行数 / 現在の行の合計数) が[`tidb_auto_analyze_ratio`](/system-variables.md#tidb_auto_analyze_ratio)超えると、 [`ANALYZE`](/sql-statements/sql-statement-analyze-table.md)ステートメントが自動的にトリガーされます。
 
-システム変数`tidb_auto_analyze_ratio`のデフォルト値は`0.5`で、この機能がデフォルトで有効になっていることを示します。システム変数`tidb_auto_analyze_ratio`を[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)以上（デフォルト値は`0.8` ）に設定することは推奨されません。そうしないと、オプティマイザーが疑似統計を使用する可能性があります。TiDB v5.3.0 では[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)変数が導入され、これを`OFF`に設定すると、統計が古くても疑似統計は使用されません。
+システム変数`tidb_auto_analyze_ratio`のデフォルト値は`0.5`で、この機能がデフォルトで有効になっていることを示します。システム変数`tidb_auto_analyze_ratio`を[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)以上（デフォルト値は`0.8` ）に設定することは推奨されません。そうしないと、オプティマイザが疑似統計を使用する可能性があります。TiDB v5.3.0 では[`tidb_enable_pseudo_for_outdated_stats`](/system-variables.md#tidb_enable_pseudo_for_outdated_stats-new-in-v530)変数が導入され、これを`OFF`に設定すると、統計が古くても疑似統計は使用されません。
 
 `auto analyze`を無効にするには、システム変数[`tidb_enable_auto_analyze`](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)を使用します。
 
-## オプティマイザーヒントを使用してオプティマイザーの動作をオーバーライドできますか? {#can-i-use-optimizer-hints-to-override-the-optimizer-behavior}
+## オプティマイザヒントを使用してオプティマイザの動作をオーバーライドできますか? {#can-i-use-optimizer-hints-to-override-the-optimizer-behavior}
 
-TiDBは、 [ヒント](/optimizer-hints.md)と[SQLプラン管理](/sql-plan-management.md)を含む、デフォルトのクエリオプティマイザーの動作をオーバーライドする複数の方法をサポートしています。基本的な使用方法はMySQLと同様ですが、TiDB固有の拡張機能がいくつかあります。
+TiDBは、 [ヒント](/optimizer-hints.md)と[SQLプラン管理](/sql-plan-management.md)を含む、デフォルトのクエリオプティマイザの動作をオーバーライドする複数の方法をサポートしています。基本的な使用方法はMySQLと同様ですが、TiDB固有の拡張機能がいくつかあります。
 
 ```sql
 SELECT column_name FROM table_name USE INDEX（index_name）WHERE where_condition;
@@ -251,7 +251,7 @@ DDL操作がブロックされておらず、各TiDBサーバーがスキーマ�
 
 | DDL操作タイプ                                                                                                                                                   | 推定所要時間                            |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------- |
-| 再編成DDL（ `ADD INDEX` 、 `MODIFY COLUMN`など、再編成タイプのデータ変更）                                                                                                        | データ量、システム負荷、DDL パラメーター設定によって異なります。 |
+| 再編成DDL（ `ADD INDEX` 、 `MODIFY COLUMN`など、再編成タイプのデータ変更）                                                                                                        | データ量、システム負荷、DDL パラメータ設定によって異なります。 |
 | 一般DDL（Reorg以外のDDLタイプ）（ `CREATE DATABASE`、 `CREATE TABLE`、 `DROP DATABASE`、 `DROP TABLE`、 `TRUNCATE TABLE`、 `ALTER TABLE ADD`、 `ALTER TABLE DROP`、 `MODIFY COLUMN` （メタデータのみ変更）、 `DROP INDEX`など） | 約1秒                               |
 
 > **Note:**
@@ -344,11 +344,11 @@ JDBC URL に`connectionCollation`が設定されていない場合、次の2つ�
 
 **シナリオ 1** : JDBC URL に`connectionCollation`も`characterEncoding`も設定されていない
 
-- Connector/J 8.0.25以前のバージョンでは、JDBCドライバーはサーバーのデフォルトの文字セットを使用しようとします。TiDBのデフォルトの文字セットは`utf8mb4`であるため、ドライバーは接続照合順序として`utf8mb4_bin`を使用します。
+- Connector/J 8.0.25以前のバージョンでは、JDBCドライバはサーバーのデフォルトの文字セットを使用しようとします。TiDBのデフォルトの文字セットは`utf8mb4`であるため、ドライバは接続照合順序として`utf8mb4_bin`を使用します。
 - Connector/J 8.0.26 以降のバージョンでは、JDBC ドライバーは`utf8mb4`文字セットを使用し、 `SELECT VERSION()`の戻り値に基づいて照合順序を自動的に選択します。
 
-    - 戻り値が`8.0.1`未満の場合、ドライバーは接続照合順序として`utf8mb4_general_ci`を使用します。TiDB はドライバーに従い、照合順序として`utf8mb4_general_ci`を使用します。
-    - 戻り値が`8.0.1`以上の場合、ドライバーは接続照合順序として`utf8mb4_0900_ai_ci`を使用します。TiDB v7.4.0 以降のバージョンではドライバーに従い、照合順序として`utf8mb4_0900_ai_ci`を使用しますが、TiDB v7.4.0 より前のバージョンでは`utf8mb4_0900_ai_ci`照合順序がサポートされていないため、デフォルトの照合順序`utf8mb4_bin`が使用されます。
+    - 戻り値が`8.0.1`未満の場合、ドライバは接続照合順序として`utf8mb4_general_ci`を使用します。TiDB はドライバに従い、照合順序として`utf8mb4_general_ci`を使用します。
+    - 戻り値が`8.0.1`以上の場合、ドライバは接続照合順序として`utf8mb4_0900_ai_ci`を使用します。TiDB v7.4.0 以降のバージョンではドライバに従い、照合順序として`utf8mb4_0900_ai_ci`を使用しますが、TiDB v7.4.0 より前のバージョンでは`utf8mb4_0900_ai_ci`照合順序がサポートされていないため、デフォルトの照合順序`utf8mb4_bin`が使用されます。
 
 **シナリオ2** ：JDBC URLに`characterEncoding=utf8`が設定されていますが、 `connectionCollation`が設定されていません。JDBCドライバーはマッピングルールに従って`utf8mb4`文字セットを使用します。照合順序はシナリオ1で説明したルールに従って決定されます。
 
@@ -358,7 +358,7 @@ TiDB v7.4 以前のバージョンでは、 `connectionCollation`構成されて
 
 TiDB v7.4以降、 `connectionCollation`が設定されておらず、JDBC URLで`characterEncoding`が設定されていないか`UTF-8`に設定されている場合、変数[`collation_connection`](/system-variables.md#collation_connection)の値はJDBCドライバーのバージョンによって異なります。詳細については、 [JDBC接続で使用される照合順序](#what-collation-is-used-in-a-jdbc-connection-when-connectioncollation-is-not-configured-in-the-jdbc-url)を参照してください。
 
-以前のバージョンから v7.4 以降にアップグレードする場合 (たとえば、v6.5 から v7.5)、JDBC 接続で`collation_connection`を`utf8mb4_bin`として維持する必要がある場合は、JDBC URL で`connectionCollation`パラメーターを構成することをお勧めします。
+以前のバージョンから v7.4 以降にアップグレードする場合 (たとえば、v6.5 から v7.5)、JDBC 接続で`collation_connection`を`utf8mb4_bin`として維持する必要がある場合は、JDBC URL で`connectionCollation`パラメータを構成することをお勧めします。
 
 以下は、TiDB v6.5 の一般的な JDBC URL 構成です。
 
@@ -366,7 +366,7 @@ TiDB v7.4以降、 `connectionCollation`が設定されておらず、JDBC URL�
 spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
 ```
 
-TiDB v7.5 以降のバージョンにアップグレードした後は、JDBC URL に`connectionCollation`パラメーターを設定することをお勧めします。
+TiDB v7.5 以降のバージョンにアップグレードした後は、JDBC URL に`connectionCollation`パラメータを設定することをお勧めします。
 
 ```
 spring.datasource.url=JDBC:mysql://{TiDBIP}:{TiDBPort}/{DBName}?characterEncoding=UTF-8&connectionCollation=utf8mb4_bin&useSSL=false&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSqlLimit=10000&prepStmtCacheSize=1000&useConfigs=maxPerformance&rewriteBatchedStatements=true&defaultFetchSize=-2147483648&allowMultiQueries=true
@@ -449,7 +449,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 ### TiDB は CBO (コストベース最適化) をサポートしていますか? サポートしている場合、どの程度サポートしていますか? {#does-tidb-support-cbo-cost-based-optimization-if-yes-to-what-extent}
 
-はい。TiDBはコストベースオプティマイザーを使用しています。コストモデルと統計は常に最適化されています。また、TiDBはハッシュ結合やソートマージ結合などの結合アルゴリズムもサポートしています。
+はい。TiDBはコストベースオプティマイザを使用しています。コストモデルと統計は常に最適化されています。また、TiDBはハッシュ結合やソートマージ結合などの結合アルゴリズムもサポートしています。
 
 ### テーブルで`analyze`を実行する必要があるかどうかを判断するにはどうすればよいでしょうか? {#how-to-determine-whether-i-need-to-execute-analyze-on-a-table}
 
@@ -461,9 +461,9 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 ### TiDBクエリプランでは、 `cop`タスクは同じルートにあります。それらは同時に実行されますか？ {#in-the-tidb-query-plan-cop-tasks-are-in-the-same-root-are-they-executed-concurrently}
 
-現在、 TiDB のコンピューティングタスクは、タスク`cop task`と`root task`の 2つの異なるタイプに属しています。
+現在、 TiDB のコンピューティング タスクは、タスク`cop task`と`root task`の 2つの異なるタイプに属しています。
 
-`cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティングタスクです。`root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティングタスクです。
+`cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティング タスクです。`root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティング タスクです。
 
 通常、 `root task`の入力データは`cop task`から取得されます。`root task`がデータを処理している間、TiKVの`cop task`が同時にデータを処理し、TiDBの`root task`からのプルを待機します。したがって、 `cop`タスクは`root task`と並行して実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間並行して実行されます。たとえば、最初の`cop task`は[100, 200]のデータを処理し、2番目の`cop task`は[1, 100]のデータを処理します。詳細は[TiDBクエリプランの理解](/explain-overview.md)を参照してください。
 
@@ -481,7 +481,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 - [`AUTO_RANDOM`](/troubleshoot-hot-spot-issues.md#handle-auto-increment-primary-key-hotspot-tables-using-auto_random)属性は、AUTO_INCREMENT主キーによってもたらされるホットスポットを解決するのに役立ちます。
 - [コプロセッサーキャッシュ](/coprocessor-cache.md) 、小さなテーブル上の読み取りホットスポットの場合。
 - [ロードベーススプリット](/configure-load-base-split.md) 、小さなテーブルの完全なテーブルスキャンなど、リージョン間の不均衡なアクセスによって発生するホットスポットの場合。
-- [キャッシュテーブル](/cached-tables.md) 、頻繁にアクセスされるが、めったに更新されない小さなホットスポットテーブル用。
+- [キャッシュテーブル](/cached-tables.md) 、頻繁にアクセスされるが、めったに更新されない小さなホットスポット テーブル用。
 
 ホットスポットによってパフォーマンスの問題が発生した場合は、 [ホットスポットの問題のトラブルシューティング](/troubleshoot-hot-spot-issues.md)を参照して解決してください。
 

@@ -60,7 +60,7 @@ tiup dmctl check-task ./task.yaml
     > - アップストリームで互換性のない文字セットが使用されている場合でも、ダウンストリームでutf8mb4文字セットを使用してテーブルを作成することで、レプリケーションを続行できます。ただし、この方法は推奨されません。アップストリームで使用されている互換性のない文字セットを、ダウンストリームでサポートされている別の文字セットに置き換えることをお勧めします。
     > - 上流テーブルに主キー制約または一意キー制約がない場合、同じデータ行が下流テーブルに複数回複製される可能性があり、レプリケーションのパフォーマンスに影響を与える可能性があります。本番環境では、上流テーブルに主キー制約または一意キー制約を指定することをお勧めします。
 
-### 完全データ移行のためのチェック項目 {#check-items-for-full-data-migration}
+### 完全なデータ移行のためのチェック項目 {#check-items-for-full-data-migration}
 
 完全データ移行モード ( `task-mode: full` ) の場合、事前チェックには[一般的なチェック項目](#common-check-items)に加えて、次のチェック項目も含まれます。
 
@@ -99,11 +99,11 @@ tiup dmctl check-task ./task.yaml
 
 - 下流データベース内の空のリージョン
 
-    - 空のリージョンの数が`max(1000, 3 * the number of tables)` (「1000」と「テーブル数の 3 倍」の大きい方) より大きい場合、事前チェックは警告を返します。関連する PD パラメーターを調整して、空のリージョンの結合を高速化し、空のリージョンの数が減少するのを待つことができます。 [PDスケジューリングのベストプラクティス - 低速リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)を参照。
+    - 空のリージョンの数が`max(1000, 3 * the number of tables)` (「1000」と「テーブル数の 3 倍」の大きい方) より大きい場合、事前チェックは警告を返します。関連する PD パラメータを調整して、空のリージョンの結合を高速化し、空のリージョンの数が減少するのを待つことができます。 [PDスケジューリングのベストプラクティス - 低速リージョンマージ](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)を参照。
 
 - 下流データベースにおけるリージョン分布
 
-    - さまざまな TiKV ノード上のリージョンの数を確認します。リージョン数が最も少ない TiKV ノードに`a`個のリージョンがあり、リージョン数が最も多い TiKV ノードに`b`個のリージョンがあると仮定すると、 `a / b`が0.75 未満の場合、事前チェックは警告を返します。関連する PD パラメーターを調整して、リージョンのスケジュールを高速化し、リージョンの数が変更されるのを待つことができます。 [PDスケジューリングのベストプラクティス -Leader/リージョンの配分がバランスが取れていない](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed)参照。
+    - さまざまな TiKV ノード上のリージョンの数を確認します。リージョン数が最も少ない TiKV ノードに`a`個のリージョンがあり、リージョン数が最も多い TiKV ノードに`b`個のリージョンがあると仮定すると、 `a / b`が0.75 未満の場合、事前チェックは警告を返します。関連する PD パラメータを調整して、リージョンのスケジュールを高速化し、リージョンの数が変更されるのを待つことができます。 [PDスケジューリングのベストプラクティス -Leader/リージョンの配分がバランスが取れていない](/best-practices/pd-scheduling-best-practices.md#leadersregions-are-not-evenly-distributed)参照。
 
 - 下流データベースにおけるTiDB、PD、およびTiKVのバージョン
 
@@ -152,7 +152,7 @@ tiup dmctl check-task ./task.yaml
 
 ### 完全データ移行および増分データ移行のチェック項目 {#check-items-for-full-and-incremental-data-migration}
 
-完全および増分データ移行モード ( `task-mode: all` ) の場合、事前チェックには[一般的なチェック項目](#common-check-items)に加えて、[完全データ移行チェック項目](#check-items-for-full-data-migration)と[増分データ移行チェック項目](#check-items-for-incremental-data-migration)も含まれます。
+完全および増分データ移行モード ( `task-mode: all` ) の場合、事前チェックには[一般的なチェック項目](#common-check-items)に加えて、[完全なデータ移行チェック項目](#check-items-for-full-data-migration)と[増分データ移行チェック項目](#check-items-for-incremental-data-migration)も含まれます。
 
 ### 無視できるチェック項目 {#ignorable-check-items}
 
@@ -177,7 +177,7 @@ tiup dmctl check-task ./task.yaml
 
 > **Note:**
 >
-> バージョン6.0より前のバージョンでは、無視可能なチェック項目がより多くサポートされていました。しかし、バージョン6.0以降では、データセキュリティに関連する一部のチェック項目を無視することはDMでは許可されていません。例えば、 `binlog_row_image`パラメーターを誤って設定すると、レプリケーション中にデータが失われる可能性があります。
+> バージョン6.0より前のバージョンでは、無視可能なチェック項目がより多くサポートされていました。しかし、バージョン6.0以降では、データセキュリティに関連する一部のチェック項目を無視することはDMでは許可されていません。例えば、 `binlog_row_image`パラメータを誤って設定すると、レプリケーション中にデータが失われる可能性があります。
 
 ## 事前チェック引数を設定する {#configure-precheck-arguments}
 

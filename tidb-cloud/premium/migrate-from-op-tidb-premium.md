@@ -5,7 +5,7 @@ summary: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への�
 
 # TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium-or-tidb-cloud-byoc}
 
-このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスターからTiDB Cloud Premiumまたは{{{ .byoc }}}（AWS上）インスタンスにデータを移行する方法について説明します。
+このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスタからTiDB Cloud Premiumまたは{{{ .byoc }}}（AWS上）インスタンスにデータを移行する方法について説明します。
 
 全体の手順は以下のとおりです。
 
@@ -81,7 +81,7 @@ tiup update --self && tiup update dumpling
 
 1. 現在の TiDB バージョンが TiCDC をサポートしているかどうかを確認します。 TiDB v4.0.8.rc.1 以降のバージョンは TiCDC をサポートします。 TiDB のバージョンを確認するには、TiDB Self-Managed クラスターで`select tidb_version();`を実行します。アップグレードする必要がある場合は、 [TiUPを使用してTiDBをアップグレードする](https://docs.pingcap.com/tidb/dev/deploy-ticdc#upgrade-ticdc-using-tiup)を参照してください。
 
-2. TiCDCコンポーネントをTiDB Self-Managedクラスターに追加します。 [TiUPを使用して、既存のTiDBクラスターにTiCDCを追加またはスケールアウトします](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
+2. TiCDCコンポーネントをTiDB Self-Managedクラスターに追加します。 [TiUPを使用して、既存のTiDBクラスタにTiCDCを追加またはスケールアウトします](https://docs.pingcap.com/tidb/dev/deploy-ticdc#add-or-scale-out-ticdc-to-an-existing-tidb-cluster-using-tiup)を参照してください。 `scale-out.yml`ファイルを編集して TiCDC を追加します。
 
     ```yaml
     cdc_servers:
@@ -102,7 +102,7 @@ tiup update --self && tiup update dumpling
 
 ## 全てのデータを移行する {#migrate-full-data}
 
-TiDB Self-ManagedクラスターからTiDB Cloud Premiumまたは{{{ .byoc }}}にデータを移行するには、以下の手順で完全データ移行を実行します。
+TiDB Self-ManagedクラスタからTiDB Cloud Premiumまたは{{{ .byoc }}}にデータを移行するには、以下の手順で完全なデータ移行を実行します。
 
 1. TiDB Self-ManagedクラスターからAmazon S3へデータを移行します。
 2. Amazon S3からTiDB Cloud Premiumまたは{{{ .byoc }}}へデータを移行します。
@@ -113,9 +113,9 @@ TiDB Self-ManagedクラスターからAmazon S3へDumplingを使用してデー�
 
 TiDB Self-ManagedクラスターがローカルIDCにある場合、またはDumplingサーバーとAmazon S3間のネットワークが接続されていない場合は、まずファイルをローカルストレージにエクスポートしてから、後でAmazon S3にアップロードできます。
 
-#### ステップ1. アップストリームのTiDB Self-ManagedクラスターのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
+#### ステップ1. アップストリームのTiDB Self-ManagedクラスタのGCメカニズムを一時的に無効にする {#step-1-disable-the-gc-mechanism-of-the-upstream-tidb-self-managed-cluster-temporarily}
 
-増分移行中に新しく書き込まれたデータが失われないようにするには、移行を開始する前にアップストリームクラスターのガベージコレクション（GC）メカニズムを無効にして、システムが履歴データをクリーンアップしないようにする必要があります。
+増分移行中に新しく書き込まれたデータが失われないようにするには、移行を開始する前にアップストリームクラスタのガベージコレクション（GC）メカニズムを無効にして、システムが履歴データをクリーンアップしないようにする必要があります。
 
 設定が成功したかどうかを確認するには、次のコマンドを実行してください。
 
@@ -143,7 +143,7 @@ AWS コンソールでアクセスキーを作成します。詳細について�
 
 2. 右上にあるナビゲーションバーでユーザー名を選択し、 **My Security Credentials**をクリックします。
 
-3. アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレットアクセスキーをコンピューターの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレットアクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **Close**を選択します。アクセスキーを作成すると、キーペアはデフォルトで有効になり、すぐに使用できます。
+3. アクセスキーを作成するには、 **Create access key**をクリックします。次に、 **Download .csv file**を選択して、アクセスキー ID とシークレットアクセスキーをコンピュータの CSV ファイルに保存します。このファイルは安全な場所に保存してください。このダイアログボックスを閉じると、シークレットアクセスキーには再度アクセスできなくなります。CSV ファイルをダウンロードしたら、 **Close**を選択します。アクセスキーを作成すると、キーペアはデフォルトで有効になり、すぐに使用できます。
 
     ![Create access key](/media/tidb-cloud/op-to-cloud-create-access-key01.png)
 
@@ -185,7 +185,7 @@ Dumplingを使用して、アップストリームのTiDB Self-Managedクラス�
     --s3.region "${s3.region}"
     ```
 
-    `-t`オプションは、エクスポートに使用するスレッド数を指定します。スレッド数を増やすと、Dumplingの並列処理能力とエクスポート速度が向上しますが、データベースのメモリ使用量も増加します。そのため、このパラメーターに非常に大きな値を設定しないでください。
+    `-t`オプションは、エクスポートに使用するスレッド数を指定します。スレッド数を増やすと、Dumplingの並列処理能力とエクスポート速度が向上しますが、データベースのメモリ使用量も増加します。そのため、このパラメータに非常に大きな値を設定しないでください。
 
     詳細については、 [Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview#export-to-sql-files)を参照してください。
 
@@ -301,7 +301,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     --start-ts="431434047157698561"
     ```
 
-    - `--pd` : アップストリームクラスターのPDアドレス。形式は`[upstream_pd_ip]:[pd_port]`です。
+    - `--pd` : アップストリームクラスタのPDアドレス。形式は`[upstream_pd_ip]:[pd_port]`です。
 
     - `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。 `--sink-uri`は、次の形式に従って構成します。現在、このスキームは`mysql` 、 `tidb` 、 `kafka` 、 `s3` 、および`local`をサポートしています。
 
@@ -311,11 +311,11 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
     - `--changefeed-id` : レプリケーションタスクのID。形式は、^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$ の正規表現に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
-    - `--start-ts` : 変更フィードの開始TSOを指定します。TiCDCクラスターはこのTSOからデータの取得を開始します。デフォルト値は現在時刻です。
+    - `--start-ts` : 変更フィードの開始TSOを指定します。TiCDCクラスタはこのTSOからデータの取得を開始します。デフォルト値は現在時刻です。
 
-    詳細については、 [TiCDC ChangefeedsのCLIと設定パラメーター](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)を参照してください。
+    詳細については、 [TiCDC ChangefeedsのCLIと設定パラメータ](https://docs.pingcap.com/tidb/dev/ticdc-changefeed-config)を参照してください。
 
-5. アップストリームクラスターでGCメカニズムを再度有効にします。増分レプリケーションでエラーや遅延が検出されない場合は、GCメカニズムを有効にしてクラスターのガベージコレクションを再開します。
+5. アップストリームクラスタでGCメカニズムを再度有効にします。増分レプリケーションでエラーや遅延が検出されない場合は、GCメカニズムを有効にしてクラスタのガベージコレクションを再開します。
 
     設定が正しく機能しているかどうかを確認するには、以下のコマンドを実行してください。
 
@@ -347,7 +347,7 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
 
         ![Update Filter](/media/tidb-cloud/normal_status_in_replication_task.png)
 
-    - レプリケーションを確認します。アップストリームのクラスターに新しいレコードを書き込み、そのレコードがダウンストリームのTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスにレプリケートされているかどうかを確認します。
+    - レプリケーションを確認します。アップストリームのクラスタに新しいレコードを書き込み、そのレコードがダウンストリームのTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスにレプリケートされているかどうかを確認します。
 
 7. アップストリームクラスターとダウンストリームインスタンスで同じタイムゾーンを設定してください。デフォルトでは、 TiDB Cloud Premiumまたは{{{ .byoc }}}はタイムゾーンをUTCに設定します。アップストリームクラスターとダウンストリームインスタンスのタイムゾーンが異なる場合は、両方で同じタイムゾーンを設定する必要があります。
 
@@ -375,11 +375,11 @@ TiDB Self-ManagedクラスターからAmazon S3にデータをエクスポート
     SELECT DISTINCT(CONCAT('CREATE GLOBAL BINDING FOR ', original_sql,' USING ', bind_sql,';')) FROM mysql.bind_info WHERE status='enabled';
     ```
 
-    出力が得られない場合は、アップストリームクラスターでクエリバインディングが使用されていないことを意味します。この場合は、この手順をスキップできます。
+    出力が得られない場合は、アップストリームクラスタでクエリバインディングが使用されていないことを意味します。この場合は、この手順をスキップできます。
 
     クエリバインディングを取得したら、ダウンストリームインスタンスでそれらを実行してクエリバインディングを復元します。
 
-9. アップストリームクラスターのユーザー情報と権限情報をバックアップし、ダウンストリームインスタンスに復元します。ユーザー情報と権限情報のバックアップには、以下のスクリプトを使用できます。プレースホルダーを実際の値に置き換える必要があることに注意してください。
+9. アップストリームクラスタのユーザー情報と権限情報をバックアップし、ダウンストリームインスタンスに復元します。ユーザー情報と権限情報のバックアップには、以下のスクリプトを使用できます。プレースホルダーを実際の値に置き換える必要があることに注意してください。
 
     ```shell
     #!/bin/bash

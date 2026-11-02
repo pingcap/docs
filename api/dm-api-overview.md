@@ -5,14 +5,14 @@ summary: データ移行 (DM) の API を学習します。
 
 # データ移行APIの概要 {#data-migration-api-overview}
 
-[TiDB Data Migration](/dm/dm-overview.md) (DM) は、MySQL 互換データベース (MySQL、MariaDB、 Aurora MySQL など) から TiDB への完全データ移行と増分データレプリケーションをサポートする統合データ移行タスク管理プラットフォームです。
+[TiDB Data Migration](/dm/dm-overview.md) (DM) は、MySQL 互換データベース (MySQL、MariaDB、 Aurora MySQL など) から TiDB への完全なデータ移行と増分データレプリケーションをサポートする統合データ移行タスク管理プラットフォームです。
 
 DM は、 [dmctlツール](/dm/dmctl-introduction.md)と同様に、DM クラスターのクエリと操作を行うための OpenAPI を提供します。
 
 DM API を使用して、DM クラスターで次のメンテナンス操作を実行できます。
 
-- [クラスター管理](/dm/dm-open-api.md#apis-for-managing-clusters) : DM-masterノードと DM-workerノードに関する情報を取得したり、停止したりします。
+- [クラスタ管理](/dm/dm-open-api.md#apis-for-managing-clusters) : DM-masterノードと DM-workerノードに関する情報を取得したり、停止したりします。
 - [データソース管理](/dm/dm-open-api.md#apis-for-managing-data-sources) : データソースを作成、更新、削除、有効化、無効化し、リレーログ機能を管理し、データソースと DM-worker間のバインディングを変更します。
 - [レプリケーションタスク管理](/dm/dm-open-api.md#apis-for-managing-replication-tasks) : レプリケーションタスクを作成、更新、削除、開始、または停止し、スキーマと移行ルールを管理します。
 
-リクエストパラメーター、レスポンス例、使用方法など、各 API の詳細については、 [OpenAPI を使用して DM クラスターを管理](/dm/dm-open-api.md)を参照してください。
+リクエストパラメータ、レスポンス例、使用方法など、各 API の詳細については、 [OpenAPI を使用して DM クラスターを管理](/dm/dm-open-api.md)を参照してください。

@@ -11,10 +11,10 @@ TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-
 
 ## TiDB Cloudコンソールで、TiDB Cloud StarterとEssentialインスタンスを移動するように促されるのはなぜですか？ {#why-does-the-tidb-cloud-console-prompt-me-to-move-my-tidb-cloud-starter-and-essential-instances}
 
-2026年4月15日以前は、 TiDB Cloudは単一の**TiDB dedicated project**タイプを使用してすべてのTiDB Cloudリソースを管理していました。このようなプロジェクトには、TiDB Cloud DedicatedクラスターとTiDB Xインスタンスが混在できました。しかし、1つのプロジェクトに異なるリソースタイプを混在させると、次のような理由で管理が複雑化しました。
+2026年4月15日以前は、 TiDB Cloudは単一の**TiDB dedicated project**タイプを使用してすべてのTiDB Cloudリソースを管理していました。このようなプロジェクトには、TiDB Cloud DedicatedクラスタとTiDB Xインスタンスが混在することができました。しかし、1つのプロジェクトに異なるリソースタイプを混在させると、次のような理由で管理が複雑化しました。
 
 - TiDB専用プロジェクトは、元々 TiDB Cloud Dedicatedクラスター向けに設計されたものです。
-- TiDB XインスタンスとTiDB Cloud Dedicatedクラスターは、動作と管理モデルが異なります。
+- TiDB XインスタンスとTiDB Cloud Dedicatedクラスタは、動作と管理モデルが異なります。
 
 2026年4月15日より、 TiDB Cloudは異なるリソースタイプを明確に区別するために、個別のプロジェクトタイプを導入します。各プロジェクトタイプは、それぞれ独自のリソースタイプをホストするようになります。
 
@@ -22,7 +22,7 @@ TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-
 - **TiDB X project**：TiDB Xインスタンス向け
 - **TiDB X virtual project**：どのTiDB Xプロジェクトにもグループ化されていないTiDB Xインスタンス用
 
-TiDB Xプロジェクトは軽量で、TiDB Xインスタンスではオプションですが、 TiDB Cloud Dedicatedクラスターでは専用プロジェクトが必須です。これらのリソースを分離することで、より一貫性のあるユーザーエクスペリエンスが実現し、どのプロジェクト機能が適用されるかについての混乱が解消されます。
+TiDB Xプロジェクトは軽量で、TiDB Xインスタンスではオプションですが、 TiDB Cloud Dedicatedクラスタでは専用プロジェクトが必須です。これらのリソースを分離することで、より一貫性のあるユーザーエクスペリエンスが実現し、どのプロジェクト機能が適用されるかについての混乱が解消されます。
 
 この分離の結果、専用プロジェクトにはTiDB Xインスタンスを含めることができなくなりました。組織が専用プロジェクトに既存のTiDB Cloud StarterまたはEssentialリソースを持っている場合、 TiDB Cloudは新しいリソースモデルに合わせてそれらをTiDB Xプロジェクトに移動するように促します。
 
@@ -32,7 +32,7 @@ TiDB Cloudは、異なるリソースタイプとユースケースに対応す�
 
 - **TiDB dedicated project**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。
 
-    - この機能を使うと、RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスターの設定をプロジェクトごとに個別に管理できます。
+    - この機能を使うと、RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
     - 各TiDB Cloud Dedicatedクラスターは、専用プロジェクトに属していなければなりません。
     - TiDB Cloud Dedicatedクラスターは、インフラストラクチャの結合により、プロジェクト間で移動できません。
 
@@ -45,7 +45,7 @@ TiDB Cloudは、異なるリソースタイプとユースケースに対応す�
 
 - **TiDB X virtual project**：このプロジェクトは仮想プロジェクトであり、管理機能は提供していません。
 
-    - これは、どのプロジェクトにも属さないTiDB Xインスタンスの論理コンテナーとして機能するため、プロジェクトIDを使用することで、 TiDB Cloud APIを介してこれらのインスタンスにアクセスできます。
+    - これは、どのプロジェクトにも属さないTiDB Xインスタンスの論理コンテナとして機能するため、プロジェクトIDを使用することで、 TiDB Cloud APIを介してこれらのインスタンスにアクセスできます。
     - 各組織には固有の仮想プロジェクトIDが付与されています。
     - この ID は、TiDB Cloud API の[アクセス可能なプロジェクトをすべて一覧表示します](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects)エンドポイントから取得できます。
 
@@ -120,7 +120,7 @@ TiDB Cloudのリソースごとに異なるプロジェクトタイプが導入�
 
 この移行には追加費用はかかりません。
 
-移行後、TiDB XインスタンスはTiDB Xプロジェクト（または組織レベル）を通じて管理でき、 TiDB Cloud Dedicatedクラスターは専用プロジェクトを通じて引き続き管理できます。
+移行後、TiDB XインスタンスはTiDB Xプロジェクト（または組織レベル）を通じて管理でき、 TiDB Cloud Dedicatedクラスタは専用プロジェクトを通じて引き続き管理できます。
 
 ## 移行後にはどのような対応が必要ですか？ {#what-actions-are-required-after-migration}
 

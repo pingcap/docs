@@ -26,7 +26,7 @@ aliases: ['/ja/tidb/stable/dev-guide-get-data-from-single-table/','/ja/tidb/dev/
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-1. [TiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)。
+1. [TiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)。
 2. [Bookshopアプリケーションのテーブルスキーマとサンプルデータをインポートします](/develop/dev-guide-bookshop-schema-design.md#import-table-structures-and-data)
 3. [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)。
 
@@ -114,7 +114,7 @@ public class AuthorDAO {
 }
 ```
 
-[JDBCドライバーを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `conn.createStatement()`を使用して`Statement`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベースクエリリクエストを開始できます。
+[JDBCドライバを使用してTiDBに接続する](/develop/dev-guide-sample-application-java-jdbc.md)後、 `conn.createStatement()`を使用して`Statement`オブジェクトを作成し、 `stmt.executeQuery("query_sql")`を呼び出して TiDB へのデータベース クエリ リクエストを開始できます。
 
 クエリ結果は`ResultSet`オブジェクトに格納されます。 `ResultSet`を走査することで、返された結果を`Author`オブジェクトにマッピングできます。
 
@@ -130,7 +130,7 @@ public class AuthorDAO {
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-`WHERE`ステートメントにフィルター条件を追加します。
+`WHERE`ステートメントにフィルタ条件を追加します。
 
 ```sql
 SELECT * FROM authors WHERE birth_year = 1998;
@@ -139,9 +139,9 @@ SELECT * FROM authors WHERE birth_year = 1998;
 </div>
 <div label="Java" value="java">
 
-Javaでは、同じSQLを使用して、動的なパラメーターを持つデータクエリリクエストを処理できます。
+Javaでは、同じSQLを使用して、動的なパラメータを持つデータクエリリクエストを処理できます。
 
-これは、パラメーターを SQL文に連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)の潜在的なリスクが生じます。
+これは、パラメータを SQL文に連結することで実行できます。ただし、この方法では、アプリケーションのセキュリティに[SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)の潜在的なリスクが生じます。
 
 このようなクエリに対処するには、通常のステートメントの代わりに[プリペアドステートメント](/develop/dev-guide-prepared-statement.md)を使用します。
 
@@ -304,7 +304,7 @@ public List<Author> getAuthorsWithLimit(Integer limit) throws SQLException {
 
 データの全体的な状況をよりよく理解するために、 `GROUP BY`ステートメントを使用してクエリ結果を集計できます。
 
-例えば、どの年に作家の出生数が多いかを知りたい場合は、 `authors`テーブルを`birth_year`列でグループ化し、各年ごとにカウントできます。
+例えば、どの年に作家の出生数が多いかを知りたい場合は、 `authors`テーブルを`birth_year`列でグループ化し、各年ごとにカウントすることができます。
 
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">

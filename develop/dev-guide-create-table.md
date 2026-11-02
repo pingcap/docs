@@ -30,7 +30,7 @@ aliases: ['/ja/tidb/stable/dev-guide-create-table/','/ja/tidb/dev/dev-guide-crea
 CREATE TABLE {table_name} ( {elements} );
 ```
 
-**パラメーターの説明**
+**パラメータの説明**
 
 - `{table_name}` : 作成するテーブルの名前。
 - `{elements}` : 列定義や主キー定義など、テーブル要素をカンマで区切ったリスト。
@@ -54,7 +54,7 @@ CREATE TABLE `bookshop`.`users` (
 {column_name} {data_type} {column_qualification}
 ```
 
-**パラメーターの説明**
+**パラメータの説明**
 
 - `{column_name}` : 列名。
 - `{data_type}` : 列の[データ型](/data-type-overview.md)。
@@ -74,7 +74,7 @@ CREATE TABLE `bookshop`.`users` (
 
 次に、 `nickname`という名前のフィールドが定義されます。これは[varchar](/data-type-string.md#varchar-type)型で、長さの制限は 100 文字です。つまり、ユーザーの`nicknames`は`varchar`型を使用し、100 文字を超えないということです。
 
-最後に、 `balance`という名前のフィールドが追加されます。これは[decimal](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2` 。**精度**はフィールド内の桁数の合計を表し、**スケール**は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5` 、スケールが`2`で、範囲は`-999.99`から`999.99`となります。 `decimal(6,1)`は、精度が`6` 、スケールが`1`で、範囲が`-99999.9`から`99999.9`であることを意味します。**decimal**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (たとえば、ユーザープロパティ関連) では、 **decimal**型を使用するようにしてください。
+最後に、 `balance`という名前のフィールドが追加されます。これは[decimal](/data-type-numeric.md#decimal-type)型で、**精度**は`15` 、**スケール**は`2` 。**精度**はフィールド内の桁数の合計を表し、**スケール**は小数点以下の桁数を表します。たとえば、 `decimal(5,2)`は、精度が`5` 、スケールが`2`で、範囲は`-999.99`から`999.99`となります。 `decimal(6,1)`は、精度が`6` 、スケールが`1`で、範囲が`-99999.9`から`99999.9`であることを意味します。**decimal**は[固定小数点型](/data-type-numeric.md#fixed-point-types)で、数値を正確に格納するために使用できます。正確な数値が必要なシナリオ (たとえば、ユーザー プロパティ関連) では、 **decimal**型を使用するようにしてください。
 
 TiDB は、[整数型](/data-type-numeric.md#integer-types)、 [浮動小数点型](/data-type-numeric.md#floating-point-types)、[固定小数点型](/data-type-numeric.md#fixed-point-types)、[日付と時刻の種類](/data-type-date-and-time.md)、[列挙型](/data-type-string.md#enum-type)など、他の多くの列データ型をサポートしています。サポートされている列の[データ型](/data-type-overview.md)を参照し、データベースに保存したいデータに一致する**データ型**を使用できます。
 
@@ -111,7 +111,7 @@ CREATE TABLE `bookshop`.`books` (
 
 **主キー**は`CREATE TABLE`文で定義されます。[主キー制約](/constraints.md#primary-key)は、制約付き列すべてに NULL 以外の値のみが含まれることを要求します。
 
-テーブルは、**主キー**なし、または非整数の**主キー**を使用して作成できます。この場合、TiDB は**暗黙の主キー**として`_tidb_rowid`を作成します。暗黙の主キー`_tidb_rowid`は単調増加する性質を持つため、書き込み負荷の高いシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み負荷の高い場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)および[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメーターを使用してデータをシャーディングすることを検討してください。ただし、これにより読み取り増幅が発生する可能性があるため、トレードオフを独自に判断する必要があります。
+テーブルは、**主キー**なし、または非整数の**主キー**を使用して作成できます。この場合、TiDB は**暗黙の主キー**として`_tidb_rowid`を作成します。暗黙の主キー`_tidb_rowid`は単調増加する性質を持つため、書き込み負荷の高いシナリオでは書き込みホットスポットが発生する可能性があります。したがって、アプリケーションが書き込み負荷の高い場合は、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)および[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)パラメータを使用してデータをシャーディングすることを検討してください。ただし、これにより読み取り増幅が発生する可能性があるため、トレードオフを独自に判断する必要があります。
 
 テーブルの**主キー**が[整数型](/data-type-numeric.md#integer-types)で`AUTO_INCREMENT`が使用されている場合、 `SHARD_ROW_ID_BITS`を使用してもホットスポットを回避できません。ホットスポットを回避する必要があり、かつ連続的かつ増分的な主キーが必要ない場合は、 `AUTO_INCREMENT`の代わりに[`AUTO_RANDOM`](/auto-random.md)を使用して行 ID の連続性を排除できます。
 
@@ -246,7 +246,7 @@ TiFlashはデプロイ後にデータを自動的に複製しません。その�
 ALTER TABLE {table_name} SET TIFLASH REPLICA {count};
 ```
 
-**パラメーターの説明**
+**パラメータの説明**
 
 - `{table_name}` : テーブル名。
 - `{count}` : 複製されたレプリカの数。0 の場合、複製されたレプリカは削除されます。
@@ -356,7 +356,7 @@ SHOW TABLES IN `bookshop`;
 - 複雑なデータ型を使用することは推奨されません。
 - 結合するフィールドについては、データ型が一致していることを確認し、暗黙的な型変換を避けてください。
 - 単一の単調データ列に**主キー**を定義することは避けてください。単一の単調データ列（たとえば、 `AUTO_INCREMENT`属性を持つ列）を使用して**主キー**を定義すると、書き込みパフォーマンスに影響が出る可能性があります。可能であれば、 `AUTO_INCREMENT`ではなく`AUTO_RANDOM`を使用してください。これにより、主キーの連続性および増分属性が破棄されます。
-- 書き込み集中シナリオで単一の単調データ列にインデックスを作成する必要がある場合は、この単調データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`を使用してそのテーブルの**主キー**を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用して`_tidb_rowid`をシャーディングできます。
+- 書き込み集中シナリオで単一の単調データ列にインデックスを作成する必要がある場合は、この単調データ列を**主キー**として定義する代わりに、 `AUTO_RANDOM`を使用してそのテーブルの**主キー**を作成するか、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)と[`PRE_SPLIT_REGIONS`](/sql-statements/sql-statement-split-region.md#pre_split_regions)を使用して`_tidb_rowid`をシャーディングすることができます。
 
 ### クラスター化インデックスを選択する際に従うべきガイドライン {#guidelines-to-follow-when-selecting-clustered-index}
 

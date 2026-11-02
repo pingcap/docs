@@ -45,14 +45,14 @@ cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id 28c43ffc
     - このシナリオでは、TiCDCはタスク情報を保存します。TiCDCはPDにサービスGCセーフポイントを設定しているため、タスクチェックポイント以降のデータは有効期間`gc-ttl`内にTiKV GCによってクリーンアップされません。
     - 取り扱い手順:
         1. `cdc cli changefeed query`コマンドを使用してレプリケーションタスクのステータス情報を照会し、 `checkpoint-ts`の値を記録します。
-        2. 新しいタスク設定ファイルを使用して`ignore-txn-start-ts`パラメーターを追加し、指定された`start-ts`に対応するトランザクションをスキップします。
+        2. 新しいタスク設定ファイルを使用して`ignore-txn-start-ts`パラメータを追加し、指定された`start-ts`に対応するトランザクションをスキップします。
         3. `cdc cli changefeed pause -c <changefeed-id>`を実行してレプリケーションタスクを一時停止します。
         4. `cdc cli changefeed update -c <changefeed-id> --config <config-file-path>`を実行して新しいタスク設定ファイルを指定します。
         5. `cdc cli changefeed resume -c <changefeed-id>`を実行してレプリケーションタスクを再開します。
 
 ### タスク中断後に TiCDC を再起動した後で発生する OOM を処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-oom-that-occurs-after-ticdc-is-restarted-after-a-task-interruption}
 
-- TiDBクラスターとTiCDCクラスターを最新バージョンに更新してください。OOM問題は、**v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョン**で既に解決されています。
+- TiDBクラスタとTiCDCクラスタを最新バージョンに更新してください。OOM問題は、**v4.0.14以降のv4.0バージョン、v5.0.2以降のv5.0バージョン、および最新バージョン**で既に解決されています。
 
 ## レプリケーションタスクを作成するとき、または MySQL にデータをレプリケートするときに、`Error 1298: Unknown or incorrect time zone: 'UTC'`エラーを処理するにはどうすればよいですか? {#how-do-i-handle-the-error-1298-unknown-or-incorrect-time-zone-utc-error-when-creating-the-replication-task-or-replicating-data-to-mysql}
 
@@ -82,7 +82,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
 
 ## TiCDCタスクの`start-ts`タイムスタンプが現在時刻と大きく異なります。このタスクの実行中にレプリケーションが中断され、エラー`[CDC:ErrBufferReachLimit]`が発生しました。どうすればよいでしょうか？ {#the-start-ts-timestamp-of-the-ticdc-task-is-quite-different-from-the-current-time-during-the-execution-of-this-task-replication-is-interrupted-and-an-error-cdc-errbufferreachlimit-occurs-what-should-i-do}
 
-v4.0.9 以降では、レプリケーションタスクで統合ソーター機能を有効にするか、 BRツールを使用して増分バックアップと復元を実行し、新しい時間から TiCDC レプリケーションタスクを開始できます。
+v4.0.9 以降では、レプリケーションタスクで統合ソーター機能を有効にするか、 BRツールを使用して増分バックアップと復元を実行し、新しい時間から TiCDC レプリケーションタスクを開始することができます。
 
 ## 変更フィードの下流にMySQLなどのデータベースがあり、TiCDCが時間のかかるDDL文を実行すると、他のすべての変更フィードがブロックされます。どうすればよいでしょうか？ {#when-the-downstream-of-a-changefeed-is-a-database-similar-to-mysql-and-ticdc-executes-a-time-consuming-ddl-statement-all-other-changefeeds-are-blocked-what-should-i-do}
 
@@ -103,7 +103,7 @@ v4.0.9 以降では、レプリケーションタスクで統合ソーター機�
 
 ## TiCDCを使用してメッセージをKafkaに複製すると、Kafkaから`Message was too large`エラーが返されます。なぜでしょうか？ {#when-i-use-ticdc-to-replicate-messages-to-kafka-kafka-returns-the-message-was-too-large-error-why}
 
-TiCDC が Kafka に送信するメッセージのサイズを制御するには、Sink URI で`max-message-bytes`パラメーターを設定します。ただし、Kafkaサーバーがそのサイズのメッセージを受け入れるように設定されていることも確認する必要があります。TiCDC からのメッセージが Kafka サーバーの制限を超えた場合、Kafka は`Message was too large`エラーを返します。Kafka サーバーのメッセージサイズの上限を引き上げるには、その設定ファイルに次の設定を追加してください。
+TiCDC が Kafka に送信するメッセージのサイズを制御するには、Sink URI で`max-message-bytes`パラメータを設定します。ただし、Kafkaサーバーがそのサイズのメッセージを受け入れるように設定されていることも確認する必要があります。TiCDC からのメッセージが Kafka サーバーの制限を超えた場合、Kafka は`Message was too large`エラーを返します。Kafka サーバーのメッセージサイズの上限を引き上げるには、その設定ファイルに次の設定を追加してください。
 
 ```
 # The maximum byte number of a message that the broker receives
@@ -124,7 +124,7 @@ cdc cli changefeed resume -c test-cf --server=http://127.0.0.1:8300
 
 このDDL文のエラーをスキップしたい場合は、changefeedのstart-tsをcheckpoint-ts（DDL文のエラーが発生したタイムスタンプ）に1を加えた値に設定し、 `cdc cli changefeed create`コマンドを実行して新しいchangefeedタスクを作成します。例えば、DDL文のエラーが発生したcheckpoint-tsが`415241823337054209`の場合、以下のコマンドを実行してこのDDL文をスキップします。
 
-この問題のあるDDL文をスキップするには、 `ignore-txn-start-ts`パラメーターを設定して、指定された`start-ts`に対応するトランザクションをスキップします。例:
+この問題のあるDDL文をスキップするには、 `ignore-txn-start-ts`パラメータを設定して、指定された`start-ts`に対応するトランザクションをスキップします。例:
 
 1. TiCDC ログで`apply job`フィールドを検索し、時間がかかっている DDL の`start-ts`を特定します。
 2. changefeed の設定を変更します。設定項目`ignore-txn-start-ts`に上記の`start-ts`を追加します。
@@ -141,7 +141,7 @@ cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://roo
 
 ## TiCDC を使用して Kafka にメッセージをレプリケートすると`Kafka: client has run out of available brokers to talk to: EOF`エラーが報告されます。どうすればよいでしょうか？ {#the-kafka-client-has-run-out-of-available-brokers-to-talk-to-eof-error-is-reported-when-i-use-ticdc-to-replicate-messages-to-kafka-what-should-i-do}
 
-このエラーは通常、TiCDCとKafkaクラスター間の接続障害によって発生します。トラブルシューティングを行うには、Kafkaのログとネットワークステータスを確認してください。考えられる原因の一つは、レプリケーションタスクの作成時に正しいパラメーター`kafka-version`を指定しなかったために、TiCDC内のKafkaクライアントがKafkaサーバーにアクセスする際に間違ったバージョンのKafka APIを使用していることです。この問題を解決するには、 [`--sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)で正しいパラメーター`kafka-version`を指定します。例：
+このエラーは通常、TiCDCとKafkaクラスター間の接続障害によって発生します。トラブルシューティングを行うには、Kafkaのログとネットワークステータスを確認してください。考えられる原因の一つは、レプリケーションタスクの作成時に正しいパラメータ`kafka-version`を指定しなかったために、TiCDC内のKafkaクライアントがKafkaサーバーにアクセスする際に間違ったバージョンのKafka APIを使用していることです。この問題を解決するには、 [`--sink-uri`](/ticdc/ticdc-sink-to-kafka.md#configure-sink-uri-for-kafka)で正しいパラメータ`kafka-version`を指定します。例：
 
 ```shell
 cdc cli changefeed create --server=http://127.0.0.1:8300 --sink-uri "kafka://127.0.0.1:9092/test?topic=test&protocol=open-protocol&kafka-version=2.4.0" 

@@ -29,7 +29,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 - `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。詳細は[`kafka`でシンクURIを設定する](#configure-sink-uri-for-kafka)を参照してください。
 - `--start-ts` : チェンジフィードの開始TSOを指定します。このTSOから、TiCDCクラスターはデータのプルを開始します。デフォルト値は現在時刻です。
 - `--target-ts` : チェンジフィードの終了TSOを指定します。このTSOまで、TiCDCクラスターはデータのプルを停止します。デフォルト値は空で、TiCDCはデータのプルを自動的に停止しません。
-- `--config` : changefeed設定ファイルを指定します。詳細は[TiCDC Changefeed設定パラメーター](/ticdc/ticdc-changefeed-config.md)を参照してください。
+- `--config` : changefeed設定ファイルを指定します。詳細は[TiCDC Changefeed設定パラメータ](/ticdc/ticdc-changefeed-config.md)を参照してください。
 
 ## サポートされているKafkaのバージョン {#supported-kafka-versions}
 
@@ -66,9 +66,9 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 --sink-uri="kafka://127.0.0.1:9092/topic-name?protocol=canal-json&kafka-version=2.4.0&partition-num=6&max-message-bytes=67108864&replication-factor=1"
 ```
 
-以下は、Kafka に設定できるシンク URI パラメーターと値の説明です。
+以下は、Kafka に設定できるシンク URI パラメータと値の説明です。
 
-| パラメーター/パラメーター値                         | 説明                                                                                                                                                                                                                                                                                                                                                                                          |
+| パラメータ/パラメータ値                         | 説明                                                                                                                                                                                                                                                                                                                                                                                          |
 | :----------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `host`                               | ダウンストリーム Kafka サービスの IP アドレス。                                                                                                                                                                                                                                                                                                                                                               |
 | `port`                               | ダウンストリーム Kafka のポート。                                                                                                                                                                                                                                                                                                                                                                        |
@@ -79,21 +79,21 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 | `partition-num`                      | ダウンストリーム Kafka パーティションの数 (オプション。値は実際のパーティション数**以下に**する必要があります。そうでない場合、レプリケーションタスクを正常に作成できません。デフォルトは`3` )。                                                                                                                                                                                                                                                                                  |
 | `max-message-bytes`                  | Kafkaブローカーに毎回送信されるデータの最大サイズ（オプション、デフォルトは`10MB` 、最大値は`100MB` ）。v5.0.6およびv4.0.6以降、デフォルト値は`64MB`および`256MB`から`10MB`に変更されました。                                                                                                                                                                                                                                                                    |
 | `replication-factor`                 | 保存できるKafkaメッセージレプリカの数（オプション、デフォルトは`1` ）。この値はKafkaの[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)の値以上である必要があります。                                                                                                                                                                                                                    |
-| `required-acks`                      | `Produce`リクエストで使用されるパラメーター。ブローカーが応答するまでに受信する必要があるレプリカ確認応答の数を通知します。値のオプションは`0` ( `NoResponse` : 応答なし、 `TCP ACK`のみ提供)、 `1` ( `WaitForLocal` : ローカルコミットが正常に送信された後にのみ応答)、および`-1` ( `WaitForAll` : すべての複製レプリカが正常にコミットされた後に応答) です。複製レプリカの最小数は、ブローカーの[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)設定項目を使用して設定できます。(オプション、デフォルト値は`-1` )。 |
+| `required-acks`                      | `Produce`リクエストで使用されるパラメータ。ブローカーが応答するまでに受信する必要があるレプリカ確認応答の数を通知します。値のオプションは`0` ( `NoResponse` : 応答なし、 `TCP ACK`のみ提供)、 `1` ( `WaitForLocal` : ローカルコミットが正常に送信された後にのみ応答)、および`-1` ( `WaitForAll` : すべての複製レプリカが正常にコミットされた後に応答) です。複製レプリカの最小数は、ブローカーの[`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)設定項目を使用して設定できます。(オプション、デフォルト値は`-1` )。 |
 | `compression`                        | メッセージを送信する際に使用する圧縮アルゴリズム（値の選択肢は`none` 、 `lz4` 、 `gzip` 、 `snappy` 、 `zstd` 。デフォルトは`none` ）。Snappy圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。その他のSnappy圧縮形式はサポートされていません。                                                                                                                                                                                            |
 | `auto-create-topic`                  | 渡された`topic-name`が Kafka クラスターに存在しない場合に、TiCDC がトピックを自動的に作成するかどうかを決定します (オプション、デフォルトは`true` )。                                                                                                                                                                                                                                                                                                 |
-| `enable-tidb-extension`              | オプション。デフォルトは`false` 。出力プロトコルが`canal-json`の場合、値が`true`であれば、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)を送信し、Kafka メッセージに[TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を追加します。v6.1.0 以降では、このパラメーターは`avro`プロトコルにも適用されます。値が`true`であれば、TiCDC は Kafka メッセージに[3つのTiDB拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)を追加します。                         |
-| `max-batch-size`                     | v4.0.9 の新機能。メッセージプロトコルが 1つの Kafka メッセージに複数のデータ変更を出力することをサポートしている場合、このパラメーターは 1つの Kafka メッセージに含まれるデータ変更の最大数を指定します。現在、このパラメーターは Kafka の`protocol`が`open-protocol` （オプション、デフォルトは`16` ）の場合にのみ有効です。                                                                                                                                                                                              |
+| `enable-tidb-extension`              | オプション。デフォルトは`false` 。出力プロトコルが`canal-json`の場合、値が`true`であれば、TiCDC は[ウォーターマークイベント](/ticdc/ticdc-canal-json.md#watermark-event)を送信し、Kafka メッセージに[TiDB拡張フィールド](/ticdc/ticdc-canal-json.md#tidb-extension-field)を追加します。v6.1.0 以降では、このパラメータは`avro`プロトコルにも適用されます。値が`true`であれば、TiCDC は Kafka メッセージに[3つのTiDB拡張フィールド](/ticdc/ticdc-avro-protocol.md#tidb-extension-fields)を追加します。                         |
+| `max-batch-size`                     | v4.0.9 の新機能。メッセージプロトコルが 1つの Kafka メッセージに複数のデータ変更を出力することをサポートしている場合、このパラメータは 1つの Kafka メッセージに含まれるデータ変更の最大数を指定します。現在、このパラメータは Kafka の`protocol`が`open-protocol` （オプション、デフォルトは`16` ）の場合にのみ有効です。                                                                                                                                                                                              |
 | `enable-tls`                         | ダウンストリーム Kafka インスタンスに接続するために TLS を使用するかどうか (オプション、デフォルトは`false` )。                                                                                                                                                                                                                                                                                                                         |
 | `ca`                                 | ダウンストリーム Kafka インスタンスに接続するために必要な CA 証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                     |
 | `cert`                               | ダウンストリーム Kafka インスタンスに接続するために必要な証明書ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                         |
-| `key`                                | ダウンストリーム Kafka インスタンスに接続するために必要な証明書キーファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                      |
+| `key`                                | ダウンストリーム Kafka インスタンスに接続するために必要な証明書キー ファイルのパス (オプション)。                                                                                                                                                                                                                                                                                                                                      |
 | `insecure-skip-verify`               | ダウンストリーム Kafka インスタンスに接続するときに証明書の検証をスキップするかどうか (オプション、デフォルトは`false` )。                                                                                                                                                                                                                                                                                                                      |
 | `sasl-user`                          | ダウンストリーム Kafka インスタンスに接続するために必要な SASL/PLAIN または SASL/SCRAM 認証の ID (authcid) (オプション)。                                                                                                                                                                                                                                                                                                        |
 | `sasl-password`                      | 下流のKafkaインスタンスに接続するために必要なSASL/PLAINまたはSASL/SCRAM認証のパスワード（オプション）。特殊文字が含まれている場合は、URLエンコードする必要があります。                                                                                                                                                                                                                                                                                           |
 | `sasl-mechanism`                     | 下流のKafkaインスタンスに接続するために必要なSASL認証の名前。値は`plain` 、 `scram-sha-256` 、 `scram-sha-512` 、または`gssapi`です。                                                                                                                                                                                                                                                                                            |
 | `sasl-gssapi-auth-type`              | gssapi認証タイプ。値は`user`または`keytab` （オプション）です。                                                                                                                                                                                                                                                                                                                                                  |
-| `sasl-gssapi-keytab-path`            | gssapi キータブパス (オプション)。                                                                                                                                                                                                                                                                                                                                                                     |
+| `sasl-gssapi-keytab-path`            | gssapi キータブ パス (オプション)。                                                                                                                                                                                                                                                                                                                                                                     |
 | `sasl-gssapi-kerberos-config-path`   | gssapi kerberos 構成パス (オプション)。                                                                                                                                                                                                                                                                                                                                                               |
 | `sasl-gssapi-service-name`           | gssapi サービス名 (オプション)。                                                                                                                                                                                                                                                                                                                                                                       |
 | `sasl-gssapi-user`                   | gssapi 認証のユーザー名 (オプション)。                                                                                                                                                                                                                                                                                                                                                                    |
@@ -109,7 +109,7 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 ### ベストプラクティス {#best-practices}
 
 - 独自のKafkaトピックを作成することをお勧めします。少なくとも、トピックがKafkaブローカーに送信できる各メッセージの最大データ量と、下流のKafkaパーティションの数を設定する必要があります。チェンジフィードを作成する場合、これらの2つの設定はそれぞれ`max-message-bytes`と`partition-num`に対応します。
-- まだ存在しないトピックでチェンジフィードを作成した場合、TiCDCは`partition-num`と`replication-factor`パラメーターを使用してトピックを作成しようとします。これらのパラメーターは明示的に指定することをお勧めします。
+- まだ存在しないトピックでチェンジフィードを作成した場合、TiCDCは`partition-num`と`replication-factor`パラメータを使用してトピックを作成しようとします。これらのパラメータは明示的に指定することをお勧めします。
 - ほとんどの場合、 `canal-json`プロトコルを使用することをお勧めします。
 - TiCDCにおけるアップストリームデータの変更頻度が低い場合（例えば、10分以上データの変更がないなど）、Kafkaブローカー設定ファイルでKafka接続アイドルタイムアウトを増やすことをお勧めします。詳細については、 [TiCDC の Kafka へのレプリケーションタスクが`broken pipe`エラーで頻繁に失敗する理由](/ticdc/ticdc-faq.md#why-do-ticdc-replication-tasks-to-kafka-often-fail-with-broken-pipe-errors)を参照してください。
 
@@ -154,29 +154,29 @@ Info: {"sink-uri":"kafka://127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094/topic-na
 
 - TLS/SSL暗号化
 
-    KafkaブローカーでTLS/SSL暗号化が有効になっている場合は、 `--sink-uri`に`-enable-tls=true`パラメーターを追加する必要があります。自己署名証明書を使用する場合は、 `--sink-uri`に`ca` 、 `cert` 、 `key`を指定する必要があります。
+    KafkaブローカーでTLS/SSL暗号化が有効になっている場合は、 `--sink-uri`に`-enable-tls=true`パラメータを追加する必要があります。自己署名証明書を使用する場合は、 `--sink-uri`に`ca` 、 `cert` 、 `key`を指定する必要があります。
 
 - ACL認可
 
     TiCDC が適切に機能するために必要な最小限の権限セットは次のとおりです。
 
     - トピック[リソースタイプ](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)の`Create` 、 `Write` 、および`Describe`権限。
-    - クラスターリソースタイプに対する`DescribeConfig`の権限。
+    - クラスタリソース タイプに対する`DescribeConfig`の権限。
 
     各権限の使用シナリオは次のとおりです。
 
     | リソースタイプ | 操作の種類            | シナリオ                         |
     | :------ | :--------------- | :--------------------------- |
-    | クラスター    | `DescribeConfig` | 変更フィードの実行中にクラスターのメタデータを取得します |
+    | クラスタ    | `DescribeConfig` | 変更フィードの実行中にクラスターのメタデータを取得します |
     | トピック    | `Describe`       | チェンジフィードの開始時にトピックを作成しようとします  |
     | トピック    | `Create`         | チェンジフィードの開始時にトピックを作成しようとします  |
     | トピック    | `Write`          | トピックにデータを送信する                |
 
-    変更フィードを作成または開始するときに、指定された Kafka トピックがすでに存在する場合は、 `Describe`および`Create`権限を無効にできます。
+    変更フィードを作成または開始するときに、指定された Kafka トピックがすでに存在する場合は、 `Describe`および`Create`権限を無効にすることができます。
 
 ### TiCDC を Kafka Connect (Confluent Platform) と統合する {#integrate-ticdc-with-kafka-connect-confluent-platform}
 
-Confluent が提供する[データコネクター](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してリレーショナルデータベースまたは非リレーショナルデータベースにデータをストリーミングするには、 [`avro`プロトコル](/ticdc/ticdc-avro-protocol.md)を使用し、 `schema-registry`で[Confluent スキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/)の URL を指定する必要があります。
+Confluent が提供する[データコネクタ](https://docs.confluent.io/current/connect/managing/connectors.html)を使用してリレーショナルデータベースまたは非リレーショナルデータベースにデータをストリーミングするには、 [`avro`プロトコル](/ticdc/ticdc-avro-protocol.md)を使用し、 `schema-registry`で[Confluent スキーマレジストリ](https://www.confluent.io/product/confluent-platform/data-compatibility/)の URL を指定する必要があります。
 
 サンプル構成:
 
@@ -236,14 +236,14 @@ dispatchers = [
 - どのマッチャールールにも一致しないテーブルの場合、対応するデータ変更イベントは`--sink-uri`で指定されたデフォルトトピックに送信されます。例えば、 `test10.aa`テーブルはデフォルトトピックに送信されます。
 - マッチャールールに一致するもののトピックディスパッチャーを指定していないテーブルの場合、対応するデータ変更は`--sink-uri`で指定されたデフォルトトピックに送信されます。例えば、 `test6.aa`テーブルはデフォルトトピックに送信されます。
 
-### トピックディスパッチャー {#topic-dispatchers}
+### トピックディスパッチャ {#topic-dispatchers}
 
-topic = "xxx" を使用してトピックディスパッチャーを指定し、トピック式を使用して柔軟なトピックディスパッチポリシーを実装できます。トピックの総数は1000未満にすることを推奨します。
+topic = "xxx" を使用してトピックディスパッチャを指定し、トピック式を使用して柔軟なトピックディスパッチポリシーを実装できます。トピックの総数は1000未満にすることを推奨します。
 
 Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 - `prefix` : オプション。トピック名のプレフィックスを示します。
-- `{schema}` : 必須。スキーマ名を一致させるために使用されます。v7.1.4以降、このパラメーターはオプションです。
+- `{schema}` : 必須。スキーマ名を一致させるために使用されます。v7.1.4以降、このパラメータはオプションです。
 - `middle` : オプション。スキーマ名とテーブル名の間の区切り文字を示します。
 - `{table}` : オプション。テーブル名と一致させるために使用されます。
 - `suffix` : オプション。トピック名の接尾辞を示します。
@@ -271,20 +271,20 @@ Topic 式の形式は`[prefix]{schema}[middle][{table}][suffix]`です。
 
 #### テーブルレベルのDDL {#table-level-ddls}
 
-特定のテーブルに関連するDDLは、テーブルレベルDDLと呼ばれます（ `alter table`や`create table`など）。テーブルレベルDDLに対応するイベントは、ディスパッチャーの設定に従って対応するトピックに送信されます。
+特定のテーブルに関連するDDLは、テーブルレベルDDLと呼ばれます（ `alter table`や`create table`など）。テーブルレベルDDLに対応するイベントは、ディスパッチャの設定に従って対応するトピックに送信されます。
 
-たとえば、 `matcher = ['test.*'], topic = "{schema}_{table}"`のようなディスパッチャーの場合、DDL イベントは次のようにディスパッチされます。
+たとえば、 `matcher = ['test.*'], topic = "{schema}_{table}"`のようなディスパッチャの場合、DDL イベントは次のようにディスパッチされます。
 
 - DDLイベントに単一のテーブルが関係している場合、DDLイベントは対応するトピックにそのまま送信されます。例えば、DDLイベント`drop table test.table1`の場合、イベントは`test_table1`という名前のトピックに送信されます。
 - DDLイベントに複数のテーブルが関係する場合（ `rename table` / `drop table` / `drop view`は複数のテーブルに関係する可能性があります）、DDLイベントは複数のイベントに分割され、対応するトピックに送信されます。例えば、DDLイベント`rename table test.table1 to test.table10, test.table2 to test.table20`の場合、イベント`rename table test.table1 to test.table10`はトピック`test_table1`に送信され、イベント`rename table test.table2 to test.table20`はトピック`test_table2`に送信されます。
 
-### パーティションディスパッチャー {#partition-dispatchers}
+### パーティションディスパッチャ {#partition-dispatchers}
 
-`partition = "xxx"`を使用してパーティションディスパッチャーを指定できます。`default` 、 `index-value` 、 `columns` 、 `table` 、 `ts`の5つのディスパッチャーをサポートします。ディスパッチャーのルールは以下のとおりです。
+`partition = "xxx"`を使用してパーティションディスパッチャを指定できます。`default` 、 `index-value` 、 `columns` 、 `table` 、 `ts`の5つのディスパッチャをサポートします。ディスパッチャのルールは以下のとおりです。
 
-- `default` : デフォルトで`table`ディスパッチャールールを使用します。スキーマ名とテーブル名に基づいてパーティション番号を計算し、テーブルからのデータが必ず同じパーティションに送信されるようにします。その結果、1つのテーブルからのデータは1つのパーティションにのみ存在し、順序付けが保証されます。ただし、このディスパッチャールールは送信スループットを制限し、コンシューマーを追加しても消費速度を向上させることはできません。
-- `index-value` : 主キー、一意インデックス、または`index`で明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャーは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
-- `columns` : 明示的に指定された列の値を使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャーは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
+- `default` : デフォルトで`table`ディスパッチャルールを使用します。スキーマ名とテーブル名に基づいてパーティション番号を計算し、テーブルからのデータが必ず同じパーティションに送信されるようにします。その結果、1つのテーブルからのデータは1つのパーティションにのみ存在し、順序付けが保証されます。ただし、このディスパッチャルールは送信スループットを制限し、コンシューマーを追加しても消費速度を向上させることはできません。
+- `index-value` : 主キー、一意インデックス、または`index`で明示的に指定されたインデックスのいずれかを使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
+- `columns` : 明示的に指定された列の値を使用してパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一のテーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。このディスパッチャは、同じ行への更新が同じパーティションに送信されるようにすることで、その行の順序付けされた処理を保証します。
 - `table` : スキーマ名とテーブル名を使用してパーティション番号を計算します。
 - `ts` : 行変更の commitTs を用いてパーティション番号を計算し、テーブルデータを複数のパーティションに分散します。単一テーブルのデータは複数のパーティションに送信され、各パーティションのデータは順序付けされます。コンシューマーを追加することで、消費速度を向上させることができます。ただし、データ項目の複数の変更が異なるパーティションに送信され、各コンシューマーのコンシューマー処理の進行状況が異なる場合があり、データの不整合が発生する可能性があります。そのため、コンシューマーは複数のパーティションからのデータを消費する前に、commitTs でソートする必要があります。
 
@@ -300,17 +300,17 @@ dispatchers = [
 ]
 ```
 
-- `test`データベース内のテーブルは`index-value`ディスパッチャーを使用し、主キーまたは一意インデックスの値を使用してパーティション番号を計算します。主キーが存在する場合は主キーが使用され、存在しない場合は最短の一意インデックスが使用されます。
-- `test1`テーブル内のテーブルは`index-value`ディスパッチャーを使用し、 `index1`という名前のインデックスに含まれるすべての列の値を使用してパーティション番号を計算します。指定されたインデックスが存在しない場合はエラーが報告されます。なお、`index`で指定されたインデックスは一意インデックスである必要があります。
-- `test2`データベース内のテーブルは`columns`ディスパッチャーを使用し、列`id`と`a`の値を使用してパーティション番号を計算します。いずれかの列が存在しない場合は、エラーが報告されます。
+- `test`データベース内のテーブルは`index-value`ディスパッチャを使用し、主キーまたは一意インデックスの値を使用してパーティション番号を計算します。主キーが存在する場合は主キーが使用され、存在しない場合は最短の一意インデックスが使用されます。
+- `test1`テーブル内のテーブルは`index-value`ディスパッチャを使用し、 `index1`という名前のインデックスに含まれるすべての列の値を使用してパーティション番号を計算します。指定されたインデックスが存在しない場合はエラーが報告されます。なお、`index`で指定されたインデックスは一意インデックスである必要があります。
+- `test2`データベース内のテーブルは`columns`ディスパッチャを使用し、列`id`と`a`の値を使用してパーティション番号を計算します。いずれかの列が存在しない場合は、エラーが報告されます。
 - `test3`データベース内のテーブルは`table`ディスパッチャーを使用します。
-- `test4`データベース内のテーブルは、前述のルールのいずれにも一致しないため、 `default`ディスパッチャー、つまり`table`ディスパッチャーを使用します。
+- `test4`データベース内のテーブルは、前述のルールのいずれにも一致しないため、 `default`ディスパッチャ、つまり`table`ディスパッチャを使用します。
 
-テーブルが複数のディスパッチャールールに一致する場合、最初に一致するルールが優先されます。
+テーブルが複数のディスパッチャ ルールに一致する場合、最初に一致するルールが優先されます。
 
 > **Note:**
 >
-> バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャーを指定するための設定が`dispatcher`から`partition`に変更されました。`partition`は`dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
+> バージョン6.1.0以降、設定の意味を明確にするため、パーティションディスパッチャを指定するための設定が`dispatcher`から`partition`に変更されました。`partition`は`dispatcher`の別名です。例えば、次の2つのルールは全く同じ意味です。
 >
 > ```
 > [sink]
@@ -390,7 +390,7 @@ SELECT COUNT(*) FROM INFORMATION_SCHEMA.TIKV_REGION_STATUS WHERE DB_NAME="databa
 
 ## Kafka トピックの制限を超えるメッセージを処理する {#handle-messages-that-exceed-the-kafka-topic-limit}
 
-Kafkaトピックは、受信できるメッセージのサイズに制限を設定します。この制限はパラメーター[`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes)によって制御されます。TiCDC Kafkaシンクがこの制限を超えるデータを送信した場合、チェンジフィードはエラーを報告し、データのレプリケーションを続行できません。この問題を解決するために、TiCDCは新しい設定`large-message-handle-option`を追加し、以下のソリューションを提供します。
+Kafkaトピックは、受信できるメッセージのサイズに制限を設定します。この制限はパラメータ[`max.message.bytes`](https://kafka.apache.org/documentation/#topicconfigs_max.message.bytes)によって制御されます。TiCDC Kafkaシンクがこの制限を超えるデータを送信した場合、チェンジフィードはエラーを報告し、データのレプリケーションを続行できません。この問題を解決するために、TiCDCは新しい設定`large-message-handle-option`を追加し、以下のソリューションを提供します。
 
 現在、この機能はCanal-JSONとOpen Protocolの2つのエンコーディングプロトコルをサポートしています。Canal-JSONプロトコルを使用する場合は、 `sink-uri`のうち`enable-tidb-extension=true`を指定する必要があります。
 
@@ -408,14 +408,14 @@ Kafkaトピックは、受信できるメッセージのサイズに制限を設
 large-message-handle-compression = "none"
 ```
 
-`large-message-handle-compression`が有効になっている場合、コンシューマーが受信するメッセージは特定の圧縮プロトコルを使用してエンコードされ、コンシューマーアプリケーションは指定された圧縮プロトコルを使用してデータをデコードする必要があります。
+`large-message-handle-compression`が有効になっている場合、コンシューマーが受信するメッセージは特定の圧縮プロトコルを使用してエンコードされ、コンシューマー アプリケーションは指定された圧縮プロトコルを使用してデータをデコードする必要があります。
 
 この機能は、Kafka プロデューサーの圧縮機能とは異なります。
 
 - `large-message-handle-compression`で指定された圧縮アルゴリズムは、単一のKafkaメッセージを圧縮します。圧縮は、メッセージサイズの制限と比較する前に実行されます。
-- 同時に、 [`sink-uri`](#configure-sink-uri-for-kafka)の`compression`パラメーターを使用して圧縮アルゴリズムを設定することもできます。この圧縮アルゴリズムは、複数のKafkaメッセージを含むデータ送信リクエスト全体に適用されます。
+- 同時に、 [`sink-uri`](#configure-sink-uri-for-kafka)の`compression`パラメータを使用して圧縮アルゴリズムを設定することもできます。この圧縮アルゴリズムは、複数のKafkaメッセージを含むデータ送信リクエスト全体に適用されます。
 
-`large-message-handle-compression`を設定した場合、TiCDC はメッセージを受信すると、まずメッセージサイズ制限パラメーターの値と比較し、サイズ制限を超えるメッセージを圧縮します。[`sink-uri`](#configure-sink-uri-for-kafka)に`compression`も設定した場合、TiCDC は`sink-uri`設定に基づいて、送信データリクエスト全体をシンクレベルで再度圧縮します。
+`large-message-handle-compression`を設定した場合、TiCDC はメッセージを受信すると、まずメッセージサイズ制限パラメータの値と比較し、サイズ制限を超えるメッセージを圧縮します。[`sink-uri`](#configure-sink-uri-for-kafka)に`compression`も設定した場合、TiCDC は`sink-uri`設定に基づいて、送信データリクエスト全体をシンクレベルで再度圧縮します。
 
 前述の2つの圧縮方法の圧縮率は次のように計算されます: `compression ratio = size before compression / size after compression * 100` 。
 
@@ -476,7 +476,7 @@ Kafkaコンシューマーはメッセージを受信すると、まず`onlyHand
 
 > **Warning:**
 >
-> Kafkaコンシューマーがデータを処理してTiDBにクエリを実行すると、GCによってデータが削除される可能性があります。この状況を回避するには、 [TiDBクラスターのGCライフタイム](/system-variables.md#tidb_gc_life_time-new-in-v50)をより大きい値に変更する必要があります。
+> Kafkaコンシューマーがデータを処理してTiDBにクエリを実行すると、GCによってデータが削除される可能性があります。この状況を回避するには、 [TiDBクラスタのGCライフタイム](/system-variables.md#tidb_gc_life_time-new-in-v50)をより大きい値に変更する必要があります。
 
 ### 大きなメッセージを外部ストレージに送信する {#send-large-messages-to-external-storage}
 
@@ -498,7 +498,7 @@ claim-check-storage-uri = "s3://claim-check-bucket"
 
 > **Tip**
 >
-> TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメーターの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
+> TiCDC における Amazon S3、GCS、Azure Blob Storage の URI パラメータの詳細については、 [外部ストレージサービスのURI形式](/external-storage-uri.md)を参照してください。
 
 TiCDCは外部ストレージサービス上のメッセージをクリーンアップしません。データ利用者は外部ストレージサービスを独自に管理する必要があります。
 
@@ -551,7 +551,7 @@ Kafkaコンシューマーは、外部ストレージ内の大きなメッセー
 
 #### `value`フィールドを外部ストレージにのみ送信する {#send-the-value-field-to-external-storage-only}
 
-バージョン8.4.0以降、TiCDCはKafkaメッセージの`value`フィールドのみを外部ストレージに送信できるようになりました。この機能は、Open Protocol以外のシナリオにのみ適用されます。この機能は、 `claim-check-raw-value`パラメーター（デフォルトは`false`）を設定することで制御できます。
+バージョン8.4.0以降、TiCDCはKafkaメッセージの`value`フィールドのみを外部ストレージに送信できるようになりました。この機能は、Open Protocol以外のシナリオにのみ適用されます。この機能は、 `claim-check-raw-value`パラメータ（デフォルトは`false`）を設定することで制御できます。
 
 > **Note:**
 >

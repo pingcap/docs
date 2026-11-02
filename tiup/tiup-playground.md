@@ -1,11 +1,11 @@
 ---
 title: Quickly Deploy a Local TiDB Cluster
-summary: TiUPのPlaygroundコンポーネントを使用して、ローカルTiDBクラスターを迅速にデプロイする方法を学びましょう。
+summary: TiUPのPlaygroundコンポーネントを使用して、ローカルTiDBクラスタを迅速にデプロイする方法を学びましょう。
 ---
 
-# ローカルTiDBクラスターを迅速にデプロイ {#quickly-deploy-a-local-tidb-cluster}
+# ローカルTiDBクラスタを迅速にデプロイ {#quickly-deploy-a-local-tidb-cluster}
 
-TiDBクラスターは、複数のコンポーネントで構成される分散システムです。一般的なTiDBクラスターは、少なくとも3つのPDノード、3つのTiKVノード、および2つのTiDBノードで構成されます。TiDBをすぐに試してみたい場合、これほど多くのコンポーネントを手動でデプロイするのは時間と手間がかかるかもしれません。このドキュメントでは、 TiUPのPlaygroundコンポーネントと、それを使用してローカルのTiDBテスト環境を迅速に構築する方法について説明します。
+TiDBクラスタは、複数のコンポーネントで構成される分散システムです。一般的なTiDBクラスタは、少なくとも3つのPDノード、3つのTiKVノード、および2つのTiDBノードで構成されます。TiDBをすぐに試してみたい場合、これほど多くのコンポーネントを手動でデプロイするのは時間と手間がかかるかもしれません。このドキュメントでは、 TiUPのPlaygroundコンポーネントと、それを使用してローカルのTiDBテスト環境を迅速に構築する方法について説明します。
 
 ## TiUP Playgroundの概要 {#tiup-playground-overview}
 
@@ -15,14 +15,14 @@ Playgroundコンポーネントの基本的な使用方法を以下に示しま�
 tiup playground ${version} [flags]
 ```
 
-`tiup playground`コマンドを直接実行すると、 TiUP はローカルにインストールされている TiDB、TiKV、および PD コンポーネントを使用するか、これらのコンポーネントの安定版をインストールして、1つの TiKV インスタンス、1つの TiDB インスタンス、1つの PD インスタンス、および 1つのTiFlashインスタンスで構成される TiDB クラスターを起動します。
+`tiup playground`コマンドを直接実行すると、 TiUP はローカルにインストールされている TiDB、TiKV、および PD コンポーネントを使用するか、これらのコンポーネントの安定版をインストールして、1つの TiKV インスタンス、1つの TiDB インスタンス、1つの PD インスタンス、および 1つのTiFlashインスタンスで構成される TiDB クラスタを起動します。
 
 このコマンドは実際には以下の操作を実行します。
 
 - このコマンドではPlaygroundコンポーネントのバージョンが指定されていないため、 TiUP はまずインストールされているPlaygroundコンポーネントの最新バージョンを確認します。最新バージョンが v1.12.3 であると仮定すると、このコマンドは`tiup playground:v1.12.3`と同じように動作します。
 - TiUP playgroundを使用してTiDB、TiKV、およびPDコンポーネントをインストールしていない場合、playgroundコンポーネントはこれらのコンポーネントの最新の安定版をインストールし、その後これらのインスタンスを起動します。
 - このコマンドでは TiDB、PD、TiKVコンポーネントのバージョンが指定されていないため、 TiUP playground はデフォルトで各コンポーネントの最新バージョンを使用します。最新バージョンが v8.5.4 であると仮定すると、このコマンドは`tiup playground:v1.12.3 v8.5.4`と同じように動作します。
-- このコマンドでは各コンポーネントの数を指定しないため、 TiUP playground はデフォルトで、TiDB インスタンス、TiKV インスタンス、PD インスタンス、 TiFlashインスタンスがそれぞれ 1つずつで構成される最小のクラスターを起動します。
+- このコマンドでは各コンポーネントの数を指定しないため、 TiUP playground はデフォルトで、TiDB インスタンス、TiKV インスタンス、PD インスタンス、 TiFlashインスタンスがそれぞれ 1つずつで構成される最小のクラスタを起動します。
 - TiDB の各コンポーネントを起動した後、 TiUP Playgroundはクラスターが正常に起動したことを通知し、MySQL クライアントを介して TiDB クラスターに接続する方法や、 [TiDB Dashboard](/dashboard/dashboard-intro.md)にアクセスする方法など、いくつかの有用な情報を提供します。
 
 Playgroundコンポーネントのコマンドラインフラグを表示するには、次のコマンドを使用できます。
@@ -39,7 +39,7 @@ tiup playground --help
 tiup list tidb
 ```
 
-### 特定のバージョンのTiDBクラスターを起動する {#start-a-tidb-cluster-of-a-specific-version}
+### 特定のバージョンのTiDBクラスタを起動する {#start-a-tidb-cluster-of-a-specific-version}
 
 ```shell
 tiup playground ${version}
@@ -47,7 +47,7 @@ tiup playground ${version}
 
 `${version}`を対象のバージョン番号に置き換えてください。
 
-### ナイトリーバージョンのTiDBクラスターを起動します {#start-a-tidb-cluster-of-the-nightly-version}
+### ナイトリーバージョンのTiDBクラスタを起動します {#start-a-tidb-cluster-of-the-nightly-version}
 
 ```shell
 tiup playground nightly
@@ -65,7 +65,7 @@ tiup playground --pd.config ~/config/pd.toml
 
 ### デフォルトのバイナリファイルを置き換える {#replace-the-default-binary-files}
 
-デフォルトでは、Playgroundが起動されると、各コンポーネントは公式ミラーのバイナリファイルを使用して起動されます。テストのために一時的にコンパイルされたローカルバイナリファイルをクラスターに配置したい場合は、置換フラグ`--{comp}.binpath`を使用できます。たとえば、TiDB のバイナリファイルを置き換えるには、次のコマンドを実行します。
+デフォルトでは、Playgroundが起動されると、各コンポーネントは公式ミラーのバイナリファイルを使用して起動されます。テストのために一時的にコンパイルされたローカルバイナリファイルをクラスタに配置したい場合は、置換フラグ`--{comp}.binpath`を使用できます。たとえば、TiDB のバイナリファイルを置き換えるには、次のコマンドを実行します。
 
 ```shell
 tiup playground --db.binpath /xx/tidb-server
@@ -79,19 +79,19 @@ tiup playground --db.binpath /xx/tidb-server
 tiup playground --db 3 --pd 3 --kv 3
 ```
 
-### TiDBクラスターの起動時に、データを保存するタグを指定する {#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data}
+### TiDBクラスタの起動時に、データを保存するタグを指定する {#specify-a-tag-when-starting-the-tidb-cluster-to-store-the-data}
 
-TiUP playground を使用して起動した TiDB クラスターを停止すると、クラスターデータもすべてクリーンアップされます。TiUP playground を使用してTiDBクラスターを起動し、クラスターデータが自動的にクリーンアップされないようにするには、クラスター起動時にタグを指定できます。タグを指定すると、クラスターデータは`~/.tiup/data`ディレクトリに保存されます。タグを指定するには、次のコマンドを実行します。
+TiUP playground を使用して起動した TiDB クラスタを停止すると、クラスタデータもすべてクリーンアップされます。TiUP playground を使用してTiDBクラスタを起動し、クラスタデータが自動的にクリーンアップされないようにするには、クラスタ起動時にタグを指定できます。タグを指定すると、クラスタデータは`~/.tiup/data`ディレクトリに保存されます。タグを指定するには、次のコマンドを実行します。
 
 ```shell
 tiup playground --tag ${tag_name}
 ```
 
-このように起動したクラスターの場合、クラスター停止後もデータファイルは保持されます。次回クラスターを起動する際にこのタグを使用することで、クラスター停止以降に保持されたデータを利用できます。
+このように起動したクラスターの場合、クラスター停止後もデータファイルは保持されます。次回クラスターを起動する際にこのタグを使用することで、クラスター停止以降に保持されたデータを利用することができます。
 
 ## TiDB DashboardとGrafanaにアクセスする {#access-tidb-dashboard-and-grafana}
 
-TiUP playgroundを使用してTiDBクラスターを起動すると、ブラウザーで次のアドレスにアクセスすることで、 [TiDB Dashboard](/dashboard/dashboard-intro.md)とGrafanaにアクセスできます。
+TiUP playgroundを使用してTiDBクラスタを起動すると、ブラウザで次のアドレスにアクセスすることで、 [TiDB Dashboard](/dashboard/dashboard-intro.md)とGrafanaにアクセスできます。
 
 - TiDB Dashboard： `http://127.0.0.1:2379/dashboard`
 
@@ -109,13 +109,13 @@ TiUP playgroundを使用してTiDBクラスターを起動すると、ブラウ�
 
 ## playground で起動した TiDB クラスターにすばやく接続します {#quickly-connect-to-the-tidb-cluster-started-by-playground}
 
-TiUPは、playgroundによって起動されたローカルTiDBクラスターを自動的に検出して接続するために使用される`client`コンポーネントを提供します。使用方法は以下のとおりです。
+TiUPは、playgroundによって起動されたローカルTiDBクラスタを自動的に検出して接続するために使用される`client`コンポーネントを提供します。使用方法は以下のとおりです。
 
 ```shell
 tiup client
 ```
 
-このコマンドを実行すると、コンソールに、現在のマシン上でplaygroundによって起動されたTiDBクラスターの一覧が表示されます。接続するTiDBクラスターを選択してください。<kbd>Enter</kbd>キーを押すと、TiDBに接続するための組み込みのMySQLクライアントが開きます。
+このコマンドを実行すると、コンソールに、現在のマシン上でplaygroundによって起動されたTiDBクラスタの一覧が表示されます。接続するTiDBクラスタを選択してください。<kbd>Enter</kbd>キーを押すと、TiDBに接続するための組み込みのMySQLクライアントが開きます。
 
 ## 起動したクラスターの情報を表示する {#view-information-of-the-started-cluster}
 
@@ -136,7 +136,7 @@ Pid    Role     Uptime
 
 ## クラスターをスケールアウトする {#scale-out-a-cluster}
 
-クラスターをスケールアウトするためのコマンドラインパラメーターは、クラスターを起動するためのパラメーターと似ています。以下のコマンドを実行することで、2つのTiDBインスタンスをスケールアウトできます。
+クラスタをスケールアウトするためのコマンドラインパラメータは、クラスタを起動するためのパラメータと似ています。以下のコマンドを実行することで、2つのTiDBインスタンスをスケールアウトできます。
 
 ```shell
 tiup playground scale-out --db 2
@@ -162,9 +162,9 @@ TiUP v1.15.0以降では、 TiUP Playgroundを使用してクラスターにTiPr
     graceful-wait-before-shutdown=15
     ```
 
-    この設定項目は、TiDBがサーバーをシャットダウンするまでの待機時間（秒単位）を制御し、クラスターのスケールイン操作中にクライアントが切断されるのを防ぎます。
+    この設定項目は、TiDBがサーバーをシャットダウンするまでの待機時間（秒単位）を制御し、クラスタのスケールイン操作中にクライアントが切断されるのを防ぎます。
 
-2. TiDBクラスターを起動します。
+2. TiDBクラスタを起動します。
 
     ```shell
     tiup playground v8.5.4 --tiproxy 1 --db.config tidb.toml

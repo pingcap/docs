@@ -45,9 +45,9 @@ class Chunk(TableModel):
 table = client.create_table(schema=Chunk, if_exists="overwrite")
 ```
 
-埋め込みモデルによって自動的に決定されるため、 `dimensions`パラメーターを指定する必要はありません。
+埋め込みモデルによって自動的に決定されるため、 `dimensions`パラメータを指定する必要はありません。
 
-ただし、 `dimensions`パラメーターを設定してデフォルトの次元を上書きできます。
+ただし、 `dimensions`パラメータを設定してデフォルトの次元を上書きすることができます。
 
 ### ステップ3. サンプルデータを挿入する {#step-3-insert-some-sample-data}
 

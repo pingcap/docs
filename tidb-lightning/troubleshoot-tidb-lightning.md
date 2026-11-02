@@ -21,13 +21,13 @@ TiDB Lightning が遅くなる理由はいくつかあります。
 
 **原因 2** : テーブルスキーマが複雑すぎます。
 
-インデックスを追加するたびに、各行に新しいKVペアが作成されます。インデックスがN個ある場合、実際にインポートされるサイズはDumpling出力のサイズの約(N+1)倍になります。インデックスが無視できるほど小さい場合は、まずスキーマからインデックスを削除し、インポート完了後に`CREATE INDEX`を使用して再度追加できます。
+インデックスを追加するたびに、各行に新しいKVペアが作成されます。インデックスがN個ある場合、実際にインポートされるサイズはDumpling出力のサイズの約(N+1)倍になります。インデックスが無視できるほど小さい場合は、まずスキーマからインデックスを削除し、インポート完了後に`CREATE INDEX`を使用して再度追加することができます。
 
 **原因 3** : 各ファイルが大きすぎます。
 
 TiDB Lightningは、データソースを256MB程度の複数のファイルに分割し、並列処理することで最適に動作します。各ファイルのサイズが大きすぎると、 TiDB Lightningが応答しない場合があります。
 
-データソースが CSV であり、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、"strict format"をオンにして、 TiDB Lightning が大きなファイルを自動的に分割するようにできます。
+データソースが CSV であり、すべての CSV ファイルに改行制御文字 (U+000A および U+000D) を含むフィールドがない場合は、"strict format"をオンにして、 TiDB Lightning が大きなファイルを自動的に分割するようにすることができます。
 
 ```toml
 [mydumper]
@@ -154,7 +154,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 ### TiDB Lightningがモードを切り替えるときに、 `rpc error: code = Unimplemented ...` {#encounter-rpc-error-code--unimplemented--when-tidb-lightning-switches-the-mode}
 
-**原因**: クラスター内の一部のノードが`switch-mode`をサポートしていません。例えば、 TiFlash のバージョンが`v4.0.0-rc.2`より前の場合、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)。
+**原因**: クラスタ内の一部のノードが`switch-mode`をサポートしていません。例えば、 TiFlash のバージョンが`v4.0.0-rc.2`より前の場合、 [`switch-mode`はサポートされていません](https://github.com/pingcap/tidb-lightning/issues/273)。
 
 **ソリューション**：
 
@@ -165,7 +165,7 @@ tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-error-destroy=
 
 TiDB Lightning Local-backend は、v4.0.0 以降のバージョンの TiDB クラスターへのデータインポートのみをサポートしています。Local-backend を使用して v2.x または v3.x クラスターにデータをインポートしようとすると、上記のエラーが報告されます。その場合は、設定を変更して、データのインポートに Importer-backend または TiDB-backend を使用するように設定できます。
 
-`nightly`バージョンの中には、v4.0.0-beta.2 に類似しているものもあります。これらの`nightly`バージョンのTiDB Lightning は、実際にはローカルバックエンドをサポートしています。`nightly`バージョンの使用時にこのエラーが発生した場合は、設定`check-requirements = false`を設定することでバージョンチェックを省略できます。このパラメーターを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうでない場合、インポートが失敗する可能性があります。
+`nightly`バージョンの中には、v4.0.0-beta.2 に類似しているものもあります。これらの`nightly`バージョンのTiDB Lightning は、実際にはローカルバックエンドをサポートしています。`nightly`バージョンの使用時にこのエラーが発生した場合は、設定`check-requirements = false`を設定することでバージョンチェックを省略できます。このパラメータを設定する前に、 TiDB Lightningの設定が対応するバージョンをサポートしていることを確認してください。そうでない場合、インポートが失敗する可能性があります。
 
 ### `restore table test.district failed: unknown columns in header [...]` {#restore-table-testdistrict-failed-unknown-columns-in-header-}
 

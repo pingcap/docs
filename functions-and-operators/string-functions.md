@@ -326,7 +326,7 @@ SELECT CONCAT_WS(',', 'TiDB Server', 'TiKV', 'PD');
 +---------------------------------------------+
 ```
 
-- セパレーターが空の文字列の場合、 `CONCAT_WS()` `CONCAT()`と同等となり、残りの引数を連結した文字列を返します。
+- セパレータが空の文字列の場合、 `CONCAT_WS()` `CONCAT()`と同等となり、残りの引数を連結した文字列を返します。
 
     例：
 
@@ -639,7 +639,7 @@ mysql> SELECT FROM_BASE64('MTIzNDU2');
 
 > **Note:**
 >
-> MySQLクライアントでは、対話型モードではデフォルトで[`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションが有効になっており、不明な文字セットを持つデータは[16進数リテラル](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html)として表示されます。この動作を無効にするには、 `--skip-binary-as-hex`オプションを使用します。
+> MySQLクライアントでは、対話モードではデフォルトで[`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションが有効になっており、不明な文字セットを持つデータは[16進数リテラル](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html)として表示されます。この動作を無効にするには、 `--skip-binary-as-hex`オプションを使用します。
 
 例（ `mysql --skip-binary-as-hex` ）:
 
@@ -890,7 +890,7 @@ SELECT LEFT(NULL, 3);
 
 `LENGTH()`関数は文字列の長さをバイト単位で返します。
 
-`LENGTH()`マルチバイト文字を複数バイトとしてカウントし、 `CHAR_LENGTH()`マルチバイト文字を単一のコードポイントとしてカウントします。
+`LENGTH()`マルチバイト文字を複数バイトとしてカウントし、 `CHAR_LENGTH()`マルチバイト文字を単一のコード ポイントとしてカウントします。
 
 引数が`NULL`の場合、関数は`NULL`を返します。
 
@@ -932,7 +932,7 @@ SELECT LENGTH(NULL);
 
 `LIKE`演算子は単純な文字列マッチングに使用されます。式`expr LIKE pat [ESCAPE 'escape_char']` `1` ( `TRUE` ) または`0` ( `FALSE` ) を返します。`expr`または`pat`のいずれかが`NULL`の場合、結果は`NULL`になります。
 
-`LIKE`では次の2つのワイルドカードパラメーターを使用できます。
+`LIKE`では次の2つのワイルドカード パラメータを使用できます。
 
 - `%` 、ゼロ文字を含む任意の数の文字に一致します。
 - `_` 1つの文字と一致します。
@@ -2259,7 +2259,7 @@ SELECT UCASE('bigdata') AS result_upper, UCASE(null) AS result_null;
 > **Note:**
 >
 > - 引数は`0` ～ `9` 、 `A` ～ `F` 、または`a` ～ `f`を含む有効な16進数値でなければなりません。引数が`NULL`またはこの範囲外の場合、関数は`NULL`を返します。
-> - MySQLクライアントでは、対話型モードではデフォルトで[`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションが有効になっており、不明な文字セットを持つデータは[16進数リテラル](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html)として表示されます。この動作を無効にするには、 `--skip-binary-as-hex`オプションを使用します。
+> - MySQLクライアントでは、対話モードではデフォルトで[`--binary-as-hex`](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html#option_mysql_binary-as-hex)オプションが有効になっており、不明な文字セットを持つデータは[16進数リテラル](https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html)として表示されます。この動作を無効にするには、 `--skip-binary-as-hex`オプションを使用します。
 
 例：
 
@@ -2311,7 +2311,7 @@ WEIGHT_STRING(str [AS {CHAR|BINARY}(N)])
 
 - `str` : 入力文字列式。`CHAR` 、 `VARCHAR` 、 `TEXT`などの非バイナリ文字列の場合、戻り値には文字列の照合順序重みが含まれます。`BINARY` 、 `VARBINARY` 、 `BLOB`などのバイナリ文字列の場合、戻り値は入力値と同じになります。
 
-- `AS {CHAR|BINARY}(N)` : 出力のタイプと長さを指定するために使用されるオプションのパラメーター。`CHAR`は文字データ型を表し、 `BINARY`はバイナリデータ型を表します。`N`は出力長を指定します。これは 1 以上の整数です。
+- `AS {CHAR|BINARY}(N)` : 出力のタイプと長さを指定するために使用されるオプションのパラメータ。`CHAR`は文字データ型を表し、 `BINARY`はバイナリ データ型を表します。`N`は出力長を指定します。これは 1 以上の整数です。
 
 > **Note:**
 >
@@ -2373,7 +2373,7 @@ TiDB と MySQL 間の`match_type`の値オプションは次のとおりです�
 
 バイナリ文字列型に対する TiDB と MySQL のサポートの違い:
 
-- MySQL 8.0.22以降、正規表現関数ではバイナリ文字列をサポートしていません。詳細については[MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/regexp.html)を参照してください。ただし、実際には、すべてのパラメーターまたは戻り値の型がバイナリ文字列である場合、MySQLで正規関数は正常に動作します。それ以外の場合は、エラーが報告されます。
+- MySQL 8.0.22以降、正規表現関数ではバイナリ文字列をサポートしていません。詳細については[MySQLドキュメント](https://dev.mysql.com/doc/refman/8.0/en/regexp.html)を参照してください。ただし、実際には、すべてのパラメータまたは戻り値の型がバイナリ文字列である場合、MySQLで正規関数は正常に動作します。それ以外の場合は、エラーが報告されます。
 - 現在、TiDB ではバイナリ文字列の使用が禁止されており、どのような状況でもエラーが報告されます。
 
 ### その他の互換性 {#other-compatibility}
