@@ -22,7 +22,7 @@ summary: "`tidbcloud_dedicated_cluster` リソースを使用してTiDB Cloud De
 
 ## `tidbcloud_projects`データソースを使用してプロジェクト ID を取得する {#get-project-ids-using-the-tidbcloud-projects-data-source}
 
-各TiDB Cloud Dedicatedクラスタはプロジェクトに属します。TiDB Cloud Dedicatedクラスタを作成する前に、クラスタを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
+各TiDB Cloud Dedicatedクラスターはプロジェクトに属します。TiDB Cloud Dedicatedクラスターを作成する前に、クラスターを作成するプロジェクトのIDを取得する必要があります。`project_id`が指定されていない場合は、デフォルトのプロジェクトが使用されます。
 
 利用可能なすべてのプロジェクトに関する情報を取得するには、次のように`tidbcloud_projects`データソースを使用します。
 

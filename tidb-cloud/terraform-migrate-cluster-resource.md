@@ -3,7 +3,7 @@ title: Migrate Cluster Resource to Serverless or Dedicated Cluster Resource
 summary: クラスターリソースをサーバーレスまたは専用のクラスターリソースに移行する方法を学習します。
 ---
 
-# クラスタリソースをサーバーレスまたは専用クラスタリソースに移行する {#migrate-cluster-resource-to-serverless-or-dedicated-cluster-resource}
+# クラスターリソースをサーバーレスまたは専用クラスターリソースに移行する {#migrate-cluster-resource-to-serverless-or-dedicated-cluster-resource}
 
 TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソースが`tidbcloud_serverless_cluster`と`tidbcloud_dedicated_cluster`の2つの新しいリソースに置き換えられます。TiDB Cloud Terraform Provider v0.4.0 以降のバージョンをご利用の場合は、このドキュメントに従って`tidbcloud_cluster`リソースを`tidbcloud_serverless_cluster`または`tidbcloud_dedicated_cluster`リソースに移行できます。
 
@@ -37,7 +37,7 @@ TiDB Cloud Terraform Provider v0.4.0 以降では、 `tidbcloud_cluster`リソ�
 terraform state rm ${your_target_cluster_resource}
 ```
 
-## ステップ3. ターゲットクラスタリソースの構成を削除する {#step-3-delete-the-configuration-of-your-target-cluster-resource}
+## ステップ3. ターゲットクラスターリソースの構成を削除する {#step-3-delete-the-configuration-of-your-target-cluster-resource}
 
 `.tf`ファイルで、ターゲットクラスターリソースの構成を見つけて、対応するコードを削除します。
 

@@ -155,7 +155,7 @@ summary: クラスターリソースを使用してTiDB Cloudクラスターを�
 
     次の行をクリックすると、参考用の例の結果の一部が表示されます。
 
-    <details><summary>クラスタ仕様</summary>
+    <details><summary>クラスター仕様</summary>
 
     ```
     {
@@ -604,13 +604,13 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 ステータス`MODIFYING`は、クラスターが現在変更中であることを示します。しばらくお待ちください。ステータスは`AVAILABLE`に変更されます。
 
-### TiDB クラスタをスケールする {#scale-a-tidb-cluster}
+### TiDB クラスターをスケールする {#scale-a-tidb-cluster}
 
 ステータスが`AVAILABLE`の場合、TiDB クラスターをスケーリングできます。
 
 1. [クラスターを作成する](#create-a-cluster-using-the-cluster-resource)際に使用される`cluster.tf`ファイルで、 `components`構成を編集します。
 
-    たとえば、TiDB 用にさらに 1つのノード、TiKV 用にさらに 3つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスタ仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)できます)、およびTiFlash用にさらに 1つのノードを追加するには、次のように構成を編集します。
+    たとえば、TiDB 用にさらに 1つのノード、TiKV 用にさらに 3つのノード (TiKV ノードの数は、ステップが 3 であるため 3 の倍数である必要があります。[クラスター仕様からこの情報を取得](#get-cluster-specification-information-using-the-tidbcloud_cluster_specs-data-source)できます)、およびTiFlash用にさらに 1つのノードを追加するには、次のように構成を編集します。
 
    ```
    components = {
@@ -833,7 +833,7 @@ TiDB Cloud Dedicated クラスターの場合、Terraform を使用して次の�
 
 6. 少し待ってから、コマンド`terraform refresh`で状態を更新します。最終的にステータスは`AVAILABLE`に変更されます。
 
-これで、Terraform を使用してTiDB Cloud Dedicated クラスタを作成および管理できました。次に、 [`tidbcloud_backup`](/tidb-cloud/terraform-use-backup-resource.md)リソースでクラスタのバックアップを作成してみましょう。
+これで、Terraform を使用してTiDB Cloud Dedicated クラスターを作成および管理できました。次に、 [`tidbcloud_backup`](/tidb-cloud/terraform-use-backup-resource.md)リソースでクラスターのバックアップを作成してみましょう。
 
 ## クラスターをインポートする {#import-a-cluster}
 
@@ -908,7 +908,7 @@ Terraform で管理されていない TiDB クラスターの場合は、イン�
     }
     ```
 
-4. Terraformを使用してクラスタを管理するには、前の手順の出力を設定ファイルにコピーします。`id`と`status`行はTerraformによって制御されるため、削除する必要があることに注意してください。
+4. Terraformを使用してクラスターを管理するには、前の手順の出力を設定ファイルにコピーします。`id`と`status`行はTerraformによって制御されるため、削除する必要があることに注意してください。
 
     ```
     resource "tidbcloud_cluster" "import_cluster" {

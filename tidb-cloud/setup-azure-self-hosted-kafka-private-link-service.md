@@ -30,7 +30,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     - プライベートリンクサービスを管理する
     - 仮想マシンに接続して Kafka ノードを構成する
 
-2. Azure 上に TiDB Cloud Dedicated クラスターがない場合は、[TiDB Cloud Dedicatedクラスタを作成](/tidb-cloud/create-tidb-cluster.md)します。
+2. Azure 上に TiDB Cloud Dedicated クラスターがない場合は、[TiDB Cloud Dedicatedクラスターを作成](/tidb-cloud/create-tidb-cluster.md)します。
 
 3. [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターから Kafka デプロイメント情報を取得します。
 
@@ -129,7 +129,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     - **Local File**: 以前にダウンロードした秘密鍵ファイルを選択します
     - **Open in new browser tab**オプションを選択します
 
-3. ブローカーノードの各ページで**Connect**をクリックすると、Linuxターミナルを表示する新しいブラウザタブが開きます。3つのブローカーノード用に、Linuxターミナルを表示するブラウザタブを3つ開く必要があります。
+3. ブローカーノードの各ページで**Connect**をクリックすると、Linuxターミナルを表示する新しいブラウザータブが開きます。3つのブローカーノード用に、Linuxターミナルを表示するブラウザータブを3つ開く必要があります。
 
 4. 各 Linux ターミナルで次のコマンドを実行して、各ブローカーノードにバイナリをダウンロードします。
 
@@ -314,7 +314,7 @@ summary: このドキュメントでは、Azure でセルフホスト型 Kafka �
     consume_messages
     ```
 
-4. `produce.sh`と`consume.sh`スクリプトを実行します。これらのスクリプトは、接続とメッセージフローを自動的にテストし、Kafkaクラスターが正しく機能していることを確認します。`produce.sh`スクリプトは、 `--partitions 3 --replication-factor 3`でトピックを作成し、テストメッセージを送信し、 `--broker-list`パラメータを使用して3つのブローカーすべてに接続します。`consume.sh`スクリプトは、トピックからメッセージを読み取り、メッセージの配信が成功したことを確認します。
+4. `produce.sh`と`consume.sh`スクリプトを実行します。これらのスクリプトは、接続とメッセージフローを自動的にテストし、Kafkaクラスターが正しく機能していることを確認します。`produce.sh`スクリプトは、 `--partitions 3 --replication-factor 3`でトピックを作成し、テストメッセージを送信し、 `--broker-list`パラメーターを使用して3つのブローカーすべてに接続します。`consume.sh`スクリプトは、トピックからメッセージを読み取り、メッセージの配信が成功したことを確認します。
 
     ```shell
     # Test write message.
@@ -504,7 +504,7 @@ b3.abc.eastus.azure.3199745.tidbcloud.com:9095 (id: 3 rack: null) -> ERROR: org.
 
 2. **Basic**タブで、 **Subscription** 、 **Resource group** 、 **Region**を選択し、 **Name**フィールドに`kafka-pls`と入力して、 **Next : Outbound settings >**をクリックします。
 
-3. **Outbound settings**タブで、次のようにパラメータを入力し、 **Next : Access security >**をクリックします。
+3. **Outbound settings**タブで、次のようにパラメーターを入力し、 **Next : Access security >**をクリックします。
 
     - **Load balancer**： `kafka-lb`
     - **Load balancer frontend IP address**: `kafka-lb-ip`

@@ -116,7 +116,7 @@ TiDB Cloudは、耐久性と高可用性を実現するために、選択した�
 
 > **Note:**
 >
-> TiDB クラスターをスケールすると、3つのアベイラビリティゾーンのノードが同時に増減します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスタのスケール](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
+> TiDB クラスターをスケールすると、3つのアベイラビリティゾーンのノードが同時に増減します。ニーズに応じて TiDB クラスターをスケールインまたはスケールアウトする方法については、 [TiDBクラスターのスケール](/tidb-cloud/scale-tidb-cluster.md)を参照してください。
 
 TiKVは主にデータストレージに使用されますが、TiKVノードのパフォーマンスはワークロードによって異なります。そのため、TiKVノードの数を計画する際には、 [**データ量**](#estimate-tikv-node-count-according-to-data-volume)と[期待されるパフォーマンス](#estimate-tikv-node-count-according-to-expected-performance)両方に基づいて見積もり、そのうち大きい方の見積もりを推奨ノード数とする必要があります。
 

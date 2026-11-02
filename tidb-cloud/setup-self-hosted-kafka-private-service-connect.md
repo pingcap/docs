@@ -33,7 +33,7 @@ Google Cloud でセルフホスト型 Kafka に Private Service Connect を設�
     - Private Service Connect を管理する
     - VMノードに接続してKafkaノードを構成する
 
-2. 持っていない場合は[TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+2. 持っていない場合は[TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 3. TiDB Cloud Dedicated クラスターから Kafka デプロイメント情報を取得します。
 

@@ -18,7 +18,7 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
 - TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
     - [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+    - [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
@@ -70,7 +70,7 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
     }
     ```
 
-    ファイル内のリソース値（プロジェクトID、クラスタID、CSVパスなど）をご自身のものに置き換えてください。 `csv_format`の詳細は [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
+    ファイル内のリソース値（プロジェクトID、クラスターID、CSVパスなど）をご自身のものに置き換えてください。 `csv_format`の詳細は [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
 
 3. `terraform apply`コマンドを実行してインポートタスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 

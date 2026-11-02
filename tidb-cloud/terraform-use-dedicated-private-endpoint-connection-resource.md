@@ -20,7 +20,7 @@ summary: "`tidbcloud_dedicated_private_endpoint_connection` リソースを使�
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) v0.4.0以降。
-- [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+- [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## TiDB Cloud Dedicatedプライベートエンドポイント接続を作成する {#create-a-tidb-cloud-dedicated-private-endpoint-connection}
 
@@ -57,7 +57,7 @@ summary: "`tidbcloud_dedicated_private_endpoint_connection` リソースを使�
 
     - `tidbcloud_dedicated_private_endpoint_connection`リソースを使用するには、リソースタイプを`tidbcloud_dedicated_private_endpoint_connection`に設定します。
     - リソース名は必要に応じて定義できます。例： `example` 。
-    - 必要な引数の値を取得する方法がわからない場合は、 [AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+    - 必要な引数の値を取得する方法がわからない場合は、 [AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
     - TiDB Cloud Dedicated プライベートエンドポイント接続の仕様情報を取得するには、 [tidbcloud_private_endpoint_connection (リソース)](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/dedicated_private_endpoint_connection)を参照してください。
 
 3. `terraform apply`コマンドを実行します。リソースを適用する場合は`terraform apply --auto-approve`の使用は推奨されません。
