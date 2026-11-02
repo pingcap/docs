@@ -83,7 +83,7 @@ grubby --update-kernel="$KERNEL" --args='transparent_hugepage=never'
 
 #### I/Oスケジューラー {#io-scheduler}
 
-I/Oスケジューラーは、ストレージデバイス上でI/O操作を実行するタイミングと時間を決定します。I/Oエレベータとも呼ばれます。SSDデバイスの場合、I/Oスケジューリングポリシーを`noop`に設定することをお勧めします。
+I/Oスケジューラーは、ストレージデバイス上でI/O操作を実行するタイミングと時間を決定します。I/Oエレベーターとも呼ばれます。SSDデバイスの場合、I/Oスケジューリングポリシーを`noop`に設定することをお勧めします。
 
 ```shell
 echo noop > /sys/block/${SSD_DEV_NAME}/queue/scheduler
