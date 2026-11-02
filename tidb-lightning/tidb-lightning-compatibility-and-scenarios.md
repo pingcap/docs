@@ -23,7 +23,7 @@ summary: IMPORT INTO およびTiDB Lightning とログバックアップおよ�
 
 ## TiDB Lightning論理インポートモードのシナリオ {#scenarios-for-tidb-lightning-logical-import-mode}
 
-TiDB Lightning論理インポートモードがアプリケーションのパフォーマンス要件を満たすことができ、アプリケーションでインポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、 TiDB Lightning論理インポートモードを使用することをお勧めします。
+TiDB Lightning論理インポートモードがアプリケーションのパフォーマンス要件を満たせ、アプリケーションでインポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、 TiDB Lightning論理インポートモードを使用することをお勧めします。
 
 ## TiDB Lightning物理インポートモードのシナリオ {#scenarios-for-tidb-lightning-physical-import-mode}
 

@@ -108,7 +108,7 @@ SELECT year, month, SUM(profit) AS profit from bank GROUP BY year, month WITH RO
 - 2 行目の値`profit`は 1 次元グループ`{year}`からのもので、中間レベルのグループ`{2001}`の集計結果を表しています。
 - 最後の行の`profit`の値は 0 次元のグループ化`{}`から取得され、全体的な集計結果を表します。
 
-`WITH ROLLUP`の結果のうち`NULL`値は、Aggregate 演算子が適用される直前に生成されます。したがって、 `SELECT` 、 `HAVING` 、 `ORDER BY`句で`NULL`値を使用して、集計結果をさらに絞り込むことができます。
+`WITH ROLLUP`の結果のうち`NULL`値は、Aggregate 演算子が適用される直前に生成されます。したがって、 `SELECT` 、 `HAVING` 、 `ORDER BY`句で`NULL`値を使用して、集計結果をさらに絞り込めます。
 
 たとえば、 `HAVING`句の`NULL`を使用して、2 次元グループの集計結果のみをフィルタリングして表示できます。
 
@@ -143,7 +143,7 @@ SELECT year, month, SUM(profit) AS profit, grouping(year) as grp_year, grouping(
 6 rows in set (0.028 sec)
 ```
 
-この出力では、 `grp_year`と`grp_month`結果から行の集計ディメンションを直接把握でき、 `year`と`month`グループ化式におけるネイティブの`NULL`値からの干渉を防ぐことができます。
+この出力では、 `grp_year`と`grp_month`結果から行の集計ディメンションを直接把握でき、 `year`と`month`グループ化式におけるネイティブの`NULL`値からの干渉を防げます。
 
 `GROUPING()`関数は、最大 64 個のグループ化式をパラメーターとして受け入れることができます。複数のパラメーターが出力された場合、各パラメーターは`0`または`1`という結果を生成し、これらのパラメーターは合計で 64 ビットの`UNSIGNED LONGLONG`を形成し、各ビットは`0`または`1`となります。各パラメーターのビット位置を取得するには、次の式を使用します。
 

@@ -17,7 +17,7 @@ summary: TiCDC の使用時に発生する可能性のある問題のトラブ�
 
 - Grafanaダッシュボードで、レプリケーションタスクの監視メトリック`changefeed checkpoint` （適切な`changefeed id`を選択）を確認してください。メトリック値が変化しない場合、またはメトリック`checkpoint lag`が増加し続ける場合、レプリケーションタスクが中断されている可能性があります。
 - 監視メトリック`exit error count`を確認してください。メトリック値が`0`より大きい場合、レプリケーションタスクでエラーが発生しました。
-- `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。`stopped`はタスクが停止したことを意味し、 `error`は詳細なエラーメッセージを示します。エラー発生後、TiCDCサーバーログで`error on running processor`を検索してエラースタックを確認し、トラブルシューティングを行うことができます。
+- `cdc cli changefeed list`と`cdc cli changefeed query`を実行して、レプリケーションタスクのステータスを確認します。`stopped`はタスクが停止したことを意味し、 `error`は詳細なエラーメッセージを示します。エラー発生後、TiCDCサーバーログで`error on running processor`を検索してエラースタックを確認し、トラブルシューティングを行えます。
 - 極端なケースでは、TiCDC サービスが再起動されることがあります。トラブルシューティングのために、TiCDCサーバーログの`FATAL`レベルのログを検索できます。
 
 ### レプリケーションタスクが手動で停止されたかどうかを確認するにはどうすればよいですか? {#how-do-i-know-whether-the-replication-task-is-stopped-manually}
@@ -74,7 +74,7 @@ Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time zone. Skippin
 
 ダウンストリームが特殊なMySQL環境（パブリッククラウドRDSまたは一部のMySQL派生バージョン）であり、前述の方法によるタイムゾーンのインポートに失敗した場合は、シンクURIの`time-zone`を空の値（例： `time-zone=""` ）に設定することで、ダウンストリームのデフォルトのタイムゾーンを使用できます。`time-zone`は`mysql`と`tidb`シンクにのみ有効であることに注意してください。
 
-`mysql`と`tidb`シンクを使用する場合は、タイムゾーンを明示的に指定することをお勧めします（例： `time-zone="Asia/Shanghai"`）。また、TiCDCサーバー構成で指定する`tz`とシンクURIで指定する`time-zone`が、下流データベースのタイムゾーン設定と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合を防ぐことができます。
+`mysql`と`tidb`シンクを使用する場合は、タイムゾーンを明示的に指定することをお勧めします（例： `time-zone="Asia/Shanghai"`）。また、TiCDCサーバー構成で指定する`tz`とシンクURIで指定する`time-zone`が、下流データベースのタイムゾーン設定と一致していることを確認してください。これにより、タイムゾーンの不一致によるデータの不整合を防げます。
 
 ## TiCDC のアップグレードによって発生した設定ファイルの非互換性の問題をどのように処理すればよいですか? {#how-do-i-handle-the-incompatibility-issue-of-configuration-files-caused-by-ticdc-upgrade}
 

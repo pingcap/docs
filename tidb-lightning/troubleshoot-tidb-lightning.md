@@ -58,7 +58,7 @@ strict-format = true
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode
 ```
 
-次のコマンドを使用して、クラスターを強制的に"normal mode"に戻すことができます。
+次のコマンドを使用して、クラスターを強制的に"normal mode"に戻せます。
 
 ```sh
 tidb-lightning-ctl --config tidb-lightning.toml --fetch-mode

@@ -76,7 +76,7 @@ DMオープンソースプロジェクトへのご参加を歓迎いたします
 
 ## コミュニティのサポート {#community-support}
 
-DMについては、オンラインドキュメントで詳しく学ぶことができます。ご質問があれば、 [GitHub](https://github.com/pingcap/tiflow/tree/release-8.5/dm)でお問い合わせください。
+DMについては、オンラインドキュメントで詳しく学べます。ご質問があれば、 [GitHub](https://github.com/pingcap/tiflow/tree/release-8.5/dm)でお問い合わせください。
 
 ## ライセンス {#license}
 

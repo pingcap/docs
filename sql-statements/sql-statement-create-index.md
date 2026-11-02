@@ -184,7 +184,7 @@ DROP INDEX idx1 ON t1;
 
 <CustomContent platform="tidb">
 
-それでもこれらの式を使用したい場合は、 [TiDB設定ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行うことができます。
+それでもこれらの式を使用したい場合は、 [TiDB設定ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行えます。
 
 ```sql
 allow-expression-index = true

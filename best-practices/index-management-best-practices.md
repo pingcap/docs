@@ -124,7 +124,7 @@ DESC TIDB_INDEX_USAGE;
 SELECT * FROM INFORMATION_SCHEMA.TIDB_INDEX_USAGE INTO OUTFILE '/backup/index_usage_snapshot.csv';
 ```
 
-これにより、時間の経過に伴うスナップショットの比較による履歴追跡が可能になり、インデックスの使用傾向を検出し、より情報に基づいたプルーニングの決定を行うことができます。
+これにより、時間の経過に伴うスナップショットの比較による履歴追跡が可能になり、インデックスの使用傾向を検出し、より情報に基づいたプルーニングの決定を行えます。
 
 ## `CLUSTER_TIDB_INDEX_USAGE`を使用して TiDB ノード間でインデックス使用状況データを統合する {#consolidate-index-usage-data-across-tidb-nodes-using-cluster-tidb-index-usage}
 

@@ -465,7 +465,7 @@ RUNNING_JOBS: ID:121, Type:add index, State:running, SchemaState:write reorganiz
 
 `cop task`は、分散実行のために KV エンドにプッシュダウンされるコンピューティングタスクです。`root task` 、TiDB エンドでの単一ポイント実行のためのコンピューティングタスクです。
 
-通常、 `root task`の入力データは`cop task`から取得されます。`root task`がデータを処理している間、TiKVの`cop task`が同時にデータを処理し、TiDBの`root task`からのプルを待機します。したがって、 `cop`タスクは`root task`と並行して実行されていると見なすことができますが、それらのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間並行して実行されます。たとえば、最初の`cop task`は[100, 200]のデータを処理し、2番目の`cop task`は[1, 100]のデータを処理します。詳細は[TiDBクエリプランの理解](/explain-overview.md)を参照してください。
+通常、 `root task`の入力データは`cop task`から取得されます。`root task`がデータを処理している間、TiKVの`cop task`が同時にデータを処理し、TiDBの`root task`からのプルを待機します。したがって、 `cop`タスクは`root task`と並行して実行されていると見なせますが、それらのデータには上流と下流の関係があります。実行プロセス中、それらはしばらくの間並行して実行されます。たとえば、最初の`cop task`は[100, 200]のデータを処理し、2番目の`cop task`は[1, 100]のデータを処理します。詳細は[TiDBクエリプランの理解](/explain-overview.md)を参照してください。
 
 ## データベースの最適化 {#database-optimization}
 

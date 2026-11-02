@@ -82,7 +82,7 @@ Titan は、RocksDB の TablePropertiesCollector および EventListener コン�
 
 #### TablePropertiesCollector {#tablepropertiescollector}
 
-RocksDBは、カスタムテーブルプロパティコレクターであるBlobFileSizeCollectorを使用して、SSTからプロパティを収集し、対応するSSTファイルに書き込むことができます。収集されたプロパティはBlobFileSizePropertiesという名前になります。次の図は、BlobFileSizeCollectorのワークフローとデータ形式を示しています。
+RocksDBは、カスタムテーブルプロパティコレクターであるBlobFileSizeCollectorを使用して、SSTからプロパティを収集し、対応するSSTファイルに書き込めます。収集されたプロパティはBlobFileSizePropertiesという名前になります。次の図は、BlobFileSizeCollectorのワークフローとデータ形式を示しています。
 
 ![BlobFileSizeProperties](/media/titan/titan-4.png)
 

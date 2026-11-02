@@ -18,7 +18,7 @@ TiKVのストレージエンジンである[RocksDB](https://rocksdb.org/)は、
 
 ### Titanを有効にする {#enable-titan}
 
-[Titan](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[RocksDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らすことができます。
+[Titan](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[RocksDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らせます。
 
 平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size`を`"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan によるコンパクション I/O フローの削減を有効にできます。
 
@@ -36,7 +36,7 @@ blob-file-compression = "zstd"
 
 ### すべての圧縮レベルを上げる {#increase-all-the-compression-levels}
 
-平均行サイズが 512 バイトより小さい場合は、次のようにして、デフォルトのカラムファミリーのすべての圧縮レベルを`"zstd"`に増やすことができます。
+平均行サイズが 512 バイトより小さい場合は、次のようにして、デフォルトのカラムファミリーのすべての圧縮レベルを`"zstd"`に増やせます。
 
 ```toml
 [rocksdb.defaultcf]
@@ -165,7 +165,7 @@ TiDBクラスターでは、TSO（Timestamp Oracle）の提供やリクエスト
 
 ### PDパフォーマンスの調整 {#tune-pd-performance}
 
-PDサーバーでの CPU 使用率が高い問題を解決するには、次のチューニング調整を行うことができます。
+PDサーバーでの CPU 使用率が高い問題を解決するには、次のチューニング調整を行えます。
 
 #### PD設定を調整する {#adjust-pd-configuration}
 
@@ -185,7 +185,7 @@ set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
 
 #### TiKV設定を調整する {#adjust-tikv-configuration}
 
-リージョンの数を減らし、システムのハートビートビートのオーバーヘッドを軽減するには、 [リージョンのサイズを調整する](/best-practices/massive-regions-best-practices.md#method-6-adjust-region-size)を参照して、TiKV 構成でリージョンのサイズを適度に増やすことができます。
+リージョンの数を減らし、システムのハートビートビートのオーバーヘッドを軽減するには、 [リージョンのサイズを調整する](/best-practices/massive-regions-best-practices.md#method-6-adjust-region-size)を参照して、TiKV 構成でリージョンのサイズを適度に増やせます。
 
 ```
 [coprocessor]

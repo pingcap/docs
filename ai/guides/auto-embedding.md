@@ -65,7 +65,7 @@ table.bulk_insert([
 
 ### ステップ4. ベクトル検索を実行する {#step-4-perform-a-vector-search}
 
-クエリテキストを`search()`メソッドに直接渡すことができます。クエリテキストは自動的に埋め込まれ、ベクトル検索に使用されます。
+クエリテキストを`search()`メソッドに直接渡せます。クエリテキストは自動的に埋め込まれ、ベクトル検索に使用されます。
 
 ```python
 table.search("HTAP database").limit(3).to_list()

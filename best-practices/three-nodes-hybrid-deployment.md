@@ -60,7 +60,7 @@ tikv:
 
 #### `server.grpc-concurrency` {#server-grpc-concurrency}
 
-既存のデプロイメントプランではCPUリソースが限られており、実際のリクエスト数も少ないため、監視パネルを監視し、 [`server.grpc-concurrency`](/tikv-configuration-file.md#grpc-concurrency)の値を下げて使用率を80%未満に保つことができます。
+既存のデプロイメントプランではCPUリソースが限られており、実際のリクエスト数も少ないため、監視パネルを監視し、 [`server.grpc-concurrency`](/tikv-configuration-file.md#grpc-concurrency)の値を下げて使用率を80%未満に保てます。
 
 このテストでは、このパラメーターの値は`2`に設定されています。**gRPC poll CPU**パネルを確認すると、使用率が約 80% であることがわかります。
 

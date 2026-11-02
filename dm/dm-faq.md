@@ -16,7 +16,7 @@ Alibaba Cloud RDS の主キーのないアップストリームテーブルの�
 互換性に関する既知の問題は次のとおりです。
 
 - **Alibaba Cloud RDS**では、主キーのないアップストリームテーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
-- **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
+- **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取れますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
 
 ## タスク構成のブロックおよび許可リストの正規表現は`non-capturing (?!)`をサポートしていますか? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-non-capturing-}
 
@@ -231,7 +231,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 次の方法で設定することで、この問題を事前に回避できます。
 
 1. 移行タスクが完了する前に必要なbinlogファイルが誤って削除されるのを防ぐため、上流のMySQLデータベースで`expire_logs_days`の値を増やしてください。データ量が多い場合は、タスクを高速化するために、DumplingとTiDB Lightningを同時に使用することをお勧めします。
-2. このタスクのリレーログ機能を有効にすると、binlogの位置が消去されていても DM がリレーログからデータを読み取ることができます。
+2. このタスクのリレーログ機能を有効にすると、binlogの位置が消去されていても DM がリレーログからデータを読み取れます。
 
 ## クラスターがTiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスターの Grafana ダッシュボードに`failed to fetch dashboard`と表示されるのはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-failed-to-fetch-dashboard-if-the-cluster-is-deployed-using-tiup-v130-or-v131}
 
