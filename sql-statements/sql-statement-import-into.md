@@ -133,7 +133,7 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 
 > **Note:**
 >
-> Use only one file format per import job. If a wildcard matches files with different extensions (for example, `.csv` and `.sql` in the same pattern), the pre-check fails. Import files of each format separately using their own `IMPORT INTO` statement.
+> Use only one file format per import job. If a wildcard matches files with different extensions (for example, `.csv` and `.sql` in the same pattern), the precheck fails. Import files of each format separately using their own `IMPORT INTO` statement.
 
 ### Format
 
@@ -162,7 +162,7 @@ The supported options are described as follows:
 | `CHECKSUM_TABLE='<string>'` | All file formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
 | `DETACHED` | All file formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
 | `CLOUD_STORAGE_URI` | All file formats | Specifies the target address where encoded KV data for [Global Sort](/tidb-global-sort.md) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket, including at least these permissions: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, `s3: AbortMultipartUpload`. |
-| `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables pre-checks of non-critical items, such as checking whether there are CDC or PITR tasks.  |
+| `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables prechecks of non-critical items, such as checking whether there are CDC or PITR tasks.  |
 
 <CustomContent platform="tidb-cloud" plan="premium">
 

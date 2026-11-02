@@ -6,7 +6,7 @@ aliases: ['/docs/dev/sql-statements/sql-statement-rename-index/','/docs/dev/refe
 
 # RENAME INDEX
 
-The statement `ALTER TABLE .. RENAME INDEX` renames an existing index to a new name. This operation is instant in TiDB, and requires only a meta data change.
+The statement `ALTER TABLE .. RENAME INDEX` renames an existing index to a new name. This operation is instant in TiDB, and requires only a metadata change.
 
 ## Synopsis
 

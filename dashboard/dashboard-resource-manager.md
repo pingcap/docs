@@ -53,7 +53,7 @@ Before resource planning, you need to know the overall capacity of the cluster. 
 
     ![Calibrate by Workload](/media/dashboard/dashboard-resource-manager-calibrate-by-workload.png)
 
-    You can select a time range for estimation within the range of 10 minutes to 24 hours. The time zone used is the same as that of the front-end user.
+    You can select a time range for estimation within the range of 10 minutes to 24 hours. The time zone used is the same as that of the frontend user.
 
     - When the time window range does not fall between 10 minutes and 24 hours, the following error is displayed `ERROR 1105 (HY000): the duration of calibration is too short, which could lead to inaccurate output. Please make the duration between 10m0s and 24h0m0s`.
 

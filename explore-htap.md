@@ -79,7 +79,7 @@ After TiFlash is deployed, TiKV does not replicate data to TiFlash automatically
 
 ## Data processing
 
-With TiDB, you can simply enter SQL statements for query or write requests. For the tables with TiFlash replicas, TiDB uses the front-end optimizer to automatically choose the optimal execution plan.
+With TiDB, you can simply enter SQL statements for query or write requests. For the tables with TiFlash replicas, TiDB uses the frontend optimizer to automatically choose the optimal execution plan.
 
 > **Note:**
 >
@@ -93,7 +93,7 @@ With TiDB, you can simply enter SQL statements for query or write requests. For 
 
 When using TiDB, you can monitor the TiDB cluster status and performance metrics in either of the following ways:
 
-- [TiDB Dashboard](/dashboard/dashboard-intro.md): you can see the overall running status of the TiDB cluster, analyse distribution and trends of read and write traffic, and learn the detailed execution information of slow queries.
+- [TiDB Dashboard](/dashboard/dashboard-intro.md): you can see the overall running status of the TiDB cluster, analyze distribution and trends of read and write traffic, and learn the detailed execution information of slow queries.
 - [Monitoring system (Prometheus & Grafana)](/grafana-overview-dashboard.md): you can see the monitoring parameters of TiDB cluster-related components including PD, TiDB, TiKV, TiFlash, TiCDC, and Node_exporter.
 
 To see the alert rules of TiDB cluster and TiFlash cluster, see [TiDB cluster alert rules](/alert-rules.md) and [TiFlash alert rules](/tiflash/tiflash-alert-rules.md).

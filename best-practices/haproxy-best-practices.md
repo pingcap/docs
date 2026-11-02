@@ -136,7 +136,7 @@ haproxy --help
 | `-c` | Only performs a check of the configuration files and exits before trying to bind. |
 | `-n <limit>` | Limits the per-process connection limit to `<limit>`. |
 | `-m <limit>` | Limits the total allocatable memory to `<limit>` megabytes across all processes. |
-| `-N <limit>` | Sets the default per-proxy maxconn to `<limit>` instead of the builtin default value (usually 2000). |
+| `-N <limit>` | Sets the default per-proxy maxconn to `<limit>` instead of the built-in default value (usually 2000). |
 | `-L <name>` | Changes the local peer name to `<name>`, which defaults to the local hostname. |
 | `-p <file>` | Writes all processes' PIDs into `<file>` during startup. |
 | `-de` | Disables the use of epoll(7). epoll(7) is available only on Linux 2.6 and some custom Linux 2.4 systems. |

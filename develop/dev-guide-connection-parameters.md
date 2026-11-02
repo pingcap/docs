@@ -111,7 +111,7 @@ In particular, pay attention to the following note below the [formula](https://g
 > that for optimal throughput the number of active connections should be somewhere
 > near ((core_count * 2) + effective_spindle_count). Core count should not include
 > HT threads, even if hyperthreading is enabled. Effective spindle count is zero if
-> the active data set is fully cached, and approaches the actual number of spindles
+> the active dataset is fully cached, and approaches the actual number of spindles
 > as the cache hit rate falls. ... There hasn't been any analysis so far regarding
 > how well the formula works with SSDs.
 > ```

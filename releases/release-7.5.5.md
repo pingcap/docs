@@ -150,7 +150,7 @@ Quick access: [Quick start](https://docs.pingcap.com/tidb/v7.5/quick-start-with-
     + TiDB Data Migration (DM)
 
         - Fix the issue that automatically generated IDs in a table might have significant jumps after data import in physical import mode [#11768](https://github.com/pingcap/tiflow/issues/11768) @[D3Hunter](https://github.com/D3Hunter)
-        - Fix the issue that the pre-check of `start-task` fails when both TLS and `shard-mode` are configured [#11842](https://github.com/pingcap/tiflow/issues/11842) @[sunxiaoguang](https://github.com/sunxiaoguang)
+        - Fix the issue that the precheck of `start-task` fails when both TLS and `shard-mode` are configured [#11842](https://github.com/pingcap/tiflow/issues/11842) @[sunxiaoguang](https://github.com/sunxiaoguang)
         - Fix the issue that connecting to MySQL 8.0 fails when the password length exceeds 19 characters [#11603](https://github.com/pingcap/tiflow/issues/11603) @[fishiu](https://github.com/fishiu)
 
     + TiDB Lightning

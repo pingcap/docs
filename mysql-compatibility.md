@@ -8,13 +8,13 @@ aliases: ['/docs/dev/mysql-compatibility/','/docs/dev/reference/mysql-compatibil
 
 <CustomContent platform="tidb">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (phpMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](/develop/dev-guide-third-party-support.md#gui)) and the MySQL client can be used for TiDB.
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (PHPMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
+TiDB is highly compatible with the MySQL protocol and the common features and syntax of MySQL 8.x. The ecosystem tools for MySQL (phpMyAdmin, Navicat, MySQL Workbench, DBeaver and [more](https://docs.pingcap.com/tidb/stable/dev-guide-third-party-support#gui)) and the MySQL client can be used for TiDB.
 
 </CustomContent>
 
