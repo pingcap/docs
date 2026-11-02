@@ -55,7 +55,7 @@ tikv-server --labels region=<region>,zone=<zone>,host=<host>
 | デプロイ方法                    | 例                                                                                                                                 |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | 手動デプロイ                    | [トポロジーラベルに基づいてレプリカをスケジュールする](/schedule-replicas-by-topology-labels.md)                                                            |
-| TiUPを使用したデプロイ             | [地理的に分散した展開トポロジ](/geo-distributed-deployment-topology.md)                                                                        |
+| TiUPを使用したデプロイ             | [地理的に分散した展開トポロジー](/geo-distributed-deployment-topology.md)                                                                        |
 | TiDB Operatorを使用したデプロイメント | [KubernetesでTiDBクラスターを構成する](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data) |
 
 > **Note:**
@@ -422,7 +422,7 @@ CREATE PLACEMENT POLICY deploy221_primary_east1 LEADER_CONSTRAINTS="[+region=us-
 
 #### `PRIMARY_REGION`を使用する {#use-primary-region}
 
-クラスタートポロジに`region`ラベルが設定されている場合、 `PRIMARY_REGION`および`REGIONS`オプションを使用して、フォロワーの配置ポリシーを指定することもできます。
+クラスタートポロジーに`region`ラベルが設定されている場合、 `PRIMARY_REGION`および`REGIONS`オプションを使用して、フォロワーの配置ポリシーを指定することもできます。
 
 ```sql
 CREATE PLACEMENT POLICY eastandwest PRIMARY_REGION="us-east-1" REGIONS="us-east-1,us-east-2,us-west-1" SCHEDULE="MAJORITY_IN_PRIMARY" FOLLOWERS=4;

@@ -27,7 +27,7 @@
       - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
       - [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
       - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
-      - [接続プールと接続パラメータの設定](/develop/dev-guide-connection-parameters.md)
+      - [接続プールと接続パラメーターの設定](/develop/dev-guide-connection-parameters.md)
       - [Javaアプリケーション開発におけるベストプラクティス](/develop/java-app-best-practices.md)
     - Go
       - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
