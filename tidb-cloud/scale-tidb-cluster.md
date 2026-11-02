@@ -3,7 +3,7 @@ title: Scale Your TiDB Cluster
 summary: TiDB Cloudクラスターを拡張する方法を学びます。
 ---
 
-# TiDBクラスタのスケール {#scale-your-tidb-cluster}
+# TiDBクラスターのスケール {#scale-your-tidb-cluster}
 
 > **Note:**
 >

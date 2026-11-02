@@ -1,6 +1,6 @@
 ---
 title: Subscribe via Zoom
-summary: Zoom経由でアラート通知を受け取ることで、TiDBクラスタを監視する方法を学びましょう。
+summary: Zoom経由でアラート通知を受け取ることで、TiDBクラスターを監視する方法を学びましょう。
 ---
 
 # Zoom経由で購読する {#subscribe-via-zoom}
@@ -9,7 +9,7 @@ TiDB Cloud は、Zoom、[Slack](/tidb-cloud/monitor-alert-slack.md)、[メール
 
 > **Note:**
 >
-> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタで利用可能です。
+> 現在、アラート購読は、 [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンス、 [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium)インスタンス、および[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターで利用可能です。
 
 ## 前提条件 {#prerequisites}
 
@@ -66,7 +66,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 > **Tip:**
 >
-> TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスタがある場合でも、購読は一度だけで済みます。
+> TiDB Cloud Dedicatedの場合、アラートの購読は現在のプロジェクト内のすべてのアラートに適用されます。プロジェクト内に複数のTiDB Cloud Dedicatedクラスターがある場合でも、購読は一度だけで済みます。
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)で、組織の[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、 **Project view**タブをクリックします。
 
@@ -87,7 +87,7 @@ TiDB Cloud Dedicatedクラスターのアラート通知を購読するには、
 
 8. 購読を完了するには、 **Save**をクリックしてください。
 
-または、対象のTiDB Cloud Dedicatedクラスタの**Alert**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
+または、対象のTiDB Cloud Dedicatedクラスターの**Alert**ページの右上にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 
 または、クラスターの**Alert**ページの右上隅にある**Subscribe**をクリックすることもできます。**Alert Subscription**ページに移動します。
 

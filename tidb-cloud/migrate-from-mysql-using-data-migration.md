@@ -36,7 +36,7 @@ aliases: ['/ja/tidbcloud/migrate-data-into-tidb','/ja/tidbcloud/migrate-incremen
 
 <CustomContent plan="dedicated">
 
-- [TiDB Cloudコンソール](https://tidbcloud.com/)にTiDB Cloud Dedicatedクラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md#step-1-go-to-the-data-migration-page)エントリーが表示されない場合、その機能はリージョンで利用できない可能性があります。リージョンのサポートをリクエストするには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+- [TiDB Cloudコンソール](https://tidbcloud.com/)にTiDB Cloud Dedicatedクラスターの[データ移行](/tidb-cloud/migrate-from-mysql-using-data-migration.md#step-1-go-to-the-data-migration-page)エントリが表示されない場合、その機能はリージョンで利用できない可能性があります。リージョンのサポートをリクエストするには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 </CustomContent>
 
@@ -74,7 +74,7 @@ TiDB Cloud Essentialインスタンスでは、組織ごとに最大 100 個の�
 
 <CustomContent plan="dedicated">
 
-- TiDB CloudでTiDB Cloud Dedicatedクラスタを削除すると、そのクラスタ内のすべての移行ジョブが自動的に削除され、復元できなくなります。
+- TiDB CloudでTiDB Cloud Dedicatedクラスターを削除すると、そのクラスター内のすべての移行ジョブが自動的に削除され、復元できなくなります。
 
 </CustomContent>
 
@@ -115,7 +115,7 @@ Alibaba Cloud RDSをデータソースとして使用する場合、すべての
 
 <CustomContent plan="dedicated">
 
-- 増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**Restart**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Dedicatedクラスタ内の競合レコードをMySQLソースレコードに置き換えます。
+- 増分データ移行中に、移行対象のテーブルが既にターゲットデータベースに重複キーで存在する場合、エラーが報告され、移行は中断されます。この場合、MySQLソースデータが正確であることを確認する必要があります。データが正確であれば、移行ジョブの**Restart**ボタンをクリックすると、移行ジョブはターゲットのTiDB Cloud Dedicatedクラスター内の競合レコードをMySQLソースレコードに置き換えます。
 
 </CustomContent>
 <CustomContent plan="essential">
@@ -242,12 +242,12 @@ SHOW VARIABLES WHERE Variable_name IN
 
 <details><summary>AWS RDSまたはAurora MySQLの設定</summary>
 
-1. AWS マネジメントコンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタムパラメータグループを作成または編集します。
-2. 上記の4つのパラメータを必要な値に設定してください。
-3. パラメータグループをインスタンスまたはクラスターにアタッチし、再起動して変更を適用してください。
+1. AWS マネジメントコンソールで、 [Amazon RDS コンソール](https://console.aws.amazon.com/rds/)を開き、左側のナビゲーションペインで**Parameter groups**をクリックし、カスタムパラメーターグループを作成または編集します。
+2. 上記の4つのパラメーターを必要な値に設定してください。
+3. パラメーターグループをインスタンスまたはクラスターにアタッチし、再起動して変更を適用してください。
 4. 再起動後、インスタンスに接続し、 `SHOW VARIABLES`文を実行して構成を確認します。
 
-詳細な手順については、AWS ドキュメントの[DBパラメータグループの操作](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)と[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
+詳細な手順については、AWS ドキュメントの[DBパラメーターグループの操作](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html)と[MySQLバイナリログの設定](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQL.BinaryFormat.html)を参照してください。
 
 </details>
 
@@ -255,7 +255,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 1. [Azureポータル](https://portal.azure.com/)で、 **Azure Database for MySQL servers**を検索して選択し、インスタンス名をクリックしてから、左側のナビゲーションペインで**Setting** > **Server parameters**をクリックします。
 
-2. 各パラメータを検索し、その値を更新します。
+2. 各パラメーターを検索し、その値を更新します。
 
     ほとんどの変更は再起動なしで反映されます。再起動が必要な場合は、ポータルから通知が表示されます。
 
@@ -294,7 +294,7 @@ SHOW VARIABLES WHERE Variable_name IN
 
 4. 変更を適用した後（必要に応じて再起動した後）、インスタンスに接続し、このセクションの`SHOW VARIABLES`文を実行して構成を確認します。
 
-詳細については、 [インスタンスパラメータを設定します](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/modify-the-parameters-of-an-apsaradb-rds-for-mysql-instance)を参照してください。
+詳細については、 [インスタンスパラメーターを設定します](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/modify-the-parameters-of-an-apsaradb-rds-for-mysql-instance)を参照してください。
 
 </details>
 
@@ -342,7 +342,7 @@ TiDB Cloud Premiumで利用可能な接続方法は以下のとおりです。
 
 <details><summary>TLS/SSL暗号化接続用のクラウドプロバイダーの証明書をダウンロードして保存する</summary>
 
-- Amazon Aurora MySQL または Amazon RDS MySQL: [SSL/TLSを使用してDBインスタンスまたはクラスタへの接続を暗号化する](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+- Amazon Aurora MySQL または Amazon RDS MySQL: [SSL/TLSを使用してDBインスタンスまたはクラスターへの接続を暗号化する](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
 - Azure Database for MySQL - Flexible Server: [暗号化された接続で接続します](https://learn.microsoft.com/en-us/azure/mysql/flexible-server/how-to-connect-tls-ssl)
 - Google Cloud SQL for MySQL: [SSL/TLS証明書の管理](https://cloud.google.com/sql/docs/mysql/manage-ssl-instance)
 - Alibaba Cloud RDS MySQL: [SSL暗号化機能を設定する](https://www.alibabacloud.com/help/en/rds/apsaradb-rds-for-mysql/configure-a-cloud-certificate-to-enable-ssl-encryption)
@@ -819,7 +819,7 @@ TiDB Cloudへのデータ移行を一度で完了させるには、 **Existing d
 
 > **Note:**
 >
-> - 物理モードを使用する場合、既存のデータ移行が完了する前に、 TiDB Cloud Dedicatedクラスタに対して2つ目の移行ジョブまたはインポートタスクを作成できません。
+> - 物理モードを使用する場合、既存のデータ移行が完了する前に、 TiDB Cloud Dedicatedクラスターに対して2つ目の移行ジョブまたはインポートタスクを作成できません。
 > - 物理モードを使用し、移行ジョブが開始されたら、 TiDB Cloud Dedicatedクラスターで PITR (ポイントインタイムリカバリ) を有効にしたり、変更フィードを設定したり**しないで**ください。そうしないと、移行ジョブが停止します。PITR を有効にしたり、変更フィードを設定したりする必要がある場合は、代わりに論理モードを使用してデータを移行してください。
 
 物理モードでは、MySQLソースデータを可能な限り高速にエクスポートするため、 [異なる仕様](/tidb-cloud/tidb-cloud-billing-dm.md#specifications-for-data-migration)では、データエクスポート時のMySQLソースデータベースのQPSとTPSに対するパフォーマンスへの影響が異なります。以下の表は、各仕様のパフォーマンス低下を示しています。
@@ -969,7 +969,7 @@ TiDB Cloud Dedicatedは、さまざまなシナリオにおけるパフォーマ
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
-2. 対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
+2. 対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Data Migration**をクリックします。
 
 3. **Data Migration**ページで、スケールする移行ジョブを探します。**Action**列で、 **...** > **Scale Up/Down**をクリックします。
 

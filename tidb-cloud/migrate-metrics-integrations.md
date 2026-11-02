@@ -1,11 +1,11 @@
 ---
 title: Migrate Datadog and New Relic Integrations
-summary: DatadogとNew Relicにおける、従来のプロジェクトレベルのメトリクス統合から新しいクラスタレベルの統合への移行方法を学びましょう。
+summary: DatadogとNew Relicにおける、従来のプロジェクトレベルのメトリクス統合から新しいクラスターレベルの統合への移行方法を学びましょう。
 ---
 
 # DatadogとNew Relicの統合を移行する {#migrate-datadog-and-new-relic-integrations}
 
-TiDB Cloudは、DatadogおよびNew Relicとの統合をクラスタレベルで管理するようになり、よりきめ細かな制御と設定が可能になりました。従来のプロジェクトレベルのDatadogおよびNew Relic統合は、2025年10月31日に廃止されました。組織でこれらの従来の統合をまだ使用している場合は、このガイドに従って新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
+TiDB Cloudは、DatadogおよびNew Relicとの統合をクラスターレベルで管理するようになり、よりきめ細かな制御と設定が可能になりました。従来のプロジェクトレベルのDatadogおよびNew Relic統合は、2025年10月31日に廃止されました。組織でこれらの従来の統合をまだ使用している場合は、このガイドに従って新しいクラスターレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 

@@ -11,7 +11,7 @@ summary: 大規模データセットのMySQLシャードをTiDB Cloudに移行�
 
 ## 例の環境情報 {#environment-information-in-the-example}
 
-このセクションでは、例で使用されているアップストリームクラスタ、DM、およびダウンストリームTiDB Cloudの基本情報について説明します。
+このセクションでは、例で使用されているアップストリームクラスター、DM、およびダウンストリームTiDB Cloudの基本情報について説明します。
 
 ### 上流クラスター {#upstream-cluster}
 
@@ -38,7 +38,7 @@ summary: 大規模データセットのMySQLシャードをTiDB Cloudに移行�
 
 ### DM {#dm}
 
-DM のバージョンは v5.3.0 です。 TiDB DM を手動でデプロイする必要があります。詳細な手順については、 [TiUPを使用してDMクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
+DM のバージョンは v5.3.0 です。 TiDB DM を手動でデプロイする必要があります。詳細な手順については、 [TiUPを使用してDMクラスターをデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
 ### 外部ストレージ {#external-storage}
 
@@ -74,7 +74,7 @@ Dumplingを使用してデータをAmazon S3にエクスポートする場合、
 
 - アップストリームクラスターのbinlogを有効にします。
 - 適切なAmazon S3ディレクトリとリージョンを選択してください。
-- 上流クラスタへの影響を最小限に抑えるには、 `-t`オプションを設定して適切な同時実行数を選択するか、バックアップデータベースから直接エクスポートしてください。このパラメータの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
+- 上流クラスターへの影響を最小限に抑えるには、 `-t`オプションを設定して適切な同時実行数を選択するか、バックアップデータベースから直接エクスポートしてください。このパラメーターの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 - `--filetype csv`と`--no-schemas`に適切な値を設定します。これらのパラメーターの使用方法の詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 
 CSVファイルの名前は以下のようにしてください。
@@ -100,7 +100,7 @@ CSVファイルの名前は以下のようにしてください。
     [root@localhost ~]# tiup dumpling -u {username} -p {password} -P {port} -h {mysql01-ip} -B store_01,store_02 -r 20000 --filetype csv --no-schemas -o "s3://dumpling-s3/store/sales/instance01/" --s3.region "ap-northeast-1"
     ```
 
-    パラメータの詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
+    パラメーターの詳細については、 [Dumplingのオプション一覧](https://docs.pingcap.com/tidb/stable/dumpling-overview#option-list-of-dumpling)を参照してください。
 
 3. MySQL instance2 から Amazon S3 バケット内の`s3://dumpling-s3/store/sales/instance02/`ディレクトリにデータをエクスポートします。
 
@@ -209,15 +209,15 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
     ワイルドカードを使用してソースファイルを照合することもできます。例：
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv` : そのフォルダ内の`my-data`で始まり、その後に 1 文字が続くすべての CSV ファイル (例えば`my-data1.csv`や`my-data2.csv` ) は、同じターゲットテーブルにインポートされます。
+    - `s3://[bucket_name]/[data_source_folder]/my-data?.csv` : そのフォルダー内の`my-data`で始まり、その後に 1 文字が続くすべての CSV ファイル (例えば`my-data1.csv`や`my-data2.csv` ) は、同じターゲットテーブルにインポートされます。
 
-    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv` : そのフォルダ内の`my-data`で始まるすべての CSV ファイルは、同じターゲットテーブルにインポートされます。
+    - `s3://[bucket_name]/[data_source_folder]/my-data*.csv` : そのフォルダー内の`my-data`で始まるすべての CSV ファイルは、同じターゲットテーブルにインポートされます。
 
     `?`と`*`のみがサポートされていることに注意してください。
 
     > **Note:**
     >
-    > URIにはデータソースフォルダを含める必要があります。
+    > URIにはデータソースフォルダーを含める必要があります。
 
 6. 必要に応じてCSV設定を編集してください。
 
@@ -225,7 +225,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
     > **Note:**
     >
-    > セパレータ、デリミタ、およびヌルの設定には、英数字と特定の特殊文字の両方を使用できます。サポートされている特殊文字には、 `\t` 、 `\b` 、 `\n` 、 `\r` 、 `\f` 、および`\u0001`が含まれます。
+    > セパレーター、デリミター、およびヌルの設定には、英数字と特定の特殊文字の両方を使用できます。サポートされている特殊文字には、 `\t` 、 `\b` 、 `\n` 、 `\r` 、 `\f` 、および`\u0001`が含まれます。
 
 7. **Start Import**をクリックしてください。
 
@@ -235,11 +235,11 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
 ## MySQLからTiDB Cloudへの増分データレプリケーションを実行する {#perform-incremental-data-replication-from-mysql-to-tidb-cloud}
 
-上流クラスタの指定された位置からbinlogに基づいてデータ変更をTiDB Cloudに複製するには、TiDB Data Migration (DM)を使用して増分レプリケーションを実行できます。
+上流クラスターの指定された位置からbinlogに基づいてデータ変更をTiDB Cloudに複製するには、TiDB Data Migration (DM)を使用して増分レプリケーションを実行できます。
 
 ### 始める前に {#before-you-begin}
 
-増分データを移行し、MySQL シャードをTiDB Cloudにマージする場合は、TiDB DM を手動でデプロイする必要があります。これは、 TiDB Cloud がMySQL シャードの移行とマージをまだサポートしていないためです。詳細な手順については、 [TiUPを使用してDMクラスタをデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
+増分データを移行し、MySQL シャードをTiDB Cloudにマージする場合は、TiDB DM を手動でデプロイする必要があります。これは、 TiDB Cloud がMySQL シャードの移行とマージをまだサポートしていないためです。詳細な手順については、 [TiUPを使用してDMクラスターをデプロイ](https://docs.pingcap.com/tidb/stable/deploy-a-dm-cluster-using-tiup)を参照してください。
 
 ### ステップ1. データソースを追加する {#step-1-add-the-data-source}
 
@@ -275,17 +275,17 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
      port: 3308
     ```
 
-3. ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、最初のデータソース構成をDMクラスタにロードします。
+3. ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、最初のデータソース構成をDMクラスターにロードします。
 
     ```shell
     [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr} operate-source create dm-source1.yaml
     ```
 
-    上記のコマンドで使用されるパラメータは、以下のように説明されます。
+    上記のコマンドで使用されるパラメーターは、以下のように説明されます。
 
-    | パラメータ                   | 説明                                                                        |
+    | パラメーター                   | 説明                                                                        |
     | ----------------------- | ------------------------------------------------------------------------- |
-    | `--master-addr`         | dmctlが接続するクラスタ内の任意のDM-masterノードの`{advertise-addr}`。例：192.168.11.110:9261 |
+    | `--master-addr`         | dmctlが接続するクラスター内の任意のDM-masterノードの`{advertise-addr}`。例：192.168.11.110:9261 |
     | `operate-source create` | データソースをDMクラスターにロードします。                                                    |
 
     以下は出力例です。
@@ -310,7 +310,7 @@ Amazon S3へのアクセスを設定した後、 TiDB Cloudコンソールで次
 
     ```
 
-4. ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、2番目のデータソース構成をDMクラスタにロードします。
+4. ターミナルで次のコマンドを実行します。 `tiup dmctl`を使用して、2番目のデータソース構成をDMクラスターにロードします。
 
     ```shell
     [root@localhost ~]# tiup dmctl --master-addr 192.168.11.110:9261 operate-source create dm-source2.yaml
@@ -466,11 +466,11 @@ Starting component `dmctl`: /root/.tiup/components/dmctl/${tidb_version}/dmctl/d
 [root@localhost ~]# tiup dmctl --master-addr ${advertise-addr}  start-task dm-task.yaml
 ```
 
-上記のコマンドで使用されるパラメータは、以下のように説明されます。
+上記のコマンドで使用されるパラメーターは、以下のように説明されます。
 
-| パラメータ           | 説明                                                                        |
+| パラメーター           | 説明                                                                        |
 | --------------- | ------------------------------------------------------------------------- |
-| `--master-addr` | dmctlが接続するクラスタ内の任意のDM-masterノードの`{advertise-addr}`。例：192.168.11.110:9261 |
+| `--master-addr` | dmctlが接続するクラスター内の任意のDM-masterノードの`{advertise-addr}`。例：192.168.11.110:9261 |
 | `start-task`    | 移行タスクを開始します。                                                              |
 
 以下は出力例です。

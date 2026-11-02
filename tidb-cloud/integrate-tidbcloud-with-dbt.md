@@ -75,7 +75,7 @@ cd jaffle_shop
     sudo vi ~/.dbt/profiles.yml
     ```
 
-    エディタで、以下の設定を追加します。
+    エディターで、以下の設定を追加します。
 
     ```yaml
      jaffle_shop_tidb:                                                 # Project name
@@ -100,7 +100,7 @@ cd jaffle_shop
     vi dbt_project.yml
     ```
 
-    エディタで、以下のように設定を更新してください。
+    エディターで、以下のように設定を更新してください。
 
     ```yaml
     name: 'jaffle_shop'
@@ -315,7 +315,7 @@ dbtを使用すると、プロジェクト全体の構造を表示し、すべ�
     dbt docs serve
     ```
 
-3. ブラウザからドキュメントにアクセスするには、 [http://localhost:8080](http://localhost:8080)にアクセスしてください。
+3. ブラウザーからドキュメントにアクセスするには、 [http://localhost:8080](http://localhost:8080)にアクセスしてください。
 
 ## プロフィール項目の説明 {#description-of-profile-fields}
 

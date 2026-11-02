@@ -5,12 +5,12 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 # クラウドストレージからサンプルデータ（SQLファイル）をTiDB Cloud Dedicatedにインポートする {#import-sample-data-sql-files-from-cloud-storage-into-tidb-cloud-dedicated}
 
-このドキュメントでは、UI を介してサンプルデータ (SQL ファイル) をTiDB Cloud Dedicatedにインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshare のデータライセンス契約に基づいて公開されている Capital Bikeshare のシステムデータです。サンプルデータをインポートする前に、TiDB クラスタが 1つ必要です。
+このドキュメントでは、UI を介してサンプルデータ (SQL ファイル) をTiDB Cloud Dedicatedにインポートする方法について説明します。使用するサンプルデータは、Capital Bikeshare のデータライセンス契約に基づいて公開されている Capital Bikeshare のシステムデータです。サンプルデータをインポートする前に、TiDB クラスターが 1つ必要です。
 
 <SimpleTab>
 <div label="Amazon S3">
 
-1. 対象のTiDB Cloud Dedicatedクラスタの**Import**ページを開きます。
+1. 対象のTiDB Cloud Dedicatedクラスターの**Import**ページを開きます。
 
     1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -42,7 +42,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 </div>
 <div label="Google Cloud">
 
-1. 対象のTiDB Cloud Dedicatedクラスタの**Import**ページを開きます。
+1. 対象のTiDB Cloud Dedicatedクラスターの**Import**ページを開きます。
 
     1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 
@@ -74,7 +74,7 @@ summary: TiDB Cloud DedicatedにUI経由でサンプルデータをインポー�
 
 <div label="Azure Blob Storage">
 
-1. 対象のTiDB Cloud Dedicatedクラスタの**Import**ページを開きます。
+1. 対象のTiDB Cloud Dedicatedクラスターの**Import**ページを開きます。
 
     1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインし、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
 

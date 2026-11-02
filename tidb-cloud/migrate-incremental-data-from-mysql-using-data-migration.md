@@ -60,7 +60,7 @@ summary: データ移行を使用して、Amazon Aurora MySQL、Amazon Relationa
 
 ### Amazon RDS および Amazon Aurora MySQL の場合 {#for-amazon-rds-and-amazon-aurora-mysql}
 
-Amazon RDS および Amazon Aurora MySQL の場合、新しい変更可能なパラメータグループ (デフォルトのパラメータグループではない) を作成し、そのパラメータグループ内の以下のパラメータを変更してから、インスタンスを再起動して変更を適用する必要があります。
+Amazon RDS および Amazon Aurora MySQL の場合、新しい変更可能なパラメーターグループ (デフォルトのパラメーターグループではない) を作成し、そのパラメーターグループ内の以下のパラメーターを変更してから、インスタンスを再起動して変更を適用する必要があります。
 
 - `gtid_mode`
 - `enforce_gtid_consistency`
@@ -73,7 +73,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 
 結果が`ON`または`ON_PERMISSIVE`の場合、GTID モードは正常に有効化されています。
 
-詳細については、 [GTIDベースの複製のためのパラメータ](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters)を参照してください。
+詳細については、 [GTIDベースの複製のためのパラメーター](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/mysql-replication-gtid.html#mysql-replication-gtid.parameters)を参照してください。
 
 ### Google Cloud SQL for MySQL の場合 {#for-google-cloud-sql-for-mysql}
 
@@ -113,7 +113,7 @@ SHOW VARIABLES LIKE 'gtid_mode';
 SHOW VARIABLES LIKE 'binlog_row_image';
 ```
 
-結果が`FULL`でない場合は、 [RDSコンソール](https://rds.console.aliyun.com/)を使用して Alibaba Cloud RDS MySQL インスタンスのこのパラメータを設定する必要があります。
+結果が`FULL`でない場合は、 [RDSコンソール](https://rds.console.aliyun.com/)を使用して Alibaba Cloud RDS MySQL インスタンスのこのパラメーターを設定する必要があります。
 
 ### 自己ホスト型のMySQLインスタンスの場合 {#for-a-self-hosted-mysql-instance}
 

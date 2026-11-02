@@ -18,7 +18,7 @@ TiDB CloudとVercelを組み合わせることで、MySQL互換のリレーシ�
 
 上記2つの方法のいずれにおいても、 TiDB Cloudはデータベースにプログラムで接続するための以下のオプションを提供します。
 
-- クラスタ: 直接接続または[TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用して、 TiDB Cloudクラスターを Vercel プロジェクトに接続します。
+- クラスター: 直接接続または[TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用して、 TiDB Cloudクラスターを Vercel プロジェクトに接続します。
 - [データアプリ](/tidb-cloud/data-service-manage-data-app.md): HTTP エンドポイントのコレクションを通じてTiDB Cloudクラスターのデータにアクセスします。
 
 ## 前提条件 {#prerequisites}
@@ -34,7 +34,7 @@ Vercelにアカウントとプロジェクトをお持ちであることが前�
 
 Vercelプロジェクトは、1つのTiDB Cloudクラスターにしか接続できません。統合を変更するには、まず現在のクラスターとの接続を解除してから、新しいクラスターに接続する必要があります。
 
-### TiDB CloudアカウントとTiDBクラスタ {#a-tidb-cloud-account-and-a-tidb-cluster}
+### TiDB CloudアカウントとTiDBクラスター {#a-tidb-cloud-account-and-a-tidb-cluster}
 
 TiDB Cloudにアカウントとクラスターが既に作成されている必要があります。アカウントとクラスターをお持ちでない場合は、以下の手順に従って作成してください。
 
@@ -97,7 +97,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [VercelのIntegrations Ma
 
 ![Vercel Integration Page](/media/tidb-cloud/vercel/integration-link-cluster-page.png)
 
-6. Vercelダッシュボードに戻り、Vercelプロジェクトに移動して、 **Settings** > **Environment Variables**をクリックし、対象のTiDBクラスタの環境変数が自動的に追加されているかどうかを確認してください。
+6. Vercelダッシュボードに戻り、Vercelプロジェクトに移動して、 **Settings** > **Environment Variables**をクリックし、対象のTiDBクラスターの環境変数が自動的に追加されているかどうかを確認してください。
 
     以下の変数が追加された場合、統合は完了です。
 
@@ -165,7 +165,7 @@ TiDB Cloud Vercel 統合経由で接続するには、 [VercelのIntegrations Ma
 
     ![Vercel Integration Configuration Page](/media/tidb-cloud/vercel/integration-vercel-configuration-page.png)
 
-    接続を削除すると、統合ワークフローによって設定された環境変数もVercelプロジェクトから削除されます。ただし、この操作はTiDB Cloudクラスタのデータには影響しません。
+    接続を削除すると、統合ワークフローによって設定された環境変数もVercelプロジェクトから削除されます。ただし、この操作はTiDB Cloudクラスターのデータには影響しません。
 
 ### TiDB Cloud Branchingを使用して接続する {#connect-with-branching}
 
@@ -180,7 +180,7 @@ TiDB Cloud Branching を有効にするには、 [TiDB Cloud Vercel統合ワー�
 1. 接続タイプとして**Cluster**を選択してください。
 2. プレビュー環境用の新しいブランチを作成するには、**Branching**を有効にしてください。
 
-Gitリポジトリに変更をプッシュすると、Vercelがプレビューデプロイメントをトリガーします。TiDB Cloudとの連携により、Gitブランチ用のTiDB Cloudクラスタのブランチが自動的に作成され、環境変数が設定されます。詳細な手順は以下のとおりです。
+Gitリポジトリに変更をプッシュすると、Vercelがプレビューデプロイメントをトリガーします。TiDB Cloudとの連携により、Gitブランチ用のTiDB Cloudクラスターのブランチが自動的に作成され、環境変数が設定されます。詳細な手順は以下のとおりです。
 
 1. Gitリポジトリに新しいブランチを作成します。
 
@@ -195,7 +195,7 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 
     ![Vercel Preview\_Deployment](/media/tidb-cloud/vercel/vercel-preview-deployment.png)
 
-    1. デプロイ時に、 TiDB Cloud統合機能は、Gitブランチと同じ名前のブランチをクラスタ用に自動的に作成します。ブランチが既に存在する場合は、 TiDB Cloud統合機能はこの手順をスキップします。
+    1. デプロイ時に、 TiDB Cloud統合機能は、Gitブランチと同じ名前のブランチをクラスター用に自動的に作成します。ブランチが既に存在する場合は、 TiDB Cloud統合機能はこの手順をスキップします。
 
         ![TiDB\_Cloud\_Branch\_Check](/media/tidb-cloud/vercel/tidbcloud-branch-check.png)
 
@@ -220,9 +220,9 @@ Gitリポジトリに変更をプッシュすると、Vercelがプレビュー�
 <SimpleTab>
 <div label="Cluster">
 
-1. TiDBクラスタの接続情報を取得します。
+1. TiDBクラスターの接続情報を取得します。
 
-    接続情報は、クラスタの接続ダイアログから取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象リソースの名前をクリックして概要ページを開き、右上隅の**Connect**をクリックします。
+    接続情報は、クラスターの接続ダイアログから取得できます。ダイアログを開くには、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象リソースの名前をクリックして概要ページを開き、右上隅の**Connect**をクリックします。
 
 2. Vercel ダッシュボード > Vercel プロジェクト > **Settings** > **Environment Variables**に移動し、TiDB クラスターの接続情報に従って[各環境変数の値を宣言する](https://vercel.com/docs/concepts/projects/environment-variables#declare-an-environment-variable)。
 

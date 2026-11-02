@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/serverless-tier-limitations']
 
 <!-- markdownlint-disable MD026 -->
 
-TiDB Cloud StarterおよびEssentialは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDB Self-ManagedまたはTiDB Cloud Dedicatedクラスタと比較して機能に若干の違いがあります。このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialの制限事項について説明します。
+TiDB Cloud StarterおよびEssentialは、TiDBがサポートするほぼすべてのワークロードで動作しますが、TiDB Self-ManagedまたはTiDB Cloud Dedicatedクラスターと比較して機能に若干の違いがあります。このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialの制限事項について説明します。
 
 TiDB Cloud Starter/EssentialとTiDB Cloud Dedicated間の機能ギャップを継続的に埋めています。ギャップを埋める機能や性能が必要な場合は、[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)を使用するか、機能リクエストについて[お問い合わせ](https://www.pingcap.com/contact-us/?from=en)ください。
 

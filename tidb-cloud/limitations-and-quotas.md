@@ -11,7 +11,7 @@ TiDB Cloudでは、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#ti
 >
 > これらの制限またはクォータが組織にとって問題となる場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-## クラスタの制限 {#cluster-limits}
+## クラスターの制限 {#cluster-limits}
 
 | コンポーネント                                                          | 制限 |
 | :---------------------------------------------------------- | :- |
@@ -22,14 +22,14 @@ TiDB Cloudでは、 [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#ti
 >
 > TiDB の一般的な使用上の制限について詳しくは、 [TiDB の制限](https://docs.pingcap.com/tidb/stable/tidb-limitations)を参照してください。
 
-## クラスタクォータ {#cluster-quotas}
+## クラスタークォータ {#cluster-quotas}
 
 | コンポーネント                            | クォータ（デフォルト） |
 | :---------------------------- | :---------- |
-| 組織内のすべてのクラスタの合計 TiDB ノードの最大数  | 10          |
-| 組織内のすべてのクラスタの合計 TiKV ノードの最大数  | 15          |
-| 組織内のすべてのクラスタのTiFlashノードの最大数   | 5           |
-| 組織内のすべてのクラスタの TiProxy ノードの最大数 | 10          |
+| 組織内のすべてのクラスターの合計 TiDB ノードの最大数  | 10          |
+| 組織内のすべてのクラスターの合計 TiKV ノードの最大数  | 15          |
+| 組織内のすべてのクラスターのTiFlashノードの最大数   | 5           |
+| 組織内のすべてのクラスターの TiProxy ノードの最大数 | 10          |
 
 > **Note:**
 >

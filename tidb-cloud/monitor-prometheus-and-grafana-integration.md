@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Prometheus and Grafana
-summary: PrometheusとGrafanaを統合してTiDBクラスタを監視する方法を学びましょう。
+summary: PrometheusとGrafanaを統合してTiDBクラスターを監視する方法を学びましょう。
 ---
 
 # TiDB CloudをPrometheusおよびGrafanaと統合する {#integrate-tidb-cloud-with-prometheus-and-grafana}
@@ -13,13 +13,13 @@ TiDB Cloudは[Prometheus](https://prometheus.io/)APIエンドポイントを提�
 
 TiDB Cloudは、2022年3月15日よりプロジェクトレベルのPrometheus統合（ベータ版）をサポートしてきました。2025年10月21日より、クラスターレベルのPrometheus統合（PREVIEW）を導入します。2025年12月2日より、クラスターレベルのPrometheus統合が一般提供（GA）となります。
 
-- **クラスタレベルのPrometheus統合**：2025年10月21日までに組織内に削除されていない従来のプロジェクトレベルのPrometheus統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのPrometheus統合を提供します。
+- **クラスターレベルのPrometheus統合**：2025年10月21日までに組織内に削除されていない従来のプロジェクトレベルのPrometheus統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスターレベルのPrometheus統合を提供します。
 
 - **従来のプロジェクトレベルの Prometheus 統合 (ベータ版)** : 2025年 10月 21日時点で組織内に少なくとも 1つの従来のプロジェクトレベルの Prometheus 統合が削除されずに残っている場合、 TiDB Cloud は、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。
 
     > **Note**
     >
-    > 従来のプロジェクトレベルのPrometheus統合は、2026年1月9日に廃止されました。組織がまだこれらの従来の統合を使用している場合は、 [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)手順に従って、新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
+    > 従来のプロジェクトレベルのPrometheus統合は、2026年1月9日に廃止されました。組織がまだこれらの従来の統合を使用している場合は、 [Prometheus統合の移行](/tidb-cloud/migrate-prometheus-metrics-integrations.md)手順に従って、新しいクラスターレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 
@@ -106,7 +106,7 @@ Grafana の使用方法の詳細については、 [Grafanaのドキュメント
 
 ## Prometheusで利用可能なメトリクス {#metrics-available-to-prometheus}
 
-Prometheusは、TiDBクラスタに関して以下のメトリックデータを追跡します。
+Prometheusは、TiDBクラスターに関して以下のメトリックデータを追跡します。
 
 | メトリック名                                                      | メトリックタイプ | ラベル                                                                                                                            | 説明                                                                                                                                                                                                                                                                                                                         |
 | :---------------------------------------------------------- | :------- | :----------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -130,8 +130,8 @@ Prometheusは、TiDBクラスタに関して以下のメトリックデータを
 | tidbcloud_component_uptime                                  | histogram   | instance: `tidb-0\|tidb-1\|...`<br/>component: `tidb\|tikv\|tiflash`<br/>cluster_name: `<cluster name>`                                  | TiDBコンポーネントの稼働時間（秒）                                                                                                                                                                                                                                                                                                        |
 | tidbcloud_ticdc_owner_resolved_ts_lag                       | gauge      | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>`                                                                  | 変更フィード所有者の解決済みタイムスタンプ遅延（秒単位）                                                                                                                                                                                                                                                                                               |
 | tidbcloud_changefeed_status                                 | gauge      | changefeed_id: `<changefeed-id>`<br/>cluster_name: `<cluster name>`                                                                  | 変更フィードのステータス:<br/> `-1` : Unknown<br/>`0` : Normal<br/>`1` : Warning<br/>`2` : Failed<br/>`3` : Stopped<br/>`4` : Finished<br/>`6` : Warning<br/>`7` : Other                                                                                                                                                                                               |
-| tidbcloud_resource_manager_resource_unit_read_request_unit  | gauge      | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>`                                                                          | リソースマネージャが消費する読み取りリクエストユニット                                                                                                                                                                                                                                                                                                |
-| tidbcloud_resource_manager_resource_unit_write_request_unit | gauge      | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>`                                                                          | リソースマネージャが消費する書き込みリクエストユニット                                                                                                                                                                                                                                                                                                |
+| tidbcloud_resource_manager_resource_unit_read_request_unit  | gauge      | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>`                                                                          | リソースマネージャーが消費する読み取りリクエストユニット                                                                                                                                                                                                                                                                                                |
+| tidbcloud_resource_manager_resource_unit_write_request_unit | gauge      | cluster_name: `<cluster name>`<br/>resource_group: `<group-name>`                                                                          | リソースマネージャーが消費する書き込みリクエストユニット                                                                                                                                                                                                                                                                                                |
 
 クラスターレベルのPrometheus統合では、以下の追加メトリクスも利用可能です。
 

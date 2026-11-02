@@ -117,17 +117,17 @@ TiDB Cloudは、組織、プロジェクト、リソースという階層構造�
 
 **プロジェクト**
 
-- TiDB Cloudのリソースをグループ化および管理するためのコンテナ。
+- TiDB Cloudのリソースをグループ化および管理するためのコンテナー。
 
 - TiDB Cloudには、3種類のプロジェクトがあります。
 
-    - **TiDB Dedicatedプロジェクト**： TiDB Cloud Dedicatedクラスタ専用のプロジェクトタイプです。Dedicatedプロジェクトは、ネットワーク、メンテナンス、アラート購読、統合、暗号化関連のアクセスなど、プロジェクトスコープの設定を管理します。
-    - **TiDB Xプロジェクト**：TiDB Xインスタンス（ TiDB Cloud Starter、 Essential、Premiumインスタンスを含む）の論理コンテナです。TiDB Xプロジェクトは、リソースのグループ化やプロジェクトレベルのRBACの適用に使用されますが、Dedicated専用のインフラストラクチャ設定は保持しません。
+    - **TiDB Dedicatedプロジェクト**： TiDB Cloud Dedicatedクラスター専用のプロジェクトタイプです。Dedicatedプロジェクトは、ネットワーク、メンテナンス、アラート購読、統合、暗号化関連のアクセスなど、プロジェクトスコープの設定を管理します。
+    - **TiDB Xプロジェクト**：TiDB Xインスタンス（ TiDB Cloud Starter、 Essential、Premiumインスタンスを含む）の論理コンテナーです。TiDB Xプロジェクトは、リソースのグループ化やプロジェクトレベルのRBACの適用に使用されますが、Dedicated専用のインフラストラクチャ設定は保持しません。
     - **TiDB X仮想プロジェクト**：どのTiDB Xプロジェクトにもグループ化されていないTiDB Xインスタンス用の仮想プロジェクトです。このプロジェクトタイプはAPI互換性のためだけに使用され、管理機能は提供されません。
 
 **リソース**
 
-- TiDB Cloudリソースは、TiDB X インスタンス ( [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudオファリング) またはTiDB Cloud Dedicatedクラスタのいずれかになります。
+- TiDB Cloudリソースは、TiDB X インスタンス ( [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudオファリング) またはTiDB Cloud Dedicatedクラスターのいずれかになります。
 
 ### 例となる構造 {#example-structure}
 
@@ -150,7 +150,7 @@ TiDB Cloudは、組織、プロジェクト、リソースという階層構造�
 - **詳細な権限設定**：
     - 組織、プロジェクト、インスタンスの各レベルで特定の役割を割り当てることで、正確なアクセス制御を実現します。
 
-    - TiDB Xインスタンスにはプロジェクトロールまたはインスタンスロールのいずれかを通じてアクセスできますが、 TiDB Cloud Dedicatedクラスタはプロジェクトレベルのアクセスによって管理されます。
+    - TiDB Xインスタンスにはプロジェクトロールまたはインスタンスロールのいずれかを通じてアクセスできますが、 TiDB Cloud Dedicatedクラスターはプロジェクトレベルのアクセスによって管理されます。
 
 - **柔軟なプロジェクトモデル**：
     - TiDB Xプロジェクトはオプションなので、TiDB Xインスタンスはプロジェクトにグループ化することも、組織レベルで管理することもできます。
@@ -215,7 +215,7 @@ TiDB Cloudは、堅牢なネットワークアクセス制御により、安全�
 
 ### IPアクセスリスト {#ip-access-list}
 
-- ファイアウォールとして機能し、クラスタへのアクセスを信頼できるIPアドレスに制限します。
+- ファイアウォールとして機能し、クラスターへのアクセスを信頼できるIPアドレスに制限します。
 
 - 詳細については、 [IPアクセスリストを設定する](/tidb-cloud/configure-ip-access-list.md)を参照してください。
 
@@ -233,7 +233,7 @@ TiDB Cloudは、高度な暗号化機能で静的データを保護し、セキ�
 
 - 有効にすると、静的データとバックアップをCMEKキーで暗号化します。
 
-- CMEKを使用しないTiDB Cloud Dedicatedクラスタの場合、 TiDB Cloudはエスクローキーを使用します。TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、エスクローキーのみに依存します。
+- CMEKを使用しないTiDB Cloud Dedicatedクラスターの場合、 TiDB Cloudはエスクローキーを使用します。TiDB Cloud StarterおよびTiDB Cloud Essentialインスタンスは、エスクローキーのみに依存します。
 
 **二重層暗号化**
 

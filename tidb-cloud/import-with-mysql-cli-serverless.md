@@ -12,7 +12,7 @@ summary: MySQL CLIを使用して、 TiDB Cloud StarterまたはTiDB Cloud Essen
 MySQL CLI を介してTiDB Cloud StarterまたはTiDB Cloud Essentialにデータをインポートするには、以下の前提条件を満たす必要があります。
 
 - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにアクセスできます。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)の手順に従って作成します。
-- ローカルコンピュータにMySQL CLIをインストールしてください。
+- ローカルコンピューターにMySQL CLIをインストールしてください。
 
 ## ステップ1. TiDB Cloud StarterまたはEssentialインスタンスに接続する {#step-1-connect-to-your-tidb-cloud-starter-or-essential-instance}
 

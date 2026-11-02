@@ -160,8 +160,8 @@ Zapier で[TiDB Cloudアプリ](https://zapier.com/apps/tidb-cloud/integrations)
 
 | アクション         | 説明                                                            | リソース                                    |
 | ------------- | ------------------------------------------------------------- | --------------------------------------- |
-| Find Cluster  | 既存のTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスタを検索します。 | なし                                      |
-| Create Cluster | 新しいクラスタを作成します。TiDB Cloud Starterインスタンスの作成のみをサポートしています。  | なし                                      |
+| Find Cluster  | 既存のTiDB Cloud StarterインスタンスまたはTiDB Cloud Dedicatedクラスターを検索します。 | なし                                      |
+| Create Cluster | 新しいクラスターを作成します。TiDB Cloud Starterインスタンスの作成のみをサポートしています。  | なし                                      |
 | Find Database | 既存のデータベースを検索します。                                              | TiDB Cloud Starterインスタンス                |
 | Create Database | 新しいデータベースを作成します。                                              | TiDB Cloud Starterインスタンス                |
 | Find Table    | 既存のテーブルを検索します。                                                | TiDB Cloud Starterインスタンスとデータベース         |

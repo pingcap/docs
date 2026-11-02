@@ -1,6 +1,6 @@
 ---
 title: Integrate TiDB Cloud with Airbyte
-summary: Airbyte TiDBコネクタの使い方を学びましょう。
+summary: Airbyte TiDBコネクターの使い方を学びましょう。
 ---
 
 # TiDB CloudとAirbyteを統合する {#integrate-tidb-cloud-with-airbyte}
@@ -40,13 +40,13 @@ airbyte-server      |  Now ready at http://localhost:8000/
 airbyte-server      | --------------------------------------
 ```
 
-## TiDBコネクタを設定する {#set-up-the-tidb-connector}
+## TiDBコネクターを設定する {#set-up-the-tidb-connector}
 
 便利なことに、TiDBをソースと宛先に設定する手順は同じです。
 
-1. サイドバーの**Sources**または**Destinations**をクリックし、TiDBタイプを選択して新しいTiDBコネクタを作成します。
+1. サイドバーの**Sources**または**Destinations**をクリックし、TiDBタイプを選択して新しいTiDBコネクターを作成します。
 
-2. 以下のパラメータを入力してください。
+2. 以下のパラメーターを入力してください。
 
     - ホスト: <CustomContent plan="starter">TiDB Cloud Starterインスタンス</CustomContent><CustomContent plan="essential">TiDB Cloud Essentialインスタンス</CustomContent><CustomContent plan="premium">TiDB Cloud Premiumインスタンス</CustomContent><CustomContent plan="dedicated">TiDB Cloud Dedicatedクラスター</CustomContent>のエンドポイント
     - ポート: データベースのポート番号
@@ -64,19 +64,19 @@ airbyte-server      | --------------------------------------
     > - JDBC を介してTiDB Cloudへの TLS 接続を無効にする場合は、JDBC URL Paramsで useSSL を`false`に設定し、SSL 接続を閉じる必要があります。たとえば、 `useSSL=false`のように設定します。
     > - TiDB Cloud StarterとTiDB Cloud EssentialはTLS接続のみをサポートしています。
 
-4. コネクタの作成を完了するには、**Set up source**または**destination**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
+4. コネクターの作成を完了するには、**Set up source**または**destination**をクリックします。次のスクリーンショットは、ソースとしてTiDBを設定した例です。
 
 ![TiDB source configuration](/media/tidb-cloud/integration-airbyte-parameters.jpg)
 
 TiDBからSnowflakeへの転送や、CSVファイルからTiDBへの転送など、ソースと宛先を自由に組み合わせて使用できます。
 
-TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyte.com/integrations/sources/tidb)と[TiDB宛先](https://docs.airbyte.com/integrations/destinations/tidb)を参照してください。
+TiDB コネクターの詳細については、 [TiDBソース](https://docs.airbyte.com/integrations/sources/tidb)と[TiDB宛先](https://docs.airbyte.com/integrations/destinations/tidb)を参照してください。
 
 ## 接続を設定する {#set-up-the-connection}
 
 ソースと宛先を設定したら、接続を構築して構成できます。
 
-以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクタでは、パラメータが異なる場合があります。
+以下の手順では、TiDBをソースと宛先の両方として使用します。他のコネクターでは、パラメーターが異なる場合があります。
 
 1. サイドバーの**Connections**をクリックし、次に**New Connection**をクリックします。
 
@@ -92,7 +92,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
     > **Tip:**
     >
-    > TiDB コネクタは[増分更新と完全更新の同期](https://airbyte.com/blog/understanding-data-replication-modes)をサポートします。
+    > TiDB コネクターは[増分更新と完全更新の同期](https://airbyte.com/blog/understanding-data-replication-modes)をサポートします。
     >
     > - インクリメンタルモードでは、Airbyteは前回の同期ジョブ以降にソースに追加されたレコードのみを読み取ります。インクリメンタルモードを使用した最初の同期は、フルリフレッシュモードと同等です。
     > - フルリフレッシュモードでは、Airbyteはソース内のすべてのレコードを読み取り、同期タスクごとに宛先に複製します。Airbyteの**Namespace**という名前のテーブルごとに、同期モードを個別に設定できます。
@@ -109,7 +109,7 @@ TiDB コネクタの詳細については、 [TiDBソース](https://docs.airbyt
 
 ## 制限事項 {#limitations}
 
-- TiDBコネクタは、TiCDCが提供する変更データキャプチャ（CDC）機能を使用できません。増分同期はカーソル機構に基づいて実行されます。
+- TiDBコネクターは、TiCDCが提供する変更データキャプチャ（CDC）機能を使用できません。増分同期はカーソル機構に基づいて実行されます。
 - TiDB の宛先では、デフォルトの正規化モードで`timestamp`型が`varchar`型に変換されます。これは、Airbyte が送信中にタイムスタンプ型を文字列に変換し、TiDB が`cast ('2020-07-28 14:50:15+1:00' as timestamp)`をサポートしていないためです。
 - 一部の大規模な ELT ミッションでは、TiDB の[トランザクション制限](/develop/dev-guide-transaction-restraints.md#large-transaction-restrictions)のパラメーターを増やす必要があります。
 

@@ -53,7 +53,7 @@ TiDB Cloudリソースを作成するには、組織の[**My TiDB**](https://tid
 
 - [{{{ .byoc }}} インスタンスを作成する](/tidb-cloud/byoc/create-tidb-instance-byoc.md)
 
-- [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
+- [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
 
 ### TiDB Cloudのリソースを管理する {#manage-tidb-cloud-resources}
 
@@ -84,7 +84,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 > **Note:**
 >
 > - 無料トライアルユーザーは新規プロジェクトを作成できません。
-> - TiDB Xインスタンスの場合、プロジェクトの作成は任意です。TiDB Cloud Dedicatedクラスタの場合は、デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成して管理する必要があります。
+> - TiDB Xインスタンスの場合、プロジェクトの作成は任意です。TiDB Cloud Dedicatedクラスターの場合は、デフォルトのプロジェクトを使用するか、新しいプロジェクトを作成して管理する必要があります。
 
 `Organization Owner`ロールをお持ちの場合は、組織内でプロジェクトを作成できます。
 
@@ -144,7 +144,7 @@ TiDB Cloudのリソースをプロジェクトごとにグループ化して表�
 
 > **Note:**
 >
-> TiDB Xインスタンスのみが、TiDB Xプロジェクト間の移動およびTiDB Xプロジェクトからの離脱をサポートしています。TiDB Cloud Dedicatedクラスタは、プロジェクト間の移動をサポートしていません。
+> TiDB Xインスタンスのみが、TiDB Xプロジェクト間の移動およびTiDB Xプロジェクトからの離脱をサポートしています。TiDB Cloud Dedicatedクラスターは、プロジェクト間の移動をサポートしていません。
 
 TiDB Xインスタンスを移動するには、以下の手順を実行してください。
 
@@ -154,7 +154,7 @@ TiDB Xインスタンスを移動するには、以下の手順を実行して�
 
     > **Tip:**
     >
-    > TiDB Xインスタンスがどのプロジェクトにも含まれていない場合、それは**Out of project**フォルダに表示されます。
+    > TiDB Xインスタンスがどのプロジェクトにも含まれていない場合、それは**Out of project**フォルダーに表示されます。
 
 3. 表示されたダイアログで、次のいずれかの操作を行います。
 

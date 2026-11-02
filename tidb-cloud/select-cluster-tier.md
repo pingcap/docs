@@ -154,7 +154,7 @@ TiDB Cloud Dedicatedクラスターを作成するには、 [支払い方法を�
 
 > **Note:**
 >
-> TiDB Cloud Dedicatedクラスタの作成後は、ノードのストレージを減らすことはできません。
+> TiDB Cloud Dedicatedクラスターの作成後は、ノードのストレージを減らすことはできません。
 
 ## {{{ .lake }}} {#lake}
 

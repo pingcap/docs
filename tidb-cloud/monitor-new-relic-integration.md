@@ -1,18 +1,18 @@
 ---
 title: Integrate TiDB Cloud with New Relic
-summary: New Relicとの連携により、TiDBクラスタを監視する方法を学びましょう。
+summary: New Relicとの連携により、TiDBクラスターを監視する方法を学びましょう。
 ---
 
 # TiDB CloudとNew Relicを統合する {#integrate-tidb-cloud-with-new-relic}
 
-TiDB CloudはNew Relicとの連携をサポートしています。TiDB Cloudを設定して、TiDBクラスタのメトリクスを[New Relic](https://newrelic.com/)に送信できます。その後、New Relicダッシュボードでこれらのメトリクスを直接確認できます。
+TiDB CloudはNew Relicとの連携をサポートしています。TiDB Cloudを設定して、TiDBクラスターのメトリクスを[New Relic](https://newrelic.com/)に送信できます。その後、New Relicダッシュボードでこれらのメトリクスを直接確認できます。
 
 ## New Relic統合バージョン {#new-relic-integration-version}
 
 TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統合（ベータ版）をサポートしてきました。2025年7月31日より、クラスターレベルのNew Relic統合（PREVIEW）を導入します。2025年9月30日より、クラスターレベルのNew Relic統合が一般提供（GA）となります。
 
-- **クラスタレベルのNew Relic統合**：2025年7月31日までに組織内で削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスタレベルのNew Relic統合を提供します。
-- **従来のプロジェクトレベルの New Relic 統合 (ベータ版)** : 2025年 7月 31日時点で組織内に少なくとも 1つの従来のプロジェクトレベルの Datadog または New Relic 統合が削除されずに残っている場合、 TiDB Cloud は、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。従来のプロジェクトレベルの New Relic 統合は、2025年 10月 31日に廃止されました。組織がこれらの従来の統合をまだ使用している場合は、[DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)手順に従って、新しいクラスタレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
+- **クラスターレベルのNew Relic統合**：2025年7月31日までに組織内で削除されていない従来のプロジェクトレベルのDatadogまたはNew Relic統合が残っていない場合、 TiDB Cloudは組織が最新の機能強化を体験できるように、クラスターレベルのNew Relic統合を提供します。
+- **従来のプロジェクトレベルの New Relic 統合 (ベータ版)** : 2025年 7月 31日時点で組織内に少なくとも 1つの従来のプロジェクトレベルの Datadog または New Relic 統合が削除されずに残っている場合、 TiDB Cloud は、現在のダッシュボードへの影響を回避するために、組織向けにプロジェクトレベルで既存および新規の統合の両方を保持します。従来のプロジェクトレベルの New Relic 統合は、2025年 10月 31日に廃止されました。組織がこれらの従来の統合をまだ使用している場合は、[DatadogとNew Relicの統合を移行する](/tidb-cloud/migrate-metrics-integrations.md)手順に従って、新しいクラスターレベルの統合に移行し、メトリクス関連サービスへの影響を最小限に抑えてください。
 
 ## 前提条件 {#prerequisites}
 
@@ -137,12 +137,12 @@ TiDB Cloudは、2023年4月11日よりプロジェクトレベルのNew Relic統
 
 3. [New Relic統合バージョン](#new-relic-integration-version)に応じて、次のいずれかを実行します。
 
-    - クラスタレベルのNew Relic統合の場合は、 **TiDB Cloud Dynamic Tracker**をクリックして新しいダッシュボードを表示してください。
+    - クラスターレベルのNew Relic統合の場合は、 **TiDB Cloud Dynamic Tracker**をクリックして新しいダッシュボードを表示してください。
     - 従来のプロジェクトレベルのNew Relic統合（ベータ版）については、 **TiDB Cloud Monitoring**をクリックして従来のダッシュボードを表示してください。
 
 ## New Relicで利用可能なメトリクス {#metrics-available-to-new-relic}
 
-New Relicは、TiDBクラスタに関して以下のメトリクスを追跡します。
+New Relicは、TiDBクラスターに関して以下のメトリクスを追跡します。
 
 | メトリック名                                     | メトリックタイプ | ラベル                                                                                                                                   | 説明                                                                                                                                                                                                                                                                                                                         |
 | :----------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -175,8 +175,8 @@ New Relicは、TiDBクラスタに関して以下のメトリクスを追跡し�
 | tidb_cloud.cdc_changefeed_latency (別名 cdc_changefeed_checkpoint_ts_lag) | gauge      | changefeed_id: `<changefeed-id>`<br/><br/>cluster_name: `<cluster name>`                                                                            | 変更フィード所有者のチェックポイントタイムスタンプの遅延（秒単位）。                                                                                                                                   |
 | tidb_cloud.cdc_changefeed_resolved_ts_lag                               | gauge      | changefeed_id: `<changefeed-id>`<br/><br/>cluster_name: `<cluster name>` | 変更フィード所有者の解決済みタイムスタンプ遅延（秒単位）。                                                                                                                                        |
 | tidb_cloud.cdc_changefeed_status                                        | gauge      | changefeed_id: `<changefeed-id>`<br/><br/>cluster_name: `<cluster name>` | 変更フィードのステータス:<br/><br/> `-1` : Unknown<br/><br/>`0` : Normal<br/><br/>`1` : Warning<br/><br/>`2` : Failed<br/><br/>`3` : Stopped<br/><br/>`4` : Finished<br/><br/>`6` : Warning<br/><br/>`7` : Other |
-| tidb_cloud.resource_manager_resource_unit_read_request_unit             | gauge      | cluster_name: `<cluster name>`<br/><br/>resource_group: `<group-name>` | リソースマネージャによって消費された読み取りリクエストユニット（RU）。                                                                                                                                 |
-| tidb_cloud.resource_manager_resource_unit_write_request_unit            | gauge      | cluster_name: `<cluster name>`<br/><br/>resource_group: `<group-name>` | リソースマネージャによって消費される書き込みリクエストユニット（RU）。                                                                                                                                 |
+| tidb_cloud.resource_manager_resource_unit_read_request_unit             | gauge      | cluster_name: `<cluster name>`<br/><br/>resource_group: `<group-name>` | リソースマネージャーによって消費された読み取りリクエストユニット（RU）。                                                                                                                                 |
+| tidb_cloud.resource_manager_resource_unit_write_request_unit            | gauge      | cluster_name: `<cluster name>`<br/><br/>resource_group: `<group-name>` | リソースマネージャーによって消費される書き込みリクエストユニット（RU）。                                                                                                                                 |
 | tidb_cloud.dm_task_state                                                | gauge      | instance: `instance`<br/><br/>task: `task`<br/><br/>cluster_name: `<cluster name>` | データ移行のタスク状態:<br/><br/> `0` : Invalid<br/><br/>`1` : New<br/><br/>`2` : Running<br/><br/>`3` : Paused<br/><br/>`4` : Stopped<br/><br/>`5` : Finished<br/><br/>`15` : Error                 |
 | tidb_cloud.dm_syncer_replication_lag_bucket                             | gauge      | instance: `instance`<br/><br/>cluster_name: `<cluster name>` | データ移行のレプリケーション遅延（バケット）。                                                                                                                                                |
 | tidb_cloud.dm_syncer_replication_lag_gauge                              | gauge      | instance: `instance`<br/><br/>task: `task`<br/><br/>cluster_name: `<cluster name>` | データ移行のレプリケーション遅延（gauge）。                                                                                                                                                 |

@@ -47,7 +47,7 @@ aliases: ['/ja/tidbcloud/secure-connections-to-serverless-tier-clusters']
 
 TiDB Cloudは、クライアントとTiDB Cloud StarterまたはEssentialインスタンス間のTLS接続において、 [Let's Encrypt](https://letsencrypt.org/)の証明書を証明機関（CA）として使用します。TiDB Cloud証明書の有効期限が切れると、TiDB Cloud StarterまたはEssentialインスタンスの通常の動作や確立されたTLSセキュア接続に影響を与えることなく、自動的にローテーションされます。
 
-JavaやGoなど、クライアントがシステムのルートCAストアをデフォルトで使用する場合、CAルートのパスを指定せずにTiDB Cloud StarterまたはEssentialインスタンスに安全に接続できます。ただし、一部のドライバやORMはシステムルートCAストアを使用しません。そのような場合は、ドライバやORMのCAルートパスをシステムルートCAストアに設定する必要があります。例えば、macOS上のPythonで[mysqlclient](https://github.com/PyMySQL/mysqlclient)を使用してTiDB Cloud StarterまたはEssentialインスタンスに接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`を設定する必要があります。
+JavaやGoなど、クライアントがシステムのルートCAストアをデフォルトで使用する場合、CAルートのパスを指定せずにTiDB Cloud StarterまたはEssentialインスタンスに安全に接続できます。ただし、一部のドライバーやORMはシステムルートCAストアを使用しません。そのような場合は、ドライバーやORMのCAルートパスをシステムルートCAストアに設定する必要があります。例えば、macOS上のPythonで[mysqlclient](https://github.com/PyMySQL/mysqlclient)を使用してTiDB Cloud StarterまたはEssentialインスタンスに接続する場合、引数`ssl`に`ca: /etc/ssl/cert.pem`を設定する必要があります。
 
 複数の証明書が含まれる証明書ファイルを受け入れない DBeaver などの GUI クライアントを使用している場合は、 [ISRG Root X1](https://letsencrypt.org/certs/isrgrootx1.pem)証明書をダウンロードする必要があります。
 

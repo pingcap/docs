@@ -62,7 +62,7 @@ Cloudflare WorkersはV8エンジン上で動作するため、直接TCP接続を
     npm install @tidbcloud/serverless
     ```
 
-    これにより`package.json`にサーバーレスドライバの依存関係が追加されます。
+    これにより`package.json`にサーバーレスドライバーの依存関係が追加されます。
 
 ## ステップ3. Cloudflare Worker関数を開発する {#step-3-develop-the-cloudflare-worker-function}
 

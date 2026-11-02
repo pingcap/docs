@@ -11,13 +11,13 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 このドキュメントでは、Amazon RDSを例として、AWS DMSを使用してTiDB Cloudにデータを移行する方法を示します。この手順は、セルフホスト型のMySQLデータベースまたはAmazon AuroraからTiDB Cloudへのデータ移行にも適用できます。
 
-この例では、データソースはAmazon RDS、データ宛先はTiDB Cloud内のTiDB Cloud Dedicatedクラスタです。アップストリームデータベースとダウンストリームデータベースはどちらも同じリージョンにあります。
+この例では、データソースはAmazon RDS、データ宛先はTiDB Cloud内のTiDB Cloud Dedicatedクラスターです。アップストリームデータベースとダウンストリームデータベースはどちらも同じリージョンにあります。
 
 ## 前提条件 {#prerequisites}
 
 移行を開始する前に、以下の内容を必ずお読みください。
 
-- ソースデータベースが Amazon RDS または Amazon Auroraの場合、 `binlog_format`パラメータを`ROW`に設定する必要があります。データベースがデフォルトのパラメータグループを使用する場合、 `binlog_format`パラメータはデフォルトで`MIXED`となり、変更できません。この場合、 [新しいパラメータグループを作成する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params)必要があります (例: `newset` )。その`binlog_format`を`ROW`に設定します。次に、 [デフォルトパラメータグループを変更](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying)して`newset`にします。パラメータグループを変更するとデータベースが再起動されることに注意してください。
+- ソースデータベースが Amazon RDS または Amazon Auroraの場合、 `binlog_format`パラメーターを`ROW`に設定する必要があります。データベースがデフォルトのパラメーターグループを使用する場合、 `binlog_format`パラメーターはデフォルトで`MIXED`となり、変更できません。この場合、 [新しいパラメーターグループを作成する](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.params)必要があります (例: `newset` )。その`binlog_format`を`ROW`に設定します。次に、 [デフォルトパラメーターグループを変更](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithDBInstanceParamGroups.html#USER_WorkingWithParamGroups.Modifying)して`newset`にします。パラメーターグループを変更するとデータベースが再起動されることに注意してください。
 - ソースデータベースが TiDB と互換性のある照合順序を使用していることを確認してください。TiDB の utf8mb4 文字セットのデフォルトの照合順序は`utf8mb4_bin`です。しかし、MySQL 8.0 では、デフォルトの照合順序は`utf8mb4_0900_ai_ci`です。アップストリームの MySQL がデフォルトの照合順序を使用している場合、TiDB は`utf8mb4_0900_ai_ci`と互換性がないため、AWS DMS は TiDB にターゲットテーブルを作成できず、データを移行できません。この問題を解決するには、移行前にソースデータベースの照合順序を`utf8mb4_bin`に変更する必要があります。TiDB でサポートされている文字セットと照合順序の完全なリストについては、 [文字セットと照合順序](https://docs.pingcap.com/tidb/stable/character-set-and-collation)を参照してください。
 - AWS DMS 移行タスクを作成するときは、データベースの選択にデフォルトの `%` ワイルドカードを使用しないでください。代わりに、移行するデータベースとテーブルのみを明示的に指定してください。そうしないと、AWS DMS が `INFORMATION_SCHEMA`、`PERFORMANCE_SCHEMA`、`mysql`、`sys` などのシステムデータベースをソース MySQL データベースから TiDB に移行しようとして、移行タスクが失敗する可能性があります。
 - AWS DMSのパブリックネットワークIPアドレスとプライベートネットワークIPアドレスを、ソースデータベースとターゲットデータベースの両方のIPアクセスリストに追加してください。そうしないと、状況によってはネットワーク接続が失敗する可能性があります。
@@ -100,7 +100,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 2. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のリソース名をクリックしてから、右上隅の**Connect**をクリックすると、 TiDB Cloudデータベースの接続情報が表示されます。
 
-3. ダイアログの**Step 1: Create traffic filter**で、 **Edit**をクリックし、AWS DMS コンソールからコピーしたパブリック IP アドレスとプライベート IP アドレスを入力して、 **Update Filter**をクリックします。AWS DMS レプリケーションインスタンスのパブリック IP アドレスとプライベート IP アドレスを TiDB クラスタのトラフィックフィルタに同時に追加することをお勧めします。そうしないと、状況によっては AWS DMS が TiDB クラスタに接続できない場合があります。
+3. ダイアログの**Step 1: Create traffic filter**で、 **Edit**をクリックし、AWS DMS コンソールからコピーしたパブリック IP アドレスとプライベート IP アドレスを入力して、 **Update Filter**をクリックします。AWS DMS レプリケーションインスタンスのパブリック IP アドレスとプライベート IP アドレスを TiDB クラスターのトラフィックフィルターに同時に追加することをお勧めします。そうしないと、状況によっては AWS DMS が TiDB クラスターに接続できない場合があります。
 
 4. **Download CA cert**をクリックします。ダイアログの**Step 3: Connect with a SQL client**で、接続文字列内の`-u` 、 `-h` 、および`-P`情報を後で使用するためにメモしておきます。
 
@@ -108,7 +108,7 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 
 6. 対応する情報を設定します。 [VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
-7. TiDBクラスタのターゲットエンドポイントを設定します。
+7. TiDBクラスターのターゲットエンドポイントを設定します。
 
     - **Endpoint type**：**Target endpoint**を選択してください。
     - **Endpoint identifier**：エンドポイントの名前を入力してください。
@@ -120,9 +120,9 @@ AWS DMSは、リレーショナルデータベース、データウェアハウ�
 8. [AWS DMSコンソール](https://console.aws.amazon.com/dms/v2/home)で、 **Create endpoint**をクリックしてターゲットデータベースエンドポイントを作成し、次の情報を設定します。
 
     - **Server name**: 記録した`-h`の値である TiDB クラスターのホスト名を入力してください。
-    - **Port**：記録した`-P`の値である TiDB クラスターのポート番号を入力してください。TiDBクラスタのデフォルトポートは4000です。
+    - **Port**：記録した`-P`の値である TiDB クラスターのポート番号を入力してください。TiDBクラスターのデフォルトポートは4000です。
     - **User name**: 記録した`-u`の値である TiDB クラスターのユーザー名を入力してください。
-    - **Password**：TiDBクラスタのパスワードを入力してください。
+    - **Password**：TiDBクラスターのパスワードを入力してください。
     - **Secure Socket Layer (SSL) mode**： **Verify-ca**を選択します。
     - **Add new CA certificate**をクリックして、前の手順でTiDB CloudコンソールからダウンロードしたCAファイルをインポートします。
 
