@@ -310,7 +310,7 @@ TiDB supports the XFS and Ext4 file systems. Other file systems are not recommen
 
 ## Web browser requirements
 
-TiDB relies on [Grafana](https://grafana.com/) to provide visualization of database metrics. A recent version of Microsoft Edge, Safari, Chrome or Firefox with Javascript enabled is sufficient.
+TiDB relies on [Grafana](https://grafana.com/) to provide visualization of database metrics. A recent version of Microsoft Edge, Safari, Chrome or Firefox with JavaScript enabled is sufficient.
 
 ## Hardware and software requirements for TiFlash disaggregated storage and compute architecture
 

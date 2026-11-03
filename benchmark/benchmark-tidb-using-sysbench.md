@@ -57,7 +57,7 @@ For more detailed information on TiKV performance tuning, see [Tune TiKV Perform
 
 > **Note:**
 >
-> The test in this document was performed without load balancing tools such as HAproxy. We run the Sysbench test on individual TiDB node and added the results up. The load balancing tools and the parameters of different versions might also impact the performance.
+> The test in this document was performed without load balancing tools such as HAProxy. We run the Sysbench test on individual TiDB node and added the results up. The load balancing tools and the parameters of different versions might also impact the performance.
 
 ### Sysbench configuration
 
@@ -170,7 +170,7 @@ sysbench --config-file=config oltp_read_only --tables=32 --table-size=10000000 -
 
 This issue often has things to do with the use of a proxy. You can add pressure on single TiDB server, sum each result up and compare the summed result with the result with proxy.
 
-Take HAproxy as an example. The parameter `nbproc` can increase the number of processes it can start at most. Later versions of HAproxy also support `nbthread` and `cpu-map`. All of these can mitigate the negative impact of proxy use on performance.
+Take HAProxy as an example. The parameter `nbproc` can increase the number of processes it can start at most. Later versions of HAProxy also support `nbthread` and `cpu-map`. All of these can mitigate the negative impact of proxy use on performance.
 
 ### Under high concurrency, why is the CPU utilization rate of TiKV still low?
 

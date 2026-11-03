@@ -128,7 +128,17 @@ In the `fileLocation` parameter, you can specify a single file, or use the `*` a
 - Import all files with the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/*.csv`
 - Import all files with the `foo` prefix in a specified path: `s3://<bucket-name>/path/to/data/foo*`
 - Import all files with the `foo` prefix and the `.csv` suffix in a specified path: `s3://<bucket-name>/path/to/data/foo*.csv`
+<<<<<<< HEAD
 - Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`
+=======
+- Import `1.csv` and `2.csv` in a specified path: `s3://<bucket-name>/path/to/data/[12].csv`. This is useful for importing a specific, non-sequential set of files.
+- Import `1.csv`, `2.csv`, and `3.csv` using a range: `s3://<bucket-name>/path/to/data/[1-3].csv`
+- Import files with a single character name, using `^` for negation. For example, excluding `1.csv` or `2.csv`: `s3://<bucket-name>/path/to/data/[^12].csv`.
+
+> **Note:**
+>
+> Use only one file format per import job. If a wildcard matches files with different extensions (for example, `.csv` and `.sql` in the same pattern), the precheck fails. Import files of each format separately using their own `IMPORT INTO` statement.
+>>>>>>> e593e501e5 (Unify the notation of product names and common terms across the docs (#24605))
 
 ### Format
 
@@ -157,7 +167,7 @@ The supported options are described as follows:
 | `CHECKSUM_TABLE='<string>'` | All file formats | Configures whether to perform a checksum check on the target table after the import to validate the import integrity. The supported values include `"required"` (default), `"optional"`, and `"off"`. `"required"` means performing a checksum check after the import. If the checksum check fails, TiDB will return an error and the import will exit. `"optional"` means performing a checksum check after the import. If an error occurs, TiDB will return a warning and ignore the error. `"off"` means not performing a checksum check after the import. |
 | `DETACHED` | All file formats | Controls whether to execute `IMPORT INTO` asynchronously. When this option is enabled, executing `IMPORT INTO` immediately returns the information of the import job (such as the `Job_ID`), and the job is executed asynchronously in the backend. |
 | `CLOUD_STORAGE_URI` | All file formats | Specifies the target address where encoded KV data for [Global Sort](/tidb-global-sort.md) is stored. When `CLOUD_STORAGE_URI` is not specified, `IMPORT INTO` determines whether to use Global Sort based on the value of the system variable [`tidb_cloud_storage_uri`](/system-variables.md#tidb_cloud_storage_uri-new-in-v740). If this system variable specifies a target storage address, `IMPORT INTO` uses this address for Global Sort. When `CLOUD_STORAGE_URI` is specified with a non-empty value, `IMPORT INTO` uses that value as the target storage address. When `CLOUD_STORAGE_URI` is specified with an empty value, local sorting is enforced. Currently, the target storage address only supports S3. For details about the URI configuration, see [Amazon S3 URI format](/external-storage-uri.md#amazon-s3-uri-format). When this feature is used, all TiDB nodes must have read and write access for the target S3 bucket, including at least these permissions: `s3:ListBucket`, `s3:GetObject`, `s3:DeleteObject`, `s3:PutObject`, `s3: AbortMultipartUpload`. |
-| `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables pre-checks of non-critical items, such as checking whether there are CDC or PITR tasks.  |
+| `DISABLE_PRECHECK` | All file formats and query results of `SELECT` | Setting this option disables prechecks of non-critical items, such as checking whether there are CDC or PITR tasks.  |
 
 <CustomContent platform="tidb-cloud" plan="premium">
 

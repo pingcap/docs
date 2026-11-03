@@ -31,7 +31,7 @@ An incorrect or incomplete hint will not result in a statement error. This is be
 
 Currently, TiDB supports two categories of hints, which are different in scope. The first category of hints takes effect in the scope of query blocks, such as [`/*+ HASH_AGG() */`](#hash_agg); the second category of hints takes effect in the whole query, such as [`/*+ MEMORY_QUOTA(1024 MB)*/`](#memory_quotan).
 
-Each query or sub-query in a statement corresponds to a different query block, and each query block has its own name. For example:
+Each query or subquery in a statement corresponds to a different query block, and each query block has its own name. For example:
 
 {{< copyable "sql" >}}
 
@@ -39,7 +39,7 @@ Each query or sub-query in a statement corresponds to a different query block, a
 SELECT * FROM (SELECT * FROM t) t1, (SELECT * FROM t) t2;
 ```
 
-The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose name is `sel_1`; the two `SELECT` sub-queries correspond to the second and the third query block, whose names are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the first `SELECT` with `DELETE` or `UPDATE`, then the corresponding query block names are `del_1` or `upd_1`.
+The above query statement has three query blocks: the outermost `SELECT` corresponds to the first query block, whose name is `sel_1`; the two `SELECT` subqueries correspond to the second and the third query block, whose names are `sel_2` and `sel_3`, respectively. The sequence of the numbers is based on the appearance of `SELECT` from left to right. If you replace the first `SELECT` with `DELETE` or `UPDATE`, then the corresponding query block names are `del_1` or `upd_1`.
 
 ## Hints that take effect in query blocks
 
@@ -774,7 +774,7 @@ In addition to this hint, setting the `tidb_enable_index_merge` system variable 
 
 ### USE_TOJA(boolean_value)
 
-The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a sub-query) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
+The `boolean_value` parameter can be `TRUE` or `FALSE`. The `USE_TOJA(TRUE)` hint enables the optimizer to convert an `in` condition (containing a subquery) to join and aggregation operations. Comparatively, the `USE_TOJA(FALSE)` hint disables this feature.
 
 For example, the following query will convert `in (select t2.a from t2) subq` to corresponding join and aggregation operations:
 

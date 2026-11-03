@@ -163,7 +163,7 @@ At the connection level, you can make the following configurations:
 | `host`       | string   | N/A           | Hostname of the {{{ .starter }}} or {{{ .essential }}} instance.                                                                                                                                                                                                                                                                                                                                     |
 | `database`   | string   | `test`        | Database of the {{{ .starter }}} or {{{ .essential }}} instance.                                                                                                                                                                                                                                                                                                                                     |
 | `url`        | string   | N/A           | The URL for the database, in the `mysql://[username]:[password]@[host]/[database]` format, where `database` can be skipped if you intend to connect to the default database.                                                                                                                                                                                 |
-| `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in node.js.                                                                                                                                                                                                                                                                               |
+| `fetch`      | function | global fetch  | Custom fetch function. For example, you can use the `undici` fetch in Node.js.                                                                                                                                                                                                                                                                               |
 | `arrayMode`  | bool     | `false`       | Whether to return results as arrays instead of objects. To get better performance, set it to `true`.                                                                                                                                                                                                                                                         |
 | `fullResult` | bool     | `false`       | Whether to return full result object instead of just rows. To get more detailed results, set it to `true`.                                                                                                                                                                                                                                                   |
 | `decoders`   | object   | `{}`          | A collection of key-value pairs, which enables you to customize the decoding process for different column types. In each pair, you can specify a column type as the key and specify a corresponding function as the value. This function takes the raw string value received from TiDB Cloud serverless driver as an argument and returns the decoded value. |
@@ -271,9 +271,15 @@ DDL is supported and the following SQL statements are supported:  `SELECT`, `SHO
 
 ### Data type mapping
 
+<<<<<<< HEAD
 The type mapping between TiDB and Javascript is as follows:
 
 | TiDB data type | Javascript type |
+=======
+The type mapping between TiDB Cloud Serverless and JavaScript is as follows:
+
+| TiDB Cloud Serverless type | JavaScript type |
+>>>>>>> e593e501e5 (Unify the notation of product names and common terms across the docs (#24605))
 |----------------------|-----------------|
 | TINYINT              | number          |
 | UNSIGNED TINYINT     | number          |
