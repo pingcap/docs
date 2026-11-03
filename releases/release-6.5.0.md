@@ -26,12 +26,12 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 - TiDB グローバルメモリ制御が GA になり、 [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を介してメモリ消費しきい値を制御できるようになりました。
 - 高性能かつグローバルに単調な[`AUTO_INCREMENT`](/auto-increment.md#mysql-compatibility-mode)列属性が、MySQLと互換性のあるGAになります。
 - [`FLASHBACK CLUSTER TO TIMESTAMP`](/sql-statements/sql-statement-flashback-cluster.md)は TiCDC および PITR と互換性があり、GA になります。
-- より正確な[コストモデル バージョン 2](/cost-model.md#cost-model-version-2)を一般提供し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザを強化します。
+- より正確な[コストモデルバージョン 2](/cost-model.md#cost-model-version-2)を一般提供し、 `AND`で[インデックスマージ](/explain-index-merge.md)に接続された式をサポートすることで、 TiDB オプティマイザーを強化します。
 - `JSON_EXTRACT()`関数をTiFlashにプッシュダウンすることをサポートします。
-- パスワード コンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
+- パスワードコンプライアンス監査要件を満たす[パスワード管理](/password-management.md)ポリシーをサポートします。
 - TiDB LightningとDumplingは、圧縮されたSQLおよびCSVファイルの[インポート](/tidb-lightning/tidb-lightning-data-source.md)および[エクスポート](/dumpling-overview.md#improve-export-efficiency-through-concurrency)をサポートします。
 - TiDB Data Migration (DM) [継続的なデータ検証](/dm/dm-continuous-data-validation.md)が GA になります。
-- TiDB バックアップ & リストアは、スナップショット チェックポイント バックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)のリカバリ パフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を最短 5分に短縮します。
+- TiDB バックアップ & リストアは、スナップショットチェックポイントバックアップをサポートし、 [PITR](/br/br-pitr-guide.md#run-pitr)のリカバリパフォーマンスを 50% 向上させ、一般的なシナリオでの RPO を最短 5分に短縮します。
 - [Kafkaへのデータの複製](/replicate-data-to-kafka.md)の TiCDC スループットを 4000 行/秒から 35000 行/秒に向上し、レプリケーションのレイテンシーを2秒に短縮します。
 - データのライフサイクルを管理するために行レベル[TTL (Time to Live)](/time-to-live.md)を提供します (実験的)。
 - TiCDC は、Amazon S3、Azure Blob Storage、NFS (実験的) など[変更ログをオブジェクトストレージに複製する](/ticdc/ticdc-sink-to-cloud-storage.md)ことをサポートしています。
@@ -58,7 +58,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - `INSERT` 、 `REPLACE` 、 `UPDATE` 、 `DELETE` を含む非トランザクションDML文を完全にサポート [#33485](https://github.com/pingcap/tidb/issues/33485) @[ekexium](https://github.com/ekexium)
 
-    大規模データ処理のシナリオでは、大規模なトランザクションを含む単一のSQL文が、クラスタの安定性とパフォーマンスに悪影響を及ぼす可能性があります。非トランザクションDML文とは、内部実行のために複数のSQL文に分割されたDML文です。分割された文はトランザクションの原子性と独立性を損なう一方で、クラスタの安定性を大幅に向上させます。TiDBはバージョン6.1.0以降、非トランザクション`DELETE`文をサポートしており、バージョン6.5.0以降、非トランザクション`INSERT`文、`REPLACE`文、および`UPDATE`文をサポートしています。
+    大規模データ処理のシナリオでは、大規模なトランザクションを含む単一のSQL文が、クラスターの安定性とパフォーマンスに悪影響を及ぼす可能性があります。非トランザクションDML文とは、内部実行のために複数のSQL文に分割されたDML文です。分割された文はトランザクションの原子性と独立性を損なう一方で、クラスターの安定性を大幅に向上させます。TiDBはバージョン6.1.0以降、非トランザクション`DELETE`文をサポートしており、バージョン6.5.0以降、非トランザクション`INSERT`文、`REPLACE`文、および`UPDATE`文をサポートしています。
 
     詳細については、 [非トランザクションDML文](/non-transactional-dml.md)および[`BATCH`構文](/sql-statements/sql-statement-batch.md)を参照してください。
 
@@ -70,7 +70,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - `INSERT INTO SELECT`文を使用したTiFlashクエリ結果の保存をサポート (実験的) [#37515](https://github.com/pingcap/tidb/issues/37515) @[gengliqi](https://github.com/gengliqi)
 
-    TiDB v6.5.0以降、 `INSERT INTO SELECT`文の`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`で指定したTiDBテーブルに簡単に保存して、さらに分析することができます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。例えば、次のようになります。
+    TiDB v6.5.0以降、 `INSERT INTO SELECT`文の`SELECT`の句（分析クエリ）をTiFlashにプッシュダウンできるようになりました。これにより、 TiFlashクエリの結果を`INSERT INTO`で指定したTiDBテーブルに簡単に保存して、さらに分析できます。これは、結果のキャッシュ（つまり、結果のマテリアライゼーション）として機能します。例えば、次のようになります。
 
     ```sql
     INSERT INTO t2 SELECT Mod(x,y) FROM t1;
@@ -79,14 +79,14 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
     実験的段階中は、この機能はデフォルトで無効になっています。有効にするには、システム変数[`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)を`ON`に設定します。この機能では、 `INSERT INTO`で指定される結果テーブルに特別な制限はなく、 TiFlashレプリカを結果テーブルに追加するかどうかは自由に設定できます。この機能の典型的な使用シナリオは以下のとおりです。
 
     - TiFlashを使用して複雑な分析クエリを実行する
-    - TiFlashクエリ結果を再利用するか、同時実行性の高いオンライン リクエストを処理する
+    - TiFlashクエリ結果を再利用するか、同時実行性の高いオンラインリクエストを処理する
     - 入力データのサイズと比較して比較的小さい結果セットが必要です。100 MiB 未満が望ましいです。
 
     詳細については[ドキュメント](/tiflash/tiflash-results-materialization.md)を参照してください。
 
 - バインディング履歴実行計画のサポート（実験的） [#39199](https://github.com/pingcap/tidb/issues/39199) @[fzzf678](https://github.com/fzzf678)
 
-    SQL文の場合、実行中の様々な要因により、オプティマイザが以前の最適な実行計画ではなく新しい実行計画を選択することがあり、SQLパフォーマンスに影響が出ることがあります。この場合、最適な実行計画がまだクリアされていない場合、SQL実行履歴に残ります。
+    SQL文の場合、実行中の様々な要因により、オプティマイザーが以前の最適な実行計画ではなく新しい実行計画を選択することがあり、SQLパフォーマンスに影響が出ることがあります。この場合、最適な実行計画がまだクリアされていない場合、SQL実行履歴に残ります。
 
     TiDB v6.5.0では、 [`CREATE [GLOBAL | SESSION] BINDING`](/sql-statements/sql-statement-create-binding.md)ステートメントのバインディングオブジェクトを拡張することで、履歴実行計画のバインディングをサポートします。SQL文の実行計画が変更された場合、元の実行計画がSQL実行履歴メモリテーブル（例えば`statements_summary`）に残っている限り、 `CREATE [GLOBAL | SESSION] BINDING`ステートメントで`plan_digest`を指定することで元の実行計画をバインドし、SQLパフォーマンスを迅速に回復できます。この機能により、実行計画変更の問題への対応プロセスが簡素化され、メンテナンス効率が向上します。
 
@@ -149,7 +149,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - [インデックスマージ](/glossary.md#index-merge)は、 `AND` で接続された式をサポートします [#39333](https://github.com/pingcap/tidb/issues/39333) @[guo-shaoge](https://github.com/guo-shaoge) @[time-and-fate](https://github.com/time-and-fate) @[hailanwhu](https://github.com/hailanwhu)
 
-    v6.5.0より前のTiDBでは、 `OR`で連結されたフィルタ条件に対してのみインデックスマージがサポートされていました。v6.5.0以降、TiDBは`WHERE`句の`AND`で連結されたフィルタ条件に対してもインデックスマージがサポートされるようになりました。これにより、TiDBのインデックスマージは、より一般的なクエリフィルタ条件の組み合わせをカバーできるようになり、union( `OR` )関係に限定されなくなりました。現在のv6.5.0バージョンでは、オプティマイザによって自動的に選択された`OR`の条件でのインデックスマージのみがサポートされています。`AND`条件でインデックスマージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
+    v6.5.0より前のTiDBでは、 `OR`で連結されたフィルター条件に対してのみインデックスマージがサポートされていました。v6.5.0以降、TiDBは`WHERE`句の`AND`で連結されたフィルター条件に対してもインデックスマージがサポートされるようになりました。これにより、TiDBのインデックスマージは、より一般的なクエリフィルター条件の組み合わせをカバーできるようになり、union( `OR` )関係に限定されなくなりました。現在のv6.5.0バージョンでは、オプティマイザーによって自動的に選択された`OR`の条件でのインデックスマージのみがサポートされています。`AND`条件でインデックスマージを有効にするには、 [`USE_INDEX_MERGE`](/optimizer-hints.md#use_index_merget1_name-idx1_name--idx2_name-)ヒントを使用する必要があります。
 
     インデックスマージの詳細については、 [v5.4.0 リリースノート](/releases/release-5.4.0.md#performance)と[インデックスマージを使用するステートメントの実行計画](/explain-index-merge.md)を参照してください。
 
@@ -167,9 +167,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
     - `regexp_instr`
     - `regexp_substr`
 
-- [ビュー](/views.md) で実行計画生成に干渉するグローバルオプティマイザヒントをサポートします [#37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent)
+- [ビュー](/views.md) で実行計画生成に干渉するグローバルオプティマイザーヒントをサポートします [#37887](https://github.com/pingcap/tidb/issues/37887) @[Reminiscent](https://github.com/Reminiscent)
 
-    ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行計画にオプティマイザヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行計画の制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付け](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)、 [ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)必要があります。
+    ビューアクセスのシナリオによっては、最適なパフォーマンスを実現するために、ビュー内のクエリの実行計画にオプティマイザーヒントを使用して介入する必要があります。TiDB v6.5.0以降、ビュー内のクエリブロックへのグローバルヒントの追加がサポートされ、クエリで定義されたヒントがビュー内で有効になります。この機能により、ネストされたビューを含む複雑なSQL文にヒントを挿入できるようになり、実行計画の制御が強化され、複雑な文のパフォーマンスが安定します。グローバルヒントを使用するには、 [クエリブロックに名前を付け](/optimizer-hints.md#step-1-define-the-query-block-name-of-the-view-using-the-qb_name-hint)、 [ヒント参照を指定する](/optimizer-hints.md#step-2-add-the-target-hints)必要があります。
 
     詳細については[ドキュメント](/optimizer-hints.md#hints-that-take-effect-globally)を参照してください。
 
@@ -177,11 +177,11 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     [パーティションテーブル](/partitioned-table.md)機能は v6.1.0 から GA となっていますが、TiDB は継続的にパフォーマンスを改善しています。v6.5.0 では、TiDB は計算とフィルタリングのために`ORDER BY`や`LIMIT`などのソート操作を TiKV にプッシュダウンすることをサポートします。これにより、ネットワーク I/O オーバーヘッドが削減され、パーティションテーブル使用時の SQL パフォーマンスが向上します。
 
-- オプティマイザはより正確なコストモデルバージョン2（GA） を導入しました [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990)
+- オプティマイザーはより正確なコストモデルバージョン2（GA） を導入しました [#35240](https://github.com/pingcap/tidb/issues/35240) @[qw4990](https://github.com/qw4990)
 
-    TiDB v6.2.0 では、 [コストモデル バージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザが最適な実行計画を選択できるように支援します。特にTiFlashを導入している場合、コストモデル バージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデル バージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデル バージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
+    TiDB v6.2.0 では、 [コストモデルバージョン 2](/cost-model.md#cost-model-version-2)が実験的機能として導入されました。このモデルは、より正確なコスト推定手法を用いて、オプティマイザーが最適な実行計画を選択できるように支援します。特にTiFlashを導入している場合、コストモデルバージョン 2 は適切なストレージエンジンを自動的に選択し、手動による介入を大幅に削減します。一定期間の実環境テストを経て、このモデルは v6.5.0 で一般提供となります。v6.5.0 以降、新規に作成されたクラスターはデフォルトでコストモデルバージョン 2 を使用します。v6.5.0 にアップグレードするクラスターでは、コストモデルバージョン 2 によってクエリプランが変更される可能性があるため、十分なパフォーマンステストを行った後、 [`tidb_cost_model_version = 2`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数を設定して新しいコストモデルを使用するように設定できます。
 
-    コストモデル バージョン 2 は、TiDB オプティマイザの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
+    コストモデルバージョン 2 は、TiDB オプティマイザーの全体的な機能を大幅に向上させ、TiDB をより強力な HTAP データベースへと進化させる、一般利用可能な機能になります。
 
     詳細については[ドキュメント](/cost-model.md#cost-model-version-2)を参照してください。
 
@@ -211,7 +211,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - JSON形式での実行計画の出力をサポート[#39261](https://github.com/pingcap/tidb/issues/39261) @[fzzf678](https://github.com/fzzf678)
 
-    TiDB v6.5.0では、実行計画の出力形式が拡張されました。`EXPLAIN`に`FORMAT = "tidb_json"`を指定することで、SQL実行計画をJSON形式で出力できます。この機能により、SQLデバッグツールや診断ツールは実行計画をより便利かつ正確に読み取ることができるため、SQL診断やチューニングの利便性が向上します。
+    TiDB v6.5.0では、実行計画の出力形式が拡張されました。`EXPLAIN`に`FORMAT = "tidb_json"`を指定することで、SQL実行計画をJSON形式で出力できます。この機能により、SQLデバッグツールや診断ツールは実行計画をより便利かつ正確に読み取れるため、SQL診断やチューニングの利便性が向上します。
 
     詳細については[ドキュメント](/sql-statements/sql-statement-explain.md)を参照してください。
 
@@ -219,7 +219,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - 高性能かつグローバルに単調な`AUTO_INCREMENT`列属性 (GA) をサポート [#38442](https://github.com/pingcap/tidb/issues/38442) @[tiancaiamao](https://github.com/tiancaiamao)
 
-    TiDBはv6.4.0以降、実験的機能としてMySQL互換モード`AUTO_INCREMENT`を導入しました。このモードでは、すべてのTiDBインスタンスでIDが単調に増加するようにする、集中型のAUTO_INCREMENT ID割り当てサービスが導入されます。この機能により、AUTO_INCREMENT IDによるクエリ結果のソートが容易になります。v6.5.0では、この機能がGAになります。この機能を使用したテーブルの挿入TPSは20,000を超えると予想されており、この機能は単一のテーブルとクラスタ全体の書き込みスループットを向上させるためのエラスティックスケーリングをサポートしています。MySQL互換モードを使用するには、テーブル作成時に`AUTO_ID_CACHE`を`1`に設定する必要があります。以下は例です。
+    TiDBはv6.4.0以降、実験的機能としてMySQL互換モード`AUTO_INCREMENT`を導入しました。このモードでは、すべてのTiDBインスタンスでIDが単調に増加するようにする、集中型のAUTO_INCREMENT ID割り当てサービスが導入されます。この機能により、AUTO_INCREMENT IDによるクエリ結果のソートが容易になります。v6.5.0では、この機能がGAになります。この機能を使用したテーブルの挿入TPSは20,000を超えると予想されており、この機能は単一のテーブルとクラスター全体の書き込みスループットを向上させるためのエラスティックスケーリングをサポートしています。MySQL互換モードを使用するには、テーブル作成時に`AUTO_ID_CACHE`を`1`に設定する必要があります。以下は例です。
 
     ```sql
     CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
@@ -267,9 +267,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
     ストレージシンクは、canal-json形式とCSV形式の変更ログをサポートしています。詳細については、[ドキュメント](/ticdc/ticdc-sink-to-cloud-storage.md)を参照してください。
 
-- TiCDCは2つのクラスタ間の双方向レプリケーションをサポートします[#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen)
+- TiCDCは2つのクラスター間の双方向レプリケーションをサポートします[#38587](https://github.com/pingcap/tidb/issues/38587) @[xiongjiwei](https://github.com/xiongjiwei) @[asddongmen](https://github.com/asddongmen)
 
-    TiCDCは、2つのTiDBクラスタ間の双方向レプリケーションをサポートしています。アプリケーションのために地理的に分散された複数のアクティブデータセンターを構築する必要がある場合、この機能をソリューションとして利用できます。あるTiDBクラスタから別のTiDBクラスタへのTiCDCの変更フィードに`bdr-mode = true`パラメータを設定することで、2つのTiDBクラスタ間の双方向データレプリケーションを実現できます。
+    TiCDCは、2つのTiDBクラスター間の双方向レプリケーションをサポートしています。アプリケーションのために地理的に分散された複数のアクティブデータセンターを構築する必要がある場合、この機能をソリューションとして利用できます。あるTiDBクラスターから別のTiDBクラスターへのTiCDCの変更フィードに`bdr-mode = true`パラメーターを設定することで、2つのTiDBクラスター間の双方向データレプリケーションを実現できます。
 
     詳細については[ドキュメント](/ticdc/ticdc-bidirectional-replication.md)を参照してください。
 
@@ -279,13 +279,13 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 
 - TiCDCのパフォーマンスが大幅に向上[#7540](https://github.com/pingcap/tiflow/issues/7540) [#7478](https://github.com/pingcap/tiflow/issues/7478) [#7532](https://github.com/pingcap/tiflow/issues/7532) @[sdojjy](https://github.com/sdojjy) @[3AceShowHand](https://github.com/3AceShowHand)
 
-    TiDBクラスタのテストシナリオでは、TiCDCのパフォーマンスが大幅に向上しました。具体的には、シナリオ[Kafkaへのデータの複製](/replicate-data-to-kafka.md)では、単一のTiCDCが処理できる行変更の最大量は3万行/秒に達し、レプリケーションのレイテンシーは10秒に短縮されました。TiKVとTiCDCのローリングアップグレード中でも、レプリケーションのレイテンシーは30秒未満です。
+    TiDBクラスターのテストシナリオでは、TiCDCのパフォーマンスが大幅に向上しました。具体的には、シナリオ[Kafkaへのデータの複製](/replicate-data-to-kafka.md)では、単一のTiCDCが処理できる行変更の最大量は3万行/秒に達し、レプリケーションのレイテンシーは10秒に短縮されました。TiKVとTiCDCのローリングアップグレード中でも、レプリケーションのレイテンシーは30秒未満です。
 
     災害復旧 (DR) シナリオでは、TiCDC の再実行ログと同期ポイントを有効にすると、TiCDC のスループットを 4000 行/秒から 35000 行/秒に向上でき、レプリケーションのレイテンシーを2秒に制限できます。
 
 ### バックアップと復元 {#backup-and-restore}
 
-- TiDB バックアップ & リストアはスナップショット チェックポイント バックアップをサポートします [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth)
+- TiDB バックアップ & リストアはスナップショットチェックポイントバックアップをサポートします [#38647](https://github.com/pingcap/tidb/issues/38647) @[Leavrth](https://github.com/Leavrth)
 
     TiDBスナップショットバックアップは、チェックポイントからのバックアップ再開をサポートしています。バックアップ＆リストア（BR）は、回復可能なエラーが発生するとバックアップを再試行します。ただし、再試行が複数回失敗するとBRは終了します。チェックポイントバックアップ機能により、数十分のネットワーク障害など、回復可能なより長い障害の再試行が可能になります。
 
@@ -309,7 +309,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | ------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `tidb_enable_amend_pessimistic_txn`                                                                                       | 非推奨      | v6.5.0 以降、この変数は非推奨となり、TiDB は`Information schema is changed`エラーを回避するためにデフォルトで[メタデータロック](/metadata-lock.md)機能を使用します。                                                                                                                                                                                                                                     |
 | [`tidb_enable_outer_join_reorder`](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                       | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。つまり、 [結合順序の並べ替え](/join-reorder.md)アルゴリズムの Outer Join のサポートがデフォルトで有効になります。                                                                                                                                                                                                                                      |
-| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620)                                     | 変更     | さらにテストを行った後、デフォルト値を`1`から`2`に変更します。つまり、インデックス選択と演算子選択には、デフォルトでコストモデル バージョン 2 が使用されることになります。                                                                                                                                                                                                                                                            |
+| [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620)                                     | 変更     | さらにテストを行った後、デフォルト値を`1`から`2`に変更します。つまり、インデックス選択と演算子選択には、デフォルトでコストモデルバージョン 2 が使用されることになります。                                                                                                                                                                                                                                                            |
 | [`tidb_enable_gc_aware_memory_track`](/system-variables.md#tidb_enable_gc_aware_memory_track)                             | 変更     | デフォルト値を`ON`から`OFF`に変更します。GC対応メモリトラックはテストで不正確であることが判明し、追跡されるメモリサイズが大きくなりすぎるため、メモリトラックは無効化されています。また、 Golang 1.19では、GC対応メモリトラックによって追跡されるメモリは、全体のメモリに大きな影響を与えません。                                                                                                                                                                                          |
 | [`tidb_enable_metadata_lock`](/system-variables.md#tidb_enable_metadata_lock-new-in-v630)                                 | 変更     | さらにテストを行った後、デフォルト値を`OFF`から`ON`に変更します。これは、メタデータロック機能がデフォルトで有効になっていることを意味します。                                                                                                                                                                                                                                                                           |
 | [`tidb_enable_tiflash_read_for_write_stmt`](/system-variables.md#tidb_enable_tiflash_read_for_write_stmt-new-in-v630)     | 変更     | 6.5.0以降で有効になります。`INSERT` 、 `DELETE` 、 `UPDATE`を含むSQL文の読み取り操作をTiFlashにプッシュダウンできるかどうかを制御します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                              |
@@ -336,7 +336,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | [`tidb_ttl_job_schedule_window_start_time`](/system-variables.md#tidb_ttl_job_schedule_window_start_time-new-in-v650)     | 新しく追加された | この変数は、バックグラウンドで実行されるTTLジョブのスケジュールウィンドウの開始時刻を制御するために使用されます。この変数の値を変更する際は、ウィンドウが小さいと期限切れデータのクリーンアップが失敗する可能性があるので注意してください。                                                                                                                                                                                                                                |
 | [`tidb_ttl_job_schedule_window_end_time`](/system-variables.md#tidb_ttl_job_schedule_window_end_time-new-in-v650)         | 新しく追加された | この変数は、バックグラウンドで実行されるTTLジョブのスケジュールウィンドウの終了時刻を制御するために使用されます。この変数の値を変更する際は、ウィンドウが小さいと期限切れデータのクリーンアップが失敗する可能性があるので注意してください。                                                                                                                                                                                                                                |
 | [`tidb_ttl_scan_batch_size`](/system-variables.md#tidb_ttl_scan_batch_size-new-in-v650)                                   | 新しく追加された | この変数は、TTL ジョブで期限切れのデータをスキャンするために使用される`SELECT`文ごとに`LIMIT`値を設定するために使用されます。                                                                                                                                                                                                                                                                         |
-| [`tidb_ttl_scan_worker_count`](/system-variables.md#tidb_ttl_scan_worker_count-new-in-v650)                               | 新しく追加された | この変数は、各 TiDB ノード上の TTL スキャン ジョブの最大同時実行数を設定するために使用されます。                                                                                                                                                                                                                                                                                                 |
+| [`tidb_ttl_scan_worker_count`](/system-variables.md#tidb_ttl_scan_worker_count-new-in-v650)                               | 新しく追加された | この変数は、各 TiDB ノード上の TTL スキャンジョブの最大同時実行数を設定するために使用されます。                                                                                                                                                                                                                                                                                                 |
 | [`validate_password.check_user_name`](/system-variables.md#validate_passwordcheck_user_name-new-in-v650)                  | 新しく追加された | パスワード複雑度チェックにおけるチェック項目。パスワードがユーザー名と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効になっている場合にのみ有効になります。デフォルト値は`ON`です。                                                                                                                                                                   |
 | [`validate_password.dictionary`](/system-variables.md#validate_passworddictionary-new-in-v650)                            | 新しく追加された | パスワード複雑度チェックにおけるチェック項目です。パスワードが辞書内の単語と一致するかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)が`2` （STRONG）に設定されている場合にのみ有効になります。デフォルト値は`""`です。                                                       |
 | [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)                                    | 新しく追加された | この変数は、パスワードの複雑さのチェックを実行するかどうかを制御します。この変数を`ON`に設定すると、TiDBはパスワード設定時にパスワードの複雑さのチェックを実行します。デフォルト値は`OFF`です。                                                                                                                                                                                                                                                 |
@@ -346,9 +346,9 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)                                    | 新しく追加された | この変数は、パスワードの複雑さチェックのポリシーを制御します。値は`0` 、 `1` 、または`2` （それぞれLOW、MEDIUM、STRONGに対応）です。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効な場合にのみ有効になります。デフォルト値は`1`です。                                                                                                                                            |
 | [`validate_password.special_char_count`](/system-variables.md#validate_passwordspecial_char_count-new-in-v650)            | 新しく追加された | パスワード複雑度チェックにおけるチェック項目。パスワードに十分な特殊文字が含まれているかどうかをチェックします。この変数は、 [`validate_password.enable`](/system-variables.md#validate_passwordenable-new-in-v650)が有効で、 [`validate_password.policy`](/system-variables.md#validate_passwordpolicy-new-in-v650)が`1` （MEDIUM）以上に設定されている場合にのみ有効になります。デフォルト値は`1`です。                                                          |
 
-### 設定ファイルのパラメータ {#configuration-file-parameters}
+### 設定ファイルのパラメーター {#configuration-file-parameters}
 
-| 設定ファイル | 設定パラメータ                                                                                            | 変更の種類   | 説明                                                                                                                                                       |
+| 設定ファイル | 設定パラメーター                                                                                            | 変更の種類   | 説明                                                                                                                                                       |
 | -------------- | ---------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`server-memory-quota`](/tidb-configuration-file.md#server-memory-quota-new-in-v409)                       | 非推奨      | バージョン6.5.0以降、この設定項目は非推奨となりました。代わりに、システム変数[`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)を使用してメモリをグローバルに管理してください。 |
 | TiDB           | [`disconnect-on-expired-password`](/tidb-configuration-file.md#disconnect-on-expired-password-new-in-v650) | 新しく追加された | パスワードの有効期限が切れたときに、TiDBがクライアント接続を切断するかどうかを決定します。デフォルト値は`true`で、パスワードの有効期限が切れるとクライアント接続が切断されます。                                                            |
@@ -356,7 +356,7 @@ TiDB [6.4.0-DMR](/releases/release-6.4.0.md)と比較して、TiDB 6.5.0 では�
 | TiKV           | [`raft-engine.bytes-per-sync`](/tikv-configuration-file.md#bytes-per-sync-2)                               | 非推奨      | バージョン6.5.0以降、 Raft Engineはバッファリングなしでログを直接ディスクに書き込みます。そのため、この設定項目は非推奨となり、機能しなくなりました。                                                                      |
 | TiKV           | [`cdc.min-ts-interval`](/tikv-configuration-file.md#min-ts-interval)                                       | 変更     | CDC のレイテンシーを短縮するために、デフォルト値は`"1s"`から`"200ms"`に変更されます。                                                                                                     |
 | TiKV           | [`memory-use-ratio`](/tikv-configuration-file.md#memory-use-ratio-new-in-v650)                             | 新しく追加された | PITR ログリカバリにおける使用可能なメモリとシステムメモリの合計の比率を示します。                                                                                                              |
-| TiCDC          | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                 | 新しく追加された | 2つのデータ変更イベントを区切るために使用される行ターミネータを示します。デフォルトでは値は空で、 `\r\n`が使用されます。                                                                                         |
+| TiCDC          | [`sink.terminator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)                 | 新しく追加された | 2つのデータ変更イベントを区切るために使用される行ターミネーターを示します。デフォルトでは値は空で、 `\r\n`が使用されます。                                                                                         |
 | TiCDC          | [`sink.date-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)             | 新しく追加された | ファイルディレクトリの日付区切りの種類を示します。値のオプションは`none` 、 `year` 、 `month` 、 `day`です。デフォルト値は`none`で、日付が区切られないことを意味します。                                                   |
 | TiCDC          | [`sink.enable-partition-separator`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters) | 新しく追加された | パーティションを区切り文字列として使用するかどうかを指定します。デフォルト値は`false`で、テーブル内のパーティションが別々のディレクトリに保存されないことを意味します。                                                                  |
 | TiCDC          | [`sink.csv.delimiter`](/ticdc/ticdc-changefeed-config.md#changefeed-configuration-parameters)              | 新しく追加された | フィールド間の区切り文字を示します。値はASCII文字でなければならず、デフォルトは`,`です。                                                                                                         |
@@ -389,7 +389,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     - 悲観的トランザクション競合を減らす[#13298](https://github.com/tikv/tikv/issues/13298) @[MyonKeminta](https://github.com/MyonKeminta)
     - 外部ストレージオブジェクトをキャッシュすることでリカバリパフォーマンスを向上 [#13798](https://github.com/tikv/tikv/issues/13798) @[YuJuncen](https://github.com/YuJuncen)
     - 専用スレッドで CheckLeader を実行して、TiCDC レプリケーションのレイテンシーを削減します。 [#13774](https://github.com/tikv/tikv/issues/13774) @[overvenus](https://github.com/overvenus)
-    - チェックポイントのプル モデルをサポート [#13824](https://github.com/tikv/tikv/issues/13824) @[YuJuncen](https://github.com/YuJuncen)
+    - チェックポイントのプルモデルをサポート [#13824](https://github.com/tikv/tikv/issues/13824) @[YuJuncen](https://github.com/YuJuncen)
     - crossbeam-channel を更新することで、送信側でのスピンの問題を回避します。 [#13815](https://github.com/tikv/tikv/issues/13815) @[sticnarf](https://github.com/sticnarf)
     - TiKV でのバッチコプロセッサータスク処理をサポート [#13849](https://github.com/tikv/tikv/issues/13849) @[cfzjywxk](https://github.com/cfzjywxk)
     - TiKVにリージョンを起動するように通知することで、障害回復の待ち時間を短縮します。 [#13648](https://github.com/tikv/tikv/issues/13648) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -401,7 +401,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
 - PD
 
     - ロックの粒度を最適化してロックの競合を減らし、高同時実行時のハートビートの処理能力を向上させる[#5586](https://github.com/tikv/pd/issues/5586) @[rleungx](https://github.com/rleungx)
-    - 大規模クラスタのスケジューラパフォーマンスを最適化し、スケジューリングポリシーの生成を高速化します。 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
+    - 大規模クラスターのスケジューラーパフォーマンスを最適化し、スケジューリングポリシーの生成を高速化します。 [#5473](https://github.com/tikv/pd/issues/5473) @[bufferflies](https://github.com/bufferflies)
     - リージョンの読み込み速度を向上 [#5606](https://github.com/tikv/pd/issues/5606) @[rleungx](https://github.com/rleungx)
     - リージョンハートビートの最適化された処理により不要なオーバーヘッドを削減 [#5648](https://github.com/tikv/pd/issues/5648) @[rleungx](https://github.com/rleungx)
     - tombstoneストアの自動ガベージコレクション機能を追加 [#5348](https://github.com/tikv/pd/issues/5348) @[nolouch](https://github.com/nolouch)
@@ -442,7 +442,7 @@ v6.5.0 以降では、v4.0.7 で導入された`AMEND TRANSACTION`メカニズ�
     - `tidb_constraint_check_in_place_pessimistic`の内部セッションがグローバル設定の影響を受ける可能性がある問題を修正しました [#38766](https://github.com/pingcap/tidb/issues/38766) @[ekexium](https://github.com/ekexium)
     - `AUTO_INCREMENT`列が`CHECK`制約で動作しない問題を修正 [#38894](https://github.com/pingcap/tidb/issues/38894) @[YangKeao](https://github.com/YangKeao)
     - `INSERT IGNORE INTO`を使用して`STRING`型のデータを`SMALLINT`型のAUTO_INCREMENT列に挿入すると、エラーが発生する問題を修正しました。 [#38483](https://github.com/pingcap/tidb/issues/38483) @[hawkingrei](https://github.com/hawkingrei)
-    - パーティションテーブルのパーティション列の名前を変更する操作で NULL ポインタ エラーが発生する問題を修正しました。 [#38932](https://github.com/pingcap/tidb/issues/38932) @[mjonss](https://github.com/mjonss)
+    - パーティションテーブルのパーティション列の名前を変更する操作で NULL ポインターエラーが発生する問題を修正しました。 [#38932](https://github.com/pingcap/tidb/issues/38932) @[mjonss](https://github.com/mjonss)
     - パーティションテーブルのパーティション列を変更すると、DDLがハングする問題を修正しました。 [#38530](https://github.com/pingcap/tidb/issues/38530) @[mjonss](https://github.com/mjonss)
     - v4.0.16からv6.4.0 にアップグレードした後に`ADMIN SHOW JOB`操作がパニックになる問題を修正 [#38980](https://github.com/pingcap/tidb/issues/38980) @[tangenta](https://github.com/tangenta)
     - `tidb_decode_key`関数がパーティションテーブルのエンコーディングを正しく解析できない問題を修正しました [#39304](https://github.com/pingcap/tidb/issues/39304) @[Defined2014](https://github.com/Defined2014)

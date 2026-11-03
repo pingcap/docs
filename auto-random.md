@@ -15,7 +15,7 @@ TiDB で同時書き込みの多いワークロードを処理する方法の詳
 
 </CustomContent>
 
-[CREATE TABLE](/sql-statements/sql-statement-create-table.md)文の`AUTO_RANDOM_BASE`パラメータは、初期増分値`auto_random`を設定するために使用されます。このオプションは内部インターフェースの一部とみなすことができます。このパラメータは無視できます。
+[CREATE TABLE](/sql-statements/sql-statement-create-table.md)文の`AUTO_RANDOM_BASE`パラメーターは、初期増分値`auto_random`を設定するために使用されます。このオプションは内部インターフェースの一部とみなせます。このパラメーターは無視できます。
 
 ## 基本概念 {#basic-concepts}
 
@@ -31,7 +31,7 @@ CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a));
 CREATE TABLE t (a BIGINT AUTO_RANDOM(5, 54), b VARCHAR(255), PRIMARY KEY (a, b));
 ```
 
-キーワード`AUTO_RANDOM`実行コメントで囲むことができます。詳細については[TiDB固有のコメント構文](/comment-syntax.md#tidb-specific-comment-syntax)を参照してください。
+キーワード`AUTO_RANDOM`実行コメントで囲めます。詳細については[TiDB固有のコメント構文](/comment-syntax.md#tidb-specific-comment-syntax)を参照してください。
 
 ```sql
 CREATE TABLE t (a bigint /*T![auto_rand] AUTO_RANDOM */, b VARCHAR(255), PRIMARY KEY (a));
@@ -135,8 +135,8 @@ TiDB によって自動的に割り当てられる`AUTO_RANDOM(S, R)`列の値�
 >
 > 範囲の選択（ `R` ）：
 >
-> - 通常、アプリケーションの数値型が完全な 64 ビット整数を表現できない場合は、 `R`パラメータを設定する必要があります。
-> - 例えば、JSONの数値の範囲は`[-(2^53)+1, (2^53)-1]`です。TiDBは、 `AUTO_RANDOM(5)`と定義された列にこの範囲を超える整数を簡単に割り当ててしまう可能性があり、アプリケーションがその列を読み取った際に予期しない動作を引き起こす可能性があります。このような場合、符号付き列の場合は`AUTO_RANDOM(5)` `AUTO_RANDOM(5, 54)`に、符号なし列の場合は`AUTO_RANDOM(5)` `AUTO_RANDOM(5, 53)`に置き換えることで、TiDBが列に`9007199254740991` (2^53-1) を超える整数を割り当てないようにすることができます。
+> - 通常、アプリケーションの数値型が完全な 64 ビット整数を表現できない場合は、 `R`パラメーターを設定する必要があります。
+> - 例えば、JSONの数値の範囲は`[-(2^53)+1, (2^53)-1]`です。TiDBは、 `AUTO_RANDOM(5)`と定義された列にこの範囲を超える整数を簡単に割り当ててしまう可能性があり、アプリケーションがその列を読み取った際に予期しない動作を引き起こす可能性があります。このような場合、符号付き列の場合は`AUTO_RANDOM(5)` `AUTO_RANDOM(5, 54)`に、符号なし列の場合は`AUTO_RANDOM(5)` `AUTO_RANDOM(5, 53)`に置き換えることで、TiDBが列に`9007199254740991` (2^53-1) を超える整数を割り当てないようにできます。
 
 `AUTO_RANDOM`列に暗黙的に割り当てられた値は`last_insert_id()`影響します。TiDB が最後に暗黙的に割り当てた ID を取得するには、 `SELECT last_insert_id ()`ステートメントを使用できます。
 
@@ -168,7 +168,7 @@ TiDBは、 `AUTO_INCREMENT`列と同様に、 `AUTO_RANDOM`列にも暗黙的に
 
 複数のTiDBサーバーインスタンスが存在する環境で、 `AUTO_RANDOM`列に明示的な値を持つデータを挿入すると、 `AUTO_INCREMENT`列と同様に、IDの衝突が発生する可能性があります。明示的な挿入で使用されたID値が、TiDBが自動生成に使用する内部カウンターと競合すると、エラーが発生する可能性があります。
 
-衝突が発生する仕組みは以下のとおりです。 `AUTO_RANDOM` IDはランダムビットとAUTO_INCREMENT部分で構成されています。TiDBはこのAUTO_INCREMENT部分に内部カウンタを使用します。AUTO_INCREMENT部分がカウンタの次の値と一致するIDを明示的に挿入すると、TiDBが後で同じIDを自動生成しようとする際に、重複キーエラーが発生する可能性があります。詳細については、 [AUTO_INCREMENT 一意性](/auto-increment.md#uniqueness)を参照してください。
+衝突が発生する仕組みは以下のとおりです。 `AUTO_RANDOM` IDはランダムビットとAUTO_INCREMENT部分で構成されています。TiDBはこのAUTO_INCREMENT部分に内部カウンターを使用します。AUTO_INCREMENT部分がカウンターの次の値と一致するIDを明示的に挿入すると、TiDBが後で同じIDを自動生成しようとする際に、重複キーエラーが発生する可能性があります。詳細については、 [AUTO_INCREMENT 一意性](/auto-increment.md#uniqueness)を参照してください。
 
 TiDBインスタンスが1つの場合、ノードは明示的な挿入を処理する際に内部カウンターを自動的に調整し、将来の衝突を防ぐため、この問題は発生しません。一方、複数のTiDBノードがある場合、各ノードは独自のIDキャッシュを保持しており、明示的な挿入後に衝突を防ぐには、このキャッシュをクリアする必要があります。これらの未割り当てのキャッシュIDをクリアして衝突の可能性を回避するには、次の2つの方法があります。
 

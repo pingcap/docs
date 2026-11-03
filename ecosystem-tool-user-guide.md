@@ -13,20 +13,20 @@ TiDB は、さまざまなシステム環境でのデプロイおよび運用の
 
 ### 物理マシンまたは仮想マシンに TiDBをデプロイて運用する - TiUP {#deploy-and-operate-tidb-on-physical-or-virtual-machines-tiup}
 
-[TiUP](/tiup/tiup-overview.md)は、物理マシンまたは仮想マシン上のTiDBパッケージマネージャです。TiUPは、TiDB、PD、TiKVなどの複数のTiDBコンポーネントを管理できます。TiDBエコシステム内の任意のコンポーネントを起動するには、 TiUPコマンドを1行実行するだけです。
+[TiUP](/tiup/tiup-overview.md)は、物理マシンまたは仮想マシン上のTiDBパッケージマネージャーです。TiUPは、TiDB、PD、TiKVなどの複数のTiDBコンポーネントを管理できます。TiDBエコシステム内の任意のコンポーネントを起動するには、 TiUPコマンドを1行実行するだけです。
 
-TiUPは、 Golangで記述されたクラスタ管理コンポーネントで[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)提供します。TiUPクラスタを使用することで、 TiUPクラスタのデプロイ、起動、停止、破棄、スケーリング、アップグレードといった日常的なデータベース操作や、TiDBクラスタパラメータの管理を容易に行うことができます。
+TiUPは、 Golangで記述されたクラスター管理コンポーネントで[TiUPクラスター](https://github.com/pingcap/tiup/tree/master/components/cluster)提供します。TiUPクラスターを使用することで、 TiUPクラスターのデプロイ、起動、停止、破棄、スケーリング、アップグレードといった日常的なデータベース操作や、TiDBクラスターパラメーターの管理を容易に行えます。
 
 TiUPの基本は次のとおりです。
 
 - [用語と概念](/tiup/tiup-terminology-and-concepts.md)
-- [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [TiUPを使用して TiDBクラスターをデプロイ](/production-deployment-using-tiup.md)
 - [TiUPコマンドを使用してTiUPコンポーネントを管理する](/tiup/tiup-component-management.md)
 - 適用可能な TiDB バージョン: v4.0 以降
 
 ### Kubernetes 上で TiDBをデプロイて運用する - TiDB Operator {#deploy-and-operate-tidb-on-kubernetes-tidb-operator}
 
-[TiDB Operator](https://github.com/pingcap/tidb-operator)は、Kubernetes上でTiDBクラスタを管理するための自動運用システムです。デプロイメント、アップグレード、スケーリング、バックアップ、設定変更など、TiDBのライフサイクル全体にわたる管理を提供します。TiDB Operatorを使用することで、パブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスタ内でTiDBをシームレスに実行できます。
+[TiDB Operator](https://github.com/pingcap/tidb-operator)は、Kubernetes上でTiDBクラスターを管理するための自動運用システムです。デプロイメント、アップグレード、スケーリング、バックアップ、設定変更など、TiDBのライフサイクル全体にわたる管理を提供します。TiDB Operatorを使用することで、パブリッククラウドまたはプライベートクラウドにデプロイされたKubernetesクラスター内でTiDBをシームレスに実行できます。
 
 TiDB Operatorの基本は次のとおりです。
 
@@ -40,7 +40,7 @@ TiDB は、インポートとエクスポート、バックアップと復元、
 
 ### データ移行 - TiDB Data Migration (DM) {#data-migration-tidb-data-migration-dm}
 
-[TiDB Data Migration](/dm/dm-overview.md) (DM) は、MySQL/MariaDB から TiDB への完全なデータ移行と増分データレプリケーションをサポートするツールです。
+[TiDB Data Migration](/dm/dm-overview.md) (DM) は、MySQL/MariaDB から TiDB への完全データ移行と増分データレプリケーションをサポートするツールです。
 
 DM の基本は次のとおりです。
 
@@ -49,7 +49,7 @@ DM の基本は次のとおりです。
 - サポートされている TiDB バージョン: すべてのバージョン
 - Kubernetes サポート: Kubernetes に TiDB DM をデプロイするには[TiDB Operator](https://github.com/pingcap/tidb-operator)を使用します。
 
-データ量が1TB未満の場合は、DMを使用してMySQL/MariaDBからTiDBに直接データを移行することをお勧めします。移行プロセスには、完全なデータ移行と増分データレプリケーションが含まれます。
+データ量が1TB未満の場合は、DMを使用してMySQL/MariaDBからTiDBに直接データを移行することをお勧めします。移行プロセスには、完全データ移行と増分データレプリケーションが含まれます。
 
 データ量が 1 TB を超える場合は、次の手順を実行します。
 

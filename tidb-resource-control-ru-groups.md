@@ -10,9 +10,9 @@ aliases: ['/ja/tidb/v8.5/tidb-resource-control/','/ja/tidb/stable/tidb-resource-
 >
 > この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-クラスタ管理者として、リソース制御機能を使用して、リソースグループの作成、リソースグループの割り当て量の設定、およびユーザーをそれらのグループにバインドすることができます。
+クラスター管理者として、リソース制御機能を使用して、リソースグループの作成、リソースグループの割り当て量の設定、およびユーザーをそれらのグループにバインドできます。
 
-TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能とTiKVレイヤーの優先度スケジューリング機能という2つのレイヤーのリソース管理機能を提供します。これらの2つの機能は、個別に、または同時に有効にすることができます。詳しくは[リソース制御のためのパラメータ](#parameters-for-resource-control)を参照してください。これにより、TiDBレイヤーはリソースグループに設定されたクォータに基づいてユーザーの読み取りおよび書き込みリクエストのフローを制御し、TiKVレイヤーは読み取りおよび書き込みクォータにマッピングされた優先度に基づいてリクエストをスケジュールすることができます。この操作を行うことで、アプリケーションのリソース分離を確保し、サービス品質（QoS）要件を満たすことができます。
+TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能とTiKVレイヤーの優先度スケジューリング機能という2つのレイヤーのリソース管理機能を提供します。これらの2つの機能は、個別に、または同時に有効にできます。詳しくは[リソース制御のためのパラメーター](#parameters-for-resource-control)を参照してください。これにより、TiDBレイヤーはリソースグループに設定されたクォータに基づいてユーザーの読み取りおよび書き込みリクエストのフローを制御し、TiKVレイヤーは読み取りおよび書き込みクォータにマッピングされた優先度に基づいてリクエストをスケジュールできます。この操作を行うことで、アプリケーションのリソース分離を確保し、サービス品質（QoS）要件を満たせます。
 
 - TiDBフロー制御：TiDBフロー制御は[トークンバケットアルゴリズム](https://en.wikipedia.org/wiki/Token_bucket)を使用します。バケットに十分なトークンがなく、リソースグループが`BURSTABLE`オプションを指定していない場合、リソースグループへのリクエストはトークンバケットがトークンを補充するまで待機し、再試行します。再試行はタイムアウトにより失敗する可能性があります。
 
@@ -22,15 +22,15 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 
 <CustomContent platform="tidb">
 
-- TiFlashフロー制御: [TiFlashパイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
-- TiFlashスケジューリング: システムリソースが不足している場合、 TiFlash は優先順位に基づいて複数のリソースグループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソースグループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。その結果、 `rg1`と`rg2`が同じ`PRIORITY`を持ち、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
+- TiFlashフロー制御: [TiFlashパイプライン実行モデル](/tiflash/tiflash-pipeline-model.md)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット数（RU）](#what-is-request-unit-ru)に変換して差し引けます。トラフィック制御はトークンバケットアルゴリズムを使用して実装されます。
+- TiFlashスケジューリング: システムリソースが不足している場合、 TiFlash は優先順位に基づいて複数のリソースグループ間でパイプラインタスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソースグループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。その結果、 `rg1`と`rg2`が同じ`PRIORITY`を持ち、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- TiFlashフロー制御: [TiFlashパイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット数（RU）](#what-is-request-unit-ru)に変換して差し引くことができます。トラフィック制御はトークン バケット アルゴリズムを使用して実装されます。
-- TiFlashスケジューリング: システムリソースが不足している場合、 TiFlash は優先順位に基づいて複数のリソースグループ間でパイプライン タスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソースグループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。その結果、 `rg1`と`rg2`が同じ`PRIORITY`を持ち、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
+- TiFlashフロー制御: [TiFlashパイプライン実行モデル](http://docs.pingcap.com/tidb/dev/tiflash-pipeline-model)を使用すると、 TiFlash はさまざまなクエリの CPU 消費量をより正確に取得し、それを[リクエストユニット数（RU）](#what-is-request-unit-ru)に変換して差し引けます。トラフィック制御はトークンバケットアルゴリズムを使用して実装されます。
+- TiFlashスケジューリング: システムリソースが不足している場合、 TiFlash は優先順位に基づいて複数のリソースグループ間でパイプラインタスクをスケジュールします。具体的なロジックは次のとおりです。まず、 TiFlash はリソースグループの`PRIORITY`を評価し、次に CPU 使用率と`RU_PER_SEC`を考慮します。その結果、 `rg1`と`rg2`が同じ`PRIORITY`を持ち、 `rg2`の`RU_PER_SEC`が`rg1`の 2 倍である場合、 `rg2`の CPU 使用率は`rg1`の 2 倍になります。
 
 </CustomContent>
 
@@ -41,20 +41,20 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 
 ## リソース制御のシナリオ {#scenarios-for-resource-control}
 
-リソース制御機能の導入は、TiDBにとって画期的な出来事です。この機能により、分散データベースクラスタを複数の論理ユニットに分割できます。たとえ個々のユニットがリソースを過剰に使用したとしても、他のユニットが必要とするリソースを圧迫することはありません。
+リソース制御機能の導入は、TiDBにとって画期的な出来事です。この機能により、分散データベースクラスターを複数の論理ユニットに分割できます。たとえ個々のユニットがリソースを過剰に使用したとしても、他のユニットが必要とするリソースを圧迫することはありません。
 
 この機能を使うと、次のことができます。
 
-- 異なるシステムに存在する複数の中小規模アプリケーションを単一のTiDBクラスタに統合します。アプリケーションのワークロードが増加しても、他のアプリケーションの正常な動作には影響しません。システムワークロードが低い場合、負荷の高いアプリケーションは設定されたクォータを超えても必要なシステムリソースを割り当てられるため、リソースを最大限に活用できます。
-- すべてのテスト環境を単一のTiDBクラスタに統合するか、より多くのリソースを消費するバッチタスクを単一のリソースグループにまとめるかを選択できます。これにより、ハードウェア利用率を向上させ、運用コストを削減しながら、重要なアプリケーションが常に必要なリソースを確保できるようになります。
-- システム内に複数のワークロードが存在する場合、異なるワークロードを別々のリソースグループに割り当てることができます。リソース制御機能を使用することで、トランザクションアプリケーションの応答時間がデータ分析やバッチ処理アプリケーションの影響を受けないようにすることができます。
+- 異なるシステムに存在する複数の中小規模アプリケーションを単一のTiDBクラスターに統合します。アプリケーションのワークロードが増加しても、他のアプリケーションの正常な動作には影響しません。システムワークロードが低い場合、負荷の高いアプリケーションは設定されたクォータを超えても必要なシステムリソースを割り当てられるため、リソースを最大限に活用できます。
+- すべてのテスト環境を単一のTiDBクラスターに統合するか、より多くのリソースを消費するバッチタスクを単一のリソースグループにまとめるかを選択できます。これにより、ハードウェア利用率を向上させ、運用コストを削減しながら、重要なアプリケーションが常に必要なリソースを確保できるようになります。
+- システム内に複数のワークロードが存在する場合、異なるワークロードを別々のリソースグループに割り当てることができます。リソース制御機能を使用することで、トランザクションアプリケーションの応答時間がデータ分析やバッチ処理アプリケーションの影響を受けないようにできます。
 - クラスターで予期しないSQLパフォーマンスの問題が発生した場合、SQLバインディングとリソースグループを併用することで、SQL文のリソース消費を一時的に制限できます。
 
-さらに、リソース制御機能を合理的に活用することで、クラスタ数を削減し、運用・保守の難易度を下げ、管理コストを削減することができます。
+さらに、リソース制御機能を合理的に活用することで、クラスター数を削減し、運用・保守の難易度を下げ、管理コストを削減できます。
 
 > **Note:**
 >
-> - リソース管理の有効性を評価するには、クラスタを独立したコンピューティングノードとストレージノードにデプロイすることをお勧めします。 `tiup playground`で作成されたデプロイメントでは、リソースがインスタンス間で共有されるため、スケジューリングやその他のクラスタのリソースに依存する機能が正しく動作しない場合があります。
+> - リソース管理の有効性を評価するには、クラスターを独立したコンピューティングノードとストレージノードにデプロイすることをお勧めします。 `tiup playground`で作成されたデプロイメントでは、リソースがインスタンス間で共有されるため、スケジューリングやその他のクラスターのリソースに依存する機能が正しく動作しない場合があります。
 
 ## 制限事項 {#limitations}
 
@@ -69,30 +69,30 @@ TiDBのリソース制御機能は、TiDBレイヤーのフロー制御機能と
 > **Note:**
 >
 > - 各書き込み操作は最終的にすべてのレプリカに複製されます（デフォルトでは、TiKVには3つのレプリカがあります）。各複製操作は、それぞれ異なる書き込み操作として扱われます。
-> - 上記の表には、TiDB Self-ManagedクラスタのRU計算に関わるリソースのみが記載されており、ネットワークとストレージの消費量は含まれていません。TiDB Cloud StarterのRUについては、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
+> - 上記の表には、TiDB Self-ManagedクラスターのRU計算に関わるリソースのみが記載されており、ネットワークとストレージの消費量は含まれていません。TiDB Cloud StarterのRUについては、 [TiDB Cloud Starterの料金詳細](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)を参照してください。
 > - 現在、 TiFlashのリソース制御では、SQL CPUのみが考慮されます。SQL CPUとは、クエリおよび読み取りリクエストのペイロードに対するパイプラインタスクの実行によって消費されるCPU時間です。
 
-## リソース制御のためのパラメータ {#parameters-for-resource-control}
+## リソース制御のためのパラメーター {#parameters-for-resource-control}
 
-リソース制御機能では、以下のシステム変数またはパラメータが導入されます。
+リソース制御機能では、以下のシステム変数またはパラメーターが導入されます。
 
 - TiDB: [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)システム変数を使用して、リソースグループのフロー制御を有効にするかどうかを制御できます。
 
 <CustomContent platform="tidb">
 
-- TiKV: [`resource-control.enabled`](/tikv-configuration-file.md#resource-control)パラメータを使用すると、リソースグループに基づいてリクエストスケジューリングを使用するかどうかを制御できます。
+- TiKV: [`resource-control.enabled`](/tikv-configuration-file.md#resource-control)パラメーターを使用すると、リソースグループに基づいてリクエストスケジューリングを使用するかどうかを制御できます。
 - TiFlash: TiFlashリソース制御を有効にするかどうかは、 [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)システム変数と[`enable_resource_control`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)設定項目（v7.4.0で導入）を使用して制御できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- TiKV: TiDB Self-Managed では、 `resource-control.enabled`パラメータを使用して、リソースグループのクォータに基づいてリクエストスケジューリングを使用するかどうかを制御できます。TiDB Cloudでは、 `resource-control.enabled`パラメータのデフォルト値は`true`であり、動的な変更はサポートされていません。
+- TiKV: TiDB Self-Managed では、 `resource-control.enabled`パラメーターを使用して、リソースグループのクォータに基づいてリクエストスケジューリングを使用するかどうかを制御できます。TiDB Cloudでは、 `resource-control.enabled`パラメーターのデフォルト値は`true`であり、動的な変更はサポートされていません。
 - TiFlash: TiDB Self-Managedの場合、 `tidb_enable_resource_control`システム変数と`enable_resource_control`設定項目 (v7.4.0 で導入) を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。
 
 </CustomContent>
 
-TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`はデフォルトで有効になっています。これら2つのパラメータの組み合わせによる結果を次の表に示します。
+TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`はデフォルトで有効になっています。これら2つのパラメーターの組み合わせによる結果を次の表に示します。
 
 | `resource-control.enabled`         | `tidb_enable_resource_control` = オン | `tidb_enable_resource_control` = オフ |
 | :--------------------------------- | :---------------------------------- | :---------------------------------- |
@@ -111,7 +111,7 @@ TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`
 
 </CustomContent>
 
-リソース制御メカニズムとパラメータの詳細については、 [RFC: TiDBにおけるグローバルリソース制御](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md)および[TiFlashリソース制御](https://github.com/pingcap/tiflash/blob/release-8.5/docs/design/2023-09-21-tiflash-resource-control.md)を参照してください。
+リソース制御メカニズムとパラメーターの詳細については、 [RFC: TiDBにおけるグローバルリソース制御](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2022-11-25-global-resource-control.md)および[TiFlashリソース制御](https://github.com/pingcap/tiflash/blob/release-8.5/docs/design/2023-09-21-tiflash-resource-control.md)を参照してください。
 
 ## リソース制御の使い方 {#how-to-use-resource-control}
 
@@ -121,7 +121,7 @@ TiDB v7.0.0以降、 `tidb_enable_resource_control`と`resource-control.enabled`
 
 <CustomContent platform="tidb">
 
-リソース計画を行う前に、クラスタ全体のキャパシティを把握しておく必要があります。TiDB では、クラスタキャパシティを推定するための[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)ステートメントが提供されています。以下のいずれかの方法を使用できます。
+リソース計画を行う前に、クラスター全体のキャパシティを把握しておく必要があります。TiDB では、クラスターキャパシティを推定するための[`CALIBRATE RESOURCE`](/sql-statements/sql-statement-calibrate-resource.md)ステートメントが提供されています。以下のいずれかの方法を使用できます。
 
 - [実際の作業負荷に基づいてキャパシティを推定する](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-actual-workload)
 - [ハードウェアの導入状況に基づいてキャパシティを推定する](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
@@ -132,7 +132,7 @@ TiDB Dashboardで[リソースマネージャーページ](/dashboard/dashboard-
 
 <CustomContent platform="tidb-cloud">
 
-TiDB Self-Managedの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスタキャパシティを推定できます。
+TiDB Self-Managedの場合、 [`CALIBRATE RESOURCE`](https://docs.pingcap.com/tidb/stable/sql-statement-calibrate-resource)ステートメントを使用してクラスターキャパシティを推定できます。
 
 TiDB Cloud Dedicated では、`CALIBRATE RESOURCE`文はサポートされていません。クラスターの RU キャパシティを見積もるには、代わりに TiDB Cloud コンソールの **Calibrate Resource** 機能を使用してください。詳細については、[Calibrate Resource](/tidb-cloud/calibrate-resource.md) を参照してください。
 
@@ -152,7 +152,7 @@ TiDB Cloud Dedicated では、`CALIBRATE RESOURCE`文はサポートされてい
 
 以下は、リソースグループを作成する方法の例です。
 
-1. リソースグループ`rg1`を作成します。リソース制限は毎秒 500 RU で、このリソースグループ内のアプリケーションはリソースを超過することができます。
+1. リソースグループ`rg1`を作成します。リソース制限は毎秒 500 RU で、このリソースグループ内のアプリケーションはリソースを超過できます。
 
     ```sql
     CREATE RESOURCE GROUP IF NOT EXISTS rg1 RU_PER_SEC = 500 BURSTABLE;
@@ -176,7 +176,7 @@ TiDBは、以下の3つのレベルのリソースグループ設定をサポー
 
 - ユーザーレベル。[`CREATE USER`](/sql-statements/sql-statement-create-user.md)または[`ALTER USER`](/sql-statements/sql-statement-alter-user.md#modify-the-resource-group-bound-to-the-user)ステートメントを使用して、ユーザーを特定のリソースグループにバインドします。ユーザーがリソースグループにバインドされると、そのユーザーが作成したセッションは自動的に対応するリソースグループにバインドされます。
 - セッションレベル。[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションのリソースグループを設定します。
-- ステートメントレベル。[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントを使用して、現在のステートメントのリソースグループを設定します。
+- ステートメントレベル。[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザーヒントを使用して、現在のステートメントのリソースグループを設定します。
 
 #### ユーザーをリソースグループにバインドする {#bind-users-to-a-resource-group}
 
@@ -199,7 +199,7 @@ ALTER USER usr2 RESOURCE GROUP rg2;
 > **Note:**
 >
 > - `CREATE USER`または`ALTER USER`を使用してユーザーをリソースグループにバインドすると、その設定はユーザーの既存のセッションには適用されず、ユーザーの新しいセッションにのみ適用されます。
-> - TiDB はクラスタ初期化時に`default`リソースグループを自動的に作成します。このリソースグループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) で、 `BURSTABLE`モードです。リソースグループにバインドされていないステートメントは、自動的にこのリソースグループにバインドされます。このリソースグループは削除をサポートしていませんが、RU の設定を変更することはできます。
+> - TiDB はクラスター初期化時に`default`リソースグループを自動的に作成します。このリソースグループの`RU_PER_SEC`のデフォルト値は`UNLIMITED` ( `INT`型の最大値、つまり`2147483647`に相当) で、 `BURSTABLE`モードです。リソースグループにバインドされていないステートメントは、自動的にこのリソースグループにバインドされます。このリソースグループは削除をサポートしていませんが、RU の設定を変更することはできます。
 
 リソースグループからユーザーのバインドを解除するには、次のようにしてユーザーを`default`グループに再度バインドするだけです。
 
@@ -243,7 +243,7 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2. リソースグループの RU に基づくスケジューリングを無効にするには、TiKV パラメータ[`resource-control.enabled`](/tikv-configuration-file.md#resource-control)を`false`に設定します。
+2. リソースグループの RU に基づくスケジューリングを無効にするには、TiKV パラメーター[`resource-control.enabled`](/tikv-configuration-file.md#resource-control)を`false`に設定します。
 
 3. TiFlashのリソース制御を無効にするには、 TiFlash設定項目[`enable_resource_control`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file) `false`に設定します。
 
@@ -257,9 +257,9 @@ SELECT /*+ RESOURCE_GROUP(rg1) */ * FROM t limit 10;
     SET GLOBAL tidb_enable_resource_control = 'OFF';
     ```
 
-2. TiDB Self-Managed では、 `resource-control.enabled`パラメータを使用して、リソースグループのクォータに基づいてリクエストスケジューリングを使用するかどうかを制御できます。TiDB Cloudでは、 `resource-control.enabled`パラメータのデフォルト値は`true`であり、動的な変更はサポートされていません。TiDB Cloud Dedicatedクラスタでこれを無効にする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+2. TiDB Self-Managed では、 `resource-control.enabled`パラメーターを使用して、リソースグループのクォータに基づいてリクエストスケジューリングを使用するかどうかを制御できます。TiDB Cloudでは、 `resource-control.enabled`パラメーターのデフォルト値は`true`であり、動的な変更はサポートされていません。TiDB Cloud Dedicatedクラスターでこれを無効にする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-3. TiDB Self-Managed では、 `enable_resource_control`設定項目を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。TiDB Cloudでは、 `enable_resource_control`パラメータのデフォルト値は`true`であり、動的な変更はサポートされていません。TiDB Cloud Dedicatedクラスタでこれを無効にする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+3. TiDB Self-Managed では、 `enable_resource_control`設定項目を使用して、 TiFlashリソース制御を有効にするかどうかを制御できます。TiDB Cloudでは、 `enable_resource_control`パラメーターのデフォルト値は`true`であり、動的な変更はサポートされていません。TiDB Cloud Dedicatedクラスターでこれを無効にする必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 </CustomContent>
 
@@ -312,7 +312,7 @@ TiDBはシステム変数[`tidb_last_query_info`](/system-variables.md#tidb_last
 
 #### SQL実行中に消費されたRUを`EXPLAIN ANALYZE`で表示する {#view-rus-consumed-during-sql-execution-by-explain-analyze}
 
-[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL 実行中に消費される RU の量を取得できます。RU の量はキャッシュ (たとえば、[コプロセッサキャッシュ](/coprocessor-cache.md)) の影響を受けることに注意してください。同じ SQL を複数回実行すると、各実行で消費される RU の量は異なる場合があります。RU の値は各実行の正確な値を表すものではありませんが、推定の参考として使用できます。
+[`EXPLAIN ANALYZE`](/sql-statements/sql-statement-explain-analyze.md#ru-request-unit-consumption)ステートメントを使用すると、SQL 実行中に消費される RU の量を取得できます。RU の量はキャッシュ (たとえば、[コプロセッサーキャッシュ](/coprocessor-cache.md)) の影響を受けることに注意してください。同じ SQL を複数回実行すると、各実行で消費される RU の量は異なる場合があります。RU の値は各実行の正確な値を表すものではありませんが、推定の参考として使用できます。
 
 #### スロークエリとそれに対応するシステムテーブル {#slow-queries-and-the-corresponding-system-table}
 
@@ -395,11 +395,11 @@ TiKVは、Grafanaの**TiKV**ダッシュボードに、さまざまなリソー�
 
 2. データベースユーザーは複数のリソースグループに紐付けられますか？
 
-    いいえ。データベースユーザーは1つのリソースグループにしかバインドできません。ただし、セッション実行時には、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションで使用するリソースグループを設定できます。また、オプティマイザヒント[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を使用して、実行中のステートメントのリソースグループを設定することもできます。
+    いいえ。データベースユーザーは1つのリソースグループにしかバインドできません。ただし、セッション実行時には、 [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)を使用して、現在のセッションで使用するリソースグループを設定できます。また、オプティマイザーヒント[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)を使用して、実行中のステートメントのリソースグループを設定することもできます。
 
 3. すべてのリソースグループの合計リソース割り当て（ `RU_PER_SEC` ）がシステムキャパシティを超えた場合、どうなりますか？
 
-    TiDB は、リソースグループを作成する際にキャパシティを検証しません。システムに十分な利用可能なリソースがあれば、TiDB は各リソースグループのリソース要件を満たすことができます。システムリソースが制限を超えると、TiDB は優先度の高いリソースグループからのリクエストを満たすことを優先します。同じ優先度のリクエストすべてを満たすことができない場合、TiDB はリソース割り当て ( `RU_PER_SEC` ) に従ってリソースを比例的に割り当てます。
+    TiDB は、リソースグループを作成する際にキャパシティを検証しません。システムに十分な利用可能なリソースがあれば、TiDB は各リソースグループのリソース要件を満たせます。システムリソースが制限を超えると、TiDB は優先度の高いリソースグループからのリクエストを満たすことを優先します。同じ優先度のリクエストすべてを満たせない場合、TiDB はリソース割り当て ( `RU_PER_SEC` ) に従ってリソースを比例的に割り当てます。
 
 ## 参照 {#see-also}
 

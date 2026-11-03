@@ -19,11 +19,11 @@ SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY a) AS rownumber FROM t) dt WHE
 WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY a) AS rownumber FROM t_topN) dt WHERE rownumber <= 3
 ```
 
-書き換え後、TiDBはウィンドウ関数とそれに続くフィルタ条件からTopNオペレーターを導出できます。元のSQL（ `ORDER BY` ）のSortオペレーターと比較して、TopNオペレーターは実行効率がはるかに高くなります。さらに、TiKVとTiFlashはどちらもTopNオペレーターのプッシュダウンをサポートしており、書き換えられたSQLのパフォーマンスをさらに向上させます。
+書き換え後、TiDBはウィンドウ関数とそれに続くフィルター条件からTopNオペレーターを導出できます。元のSQL（ `ORDER BY` ）のSortオペレーターと比較して、TopNオペレーターは実行効率がはるかに高くなります。さらに、TiKVとTiFlashはどちらもTopNオペレーターのプッシュダウンをサポートしており、書き換えられたSQLのパフォーマンスをさらに向上させます。
 
 ウィンドウ関数からTopNまたはLimitを導出することはデフォルトで無効になっています。この機能を有効にするには、セッション変数[`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`ON`に設定します。
 
-この機能を有効にした後、次のいずれかの操作を実行して無効にすることができます。
+この機能を有効にした後、次のいずれかの操作を実行して無効にできます。
 
 - セッション変数[`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)を`OFF`に設定します。
 - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)に記載されている手順に従います。
@@ -31,7 +31,7 @@ WITH t_topN AS (SELECT a FROM t1 ORDER BY a LIMIT 3) SELECT * FROM (SELECT ROW_N
 ## 制限事項 {#limitations}
 
 - SQL 書き換えでは`ROW_NUMBER()`ウィンドウ関数のみがサポートされます。
-- TiDB は、 `ROW_NUMBER()`の結果をフィルタリングし、フィルタ条件が`<`または`<=`の場合にのみ SQL を書き換えることができます。
+- TiDB は、 `ROW_NUMBER()`の結果をフィルタリングし、フィルター条件が`<`または`<=`の場合にのみ SQL を書き換えることができます。
 
 ## 使用例 {#usage-examples}
 
@@ -63,7 +63,7 @@ EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER () AS rownumber FROM t) dt WHERE
 +----------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------+
 ```
 
-このクエリでは、オプティマイザはウィンドウ関数から Limit オペレーターを導出し、それを TiKV にプッシュダウンします。
+このクエリでは、オプティマイザーはウィンドウ関数から Limit オペレーターを導出し、それを TiKV にプッシュダウンします。
 
 #### 例2: ORDER BYを使用したウィンドウ関数 {#example-2-window-functions-with-order-by}
 
@@ -89,7 +89,7 @@ EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (ORDER BY value) AS rownumber FR
 +----------------------------------+----------+-----------+---------------+---------------------------------------------------------------------------------------------+
 ```
 
-このクエリでは、オプティマイザはウィンドウ関数から TopN オペレーターを導出し、それを TiKV にプッシュダウンします。
+このクエリでは、オプティマイザーはウィンドウ関数から TopN オペレーターを導出し、それを TiKV にプッシュダウンします。
 
 ### PARTITION BYを使用したウィンドウ関数 {#window-functions-with-partition-by}
 
@@ -122,7 +122,7 @@ EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY id1) AS rownumber 
 +------------------------------------+---------+-----------+---------------+-----------------------------------------------------------------------------------------------+
 ```
 
-このクエリでは、オプティマイザはウィンドウ関数からLimitオペレーターを導出し、TiKVにプッシュダウンします。このLimitは実際にはパーティションLimitであり、同じ`id1`値を持つデータの各グループに適用されることに注意してください。
+このクエリでは、オプティマイザーはウィンドウ関数からLimitオペレーターを導出し、TiKVにプッシュダウンします。このLimitは実際にはパーティションLimitであり、同じ`id1`値を持つデータの各グループに適用されることに注意してください。
 
 #### 例4: ORDER BYを使用したウィンドウ関数 {#example-4-window-functions-with-order-by}
 
@@ -149,7 +149,7 @@ EXPLAIN SELECT * FROM (SELECT ROW_NUMBER() OVER (PARTITION BY id1 ORDER BY value
 +------------------------------------+----------+-----------+---------------+----------------------------------------------------------------------------------------------------------------------+
 ```
 
-このクエリでは、オプティマイザはウィンドウ関数からTopNオペレーターを導出し、TiKVにプッシュダウンします。このTopNは実際にはパーティションTopNであり、同じ`id1`値を持つデータの各グループに適用されることに注意してください。
+このクエリでは、オプティマイザーはウィンドウ関数からTopNオペレーターを導出し、TiKVにプッシュダウンします。このTopNは実際にはパーティションTopNであり、同じ`id1`値を持つデータの各グループに適用されることに注意してください。
 
 #### 例5: PARTITION BY列は主キーの接頭辞ではありません {#example-5-partition-by-column-is-not-a-prefix-of-the-primary-key}
 

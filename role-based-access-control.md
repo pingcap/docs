@@ -11,7 +11,7 @@ TiDB のロールベースアクセス制御 (RBAC) システムの実装は、M
 
 ## RBAC操作 {#rbac-operations}
 
-ロールとは、一連の権限の集合です。以下の操作を行うことができます。
+ロールとは、一連の権限の集合です。以下の操作を行えます。
 
 - ロールを作成します。
 - ロールを削除します。
@@ -186,7 +186,7 @@ SET DEFAULT ROLE app_read, app_write TO 'rw_user1'@'localhost';
 SET DEFAULT ROLE ALL TO 'dev1'@'localhost';
 ```
 
-次のステートメントを使用して、 `dev1@localhost`のすべてのデフォルトロールを無効にすることができます。
+次のステートメントを使用して、 `dev1@localhost`のすべてのデフォルトロールを無効にできます。
 
 ```sql
 SET DEFAULT ROLE NONE TO 'dev1'@'localhost';
@@ -198,7 +198,7 @@ SET DEFAULT ROLE NONE TO 'dev1'@'localhost';
 
 ### 現在のセッションでロールを有効にする {#enable-a-role-in-the-current-session}
 
-現在のセッションでいくつかのロールを有効にすることができます。
+現在のセッションでいくつかのロールを有効にできます。
 
 ```sql
 SET ROLE {
@@ -282,13 +282,13 @@ SET ROLE 'app_read'; SELECT CURRENT_ROLE();
 
 ### 役割を取り消す {#revoke-a-role}
 
-次のステートメントを使用して、ユーザー`read_user1@localhost`および`read_user2@localhost`に付与された`app_read`ロールを取り消すことができます。
+次のステートメントを使用して、ユーザー`read_user1@localhost`および`read_user2@localhost`に付与された`app_read`ロールを取り消せます。
 
 ```sql
 REVOKE 'app_read' FROM 'read_user1'@'localhost', 'read_user2'@'localhost';
 ```
 
-次のステートメントを使用して、 `rw_user1@localhost`ユーザーに付与されたロール`app_read`と`app_write`取り消すことができます。
+次のステートメントを使用して、 `rw_user1@localhost`ユーザーに付与されたロール`app_read`と`app_write`取り消せます。
 
 ```sql
 REVOKE 'app_read', 'app_write' FROM 'rw_user1'@'localhost';
@@ -298,7 +298,7 @@ REVOKE 'app_read', 'app_write' FROM 'rw_user1'@'localhost';
 
 ### 権限を取り消す {#revoke-a-privilege}
 
-`REVOKE`文は`GRANT`の逆です。 `REVOKE`を使用すると`app_write`の権限を取り消すことができます。
+`REVOKE`文は`GRANT`の逆です。 `REVOKE`を使用すると`app_write`の権限を取り消せます。
 
 ```sql
 REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
@@ -314,7 +314,7 @@ REVOKE INSERT, UPDATE, DELETE ON app_db.* FROM 'app_write';
 DROP ROLE 'app_read', 'app_write';
 ```
 
-この操作により、 `mysql.user`テーブル内の`app_read`と`app_write`ロール レコードと、承認テーブル内の関連レコードが削除され、2つのロールに関連する承認が終了します。
+この操作により、 `mysql.user`テーブル内の`app_read`と`app_write`ロールレコードと、承認テーブル内の関連レコードが削除され、2つのロールに関連する承認が終了します。
 
 ロールを削除するには、 `DROP ROLE`または`DROP USER`権限が必要です。
 

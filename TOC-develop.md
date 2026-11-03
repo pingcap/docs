@@ -27,7 +27,7 @@
       - [MyBatis](/develop/dev-guide-sample-application-java-mybatis.md)
       - [Hibernate](/develop/dev-guide-sample-application-java-hibernate.md)
       - [Spring Boot](/develop/dev-guide-sample-application-java-spring-boot.md)
-      - [接続プールと接続パラメータの設定](/develop/dev-guide-connection-parameters.md)
+      - [接続プールと接続パラメーターの設定](/develop/dev-guide-connection-parameters.md)
       - [Javaアプリケーション開発におけるベストプラクティス](/develop/java-app-best-practices.md)
     - Go
       - [Go-MySQL-Driver](/develop/dev-guide-sample-application-golang-sql-driver.md)
@@ -62,7 +62,7 @@
   - [概要](/develop/dev-guide-schema-design-overview.md)
   - [データベースを作成する](/develop/dev-guide-create-database.md)
   - [テーブルを作成する](/develop/dev-guide-create-table.md)
-  - [セカンダリーインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)
+  - [セカンダリインデックスを作成する](/develop/dev-guide-create-secondary-indexes.md)
 - データを書き込む
   - [データを挿入する](/develop/dev-guide-insert-data.md)
   - [データの更新](/develop/dev-guide-update-data.md)

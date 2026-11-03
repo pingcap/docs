@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.2 Release Notes
-summary: TiDB 5.2.0では、式インデックスのサポート、Lock ビュー GA、 TiFlashのI/Oトラフィック制限など、新機能と改善点が導入されています。互換性の変更点としては、新しいシステム変数と設定ファイルパラメータが追加されています。また、TiDB、TiKV、 TiFlash、およびTiCDC、 BR、Lightning、 Dumplingなどのツールに対するバグ修正と機能強化も含まれています。
+summary: TiDB 5.2.0では、式インデックスのサポート、Lock ビュー GA、 TiFlashのI/Oトラフィック制限など、新機能と改善点が導入されています。互換性の変更点としては、新しいシステム変数と設定ファイルパラメーターが追加されています。また、TiDB、TiKV、 TiFlash、およびTiCDC、 BR、Lightning、 Dumplingなどのツールに対するバグ修正と機能強化も含まれています。
 ---
 
 # TiDB 5.2 リリースノート {#tidb-5-2-release-notes}
@@ -16,7 +16,7 @@ TiDB バージョン: 5.2.0
 バージョン5.2の主な新機能と改善点は以下のとおりです。
 
 - 式インデックスで複数の関数を使用することをサポートし、クエリのパフォーマンスを大幅に向上させます。
-- 最適な実行計画の選択を支援するために、オプティマイザのカーディナリティ推定の精度を向上させます。
+- 最適な実行計画の選択を支援するために、オプティマイザーのカーディナリティ推定の精度を向上させます。
 - トランザクションのロックイベントを監視し、デッドロックの問題をトラブルシューティングするためのロックビュー機能の一般提供（GA）を発表します。
 - TiFlashの読み書きの安定性を向上させるため、 TiFlash I/Oトラフィック制限機能を追加しました。
 - TiKVは、従来のRocksDB書き込み停止メカニズムに代わる新しいフロー制御メカニズムを導入し、TiKVフロー制御の安定性を向上させています。
@@ -35,12 +35,12 @@ TiDB バージョン: 5.2.0
 | :-------------------------------------------------------------------------------------------------------- | :------- | :--------------------------------------------------------------------- |
 | [`default_authentication_plugin`](/system-variables.md#default_authentication_plugin)                     | 新しく追加された | サーバーが公開する認証方法を設定します。デフォルト値は`mysql_native_password`です。                  |
 | [`tidb_enable_auto_increment_in_generated`](/system-variables.md#tidb_enable_auto_increment_in_generated) | 新しく追加された | 生成列または式インデックスを作成する際に`AUTO_INCREMENT`列を含めるかどうかを決定します。デフォルト値は`OFF`です。    |
-| [`tidb_opt_enable_correlation_adjustment`](/system-variables.md#tidb_opt_enable_correlation_adjustment)   | 新しく追加された | オプティマイザが列の順序相関に基づいて行数を推定するかどうかを制御します。デフォルト値は`ON`です。                    |
+| [`tidb_opt_enable_correlation_adjustment`](/system-variables.md#tidb_opt_enable_correlation_adjustment)   | 新しく追加された | オプティマイザーが列の順序相関に基づいて行数を推定するかどうかを制御します。デフォルト値は`ON`です。                    |
 | [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold)           | 新しく追加された | Limit または TopN オペレーターを TiKV にプッシュするかどうかを決定するしきい値を設定します。デフォルト値は`100`です。    |
 | [`tidb_stmt_summary_max_stmt_count`](/system-variables.md#tidb_stmt_summary_max_stmt_count-new-in-v40)    | 変更     | ステートメントサマリーテーブルがメモリに格納するステートメントの最大数を設定します。デフォルト値は`200`から`3000`に変更されます。 |
 | `tidb_enable_streaming`                                                                                   | 非推奨      | システム変数`enable-streaming`は非推奨であり、今後は使用しないことをお勧めします。                     |
 
-### 設定ファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメーター {#configuration-file-parameters}
 
 | 設定ファイル | 設定項目                                                                                                                | 変更の種類  | 説明                                                                                                                              |
 | :------------- | :---------------------------------------------------------------------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------ |
@@ -51,7 +51,7 @@ TiDB バージョン: 5.2.0
 | TiKV設定ファイル     | [`raftstore.cmd-batch`](/tikv-configuration-file.md#cmd-batch)                                                                | 新しく追加された | リクエストのバッチ処理を有効にするかどうかを制御します。有効にすると、書き込みパフォーマンスが大幅に向上します。デフォルト値は`true`です。                                                        |
 | TiKV設定ファイル     | [`raftstore.inspect-interval`](/tikv-configuration-file.md#inspect-interval)                                                  | 新しく追加された | TiKV は一定間隔でRaftstoreコンポーネントのレイテンシーを検査します。この設定項目は検査間隔を指定します。レイテンシーがこの値を超えると、この検査はタイムアウトとしてマークされます。デフォルト値は`500ms`です。              |
 | TiKV設定ファイル     | [`raftstore.max-peer-down-duration`](/tikv-configuration-file.md#max-peer-down-duration)                                      | 変更     | ピアに許可される最長の非アクティブ期間を示します。タイムアウトしたピアは`down`とマークされ、PD は後でそれを削除しようとします。デフォルト値は`5m`から`10m`に変更されます。                                  |
-| TiKV設定ファイル     | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新しく追加された | TiKV のRaftメッセージのキュー サイズを指定します。デフォルト値は`8192`です。                                                                                  |
+| TiKV設定ファイル     | [`server.raft-client-queue-size`](/tikv-configuration-file.md#raft-client-queue-size)                                         | 新しく追加された | TiKV のRaftメッセージのキューサイズを指定します。デフォルト値は`8192`です。                                                                                  |
 | TiKV設定ファイル     | [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)                                                           | 新しく追加された | フロー制御メカニズムを有効にするかどうかを決定します。デフォルト値は`true`です。                                                                                     |
 | TiKV設定ファイル     | [`storage.flow-control.memtables-threshold`](/tikv-configuration-file.md#memtables-threshold)                                 | 新しく追加された | kvDB の memtable の数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`5`です。                                                                |
 | TiKV設定ファイル     | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                   | 新しく追加された | kvDB L0 ファイルの数がこのしきい値に達すると、フロー制御メカニズムが動作を開始します。デフォルト値は`9`です。                                                                    |
@@ -85,19 +85,19 @@ TiDB バージョン: 5.2.0
 
 - **HashAggのスピルをサポート**
 
-    HashAgg をディスクに書き出す機能をサポートします。HashAgg オペレーターを含む SQL 文でメモリ不足 (OOM) が発生した場合、このオペレーターの同時実行数を`1`に設定してディスクへの書き出しをトリガーし、メモリ負荷を軽減することができます。
+    HashAgg をディスクに書き出す機能をサポートします。HashAgg オペレーターを含む SQL 文でメモリ不足 (OOM) が発生した場合、このオペレーターの同時実行数を`1`に設定してディスクへの書き出しをトリガーし、メモリ負荷を軽減できます。
 
     [ユーザー向けドキュメント](/configure-memory-usage.md#other-memory-control-behaviors-of-tidb-server)、 [#25882](https://github.com/pingcap/tidb/issues/25882)
 
-- **オプティマイザのカーディナリティ推定の精度を向上させる**
+- **オプティマイザーのカーディナリティ推定の精度を向上させる**
 
     - TiDBのTopN/Limit推定精度を向上させます。例えば、 `order by col limit x`条件を含む大規模テーブルに対するページネーションクエリの場合、TiDBは適切なインデックスをより容易に選択し、クエリ応答時間を短縮できます。
     - 範囲外推定の精度を向上させます。たとえば、1日の統計情報が更新されていなくても、TiDB は`where date=Now()`を含むクエリに対して対応するインデックスを正確に選択できます。
-    - オプティマイザが Limit/TopN をプッシュダウンする動作を制御するために`tidb_opt_limit_push_down_threshold`変数を導入します。これにより、誤った推定のために一部の状況で Limit/TopN をプッシュダウンすることができないという問題が解決されます。
+    - オプティマイザーが Limit/TopN をプッシュダウンする動作を制御するために`tidb_opt_limit_push_down_threshold`変数を導入します。これにより、誤った推定のために一部の状況で Limit/TopN をプッシュダウンできないという問題が解決されます。
 
     [ユーザー向けドキュメント](/system-variables.md#tidb_opt_limit_push_down_threshold)、 [#26085](https://github.com/pingcap/tidb/issues/26085)
 
-- **オプティマイザのインデックス選択を改善する**
+- **オプティマイザーのインデックス選択を改善する**
 
     インデックス選択のためのプルーニングルールを追加します。TiDBは、比較統計を使用する前に、これらのルールを使用して選択可能なインデックスの範囲を絞り込み、最適でないインデックスを選択する可能性を低減します。
 
@@ -112,14 +112,14 @@ TiDB バージョン: 5.2.0
     バージョン5.2では、ロックビューに以下の機能強化が加えられました。
 
     - ロックビュー関連テーブルのSQLダイジェスト列に加えて、対応する正規化されたSQLテキストを表示する列をこれらのテーブルに追加します。SQLダイジェストに対応するステートメントを手動でクエリする必要はありません。
-    - `TIDB_DECODE_SQL_DIGESTS`関数を追加して、クラスタ内の一連の SQL ダイジェストに対応する正規化された SQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会します。これにより、トランザクションによって過去に実行された文の照会操作が簡素化されます。
+    - `TIDB_DECODE_SQL_DIGESTS`関数を追加して、クラスター内の一連の SQL ダイジェストに対応する正規化された SQL文（リテラル値が `?` や `...` などのプレースホルダーに置き換えられたもの）を照会します。これにより、トランザクションによって過去に実行された文の照会操作が簡素化されます。
     - `DATA_LOCK_WAITS`および`DEADLOCKS`システムテーブルに、テーブル名、行 ID、インデックス値、およびキーから解釈されるその他のキー情報を表示する列を追加します。これにより、キーが属するテーブルの検索やキー情報の解釈などの操作が簡素化されます。
     - `DEADLOCKS`テーブルで再試行可能なデッドロックエラーの情報を収集する機能をサポートします。これにより、そのようなエラーによって発生する問題のトラブルシューティングが容易になります。エラー収集はデフォルトでは無効になっており、 `pessimistic-txn.deadlock-history-collect-retryable`設定を使用して有効にできます。
     - `TIDB_TRX`システムテーブルで、クエリ実行中のトランザクションとアイドル状態のトランザクションを区別できるようにしました。 `Normal`状態は`Running`と`Idle`の状態に分割されました。
 
     ユーザー向けドキュメント：
 
-    - クラスタ内のすべての TiKV ノードで発生している悲観的ロック待機イベントを確認する: [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
+    - クラスター内のすべての TiKV ノードで発生している悲観的ロック待機イベントを確認する: [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md)
     - TiDBノードで最近発生したデッドロックエラーを確認する: [`DEADLOCKS`](/information-schema/information-schema-deadlocks.md)
     - TiDBノードで実行中のトランザクションを確認する: [`TIDB_TRX`](/information-schema/information-schema-tidb-trx.md)
 
@@ -139,7 +139,7 @@ TiDB バージョン: 5.2.0
 
     TiKVは、従来のRocksDBの書き込み停止メカニズムに代わる新しいフロー制御メカニズムを導入しました。この新しいメカニズムは、従来の書き込み停止メカニズムと比較して、フォアグラウンド書き込みの安定性への影響を軽減します。
 
-    具体的には、RocksDBのコンパクションによる負荷が蓄積した場合、以下の問題を回避するために、RocksDBレイヤーではなくTiKVスケジューラレイヤーでフロー制御が実行されます。
+    具体的には、RocksDBのコンパクションによる負荷が蓄積した場合、以下の問題を回避するために、RocksDBレイヤーではなくTiKVスケジューラーレイヤーでフロー制御が実行されます。
 
     - Raftstoreが停止していますが、これはRocksDBの書き込み停止が原因です。
     - Raftの選挙がタイムアウトし、その結果、ノードリーダーが移管されます。
@@ -148,9 +148,9 @@ TiDB バージョン: 5.2.0
 
     [ユーザー向けドキュメント](/tikv-configuration-file.md#storageflow-control)、 [#10137](https://github.com/tikv/tikv/issues/10137)
 
-- **クラスタ内の単一の低速なTiKVノードによって引き起こされる影響を自動的に検出し、復旧する**
+- **クラスター内の単一の低速なTiKVノードによって引き起こされる影響を自動的に検出し、復旧する**
 
-    TiKVは、スローノード検出メカニズムを導入しました。このメカニズムは、TiKV Raftstoreのレートを検査してスコアを計算し、ストアハートビートを通じてPDにスコアを報告します。同時に、PDに`evict-slow-store-scheduler`スケジューラを追加し、単一のスローTiKVノード上のリーダーを自動的に排除します。これにより、クラスタ全体への影響が軽減されます。また、スローノードに関するアラート項目がさらに追加され、問題の迅速な特定と解決に役立ちます。
+    TiKVは、スローノード検出メカニズムを導入しました。このメカニズムは、TiKV Raftstoreのレートを検査してスコアを計算し、ストアハートビートを通じてPDにスコアを報告します。同時に、PDに`evict-slow-store-scheduler`スケジューラーを追加し、単一のスローTiKVノード上のリーダーを自動的に排除します。これにより、クラスター全体への影響が軽減されます。また、スローノードに関するアラート項目がさらに追加され、問題の迅速な特定と解決に役立ちます。
 
     [ユーザー向けドキュメント](/tikv-configuration-file.md#inspect-interval)、 [#10539](https://github.com/tikv/tikv/issues/10539)
 
@@ -172,7 +172,7 @@ TiCDCは、HTTPプロトコル（OpenAPI）を使用してTiCDCタスクを管�
 
 ### デプロイと運用 {#deployment-and-operations}
 
-Apple M1チップを搭載したMacコンピュータで`tiup playground`コマンドを実行することをサポートします。
+Apple M1チップを搭載したMacコンピューターで`tiup playground`コマンドを実行することをサポートします。
 
 ## 機能強化 {#feature-enhancements}
 
@@ -204,13 +204,13 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
     - リージョンに基づいて、異なるTiFlashノード間でMPPクエリワークロードのバランスを取ることをサポートする [#24724](https://github.com/pingcap/tidb/pull/24724)
     - MPPクエリ実行後にキャッシュ内の古いリージョンを無効化する機能をサポートする [#24432](https://github.com/pingcap/tidb/pull/24432)
     - フォーマット指定子`%b/%M/%r/%T`に対する組み込み関数`str_to_date` の MySQL 互換性を向上させる [#25767](https://github.com/pingcap/tidb/pull/25767)
-    - 同じクエリに対して異なるバインディングを再作成した後に、複数の TiDB で一貫性のないバインディング キャッシュが作成される可能性がある問題を修正します [#26015](https://github.com/pingcap/tidb/pull/26015)
+    - 同じクエリに対して異なるバインディングを再作成した後に、複数の TiDB で一貫性のないバインディングキャッシュが作成される可能性がある問題を修正します [#26015](https://github.com/pingcap/tidb/pull/26015)
     - アップグレード後に既存のバインディングをキャッシュにロードできない問題を修正しました [#23295](https://github.com/pingcap/tidb/pull/23295)
     - `SHOW BINDINGS`の結果を ( `original_sql` 、 `update_time` ) で並べ替えることをサポートする [#26139](https://github.com/pingcap/tidb/pull/26139)
     - バインディングが存在する場合のクエリ最適化ロジックを改善し、クエリの最適化時間を短縮する [#26141](https://github.com/pingcap/tidb/pull/26141)
     - "deleted"ステータスのバインディングに対してガベージコレクションを自動的に完了する機能をサポートする [#26206](https://github.com/pingcap/tidb/pull/26206)
     - `EXPLAIN VERBOSE`の結果で、バインディングがクエリ最適化に使用されているかどうかを表示する機能のサポート [#26930](https://github.com/pingcap/tidb/pull/26930)
-    - 現在の TiDB インスタンスのバインディング キャッシュに対応するタイムスタンプを表示するための新しいステータス バリエーション`last_plan_binding_update_time`を追加します [#26340](https://github.com/pingcap/tidb/pull/26340)
+    - 現在の TiDB インスタンスのバインディングキャッシュに対応するタイムスタンプを表示するための新しいステータスバリエーション`last_plan_binding_update_time`を追加します [#26340](https://github.com/pingcap/tidb/pull/26340)
     - バインディング進化の開始時、またはベースライン進化を禁止する`admin evolve bindings`実行時にエラーを報告する機能をサポートする（現在、実験的機能であるため、TiDB Self-Managed バージョンでは無効になっている）。これにより、他の機能に影響が出る。 [#26333](https://github.com/pingcap/tidb/pull/26333)
 
 - PD
@@ -272,14 +272,14 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
 - TiKV
 
     - 誤った`tikv_raftstore_hibernated_peer_state` メトリックを修正 [#10330](https://github.com/tikv/tikv/issues/10330)
-    - コプロセッサ内の`json_unquote()`関数の引数の型が間違っている問題を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
+    - コプロセッサー内の`json_unquote()`関数の引数の型が間違っている問題を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
     - 場合によってはACIDが損なわれるのを避けるため、正常シャットダウン時にクリアリングコールバックをスキップする[#10353](https://github.com/tikv/tikv/issues/10353) [#10307](https://github.com/tikv/tikv/issues/10307)
     - Leader上でレプリカ読み取り時にReadIndex が共有されるバグを修正 [#10347](https://github.com/tikv/tikv/issues/10347)
     - `DOUBLE`を`DOUBLE`にキャストする誤った関数を修正 [#25200](https://github.com/pingcap/tidb/issues/25200)
 
 - PD
 
-    - 複数のスケジューラ間のスケジューリング競合により、期待されるスケジューリングが生成できない問題を修正します[#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
+    - 複数のスケジューラー間のスケジューリング競合により、期待されるスケジューリングが生成できない問題を修正します[#3807](https://github.com/tikv/pd/issues/3807) [#3778](https://github.com/tikv/pd/issues/3778)
 
 - TiFlash
 
@@ -305,7 +305,7 @@ Apple M1チップを搭載したMacコンピュータで`tiup playground`コマ�
         - TiCDC が`ErrSchemaStorageTableMiss` エラーを受け取った際に、changefeed が予期せずリセットされる可能性があるバグを修正しました。 [#2422](https://github.com/pingcap/tiflow/issues/2422)
         - TiCDC `ErrGCTTLExceeded` エラーを受け取った際に changefeed を削除できないバグを修正しました。 [#2391](https://github.com/pingcap/tiflow/issues/2391)
         - TiCDCが大きなテーブルをcdclogに同期できないバグを修正[#1259](https://github.com/pingcap/tiflow/issues/1259) [#2424](https://github.com/pingcap/tiflow/issues/2424)
-        - TiCDCがテーブルを再スケジュールしている際に、複数のプロセッサが同じテーブルにデータを書き込む可能性があるバグを修正しました [#2230](https://github.com/pingcap/tiflow/issues/2230)
+        - TiCDCがテーブルを再スケジュールしている際に、複数のプロセッサーが同じテーブルにデータを書き込む可能性があるバグを修正しました [#2230](https://github.com/pingcap/tiflow/issues/2230)
 
     - Backup & Restore (BR)
 

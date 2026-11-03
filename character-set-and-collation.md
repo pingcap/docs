@@ -178,7 +178,7 @@ MySQLでは、文字セット`utf8`は最大3バイトに制限されていま�
 
 MySQL と TiDB の両方で、 `utf8`と`utf8mb3`は同じ文字セットのエイリアスです。
 
-TiDBはデフォルトで、文字セット`utf8`を最大3バイトに制限しています。これは、TiDBで作成されたデータがMySQLで安全に復元できることを保証するためです。システム変数[`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8)の値を`OFF`に変更することで、この制限を無効にすることができます。ただし、完全なUnicodeサポートと高い互換性のためには、代わりに`utf8mb4`を使用することをお勧めします。
+TiDBはデフォルトで、文字セット`utf8`を最大3バイトに制限しています。これは、TiDBで作成されたデータがMySQLで安全に復元できることを保証するためです。システム変数[`tidb_check_mb4_value_in_utf8`](/system-variables.md#tidb_check_mb4_value_in_utf8)の値を`OFF`に変更することで、この制限を無効にできます。ただし、完全なUnicodeサポートと高い互換性のためには、代わりに`utf8mb4`を使用することをお勧めします。
 
 以下は、4バイトの絵文字をテーブルに挿入する際のデフォルトの動作を示しています。`INSERT`文は`utf8`文字セットでは失敗しますが、 `utf8mb4`の文では成功します。
 

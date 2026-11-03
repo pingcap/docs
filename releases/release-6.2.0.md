@@ -68,27 +68,27 @@ TiDBバージョン: 6.2.0-DMR
 
 - Lock ビューは、楽観的トランザクションの待機情報の表示をサポートしています。
 
-    ロックの競合が多すぎると、深刻なパフォーマンスの問題を引き起こす可能性があり、そのような問題のトラブルシューティングにはロックの競合を検出することが不可欠です。v6.2.0 より前の TiDB では、 `INFORMATION_SCHEMA.DATA_LOCK_WAITS`システム ビューを使用してロックの競合関係を表示することはできましたが、楽観的トランザクションの待機情報は表示されませんでした。TiDB v6.2.0 では`DATA_LOCK_WAITS`ビューが拡張され、悲観的ロックによってブロックされている楽観的トランザクションがビューに一覧表示されます。この機能により、ユーザーはロックの競合を迅速に検出でき、アプリケーションの改善の基礎となるため、ロックの競合の頻度を減らし、全体的なパフォーマンスを向上させることができます。
+    ロックの競合が多すぎると、深刻なパフォーマンスの問題を引き起こす可能性があり、そのような問題のトラブルシューティングにはロックの競合を検出することが不可欠です。v6.2.0 より前の TiDB では、 `INFORMATION_SCHEMA.DATA_LOCK_WAITS`システムビューを使用してロックの競合関係を表示することはできましたが、楽観的トランザクションの待機情報は表示されませんでした。TiDB v6.2.0 では`DATA_LOCK_WAITS`ビューが拡張され、悲観的ロックによってブロックされている楽観的トランザクションがビューに一覧表示されます。この機能により、ユーザーはロックの競合を迅速に検出でき、アプリケーションの改善の基礎となるため、ロックの競合の頻度を減らし、全体的なパフォーマンスを向上させることができます。
 
     [ユーザー向けドキュメント](/information-schema/information-schema-data-lock-waits.md) [#34609](https://github.com/pingcap/tidb/issues/34609) @[longfangsong](https://github.com/longfangsong)
 
 ### パフォーマンス {#performance}
 
-- `LEADING`オプティマイザヒントを改善し、外部結合の順序付けをサポートするようにしました。
+- `LEADING`オプティマイザーヒントを改善し、外部結合の順序付けをサポートするようにしました。
 
-    バージョン 6.1.0 では、テーブルの結合順序を変更するためにオプティマイザヒント`LEADING`が導入されました。しかし、このヒントは外部結合を含むクエリには適用できませんでした。詳細については、 [`LEADING`文書](/optimizer-hints.md#leadingt1_name--tl_name-)を参照してください。バージョン 6.2.0 では、TiDB はこの制限を解除しました。外部結合を含むクエリでも、このヒントを使用してテーブルの結合順序を指定できるようになり、SQL の実行パフォーマンスが向上し、実行計画の急激な変更を回避できます。
+    バージョン 6.1.0 では、テーブルの結合順序を変更するためにオプティマイザーヒント`LEADING`が導入されました。しかし、このヒントは外部結合を含むクエリには適用できませんでした。詳細については、 [`LEADING`文書](/optimizer-hints.md#leadingt1_name--tl_name-)を参照してください。バージョン 6.2.0 では、TiDB はこの制限を解除しました。外部結合を含むクエリでも、このヒントを使用してテーブルの結合順序を指定できるようになり、SQL の実行パフォーマンスが向上し、実行計画の急激な変更を回避できます。
 
     [ユーザー向けドキュメント](/optimizer-hints.md#leadingt1_name--tl_name-) [#29932](https://github.com/pingcap/tidb/issues/29932) @[Reminiscent](https://github.com/Reminiscent)
 
-- `EXISTS`クエリのパフォーマンスを向上させるために、新しいオプティマイザヒント`SEMI_JOIN_REWRITE`を追加します。
+- `EXISTS`クエリのパフォーマンスを向上させるために、新しいオプティマイザーヒント`SEMI_JOIN_REWRITE`を追加します。
 
-    場合によっては、 `EXISTS`を含むクエリは最適な実行計画を取得できず、実行時間が長くなる可能性があります。v6.2.0 では、このようなシナリオに対応するためにオプティマイザに書き換えルールが追加され、クエリ内で`SEMI_JOIN_REWRITE`を使用することで、オプティマイザにクエリを強制的に書き換えさせ、クエリのパフォーマンスを向上させることができます。
+    場合によっては、 `EXISTS`を含むクエリは最適な実行計画を取得できず、実行時間が長くなる可能性があります。v6.2.0 では、このようなシナリオに対応するためにオプティマイザーに書き換えルールが追加され、クエリ内で`SEMI_JOIN_REWRITE`を使用することで、オプティマイザーにクエリを強制的に書き換えさせ、クエリのパフォーマンスを向上させることができます。
 
     [ユーザー向けドキュメント](/optimizer-hints.md#semi_join_rewrite) [#35323](https://github.com/pingcap/tidb/issues/35323) @[winoros](https://github.com/winoros)
 
-- 分析クエリのパフォーマンスを向上させるために、新しいオプティマイザヒント`MERGE`を追加します。
+- 分析クエリのパフォーマンスを向上させるために、新しいオプティマイザーヒント`MERGE`を追加します。
 
-    共通テーブル式 (CTE) は、クエリロジックを簡素化する効果的な方法です。複雑なクエリを作成する際に広く使用されています。v6.2.0 より前のバージョンでは、 TiFlash環境で CTE を自動的に展開することができなかったため、MPP の実行効率が多少制限されていました。v6.2.0 では、MySQL 互換のオプティマイザヒント`MERGE`が導入されました。このヒントにより、オプティマイザは CTE インラインを展開できるようになり、CTE クエリ結果のコンシューマーがTiFlashでクエリを並行して実行できるようになったため、一部の分析クエリのパフォーマンスが向上しました。
+    共通テーブル式 (CTE) は、クエリロジックを簡素化する効果的な方法です。複雑なクエリを作成する際に広く使用されています。v6.2.0 より前のバージョンでは、 TiFlash環境で CTE を自動的に展開できなかったため、MPP の実行効率が多少制限されていました。v6.2.0 では、MySQL 互換のオプティマイザーヒント`MERGE`が導入されました。このヒントにより、オプティマイザーは CTE インラインを展開できるようになり、CTE クエリ結果のコンシューマーがTiFlashでクエリを並行して実行できるようになったため、一部の分析クエリのパフォーマンスが向上しました。
 
     [ユーザー向けドキュメント](/optimizer-hints.md#merge) [#36122](https://github.com/pingcap/tidb/issues/36122) @[dayicklp](https://github.com/dayicklp)
 
@@ -104,9 +104,9 @@ TiDBバージョン: 6.2.0-DMR
 
     [#32031](https://github.com/pingcap/tidb/issues/32031) @[wjhuang2016](https://github.com/wjhuang2016)
 
-- オプティマイザは文字列マッチングの推定精度を向上させます
+- オプティマイザーは文字列マッチングの推定精度を向上させます
 
-    文字列マッチングのシナリオでは、オプティマイザが行数を正確に推定できない場合、最適な実行計画の生成に影響します。たとえば、条件が`like '%xyz'`または正規表現`regex ()`の場合です。このようなシナリオでの推定精度を向上させるため、TiDB v6.2.0 では推定方法を強化しました。新しい方法では、統計情報の TopN 情報とシステム変数を組み合わせて精度を向上させ、マッチングの選択性を手動で変更できるようにすることで、SQL のパフォーマンスを向上させています。
+    文字列マッチングのシナリオでは、オプティマイザーが行数を正確に推定できない場合、最適な実行計画の生成に影響します。たとえば、条件が`like '%xyz'`または正規表現`regex ()`の場合です。このようなシナリオでの推定精度を向上させるため、TiDB v6.2.0 では推定方法を強化しました。新しい方法では、統計情報の TopN 情報とシステム変数を組み合わせて精度を向上させ、マッチングの選択性を手動で変更できるようにすることで、SQL のパフォーマンスを向上させています。
 
     [ユーザー向けドキュメント](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620) [#36209](https://github.com/pingcap/tidb/issues/36209) @[time-and-fate](https://github.com/time-and-fate)
 
@@ -156,7 +156,7 @@ TiDBバージョン: 6.2.0-DMR
 
 - TiKVは、コマンドラインフラグを使用して詳細な設定情報を一覧表示することをサポートしています。
 
-    TiKV 設定ファイルは、TiKV インスタンスの管理に使用できます。しかし、長時間実行され、複数のユーザーによって管理されているインスタンスの場合、どの設定項目が変更されたか、デフォルト値は何かを把握するのは困難です。これは、クラスタのアップグレードやデータの移行時に混乱を招く可能性があります。TiDB v6.2.0 以降、tikv-server は、すべての TiKV 設定項目のデフォルト値と現在の値を一覧表示する新しいコマンドラインフラグ[`--config-info`](/command-line-flags-for-tikv-configuration.md#--config-info-format)をサポートしており、TiKV プロセスの起動パラメータをユーザーがすばやく確認できるようになり、使いやすさが向上します。
+    TiKV 設定ファイルは、TiKV インスタンスの管理に使用できます。しかし、長時間実行され、複数のユーザーによって管理されているインスタンスの場合、どの設定項目が変更されたか、デフォルト値は何かを把握するのは困難です。これは、クラスターのアップグレードやデータの移行時に混乱を招く可能性があります。TiDB v6.2.0 以降、tikv-server は、すべての TiKV 設定項目のデフォルト値と現在の値を一覧表示する新しいコマンドラインフラグ[`--config-info`](/command-line-flags-for-tikv-configuration.md#--config-info-format)をサポートしており、TiKV プロセスの起動パラメーターをユーザーがすばやく確認できるようになり、使いやすさが向上します。
 
     [ユーザー向けドキュメント](/command-line-flags-for-tikv-configuration.md#--config-info-format) [#12492](https://github.com/tikv/tikv/issues/12492)@[glorv](https://github.com/glorv)
 
@@ -184,9 +184,9 @@ TiDBバージョン: 6.2.0-DMR
 
 - ログとスナップショットのバックアップと復元に基づくポイントインタイムリカバリ（PITR）をサポートします。
 
-    PITRは、ログとスナップショットのバックアップおよび復元に基づいて実装されています。これにより、クラスタの履歴上の任意の時点のスナップショットを新しいクラスタに復元できます。この機能は、以下のニーズを満たします。
+    PITRは、ログとスナップショットのバックアップおよび復元に基づいて実装されています。これにより、クラスターの履歴上の任意の時点のスナップショットを新しいクラスターに復元できます。この機能は、以下のニーズを満たします。
 
-    - ディザスタリカバリにおけるRPO（目標復旧時点）を20分未満に短縮します。
+    - ディザスターリカバリにおけるRPO（目標復旧時点）を20分未満に短縮します。
     - アプリケーションからの書き込みエラーが発生した場合は、例えば、エラー発生前の状態にデータをロールバックするなどの方法で対処します。
     - 法令の要件を満たすため、履歴データの監査を実施します。
 
@@ -204,7 +204,7 @@ TiDBバージョン: 6.2.0-DMR
 
 - Amazon S3バケットのリージョンを自動的に識別する
 
-    データ移行タスクでは、Amazon S3バケットのリージョンを自動的に識別できます。リージョンパラメータを明示的に渡す必要はありません。
+    データ移行タスクでは、Amazon S3バケットのリージョンを自動的に識別できます。リージョンパラメーターを明示的に渡す必要はありません。
 
     [#34275](https://github.com/pingcap/tidb/issues/34275) @[WangLe1321](https://github.com/WangLe1321)
 
@@ -214,13 +214,13 @@ TiDBバージョン: 6.2.0-DMR
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) [#446](https://github.com/pingcap/tidb-lightning/issues/446) @[buchuitoudegou](https://github.com/buchuitoudegou)
 
-- TiDB Lightningは、物理インポートモードでの本番クラスタへのデータインポートをサポートしています。
+- TiDB Lightningは、物理インポートモードでの本番クラスターへのデータインポートをサポートしています。
 
-    従来、 TiDB Lightningの物理インポートモード（backend='local'）は、対象クラスタに大きな影響を与えていました。例えば、移行中にPDのグローバルスケジューリングが一時停止されるといった問題がありました。そのため、従来の物理インポートモードは、初期データインポートにのみ適していました。
+    従来、 TiDB Lightningの物理インポートモード（backend='local'）は、対象クラスターに大きな影響を与えていました。例えば、移行中にPDのグローバルスケジューリングが一時停止されるといった問題がありました。そのため、従来の物理インポートモードは、初期データインポートにのみ適していました。
 
-    TiDB Lightningは、既存の物理インポートモードを改良しました。テーブルのスケジュールを一時停止できるようにすることで、インポートの影響をクラスタレベルからテーブルレベルにまで軽減します。つまり、インポートされていないテーブルの読み書きが可能になります。
+    TiDB Lightningは、既存の物理インポートモードを改良しました。テーブルのスケジュールを一時停止できるようにすることで、インポートの影響をクラスターレベルからテーブルレベルにまで軽減します。つまり、インポートされていないテーブルの読み書きが可能になります。
 
-    この機能には手動設定は不要です。TiDBクラスタがv6.1.0以降、かつTiDB Lightningがv6.2.0以降の場合、新しい物理インポートモードは自動的に有効になります。
+    この機能には手動設定は不要です。TiDBクラスターがv6.1.0以降、かつTiDB Lightningがv6.2.0以降の場合、新しい物理インポートモードは自動的に有効になります。
 
     [ユーザー向けドキュメント](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#scope-of-pausing-scheduling-during-import) [#35148](https://github.com/pingcap/tidb/issues/35148) @[sleepymole](https://github.com/sleepymole)
 
@@ -233,13 +233,13 @@ TiDBバージョン: 6.2.0-DMR
 
 - クラスター間RawKVレプリケーションのサポート（実験的）
 
-    新しいコンポーネントTiKV-CDCを使用して、RawKVのデータ変更を購読し、そのデータ変更を下流のTiKVクラスタにリアルタイムで複製することをサポートします。これにより、クラスタ間の複製が可能になります。
+    新しいコンポーネントTiKV-CDCを使用して、RawKVのデータ変更を購読し、そのデータ変更を下流のTiKVクラスターにリアルタイムで複製することをサポートします。これにより、クラスター間の複製が可能になります。
 
     [ユーザー向けドキュメント](/tikv-configuration-file.md#api-version-new-in-v610) [#11965](https://github.com/tikv/tikv/issues/11965) @[pingyu](https://github.com/pingyu)
 
 - DDLおよびDMLイベントのフィルタリングをサポートします。
 
-    特別な状況では、増分データ変更ログに対してフィルタルールを設定したい場合があります。たとえば、DROP TABLEなどの高リスクなDDLイベントをフィルタリングする場合などです。TiCDCはバージョン6.2.0以降、指定されたタイプのDDLイベントのフィルタリングと、SQL式に基づくDMLイベントのフィルタリングをサポートしています。これにより、TiCDCはより多くのデータレプリケーションシナリオに適用可能になります。
+    特別な状況では、増分データ変更ログに対してフィルタールールを設定したい場合があります。たとえば、DROP TABLEなどの高リスクなDDLイベントをフィルタリングする場合などです。TiCDCはバージョン6.2.0以降、指定されたタイプのDDLイベントのフィルタリングと、SQL式に基づくDMLイベントのフィルタリングをサポートしています。これにより、TiCDCはより多くのデータレプリケーションシナリオに適用可能になります。
 
     [ユーザー向けドキュメント](/ticdc/ticdc-filter.md) [#6160](https://github.com/pingcap/tiflow/issues/6160) @[asddongmen](https://github.com/asddongmen)
 
@@ -251,20 +251,20 @@ TiDBバージョン: 6.2.0-DMR
 | ----------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [tidb_enable_new_cost_interface](/system-variables.md#tidb_enable_new_cost_interface-new-in-v620)                       | 新しく追加された | この変数は[リファクタリングされたコストモデルの実装](/cost-model.md#cost-model-version-2)を有効にするかどうかを制御します。                                                                                                                          |
 | [tidb_cost_model_version](/system-variables.md#tidb_cost_model_version-new-in-v620)                                     | 新しく追加された | TiDBは、物理最適化の際にインデックスと演算子を選択するためにコストモデルを使用します。この変数は、コストモデルのバージョンを選択するために使用されます。TiDB v6.2.0では、内部テストで以前のバージョンよりも精度が向上したコストモデルバージョン2が導入されました。                                                                    |
-| tidb_enable_concurrent_ddl                                                                                              | 新しく追加された | この変数は、TiDBが同時DDL文を使用することを許可するかどうかを制御します。この変数は変更しないでください。この変数を無効にすると、リスクは不明であり、クラスタのメタデータが破損する可能性があります。                                                                                                 |
+| tidb_enable_concurrent_ddl                                                                                              | 新しく追加された | この変数は、TiDBが同時DDL文を使用することを許可するかどうかを制御します。この変数は変更しないでください。この変数を無効にすると、リスクは不明であり、クラスターのメタデータが破損する可能性があります。                                                                                                 |
 | [tiflash_fine_grained_shuffle_stream_count](/system-variables.md#tiflash_fine_grained_shuffle_stream_count-new-in-v620) | 新しく追加された | この変数は、ウィンドウ関数が実行のためにTiFlashにプッシュダウンされる際の、ウィンドウ関数実行の並行レベルを制御します。                                                                                                                                              |
 | [tiflash_fine_grained_shuffle_batch_size](/system-variables.md#tiflash_fine_grained_shuffle_batch_size-new-in-v620)     | 新しく追加された | 細粒度シャッフルが有効になっている場合、 TiFlashにプッシュダウンされるウィンドウ関数を並列実行できます。この変数は、送信側から送信されるデータのバッチサイズを制御します。送信側は、累積行数がこの値を超えた時点でデータを送信します。                                                                                      |
-| [tidb_default_string_match_selectivity](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620)         | 新しく追加された | この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために使用されます。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。                                                                               |
+| [tidb_default_string_match_selectivity](/system-variables.md#tidb_default_string_match_selectivity-new-in-v620)         | 新しく追加された | この変数は、行数を推定する際のフィルター条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために使用されます。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。                                                                               |
 | [tidb_enable_analyze_snapshot](/system-variables.md#tidb_enable_analyze_snapshot-new-in-v620)                           | 新しく追加された | この変数は`ANALYZE`を実行する際に、履歴データまたは最新データを読み込むかどうかを制御します。                                                                                                                                                          |
 | [tidb_generate_binary_plan](/system-variables.md#tidb_generate_binary_plan-new-in-v620)                                 | 新しく追加された | この変数は、スローログとステートメントサマリーにバイナリエンコードされた実行計画を生成するかどうかを制御します。                                                                                                                                                    |
-| [tidb_opt_skew_distinct_agg](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620)                               | 新しく追加された | この変数は、オプティマイザが`DISTINCT`を含む集計関数を2レベルの集計関数に書き換えるかどうかを設定します。たとえば`SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b`を`SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`に書き換えます。              |
+| [tidb_opt_skew_distinct_agg](/system-variables.md#tidb_opt_skew_distinct_agg-new-in-v620)                               | 新しく追加された | この変数は、オプティマイザーが`DISTINCT`を含む集計関数を2レベルの集計関数に書き換えるかどうかを設定します。たとえば`SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b`を`SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`に書き換えます。              |
 | [tidb_enable_noop_variables](/system-variables.md#tidb_enable_noop_variables-new-in-v620)                               | 新しく追加された | この変数は`SHOW [GLOBAL] VARIABLES`の結果に`noop`変数を表示するかどうかを制御します。                                                                                                                                                |
-| [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620)                                           | 新しく追加された | この変数は、コプロセッサのページングリクエスト処理中に処理される行の最小数を設定するために使用されます。                                                                                                                                                            |
+| [tidb_min_paging_size](/system-variables.md#tidb_min_paging_size-new-in-v620)                                           | 新しく追加された | この変数は、コプロセッサーのページングリクエスト処理中に処理される行の最小数を設定するために使用されます。                                                                                                                                                            |
 | [tidb_txn_commit_batch_size](/system-variables.md#tidb_txn_commit_batch_size-new-in-v620)                               | 新しく追加された | この変数は、TiDBがTiKVに送信するトランザクションコミットリクエストのバッチサイズを制御するために使用されます。                                                                                                                                                     |
 | tidb_enable_change_multi_schema                                                                                         | 削除済み     | この変数は、v6.2.0 以降では、デフォルトで 1つの`ALTER TABLE`文で複数の列またはインデックスを変更できるため、削除されます。                                                                                                                              |
 | [tidb_enable_outer_join_reorder](/system-variables.md#tidb_enable_outer_join_reorder-new-in-v610)                       | 変更     | この変数は、TiDB の Join Reorder アルゴリズムが Outer Join をサポートするかどうかを制御します。v6.1.0 では、デフォルト値は`ON`であり、これは Join Reorder の Outer Join のサポートがデフォルトで有効になっていることを意味します。v6.2.0 以降では、デフォルト値は`OFF`であり、これはサポートがデフォルトで無効になっていることを意味します。 |
 
-### 設定ファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメーター {#configuration-file-parameters}
 
 | 設定ファイル | 設定                                                                                                                | 変更の種類  | 説明                                                                                                  |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------------- |
@@ -272,7 +272,7 @@ TiDBバージョン: 6.2.0-DMR
 | TiDB           | query-feedback-limit                                                                                                              | 削除済み     | この設定はもはや有効ではなく、推奨されません。                                                                             |
 | TiKV           | [server.simplify-metrics](/tikv-configuration-file.md#simplify-metrics-new-in-v620)                                         | 新しく追加された | この設定では、返される監視メトリクスを簡略化するかどうかを指定します。                                                                 |
 | TiKV           | [quota.background-cpu-time](/tikv-configuration-file.md#background-cpu-time-new-in-v620)                                  | 新しく追加された | この設定では、TiKVのバックグラウンド処理で読み取りおよび書き込みリクエストを処理するために使用されるCPUリソースのソフトリミットを指定します。                             |
-| TiKV           | [quota.background-write-bandwidth](/tikv-configuration-file.md#background-write-bandwidth-new-in-v620)                    | 新しく追加された | この設定では、バックグラウンド トランザクションがデータを書き込む際の帯域幅のソフト リミットを指定します (現在は有効ではありません)。                               |
+| TiKV           | [quota.background-write-bandwidth](/tikv-configuration-file.md#background-write-bandwidth-new-in-v620)                    | 新しく追加された | この設定では、バックグラウンドトランザクションがデータを書き込む際の帯域幅のソフトリミットを指定します (現在は有効ではありません)。                               |
 | TiKV           | [quota.background-read-bandwidth](/tikv-configuration-file.md#background-read-bandwidth-new-in-v620)                                 | 新しく追加された | この設定では、バックグラウンドトランザクションとコプロセッサーがデータを読み取る際の帯域幅のソフトリミットを指定します（現在は有効ではありません）。                          |
 | TiKV           | [quota.enable-auto-tune](/tikv-configuration-file.md#enable-auto-tune-new-in-v620)                                        | 新しく追加された | この設定では、クォータの自動調整を有効にするかどうかを指定します。この設定項目を有効にすると、TiKVはTiKVインスタンスの負荷に基づいて、バックグラウンドリクエストのクォータを動的に調整します。 |
 | TiKV           | rocksdb.enable-pipelined-commit                                                                                           | 削除済み     | この設定はもはや有効ではありません。                                                                                  |
@@ -294,9 +294,9 @@ TiDBバージョン: 6.2.0-DMR
 | TiFlash        | [profiles.default.dt_page_gc_threshold](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)                 | 新しく追加された | この設定では、PageStorageデータファイル内の有効データの最小比率を指定します。                                                        |
 | TiCDC          | [--overwrite-checkpoint-ts](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)                                  | 新しく追加された | この設定は`cdc cli changefeed resume`サブコマンドに追加されます。                                                      |
 | TiCDC          | [--no-confirm](/ticdc/ticdc-manage-changefeed.md#resume-a-replication-task)                                                    | 新しく追加された | この設定は`cdc cli changefeed resume`サブコマンドに追加されます。                                                      |
-| DM             | [mode](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                      | 新しく追加された | この設定はバリデーターパラメータです。オプションの値は`full` 、 `fast` 、および`none`です。デフォルト値は`none`で、これはデータの検証を行いません。             |
-| DM             | [worker-count](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                     | 新しく追加された | この設定はバリデーターパラメータであり、バックグラウンドで実行される検証ワーカーの数を指定します。デフォルト値は`4`です。                                      |
-| DM             | [row-error-delay](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                   | 新しく追加された | この設定はバリデーターパラメータです。指定された時間内に検証が行われなかった場合、その行はエラー行としてマークされます。デフォルト値は30mで、これは30分を意味します。               |
+| DM             | [mode](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                      | 新しく追加された | この設定はバリデーターパラメーターです。オプションの値は`full` 、 `fast` 、および`none`です。デフォルト値は`none`で、これはデータの検証を行いません。             |
+| DM             | [worker-count](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                     | 新しく追加された | この設定はバリデーターパラメーターであり、バックグラウンドで実行される検証ワーカーの数を指定します。デフォルト値は`4`です。                                      |
+| DM             | [row-error-delay](/dm/task-configuration-file-full.md#task-configuration-file-template-advanced)                                   | 新しく追加された | この設定はバリデーターパラメーターです。指定された時間内に検証が行われなかった場合、その行はエラー行としてマークされます。デフォルト値は30mで、これは30分を意味します。               |
 | TiDB Lightning | [tikv-importer.store-write-bwlimit](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                  | 新しく追加された | この設定は、TiDB Lightning が各 TiKV ストアにデータを書き込む際の書き込み帯域幅を決定します。デフォルト値は`0`で、帯域幅に制限がないことを示します。              |
 | TiDB Lightning | [tikv-importer.disk-quota](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#configure-disk-quota-new-in-v620) | 新しく追加された | この構成により、TiDB Lightningが使用するストレージ容量が制限されます。                                                        |
 
@@ -304,8 +304,8 @@ TiDBバージョン: 6.2.0-DMR
 
 - TiFlash の`format_version`は`4`から`3`にダウングレードできません。詳細については、 [TiFlashアップグレードガイド](/tiflash-upgrade-guide.md)を参照してください。
 - バージョン6.2.0以降では、`dt_enable_logical_split`のデフォルト値`false`をそのまま維持し、 `true`に変更しないことを強くお勧めします。詳細は、既知の問題[#5576](https://github.com/pingcap/tiflash/issues/5576)を参照してください。
-- バックアップクラスタにTiFlashレプリカがある場合、PITR を実行すると、リストアクラスタにはTiFlashレプリカ内のデータが含まれません。TiFlash レプリカからデータをリストアするには、 TiFlashレプリカを手動で構成する必要があります。 `exchange partition` DDL 文を実行すると、PITR が失敗する可能性があります。アップストリームデータベースが TiDB Lightning の物理インポートモードを使用してデータをインポートする場合、ログバックアップでデータをバックアップできません。データインポート後にフルバックアップを実行することをお勧めします。PITR のその他の互換性の問題については、 [PITRの制限](/br/backup-and-restore-overview.md#before-you-use)を参照してください。
-- TiDB v6.2.0以降では、データ復元時に`--with-sys-table=true`パラメータを指定することで`mysql`スキーマのテーブルを復元できます。
+- バックアップクラスターにTiFlashレプリカがある場合、PITR を実行すると、リストアクラスターにはTiFlashレプリカ内のデータが含まれません。TiFlash レプリカからデータをリストアするには、 TiFlashレプリカを手動で構成する必要があります。 `exchange partition` DDL 文を実行すると、PITR が失敗する可能性があります。アップストリームデータベースが TiDB Lightning の物理インポートモードを使用してデータをインポートする場合、ログバックアップでデータをバックアップできません。データインポート後にフルバックアップを実行することをお勧めします。PITR のその他の互換性の問題については、 [PITRの制限](/br/backup-and-restore-overview.md#before-you-use)を参照してください。
+- TiDB v6.2.0以降では、データ復元時に`--with-sys-table=true`パラメーターを指定することで`mysql`スキーマのテーブルを復元できます。
 - `ALTER TABLE`文を実行して複数の列またはインデックスを追加、削除、または変更する場合、TiDB は同じ DDL文の変更内容に関わらず、ステートメント実行前後のテーブルを比較してテーブルの一貫性をチェックします。DDL の実行順序は、シナリオによっては MySQL と完全には互換性がない場合があります。
 - TiDBコンポーネントがv6.2.0以降の場合、TiKVコンポーネントはv6.2.0より前のバージョンであってはなりません。
 - TiKV は[動的構成](/dynamic-config.md#modify-tikv-configuration-dynamically)をサポートする構成アイテム`split.region-cpu-overload-threshold-ratio`を追加します。
@@ -372,7 +372,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 
     - Backup & Restore (BR)
 
-        - 大規模クラスタバックアップにおけるS3レート制限によるバックアップ失敗を修正するため、バックアップデータディレクトリ構造を調整しました [#30087](https://github.com/pingcap/tidb/issues/30087) @[MoCuishle28](https://github.com/MoCuishle28)
+        - 大規模クラスターバックアップにおけるS3レート制限によるバックアップ失敗を修正するため、バックアップデータディレクトリ構造を調整しました [#30087](https://github.com/pingcap/tidb/issues/30087) @[MoCuishle28](https://github.com/MoCuishle28)
 
     - TiCDC
 
@@ -421,7 +421,7 @@ TiDB v6.2.0以降、 BRを使用したRawKVのバックアップと復元は非�
 - TiKV
 
     - 悲観的トランザクションで`WriteConflict`エラーを報告しないようにします [#11612](https://github.com/tikv/tikv/issues/11612) @[sticnarf](https://github.com/sticnarf)
-    - 非同期コミットが有効になっている場合に、悲観的トランザクションで発生する可能性のある重複コミット レコードを修正 [#12615](https://github.com/tikv/tikv/issues/12615) @[sticnarf](https://github.com/sticnarf)
+    - 非同期コミットが有効になっている場合に、悲観的トランザクションで発生する可能性のある重複コミットレコードを修正 [#12615](https://github.com/tikv/tikv/issues/12615) @[sticnarf](https://github.com/sticnarf)
     - `storage.api-version`を`1`から`2`に変更した際に TiKV がパニックする問題を修正 [#12600](https://github.com/tikv/tikv/issues/12600) @[pingyu](https://github.com/pingyu)
     - TiKVとPD間のリージョンサイズ構成の不整合の問題を修正 [#12518](https://github.com/tikv/tikv/issues/12518) @[5kbpers](https://github.com/5kbpers)
     - TiKV が PD クライアントに再接続し続ける問題を修正[#12506](https://github.com/tikv/tikv/issues/12506) 、 [#12827](https://github.com/tikv/tikv/issues/12827) @[Connor1996](https://github.com/Connor1996)

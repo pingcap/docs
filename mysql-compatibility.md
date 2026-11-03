@@ -23,7 +23,7 @@ TiDBはMySQLプロトコルと高い互換性を持ち、 MySQL 5.7およびMySQ
 
 TiDBはMySQLレプリケーションプロトコルをサポートしていない点に注意が必要です。代わりに、MySQLでデータをレプリケートするための専用ツールが提供されています。
 
-- MySQL からデータを複製する: [TiDB Data Migration (DM)](/dm/dm-overview.md)は、MySQL または MariaDB から TiDB への完全なデータ移行と増分データレプリケーションをサポートするツールです。
+- MySQL からデータを複製する: [TiDB Data Migration (DM)](/dm/dm-overview.md)は、MySQL または MariaDB から TiDB への完全データ移行と増分データレプリケーションをサポートするツールです。
 - データをMySQLに複製する: [TiCDC](/ticdc/ticdc-overview.md)は、TiKV変更ログを取得してTiDBの増分データを複製するためのツールです。TiCDCは[MySQLシンク](/ticdc/ticdc-overview.md#replication-consistency)を使用して、TiDBの増分データをMySQLに複製します。
 
 </CustomContent>
@@ -36,7 +36,7 @@ TiDBはMySQLレプリケーションプロトコルをサポートしていな�
 
 </CustomContent>
 
-[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=mysql_compatibility)でTiDBの機能を試すことができます。
+[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=mysql_compatibility)でTiDBの機能を試せます。
 
 ## サポートされていない機能 {#unsupported-features}
 
@@ -58,7 +58,7 @@ TiDBはMySQLレプリケーションプロトコルをサポートしていな�
 
 - `ascii` 、 `latin1` 、 `binary` 、 `utf8` 、 `utf8mb4` 、および`gbk`などの文字セット。
 
-- オプティマイザトレース
+- オプティマイザートレース
 
 - XML関数
 
@@ -106,7 +106,7 @@ TiDBはMySQLレプリケーションプロトコルをサポートしていな�
 
 > **Note:**
 >
-> - テーブル作成時に主キーを指定しない場合、TiDB は`_tidb_rowid`を使用して行を識別します。この値の割り当ては、AUTO_INCREMENT列 (そのような列が存在する場合) とアロケータを共有します。AUTO_INCREMENT列を主キーとして指定した場合、TiDB はこの列を使用して行を識別します。この場合、次のような状況が発生する可能性があります。
+> - テーブル作成時に主キーを指定しない場合、TiDB は`_tidb_rowid`を使用して行を識別します。この値の割り当ては、AUTO_INCREMENT列 (そのような列が存在する場合) とアロケーターを共有します。AUTO_INCREMENT列を主キーとして指定した場合、TiDB はこの列を使用して行を識別します。この場合、次のような状況が発生する可能性があります。
 
 ```sql
 mysql> CREATE TABLE t(id INT UNIQUE KEY AUTO_INCREMENT);
@@ -132,7 +132,7 @@ mysql> SELECT _tidb_rowid, id FROM t;
 3 rows in set (0.01 sec)
 ```
 
-図に示すように、共有アロケータのため、 `id`は毎回 2 ずつ増加します。この動作は[MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)では変更され、共有アロケータがないため、数値のスキップは発生しません。
+図に示すように、共有アロケーターのため、 `id`は毎回 2 ずつ増加します。この動作は[MySQL互換モード](/auto-increment.md#mysql-compatibility-mode)では変更され、共有アロケーターがないため、数値のスキップは発生しません。
 
 <CustomContent platform="tidb">
 
@@ -168,7 +168,7 @@ TiDB Cloudのパフォーマンスメトリックを確認するには、 TiDB C
 
 TiDB のクエリ実行計画 ( `EXPLAIN` / `EXPLAIN FOR` ) の出力形式、内容、および権限設定は、MySQL のものとは大きく異なります。
 
-TiDBでは、MySQLシステム変数`optimizer_switch`は読み取り専用であり、実行計画には影響を与えません。オプティマイザヒントはMySQLと同様の構文で使用できますが、使用可能なヒントとその実装は異なる場合があります。
+TiDBでは、MySQLシステム変数`optimizer_switch`は読み取り専用であり、実行計画には影響を与えません。オプティマイザーヒントはMySQLと同様の構文で使用できますが、使用可能なヒントとその実装は異なる場合があります。
 
 詳細については、[クエリ実行計画を理解する](/explain-overview.md)を参照してください。
 
@@ -283,7 +283,7 @@ TiDBは、MySQL 5.7およびMySQL 8.0と比較して、デフォルト設定に�
 TiDBは、以下の点を考慮して、名前付きタイムゾーンをサポートしています。
 
 - TiDBは、計算にシステムに現在インストールされているすべてのタイムゾーンルール（通常は`tzdata`パッケージ）を使用します。これにより、タイムゾーンテーブルデータをインポートすることなく、すべてのタイムゾーン名を使用できます。タイムゾーンテーブルデータをインポートしても、計算ルールは変更されません。
-- 現在、MySQL はデフォルトでローカル タイムゾーンを使用し、システムに組み込まれている現在のタイムゾーン ルール (夏時間の開始時など) に基づいて計算します。 [タイムゾーンテーブルデータのインポート](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation)インポートがないと、MySQL は名前でタイムゾーンを指定できません。
+- 現在、MySQL はデフォルトでローカルタイムゾーンを使用し、システムに組み込まれている現在のタイムゾーンルール (夏時間の開始時など) に基づいて計算します。 [タイムゾーンテーブルデータのインポート](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html#time-zone-installation)インポートがないと、MySQL は名前でタイムゾーンを指定できません。
 
 ### タイプシステムの違い {#type-system-differences}
 
@@ -304,7 +304,7 @@ TiDBは、MySQLで非推奨となった特定の機能を実装していませ�
 
 ### `CREATE RESOURCE GROUP` 、 `DROP RESOURCE GROUP` 、および`ALTER RESOURCE GROUP`文 {#create-resource-group-drop-resource-group-and-alter-resource-group-statements}
 
-リソースグループの作成、変更、削除に関する以下のステートメントは、MySQLとは異なるパラメータをサポートしています。詳細については、以下のドキュメントを参照してください。
+リソースグループの作成、変更、削除に関する以下のステートメントは、MySQLとは異なるパラメーターをサポートしています。詳細については、以下のドキュメントを参照してください。
 
 - [`CREATE RESOURCE GROUP`](/sql-statements/sql-statement-create-resource-group.md)
 - [`DROP RESOURCE GROUP`](/sql-statements/sql-statement-drop-resource-group.md)

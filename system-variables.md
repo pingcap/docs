@@ -23,12 +23,12 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 > **Note:**
 >
-> いくつかの`GLOBAL`変数は TiDB クラスタに保持されます。このドキュメントの一部の変数には`Persists to cluster`設定があり、これは`Yes`または`No`に設定できます。
+> いくつかの`GLOBAL`変数は TiDB クラスターに保持されます。このドキュメントの一部の変数には`Persists to cluster`設定があり、これは`Yes`または`No`に設定できます。
 >
 > - `Persists to cluster: Yes`設定の変数については、グローバル変数が変更されると、すべての TiDB サーバーに通知が送信され、システム変数キャッシュが更新されます。TiDB サーバーを追加したり、既存の TiDB サーバーを再起動したりすると、保存されている構成値が自動的に使用されます。
 > - `Persists to cluster: No`設定の変数については、変更は接続先のローカル TiDB インスタンスにのみ適用されます。設定した値を保持するには、 `tidb.toml`設定ファイルで変数を指定する必要があります。
 >
-> さらに、TiDBはいくつかのMySQL変数を読み取りと設定の両方が可能な変数として提供します。これは、アプリケーションとコネクタの両方がMySQL変数を読み取ることが一般的であるため、互換性のために必要です。たとえば、JDBCコネクタは、その動作に依存していないにもかかわらず、クエリキャッシュ設定の読み取りと設定の両方を行います。
+> さらに、TiDBはいくつかのMySQL変数を読み取りと設定の両方が可能な変数として提供します。これは、アプリケーションとコネクターの両方がMySQL変数を読み取ることが一般的であるため、互換性のために必要です。たとえば、JDBCコネクターは、その動作に依存していないにもかかわらず、クエリキャッシュ設定の読み取りと設定の両方を行います。
 
 > **Note:**
 >
@@ -42,7 +42,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 >
 > 同じ単位を使用する変数は、同じリソースを巡って競合する可能性があります。
 
-バージョン 7.4.0 以降では、 [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)を使用してステートメントの実行中に一部の`SESSION`変数の値を一時的に変更できます。ステートメントの実行後、現在のセッションのシステム変数の値は自動的に元の値に戻ります。このヒントは、オプティマイザとエグゼキュータに関連する一部のシステム変数を変更するために使用できます。このドキュメントの変数には`Applies to hint SET_VAR`設定があり、 `Yes`または`No`に設定できます。
+バージョン 7.4.0 以降では、 [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)を使用してステートメントの実行中に一部の`SESSION`変数の値を一時的に変更できます。ステートメントの実行後、現在のセッションのシステム変数の値は自動的に元の値に戻ります。このヒントは、オプティマイザーとエグゼキューターに関連する一部のシステム変数を変更するために使用できます。このドキュメントの変数には`Applies to hint SET_VAR`設定があり、 `Yes`または`No`に設定できます。
 
 - `Applies to hint SET_VAR: Yes`設定の変数については、 [`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)ヒントを使用して、ステートメントの実行中に現在のセッションのシステム変数の値を変更できます。
 - `Applies to hint SET_VAR: No`設定の変数については、ステートメントの実行中に[`SET_VAR`](/optimizer-hints.md#set_varvar_namevar_value)ヒントを使用して現在のセッションのシステム変数の値を変更できません。
@@ -53,7 +53,7 @@ SET GLOBAL tidb_distsql_scan_concurrency = 10;
 
 ### allow_auto_random_explicit_insert <span class="version-mark">New in v4.0.3</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -296,7 +296,7 @@ mysql> SELECT * FROM t1;
 
 ### autocommit
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -305,7 +305,7 @@ mysql> SELECT * FROM t1;
 
 ### block_encryption_mode
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
@@ -315,7 +315,7 @@ mysql> SELECT * FROM t1;
 
 ### character_set_client
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `utf8mb4`
@@ -323,7 +323,7 @@ mysql> SELECT * FROM t1;
 
 ### character_set_connection
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `utf8mb4`
@@ -331,7 +331,7 @@ mysql> SELECT * FROM t1;
 
 ### character_set_database
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `utf8mb4`
@@ -339,7 +339,7 @@ mysql> SELECT * FROM t1;
 
 ### character_set_results
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `utf8mb4`
@@ -347,7 +347,7 @@ mysql> SELECT * FROM t1;
 
 ### character_set_server
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `utf8mb4`
@@ -355,7 +355,7 @@ mysql> SELECT * FROM t1;
 
 ### collation_connection
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `utf8mb4_bin`
@@ -363,7 +363,7 @@ mysql> SELECT * FROM t1;
 
 ### collation_database
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `utf8mb4_bin`
@@ -371,7 +371,7 @@ mysql> SELECT * FROM t1;
 
 ### collation_server
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `utf8mb4_bin`
@@ -395,7 +395,7 @@ mysql> SELECT * FROM t1;
 
 <CustomContent platform="tidb">
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値：コンポーネントとデプロイ方法によって異なります。
     - `/tmp/tidb` : [`--store`](/command-line-flags-for-tidb-configuration.md#--store)に`"unistore"`を設定した場合、または`--store`を設定しなかった場合。
@@ -406,7 +406,7 @@ mysql> SELECT * FROM t1;
 
 <CustomContent platform="tidb-cloud">
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値：コンポーネントとデプロイ方法によって異なります。
     - `/tmp/tidb` : [`--store`](https://docs.pingcap.com/tidb/stable/command-line-flags-for-tidb-configuration#--store)に`"unistore"`を設定した場合、または`--store`を設定しなかった場合。
@@ -426,7 +426,7 @@ mysql> SELECT * FROM t1;
 </CustomContent>
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `300`
@@ -453,7 +453,7 @@ mysql> SELECT * FROM t1;
 
 ### default_collation_for_utf8mb4 <span class="version-mark">New in v7.4.0</span>
 
-- 範囲：グローバル | セッション
+- 対象範囲：グローバル | セッション
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: String
@@ -517,7 +517,7 @@ mysql> SELECT * FROM t1;
 
 ### error_count
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `0`
@@ -525,7 +525,7 @@ mysql> SELECT * FROM t1;
 
 ### foreign_key_checks
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -540,11 +540,11 @@ mysql> SELECT * FROM t1;
 - 型: 整数
 - デフォルト値: `1024`
 - 範囲: `[4, 18446744073709551615]`
-- `GROUP_CONCAT()`関数内の項目の最大バッファサイズ。
+- `GROUP_CONCAT()`関数内の項目の最大バッファーサイズ。
 
 ### have_openssl
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `DISABLED`
@@ -552,7 +552,7 @@ mysql> SELECT * FROM t1;
 
 ### have_ssl
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `DISABLED`
@@ -560,7 +560,7 @@ mysql> SELECT * FROM t1;
 
 ### hostname
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: (システムホスト名)
 - TiDBサーバーのホスト名を読み取り専用変数として指定します。
@@ -619,28 +619,28 @@ mysql> SELECT * FROM t1;
 
 ### last_plan_from_binding <span class="version-mark">New in v4.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - この変数は、前のステートメントで使用された実行計画が[プランバインディング](/sql-plan-management.md)の影響を受けたかどうかを示すために使用されます。
 
 ### last_plan_from_cache <span class="version-mark">New in v4.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - この変数は、前の`execute`文で使用された実行計画がプランキャッシュから直接取得されたかどうかを示すために使用されます。
 
 ### last_sql_use_alloc <span class="version-mark">New in v6.4.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - この変数は読み取り専用です。前のステートメントがキャッシュされたチャンクオブジェクト（チャンク割り当て）を使用しているかどうかを示すために使用されます。
 
 ### license
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `Apache License 2.0`
 - この変数は、TiDBサーバーのインストールライセンスを示します。
@@ -664,7 +664,7 @@ mysql> SELECT * FROM t1;
 ### max_connections
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `0`
@@ -701,10 +701,10 @@ mysql> SELECT * FROM t1;
 
 ### max_user_connections <span class="version-mark">New in v8.5.7</span>
 
-- スコープ: GLOBAL
-- クラスターに永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
-- 型: Integer
+- 対象範囲: グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
+- 型: 整数
 - デフォルト値: `0`
 - 範囲: `[0, 100000]`
 - この変数は、ユーザーが TiDB サーバーインスタンスに確立できる接続の最大数を制御します。リソース制御に使用されます。
@@ -713,7 +713,7 @@ mysql> SELECT * FROM t1;
 
 ### mpp_exchange_compression_mode <span class="version-mark">New in v6.6.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: `UNSPECIFIED`
@@ -726,14 +726,14 @@ mysql> SELECT * FROM t1;
 
 ### mpp_version <span class="version-mark">New in v6.6.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: `UNSPECIFIED`
 - 値のオプション: `UNSPECIFIED` 、 `0` 、 `1` 、 `2`
 - この変数は、MPP実行計画の異なるバージョンを指定するために使用されます。バージョンが指定されると、TiDBは指定されたバージョンのMPP実行計画を選択します。変数の値の意味は次のとおりです。
     - `UNSPECIFIED` : 未指定を意味します。TiDB は最新バージョン`2`を自動的に選択します。
-    - `0` : すべての TiDB クラスタバージョンと互換性があります。 `0`より大きい MPP バージョンを持つ機能は、このモードでは有効になりません。
+    - `0` : すべての TiDB クラスターバージョンと互換性があります。 `0`より大きい MPP バージョンを持つ機能は、このモードでは有効になりません。
     - `1` : v6.6.0 の新機能。 TiFlashで圧縮を伴うデータ交換を有効にするために使用されます。詳細については、 [MPPバージョンとデータ圧縮の交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)を参照してください。
     - `2` : v7.3.0 で新しく追加され、 TiFlashで MPP タスクがエラーに遭遇したときに、より正確なエラーメッセージを提供するために使用されます。
 
@@ -804,14 +804,14 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - この変数は、アクティブ PDFollower機能を有効にするかどうかを制御します (現在はリージョン情報のリクエストにのみ適用されます)。値が`OFF`の場合、TiDB は PD リーダーからのみリージョン情報を取得します。値が`ON`の場合、TiDB はリージョン情報のリクエストをすべての PD サーバーに均等に分散し、PD フォロワーもリージョンリクエストを処理できるため、PD リーダーの CPU 負荷が軽減されます。
 - アクティブPDFollowerを有効にするシナリオ：
     - リージョン数が多いクラスターでは、ハートビートの処理やタスクのスケジューリングに伴うオーバーヘッドが増加するため、PDリーダーのCPU負荷が高くなります。
-    - TiDBインスタンスが多数存在するTiDBクラスタでは、リージョン情報に対するリクエストの同時発生率が高いため、PDリーダーに高いCPU負荷がかかります。
+    - TiDBインスタンスが多数存在するTiDBクラスターでは、リージョン情報に対するリクエストの同時発生率が高いため、PDリーダーに高いCPU負荷がかかります。
 
 ### performance_schema_session_connect_attrs_size <span class="version-mark">New in v8.5.7</span>
 
-- スコープ: GLOBAL
-- クラスターへの永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
-- 型: Integer
+- 対象範囲: グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
+- 型: 整数
 - デフォルト値: `4096`
 - 範囲: `[-1, 65536]`
 - 単位: Bytes
@@ -833,7 +833,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)ではサポートされていません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - コマンドラインフラグで指定されたプラグインをロードするディレクトリを示します。
@@ -845,14 +845,14 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)ではサポートされていません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - TiDB起動時にロードするプラグインを指定します。これらのプラグインはコマンドラインフラグで指定し、カンマで区切ります。
 
 ### port
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `4000`
@@ -893,7 +893,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb">
 
-- この変数により、TiDB へのすべての接続がローカル ソケット上か TLS を使用するようになります。詳細については、 [TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
+- この変数により、TiDB へのすべての接続がローカルソケット上か TLS を使用するようになります。詳細については、 [TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)を参照してください。
 
 </CustomContent>
 
@@ -903,7 +903,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 </CustomContent>
 
-- この変数を`ON`に設定するには、TLS が有効になっているセッションから TiDB に接続する必要があります。これにより、TLS が正しく設定されていない場合に発生するロックアウトを防ぐことができます。
+- この変数を`ON`に設定するには、TLS が有効になっているセッションから TiDB に接続する必要があります。これにより、TLS が正しく設定されていない場合に発生するロックアウトを防げます。
 - この設定は以前は`tidb.toml`オプション ( `security.require-secure-transport` ) でしたが、TiDB v6.1.0 以降はシステム変数に変更されました。
 - バージョン6.5.6、7.1.2、7.5.1、および8.0.0以降、セキュリティ強化モード（SEM）が有効になっている場合、ユーザーの接続に関する潜在的な問題を回避するために、この変数を`ON`に設定することは禁止されています。
 
@@ -933,14 +933,14 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 ### socket
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
-- `tidb-server`が MySQL プロトコルと通信する際にリッスンしているローカル Unix ソケット ファイル。
+- `tidb-server`が MySQL プロトコルと通信する際にリッスンしているローカル Unix ソケットファイル。
 
 ### sql_mode
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: `ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION`
@@ -948,7 +948,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 ### sql_require_primary_key <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -978,7 +978,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb">
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - 認証局ファイルの場所（存在する場合）。この変数の値は、TiDB 設定項目[`ssl-ca`](/tidb-configuration-file.md#ssl-ca)によって定義されます。
@@ -987,7 +987,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb-cloud">
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - 認証局ファイルの場所（存在する場合）。この変数の値は、TiDB 設定項目[`ssl-ca`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-ca)によって定義されます。
@@ -998,7 +998,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb">
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - SSL/TLS接続に使用される証明書ファイルの場所（ファイルが存在する場合）。この変数の値は、TiDB設定項目[`ssl-cert`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
@@ -1007,7 +1007,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb-cloud">
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - SSL/TLS接続に使用される証明書ファイルの場所（ファイルが存在する場合）。この変数の値は、TiDB設定項目[`ssl-cert`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-cert)によって定義されます。
@@ -1018,7 +1018,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb">
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - SSL/TLS接続に使用される秘密鍵ファイル（存在する場合）の場所。この変数の値は、TiDB設定項目[`ssl-key`](/tidb-configuration-file.md#ssl-cert)によって定義されます。
@@ -1027,7 +1027,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 <CustomContent platform="tidb-cloud">
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - SSL/TLS接続に使用される秘密鍵ファイル（存在する場合）の場所。この変数の値は、TiDB設定項目[`ssl-key`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file#ssl-key)によって定義されます。
@@ -1036,7 +1036,7 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 ### system_time_zone
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値：（システム依存）
 - この変数は、TiDBが最初にブートストラップされた時点のシステムタイムゾーンを示します。[`time_zone`](#time_zone)も参照してください。
@@ -1064,14 +1064,14 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 ### tidb_allow_tiflash_cop <span class="version-mark">New in v7.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
 - TiDBが計算タスクをTiFlashにプッシュダウンする場合、Cop、BatchCop、MPPの3つの方法（プロトコル）から選択できます。CopおよびBatchCopと比較して、MPPプロトコルはより成熟しており、タスクおよびリソース管理において優れています。そのため、MPPプロトコルの使用をお勧めします。
-    - `0`または`OFF` : オプティマイザはTiFlash MPP プロトコルを使用したプランのみを生成します。
-    - `1`または`ON` : オプティマイザは、コスト見積もりに基づいて実行計画を生成するために、Cop、BatchCop、または MPP プロトコルを使用するかどうかを決定します。
+    - `0`または`OFF` : オプティマイザーはTiFlash MPP プロトコルを使用したプランのみを生成します。
+    - `1`または`ON` : オプティマイザーは、コスト見積もりに基づいて実行計画を生成するために、Cop、BatchCop、または MPP プロトコルを使用するかどうかを決定します。
 
 ### tidb_allow_batch_cop <span class="version-mark">New in v4.0</span>
 
@@ -1081,15 +1081,15 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 - 型: 整数
 - デフォルト値: `1`
 - 範囲: `[0, 2]`
-- この変数は、TiDBがTiFlashにコプロセッサリクエストを送信する方法を制御するために使用されます。この変数には以下の値があります。
+- この変数は、TiDBがTiFlashにコプロセッサーリクエストを送信する方法を制御するために使用されます。この変数には以下の値があります。
 
     - `0` : リクエストをバッチで送信しません
     - `1` :集計および結合リクエストはバッチで送信されます
-    - `2` : すべてのコプロセッサリクエストはバッチで送信されます
+    - `2` : すべてのコプロセッサーリクエストはバッチで送信されます
 
 ### tidb_allow_fallback_to_tikv <span class="version-mark">New in v5.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: ""
@@ -1097,23 +1097,23 @@ mysql> SHOW GLOBAL VARIABLES LIKE 'max_prepared_stmt_count';
 
 ### tidb_allow_function_for_expression_index <span class="version-mark">New in v5.2.0</span>
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `json_array, json_array_append, json_array_insert, json_contains, json_contains_path, json_depth, json_extract, json_insert, json_keys, json_length, json_merge_patch, json_merge_preserve, json_object, json_pretty, json_quote, json_remove, json_replace, json_schema_valid, json_search, json_set, json_storage_size, json_type, json_unquote, json_valid, lower, md5, reverse, tidb_shard, upper, vitess_hash`
 - この読み取り専用変数は、 [式インデックス](/sql-statements/sql-statement-create-index.md#expression-index)を作成するために使用できる関数を表示するために使用されます。
 
 ### tidb_allow_mpp <span class="version-mark">New in v5.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON`
 - TiFlashのMPPモードを使用してクエリを実行するかどうかを制御します。値のオプションは以下のとおりです。
     - `0`または`OFF`に設定すると、MPP モードは使用されません。v7.3.0 以降のバージョンでは、この変数の値を`0`または`OFF`に設定する場合は、 [`tidb_allow_tiflash_cop`](/system-variables.md#tidb_allow_tiflash_cop-new-in-v730)変数も有効にする必要があります。そうしないと、クエリでエラーが発生する可能性があります。
-    - `1`または`ON`は、オプティマイザがコスト見積もりに基づいて MPP モードを使用するかどうかを決定することを意味します (デフォルト)。
+    - `1`または`ON`は、オプティマイザーがコスト見積もりに基づいて MPP モードを使用するかどうかを決定することを意味します (デフォルト)。
 
-MPP は、 TiFlashエンジンによって提供される分散コンピューティング フレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットの SQL アルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
+MPP は、 TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットの SQL アルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
 
 ### tidb_allow_remove_auto_inc <span class="version-mark">New in v2.1.18 and v3.0.4</span>
 
@@ -1125,7 +1125,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 </CustomContent>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -1137,8 +1137,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 >
 > - この変数は、 [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510)が`2`に設定されている場合にのみ機能します。
 > - TiDB クラスターを v8.3.0 より前のバージョンから v8.3.0 以降にアップグレードすると、元の動作を維持するために、この変数はデフォルトで`ALL`に設定されます。
-> - v8.3.0 から v8.5.4 までの新規デプロイされた TiDB クラスタの場合、この変数はデフォルトで`PREDICATE`に設定されます。
-> - バージョン8.5.5以降に新しくデプロイされたTiDBクラスタの場合、この変数はデフォルトで`ALL`に設定されます。
+> - v8.3.0 から v8.5.4 までの新規デプロイされた TiDB クラスターの場合、この変数はデフォルトで`PREDICATE`に設定されます。
+> - バージョン8.5.5以降に新しくデプロイされたTiDBクラスターの場合、この変数はデフォルトで`ALL`に設定されます。
 
 - 対象範囲：グローバル
 - クラスターに保持される: はい
@@ -1159,7 +1159,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `4`
-- 範囲: `[0, 4294967295]` 。v8.2.0 より前のバージョンでは、最小値は`1`です。これを`0`に設定すると、クラスタサイズに基づいて同時実行数が適応的に調整されます。
+- 範囲: `[0, 4294967295]` 。v8.2.0 より前のバージョンでは、最小値は`1`です。これを`0`に設定すると、クラスターサイズに基づいて同時実行数が適応的に調整されます。
 - この変数は、`ANALYZE` の同時実行性について、以下の項目を制御します。
     - TiKV リージョンをスキャンする同時実行数。
     - 生成された仮想カラム上のインデックスなど、特殊なインデックスのリージョンをスキャンする同時実行数。
@@ -1193,7 +1193,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_analyze_skip_column_types <span class="version-mark">New in v7.2.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: 「json、blob、mediumblob、longblob、mediumtext、longtext」。 v8.2.0 より前のデフォルト値は「json,blob,mediumblob,longblob」です。
@@ -1254,7 +1254,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: 整数
 - デフォルト値: `3`
 - 範囲: `[1, 2147483647]`
-- この変数は、TiDBクラスターで同時に実行できる自動分析操作の数を制御します。統計情報の収集タスクを高速化するには、クラスターで使用可能なリソースに基づいてこの同時実行数を増やすことができます。
+- この変数は、TiDBクラスターで同時に実行できる自動分析操作の数を制御します。統計情報の収集タスクを高速化するには、クラスターで使用可能なリソースに基づいてこの同時実行数を増やせます。
 - v8.4.0より前のバージョンでは、この同時実行数は `1` に固定されていました。
 - v8.5.7以降、デフォルト値は `1` から `3` に変更されました。以前のバージョンからクラスターをアップグレードした場合、この変数の値はアップグレード後も変更されません。
 
@@ -1275,7 +1275,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
     - `tidb_auto_analyze_start_time='01:00 +0000'`
     - `tidb_auto_analyze_end_time='03:00 +0000'`
 
-- パラメータ内の時刻にタイムゾーン情報が含まれている場合、そのタイムゾーンが解析に使用されます。そうでない場合は、現在のセッションの`time_zone`で指定されたタイムゾーンが使用されます。たとえば、 `01:00 +0000`は UTC の午前 1:00 を指します。
+- パラメーター内の時刻にタイムゾーン情報が含まれている場合、そのタイムゾーンが解析に使用されます。そうでない場合は、現在のセッションの`time_zone`で指定されたタイムゾーンが使用されます。たとえば、 `01:00 +0000`は UTC の午前 1:00 を指します。
 
 ### tidb_auto_analyze_partition_batch_size <span class="version-mark">New in v6.4.0</span>
 
@@ -1319,7 +1319,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
     - `tidb_auto_analyze_start_time='01:00 +0000'`
     - `tidb_auto_analyze_end_time='03:00 +0000'`
 
-- パラメータ内の時刻にタイムゾーン情報が含まれている場合、そのタイムゾーンが解析に使用されます。そうでない場合は、現在のセッションの`time_zone`で指定されたタイムゾーンが使用されます。たとえば、 `01:00 +0000`は UTC の午前 1:00 を指します。
+- パラメーター内の時刻にタイムゾーン情報が含まれている場合、そのタイムゾーンが解析に使用されます。そうでない場合は、現在のセッションの`time_zone`で指定されたタイムゾーンが使用されます。たとえば、 `01:00 +0000`は UTC の午前 1:00 を指します。
 
 ### tidb_auto_build_stats_concurrency <span class="version-mark">New in v6.5.0</span>
 
@@ -1370,7 +1370,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > この変数を有効にすることは推奨**されません**。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -1382,7 +1382,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > この変数は、非推奨のバッチ DML 機能に関連付けられており、データ破損を引き起こす可能性があります。そのため、バッチ DML でこの変数を有効にすることは推奨されません。代わりに、[非トランザクションDML](/non-transactional-dml.md)を使用してください。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -1394,7 +1394,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > この変数は、非推奨のバッチ DML 機能に関連付けられており、データ破損を引き起こす可能性があります。そのため、バッチ DML でこの変数を有効にすることは推奨されません。代わりに、[非トランザクションDML](/non-transactional-dml.md)を使用してください。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -1419,7 +1419,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - デフォルト値: `10240`
 - 範囲: `[0, 9223372036854775807]`
 - 単位：行
-- 結合操作の対象がサブクエリに属する場合、オプティマイザはサブクエリの結果セットのサイズを推定できません。この場合、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値より少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。そうでない場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
+- 結合操作の対象がサブクエリに属する場合、オプティマイザーはサブクエリの結果セットのサイズを推定できません。この場合、サイズは結果セットの行数によって決定されます。サブクエリの推定行数がこの変数の値より少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。そうでない場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 - この変数は、 [`tidb_prefer_broadcast_join_by_exchange_data_size`](/system-variables.md#tidb_prefer_broadcast_join_by_exchange_data_size-new-in-v710)が有効になった後は効果を発揮しません。
 
 ### tidb_broadcast_join_threshold_size <span class="version-mark">New in v5.0</span>
@@ -1489,7 +1489,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
@@ -1504,7 +1504,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - デフォルト値: `4`
 - 範囲: `[1, 256]`
 - 単位：スレッド
-- この変数は、 [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)ステートメントを実行する際のスキャン インデックスの同時実行数を設定するために使用されます。
+- この変数は、 [`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md)ステートメントを実行する際のスキャンインデックスの同時実行数を設定するために使用されます。
 - 変数をより大きな値に設定すると、他のクエリの実行パフォーマンスに影響が出ます。
 
 ### tidb_committer_concurrency <span class="version-mark">New in v6.1.0</span>
@@ -1526,14 +1526,14 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - この変数は読み取り専用です。現在のTiDBサーバーの構成情報を取得するために使用されます。
 
 ### tidb_constraint_check_in_place
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -1564,7 +1564,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_constraint_check_in_place_pessimistic <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 
@@ -1624,18 +1624,18 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> - TiDB v6.5.0以降では、新しく作成されたクラスタはデフォルトでコストモデルバージョン2を使用します。TiDBバージョンをv6.5.0より前のバージョンからv6.5.0以降にアップグレードした場合、 `tidb_cost_model_version`の値は変更されません。
+> - TiDB v6.5.0以降では、新しく作成されたクラスターはデフォルトでコストモデルバージョン2を使用します。TiDBバージョンをv6.5.0より前のバージョンからv6.5.0以降にアップグレードした場合、 `tidb_cost_model_version`の値は変更されません。
 > - コストモデルのバージョンを変更すると、実行計画に変更が生じる可能性があります。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: 整数
 - デフォルト値: `2`
 - 値のオプション：
     - `1` : TiDB v6.4.0 以前のバージョンでデフォルトで使用されているコストモデルバージョン 1 を有効にします。
-    - `2` :[コストモデル バージョン2](/cost-model.md#cost-model-version-2)を有効にします。これは TiDB v6.5.0 で一般提供されており、内部テストではバージョン 1 よりも正確です。
-- コストモデルのバージョンは、オプティマイザの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
+    - `2` :[コストモデルバージョン2](/cost-model.md#cost-model-version-2)を有効にします。これは TiDB v6.5.0 で一般提供されており、内部テストではバージョン 1 よりも正確です。
+- コストモデルのバージョンは、オプティマイザーの計画決定に影響します。詳細については、[コストモデル](/cost-model.md)を参照してください。
 
 ### tidb_current_ts
 
@@ -1692,7 +1692,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Warning:**
 >
-> 現在、この機能は[単一の`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)完全な互換性はありません。インデックス アクセラレーションを使用して一意インデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。
+> 現在、この機能は[単一の`ALTER TABLE`文で複数の列またはインデックスを変更する](/sql-statements/sql-statement-alter-table.md)完全な互換性はありません。インデックスアクセラレーションを使用して一意インデックスを追加する場合は、同じステートメント内の他の列やインデックスを変更しないようにする必要があります。
 
 </CustomContent>
 
@@ -1714,17 +1714,17 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `ON`
-- この変数は[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を有効にするかどうかを制御するために使用されます。フレームワークが有効になると、DDLやインポートなどのDXFタスクは、クラスタ内の複数のTiDBノードによって分散的に実行および完了されます。
+- この変数は[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)を有効にするかどうかを制御するために使用されます。フレームワークが有効になると、DDLやインポートなどのDXFタスクは、クラスター内の複数のTiDBノードによって分散的に実行および完了されます。
 - TiDB v7.1.0以降、DXFはパーティションテーブルに対する[`ADD INDEX`](/sql-statements/sql-statement-add-index.md)ステートメントの分散実行をサポートしています。
 - TiDB v7.2.0以降、DXFはインポートジョブにおける[`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)ステートメントの分散実行をサポートしています。
-- TiDB v8.1.0 以降では、この変数はデフォルトで有効になっています。DXF が有効になっているクラスタを v8.1.0 以降にアップグレードする場合は、アップグレード前に DXF を無効にしてください ( `tidb_enable_dist_task`を`OFF`に設定)。これにより、アップグレード中に`ADD INDEX`操作が発生してデータインデックスの不整合が発生するのを回避できます。アップグレード後、DXF を手動で有効にすることができます。
+- TiDB v8.1.0 以降では、この変数はデフォルトで有効になっています。DXF が有効になっているクラスターを v8.1.0 以降にアップグレードする場合は、アップグレード前に DXF を無効にしてください ( `tidb_enable_dist_task`を`OFF`に設定)。これにより、アップグレード中に`ADD INDEX`操作が発生してデータインデックスの不整合が発生するのを回避できます。アップグレード後、DXF を手動で有効にできます。
 - この変数は`tidb_ddl_distribute_reorg`から名前が変更されました。
 
 ### tidb_cloud_storage_uri <span class="version-mark">New in v7.4.0</span>
 
 > **Note:**
 >
-> 現在、[グローバルソート](/tidb-global-sort.md)プロセスは TiDB ノードのコンピューティングリソースとメモリリソースを大量に消費します。ユーザー業務アプリケーションの実行中にオンラインでインデックスを追加するなどのシナリオでは、クラスタに新しい TiDB ノードを追加し、これらのノードの[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)変数を構成して、これらのノードに接続してタスクを作成することをお勧めします。このようにして、分散フレームワークはタスクをこれらのノードにスケジュールし、ワークロードを他の TiDB ノードから分離することで、 `ADD INDEX`や`IMPORT INTO`などのバックエンド タスクの実行がユーザー業務アプリケーションに与える影響を軽減します。
+> 現在、[グローバルソート](/tidb-global-sort.md)プロセスは TiDB ノードのコンピューティングリソースとメモリリソースを大量に消費します。ユーザー業務アプリケーションの実行中にオンラインでインデックスを追加するなどのシナリオでは、クラスターに新しい TiDB ノードを追加し、これらのノードの[`tidb_service_scope`](/system-variables.md#tidb_service_scope-new-in-v740)変数を構成して、これらのノードに接続してタスクを作成することをお勧めします。このようにして、分散フレームワークはタスクをこれらのノードにスケジュールし、ワークロードを他の TiDB ノードから分離することで、 `ADD INDEX`や`IMPORT INTO`などのバックエンドタスクの実行がユーザー業務アプリケーションに与える影響を軽減します。
 
 - 対象範囲：グローバル
 - クラスターに保持される: はい
@@ -1747,7 +1747,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: 整数
 - デフォルト値: `512`
 - 範囲: `[0, 9223372036854775807]`
-- この変数は、DDL操作が失敗した場合の再試行回数を設定するために使用されます。再試行回数がパラメータ値を超えると、誤ったDDL操作はキャンセルされます。
+- この変数は、DDL操作が失敗した場合の再試行回数を設定するために使用されます。再試行回数がパラメーター値を超えると、誤ったDDL操作はキャンセルされます。
 
 ### tidb_ddl_flashback_concurrency <span class="version-mark">New in v6.3.0</span>
 
@@ -1779,8 +1779,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - この変数は、DDL 操作の`re-organize`フェーズ中にバッチサイズを設定するために使用されます。たとえば、TiDB が`ADD INDEX`操作を実行すると、インデックスデータは`tidb_ddl_reorg_worker_cnt` (数) 個の同時実行ワーカーによってバックフィルされる必要があります。各ワーカーは、インデックスデータをバッチ単位でバックフィルします。
     - `tidb_ddl_enable_fast_reorg`が`OFF`に設定されている場合、 `ADD INDEX`はトランザクションとして実行されます。 `ADD INDEX`の実行中に、対象列で`UPDATE`や`REPLACE`などの更新操作が多数発生する場合、バッチサイズが大きいほどトランザクション競合が発生する可能性が高くなります。この場合、バッチサイズを小さい値に設定することをお勧めします。最小値は 32 です。
     - トランザクションの競合が存在しない場合、または`tidb_ddl_enable_fast_reorg`が`ON`に設定されている場合は、バッチサイズを大きな値に設定できます。これにより、データのバックフィルが高速になりますが、TiKV への書き込み圧力も増加します。適切なバッチサイズについては、 `tidb_ddl_reorg_worker_cnt`の値も参照する必要があります。参考として[オンラインワークロードと`ADD INDEX`操作に関する相互作用テスト](https://docs.pingcap.com/tidb/dev/online-workloads-and-add-index-operations)を参照してください。
-    - バージョン8.3.0以降、このパラメータはセッションレベルでサポートされています。グローバルレベルでパラメータを変更しても、現在実行中のDDL文には影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
-    - バージョン 8.5.0 以降では、 `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`を実行することで、実行中の DDL ジョブのこのパラメータを変更できます。TiDB バージョン 8.5.5 より前のバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、 `ADD INDEX` DDL に対してこの操作はサポートされていないことに注意してください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
+    - バージョン8.3.0以降、このパラメーターはセッションレベルでサポートされています。グローバルレベルでパラメーターを変更しても、現在実行中のDDL文には影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
+    - バージョン 8.5.0 以降では、 `ADMIN ALTER DDL JOBS <job_id> BATCH_SIZE = <new_batch_size>;`を実行することで、実行中の DDL ジョブのこのパラメーターを変更できます。TiDB バージョン 8.5.5 より前のバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、 `ADD INDEX` DDL に対してこの操作はサポートされていないことに注意してください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
 
 ### tidb_ddl_reorg_priority
 
@@ -1788,7 +1788,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では読み取り専用です。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
 - デフォルト値: `PRIORITY_LOW`
@@ -1808,7 +1808,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: String
 - デフォルト値: `0`
 - 範囲: `[0, 1PiB]`
-- この変数は、インデックスのバックフィル中に、**単一の TiDB ノードから単一の TiKV ノードへの**書き込み帯域幅を制限します。これは、インデックス作成の高速化が有効になっている場合 ( [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630)変数で制御) にのみ有効になります。[グローバルソート](/tidb-global-sort.md)が有効になっている場合、複数の TiDB ノードが TiKV に同時に書き込むことができます。クラスタ内のデータサイズが非常に大きい場合 (数十億行など)、インデックス作成の書き込み帯域幅を制限することで、アプリケーションのワークロードへの影響を効果的に軽減できます。
+- この変数は、インデックスのバックフィル中に、**単一の TiDB ノードから単一の TiKV ノードへの**書き込み帯域幅を制限します。これは、インデックス作成の高速化が有効になっている場合 ( [`tidb_ddl_enable_fast_reorg`](#tidb_ddl_enable_fast_reorg-new-in-v630)変数で制御) にのみ有効になります。[グローバルソート](/tidb-global-sort.md)が有効になっている場合、複数の TiDB ノードが TiKV に同時に書き込めます。クラスター内のデータサイズが非常に大きい場合 (数十億行など)、インデックス作成の書き込み帯域幅を制限することで、アプリケーションのワークロードへの影響を効果的に軽減できます。
 - デフォルト値`0`は、書き込み帯域幅制限がないことを意味します。
 - この変数の値は、単位を指定しても指定しなくても構いません。
     - 単位を指定せずに値を指定すると、デフォルトの単位はバイト/秒になります。たとえば、 `67108864`は、1秒あたり`64MiB`を表します。
@@ -1816,10 +1816,10 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 例：
 
-4 つの TiDB ノードと複数の TiKV ノードを持つクラスタがあるとします。このクラスタでは、各 TiDB ノードがインデックスのバックフィルを実行でき、リージョンはすべての TiKV ノードに均等に分散されています。 `tidb_ddl_reorg_max_write_speed`を`100MiB`に設定すると、次のようになります。
+4 つの TiDB ノードと複数の TiKV ノードを持つクラスターがあるとします。このクラスターでは、各 TiDB ノードがインデックスのバックフィルを実行でき、リージョンはすべての TiKV ノードに均等に分散されています。 `tidb_ddl_reorg_max_write_speed`を`100MiB`に設定すると、次のようになります。
 
 - グローバルソートが無効になっている場合、一度に TiDB ノードが TiKV に書き込むのは 1 つだけです。この場合、TiKV ノードあたりの最大書き込み帯域幅は`100MiB`です。
-- グローバルソートが有効になっている場合、4 つの TiDB ノードすべてが同時に TiKV に書き込むことができます。この場合、TiKV ノードあたりの最大書き込み帯域幅は`4 * 100MiB = 400MiB`です。
+- グローバルソートが有効になっている場合、4 つの TiDB ノードすべてが同時に TiKV に書き込めます。この場合、TiKV ノードあたりの最大書き込み帯域幅は`4 * 100MiB = 400MiB`です。
 
 ### tidb_ddl_reorg_worker_cnt
 
@@ -1836,8 +1836,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 範囲: `[1, 256]`
 - 単位：スレッド
 - この変数は`re-organize`フェーズでの DDL 操作の同時実行性を設定するために使用されます。
-- バージョン8.3.0以降、このパラメータはセッションレベルでサポートされています。グローバルレベルでパラメータを変更しても、現在実行中のDDL文には影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
-- バージョン 8.5.0 以降では、 `ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`を実行することで、実行中の DDL ジョブのこのパラメータを変更できます。TiDB バージョン 8.5.5 より前のバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、 `ADD INDEX` DDL に対してこの操作はサポートされていないことに注意してください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
+- バージョン8.3.0以降、このパラメーターはセッションレベルでサポートされています。グローバルレベルでパラメーターを変更しても、現在実行中のDDL文には影響しません。変更は、新規セッションで送信されるDDLにのみ適用されます。
+- バージョン 8.5.0 以降では、 `ADMIN ALTER DDL JOBS <job_id> THREAD = <new_thread_count>;`を実行することで、実行中の DDL ジョブのこのパラメーターを変更できます。TiDB バージョン 8.5.5 より前のバージョンでは、 [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、 `ADD INDEX` DDL に対してこの操作はサポートされていないことに注意してください。詳細については、 [`ADMIN ALTER DDL JOBS`](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
 
 ### `tidb_enable_fast_create_table` <span class="version-mark">New in v8.0.0</span>
 
@@ -1849,7 +1849,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - この変数は[TiDB高速テーブル作成](/accelerated-table-creation.md)を有効にするかどうかを制御するために使用されます。
 - バージョン8.0.0以降、TiDBは`tidb_enable_fast_create_table`を使用して[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)ステートメントによるテーブル作成の高速化をサポートしています。
 - この変数は、v7.6.0 で導入された変数[`tidb_ddl_version`](https://docs-archive.pingcap.com/tidb/v7.6/system-variables#tidb_ddl_version-new-in-v760)から名前が変更されました。v8.0.0 以降、 `tidb_ddl_version`は無効になります。
-- TiDB v8.5.0以降、新しく作成されたクラスタでは、高速テーブル作成機能がデフォルトで有効になり、 `tidb_enable_fast_create_table`が`ON`に設定されます。v8.4.0以前のバージョンからアップグレードされたクラスタの場合、 `tidb_enable_fast_create_table`のデフォルト値は変更されません。
+- TiDB v8.5.0以降、新しく作成されたクラスターでは、高速テーブル作成機能がデフォルトで有効になり、 `tidb_enable_fast_create_table`が`ON`に設定されます。v8.4.0以前のバージョンからアップグレードされたクラスターの場合、 `tidb_enable_fast_create_table`のデフォルト値は変更されません。
 
 ### tidb_default_string_match_selectivity <span class="version-mark">New in v6.2.0</span>
 
@@ -1859,8 +1859,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - 型: Float
 - デフォルト値: `0.8`
 - 範囲: `[0, 1]`
-- この変数は、行数を推定する際のフィルタ条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために使用されます。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。
-- TiDB は統計情報を使用してフィルタ条件`like`を推定しようとします。しかし、 `like`が複雑な文字列に一致する場合、または`rlike`や`regexp`を使用する場合、TiDB は統計情報を十分に使用できないことが多く、代わりにデフォルト値`0.8`が選択率として設定され、推定が不正確になります。
+- この変数は、行数を推定する際のフィルター条件における`like` 、 `rlike` 、および`regexp`関数のデフォルトの選択性を設定するために使用されます。また、この変数は、これらの関数の推定を支援するために TopN を有効にするかどうかも制御します。
+- TiDB は統計情報を使用してフィルター条件`like`を推定しようとします。しかし、 `like`が複雑な文字列に一致する場合、または`rlike`や`regexp`を使用する場合、TiDB は統計情報を十分に使用できないことが多く、代わりにデフォルト値`0.8`が選択率として設定され、推定が不正確になります。
 - この変数は、前述の動作を変更するために使用されます。変数が`0`以外の値に設定されている場合、選択率は`0.8`ではなく、指定された変数の値になります。
 - 変数が`0`に設定されている場合、TiDB は統計情報で TopN を使用して評価し、精度を向上させ、前述の 3 つの関数を推定する際に統計情報で NULL の数を考慮します。前提条件として、 [`tidb_analyze_version`](#tidb_analyze_version-new-in-v510)が`2`に設定されているときに統計情報が収集されます。このような評価は、パフォーマンスに若干影響を与える可能性があります。
 - 変数が`0.8`以外の値に設定されている場合、TiDB は`not like` 、 `not rlike` 、および`not regexp`の推定値をそれに応じて調整します。
@@ -1871,7 +1871,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > バージョン8.0.0以降、この変数は非推奨となり、TiDBは楽観的トランザクションの自動再試行をサポートしなくなりました。代替策として、楽観的トランザクションの競合が発生した場合は、エラーを捕捉してアプリケーションでトランザクションを再試行するか、[悲観的トランザクションモード](/pessimistic-transaction.md)を使用してください。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -1908,7 +1908,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - この変数は`scan`操作の同時実行数を設定するために使用されます。
 - OLAPシナリオではより大きな値を使用し、OLTPシナリオではより小さな値を使用してください。
 - OLAPシナリオの場合、最大値はすべてのTiKVノードのCPUコア数を超えてはなりません。
-- テーブルにパーティションが多数ある場合、変数値を適切に減らすことで（スキャンするデータのサイズとスキャンの頻度によって決まります）、TiKVがメモリ不足（OOM）になるのを防ぐことができます。
+- テーブルにパーティションが多数ある場合、変数値を適切に減らすことで（スキャンするデータのサイズとスキャンの頻度によって決まります）、TiKVがメモリ不足（OOM）になるのを防げます。
 - `LIMIT`句のみを含む単純なクエリの場合、 `LIMIT`の値が100000未満であれば、TiKVにプッシュダウンされるスキャン操作では、実行効率を高めるためにこの変数の値を`1`として扱います。
 - `SELECT MAX/MIN(col) FROM ...`クエリの場合、 `col`列に`MAX(col)`または`MIN(col)`関数で要求されるのと同じ順序でソートされたインデックスがある場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えて処理し、この変数の値も`1`として処理されます。例えば、 `SELECT MIN(col) FROM ...`の場合、 `col`列に昇順インデックスがある場合、TiDB はクエリを`SELECT col FROM ... LIMIT 1`に書き換えてインデックスの最初の行を直接読み取ることで、 `MIN(col)`の値をすばやく取得できます。
 - [`SLOW_QUERY`](/information-schema/information-schema-slow-query.md)テーブルに対するクエリの場合、この変数はスローログファイルの解析における同時実行数を制御します。
@@ -1926,7 +1926,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 - デフォルト値: `0`
 - 範囲: `[0, 2147483647]`
 - 単位：行
-- この値が`0`より大きい場合、TiDB は`INSERT`などのコミットステートメントをより小さなトランザクションにバッチ処理します。これによりメモリ使用量が削減され、一括変更によって`txn-total-size-limit`に達しないようにすることができます。
+- この値が`0`より大きい場合、TiDB は`INSERT`などのコミットステートメントをより小さなトランザクションにバッチ処理します。これによりメモリ使用量が削減され、一括変更によって`txn-total-size-limit`に達しないようにできます。
 - `0`という値のみがACID準拠を保証します。この値を他の値に設定すると、TiDB の原子性と分離性の保証が損なわれます。
 - この変数を機能させるには、 `tidb_enable_batch_dml`と、 `tidb_batch_insert`および`tidb_batch_delete`の少なくとも 1 つを有効にする必要があります。
 
@@ -1944,7 +1944,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では読み取り専用です。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: String
 - デフォルト値: `"standard"`
@@ -1959,7 +1959,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では読み取り専用です。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -1969,11 +1969,11 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > **Note:**
 >
 > - `ON`のデフォルト値は、新規クラスターにのみ適用されます。クラスターが以前のバージョンの TiDB からアップグレードされた場合は、代わりに`OFF`が使用されます。
-> - このパラメータを有効にしても、ワンフェーズコミットがトランザクションコミットのオプションモードになるだけです。実際には、最適なトランザクションコミットモードはTiDBによって決定されます。
+> - このパラメーターを有効にしても、ワンフェーズコミットがトランザクションコミットのオプションモードになるだけです。実際には、最適なトランザクションコミットモードはTiDBによって決定されます。
 
 ### tidb_enable_analyze_snapshot <span class="version-mark">New in v6.2.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -1991,7 +1991,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では読み取り専用です。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2001,7 +2001,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > **Note:**
 >
 > - `ON`のデフォルト値は、新規クラスターにのみ適用されます。クラスターが以前のバージョンの TiDB からアップグレードされた場合は、代わりに`OFF`が使用されます。
-> - このパラメータを有効にしても、非同期コミットがトランザクションコミットのオプションモードになるだけです。実際には、最適なトランザクションコミットモードはTiDBによって決定されます。
+> - このパラメーターを有効にしても、非同期コミットがトランザクションコミットのオプションモードになるだけです。実際には、最適なトランザクションコミットモードはTiDBによって決定されます。
 
 ### tidb_enable_auto_analyze <span class="version-mark">New in v6.1.0</span>
 
@@ -2028,7 +2028,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_auto_increment_in_generated
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2050,9 +2050,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### `tidb_enable_batch_query_region` <span class="version-mark">New in v8.5.7</span>
 
-- スコープ: GLOBAL
-- クラスターへの永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
+- 対象範囲: グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は、Batch Query Region 機能を有効にするかどうかを制御します。TiDB がデータにアクセスする際、ローカルの Region キャッシュを更新するために、Region のルーティング情報を PD に問い合わせます。デフォルトでは、`GetRegion`（キーを含む Region を問い合わせる）、`GetPrevRegion`（キーに基づいて直前に隣接する Region を問い合わせる）、`GetRegionByID`（Region ID によって問い合わせる）などのポイントクエリリクエストは、それぞれ独立した unary gRPC リクエストです。Batch Query Region 機能は、これら 3 種類のリクエストをバッチ化してマージします。
@@ -2071,7 +2071,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > 現在、カスケードプランナーは実験的機能です。本番環境での使用は推奨されません。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2089,7 +2089,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_chunk_rpc <span class="version-mark">New in v4.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
@@ -2097,7 +2097,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_clustered_index <span class="version-mark">New in v5.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
@@ -2115,11 +2115,11 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)では読み取り専用です。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `ON`
 - 指定可能な値: `OFF` 、 `ON`
-- この変数は、対応する TiDB インスタンスが DDL の所有者になれるかどうかを制御します。現在の TiDB クラスタに TiDB インスタンスが 1 つしかない場合、それが DDL の所有者になることを防ぐことはできません。つまり、 `OFF`に設定できません。
+- この変数は、対応する TiDB インスタンスが DDL の所有者になれるかどうかを制御します。現在の TiDB クラスターに TiDB インスタンスが 1 つしかない場合、それが DDL の所有者になることを防ぐことはできません。つまり、 `OFF`に設定できません。
 
 ### tidb_enable_collect_execution_info
 
@@ -2128,7 +2128,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
@@ -2149,7 +2149,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_enhanced_security
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 
@@ -2175,7 +2175,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_exchange_partition
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2185,16 +2185,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_extended_stats
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、TiDB がオプティマイザをガイドする拡張統計を収集できるかどうかを示します。詳細については、[拡張統計入門](/extended-statistics.md)を参照してください。
+- この変数は、TiDB がオプティマイザーをガイドする拡張統計を収集できるかどうかを示します。詳細については、[拡張統計入門](/extended-statistics.md)を参照してください。
 
 ### tidb_enable_external_ts_read <span class="version-mark">New in v6.4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2216,7 +2216,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > バージョン7.5.0以降、この変数は非推奨となりました。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2230,8 +2230,8 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > この変数は[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)およびプレフィックスインデックスに対しては機能しません。
 
-- 範囲: セッション | グローバル
-- クラスターに永続化：はい
+- 対象範囲: セッション | グローバル
+- クラスターに保持される：はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
@@ -2266,7 +2266,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_global_index <span class="version-mark">New in v7.6.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2320,7 +2320,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_non_prepared_plan_cache
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2334,7 +2334,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > DML文用の非プリペアドプランキャッシュは実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2347,9 +2347,9 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 >
 > 現在、この変数は実験的です。本番環境での使用は推奨されません。この変数は事前の通知なく変更または削除される可能性があります。バグを見つけた場合は、GitHub で [issue](https://github.com/pingcap/tidb/issues) を報告できます。
 
-- 対象範囲: SESSION | GLOBAL
-- クラスターに保持される: Yes
-- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用: Yes
+- 対象範囲: セッション | グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は、`Prepare`文の結果をキャッシュするかどうかを制御します。通常、アプリケーションは `Prepare` を 1 回だけ実行し、その後 `Execute` を複数回実行するだけで済みます。以降のすべての `Execute` 操作では、最初の `Prepare` の結果を再利用できます。アプリケーションが同じ `Prepare`文を繰り返し送信する場合は、この変数を有効にすることで、TiDB が同一の `Prepare`文の結果をキャッシュして再利用できるようになり、リソース消費を削減できます。
@@ -2393,13 +2393,13 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 > **Note:**
 >
-> - TiDBクラスタをv4.0.0より前のバージョンからv5.4.0以降にアップグレードした後、実行計画の変更によるパフォーマンス低下を防ぐため、この変数はデフォルトで無効になります。
+> - TiDBクラスターをv4.0.0より前のバージョンからv5.4.0以降にアップグレードした後、実行計画の変更によるパフォーマンス低下を防ぐため、この変数はデフォルトで無効になります。
 >
-> - TiDBクラスタをv4.0.0以降からv5.4.0以降にアップグレードした後も、この変数はアップグレード前の設定のままです。
+> - TiDBクラスターをv4.0.0以降からv5.4.0以降にアップグレードした後も、この変数はアップグレード前の設定のままです。
 >
-> - バージョン5.4.0以降、新規にデプロイされたTiDBクラスタでは、この変数はデフォルトで有効になっています。
+> - バージョン5.4.0以降、新規にデプロイされたTiDBクラスターでは、この変数はデフォルトで有効になっています。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2408,7 +2408,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_index_merge_join
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2418,7 +2418,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_legacy_instance_scope <span class="version-mark">New in v6.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2428,7 +2428,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_list_partition <span class="version-mark">New in v5.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2464,17 +2464,17 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_mutation_checker <span class="version-mark">New in v6.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、DML文の実行中にデータとインデックス間の一貫性をチェックするために使用されるツールである TiDB ミューテーション チェッカーを有効にするかどうかを制御するために使用されます。チェッカーがステートメントに対してエラーを返した場合、TiDB はステートメントの実行をロールバックします。この変数を有効にすると、CPU 使用率がわずかに増加します。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
+- この変数は、DML文の実行中にデータとインデックス間の一貫性をチェックするために使用されるツールである TiDB ミューテーションチェッカーを有効にするかどうかを制御するために使用されます。チェッカーがステートメントに対してエラーを返した場合、TiDB はステートメントの実行をロールバックします。この変数を有効にすると、CPU 使用率がわずかに増加します。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 - v6.0.0以降のバージョンの新規クラスターの場合、デフォルト値は`ON`です。v6.0.0より前のバージョンからアップグレードする既存のクラスターの場合、デフォルト値は`OFF`です。
 
 ### tidb_enable_new_cost_interface <span class="version-mark">New in v6.2.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2485,7 +2485,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_new_only_full_group_by_check <span class="version-mark">New in v6.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2495,7 +2495,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_noop_functions <span class="version-mark">New in v4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
@@ -2527,7 +2527,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_null_aware_anti_join <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: v7.0.0 より前のバージョンでは、デフォルト値は`OFF`です。v7.0.0 以降では、デフォルト値は`ON`です。
@@ -2537,7 +2537,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_outer_join_reorder <span class="version-mark">New in v6.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2550,7 +2550,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### `tidb_enable_inl_join_inner_multi_pattern` <span class="version-mark">New in v7.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2573,7 +2573,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_ordered_result_mode
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2583,12 +2583,12 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_paging <span class="version-mark">New in v5.4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、ページング方式を使用してコプロセッサリクエストを送信するかどうかを制御します。TiDB バージョン (v5.4.0、v6.2.0) では、この変数は`IndexLookup`オペレーターにのみ有効です。v6.2.0 以降では、この変数はグローバルに有効です。v6.4.0 以降、この変数のデフォルト値は`OFF`から`ON`に変更されました。
+- この変数は、ページング方式を使用してコプロセッサーリクエストを送信するかどうかを制御します。TiDB バージョン (v5.4.0、v6.2.0) では、この変数は`IndexLookup`オペレーターにのみ有効です。v6.2.0 以降では、この変数はグローバルに有効です。v6.4.0 以降、この変数のデフォルト値は`OFF`から`ON`に変更されました。
 - ユーザーシナリオ：
 
     - すべてのOLTPシナリオにおいて、ページング方式を使用することが推奨されます。
@@ -2601,7 +2601,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_parallel_apply <span class="version-mark">New in v5.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2610,7 +2610,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_parallel_hashagg_spill <span class="version-mark">New in v8.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2619,7 +2619,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_pipelined_window_function
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2628,7 +2628,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_plan_cache_for_param_limit <span class="version-mark">New in v6.6.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2637,7 +2637,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_plan_cache_for_subquery <span class="version-mark">New in v7.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2659,7 +2659,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 <CustomContent platform="tidb">
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2683,7 +2683,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 <CustomContent platform="tidb">
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2694,7 +2694,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_point_get_cache
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -2702,7 +2702,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_prepared_plan_cache <span class="version-mark">New in v6.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -2712,7 +2712,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_prepared_plan_cache_memory_monitor <span class="version-mark">New in v6.4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `ON`
@@ -2720,31 +2720,31 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_pseudo_for_outdated_stats <span class="version-mark">New in v5.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、統計情報が古い場合に、オプティマイザがテーブルの統計情報を使用するかどうかの動作を制御します。
+- この変数は、統計情報が古い場合に、オプティマイザーがテーブルの統計情報を使用するかどうかの動作を制御します。
 
 <CustomContent platform="tidb">
 
-- オプティマイザは、テーブルの統計情報が古いかどうかを次のように判断します。 `ANALYZE`がテーブルに対して最後に実行されて統計情報が取得されてから、テーブルの行の 80% が変更された場合 (変更された行数を総行数で割った値)、オプティマイザはこのテーブルの統計情報が古いと判断します。この比率は[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)設定を使用して変更できます。
+- オプティマイザーは、テーブルの統計情報が古いかどうかを次のように判断します。 `ANALYZE`がテーブルに対して最後に実行されて統計情報が取得されてから、テーブルの行の 80% が変更された場合 (変更された行数を総行数で割った値)、オプティマイザーはこのテーブルの統計情報が古いと判断します。この比率は[`pseudo-estimate-ratio`](/tidb-configuration-file.md#pseudo-estimate-ratio)設定を使用して変更できます。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- オプティマイザは、テーブルの統計情報が古くなっているかどうかを次のように判断します。テーブルに対して統計情報を取得するために最後に`ANALYZE`が実行されてから、テーブルの行の 80% が変更された場合 (変更された行数を総行数で割った値)、オプティマイザはこのテーブルの統計情報が古くなっていると判断します。
+- オプティマイザーは、テーブルの統計情報が古くなっているかどうかを次のように判断します。テーブルに対して統計情報を取得するために最後に`ANALYZE`が実行されてから、テーブルの行の 80% が変更された場合 (変更された行数を総行数で割った値)、オプティマイザーはこのテーブルの統計情報が古くなっていると判断します。
 
 </CustomContent>
 
-- デフォルトでは（変数値が`OFF`の場合）、テーブルの統計情報が古くなっている場合でも、オプティマイザは引き続きテーブルの統計情報を使用します。変数値を`ON`に設定すると、オプティマイザは、行の総数を除いてテーブルの統計情報が信頼できないと判断します。その後、オプティマイザは擬似統計情報を使用します。
+- デフォルトでは（変数値が`OFF`の場合）、テーブルの統計情報が古くなっている場合でも、オプティマイザーは引き続きテーブルの統計情報を使用します。変数値を`ON`に設定すると、オプティマイザーは、行の総数を除いてテーブルの統計情報が信頼できないと判断します。その後、オプティマイザーは擬似統計情報を使用します。
 - テーブル上のデータが頻繁に変更されるにもかかわらず、このテーブルに対して`ANALYZE`を適時に実行しない場合、実行計画を安定させるために、変数の値を`OFF`に設定することをお勧めします。
 
 ### tidb_enable_rate_limit_action
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2779,16 +2779,16 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_reuse_chunk <span class="version-mark">New in v6.4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `ON`
 - 値のオプション: `OFF` 、 `ON`
-- この変数は、TiDB がチャンク オブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`の場合、TiDB はキャッシュされたチャンク オブジェクトの使用を優先し、要求されたオブジェクトがキャッシュにない場合のみシステムにリクエストします。値が`OFF`の場合、TiDB はシステムから直接チャンク オブジェクトをリクエストします。
+- この変数は、TiDB がチャンクオブジェクトのキャッシュを有効にするかどうかを制御します。値が`ON`の場合、TiDB はキャッシュされたチャンクオブジェクトの使用を優先し、要求されたオブジェクトがキャッシュにない場合のみシステムにリクエストします。値が`OFF`の場合、TiDB はシステムから直接チャンクオブジェクトをリクエストします。
 
 ### tidb_enable_shared_lock_promotion <span class="version-mark">New in v8.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2803,7 +2803,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
@@ -2822,11 +2822,11 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 ### tidb_enable_stats_owner <span class="version-mark">New in v8.4.0</span>
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `ON`
 - 指定可能な値: `OFF` 、 `ON`
-- この変数は、対応する TiDB インスタンスが[統計情報の自動更新](/statistics.md#automatic-update)タスクを実行できるかどうかを制御します。現在の TiDB クラスタに TiDB インスタンスが 1 つしかない場合、このインスタンスで統計の自動更新を無効にできません。つまり、この変数を`OFF`に設定できません。
+- この変数は、対応する TiDB インスタンスが[統計情報の自動更新](/statistics.md#automatic-update)タスクを実行できるかどうかを制御します。現在の TiDB クラスターに TiDB インスタンスが 1 つしかない場合、このインスタンスで統計の自動更新を無効にできません。つまり、この変数を`OFF`に設定できません。
 
 ### tidb_enable_stmt_summary <span class="version-mark">New in v3.0.4</span>
 
@@ -2843,13 +2843,13 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_strict_not_null_check <span class="version-mark">New in v8.5.7</span>
 
-- スコープ: SESSION | GLOBAL
-- クラスターへの永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
+- 対象範囲: セッション | グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
 - この変数は、`INSERT` 文で `NOT NULL` カラムに `NULL` 値を明示的に書き込んだときに、TiDB が厳密な検証を行うかどうかを制御します。
-- 取り得る値:
+- 指定可能な値:
     - `ON`: 厳密な `NOT NULL` 検証を有効にします。この動作は MySQL 8.0 のセマンティクスにより近くなります。
         - strict SQL mode の場合: `NOT NULL` カラムに `NULL` 値を挿入すると、TiDB はエラーを返します。
         - non-strict SQL mode の場合: 単一行の `INSERT` 文で `NOT NULL` カラムに `NULL` 値を挿入すると、TiDB はエラーを返します。複数行の `INSERT` 文で `NOT NULL` カラムに `NULL` 値を挿入すると、TiDB はそのエラーを警告に格下げし、カラムのデータ型の暗黙のデフォルト値を書き込みます。
@@ -2863,7 +2863,7 @@ mysql> SELECT job_info FROM mysql.analyze_jobs ORDER BY end_time DESC LIMIT 1;
 
 ### tidb_enable_strict_double_type_check <span class="version-mark">New in v5.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2890,7 +2890,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 ### tidb_enable_table_partition
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
@@ -2926,7 +2926,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 ### tidb_enable_tiflash_read_for_write_stmt <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2935,7 +2935,7 @@ Query OK, 0 rows affected (0.09 sec)
 
     - `SELECT`文内の`INSERT INTO SELECT`クエリ (一般的な使用シナリオ:[TiFlashクエリ結果の具体化](/tiflash/tiflash-results-materialization.md))
     - `WHERE`および`UPDATE`文における`DELETE`条件フィルタリング
-- バージョン7.1.0以降、この変数は非推奨となりました。[`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)の場合、オプティマイザは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに判断します。 TiDB では`INSERT` 、 `DELETE` 、および`UPDATE` (例えば`INSERT INTO SELECT` ) を含む SQL文の読み取り操作をTiFlashにプッシュダウンできるのは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合のみであることに注意してください。つまり、 `sql_mode`の値には`STRICT_TRANS_TABLES`および`STRICT_ALL_TABLES`は含まれません。
+- バージョン7.1.0以降、この変数は非推奨となりました。[`tidb_allow_mpp = ON`](/system-variables.md#tidb_allow_mpp-new-in-v50)の場合、オプティマイザーは[SQLモード](/sql-mode.md)とTiFlashレプリカのコスト見積もりに基づいて、クエリをTiFlashにプッシュダウンするかどうかをインテリジェントに判断します。 TiDB では`INSERT` 、 `DELETE` 、および`UPDATE` (例えば`INSERT INTO SELECT` ) を含む SQL文の読み取り操作をTiFlashにプッシュダウンできるのは、現在のセッションの[SQLモード](/sql-mode.md)が厳密でない場合のみであることに注意してください。つまり、 `sql_mode`の値には`STRICT_TRANS_TABLES`および`STRICT_ALL_TABLES`は含まれません。
 
 ### tidb_enable_top_sql <span class="version-mark">New in v5.4.0</span>
 
@@ -2975,16 +2975,16 @@ Query OK, 0 rows affected (0.09 sec)
 - この変数は、TSOFollowerプロキシ機能を有効にするかどうかを制御します。値が`OFF`の場合、TiDBはPDリーダーからのみTSOを取得します。値が`ON`の場合、TiDBはTSOリクエストをすべてのPDサーバーに均等に分散し、PDフォロワーもTSOリクエストを処理できるため、PDリーダーのCPU負荷が軽減されます。
 - TSOFollowerプロキシを有効にするシナリオ：
     - TSOリクエストの負荷が高いため、PDリーダーのCPUがボトルネックとなり、TSO RPCリクエストのレイテンシーが増大します。
-    - TiDBクラスタには多数のTiDBインスタンスが存在するため、 [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530)の値を増やしても、TSO RPCリクエストの高レイテンシーの問題は解消されません。
+    - TiDBクラスターには多数のTiDBインスタンスが存在するため、 [`tidb_tso_client_batch_max_wait_time`](#tidb_tso_client_batch_max_wait_time-new-in-v530)の値を増やしても、TSO RPCリクエストの高レイテンシーの問題は解消されません。
 
 > **Note:**
 >
-> - PDリーダーのCPU使用率のボトルネック以外の理由（ネットワークの問題など）でTSO RPCのレイテンシーが増加したとします。この場合、TSOFollowerプロキシを有効にすると、TiDBの実行レイテンシーが増加し、クラスタのQPSパフォーマンスに影響を与える可能性があります。
+> - PDリーダーのCPU使用率のボトルネック以外の理由（ネットワークの問題など）でTSO RPCのレイテンシーが増加したとします。この場合、TSOFollowerプロキシを有効にすると、TiDBの実行レイテンシーが増加し、クラスターのQPSパフォーマンスに影響を与える可能性があります。
 > - この機能は[`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840)と互換性がありません。この機能を有効にすると、[`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840)は有効になりません。
 
 ### tidb_enable_unsafe_substitute <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -2993,7 +2993,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 ### tidb_enable_vectorized_expression <span class="version-mark">New in v4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -3002,7 +3002,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 ### tidb_enable_window_function
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -3033,7 +3033,7 @@ Query OK, 0 rows affected (0.09 sec)
 
 ### tidb_enforce_mpp <span class="version-mark">New in v5.1</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -3044,11 +3044,11 @@ Query OK, 0 rows affected (0.09 sec)
 
 </CustomContent>
 
-- オプティマイザのコスト見積もりを無視し、クエリ実行にTiFlashのMPPモードを強制的に使用するかどうかを制御します。値オプションは以下のとおりです。
+- オプティマイザーのコスト見積もりを無視し、クエリ実行にTiFlashのMPPモードを強制的に使用するかどうかを制御します。値オプションは以下のとおりです。
     - `0`または`OFF`は、MPP モードが強制的に使用されないことを意味します (デフォルトでは)。
     - `1`または`ON`の場合、コスト見積もりは無視され、MPP モードが強制的に使用されます。この設定は`tidb_allow_mpp=true`の場合にのみ有効になることに注意してください。
 
-MPP は、 TiFlashエンジンによって提供される分散コンピューティング フレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットの SQL アルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
+MPP は、 TiFlashエンジンによって提供される分散コンピューティングフレームワークであり、ノード間のデータ交換を可能にし、高性能、高スループットの SQL アルゴリズムを提供します。 MPPモードの選択の詳細については、 [MPPモードを選択するかどうかを制御する](/tiflash/use-tiflash-mpp-mode.md#control-whether-to-select-the-mpp-mode)を参照してください。
 
 ### tidb_evolve_plan_baselines <span class="version-mark">New in v4.0</span>
 
@@ -3056,7 +3056,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 >
 > この変数で制御される機能は実験的機能です。本番環境での使用は推奨されません。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -3136,7 +3136,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `60`
@@ -3157,7 +3157,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 </CustomContent>
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `600`
@@ -3172,7 +3172,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
 - デフォルト値: `NO_PRIORITY`
@@ -3186,7 +3186,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_foreign_key_check_in_shared_lock <span class="version-mark">New in v8.5.6</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -3310,7 +3310,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -3384,7 +3384,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `ON`
 - この変数は、スローログとステートメントサマリーにバイナリエンコードされた実行計画を生成するかどうかを制御します。
 - この変数を`ON`に設定すると、TiDB Dashboardで実行計画を視覚的に表示できます。ただし、TiDB Dashboardでは、この変数が有効になった後に生成された実行計画のみを視覚的に表示できることに注意してください。
-- [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行すると、バイナリ プランから特定のプランを解析できます。
+- [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan)ステートメントを実行すると、バイナリプランから特定のプランを解析できます。
 
 ### tidb_gogc_tuner_max_value <span class="version-mark">New in v7.5.0</span>
 
@@ -3425,7 +3425,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは読み取り専用です。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -3436,12 +3436,12 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_hash_exchange_with_new_collation
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、新しい照合順序が有効になっているクラスタで MPP ハッシュパーティション交換演算子を生成するかどうかを制御します。 `true`は演算子を生成することを意味し、 `false`は生成しないことを意味します。
+- この変数は、新しい照合順序が有効になっているクラスターで MPP ハッシュパーティション交換演算子を生成するかどうかを制御します。 `true`は演算子を生成することを意味し、 `false`は生成しないことを意味します。
 - この変数はTiDBの内部動作に使用されます。この変数を設定することは**推奨されません**。
 
 ### tidb_hash_join_concurrency
@@ -3466,7 +3466,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 >
 > この変数で制御される機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
@@ -3492,7 +3492,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 範囲: `[1, 256]`
 - 単位：スレッド
 - この変数は`hash aggregation` `final`アルゴリズムの並行性を設定するために使用されます。
-- 集計関数のパラメータが区別できない場合、 `HashAgg`は、 `partial`フェーズと`final`の 2 つのフェーズで同時に実行されます。
+- 集計関数のパラメーターが区別できない場合、 `HashAgg`は、 `partial`フェーズと`final`の 2 つのフェーズで同時に実行されます。
 - `-1`という値が指定された場合、代わりに`tidb_executor_concurrency`という値が使用されます。
 
 ### tidb_hashagg_partial_concurrency
@@ -3509,7 +3509,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 範囲: `[1, 256]`
 - 単位：スレッド
 - この変数は`hash aggregation` `partial`アルゴリズムの並行性を設定するために使用されます。
-- 集計関数のパラメータが区別できない場合、 `HashAgg`は、 `partial`フェーズと`final`の 2 つのフェーズで同時に実行されます。
+- 集計関数のパラメーターが区別できない場合、 `HashAgg`は、 `partial`フェーズと`final`の 2 つのフェーズで同時に実行されます。
 - `-1`という値が指定された場合、代わりに`tidb_executor_concurrency`という値が使用されます。
 
 ### tidb_historical_stats_duration <span class="version-mark">New in v6.6.0</span>
@@ -3535,7 +3535,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_ignore_prepared_cache_close_stmt <span class="version-mark">New in v6.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -3575,8 +3575,8 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: Float
 - デフォルト値: `0`
 - 範囲: `[0, 18446744073709551615]`
-- この変数は、インデックス結合の選択にペナルティコストを適用するかどうかを決定します。ペナルティコストを適用すると、オプティマイザがインデックス結合を選択する可能性が低くなり、ハッシュ結合やTiFlash結合などの代替結合方法を選択する可能性が高くなります。
-- インデックス結合を選択すると、多数のテーブル検索リクエストが発生し、リソースを過剰に消費します。この変数を使用することで、オプティマイザがインデックス結合を選択する可能性を低減できます。
+- この変数は、インデックス結合の選択にペナルティコストを適用するかどうかを決定します。ペナルティコストを適用すると、オプティマイザーがインデックス結合を選択する可能性が低くなり、ハッシュ結合やTiFlash結合などの代替結合方法を選択する可能性が高くなります。
+- インデックス結合を選択すると、多数のテーブル検索リクエストが発生し、リソースを過剰に消費します。この変数を使用することで、オプティマイザーがインデックス結合を選択する可能性を低減できます。
 - この変数は、 [`tidb_cost_model_version`](/system-variables.md#tidb_cost_model_version-new-in-v620)変数が`2`に設定されている場合にのみ有効になります。
 
 ### tidb_index_lookup_concurrency
@@ -3614,7 +3614,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_index_lookup_pushdown_policy <span class="version-mark">New in v8.5.5</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
@@ -3671,7 +3671,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `32`
 - 範囲: `[1, 32]`
 - 単位：行
-- この変数は、実行プロセス中に最初のチャンクの行数を設定するために使用されます。チャンクの行数は、単一のクエリに必要なメモリ量に直接影響します。クエリ内のすべての列の合計幅とチャンクの行数を考慮することで、単一のチャンクに必要なメモリを概算できます。これにエグゼキュータの同時実行性を組み合わせることで、単一のクエリに必要な合計メモリを概算できます。単一のチャンクの合計メモリは16 MiBを超えないことを推奨します。
+- この変数は、実行プロセス中に最初のチャンクの行数を設定するために使用されます。チャンクの行数は、単一のクエリに必要なメモリ量に直接影響します。クエリ内のすべての列の合計幅とチャンクの行数を考慮することで、単一のチャンクに必要なメモリを概算できます。これにエグゼキューターの同時実行性を組み合わせることで、単一のクエリに必要な合計メモリを概算できます。単一のチャンクの合計メモリは16 MiBを超えないことを推奨します。
 
 ### tidb_instance_plan_cache_reserved_percentage <span class="version-mark">New in v8.4.0</span>
 
@@ -3707,14 +3707,14 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは読み取り専用です。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: `tikv,tiflash,tidb`
 - この変数は、TiDBがデータを読み取る際に使用できるストレージエンジンのリストを設定するために使用されます。
 
 ### tidb_last_ddl_info <span class="version-mark">New in v6.0.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - 型: String
@@ -3724,7 +3724,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_last_query_info <span class="version-mark">New in v4.0.14</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - これは読み取り専用変数です。TiDB内部で、最後のDML文のトランザクション情報を照会するために使用されます。情報には以下が含まれます。
@@ -3736,7 +3736,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_last_txn_info <span class="version-mark">New in v4.0.9</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: String
 - この変数は、現在のセッション内の最後のトランザクション情報を取得するために使用されます。これは読み取り専用変数です。トランザクション情報には以下が含まれます。
@@ -3748,7 +3748,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_last_plan_replayer_token <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: String
 - この変数は読み取り専用であり、現在のセッションでの最後の`PLAN REPLAYER DUMP`実行の結果を取得するために使用されます。
@@ -3792,7 +3792,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### `tidb_lock_unchanged_keys` <span class="version-mark">New in v7.1.1 and v7.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -3809,7 +3809,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは読み取り専用です。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `0`
@@ -3829,7 +3829,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_low_resolution_tso
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -3874,7 +3874,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計オペレーターの最大メモリ使用量を制御します。
+> - TiDBクラスターに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計オペレーターの最大メモリ使用量を制御します。
 > - この変数が`-1`に設定されている場合、 TiFlash は、自身の設定項目[`max_bytes_before_external_group_by`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、集約オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3883,7 +3883,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計オペレーターの最大メモリ使用量を制御します。
+> - TiDBクラスターに複数のTiFlashノードがある場合、集計処理は通常、複数のTiFlashノードに分散して実行されます。この変数は、単一のTiFlashノードにおける集計オペレーターの最大メモリ使用量を制御します。
 > - この変数が`-1`に設定されている場合、 TiFlash は自身の設定項目`max_bytes_before_external_group_by`の値に基づいて集約オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3902,7 +3902,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合オペレーターの最大メモリ使用量を制御します。
+> - TiDBクラスターに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合オペレーターの最大メモリ使用量を制御します。
 > - この変数が`-1`に設定されている場合、 TiFlash は、自身の設定項目[`max_bytes_before_external_join`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、結合オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3911,7 +3911,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合オペレーターの最大メモリ使用量を制御します。
+> - TiDBクラスターに複数のTiFlashノードがある場合、結合処理は通常、複数のTiFlashノード上で分散して実行されます。この変数は、単一のTiFlashノード上での結合オペレーターの最大メモリ使用量を制御します。
 > - この変数が`-1`に設定されている場合、 TiFlash は自身の設定項目`max_bytes_before_external_join`の値に基づいて結合オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3930,7 +3930,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSortオペレーターの最大メモリ使用量を制御します。
+> - TiDBクラスターに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSortオペレーターの最大メモリ使用量を制御します。
 > - この変数が`-1`に設定されている場合、 TiFlash は、独自の設定項目[`max_bytes_before_external_sort`](/tiflash/tiflash-configuration.md#tiflash-configuration-parameters)の値に基づいて、TopN および Sort オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3939,7 +3939,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> - TiDBクラスタに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSortオペレーターの最大メモリ使用量を制御します。
+> - TiDBクラスターに複数のTiFlashノードがある場合、TopNとSortは通常、複数のTiFlashノードで分散実行されます。この変数は、単一のTiFlashノードにおけるTopNおよびSortオペレーターの最大メモリ使用量を制御します。
 > - この変数が`-1`に設定されている場合、 TiFlash は、自身の設定項目`max_bytes_before_external_sort`の値に基づいて、TopN および Sort オペレーターの最大メモリ使用量を決定します。
 
 </CustomContent>
@@ -3953,7 +3953,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `1024`
 - 範囲: `[32, 2147483647]`
 - 単位：行
-- この変数は、実行プロセス中にチャンク内の最大行数を設定するために使用されます。大きすぎる値を設定すると、キャッシュの局所性の問題が発生する可能性があります。この変数の推奨値は 65536 以下です。チャンクの行数は、単一のクエリに必要なメモリ量に直接影響します。クエリ内のすべての列の合計幅とチャンクの行数を考慮することで、単一のチャンクに必要なメモリを概算できます。これをエグゼキュータの同時実行性と組み合わせることで、単一のクエリに必要な合計メモリを概算できます。単一のチャンクの合計メモリは16 MiB を超えないことを推奨します。クエリに大量のデータが含まれており、単一のチャンクではすべてのデータを処理するのに不十分な場合、TiDB はそれを複数回処理し、チャンクサイズが`tidb_max_chunk_size`の値に達するまで、各処理反復でチャンクサイズを[`tidb_init_chunk_size`](#tidb_init_chunk_size)倍にします。
+- この変数は、実行プロセス中にチャンク内の最大行数を設定するために使用されます。大きすぎる値を設定すると、キャッシュの局所性の問題が発生する可能性があります。この変数の推奨値は 65536 以下です。チャンクの行数は、単一のクエリに必要なメモリ量に直接影響します。クエリ内のすべての列の合計幅とチャンクの行数を考慮することで、単一のチャンクに必要なメモリを概算できます。これをエグゼキューターの同時実行性と組み合わせることで、単一のクエリに必要な合計メモリを概算できます。単一のチャンクの合計メモリは16 MiB を超えないことを推奨します。クエリに大量のデータが含まれており、単一のチャンクではすべてのデータを処理するのに不十分な場合、TiDB はそれを複数回処理し、チャンクサイズが`tidb_max_chunk_size`の値に達するまで、各処理反復でチャンクサイズを[`tidb_init_chunk_size`](#tidb_init_chunk_size)倍にします。
 
 ### tidb_max_delta_schema_count <span class="version-mark">New in v2.1.18 and v3.0.5</span>
 
@@ -3973,7 +3973,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 型: 整数
 - デフォルト値: `-1`
 - 範囲: `-1`または`[1, 128]`
-- この変数は、分散実行フレームワーク（DXF）タスクが使用できる TiDB ノードの最大数を定義します。デフォルト値`-1`は、自動モードが有効になっていることを示します。このモードでは、TiDB は`min(3, tikv_nodes / 3)`という値を動的に計算します。ここで、 `tikv_nodes`はクラスタ内の TiKV ノードの数です。
+- この変数は、分散実行フレームワーク（DXF）タスクが使用できる TiDB ノードの最大数を定義します。デフォルト値`-1`は、自動モードが有効になっていることを示します。このモードでは、TiDB は`min(3, tikv_nodes / 3)`という値を動的に計算します。ここで、 `tikv_nodes`はクラスター内の TiKV ノードの数です。
 
 > **Note:**
 >
@@ -3990,7 +3990,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `50000`
 - 範囲: `[1, 9223372036854775807]`
 - 単位：行
-- この変数は、コプロセッサのページングリクエスト処理中に処理する最大行数を設定するために使用されます。値を小さく設定しすぎると、TiDBとTiKV間のRPC回数が増加します。一方、値を大きく設定しすぎると、データのロードやフルテーブルスキャンなど、場合によってはメモリ使用量が過剰になります。この変数のデフォルト値は、OLAPシナリオよりもOLTPシナリオで優れたパフォーマンスを発揮します。アプリケーションがストレージエンジンとしてTiKVのみを使用している場合は、OLAPワークロードクエリを実行する際にこの変数の値を増やすことを検討してください。これにより、パフォーマンスが向上する可能性があります。
+- この変数は、コプロセッサーのページングリクエスト処理中に処理する最大行数を設定するために使用されます。値を小さく設定しすぎると、TiDBとTiKV間のRPC回数が増加します。一方、値を大きく設定しすぎると、データのロードやフルテーブルスキャンなど、場合によってはメモリ使用量が過剰になります。この変数のデフォルト値は、OLAPシナリオよりもOLTPシナリオで優れたパフォーマンスを発揮します。アプリケーションがストレージエンジンとしてTiKVのみを使用している場合は、OLAPワークロードクエリを実行する際にこの変数の値を増やすことを検討してください。これにより、パフォーマンスが向上する可能性があります。
 
 ### tidb_max_tiflash_threads <span class="version-mark">New in v6.1.0</span>
 
@@ -4014,13 +4014,13 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 <CustomContent platform="tidb">
 
-- 単一の SQL文が`tidb_mem_quota_query`で指定されたメモリクォータを超え、ディスクに書き出すことができない場合に TiDB が実行する操作を指定します。詳細は[TiDBメモリ制御](/configure-memory-usage.md)を参照してください。
+- 単一の SQL文が`tidb_mem_quota_query`で指定されたメモリクォータを超え、ディスクに書き出せない場合に TiDB が実行する操作を指定します。詳細は[TiDBメモリ制御](/configure-memory-usage.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- 単一の SQL文が[`tidb_mem_quota_query`](#tidb_mem_quota_query)で指定されたメモリクォータを超え、ディスクに書き出すことができない場合に、TiDB が実行する操作を指定します。
+- 単一の SQL文が[`tidb_mem_quota_query`](#tidb_mem_quota_query)で指定されたメモリクォータを超え、ディスクに書き出せない場合に、TiDB が実行する操作を指定します。
 
 </CustomContent>
 
@@ -4044,7 +4044,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 > **Note:**
 >
-> `auto_analyze`は、TiDB 起動設定ファイルで`run-auto-analyze`が有効になっている場合にのみ、TiDB クラスタでトリガーされます。
+> `auto_analyze`は、TiDB 起動設定ファイルで`run-auto-analyze`が有効になっている場合にのみ、TiDB クラスターでトリガーされます。
 
 ### tidb_mem_quota_apply_cache <span class="version-mark">New in v5.0</span>
 
@@ -4068,7 +4068,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - 範囲: `[0, 2147483647]`
 - 単位：バイト
 - この変数は、バインディングのキャッシュに使用されるメモリのしきい値を設定するために使用されます。
-- システムが過剰なバインディングを作成またはキャプチャし、メモリ領域の過剰使用が発生した場合、TiDB はログに警告を返します。この場合、キャッシュは利用可能なすべてのバインディングを保持できず、どのバインディングを保存するかを判断できません。そのため、一部のクエリでバインディングが見つからない場合があります。この問題を解決するには、この変数の値を増やして、バインディングのキャッシュに使用されるメモリを増やすことができます。このパラメータを変更した後は、 `admin reload bindings`を実行してバインディングを再読み込みし、変更を検証する必要があります。
+- システムが過剰なバインディングを作成またはキャプチャし、メモリ領域の過剰使用が発生した場合、TiDB はログに警告を返します。この場合、キャッシュは利用可能なすべてのバインディングを保持できず、どのバインディングを保存するかを判断できません。そのため、一部のクエリでバインディングが見つからない場合があります。この問題を解決するには、この変数の値を増やして、バインディングのキャッシュに使用されるメモリを増やせます。このパラメーターを変更した後は、 `admin reload bindings`を実行してバインディングを再読み込みし、変更を検証する必要があります。
 
 ### tidb_mem_quota_query
 
@@ -4100,7 +4100,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_memory_debug_mode_alarm_ratio
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Float
 - デフォルト値: `0`
@@ -4109,12 +4109,12 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_memory_debug_mode_min_heap_inuse
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `0`
 - この変数はTiDBの内部テストに使用されます。この変数を設定することは**推奨されません**。この変数を有効にすると、TiDBのパフォーマンスに影響が出ます。
-- このパラメータを設定すると、TiDB はメモリデバッグモードに入り、メモリ追跡の精度を分析します。TiDB は、後続の SQL文の実行中に頻繁に GC をトリガーし、実際のメモリ使用量とメモリ統計を比較します。現在のメモリ使用量が`tidb_memory_debug_mode_min_heap_inuse`より大きく、メモリ統計の誤差が`tidb_memory_debug_mode_alarm_ratio`を超える場合、TiDB は関連するメモリ情報をログとファイルに出力します。
+- このパラメーターを設定すると、TiDB はメモリデバッグモードに入り、メモリ追跡の精度を分析します。TiDB は、後続の SQL文の実行中に頻繁に GC をトリガーし、実際のメモリ使用量とメモリ統計を比較します。現在のメモリ使用量が`tidb_memory_debug_mode_min_heap_inuse`より大きく、メモリ統計の誤差が`tidb_memory_debug_mode_alarm_ratio`を超える場合、TiDB は関連するメモリ情報をログとファイルに出力します。
 
 ### tidb_memory_usage_alarm_ratio
 
@@ -4178,7 +4178,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_merge_partition_stats_concurrency
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `1`
@@ -4186,7 +4186,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_enable_async_merge_global_stats <span class="version-mark">New in v7.5.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -4230,7 +4230,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `128`
 - 範囲: `[1, 9223372036854775807]`
 - 単位：行
-- この変数は、コプロセッサのページングリクエスト処理中に最小行数を設定するために使用されます。値を小さく設定しすぎると、TiDBとTiKV間のRPCリクエスト数が増加します。一方、値を大きく設定しすぎると、Limitを使用したIndexLookupクエリの実行時にパフォーマンスが低下する可能性があります。この変数のデフォルト値は、OLAPシナリオよりもOLTPシナリオで優れたパフォーマンスを発揮します。アプリケーションがストレージエンジンとしてTiKVのみを使用している場合は、OLAPワークロードクエリを実行する際にこの変数の値を増やすことを検討してください。これにより、パフォーマンスが向上する可能性があります。
+- この変数は、コプロセッサーのページングリクエスト処理中に最小行数を設定するために使用されます。値を小さく設定しすぎると、TiDBとTiKV間のRPCリクエスト数が増加します。一方、値を大きく設定しすぎると、Limitを使用したIndexLookupクエリの実行時にパフォーマンスが低下する可能性があります。この変数のデフォルト値は、OLAPシナリオよりもOLTPシナリオで優れたパフォーマンスを発揮します。アプリケーションがストレージエンジンとしてTiKVのみを使用している場合は、OLAPワークロードクエリを実行する際にこの変数の値を増やすことを検討してください。これにより、パフォーマンスが向上する可能性があります。
 
 ![Paging size impact on TPCH](/media/paging-size-impact-on-tpch.png)
 
@@ -4238,7 +4238,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_mpp_store_fail_ttl
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Duration
@@ -4247,7 +4247,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_multi_statement_mode <span class="version-mark">New in v4.0.11</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
@@ -4275,7 +4275,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_nontransactional_ignore_error <span class="version-mark">New in v6.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -4286,12 +4286,12 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_opt_agg_push_down
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、オプティマイザが集計関数をJoin、Projection、およびUnionAllの前の位置にプッシュダウンする最適化操作を実行するかどうかを設定するために使用されます。
+- この変数は、オプティマイザーが集計関数をJoin、Projection、およびUnionAllの前の位置にプッシュダウンする最適化操作を実行するかどうかを設定するために使用されます。
 - クエリにおける集計処理が遅い場合は、変数の値をONに設定できます。
 
 ### tidb_opt_broadcast_cartesian_join
@@ -4303,7 +4303,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 - デフォルト値: `1`
 - 範囲: `[0, 2]`
 - ブロードキャストによる直交座標結合を許可するかどうかを示します。
-- `0`は、ブロードキャスト カルテシアン ジョインが許可されていないことを意味します。 `1`は、 [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されていることを意味します。 `2`は、テーブル サイズがしきい値を超えても常に許可されていることを意味します。
+- `0`は、ブロードキャストカルテシアンジョインが許可されていないことを意味します。 `1`は、 [`tidb_broadcast_join_threshold_count`](#tidb_broadcast_join_threshold_count-new-in-v50)に基づいて許可されていることを意味します。 `2`は、テーブルサイズがしきい値を超えても常に許可されていることを意味します。
 - この変数はTiDB内部で使用されているため、その値を変更することは推奨さ**れません**。
 
 ### tidb_opt_concurrency_factor
@@ -4362,7 +4362,7 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### `tidb_opt_derive_topn` <span class="version-mark">New in v7.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -4391,11 +4391,11 @@ MPP は、 TiFlashエンジンによって提供される分散コンピュー�
 
 ### tidb_opt_distinct_agg_push_down
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、オプティマイザが`distinct` （例えば`select count(distinct a) from t` ）を持つ集約関数をコプロセッサーにプッシュダウンする最適化操作を実行するかどうかを設定するために使用されます。
+- この変数は、オプティマイザーが`distinct` （例えば`select count(distinct a) from t` ）を持つ集約関数をコプロセッサーにプッシュダウンする最適化操作を実行するかどうかを設定するために使用されます。
 - クエリで`distinct`操作を含む集計関数が遅い場合は、変数の値を`1`に設定できます。
 
 次の例では、 `tidb_opt_distinct_agg_push_down`が有効になる前に、TiDB は TiKV からすべてのデータを読み取り、TiDB 側で`distinct`を実行する必要があります。 `tidb_opt_distinct_agg_push_down`が有効になると、 `distinct a`がコプロセッサーにプッシュダウンされ、 `group by`列`test.t.a`が`HashAgg_5`に追加されます。
@@ -4428,26 +4428,26 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_enable_correlation_adjustment
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、オプティマイザが列順序の相関に基づいて行数を推定するかどうかを制御するために使用されます。
+- この変数は、オプティマイザーが列順序の相関に基づいて行数を推定するかどうかを制御するために使用されます。
 
 ### tidb_opt_enable_hash_join <span class="version-mark">New in v6.5.6, v7.1.2, and v7.4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、オプティマイザがテーブルのハッシュ結合を選択するかどうかを制御するために使用されます。デフォルト値は`ON`です。 `OFF`に設定すると、他の結合アルゴリズムが利用できない場合を除き、オプティマイザは実行計画の生成時にハッシュ結合を選択しません。
-- システム変数`tidb_opt_enable_hash_join`とヒント`HASH_JOIN`の両方が設定されている場合、ヒント`HASH_JOIN`が優先されます。 `tidb_opt_enable_hash_join`が`OFF`に設定されている場合でも、クエリでヒント`HASH_JOIN`を指定すると、TiDB オプティマイザはハッシュ結合プランを適用します。
+- この変数は、オプティマイザーがテーブルのハッシュ結合を選択するかどうかを制御するために使用されます。デフォルト値は`ON`です。 `OFF`に設定すると、他の結合アルゴリズムが利用できない場合を除き、オプティマイザーは実行計画の生成時にハッシュ結合を選択しません。
+- システム変数`tidb_opt_enable_hash_join`とヒント`HASH_JOIN`の両方が設定されている場合、ヒント`HASH_JOIN`が優先されます。 `tidb_opt_enable_hash_join`が`OFF`に設定されている場合でも、クエリでヒント`HASH_JOIN`を指定すると、TiDB オプティマイザーはハッシュ結合プランを適用します。
 
 ### tidb_opt_enable_non_eval_scalar_subquery <span class="version-mark">New in v7.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -4456,13 +4456,13 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_enable_late_materialization <span class="version-mark">New in v7.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON`
 - この変数は、 [TiFlashの遅延マテリアライゼーション](/tiflash/tiflash-late-materialization.md)機能を有効にするかどうかを制御するために使用されます。 TiFlash の遅延マテリアライゼーションは[高速スキャンモード](/tiflash/use-fastscan.md)では有効にならないことに注意してください。
-- この変数を`OFF`に設定してTiFlash の遅延マテリアライゼーション機能を無効にした場合、フィルタ条件（`WHERE`句）を含む`SELECT`文を処理するために、 TiFlash はフィルタリングの前に必要な列のすべてのデータをスキャンします。この変数を`ON`に設定してTiFlash の遅延マテリアライゼーション機能を有効にすると、 TiFlash は、TableScan オペレーターにプッシュダウンされたフィルタ条件に関連する列データを最初にスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列のデータをスキャンしてさらに計算を行うことができ、これにより、データ処理の IO スキャンと計算を削減できます。
+- この変数を`OFF`に設定してTiFlash の遅延マテリアライゼーション機能を無効にした場合、フィルター条件（`WHERE`句）を含む`SELECT`文を処理するために、 TiFlash はフィルタリングの前に必要な列のすべてのデータをスキャンします。この変数を`ON`に設定してTiFlash の遅延マテリアライゼーション機能を有効にすると、 TiFlash は、TableScan オペレーターにプッシュダウンされたフィルター条件に関連する列データを最初にスキャンし、条件を満たす行をフィルタリングしてから、これらの行の他の列のデータをスキャンしてさらに計算を行え、これにより、データ処理の IO スキャンと計算を削減できます。
 
 ### tidb_opt_enable_mpp_shared_cte_execution <span class="version-mark">New in v7.2.0</span>
 
@@ -4470,7 +4470,7 @@ mysql> desc select count(distinct a) from test.t;
 >
 > この変数で制御される機能は実験的機能です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -4479,7 +4479,7 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_enable_fuzzy_binding <span class="version-mark">New in v7.6.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -4488,32 +4488,32 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_enable_no_decorrelate_in_select <span class="version-mark">New in v8.5.4</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は`SELECT`リスト内のサブクエリを含むすべてのクエリに対して、オプティマイザが[`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate)ヒントを適用するかどうかを制御します。
+- この変数は`SELECT`リスト内のサブクエリを含むすべてのクエリに対して、オプティマイザーが[`NO_DECORRELATE()`](/optimizer-hints.md#no_decorrelate)ヒントを適用するかどうかを制御します。
 
 ### tidb_opt_enable_alternative_logical_plans <span class="version-mark">New in v8.5.7</span>
 
-- スコープ: SESSION | GLOBAL
-- クラスターへの永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: Yes
+- 対象範囲: セッション | グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、[相関サブクエリの非相関化](/correlated-subquery-optimization.md) のシナリオにおいて、オプティマイザが非相関化を行わない論理候補プランも追加で構築するかどうかを制御します。
+- この変数は、[相関サブクエリの非相関化](/correlated-subquery-optimization.md) のシナリオにおいて、オプティマイザーが非相関化を行わない論理候補プランも追加で構築するかどうかを制御します。
     - デフォルトでは、TiDB は相関サブクエリに対して非相関化の書き換えを優先的に試みます。
-    - この変数を有効にすると、非相関化後の候補プランが、元の相関サブクエリと同じアクセス方向を持つ等価な `IndexJoin` 候補プランの生成に失敗した場合、オプティマイザは非相関化しない候補プランも追加で保持し、非相関化あり・なしの両方の候補プランを評価したうえで、より低コストな[実行計画](/explain-subqueries.md)を選択します。
+    - この変数を有効にすると、非相関化後の候補プランが、元の相関サブクエリと同じアクセス方向を持つ等価な `IndexJoin` 候補プランの生成に失敗した場合、オプティマイザーは非相関化しない候補プランも追加で保持し、非相関化あり・なしの両方の候補プランを評価したうえで、より低コストな[実行計画](/explain-subqueries.md)を選択します。
 
 ### tidb_opt_enable_semi_join_rewrite <span class="version-mark">New in v8.5.4</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、サブクエリを含むすべてのクエリに対してオプティマイザが[`SEMI_JOIN_REWRITE()`](/optimizer-hints.md#semi_join_rewrite)ヒントを適用するかどうかを制御します。
+- この変数は、サブクエリを含むすべてのクエリに対してオプティマイザーが[`SEMI_JOIN_REWRITE()`](/optimizer-hints.md#semi_join_rewrite)ヒントを適用するかどうかを制御します。
 
 ### tidb_opt_fix_control <span class="version-mark">New in v6.5.3 and v7.1.0</span>
 
@@ -4524,28 +4524,28 @@ mysql> desc select count(distinct a) from test.t;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: String
 - デフォルト値: `""`
-- この変数は、オプティマイザの内部動作の一部を制御するために使用されます。
-- オプティマイザの動作は、ユーザーシナリオやSQL文によって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
-- より詳細な概要については、[オプティマイザ修正コントロール](/optimizer-fix-controls.md)を参照してください。
+- この変数は、オプティマイザーの内部動作の一部を制御するために使用されます。
+- オプティマイザーの動作は、ユーザーシナリオやSQL文によって異なる場合があります。この変数を使用することで、オプティマイザーをより細かく制御でき、オプティマイザーの動作変更によってアップグレード後に発生するパフォーマンス低下を防げます。
+- より詳細な概要については、[オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: String
 - デフォルト値: `""`
-- この変数は、オプティマイザの内部動作の一部を制御するために使用されます。
-- オプティマイザの動作は、ユーザーシナリオやSQL文によって異なる場合があります。この変数を使用することで、オプティマイザをより細かく制御でき、オプティマイザの動作変更によってアップグレード後に発生するパフォーマンス低下を防ぐことができます。
-- より詳細な概要については、[オプティマイザ修正コントロール](/optimizer-fix-controls.md)を参照してください。
+- この変数は、オプティマイザーの内部動作の一部を制御するために使用されます。
+- オプティマイザーの動作は、ユーザーシナリオやSQL文によって異なる場合があります。この変数を使用することで、オプティマイザーをより細かく制御でき、オプティマイザーの動作変更によってアップグレード後に発生するパフォーマンス低下を防げます。
+- より詳細な概要については、[オプティマイザー修正コントロール](/optimizer-fix-controls.md)を参照してください。
 
 </CustomContent>
 
 ### tidb_opt_force_inline_cte <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -4554,7 +4554,7 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_advanced_join_hint <span class="version-mark">New in v7.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -4563,11 +4563,11 @@ mysql> desc select count(distinct a) from test.t;
 
 > **Note:**
 >
-> v7.0.0 より前のバージョンの動作は、この変数を`OFF`に設定した場合の動作と一致します。前方互換性を確保するため、以前のバージョンから v7.0.0 以降のクラスタにアップグレードすると、この変数は`OFF`に設定されます。より柔軟なヒント動作を実現するには、パフォーマンスの低下がないことを条件に、この変数を`ON`に切り替えることを強くお勧めします。
+> v7.0.0 より前のバージョンの動作は、この変数を`OFF`に設定した場合の動作と一致します。前方互換性を確保するため、以前のバージョンから v7.0.0 以降のクラスターにアップグレードすると、この変数は`OFF`に設定されます。より柔軟なヒント動作を実現するには、パフォーマンスの低下がないことを条件に、この変数を`ON`に切り替えることを強くお勧めします。
 
 ### tidb_opt_insubq_to_join_and_agg
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -4604,14 +4604,14 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_join_reorder_through_sel <span class="version-mark">New in v8.5.6</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、特定の複数テーブル結合クエリの結合順序の並べ替え最適化を改善します。この変数を`ON`に設定すると、安全条件が満たされている場合、オプティマイザは、連続する複数の結合間のフィルタ条件 ( `Selection` ) を結合順序の並べ替え最適化の候補範囲に含めます。結合ツリーを再構築する際、オプティマイザはこれらの条件をより適切な位置にプッシュダウンし、より多くのテーブルが結合順序の並べ替え最適化に参加できるようにします。
+- この変数は、特定の複数テーブル結合クエリの結合順序の並べ替え最適化を改善します。この変数を`ON`に設定すると、安全条件が満たされている場合、オプティマイザーは、連続する複数の結合間のフィルター条件 ( `Selection` ) を結合順序の並べ替え最適化の候補範囲に含めます。結合ツリーを再構築する際、オプティマイザーはこれらの条件をより適切な位置にプッシュダウンし、より多くのテーブルが結合順序の並べ替え最適化に参加できるようにします。
 - この変数を有効にした後にパフォーマンスの低下や不安定な実行計画が見られる場合は、この変数を`OFF`に設定して、この機能を無効にしてください。
-- 式の評価意味論が変更されないようにするため、フィルタ条件に非決定的な関数や副作用のある関数 ( `RAND()`など) が含まれている場合、この変数が有効になっていてもオプティマイザは条件プッシュダウンを実行しません。
+- 式の評価意味論が変更されないようにするため、フィルター条件に非決定的な関数や副作用のある関数 ( `RAND()`など) が含まれている場合、この変数が有効になっていてもオプティマイザーは条件プッシュダウンを実行しません。
 
 ### tidb_opt_limit_push_down_threshold
 
@@ -4636,7 +4636,7 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_mpp_outer_join_fixed_build_side <span class="version-mark">New in v5.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -4655,13 +4655,13 @@ mysql> desc select count(distinct a) from test.t;
 
 ### tidb_opt_objective <span class="version-mark">New in v7.4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
 - デフォルト値: `moderate`
 - 指定可能な値: `moderate` 、 `determinate`
-- この変数はオプティマイザの目的を制御します。 `moderate`は、TiDB v7.4.0 より前のバージョンにおけるデフォルトの動作を維持し、オプティマイザはより多くの情報を使用してより良い実行計画を生成しようとします。 `determinate`モードはより保守的になり、実行計画をより安定させます。
+- この変数はオプティマイザーの目的を制御します。 `moderate`は、TiDB v7.4.0 より前のバージョンにおけるデフォルトの動作を維持し、オプティマイザーはより多くの情報を使用してより良い実行計画を生成しようとします。 `determinate`モードはより保守的になり、実行計画をより安定させます。
 - リアルタイム統計とは、DML文に基づいて自動的に更新される行の総数と変更された行の数です。この変数が`moderate` (デフォルト) に設定されている場合、TiDB はリアルタイム統計に基づいて実行計画を生成します。この変数が`determinate`に設定されている場合、TiDB は実行計画の生成にリアルタイム統計を使用しないため、実行計画がより安定します。
 - 長期的に安定したOLTPワークロードを維持する場合、またはユーザーが既存の実行計画に満足している場合は、予期しない実行計画の変更の可能性を減らすために`determinate`モードを使用することをお勧めします。さらに、[`LOCK STATS`](/sql-statements/sql-statement-lock-stats.md)を使用することで、統計情報の変更を防ぎ、実行計画をより安定させることができます。
 
@@ -4679,7 +4679,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - 範囲: `[-1, 1]`
 
-- この変数は、SQL文に`ORDER BY`および`LIMIT`句がある場合に、SQL文`ORDER BY`に一致するインデックスの推定行数を制御しますが、一部のフィルタ条件はカバーしません。
+- この変数は、SQL文に`ORDER BY`および`LIMIT`句がある場合に、SQL文`ORDER BY`に一致するインデックスの推定行数を制御しますが、一部のフィルター条件はカバーしません。
 
 - これは、システム変数[tidb_opt_ordering_index_selectivity_threshold](#tidb_opt_ordering_index_selectivity_threshold-new-in-v700)と同じクエリパターンに対応します。
 
@@ -4687,7 +4687,7 @@ mysql> desc select count(distinct a) from test.t;
 
 - `-1` (デフォルト値) または`0`未満の値を指定すると、この比率は無効になります。 `0`から`1`の間の値を指定すると、0% から 100% の比率が適用されます (たとえば、 `0.5`は`50%`に対応します)。
 
-- 以下の例では、テーブル`t`には合計 1,000,000 行のデータがあります。同じクエリを使用していますが、 `tidb_opt_ordering_index_selectivity_ratio`には異なる値を使用しています。例のクエリには、行のごく一部 (1,000,000 行のうち 9,000 行) を修飾する`WHERE`句述語が含まれています。 `ORDER BY a` (インデックス`ia` ) をサポートするインデックスは存在しますが、 `b`のフィルタはこのインデックスには含まれていません。実際のデータ分布によっては、 `WHERE`句と`LIMIT 1`に一致する行が、フィルタリングされていないインデックスをスキャンする際に最初にアクセスされる行として見つかる場合もあれば、最悪の場合、ほぼすべての行が処理された後に見つかる場合もあります。
+- 以下の例では、テーブル`t`には合計 1,000,000 行のデータがあります。同じクエリを使用していますが、 `tidb_opt_ordering_index_selectivity_ratio`には異なる値を使用しています。例のクエリには、行のごく一部 (1,000,000 行のうち 9,000 行) を修飾する`WHERE`句述語が含まれています。 `ORDER BY a` (インデックス`ia` ) をサポートするインデックスは存在しますが、 `b`のフィルターはこのインデックスには含まれていません。実際のデータ分布によっては、 `WHERE`句と`LIMIT 1`に一致する行が、フィルタリングされていないインデックスをスキャンする際に最初にアクセスされる行として見つかる場合もあれば、最悪の場合、ほぼすべての行が処理された後に見つかる場合もあります。
 
 - 各例では、インデックスヒントを使用してestRowsへの影響を示しています。最終的なプランの選択は、他のプランの利用可能性とコストによって決まります。
 
@@ -4763,7 +4763,7 @@ mysql> desc select count(distinct a) from test.t;
     +-----------------------------------+-----------+-----------+-----------------------+---------------------------------+
     ```
 
-- 5 番目の例でも`1.0`を使用しますが、 `a`に述語を追加し、最悪の場合のスキャン範囲を制限します。これは、 `WHERE a <= 9000`インデックスに一致し、約 9,000 行が条件を満たすためです。 `b`のフィルタ述語がインデックスにないため、 `b <= 9000`に一致する行を見つける前に、約 9,000 行すべてがスキャンされたとみなされます。
+- 5 番目の例でも`1.0`を使用しますが、 `a`に述語を追加し、最悪の場合のスキャン範囲を制限します。これは、 `WHERE a <= 9000`インデックスに一致し、約 9,000 行が条件を満たすためです。 `b`のフィルター述語がインデックスにないため、 `b <= 9000`に一致する行を見つける前に、約 9,000 行すべてがスキャンされたとみなされます。
 
     ```sql
     > SET SESSION tidb_opt_ordering_index_selectivity_ratio = 1;
@@ -4789,11 +4789,11 @@ mysql> desc select count(distinct a) from test.t;
 - 型: Float
 - デフォルト値: `0`
 - 範囲: `[0, 1]`
-- この変数は、SQL文にフィルタ条件を含む`ORDER BY`および`LIMIT`句がある場合に、オプティマイザがインデックスを選択する方法を制御するために使用されます。
-- このようなクエリの場合、オプティマイザは`ORDER BY`句と`LIMIT`句を満たす対応するインデックスを選択することを検討します（このインデックスがフィルタ条件を満たさない場合でも）。ただし、データ分布の複雑さから、このシナリオではオプティマイザが最適ではないインデックスを選択する可能性があります。
-- この変数はしきい値を表します。フィルタリング条件を満たすインデックスが存在し、その選択性推定値がこのしきい値よりも低い場合、オプティマイザは`ORDER BY`と`LIMIT`を満たすために使用されるインデックスの選択を回避します。代わりに、フィルタリング条件を満たすインデックスを優先します。
-- 例えば、変数が`0`に設定されている場合、オプティマイザはデフォルトの動作を維持します。一方、 `1`に設定されている場合、オプティマイザは常にフィルタ条件を満たすインデックスの選択を優先し、 `ORDER BY`と`LIMIT`両方の句を満たすインデックスの選択を回避します。
-- 次の例では、テーブル`t`には合計 1,000,000 行があります。列`b`にインデックスを使用すると、推定行数は約 8,748 なので、選択性の推定値は約 0.0087 になります。デフォルトでは、オプティマイザは列`a`にインデックスを選択します。ただし、この変数を 0.01 に設定すると、列`b`のインデックスの選択性 (0.0087) が 0.01 未満になるため、オプティマイザは列`b`にインデックスを選択します。
+- この変数は、SQL文にフィルター条件を含む`ORDER BY`および`LIMIT`句がある場合に、オプティマイザーがインデックスを選択する方法を制御するために使用されます。
+- このようなクエリの場合、オプティマイザーは`ORDER BY`句と`LIMIT`句を満たす対応するインデックスを選択することを検討します（このインデックスがフィルター条件を満たさない場合でも）。ただし、データ分布の複雑さから、このシナリオではオプティマイザーが最適ではないインデックスを選択する可能性があります。
+- この変数はしきい値を表します。フィルタリング条件を満たすインデックスが存在し、その選択性推定値がこのしきい値よりも低い場合、オプティマイザーは`ORDER BY`と`LIMIT`を満たすために使用されるインデックスの選択を回避します。代わりに、フィルタリング条件を満たすインデックスを優先します。
+- 例えば、変数が`0`に設定されている場合、オプティマイザーはデフォルトの動作を維持します。一方、 `1`に設定されている場合、オプティマイザーは常にフィルター条件を満たすインデックスの選択を優先し、 `ORDER BY`と`LIMIT`両方の句を満たすインデックスの選択を回避します。
+- 次の例では、テーブル`t`には合計 1,000,000 行があります。列`b`にインデックスを使用すると、推定行数は約 8,748 なので、選択性の推定値は約 0.0087 になります。デフォルトでは、オプティマイザーは列`a`にインデックスを選択します。ただし、この変数を 0.01 に設定すると、列`b`のインデックスの選択性 (0.0087) が 0.01 未満になるため、オプティマイザーは列`b`にインデックスを選択します。
 
 ```sql
 > EXPLAIN SELECT * FROM t WHERE b <= 9000 ORDER BY a LIMIT 1;
@@ -4824,22 +4824,22 @@ mysql> desc select count(distinct a) from test.t;
 
 ### `tidb_opt_partial_ordered_index_for_topn` <span class="version-mark">New in v8.5.7</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
 - デフォルト値: `DISABLE`
 - 指定可能な値: `DISABLE` 、 `COST`
-- クエリに`ORDER BY ... LIMIT`が含まれている場合に、オプティマイザがインデックスの部分順序を利用して TopN 計算を最適化できるかどうかを制御します。ソート列がインデックスの順序と一致する場合 (たとえば、ソート列がインデックス列であるか、プレフィックスインデックスを持っている場合)、インデックススキャンによって返されるデータは、その列で既に部分的に順序付けられています。この場合、オプティマイザはスキャン中に TopN 結果を段階的に構築し、 `LIMIT`が満たされたら早期に停止できるため、ソートのオーバーヘッドを削減できます。
+- クエリに`ORDER BY ... LIMIT`が含まれている場合に、オプティマイザーがインデックスの部分順序を利用して TopN 計算を最適化できるかどうかを制御します。ソート列がインデックスの順序と一致する場合 (たとえば、ソート列がインデックス列であるか、プレフィックスインデックスを持っている場合)、インデックススキャンによって返されるデータは、その列で既に部分的に順序付けられています。この場合、オプティマイザーはスキャン中に TopN 結果を段階的に構築し、 `LIMIT`が満たされたら早期に停止できるため、ソートのオーバーヘッドを削減できます。
 - 使用シナリオ: `ORDER BY ... LIMIT`句のソート列がプレフィックスインデックスのみを持つ長い文字列である場合、TopN ソートのオーバーヘッドを削減するために、この変数を`COST`に設定し、クエリで`USE INDEX`または`FORCE INDEX`ヒントを指定して、部分順序 TopN 最適化を有効にできます。
 
-    - デフォルト値は`DISABLE`で、これは部分順序による TopN 最適化が無効になっていることを意味します。この場合、オプティマイザは TopN に対して標準的なグローバルソート方式を使用します。
+    - デフォルト値は`DISABLE`で、これは部分順序による TopN 最適化が無効になっていることを意味します。この場合、オプティマイザーは TopN に対して標準的なグローバルソート方式を使用します。
 
     - 部分順序 TopN 最適化の使用を強制するには、この変数を`COST`に設定し、クエリで`USE INDEX`または`FORCE INDEX`を使用して条件付きインデックスを指定します。指定されたインデックスがこの最適化の前提条件を満たしていない場合 (たとえば、 `ORDER BY`句がインデックスのプレフィックスと一致しない場合、またはクエリにサポートされていない順序付けパターンが含まれている場合)、変数を`COST`に設定しても最適化が適用されず、実行計画は標準の TopN アプローチにフォールバックします。
 
     > **Note:**
     >
-    > 現在、オプティマイザはコストモデルに基づいて部分順序 TopN 最適化を適用するかどうかを動的に決定することをサポートしていません。 `USE INDEX`または`FORCE INDEX`を指定せずにこの変数を`COST`のみに設定した場合、オプティマイザはこの最適化を適用しない可能性があります。最適化が確実に適用されるようにするには、 `USE INDEX`または`FORCE INDEX`と組み合わせて使用してください。
+    > 現在、オプティマイザーはコストモデルに基づいて部分順序 TopN 最適化を適用するかどうかを動的に決定することをサポートしていません。 `USE INDEX`または`FORCE INDEX`を指定せずにこの変数を`COST`のみに設定した場合、オプティマイザーはこの最適化を適用しない可能性があります。最適化が確実に適用されるようにするには、 `USE INDEX`または`FORCE INDEX`と組み合わせて使用してください。
 
 <details><summary>部分順序TopN最適化の例を表示する</summary>
 
@@ -4895,13 +4895,13 @@ CREATE TABLE t_varchar (
 >
 > バージョン8.4.0以降、この変数のデフォルト値が`OFF`から`ON`に変更されました。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数の値が`ON`の場合、オプティマイザは統計情報のないテーブル (擬似統計情報) または空のテーブル (統計情報がゼロ) に対して、フルテーブルスキャンよりも範囲スキャンを優先します。
-- 次の例では、 `tidb_opt_prefer_range_scan`を有効にする前は、TiDB オプティマイザはフルテーブルスキャンを実行します。 `tidb_opt_prefer_range_scan`を有効にすると、オプティマイザはインデックス範囲スキャンを選択します。
+- この変数の値が`ON`の場合、オプティマイザーは統計情報のないテーブル (擬似統計情報) または空のテーブル (統計情報がゼロ) に対して、フルテーブルスキャンよりも範囲スキャンを優先します。
+- 次の例では、 `tidb_opt_prefer_range_scan`を有効にする前は、TiDB オプティマイザーはフルテーブルスキャンを実行します。 `tidb_opt_prefer_range_scan`を有効にすると、オプティマイザーはインデックス範囲スキャンを選択します。
 
 ```sql
 explain select * from t where age=5;
@@ -4929,12 +4929,12 @@ explain select * from t where age=5;
 
 ### tidb_opt_prefix_index_single_scan <span class="version-mark">New in v6.4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: `ON`
-- この変数は、TiDBオプティマイザが不要なテーブル検索を回避し、クエリパフォーマンスを向上させるために、一部のフィルタ条件をプレフィックスインデックスにプッシュダウンするかどうかを制御します。
-- この変数の値が`ON`に設定されている場合、一部のフィルタ条件がプレフィックスインデックスにプッシュダウンされます。たとえば、 `col`列がテーブルのインデックスプレフィックス 列であるとします。クエリ内の`col is null`または`col is not null`条件は、テーブル参照のフィルタ条件ではなく、インデックスのフィルタ条件として処理されるため、不要なテーブル参照が回避されます。
+- この変数は、TiDBオプティマイザーが不要なテーブル検索を回避し、クエリパフォーマンスを向上させるために、一部のフィルター条件をプレフィックスインデックスにプッシュダウンするかどうかを制御します。
+- この変数の値が`ON`に設定されている場合、一部のフィルター条件がプレフィックスインデックスにプッシュダウンされます。たとえば、 `col`列がテーブルのインデックスプレフィックス 列であるとします。クエリ内の`col is null`または`col is not null`条件は、テーブル参照のフィルター条件ではなく、インデックスのフィルター条件として処理されるため、不要なテーブル参照が回避されます。
 
 <details><summary><code>tidb_opt_prefix_index_single_scan</code>の使用例</summary>
 
@@ -4992,16 +4992,16 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 
 ### tidb_opt_projection_push_down <span class="version-mark">New in v6.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `ON` 。v8.3.0 より前のバージョンでは、デフォルト値は`OFF`です。
-- オプティマイザが`Projection`オペレーターを TiKV コプロセッサにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザは次の3種類の`Projection`オペレーターを TiKV にプッシュダウンする可能性があります。
+- オプティマイザーが`Projection`オペレーターを TiKV コプロセッサーにプッシュダウンすることを許可するかどうかを指定します。有効にすると、オプティマイザーは次の3種類の`Projection`オペレーターを TiKV にプッシュダウンする可能性があります。
     - オペレーターのトップレベル式はすべて[JSONクエリ関数](/functions-and-operators/json-functions/json-functions-search.md)または[JSON値属性関数](/functions-and-operators/json-functions/json-functions-return.md)です。例: `SELECT JSON_EXTRACT(data, '$.name') FROM users;` 。
     - オペレーターの最上位式には、JSON クエリ関数または JSON 値属性関数と、直接列読み取りが混在しています。例: `SELECT JSON_DEPTH(data), name FROM users;` 。
     - オペレーターの最上位式はすべて直接列読み取りであり、出力列の数は入力列の数よりも少ないです。例: `SELECT name FROM users;` 。
-- `Projection`オペレーターをプッシュダウンする最終決定は、オプティマイザによるクエリコストの総合的な評価にも依存します。
+- `Projection`オペレーターをプッシュダウンする最終決定は、オプティマイザーによるクエリコストの総合的な評価にも依存します。
 - TiDB クラスターが v8.3.0 より前のバージョンから v8.3.0 以降にアップグレードされた場合、この変数のデフォルト値は`OFF`です。
 
 ### tidb_opt_range_max_size <span class="version-mark">New in v6.4.0</span>
@@ -5012,13 +5012,13 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 - デフォルト値: `67108864` (64 MiB)
 - 範囲: `[0, 9223372036854775807]`
 - 単位：バイト
-- この変数は、オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を設定するために使用されます。変数の値が`0`の場合、スキャン範囲の構築にメモリ制限はありません。正確なスキャン範囲の構築によって消費されるメモリが制限を超える場合、オプティマイザはより緩やかなスキャン範囲 ( `[[NULL,+inf]]`など) を使用します。実行計画で正確なスキャン範囲を使用しない場合は、この変数の値を増やすことで、オプティマイザが正確なスキャン範囲を構築できるようになります。
+- この変数は、オプティマイザーがスキャン範囲を構築するためのメモリ使用量の上限を設定するために使用されます。変数の値が`0`の場合、スキャン範囲の構築にメモリ制限はありません。正確なスキャン範囲の構築によって消費されるメモリが制限を超える場合、オプティマイザーはより緩やかなスキャン範囲 ( `[[NULL,+inf]]`など) を使用します。実行計画で正確なスキャン範囲を使用しない場合は、この変数の値を増やすことで、オプティマイザーが正確なスキャン範囲を構築できるようになります。
 
 この変数の使用例は以下のとおりです。
 
 <details><summary><code>tidb_opt_range_max_size</code>使用例</summary>
 
-この変数のデフォルト値を表示します。結果から、オプティマイザがスキャン範囲の構築に最大64MiBのメモリを使用していることがわかります。
+この変数のデフォルト値を表示します。結果から、オプティマイザーがスキャン範囲の構築に最大64MiBのメモリを使用していることがわかります。
 
 ```sql
 SELECT @@tidb_opt_range_max_size;
@@ -5037,7 +5037,7 @@ SELECT @@tidb_opt_range_max_size;
 EXPLAIN SELECT * FROM t use index (idx) WHERE a IN (10,20,30) AND b IN (40,50,60);
 ```
 
-64 MiB のメモリ上限では、オプティマイザは次の実行計画の結果に示すように、 `[10 40,10 40], [10 50,10 50], [10 60,10 60], [20 40,20 40], [20 50,20 50], [20 60,20 60], [30 40,30 40], [30 50,30 50], [30 60,30 60]`という正確なスキャン範囲を構築します。
+64 MiB のメモリ上限では、オプティマイザーは次の実行計画の結果に示すように、 `[10 40,10 40], [10 50,10 50], [10 60,10 60], [20 40,20 40], [20 50,20 50], [20 60,20 60], [30 40,30 40], [30 50,30 50], [30 60,30 60]`という正確なスキャン範囲を構築します。
 
 ```sql
 +-------------------------------+---------+-----------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -5050,7 +5050,7 @@ EXPLAIN SELECT * FROM t use index (idx) WHERE a IN (10,20,30) AND b IN (40,50,60
 3 rows in set (0.00 sec)
 ```
 
-次に、オプティマイザがスキャン範囲を構築するためのメモリ使用量の上限を1500バイトに設定します。
+次に、オプティマイザーがスキャン範囲を構築するためのメモリ使用量の上限を1500バイトに設定します。
 
 ```sql
 SET @@tidb_opt_range_max_size = 1500;
@@ -5064,7 +5064,7 @@ Query OK, 0 rows affected (0.00 sec)
 EXPLAIN SELECT * FROM t USE INDEX (idx) WHERE a IN (10,20,30) AND b IN (40,50,60);
 ```
 
-1500バイトのメモリ制限では、オプティマイザはより緩やかなスキャン範囲`[10,10], [20,20], [30,30]`を構築し、正確なスキャン範囲を構築するために必要なメモリ使用量が`tidb_opt_range_max_size`の制限を超えていることをユーザーに警告します。
+1500バイトのメモリ制限では、オプティマイザーはより緩やかなスキャン範囲`[10,10], [20,20], [30,30]`を構築し、正確なスキャン範囲を構築するために必要なメモリ使用量が`tidb_opt_range_max_size`の制限を超えていることをユーザーに警告します。
 
 ```sql
 +-------------------------------+---------+-----------+--------------------------+-----------------------------------------------------------------+
@@ -5105,7 +5105,7 @@ Query OK, 0 rows affected (0.00 sec)
 EXPLAIN SELECT * FROM t USE INDEX (idx) WHERE a IN (10,20,30) AND b IN (40,50,60);
 ```
 
-100 バイトのメモリ制限では、オプティマイザは`IndexFullScan`を選択し、正確なスキャン範囲を構築するために必要なメモリが`tidb_opt_range_max_size`の制限を超えていることをユーザーに知らせる警告を使用します。
+100 バイトのメモリ制限では、オプティマイザーは`IndexFullScan`を選択し、正確なスキャン範囲を構築するために必要なメモリが`tidb_opt_range_max_size`の制限を超えていることをユーザーに知らせる警告を使用します。
 
 ```sql
 +-------------------------------+----------+-----------+--------------------------+----------------------------------------------------+
@@ -5160,16 +5160,16 @@ SHOW WARNINGS;
 >
 > この変数を有効にすることでクエリのパフォーマンスを最適化する効果は、**TiFlashに対してのみ**有効です。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、オプティマイザが`DISTINCT`を含む集計関数を、 `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b`を`SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`に書き換えるなど、2 レベルの集計関数に書き換えるかどうかを設定します。集計列に深刻な偏りがあり、 `DISTINCT`列にさまざまな値がある場合、この書き換えによってクエリ実行時のデータ偏りを回避し、クエリのパフォーマンスを向上させることができます。
+- この変数は、オプティマイザーが`DISTINCT`を含む集計関数を、 `SELECT b, COUNT(DISTINCT a) FROM t GROUP BY b`を`SELECT b, COUNT(a) FROM (SELECT b, a FROM t GROUP BY b, a) t GROUP BY b`に書き換えるなど、2 レベルの集計関数に書き換えるかどうかを設定します。集計列に深刻な偏りがあり、 `DISTINCT`列にさまざまな値がある場合、この書き換えによってクエリ実行時のデータ偏りを回避し、クエリのパフォーマンスを向上させることができます。
 
 ### tidb_opt_three_stage_distinct_agg <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
@@ -5189,11 +5189,11 @@ SHOW WARNINGS;
 
 ### tidb_opt_use_invisible_indexes <span class="version-mark">New in v8.0.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、オプティマイザが[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。不可視インデックスは DML文によって維持されますが、クエリ最適化では使用されません。これは、インデックスを完全に削除する前に二重チェックしたいシナリオで役立ちます。変数が`ON`に設定されている場合、オプティマイザはセッションでクエリ最適化のために不可視インデックスを選択できます。
+- この変数は、オプティマイザーが[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。不可視インデックスは DML文によって維持されますが、クエリ最適化では使用されません。これは、インデックスを完全に削除する前に二重チェックしたいシナリオで役立ちます。変数が`ON`に設定されている場合、オプティマイザーはセッションでクエリ最適化のために不可視インデックスを選択できます。
 
 ### tidb_opt_write_row_id
 
@@ -5201,7 +5201,7 @@ SHOW WARNINGS;
 >
 > この TiDB 変数はTiDB Cloudには適用されません。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Boolean
 - デフォルト値: `OFF`
@@ -5418,7 +5418,7 @@ SHOW WARNINGS;
 - 型: 整数
 - デフォルト値: `0`
 - 範囲: `[0, 2147483647]`
-- この変数は、オプティマイザの推定ロジックの反復処理を制御します。この変数の値を変更すると、オプティマイザの推定ロジックが大きく変化します。現在、 `0`のみが有効な値です。他の値を設定することは推奨されません。
+- この変数は、オプティマイザーの推定ロジックの反復処理を制御します。この変数の値を変更すると、オプティマイザーの推定ロジックが大きく変化します。現在、 `0`のみが有効な値です。他の値を設定することは推奨されません。
 
 ### tidb_partition_prune_mode <span class="version-mark">New in v5.1</span>
 
@@ -5426,7 +5426,7 @@ SHOW WARNINGS;
 >
 > バージョン8.5.0以降、この変数を`static`または`static-only`に設定すると警告が表示されます。この変数は今後のリリースで非推奨となります。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
@@ -5445,13 +5445,13 @@ SHOW WARNINGS;
 
 ### tidb_pessimistic_txn_fair_locking <span class="version-mark">New in v7.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
 - 悲観的トランザクションに対して拡張悲観的ロックウェイクアップモデルを使用するかどうかを決定します。このモデルは、悲観的ロックの単一点競合シナリオにおける悲観的トランザクションのウェイクアップ順序を厳密に制御し、不要なウェイクアップを回避します。既存のウェイクアップメカニズムのランダム性によって生じる不確実性を大幅に低減します。ビジネスシナリオで頻繁に単一点悲観的ロックの競合が発生し（同じデータ行への頻繁な更新など）、その結果、ステートメントの再試行が頻繁に発生したり、テールレイテンシーが高くなったり、場合によっては`pessimistic lock retry limit reached`エラーが発生したりする場合には、この変数を有効にして問題を解決してみてください。
-- この変数は、TiDBクラスタをv7.0.0より前のバージョンからv7.0.0以降のバージョンにアップグレードする場合、デフォルトで無効になっています。
+- この変数は、TiDBクラスターをv7.0.0より前のバージョンからv7.0.0以降のバージョンにアップグレードする場合、デフォルトで無効になっています。
 
 > **Note:**
 >
@@ -5465,18 +5465,18 @@ SHOW WARNINGS;
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは読み取り専用です。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
 - デフォルト値: `STRICT`
 - 指定可能な値: `STRICT` 、 `IGNORE`
-- この変数は、DDL文が[SQLで指定された配置ルール](/placement-rules-in-sql.md)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルール オプションは無視されます。
+- この変数は、DDL文が[SQLで指定された配置ルール](/placement-rules-in-sql.md)を無視するかどうかを制御します。変数値が`IGNORE`の場合、すべての配置ルールオプションは無視されます。
 - これは、論理ダンプ/リストアツールが、無効な配置ルールが割り当てられた場合でもテーブルが常に作成できるようにするために使用することを目的としています。これは、mysqldumpがすべてのダンプファイルの先頭に`SET FOREIGN_KEY_CHECKS=0;`を書き込む方法と同様です。
 
 ### `tidb_plan_cache_invalidation_on_fresh_stats` <span class="version-mark">New in v7.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -5485,7 +5485,7 @@ SHOW WARNINGS;
 - この変数を有効にすると、プランキャッシュは統計情報をより効果的に活用して実行計画を生成できるようになります。例えば、次のようになります。
     - 統計情報が利用可能になる前に実行計画が生成された場合、統計情報が利用可能になった時点で、計画キャッシュは実行計画を再生成します。
     - テーブルのデータ分布が変化し、以前は最適だった実行計画が最適ではなくなった場合、統計情報が再収集された後、プランキャッシュは実行計画を再生成します。
-- この変数は、バージョン7.1.0より前のバージョンからバージョン7.1.0以降にアップグレードされたTiDBクラスタでは、デフォルトで無効になっています。
+- この変数は、バージョン7.1.0より前のバージョンからバージョン7.1.0以降にアップグレードされたTiDBクラスターでは、デフォルトで無効になっています。
 
 ### `tidb_plan_cache_max_plan_size` <span class="version-mark">New in v7.1.0</span>
 
@@ -5503,7 +5503,7 @@ SHOW WARNINGS;
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `0`
@@ -5512,7 +5512,7 @@ SHOW WARNINGS;
 
 ### tidb_prefer_broadcast_join_by_exchange_data_size <span class="version-mark">New in v7.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: `OFF`
@@ -5582,12 +5582,12 @@ SHOW WARNINGS;
 > - バージョン7.0.0以降、この変数は、プリペアドステートメントプロトコルを使用するカーソルフェッチ読み取りモードでは無効になります。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数はタイムスタンプの取得を最適化するために使用され、read-committed分離レベルが採用され、読み書きの競合がまれなシナリオに適しています。この変数を有効にすることで、グローバルタイムスタンプの取得に伴うレイテンシーとコストを回避し、トランザクションレベルの読み取りレイテンシーを最適化できます。
-- 読み取り/書き込み競合が深刻な場合、この機能を有効にすると、グローバル タイムスタンプを取得するコストとレイテンシーが増加し、パフォーマンスの低下を引き起こす可能性があります。詳細については、 [Read Committed分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
+- 読み取り/書き込み競合が深刻な場合、この機能を有効にすると、グローバルタイムスタンプを取得するコストとレイテンシーが増加し、パフォーマンスの低下を引き起こす可能性があります。詳細については、 [Read Committed分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
 
 ### tidb_rc_write_check_ts <span class="version-mark">New in v6.3.0</span>
 
@@ -5595,17 +5595,17 @@ SHOW WARNINGS;
 >
 > この機能は現在、 [`replica-read`](#tidb_replica_read-new-in-v40)と互換性がありません。この変数を有効にすると、クライアントから送信されるすべてのリクエストで`replica-read`を使用できなくなります。したがって、 `tidb_rc_write_check_ts`と`replica-read`を同時に有効にしないでください。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
-- この変数は、タイムスタンプの取得を最適化するために使用され、悲観的トランザクションの分離レベル`READ-COMMITTED`でポイント書き込み競合が少ないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバルタイムスタンプを取得することによって発生するレイテンシーとオーバーヘッドを回避できます。現在、この変数は、 `UPDATE` 、 `DELETE` 、および`SELECT ...... FOR UPDATE`ポイント書き込みステートメントに適用できます。ポイント書き込みステートメントとは、フィルタ条件として主キーまたは一意キーを使用し、最終実行演算子に`POINT-GET`が含まれる書き込みステートメントを指します。
+- この変数は、タイムスタンプの取得を最適化するために使用され、悲観的トランザクションの分離レベル`READ-COMMITTED`でポイント書き込み競合が少ないシナリオに適しています。この変数を有効にすると、ポイント書き込みステートメントの実行中にグローバルタイムスタンプを取得することによって発生するレイテンシーとオーバーヘッドを回避できます。現在、この変数は、 `UPDATE` 、 `DELETE` 、および`SELECT ...... FOR UPDATE`ポイント書き込みステートメントに適用できます。ポイント書き込みステートメントとは、フィルター条件として主キーまたは一意キーを使用し、最終実行演算子に`POINT-GET`が含まれる書き込みステートメントを指します。
 - ポイント書き込みの競合が深刻な場合、この変数を有効にすると、余分なオーバーヘッドとレイテンシーが増加し、パフォーマンスの低下につながります。詳細については、 [Read Committed分離レベル](/transaction-isolation-levels.md#read-committed-isolation-level)をご覧ください。
 
 ### tidb_read_consistency <span class="version-mark">New in v5.4.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用: はい ([非トランザクションDML文](/non-transactional-dml.md)が存在する場合、ヒントを使用してこの変数の値を変更しても有効にならない可能性があることに注意してください。)
 - 型: String
 - デフォルト値: `strict`
@@ -5620,7 +5620,7 @@ SHOW WARNINGS;
 - 型: 整数
 - デフォルト値: `0`
 - 範囲: `[-2147483648, 0]`
-- この変数は、TiDB が現在のセッションで読み取ることができる履歴データの時間範囲を設定するために使用されます。値を設定すると、TiDB はこの変数で許可されている範囲から可能な限り新しいタイムスタンプを選択し、以降のすべての読み取り操作はこのタイムスタンプに対して実行されます。たとえば、この変数の値が`-5`に設定されている場合、TiKV に対応する履歴バージョンのデータが存在するという条件の下で、TiDB は 5 秒以内の時間範囲内で可能な限り新しいタイムスタンプを選択します。
+- この変数は、TiDB が現在のセッションで読み取れる履歴データの時間範囲を設定するために使用されます。値を設定すると、TiDB はこの変数で許可されている範囲から可能な限り新しいタイムスタンプを選択し、以降のすべての読み取り操作はこのタイムスタンプに対して実行されます。たとえば、この変数の値が`-5`に設定されている場合、TiKV に対応する履歴バージョンのデータが存在するという条件の下で、TiDB は 5 秒以内の時間範囲内で可能な限り新しいタイムスタンプを選択します。
 
 ### tidb_record_plan_in_slow_log
 
@@ -5629,7 +5629,7 @@ SHOW WARNINGS;
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、これは現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
@@ -5654,17 +5654,17 @@ SHOW WARNINGS;
 
 ### tidb_regard_null_as_point <span class="version-mark">New in v5.4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は、オプティマイザがNULL等価性を含むクエリ条件をインデックスアクセスのプレフィックス条件として使用できるかどうかを制御します。
-- この変数はデフォルトで有効になっています。有効になっている場合、オプティマイザはアクセスするインデックスデータの量を減らすことができ、クエリの実行が高速化されます。たとえば、クエリに複数列インデックス`index(a, b)`が含まれ、クエリ条件に`a<=>null and b=1`が含まれている場合、オプティマイザはインデックスへのアクセスにクエリ条件内の`a<=>null`と`b=1`両方を使用できます。変数が無効になっている場合、 `a<=>null and b=1`に null 等価条件が含まれているため、オプティマイザはインデックスへのアクセスに`b=1`を使用しません。
+- この変数は、オプティマイザーがNULL等価性を含むクエリ条件をインデックスアクセスのプレフィックス条件として使用できるかどうかを制御します。
+- この変数はデフォルトで有効になっています。有効になっている場合、オプティマイザーはアクセスするインデックスデータの量を減らせ、クエリの実行が高速化されます。たとえば、クエリに複数列インデックス`index(a, b)`が含まれ、クエリ条件に`a<=>null and b=1`が含まれている場合、オプティマイザーはインデックスへのアクセスにクエリ条件内の`a<=>null`と`b=1`両方を使用できます。変数が無効になっている場合、 `a<=>null and b=1`に null 等価条件が含まれているため、オプティマイザーはインデックスへのアクセスに`b=1`を使用しません。
 
 ### tidb_remove_orderby_in_subquery <span class="version-mark">New in v6.1.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -5679,7 +5679,7 @@ SHOW WARNINGS;
 >
 > [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)、および [{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium) では、この変数は読み取り専用です。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
@@ -5705,9 +5705,9 @@ SHOW WARNINGS;
     - `tidb_restricted_read_only`を`ON`に設定すると、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)が`ON`に更新されます。
     - `tidb_restricted_read_only`を`OFF`に設定しても、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)は変更されません。
     - `tidb_restricted_read_only`が`ON`の場合、 [`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を`OFF`に設定できません。
-- TiDB の DBaaS プロバイダーの場合、TiDB クラスタが別のデータベースのダウンストリームデータベースである場合、TiDB クラスタを読み取り専用にするには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にした上で`tidb_restricted_read_only`を使用する必要がある場合があります。これにより、顧客が[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を使用してクラスタを書き込み可能にすることができなくなります。これを実現するには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にし、 `SYSTEM_VARIABLES_ADMIN`および`RESTRICTED_VARIABLES_ADMIN`権限を持つ管理者ユーザーを使用して`tidb_restricted_read_only`を制御し、データベースユーザーには、 `SUPER`権限を持つルートユーザーを使用して[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを制御させる必要があります。-   この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
-- この変数を使用して読み取り専用モードを有効にしても、最終的にクラスタ全体が読み取り専用状態になることが保証されるだけです。TiDBクラスタでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
-- TiDB は、SQL文の実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL文のコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
+- TiDB の DBaaS プロバイダーの場合、TiDB クラスターが別のデータベースのダウンストリームデータベースである場合、TiDB クラスターを読み取り専用にするには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にした上で`tidb_restricted_read_only`を使用する必要がある場合があります。これにより、顧客が[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)を使用してクラスターを書き込み可能にできなくなります。これを実現するには、 [セキュリティ強化モード](#tidb_enable_enhanced_security)を有効にし、 `SYSTEM_VARIABLES_ADMIN`および`RESTRICTED_VARIABLES_ADMIN`権限を持つ管理者ユーザーを使用して`tidb_restricted_read_only`を制御し、データベースユーザーには、 `SUPER`権限を持つルートユーザーを使用して[`tidb_super_read_only`](#tidb_super_read_only-new-in-v531)のみを制御させる必要があります。-   この変数は、クラスター全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスター全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
+- この変数を使用して読み取り専用モードを有効にしても、最終的にクラスター全体が読み取り専用状態になることが保証されるだけです。TiDBクラスターでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
+- TiDB は、SQL文の実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL文のコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防げます。
 - この変数が有効になっている場合、TiDB はコミットされていないトランザクションを次のように処理します。
     - コミットされていない読み取り専用トランザクションについては、通常どおりトランザクションをコミットできます。
     - 読み取り専用ではない未コミットのトランザクションの場合、これらのトランザクション内で書き込み操作を実行するSQL文は拒否されます。
@@ -5716,7 +5716,7 @@ SHOW WARNINGS;
 
 ### tidb_request_source_type <span class="version-mark">New in v7.4.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: String
 - デフォルト値: `""`
@@ -5730,7 +5730,7 @@ SHOW WARNINGS;
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
-- この変数は[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントと[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。このシステム変数が`ON`に設定されている場合、これらの 2 つの方法で現在のセッションまたは現在のステートメントのバインドされたリソースグループを変更するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`の特権が必要です。 `OFF`に設定されている場合、これらの権限は不要となり、この変数がない以前の TiDB バージョンと同じ動作になります。
+- この変数は[`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントと[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザーヒントに特権制御を適用するかどうかを制御します。このシステム変数が`ON`に設定されている場合、これらの 2 つの方法で現在のセッションまたは現在のステートメントのバインドされたリソースグループを変更するには`SUPER` 、 `RESOURCE_GROUP_ADMIN` 、または`RESOURCE_GROUP_USER`の特権が必要です。 `OFF`に設定されている場合、これらの権限は不要となり、この変数がない以前の TiDB バージョンと同じ動作になります。
 - TiDB クラスターを以前のバージョンから v8.2.0 以降にアップグレードすると、この変数のデフォルト値は`OFF`に設定され、この機能はデフォルトで無効になります。
 
 ### tidb_retry_limit
@@ -5756,28 +5756,28 @@ SHOW WARNINGS;
 - デフォルト値: `2`
 - 範囲: `[1, 2]`
 - テーブルに新しく保存されたデータの形式バージョンを制御します。 TiDB v4.0 では、 [新しいストレージ行フォーマット](https://github.com/pingcap/tidb/blob/release-8.5/docs/design/2018-07-19-row-format.md)バージョン`2`がデフォルトで新しいデータの保存に使用されます。
-- TiDB のバージョンを v4.0.0 より前のバージョンから v4.0.0 以降のバージョンにアップグレードした場合、フォーマット バージョンは変更されず、TiDB は引き続き古いフォーマット`1`を使用してテーブルにデータを書き込みます。つまり、**新しく作成されたクラスタのみがデフォルトで新しいデータ フォーマットを使用します**。
+- TiDB のバージョンを v4.0.0 より前のバージョンから v4.0.0 以降のバージョンにアップグレードした場合、フォーマットバージョンは変更されず、TiDB は引き続き古いフォーマット`1`を使用してテーブルにデータを書き込みます。つまり、**新しく作成されたクラスターのみがデフォルトで新しいデータフォーマットを使用します**。
 - この変数を変更しても、既に保存されている古いデータには影響しませんが、この変数を変更した後に新たに書き込まれるデータにのみ、対応するバージョン形式が適用されます。
 
 ### tidb_runtime_filter_mode <span class="version-mark">New in v7.2.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
 - デフォルト値: `OFF`
 - 指定可能な値: `OFF` 、 `LOCAL`
-- ランタイムフィルタのモード、つまり**フィルタ送信演算子**と**フィルタ受信演算子**の関係を制御します。モードは`OFF`と`LOCAL`の 2 つあります。 `OFF`はランタイムフィルタを無効にすることを意味します。 `LOCAL`はローカルモードでランタイムフィルタを有効にすることを意味します。詳細については、[ランタイムフィルタモード](/runtime-filter.md#runtime-filter-mode)を参照してください。
+- ランタイムフィルターのモード、つまり**フィルター送信演算子**と**フィルター受信演算子**の関係を制御します。モードは`OFF`と`LOCAL`の 2 つあります。 `OFF`はランタイムフィルターを無効にすることを意味します。 `LOCAL`はローカルモードでランタイムフィルターを有効にすることを意味します。詳細については、[ランタイムフィルターモード](/runtime-filter.md#runtime-filter-mode)を参照してください。
 
 ### tidb_runtime_filter_type <span class="version-mark">New in v7.2.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
 - デフォルト値: `IN`
 - 指定可能な値: `IN`
-- 生成されたフィルター演算子によって使用される述語のタイプを制御します。現在、サポートされているタイプは`IN` 1 つだけです。詳細については、[ランタイムフィルタタイプ](/runtime-filter.md#runtime-filter-type)を参照してください。
+- 生成されたフィルター演算子によって使用される述語のタイプを制御します。現在、サポートされているタイプは`IN` 1 つだけです。詳細については、[ランタイムフィルタータイプ](/runtime-filter.md#runtime-filter-type)を参照してください。
 
 ### tidb_scatter_region
 
@@ -5785,16 +5785,16 @@ SHOW WARNINGS;
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは読み取り専用です。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
 - デフォルト値: `""`
 - 指定可能な値: `""` 、 `table` 、 `global`
-- テーブル作成時に`SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`パラメータが設定されている場合、システムはテーブルの作成が成功すると、自動的に指定された数のリージョンに分割します。この変数は、分割されたリージョンの分散戦略を制御します。TiDB は、選択された分散戦略に基づいてリージョンを処理します。テーブル作成操作は、成功ステータスを返す前に分散処理が完了するまで待機するため、この変数を有効にすると`CREATE TABLE`文の実行時間が大幅に増加する可能性があることに注意してください。この変数が無効になっている場合と比較すると、実行時間は数倍長くなる可能性があります。可能な値の説明は次のとおりです。
+- テーブル作成時に`SHARD_ROW_ID_BITS`および`PRE_SPLIT_REGIONS`パラメーターが設定されている場合、システムはテーブルの作成が成功すると、自動的に指定された数のリージョンに分割します。この変数は、分割されたリージョンの分散戦略を制御します。TiDB は、選択された分散戦略に基づいてリージョンを処理します。テーブル作成操作は、成功ステータスを返す前に分散処理が完了するまで待機するため、この変数を有効にすると`CREATE TABLE`文の実行時間が大幅に増加する可能性があることに注意してください。この変数が無効になっている場合と比較すると、実行時間は数倍長くなる可能性があります。可能な値の説明は次のとおりです。
     - `""` : デフォルト値。テーブル作成後にテーブルのリージョンが分散されないことを示します。
     - `table` : テーブルを作成する際に`PRE_SPLIT_REGIONS`または`SHARD_ROW_ID_BITS`属性を設定した場合、複数のリージョンを事前に分割するシナリオでは、これらのテーブルのリージョンはテーブルの粒度に応じて分散されます。ただし、テーブルを作成する際に上記の属性を設定しない場合、多数のテーブルを迅速に作成するシナリオでは、これらのテーブルのリージョンが少数の TiKV ノードに集中し、リージョンの分布が不均一になります。
-    - `global` : TiDB は、新しく作成されたテーブルのリージョンをクラスタ全体のデータ分布に従って分散します。特に、多数のテーブルを迅速に作成する場合、 `global`オプションを使用すると、リージョンが少数の TiKV ノードに過度に集中するのを防ぎ、クラスタ全体にリージョンがよりバランスよく分散されるようにすることができます。
+    - `global` : TiDB は、新しく作成されたテーブルのリージョンをクラスター全体のデータ分布に従って分散します。特に、多数のテーブルを迅速に作成する場合、 `global`オプションを使用すると、リージョンが少数の TiKV ノードに過度に集中するのを防ぎ、クラスター全体にリージョンがよりバランスよく分散されるようにできます。
 
 ### tidb_schema_cache_size <span class="version-mark">New in v8.0.0</span>
 
@@ -5817,7 +5817,7 @@ SHOW WARNINGS;
 - デフォルト値: `16`
 - 範囲: `[2, 255]`
 - この変数は、TiDBインスタンスにキャッシュできる履歴スキーマバージョンの数を制限します。デフォルト値は`16`で、これはTiDBがデフォルトで16個の履歴スキーマバージョンをキャッシュすることを意味します。
-- 通常、この変数を変更する必要はありません。[ステイル読み取り](/stale-read.md)機能を使用し、DDL 操作が非常に頻繁に実行されると、スキーマバージョンが頻繁に変更されます。その結果、ステイル読み取りがスナップショットからスキーマ情報を取得しようとすると、スキーマキャッシュ ミスにより情報の再構築に時間がかかる場合があります。この場合、 `tidb_schema_version_cache_limit`の値を増やすことで (例えば、 `32` )、スキーマキャッシュ ミスの問題を回避できます。
+- 通常、この変数を変更する必要はありません。[ステイル読み取り](/stale-read.md)機能を使用し、DDL 操作が非常に頻繁に実行されると、スキーマバージョンが頻繁に変更されます。その結果、ステイル読み取りがスナップショットからスキーマ情報を取得しようとすると、スキーマキャッシュミスにより情報の再構築に時間がかかる場合があります。この場合、 `tidb_schema_version_cache_limit`の値を増やすことで (例えば、 `32` )、スキーマキャッシュミスの問題を回避できます。
 - この変数を変更すると、TiDBのメモリ使用量がわずかに増加します。メモリ不足の問題を回避するため、TiDBのメモリ使用量を監視してください。
 
 ### tidb_server_memory_limit <span class="version-mark">New in v6.4.0</span>
@@ -5871,16 +5871,16 @@ SHOW WARNINGS;
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: String
 - デフォルト値: ""
 - オプション値: 最大 64 文字の文字列。有効な文字は、数字`0-9` 、文字`a-zA-Z` 、アンダースコア`_` 、ハイフン`-` 。v8.5.6 以降、この変数の値は大文字と小文字を区別しません。TiDB は、ストレージおよび比較のために入力値を小文字に変換します。
-- この変数はインスタンスレベルのシステム変数です。これを使用して[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービス スコープを制御できます。 DXF は、この変数の値に基づいて、どの TiDB ノードが分散タスクを実行するようにスケジュールできるかを決定します。特定のルールについては、 [タスクスケジューリング](/tidb-distributed-execution-framework.md#task-scheduling)を参照してください。
+- この変数はインスタンスレベルのシステム変数です。これを使用して[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)の下で各 TiDB ノードのサービススコープを制御できます。 DXF は、この変数の値に基づいて、どの TiDB ノードが分散タスクを実行するようにスケジュールできるかを決定します。特定のルールについては、 [タスクスケジューリング](/tidb-distributed-execution-framework.md#task-scheduling)を参照してください。
 
 ### tidb_session_alias <span class="version-mark">New in v7.4.0</span>
 
-- 範囲: セッション
+- 対象範囲: セッション
 - クラスターに保持される: いいえ
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: ""
@@ -5932,7 +5932,7 @@ SHOW WARNINGS;
 
 ### tidb_skip_ascii_check <span class="version-mark">New in v5.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -5942,7 +5942,7 @@ SHOW WARNINGS;
 
 ### tidb_skip_isolation_level_check
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -5961,7 +5961,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_skip_missing_partition_stats <span class="version-mark">New in v7.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -5973,7 +5973,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_skip_utf8_check
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -5991,11 +5991,11 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この変数は TiDB Cloud では読み取り専用です。
 
-- スコープ: GLOBAL
-- クラスターへの永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
+- 対象範囲: グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `0`
-- 型: Integer
+- 型: 整数
 - 範囲: `[0, 1000000]`
 - この変数は、TiDB ノードごとに 1 秒あたり書き込めるスロークエリログエントリの最大数を制御します。
     - 値が `0` の場合、1 秒あたりに書き込まれるスロークエリログエントリ数に制限はありません。
@@ -6008,11 +6008,11 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この変数は TiDB Cloud Starter ではサポートされていません。
 
-- スコープ
-    - TiDB Self-Managed および TiDB Cloud Dedicated: SESSION | GLOBAL
-    - TiDB Cloud Essential および Premium: SESSION
-- クラスターへの永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
+- 対象範囲
+    - TiDB Self-Managed および TiDB Cloud Dedicated: セッション | グローバル
+    - TiDB Cloud Essential および Premium: セッション
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - 型: String
 - この変数は、スロークエリログのトリガールールを定義します。複数次元のメトリクスを組み合わせることで、より柔軟できめ細かなログ記録を実現します。
@@ -6041,7 +6041,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > この TiDB 変数はTiDB Cloudには適用されません。
 
 - 対象範囲：グローバル
-- クラスタに永続化しますか？：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
+- クラスターに保持される：いいえ、現在接続している TiDB インスタンスにのみ適用されます。
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
 - デフォルト値: `300`
@@ -6055,7 +6055,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この TiDB 変数はTiDB Cloudには適用されません。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - `INFORMATION_SCHEMA.SLOW_QUERY`が照会されると、設定ファイル`slow-query-file`で設定されたスロークエリログ名のみが解析されます。デフォルトのスロークエリログ名は"tidb-slow.log"です。他のログを解析するには、 `tidb_slow_query_file`セッション変数を特定のファイルパスに設定し、 `INFORMATION_SCHEMA.SLOW_QUERY`を照会して、設定したファイルパスに基づいてスロークエリログを解析します。
@@ -6078,7 +6078,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_snapshot
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - この変数は、セッションがデータを読み取る時点を設定するために使用されます。たとえば、変数を"2017-11-11 20:20:20"または"400036290571534337"のようなTSO番号に設定すると、現在のセッションはこの時点のデータを読み取ります。
@@ -6280,9 +6280,9 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > - TiDB Cloud Starter では、この変数はサポートされていません。
 > - TiDB Cloud Essential および Premium では、この変数は読み取り専用です。
 
-- スコープ: GLOBAL
-- クラスターへの永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
+- 対象範囲: グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: TiDB Cloud Essential および TiDB Cloud Premium では `ON`
 - この変数は、[ステートメントサマリーテーブル](/statement-summary-tables.md) で集計次元として SQL 文を実行するユーザーを含めるかどうかを制御します。この変数が `OFF` に設定されている場合、TiDB は異なるユーザーによって実行された同じ SQL ダイジェストを同じ行に集計し、`SAMPLE_USER` フィールドにはサンプリングされた 1 人のユーザーが表示されます。この変数が `ON` に設定されている場合、TiDB は異なるユーザーによって実行された同じ SQL ダイジェストを別々の行に集計し、各行の `SAMPLE_USER` フィールドはその文を実行したユーザーを示します。
@@ -6375,14 +6375,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 > - TiDB Cloud Starter では、この変数はサポートされていません。
 > - TiDB Cloud Essential および Premium では、この変数は読み取り専用です。
 
-- スコープ: GLOBAL
-- クラスターへの永続化: Yes
-- ヒント [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value) への適用: No
+- 対象範囲: グローバル
+- クラスターに保持される: はい
+- ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `OFF`
 - この変数は、[ステートメントサマリーの永続化](/statement-summary-tables.md#persist-statements-summary) を有効にした後、LRU によって退避されたステートメントサマリーレコードをステートメントサマリーログに書き込むかどうかを制御します。TiDB はこれらの JSON レコードに `"evicted": true` を付けて、下流のログコンシューマーがそれらを識別できるようにします。
 - この変数は、[tidb_stmt_summary_enable_persistent](/system-variables.md#tidb_stmt_summary_enable_persistent-new-in-v660) が有効な場合にのみ有効になります。TiDB は、`statements_summary_history` または `cluster_statements_summary_history` からのクエリ結果として、`"evicted": true` が付いたレコードを返しません。
-- この変数を有効にすると、LRU による退避がより頻繁になるにつれてログ量が増加します。TiDB は非同期バッファメカニズムを使用して退避されたレコードを書き込みます。バッファキューがいっぱいの場合、TiDB は新しい退避レコードを破棄する可能性があります。
+- この変数を有効にすると、LRU による退避がより頻繁になるにつれてログ量が増加します。TiDB は非同期バッファーメカニズムを使用して退避されたレコードを書き込みます。バッファーキューがいっぱいの場合、TiDB は新しい退避レコードを破棄する可能性があります。
 
 </CustomContent>
 
@@ -6423,7 +6423,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_streamagg_concurrency
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: 整数
@@ -6440,9 +6440,9 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - デフォルト値: `OFF`
 - `tidb_super_read_only` MySQL 変数`super_read_only`の代替として実装されることを目的としています。ただし、TiDB は分散データベースであるため、 `tidb_super_read_only`実行直後にデータベースを読み取り専用にするのではなく、最終的に読み取り専用にします。
 - `SUPER`または`SYSTEM_VARIABLES_ADMIN`の権限を持つユーザーは、この変数を変更できます。
-- この変数は、クラスタ全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスタ全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
-- この変数を使用して読み取り専用モードを有効にしても、最終的にクラスタ全体が読み取り専用状態になることが保証されるだけです。TiDBクラスタでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
-- TiDB は、SQL文の実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL文のコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防ぐことができます。
+- この変数は、クラスター全体の読み取り専用状態を制御します。変数が`ON`の場合、クラスター全体のすべての TiDB サーバーが読み取り専用モードになります。この場合、TiDB は`SELECT` 、 `USE` 、 `SHOW` など、データを変更しないステートメントのみを実行します。 `INSERT`や`UPDATE`などの他のステートメントについては、TiDB は読み取り専用モードでの実行を拒否します。
+- この変数を使用して読み取り専用モードを有効にしても、最終的にクラスター全体が読み取り専用状態になることが保証されるだけです。TiDBクラスターでこの変数の値を変更しても、その変更が他のTiDBサーバーにまだ反映されていない場合、更新されていないTiDBサーバーは読み取り専用モードになり**ません**。
+- TiDB は、SQL文の実行前に読み取り専用フラグを確認します。v6.2.0 以降では、SQL文のコミット前にもフラグがチェックされます。これにより、サーバーが読み取り専用モードになった後に、長時間実行される[自動コミット](/transaction-overview.md#autocommit)ステートメントがデータを変更するケースを防げます。
 - この変数が有効になっている場合、TiDB はコミットされていないトランザクションを次のように処理します。
     - コミットされていない読み取り専用トランザクションについては、通常どおりトランザクションをコミットできます。
     - 読み取り専用ではない未コミットのトランザクションの場合、これらのトランザクション内で書き込み操作を実行するSQL文は拒否されます。
@@ -6452,7 +6452,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_sysdate_is_now <span class="version-mark">New in v6.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -6483,7 +6483,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - デフォルト値: `3`
 - 範囲: `[1, 10]`
 - 単位：秒
-- この変数は、[キャッシュテーブル](/cached-tables.md)のリース時間を制御するために使用され、デフォルト値は`3`です。この変数の値は、キャッシュテーブルの変更に影響します。キャッシュテーブルが変更された後、最長の待機時間は`tidb_table_cache_lease`秒になる可能性があります。テーブルが読み取り専用であるか、高い書き込みレイテンシーを許容できる場合は、この変数の値を増やすことで、キャッシュテーブルの有効時間を長くし、リース更新の頻度を減らすことができます。
+- この変数は、[キャッシュテーブル](/cached-tables.md)のリース時間を制御するために使用され、デフォルト値は`3`です。この変数の値は、キャッシュテーブルの変更に影響します。キャッシュテーブルが変更された後、最長の待機時間は`tidb_table_cache_lease`秒になる可能性があります。テーブルが読み取り専用であるか、高い書き込みレイテンシーを許容できる場合は、この変数の値を増やすことで、キャッシュテーブルの有効時間を長くし、リース更新の頻度を減らせます。
 
 ### tidb_tmp_table_max_size <span class="version-mark">New in v5.3.0</span>
 
@@ -6552,7 +6552,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_track_aggregate_memory_usage
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -6586,7 +6586,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 > **Note:**
 >
-> - TSO RPC のレイテンシーがPD リーダーの CPU 使用率のボトルネック以外の理由 (ネットワークの問題など) で増加するとします。この場合、 `tidb_tso_client_batch_max_wait_time`の値を増やすと、TiDB の実行レイテンシーが増加し、クラスタの QPS パフォーマンスに影響を与える可能性があります。
+> - TSO RPC のレイテンシーがPD リーダーの CPU 使用率のボトルネック以外の理由 (ネットワークの問題など) で増加するとします。この場合、 `tidb_tso_client_batch_max_wait_time`の値を増やすと、TiDB の実行レイテンシーが増加し、クラスターの QPS パフォーマンスに影響を与える可能性があります。
 > - この機能は[`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840)と互換性がありません。この変数にゼロ以外の値を設定すると、[`tidb_tso_client_rpc_mode`](#tidb_tso_client_rpc_mode-new-in-v840)は有効になりません。
 
 ### tidb_tso_client_rpc_mode <span class="version-mark">New in v8.4.0</span>
@@ -6709,7 +6709,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `4`
 - 範囲: `[1, 256]`
-- この変数は、各 TiDB ノードでの TTL スキャン ジョブの最大同時実行数を設定するために使用されます。詳細については、[TTL (Time to Live)](/time-to-live.md)を参照してください。
+- この変数は、各 TiDB ノードでの TTL スキャンジョブの最大同時実行数を設定するために使用されます。詳細については、[TTL (Time to Live)](/time-to-live.md)を参照してください。
 
 ### tidb_ttl_job_schedule_window_start_time <span class="version-mark">New in v6.5.0</span>
 
@@ -6753,7 +6753,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tidb_txn_assertion_level <span class="version-mark">New in v6.0.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 
 - クラスターに保持される: はい
 
@@ -6765,7 +6765,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 - 指定可能な値: `OFF` 、 `FAST` 、 `STRICT`
 
-- この変数はアサーション レベルを制御するために使用されます。アサーションは、データとインデックス間の整合性チェックであり、書き込まれるキーがトランザクションのコミット プロセスに存在するかどうかをチェックします。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
+- この変数はアサーションレベルを制御するために使用されます。アサーションは、データとインデックス間の整合性チェックであり、書き込まれるキーがトランザクションのコミットプロセスに存在するかどうかをチェックします。詳細については、 [データとインデックス間の不整合のトラブルシューティング](/troubleshoot-data-inconsistency-errors.md)を参照してください。
 
     - `OFF` : このチェックを無効にします。
     - `FAST` : パフォーマンスへの影響はほとんどなく、ほとんどのチェック項目を有効にします。
@@ -6791,7 +6791,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 <CustomContent platform="tidb-cloud">
 
-- この変数は、TiDB が TiKV に送信するトランザクションコミット リクエストのバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションの大部分で書き込み操作が多数発生する場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数を大きすぎる値に設定して TiKV の単一ログの最大サイズ (デフォルトでは 8 MiB) の制限を超えると、コミットが失敗する可能性があります。
+- この変数は、TiDB が TiKV に送信するトランザクションコミットリクエストのバッチサイズを制御するために使用されます。アプリケーションワークロード内のトランザクションの大部分で書き込み操作が多数発生する場合、この変数の値を大きくすることでバッチ処理のパフォーマンスを向上させることができます。ただし、この変数を大きすぎる値に設定して TiKV の単一ログの最大サイズ (デフォルトでは 8 MiB) の制限を超えると、コミットが失敗する可能性があります。
 
 </CustomContent>
 
@@ -6827,19 +6827,19 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは読み取り専用です。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
 - デフォルト値: `pessimistic`
 - 指定可能な値: `pessimistic` 、 `optimistic`
 - この変数はトランザクションモードを設定するために使用されます。 TiDB 3.0 は悲観的トランザクションをサポートします。 TiDB 3.0.8 以降、[悲観的トランザクションモード](/pessimistic-transaction.md)はデフォルトで有効になっています。
-- TiDBをv3.0.7以前のバージョンからv3.0.8以降のバージョンにアップグレードしても、デフォルトのトランザクションモードは変更されません。**新しく作成されたクラスタのみが、デフォルトで悲観的トランザクションモードを使用します**。
+- TiDBをv3.0.7以前のバージョンからv3.0.8以降のバージョンにアップグレードしても、デフォルトのトランザクションモードは変更されません。**新しく作成されたクラスターのみが、デフォルトで悲観的トランザクションモードを使用します**。
 - この変数が"optimistic"または""に設定されている場合、TiDB は[楽観的トランザクションモード](/optimistic-transaction.md)を使用します。
 
 ### tidb_use_plan_baselines <span class="version-mark">New in v4.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
@@ -6852,7 +6852,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは読み取り専用です。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean
 - デフォルト値: `ON`
@@ -6893,7 +6893,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tiflash_fastscan <span class="version-mark">New in v6.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - デフォルト値: `OFF`
 - 型: Boolean
@@ -6954,7 +6954,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この TiDB 変数はTiDB Cloudには適用されません。
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
@@ -6976,7 +6976,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tiflash_hashagg_preaggregation_mode <span class="version-mark">New in v8.3.0</span>
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：はい
 - 型: Enumeration
@@ -6996,19 +6996,19 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - デフォルト値: `0`
 - 範囲: `[0, 2147483647]`
 - 単位：ミリ秒
-- `tikv_client_read_timeout`を使用すると、クエリで TiDB が TiKV RPC 読み取りリクエストを送信するタイムアウトを設定できます。TiDB クラスタが不安定なネットワーク環境または深刻な TiKV I/Oレイテンシーのジッターがある環境にあり、アプリケーションが SQL クエリのレイテンシーに敏感な場合は、 `tikv_client_read_timeout`を設定して、TiKV RPC 読み取りリクエストのタイムアウトを短縮できます。この場合、TiKV ノードで I/Oレイテンシーのジッターが発生すると、TiDB はすぐにタイムアウトして、次の TiKVリージョンピアがある TiKV ノードに RPC リクエストを再送信できます。すべての TiKVリージョンピアのリクエストがタイムアウトした場合、TiDB はデフォルトのタイムアウト (通常 40 秒) で再試行します。
-- クエリ内でオプティマイザヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */`を使用すると、TiDB が TiKV RPC 読み取りリクエストを送信するタイムアウトを設定できます。オプティマイザヒントとこのシステム変数の両方が設定されている場合は、オプティマイザヒントが優先されます。
+- `tikv_client_read_timeout`を使用すると、クエリで TiDB が TiKV RPC 読み取りリクエストを送信するタイムアウトを設定できます。TiDB クラスターが不安定なネットワーク環境または深刻な TiKV I/Oレイテンシーのジッターがある環境にあり、アプリケーションが SQL クエリのレイテンシーに敏感な場合は、 `tikv_client_read_timeout`を設定して、TiKV RPC 読み取りリクエストのタイムアウトを短縮できます。この場合、TiKV ノードで I/Oレイテンシーのジッターが発生すると、TiDB はすぐにタイムアウトして、次の TiKVリージョンピアがある TiKV ノードに RPC リクエストを再送信できます。すべての TiKVリージョンピアのリクエストがタイムアウトした場合、TiDB はデフォルトのタイムアウト (通常 40 秒) で再試行します。
+- クエリ内でオプティマイザーヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=N) */`を使用すると、TiDB が TiKV RPC 読み取りリクエストを送信するタイムアウトを設定できます。オプティマイザーヒントとこのシステム変数の両方が設定されている場合は、オプティマイザーヒントが優先されます。
 - デフォルト値`0`は、デフォルトのタイムアウト（通常は 40 秒）が使用されることを示します。
 
 > **Note:**
 >
-> - 通常、通常のクエリは数ミリ秒で完了しますが、TiKVノードのネットワークが不安定な場合やI/Oジッターが発生すると、クエリに1秒以上、場合によっては10秒以上かかることがあります。このような場合は、オプティマイザヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=100) */`を使用して、特定のクエリのTiKV RPC読み取りリクエストのタイムアウトを100ミリ秒に設定できます。こうすることで、TiKVノードの応答が遅い場合でも、TiDBはすぐにタイムアウトして、次のTiKVリージョンピアが存在するTiKVノードにRPCリクエストを再送信できます。2つのTiKVノードが同時にI/Oジッターが発生する確率は低いため、クエリは通常、数ミリ秒から110ミリ秒以内に完了します。
-> - `tikv_client_read_timeout`に小さすぎる値（例えば 1 ミリ秒）を設定しないでください。そうしないと、TiDB クラスタのワークロードが高い場合にリクエストがタイムアウトしやすくなり、その後の再試行によって TiDB クラスタへの負荷がさらに増加する可能性があります。
-> - クエリの種類ごとに異なるタイムアウト値を設定する必要がある場合は、オプティマイザヒントを使用することをお勧めします。
+> - 通常、通常のクエリは数ミリ秒で完了しますが、TiKVノードのネットワークが不安定な場合やI/Oジッターが発生すると、クエリに1秒以上、場合によっては10秒以上かかることがあります。このような場合は、オプティマイザーヒント`/*+ SET_VAR(TIKV_CLIENT_READ_TIMEOUT=100) */`を使用して、特定のクエリのTiKV RPC読み取りリクエストのタイムアウトを100ミリ秒に設定できます。こうすることで、TiKVノードの応答が遅い場合でも、TiDBはすぐにタイムアウトして、次のTiKVリージョンピアが存在するTiKVノードにRPCリクエストを再送信できます。2つのTiKVノードが同時にI/Oジッターが発生する確率は低いため、クエリは通常、数ミリ秒から110ミリ秒以内に完了します。
+> - `tikv_client_read_timeout`に小さすぎる値（例えば 1 ミリ秒）を設定しないでください。そうしないと、TiDB クラスターのワークロードが高い場合にリクエストがタイムアウトしやすくなり、その後の再試行によって TiDB クラスターへの負荷がさらに増加する可能性があります。
+> - クエリの種類ごとに異なるタイムアウト値を設定する必要がある場合は、オプティマイザーヒントを使用することをお勧めします。
 
 ### time_zone
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `SYSTEM`
@@ -7026,7 +7026,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### transaction_isolation
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
@@ -7048,7 +7048,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### tx_read_ts
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: ""
 - ステイル読み取りシナリオでは、このセッション変数を使用して、Stable Read のタイムスタンプ値を記録します。
@@ -7060,10 +7060,10 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 >
 > この変数は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは読み取り専用です。
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `global`
-- 値オプション: `global`および`local`
+- 値のオプション: `global`および`local`
 - この変数は、現在のセッショントランザクションがグローバルトランザクションかローカルトランザクションかを設定するために使用されます。
 - この変数はTiDBの内部動作に使用されます。この変数を設定することは**推奨されません**。
 
@@ -7142,7 +7142,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Enumeration
 - デフォルト値: `1`
-- 値オプション: TiDB Self-Managed および[TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合は`0`、`1`、`2`、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合は`1`および`2`
+- 値のオプション: TiDB Self-Managed および[TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合は`0`、`1`、`2`、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合は`1`および`2`
 - この変数は、パスワードの複雑性チェックのポリシーを制御します。この変数は、 [`validate_password.enable`](#validate_passwordenable-new-in-v650)が有効になっている場合にのみ有効になります。この変数の値によって、 `validate_password.check_user_name`を除く他の`validate-password`変数がパスワードの複雑性チェックで有効になるかどうかが決まります。
 - この変数の値は`0` 、 `1` 、または`2` （それぞれLOW、MEDIUM、STRONGに対応）のいずれかになります。ポリシーレベルによってチェック項目が異なります。
     - 0またはLOW：パスワードの長さ。
@@ -7161,28 +7161,28 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### version
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `8.0.11-TiDB-` (tidb バージョン)
 - この変数は、MySQLのバージョンに続いてTiDBのバージョンを返します。例えば、'8.0.11-TiDB-v8.5.4'のようになります。
 
 ### version_comment
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: (文字列)
 - この変数は、TiDBのバージョンに関する詳細情報を返します。例えば、「TiDB Server (Apache License 2.0) Community Edition、MySQL 8.0互換」などです。
 
 ### version_compile_machine
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: (文字列)
 - この変数は、TiDBが実行されているCPUアーキテクチャの名前を返します。
 
 ### version_compile_os
 
-- 適用範囲：なし
+- 対象範囲：なし
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: (文字列)
 - この変数は、TiDBが実行されているOSの名前を返します。
@@ -7204,14 +7204,14 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
 ### warning_count
 
-- 範囲: セッション
+- 対象範囲: セッション
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - デフォルト値: `0`
 - この読み取り専用変数は、前回実行されたステートメントで発生した警告の数を示します。
 
 ### windowing_use_high_precision
 
-- 範囲: セッション | グローバル
+- 対象範囲: セッション | グローバル
 - クラスターに保持される: はい
 - ヒント[SET_VAR](/optimizer-hints.md#set_varvar_namevar_value)に適用：いいえ
 - 型: Boolean

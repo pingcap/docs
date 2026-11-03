@@ -30,7 +30,7 @@ summary: パイプラインDMLのユースケース、メソッド、制限事�
 - DML 操作中にメモリ不足エラーが発生しました。
 - 大規模なデータ操作中に顕著なワークロードの変動が発生します。
 
-パイプライン DML によりトランザクション処理中のメモリ使用量が大幅に削減されますが、大規模なデータ操作中に他のコンポーネント (エグゼキュータなど) が適切に機能することを保証するには、 [適切なメモリ閾値](/system-variables.md#tidb_mem_quota_query) (少なくとも 2 GiB を推奨) を構成する必要があることに注意してください。
+パイプライン DML によりトランザクション処理中のメモリ使用量が大幅に削減されますが、大規模なデータ操作中に他のコンポーネント (エグゼキューターなど) が適切に機能することを保証するには、 [適切なメモリ閾値](/system-variables.md#tidb_mem_quota_query) (少なくとも 2 GiB を推奨) を構成する必要があることに注意してください。
 
 ## 制限事項 {#limitations}
 
@@ -94,7 +94,7 @@ SELECT @@tidb_last_txn_info;
 
 ## ベストプラクティス {#best-practices}
 
-- Executorなどのコンポーネントのメモリ使用量が制限を超えないように、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の値を少し増やしてください。少なくとも2GiBの値を推奨します。十分なTiDBメモリがある環境では、この値をさらに増やすことができます。
+- Executorなどのコンポーネントのメモリ使用量が制限を超えないように、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)の値を少し増やしてください。少なくとも2GiBの値を推奨します。十分なTiDBメモリがある環境では、この値をさらに増やせます。
 - 新しいテーブルにデータを挿入するシナリオでは、パイプラインDMLのパフォーマンスがホットスポットの影響を受ける可能性があります。最適なパフォーマンスを実現するには、事前にホットスポットに対処することをお勧めします。詳細については、 [ホットスポットの問題のトラブルシューティング](https://docs.pingcap.com/tidb/stable/troubleshoot-hot-spot-issues)を参照してください。
 
 ## 関連構成 {#related-configurations}
@@ -126,7 +126,7 @@ SELECT @@tidb_last_txn_info;
 - パイプライン DML が使用されたかどうかなど、現在のセッションで実行された最後のトランザクションに関する情報を取得するには、 [`tidb_last_txn_info`](/system-variables.md#tidb_last_txn_info-new-in-v409)システム変数を確認します。
 - TiDB ログで`"[pipelined dml]"`を含む行を探して、現在のステージや書き込まれたデータの量など、パイプライン DML の実行プロセスと進行状況を把握します。
 - 長時間実行されるステートメントの進行状況を追跡するには、 [`expensive query`](https://docs.pingcap.com/tidb/stable/identify-expensive-queries#expensive-query-log-example)ログの`affected rows`フィールドを確認します。
-- トランザクションの実行状況を確認するには、 [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブルをクエリします。パイプラインDMLは通常、大規模なトランザクションで使用されるため、このテーブルを使用して実行状況を監視することができます。
+- トランザクションの実行状況を確認するには、 [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)テーブルをクエリします。パイプラインDMLは通常、大規模なトランザクションで使用されるため、このテーブルを使用して実行状況を監視できます。
 
 ## よくある質問 {#faqs}
 
@@ -137,7 +137,7 @@ TiDBがパイプラインDMLを使用したステートメントの実行を拒�
 一般的な理由:
 
 - DML文は自動コミットされません。
-- ステートメントには、 [一時テーブル](/temporary-tables.md)や[キャッシュテーブル](/cached-tables.md)などのサポートされていないテーブル タイプが含まれています。
+- ステートメントには、 [一時テーブル](/temporary-tables.md)や[キャッシュテーブル](/cached-tables.md)などのサポートされていないテーブルタイプが含まれています。
 - 操作には外部キーが関係し、外部キーのチェックが有効になっています。
 
 ### パイプライン DML はトランザクションの分離レベルに影響しますか? {#does-pipelined-dml-affect-the-isolation-level-of-transactions}
