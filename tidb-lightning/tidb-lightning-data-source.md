@@ -253,7 +253,7 @@ TiDB Lightning does not support every option supported by the `LOAD DATA` statem
 
 TiDB Lightning works best when the input files have a uniform size of around 256 MiB. When the input is a single huge CSV file, TiDB Lightning can only process the file in one thread, which slows down the import speed.
 
-This can be fixed by splitting the CSV into multiple files first. For the generic CSV format, there is no way to quickly identify where a row starts or ends without reading the whole file. Therefore, TiDB Lightning by default does *not* automatically split a CSV file. However, if you are certain that the CSV input adheres to certain restrictions, you can enable the `strict-format` setting to allow TiDB Lightning to split the file into multiple 256 MiB-sized chunks for parallel processing. To use `strict-format`, you need to also set `mydumper.csv.terminator` to the actual non-empty line terminator in the source file.
+This can be fixed by splitting the CSV into multiple files first. For the generic CSV format, there is no way to quickly identify where a row starts or ends without reading the whole file. Therefore, TiDB Lightning by default does *not* automatically split a CSV file. However, if you are certain that the CSV input adheres to certain restrictions, you can enable the `strict-format` setting to allow TiDB Lightning to split the file into multiple chunks for parallel processing. The chunk size is controlled by `max-region-size`, which defaults to `256MiB`. To use `strict-format`, you need to also set `mydumper.csv.terminator` to the actual non-empty line terminator in the source file.
 
 ```toml
 [mydumper]
