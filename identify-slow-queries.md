@@ -72,7 +72,7 @@ Slow query basics:
     - `col1:allEvicted`: statistics on the column `col1` are not fully loaded.
     - `idx1:allEvicted`: statistics on the index `idx1` are not fully loaded.
 * `Succ`: Whether a statement is executed successfully.
-* `Backoff_time`: The waiting time before retry when a statement encounters errors that require a retry. The common errors as such include: `lock occurs`, `Region split`, and `tikv server is busy`.
+* `Backoff_time`: The cumulative backoff time of coprocessor tasks, in seconds. It does not include backoff from `Point_Get` requests. Common causes include lock conflicts, Region splits, and a busy TiKV server.
 * `Plan`: The execution plan of a statement. Execute the `SELECT tidb_decode_plan('xxx...')` statement to parse the specific execution plan.
 * `Binary_plan`: The execution plan of a binary-encoded statement. Execute the [`SELECT tidb_decode_binary_plan('xxx...')`](/functions-and-operators/tidb-functions.md#tidb_decode_binary_plan) statement to parse the specific execution plan. The `Plan` and `Binary_plan` fields carry the same information. However, the format of execution plans parsed from the two fields are different.
 * `Prepared`: Whether this statement is a `Prepare` or `Execute` request or not.
@@ -86,7 +86,7 @@ Slow query basics:
 * `Exec_retry_time`: The execution retry duration of this statement. For example, if a statement has been executed three times in total (failed for the first two times), `Exec_retry_time` means the total duration of the first two executions. The duration of the last execution is `Query_time` minus `Exec_retry_time`.
 * `KV_total`: The time spent on all the RPC requests on TiKV or TiFlash by this statement.
 * `PD_total`: The time spent on all the RPC requests on PD by this statement.
-* `Backoff_total`: The time spent on all the backoff during the execution of this statement.
+* `Backoff_total`: The cumulative client-go backoff sleep time recorded in the statement execution context, in seconds. It can include coprocessor and transaction backoff, but does not represent all statement waiting time. `Backoff_total`, `Backoff_time`, and `Commit_backoff_time` can overlap; do not add them together. A value of `0` does not prove that the statement had no backoff, because the execution details might be unavailable.
 * `Write_sql_response_total`: The time consumed for sending the results back to the client by this statement.
 * `Result_rows`: The row count of the query results.
 * `IsExplicitTxn`: Whether this statement is in an explicit transaction. If the value is `false`, the transaction is `autocommit=1` and the statement is automatically committed after execution.
@@ -96,6 +96,9 @@ The following fields are related to transaction execution:
 
 * `Prewrite_time`: The duration of the first phase (prewrite) of the two-phase transaction commit.
 * `Commit_time`: The duration of the second phase (commit) of the two-phase transaction commit.
+* `Commit_backoff_time`: The sum of the longest cumulative backoff time among prewrite batches and the cumulative backoff time in the commit phase, in seconds.
+* `Prewrite_Backoff_types`: The backoff types from the prewrite batch with the longest cumulative backoff time. This is not the union of types from all prewrite batches.
+* `Commit_Backoff_types`: The backoff types in the commit phase.
 * `Get_commit_ts_time`: The time spent on getting `commit_ts` during the second phase (commit) of the two-phase transaction commit.
 * `Local_latch_wait_time`: The time that TiDB spends on waiting for the lock before the second phase (commit) of the two-phase transaction commit.
 * `Write_keys`: The count of keys that the transaction writes to the Write CF in TiKV.
@@ -414,6 +417,19 @@ TiDB 4.0 adds the [`CLUSTER_SLOW_QUERY`](/information-schema/information-schema-
 When you query the `CLUSTER_SLOW_QUERY` table, TiDB pushes the computation and the judgment down to other nodes, instead of retrieving all slow query information from other nodes and executing the operations on one TiDB node.
 
 ## `SLOW_QUERY` / `CLUSTER_SLOW_QUERY` usage examples
+
+### Filter by transaction backoff type
+
+To find slow queries whose transaction commit hit `txnLock` backoff in the past hour, query the [`Prewrite_Backoff_types` and `Commit_Backoff_types` columns](/information-schema/information-schema-slow-query.md#backoff-type-columns):
+
+```sql
+SELECT time, query, prewrite_backoff_types, commit_backoff_types
+FROM information_schema.slow_query
+WHERE time >= NOW() - INTERVAL 1 HOUR
+  AND commit_backoff_types LIKE '%txnLock%';
+```
+
+An empty type column does not rule out backoff in other phases or paths: coprocessor backoff types remain visible in the `Backoff_Detail` column of the same row, and backoff of `Point_Get` requests is only reflected in `Backoff_total`. To query all nodes with `CLUSTER_SLOW_QUERY`, first check the [rolling upgrade requirements](/information-schema/information-schema-slow-query.md#cluster_slow_query-table).
 
 ### Top-N slow queries
 
