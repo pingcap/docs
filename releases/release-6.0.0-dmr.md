@@ -215,7 +215,7 @@ TiDB v6.0.0 is a DMR, and its version is 6.0.0-DMR.
 
     A new parameter `--start-time` is added to migration tasks. You can define time in the format of '2021-10-21 00:01:00' or '2021-10-21T00:01:00'.
 
-    This feature is particularly useful in scenarios where you migrate and merge incremental data from shard mysql instances. Specifically, you do not need to set a binlog start point for each source in an incremental migration task. Instead, you can create an incremental migration task quickly by using the `--start-time` parameter in `safe-mode`.
+    This feature is particularly useful in scenarios where you migrate and merge incremental data from shard MySQL instances. Specifically, you do not need to set a binlog start point for each source in an incremental migration task. Instead, you can create an incremental migration task quickly by using the `--start-time` parameter in `safe-mode`.
 
     [User document](/dm/dm-create-task.md#flags-description)
 

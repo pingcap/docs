@@ -60,7 +60,7 @@ The TiDB server, the control machine, and the monitoring server are on rac3. The
 
 ### Example
 
-See the following `tiup topology.yaml` yaml file for example:
+See the following `tiup topology.yaml` YAML file for example:
 
 ```yaml
 # # Global variables are applied to all deployments and used as the default value of

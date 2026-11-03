@@ -396,7 +396,7 @@ SELECT TIDB_IS_DDL_OWNER();
 
 ## TIDB_PARSE_TSO
 
-The `TIDB_PARSE_TSO()` function extracts the physical timestamp from a TiDB TSO timestamp. [TSO](/tso.md) stands for Time Stamp Oracle and is a monotonically increasing timestamp given out by PD (Placement Driver) for every transaction.
+The `TIDB_PARSE_TSO()` function extracts the physical timestamp from a TiDB TSO timestamp. [TSO](/tso.md) stands for Timestamp Oracle and is a monotonically increasing timestamp given out by PD (Placement Driver) for every transaction.
 
 A TSO is a number that consists of two parts:
 

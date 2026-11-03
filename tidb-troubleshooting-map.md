@@ -137,7 +137,7 @@ Refer to [5 PD issues](#5-pd-issues).
 
     - The data volume of a single `UPDATE/DELETE` query is too large. See [case-882](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case882.md) in Chinese.
 
-    - The SQL contains multiple sub-queries connected by `Union`. See [case-1828](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1828.md) in Chinese.
+    - The SQL contains multiple subqueries connected by `Union`. See [case-1828](https://github.com/pingcap/tidb-map/blob/master/maps/diagnose-case-study/case1828.md) in Chinese.
 
 For more information about troubleshooting OOM, see [Troubleshoot TiDB OOM Issues](/troubleshoot-tidb-oom.md).
 

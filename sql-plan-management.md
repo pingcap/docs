@@ -847,7 +847,7 @@ Because the baseline evolution automatically creates a new binding, when the que
     | Hint | Description            |
     | :-------- | :------------- |
     | `memory_quota` | The maximum memory that can be used for a query. |
-    | `use_toja` | Whether the optimizer transforms sub-queries to Join. |
+    | `use_toja` | Whether the optimizer transforms subqueries to Join. |
     | `use_cascades` | Whether to use the cascades optimizer. |
     | `no_index_merge` | Whether the optimizer uses Index Merge as an option for reading tables. |
     | `read_consistent_replica` | Whether to forcibly enable Follower Read when reading tables. |

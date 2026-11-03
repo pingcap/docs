@@ -30,7 +30,7 @@ There are two ways to install your self-hosting n8n. Choose whichever works for 
 <SimpleTab>
 <div label="npm">
 
-1. Install [node.js](https://nodejs.org/en/download/) on your workspace.
+1. Install [Node.js](https://nodejs.org/en/download/) on your workspace.
 2. Download and start n8n by `npx`.
 
     ```shell
