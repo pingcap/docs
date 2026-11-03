@@ -19,18 +19,18 @@ summary: 2023年 11月 14日のTiDB Cloud Dedicated Scale 機能メンテナン�
 
 ## インパクト {#impact}
 
-メンテナンス期間中は、 [vCPUとRAMを変更する](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram)が無効化され、Dedicated クラスターの vCPU と RAM を変更できません。ただし、 **Modify Cluster**ページでノード数またはストレージを変更することは可能です。TiDB クラスターは通常通りデータの読み取りと書き込みを行うため、オンラインビジネスへの悪影響はありません。
+メンテナンスウィンドウ中は、 [vCPUとRAMを変更する](https://docs.pingcap.com/tidbcloud/scale-tidb-cluster#change-vcpu-and-ram)が無効化され、Dedicated クラスターの vCPU と RAM を変更できません。ただし、 **Modify Cluster**ページでノード数またはストレージを変更することは可能です。TiDB クラスターは通常通りデータの読み取りと書き込みを行うため、オンラインビジネスへの悪影響はありません。
 
 ### TiDB Cloudコンソール UI の影響を受ける機能 {#affected-features-of-tidb-cloud-console-ui}
 
-- クラスタレベル
-    - クラスタ管理
+- クラスターレベル
+    - クラスター管理
         - クラスターを変更する
             - TiDB、TiKV、またはTiFlashノードの vCPU と RAM を変更します。
 
 ### TiDB Cloud API の影響を受ける機能 {#affected-features-of-tidb-cloud-api}
 
-- クラスタ管理
+- クラスター管理
     - [UpdateCluster](https://docs.pingcap.com/tidbcloud/api/v1beta#tag/Cluster/operation/UpdateCluster)
 
 ## 完了と再開 {#completion-and-resumption}
