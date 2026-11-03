@@ -223,7 +223,7 @@ The `security` section specifies certificates and keys for TLS connections withi
 - Specifies the import mode of TiDB Lightning.
 - Default value: `"local"`
 - Value options:
-    - `"local"`: [Physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md), used by default. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB can provide only limited service. By default, TiDB Lightning pauses scheduling only for the target table's Regions, but the import might still affect cluster performance.
+    - `"local"`: [Physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md), used by default. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB can provide only limited service. If your TiDB Lightning version is v7.1.0 or later and your TiDB version is v6.1.0 or later, TiDB Lightning pauses scheduling only for the target table's Regions by default. The import might still affect cluster performance.
     - `"tidb"`: [Logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md). You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 
 #### `parallel-import`
