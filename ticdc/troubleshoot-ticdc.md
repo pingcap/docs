@@ -108,17 +108,17 @@ If the result of `pd-ctl service-gc-safepoint --pd <pd-addrs>` does not have `gc
 
 ## When I use TiCDC to replicate messages to Kafka, Kafka returns the `Message was too large` error. Why?
 
-Configure the TiCDC Kafka Sink URI parameter `max-message-bytes` together with the Kafka Topic configuration `max.message.bytes`. The Sink URI uses `max-message-bytes`, while each Kafka Topic uses `max.message.bytes`.
+To resolve this error, check both `max-message-bytes` in the TiCDC Kafka Sink URI and `max.message.bytes` for the receiving Kafka Topics to ensure that the settings are compatible.
 
-TiCDC limits the message size sent to Kafka with `max-message-bytes`, while Kafka applies the `max.message.bytes` limit of the receiving Topic. If you configure [Topic dispatchers](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers), TiCDC might send data to another Topic. The receiving Topic must also permit messages of that size. Changing only the Sink URI or one Topic can still result in a message size error.
+TiCDC limits the message size sent to Kafka with `max-message-bytes`, while Kafka applies the `max.message.bytes` limit to record batches in the receiving Topic (after compression if compression is enabled). TiCDC also adjusts the effective sending limit based on the default Topic's `max.message.bytes`, leaving room for protocol overhead. If you configure [Topic dispatchers](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers), TiCDC might send data to another Topic. The receiving Topic must also permit messages of that size. Changing only the Sink URI or one Topic can still result in a message size error.
 
-First, run `cdc cli changefeed query` to find the default Topic in the current Sink URI. Check the Topic dispatch rules in the changefeed configuration to identify the Topic that receives the messages:
+First, run `cdc cli changefeed query` to find the default Topic in the current Sink URI. Check the Topic dispatch rules in the changefeed configuration to identify all Topics that might receive messages:
 
 ```shell
 cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
 ```
 
-The following example sets the limit to 10 MiB for the default Topic `default-topic` and one routed Topic `routed-topic`. Replace the Kafka address and Topic names with your actual values. If Topic dispatchers route messages to multiple Topics, update every possible receiving Topic. If you have not configured a Topic dispatcher, you only need to update the default Topic.
+The following example sets the limit to 10 MiB (`10485760` bytes) for the default Topic `default-topic` and one routed Topic `routed-topic`. Determine the target limit based on your actual message sizes and existing configuration. If the existing limit is higher, do not lower it to the example value. Replace the Kafka address, Topic names, and limit values in the commands with your actual values. If Topic dispatchers route messages to multiple Topics, update every possible receiving Topic. If you have not configured a Topic dispatcher, you only need to update the default Topic.
 
 ```shell
 bin/kafka-configs.sh --bootstrap-server localhost:9092 \
@@ -130,7 +130,7 @@ bin/kafka-configs.sh --bootstrap-server localhost:9092 \
   --alter --add-config max.message.bytes=10485760
 ```
 
-Query both Topics and confirm that `max.message.bytes` is `10485760` in the output:
+Query the default Topic and all routed Topics that might receive messages to confirm that each Topic's `max.message.bytes` has been updated to the target value. The following commands correspond to the preceding example. If you have not configured a Topic dispatcher, query only the default Topic.
 
 ```shell
 bin/kafka-configs.sh --bootstrap-server localhost:9092 \
@@ -140,19 +140,38 @@ bin/kafka-configs.sh --bootstrap-server localhost:9092 \
   --entity-type topics --entity-name routed-topic --describe
 ```
 
-Then update the changefeed Sink URI. The following example uses `cdc cli changefeed update --sink-uri` to set `max-message-bytes` to the same value. The `--sink-uri` option takes a complete URI, so preserve the existing protocol, authentication settings, and other parameters. If the changefeed is running, pause it first.
+Then update the changefeed Sink URI. The `--sink-uri` option takes a complete URI, so preserve the existing protocol, authentication settings, and other parameters. The following example sets `max-message-bytes` to `10485760`. Replace this value with your target limit.
+
+If the changefeed is running, pause it first, then query it and confirm that its state is `stopped`. If the changefeed is already in the `stopped` or `failed` state, you can proceed directly to the update command.
 
 ```shell
 cdc cli changefeed pause --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
 
-cdc cli changefeed update --server=http://127.0.0.1:8300 --changefeed-id=test-cf \
-  --sink-uri='kafka://127.0.0.1:9092/default-topic?protocol=canal-json&max-message-bytes=10485760'
-
-cdc cli changefeed resume --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```shell
 cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
 ```
 
-Finally, confirm that the Sink URI in the query result contains `max-message-bytes=10485760`, the changefeed state is `normal`, and `checkpoint-ts` continues to advance.
+Run the update command, review the configuration differences in the output, and confirm the changes when prompted:
+
+```shell
+cdc cli changefeed update --server=http://127.0.0.1:8300 --changefeed-id=test-cf \
+  --sink-uri='kafka://127.0.0.1:9092/default-topic?protocol=canal-json&max-message-bytes=10485760'
+```
+
+After confirming that the update succeeds, resume the changefeed:
+
+```shell
+cdc cli changefeed resume --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+After resuming the changefeed, run the following command to confirm that the Sink URI in the query result contains the updated `max-message-bytes` parameter and that the changefeed state returns to `normal`:
+
+```shell
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+Repeat the query after an interval to confirm that `checkpoint-ts` continues to advance, and check the TiCDC logs for any recurring message size errors.
 
 ## How can I find out whether a DDL statement fails to execute in downstream during TiCDC replication? How to resume the replication?
 
