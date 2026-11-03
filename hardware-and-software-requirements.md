@@ -218,7 +218,7 @@ As an open-source distributed SQL database, TiDB requires the following network 
 | TiKV |  20180 | the communication port to report TiKV status |
 | PD | 2379 | the communication port between TiDB and PD |
 | PD | 2380 | the inter-node communication port within the PD cluster |
-| TiFlash | 9000 | the TiFlash TCP service port |
+| TiFlash | 9000 | the TiFlash TCP service port (disabled by default when TiFlash v7.1.0 or later is deployed using TiUP v1.12.5 or later; not recommended to configure) |
 | TiFlash | 3930 | the TiFlash RAFT and Coprocessor service port |
 | TiFlash | 20170 |the TiFlash Proxy service port |
 | TiFlash | 20292 | the port for Prometheus to pull TiFlash Proxy metrics |
