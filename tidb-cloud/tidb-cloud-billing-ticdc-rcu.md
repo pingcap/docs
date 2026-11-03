@@ -14,12 +14,12 @@ TiDB Cloud Dedicatedは、[チェンジフィード](/tidb-cloud/changefeed-over
 
 ### TiCDC RCUの数 {#number-of-ticdc-rcus}
 
-次の表は、変更フィードの仕様と対応するレプリケーション パフォーマンスを示しています。
+次の表は、変更フィードの仕様と対応するレプリケーションパフォーマンスを示しています。
 
 | 仕様      | 最大のレプリケーションパフォーマンス |
 | ------- | ------------------ |
-| 2台のRCU  | 5,000行/秒           |
-| 4つのRCU  | 10,000行/秒          |
+| 2 RCU  | 5,000行/秒           |
+| 4 RCU  | 10,000行/秒          |
 | 8 RCU   | 20,000行/秒          |
 | 16 RCU  | 40,000行/秒          |
 | 24 RCU  | 60,000行/秒          |
@@ -45,4 +45,4 @@ TiDB Cloud Dedicatedは、[チェンジフィード](/tidb-cloud/changefeed-over
 
 **Private Link**または**Private Service Connect**のネットワーク接続方法を選択した場合、追加の**Private Data Link**料金が発生します。これらの料金は[データ転送コスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#data-transfer-cost)カテゴリに該当します。
 
-**Private Data Link**の料金は**$0.01/GiB**で、**Data Processed**[AWS インターフェースエンドポイントの料金](https://aws.amazon.com/privatelink/pricing/#Interface_Endpoint_pricing) 、**Consumer data processing**量[Google Cloud プライベートサービス コネクトの料金](https://cloud.google.com/vpc/pricing#psc-forwarding-rules) 、**Inbound/Outbound Data Processed**量[Azure Private Link の料金](https://azure.microsoft.com/en-us/pricing/details/private-link/)と同じです。
+**Private Data Link**の料金は**$0.01/GiB**で、[AWS インターフェースエンドポイントの料金](https://aws.amazon.com/privatelink/pricing/#Interface_Endpoint_pricing)の**Data Processed**、[Google Cloud Private Service Connect の料金](https://cloud.google.com/vpc/pricing#psc-forwarding-rules)の**Consumer data processing**、[Azure Private Link の料金](https://azure.microsoft.com/en-us/pricing/details/private-link/)の**Inbound/Outbound Data Processed**と同じです。

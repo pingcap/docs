@@ -17,17 +17,17 @@ ACIDとは、トランザクションの4つの主要な特性、すなわち原
 
 - **一貫性**とは、トランザクションによってデータベースが常に一貫性のある状態から別の一貫性のある状態へと移行することを意味します。TiDBでは、メモリにデータを書き込む前にデータの一貫性が確保されます。
 
-- **分離**とは、進行中のトランザクションが完了するまで他のトランザクションから見えないことを意味します。これにより、同時実行トランザクションは一貫性を損なうことなくデータの読み書きを行うことができます。TiDB は現在、 `REPEATABLE READ`の分離レベルをサポートしています。
+- **分離性**とは、進行中のトランザクションが完了するまで他のトランザクションから見えないことを意味します。これにより、同時実行トランザクションは一貫性を損なうことなくデータの読み書きを行えます。TiDB は現在、 `REPEATABLE READ`の分離レベルをサポートしています。
 
 - **永続性**とは、一度トランザクションがコミットされると、システム障害が発生した場合でもコミットされた状態が維持されることを意味します。TiKVは永続ストレージを使用して永続性を確保しています。
 
 ## C {#c}
 
-### クラスタ {#cluster}
+### クラスター {#cluster}
 
 TiDB Cloudでは、クラスターとは、ノードトポロジー、インスタンスタイプ、ストレージ構成、スケーリングモデルなどの明確なインフラストラクチャの詳細を含む、専用のクラウドデプロイメントのことです。
 
-TiDB Cloudのプランの中で、このデプロイメントモデルを採用しているのはTiDB Cloud Dedicatedクラスタのみです。
+TiDB Cloudのプランの中で、このデプロイメントモデルを採用しているのはTiDB Cloud Dedicatedクラスターのみです。
 
 ### クレジット {#credit}
 
@@ -95,11 +95,11 @@ TiDB Cloudの[組織](#organization)に招待されたユーザー。
 
 ### 組織 {#organization}
 
-TiDB Cloudアカウント (任意の数の複数のメンバー アカウントを持つ管理アカウントを含む)、[プロジェクト](#project)、および[リソース](#tidb-cloud-resource)を管理するための最上位のコンテナー。
+TiDB Cloudアカウント (任意の数の複数のメンバーアカウントを持つ管理アカウントを含む)、[プロジェクト](#project)、および[リソース](#tidb-cloud-resource)を管理するための最上位のコンテナー。
 
 ### 組織のメンバー {#organization-members}
 
-組織メンバーとは、組織のオーナーまたはプロジェクトのオーナーから組織への参加を招待されたユーザーのことです。組織メンバーは、組織内のメンバーを閲覧したり、組織内のプロジェクトに招待されたりすることができます。
+組織メンバーとは、組織のオーナーまたはプロジェクトのオーナーから組織への参加を招待されたユーザーのことです。組織メンバーは、組織内のメンバーを閲覧したり、組織内のプロジェクトに招待されたりできます。
 
 ## P {#p}
 
@@ -116,9 +116,9 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 プロジェクトの機能はプロジェクトの種類によって異なります。現在、プロジェクトには以下の3種類があります。
 
-- **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスタでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスタの設定をプロジェクトごとに個別に管理できます。
+- **TiDB Dedicatedプロジェクト**：このプロジェクトタイプは、 TiDB Cloud Dedicatedクラスターでのみ使用されます。RBAC、ネットワーク、メンテナンス、アラート購読、暗号化アクセスなど、 TiDB Cloud Dedicatedクラスターの設定をプロジェクトごとに個別に管理できます。
 - **TiDB X プロジェクト**: このプロジェクトタイプは TiDB X インスタンスでのみ使用されます。プロジェクトごとに TiDB X インスタンスの RBAC を管理できます。TiDB X プロジェクトは [**My TiDB**](https://tidbcloud.com/tidbs) ページでプロジェクトを作成する際のデフォルトのプロジェクトタイプです。
-- **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナとして機能するため、これらのインスタンスには、プロジェクト ID を使用して TiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) エンドポイントから取得できます。
+- **TiDB X 仮想プロジェクト**: このプロジェクトは仮想プロジェクトであり、管理機能は提供しません。これは、どのプロジェクトにも属さない TiDB X インスタンスの仮想コンテナーとして機能するため、これらのインスタンスには、プロジェクト ID を使用して TiDB Cloud API 経由でアクセスできます。各組織には一意の仮想プロジェクト ID があります。この ID は、TiDB Cloud API の [List all accessible projects](https://docs.pingcap.com/tidbcloud/api/v1beta/#tag/Project/operation/ListProjects) エンドポイントから取得できます。
 
 これらのプロジェクトタイプの違いの詳細については、 [プロジェクト](/tidb-cloud/manage-user-access.md#projects)を参照してください。
 
@@ -152,11 +152,11 @@ TiDB Cloudでは、プロジェクトを使用してTiDBリソースをグルー
 
 ### レプリカ {#replica}
 
-同一または異なるリージョンに配置される、同じデータを含む独立したデータベース。レプリカは、ディザスタリカバリ目的やパフォーマンス向上のためによく使用されます。
+同一または異なるリージョンに配置される、同じデータを含む独立したデータベース。レプリカは、ディザスターリカバリ目的やパフォーマンス向上のためによく使用されます。
 
 ### レプリケーションキャパシティユニット（RCU） {#replication-capacity-unit-rcu}
 
-TiDB Cloud は、[変更フィード](/tidb-cloud/changefeed-overview.md)のキャパシティを TiCDC Replication Capacity Unit (RCU) 単位で測定します。変更フィードを作成するときに、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。詳細については、 [変更フィードのコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)を参照してください。
+TiDB Cloud は、[変更フィード](/tidb-cloud/changefeed-overview.md)のキャパシティを TiCDCレプリケーションキャパシティユニット（RCU）単位で測定します。変更フィードを作成するときに、適切な仕様を選択できます。 RCU が高いほど、レプリケーションのパフォーマンスが向上します。これらの TiCDC 変更フィード RCU に対して料金が発生します。詳細については、 [変更フィードのコスト](https://www.pingcap.com/tidb-dedicated-pricing-details/#changefeed-cost)を参照してください。
 
 ### リクエストキャパシティユニット（RCU） {#request-capacity-unit-rcu}
 
@@ -179,7 +179,7 @@ TiDB Cloud Dedicatedおよび TiDB Self-Managedの場合、リクエストユニ
 
 ### 支出限度額 {#spending-limit}
 
-支出限度額は、特定のワークロードに対して1か月あたりに費やすことができる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
+支出限度額は、特定のワークロードに対して1か月あたりに費やせる最大金額を指します。これは、TiDB Cloud Starterインスタンスの予算を設定できるコスト管理メカニズムです。 [支出限度額](/tidb-cloud/manage-serverless-spend-limit.md)が0に設定されている場合、 TiDB Cloud Starterインスタンスは無料のままです。支出限度額が0より大きい場合は、クレジットカードを追加する必要があります。
 
 ## T {#t}
 
@@ -189,7 +189,7 @@ TiDB Cloudでは、クラスターはクラウド上に専用デプロイされ�
 
 ### TiDBノード {#tidb-node}
 
-トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、TiDB Cloud Dedicatedクラスタが処理できる同時クエリの数が増加します。
+トランザクションストアまたは分析ストアから返されたクエリのデータを集約するコンピューティングノード。TiDBノードの数を増やすと、TiDB Cloud Dedicatedクラスターが処理できる同時クエリの数が増加します。
 
 ### TiDB Cloudリソース {#tidb-cloud-resource}
 
@@ -206,7 +206,7 @@ TiDB Xアーキテクチャは、 TiDB Cloud Starter、 Essential、および Pr
 
 ### TiDB Xインスタンス {#tidb-x-instance}
 
-TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudサービスです。基盤となるクラスタトポロジーの管理や理解は不要です。
+TiDB Xインスタンスは、 [TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md)上に構築されたサービス指向のTiDB Cloudサービスです。基盤となるクラスタートポロジーの管理や理解は不要です。
 
 TiDB Cloudのプランのうち、 TiDB Cloud Starter、 Essential、およびPremiumはTiDB Xアーキテクチャを使用しています。したがって、「TiDB Xインスタンス」という表現は、 TiDB Cloud Starter、 Essential、またはPremiumインスタンスを指します。
 
@@ -220,7 +220,7 @@ TiKVからリアルタイムでデータを複製し、リアルタイムの分�
 
 ### トラフィックフィルター {#traffic-filter}
 
-SQLクライアント経由でTiDB Cloudリソースへのアクセスが許可されているIPアドレスとクラスレスドメイン間ルーティング（CIDR）アドレスのリスト。トラフィックフィルタはデフォルトでは空です。
+SQLクライアント経由でTiDB Cloudリソースへのアクセスが許可されているIPアドレスとクラスレスドメイン間ルーティング（CIDR）アドレスのリスト。トラフィックフィルターはデフォルトでは空です。
 
 ## V {#v}
 

@@ -5,17 +5,17 @@ summary: 顧客管理暗号化キー (CMEK) を使用して、Azure でホスト
 
 # Azure での顧客管理の暗号化キーを使用した保存時の暗号化 {#encryption-at-rest-using-customer-managed-encryption-keys-on-azure}
 
-顧客管理暗号鍵（CMEK）を使用すると、完全に管理可能な対称暗号鍵を利用して、 TiDB Cloud Dedicated クラスタ内の静的データを保護できます。この鍵はCMEK鍵と呼ばれます。
+顧客管理暗号化キー（CMEK）を使用すると、完全に管理可能な対称暗号鍵を利用して、 TiDB Cloud Dedicated クラスター内の静的データを保護できます。この鍵はCMEK鍵と呼ばれます。
 
-プロジェクトでCMEKを有効にすると、そのプロジェクト内で作成されるすべてのクラスタは、CMEK鍵を使用して静的データを暗号化します。さらに、これらのクラスタによって生成されるバックアップデータも同じ鍵を使用して暗号化されます。CMEKが有効になっていない場合、 TiDB Cloudはエスクロー鍵を使用して、クラスタ内のすべての保存データを暗号化します。
+プロジェクトでCMEKを有効にすると、そのプロジェクト内で作成されるすべてのクラスターは、CMEK鍵を使用して静的データを暗号化します。さらに、これらのクラスターによって生成されるバックアップデータも同じ鍵を使用して暗号化されます。CMEKが有効になっていない場合、 TiDB Cloudはエスクロー鍵を使用して、クラスター内のすべての保存データを暗号化します。
 
 ## 制限 {#restrictions}
 
 - 現在、 TiDB Cloud はCMEK を提供するために AWS KMS と Azure Key Vault の使用のみをサポートしています。
-- CMEK を使用するには、プロジェクトの作成時に CMEK を有効にし、クラスタを作成する前に CMEK 関連の設定を完了する必要があります。既存のプロジェクトでは CMEK を有効にできません。
+- CMEK を使用するには、プロジェクトの作成時に CMEK を有効にし、クラスターを作成する前に CMEK 関連の設定を完了する必要があります。既存のプロジェクトでは CMEK を有効にできません。
 - 現在、CMEK 対応プロジェクトでは、AWS と Azure でホストされる[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターのみ作成できます。
 - 現在、CMEK 対応プロジェクトでは、 [デュアルリージョンバックアップ](/tidb-cloud/backup-and-restore-concepts.md#dual-region-backup)はサポートされていません。
-- 現在、CMEK 対応プロジェクトでは、AWS と Azure で CMEK を有効化できます。クラウドプロバイダーごとに、リージョンごとに 1つの固有の暗号化キーを設定できます。選択したクラウドプロバイダーの暗号化キーを設定したリージョンでのみ、クラスタを作成できます。
+- 現在、CMEK 対応プロジェクトでは、AWS と Azure で CMEK を有効化できます。クラウドプロバイダーごとに、リージョンごとに 1つの固有の暗号化キーを設定できます。選択したクラウドプロバイダーの暗号化キーを設定したリージョンでのみ、クラスターを作成できます。
 
 ## CMEKを有効にする {#enable-cmek}
 
@@ -38,7 +38,7 @@ Azure Portal または Azure Resource Manager のいずれかでTiDB Cloudコン
 > **Note:**
 >
 > - キーのポリシーが要件を満たしており、権限不足やアカウントの問題などのエラーがないことを確認してください。これらのエラーがあると、このキーを使用してクラスターが誤って作成される可能性があります。
-> - Azure マネージド ディスクのクロステナント カスタマー マネージド キー (CMK) 機能は現在プレビュー段階であり、一部の Azure リージョンでのみご利用いただけます。現在、サポート対象は可用性リージョンのみです。詳細については、 [テナント間の顧客管理キーを使用してマネージド ディスクを暗号化する](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-cross-tenant-customer-managed-keys?tabs=azure-portal#preview-regional-availability)をご覧ください。
+> - Azure マネージドディスクのクロステナントカスタマーマネージドキー (CMK) 機能は現在プレビュー段階であり、一部の Azure リージョンでのみご利用いただけます。現在、サポート対象は可用性リージョンのみです。詳細については、 [テナント間の顧客管理キーを使用してマネージドディスクを暗号化する](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-cross-tenant-customer-managed-keys?tabs=azure-portal#preview-regional-availability)をご覧ください。
 
 <SimpleTab groupId="method">
 <div label="Use Azure portal" value="console">
@@ -55,13 +55,13 @@ TiDB Cloudコンソールと Azure ポータルを使用して CMEK を構成す
 
 5. **Key Management Service**で**Azure Key Vault**を選択し、暗号化キーが使用されるリージョンを選択します。
 
-6. TiDB が提供するエンタープライズ アプリケーションのサービス プリンシパルがテナント内にまだ存在しない場合は、作成してください。TiDB Cloudコンソールに**Microsoft Entra Application Name**と**ID**が表示されます。これらは、このプロセスと以降の手順で必要になります。サービス プリンシパルを作成するには、 **Create Service Principal**セクションから次のコマンドを実行します。
+6. TiDB が提供するエンタープライズアプリケーションのサービスプリンシパルがテナント内にまだ存在しない場合は、作成してください。TiDB Cloudコンソールに**Microsoft Entra Application Name**と**ID**が表示されます。これらは、このプロセスと以降の手順で必要になります。サービスプリンシパルを作成するには、 **Create Service Principal**セクションから次のコマンドを実行します。
 
     ```shell
     az ad sp create --id {Microsoft_Entra_Application_ID}
     ```
 
-    詳細については[Microsoft Entra ID のアプリケーションおよびサービス プリンシパル オブジェクト](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)を参照してください。
+    詳細については[Microsoft Entra ID のアプリケーションおよびサービスプリンシパルオブジェクト](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)を参照してください。
 
 7. Azureアカウントで Key Vault を作成するか、既存の Key Vault を選択します。以下の点を確認してください。
 
@@ -79,9 +79,9 @@ TiDB Cloudコンソールと Azure ポータルを使用して CMEK を構成す
     5. **+ Select members**をクリックし、現在のユーザーを検索してメンバーとして選択します。次に、 **Select**をクリックします。
     6. 設定を確認し、 **Review + assign**をクリックします。
 
-10. 暗号化キー用の TiDB 提供エンタープライズ アプリケーションに**Key Vault Crypto Service Encryption User**ロールを割り当てます。
+10. 暗号化キー用の TiDB 提供エンタープライズアプリケーションに**Key Vault Crypto Service Encryption User**ロールを割り当てます。
 
-    1. Key Vault で、作成した暗号化キー オブジェクトに移動します。
+    1. Key Vault で、作成した暗号化キーオブジェクトに移動します。
     2. **Add** > **Add role assignment**をクリックします。
     3. **Key Vault Crypto Service Encryption User**ロールを検索して選択し、 **Next**をクリックします。
     4. **Members**タブで、 **Assign access to**を**User, group, or service principal**に設定します。
@@ -109,15 +109,15 @@ TiDB Cloudコンソールと Azure Resource Manager を使用して CMEK を構�
 
 5. **Key Management Service**で**Azure Key Vault**を選択し、暗号化キーが使用可能なリージョンを指定します。
 
-6. TiDB が提供するエンタープライズ アプリケーションのサービス プリンシパルがテナント内にまだ存在しない場合は、作成してください。サービス プリンシパルを作成するには、 **Create Service Principal**セクションから次のコマンドを実行します。
+6. TiDB が提供するエンタープライズアプリケーションのサービスプリンシパルがテナント内にまだ存在しない場合は、作成してください。サービスプリンシパルを作成するには、 **Create Service Principal**セクションから次のコマンドを実行します。
 
     ```shell
     az ad sp create --id {Microsoft_Entra_Application_ID}
     ```
 
-    詳細については[Microsoft Entra ID のアプリケーションおよびサービス プリンシパル オブジェクト](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)を参照してください。
+    詳細については[Microsoft Entra ID のアプリケーションおよびサービスプリンシパルオブジェクト](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)を参照してください。
 
-7. Azureポータルで[Azure Resource Manager 用の TiDB カスタム デプロイメント テンプレート](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Ftcidm.blob.core.windows.net%2Fcmek%2Fazure_cmek_rmt.json%3Fsv%3D2015-04-05%26ss%3Db%26srt%3Dco%26sp%3Drl%26se%3D2029-03-01T00%3A00%3A01.0000000Z%26sig%3DIA02CymcFpYCwoTsqCSJVD%2F8Khh%2F0UAPrkKDeLMIIFc%3D)を開きます。**Subscription**と**Resource Group**を選択し、 **Instance Details**セクションに次のように入力します。
+7. Azureポータルで[Azure Resource Manager 用の TiDB カスタムデプロイメントテンプレート](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Ftcidm.blob.core.windows.net%2Fcmek%2Fazure_cmek_rmt.json%3Fsv%3D2015-04-05%26ss%3Db%26srt%3Dco%26sp%3Drl%26se%3D2029-03-01T00%3A00%3A01.0000000Z%26sig%3DIA02CymcFpYCwoTsqCSJVD%2F8Khh%2F0UAPrkKDeLMIIFc%3D)を開きます。**Subscription**と**Resource Group**を選択し、 **Instance Details**セクションに次のように入力します。
 
     - **Region**: Key Vault を作成する場所を選択します。これはクラスターのリージョンと一致する必要があります。
     - **Key Vault Name**: Azure Key Vault の名前を入力します。
@@ -137,15 +137,15 @@ TiDB Cloudコンソールと Azure Resource Manager を使用して CMEK を構�
 
 ### ステップ3. クラスターを作成する {#step-3-create-a-cluster}
 
-[ステップ1](#step-1-create-a-cmek-enabled-project)で作成したプロジェクトの下に、Azure でホストされるTiDB Cloud Dedicated クラスターを作成します。詳細な手順については、 [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
+[ステップ1](#step-1-create-a-cmek-enabled-project)で作成したプロジェクトの下に、Azure でホストされるTiDB Cloud Dedicated クラスターを作成します。詳細な手順については、 [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)を参照してください。
 
 クラウドプロバイダーとリージョンを選択すると、適切な暗号化キーが自動的に選択されます。プロバイダーとリージョンで利用可能な暗号化キーがない場合は、コンソールに暗号化キーの作成に役立つヒントが表示されます。
 
 > **Note:**
 >
-> CMEK が有効になっている場合、 TiDB Cloud は、クラスター ノードで使用される Premium SSD v2 とクラスター バックアップ用のストレージ BLOB の両方を CMEK で暗号化します。
+> CMEK が有効になっている場合、 TiDB Cloud は、クラスターノードで使用される Premium SSD v2 とクラスターバックアップ用のストレージ BLOB の両方を CMEK で暗号化します。
 
-## CMEKを回転させる {#rotate-cmek}
+## CMEKをローテーションする {#rotate-cmek}
 
 Azure Key Vaultで[暗号鍵の自動ローテーション](https://learn.microsoft.com/en-us/azure/key-vault/keys/how-to-configure-key-rotation)を設定できます。このローテーションを有効にすると、 TiDB Cloudのプロジェクト設定で**Encryption Access**を更新する必要はありません。
 

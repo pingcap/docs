@@ -1,19 +1,19 @@
 ---
 title: Use TiDB Cloud Starter with AI Tools
-summary: TiDB Cloud Starter クラスターを、Cursor、Claude Code、VS Code、Windsurf などのモデル コンテキスト プロトコル (MCP) をサポートする AI 搭載開発ツールに接続する方法を学習します。
+summary: TiDB Cloud Starter インスタンスを、Cursor、Claude Code、VS Code、Windsurf などのモデルコンテキストプロトコル (MCP) をサポートする AI 搭載開発ツールに接続する方法を学習します。
 ---
 
 # TiDB Cloud Starter を AI ツールと併用する {#use-tidb-cloud-starter-with-ai-tools}
 
-このドキュメントでは、Cursor、Claude Code、Visual Studio Code (VS Code)、Windsurf などのモデル コンテキスト プロトコル (MCP) をサポートする AI 搭載開発ツールにTiDB Cloud Starter クラスターを接続する方法について説明します。
+このドキュメントでは、Cursor、Claude Code、Visual Studio Code (VS Code)、Windsurf などのモデルコンテキストプロトコル (MCP) をサポートする AI 搭載開発ツールにTiDB Cloud Starter インスタンスを接続する方法について説明します。
 
-TiDB Cloud Starter クラスターを MCPサーバーとして構成すると、開発ツールの AI アシスタントを有効にして、データベーススキーマを照会し、データモデルを理解し、コンテキストに応じたコード提案を生成できるようになります。
+TiDB Cloud Starter インスタンスを MCPサーバーとして構成すると、開発ツールの AI アシスタントを有効にして、データベーススキーマを照会し、データモデルを理解し、コンテキストに応じたコード提案を生成できるようになります。
 
 ## 始める前に {#before-you-begin}
 
 このガイドを完了するには、次のものが必要です。
 
-- TiDB Cloud Starter クラスター。まだお持ちでない場合は、 [TiDB Cloud Starterクラスターを作成する](/develop/dev-guide-build-cluster-in-cloud.md)を実行できます。
+- TiDB Cloud Starter インスタンス。まだお持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)を実行できます。
 - [Python 3.11以上](https://www.python.org/downloads/)がインストールされていること。
 - [uv](https://docs.astral.sh/uv/getting-started/installation/)がインストールされていること。
 - MCP をサポートする AI 開発ツール:
@@ -25,9 +25,9 @@ TiDB Cloud Starter クラスターを MCPサーバーとして構成すると、
 
 ## AIツールに接続する {#connect-to-ai-tools}
 
-TiDB CloudでTiDB Cloud Starter クラスターを作成したら、次の手順を実行してそれを AI ツールに接続します。
+TiDB CloudでTiDB Cloud Starter インスタンスを作成したら、次の手順を実行してそれを AI ツールに接続します。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、ターゲットクラスターの名前をクリックして概要ページに移動します。次に、右上隅の**Use with AI Tools**をクリックします。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、ターゲットのTiDB Cloud Starter インスタンスの名前をクリックして概要ページに移動します。
 
 2. **Access `your_cluster_name` with AI tools**ダイアログで、AI ツールがアクセスする**Branch**と**Database**を選択します。
 
@@ -81,7 +81,7 @@ Cursor を TiDB の MCP クライアントとして構成するには、次の�
 
 Claude Code を TiDB の MCP クライアントとして構成するには、次のいずれかの方法を使用できます。
 
-- **方法 1** : [TiDB Cloudコンソール](https://tidbcloud.com/)の**Access `your_cluster_name` with AI tools**ダイアログからセットアップ コマンドをコピーし、ターミナルで実行します。
+- **方法 1** : [TiDB Cloudコンソール](https://tidbcloud.com/)の**Access `your_cluster_name` with AI tools**ダイアログからセットアップコマンドをコピーし、ターミナルで実行します。
 
     ```bash
     claude mcp add --transport stdio TiDB \

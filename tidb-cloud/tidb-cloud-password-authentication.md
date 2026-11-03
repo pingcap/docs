@@ -9,7 +9,7 @@ summary: TiDB Cloudコンソールでパスワードを管理し、多要素認�
 
 ## サインアップ {#sign-up}
 
-電子メールとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)するか、 TiDB Cloudへのシングル サインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択できます。
+電子メールとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)するか、 TiDB Cloudへのシングルサインオン (SSO) 用に Google、GitHub、または Microsoft アカウントを選択できます。
 
 - メールアドレスとパスワードを使用してTiDB Cloudにサインアップすると、このドキュメントに従ってパスワードを管理できます。
 - TiDB Cloudへの Google、GitHub、または Microsoft SSO を選択した場合、パスワードは選択したプラットフォームによって管理され、 TiDB Cloudコンソールを使用して変更できません。
@@ -18,7 +18,7 @@ summary: TiDB Cloudコンソールでパスワードを管理し、多要素認�
 
 1. TiDB Cloud [サインアップ](https://tidbcloud.com/free-trial)ページに移動し、登録情報を入力します。
 
-2. プライバシー ポリシーとサービス契約を読み、 **I agree to the Privacy Policy and Services Agreement**を選択します。
+2. プライバシーポリシーとサービス契約を読み、 **I agree to the Privacy Policy and Services Agreement**を選択します。
 
 3. **Sign up**をクリックします。
 
@@ -46,7 +46,7 @@ TiDB Cloudコンソールの左下隅で<MDSvgIcon name="icon-top-account-settin
 
 TiDB Cloudは、登録ユーザーに対してデフォルトのパスワードポリシーを設定します。パスワードがポリシーを満たしていない場合は、パスワード設定時にプロンプトが表示されます。
 
-デフォルトのパスワード ポリシーは次のとおりです。
+デフォルトのパスワードポリシーは次のとおりです。
 
 - 長さは 8 文字以上。
 - 少なくとも 1つの大文字 (A から Z)。
@@ -83,7 +83,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 > **Note:**
 >
 > - このセクションは、メールアドレスとパスワードを使用してTiDB Cloudに[サインアップ](https://tidbcloud.com/free-trial)する場合にのみ適用されます。Google、GitHub、またはMicrosoft SSOを使用してTiDB Cloudにサインアップする場合は、選択したID管理プラットフォームでMFAを有効にできます。
-> - SSO ログイン シナリオでTiDB Cloud MFA を有効にしている場合は、アカウントのセキュリティを確保するために、 **2025年 9月 30日**までに MFA 管理を SSO ID 管理プラットフォームに移行してください。
+> - SSO ログインシナリオでTiDB Cloud MFA を有効にしている場合は、アカウントのセキュリティを確保するために、 **2025年 9月 30日**までに MFA 管理を SSO ID 管理プラットフォームに移行してください。
 
 多要素認証（MFA）は、認証アプリを使用してログイン時にワンタイム認証コードを生成することで、セキュリティを強化します。ログインすると、 TiDB Cloud はパスワードとMFA認証コードの両方を検証します。このパスワードを生成するには、iOS または Android App Store で提供されている Google Authenticator や Authy などの認証アプリを使用できます。
 
@@ -106,7 +106,7 @@ TiDB Cloudは、登録ユーザーに対してデフォルトのパスワード�
 > **Note:**
 >
 > - アカウントのセキュリティを維持するために、回復コードを安全に保管する必要があります。
-> - ログイン時に MFA 認証にリカバリ コードを使用すると、認証が成功するとシステムによって新しいリカバリ コードが自動的に生成されます。
+> - ログイン時に MFA 認証にリカバリコードを使用すると、認証が成功するとシステムによって新しいリカバリコードが自動的に生成されます。
 
 ### MFAを無効にする {#disable-mfa}
 

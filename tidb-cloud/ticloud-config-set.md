@@ -17,7 +17,7 @@ ticloud config set <property-name> <value> [flags]
 | ------- | ------------------------------------------------------------------ | --- |
 | public-key  | TiDB Cloud API の公開キーを指定します。                                        | はい  |
 | private-key | TiDB Cloud API の秘密キーを指定します。                                        | はい  |
-| API URL | TiDB Cloudの基本 API URL を指定します (デフォルトは`https://api.tidbcloud.com` )。 | いいえ |
+| api-url | TiDB Cloudの基本 API URL を指定します (デフォルトは`https://api.tidbcloud.com` )。 | いいえ |
 
 > **Note:**
 >
@@ -25,7 +25,7 @@ ticloud config set <property-name> <value> [flags]
 
 ## 例 {#examples}
 
-アクティブ プロファイルの公開キーの値を設定します。
+アクティブプロファイルの公開キーの値を設定します。
 
 ```shell
 ticloud config set public-key <public-key>
@@ -45,7 +45,7 @@ ticloud config set api-url https://api.tidbcloud.com
 
 > **Note:**
 >
-> TiDB Cloud APIのURLはデフォルトで`https://api.tidbcloud.com`設定されています。通常は設定する必要はありません。
+> TiDB Cloud APIのURLはデフォルトで`https://api.tidbcloud.com`に設定されています。通常は設定する必要はありません。
 
 ## フラグ {#flags}
 
@@ -57,10 +57,10 @@ ticloud config set api-url https://api.tidbcloud.com
 
 | フラグ               | 説明                                                                             | 必須  | 注記                                                      |
 | ----------------- | ------------------------------------------------------------------------------ | --- | ------------------------------------------------------- |
-| --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話モードでのみ機能します。対話モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
-| -P, --profile 文字列 | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
-| -D, --debug       | デバッグ モードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| --no-color             | 出力のカラーを無効にします。                                                                 | いいえ | 非対話型モードでのみ機能します。対話型モードでは、一部のUIコンポーネントで色の無効化が機能しない場合があります。 |
+| -P, --profile string | このコマンドで使用するアクティブ[ユーザープロフィール](/tidb-cloud/cli-reference.md#user-profile)を指定します。 | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
+| -D, --debug       | デバッグモードを有効にします。                                                               | いいえ | 非対話型モードと対話型モードの両方で動作します。                                |
 
 ## フィードバック {#feedback}
 
-TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[問題](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。
+TiDB Cloud CLI についてご質問やご提案がございましたら、お気軽に[Issue](https://github.com/tidbcloud/tidbcloud-cli/issues/new/choose)を作成してください。また、皆様からの貢献も歓迎いたします。

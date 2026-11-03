@@ -30,7 +30,7 @@ TiDB Cloud Account IDとTiDB Cloud External IDは環境およびクラスター�
 2. ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
 3. ロールの概要ページで、 **Trust relationships**タブをクリックすると、信頼されたエンティティが表示されます。
 
-以下は信頼エンティティのサンプルです。
+信頼エンティティは、`<TiDB-Cloud-Account-ID>`と`<TiDB-Cloud-External-ID>`をコンソールから取得した値に置き換えた、次のサンプルのようになっている必要があります。
 
 ```
 {
@@ -39,12 +39,12 @@ TiDB Cloud Account IDとTiDB Cloud External IDは環境およびクラスター�
         {
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:aws:iam::380838443567:root"
+                "AWS": "arn:aws:iam::<TiDB-Cloud-Account-ID>:root"
             },
             "Action": "sts:AssumeRole",
             "Condition": {
                 "StringEquals": {
-                    "sts:ExternalId": "696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe"
+                    "sts:ExternalId": "<TiDB-Cloud-External-ID>"
                 }
             }
         }
@@ -52,10 +52,7 @@ TiDB Cloud Account IDとTiDB Cloud External IDは環境およびクラスター�
 }
 ```
 
-サンプル信頼エンティティの場合:
-
-- `380838443567`はTiDB CloudアカウントIDです。信頼エンティティのこのフィールドがTiDB CloudアカウントIDと一致していることを確認してください。
-- `696e6672612d617069a79c22fa5740944bf8bb32e4a0c4e3fe`はTiDB Cloud外部IDです。信頼できるエンティティのこのフィールドがTiDB Cloud外部IDと一致していることを確認してください。
+`Principal.AWS`フィールドがコンソールに表示される**TiDB Cloud Account ID**と一致し、`sts:ExternalId`条件がコンソールに表示される**TiDB Cloud External ID**と一致していることを確認してください。
 
 ### IAMロールが存在するかどうかを確認する {#check-whether-the-iam-role-exists}
 
@@ -120,7 +117,7 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 ### IAMロールのポリシーを確認する {#check-the-policy-of-the-iam-role}
 
 1. AWS マネジメントコンソールで、 **IAM** > **Access Management** > **Roles**に移動します。
-2. ロールのリストで、ターゲットTiDBクラスター用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
+2. ロールのリストで、ターゲットTiDB Cloudリソース用に作成したロールを見つけてクリックします。ロールの概要ページが表示されます。
 3. ロールの概要ページの**Permission policies**領域に、ポリシーの一覧が表示されます。各ポリシーごとに以下の手順を実行してください。
     1. ポリシーをクリックすると、ポリシーの概要ページが表示されます。
     2. ポリシーの概要ページで、 **{}JSON**タブをクリックして権限ポリシーを確認します。ポリシー内の`Resource`フィールドが正しく設定されていることを確認してください。
@@ -161,7 +158,7 @@ IAMユーザーのポリシーを確認するには、次の手順を実行し�
 }
 ```
 
-このサンプル ポリシーでは、次の点に注意してください。
+このサンプルポリシーでは、次の点に注意してください。
 
 - `"arn:aws:s3:::tidb-cloud-source-data/mydata/*"`の`"arn:aws:s3:::tidb-cloud-source-data"`はサンプルの S3 バケット ARN で、 `/mydata/*`はデータストレージ用に S3 バケットのルートレベルでカスタマイズできるディレクトリです。ディレクトリの末尾は`/*` （例： `"<Your S3 bucket ARN>/<Directory of your source data>/*"` ）でなければなりません。 `/*`が追加されていない場合、 `AccessDenied`エラーが発生します。
 

@@ -5,14 +5,14 @@ summary: ローカルファイルをTiDB Cloud Starter にインポートする�
 
 # ローカルファイルをTiDB Cloud Starterにインポートする {#import-local-files-to-tidb-cloud-starter}
 
-ローカルファイルをTiDB Cloud Starterに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDBクラスターに素早くインポートされます。この方法を使用すると、クラウドストレージや認証情報を入力する必要がありません。インポートプロセス全体が迅速かつスムーズです。
+ローカルファイルをTiDB Cloud Starterに直接インポートできます。タスク設定は数回クリックするだけで完了し、ローカルCSVデータがTiDB Cloud Starterインスタンスに素早くインポートされます。この方法を使用すると、クラウドストレージや認証情報を入力する必要がありません。インポートプロセス全体が迅速かつスムーズです。
 
 現在、この方法では、1つのタスクに対して 1つの CSV ファイルを既存の空のテーブルまたは新しいテーブルにインポートすることがサポートされています。
 
 ## 制限事項 {#limitations}
 
 - 現在、 TiDB Cloud は、1つのタスクにつき 250 MiB 以内の CSV 形式のローカルファイルのインポートのみをサポートしています。
-- ローカルファイルのインポートは、 TiDB Cloud Starter クラスターでのみサポートされ、 TiDB Cloud Essential クラスターおよび TiDB Cloud Dedicated クラスターではサポートされません。
+- ローカルファイルのインポートは、 TiDB Cloud Starter インスタンスでのみサポートされ、 TiDB Cloud Essential インスタンスおよび TiDB Cloud Dedicated クラスターではサポートされません。
 - 複数のインポートタスクを同時に実行できません。
 
 ## ローカルファイルをインポートする {#import-local-files}
@@ -23,7 +23,7 @@ summary: ローカルファイルをTiDB Cloud Starter にインポートする�
 
         > **Tip:**
         >
-        > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+        > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
     2. ターゲット TiDB Cloud Starter インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Import**をクリックします。
 
@@ -72,13 +72,13 @@ summary: ローカルファイルをTiDB Cloud Starter にインポートする�
 
 7. 必要に応じて CSV 構成を編集します。
 
-    **Edit CSV configuration**をクリックすると、Backslash Escape、Separator、Delimiterを設定して、よりきめ細かな制御を行うことができます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
+    **Edit CSV configuration**をクリックすると、Backslash Escape、Separator、Delimiterを設定して、よりきめ細かな制御を行えます。CSV設定の詳細については、 [データのインポートのためのCSV構成](/tidb-cloud/csv-config-for-import-data.md)を参照してください。
 
 8. **Start Import**をクリックします。
 
     **Import Task Detail**ページでインポートの進行状況を確認できます。警告や失敗したタスクがある場合は、詳細を確認して解決できます。
 
-9. インポートタスクが完了したら、 **Explore your data by SQL Editor**をクリックして、インポートしたデータに対してクエリを実行できます。SQLエディタの使用方法の詳細については、 [SQL Editor でデータを探索する](/tidb-cloud/explore-data-with-sql-editor.md)をご覧ください。
+9. インポートタスクが完了したら、 **Explore your data by SQL Editor**をクリックして、インポートしたデータに対してクエリを実行できます。SQLエディターの使用方法の詳細については、 [SQL Editor でデータを探索する](/tidb-cloud/explore-data-with-sql-editor.md)をご覧ください。
 
 10. **Import**ページで、 **Action**列の**...** > **View**をクリックして、インポートタスクの詳細を確認できます。
 
