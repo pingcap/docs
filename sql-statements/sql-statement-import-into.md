@@ -227,6 +227,29 @@ SET GLOBAL tidb_server_memory_limit='75%';
 > - If the KV range overlap in a source data file is low, enabling Global Sort might decrease import performance. This is because when Global Sort is enabled, TiDB needs to wait for the completion of local sorting in all sub-jobs before proceeding with the Global Sort operations and subsequent import.
 > - After an import job using Global Sort completes, the files stored in the cloud storage for Global Sort are cleaned up asynchronously in a background thread.
 
+### Asynchronous preparation
+
+<CustomContent platform="tidb-cloud" plan="starter,essential,premium">
+
+On TiDB X instances, `IMPORT INTO ... FROM FILE` uses [Global Sort](#global-sort). TiDB creates the import job first and then prepares it asynchronously in the background. The preparation work includes:
+
+- Listing the source files that match `fileLocation`.
+- Detecting the file format when the `FORMAT` clause is omitted.
+- Calculating resource-related parameters, such as the import concurrency.
+- Splitting the source files into chunks for parallel processing.
+
+Before the preparation finishes, the job is in the `preparing` phase. Because the source files have not been listed yet, the `Source_File_Size` field in [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md) is `N/A` until the preparation succeeds.
+
+If you execute `IMPORT INTO ... FROM FILE` with the `DETACHED` option, the statement returns immediately after the import job is created. You can then use [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md) to check whether the preparation is still running.
+
+> **Note:**
+>
+> The preparation time grows with the number and size of the source files. For a large single-table import, such as an import of tens of TiB, the `preparing` phase can take a noticeable amount of time even when you execute the statement with the `DETACHED` option, and the import job does not import any data during this period. Before you take any action on the job, such as canceling it, check the job phase with [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md).
+
+For {{{ .starter }}} instances, TiDB prepares the import job synchronously, so the `preparing` phase is not shown in [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md).
+
+</CustomContent>
+
 ### Output
 
 When `IMPORT INTO ... FROM FILE` completes the import or when the `DETACHED` mode is enabled, TiDB returns the current job information in the output, as shown in the following examples. For the description of each field, see [`SHOW IMPORT JOB(s)`](/sql-statements/sql-statement-show-import-job.md).
