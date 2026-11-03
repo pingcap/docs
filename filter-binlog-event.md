@@ -22,7 +22,6 @@ filters:
     schema-pattern: "test_*"
     table-pattern: "t_*"
     events: ["truncate table", "drop table"]
-    sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
     action: Ignore
 ```
 
@@ -103,21 +102,29 @@ filters:
     action: Do
 ```
 
-### Filter out SQL statements not supported by TiDB
+### Handle SQL statements that TiDB does not support or that DM cannot parse
 
-To filter out SQL statements not supported by TiDB, configure a `filter-procedure-rule`, as shown below:
+You do not need to configure filters for `CREATE PROCEDURE`, `DROP PROCEDURE`, or `ALTER PROCEDURE`. DM skips these statements automatically.
 
-```
-filters:
-  filter-procedure-rule:
-    schema-pattern: "*"
-    sql-pattern: [".*\\s+DROP\\s+PROCEDURE", ".*\\s+CREATE\\s+PROCEDURE", "ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
-    action: Ignore
-```
+When you add or drop a partition in MySQL, DM normally replicates the change to TiDB. You do not need a filter for partition operations that both DM and TiDB support. To check which operations TiDB supports for your table's partition type, see [Partition management](/partitioned-table.md#partition-management).
+
+If DM reports a parsing error for an `ALTER TABLE` statement that uses `ADD PARTITION` or `DROP PARTITION` and you do not need to replicate the partition change to TiDB, you can use the following rule to skip the statement. A parsing error in DM does not necessarily mean that TiDB does not support the operation.
+
+When DM cannot parse a statement, it cannot apply filters that target a specific schema or table. In this case, you need a global filtering rule with `schema-pattern: "*"` and no `table-pattern`. This rule applies to matching statements for all tables in the migration task.
 
 > **Warning:**
 >
 > To avoid filtering out data that needs to be migrated, configure the global filtering rule as strictly as possible.
+>
+> The following patterns match SQL text, including string literals, and might unintentionally filter out other DDL statements. For example, an `ALTER TABLE ... ADD COLUMN` statement containing `ADD PARTITION` in a default value might also be skipped. Before using this rule, make sure the patterns do not match any DDL statements you need to replicate.
+
+```
+filters:
+  filter-partition-rule:
+    schema-pattern: "*"
+    sql-pattern: ["ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
+    action: Ignore
+```
 
 ## See also
 

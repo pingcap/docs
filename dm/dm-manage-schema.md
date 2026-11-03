@@ -174,7 +174,7 @@ Save the `CREATE TABLE` statement above as a file (for example, `db_single.t1-sc
 {{< copyable "shell-regular" >}}
 
 ```bash
-operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.t1-schema.sql
+binlog-schema update -s mysql-replica-01 task_single db_single t1 db_single.t1-schema.sql
 ```
 
 ```
