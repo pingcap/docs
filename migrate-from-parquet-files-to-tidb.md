@@ -69,7 +69,7 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
+# "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster can provide only limited service. By default, TiDB Lightning pauses scheduling only for the target table's Regions, but the import might still affect cluster performance.
 backend = "local"
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 # For more information on import mode, refer to <https://docs.pingcap.com/tidb/stable/tidb-lightning-overview#tidb-lightning-architecture>
@@ -83,10 +83,10 @@ data-source-dir = "${data-path}" # A local path or S3 path. For example, 's3://m
 [tidb]
 # The target cluster.
 host = "${host}"            # e.g.: 172.16.32.1
-port = "${port}"            # e.g.: 4000
+port = ${port}              # e.g.: 4000
 user = "${user_name}"     # e.g.: "root"
 password = "${password}"  # e.g.: "rootroot"
-status-port = "${status-port}" # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
+status-port = ${status-port}  # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 

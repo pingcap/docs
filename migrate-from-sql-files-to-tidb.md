@@ -15,7 +15,7 @@ This document describes how to migrate data from MySQL SQL files to TiDB using T
 
 ## Step 1. Prepare SQL files
 
-Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning recursively searches for all `.sql` files in this directory and its subdirectories.
+Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning recursively searches for `.sql` files in this directory and its subdirectories, but the data files must follow the default naming patterns such as `${db_name}.${table_name}.sql` or `${db_name}.${table_name}.001.sql`. If your SQL files use different names, configure [`[[mydumper.files]]`](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files) to match them.
 
 ## Step 2. Define the target table schema
 
@@ -45,7 +45,7 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local": Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster cannot provide any service.
+# "local": Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster can provide only limited service. By default, TiDB Lightning pauses scheduling only for the target table's Regions, but the import might still affect cluster performance.
 # "tidb": The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
 
 backend = "local"
@@ -59,10 +59,10 @@ data-source-dir = "${data-path}" # Local or S3 path, such as 's3://my-bucket/sql
 [tidb]
 # The information of target cluster
 host = "${host}"              # For example, 172.16.32.1
-port = "${port}"              # For example, 4000
+port = ${port}                # For example, 4000
 user = "${user_name}"         # For example, "root"
 password = "${password}"      # For example, "rootroot"
-status-port = "${status-port}"  # During the import process, TiDB Lightning needs to obtain table schema information from the "Status Port" of TiDB, such as 10080.
+status-port = ${status-port}    # During the import process, TiDB Lightning needs to obtain table schema information from the "Status Port" of TiDB, such as 10080.
 pd-addr = "${ip}:${port}"     # The address of the cluster's PD. TiDB Lightning obtains some information through PD, such as 172.16.31.3:2379. When backend = "local", you must correctly specify status-port and pd-addr. Otherwise, the import will encounter errors.
 ```
 
