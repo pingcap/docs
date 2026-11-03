@@ -224,6 +224,9 @@ The `security` section specifies certificates and keys for TLS connections withi
 - Default value: `"local"`
 - Value options:
     - `"local"`: [Physical import mode](/tidb-lightning/tidb-lightning-physical-import-mode.md), used by default. It applies to large dataset import, for example, greater than 1 TiB. However, during the import, downstream TiDB can provide only limited service. If your TiDB Lightning version is v7.1.0 or later and your TiDB version is v6.1.0 or later, TiDB Lightning pauses scheduling only for the target table's Regions by default. The import might still affect cluster performance.
+
+        During import, do not perform DDL or DML operations on the target table. Avoid reading from the target table because the results might be inconsistent.
+
     - `"tidb"`: [Logical import mode](/tidb-lightning/tidb-lightning-logical-import-mode.md). You can use this mode for small dataset import, for example, smaller than 1 TiB. During the import, downstream TiDB is available to provide services.
 
 #### `parallel-import`
@@ -446,6 +449,7 @@ Configures how CSV files are parsed.
 
 - Specifies the line terminator.
 - Default value: `""`, which means both `"\n"` (LF) and `"\r\n"` (CRLF) are line terminators.
+- If you set `mydumper.strict-format = true`, you need to set this parameter to a non-empty value that matches the line terminator in your source file. If this value is empty, TiDB Lightning reports a configuration error.
 
 #### `header`
 
