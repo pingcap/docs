@@ -2719,7 +2719,7 @@ Assume that you have a cluster with 4 TiDB nodes and multiple TiKV nodes. In thi
 ### tidb_enable_point_get_cache
 
 - Scope: SESSION
-- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): YES
+- Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Boolean
 - Default value: `OFF`
 - When you set the table lock type of [`LOCK TABLES`](/sql-statements/sql-statement-lock-tables-and-unlock-tables.md) to `READ`, setting this variable to `ON` enables caching of point query results, reducing the overhead of repeated queries and improving point query performance.
@@ -5095,7 +5095,7 @@ EXPLAIN FORMAT='brief' SELECT COUNT(1) FROM t WHERE a = 1 AND b IS NOT NULL;
 - Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Default value: `67108864` (64 MiB)
-- Scope: `[0, 9223372036854775807]`
+- Range: `[0, 9223372036854775807]`
 - Unit: Bytes
 - This variable is used to set the upper limit of memory usage for the optimizer to build scan ranges. When the variable value is `0`, there is no memory limit for building scan ranges. If building exact scan ranges consumes memory that exceeds the limit, the optimizer uses more relaxed scan ranges (such as `[[NULL,+inf]]`). If the execution plan does not use exact scan ranges, you can increase the value of this variable to let the optimizer build exact scan ranges.
 
@@ -5266,7 +5266,7 @@ SHOW WARNINGS;
 ### tidb_opt_tiflash_concurrency_factor
 
 - Scope: SESSION | GLOBAL
-- Persists to cluster: YES
+- Persists to cluster: Yes
 - Applies to hint [SET_VAR](/optimizer-hints.md#set_varvar_namevar_value): Yes
 - Type: Float
 - Range: `[0, 2147483647]`
