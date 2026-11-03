@@ -14,7 +14,7 @@ This document describes how to migrate data from MySQL SQL files to TiDB using T
 
 ## Step 1. Prepare SQL files
 
-Put all the SQL files in the same directory, like `/data/my_datasource/` or `s3://my-bucket/sql-backup`. TiDB Lightning recursively searches for `.sql` files in this directory and its subdirectories, but the data files must follow the default naming patterns such as `${db_name}.${table_name}.sql` or `${db_name}.${table_name}.001.sql`.
+Put all the SQL files under a common directory, such as `/data/my_datasource/` or `s3://my-bucket/sql-backup`. By default, TiDB Lightning recursively searches this directory and its subdirectories for SQL data files that match naming patterns such as `${db_name}.${table_name}.sql` or `${db_name}.${table_name}.001.sql`.
 
 If your SQL files use different names, configure [`[[mydumper.files]]`](/tidb-lightning/tidb-lightning-data-source.md#match-customized-files) to match them. Custom rules disable default file matching. To also match files that follow the default naming patterns, set `default-file-rules = true` under `[mydumper]`. Otherwise, your custom rules need to cover all required data and schema files.
 
@@ -46,7 +46,7 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local": Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster can provide only limited service. If your TiDB Lightning version is v7.1.0 or later and your TiDB version is v6.1.0 or later, TiDB Lightning pauses scheduling only for the target table's Regions by default. The import might still affect cluster performance.
+# "local": Default. The local backend is used to import large volumes of data (around or more than 1 TiB). During the import, the target TiDB cluster can provide only limited service. If your TiDB Lightning version is v6.2.0 or later and your TiDB version is v6.1.0 or later, TiDB Lightning pauses scheduling only for the target table's Regions by default. The import might still affect cluster performance.
 # During import, do not perform DDL or DML operations on the target table.
 # Avoid reading from the target table because the results might be inconsistent.
 # "tidb": The "tidb" backend can also be used to import small volumes of data (less than 1 TiB). During the import, the target TiDB cluster can provide service normally. For the information about backend mode, refer to https://docs.pingcap.com/tidb/stable/tidb-lightning-backends.
