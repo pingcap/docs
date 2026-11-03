@@ -288,15 +288,15 @@ The format of a topic expression is `[tenant_and_namespace][prefix]{schema}[midd
 The following are some examples:
 
 - `matcher = ['test1.table1', 'test2.table2'], topic = "hello_{schema}_{table}"`
-    - Data change events corresponding to the table `test1.table1` are despatched to a topic named `hello_test1_table1`.
-    - Data change events corresponding to the table `test2.table2` are despatched to a topic named `hello_test2_table2`.
+    - Data change events corresponding to the table `test1.table1` are dispatched to a topic named `hello_test1_table1`.
+    - Data change events corresponding to the table `test2.table2` are dispatched to a topic named `hello_test2_table2`.
 
 - `matcher = ['test3.*', 'test4.*'], topic = "hello_{schema}_world"`
-    - Data change events for all tables under `test3` are despatched to a topic named `hello_test3_world`.
-    - Data change events for all tables under `test4` are despatched to a topic named `hello_test4_world`.
+    - Data change events for all tables under `test3` are dispatched to a topic named `hello_test3_world`.
+    - Data change events for all tables under `test4` are dispatched to a topic named `hello_test4_world`.
 
 - `matcher = ['*.*'], topic = "{schema}_{table}"`
-    - For all tables that TiCDC listens on, they are despatched to separate topics according to the `databaseName_tableName` rule. For example, for the table `test.account`, TiCDC despatches its data change log to a topic named `test_account`.
+    - For all tables that TiCDC listens on, they are dispatched to separate topics according to the `databaseName_tableName` rule. For example, for the table `test.account`, TiCDC dispatches its data change log to a topic named `test_account`.
 
 ### Dispatch DDL events
 
@@ -308,7 +308,7 @@ DDL statements such as `CREATE DATABASE` and `DROP DATABASE` that are not relate
 
 DDL statements such as `ALTER TABLE` and `CREATE TABLE` that are related to a specific table are called table-level DDL statements. Events corresponding to table-level DDL statements are dispatched to an appropriate topic according to the configuration of `dispatchers`.
 
-For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = "{schema}_{table}"`, the DDL events are despatched as follows:
+For example, for a `dispatchers` configuration like `matcher = ['test.*'], topic = "{schema}_{table}"`, the DDL events are dispatched as follows:
 
 - If a DDL event only involves a single table, the DDL event is dispatched to the appropriate topic as it is. For example, for the DDL event `DROP TABLE test.table1`, the event is dispatched to the topic named `test_table1`.
 

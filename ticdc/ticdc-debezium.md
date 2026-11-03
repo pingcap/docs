@@ -769,7 +769,7 @@ The key fields of the preceding JSON data are explained as follows:
 
 | Field      | Type   | Description                                            |
 |:----------|:-------|:-------------------------------------------------------|
-| `payload.op`        | String | The type of the change event. `"m"` indicates an watermark event.  |
+| `payload.op`        | String | The type of the change event. `"m"` indicates a watermark event.  |
 | `payload.ts_ms`     | Number | The timestamp (in milliseconds) when TiCDC generates this message. |
 | `payload.source.commit_ts`     | Number  | The `CommitTs` value of the event.      |
 | `payload.source.db`     | String   | The name of the database where the event occurs.    |
