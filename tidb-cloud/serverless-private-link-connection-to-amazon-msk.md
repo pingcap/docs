@@ -5,18 +5,18 @@ summary: Amazon MSK Provisioned のプライベートリンク接続を使用し
 
 # プライベートリンク接続経由で Amazon MSK Provisioned に接続する {#connect-to-amazon-msk-provisioned-via-a-private-link-connection}
 
-このドキュメントでは、 [Amazon MSK Provisioned のプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を使用してTiDB Cloud Essentialクラスターを[Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターに接続する方法について説明します。
+このドキュメントでは、 [Amazon MSK Provisioned のプライベートリンク接続](/tidb-cloud/serverless-private-link-connection.md#create-an-amazon-msk-provisioned-private-link-connection)を使用してTiDB Cloud Essentialインスタンスを[Amazon MSK Provisioned](https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html)クラスターに接続する方法について説明します。
 
 ## TiDB Cloud Essentialの前提条件 {#prerequisites-for-essential}
 
-- TiDB Cloud Essentialクラスターは AWS でホストされており、アクティブです。後で使用するために、以下の情報を取得して保存してください。
+- TiDB Cloud Essentialインスタンスは AWS でホストされており、アクティブです。後で使用するために、以下の情報を取得して保存してください。
 
     - AWSアカウントID
     - アベイラビリティゾーン（AZ）
 
 AWS アカウント ID とアベイラビリティゾーンを表示するには:
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB クラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
+1. [TiDB Cloudコンソール](https://tidbcloud.com)で、TiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**Settings** > **Networking**をクリックします。
 2. **AWS Private Endpoints for External Services**領域で、**Create Private Endpoint for External Services**をクリックします。
 3. ダイアログで、AWS アカウント ID とアベイラビリティゾーンをメモします。
 
@@ -24,20 +24,20 @@ AWS アカウント ID とアベイラビリティゾーンを表示するには
 
 始める前に、Amazon MSK Provisioned クラスターについて次の点を確認してください。
 
-- **リージョンと AZ** : Amazon MSK Provisioned クラスターは、 TiDB Cloud Essentialクラスターと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティゾーンはTiDB Cloudクラスターと同じです。
+- **リージョンと AZ** : Amazon MSK Provisioned クラスターは、 TiDB Cloud Essentialインスタンスと同じ AWS リージョンにあり、MSK クラスターのアベイラビリティゾーンはTiDB Cloud Essentialインスタンスと同じです。
 - **Authentication**: MSK クラスターには[SASL/SCRAM認証](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password.html)が必要です。
-- **Broker type**: ブローカー`t4.small`タイプは使用しないでください。プライベートリンクをサポートしていません。
+- **Broker type**: `t4.small` ブローカータイプは使用しないでください。プライベートリンクをサポートしていません。
 
 詳細な要件については、 [単一リージョンでの Amazon MSK マルチ VPC プライベート接続](https://docs.aws.amazon.com/msk/latest/developerguide/aws-access-mult-vpc.html#mvpc-requirements)を参照してください。
 
-Amazon MSK Provisioned クラスターがない場合は、 TiDB Cloud Essentialクラスターと同じリージョンおよび同じアベイラビリティゾーンに[1つ作成](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)し、作成されたクラスターに[SASL/SCRAM認証を設定](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)します。
+Amazon MSK Provisioned クラスターがない場合は、 TiDB Cloud Essentialインスタンスと同じリージョンおよび同じアベイラビリティゾーンに[1つ作成](https://docs.aws.amazon.com/msk/latest/developerguide/create-cluster.html)し、作成されたクラスターに[SASL/SCRAM認証を設定](https://docs.aws.amazon.com/msk/latest/developerguide/msk-password-tutorial.html)します。
 
-- **Secret name**: シークレット名は`AmazonMSK_`で始まる必要があります。
-- **暗号化**：デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
+- **シークレット名**: シークレット名は`AmazonMSK_`で始まる必要があります。
+- **暗号化**: デフォルトの暗号化キーは使用しないでください。シークレット用に新しいカスタムAWS KMSキーを作成してください。
 
 ## ステップ1. TiDB Cloudアクセス用にKafka ACLを設定する {#step-1-set-up-kafka-acls-for-tidb-cloud-access}
 
-TiDB Cloud がAmazon MSK プロビジョニングクラスターにアクセスできるように、Kafka ACL を設定する必要があります。ACL の設定には、SASL/SCRAM 認証（推奨）またはIAM認証を使用できます。
+TiDB Cloud がAmazon MSK Provisioned クラスターにアクセスできるように、Kafka ACL を設定する必要があります。ACL の設定には、SASL/SCRAM 認証（推奨）またはIAM認証を使用できます。
 
 <SimpleTab>
 <div label="SASL/SCRAM">
@@ -142,7 +142,7 @@ SASL/SCRAM の代わりに、 IAM認証を使用して MSK クラスターと同
 
 ## ステップ3. クラスターポリシーをアタッチする {#step-3-attach-the-cluster-policy}
 
-[クラスタポリシーをアタッチ](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html)して、 TiDB Cloud がMSK クラスターに接続できるようにします。[前提条件](#prerequisites-for-essential)で取得したTiDB Cloud AWS アカウント ID を使用してください。
+[クラスターポリシーをアタッチ](https://docs.aws.amazon.com/msk/latest/developerguide/mvpc-cluster-owner-action-policy.html)して、 TiDB Cloud がMSK クラスターに接続できるようにします。[前提条件](#prerequisites-for-essential)で取得したTiDB Cloud AWS アカウント ID を使用してください。
 
 ## ステップ4. マルチVPC接続を有効にする {#step-4-turn-on-multi-vpc-connectivity}
 

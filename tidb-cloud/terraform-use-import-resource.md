@@ -5,7 +5,7 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
 
 # `tidbcloud_import`リソースを使用する {#use-the-tidbcloud-import-resource}
 
-このドキュメントの`tidbcloud_import`リソースを使用して、 TiDB Cloudクラスターにデータをインポートする方法を学習できます。
+このドキュメントでは、 `tidbcloud_import`リソースを使用して TiDB Cloudクラスターにデータをインポートする方法を学習できます。
 
 `tidbcloud_import`リソースの機能は次のとおりです。
 
@@ -17,8 +17,8 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
 - TiDB Cloudクラスターを作成するには、次のいずれかのドキュメントを参照してください。
-    - [TiDB Cloud Starter または Essential クラスターを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
-    - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md) 。
+    - [TiDB Cloud StarterまたはEssentialインスタンスを作成する](/tidb-cloud/create-tidb-cluster-serverless.md)
+    - [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md) 。
 
 ## インポートタスクを作成して実行する {#create-and-run-an-import-task}
 
@@ -28,7 +28,7 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
 
 > **Note:**
 >
-> ローカルファイルのインポートは、 TiDB Cloud Starter またはTiDB Cloud Essential クラスターでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
+> ローカルファイルのインポートは、 TiDB Cloud Starter またはTiDB Cloud Essential インスタンスでのみサポートされ、 TiDB Cloud Dedicated クラスターではサポートされません。
 
 1. インポート用のCSVファイルを作成します。例:
 
@@ -70,7 +70,7 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
     }
     ```
 
-    ファイル内のリソース値（プロジェクトID、クラスタID、CSVパスなど）をご自身のものに置き換えてください。 `csv_format`の詳細は [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
+    ファイル内のリソース値（プロジェクトID、クラスターID、CSVパスなど）をご自身のものに置き換えてください。 `csv_format`の詳細は [設定ページ](https://registry.terraform.io/providers/tidbcloud/tidbcloud/latest/docs/resources/import#nested-schema-for-csv_format)に記載されています。
 
 3. `terraform apply`コマンドを実行してインポートタスクを作成し、 `yes`を入力して作成を確認し、インポートを開始します。
 
@@ -251,13 +251,13 @@ summary: "`tidbcloud_import` リソースを使用してインポートタスク
 
 ## インポートタスクを更新する {#update-an-import-task}
 
-インポートタスクを更新できません。
+インポートタスクは更新できません。
 
 ## インポートタスクを削除する {#delete-an-import-task}
 
 Terraform の場合、インポートタスクを削除すると、対応する`tidbcloud_import`リソースがキャンセルされます。
 
-`COMPLETED`インポートタスクをキャンセルできません。キャンセルした場合は、次の例のように`Delete Error`が返されます。
+`COMPLETED`のインポートタスクはキャンセルできません。キャンセルした場合は、次の例のように`Delete Error`が返されます。
 
 ```
 $ terraform destroy

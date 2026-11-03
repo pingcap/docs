@@ -38,41 +38,41 @@ TiDB Cloudのロールの詳細については、 [ユーザーロール](/tidb-
 <SimpleTab>
 <div label="AWS">
 
-changefeed ダウンストリーム サービスが AWS でホストされている場合は、次の情報を収集します。
+changefeed ダウンストリームサービスが AWS でホストされている場合は、次の情報を収集します。
 
-- ダウンストリーム サービスのプライベートエンドポイントサービスの名前
-- ダウンストリーム サービスがデプロイされているアベイラビリティゾーン (AZ)
+- ダウンストリームサービスのプライベートエンドポイントサービスの名前
+- ダウンストリームサービスがデプロイされているアベイラビリティゾーン (AZ)
 
-ダウンストリーム サービスでプライベートエンドポイントサービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロードバランサーとプライベートリンクサービスを設定します。
+ダウンストリームサービスでプライベートエンドポイントサービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-aws-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロードバランサーとプライベートリンクサービスを設定します。
 
 </div>
 
 <div label="Google Cloud">
 
-changefeed ダウンストリーム サービスが Google Cloud でホストされている場合は、ダウンストリーム サービスのサービス アタッチメント情報を収集します。
+changefeed ダウンストリームサービスが Google Cloud でホストされている場合は、ダウンストリームサービスのサービスアタッチメント情報を収集します。
 
-ダウンストリーム サービスでサービス アタッチメントが利用できない場合は、[ステップ2. Kafka-proxyをプライベートサービス接続サービスとして公開する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#step-2-expose-kafka-proxy-as-private-service-connect-service)に従ってサービス アタッチメント情報を取得します。
+ダウンストリームサービスでサービスアタッチメントが利用できない場合は、[ステップ2. Kafka-proxyをPrivate Service Connect サービスとして公開する](/tidb-cloud/setup-self-hosted-kafka-private-service-connect.md#step-2-expose-kafka-proxy-as-private-service-connect-service)に従ってサービスアタッチメント情報を取得します。
 
 </div>
 
 <div label="Azure">
 
-changefeed ダウンストリーム サービスが Azure でホストされている場合は、ダウンストリーム サービスのプライベートリンクサービスのエイリアスを収集します。
+changefeed ダウンストリームサービスが Azure でホストされている場合は、ダウンストリームサービスのプライベートリンクサービスのエイリアスを収集します。
 
-ダウンストリーム サービスでプライベートエンドポイントサービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロードバランサーとプライベートリンクサービスを設定します。
+ダウンストリームサービスでプライベートエンドポイントサービスが利用できない場合は、手順[ステップ 2. Kafka クラスターをプライベートリンクサービスとして公開する](/tidb-cloud/setup-azure-self-hosted-kafka-private-link-service.md#step-2-expose-the-kafka-cluster-as-private-link-service)に従ってロードバランサーとプライベートリンクサービスを設定します。
 
 </div>
 </SimpleTab>
 
-## ステップ1. クラスターのネットワークページを開きます {#step-1-open-the-networking-page-for-your-cluster}
+## ステップ1. クラスターのネットワークページを開く {#step-1-open-the-networking-page-for-your-cluster}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com/)にログインします。
 
-2. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、ターゲットクラスターの名前をクリックして、概要ページに移動します。
+2. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして、概要ページに移動します。
 
     > **Tip:**
     >
-    > 左上隅のコンボボックスを使用して、組織、プロジェクト、クラスターを切り替えることができます。
+    > 複数の組織に所属している場合は、左上隅のコンボボックスを使用して、まず目的の組織に切り替えてください。
 
 3. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
@@ -98,7 +98,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 7. **TiDB Managed**ドメインまたは**Custom**ドメインのいずれかを使用して、Kafka のアドバタイズリスナーを構成します。
 
     - アドバタイズリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
-    - アドバタイズリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティゾーンのブローカー サブドメインを指定します。
+    - アドバタイズリスナーに独自の**Custom**ドメインを使用するには、ドメインタイプを**Custom**に切り替え、 **Custom Domain**フィールドにルートドメインを入力し、**Check**をクリックして、各アベイラビリティゾーンのブローカーサブドメインを指定します。
 
 8. **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
 
@@ -119,7 +119,7 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 6. **TiDB Managed**ドメインまたは**Custom**ドメインのいずれかを使用して、Kafka のアドバタイズリスナーを構成します。
 
     - アドバタイズリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
-    - アドバタイズリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティゾーンのブローカー サブドメインを指定します。
+    - アドバタイズリスナーに独自の**Custom**ドメインを使用するには、ドメインタイプを**Custom**に切り替え、 **Custom Domain**フィールドにルートドメインを入力し、**Check**をクリックして、各アベイラビリティゾーンのブローカーサブドメインを指定します。
 
 7. **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
 
@@ -133,14 +133,14 @@ changefeed ダウンストリーム サービスが Azure でホストされて�
 
 3. 変更フィードを作成する前に、リマインダーに従って、 TiDB Cloudの Azure サブスクリプションを承認するか、エイリアスを持つすべてのユーザーが Private Link サービスにアクセスできるようにしてください。Private Link サービスの可視性に関する詳細については、Azure ドキュメントの[サービスの公開の制御](https://learn.microsoft.com/en-us/azure/private-link/private-link-service-overview#control-service-exposure)を参照してください。
 
-4. セクション[ネットワーク](#network)で収集した**プライベートリンクサービスのエイリアス**を入力します。
+4. セクション[ネットワーク](#network)で収集した**Alias of Private Link Service**を入力します。
 
 5. このプライベートエンドポイントが Apache Kafka 用に作成される場合は、 **Configure Advertised Listener for Kafka**チェックボックスを選択します。
 
 6. **TiDB Managed**ドメインまたは**Custom**ドメインのいずれかを使用して、Kafka のアドバタイズリスナーを構成します。
 
     - アドバタイズリスナーに**TiDB Managed**ドメインを使用するには、 **Domain Pattern**フィールドに一意の文字列を入力し、 **Generate**をクリックします。TiDB は、各アベイラビリティゾーンのサブドメインを持つブローカーアドレスを生成します。
-    - アドバタイズリスナーに独自の**Custom**ドメインを使用するには、ドメイン タイプを**Custom**に切り替え、 **Custom Domain**フィールドにルート ドメインを入力し、**Check**をクリックして、各アベイラビリティゾーンのブローカー サブドメインを指定します。
+    - アドバタイズリスナーに独自の**Custom**ドメインを使用するには、ドメインタイプを**Custom**に切り替え、 **Custom Domain**フィールドにルートドメインを入力し、**Check**をクリックして、各アベイラビリティゾーンのブローカーサブドメインを指定します。
 
 7. **Create**をクリックして構成を検証し、プライベートエンドポイントを作成します。
 

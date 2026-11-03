@@ -5,7 +5,7 @@ summary: "`tidbcloud_restore` リソースを使用して復元タスクを作�
 
 # `tidbcloud_restore`リソースを使用する {#use-the-tidbcloud-restore-resource}
 
-このドキュメントの`tidbcloud_restore`リソースを使用して復元タスクを管理する方法を学習できます。
+このドキュメントでは、 `tidbcloud_restore`リソースを使用して復元タスクを管理する方法を学習できます。
 
 `tidbcloud_restore`リソースの機能は次のとおりです。
 
@@ -14,7 +14,7 @@ summary: "`tidbcloud_restore` リソースを使用して復元タスクを作�
 ## 前提条件 {#prerequisites}
 
 - [TiDB Cloud Terraform プロバイダーを入手する](/tidb-cloud/terraform-get-tidbcloud-provider.md) 。
-- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter およびTiDB Cloud Essential クラスターではご利用いただけません。`tidbcloud_restore`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
+- このドキュメントで紹介されているバックアップと復元機能は、TiDB Cloud Starter およびTiDB Cloud Essential インスタンスではご利用いただけません。`tidbcloud_restore`リソースを使用するには、 TiDB Cloud Dedicated クラスターを作成してください。
 
 ## 復元タスクを作成する {#create-a-restore-task}
 
@@ -37,7 +37,6 @@ summary: "`tidbcloud_restore` リソースを使用して復元タスクを作�
          source = "tidbcloud/tidbcloud"
        }
      }
-
    }
 
    provider "tidbcloud" {
@@ -182,7 +181,7 @@ summary: "`tidbcloud_restore` リソースを使用して復元タスクを作�
 
 6. クラスターのステータスが`AVAILABLE`に変わると、復元タスクは`RUNNING`になり、最終的に`SUCCESS`になります。
 
-復元されたクラスターはTerraformによって管理されないことに注意してください。これらは[インポートする](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)ことで管理できます。
+復元されたクラスターはTerraformによって管理されないことに注意してください。復元されたクラスターは[インポートする](/tidb-cloud/terraform-use-cluster-resource.md#import-a-cluster)ことで管理できます。
 
 ## 復元タスクを更新する {#update-a-restore-task}
 
