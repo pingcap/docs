@@ -69,7 +69,7 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster can provide only limited service. If your TiDB Lightning version is v7.1.0 or later and your TiDB version is v6.1.0 or later, TiDB Lightning pauses scheduling only for the target table's Regions by default. The import might still affect cluster performance.
+# "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster can provide only limited service. If your TiDB Lightning version is v6.2.0 or later and your TiDB version is v6.1.0 or later, TiDB Lightning pauses scheduling only for the target table's Regions by default. The import might still affect cluster performance.
 # During import, do not perform DDL or DML operations on the target table.
 # Avoid reading from the target table because the results might be inconsistent.
 backend = "local"
