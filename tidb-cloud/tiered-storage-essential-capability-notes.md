@@ -19,24 +19,26 @@ All capabilities described in the official documentation work the same on an all
 | Conversion progress and history: `SHOW STORAGE_CLASS TRANSITIONS`, `mysql.tidb_storage_class_transition_history` | [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md) |
 | Statement-level IA metrics: `ia_remote_read_segment_*` fields in `EXPLAIN ANALYZE`, `IA_EXEC_COUNT` and related columns in statement summary tables, IA fields in slow query details | [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md) |
 | Storage usage metrics: `Row-based IA Storage` and `Row-based Standard Storage` in the console | [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md) |
+| Cluster-level IA remote read panels in the console: **IA Remote Read Segment** and **IA Remote Read Throughput** | [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md) |
 | Compatibility with BR, TiCDC, PITR, and IMPORT INTO; TiFlash remaining local | [Tiered Storage Limitations](/tidb-cloud/tiered-storage-limitations.md) |
 | Cold-read throttling constraints (≤ 100 MiB/s per SQL, ≤ 1 GiB/s total) | [Tiered Storage Limitations](/tidb-cloud/tiered-storage-limitations.md) |
 
 ## What is different on Essential
 
-Two tuning capabilities and one set of observability data are **not available** on Essential:
+Two tuning capabilities and one observability panel are **not available** on Essential:
 
 | Capability | Essential (allowlisted) | Premium | BYOC |
 |-|-|-|-|
 | IA cache level (local cache ratio): Economy / Default / Balanced / Deep | ✗ Fixed at the system default (`Default`), not adjustable | ✓ Adjustable in the console (requires a separate allowlist) | ✓ |
 | IA segment size (`kvengine.ia.segment-size`) | ✗ Fixed at the default 1 MiB | ✗ Not exposed (per current official docs) | ✓ Configurable, rolling restart required |
-| Cluster-level IA cache hit rate / miss rate panels in the console | ✗ Not displayed | ✓ Displayed | ✓ Displayed |
+| Cluster-level **IA Cache Hit Rate** panel in the console | ✗ Not displayed | ✓ Displayed | ✓ Displayed |
 
 Detailed impact:
 
 1. **No local cache ratio adjustment.** On Premium, you can select a higher IA cache level in **Overview** > **Capacity** > **Update Capacity** > **Storage Acceleration** to cache more IA data on local disks and improve cold-read performance. On Essential, the cache level is fixed at the system default and cannot be changed. If cold reads degrade performance, the only self-service options are to narrow the IA scope (switch partitions back to Standard) or optimize the queries.
 2. **No segment size adjustment.** The segment size stays at the default 1 MiB. Note that per the current official documentation this parameter is configurable only on BYOC; Premium also uses the default.
-3. **No cache hit rate in observability.** The **IA Cache Hit Rate (%)** and **IA Cache Miss Rate (ops/s)** panels are not shown in the Monitoring dashboards on Essential. The tuning loop documented for Premium ("if the hit rate stays below 85%, raise the cache level") does not apply. Instead, judge IA health from the statement-level signals that remain available:
+3. **No cache hit rate in observability.** The **IA Cache Hit Rate** panel is not shown in the Monitoring dashboards on Essential, while **IA Remote Read Segment** and **IA Remote Read Throughput** are shown. The tuning loop documented for Premium ("if the hit rate stays below 85%, raise the cache level") does not apply. Instead, judge IA health from the signals that remain available:
+    - Rising **IA Remote Read Segment** and **IA Remote Read Throughput** on the **Instance Overview** tab — more remote reads and more cold data loaded per second.
     - Rising `IA_EXEC_COUNT / EXEC_COUNT` ratio in the statement summary tables — more executions are hitting cold data.
     - Rising `AVG_IA_REMOTE_READ_SEGMENT_SIZE` / `AVG_IA_REMOTE_READ_SEGMENT_WAIT_TIME` — heavier or slower cold reads.
     - `IA_remote_read_segment_*` fields in slow query details and `EXPLAIN ANALYZE`.
@@ -47,7 +49,7 @@ Detailed impact:
 Because the cache is system-fixed and the hit rate is not visible, be more conservative than the general guidance suggests:
 
 - Prefer partition-level IA on partitioned tables; tier only confirmed low-frequency historical partitions, and keep hot and future partitions in Standard.
-- Roll out gradually: convert the smallest oldest partition first, observe for at least one full business day using the statement-level metrics above, then proceed.
+- Roll out gradually: convert the smallest oldest partition first, observe for at least one full business day using the metrics above, then proceed.
 - Strictly respect the cold-read decision checklist and the throttling constraints in [Tiered Storage Limitations](/tidb-cloud/tiered-storage-limitations.md), since you cannot compensate with a larger cache.
 - Avoid large-range scans and `SELECT *` on IA tables; keep queries within no more than 3 IA partitions.
 - Keep storage class settings stable; avoid frequent IA ⇄ Standard switching.

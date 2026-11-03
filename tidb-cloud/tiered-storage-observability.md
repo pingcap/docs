@@ -253,18 +253,17 @@ The column is named **Exec Count of IA** and is placed right after **Executions 
 
 ## Monitor IA cache performance at the cluster level
 
-This section describes the cluster-level panels for IA cache behavior in the TiDB Cloud console.
+This section describes the cluster-level panels for the IA cache and remote reads in the TiDB Cloud console.
 
-### IA Cache Performance panels
+### IA panels on the Instance Overview tab
 
-Path: **Monitoring** > **Metrics** > **Instance Overview** > **IA Cache Performance**.
+Path: **Monitoring** > **Metrics** > **Instance Overview**.
 
 | Panel | Description |
 |-|-|
-| **IA Cache Hit Rate (%)** | The overall IA cache hit rate of the cluster. A yellow indicator appears when the value drops below 85% |
-| **IA Cache Miss Rate (ops/s)** | The frequency of IA cache misses. This value normally stays low. A sudden increase indicates a large volume of cold reads or a cache under pressure |
-| **IA Remote Read Segment** | The frequency (Count) and data volume (Size) of segments read from object storage. Use it to assess object storage request volume and bandwidth consumption |
-| **IA Remote Read Segment Wait Time** | The wait time of a single remote read, shown as P99 and Avg. A sustained increase indicates degraded object storage latency or bandwidth limits |
+| **IA Cache Hit Rate** | The percentage of IA segment reads served from cache, as observed by TiDB. A yellow indicator appears when the value drops below 85% |
+| **IA Remote Read Segment** | The number of successful IA remote segment reads per second, as observed by TiDB |
+| **IA Remote Read Throughput** | The number of bytes read from remote IA segments per second, as observed by TiDB |
 
 You can change the time window with the time picker to observe longer trends. If the cluster has no IA tables, the panels show **No IA data** instead of `0%` or an error.
 
@@ -274,7 +273,7 @@ To monitor the cold data volume of a single statement, use the `IA Remote Read S
 
 Cache hit rates depend on your actual access patterns. Concentrated access can exceed 95%, while scattered access might fall below 95%.
 
-- **Sudden drop in hit rate**: check whether **IA Cache Miss Rate** rises at the same time. A simultaneous rise confirms a real increase in cold reads rather than a collection issue. Then use `IA_EXEC_COUNT` in the statement summary tables to identify which statements triggered the cold reads.
+- **Sudden drop in hit rate**: check whether **IA Remote Read Segment** and **IA Remote Read Throughput** rise at the same time. A simultaneous rise confirms a real increase in cold reads rather than a collection issue. Then use `IA_EXEC_COUNT` in the statement summary tables to identify which statements triggered the cold reads.
 - **Sustained low hit rate**: the cache is under pressure from cold data. Consider raising the IA cache level, or reducing the amount of data set to IA. See [Configure and Manage Tiered Storage](/tidb-cloud/tiered-storage-guide.md).
 - **Evaluating whether a table suits IA**: after setting a partition to IA, observe **IA Cache Hit Rate** for at least one full business day. A stable hit rate means the access pattern suits IA. Large fluctuations or a low average means the data is accessed too scatteredly for IA.
 
@@ -288,7 +287,7 @@ Cache hit rates depend on your actual access patterns. Concentrated access can e
 
 ### Investigate a sudden drop in cache hit rate
 
-1. Confirm the drop in **IA Cache Hit Rate** and check whether **IA Cache Miss Rate** rises at the same time.
+1. Confirm the drop in **IA Cache Hit Rate** and check whether **IA Remote Read Segment** and **IA Remote Read Throughput** rise at the same time.
 2. Identify the statements with a high `IA_EXEC_COUNT / EXEC_COUNT` ratio in the statement summary tables.
 3. If many statements show the ratio rising at the same time, a batch of analytical queries is probably scanning IA tables and evicting hot data from the cache.
 4. Decide whether to raise the IA cache level or to move the affected data back to Standard storage.

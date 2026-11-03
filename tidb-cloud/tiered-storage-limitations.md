@@ -45,7 +45,7 @@ Since shared physical clusters have limited object storage bandwidth, IA cold st
 
 **If your business involves sustained heavy access to cold data, IA is not recommended; revert the table to Standard storage.** To ensure system stability, hard throttling for cold data access will be added in a future technical release. For now, you must comply with the constraints above.
 
-You can monitor single SQL cold data access volume via the `IA Remote Read Segment Size` panel in Cloud Console → Monitoring → Diagnosis → Slow Query → Coprocessor. To monitor IA cache behavior for the whole cluster, use the **IA Cache Performance** panels described in [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
+You can monitor single SQL cold data access volume via the `IA Remote Read Segment Size` panel in Cloud Console → Monitoring → Diagnosis → Slow Query → Coprocessor. To monitor IA cache behavior for the whole cluster, use the IA panels on the **Instance Overview** tab described in [Tiered Storage Observability](/tidb-cloud/tiered-storage-observability.md).
 
 ## Impact on peripheral tools
 
