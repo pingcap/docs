@@ -261,7 +261,7 @@ score(D, Q) = sum_{t in Q} IDF(t) * TF(t, D) * (k1 + 1) / (TF(t, D) + k1 * (1 - 
 - `IDF(t)`: 逆文書頻度。語の希少性を測定します
 - `|D|`: ドキュメント長
 - `avgdl`: すべてのドキュメントにおける平均ドキュメント長
-- `k1`, `b`: BM25 のチューニングパラメータ
+- `k1`, `b`: BM25 のチューニングパラメーター
 
 TiDB の実装では、情報検索における BM25 の標準デフォルト値である `k1 = 1.2` と `b = 0.75` の固定値を使用します。
 
@@ -294,7 +294,7 @@ INSERT INTO tickets VALUES (2, "Ticket 2", 1);
 INSERT INTO tickets VALUES (3, "Ticket 3", 2);
 ```
 
-サブクエリを使用して作成者名に基づいて一致するユーザーIDを検索し、これらのIDを外部クエリで使用して関連するチケット情報を取得および結合することができます。
+サブクエリを使用して作成者名に基づいて一致するユーザーIDを検索し、これらのIDを外部クエリで使用して関連するチケット情報を取得および結合できます。
 
 ```sql
 SELECT t.title AS TICKET_TITLE, u.id AS AUTHOR_ID, u.name AS AUTHOR_NAME FROM tickets t

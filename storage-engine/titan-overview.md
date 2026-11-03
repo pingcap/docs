@@ -31,7 +31,7 @@ Titan を有効にするための前提条件は次のとおりです。
 - 範囲クエリは実行されないか、高い範囲クエリのパフォーマンスを必要としません。Titan に格納されるデータは整列されていないため、範囲クエリのパフォーマンスは RocksDB よりも低く、特に広い範囲のクエリではその傾向が顕著です。PingCAP の内部テストによると、Titan の範囲クエリのパフォーマンスは RocksDB よりも 40% から数倍低いことが示されています。
 - 十分なディスク容量（同じデータ量でRocksDBのディスク消費量の2倍の容量を確保することを検討してください）。これは、Titanがディスク容量を犠牲にして書き込み増幅を削減するためです。また、Titanは値を1つずつ圧縮するため、圧縮率はRocksDBよりも低くなります。RocksDBはブロックを1つずつ圧縮するため、TitanはRocksDBよりも多くのストレージ容量を消費しますが、これは想定内の正常な動作です。状況によっては、Titanのストレージ消費量がRocksDBの2倍になる場合があります。
 
-バージョン7.6.0以降、新規作成されたクラスターではTitanがデフォルトで有効になっています。小さなTiKV値はRocksDBに保存されたままなので、このシナリオでもTitanを有効にすることができます。
+バージョン7.6.0以降、新規作成されたクラスターではTitanがデフォルトで有効になっています。小さなTiKV値はRocksDBに保存されたままなので、このシナリオでもTitanを有効にできます。
 
 Titan のパフォーマンスを向上させたい場合は、ブログ投稿[Titan: 書き込み増幅を減らす RocksDB プラグイン](https://pingcap.com/blog/titan-storage-engine-design-and-implementation/)を参照してください。
 
@@ -82,7 +82,7 @@ Titan は、RocksDB の TablePropertiesCollector および EventListener コン�
 
 #### TablePropertiesCollector {#tablepropertiescollector}
 
-RocksDBは、カスタムテーブルプロパティコレクターであるBlobFileSizeCollectorを使用して、SSTからプロパティを収集し、対応するSSTファイルに書き込むことができます。収集されたプロパティはBlobFileSizePropertiesという名前になります。次の図は、BlobFileSizeCollectorのワークフローとデータ形式を示しています。
+RocksDBは、カスタムテーブルプロパティコレクターであるBlobFileSizeCollectorを使用して、SSTからプロパティを収集し、対応するSSTファイルに書き込めます。収集されたプロパティはBlobFileSizePropertiesという名前になります。次の図は、BlobFileSizeCollectorのワークフローとデータ形式を示しています。
 
 ![BlobFileSizeProperties](/media/titan/titan-4.png)
 

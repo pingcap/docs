@@ -11,7 +11,7 @@ summary: TiDBデータベースにおけるCREATE INDEXの使用方法の概要�
 
 > **Note:**
 >
-> 4 vCPUを搭載した[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタの場合、インデックス作成中にリソース制限がクラスタの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を手動で無効にすることをお勧めします。この設定を無効にすることで、トランザクションを使用してインデックスを作成できるようになり、クラスタ全体への影響を軽減できます。
+> 4 vCPUを搭載した[TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターの場合、インデックス作成中にリソース制限がクラスターの安定性に影響を与えないように、 [`tidb_ddl_enable_fast_reorg`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630)を手動で無効にすることをお勧めします。この設定を無効にすることで、トランザクションを使用してインデックスを作成できるようになり、クラスター全体への影響を軽減できます。
 
 </CustomContent>
 
@@ -184,7 +184,7 @@ DROP INDEX idx1 ON t1;
 
 <CustomContent platform="tidb">
 
-それでもこれらの式を使用したい場合は、 [TiDB設定ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行うことができます。
+それでもこれらの式を使用したい場合は、 [TiDB設定ファイル](/tidb-configuration-file.md#allow-expression-index-new-in-v400)で次の構成を行えます。
 
 ```sql
 allow-expression-index = true
@@ -208,11 +208,11 @@ allow-expression-index = true
 >
 > 式インデックスは暗黙的に名前を取得します（例： `_V$_{index_name}_{index_offset}` ）。既に列に付けられている名前で新しい式インデックスを作成しようとすると、エラーが発生します。また、同じ名前で新しい列を追加しようとした場合も、エラーが発生します。
 >
-> 式インデックスの式に含まれる関数パラメータの数が正しいことを確認してください。
+> 式インデックスの式に含まれる関数パラメーターの数が正しいことを確認してください。
 >
 > インデックスの式に、戻り値の型と長さによって影響を受ける文字列関連の関数が含まれている場合、式インデックスの作成が失敗する可能性があります。このような場合は、 `CAST()`関数を使用して、戻り値の型と長さを明示的に指定できます。たとえば、 `REPEAT(a, 3)`式に基づいて式インデックスを作成するには、この式を`CAST(REPEAT(a, 3) AS CHAR(20))`に変更する必要があります。
 
-クエリ文の式が式インデックスの式と一致する場合、オプティマイザはクエリに対して式インデックスを選択できます。ただし、統計情報によっては、オプティマイザが式インデックスを選択しない場合もあります。このような場合は、オプティマイザヒントを使用することで、オプティマイザに式インデックスを選択させることができます。
+クエリ文の式が式インデックスの式と一致する場合、オプティマイザーはクエリに対して式インデックスを選択できます。ただし、統計情報によっては、オプティマイザーが式インデックスを選択しない場合もあります。このような場合は、オプティマイザーヒントを使用することで、オプティマイザーに式インデックスを選択させることができます。
 
 以下の例では、式`LOWER(col1)`に対して式インデックス`idx`を作成するとします。
 
@@ -248,7 +248,7 @@ SELECT MIN(col1) FROM t GROUP BY LOWER(col1);
 
 式インデックスに対応する式を確認するには、 [`SHOW INDEX`](/sql-statements/sql-statement-show-indexes.md)を実行するか、システムテーブル[`information_schema.tidb_indexes`](/information-schema/information-schema-tidb-indexes.md)およびテーブル[`information_schema.STATISTICS`](/information-schema/information-schema-statistics.md)を確認してください。出力の`Expression`列は、対応する式を示します。式インデックス以外の場合は、 `NULL`が表示されます。
 
-式インデックスの維持コストは、他のインデックスの維持コストよりも高くなります。これは、行が挿入または更新されるたびに式の値を計算する必要があるためです。式の値は既にインデックスに格納されているため、オプティマイザが式インデックスを選択する際に、この値を再計算する必要はありません。
+式インデックスの維持コストは、他のインデックスの維持コストよりも高くなります。これは、行が挿入または更新されるたびに式の値を計算する必要があるためです。式の値は既にインデックスに格納されているため、オプティマイザーが式インデックスを選択する際に、この値を再計算する必要はありません。
 
 したがって、クエリのパフォーマンスが挿入および更新のパフォーマンスを上回る場合は、式にインデックスを作成することを検討できます。
 
@@ -279,7 +279,7 @@ mysql> CREATE TABLE customers (
 );
 ```
 
-多値インデックスを一意インデックスとして定義することができます。
+多値インデックスを一意インデックスとして定義できます。
 
 ```sql
 mysql> CREATE TABLE customers (
@@ -363,7 +363,7 @@ Query OK, 1 row affected (0.00 sec)
 - 多値インデックスが使用する追加のストレージ領域は、1行あたりの配列要素の平均数×通常のセカンダリインデックスが使用する領域に等しくなります。
 - 通常のインデックスと比較して、多値インデックスではDML操作によって変更されるインデックスレコードの数が多くなるため、多値インデックスは通常のインデックスよりもパフォーマンスに大きな影響を与えます。
 - 多値インデックスは式インデックスの特殊なタイプであるため、式インデックスと同様の制限があります。
-- テーブルが多値インデックスを使用している場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0より前のTiDBクラスタにテーブルをバックアップ、レプリケート、またはインポートできません。
+- テーブルが多値インデックスを使用している場合、 BR、TiCDC、またはTiDB Lightningを使用して、v6.6.0より前のTiDBクラスターにテーブルをバックアップ、レプリケート、またはインポートできません。
 - 複雑な条件を含むクエリの場合、TiDB は多値インデックスを選択できない場合があります。多値インデックスでサポートされる条件パターンについては、 [多値インデックスを使用する](/choose-index.md#use-multi-valued-indexes)を参照してください。
 
 ## 部分インデックス {#partial-indexes}
@@ -502,14 +502,14 @@ mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score >
 
 ## 不可視インデックス {#invisible-index}
 
-デフォルトでは、不可視インデックスとはクエリオプティマイザによって無視されるインデックスのことです。
+デフォルトでは、不可視インデックスとはクエリオプティマイザーによって無視されるインデックスのことです。
 
 ```sql
 CREATE TABLE t1 (c1 INT, c2 INT, UNIQUE(c2));
 CREATE UNIQUE INDEX c1 ON t1 (c1) INVISIBLE;
 ```
 
-TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)を変更することで、オプティマイザに不可視インデックスを選択させることができます。
+TiDB v8.0.0以降では、システム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)を変更することで、オプティマイザーに不可視インデックスを選択させることができます。
 
 詳細については、 [`ALTER INDEX`](/sql-statements/sql-statement-alter-index.md)を参照してください。
 

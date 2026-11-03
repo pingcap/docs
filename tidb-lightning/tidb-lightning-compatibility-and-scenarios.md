@@ -23,7 +23,7 @@ summary: IMPORT INTO およびTiDB Lightning とログバックアップおよ�
 
 ## TiDB Lightning論理インポートモードのシナリオ {#scenarios-for-tidb-lightning-logical-import-mode}
 
-TiDB Lightning論理インポートモードがアプリケーションのパフォーマンス要件を満たすことができ、アプリケーションでインポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、 TiDB Lightning論理インポートモードを使用することをお勧めします。
+TiDB Lightning論理インポートモードがアプリケーションのパフォーマンス要件を満たせ、アプリケーションでインポートされたテーブルを TiCDC を使用してダウンストリームにバックアップまたは複製する必要がある場合は、 TiDB Lightning論理インポートモードを使用することをお勧めします。
 
 ## TiDB Lightning物理インポートモードのシナリオ {#scenarios-for-tidb-lightning-physical-import-mode}
 
@@ -33,25 +33,25 @@ TiDB Lightning論理インポートモードがアプリケーションのパフ
 
 ### ログバックアップで使用される {#used-with-log-backup}
 
-このシナリオでは、 [PITR](/br/br-log-architecture.md#process-of-pitr)が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルのバックアップが不要であることが確実な場合は、 [TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
+このシナリオでは、 [PITR](/br/br-log-architecture.md#process-of-pitr)が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルのバックアップが不要であることが確実な場合は、 [TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメーターを`false`に変更してインポートタスクを再開できます。
 
 TiDB Lightning物理インポートモードでインポートされたデータは、ログバックアップではバックアップできません。テーブルをバックアップする必要がある場合は、 [テーブルをバックアップする](/br/br-snapshot-manual.md#back-up-a-table)で説明されているように、インポート後にテーブルレベルのスナップショットバックアップを実行することをお勧めします。
 
 ### TiCDC で使用される {#used-with-ticdc}
 
-TiCDC を物理インポートモードで使用することは、短期的には互換性がありません。これは、TiCDC がTiDB Lightning物理インポートモードの書き込み速度に追いつけず、クラスター レプリケーションのレイテンシーが長くなる可能性があるためです。
+TiCDC を物理インポートモードで使用することは、短期的には互換性がありません。これは、TiCDC がTiDB Lightning物理インポートモードの書き込み速度に追いつけず、クラスターレプリケーションのレイテンシーが長くなる可能性があるためです。
 
 次のようにさまざまなシナリオで実行できます。
 
 - シナリオ 1: テーブルを TiCDC によってダウンストリームに複製する必要はありません。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)が必要ないことが確実な場合は、 [TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメータを`false`に変更してインポートタスクを再開できます。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。これらのテーブルにバックアップや[ログバックアップ](/br/br-pitr-guide.md)が必要ないことが確実な場合は、 [TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)の`Lightning.check-requirements`パラメーターを`false`に変更してインポートタスクを再開できます。
 
 - シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。上流 TiDB クラスターの[TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)のパラメータ`Lightning.check-requirements`を`false`に変更し、インポートタスクを再起動する必要があります。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 TiDB Lightning の起動後に互換性チェックでエラーが報告されます。上流 TiDB クラスターの[TiDB Lightning設定ファイル](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)のパラメーター`Lightning.check-requirements`を`false`に変更し、インポートタスクを再起動する必要があります。
 
-    上流TiDBクラスタのインポートタスクが完了したら、 TiDB Lightningを使用して、同じデータを下流TiDBクラスタにインポートします。下流にRedshiftやSnowflakeなどのデータベースがある場合は、クラウドストレージサービスからCSV、SQL、またはParquetファイルを読み取り、データベースに書き込むように設定できます。
+    上流TiDBクラスターのインポートタスクが完了したら、 TiDB Lightningを使用して、同じデータを下流TiDBクラスターにインポートします。下流にRedshiftやSnowflakeなどのデータベースがある場合は、クラウドストレージサービスからCSV、SQL、またはParquetファイルを読み取り、データベースに書き込むように設定できます。
 
 ## `IMPORT INTO`のシナリオ {#scenarios-for-import-into}
 
@@ -73,6 +73,6 @@ TiCDC を物理インポートモードで使用することは、短期的に�
 
 - シナリオ 2: テーブルを TiCDC によってダウンストリームに複製する必要があります。
 
-    このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。その文の[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信することができます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
+    このシナリオでは、TiCDC の changefeed が有効になっている場合、 `IMPORT INTO`文を送信した後に互換性チェックでエラーが報告されます。その文の[`WithOptions`](/sql-statements/sql-statement-import-into.md#withoptions)に`DISABLE_PRECHECK` (v8.0.0 で導入) を含めて再送信できます。これにより、データインポートタスクは互換性チェックを無視し、データを直接インポートします。
 
     上流 TiDB クラスターのインポートタスクが完了したら、 `IMPORT INTO`を使用して下流 TiDB クラスターに同じデータをインポートします。下流に Redshift や Snowflake などのデータベースがある場合は、クラウドストレージサービスから CSV、SQL、または Parquet ファイルを読み取り、データベースに書き込むように設定できます。

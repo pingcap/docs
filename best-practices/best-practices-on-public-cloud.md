@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/best-practices-on-public-cloud/']
 
 パブリッククラウドインフラストラクチャは、TiDBの導入と管理においてますます人気の選択肢となっています。しかし、パブリッククラウドにTiDBを導入するには、パフォーマンスチューニング、コスト最適化、信頼性、スケーラビリティなど、いくつかの重要な要素を慎重に検討する必要があります。
 
-このドキュメントでは、KV RocksDB におけるコンパクション I/O フローの削減、 Raft Engine専用ディスクの使用、AZ 間トラフィックのコスト最適化、Google Cloud ライブマイグレーションイベントの軽減、大規模クラスタにおける PDサーバーの微調整など、パブリッククラウドへの TiDB の導入に関する様々な重要なベストプラクティスを解説します。これらのベストプラクティスに従うことで、パブリッククラウドにおける TiDB 導入のパフォーマンス、コスト効率、信頼性、スケーラビリティを最大限に高めることができます。
+このドキュメントでは、KV RocksDB におけるコンパクション I/O フローの削減、 Raft Engine専用ディスクの使用、AZ 間トラフィックのコスト最適化、Google Cloud ライブマイグレーションイベントの軽減、大規模クラスターにおける PDサーバーの微調整など、パブリッククラウドへの TiDB の導入に関する様々な重要なベストプラクティスを解説します。これらのベストプラクティスに従うことで、パブリッククラウドにおける TiDB 導入のパフォーマンス、コスト効率、信頼性、スケーラビリティを最大限に高めることができます。
 
 ## KV RocksDB のコンパクション I/O フローを削減 {#reduce-compaction-i-o-flow-in-kv-rocksdb}
 
@@ -18,9 +18,9 @@ TiKVのストレージエンジンである[RocksDB](https://rocksdb.org/)は、
 
 ### Titanを有効にする {#enable-titan}
 
-[Titan](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[RocksDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らすことができます。
+[Titan](/storage-engine/titan-overview.md)は、キーと値の分離のための高性能な[RocksDB](https://github.com/facebook/rocksdb)プラグインであり、大きな値が使用されるときに RocksDB での書き込み増幅を減らせます。
 
-平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size`を`"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan によるコンパクション I/O フローの削減を有効にすることができます。
+平均行サイズが 512 バイトより大きい場合は、次のように`min-blob-size`を`"512B"`または`"1KB"`に設定し、 `blob-file-compression`を`"zstd"`に設定して、Titan によるコンパクション I/O フローの削減を有効にできます。
 
 ```toml
 [rocksdb.titan]
@@ -36,7 +36,7 @@ blob-file-compression = "zstd"
 
 ### すべての圧縮レベルを上げる {#increase-all-the-compression-levels}
 
-平均行サイズが 512 バイトより小さい場合は、次のようにして、デフォルトのカラムファミリーのすべての圧縮レベルを`"zstd"`に増やすことができます。
+平均行サイズが 512 バイトより小さい場合は、次のようにして、デフォルトのカラムファミリーのすべての圧縮レベルを`"zstd"`に増やせます。
 
 ```toml
 [rocksdb.defaultcf]
@@ -63,7 +63,7 @@ sdd           1033.00   4132.00   1141.33  31685.33   571.00    0.94 100.00
 
 #### ミドルレンジディスク {#middle-range-disk}
 
-さまざまなパブリッククラウドに推奨されるミドルレンジ ディスクは次のとおりです。
+さまざまなパブリッククラウドに推奨されるミドルレンジディスクは次のとおりです。
 
 - AWSでは[gp3](https://aws.amazon.com/ebs/general-purpose/)が推奨されます。gp3ボリュームは、ボリュームサイズに関係なく、3000 IOPSと125 MB/秒のスループットを無料で割り当てることができ、通常はRaft Engineに十分な値です。
 
@@ -81,11 +81,11 @@ Raft Engineのレイテンシーをさらに低減したい場合は、ハイエ
 
 - Azure では[Ultra Disk](https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types#ultra-disks)が推奨されます。ディスクサイズ、IOPS、MBPS は、お客様の特定の要件に応じてプロビジョニングできます。
 
-### 例 1: AWS でソーシャル ネットワーク ワークロードを実行する {#example-1-run-a-social-network-workload-on-aws}
+### 例 1: AWS でソーシャルネットワークワークロードを実行する {#example-1-run-a-social-network-workload-on-aws}
 
 AWS は、20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/)ボリュームに対して 3000 IOPS と 125 MBPS/s を提供します。
 
-書き込み集中型のソーシャル ネットワーク アプリケーション ワークロードに AWS 上の専用の 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raft Engineディスクを使用すると、次のような改善が見られますが、推定コストはわずか 0.4% しか増加しません。
+書き込み集中型のソーシャルネットワークアプリケーションワークロードに AWS 上の専用の 20 GB [gp3](https://aws.amazon.com/ebs/general-purpose/) Raft Engineディスクを使用すると、次のような改善が見られますが、推定コストはわずか 0.4% しか増加しません。
 
 - QPS（1秒あたりのクエリ数）が17.5%増加
 - 挿入ステートメントの平均レイテンシーが18.7%減少
@@ -113,7 +113,7 @@ Azure 上のRaft Engineに専用の 32 GB [Ultra Disk](https://learn.microsoft.c
 
 ### 例 3: TiKV マニフェストのRaft Engine用に Google Cloud に専用の pd-ssd ディスクを接続する {#example-3-attach-a-dedicated-pd-ssd-disk-on-google-cloud-for-raft-engine-on-tikv-manifest}
 
-次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスタに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`を構成する方法を示しています。
+次の TiKV 構成例は、 [TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/stable)によってデプロイされた Google Cloud 上のクラスターに 512 GB の追加のディスク[pd-ssd](https://cloud.google.com/compute/docs/disks#disk-types/)を接続し、この特定のディスクにRaft Engineログを保存するように`raft-engine.dir`を構成する方法を示しています。
 
 ```
 tikv:
@@ -139,11 +139,11 @@ AZ間の読み取りトラフィックを削減するには、 [Follower Read機
 
 TiFlash MPPタスクのデータシャッフルによって発生するネットワークトラフィックを削減するため、複数のTiFlashインスタンスを同じアベイラビリティゾーン（AZ）にデプロイすることをお勧めします。v6.6.0以降では、 [圧縮交換](/explain-mpp.md#mpp-version-and-exchange-data-compression)はデフォルトで有効になっており、MPPデータシャッフルによって発生するネットワークトラフィックを削減します。
 
-## Google Cloud でのライブ マイグレーション メンテナンス イベントを軽減する {#mitigate-live-migration-maintenance-events-on-google-cloud}
+## Google Cloud でのライブマイグレーションメンテナンスイベントを軽減する {#mitigate-live-migration-maintenance-events-on-google-cloud}
 
-Google Cloud の[ライブマイグレーション機能](https://cloud.google.com/compute/docs/instances/live-migration-process)は、ダウンタイムを発生させることなく、ホスト間でVMをシームレスに移行できます。しかし、これらの移行イベントは頻度は低いものの、TiDBクラスタで実行されているVMを含むVMのパフォーマンスに重大な影響を与える可能性があります。このようなイベントが発生すると、影響を受けるVMのパフォーマンスが低下し、TiDBクラスタでのクエリ処理時間が長くなる可能性があります。
+Google Cloud の[ライブマイグレーション機能](https://cloud.google.com/compute/docs/instances/live-migration-process)は、ダウンタイムを発生させることなく、ホスト間でVMをシームレスに移行できます。しかし、これらの移行イベントは頻度は低いものの、TiDBクラスターで実行されているVMを含むVMのパフォーマンスに重大な影響を与える可能性があります。このようなイベントが発生すると、影響を受けるVMのパフォーマンスが低下し、TiDBクラスターでのクエリ処理時間が長くなる可能性があります。
 
-Google Cloud によって開始されたライブマイグレーション イベントを検出し、これらのイベントによるパフォーマンスへの影響を軽減するために、TiDB は Google のメタデータ[例](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py)に基づく[監視スクリプト](https://github.com/PingCAP-QE/tidb-google-maintenance)を提供します。このスクリプトを TiDB、TiKV、PD ノードにデプロイして、メンテナンス イベントを検出できます。メンテナンス イベントが検出されると、中断を最小限に抑え、クラスタの動作を最適化するために、次のように適切なアクションが自動的に実行されます。
+Google Cloud によって開始されたライブマイグレーションイベントを検出し、これらのイベントによるパフォーマンスへの影響を軽減するために、TiDB は Google のメタデータ[例](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/master/compute/metadata/main.py)に基づく[監視スクリプト](https://github.com/PingCAP-QE/tidb-google-maintenance)を提供します。このスクリプトを TiDB、TiKV、PD ノードにデプロイして、メンテナンスイベントを検出できます。メンテナンスイベントが検出されると、中断を最小限に抑え、クラスターの動作を最適化するために、次のように適切なアクションが自動的に実行されます。
 
 - TiDB: TiDBノードをcordonしてオフラインにし、TiDBポッドを削除します。これは、TiDBインスタンスのノードプールが自動スケールに設定され、TiDB専用になっていることを前提としています。ノード上で実行されている他のポッドに中断が発生する可能性があり、cordonされたノードは自動スケーラーによって回収されることが想定されます。
 - TiKV: メンテナンス中に、影響を受ける TiKV ストアのリーダーを削除します。
@@ -151,11 +151,11 @@ Google Cloud によって開始されたライブマイグレーション イベ
 
 この監視スクリプトは、Kubernetes 環境での TiDB の強化された管理機能を提供する[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.6/tidb-operator-overview)を使用してデプロイされた TiDB クラスター用に特別に設計されていることに注意することが重要です。
 
-監視スクリプトを活用し、メンテナンス イベント中に必要なアクションを実行することで、TiDB クラスタは Google Cloud 上のライブ マイグレーション イベントをより適切に処理し、クエリ処理と応答時間への影響を最小限に抑えながら、よりスムーズな操作を実現できます。
+監視スクリプトを活用し、メンテナンスイベント中に必要なアクションを実行することで、TiDB クラスターは Google Cloud 上のライブマイグレーションイベントをより適切に処理し、クエリ処理と応答時間への影響を最小限に抑えながら、よりスムーズな操作を実現できます。
 
-## 高QPSの大規模TiDBクラスタのPDをチューニングする {#tune-pd-for-a-large-scale-tidb-cluster-with-high-qps}
+## 高QPSの大規模TiDBクラスターのPDをチューニングする {#tune-pd-for-a-large-scale-tidb-cluster-with-high-qps}
 
-TiDBクラスタでは、TSO（Timestamp Oracle）の提供やリクエストの処理といった重要なタスクを、単一のアクティブなPlacement Driver （PD）サーバーで処理します。しかし、単一のアクティブなPDサーバーに依存すると、TiDBクラスタのスケーラビリティが制限される可能性があります。
+TiDBクラスターでは、TSO（Timestamp Oracle）の提供やリクエストの処理といった重要なタスクを、単一のアクティブなPlacement Driver （PD）サーバーで処理します。しかし、単一のアクティブなPDサーバーに依存すると、TiDBクラスターのスケーラビリティが制限される可能性があります。
 
 ### PD制限の症状 {#symptoms-of-pd-limitation}
 
@@ -165,11 +165,11 @@ TiDBクラスタでは、TSO（Timestamp Oracle）の提供やリクエストの
 
 ### PDパフォーマンスの調整 {#tune-pd-performance}
 
-PDサーバーでの CPU 使用率が高い問題を解決するには、次のチューニング調整を行うことができます。
+PDサーバーでの CPU 使用率が高い問題を解決するには、次のチューニング調整を行えます。
 
 #### PD設定を調整する {#adjust-pd-configuration}
 
-[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) : このパラメータは、PDサーバーが物理TSOバッチを更新する間隔を制御します。間隔を短くすることで、PDサーバーはTSOバッチをより頻繁に割り当てることができ、次の割り当てまでの待ち時間を短縮できます。
+[`tso-update-physical-interval`](/pd-configuration-file.md#tso-update-physical-interval) : このパラメーターは、PDサーバーが物理TSOバッチを更新する間隔を制御します。間隔を短くすることで、PDサーバーはTSOバッチをより頻繁に割り当てることができ、次の割り当てまでの待ち時間を短縮できます。
 
 ```
 tso-update-physical-interval = "10ms" # default: 50ms
@@ -185,7 +185,7 @@ set global tidb_tso_client_batch_max_wait_time = 2; # default: 0
 
 #### TiKV設定を調整する {#adjust-tikv-configuration}
 
-リージョンの数を減らし、システムのハートビートビートのオーバーヘッドを軽減するには、 [リージョンのサイズを調整する](/best-practices/massive-regions-best-practices.md#method-6-adjust-region-size)を参照して、TiKV 構成でリージョンのサイズを適度に増やすことができます。
+リージョンの数を減らし、システムのハートビートビートのオーバーヘッドを軽減するには、 [リージョンのサイズを調整する](/best-practices/massive-regions-best-practices.md#method-6-adjust-region-size)を参照して、TiKV 構成でリージョンのサイズを適度に増やせます。
 
 ```
 [coprocessor]

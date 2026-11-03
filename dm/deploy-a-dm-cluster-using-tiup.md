@@ -3,11 +3,11 @@ title: Deploy a DM Cluster Using TiUP
 summary: TiUP DMを使用して TiDB データ移行をデプロイする方法を学習します。
 ---
 
-# TiUPを使用して DMクラスタをデプロイ {#deploy-a-dm-cluster-using-tiup}
+# TiUPを使用して DMクラスターをデプロイ {#deploy-a-dm-cluster-using-tiup}
 
-[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0で導入されたクラスタ運用・保守ツールです。TiUPは、Golangで記述されたクラスタ管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。TiUP DMを使用すると、DMクラスタのデプロイ、起動、停止、破棄、スケーリング、アップグレードなど、日常的なTiDB Data Migration (DM)操作を簡単に実行でき、DMクラスタパラメータの管理も可能です。
+[TiUP](https://github.com/pingcap/tiup)は、TiDB 4.0で導入されたクラスター運用・保守ツールです。TiUPは、Golangで記述されたクラスター管理コンポーネントである[TiUP DM](/dm/maintain-dm-using-tiup.md)を提供します。TiUP DMを使用すると、DMクラスターのデプロイ、起動、停止、破棄、スケーリング、アップグレードなど、日常的なTiDB Data Migration (DM)操作を簡単に実行でき、DMクラスターパラメーターの管理も可能です。
 
-TiUPはDM v2.0以降のバージョンの導入をサポートしています。このドキュメントでは、さまざまなトポロジのDMクラスタを導入する方法について説明します。
+TiUPはDM v2.0以降のバージョンの導入をサポートしています。このドキュメントでは、さまざまなトポロジーのDMクラスターを導入する方法について説明します。
 
 > **Note:**
 >
@@ -23,7 +23,7 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 ## ステップ1: 制御マシンにTiUPをインストールする {#step-1-install-tiup-on-the-control-machine}
 
-通常のユーザーアカウント（ユーザー`tidb`を例に挙げます）を使用して制御マシンにログインします。以下のTiUPのインストールとクラスタ管理操作はすべて、ユーザー`tidb`で実行できます。
+通常のユーザーアカウント（ユーザー`tidb`を例に挙げます）を使用して制御マシンにログインします。以下のTiUPのインストールとクラスター管理操作はすべて、ユーザー`tidb`で実行できます。
 
 1. 次のコマンドを実行してTiUPをインストールします。
 
@@ -41,11 +41,11 @@ TiUPはDM v2.0以降のバージョンの導入をサポートしています。
 
 ## ステップ2: 初期化設定ファイルを編集する {#step-2-edit-the-initialization-configuration-file}
 
-意図したクラスター トポロジに応じて、クラスター初期化設定ファイルを手動で作成および編集する必要があります。
+意図したクラスタートポロジーに応じて、クラスター初期化設定ファイルを手動で作成および編集する必要があります。
 
 [設定ファイルテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/dm/topology.example.yaml)に従って、YAML 設定ファイル（例： `topology.yaml` ）を作成する必要があります。その他のシナリオでは、設定を適宜編集してください。
 
-コマンド`tiup dm template > topology.yaml`を使用すると、設定ファイル テンプレートをすばやく生成できます。
+コマンド`tiup dm template > topology.yaml`を使用すると、設定ファイルテンプレートをすばやく生成できます。
 
 3 つの DM-master、3つの DM-worker、および 1つの監視コンポーネントインスタンスをデプロイする構成は次のとおりです。
 
@@ -141,7 +141,7 @@ alertmanager_servers:
 >     - TiUPノードは、すべての DM-masterノードの`port` (デフォルトでは`8261` ) に接続できます。
 >     - TiUPノードは、すべての DM-workerノードの`port` (デフォルトでは`8262` ) に接続できます。
 
-`master_servers.host.config`パラメータの詳細については[マスターパラメータ](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)を参照してください。`worker_servers.host.config`のパラメータの詳細については[ワーカーパラメータ](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
+`master_servers.host.config`パラメーターの詳細については[マスターパラメーター](https://github.com/pingcap/tiflow/blob/release-8.5/dm/master/dm-master.toml)を参照してください。`worker_servers.host.config`のパラメーターの詳細については[ワーカーパラメーター](https://github.com/pingcap/tiflow/blob/release-8.5/dm/worker/dm-worker.toml)を参照してください。
 
 ## ステップ3: デプロイメントコマンドを実行する {#step-3-execute-the-deployment-command}
 
@@ -157,13 +157,13 @@ alertmanager_servers:
 tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/root/.ssh/gcp_rsa]
 ```
 
-このステップで使用されるパラメータは次のとおりです。
+このステップで使用されるパラメーターは次のとおりです。
 
-| パラメータ                    | 説明                                                                              |
+| パラメーター                    | 説明                                                                              |
 | ------------------------ | ------------------------------------------------------------------------------- |
 | `${name}`                | DM クラスターの名前 (例: dm-test)                                                        |
 | `${version}`             | DM クラスターのバージョン。 `tiup list dm-master`を実行すると、サポートされている他のバージョンを確認できます。               |
-| `./topology.yaml`        | トポロジ設定ファイルのパス。                                                                  |
+| `./topology.yaml`        | トポロジー設定ファイルのパス。                                                                  |
 | `-u`または`--user`          | クラスターのデプロイを完了するには、root ユーザーまたは ssh および sudo権限を持つ他のユーザーアカウントとしてターゲットマシンにログインします。 |
 | `-p`または`--password`      | 対象ホストのパスワード。指定すると、パスワード認証が使用されます。                                               |
 | `-i`または`--identity_file` | SSH IDファイルのパス。指定すると公開鍵認証が使用されます（デフォルトは"/root/.ssh/id_rsa"）。                     |
@@ -176,7 +176,7 @@ tiup dm deploy ${name} ${version} ./topology.yaml -u ${ssh_user} [-p] [-i /home/
 tiup dm list
 ```
 
-TiUP は複数の DM クラスタの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスタの情報を出力します。これには、名前、デプロイメントユーザー、バージョン、秘密鍵の情報が含まれます。
+TiUP は複数の DM クラスターの管理をサポートしています。上記のコマンドは、現在TiUPによって管理されているすべてのクラスターの情報を出力します。これには、名前、デプロイメントユーザー、バージョン、秘密鍵の情報が含まれます。
 
 ```log
 Name  User  Version  Path                                  PrivateKey
@@ -184,7 +184,7 @@ Name  User  Version  Path                                  PrivateKey
 dm-test  tidb  ${version}  /root/.tiup/storage/dm/clusters/dm-test  /root/.tiup/storage/dm/clusters/dm-test/ssh/id_rsa
 ```
 
-## ステップ5: デプロイされたDMクラスタのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
+## ステップ5: デプロイされたDMクラスターのステータスを確認する {#step-5-check-the-status-of-the-deployed-dm-cluster}
 
 `dm-test`クラスターのステータスを確認するには、次のコマンドを実行します。
 
@@ -202,7 +202,7 @@ tiup dm start dm-test
 
 出力ログに``Started cluster `dm-test` successfully``が含まれていれば起動は成功です。
 
-## ステップ7: DMクラスタの実行状態を確認する {#step-7-verify-the-running-status-of-the-dm-cluster}
+## ステップ7: DMクラスターの実行状態を確認する {#step-7-verify-the-running-status-of-the-dm-cluster}
 
 TiUPを使用して DM クラスターのステータスを確認します。
 
@@ -214,9 +214,9 @@ tiup dm display dm-test
 
 ## ステップ8: dmctlを使用して移行タスクを管理する {#step-8-managing-migration-tasks-using-dmctl}
 
-dmctl は、DM クラスタを制御するためのコマンドラインツールです。 [TiUP経由でdmctlを使用する](/dm/maintain-dm-using-tiup.md#dmctl)ことをお勧めします。
+dmctl は、DM クラスターを制御するためのコマンドラインツールです。 [TiUP経由でdmctlを使用する](/dm/maintain-dm-using-tiup.md#dmctl)ことをお勧めします。
 
-dmctlはコマンドモードと対話モードの両方をサポートしています。詳細については[dmctl を使用して DM クラスターを管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。
+dmctlはコマンドモードと対話型モードの両方をサポートしています。詳細については[dmctl を使用して DM クラスターを管理](/dm/dmctl-introduction.md#maintain-dm-clusters-using-dmctl)を参照してください。
 
 ## ステップ9: データベースのパスワードを暗号化する {#step-9-encrypt-the-database-password}
 

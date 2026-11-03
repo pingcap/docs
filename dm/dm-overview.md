@@ -12,15 +12,15 @@ aliases: ['/ja/tidb-data-migration/stable/overview/','/ja/tidb-data-migration/de
 ![star](https://img.shields.io/github/stars/pingcap/tiflow?style=for-the-badge&logo=github) ![license](https://img.shields.io/github/license/pingcap/tiflow?style=for-the-badge) ![forks](https://img.shields.io/github/forks/pingcap/tiflow?style=for-the-badge)
 -->
 
-[TiDB Data Migration](https://github.com/pingcap/tiflow/tree/release-8.5/dm)(DM)は、統合データ移行タスク管理プラットフォームであり、MySQL互換データベース（MySQL、MariaDB、 Aurora MySQLなど）からTiDBへのフルデータ移行と増分データレプリケーションをサポートします。データ移行の運用コストを削減し、トラブルシューティングプロセスを簡素化するのに役立ちます。
+[TiDB Data Migration](https://github.com/pingcap/tiflow/tree/release-8.5/dm)(DM)は、統合データ移行タスク管理プラットフォームであり、MySQL互換データベース（MySQL、MariaDB、 Aurora MySQLなど）からTiDBへの完全データ移行と増分データレプリケーションをサポートします。データ移行の運用コストを削減し、トラブルシューティングプロセスを簡素化するのに役立ちます。
 
 ## 基本機能 {#basic-features}
 
 - **MySQLとの互換性。** DMはMySQLプロトコルと互換性があり、 MySQL 5.7およびMySQL 8.0のほとんどの機能と構文に対応しています。
 - **DMLおよびDDLイベントの複製。** MySQL binlog内のDMLおよびDDLイベントの解析と複製をサポートします。
 - **MySQLシャードの移行とマージ。** DMは、複数のMySQLデータベースインスタンスを上流から下流の1つのTiDBデータベースに移行およびマージすることをサポートします。さまざまな移行シナリオに合わせてレプリケーションルールをカスタマイズできます。上流のMySQLシャードのDDL変更を自動的に検出して処理できるため、運用コストを大幅に削減できます。
-- **さまざまな種類のフィルタ。** イベントタイプ、正規表現、SQL式を事前に定義することで、データ移行プロセス中にMySQLbinlogイベントをフィルタリングできます。
-- **集中管理。** DMはクラスタ内の数千ノードをサポートし、多数のデータ移行タスクを同時に実行および管理できます。
+- **さまざまな種類のフィルター。** イベントタイプ、正規表現、SQL式を事前に定義することで、データ移行プロセス中にMySQLbinlogイベントをフィルタリングできます。
+- **集中管理。** DMはクラスター内の数千ノードをサポートし、多数のデータ移行タスクを同時に実行および管理できます。
 - **サードパーティのオンラインスキーマ変更プロセスの最適化。** MySQL エコシステムでは、gh-ostやpt-oscなどのツールが広く使用されています。DMは、中間データの不要な移行を回避するために変更プロセスを最適化します。詳細は、[オンラインDDL](/dm/dm-online-ddl-tool-support.md)を参照してください。
 - **高可用性。** DMは、データ移行タスクを異なるノードに自由にスケジュールすることをサポートします。少数のノードがクラッシュしても、実行中のタスクには影響しません。
 
@@ -56,7 +56,7 @@ DMツールを使用する前に、以下の制限事項にご注意ください
 
     - DM は、互換性のない DDL文が発生するとエラーを報告します。このエラーを解決するには、dmctl を使用して手動で処理し、この DDL文をスキップするか、指定された DDL文に置き換える必要があります。詳細については、 [異常な SQL文をスキップまたは置換します](/dm/dm-faq.md#how-to-handle-incompatible-ddl-statements)を参照してください。
 
-    - DMは、ビュー関連のDDL文およびDML文をダウンストリームのTiDBクラスタに複製しません。ダウンストリームのTiDBクラスタでビューを手動で作成することをお勧めします。
+    - DMは、ビュー関連のDDL文およびDML文をダウンストリームのTiDBクラスターに複製しません。ダウンストリームのTiDBクラスターでビューを手動で作成することをお勧めします。
 
 - GBK文字セットとの互換性
 
@@ -76,7 +76,7 @@ DMオープンソースプロジェクトへのご参加を歓迎いたします
 
 ## コミュニティのサポート {#community-support}
 
-DMについては、オンラインドキュメントで詳しく学ぶことができます。ご質問があれば、 [GitHub](https://github.com/pingcap/tiflow/tree/release-8.5/dm)でお問い合わせください。
+DMについては、オンラインドキュメントで詳しく学べます。ご質問があれば、 [GitHub](https://github.com/pingcap/tiflow/tree/release-8.5/dm)でお問い合わせください。
 
 ## ライセンス {#license}
 

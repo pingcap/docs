@@ -7,7 +7,7 @@ summary: TiDB Data Migration (DM) に関するよくある質問 (FAQ) につい
 
 このドキュメントでは、TiDB Data Migration (DM) に関するよくある質問 (FAQ) をまとめています。
 
-## DM は Alibaba RDS またはその他のクラウド データベースからのデータ移行をサポートしていますか? {#does-dm-support-migrating-data-from-alibaba-rds-or-other-cloud-databases}
+## DM は Alibaba RDS またはその他のクラウドデータベースからのデータ移行をサポートしていますか? {#does-dm-support-migrating-data-from-alibaba-rds-or-other-cloud-databases}
 
 現在、DMはMySQLまたはMariaDBの標準バージョンのbinlogのデコードのみをサポートしています。Alibaba Cloud RDSやその他のクラウドデータベースではテストされていません。binlogが標準形式であることが確認できれば、サポートされます。
 
@@ -16,7 +16,7 @@ Alibaba Cloud RDS の主キーのないアップストリームテーブルの�
 互換性に関する既知の問題は次のとおりです。
 
 - **Alibaba Cloud RDS**では、主キーのないアップストリームテーブルの場合、そのbinlog には非表示の主キー列がまだ含まれており、元のテーブル構造と一致していません。
-- **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取ることができますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
+- **HUAWEI Cloud RDS**では、 binlogファイルの直接読み取りはサポートされていません。詳細については、 [HUAWEI Cloud RDS はBinlogバックアップファイルを直接読み取れますか?](https://support.huaweicloud.com/en-us/rds_faq/rds_faq_0210.html)を参照してください。
 
 ## タスク構成のブロックおよび許可リストの正規表現は`non-capturing (?!)`をサポートしていますか? {#does-the-regular-expression-of-the-block-and-allow-list-in-the-task-configuration-support-non-capturing-}
 
@@ -88,7 +88,7 @@ TiDBでサポートされていないDDL文に遭遇した場合は、dmctlを�
 
 ### `Dump`段階 {#in-the-dump-stage}
 
-MySQLはエクスポート時にスナップショットを指定できないため、エクスポート中にデータ移行タスクを更新し、その後再起動してチェックポイントからエクスポートを再開することができません。そのため、`Dump`ステージで移行が必要なテーブルを動的に追加できません。
+MySQLはエクスポート時にスナップショットを指定できないため、エクスポート中にデータ移行タスクを更新し、その後再起動してチェックポイントからエクスポートを再開できません。そのため、`Dump`ステージで移行が必要なテーブルを動的に追加できません。
 
 移行のためにテーブルを追加する必要がある場合は、新しい設定ファイルを使用してタスクを直接再起動することをお勧めします。
 
@@ -108,7 +108,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 2. MySQLクライアントを使用して下流のTiDBデータベースに接続し、既存の移行タスクに対応するチェックポイントテーブルの情報を、 `checkpoint-T`と`checkpoint-S`の間の小さい方の値に手動で更新します。この例では`(mysql- bin.000099, 5678)`です。
 
-    - 更新するチェックポイント テーブルは、スキーマ`{dm_meta}`の`{task-name}_syncer_checkpoint`です。
+    - 更新するチェックポイントテーブルは、スキーマ`{dm_meta}`の`{task-name}_syncer_checkpoint`です。
 
     - 更新するチェックポイント行は`id=(source-id)`と`is_global=1`と一致します。
 
@@ -122,7 +122,7 @@ MySQLはエクスポート時にスナップショットを指定できないた
 
 ## フルインポート中に発生するエラー`packet for query is too large. Try adjusting the 'max_allowed_packet' variable`をどのように処理すればよいですか? {#how-to-handle-the-error-packet-for-query-is-too-large-try-adjusting-the-max_allowed_packet-variable-that-occurs-during-the-full-import}
 
-以下のパラメータをデフォルトの 67108864 (64M) より大きい値に設定します。
+以下のパラメーターをデフォルトの 67108864 (64M) より大きい値に設定します。
 
 - TiDBサーバーのグローバル変数: `max_allowed_packet` 。
 - タスク設定ファイル内の設定項目： `target-database.max-allowed-packet` 。詳細は[DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
@@ -148,7 +148,7 @@ DM v2.0 以降、増分データレプリケーションを続行するために
 - `block-allow-list`の下にある上流のデータベースとテーブルの名前を設定する必要があります。`do-tables`の前に"~"を追加すると、正規表現を使用して名前を一致させることができます。
 - `table-route`は、テーブル名の一致に正規表現ではなくワイルドカード文字を使用します。例えば、 `table_pattern_[0-63]`は、 `table_pattern_0`から`table_pattern_6`までの 7つのテーブルのみに一致します。
 
-## DM がアップストリームからレプリケートしていないのに、 `replicate lag`モニター メトリックにデータが表示されないのはなぜですか? {#why-does-the-replicate-lag-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
+## DM がアップストリームからレプリケートしていないのに、 `replicate lag`モニターメトリックにデータが表示されないのはなぜですか? {#why-does-the-replicate-lag-monitor-metric-show-no-data-when-dm-is-not-replicating-from-upstream}
 
 DM 1.0では、監視データを生成するには`enable-heartbeat`を有効にする必要があります。DM 2.0以降のバージョンでは、この機能はサポートされていないため、監視メトリック`replicate lag`にはデータが存在しないことが想定されます。
 
@@ -161,7 +161,7 @@ DM 1.0では、監視データを生成するには`enable-heartbeat`を有効�
 まず、以下の点を確認して確認する必要があります。
 
 - レプリケーションタスクで`disable-detect`が構成されていません (v2.0.7 以前のバージョン)。
-- データは手動でも他のレプリケーション プログラムによっても挿入されません。
+- データは手動でも他のレプリケーションプログラムによっても挿入されません。
 - このテーブルに関連付けられた DML フィルターは構成されていません。
 
 トラブルシューティングを容易にするために、まず下流のTiDBインスタンスの一般的なログファイルを収集し、その後[TiDB Community Slack channel](https://slack.tidb.io/invite?team=tidb-community&channel=everyone&ref=docs)でサポートを求めることができます。次の例は、一般的なログファイルを収集する方法を示しています。
@@ -189,7 +189,7 @@ curl -X POST -d "tidb_general_log=0" http://{TiDBIP}:10080/settings
 if the DDL is not needed, you can use a filter rule with \"*\" schema-pattern to ignore it.\n\t : parse statement: line 1 column 11 near \"EVENT `event_del_big_table` \r\nDISABLE\" %!!(MISSING)(EXTRA string=ALTER EVENT `event_del_big_table` \r\nDISABLE
 ```
 
-このタイプのエラーの原因は、TiDBパーサーがアップストリームから送信されたDDL文（例えば`ALTER EVENT`）を解析できないため、 `sql-skip`が期待どおりに機能しないことです。設定ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を追加してこれらの文をフィルタリングし、 `schema-pattern: "*"`を設定することができます。DM v2.0.1以降、DMは`EVENT`に関連する文を事前にフィルタリングします。
+このタイプのエラーの原因は、TiDBパーサーがアップストリームから送信されたDDL文（例えば`ALTER EVENT`）を解析できないため、 `sql-skip`が期待どおりに機能しないことです。設定ファイルに[binlogイベントフィルター](/dm/dm-binlog-event-filter.md)を追加してこれらの文をフィルタリングし、 `schema-pattern: "*"`を設定できます。DM v2.0.1以降、DMは`EVENT`に関連する文を事前にフィルタリングします。
 
 DM v6.0以降、 `sql-skip`と`handle-error`が`binlog`に置き換えられました。この問題を回避するには、代わりに`binlog`コマンドを使用してください。
 
@@ -217,7 +217,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 
     1. ダウンストリームデータベースにインポートされたデータをクリーンアップします。
     2. データを処理する DM-workerノードに TiDB-Lightningをデプロイします。
-    3. DM ダンプユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカルバックエンド モードを使用します。
+    3. DM ダンプユニットがエクスポートするデータをインポートするには、TiDB-Lightning のローカルバックエンドモードを使用します。
     4. 完全インポートが完了したら、次の方法でタスク設定ファイルを編集し、タスクを再起動します。
         - `task-mode`を`incremental`に変更します。
         - ダンプユニットが出力するメタデータファイルに記録されている位置に値`mysql-instance.meta.pos`を設定します。
@@ -231,7 +231,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 次の方法で設定することで、この問題を事前に回避できます。
 
 1. 移行タスクが完了する前に必要なbinlogファイルが誤って削除されるのを防ぐため、上流のMySQLデータベースで`expire_logs_days`の値を増やしてください。データ量が多い場合は、タスクを高速化するために、DumplingとTiDB Lightningを同時に使用することをお勧めします。
-2. このタスクのリレーログ機能を有効にすると、binlogの位置が消去されていても DM がリレーログからデータを読み取ることができます。
+2. このタスクのリレーログ機能を有効にすると、binlogの位置が消去されていても DM がリレーログからデータを読み取れます。
 
 ## クラスターがTiUP v1.3.0 または v1.3.1 を使用してデプロイされている場合、DM クラスターの Grafana ダッシュボードに`failed to fetch dashboard`と表示されるのはなぜですか? {#why-does-the-grafana-dashboard-of-a-dm-cluster-display-failed-to-fetch-dashboard-if-the-cluster-is-deployed-using-tiup-v130-or-v131}
 
@@ -241,9 +241,9 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
     1. コマンド`tiup update --self && tiup update dm`を使用して、 TiUP を新しいバージョンにアップグレードします。
     2. クラスター内の Grafana ノードをスケールインからスケールアウトして、Grafana サービスを再起動します。
 - 解決策2:
-    1. `deploy/grafana-$port/bin/public`フォルダをバックアップします。
+    1. `deploy/grafana-$port/bin/public`フォルダーをバックアップします。
     2. [TiUP DMオフラインパッケージ](https://download.pingcap.com/tidb-dm-v2.0.1-linux-amd64.tar.gz)をダウンロードして解凍します。
-    3. オフライン パッケージの`grafana-v4.0.3-**.tar.gz`を解凍します。
+    3. オフラインパッケージの`grafana-v4.0.3-**.tar.gz`を解凍します。
     4. フォルダー`deploy/grafana-$port/bin/public`を `grafana-v4.0.3-**.tar.gz`のフォルダー`public`に置き換えます。
     5. `tiup dm restart $cluster_name -R grafana`を実行して Grafana サービスを再起動します。
 
@@ -251,7 +251,7 @@ DM v2.0.1 以前のバージョンでは、完全インポートが完了する�
 
 これはDMの既知のバグで、DM v2.0.2で修正されています。このバグは、以下の2つの条件が同時に満たされた場合に発生します。
 
-1. ソース設定ファイルでは、パラメータ`enable-relay`と`enable-gtid`は`true`に設定されています。
+1. ソース設定ファイルでは、パラメーター`enable-relay`と`enable-gtid`は`true`に設定されています。
 2. アップストリームデータベースは**MySQLセカンダリデータベース**です。コマンド`show binlog events in '<newest-binlog>' limit 2`を実行してデータベースの`previous_gtids`をクエリすると、次の例のように結果が不連続になります。
 
 ```
@@ -330,16 +330,16 @@ query-status test
 
 この例では、データソース`mysql1`の`syncerBinlogGtid`が連続していません。この場合、データ損失に対処するには、次のいずれかの方法を実行できます。
 
-- 現在の時刻から完全エクスポート タスクのメタデータに記録された位置までのアップストリーム バイナリ ログが消去されていない場合は、次の手順を実行できます。
+- 現在の時刻から完全エクスポートタスクのメタデータに記録された位置までのアップストリームバイナリログが消去されていない場合は、次の手順を実行できます。
     1. 現在のタスクを停止し、連続しない GTID を持つすべてのデータソースを削除します。
     2. すべてのソース設定ファイルで`enable-relay`を`false`に設定します。
-    3. 連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
+    3. 連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポートタスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     4. 増分タスクの`task.yaml`に`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5. 増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
     6. タスクを再度開始します。
-- アップストリーム バイナリ ログが消去されたが、ローカルリレーログが残っている場合は、次の手順を実行できます。
+- アップストリームバイナリログが消去されたが、ローカルリレーログが残っている場合は、次の手順を実行できます。
     1. 現在のタスクを停止します。
-    2. 連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポート タスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
+    2. 連続しない GTID を持つデータソース (上記の例の`mysql1`など) の場合は、タスクを増分タスクに変更し、 `binlog-name` 、 `binlog-pos` 、および`binlog-gtid`情報を含む各完全エクスポートタスクのメタデータ情報を使用して関連する`mysql-instances.meta`を構成します。
     3. 増分タスクの`task.yaml`で、 `binlog-gtid`の前の値を`previous_gtids`の前の値に変更します。上記の例では、 `1-y`を`6-y`に変更します。
     4. `task.yaml`の`syncers.safe-mode`を`true`に設定し、タスクを再開します。
     5. 増分タスクがすべての欠落データをダウンストリームに複製した後、タスクを停止し、 `task.yaml`の`safe-mode`を`false`に変更します。
@@ -364,7 +364,7 @@ DM-masterが起動すると、DMはetcd情報をカレントディレクトリ�
 
 ## dmctl を使用してコマンドを実行すると、DM-masterに接続できないのはなぜですか? {#why-dm-master-cannot-be-connected-when-i-use-dmctl-to-execute-commands}
 
-dmctl execute コマンドを使用すると、DM-masterへの接続に失敗し（コマンドでパラメータ値`--master-addr`を指定している場合でも）、エラーメッセージ`RawCause: context deadline exceeded, Workaround: please check your network connection.`が表示される場合があります。ただし、コマンド`telnet <master-addr>`などを使用してネットワーク接続を確認すると、例外は見つかりません。
+dmctl execute コマンドを使用すると、DM-masterへの接続に失敗し（コマンドでパラメーター値`--master-addr`を指定している場合でも）、エラーメッセージ`RawCause: context deadline exceeded, Workaround: please check your network connection.`が表示される場合があります。ただし、コマンド`telnet <master-addr>`などを使用してネットワーク接続を確認すると、例外は見つかりません。
 
 この場合、環境変数`https_proxy` （ **https** ）を確認してください。この変数が設定されている場合、dmctl は`https_proxy`で指定されたホストとポートに自動的に接続します。ホストに対応する`proxy`転送サービスがない場合、接続は失敗します。
 
@@ -372,7 +372,7 @@ dmctl execute コマンドを使用すると、DM-masterへの接続に失敗し
 
 > **Note:**
 >
-> `proxy`に関連する環境変数には`http_proxy` 、 `https_proxy` 、 `no_proxy`があります。上記の手順を実行しても接続エラーが解決しない場合は、 `http_proxy`と`no_proxy`の設定パラメータが正しいかどうかを確認してください。
+> `proxy`に関連する環境変数には`http_proxy` 、 `https_proxy` 、 `no_proxy`があります。上記の手順を実行しても接続エラーが解決しない場合は、 `http_proxy`と`no_proxy`の設定パラメーターが正しいかどうかを確認してください。
 
 ## DM バージョン 2.0.2 から 2.0.6 で start-relay コマンドを実行したときに返されるエラーを処理するにはどうすればよいですか? {#how-to-handle-the-returned-error-when-executing-start-relay-command-for-dm-versions-from-202-to-206}
 
@@ -396,6 +396,6 @@ flush local meta, Rawcause: open relay-dir/xxx.000001/relay.metayyyy: no such fi
 
 - DM を v2.0.7 以降のバージョンにアップグレードします。
 
-## ロード ユニットが`Unknown character set`エラーを報告するのはなぜですか? {#why-does-the-load-unit-report-the-unknown-character-set-error}
+## ロードユニットが`Unknown character set`エラーを報告するのはなぜですか? {#why-does-the-load-unit-report-the-unknown-character-set-error}
 
 TiDBはMySQLのすべての文字セットをサポートしているわけではありません。そのため、フルインポート中にテーブルスキーマを作成する際にサポートされていない文字セットが使用されると、DMはこのエラーを報告します。このエラーを回避するには、特定のデータに応じて、 [TiDBでサポートされている文字セット](/character-set-and-collation.md)を使用して下流で事前にテーブルスキーマを作成してください。

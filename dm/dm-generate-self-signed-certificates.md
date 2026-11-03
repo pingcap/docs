@@ -7,7 +7,7 @@ summary: "`openssl` を使用して自己署名証明書を生成します。"
 
 このドキュメントでは、 `openssl`を使用して TiDB Data Migration (DM) 用の自己署名証明書を生成する例を示します。また、必要に応じて、要件を満たす証明書と鍵を生成することもできます。
 
-インスタンス クラスターのトポロジが次のとおりであると仮定します。
+インスタンスクラスターのトポロジーが次のとおりであると仮定します。
 
 | 名前   | ホストIP        | サービス    |
 | ---- | ------------ | ------- |
@@ -58,7 +58,7 @@ summary: "`openssl` を使用して自己署名証明書を生成します。"
 
 ## 個々のコンポーネントの証明書を発行する {#issue-certificates-for-individual-components}
 
-### クラスタで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
+### クラスターで使用される可能性のある証明書 {#certificates-that-might-be-used-in-the-cluster}
 
 - DM-master が他のコンポーネントに対して DM-master を認証するために使用する`master`証明書。
 - DM-worker が他のコンポーネントに対して DM-worker を認証するために使用する`worker`証明書。
@@ -74,7 +74,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     openssl genrsa -out master-key.pem 2048
     ```
 
-2. OpenSSL 構成テンプレート ファイルのコピーを作成します (テンプレート ファイルは複数の場所に存在する可能性があるため、実際の場所を参照してください)。
+2. OpenSSL 構成テンプレートファイルのコピーを作成します (テンプレートファイルは複数の場所に存在する可能性があるため、実際の場所を参照してください)。
 
     ```bash
     cp /usr/lib/ssl/openssl.cnf .
@@ -86,7 +86,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     find / -name openssl.cnf
     ```
 
-3. `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタトポロジの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
+3. `openssl.cnf`を編集し、 `[ req ]`フィールドに`req_extensions = v3_req`を追加し、 `[ v3_req ]`フィールドに`subjectAltName = @alt_names`を追加します。最後に、新しいフィールドを作成し、上記のクラスタートポロジーの説明に従って`Subject Alternative Name` (SAN) の情報を編集します。
 
     ```
     [ alt_names ]
@@ -108,7 +108,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     >
     > `0.0.0.0`のような特殊な IP を接続や通信に使用する場合は、 `alt_names`にも追加する必要があります。
 
-4. `openssl.cnf`ファイルを保存し、証明書リクエストファイルを生成します。( `Common Name (e.g. server FQDN or YOUR name) []:`に入力する際に、証明書に`dm`などの共通名 (CN) を割り当てます。これは、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントは、デフォルトでは検証を有効にしません。設定ファイルで有効にすることができます。)
+4. `openssl.cnf`ファイルを保存し、証明書リクエストファイルを生成します。( `Common Name (e.g. server FQDN or YOUR name) []:`に入力する際に、証明書に`dm`などの共通名 (CN) を割り当てます。これは、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントは、デフォルトでは検証を有効にしません。設定ファイルで有効にできます。)
 
     ```bash
     openssl req -new -key master-key.pem -out master-cert.pem -config openssl.cnf
@@ -148,7 +148,7 @@ DM-master インスタンスに証明書を発行するには、次の手順を�
     openssl genrsa -out client-key.pem 2048
     ```
 
-2. 証明書リクエストファイルを生成します (この手順では、証明書に共通名を割り当てることもできます。共通名は、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントはデフォルトで検証を有効にしませんが、設定ファイルで有効にすることができます)。
+2. 証明書リクエストファイルを生成します (この手順では、証明書に共通名を割り当てることもできます。共通名は、サーバーがクライアントの ID を検証するために使用されます。各コンポーネントはデフォルトで検証を有効にしませんが、設定ファイルで有効にできます)。
 
     ```bash
     openssl req -new -key client-key.pem -out client-cert.pem

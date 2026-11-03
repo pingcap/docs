@@ -15,7 +15,7 @@ TiFlashがTiKVクラスターに接続されても、デフォルトではデー
 ALTER TABLE table_name SET TIFLASH REPLICA count;
 ```
 
-上記コマンドのパラメータは以下のとおりです。
+上記コマンドのパラメーターは以下のとおりです。
 
 - `count`はレプリカの数を示します。値が`0`の場合、レプリカは削除されます。
 
@@ -173,7 +173,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
     数分以内に、 TiFlashノードのCPUとディスクIOリソース使用量が大幅に増加し、 TiFlashによるレプリカ作成速度が速くなります。同時に、TiKVノードのCPUとディスクIOリソース使用量も増加します。
 
-    この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンラインサービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にすることができます。
+    この時点で TiKV ノードとTiFlashノードにまだ余分なリソースがあり、オンラインサービスのレイテンシーが大幅に増加しない場合は、制限をさらに緩和して、たとえば元の速度を 3 倍にできます。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 90 add-peer
@@ -182,7 +182,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 3. TiFlashレプリケーションが完了したら、オンラインサービスへの影響を軽減するために、デフォルト構成に戻します。
 
-    デフォルトのレプリカ スケジューリング速度制限を復元するには、次のPD Controlコマンドを実行します。
+    デフォルトのレプリカスケジューリング速度制限を復元するには、次のPD Controlコマンドを実行します。
 
     ```shell
     tiup ctl:v<CLUSTER_VERSION> pd -u http://<PD_ADDRESS>:2379 store limit all engine tiflash 30 add-peer
@@ -245,7 +245,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
     ALTER TABLE t SET TIFLASH REPLICA 2;
     ```
 
-3. PDは、 TiFlashノードの`learner_config`の`server.labels`と、テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
+3. PDは、 TiFlashノードの`learner_config`の`server.labels`と、テーブルのレプリカ数（ `count` ）に基づいて、テーブル`t`のレプリカを異なるアベイラビリティゾーンにスケジュールし、可用性を確保します。詳細については、 [トポロジーラベルによるレプリカのスケジュール](https://docs.pingcap.com/tidb/stable/schedule-replicas-by-topology-labels/)を参照してください。次のSQL文を使用して、 TiFlashノード間のテーブルのリージョンの分散を確認できます。
 
     ```sql
     -- Non-partitioned table
@@ -281,7 +281,7 @@ TiDB クラスターは、次のいずれかの操作を実行すると、 TiFla
 
 <CustomContent platform="tidb">
 
-ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1つの地域デプロイにおける複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2つの地域に配置された 3つのデータセンター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
+ラベルを使用してレプリカをスケジュールする方法の詳細については、 [トポロジーラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md) 、 [1つの地域デプロイにおける複数のデータセンター](/multi-data-centers-in-one-city-deployment.md) 、および[2つの地域に配置された 3つのデータセンター](/three-data-centers-in-two-cities-deployment.md)を参照してください。
 
 TiFlashは、異なるゾーンに対するレプリカ選択戦略の設定をサポートしています。詳細については、 [`tiflash_replica_read`](/system-variables.md#tiflash_replica_read-new-in-v730)を参照してください。
 

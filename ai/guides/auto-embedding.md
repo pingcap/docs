@@ -45,9 +45,9 @@ class Chunk(TableModel):
 table = client.create_table(schema=Chunk, if_exists="overwrite")
 ```
 
-埋め込みモデルによって自動的に決定されるため、 `dimensions`パラメータを指定する必要はありません。
+埋め込みモデルによって自動的に決定されるため、 `dimensions`パラメーターを指定する必要はありません。
 
-ただし、 `dimensions`パラメータを設定してデフォルトの次元を上書きすることができます。
+ただし、 `dimensions`パラメーターを設定してデフォルトの次元を上書きできます。
 
 ### ステップ3. サンプルデータを挿入する {#step-3-insert-some-sample-data}
 
@@ -65,7 +65,7 @@ table.bulk_insert([
 
 ### ステップ4. ベクトル検索を実行する {#step-4-perform-a-vector-search}
 
-クエリテキストを`search()`メソッドに直接渡すことができます。クエリテキストは自動的に埋め込まれ、ベクトル検索に使用されます。
+クエリテキストを`search()`メソッドに直接渡せます。クエリテキストは自動的に埋め込まれ、ベクトル検索に使用されます。
 
 ```python
 table.search("HTAP database").limit(3).to_list()

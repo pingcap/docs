@@ -6,11 +6,11 @@ aliases: ['/ja/docs/dev/best-practices/grafana-monitor-best-practices/','/ja/doc
 
 # Grafana を使用した TiDB 監視のベストプラクティス {#best-practices-for-monitoring-tidb-using-grafana}
 
-トポロジ構成にGrafanaとPrometheusを追加し、[TiUPを使用してTiDBクラスタをデプロイする](/production-deployment-using-tiup.md)と、TiDBクラスター内の様々なコンポーネントとマシンのメトリクスを収集・表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のツールセットが同時にデプロイされます。このドキュメントでは、Grafanaを用いたTiDBの監視に関するベストプラクティスについて説明します。メトリクスを用いてTiDBクラスターの状態を分析し、問題を診断するのに役立つことを目的としています。
+トポロジー構成にGrafanaとPrometheusを追加し、[TiUPを使用してTiDBクラスターをデプロイする](/production-deployment-using-tiup.md)と、TiDBクラスター内の様々なコンポーネントとマシンのメトリクスを収集・表示するために、 [Grafana + Prometheus 監視プラットフォーム](/tidb-monitoring-framework.md)のツールセットが同時にデプロイされます。このドキュメントでは、Grafanaを用いたTiDBの監視に関するベストプラクティスについて説明します。メトリクスを用いてTiDBクラスターの状態を分析し、問題を診断するのに役立つことを目的としています。
 
 ## 監視アーキテクチャ {#monitoring-architecture}
 
-[Prometheus](https://prometheus.io/)は、多次元データモデルと柔軟なクエリ言語を備えた時系列データベースです。[Grafana](https://grafana.com/)は、メトリックを分析および視覚化するためのオープン ソースの監視システムです。
+[Prometheus](https://prometheus.io/)は、多次元データモデルと柔軟なクエリ言語を備えた時系列データベースです。[Grafana](https://grafana.com/)は、メトリックを分析および視覚化するためのオープンソースの監視システムです。
 
 ![The monitoring architecture in the TiDB cluster](/media/prometheus-in-tidb.png)
 
@@ -99,7 +99,7 @@ Y 軸を線形スケールに切り替えます。
 
 ### ヒント3: Y軸のベースラインを変更して変化を強調する {#tip-3-modify-the-baseline-of-the-y-axis-to-amplify-changes}
 
-線形スケールに切り替えても、トレンドがまだ見えない場合があります。例えば、次の図では、クラスターをスケーリングした後の`Store size`のリアルタイムの変化を観察したいのですが、ベースラインが大きいため、小さな変化が見えません。このような状況では、Y軸のベースラインを`0`から`auto`に変更して、上部を拡大表示することができます。下の2つの図を確認すると、データ移行が始まっていることがわかります。
+線形スケールに切り替えても、トレンドがまだ見えない場合があります。例えば、次の図では、クラスターをスケーリングした後の`Store size`のリアルタイムの変化を観察したいのですが、ベースラインが大きいため、小さな変化が見えません。このような状況では、Y軸のベースラインを`0`から`auto`に変更して、上部を拡大表示できます。下の2つの図を確認すると、データ移行が始まっていることがわかります。
 
 ベースラインのデフォルトは`0`です。
 
