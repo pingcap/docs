@@ -9,7 +9,7 @@ summary: このドキュメントでは、TiDB Cloudから Apache Pulsar へデ�
 
 > **Note:**
 >
-> - 変更フィード機能を使用してデータをApache Pulsarに複製するには、 TiDB Cloud Dedicatedクラスタのバージョンがv7.5.1以降であることを確認してください。
+> - 変更フィード機能を使用してデータをApache Pulsarに複製するには、 TiDB Cloud Dedicatedクラスターのバージョンがv7.5.1以降であることを確認してください。
 > - [TiDB Cloud Starter](/tidb-cloud/select-cluster-tier.md#starter)インスタンスでは、変更フィード機能は利用できません。
 > - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential)インスタンスの場合、変更フィード機能はリクエストに応じてのみ利用できます。詳細については、 [変更フィード](/tidb-cloud/essential-changefeed-overview.md)を参照してください。
 
@@ -26,15 +26,15 @@ summary: このドキュメントでは、TiDB Cloudから Apache Pulsar へデ�
 Apache Pulsarにデータをストリーミングするためのチェンジフィードを作成する前に、以下の前提条件を満たす必要があります。
 
 - ネットワーク接続を設定する
-- Pulsar ACL認証のための権限を追加する
+- Pulsar ACL認可のための権限を追加する
 - Apache Pulsarでトピックを手動で作成するか、Apache Pulsarブローカーの設定で[`allowAutoTopicCreation`](https://pulsar.apache.org/reference/#/4.0.x/config/reference-configuration-broker?id=allowautotopiccreation)を有効にしてください。
 
 ### ネットワーク {#network}
 
-TiDBクラスタがApache Pulsarサービスに接続できることを確認してください。接続方法は以下のいずれかを選択できます。
+TiDBクラスターがApache Pulsarサービスに接続できることを確認してください。接続方法は以下のいずれかを選択できます。
 
-- VPCピアリング：潜在的なVPC CIDRの競合を回避するためのネットワーク計画と、セキュリティ上の懸念事項の考慮が必要です。
-- パブリックIP：PulsarがパブリックIPをアドバタイズする場合に適しています。この方法は本番環境では推奨されず、セキュリティ上の懸念事項を慎重に検討する必要があります。
+- VPC Peering：潜在的なVPC CIDRの競合を回避するためのネットワーク計画と、セキュリティ上の懸念事項の考慮が必要です。
+- Public IP：PulsarがパブリックIPをアドバタイズする場合に適しています。この方法は本番環境では推奨されず、セキュリティ上の懸念事項を慎重に検討する必要があります。
 
 <SimpleTab>
 <div label="VPC Peering">
@@ -45,7 +45,7 @@ Apache PulsarサービスがインターネットにアクセスできないAWS 
 
 2. Apache Pulsarサービスが関連付けられているセキュリティグループの受信ルールを変更します。
 
-    TiDB Cloudクラスタが配置されているリージョンのCIDRを受信ルールに追加する必要があります。CIDRは**VPC Peering**ページで確認できます。これにより、TiDBクラスタからPulsarブローカーへのトラフィックが流れるようになります。
+    TiDB Cloudクラスターが配置されているリージョンのCIDRを受信ルールに追加する必要があります。CIDRは**VPC Peering**ページで確認できます。これにより、TiDBクラスターからPulsarブローカーへのトラフィックが流れるようになります。
 
 3. Apache PulsarのURLにホスト名が含まれている場合、 TiDB CloudがApache PulsarブローカーのDNSホスト名を解決できるようにする必要があります。
 
@@ -57,7 +57,7 @@ Apache Pulsar サービスがインターネットにアクセスできない Go
 1. Apache Pulsar サービスの VPC と TiDB クラスターの間で[VPCピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
 2. Apache Pulsarが配置されているVPCのイングレスファイアウォールルールを変更します。
 
-    TiDB Cloudクラスタが配置されているリージョンのCIDRを、イングレスファイアウォールルールに追加する必要があります。CIDRは**VPC Peering**ページで確認できます。これにより、TiDBクラスタからPulsarブローカーへのトラフィックが流れるようになります。
+    TiDB Cloudクラスターが配置されているリージョンのCIDRを、イングレスファイアウォールルールに追加する必要があります。CIDRは**VPC Peering**ページで確認できます。これにより、TiDBクラスターからPulsarブローカーへのトラフィックが流れるようになります。
 
 </div>
 <div label="Public IP">
@@ -84,7 +84,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 ## ステップ1. Apache PulsarのChangefeedページを開く {#step-1-open-the-changefeed-page-for-apache-pulsar}
 
 1. [TiDB Cloudコンソール](https://tidbcloud.com)にログインします。
-2. 変更フィードイベントの発生源となるTiDBクラスタのクラスタ概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
+2. 変更フィードイベントの発生源となるTiDBクラスターのクラスター概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
 3. **Create Changefeed**をクリックします。
 
 ## ステップ2. changefeedの送信先を設定します {#step-2-configure-the-changefeed-destination}
@@ -111,12 +111,12 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 
 ## ステップ3. 変更フィードのレプリケーションを設定する {#step-3-configure-the-changefeed-replication}
 
-1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
+1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタールール](/table-filter.md)を参照してください。
 
-    - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
+    - **Case Sensitive**：フィルタールールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    - **Filter Rules**：この列でフィルタールールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタールールは最大 100 個まで追加できます。
     - **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
+    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタールールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
 
 2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
@@ -125,14 +125,14 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
         - **Ignore event**：指定されたイベントタイプを除外します。
         - **Ignore SQL**: 指定された式に一致する DDL イベントを除外します。たとえば、 `^drop`は`DROP`で始まるステートメントを除外し、 `add column`は`ADD COLUMN`を含むステートメントを除外します。
         - **Ignore insert value expression**: 特定の条件を満たす`INSERT`文を除外します。たとえば、`id >= 100`は、`id`が 100 以上である`INSERT`文を除外します。
-        - **新しい値の更新式を無視する**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
-        - **古い値の更新を無視する式**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
+        - **Ignore update new value expression**: 新しい値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `gender = 'male'`は`gender`が`male`になるような更新を除外します。
+        - **Ignore update old value expression**: 古い値が指定された条件に一致する`UPDATE`文を除外します。たとえば、 `age < 18`は`age`の古い値が 18 未満である場合の更新を除外します。
         - **Ignore delete value expression**: 指定された条件を満たす`DELETE`文を除外します。たとえば、`name = 'john'`は`name`が`'john'`である`DELETE`文を除外します。
 
 3. **Start Replication Position**領域で、チェンジフィードがPulsarにデータをレプリケートする開始点を選択します。
 
     - **Start replication from now on**：変更フィードは、現在の時点からデータのレプリケーションを開始します。
-    - **Start replication from a specific TSO**: 変更フィードは、指定された[TSO](/tso.md)以降のデータのレプリケーションを開始します。指定された TSO は[ガベージコレクションの安全地点](/read-historical-data.md#how-tidb-manages-the-data-versions)内にある必要があります。
+    - **Start replication from a specific TSO**: 変更フィードは、指定された[TSO](/tso.md)以降のデータのレプリケーションを開始します。指定された TSO は[ガベージコレクションのセーフポイント](/read-historical-data.md#how-tidb-manages-the-data-versions)内にある必要があります。
     - **Start replication from a specific time**：変更フィードは、指定されたタイムスタンプ以降からデータのレプリケーションを開始します。指定されたタイムスタンプは、ガベージコレクションのセーフポイント内である必要があります。
 
 4. **Data Format**領域で、希望するPulsarメッセージのフォーマットを選択してください。
@@ -149,17 +149,17 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
     >
     > ダウンストリームとしてPulsarを選択した場合、チェンジフィードは自動的にトピックを作成しません。必要なトピックは事前に作成しておく必要があります。
 
-    - **すべての変更ログを、指定された1つのPulsarトピックに送信する**
+    - **Send all changelogs to one specified Pulsar Topic**
 
         変更フィードからすべてのメッセージを単一のPulsarトピックに送信する場合は、このモードを選択してください。トピック名は**Topic Name**フィールドで指定できます。
 
-    - **変更履歴をテーブルごとにPulsarトピックに配布する**
+    - **Distribute changelogs by table to Pulsar Topics**
 
         変更フィードで各テーブルのすべての Pulsar メッセージを専用の Pulsar トピックに送信する場合は、このモードを選択してください。トピック名は、**Topic Prefix**、データベース名とテーブル名の間の**Separator**、および**Topic Suffix**を設定することで指定できます。たとえば、区切り文字を`_`に設定すると、Pulsar メッセージは`<Topic Prefix><DatabaseName>_<TableName><Topic Suffix>`の形式の名前を持つトピックに送信されます。これらのトピックは、事前に Pulsar 上に作成しておく必要があります。
 
         スキーマ作成イベントなどの行以外のイベントの変更ログについては、 **Default Topic Name**フィールドにトピック名を指定できます。変更フィードは、行以外のイベントをこのトピックに送信し、変更ログを収集します。
 
-    - **データベースごとに変更ログをPulsarトピックに配信する**
+    - **Distribute changelogs by database to Pulsar Topics**
 
         変更フィードが各データベースのすべてのPulsarメッセージを専用のPulsarトピックに送信するようにするには、このモードを選択してください。**Topic Prefix**と**Topic Suffix**を設定することで、データベースのトピック名を指定できます。
 
@@ -167,7 +167,7 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 
     Pulsarはマルチテナントをサポートしているため、デフォルト設定と異なる場合は、 **Pulsar Tenant**と**Pulsar Namespace**を設定することもできます。
 
-6. **Partition Distribution**領域では、Pulsar メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャ**を定義することもできます。TiDB Cloudでは、変更イベントを Pulsar パーティションに分散するための 4つのルール オプションが提供されています。
+6. **Partition Distribution**領域では、Pulsar メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャー**を定義することも、**テーブルごとに異なるパーティションディスパッチャー**を定義することもできます。TiDB Cloudでは、変更イベントを Pulsar パーティションに分散するための 4つのルールオプションが提供されています。
 
     - **Primary key or unique index**
 
@@ -185,11 +185,11 @@ Apache PulsarサービスにパブリックIPアクセスを提供する場合�
 
         テーブルのPulsarメッセージを異なるパーティションに送信するように変更フィードを設定する場合は、この配信方法を選択してください。行の変更ログで指定された列の値によって、変更ログの送信先パーティションが決まります。この配信方法により、各パーティション内の順序が確保され、同じ列の値を持つ変更ログが同じパーティションに送信されることが保証されます。
 
-7. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
+7. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクの主キーまたは一意キーのUPDATEイベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
 8. **Next**をクリックしてください。
 
-## ステップ4．仕様の設定とレビュー {#step-4-configure-specification-and-review}
+## ステップ4. 仕様の設定とレビュー {#step-4-configure-specification-and-review}
 
 1. **Specification and Name**セクションで：
 

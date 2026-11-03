@@ -1,21 +1,21 @@
 ---
-title: PostgreSQL セッションパラメータ
-summary: PostgreSQL 互換の TiDB Cloud Starter で PostgreSQL のセッションパラメータを表示および設定する方法を学びます。
+title: PostgreSQL セッションパラメーター
+summary: PostgreSQL 互換の TiDB Cloud Starter で PostgreSQL のセッションパラメーターを表示および設定する方法を学びます。
 ---
 
-# PostgreSQL セッションパラメータ
+# PostgreSQL セッションパラメーター
 
-PostgreSQL 互換の {{{ .starter }}} は、トランザクションの動作、スキーマ解決、タイムゾーン、クエリタイムアウト、出力形式、その他のセッション設定を制御する PostgreSQL 互換のセッションパラメータをサポートしています。
+PostgreSQL 互換の {{{ .starter }}} は、トランザクションの動作、スキーマ解決、タイムゾーン、クエリタイムアウト、出力形式、その他のセッション設定を制御する PostgreSQL 互換のセッションパラメーターをサポートしています。
 
-## パラメータの設定と表示 {#set-and-view-parameters}
+## パラメーターの設定と表示 {#set-and-view-parameters}
 
-現在のセッションのパラメータを変更するには、`SET` を使用します。
+現在のセッションのパラメーターを変更するには、`SET` を使用します。
 
 ```sql
 SET statement_timeout = '120s';
 ```
 
-現在のトランザクションに対してのみパラメータを変更するには、`SET LOCAL` を使用します。
+現在のトランザクションに対してのみパラメーターを変更するには、`SET LOCAL` を使用します。
 
 ```sql
 BEGIN;
@@ -34,19 +34,19 @@ COMMIT;
 SHOW statement_timeout;
 ```
 
-認識されているすべてのパラメータを一覧表示します。
+認識されているすべてのパラメーターを一覧表示します。
 
 ```sql
 SHOW ALL;
 ```
 
-1 つのパラメータをデフォルト値に戻すには、`RESET` を使用します。
+1 つのパラメーターをデフォルト値に戻すには、`RESET` を使用します。
 
 ```sql
 RESET statement_timeout;
 ```
 
-すべてのセッションパラメータをリセットします。
+すべてのセッションパラメーターをリセットします。
 
 ```sql
 RESET ALL;
@@ -54,13 +54,13 @@ RESET ALL;
 
 ## 設定関数 {#configuration-functions}
 
-パラメータを読み取るには、`current_setting()` を使用します。
+パラメーターを読み取るには、`current_setting()` を使用します。
 
 ```sql
 SELECT current_setting('statement_timeout');
 ```
 
-パラメータを変更するには、`set_config()` を使用します。
+パラメーターを変更するには、`set_config()` を使用します。
 
 ```sql
 SELECT set_config(
@@ -75,11 +75,11 @@ SELECT set_config(
 - `false`: セッションスコープ
 - `true`: トランザクションローカルスコープ
 
-## 一般的な PostgreSQL 互換パラメータ {#common-postgresql-compatible-parameters}
+## 一般的な PostgreSQL 互換パラメーター {#common-postgresql-compatible-parameters}
 
-以下のよく使用されるパラメータがサポートされています。
+以下のよく使用されるパラメーターがサポートされています。
 
-| パラメータ | デフォルト | 変更可能 | 説明 |
+| パラメーター | デフォルト | 変更可能 | 説明 |
 | --- | --- | --- | --- |
 | `application_name` | 空 | はい | セッションに関連付けられたアプリケーション名。 |
 | `bytea_output` | `hex` | はい | `BYTEA` 値の出力形式。 |
@@ -100,11 +100,11 @@ SELECT set_config(
 | `max_identifier_length` | `63` | いいえ | PostgreSQL 互換の識別子長 63 バイトを報告します。この制限は現在は適用されません。 |
 | `lc_messages` | `C` | はい | サーバーメッセージに使用されるロケール。 |
 
-現在の PostgreSQL 互換の {{{ .starter }}} インスタンスで利用可能な完全なパラメータセットを確認するには、`SHOW ALL` を使用するのが最適です。
+現在の PostgreSQL 互換の {{{ .starter }}} インスタンスで利用可能な完全なパラメーターセットを確認するには、`SHOW ALL` を使用するのが最適です。
 
 ## 検索パス {#search-path}
 
-`search_path` パラメータは、スキーマ解決の順序を制御します。
+`search_path` パラメーターは、スキーマ解決の順序を制御します。
 
 現在の検索パスを表示します。
 
@@ -160,7 +160,7 @@ SET statement_timeout = 0;
 
 インデックス作成や大規模なデータ移行などの操作では、より大きなタイムアウトを慎重に使用してください。
 
-## トランザクションパラメータ {#transaction-parameters}
+## トランザクションパラメーター {#transaction-parameters}
 
 後続のトランザクションのデフォルト分離レベルを設定します。
 
@@ -181,9 +181,9 @@ SHOW transaction_isolation;
 SHOW transaction_read_only;
 ```
 
-## その他の受け入れられる PostgreSQL パラメータ {#other-accepted-postgresql-parameters}
+## その他の受け入れられる PostgreSQL パラメーター {#other-accepted-postgresql-parameters}
 
-以下の PostgreSQL 互換パラメータも認識されます。
+以下の PostgreSQL 互換パラメーターも認識されます。
 
 - `default_table_access_method`
 - `default_tablespace`
@@ -200,7 +200,7 @@ SHOW transaction_read_only;
 - `row_security`
 - `xmloption`
 
-以下の追加パラメータは、`SHOW` で読み取ることができます。
+以下の追加パラメーターは、`SHOW` で読み取れます。
 
 - `is_superuser`
 - `listen_addresses`
@@ -215,9 +215,9 @@ SHOW transaction_read_only;
 
 一部の値は、PostgreSQL クライアントおよびツールとの互換性のために公開されていますが、対応する PostgreSQL 本体のサーバーのすべての機能が利用可能であることを意味するものではありません。
 
-## 互換性専用パラメータ {#compatibility-only-parameters}
+## 互換性専用パラメーター {#compatibility-only-parameters}
 
-一部の PostgreSQL パラメータは、PostgreSQL クライアントやフレームワークがセッションを正常に初期化できるように受け入れられますが、それらを変更してもクエリの動作は変わりません。
+一部の PostgreSQL パラメーターは、PostgreSQL クライアントやフレームワークがセッションを正常に初期化できるように受け入れられますが、それらを変更してもクエリの動作は変わりません。
 
 ### `work_mem` {#work-mem}
 
@@ -250,9 +250,9 @@ SET session_replication_role = 'replica';
 
 バルクロード中にトリガーを抑止するために `session_replication_role` に依存しないでください。
 
-## 全文検索パラメータ {#full-text-search-parameter}
+## 全文検索パラメーター {#full-text-search-parameter}
 
-`default_text_search_config` パラメータは、デフォルトの全文検索設定を制御します。
+`default_text_search_config` パラメーターは、デフォルトの全文検索設定を制御します。
 
 現在の値を表示します。
 
@@ -266,9 +266,9 @@ SHOW default_text_search_config;
 SET default_text_search_config = 'simple';
 ```
 
-## ベクトル検索パラメータ {#vector-search-parameter}
+## ベクトル検索パラメーター {#vector-search-parameter}
 
-`hnsw.ef_search` パラメータは、現在のセッションにおける HNSW の候補リストサイズを制御します。
+`hnsw.ef_search` パラメーターは、現在のセッションにおける HNSW の候補リストサイズを制御します。
 
 表示するには、次を実行します。
 
@@ -284,9 +284,9 @@ SET hnsw.ef_search = 100;
 
 デフォルト値は `40` です。値を大きくすると、追加のクエリレイテンシーを伴う代わりに再現率が向上する場合があります。
 
-## 埋め込みパラメータ {#embedding-parameter}
+## 埋め込みパラメーター {#embedding-parameter}
 
-`embedding` 拡張機能を有効にすると、`embedding.dimensions` パラメータは、サポートされているサーバー側埋め込み関数で使用される出力次元を制御します。
+`embedding` 拡張機能を有効にすると、`embedding.dimensions` パラメーターは、サポートされているサーバー側埋め込み関数で使用される出力次元を制御します。
 
 例:
 

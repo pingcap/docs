@@ -89,7 +89,7 @@ Windowsの場合、 `ticloud`は以下のいずれかの方法でインストー
 
     GitHub Actions で`ticloud`を設定するには、 [`setup-tidbcloud-cli`](https://github.com/tidbcloud/setup-tidbcloud-cli)を使用します。
 
-MySQL コマンドライン クライアントがインストールされていない場合はインストールしてください。インストール方法については[Windows 用 MySQL インストーラー](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html)の手順を参照してください。Windows で`ticloud connect`を起動するには、 `mysql.exe`を含むディレクトリが PATH 環境変数に含まれている必要があります。
+MySQL コマンドラインクライアントがインストールされていない場合はインストールしてください。インストール方法については[Windows 用 MySQL インストーラー](https://dev.mysql.com/doc/refman/8.0/en/mysql-installer.html)の手順を参照してください。Windows で`ticloud connect`を起動するには、 `mysql.exe`を含むディレクトリが PATH 環境変数に含まれている必要があります。
 
 </div>
 </SimpleTab>

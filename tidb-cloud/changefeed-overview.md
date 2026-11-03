@@ -19,7 +19,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloud から他のデータサ�
 > **Note:**
 >
 > - 現在、TiDB Cloud では、<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>ごとに最大 100 件の変更フィードのみが許可されます。
-> - 現在、TiDB Cloud では、変更フィードごとに最大 100 個のテーブルフィルタルールのみが許可されます。
+> - 現在、TiDB Cloud では、変更フィードごとに最大 100 個のテーブルフィルタールールのみが許可されます。
 > - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
 > - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストがあった場合にのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
 
@@ -35,7 +35,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloud から他のデータサ�
 
 2. ターゲットの<CustomContent plan="dedicated">TiDB Cloud Dedicated クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>の名前をクリックして概要ページに移動し、左側のナビゲーションペインで **Data** > **Changefeed** をクリックします。changefeed ページが表示されます。
 
-**Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの拡大縮小、一時停止、再開、編集、削除など）を行うことができます。
+**Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの拡大縮小、一時停止、再開、編集、削除など）を行えます。
 
 ## 変更フィードを作成する {#create-a-changefeed}
 
@@ -182,7 +182,7 @@ TiDB Cloud Dedicated の changefeed の請求については、[TiDB Cloud Dedic
 状態は以下のように説明されます。
 
 - `CREATING` : レプリケーションタスクが作成されています。
-- `RUNNING` : レプリケーションタスクは正常に実行され、チェックポイント ts も正常に進行します。
+- `RUNNING` : レプリケーションタスクは正常に実行され、checkpoint-ts も正常に進行します。
 - `EDITING` : レプリケーションタスクが編集されています。
 - `PAUSING` : レプリケーションタスクが一時停止されています。
 - `PAUSED` : レプリケーションタスクが一時停止されました。

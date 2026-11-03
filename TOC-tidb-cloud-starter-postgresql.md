@@ -55,7 +55,7 @@
   - [高度な SQL](/tidb-cloud/starter/pg-advanced-sql.md)
   - [認証とロール](/tidb-cloud/starter/pg-auth-roles.md)
   - [トランザクションと COPY](/tidb-cloud/starter/pg-transactions-copy.md)
-  - [セッションパラメータ](/tidb-cloud/starter/pg-session-parameters.md)
+  - [セッションパラメーター](/tidb-cloud/starter/pg-session-parameters.md)
   - [システムカタログ](/tidb-cloud/starter/pg-system-catalog.md)
   - [行レベルセキュリティ](/tidb-cloud/starter/pg-row-level-security.md)
   - [制限事項と制約](/tidb-cloud/starter/pg-limits-constraints.md)
@@ -77,7 +77,7 @@
   - TiDB Cloud Partner Web Console
     - [TiDB Cloud パートナー](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
-    - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
+    - [販売代理店の顧客](/tidb-cloud/cppo-customer.md)
   - [{{{ .starter }}} と Essential の制限事項](/tidb-cloud/serverless-limitations.md)
   - [TiDB X インスタンスで制限される SQL 機能](/tidb-cloud/limited-sql-features-tidb-x.md)
   - [TiDB の制限事項](/tidb-limitations.md)

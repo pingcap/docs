@@ -475,7 +475,7 @@ FROM users;
 | `VERSION()` | PostgreSQL 互換のサーバーバージョン情報を返します。 |
 | `PG_TYPEOF(value)` | 値のデータ型を返します。 |
 | `PG_BACKEND_PID()` | PostgreSQL 互換のバックエンドプロセス識別子を返します。 |
-| `CURRENT_SETTING(name)` | セッションパラメータ値を返します。 |
+| `CURRENT_SETTING(name)` | セッションパラメーター値を返します。 |
 
 例:
 

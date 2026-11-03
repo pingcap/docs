@@ -11,7 +11,7 @@ summary: このドキュメントでは、Sink to MySQL changefeed を使用し�
 
 > **Note:**
 >
-> 変更フィード機能を使用するには、 TiDB Cloud Dedicatedクラスタのバージョンがv6.1.3以降であることを確認してください。
+> 変更フィード機能を使用するには、 TiDB Cloud Dedicatedクラスターのバージョンがv6.1.3以降であることを確認してください。
 
 </CustomContent>
 
@@ -86,12 +86,12 @@ MySQL サービスがパブリックインターネットアクセスを持た�
 
 <CustomContent plan="dedicated">
 
-**Sink to MySQL** コネクタは、特定のタイムスタンプ以降の増分データのみを {{{ .dedicated }}} クラスターから MySQL にシンクできます。{{{ .dedicated }}} クラスターにすでにデータが存在する場合は、**Sink to MySQL** を有効にする前に、{{{ .dedicated }}} クラスターの既存データをエクスポートして MySQL にロードできます。
+**Sink to MySQL** コネクターは、特定のタイムスタンプ以降の増分データのみを {{{ .dedicated }}} クラスターから MySQL にシンクできます。{{{ .dedicated }}} クラスターにすでにデータが存在する場合は、**Sink to MySQL** を有効にする前に、{{{ .dedicated }}} クラスターの既存データをエクスポートして MySQL にロードできます。
 
 </CustomContent>
 <CustomContent plan="premium,byoc">
 
-**Sink to MySQL** コネクタは、特定のタイムスタンプ以降の増分データのみを {{{ .premium }}} または {{{ .byoc }}} インスタンスから MySQL にシンクできます。{{{ .premium }}} または {{{ .byoc }}} インスタンスにすでにデータが存在する場合は、**Sink to MySQL** を有効にする前に、既存データをエクスポートして MySQL にロードできます。
+**Sink to MySQL** コネクターは、特定のタイムスタンプ以降の増分データのみを {{{ .premium }}} または {{{ .byoc }}} インスタンスから MySQL にシンクできます。{{{ .premium }}} または {{{ .byoc }}} インスタンスにすでにデータが存在する場合は、**Sink to MySQL** を有効にする前に、既存データをエクスポートして MySQL にロードできます。
 
 </CustomContent>
 
@@ -148,12 +148,12 @@ MySQL サービスがパブリックインターネットアクセスを持た�
     - はいの場合、次の設定手順に進みます。
     - そうでない場合は、接続エラーが表示されるため、エラーに対処する必要があります。エラーが解決したら、もう一度 **Next** をクリックします。
 
-6. **Table Filter** をカスタマイズして、複製するテーブルをフィルタリングします。ルールの構文については、[テーブルフィルタルール](/table-filter.md) を参照してください。
+6. **Table Filter** をカスタマイズして、複製するテーブルをフィルタリングします。ルールの構文については、[テーブルフィルタールール](/table-filter.md) を参照してください。
 
-    - **Case Sensitive**: フィルタルールにおけるデータベース名とテーブル名の照合で、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    - **Filter Rules**: この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール `*.*` があります。新しいルールを追加すると、TiDB Cloud は TiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
+    - **Case Sensitive**: フィルタールールにおけるデータベース名とテーブル名の照合で、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    - **Filter Rules**: この列でフィルタールールを設定できます。デフォルトでは、すべてのテーブルを複製することを表すルール `*.*` があります。新しいルールを追加すると、TiDB Cloud は TiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタールールは最大 100 個まで追加できます。
     - **Tables with valid keys**: この列には、主キーまたは一意インデックスを含む、有効なキーを持つテーブルが表示されます。
-    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。これらのテーブルは、一意の識別子がないために下流で重複イベントを処理する際にデータの不整合が発生する可能性があり、複製中に課題となります。データの一貫性を確保するため、複製を開始する前に、これらのテーブルに一意キーまたは主キーを追加することを推奨します。あるいは、フィルタルールを追加してこれらのテーブルを除外することもできます。例えば、ルール `!test.tbl1` を使用してテーブル `test.tbl1` を除外できます。
+    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。これらのテーブルは、一意の識別子がないために下流で重複イベントを処理する際にデータの不整合が発生する可能性があり、複製中に課題となります。データの一貫性を確保するため、複製を開始する前に、これらのテーブルに一意キーまたは主キーを追加することを推奨します。あるいは、フィルタールールを追加してこれらのテーブルを除外することもできます。例えば、ルール `!test.tbl1` を使用してテーブル `test.tbl1` を除外できます。
 
 7. **Event Filter** をカスタマイズして、複製するイベントをフィルタリングします。
 
@@ -174,7 +174,7 @@ MySQL サービスがパブリックインターネットアクセスを持た�
 
 9. **Next** をクリックして、変更フィードの仕様を設定します。
 
-    - **Changefeed Specification** 領域で、変更フィードで使用する <CustomContent plan="dedicated">Replication Capacity Units (RCUs) の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent> を設定します。
+    - **Changefeed Specification** 領域で、変更フィードで使用する <CustomContent plan="dedicated">レプリケーションキャパシティユニット（RCU）の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent> を設定します。
     - **Changefeed Name** 領域で、変更フィードの名前を指定します。
 
 10. **Next** をクリックして、変更フィードの設定を確認します。

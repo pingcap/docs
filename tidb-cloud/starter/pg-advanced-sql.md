@@ -86,7 +86,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-宣言は複数行にまたがることができます。
+宣言は複数行にまたがれます。
 
 ### 条件分岐 {#conditional-logic}
 
@@ -185,7 +185,7 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-`USING` を使って動的 SQL をパラメータ化します。
+`USING` を使って動的 SQL をパラメーター化します。
 
 ```sql
 CREATE FUNCTION double_it(p INTEGER)
@@ -217,7 +217,7 @@ END;
 $$;
 ```
 
-例外ハンドラは、保護対象ブロックに対して PostgreSQL のロールバックセマンティクスに従います。
+例外ハンドラーは、保護対象ブロックに対して PostgreSQL のロールバックセマンティクスに従います。
 
 `BEGIN ... EXCEPTION` とネストされた手続き型の `BEGIN ... END` ブロックは、`CREATE FUNCTION` 本文内ではサポートされていません。これらは `DO` ブロックでのみサポートされます。
 
@@ -321,7 +321,7 @@ $$ LANGUAGE plpgsql;
 - `WHILE` と `FOREACH`
 - PL/pgSQL の `CASE` 文
 - 動的 `EXECUTE`
-- 例外ハンドラ
+- 例外ハンドラー
 - ネストされた手続き型ブロック
 
 `NEW.status := CASE WHEN ... END` のような `CASE` 式は、代入の中で引き続き使用できます。

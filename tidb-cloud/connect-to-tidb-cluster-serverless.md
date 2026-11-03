@@ -9,8 +9,8 @@ summary: TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにさ
 
 > **Tip:**
 >
-> - TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
-> - このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)を参照してください。
+> - TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスターに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+> - このドキュメントでは、TiDB Cloud StarterおよびTiDB Cloud Essentialのネットワーク接続方法について説明します。特定のツール、ドライバー、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)を参照してください。
 
 ## ネットワーク接続方法 {#network-connection-methods}
 
@@ -26,14 +26,14 @@ TiDB Cloud上にTiDB Cloud StarterまたはTiDB Cloud Essentialインスタン�
 
 - [Serverless Driver（PREVIEW）](/develop/serverless-driver.md)
 
-    TiDB CloudはJavaScript用のサーバーレスドライバを提供しており、これにより、エッジ環境にあるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに、直接接続時と同様の操作感で接続できます。
+    TiDB CloudはJavaScript用のサーバーレスドライバーを提供しており、これにより、エッジ環境にあるTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに、直接接続時と同様の操作感で接続できます。
 
 上記の接続方法の中から、ご自身のニーズに合わせてお好みの方法をお選びください。
 
 | 接続方法         | ユーザーインターフェース | シナリオ                                                                                                                                       |
 | ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | 直接接続         | SQL/ORM      | Java、Node.js、Pythonなどの長時間稼働環境。                                                                                                             |
-| Data Service      | RESTful API  | すべてのブラウザおよびアプリケーションとのやり取り。                                                                                                                 |
+| Data Service      | RESTful API  | すべてのブラウザーおよびアプリケーションとのやり取り。                                                                                                                 |
 | Serverless Driver | SQL/ORM      | [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)や[Cloudflare Workers](https://workers.cloudflare.com/)などのサーバーレスおよびエッジ環境。 |
 
 ## ネットワーク {#network}
@@ -44,9 +44,9 @@ TiDB Cloud StarterとTiDB Cloud Essentialには、2種類のネットワーク�
 
     プライベートエンドポイント接続は、VPC内のSQLクライアントがAWS PrivateLink経由でサービスに安全にアクセスできるようにするプライベートエンドポイントを提供します。AWS PrivateLinkは、簡素化されたネットワーク管理で、データベースサービスへの高度に安全な一方向アクセスを提供します。
 
-- [公開エンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
+- [パブリックエンドポイント](/tidb-cloud/connect-via-standard-connection-serverless.md)
 
-    標準接続では公開エンドポイントが提供されるため、ノートパソコンからSQLクライアントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続できます。
+    標準接続ではパブリックエンドポイントが提供されるため、ノートパソコンからSQLクライアントを介してTiDB Cloud StarterまたはEssentialインスタンスに接続できます。
 
     TiDB Cloud StarterとTiDB Cloud Essentialは[TLS接続](/tidb-cloud/secure-connections-to-serverless-clusters.md)を必要とします。TLSは、アプリケーションからTiDB Cloud StarterまたはEssentialインスタンスへのデータ送信のセキュリティを保証します。
 
@@ -54,9 +54,9 @@ TiDB Cloud StarterとTiDB Cloud Essentialには、2種類のネットワーク�
 
 | 接続方法               | ネットワーク                | 説明                                                                                |
 | ------------------ | --------------------- | --------------------------------------------------------------------------------- |
-| 直接接続               | パブリックまたはプライベートエンドポイント | 直接接続は、パブリックエンドポイントとプライベートエンドポイントの両方を介して行うことができます。                                 |
+| 直接接続               | パブリックまたはプライベートエンドポイント | 直接接続は、パブリックエンドポイントとプライベートエンドポイントの両方を介して行えます。                                 |
 | Data Service（PREVIEW）      | /                     | AWS上でホストされているTiDB Cloud StarterにData Service (PREVIEW)経由でアクセスする場合、ネットワークの種類を指定する必要はありません。 |
-| Serverless Driver（PREVIEW） | 公開エンドポイント             | Serverless Driverは、パブリックエンドポイント経由の接続のみをサポートしています。                                 |
+| Serverless Driver（PREVIEW） | パブリックエンドポイント             | Serverless Driverは、パブリックエンドポイント経由の接続のみをサポートしています。                                 |
 
 ## 次は？ {#what-s-next}
 

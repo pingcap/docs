@@ -1,6 +1,6 @@
 ---
 title: Sink to Apache Kafka
-summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認証のための権限の追加、およびチェンジフィード仕様の構成が含まれます。
+summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデータをストリーミングするためのチェンジフィードの作成方法について説明します。制限事項、前提条件、および Apache Kafka 用のチェンジフィードを構成する手順が含まれています。このプロセスには、ネットワーク接続の設定、Kafka ACL 認可のための権限の追加、およびチェンジフィード仕様の構成が含まれます。
 ---
 
 # Apache Kafkaへのシンク {#sink-to-apache-kafka}
@@ -11,7 +11,7 @@ summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデ�
 
 > **Note:**
 >
-> 変更フィード機能を使用するには、 TiDB Cloud Dedicatedクラスタのバージョンがv6.1.3以降であることを確認してください。
+> 変更フィード機能を使用するには、 TiDB Cloud Dedicatedクラスターのバージョンがv6.1.3以降であることを確認してください。
 
 </CustomContent>
 
@@ -24,7 +24,7 @@ summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデ�
 
 <CustomContent plan="dedicated">
 
-- ネットワーク接続方法としてプライベートリンクまたはプライベートサービスコネクトを選択する場合は、 TiDB Cloud Dedicatedクラスタのバージョンが以下の要件を満たしていることを確認してください。
+- ネットワーク接続方法としてPrivate LinkまたはPrivate Service Connectを選択する場合は、 TiDB Cloud Dedicatedクラスターのバージョンが以下の要件を満たしていることを確認してください。
 
     - v6.5.xの場合：バージョンv6.5.9以降
     - v7.1.xの場合：バージョンv7.1.4以降
@@ -34,7 +34,7 @@ summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデ�
 - Kafkaメッセージのパーティション分散については、以下の点に注意してください。
 
     - 変更ログを主キーまたはインデックス値に基づいて、指定したインデックス名を持つ Kafka パーティションに分散する場合は、 TiDB Cloud Dedicatedクラスターのバージョンが v7.5.0 以降であることを確認してください。
-    - 変更ログを列値ごとにKafkaパーティションに分散する場合は、 TiDB Cloud Dedicatedクラスタのバージョンがv7.5.0以降であることを確認してください。
+    - 変更ログを列値ごとにKafkaパーティションに分散する場合は、 TiDB Cloud Dedicatedクラスターのバージョンがv7.5.0以降であることを確認してください。
 
 </CustomContent>
 
@@ -43,13 +43,13 @@ summary: このドキュメントでは、TiDB Cloudから Apache Kafka へデ�
 Apache Kafkaにデータをストリーミングするためのチェンジフィードを作成する前に、以下の前提条件を満たす必要があります。
 
 - ネットワーク接続を設定する
-- Kafka ACL認証の権限を追加する
+- Kafka ACL認可の権限を追加する
 
 ### ネットワーク {#network}
 
 <CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent> が Apache Kafka サービスに接続できることを確認します。次の接続方法のいずれかを選択できます。
 
-- Private Connect: VPC CIDR の競合を回避し、セキュリティ コンプライアンスを満たすのに最適ですが、追加の [プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost) が発生します。
+- Private Connect: VPC CIDR の競合を回避し、セキュリティコンプライアンスを満たすのに最適ですが、追加の [プライベートデータリンクのコスト](/tidb-cloud/tidb-cloud-billing-ticdc-rcu.md#private-data-link-cost) が発生します。
 - VPC Peering: 費用対効果の高い選択肢として適していますが、潜在的な VPC CIDR の競合やセキュリティ上の考慮事項を管理する必要があります。
 - Public IP: 迅速なセットアップに適しています。
 
@@ -84,9 +84,9 @@ Apache Kafka サービスがインターネットにアクセスできない AWS
 Apache Kafka サービスがインターネットにアクセスできない Google Cloud VPC 内にある場合は、次の手順を実行します。
 
 1. Apache Kafka サービスの VPC と {{{ .dedicated }}} クラスターの間で [VPC ピアリング接続を設定する](/tidb-cloud/set-up-vpc-peering-connections.md)。
-2. Apache Kafka が配置されている VPC のイングレス ファイアウォールルールを変更します。
+2. Apache Kafka が配置されている VPC のイングレスファイアウォールルールを変更します。
 
-    {{{ .dedicated }}} クラスターが配置されているリージョンの CIDR をイングレス ファイアウォールルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} クラスターから Kafka ブローカーへのトラフィックが流れるようになります。
+    {{{ .dedicated }}} クラスターが配置されているリージョンの CIDR をイングレスファイアウォールルールに追加する必要があります。CIDR は **VPC Peering** ページで確認できます。これにより、{{{ .dedicated }}} クラスターから Kafka ブローカーへのトラフィックが流れるようになります。
 
 </div>
 <div label="Public IP">
@@ -129,12 +129,12 @@ Apache Kafka サービスに Public IP アクセスを提供する場合は、�
 </SimpleTab>
 </CustomContent>
 
-### Kafka ACL認証 {#kafka-acl-authorization}
+### Kafka ACL認可 {#kafka-acl-authorization}
 
 TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミングし、Kafkaトピックを自動的に作成できるようにするには、Kafkaに以下の権限が追加されていることを確認してください。
 
-- Kafka のトピック リソース タイプに`Create`および`Write`権限が追加されます。
-- Kafka のクラスタリソース タイプに`DescribeConfigs`権限が追加されます。
+- Kafka のトピックリソースタイプに`Create`および`Write`権限が追加されます。
+- Kafka のクラスターリソースタイプに`DescribeConfigs`権限が追加されます。
 
 たとえば、Kafka クラスターが Confluent Cloud にある場合、詳細については Confluent ドキュメントの[リソース](https://docs.confluent.io/platform/current/kafka/authorization.html#resources)と[ACLの追加](https://docs.confluent.io/platform/current/kafka/authorization.html#adding-acls)を参照してください。
 
@@ -244,14 +244,14 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 </CustomContent>
 </SimpleTab>
 
-## ステップ3．チェンジフィードを設定する {#step-3-set-the-changefeed}
+## ステップ3. チェンジフィードを設定する {#step-3-set-the-changefeed}
 
-1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタルール](/table-filter.md)を参照してください。
+1. **Table Filter**をカスタマイズして、複製するテーブルをフィルターします。ルールの構文については、[テーブルフィルタールール](/table-filter.md)を参照してください。
 
-    - **Case Sensitive**：フィルタルールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
-    - **Filter Rules**：この列でフィルタルールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタルールは最大 100 個まで追加できます。
+    - **Case Sensitive**：フィルタールールにおけるデータベース名とテーブル名の照合において、大文字小文字を区別するかどうかを設定できます。デフォルトでは、大文字小文字は区別されません。
+    - **Filter Rules**：この列でフィルタールールを設定できます。デフォルトでは、すべてのテーブルを複製するルール`*.*`が設定されています。新しいルールを追加すると、 TiDB Cloud はTiDB 内のすべてのテーブルをクエリし、右側のボックスにルールに一致するテーブルのみを表示します。フィルタールールは最大 100 個まで追加できます。
     - **Tables with valid keys**：この列には、主キーや一意インデックスなど、有効なキーを持つテーブルが表示されます。
-    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタルールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
+    - **Tables without valid keys**: この列には、主キーまたは一意キーがないテーブルが表示されます。一意の識別子がないと、ダウンストリームが重複イベントを処理する際にデータの一貫性が失われる可能性があるため、これらのテーブルはレプリケーション中に問題となります。データの一貫性を確保するには、レプリケーションを開始する前に、これらのテーブルに一意キーまたは主キーを追加することをお勧めします。または、フィルタールールを追加してこれらのテーブルを除外することもできます。たとえば、ルール`!test.tbl1`を使用して、テーブル`test.tbl1`を除外できます。
 
 2. **Event Filter**をカスタマイズして、複製したいイベントを絞り込みます。
 
@@ -309,7 +309,7 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
         変更フィードで全ての変更ログに対して1つのKafkaトピックを作成する場合は、このモードを選択してください。そうすると、変更フィード内のすべてのKafkaメッセージが1つのKafkaトピックに送信されます。トピック名は**Topic Name**フィールドで指定できます。
 
-8. **Partition Distribution**エリアでは、Kafka メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャ**を定義することも、**テーブルごとに異なるパーティションディスパッチャ**を定義することもできます。TiDB Cloudでは、次の4種類のディスパッチャが提供されています。
+8. **Partition Distribution**エリアでは、Kafka メッセージの送信先パーティションを決定できます。**すべてのテーブルに対して単一のパーティションディスパッチャー**を定義することも、**テーブルごとに異なるパーティションディスパッチャー**を定義することもできます。TiDB Cloudでは、次の4種類のディスパッチャーが提供されています。
 
     - **Distribute changelogs by primary key or index value to Kafka partition**
 
@@ -325,24 +325,24 @@ TiDB Cloudの変更フィードがデータをApache Kafkaにストリーミン�
 
     - **Distribute changelogs by column value to Kafka partition**
 
-        テーブルのKafkaメッセージを複数のパーティションに送信するように変更フィードを設定したい場合は、この配信方法を選択してください。行の変更ログで指定された列の値によって、変更ログの送信先パーティションが決まります。この配信方法では、各パーティション内の順序が確保され、同じ列の値を持つ変更ログが同じパーティションに送信されることが保証されます。
+        テーブルのKafkaメッセージを複数のパーティションに送信するように変更フィードを設定したい場合は、この分散方法を選択してください。行の変更ログで指定された列の値によって、変更ログの送信先パーティションが決まります。この分散方法では、各パーティション内の順序が確保され、同じ列の値を持つ変更ログが同じパーティションに送信されることが保証されます。
 
 9. **Topic Configuration**エリアで、以下の数値を設定してください。changefeedは、これらの数値に基づいてKafkaトピックを自動的に作成します。
 
     - **Replication Factor**：各KafkaメッセージがレプリケートされるKafkaサーバーの数を制御します。有効な値の範囲は、 [`min.insync.replicas`](https://kafka.apache.org/33/documentation.html#brokerconfigs_min.insync.replicas)からKafkaブローカーの数までです。
     - **Partition Number**：トピックに存在するパーティションの数を制御します。有効な値の範囲は`[1, 10 * the number of Kafka brokers]`です。
 
-10. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクにおける、主キーまたは一意キーを分割したUPDATEイベント](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
+10. **Split Event**エリアで、 `UPDATE`イベントを別々の`DELETE`と`INSERT`イベントに分割するか、生の`UPDATE`イベントとして保持するかを選択します。詳細については、 [MySQL以外のシンクの主キーまたは一意キーのUPDATEイベントを分割する](https://docs.pingcap.com/tidb/stable/ticdc-split-update-behavior/#split-primary-or-unique-key-update-events-for-non-mysql-sinks)を参照してください。
 
 11. **Next**をクリックしてください。
 
 ## ステップ4. 変更フィード仕様を設定します {#step-4-configure-your-changefeed-specification}
 
-1. **Changefeed Specification**エリアで、チェンジフィードで使用する<CustomContent plan="dedicated">Replication Capacity Units (RCUs) の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent>を設定します。
+1. **Changefeed Specification**エリアで、チェンジフィードで使用する<CustomContent plan="dedicated">レプリケーションキャパシティユニット（RCU）の数</CustomContent><CustomContent plan="premium">Changefeed Capacity Units (CCUs) の数</CustomContent><CustomContent plan="byoc">TiCDC ノードのプロビジョニング済み vCPU</CustomContent>を設定します。
 2. **Changefeed Name**エリアで、変更フィードの名前を指定します。
 3. **Next**をクリックして、設定した内容を確認し、次のページに進みます。
 
-## ステップ5．設定内容を確認する {#step-5-review-the-configurations}
+## ステップ5. 設定内容を確認する {#step-5-review-the-configurations}
 
 このページでは、設定したすべての変更フィード設定を確認できます。
 

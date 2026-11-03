@@ -3,16 +3,16 @@ title: Connect to Your TiDB Cloud Dedicated Cluster
 summary: さまざまな方法でTiDB Cloud Dedicatedクラスターに接続する方法を学びましょう。
 ---
 
-# TiDB Cloud Dedicatedクラスタに接続します {#connect-to-your-tidb-cloud-dedicated-cluster}
+# TiDB Cloud Dedicatedクラスターに接続します {#connect-to-your-tidb-cloud-dedicated-cluster}
 
-このドキュメントでは、TiDB Cloud Dedicatedクラスタへの接続方法について説明します。
+このドキュメントでは、TiDB Cloud Dedicatedクラスターへの接続方法について説明します。
 
 > **Tip:**
 >
 > - TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [TiDB Cloud StarterまたはEssentialインスタンスに接続します](/tidb-cloud/connect-to-tidb-cluster-serverless.md)を参照してください。
-> - このドキュメントでは、 TiDB Cloud Dedicatedのネットワーク接続方法について説明します。特定のツール、ドライバ、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)を参照してください。
+> - このドキュメントでは、 TiDB Cloud Dedicatedのネットワーク接続方法について説明します。特定のツール、ドライバー、または ORM を介して TiDB に接続する方法については、 [TiDBに接続する](/develop/dev-guide-connect-to-tidb.md)を参照してください。
 
-TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかのネットワーク接続方法で接続できます。
+TiDB Cloud Dedicatedクラスターが作成されたら、以下のいずれかのネットワーク接続方法で接続できます。
 
 - 直接接続
 
@@ -28,23 +28,23 @@ TiDB Cloud Dedicatedクラスタが作成されたら、以下のいずれかの
 
         プライベートエンドポイント接続は、VPC内のSQLクライアントがTiDB Cloud Dedicatedクラスターに安全にアクセスできるようにするためのプライベートエンドポイントを提供します。これは、さまざまなクラウドプロバイダーが提供するプライベートリンクサービスを利用しており、ネットワーク管理を簡素化しながら、データベースサービスへの高度に安全な一方向アクセスを実現します。
 
-        - AWS でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は AWS PrivateLink を使用します。詳細については、 [AWS PrivateLink を介してTiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
-        - Azure 上でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は Azure Private Link を使用します。詳細については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)を参照してください。
-        - Google Cloud でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は Google Cloud Private Service Connect を使用します。詳細については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスタに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
+        - AWS でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は AWS PrivateLink を使用します。詳細については、 [AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
+        - Azure 上でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は Azure Private Link を使用します。詳細については、 [Azureプライベートリンクを介してTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-azure.md)を参照してください。
+        - Google Cloud でホストされているTiDB Cloud Dedicatedクラスターの場合、プライベートエンドポイント接続は Google Cloud Private Service Connect を使用します。詳細については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
 
     - [VPCピアリング](/tidb-cloud/set-up-vpc-peering-connections.md)
 
-        レイテンシーを短縮し、セキュリティを強化したい場合は、VPC ピアリングを設定し、クラウドアカウント内の対応するクラウドプロバイダー上の VM インスタンスを使用してプライベートエンドポイント経由で接続します。詳細については、 [VPCピアリング経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
+        レイテンシーを短縮し、セキュリティを強化したい場合は、VPC ピアリングを設定し、クラウドアカウント内の対応するクラウドプロバイダー上の VM インスタンスを使用してプライベートエンドポイント経由で接続します。詳細については、 [VPC ピアリング経由でTiDB Cloud Dedicated に接続する](/tidb-cloud/set-up-vpc-peering-connections.md)を参照してください。
 
-- [組み込みSQLエディタ](/tidb-cloud/explore-data-with-sql-editor.md)
+- [組み込みSQLエディター](/tidb-cloud/explore-data-with-sql-editor.md)
 
     > **Note:**
     >
-    > [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスタでSQLエディタを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+    > [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated)クラスターでSQLエディターを使用するには、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-    クラスターがAWS上でホストされており、クラスターのTiDBバージョンがv6.5.0以降である場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)のSQLエディタを使用して、データの価値を最大化できます。
+    クラスターがAWS上でホストされており、クラスターのTiDBバージョンがv6.5.0以降である場合、 [TiDB Cloudコンソール](https://tidbcloud.com/)のSQLエディターを使用して、データの価値を最大化できます。
 
-    SQLエディタでは、SQLクエリを記述して実行できます。これにより、ローカルSQLクライアントがなくてもデータベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示でき、クエリログも簡単に確認できます。
+    SQLエディターでは、SQLクエリを記述して実行できます。これにより、ローカルSQLクライアントがなくてもデータベースに対してSQLクエリを実行できます。クエリ結果は表やグラフで直感的に表示でき、クエリログも簡単に確認できます。
 
 ## 次は？ {#what-s-next}
 

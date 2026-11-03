@@ -17,11 +17,11 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
     ![lark-ticket-creation-1](/media/tidb-cloud/connected-lark-ticket-creation-1.png)
 
-2. カードの**Reporter**フィールドに[TiDB Cloudコンソール](https://tidbcloud.com/)に使用するメール アドレスを入力し、必要に応じて他のフィールドに入力して、 **Submit**をクリックしてチケットを作成します。
+2. カードの**Reporter**フィールドに[TiDB Cloudコンソール](https://tidbcloud.com/)に使用するメールアドレスを入力し、必要に応じて他のフィールドに入力して、 **Submit**をクリックしてチケットを作成します。
 
     ![lark-ticket-creation-2](/media/tidb-cloud/connected-lark-ticket-creation-2.png)
 
-チケットが作成されると、ボットはスレッド内のチケットリンクを返信します。リンクをクリックすると、 [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)でチケットの詳細を確認できます。
+チケットが作成されると、ボットはスレッドにチケットリンクを返信します。リンクをクリックすると、 [PingCAP ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)でチケットの詳細を確認できます。
 
 ![lark-ticket-creation-3](/media/tidb-cloud/connected-lark-ticket-creation-3.png)
 
@@ -29,7 +29,7 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## チケットの最新情報を購読する {#subscribe-to-ticket-updates}
 
-[サポートチケットを作成する](#create-a-support-ticket)と、Lark **PingCAP Support Group**でチケットの更新情報を直接受け取ることができます。サポートエンジニアがチケットに返信すると、ボットがグループに更新メッセージを投稿します。メッセージには、チケットのタイトル、チケットへのリンク、最新のコメントが含まれます。
+[サポートチケットを作成する](#create-a-support-ticket)と、Lark **PingCAP Support Group**でチケットの更新情報を直接受け取れます。サポートエンジニアがチケットに返信すると、ボットがグループに更新メッセージを投稿します。メッセージには、チケットのタイトル、チケットへのリンク、最新のコメントが含まれます。
 
 ![lark-ticket-creation-5](/media/tidb-cloud/connected-lark-ticket-creation-5.png)
 
@@ -41,4 +41,4 @@ TiDB Cloud **Enterprise** [サポートプラン](/tidb-cloud/connected-care-det
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>にお問い合わせください。
+ヘルプや質問がある場合は、サポートチーム<a href="mailto:support@pingcap.com">support@pingcap.com</a>にお問い合わせください。

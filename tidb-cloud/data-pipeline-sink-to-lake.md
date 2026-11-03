@@ -40,14 +40,14 @@ TiDB Cloud では、サードパーティの ETL ツールを使わずに、Data
     - **Destination**: **TiDB Cloud Lake** を選択します。
     - **Warehouse**: ターゲットの Warehouse を選択します。表示されるのは、インスタンスと同じリージョンにある Warehouse のみです。利用可能な Warehouse がない場合は、まず [TiDB Cloud Lake](https://lake.tidbcloud.com/) で作成し、その後リストを更新してください。
 
-3. （任意）**Database Prefix**、**Database Suffix**、**Table Prefix**、**Table Suffix** フィールドでターゲットの命名規則を設定します。デフォルトでは 4 つのフィールドはすべて空であり、この場合 TiDB Cloud Lake に作成されるデータベース名とテーブル名はソースと同じ名前になります。
+3. （オプション）**Database Prefix**、**Database Suffix**、**Table Prefix**、**Table Suffix** フィールドでターゲットの命名規則を設定します。デフォルトでは 4 つのフィールドはすべて空であり、この場合 TiDB Cloud Lake に作成されるデータベース名とテーブル名はソースと同じ名前になります。
 
     - データベース名: `<database prefix><source database name><database suffix>`
     - テーブル名: `<table prefix><source table name><table suffix>`
 
 ### ステップ 2. 外部 stage を設定する {#step-2-configure-the-external-stage}
 
-外部 stage は、データパイプラインの両側をつなぐオブジェクトストレージです。TiDB Cloud はエクスポートしたスナップショットとキャプチャした行変更を stage に書き込み、TiDB Cloud Lake は stage からデータをロード (load) してターゲット Warehouse に取り込みます。詳細は、[データパイプラインで外部 stage が必要なのはなぜですか？](/tidb-cloud/data-pipeline-lake-faq.md#why-does-a-data-pipeline-require-an-external-stage) を参照してください。
+外部 stage は、データパイプラインの両側をつなぐオブジェクトストレージです。TiDB Cloud はエクスポートしたスナップショットとキャプチャした行変更を stage に書き込み、TiDB Cloud Lake は stage からデータをロードしてターゲット Warehouse に取り込みます。詳細は、[データパイプラインで外部 stage が必要なのはなぜですか？](/tidb-cloud/data-pipeline-lake-faq.md#why-does-a-data-pipeline-require-an-external-stage) を参照してください。
 
 TiDB Cloud Data Pipeline は、外部 stage として Amazon S3 および Alibaba Cloud OSS をサポートしています。バケットは <CustomContent plan="premium">{{{ .premium }}}</CustomContent><CustomContent plan="byoc">{{{ .byoc }}}</CustomContent> インスタンスと同じリージョンに作成し、先にクラウドプロバイダー側の設定を完了してください。設定手順はクラウドプロバイダーによって異なります。
 

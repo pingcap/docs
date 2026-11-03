@@ -35,7 +35,7 @@ summary: Amazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object St
     > - Snappy 圧縮ファイルは[公式Snappyフォーマット](https://github.com/google/snappy)である必要があります。 その他の Snappy 圧縮形式はサポートされていません。
     > - 非圧縮ファイルの場合、場合によっては前述のルールに従ってCSVファイル名を更新できない場合（たとえば、CSVファイルリンクが他のプログラムでも使用されている場合）、ファイル名を変更せずに、[ステップ4](#step-4-import-csv-files)の**Mapping Settings**を使用してソースデータを単一のターゲットテーブルにインポートできます。
 
-## ステップ2．対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
+## ステップ2. 対象テーブルのスキーマを作成する {#step-2-create-the-target-table-schemas}
 
 CSVファイルにはスキーマ情報が含まれていないため、CSVファイルからTiDB Cloudにデータをインポートする前に、以下のいずれかの方法を使用してテーブルスキーマを作成する必要があります。
 
@@ -74,7 +74,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
         >
         > `${db_name}.${table_name}-schema.sql`ファイルには、単一の DDL文のみを含める必要があります。ファイルに複数の DDL文が含まれている場合、最初の文のみが有効になります。
 
-## ステップ3．アカウント間アクセスの設定 {#step-3-configure-cross-account-access}
+## ステップ3. アカウント間アクセスの設定 {#step-3-configure-cross-account-access}
 
 TiDB CloudがAmazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Object Storage Serviceバケット内のCSVファイルにアクセスできるようにするには、次のいずれかの操作を行います。
 
@@ -88,7 +88,7 @@ TiDB CloudがAmazon S3、GCS、Azure Blob Storage、またはAlibaba Cloud Objec
 
 - CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud StarterまたはEssentialインスタンスに対して[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)します。
 
-## ステップ4．CSVファイルをインポートする {#step-4-import-csv-files}
+## ステップ4. CSVファイルをインポートする {#step-4-import-csv-files}
 
 CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポートするには、以下の手順に従ってください。
 
@@ -112,7 +112,7 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
     - **Storage Provider**： **Amazon S3**を選択してください。
     - **Source Files URI** ：
         - 1 つのファイルをインポートする場合は、ソースファイルの URI を`s3://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `s3://sampledata/ingest/TableName.01.csv` 。
-        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
+        - 複数のファイルをインポートする場合は、ソースフォルダーのURIを`s3://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `s3://sampledata/ingest/` 。
     - **Credential**: AWS ロール ARN または AWS アクセスキーを使用してバケットにアクセスできます。詳細については、 [Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
         - **AWS Role ARN** ：AWSロールARNの値を入力してください。
         - **AWS Access Key**：AWSアクセスキーIDとAWSシークレットアクセスキーを入力してください。
@@ -121,11 +121,11 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     - TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
 
@@ -165,18 +165,18 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
     - **Storage Provider**： **Google Cloud Storage**を選択してください。
     - **Source Files URI** ：
         - 1 つのファイルをインポートする場合は、ソースファイルの URI を`[gcs|gs]://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `[gcs|gs]://sampledata/ingest/TableName.01.csv` 。
-        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`[gcs|gs]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[gcs|gs]://sampledata/ingest/` 。
-    - **Credential**: GCS IAM役割サービスアカウント キーを使用してバケットにアクセスできます。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
+        - 複数のファイルをインポートする場合は、ソースフォルダーのURIを`[gcs|gs]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[gcs|gs]://sampledata/ingest/` 。
+    - **Credential**: GCS IAMロールサービスアカウントキーを使用してバケットにアクセスできます。詳細については、 [GCSへのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-gcs-access)を参照してください。
 
 4. **Next**をクリックしてください。
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     - TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
 
@@ -216,18 +216,18 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
     - **Storage Provider**： **Azure Blob Storage**を選択します。
     - **Source Files URI** ：
         - 1 つのファイルをインポートする場合は、ソースファイルの URI を`[azure|https]://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `[azure|https]://sampledata/ingest/TableName.01.csv` 。
-        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`[azure|https]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[azure|https]://sampledata/ingest/` 。
+        - 複数のファイルをインポートする場合は、ソースフォルダーのURIを`[azure|https]://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `[azure|https]://sampledata/ingest/` 。
     - **Credential**: Shared Access Signature (SAS) トークンを使用してバケットにアクセスできます。詳細については、 [Azure Blob Storageへのアクセスを構成する](/tidb-cloud/configure-external-storage-access.md#configure-azure-blob-storage-access)を参照してください。
 
 4. **Next**をクリックしてください。
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     - TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
 
@@ -267,18 +267,18 @@ CSVファイルをTiDB Cloud StarterまたはTiDB Cloud Essentialにインポー
     - **Storage Provider**： **Alibaba Cloud OSS**を選択してください。
     - **Source Files URI** ：
         - 1 つのファイルをインポートする場合は、ソースファイルの URI を`oss://[bucket_name]/[data_source_folder]/[file_name].csv`の形式で入力します。例: `oss://sampledata/ingest/TableName.01.csv` 。
-        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `oss://sampledata/ingest/` 。
+        - 複数のファイルをインポートする場合は、ソースフォルダーのURIを`oss://[bucket_name]/[data_source_folder]/`の形式で入力してください。例： `oss://sampledata/ingest/` 。
     - **Credential** : AccessKey ペアを使用してバケットにアクセスできます。詳細については、 [Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
 
 4. **Next**をクリックしてください。
 
 5. **Destination Mapping**セクションで、ソースファイルをターゲットテーブルにどのようにマッピングするかを指定します。
 
-    **Source Files URI**でディレクトリが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションがデフォルトで選択されます。
+    **Source Files URI**でディレクトリが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションがデフォルトで選択されます。
 
     > **Note:**
     >
-    > **Source Files URI**で単一のファイルが指定されている場合、 **自動マッピングに<a href="/tidb-cloud/naming-conventions-for-data-import.md">ファイル命名規則</a>を使用する**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
+    > **Source Files URI**で単一のファイルが指定されている場合、 **Use [File naming conventions](/tidb-cloud/naming-conventions-for-data-import.md) for automatic mapping**オプションは表示されず、 TiDB Cloudは**Source**フィールドにファイル名を自動的に入力します。この場合、データインポートの対象となるデータベースとテーブルを選択するだけで済みます。
 
     - TiDB Cloud が[ファイル命名規則](/tidb-cloud/naming-conventions-for-data-import.md)に従うすべてのソースファイルを対応するテーブルに自動的にマッピングするには、このオプションを選択したままにして、データ形式として**CSV**を選択します。
 

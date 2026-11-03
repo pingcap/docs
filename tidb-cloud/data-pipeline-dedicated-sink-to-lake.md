@@ -83,7 +83,7 @@ TiDB Cloud Dedicated では TiDB Cloud コンソールでエクスポート機�
 
 ### 2. Dumpling でスナップショットをエクスポートする {#2-export-the-snapshot-with-dumpling}
 
-{{{ .dedicated }}} クラスターに接続できるマシンで Dumpling を実行します。AWS アクセスキーは、`access-key` および `secret-access-key` パラメータを使って `-o` URI に渡します。
+{{{ .dedicated }}} クラスターに接続できるマシンで Dumpling を実行します。AWS アクセスキーは、`access-key` および `secret-access-key` パラメーターを使って `-o` URI に渡します。
 
 ```shell
 tiup dumpling \
@@ -98,16 +98,16 @@ tiup dumpling \
   --s3.region "<region>"
 ```
 
-パラメータの説明:
+パラメーターの説明:
 
 - `--filetype csv` と `--csv-output-dialect snowflake`: データを **Snowflake** 方言の CSV 形式でエクスポートします。
 - `--escape-backslash=false`: バックスラッシュのエスケープを無効にします。
 - 圧縮はデフォルトで無効です。
-- `-o` と `--s3.region`: エクスポートしたファイルを S3 バケットに書き込みます。`-o` URI 内の `access-key` および `secret-access-key` パラメータは、バケット用の認証情報を提供します。
+- `-o` と `--s3.region`: エクスポートしたファイルを S3 バケットに書き込みます。`-o` URI 内の `access-key` および `secret-access-key` パラメーターは、バケット用の認証情報を提供します。
 
 > **Note:**
 >
-> Secret Access Key に `+`、`/`、`=` などの URI 特殊文字が含まれている場合は、先に URL エンコードしてください。あるいは、`AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` 環境変数を設定するか、`~/.aws/credentials` ファイルを使用し、`-o` URI から `access-key` と `secret-access-key` パラメータを省略することもできます。
+> Secret Access Key に `+`、`/`、`=` などの URI 特殊文字が含まれている場合は、先に URL エンコードしてください。あるいは、`AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` 環境変数を設定するか、`~/.aws/credentials` ファイルを使用し、`-o` URI から `access-key` と `secret-access-key` パラメーターを省略することもできます。
 
 エクスポートが正常に完了すると、コマンド出力に JSON サマリーが含まれます。出力内の `SessionParams.tidb_snapshot` フィールドを見つけ、その値を記録してください。この値は **snapshot TSO** です。エクスポートしたスナップショットの続きから増分レプリケーションを開始するため、changefeed の作成時に必要になります。
 
@@ -126,7 +126,7 @@ TiDB Cloud Lake では、S3 バケットからデータをロードするため�
 
 ### 1. データソースを作成する {#1-create-a-data-source}
 
-1. [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で、**Data > Data Sources > Create** に移動します。
+1. [TiDB Cloud Lake コンソール](https://lake.tidbcloud.com/) で、**Data > Data Sources > Create** に移動します。
 2. **Service: TiDB** を選択します。
 3. アクセスキー認証を選択し、以下を入力します。
     - **Access Key ID** と **Secret Access Key**: [ステップ 1. S3 バケットへのアクセスを準備する](#step-1-prepare-s3-bucket-access) の認証情報。
@@ -136,7 +136,7 @@ TiDB Cloud Lake では、S3 バケットからデータをロードするため�
 
 ### 2. 統合を作成する {#2-create-an-integration}
 
-1. [TiDB Cloud Lake console](https://lake.tidbcloud.com/) で、**Data > Integration > Create** に移動します。
+1. [TiDB Cloud Lake コンソール](https://lake.tidbcloud.com/) で、**Data > Integration > Create** に移動します。
 2. 次のフィールドを入力します。
     - **Data Source**: 上で作成したデータソースを選択します。
     - **Name**: この統合タスクの名前。

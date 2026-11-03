@@ -3,7 +3,7 @@ title: Delete a TiDB Cloud Resource
 summary: TiDB Cloudリソースを削除する方法を学びましょう。
 ---
 
-# TiDB Cloudリソースを削除します {#delete-a-tidb-cloud-resource}
+# TiDB Cloudリソースを削除する {#delete-a-tidb-cloud-resource}
 
 このドキュメントでは、以下のTiDB Cloudリソースを削除する方法について説明します。
 
@@ -40,7 +40,7 @@ summary: TiDB Cloudリソースを削除する方法を学びましょう。
 
 5. **I understand, delete it**をクリックしてください。
 
-    バックアップ済みのTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスタが削除されると、既存のバックアップファイルはごみ箱に移動されます。
+    バックアップ済みのTiDB Cloud EssentialインスタンスまたはTiDB Cloud Dedicatedクラスターが削除されると、既存のバックアップファイルはごみ箱に移動されます。
 
     - 自動バックアップは、最新のものを除き、保持期間が終了すると期限切れとなり自動的に削除されます。保持期間は、変更しない場合はデフォルトで7日間です。最新の自動バックアップは、明示的に削除しない限り削除されません。
 

@@ -30,14 +30,14 @@
 
 ## ガイド
 
-- クラスタを計画する
+- クラスターを計画する
   - [プランを選択する](/tidb-cloud/select-cluster-tier.md)
   - [TiDBサイズを決定する](/tidb-cloud/size-your-cluster.md)
   - [TiDB Cloudパフォーマンスリファレンス](/tidb-cloud/tidb-cloud-performance-reference.md)
 - [TiDB Cloudのリソースとプロジェクトを管理する](/tidb-cloud/manage-projects-and-resources.md)
 - TiDB Cloud Dedicatedクラスターの管理
-  - [TiDB Cloud Dedicatedクラスタを作成する](/tidb-cloud/create-tidb-cluster.md)
-  - TiDB Cloud Dedicatedクラスタに接続する
+  - [TiDB Cloud Dedicatedクラスターを作成する](/tidb-cloud/create-tidb-cluster.md)
+  - TiDB Cloud Dedicatedクラスターに接続する
     - [ネットワーク接続の概要](/tidb-cloud/connect-to-tidb-cluster.md)
     - [公共接続経由で接続する](/tidb-cloud/connect-via-standard-connection.md)
     - [AWS のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections.md)
@@ -45,9 +45,9 @@
     - [Google Cloud のプライベートエンドポイント経由で接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)
     - [VPCピアリング経由で接続](/tidb-cloud/set-up-vpc-peering-connections.md)
     - [SQL Shell経由で接続する](/tidb-cloud/connect-via-sql-shell.md)
-  - [TiDB Cloud Dedicatedクラスタを拡張する](/tidb-cloud/scale-tidb-cluster.md)
+  - [TiDB Cloud Dedicatedクラスターを拡張する](/tidb-cloud/scale-tidb-cluster.md)
   - [TiDB Cloud Dedicatedデータのバックアップと復元](/tidb-cloud/backup-and-restore.md)
-  - [TiDB Cloud Dedicatedクラスタの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)
+  - [TiDB Cloud Dedicatedクラスターの一時停止または再開](/tidb-cloud/pause-or-resume-tidb-cluster.md)
   - [メンテナンスウィンドウの設定](/tidb-cloud/configure-maintenance-window.md)
   - HTAPにTiFlashを使用する
     - [TiFlashの概要](/tiflash/tiflash-overview.md)
@@ -117,15 +117,15 @@
           - [インデックス問題の解決方法](/wrong-index-solution.md)
           - [Distinct最適化](/agg-distinct-optimization.md)
           - [コストモデル](/cost-model.md)
-          - [ランタイムフィルタ](/runtime-filter.md)
+          - [ランタイムフィルター](/runtime-filter.md)
         - [プリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)
         - [非プリペアド実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
       - 実行計画の制御
         - [概要](/control-execution-plan.md)
-        - [オプティマイザのヒント](/optimizer-hints.md)
+        - [オプティマイザーのヒント](/optimizer-hints.md)
         - [SQLプラン管理](/sql-plan-management.md)
         - [最適化ルールと式プッシュダウンのブロックリスト](/blocklist-control-plan.md)
-        - [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
+        - [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
       - [インデックスアドバイザー](/index-advisor.md)
     - [TiKV Follower Read](/follower-read.md)
     - [コプロセッサーキャッシュ](/coprocessor-cache.md)
@@ -147,7 +147,7 @@
     - [TiProxyの概要](/tidb-cloud/tiproxy-overview-for-cloud.md)
     - [TiProxyを管理する](/tidb-cloud/tiproxy-management.md)
   - [TiDBのバージョンをアップグレードする](/tidb-cloud/upgrade-tidb-cluster.md)
-  - [TiDB Cloud Dedicatedクラスタを削除する](/tidb-cloud/delete-tidb-cluster.md)
+  - [TiDB Cloud Dedicatedクラスターを削除する](/tidb-cloud/delete-tidb-cluster.md)
 - データの移行またはインポート
   - [概要](/tidb-cloud/tidb-cloud-migration-overview.md)
   - TiDB Cloudへのデータ移行
@@ -177,7 +177,7 @@
   - [概要](/tidb-cloud/data-service-overview.md)
   - [はじめに](/tidb-cloud/data-service-get-started.md)
   - [データ管理アプリ](/tidb-cloud/data-service-manage-data-app.md)
-  - [エンドポイントの管理](/tidb-cloud/data-service-manage-endpoint.md)
+  - [エンドポイントを管理する](/tidb-cloud/data-service-manage-endpoint.md)
   - [APIキー](/tidb-cloud/data-service-api-key.md)
   - [カスタムドメイン](/tidb-cloud/data-service-custom-domain.md)
   - [統合](/tidb-cloud/data-service-integrations.md)
@@ -219,7 +219,7 @@
     - [AWS 上で顧客管理暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-aws.md)
     - [Azure 上で顧客管理暗号化キーを使用した保存時の暗号化](/tidb-cloud/tidb-cloud-encrypt-cmek-azure.md)
   - データベースアクセス制御
-    - [クラスタパスワード設定の構成](/tidb-cloud/configure-security-settings.md)
+    - [クラスターパスワード設定の構成](/tidb-cloud/configure-security-settings.md)
   - 監査管理
     - [データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md) ![PREVIEW](/media/tidb-cloud/blank_transparent_placeholder.png)
     - [コンソール監査ログ](/tidb-cloud/tidb-cloud-console-auditing.md)
@@ -259,7 +259,7 @@
     - [`tidbcloud_backup`リソースを使用する](/tidb-cloud/terraform-use-backup-resource.md)
     - [`tidbcloud_restore`リソースを使用する](/tidb-cloud/terraform-use-restore-resource.md)
     - [`tidbcloud_import`リソースを使用する](/tidb-cloud/terraform-use-import-resource.md)
-    - [クラスタリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
+    - [クラスターリソースの移行](/tidb-cloud/terraform-migrate-cluster-resource.md)
   - [Vercel](/tidb-cloud/integrate-tidbcloud-with-vercel.md)
   - [Zapier](/tidb-cloud/integrate-tidbcloud-with-zapier.md)
 
@@ -586,7 +586,7 @@
   - TiDB CloudパートナーWebコンソール
     - [TiDB Cloudパートナー](/tidb-cloud/tidb-cloud-partners.md)
     - [MSP顧客](/tidb-cloud/managed-service-provider-customer.md)
-    - [再販業者の顧客](/tidb-cloud/cppo-customer.md)
+    - [販売代理店の顧客](/tidb-cloud/cppo-customer.md)
   - TiDB分散実行フレームワーク（DXF）
     - [概要](/tidb-distributed-execution-framework.md)
     - [TiDB グローバルソート](/tidb-global-sort.md)

@@ -23,16 +23,16 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 - Changefeeds は、 `RENAME TABLE t1 TO t3, t2 TO t4`のように、単一の`RENAME TABLE`文で複数のテーブルの名前を変更する DDL文をサポートしていません。この文を実行すると、Changefeed のデータレプリケーションが永続的に中断されます。
 - 変更フィードのスループットは約20 MiB/秒です。増分データ量がこの制限を超える場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
-## 対応地域 {#supported-regions}
+## サポートされているリージョン {#supported-regions}
 
-変更フィード機能は、以下の地域でご利用いただけます。
+変更フィード機能は、以下のリージョンでご利用いただけます。
 
-| クラウドプロバイダー | 対応地域                                                                                                                                  |
+| クラウドプロバイダー | サポートされているリージョン                                                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | AWS        | <ul><li>`ap-east-1`</li><li>`ap-northeast-1`</li><li>`ap-southeast-1`</li><li>`eu-central-1`</li><li>`us-east-1`</li><li>`us-west-2`</li></ul> |
 | Alibaba Cloud   | <ul><li>`ap-southeast-1`</li><li>`ap-southeast-5`</li><li>`cn-hongkong`</li></ul>                                                              |
 
-今後、対応地域は拡大していく予定です。特定の地域での即時サポートについては、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。
+今後、サポートされるリージョンは拡大していく予定です。特定のリージョンでの即時サポートについては、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)までお問い合わせください。
 
 ## Changefeedページを確認する {#view-the-changefeed-page}
 
@@ -46,14 +46,14 @@ TiDB Cloud changefeed を使用すると、TiDB Cloudから他のデータサー
 
 2. 対象のTiDB Cloud Essentialインスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。変更フィードページが表示されます。
 
-**Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの一時停止、再開、編集、削除など）を行うことができます。
+**Changefeed**ページでは、変更フィードの作成、既存の変更フィードの一覧表示、および既存の変更フィードの操作（変更フィードの一時停止、再開、編集、削除など）を行えます。
 
 ## 変更フィードを作成する {#create-a-changefeed}
 
 変更フィードを作成するには、チュートリアルを参照してください。
 
 - [Apache Kafkaへのシンク](/tidb-cloud/essential-changefeed-sink-to-kafka.md)
-- [MySQLにシンクする](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
+- [MySQLへのシンク](/tidb-cloud/essential-changefeed-sink-to-mysql.md)
 - [クラウドストレージへのシンク](/tidb-cloud/changefeed-sink-to-cloud-storage.md)
 
 ## 変更フィードを確認する {#view-a-changefeed}
@@ -126,7 +126,7 @@ ticloud serverless changefeed resume -c <cluster-id> --changefeed-id <changefeed
 
 3. 変更フィードのステータスが`Paused`に変更されたら、 **...** > **Edit**をクリックして、対応する変更フィードを編集します。
 
-    TiDB Cloudは、変更フィードの設定にデフォルト値を入力します。以下の設定を変更できます。
+    TiDB Cloudは、デフォルトで変更フィードの設定を自動入力します。以下の設定を変更できます。
 
     - Apache Kafkaシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定
     - MySQLシンク：**Destination**、**Connection**、**Start Position**を除くすべての設定

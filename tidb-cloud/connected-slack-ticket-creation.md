@@ -9,7 +9,7 @@ summary: Slack チケットの作成と更新サブスクリプションに関�
 
 > **Note:**
 >
-> Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
+> Slackのチケットサポート機能はリクエストに応じてご利用いただけます。この機能をご利用になりたい場合は、 TiDB Cloudサポート<a href="mailto:support@pingcap.com">support@pingcap.com</a>までご連絡いただくか、担当のテクニカルアカウントマネージャー（TAM）までお問い合わせください。
 
 ## サポートチケットを作成する {#create-a-support-ticket}
 
@@ -41,4 +41,4 @@ Slackのサポートチャンネルで、 **PingCAP Support Bot**をメンショ
 
 ## サポートにお問い合わせください {#contact-support}
 
-ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">[support@pingcap.com](mailto:support@pingcap.com)</a>のサポートチームにお問い合わせください。
+ヘルプや質問がある場合は、 <a href="mailto:support@pingcap.com">support@pingcap.com</a>のサポートチームにお問い合わせください。

@@ -17,7 +17,7 @@ TiDB Cloud Data Serviceは、各データアプリのエンドポイントにア
 - カスタムドメインは、 TiDB Cloud Data Service内で一意である必要があります。
 - TiDB Cloud Starterインスタンスのリージョンによって決定されるデフォルトドメインごとに、設定できるカスタムドメインは1つだけです。
 
-## カスタムドメインの管理 {#manage-custom-domains}
+## カスタムドメインを管理する {#manage-custom-domains}
 
 以下のセクションでは、データアプリのカスタムドメインを作成、編集、削除する方法について説明します。
 
