@@ -289,7 +289,7 @@ GROUP BY
 
 さらに、上記のステートメントでは、
 
-- `store_size_amplification`クラスター圧縮率の平均値を示します。 `SELECT * FROM METRICS_SCHEMA.store_size_amplification;`を使用してこの情報を照会する以外にも、 **Grafana Monitoring PD - 統計バランス**パネルで各ノードの**サイズ増幅**メトリックを確認することもできます。クラスター圧縮率の平均値は、すべてのノードのサイズ増幅の平均値です。
+- `store_size_amplification`クラスター圧縮率の平均値を示します。 `SELECT * FROM METRICS_SCHEMA.store_size_amplification;`を使用してこの情報を照会する以外にも、 **Grafana Monitoring PD - statistics balance**パネルで各ノードの**Size amplification**メトリックを確認することもできます。クラスター圧縮率の平均値は、すべてのノードのサイズ増幅の平均値です。
 - `Approximate_Size`圧縮前のレプリカ内のテーブルのサイズを示します。これは概算値であり、正確な値ではないことに注意してください。
 - `Disk_Size`圧縮後のテーブルのサイズを示します。これは概算値であり、 `Approximate_Size`および`store_size_amplification`に基づいて計算できます。
 
@@ -315,7 +315,7 @@ SQL の配置ルールは、レプリカ数、 Raftの役割、配置場所、�
 
 ### TiKVの起動時に`duplicated store address`メッセージが表示されます {#the-duplicated-store-address-message-is-displayed-when-starting-tikv}
 
-これは、起動パラメーターのアドレスが他の TiKV によって PD クラスターに登録されているためです。このエラーが発生する一般的な条件: TiKV `--data-dir`で指定されたパスにデータフォルダーがありません (削除または移動後に --data-dir を更新しません)。以前のパラメーターを使用して TiKV を再起動してください。pd-ctl の[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)機能を使用して以前のストアを削除し、TiKV を再起動してください。
+これは、起動パラメーターのアドレスが他の TiKV によって PD クラスターに登録されているためです。このエラーが発生する一般的な条件: TiKV `--data-dir`で指定されたパスにデータフォルダーがありません (削除または移動後に --data-dir を更新していない)。以前のパラメーターを使用して TiKV を再起動してください。pd-ctl の[ストア削除](https://github.com/pingcap/pd/tree/55db505e8f35e8ab4e00efd202beb27a8ecc40fb/tools/pd-ctl#store-delete--label--weight-store_id----jqquery-string)機能を使用して以前のストアを削除し、TiKV を再起動してください。
 
 ### TiKVのプライマリノードとセカンダリノードは同じ圧縮アルゴリズムを使用しているのに、なぜ結果が異なるのでしょうか？ {#tikv-primary-node-and-secondary-node-use-the-same-compression-algorithm-why-the-results-are-different}
 
