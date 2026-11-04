@@ -163,7 +163,7 @@ Warning (Code 1681): PASSWORD is deprecated and will be removed in a future rele
 
 ### `RANDOM_BYTES()` {#random_bytes}
 
-`RANDOM_BYTES(n)`関数は`n`ランダムバイトを返します。
+`RANDOM_BYTES(n)`関数はランダムな`n`バイトを返します。
 
 ```sql
 SELECT RANDOM_BYTES(3);
