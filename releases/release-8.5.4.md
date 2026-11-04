@@ -168,7 +168,7 @@ TiDBバージョン：8.5.4
     - 場合によってはグローバルインデックスが誤った結果を返す可能性がある問題を修正 [#61083](https://github.com/pingcap/tidb/issues/61083) @[Defined2014](https://github.com/Defined2014)
     - `character_set_results`が誤った文字を置き換えるのではなく切り捨ててしまう問題を修正 [#61085](https://github.com/pingcap/tidb/issues/61085) @[xhebox](https://github.com/xhebox)
     - `ADD COLUMN`と`UPDATE`文を同時に実行するとエラーが発生する可能性がある問題を修正しました [#60047](https://github.com/pingcap/tidb/issues/60047) @[L-maple](https://github.com/L-maple)
-    - マージ結合時にコスト計算時にフィルター条件が省略される可能性がある問題を修正 [#62917](https://github.com/pingcap/tidb/issues/62917) @[qw4990](https://github.com/qw4990)
+    - マージ結合のコスト計算時にフィルター条件が省略される可能性がある問題を修正 [#62917](https://github.com/pingcap/tidb/issues/62917) @[qw4990](https://github.com/qw4990)
 
 - PD
 
