@@ -125,7 +125,7 @@ TiDB バージョン: 4.0.14
 
     - **Profiling** UIがすべてのTiDBインスタンスをプロファイリングできない問題を修正[#944](https://github.com/pingcap/tidb-dashboard/pull/944)
     - **Statements**UIに"Plan Count"が表示されない問題を修正しました[#939](https://github.com/pingcap/tidb-dashboard/pull/939)
-    - クラスターアップグレード後に**Slow Query**UIに"unknown field"エラーが表示される問題を修正しました [#902](https://github.com/pingcap/tidb-dashboard/issues/902)
+    - クラスターアップグレード後に**Slow Query**UIに"unknown field"エラーが表示される可能性がある問題を修正しました [#902](https://github.com/pingcap/tidb-dashboard/issues/902)
 
 - TiFlash
 
