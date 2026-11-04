@@ -3,7 +3,7 @@ title: Limited SQL Features on TiDB X Instances
 summary: TiDB X インスタンスで制限される SQL 機能について説明します。
 ---
 
-# TiDB X インスタンスで制限される SQL 機能 {#limited-sql-features-on-tidb-x-instances}
+# TiDB X インスタンスで制限される SQL 機能
 
 TiDB X インスタンスは、[TiDB Xアーキテクチャ](/tidb-cloud/tidb-x-architecture.md) 上に構築されたサービス指向の TiDB Cloud オファリングであり、{{{ .starter }}}、Essential、Premium、BYOC インスタンスなどが含まれます。
 
