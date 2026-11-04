@@ -20,6 +20,7 @@ summary: 本页按功能分类，全面概述 {{{ .lake }}} 中的散列函数�
 
 | 函数 | 描述 | 示例 |
 |----------|-------------|--------|
+| [BUCKET](/tidb-cloud-lake/sql/bucket.md) | 将值映射到用于物理分区的稳定存储桶 | `BUCKET(16, customer_id)` → 从 `0` 到 `15` 的整数 |
 | [XXHASH32](/tidb-cloud-lake/sql/xxhash.md) | 计算 xxHash32 32 位散列值 | `XXHASH32('1234567890')` → `3768853052` |
 | [XXHASH64](/tidb-cloud-lake/sql/xxhash.md) | 计算 xxHash64 64 位散列值 | `XXHASH64('1234567890')` → `12237639266330420150` |
 | [SIPHASH64](/tidb-cloud-lake/sql/siphash.md) / [SIPHASH](/tidb-cloud-lake/sql/siphash.md) | 计算 SipHash-2-4 64 位散列值 | `SIPHASH64('1234567890')` → `2917646445633666330` |

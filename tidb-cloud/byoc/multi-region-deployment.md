@@ -151,7 +151,7 @@ bash tidbcloud-byoc-update.sh \
 
 现有资源将继续供所有已启用的 Region 使用。
 
-当不需要新的多 Region 资源值时，直接使用 \--stack all 进行更新是安全的。
+当不需要新的多 Region 资源值时，直接使用 `--stack all` 进行更新是安全的。
 
 ### 为新 Region 使用专用资源 {#use-dedicated-resources-for-the-new-regions}
 
@@ -216,4 +216,4 @@ bash tidbcloud-byoc-update.sh \
 1. 将脚本执行结果分享给你的 TiDB Cloud 对接人员。
 2. TiDB Cloud 会验证已修改的 IAM 和 Region 资源配置。
 3. TiDB Cloud 会为新 Region 启动自动化基础设施预配。
-4. 预配完成后，请针对每个新 Region 执行第 5 节中描述的联合验证。
+4. 预配完成后，请针对每个新 Region 执行 [TiDB Cloud BYOC 联合验证](/tidb-cloud/byoc/joint-validation.md) 中描述的联合验证。

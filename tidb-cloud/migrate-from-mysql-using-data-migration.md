@@ -444,7 +444,7 @@ AWS 不支持直接通过 PrivateLink 访问 RDS 或 Aurora。因此，你需要
 </details>
 
 <details>
-<summary> 为 MySQL 源数据库设置 Azure PrivateLink 和 private endpoint </summary>
+<summary> 为 MySQL 源数据库设置 Azure Private Link 和 private endpoint </summary>
 
 Azure Database for MySQL - Flexible Server 原生支持 private endpoint。你可以在创建 MySQL 实例时启用私有访问（VNet 集成），也可以后续添加 private endpoint。
 
@@ -465,7 +465,7 @@ Azure Database for MySQL - Flexible Server 原生支持 private endpoint。你�
 
 4. 在 [Azure 门户](https://portal.azure.com/)中，回到你的 MySQL Flexible Server 实例的概览页（不是 private endpoint 对象），点击 **Essentials** 区域的 **JSON View**，复制 resource ID 以备后用。resource ID 格式为 `/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.DBforMySQL/flexibleServers/<server>`。你将在 TiDB Cloud DM 配置时使用该 resource ID（不是 private endpoint ID）。
 
-5. 后续在 TiDB Cloud DM 配置 PrivateLink 连接时，你需要回到 Azure 门户，批准 TiDB Cloud 到该 private endpoint 的连接请求。
+5. 后续在 TiDB Cloud DM 配置 Private Link 连接时，你需要回到 Azure 门户，批准 TiDB Cloud 到该 private endpoint 的连接请求。
 
 </details>
 

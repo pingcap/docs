@@ -91,7 +91,7 @@ subordinate CA 证书的有效期必须至少为 **20 年**。请确保用于签
 
 ## Step 6. 规划网络 CIDR 范围 {#step-6-plan-network-cidr-ranges}
 
-在开始 BYOC 部署之前，请为可观测性（O11Y）基础设施和资源池规划专用私有 CIDR 范围。请使用 `/16` 到 `/22` 之间的前缀长度。
+在开始 BYOC 部署之前，请为可观测性（O11Y）基础设施和资源池规划专用私有 CIDR 范围。请使用 `/16` 到 `/20` 之间的前缀长度。
 
 每个 BYOC 部署 Region 都有一个 O11Y CIDR。资源池 CIDR 会在你创建每个资源池时分别配置。请在部署前规划这些 CIDR 范围，以便能够在没有网络冲突的情况下配置 BYOC 环境和未来的资源池。
 
@@ -99,7 +99,7 @@ subordinate CA 证书的有效期必须至少为 **20 年**。请确保用于签
 
 | 项目 | 说明 | 示例 |
 | ----- | ----- | ----- |
-| O11Y CIDR | 为部署 Region 中的可观测性基础设施及相关服务预留的 CIDR 范围。 | `10.1.0.0/22` |
+| O11Y CIDR | 为部署 Region 中的可观测性基础设施及相关服务预留的 CIDR 范围。 | `10.1.0.0/20` |
 | Resource pool CIDR | 为资源池预留的 CIDR 范围。每个资源池都有自己的 CIDR，资源池创建后无法修改。 | `10.10.0.0/16` |
 
 **CIDR 规划规则与约束**
@@ -133,7 +133,7 @@ subordinate CA 证书的有效期必须至少为 **20 年**。请确保用于签
 | **Availability Zones** | 每个 Region 提供 3 个 AZ 或单个 AZ（请注明名称和 ID） | **us-east-1:** `us-east-1a`, `use1-az1`, `us-east-1b`, `use1-az2`, `us-east-1c`, `use1-az4`; **us-east-2:** `us-east-2a`, `use2-az1`, `us-east-2b`, `use2-az2`, `us-east-2c`, `use2-az3`; **us-west-2:** `us-west-2a`, `usw2-az1` | Step 3。注意对**每个**所选 Region 都要满足 AZ 数量要求。 |
 | **Subordinate CA ARN** | AWS ACM Private CA ARN | `arn:aws:acm-pca:us-west-2:123456789012:ca/abcd-1234` | Step 5。该 ARN 可在多个 Region 之间共享。 |
 | **Hosted Zone Name & Hosted Zone ID** | TiDB hosted zone。你可以提供 public hosted zone 或 private hosted zone。 | **Hosted TiDB zone name:** `clusters.byoc-0929.pingcap.net`; **Hosted TiDB zone ID:** `Z1039122VAY4T8UNWR8E`. | Step 4。该 hosted zone 可在多个 Region 之间共享。 |
-| **CIDR** | 客户规划的用于 O11Y 基础设施和资源池的 CIDR 范围 | **O11Y CIDR:** `10.1.0.0/22`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |
+| **CIDR** | 客户规划的用于 O11Y 基础设施和资源池的 CIDR 范围 | **O11Y CIDR:** `10.1.0.0/20`; **Resource pool CIDR:** `10.10.0.0/16` | Step 6 |
 | **Image Sync Region** | 选择用于镜像同步的 Region ID | `us-west-2` | 详情请参见[镜像同步](/tidb-cloud/byoc/byoc-automated-deployment.md#step-1-image-synchronization)。 |
 
 ## 检查并提高 AWS 服务配额 {#review-and-increase-aws-service-quotas}
