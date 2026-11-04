@@ -22,7 +22,7 @@ summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}
 
 ## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
 
-パブリック接続の場合、TiDB Cloud は、IP アクセス リスト内の IP アドレスからのクライアント接続のみを許可します。IP アクセス リストを設定していない場合は、最初の接続の前に [IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って設定してください。
+パブリック接続の場合、TiDB Cloud は、IP アクセスリスト内の IP アドレスからのクライアント接続のみを許可します。IP アクセスリストを設定していない場合は、最初の接続の前に [IP アクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って設定してください。
 
 ## インスタンスに接続する {#connect-to-the-instance}
 
@@ -44,7 +44,7 @@ summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択します。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、**Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)の手順に従って設定してください。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、**Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)の手順に従って設定してください。
 
 4. **CA cert**をクリックすると、 {{{ .premium }}}インスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
 
@@ -68,7 +68,7 @@ summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}
 
 3. 接続ダイアログで、**Connection Type** ドロップダウンリストから **Public** を選択します。
 
-    IP アクセスリストを設定していない場合は、**Configure IP Access List** をクリックするか、[IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って、初回接続の前に設定してください。
+    IP アクセスリストを設定していない場合は、**Configure IP Access List** をクリックするか、[IP アクセスリストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md) の手順に従って、初回接続の前に設定してください。
 
 4. 希望する接続方法を選択し、タブに表示される接続文字列とサンプルコードを参照してインスタンスに接続します。
 

@@ -57,10 +57,10 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
     4. **Database Audit Log Storage Configuration**ダイアログで、 **AWS IAM Policy Settings**セクションを探し、後で使用するために**TiDB Cloud Account ID**と**TiDB Cloud External ID**を記録してください。
 
-2. AWS マネジメントコンソールで、 **IAM** > **Access Management** > **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケット ポリシーが存在するかどうかを確認します。
+2. AWS マネジメントコンソールで、 **IAM** > **Access Management** > **Policies**に移動し、 `s3:PutObject`書き込み専用権限を持つストレージバケットポリシーが存在するかどうかを確認します。
 
     - はいの場合、後で使用するために、一致したストレージバケットポリシーを記録してください。
-    - そうでない場合は、 **IAM** > **Access Management** > **Policies** > **Create Policy**に移動し、次のポリシー テンプレートに従ってバケット ポリシーを定義します。
+    - そうでない場合は、 **IAM** > **Access Management** > **Policies** > **Create Policy**に移動し、次のポリシーテンプレートに従ってバケットポリシーを定義します。
 
         ```json
         {
@@ -75,7 +75,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
         }
         ```
 
-        テンプレートでは、 `<Your S3 bucket ARN>`は監査ログファイルが書き込まれる S3 バケットの Amazon リソース ネーム (ARN) です。S3 バケットの**Properties**タブに移動し、 **Bucket Overview**領域で ARN の値を取得できます。 `"Resource"`フィールドでは、ARN の後に`/*`を追加する必要があります。たとえば、ARN が`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
+        テンプレートでは、 `<Your S3 bucket ARN>`は監査ログファイルが書き込まれる S3 バケットの Amazon リソースネーム (ARN) です。S3 バケットの**Properties**タブに移動し、 **Bucket Overview**領域で ARN の値を取得できます。 `"Resource"`フィールドでは、ARN の後に`/*`を追加する必要があります。たとえば、ARN が`arn:aws:s3:::tidb-cloud-test`の場合、 `"Resource"`フィールドの値を`"arn:aws:s3:::tidb-cloud-test/*"`に設定する必要があります。
 
 3. **IAM** > **Access Management** > **Roles**に移動し、以前に記録したTiDB Cloudアカウント ID と外部 ID に対応する信頼エンティティを持つロールが既に存在するかどうかを確認します。
 

@@ -5,7 +5,7 @@ summary: TiDB CloudのData Serviceの概念について学習します。
 
 # Data Service（PREVIEW） {#data-service-beta}
 
-TiDB Cloud [Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)は、バックエンド アプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードの BaaS (Backend-as-a-Service) ソリューションです。
+TiDB Cloud [Data Service（PREVIEW）](https://tidbcloud.com/project/data-service)は、バックエンドアプリケーション開発を簡素化し、開発者が拡張性が高く安全なデータ駆動型アプリケーションを迅速に構築できるようにする、完全に管理されたローコードの BaaS (Backend-as-a-Service) ソリューションです。
 
 Data Service を使用すると、カスタム API エンドポイントを使用して HTTPS リクエスト経由でTiDB Cloudデータにアクセスできます。この機能は、サーバーレスアーキテクチャを使用してコンピューティングリソースと柔軟なスケーリングを処理するため、インフラストラクチャやメンテナンスコストを気にすることなく、エンドポイントのクエリロジックに集中できます。
 
