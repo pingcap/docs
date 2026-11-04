@@ -20,7 +20,7 @@ TiDBはMySQLプロトコルとの互換性が非常に高いため、ほとん�
 
 - TiDB 上でアプリケーションを構築するには、プログラミング言語とフレームワークに基づいて [ドライバーまたはORMを選択してください](/develop/dev-guide-choose-driver-or-orm.md)。
 
-- エッジ環境から HTTP 経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続するには、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用します。TiDB Cloud Serverless Driverはパブリックプレビューであり、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにのみ適用可能であることに注意してください。
+- エッジ環境から HTTP 経由で{{{ .starter }}}または{{{ .essential }}}インスタンスに接続するには、 [TiDB Cloud Serverless Driver](/develop/serverless-driver.md)を使用します。TiDB Cloud Serverless Driverはパブリックプレビューであり、 {{{ .starter }}}または{{{ .essential }}}インスタンスにのみ適用可能であることに注意してください。
 
 ## お困りですか？ {#need-help}
 

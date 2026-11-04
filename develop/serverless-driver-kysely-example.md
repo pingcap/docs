@@ -23,7 +23,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 - [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
-- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- {{{ .starter }}}インスタンス。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -74,7 +74,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1. TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+1. {{{ .starter }}}インスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
     ```
     mysql://[username]:[password]@[host]/[database]
@@ -88,7 +88,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ3. Kyselyを使用してデータをクエリする {#step-3-use-kysely-to-query-data}
 
-1. TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
+1. {{{ .starter }}}インスタンスにテーブルを作成し、データを挿入してください。
 
     [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
@@ -167,7 +167,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 - エッジ環境を提供する[Vercel](https://vercel.com/docs)アカウント。
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
-- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- {{{ .starter }}}インスタンス。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -192,7 +192,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-TiDB Cloud Starterインスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
+{{{ .starter }}}インスタンスの概要ページで、右上隅の**Connect**をクリックし、表示されたダイアログからデータベースの接続文字列を取得します。接続文字列は次のようになります。
 
 ```
 mysql://[username]:[password]@[host]/[database]
@@ -200,7 +200,7 @@ mysql://[username]:[password]@[host]/[database]
 
 ### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
 
-1. TiDB Cloud Starterインスタンスにテーブルを作成し、データを挿入してください。
+1. {{{ .starter }}}インスタンスにテーブルを作成し、データを挿入してください。
 
     [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 

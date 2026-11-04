@@ -12,7 +12,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 > **Note:**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 {{{ .starter }}}、 {{{ .essential }}}、 {{{ .premium }}}、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
@@ -24,7 +24,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
-- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
@@ -34,7 +34,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}またはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -63,20 +63,20 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
     - **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
     - **Password**：手順4で作成したパスワードを入力してください。
 
-    ![Navicat: configure connection general panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-general.png)
+    ![Navicat: configure connection general panel for {{{ .starter }}}](/media/develop/navicat-premium-connection-config-serverless-general.png)
 
 7. **SSL**タブをクリックし、 **Use SSL** 、 **Use authentication** 、 **Verify server certificate against CA**のチェックボックスを選択します。次に、 TiDB Cloud接続ダイアログから`CA`ファイルを選択し、 **CA Certificate**フィールドに貼り付けます。
 
-    ![Navicat: configure connection SSL panel for TiDB Cloud Starter](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
+    ![Navicat: configure connection SSL panel for {{{ .starter }}}](/media/develop/navicat-premium-connection-config-serverless-ssl.png)
 
-8. **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+8. **Test Connection**をクリックして、対象の{{{ .starter }}}またはEssentialインスタンスへの接続を検証してください。
 
 9. 接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .premium }}}インスタンスの名前をクリックして概要ページに移動します。
 
 2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
@@ -93,7 +93,7 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
     - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
     - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - **Public**接続タイプに加えて、 {{{ .premium }}} は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由で{{{ .premium }}}に接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7. Navicat Premiumを起動し、左上隅の**Connect**をクリックし、**Vendor Filter**リストから**PingCAP**を選択し、右側のパネルで**TiDB**をダブルクリックします。
 
@@ -103,11 +103,11 @@ TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.co
     - **Host**: TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
     - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     - **User Name**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    - **Password**： TiDB Cloud Premiumインスタンスのパスワードを入力してください。
+    - **Password**： {{{ .premium }}}インスタンスのパスワードを入力してください。
 
 9. **SSL**タブをクリックし、 **Use SSL**チェックボックスをオフにします。
 
-10. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+10. **Test Connection**をクリックして、 {{{ .premium }}}インスタンスへの接続を検証してください。
 
 11. 接続テストが成功すると、 **Connection Successful**というメッセージが表示されます。 **OK**をクリックして接続設定を完了してください。
 

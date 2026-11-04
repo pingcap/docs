@@ -17,7 +17,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 
 > **Note:**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 {{{ .starter }}}、 {{{ .essential }}}、 {{{ .premium }}}、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
@@ -28,7 +28,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
-- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
 ## TiDBに接続する {#connect-to-tidb}
@@ -38,7 +38,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}またはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -67,20 +67,20 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
     - **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
     - **Password**： **Store in Keychain ...**または**Store in Vault**をクリックし、手順4で作成したパスワードを入力して、 **OK**をクリックしてパスワードを保存します。
 
-        ![MySQL Workbench: store the password of TiDB Cloud Starter in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
+        ![MySQL Workbench: store the password of {{{ .starter }}} in keychain](/media/develop/mysql-workbench-store-password-in-keychain.png)
 
     次の図は、接続パラメータの例を示しています。
 
-    ![MySQL Workbench: configure connection settings for TiDB Cloud Starter](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
+    ![MySQL Workbench: configure connection settings for {{{ .starter }}}](/media/develop/mysql-workbench-connection-config-serverless-parameters.png)
 
-7. **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+7. **Test Connection**をクリックして、対象の{{{ .starter }}}またはEssentialインスタンスへの接続を検証してください。
 
 8. 接続テストが成功すると、 **Successfully made the MySQL connection**というメッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 
 </div>
 <div label="TiDB Cloud Premium">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .premium }}}インスタンスの名前をクリックして概要ページに移動します。
 
 2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
@@ -97,7 +97,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
     - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
     - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - **Public**接続タイプに加えて、 {{{ .premium }}} は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由で{{{ .premium }}}に接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7. MySQL Workbenchを起動し、 **MySQL Connections**タイトルの横にある**+**をクリックします。
 
@@ -107,9 +107,9 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
     - **Hostname**： TiDB Cloud接続ダイアログから`HOST`パラメータを入力します。
     - **Port**: TiDB Cloud接続ダイアログから`PORT`パラメータを入力します。
     - **Username**： TiDB Cloud接続ダイアログから`USERNAME`パラメータを入力してください。
-    - **Password**： **Store in Keychain ...**または**Store in Vault**をクリックし、 TiDB Cloud Premiumインスタンスのパスワードを入力して、 **OK**をクリックするとパスワードが保存されます。
+    - **Password**： **Store in Keychain ...**または**Store in Vault**をクリックし、 {{{ .premium }}}インスタンスのパスワードを入力して、 **OK**をクリックするとパスワードが保存されます。
 
-9. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+9. **Test Connection**をクリックして、 {{{ .premium }}}インスタンスへの接続を検証してください。
 
 10. 接続テストが成功すると、 **Successfully made the MySQL connection**というメッセージが表示されます。 **OK**をクリックして接続設定を保存してください。
 

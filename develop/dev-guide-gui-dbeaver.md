@@ -12,7 +12,7 @@ TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbe
 
 > **Note:**
 >
-> このチュートリアルは、 TiDB Cloud Starter、 TiDB Cloud Essential、 TiDB Cloud Premium、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
+> このチュートリアルは、 {{{ .starter }}}、 {{{ .essential }}}、 {{{ .premium }}}、 TiDB Cloud Dedicated、およびTiDB Self-Managedに対応しています。
 
 ## 前提条件 {#prerequisites}
 
@@ -23,10 +23,10 @@ TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbe
 
 **TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
 
-- (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 - [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
 
-さらに、 **Windows**上の DBeaver からTiDB Cloud StarterまたはTiDB Cloud Essential のパブリックエンドポイントに接続するには、以下の手順で追加の SSL 証明書 (ISRG Root X1) を設定する必要があります。設定しない場合、接続は失敗します。その他のオペレーティングシステムの場合は、これらの手順はスキップできます。
+さらに、 **Windows**上の DBeaver から{{{ .starter }}}または{{{ .essential }}} のパブリックエンドポイントに接続するには、以下の手順で追加の SSL 証明書 (ISRG Root X1) を設定する必要があります。設定しない場合、接続は失敗します。その他のオペレーティングシステムの場合は、これらの手順はスキップできます。
 
 1. [ISRGルートX1証明書](https://letsencrypt.org/certs/isrgrootx1.pem)をダウンロードし、 `C:\certs\isrgrootx1.pem`などのローカルパスに保存します。
 
@@ -47,7 +47,7 @@ TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbe
 <SimpleTab>
 <div label="TiDB Cloud Starter or Essential">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud StarterまたはEssentialインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}またはEssentialインスタンスの名前をクリックして、概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -72,9 +72,9 @@ TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbe
 
 7. **Authentication (Database Native)**セクションで、**Username**と**Password**を入力してください。例は以下のとおりです。
 
-    ![Configure connection settings for TiDB Cloud Starter](/media/develop/dbeaver-connection-settings-serverless.jpg)
+    ![Configure connection settings for {{{ .starter }}}](/media/develop/dbeaver-connection-settings-serverless.jpg)
 
-8. **Test Connection**をクリックして、対象のTiDB Cloud StarterまたはEssentialインスタンスへの接続を検証してください。
+8. **Test Connection**をクリックして、対象の{{{ .starter }}}またはEssentialインスタンスへの接続を検証してください。
 
     **Download driver files**ダイアログが表示されたら、 **Download**をクリックしてドライバファイルを入手してください。
 
@@ -89,7 +89,7 @@ TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbe
 </div>
 <div label="TiDB Cloud Premium">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Premiumインスタンスの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .premium }}}インスタンスの名前をクリックして概要ページに移動します。
 
 2. 左側のナビゲーションペインで、 **Settings** > **Networking**をクリックします。
 
@@ -106,13 +106,13 @@ TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbe
     - 公開エンドポイントがまだ有効化中であることを示すメッセージが表示された場合は、処理が完了するまでお待ちください。
     - まだパスワードを設定していない場合は、ダイアログの**Set Root Password**をクリックしてください。
     - サーバー証明書を確認する必要がある場合、または接続に失敗して認証局（CA）証明書が必要な場合は、 **CA cert**をクリックしてダウンロードしてください。
-    - **Public**接続タイプに加えて、 TiDB Cloud Premium は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由でTiDB Cloud Premiumに接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
+    - **Public**接続タイプに加えて、 {{{ .premium }}} は**Private Endpoint**接続をサポートします。詳細については、 [AWS PrivateLink経由で{{{ .premium }}}に接続します](/tidb-cloud/premium/connect-to-premium-via-aws-private-endpoint.md)を参照してください。
 
 7. DBeaverを起動し、左上隅の**New Database Connection**をクリックします。 **Connect to a database**ダイアログで、リストから**TiDB**を選択し、 **Next**をクリックします。
 
-8. 適切な接続文字列をコピーして、DBeaverの接続パネルに貼り付けてください。DBeaverのフィールドとTiDB Cloud Premiumの接続文字列のマッピングは以下のとおりです。
+8. 適切な接続文字列をコピーして、DBeaverの接続パネルに貼り付けてください。DBeaverのフィールドと{{{ .premium }}}の接続文字列のマッピングは以下のとおりです。
 
-    | DBeaverフィールド | TiDB Cloud Premium接続文字列 |
+    | DBeaverフィールド | {{{ .premium }}}接続文字列 |
     | ------------ | ----------------------- |
     | Server Host      | `{host}`                |
     | Port          | `{port}`                |
@@ -121,7 +121,7 @@ TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbe
 
     SSL設定は無効のままにしてください。
 
-9. **Test Connection**をクリックして、 TiDB Cloud Premiumインスタンスへの接続を検証してください。
+9. **Test Connection**をクリックして、 {{{ .premium }}}インスタンスへの接続を検証してください。
 
 10. 接続設定を保存するには、 **Finish**をクリックしてください。
 

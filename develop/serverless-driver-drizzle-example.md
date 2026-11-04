@@ -12,7 +12,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 > **Tip:**
 >
-> このドキュメントの手順は、 TiDB Cloud Starterインスタンスに加えて、 TiDB Cloud Essentialインスタンスでも適用できます。
+> このドキュメントの手順は、 {{{ .starter }}}インスタンスに加えて、 {{{ .essential }}}インスタンスでも適用できます。
 
 ## Node.js環境でDrizzleとTiDB Cloud Serverless Driverを使用する {#use-drizzle-and-tidb-cloud-serverless-driver-in-node-js-environments}
 
@@ -24,7 +24,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 - [Node.js](https://nodejs.org/en) &gt;= 18.0.0。
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
-- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- {{{ .starter }}}インスタンス。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -74,7 +74,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの{{{ .starter }}}インスタンスの名前をクリックして、その概要ページに移動します。
 
 2. 概要ページで、右上隅の**Connect**をクリックし、 **Connect With**ドロップダウンリストから`Serverless Driver`を選択してから、 **Generate Password**をクリックしてランダムなパスワードを作成します。
 
@@ -96,7 +96,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ3. Drizzleを使用してデータをクエリする {#step-3-use-drizzle-to-query-data}
 
-1. TiDB Cloud Starterインスタンスにテーブルを作成します。
+1. {{{ .starter }}}インスタンスにテーブルを作成します。
 
     [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
@@ -160,7 +160,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 - エッジ環境を提供する[Vercel](https://vercel.com/docs)アカウント。
 - [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) 、またはお好みのパッケージマネージャーを使用してください。
-- TiDB Cloud Starterインスタンス。お持ちでない場合は、 [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
+- {{{ .starter }}}インスタンス。お持ちでない場合は、 [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
 
 ### ステップ1. プロジェクトを作成する {#step-1-create-a-project}
 
@@ -190,7 +190,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ2. 環境を設定する {#step-2-set-the-environment}
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの{{{ .starter }}}インスタンスの名前をクリックして、その概要ページに移動します。
 
 2. 概要ページで、右上隅の**Connect**をクリックし、 **Connect With**ドロップダウンリストから`Serverless Driver`を選択してから、 **Generate Password**をクリックしてランダムなパスワードを作成します。
 
@@ -206,7 +206,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 ### ステップ3. エッジ関数を作成する {#step-3-create-an-edge-function}
 
-1. TiDB Cloud Starterインスタンスにテーブルを作成します。
+1. {{{ .starter }}}インスタンスにテーブルを作成します。
 
     [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 

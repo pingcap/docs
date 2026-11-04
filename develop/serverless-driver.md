@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Serverless Driver (PREVIEW)
-summary: サーバーレス環境およびエッジ環境からTiDB Cloud StarterまたはTiDB Cloud Essentialに接続する方法を学びましょう。
+summary: サーバーレス環境およびエッジ環境から{{{ .starter }}}または{{{ .essential }}}に接続する方法を学びましょう。
 aliases: ['/ja/tidbcloud/serverless-driver-config/','/ja/tidbcloud/serverless-driver/']
 ---
 
@@ -8,13 +8,13 @@ aliases: ['/ja/tidbcloud/serverless-driver-config/','/ja/tidbcloud/serverless-dr
 
 > **Note:**
 >
-> TiDB Cloud Serverless Driverはパブリックプレビューであり、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスにのみ適用可能です。
+> TiDB Cloud Serverless Driverはパブリックプレビューであり、 {{{ .starter }}}または{{{ .essential }}}インスタンスにのみ適用可能です。
 
 ## TiDB Cloud Serverless Driver （PREVIEW）を使用する理由 {#why-use-tidb-cloud-serverless-driver-preview}
 
 従来のTCPベースのMySQLドライバは、サーバーレス関数の短命な性質と矛盾する、長期間持続するTCP接続を前提としているため、サーバーレス関数には適していません。さらに、 [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)や[Cloudflare Workers](https://workers.cloudflare.com/)などのエッジ環境では、包括的なTCPサポートと完全なNode.js互換性が欠けている場合があり、これらのドライバは全く動作しない可能性があります。
 
-[TiDB Cloud Serverless Driver（PREVIEW）](https://github.com/tidbcloud/serverless-js) for JavaScript を使用すると、サーバーレス環境で一般的にサポートされている HTTP 経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続できます。これにより、エッジ環境からTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続し、従来の TCP ベースの MySQL ドライバーと同様の開発エクスペリエンスを維持しながら、TCP による接続オーバーヘッドを削減することが可能になります。
+[TiDB Cloud Serverless Driver（PREVIEW）](https://github.com/tidbcloud/serverless-js) for JavaScript を使用すると、サーバーレス環境で一般的にサポートされている HTTP 経由で{{{ .starter }}}または{{{ .essential }}}インスタンスに接続できます。これにより、エッジ環境から{{{ .starter }}}または{{{ .essential }}}インスタンスに接続し、従来の TCP ベースの MySQL ドライバーと同様の開発エクスペリエンスを維持しながら、TCP による接続オーバーヘッドを削減することが可能になります。
 
 > **Note:**
 >
@@ -30,11 +30,11 @@ npm install @tidbcloud/serverless
 
 ## TiDB Cloud Serverless Driverを使用する {#use-the-serverless-driver}
 
-TiDB Cloud Serverless Driverを使用すると、 TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータを照会したり、対話型トランザクションを実行したりできます。
+TiDB Cloud Serverless Driverを使用すると、 {{{ .starter }}}または{{{ .essential }}}インスタンスのデータを照会したり、対話型トランザクションを実行したりできます。
 
 ### クエリ {#query}
 
-TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスからデータをクエリするには、まず接続を作成する必要があります。その後、その接続を使用して生のSQLクエリを実行できます。例：
+{{{ .starter }}}または{{{ .essential }}}インスタンスからデータをクエリするには、まず接続を作成する必要があります。その後、その接続を使用して生のSQLクエリを実行できます。例：
 
 ```ts
 import { connect } from '@tidbcloud/serverless'
@@ -158,10 +158,10 @@ TiDB Cloud Serverless Driverは、接続レベルとSQLレベルの両方で設�
 
 | 名前           | 型  | デフォルト値    | 説明                                                                                                                                                  |
 | ------------ | ---- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `username`   | string    | N/A      | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのユーザー名。                                                                                              |
-| `password`   | string    | N/A      | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのパスワード。                                                                                              |
-| `host`       | string    | N/A      | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのホスト名。                                                                                               |
-| `database`   | string    | `test`    | TiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスのデータベース。                                                                                             |
+| `username`   | string    | N/A      | {{{ .starter }}}または{{{ .essential }}}インスタンスのユーザー名。                                                                                              |
+| `password`   | string    | N/A      | {{{ .starter }}}または{{{ .essential }}}インスタンスのパスワード。                                                                                              |
+| `host`       | string    | N/A      | {{{ .starter }}}または{{{ .essential }}}インスタンスのホスト名。                                                                                               |
+| `database`   | string    | `test`    | {{{ .starter }}}または{{{ .essential }}}インスタンスのデータベース。                                                                                             |
 | `url`        | string    | N/A      | データベースのURLを`mysql://[username]:[password]@[host]/[database]`形式で指定します。デフォルトのデータベースに接続する場合は、 `database`を省略できます。                                       |
 | `fetch`      | function   | グローバルフェッチ | カスタムフェッチ関数。たとえば、node.js で`undici`フェッチを使用できます。                                                                                                       |
 | `arrayMode`  | bool    | `false`   | 結果をオブジェクトではなく配列として返すかどうか。パフォーマンスを向上させるには、 `true`に設定してください。                                                                                          |
@@ -333,8 +333,8 @@ TiDB Cloud Serverless Driverは、以下のORMと統合されています。
 
 TiDB Cloud Serverless Driver自体は無料ですが、ドライバーを使用してデータにアクセスすると[リクエストユニット（RU）](https://docs.pingcap.com/tidbcloud/tidb-cloud-glossary#request-unit-ru)とストレージの使用量が発生します。
 
-- TiDB Cloud Starterインスタンスの料金は、 [TiDB Cloud Starter の価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
-- TiDB Cloud Essentialインスタンスの場合、価格は[TiDB Cloud Essential の価格設定](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)モデルに従います。
+- {{{ .starter }}}インスタンスの料金は、 [{{{ .starter }}} の価格](https://www.pingcap.com/tidb-cloud-starter-pricing-details/)モデルに従います。
+- {{{ .essential }}}インスタンスの場合、価格は[{{{ .essential }}} の価格設定](https://www.pingcap.com/tidb-cloud-essential-pricing-details/)モデルに従います。
 
 ## 制限事項 {#limitations}
 
