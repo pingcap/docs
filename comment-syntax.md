@@ -90,7 +90,7 @@ TiDB は次の3つのコメントスタイルをサポートしています。
 
 ## MySQL互換のコメント構文 {#mysql-compatible-comment-syntax}
 
-MySQL と同じように、TiDB は C コメントスタイルのバリエーションをサポートしています。
+MySQL と同じように、TiDB は C スタイルのコメントを変形した構文をサポートしています。
 
 ```
 /*! Specific code */
@@ -110,7 +110,7 @@ MySQL と同じように、TiDB は C コメントスタイルのバリエーシ
 SELECT /*! STRAIGHT_JOIN */ col1 FROM table1,table2 WHERE ...
 ```
 
-TiDB では、別のバージョンも使用できます。
+TiDB では、別の書き方も使用できます。
 
 ```sql
 SELECT STRAIGHT_JOIN col1 FROM table1,table2 WHERE ...
