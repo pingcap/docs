@@ -40,7 +40,7 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 - トラフィックが`split.byte-threshold`を超えています。
 - 統合読み取りプール内の CPU 使用率が`split.region-cpu-overload-threshold-ratio`を超えています。
 
-ロードベーススプリットはデフォルトで有効になっていますが、パラメーターがかなり高い値に設定されています。この機能を無効にするには、 `split.qps-threshold`と`split.byte-threshold`十分に高い値に設定し、同時に`split.region-cpu-overload-threshold-ratio`を`0`に設定してください。
+ロードベーススプリットはデフォルトで有効になっていますが、パラメーターは比較的高い値に設定されています。この機能を無効にするには、 `split.qps-threshold`と`split.byte-threshold`を十分に高い値に設定し、同時に`split.region-cpu-overload-threshold-ratio`を`0`に設定してください。
 
 パラメーターを変更するには、次の2つの方法のいずれかを実行します。
 
