@@ -76,7 +76,7 @@ SQL実行フェーズは緑色で、その他のフェーズは全体的に赤�
 ### KV Request Time By Source {#kv-request-time-by-source}
 
 - kv request total time: すべての TiDB インスタンスで 1秒あたりに KV およびTiFlashリクエストを処理する合計時間
-- 各 KV リクエストとそれに対応するリクエストソースは積み上げ棒グラフを形成し、 `external`通常のビジネスリクエストを識別し、 `internal`内部アクティビティリクエスト (DDL やauto analyzeリクエストなど) を識別します。
+- 各 KV リクエストとそれに対応するリクエストソースは積み上げ棒グラフを形成し、 `external`は通常のビジネスリクエストを、 `internal`は内部アクティビティリクエスト (DDL やauto analyzeリクエストなど) を識別します。
 
 ### TiDB CPU {#tidb-cpu}
 
