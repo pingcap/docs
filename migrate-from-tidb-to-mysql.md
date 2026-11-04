@@ -83,6 +83,10 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     1 row in set (0.00 sec)
     ```
 
+    > **Note:**
+    >
+    > TiCDC `gc-ttl` is 24 hours by default. If exporting and importing the full data takes a long time, the default `gc-ttl` might not be sufficient, which could cause the subsequent [incremental replication task](#step-3-migrate-incremental-data) to fail. To avoid this situation, adjust the `gc-ttl` value according to your specific needs when starting the TiCDC server. For more information, see [What is `gc-ttl` in TiCDC](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc).
+
 2. Back up data.
 
     1. Export data in SQL format using Dumpling:
@@ -113,7 +117,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     Run the following command to import full data exported by Dumpling to MySQL:
 
     ```shell
-    myloader -h 127.0.0.1 -P 3306 -d ./dumpling_output/
+    myloader -h 127.0.0.1 -P 3306 -u root -p my-secret-pw -d ./dumpling_output/
     ```
 
 4. (Optional) Validate data.
@@ -140,7 +144,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
             host = "127.0.0.1" # Replace the value with the IP address of your downstream cluster
             port = 3306
             user = "root"
-            password = ""
+            password = "my-secret-pw"
     ######################### Task config #########################
     [task]
             output-dir = "./output"
@@ -160,8 +164,10 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     In the upstream cluster, run the following command to create a changefeed from the upstream to the downstream clusters:
 
     ```shell
-    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:***@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
+
+    Replace `***` with the password of the downstream MySQL root account that you configured in [Step 1. Set up the environment](#step-1-set-up-the-environment).
 
     In this command, the parameters are as follows:
 
@@ -203,7 +209,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 ## Step 4. Migrate services
 
-After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read traffic to the downstream cluster gradually. Observe the read traffic for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster as well in the following steps:
+After creating a changefeed, data written to upstream tables that have at least one [valid index](/ticdc/ticdc-overview.md#valid-index) is replicated to the downstream cluster with low latency. If you need to replicate tables without a valid index, you must enable [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate), which does not guarantee data consistency and might cause data redundancy. You can migrate read traffic to the downstream cluster gradually. Observe the read traffic for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster as well in the following steps:
 
 1. Stop write services in the upstream cluster. Make sure that all upstream data are replicated to downstream before stopping the changefeed.
 
