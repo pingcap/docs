@@ -148,7 +148,7 @@ TiDBクラスターのデプロイには[TiUP](/production-deployment-using-tiup
 
 ### データインポート {#data-import}
 
-インポートプロセス中の書き込みパフォーマンスを向上させるには、 [TiKVメモリパラメーターのパフォーマンスを調整する](/tune-tikv-memory-performance.md)。
+インポートプロセス中の書き込みパフォーマンスを向上させるには、 [TiKVメモリパラメーターのパフォーマンスを調整する](/tune-tikv-memory-performance.md)の説明に従ってTiKVのパラメーターを調整できます。
 
 ### 書き込み {#write}
 
