@@ -35,7 +35,7 @@ If the data source is CSV, and all CSV files have no fields containing newline c
 strict-format = true
 
 [mydumper.csv]
-terminator = "\n" # Or "\r" or "\r\n", depending on the actual line terminator in your files.
+terminator = "\n" # Set it to "\n", "\r", or "\r\n", depending on the actual line terminator in your files.
 ```
 
 **Cause 4**: TiDB Lightning is too old.

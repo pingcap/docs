@@ -119,7 +119,7 @@ If your CSV file meets the above requirements, you can speed up the import by en
 strict-format = true
 
 [mydumper.csv]
-terminator = "\n" # Or "\r" or "\r\n", depending on the actual line terminator in your file.
+terminator = "\n" # Set it to "\n", "\r", or "\r\n", depending on the actual line terminator in your files.
 ```
 
 ## Step 5. Import the data
