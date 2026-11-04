@@ -21,18 +21,18 @@ PD ダッシュボードメトリック項目の説明は次のとおりです�
 - Number of Regions: クラスターリージョンの総数
 - Abnormal stores: 不健全なストアの数。正常値は`0`です。この数値が`0`より大きい場合、少なくとも 1つのインスタンスが異常であることを意味します。
 - Region health: 保留中のピア、ダウン中のピア、余分なピア、オフラインのピア、欠落しているピア、学習中のピア、不正な名前空間など、異常なリージョンの数でリージョンの健全性を示します。通常、保留中のピアの数は`100`未満である必要があります。欠落しているピアの数が持続的に`0`を超えてはなりません。空のリージョンが多数存在する場合は、リージョンマージを適時に有効化してください。
-- Current peer count: すべてのクラスタピアの現在の数![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
+- Current peer count: すべてのクラスターピアの現在の数![PD Dashboard - Header](/media/pd-dashboard-header-v4.png)
 
 ## 主要な指標の説明 {#key-metrics-description}
 
 ## Cluster {#cluster}
 
-- PD scheduler config: PDスケジューラ設定のリスト
+- PD scheduler config: PDスケジューラー設定のリスト
 - Cluster ID: クラスターの一意の識別子
 - Current TSO: 現在割り当てられているTSOの物理部分
 - Current ID allocation: 新しいストア/ピアに割り当てられる最大ID
 - Region label isolation level: 異なるラベルレベルのリージョン数
-- Label distribution: クラスタ内のラベルの配布状態
+- Label distribution: クラスター内のラベルの配布状態
 - Store Limit: ストアでのスケジュールのフロー制御制限
 
 ![PD Dashboard - Cluster metrics](/media/pd-dashboard-cluster-v4.png)
@@ -75,7 +75,7 @@ PD ダッシュボードメトリック項目の説明は次のとおりです�
 - Store Write rate bytes: 各 TiKV インスタンスに書き込まれた合計バイト数
 - Store Write rate keys: 各 TiKV インスタンスに書き込まれたキーの合計
 - Hot cache write entry number: 書き込みホットスポット統計モジュールにある各 TiKV インスタンス上のピアの数
-- Selector events: ホットスポットスケジューリングモジュールのセレクタのイベント数
+- Selector events: ホットスポットスケジューリングモジュールのセレクターのイベント数
 - Direction of hotspot move leader: ホットスポットスケジューリングにおけるリーダーの移動方向。正の数値はインスタンスへのスケジューリングを意味し、負の数値はインスタンスからのスケジューリングを意味します。
 - Direction of hotspot move peer: ホットスポットスケジューリングにおけるピアの移動方向。正の数値はインスタンスへのスケジューリングを意味し、負の数値はインスタンスからのスケジューリングを意味します。
 
@@ -94,13 +94,13 @@ PD ダッシュボードメトリック項目の説明は次のとおりです�
 
 ## Scheduler {#scheduler}
 
-- Scheduler is running: 現在実行中のスケジューラ
+- Scheduler is running: 現在実行中のスケジューラー
 - Balance leader movement: TiKVインスタンス間のリーダーの移動の詳細
 - Balance Region movement: TiKVインスタンス間のリージョン移動の詳細
 - Balance leader event:バランスリーダーイベントの数
 - Balance Region event: バランスリージョンイベントの数
-- Balance leader scheduler: バランスリーダースケジューラの内部状態
-- Balance Region scheduler: バランスリージョンスケジューラの内部状態
+- Balance leader scheduler: バランスリーダースケジューラーの内部状態
+- Balance Region scheduler: バランスリージョンスケジューラーの内部状態
 - Replica checker:レプリカチェッカーのステータス
 - Rule checker: ルールチェッカーのステータス
 - Region merge checker: マージチェッカーのステータス

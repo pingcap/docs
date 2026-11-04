@@ -7,7 +7,7 @@ summary: クラスター構成を動的に変更する方法を学習します�
 
 このドキュメントでは、クラスター構成を動的に変更する方法について説明します。
 
-クラスタコンポーネントを再起動することなく、SQL文を使用してコンポーネント（TiDB、TiKV、PDを含む）の構成を動的に更新できます。現在、TiDBインスタンスの構成変更方法は、他のコンポーネント（TiKVやPDなど）の構成変更方法とは異なります。
+クラスターコンポーネントを再起動することなく、SQL文を使用してコンポーネント（TiDB、TiKV、PDを含む）の構成を動的に更新できます。現在、TiDBインスタンスの構成変更方法は、他のコンポーネント（TiKVやPDなど）の構成変更方法とは異なります。
 
 > **Note:**
 >
@@ -176,8 +176,8 @@ show warnings;
 | `gc.ratio-threshold`                                      | リージョンGCをスキップするしきい値（GCのバージョン数/キーの数）                                                                                                   |
 | `gc.batch-keys`                                           | 1バッチで処理されるキーの数                                                                                                                             |
 | `gc.max-write-bytes-per-sec`                              | RocksDBに1秒あたり書き込める最大バイト数                                                                                                                   |
-| `gc.enable-compaction-filter`                             | コンパクションフィルタを有効にするかどうか                                                                                                                           |
-| `gc.compaction-filter-skip-version-check`                 | コンパクションフィルタのクラスタバージョンチェックをスキップするかどうか（未リリース）                                                                                                     |
+| `gc.enable-compaction-filter`                             | コンパクションフィルターを有効にするかどうか                                                                                                                           |
+| `gc.compaction-filter-skip-version-check`                 | コンパクションフィルターのクラスターバージョンチェックをスキップするかどうか（未リリース）                                                                                                     |
 | `gc.auto-compaction.check-interval`                       | TiKVが自動（RocksDB）コンパクションをトリガーするかどうかを確認する間隔                                                                                                       |
 | `gc.auto-compaction.tombstone-num-threshold`              | TiKV自動（RocksDB）コンパクションをトリガーするために必要なRocksDBのtombstoneの数                                                                                            |
 | `gc.auto-compaction.tombstone-percent-threshold`          | TiKV自動（RocksDB）コンパクションをトリガーするために必要なRocksDBのtombstoneの割合                                                                                           |
@@ -191,9 +191,9 @@ show warnings;
 | `{db-name}.compaction-readahead-size`                     | コンパクション時のサイズ`readahead`                                                                                                                         |
 | `{db-name}.bytes-per-sync`                                | ファイルが非同期的に書き込まれている間に、OSがファイルをディスクに増分的に同期する速度                                                                                               |
 | `{db-name}.wal-bytes-per-sync`                            | WAL ファイルが書き込まれている間に OS が WAL ファイルをディスクに増分的に同期する速度                                                                                          |
-| `{db-name}.writable-file-max-buffer-size`                 | WritableFileWriteで使用される最大バッファサイズ                                                                                                           |
+| `{db-name}.writable-file-max-buffer-size`                 | WritableFileWriteで使用される最大バッファーサイズ                                                                                                           |
 | `{db-name}.{cf-name}.block-cache-size`                    | ブロックのキャッシュサイズ                                                                                                                              |
-| `{db-name}.{cf-name}.write-buffer-size`                   | メンバテーブルのサイズ                                                                                                                                |
+| `{db-name}.{cf-name}.write-buffer-size`                   | メンバーテーブルのサイズ                                                                                                                                |
 | `{db-name}.{cf-name}.max-write-buffer-number`             | メンバーテーブルの最大数                                                                                                                               |
 | `{db-name}.{cf-name}.max-bytes-for-level-base`            | ベースレベル（L1）の最大バイト数                                                                                                                          |
 | `{db-name}.{cf-name}.target-file-size-base`               | ベースレベルのターゲットファイルのサイズ                                                                                                                       |
@@ -222,26 +222,26 @@ show warnings;
 | storage.flow-control.l0-files-threshold                   | フロー制御をトリガーするkvDB L0ファイルの最大数                                                                                                                |
 | storage.flow-control.soft-pending-compaction-bytes-limit  | フロー制御メカニズムが一部の書き込みリクエストを拒否するトリガーとなる、kvDB保留コンパクションバイトのしきい値                                                                                          |
 | storage.flow-control.hard-pending-compaction-bytes-limit                                | フロー制御メカニズムがすべての書き込みリクエストを拒否するトリガーとなる、kvDB保留コンパクションバイトのしきい値                                                                                         |
-| `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
+| `storage.scheduler-worker-pool-size`                      | スケジューラースレッドプール内のスレッド数                                                                                                                       |
 | `import.num-threads`                                      | 復元またはインポート RPC リクエストを処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
 | `backup.num-threads`                                      | バックアップスレッドの数 (v4.0.3 以降でサポート)                                                                                                             |
 | `split.qps-threshold`                                     | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`を超える場合、このリージョンは分割される必要があります。                                    |
 | `split.byte-threshold`                                    | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンは分割されます。                                   |
 | `split.region-cpu-overload-threshold-ratio`               | リージョンで`load-base-split`を実行するためのしきい値。リージョンの統合読み取りプールのCPU使用率が10秒連続で`region-cpu-overload-threshold-ratio`を超えた場合、このリージョンは分割されます。(v6.2.0以降でサポート) |
-| `split.split-balance-score`                               | `load-base-split`というパラメータは、2つの分割されたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、値が小さすぎると分割が失敗する可能性があります。                               |
-| `split.split-contained-score`                             | パラメータは`load-base-split`です。値が小さいほど、リージョン分割後のリージョン間アクセス数が少なくなります。                                                                                 |
+| `split.split-balance-score`                               | `load-base-split`というパラメーターは、2つの分割されたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、値が小さすぎると分割が失敗する可能性があります。                               |
+| `split.split-contained-score`                             | パラメーターは`load-base-split`です。値が小さいほど、リージョン分割後のリージョン間アクセス数が少なくなります。                                                                                 |
 | `cdc.min-ts-interval`                                     | Resolved TSが転送される時間間隔                                                                                                                          |
 | `cdc.old-value-cache-memory-quota`                        | TiCDC 古い値のエントリが占有するメモリの上限                                                                                                                  |
 | `cdc.sink-memory-quota`                                   | TiCDCデータ変更イベントが占有するメモリの上限                                                                                                                  |
 | `cdc.incremental-scan-speed-limit`                        | 履歴データの増分スキャンの速度の上限                                                                                                                         |
 | `cdc.incremental-scan-concurrency`                        | 履歴データの同時増分スキャンタスクの最大数                                                                                                                      |
 
-上記の表で、`{db-name}`または`{db-name}.{cf-name}`プレフィックスを持つパラメータはRocksDB関連の設定です。`db-name`のオプション値は`rocksdb`と`raftdb`です。
+上記の表で、`{db-name}`または`{db-name}.{cf-name}`プレフィックスを持つパラメーターはRocksDB関連の設定です。`db-name`のオプション値は`rocksdb`と`raftdb`です。
 
 - `db-name`が`rocksdb`の場合、 `cf-name`のオプションの値は`defaultcf` 、 `writecf` 、 `lockcf` 、および`raftcf`です。
 - `db-name`が`raftdb`のとき、 `cf-name`の値は`defaultcf`になります。
 
-詳細なパラメータの説明については[TiKV設定ファイル](/tikv-configuration-file.md)を参照してください。
+詳細なパラメーターの説明については[TiKV設定ファイル](/tikv-configuration-file.md)を参照してください。
 
 ### PD構成を動的に変更する {#modify-pd-configuration-dynamically}
 
@@ -284,7 +284,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.hot-region-cache-hits-threshold`           | リージョンがホットスポットとみなされる閾値を決定します                                |
 | `schedule.high-space-ratio`                          | ストアの収容能力が十分である閾値比率                                          |
 | `schedule.low-space-ratio`                           | ストアの収容能力が不足する閾値比率                                           |
-| `schedule.tolerant-size-ratio`                       | `balance`バッファサイズを制御します                                     |
+| `schedule.tolerant-size-ratio`                       | `balance`バッファーサイズを制御します                                     |
 | `schedule.enable-remove-down-replica`                | `DownReplica`自動的に削除する機能を有効にするかどうかを決定します                    |
 | `schedule.enable-replace-offline-replica`            | `OfflineReplica`を移行する機能を有効にするかどうかを決定します                    |
 | `schedule.enable-make-up-replica`                    | レプリカを自動的に補完する機能を有効にするかどうかを決定します                            |
@@ -293,7 +293,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.enable-cross-table-merge`                  | テーブル間の結合を有効にするかどうかを決定します                                   |
 | `schedule.enable-one-way-merge`                      | 一方向のマージを有効にします。これにより、隣接する次のリージョンとのマージのみが可能になります。           |
 | `schedule.region-score-formula-version`              | リージョンスコア計算式のバージョンを制御します                                    |
-| `schedule.scheduler-max-waiting-operator`            | 各スケジューラ内の待機オペレーターの数を制御します                                   |
+| `schedule.scheduler-max-waiting-operator`            | 各スケジューラー内の待機オペレーターの数を制御します                                   |
 | `schedule.enable-debug-metrics`                      | デバッグ用のメトリクスを有効にする                                          |
 | `schedule.enable-heartbeat-concurrent-runner`        | リージョンハートビートの非同期並行処理を有効にする                                  |
 | `schedule.enable-heartbeat-breakdown-metrics`        | リージョンハートビートの内訳メトリックを有効にして、リージョンハートビート処理の各段階で消費された時間を測定します。 |
@@ -304,13 +304,13 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.store-limit-version`                       | [ストア制限](/configure-store-limit.md)のバージョンを制御します              |
 | `schedule.patrol-region-worker-count`                | リージョンのヘルス状態を検査するときにチェッカーによって作成される同時オペレーターの数を制御します           |
 | `replication.max-replicas`                           | レプリカの最大数を設定します                                             |
-| `replication.location-labels`                        | TiKVクラスタのトポロジ情報                                            |
+| `replication.location-labels`                        | TiKVクラスターのトポロジー情報                                            |
 | `replication.enable-placement-rules`                 | 配置ルールを有効にする                                                |
 | `replication.strictly-match-label`                   | ラベルチェックを有効にする                                              |
-| `replication.isolation-level`                        | TiKVクラスタの最小トポロジカル分離レベル                                     |
+| `replication.isolation-level`                        | TiKVクラスターの最小トポロジカル分離レベル                                     |
 | `pd-server.use-region-storage`                       | 独立したリージョンストレージを有効にする                                     |
 | `pd-server.max-gap-reset-ts`                         | タイムスタンプをリセットする最大間隔を設定します（BR）                               |
-| `pd-server.key-type`                                 | クラスタキータイプを設定します                                            |
+| `pd-server.key-type`                                 | クラスターキータイプを設定します                                            |
 | `pd-server.metric-storage`                           | クラスターメトリックのストレージアドレスを設定します                               |
 | `pd-server.dashboard-address`                        | ダッシュボードのアドレスを設定します                                         |
 | `pd-server.flow-round-by-digit`                      | リージョンフロー情報の丸めの最小桁数を指定します                                   |
@@ -329,7 +329,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `replication-mode.dr-auto-sync.wait-recover-timeout` | ネットワークが回復した後、 `sync-recover`状態に戻るまでの待機時間                   |
 | `replication-mode.dr-auto-sync.pause-region-split`   | `async_wait`と`async`ステータスでリージョン分割操作を一時停止するかどうかを制御します       |
 
-詳細なパラメータの説明については[PD設定ファイル](/pd-configuration-file.md)を参照してください。
+詳細なパラメーターの説明については[PD設定ファイル](/pd-configuration-file.md)を参照してください。
 
 ### TiDB構成を動的に変更する {#modify-tidb-configuration-dynamically}
 

@@ -9,7 +9,7 @@ summary: TiUPを使用して TiDB クラスターを操作および保守する�
 
 ## クラスターリストを表示する {#view-the-cluster-list}
 
-TiUPクラスタコンポーネントを使用して、複数の TiDB クラスタを管理できます。TiDB クラスタがデプロイされると、そのクラスタはTiUPクラスタリストに表示されます。
+TiUPクラスターコンポーネントを使用して、複数の TiDB クラスターを管理できます。TiDB クラスターがデプロイされると、そのクラスターはTiUPクラスターリストに表示されます。
 
 リストを表示するには、次のコマンドを実行します。
 
@@ -33,7 +33,7 @@ tiup cluster start ${cluster-name}
 >
 > `${cluster-name}`をクラスター名に置き換えてください。クラスター名を忘れた場合は、 `tiup cluster list`を実行して確認してください。
 
-コマンドに`-R`または`-N`パラメータを追加することで、一部のコンポーネントのみを起動できます。例：
+コマンドに`-R`または`-N`パラメーターを追加することで、一部のコンポーネントのみを起動できます。例：
 
 - このコマンドは PDコンポーネントのみを起動します。
 
@@ -49,7 +49,7 @@ tiup cluster start ${cluster-name}
 
 > **Note:**
 >
-> `-R`または`-N`パラメータを使用して指定されたコンポーネントを起動する場合は、起動順序が正しいことを確認してください。例えば、PDコンポーネントをTiKVコンポーネントより先に起動してください。そうしないと、起動に失敗する可能性があります。
+> `-R`または`-N`パラメーターを使用して指定されたコンポーネントを起動する場合は、起動順序が正しいことを確認してください。例えば、PDコンポーネントをTiKVコンポーネントより先に起動してください。そうしないと、起動に失敗する可能性があります。
 
 ## クラスターのステータスを表示する {#view-the-cluster-status}
 
@@ -61,7 +61,7 @@ tiup cluster display ${cluster-name}
 
 ## 設定を変更する {#modify-the-configuration}
 
-クラスタの稼働中にコンポーネントのパラメータを変更する必要がある場合は、コマンド`edit-config`を実行してください。詳細な手順は次のとおりです。
+クラスターの稼働中にコンポーネントのパラメーターを変更する必要がある場合は、コマンド`edit-config`を実行してください。詳細な手順は次のとおりです。
 
 1. クラスターの設定ファイルを編集モードで開きます。
 
@@ -69,7 +69,7 @@ tiup cluster display ${cluster-name}
     tiup cluster edit-config ${cluster-name}
     ```
 
-2. パラメータを設定します。
+2. パラメーターを設定します。
 
     - 構成がコンポーネントに対してグローバルに有効な場合は、 `server_configs`を編集します。
 
@@ -89,11 +89,11 @@ tiup cluster display ${cluster-name}
               log.slow-threshold: 300
         ```
 
-    パラメータの形式については[TiUPパラメータテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
+    パラメーターの形式については[TiUPパラメーターテンプレート](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml)を参照してください。
 
     **設定項目の階層を表すには、 `.` を使用します**
 
-    コンポーネントの設定パラメータの詳細については、 [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example) 、 [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml) 、および[PD `config.toml.example`](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)を参照してください。
+    コンポーネントの設定パラメーターの詳細については、 [TiDB `config.toml.example`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example) 、 [TiKV `config.toml.example`](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml) 、および[PD `config.toml.example`](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)を参照してください。
 
 3. `reload`コマンドを実行して、構成をローリング更新し、対応するコンポーネントを再起動します。
 
@@ -103,7 +103,7 @@ tiup cluster display ${cluster-name}
 
 ### 例 {#example}
 
-tidb-server でトランザクションサイズ制限パラメータ ( [パフォーマンス](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)モジュールの`txn-total-size-limit` ) を`1G`に設定する場合は、次のように設定を編集します。
+tidb-server でトランザクションサイズ制限パラメーター ( [パフォーマンス](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)モジュールの`txn-total-size-limit` ) を`1G`に設定する場合は、次のように設定を編集します。
 
 ```
 server_configs:
@@ -179,7 +179,7 @@ TiDB クラスター内のコンポーネントは次の順序で停止されま
 tiup cluster stop ${cluster-name}
 ```
 
-`start`コマンドと同様に、 `stop`コマンドでも`-R`または`-N`パラメータを追加することで、一部のコンポーネントを停止できます。例:
+`start`コマンドと同様に、 `stop`コマンドでも`-R`または`-N`パラメーターを追加することで、一部のコンポーネントを停止できます。例:
 
 - このコマンドは TiDBコンポーネントのみを停止します。
 
@@ -195,7 +195,7 @@ tiup cluster stop ${cluster-name}
 
 ## クラスターデータをクリーンアップする {#clean-up-cluster-data}
 
-クラスタデータのクリーンアップ操作では、すべてのサービスが停止し、データディレクトリまたはログディレクトリがクリーンアップされます。この操作は元に戻すことができませんので、**慎重に**進めてください。
+クラスターデータのクリーンアップ操作では、すべてのサービスが停止し、データディレクトリまたはログディレクトリがクリーンアップされます。この操作は元に戻すことができませんので、**慎重に**進めてください。
 
 - クラスター内のすべてのサービスのデータをクリーンアップしますが、ログは保持します。
 
@@ -247,7 +247,7 @@ tiup cluster destroy ${cluster-name}
 
 ### 新しいデプロイメント用に VictoriaMetrics を設定する {#set-up-victoriametrics-for-a-new-deployment}
 
-デフォルトでは、 TiUP はメトリクス監視コンポーネントとして Prometheus を使用します。新しいデプロイメントで Prometheus の代わりに VictoriaMetrics を使用するには、トポロジファイルを次のように設定します。
+デフォルトでは、 TiUP はメトリクス監視コンポーネントとして Prometheus を使用します。新しいデプロイメントで Prometheus の代わりに VictoriaMetrics を使用するには、トポロジーファイルを次のように設定します。
 
 ```yaml
 # Monitoring server configuration

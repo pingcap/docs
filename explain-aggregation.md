@@ -5,7 +5,7 @@ summary: "TiDB の `EXPLAIN`文によって返される実行計画情報につ�
 
 # 集計を使用するステートメントの実行計画 {#explain-statements-using-aggregation}
 
-データを集計する際、SQLオプティマイザはハッシュ集計またはストリーム集計のいずれかのオペレーターを選択します。クエリ効率を向上させるため、集計はコプロセッサ層とTiDB層の両方で実行されます。次の例を考えてみましょう。
+データを集計する際、SQLオプティマイザーはハッシュ集計またはストリーム集計のいずれかのオペレーターを選択します。クエリ効率を向上させるため、集計はコプロセッサー層とTiDB層の両方で実行されます。次の例を考えてみましょう。
 
 ```sql
 CREATE TABLE t1 (id INT NOT NULL PRIMARY KEY auto_increment, pad1 BLOB, pad2 BLOB, pad3 BLOB);

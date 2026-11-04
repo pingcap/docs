@@ -12,7 +12,7 @@ summary: SQL 式を使用して DML イベントをフィルター処理する�
 - [小さなデータセットの MySQL シャードを TiDB に移行してマージする](/migrate-small-mysql-shards-to-tidb.md)
 - [大規模データセットの MySQL シャードを TiDB に移行およびマージする](/migrate-large-mysql-shards-to-tidb.md)
 
-増分データレプリケーションを実行する際に、 [Binlogイベントフィルター](/filter-binlog-event.md)を使用して特定の種類のbinlogイベントをフィルタリングできます。例えば、アーカイブや監査などの目的で、 `DELETE`イベントを下流に複製しないように選択できます。ただし、 Binlogイベントフィルタは、より細かい粒度が求められる行の`DELETE`のイベントをフィルタリングするかどうかを判断できません。
+増分データレプリケーションを実行する際に、 [Binlogイベントフィルター](/filter-binlog-event.md)を使用して特定の種類のbinlogイベントをフィルタリングできます。例えば、アーカイブや監査などの目的で、 `DELETE`イベントを下流に複製しないように選択できます。ただし、 Binlogイベントフィルターは、より細かい粒度が求められる行の`DELETE`のイベントをフィルタリングするかどうかを判断できません。
 
 この問題に対処するため、DM v2.0.5以降では、増分データレプリケーションにおいて`binlog value filter`を使用したデータのフィルタリングをサポートしています。DM対応の`ROW`形式のbinlogでは、binlogイベントはすべての列の値を保持しており、これらの値に基づいてSQL式を設定できます。式で行の変更が`TRUE`と計算された場合、DMはこの行の変更を下流に複製しません。
 
@@ -54,7 +54,7 @@ MySQL [test]> select * from tbl;
 2 rows in set (0.001 sec)
 ```
 
-## 設定パラメータと説明 {#configuration-parameters-and-description}
+## 設定パラメーターと説明 {#configuration-parameters-and-description}
 
 - `schema` : 一致させる上流スキーマの名前。ワイルドカード一致や通常の一致はサポートされていません。
 - `table` : 照合するアップストリームテーブルの名前。ワイルドカードによる照合や通常の照合はサポートされていません。

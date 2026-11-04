@@ -104,7 +104,7 @@ git remote -v # Confirms that your remote makes sense
 
 ### ステップ4：何か行動を起こす {#step-4-do-something}
 
-`new-branch-name`ブランチのファイルをいくつか編集し、変更を保存します。Visual Studio Code などのエディタを使用して`.md`ファイルを開いて編集できます。
+`new-branch-name`ブランチのファイルをいくつか編集し、変更を保存します。Visual Studio Code などのエディターを使用して`.md`ファイルを開いて編集できます。
 
 ### ステップ5: 変更をコミットする {#step-5-commit-your-changes}
 

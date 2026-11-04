@@ -73,9 +73,9 @@ DM がダウンストリームテーブルスキーマを使用してアップ�
     tiup dmctl --master-addr ${advertise-addr} binlog-schema update -s ${source-id} ${task-name} ${database-name} ${table-name} ${schema-file}
     ```
 
-    このコマンドのパラメータの説明は次のとおりです。
+    このコマンドのパラメーターの説明は次のとおりです。
 
-    | パラメータ               | 説明                                                                                                               |
+    | パラメーター               | 説明                                                                                                               |
     | :------------------ | :--------------------------------------------------------------------------------------------------------------- |
     | `--master-addr`      | dmctl が接続されるクラスター内の任意の DM-masterノードの`${advertise-addr}`を指定します。`${advertise-addr}`は 、DM-masterが外部にアドバタイズするアドレスを示します。 |
     | `binlog-schema set` | スキーマ情報を手動で設定します。                                                                                                 |

@@ -16,7 +16,7 @@ summary: TiDB のレイテンシーと、実際の使用例でレイテンシー
 
 これらの分析により、 TiDB SQLクエリの実行時間コストに関する詳細な情報が得られます。これは、TiDBのクリティカルパス診断のガイドです。さらに、[診断のユースケース](#diagnosis-use-cases)セクションでは、実際のユースケースにおけるレイテンシーの分析方法を紹介します。
 
-このドキュメントを読む前に、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)をお読みください。レイテンシーをメトリクスに分解する際、特定のスロークエリではなく、実行時間またはレイテンシーの平均値を計算することに注意してください。多くのメトリクスは、実行時間またはレイテンシーの分布を示すヒストグラムとして表示されます。平均レイテンシーを計算するには、以下の合計とカウントのカウンタを使用する必要があります。
+このドキュメントを読む前に、 [パフォーマンス分析とチューニング](/performance-tuning-methods.md)をお読みください。レイテンシーをメトリクスに分解する際、特定のスロークエリではなく、実行時間またはレイテンシーの平均値を計算することに注意してください。多くのメトリクスは、実行時間またはレイテンシーの分布を示すヒストグラムとして表示されます。平均レイテンシーを計算するには、以下の合計とカウントのカウンターを使用する必要があります。
 
 ```
 avg = ${metric_name}_sum / ${metric_name}_count
@@ -229,7 +229,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     tidb_distsql_handle_query_duration_seconds{sql_type="general"} <= send request duration
 ```
 
-テーブルスキャンとインデックススキャンは同じように処理されます。`req_per_copr`は分散タスク数です。コプロセッサの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
+テーブルスキャンとインデックススキャンは同じように処理されます。`req_per_copr`は分散タスク数です。コプロセッサーの実行とクライアントへのデータ応答は異なるスレッドで行われるため、待機時間は`tidb_distsql_handle_query_duration_seconds{sql_type="general"}`となり、 `send request duration`よりも短くなります。
 
 `send request duration`と`req_per_copr`は次のように計算されます。
 
@@ -437,7 +437,7 @@ tikv_grpc_msg_duration_seconds{type="kv_pessimistic_lock"} =
         sum(rate(tikv_grpc_msg_duration_seconds_count{type="kv_pessimistic_lock"}}))
     ```
 
-    メモリ内およびディスク上のロックされたキーの数は、メモリ内ロックカウンタによって計算できます。TiKVはロックを取得する前にキーの値を読み取り、読み取り時間はRocksDBパフォーマンスコンテキストによって計算できます。
+    メモリ内およびディスク上のロックされたキーの数は、メモリ内ロックカウンターによって計算できます。TiKVはロックを取得する前にキーの値を読み取り、読み取り時間はRocksDBパフォーマンスコンテキストによって計算できます。
 
     ```text
     lock read duration(from disk) =
@@ -865,7 +865,7 @@ tikv_raftstore_apply_log_duration_seconds =
 
 `SELECT`文がデータベース時間の大部分を占める場合、TiDB の読み取りクエリが遅いと想定できます。
 
-スロークエリの実行計画は、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って、[PointGet](#point-get)、[Batch PointGet](#batch-point-get)、およびいくつかの[シンプルなコプロセッサクエリ](#table-scan--index-scan)を分析できます。
+スロークエリの実行計画は、TiDB Dashboardの[Top SQL文](/dashboard/dashboard-overview.md#top-sql-statements)パネルに表示されます。遅い読み取りクエリの時間コストを調査するには、前述の説明に従って、[PointGet](#point-get)、[Batch PointGet](#batch-point-get)、およびいくつかの[シンプルなコプロセッサークエリ](#table-scan--index-scan)を分析できます。
 
 ### 書き込みクエリが遅い {#slow-write-queries}
 

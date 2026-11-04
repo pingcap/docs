@@ -139,7 +139,7 @@ TiDBが使用するトランザクションモデルでは、トランザクシ�
 
 TiDBは、実行演算子のディスクへの書き込みをサポートしています。SQL実行のメモリ使用量がメモリクォータを超えた場合、tidb-serverは実行演算子の中間データをディスクに書き出すことで、メモリ負荷を軽減します。ディスクへの書き込みをサポートする演算子には、Sort、MergeJoin、HashJoin、HashAggなどがあります。
 
-- ディスクスピル動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメータによって共同で制御されます。
+- ディスクスピル動作は、 [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query) 、 [`tidb_enable_tmp_storage_on_oom`](/system-variables.md#tidb_enable_tmp_storage_on_oom) 、 [`tmp-storage-path`](/tidb-configuration-file.md#tmp-storage-path) 、および[`tmp-storage-quota`](/tidb-configuration-file.md#tmp-storage-quota)パラメーターによって共同で制御されます。
 - ディスクスピルがトリガーされると、TiDB はキーワード`memory exceeds quota, spill to disk now`または`memory exceeds quota, set aggregate mode to spill-mode`を含むログを出力します。
 - Sort、MergeJoin、およびHashJoinオペレーターのディスクスピルはv4.0.0で導入されました。HashAggオペレーターの非並列アルゴリズムのディスクスピルはv5.2.0で導入されました。HashAggオペレーターの並列アルゴリズムのディスクスピルはv8.0.0で実験的機能として導入され、v8.2.0で一般提供（GA）されました。TopNオペレーターのディスクスピルはv8.3.0で導入されました。
 - [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数を使用して、ディスクスピルをサポートする並列HashAggアルゴリズムを有効にするかどうかを制御できます。この変数は将来のリリースで廃止される予定です。

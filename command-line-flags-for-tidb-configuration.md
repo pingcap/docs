@@ -5,7 +5,7 @@ summary: TiDB の設定オプションについて学習します。
 
 # 設定オプション {#configuration-options}
 
-TiDBクラスタを起動する際には、コマンドラインオプションまたは環境変数を使用して設定できます。このドキュメントでは、TiDBのコマンドオプションについて説明します。デフォルトのTiDBポートは、クライアントリクエスト用に`4000` 、ステータスレポート用に`10080`です。
+TiDBクラスターを起動する際には、コマンドラインオプションまたは環境変数を使用して設定できます。このドキュメントでは、TiDBのコマンドオプションについて説明します。デフォルトのTiDBポートは、クライアントリクエスト用に`4000` 、ステータスレポート用に`10080`です。
 
 ## `--advertise-address` {#--advertise-address}
 
@@ -53,7 +53,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--initialize-sql-file` {#--initialize-sql-file}
 
-- TiDBクラスタの初回起動時に実行されるSQLスクリプト。詳細は[設定項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照。
+- TiDBクラスターの初回起動時に実行されるSQLスクリプト。詳細は[設定項目`initialize-sql-file`](/tidb-configuration-file.md#initialize-sql-file-new-in-v660)を参照。
 - デフォルト: `""`
 
 ## `-L` {#-l}
@@ -114,7 +114,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--proxy-protocol-fallbackable` {#--proxy-protocol-fallbackable}
 
-- PROXYプロトコルフォールバックモードを有効にするかどうかを制御します。このパラメータを`true`に設定すると、TiDBはPROXYプロトコル仕様を使用せず、PROXYプロトコルヘッダーを送信せずに、 `--proxy-protocol-networks`に属するクライアント接続を受け入れます。デフォルトでは、TiDBは`--proxy-protocol-networks`に属し、PROXYプロトコルヘッダーを送信するクライアント接続のみを受け入れます。
+- PROXYプロトコルフォールバックモードを有効にするかどうかを制御します。このパラメーターを`true`に設定すると、TiDBはPROXYプロトコル仕様を使用せず、PROXYプロトコルヘッダーを送信せずに、 `--proxy-protocol-networks`に属するクライアント接続を受け入れます。デフォルトでは、TiDBは`--proxy-protocol-networks`に属し、PROXYプロトコルヘッダーを送信するクライアント接続のみを受け入れます。
 - デフォルト値: `false`
 
 ## `--proxy-protocol-networks` {#--proxy-protocol-networks}
@@ -139,7 +139,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 > **Warning:**
 >
-> バージョン6.3.0以降、このパラメータは非推奨となりました。ネットワークデータの初回読み取り時にPROXYプロトコルヘッダーが読み込まれるため、このパラメータは使用されなくなりました。このパラメータを非推奨にすることで、ネットワークデータの初回読み取り時に設定されるタイムアウトに影響を与えなくなります。
+> バージョン6.3.0以降、このパラメーターは非推奨となりました。ネットワークデータの初回読み取り時にPROXYプロトコルヘッダーが読み込まれるため、このパラメーターは使用されなくなりました。このパラメーターを非推奨にすることで、ネットワークデータの初回読み取り時に設定されるタイムアウトに影響を与えなくなります。
 
 > **Note:**
 >
@@ -149,11 +149,11 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 - ステータスレポートとpprofツールを有効（ `true` ）または無効（ `false` ）にする
 - デフォルト: `true`
-- このパラメータを`true`に設定すると、メトリクスとpprofが有効になります。 `false`に設定すると、メトリクスとpprofが無効になります。
+- このパラメーターを`true`に設定すると、メトリクスとpprofが有効になります。 `false`に設定すると、メトリクスとpprofが無効になります。
 
 ## `--run-ddl` {#--run-ddl}
 
-- `tidb-server` DDL文を実行するかどうかを確認し、クラスタ内の`tidb-server`の数が2を超える場合に設定する
+- `tidb-server` DDL文を実行するかどうかを確認し、クラスター内の`tidb-server`の数が2を超える場合に設定する
 - デフォルト: `true`
 - 値は (true) または (false) になります。 (true) は、 `tidb-server` DDL 自体を実行することを示します。 (false) は、 `tidb-server` DDL 自体を実行しないことを示します。
 

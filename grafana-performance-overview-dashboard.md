@@ -119,7 +119,7 @@ Connection Idle Duration は、接続がアイドル状態にある期間を示�
 - total: すべてのTiDBインスタンスへの接続数
 - active connections: すべての TiDB インスタンスへのアクティブな接続の数
 - tidb-{node-number}-peer: 各TiDBインスタンスへの接続数
-- disconnection/s: TiDB クラスタ内の切断回数
+- disconnection/s: TiDB クラスター内の切断回数
 - 99-not-in-txn: 接続がトランザクション内にない場合の P99 接続アイドル期間
 
 ### Parse Duration, Compile Duration, and Execute Duration {#parse-duration-compile-duration-and-execute-duration}
@@ -173,17 +173,17 @@ Connection Idle Duration は、接続がアイドル状態にある期間を示�
 - Memory: TiFlashインスタンスごとのメモリ使用量。
 - IO utilization: TiFlashインスタンスごとの IO 使用率。
 - MPP Query count: TiFlashインスタンスあたりの 1秒あたりのTiFlash MPP クエリ数。
-- Request QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサリクエストの数。
+- Request QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサーリクエストの数。
 
     - `batch` : バッチリクエストの数。
-    - `batch_cop` : バッチリクエスト内のコプロセッサリクエストの数。
-    - `cop` : コプロセッサインターフェイスを介して直接送信されるコプロセッサリクエストの数。
-    - `cop_dag` : すべてのコプロセッサリクエスト内の DAG リクエストの数。
+    - `batch_cop` : バッチリクエスト内のコプロセッサーリクエストの数。
+    - `cop` : コプロセッサーインターフェイスを介して直接送信されるコプロセッサーリクエストの数。
+    - `cop_dag` : すべてのコプロセッサーリクエスト内の DAG リクエストの数。
     - `super_batch` : スーパーバッチ機能を有効にするリクエストの数。
 - Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブルスキャン Executor です。`selection`は選択 Executor です。`aggregation`は集約 Executor です。`top_n`は`TopN` Executor です。`limit`は制限 Executor です。
 - Request Duration Overview: すべてのTiFlashインスタンスのすべてのリクエストタイプについて、1秒あたりの合計処理時間の積み上げグラフを提供します。
-- Request Duration: すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサリクエストタイプの合計処理期間。コプロセッサリクエストの受信からリクエストへの応答が完了するまでの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
-- Request Handle Duration：すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサリクエストタイプの実際の処理時間。コプロセッサリクエストの実行開始から完了までの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
+- Request Duration: すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサーリクエストタイプの合計処理期間。コプロセッサーリクエストの受信からリクエストへの応答が完了するまでの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
+- Request Handle Duration：すべてのTiFlashインスタンスにおける各MPPおよびコプロセッサーリクエストタイプの実際の処理時間。コプロセッサーリクエストの実行開始から完了までの時間であり、平均レイテンシーとp99レイテンシーが含まれます。
 - Raft Wait Index Duration: すべてのTiFlashインスタンスに対して`wait_index`が使用する時間。つまり、 `read_index`リクエストを受信してから、リージョンインデックスが`read_index`になるまで待機する時間です。
 - Raft Batch Read Index Duration: すべてのTiFlashインスタンスの`read_index`が使用する時間。ほとんどの時間は、リージョンリーダーとのやり取りと再試行に使用されます。
 - Write Throughput By Instance：インスタンスごとの書き込みスループット。Raft書き込みコマンドとRaftスナップショットを適用した場合のスループットも含まれます。

@@ -3,13 +3,13 @@ title: Deploy Monitoring Services for the TiDB Cluster
 summary: TiDB クラスターの監視サービスをデプロイする方法を学習します。
 ---
 
-# TiDBクラスタの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
+# TiDBクラスターの監視サービスをデプロイ {#deploy-monitoring-services-for-the-tidb-cluster}
 
 このドキュメントは、TiDB 監視およびアラートサービスを手動でデプロイしたいユーザーを対象としています。TiUPを使用して TiDB クラスターをデプロイする場合、監視およびアラートサービスは自動的にデプロイされるため、手動でのデプロイは不要です。[TiDB Dashboard](/dashboard/dashboard-intro.md)はPDコンポーネントに組み込まれているため、別途デプロイする必要はありません。
 
 ## PrometheusとGrafanaをデプロイ {#deploy-prometheus-and-grafana}
 
-TiDB クラスタートポロジが次のようになっていると仮定します。
+TiDB クラスタートポロジーが次のようになっていると仮定します。
 
 | 名前   | ホストIP           | サービス                              |
 | :--- | :-------------- | :-------------------------------- |
@@ -270,7 +270,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
     - ガベージコレクション（GC）監視
     - TiKVコマンドが実行される合計回数
-    - スケジューラがコマンドを実行する期間
+    - スケジューラーがコマンドを実行する期間
     - Raftの提案コマンドの総回数
     - Raftがコマンドを実行する期間
     - Raftコマンドが失敗した合計回数

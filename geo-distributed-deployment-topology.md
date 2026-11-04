@@ -1,13 +1,13 @@
 ---
 title: Geo-distributed Deployment topology
-summary: TiDB の地理的に分散された展開トポロジについて学習します。
+summary: TiDB の地理的に分散された展開トポロジーについて学習します。
 ---
 
-# 地理的に分散した展開トポロジ {#geo-distributed-deployment-topology}
+# 地理的に分散した展開トポロジー {#geo-distributed-deployment-topology}
 
 このドキュメントでは、2つの都市に3つのデータセンター（DC）を配置した典型的なアーキテクチャを例に、地理的に分散したデプロイメントアーキテクチャと主要な構成について説明します。この例で使用する都市は、上海（ `sha` ）と北京（ `bja`と`bjb` ）です。
 
-## トポロジ情報 {#topology-information}
+## トポロジー情報 {#topology-information}
 
 | インスタンス             | 数 | 物理マシン構成                          | BJ IP                                                  | SH IP         | 設定                 |
 | :------------- | :--- | :------------------------------- | :----------------------------------------------------- | :-------- | :------------------------- |
@@ -20,21 +20,21 @@ summary: TiDB の地理的に分散された展開トポロジについて学習
 >
 > インスタンスのIPアドレスは例としてのみ示されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-### トポロジテンプレート {#topology-templates}
+### トポロジーテンプレート {#topology-templates}
 
-- [地理的に分散したトポロジテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
+- [地理的に分散したトポロジーテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/geo-redundancy-deployment.yaml)
 
-上記の TiDB クラスタートポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスタートポロジーファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-### 主なパラメータ {#key-parameters}
+### 主なパラメーター {#key-parameters}
 
-このセクションでは、TiDB の地理的に分散されたデプロイメントの主要なパラメータ構成について説明します。
+このセクションでは、TiDB の地理的に分散されたデプロイメントの主要なパラメーター構成について説明します。
 
-#### TiKVパラメータ {#tikv-parameters}
+#### TiKVパラメーター {#tikv-parameters}
 
 - gRPC 圧縮形式 (デフォルトは`none` ):
 
-    地理的に分散されたターゲットノード間の gRPC パッケージの転送速度を上げるには、このパラメータを`gzip`に設定します。
+    地理的に分散されたターゲットノード間の gRPC パッケージの転送速度を上げるには、このパラメーターを`gzip`に設定します。
 
     ```yaml
     server.grpc-compression-type: gzip
@@ -57,7 +57,7 @@ summary: TiDB の地理的に分散された展開トポロジについて学習
         host: host2
     ```
 
-- リモートTiKVノードが不要なRaft選出を開始するのを防ぐには、リモートTiKVノードが選出を開始するために必要な最小ティック数と最大ティック数を増やす必要があります。これらの2つのパラメータはデフォルトで`0`に設定されています。
+- リモートTiKVノードが不要なRaft選出を開始するのを防ぐには、リモートTiKVノードが選出を開始するために必要な最小ティック数と最大ティック数を増やす必要があります。これらの2つのパラメーターはデフォルトで`0`に設定されています。
 
     ```yaml
     raftstore.raft-min-election-timeout-ticks: 50
@@ -68,9 +68,9 @@ summary: TiDB の地理的に分散された展開トポロジについて学習
 >
 > TiKVノードの選出タイムアウト値を`raftstore.raft-min-election-timeout-ticks`と`raftstore.raft-max-election-timeout-ticks`で大きく設定すると、そのノード上のリージョンがリーダーになる可能性が大幅に低下します。ただし、一部のTiKVノードがオフラインになり、残りのアクティブなTiKVノードのRaftログが遅延しているような災害シナリオでは、このTiKVノード上の選出タイムアウト値が大きいリージョンのみがリーダーになることができます。このTiKVノード上のリージョンは、選出を開始する前に少なくとも`raftstore.raft-min-election-timeout-ticks`で設定された期間待機する必要があるため、このようなシナリオではクラスターの可用性への影響を防ぐため、これらの値を過度に大きく設定しないことをお勧めします。
 
-#### PDパラメータ {#pd-parameters}
+#### PDパラメーター {#pd-parameters}
 
-- PD メタデータ情報には、TiKV クラスターのトポロジが記録されます。PD は、次の4つの次元に基づいてRaftグループのレプリカをスケジュールします。
+- PD メタデータ情報には、TiKV クラスターのトポロジーが記録されます。PD は、次の4つの次元に基づいてRaftグループのレプリカをスケジュールします。
 
     ```yaml
     replication.location-labels: ["zone","dc","rack","host"]
@@ -95,7 +95,7 @@ summary: TiDB の地理的に分散された展開トポロジについて学習
     >
     > TiDB 5.2以降、 `label-property`構成はデフォルトではサポートされません。レプリカポリシーを設定するには、 [配置ルール](/configure-placement-rules.md)を使用してください。
 
-ラベルとRaftグループのレプリカの数に関する詳細については、 [トポロジラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
+ラベルとRaftグループのレプリカの数に関する詳細については、 [トポロジーラベルによるレプリカのスケジュール](/schedule-replicas-by-topology-labels.md)を参照してください。
 
 > **Note:**
 >
