@@ -63,7 +63,7 @@ TiDB バージョン: 6.1.1
 
     - TiCDC
 
-        - シンクURIパラメーター`transaction-atomicity`を追加し、チェンジフィード内の大規模トランザクションの分割をサポートします。これにより、大規模トランザクションのレイテンシーとメモリ消費を大幅に削減できます[#5231](https://github.com/pingcap/tiflow/issues/5231) @[CharlesCheung96](https://github.com/CharlesCheung96)
+        - シンクURIパラメーター`transaction-atomicity`を追加し、チェンジフィード内の大規模トランザクションの分割をサポートします。これにより、大規模トランザクションのレイテンシーとメモリ消費を大幅に削減できます。 [#5231](https://github.com/pingcap/tiflow/issues/5231) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - マルチリージョンシナリオにおける実行時コンテキスト切り替えによるパフォーマンスオーバーヘッドを削減[#5610](https://github.com/pingcap/tiflow/issues/5610) @[hicqu](https://github.com/hicqu)
         - MySQLシンクを強化してセーフモードを自動的にオフにする[#5611](https://github.com/pingcap/tiflow/issues/5611) @[overvenus](https://github.com/overvenus)
 
