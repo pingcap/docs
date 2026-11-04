@@ -5,15 +5,15 @@ summary: Titan の設定方法を学びます。
 
 # Titanの設定 {#titan-configuration}
 
-このドキュメントでは、対応する設定項目、データ変換メカニズム、関連パラメータ、およびレベルマージ機能を使用して[Titan](/storage-engine/titan-overview.md)を有効または無効にする方法を紹介します。
+このドキュメントでは、対応する設定項目、データ変換メカニズム、関連パラメーター、およびレベルマージ機能を使用して[Titan](/storage-engine/titan-overview.md)を有効または無効にする方法を紹介します。
 
 ## Titanを有効にする {#enable-titan}
 
 > **Note:**
 >
-> - TiDB v7.6.0以降、新規クラスタではTitanがデフォルトで有効化され、ワイドテーブルとJSONデータの書き込みパフォーマンスが向上します。[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)のデフォルト値は`1KB`から`32KB`に変更されました。
+> - TiDB v7.6.0以降、新規クラスターではTitanがデフォルトで有効化され、ワイドテーブルとJSONデータの書き込みパフォーマンスが向上します。[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)のデフォルト値は`1KB`から`32KB`に変更されました。
 > - v7.6.0 以降のバージョンにアップグレードされた既存のクラスターは元の構成を保持します。つまり、Titan が明示的に有効になっていない場合は、引き続き RocksDB が使用されます。
-> - クラスタをTiDB v7.6.0以降のバージョンにアップグレードする前にTitanを有効にしていた場合、アップグレード後もTitanが有効になり、アップグレード前の設定値[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)も保持されます。アップグレード前に明示的に値を設定しない場合は、アップグレード後のクラスタ構成の安定性を確保するために、旧バージョンのデフォルト値`1KB`が保持されます。
+> - クラスターをTiDB v7.6.0以降のバージョンにアップグレードする前にTitanを有効にしていた場合、アップグレード後もTitanが有効になり、アップグレード前の設定値[`min-blob-size`](/tikv-configuration-file.md#min-blob-size)も保持されます。アップグレード前に明示的に値を設定しない場合は、アップグレード後のクラスター構成の安定性を確保するために、旧バージョンのデフォルト値`1KB`が保持されます。
 
 TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKVインスタンスでTitanを直接有効化できます。Titanを有効化するには、以下のいずれかの方法があります。
 
@@ -61,7 +61,7 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
     kubectl apply -f ${cluster_name} -n ${namespace}
     ```
 
-    詳細については[Kubernetes での TiDBクラスタの構成](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster)を参照してください。
+    詳細については[Kubernetes での TiDBクラスターの構成](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster)を参照してください。
 
 ## データ変換 {#data-conversion}
 
@@ -75,9 +75,9 @@ Titan を有効にした後、RocksDB に保存されている既存のデータ
 
 Titan BLOBファイル内の値は連続しておらず、Titanのキャッシュは値レベルであるため、コンパクション時にはBLOBキャッシュは役に立ちません。TitanからRocksDBへの変換速度は、RocksDBからTitanへの変換速度よりも桁違いに遅くなります。テストでは、TiKVノード上の800GiBのTitanデータをtikv-ctlのフルコンパクションでRocksDBに変換するのに12時間かかりました。
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-Titanパラメータを適切に設定することで、データベースのパフォーマンスとリソース使用率を効果的に向上させることができます。このセクションでは、使用可能な主要なパラメータをいくつか紹介します。
+Titanパラメーターを適切に設定することで、データベースのパフォーマンスとリソース使用率を効果的に向上させることができます。このセクションでは、使用可能な主要なパラメーターをいくつか紹介します。
 
 ### `min-blob-size` {#min-blob-size}
 
@@ -95,7 +95,7 @@ Titanの値のキャッシュサイズを制御するには、 [`blob-cache-size
 
 ### `discardable-ratio`と`max-background-gc` {#discardable-ratio-and-max-background-gc}
 
-[`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)のパラメータと[`max-background-gc`](/tikv-configuration-file.md#max-background-gc)パラメータは、Titan の読み取りパフォーマンスとガベージコレクションプロセスに大きな影響を与えます。
+[`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)のパラメーターと[`max-background-gc`](/tikv-configuration-file.md#max-background-gc)パラメーターは、Titan の読み取りパフォーマンスとガベージコレクションプロセスに大きな影響を与えます。
 
 BLOBファイル内の古いデータ（対応するキーが更新または削除されたデータ）の割合が、 [`discardable-ratio`](/tikv-configuration-file.md#discardable-ratio)で設定されたしきい値を超えると、Titan GCがトリガーされます。このしきい値を下げると、スペースの増幅を軽減できますが、Titan GCの頻度が高くなる可能性があります。この値を上げると、Titan GC、I/O帯域幅、CPU消費量を削減できますが、ディスク容量の使用量は増加します。
 

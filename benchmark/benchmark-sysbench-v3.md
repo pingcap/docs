@@ -52,11 +52,11 @@ Sysbenchを使用して、**各テーブルに10,000,000行が含まれる16個�
 | TiKV | 57c83dc4ebc93d38d77dc8f7d66db224760766cc |
 |  PD  | b64716707b7279a4ae822be767085ff17b5f3fea |
 
-### TiDBパラメータ設定 {#tidb-parameter-configuration}
+### TiDBパラメーター設定 {#tidb-parameter-configuration}
 
 デフォルトの TiDB 構成は、v2.1 と v2.0 の両方で使用されます。
 
-### TiKVパラメータ設定 {#tikv-parameter-configuration}
+### TiKVパラメーター設定 {#tikv-parameter-configuration}
 
 次の TiKV 構成は、v2.1 と v2.0 の両方で使用されます。
 
@@ -73,7 +73,7 @@ block-cache-size = "60GB"
 block-cache-size = "20GB"
 ```
 
-### クラスタトポロジー {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 |     マシンIP    |     デプロイメントインスタンス    |
 | :----------: | :------------------: |

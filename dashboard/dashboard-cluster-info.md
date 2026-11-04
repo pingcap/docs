@@ -1,9 +1,9 @@
 ---
 title: TiDB Dashboard Cluster Information Page
-summary: TiDB Dashboardのクラスタ情報ページでは、クラスタ全体のTiDB、TiKV、PD、 TiFlashコンポーネントの稼働状況、およびこれらのコンポーネントが配置されているホストの稼働状況を確認できます。このページにアクセスするには、TiDB Dashboardにログインし、左側のナビゲーションメニューでCluster Infoをクリックするか、ブラウザで特定のURLにアクセスしてください。このページには、インスタンス、ホスト、ディスクのリストが表示され、各コンポーネントの詳細情報と稼働状況が表示されます。
+summary: TiDB Dashboardのクラスター情報ページでは、クラスター全体のTiDB、TiKV、PD、 TiFlashコンポーネントの稼働状況、およびこれらのコンポーネントが配置されているホストの稼働状況を確認できます。このページにアクセスするには、TiDB Dashboardにログインし、左側のナビゲーションメニューでCluster Infoをクリックするか、ブラウザーで特定のURLにアクセスしてください。このページには、インスタンス、ホスト、ディスクのリストが表示され、各コンポーネントの詳細情報と稼働状況が表示されます。
 ---
 
-# TiDB Dashboardのクラスタ情報ページ {#tidb-dashboard-cluster-information-page}
+# TiDB Dashboardのクラスター情報ページ {#tidb-dashboard-cluster-information-page}
 
 クラスター情報ページでは、クラスター全体の TiDB、TiKV、PD、 TiFlashコンポーネントの実行状態と、これらのコンポーネントが配置されているホストの実行状態を表示できます。
 
@@ -13,7 +13,7 @@ summary: TiDB Dashboardのクラスタ情報ページでは、クラスタ全体
 
 - TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**Cluster Info**をクリックします。
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/cluster_info/instance](http://127.0.0.1:2379/dashboard/#/cluster_info/instance)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/cluster_info/instance](http://127.0.0.1:2379/dashboard/#/cluster_info/instance)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 ## インスタンスリスト {#instance-list}
 

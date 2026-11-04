@@ -42,7 +42,7 @@ TiProxy v1.0.0 は、TiDB サーバーに対してステータスベースおよ
 
 <img src="https://docs-download.pingcap.com/media/images/docs/tiproxy/tiproxy-balance-label-v2.png" alt="ラベルベースの負荷分散" width="600" />
 
-このトポロジの構成例:
+このトポロジーの構成例:
 
 ```yaml
 component_versions:
@@ -149,7 +149,7 @@ TiProxyは、ラベル`zone`に基づいて自身とTiDBサーバーの場所を
 
 TiDB Operatorを使用してデプロイされたクラスターについては、 [データの高可用性](https://docs.pingcap.com/tidb-in-kubernetes/stable/configure-a-tidb-cluster#high-availability-of-data)を参照してください。
 
-以下はクラスタ構成の例です。
+以下はクラスター構成の例です。
 
 ```yaml
 component_versions:

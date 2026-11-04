@@ -11,7 +11,7 @@ TiDBは、 TiFlashレプリカを読み取る3つの方法を提供します。�
 
 ## スマートな選択 {#smart-selection}
 
-TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。`desc`または`explain analyze`文を使用して、 TiFlashレプリカが選択されているかどうかを確認できます。例：
+TiFlashレプリカを持つテーブルの場合、TiDBオプティマイザーはコスト見積もりに基づいてTiFlashレプリカを使用するかどうかを自動的に決定します。`desc`または`explain analyze`文を使用して、 TiFlashレプリカが選択されているかどうかを確認できます。例：
 
 ```sql
 desc select count(*) from test.t;
@@ -77,7 +77,7 @@ explain analyze select count(*) from test.t;
 
     SESSION レベルのデフォルト構成は、TiDB INSTANCE レベルの構成を継承します。
 
-最終的なエンジン構成はセッションレベルの構成です。つまり、セッションレベルの構成はインスタンスレベルの構成をオーバーライドします。例えば、インスタンスレベルで"tikv"を設定し、セッションレベルで"tiflash"を設定した場合、 TiFlashレプリカが読み込まれます。最終的なエンジン構成が"tikv"と"tiflash"の場合、TiKVレプリカとTiFlashレプリカの両方が読み込まれ、オプティマイザはより適切なエンジンを自動的に選択して実行します。
+最終的なエンジン構成はセッションレベルの構成です。つまり、セッションレベルの構成はインスタンスレベルの構成をオーバーライドします。例えば、インスタンスレベルで"tikv"を設定し、セッションレベルで"tiflash"を設定した場合、 TiFlashレプリカが読み込まれます。最終的なエンジン構成が"tikv"と"tiflash"の場合、TiKVレプリカとTiFlashレプリカの両方が読み込まれ、オプティマイザーはより適切なエンジンを自動的に選択して実行します。
 
 > **Note:**
 >
@@ -117,13 +117,13 @@ select /*+ read_from_storage(tiflash[table_name]) */ ... from table_name;
 select /*+ read_from_storage(tiflash[alias_a,alias_b]) */ ... from table_name_1 as alias_a, table_name_2 as alias_b where alias_a.column_1 = alias_b.column_2;
 ```
 
-上記の文では、 `tiflash[]`はオプティマイザにTiFlashレプリカの読み取りを指示します。また、 `tikv[]`を使用すると、必要に応じてオプティマイザに TiKV レプリカの読み取りを指示できます。ヒント構文の詳細については、 [ストレージからの読み取り](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
+上記の文では、 `tiflash[]`はオプティマイザーにTiFlashレプリカの読み取りを指示します。また、 `tikv[]`を使用すると、必要に応じてオプティマイザーに TiKV レプリカの読み取りを指示できます。ヒント構文の詳細については、 [ストレージからの読み取り](/optimizer-hints.md#read_from_storagetiflasht1_name--tl_name--tikvt2_name--tl_name-)を参照してください。
 
 ヒントで指定されたテーブルに指定されたエンジンのレプリカが存在しない場合、ヒントは無視され、警告が報告されます。また、ヒントはエンジン分離を前提としてのみ有効です。ヒントで指定されたエンジンがエンジン分離リストに含まれていない場合も、ヒントは無視され、警告が報告されます。
 
 > **Note:**
 >
-> MySQLクライアント5.7.7以前のバージョンでは、オプティマイザヒントがデフォルトでクリアされます。これらの初期バージョンのヒント構文を使用するには、クライアントを`--comments`オプション（例： `mysql -h 127.0.0.1 -P 4000 -uroot --comments` ）で起動してください。
+> MySQLクライアント5.7.7以前のバージョンでは、オプティマイザーヒントがデフォルトでクリアされます。これらの初期バージョンのヒント構文を使用するには、クライアントを`--comments`オプション（例： `mysql -h 127.0.0.1 -P 4000 -uroot --comments` ）で起動してください。
 
 ## スマート選択、エンジン分離、手動ヒントの関係 {#the-relationship-of-smart-selection-engine-isolation-and-manual-hint}
 

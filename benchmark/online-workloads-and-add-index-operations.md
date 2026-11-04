@@ -31,11 +31,11 @@ TiDB バージョン: v3.0.1
 
 Sysbench バージョン: 1.0.17
 
-### TiDBパラメータ設定 {#tidb-parameter-configuration}
+### TiDBパラメーター設定 {#tidb-parameter-configuration}
 
 TiDB、TiKV、PD はすべてデフォルトの[TiDB Operator](https://github.com/pingcap/tidb-operator)構成を使用します。
 
-### クラスタトポロジー {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 | マシンIP                                    | デプロイメントインスタンス |
 | :--------------------------------------- | :------------ |
@@ -85,7 +85,7 @@ sysbench $testname \
 2. 手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
 3. 手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_write`を停止します。
 4. `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
-5. 2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
+5. 2 つのパラメーター`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
 
 ### テスト結果 {#test-results}
 
@@ -211,7 +211,7 @@ sysbench $testname \
 
 `ADD INDEX`の文のターゲット列に対して頻繁に書き込み操作（このテストでは`UPDATE` `INSERT` `DELETE`操作が含まれます）を実行すると、デフォルトの`ADD INDEX`構成はシステムのオンラインワークロードに大きな影響を与えます。これは主に、同時実行される`ADD INDEX`操作と列更新によって発生する書き込み競合が原因です。システムのパフォーマンスは次のようになります。
 
-- パラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値が増加すると、 `TiKV_prewrite_latch_wait_duration`の値が大幅に増加し、書き込み速度が低下します。
+- パラメーター`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値が増加すると、 `TiKV_prewrite_latch_wait_duration`の値が大幅に増加し、書き込み速度が低下します。
 - `tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値が非常に大きい場合、 `admin show ddl`コマンドを実行すると、DDL ジョブの再試行回数（例えば`Write conflict, txnStartTS 410327455965380624 is stale [try again later], ErrCount:38, SnapshotVersion: 410327228136030220`）を確認できます。この場合、 `ADD INDEX`操作の完了に非常に長い時間がかかります。
 
 ## テストプラン 2: `ADD INDEX`文のターゲット列への書き込み操作を実行しない (クエリのみ) {#test-plan-2-do-not-perform-write-operations-to-the-target-column-of-the-add-index-statement-query-only}
@@ -220,7 +220,7 @@ sysbench $testname \
 2. 手順 1 と同時に実行します。`alter table sbtest1 add index c_idx(c)`を使用してインデックスを追加します。
 3. 手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_only`を停止します。
 4. `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
-5. 2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
+5. 2 つのパラメーター`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
 
 ### テスト結果 {#test-results}
 
@@ -282,7 +282,7 @@ sysbench $testname \
 2. 手順 1 と同時に実行します。`alter table test add index pad_idx(pad)`を使用してインデックスを追加します。
 3. 手順 2 の最後に実行します。インデックスが正常に追加されたら、テスト`oltp_read_only`を停止します。
 4. `alter table ... add index`の期間と、この期間の Sysbench の平均 TPS と QPS を取得します。
-5. 2 つのパラメータ`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
+5. 2 つのパラメーター`tidb_ddl_reorg_worker_cnt`と`tidb_ddl_reorg_batch_size`値を徐々に増やし、手順 1 ～ 4 を繰り返します。
 
 ### テスト結果 {#test-results}
 

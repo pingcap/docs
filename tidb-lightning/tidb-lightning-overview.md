@@ -5,7 +5,7 @@ summary: Lightning とアーキテクチャ全体について学びます。
 
 # TiDB Lightning の概要 {#tidb-lightning-overview}
 
-[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.5/lightning) 、TB規模のデータをTiDBクラスタにインポートするためのツールです。TiDBクラスタへの初期データインポートによく使用されます。
+[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.5/lightning) 、TB規模のデータをTiDBクラスターにインポートするためのツールです。TiDBクラスターへの初期データインポートによく使用されます。
 
 TiDB Lightning は次のファイル形式をサポートしています。
 
@@ -41,8 +41,8 @@ TiDB Lightning は、 `backend`で設定された 2つのインポートモー�
 | ネットワーク帯域幅の消費                   | 高い                                                                           | 低い              |
 | インポート時のACID準拠                  | いいえ                                                                          | はい              |
 | ターゲットテーブル                      | 空でなければなりません                                                                  | データを含むことができる    |
-| TiDB クラスタバージョン                | >= 4.0.0                                                                      | 全て              |
-| TiDBクラスタがインポート中にサービスを提供できるかどうか | [限定サービス](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations) | はい              |
+| TiDB クラスターバージョン                | >= 4.0.0                                                                      | 全て              |
+| TiDBクラスターがインポート中にサービスを提供できるかどうか | [限定サービス](/tidb-lightning/tidb-lightning-physical-import-mode.md#limitations) | はい              |
 
 <Note>
 

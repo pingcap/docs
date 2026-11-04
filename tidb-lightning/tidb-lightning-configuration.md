@@ -5,7 +5,7 @@ summary: TiDB Lightningの CLI の使用方法とサンプル構成について�
 
 # TiDB Lightning設定 {#tidb-lightning-configuration}
 
-このドキュメントでは、グローバル設定とタスク設定のサンプルを提供し、コマンドラインパラメータの使用方法を説明します。サンプル設定ファイルは[`lightning/tidb-lightning.toml`](https://github.com/pingcap/tidb/blob/master/lightning/tidb-lightning.toml)にあります。
+このドキュメントでは、グローバル設定とタスク設定のサンプルを提供し、コマンドラインパラメーターの使用方法を説明します。サンプル設定ファイルは[`lightning/tidb-lightning.toml`](https://github.com/pingcap/tidb/blob/master/lightning/tidb-lightning.toml)にあります。
 
 TiDB Lightningには「グローバル」と「タスク」という2つの設定クラスがあり、構造は互換性があります。これらの違いは、サーバーモードが有効な場合にのみ発生します。サーバーモードが無効（デフォルト）の場合、TiDB Lightningは1つのタスクのみを実行し、グローバル設定とタスク設定の両方に同じ設定ファイルを使用します。
 
@@ -85,7 +85,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `io-concurrency` {#io-concurrency}
 
-- 最大I/O同時実行数。I/O同時実行数が多すぎると、ディスクの内部バッファが頻繁に更新されるため、I/Oレイテンシーが増加し、キャッシュミスが発生し、読み取り速度が低下します。ストレージメディアによっては、最適なパフォーマンスを得るためにこの値を調整する必要があるかもしれません。
+- 最大I/O同時実行数。I/O同時実行数が多すぎると、ディスクの内部バッファーが頻繁に更新されるため、I/Oレイテンシーが増加し、キャッシュミスが発生し、読み取り速度が低下します。ストレージメディアによっては、最適なパフォーマンスを得るためにこの値を調整する必要があるかもしれません。
 
 <!-- Example: `5` -->
 
@@ -106,10 +106,10 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `meta-schema-name` {#meta-schema-name}
 
-- [並列インポートモード](/tidb-lightning/tidb-lightning-distributed-import.md)では、ターゲットクラスタ内の各TiDB Lightningインスタンスのメタ情報を格納するスキーマ名です。このパラメータは、並列インポートが有効な場合にのみ設定してください。
-- このパラメータに設定する値は、同じ並列インポートに参加する各TiDB Lightningインスタンスで同じである必要があります。そうでない場合、インポートされたデータの正確性は保証されません。
+- [並列インポートモード](/tidb-lightning/tidb-lightning-distributed-import.md)では、ターゲットクラスター内の各TiDB Lightningインスタンスのメタ情報を格納するスキーマ名です。このパラメーターは、並列インポートが有効な場合にのみ設定してください。
+- このパラメーターに設定する値は、同じ並列インポートに参加する各TiDB Lightningインスタンスで同じである必要があります。そうでない場合、インポートされたデータの正確性は保証されません。
 - 並列インポートモードが有効になっている場合は、インポートに使用されるユーザー (構成`tidb.user` ) に、この構成に対応するデータベースを作成してアクセスする権限があることを確認します。
-- TiDB Lightningはインポート完了後にこのスキーマを削除します。そのため、このパラメータを設定する際に既存のスキーマ名を使用しないでください。
+- TiDB Lightningはインポート完了後にこのスキーマを削除します。そのため、このパラメーターを設定する際に既存のスキーマ名を使用しないでください。
 - デフォルト値: `"lightning_metadata"`
 
 ### security {#security}
@@ -159,7 +159,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 #### `dsn` {#dsn}
 
 - チェックポイントストレージの場所を示すデータソース名 (DSN)。
-- `file`ドライバの場合、DSNはパスです。パスが指定されていない場合、 TiDB Lightningはデフォルト値の`/tmp/CHECKPOINT_SCHEMA.pb`を使用します。
+- `file`ドライバーの場合、DSNはパスです。パスが指定されていない場合、 TiDB Lightningはデフォルト値の`/tmp/CHECKPOINT_SCHEMA.pb`を使用します。
 - `mysql`ドライバーの場合、 DSN は`USER:PASS@tcp(HOST:PORT)/`形式の URL です。
 - URL が指定されていない場合は、 `[tidb]`セクションの TiDBサーバーがチェックポイントの保存に使用されます。
 - ターゲット TiDB クラスターの負荷を軽減するには、別の MySQL 互換データベースサーバーを指定することをお勧めします。
@@ -192,7 +192,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `precheck-conflict-before-import` {#precheck-conflict-before-import}
 
-- インポート前の競合検出を有効にするかどうかを制御します。これは、TiDBにインポートする前にデータの競合をチェックします。このパラメータは、物理インポートモードでのみ使用できます。
+- インポート前の競合検出を有効にするかどうかを制御します。これは、TiDBにインポートする前にデータの競合をチェックします。このパラメーターは、物理インポートモードでのみ使用できます。
 - 競合レコードの数が 1,000,000 を超えるシナリオでは、競合検出のパフォーマンスを向上させるために`precheck-conflict-before-import = true`を設定することをお勧めします。
 - その他のシナリオでは、無効にすることをお勧めします。
 - デフォルト値: `false`
@@ -227,16 +227,16 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `parallel-import` {#parallel-import}
 
-- 複数のTiDB Lightningインスタンス（物理インポートモード）が1つ以上のターゲットテーブル[並行して](/tidb-lightning/tidb-lightning-distributed-import.md)にデータをインポートできるようにするかどうかを制御します。このパラメータは、ターゲットテーブルが空の場合にのみ使用されることに注意してください。
+- 複数のTiDB Lightningインスタンス（物理インポートモード）が1つ以上のターゲットテーブル[並行して](/tidb-lightning/tidb-lightning-distributed-import.md)にデータをインポートできるようにするかどうかを制御します。このパラメーターは、ターゲットテーブルが空の場合にのみ使用されることに注意してください。
 - デフォルト値: `false`
 - 値のオプション: `true` 、 `false`
-- 並列インポートモードを使用する場合は、パラメータを`true`に設定する必要がありますが、ターゲットテーブルにデータが存在しないことが前提となります。つまり、すべてのデータはTiDB Lightningによってのみインポートできます。
+- 並列インポートモードを使用する場合は、パラメーターを`true`に設定する必要がありますが、ターゲットテーブルにデータが存在しないことが前提となります。つまり、すべてのデータはTiDB Lightningによってのみインポートできます。
 
 #### `duplicate-resolution` {#duplicate-resolution}
 
 > **Warning:**
 >
-> バージョン8.0.0以降、 `duplicate-resolution`パラメータは非推奨となり、将来のリリースで削除される予定です。詳細については、 [競合検出の旧バージョン](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)を参照してください。
+> バージョン8.0.0以降、 `duplicate-resolution`パラメーターは非推奨となり、将来のリリースで削除される予定です。詳細については、 [競合検出の旧バージョン](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)を参照してください。
 
 - 物理インポートモードで重複レコード (一意キーの競合) を検出して解決するかどうかを制御します。
 - デフォルト値: `'none'`
@@ -248,7 +248,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 > **Warning:**
 >
-> バージョン7.2.0以降、このパラメータは非推奨となり、設定後は無効になります。1回のリクエストでTiKVに送信されるデータ量を調整したい場合は、代わりに[`send-kv-size`](#send-kv-size-new-in-v720)パラメータを使用してください。
+> バージョン7.2.0以降、このパラメーターは非推奨となり、設定後は無効になります。1回のリクエストでTiKVに送信されるデータ量を調整したい場合は、代わりに[`send-kv-size`](#send-kv-size-new-in-v720)パラメーターを使用してください。
 
 - 物理インポートモードで TiKV にデータを送信するときに、1つのリクエスト内の KV ペアの最大数を指定します。
 
@@ -262,7 +262,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 #### `compress-kv-pairs` {#compress-kv-pairs}
 
 - 物理インポートモードで KV ペアを TiKV に送信するときに圧縮を有効にするかどうかを制御します。
-- 現在、Gzip圧縮アルゴリズムのみがサポートされています。このアルゴリズムを使用するには、このパラメータに`"gzip"`または`"gz"`を入力してください。
+- 現在、Gzip圧縮アルゴリズムのみがサポートされています。このアルゴリズムを使用するには、このパラメーターに`"gzip"`または`"gz"`を入力してください。
 - デフォルト値: `""` 。圧縮が有効になっていないことを意味します。
 - 値のオプション: `""` 、 `"gzip"` 、 `"gz"`
 
@@ -299,21 +299,21 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `keyspace-name` {#keyspace-name}
 
-- TiDB Lightningを使用してマルチテナント TiDB クラスターをインポートする場合は、このパラメータを使用して対応するキースペース名を指定します。
+- TiDB Lightningを使用してマルチテナント TiDB クラスターをインポートする場合は、このパラメーターを使用して対応するキースペース名を指定します。
 - デフォルト値: `""` 。これは、 TiDB Lightning がデータをインポートするために、対応するテナントのキースペース名を自動的に取得することを意味します。
 - 値を指定すると、指定されたキースペース名がデータのインポートに使用されます。
 
 #### `pause-pd-scheduler-scope`<span class="version-mark">バージョン7.1.0の新機能</span> {#pause-pd-scheduler-scope-new-in-v710}
 
-- 物理インポートモードでは、このパラメータはTiDB Lightning がPD スケジュールを停止する範囲を制御します。
+- 物理インポートモードでは、このパラメーターはTiDB Lightning がPD スケジュールを停止する範囲を制御します。
 - デフォルト値: `"table"`
 - 値のオプション:
     - `"table"` : ターゲットテーブルデータを格納するリージョンのみのスケジュールを一時停止します。
-    - `"global"` : グローバルスケジューリングを一時停止します。ビジネストラフィックのないクラスターにデータをインポートする場合は、他のスケジューリングからの干渉を避けるため、このパラメータを`"global"`に設定することをお勧めします。
+    - `"global"` : グローバルスケジューリングを一時停止します。ビジネストラフィックのないクラスターにデータをインポートする場合は、他のスケジューリングからの干渉を避けるため、このパラメーターを`"global"`に設定することをお勧めします。
 
 #### `region-split-batch-size` <span class="version-mark">v7.1.0 の新機能</span> {#region-split-batch-size-new-in-v710}
 
-- 物理インポートモードでは、このパラメータはバッチでリージョンを分割するときのリージョンの数を制御します。
+- 物理インポートモードでは、このパラメーターはバッチでリージョンを分割するときのリージョンの数を制御します。
 - TiDB Lightningインスタンスごとに同時に分割できるリージョンの最大数は次のとおりです: `region-split-batch-size * region-split-concurrency * table-concurrency`
 - デフォルト値: `4096`
 
@@ -324,34 +324,34 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 
 #### `region-check-backoff-limit`<span class="version-mark">バージョン7.1.0の新機能</span> {#region-check-backoff-limit-new-in-v710}
 
-- 物理インポートモードでは、このパラメータは、分割および分散操作後にリージョンがオンラインになるまで待機する再試行回数を制御します。
+- 物理インポートモードでは、このパラメーターは、分割および分散操作後にリージョンがオンラインになるまで待機する再試行回数を制御します。
 - 再試行間隔は最大2秒です。再試行の間にいずれかのリージョンがオンラインになった場合でも、再試行回数は増加しません。
 - デフォルト値: `1800`
 
 #### `block-size` <span class="version-mark">v7.6.0 の新機能</span> {#block-size-new-in-v760}
 
-- 物理インポートモードでは、このパラメータはローカルファイルのソートに使用するI/Oブロックサイズを制御します。ディスクIOPSがボトルネックになっている場合は、この値を増やすことでデータインポートのパフォーマンスを向上させることができます。
+- 物理インポートモードでは、このパラメーターはローカルファイルのソートに使用するI/Oブロックサイズを制御します。ディスクIOPSがボトルネックになっている場合は、この値を増やすことでデータインポートのパフォーマンスを向上させることができます。
 - 値は`1B`以上である必要があります。数値のみ（例： `16` ）を指定した場合、単位は KiB ではなくバイトになります。
 - デフォルト値: `"16KiB"`
 
 #### `logical-import-batch-size` <span class="version-mark">v8.0.0 の新機能</span> {#logical-import-batch-size-new-in-v800}
 
-- 論理インポートモードでは、このパラメータはダウンストリーム TiDBサーバーで実行される各 SQL文のサイズを制御します。
+- 論理インポートモードでは、このパラメーターはダウンストリーム TiDBサーバーで実行される各 SQL文のサイズを制御します。
 - 単一のトランザクション内の`INSERT`または`REPLACE`文の`VALUES`部分の予想サイズを指定します。
-- このパラメータは厳密な制限ではありません。実際に実行されるSQLは、インポートされるコンテンツに応じて、これより長くなったり短くなったりする場合があります。
+- このパラメーターは厳密な制限ではありません。実際に実行されるSQLは、インポートされるコンテンツに応じて、これより長くなったり短くなったりする場合があります。
 - デフォルト値: `"96KiB"` 。これは、 TiDB Lightning がクラスターの唯一のクライアントである場合に、インポート速度が最適化されます。
 - TiDB Lightningの実装上の理由により、この値は96 KiBに制限されています。これより大きな値を設定しても効果はありません。この値を下げることで、大規模なトランザクションによるクラスターへの負荷を軽減できます。
 
 #### `logical-import-batch-rows` <span class="version-mark">v8.0.0 の新機能</span> {#logical-import-batch-rows-new-in-v800}
 
-- 論理インポートモードでは、このパラメータはトランザクションごとに挿入される行の最大数を制御します。
-- [`logical-import-batch-size`](#logical-import-batch-size-new-in-v800)と`logical-import-batch-rows`両方を指定した場合、最初にしきい値に達したパラメータが有効になります。
+- 論理インポートモードでは、このパラメーターはトランザクションごとに挿入される行の最大数を制御します。
+- [`logical-import-batch-size`](#logical-import-batch-size-new-in-v800)と`logical-import-batch-rows`両方を指定した場合、最初にしきい値に達したパラメーターが有効になります。
 - この値を減らすと、大規模なトランザクションによるクラスターのストレスを軽減できます。
 - デフォルト値: `65536`
 
 #### `logical-import-prep-stmt` {#logical-import-prep-stmt}
 
-- 論理インポートモードでは、このパラメータは、パフォーマンスを向上させるために[準備された文](/sql-statements/sql-statement-prepare.md)およびステートメントキャッシュを使用するかどうかを制御します。
+- 論理インポートモードでは、このパラメーターは、パフォーマンスを向上させるために[準備された文](/sql-statements/sql-statement-prepare.md)およびステートメントキャッシュを使用するかどうかを制御します。
 - デフォルト値: `false`
 
 ### mydumper {#mydumper}
@@ -364,7 +364,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 #### `batch-import-ratio` {#batch-import-ratio}
 
 - エンジンファイルは順番にインポートする必要があります。並列処理のため、複数のデータエンジンがほぼ同時にインポートされ、キューが生成されてリソースが浪費されます。そのため、 TiDB Lightningは、リソースを適切に配分するために、最初の数バッチのサイズをわずかに大きくしています。
-- スケールアップ係数はこのパラメータによって制御されます。このパラメータは、完全な同時実行における"import"ステップと"write"ステップの所要時間の比率を表します。これは、約1GiBの単一テーブルにおける比率（インポート所要時間/書き込み所要時間）を使用して計算できます。正確な時間はログで確認できます。
+- スケールアップ係数はこのパラメーターによって制御されます。このパラメーターは、完全な同時実行における"import"ステップと"write"ステップの所要時間の比率を表します。これは、約1GiBの単一テーブルにおける比率（インポート所要時間/書き込み所要時間）を使用して計算できます。正確な時間はログで確認できます。
 - "import"の方が高速であれば、バッチサイズの分散は小さくなり、比率が 0 であればバッチサイズは均一になります。
 - 範囲: `[0, 1)`
 
@@ -463,7 +463,7 @@ CSV ファイルの解析方法を構成します。
 
 > **Note:**
 >
-> このパラメータは、 `header`パラメータが`true`に設定されている場合にのみ適用されます。 `header`が`false`に設定されている場合は、CSVファイルにヘッダーが含まれていないため、このパラメータは適用されません。
+> このパラメーターは、 `header`パラメーターが`true`に設定されている場合にのみ適用されます。 `header`が`false`に設定されている場合は、CSVファイルにヘッダーが含まれていないため、このパラメーターは適用されません。
 
 #### `not-null` {#not-null}
 
@@ -556,7 +556,7 @@ CSV ファイルの解析方法を構成します。
 #### `distsql-scan-concurrency` {#distsql-scan-concurrency}
 
 - チェックサムおよび分析処理を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)を参照してください。
-- [`checksum-via-sql`](#checksum-via-sql)を`"true"`に設定した場合、 TiDB Lightning は`ADMIN CHECKSUM TABLE <table>` SQL 文を実行して TiDB のチェックサム演算を実行します。この場合、以下のパラメータ`distsql-scan-concurrency`と`checksum-table-concurrency`が無効になります。
+- [`checksum-via-sql`](#checksum-via-sql)を`"true"`に設定した場合、 TiDB Lightning は`ADMIN CHECKSUM TABLE <table>` SQL 文を実行して TiDB のチェックサム演算を実行します。この場合、以下のパラメーター`distsql-scan-concurrency`と`checksum-table-concurrency`が無効になります。
 
 <!-- Example: `15` -->
 
@@ -569,7 +569,7 @@ CSV ファイルの解析方法を構成します。
 #### `checksum-table-concurrency` {#checksum-table-concurrency}
 
 - チェックサムと`ANALYZE`操作を高速化するために、TiDBセッション変数を設定します。詳細については、 [`ANALYZE`同時実行を制御する](/statistics.md#control-analyze-concurrency)を参照してください。
-- [`checksum-via-sql`](#checksum-via-sql)を`"true"`に設定した場合、 TiDB Lightning は`ADMIN CHECKSUM TABLE <table>` SQL 文を実行して TiDB のチェックサム演算を実行します。この場合、以下のパラメータ`distsql-scan-concurrency`と`checksum-table-concurrency`が無効になります。
+- [`checksum-via-sql`](#checksum-via-sql)を`"true"`に設定した場合、 TiDB Lightning は`ADMIN CHECKSUM TABLE <table>` SQL 文を実行して TiDB のチェックサム演算を実行します。この場合、以下のパラメーター`distsql-scan-concurrency`と`checksum-table-concurrency`が無効になります。
 
 <!-- Example: `2` -->
 

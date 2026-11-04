@@ -105,13 +105,13 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 
 `POST /api/v1/changefeeds`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-`cli`コマンドを使用してレプリケーションタスクを作成する場合のオプションパラメータと比較すると、API を使用してそのようなタスクを作成する場合のオプションパラメータはそれほど充実していません。この API は以下のパラメータをサポートしています。
+`cli`コマンドを使用してレプリケーションタスクを作成する場合のオプションパラメーターと比較すると、API を使用してそのようなタスクを作成する場合のオプションパラメーターはそれほど充実していません。この API は以下のパラメーターをサポートしています。
 
-#### リクエスト本体のパラメータ {#parameters-for-the-request-body}
+#### リクエスト本体のパラメーター {#parameters-for-the-request-body}
 
-| パラメータ名 | 説明 |
+| パラメーター名 | 説明 |
 | :------------------------ | :---------------------- ------------------------------- |
 | `changefeed_id` | `STRING`型。レプリケーションタスクの ID。(オプション) |
 | `start_ts` | `UINT64`型。changefeed の開始 TSO を指定します。(オプション) |
@@ -122,23 +122,23 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 | `filter_rules` | `STRING`型の配列。テーブルスキーマのフィルタリングのルール。(オプション) |
 | `ignore_txn_start_ts` | `UINT64`型の配列。指定された start_ts のトランザクションを無視します。(オプション) |
 | `mounter_worker_num` | `INT`型。Mounter スレッドの数。(オプション) |
-| `sink_config` | シンクの設定パラメータ。(オプション) |
+| `sink_config` | シンクの設定パラメーター。(オプション) |
 
-`changefeed_id`、`start_ts`、`target_ts`、`sink_uri`の意味と形式は、[`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これらのパラメータの詳細については、このドキュメントを参照してください。なお、`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
+`changefeed_id`、`start_ts`、`target_ts`、`sink_uri`の意味と形式は、[`cdc cli`を使用してレプリケーションタスクを作成する](/ticdc/ticdc-manage-changefeed.md#create-a-replication-task)ドキュメントに記載されているものと同じです。これらのパラメーターの詳細については、このドキュメントを参照してください。なお、`sink_uri`で証明書パスを指定する際は、対応する証明書が対応する TiCDCサーバーにアップロードされていることを確認してください。
 
-上記の表のその他のパラメータについては、次のようにさらに詳しく説明します。
+上記の表のその他のパラメーターについては、次のようにさらに詳しく説明します。
 
-`force_replicate` : このパラメータのデフォルトは`false`です。`true`を指定すると、TiCDC は一意インデックスを持たないテーブルを強制的に複製しようとします。
+`force_replicate` : このパラメーターのデフォルトは`false`です。`true`を指定すると、TiCDC は一意インデックスを持たないテーブルを強制的に複製しようとします。
 
-`ignore_ineligible_table` : このパラメータのデフォルトは`false`です。`true`を指定すると、TiCDC は複製できないテーブルを無視します。
+`ignore_ineligible_table` : このパラメーターのデフォルトは`false`です。`true`を指定すると、TiCDC は複製できないテーブルを無視します。
 
 `filter_rules` : テーブルスキーマフィルタリングのルール（例： `filter_rules = ['foo*.*','bar*.*']` ）。詳細については、 [テーブルフィルター](/table-filter.md)ドキュメントを参照してください。
 
-`ignore_txn_start_ts` : このパラメータが指定されると、指定された start_ts は無視されます。例: `ignore-txn-start-ts = [1, 2]` 。
+`ignore_txn_start_ts` : このパラメーターが指定されると、指定された start_ts は無視されます。例: `ignore-txn-start-ts = [1, 2]` 。
 
 `mounter_worker_num` : Mounter のスレッド数。Mounter は TiKV から出力されたデータをデコードするために使用されます。デフォルト値は`16`です。
 
-シンクの設定パラメータは以下のとおりです。
+シンクの設定パラメーターは以下のとおりです。
 
 ```json
 {
@@ -150,7 +150,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 }
 ```
 
-`dispatchers` : MQタイプのシンクでは、ディスパッチャを使用してイベントディスパッチャを設定できます。サポートされるディスパッチャは`default` 、 `ts` 、 `index-value` 、 `table`の4つです。ディスパッチャのルールは以下のとおりです。
+`dispatchers` : MQタイプのシンクでは、ディスパッチャーを使用してイベントディスパッチャーを設定できます。サポートされるディスパッチャーは`default` 、 `ts` 、 `index-value` 、 `table`の4つです。ディスパッチャーのルールは以下のとおりです。
 
 - `default` : `table`モードでイベントを送信します。
 - `ts` : 行変更の commitTs を使用してハッシュ値を作成し、イベントをディスパッチします。
@@ -179,11 +179,11 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 
 `DELETE /api/v1/changefeeds/{changefeed_id}`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                  |
+| パラメーター名          | 説明                                  |
 | :-------------- | :---------------------------------- |
 | `changefeed_id` | 削除するレプリケーションタスク (changefeed) の ID。 |
 
@@ -207,28 +207,28 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 `PUT /api/v1/changefeeds/{changefeed_id}`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                  |
+| パラメーター名          | 説明                                  |
 | :-------------- | :---------------------------------- |
 | `changefeed_id` | 更新するレプリケーションタスク (changefeed) の ID。 |
 
-#### リクエスト本体のパラメータ {#parameters-for-the-request-body}
+#### リクエスト本体のパラメーター {#parameters-for-the-request-body}
 
 現在、API 経由で変更できるのは次の構成のみです。
 
-| パラメータ名 | 説明 |
+| パラメーター名 | 説明 |
 | :--------------------- | :-------------------------- --------------------------- |
 | `target_ts` | `UINT64`型。changefeed のターゲット TSO を指定します。(オプション) |
 | `sink_uri` | `STRING`型。レプリケーションタスクのダウンストリームアドレス。(オプション) |
 | `filter_rules` | `STRING`型の配列。テーブルスキーマフィルタリングのルール。(オプション) |
 | `ignore_txn_start_ts` | `UINT64`型の配列。指定された start_ts のトランザクションを無視します。(オプション) |
 | `mounter_worker_num` | `INT`型。Mounter スレッドの数。(オプション) |
-| `sink_config` | シンクの設定パラメータ。(オプション) |
+| `sink_config` | シンクの設定パラメーター。(オプション) |
 
-上記のパラメータの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、そのセクションを参照してください。
+上記のパラメーターの意味はセクション[レプリケーションタスクを作成する](#create-a-replication-task)と同じです。詳細については、そのセクションを参照してください。
 
 ### 例 {#example}
 
@@ -248,17 +248,17 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 
 `GET /api/v1/changefeeds`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### クエリパラメータ {#query-parameters}
+#### クエリパラメーター {#query-parameters}
 
-| パラメータ名 | 説明 |
+| パラメーター名 | 説明 |
 | :------ | :----------------------------------------- ----- |
-| `state` | このパラメータを指定すると、この状態のレプリケーションステータス情報のみが返されます。(オプション) |
+| `state` | このパラメーターを指定すると、この状態のレプリケーションステータス情報のみが返されます。(オプション) |
 
 `state`の値のオプションは`all` 、 `normal` 、 `stopped` 、 `error` 、 `failed` 、 `finished`です。
 
-このパラメータを指定しない場合は、状態が normal、stopped、または failed であるレプリケーションタスクの基本情報がデフォルトで返されます。
+このパラメーターを指定しない場合は、状態が normal、stopped、または failed であるレプリケーションタスクの基本情報がデフォルトで返されます。
 
 ### 例 {#example}
 
@@ -303,11 +303,11 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds?state=normal
 
 `GET /api/v1/changefeeds/{changefeed_id}`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                   |
+| パラメーター名          | 説明                                   |
 | :-------------- | :----------------------------------- |
 | `changefeed_id` | クエリするレプリケーションタスク (changefeed) の ID。 |
 
@@ -354,11 +354,11 @@ curl -X GET http://127.0.0.1:8300/api/v1/changefeeds/test1
 
 `POST /api/v1/changefeeds/{changefeed_id}/pause`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                    |
+| パラメーター名          | 説明                                    |
 | :-------------- | :------------------------------------ |
 | `changefeed_id` | 一時停止するレプリケーションタスク (changefeed) の ID。 |
 
@@ -380,11 +380,11 @@ curl -X POST http://127.0.0.1:8300/api/v1/changefeeds/test1/pause
 
 `POST /api/v1/changefeeds/{changefeed_id}/resume`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                  |
+| パラメーター名          | 説明                                  |
 | :-------------- | :---------------------------------- |
 | `changefeed_id` | 再開するレプリケーションタスク (changefeed) の ID。 |
 
@@ -429,11 +429,11 @@ curl -X GET http://127.0.0.1:8300/api/v1/processors
 
 `GET /api/v1/processors/{changefeed_id}/{capture_id}`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                             |
+| パラメーター名          | 説明                             |
 | :-------------- | :----------------------------- |
 | `changefeed_id` | クエリするレプリケーションサブタスクの変更フィード ID。 |
 | `capture_id`    | クエリするレプリケーションサブタスクのキャプチャ ID。  |
@@ -508,11 +508,11 @@ curl -X POST http://127.0.0.1:8300/api/v1/owner/resign
 
 `POST /api/v1/changefeeds/{changefeed_id}/tables/rebalance_table`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                      |
+| パラメーター名          | 説明                                      |
 | :-------------- | :-------------------------------------- |
 | `changefeed_id` | スケジュールするレプリケーションタスク (changefeed) の ID。 |
 
@@ -534,17 +534,17 @@ curl -X POST http://127.0.0.1:8300/api/v1/owner/resign
 
 `POST /api/v1/changefeeds/{changefeed_id}/tables/move_table`
 
-### パラメータの説明 {#parameter-description}
+### パラメーターの説明 {#parameter-description}
 
-#### パスパラメータ {#path-parameters}
+#### パスパラメーター {#path-parameters}
 
-| パラメータ名          | 説明                                                           |
+| パラメーター名          | 説明                                                           |
 | :-------------- | :----------------------------------------------------------- |
 | `changefeed_id` | スケジュールするレプリケーションタスク (changefeed) の ID。 |
 
-#### リクエスト本体のパラメータ {#parameters-for-the-request-body}
+#### リクエスト本体のパラメーター {#parameters-for-the-request-body}
 
-| パラメータ名              | 説明                |
+| パラメーター名              | 説明                |
 | :------------------ | :---------------- |
 | `target_capture_id` | ターゲットキャプチャの ID。   |
 | `table_id`          | スケジュールするテーブルの ID。 |
@@ -568,11 +568,11 @@ curl -X POST -H "'Content-type':'application/json'" http://127.0.0.1:8300/api/v1
 
 `POST /api/v1/log`
 
-### リクエストパラメータ {#request-parameters}
+### リクエストパラメーター {#request-parameters}
 
-#### リクエスト本体のパラメータ {#parameters-for-the-request-body}
+#### リクエスト本体のパラメーター {#parameters-for-the-request-body}
 
-| パラメータ名      | 説明          |
+| パラメーター名      | 説明          |
 | :---------- | :---------- |
 | `log_level` | 設定するログレベル。 |
 

@@ -21,9 +21,9 @@ TiDB LightningはTiDBを経由せずにデータをインポートするため�
 
 ### `AUTO_INCREMENT_ID` {#auto-increment-id}
 
-各テーブルには、AUTO_INCREMENT列のデフォルト値を提供するためのカウンタ`AUTO_INCREMENT_ID`が関連付けられています。TiDBでは、このカウンタは行IDの割り当てにも使用されます。
+各テーブルには、AUTO_INCREMENT列のデフォルト値を提供するためのカウンター`AUTO_INCREMENT_ID`が関連付けられています。TiDBでは、このカウンターは行IDの割り当てにも使用されます。
 
-TiDB LightningはTiDBを経由せずにデータをインポートするため、 `AUTO_INCREMENT_ID`カウンタは自動的に更新されません。そのため、 TiDB Lightningは`AUTO_INCREMENT_ID`を明示的に有効な値に変更します。この手順は、テーブルに`AUTO_INCREMENT`列がない場合でも常に実行されます。
+TiDB LightningはTiDBを経由せずにデータをインポートするため、 `AUTO_INCREMENT_ID`カウンターは自動的に更新されません。そのため、 TiDB Lightningは`AUTO_INCREMENT_ID`を明示的に有効な値に変更します。この手順は、テーブルに`AUTO_INCREMENT`列がない場合でも常に実行されます。
 
 <!-- B -->
 
@@ -141,7 +141,7 @@ TiDB Lightningは複数のインデックスエンジンを同時に処理しま
 
 「キーと値のペア」の略語。
 
-### KVエンコーダ {#kv-encoder}
+### KVエンコーダー {#kv-encoder}
 
 SQLまたはCSV行をKVペアに解析するルーチン。複数のKVエンコーダーを並列実行することで処理を高速化します。
 

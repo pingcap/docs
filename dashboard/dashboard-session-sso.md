@@ -122,7 +122,7 @@ TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経�
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザーで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
 8. **Sign-out redirect URIs**を次のように入力します。
 
@@ -180,7 +180,7 @@ Oktaと同様に、 [Auth0](https://auth0.com/)もOIDC SSOアイデンティテ�
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザーで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
 6. **許可されたログアウト URL**を次のように入力します。
 
@@ -224,7 +224,7 @@ Oktaと同様に、 [Auth0](https://auth0.com/)もOIDC SSOアイデンティテ�
     http://DASHBOARD_IP:PORT/dashboard/?sso_callback=1
     ```
 
-    `DASHBOARD_IP:PORT`を、ブラウザで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
+    `DASHBOARD_IP:PORT`を、ブラウザーで TiDB Dashboardにアクセスするために使用する実際のドメイン (または IP アドレス) とポートに置き換えます。
 
     ![Settings](/media/dashboard/dashboard-session-sso-casdoor-settings-2.png)
 

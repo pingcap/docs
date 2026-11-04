@@ -9,7 +9,7 @@ summary: TiDB で CH-benCHmark テストを実行する方法を学びます。
 
 CH-benCHmarkは、テスト[TPC-C](http://www.tpc.org/tpcc/)とテスト[TPC-H](http://www.tpc.org/tpch/)両方を含む混合ワークロードです。HTAPシステムのテストで最も一般的なワークロードです。詳細については、 [混合ワークロードCH-benCHmark](https://dl.acm.org/doi/10.1145/1988842.1988850)を参照してください。
 
-CH-benCHmarkテストを実行する前に、まずTiDBのHTAPコンポーネントである[TiFlash](/tiflash/tiflash-overview.md)を導入する必要があります。TiFlashを導入し、[TiFlashレプリカを作成する](#create-tiflash-replicas)と、TiKVがTPC-Cオンライントランザクションの最新データをTiFlashにリアルタイムで複製し、TiDBオプティマイザがTPC-HワークロードからTiFlashのMPPエンジンにOLAPクエリを自動的にプッシュダウンして効率的に実行します。
+CH-benCHmarkテストを実行する前に、まずTiDBのHTAPコンポーネントである[TiFlash](/tiflash/tiflash-overview.md)を導入する必要があります。TiFlashを導入し、[TiFlashレプリカを作成する](#create-tiflash-replicas)と、TiKVがTPC-Cオンライントランザクションの最新データをTiFlashにリアルタイムで複製し、TiDBオプティマイザーがTPC-HワークロードからTiFlashのMPPエンジンにOLAPクエリを自動的にプッシュダウンして効率的に実行します。
 
 このドキュメントのCH-benCHmarkテストは[ゴーTPC](https://github.com/pingcap/go-tpc)に基づいて実装されています。テストプログラムは以下の[TiUP](/tiup/tiup-overview.md)のコマンドでダウンロードできます。
 
@@ -79,7 +79,7 @@ SELECT * FROM information_schema.tiflash_replica WHERE TABLE_SCHEMA = 'tpcc';
 
 ## 統計を収集する {#collect-statistics}
 
-TiDBオプティマイザが最適な実行計画を生成できるようにするには、事前に以下のSQL文を実行して統計情報を収集してください。**必ず[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を`ALL`に設定してください。設定しないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
+TiDBオプティマイザーが最適な実行計画を生成できるようにするには、事前に以下のSQL文を実行して統計情報を収集してください。**必ず[`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)を`ALL`に設定してください。設定しないと、統計情報を収集するとクエリのパフォーマンスが大幅に低下する可能性があります。**
 
 ```
 set global tidb_analyze_column_options='ALL';

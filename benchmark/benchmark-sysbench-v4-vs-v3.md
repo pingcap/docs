@@ -29,7 +29,7 @@ summary: TiDB 4.0 と TiDB 3.0 の Sysbench パフォーマンスを比較しま
 | TiKV    | 3.0と4.0     |
 | Sysbench | 1.0.20      |
 
-### パラメータ設定 {#parameter-configuration}
+### パラメーター設定 {#parameter-configuration}
 
 #### TiDB v3.0 の構成 {#tidb-v3-0-configuration}
 

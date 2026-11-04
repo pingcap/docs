@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/three-dc-local-read/']
 
 このドキュメントでは、 [ステイル読み取り](/stale-read.md)機能を使用して、センター間アクセスを回避し、リアルタイムのデータ可用性を犠牲にしてアクセスのレイテンシーを減らす方法について説明します。
 
-## 3つのデータセンターのTiDBクラスタをデプロイ {#deploy-a-tidb-cluster-of-three-data-centers}
+## 3つのデータセンターのTiDBクラスターをデプロイ {#deploy-a-tidb-cluster-of-three-data-centers}
 
 3 つのデータセンターのデプロイ方法については、 [1つの地域デプロイにおける複数のデータセンター](/multi-data-centers-in-one-city-deployment.md)を参照してください。
 

@@ -57,7 +57,7 @@ v7.0.0以降、 TiUPを使用してGrafanaをデプロイすると、TiCDCサマ
 
 - **Mounter output events/s**: TiCDCノードにおいて、マウンターモジュールによって1秒あたりにデコードされたデータ変更の数。上流のデータ変更に多数のフィールドが含まれる場合、マウンターモジュールのデコード速度に影響が出る可能性があります。
 
-- **Mounter output event**: TiCDC ノードのマウンタモジュールによってデコードされたデータ変更の合計数。
+- **Mounter output event**: TiCDC ノードのマウンターモジュールによってデコードされたデータ変更の合計数。
 
 ![TiCDC Summary Dashboard - Sink metrics](/media/ticdc/ticdc-summary-monitor-dataflow-sink.png)
 

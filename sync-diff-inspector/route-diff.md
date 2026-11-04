@@ -57,9 +57,9 @@ target-schema = "test_2"       # The name of the schema in the target database
 target-table = "t_2"           # The name of the target table
 ```
 
-## テーブルルータの初期化といくつかの例 {#the-initialization-of-table-routers-and-some-examples}
+## テーブルルーターの初期化といくつかの例 {#the-initialization-of-table-routers-and-some-examples}
 
-### テーブルルータの初期化 {#the-initialization-of-table-routers}
+### テーブルルーターの初期化 {#the-initialization-of-table-routers}
 
 - ルール内に`schema.table`という名前のテーブル`target-schema/target-table`が存在する場合、sync-diff-inspector の動作は次のようになります。
 

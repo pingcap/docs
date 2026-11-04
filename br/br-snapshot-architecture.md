@@ -15,7 +15,7 @@ TiDBのスナップショットバックアップおよびリストアのアー�
 
 ## バックアップのプロセス {#process-of-backup}
 
-クラスタスナップショットバックアップの手順は以下のとおりです。
+クラスタースナップショットバックアップの手順は以下のとおりです。
 
 ```mermaid
 sequenceDiagram
@@ -73,7 +73,7 @@ sequenceDiagram
 
 ## 復元プロセス {#process-of-restore}
 
-クラスタスナップショットの復元プロセスは以下のとおりです。
+クラスタースナップショットの復元プロセスは以下のとおりです。
 
 ```mermaid
 sequenceDiagram

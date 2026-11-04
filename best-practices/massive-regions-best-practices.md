@@ -90,7 +90,7 @@ TiKVでは、デフォルトで`raftstore.store-pool-size`は`2`に設定され�
 
 `Region Merge`を有効にすることで、Regionの数を減らすこともできます。`Region Split`とは異なり、 `Region Merge`スケジュール設定によって隣接する小さなRegionを結合するプロセスです。データを削除した後、または`Drop Table`もしくは`Truncate Table`文を実行した後、小さなRegion、あるいは空のRegionを結合することで、リソース消費を削減できます。
 
-次のパラメータを設定して`Region Merge`を有効にします。
+次のパラメーターを設定して`Region Merge`を有効にします。
 
 ```
 config set max-merge-region-size 54
@@ -98,13 +98,13 @@ config set max-merge-region-keys 540000
 config set merge-schedule-limit 8
 ```
 
-詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の3つの設定パラメータを参照してください。
+詳細については、 [リージョン結合](https://tikv.org/docs/4.0/tasks/configure/region-merge/)および[PD設定ファイル](/pd-configuration-file.md#schedule)の次の3つの設定パラメーターを参照してください。
 
 - [`max-merge-region-size`](/pd-configuration-file.md#max-merge-region-size)
 - [`max-merge-region-keys`](/pd-configuration-file.md#max-merge-region-keys)
 - [`merge-schedule-limit`](/pd-configuration-file.md#merge-schedule-limit)
 
-`Region Merge`パラメータのデフォルト設定はかなり保守的です。[PDスケジュールのベストプラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)に記載されている方法を参考にすれば、 `Region Merge`プロセスを高速化できます。
+`Region Merge`パラメーターのデフォルト設定はかなり保守的です。[PDスケジュールのベストプラクティス](/best-practices/pd-scheduling-best-practices.md#region-merge-is-slow)に記載されている方法を参考にすれば、 `Region Merge`プロセスを高速化できます。
 
 ### 方法4: TiKVインスタンスの数を増やす {#method-4-increase-the-number-of-tikv-instances}
 

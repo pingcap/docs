@@ -48,7 +48,7 @@ IDCマシン
 | TiKV | 7ed4f6a91f92cad5cd5323aaebe7d9f04b77cc79 |
 |  PD  | 2c8e7d7e33b38e457169ce5dfb2f461fced82d65 |
 
-### TiKVパラメータ設定 {#tikv-parameter-configuration}
+### TiKVパラメーター設定 {#tikv-parameter-configuration}
 
 - バージョン1.0.8
 
@@ -67,7 +67,7 @@ IDCマシン
     use-delete-range: false
     ```
 
-### クラスタトポロジー {#cluster-topology}
+### クラスタートポロジー {#cluster-topology}
 
 | マシンIP       | デプロイメントインスタンス            |
 | ----------- | ------------------------ |

@@ -1,11 +1,11 @@
 ---
 title: TiProxy Deployment Topology
-summary: 最小限の TiDB トポロジに基づく TiProxy の展開トポロジについて学習します。
+summary: 最小限の TiDB トポロジーに基づく TiProxy の展開トポロジーについて学習します。
 ---
 
-# TiProxy 展開トポロジ {#tiproxy-deployment-topology}
+# TiProxy 展開トポロジー {#tiproxy-deployment-topology}
 
-このドキュメントでは、最小限の TiDB トポロジに基づく[TiProxy](/tiproxy/tiproxy-overview.md)のデプロイメントトポロジについて説明します。
+このドキュメントでは、最小限の TiDB トポロジーに基づく[TiProxy](/tiproxy/tiproxy-overview.md)のデプロイメントトポロジーについて説明します。
 
 その他のデプロイ方法については、次のドキュメントを参照してください。
 
@@ -15,7 +15,7 @@ summary: 最小限の TiDB トポロジに基づく TiProxy の展開トポロ�
 
 TiProxy は TiDB の L7 プロキシサーバーであり、接続のバランスを取り、可能な場合はセッションを移行できます。
 
-## トポロジ情報 {#topology-information}
+## トポロジー情報 {#topology-information}
 
 | インスタンス             | 数 | 物理マシン構成                          | IP                                   | 設定                 |
 | :------------- | :--- | :------------------------------- | :----------------------------------- | :------------------------- |
@@ -29,16 +29,16 @@ TiProxy は TiDB の L7 プロキシサーバーであり、接続のバラン�
 >
 > インスタンスのIPアドレスは例としてのみ提供されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-### トポロジテンプレート {#topology-templates}
+### トポロジーテンプレート {#topology-templates}
 
-TiProxy のテンプレートの詳細については、 [TiProxyトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)を参照してください。
+TiProxy のテンプレートの詳細については、 [TiProxyトポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiproxy.yaml)を参照してください。
 
-前述の TiDB クラスタトポロジファイル内の設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+前述の TiDB クラスタートポロジーファイル内の設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-### 主なパラメータ {#key-parameters}
+### 主なパラメーター {#key-parameters}
 
 - `tiproxy_servers`のインスタンスレベル`"-host"`構成では、ドメイン名ではなく IP のみがサポートされます。
-- TiProxyパラメータの詳細な説明については、 [TiProxy の設定](/tiproxy/tiproxy-configuration.md)を参照してください。
+- TiProxyパラメーターの詳細な説明については、 [TiProxy の設定](/tiproxy/tiproxy-configuration.md)を参照してください。
 
 > **Note:**
 >

@@ -251,8 +251,8 @@ cdc cli changefeed resume -c test-cf --server=http://10.0.10.25:8300
     上記のコマンドでは、次のようになります。
 
     - `status.tables` : 各キー番号はレプリケーションテーブルの ID を表し、TiDB のテーブルの`tidb_table_id`に相当します。
-    - `resolved-ts` : 現在のプロセッサ内のソートされたデータの中で最大の TSO。
-    - `checkpoint-ts` : 現在のプロセッサでダウンストリームに正常に書き込まれた最大の TSO。
+    - `resolved-ts` : 現在のプロセッサー内のソートされたデータの中で最大の TSO。
+    - `checkpoint-ts` : 現在のプロセッサーでダウンストリームに正常に書き込まれた最大の TSO。
 
 ## 照合順序の新しいフレームワークを有効にしてテーブルを複製する {#replicate-tables-with-the-new-framework-for-collations-enabled}
 

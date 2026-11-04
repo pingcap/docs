@@ -1,6 +1,6 @@
 ---
 title: TiDB Dashboard Instance Profiling - Manual Profiling
-summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDB Dashboardまたはブラウザからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況を確認し、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴を確認します。
+summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 TiFlashインスタンスの現在のパフォーマンスデータをオンデマンドで収集できます。エキスパートはCPUやメモリなどのリソース消費量の詳細を分析し、進行中のパフォーマンス問題を特定できます。このページには、TiDB Dashboardまたはブラウザーからアクセスできます。対象インスタンスを選択してプロファイリングを開始し、必要に応じて期間を変更します。リアルタイムの進行状況を確認し、プロファイリング完了後にパフォーマンスデータをダウンロードできます。詳細な操作については、プロファイリング履歴を確認します。
 ---
 
 # TiDB Dashboardインスタンスプロファイリング - 手動プロファイリング {#tidb-dashboard-instance-profiling-manual-profiling}
@@ -39,7 +39,7 @@ summary: 手動プロファイリングを使用すると、TiDB、TiKV、PD、 
 
     ![Access instance profiling page](/media/dashboard/dashboard-profiling-access.png)
 
-- ブラウザで[http://127.0.0.1:2379/dashboard/#/instance_profiling](http://127.0.0.1:2379/dashboard/#/instance_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
+- ブラウザーで[http://127.0.0.1:2379/dashboard/#/instance_profiling](http://127.0.0.1:2379/dashboard/#/instance_profiling)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
 ## プロファイリングを開始 {#start-profiling}
 

@@ -15,7 +15,7 @@ summary: sync-diff-inspectorを使用してデータを比較し、不整合な�
 - データ不整合が存在する場合に、データ修復に使用するSQL文を生成します。
 - [スキーマ名またはテーブル名が異なるテーブルのデータチェック](/sync-diff-inspector/route-diff.md)をサポート
 - [シャーディングシナリオにおけるデータチェック](/sync-diff-inspector/shard-diff.md)をサポート
-- [TiDBアップストリーム/ダウンストリームクラスタのデータチェック](/ticdc/ticdc-upstream-downstream-check.md)をサポート
+- [TiDBアップストリーム/ダウンストリームクラスターのデータチェック](/ticdc/ticdc-upstream-downstream-check.md)をサポート
 - [DMレプリケーションシナリオにおけるデータチェック](/sync-diff-inspector/dm-diff.md)をサポート
 
 ## sync-diff-inspectorをインストールする {#install-sync-diff-inspector}
@@ -67,7 +67,7 @@ TiDB v8.5.6以降の場合：
 
 - `SELECT` : データを比較するために必要です。
 - `RELOAD` : テーブルスキーマを表示するために必要です。
-- `PROCESS` : アップストリームとダウンストリームの両方が TiDB クラスタである場合に必須です。 `INFORMATION_SCHEMA.CLUSTER_INFO`テーブルをクエリするために使用されます。
+- `PROCESS` : アップストリームとダウンストリームの両方が TiDB クラスターである場合に必須です。 `INFORMATION_SCHEMA.CLUSTER_INFO`テーブルをクエリするために使用されます。
 
 > **Note:**
 >
@@ -199,7 +199,7 @@ collation = ""
 ./sync_diff_inspector --config=./config.toml
 ```
 
-このコマンドは`config.toml`の`output-dir`にチェックレポート`summary.txt`とログ`sync_diff.log`を出力します。また、 `output-dir`には、 `config.toml`ファイルのハッシュ値で命名されたフォルダも生成されます。このフォルダには、ブレークポイントのチェックポイントノード情報と、データに不整合が生じた場合に生成される SQL ファイルが含まれます。
+このコマンドは`config.toml`の`output-dir`にチェックレポート`summary.txt`とログ`sync_diff.log`を出力します。また、 `output-dir`には、 `config.toml`ファイルのハッシュ値で命名されたフォルダーも生成されます。このフォルダーには、ブレークポイントのチェックポイントノード情報と、データに不整合が生じた場合に生成される SQL ファイルが含まれます。
 
 ### 進捗状況 {#progress-information}
 
