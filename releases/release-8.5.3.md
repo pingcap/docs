@@ -93,7 +93,7 @@ TiDBバージョン：8.5.3
     - 無効な夏時間 (DST) タイムスタンプを挿入すると`0000-00-00`になる問題を修正 [#61334](https://github.com/pingcap/tidb/issues/61334) @[mjonss](https://github.com/mjonss)
     - `INSERT IGNORE`を使用して厳密なSQLモードで無効な夏時間タイムスタンプを挿入すると、MySQLと矛盾するタイムスタンプが生成される問題を修正しました [#61439](https://github.com/pingcap/tidb/issues/61439) @[mjonss](https://github.com/mjonss)
     - リージョンのマージが頻繁に行われるとTTLジョブの開始が妨げられる問題を修正 [#61512](https://github.com/pingcap/tidb/issues/61512) @[YangKeao](https://github.com/YangKeao)
-    - TiDB がネットワーク プロトコルで返す列の長さが`0`になる可能性がある問題を修正します。もし`0`であれば、TiDB は各フィールド タイプのデフォルトの長さを返します。 [#60503](https://github.com/pingcap/tidb/issues/60503) @[xhebox](https://github.com/xhebox)
+    - TiDB がネットワークプロトコルで返す列の長さが`0`になる可能性がある問題を修正します。もし`0`であれば、TiDB は各フィールドタイプのデフォルトの長さを返します。 [#60503](https://github.com/pingcap/tidb/issues/60503) @[xhebox](https://github.com/xhebox)
     - ネットワークプロトコルにおける`blob`の戻り値の型が MySQL と一致しない問題を修正しました [#60195](https://github.com/pingcap/tidb/issues/60195) @[dveeden](https://github.com/dveeden)
     - `CAST()`が返す長さが MySQL と互換性がない問題を修正 [#61350](https://github.com/pingcap/tidb/issues/61350) @[YangKeao](https://github.com/YangKeao)
     - `latin1_bin`の比較動作が`utf8mb4_bin`および`utf8_bin`と異なる問題を修正 [#60701](https://github.com/pingcap/tidb/issues/60701) @[hawkingrei](https://github.com/hawkingrei)

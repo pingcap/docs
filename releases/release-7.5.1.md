@@ -31,10 +31,10 @@ TiDB バージョン: 7.5.1
 
         リソースグループを使用してアプリケーションのワークロードを分離するユーザーが増えるにつれ、リソースコントロールはリソースグループに基づいた拡張データを提供します。これにより、リソースグループのワークロードと設定を監視し、次のような問題を迅速に特定し、正確に診断できるようになります。
 
-        - [スロークエリ](/identify-slow-queries.md) : リソースグループ名、リソース ユニット (RU) の消費量、およびリソースの待機時間を追加します。
+        - [スロークエリ](/identify-slow-queries.md) : リソースグループ名、リソースユニット (RU) の消費量、およびリソースの待機時間を追加します。
         - [ステートメントサマリーテーブル](/statement-summary-tables.md) : リソースグループ名、RU 消費量、リソースの待機時間を追加します。
         - システム変数[`tidb_last_query_info`](/system-variables.md#tidb_last_query_info-new-in-v4014)に、SQL文によって消費されたリソース量[RU](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)を示す新しいエントリ`ru_consumption`を追加します。この変数を使用して、セッション内の最後の文のリソース消費量を取得できます。
-        - リソースグループに基づいてデータベース メトリックを追加します: QPS/TPS、実行時間 (P999/P99/P95)、障害数、接続数。
+        - リソースグループに基づいてデータベースメトリックを追加します: QPS/TPS、実行時間 (P999/P99/P95)、障害数、接続数。
 
     - `CANCEL IMPORT JOB`文を同期文に変更します。 [#48736](https://github.com/pingcap/tidb/issues/48736) @[D3Hunter](https://github.com/D3Hunter)
 
@@ -94,7 +94,7 @@ TiDB バージョン: 7.5.1
     - `BIT`型の列が一部の関数の計算に関係する場合にデコード失敗によりクエリエラーが発生する可能性がある問題を修正しました[#49566](https://github.com/pingcap/tidb/issues/49566) [#50850](https://github.com/pingcap/tidb/issues/50850) [#50855](https://github.com/pingcap/tidb/issues/50855) @[jiyfhust](https://github.com/jiyfhust)
     - CTEクエリのメモリ使用量が制限を超えたときに発生するgoroutineリークの問題を修正しました [#50337](https://github.com/pingcap/tidb/issues/50337) @[guo-shaoge](https://github.com/guo-shaoge)
     - TiFlash の遅延マテリアライゼーションが関連列 を処理するときに間違った結果が返される可能性がある問題を修正しました [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger) [#49241](https://github.com/pingcap/tidb/issues/49241)
-    - TiDB が履歴統計を記録するときに TiDB のバックグラウンド ジョブ スレッドがpanicになる可能性がある問題を修正しました [#49076](https://github.com/pingcap/tidb/issues/49076) @[hawkingrei](https://github.com/hawkingrei)
+    - TiDB が履歴統計を記録するときに TiDB のバックグラウンドジョブスレッドがpanicになる可能性がある問題を修正しました [#49076](https://github.com/pingcap/tidb/issues/49076) @[hawkingrei](https://github.com/hawkingrei)
     - TiDBがパーティションテーブルのグローバル統計のヒストグラムをマージするときに発生する可能性のあるエラーを修正しました。 [#49023](https://github.com/pingcap/tidb/issues/49023) @[hawkingrei](https://github.com/hawkingrei)
     - パーティションが削除された後、 `stats_meta`テーブルの履歴統計が更新されない問題を修正しました [#49334](https://github.com/pingcap/tidb/issues/49334) @[hi-rustin](https://github.com/Rustin170506)
     - 複数値インデックスが誤って`Index Join`プローブ側として選択されたために発生する誤ったクエリ結果の問題を修正しました。 [#50382](https://github.com/pingcap/tidb/issues/50382) @[AilinKid](https://github.com/AilinKid)
@@ -150,7 +150,7 @@ TiDB バージョン: 7.5.1
     - 定数伝播で`ENUM`または`SET`型を処理するときに TiDB が間違ったクエリ結果を返す問題を修正しました [#49440](https://github.com/pingcap/tidb/issues/49440) @[winoros](https://github.com/winoros)
     - `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [#49166](https://github.com/pingcap/tidb/issues/49166) @[qw4990](https://github.com/qw4990)
     - クエリがソートを強制するオプティマイザヒント（ `STREAM_AGG()`など）を使用し、その実行計画に`IndexMerge` が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
-    - テーブルが多数ある場合に、テーブルが`AUTO_ID_CACHE=1`の場合に gRPC クライアント リークが発生する可能性がある問題を修正しました。 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
+    - テーブルが多数ある場合に、テーブルが`AUTO_ID_CACHE=1`の場合に gRPC クライアントリークが発生する可能性がある問題を修正しました。 [#48869](https://github.com/pingcap/tidb/issues/48869) @[tiancaiamao](https://github.com/tiancaiamao)
     - 非厳密モード（ `sql_mode = ''` ）で、 `INSERT`実行中に切り捨てが行われても、エラーが報告される問題を修正しました。 [#49369](https://github.com/pingcap/tidb/issues/49369) @[tiancaiamao](https://github.com/tiancaiamao)
     - データの末尾にスペースが含まれている場合に`LIKE`で`_`ワイルドカードを使用すると、誤ったクエリ結果が返される可能性がある問題を修正しました [#48983](https://github.com/pingcap/tidb/issues/48983) @[time-and-fate](https://github.com/time-and-fate)
     - `tidb_mem_quota_query`システム変数を更新した後に`ADMIN CHECK`を実行すると`ERROR 8175` が返される問題を修正しました [#49258](https://github.com/pingcap/tidb/issues/49258) @[tangenta](https://github.com/tangenta)
@@ -218,7 +218,7 @@ TiDB バージョン: 7.5.1
         - タスク初期化中にPDへの接続に失敗すると、ログバックアップタスクは開始できるが正常に動作しない問題を修正[#16056](https://github.com/tikv/tikv/issues/16056) @[YuJuncen](https://github.com/YuJuncen)
         - BRが外部ストレージファイルに対して誤ったURIを生成する問題を修正 [#48452](https://github.com/pingcap/tidb/issues/48452) @[3AceShowHand](https://github.com/3AceShowHand)
         - 同じノードで TiKV IP アドレスを変更した後にログバックアップが停止する問題を修正しました [#50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
-        - S3 からファイル コンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
+        - S3 からファイルコンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
 
     - TiCDC
 

@@ -95,7 +95,7 @@ TiDB バージョン: 6.5.2
     - TiCDC
 
         - TiCDCがオブジェクトストレージにデータを複製するときにパーティションセパレーターが機能しない問題を修正しました [#8581](https://github.com/pingcap/tiflow/issues/8581) @[CharlesCheung96](https://github.com/CharlesCheung96) @[Rustin170506](https://github.com/Rustin170506)
-        - TiCDC がオブジェクトストレージにデータを複製するときにテーブル スケジューリングによってデータ損失が発生する可能性がある問題を修正しました。 [#8256](https://github.com/pingcap/tiflow/issues/8256) @[zhaoxinyu](https://github.com/zhaoxinyu)
+        - TiCDC がオブジェクトストレージにデータを複製するときにテーブルスケジューリングによってデータ損失が発生する可能性がある問題を修正しました。 [#8256](https://github.com/pingcap/tiflow/issues/8256) @[zhaoxinyu](https://github.com/zhaoxinyu)
         - 非再入可能DDL文によりレプリケーションが停止する問題を修正 [#8662](https://github.com/pingcap/tiflow/issues/8662) @[hicqu](https://github.com/hicqu)
         - TiCDC がオブジェクトストレージにデータを複製するときに、TiCDC スケーリングによってデータ損失が発生する可能性がある問題を修正しました。 [#8666](https://github.com/pingcap/tiflow/issues/8666) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - `db sorter`のメモリ使用量が`cgroup memory limit` で制御されない問題を修正 [#8588](https://github.com/pingcap/tiflow/issues/8588) @[amyangfei](https://github.com/amyangfei)

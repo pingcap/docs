@@ -311,7 +311,7 @@ TiDB をアップグレードする前に、オペレーティングシステム
         - グローバルインデックスをバックアップできない問題を修正 [#57469](https://github.com/pingcap/tidb/issues/57469) @[Defined2014](https://github.com/Defined2014)
         - ログに暗号化された情報が出力される可能性がある問題を修正 [#57585](https://github.com/pingcap/tidb/issues/57585) @[kennytm](https://github.com/kennytm)
         - アドバンサーがロックの競合を処理できない問題を修正 [#57134](https://github.com/pingcap/tidb/issues/57134) @[3pointer](https://github.com/3pointer)
-        - `k8s.io/api` ライブラリ バージョンをアップグレードして、潜在的なセキュリティ脆弱性を修正します [#57790](https://github.com/pingcap/tidb/issues/57790) @[BornChanger](https://github.com/BornChanger)
+        - `k8s.io/api` ライブラリバージョンをアップグレードして、潜在的なセキュリティ脆弱性を修正します [#57790](https://github.com/pingcap/tidb/issues/57790) @[BornChanger](https://github.com/BornChanger)
         - クラスター内に多数のテーブルが存在するが実際のデータサイズが小さい場合に、PITRタスクが`Information schema is out of date`エラーを返す可能性がある問題を修正します。 [#57743](https://github.com/pingcap/tidb/issues/57743) @[Tristan1900](https://github.com/Tristan1900)
         - アドバンサー所有者が切り替わるとログバックアップが予期せず一時停止状態になることがある問題を修正 [#58031](https://github.com/pingcap/tidb/issues/58031) @[3pointer](https://github.com/3pointer)
         - `tiup br restore`コマンドがデータベースまたはテーブルの復元時にターゲットクラスタテーブルが既に存在するかどうかのチェックを省略し、既存のテーブルを上書きする可能性がある問題を修正しました [#58168](https://github.com/pingcap/tidb/issues/58168) @[RidRisR](https://github.com/RidRisR)

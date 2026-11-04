@@ -59,7 +59,7 @@ TiDB バージョン: 6.1.2
 
     - リージョンツリーの統計が不正確になる可能性がある問題を修正[#5318](https://github.com/tikv/pd/issues/5318) @[rleungx](https://github.com/rleungx)
     - TiFlashラーナーレプリカが作成されない可能性がある問題を修正[#5401](https://github.com/tikv/pd/issues/5401) @[HunDunDM](https://github.com/HunDunDM)
-    - PD がダッシュボード プロキシ リクエストを正しく処理できない問題を修正しました [#5321](https://github.com/tikv/pd/issues/5321) @[HunDunDM](https://github.com/HunDunDM)
+    - PD がダッシュボードプロキシリクエストを正しく処理できない問題を修正しました [#5321](https://github.com/tikv/pd/issues/5321) @[HunDunDM](https://github.com/HunDunDM)
     - 不健全なリージョンがPD panicを引き起こす可能性がある問題を修正 [#5491](https://github.com/tikv/pd/issues/5491) @[nolouch](https://github.com/nolouch)
 
 - TiFlash
@@ -86,7 +86,7 @@ TiDB バージョン: 6.1.2
     - TiCDC
 
         - CDCサーバーが完全に起動する前に HTTP リクエストを受信すると、CDCサーバーがpanicする可能性がある問題を修正しました[#6838](https://github.com/pingcap/tiflow/issues/6838) @[asddongmen](https://github.com/asddongmen)
-        - アップグレード中のログ フラッディング問題を修正 [#7235](https://github.com/pingcap/tiflow/issues/7235) @[Rustin170506](https://github.com/Rustin170506)
+        - アップグレード中のログフラッディング問題を修正 [#7235](https://github.com/pingcap/tiflow/issues/7235) @[Rustin170506](https://github.com/Rustin170506)
         - changefeed の redo ログファイルが誤って削除される可能性がある問題を修正[#6413](https://github.com/pingcap/tiflow/issues/6413) @[Rustin170506](https://github.com/Rustin170506)
         - etcdトランザクションでコミットされる操作が多すぎるとTiCDCが利用できなくなる問題を修正[#7131](https://github.com/pingcap/tiflow/issues/7131) @[Rustin170506](https://github.com/Rustin170506)
         - REDOログ内の非再入可能DDL文が2回実行されるとデータの不整合が発生する可能性がある問題を修正[#6927](https://github.com/pingcap/tiflow/issues/6927) @[hicqu](https://github.com/hicqu)

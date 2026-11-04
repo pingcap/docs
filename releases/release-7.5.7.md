@@ -46,7 +46,7 @@ TiDB バージョン: 7.5.7
     - Raft Engineの`fetch_entries_to`のパフォーマンスを最適化して競合を減らし、混合ワークロードでのパフォーマンスを向上します。 [#18605](https://github.com/tikv/tikv/issues/18605) @[LykxSassinator](https://github.com/LykxSassinator)
     - 書き込み操作のフロー制御構成の動的な変更をサポート[#17395](https://github.com/tikv/tikv/issues/17395) @[glorv](https://github.com/glorv)
     - フォアグラウンド書き込みをブロックせずにSSTファイルの取り込みをサポートし、レイテンシーの影響を軽減します。 [#18081](https://github.com/tikv/tikv/issues/18081) @[hhwyt](https://github.com/hhwyt)
-    - KvDB と RaftDB が別々のマウント パスを使用する場合の KvDB ディスクの I/O ジッターの検出メカニズムを最適化します。 [#18463](https://github.com/tikv/tikv/issues/18463) @[LykxSassinator](https://github.com/LykxSassinator)
+    - KvDB と RaftDB が別々のマウントパスを使用する場合の KvDB ディスクの I/O ジッターの検出メカニズムを最適化します。 [#18463](https://github.com/tikv/tikv/issues/18463) @[LykxSassinator](https://github.com/LykxSassinator)
     - ピアおよびストアのメッセージのスローログを追加します [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
 
 - PD
@@ -112,7 +112,7 @@ TiDB バージョン: 7.5.7
 - TiKV
 
     - CPUプロファイリング中にデッドロックが発生する可能性がある問題を修正 [#18474](https://github.com/tikv/tikv/issues/18474) @[YangKeao](https://github.com/YangKeao)
-    - 特定のTiFlashレプリカによってオンライン アンセーフ リカバリがブロックされ、コミット インデックスが進まなくなる問題を修正しました。 [#18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
+    - 特定のTiFlashレプリカによってオンラインアンセーフリカバリがブロックされ、コミットインデックスが進まなくなる問題を修正しました。 [#18197](https://github.com/tikv/tikv/issues/18197) @[v01dstar](https://github.com/v01dstar)
     - TiKVがクライアントがデコードできない圧縮アルゴリズムを使用する可能性がある問題を修正しました [#18079](https://github.com/tikv/tikv/issues/18079) @[ekexium](https://github.com/ekexium)
     - TiKV が高同時実行で過剰な SST 取り込みリクエストを許可する問題を修正 [#18452](https://github.com/tikv/tikv/issues/18452) @[hbisheng](https://github.com/hbisheng)
     - Grafana の TiKV ダッシュボードで`Ingestion picked level`と`Compaction Job Size(files)`が誤って表示される問題を修正しました [#15990](https://github.com/tikv/tikv/issues/15990) @[Connor1996](https://github.com/Connor1996)

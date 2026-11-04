@@ -15,7 +15,7 @@ TiDBバージョン：8.5.6
 
 ### パフォーマンス {#performance}
 
-- 外部キー チェックで共有ロックがサポートされるようになりました [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/you06)
+- 外部キーチェックで共有ロックがサポートされるようになりました [#66154](https://github.com/pingcap/tidb/issues/66154) @[you06](https://github.com/you06)
 
     悲観的トランザクションでは、外部キー制約を持つ子テーブルで`INSERT`または`UPDATE`を実行すると、外部キーチェックによって、デフォルトで対応する親テーブルの行が排他ロックでロックされます。子テーブルへの書き込みが高頻度で行われるシナリオでは、多数のトランザクションが同じ親テーブルの行にアクセスすると、深刻なロック競合が発生する可能性があります。
 
@@ -82,7 +82,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 ### MySQLとの互換性 {#mysql-compatibility}
 
 - バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。テーブルレベルで特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`の権限を付与または取り消すことができます。詳細については、 [列レベルの権限管理](https://docs.pingcap.com/tidb/v8.5/column-privilege-management)を参照してください。
-- バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブルエイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベース テーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。詳細については、 [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select)を参照してください。
+- バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブルエイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベーステーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。詳細については、 [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select)を参照してください。
 - バージョン8.5.6以降、 Dumplingは更新されたMySQLバイナリログの命名に対応することで、MySQL 8.4からのデータエクスポートをサポートしています。 [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
 - バージョン8.5.6以降、TiDB Data Migration (DM) は、このバージョンで導入された新しい用語とバージョン検出ロジックに対応することで、アップストリームデータソースとしてMySQL 8.4をサポートします。 [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
 
@@ -176,7 +176,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 - TiFlash
 
     - DDL文を実行して列の`NOT NULL`制約を削除した後、 TiFlashと TiKV の間で潜在的なデータの不整合の問題を修正しました [#10680](https://github.com/pingcap/tiflash/issues/10680) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - Grafana ダッシュボードのRaftスループット メトリックに異常に大きな値が表示されることがある問題を修正 [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
+    - Grafana ダッシュボードのRaftスループットメトリックに異常に大きな値が表示されることがある問題を修正 [#10701](https://github.com/pingcap/tiflash/issues/10701) @[CalvinNeo](https://github.com/CalvinNeo)
     - ランタイムフィルターが有効で結合キーのデータ型が一致しない場合、結合結果が正しくなくなることがある問題を修正 [#10699](https://github.com/pingcap/tiflash/issues/10699) @[ChangRui-Ryan](https://github.com/ChangRui-Ryan)
 
 - ツール

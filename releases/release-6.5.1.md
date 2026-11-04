@@ -13,7 +13,7 @@ TiDB バージョン: 6.5.1
 
 ## 互換性の変更 {#compatibility-changes}
 
-- 2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)がデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリース タイムライン](/releases/release-timeline.md)を参照してください。
+- 2023年2月20日以降、TiDBおよびTiDB Dashboardの新しいバージョン（v6.5.1を含む）では、 [テレメトリ機能](/telemetry.md)がデフォルトで無効化され、使用状況情報は収集されず、PingCAPと共有されません。これらのバージョンにアップグレードする前に、クラスターがデフォルトのテレメトリ設定を使用している場合、アップグレード後にテレメトリ機能が無効化されます。具体的なバージョンについては、 [TiDB リリースタイムライン](/releases/release-timeline.md)を参照してください。
 
     - [`tidb_enable_telemetry`](/system-variables.md#tidb_enable_telemetry-new-in-v402)システム変数のデフォルト値が`ON`から`OFF`に変更されます。
     - TiDB [`enable-telemetry`](/tidb-configuration-file.md#enable-telemetry-new-in-v402)設定項目のデフォルト値が`true`から`false`に変更されます。
@@ -108,8 +108,8 @@ TiDB バージョン: 6.5.1
     - 大きな範囲と大量のデータ変更を伴うクエリを実行するときに大きな推定エラーが発生する問題を修正[#39593](https://github.com/pingcap/tidb/issues/39593) @[time-and-fate](https://github.com/time-and-fate)
     - Plan Cache の使用時に、一部の条件が Join 演算子を通じてプッシュダウンできない問題を修正しました。 [#38205](https://github.com/pingcap/tidb/issues/38205) @[qw4990](https://github.com/qw4990) [#40093](https://github.com/pingcap/tidb/issues/40093)
     - IndexMerge プランが SET 型の列 に誤った範囲を生成する可能性がある問題を修正しました [#41293](https://github.com/pingcap/tidb/issues/41293) @[time-and-fate](https://github.com/time-and-fate) [#41273](https://github.com/pingcap/tidb/issues/41273)
-    - プランキャッシュが`int_col <cmp> decimal`条件 を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [#41032](https://github.com/pingcap/tidb/issues/41032) @[qw4990](https://github.com/qw4990) [#40679](https://github.com/pingcap/tidb/issues/40679)
-    - プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャン プランをキャッシュする可能性がある問題を修正しました [#40224](https://github.com/pingcap/tidb/issues/40224) @[qw4990](https://github.com/qw4990)
+    - プランキャッシュが`int_col <cmp> decimal`条件 を処理するときにフルスキャンプランをキャッシュする可能性がある問題を修正しました [#41032](https://github.com/pingcap/tidb/issues/41032) @[qw4990](https://github.com/qw4990) [#40679](https://github.com/pingcap/tidb/issues/40679)
+    - プランキャッシュが`int_col in (decimal...)`条件を処理するときにフルスキャンプランをキャッシュする可能性がある問題を修正しました [#40224](https://github.com/pingcap/tidb/issues/40224) @[qw4990](https://github.com/qw4990)
     - `ignore_plan_cache`ヒントが`INSERT`文 では機能しない可能性がある問題を修正しました [#39717](https://github.com/pingcap/tidb/issues/39717) @[qw4990](https://github.com/qw4990) [#40079](https://github.com/pingcap/tidb/issues/40079)
     - 自動分析により TiDB が終了できなくなる問題を修正しました [#40038](https://github.com/pingcap/tidb/issues/40038) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - パーティションテーブルの符号なし主キーに不正なアクセス間隔が構築される可能性がある問題を修正しました。 [#40309](https://github.com/pingcap/tidb/issues/40309) @[winoros](https://github.com/winoros)
@@ -175,7 +175,7 @@ TiDB バージョン: 6.5.1
         - REDOログがメタへの書き込みを有効にするとパフォーマンスが低下する問題を修正しました [#8074](https://github.com/pingcap/tiflow/issues/8074) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiCDCが大きなトランザクションを分割せずにデータを複製するとコンテキスト期限が超過するバグを修正 [#7982](https://github.com/pingcap/tiflow/issues/7982) @[hi-rustin](https://github.com/Rustin170506)
         - PDが異常なときにチェンジフィードを一時停止すると、誤ったステータスになる問題を修正しました。 [#8330](https://github.com/pingcap/tiflow/issues/8330) @[sdojjy](https://github.com/sdojjy)
-        - TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニーク インデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [#8420](https://github.com/pingcap/tiflow/issues/8420) @[asddongmen](https://github.com/asddongmen)
+        - TiDB または MySQL シンクにデータを複製するときに、主キーのない非 NULL ユニークインデックスを持つ列に`CHARACTER SET`を指定した場合に発生するデータの不整合を修正しました。 [#8420](https://github.com/pingcap/tiflow/issues/8420) @[asddongmen](https://github.com/asddongmen)
         - テーブルスケジューリングとブラックホールシンクのpanic問題を修正[#8024](https://github.com/pingcap/tiflow/issues/8024) [#8142](https://github.com/pingcap/tiflow/issues/8142) @[hicqu](https://github.com/hicqu)
 
     - TiDB Data Migration (DM)

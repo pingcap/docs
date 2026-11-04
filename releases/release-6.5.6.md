@@ -50,7 +50,7 @@ TiDB バージョン: 6.5.6
 
     - TiCDC
 
-        - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツ フォーマットを[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)ようにすることをサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
+        - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツフォーマットを[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)ようにすることをサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
         - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDML文をブロックしないようにします。 [#9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
         - TiCDC 増分スキャンによる上流 TiKV への影響を軽減 [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
 
@@ -166,7 +166,7 @@ TiDB バージョン: 6.5.6
 
         - DMが楽観的モードでパーティションDDLをスキップする問題を修正 [#9788](https://github.com/pingcap/tiflow/issues/9788) @[GMHDBJD](https://github.com/GMHDBJD)
         - オンライン DDL をスキップするときに DM が上流のテーブルスキーマを適切に追跡できない問題を修正しました [#9587](https://github.com/pingcap/tiflow/issues/9587) @[GMHDBJD](https://github.com/GMHDBJD)
-        - 失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[#9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
+        - 失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーションラグが増大し続ける問題を修正しました[#9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
         - 楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [#9588](https://github.com/pingcap/tiflow/issues/9588) @[GMHDBJD](https://github.com/GMHDBJD)
 
     - TiDB Lightning

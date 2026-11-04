@@ -110,7 +110,7 @@ TiDB バージョン: 6.1.1
     - Raft Engineが有効になっているときに稀に発生するパニックを修正[#12698](https://github.com/tikv/tikv/issues/12698) @[tabokie](https://github.com/tabokie)
     - proc ファイルシステム (procfs) が見つからない場合に冗長なログ警告を回避する[#13116](https://github.com/tikv/tikv/issues/13116) @[tabokie](https://github.com/tabokie)
     - ダッシュボードの`Unified Read Pool CPU`の誤った表現を修正 [#13086](https://github.com/tikv/tikv/issues/13086) @[glorv](https://github.com/glorv)
-    - リージョンが大きい場合、デフォルトの[`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff)がバケット サイズよりも大きくなる可能性がある問題を修正しました。 [#12598](https://github.com/tikv/tikv/issues/12598) @[tonyxuqqi](https://github.com/tonyxuqqi)
+    - リージョンが大きい場合、デフォルトの[`region-split-check-diff`](/tikv-configuration-file.md#region-split-check-diff)がバケットサイズよりも大きくなる可能性がある問題を修正しました。 [#12598](https://github.com/tikv/tikv/issues/12598) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - スナップショットの適用が中止され、 Raft Engineが有効になっている場合に TiKV がpanicする可能性がある問題を修正[#12470](https://github.com/tikv/tikv/issues/12470) @[tabokie](https://github.com/tabokie)
     - PD クライアントがデッドロックを引き起こす可能性がある問題を修正しました [#13191](https://github.com/tikv/tikv/issues/13191) @[bufferflies](https://github.com/bufferflies) [#12933](https://github.com/tikv/tikv/issues/12933) @[BurtonQin](https://github.com/BurtonQin)
 

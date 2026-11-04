@@ -51,7 +51,7 @@ TiDB バージョン: 7.5.5
     - DDL 所有者ノードが切り替えられた後、TiDB が以前の進行状況から再編成 DDL タスクを再開できない問題を修正しました。 [#56506](https://github.com/pingcap/tidb/issues/56506) @[tangenta](https://github.com/tangenta)
     - 非厳密モードで無効な`NULL`値が挿入される問題を修正 ( `sql_mode = ''` ) [#56381](https://github.com/pingcap/tidb/issues/56381) @[joechenrh](https://github.com/joechenrh)
     - Grafanaの**Stats Healthy Distribution**パネルのデータが正しくない可能性がある問題を修正しました[#57176](https://github.com/pingcap/tidb/issues/57176) @[hawkingrei](https://github.com/hawkingrei)
-    - 共通テーブル式 (CTE) に複数のデータ コンシューマーがあり、1つのコンシューマーがデータを読み取らずに終了した場合に発生する可能性のある無効なメモリアクセスの問題を修正しました[#55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
+    - 共通テーブル式 (CTE) に複数のデータコンシューマーがあり、1つのコンシューマーがデータを読み取らずに終了した場合に発生する可能性のある無効なメモリアクセスの問題を修正しました[#55881](https://github.com/pingcap/tidb/issues/55881) @[windtalker](https://github.com/windtalker)
     - v6.5からv7.5以降にアップグレードされたクラスターで、既存のTTLタスクが予期せず頻繁に実行される問題を修正[#56539](https://github.com/pingcap/tidb/issues/56539) @[lcwangchao](https://github.com/lcwangchao)
     - `tidb_ttl_job_enable`変数が無効になった後、TTL タスクがキャンセルされない問題を修正[#57404](https://github.com/pingcap/tidb/issues/57404) @[YangKeao](https://github.com/YangKeao)
     - 情報スキーマキャッシュミスにより、ステイル読み取りのクエリレイテンシーが増加する問題を修正しました。 [#53428](https://github.com/pingcap/tidb/issues/53428) @[crazycs520](https://github.com/crazycs520)
@@ -115,9 +115,9 @@ TiDB バージョン: 7.5.5
     - etcdリーダー遷移中にPDがリーダーを素早く再選出できない問題を修正 [#8823](https://github.com/tikv/pd/issues/8823) @[rleungx](https://github.com/rleungx)
     - ラベル統計のメモリリーク問題を修正 [#8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)
     - 同じストアID で繰り返し作成された場合に`evict-leader-scheduler`が正常に動作しない問題を修正 [#8756](https://github.com/tikv/pd/issues/8756) @[okJiang](https://github.com/okJiang)
-    - リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    - リソースグループクライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     - `evict-leader-scheduler`で間違ったパラメータを使用すると、PD がエラーを正しく報告せず、一部のスケジューラが利用できなくなる問題を修正しました[#8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
-    - ホットスポット キャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
+    - ホットスポットキャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
     - 乱数ジェネレータの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [#8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
 
 - TiFlash

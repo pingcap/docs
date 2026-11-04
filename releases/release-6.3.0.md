@@ -73,7 +73,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiDBはSQLクエリ実行時間の詳細なメトリクスを提供します [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
-    TiDB v6.3.0 は[実行時間の詳細な観察](/latency-breakdown.md)のためのきめ細かいデータ メトリクスを提供します。完全でセグメント化されたメトリクスを通じて、SQL クエリの主な消費時間を明確に把握でき、主要な問題を迅速に見つけてトラブルシューティングの時間を節約できます。
+    TiDB v6.3.0 は[実行時間の詳細な観察](/latency-breakdown.md)のためのきめ細かいデータメトリクスを提供します。完全でセグメント化されたメトリクスを通じて、SQL クエリの主な消費時間を明確に把握でき、主要な問題を迅速に見つけてトラブルシューティングの時間を節約できます。
 
 - スローログと`TRACE`ステートメントの出力強化 [#34106](https://github.com/pingcap/tidb/issues/34106) @[cfzjywxk](https://github.com/cfzjywxk)
 
@@ -107,7 +107,7 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiKVはログのリサイクルをサポートしています [#214](https://github.com/tikv/raft-engine/issues/214) @[LykxSassinator](https://github.com/LykxSassinator)
 
-    TiKV はRaft Engineの[リサイクルログファイル](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)をサポートしています。これにより、 Raftログの追加中のネットワーク ディスクのロングテールレイテンシーが短縮され、書き込みワークロード時のパフォーマンスが向上します。
+    TiKV はRaft Engineの[リサイクルログファイル](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)をサポートしています。これにより、 Raftログの追加中のネットワークディスクのロングテールレイテンシーが短縮され、書き込みワークロード時のパフォーマンスが向上します。
 
 - TiDB は null 認識アンチ結合をサポートします [#37525](https://github.com/pingcap/tidb/issues/37525) @[Arenatlx](https://github.com/Arenatlx)
 
@@ -175,11 +175,11 @@ TiDBバージョン: 6.3.0-DMR
 
 ### バックアップと復元 {#backup-and-restore}
 
-- PITR はバックアップ ストレージとして[GCSとAzure Blob Storage](/br/backup-and-restore-storages.md)をサポートしています @[joccau](https://github.com/joccau)
+- PITR はバックアップストレージとして[GCSとAzure Blob Storage](/br/backup-and-restore-storages.md)をサポートしています @[joccau](https://github.com/joccau)
 
     TiDBクラスターがGoogle CloudまたはAzureにデプロイされている場合、クラスターをv6.3.0にアップグレードすると、PITR機能を使用できます。
 
-- BRは AWS S3 オブジェクト ロックをサポートします [#13442](https://github.com/tikv/tikv/issues/13442) @[3pointer](https://github.com/3pointer)
+- BRは AWS S3 オブジェクトロックをサポートします [#13442](https://github.com/tikv/tikv/issues/13442) @[3pointer](https://github.com/3pointer)
 
     [S3オブジェクトロック](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)を有効にすることで、AWS 上のバックアップデータが改ざんまたは削除されないように保護できます。
 
@@ -195,13 +195,13 @@ TiDBバージョン: 6.3.0-DMR
 
 - TiCDCは、地理的に分散した複数のデータソースからデータを複製できる展開トポロジをサポートしています [#5301](https://github.com/pingcap/tiflow/issues/5301) @[sdojjy](https://github.com/sdojjy)
 
-    v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータ システムへのデータの複製をサポートするために、各 IDC にデータを複製する[TiCDCを複数のIDCにデプロイできます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータレプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
+    v6.3.0 以降、単一の TiDB クラスターから複数の地理的に分散されたデータシステムへのデータの複製をサポートするために、各 IDC にデータを複製する[TiCDCを複数のIDCにデプロイできます](/ticdc/deploy-ticdc.md) 。この機能は、地理的に分散されたデータレプリケーションおよび展開トポロジの機能を提供するのに役立ちます。
 
 - TiCDCは、アップストリームとダウンストリーム間でスナップショットの一貫性を維持することをサポートしています（同期ポイント） [#6977](https://github.com/pingcap/tiflow/issues/6977) @[asddongmen](https://github.com/asddongmen)
 
-    ディザスタリカバリのためのデータレプリケーションのシナリオでは、TiCDC は、ダウンストリーム スナップショットがアップストリーム スナップショットと一貫性を保つように [定期的に下流データのスナップショットを維持する](/ticdc/ticdc-upstream-downstream-check.md)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
+    ディザスタリカバリのためのデータレプリケーションのシナリオでは、TiCDC は、ダウンストリームスナップショットがアップストリームスナップショットと一貫性を保つように [定期的に下流データのスナップショットを維持する](/ticdc/ticdc-upstream-downstream-check.md)をサポートします。この機能により、TiCDC は読み取りと書き込みが分離されるシナリオをより適切にサポートし、コストの削減に役立ちます。
 
-- TiCDC はグレースフル アップグレードをサポート [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)@[3AceShowHand](https://github.com/3AceShowHand)
+- TiCDC はグレースフルアップグレードをサポート [#4757](https://github.com/pingcap/tiflow/issues/4757) @[overvenus](https://github.com/overvenus)@[3AceShowHand](https://github.com/3AceShowHand)
 
     TiCDCを[TiUP](/ticdc/deploy-ticdc.md#upgrade-cautions) （&gt;=v1.11.0）または[TiDB Operator](https://docs.pingcap.com/tidb-in-kubernetes/v1.3/configure-a-tidb-cluster#configure-graceful-upgrade-for-ticdc-cluster) （&gt;=v1.3.8）を使用してデプロイする場合、TiCDCクラスタをスムーズにアップグレードできます。アップグレード中は、データレプリケーションのレイテンシーが30秒以下に抑えられます。これにより安定性が向上し、TiCDCはレイテンシーに敏感なアプリケーションをより適切にサポートできるようになります。
 
@@ -245,7 +245,7 @@ TiDBバージョン: 6.3.0-DMR
 | TiKV           | [`auto-adjust-pool-size`](/tikv-configuration-file.md#auto-adjust-pool-size-new-in-v630)              | 新しく追加された | スレッドプールのサイズを自動的に調整するかどうかを制御します。有効にすると、現在のCPU使用率に基づいてUnifyReadPoolスレッドプールのサイズを自動的に調整することで、TiKVの読み取りパフォーマンスが最適化されます。                                                                                               |
 | TiKV           | [`data-encryption-method`](/tikv-configuration-file.md#data-encryption-method)                        | 変更     | 新しい値オプション`sm4-ctr`が導入されました。この設定項目が`sm4-ctr`に設定されている場合、データは保存される前に SM4 を使用して暗号化されます。                                                                                                                              |
 | TiKV           | [`enable-log-recycle`](/tikv-configuration-file.md#enable-log-recycle-new-in-v630)                    | 新しく追加された | Raft Engineで古いログファイルを再利用するかどうかを決定します。有効にすると、論理的に削除されたログファイルは再利用のために予約されます。これにより、書き込みワークロードのロングテールレイテンシーが削減されます。この設定項目は[フォーマットバージョン](/tikv-configuration-file.md#format-version-new-in-v630)が 2 以上の場合のみ使用できます。 |
-| TiKV           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログファイルのバージョンを指定します。デフォルトのログファイル バージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログファイル バージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログファイルを読み取ることができます。       |
+| TiKV           | [`format-version`](/tikv-configuration-file.md#format-version-new-in-v630)                            | 新しく追加された | Raft Engineのログファイルのバージョンを指定します。デフォルトのログファイルバージョンは、TiKV v6.3.0 より前のバージョンでは`1`です。ログファイルは、TiKV &gt;= v6.1.0 で読み取ることができます。デフォルトのログファイルバージョンは、TiKV v6.3.0 以降では`2`です。TiKV v6.3.0 以降では、ログファイルを読み取ることができます。       |
 | TiKV           | [`log-backup.enable`](/tikv-configuration-file.md#enable-new-in-v620)                                 | 変更     | バージョン6.3.0以降、デフォルト値が`false`から`true`に変更されました。                                                                                                                                                                     |
 | TiKV           | [`log-backup.max-flush-interval`](/tikv-configuration-file.md#max-flush-interval-new-in-v620)         | 変更     | バージョン6.3.0以降、デフォルト値が`5min`から`3min`に変更されました。                                                                                                                                                                      |
 | PD             | [`enable-diagnostic`](/pd-configuration-file.md#enable-diagnostic-new-in-v630)                                   | 新しく追加された | 診断機能を有効にするかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                           |
@@ -393,7 +393,7 @@ TiDBバージョン: 6.3.0-DMR
     - `CAST(Real/Decimal AS time)`の結果が MySQL と一致しない問題を修正します [#3779](https://github.com/pingcap/tiflash/issues/3779) @[mengxin9014](https://github.com/mengxin9014)
     - ストレージ内の一部の古いデータが削除できない問題を修正 [#5570](https://github.com/pingcap/tiflash/issues/5570) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - ページ GC がテーブルの作成をブロックする可能性がある問題を修正 [#5697](https://github.com/pingcap/tiflash/issues/5697) @[JaySon-Huang](https://github.com/JaySon-Huang)
-    - `NULL`値を含む列でプライマリ インデックスを作成した後に発生するpanicを修正 [#5859](https://github.com/pingcap/tiflash/issues/5859) @[JaySon-Huang](https://github.com/JaySon-Huang)
+    - `NULL`値を含む列でプライマリインデックスを作成した後に発生するpanicを修正 [#5859](https://github.com/pingcap/tiflash/issues/5859) @[JaySon-Huang](https://github.com/JaySon-Huang)
 
 - ツール
 

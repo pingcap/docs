@@ -133,9 +133,9 @@ TiDB バージョン: 8.2.0
 
 ### 動作の変更 {#behavior-changes}
 
-- TiDB Lightningを使用して CSV ファイルをインポートする場合、 `strict-format = true`を設定して大きな CSV ファイルを複数の小さな CSV ファイルに分割し、同時実行性とインポートパフォーマンスを向上させる場合は、 `terminator`を明示的に指定する必要があります。指定できる値は、 `\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
+- TiDB Lightningを使用して CSV ファイルをインポートする場合、 `strict-format = true`を設定して大きな CSV ファイルを複数の小さな CSV ファイルに分割し、同時実行性とインポートパフォーマンスを向上させる場合は、 `terminator`を明示的に指定する必要があります。指定できる値は、 `\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイルデータの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
-- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用して CSV ファイルをインポートする場合、大きな CSV ファイルを複数の小さな CSV ファイルに分割して同時実行性とインポートパフォーマンスを向上させるために`SPLIT_FILE`パラメーターを指定すると、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。指定できる値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイル データの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
+- [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用して CSV ファイルをインポートする場合、大きな CSV ファイルを複数の小さな CSV ファイルに分割して同時実行性とインポートパフォーマンスを向上させるために`SPLIT_FILE`パラメーターを指定すると、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。指定できる値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイルデータの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
 - BR v8.2.0 より前は、TiCDC レプリケーションタスクを持つクラスタで[BRデータ復元](/br/backup-and-restore-overview.md)を実行することはサポートされていませんでした。v8.2.0 以降、 BR はTiCDC のデータ復元に関する制限を緩和しました。復元対象データの BackupTS (バックアップ時刻) が changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (現在のレプリケーションの進行状況を示すタイムスタンプ) より前であれば、 BR は正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオで、 BR はTiCDC レプリケーションタスクを持つクラスタのデータ復元をサポートしていると考えられます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
 
@@ -161,7 +161,7 @@ TiDB バージョン: 8.2.0
 | -------------- | ------------------------------------------------------------------------------------------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)        | 変更    | 統計情報の初期化にかかる時間を短縮するため、デフォルト値を`false`から`true`に変更します。この設定項目は、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)が`false`に設定されている場合にのみ有効になります。 |
 | TiDB           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                   | 変更    | デフォルト値を`5`から`0`に変更し、最小値を`1`から`0`に変更します。値`0`は自動モードを意味し、サーバーの設定に基づいて同時実行数を自動的に調整します。                                                                                    |
-| TiDB           | [`token-limit`](/tidb-configuration-file.md#token-limit)                                                     | 変更    | TiDB Server のメモリ不足エラー (OOM) が発生するのを避けるため、最大値を`18446744073709551615` (64 ビット プラットフォーム) および`4294967295` (32 ビット プラットフォーム) から`1048576`に変更します。これにより、同時にリクエストを実行できるセッション数は最大`1048576`まで設定できます。 |
+| TiDB           | [`token-limit`](/tidb-configuration-file.md#token-limit)                                                     | 変更    | TiDB Server のメモリ不足エラー (OOM) が発生するのを避けるため、最大値を`18446744073709551615` (64 ビットプラットフォーム) および`4294967295` (32 ビットプラットフォーム) から`1048576`に変更します。これにより、同時にリクエストを実行できるセッション数は最大`1048576`まで設定できます。 |
 | TiKV           | [`max-apply-unpersisted-log-limit`](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810) | 変更    | TiKVノードのI/Oジッターによって発生するロングテールレイテンシーを削減するため、デフォルト値を`0`から`1024`に変更します。これは、コミット済みだが永続化されていないRaftログの最大適用数が、デフォルトでは`1024`であることを意味します。                                      |
 | TiKV           | [`server.grpc-compression-type`](/tikv-configuration-file.md#grpc-compression-type)                          | 変更    | この設定項目では、TiKVからTiDBに送信される応答メッセージの圧縮アルゴリズムも制御できるようになりました。圧縮を有効にすると、CPUリソースの消費量が増加する可能性があります。                                                                           |
 | TiFlash        | [`security.redact_info_log`](/tiflash/tiflash-configuration.md#configure-the-tiflashtoml-file)               | 変更    | 新しい値オプション`marker`が導入されました。値を`marker`に設定すると、ログ内のすべてのユーザーデータが`‹ ›`で囲まれます。                                                                                               |
@@ -212,7 +212,7 @@ TiDB バージョン: 8.2.0
 - TiKV
 
     - 単一のコンパクションジョブに関係する SST ファイルの数を表示する**Compaction Job Size(files)**メトリックを追加します [#16837](https://github.com/tikv/tikv/issues/16837) @[zhangjinpeng87](https://github.com/zhangjinpeng87)
-    - [早期適用](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810)をデフォルトで有効にします。この機能を有効にすると、 Raftリーダーは、クォーラム ピアがログを永続化した後、リーダー自身がログを永続化するのを待たずにログを適用できるため、少数の TiKV ノードでのジッターが書き込みリクエストのレイテンシーに与える影響が軽減されます。 [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
+    - [早期適用](/tikv-configuration-file.md#max-apply-unpersisted-log-limit-new-in-v810)をデフォルトで有効にします。この機能を有効にすると、 Raftリーダーは、クォーラムピアがログを永続化した後、リーダー自身がログを永続化するのを待たずにログを適用できるため、少数の TiKV ノードでのジッターが書き込みリクエストのレイテンシーに与える影響が軽減されます。 [#16717](https://github.com/tikv/tikv/issues/16717) @[glorv](https://github.com/glorv)
     - **Raft dropped messages**の可視性を向上させ、書き込み速度低下の根本原因を特定する [#17093](https://github.com/tikv/tikv/issues/17093) @[Connor1996](https://github.com/Connor1996)
     - クラスターのレイテンシーの問題をトラブルシューティングするために、ファイル取り込みレイテンシーの可視性を向上させる [#17078](https://github.com/tikv/tikv/issues/17078) @[LykxSassinator](https://github.com/LykxSassinator)
     - リージョンレプリカのクリーンアップに別のスレッドを使用して、重要なRaftの読み取りと書き込みのレイテンシーを安定させる [#16001](https://github.com/tikv/tikv/issues/16001) @[hbisheng](https://github.com/hbisheng)
@@ -234,12 +234,12 @@ TiDB バージョン: 8.2.0
 
     - Backup & Restore (BR)
 
-        - バックアップ機能を最適化し、ノードの再起動、クラスターのスケールアウト、および多数のテーブルをバックアップする際のネットワーク ジッター時のバックアップ パフォーマンスと安定性を向上させます [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)
+        - バックアップ機能を最適化し、ノードの再起動、クラスターのスケールアウト、および多数のテーブルをバックアップする際のネットワークジッター時のバックアップパフォーマンスと安定性を向上させます [#52534](https://github.com/pingcap/tidb/issues/52534) @[3pointer](https://github.com/3pointer)
         - データ復元時にTiCDCチェンジフィードのきめ細かいチェックを実装します。チェンジフィードの[`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts)がデータバックアップ時刻より後であれば、復元操作に影響はなく、不要な待ち時間を短縮し、ユーザーエクスペリエンスを向上させます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
         - [`BACKUP`](/sql-statements/sql-statement-backup.md)ステートメントと[`RESTORE`](/sql-statements/sql-statement-restore.md)ステートメントに、 `CHECKSUM_CONCURRENCY`などのよく使用されるパラメーターをいくつか追加します [#53040](https://github.com/pingcap/tidb/issues/53040) @[RidRisR](https://github.com/RidRisR)
         - `br log restore`サブコマンドを除き、他のすべての`br log`サブコマンドは、メモリ消費量を削減するために TiDB `domain`データ構造の読み込みをスキップすることをサポートしています [#52088](https://github.com/pingcap/tidb/issues/52088) @[Leavrth](https://github.com/Leavrth)
         - ログバックアップ中に生成される一時ファイルの暗号化をサポート [#15083](https://github.com/tikv/tikv/issues/15083) @[YuJuncen](https://github.com/YuJuncen)
-        - Grafana ダッシュボードに`tikv_log_backup_pending_initial_scan`モニタリング メトリクスを追加します [#16656](https://github.com/tikv/tikv/issues/16656) @[3pointer](https://github.com/3pointer)
+        - Grafana ダッシュボードに`tikv_log_backup_pending_initial_scan`モニタリングメトリクスを追加します [#16656](https://github.com/tikv/tikv/issues/16656) @[3pointer](https://github.com/3pointer)
         - PITRログの出力形式を最適化し、ログに`RestoreTS`フィールドを追加する [#53645](https://github.com/pingcap/tidb/issues/53645) @[dveeden](https://github.com/dveeden)
 
     - TiCDC

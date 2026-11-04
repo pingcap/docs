@@ -26,7 +26,7 @@ TiDBバージョン: 6.5.11
 
 - TiKV
 
-    - RocksDB のコンパクショントリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
+    - RocksDB のコンパクショントリガーメカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
 
 - TiFlash
 
@@ -89,7 +89,7 @@ TiDBバージョン: 6.5.11
     - 一部のログが秘匿化されない問題を修正[#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [#8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     - `replication.strictly-match-label`を`true`に設定するとTiFlash が起動しなくなる問題を修正 [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
-    - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
+    - PD がオペレーターチェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
 
 - TiFlash
 
@@ -121,7 +121,7 @@ TiDBバージョン: 6.5.11
     - TiDB Data Migration (DM)
 
         - インデックスの長さが`max-index-length`のデフォルト値を超えるとデータレプリケーションが中断される問題を修正しました [#11459](https://github.com/pingcap/tiflow/issues/11459) @[michaelmdeng](https://github.com/michaelmdeng)
-        - スキーマ トラッカーが LIST パーティションテーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
+        - スキーマトラッカーが LIST パーティションテーブルを誤って処理し、DM エラーが発生する問題を修正しました。 [#11408](https://github.com/pingcap/tiflow/issues/11408) @[lance6716](https://github.com/lance6716)
         - LISTパーティションテーブルの`ALTER TABLE ... DROP PARTITION`文を複製するときにDMがエラーを返す問題を修正しました。 [#54760](https://github.com/pingcap/tidb/issues/54760) @[lance6716](https://github.com/lance6716)
         - DMが`ALTER DATABASE`文を処理するときにデフォルトのデータベースを設定せず、レプリケーションエラーが発生する問題を修正しました。 [#11503](https://github.com/pingcap/tiflow/issues/11503) @[lance6716](https://github.com/lance6716)
 

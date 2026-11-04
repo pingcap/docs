@@ -44,7 +44,7 @@ TiDB バージョン: 7.1.2
 
 - PD
 
-    - PD 呼び出し元のバックオフ メカニズムを最適化して、呼び出しが失敗したときの RPC リクエストの頻度を減らします[#6556](https://github.com/tikv/pd/issues/6556) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[HuSharp](https://github.com/HuSharp)
+    - PD 呼び出し元のバックオフメカニズムを最適化して、呼び出しが失敗したときの RPC リクエストの頻度を減らします[#6556](https://github.com/tikv/pd/issues/6556) @[nolouch](https://github.com/nolouch) @[rleungx](https://github.com/rleungx) @[HuSharp](https://github.com/HuSharp)
     - 発信者が切断されたときにCPUとメモリを速やかに解放するために、 `GetRegions`インターフェースにキャンセルメカニズムを導入する[#6835](https://github.com/tikv/pd/issues/6835) @[lhy1024](https://github.com/lhy1024)
 
 - TiFlash
@@ -62,9 +62,9 @@ TiDB バージョン: 7.1.2
     - TiCDC
 
         - 複数の TiCDC 監視メトリックとアラームルールを最適化します [#9047](https://github.com/pingcap/tiflow/issues/9047) @[asddongmen](https://github.com/asddongmen)
-        - Kafka Sink は、メッセージが大きすぎる場合に[ハンドルキーデータのみを送信する](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)サポートし、過剰なメッセージ サイズによって引き起こされる変更フィードの失敗を回避します。 [#9680](https://github.com/pingcap/tiflow/issues/9680) @[3AceShowHand](https://github.com/3AceShowHand)
+        - Kafka Sink は、メッセージが大きすぎる場合に[ハンドルキーデータのみを送信する](/ticdc/ticdc-sink-to-kafka.md#handle-messages-that-exceed-the-kafka-topic-limit)サポートし、過剰なメッセージサイズによって引き起こされる変更フィードの失敗を回避します。 [#9680](https://github.com/pingcap/tiflow/issues/9680) @[3AceShowHand](https://github.com/3AceShowHand)
         - `ADD INDEX` DDL操作を複製する実行ロジックを最適化して、後続のDML文をブロックしないようにします。 [#9644](https://github.com/pingcap/tiflow/issues/9644) @[sdojjy](https://github.com/sdojjy)
-        - TiCDC が失敗後に再試行するときのステータス メッセージを改善する[#9483](https://github.com/pingcap/tiflow/issues/9483) @[asddongmen](https://github.com/asddongmen)
+        - TiCDC が失敗後に再試行するときのステータスメッセージを改善する[#9483](https://github.com/pingcap/tiflow/issues/9483) @[asddongmen](https://github.com/asddongmen)
 
     - TiDB Data Migration (DM)
 
@@ -88,7 +88,7 @@ TiDB バージョン: 7.1.2
     - 符号なし型と`Duration`型定数を比較したときに発生する誤った結果を修正しました [#45410](https://github.com/pingcap/tidb/issues/45410) @[wshwsh12](https://github.com/wshwsh12)
     - `AUTO_ID_CACHE=1` に設定されている場合に`Duplicate entry`が発生する可能性がある問題を修正しました [#46444](https://github.com/pingcap/tidb/issues/46444) @[tiancaiamao](https://github.com/tiancaiamao)
     - TTLが実行されているときのメモリリークの問題を修正しました [#45510](https://github.com/pingcap/tidb/issues/45510) @[lcwangchao](https://github.com/lcwangchao)
-    - 接続を切断すると go コルーチン リークが発生する可能性がある問題を修正[#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
+    - 接続を切断すると go コルーチンリークが発生する可能性がある問題を修正[#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
     - インデックス結合のエラーによりクエリが停止する可能性がある問題を修正[#45716](https://github.com/pingcap/tidb/issues/45716) @[wshwsh12](https://github.com/wshwsh12)
     - ハッシュパーティションテーブルに対して`BatchPointGet`オペレーターが誤った結果を返す問題を修正しました [#46779](https://github.com/pingcap/tidb/issues/46779) @[jiyfhust](https://github.com/jiyfhust)
     - `EXCHANGE PARTITION`が失敗またはキャンセルされた場合に、パーティションテーブルの制限が元のテーブルに残る問題を修正[#45920](https://github.com/pingcap/tidb/issues/45920) [#45791](https://github.com/pingcap/tidb/issues/45791) @[mjonss](https://github.com/mjonss)
@@ -137,7 +137,7 @@ TiDB バージョン: 7.1.2
 
 - PD
 
-    - v2 スケジューラ アルゴリズムでホットリージョンがスケジュールされない可能性がある問題を修正しました [#6645](https://github.com/tikv/pd/issues/6645) @[lhy1024](https://github.com/lhy1024)
+    - v2 スケジューラアルゴリズムでホットリージョンがスケジュールされない可能性がある問題を修正しました [#6645](https://github.com/tikv/pd/issues/6645) @[lhy1024](https://github.com/lhy1024)
     - TLSハンドシェイクにより空のクラスタでCPU使用率が上昇する可能性がある問題を修正 [#6913](https://github.com/tikv/pd/issues/6913) @[nolouch](https://github.com/nolouch)
     - PDノード間の注入エラーによりPD panicが発生する可能性がある問題を修正しました [#6858](https://github.com/tikv/pd/issues/6858) @[HuSharp](https://github.com/HuSharp)
     - ストア情報の同期によりPDリーダーが終了して停止する可能性がある問題を修正しました。 [#6918](https://github.com/tikv/pd/issues/6918) @[rleungx](https://github.com/rleungx)
@@ -145,7 +145,7 @@ TiDB バージョン: 7.1.2
     - 終了時に PD がpanicになる可能性がある問題を修正しました [#7053](https://github.com/tikv/pd/issues/7053) @[HuSharp](https://github.com/HuSharp)
     - コンテキストタイムアウトにより`lease timeout`エラーが発生する可能性がある問題を修正 [#6926](https://github.com/tikv/pd/issues/6926) @[rleungx](https://github.com/rleungx)
     - ピアがグループごとに適切に分散されず、リーダーの分布が不均等になる可能性がある問題を修正しました。 [#6962](https://github.com/tikv/pd/issues/6962) @[rleungx](https://github.com/rleungx)
-    - pd-ctl を使用して更新するときに分離レベル ラベルが同期されない問題を修正しました [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
+    - pd-ctl を使用して更新するときに分離レベルラベルが同期されない問題を修正しました [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
     - `evict-leader-scheduler`が構成を失う可能性がある問題を修正 [#6897](https://github.com/tikv/pd/issues/6897) @[HuSharp](https://github.com/HuSharp)
     - プラグインディレクトリとファイルの潜在的なセキュリティリスクを修正[#7094](https://github.com/tikv/pd/issues/7094) @[HuSharp](https://github.com/HuSharp)
     - リソース制御を有効にした後に DDL がアトミック性を保証しない可能性がある問題を修正しました [#45050](https://github.com/pingcap/tidb/issues/45050) @[glorv](https://github.com/glorv)
@@ -199,7 +199,7 @@ TiDB バージョン: 7.1.2
 
     - TiDB Data Migration (DM)
 
-        - 失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーション ラグが増大し続ける問題を修正しました[#9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
+        - 失敗した DDL がスキップされ、後続の DDL が実行されない場合に、DM によって返されるレプリケーションラグが増大し続ける問題を修正しました[#9605](https://github.com/pingcap/tiflow/issues/9605) @[D3Hunter](https://github.com/D3Hunter)
         - DM が大文字と小文字を区別しない照合順序で競合を正しく処理できない問題を修正しました [#9489](https://github.com/pingcap/tiflow/issues/9489) @[hihihuhu](https://github.com/hihihuhu)
         - DM バリデーターのデッドロック問題を修正し、再試行を強化しました。 [#9257](https://github.com/pingcap/tiflow/issues/9257) @[D3Hunter](https://github.com/D3Hunter)
         - 楽観的モードでタスクを再開するときに DM がすべての DML をスキップする問題を修正しました [#9588](https://github.com/pingcap/tiflow/issues/9588) @[GMHDBJD](https://github.com/GMHDBJD)

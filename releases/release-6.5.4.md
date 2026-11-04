@@ -59,7 +59,7 @@ TiDB バージョン: 6.5.4
 
     - TiCDC
 
-        - TiCDC が失敗後に再試行するときのステータス メッセージを改善する[#9483](https://github.com/pingcap/tiflow/issues/9483) @[asddongmen](https://github.com/asddongmen)
+        - TiCDC が失敗後に再試行するときのステータスメッセージを改善する[#9483](https://github.com/pingcap/tiflow/issues/9483) @[asddongmen](https://github.com/asddongmen)
         - TiCDC が Kafka に同期する際に制限を超えるメッセージを処理する方法を最適化し、主キーのみをダウンストリームに送信することをサポートしました。 [#9574](https://github.com/pingcap/tiflow/issues/9574) @[3AceShowHand](https://github.com/3AceShowHand)
         - ストレージシンクは、HEX形式のデータの16進エンコードをサポートするようになり、AWS DMS形式仕様と互換性があります。 [#9373](https://github.com/pingcap/tiflow/issues/9373) @[CharlesCheung96](https://github.com/CharlesCheung96)
 
@@ -109,7 +109,7 @@ TiDB バージョン: 6.5.4
     - 権限がなくてもユーザーが`INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの情報を表示できる問題を修正 [#45320](https://github.com/pingcap/tidb/issues/45320) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `DATETIME`または`TIMESTAMP`列を数値定数と比較するときに、MySQL と動作が一致しない問題を修正しました。 [#38361](https://github.com/pingcap/tidb/issues/38361) @[yibin87](https://github.com/yibin87)
     - インデックス結合のエラーによりクエリが停止する可能性がある問題を修正[#45716](https://github.com/pingcap/tidb/issues/45716) @[wshwsh12](https://github.com/wshwsh12)
-    - 接続を切断すると go コルーチン リークが発生する可能性がある問題を修正[#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
+    - 接続を切断すると go コルーチンリークが発生する可能性がある問題を修正[#46034](https://github.com/pingcap/tidb/issues/46034) @[pingyu](https://github.com/pingyu)
     - `tmp-storage-quota`設定が有効にならない問題を修正 [#26806](https://github.com/pingcap/tidb/issues/26806) @[wshwsh12](https://github.com/wshwsh12) [#45161](https://github.com/pingcap/tidb/issues/45161)
     - クラスターでTiFlashノードがダウンした場合にTiFlashレプリカが利用できなくなる問題を修正しました。 [#38484](https://github.com/pingcap/tidb/issues/38484) @[hehechen](https://github.com/hehechen)
     - `Config.Labels`を同時に読み書きする場合に、データ競合により TiDB がクラッシュする問題を修正[#45561](https://github.com/pingcap/tidb/issues/45561) @[gengliqi](https://github.com/gengliqi)
@@ -181,7 +181,7 @@ TiDB バージョン: 6.5.4
 
     - TiDB Lightning
 
-        - エンジンがデータをインポートしているときにディスククォータ チェックがブロックされる可能性がある問題を修正しました [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
+        - エンジンがデータをインポートしているときにディスククォータチェックがブロックされる可能性がある問題を修正しました [#44867](https://github.com/pingcap/tidb/issues/44867) @[D3Hunter](https://github.com/D3Hunter)
         - ターゲットクラスタで SSL が有効になっているときにチェックサムがエラー`Region is unavailable`を報告する問題を修正しました [#45462](https://github.com/pingcap/tidb/issues/45462) @[D3Hunter](https://github.com/D3Hunter)
         - エンコードエラーが正しく記録されない問題を修正[#44321](https://github.com/pingcap/tidb/issues/44321) @[lyzx2001](https://github.com/lyzx2001)
         - CSVデータをインポートする際にルートがpanicになる可能性がある問題を修正 [#43284](https://github.com/pingcap/tidb/issues/43284) @[lyzx2001](https://github.com/lyzx2001)

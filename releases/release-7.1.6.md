@@ -34,7 +34,7 @@ TiDB バージョン: 7.1.6
 - TiKV
 
     - ピアおよびストアのメッセージのスローログを追加します。 [#16600](https://github.com/tikv/tikv/issues/16600) @[Connor1996](https://github.com/Connor1996)
-    - RocksDB のコンパクショントリガー メカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
+    - RocksDB のコンパクショントリガーメカニズムを最適化し、多数の DELETE バージョンを処理するときにディスク領域の再利用を高速化します。 [#17269](https://github.com/tikv/tikv/issues/17269) @[AndreMouche](https://github.com/AndreMouche)
     - TiKV の再起動時にログの適用を待つことで発生する不安定なアクセス遅延を最適化し、TiKV の安定性を向上しました。 [#15874](https://github.com/tikv/tikv/issues/15874) @[LykxSassinator](https://github.com/LykxSassinator)
     - 不要な非同期ブロックを削除してメモリ使用量を削減する[#16540](https://github.com/tikv/tikv/issues/16540) @[overvenus](https://github.com/overvenus)
 
@@ -207,12 +207,12 @@ TiDB バージョン: 7.1.6
     - リソースグループが過剰なログを出力する問題を修正しました [#8159](https://github.com/tikv/pd/issues/8159) @[nolouch](https://github.com/nolouch)
     - 乱数ジェネレータの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [#8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
     - リージョン統計のメモリリーク問題を修正 [#8710](https://github.com/tikv/pd/issues/8710) @[rleungx](https://github.com/rleungx)
-    - ホットスポット キャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
+    - ホットスポットキャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
     - 同じストアID で繰り返し作成された場合に`evict-leader-scheduler`が正常に動作しない問題を修正 [#8756](https://github.com/tikv/pd/issues/8756) @[okJiang](https://github.com/okJiang)
     - `replication.strictly-match-label`を`true`に設定するとTiFlash が起動しなくなる問題を修正 [#8480](https://github.com/tikv/pd/issues/8480) @[rleungx](https://github.com/rleungx)
     - 設定ファイル経由でログレベルを変更しても反映されない問題を修正[#8117](https://github.com/tikv/pd/issues/8117) @[rleungx](https://github.com/rleungx)
     - 同時実行性が高い場合にリソースグループがリソース使用量を効果的に制限できない問題を修正[#8435](https://github.com/tikv/pd/issues/8435) @[nolouch](https://github.com/nolouch)
-    - PD がオペレーター チェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
+    - PD がオペレーターチェック中に遭遇するデータ競合問題を修正しました [#8263](https://github.com/tikv/pd/issues/8263) @[lhy1024](https://github.com/lhy1024)
     - 500 ミリ秒を超えるトークンをリクエストするとリソースグループがクォータ制限に達する問題を修正[#8349](https://github.com/tikv/pd/issues/8349) @[nolouch](https://github.com/nolouch)
     - 一部のログが秘匿化されない問題を修正[#8419](https://github.com/tikv/pd/issues/8419) @[rleungx](https://github.com/rleungx)
     - ロールをリソースグループにバインドするときにエラーが報告されない問題を修正しました [#54417](https://github.com/pingcap/tidb/issues/54417) @[JmPotato](https://github.com/JmPotato)
@@ -223,7 +223,7 @@ TiDB バージョン: 7.1.6
     - リソースグループのデータ競合問題を修正 [#8267](https://github.com/tikv/pd/issues/8267) @[HuSharp](https://github.com/HuSharp)
     - TiKV設定項目[`coprocessor.region-split-size`](/tikv-configuration-file.md#region-split-size)を1 MiB未満の値に設定するとPD panicが発生する問題を修正しました [#8323](https://github.com/tikv/pd/issues/8323) @[JmPotato](https://github.com/JmPotato)
     - `evict-leader-scheduler`で間違ったパラメータを使用すると、PD がエラーを正しく報告せず、一部のスケジューラが利用できなくなる問題を修正しました[#8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
-    - リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    - リソースグループクライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     - 配置ルールを使用しているときに、ダウンしたピアが回復しない可能性がある問題を修正しました。 [#7808](https://github.com/tikv/pd/issues/7808) @[rleungx](https://github.com/rleungx)
 
 - TiFlash

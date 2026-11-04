@@ -29,7 +29,7 @@ TiDBバージョン: 7.1.4
 
 - PD
 
-    - バックアップ クラスタが切断されたときに PD がクラスタ ステータスを自動更新する速度を向上[#6883](https://github.com/tikv/pd/issues/6883) @[disksing](https://github.com/disksing)
+    - バックアップクラスタが切断されたときに PD がクラスタステータスを自動更新する速度を向上[#6883](https://github.com/tikv/pd/issues/6883) @[disksing](https://github.com/disksing)
 
 - TiFlash
 
@@ -124,7 +124,7 @@ TiDBバージョン: 7.1.4
 
 - PD
 
-    - リソースグループ クライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
+    - リソースグループクライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
     - 一部のTSOログでエラー原因が出力されない問題を修正しました [#7496](https://github.com/tikv/pd/issues/7496) @[CabinfeverB](https://github.com/CabinfeverB)
     - `BURSTABLE`が有効になっているときにデフォルトのリソースグループに不要なトークンが蓄積される問題を修正[#7206](https://github.com/tikv/pd/issues/7206) @[CabinfeverB](https://github.com/CabinfeverB)
     - `evict-leader-scheduler`インターフェースが呼び出されたときに出力がない問題を修正しました [#7672](https://github.com/tikv/pd/issues/7672) @[CabinfeverB](https://github.com/CabinfeverB)
@@ -160,7 +160,7 @@ TiDBバージョン: 7.1.4
         - ログバックアップタスクを停止すると TiDB がクラッシュする問題を修正[#50839](https://github.com/pingcap/tidb/issues/50839) @[YuJuncen](https://github.com/YuJuncen)
         - TiKVノードにリーダーがいないためにデータの復元が遅くなる問題を修正しました [#50566](https://github.com/pingcap/tidb/issues/50566) @[Leavrth](https://github.com/Leavrth)
         - 同じノードで TiKV IP アドレスを変更した後にログバックアップが停止する問題を修正しました [#50445](https://github.com/pingcap/tidb/issues/50445) @[3pointer](https://github.com/3pointer)
-        - S3 からファイル コンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
+        - S3 からファイルコンテンツを読み取っているときにエラーが発生した場合にBR が再試行できない問題を修正しました [#49942](https://github.com/pingcap/tidb/issues/49942) @[Leavrth](https://github.com/Leavrth)
         - 古いバージョンのバックアップからデータを復元するときに`Unsupported collation`エラーが報告される問題を修正しました [#49466](https://github.com/pingcap/tidb/issues/49466) @[3pointer](https://github.com/3pointer)
 
     - TiCDC
@@ -177,7 +177,7 @@ TiDBバージョン: 7.1.4
     - TiDB Data Migration (DM)
 
         - タスク構成で間違ったbinlogイベントタイプがアップグレード失敗の原因となる問題を修正[#10282](https://github.com/pingcap/tiflow/issues/10282) @[GMHDBJD](https://github.com/GMHDBJD)
-        - `shard_row_id_bits`を持つテーブルが原因でスキーマ トラッカーの初期化に失敗する問題を修正しました。 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
+        - `shard_row_id_bits`を持つテーブルが原因でスキーマトラッカーの初期化に失敗する問題を修正しました。 [#10308](https://github.com/pingcap/tiflow/issues/10308) @[GMHDBJD](https://github.com/GMHDBJD)
 
     - TiDB Lightning
 

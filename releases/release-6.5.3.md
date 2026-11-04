@@ -90,7 +90,7 @@ TiDB バージョン: 6.5.3
 - TiKV
 
     - TiKVノードが失敗したときに、対応するリージョンのピアが誤って休止状態になる問題を修正しました [#14547](https://github.com/tikv/tikv/issues/14547) @[hicqu](https://github.com/hicqu)
-    - 継続的プロファイリングにおけるファイル ハンドル リークの問題を修正しました [#14224](https://github.com/tikv/tikv/issues/14224) @[tabokie](https://github.com/tabokie)
+    - 継続的プロファイリングにおけるファイルハンドルリークの問題を修正しました [#14224](https://github.com/tikv/tikv/issues/14224) @[tabokie](https://github.com/tabokie)
     - PD クラッシュにより PITR が続行できなくなる問題を修正しました [#14184](https://github.com/tikv/tikv/issues/14184) @[YuJuncen](https://github.com/YuJuncen)
     - 暗号化キーIDの競合により古いキーが削除される可能性がある問題を修正しました [#14585](https://github.com/tikv/tikv/issues/14585) @[tabokie](https://github.com/tabokie)
     - 自動コミットとPointGetレプリカ読み取りによって線形化可能性が破壊される可能性がある問題を修正しました [#14715](https://github.com/tikv/tikv/issues/14715) @[cfzjywxk](https://github.com/cfzjywxk)
