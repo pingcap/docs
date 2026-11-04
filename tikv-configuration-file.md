@@ -1533,7 +1533,7 @@ RocksDBに関連する設定項目
 
 ### `enable-multi-batch-write` <span class="version-mark">v6.2.0で追加</span> {#enable-multi-batch-write-new-in-v620}
 
-- RocksDBの書き込み最適化を有効にするかどうかを制御します。有効にすると、WriteBatchの内容をmemtableに同時に書き込め、書き込みレイテンシーが削減されます。
+- RocksDBの書き込み最適化を有効にするかどうかを制御します。有効にすると、WriteBatchの内容をmemtableに同時に書き込むことができ、書き込みレイテンシーが削減されます。
 - デフォルト値：なし。ただし、 `false`に明示的に設定するか、 `rocksdb.enable-pipelined-write`または`rocksdb.enable-unordered-write`が有効になっている場合を除き、デフォルトで有効になります。
 
 ## rocksdb.titan {#rocksdbtitan}
