@@ -29,7 +29,7 @@ summary: 間違ったインデックスの問題を解決する方法を学び�
 
 同値クエリの場合、原因は[カウントミニマムスケッチ](/statistics.md#count-min-sketch)である可能性があります。Count-Min Sketchが原因であるかどうかを確認し、適切な解決策を実行できます。
 
-上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザーヒントを使用してインデックスを強制的に選択できます（詳細は[使用インデックス](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を参照）。また、 [SQLプラン管理](/sql-plan-management.md)を使用してクエリの動作を非侵入的に変更することもできます。
+上記の原因が問題に当てはまらない場合は、 `USE_INDEX`または`use index`オプティマイザーヒントを使用してインデックスを強制的に選択できます（詳細は[USE_INDEX](/optimizer-hints.md#use_indext1_name-idx1_name--idx2_name-)を参照）。また、 [SQLプラン管理](/sql-plan-management.md)を使用してクエリの動作を非侵入的に変更することもできます。
 
 ### その他の状況 {#other-situations}
 
