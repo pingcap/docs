@@ -51,7 +51,7 @@ TiProxy には 4つのパネルグループがあります。これらのパネ�
 - CPS by Instance: 各 TiProxy インスタンスの 1秒あたりのコマンド数
 - CPS by Backend: 各 TiDB インスタンスの 1秒あたりのコマンド数
 - CPS by CMD: SQL コマンドの種類別にグループ化された 1秒あたりのコマンド数
-- Handshake Duration: クライアントと TiProxy 間のハンドシェイクフェーズの平均、P95、および P99 期間
+- Handshake Duration: クライアントと TiProxy 間のハンドシェイクフェーズの平均、P95、および P99 の所要時間
 
 ## Balance {#balance}
 
