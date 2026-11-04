@@ -65,7 +65,7 @@ ERROR 1105 (HY000): vector has 2 dimensions, does not fit VECTOR(3)
 
 ## 異なる次元のベクトルを保存する {#store-vectors-with-different-dimensions}
 
-`VECTOR`型の次元パラメータを省略すると、同じ列に異なる次元のベクトルを保存できます。
+`VECTOR`型の次元パラメーターを省略すると、同じ列に異なる次元のベクトルを保存できます。
 
 ```sql
 CREATE TABLE vector_table (

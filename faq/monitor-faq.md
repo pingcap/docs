@@ -16,7 +16,7 @@ TiDBの監視システムは、PrometheusとGrafanaで構成されています�
 
 ## Prometheusの監視データはデフォルトで15日ごとに削除されます。これを2か月に設定したり、監視データを手動で削除したりすることはできますか？ {#the-prometheus-monitoring-data-is-deleted-every-15-days-by-default-could-i-set-it-to-two-months-or-delete-the-monitoring-data-manually}
 
-はい。Prometheus が起動されているマシンで起動スクリプトを見つけ、起動パラメータを編集して Prometheus を再起動してください。
+はい。Prometheus が起動されているマシンで起動スクリプトを見つけ、起動パラメーターを編集して Prometheus を再起動してください。
 
 ```
 --storage.tsdb.retention="60d"

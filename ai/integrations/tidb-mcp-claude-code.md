@@ -33,9 +33,9 @@ TiDB Cloudコンソールを使用して、すぐに実行できるClaude Code�
 
 5. **Claude Code**タブを選択し、セットアップコマンドをコピーして、ターミナルで実行してください。
 
-## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
+## 手動設定（任意のTiDBクラスター） {#manual-configuration-any-tidb-cluster}
 
-手動で設定する場合は、以下のいずれかの方法を使用し、プレースホルダーを接続パラメータに置き換えてください。
+手動で設定する場合は、以下のいずれかの方法を使用し、プレースホルダーを接続パラメーターに置き換えてください。
 
 ### 方法1：CLIコマンド {#method-1-cli-command}
 

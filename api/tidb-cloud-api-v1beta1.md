@@ -5,13 +5,13 @@ summary: TiDB Cloudの v1beta1 API について学習します。
 
 # TiDB Cloud API v1beta1 の概要 {#tidb-cloud-api-v1beta1-overview}
 
-TiDB Cloud API v1beta1 は、 TiDB Cloud内の管理オブジェクトをプログラム的に管理するためのアクセスを提供する RESTful API です。この API を使用すると、クラスタレベルのリソース（クラスタやブランチなど）や組織レベルまたはプロジェクトレベルのリソース（課金、Data Service、 IAMなど）を自動的かつ効率的に管理できます。
+TiDB Cloud API v1beta1 は、 TiDB Cloud内の管理オブジェクトをプログラム的に管理するためのアクセスを提供する RESTful API です。この API を使用すると、クラスターレベルのリソース（クラスターやブランチなど）や組織レベルまたはプロジェクトレベルのリソース（課金、Data Service、 IAMなど）を自動的かつ効率的に管理できます。
 
 現在、次の v1beta1 API を使用してTiDB Cloud内のリソースを管理できます。
 
 - クラスターレベルのリソース:
-    - [TiDB Cloud Starter または Essential クラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless) : TiDB Cloud Starter または Essential クラスターのクラスター、ブランチ、データエクスポートタスク、およびデータインポートタスクを管理します。
-    - [TiDB Cloud Dedicatedクラスタ](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated) : TiDB Cloud Dedicated クラスターのクラスター、リージョン、プライベートエンドポイント接続、およびデータインポートタスクを管理します。
+    - [TiDB Cloud Starter または Essential クラスター](https://docs.pingcap.com/tidbcloud/api/v1beta1/serverless) : TiDB Cloud Starter または Essential クラスターのクラスター、ブランチ、データエクスポートタスク、およびデータインポートタスクを管理します。
+    - [TiDB Cloud Dedicatedクラスター](https://docs.pingcap.com/tidbcloud/api/v1beta1/dedicated) : TiDB Cloud Dedicated クラスターのクラスター、リージョン、プライベートエンドポイント接続、およびデータインポートタスクを管理します。
 - 組織またはプロジェクトレベルのリソース:
     - [請求](https://docs.pingcap.com/tidbcloud/api/v1beta1/billing) : TiDB Cloudクラスターの課金を管理します。
     - [Data Service](https://docs.pingcap.com/tidbcloud/api/v1beta1/dataservice) : TiDB CloudクラスターのData Service内のリソースを管理します。

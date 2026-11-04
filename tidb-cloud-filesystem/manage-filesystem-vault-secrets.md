@@ -27,7 +27,7 @@ TiDB Cloud Filesystem では、通常のファイルシステムファイルの�
 
 Vault シークレットには、複数の名前付きフィールドを含めることができます。たとえば、データベースシークレットには接続 URL とパスワードを含めることができます。
 
-まず各フィールド値をそれぞれ別のローカルファイルに書き込み、その後 `@` プレフィックスを付けてそれらのファイルを `create-secret` に渡します。各値は `read -r -s` で変数に読み込み、`printf '%s'` で書き込んでください。これにより、値がシェル履歴に残らず、末尾に改行も追加されません。`create-secret` と `replace-secret` は末尾が改行で終わる値も受け付けて成功を返しますが、後で [`run-with-secret`](#inject-a-secret-into-a-process) が `refusing to inject (EACCES)` としてその値の注入を拒否します。エディタや `echo` は末尾に改行を追加しますが、`printf '%s'` は追加しません。
+まず各フィールド値をそれぞれ別のローカルファイルに書き込み、その後 `@` プレフィックスを付けてそれらのファイルを `create-secret` に渡します。各値は `read -r -s` で変数に読み込み、`printf '%s'` で書き込んでください。これにより、値がシェル履歴に残らず、末尾に改行も追加されません。`create-secret` と `replace-secret` は末尾が改行で終わる値も受け付けて成功を返しますが、後で [`run-with-secret`](#inject-a-secret-into-a-process) が `refusing to inject (EACCES)` としてその値の注入を拒否します。エディターや `echo` は末尾に改行を追加しますが、`printf '%s'` は追加しません。
 
 ```shell
 umask 077
@@ -92,7 +92,7 @@ ti fs-vault replace-secret \
   --from-directory "$secret_dir"
 ```
 
-ディレクトリ内の各ファイルは、置換後のシークレット内の 1 つのフィールドになります。ディレクトリに含まれていない既存フィールドは保持されません。`replace-secret` は末尾が改行で終わる値も受け付けて成功を返しますが、失敗は後で `run-with-secret` がその値の注入を拒否したときに現れます。そのため、ここでも `echo` やエディタではなく、引き続き `printf '%s'` を使用してください。
+ディレクトリ内の各ファイルは、置換後のシークレット内の 1 つのフィールドになります。ディレクトリに含まれていない既存フィールドは保持されません。`replace-secret` は末尾が改行で終わる値も受け付けて成功を返しますが、失敗は後で `run-with-secret` がその値の注入を拒否したときに現れます。そのため、ここでも `echo` やエディターではなく、引き続き `printf '%s'` を使用してください。
 
 これらのローカルファイルはソース管理に含めず、不要になったら削除してください。詳細は [`replace-secret` リファレンス](/ai/ti/reference/ti-fs-vault-replace-secret.md) を参照してください。
 

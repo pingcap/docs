@@ -41,7 +41,7 @@ tidb_client = TiDBClient.connect(
 
 ### ステップ2：埋め込み関数を定義する {#step-2-define-the-embedding-function}
 
-OpenAI互換の埋め込みサービスと統合するには、 `EmbeddingFunction`クラスを初期化し、 `model_name`パラメータに`openai/`プレフィックスを設定します。
+OpenAI互換の埋め込みサービスと統合するには、 `EmbeddingFunction`クラスを初期化し、 `model_name`パラメーターに`openai/`プレフィックスを設定します。
 
 ```python
 from pytidb.embeddings import EmbeddingFunction
@@ -53,7 +53,7 @@ openai_like_embed = EmbeddingFunction(
 )
 ```
 
-パラメータは以下のとおりです。
+パラメーターは以下のとおりです。
 
 - `model_name` : 使用するモデルを指定します。 `openai/{model_name}`の形式を使用してください。
 - `api_base` : OpenAI互換の埋め込みAPIサービスのベースURL。

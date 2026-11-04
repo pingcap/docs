@@ -24,12 +24,12 @@ aliases: ['/ja/tidb/stable/vector-search-integrate-with-llamaindex/','/ja/tidb/d
 - [Python 3.8以降](https://www.python.org/downloads/)がインストールされていること。
 - [Jupyter Notebook](https://jupyter.org/install)がインストールされていること。
 - [Git](https://git-scm.com/downloads)がインストールされていること。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -122,21 +122,21 @@ tidb_connection_string = getpass.getpass("TiDB Connection String:")
 os.environ["OPENAI_API_KEY"] = getpass.getpass("OpenAI API Key:")
 ```
 
-macOSを例にとると、クラスタ接続文字列は次のようになります。
+macOSを例にとると、クラスター接続文字列は次のようになります。
 
 ```dotenv
 TIDB_DATABASE_URL="mysql+pymysql://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>"
 # For example: TIDB_DATABASE_URL="mysql+pymysql://root@127.0.0.1:4000/test"
 ```
 
-TiDBクラスタに合わせて、接続文字列のパラメータを変更する必要があります。ローカルマシンでTiDBを実行している場合、 `<HOST>`はデフォルトで`127.0.0.1`になります。初期値の`<PASSWORD>`は空なので、クラスタを初めて起動する場合は、このフィールドを省略できます。
+TiDBクラスターに合わせて、接続文字列のパラメーターを変更する必要があります。ローカルマシンでTiDBを実行している場合、 `<HOST>`はデフォルトで`127.0.0.1`になります。初期値の`<PASSWORD>`は空なので、クラスターを初めて起動する場合は、このフィールドを省略できます。
 
-各パラメータの説明は以下のとおりです。
+各パラメーターの説明は以下のとおりです。
 
 - `<USERNAME>` : TiDBに接続するためのユーザー名。
 - `<PASSWORD>` : TiDBに接続するためのパスワード。
-- `<HOST>` : TiDBクラスタのホスト。
-- `<PORT>` : TiDB クラスタのポート。
+- `<HOST>` : TiDBクラスターのホスト。
+- `<PORT>` : TiDB クラスターのポート。
 - `<DATABASE>` : 接続するデータベースの名前。
 
 </div>

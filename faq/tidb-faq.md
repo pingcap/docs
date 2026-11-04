@@ -25,7 +25,7 @@ summary: TiDB に関するよくある質問 (FAQ) について説明します�
 
 ### TiDB のアーキテクチャとは何ですか? {#what-is-tidb-s-architecture}
 
-TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、TiKVサーバーの3つのコンポーネントで構成されています。詳細については、[TiDBアーキテクチャ](/tidb-architecture.md)、[TiDBストレージ](/tidb-storage.md)、[TiDBスケジューリング](/tidb-scheduling.md)、[TiDBコンピューティング](/tidb-computing.md)を参照してください。
+TiDBクラスターは、TiDBサーバー、PD（Placement Driver）サーバー、TiKVサーバーの3つのコンポーネントで構成されています。詳細については、[TiDBアーキテクチャ](/tidb-architecture.md)、[TiDBストレージ](/tidb-storage.md)、[TiDBスケジューリング](/tidb-scheduling.md)、[TiDBコンピューティング](/tidb-computing.md)を参照してください。
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
@@ -33,7 +33,7 @@ TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、
 
 ### TiDB、TiKV、PD (Placement Driver) のそれぞれの責任は何ですか? {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 
-- TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリプランの指定、エグゼキュータの生成を担当します。
+- TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリプランの指定、エグゼキューターの生成を担当します。
 - TiKVは分散型のキーバリューストレージエンジンとして動作し、実データの保存に使用されます。つまり、TiKVはTiDBのストレージエンジンです。
 - PD は TiDB のクラスターマネージャーとして機能し、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散の決定を行います。
 
@@ -49,7 +49,7 @@ TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、
 
 はい。TiDB は、単一の場所に少数のノードがある場合でも、多数の[複数のデータセンターにまたがるノード](/multi-data-centers-in-one-city-deployment.md)がある場合でも、クラスター全体にトランザクションを分散します。
 
-GoogleのPercolatorに着想を得たTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルをベースに、実用的な最適化が施されています。このモデルは、タイムスタンプアロケータを利用して各トランザクションに単調増加するタイムスタンプを割り当てることで、競合を検出します。[PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDBクラスタ内でタイムスタンプアロケータとして機能します。
+GoogleのPercolatorに着想を得たTiDBのトランザクションモデルは、主に2フェーズコミットプロトコルをベースに、実用的な最適化が施されています。このモデルは、タイムスタンプアロケーターを利用して各トランザクションに単調増加するタイムスタンプを割り当てることで、競合を検出します。[PD](/tidb-architecture.md#placement-driver-pd-server)は、TiDBクラスター内でタイムスタンプアロケーターとして機能します。
 
 ### TiDB を操作するためにどのプログラミング言語を使用できますか? {#what-programming-language-can-i-use-to-work-with-tidb}
 
@@ -99,7 +99,7 @@ Usage of ./bin/tidb-server:
 
 ### TiDB は XA をサポートしていますか? {#does-tidb-support-xa}
 
-いいえ。TiDBのJDBCドライバはMySQL Connector/Jです。Atomikosを使用する場合は、データソースを`type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`に設定してください。TiDBはMySQL JDBC XADataSourceとの接続をサポートしていません。MySQL JDBC XADataSourceはMySQLでのみ機能します（例：DMLを使用して`redo`ログを変更する場合）。
+いいえ。TiDBのJDBCドライバーはMySQL Connector/Jです。Atomikosを使用する場合は、データソースを`type="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource"`に設定してください。TiDBはMySQL JDBC XADataSourceとの接続をサポートしていません。MySQL JDBC XADataSourceはMySQLでのみ機能します（例：DMLを使用して`redo`ログを変更する場合）。
 
 Atomikosの2つのデータソースを設定したら、JDBCドライブをXAに設定します。AtomikosがTMおよびRM（DB）を操作する際、AtomikosはXAを含むコマンドをJDBCレイヤーに送信します。MySQLを例に挙げると、JDBCレイヤーでXAが有効になっている場合、JDBCはDMLを使用して`redo`ログを変更するなど、一連のXAロジック操作をInnoDBに送信します。これは2相コミットの動作です。現在のTiDBバージョンは、上位アプリケーションレイヤーのJTA/XAをサポートしておらず、Atomikosから送信されたXA操作を解析しません。
 

@@ -1,6 +1,6 @@
 ---
 title: TiDB Cloud Filesystem をマウントする
-summary: macOS、Linux、またはコンテナ内で TiDB Cloud Filesystem を安全にマウント、使用、drain、アンマウントする方法を学びます。
+summary: macOS、Linux、またはコンテナー内で TiDB Cloud Filesystem を安全にマウント、使用、drain、アンマウントする方法を学びます。
 ---
 
 # TiDB Cloud Filesystem をマウントする
@@ -37,9 +37,9 @@ CLI はバックグラウンドのマウントプロセスを開始し、drain �
 
 サブツリーを公開するには `--remote-path` を使用し、書き込みを防ぐには `--read-only` を使用します。レイヤーまたは checkpoint をマウントするには、FUSE ドライバーを選択し、[`mount-file-system` リファレンス](/ai/ti/reference/ti-fs-mount-file-system.md)で説明されている適切な layer オプションを渡します。
 
-## コンテナ内でマウントする {#mount-in-a-container}
+## コンテナー内でマウントする {#mount-in-a-container}
 
-イメージ内に FUSE3 をインストールするだけでは不十分です。ホストが `/dev/fuse` を公開し、コンテナがマウントを実行できるよう許可されている必要があります。Docker では、次と同等の設定を指定します。
+イメージ内に FUSE3 をインストールするだけでは不十分です。ホストが `/dev/fuse` を公開し、コンテナーがマウントを実行できるよう許可されている必要があります。Docker では、次と同等の設定を指定します。
 
 ```shell
 docker run --rm -it \
@@ -72,7 +72,7 @@ services:
 
 > **Warning:**
 >
-> `SYS_ADMIN` と制限のない AppArmor プロファイルは、コンテナ分離を弱めます。これらは、専用で信頼できるコンテナに対してのみ使用してください。FUSE アクセスを利用できない場合は、マウントせずに `ti fs` のデータコマンドを使用してください。
+> `SYS_ADMIN` と制限のない AppArmor プロファイルは、コンテナー分離を弱めます。これらは、専用で信頼できるコンテナーに対してのみ使用してください。FUSE アクセスを利用できない場合は、マウントせずに `ti fs` のデータコマンドを使用してください。
 
 ## Ubuntu 26.04 のマウントパス {#ubuntu-2604-mount-paths}
 

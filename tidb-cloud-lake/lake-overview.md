@@ -20,7 +20,7 @@ TiDB Cloud Lake は、ANSI SQL、半構造化データ処理、ベクトル検�
 
 | 機能 | 説明 | 詳細 |
 |---|---|---|
-| **Unified Engine** | 分析、ベクトル、検索、地理空間は、1 つのオプティマイザとランタイムを共有します。 | [TiDB Cloud Lake アーキテクチャ](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md) |
+| **Unified Engine** | 分析、ベクトル、検索、地理空間は、1 つのオプティマイザーとランタイムを共有します。 | [TiDB Cloud Lake アーキテクチャ](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md) |
 | **Unified Data** | 構造化データ、半構造化データ、非構造化データ、ベクトルデータは、同じオブジェクトストレージを共有します。 | [TiDB Cloud Lake アーキテクチャ](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md) |
 | **Analytics Native** | ANSI SQL、ウィンドウ処理、増分集計、ストリーミング BI を同じプラットフォーム上で実行できます。 | [Worksheets](/tidb-cloud-lake/guides/worksheet.md) |
 | **Vector Native** | 埋め込み、ベクトルインデックス、セマンティック検索はすべて SQL で実行できます。 | [ベクトル検索](/tidb-cloud-lake/guides/vector-search-guide.md) |
@@ -30,6 +30,6 @@ TiDB Cloud Lake は、ANSI SQL、半構造化データ処理、ベクトル検�
 ## はじめに {#get-started}
 
 1. [**クイックスタート**](/tidb-cloud-lake/lake-quick-start.md): アカウントを作成し、最初のワークフローを実行します。
-2. [**TiDB Cloud Lake への接続**](/tidb-cloud-lake/guides/connection-overview.md): ワークフローに適したクライアントまたはドライバを選択します。
+2. [**TiDB Cloud Lake への接続**](/tidb-cloud-lake/guides/connection-overview.md): ワークフローに適したクライアントまたはドライバーを選択します。
 3. [**アーキテクチャを学ぶ**](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md): メタデータ、コンピュート、ストレージの各レイヤーを理解します。
 4. [**製品機能を確認する**](/tidb-cloud-lake/guides/vector-search-guide.md): 分析、ベクトル、検索、地理空間の機能から使い始めます。

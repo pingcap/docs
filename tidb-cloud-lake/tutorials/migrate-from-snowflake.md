@@ -56,10 +56,10 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
     }
     ```
 
-    このポリシーは、`lake-doc` という名前の S3 バケットと、そのバケット内の `snowflake` フォルダに対して適用されます。
+    このポリシーは、`lake-doc` という名前の S3 バケットと、そのバケット内の `snowflake` フォルダーに対して適用されます。
 
-    - `s3:PutObject`, `s3:GetObject`, `s3:GetObjectVersion`, `s3:DeleteObject`, `s3:DeleteObjectVersion`: snowflake フォルダ内のオブジェクト（例: `s3://lake-doc/snowflake/`）に対する操作を許可します。このフォルダ内でオブジェクトのアップロード、読み取り、削除ができます。
-    - `s3:ListBucket`, `s3:GetBucketLocation`: `lake-doc` バケットの内容一覧の取得と、そのロケーションの取得を許可します。`Condition` 要素により、一覧取得は `snowflake` フォルダ内のオブジェクトに制限されます。
+    - `s3:PutObject`, `s3:GetObject`, `s3:GetObjectVersion`, `s3:DeleteObject`, `s3:DeleteObjectVersion`: snowflake フォルダー内のオブジェクト（例: `s3://lake-doc/snowflake/`）に対する操作を許可します。このフォルダー内でオブジェクトのアップロード、読み取り、削除ができます。
+    - `s3:ListBucket`, `s3:GetBucketLocation`: `lake-doc` バケットの内容一覧の取得と、そのロケーションの取得を許可します。`Condition` 要素により、一覧取得は `snowflake` フォルダー内のオブジェクトに制限されます。
 
 2. **IAM** > **Roles** で `lake-doc-role` という名前のロールを作成し、先ほど作成したポリシーをアタッチします。
     - ロール作成の最初のステップで、**Trusted entity type** に **AWS account**、**An AWS account** に **This account (xxxxx)** を選択します。
@@ -86,7 +86,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
     DESCRIBE INTEGRATION my_s3_integration;
     ```
 
-5. AWS Management Console に戻り、ロール `lake-doc-role` を開いて **Trust relationships** > **Edit trust policy** に移動します。次のコードをエディタにコピーします。
+5. AWS Management Console に戻り、ロール `lake-doc-role` を開いて **Trust relationships** > **Edit trust policy** に移動します。次のコードをエディターにコピーします。
 
     ```json
     {
@@ -116,7 +116,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
         FILE_FORMAT = (TYPE = 'PARQUET');
     ```
 
-    `URL = 's3://lake-doc/snowflake/'` は、データを stage する S3 バケットとフォルダを指定します。パス `s3://lake-doc/snowflake/` は、S3 バケット `lake-doc` と、そのバケット内の `snowflake` フォルダに対応します。
+    `URL = 's3://lake-doc/snowflake/'` は、データを stage する S3 バケットとフォルダーを指定します。パス `s3://lake-doc/snowflake/` は、S3 バケット `lake-doc` と、そのバケット内の `snowflake` フォルダーに対応します。
 
 2. エクスポートするデータを準備します。
 
@@ -144,7 +144,7 @@ summary: データを Amazon S3 にエクスポートし、それを TiDB Cloud 
     FILE_FORMAT = (TYPE = 'PARQUET') HEADER=true;
     ```
 
-    `lake-doc` バケットを開くと、`snowflake` フォルダ内に Parquet ファイルが表示されます。
+    `lake-doc` バケットを開くと、`snowflake` フォルダー内に Parquet ファイルが表示されます。
 
 ## ステップ 3: {{{ .lake }}} へのデータのロード (load) {#step-3-loading-data-into--lake-}
 

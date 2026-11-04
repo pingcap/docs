@@ -25,12 +25,12 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/guides/vector-sea
 この文書の手順を完了するには、以下が必要です。
 
 - [MySQLコマンドラインクライアント](https://dev.mysql.com/doc/refman/8.4/en/mysql.html)(MySQL CLI)がマシンにインストールされていること。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## さあ始めましょう {#get-started}
 
@@ -58,7 +58,7 @@ TiDB は、MySQL 構文を拡張して[ベクトル検索](/ai/guides/vector-sea
 </div>
 <div label="TiDB Self-Managed" value="tidb">
 
-TiDB Self-Managedクラスタが起動したら、ターミナルでクラスタ接続コマンドを実行してください。
+TiDB Self-Managedクラスターが起動したら、ターミナルでクラスター接続コマンドを実行してください。
 
 以下はmacOSにおける接続コマンドの例です。
 

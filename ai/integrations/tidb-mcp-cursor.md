@@ -1,11 +1,11 @@
 ---
 title: Get started with Cursor and TiDB MCP Server
-summary: このガイドでは、CursorエディタでTiDB MCPサーバーを設定する方法を説明します。
+summary: このガイドでは、CursorエディターでTiDB MCPサーバーを設定する方法を説明します。
 ---
 
 # CursorとTiDB MCPサーバーを使い始める {#get-started-with-cursor-and-tidb-mcp-server}
 
-このガイドでは、CursorエディタでTiDB MCPサーバーを設定する方法を説明します。
+このガイドでは、CursorエディターでTiDB MCPサーバーを設定する方法を説明します。
 
 ワンクリックでインストールするには、次のボタンをクリックしてください。
 
@@ -37,9 +37,9 @@ TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンス
 
 5. **Cursor**タブを選択し、 **Add to Cursor**をクリックしてから、Cursorで**Install**をクリックします。
 
-## 手動設定（任意のTiDBクラスタ） {#manual-configuration-any-tidb-cluster}
+## 手動設定（任意のTiDBクラスター） {#manual-configuration-any-tidb-cluster}
 
-手動で設定する場合は、 `.cursor/mcp.json`ファイルに次の設定を追加し、プレースホルダーを接続パラメータに置き換えてください。
+手動で設定する場合は、 `.cursor/mcp.json`ファイルに次の設定を追加し、プレースホルダーを接続パラメーターに置き換えてください。
 
 ```json
 {
@@ -64,6 +64,6 @@ TiDB Cloudコンソールを使用して、 TiDB Cloud Starterインスタンス
 
 TiDB MCPサーバーのインストールで問題が発生した場合は、CursorのMCPログを確認してください。
 
-1. エディタ上部のメインメニューで、 **ビュー** > **出力**をクリックします。
+1. エディター上部のメインメニューで、 **ビュー** > **出力**をクリックします。
 2. **出力**パネルのドロップダウンメニューから**MCP**を選択してください。
 3. `[error] Could not start MCP server tidb-mcp-server: Error: spawn uvx ENOENT`のようなエラーが表示される場合は、 `uvx`コマンドがシステム環境変数`$PATH`に存在しない可能性があります。macOS ユーザーの場合は、 `brew install uv`を実行して`uvx`をインストールできます。

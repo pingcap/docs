@@ -115,7 +115,7 @@ Cargo を使用して LakeSQL をインストールするには、`cargo-binstal
 
 > **Note:**
 >
-> Cargo でインストールする前に、完全な Rust ツールチェーンと `cargo` コマンドがコンピュータにインストールされていることを確認してください。インストールされていない場合は、[https://rustup.rs/](https://rustup.rs/) のインストールガイドに従ってください。
+> Cargo でインストールする前に、完全な Rust ツールチェーンと `cargo` コマンドがコンピューターにインストールされていることを確認してください。インストールされていない場合は、[https://rustup.rs/](https://rustup.rs/) のインストールガイドに従ってください。
 
 **cargo-binstall を使用する**
 
@@ -127,7 +127,7 @@ cargo binstall lakesql
 
 **ソースからビルドする**
 
-ソースからビルドする場合、一部の依存関係では C/C++ コードのコンパイルが必要になることがあります。GCC/G++ または Clang ツールチェーンがコンピュータにインストールされていることを確認してください。
+ソースからビルドする場合、一部の依存関係では C/C++ コードのコンパイルが必要になることがあります。GCC/G++ または Clang ツールチェーンがコンピューターにインストールされていることを確認してください。
 
 ```bash
 cargo install lakesql
@@ -145,13 +145,13 @@ LakeSQL を使用すると、両方の {{{ .lake }}} インスタンスに接続
 
 DSN (Data Source Name) は、単一の URI 形式の文字列を使用して、LakeSQL で {{{ .lake }}} への接続を設定および管理するための、シンプルでありながら強力な方法です。この方法では、認証情報や接続設定を環境に直接埋め込むことができるため、接続プロセスを簡素化できます。
 
-#### DSN の形式とパラメータ {#dsn-format-and-parameters}
+#### DSN の形式とパラメーター {#dsn-format-and-parameters}
 
 ```bash title='DSN Format'
 lake[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&arg1=value1]
 ```
 
-| 一般的な DSN パラメータ | 説明                                 |
+| 一般的な DSN パラメーター | 説明                                 |
 |-----------------------|--------------------------------------|
 | `tenant`              | Tenant ID。{{{ .lake }}} のみ。      |
 | `warehouse`           | Warehouse 名。{{{ .lake }}} のみ。   |
@@ -159,15 +159,15 @@ lake[+flight]://user[:password]@host[:port]/[database][?sslmode=disable][&arg1=v
 | `tls_ca_file`         | カスタム root CA 証明書のパス。      |
 | `connect_timeout`     | 接続タイムアウト (秒)。              |
 
-| RestAPI クライアントパラメータ | 説明                                                                                                                   |
+| RestAPI クライアントパラメーター | 説明                                                                                                                   |
 |-----------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | `wait_time_secs`            | ページのリクエスト待機時間。デフォルトは `1`。                                                                                   |
-| `max_rows_in_buffer`        | ページバッファ内の最大行数。                                                                                                 |
+| `max_rows_in_buffer`        | ページバッファー内の最大行数。                                                                                                 |
 | `max_rows_per_page`         | 1 ページあたりのレスポンスの最大行数。                                                                                      |
 | `page_request_timeout_secs` | 1 回のページリクエストのタイムアウト。デフォルトは `30`。                                                                           |
 | `presign`                   | データロード用の presign を有効にします。オプション: `auto`, `detect`, `on`, `off`。デフォルトは `auto` ({{{ .lake }}} でのみ有効)。 |
 
-| FlightSQL クライアントパラメータ | 説明                                                          |
+| FlightSQL クライアントパラメーター | 説明                                                          |
 |-----------------------------|----------------------------------------------------------------------|
 | `query_timeout`             | クエリタイムアウト (秒)。                                            |
 | `tcp_nodelay`               | デフォルトは `true`。                                                  |

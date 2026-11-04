@@ -64,13 +64,13 @@ db = TiDBClient.connect(
 )
 ```
 
-これらの接続パラメータは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
+これらの接続パラメーターは、次のように[TiDB Cloudコンソール](https://tidbcloud.com)から取得できます。
 
 1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
 
-2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
+2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメーターが表示されます。
 
-    例えば、接続パラメータが以下のように表示される場合：
+    例えば、接続パラメーターが以下のように表示される場合：
 
     ```text
     HOST:     gateway01.us-east-1.prod.shared.aws.tidbcloud.com
@@ -93,7 +93,7 @@ db = TiDBClient.connect(
     )
     ```
 
-    上記の例はあくまでも説明のためのものです。パラメータにはご自身の値を入力し、安全に保管してください。
+    上記の例はあくまでも説明のためのものです。パラメーターにはご自身の値を入力し、安全に保管してください。
 
 ### ステップ3．表とフルテキストインデックスを作成する {#step-3-create-a-table-and-a-full-text-index}
 
