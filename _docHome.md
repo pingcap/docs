@@ -34,7 +34,7 @@ TiDB Cloudを簡単に使い始めるためのガイド。
 
 <DocHomeCard href="/ai/vector-search-overview" label="Vector Search (Beta)" icon="cloud-vector-mauve">
 
-TiDB Cloud Starter の Vector Search のネイティブ サポートを調べて、AI アプリケーションを構築します。
+{{{ .starter }}} の Vector Search のネイティブ サポートを調べて、AI アプリケーションを構築します。
 
 </DocHomeCard>
 
