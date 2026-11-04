@@ -48,7 +48,9 @@ level = "info"
 file = "tidb-lightning.log"
 
 [tikv-importer]
-# "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster cannot provide any service.
+# "local": Default backend. The local backend is recommended to import large volumes of data (1 TiB or more). During the import, the target TiDB cluster can provide only limited service. If your TiDB Lightning version is v6.2.0 or later and your TiDB version is v6.1.0 or later, TiDB Lightning pauses scheduling only for the target table's Regions by default. The import might still affect cluster performance.
+# During import, do not perform DDL or DML operations on the target table.
+# Avoid reading from the target table because the results might be inconsistent.
 # "tidb": The "tidb" backend is recommended to import data less than 1 TiB. During the import, the target TiDB cluster can provide service normally.
 # For more information on import mode, refer to <https://docs.pingcap.com/tidb/stable/tidb-lightning-overview#tidb-lightning-architecture>
 backend = "local"
@@ -84,10 +86,10 @@ trim-last-separator = false
 [tidb]
 # The target cluster.
 host = "${host}"            # e.g.: 172.16.32.1
-port = "${port}"            # e.g.: 4000
+port = ${port}              # e.g.: 4000
 user = "${user_name}"     # e.g.: "root"
 password = "${password}"  # e.g.: "rootroot"
-status-port = "${status-port}" # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
+status-port = ${status-port}  # During the import, TiDB Lightning needs to obtain the table schema information from the TiDB status port. e.g.: 10080
 pd-addr = "${ip}:${port}" # The address of the PD cluster, e.g.: 172.16.31.3:2379. TiDB Lightning obtains some information from PD. When backend = "local", you must specify status-port and pd-addr correctly. Otherwise, the import will be abnormal.
 ```
 
@@ -115,6 +117,9 @@ If your CSV file meets the above requirements, you can speed up the import by en
 ```toml
 [mydumper]
 strict-format = true
+
+[mydumper.csv]
+terminator = "\n" # Set it to "\n", "\r", or "\r\n", depending on the actual line terminator in your files.
 ```
 
 ## Step 5. Import the data
