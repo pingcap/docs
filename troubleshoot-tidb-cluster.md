@@ -3,7 +3,7 @@ title: TiDB Cluster Troubleshooting Guide
 summary: TiDB を使用する際に問題を診断して解決する方法を学びます。
 ---
 
-# TiDBクラスターシューティングガイド {#tidb-cluster-troubleshooting-guide}
+# TiDBクラスタートラブルシューティングガイド {#tidb-cluster-troubleshooting-guide}
 
 このガイドは、TiDBの使用中に発生する基本的な問題の診断と解決に役立ちます。問題が解決しない場合は、以下の情報を収集して、 [バグを報告する](/support.md)ことができます。
 
