@@ -1,6 +1,6 @@
 ---
 title: TiDB 4.0.16 Release Notes
-summary: TiDB 4.0.16は2021年12月17日にリリースされました。このリリースには、TiKVとツールの互換性変更、TiDB、TiKV、ツールの改善、TiDB、TiKV、PD、 TiFlash、TiDB Binlog、TiCDCのバグ修正が含まれています。これらのバグ修正により、クエリパニック、誤った結果、パニック、メモリリークなどのさまざまな問題が修正されています。また、TiCDCレプリケーションの中断、コンテナ環境におけるOOM、メモリリークの問題も修正されています。
+summary: TiDB 4.0.16は2021年12月17日にリリースされました。このリリースには、TiKVとツールの互換性変更、TiDB、TiKV、ツールの改善、TiDB、TiKV、PD、 TiFlash、TiDB Binlog、TiCDCのバグ修正が含まれています。これらのバグ修正により、クエリパニック、誤った結果、パニック、メモリリークなどのさまざまな問題が修正されています。また、TiCDCレプリケーションの中断、コンテナー環境におけるOOM、メモリリークの問題も修正されています。
 ---
 
 # TiDB 4.0.16 リリースノート {#tidb-4-0-16-release-notes}
@@ -48,7 +48,7 @@ TiDBバージョン: 4.0.16
 - TiDB
 
     - コスト見積もりのために範囲をポイントに変換するときに統計モジュールのオーバーフローによって発生するクエリpanicを修正しました [#23625](https://github.com/pingcap/tidb/issues/23625)
-    - `ENUM`型データを制御関数のパラメータとして使用した場合に、制御関数の誤った結果（ `IF`や`CASE WHEN`など）が返される問題を修正しました[#23114](https://github.com/pingcap/tidb/issues/23114)
+    - `ENUM`型データを制御関数のパラメーターとして使用した場合に、制御関数の誤った結果（ `IF`や`CASE WHEN`など）が返される問題を修正しました[#23114](https://github.com/pingcap/tidb/issues/23114)
     - `GREATEST`関数が`tidb_enable_vectorized_expression` ( `on`または`off` ) の値が異なるために矛盾した結果を返す問題を修正しました。 [#29434](https://github.com/pingcap/tidb/issues/29434)
     - 一部のケースでプレフィックスインデックスにインデックス結合を適用するとpanicする問題を修正[#24547](https://github.com/pingcap/tidb/issues/24547)
     - プランナーが場合によっては`join`の無効なプランをキャッシュする可能性がある問題を修正 [#28087](https://github.com/pingcap/tidb/issues/28087)
@@ -82,7 +82,7 @@ TiDBバージョン: 4.0.16
 
     - TiKVノードが削除された後に発生するpanic問題を修正[#4344](https://github.com/tikv/pd/issues/4344)
     - スタックしたリージョン同期機能によって発生するリーダー選出の遅延を修正 [#3936](https://github.com/tikv/pd/issues/3936)
-    - 退去リーダースケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
+    - 退去リーダースケジューラーが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
 
 - TiFlash
 
@@ -97,7 +97,7 @@ TiDBバージョン: 4.0.16
     - TiCDC
 
         - チェンジフィードチェックポイントラグの負の値エラーを修正 [#3010](https://github.com/pingcap/tiflow/issues/3010)
-        - コンテナ環境のOOMを修正[#1798](https://github.com/pingcap/tiflow/issues/1798)
+        - コンテナー環境のOOMを修正[#1798](https://github.com/pingcap/tiflow/issues/1798)
         - 複数の TiKV がクラッシュした場合や強制再起動中に TiCDC レプリケーションが中断される問題を修正[#3288](https://github.com/pingcap/tiflow/issues/3288)
         - DDL 処理後のメモリリークの問題を修正 [#3174](https://github.com/pingcap/tiflow/issues/3174)
         - ErrGCTTLExceeded エラーが発生したときに changefeed が十分に速く失敗しない問題を修正しました[#3111](https://github.com/pingcap/tiflow/issues/3111)
@@ -110,4 +110,4 @@ TiDBバージョン: 4.0.16
         - 新しい変更フィードを作成するときに発生するメモリリークの問題を修正しました [#2389](https://github.com/pingcap/tiflow/issues/2389)
         - シンクコンポーネントが resolved ts を早く進めることによりデータの不整合が発生する可能性がある問題を修正しました[#3503](https://github.com/pingcap/tiflow/issues/3503)
         - changefeed の初期化に時間がかかりすぎて TiKV が GC safepoint を進めた場合に、changefeed が失敗する可能性がある問題を修正しました[#2470](https://github.com/pingcap/tiflow/issues/2470)
-        - changefeed update コマンドがグローバルコマンドラインパラメータを認識しない問題を修正[#2803](https://github.com/pingcap/tiflow/issues/2803)
+        - changefeed update コマンドがグローバルコマンドラインパラメーターを認識しない問題を修正[#2803](https://github.com/pingcap/tiflow/issues/2803)

@@ -28,7 +28,7 @@ TiDB バージョン: 4.0.9
 - TiDB Dashboard
 
     - **SQL Statements**ページのすべてのフィールドによる表示と並べ替えをサポート [#749](https://github.com/pingcap/tidb-dashboard/pull/749)
-    - トポロジグラフのズームとパンをサポート[#772](https://github.com/pingcap/tidb-dashboard/pull/772)
+    - トポロジーグラフのズームとパンをサポート[#772](https://github.com/pingcap/tidb-dashboard/pull/772)
     - **SQL Statements**と**Slow Queries**ページでディスク使用量情報を表示する機能をサポート[#777](https://github.com/pingcap/tidb-dashboard/pull/777)
     - **SQL Statements**と**Slow Queries**ページでリストデータのエクスポートをサポート[#778](https://github.com/pingcap/tidb-dashboard/pull/778)
     - Prometheusアドレスのカスタマイズをサポート [#808](https://github.com/pingcap/tidb-dashboard/pull/808)
@@ -82,7 +82,7 @@ TiDB バージョン: 4.0.9
     - レプリカ読み取りのレイテンシーを削減
     - TiFlashのエラーメッセージを改善する
     - データ量が大きい場合、キャッシュデータのメモリ使用量を制限する
-    - 処理されているコプロセッサタスクの数を監視するメトリックを追加します。
+    - 処理されているコプロセッサータスクの数を監視するメトリックを追加します。
 
 - ツール
 
@@ -105,8 +105,8 @@ TiDB バージョン: 4.0.9
         - 失敗したチャンクデータのダンプを再試行します [#182](https://github.com/pingcap/dumpling/pull/182)
         - `-F`と`-r`引数を同時に設定することをサポート[#177](https://github.com/pingcap/dumpling/pull/177)
         - `--filter`でシステムデータベースをデフォルトで除外[#194](https://github.com/pingcap/dumpling/pull/194)
-        - `--transactional-consistency`パラメータをサポートし、再試行中に MySQL 接続を再構築することをサポートします。 [#199](https://github.com/pingcap/dumpling/pull/199)
-        - Dumplingで使用される圧縮アルゴリズムを指定するために、 `-c,--compress`パラメータの使用をサポートします。空の文字列は圧縮なしを意味します[#202](https://github.com/pingcap/dumpling/pull/202)
+        - `--transactional-consistency`パラメーターをサポートし、再試行中に MySQL 接続を再構築することをサポートします。 [#199](https://github.com/pingcap/dumpling/pull/199)
+        - Dumplingで使用される圧縮アルゴリズムを指定するために、 `-c,--compress`パラメーターの使用をサポートします。空の文字列は圧縮なしを意味します[#202](https://github.com/pingcap/dumpling/pull/202)
 
     - TiDB Lightning
 
@@ -183,7 +183,7 @@ TiDB バージョン: 4.0.9
 - TiDB Dashboard
 
     - 中国語の時間表示の問題を修正[#755](https://github.com/pingcap/tidb-dashboard/pull/755)
-    - ブラウザ互換性通知が機能しないバグを修正[#776](https://github.com/pingcap/tidb-dashboard/pull/776)
+    - ブラウザー互換性通知が機能しないバグを修正[#776](https://github.com/pingcap/tidb-dashboard/pull/776)
     - 一部のシナリオでトランザクション`start_ts`が誤って表示される問題を修正 [#793](https://github.com/pingcap/tidb-dashboard/pull/793)
     - 一部のSQLテキストのフォーマットが正しくない問題を修正[#805](https://github.com/pingcap/tidb-dashboard/pull/805)
 

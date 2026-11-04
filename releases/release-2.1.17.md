@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.17 Release Notes
-summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGIONS` の `WHERE` 句、TiKV および PD の `config-check` 機能、pd-ctl の `remove-tombstone` コマンド、 Reparoの `worker-count` および `txn-batch` 設定項目が含まれます。PD のスケジュールプロセスと TiKV の起動プロセスが改善されました。TiDB スロークエリログと設定ファイルの動作が変更されました。SQL オプティマイザ、SQL 実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、および TiDB Ansible の修正と最適化が行われました。"
+summary: "TiDB 2.1.17 リリースノート: 新機能には、SHOW TABLE REGIONS` の `WHERE` 句、TiKV および PD の `config-check` 機能、pd-ctl の `remove-tombstone` コマンド、 Reparoの `worker-count` および `txn-batch` 設定項目が含まれます。PD のスケジュールプロセスと TiKV の起動プロセスが改善されました。TiDB スロークエリログと設定ファイルの動作が変更されました。SQL オプティマイザー、SQL 実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、および TiDB Ansible の修正と最適化が行われました。"
 ---
 
 # TiDB 2.1.17 リリースノート {#tidb-2-1-17-release-notes}
@@ -24,11 +24,11 @@ TiDB Ansible バージョン: 2.1.17
 - 動作の変更
     - TiDB スロークエリログの`start ts`を最後の再試行時刻から最初の実行時刻に変更
     - TiDB スロークエリログの`Index_ids`フィールドを`Index_names`フィールドに置き換えて、スロークエリログの使いやすさを向上させます。
-    - TiDB の設定ファイルに`split-region-max-num`パラメータを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。デフォルト構成では、1,000 から 10,000 に増加されます。
+    - TiDB の設定ファイルに`split-region-max-num`パラメーターを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。デフォルト構成では、1,000 から 10,000 に増加されます。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - `EvalSubquery`ビルド`Executor` 中にエラーが発生したときにエラーメッセージが正しく返されない問題を修正 [#11811](https://github.com/pingcap/tidb/pull/11811)
     - インデックスルックアップ結合において、外部テーブルの行数が単一バッチの行数より多い場合にクエリ結果が正しくない可能性がある問題を修正しました。インデックスルックアップ結合の機能範囲を拡張しました。`UnionScan`は `IndexJoin` のサブノードとして使用できます。 [#11843](https://github.com/pingcap/tidb/pull/11843)
     - 統計フィードバック処理中に無効なキーが発生する可能性がある状況に備えて、 `SHOW STAT_BUCKETS`構文に無効なキー（ `invalid encoded key flag 252`など）の表示を追加します[#12098](https://github.com/pingcap/tidb/pull/12098)
@@ -52,9 +52,9 @@ TiDB Ansible バージョン: 2.1.17
 - DDL
     - `tikvSnapshot`にリバーススキャンインターフェースを追加し、DDL履歴ジョブを効率的にクエリできるようにします。このインターフェースを使用することで、 `ADMIN SHOW DDL JOBS`の実行時間が大幅に短縮されます[#11789](https://github.com/pingcap/tidb/pull/11789)
     - `CREATE TABLE ... PRE_SPLIT_REGION`構文の改善: `PRE_SPLIT_REGION = N` の場合、事前分割されるリージョンの数を 2^(N-1) から 2^N に変更します。 [#11797](https://github.com/pingcap/tidb/pull/11797/files)
-    - オンラインワークロードに大きな影響を与えないように、 `Add Index`操作のバックグラウンドワーカースレッドのデフォルトパラメータ値を減らします[#11875](https://github.com/pingcap/tidb/pull/11875)
+    - オンラインワークロードに大きな影響を与えないように、 `Add Index`操作のバックグラウンドワーカースレッドのデフォルトパラメーター値を減らします[#11875](https://github.com/pingcap/tidb/pull/11875)
     - `SPLIT TABLE`構文の動作を改善します。`SPLIT TABLE ... REGIONS N`を使用してリージョンを分割すると、N 個のデータリージョンと 1つのインデックスリージョンが生成されます。 [#11929](https://github.com/pingcap/tidb/pull/11929)
-    - 設定ファイルに`split-region-max-num`パラメータ（デフォルトでは`10000` ）を追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を調整可能にします[#12080](https://github.com/pingcap/tidb/pull/12080)
+    - 設定ファイルに`split-region-max-num`パラメーター（デフォルトでは`10000` ）を追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を調整可能にします[#12080](https://github.com/pingcap/tidb/pull/12080)
     - システムがbinlog書き込むときに、この句のコメントが解除された`PRE_SPLIT_REGIONS`原因で、下流のMySQLで`CREATE TABLE`句を解析できない問題を修正しました。 [#12121](https://github.com/pingcap/tidb/pull/12121)
     - `SHOW TABLE … REGIONS`と`SHOW TABLE .. INDEX … REGIONS`の`WHERE` のサブ句を追加する [#12124](https://github.com/pingcap/tidb/pull/12124)
 - モニター

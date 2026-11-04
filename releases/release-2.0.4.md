@@ -13,9 +13,9 @@ summary: "TiDB 2.0.4は2018年6月15日にリリースされ、システムの�
 - TSOに`tidb_snapshot`の値を設定することをサポート
 - 監視項目のステートメントタイプの表示を改良
 - クエリコストの見積り精度を最適化する
-- gRPCの`backoff max delay`のパラメータを設定する
+- gRPCの`backoff max delay`のパラメーターを設定する
 - 設定ファイル内の単一のステートメントのメモリしきい値の設定をサポート
-- オプティマイザのエラーをリファクタリングする
+- オプティマイザーのエラーをリファクタリングする
 - `Cast Decimal`データの副作用を修正
 - 特定のシナリオで`Merge Join`演算子の誤った結果の問題を修正しました
 - Nullオブジェクトを文字列に変換する問題を修正
@@ -34,7 +34,7 @@ summary: "TiDB 2.0.4は2018年6月15日にリリースされ、システムの�
 ## TiKV {#tikv}
 
 - デバッグ用のRocksDB `PerfContext`インターフェースを追加する
-- `import-mode`パラメータを削除します
+- `import-mode`パラメーターを削除します
 - `tikv-ctl`に`region-properties`コマンドを追加
 - RocksDBのtombstoneが多数存在する場合に`reverse-seek`が遅くなる問題を修正
 - `do_sub`によって引き起こされたクラッシュの問題を修正

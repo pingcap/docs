@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.0-rc.2 Release Notes
-summary: TiDB 3.0.0-rc.2は2019年5月28日にリリースされ、安定性、ユーザビリティ、機能、SQLオプティマイザ、統計、実行エンジンが改善されました。このリリースには、SQLオプティマイザ、実行エンジン、サーバー、DDL、PD、TiKV、そしてTiDB BinlogやTiDB Lightningなどのツールの機能強化が含まれています。注目すべき改善点としては、より多くのシナリオでのインデックス結合のサポート、仮想列の適切な処理、下流のデータレプリケーションを追跡するためのメトリックの追加などが挙げられます。
+summary: TiDB 3.0.0-rc.2は2019年5月28日にリリースされ、安定性、ユーザビリティ、機能、SQLオプティマイザー、統計、実行エンジンが改善されました。このリリースには、SQLオプティマイザー、実行エンジン、サーバー、DDL、PD、TiKV、そしてTiDB BinlogやTiDB Lightningなどのツールの機能強化が含まれています。注目すべき改善点としては、より多くのシナリオでのインデックス結合のサポート、仮想列の適切な処理、下流のデータレプリケーションを追跡するためのメトリックの追加などが挙げられます。
 ---
 
 # TiDB 3.0.0-rc.2 リリースノート {#tidb-3-0-0-rc-2-release-notes}
@@ -13,11 +13,11 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 
 ## 概要 {#overview}
 
-2019年5月28日にTiDB 3.0.0-rc.2がリリースされました。対応するTiDB Ansibleバージョンは3.0.0-rc.2です。このリリースでは、TiDB 3.0.0-rc.1と比較して、安定性、使いやすさ、機能、SQLオプティマイザ、統計、実行エンジンが大幅に向上しています。
+2019年5月28日にTiDB 3.0.0-rc.2がリリースされました。対応するTiDB Ansibleバージョンは3.0.0-rc.2です。このリリースでは、TiDB 3.0.0-rc.1と比較して、安定性、使いやすさ、機能、SQLオプティマイザー、統計、実行エンジンが大幅に向上しています。
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - より多くのシナリオでIndex Joinをサポート[#10540](https://github.com/pingcap/tidb/pull/10540)
     - 履歴統計のエクスポートをサポート[#10291](https://github.com/pingcap/tidb/pull/10291)
     - 単調に増加するインデックス列に対する増分`Analyze`操作をサポートする [#10355](https://github.com/pingcap/tidb/pull/10355)
@@ -36,7 +36,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 - サーバー
     - TiKV で障害が発生したときに TiDB が TiKV への新しい接続を継続的に作成する問題を修正しました [#10301](https://github.com/pingcap/tidb/pull/10301)
     - `tidb_disable_txn_auto_retry`を書き込み競合エラーのみではなく、再試行可能なすべてのエラーに適用する [#10339](https://github.com/pingcap/tidb/pull/10339)
-    - パラメータなしのDDL文を`prepare` / `execute`で実行することを許可する [#10144](https://github.com/pingcap/tidb/pull/10144)
+    - パラメーターなしのDDL文を`prepare` / `execute`で実行することを許可する [#10144](https://github.com/pingcap/tidb/pull/10144)
     - バックオフ時間を制御する変数`tidb_back_off_weight`を追加する[#10266](https://github.com/pingcap/tidb/pull/10266)
     - `tidb_disable_txn_auto_retry`のデフォルト値を`on` に設定することで、デフォルト条件で自動的にコミットされていないトランザクションをTiDBが再試行することを禁止します。 [#10266](https://github.com/pingcap/tidb/pull/10266)
     - `RBAC`における`role`のデータベース権限判定を修正 [#10261](https://github.com/pingcap/tidb/pull/10261)
@@ -60,7 +60,7 @@ TiDB Ansible バージョン: 3.0.0-rc.2
 ## PD {#pd}
 
 - リージョンメタデータを保存するために、デフォルトでリージョンストレージを有効にします[#1524](https://github.com/pingcap/pd/pull/1524)
-- ホットリージョンのスケジューリングが別のスケジューラによって横取り（プリエンプト）される問題を修正[#1522](https://github.com/pingcap/pd/pull/1522)
+- ホットリージョンのスケジューリングが別のスケジューラーによって横取り（プリエンプト）される問題を修正[#1522](https://github.com/pingcap/pd/pull/1522)
 - リーダーの優先順位が有効にならない問題を修正[#1533](https://github.com/pingcap/pd/pull/1533)
 - `ScanRegions` の gRPC インターフェースを追加する [#1535](https://github.com/pingcap/pd/pull/1535)
 - オペレーターを能動的にプッシュする[#1536](https://github.com/pingcap/pd/pull/1536)

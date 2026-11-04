@@ -31,7 +31,7 @@ TiDBバージョン：5.1.5
     - リージョンが空のデータを返した場合に発生する誤った`ANY_VALUE`の結果を修正する [#30923](https://github.com/pingcap/tidb/issues/30923)
     - innerWorkerのpanicによって発生したインデックス結合の誤った結果を修正 [#31494](https://github.com/pingcap/tidb/issues/31494)
     - SQL操作がJSON型の列と`CHAR`型の列を結合する際にキャンセルされる問題を修正しました [#29401](https://github.com/pingcap/tidb/issues/29401)
-    - TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスタが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
+    - TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスターが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
     - 同時実行される列型変更によってスキーマとデータの間に不整合が生じる問題を修正します [#31048](https://github.com/pingcap/tidb/issues/31048)
     - `KILL TIDB`がアイドル状態の接続で即座に有効にならない問題を修正します [#24031](https://github.com/pingcap/tidb/issues/24031)
     - セッション変数を設定すると`tidb_snapshot`が機能しなくなるバグを修正しました [#35515](https://github.com/pingcap/tidb/issues/35515)
@@ -45,7 +45,7 @@ TiDBバージョン：5.1.5
     - TiKVとTiFlashが論理演算を照会した際に異なる結果を返す問題を修正しました [#37258](https://github.com/pingcap/tidb/issues/37258)
     - `EXECUTE`文が特定のシナリオで予期しないエラーを発生させる可能性がある問題を修正しました [#37187](https://github.com/pingcap/tidb/issues/37187)
     - `tidb_opt_agg_push_down`と`tidb_enforce_mpp`が有効になっている場合に発生するプランナーの誤った動作を修正します [#34465](https://github.com/pingcap/tidb/issues/34465)
-    - TiDBが`SHOW COLUMNS`ステートメントを実行する際にコプロセッサリクエストを送信する可能性があるバグを修正しました [#36496](https://github.com/pingcap/tidb/issues/36496)
+    - TiDBが`SHOW COLUMNS`ステートメントを実行する際にコプロセッサーリクエストを送信する可能性があるバグを修正しました [#36496](https://github.com/pingcap/tidb/issues/36496)
     - `enable-table-lock`フラグが有効になっていない場合に、 `lock tables`と`unlock tables`に対する警告を追加する [#28967](https://github.com/pingcap/tidb/issues/28967)
     - レンジパーティションで複数の`MAXVALUE`パーティションが許可される問題を修正 [#36329](https://github.com/pingcap/tidb/issues/36329)
 
@@ -77,7 +77,7 @@ TiDBバージョン：5.1.5
     - 特定のシナリオでTiFlashラーナーレプリカが作成されない可能性がある問題を修正しました [#5401](https://github.com/tikv/pd/issues/5401)
     - メトリクスのラベル分布に残余ラベルが含まれる問題を修正 [#4825](https://github.com/tikv/pd/issues/4825)
     - 大容量（例えば2T）のストアが存在する場合、完全に割り当てられた小型ストアを検出できず、結果としてbalance operatorが生成されない問題を修正します [#4805](https://github.com/tikv/pd/issues/4805)
-    - `SchedulerMaxWaitingOperator`が`1`に設定されている場合、スケジューラが機能しない問題を修正します。 [#4946](https://github.com/tikv/pd/issues/4946)
+    - `SchedulerMaxWaitingOperator`が`1`に設定されている場合、スケジューラーが機能しない問題を修正します。 [#4946](https://github.com/tikv/pd/issues/4946)
 
 - TiFlash
 

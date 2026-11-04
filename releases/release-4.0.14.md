@@ -52,7 +52,7 @@ TiDB バージョン: 4.0.14
 
 - PD
 
-    - 同時に実行される複数のスケジューラ間の競合を減らす[#3858](https://github.com/pingcap/pd/pull/3858) [#3854](https://github.com/tikv/pd/pull/3854)
+    - 同時に実行される複数のスケジューラー間の競合を減らす[#3858](https://github.com/pingcap/pd/pull/3858) [#3854](https://github.com/tikv/pd/pull/3854)
 
 - TiDB Dashboard
 
@@ -67,7 +67,7 @@ TiDB バージョン: 4.0.14
 
     - Dumpling
 
-        - アップストリームが TiDB v3.x クラスタの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量が削減されます[#306](https://github.com/pingcap/dumpling/pull/306)
+        - アップストリームが TiDB v3.x クラスターの場合は、常に`_tidb_rowid`を使用してテーブルを分割します。これにより、TiDB のメモリ使用量が削減されます[#306](https://github.com/pingcap/dumpling/pull/306)
 
     - TiCDC
 
@@ -103,7 +103,7 @@ TiDB バージョン: 4.0.14
     - `DOUBLE`を`DOUBLE` に変換する間違った関数を修正 [#25200](https://github.com/pingcap/tidb/issues/25200)
     - 非同期ロガー使用時にpanicログが失われる可能性がある問題を修正 [#8998](https://github.com/tikv/tikv/issues/8998)
     - 暗号化が有効になっている場合にスナップショットを2回構築すると発生するpanic問題を修正[#9786](https://github.com/tikv/tikv/issues/9786) [#10407](https://github.com/tikv/tikv/issues/10407)
-    - コプロセッサの関数`json_unquote()`の間違った引数の型を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
+    - コプロセッサーの関数`json_unquote()`の間違った引数の型を修正 [#10176](https://github.com/tikv/tikv/issues/10176)
     - シャットダウン時の疑わしい警告とRaftstore からの非決定的な応答の問題を修正しました [#10307](https://github.com/tikv/tikv/issues/10307) [#10353](https://github.com/tikv/tikv/issues/10353)
     - バックアップスレッドリークの問題を修正[#10287](https://github.com/tikv/tikv/issues/10287)
     - 分割プロセスが遅すぎてリージョンのマージが進行中の場合、リージョン分割がpanicになり、メタデータが破損する可能性がある問題を修正しました[#8456](https://github.com/tikv/tikv/issues/8456) [#8783](https://github.com/tikv/tikv/issues/8783)
@@ -114,18 +114,18 @@ TiDB バージョン: 4.0.14
 
 - PD
 
-    - 削除操作を実行した後にスケジューラが再表示されることがあるバグを修正[#2572](https://github.com/tikv/pd/issues/2572)
-    - 一時構成がロードされる前にスケジューラが起動されたときに発生する可能性のあるデータ競合の問題を修正しました[#3771](https://github.com/tikv/pd/issues/3771)
+    - 削除操作を実行した後にスケジューラーが再表示されることがあるバグを修正[#2572](https://github.com/tikv/pd/issues/2572)
+    - 一時構成がロードされる前にスケジューラーが起動されたときに発生する可能性のあるデータ競合の問題を修正しました[#3771](https://github.com/tikv/pd/issues/3771)
     - リージョン分散操作中に発生する可能性のあるPD panic問題を修正しました[#3761](https://github.com/pingcap/pd/pull/3761)
     - 一部のオペレーターの優先順位が正しく設定されていない問題を修正[#3703](https://github.com/pingcap/pd/pull/3703)
-    - 存在しないストアから`evict-leader`スケジューラを削除するときに発生する可能性のある PD panicの問題を修正しました。 [#3660](https://github.com/tikv/pd/issues/3660)
+    - 存在しないストアから`evict-leader`スケジューラーを削除するときに発生する可能性のある PD panicの問題を修正しました。 [#3660](https://github.com/tikv/pd/issues/3660)
     - ストア数が多い場合にPD Leaderの再選出が遅くなる問題を修正[#3697](https://github.com/tikv/pd/issues/3697)
 
 - TiDB Dashboard
 
     - **Profiling** UIがすべてのTiDBインスタンスをプロファイリングできない問題を修正[#944](https://github.com/pingcap/tidb-dashboard/pull/944)
     - **Statements**UIに"Plan Count"が表示されない問題を修正しました[#939](https://github.com/pingcap/tidb-dashboard/pull/939)
-    - クラスタアップグレード後に**Slow Query**UIに"unknown field"エラーが表示される問題を修正しました [#902](https://github.com/pingcap/tidb-dashboard/issues/902)
+    - クラスターアップグレード後に**Slow Query**UIに"unknown field"エラーが表示される問題を修正しました [#902](https://github.com/pingcap/tidb-dashboard/issues/902)
 
 - TiFlash
 

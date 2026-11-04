@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.0.9
 ## PD {#pd}
 
 - 位置ラベル名でスラッシュ`/`使用をサポート [#2083](https://github.com/pingcap/pd/pull/2083)
-- tombstoneストアがラベルカウンタに誤って含まれているために誤った統計を修正しました [#2067](https://github.com/pingcap/pd/pull/2067)
+- tombstoneストアがラベルカウンターに誤って含まれているために誤った統計を修正しました [#2067](https://github.com/pingcap/pd/pull/2067)
 
 ## ツール {#tools}
 

@@ -44,7 +44,7 @@ TiDB バージョン: 5.1.2
 
 - PD
 
-    - 空のリージョンをスケジュールできるようにし、scatter range スケジューラで別の許容範囲設定を使用します。 [#4117](https://github.com/tikv/pd/pull/4117)
+    - 空のリージョンをスケジュールできるようにし、scatter range スケジューラーで別の許容範囲設定を使用します。 [#4117](https://github.com/tikv/pd/pull/4117)
     - PD間のリージョン情報の同期パフォーマンスを向上[#3933](https://github.com/tikv/pd/pull/3933)
     - 生成された演算子に基づいてストアの再試行制限を動的に調整する機能をサポート [#3744](https://github.com/tikv/pd/issues/3744)
 
@@ -99,7 +99,7 @@ TiDB バージョン: 5.1.2
 
     - TiKVをv3.xからそれ以降のバージョンにアップグレードした後に発生するpanic問題を修正しました[#10902](https://github.com/tikv/tikv/issues/10902)
     - 破損したスナップショットファイルによって引き起こされる潜在的なディスクフル問題を修正[#10813](https://github.com/tikv/tikv/issues/10813)
-    - TiKVコプロセッサのスローログに、リクエスト処理に費やされた時間のみを考慮するようにする [#10841](https://github.com/tikv/tikv/issues/10841)
+    - TiKVコプロセッサーのスローログに、リクエスト処理に費やされた時間のみを考慮するようにする [#10841](https://github.com/tikv/tikv/issues/10841)
     - スロガースレッドが過負荷になりキューがいっぱいになったときに、スレッドをブロックする代わりにログをドロップする[#10841](https://github.com/tikv/tikv/issues/10841)
     - コプロセッサーリクエストの処理がタイムアウトしたときに発生するpanic問題を修正しました[#10852](https://github.com/tikv/tikv/issues/10852)
     - Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKV panic問題を修正しました[#10842](https://github.com/tikv/tikv/pull/10842)
@@ -112,7 +112,7 @@ TiDB バージョン: 5.1.2
     - PDがダウンしたピアを速やかに修復しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
     - `replication.max-replicas`を更新した後、デフォルトの配置ルールのレプリカ数が一定のままになる問題を修正[#3886](https://github.com/tikv/pd/issues/3886)
     - TiKV をスケールアウトするときに PD がpanicする可能性があるバグを修正しました [#3868](https://github.com/tikv/pd/issues/3868)
-    - クラスターにエビクトリーダースケジューラがある場合にホットリージョンスケジューラが動作しないバグを修正しました [#3697](https://github.com/tikv/pd/issues/3697)
+    - クラスターにエビクトリーダースケジューラーがある場合にホットリージョンスケジューラーが動作しないバグを修正しました [#3697](https://github.com/tikv/pd/issues/3697)
 
 - TiFlash
 
@@ -138,7 +138,7 @@ TiDB バージョン: 5.1.2
     - Dumpling
 
         - 一部のMySQLバージョン（8.0.3および8.0.23）で`show table status`が誤った結果を返すときにDumplingがハングする問題を修正しました[#322](https://github.com/pingcap/dumpling/issues/322)
-        - デフォルト`sort-engine`オプションの 4.0.x クラスタでの CLI 互換性の問題を修正しました [#2373](https://github.com/pingcap/tiflow/issues/2373)
+        - デフォルト`sort-engine`オプションの 4.0.x クラスターでの CLI 互換性の問題を修正しました [#2373](https://github.com/pingcap/tiflow/issues/2373)
 
     - TiCDC
 
@@ -149,7 +149,7 @@ TiDB バージョン: 5.1.2
         - TiCDC Open Protocolにおける空の値の問題を修正しました。1つのトランザクションに変更がない場合、空の値を出力することはなくなりました[#2612](https://github.com/pingcap/tiflow/issues/2612)
         - 手動再起動時の DDL 処理のバグを修正[#2603](https://github.com/pingcap/tiflow/issues/2603)
         - メタデータ管理する際に、 `EtcdWorker`のスナップショット分離が誤って違反される可能性がある問題を修正しました [#2559](https://github.com/pingcap/tiflow/pull/2559)
-        - TiCDCがテーブルを再スケジュールしているときに、複数のプロセッサが同じテーブルにデータを書き込む可能性があるバグを修正しました。 [#2230](https://github.com/pingcap/tiflow/issues/2230)
+        - TiCDCがテーブルを再スケジュールしているときに、複数のプロセッサーが同じテーブルにデータを書き込む可能性があるバグを修正しました。 [#2230](https://github.com/pingcap/tiflow/issues/2230)
         - TiCDCが`ErrSchemaStorageTableMiss`エラーを取得したときに、changefeedが予期せずリセットされる可能性があるバグを修正しました。 [#2422](https://github.com/pingcap/tiflow/issues/2422)
         - TiCDCが`ErrGCTTLExceeded`エラーを取得したときにchangefeedを削除できないバグを修正 [#2391](https://github.com/pingcap/tiflow/issues/2391)
         - TiCDCがcdclog への大きなテーブルの同期に失敗するバグを修正 [#2424](https://github.com/pingcap/tiflow/issues/2424) [#1259](https://github.com/pingcap/tiflow/issues/1259)

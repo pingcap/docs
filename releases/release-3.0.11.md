@@ -26,7 +26,7 @@ TiDB Ansible バージョン: 3.0.11
     - `information_schema.PARTITIONS`テーブルのパーティションテーブルのメタ情報の表示をサポート [#14849](https://github.com/pingcap/tidb/pull/14849)
 
 - TiDB Binlog
-    - TiDBクラスタ間の双方向データレプリケーションをサポート[#884](https://github.com/pingcap/tidb-binlog/pull/884) [#909](https://github.com/pingcap/tidb-binlog/pull/909)
+    - TiDBクラスター間の双方向データレプリケーションをサポート[#884](https://github.com/pingcap/tidb-binlog/pull/884) [#909](https://github.com/pingcap/tidb-binlog/pull/909)
 
 - TiDB Lightning
     - TLS構成 をサポートする [#270](https://github.com/pingcap/tidb-lightning/pull/270) [#44](https://github.com/tikv/importer/pull/44)
@@ -38,7 +38,7 @@ TiDB Ansible バージョン: 3.0.11
 
 - TiDB
     - `Union`を使用するクエリが読み取り専用としてマークされていないため、楽観的トランザクションを再試行するときに Goroutine リークが発生する問題を修正しました[#15076](https://github.com/pingcap/tidb/pull/15076)
-    - `SET SESSION tidb_snapshot = 'xxx';`ステートメント実行時に`tidb_snapshot`パラメータの値が正しく使用されていないため、スナップショット時に`SHOW TABLE STATUS`でテーブルの状態を正しく出力できない問題を修正しました [#14391](https://github.com/pingcap/tidb/pull/14391)
+    - `SET SESSION tidb_snapshot = 'xxx';`ステートメント実行時に`tidb_snapshot`パラメーターの値が正しく使用されていないため、スナップショット時に`SHOW TABLE STATUS`でテーブルの状態を正しく出力できない問題を修正しました [#14391](https://github.com/pingcap/tidb/pull/14391)
     - `Sort Merge Join`と`ORDER BY DESC`が同時に含まれるSQL文によって発生する誤った結果を修正する[#14664](https://github.com/pingcap/tidb/pull/14664)
     - サポートされていない式を使用してパーティションテーブルを作成する際にTiDBサーバーのpanicを修正しました。このpanicを修正すると、エラー情報`This partition function is not allowed`が返されます[#14769](https://github.com/pingcap/tidb/pull/14769)
     - `Union` を含むサブクエリで`select max() from subquery`文を実行したときに発生した誤った結果を修正しました [#14944](https://github.com/pingcap/tidb/pull/14944)

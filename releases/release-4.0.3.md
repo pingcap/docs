@@ -14,7 +14,7 @@ TiDB バージョン: 4.0.3
 - TiDB Dashboard
 
     - TiDB Dashboardの詳細なバージョン情報を表示する[#679](https://github.com/pingcap-incubator/tidb-dashboard/pull/679)
-    - サポートされていないブラウザまたは古いブラウザのブラウザ互換性に関する通知を表示する[#654](https://github.com/pingcap-incubator/tidb-dashboard/pull/654)
+    - サポートされていないブラウザーまたは古いブラウザーのブラウザー互換性に関する通知を表示する[#654](https://github.com/pingcap-incubator/tidb-dashboard/pull/654)
     - **SQL Statements**ページでの検索をサポート [#658](https://github.com/pingcap-incubator/tidb-dashboard/pull/658)
 
 - TiFlash
@@ -125,12 +125,12 @@ TiDB バージョン: 4.0.3
 
     - サーバーがクラッシュした場合にTSOストリームの作成がしばらくブロックされる可能性がある問題を修正しました[#2648](https://github.com/pingcap/pd/pull/2648)
     - `getSchedulers`がデータ競合を引き起こす可能性がある問題を修正[#2638](https://github.com/pingcap/pd/pull/2638)
-    - スケジューラを削除するとデッドロックが発生する可能性がある問題を修正[#2637](https://github.com/pingcap/pd/pull/2637)
+    - スケジューラーを削除するとデッドロックが発生する可能性がある問題を修正[#2637](https://github.com/pingcap/pd/pull/2637)
     - `balance-leader-scheduler`が有効になっているときに配置ルールが考慮されないバグを修正[#2636](https://github.com/pingcap/pd/pull/2636)
     - サービス`safepoint`が正しく設定されない場合があり、 BRとDumplingが失敗する可能性がある問題を修正[#2635](https://github.com/pingcap/pd/pull/2635)
     - `hot region scheduler`の対象ストアが誤って選択されている問題を修正[#2627](https://github.com/pingcap/pd/pull/2627)
     - PDリーダーが切り替えられたときにTSOリクエストに時間がかかりすぎる可能性がある問題を修正[#2622](https://github.com/pingcap/pd/pull/2622)
-    - リーダー変更後の古いスケジューラの問題を修正[#2608](https://github.com/pingcap/pd/pull/2608)
+    - リーダー変更後の古いスケジューラーの問題を修正[#2608](https://github.com/pingcap/pd/pull/2608)
     - 配置ルールが有効になっているときに、リージョンのレプリカを最適な場所に調整できないことがある問題を修正しました[#2605](https://github.com/pingcap/pd/pull/2605)
     - デプロイディレクトリの変更に応じてストアのデプロイパスが更新されない問題を修正 [#2600](https://github.com/pingcap/pd/pull/2600)
     - `store limit`が0になるのを防ぐ[#2588](https://github.com/pingcap/pd/pull/2588)
@@ -154,7 +154,7 @@ TiDB バージョン: 4.0.3
 
         - TiCDC がメモリリークを起こす場合がある問題を修正しました [#704](https://github.com/pingcap/tiflow/pull/704)
         - 引用符で囲まれていないテーブル名がSQL構文エラーを引き起こす問題を修正[#676](https://github.com/pingcap/tiflow/pull/676)
-        - `p.stop`が呼び出された後にプロセッサが完全に終了しない問題を修正[#693](https://github.com/pingcap/tiflow/pull/693)
+        - `p.stop`が呼び出された後にプロセッサーが完全に終了しない問題を修正[#693](https://github.com/pingcap/tiflow/pull/693)
 
     - Backup & Restore (BR)
 

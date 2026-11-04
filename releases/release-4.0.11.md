@@ -85,10 +85,10 @@ TiDB バージョン: 4.0.11
     - `tidb_rowid`列に値を挿入するときに発生する`index out of range`エラーを修正[#22359](https://github.com/pingcap/tidb/pull/22359)
     - キャッシュされたプランが誤って使用されるバグを修正[#22353](https://github.com/pingcap/tidb/pull/22353)
     - バイナリ/文字列の長さが大きすぎる場合に関数`WEIGHT_STRING`で発生するランタイムpanicを修正[#22332](https://github.com/pingcap/tidb/pull/22332)
-    - 関数パラメータの数が無効な場合、生成列の使用を禁止する[#22174](https://github.com/pingcap/tidb/pull/22174)
+    - 関数パラメーターの数が無効な場合、生成列の使用を禁止する[#22174](https://github.com/pingcap/tidb/pull/22174)
     - 実行計画を構築する前にプロセス情報を正しく設定する[#22148](https://github.com/pingcap/tidb/pull/22148)
     - `IndexLookUp` の不正確な実行時統計の問題を修正 [#22136](https://github.com/pingcap/tidb/pull/22136)
-    - コンテナにクラスタをデプロイするときにメモリ使用量情報のキャッシュを追加する [#22116](https://github.com/pingcap/tidb/pull/22116)
+    - コンテナーにクラスターをデプロイするときにメモリ使用量情報のキャッシュを追加する [#22116](https://github.com/pingcap/tidb/pull/22116)
     - デコードプランエラーの問題を修正[#22022](https://github.com/pingcap/tidb/pull/22022)
     - 無効なウィンドウ仕様の使用によるエラーを報告[#21976](https://github.com/pingcap/tidb/pull/21976)
     - `PREPARE`文が`EXECUTE` 、 `DEALLOCATE` 、または`PREPARE` とネストされている場合はエラーを報告します。 [#21972](https://github.com/pingcap/tidb/pull/21972)
@@ -132,7 +132,7 @@ TiDB バージョン: 4.0.11
     - メンバーのヘルスメトリクスが正しく表示されない問題を修正[#3368](https://github.com/pingcap/pd/pull/3368)
     - ピアがまだ残っているtombstoneストアの削除を禁止する [#3352](https://github.com/pingcap/pd/pull/3352)
     - ストア制限を永続化できない問題を修正[#3403](https://github.com/pingcap/pd/pull/3403)
-    - scatter range スケジューラの制限の制約を修正 [#3401](https://github.com/pingcap/pd/pull/3401)
+    - scatter range スケジューラーの制限の制約を修正 [#3401](https://github.com/pingcap/pd/pull/3401)
 
 - TiFlash
 
@@ -149,10 +149,10 @@ TiDB バージョン: 4.0.11
 
         - `ErrTaskStatusNotExists`と`capture`セッションの終了が同時に発生した場合、TiCDCサービスが予期せず終了する可能性があるバグを修正[#1240](https://github.com/pingcap/tiflow/pull/1240)
         - `changefeed`が別の`changefeed` の影響を受ける可能性があるという古い値の切り替え問題を修正しました [#1347](https://github.com/pingcap/tiflow/pull/1347)
-        - 無効な`sort-engine`パラメータを持つ新しい`changefeed`を処理するときにTiCDCサービスがハングする可能性があるバグを修正しました [#1309](https://github.com/pingcap/tiflow/pull/1309)
+        - 無効な`sort-engine`パラメーターを持つ新しい`changefeed`を処理するときにTiCDCサービスがハングする可能性があるバグを修正しました [#1309](https://github.com/pingcap/tiflow/pull/1309)
         - 非オーナーノードでデバッグ情報を取得する際に発生するpanicの問題を修正[#1349](https://github.com/pingcap/tiflow/pull/1349)
         - テーブルを追加または削除したときに、 `ticdc_processor_num_of_tables`と`ticdc_processor_table_resolved_ts`メトリックが正しく更新されない問題を修正しました。 [#1351](https://github.com/pingcap/tiflow/pull/1351)
-        - テーブルを追加するときにプロセッサがクラッシュした場合に潜在的なデータ損失が発生する問題を修正しました [#1363](https://github.com/pingcap/tiflow/pull/1363)
+        - テーブルを追加するときにプロセッサーがクラッシュした場合に潜在的なデータ損失が発生する問題を修正しました [#1363](https://github.com/pingcap/tiflow/pull/1363)
         - テーブル移行中に所有者が TiCDCサーバーの異常終了を引き起こす可能性があるバグを修正[#1352](https://github.com/pingcap/tiflow/pull/1352)
         - サービスGCセーフポイントが失われた後にTiCDCが速やかに終了しないバグを修正[#1367](https://github.com/pingcap/tiflow/pull/1367)
         - KVクライアントがイベントフィード作成をスキップする可能性があるバグを修正しました [#1336](https://github.com/pingcap/tiflow/pull/1336)

@@ -37,7 +37,7 @@ TiDB バージョン: 5.1.4
 
 - PD
 
-    - スケジューラの終了プロセスを高速化 [#4146](https://github.com/tikv/pd/issues/4146)
+    - スケジューラーの終了プロセスを高速化 [#4146](https://github.com/tikv/pd/issues/4146)
 
 - TiFlash
 
@@ -72,7 +72,7 @@ TiDB バージョン: 5.1.4
     - トランザクションを使用する場合と使用しない場合でウィンドウ関数が異なる結果を返す可能性がある問題を修正しました[#29947](https://github.com/pingcap/tidb/issues/29947)
     - `Decimal`から`String` へのキャスト時に長さ情報が間違っている問題を修正 [#29417](https://github.com/pingcap/tidb/issues/29417)
     - `tidb_enable_vectorized_expression`ベクトル化式を`off` に設定すると`GREATEST`関数が誤った結果を返す問題を修正しました。 [#29434](https://github.com/pingcap/tidb/issues/29434)
-    - オプティマイザが`join`の無効なプランをキャッシュする可能性がある問題を修正[#28087](https://github.com/pingcap/tidb/issues/28087)
+    - オプティマイザーが`join`の無効なプランをキャッシュする可能性がある問題を修正[#28087](https://github.com/pingcap/tidb/issues/28087)
     - ベクトル化された式 の`microsecond`と`hour`関数の誤った結果を修正 [#28643](https://github.com/pingcap/tidb/issues/28643) [#29244](https://github.com/pingcap/tidb/issues/29244)
     - `ALTER TABLE.. ADD INDEX`文を実行する際に TiDB panicが発生する問題を修正[#27687](https://github.com/pingcap/tidb/issues/27687)
     - MPPノードの可用性検出が一部のコーナーケースで機能しないバグを修正[#3118](https://github.com/pingcap/tics/issues/3118)
@@ -111,7 +111,7 @@ TiDB バージョン: 5.1.4
     - リージョンスキャッタラーによって生成されたスケジュールによってピア数が減少する可能性があるバグを修正[#4565](https://github.com/tikv/pd/issues/4565)
     - リージョン統計が`flow-round-by-digit` の影響を受けない問題を修正 [#4295](https://github.com/tikv/pd/issues/4295)
     - リージョン同期が停止したことによるリーダー選出の遅延を修正[#3936](https://github.com/tikv/pd/issues/3936)
-    - 退去リーダースケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
+    - 退去リーダースケジューラーが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
     - ホットスポット統計からコールドホットスポットデータを削除できない問題を修正[#4390](https://github.com/tikv/pd/issues/4390)
     - TiKVノードが削除された後に発生するpanic問題を修正[#4344](https://github.com/tikv/pd/issues/4344)
     - ターゲットストアがダウンしているため、スケジューリングオペレーターが迅速に失敗できない問題を修正しました[#3353](https://github.com/tikv/pd/issues/3353)
@@ -145,8 +145,8 @@ TiDB バージョン: 5.1.4
         - 不正確なチェックポイントによって発生する潜在的なデータ損失の問題を修正しました [#3545](https://github.com/pingcap/tiflow/issues/3545)
         - デッドロックによりレプリケーションタスクが停止する可能性がある問題を修正しました[#4055](https://github.com/pingcap/tiflow/issues/4055)
         - DDL文の特別なコメントによりレプリケーションタスクが停止する問題を修正[#3755](https://github.com/pingcap/tiflow/issues/3755)
-        - EtcdWorker がオーナーとプロセッサをハングさせる可能性があるバグを修正しました [#3750](https://github.com/pingcap/tiflow/issues/3750)
-        - クラスタのアップグレード後に`stopped`変更フィードが自動的に再開される問題を修正[#3473](https://github.com/pingcap/tiflow/issues/3473)
+        - EtcdWorker がオーナーとプロセッサーをハングさせる可能性があるバグを修正しました [#3750](https://github.com/pingcap/tiflow/issues/3750)
+        - クラスターのアップグレード後に`stopped`変更フィードが自動的に再開される問題を修正[#3473](https://github.com/pingcap/tiflow/issues/3473)
         - デフォルト値を複製できない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
         - TiCDC のデフォルト値のパディング例外によって発生するデータの不整合を修正[#3918](https://github.com/pingcap/tiflow/issues/3918) [#3929](https://github.com/pingcap/tiflow/issues/3929)
         - PDリーダーがシャットダウンして新しいノードに転送するときにオーナーがスタックするバグを修正 [#3615](https://github.com/pingcap/tiflow/issues/3615)
@@ -156,7 +156,7 @@ TiDB バージョン: 5.1.4
         - Canalプロトコルで設定項目`enable-old-value`が自動的に`true`に設定されないバグを修正 [#3676](https://github.com/pingcap/tiflow/issues/3676)
         - AvroシンクがJSON型列解析をサポートしていない問題を修正 [#3624](https://github.com/pingcap/tiflow/issues/3624)
         - チェンジフィードチェックポイントラグの負の値エラーを修正 [#3010](https://github.com/pingcap/ticdc/issues/3010)
-        - コンテナ環境のOOM問題を修正 [#1798](https://github.com/pingcap/tiflow/issues/1798)
+        - コンテナー環境のOOM問題を修正 [#1798](https://github.com/pingcap/tiflow/issues/1798)
         - 複数の TiKV がクラッシュした場合や強制再起動中に TiCDC レプリケーションが中断される問題を修正[#3288](https://github.com/pingcap/ticdc/issues/3288)
         - DDL 処理後のメモリリークの問題を修正 [#3174](https://github.com/pingcap/ticdc/issues/3174)
         - ErrGCTTLExceeded エラーが発生したときに changefeed が十分に速く失敗しない問題を修正しました[#3111](https://github.com/pingcap/ticdc/issues/3111)

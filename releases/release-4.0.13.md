@@ -26,7 +26,7 @@ TiDB バージョン: 4.0.13
 
     - `store used size`の計算プロセスをより正確にする[#9904](https://github.com/tikv/tikv/pull/9904)
     - `EpochNotMatch`メッセージにさらに多くのリージョンを設定すると、リージョンのミスが減ります。 [#9731](https://github.com/tikv/tikv/pull/9731)
-    - 長時間稼働するクラスタに蓄積されたメモリの解放を高速化[#10035](https://github.com/tikv/tikv/pull/10035)
+    - 長時間稼働するクラスターに蓄積されたメモリの解放を高速化[#10035](https://github.com/tikv/tikv/pull/10035)
 
 - PD
 
@@ -42,14 +42,14 @@ TiDB バージョン: 4.0.13
     - Backup & Restore (BR)
 
         - `mysql`スキーマで作成されたユーザーテーブルのバックアップをサポート [#1077](https://github.com/pingcap/br/pull/1077)
-        - 更新`checkVersion`クラスタデータとバックアップデータチェックする [#1090](https://github.com/pingcap/br/pull/1090)
+        - 更新`checkVersion`クラスターデータとバックアップデータチェックする [#1090](https://github.com/pingcap/br/pull/1090)
         - バックアップ中に少数のTiKVノード障害を許容する [#1062](https://github.com/pingcap/br/pull/1062)
 
     - TiCDC
 
-        - メモリオーバーフロー（OOM）を回避するためにプロセッサフロー制御を実装する[#1751](https://github.com/pingcap/tiflow/pull/1751)
+        - メモリオーバーフロー（OOM）を回避するためにプロセッサーフロー制御を実装する[#1751](https://github.com/pingcap/tiflow/pull/1751)
         - Unified Sorter 内の古い一時ファイルのクリーンアップをサポートし、複数の`cdc server`インスタンスが同じ`sort-dir`ディレクトリを共有するのを防ぎます [#1741](https://github.com/pingcap/tiflow/pull/1741)
-        - フェイルポイント HTTPハンドラを追加する [#1732](https://github.com/pingcap/tiflow/pull/1732)
+        - フェイルポイント HTTPハンドラーを追加する [#1732](https://github.com/pingcap/tiflow/pull/1732)
 
 ## バグ修正 {#bug-fixes}
 
@@ -87,7 +87,7 @@ TiDB バージョン: 4.0.13
     - DDLジョブのキャンセルがスタックする問題を修正[#24445](https://github.com/pingcap/tidb/pull/24445)
     - `concat`関数が照合順序を誤って処理する問題を修正しました [#24300](https://github.com/pingcap/tidb/pull/24300)
     - `SELECT`のフィールドに`IN`サブクエリがあり、そのサブクエリの外側に`NULL` タプルが含まれている場合にクエリが間違った結果を返すバグを修正しました。 [#24022](https://github.com/pingcap/tidb/pull/24022)
-    - `TableScan`が降順の場合にオプティマイザによってTiFlashが誤って選択されるバグを修正[#23974](https://github.com/pingcap/tidb/pull/23974)
+    - `TableScan`が降順の場合にオプティマイザーによってTiFlashが誤って選択されるバグを修正[#23974](https://github.com/pingcap/tidb/pull/23974)
     - `point_get`プランがMySQL と一致しない列名を返すバグを修正しました [#23970](https://github.com/pingcap/tidb/pull/23970)
     - 大文字の名前を持つデータベースで`show table status`文を実行すると間違った結果が返される問題を修正しました[#23958](https://github.com/pingcap/tidb/pull/23958)
     - テーブルに対して同時に`INSERT`と`DELETE`権限を持たないユーザーが`REPLACE`操作を実行できるバグを修正しました。 [#23938](https://github.com/pingcap/tidb/pull/23938)
@@ -97,7 +97,7 @@ TiDB バージョン: 4.0.13
     - TiDB が TCP および UNIX ソケットを listen するように構成されている場合、TCP 接続経由のリモートホストが接続に対して正しく検証されない問題を修正しました。 [#23513](https://github.com/pingcap/tidb/pull/23513)
     - デフォルト以外の照合順序で間違ったクエリ結果が発生するバグを修正[#22923](https://github.com/pingcap/tidb/pull/22923)
     - Grafanaの**Coprocessor Cache**パネルが動作しないバグを修正[#22617](https://github.com/pingcap/tidb/pull/22617)
-    - オプティマイザが統計キャッシュにアクセスする際に発生するエラーを修正 [#22565](https://github.com/pingcap/tidb/pull/22565)
+    - オプティマイザーが統計キャッシュにアクセスする際に発生するエラーを修正 [#22565](https://github.com/pingcap/tidb/pull/22565)
 
 - TiKV
 
@@ -119,7 +119,7 @@ TiDB バージョン: 4.0.13
     - `bitwise`演算子の動作がTiDBと異なるバグを修正
     - `STRING`型を`INTEGER`型にキャストしたときに結果が不正確になる問題を修正しました
     - 連続した高速書き込みによりTiFlashのメモリが不足する可能性がある問題を修正しました
-    - テーブルGC中にヌルポインタの例外が発生する可能性がある問題を修正しました
+    - テーブルGC中にヌルポインターの例外が発生する可能性がある問題を修正しました
     - ドロップされたテーブルにデータを書き込むときに発生するTiFlash panic問題を修正しました
     - BR復元中に発生するTiFlash panic問題を修正
     - general CI 照合順序を使用したときに一部の文字の重みが間違っているというバグを修正しました

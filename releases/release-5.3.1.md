@@ -1,6 +1,6 @@
 ---
 title: TiDB 5.3.1 Release Notes
-summary: TiDB 5.3.1は2022年3月3日にリリースされました。このリリースには、TiDB、TiKV、PD、TiCDC、 TiFlash、Backup & Restore (BR)、およびTiDB Data Migration (DM)の互換性の変更、改善、バグ修正が含まれています。主な変更点としては、ユーザーログインモードマッピングの最適化、TiCDCのリカバリ時間の短縮、TiDB、TiKV、PD、 TiFlash、およびTiCDCやTiDB Lightningなどのツールにおけるさまざまなバグの修正などがあります。これらの修正は、データのインポート、ユーザーログイン、ガベージコレクション、設定パラメータなどに関連する問題に対処しています。
+summary: TiDB 5.3.1は2022年3月3日にリリースされました。このリリースには、TiDB、TiKV、PD、TiCDC、 TiFlash、Backup & Restore (BR)、およびTiDB Data Migration (DM)の互換性の変更、改善、バグ修正が含まれています。主な変更点としては、ユーザーログインモードマッピングの最適化、TiCDCのリカバリ時間の短縮、TiDB、TiKV、PD、 TiFlash、およびTiCDCやTiDB Lightningなどのツールにおけるさまざまなバグの修正などがあります。これらの修正は、データのインポート、ユーザーログイン、ガベージコレクション、設定パラメーターなどに関連する問題に対処しています。
 ---
 
 # TiDB 5.3.1 リリースノート {#tidb-5-3-1-release-notes}
@@ -37,7 +37,7 @@ TiDB バージョン: 5.3.1
 
     - TiCDC
 
-        - Kafka プロデューサーの設定パラメータを公開して、TiCDC で設定できるようにします。 [#4385](https://github.com/pingcap/tiflow/issues/4385)
+        - Kafka プロデューサーの設定パラメーターを公開して、TiCDC で設定できるようにします。 [#4385](https://github.com/pingcap/tiflow/issues/4385)
         - S3 をバックエンドストレージとして使用する場合、TiCDC の起動時に事前クリーンアッププロセスを追加します[#3878](https://github.com/pingcap/tiflow/issues/3878)
         - TiCDCクライアントは証明書名が指定されていない場合でも動作します[#3627](https://github.com/pingcap/tiflow/issues/3627)
         - チェックポイントのタイムスタンプが予期せず進むのを避けるために、テーブルごとにシンクのチェックポイントを管理する[#3545](https://github.com/pingcap/tiflow/issues/3545)
@@ -72,7 +72,7 @@ TiDB バージョン: 5.3.1
 
     - ピアステータスが`Applying`のときにスナップショットファイルを削除すると発生するpanic問題を修正しました [#11746](https://github.com/tikv/tikv/issues/11746)
     - フロー制御が有効で、 `level0_slowdown_trigger`が明示的に設定されている場合に QPS が低下する問題を修正しました[#11424](https://github.com/tikv/tikv/issues/11424)
-    - cgroup コントローラがマウントされていない場合に発生するpanic問題を修正[#11569](https://github.com/tikv/tikv/issues/11569)
+    - cgroup コントローラーがマウントされていない場合に発生するpanic問題を修正[#11569](https://github.com/tikv/tikv/issues/11569)
     - TiKVの動作が停止した後にResolved TSのレイテンシーが増加する問題を修正[#11351](https://github.com/tikv/tikv/issues/11351)
     - GCワーカーがビジー状態のときにTiKVがデータ範囲を削除できない（ `unsafe_destroy_range`を実行できない）というバグを修正[#11903](https://github.com/tikv/tikv/issues/11903)
     - ピアを破棄するとレイテンシーが大きくなる可能性がある問題を修正[#10210](https://github.com/tikv/tikv/issues/10210)
@@ -106,7 +106,7 @@ TiDB バージョン: 5.3.1
     - `select (arg0, arg1) in (x,y)`のような文で`in`が複数の引数を持つ場合に、 `in`が間違った結果を返すバグを修正しました
     - MPPクエリが停止したときにTiFlashがpanicになる可能性がある問題を修正しました
     - 入力引数の先頭にゼロがある場合に`str_to_date`が間違った結果を返す問題を修正しました
-    - フィルタが`where <string>`形式の場合にクエリが間違った結果を返す問題を修正しました
+    - フィルターが`where <string>`形式の場合にクエリが間違った結果を返す問題を修正しました
     - 入力引数`string`が`%Y-%m-%d\n%H:%i:%s`形式の場合に`cast(string as datetime)`が間違った結果を返す問題を修正しました
 
 - ツール
@@ -121,9 +121,9 @@ TiDB バージョン: 5.3.1
         - PDリーダーが強制終了した際にTiCDCノードが異常終了するバグを修正[#4248](https://github.com/pingcap/tiflow/issues/4248)
         - セーフモードでの更新ステートメントの実行エラーにより、DM-workerがpanicになる可能性がある問題を修正しました[#4317](https://github.com/pingcap/tiflow/issues/4317)
         - TiKVクライアントのキャッシュされたリージョンメトリックが負になる可能性がある問題を修正しました[#4300](https://github.com/pingcap/tiflow/issues/4300)
-        - 必要なプロセッサ情報が存在しない場合にHTTP APIがパニックを起こすバグを修正[#3840](https://github.com/pingcap/tiflow/issues/3840)
+        - 必要なプロセッサー情報が存在しない場合にHTTP APIがパニックを起こすバグを修正[#3840](https://github.com/pingcap/tiflow/issues/3840)
         - 一時停止中の変更フィードを削除したときに、REDO ログがクリーンアップされないバグを修正しました。 [#4740](https://github.com/pingcap/tiflow/issues/4740)
-        - コンテナ環境のOOMを修正[#1798](https://github.com/pingcap/tiflow/issues/1798)
+        - コンテナー環境のOOMを修正[#1798](https://github.com/pingcap/tiflow/issues/1798)
         - ロードタスクを停止するとタスクが予期せず転送されるバグを修正 [#3771](https://github.com/pingcap/tiflow/issues/3771)
         - ローダーのコマンド`query-status`で間違った進行状況が返される問題を修正しました [#3252](https://github.com/pingcap/tiflow/issues/3252)
         - クラスター内に異なるバージョンの TiCDC ノードがある場合に HTTP API が動作しない問題を修正[#3483](https://github.com/pingcap/tiflow/issues/3483)
@@ -140,7 +140,7 @@ TiDB バージョン: 5.3.1
         - DDL文の特別なコメントによりレプリケーションタスクが停止する問題を修正[#3755](https://github.com/pingcap/tiflow/issues/3755)
         - `config.Metadata.Timeout` の誤った構成によって発生するレプリケーション停止の問題を修正しました [#3352](https://github.com/pingcap/tiflow/issues/3352)
         - 一部の RHEL リリースでタイムゾーンの問題によりサービスを開始できない問題を修正しました [#3584](https://github.com/pingcap/tiflow/issues/3584)
-        - クラスタのアップグレード後に`stopped`変更フィードが自動的に再開される問題を修正[#3473](https://github.com/pingcap/tiflow/issues/3473)
+        - クラスターのアップグレード後に`stopped`変更フィードが自動的に再開される問題を修正[#3473](https://github.com/pingcap/tiflow/issues/3473)
         - デフォルト値を複製できない問題を修正[#3793](https://github.com/pingcap/tiflow/issues/3793)
         - MySQLシンクデッドロックによる警告が頻繁に発生する問題を修正 [#2706](https://github.com/pingcap/tiflow/issues/2706)
         - Canalプロトコルで設定項目`enable-old-value`が自動的に`true`に設定されないバグを修正 [#3676](https://github.com/pingcap/tiflow/issues/3676)

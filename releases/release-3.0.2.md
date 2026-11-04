@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.2 Release Notes
-summary: TiDB 3.0.2は、2019年8月7日にリリースされ、様々な修正と改善が行われました。このリリースには、SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの修正が含まれています。修正には、クエリプラン、クエリ結果、エラーメッセージ、パフォーマンス最適化に関する問題が含まれます。
+summary: TiDB 3.0.2は、2019年8月7日にリリースされ、様々な修正と改善が行われました。このリリースには、SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの修正が含まれています。修正には、クエリプラン、クエリ結果、エラーメッセージ、パフォーマンス最適化に関する問題が含まれます。
 ---
 
 # TiDB 3.0.2 リリースノート {#tidb-3-0-2-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.2
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - クエリ内で同じテーブルが複数回出現し、論理的にクエリ結果が常に空になる場合に"Can't find column in schema"というメッセージが報告される問題を修正しました[#11247](https://github.com/pingcap/tidb/pull/11247)
     - `TIDB_INLJ`ヒントが一部のケース（ `explain select /*+ TIDB_INLJ(t1) */ t1.b, t2.a from t t1, t t2 where t1.b = t2.a`など）で正しく機能しないことが原因でクエリプランが期待どおりに動作しない問題を修正しました[#11362](https://github.com/pingcap/tidb/pull/11362)
     - クエリ結果の列名が場合によっては間違っている問題を修正しました（ `SELECT IF(1,c,c) FROM t`など） [#11379](https://github.com/pingcap/tidb/pull/11379)
@@ -23,18 +23,18 @@ TiDB Ansible バージョン: 3.0.2
     - ウィンドウ関数で構文制限に違反した場合にエラーが報告されない問題を修正しました（例： `UNBOUNDED PRECEDING`はフレーム定義の最後に出現できません） [#11543](https://github.com/pingcap/tidb/pull/11543)
     - `ERROR 3593 (HY000): You cannot use the window function FUNCTION_NAME in this context`エラーメッセージで`FUNCTION_NAME`が大文字になっているため、MySQL との非互換性が発生する問題を修正しました。 [#11535](https://github.com/pingcap/tidb/pull/11535)
     - ウィンドウ関数で実装されていない`IGNORE NULLS`構文が使用されているにもかかわらずエラーが報告されない問題を修正[#11593](https://github.com/pingcap/tidb/pull/11593)
-    - オプティマイザが時間の等価条件を正しく推定しない問題を修正 [#11512](https://github.com/pingcap/tidb/pull/11512)
+    - オプティマイザーが時間の等価条件を正しく推定しない問題を修正 [#11512](https://github.com/pingcap/tidb/pull/11512)
     - フィードバック情報に基づいてトップN統計を更新することをサポート[#11507](https://github.com/pingcap/tidb/pull/11507)
 - SQL実行エンジン
-    - 関数`INSERT`のパラメータに`NULL`が含まれている場合、戻り値が`NULL`にならない問題を修正しました。 [#11248](https://github.com/pingcap/tidb/pull/11248)
+    - 関数`INSERT`のパラメーターに`NULL`が含まれている場合、戻り値が`NULL`にならない問題を修正しました。 [#11248](https://github.com/pingcap/tidb/pull/11248)
     - パーティションテーブルを`ADMIN CHECKSUM`操作でチェックすると計算結果が間違っている可能性がある問題を修正しました [#11266](https://github.com/pingcap/tidb/pull/11266)
     - INDEX JOIN がプレフィックスインデックスを使用すると結果が間違ってしまう可能性がある問題を修正しました [#11246](https://github.com/pingcap/tidb/pull/11246)
     - `DATE_ADD`関数がマイクロ秒を含む日付数値の減算を行う際に小数部の桁合わせが誤っているために結果が間違っている可能性がある問題を修正しました[#11288](https://github.com/pingcap/tidb/pull/11288)
     - `DATE_ADD`関数が`INTERVAL` の負の数を誤って処理することによって発生する誤った結果を修正しました。 [#11325](https://github.com/pingcap/tidb/pull/11325)
     - `Mod(%)` 、 `Multiple(*)` 、または`Minus(-)`が 0 を返し、小数点以下の桁数が大きい場合 ( `select 0.000 % 0.11234500000000000000`など)、 `Mod(%)` 、 `Multiple(*)` 、または`Minus(-)`が返す小数点以下の桁数が MySQL と異なる問題を修正しました[#11251](https://github.com/pingcap/tidb/pull/11251)
     - `CONCAT`と`CONCAT_WS`関数によって返される結果の長さが`max_allowed_packet`を超えると、警告付きの`NULL`が誤って返される問題を修正しました[#11275](https://github.com/pingcap/tidb/pull/11275)
-    - `SUBTIME`と`ADDTIME`関数のパラメータが無効な場合に警告付きの`NULL`が誤って返される問題を修正しました[#11337](https://github.com/pingcap/tidb/pull/11337)
-    - `CONVERT_TZ`関数のパラメータが無効な場合に`NULL`が誤って返される問題を修正しました[#11359](https://github.com/pingcap/tidb/pull/11359)
+    - `SUBTIME`と`ADDTIME`関数のパラメーターが無効な場合に警告付きの`NULL`が誤って返される問題を修正しました[#11337](https://github.com/pingcap/tidb/pull/11337)
+    - `CONVERT_TZ`関数のパラメーターが無効な場合に`NULL`が誤って返される問題を修正しました[#11359](https://github.com/pingcap/tidb/pull/11359)
     - このクエリのメモリ使用量を表示するため、 `EXPLAIN ANALYZE`で返された結果に`MEMORY`列を追加します[#11418](https://github.com/pingcap/tidb/pull/11418)
     - `EXPLAIN` の結果に`CARTESIAN` Joinを加える [#11429](https://github.com/pingcap/tidb/pull/11429)
     - float型とdouble型のAUTO_INCREMENT列の不正なデータを修正[#11385](https://github.com/pingcap/tidb/pull/11385)
@@ -47,10 +47,10 @@ TiDB Ansible バージョン: 3.0.2
     - `GRANT ROLE`文が`CURRENT_ROLE`を受け取ったときにエラーが報告される問題を修正します。`REVOKE ROLE`が`mysql.default_role`権限を正しく取り消さない問題を修正します。 [#11356](https://github.com/pingcap/tidb/pull/11356)
     - `SELECT ADDDATE('2008-01-34', -1)` のような文を実行する際の`Incorrect datetime value`警告情報の表示形式の問題を修正しました [#11447](https://github.com/pingcap/tidb/pull/11447)
     - JSONデータの浮動小数点フィールドを整数に変換するときに結果がオーバーフローすると、エラーメッセージが`constant … overflows bigint`ではなく`constant … overflows float`を報告する問題を修正しました。 [#11534](https://github.com/pingcap/tidb/pull/11534)
-    - `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、 `DECIMAL`列のパラメータを受け取ったときに、誤った型変換によって結果が間違ってしまう可能性がある問題を修正しました[#11527](https://github.com/pingcap/tidb/pull/11527)
+    - `DATE_ADD`関数が`FLOAT` 、 `DOUBLE` 、 `DECIMAL`列のパラメーターを受け取ったときに、誤った型変換によって結果が間違ってしまう可能性がある問題を修正しました[#11527](https://github.com/pingcap/tidb/pull/11527)
     - `DATE_ADD`関数のINTERVAL の小数部の符号を誤って処理することによって発生する誤った結果を修正しました。 [#11615](https://github.com/pingcap/tidb/pull/11615)
     - プレフィックスインデックスが正しく処理されていないために`Ranger`インデックスルックアップ結合にプレフィックスインデックスが含まれている場合に誤ったクエリ結果が発生する問題を修正しました[#11565](https://github.com/pingcap/tidb/pull/11565)
-    - `NAME_CONST`の 2 番目のパラメータが負の数のときに`NAME_CONST`関数を実行すると、「Incorrect arguments to NAME_CONST」というメッセージが報告される問題を修正しました[#11268](https://github.com/pingcap/tidb/pull/11268)
+    - `NAME_CONST`の 2 番目のパラメーターが負の数のときに`NAME_CONST`関数を実行すると、「Incorrect arguments to NAME_CONST」というメッセージが報告される問題を修正しました[#11268](https://github.com/pingcap/tidb/pull/11268)
     - SQL 文で現在時刻を計算し、その値が複数回取得された場合に結果が MySQL と互換性がない問題を修正しました。同じ SQL 文で現在時刻を取得する場合は同じ値を使用します[#11394](https://github.com/pingcap/tidb/pull/11394)
     - `baseExecutor`の`Close`エラーを報告しているにもかかわらず、 `ChildExecutor`に対して`Close`が呼び出されない問題を修正しました。この問題は、 `KILL`文が実行されず、 `ChildExecutor`が閉じられていない場合にGoroutineリークを引き起こす可能性があります[#11576](https://github.com/pingcap/tidb/pull/11576)
 - サーバー
@@ -107,7 +107,7 @@ TiDB Ansible バージョン: 3.0.2
 
 ## PD {#pd}
 
-- Scatter リージョンスケジューラが動作しないバグを修正[#1642](https://github.com/pingcap/pd/pull/1642)
+- Scatter リージョンスケジューラーが動作しないバグを修正[#1642](https://github.com/pingcap/pd/pull/1642)
 - pd-ctl でマージリージョン操作が実行できないバグを修正しました [#1653](https://github.com/pingcap/pd/pull/1653)
 - pd-ctl でremove-tombstone 操作が実行できないバグを修正しました [#1651](https://github.com/pingcap/pd/pull/1651)
 - スキャンリージョン操作を実行するときに、キースコープと重複するリージョンが見つからない問題を修正しました [#1648](https://github.com/pingcap/pd/pull/1648)
@@ -130,11 +130,11 @@ TiDB Lightning
 - ディスクパフォーマンスモニターが秒をミリ秒として扱う単位エラーを修正[#840](https://github.com/pingcap/tidb-ansible/pull/840)
 - Spark に`log4j`設定ファイルを追加する [#841](https://github.com/pingcap/tidb-ansible/pull/841)
 - Binlogが有効で Kafka または ZooKeeper が構成されている場合に Prometheus 設定ファイルが間違った形式で生成される問題を修正[#844](https://github.com/pingcap/tidb-ansible/pull/844)
-- 生成されたTiDB設定ファイルで`pessimistic-txn`設定パラメータが省略される問題を修正 [#850](https://github.com/pingcap/tidb-ansible/pull/850)
+- 生成されたTiDB設定ファイルで`pessimistic-txn`設定パラメーターが省略される問題を修正 [#850](https://github.com/pingcap/tidb-ansible/pull/850)
 - TiDB Dashboardのメトリックを追加して最適化する [#853](https://github.com/pingcap/tidb-ansible/pull/853)
 - TiDB Dashboardの各監視項目の説明を追加します [#854](https://github.com/pingcap/tidb-ansible/pull/854)
 - TiDB サマリーダッシュボードを追加して、クラスターのステータスをより適切に表示し、問題をトラブルシューティングします[#855](https://github.com/pingcap/tidb-ansible/pull/855)
-- TiKVダッシュボードのアロケータ統計監視項目を更新します。 [#857](https://github.com/pingcap/tidb-ansible/pull/857)
+- TiKVダッシュボードのアロケーター統計監視項目を更新します。 [#857](https://github.com/pingcap/tidb-ansible/pull/857)
 - Node Exporterの警告式の単位エラーを修正しました [#860](https://github.com/pingcap/tidb-ansible/pull/860)
 - TiSpark jarパッケージをv2.1.2にアップグレードする[#862](https://github.com/pingcap/tidb-ansible/pull/862)
 - Ansible タスク機能の説明を更新 [#867](https://github.com/pingcap/tidb-ansible/pull/867)

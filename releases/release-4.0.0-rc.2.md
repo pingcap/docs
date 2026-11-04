@@ -13,7 +13,7 @@ TiDB バージョン: 4.0.0-rc.2
 
 - TiDB
 
-    - TiDB Binlogが有効な場合、単一トランザクションのサイズ制限（100 MB）が削除されました。現在、トランザクションのサイズ制限は 10 GB です。ただし、TiDB Binlogが有効で、ダウンストリームが Kafka の場合は、Kafka のメッセージサイズ制限である 1 GB に合わせて`txn-total-size-limit`パラメータを設定してください。 [#16941](https://github.com/pingcap/tidb/pull/16941)
+    - TiDB Binlogが有効な場合、単一トランザクションのサイズ制限（100 MB）が削除されました。現在、トランザクションのサイズ制限は 10 GB です。ただし、TiDB Binlogが有効で、ダウンストリームが Kafka の場合は、Kafka のメッセージサイズ制限である 1 GB に合わせて`txn-total-size-limit`パラメーターを設定してください。 [#16941](https://github.com/pingcap/tidb/pull/16941)
     - `CLUSTER_LOG`テーブルを照会するときに時間範囲が指定されていない場合は、デフォルトの時間範囲を照会するのではなく、エラーを返して時間範囲の指定をリクエストするように動作を変更します。 [#17003](https://github.com/pingcap/tidb/pull/17003)
     - `CREATE TABLE`文を使用してパーティションテーブルを作成するときに、サポートされていない`sub-partition`または`linear hash`オプションが指定された場合、オプションが無視されたパーティションテーブルではなく、通常のテーブルが作成されます[#17197](https://github.com/pingcap/tidb/pull/17197)
 
@@ -89,13 +89,13 @@ TiDB バージョン: 4.0.0-rc.2
 
     - Grafanaの**Read Index**のCountグラフの名前を**Ops**に変更します
     - システム負荷が低いときにファイル記述子を開くためのデータを最適化して、システムリソースの消費を削減します。
-    - データストレージ容量を制限するために容量関連の設定パラメータを追加します
+    - データストレージ容量を制限するために容量関連の設定パラメーターを追加します
 
 - ツール
 
     - TiDB Lightning
 
-        - tidb-lightning-ctlに`fetch-mode`サブコマンドを追加して、TiKVクラスタモードを出力します。 [#287](https://github.com/pingcap/tidb-lightning/pull/287)
+        - tidb-lightning-ctlに`fetch-mode`サブコマンドを追加して、TiKVクラスターモードを出力します。 [#287](https://github.com/pingcap/tidb-lightning/pull/287)
 
     - TiCDC
 
@@ -104,7 +104,7 @@ TiDB バージョン: 4.0.0-rc.2
     - Backup & Restore (BR)
 
         - バックアップ中のGC時間の自動調整をサポート[#257](https://github.com/pingcap/br/pull/257)
-        - データの復元時にPDパラメータを調整して復元を高速化します[#198](https://github.com/pingcap/br/pull/198)
+        - データの復元時にPDパラメーターを調整して復元を高速化します[#198](https://github.com/pingcap/br/pull/198)
 
 ## バグ修正 {#bug-fixes}
 
@@ -115,7 +115,7 @@ TiDB バージョン: 4.0.0-rc.2
     - シーケンスオブジェクトの切り捨てを禁止する [#17037](https://github.com/pingcap/tidb/pull/17037)
     - `INSERT` / `UPDATE` / `ANALYZE` / `DELETE`文がシーケンスオブジェクトで実行できる問題を修正しました [#16957](https://github.com/pingcap/tidb/pull/16957)
     - ブートストラップフェーズの内部SQL文がステートメントサマリーテーブルで内部クエリとして正しくマークされない問題を修正しました。 [#17062](https://github.com/pingcap/tidb/pull/17062)
-    - TiFlashではサポートされているがTiKVではサポートされていないフィルタ条件が`IndexLookupJoin`オペレーターにプッシュダウンされたときに発生するエラーを修正しました [#17036](https://github.com/pingcap/tidb/pull/17036)
+    - TiFlashではサポートされているがTiKVではサポートされていないフィルター条件が`IndexLookupJoin`オペレーターにプッシュダウンされたときに発生するエラーを修正しました [#17036](https://github.com/pingcap/tidb/pull/17036)
     - 照合順序が有効になった後に発生する可能性のある`LIKE`の同時実行の問題を修正[#16997](https://github.com/pingcap/tidb/pull/16997)
     - 照合順序が有効になった後、 `LIKE`関数が`Range`クエリインデックスを正しく構築できない問題を修正しました[#16783](https://github.com/pingcap/tidb/pull/16783)
     - `Plan Cache`文がトリガーされた後に`@@LAST_PLAN_FROM_CACHE`を実行すると間違った値が返される問題を修正[#16831](https://github.com/pingcap/tidb/pull/16831)
@@ -135,7 +135,7 @@ TiDB バージョン: 4.0.0-rc.2
     - `WHERE`句の`string_value`の誤った値を修正する [#16559](https://github.com/pingcap/tidb/pull/16559)
     - `GROUP BY`ウィンドウ関数のエラーメッセージがMySQL と一致しない問題を修正しました [#16165](https://github.com/pingcap/tidb/pull/16165)
     - データベース名に大文字の含まれている場合に`FLASH TABLE`文の実行が失敗する問題を修正しました [#17167](https://github.com/pingcap/tidb/pull/17167)
-    - Projection エグゼキュータの不正確なメモリトレースを修正しました [#17118](https://github.com/pingcap/tidb/pull/17118)
+    - Projection エグゼキューターの不正確なメモリトレースを修正しました [#17118](https://github.com/pingcap/tidb/pull/17118)
     - 異なるタイムゾーンの`SLOW_QUERY`テーブルで時間フィルタリングが正しく行われない問題を修正しました[#17164](https://github.com/pingcap/tidb/pull/17164)
     - 仮想生成列で`IndexMerge`が使用された場合に発生するpanic問題を修正 [#17126](https://github.com/pingcap/tidb/pull/17126)
     - `INSTR`と`LOCATE`関数の大文字化の問題を修正 [#17068](https://github.com/pingcap/tidb/pull/17068)
@@ -152,14 +152,14 @@ TiDB バージョン: 4.0.0-rc.2
 
     - 復元後に多くの空のリージョンが生成される問題を修正[#7632](https://github.com/tikv/tikv/pull/7632)
     - 順序がずれた read index 応答を受け取ったときにRaftstoreがpanicする問題を修正[#7370](https://github.com/tikv/tikv/pull/7370)
-    - 統合スレッドプールが有効な場合に、無効なストレージまたはコプロセッサ読み取りプール構成が拒否されない可能性がある問題を修正しました[#7513](https://github.com/tikv/tikv/pull/7513)
+    - 統合スレッドプールが有効な場合に、無効なストレージまたはコプロセッサー読み取りプール構成が拒否されない可能性がある問題を修正しました[#7513](https://github.com/tikv/tikv/pull/7513)
     - TiKVサーバーがシャットダウンされたときの`join`操作のpanic問題を修正しました[#7713](https://github.com/tikv/tikv/pull/7713)
     - 診断API 経由でTiKVスローログを検索しても結果が返されない問題を修正 [#7776](https://github.com/tikv/tikv/pull/7776)
     - TiKVノードが長時間実行されると顕著なメモリ断片化が発生する問題を修正[#7556](https://github.com/tikv/tikv/pull/7556)
     - 無効な日付が格納されている場合にSQL文の実行が失敗する問題を修正[#7268](https://github.com/tikv/tikv/pull/7268)
     - GCS からバックアップデータを復元できない問題を修正 [#7739](https://github.com/tikv/tikv/pull/7739)
     - 保存時の暗号化中にKMSキーIDが検証されない問題を修正[#7719](https://github.com/tikv/tikv/pull/7719)
-    - 異なるアーキテクチャのコンパイラにおけるコプロセッサーの根本的な正確性の問題を修正[#7714](https://github.com/tikv/tikv/pull/7714) [#7730](https://github.com/tikv/tikv/pull/7730)
+    - 異なるアーキテクチャのコンパイラーにおけるコプロセッサーの根本的な正確性の問題を修正[#7714](https://github.com/tikv/tikv/pull/7714) [#7730](https://github.com/tikv/tikv/pull/7730)
     - 暗号化が有効になっている場合の`snapshot ingestion`エラーを修正[#7815](https://github.com/tikv/tikv/pull/7815)
     - 設定ファイル書き換え時に発生する`Invalid cross-device link`エラーを修正 [#7817](https://github.com/tikv/tikv/pull/7817)
     - 設定ファイルを空のファイルに書き込むときに間違った toml 形式になる問題を修正しました[#7817](https://github.com/tikv/tikv/pull/7817)

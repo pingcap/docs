@@ -52,4 +52,4 @@ TiDB Binlog
 ## TiDB Ansible {#tidb-ansible}
 
 - `ansible`コマンドとその`jmespath`および`jinja2`依存パッケージの事前チェック機能を追加します。 [#807](https://github.com/pingcap/tidb-ansible/pull/807)
-- Pumpに`stop-write-at-available-space`パラメータ（デフォルトでは 10 GiB）を追加し、使用可能なディスク容量がパラメータ値より小さい場合にPumpでのbinlogファイルの書き込みを停止します。 [#807](https://github.com/pingcap/tidb-ansible/pull/807)
+- Pumpに`stop-write-at-available-space`パラメーター（デフォルトでは 10 GiB）を追加し、使用可能なディスク容量がパラメーター値より小さい場合にPumpでのbinlogファイルの書き込みを停止します。 [#807](https://github.com/pingcap/tidb-ansible/pull/807)

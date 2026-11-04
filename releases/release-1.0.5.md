@@ -1,6 +1,6 @@
 ---
 title: TiDB 1.0.5 Release Notes
-summary: TiDB 1.0.5は2017年12月26日にリリースされました。アップデートには、Auto_Increment IDの最大値の追加、goroutineリークの修正、スロークエリの別ファイルへの出力のサポート、TiKVからのTimeZone変数の読み込みなどが含まれています。PDの修正には、リーダーのバランス調整とブートストラップ中の潜在的なpanicの修正が含まれています。TiKVはCPU IDの取得速度の遅さを修正し、dynamic-level-bytesパラメータをサポートします。アップグレードの順序はPD -> TiKV -> TiDBです。
+summary: TiDB 1.0.5は2017年12月26日にリリースされました。アップデートには、Auto_Increment IDの最大値の追加、goroutineリークの修正、スロークエリの別ファイルへの出力のサポート、TiKVからのTimeZone変数の読み込みなどが含まれています。PDの修正には、リーダーのバランス調整とブートストラップ中の潜在的なpanicの修正が含まれています。TiKVはCPU IDの取得速度の遅さを修正し、dynamic-level-bytesパラメーターをサポートします。アップグレードの順序はPD -> TiKV -> TiDBです。
 ---
 
 # TiDB 1.0.5 リリースノート {#tidb-1-0-5-release-notes}
@@ -28,6 +28,6 @@ summary: TiDB 1.0.5は2017年12月26日にリリースされました。アッ�
 ## TiKV {#tikv}
 
 - [`get_cpuid`](https://github.com/pingcap/tikv/pull/2611)関数を使用して CPU ID を取得するのが遅い問題を修正しました。
-- スペース収集状況を改善するために[`dynamic-level-bytes`](https://github.com/pingcap/tikv/pull/2605)パラメータをサポートします。
+- スペース収集状況を改善するために[`dynamic-level-bytes`](https://github.com/pingcap/tikv/pull/2605)パラメーターをサポートします。
 
 1.0.4 から 1.0.5 にアップグレードするには、PD -> TiKV -> TiDB のローリングアップグレード順序に従います。

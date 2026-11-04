@@ -1,6 +1,6 @@
 ---
 title: TiDB 3.0.5 Release Notes
-summary: TiDB 3.0.5は、2019年10月25日にリリースされ、様々な改善とバグ修正が行われました。このリリースには、SQLオプティマイザ、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの機能強化が含まれています。改善点には、ウィンドウ関数の境界チェックのサポート、インデックス結合と外部結合の問題の修正、各種操作の監視メトリクスの追加などがあります。さらに、TiKVではストレージとパフォーマンスの最適化が行われ、PDではストレージ精度とHTTPリクエスト処理が改善されました。TiDB Ansibleでは、監視メトリクスのアップデートと設定ファイルの簡素化も行われました。
+summary: TiDB 3.0.5は、2019年10月25日にリリースされ、様々な改善とバグ修正が行われました。このリリースには、SQLオプティマイザー、SQL実行エンジン、サーバー、DDL、モニター、TiKV、PD、TiDB Binlog、 TiDB Lightning、TiDB Ansibleの機能強化が含まれています。改善点には、ウィンドウ関数の境界チェックのサポート、インデックス結合と外部結合の問題の修正、各種操作の監視メトリクスの追加などがあります。さらに、TiKVではストレージとパフォーマンスの最適化が行われ、PDではストレージ精度とHTTPリクエスト処理が改善されました。TiDB Ansibleでは、監視メトリクスのアップデートと設定ファイルの簡素化も行われました。
 ---
 
 # TiDB 3.0.5 リリースノート {#tidb-3-0-5-release-notes}
@@ -13,7 +13,7 @@ TiDB Ansible バージョン: 3.0.5
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - ウィンドウ関数の境界チェックをサポート [#12404](https://github.com/pingcap/tidb/pull/12404)
     - パーティションテーブルでの`IndexJoin`が誤った結果を返す問題を修正[#12712](https://github.com/pingcap/tidb/pull/12712)
     - 外部結合オペレーター`Apply`の先頭の`ifnull`関数が誤った結果を返す問題を修正[#12694](https://github.com/pingcap/tidb/pull/12694)
@@ -88,7 +88,7 @@ TiDB Ansible バージョン: 3.0.5
 ## TiDB Ansible {#tidb-ansible}
 
 - インデックス追加速度の監視メトリックを追加します [#986](https://github.com/pingcap/tidb-ansible/pull/986)
-- 設定ファイルの内容を簡素化し、ユーザーが設定する必要のないパラメータを削除します[#1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14) 、 [#998](https://github.com/pingcap/tidb-ansible/pull/998)
+- 設定ファイルの内容を簡素化し、ユーザーが設定する必要のないパラメーターを削除します[#1043c](https://github.com/pingcap/tidb-ansible/commit/1043c3df7ddb72eb234c55858960e9fdd3830a14) 、 [#998](https://github.com/pingcap/tidb-ansible/pull/998)
 - パフォーマンス読み取りとパフォーマンス書き込み[#e90e7](https://github.com/pingcap/tidb-ansible/commit/e90e79f5117bb89197e01b1391fd02e25d57a440)の監視式エラーを修正
 - Raftstore CPU使用率の監視表示方法とアラームルールを更新 [#992](https://github.com/pingcap/tidb-ansible/pull/992)
 - Overview 監視ダッシュボードの TiKV CPU 監視項目を更新して、余分な監視コンテンツをフィルタリングします[#1001](https://github.com/pingcap/tidb-ansible/pull/1001)

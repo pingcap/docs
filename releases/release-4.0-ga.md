@@ -37,7 +37,7 @@ TiDB バージョン: 4.0.0
     - テーブルの作成時および変更時に、パーティションテーブルが一意のプレフィックスインデックスを使用しているかどうかのチェックをサポート[#17213](https://github.com/pingcap/tidb/pull/17213)
     - `insert/replace into tbl_name partition` （ `partition_name_list` ）のステートメントをサポートする [#17313](https://github.com/pingcap/tidb/pull/17313)
     - `Distinct`関数を使用するときに`collations`の値をチェックする機能をサポート [#17240](https://github.com/pingcap/tidb/pull/17240)
-    - ハッシュパーティションプルーニング中の`is null`フィルタ条件をサポート [#17310](https://github.com/pingcap/tidb/pull/17310)
+    - ハッシュパーティションプルーニング中の`is null`フィルター条件をサポート [#17310](https://github.com/pingcap/tidb/pull/17310)
     - パーティションテーブルで`admin check index` 、 `admin cleanup index` 、 `admin recover index`をサポート [#17392](https://github.com/pingcap/tidb/pull/17392) [#17405](https://github.com/pingcap/tidb/pull/17405) [#17317](https://github.com/pingcap/tidb/pull/17317)
     - `in`式に対するレンジパーティションプルーニングをサポート [#17320](https://github.com/pingcap/tidb/pull/17320)
 
@@ -73,7 +73,7 @@ TiDB バージョン: 4.0.0
     - `update`文でパーティションの選択が誤っている問題を修正 [#17305](https://github.com/pingcap/tidb/pull/17305)
     - TiKV から不明なエラーメッセージを受信したときにシステムパニックが発生する問題を修正 [#17380](https://github.com/pingcap/tidb/pull/17380)
     - `key`パーティションテーブルを作成するときに誤った処理ロジックによって発生するシステムパニックを修正しました。 [#17242](https://github.com/pingcap/tidb/pull/17242)
-    - オプティマイザの処理ロジックの誤りにより間違った`Index Merge Join`プランが選択される問題を修正 [#17365](https://github.com/pingcap/tidb/pull/17365)
+    - オプティマイザーの処理ロジックの誤りにより間違った`Index Merge Join`プランが選択される問題を修正 [#17365](https://github.com/pingcap/tidb/pull/17365)
     - Grafana の`SELECT`文の`duration`監視メトリックが不正確であるという問題を修正しました [#16561](https://github.com/pingcap/tidb/pull/16561)
     - システムエラーが発生したときにGCワーカーがブロックされる問題を修正[#16915](https://github.com/pingcap/tidb/pull/16915)
     - ブール列の制約`UNIQUE`が比較で誤った結果をもたらす問題を修正 [#17306](https://github.com/pingcap/tidb/pull/17306)

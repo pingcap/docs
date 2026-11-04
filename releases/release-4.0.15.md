@@ -42,7 +42,7 @@ TiDB バージョン: 4.0.15
 - TiKV
 
     - read ready と write ready を別々に処理して読み取りレイテンシーを削減する[#10475](https://github.com/tikv/tikv/issues/10475)
-    - TiKVコプロセッサのスローログは、リクエストの処理に費やされた時間のみを考慮します[#10841](https://github.com/tikv/tikv/issues/10841)
+    - TiKVコプロセッサーのスローログは、リクエストの処理に費やされた時間のみを考慮します[#10841](https://github.com/tikv/tikv/issues/10841)
     - スロガースレッドが過負荷になりキューがいっぱいになったときに、スレッドをブロックする代わりにログをドロップする[#10841](https://github.com/tikv/tikv/issues/10841)
     - ネットワーク帯域幅を節約するために、Resolved TSメッセージのサイズを縮小します[#2448](https://github.com/pingcap/tiflow/issues/2448)
 
@@ -56,7 +56,7 @@ TiDB バージョン: 4.0.15
 
         - リージョンを同時に分割して分散させることで、復元速度が向上します[#1363](https://github.com/pingcap/br/pull/1363)
         - PD リクエストエラーまたは TiKV I/O タイムアウトエラーが発生した場合は、 BRタスクを再試行します[#27787](https://github.com/pingcap/tidb/issues/27787)
-        - 多数の小さなテーブルをリストアするときに空のリージョンを減らして、リストア後のクラスタ操作に影響を与えないようにします[#1374](https://github.com/pingcap/br/issues/1374)
+        - 多数の小さなテーブルをリストアするときに空のリージョンを減らして、リストア後のクラスター操作に影響を与えないようにします[#1374](https://github.com/pingcap/br/issues/1374)
         - テーブルの作成中に`rebase auto id`操作を実行すると、別の`rebase auto id` DDL操作が節約され、 復元が高速化されます。 [#1424](https://github.com/pingcap/br/pull/1424)
 
     - Dumpling
@@ -82,7 +82,7 @@ TiDB バージョン: 4.0.15
         - DDL実行のPrometheusメトリックを追加する[#2595](https://github.com/pingcap/tiflow/issues/2595) [#2669](https://github.com/pingcap/tiflow/issues/2669)
         - メジャーバージョンまたはマイナーバージョン間での TiCDC クラスターの操作を禁止[#2601](https://github.com/pingcap/tiflow/pull/2601)
         - `file sorter` を削除 [#2325](https://github.com/pingcap/tiflow/pull/2325)
-        - 変更フィードが削除されたときに変更フィードメトリックをクリーンアップし、プロセッサが終了したときにプロセッサメトリックをクリーンアップします[#2156](https://github.com/pingcap/tiflow/issues/2156)
+        - 変更フィードが削除されたときに変更フィードメトリックをクリーンアップし、プロセッサーが終了したときにプロセッサーメトリックをクリーンアップします[#2156](https://github.com/pingcap/tiflow/issues/2156)
         - リージョンが初期化された後のロック解決アルゴリズムを最適化する[#2188](https://github.com/pingcap/tiflow/issues/2188)
 
 ## バグ修正 {#bug-fixes}
@@ -131,8 +131,8 @@ TiDB バージョン: 4.0.15
         - 統合テストでDDLジョブの重複が発生したときに発生する`ErrSchemaStorageTableMiss`エラーを修正します [#2422](https://github.com/pingcap/tiflow/issues/2422)
         - `ErrGCTTLExceeded`エラーが発生した場合に changefeed を削除できないバグを修正[#2391](https://github.com/pingcap/tiflow/issues/2391)
         - `capture list`コマンドの出力に古いキャプチャが表示される可能性がある問題を修正しました [#2388](https://github.com/pingcap/tiflow/issues/2388)
-        - TiCDC プロセッサのデッドロック問題を修正 [#2017](https://github.com/pingcap/tiflow/pull/2017)
-        - このテーブルが再スケジュールされているときに複数のプロセッサが同じテーブルにデータを書き込む可能性があるために発生するデータの不整合の問題を修正しました[#2230](https://github.com/pingcap/tiflow/issues/2230)
+        - TiCDC プロセッサーのデッドロック問題を修正 [#2017](https://github.com/pingcap/tiflow/pull/2017)
+        - このテーブルが再スケジュールされているときに複数のプロセッサーが同じテーブルにデータを書き込む可能性があるために発生するデータの不整合の問題を修正しました[#2230](https://github.com/pingcap/tiflow/issues/2230)
         - メタデータ管理で`EtcdWorker`のスナップショット分離が破られるバグを修正 [#2557](https://github.com/pingcap/tiflow/pull/2557)
         - DDLシンクエラーによりチェンジフィードを停止できない問題を修正 [#2552](https://github.com/pingcap/tiflow/issues/2552)
         - TiCDC Open Protocolの問題を修正: トランザクションに変更がない場合、TiCDC は空の値を出力します [#2612](https://github.com/pingcap/tiflow/issues/2612)

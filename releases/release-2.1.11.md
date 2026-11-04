@@ -1,6 +1,6 @@
 ---
 title: TiDB 2.1.11 Release Notes
-summary: TiDB 2.1.11は2019年6月3日にリリースされました。TiDB、PD、TiKV、ツールにおける様々な問題の修正が含まれています。主な修正点としては、結合からの削除におけるスキーマの誤り、unix_timestamp()の計算エラー、TiDB AnsibleへのDrainerパラメータの追加などが挙げられます。
+summary: TiDB 2.1.11は2019年6月3日にリリースされました。TiDB、PD、TiKV、ツールにおける様々な問題の修正が含まれています。主な修正点としては、結合からの削除におけるスキーマの誤り、unix_timestamp()の計算エラー、TiDB AnsibleへのDrainerパラメーターの追加などが挙げられます。
 ---
 
 # TiDB 2.1.11 リリースノート {#tidb-2-1-11-release-notes}
@@ -44,4 +44,4 @@ TiDB Ansible バージョン: 2.1.11
 
 ## TiDB Ansible {#tidb-ansible}
 
-- Drainerパラメータを追加 [#760](https://github.com/pingcap/tidb-ansible/pull/760)
+- Drainerパラメーターを追加 [#760](https://github.com/pingcap/tidb-ansible/pull/760)

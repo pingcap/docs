@@ -32,7 +32,7 @@ TiDB バージョン: 4.0.8
     - `Selectivity()` の貪欲探索手順で選択性の低いインデックスを優先する [#20154](https://github.com/pingcap/tidb/pull/20154)
     - コプロセッサー実行時統計にRPC実行時情報をさらに記録します。 [#19264](https://github.com/pingcap/tidb/pull/19264)
     - スローログの解析を高速化してクエリパフォーマンスを向上させる[#20556](https://github.com/pingcap/tidb/pull/20556)
-    - SQL オプティマイザが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プランバインディングステージ中にタイムアウト実行計画を待機します[#20530](https://github.com/pingcap/tidb/pull/20530)
+    - SQL オプティマイザーが潜在的な新しいプランを検証しているときに、より多くのデバッグ情報を記録するために、プランバインディングステージ中にタイムアウト実行計画を待機します[#20530](https://github.com/pingcap/tidb/pull/20530)
     - スローログとスロークエリの結果に実行再試行時間を追加する [#20495](https://github.com/pingcap/tidb/pull/20495) [#20494](https://github.com/pingcap/tidb/pull/20494)
     - `table_storage_stats`システムテーブルを追加する [#20431](https://github.com/pingcap/tidb/pull/20431)
     - `INSERT` / `UPDATE` / `REPLACE`文のRPC実行時統計情報を追加する[#20430](https://github.com/pingcap/tidb/pull/20430)
@@ -71,8 +71,8 @@ TiDB バージョン: 4.0.8
     - Backup & Restore (BR)
 
         - `split`と`ingest`をパイプライン化して復元プロセスを高速化します[#427](https://github.com/pingcap/br/pull/427)
-        - PDスケジューラの手動復元をサポート [#530](https://github.com/pingcap/br/pull/530)
-        - `remove`スケジューラの代わりに`pause`スケジューラを使用する[#551](https://github.com/pingcap/br/pull/551)
+        - PDスケジューラーの手動復元をサポート [#530](https://github.com/pingcap/br/pull/530)
+        - `remove`スケジューラーの代わりに`pause`スケジューラーを使用する[#551](https://github.com/pingcap/br/pull/551)
 
     - TiCDC
 
@@ -87,8 +87,8 @@ TiDB バージョン: 4.0.8
     - TiDB Lightning
 
         - マルチバイトCSV区切り文字とセパレーターをサポート[#406](https://github.com/pingcap/tidb-lightning/pull/406)
-        - 一部のPDスケジューラを無効にして復元プロセスを高速化します[#408](https://github.com/pingcap/tidb-lightning/pull/408)
-        - v4.0 クラスタのチェックサム GC セーフポイントに GC-TTL API を使用して、GC エラーを回避します。 [#396](https://github.com/pingcap/tidb-lightning/pull/396)
+        - 一部のPDスケジューラーを無効にして復元プロセスを高速化します[#408](https://github.com/pingcap/tidb-lightning/pull/408)
+        - v4.0 クラスターのチェックサム GC セーフポイントに GC-TTL API を使用して、GC エラーを回避します。 [#396](https://github.com/pingcap/tidb-lightning/pull/396)
 
 ## バグ修正 {#bug-fixes}
 

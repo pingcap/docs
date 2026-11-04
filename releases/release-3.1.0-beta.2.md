@@ -20,19 +20,19 @@ TiDB Ansible バージョン: 3.1.0-beta.2
 - ツール
     - TiDB Lightning
         - 設定ファイルで設定されていない特定の項目については、 [TiDB Lightning設定](/tidb-lightning/tidb-lightning-configuration.md)で指定されたデフォルト設定を使用します。 [#255](https://github.com/pingcap/tidb-lightning/pull/255)
-        - TiDBパスワードを設定するための`--tidb-password` CLIパラメータを追加する[#253](https://github.com/pingcap/tidb-lightning/pull/253)
+        - TiDBパスワードを設定するための`--tidb-password` CLIパラメーターを追加する[#253](https://github.com/pingcap/tidb-lightning/pull/253)
 
 ## 新機能 {#new-features}
 
 - TiDB
     - 列属性に`AutoRandom`キーワードを追加することで、TiDB が主キーにランダムな整数を自動的に割り当てるようになり、主キー`AUTO_INCREMENT`によって発生する書き込みホットスポットを回避します[#14555](https://github.com/pingcap/tidb/pull/14555)
     - DDL文による列ストアのレプリカの作成または削除のサポート [#14537](https://github.com/pingcap/tidb/pull/14537)
-    - オプティマイザが異なるストレージエンジンを独立して選択できる機能を追加[#14537](https://github.com/pingcap/tidb/pull/14537)
+    - オプティマイザーが異なるストレージエンジンを独立して選択できる機能を追加[#14537](https://github.com/pingcap/tidb/pull/14537)
     - SQLヒントが異なるストレージエンジンをサポートする機能を追加[#14537](https://github.com/pingcap/tidb/pull/14537)
     - `tidb_replica_read`システム変数を使用してフォロワーからのデータの読み取りをサポート [#13464](https://github.com/pingcap/tidb/pull/13464)
 - TiKV
     - Raftstore
-        - 他のノードをTiKVサーバーに接続するための`peer_address`パラメータを追加します [#6491](https://github.com/tikv/tikv/pull/6491)
+        - 他のノードをTiKVサーバーに接続するための`peer_address`パラメーターを追加します [#6491](https://github.com/tikv/tikv/pull/6491)
         - `read_index`と`read_index_resp`監視メトリックを追加して、 `ReadIndex`リクエストの数を監視します[#6610](https://github.com/tikv/tikv/pull/6610)
 - PDクライアント
     - ローカルスレッドの統計情報をPD に報告する機能をサポート [#6605](https://github.com/tikv/tikv/pull/6605)

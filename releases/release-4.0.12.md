@@ -98,7 +98,7 @@ TiDB バージョン: 4.0.12
 
     - `IN`式が符号なし/符号付き整数を適切に処理しない問題を修正[#9850](https://github.com/tikv/tikv/pull/9850)
     - 取り込み操作が再入可能ではない問題を修正[#9779](https://github.com/tikv/tikv/pull/9779)
-    - TiKVコプロセッサでJSONを文字列に変換するときにスペースが失われる問題を修正 [#9666](https://github.com/tikv/tikv/pull/9666)
+    - TiKVコプロセッサーでJSONを文字列に変換するときにスペースが失われる問題を修正 [#9666](https://github.com/tikv/tikv/pull/9666)
 
 - PD
 
@@ -121,8 +121,8 @@ TiDB バージョン: 4.0.12
 
         - `resolved ts`イベントの順序が乱れる問題を修正 [#1464](https://github.com/pingcap/tiflow/pull/1464)
         - ネットワークの問題による誤ったテーブルスケジュールによって発生するデータ損失の問題を修正[#1508](https://github.com/pingcap/tiflow/pull/1508)
-        - プロセッサが停止した後にリソースが適時に解放されないバグを修正[#1547](https://github.com/pingcap/tiflow/pull/1547)
-        - トランザクションカウンタが正しく更新されず、データベース接続リークが発生する可能性があるバグを修正しました[#1524](https://github.com/pingcap/tiflow/pull/1524)
+        - プロセッサーが停止した後にリソースが適時に解放されないバグを修正[#1547](https://github.com/pingcap/tiflow/pull/1547)
+        - トランザクションカウンターが正しく更新されず、データベース接続リークが発生する可能性があるバグを修正しました[#1524](https://github.com/pingcap/tiflow/pull/1524)
         - PD にジッターがある場合に複数の所有者が共存し、テーブルが失われる可能性がある問題を修正しました。 [#1540](https://github.com/pingcap/tiflow/pull/1540)
 
     - Backup & Restore (BR)

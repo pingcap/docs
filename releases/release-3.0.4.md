@@ -18,13 +18,13 @@ TiDB Ansible バージョン: 3.0.4
 - 改善点
     - TiKV でバッチリージョン分割コマンドと空分割コマンドをサポートし、分割パフォーマンスを向上
     - TiKV で RocksDB の二重リンクリストをサポートし、逆スキャンのパフォーマンスを向上
-    - クラスタの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`を追加します。
+    - クラスターの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`を追加します。
     - 冗長なフィールドを削除して、TiDB のスロークエリログの出力を最適化します。
 - 動作の変更
     - デフォルト値の`txn-local-latches.enable`を`false`に更新して、TiDB のローカルトランザクションの競合をチェックするデフォルトの動作を無効にします。
     - TiDBにグローバルスコープのシステム変数`tidb_txn_mode`を追加し、悲観的ロックの使用を許可します。ただし、TiDBはデフォルトで依然として楽観的ロックを採用していることに注意してください。
     - TiDB スロークエリログの`Index_ids`フィールドを`Index_names`に置き換えて、スロークエリログの使いやすさを向上させます。
-    - TiDB設定ファイルに`split-region-max-num`パラメータを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。
+    - TiDB設定ファイルに`split-region-max-num`パラメーターを追加して、 `SPLIT TABLE`構文で許可されるリージョンの最大数を変更します。
     - SQL実行がメモリ制限を超えたときにリンクを切断する代わりに`Out Of Memory Quota`エラーを返します
     - 誤操作を避けるため、TiDBの列の`AUTO_INCREMENT`の属性の削除を禁止します。この属性を削除するには、 `tidb_allow_remove_auto_inc`のシステム変数を変更します。
 - 修正された問題
@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.4
 
 ## TiDB {#tidb}
 
-- SQLオプティマイザ
+- SQLオプティマイザー
     - フィードバックで分割すると無効なクエリ範囲が生成される可能性がある問題を修正しました [#12170](https://github.com/pingcap/tidb/pull/12170)
     - 結果に無効なキーが含まれている場合はエラーを返すのではなく、 `SHOW STATS_BUCKETS`のステートメントの返されたエラーを16進数で表示します。 [#12094](https://github.com/pingcap/tidb/pull/12094)
     - クエリに`SLEEP`関数（たとえば`select 1 from (select sleep(1)) t;)` ）が含まれている場合、列プルーニングによってクエリ中に無効な`sleep(1)`が発生する問題を修正しました。 [#11953](https://github.com/pingcap/tidb/pull/11953)
@@ -104,7 +104,7 @@ TiDB Ansible バージョン: 3.0.4
 ## PD {#pd}
 
 - 隣接する小さいリージョンを結合できない問題を修正[#1726](https://github.com/pingcap/pd/pull/1726)
-- `pd-ctl`のTLS有効化パラメータが無効である問題を修正[#1738](https://github.com/pingcap/pd/pull/1738)
+- `pd-ctl`のTLS有効化パラメーターが無効である問題を修正[#1738](https://github.com/pingcap/pd/pull/1738)
 - PDオペレーターが誤って削除されるスレッドセーフの問題を修正[#1734](https://github.com/pingcap/pd/pull/1734)
 - リージョンシンカーのTLSをサポート [#1739](https://github.com/pingcap/pd/pull/1739)
 
@@ -122,7 +122,7 @@ TiDB Ansible バージョン: 3.0.4
 - TiSparkをv2.2.0 にアップグレード [#926](https://github.com/pingcap/tidb-ansible/pull/926)
 - TiDB設定項目`pessimistic_txn`のデフォルト値を`true` に更新します。 [#933](https://github.com/pingcap/tidb-ansible/pull/933)
 - `node_exporter` にシステムレベルの監視メトリックを追加します [#938](https://github.com/pingcap/tidb-ansible/pull/938)
-- クラスタの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`を追加します[#946](https://github.com/pingcap/tidb-ansible/pull/946)
+- クラスターの状態をより適切に診断するために、TiDB Ansibleに2つのperfツール`iosnoop`と`funcslower`を追加します[#946](https://github.com/pingcap/tidb-ansible/pull/946)
 - パスワードの有効期限が切れた場合などに発生する長い待機時間に対処するために、rawモジュールをシェルモジュールに置き換えます[#949](https://github.com/pingcap/tidb-ansible/pull/949)
 - TiDB設定項目`txn_local_latches`のデフォルト値を`false`に更新します
 - Grafanaダッシュボードの監視メトリックとアラートルールを最適化する[#962](https://github.com/pingcap/tidb-ansible/pull/962) [#963](https://github.com/pingcap/tidb-ansible/pull/963) [#969](https://github.com/pingcap/tidb-ansible/pull/963)

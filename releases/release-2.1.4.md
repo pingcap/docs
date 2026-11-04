@@ -1,15 +1,15 @@
 ---
 title: TiDB 2.1.4 Release Notes
-summary: TiDB 2.1.4およびTiDB Ansible 2.1.4は、2019年2月15日にリリースされました。このリリースでは、安定性、SQLオプティマイザ、統計、実行エンジンが改善されています。SQLオプティマイザ/エグゼキュータ、サーバー、DDL、TiKVに関する問題が修正されています。Lightningツールの最適化には、メモリ使用量、チャンク分割の削除、I/O同時実行制限、バッチデータインポートのサポート、TiKVインポートモードでの自動コンパクションが含まれます。さらに、TiKVの定期的なレベル1コンパクションパラメータの無効化とインポートエンジン数の制限もサポートされました。Sync-diff-inspectorは、TiDB統計を使用したチャンク分割をサポートするようになりました。
+summary: TiDB 2.1.4およびTiDB Ansible 2.1.4は、2019年2月15日にリリースされました。このリリースでは、安定性、SQLオプティマイザー、統計、実行エンジンが改善されています。SQLオプティマイザー/エグゼキューター、サーバー、DDL、TiKVに関する問題が修正されています。Lightningツールの最適化には、メモリ使用量、チャンク分割の削除、I/O同時実行制限、バッチデータインポートのサポート、TiKVインポートモードでの自動コンパクションが含まれます。さらに、TiKVの定期的なレベル1コンパクションパラメーターの無効化とインポートエンジン数の制限もサポートされました。Sync-diff-inspectorは、TiDB統計を使用したチャンク分割をサポートするようになりました。
 ---
 
 # TiDB 2.1.4 リリースノート {#tidb-2-1-4-release-notes}
 
-2019年2月15日にTiDB 2.1.4がリリースされました。対応するTiDB Ansible 2.1.4もリリースされました。このリリースでは、TiDB 2.1.3と比較して、安定性、SQLオプティマイザ、統計、実行エンジンが大幅に改善されています。
+2019年2月15日にTiDB 2.1.4がリリースされました。対応するTiDB Ansible 2.1.4もリリースされました。このリリースでは、TiDB 2.1.3と比較して、安定性、SQLオプティマイザー、統計、実行エンジンが大幅に改善されています。
 
 ## TiDB {#tidb}
 
-- SQL オプティマイザ/エグゼキューター
+- SQL オプティマイザー/エグゼキューター
     - `VALUES`関数が FLOAT 型を正しく処理しない問題を修正[#9223](https://github.com/pingcap/tidb/pull/9223)
     - 一部のケースで Float を String にキャストすると結果が間違ってしまう問題を修正[#9227](https://github.com/pingcap/tidb/pull/9227)
     - `FORMAT`関数が一部のケースで誤った結果を出す問題を修正[#9235](https://github.com/pingcap/tidb/pull/9235)
@@ -35,6 +35,6 @@ summary: TiDB 2.1.4およびTiDB Ansible 2.1.4は、2019年2月15日にリリー
     - ダンプファイルの読み取りI/O同時実行を制限し、キャッシュミスが多すぎることによるパフォーマンスの低下を回避します[#110](https://github.com/pingcap/tidb-lightning/pull/110)
     - インポートの安定性を向上させるために、単一のテーブルへのデータのバッチインポートをサポートします[#110](https://github.com/pingcap/tidb-lightning/pull/113)
     - TiKV のインポートモードで自動コンパクションを有効にする [#4199](https://github.com/tikv/tikv/pull/4199)
-    - TiKV クラスタバージョンが 2.1.4 以降の場合、インポートモードでレベル 1 コンパクションが自動的に実行されるため、TiKV 定期的なレベル 1 コンパクションパラメータを無効にすることをサポートします[#119](https://github.com/pingcap/tidb-lightning/pull/119)
+    - TiKV クラスターバージョンが 2.1.4 以降の場合、インポートモードでレベル 1 コンパクションが自動的に実行されるため、TiKV 定期的なレベル 1 コンパクションパラメーターを無効にすることをサポートします[#119](https://github.com/pingcap/tidb-lightning/pull/119)
     - インポーターのディスク容量を過度に消費しないようにインポートエンジンの数を制限する[#119](https://github.com/pingcap/tidb-lightning/pull/119)
 - sync-diff-inspector の TiDB 統計を使用したチャンクの分割をサポート [#197](https://github.com/pingcap/tidb-tools/pull/197)
