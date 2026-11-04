@@ -228,8 +228,8 @@ show warnings;
 | `split.qps-threshold`                                     | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`を超える場合、このリージョンは分割される必要があります。                                    |
 | `split.byte-threshold`                                    | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンは分割されます。                                   |
 | `split.region-cpu-overload-threshold-ratio`               | リージョンで`load-base-split`を実行するためのしきい値。リージョンの統合読み取りプールのCPU使用率が10秒連続で`region-cpu-overload-threshold-ratio`を超えた場合、このリージョンは分割されます。(v6.2.0以降でサポート) |
-| `split.split-balance-score`                               | `load-base-split`というパラメーターは、2つの分割されたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、値が小さすぎると分割が失敗する可能性があります。                               |
-| `split.split-contained-score`                             | パラメーターは`load-base-split`です。値が小さいほど、リージョン分割後のリージョン間アクセス数が少なくなります。                                                                                 |
+| `split.split-balance-score`                               | `load-base-split`のパラメーターで、2つの分割されたリージョンの負荷が可能な限り均等になるようにします。値が小さいほど、負荷は均等になります。ただし、値が小さすぎると分割が失敗する可能性があります。                               |
+| `split.split-contained-score`                             | `load-base-split`のパラメーターです。値が小さいほど、リージョン分割後のリージョン間アクセス数が少なくなります。                                                                                 |
 | `cdc.min-ts-interval`                                     | Resolved TSが転送される時間間隔                                                                                                                          |
 | `cdc.old-value-cache-memory-quota`                        | TiCDC 古い値のエントリが占有するメモリの上限                                                                                                                  |
 | `cdc.sink-memory-quota`                                   | TiCDCデータ変更イベントが占有するメモリの上限                                                                                                                  |
