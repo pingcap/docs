@@ -9,7 +9,7 @@ summary: TiKV のステイル読み取りと safe-ts の原則を紹介し、 �
 
 ## ステイル読み取りとsafe-tsの概要 {#overview-of-stale-read-and-safe-ts}
 
-[ステイル読み取り](/stale-read.md) 、TiDB が TiDB に保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。TiKV では、 ステイル読み取り は[safe-ts](/#what-is-safe-ts)に依存します。リージョンピアへの読み取りリクエストのタイムスタンプ (ts) がそのリージョンの safe-ts 以下であれば、TiDB はピアからデータを安全に読み取れます。TiKV は、safe-ts が常に[resolved-ts](#what-is-resolved-ts)以下であることを保証することで、この安全性保証を実装しています。
+[ステイル読み取り](/stale-read.md)は、TiDB が TiDB に保存されているデータの履歴バージョンを読み取るために適用するメカニズムです。TiKV では、 ステイル読み取り は[safe-ts](/#what-is-safe-ts)に依存します。リージョンピアへの読み取りリクエストのタイムスタンプ (ts) がそのリージョンの safe-ts 以下であれば、TiDB はピアからデータを安全に読み取れます。TiKV は、safe-ts が常に[resolved-ts](#what-is-resolved-ts)以下であることを保証することで、この安全性保証を実装しています。
 
 ## safe-tsとresolved-tsを理解する {#understand-safe-ts-and-resolved-ts}
 
