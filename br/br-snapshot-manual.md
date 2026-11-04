@@ -133,7 +133,7 @@ tiup br restore full \
 
 バックアップと復元機能は、データをバックアップする際に、統計情報をJSON形式で`backupmeta`ファイルに保存します。データを復元する際には、JSON形式の統計情報をクラスターに読み込みます。詳細については、 [LOAD STATS](/sql-statements/sql-statement-load-stats.md)を参照してください。
 
-v8.5.5以降、 BRは`--fast-load-sys-tables`パラメーターを導入し、デフォルトで有効になっています。`br`コマンドラインツールを使用して新しいクラスターにデータを復元する場合、上流クラスターと下流クラスター間のテーブルとパーティションのIDを再利用できます（そうでない場合、 BRは自動的に統計を論理的にロードします）。 `--fast-load-sys-tables`を有効にすると、 BRはまず統計関連のシステムテーブルを一時システムデータベース`__TiDB_BR_Temporary_mysql`に復元し、次に`RENAME TABLE`文を使用してこれらのテーブルを`mysql`データベース内の対応するテーブルとアトミックにスワップします。
+v8.5.5以降、 BRは`--fast-load-sys-tables`パラメーターを導入し、デフォルトで有効になっています。`br`コマンドラインツールを使用して新しいクラスターにデータを復元する場合、上流クラスターと下流クラスター間のテーブルとパーティションのIDを再利用できる場合（そうでない場合、 BRは自動的に統計の論理的なロードにフォールバックします）、 `--fast-load-sys-tables`を有効にすると、 BRはまず統計関連のシステムテーブルを一時システムデータベース`__TiDB_BR_Temporary_mysql`に復元し、次に`RENAME TABLE`文を使用してこれらのテーブルを`mysql`データベース内の対応するテーブルとアトミックにスワップします。
 
 次に例を示します。
 
@@ -229,7 +229,7 @@ tiup br restore db \
     --log-file restore_db.log
 ```
 
-上記のコマンドでは、 `--db`復元するデータベースの名前を指定し、その他のパラメーターは[TiDB クラスターのスナップショットを復元する](#restore-cluster-snapshots)と同じです。
+上記のコマンドでは、 `--db`は復元するデータベースの名前を指定し、その他のパラメーターは[TiDB クラスターのスナップショットを復元する](#restore-cluster-snapshots)と同じです。
 
 > **Note:**
 >
@@ -251,7 +251,7 @@ tiup br restore table \
     --log-file restore_table.log
 ```
 
-上記のコマンドでは、 `--table`復元するテーブルの名前を指定し、その他のパラメーターは[データベースを復元する](#restore-a-database)と同じです。
+上記のコマンドでは、 `--table`は復元するテーブルの名前を指定し、その他のパラメーターは[データベースを復元する](#restore-a-database)と同じです。
 
 ### テーブルフィルターを使用して複数のテーブルを復元する {#restore-multiple-tables-with-table-filter}
 
