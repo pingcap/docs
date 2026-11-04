@@ -30,9 +30,9 @@ TiDB Cloudでは、以下の主要機能を利用できます。
 
     重要なワークロード向けに、 ACIDトランザクションを維持しながら、数百ノードまで柔軟かつ透過的に拡張できます。シャーディングについて悩む必要はありません。また、ビジネスニーズに応じて、コンピューティングノードとストレージノードを個別に拡張することも可能です。
 
-- **MySQLおよびPostgreSQLとの互換性**
+- **MySQL および PostgreSQL との互換性**
 
-    既存のアプリケーションコードや使い慣れたデータベースツールを再利用することで、生産性を向上させ、市場投入までの時間を短縮できます。TiDB Cloudは[MySQL compatibility](https://docs.pingcap.com/tidbcloud/mysql-compatibility/?plan=starter&compatibility=mysql)を提供しており、[PostgreSQL compatibility](https://docs.pingcap.com/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)もTiDB Cloud Starterでパブリックプレビューとして利用できます。
+    既存のアプリケーションコードや使い慣れたデータベースツールを再利用することで、生産性を向上させ、市場投入までの期間を短縮できます。TiDB Cloud は [MySQL との互換性](https://docs.pingcap.com/tidbcloud/mysql-compatibility/?plan=starter&compatibility=mysql)を備えています。また、TiDB Cloud Starter では、[PostgreSQL との互換性](https://docs.pingcap.com/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)もパブリックプレビューとして利用できます。
 
 - **高可用性と高信頼性**
 
