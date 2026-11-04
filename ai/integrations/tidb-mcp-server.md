@@ -27,7 +27,7 @@ MCPはクライアント/サーバーアーキテクチャを採用しており�
 
 - **MCP 互換クライアント**: 例:[Cursor](/ai/integrations/tidb-mcp-cursor.md)や[Claude Desktop](/ai/integrations/tidb-mcp-claude-desktop.md)。
 - **Python (&gt;=3.10) と uv** : Python (3.10 以降) と`uv`がインストールされていることを確認します。 [インストールガイド](https://docs.astral.sh/uv/getting-started/installation/)に従って`uv`をインストールします。
-- **TiDB Cloud Starterインスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料のTiDB Cloud Starterインスタンスを作成できます。
+- **{{{ .starter }}}インスタンス**: [TiDB Cloud](https://tidbcloud.com/free-trial)で無料の{{{ .starter }}}インスタンスを作成できます。
 
 ## サポートされているMCPクライアント {#supported-mcp-clients}
 
@@ -55,7 +55,7 @@ STDIOモードを使用してMCPクライアントにTiDB MCPサーバーを設�
 
 1. MCPサーバーの設定方法については、MCPクライアントのドキュメントを参照してください。
 
-2. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
+2. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}インスタンスの名前をクリックして概要ページに移動します。
 
 3. 接続パラメータを取得するには、右上隅の**Connect**をクリックしてください。
 
@@ -86,7 +86,7 @@ MCPクライアントでSSEモードを使用してTiDB MCPサーバーを設定
 
 1. MCPサーバーの設定方法については、MCPクライアントのドキュメントを参照してください。
 
-2. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Starterインスタンスの名前をクリックして概要ページに移動します。
+2. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象の{{{ .starter }}}インスタンスの名前をクリックして概要ページに移動します。
 
 3. 接続パラメータを取得するには、右上隅の**Connect**をクリックしてください。
 
@@ -128,7 +128,7 @@ TiDB MCPサーバーは、MCPクライアントに以下の操作（ツール）
 
 **データベース管理**
 
-- `show_databases` - TiDB Cloud Starterインスタンス内のすべてのデータベースを表示します
+- `show_databases` - {{{ .starter }}}インスタンス内のすべてのデータベースを表示します
 
     - `username` : データベースユーザー名（文字列、オプション）
     - `password` : データベースパスワード（文字列、オプション）

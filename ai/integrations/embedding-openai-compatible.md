@@ -9,7 +9,7 @@ summary: TiDBベクトル検索をOpenAI互換の埋め込みモデルと統合�
 
 > **Note:**
 >
-> 現在、 [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされているTiDB Cloud Starterインスタンスでのみ利用できます。
+> 現在、 [自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)は、AWS でホストされている{{{ .starter }}}インスタンスでのみ利用できます。
 
 ## OpenAI互換の埋め込みサービス {#openai-compatible-embedding-services}
 

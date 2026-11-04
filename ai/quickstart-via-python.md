@@ -47,7 +47,7 @@ pip install "pytidb[models]"
 
 これらの接続パラメータは[TiDB Cloudコンソール](https://tidbcloud.com/tidbs)から取得できます。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象のTiDB Cloud Starterインスタンスの名前をクリックして、概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、次に、対象の{{{ .starter }}}インスタンスの名前をクリックして、概要ページに移動します。
 2. 右上隅の**Connect**をクリックします。接続ダイアログが表示され、接続パラメータが表示されます。
 
 例えば、接続パラメータが以下のように表示される場合：

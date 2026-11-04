@@ -16,7 +16,7 @@ aliases: ['/ja/tidbcloud/vector-search-auto-embedding-overview/']
 
 > **Note:**
 >
-> 自動埋め込み機能は、AWS上でホストされているTiDB Cloud Starterインスタンスでのみ利用可能です。
+> 自動埋め込み機能は、AWS上でホストされている{{{ .starter }}}インスタンスでのみ利用可能です。
 
 ## クイックスタートの例 {#quick-start-example}
 
