@@ -68,5 +68,5 @@ ALTER TABLE tpch.lineitem REFRESH CACHE;
 ## 注意事項と制限 {#notes-and-limitations}
 
 - Hive カタログは {{{ .lake }}} では**読み取り専用**です（書き込みは Hive 互換エンジン経由で行う必要があります）。
-- 基盤となるオブジェクトストレージへのアクセスが必要です。認証情報は [接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md) を使用して設定してください。
+- 基盤となるオブジェクトストレージへのアクセスが必要です。認証情報は [接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md) を使用して設定してください。
 - テーブルレイアウトが変更された場合（たとえば新しいパーティションが追加された場合）は、クエリ結果を最新の状態に保つために `ALTER TABLE ... REFRESH CACHE` を使用してください。

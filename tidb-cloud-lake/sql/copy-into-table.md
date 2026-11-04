@@ -8,7 +8,7 @@ summary: COPY INTO を使用すると、以下のいずれかの場所にある�
 COPY INTO を使用すると、以下のいずれかの場所にあるファイルからデータをロード (load) できます。
 
 - ユーザー / 内部 / 外部 stage: {{{ .lake }}} の stage については、[Stage とは？](/tidb-cloud-lake/guides/stage-overview.md) を参照してください。
-- ストレージサービスで作成されたバケットまたはコンテナ。
+- ストレージサービスで作成されたバケットまたはコンテナー。
 - URL（`https://` で始まる）でファイルにアクセスできるリモートサーバー。
 - [IPFS](https://ipfs.tech) および Hugging Face リポジトリ。
 
@@ -185,7 +185,7 @@ copyOptions ::=
     ) ]
 ```
 
-## 主なパラメータ {#key-parameters}
+## 主なパラメーター {#key-parameters}
 
 - **FILES**: ロードする 1 つ以上のファイル名（カンマ区切り）を指定します。
 
@@ -193,7 +193,7 @@ copyOptions ::=
 
 ## フォーマットタイプのオプション {#format-type-options}
 
-`FILE_FORMAT` パラメータはさまざまなファイルタイプをサポートしており、それぞれに固有のフォーマットオプションがあります。以下に、サポートされている各ファイル形式で使用可能なオプションを示します。すべてのオプションの詳細については、[入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
+`FILE_FORMAT` パラメーターはさまざまなファイルタイプをサポートしており、それぞれに固有のフォーマットオプションがあります。以下に、サポートされている各ファイル形式で使用可能なオプションを示します。すべてのオプションの詳細については、[入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md) を参照してください。
 
 <SimpleTab>
 
@@ -285,7 +285,7 @@ copyOptions ::=
 
 ## コピーオプション {#copy-options}
 
-| パラメータ | 説明 | デフォルト |
+| パラメーター | 説明 | デフォルト |
 |-----------|-------------|----------|
 | PURGE | ロード成功後にファイルを削除する | `false` |
 | FORCE | 重複ファイルの再ロードを許可する | `false` (重複をスキップ) |
@@ -330,7 +330,7 @@ COPY INTO は、以下のカラムを含むデータロード結果のサマリ�
 
 ## 例 {#examples}
 
-外部ストレージソースでは、COPY 文で認証情報を直接指定する代わりに、`CONNECTION_NAME` パラメータを使用して事前作成済みの接続を利用することを推奨します。この方法により、セキュリティ、管理性、再利用性が向上します。接続の作成方法の詳細については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
+外部ストレージソースでは、COPY 文で認証情報を直接指定する代わりに、`CONNECTION_NAME` パラメーターを使用して事前作成済みの接続を利用することを推奨します。この方法により、セキュリティ、管理性、再利用性が向上します。接続の作成方法の詳細については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 
 ### 例 1: stage からのロード {#example-1-loading-from-stages}
 
@@ -529,7 +529,7 @@ COPY INTO mytable
 
 ### 例 4: PATTERN を使用したファイルのフィルタリング {#example-4-filtering-files-with-pattern}
 
-この例では、PATTERN パラメータによるパターンマッチングを使用して、Amazon S3 から CSV ファイルをロードする方法を示します。ファイル名に 'sales' を含み、拡張子が '.csv' のファイルをフィルタリングします。
+この例では、PATTERN パラメーターによるパターンマッチングを使用して、Amazon S3 から CSV ファイルをロードする方法を示します。ファイル名に 'sales' を含み、拡張子が '.csv' のファイルをフィルタリングします。
 
 ```sql
 -- Create connection for pattern-based file loading
@@ -568,7 +568,7 @@ COPY INTO mytable
     );
 ```
 
-複数のフォルダを含むパス内の stage 上のファイルに対してパターンを指定する場合、パターンは `@<stage_name>[/<path>]` より後のパス部分にのみ一致することに注意してください。たとえば、`FROM @sales_stage/raw/` の場合、ファイル `@sales_stage/raw/year=2025/month=01/sales_20250101.parquet` は `year=2025/month=01/sales_20250101.parquet` としてマッチされます。
+複数のフォルダーを含むパス内の stage 上のファイルに対してパターンを指定する場合、パターンは `@<stage_name>[/<path>]` より後のパス部分にのみ一致することに注意してください。たとえば、`FROM @sales_stage/raw/` の場合、ファイル `@sales_stage/raw/year=2025/month=01/sales_20250101.parquet` は `year=2025/month=01/sales_20250101.parquet` としてマッチされます。
 
 - プレフィックスに続く特定のサブパスに一致させたい場合は、そのプレフィックスをパターンに含めて（例: 'year=2025/month=01/'）、そのサブパス内で一致させたいパターン（例: 'sales_'）を指定します。
 

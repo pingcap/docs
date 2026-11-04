@@ -36,7 +36,7 @@ $$
 | `<return_type>` | 集計が返すデータ型です（`DOUBLE`、`INT` など）。 |
 | `LANGUAGE` | スクリプトの実行に使用するランタイムです。サポートされる値: `javascript`、`python`。 |
 | `IMPORTS` / `PACKAGES` | 追加ファイル（imports）または PyPI パッケージ（Python のみ）を含めるための省略可能なリストです。 |
-| `<language_specific_code>` | `create_state`、`accumulate`、`merge`、`finish` のエントリーポイントを公開する必要があるスクリプト本体です。 |
+| `<language_specific_code>` | `create_state`、`accumulate`、`merge`、`finish` のエントリポイントを公開する必要があるスクリプト本体です。 |
 | `DESC` | 省略可能な説明です。 |
 
 スクリプトでは、次の関数を実装する必要があります。

@@ -13,9 +13,9 @@ summary: 配列からすべての NULL 値を削除します。
 ARRAY_COMPACT(array)
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | array     | NULL 値を削除する対象の配列です。 |
 

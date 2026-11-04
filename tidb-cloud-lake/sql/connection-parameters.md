@@ -1,11 +1,11 @@
 ---
-title: 接続パラメータ
-summary: 接続パラメータは、`CREATE CONNECTION` を使用して再利用可能な接続を作成する際に指定するキーと値のペアです。接続を作成した後は、`CONNECTION = (CONNECTION_NAME = '<connection-name>')` を使用して、stage、`COPY` コマンド、およびその他の SQL 機能からその接続を参照できます。完全な構文と使用方法については、`CREATE CONNECTION` を参照してください。
+title: 接続パラメーター
+summary: 接続パラメーターは、`CREATE CONNECTION` を使用して再利用可能な接続を作成する際に指定するキーと値のペアです。接続を作成した後は、`CONNECTION = (CONNECTION_NAME = '<connection-name>')` を使用して、stage、`COPY` コマンド、およびその他の SQL 機能からその接続を参照できます。完全な構文と使用方法については、`CREATE CONNECTION` を参照してください。
 ---
 
-# 接続パラメータ
+# 接続パラメーター
 
-接続パラメータは、`CREATE CONNECTION` を使用して再利用可能な接続を作成する際に指定するキーと値のペアです。接続を作成した後は、`CONNECTION = (CONNECTION_NAME = '<connection-name>')` を使用して、stage、COPY コマンド、およびその他の SQL 機能からその接続を参照できます。完全な構文と使用方法については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
+接続パラメーターは、`CREATE CONNECTION` を使用して再利用可能な接続を作成する際に指定するキーと値のペアです。接続を作成した後は、`CONNECTION = (CONNECTION_NAME = '<connection-name>')` を使用して、stage、COPY コマンド、およびその他の SQL 機能からその接続を参照できます。完全な構文と使用方法については、[CREATE CONNECTION](/tidb-cloud-lake/sql/create-connection.md) を参照してください。
 
 ストレージ固有の接続詳細については、以下の表を参照してください。
 
@@ -13,12 +13,12 @@ summary: 接続パラメータは、`CREATE CONNECTION` を使用して再利用
 
 <div label="Amazon S3" value="Amazon S3">
 
-以下の表は、Amazon S3 互換ストレージサービスにアクセスするための接続パラメータを示しています。
+以下の表は、Amazon S3 互換ストレージサービスにアクセスするための接続パラメーターを示しています。
 
 | パラメーター                | 必須?      | 説明                                                          |
 |--------------------------- |----------- |-------------------------------------------------------------- |
 | endpoint_url               | はい        | Amazon S3 互換ストレージサービスのエンドポイント URL。              |
-| access_key_id              | はい        | リクエスタを識別するためのアクセスキー ID。                         |
+| access_key_id              | はい        | リクエスターを識別するためのアクセスキー ID。                         |
 | secret_access_key          | はい        | 認証用のシークレットアクセスキー。                                 |
 | enable_virtual_host_style  | いいえ         | 仮想ホスト形式 URL を使用するかどうか。デフォルトは *false*。        |
 | master_key                 | いいえ         | 高度なデータ暗号化のためのオプションのマスターキー。                 |
@@ -27,9 +27,9 @@ summary: 接続パラメータは、`CREATE CONNECTION` を使用して再利用
 
 > **Note:**
 >
-> - コマンドで **endpoint_url** パラメータが指定されていない場合、{{{ .lake }}} はデフォルトで Amazon S3 上に stage を作成します。そのため、S3 互換オブジェクトストレージやその他のオブジェクトストレージソリューション上に外部 stage を作成する場合は、必ず **endpoint_url** パラメータを含めてください。
+> - コマンドで **endpoint_url** パラメーターが指定されていない場合、{{{ .lake }}} はデフォルトで Amazon S3 上に stage を作成します。そのため、S3 互換オブジェクトストレージやその他のオブジェクトストレージソリューション上に外部 stage を作成する場合は、必ず **endpoint_url** パラメーターを含めてください。
 >
-> - **region** パラメータは、{{{ .lake }}} がリージョン情報を自動検出できるため必須ではありません。通常、このパラメータの値を手動で指定する必要はありません。自動検出に失敗した場合、{{{ .lake }}} はデフォルトで 'us-east-1' をリージョンとして使用します。MinIO とともに {{{ .lake }}} をデプロイし、リージョン情報を設定していない場合も、自動的に 'us-east-1' が使用され、正常に動作します。ただし、"region is missing" や "The bucket you are trying to access requires a specific endpoint. Please direct all future requests to this particular endpoint" のようなエラーメッセージが表示された場合は、リージョン名を確認し、**region** パラメータに明示的に設定する必要があります。
+> - **region** パラメーターは、{{{ .lake }}} がリージョン情報を自動検出できるため必須ではありません。通常、このパラメーターの値を手動で指定する必要はありません。自動検出に失敗した場合、{{{ .lake }}} はデフォルトで 'us-east-1' をリージョンとして使用します。MinIO とともに {{{ .lake }}} をデプロイし、リージョン情報を設定していない場合も、自動的に 'us-east-1' が使用され、正常に動作します。ただし、"region is missing" や "The bucket you are trying to access requires a specific endpoint. Please direct all future requests to this particular endpoint" のようなエラーメッセージが表示された場合は、リージョン名を確認し、**region** パラメーターに明示的に設定する必要があります。
 
 ```sql title='Examples'
 -- Create a reusable connection for Amazon S3
@@ -57,7 +57,7 @@ CREATE STAGE my_minio_stage
 
 Amazon S3 バケットにアクセスするために、認証用の AWS IAM ロールと 外部 ID を指定することもできます。AWS IAM ロールと 外部 ID を指定することで、ユーザーがアクセスできる S3 バケットをより細かく制御できます。つまり、IAM ロールに特定の S3 バケットへのアクセス権限のみが付与されている場合、ユーザーはそのバケットにのみアクセスできます。外部 ID は、追加の検証レイヤーを提供することで、さらにセキュリティを強化できます。詳細については、<https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-role.html> を参照してください。
 
-以下の表は、AWS IAM ロール認証を使用して Amazon S3 ストレージサービスにアクセスするための接続パラメータを示しています。
+以下の表は、AWS IAM ロール認証を使用して Amazon S3 ストレージサービスにアクセスするための接続パラメーターを示しています。
 
 | パラメーター   | 必須?      | 説明                                                   |
 |-------------- |----------- |------------------------------------------------------- |
@@ -82,7 +82,7 @@ CREATE STAGE my_iam_stage
 
 <div label="Azure Blob" value="Azure Blob">
 
-以下の表は、Azure Blob Storage にアクセスするための接続パラメータを示しています。
+以下の表は、Azure Blob Storage にアクセスするための接続パラメーターを示しています。
 
 | パラメーター      | 必須?   | 説明                                           |
 |----------------|-------------|-------------------------------------------------------|
@@ -108,9 +108,9 @@ CREATE STAGE my_azure_stage
 
 <div label="Google GCS" value="Google GCS">
 
-以下の表は、Google Cloud Storage にアクセスするための接続パラメータを示しています。
+以下の表は、Google Cloud Storage にアクセスするための接続パラメーターを示しています。
 
-| パラメータ      | 必須?   | 説明                                           |
+| パラメーター      | 必須?   | 説明                                           |
 |----------------|-------------|-------------------------------------------------------|
 | credential     | はい         | 認証用の Google Cloud Storage 認証情報。               |
 
@@ -136,7 +136,7 @@ CREATE STAGE my_gcs_stage
 
 <div label="Alibaba Cloud OSS" value="Alibaba OSS">
 
-以下の表は、Alibaba Cloud OSS にアクセスするための接続パラメータを示しています。
+以下の表は、Alibaba Cloud OSS にアクセスするための接続パラメーターを示しています。
 
 | パラメーター          | 必須?      | 説明                                                     |
 |---------------------- |----------- |--------------------------------------------------------- |
@@ -163,7 +163,7 @@ CREATE STAGE my_oss_stage
 
 <div label="Tencent COS" value="Tencent COS">
 
-以下の表は、Tencent Cloud Object Storage (COS) にアクセスするための接続パラメータを示しています。
+以下の表は、Tencent Cloud Object Storage (COS) にアクセスするための接続パラメーターを示しています。
 
 | パラメーター     | 必須?  | 説明                                                  |
 |-------------- |----------- |------------------------------------------------------------- |
@@ -189,7 +189,7 @@ CREATE STAGE my_cos_stage
 
 <div label="HuggingFace" value="Hugging Face">
 
-以下の表は、Hugging Face にアクセスするための接続パラメータを示しています。
+以下の表は、Hugging Face にアクセスするための接続パラメーターを示しています。
 
 | パラメーター | 必須?             | 説明                                                                                                     |
 |-----------|-----------------------|-----------------------------------------------------------------------------------------------------------------|

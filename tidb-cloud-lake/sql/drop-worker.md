@@ -21,9 +21,9 @@ worker を削除します。
 DROP WORKER [ IF EXISTS ] <worker_name>
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | `IF EXISTS` | 任意。worker が存在しない場合のエラーを抑制します。 |
 | `<worker_name>` | worker 名です。 |

@@ -13,9 +13,9 @@ summary: 配列から要素の最初の出現を削除します。
 ARRAY_REMOVE_FIRST(array, element)
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-------------|
 | array     | 要素を削除する元の配列です。 |
 | element   | 配列から削除する要素です。 |

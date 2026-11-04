@@ -19,7 +19,7 @@ summary: "{{{ .lake }}} はデフォルトのストレージエンジンとし�
 
 以下の用途に適しています。
 
-- **分析**: カラムナストレージによる OLAP クエリ
+- **分析**: カラムナーストレージによる OLAP クエリ
 - **データウェアハウジング**: 大量の履歴データ
 - **タイムトラベル**: 過去のデータバージョンへのアクセス
 - **クラウドストレージ**: オブジェクトストレージ向けに最適化
@@ -36,9 +36,9 @@ CREATE TABLE <table_name> (
 
 `CREATE TABLE` 構文の詳細については、[CREATE TABLE](/tidb-cloud-lake/sql/create-table.md) を参照してください。
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-以下は、Fuse Engine テーブルを作成する際の主なパラメータです。
+以下は、Fuse Engine テーブルを作成する際の主なパラメーターです。
 
 ### `ENGINE` {#engine}
 
@@ -69,7 +69,7 @@ CREATE TABLE <table_name> (
 ### `snapshot_loc` {#snapshot_loc}
 
 - **構文:** `snapshot_loc = '<snapshot_loc>'`
-- **説明:** 文字列形式の location パラメータを指定し、データをコピーせずにテーブルを簡単に共有できるようにします。
+- **説明:** 文字列形式の location パラメーターを指定し、データをコピーせずにテーブルを簡単に共有できるようにします。
 
 ### `block_size_threshold` {#block_size_threshold}
 

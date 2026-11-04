@@ -13,10 +13,10 @@ summary: 作成されたシーケンスの一覧を返します。
 SHOW SEQUENCES [ LIKE '<pattern>' | WHERE <expr> ]
 ```
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 |-----------|-----------------------------------------------------------------------------------------------------------------------------|
 | LIKE      | 大文字と小文字を区別するパターンマッチングを使用して、名前で結果を絞り込みます。 |
-| WHERE     | WHERE 句の式を使用して結果を絞り込みます。`name`、`start`、`interval`、`current`、`created_on`、`updated_on`、`comment` など、結果セット内の任意のカラムに基づいてフィルタできます。例: `WHERE start > 0` または `WHERE name LIKE 's%'`。 |
+| WHERE     | WHERE 句の式を使用して結果を絞り込みます。`name`、`start`、`interval`、`current`、`created_on`、`updated_on`、`comment` など、結果セット内の任意のカラムに基づいてフィルターできます。例: `WHERE start > 0` または `WHERE name LIKE 's%'`。 |
 
 ## 例 {#examples}
 

@@ -34,9 +34,9 @@ CONNECTION = (
 );
 ```
 
-### パラメータ {#parameters}
+### パラメーター {#parameters}
 
-| パラメータ | 必須 | 説明 |
+| パラメーター | 必須 | 説明 |
 | --- | --- | --- |
 | `<catalog_name>` | はい | {{{ .lake }}} 内のカタログ名。 |
 | `TYPE` | はい | カタログエンジン。この値を `ICEBERG` に設定します。 |
@@ -46,9 +46,9 @@ CONNECTION = (
 | `WAREHOUSE` | カタログタイプによる | カタログで使用される warehouse の場所。 |
 | `<connection_parameter>` | カタログタイプによる | カタログ、認証、およびオブジェクトストレージのプロパティ。 |
 
-以下の接続パラメータは、S3 互換ストレージで使用できます。
+以下の接続パラメーターは、S3 互換ストレージで使用できます。
 
-| 接続パラメータ | 説明 |
+| 接続パラメーター | 説明 |
 | --- | --- |
 | `s3.endpoint` | S3 互換サービスのエンドポイント。 |
 | `s3.access-key-id` | S3 access key ID。 |
@@ -80,7 +80,7 @@ CONNECTION = (
 
 Storage カタログは、以下の AWS クライアントプロパティをサポートします。
 
-| 接続パラメータ | 説明 |
+| 接続パラメーター | 説明 |
 | --- | --- |
 | `table_bucket_arn` | Amazon S3 Tables のテーブルバケットの ARN。 |
 | `profile_name` | AWS プロファイル名。 |
@@ -162,7 +162,7 @@ ENGINE = ICEBERG
 [ PARTITION BY ( <column_name> [ , ... ] ) ];
 ```
 
-| パラメータ | 説明 |
+| パラメーター | 説明 |
 | --- | --- |
 | `ENGINE = ICEBERG` | テーブルを Iceberg 形式で保存します。 |
 | `PARTITION BY` | 1 つ以上のパーティションカラムを定義します。 |

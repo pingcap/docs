@@ -143,9 +143,9 @@ SELECT * FROM system.settings;
 | inlist_runtime_bloom_prune_threshold | 64 | 64 | DEFAULT | ランタイム block bloom pruning における IN リストの最大値数を設定します。 | UInt64 |
 | inlist_runtime_filter_threshold | 1024 | 1024 | DEFAULT | ランタイムフィルター生成における IN リストの最大値数を設定します。 | UInt64 |
 | inlist_to_join_threshold | 1024 | 1024 | DEFAULT | IN リストを JOIN に変換するしきい値を設定します。 | UInt64 |
-| input_read_buffer_size | 4194304 | 4194304 | DEFAULT | バッファ付きリーダーがストレージからデータを読み取る際に使用するバッファへ割り当てるメモリサイズをバイト単位で設定します。 | UInt64 |
+| input_read_buffer_size | 4194304 | 4194304 | DEFAULT | バッファー付きリーダーがストレージからデータを読み取る際に使用するバッファーへ割り当てるメモリサイズをバイト単位で設定します。 | UInt64 |
 | join_runtime_filter_selectivity_threshold | 10 | 10 | DEFAULT | bloom join ランタイムフィルターの選択率しきい値 (パーセンテージ) です。デフォルトの 10 は 10% を意味します。 | UInt64 |
-| join_spilling_buffer_threshold_per_proc_mb | 512 | 512 | DEFAULT | 各 join processor のスピルバッファしきい値 (MB) を設定します。 | UInt64 |
+| join_spilling_buffer_threshold_per_proc_mb | 512 | 512 | DEFAULT | 各 join processor のスピルバッファーしきい値 (MB) を設定します。 | UInt64 |
 | join_spilling_memory_ratio | 60 | 60 | LOCAL | hash join がデータをストレージにスピルする前に使用できる最大メモリ比率をバイト単位で設定します。0 は無制限です。 | UInt64 |
 | join_spilling_partition_bits | 4 | 4 | DEFAULT | join spilling のパーティション数を設定します。デフォルト値は 4 で、2^4 パーティションを意味します。 | UInt64 |
 | lazy_read_across_join_threshold | 10 | 10 | DEFAULT | join をまたぐ lazy read 最適化を有効にするクエリ内の最大 LIMIT を設定します。0 に設定するとこの最適化を無効にします。 | UInt64 |
@@ -215,7 +215,7 @@ SELECT * FROM system.settings;
 | storage_fetch_part_num | 2 | 2 | DEFAULT | クエリ実行中にストレージから並列取得するパーティション数を設定します。 | UInt64 |
 | storage_io_max_page_bytes_for_read | 524288 | 524288 | DEFAULT | 1 回の I/O 操作でストレージから読み取れるデータページの最大バイトサイズを設定します。 | UInt64 |
 | storage_io_min_bytes_for_seek | 48 | 48 | DEFAULT | 新しい位置を seek する際に、1 回の I/O 操作でストレージから読み取る必要があるデータの最小バイトサイズを設定します。 | UInt64 |
-| storage_read_buffer_size | 1048576 | 1048576 | DEFAULT | データをメモリに読み込むために使用するバッファのバイトサイズを設定します。 | UInt64 |
+| storage_read_buffer_size | 1048576 | 1048576 | DEFAULT | データをメモリに読み込むために使用するバッファーのバイトサイズを設定します。 | UInt64 |
 | stream_consume_batch_size_hint | 0 | 0 | DEFAULT | stream 消費時のバッチサイズのヒントです。無効にするには 0 に設定します。 | UInt64 |
 | system_tables_count_db_concurrency | 16 | 16 | DEFAULT | system.tables count 最適化で使用する DB レベルの並行性を設定します。 | UInt64 |
 | table_lock_expire_secs | 30 | 30 | DEFAULT | テーブルロックの有効期限までの秒数を設定します。 | UInt64 |
