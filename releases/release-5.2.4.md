@@ -84,7 +84,7 @@ TiDBバージョン：5.2.4
     - テーブルに仮想列がある場合、TiDBが誤ったデータを読み取る可能性がある問題を修正しました [#30965](https://github.com/pingcap/tidb/issues/30965)
     - ログレベルの設定がスロークエリログに反映されない問題を修正しました [#30309](https://github.com/pingcap/tidb/issues/30309)
     - パーティションテーブルが場合によってはインデックスを完全に利用してデータをスキャンできない問題を修正しました [#33966](https://github.com/pingcap/tidb/issues/33966)
-    - TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスターが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
+    - TiDBのバックグラウンドHTTPサービスが正常に終了しない可能性があり、クラスターが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
     - TiDBが認証失敗のログを予期せず多数出力する可能性がある問題を修正しました [#29709](https://github.com/pingcap/tidb/issues/29709)
     - システム変数`max_allowed_packet`が有効にならない問題を修正します [#31422](https://github.com/pingcap/tidb/issues/31422)
     - 自動 ID が範囲外の場合に`REPLACE`文が他の行を誤って変更してしまう問題を修正しました [#29483](https://github.com/pingcap/tidb/issues/29483)
