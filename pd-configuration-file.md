@@ -7,7 +7,7 @@ summary: PD 設定ファイルについて学習します。
 
 <!-- markdownlint-disable MD001 -->
 
-PD設定ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの設定ファイルは[ここ](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)あります。
+PD設定ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの設定ファイルは[ここ](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)にあります。
 
 このドキュメントでは、コマンドラインパラメーターに含まれないパラメーターについてのみ説明します。コマンドラインパラメーターについては、 [ここ](/command-line-flags-for-pd-configuration.md)を参照してください。
 
@@ -376,7 +376,7 @@ pd-server関連の設定項目
 
 ### `merge-schedule-limit` {#merge-schedule-limit}
 
-- 同時に実行される`Region Merge`スケジュールタスクの数`Region Merge`を無効にするには、このパラメーターを`0`に設定します。
+- 同時に実行される`Region Merge`スケジュールタスクの数。`Region Merge`を無効にするには、このパラメーターを`0`に設定します。
 - デフォルト値: `8`
 
 ### `affinity-schedule-limit` <span class="version-mark">v8.5.5 の新機能</span> {#affinity-schedule-limit-new-in-v855}
