@@ -259,7 +259,7 @@ This can be fixed by splitting the CSV into multiple files first. For the generi
 strict-format = true
 
 [mydumper.csv]
-terminator = "\n" # Or "\r" or "\r\n", depending on the actual line terminator in your file.
+terminator = "\n" # Set it to "\n", "\r", or "\r\n", depending on the actual line terminator in your files.
 ```
 
 In a strict CSV file, every field occupies only a single line. In other words, one of the following must be true:
