@@ -137,7 +137,7 @@ tiup update playground
 
     - Firefox:**メニュー** > **Web 開発** > **ツールの切り替え**、または**ツール** > **Web 開発** > **ツールの切り替え**。
     - Chrome:**その他のツール** > **開発者ツール**。
-    - Safari:**開発** > **Webインスペクターを表示**。**開発**メニューが表示されない場合は、 **Safari** > **環境設定** > **詳細**に移動し、メニューバーに**開発メニューを表示**チェックボックスをオンにします。
+    - Safari:**Develop** > **Show Web Inspector**。**Develop**メニューが表示されない場合は、 **Safari** > **Preferences** > **Advanced**に移動し、**Show Develop menu in menu bar**チェックボックスをオンにします。
 
     次の例では、Chrome が使用されています。
 
