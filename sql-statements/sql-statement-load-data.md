@@ -46,7 +46,7 @@ Fields ::=
 
 ### `LOCAL` {#local}
 
-`LOCAL`を使用して、インポートするクライアント上のデータファイルを指定できます。ファイル パラメーターは、クライアント上のファイルシステム パスである必要があります。
+`LOCAL`を使用して、インポートするクライアント上のデータファイルを指定できます。ファイルパラメーターは、クライアント上のファイルシステムパスである必要があります。
 
 TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカルデータファイルをロードするには、 TiDB Cloudに接続するときに接続文字列に`--local-infile`オプションを追加する必要があります。
 
@@ -75,13 +75,13 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 
 <CustomContent platform="tidb">
 
-`LOCAL`を指定しない場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳述されているように、ファイル パラメータは有効な S3 または GCS パスである必要があります。
+`LOCAL`を指定しない場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳述されているように、ファイルパラメータは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`LOCAL`を指定しない場合は、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳述されているように、ファイル パラメータは有効な S3 または GCS パスである必要があります。
+`LOCAL`を指定しない場合は、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳述されているように、ファイルパラメータは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 

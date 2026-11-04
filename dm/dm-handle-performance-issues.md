@@ -29,9 +29,9 @@ summary: DM に存在する可能性のある一般的なパフォーマンス�
 
 - 単一データセンター内でのデータ移行では、 binlogデータの読み取りはパフォーマンスのボトルネックにはなりません。`read binlog event duration`の値が大きすぎる場合は、DM-workerとMySQL/MariaDB間のネットワーク接続を確認してください。
 
-- 地理的に分散された環境でのデータ移行では、DM-workerと MySQL/MariaDB を 1つのデータセンターにデプロイし、TiDB クラスターをターゲット データセンターにデプロイするようにしてください。
+- 地理的に分散された環境でのデータ移行では、DM-workerと MySQL/MariaDB を 1つのデータセンターにデプロイし、TiDB クラスターをターゲットデータセンターにデプロイするようにしてください。
 
-アップストリーム データベースからbinlogデータを読み取るプロセスには、次のサブプロセスが含まれます。
+アップストリームデータベースからbinlogデータを読み取るプロセスには、次のサブプロセスが含まれます。
 
 - 上流のMySQL/MariaDBはbinlogデータをローカルで読み取り、ネットワーク経由で送信します。MySQL/MariaDBの負荷に例外が発生しない限り、このサブプロセスは通常ボトルネックにはなりません。
 - binlogデータは、MySQL/MariaDBが配置されているマシンからDM-workerが配置されているマシンへネットワーク経由で転送されます。このサブプロセスがボトルネックになるかどうかは、主にDM-workerと上流のMySQL/MariaDB間のネットワーク接続に依存します。
@@ -78,7 +78,7 @@ Binlogレプリケーションユニットは、DMLを構築し、DDLを解析�
 
 ### 下流にSQL文を書き込む {#write-sql-statements-to-downstream}
 
-Binlogレプリケーション ユニットが変換された SQL文をダウンストリームに書き込む場合、関連するパフォーマンスメトリックは`DML queue remain length`と`transaction execution latency`になります。
+Binlogレプリケーションユニットが変換された SQL文をダウンストリームに書き込む場合、関連するパフォーマンスメトリックは`DML queue remain length`と`transaction execution latency`になります。
 
 DMはbinlogイベントからSQL文を構築した後、 `worker-count`キューを使用してこれらの文を下流に同時に書き込みます。ただし、監視エントリが過度に多くなりすぎないようにするため、DMは同時キューのIDに対して`8`を法とする演算を実行します。つまり、すべての同時キューは`q_0`から`q_7`までの1つのアイテムに対応します。
 

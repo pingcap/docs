@@ -5,14 +5,14 @@ summary: TiDBデータベースにおけるRESTOREの使用方法の概要。
 
 # RESTORE {#restore}
 
-このステートメントは[BACKUP](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップ アーカイブから分散復元を実行します。
+このステートメントは[BACKUP](/sql-statements/sql-statement-backup.md)によって以前に作成されたバックアップアーカイブから分散復元を実行します。
 
 > **Warning:**
 >
 > - この機能は実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される場合があります。バグを発見した場合は、GitHubで[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 > - この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
-`RESTORE`文は、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、リストア プロセスは別のBRツールではなく TiDB 自体によって実行されます。BR のすべての利点と注意点もここに適用されます。特に、 **`RESTORE`は現在ACID準拠ではありません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
+`RESTORE`文は、 [BRツール](https://docs.pingcap.com/tidb/stable/backup-and-restore-overview)と同じエンジンを使用しますが、リストアプロセスは別のBRツールではなく TiDB 自体によって実行されます。BR のすべての利点と注意点もここに適用されます。特に、 **`RESTORE`は現在ACID準拠ではありません**。 `RESTORE`を実行する前に、次の要件が満たされていることを確認してください。
 
 - クラスターは"offline"状態であり、現在有効なTiDBセッションは、復元中のすべてのテーブルにアクセスできる唯一のアクティブなSQL接続です。
 - 完全復元を実行する場合、復元対象のテーブルは既に存在してはなりません。既存のデータが上書きされ、データとインデックス間の不整合が発生する可能性があるためです。
@@ -81,7 +81,7 @@ RESTORE DATABASE * FROM 'local:///mnt/backup/2020/04/';
 
 ### 部分的な復元 {#partial-restore}
 
-復元するデータベースまたはテーブルを指定できます。バックアップ アーカイブに一部のデータベースまたはテーブルが存在しない場合でも、それらは無視されるため、 `RESTORE`は何もせずに完了します。
+復元するデータベースまたはテーブルを指定できます。バックアップアーカイブに一部のデータベースまたはテーブルが存在しない場合でも、それらは無視されるため、 `RESTORE`は何もせずに完了します。
 
 ```sql
 RESTORE DATABASE `test` FROM 'local:///mnt/backup/2020/04/';
@@ -112,7 +112,7 @@ RESTORE DATABASE * FROM 's3://example-bucket-2020/backup-05/'
 
 `RATE_LIMIT`を使用して、TiKVノードあたりの平均ダウンロード速度を制限し、ネットワーク帯域幅を削減します。
 
-リストアが完了する前に、 `RESTORE`はデフォルトでバックアップファイル内のデータに対してチェックサムを実行し、データの正当性を検証します。単一テーブルに対するチェックサム タスクのデフォルトの同時実行数は 4 ですが、 `CHECKSUM_CONCURRENCY`パラメータを使用して調整できます。データの検証が不要であると確信している場合は、 `CHECKSUM`パラメータを`FALSE`に設定することでチェックを無効にできます。
+リストアが完了する前に、 `RESTORE`はデフォルトでバックアップファイル内のデータに対してチェックサムを実行し、データの正当性を検証します。単一テーブルに対するチェックサムタスクのデフォルトの同時実行数は 4 ですが、 `CHECKSUM_CONCURRENCY`パラメータを使用して調整できます。データの検証が不要であると確信している場合は、 `CHECKSUM`パラメータを`FALSE`に設定することでチェックを無効にできます。
 
 統計情報がバックアップされている場合、復元時にデフォルトで復元されます。統計情報を復元する必要がない場合は、 `LOAD_STATS`パラメーターを`FALSE`に設定できます。
 

@@ -31,7 +31,7 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 ## パラメータの説明 {#parameter-descriptions}
 
-- [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンス テーブルのbinlogイベントまたは DDL SQL文は、以下のルールによってフィルター処理されます。
+- [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンステーブルのbinlogイベントまたは DDL SQL文は、以下のルールによってフィルター処理されます。
 
 - `events` : binlogイベント配列。次の表から1つ以上の`Event`のみを選択できます。
 
@@ -101,7 +101,7 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 ### すべてのシャーディング削除操作をフィルタリングする {#filter-all-sharding-deletion-operations}
 
-すべての削除操作をフィルタリングするには、次の2つのフィルタリング ルールを構成します。
+すべての削除操作をフィルタリングするには、次の2つのフィルタリングルールを構成します。
 
 - `filter-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`TRUNCATE TABLE` 、 `DROP TABLE` 、および`DELETE STATEMENT`操作を除外します。
 - `filter-schema-rule`は`test_*`パターンに一致するすべてのスキーマの`DROP DATABASE`操作を除外します。
@@ -121,7 +121,7 @@ filters:
 
 ### シャーディングDML文のみを移行する {#only-migrate-sharding-dml-statements}
 
-シャーディング DML文のみを移行するには、次の2つのフィルタリング ルールを構成します。
+シャーディング DML文のみを移行するには、次の2つのフィルタリングルールを構成します。
 
 - `do-table-rule`は、 `test_*`.`t_*`パターンに一致するすべてのテーブルの`CREATE TABLE` 、 `INSERT` 、 `UPDATE` 、および`DELETE`文のみを移行します。
 - `do-schema-rule`は、 `test_*`パターンに一致するすべてのスキーマの`CREATE DATABASE`のステートメントのみを移行します。
@@ -164,9 +164,9 @@ TiDBパーサーがサポートしていないSQL文については、DMは解�
 
 > **Note:**
 >
-> 移行する必要があるデータがフィルタリングされないようにするには、グローバル フィルタリング ルールをできるだけ厳密に構成する必要があります。
+> 移行する必要があるデータがフィルタリングされないようにするには、グローバルフィルタリングルールをできるだけ厳密に構成する必要があります。
 
-TiDB パーサー (特定のバージョン) がサポートしていない`PARTITION`ステートメントを除外するには、次のフィルタリング ルールを構成します。
+TiDB パーサー (特定のバージョン) がサポートしていない`PARTITION`ステートメントを除外するには、次のフィルタリングルールを構成します。
 
 ```yaml
 filters:

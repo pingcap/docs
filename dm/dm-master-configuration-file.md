@@ -5,11 +5,11 @@ summary: DM-master の設定ファイルについて説明します。
 
 # DM-master設定ファイル {#dm-master-configuration-file}
 
-このドキュメントでは、設定ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-master の構成について説明します。
+このドキュメントでは、設定ファイルテンプレートと、このファイル内の各設定パラメータの説明を含む、DM-master の構成について説明します。
 
 ## 設定ファイルテンプレート {#configuration-file-template}
 
-以下は DM-master の設定ファイル テンプレートです。
+以下は DM-master の設定ファイルテンプレートです。
 
 ```toml
 name = "dm-master"

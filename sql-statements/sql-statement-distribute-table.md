@@ -110,7 +110,7 @@ DISTRIBUTE TABLE t4 PARTITION (p1, p2) RULE = "learner-scatter" ENGINE="tiflash"
 
 ## 注記 {#notes}
 
-`DISTRIBUTE TABLE`文を実行してテーブルのリージョンを再分配すると、リージョンの分配結果が PD ホットスポット スケジューラの影響を受ける可能性があります。再分配後、このテーブルのリージョンの分配は時間の経過とともに再び不均衡になる可能性があります。
+`DISTRIBUTE TABLE`文を実行してテーブルのリージョンを再分配すると、リージョンの分配結果が PD ホットスポットスケジューラの影響を受ける可能性があります。再分配後、このテーブルのリージョンの分配は時間の経過とともに再び不均衡になる可能性があります。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

@@ -218,7 +218,7 @@ mysql> EXPLAIN SELECT * FROM users USE INDEX(idx_high_score_users) WHERE score >
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックス タイプを構文で受け入れますが、それらを無視します。
+- TiDB は、MySQL との互換性のために、 `HASH` 、 `BTREE` 、 `RTREE`などのインデックスタイプを構文で受け入れますが、それらを無視します。
 
 - `SPATIAL`インデックスはサポートされていません。
 

@@ -5,11 +5,11 @@ summary: DM-worker の設定ファイルについて学習します。
 
 # DM-worker設定ファイル {#dm-worker-configuration-file}
 
-このドキュメントでは、設定ファイル テンプレートと、このファイル内の各設定パラメータの説明を含む、DM-workerの構成について説明します。
+このドキュメントでは、設定ファイルテンプレートと、このファイル内の各設定パラメータの説明を含む、DM-workerの構成について説明します。
 
 ## 設定ファイルテンプレート {#configuration-file-template}
 
-以下は、DM-workerの設定ファイル テンプレートです。
+以下は、DM-workerの設定ファイルテンプレートです。
 
 ```toml
 # Worker Configuration.

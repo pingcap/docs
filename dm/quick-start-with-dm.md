@@ -123,7 +123,7 @@ macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をロー�
     brew install mysql@8.0
     ```
 
-2. MySQL コマンドをシステム パスでアクセスできるようにします。
+2. MySQL コマンドをシステムパスでアクセスできるようにします。
 
     ```shell
     brew link mysql@8.0 --force
@@ -177,7 +177,7 @@ macOS では、 [Homebrew](https://brew.sh)を使用して MySQL 8.0 をロー�
 
 CentOS などのEnterprise Linux ディストリビューションでは、MySQL Yum リポジトリから MySQL 8.0 をインストールできます。
 
-1. [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリ パッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`をそのままにする必要があります。
+1. [MySQL Yumリポジトリのダウンロードページ](https://dev.mysql.com/downloads/repo/yum)から MySQL Yum リポジトリパッケージをダウンロードしてインストールします。Linux バージョン 9 以外の場合は、次の URL の`el9` (Enterprise Linux バージョン 9) を置き換え、MySQL バージョン 8.0 の場合は`mysql80`をそのままにする必要があります。
 
     ```shell
     sudo yum install -y https://dev.mysql.com/get/mysql80-community-release-el9-1.noarch.rpm

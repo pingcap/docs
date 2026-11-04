@@ -30,7 +30,7 @@ DESC cluster_config;
 フィールドの説明:
 
 - `TYPE` : インスタンスタイプ。オプションの値は`tidb` 、 `pd` 、 `tikv`です。
-- `INSTANCE` : インスタンスのサービス アドレス。
+- `INSTANCE` : インスタンスのサービスアドレス。
 - `KEY` : 設定項目名。
 - `VALUE` : 設定項目の値。
 

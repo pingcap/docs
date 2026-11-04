@@ -86,7 +86,7 @@ MAX_VALUE    | 0.013
 COMMENT      | The quantile of kv requests durations by store
 ```
 
-同様に、次の例では、 `metrics_summary_by_label`監視サマリー テーブルをクエリします。
+同様に、次の例では、 `metrics_summary_by_label`監視サマリーテーブルをクエリします。
 
 ```sql
 SELECT /*+ time_range('2020-03-08 13:23:00','2020-03-08 13:33:00') */ *

@@ -121,7 +121,7 @@ DM-masterコンポーネントの場合、ステータスに`|L`が付加され�
 2. DM-master の API を呼び出して`member`を削除します。
 3. ノードに関連するデータファイルをクリーンアップします。
 
-スケールイン コマンドの基本的な使用法:
+スケールインコマンドの基本的な使用法:
 
 ```bash
 tiup dm scale-in <cluster-name> -N <node-id>
@@ -137,7 +137,7 @@ tiup dm scale-in prod-cluster -N 172.16.5.140:8262
 
 ## クラスターをスケールアウトする {#scale-out-a-cluster}
 
-スケールアウト操作には、デプロイメントと同様の内部ロジックがあります。TiUP DMコンポーネントは、まずノードの SSH 接続を確認し、ターゲットノードに必要なディレクトリを作成し、次にデプロイメント操作を実行して、ノード サービスを開始します。
+スケールアウト操作には、デプロイメントと同様の内部ロジックがあります。TiUP DMコンポーネントは、まずノードの SSH 接続を確認し、ターゲットノードに必要なディレクトリを作成し、次にデプロイメント操作を実行して、ノードサービスを開始します。
 
 たとえば、クラスター`prod-cluster`内の DM-workerノードをスケールアウトするには、次の手順を実行します (DM-masterのスケールアウトにも同様の手順があります)。
 
@@ -233,7 +233,7 @@ Global Flags:
   -y, --yes                Skip all confirmations and assumes 'yes'
 ```
 
-DM-master ホットフィックス パッケージが`/tmp/dm-master-hotfix.tar.gz`にあり、クラスター内のすべての DM-master パッケージを置き換える場合は、次のコマンドを実行します。
+DM-master ホットフィックスパッケージが`/tmp/dm-master-hotfix.tar.gz`にあり、クラスター内のすべての DM-master パッケージを置き換える場合は、次のコマンドを実行します。
 
 ```bash
 tiup dm patch prod-cluster /tmp/dm-master-hotfix.tar.gz -R dm-master
@@ -266,7 +266,7 @@ TiUPがリリースされる前は、DMクラスターのデプロイにはDM-An
 tiup dm import --dir=/path/to/dm-ansible --cluster-version ${version}
 ```
 
-`tiup list dm-master`を実行すると、 TiUPでサポートされている最新のクラスター バージョンが表示されます。
+`tiup list dm-master`を実行すると、 TiUPでサポートされている最新のクラスターバージョンが表示されます。
 
 `import`コマンドを使用するプロセスは次のとおりです。
 
@@ -331,7 +331,7 @@ tiup dm exec prod-cluster --command='ls /tmp'
 
 ## dmctl {#dmctl}
 
-TiUP はDM クラスタ コントローラ`dmctl`を統合します。
+TiUP はDM クラスタコントローラ`dmctl`を統合します。
 
 dmctl を使用するには、次のコマンドを実行します。
 
@@ -380,4 +380,4 @@ export TIUP_NATIVE_SSH=enable
 
 > **Note:**
 >
-> クラスターのデプロイプロセス中に、接続にパスワードを使用する必要がある場合、またはキー ファイルに`passphrase`が設定されている場合は、コントロールマシンに`sshpass`がインストールされていることを確認する必要があります。そうでない場合、タイムアウトエラーが報告されます。
+> クラスターのデプロイプロセス中に、接続にパスワードを使用する必要がある場合、またはキーファイルに`passphrase`が設定されている場合は、コントロールマシンに`sshpass`がインストールされていることを確認する必要があります。そうでない場合、タイムアウトエラーが報告されます。

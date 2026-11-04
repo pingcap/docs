@@ -79,9 +79,9 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
 ### 証明書を再読み込みする {#reload-certificates}
 
-証明書とキーを再ロードするために、DM-master、DM-worker、および dmctl は、新しい接続が作成されるたびに現在の証明書とキー ファイルを再読み取りします。
+証明書とキーを再ロードするために、DM-master、DM-worker、および dmctl は、新しい接続が作成されるたびに現在の証明書とキーファイルを再読み取りします。
 
-`ssl-ca` 、 `ssl-cert` 、または`ssl-key`で指定されたファイルが更新された場合は、DM コンポーネントを再起動して証明書とキー ファイルを再読み込みし、相互に再接続します。
+`ssl-ca` 、 `ssl-cert` 、または`ssl-key`で指定されたファイルが更新された場合は、DM コンポーネントを再起動して証明書とキーファイルを再読み込みし、相互に再接続します。
 
 ## DMコンポーネントと上流または下流のデータベース間の暗号化されたデータ転送を有効にする {#enable-encrypted-data-transmission-between-dm-components-and-the-upstream-or-downstream-database}
 
@@ -95,7 +95,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
     > **Note:**
     >
-    > すべての DM-masterおよび DM-worker コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
+    > すべての DM-masterおよび DM-worker コンポーネントが指定されたパスを介して証明書とキーファイルを読み取ることができることを確認します。
 
     ```yaml
     from:
@@ -113,7 +113,7 @@ summary: DM 接続で TLS を有効にする方法を学習します。
 
     > **Note:**
     >
-    > すべての DM-masterおよび DM-worker コンポーネントが指定されたパスを介して証明書とキー ファイルを読み取ることができることを確認します。
+    > すべての DM-masterおよび DM-worker コンポーネントが指定されたパスを介して証明書とキーファイルを読み取ることができることを確認します。
 
     ```yaml
     target-database:

@@ -51,18 +51,18 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 ## フィルタリングプロセス {#filtering-process}
 
-- `do-dbs`と`ignore-dbs`に対応するフィルタリング ルールは、MySQL の[データベースレベルのレプリケーションとバイナリログオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-db-options.html)と同様です。
-- `do-tables`と`ignore-tables`に対応するフィルタリング ルールは、MySQL の[テーブルレベルのレプリケーションオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-table-options.html)と同様です。
+- `do-dbs`と`ignore-dbs`に対応するフィルタリングルールは、MySQL の[データベースレベルのレプリケーションとバイナリログオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-db-options.html)と同様です。
+- `do-tables`と`ignore-tables`に対応するフィルタリングルールは、MySQL の[テーブルレベルのレプリケーションオプションの評価](https://dev.mysql.com/doc/refman/8.0/en/replication-rules-table-options.html)と同様です。
 
 > **Note:**
 >
-> DM と MySQL では、ブロックリストと許可リストのフィルタリング ルールが次の点で異なります。
+> DM と MySQL では、ブロックリストと許可リストのフィルタリングルールが次の点で異なります。
 >
 > - MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)はワイルドカード文字をサポートしています。DMでは、一部のパラメータ値は`~`で始まる正規表現を直接サポートしています。
 > - DMは現在、 `ROW`形式のバイナリログのみをサポートしており、 `STATEMENT`形式と`MIXED`形式のバイナリログはサポートしていません。そのため、DMのフィルタリングルールはMySQLの`ROW`形式のフィルタリングルールに対応しています。
 > - MySQLは、DDL文の`USE`のセクションに明示的に指定されたデータベース名のみに基づいてDDL文を判別します。DMは、まずDDL文のデータベース名セクションに基づいて文を判別します。DDL文にそのようなセクションが含まれていない場合、DMは`USE`セクションに基づいて文を判別します。判別対象のSQL文が`USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`で、MySQLに`replicate-do-db=test_db_1`が設定され、DMに`do-dbs: ["test_db_1"]`が設定されているとします。この場合、このルールはDMにのみ適用され、MySQLには適用されません。
 
-`test`.`t`テーブルのフィルタリング プロセスは次のとおりです。
+`test`.`t`テーブルのフィルタリングプロセスは次のとおりです。
 
 1. **スキーマ**レベルでフィルターします。
 
@@ -94,7 +94,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 > **Note:**
 >
-> スキーマ`test`をフィルタリングする必要があるかどうかを確認するには、スキーマ レベルでフィルタリングするだけで済みます。
+> スキーマ`test`をフィルタリングする必要があるかどうかを確認するには、スキーマレベルでフィルタリングするだけで済みます。
 
 ## 使用例 {#usage-examples}
 

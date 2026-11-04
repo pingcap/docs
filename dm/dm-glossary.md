@@ -33,7 +33,7 @@ Binlogレプリケーション処理ユニットは、DM-workerにおいて上�
 
 ### ブロックと許可テーブルリスト {#block-x26-allow-table-list}
 
-ブロック・許可テーブルリストは、特定のデータベースまたはテーブルに対するすべての操作をフィルタリングしたり、移行対象のみを選択したりする機能です。詳細は[ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)を参照してください。この機能は[MySQL レプリケーション フィルタリング](https://dev.mysql.com/doc/refman/8.0/en/replication-rules.html)および[MariaDB レプリケーションフィルター](https://mariadb.com/docs/server/ha-and-performance/standard-replication/replication-filters)に類似しています。
+ブロック・許可テーブルリストは、特定のデータベースまたはテーブルに対するすべての操作をフィルタリングしたり、移行対象のみを選択したりする機能です。詳細は[ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)を参照してください。この機能は[MySQL レプリケーションフィルタリング](https://dev.mysql.com/doc/refman/8.0/en/replication-rules.html)および[MariaDB レプリケーションフィルター](https://mariadb.com/docs/server/ha-and-performance/standard-replication/replication-filters)に類似しています。
 
 ## C {#c}
 
@@ -68,7 +68,7 @@ GTIDはMySQLまたはMariaDBのグローバルトランザクションIDです�
 
 ### 移行する/移行 {#migrate-migration}
 
-TiDB データ移行ツールを使用して、アップストリーム データベースの**完全なデータ**をダウンストリームデータベースにコピーするプロセス。
+TiDB データ移行ツールを使用して、アップストリームデータベースの**完全なデータ**をダウンストリームデータベースにコピーするプロセス。
 
 "full"と明記している場合、"full or incremental"とは明記していない場合、"full + incremental"と明記している場合は、replicate/replication ではなく migrate/migration を使用します。
 
@@ -78,7 +78,7 @@ TiDB データ移行ツールを使用して、アップストリーム デー�
 
 リレーログとは、DM-workerが上流のMySQLまたはMariaDBから取得し、ローカルディスクに保存するbinlogファイルを指します。リレーログの形式は標準的なbinlogファイルであり、互換性のあるバージョンの[mysqlbinlog](https://dev.mysql.com/doc/refman/8.0/en/mysqlbinlog.html)などのツールで解析できます。その役割は[MySQLリレーログ](https://dev.mysql.com/doc/refman/8.0/en/replica-logs-relaylog.html)および[MariaDB リレーログ](https://mariadb.com/docs/server/server-management/server-monitoring-logs/binary-log/relay-log)と同様です。
 
-リレーログのディレクトリ構造、初期移行ルール、TiDB DM のデータ パージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)を参照してください。
+リレーログのディレクトリ構造、初期移行ルール、TiDB DM のデータパージなどの詳細については、 [TiDB DMリレーログ](/dm/relay-log.md)を参照してください。
 
 ### リレー処理ユニット {#relay-processing-unit}
 

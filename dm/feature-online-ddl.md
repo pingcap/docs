@@ -220,7 +220,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
 
 バージョン2.0.7以降、DMは改良されたオンラインスキーマ変更ツールを試験的にサポートしています。DMタスク設定で`online-ddl=true`を設定し、 `shadow-table-rules`と`trash-table-rules`を設定することで、変更された一時テーブルを正規表現で照合できます。
 
-たとえば、 `ghost table`の名前が`_{origin_table}_pcnew` 、 `trash table`の名前が`_{origin_table}_pcold`であるカスタマイズされた pt-osc を使用する場合、次のようにカスタム ルールを設定できます。
+たとえば、 `ghost table`の名前が`_{origin_table}_pcnew` 、 `trash table`の名前が`_{origin_table}_pcold`であるカスタマイズされた pt-osc を使用する場合、次のようにカスタムルールを設定できます。
 
 ```yaml
 online-ddl: true
