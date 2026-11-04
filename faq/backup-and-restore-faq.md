@@ -129,7 +129,7 @@ failed to refresh meta for database with schemaID=124, dbName=pitr_test: [ddl:82
 
 TiDB v6.0.0以降、デフォルト値の[`new_collations_enabled_on_first_bootstrap`](/tidb-configuration-file.md#new_collations_enabled_on_first_bootstrap)は`false`から`true`に変更されました。BRは上流クラスターの`mysql.tidb`テーブルにある`new_collation_enabled`設定をバックアップし、この設定の値が上流クラスターと下流クラスター間で一致しているかどうかを確認します。値が一致している場合、 BRは上流クラスターにバックアップされたデータを下流クラスターに安全に復元します。値が一致していない場合、 BRはデータの復元を実行せず、エラーを報告します。
 
-以前のバージョンのTiDBクラスターでデータをバックアップし、そのデータをv6.0.0以降のバージョンのTiDBクラスターにリストアするとします。この場合、上流クラスターと下流クラスターの間で値`new_collations_enabled_on_first_bootstrap`が一致しているかどうかを手動で確認する必要があります。
+v6.0.0より前のバージョンのTiDBクラスターでデータをバックアップし、そのデータをv6.0.0以降のバージョンのTiDBクラスターにリストアするとします。この場合、上流クラスターと下流クラスターの間で値`new_collations_enabled_on_first_bootstrap`が一致しているかどうかを手動で確認する必要があります。
 
 - 値が一貫している場合は、復元コマンドに`--check-requirements=false`を追加して、この構成チェックをスキップできます。
 - 値が矛盾している場合に強制的に復元を実行すると、 BR はデータ検証エラーを報告します。
