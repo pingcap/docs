@@ -9,7 +9,7 @@ summary: パブリック接続を使用してTiDB Cloudクラスターに接続�
 
 > **Tip:**
 >
-> パブリック接続経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
+> パブリック接続経由で{{{ .starter }}}または{{{ .essential }}}インスタンスに接続する方法については、 [パブリックエンドポイント経由で{{{ .starter }}}またはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
 
 ## 前提条件 {#prerequisites}
 

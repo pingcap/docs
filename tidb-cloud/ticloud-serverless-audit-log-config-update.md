@@ -5,7 +5,7 @@ summary: "`ticloud serverless audit-log config update` のリファレンス。"
 
 # ticloud serverless audit-log config update {#ticloud-serverless-audit-log-config-update}
 
-TiDB Cloud Essential インスタンスのデータベース監査ログ構成を更新します。
+{{{ .essential }}} インスタンスのデータベース監査ログ構成を更新します。
 
 ```shell
 ticloud serverless audit-log config update [flags]

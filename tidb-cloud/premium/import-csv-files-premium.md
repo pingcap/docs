@@ -1,16 +1,16 @@
 ---
 title: クラウドストレージからCSVファイルを{{{ .premium }}}または{{{ .byoc }}}にインポートする
-summary: Amazon Simple Storage Service（Amazon S3）からTiDB Cloud Premiumおよび{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）からTiDB Cloud PremiumインスタンスにCSVファイルをインポートする方法を学びましょう。
+summary: Amazon Simple Storage Service（Amazon S3）から{{{ .premium }}}および{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）から{{{ .premium }}}インスタンスにCSVファイルをインポートする方法を学びましょう。
 ---
 
 # クラウドストレージからCSVファイルを{{{ .premium }}}または{{{ .byoc }}}にインポートする
 
-このドキュメントでは、Amazon Simple Storage Service（Amazon S3）からTiDB Cloud Premiumおよび{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）からTiDB Cloud PremiumインスタンスにCSVファイルをインポートする方法について説明します。
+このドキュメントでは、Amazon Simple Storage Service（Amazon S3）から{{{ .premium }}}および{{{ .byoc }}}インスタンスにCSVファイルをインポートする方法と、Alibaba Cloud Object Storage Service（OSS）から{{{ .premium }}}インスタンスにCSVファイルをインポートする方法について説明します。
 
 > **Tip:**
 >
-> - {{{ .starter }}} または Essential については、[TiDB Cloud StarterまたはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)を参照してください。
-> - {{{ .dedicated }}} については、[クラウドストレージからTiDB Cloud DedicatedにCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
+> - {{{ .starter }}} または Essential については、[{{{ .starter }}}またはEssentialにクラウドストレージからCSVファイルをインポートする](/tidb-cloud/import-csv-files-serverless.md)を参照してください。
+> - {{{ .dedicated }}} については、[クラウドストレージから{{{ .dedicated }}}にCSVファイルをインポートする](/tidb-cloud/import-csv-files.md)を参照してください。
 
 ## 制限事項 {#limitations}
 
@@ -97,7 +97,7 @@ CSVファイルにはスキーマ情報が含まれていないため、CSVフ�
 
 <CustomContent plan="premium">
 
-- CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 TiDB Cloud Premium インスタンスの[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)してください。
+- CSV ファイルが Alibaba Cloud Object Storage Service (OSS) にある場合は、 {{{ .premium }}} インスタンスの[Alibaba Cloud Object Storage Service (OSS) へのアクセスを設定](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)してください。
 
 </CustomContent>
 

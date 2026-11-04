@@ -1,6 +1,6 @@
 ---
-title: Export Data from TiDB Cloud Premium or {{{ .byoc }}}
-summary: TiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスからデータをエクスポートする方法を学びましょう。
+title: Export Data from {{{ .premium }}} or {{{ .byoc }}}
+summary: "{{{ .premium }}}または{{{ .byoc }}}インスタンスからデータをエクスポートする方法を学びましょう。"
 ---
 
 # {{{ .premium }}} または {{{ .byoc }}} からデータをエクスポートする

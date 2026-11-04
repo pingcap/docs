@@ -5,7 +5,7 @@ summary: "`ticloud serverless capacity` のリファレンス。"
 
 # ticloud serverless capacity {#ticloud-serverless-capacity}
 
-TiDB Cloud Essential インスタンスのキャパシティを、最大および最小のリクエストキャパシティユニット (RCU) に基づいて設定します。
+{{{ .essential }}} インスタンスのキャパシティを、最大および最小のリクエストキャパシティユニット (RCU) に基づいて設定します。
 
 ```shell
 ticloud serverless capacity [flags]
@@ -13,13 +13,13 @@ ticloud serverless capacity [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Essential インスタンスのキャパシティを設定します。
+対話型モードで{{{ .essential }}} インスタンスのキャパシティを設定します。
 
 ```shell
  ticloud serverless capacity
 ```
 
-非対話型モードでTiDB Cloud Essential インスタンスのキャパシティを設定します。
+非対話型モードで{{{ .essential }}} インスタンスのキャパシティを設定します。
 
 ```shell
 ticloud serverless capacity -c <cluster-id> --max-rcu <maximum-rcu> --min-rcu <minimum-rcu>
@@ -32,8 +32,8 @@ ticloud serverless capacity -c <cluster-id> --max-rcu <maximum-rcu> --min-rcu <m
 | フラグ                  | 説明                                          | 必須  | 注記                       |
 | -------------------- | ------------------------------------------- | --- | ------------------------ |
 | -c, --cluster-id string | クラスターの ID を指定します。                           | はい  | 非対話型モードでのみ動作します。         |
-| --max-rcu int32      | TiDB Cloud Essential インスタンスの最大リクエストキャパシティユニット (RCU) を 100000 まで指定します。   | いいえ | 非対話型モードでのみ動作します。         |
-| --min-rcu int32      | TiDB Cloud Essential インスタンスの最小リクエストキャパシティユニット (RCU) を少なくとも 2000 に指定します。 | いいえ | 非対話型モードでのみ動作します。         |
+| --max-rcu int32      | {{{ .essential }}} インスタンスの最大リクエストキャパシティユニット (RCU) を 100000 まで指定します。   | いいえ | 非対話型モードでのみ動作します。         |
+| --min-rcu int32      | {{{ .essential }}} インスタンスの最小リクエストキャパシティユニット (RCU) を少なくとも 2000 に指定します。 | いいえ | 非対話型モードでのみ動作します。         |
 | -h, --help           | このコマンドのヘルプ情報を表示します。                         | いいえ | 非対話型モードと対話型モードの両方で動作します。 |
 
 ## 継承されたフラグ {#inherited-flags}

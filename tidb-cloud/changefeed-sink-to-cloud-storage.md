@@ -25,9 +25,9 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 >
 > - {{{ .essential }}} では、changefeed 機能はリクエストに応じてのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
 > - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
-> - [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
+> - [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
 > - [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc) を参照してください。
-> - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/) を参照してください。
+> - [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/) を参照してください。
 
 </CustomContent>
 
@@ -36,7 +36,7 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 > **Note:**
 >
 > - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
-> - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストに応じてのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
+> - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストに応じてのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
 > - [{{{ .byoc }}}](/tidb-cloud/select-cluster-tier.md#byoc) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=byoc) を参照してください。
 > - [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/) を参照してください。
 
@@ -47,9 +47,9 @@ summary: このドキュメントでは、TiDB Cloudからクラウドストレ�
 > **Note:**
 >
 > - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
-> - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストに応じてのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
-> - [TiDB Cloud Premium](/tidb-cloud/select-cluster-tier.md#premium) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
-> - [TiDB Cloud Dedicated](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/) を参照してください。
+> - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストに応じてのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
+> - [{{{ .premium }}}](/tidb-cloud/select-cluster-tier.md#premium) インスタンスについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/?plan=premium) を参照してください。
+> - [{{{ .dedicated }}}](/tidb-cloud/select-cluster-tier.md#tidb-cloud-dedicated) クラスターについては、[クラウドストレージへのシンク](https://docs.pingcap.com/tidbcloud/changefeed-sink-to-cloud-storage/) を参照してください。
 
 </CustomContent>
 

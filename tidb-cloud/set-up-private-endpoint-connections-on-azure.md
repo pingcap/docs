@@ -13,9 +13,9 @@ summary: Azure Private Linkを介してTiDB Cloud Dedicatedクラスターに接
 >
 > - AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
 > - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
-> - プライベートエンドポイントを介してTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、以下のドキュメントを参照してください。
->     - [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
->     - [Alibaba Cloudプライベートエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
+> - プライベートエンドポイントを介して{{{ .starter }}}または{{{ .essential }}}インスタンスに接続する方法については、以下のドキュメントを参照してください。
+>     - [AWS PrivateLink経由で{{{ .starter }}}またはEssentialに接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)
+>     - [Alibaba Cloudプライベートエンドポイント経由で{{{ .starter }}}またはEssentialに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-alibaba-cloud.md)
 
 </CustomContent>
 
@@ -25,7 +25,7 @@ summary: Azure Private Linkを介してTiDB Cloud Dedicatedクラスターに接
 >
 > - AWS のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [AWS PrivateLink 経由でTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections.md)を参照してください。
 > - Google Cloud のプライベートエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [Google Cloud Private Service Connect を介してTiDB Cloud Dedicatedクラスターに接続する](/tidb-cloud/set-up-private-endpoint-connections-on-google-cloud.md)を参照してください。
-> - プライベートエンドポイント経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [AWS PrivateLink経由でTiDB Cloud StarterまたはEssentialに接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
+> - プライベートエンドポイント経由で{{{ .starter }}}または{{{ .essential }}}インスタンスに接続する方法については、 [AWS PrivateLink経由で{{{ .starter }}}またはEssentialに接続する](/tidb-cloud/set-up-private-endpoint-connections-serverless.md)を参照してください。
 
 </CustomContent>
 

@@ -10,8 +10,8 @@ summary: "MySQLコマンドラインクライアント（`mysql`）を使用し�
 > **Tip:**
 >
 > - 論理インポートは、比較的小さなSQLファイルまたはCSVファイルに最適です。クラウドストレージからより高速に並列インポートする場合、または[Dumpling](https://docs.pingcap.com/tidb/stable/dumpling-overview)エクスポートの複数ファイルを処理する場合は、[クラウドストレージからCSVファイルを{{{ .premium }}}または{{{ .byoc }}}にインポートする](/tidb-cloud/premium/import-csv-files-premium.md)を参照してください。
-> - {{{ .starter }}}またはEssentialについては、[MySQL CLI を介してTiDB Cloud StarterまたはEssentialにデータをインポートする](/tidb-cloud/import-with-mysql-cli-serverless.md)を参照してください。
-> - {{{ .dedicated }}}については、[MySQL CLI を介してTiDB Cloud Dedicatedにデータをインポートする](/tidb-cloud/import-with-mysql-cli.md)を参照してください。
+> - {{{ .starter }}}またはEssentialについては、[MySQL CLI を介して{{{ .starter }}}またはEssentialにデータをインポートする](/tidb-cloud/import-with-mysql-cli-serverless.md)を参照してください。
+> - {{{ .dedicated }}}については、[MySQL CLI を介して{{{ .dedicated }}}にデータをインポートする](/tidb-cloud/import-with-mysql-cli.md)を参照してください。
 
 ## 前提条件 {#prerequisites}
 

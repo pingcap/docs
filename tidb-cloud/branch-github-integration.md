@@ -11,13 +11,13 @@ summary: TiDB Cloudのブランチ機能をGitHubと連携させる方法を学�
 
 アプリケーション開発にGitHubを使用している場合、 TiDB Cloud BranchingをGitHubのCI/CDパイプラインに統合することで、本番データベースに影響を与えることなく、ブランチを使用したプルリクエストを自動的にテストできます。
 
-統合プロセスでは、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)GitHub アプリのインストールを求められます。このアプリは、GitHub リポジトリのプルリクエストに基づいて、 TiDB Cloud Starterインスタンスのブランチを自動的に管理できます。たとえば、プルリクエストを作成すると、アプリはTiDB Cloud Starterインスタンスに対応するブランチを作成します。このブランチでは、本番データベースに影響を与えることなく、新機能の開発やバグ修正を個別に行えます。
+統合プロセスでは、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)GitHub アプリのインストールを求められます。このアプリは、GitHub リポジトリのプルリクエストに基づいて、 {{{ .starter }}}インスタンスのブランチを自動的に管理できます。たとえば、プルリクエストを作成すると、アプリは{{{ .starter }}}インスタンスに対応するブランチを作成します。このブランチでは、本番データベースに影響を与えることなく、新機能の開発やバグ修正を個別に行えます。
 
 この文書では、以下のトピックについて説明します。
 
 1. TiDB Cloud BranchingをGitHubと統合する方法
 2. TiDB Cloud Branchingアプリはどのように動作しますか？
-3. 本番のTiDB Cloud Starterインスタンスではなく、ブランチを使用してすべてのプルリクエストをテストするブランチベースのCIワークフローを構築する方法
+3. 本番の{{{ .starter }}}インスタンスではなく、ブランチを使用してすべてのプルリクエストをテストするブランチベースのCIワークフローを構築する方法
 
 ## 始める前に {#before-you-begin}
 
@@ -25,13 +25,13 @@ summary: TiDB Cloudのブランチ機能をGitHubと連携させる方法を学�
 
 - GitHubアカウント
 - アプリケーション用のGitHubリポジトリ
-- [TiDB Cloud Starterインスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)
+- [{{{ .starter }}}インスタンス](/tidb-cloud/create-tidb-cluster-serverless.md)
 
 ## TiDB Cloud BranchingをGitHubリポジトリと統合する {#integrate-branching-with-your-github-repository}
 
 TiDB Cloud BranchingをGitHubリポジトリと統合するには、以下の手順に従ってください。
 
-1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットのTiDB Cloud Starterインスタンスの名前をクリックして、その概要ページに移動します。
+1. [TiDB Cloudコンソール](https://tidbcloud.com/)で、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、ターゲットの{{{ .starter }}}インスタンスの名前をクリックして、その概要ページに移動します。
 
 2. 左側のナビゲーションペインで**Branches**をクリックします。
 
@@ -48,17 +48,17 @@ TiDB Cloud BranchingをGitHubリポジトリと統合するには、以下の手
 
 5. **GitHub Repository**ドロップダウンリストから、対象のリポジトリを選択してください。リストが長い場合は、リポジトリ名を入力して検索することもできます。
 
-6. **Connect**をクリックすると、 TiDB Cloud StarterインスタンスとGitHubリポジトリが接続されます。
+6. **Connect**をクリックすると、 {{{ .starter }}}インスタンスとGitHubリポジトリが接続されます。
 
     <img src="https://docs-download.pingcap.com/media/images/docs/tidb-cloud/branch/github-connect.png" width="40%" />
 
 ## TiDB Cloud Branchingアプリの動作 {#tidb-cloud-branching-app-behaviors}
 
-TiDB Cloud Starterインスタンスを GitHub リポジトリに接続すると、このリポジトリ内の各プルリクエストに対して、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)GitHub アプリは、 TiDB Cloud Starterインスタンスに対応するブランチを自動的に管理できます。プルリクエストの変更に関するデフォルトの動作は次のとおりです。
+{{{ .starter }}}インスタンスを GitHub リポジトリに接続すると、このリポジトリ内の各プルリクエストに対して、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)GitHub アプリは、 {{{ .starter }}}インスタンスに対応するブランチを自動的に管理できます。プルリクエストの変更に関するデフォルトの動作は次のとおりです。
 
 | プルリクエストの変更             | TiDB Cloud Branchingアプリの動作                                                                                                                                                                                                                                                                                                                                                                                       |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| プルリクエストを作成する           | リポジトリでプルリクエストを作成すると、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)アプリは、 TiDB Cloud Starterインスタンス用のブランチを作成します。 `branch.mode`が`reset`に設定されている場合、ブランチ名は`${github_branch_name}_${pr_id}`の形式に従います。 `branch.mode`が`reserve`に設定されている場合、ブランチ名は`${github_branch_name}_${pr_id}_${commit_sha}`の形式に従います。ブランチの数には[制限](/tidb-cloud/branch-overview.md#limitations-and-quotas)があることに注意してください。 |
+| プルリクエストを作成する           | リポジトリでプルリクエストを作成すると、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)アプリは、 {{{ .starter }}}インスタンス用のブランチを作成します。 `branch.mode`が`reset`に設定されている場合、ブランチ名は`${github_branch_name}_${pr_id}`の形式に従います。 `branch.mode`が`reserve`に設定されている場合、ブランチ名は`${github_branch_name}_${pr_id}_${commit_sha}`の形式に従います。ブランチの数には[制限](/tidb-cloud/branch-overview.md#limitations-and-quotas)があることに注意してください。 |
 | プルリクエストに新しいコミットをプッシュする | `branch.mode`が`reset`に設定されている場合、リポジトリのプルリクエストに新しいコミットをプッシュするたびに、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)アプリはブランチをリセットします。 `branch.mode`が`reserve`に設定されている場合、アプリは最新のコミット用に新しいブランチを作成します。                                                                                                                                                                                              |
 | プルリクエストを閉じるかマージする      | プルリクエストを閉じたりマージしたりすると、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)アプリはこのプルリクエストのブランチを削除します。                                                                                                                                                                                                                                                                                              |
 | プルリクエストを再開する           | プルリクエストを再開すると、 [TiDB Cloud Branching](https://github.com/apps/tidb-cloud-branching)アプリはプルリクエストの最後のコミットのブランチを作成します。                                                                                                                                                                                                                                                                                                |
@@ -113,7 +113,7 @@ github:
 
 **型:**ブール値。**デフォルト:** `true` 。
 
-`false`に設定されている場合、プルリクエストがクローズまたはマージされたときに、 TiDB Cloud Branching アプリはTiDB Cloud Starterインスタンスのブランチを削除しません。
+`false`に設定されている場合、プルリクエストがクローズまたはマージされたときに、 TiDB Cloud Branching アプリは{{{ .starter }}}インスタンスのブランチを削除しません。
 
 ```yaml
 github:
@@ -123,7 +123,7 @@ github:
 
 ## ブランチングCIワークフローを作成する {#create-a-branching-ci-workflow}
 
-ブランチを活用するためのベストプラクティスの1つは、ブランチングCIワークフローを作成することです。このワークフローを使用すると、プルリクエストをマージする前に、本番インスタンス自体を使用する代わりに、 TiDB Cloud Starterインスタンスのブランチを使用してコードをテストできます。ライブデモは[ここ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)をご覧ください。
+ブランチを活用するためのベストプラクティスの1つは、ブランチングCIワークフローを作成することです。このワークフローを使用すると、プルリクエストをマージする前に、本番インスタンス自体を使用する代わりに、 {{{ .starter }}}インスタンスのブランチを使用してコードをテストできます。ライブデモは[ここ](https://github.com/shiyuhang0/tidbcloud-branch-gorm-example)をご覧ください。
 
 ワークフローを作成するための主な手順は以下のとおりです。
 
@@ -133,7 +133,7 @@ github:
 
     [wait-for-tidbcloud-branch](https://github.com/tidbcloud/wait-for-tidbcloud-branch)アクションを使用すると、ブランチの準備が整うまで待機し、ブランチの接続情報を取得できます。
 
-    TiDB Cloud Starterインスタンスのブランチを例にとると、次のようになります。
+    {{{ .starter }}}インスタンスのブランチを例にとると、次のようになります。
 
     ```yaml
     steps:

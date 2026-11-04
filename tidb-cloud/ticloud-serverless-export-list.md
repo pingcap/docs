@@ -5,7 +5,7 @@ summary: "`ticloud serverless export list` のリファレンス。"
 
 # ticloud serverless export list {#ticloud-serverless-export-list}
 
-TiDB Cloud Starter およびTiDB Cloud Essential インスタンスのデータエクスポートタスクを一覧表示します。
+{{{ .starter }}} および{{{ .essential }}} インスタンスのデータエクスポートタスクを一覧表示します。
 
 ```shell
 ticloud serverless export list [flags]
@@ -25,13 +25,13 @@ ticloud serverless export ls [flags]
 ticloud serverless export list
 ```
 
-非対話型モードで指定されたTiDB Cloud Starter またはEssential インスタンスのエクスポートタスクを一覧表示します。
+非対話型モードで指定された{{{ .starter }}} またはEssential インスタンスのエクスポートタスクを一覧表示します。
 
 ```shell
 ticloud serverless export list -c <cluster-id>
 ```
 
-非対話型モードで、指定されたTiDB Cloud Starter またはEssential インスタンスのエクスポートタスクを JSON 形式で一覧表示します。
+非対話型モードで、指定された{{{ .starter }}} またはEssential インスタンスのエクスポートタスクを JSON 形式で一覧表示します。
 
 ```shell
 ticloud serverless export list -c <cluster-id> -o json

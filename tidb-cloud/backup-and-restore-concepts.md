@@ -46,8 +46,8 @@ TiDB Cloud Dedicatedのデュアルリージョンバックアップ機能は、
 
 ポイントインタイム復元を実行する場合は、以下の点に注意してください。
 
-- TiDB Cloud Starterインスタンスでは、特定時点への復元機能は利用できません。
-- TiDB Cloud Essentialインスタンスの場合、過去30日間の任意の時点に復元できます。詳細については、 [復元モード](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)を参照してください。
+- {{{ .starter }}}インスタンスでは、特定時点への復元機能は利用できません。
+- {{{ .essential }}}インスタンスの場合、過去30日間の任意の時点に復元できます。詳細については、 [復元モード](/tidb-cloud/backup-and-restore-serverless.md#restore-mode)を参照してください。
 - TiDB Cloud Dedicatedクラスターの場合、事前に[PITRを有効にする](/tidb-cloud/backup-and-restore.md#turn-on-point-in-time-restore)必要があります。
 
 ## 復元 {#restore}

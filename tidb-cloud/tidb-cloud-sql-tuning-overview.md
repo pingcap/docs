@@ -107,7 +107,7 @@ SQLパフォーマンスチューニングを行ってもパフォーマンス�
 
 [Key Visualizer](/tidb-cloud/tune-performance.md#key-visualizer)を使用してホットスポットの問題を分析できます。
 
-Key Visualizerを使用すると、 TiDB Cloud Dedicatedクラスターの使用パターンを分析し、トラフィックのホットスポットをトラブルシューティングできます。このページでは、TiDB Cloud Dedicatedクラスターのトラフィックの推移を視覚的に表示します。
+Key Visualizerを使用すると、 {{{ .dedicated }}}クラスターの使用パターンを分析し、トラフィックのホットスポットをトラブルシューティングできます。このページでは、{{{ .dedicated }}}クラスターのトラフィックの推移を視覚的に表示します。
 
 Key Visualizerでは、以下の情報を確認できます。まず、いくつかの[基本概念](https://docs.pingcap.com/tidb/stable/dashboard-key-visualizer#basic-concepts)を理解しておく必要があるかもしれません。
 

@@ -5,7 +5,7 @@ summary: "`ticloud serverless export describe` のリファレンス。"
 
 # ticloud serverless export describe {#ticloud-serverless-export-describe}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスのエクスポート情報を取得します。
+{{{ .starter }}} または{{{ .essential }}} インスタンスのエクスポート情報を取得します。
 
 ```shell
 ticloud serverless export describe [flags]

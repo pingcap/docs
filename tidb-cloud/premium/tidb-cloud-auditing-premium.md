@@ -21,9 +21,9 @@ TiDB Cloud は、実行された SQL ステートメントなど、データベ�
 
     > **Note:**
     >
-    > - TiDB Cloud Starterでは、データベース監査ログは利用できません。
-    > - TiDB Cloud Essentialについては、 [TiDB Cloud Essentialのデータベース監査ログ機能 (PREVIEW)](/tidb-cloud/essential-database-audit-logging.md)を参照してください。
-    > - TiDB Cloud Dedicatedについては、 [TiDB Cloud Dedicatedデータベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
+    > - {{{ .starter }}}では、データベース監査ログは利用できません。
+    > - {{{ .essential }}}については、 [{{{ .essential }}}のデータベース監査ログ機能 (PREVIEW)](/tidb-cloud/essential-database-audit-logging.md)を参照してください。
+    > - {{{ .dedicated }}}については、 [{{{ .dedicated }}}データベース監査ログ](/tidb-cloud/tidb-cloud-auditing.md)を参照してください。
 
 - 組織内で`Organization Owner`ロールが付与されている必要があります。付与されていない場合、 TiDB Cloudコンソールでデータベース監査関連のオプションは表示されません。
 
@@ -137,7 +137,7 @@ TiDB Cloudが監査ログを書き込む宛先として、組織が所有するA
 
 監査ログを保存するOSSバケットと、そのOSSバケットにアクセスするロールが同じクラウドアカウントにある場合は、OSSアクセスを次のように構成します。
 
-1. 監査ログを有効にしたいTiDB Cloud PremiumインスタンスのAlibaba CloudサービスアカウントIDを取得してください。
+1. 監査ログを有効にしたい{{{ .premium }}}インスタンスのAlibaba CloudサービスアカウントIDを取得してください。
 
     1. TiDB Cloudコンソールで、[**My TiDB**](https://tidbcloud.com/tidbs)ページに移動します。
     2. 対象インスタンスの名前をクリックして概要ページに移動し、左側のナビゲーションペインで**Settings** > **DB Audit Logging**をクリックします。

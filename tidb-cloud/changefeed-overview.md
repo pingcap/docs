@@ -21,7 +21,7 @@ TiDB Cloud changefeed を使用すると、TiDB Cloud から他のデータサ�
 > - 現在、TiDB Cloud では、<CustomContent plan="dedicated">{{{ .dedicated }}} クラスター</CustomContent><CustomContent plan="premium,byoc">{{{ .premium }}} または {{{ .byoc }}} インスタンス</CustomContent>ごとに最大 100 件の変更フィードのみが許可されます。
 > - 現在、TiDB Cloud では、変更フィードごとに最大 100 個のテーブルフィルタールールのみが許可されます。
 > - [{{{ .starter }}}](/tidb-cloud/select-cluster-tier.md#starter) インスタンスでは、changefeed 機能は利用できません。
-> - [TiDB Cloud Essential](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストがあった場合にのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
+> - [{{{ .essential }}}](/tidb-cloud/select-cluster-tier.md#essential) インスタンスでは、changefeed 機能はリクエストがあった場合にのみ利用できます。詳細については、[変更フィード](/tidb-cloud/essential-changefeed-overview.md) を参照してください。
 
 ## Changefeedページを確認する {#view-the-changefeed-page}
 
@@ -63,16 +63,16 @@ TiDB Cloud changefeed を使用すると、TiDB Cloud から他のデータサ�
 
 TiDB Cloud Dedicatedでは、変更フィードの TiCDC レプリケーションキャパシティユニット (RCU) を照会できます。
 
-1. ターゲットのTiDB Cloud Dedicatedクラスターの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+1. ターゲットの{{{ .dedicated }}}クラスターの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
 2. 確認したい対応する変更フィードを見つけて、 **Action**列の**...** > **View**をクリックします。
 3. 現在のTiCDCレプリケーションキャパシティユニット（RCU）は、ページの**Specification**欄で確認できます。
 
 </CustomContent>
 <CustomContent plan="premium">
 
-TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィードキャパシティユニット（CCU）を照会できます。
+{{{ .premium }}}では、チェンジフィードのTiCDC 変更フィードキャパシティユニット（CCU）を照会できます。
 
-1. ターゲットのTiDB Cloud Premium インスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
+1. ターゲットの{{{ .premium }}} インスタンスの[**Changefeed**](#view-the-changefeed-page)ページに移動します。
 2. 確認したい対応する変更フィードを見つけて、 **Action**列の**...** > **View**をクリックします。
 3. 現在の TiCDC 変更フィードキャパシティユニット（CCU）は、ページの**Specification**欄で確認できます。
 
@@ -86,8 +86,8 @@ TiDB Cloud Premiumでは、チェンジフィードのTiCDC 変更フィード�
 
 > **Note:**
 >
-> - TiDB Cloud Dedicatedクラスターの変更フィードをスケーリングするには、このクラスターのすべての変更フィードが 2023年 3月 28日以降に作成されていることを確認してください。
-> - TiDB Cloud Dedicatedクラスターに 2023年 3月 28日より前に作成された変更フィードがある場合、このクラスターの既存の変更フィードも新しく作成された変更フィードもスケールアップまたはスケールダウンをサポートしません。
+> - {{{ .dedicated }}}クラスターの変更フィードをスケーリングするには、このクラスターのすべての変更フィードが 2023年 3月 28日以降に作成されていることを確認してください。
+> - {{{ .dedicated }}}クラスターに 2023年 3月 28日より前に作成された変更フィードがある場合、このクラスターの既存の変更フィードも新しく作成された変更フィードもスケールアップまたはスケールダウンをサポートしません。
 
 </CustomContent>
 <CustomContent plan="premium">

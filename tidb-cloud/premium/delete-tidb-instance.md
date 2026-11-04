@@ -1,6 +1,6 @@
 ---
-title: Delete a TiDB Cloud Premium or {{{ .byoc }}} instance
-summary: TiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスを削除する方法を学びましょう。
+title: Delete a {{{ .premium }}} or {{{ .byoc }}} instance
+summary: "{{{ .premium }}}または{{{ .byoc }}}インスタンスを削除する方法を学びましょう。"
 ---
 
 # {{{ .premium }}} または {{{ .byoc }}} インスタンスを削除する

@@ -1,15 +1,15 @@
 ---
 title: Sink to MySQL
-summary: このドキュメントでは、Sink to MySQL changefeed を使用してTiDB Cloud Essentialから MySQL へデータをストリーミングする方法について説明します。データレプリケーション用の MySQL シンクを作成するための制限事項、前提条件、および手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
+summary: このドキュメントでは、Sink to MySQL changefeed を使用して{{{ .essential }}}から MySQL へデータをストリーミングする方法について説明します。データレプリケーション用の MySQL シンクを作成するための制限事項、前提条件、および手順が含まれています。このプロセスには、ネットワーク接続の設定、既存データの MySQL へのロード、および MySQL でのターゲットテーブルの作成が含まれます。前提条件を満たした後、ユーザーは MySQL シンクを作成してデータを MySQL にレプリケートできます。
 ---
 
 # MySQLへのシンク {#sink-to-mysql}
 
-このドキュメントでは、**Sink to MySQL** changefeedを使用してTiDB Cloud EssentialからMySQLにデータをストリーミングする方法について説明します。
+このドキュメントでは、**Sink to MySQL** changefeedを使用して{{{ .essential }}}からMySQLにデータをストリーミングする方法について説明します。
 
 > **Note:**
 >
-> 現在、TiDB Cloud Essentialの変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
+> 現在、{{{ .essential }}}の変更フィード機能はリクエストに応じてのみ利用可能です。この機能をリクエストするには、以下の手順に従ってください。
 >
 > 1. [TiDB Cloudコンソール](https://tidbcloud.com)の右下隅にある**?**をクリックします。
 > 2. **Support Tickets**をクリックして[ヘルプセンター](https://tidb.support.pingcap.com/servicedesk/customer/portals)に移動します。
@@ -18,8 +18,8 @@ summary: このドキュメントでは、Sink to MySQL changefeed を使用し�
 
 ## 制限 {#restrictions}
 
-- TiDB Cloud Essentialインスタンスごとに、最大10個のチェンジフィードを作成できます。
-- TiDB Cloud Essential はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
+- {{{ .essential }}}インスタンスごとに、最大10個のチェンジフィードを作成できます。
+- {{{ .essential }}} はTiCDC を使用して変更フィードを確立するため、同じ[TiCDCの制限](https://docs.pingcap.com/tidb/stable/ticdc-overview#unsupported-scenarios)があります。
 - 複製対象のテーブルに主キーまたはNULLを許容しない一意インデックスがない場合、複製中に一意制約が存在しないことで、一部の再試行シナリオにおいて、下流で重複データが挿入される可能性があります。
 
 ## 前提条件 {#prerequisites}
@@ -32,7 +32,7 @@ summary: このドキュメントでは、Sink to MySQL changefeed を使用し�
 
 ### ネットワーク {#network}
 
-TiDB Cloud EssentialインスタンスがMySQLサービスに接続できることを確認してください。接続方法は以下のいずれかを選択できます。
+{{{ .essential }}}インスタンスがMySQLサービスに接続できることを確認してください。接続方法は以下のいずれかを選択できます。
 
 - プライベートリンク接続：セキュリティコンプライアンスを満たし、ネットワーク品質を確保します。
 - パブリックネットワーク：迅速なセットアップに適しています。
@@ -42,7 +42,7 @@ TiDB Cloud EssentialインスタンスがMySQLサービスに接続できるこ�
 
 プライベートリンク接続は、クラウドプロバイダーの**Private Link**技術を活用することで、VPC内のリソースがプライベートIPアドレスを介して他のVPC内のサービスに接続できるようにします。これにより、あたかもそれらのサービスがVPC内で直接ホストされているかのように動作します。
 
-プライベートリンク接続を通じて、 TiDB Cloud Essentialインスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベートリンク接続が利用できない場合は、[プライベートリンク接続を介してAmazon RDSに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)または[プライベートリンク接続を介してAlibaba Cloud ApsaraDB RDS for MySQLに接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)の手順に従って作成してください。
+プライベートリンク接続を通じて、 {{{ .essential }}}インスタンスを MySQL サービスに安全に接続できます。 MySQL サービスでプライベートリンク接続が利用できない場合は、[プライベートリンク接続を介してAmazon RDSに接続する](/tidb-cloud/serverless-private-link-connection-to-aws-rds.md)または[プライベートリンク接続を介してAlibaba Cloud ApsaraDB RDS for MySQLに接続する](/tidb-cloud/serverless-private-link-connection-to-alicloud-rds.md)の手順に従って作成してください。
 
 </div>
 
@@ -56,7 +56,7 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
 
 ### 既存データの読み込み（オプション） {#load-existing-data-optional}
 
-**Sink to MySQL**コネクターは、特定のタイムスタンプ以降のTiDB Cloud EssentialインスタンスからMySQLへの増分データのみをシンクできます。TiDB Cloud Essentialインスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 TiDB Cloud Essentialインスタンスの既存データをエクスポートしてMySQLにロードできます。
+**Sink to MySQL**コネクターは、特定のタイムスタンプ以降の{{{ .essential }}}インスタンスからMySQLへの増分データのみをシンクできます。{{{ .essential }}}インスタンスに既にデータが存在する場合は、 **Sink to MySQL**を有効にする前に、 {{{ .essential }}}インスタンスの既存データをエクスポートしてMySQLにロードできます。
 
 既存のデータを読み込むには：
 
@@ -71,7 +71,7 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
     SET GLOBAL tidb_gc_life_time = '72h';
     ```
 
-2. [エクスポート](/tidb-cloud/serverless-export.md)機能を使用してTiDB Cloud Essentialインスタンスからデータをエクスポートし、その後、 [mydumper/myloader](https://centminmod.com/mydumper.html)などのコミュニティツールを使用してデータをMySQLサービスにロードします。
+2. [エクスポート](/tidb-cloud/serverless-export.md)機能を使用して{{{ .essential }}}インスタンスからデータをエクスポートし、その後、 [mydumper/myloader](https://centminmod.com/mydumper.html)などのコミュニティツールを使用してデータをMySQLサービスにロードします。
 
 3. [エクスポート](/tidb-cloud/serverless-export.md)によって返されるスナップショットの時刻を記録してください。このタイムスタンプを、MySQLシンクを設定する際の開始位置として使用してください。
 
@@ -83,7 +83,7 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
 
 前提条件を満たしたら、データをMySQLに取り込めます。
 
-1. 対象のTiDB Cloud Essentialインスタンスの概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
+1. 対象の{{{ .essential }}}インスタンスの概要ページに移動し、左側のナビゲーションペインで**Data** > **Changefeed**をクリックします。
 
 2. **Create Changefeed**をクリックし、**Destination**として**MySQL**を選択します。
 
@@ -115,7 +115,7 @@ MySQLサービスがパブリックネットワーク経由でアクセスでき
 8. **Start Replication Position**で、MySQLシンクの開始位置を設定します。
 
     - エクスポートを使用して[既存のデータをロード](#load-existing-data-optional)した場合は、 **From Time**を選択し、エクスポートによって返されたスナップショット時刻を入力します。タイムゾーンが正しいことを確認してください。
-    - 上流のTiDB Cloud Essentialインスタンスにデータがない場合は、 **Start replication from now on**を選択してください。
+    - 上流の{{{ .essential }}}インスタンスにデータがない場合は、 **Start replication from now on**を選択してください。
 
 9. **Next**をクリックして変更フィードを設定してください。
 

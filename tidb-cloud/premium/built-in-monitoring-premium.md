@@ -1,17 +1,17 @@
 ---
-title: "TiDB Cloud Premium Built-in Metrics"
-summary: TiDB Cloud Premiumに組み込まれているメトリクスを表示する方法と、これらのメトリクスの意味を理解する方法を学びましょう。
+title: "{{{ .premium }}} Built-in Metrics"
+summary: "{{{ .premium }}}に組み込まれているメトリクスを表示する方法と、これらのメトリクスの意味を理解する方法を学びましょう。"
 ---
 
-# TiDB Cloud Premium の組み込みメトリクス {#tidb-cloud-premium-built-in-metrics}
+# {{{ .premium }}} の組み込みメトリクス {#tidb-cloud-premium-built-in-metrics}
 
-TiDB Cloudは、 TiDB Cloud Premiumインスタンスの標準メトリック一式を収集し、メトリックページに表示します。これらのメトリックを確認することで、パフォーマンスの問題を容易に特定し、現在のデータベース環境が要件を満たしているかどうかを判断できます。
+TiDB Cloudは、 {{{ .premium }}}インスタンスの標準メトリック一式を収集し、メトリックページに表示します。これらのメトリックを確認することで、パフォーマンスの問題を容易に特定し、現在のデータベース環境が要件を満たしているかどうかを判断できます。
 
 ## メトリクスページを確認する {#view-the-metrics-page}
 
 **Metrics**ページでメトリクスを表示するには、以下の手順に従ってください。
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象のTiDB Cloud Premiumインスタンスの名前をクリックすると、その概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページで、対象の{{{ .premium }}}インスタンスの名前をクリックすると、その概要ページに移動します。
 
     > **Tip:**
     >
@@ -21,11 +21,11 @@ TiDB Cloudは、 TiDB Cloud Premiumインスタンスの標準メトリック一
 
 ## メトリクス保持ポリシー {#metrics-retention-policy}
 
-TiDB Cloud Premiumインスタンスの場合、メトリクスデータは7日間保持されます。
+{{{ .premium }}}インスタンスの場合、メトリクスデータは7日間保持されます。
 
-## TiDB Cloud Premiumインスタンスのメトリクス {#metrics-for-tidb-cloud-premium-instances}
+## {{{ .premium }}}インスタンスのメトリクス {#metrics-for-tidb-cloud-premium-instances}
 
-以下のセクションでは、TiDB Cloud Premiumインスタンスの**Metrics**ページに表示されるメトリクスについて説明します。
+以下のセクションでは、{{{ .premium }}}インスタンスの**Metrics**ページに表示されるメトリクスについて説明します。
 
 ### Overview {#overview}
 
@@ -72,8 +72,8 @@ TiDB Cloud Premiumインスタンスの場合、メトリクスデータは7日�
 
 ペインにメトリクスが表示されない場合、考えられる理由は以下のとおりです。
 
-- 対応するTiDB Cloud Premiumインスタンスのワークロードは、このメトリックをトリガーしません。たとえば、失敗したクエリがない場合、失敗したクエリのメトリックは常に空になります。
-- TiDB Cloud PremiumインスタンスのTiDBバージョンが低いです。これらのメトリクスを表示するには、最新バージョンのTiDBにアップグレードする必要があります。
+- 対応する{{{ .premium }}}インスタンスのワークロードは、このメトリックをトリガーしません。たとえば、失敗したクエリがない場合、失敗したクエリのメトリックは常に空になります。
+- {{{ .premium }}}インスタンスのTiDBバージョンが低いです。これらのメトリクスを表示するには、最新バージョンのTiDBにアップグレードする必要があります。
 
 これらの理由がすべて除外される場合は、トラブルシューティングのために[PingCAPサポートチーム](/tidb-cloud/tidb-cloud-support.md)に連絡できます。
 

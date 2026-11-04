@@ -5,7 +5,7 @@ summary: "`ticloud serverless sql-user create` のリファレンス。"
 
 # ticloud serverless sql-user create {#ticloud-serverless-sql-user-create}
 
-TiDB Cloud Starter またはTiDB Cloud Essential インスタンスで SQL ユーザーを作成します。
+{{{ .starter }}} または{{{ .essential }}} インスタンスで SQL ユーザーを作成します。
 
 ```shell
 ticloud serverless sql-user create [flags]
@@ -13,13 +13,13 @@ ticloud serverless sql-user create [flags]
 
 ## 例 {#examples}
 
-対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスに SQL ユーザーを作成します。
+対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスに SQL ユーザーを作成します。
 
 ```shell
 ticloud serverless sql-user create
 ```
 
-非対話型モードでTiDB Cloud Starter またはTiDB Cloud Essential インスタンスに SQL ユーザーを作成します。
+非対話型モードで{{{ .starter }}} または{{{ .essential }}} インスタンスに SQL ユーザーを作成します。
 
 ```shell
 ticloud serverless sql-user create --user <user-name> --password <password> --role <role> --cluster-id <cluster-id>

@@ -17,7 +17,7 @@ summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}
 
 > **Tip:**
 >
-> - パブリック接続経由でTiDB Cloud StarterまたはTiDB Cloud Essentialインスタンスに接続する方法については、 [パブリックエンドポイント経由でTiDB Cloud StarterまたはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
+> - パブリック接続経由で{{{ .starter }}}または{{{ .essential }}}インスタンスに接続する方法については、 [パブリックエンドポイント経由で{{{ .starter }}}またはEssentialに接続します](/tidb-cloud/connect-via-standard-connection-serverless.md)を参照してください。
 > - パブリックエンドポイント経由でTiDB Cloud Dedicatedクラスターに接続する方法については、 [パブリック接続経由でTiDB Cloud Dedicatedに接続します](/tidb-cloud/connect-via-standard-connection.md)を参照してください。
 
 ## 前提条件：IPアクセスリストの設定 {#prerequisite-configure-ip-access-list}
@@ -46,7 +46,7 @@ summary: パブリック接続を介して{{{ .premium }}}または{{{ .byoc }}}
 
     IP アクセス リストを設定していない場合は、最初の接続の前に、**Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](/tidb-cloud/premium/configure-ip-access-list-premium.md)の手順に従って設定してください。
 
-4. **CA cert**をクリックすると、 TiDB Cloud PremiumインスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
+4. **CA cert**をクリックすると、 {{{ .premium }}}インスタンスへのTLS接続に必要なCA証明書をダウンロードできます。このCA証明書はデフォルトでTLS 1.2をサポートしています。
 
 5. ご希望の接続方法を選択し、タブに表示されている接続文字列とサンプルコードを参照してインスタンスに接続してください。
 
