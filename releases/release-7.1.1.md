@@ -23,7 +23,7 @@ TiDB バージョン: 7.1.1
 
 - TiDB
 
-    - プランキャッシュは200以上のパラメーターを持つクエリをサポートします[#44823](https://github.com/pingcap/tidb/issues/44823) @[qw4990](https://github.com/qw4990)
+    - プランキャッシュは200を超えるパラメーターを持つクエリをサポートします[#44823](https://github.com/pingcap/tidb/issues/44823) @[qw4990](https://github.com/qw4990)
     - ディスクからダンプされたチャンクを読み込む際のパフォーマンスを最適化します@[YangKeao](https://github.com/YangKeao) [#45125](https://github.com/pingcap/tidb/issues/45125)
     - インデックススキャン範囲を構築するロジックを最適化し、複雑な条件をインデックススキャン範囲 に変換できるようにしました。 [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) [#41572](https://github.com/pingcap/tidb/issues/41572)
     - ステイル読み取りの再試行リーダーがロックに遭遇すると、TiDBはロックを解決した後、リーダーで強制的に再試行し、不要なオーバーヘッドを回避します[#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
