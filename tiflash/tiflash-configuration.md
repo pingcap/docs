@@ -88,7 +88,7 @@ summary: TiFlash の設定方法を学びます。
 ##### `dir` {#dir}
 
 - メインデータを保存するディレクトリのリスト。例： `[ "/tidb-data/tiflash-9000" ]`または`[ "/ssd0/tidb-data/tiflash", "/ssd1/tidb-data/tiflash" ]` 。
-- 全データの 90% 以上がディレクトリリストに保存されます。
+- 全データの 90% 超がディレクトリリストに保存されます。
 
 ##### `capacity` {#capacity}
 
@@ -296,7 +296,7 @@ I/O トラフィック制限設定を構成します。
 
 #### logger {#logger}
 
-以下のパラメーターはTiFlashログとTiFlashエラーログにのみ有効です。TiFlashのログパラメーターを設定する必要がある場合は、 [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)で指定してください。
+以下のパラメーターはTiFlashログとTiFlashエラーログにのみ有効です。TiFlash Proxyのログパラメーターを設定する必要がある場合は、 [`tiflash-learner.toml`](#configure-the-tiflash-learnertoml-file)で指定してください。
 
 ##### `level` {#level}
 
@@ -351,7 +351,7 @@ I/O トラフィック制限設定を構成します。
 ##### `max_threads` {#max_threads}
 
 - `max_threads`は、 TiFlash がMPP タスクを実行する際の内部スレッド同時実行数を示します。`0`に設定すると、 TiFlash は論理 CPU コアの数を同時実行数として使用します。
-- このパラメーターは、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610) `-1`に設定されている場合にのみ有効になります。
+- このパラメーターは、システム変数[`tidb_max_tiflash_threads`](/system-variables.md#tidb_max_tiflash_threads-new-in-v610)が`-1`に設定されている場合にのみ有効になります。
 - デフォルト値: `0`
 
 ##### `max_memory_usage` {#max_memory_usage}
@@ -491,7 +491,7 @@ I/O トラフィック制限設定を構成します。
 
 ### `tiflash-learner.toml`ファイルを設定する {#configure-the-tiflash-learnertoml-file}
 
-`tiflash-learner.toml`のパラメーターは基本的にTiKVと同じです。TiFlashの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメーターのみを示しています。ご注意ください。
+`tiflash-learner.toml`のパラメーターは基本的にTiKVと同じです。TiFlash Proxyの設定については[TiKV構成](/tikv-configuration-file.md)を参照してください。以下はよく使用されるパラメーターのみを示しています。ご注意ください。
 
 - TiKV と比較して、 TiFlash Proxy には[`raftstore.snap-handle-pool-size`](#snap-handle-pool-size-new-in-v400)という追加パラメーターがあります。
 - キーが`engine`の`label`は予約されており、手動で設定できません。
@@ -580,7 +580,7 @@ I/O トラフィック制限設定を構成します。
 
 ### マルチディスクデプロイ {#multi-disk-deployment}
 
-TiFlashはマルチディスク構成をサポートしています。TiFlashノードに複数のディスクがある場合、以下のセクションで説明するパラメーターを設定することで、それらのディスクを最大限に活用できます。TiUPで使用するTiUPの設定テンプレートについては、 [TiFlashトポロジーの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
+TiFlashはマルチディスク構成をサポートしています。TiFlashノードに複数のディスクがある場合、以下のセクションで説明するパラメーターを設定することで、それらのディスクを最大限に活用できます。TiUPで使用するTiFlashの設定テンプレートについては、 [TiFlashトポロジーの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)を参照してください。
 
 v4.0.9以降のバージョンのTiDBクラスターでは、 TiFlashはストレージエンジンのメインデータと最新データを複数のディスクに保存することをサポートしています。TiFlashノードを複数のディスクにデプロイする場合は、ノードのI/Oパフォーマンスを最大限に活用するために、 `[storage]`セクションでストレージディレクトリを指定することをお勧めします。
 
