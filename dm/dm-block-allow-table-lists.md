@@ -47,7 +47,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 - `do-tables` : 移行するテーブルの許可リストです（MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
 - `ignore-tables` : 移行対象テーブルのブロックリスト（MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
 
-上記のパラメーターの値が`~`文字で始まる場合、その値の以降の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメーターは、スキーマ名またはテーブル名を一致させるために使用できます。
+上記のパラメーターの値が`~`文字で始まる場合、その値の後続の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメーターは、スキーマ名またはテーブル名を一致させるために使用できます。
 
 ## フィルタリングプロセス {#filtering-process}
 
