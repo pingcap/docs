@@ -103,10 +103,10 @@ TiDBは、テーブルへの変更回数に基づいて、自動的に[`ANALYZE`
 
 Count-Min Sketch はハッシュ構造です。 `a = 1`や`IN`クエリ (例えば`a IN (1, 2, 3)` ) のような等価性クエリを処理する際、TiDB はこのデータ構造を使用して推定を行います。
 
-Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントにおいて、同等のクエリの推定値が実際の値から大きく乖離する場合、より大きな値とより小さな値がハッシュ化されているとみなすことができます。この場合、ハッシュ衝突を回避するために、以下のいずれかの方法を取ることができます。
+Count-Min Sketch はハッシュ構造であるため、ハッシュ衝突が発生する可能性があります。[`EXPLAIN`](/sql-statements/sql-statement-explain.md)ステートメントにおいて、同等のクエリの推定値が実際の値から大きく乖離する場合、より大きな値とより小さな値がハッシュ化されているとみなせます。この場合、ハッシュ衝突を回避するために、以下のいずれかの方法を取れます。
 
-- `WITH NUM TOPN`パラメーターを変更します。TiDB は、高頻度 (上位 x) のデータを別々に格納し、その他のデータは Count-Min Sketch に格納します。そのため、より大きな値とより小さな値が一緒にハッシュ化されるのを防ぐには、 `WITH NUM TOPN`の値を増やすことができます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメーターの詳細については、 [手動収集](#manual-collection)を参照してください。
-- `WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`の 2つのパラメーターを変更します。どちらもハッシュバケットの数と衝突確率に影響します。実際のシナリオに応じて 2つのパラメーターの値を適切に増やすことでハッシュ衝突の確率を減らすことができますが、統計情報のメモリ使用量が増加します。TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2つのパラメーターの詳細については、 [手動収集](#manual-collection)を参照してください。
+- `WITH NUM TOPN`パラメーターを変更します。TiDB は、高頻度 (上位 x) のデータを別々に格納し、その他のデータは Count-Min Sketch に格納します。そのため、より大きな値とより小さな値が一緒にハッシュ化されるのを防ぐには、 `WITH NUM TOPN`の値を増やせます。TiDB では、デフォルト値は 20 です。最大値は 1024 です。このパラメーターの詳細については、 [手動収集](#manual-collection)を参照してください。
+- `WITH NUM CMSKETCH DEPTH`と`WITH NUM CMSKETCH WIDTH`の 2つのパラメーターを変更します。どちらもハッシュバケットの数と衝突確率に影響します。実際のシナリオに応じて 2つのパラメーターの値を適切に増やすことでハッシュ衝突の確率を減らせますが、統計情報のメモリ使用量が増加します。TiDB では、 `WITH NUM CMSKETCH DEPTH`のデフォルト値は 5、 `WITH NUM CMSKETCH WIDTH`のデフォルト値は 2048 です。2つのパラメーターの詳細については、 [手動収集](#manual-collection)を参照してください。
 
 ### トップN {#top-n}
 
@@ -475,7 +475,7 @@ TiDBはバージョン5.4.0以降、統計情報の同期読み込み機能を�
 
 <CustomContent platform="tidb">
 
-同期的に統計情報を読み込む機能を有効にした後、以下のようにさらに設定を行うことができます。
+同期的に統計情報を読み込む機能を有効にした後、以下のようにさらに設定を行えます。
 
 - SQL最適化の待機時間がタイムアウトに達したときのTiDBの動作を制御するには、 [`tidb_stats_load_pseudo_timeout`](/system-variables.md#tidb_stats_load_pseudo_timeout-new-in-v540)システム変数の値を変更します。この変数のデフォルト値は`ON`で、タイムアウト後、SQL最適化プロセスではどの列に対してもヒストグラム、TopN、またはCMSketch統計情報を使用しないことを示します。この変数を`OFF`に設定すると、タイムアウト後にSQLの実行が失敗します。
 - 同期的に統計情報をロードする機能が同時に処理できる列の最大数を指定するには、TiDB 設定ファイルの[`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)オプションの値を変更します。v8.2.0 以降、このオプションのデフォルト値は`0`であり、これは TiDB がサーバー構成に基づいて同時実行数を自動的に調整することを示しています。
@@ -540,7 +540,7 @@ TiDBの起動時、初期統計情報が完全にロードされる前に実行�
 
 一般的に、インポートされる統計情報は、エクスポートインターフェースを使用して取得したJSONファイルを指します。
 
-統計情報の読み込みは[`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)ステートメントを使用して行うことができます。
+統計情報の読み込みは[`LOAD STATS`](/sql-statements/sql-statement-load-stats.md)ステートメントを使用して行えます。
 
 例えば：
 

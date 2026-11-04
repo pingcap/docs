@@ -18,7 +18,7 @@ summary: TiDBは、スキーマ情報に対してLRU（Least Recently Used：最
 ## ベストプラクティス {#best-practices}
 
 - データベースとテーブルの数が非常に多い場合（例えば、10万を超えるデータベースとテーブルがある場合）、またはデータベースとテーブルの数がシステムのパフォーマンスに影響を与えるほど多い場合は、スキーマキャッシュ機能を有効にすることをお勧めします。
-- TiDBダッシュボードの**Schema load**セクションにあるサブパネル**Infoschema v2 Cache Operation**を確認することで、スキーマキャッシュのヒット率を監視できます。ヒット率が低い場合は、 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)の値を増やすことができます。
+- TiDBダッシュボードの**Schema load**セクションにあるサブパネル**Infoschema v2 Cache Operation**を確認することで、スキーマキャッシュのヒット率を監視できます。ヒット率が低い場合は、 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)の値を増やせます。
 - TiDBダッシュボードの**Schema load**セクションにあるサブパネル**Infoschema v2 Cache Size**を確認することで、現在使用されているスキーマキャッシュのサイズを監視できます。
 
 <CustomContent platform="tidb">
@@ -61,6 +61,6 @@ summary: TiDBは、スキーマ情報に対してLRU（Least Recently Used：最
 
 - [`AUTO_INCREMENT`](/auto-increment.md)または[`AUTO_RANDOM`](/auto-random.md)属性を持つテーブルを使用する場合、スキーマキャッシュサイズが小さいと、これらのテーブルのメタデータが頻繁にキャッシュに出入りする可能性があります。その結果、割り当てられた ID 範囲が完全に使用される前に無効になり、ID ジャンプが発生する可能性があります。書き込みが集中するシナリオでは、ID 範囲が枯渇することさえあります。異常な ID 割り当て動作を最小限に抑え、システムの安定性を向上させるために、次の対策を講じることをお勧めします。
 
-    - 監視パネルでスキーマキャッシュのヒット率とサイズを確認し、キャッシュ設定が適切かどうかを評価してください。スキーマキャッシュのサイズを適切に増やすことで、キャッシュの強制削除頻度を減らすことができます。
+    - 監視パネルでスキーマキャッシュのヒット率とサイズを確認し、キャッシュ設定が適切かどうかを評価してください。スキーマキャッシュのサイズを適切に増やすことで、キャッシュの強制削除頻度を減らせます。
     - IDジャンプを防ぐには、 [`AUTO_ID_CACHE`](/auto-increment.md#auto_id_cache) `1`に設定してください。
     - ID 範囲が小さすぎることを避けるため、 `AUTO_RANDOM`のシャードビットと予約ビットを適切に設定してください。

@@ -86,7 +86,7 @@ select * from employee where id in (...) and salary between ? and ?;
 
 ## `statements_summary_history` {#statements_summary_history}
 
-`statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。 `statements_summary_history`は、特定の期間の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる期間の監視メトリクスの比較を行うことができます。
+`statements_summary_history`のテーブルスキーマは`statements_summary`と同一です。 `statements_summary_history`は、特定の期間の履歴データを保存します。履歴データを確認することで、異常のトラブルシューティングや、異なる期間の監視メトリクスの比較を行えます。
 
 `SUMMARY_BEGIN_TIME`フィールドと`SUMMARY_END_TIME`フィールドは、履歴期間の開始時刻と終了時刻を表します。
 

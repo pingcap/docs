@@ -30,7 +30,7 @@ GRANT SELECT ON test.* TO 'xxx'@'%';
 GRANT ALL PRIVILEGES ON *.* TO 'xxx'@'%';
 ```
 
-バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。指定したテーブルの特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`権限を付与または取り消すことができます。詳細については、[列レベルの権限管理](/column-privilege-management.md)を参照してください。
+バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。指定したテーブルの特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`権限を付与または取り消せます。詳細については、[列レベルの権限管理](/column-privilege-management.md)を参照してください。
 
 デフォルトでは、 [`GRANT`](/sql-statements/sql-statement-grant-privileges.md)ステートメントは、指定されたユーザーが存在しない場合にエラーを返します。この動作は、 [SQLモード](/system-variables.md#sql_mode)`NO_AUTO_CREATE_USER`が指定されているかどうかによって異なります。
 
@@ -158,7 +158,7 @@ SELECT user,host,db FROM mysql.db WHERE user='genius';
 
 ### 権限を取り消す {#revoke-privileges}
 
-[`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md)ステートメントを使用すると、システム管理者はユーザーアカウントから権限を取り消すことができます。
+[`REVOKE`](/sql-statements/sql-statement-revoke-privileges.md)ステートメントを使用すると、システム管理者はユーザーアカウントから権限を取り消せます。
 
 `REVOKE`文は`GRANT`文に対応します。
 
