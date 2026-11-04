@@ -165,7 +165,7 @@ summary: TiDB 2.1 GA は 2018年 11月 30日にリリースされ、安定性、
 
     - [スケジュールポリシーを制御するためのコマンドを追加する](/pd-control.md#config-show--set-option-value--placement-rules)
 
-    - スケジューリングシナリオをシミュレートするために[PDシミュレーター](https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator)改善
+    - スケジューリングシナリオをシミュレートするために[PDシミュレーター](https://github.com/pingcap/pd/tree/release-2.1/tools/pd-simulator)を改善
 
 - APIと操作ツール
 
