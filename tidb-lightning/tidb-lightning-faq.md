@@ -153,7 +153,7 @@ CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
 
 ![TiDB Lightning FAQ - situation 1](/media/lightning-faq-situation-1.jpg)
 
-**状況2：**ターゲットクラスターがフォロワーレプリカを"us-mid"リージョン内の別のTiKVノードに配置しており、トポロジー内に"us-west"リージョンが含まれていない場合。このような場合、ターゲットクラスターで配置ポリシーを作成すると、 TiDB Lightningはエラーを報告します。
+**状況2：**ターゲットクラスターがフォロワーレプリカを"us-mid"リージョン内の別のTiKVノードに配置しており、トポロジー内に"us-west"リージョンが含まれていません。このような場合、ターゲットクラスターで配置ポリシーを作成すると、 TiDB Lightningはエラーを報告します。
 
 ![TiDB Lightning FAQ - situation 2](/media/lightning-faq-situation-2.jpg)
 
