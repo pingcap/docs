@@ -28,7 +28,7 @@ WorkloadOption ::=
 
 - [`tidb_enable_resource_control`](/system-variables.md#tidb_enable_resource_control-new-in-v660)を有効にしました。
 - ユーザーには`SUPER`または`RESOURCE_GROUP_ADMIN`権限があります。
-- [実際の作業量に基づいてキャパシティを見積もる](#estimate-capacity-based-on-actual-workload)の場合、ユーザーは`METRICS_SCHEMA`スキーマ内のすべてのテーブルに対する`SELECT`権限を持っている必要があります。
+- [実際の作業負荷に基づいてキャパシティを見積もる](#estimate-capacity-based-on-actual-workload)の場合、ユーザーは`METRICS_SCHEMA`スキーマ内のすべてのテーブルに対する`SELECT`権限を持っている必要があります。
 
 ## キャパシティを推定する方法 {#methods-for-estimating-capacity}
 
@@ -59,7 +59,7 @@ TiDB は推定に 2つの方法を提供します。
 
 > **Note:**
 >
-> クラスターのRUキャパシティは、クラスターのトポロジーと各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスターが提供できる実際のRUは、実際のワークロードにも依存します。ハードウェア構成に基づく推定値は参考値であり、実際の最大値と異なる場合があります。[実際の作業量に基づいてキャパシティを見積もる](#estimate-capacity-based-on-actual-workload)を推奨します。
+> クラスターのRUキャパシティは、クラスターのトポロジーと各コンポーネントのハードウェアおよびソフトウェア構成によって異なります。各クラスターが提供できる実際のRUは、実際のワークロードにも依存します。ハードウェア構成に基づく推定値は参考値であり、実際の最大値と異なる場合があります。[実際の作業負荷に基づいてキャパシティを見積もる](#estimate-capacity-based-on-actual-workload)を推奨します。
 
 ## 例 {#examples}
 
