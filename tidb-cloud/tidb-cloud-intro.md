@@ -30,9 +30,9 @@ With TiDB Cloud, you can get the following key features:
 
     Elastically and transparently scale to hundreds of nodes for critical workloads while maintaining ACID transactions. No need to bother with sharding. And you can scale your computing and storage nodes separately according to your business needs.
 
-- **MySQL Compatibility**
+- **MySQL and PostgreSQL Compatibility**
 
-    Increase productivity and shorten time-to-market for your applications with TiDB's MySQL compatibility. Easily migrate data from existing MySQL instances without the need to rewrite code.
+    Increase productivity and shorten time-to-market by reusing existing application code and familiar database tools. TiDB Cloud offers [MySQL compatibility](https://docs.pingcap.com/tidbcloud/mysql-compatibility/?plan=starter&compatibility=mysql), with [PostgreSQL compatibility](https://docs.pingcap.com/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql) also available in public preview on TiDB Cloud Starter.
 
 - **High Availability and Reliability**
 
