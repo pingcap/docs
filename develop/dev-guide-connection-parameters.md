@@ -178,7 +178,7 @@ JDBCでは通常、以下の2つの処理方法が使用されます。
 
     クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントを引き続き使用する前に、読み取りを完了するか、 `resultset`を閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
-    クライアントが読み取りを完了するか、 `resultset`を閉じる前にクエリでこのようなエラーが発生するのを回避するには、URLに`clobberStreamingResults=true`パラメーターを追加できます。そうすると、 `resultset`自動的に閉じられますが、前のストリーミングクエリで読み取られる結果セットは失われます。
+    クライアントが読み取りを完了するか、 `resultset`を閉じる前にクエリでこのようなエラーが発生するのを回避するには、URLに`clobberStreamingResults=true`パラメーターを追加できます。そうすると、 `resultset`は自動的に閉じられますが、前のストリーミングクエリで読み取られる結果セットは失われます。
 
 - 2つ目の方法：まず[`FetchSize`を正の整数に設定](https://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)し、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
 
