@@ -99,7 +99,7 @@ TiDB バージョン: 5.1.2
 
     - TiKVをv3.xからそれ以降のバージョンにアップグレードした後に発生するpanic問題を修正しました[#10902](https://github.com/tikv/tikv/issues/10902)
     - 破損したスナップショットファイルによって引き起こされる潜在的なディスクフル問題を修正[#10813](https://github.com/tikv/tikv/issues/10813)
-    - TiKVコプロセッサーのスローログに、リクエスト処理に費やされた時間のみを考慮するようにする [#10841](https://github.com/tikv/tikv/issues/10841)
+    - TiKVコプロセッサーのスローログが、リクエスト処理に費やされた時間のみを考慮するようにする [#10841](https://github.com/tikv/tikv/issues/10841)
     - スロガースレッドが過負荷になりキューがいっぱいになったときに、スレッドをブロックする代わりにログをドロップする[#10841](https://github.com/tikv/tikv/issues/10841)
     - コプロセッサーリクエストの処理がタイムアウトしたときに発生するpanic問題を修正しました[#10852](https://github.com/tikv/tikv/issues/10852)
     - Titan が有効になっている 5.0 より前のバージョンからアップグレードするときに発生する TiKV panic問題を修正しました[#10842](https://github.com/tikv/tikv/pull/10842)
@@ -138,7 +138,7 @@ TiDB バージョン: 5.1.2
     - Dumpling
 
         - 一部のMySQLバージョン（8.0.3および8.0.23）で`show table status`が誤った結果を返すときにDumplingがハングする問題を修正しました[#322](https://github.com/pingcap/dumpling/issues/322)
-        - デフォルト`sort-engine`オプションの 4.0.x クラスターでの CLI 互換性の問題を修正しました [#2373](https://github.com/pingcap/tiflow/issues/2373)
+        - デフォルトの`sort-engine`オプションの 4.0.x クラスターでの CLI 互換性の問題を修正しました [#2373](https://github.com/pingcap/tiflow/issues/2373)
 
     - TiCDC
 
