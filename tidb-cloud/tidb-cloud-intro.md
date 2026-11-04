@@ -32,7 +32,7 @@ TiDB Cloud 让你几乎无需培训即可轻松完成如基础设施管理和集
 
 - **兼容 MySQL 和 PostgreSQL**
 
-    可复用现有应用代码和熟悉的数据库工具，提高生产力并缩短产品上市时间。TiDB Cloud 提供 [MySQL compatibility](https://docs.pingcap.com/tidbcloud/mysql-compatibility/?plan=starter&compatibility=mysql)，同时还在 TiDB Cloud Starter 上提供处于公测阶段的 [PostgreSQL compatibility](https://docs.pingcap.com/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)。
+    可复用现有应用代码和熟悉的数据库工具，提高生产力并缩短产品上市时间。TiDB Cloud 提供 [MySQL 兼容](https://docs.pingcap.com/tidbcloud/mysql-compatibility/?plan=starter&compatibility=mysql)，同时还在 TiDB Cloud Starter 上提供 [PostgreSQL 兼容](https://docs.pingcap.com/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)（公测中）。
 
 - **High Availability and Reliability**
 
