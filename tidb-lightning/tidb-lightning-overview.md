@@ -5,7 +5,7 @@ summary: Lightning とアーキテクチャ全体について学びます。
 
 # TiDB Lightning の概要 {#tidb-lightning-overview}
 
-[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.5/lightning) 、TB規模のデータをTiDBクラスターにインポートするためのツールです。TiDBクラスターへの初期データインポートによく使用されます。
+[TiDB Lightning](https://github.com/pingcap/tidb/tree/release-8.5/lightning)は、TB規模のデータをTiDBクラスターにインポートするためのツールです。TiDBクラスターへの初期データインポートによく使用されます。
 
 TiDB Lightning は次のファイル形式をサポートしています。
 
