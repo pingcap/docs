@@ -24,7 +24,7 @@ TiCDC は、次のようなさまざまな下流システムへのデータの�
 - [メッセージキュー（MQ）タイプのシンク](/ticdc/ticdc-changefeed-config.md#sink) 、例えば[Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
 - [ストレージサービス (Amazon S3、GCS、Azure Blob Storage、NFS)](/ticdc/ticdc-sink-to-cloud-storage.md)
 - [Confluent Cloud 統合による Snowflake、ksqlDB、SQL Server](/ticdc/integrate-confluent-using-ticdc.md)
-- [Kafka で複製されたデータを消費するための Apache Flink](/replicate-data-to-kafka.md)
+- [Kafka に複製されたデータを消費するための Apache Flink](/replicate-data-to-kafka.md)
 
 ## データ複製の範囲 {#scope-of-data-replication}
 
