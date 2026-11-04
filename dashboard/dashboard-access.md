@@ -55,7 +55,7 @@ TiDB Dashboardでは次の言語がサポートされています。
 - 英語
 - 中国語（簡体字）
 
-**SQL ユーザーサインイン**ページで、**言語の切り替え**ドロップダウンリストをクリックしてインターフェイス言語を切り替えることができます。
+**SQL User Sign In**ページで、**Switch Language**ドロップダウンリストをクリックしてインターフェイス言語を切り替えることができます。
 
 ![Switch language](/media/dashboard/dashboard-access-switch-language.png)
 
