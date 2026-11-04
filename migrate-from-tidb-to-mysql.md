@@ -16,9 +16,9 @@ This document describes how to migrate data from TiDB clusters to MySQL-compatib
 
 1. Deploy a TiDB cluster upstream.
 
-    Deploy a TiDB cluster by using TiUP Playground. For more information, refer to [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md).
+    Deploy a TiDB cluster by using TiUP Playground. For more information, see [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md).
 
-    The following example sets `gc-ttl` for TiCDC to `172800` seconds (48 hours). Choose a value that covers full-data export, import, and the time needed for incremental replication to catch up. For details, see the [GC warning in Step 2](#step-2-migrate-full-data).
+    [TiCDC](/ticdc/ticdc-overview.md) replicates incremental data changes from the upstream TiDB cluster to the downstream MySQL-compatible database. The following example sets `gc-ttl` for TiCDC to `172800` seconds (48 hours). Choose a value that covers full-data export, import, and the time needed for incremental replication to catch up. For more information, see the [GC warning in Step 2](#step-2-migrate-full-data).
 
     ```shell
     # Create the TiCDC configuration file
@@ -50,7 +50,7 @@ This document describes how to migrate data from TiDB clusters to MySQL-compatib
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 run --time 300s
     ```
 
-    For more details about `go-tpc`, refer to [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md).
+    For more information about `go-tpc`, see [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md).
 
 ## Step 2. Migrate full data
 
@@ -118,7 +118,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 3. Restore data.
 
-    Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For details about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process metadata files exported by Dumpling.
+    Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For more information about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process metadata files exported by Dumpling.
 
     Run the following command to import full data exported by Dumpling to MySQL:
 
@@ -134,7 +134,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     sync_diff_inspector -C ./config.yaml
     ```
 
-    For details about how to configure the sync-diff-inspector, see [Configuration file description](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description). In this document, the configuration is as follows:
+    For more information about how to configure the sync-diff-inspector, see [Configuration file description](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description). In this document, the configuration is as follows:
 
     ```toml
     # Diff Configuration.
@@ -192,7 +192,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 3. Enable GC.
 
-    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
+    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For more information, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
 
    To enable GC, run the following command:
 

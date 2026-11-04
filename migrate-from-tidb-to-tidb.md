@@ -25,7 +25,7 @@ This document exemplifies the whole migration process and contains the following
 
 1. Deploy TiDB clusters.
 
-    Deploy two TiDB clusters, one upstream and the other downstream by using TiUP Playground. For more information, refer to [Deploy and Maintain an Online TiDB Cluster Using TiUP](/tiup/tiup-cluster.md).
+    Deploy two TiDB clusters, one upstream and the other downstream by using TiUP Playground. For more information, see [Deploy and Maintain an Online TiDB Cluster Using TiUP](/tiup/tiup-cluster.md).
 
     ```shell
     # Create an upstream cluster
@@ -184,7 +184,7 @@ After setting up the environment, you can use the backup and restore functions o
     sync_diff_inspector -C ./config.yaml
     ```
 
-    For details about how to configure the sync-diff-inspector, see [Configuration file description](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description). In this document, the configuration is as follows:
+    For more information about how to configure the sync-diff-inspector, see [Configuration file description](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description). In this document, the configuration is as follows:
 
     ```shell
     # Diff Configuration.
@@ -237,7 +237,7 @@ After setting up the environment, you can use the backup and restore functions o
 
 3. Enable GC.
 
-    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
+    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For more information, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint?](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
 
     To enable GC, run the following command:
 
