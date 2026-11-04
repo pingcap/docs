@@ -323,7 +323,7 @@ SELECT TIDB_DECODE_SQL_DIGESTS(@digests);
 1 row in set (0.00 sec)
 ```
 
-上記の例では、パラメーターは3つのSQLダイジェストを含むJSON配列であり、対応するSQL文はクエリ結果の3つの項目です。しかし、2番目のSQLダイジェストに対応するSQL文がクラスターから見つからないため、結果の2番目の項目は`null`なります。
+上記の例では、パラメーターは3つのSQLダイジェストを含むJSON配列であり、対応するSQL文はクエリ結果の3つの項目です。しかし、2番目のSQLダイジェストに対応するSQL文がクラスターから見つからないため、結果の2番目の項目は`null`になります。
 
 ```sql
 SELECT TIDB_DECODE_SQL_DIGESTS(@digests, 10);
