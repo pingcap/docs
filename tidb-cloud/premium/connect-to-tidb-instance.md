@@ -9,7 +9,7 @@ summary: さまざまな方法で{{{ .premium }}}または{{{ .byoc }}}インス
 
 > **Tip:**
 >
-> TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスタに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
+> TiDB Cloud Dedicatedクラスターに接続する方法については、 [TiDB Cloud Dedicatedクラスターに接続します](/tidb-cloud/connect-to-tidb-cluster.md)を参照してください。
 
 ## 接続方法 {#connection-methods}
 

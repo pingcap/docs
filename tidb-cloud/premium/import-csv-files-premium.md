@@ -125,7 +125,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     - **Storage Provider**: **Amazon S3**を選択します。
     - **Source Files URI**:
         - 1つのファイルをインポートする場合は、ソースファイルのURIを`s3://[bucket_name]/[data_source_folder]/[file_name].csv`形式で入力します。例: `s3://sampledata/ingest/TableName.01.csv`。
-        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`s3://[bucket_name]/[data_source_folder]/`形式で入力します。例: `s3://sampledata/ingest/`。
+        - 複数のファイルをインポートする場合は、ソースフォルダーのURIを`s3://[bucket_name]/[data_source_folder]/`形式で入力します。例: `s3://sampledata/ingest/`。
     - **Credential**: AWS Role ARNまたはAWSアクセスキーのいずれかを使用してバケットにアクセスできます。詳細については、[Amazon S3へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-amazon-s3-access)を参照してください。
         - **AWS Role ARN**: AWS Role ARNの値を入力します。新しいロールを作成する必要がある場合は、**Click here to create a new one with AWS CloudFormation**をクリックし、ガイド付きの手順に従って提供されたテンプレートを起動し、IAM警告を確認し、スタックを作成して、生成されたARNをTiDB Cloudにコピーして戻します。
         - **AWS Access Key**: AWSアクセスキーIDとAWSシークレットアクセスキーを入力します。
@@ -181,7 +181,7 @@ CSVファイルを{{{ .premium }}} または {{{ .byoc }}} にインポートす
     - **Storage Provider**: **Alibaba Cloud OSS**を選択します。
     - **Source Files URI**:
         - 1つのファイルをインポートする場合は、ソースファイルのURIを`oss://[bucket_name]/[data_source_folder]/[file_name].csv`形式で入力します。例: `oss://sampledata/ingest/TableName.01.csv`。
-        - 複数のファイルをインポートする場合は、ソースフォルダのURIを`oss://[bucket_name]/[data_source_folder]/`形式で入力します。例: `oss://sampledata/ingest/`。
+        - 複数のファイルをインポートする場合は、ソースフォルダーのURIを`oss://[bucket_name]/[data_source_folder]/`形式で入力します。例: `oss://sampledata/ingest/`。
     - **Credential**: AccessKeyペアを使用してバケットにアクセスできます。詳細については、[Alibaba Cloudオブジェクトストレージサービス（OSS）へのアクセスを設定する](/tidb-cloud/configure-external-storage-access.md#configure-alibaba-cloud-object-storage-service-oss-access)を参照してください。
     - **Test Bucket Access**: 認証情報の入力後、このボタンをクリックして、{{{ .premium }}} がバケットにアクセスできることを確認します。
     - **Target Connection**: インポートを実行するTiDBのユーザー名とパスワードを入力します。必要に応じて、**Test Connection**をクリックして認証情報を検証します。
