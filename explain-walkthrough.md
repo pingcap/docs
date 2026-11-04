@@ -197,7 +197,7 @@ EXPLAIN ANALYZE SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 
 
 > **Note:**
 >
-> Another optimization that applies here is the coprocessor cache. If you are unable to add indexes, consider enabling the [コプロセッサーキャッシュ](/coprocessor-cache.md). When it is enabled, as long as the Region has not been modified since the operator is last executed, TiKV will return the value from the cache. This will also help reduce much of the cost of the expensive `TableFullScan` and `Selection` operators.
+> ここで適用できるもう 1 つの最適化は、コプロセッサーキャッシュです。インデックスを追加できない場合は、[コプロセッサーキャッシュ](/coprocessor-cache.md)を有効にすることを検討してください。有効にすると、オペレーターが最後に実行されてからリージョンが変更されていない限り、TiKV はキャッシュから値を返します。これにより、コストの高い`TableFullScan`オペレーターと`Selection`オペレーターのコストの大部分を削減することもできます。
 
 ## サブクエリの早期実行を無効にする {#disable-the-early-execution-of-subqueries}
 
