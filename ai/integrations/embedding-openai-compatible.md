@@ -128,4 +128,4 @@ results = table.search("How to start learning Java programming?") \
 print(results)
 ```
 
-[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)を有効にすると、TiDB はベクトル検索中にクエリ テキストの埋め込みを自動的に生成します。
+[自動埋め込み](/ai/integrations/vector-search-auto-embedding-overview.md)を有効にすると、TiDB はベクトル検索中にクエリテキストの埋め込みを自動的に生成します。

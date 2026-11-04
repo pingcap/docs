@@ -36,7 +36,7 @@ TiDB はほとんどの MySQL 構文をサポートしているため、ほと�
     iperf3 -c <server-IP>
     ```
 
-次の例は、ネットワーク接続が良好なクライアント ノードの出力です。
+次の例は、ネットワーク接続が良好なクライアントノードの出力です。
 
 ```shell
 $ iperf3 -c 192.168.196.58
@@ -109,16 +109,16 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 - 単一の TiDB トランザクション内のステートメントの制限数を増やすこともできますが、これにより消費されるメモリが増加します。
 
-### Dumpling がテーブルをエクスポートするときに`The local disk space is insufficient`エラーを返したり、アップストリーム データベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-the-local-disk-space-is-insufficient-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
+### Dumpling がテーブルをエクスポートするときに`The local disk space is insufficient`エラーを返したり、アップストリームデータベースのメモリ不足を引き起こしたりする原因になるのはなぜですか? {#why-does-dumpling-return-the-local-disk-space-is-insufficient-error-or-cause-the-upstream-database-to-run-out-of-memory-when-exporting-a-table}
 
 この問題には次の原因が考えられます。
 
 - データベースの主キーが均等に分散されていません (たとえば、 [`SHARD_ROW_ID_BITS`](/shard-row-id-bits.md)を有効にした場合)。
-- アップストリーム データベースは TiDB であり、エクスポートされたテーブルはパーティションテーブルです。
+- アップストリームデータベースは TiDB であり、エクスポートされたテーブルはパーティションテーブルです。
 
 上記のケースでは、 Dumpling はエクスポート時に過度に大きなデータチャンクを分割し、過度に大きな結果を含むクエリを送信します。この問題に対処するには、 Dumplingの最新バージョンを入手してください。
 
-### TiDB には Oracle のフラッシュバック クエリのような機能がありますか? DDL をサポートしていますか? {#does-tidb-have-a-function-like-the-flashback-query-in-oracle-does-it-support-ddl}
+### TiDB には Oracle のフラッシュバッククエリのような機能がありますか? DDL をサポートしていますか? {#does-tidb-have-a-function-like-the-flashback-query-in-oracle-does-it-support-ddl}
 
 はい、サポートしています。DDLもサポートしています。詳細は[TiDBが履歴バージョンからデータを読み取る方法](/read-historical-data.md)ご覧ください。
 

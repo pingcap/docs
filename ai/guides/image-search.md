@@ -90,7 +90,7 @@ image = Image.open("/path/to/query.jpg")
 results = table.search(image).limit(3).to_list()
 ```
 
-クライアントは、PIL イメージ オブジェクトを埋め込みモデルに送信する前に、Base64 文字列に変換します。
+クライアントは、PIL イメージオブジェクトを埋め込みモデルに送信する前に、Base64 文字列に変換します。
 
 #### オプション3: キーワードテキストで検索 {#option-3-search-by-keyword-text}
 

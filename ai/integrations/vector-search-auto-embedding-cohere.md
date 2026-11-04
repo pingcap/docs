@@ -127,7 +127,7 @@ LIMIT 2;
 
 ## 使用例（BYOK） {#usage-example-byok}
 
-この例では、Bring Your Own Key (BYOK) Cohere モデルを使用して、ベクトル テーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
+この例では、Bring Your Own Key (BYOK) Cohere モデルを使用して、ベクトルテーブルを作成し、ドキュメントを挿入し、類似性検索を実行する方法を示します。
 
 ### ステップ1：データベースに接続する {#step-1-connect-to-the-database}
 

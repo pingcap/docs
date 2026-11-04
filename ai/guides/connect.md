@@ -127,7 +127,7 @@ db = TiDBClient.connect(
 
 ## SQLAlchemy DBエンジンを使用して接続する {#connect-with-sqlalchemy-db-engine}
 
-アプリケーションに既に SQLAlchemy データベース エンジンが搭載されている場合は、 `db_engine`パラメータを使用してそれを再利用できます。
+アプリケーションに既に SQLAlchemy データベースエンジンが搭載されている場合は、 `db_engine`パラメータを使用してそれを再利用できます。
 
 ```python title="main.py"
 from pytidb import TiDBClient

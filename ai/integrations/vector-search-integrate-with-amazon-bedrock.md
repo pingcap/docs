@@ -149,7 +149,7 @@ Base = declarative_base()
 
 ### ステップ5. Bedrockランタイムクライアントを使用してAmazon Titan Text Embeddings V2モデルを呼び出す {#step-5-invoke-the-amazon-titan-text-embeddings-v2-model-using-the-bedrock-runtime-client}
 
-Amazon Bedrock ランタイム クライアントは、次のパラメーターを受け入れる`invoke_model` API を提供します。
+Amazon Bedrock ランタイムクライアントは、次のパラメーターを受け入れる`invoke_model` API を提供します。
 
 - `modelId` : Amazon Bedrock で利用可能な基盤モデルのモデル ID。
 - `accept` : 入力リクエストのタイプ。

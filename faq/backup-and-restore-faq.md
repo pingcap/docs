@@ -24,7 +24,7 @@ TiKVは[動的構成](/tikv-control.md#modify-the-tikv-configuration-dynamically
 
 さらに、自動チューニングにより、バックアップタスクで使用されるデフォルトのスレッド数が削減されます。詳細については、 `backup.num-threads` ](/tikv-configuration-file.md#num-threads-1) を参照してください。そのため、Grafana ダッシュボードでは、バックアップタスクで使用される速度、CPU 使用率、および I/O リソース使用率が、v5.4.0 より前のバージョンよりも低くなります。v5.4.0 より前では、デフォルト値`backup.num-threads`は`CPU * 0.75`でした。つまり、バックアップタスクで使用されるスレッド数は、論理 CPU コアの 75% を占めていました。その最大値は`32`でした。v5.4.0 以降、この設定項目のデフォルト値は`CPU * 0.5` 、最大値は`8`です。
 
-オフライン クラスターでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
+オフラインクラスターでバックアップタスクを実行する場合、バックアップを高速化するために、 `tikv-ctl`を使用して`backup.num-threads`の値をより大きな数値に変更できます。
 
 ## PITRの問題 {#pitr-issues}
 
@@ -142,23 +142,23 @@ v6.0.0より前では、 BRは[配置ルール](/placement-rules-in-sql.md)サ�
 
 ### `Io(Os...)`エラーを処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-ioos-error}
 
-これらの問題のほとんどは、TiKV がディスクにデータを書き込むときに発生するシステム コール エラーです (例: `Io(Os {code: 13, kind: PermissionDenied...})`または`Io(Os {code: 2, kind: NotFound...})` )。
+これらの問題のほとんどは、TiKV がディスクにデータを書き込むときに発生するシステムコールエラーです (例: `Io(Os {code: 13, kind: PermissionDenied...})`または`Io(Os {code: 2, kind: NotFound...})` )。
 
 このような問題に対処するには、まずバックアップディレクトリのマウント方法とファイルシステムを確認し、別のフォルダまたは別のハードディスクにデータをバックアップしてみます。
 
-たとえば、 `samba`で構築されたネットワーク ディスクにデータをバックアップするときに、 `Code: 22(invalid argument)`エラーが発生する可能性があります。
+たとえば、 `samba`で構築されたネットワークディスクにデータをバックアップするときに、 `Code: 22(invalid argument)`エラーが発生する可能性があります。
 
 ### 復元中に発生した`rpc error: code = Unavailable desc =...`エラーを処理するにはどうすればよいですか? {#what-should-i-do-to-handle-the-rpc-error-code--unavailable-desc--error-occurred-in-restore}
 
 このエラーは、復元するクラスターの容量が不足している場合に発生する可能性があります。このクラスターの監視メトリックまたはTiKVログを確認することで、原因をさらに確認できます。
 
-この問題に対処するには、クラスター リソースをスケールアウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
+この問題に対処するには、クラスターリソースをスケールアウトし、復元の値`tikv-max-restore-concurrency`を減らして、オプション`ratelimit`を有効にしてみてください。
 
 ### `the entry too large, the max entry size is 6291456, the size of data is 7690800`というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいですか？ {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
 
 `--ddl-batch-size`を`128`またはそれより小さい値に設定することで、バッチで作成されるテーブルの数を減らすことができます。
 
-BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップデータを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブキューに書き込みます。このとき、ジョブ メッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブルスキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`を過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマ サイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
+BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップデータを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブキューに書き込みます。このとき、ジョブメッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブルスキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`を過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマサイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
 
 ### `local`ストレージを使用する場合、バックアップされたファイルはどこに保存されますか? {#where-are-the-backed-up-files-stored-when-i-use-local-storage}
 
@@ -186,7 +186,7 @@ TiKVがバックアップディレクトリにアクセスできるかどうか�
 
 したがって、データを復元する前に、次の手順に従って権限を確認することをお勧めします。
 
-1. プロセス クエリ用の Linux コマンドを実行します。
+1. プロセスクエリ用の Linux コマンドを実行します。
 
     ```bash
     ps aux | grep tikv-server
@@ -302,7 +302,7 @@ v4.0.9では、 BRはデフォルトで統計情報をバックアップしま�
 次の理由により、単一のクラスターのデータを復元するために複数の復元タスクを同時に開始することは**強く推奨されません**。
 
 - BR がデータを復元すると、PD のグローバル設定の一部が変更されます。そのため、複数の復元タスクを同時に実行すると、これらの設定が誤って上書きされ、クラスタの状態が異常になる可能性があります。
-- BR はデータの復元に大量のクラスター リソースを消費するため、実際には復元タスクを並列で実行しても復元速度は限られた範囲でしか向上しません。
+- BR はデータの復元に大量のクラスターリソースを消費するため、実際には復元タスクを並列で実行しても復元速度は限られた範囲でしか向上しません。
 - データの復元のために複数の復元タスクを並行して実行するテストは行われていないため、成功することは保証されません。
 
 ### BR はテーブルの`SHARD_ROW_ID_BITS`と`PRE_SPLIT_REGIONS`情報をバックアップしますか? 復元されたテーブルには複数のリージョンがありますか? {#does-br-back-up-the-shard_row_id_bits-and-pre_split_regions-information-of-a-table-does-the-restored-table-have-multiple-regions}

@@ -214,7 +214,7 @@ print(textwrap.fill(str(response), 100))
 
 > **Note**
 >
-> `TiDBVectorStore`は[`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode)クエリ モードのみをサポートしています。
+> `TiDBVectorStore`は[`default`](https://docs.llamaindex.ai/en/stable/api_reference/storage/vector_store/?h=vectorstorequerymode#llama_index.core.vector_stores.types.VectorStoreQueryMode)クエリモードのみをサポートしています。
 
 期待される出力は以下のとおりです。
 
@@ -230,7 +230,7 @@ a building for office use.
 
 #### `book != "paul_graham"`フィルターを含むクエリ {#query-with-book-paul-graham-filter}
 
-次の例では`book`メタデータ フィールドが`"paul_graham"`である結果を除外しています。
+次の例では`book`メタデータフィールドが`"paul_graham"`である結果を除外しています。
 
 ```python
 from llama_index.core.vector_stores.types import (
@@ -258,7 +258,7 @@ Empty Response
 
 #### `book == "paul_graham"`フィルターを含むクエリ {#query-with-book-paul-graham-filter}
 
-次の例では`book`メタデータ フィールドが`"paul_graham"`であるドキュメントのみを結果に含めるようにフィルタリングしています。
+次の例では`book`メタデータフィールドが`"paul_graham"`であるドキュメントのみを結果に含めるようにフィルタリングしています。
 
 ```python
 from llama_index.core.vector_stores.types import (

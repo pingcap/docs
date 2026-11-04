@@ -29,13 +29,13 @@ TiDBクラスタは、TiDBサーバー、PD（Placement Driver）サーバー、
 
 ### TiDB は MySQL に基づいていますか? {#is-tidb-based-on-mysql}
 
-いいえ。TiDB は MySQL の構文とプロトコルをサポートしていますが、PingCAP, Inc. によって開発および保守されている新しいオープン ソースデータベースです。
+いいえ。TiDB は MySQL の構文とプロトコルをサポートしていますが、PingCAP, Inc. によって開発および保守されている新しいオープンソースデータベースです。
 
 ### TiDB、TiKV、PD (Placement Driver) のそれぞれの責任は何ですか? {#what-is-the-respective-responsibility-of-tidb-tikv-and-pd-placement-driver}
 
 - TiDB は SQL コンピューティングレイヤーとして機能し、主に SQL の解析、クエリプランの指定、エグゼキュータの生成を担当します。
 - TiKVは分散型のキーバリューストレージエンジンとして動作し、実データの保存に使用されます。つまり、TiKVはTiDBのストレージエンジンです。
-- PD は TiDB のクラスター マネージャーとして機能し、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散の決定を行います。
+- PD は TiDB のクラスターマネージャーとして機能し、TiKV メタデータを管理し、タイムスタンプを割り当て、データの配置と負荷分散の決定を行います。
 
 ### TiDB は使いやすいですか? {#is-it-easy-to-use-tidb}
 
@@ -84,7 +84,7 @@ Usage of ./bin/tidb-server:
 
 - [TiDBドキュメント](https://docs.pingcap.com/) : TiDB 関連の知識を得るための最も重要かつタイムリーな方法。
 - [TiDBブログ](https://www.pingcap.com/blog/) : 技術記事、製品の洞察、ケーススタディを学びます。
-- [PingCAP教育](https://www.pingcap.com/education/?from=en) : オンライン コースや認定プログラムを受講します。
+- [PingCAP教育](https://www.pingcap.com/education/?from=en) : オンラインコースや認定プログラムを受講します。
 
 ### TiDB ユーザー名の長さ制限は何ですか? {#what-is-the-length-limit-for-the-tidb-user-name}
 
@@ -103,7 +103,7 @@ Usage of ./bin/tidb-server:
 
 Atomikosの2つのデータソースを設定したら、JDBCドライブをXAに設定します。AtomikosがTMおよびRM（DB）を操作する際、AtomikosはXAを含むコマンドをJDBCレイヤーに送信します。MySQLを例に挙げると、JDBCレイヤーでXAが有効になっている場合、JDBCはDMLを使用して`redo`ログを変更するなど、一連のXAロジック操作をInnoDBに送信します。これは2相コミットの動作です。現在のTiDBバージョンは、上位アプリケーションレイヤーのJTA/XAをサポートしておらず、Atomikosから送信されたXA操作を解析しません。
 
-スタンドアロン データベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクションモデルを使用した分散トランザクションをサポートし、パフォーマンスの安定性は XA よりも高いため、TiDB は JTA/XA をサポートしておらず、TiDB が XA をサポートする必要もありません。
+スタンドアロンデータベースとして、MySQL は XA を使用したデータベース間トランザクションのみを実装できます。一方、TiDB は Google Percolator トランザクションモデルを使用した分散トランザクションをサポートし、パフォーマンスの安定性は XA よりも高いため、TiDB は JTA/XA をサポートしておらず、TiDB が XA をサポートする必要もありません。
 
 ### TiDB は、パフォーマンスを損なうことなく、列指向ストレージエンジン (TiFlash) への大量の同時`INSERT`または`UPDATE`操作をどのようにサポートできるでしょうか? {#how-could-tidb-support-high-concurrent-insert-or-update-operations-to-the-columnar-storage-engine-tiflash-without-hurting-performance}
 

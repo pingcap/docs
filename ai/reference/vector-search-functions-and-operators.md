@@ -246,7 +246,7 @@ SELECT VEC_DIMS('[]');
 VEC_L2_NORM(vector)
 ```
 
-次の式を使用してベクトルの[L2ノルム](https://en.wikipedia.org/wiki/Norm_(mathematics)) (ユークリッド ノルム) を計算します。
+次の式を使用してベクトルの[L2ノルム](https://en.wikipedia.org/wiki/Norm_(mathematics)) (ユークリッドノルム) を計算します。
 
 $NORM(p)=\sqrt {\sum \limits _{i=1}^{n}{p_{i}^{2}}}$
 

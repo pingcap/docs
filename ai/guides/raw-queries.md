@@ -35,7 +35,7 @@ client.execute(
 
 ### クエリ結果を出力する {#output-query-result}
 
-`client.query()`メソッドは、いくつかのヘルパー メソッドを含む`SQLQueryResult`インスタンスを返します。
+`client.query()`メソッドは、いくつかのヘルパーメソッドを含む`SQLQueryResult`インスタンスを返します。
 
 - `to_pydantic()`
 - `to_list()`

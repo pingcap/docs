@@ -63,11 +63,11 @@ TiDB `label`の設定は、クラスタのデプロイメントアーキテク�
 
 `pd-ctl`の使い方については[PD Controlユーザーガイド](/pd-control.md)を参照してください。
 
-### ディスク テストの`dd`コマンドが`oflag=direct`オプションを使用するのはなぜですか? {#why-does-the-dd-command-for-the-disk-test-use-the-oflagdirect-option}
+### ディスクテストの`dd`コマンドが`oflag=direct`オプションを使用するのはなぜですか? {#why-does-the-dd-command-for-the-disk-test-use-the-oflagdirect-option}
 
-ダイレクト モードでは、書き込みリクエストを I/O コマンドにラップし、このコマンドをディスクに送信してファイルシステム キャッシュをバイパスし、ディスクの実際の I/O 読み取り/書き込みパフォーマンスを直接テストします。
+ダイレクトモードでは、書き込みリクエストを I/O コマンドにラップし、このコマンドをディスクに送信してファイルシステムキャッシュをバイパスし、ディスクの実際の I/O 読み取り/書き込みパフォーマンスを直接テストします。
 
-### `fio`コマンドを使用して TiKV インスタンスのディスク パフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-fio-command-to-test-the-disk-performance-of-the-tikv-instance}
+### `fio`コマンドを使用して TiKV インスタンスのディスクパフォーマンスをテストするにはどうすればよいですか? {#how-to-use-the-fio-command-to-test-the-disk-performance-of-the-tikv-instance}
 
 以下の例では`ioengine=psync` （同期I/O）を使用しているため、 `iodepth`は通常`1`に固定され、同時実行性は主に`numjobs`によって制御されます。ファイルシステムキャッシュをバイパスするには、 `direct=1`を設定することをお勧めします。
 
@@ -83,7 +83,7 @@ TiDB `label`の設定は、クラスタのデプロイメントアーキテク�
     ./fio -ioengine=psync -bs=32k -direct=1 -thread -rw=randrw -percentage_random=100,0 -time_based -size=10G -filename=fio_randread_write_test.txt -name='fio mixed randread and sequential write test' -iodepth=1 -runtime=60 -numjobs=4 -group_reporting --output-format=json --output=fio_randread_write_test.json
     ```
 
-## 現在 TiDB でサポートされているパブリッククラウド ベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
+## 現在 TiDB でサポートされているパブリッククラウドベンダーは何ですか? {#what-public-cloud-vendors-are-currently-supported-by-tidb}
 
 TiDB は[Google Cloud GKE](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-gcp-gke) 、 [AWS EKS](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-aws-eks) 、 [アリババクラウドACK](https://docs.pingcap.com/tidb-in-kubernetes/stable/deploy-on-alibaba-cloud)でのデプロイメントをサポートします。
 

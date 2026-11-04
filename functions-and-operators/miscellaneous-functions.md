@@ -21,7 +21,7 @@ TiDB は、MySQL 8.0 で利用可能な[その他の関数](https://dev.mysql.co
 | [`INET6_NTOA()`](#inet6_ntoa)         | 数値からIPv6アドレスを返します                                                                                                                                                                                                                                                          |
 | [`IS_IPV4()`](#is_ipv4)               | 引数が IPv4 アドレスかどうか                                                                                                                                                                                                                                                          |
 | [`IS_IPV4_COMPAT()`](#is_ipv4_compat) | 引数が IPv4 互換アドレスであるかどうか                                                                                                                                                                                                                                                     |
-| [`IS_IPV4_MAPPED()`](#is_ipv4_mapped) | 引数が IPv4 マップド アドレスであるかどうか                                                                                                                                                                                                                                                  |
+| [`IS_IPV4_MAPPED()`](#is_ipv4_mapped) | 引数が IPv4 マップドアドレスであるかどうか                                                                                                                                                                                                                                                  |
 | [`IS_IPV6()`](#is_ipv6)               | 引数が IPv6 アドレスかどうか                                                                                                                                                                                                                                                          |
 | [`IS_UUID()`](#is_uuid)               | 引数がUUIDかどうか                                                                                                                                                                                                                                                                |
 | [`NAME_CONST()`](#name_const)         | 列名を変更するために使用できます                                                                                                                                                                                                                                                           |
@@ -145,7 +145,7 @@ TABLE t1;
 
 ### INET_ATON() {#inet_aton}
 
-`INET_ATON()`関数は、ドット付き四分音符表記の IPv4 アドレスを、効率的に保存できるバイナリ バージョンに変換します。
+`INET_ATON()`関数は、ドット付き四分音符表記の IPv4 アドレスを、効率的に保存できるバイナリバージョンに変換します。
 
 ```sql
 SELECT INET_ATON('127.0.0.1');
@@ -260,7 +260,7 @@ SELECT IS_IPV4_COMPAT(INET6_ATON('::127.0.0.1'));
 
 ### IS_IPV4_MAPPED() {#is_ipv4_mapped}
 
-`IS_IPV4_MAPPED()`関数は、指定された引数が IPv4 マップド アドレスであるかどうかをテストします。
+`IS_IPV4_MAPPED()`関数は、指定された引数が IPv4 マップドアドレスであるかどうかをテストします。
 
 ```sql
 SELECT IS_IPV4_MAPPED(INET6_ATON('::ffff:127.0.0.1'));

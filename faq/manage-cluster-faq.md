@@ -49,7 +49,7 @@ MySQL と同様に、TiDB にはシステムテーブルも含まれており、
 
     TiDB v6.1.0 では、グローバルキル機能が導入されました (デフォルトで有効になっている`enable-global-kill`設定によって制御されます)。グローバルキルが有効になっている場合は、 `kill session_id`を実行するだけです。
 
-    TiDB のバージョンが v6.1.0 より前、またはグローバル キル機能が有効になっていない場合、 `kill session_id`はデフォルトでは有効になりません。DML文を終了するには、クライアントを DML文を実行している TiDB インスタンスに直接接続してから、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別の TiDB インスタンスに接続している場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別の TiDB インスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
+    TiDB のバージョンが v6.1.0 より前、またはグローバルキル機能が有効になっていない場合、 `kill session_id`はデフォルトでは有効になりません。DML文を終了するには、クライアントを DML文を実行している TiDB インスタンスに直接接続してから、 `kill tidb session_id`ステートメントを実行する必要があります。クライアントが別の TiDB インスタンスに接続している場合、またはクライアントと TiDB クラスタの間にプロキシがある場合、 `kill tidb session_id`ステートメントが別の TiDB インスタンスにルーティングされ、別のセッションが誤って終了する可能性があります。詳細については、[`KILL`](/sql-statements/sql-statement-kill.md)を参照してください。
 
 - DDL文を強制終了するには、まず`admin show ddl jobs`を使用して終了する必要のある DDL ジョブの ID を見つけ、次に`admin cancel ddl jobs 'job_id' [, 'job_id'] ...`を実行します。詳細については、 [`ADMIN`ステートメント](/sql-statements/sql-statement-admin.md)を参照してください。
 
@@ -144,7 +144,7 @@ PD の API のほとんどは、TiKV クラスタが初期化されたときに�
 
 ### PD の保存時の暗号化を有効にすると`[PD:encryption:ErrEncryptionNewMasterKey]fail to get encryption key from file /root/path/file%!(EXTRA string=open /root/path/file: permission denied)`というメッセージが表示される {#the-pd-encryption-errencryptionnewmasterkey-fail-to-get-encryption-key-from-file-root-path-file-extra-string-open-root-path-file-permission-denied-message-is-displayed-when-enabling-encryption-at-rest-for-pd}
 
-保存時の暗号化では、キー ファイルを`root`ディレクトリまたはそのサブディレクトリに保存することはサポートされていません。読み取り権限を付与しても、同じエラーが発生します。この問題を解決するには、キー ファイルを`root`ディレクトリ以外の場所に保存してください。
+保存時の暗号化では、キーファイルを`root`ディレクトリまたはそのサブディレクトリに保存することはサポートされていません。読み取り権限を付与しても、同じエラーが発生します。この問題を解決するには、キーファイルを`root`ディレクトリ以外の場所に保存してください。
 
 ### PDの時刻同期誤差に対する最大許容値はどれくらいですか？ {#what-s-the-maximum-tolerance-for-time-synchronization-error-of-pd}
 
@@ -162,8 +162,8 @@ PD Controlを使用すると、TiKVストアの状態情報を確認できます
 
 ### PDにおける`leader-schedule-limit`と`region-schedule-limit`というスケジューリングパラメータの違いは何ですか？ {#what-is-the-difference-between-the-leader-schedule-limit-and-region-schedule-limit-scheduling-parameters-in-pd}
 
-- `leader-schedule-limit`スケジューリング パラメータは、さまざまな TiKV サーバーのLeader数をバランスさせるために使用され、クエリ処理の負荷に影響します。
-- `region-schedule-limit`スケジューリング パラメータは、異なる TiKV サーバーのレプリカ数をバランスさせるために使用され、異なるノードのデータ量に影響を与えます。
+- `leader-schedule-limit`スケジューリングパラメータは、さまざまな TiKV サーバーのLeader数をバランスさせるために使用され、クエリ処理の負荷に影響します。
+- `region-schedule-limit`スケジューリングパラメータは、異なる TiKV サーバーのレプリカ数をバランスさせるために使用され、異なるノードのデータ量に影響を与えます。
 
 ### 各リージョンにおけるレプリカの数は設定可能ですか？設定可能な場合、どのように設定すればよいですか？ {#is-the-number-of-replicas-in-each-region-configurable-if-yes-how-to-configure-it}
 
@@ -299,7 +299,7 @@ GROUP BY
 
 ### コンプライアンス遵守やマルチテナントアプリケーションにおいて、データの保存場所を指定するにはどうすればよいですか？ {#how-to-specify-the-location-of-data-for-compliance-or-multi-tenant-applications}
 
-[配置ルール](/placement-rules-in-sql.md)を使用して、コンプライアンスまたはマルチテナント アプリケーションのデータの場所を指定できます。
+[配置ルール](/placement-rules-in-sql.md)を使用して、コンプライアンスまたはマルチテナントアプリケーションのデータの場所を指定できます。
 
 SQL の配置ルールは、レプリカ数、 Raftの役割、配置場所、ルールが適用されるキー範囲など、連続データ範囲の属性を制御するように設計されています。
 
