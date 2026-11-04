@@ -28,7 +28,7 @@ TiDB バージョン: 5.2.2
     - ホットスポットスケジューラーの QPS ディメンションに書き込みクエリの種類を追加する [#3869](https://github.com/tikv/pd/issues/3869)
     - バランスリージョンスケジューラーの再試行制限を動的に調整して、スケジューラーのパフォーマンスを向上させることをサポートしました。 [#3744](https://github.com/tikv/pd/issues/3744)
     - TiDB Dashboardをv2021.10.08.1 に更新 [#4070](https://github.com/tikv/pd/pull/4070)
-    - 退去リーダースケジューラーが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
+    - エビクトリーダースケジューラーが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
     - スケジューラーの終了プロセスを高速化 [#4146](https://github.com/tikv/pd/issues/4146)
 
 - ツール
@@ -92,7 +92,7 @@ TiDB バージョン: 5.2.2
 
     - ピア数が設定されたピア数を超えたために、PD がデータがあり保留中の状態のピアを誤って削除する問題を修正しました。 [#4045](https://github.com/tikv/pd/issues/4045)
     - PDがダウンしたピアを速やかに修復しない問題を修正[#4077](https://github.com/tikv/pd/issues/4077)
-    - 散布範囲スケジューラーが空のリージョンをスケジュールできない問題を修正[#4118](https://github.com/tikv/pd/pull/4118)
+    - scatter range スケジューラーが空のリージョンをスケジュールできない問題を修正[#4118](https://github.com/tikv/pd/pull/4118)
     - キーマネージャーのCPU使用率が高すぎる問題を修正[#4071](https://github.com/tikv/pd/issues/4071)
     - ホットリージョンスケジューラーの設定時に発生する可能性のあるデータ競合の問題を修正しました。 [#4159](https://github.com/tikv/pd/issues/4159)
     - リージョン同期が停止したことによるリーダー選出の遅延を修正[#3936](https://github.com/tikv/pd/issues/3936)
