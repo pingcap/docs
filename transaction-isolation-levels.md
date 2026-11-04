@@ -78,7 +78,7 @@ v6.0.0以降、TiDBは、読み取り/書き込み競合が稀なシナリオに
     - TiDB がまだ結果をクライアントに送信していない場合、TiDB は新しいタイムスタンプを取得してこのステートメントを再試行します。
     - TiDBが既に部分的なデータをクライアントに送信している場合、TiDBはクライアントにエラーを報告します。クライアントに送信されるデータの量は、 [`tidb_init_chunk_size`](/system-variables.md#tidb_init_chunk_size)と[`tidb_max_chunk_size`](/system-variables.md#tidb_max_chunk_size)によって制御されます。
 
-分離レベル`READ-COMMITTED`が使用され、ステートメントが`SELECT`多く、読み取り/書き込みの競合がまれなシナリオでは、この変数を有効にすると、グローバルタイムスタンプを取得する際のレイテンシーとコストを回避できます。
+分離レベル`READ-COMMITTED`が使用され、`SELECT`ステートメントが多く、読み取り/書き込みの競合がまれなシナリオでは、この変数を有効にすると、グローバルタイムスタンプを取得する際のレイテンシーとコストを回避できます。
 
 v6.3.0以降、TiDBはポイント書き込みの競合が少ないシナリオにおいて、システム変数[`tidb_rc_write_check_ts`](/system-variables.md#tidb_rc_write_check_ts-new-in-v630)を有効にすることでタイムスタンプ取得の最適化をサポートします。この変数を有効にすると、ポイント書き込みステートメントの実行中に、TiDBは現在のトランザクションの有効なタイムスタンプを使用してデータの読み取りとロックを試みます。[`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)が有効になっている場合も、TiDBは同様にデータを読み取ります。
 
