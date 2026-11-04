@@ -18,7 +18,7 @@ TiDB Ansible バージョン: 3.0.11
 ## 互換性の変更 {#compatibility-changes}
 
 - TiDB
-    - 最大インデックス長を制御するための`max-index-length`設定項目を追加します。これは、TiDB バージョン 3.0.7 以前または MySQL の動作と互換性があります。 [#15057](https://github.com/pingcap/tidb/pull/15057)
+    - 最大インデックス長を制御するための`max-index-length`設定項目を追加します。これは、TiDB バージョン 3.0.7 より前または MySQL の動作と互換性があります。 [#15057](https://github.com/pingcap/tidb/pull/15057)
 
 ## 新機能 {#new-features}
 
