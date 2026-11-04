@@ -83,14 +83,14 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
 
 パラメーターは次のとおりです。
 
-- `RESOURCE GROUP`リソースグループを指定します。このステートメントによって追加されたランナウェイクエリの一致する特徴は、リソースグループのウォッチリストに追加されます。このパラメーターは省略可能です。省略した場合、 `default`リソースグループに適用されます。
+- `RESOURCE GROUP`はリソースグループを指定します。このステートメントによって追加されたランナウェイクエリの一致する特徴は、リソースグループのウォッチリストに追加されます。このパラメーターは省略可能です。省略した場合、 `default`リソースグループに適用されます。
 
 - `ACTION`の意味は`QUERY LIMIT`と同じです。このパラメーターは省略可能です。省略した場合、識別後の対応するアクションは、リソースグループ内の`QUERY LIMIT`で設定された`ACTION`を採用し、 `QUERY LIMIT`設定によってアクションは変更されません。リソースグループ内に`ACTION`が設定されていない場合は、エラーが報告されます。
 
-- `QueryWatchTextOption`パラメーターには、 `SQL DIGEST` 、 `PLAN DIGEST` 、 `SQL TEXT` 3つのオプションがあります。
+- `QueryWatchTextOption`パラメーターには、 `SQL DIGEST` 、 `PLAN DIGEST` 、 `SQL TEXT`の3つのオプションがあります。
     - `SQL DIGEST`は`SIMILAR`と同じです。以下のパラメーターは、文字列、ユーザー定義変数、または文字列を返すその他の式を受け入れます。文字列の長さは64文字でなければなりません。これはTiDBのダイジェスト定義と同じです。
     - `PLAN DIGEST`は`PLAN`と同じです。次のパラメーターはダイジェスト文字列です。
-    - `SQL TEXT`入力SQLを生の文字列（ `EXACT` ）として一致させるか、次のパラメーターに応じて`SQL DIGEST` （ `SIMILAR` ）または`PLAN DIGEST` （ `PLAN` ）に解析してコンパイルします。
+    - `SQL TEXT`は、入力SQLを生の文字列（ `EXACT` ）として一致させるか、次のパラメーターに応じて`SQL DIGEST` （ `SIMILAR` ）または`PLAN DIGEST` （ `PLAN` ）に解析してコンパイルします。
 
 - デフォルトのリソースグループのランナウェイクエリ監視リストに一致する機能を追加します (事前にデフォルトのリソースグループに`QUERY LIMIT`を設定する必要があります)。
 
@@ -116,7 +116,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
     ```
 
-- `INFORMATION_SCHEMA.RUNAWAY_WATCHES`クエリしてウォッチアイテム ID を取得し、ウォッチアイテムを削除します。
+- `INFORMATION_SCHEMA.RUNAWAY_WATCHES`をクエリしてウォッチアイテム ID を取得し、ウォッチアイテムを削除します。
 
     ```sql
     SELECT * from information_schema.runaway_watches ORDER BY id\G
