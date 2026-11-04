@@ -85,7 +85,7 @@ RocksDBとTiKVでは、カラムファミリー（CF）は、データベース�
 
 ### コプロセッサー（Coprocessor） {#coprocessor}
 
-コプロセッサーは、TiDBと計算ワークロードを共有するコプロセッシングメカニズムです。ストレージレイヤー（TiKVまたはTiFlash）に配置され、TiDBから[プッシュダウンされる](/functions-and-operators/expressions-pushed-down.md)計算をリージョンごとに共同で処理します。
+コプロセッサーは、TiDBと計算ワークロードを共有するコプロセッシングメカニズムです。ストレージレイヤー（TiKVまたはTiFlash）に配置され、TiDBから[プッシュダウンされる](/functions-and-operators/expressions-pushed-down.md)計算をリージョンごとに分担して処理します。
 
 ## <a id="D" class="letter" href="#D">D</a> {#d}
 
