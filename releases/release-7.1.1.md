@@ -73,7 +73,7 @@ TiDB バージョン: 7.1.1
     - レンジCOLUMNSパーティションテーブルをクエリするとエラーが発生する可能性がある問題を修正しました [#43459](https://github.com/pingcap/tidb/issues/43459) @[mjonss](https://github.com/mjonss)
     - 一時停止中の DDL タスクの再開が失敗する問題を修正[#44217](https://github.com/pingcap/tidb/issues/44217) @[dhysum](https://github.com/dhysum)
     - メモリ内の悲観的ロックが`FLASHBACK`の失敗とデータの不整合を引き起こす問題を修正しました [#44292](https://github.com/pingcap/tidb/issues/44292) @[JmPotato](https://github.com/JmPotato)
-    - 削除されたテーブルが`INFORMATION_SCHEMA` から引き続き読み取ることができる問題を修正しました [#43714](https://github.com/pingcap/tidb/issues/43714) @[tangenta](https://github.com/tangenta)
+    - 削除されたテーブルが`INFORMATION_SCHEMA` から引き続き読み取れる問題を修正しました [#43714](https://github.com/pingcap/tidb/issues/43714) @[tangenta](https://github.com/tangenta)
     - アップグレード前に一時停止された DDL 操作がある場合にクラスターのアップグレードが失敗する問題を修正[#44225](https://github.com/pingcap/tidb/issues/44225) @[zimulala](https://github.com/zimulala)
     - BR を使用して`AUTO_ID_CACHE=1`テーブルを復元するときに発生する`duplicate entry`エラーを修正します [#44716](https://github.com/pingcap/tidb/issues/44716) @[tiancaiamao](https://github.com/tiancaiamao)
     - DDL 所有者の複数回の切り替えによって引き起こされるデータインデックスの不整合の問題を修正しました。 [#44619](https://github.com/pingcap/tidb/issues/44619) @[tangenta](https://github.com/tangenta)

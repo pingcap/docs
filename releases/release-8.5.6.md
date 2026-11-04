@@ -37,7 +37,7 @@ TiDBバージョン：8.5.6
 
 - スロークエリログに対する多次元で詳細なトリガールールの定義をサポートする[#62959](https://github.com/pingcap/tidb/issues/62959) 、 [#64010](https://github.com/pingcap/tidb/issues/64010) @[zimulala](https://github.com/zimulala)
 
-    バージョン 8.5.6 より前では、TiDB でスロークエリを識別する主な方法は、 [`tidb_slow_log_threshold`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_threshold)システム変数を設定することでした。このメカニズムはインスタンスレベルでグローバルに適用されるため、スロークエリログのトリガーを大まかにしか制御できず、セッションレベルや SQL レベルでのきめ細かい制御はサポートされていません。さらに、トリガー条件として実行時間 ( `Query_time` ) しかサポートしていないため、複雑なシナリオでスロークエリログをより正確にキャプチャする必要性を満たすことができません。
+    バージョン 8.5.6 より前では、TiDB でスロークエリを識別する主な方法は、 [`tidb_slow_log_threshold`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_threshold)システム変数を設定することでした。このメカニズムはインスタンスレベルでグローバルに適用されるため、スロークエリログのトリガーを大まかにしか制御できず、セッションレベルや SQL レベルでのきめ細かい制御はサポートされていません。さらに、トリガー条件として実行時間 ( `Query_time` ) しかサポートしていないため、複雑なシナリオでスロークエリログをより正確にキャプチャする必要性を満たせません。
 
     バージョン 8.5.6 以降、TiDB はスロークエリログの制御を強化しました。[`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules) システム変数を使用して、`Query_time`、`Digest`、`Mem_max`、`KV_total` などの条件に基づいて、インスタンス、セッション、SQL の各レベルで多次元のスロークエリログ出力ルールを定義できます。[`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec) を使用して、1秒あたりに書き込まれるログエントリの数を制限したり、[`WRITE_SLOW_LOG`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints) ヒントを使用して、特定の SQL文に対してスロークエリログを強制的に記録したりできます。これにより、スロークエリログをより柔軟かつきめ細かく制御できます。
 
@@ -81,7 +81,7 @@ TiDBクラスターをv8.5.5で新規にデプロイした場合（つまり、v
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
-- バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。テーブルレベルで特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`の権限を付与または取り消すことができます。詳細については、 [列レベルの権限管理](https://docs.pingcap.com/tidb/v8.5/column-privilege-management)を参照してください。
+- バージョン8.5.6以降、TiDBはMySQL互換の列レベルの権限管理メカニズムをサポートしています。テーブルレベルで特定の列に対して、 `SELECT` 、 `INSERT` 、 `UPDATE` 、および`REFERENCES`の権限を付与または取り消せます。詳細については、 [列レベルの権限管理](https://docs.pingcap.com/tidb/v8.5/column-privilege-management)を参照してください。
 - バージョン 8.5.6 以降、TiDB は`FOR UPDATE OF`句でテーブルエイリアスの使用をサポートしています。下位互換性を維持するために、エイリアスが定義されている場合でもベーステーブル名を参照できますが、明示的なエイリアスの使用を推奨する警告が表示されます。詳細については、 [`SELECT`](https://docs.pingcap.com/tidb/v8.5/sql-statement-select)を参照してください。
 - バージョン8.5.6以降、 Dumplingは更新されたMySQLバイナリログの命名に対応することで、MySQL 8.4からのデータエクスポートをサポートしています。 [#53082](https://github.com/pingcap/tidb/issues/53082) @[dveeden](https://github.com/dveeden)
 - バージョン8.5.6以降、TiDB Data Migration (DM) は、このバージョンで導入された新しい用語とバージョン検出ロジックに対応することで、アップストリームデータソースとしてMySQL 8.4をサポートします。 [#11020](https://github.com/pingcap/tiflow/issues/11020) @[dveeden](https://github.com/dveeden)
