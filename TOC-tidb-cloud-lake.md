@@ -220,7 +220,7 @@
       - [system_history.query_history](/tidb-cloud-lake/sql/system-history-query-history.md)
     - [SQL 識別子](/tidb-cloud-lake/sql/sql-identifiers.md)
     - [入出力ファイル形式](/tidb-cloud-lake/sql/input-output-file-formats.md)
-    - [接続パラメータ](/tidb-cloud-lake/sql/connection-parameters.md)
+    - [接続パラメーター](/tidb-cloud-lake/sql/connection-parameters.md)
     - [SQL 方言と準拠](/tidb-cloud-lake/sql/sql-dialects-conformance.md)
   - SQL 文
     - [概要](/tidb-cloud-lake/sql/sql-statements-reference.md)
@@ -1233,7 +1233,7 @@
   - [アーキテクチャ](/tidb-cloud-lake/guides/tidb-cloud-lake-architecture.md)
   - 実装の詳細解説
     - [Fuse Engine](/tidb-cloud-lake/guides/how-fuse-engine-works.md)
-    - [オプティマイザ](/tidb-cloud-lake/guides/how-optimizer-works.md)
+    - [オプティマイザー](/tidb-cloud-lake/guides/how-optimizer-works.md)
     - [JSON](/tidb-cloud-lake/guides/how-json-variant-works.md)
     - [データ共有](/tidb-cloud-lake/guides/how-data-sharing-works.md)
   - [エディション](/tidb-cloud-lake/guides/editions.md)

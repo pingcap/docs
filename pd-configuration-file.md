@@ -7,9 +7,9 @@ summary: PD 設定ファイルについて学習します。
 
 <!-- markdownlint-disable MD001 -->
 
-PD設定ファイルは、コマンドラインパラメータよりも多くのオプションをサポートしています。デフォルトの設定ファイルは[ここ](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)あります。
+PD設定ファイルは、コマンドラインパラメーターよりも多くのオプションをサポートしています。デフォルトの設定ファイルは[ここ](https://github.com/tikv/pd/blob/release-8.5/conf/config.toml)あります。
 
-このドキュメントでは、コマンドラインパラメータに含まれないパラメータについてのみ説明します。コマンドラインパラメータについては、 [ここ](/command-line-flags-for-pd-configuration.md)を参照してください。
+このドキュメントでは、コマンドラインパラメーターに含まれないパラメーターについてのみ説明します。コマンドラインパラメーターについては、 [ここ](/command-line-flags-for-pd-configuration.md)を参照してください。
 
 > **Tip:**
 >
@@ -54,7 +54,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### `initial-cluster` {#initial-cluster}
 
-- ブートストラップのための初期クラスタ構成
+- ブートストラップのための初期クラスター構成
 - デフォルト値: `"{name}=http://{advertise-peer-url}"`
 - たとえば、 `name`が"pd"、 `advertise-peer-urls`が`"http://192.168.100.113:2380"`の場合、 `initial-cluster`は`"pd=http://192.168.100.113:2380"`なります。
 - 3 つの PD サーバーを起動する必要がある場合、 `initial-cluster`は次のようになります。
@@ -93,7 +93,7 @@ PD設定ファイルは、コマンドラインパラメータよりも多くの
 
 ### `auto-compaction-retention` {#auto-compaction-retention}
 
-- `auto-compaction-retention`が`periodic`の場合、メタ情報データベースの自動コンパクションの間隔。コンパクションモードが`revision`に設定されている場合、このパラメータは自動コンパクションのバージョン番号を示します。
+- `auto-compaction-retention`が`periodic`の場合、メタ情報データベースの自動コンパクションの間隔。コンパクションモードが`revision`に設定されている場合、このパラメーターは自動コンパクションのバージョン番号を示します。
 - デフォルト値: 1時間
 
 ### `tick-interval` {#tick-interval}
@@ -326,12 +326,12 @@ pd-server関連の設定項目
 
 ### `max-snapshot-count` {#max-snapshot-count}
 
-- 1 つのストアが同時に受信または送信するスナップショットの最大数を制御します。PD スケジューラは、この構成に依存して、通常のトラフィックに使用されるリソースがプリエンプトされるのを防ぎます。
+- 1 つのストアが同時に受信または送信するスナップショットの最大数を制御します。PD スケジューラーは、この構成に依存して、通常のトラフィックに使用されるリソースがプリエンプトされるのを防ぎます。
 - デフォルト値: `64`
 
 ### `max-pending-peer-count` {#max-pending-peer-count}
 
-- 単一ストア内の保留中のピアの最大数を制御します。PD スケジューラはこの構成に依存して、一部のノードで古いログを持つリージョンが過剰に生成されるのを防ぎます。
+- 単一ストア内の保留中のピアの最大数を制御します。PD スケジューラーはこの構成に依存して、一部のノードで古いログを持つリージョンが過剰に生成されるのを防ぎます。
 - デフォルト値: `64`
 
 ### `max-store-down-time` {#max-store-down-time}
@@ -341,7 +341,7 @@ pd-server関連の設定項目
 
 ### `max-store-preparing-time` <span class="version-mark">v6.1.0 の新機能</span> {#max-store-preparing-time-new-in-v610}
 
-- ストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン段階にある間、PDはストアのオンライン進行状況を照会できます。指定された時間を超えると、PDはストアがオンラインになったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどの場合、このパラメータを調整する必要はありません。
+- ストアがオンラインになるまでの最大待機時間を制御します。ストアがオンライン段階にある間、PDはストアのオンライン進行状況を照会できます。指定された時間を超えると、PDはストアがオンラインになったとみなし、再度ストアのオンライン進行状況を照会できなくなります。ただし、これによってリージョンが新しいオンラインストアに移行するのが妨げられることはありません。ほとんどの場合、このパラメーターを調整する必要はありません。
 - デフォルト値: `48h`
 
 ### `leader-schedule-limit` {#leader-schedule-limit}
@@ -376,7 +376,7 @@ pd-server関連の設定項目
 
 ### `merge-schedule-limit` {#merge-schedule-limit}
 
-- 同時に実行される`Region Merge`スケジュールタスクの数`Region Merge`を無効にするには、このパラメータを`0`に設定します。
+- 同時に実行される`Region Merge`スケジュールタスクの数`Region Merge`を無効にするには、このパラメーターを`0`に設定します。
 - デフォルト値: `8`
 
 ### `affinity-schedule-limit` <span class="version-mark">v8.5.5 の新機能</span> {#affinity-schedule-limit-new-in-v855}
@@ -400,8 +400,8 @@ pd-server関連の設定項目
 
 ### `tolerant-size-ratio` {#tolerant-size-ratio}
 
-- `balance`バッファサイズを制御します
-- デフォルト値: `0` (バッファサイズを自動調整)
+- `balance`バッファーサイズを制御します
+- デフォルト値: `0` (バッファーサイズを自動調整)
 - 最小値: `0`
 
 ### `enable-cross-table-merge` {#enable-cross-table-merge}
@@ -467,15 +467,15 @@ pd-server関連の設定項目
 
 ### `location-labels` {#location-labels}
 
-- TiKVクラスタのトポロジ情報
+- TiKVクラスターのトポロジー情報
 - デフォルト値: `[]`
-- [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
+- [クラスタートポロジー構成](/schedule-replicas-by-topology-labels.md)
 
 ### `isolation-level` {#isolation-level}
 
-- TiKVクラスタの最小トポロジカル分離レベル
+- TiKVクラスターの最小トポロジカル分離レベル
 - デフォルト値: `""`
-- [クラスタトポロジ構成](/schedule-replicas-by-topology-labels.md)
+- [クラスタートポロジー構成](/schedule-replicas-by-topology-labels.md)
 
 ### `strictly-match-label` {#strictly-match-label}
 

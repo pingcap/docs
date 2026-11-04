@@ -67,7 +67,7 @@ mvcc-amplification-threshold = 10
 インメモリエンジンを有効にすると、TiKVはリージョンの読み取りトラフィックとMVCC増幅に基づいて、ロードするリージョンを自動的に選択します。具体的な手順は次のとおりです。
 
 1. リージョンは、最近の`next` （RocksDB Iterator next API）および`prev` （RocksDB Iterator prev API）の呼び出し回数に基づいてソートされます。
-2. 領域は、 `mvcc-amplification-threshold`設定パラメータを使用してフィルタリングされます。デフォルト値は`10`です。MVCC 増幅は、( `next` + `prev` ) / `processed_keys`として計算されるリード増幅を測定します。
+2. 領域は、 `mvcc-amplification-threshold`設定パラメーターを使用してフィルタリングされます。デフォルト値は`10`です。MVCC 増幅は、( `next` + `prev` ) / `processed_keys`として計算されるリード増幅を測定します。
 3. MVCC増幅が著しい上位N個の領域がロードされます。ここでNはメモリ推定に基づいて決定されます。
 
 インメモリエンジンは定期的にリージョンを削除します。そのプロセスは以下のとおりです。
@@ -79,7 +79,7 @@ mvcc-amplification-threshold = 10
 
 - [BR](/br/br-use-overview.md) ：インメモリエンジンはBRと併用できます。ただし、 BRリストア中は、リストア処理に関係するリージョンはインメモリエンジンから削除されます。BRが完了した後、対応するリージョンがホットスポットとして残っている場合は、インメモリエンジンによって自動的にロードされます。
 - [TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md) ：インメモリエンジンはTiDB Lightningと併用できます。ただし、 TiDB Lightningが物理インポートモードで動作する場合、復元プロセスに関係するリージョンはインメモリエンジンから削除されます。物理インポートが完了すると、対応するリージョンがホットスポットとして残っている場合、それらはインメモリエンジンによって自動的にロードされます。
-- [Follower Read](/develop/dev-guide-use-follower-read.md)と[ステイル読み取り](/develop/dev-guide-use-stale-read.md) ：インメモリエンジンは、これら2つの機能と併用できます。ただし、インメモリエンジンはLeader上のコプロセッサリクエストのみを高速化でき、Follower Readとステイル読み取り操作は高速化できません。
+- [Follower Read](/develop/dev-guide-use-follower-read.md)と[ステイル読み取り](/develop/dev-guide-use-stale-read.md) ：インメモリエンジンは、これら2つの機能と併用できます。ただし、インメモリエンジンはLeader上のコプロセッサーリクエストのみを高速化でき、Follower Readとステイル読み取り操作は高速化できません。
 - [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md) ：インメモリエンジンはFlashbackと併用できます。ただし、Flashbackはインメモリエンジンのキャッシュを無効化します。Flashback処理が完了すると、インメモリエンジンはホットスポット領域を自動的にロードします。
 
 ## FAQ {#faq}

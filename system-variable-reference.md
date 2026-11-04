@@ -443,7 +443,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [システム変数](/system-variables.md#interactive_timeout)
-- [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
+- [TiDBクラスター管理に関する FAQ](/faq/manage-cluster-faq.md)
 - [TiDBのタイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
 - [TiDB 3.0 ベータ版リリースノート](/releases/release-3.0-beta.md)
 - [TiDB 3.0 GA リリースノート](/releases/release-3.0-ga.md)
@@ -520,7 +520,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [設定を動的に変更する](/dynamic-config.md)
 - [データ移行の事前チェックエラー、移行エラー、アラート](https://docs.pingcap.com/tidbcloud/tidb-cloud-dm-precheck-and-troubleshooting)
 - [システム変数](/system-variables.md#max_connections)
-- [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
+- [TiDBクラスター管理に関する FAQ](/faq/manage-cluster-faq.md)
 - [TiDB設定ファイル](/tidb-configuration-file.md)
 
 ### max_execution_time
@@ -528,8 +528,8 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
-- [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
-- [オプティマイザヒント](/optimizer-hints.md)
+- [接続プールと接続パラメーター](/develop/dev-guide-connection-parameters.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [SQL プラン管理 (SPM)](/sql-plan-management.md)
 - [SQL プリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)
 - [システム変数](/system-variables.md#max_execution_time)
@@ -1147,15 +1147,15 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [プライマリクラスタとセカンダリクラスタに基づくDRソリューション](/dr-secondary-cluster.md)
+- [プライマリクラスターとセカンダリクラスターに基づくDRソリューション](/dr-secondary-cluster.md)
 - [`FLASHBACK CLUSTER`](/sql-statements/sql-statement-flashback-cluster.md)
-- [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
+- [TiDBクラスターの移行とアップグレード](/tidb-upgrade-migration-guide.md)
 - [`tidb_external_ts`変数を使用して履歴データを読み取る](/tidb-external-ts.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_current_ts)
 - [TiDB固有の関数](/functions-and-operators/tidb-functions.md)
 - [TiDB のタイムスタンプ Oracle (TSO)](/tso.md)
-- [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)
+- [上流および下流のクラスターのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)
 
 ### tidb_ddl_disk_quota
 
@@ -1359,7 +1359,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [システム変数](/system-variables.md#tidb_enable_1pc-new-in-v50)
-- [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
+- [TiDBクラスター管理に関する FAQ](/faq/manage-cluster-faq.md)
 - [TiDBの機能](/basic-features.md)
 - [トランザクション](/transaction-overview.md)
 - [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
@@ -1377,7 +1377,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [システム変数](/system-variables.md#tidb_enable_async_commit-new-in-v50)
-- [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
+- [TiDBクラスター管理に関する FAQ](/faq/manage-cluster-faq.md)
 - [TiDBの機能](/basic-features.md)
 - [トランザクション](/transaction-overview.md)
 - [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
@@ -1405,7 +1405,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [SQLに関するよくある質問](/faq/sql-faq.md)
 - [システム変数](/system-variables.md#tidb_enable_auto_analyze-new-in-v610)
-- [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
+- [PLAN REPLAYERを使用してクラスターのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
 - [TiDB 6.1.0 リリースノート](/releases/release-6.1.0.md)
 
 ### tidb_enable_auto_analyze_priority_queue
@@ -1510,7 +1510,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [設定を動的に変更する](/dynamic-config.md)
 - [システム変数](/system-variables.md#tidb_enable_ddl-new-in-v630)
 - [TiDB設定ファイル](/tidb-configuration-file.md)
-- [TiUPを使用した TiDB デプロイメントのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)
+- [TiUPを使用した TiDB デプロイメントのトポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)
 
 ### tidb_enable_dist_task
 
@@ -1562,10 +1562,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [プライマリクラスタとセカンダリクラスタに基づくDRソリューション](/dr-secondary-cluster.md)
+- [プライマリクラスターとセカンダリクラスターに基づくDRソリューション](/dr-secondary-cluster.md)
 - [`tidb_external_ts`変数を使用して履歴データを読み取る](/tidb-external-ts.md)
 - [システム変数](/system-variables.md#tidb_enable_external_ts_read-new-in-v640)
-- [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)
+- [上流および下流のクラスターのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)
 - [ステイル読み取りの使用シナリオ](/stale-read.md)
 - [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 
@@ -1635,7 +1635,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [システム変数](/system-variables.md#tidb_enable_historical_stats)
-- [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
+- [PLAN REPLAYERを使用してクラスターのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
 - [TiDB 8.2.0 リリースノート](/releases/release-8.2.0.md)
 - [TiDB 7.5.7 リリースノート](/releases/release-7.5.7.md)
 - [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
@@ -1653,7 +1653,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [インデックスマージを使用するステートメントの実行計画](/explain-index-merge.md)
 - [インデックスの選択](/choose-index.md)
-- [オプティマイザヒント](/optimizer-hints.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_enable_index_merge-new-in-v40)
 - [TiDB 5.4 リリースノート](/releases/release-5.4.0.md)
@@ -1668,7 +1668,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [オプティマイザヒント](/optimizer-hints.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [システム変数](/system-variables.md#tidb_enable_inl_join_inner_multi_pattern-new-in-v700)
 - [TiDB 8.4.0 リリースノート](/releases/release-8.4.0.md)
 - [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
@@ -1688,7 +1688,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
-- [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
+- [接続プールと接続パラメーター](/develop/dev-guide-connection-parameters.md)
 - [システム変数](/system-variables.md#tidb_enable_lazy_cursor_fetch-new-in-v830)
 - [TiDB 8.3.0 リリースノート](/releases/release-8.3.0.md)
 
@@ -1875,7 +1875,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [システム変数](/system-variables.md#tidb_enable_plan_replayer_capture)
-- [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
+- [PLAN REPLAYERを使用してクラスターのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
 - [TiDB 6.6.0 リリースノート](/releases/release-6.6.0.md)
 - [TiDB 6.5.0 リリースノート](/releases/release-6.5.0.md)
 
@@ -1884,7 +1884,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [システム変数](/system-variables.md#tidb_enable_plan_replayer_continuous_capture-new-in-v700)
-- [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
+- [PLAN REPLAYERを使用してクラスターのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
 - [TiDB 7.0.0 リリースノート](/releases/release-7.0.0.md)
 
 ### tidb_enable_point_get_cache
@@ -2052,7 +2052,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
-- [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
+- [接続プールと接続パラメーター](/develop/dev-guide-connection-parameters.md)
 - [ディスクスピルの暗号化を有効にする](/enable-disk-spill-encrypt.md)
 - [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
 - [システム変数](/system-variables.md#tidb_enable_tmp_storage_on_oom)
@@ -2122,7 +2122,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [システム変数](/system-variables.md#tidb_enforce_mpp-new-in-v51)
 - [TiDB設定ファイル](/tidb-configuration-file.md)
 - [TiFlashクエリ結果のマテリアライゼーション](/tiflash/tiflash-results-materialization.md)
-- [TiFlashクラスタのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
+- [TiFlashクラスターのトラブルシューティング](/tiflash/troubleshoot-tiflash.md)
 - [TiFlash のパフォーマンスを調整する](/tiflash/tune-tiflash-performance.md)
 - [ステイル読み取りの使用シナリオ](/stale-read.md)
 - [TiFlash MPPモードを使用する](/tiflash/use-tiflash-mpp-mode.md)
@@ -2197,10 +2197,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [プライマリクラスタとセカンダリクラスタに基づくDRソリューション](/dr-secondary-cluster.md)
+- [プライマリクラスターとセカンダリクラスターに基づくDRソリューション](/dr-secondary-cluster.md)
 - [`tidb_external_ts`変数を使用して履歴データを読み取る](/tidb-external-ts.md)
 - [システム変数](/system-variables.md#tidb_external_ts-new-in-v640)
-- [上流および下流のクラスタのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)
+- [上流および下流のクラスターのデータ検証とスナップショットの読み取り](/ticdc/ticdc-upstream-downstream-check.md)
 - [ステイル読み取りの使用シナリオ](/stale-read.md)
 - [TiDB 6.4.0 リリースノート](/releases/release-6.4.0.md)
 
@@ -2231,13 +2231,13 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [プライマリクラスタとセカンダリクラスタに基づくDRソリューション](/dr-secondary-cluster.md)
+- [プライマリクラスターとセカンダリクラスターに基づくDRソリューション](/dr-secondary-cluster.md)
 - [ガベージコレクションの設定](/garbage-collection-configuration.md)
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [TiDB から MySQL 互換データベースへのデータ移行](/migrate-from-tidb-to-mysql.md)
-- [ある TiDBクラスタから別の TiDBクラスタに移行する](/migrate-from-tidb-to-tidb.md)
+- [ある TiDBクラスターから別の TiDBクラスターに移行する](/migrate-from-tidb-to-tidb.md)
 - [TiDB Self-ManagedからTiDB Cloudへの移行](https://docs.pingcap.com/tidbcloud/migrate-from-op-tidb)
-- [プライマリクラスタとセカンダリクラスタ間でデータを複製する](/replicate-between-primary-and-secondary-clusters.md)
+- [プライマリクラスターとセカンダリクラスター間でデータを複製する](/replicate-between-primary-and-secondary-clusters.md)
 - [システム変数](/system-variables.md#tidb_gc_enable-new-in-v50)
 - [TiDB トラブルシューティングマップ](/tidb-troubleshooting-map.md)
 - [TiDB 5.0 リリースノート](/releases/release-5.0.0.md)
@@ -2251,7 +2251,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [`FLASHBACK DATABASE`](/sql-statements/sql-statement-flashback-database.md)
 - [FLASHBACK TABLE](/sql-statements/sql-statement-flashback-table.md)
 - [ガベージコレクションの設定](/garbage-collection-configuration.md)
-- [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
+- [TiDBクラスターの移行とアップグレード](/tidb-upgrade-migration-guide.md)
 - [システム変数`tidb_snapshot`を使用して履歴データを読み取る](/read-historical-data.md)
 - [Kafka にデータを複製する](/ticdc/ticdc-sink-to-kafka.md)
 - [SQLに関するよくある質問](/faq/sql-faq.md)
@@ -2405,9 +2405,9 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
+- [接続プールと接続パラメーター](/develop/dev-guide-connection-parameters.md)
 - [システム変数](/system-variables.md#tidb_idle_transaction_timeout-new-in-v760)
-- [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
+- [TiDBクラスター管理に関する FAQ](/faq/manage-cluster-faq.md)
 - [TiDBの機能](/basic-features.md)
 - [TiDBのタイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
 - [TiDB 7.6.0 リリースノート](/releases/release-7.6.0.md)
@@ -2541,7 +2541,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [システム変数](/system-variables.md#tidb_last_plan_replayer_token-new-in-v630)
-- [PLAN REPLAYERを使用してクラスタのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
+- [PLAN REPLAYERを使用してクラスターのオンサイト情報を保存および復元する](/sql-plan-replayer.md)
 - [TiDB 6.3.0 リリースノート](/releases/release-6.3.0.md)
 
 ### tidb_last_query_info
@@ -2733,7 +2733,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [テーブル結合を使用するステートメントの実行計画](/explain-joins.md)
 - [コストの高いクエリを特定する](/identify-expensive-queries.md)
 - [非トランザクションDML文](/non-transactional-dml.md)
-- [オプティマイザヒント](/optimizer-hints.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [パイプラインDML](/pipelined-dml.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_mem_quota_query)
@@ -2992,7 +2992,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [オプティマイザヒント](/optimizer-hints.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [システム変数](/system-variables.md#tidb_opt_enable_hash_join-new-in-v656-v712-and-v740)
 - [TiDB 7.4.0 リリースノート](/releases/release-7.4.0.md)
 - [TiDB 7.1.2 リリースノート](/releases/release-7.1.2.md)
@@ -3044,7 +3044,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 - [最適なパフォーマンスを得るための TiDB の設定](/tidb-performance-tuning-config.md)
 - [制御実行計画](/control-execution-plan.md)
-- [オプティマイザ修正コントロール](/optimizer-fix-controls.md)
+- [オプティマイザー修正コントロール](/optimizer-fix-controls.md)
 - [SQL 非プリペアド実行プランキャッシュ](/sql-non-prepared-plan-cache.md)
 - [システム変数](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)
 - [TiDB 7.2.0 リリースノート](/releases/release-7.2.0.md)
@@ -3111,7 +3111,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [オプティマイザヒント](/optimizer-hints.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [サブクエリ関連の最適化](/subquery-optimization.md)
 - [システム変数](/system-variables.md#tidb_opt_insubq_to_join_and_agg)
@@ -3546,7 +3546,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 - [読み取り専用ストレージノードのベストプラクティス](/best-practices/readonly-nodes.md)
 - [Follower Read](/follower-read.md)
 - [Follower Read](/develop/dev-guide-use-follower-read.md)
-- [オプティマイザヒント](/optimizer-hints.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [SHOW [GLOBAL|SESSION] VARIABLES](/sql-statements/sql-statement-show-variables.md)
 - [システム変数](/system-variables.md#tidb_replica_read-new-in-v40)
 - [パブリッククラウドにおける TiDB のベストプラクティス](/best-practices/best-practices-on-public-cloud.md)
@@ -3572,7 +3572,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [オプティマイザヒント](/optimizer-hints.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [権限管理](/privilege-management.md)
 - [SET RESOURCE GROUP](/sql-statements/sql-statement-set-resource-group.md)
 - [システム変数](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)
@@ -4036,7 +4036,7 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 
 参照先:
 
-- [TiDBクラスタの移行とアップグレード](/tidb-upgrade-migration-guide.md)
+- [TiDBクラスターの移行とアップグレード](/tidb-upgrade-migration-guide.md)
 - [システム変数](/system-variables.md#tidb_super_read_only-new-in-v531)
 - [TiDB 5.4.1 リリースノート](/releases/release-5.4.1.md)
 - [TiDB 5.3.1 リリースノート](/releases/release-5.3.1.md)
@@ -4508,10 +4508,10 @@ summary: すべての TiDB システム変数とドキュメント内の参照�
 参照先:
 
 - [TiDB を使用したJavaアプリケーション開発のベストプラクティス](/develop/java-app-best-practices.md)
-- [接続プールと接続パラメータ](/develop/dev-guide-connection-parameters.md)
+- [接続プールと接続パラメーター](/develop/dev-guide-connection-parameters.md)
 - [TiDB Cloudで制限されたSQL機能](https://docs.pingcap.com/tidbcloud/limited-sql-features)
 - [システム変数](/system-variables.md#wait_timeout)
-- [TiDBクラスタ管理に関する FAQ](/faq/manage-cluster-faq.md)
+- [TiDBクラスター管理に関する FAQ](/faq/manage-cluster-faq.md)
 - [TiProxy の概要](/tiproxy/tiproxy-overview.md)
 - [TiDBのタイムアウト](/develop/dev-guide-timeouts-in-tidb.md)
 - [TiDB OOM の問題のトラブルシューティング](/troubleshoot-tidb-oom.md)

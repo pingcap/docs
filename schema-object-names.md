@@ -74,7 +74,7 @@ SELECT 1 AS `identifier`, 2 AS 'string';
 CREATE TABLE t (i int);
 ```
 
-データベースの設定に`USE`文または接続パラメータを使用していない場合、 `ERROR 1046 (3D000): No database selected`エラーが表示されます。この場合、データベース修飾名を指定できます。
+データベースの設定に`USE`文または接続パラメーターを使用していない場合、 `ERROR 1046 (3D000): No database selected`エラーが表示されます。この場合、データベース修飾名を指定できます。
 
 ```sql
 CREATE TABLE test.t (i int);

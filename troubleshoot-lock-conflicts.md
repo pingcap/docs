@@ -308,7 +308,7 @@ err="pessimistic lock retry limit reached"
 
 ### ロック待機タイムアウトを超えました {#lock-wait-timeout-exceeded}
 
-悲観的トランザクションモードでは、トランザクションは互いのロックを待機します。ロック待機のタイムアウトは、TiDBのパラメータ[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)によって定義されます。これは、SQL文レベルでの最大ロック待機時間であり、SQL文がロックをリクエストしたがロックが取得されなかった場合に想定される時間です。この時間が経過すると、TiDBは再びロックを試行せず、対応するエラーメッセージをクライアントに返します。
+悲観的トランザクションモードでは、トランザクションは互いのロックを待機します。ロック待機のタイムアウトは、TiDBのパラメーター[innodb_lock_wait_timeout](/pessimistic-transaction.md#behaviors)によって定義されます。これは、SQL文レベルでの最大ロック待機時間であり、SQL文がロックをリクエストしたがロックが取得されなかった場合に想定される時間です。この時間が経過すると、TiDBは再びロックを試行せず、対応するエラーメッセージをクライアントに返します。
 
 待機ロックのタイムアウトが発生すると、次のエラーメッセージがクライアントに返されます。
 
@@ -320,9 +320,9 @@ ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction
 
 - 上記のエラーが頻繁に発生する場合は、アプリケーションロジックを調整することをお勧めします。
 
-### TTLマネージャがタイムアウトしました {#ttl-manager-has-timed-out}
+### TTLマネージャーがタイムアウトしました {#ttl-manager-has-timed-out}
 
-トランザクションの実行時間はGCのタイムリミットを超えることはできません。また、悲観的トランザクションのTTL時間には上限があり、デフォルト値は1時間です。そのため、1時間を超えて実行された悲観的トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDBパラメータ[`performance.max-txn-ttl`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)によって制御されます。
+トランザクションの実行時間はGCのタイムリミットを超えることはできません。また、悲観的トランザクションのTTL時間には上限があり、デフォルト値は1時間です。そのため、1時間を超えて実行された悲観的トランザクションはコミットに失敗します。このタイムアウトしきい値は、TiDBパラメーター[`performance.max-txn-ttl`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)によって制御されます。
 
 悲観的トランザクションの実行時間が TTL 時間を超えると、TiDB ログに次のエラーメッセージが表示されます。
 
@@ -333,7 +333,7 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 解決策:
 
 - まず、アプリケーションロジックを最適化できるかどうかを確認します。例えば、大規模なトランザクションはTiDBのトランザクションサイズ制限に達する可能性があり、それを複数の小さなトランザクションに分割できます。
-- また、アプリケーションのトランザクションロジックに合わせて関連パラメータを適切に調整することもできます。
+- また、アプリケーションのトランザクションロジックに合わせて関連パラメーターを適切に調整することもできます。
 
 ### ロックを取得しようとしたときにデッドロックが見つかりました {#deadlock-found-when-trying-to-get-lock}
 

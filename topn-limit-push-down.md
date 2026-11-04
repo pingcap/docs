@@ -17,7 +17,7 @@ TiDB実行計画ツリーでは、SQLの`LIMIT`句はLimitオペレーターノ�
 
 このセクションでは、いくつかの例を通して TopN プッシュダウンについて説明します。
 
-### 例1:ストレージレイヤーのコプロセッサにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
+### 例1:ストレージレイヤーのコプロセッサーにプッシュダウンする {#example-1-push-down-to-the-coprocessors-in-the-storage-layer}
 
 ```sql
 create table t(id int primary key, a int not null);

@@ -66,7 +66,7 @@ useServerPrepStmts=false
 - クエリ実行時間では、`execute`と`compile`のレイテンシーの割合が最も高くなります。
 - 平均QPS = 56.8k
 
-クラスタのリソース消費量を確認すると、TiDB CPUの平均使用率は925%、TiKV CPUの平均使用率は201%、TiKV IOの平均スループットは18.7 MB/sでした。TiDBのリソース消費量が大幅に高くなっています。
+クラスターのリソース消費量を確認すると、TiDB CPUの平均使用率は925%、TiKV CPUの平均使用率は201%、TiKV IOの平均スループットは18.7 MB/sでした。TiDBのリソース消費量が大幅に高くなっています。
 
 ![performance-overview-2-for-query-interface](/media/performance/5.png)
 
@@ -78,7 +78,7 @@ useServerPrepStmts=false
 
 ### アプリケーション構成 {#application-configuration}
 
-シナリオ1では、アプリケーションはJDBC接続文字列に新しいパラメータ`useConfigs=maxPerformance`を追加します。このパラメータを使用することで、JDBCからデータベースに送信されるSQL文（例： `select @@session.transaction_read_only` ）を排除できます。完全な設定は次のとおりです。
+シナリオ1では、アプリケーションはJDBC接続文字列に新しいパラメーター`useConfigs=maxPerformance`を追加します。このパラメーターを使用することで、JDBCからデータベースに送信されるSQL文（例： `select @@session.transaction_read_only` ）を排除できます。完全な設定は次のとおりです。
 
 ```
 useServerPrepStmts=false&useConfigs=maxPerformance
@@ -137,7 +137,7 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 
 ### アプリケーション構成 {#application-configuration}
 
-アプリケーションは以下の接続構成を使用します。シナリオ2と比較すると、JDBCパラメータ`useServerPrepStmts`の値が`true`に変更されており、Prepared Statementインターフェースが有効になっていることを示しています。
+アプリケーションは以下の接続構成を使用します。シナリオ2と比較すると、JDBCパラメーター`useServerPrepStmts`の値が`true`に変更されており、Prepared Statementインターフェースが有効になっていることを示しています。
 
 ```
 useServerPrepStmts=true&useConfigs=maxPerformance"
@@ -197,7 +197,7 @@ TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 
 ### アプリケーション構成 {#application-configuration}
 
-アプリケーション構成はシナリオ 3 と同じままです。アプリケーションが`StmtClose`をトリガーしてもキャッシュにヒットしない問題を解決するために、次のパラメータが構成されています。
+アプリケーション構成はシナリオ 3 と同じままです。アプリケーションが`StmtClose`をトリガーしてもキャッシュにヒットしない問題を解決するために、次のパラメーターが構成されています。
 
 - TiDB グローバル変数`set global tidb_ignore_prepared_cache_close_stmt=on;`を設定します (TiDB v6.0.0 以降に導入、デフォルトは`off` )。
 - プランキャッシュ機能を有効にするには、TiDB 設定項目`prepared-plan-cache: {enabled: true}`を設定します。
@@ -249,7 +249,7 @@ PreparseStmt CPU = 25% CPU 時間 = 12.75秒
 
 ### アプリケーション構成 {#application-configuration}
 
-シナリオ 4 と比較して、以下に説明するように、3つの新しい JDBC パラメータ`cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480`が構成されます。
+シナリオ 4 と比較して、以下に説明するように、3つの新しい JDBC パラメーター`cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480`が構成されます。
 
 - `cachePrepStmts = true` : クライアント側で Prepared Statement オブジェクトをキャッシュし、StmtPrepare および StmtClose の呼び出しを排除します。
 - `prepStmtCacheSize` : 値は 0 より大きくなければなりません。
@@ -425,7 +425,7 @@ QPSは34.9kから40.9kに増加し、`execute`フェーズで最も時間がか�
 
 - TiDBの実行プランキャッシュは、OLTPパフォーマンスチューニングにおいて重要な役割を果たします。バージョン6.0.0から導入されたRC Read機能とスモールテーブルキャッシュ機能も、このワークロードのさらなるパフォーマンスチューニングにおいて重要な役割を果たします。
 
-- TiDBはMySQLプロトコルの様々なコマンドと互換性があります。Prepared Statementインターフェースを使用し、以下のJDBC接続パラメータを設定することで、アプリケーションは最高のパフォーマンスを実現できます。
+- TiDBはMySQLプロトコルの様々なコマンドと互換性があります。Prepared Statementインターフェースを使用し、以下のJDBC接続パラメーターを設定することで、アプリケーションは最高のパフォーマンスを実現できます。
 
     ```
     useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCacheSqlLimit=20480&useConfigs=maxPerformance

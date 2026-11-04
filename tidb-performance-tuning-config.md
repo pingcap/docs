@@ -27,7 +27,7 @@ TiDBのパフォーマンスを最適化するには、さまざまな設定を�
 TiDBのパフォーマンスを最適化するために、一般的に以下の設定が使用されます。
 
 - [SQLプリペアド実行プランキャッシュ](/sql-prepared-plan-cache.md)、[非プリペアドプランキャッシュ](/sql-non-prepared-plan-cache.md)、[インスタンスレベルの実行プランキャッシュ](/system-variables.md#tidb_enable_instance_plan_cache-new-in-v840)など、実行プランキャッシュを強化します。
-- [オプティマイザ修正コントロール](/optimizer-fix-controls.md)を使用して TiDB オプティマイザの動作を最適化します。
+- [オプティマイザー修正コントロール](/optimizer-fix-controls.md)を使用して TiDB オプティマイザーの動作を最適化します。
 - ストレージエンジン[Titan](/storage-engine/titan-overview.md)をより積極的に活用する。
 - 書き込み負荷の高いワークロード下でも最適かつ安定したパフォーマンスを確保するために、TiKVのコンパクションおよびフロー制御の設定を微調整します。
 
@@ -63,23 +63,23 @@ SET GLOBAL tidb_opt_fix_control = '44262:ON,44389:ON,44823:10000,44830:ON,44855:
 | [`tidb_ignore_prepared_cache_close_stmt`](/system-variables.md#tidb_ignore_prepared_cache_close_stmt-new-in-v600)                                                                                               | プリペアドステートメントを使用するアプリケーション向けに、実行後にプランを閉じるキャッシュプランを作成します。                                                         | 該当なし                                                                                    |
 | [`tidb_analyze_column_options`](/system-variables.md#tidb_analyze_column_options-new-in-v830)                                                                                                                   | 列統計情報の欠落による最適とは言えない実行計画を回避するため、すべての列の統計情報を収集してください。                                                             | 該当なし                                                                                    |
 | [`tidb_stats_load_sync_wait`](/system-variables.md#tidb_stats_load_sync_wait-new-in-v540)                                                                                                                       | 統計情報の同期読み込みのタイムアウト時間を、デフォルトの100ミリ秒から2秒に延長します。これにより、TiDBはクエリコンパイル前に必要な統計情報を確実に読み込むことができます。                       | この値を大きくすると、クエリコンパイル前の同期待機時間が長くなります。                                                     |
-| [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold)                                                                                                                 | `Limit`または`TopN`オペレーターをTiKVにプッシュダウンするかどうかを決定するしきい値を引き上げます。                                                      | 複数のインデックスオプションが存在する場合、この変数を増やすと、オプティマイザは`ORDER BY`と`Limit`オペレーターを最適化できるインデックスを優先するようになります。 |
+| [`tidb_opt_limit_push_down_threshold`](/system-variables.md#tidb_opt_limit_push_down_threshold)                                                                                                                 | `Limit`または`TopN`オペレーターをTiKVにプッシュダウンするかどうかを決定するしきい値を引き上げます。                                                      | 複数のインデックスオプションが存在する場合、この変数を増やすと、オプティマイザーは`ORDER BY`と`Limit`オペレーターを最適化できるインデックスを優先するようになります。 |
 | [`tidb_opt_derive_topn`](/system-variables.md#tidb_opt_derive_topn-new-in-v700)                                                                                                                                 | 最適化ルール[ウィンドウ関数からTopNまたはLimitを導出する](/derive-topn-from-window.md)を有効にします。                                         | これは`ROW_NUMBER()`ウィンドウ機能に限定されます。                                                        |
-| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)                                                                                                                         | ハッシュ結合の効率を向上させるには、ローカルモードで[ランタイムフィルタ](/runtime-filter.md#runtime-filter-mode)を有効にしてください。                         | この変数はバージョン7.2.0で導入され、安全上の理由からデフォルトでは無効になっています。                                          |
+| [`tidb_runtime_filter_mode`](/system-variables.md#tidb_runtime_filter_mode-new-in-v720)                                                                                                                         | ハッシュ結合の効率を向上させるには、ローカルモードで[ランタイムフィルター](/runtime-filter.md#runtime-filter-mode)を有効にしてください。                         | この変数はバージョン7.2.0で導入され、安全上の理由からデフォルトでは無効になっています。                                          |
 | [`tidb_opt_enable_mpp_shared_cte_execution`](/system-variables.md#tidb_opt_enable_mpp_shared_cte_execution-new-in-v720)                                                                                         | TiFlashへの非再帰的な[共通テーブル式（CTE）](/sql-statements/sql-statement-with.md)プッシュダウンを有効にします。                              | これは実験的機能です。                                                                             |
 | [`tidb_rc_read_check_ts`](/system-variables.md#tidb_rc_read_check_ts-new-in-v600)                                                                                                                               | Read Committed分離レベルの場合、この変数を有効にすると、グローバルタイムスタンプを取得する際のレイテンシーとコストが回避され、トランザクションレベルの読み取りレイテンシーが最適化されます。                 | この機能は、Repeatable Read分離レベルとは互換性がありません。                                                        |
 | [`tidb_guarantee_linearizability`](/system-variables.md#tidb_guarantee_linearizability-new-in-v50)                                                                                                              | PDサーバーからのコミットタイムスタンプの取得をスキップすることでパフォーマンスを向上させます。                                                                | これは、線形化可能性を犠牲にしてパフォーマンスを優先するものです。因果的一貫性のみが保証されます。厳密な線形化可能性が求められるシナリオには適していません。          |
 | [`pd_enable_follower_handle_region`](/system-variables.md#pd_enable_follower_handle_region-new-in-v760)                                                                                                         | PDFollower機能を有効にすると、PDフォロワーがリージョンリクエストを処理できるようになります。これにより、すべてのPDサーバーに負荷が均等に分散され、PDリーダーのCPU負荷が軽減されます。               | 該当なし                                                                                    |
 | [`tidb_opt_fix_control`](/system-variables.md#tidb_opt_fix_control-new-in-v653-and-v710)                                                                                                                        | 高度なクエリ最適化戦略を有効にすることで、追加の最適化ルールとヒューリスティックを通じてパフォーマンスを向上させることができます。                                               | ワークロードによってパフォーマンスの向上度合いが異なるため、ご使用の環境で十分にテストを行ってください。                                    |
 
-以下では、追加の最適化を可能にするオプティマイザ制御構成について説明します。
+以下では、追加の最適化を可能にするオプティマイザー制御構成について説明します。
 
 - [`44262:ON`](/optimizer-fix-controls.md#44262-new-in-v653-and-v720) : [グローバル統計](/statistics.md#collect-statistics-of-partitioned-tables-in-dynamic-pruning-mode)が欠落している場合は、 [動的プルーニングモード](/partitioned-table.md#dynamic-pruning-mode)を使用してパーティションテーブルにアクセスします。
 - [`44389:ON`](/optimizer-fix-controls.md#44389-new-in-v653-and-v720) : `c = 10 and (a = 'xx' or (a = 'kk' and b = 1))`のようなフィルターの場合、 `IndexRangeScan`のより包括的なスキャン範囲を作成します。
-- [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730) ：メモリを節約するため、プランキャッシュは、この変数で指定された数を超えるパラメータを持つクエリをキャッシュしません。長いインリストを持つクエリでもプランキャッシュを使用できるようにするには、プランキャッシュのパラメータ制限を`200`から`10000`に増やしてください。
+- [`44823:10000`](/optimizer-fix-controls.md#44823-new-in-v730) ：メモリを節約するため、プランキャッシュは、この変数で指定された数を超えるパラメーターを持つクエリをキャッシュしません。長いインリストを持つクエリでもプランキャッシュを使用できるようにするには、プランキャッシュのパラメーター制限を`200`から`10000`に増やしてください。
 - [`44830:ON`](/optimizer-fix-controls.md#44830-new-in-v657-and-v730) : プランキャッシュは、物理最適化中に生成された`PointGet`オペレーターを含む実行計画をキャッシュすることを許可します。
-- [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730) : `IndexJoin`オペレーターの`Probe`側に`Selection`オペレーターが含まれている場合、オプティマイザは`IndexJoin`を選択します。
-- [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810) : オプティマイザがクエリプランに対して (フルテーブルスキャン以外の) 単一のインデックススキャンメソッドを選択できる場合、オプティマイザは自動的にインデックスマージを選択します。
+- [`44855:ON`](/optimizer-fix-controls.md#44855-new-in-v654-and-v730) : `IndexJoin`オペレーターの`Probe`側に`Selection`オペレーターが含まれている場合、オプティマイザーは`IndexJoin`を選択します。
+- [`52869:ON`](/optimizer-fix-controls.md#52869-new-in-v810) : オプティマイザーがクエリプランに対して (フルテーブルスキャン以外の) 単一のインデックススキャンメソッドを選択できる場合、オプティマイザーは自動的にインデックスマージを選択します。
 
 ### TiKV構成 {#tikv-configurations}
 
@@ -119,12 +119,12 @@ soft-pending-compaction-bytes-limit = "192GiB"
 | 設定項目                                                                                                                                                                                                                                                                       | 説明                                                                                                                                                                           | 注記                                                                                                                                                                       |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`concurrent-send-snap-limit`](/tikv-configuration-file.md#concurrent-send-snap-limit) [`concurrent-recv-snap-limit`](/tikv-configuration-file.md#concurrent-recv-snap-limit) [`snap-io-max-bytes-per-sec`](/tikv-configuration-file.md#snap-io-max-bytes-per-sec)                   | TiKVのスケーリング操作中に、同時スナップショット転送量とI/O帯域幅の制限を設定します。制限値を高く設定すると、データ移行が高速化され、スケーリング時間が短縮されます。                                                                                       | これらの制限を調整すると、スケーリング速度とオンライントランザクションパフォーマンスのトレードオフに影響します。                                                                                                                       |
-| [`rocksdb.max-manifest-file-size`](/tikv-configuration-file.md#max-manifest-file-size)                                                                                                                                                                                               | RocksDB マニフェストファイルの最大サイズを設定します。このファイルには、SST ファイルとデータベースの状態変更に関するメタデータが記録されます。このサイズを大きくすると、マニフェストファイルの書き換え頻度が減り、フォアグラウンド書き込みパフォーマンスへの影響を最小限に抑えることができます。                       | デフォルト値は`128MiB`です。SSTファイルが多数存在する環境（例えば、数十万個）では、マニフェストファイルの書き換えが頻繁に行われると、書き込みパフォーマンスが低下する可能性があります。このパラメータを`256MiB`以上の値に調整することで、最適なパフォーマンスを維持できます。                         |
+| [`rocksdb.max-manifest-file-size`](/tikv-configuration-file.md#max-manifest-file-size)                                                                                                                                                                                               | RocksDB マニフェストファイルの最大サイズを設定します。このファイルには、SST ファイルとデータベースの状態変更に関するメタデータが記録されます。このサイズを大きくすると、マニフェストファイルの書き換え頻度が減り、フォアグラウンド書き込みパフォーマンスへの影響を最小限に抑えることができます。                       | デフォルト値は`128MiB`です。SSTファイルが多数存在する環境（例えば、数十万個）では、マニフェストファイルの書き換えが頻繁に行われると、書き込みパフォーマンスが低下する可能性があります。このパラメーターを`256MiB`以上の値に調整することで、最適なパフォーマンスを維持できます。                         |
 | [`rocksdb.titan`](/tikv-configuration-file.md#rocksdbtitan) [`rocksdb.defaultcf.titan`](/tikv-configuration-file.md#rocksdbdefaultcftitan) [`min-blob-size`](/tikv-configuration-file.md#min-blob-size) [`blob-file-compression`](/tikv-configuration-file.md#blob-file-compression) | Titanストレージエンジンを有効にすることで、書き込み増幅を低減し、ディスクI/Oのボトルネックを緩和できます。特に、RocksDBのコンパクション処理が書き込みワークロードに追いつかず、コンパクション待ちバイトが蓄積される場合に有効です。                                                            | 書き込み増幅が主なボトルネックである場合に有効にします。トレードオフは以下のとおりです。<ul><li>主キー範囲スキャンにおけるパフォーマンスへの影響の可能性。</li><li>空間増幅率の向上（最悪の場合、最大2倍）。</li><li>ブロブキャッシュのための追加メモリ使用量。</li></ul>              |
-| [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold)                                                                                                                                                                         | TiKVスケジューラで書き込みキューの最大サイズを設定します。保留中の書き込みタスクの合計サイズがこのしきい値を超えると、TiKVは新規書き込みリクエストに対してエラーコード`Server Is Busy`を返します。                                                                   | デフォルト値は`100MiB`です。書き込み同時実行数が多い場合や、一時的な書き込みスパイクが発生する場合は、このしきい値を上げる（例えば`512MiB`にする）ことで負荷に対応できます。ただし、書き込みキューが継続的に蓄積され、このしきい値を超える場合は、根本的なパフォーマンスの問題が発生している可能性があり、さらに調査が必要です。 |
+| [`storage.scheduler-pending-write-threshold`](/tikv-configuration-file.md#scheduler-pending-write-threshold)                                                                                                                                                                         | TiKVスケジューラーで書き込みキューの最大サイズを設定します。保留中の書き込みタスクの合計サイズがこのしきい値を超えると、TiKVは新規書き込みリクエストに対してエラーコード`Server Is Busy`を返します。                                                                   | デフォルト値は`100MiB`です。書き込み同時実行数が多い場合や、一時的な書き込みスパイクが発生する場合は、このしきい値を上げる（例えば`512MiB`にする）ことで負荷に対応できます。ただし、書き込みキューが継続的に蓄積され、このしきい値を超える場合は、根本的なパフォーマンスの問題が発生している可能性があり、さらに調査が必要です。 |
 | [`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)                                                                                                                                                                                          | kvDB L0ファイルの数に基づいて、書き込みフロー制御がトリガーされるタイミングを制御します。しきい値を上げると、書き込み負荷が高い場合の書き込み停止が減少します。                                                                                          | しきい値を高く設定すると、L0ファイルが多数存在する場合に、より積極的なコンパクション処理が行われる可能性があります。                                                                                                                   |
-| [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)                                                                                                                                                        | 書き込みフロー制御を管理するために、保留中のコンパクションバイトのしきい値を制御します。ソフトリミットを設定すると、部分的な書き込み拒否が発生します。                                                                                                       | デフォルトのソフトリミットは`192GiB`です。書き込み負荷の高いシナリオでは、コンパクション処理が追いつかない場合、保留中のコンパクションバイトが蓄積され、フロー制御がトリガーされる可能性があります。リミットを調整することでバッファ領域を増やすことができますが、蓄積が続く場合は、さらなる調査が必要な根本的な問題があることを示しています。        |
-| [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)と[`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)      | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`デフォルト値に手動で設定する必要があります。こうすることで、フロー制御パラメータの影響を受けなくなります。さらに、Rocksdbパラメータを設定して、デフォルトパラメータと同じコンパクション効率を維持してください。 | 詳細については、 [第18708号](https://github.com/tikv/tikv/issues/18708)を参照してください。                                                                                                   |
+| [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit)                                                                                                                                                        | 書き込みフロー制御を管理するために、保留中のコンパクションバイトのしきい値を制御します。ソフトリミットを設定すると、部分的な書き込み拒否が発生します。                                                                                                       | デフォルトのソフトリミットは`192GiB`です。書き込み負荷の高いシナリオでは、コンパクション処理が追いつかない場合、保留中のコンパクションバイトが蓄積され、フロー制御がトリガーされる可能性があります。リミットを調整することでバッファー領域を増やすことができますが、蓄積が続く場合は、さらなる調査が必要な根本的な問題があることを示しています。        |
+| [`rocksdb.(defaultcf|writecf|lockcf).level0-slowdown-writes-trigger`](/tikv-configuration-file.md#level0-slowdown-writes-trigger)と[`rocksdb.(defaultcf|writecf|lockcf).soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)      | `level0-slowdown-writes-trigger`と`soft-pending-compaction-bytes-limit`デフォルト値に手動で設定する必要があります。こうすることで、フロー制御パラメーターの影響を受けなくなります。さらに、Rocksdbパラメーターを設定して、デフォルトパラメーターと同じコンパクション効率を維持してください。 | 詳細については、 [第18708号](https://github.com/tikv/tikv/issues/18708)を参照してください。                                                                                                   |
 
 前述の表に示されているコンパクションおよびフロー制御構成の調整は、以下の仕様を持つインスタンスへの TiKV デプロイメントに合わせて調整されていることに注意してください。
 
@@ -135,17 +135,17 @@ soft-pending-compaction-bytes-limit = "192GiB"
 
 #### 書き込み負荷の高いワークロードに対する推奨構成調整 {#recommended-configuration-adjustments-for-write-intensive-workloads}
 
-書き込み負荷の高いワークロードにおける TiKV のパフォーマンスと安定性を最適化するには、インスタンスのハードウェア仕様に基づいて、特定のコンパクションおよびフロー制御パラメータを調整することをお勧めします。例:
+書き込み負荷の高いワークロードにおける TiKV のパフォーマンスと安定性を最適化するには、インスタンスのハードウェア仕様に基づいて、特定のコンパクションおよびフロー制御パラメーターを調整することをお勧めします。例:
 
 - [`rocksdb.rate-bytes-per-sec`](/tikv-configuration-file.md#rate-bytes-per-sec) : 通常はデフォルト値を使用します。コンパクション I/O がディスク帯域幅のかなりの割合を消費していることに気づいた場合は、レートをディスクの最大スループットの約 60% に制限することを検討してください。これにより、コンパクション作業のバランスが取れ、ディスクが飽和状態にならないようになります。たとえば、 **1 GiB/s**の定格のディスクでは、これを約`600MiB`に設定します。
 
-- [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)と[`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1) ：これらの制限を、利用可能なディスク容量に比例して増やします（例えば、それぞれ1 TiBと2 TiB）。これにより、コンパクション処理のためのバッファが増えます。
+- [`storage.flow-control.soft-pending-compaction-bytes-limit`](/tikv-configuration-file.md#soft-pending-compaction-bytes-limit-1)と[`storage.flow-control.hard-pending-compaction-bytes-limit`](/tikv-configuration-file.md#hard-pending-compaction-bytes-limit-1) ：これらの制限を、利用可能なディスク容量に比例して増やします（例えば、それぞれ1 TiBと2 TiB）。これにより、コンパクション処理のためのバッファーが増えます。
 
 これらの設定は、リソースの効率的な利用を確保し、書き込み負荷がピークに達した際の潜在的なボトルネックを最小限に抑えるのに役立ちます。
 
 > **Note:**
 >
-> TiKVは、システムの安定性を確保するために、スケジューラレイヤーでフロー制御を実装しています。保留中のコンパクションバイト数や書き込みキューサイズなどの重要なしきい値を超えると、TiKVは書き込みリクエストを拒否し、ServerIsBusyエラーを返します。このエラーは、バックグラウンドのコンパクションプロセスがフォアグラウンドの書き込み操作の現在の速度に追いつけないことを示しています。フロー制御が有効になると、通常、レイテンシーの急増とクエリスループットの低下（QPSの低下）が発生します。これらのパフォーマンス低下を防ぐには、包括的なキャパシティプランニングと、コンパクションパラメータおよびストレージ設定の適切な構成が不可欠です。
+> TiKVは、システムの安定性を確保するために、スケジューラーレイヤーでフロー制御を実装しています。保留中のコンパクションバイト数や書き込みキューサイズなどの重要なしきい値を超えると、TiKVは書き込みリクエストを拒否し、ServerIsBusyエラーを返します。このエラーは、バックグラウンドのコンパクションプロセスがフォアグラウンドの書き込み操作の現在の速度に追いつけないことを示しています。フロー制御が有効になると、通常、レイテンシーの急増とクエリスループットの低下（QPSの低下）が発生します。これらのパフォーマンス低下を防ぐには、包括的なキャパシティプランニングと、コンパクションパラメーターおよびストレージ設定の適切な構成が不可欠です。
 
 ### TiFlash -ラーナー向け設定 {#tiflash-learner-configurations}
 
@@ -315,7 +315,7 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 
 - 高頻度の小さなクエリでのTSO待機時間が長い
 - さまざまなワークロードに適した最大チャンクサイズを選択してください。
-- 読み込み負荷の高いワークロード向けにコプロセッサキャッシュを調整する
+- 読み込み負荷の高いワークロード向けにコプロセッサーキャッシュを調整する
 - ワークロード特性に合わせてチャンクサイズを最適化
 - さまざまなワークロードに合わせてトランザクションモードとDMLタイプを最適化する
 - TiKVプッシュダウンによる`GROUP BY`および`DISTINCT`オペレーションの最適化
@@ -323,7 +323,7 @@ go-ycsb run mysql -P /ycsb/workloads/workloada -p {host} -p mysql.port={port} -p
 - バッチ処理中の統計情報収集を最適化する
 - インスタンスの種類ごとにスレッドプールの設定を最適化する
 
-以下のセクションでは、これらの各ケースへの対処方法について説明します。それぞれのシナリオに応じて、異なるパラメータを調整したり、特定のTiDB機能を使用したりする必要があります。
+以下のセクションでは、これらの各ケースへの対処方法について説明します。それぞれのシナリオに応じて、異なるパラメーターを調整したり、特定のTiDB機能を使用したりする必要があります。
 
 > **Note:**
 >
@@ -381,9 +381,9 @@ SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL;
 SET GLOBAL tidb_tso_client_rpc_mode=PARALLEL-FAST;
 ```
 
-### 読み込み負荷の高いワークロード向けにコプロセッサキャッシュを調整する {#tune-coprocessor-cache-for-read-heavy-workloads}
+### 読み込み負荷の高いワークロード向けにコプロセッサーキャッシュを調整する {#tune-coprocessor-cache-for-read-heavy-workloads}
 
-[コプロセッサキャッシュ](/coprocessor-cache.md)キャッシュを最適化することで、読み取り負荷の高いワークロードのクエリパフォーマンスを向上させることができます。このキャッシュにはコプロセッサのリクエスト結果が格納され、頻繁にアクセスされるデータの繰り返し計算が削減されます。キャッシュのパフォーマンスを最適化するには、次の手順を実行します。
+[コプロセッサーキャッシュ](/coprocessor-cache.md)キャッシュを最適化することで、読み取り負荷の高いワークロードのクエリパフォーマンスを向上させることができます。このキャッシュにはコプロセッサーのリクエスト結果が格納され、頻繁にアクセスされるデータの繰り返し計算が削減されます。キャッシュのパフォーマンスを最適化するには、次の手順を実行します。
 
 1. [コプロセッサーキャッシュ](/coprocessor-cache.md#view-the-grafana-monitoring-panel)で説明した指標を使用してキャッシュヒット率を監視します。
 2. キャッシュサイズを増やすことで、より大きなワーキングセットにおけるヒット率を向上させることができます。

@@ -159,9 +159,9 @@ tikv_servers:
       server.labels: { az: "3", replication zone: "5", rack: "5", host: "34" }
 ```
 
-### パラメータ設定を最適化する {#optimize-parameter-configuration}
+### パラメーター設定を最適化する {#optimize-parameter-configuration}
 
-2 つのリージョンに 3つの AZ をデプロイする場合、パフォーマンスを最適化するには、通常のパラメータを設定するだけでなく、コンポーネントパラメータも調整する必要があります。
+2 つのリージョンに 3つの AZ をデプロイする場合、パフォーマンスを最適化するには、通常のパラメーターを設定するだけでなく、コンポーネントパラメーターも調整する必要があります。
 
 - TiKVでgRPCメッセージ圧縮を有効にします。クラスターのデータはネットワーク経由で送信されるため、gRPCメッセージ圧縮を有効にするとネットワークトラフィックを削減できます。
 
@@ -169,7 +169,7 @@ tikv_servers:
     server.grpc-compression-type: gzip
     ```
 
-- 別のリージョン（サンフランシスコ）にある TiKV ノードのネットワーク構成を最適化します。サンフランシスコの AZ3 の以下の TiKV パラメータを変更し、この TiKV ノードのレプリカがRaft選出に参加しないようにします。
+- 別のリージョン（サンフランシスコ）にある TiKV ノードのネットワーク構成を最適化します。サンフランシスコの AZ3 の以下の TiKV パラメーターを変更し、この TiKV ノードのレプリカがRaft選出に参加しないようにします。
 
     ```yaml
     raftstore.raft-min-election-timeout-ticks: 50

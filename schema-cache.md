@@ -24,14 +24,14 @@ summary: TiDBは、スキーマ情報に対してLRU（Least Recently Used：最
 <CustomContent platform="tidb">
 
 - TiDBの起動時間を短縮するために、 [`performance.force-init-stats`](/tidb-configuration-file.md#force-init-stats-new-in-v657-and-v710)を無効にすることをお勧めします。
-- 多数のテーブル（例えば、10万個以上のテーブル）を作成する必要がある場合は、リージョンの数を減らし、TiKVのメモリ使用量を削減するために、 [`split-table`](/tidb-configuration-file.md#split-table)パラメータを`false`に設定することをお勧めします。
+- 多数のテーブル（例えば、10万個以上のテーブル）を作成する必要がある場合は、リージョンの数を減らし、TiKVのメモリ使用量を削減するために、 [`split-table`](/tidb-configuration-file.md#split-table)パラメーターを`false`に設定することをお勧めします。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 - TiDBの起動時間を短縮するために、 [`performance.force-init-stats`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#force-init-stats-new-in-v657-and-v710)を無効にすることをお勧めします。
-- 多数のテーブル（例えば、10万個以上のテーブル）を作成する必要がある場合は、リージョンの数を減らし、TiKVのメモリ使用量を削減するために、 [`split-table`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#split-table)パラメータを`false`に設定することをお勧めします。
+- 多数のテーブル（例えば、10万個以上のテーブル）を作成する必要がある場合は、リージョンの数を減らし、TiKVのメモリ使用量を削減するために、 [`split-table`](https://docs.pingcap.com/tidb/stable/tidb-configuration-file/#split-table)パラメーターを`false`に設定することをお勧めします。
 
 </CustomContent>
 
@@ -41,9 +41,9 @@ summary: TiDBは、スキーマ情報に対してLRU（Least Recently Used：最
 
 - 単一クラスター内のテーブル数は300万を超えることはできません。
 
-- 単一クラスタ内のテーブル数が 300,000 を超える場合は、 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)の値を`0`に設定しないでください。TiDB のメモリ不足 (OOM) を引き起こす可能性があります。
+- 単一クラスター内のテーブル数が 300,000 を超える場合は、 [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)の値を`0`に設定しないでください。TiDB のメモリ不足 (OOM) を引き起こす可能性があります。
 
-- 外部キーを使用すると、クラスタ環境におけるDDL操作の実行時間が長くなる可能性があります。
+- 外部キーを使用すると、クラスター環境におけるDDL操作の実行時間が長くなる可能性があります。
 
 - テーブルへのアクセスが不規則な場合（例えば、あるテーブル群が時刻1にアクセスされ、別のテーブル群が時刻2にアクセスされる場合など）、 `tidb_schema_cache_size`の値が小さいと、スキーマ情報が頻繁に削除およびキャッシュされ、パフォーマンスの変動につながる可能性があります。この機能は、頻繁にアクセスされるデータベースやテーブルが比較的固定されているシナリオに適しています。
 

@@ -31,7 +31,7 @@ resolved-ts は、この値より小さいタイムスタンプを持つすべ�
 
 ### resolved-tsの維持 {#the-maintenance-of-resolved-ts}
 
-リージョンリーダーは、resolved-ts を管理するためにリゾルバを使用します。このリゾルバは、 Raft適用時に変更ログを受信することで、LOCK CF（カラムファミリー）内のロックを追跡します。初期化されると、リゾルバはリージョン全体をスキャンしてロックを追跡します。
+リージョンリーダーは、resolved-ts を管理するためにリゾルバーを使用します。このリゾルバーは、 Raft適用時に変更ログを受信することで、LOCK CF（カラムファミリー）内のロックを追跡します。初期化されると、リゾルバーはリージョン全体をスキャンしてロックを追跡します。
 
 ## ステイル読み取りの問題を診断する {#diagnose-stale-read-issues}
 
@@ -65,7 +65,7 @@ resolved-ts は、この値より小さいタイムスタンプを持つすべ�
 
 ### `tikv-ctl`を使用して診断する {#use-tikv-ctl-to-diagnose}
 
-`tikv-ctl`はリゾルバと`RegionReadProgress`の最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
+`tikv-ctl`はリゾルバーと`RegionReadProgress`の最新の詳細情報を提供します。詳細については[リージョンの`RegionReadProgress`の状態を取得する](/tikv-control.md#get-the-state-of-a-regions-regionreadprogress)を参照してください。
 
 次に例を示します。
 
@@ -206,7 +206,7 @@ Resolver:
     stopped: false,
 ```
 
-ここで注目すべき点は、リゾルバの`applied_index` `tracked index`と等しいことです。したがって、リゾルバがこの問題の根本原因であると思われます。また、このリージョンに480000個のロックを残すトランザクションが1つあることもわかります。これが原因である可能性があります。
+ここで注目すべき点は、リゾルバーの`applied_index` `tracked index`と等しいことです。したがって、リゾルバーがこの問題の根本原因であると思われます。また、このリージョンに480000個のロックを残すトランザクションが1つあることもわかります。これが原因である可能性があります。
 
 正確なトランザクションと一部のロックのキーを取得するには、TiKVログを確認し、 grep `locks with`を実行します。出力は次のようになります。
 

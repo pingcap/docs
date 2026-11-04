@@ -1,19 +1,19 @@
 ---
 title: TiCDC Deployment Topology
-summary: 最小限の TiDB トポロジに基づく TiCDC のデプロイメントトポロジを学習します。
+summary: 最小限の TiDB トポロジーに基づく TiCDC のデプロイメントトポロジーを学習します。
 ---
 
-# TiCDC 展開トポロジ {#ticdc-deployment-topology}
+# TiCDC 展開トポロジー {#ticdc-deployment-topology}
 
 > **Note:**
 >
 > TiCDCはv4.0.6以降、一般提供（GA）された機能です。本番環境でご利用いただけます。
 
-このドキュメントでは、最小限のクラスタトポロジに基づく[TiCDC](/ticdc/ticdc-overview.md)のデプロイメントトポロジについて説明します。
+このドキュメントでは、最小限のクラスタートポロジーに基づく[TiCDC](/ticdc/ticdc-overview.md)のデプロイメントトポロジーについて説明します。
 
 TiCDCは、TiDB 4.0で導入されたTiDBの増分データを複製するためのツールです。TiDB、MySQL、Kafka、MQ、ストレージサービスなど、複数のダウンストリームプラットフォームをサポートします。TiCDCは低レイテンシーとネイティブな高可用性を備えています。
 
-## トポロジ情報 {#topology-information}
+## トポロジー情報 {#topology-information}
 
 | インスタンス             | 数 | 物理マシン構成                        | IP                                      | 設定                 |
 | :------------- | :--- | :----------------------------- | :-------------------------------------- | :------------------------- |
@@ -27,14 +27,14 @@ TiCDCは、TiDB 4.0で導入されたTiDBの増分データを複製するため
 >
 > インスタンスのIPアドレスは例としてのみ示されています。実際の導入では、IPアドレスを実際のIPアドレスに置き換えてください。
 
-### トポロジテンプレート {#topology-templates}
+### トポロジーテンプレート {#topology-templates}
 
-- [TiCDCトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
-- [TiCDCトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
+- [TiCDCトポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-cdc.yaml)
+- [TiCDCトポロジーの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-cdc.yaml)
 
-上記の TiDB クラスタートポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスタートポロジーファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジー設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **Note:**
 >
-> - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPクラスタコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
+> - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPクラスターコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
 > - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホームディレクトリにデプロイされます。

@@ -111,12 +111,12 @@ summary: TiCDC を使用して TiDB データを Apache Kafka および Apache F
 
 ## （オプション）ステップ4. Kafkaデータを消費するようにFlinkを構成する {#optional-step-4-configure-flink-to-consume-kafka-data}
 
-1. Flink Kafka コネクタをインストールします。
+1. Flink Kafka コネクターをインストールします。
 
-    Flinkエコシステムでは、Kafkaデータの取り込みとFlinkへのデータ出力にFlink Kafkaコネクタが使用されます。ただし、Flink Kafkaコネクタは自動的にインストールされません。使用するには、Flinkをインストールした後、Flink Kafkaコネクタとその依存関係をFlinkインストールディレクトリに追加してください。具体的には、以下のjarファイルをFlinkインストールディレクトリの`lib`ディレクトリにダウンロードしてください。すでにFlinkクラスターを実行している場合は、再起動して新しいプラグインをロードしてください。
+    Flinkエコシステムでは、Kafkaデータの取り込みとFlinkへのデータ出力にFlink Kafkaコネクターが使用されます。ただし、Flink Kafkaコネクターは自動的にインストールされません。使用するには、Flinkをインストールした後、Flink Kafkaコネクターとその依存関係をFlinkインストールディレクトリに追加してください。具体的には、以下のjarファイルをFlinkインストールディレクトリの`lib`ディレクトリにダウンロードしてください。すでにFlinkクラスターを実行している場合は、再起動して新しいプラグインをロードしてください。
 
     - [flink-connector-kafka-1.15.0.jar](https://repo.maven.apache.org/maven2/org/apache/flink/flink-connector-kafka/1.15.0/flink-connector-kafka-1.15.0.jar)
-    - [flink-sql-コネクタ-kafka-1.15.0.jar](https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-connector-kafka/1.15.0/flink-sql-connector-kafka-1.15.0.jar)
+    - [flink-sql-コネクター-kafka-1.15.0.jar](https://repo.maven.apache.org/maven2/org/apache/flink/flink-sql-connector-kafka/1.15.0/flink-sql-connector-kafka-1.15.0.jar)
     - [kafka-clients-3.2.0.jar](https://repo.maven.apache.org/maven2/org/apache/kafka/kafka-clients/3.2.0/kafka-clients-3.2.0.jar)
 
 2. テーブルを作成します。
