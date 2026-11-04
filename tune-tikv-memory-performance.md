@@ -5,7 +5,7 @@ summary: 最適なパフォーマンスを得るために TiKV パラメータ�
 
 # TiKVメモリパラメーターのパフォーマンスを調整する {#tune-tikv-memory-parameter-performance}
 
-このドキュメントでは、TiKVパラメーターを調整して最適なパフォーマンスを得る方法について説明します。デフォルトの設定ファイルは[etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml)にあります。設定を変更するには、 [TiUPを使用する](/maintain-tidb-using-tiup.md#modify-the-configuration)または[TiKVを動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)で一部の設定項目を選択できます。完全な設定については、 [TiKV設定ファイル](/tikv-configuration-file.md)ご覧ください。
+このドキュメントでは、TiKVパラメーターを調整して最適なパフォーマンスを得る方法について説明します。デフォルトの設定ファイルは[etc/config-template.toml](https://github.com/tikv/tikv/blob/release-8.5/etc/config-template.toml)にあります。設定を変更するには、 [TiUPを使用する](/maintain-tidb-using-tiup.md#modify-the-configuration)か、一部の設定項目については[TiKVを動的に変更する](/dynamic-config.md#modify-tikv-configuration-dynamically)ことができます。完全な設定については、 [TiKV設定ファイル](/tikv-configuration-file.md)をご覧ください。
 
 TiKVは、TiKVアーキテクチャの最下層における永続ストレージとしてRocksDBを使用します。そのため、多くのパフォーマンスパラメーターはRocksDBに関連しています。TiKVは2つのRocksDBインスタンスを使用します。デフォルトのRocksDBインスタンスはKVデータを保存し、 Raft RocksDBインスタンス（RaftDB）はRaftログを保存します。
 
@@ -15,7 +15,7 @@ TiKV は RocksDB から`Column Families` (CF) を実装します。
 
     - `default` CFには実際のデータが保存されます。対応するパラメーターは`[rocksdb.defaultcf]`にあります。
     - `write` CF は、マルチバージョン同時実行制御（MVCC）のバージョン情報とインデックス関連データを格納します。対応するパラメーターは`[rocksdb.writecf]`にあります。
-    - `lock`はロック情報を保存し、システムはデフォルトのパラメーターを使用します。
+    - `lock` CFはロック情報を保存し、システムはデフォルトのパラメーターを使用します。
 
 - Raft RocksDB (RaftDB) インスタンスはRaftログを保存します。
 
