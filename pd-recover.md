@@ -61,7 +61,7 @@ PD Recover インストールパッケージは、 TiDB Toolkitに含まれて�
 
 ### ステップ4：PDノードを再起動する {#step-4-restart-the-pd-node}
 
-プロンプトメッセージ`recovery is successful`が表示されたら、ステップ 2 で`--force-new-cluster`から始まる一時的な PD プロセスを停止し、 `--force-new-cluster`パラメーターなしで PD ノードを通常どおり再起動します。
+プロンプトメッセージ`recovery is successful`が表示されたら、ステップ 2 で`--force-new-cluster`で起動した一時的な PD プロセスを停止し、 `--force-new-cluster`パラメーターなしで PD ノードを通常どおり再起動します。
 
 ### ステップ5：PDをスケールアウトしてクラスターを起動する {#step-5-scale-out-pd-and-start-the-cluster}
 
