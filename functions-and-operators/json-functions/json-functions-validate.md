@@ -15,7 +15,7 @@ TiDB は、MySQL 8.0 で利用可能な[JSONスキーマ検証関数](https://de
 
 `JSON_SCHEMA_VALID(schema, json_doc)`関数は、JSON ドキュメントをスキーマに対して検証し、データの整合性と一貫性を確保します。
 
-これは[チェック](/constraints.md#check)制約と組み合わせて使用することで、テーブルが変更されたときにスキーマの自動検証を行えます。
+これは[CHECK](/constraints.md#check)制約と組み合わせて使用することで、テーブルが変更されたときにスキーマの自動検証を行えます。
 
 この関数は[JSONスキーマ仕様](https://json-schema.org/specification)に準拠しています。
 
