@@ -95,7 +95,7 @@ This section introduces the key parameters when you deploy multiple instances on
     
     - Before using NUMA to bind cores, make sure that the numactl tool is installed, and confirm the information of CPUs in the physical machines. After that, configure the parameters.
 
-    - The `numa_node` parameter corresponds to the CPU and memory binding policies configured by `numactl`.
+    - When you configure `numa_node`, TiUP uses `numactl` to bind the CPU and memory resources of the instance to the specified NUMA nodes.
 
 > **Note:**
 >
