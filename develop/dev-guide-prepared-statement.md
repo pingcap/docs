@@ -214,7 +214,7 @@ try (Connection connection = ds.getConnection()) {
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-データを挿入するときに他の JDBC パラメーターを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章も参照してください。
+データを挿入するときに他の JDBC パラメーターを変更する必要がある場合は、[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)の章も参照してください。
 
 Javaの完全な例については、以下を参照してください。
 
