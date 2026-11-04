@@ -4,7 +4,7 @@ summary: TiDB Cloudとそのアーキテクチャについて学びましょう�
 category: intro
 ---
 
-# TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
+# TiDB Cloudとは何ですか？ {#what-is-tidb-cloud} <!--Corresponding EN commit: 4274e26e46f003c1c4117cc2920d6c6b6ac5482d-->
 
 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッドトランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージドのクラウドネイティブの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。
 
@@ -30,9 +30,9 @@ TiDB Cloudでは、以下の主要機能を利用できます。
 
     重要なワークロード向けに、 ACIDトランザクションを維持しながら、数百ノードまで柔軟かつ透過的に拡張できます。シャーディングについて悩む必要はありません。また、ビジネスニーズに応じて、コンピューティングノードとストレージノードを個別に拡張することも可能です。
 
-- **MySQLとの互換性**
+- **MySQLおよびPostgreSQLとの互換性**
 
-    TiDBのMySQL互換性により、アプリケーションの生産性を向上させ、市場投入までの時間を短縮できます。既存のMySQLインスタンスからデータを簡単に移行でき、コードの書き換えは不要です。
+    既存のアプリケーションコードや使い慣れたデータベースツールを再利用することで、生産性を向上させ、市場投入までの時間を短縮できます。TiDB Cloudは[MySQL compatibility](https://docs.pingcap.com/tidbcloud/mysql-compatibility/?plan=starter&compatibility=mysql)を提供しており、[PostgreSQL compatibility](https://docs.pingcap.com/tidbcloud/postgresql-compatibility/?plan=starter&compatibility=postgresql)もTiDB Cloud Starterでパブリックプレビューとして利用できます。
 
 - **高可用性と高信頼性**
 
