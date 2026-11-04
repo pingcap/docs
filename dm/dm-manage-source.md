@@ -53,7 +53,7 @@ Global Flags:
 
 - `show` : 追加されたデータソースと対応する DM-workerを表示します。
 
-- `config-file` : `source.yaml`のファイルパスを指定し、複数のファイルパスを渡すことができます。
+- `config-file` : `source.yaml`のファイルパスを指定し、複数のファイルパスを渡せます。
 
 - `--print-sample-config` : サンプル設定ファイルを出力します。このパラメーターは他のパラメーターを無視します。
 

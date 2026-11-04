@@ -33,7 +33,7 @@ ExplainableStmt ::=
 
 ## EXPLAIN ANALYZE出力形式 {#explain-analyze-output-format}
 
-`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`は対応するSQL文を実行し、その実行時情報を記録し、実行計画とともにその情報を返します。したがって、 `EXPLAIN ANALYZE`は`EXPLAIN`の拡張版と見なすことができます。 `EXPLAIN` (クエリ実行のデバッグ用) と比較すると、 `EXPLAIN ANALYZE`の戻り値には`actRows` 、 `execution info` 、 `memory` 、 `disk`といった情報列も含まれます。これらの列の詳細は以下のとおりです。
+`EXPLAIN`とは異なり、 `EXPLAIN ANALYZE`は対応するSQL文を実行し、その実行時情報を記録し、実行計画とともにその情報を返します。したがって、 `EXPLAIN ANALYZE`は`EXPLAIN`の拡張版と見なせます。 `EXPLAIN` (クエリ実行のデバッグ用) と比較すると、 `EXPLAIN ANALYZE`の戻り値には`actRows` 、 `execution info` 、 `memory` 、 `disk`といった情報列も含まれます。これらの列の詳細は以下のとおりです。
 
 | 属性名    | 説明                                                                                                                                                                 |
 | :----- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -233,7 +233,7 @@ tiflash_scan: {
 ```
 
 - `dtfile` : テーブルスキャン中の DTFile (DeltaTree ファイル) 関連情報。TiFlash Stableレイヤーのデータスキャンステータスを反映します。
-    - `total_scanned_packs` : DTFileでスキャンされたパックの総数。パックとは、 TiFlash DTFileで読み取ることができる最小単位です。デフォルトでは、8192行ごとに1パックが構成されます。
+    - `total_scanned_packs` : DTFileでスキャンされたパックの総数。パックとは、 TiFlash DTFileで読み取れる最小単位です。デフォルトでは、8192行ごとに1パックが構成されます。
     - `total_skipped_packs` : DTFile 内のスキャンでスキップされたパックの総数。`WHERE`が粗集合インデックスにヒットするか、主キーの範囲フィルタリングに一致する場合、無関係なパックはスキップされます。
     - `total_scanned_rows` : DTFile でスキャンされた行の総数。MVCC により更新または削除のバージョンが複数ある場合、各バージョンは個別にカウントされます。
     - `total_skipped_rows` : DTFile 内のスキャンによってスキップされる行の合計数。

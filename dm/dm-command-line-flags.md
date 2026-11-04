@@ -13,13 +13,13 @@ summary: DM のコマンドラインフラグについて学習します。
 
 - クライアントのリクエストを受信するために使用されるDM-masterの外部アドレス
 - デフォルト値は`"{master-addr}"`です
-- オプションフラグ。`"domain-name:port"`の形式をとることができます。
+- オプションフラグ。`"domain-name:port"`の形式をとれます。
 
 ### `--advertise-peer-urls` {#advertise-peer-urls}
 
 - DM-masterノード間の通信用の外部アドレス
 - デフォルト値は`"{peer-urls}"`です
-- オプションフラグ。`"http(s)://domain-name:port"`の形式をとることができます。
+- オプションフラグ。`"http(s)://domain-name:port"`の形式をとれます。
 
 ### `--config` {#config}
 
@@ -87,7 +87,7 @@ summary: DM のコマンドラインフラグについて学習します。
 
 - クライアントのリクエストを受信するために使用されるDM-workerの外部アドレス
 - デフォルト値は`"{worker-addr}"`です
-- オプションフラグ。`"domain-name:port"`の形式をとることができます。
+- オプションフラグ。`"domain-name:port"`の形式をとれます。
 
 ### `--config` {#config}
 
