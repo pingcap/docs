@@ -1,6 +1,6 @@
 ---
 title: Gitpod
-summary: Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザ内で直接コードを開発、実行、テストできます。
+summary: Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザー内で直接コードを開発、実行、テストできます。
 aliases: ['/ja/tidb/stable/dev-guide-playground-gitpod/','/ja/tidbcloud/dev-guide-playground-gitpod/']
 ---
 
@@ -8,15 +8,15 @@ aliases: ['/ja/tidb/stable/dev-guide-playground-gitpod/','/ja/tidbcloud/dev-guid
 
 # Gitpod {#gitpod}
 
-[Gitpod](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけでブラウザ内で完全な開発環境が得られ、すぐにコードを記述できます。
+[Gitpod](https://www.gitpod.io/)を使用すると、ボタンまたはリンクをクリックするだけでブラウザー内で完全な開発環境が得られ、すぐにコードを記述できます。
 
-Gitpodは、コードを直接記述する開発環境向けのオープンソースKubernetesアプリケーション（GitHubリポジトリアドレス： [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ）です。クラウド上で、タスクごとに最新の自動化開発環境を数秒で構築します。開発環境をコードとして記述し、ブラウザまたはデスクトップIDEから直接、リモートおよびクラウドベースの開発環境を即座に開始できます。
+Gitpodは、コードを直接記述する開発環境向けのオープンソースKubernetesアプリケーション（GitHubリポジトリアドレス： [https://github.com/gitpod-io/gitpod](https://github.com/gitpod-io/gitpod) ）です。クラウド上で、タスクごとに最新の自動化開発環境を数秒で構築します。開発環境をコードとして記述し、ブラウザーまたはデスクトップIDEから直接、リモートおよびクラウドベースの開発環境を即座に開始できます。
 
 ## クイックスタート {#quick-start}
 
 1. TiDB アプリケーション開発用のサンプルコードリポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)をフォークします。
 
-2. ブラウザのアドレスバーでサンプルコードリポジトリの URL の前に`https://gitpod.io/#`を付けて、Gitpod ワークスペースを起動します。
+2. ブラウザーのアドレスバーでサンプルコードリポジトリの URL の前に`https://gitpod.io/#`を付けて、Gitpod ワークスペースを起動します。
 
     - たとえば、 `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java` 。
 
@@ -164,7 +164,7 @@ ports:
 
 ## まとめ {#summary}
 
-Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザ内で直接コードを開発、実行、テストできます。
+Gitpodは、完全かつ自動化された、事前設定済みのクラウドネイティブ開発環境を提供します。ローカル設定を必要とせず、ブラウザー内で直接コードを開発、実行、テストできます。
 
 ![playground gitpod summary](/media/develop/playground-gitpod-summary.png)
 

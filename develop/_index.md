@@ -143,7 +143,7 @@ mysql2 ドライバーを使用して TiDB に接続します。
 </DevToolCard>
 </DevLangAccordion>
 
-これらのガイドに加えて、PingCAP はコミュニティと協力して[サードパーティのMySQLドライバ、ORM、ツール](/develop/dev-guide-third-party-support.md)をサポートします。
+これらのガイドに加えて、PingCAP はコミュニティと協力して[サードパーティのMySQLドライバー、ORM、ツール](/develop/dev-guide-third-party-support.md)をサポートします。
 
 ## MySQLクライアントソフトウェアを使用する {#use-mysql-client-software}
 

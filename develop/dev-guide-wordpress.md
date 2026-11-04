@@ -84,19 +84,19 @@ cd wordpress-tidb-docker
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。デフォルトでは、 {{{ .starter }}}には`test`データベースが付属しています。{{{ .starter }}}インスタンスで既に別のデータベースを作成している場合は、 `test`をデータベース名に置き換えてください。
+    プレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。デフォルトでは、 {{{ .starter }}}には`test`データベースが付属しています。{{{ .starter }}}インスタンスで既に別のデータベースを作成している場合は、 `test`をデータベース名に置き換えてください。
 
 7. `.env`ファイルを保存します。
 
 ### ステップ4： {{{ .starter }}}でWordPressを起動する {#step-4-start-wordpress-with-tidb-cloud-starter}
 
-1. WordPressをDockerコンテナとして実行するには、以下のコマンドを実行してください。
+1. WordPressをDockerコンテナーとして実行するには、以下のコマンドを実行してください。
 
     ```shell
     docker compose up -d
     ```
 
-2. ローカルマシンでコンテナを起動した場合は[localhost](http://localhost/)にアクセスしてWordPressサイトをセットアップし、リモートマシンでWordPressが実行されている場合は`http://<your_instance_ip>`にアクセスしてください。
+2. ローカルマシンでコンテナーを起動した場合は[localhost](http://localhost/)にアクセスしてWordPressサイトをセットアップし、リモートマシンでWordPressが実行されている場合は`http://<your_instance_ip>`にアクセスしてください。
 
 ### ステップ5：データベース接続を確認する {#step-5-confirm-the-database-connection}
 

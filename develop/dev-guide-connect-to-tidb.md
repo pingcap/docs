@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-connect-to-tidb/','/ja/tidb/dev/dev-guide-c
 
 # TiDBに接続する {#connect-to-tidb}
 
-TiDBはMySQLプロトコルとの互換性が非常に高いため、ほとんどのMySQLツール、ドライバ、およびORMを使用して接続できます。
+TiDBはMySQLプロトコルとの互換性が非常に高いため、ほとんどのMySQLツール、ドライバー、およびORMを使用して接続できます。
 
 - SQLを手動で実行する（接続テスト、デバッグ、または簡単な検証のため）には、 [MySQL CLIツール](/develop/dev-guide-mysql-tools.md)から始めます。
 

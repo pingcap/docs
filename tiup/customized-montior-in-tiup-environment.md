@@ -159,4 +159,4 @@ alertmanager_servers:
     ssh_port: 22
 ```
 
-上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP は`listen_host`フィールドの内容を Alertmanager 起動パラメータの`--web.listen-address`に追加します。
+上記の構成が完了したら、TiDB クラスターをデプロイ、スケールアウト、スケールイン、またはリロードすると、 TiUP は`listen_host`フィールドの内容を Alertmanager 起動パラメーターの`--web.listen-address`に追加します。

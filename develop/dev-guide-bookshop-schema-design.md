@@ -19,7 +19,7 @@ Bookshopアプリケーションのテーブル構造とデータをインポー
 
 ### TiDB Self-Managed: `tiup demo`経由 {#tidb-self-managed-via-tiup-demo}
 
-[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してTiDB Self-Managedクラスタをデプロイしている場合、またはTiDBサーバーに接続できる場合は、次のコマンドを実行することで、Bookshopアプリケーション用のサンプルデータをすばやく生成してインポートできます。
+[TiUP](/tiup/tiup-reference.md#tiup-reference)を使用してTiDB Self-Managedクラスターをデプロイしている場合、またはTiDBサーバーに接続できる場合は、次のコマンドを実行することで、Bookshopアプリケーション用のサンプルデータをすばやく生成してインポートできます。
 
 ```shell
 tiup demo bookshop prepare
@@ -29,9 +29,9 @@ tiup demo bookshop prepare
 
 #### 接続情報を設定する {#configure-connection-information}
 
-以下の表に接続パラメータを示します。環境に合わせてデフォルト設定を変更できます。
+以下の表に接続パラメーターを示します。環境に合わせてデフォルト設定を変更できます。
 
-| パラメータ        | 略語   | デフォルト値      | 説明               |
+| パラメーター        | 略語   | デフォルト値      | 説明               |
 | ------------ | ---- | ----------- | ---------------- |
 | `--password` | `-p` | なし          | データベースユーザーのパスワード |
 | `--host`     | `-H` | `127.0.0.1` | データベースアドレス       |
@@ -47,9 +47,9 @@ tiup demo bookshop prepare -U <username> -H <endpoint> -P 4000 -p <password>
 
 #### データ量を設定します {#set-the-data-volume}
 
-各データベーステーブルで生成されるデータ量は、以下のパラメータを設定することで指定できます。
+各データベーステーブルで生成されるデータ量は、以下のパラメーターを設定することで指定できます。
 
-| パラメータ       | デフォルト値   | 説明                        |
+| パラメーター       | デフォルト値   | 説明                        |
 | ----------- | -------- | ------------------------- |
 | `--users`   | `10000`  | `users`テーブルで生成されるデータの行数   |
 | `--authors` | `20000`  | `authors`テーブルで生成される行数     |
@@ -59,17 +59,17 @@ tiup demo bookshop prepare -U <username> -H <endpoint> -P 4000 -p <password>
 
 例えば、以下のコマンドを実行すると、次のものが生成されます。
 
-- `--users`パラメータを介して取得した 200,000 行のユーザー情報
-- `--books`パラメータを介して50万行の書籍情報を取得
-- `--authors`パラメータによる 100,000 行の著者情報
-- `--ratings`パラメータによる 1,000,000 行の評価レコード
-- `--orders`パラメータを介して1,000,000行の注文レコードを取得
+- `--users`パラメーターを介して取得した 200,000 行のユーザー情報
+- `--books`パラメーターを介して50万行の書籍情報を取得
+- `--authors`パラメーターによる 100,000 行の著者情報
+- `--ratings`パラメーターによる 1,000,000 行の評価レコード
+- `--orders`パラメーターを介して1,000,000行の注文レコードを取得
 
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --drop-tables
 ```
 
-`--drop-tables`パラメータを使用すると、元のテーブル構造を削除できます。パラメータの詳細については、 `tiup demo bookshop --help`コマンドを実行してください。
+`--drop-tables`パラメーターを使用すると、元のテーブル構造を削除できます。パラメーターの詳細については、 `tiup demo bookshop --help`コマンドを実行してください。
 
 ### TiDB Cloud：インポート機能経由 {#tidb-cloud-via-the-import-feature}
 

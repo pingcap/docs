@@ -24,12 +24,12 @@ TiDBはMySQL互換のデータベースであり、[Django](https://www.djangopr
 
 - [Python 3.8以降](https://www.python.org/downloads/)。
 - [Git](https://git-scm.com/downloads) 。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -110,7 +110,7 @@ mysqlclient でインストールの問題が発生した場合は、 [mysqlclie
     CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
     TiDB Cloud Starter は安全な接続を必要とします。mysqlclient の`ssl_mode`はデフォルトで`PREFERRED`になっているため、 `CA_PATH`を手動で指定する必要はありません。空欄のままにしてください。ただし、 `CA_PATH`を手動で指定する必要がある特別な理由がある場合は、 [TiDB Cloud StarterへのTLS接続](https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters)を参照して、さまざまなオペレーティングシステムの証明書パスを取得してください。
 
@@ -154,14 +154,14 @@ mysqlclient でインストールの問題が発生した場合は、 [mysqlclie
     TIDB_DB_NAME='test'
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
 9. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -169,7 +169,7 @@ mysqlclient でインストールの問題が発生した場合は、 [mysqlclie
 
     IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
@@ -188,7 +188,7 @@ mysqlclient でインストールの問題が発生した場合は、 [mysqlclie
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`を前の手順でダウンロードした証明書のパスに設定してください。
+    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメーターに置き換え、 `CA_PATH`を前の手順でダウンロードした証明書のパスに設定してください。
 
 6. `.env`ファイルを保存します。
 
@@ -211,7 +211,7 @@ mysqlclient でインストールの問題が発生した場合は、 [mysqlclie
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`を接続パラメータに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空欄です。
+    プレースホルダー`{}`を接続パラメーターに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空欄です。
 
 3. `.env`ファイルを保存します。
 
@@ -240,7 +240,7 @@ python manage.py migrate
     python manage.py runserver 8080
     ```
 
-2. アプリケーションにアクセスするには、ブラウザを開いて`http://localhost:8000/`にアクセスしてください。サンプルアプリケーションでは、以下の操作が可能です。
+2. アプリケーションにアクセスするには、ブラウザーを開いて`http://localhost:8000/`にアクセスしてください。サンプルアプリケーションでは、以下の操作が可能です。
 
     - 新しいプレイヤーを作成します。
     - プレイヤーを一括作成します。

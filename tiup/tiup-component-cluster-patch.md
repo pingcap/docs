@@ -71,7 +71,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 ### --overwrite {#overwrite}
 
-- 特定のコンポーネント（TiDBやTiKVなど）にパッチを適用した後、TiUPクラスタがそのコンポーネントをスケールアウトすると、 TiUPはデフォルトで元のコンポーネントバージョンを使用します。将来クラスタがスケールアウトする際にパッチを適用したバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
+- 特定のコンポーネント（TiDBやTiKVなど）にパッチを適用した後、TiUPクラスターがそのコンポーネントをスケールアウトすると、 TiUPはデフォルトで元のコンポーネントバージョンを使用します。将来クラスターがスケールアウトする際にパッチを適用したバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
 - データ型: `BOOLEAN`
 - このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
@@ -121,4 +121,4 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

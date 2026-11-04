@@ -53,7 +53,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
    }
    ```
 
-4. プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
+4. プロジェクトのルートディレクトリに、TypeScriptコンパイラーオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
 
    ```json
    {
@@ -98,7 +98,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 1. {{{ .starter }}}インスタンスにテーブルを作成します。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディター](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`users` (
@@ -208,7 +208,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-drizzle-example/']
 
 1. {{{ .starter }}}インスタンスにテーブルを作成します。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディター](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`users` (

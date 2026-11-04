@@ -33,7 +33,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-tools-compatibility/','/ja/tidb
 
 TiDBアプリケーションでは、データオーバーフローを回避するために、 `SELECT CONNECTION_ID()`の結果を格納する際に64ビット整数型または文字列型を使用する必要があります。例えば、 Javaでは`Long`または`String`を使用し、JavaScriptまたはTypeScriptでは`string`を使用できます。
 
-### TiDBは`Com_*`カウンタを維持しません {#tidb-does-not-maintain-com-counters}
+### TiDBは`Com_*`カウンターを維持しません {#tidb-does-not-maintain-com-counters}
 
 **説明**
 
@@ -43,7 +43,7 @@ MySQLは、データベースに対して実行された操作の合計数を追
 
 これらの変数は使用しないでください。よくあるシナリオの一つは監視です。TiDBは監視性に優れているため、サーバーステータス変数からのクエリは必要ありません。監視サービスの詳細については、以下のドキュメントを参照してください。
 
-- TiDB Cloudドキュメント: [TiDBクラスタを監視する](/tidb-cloud/monitor-tidb-cluster.md) .
+- TiDB Cloudドキュメント: [TiDBクラスターを監視する](/tidb-cloud/monitor-tidb-cluster.md) .
 - TiDB Self-Managed ドキュメント: [TiDB 監視フレームワークの概要](/tidb-monitoring-framework.md) .
 
 ### TiDBはエラーメッセージで`TIMESTAMP`と`DATETIME`を区別します {#tidb-distinguishes-between-timestamp-and-datetime-in-error-messages}
@@ -88,21 +88,21 @@ MySQL Connector/J の照合順序はクライアント側に保存され、サ�
 
 照合順序は手動で設定し、クライアント側の照合順序に依存しないでください。クライアント側のデフォルトの照合順序は、MySQL Connector/J 設定ファイルに保存されます。
 
-### `NO_BACKSLASH_ESCAPES`パラメータは効果がありません {#the-no-backslash-escapes-parameter-does-not-take-effect}
+### `NO_BACKSLASH_ESCAPES`パラメーターは効果がありません {#the-no-backslash-escapes-parameter-does-not-take-effect}
 
 **説明**
 
-TiDBでは、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラメータを使用できません。詳細については、 [問題](https://github.com/pingcap/tidb/issues/35302)を参照してください。
+TiDBでは、 `\`文字をエスケープせずに`NO_BACKSLASH_ESCAPES`パラメーターを使用できません。詳細については、 [問題](https://github.com/pingcap/tidb/issues/35302)を参照してください。
 
 **回避方法**
 
 TiDB では`NO_BACKSLASH_ESCAPES`と`\`を使用しないでください。SQL文では`\\`を使用してください。
 
-### `INDEX_USED`関連のパラメータはサポートされていません {#the-index-used-related-parameters-are-not-supported}
+### `INDEX_USED`関連のパラメーターはサポートされていません {#the-index-used-related-parameters-are-not-supported}
 
 **説明**
 
-TiDBはプロトコルのパラメータ`SERVER_QUERY_NO_GOOD_INDEX_USED`と`SERVER_QUERY_NO_INDEX_USED`を設定しません。そのため、以下のパラメータが実際の状況と矛盾した値として返されます。
+TiDBはプロトコルのパラメーター`SERVER_QUERY_NO_GOOD_INDEX_USED`と`SERVER_QUERY_NO_INDEX_USED`を設定しません。そのため、以下のパラメーターが実際の状況と矛盾した値として返されます。
 
 - `com.mysql.cj.protocol.ServerSession.noIndexUsed()`
 - `com.mysql.cj.protocol.ServerSession.noGoodIndexUsed()`
@@ -111,21 +111,21 @@ TiDBはプロトコルのパラメータ`SERVER_QUERY_NO_GOOD_INDEX_USED`と`SER
 
 TiDB では`noIndexUsed()`および`noGoodIndexUsed()`関数を使用しないでください。
 
-### `enablePacketDebug`パラメータはサポートされていません {#the-enablepacketdebug-parameter-is-not-supported}
+### `enablePacketDebug`パラメーターはサポートされていません {#the-enablepacketdebug-parameter-is-not-supported}
 
 **説明**
 
-TiDBはパラメータ[enablePacketDebug](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-debugging-profiling.html)をサポートしていません。これはMySQL Connector/Jのデバッグ用パラメータであり、データパケットのバッファを保持します。これにより、接続が予期せず切断される可能性があります。このパラメータを有効に**しないでください**。
+TiDBはパラメーター[enablePacketDebug](https://dev.mysql.com/doc/connector-j/en/connector-j-connp-props-debugging-profiling.html)をサポートしていません。これはMySQL Connector/Jのデバッグ用パラメーターであり、データパケットのバッファーを保持します。これにより、接続が予期せず切断される可能性があります。このパラメーターを有効に**しないでください**。
 
 **回避方法**
 
-TiDB に`enablePacketDebug`パラメータを設定しないでください。
+TiDB に`enablePacketDebug`パラメーターを設定しないでください。
 
 ### UpdatableResultSetはサポートされていません {#the-updatableresultset-is-not-supported}
 
 **説明**
 
-TiDB は`UpdatableResultSet`をサポートしていません。`ResultSet.CONCUR_UPDATABLE`パラメータを指定**しないでください**。また、 `ResultSet`内のデータを更新**しないでください**。
+TiDB は`UpdatableResultSet`をサポートしていません。`ResultSet.CONCUR_UPDATABLE`パラメーターを指定**しないでください**。また、 `ResultSet`内のデータを更新**しないでください**。
 
 **回避方法**
 
@@ -137,7 +137,7 @@ TiDB は`UpdatableResultSet`をサポートしていません。`ResultSet.CONCU
 
 **説明**
 
-MySQL Connector/J 8.0.32 以前のバージョンを使用している場合、パラメータ`useLocalTransactionState`と`rewriteBatchedStatements`を同時に`true`に設定すると、トランザクションのコミットに失敗する可能性があります。 [このコード](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error)で再現できます。
+MySQL Connector/J 8.0.32 以前のバージョンを使用している場合、パラメーター`useLocalTransactionState`と`rewriteBatchedStatements`を同時に`true`に設定すると、トランザクションのコミットに失敗する可能性があります。 [このコード](https://github.com/Icemap/tidb-java-gitpod/tree/reproduction-local-transaction-state-txn-error)で再現できます。
 
 **回避方法**
 
@@ -147,7 +147,7 @@ MySQL Connector/J 8.0.32 以前のバージョンを使用している場合、�
 
 このバグはMySQL Connector/J 8.0.33で修正されました。8.0.xシリーズのアップデートは終了しているため、安定性とパフォーマンスを向上させるためにMySQL Connector/Jを[最新の一般提供（GA）バージョン](https://dev.mysql.com/downloads/connector/j/)にアップグレードすることを強くお勧めします。
 
-### コネクタは 5.7.5 より前のサーバーバージョンとは互換性がありません {#connector-is-incompatible-with-the-server-version-earlier-than-5-7-5}
+### コネクターは 5.7.5 より前のサーバーバージョンとは互換性がありません {#connector-is-incompatible-with-the-server-version-earlier-than-5-7-5}
 
 **説明**
 

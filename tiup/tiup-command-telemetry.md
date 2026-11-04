@@ -1,6 +1,6 @@
 ---
 title: tiup telemetry
-summary: TiUPテレメトリはv1.11.3でデフォルトで無効化されました。使用状況情報は収集されず、PingCAPと共有もされません。有効化すると、テレメトリ識別子とコマンド実行ステータスが共有されます。クラスタの詳細は共有されません。'tiup telemetry'コマンドを使用し、status、reset、enable、disableなどのサブコマンドでテレメトリを制御してください。
+summary: TiUPテレメトリはv1.11.3でデフォルトで無効化されました。使用状況情報は収集されず、PingCAPと共有もされません。有効化すると、テレメトリ識別子とコマンド実行ステータスが共有されます。クラスターの詳細は共有されません。'tiup telemetry'コマンドを使用し、status、reset、enable、disableなどのサブコマンドでテレメトリを制御してください。
 ---
 
 # tiup telemetry {#tiup-telemetry}
@@ -17,7 +17,7 @@ TiUPテレメトリが有効になっている場合、 TiUPコマンドの実�
 
 - クラスターの正確な名前
 - クラスタートポロジー
-- クラスタ設定ファイル
+- クラスター設定ファイル
 
 TiUP は`tiup telemetry`コマンドを使用してテレメトリを制御します。
 

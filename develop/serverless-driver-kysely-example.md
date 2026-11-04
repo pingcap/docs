@@ -53,7 +53,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
    }
    ```
 
-4. プロジェクトのルートディレクトリに、TypeScriptコンパイラオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
+4. プロジェクトのルートディレクトリに、TypeScriptコンパイラーオプションを定義する`tsconfig.json`ファイルを追加します。以下にファイルの例を示します。
 
    ```json
    {
@@ -90,7 +90,7 @@ aliases: ['/ja/tidbcloud/serverless-driver-kysely-example/']
 
 1. {{{ .starter }}}インスタンスにテーブルを作成し、データを挿入してください。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディター](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -202,7 +202,7 @@ mysql://[username]:[password]@[host]/[database]
 
 1. {{{ .starter }}}インスタンスにテーブルを作成し、データを挿入してください。
 
-    [TiDB CloudコンソールのSQLエディタ](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
+    [TiDB CloudコンソールのSQLエディター](https://docs.pingcap.com/tidbcloud/explore-data-with-sql-editor)を使用してSQL文を実行できます。以下に例を示します。
 
    ```sql
    CREATE TABLE `test`.`person`  (
@@ -271,7 +271,7 @@ mysql://[username]:[password]@[host]/[database]
    }
    ```
 
-    上記のコードは、クエリパラメータ`query`を受け取り、クエリの結果を返します。クエリパラメータが指定されていない場合は、 `person`テーブル内のすべてのレコードを返します。
+    上記のコードは、クエリパラメーター`query`を受け取り、クエリの結果を返します。クエリパラメーターが指定されていない場合は、 `person`テーブル内のすべてのレコードを返します。
 
 3. コードをローカル環境でテストしてください。
 

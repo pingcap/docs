@@ -1,6 +1,6 @@
 ---
 title: tiup dm deploy
-summary: "`tiup dm deploy`コマンドは、新しいクラスタをデプロイするために使用されます。クラスタ名、バージョン、および用意したトポロジファイルが必要です。オプションのフラグとして、ユーザー名、IDファイル、パスワード、ヘルプなどがあります。出力はデプロイメントログです。"
+summary: "`tiup dm deploy`コマンドは、新しいクラスターをデプロイするために使用されます。クラスター名、バージョン、および用意したトポロジーファイルが必要です。オプションのフラグとして、ユーザー名、IDファイル、パスワード、ヘルプなどがあります。出力はデプロイメントログです。"
 ---
 
 # tiup dm deploy {#tiup-dm-deploy}
@@ -15,7 +15,7 @@ tiup dm deploy <cluster-name> <version> <topology.yaml> [flags]
 
 - `<cluster-name>` : 新しいクラスターの名前。既存のクラスター名と同じにできません。
 - `<version>` : デプロイする DM クラスターのバージョン番号 (例: `v2.0.0` )。
-- `<topology.yaml>` : 準備された[トポロジファイル](/tiup/tiup-dm-topology-reference.md) 。
+- `<topology.yaml>` : 準備された[トポロジーファイル](/tiup/tiup-dm-topology-reference.md) 。
 
 ## オプション {#options}
 

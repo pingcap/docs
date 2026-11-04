@@ -13,7 +13,7 @@ summary: "`tiup mirror publish` コマンドは、新しいコンポーネント
 tiup mirror publish <comp-name> <version> <tarball> <entry> [flags]
 ```
 
-各パラメータの意味は次のとおりです。
+各パラメーターの意味は次のとおりです。
 
 - `<comp-name>` : コンポーネントの名前（例： `tidb` ）。正規表現`^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$`に一致する文字列を使用することをお勧めします。
 - `<version>` : 公開するコンポーネントのバージョン。バージョン番号は[セマンティックバージョニング](https://semver.org/)の要件に従う必要があります。

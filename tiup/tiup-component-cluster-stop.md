@@ -51,4 +51,4 @@ tiup cluster stop <cluster-name> [flags]
 
 サービスを停止したログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスターコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

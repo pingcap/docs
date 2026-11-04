@@ -10,7 +10,7 @@ aliases: ['/ja/tidb/stable/dev-guide-third-party-support/','/ja/tidb/dev/dev-gui
 >
 > このドキュメントでは、TiDBでサポートされている一般的な[サードパーティツール](https://en.wikipedia.org/wiki/Third-party_source)のみをリストしています。その他のサードパーティ製ツールはリストされていませんが、これはサポートされていないからではなく、PingCAPがそれらのツールがTiDBと互換性のない機能を使用しているかどうかを確認できないためです。
 
-TiDB は[MySQLプロトコルとの高い互換性](/mysql-compatibility.md)があるため、MySQL ドライバ、ORM フレームワーク、および MySQL に対応するその他のツールのほとんどは TiDB と互換性があります。このドキュメントでは、これらのツールと TiDB のサポートレベルに焦点を当てます。
+TiDB は[MySQLプロトコルとの高い互換性](/mysql-compatibility.md)があるため、MySQL ドライバー、ORM フレームワーク、および MySQL に対応するその他のツールのほとんどは TiDB と互換性があります。このドキュメントでは、これらのツールと TiDB のサポートレベルに焦点を当てます。
 
 ## サポートレベル {#support-level}
 
@@ -27,14 +27,14 @@ PingCAP はコミュニティと連携し、サードパーティツールに対
 
 ## Driver {#driver}
 
-| 言語   | Driver                                                        | 最新のテスト済みバージョン | サポートレベル | TiDBアダプタ                                                                                                                                                                                 | チュートリアル                                                                                    |
+| 言語   | Driver                                                        | 最新のテスト済みバージョン | サポートレベル | TiDBアダプター                                                                                                                                                                                 | チュートリアル                                                                                    |
 | ---- | ------------------------------------------------------------- | ------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | Go   | [go-sql-driver/mysql](https://github.com/go-sql-driver/mysql) | バージョン1.6.0    | 完全      | 該当なし                                                                                                                                                                                     | [Go-MySQL-Driver で TiDB に接続する](/develop/dev-guide-sample-application-golang-sql-driver.md) |
 | Java | [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/)  | 8.0           | 完全      | [pingcap/mysql-connector-j](/develop/dev-guide-choose-driver-or-orm.md#java-drivers) <br/> [pingcap/tidb-loadbalance](/develop/dev-guide-choose-driver-or-orm.md#java-client-load-balancing) | [JDBC で TiDB に接続する](/develop/dev-guide-sample-application-java-jdbc.md)                    |
 
 ## ORM {#orm}
 
-| 言語                    | ORMフレームワーク                                                            | 最新のテスト済みバージョン     | サポートレベル | TiDBアダプタ                                              | チュートリアル                                                                                            |
+| 言語                    | ORMフレームワーク                                                            | 最新のテスト済みバージョン     | サポートレベル | TiDBアダプター                                              | チュートリアル                                                                                            |
 | --------------------- | --------------------------------------------------------------------- | ----------------- | ------- | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Go                    | [GORM](https://github.com/go-gorm/gorm)                                | バージョン1.23.5       | 完全      | 該当なし                                                  | [GORMでTiDBに接続する](/develop/dev-guide-sample-application-golang-gorm.md)                             |
 | Go                    | [Beego](https://github.com/beego/beego)                                 | バージョン2.0.3        | 完全      | 該当なし                                                  | 該当なし                                                                                               |

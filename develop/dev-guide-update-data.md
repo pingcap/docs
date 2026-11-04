@@ -35,7 +35,7 @@ SQLでは、 `UPDATE`文は一般的に次の形式になります。
 UPDATE {table} SET {update_column} = {update_value} WHERE {filter_column} = {filter_value}
 ```
 
-|       パラメータ名      |        説明       |
+|       パラメーター名      |        説明       |
 | :---------------: | :-------------: |
 |     `{table}`     |      テーブル名      |
 | `{update_column}` |     更新するカラム名    |
@@ -95,7 +95,7 @@ INSERT INTO {table} ({columns}) VALUES ({values})
     ON DUPLICATE KEY UPDATE {update_column} = {update_value};
 ```
 
-|       パラメータ名      |     説明    |
+|       パラメーター名      |     説明    |
 | :---------------: | :-------: |
 |     `{table}`     |   テーブル名   |
 |    `{columns}`    |  挿入するカラム名 |

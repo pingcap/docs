@@ -64,7 +64,7 @@ TiDB は、ユーザーベースとロールベースの両方のアクセス制
 
 ## データベーススキーマの変更 {#database-schema-changes}
 
-ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバやORMではなく、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。
+ベストプラクティスとして、データベーススキーマの変更を実行する際には、ドライバーやORMではなく、 [MySQLクライアント](https://dev.mysql.com/doc/refman/8.0/en/mysql.html)またはGUIクライアントを使用することをお勧めします。
 
 ## オブジェクトの制限 {#object-limitations}
 

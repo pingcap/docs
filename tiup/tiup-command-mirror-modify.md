@@ -13,7 +13,7 @@ summary: tiup mirror modifyコマンドは、公開済みコンポーネント�
 tiup mirror modify <component>[:version] [flags]
 ```
 
-各パラメータの説明は次のとおりです。
+各パラメーターの説明は次のとおりです。
 
 - `<component>` :コンポーネント名
 - `[version]` : 変更するコンポーネントのバージョン。指定されていない場合は、コンポーネント全体が変更されます。

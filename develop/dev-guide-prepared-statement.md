@@ -6,10 +6,10 @@ aliases: ['/ja/tidb/stable/dev-guide-prepared-statement/','/ja/tidbcloud/dev-gui
 
 # プリペアドステートメント {#prepared-statements}
 
-[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)は、パラメータのみが異なる複数のSQL文をテンプレート化します。SQL文とパラメータを分離します。これにより、SQL文の以下の側面を改善できます。
+[プリペアドステートメント](/sql-statements/sql-statement-prepare.md)は、パラメーターのみが異なる複数のSQL文をテンプレート化します。SQL文とパラメーターを分離します。これにより、SQL文の以下の側面を改善できます。
 
-- **セキュリティ**: パラメータとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避します。
-- **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメータのみが渡され、SQL文全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
+- **セキュリティ**: パラメーターとステートメントが分離されているため、 [SQLインジェクション](https://en.wikipedia.org/wiki/SQL_injection)攻撃のリスクを回避します。
+- **パフォーマンス**: ステートメントは TiDBサーバー上で事前に解析されるため、後続の実行ではパラメーターのみが渡され、SQL文全体の解析、SQL ステートメント文字列の結合、およびネットワーク転送のコストが節約されます。
 
 ほとんどのアプリケーションでは、SQL文を列挙できます。限られた数のSQL文で、アプリケーション全体のデータクエリを完了できます。そのため、プリペアドステートメントを使用するのがベストプラクティスです。
 
@@ -23,23 +23,23 @@ aliases: ['/ja/tidb/stable/dev-guide-prepared-statement/','/ja/tidbcloud/dev-gui
 PREPARE {prepared_statement_name} FROM '{prepared_statement_sql}';
 ```
 
-|            パラメータ名           |                説明               |
+|            パラメーター名           |                説明               |
 | :-------------------------: | :-----------------------------: |
 | `{prepared_statement_name}` |         プリペアドステートメントの名前         |
-|  `{prepared_statement_sql}` | プレースホルダとして疑問符が付いたプリペアドステートメントSQL |
+|  `{prepared_statement_sql}` | プレースホルダーとして疑問符が付いたプリペアドステートメントSQL |
 
 詳細については[PREPARE文](/sql-statements/sql-statement-prepare.md)を参照してください。
 
 ### プリペアドステートメントを使用する {#use-the-prepared-statement}
 
-プリペアドステートメントは、パラメータとして**ユーザー変数**のみを使用できるため、 [`EXECUTE`文](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`文](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
+プリペアドステートメントは、パラメーターとして**ユーザー変数**のみを使用できるため、 [`EXECUTE`文](/sql-statements/sql-statement-execute.md)がプリペアドステートメントを呼び出す前に、 [`SET`文](/sql-statements/sql-statement-set-variable.md)を使用して変数を設定します。
 
 ```sql
 SET @{parameter_name} = {parameter_value};
 EXECUTE {prepared_statement_name} USING @{parameter_name};
 ```
 
-|            パラメータ名           |                                       説明                                       |
+|            パラメーター名           |                                       説明                                       |
 | :-------------------------: | :----------------------------------------------------------------------------: |
 |      `{parameter_name}`     |                                     ユーザー変数名                                    |
 |     `{parameter_value}`     |                                     ユーザー変数値                                    |
@@ -53,7 +53,7 @@ EXECUTE {prepared_statement_name} USING @{parameter_name};
 DEALLOCATE PREPARE {prepared_statement_name};
 ```
 
-|            パラメータ名           |                                       説明                                       |
+|            パラメーター名           |                                       説明                                       |
 | :-------------------------: | :----------------------------------------------------------------------------: |
 | `{prepared_statement_name}` | 前処理文の名前[プリペアドステートメントを作成する](#create-a-prepared-statement)で定義された名前と同じである必要があります。 |
 
@@ -201,7 +201,7 @@ try (Connection connection = ds.getConnection()) {
 
 次の構成は、JDBC で TiDB サーバー側のプリペアドステートメントを使用するのに役立ちます。
 
-|          パラメータ          |                 意味                 |            推奨シナリオ           |          推奨設定         |
+|          パラメーター          |                 意味                 |            推奨シナリオ           |          推奨設定         |
 | :---------------------: | :--------------------------------: | :-------------------------: | :---------------------------: |
 |   `useServerPrepStmts`  |   サーバー側を使用してプリペアドステートメントを有効にするかどうか  | プリペアドステートメントを複数回使用する必要がある場合 |             `true`            |
 |     `cachePrepStmts`    |   クライアントがプリペアドステートメントをキャッシュするかどうか  |  `useServerPrepStmts=true`  |             `true`            |
@@ -214,7 +214,7 @@ try (Connection connection = ds.getConnection()) {
 jdbc:mysql://127.0.0.1:4000/test?user=root&useConfigs=maxPerformance&useServerPrepStmts=true&prepStmtCacheSqlLimit=2048&prepStmtCacheSize=256&rewriteBatchedStatements=true&allowMultiQueries=true
 ```
 
-データを挿入するときに他の JDBC パラメータを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章も参照してください。
+データを挿入するときに他の JDBC パラメーターを変更する必要がある場合は、第[行を挿入する](/develop/dev-guide-insert-data.md#insert-rows)章も参照してください。
 
 Javaの完全な例については、以下を参照してください。
 

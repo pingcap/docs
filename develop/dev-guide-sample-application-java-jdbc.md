@@ -26,12 +26,12 @@ TiDBはMySQL互換データベースであり、JDBC（Java Database Connectivit
 - **Java Development Kit (JDK) 17**以降が必要です。業務要件や個人のニーズに応じて、 [OpenJDK](https://openjdk.org/)または[Oracle JDK](https://www.oracle.com/hk/java/technologies/downloads/)を選択できます。
 - [Maven](https://maven.apache.org/install.html)**3.8**以上。
 - [Git](https://git-scm.com/downloads) 。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -94,7 +94,7 @@ cd tidb-java-jdbc-quickstart
     export USE_SSL='true'
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
     TiDB Cloud Starter は安全な接続を必要とします。そのため、 `USE_SSL`の値を`true`に設定する必要があります。
 
@@ -140,7 +140,7 @@ cd tidb-java-jdbc-quickstart
     export USE_SSL='false'
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
 9. `env.sh`ファイルを保存します。
 
@@ -148,7 +148,7 @@ cd tidb-java-jdbc-quickstart
 
 <div label="TiDB Cloud Dedicated">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -156,7 +156,7 @@ cd tidb-java-jdbc-quickstart
 
     IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4. `env.sh.example`をコピーして`env.sh`に名前を変更するには、次のコマンドを実行します。
 
@@ -175,7 +175,7 @@ cd tidb-java-jdbc-quickstart
     export USE_SSL='false'
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
 6. `env.sh`ファイルを保存します。
 
@@ -199,7 +199,7 @@ cd tidb-java-jdbc-quickstart
     export USE_SSL='false'
     ```
 
-    プレースホルダー`{}`を接続パラメータに置き換え、 `USE_SSL`を`false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
+    プレースホルダー`{}`を接続パラメーターに置き換え、 `USE_SSL`を`false`に設定してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空です。
 
 3. `env.sh`ファイルを保存します。
 
@@ -319,7 +319,7 @@ public void deletePlayer(String id) throws SQLException {
 
 ### ドライバーまたはORMフレームワークを使用していますか？ {#using-driver-or-orm-framework}
 
-Javaドライバはデータベースへの低レベルアクセスを提供しますが、開発者には以下のことが必要となります。
+Javaドライバーはデータベースへの低レベルアクセスを提供しますが、開発者には以下のことが必要となります。
 
 - データベース接続を手動で確立および解放します。
 - データベースのトランザクションを手動で管理します。

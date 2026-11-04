@@ -6,7 +6,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-pymysql/','/ja/ti
 
 # PyMySQLを使用してTiDBに接続する {#connect-to-tidb-with-pymysql}
 
-TiDBはMySQL互換のデータベースであり、 [PyMySQL](https://github.com/PyMySQL/PyMySQL)はPython向けの人気の高いオープンソースドライバです。
+TiDBはMySQL互換のデータベースであり、 [PyMySQL](https://github.com/PyMySQL/PyMySQL)はPython向けの人気の高いオープンソースドライバーです。
 
 このチュートリアルでは、TiDBとPyMySQLを使用して以下のタスクを実行する方法を学ぶことができます。
 
@@ -24,12 +24,12 @@ TiDBはMySQL互換のデータベースであり、 [PyMySQL](https://github.com
 
 - [Python 3.8以降](https://www.python.org/downloads/)。
 - [Git](https://git-scm.com/downloads) 。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -100,7 +100,7 @@ pip install -r requirements.txt
     CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
 7. `.env`ファイルを保存します。
 
@@ -142,14 +142,14 @@ pip install -r requirements.txt
     TIDB_DB_NAME='test'
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
 9. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -157,7 +157,7 @@ pip install -r requirements.txt
 
     IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
@@ -176,7 +176,7 @@ pip install -r requirements.txt
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`を前の手順でダウンロードした証明書のパスに設定してください。
+    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメーターに置き換え、 `CA_PATH`を前の手順でダウンロードした証明書のパスに設定してください。
 
 6. `.env`ファイルを保存します。
 
@@ -199,7 +199,7 @@ pip install -r requirements.txt
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`を接続パラメータに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空欄です。
+    プレースホルダー`{}`を接続パラメーターに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空欄です。
 
 3. `.env`ファイルを保存します。
 
@@ -302,7 +302,7 @@ with get_connection(autocommit=True) as conn:
 
 ### ドライバーまたはORMフレームワークを使用していますか？ {#using-driver-or-orm-framework}
 
-Pythonドライバはデータベースへの低レベルアクセスを提供しますが、開発者には以下のことが必要となります。
+Pythonドライバーはデータベースへの低レベルアクセスを提供しますが、開発者には以下のことが必要となります。
 
 - データベース接続を手動で確立および解放します。
 - データベースのトランザクションを手動で管理します。

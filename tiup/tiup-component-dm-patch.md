@@ -19,7 +19,7 @@ summary: DM クラスターにホットフィックスパッチを適用する�
 tiup dm patch <cluster-name> <package-path> [flags]
 ```
 
-- `<cluster-name>` : 操作対象となるクラスタの名前
+- `<cluster-name>` : 操作対象となるクラスターの名前
 - `<package-path>` : 置換に使用するバイナリパッケージへのパス
 
 ### 準備 {#preparation}
@@ -39,7 +39,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### --overwrite {#overwrite}
 
-- 特定のコンポーネント（dm-workerなど）にパッチを適用した後、tiup-dmがそのコンポーネントをスケールアウトすると、tiup-dmはデフォルトで元のコンポーネントバージョンを使用します。将来クラスタがスケールアウトした際にパッチを適用したバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
+- 特定のコンポーネント（dm-workerなど）にパッチを適用した後、tiup-dmがそのコンポーネントをスケールアウトすると、tiup-dmはデフォルトで元のコンポーネントバージョンを使用します。将来クラスターがスケールアウトした際にパッチを適用したバージョンを使用するには、コマンドでオプション`--overwrite`を指定する必要があります。
 - データ型: `BOOLEAN`
 - このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
@@ -65,7 +65,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 ### --offline {#offline}
 
-- 現在のクラスタがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMはサービスを再起動せずに、クラスタコンポーネントのバイナリファイルのみを置き換えます。
+- 現在のクラスターがオフラインであることを宣言します。このオプションを指定すると、 TiUP DMはサービスを再起動せずに、クラスターコンポーネントのバイナリファイルのみを置き換えます。
 
 ### -h, --help {#h-help}
 
@@ -79,7 +79,7 @@ tiup dm patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> ホットフィックスは緊急時の修正にのみ使用されます。日常的なメンテナンスは複雑です。正式版がリリースされたら、できるだけ早くDMクラスタを正式版にアップグレードすることをお勧めします。
+> ホットフィックスは緊急時の修正にのみ使用されます。日常的なメンテナンスは複雑です。正式版がリリースされたら、できるだけ早くDMクラスターを正式版にアップグレードすることをお勧めします。
 
 ### 準備 {#preparations}
 
@@ -100,7 +100,7 @@ UTC Build Time: 2021-11-29 08:29:49
 Go Version: go version go1.16.4 linux/amd64
 ```
 
-### パッチパッケージを準備し、DMクラスタに適用する {#prepare-the-patch-package-and-apply-it-to-the-dm-cluster}
+### パッチパッケージを準備し、DMクラスターに適用する {#prepare-the-patch-package-and-apply-it-to-the-dm-cluster}
 
 1. 現在のバージョンに一致する DM ソフトウェアパッケージを準備します。
 

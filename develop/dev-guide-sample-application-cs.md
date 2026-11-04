@@ -31,7 +31,7 @@ Restore succeeded.
 
 ## ステップ2. MySql.Dataパッケージを追加する {#step-2-add-the-mysql-data-package}
 
-.NET のパッケージマネージャは NuGet と呼ばれます。MySQL Connector/NET の NuGet パッケージ名は[MySql.Data](https://www.nuget.org/packages/MySql.Data)で、.NET アプリケーションで MySQL プロトコルをサポートします。バージョンを指定しない場合、NuGet は最新の安定版 (例えば、バージョン 9.3.0) をインストールします。
+.NET のパッケージマネージャーは NuGet と呼ばれます。MySQL Connector/NET の NuGet パッケージ名は[MySql.Data](https://www.nuget.org/packages/MySql.Data)で、.NET アプリケーションで MySQL プロトコルをサポートします。バージョンを指定しない場合、NuGet は最新の安定版 (例えば、バージョン 9.3.0) をインストールします。
 
 ```
 $ cd tidb_cs
@@ -98,7 +98,7 @@ public class Tutorial1
 }
 ```
 
-これは、指定されたIPアドレスとポート番号のTiDBインスタンスに接続します。TiDB Cloudを使用する場合は、接続文字列パラメータ（ホスト名、ポート番号、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)で提供されている詳細情報に置き換えてください。
+これは、指定されたIPアドレスとポート番号のTiDBインスタンスに接続します。TiDB Cloudを使用する場合は、接続文字列パラメーター（ホスト名、ポート番号、ユーザー名、パスワードなど）を[TiDB Cloudコンソール](https://tidbcloud.com/)で提供されている詳細情報に置き換えてください。
 
 このコードはデータベースに接続し、そのバージョンを出力後、 [`TIDB_VERSION()`](/functions-and-operators/tidb-functions.md#tidb_version)を使用して SQL クエリを実行し、より詳細なバージョン情報を取得し、最後にその結果を出力。
 

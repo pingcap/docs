@@ -24,12 +24,12 @@ TiDBはMySQL互換のデータベースであり、[peewee](https://docs.peewee-
 
 - [Python 3.8以降](https://www.python.org/downloads/)。
 - [Git](https://git-scm.com/downloads) 。
-- TiDBクラスタ。
+- TiDBクラスター。
 
-**TiDBクラスタをお持ちでない場合は、以下の手順で作成できます。**
+**TiDBクラスターをお持ちでない場合は、以下の手順で作成できます。**
 
 - (推奨) [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)。
-- [ローカルテスト用のTiDB Self-Managedクラスタをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスタをデプロイ](/production-deployment-using-tiup.md)
+- [ローカルテスト用のTiDB Self-Managedクラスターをデプロイ](/quick-start-with-tidb.md#deploy-a-local-test-cluster)または[本番のTiDB Self-Managedクラスターをデプロイ](/production-deployment-using-tiup.md)
 
 ## サンプルアプリを実行してTiDBに接続する {#run-the-sample-app-to-connect-to-tidb}
 
@@ -54,7 +54,7 @@ pip install -r requirements.txt
 
 #### PyMySQLを使う理由とは？ {#why-use-pymysql}
 
-peeweeは、複数のデータベースを扱うORMライブラリです。データベースの高レベルな抽象化を提供することで、開発者がよりオブジェクト指向的な方法でSQL文を記述できるように支援します。ただし、peeweeにはデータベースドライバは含まれていません。データベースに接続するには、データベースドライバをインストールする必要があります。このサンプルアプリケーションでは、データベースドライバとしてPyMySQLを使用しています。PyMySQLは、TiDBと互換性があり、すべてのプラットフォームにインストール可能な、純粋なPython製のMySQLクライアントライブラリです。詳細については、 [Peewee公式ドキュメント](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql)を参照してください。
+peeweeは、複数のデータベースを扱うORMライブラリです。データベースの高レベルな抽象化を提供することで、開発者がよりオブジェクト指向的な方法でSQL文を記述できるように支援します。ただし、peeweeにはデータベースドライバーは含まれていません。データベースに接続するには、データベースドライバーをインストールする必要があります。このサンプルアプリケーションでは、データベースドライバーとしてPyMySQLを使用しています。PyMySQLは、TiDBと互換性があり、すべてのプラットフォームにインストール可能な、純粋なPython製のMySQLクライアントライブラリです。詳細については、 [Peewee公式ドキュメント](https://docs.peewee-orm.com/en/latest/peewee/database.html?highlight=mysql#using-mysql)を参照してください。
 
 ### ステップ3：接続情報の設定 {#step-3-configure-connection-information}
 
@@ -104,7 +104,7 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
     CA_PATH='{ssl_ca}'  # e.g. /etc/ssl/certs/ca-certificates.crt (Debian / Ubuntu / Arch)
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
 7. `.env`ファイルを保存します。
 
@@ -146,14 +146,14 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
     TIDB_DB_NAME='test'
     ```
 
-    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメータに置き換えてください。
+    必ずプレースホルダー`{}`を、接続ダイアログから取得した接続パラメーターに置き換えてください。
 
 9. `.env`ファイルを保存します。
 
 </div>
 <div label="TiDB Cloud Dedicated">
 
-1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスタの名前をクリックして概要ページに移動します。
+1. [**My TiDB**](https://tidbcloud.com/tidbs)ページに移動し、対象のTiDB Cloud Dedicatedクラスターの名前をクリックして概要ページに移動します。
 
 2. 右上隅の**Connect**をクリックしてください。接続ダイアログが表示されます。
 
@@ -161,7 +161,7 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
 
     IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
-    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
+    TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスターに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
 4. `.env.example`をコピーして`.env`に名前を変更するには、次のコマンドを実行します。
 
@@ -180,7 +180,7 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
     CA_PATH='{your-downloaded-ca-path}'
     ```
 
-    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメータに置き換え、 `CA_PATH`を前の手順でダウンロードした証明書のパスに設定してください。
+    必ず、プレースホルダー`{}`を接続ダイアログから取得した接続パラメーターに置き換え、 `CA_PATH`を前の手順でダウンロードした証明書のパスに設定してください。
 
 6. `.env`ファイルを保存します。
 
@@ -203,7 +203,7 @@ peeweeは、複数のデータベースを扱うORMライブラリです。デ�
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`を接続パラメータに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空欄です。
+    プレースホルダー`{}`を接続パラメーターに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空欄です。
 
 3. `.env`ファイルを保存します。
 
