@@ -31,7 +31,7 @@ tiup cluster display <cluster-name> [flags]
 
 > **Note:**
 >
-> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみがチェックされます。
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみがチェックされます。
 
 ### -R, --role {#r-role}
 
@@ -41,7 +41,7 @@ tiup cluster display <cluster-name> [flags]
 
 > **Note:**
 >
-> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが表示されます。
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが表示されます。
 
 ### --process {#process}
 
@@ -77,7 +77,7 @@ tiup cluster display <cluster-name> [flags]
 - ダッシュボードアドレス
 - 次のフィールドを持つテーブル:
     - ID: `IP:PORT`で構成されるノード ID
-    - Role: このノードにデプロイされたサービス ロール (TiDB、TiKV など)
+    - Role: このノードにデプロイされたサービスロール (TiDB、TiKV など)
     - Host: ノードに対応するマシンのIP
     - Ports: サービスが占有するポート番号
     - OS/Arch: このノードのオペレーティングシステムとマシンアーキテクチャ
@@ -87,13 +87,13 @@ tiup cluster display <cluster-name> [flags]
 
 ### ノードサービスステータス {#node-service-status}
 
-ノード サービスは次のいずれかのステータスで実行できます。
+ノードサービスは次のいずれかのステータスで実行できます。
 
-- Up: ノード サービスは正常に実行されています。
-- Down or Unreachable: ノード サービスが実行されていないか、対応するホストにネットワークの問題が発生しています。
+- Up: ノードサービスは正常に実行されています。
+- Down or Unreachable: ノードサービスが実行されていないか、対応するホストにネットワークの問題が発生しています。
 - Tombstone: ノードサービス上のデータが完全に移行され、スケールインが完了しました。このステータスは TiKV またはTiFlashでのみ存在します。
 - Pending Offline: ノードサービス上のデータが移行中で、スケールインが進行中です。このステータスは TiKV またはTiFlashでのみ表示されます。
-- Unknown: ノード サービスの実行ステータスは不明です。
+- Unknown: ノードサービスの実行ステータスは不明です。
 
 > **Note:**
 >
@@ -101,4 +101,4 @@ tiup cluster display <cluster-name> [flags]
 
 ノードのサービスステータスはPDのスケジューリング情報から取得されます。詳細については[情報収集](/tidb-scheduling.md#information-collection)を参照してください。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

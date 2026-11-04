@@ -12,7 +12,7 @@ aliases: ['/ja/docs/dev/best-practices/java-app-best-practices/','/ja/docs/dev/r
 
 JavaアプリケーションでTiDBデータベースと連携する一般的なコンポーネントには、以下のようなものがあります。
 
-- ネットワーク プロトコル: クライアントは、標準の[MySQLプロトコル](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)を介して TiDBサーバーと対話します。
+- ネットワークプロトコル: クライアントは、標準の[MySQLプロトコル](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)を介して TiDBサーバーと対話します。
 - JDBC APIとJDBCドライバ： Javaアプリケーションは通常、標準の[JDBC（Javaデータベース接続）](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) APIを使用してデータベースにアクセスします。TiDBに接続するには、JDBC APIを介してMySQLプロトコルを実装するJDBCドライバを使用できます。MySQL用の一般的なJDBCドライバには[MySQL Connector/J](https://github.com/mysql/mysql-connector-j)や[MariaDB Connector/J](https://mariadb.com/docs/connectors/mariadb-connector-j/about-mariadb-connector-j#about-mariadb-connectorj)などがあります。
 - データベース接続プール：アプリケーションは通常、接続リクエストのたびに接続を作成するオーバーヘッドを削減するために、接続プールを使用して接続をキャッシュし、再利用します。JDBC [DataSource](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html)は接続プールAPIを定義しています。必要に応じて、さまざまなオープンソースの接続プール実装から選択できます。
 - データアクセスフレームワーク: アプリケーションは通常、 [MyBatis](https://mybatis.org/mybatis-3/index.html)や[Hibernate](https://hibernate.org/)などのデータアクセスフレームワークを使用して、データベースアクセス操作をさらに簡素化および管理します。
@@ -68,7 +68,7 @@ JDBCでは通常、以下の2つの処理方法が使用されます。
 
     クライアントがストリーミング読み取り方式を使用する場合、クエリを実行するためにステートメントの使用を続行する前に、読み取りを完了するか`resultset`を閉じる必要があります。そうしないと、エラー`No statements may be issued when any streaming result sets are open and in use on a given connection. Ensure that you have called .close() on any active streaming result sets before attempting more queries.`が返されます。
 
-    クライアントが読み取りを完了するか`resultset`を閉じる前にクエリでこのようなエラーが発生するのを回避するには、URL に`clobberStreamingResults=true`パラメータを追加します。そうすると、 `resultset`は自動的に閉じられますが、前のストリーミング クエリで読み取られる結果セットは失われます。
+    クライアントが読み取りを完了するか`resultset`を閉じる前にクエリでこのようなエラーが発生するのを回避するには、URL に`clobberStreamingResults=true`パラメータを追加します。そうすると、 `resultset`は自動的に閉じられますが、前のストリーミングクエリで読み取られる結果セットは失われます。
 
 - 2番目の方法：まず[`FetchSize`を正の整数に設定](https://makejavafaster.blogspot.com/2015/06/jdbc-fetch-size-performance.html)し、次にJDBC URLで`useCursorFetch = true`を設定することで、カーソルフェッチを使用します。
 
@@ -92,7 +92,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
-- TiDB モニタリング ダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエスト コマンド タイプを確認します。
+- TiDB モニタリングダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエストコマンドタイプを確認します。
 - リクエスト内で`COM_QUERY`が`COM_STMT_EXECUTE`または`COM_STMT_PREPARE`に置き換えられた場合、この設定は既に有効になっていることを意味します。
 
 ##### `cachePrepStmts` {#cacheprepstmts}
@@ -101,7 +101,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
-- TiDB モニタリング ダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエスト コマンド タイプを確認します。
+- TiDB モニタリングダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエストコマンドタイプを確認します。
 - リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定は既に有効になっていることを意味します。
 
 さらに、 `useConfigs=maxPerformance`を設定すると、 `cachePrepStmts=true`を含む複数のパラメーターが同時に設定されます。
@@ -114,7 +114,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 次のような場合は、この設定が小さすぎるかどうかを確認する必要があります。
 
-- TiDB モニタリング ダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエスト コマンド タイプを確認します。
+- TiDB モニタリングダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエストコマンドタイプを確認します。
 - そして、 `cachePrepStmts=true`が設定されているが、 `COM_STMT_PREPARE`は依然として`COM_STMT_EXECUTE`とほぼ等しく、 `COM_STMT_CLOSE`が存在することがわかった。
 
 ##### `prepStmtCacheSize` {#prepstmtcachesize}
@@ -123,7 +123,7 @@ JDBC は通常、実装関連の設定を JDBC URL パラメーターの形式�
 
 この設定が既に有効になっていることを確認するには、次の操作を実行してください。
 
-- TiDB モニタリング ダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエスト コマンド タイプを確認します。
+- TiDB モニタリングダッシュボードに移動し、 **Query Summary** > **CPS By Instance**からリクエストコマンドタイプを確認します。
 - リクエスト内の`COM_STMT_EXECUTE`の数が`COM_STMT_PREPARE`の数よりはるかに多い場合、この設定は既に有効になっていることを意味します。
 
 #### `readOnlyPropagatesToServer` {#readonlypropagatestoserver}
@@ -220,7 +220,7 @@ jdbc:mysql://<IP_ADDRESS>:<PORT_NUMBER>/<DATABASE_NAME>?characterEncoding=UTF-8&
 
 > **Note:**
 >
-> パブリック ネットワーク経由で接続している場合は、 `useSSL=true`と[TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)を設定する必要があります。
+> パブリックネットワーク経由で接続している場合は、 `useSSL=true`と[TiDBクライアントとサーバー間でTLSを有効にする](/enable-tls-between-clients-and-servers.md)を設定する必要があります。
 
 ## 接続プール {#connection-pool}
 
@@ -328,7 +328,7 @@ MyBatis Mapperは2つのパラメータをサポートしています。
 [前のセクション](#use-streamingresult-to-get-the-execution-result)では、JDBC で読み取り実行結果をストリーミングする方法を紹介します。 MyBatis で超大規模な結果セットを読み込む場合は、JDBC の対応する設定に加えて、次の点にも注意する必要があります。
 
 - マッパー構成で単一の SQL文に対して`fetchSize`を設定できます (前のコードブロックを参照)。その効果は、JDBC で`setFetchSize`を呼び出すのと同等です。
-- `ResultHandler`を使用したクエリ インターフェースを使用すると、結果セット全体を一度に取得することを避けることができます。
+- `ResultHandler`を使用したクエリインターフェースを使用すると、結果セット全体を一度に取得することを避けることができます。
 - ストリーム読み取りには`Cursor`クラスを使用できます。
 
 XML を使用してマッピングを設定する場合、マッピングの`<select>`セクションで`fetchSize="-2147483648"`（`Integer.MIN_VALUE`）を設定することで、読み取り結果をストリーミングできます。

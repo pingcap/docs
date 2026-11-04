@@ -7,7 +7,7 @@ summary: MySQL ツールを使用して TiDB に接続する方法を学習し�
 
 TiDBはMySQLプロトコルと高い互換性があります。クライアントリンクパラメータの完全なリストについては、 [MySQL Client Options](https://dev.mysql.com/doc/refman/8.0/en/mysql-command-options.html)を参照してください。
 
-TiDB は[MySQL Client/Server Protocol](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)をサポートしており、これにより、ほとんどのクライアント ドライバーと ORM フレームワークは、MySQL に接続するのと同じように TiDB に接続できます。
+TiDB は[MySQL Client/Server Protocol](https://dev.mysql.com/doc/dev/mysql-server/latest/PAGE_PROTOCOL.html)をサポートしており、これにより、ほとんどのクライアントドライバーと ORM フレームワークは、MySQL に接続するのと同じように TiDB に接続できます。
 
 個人の好みに応じて、MySQL クライアントまたは MySQL シェルの使用を選択できます。
 
@@ -41,7 +41,7 @@ brew link mysql-client@8.0
 /opt/homebrew/opt/mysql-client@8.0/bin/mysql --comments --host ${YOUR_IP_ADDRESS} --port ${YOUR_PORT_NUMBER} -u ${your_user_name} -p
 ```
 
-上記のコマンドの`/opt/homebrew/opt/mysql-client@8.0/bin/mysql`を、実際の環境の MySQL v8.0 クライアントのインストール パスに置き換えます。
+上記のコマンドの`/opt/homebrew/opt/mysql-client@8.0/bin/mysql`を、実際の環境の MySQL v8.0 クライアントのインストールパスに置き換えます。
 
 </div>
 

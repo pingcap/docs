@@ -35,4 +35,4 @@ tiup cluster list [flags]
 - Path: 制御マシン上のクラスタデプロイデータのパス
 - PrivateKey: クラスターへの接続に使用される秘密鍵のパス
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

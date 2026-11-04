@@ -13,7 +13,7 @@ summary: tiup cluster templateコマンドは、クラスタデプロイメン�
 tiup cluster template [flags]
 ```
 
-このオプションを指定しない場合、出力のデフォルト テンプレートには次のインスタンスが含まれます。
+このオプションを指定しない場合、出力のデフォルトテンプレートには次のインスタンスが含まれます。
 
 - 3つのPDインスタンス
 - 3 つの TiKV インスタンス
@@ -32,7 +32,7 @@ tiup cluster template [flags]
 
 ### --local {#local}
 
-- ローカル クラスターの単純なトポロジテンプレートを出力します。これは直接使用でき、 `global`パラメータは必要に応じて調整できます。
+- ローカルクラスターの単純なトポロジテンプレートを出力します。これは直接使用でき、 `global`パラメータは必要に応じて調整できます。
 - このテンプレートは、PD サービス、TiDB サービス、TiKV サービス、Prometheus サービス、および Grafana サービスを作成します。
 
 ### --multi-dc {#multi-dc}
@@ -48,4 +48,4 @@ tiup cluster template [flags]
 
 指定されたオプションに従ってトポロジテンプレートを出力します。これは、デプロイメントのためにトポロジファイルにリダイレクトできます。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

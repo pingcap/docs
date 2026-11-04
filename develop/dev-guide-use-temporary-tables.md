@@ -199,7 +199,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 
 `SHOW [FULL] TABLES`文では既存のグローバル一時テーブルのリストを表示できますが、リストにローカル一時テーブルは表示されません。現時点では、TiDB には一時テーブル情報を格納するための同様の`information_schema.INNODB_TEMP_TABLE_INFO`システムテーブルはありません。
 
-たとえば、テーブル リストにはグローバル一時テーブル`top_50_eldest_authors_global`が表示されますが、テーブル`top_50_eldest_authors`は表示されません。
+たとえば、テーブルリストにはグローバル一時テーブル`top_50_eldest_authors_global`が表示されますが、テーブル`top_50_eldest_authors`は表示されません。
 
 ```
 +-------------------------------+------------+

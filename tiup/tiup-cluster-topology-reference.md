@@ -5,7 +5,7 @@ summary: TiUPは、トポロジファイルを使用してTiDBのクラスター
 
 # TiUPを使用した TiDB デプロイメントのトポロジ設定ファイル {#topology-configuration-file-for-tidb-deployment-using-tiup}
 
-TiUPを使用して TiDB をデプロイまたは拡張するには、クラスター トポロジを記述するトポロジファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
+TiUPを使用して TiDB をデプロイまたは拡張するには、クラスタートポロジを記述するトポロジファイル ( [サンプル](https://github.com/pingcap/tiup/blob/master/embed/examples/cluster/topology.example.yaml) ) を提供する必要があります。
 
 同様に、クラスタートポロジを変更するには、トポロジファイルに変更を加える必要があります。違いは、クラスターのデプロイ後は、トポロジファイル内のフィールドの一部しか変更できないことです。このドキュメントでは、トポロジファイルの各セクションと各セクション内の各フィールドについて説明します。
 
@@ -731,7 +731,7 @@ monitoring_servers:
 
 - `arch` : `host`で指定されたマシンのアーキテクチャ。このフィールドが指定されていない場合、デフォルト値は`global`の`arch`値になります。
 
-- `username` : Grafana ログイン インターフェース上のユーザー名。
+- `username` : Grafana ログインインターフェース上のユーザー名。
 
 - `password` : Grafanaに対応するパスワード。
 
@@ -745,7 +745,7 @@ monitoring_servers:
 >
 > `dashboard_dir`フィールドが`grafana_servers`に設定されている場合、クラスターの名前を変更する`tiup cluster rename`コマンドを実行した後、次の操作を実行する必要があります。
 >
-> 1. ローカル ダッシュボード ディレクトリ内の`*.json`ファイルについては、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`はクラスター名に基づいて命名されているため)。
+> 1. ローカルダッシュボードディレクトリ内の`*.json`ファイルについては、 `datasource`フィールドの値を新しいクラスター名に更新します ( `datasource`はクラスター名に基づいて命名されているため)。
 > 2. `tiup cluster reload -R grafana`コマンドを実行します。
 
 上記のフィールドについては、デプロイメント後にこれらの構成済みフィールドを変更できません。

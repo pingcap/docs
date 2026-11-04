@@ -260,7 +260,7 @@ conn.execute(`select ...`, [], {
 >
 > TiDB Cloud Serverless Driverの設定変更点：
 >
-> - v0.0.7: SQL レベル オプション`isolation`を追加します。
+> - v0.0.7: SQL レベルオプション`isolation`を追加します。
 > - v0.0.10: 接続レベル構成`decoders`と SQL レベルオプション`decoders`を追加します。
 
 ## 特徴 {#features}

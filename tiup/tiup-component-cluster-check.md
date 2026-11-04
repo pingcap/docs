@@ -137,8 +137,8 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 ```
 
 - クラスターがまだデプロイされていない場合は、クラスターのデプロイに使用する[topology.yml](/tiup/tiup-cluster-topology-reference.md)ファイルを渡す必要があります。このファイルの内容に従って、 tiup-clusterは対応するマシンに接続し、チェックを実行します。
-- クラスターがすでにデプロイされている場合は、チェック オブジェクトとして`<cluster-name>`を使用できます。
-- 既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェック オブジェクトとして`<scale-out.yml>`と`<cluster-name>`の両方を使用できます。
+- クラスターがすでにデプロイされている場合は、チェックオブジェクトとして`<cluster-name>`を使用できます。
+- 既存のクラスターのスケールアウト YAML ファイルをチェックする場合は、チェックオブジェクトとして`<scale-out.yml>`と`<cluster-name>`の両方を使用できます。
 
 > **Note:**
 >
@@ -194,7 +194,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがチェックされます。
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードのみがチェックされます。
 
 ### -R, --role {#r-role}
 
@@ -204,7 +204,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 > **Note:**
 >
-> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービス ノードのみがチェックされます。
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`の両方の指定に一致するサービスノードのみがチェックされます。
 
 ### --enable-cpu {#enable-cpu}
 
@@ -214,7 +214,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### --enable-disk {#enable-disk}
 
-- fio ディスク パフォーマンス テストを有効にします。
+- fio ディスクパフォーマンステストを有効にします。
 - データ型: `BOOLEAN`
 - このオプションはデフォルトで値`false`で無効になっています。このオプションを有効にするには、コマンドにこのオプションを追加し、値`true`を渡すか、値を渡さないかのいずれかを選択します。
 
@@ -236,7 +236,7 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 
 ### -i, --identity_file {#i-identity-file}
 
-- ターゲットマシンに接続するためのキー ファイルを指定します。
+- ターゲットマシンに接続するためのキーファイルを指定します。
 - データ型: `STRING`
 - このオプションはデフォルトで有効になっており、 `~/.ssh/id_rsa` (デフォルト値) が渡されます。
 
@@ -267,4 +267,4 @@ tiup cluster check <topology.yml | cluster-name> [flags]
 - `Result` : チェック結果（Pass、Warn、Fail）
 - `Message` : 結果の説明
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

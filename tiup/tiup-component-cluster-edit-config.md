@@ -33,4 +33,4 @@ tiup cluster edit-config <cluster-name> [flags]
 - コマンドが正常に実行された場合、出力はありません。
 - 変更できないフィールドを誤って変更した場合、ファイルを保存するとエラーが表示され、再度編集する必要があることが通知されます。変更できないフィールドについては、 [トポロジファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

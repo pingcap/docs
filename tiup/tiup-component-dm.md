@@ -19,7 +19,7 @@ tiup dm [command] [flags]
 
 ### --ssh {#ssh}
 
-- コマンド実行のためにリモート エンド (TiDB サービスがデプロイされているマシン) に接続する SSH クライアントを指定します。
+- コマンド実行のためにリモートエンド (TiDB サービスがデプロイされているマシン) に接続する SSH クライアントを指定します。
 
 - データ型: `STRING`
 
@@ -81,8 +81,8 @@ tiup dm [command] [flags]
 - [destroy](/tiup/tiup-component-dm-destroy.md) : 指定されたクラスターを破棄します。
 - [audit](/tiup/tiup-component-dm-audit.md) : 指定されたクラスターの操作監査ログを照会します。
 - [replay](/tiup/tiup-component-dm-replay.md) : 指定されたコマンドを再生する
-- [enable](/tiup/tiup-component-dm-enable.md) : マシンの再起動後にクラスター サービスを自動的に有効化します。
-- [disable](/tiup/tiup-component-dm-disable.md) : マシンの再起動後にクラスター サービスの自動有効化を無効にします。
+- [enable](/tiup/tiup-component-dm-enable.md) : マシンの再起動後にクラスターサービスを自動的に有効化します。
+- [disable](/tiup/tiup-component-dm-disable.md) : マシンの再起動後にクラスターサービスの自動有効化を無効にします。
 - [help](/tiup/tiup-component-dm-help.md) : ヘルプ情報を出力します。
 
 [&lt;&lt; 前のページに戻る - TiUP参照コンポーネントリスト](/tiup/tiup-reference.md#component-list)

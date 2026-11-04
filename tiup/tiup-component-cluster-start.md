@@ -34,7 +34,7 @@ tiup cluster start <cluster-name> [flags]
 
 > **Note:**
 >
-> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが起動されます。
+> `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが起動されます。
 
 ### -R, --role {#r-role}
 
@@ -44,7 +44,7 @@ tiup cluster start <cluster-name> [flags]
 
 > **Note:**
 >
-> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが起動されます。
+> `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが起動されます。
 
 ### -h, --help {#h-help}
 
@@ -56,4 +56,4 @@ tiup cluster start <cluster-name> [flags]
 
 サービスを開始したログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

@@ -51,7 +51,7 @@ summary: TiUP no-sudo モードを使用してオンライン TiDB クラスタ�
         source ~/.bashrc.d/systemd
         ```
 
-    2. `root`ユーザーを使用してユーザー サービスを開始します。
+    2. `root`ユーザーを使用してユーザーサービスを開始します。
 
         ```shell
         $ uid=$(id -u tidb) # Get the ID of the tidb user

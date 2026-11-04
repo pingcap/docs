@@ -56,7 +56,7 @@ pip install -r requirements.txt
 
 SQLAlchemyは、複数のデータベースを扱うORMライブラリです。データベースの高レベルな抽象化を提供することで、開発者がよりオブジェクト指向的な方法でSQL文を記述できるように支援します。ただし、SQLAlchemyにはデータベースドライバは含まれていません。データベースに接続するには、データベースドライバをインストールする必要があります。このサンプルアプリケーションでは、データベースドライバとしてPyMySQLを使用しています。PyMySQLは、TiDBと互換性があり、すべてのプラットフォームにインストール可能な、純粋なPython製のMySQLクライアントライブラリです。
 
-[mysqlclient](https://github.com/PyMySQL/mysqlclient)や[mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/)などの他のデータベース ドライバーを使用することもできます。ただし、これらは純粋な Python ライブラリではなく、コンパイルには対応する C/C++ コンパイラと MySQL クライアントが必要です。詳細については、 [SQLAlchemyの公式ドキュメント](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql)を参照してください。
+[mysqlclient](https://github.com/PyMySQL/mysqlclient)や[mysql-connector-python](https://dev.mysql.com/doc/connector-python/en/)などの他のデータベースドライバーを使用することもできます。ただし、これらは純粋な Python ライブラリではなく、コンパイルには対応する C/C++ コンパイラと MySQL クライアントが必要です。詳細については、 [SQLAlchemyの公式ドキュメント](https://docs.sqlalchemy.org/en/20/core/engines.html#mysql)を参照してください。
 
 ### ステップ3：接続情報の設定 {#step-3-configure-connection-information}
 
@@ -165,7 +165,7 @@ SQLAlchemyは、複数のデータベースを扱うORMライブラリです。�
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
@@ -209,7 +209,7 @@ SQLAlchemyは、複数のデータベースを扱うORMライブラリです。�
     TIDB_DB_NAME='test'
     ```
 
-    プレースホルダー`{}`を接続パラメータに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホスト アドレスは`127.0.0.1`で、パスワードは空欄です。
+    プレースホルダー`{}`を接続パラメータに置き換え、 `CA_PATH`の行を削除してください。TiDB をローカルで実行している場合、デフォルトのホストアドレスは`127.0.0.1`で、パスワードは空欄です。
 
 3. `.env`ファイルを保存します。
 

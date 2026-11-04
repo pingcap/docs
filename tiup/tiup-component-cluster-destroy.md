@@ -49,4 +49,4 @@ tiup cluster destroy <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

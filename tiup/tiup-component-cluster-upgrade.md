@@ -102,7 +102,7 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 - Alertmanagerのバージョンを指定します。このオプションを設定すると、Alertmanagerのバージョンはクラスターのバージョンと一致しなくなります。
 - データ型: `STRINGS`
-- このオプションが設定されていない場合、アラート マネージャーのバージョンはクラスターのバージョンと一致したままになります。
+- このオプションが設定されていない場合、アラートマネージャーのバージョンはクラスターのバージョンと一致したままになります。
 
 ### --blackbox-exporter-version {#--blackbox-exporter-version}
 
@@ -153,4 +153,4 @@ tiup cluster upgrade <cluster-name> <version> [flags]
 
 アップグレードの進行状況のログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

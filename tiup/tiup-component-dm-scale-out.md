@@ -27,7 +27,7 @@ tiup dm scale-out <cluster-name> <topology.yaml> [flags]
 
 ### -i, --identity_file {#i-identity-file}
 
-- ターゲットマシンに接続するために使用するキー ファイルを指定します。
+- ターゲットマシンに接続するために使用するキーファイルを指定します。
 - データ型: `STRING`
 - コマンドでこのオプションを指定しない場合は、デフォルトで`~/.ssh/id_rsa`ファイルを使用してターゲットマシンに接続します。
 

@@ -19,7 +19,7 @@ tiup cluster [command] [flags]
 
 ### --ssh {#--ssh}
 
-- コマンド実行のためにリモート エンド (TiDB サービスがデプロイされているマシン) に接続する SSH クライアントを指定します。
+- コマンド実行のためにリモートエンド (TiDB サービスがデプロイされているマシン) に接続する SSH クライアントを指定します。
 
 - データ型: `STRING`
 
@@ -83,8 +83,8 @@ tiup cluster [command] [flags]
 - [destroy](/tiup/tiup-component-cluster-destroy.md) : 指定されたクラスターを破棄する
 - [audit](/tiup/tiup-component-cluster-audit.md) : 指定されたクラスタの操作監査ログを照会します
 - [replay](/tiup/tiup-component-cluster-replay.md) : 指定されたコマンドを再試行します
-- [enable](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスタ サービスの自動有効化を有効にします
-- [disable](/tiup/tiup-component-cluster-disable.md) : マシンの再起動後にクラスタ サービスの自動有効化を無効にします
+- [enable](/tiup/tiup-component-cluster-enable.md) : マシンの再起動後にクラスタサービスの自動有効化を有効にします
+- [disable](/tiup/tiup-component-cluster-disable.md) : マシンの再起動後にクラスタサービスの自動有効化を無効にします
 - [meta backup](/tiup/tiup-component-cluster-meta-backup.md) : 指定されたクラスタの運用と保守に必要なTiUPメタファイルをバックアップします
 - [meta restore](/tiup/tiup-component-cluster-meta-restore.md) : 指定されたクラスターのTiUPメタファイルを復元します
 - [help](/tiup/tiup-component-cluster-help.md) : ヘルプ情報を出力

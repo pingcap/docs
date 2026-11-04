@@ -14,9 +14,9 @@ Gitpodは、コードを直接記述する開発環境向けのオープンソ�
 
 ## クイックスタート {#quick-start}
 
-1. TiDB アプリケーション開発用のサンプルコード リポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)をフォークします。
+1. TiDB アプリケーション開発用のサンプルコードリポジトリ[pingcap-inc/tidb-example-java](https://github.com/pingcap-inc/tidb-example-java)をフォークします。
 
-2. ブラウザのアドレスバーでサンプルコード リポジトリの URL の前に`https://gitpod.io/#`を付けて、Gitpod ワークスペースを起動します。
+2. ブラウザのアドレスバーでサンプルコードリポジトリの URL の前に`https://gitpod.io/#`を付けて、Gitpod ワークスペースを起動します。
 
     - たとえば、 `https://gitpod.io/#https://github.com/pingcap-inc/tidb-example-java` 。
 

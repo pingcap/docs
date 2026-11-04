@@ -1,6 +1,6 @@
 ---
 title: SQL Performance Tuning
-summary: TiDB の SQL パフォーマンスチューニング スキームと分析アプローチを紹介します。
+summary: TiDB の SQL パフォーマンスチューニングスキームと分析アプローチを紹介します。
 aliases: ['/ja/tidb/stable/dev-guide-optimize-sql/','/ja/tidbcloud/dev-guide-optimize-sql/']
 ---
 

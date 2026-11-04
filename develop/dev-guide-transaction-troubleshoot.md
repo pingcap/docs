@@ -16,7 +16,7 @@ aliases: ['/ja/tidb/stable/dev-guide-transaction-troubleshoot/','/ja/tidbcloud/d
 ERROR 1213: Deadlock found when trying to get lock; try restarting transaction
 ```
 
-デッドロックは、2つ以上のトランザクションが、それぞれが保持しているロックを解放するのを待機している場合、またはロックの順序に一貫性がないため、ロック リソースを待機するループが発生している場合に発生します。
+デッドロックは、2つ以上のトランザクションが、それぞれが保持しているロックを解放するのを待機している場合、またはロックの順序に一貫性がないため、ロックリソースを待機するループが発生している場合に発生します。
 
 以下は、データベース[`bookshop`](/develop/dev-guide-bookshop-schema-design.md)のテーブル`books`を使用したデッドロックの例です。
 
@@ -118,7 +118,7 @@ while True:
 
 > **Note:**
 >
-> `Error 9007: Write conflict`が頻繁に発生する場合は、スキーマ設計とワークロードのデータアクセス パターンを確認して競合の根本原因を特定し、設計を改善して競合を回避する必要があります。
+> `Error 9007: Write conflict`が頻繁に発生する場合は、スキーマ設計とワークロードのデータアクセスパターンを確認して競合の根本原因を特定し、設計を改善して競合を回避する必要があります。
 
 トランザクションの競合のトラブルシューティングと解決方法については、 [ロック競合のトラブルシューティング](/troubleshoot-lock-conflicts.md)を参照してください。
 

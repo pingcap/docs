@@ -163,7 +163,7 @@ npm install prisma typescript ts-node @types/node --save-dev
 
 3. 接続ダイアログで、 **Connection Type**ドロップダウンリストから**Public**を選択し、 **CA cert**をクリックしてCA証明書をダウンロードします。
 
-    IP アクセス リストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセス リストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
+    IP アクセスリストを設定していない場合は、最初の接続の前に、 **Configure IP Access List**をクリックするか、[IP アクセスリストを設定する](https://docs.pingcap.com/tidbcloud/configure-ip-access-list)の手順に従って設定します。
 
     TiDB Cloud Dedicated は、**Public**接続タイプに加えて、**Private Endpoint**および**VPC Peering**接続タイプもサポートしています。詳細については、 [TiDB Cloud Dedicatedクラスタに接続します](https://docs.pingcap.com/tidbcloud/connect-to-tidb-cluster)を参照してください。
 
@@ -391,7 +391,7 @@ await prisma.player.delete({
 
 ### 外部キー制約とPrismaリレーションモードの比較 {#foreign-key-constraints-vs-prisma-relation-mode}
 
-[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector)をチェックするには、外部キー制約または Prisma リレーション モードを使用できます。
+[参照整合性](https://en.wikipedia.org/wiki/Referential_integrity?useskin=vector)をチェックするには、外部キー制約または Prisma リレーションモードを使用できます。
 
 - [外部キー](https://docs.pingcap.com/tidb/stable/foreign-key)は、TiDB v6.6.0 以降でサポートされている機能であり、v8.5.0 以降で一般的に利用可能です。外部キーを使用すると、関連データのテーブル間参照が可能になり、外部キー制約によって関連データの一貫性が確保されます。
 
@@ -399,7 +399,7 @@ await prisma.player.delete({
     >
     > **外部キーは、小規模から中規模のデータ量を扱う場合に適しています。**大規模なデータ量で外部キーを使用すると、深刻なパフォーマンス問題が発生したり、システムに予期せぬ影響を及ぼしたりする可能性があります。外部キーを使用する場合は、事前に徹底的な検証を行い、慎重に使用してください。
 
-- [Prisma Relation Mode](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)は、Prisma Client側の参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベース クエリが必要になるため、パフォーマンスに影響があることに注意してください。
+- [Prisma Relation Mode](https://www.prisma.io/docs/concepts/components/prisma-schema/relations/relation-mode)は、Prisma Client側の参照整合性のエミュレーションです。ただし、参照整合性を維持するために追加のデータベースクエリが必要になるため、パフォーマンスに影響があることに注意してください。
 
 ## 次のステップ {#next-steps}
 

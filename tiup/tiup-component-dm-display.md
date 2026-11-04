@@ -25,7 +25,7 @@ tiup dm display <cluster-name> [flags]
 
 > **Note:**
 >
-> `-R, --role`も指定されている場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが照会されます。
+> `-R, --role`も指定されている場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが照会されます。
 
 ### -R, --role {#r-role}
 
@@ -35,7 +35,7 @@ tiup dm display <cluster-name> [flags]
 
 > **Note:**
 >
-> `-N, --node`も指定されている場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが照会されます。
+> `-N, --node`も指定されている場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが照会されます。
 
 ### -h, --help {#h-help}
 
@@ -50,7 +50,7 @@ tiup dm display <cluster-name> [flags]
 - SSHクライアントの種類
 - 次のフィールドを含むテーブル:
     - `ID` : IP:PORT で構成されるノード ID。
-    - `Role` : ノードにデプロイされたサービス ロール (たとえば、TiDB または TiKV)。
+    - `Role` : ノードにデプロイされたサービスロール (たとえば、TiDB または TiKV)。
     - `Host` : ノードに対応するマシンの IP アドレス。
     - `Ports` : サービスで使用されるポート番号。
     - `OS/Arch` : ノードのオペレーティングシステムとマシンアーキテクチャ。

@@ -16,7 +16,7 @@ TiDB v4.0より前のバージョンでは、TiDBクラスターは主にTiDB An
 >     - Kafka が有効になっているクラスター
 >     - Sparkが有効になっているクラスター
 >     - TiDB Lightning/TiKVインポーターが有効になっているクラスター
->     - 監視メトリックを収集するために古いモード`push`をまだ使用しているクラスター (デフォルト モード`pull`を変更しない場合は、 `import`コマンドの使用がサポートされます)
+>     - 監視メトリックを収集するために古いモード`push`をまだ使用しているクラスター (デフォルトモード`pull`を変更しない場合は、 `import`コマンドの使用がサポートされます)
 >     - デフォルト以外のポート（ `group_vars`ディレクトリに設定されているポートは互換性がある）が`node_exporter_port` / `blackbox_exporter_port`を使用して`inventory.ini`設定ファイルで個別に設定されているクラスタ
 > - TiDB Ansibleを使用してデプロイしたクラスター内の一部のノードに監視コンポーネントがデプロイされていない場合は、まずTiDB Ansibleを使用して`inventory.ini`ファイルの`monitored_servers`セクションに対応するノード情報を追加し、その後`deploy.yaml`プレイブックを使用して監視コンポーネントを完全にデプロイする必要があります。そうしないと、クラスターをTiUPにインポートした後にメンテナンス操作を実行すると、監視コンポーネントの不足によりエラーが発生する可能性があります。
 
@@ -42,7 +42,7 @@ tiup cluster import [flags]
 
 ### &#x20;--inventory {#inventory}
 
-- Ansible インベントリ ファイルの名前を指定します。
+- Ansible インベントリファイルの名前を指定します。
 - データ型: `STRING`
 - このオプションはデフォルトで有効になっており、 `inventory.ini` (デフォルト値) が渡されます。
 
@@ -68,4 +68,4 @@ tiup cluster import [flags]
 
 インポートプロセスのログを表示します。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

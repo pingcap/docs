@@ -144,7 +144,7 @@ TiUP v1.17.0 以降では、トポロジーファイルで Prometheus グロー�
 
 ## Alertmanager の設定をカスタマイズする {#customize-alertmanager-configurations}
 
-現在、 TiUP はAlertmanager のリスニング アドレスのカスタマイズをサポートしています。
+現在、 TiUP はAlertmanager のリスニングアドレスのカスタマイズをサポートしています。
 
 TiUPによってデプロイされた Alertmanager は、デフォルトで`alertmanager_servers.host`をリッスンします。プロキシを使用している場合は Alertmanager にアクセスできません。この問題に対処するには、クラスター設定ファイル topology.yaml に`listen_host`を追加してリッスンアドレスを指定します。推奨値は 0.0.0.0 です。
 

@@ -41,7 +41,7 @@ cd wordpress-tidb-docker
     sudo sh install.sh
     ```
 
-2. サンプル リポジトリには、サブモジュールとして[TiDB互換性プラグイン](https://github.com/pingcap/wordpress-tidb-plugin)が含まれています。次のコマンドを実行してサブモジュールを更新します。
+2. サンプルリポジトリには、サブモジュールとして[TiDB互換性プラグイン](https://github.com/pingcap/wordpress-tidb-plugin)が含まれています。次のコマンドを実行してサブモジュールを更新します。
 
     ```shell
     git submodule update --init --recursive

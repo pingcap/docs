@@ -8,7 +8,7 @@ summary: "`tiup cluster patch` コマンドを使用すると、実行中のク�
 クラスターの実行中にサービスのバイナリを動的に置き換える必要がある場合（つまり、置き換えプロセス中もクラスターを利用可能な状態に保つ必要がある場合）、 `tiup cluster patch`コマンドを使用できます。コマンドの実行後、 TiUP は以下の処理を実行します。
 
 - 置換用のバイナリパッケージをターゲットマシンにアップロードします。
-- ターゲット サービスが TiKV やTiFlashなどのストレージサービスの場合、 TiUP はまず API 経由で関連ノードをオフラインにします。
+- ターゲットサービスが TiKV やTiFlashなどのストレージサービスの場合、 TiUP はまず API 経由で関連ノードをオフラインにします。
 - 対象サービスを停止します。
 - バイナリパッケージを解凍し、サービスを置き換えます。
 - 対象サービスを開始します。
@@ -93,7 +93,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> オプション`-R, --role`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
+> オプション`-R, --role`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービスノードを置き換えます。
 
 ### -R, --role {#r-role}
 
@@ -103,7 +103,7 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 > **Note:**
 >
-> オプション`-N, --node`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービス ノードを置き換えます。
+> オプション`-N, --node`が同時に指定されている場合、 TiUP は`-N, --node`と`-R, --role`両方の要件に一致するサービスノードを置き換えます。
 
 ### --offline {#offline}
 
@@ -121,4 +121,4 @@ tiup cluster patch <cluster-name> <package-path> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)

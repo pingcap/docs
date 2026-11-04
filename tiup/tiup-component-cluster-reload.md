@@ -19,7 +19,7 @@ tiup cluster reload <cluster-name> [flags]
 
 ### --force {#--force}
 
-- 再ロード プロセス中のエラーを無視し、強制的に再ロードします。
+- 再ロードプロセス中のエラーを無視し、強制的に再ロードします。
 - データ型: `BOOLEAN`
 - デフォルト: false
 
@@ -47,7 +47,7 @@ tiup cluster reload <cluster-name> [flags]
 
 > **Note:**
 >
-> - `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
+> - `-R, --role`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが再起動されます。
 > - オプション`--skip-restart`を指定した場合、オプション`-N, --node`は無効になります。
 
 ### -R, --role {#-r---role}
@@ -58,7 +58,7 @@ tiup cluster reload <cluster-name> [flags]
 
 > **Note:**
 >
-> 1. `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービス ノードのみが再起動されます。
+> 1. `-N, --node`オプションを同時に指定した場合は、 `-N, --node`と`-R, --role`両方の指定に一致するサービスノードのみが再起動されます。
 > 2. オプション`--skip-restart`を指定した場合、オプション`-R, --role`は無効になります。
 
 ### --skip-restart {#--skip-restart}
@@ -103,4 +103,4 @@ tiup cluster reload <cluster-name> [flags]
 
 tiup-clusterの実行ログ。
 
-[&lt;&lt; 前のページに戻る - TiUPクラスタコマンド リスト](/tiup/tiup-component-cluster.md#command-list)
+[&lt;&lt; 前のページに戻る - TiUPクラスタコマンドリスト](/tiup/tiup-component-cluster.md#command-list)
