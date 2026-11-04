@@ -40,7 +40,7 @@ TiFlashは、クエリ実行にMPPモードをサポートしています。こ�
 set @@session.tidb_allow_mpp=0;
 ```
 
-TiDB のコストベース オプティマイザで MPP モード (デフォルト) を使用するかどうかを自動的に決定する場合は、次のステートメントを実行します。
+TiDB のコストベースオプティマイザで MPP モード (デフォルト) を使用するかどうかを自動的に決定する場合は、次のステートメントを実行します。
 
 ```sql
 set @@session.tidb_allow_mpp=1;
@@ -85,7 +85,7 @@ set @@session.tidb_enforce_mpp=1;
 
 MPPモードは、ブロードキャストハッシュ結合、シャッフルハッシュ結合、シャッフルハッシュ集計、Union All、TopN、およびLimitという物理アルゴリズムをサポートしています。オプティマイザは、クエリで使用するアルゴリズムを自動的に決定します。具体的なクエリ実行計画を確認するには、 `EXPLAIN`のステートメントを実行してください。`EXPLAIN`のステートメントの結果にExchangeSenderオペレーターとExchangeReceiverオペレーターが表示された場合、MPPモードが有効になっていることを示します。
 
-次のステートメントは、TPC-H テスト セット内のテーブル構造を例として示しています。
+次のステートメントは、TPC-H テストセット内のテーブル構造を例として示しています。
 
 ```sql
 explain select count(*) from customer c join nation n on c.c_nationkey=n.n_nationkey;
@@ -107,7 +107,7 @@ explain select count(*) from customer c join nation n on c.c_nationkey=n.n_natio
 
 この実行計画の例には、 `ExchangeReceiver`オペレーターと`ExchangeSender`オペレーターが含まれています。この実行計画は、テーブル`nation`が読み取られた後、 `ExchangeSender`オペレーターが各ノードにテーブルをブロードキャストし、 `HashJoin`オペレーターと`HashAgg`オペレーターがテーブル`nation`とテーブル`customer`に対して実行され、結果がTiDBに返されることを示しています。
 
-TiFlash は、ブロードキャスト ハッシュ結合を使用するかどうかを制御する次の3つのグローバル/セッション変数を提供します。
+TiFlash は、ブロードキャストハッシュ結合を使用するかどうかを制御する次の3つのグローバル/セッション変数を提供します。
 
 - [`tidb_broadcast_join_threshold_size`](/system-variables.md#tidb_broadcast_join_threshold_size-new-in-v50) : 値の単位はバイトです。テーブルサイズ（バイト単位）が変数の値より小さい場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。
 - [`tidb_broadcast_join_threshold_count`](/system-variables.md#tidb_broadcast_join_threshold_count-new-in-v50) : 値の単位は行です。結合操作のオブジェクトがサブクエリに属する場合、オプティマイザはサブクエリの結果セットのサイズを推定できないため、結果セットの行数によってサイズが決定されます。サブクエリの推定行数がこの変数の値より少ない場合は、ブロードキャストハッシュ結合アルゴリズムが使用されます。それ以外の場合は、シャッフルハッシュ結合アルゴリズムが使用されます。

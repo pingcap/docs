@@ -16,7 +16,7 @@ summary: TiDB概要ページには、クラスターのQPS、レイテンシー�
 
 ## ページにアクセスする {#access-the-page}
 
-TiDB Dashboardにログインすると、デフォルトで概要ページが表示されます。または、左側のナビゲーション メニューで**Overview**をクリックしてこのページにアクセスすることもできます。
+TiDB Dashboardにログインすると、デフォルトで概要ページが表示されます。または、左側のナビゲーションメニューで**Overview**をクリックしてこのページにアクセスすることもできます。
 
 ![Enter overview page](/media/dashboard/dashboard-overview-access-v650.png)
 

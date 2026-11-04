@@ -113,7 +113,7 @@ TiUPを使用してデプロイされた実行中のクラスターの場合は�
 tiup ctl:v<CLUSTER_VERSION> pd -u http://127.0.0.1:2379 config set dashboard-address auto
 ```
 
-上記のコマンドを実行した後、 `tiup cluster display`コマンドを使用して、PD によって自動的にネゴシエートされた TiDB Dashboard インスタンス アドレスを表示できます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
+上記のコマンドを実行した後、 `tiup cluster display`コマンドを使用して、PD によって自動的にネゴシエートされた TiDB Dashboard インスタンスアドレスを表示できます ( `CLUSTER_NAME`をクラスター名に置き換えます)。
 
 ```bash
 tiup cluster display CLUSTER_NAME --dashboard

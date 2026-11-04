@@ -15,7 +15,7 @@ TiDB Dashboardのクラスタ診断機能は、指定された時間範囲内で
 
 クラスター診断ページにアクセスするには、次のいずれかの方法を使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**Cluster Diagnostics**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**Cluster Diagnostics**をクリックします。
 
     ![Access Cluster Diagnostics page](/media/dashboard/dashboard-diagnostics-access-v650.png)
 

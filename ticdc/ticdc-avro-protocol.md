@@ -293,11 +293,11 @@ AvroはDDLイベントとウォーターマークイベントを下流に送信�
 
 TiCDC Avro プロトコルは[`io.confluent.kafka.serializers.KafkaAvroDeserializer`](https://docs.confluent.io/platform/current/schema-registry/fundamentals/serdes-develop/serdes-avro.html#avro-deserializer)でデシリアライズできます。
 
-コンシューマー プログラムは[スキーマレジストリAPI](https://docs.confluent.io/platform/current/schema-registry/develop/api.html)を介して最新のスキーマを取得し、そのスキーマを使用して TiCDC Avro プロトコルによってエンコードされたデータをデシリアライズできます。
+コンシューマープログラムは[スキーマレジストリAPI](https://docs.confluent.io/platform/current/schema-registry/develop/api.html)を介して最新のスキーマを取得し、そのスキーマを使用して TiCDC Avro プロトコルによってエンコードされたデータをデシリアライズできます。
 
 ### イベントの種類を区別する {#distinguish-event-types}
 
-コンシューマー プログラムは、次のルールによって DML イベントタイプを区別できます。
+コンシューマープログラムは、次のルールによって DML イベントタイプを区別できます。
 
 - Key部分のみの場合はDeleteイベントになります。
 - キーと値の両方がある場合、挿入イベントまたは更新イベントのいずれかです。[TiDB拡張フィールド](#tidb-extension-fields)が有効になっている場合は、 `_tidb_op`フィールドを使用して挿入イベントか更新イベントかを識別できます。TiDB拡張フィールドが有効になっていない場合は、それらを区別できません。

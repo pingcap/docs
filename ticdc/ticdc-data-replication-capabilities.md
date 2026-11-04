@@ -22,13 +22,13 @@ TiCDC は、次のようなさまざまな下流システムへのデータの�
 - [TiDBデータベースまたはその他のMySQL互換データベース](/ticdc/ticdc-sink-to-mysql.md)
 - [Apache Kafka](/ticdc/ticdc-sink-to-kafka.md)
 - [メッセージキュー（MQ）タイプのシンク](/ticdc/ticdc-changefeed-config.md#sink) 、例えば[Pulsar](/ticdc/ticdc-sink-to-pulsar.md)
-- [ストレージ サービス (Amazon S3、GCS、Azure Blob Storage、NFS)](/ticdc/ticdc-sink-to-cloud-storage.md)
+- [ストレージサービス (Amazon S3、GCS、Azure Blob Storage、NFS)](/ticdc/ticdc-sink-to-cloud-storage.md)
 - [Confluent Cloud 統合による Snowflake、ksqlDB、SQL Server](/ticdc/integrate-confluent-using-ticdc.md)
 - [Kafka で複製されたデータを消費するための Apache Flink](/replicate-data-to-kafka.md)
 
 ## データ複製の範囲 {#scope-of-data-replication}
 
-TiCDC は、次の種類のアップストリーム データの変更をサポートします。
+TiCDC は、次の種類のアップストリームデータの変更をサポートします。
 
 - **サポート対象:**
 
@@ -38,9 +38,9 @@ TiCDC は、次の種類のアップストリーム データの変更をサポ�
 
 - **サポートされていません**:
 
-    - アップストリーム システムテーブルで実行された DDL および DML文 ( `mysql.*`および`information_schema.*`を含む)。
+    - アップストリームシステムテーブルで実行された DDL および DML文 ( `mysql.*`および`information_schema.*`を含む)。
     - アップストリーム一時テーブルで実行された DDL および DML文。
-    - DQL (データ クエリ言語) および DCL (データ制御言語) 文。
+    - DQL (データクエリ言語) および DCL (データ制御言語) 文。
 
 ## 制限事項 {#limitations}
 

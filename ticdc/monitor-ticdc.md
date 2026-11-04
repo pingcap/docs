@@ -17,15 +17,15 @@ cdc cli changefeed create --server=http://10.0.10.25:8300 --sink-uri="mysql://ro
 
 [新しいアーキテクチャにおけるTiCDC](/ticdc/ticdc-architecture.md)の監視ダッシュボードは**TiCDC-New-Arch**です。v8.5.4 以降のバージョンの TiDB クラスターでは、この監視ダッシュボードはクラスターのデプロイまたはアップグレード時に Grafana に統合されるため、手動操作は不要です。
 
-クラスターのバージョンが v8.5.4 より前の場合は、TiCDC 監視メトリック ファイルを手動でインポートする必要があります。
+クラスターのバージョンが v8.5.4 より前の場合は、TiCDC 監視メトリックファイルを手動でインポートする必要があります。
 
-1. 新しいアーキテクチャの TiCDC の監視メトリック ファイルをダウンロードします。
+1. 新しいアーキテクチャの TiCDC の監視メトリックファイルをダウンロードします。
 
     ```shell
     wget https://raw.githubusercontent.com/pingcap/ticdc/refs/heads/release-8.5/metrics/grafana/ticdc_new_arch.json
     ```
 
-2. ダウンロードしたメトリック ファイルを Grafana にインポートします。
+2. ダウンロードしたメトリックファイルを Grafana にインポートします。
 
     ![Import Metrics File](/media/ticdc/ticdc-new-arch-import-grafana.png)
 
@@ -208,7 +208,7 @@ TiUPを使用して TiDB クラスターをデプロイすると、Grafana で�
 - Entry sorter merge duration: TiCDCノードがソートされたイベントをマージするのにかかった時間のヒストグラム
 - Entry sorter merge duration percentile: TiCDCがソートされたイベントを1秒以内にマージするのにかかる時間(P95、P99、P999)
 - Mounter unmarshal duration: TiCDCノードがイベントをアンマーシャリングするのにかかった時間のヒストグラム
-- Mounter unmarshal duration percentile: TiCDC アンマーシャリング イベントが 1秒間に要した時間 (P95、P99、および P999)
+- Mounter unmarshal duration percentile: TiCDC アンマーシャリングイベントが 1秒間に要した時間 (P95、P99、および P999)
 - KV client dispatch events/s: KVクライアントモジュールがTiCDCノード間で1秒あたりにディスパッチするイベント数
 - KV client batch resolved size: TiKVがTiCDCに送信する解決済みタイムスタンプメッセージのバッチサイズ
 

@@ -9,7 +9,7 @@ TiDB Dashboardのメトリクス関係グラフは、v4.0.7で導入された機
 
 ## アクセスグラフ {#access-graph}
 
-TiDB Dashboardにログイン後、左側のナビゲーション メニューで**Cluster Diagnostics**をクリックすると、メトリック関係グラフを生成するページが表示されます。
+TiDB Dashboardにログイン後、左側のナビゲーションメニューで**Cluster Diagnostics**をクリックすると、メトリック関係グラフを生成するページが表示されます。
 
 ![Metrics relation graph homepage](/media/dashboard/dashboard-metrics-relation-home-v650.png)
 
@@ -45,22 +45,22 @@ TiDB Dashboardにログイン後、左側のナビゲーション メニュー�
 - `19306.46s`は、メトリック`tidb_execute`の合計実行時間が 19306.46秒であることを示します。`89.40%`は、19306.46秒がすべての SQL クエリ（ユーザー SQL クエリと TiDB 内部 SQL クエリを含む）の合計実行時間の 89.40% を占めていることを示します。クエリの合計実行時間は、 `tidb_query`の合計実行時間です。
 - `9070.18s`は、 `tidb_execute`ノード自体の合計実行時間が 9070.18秒であり、残りがその子ノードによって消費された時間であることを表します。`42.00%`は、9070.18秒がすべてのクエリの合計クエリ時間の 42.00% を占めることを表します。
 
-ボックス領域にマウスを移動すると、 `tidb_execute`メトリック ノードの詳細が表示されます。
+ボックス領域にマウスを移動すると、 `tidb_execute`メトリックノードの詳細が表示されます。
 
 ![tidb\_execute node example2](/media/dashboard/dashboard-metrics-relation-node-example2.png)
 
-上記の画像に表示されているテキスト情報は、メトリック ノードの説明であり、合計期間、合計時間、平均期間、平均期間 P99、P90、P80 が含まれます。
+上記の画像に表示されているテキスト情報は、メトリックノードの説明であり、合計期間、合計時間、平均期間、平均期間 P99、P90、P80 が含まれます。
 
 ### ノード間の親子関係 {#the-parent-child-relations-between-nodes}
 
-このセクションでは、 `tidb_execute`メトリック ノードを例に、メトリックの子ノードを紹介します。
+このセクションでは、 `tidb_execute`メトリックノードを例に、メトリックの子ノードを紹介します。
 
 ![tidb\_execute node relation example1](/media/dashboard/dashboard-metrics-relation-relation-example1.png)
 
 上のグラフから、 `tidb_execute`の 2つの子ノードがわかります。
 
 - `pd_start_tso_wait` : トランザクションの`start_tso`を待機する合計時間。これは 300.66秒です。
-- `tidb_txn_cmd` : TiDB が関連するトランザクション コマンドを実行する合計時間。9935.62秒です。
+- `tidb_txn_cmd` : TiDB が関連するトランザクションコマンドを実行する合計時間。9935.62秒です。
 
 さらに、 `tidb_execute`は`tidb_cop`ボックス領域を指す点線の矢印もあり、次のことを示しています。
 

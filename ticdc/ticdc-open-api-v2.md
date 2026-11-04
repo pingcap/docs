@@ -26,7 +26,7 @@ API を使用して、TiCDC クラスターで次のメンテナンス操作を�
 - [レプリケーションタスクを再開する](#resume-a-replication-task)
 - [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
 - [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
-- [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
+- [TiCDC サービスプロセスリストを照会する](#query-the-ticdc-service-process-list)
 - [所有者ノードの退去](#evict-an-owner-node)
 - [TiCDCサーバーのログレベルを動的に調整する](#dynamically-adjust-the-log-level-of-the-ticdc-server)
 
@@ -347,7 +347,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/health
 | パラメータ名      | 説明                                      |
 | :---------- | :-------------------------------------- |
 | `matcher`   | `STRING ARRAY`型。フィルタールールと同じ一致構文を持ちます。   |
-| `partition` | `STRING`タイプ。イベントをディスパッチするターゲット パーティション。 |
+| `partition` | `STRING`タイプ。イベントをディスパッチするターゲットパーティション。 |
 | `topic`     | `STRING`型。イベントをディスパッチするターゲットトピック。       |
 
 `sink.cloud_storage_config`パラメータは次のように記述されます。
@@ -504,10 +504,10 @@ curl -X POST -H "Content-type: application/json" http://127.0.0.1:8300/api/v2/ch
 | `config`          | レプリケーションタスクの設定。構造と意味は、レプリケーションタスク作成時の`replica_config`の設定と同じです。                      |
 | `create_time`     | `STRING`型。レプリケーションタスクが作成された時刻。                                                      |
 | `creator_version` | `STRING`タイプ。レプリケーションタスク作成時の TiCDC バージョン。                                            |
-| `error`           | レプリケーションタスク エラー。                                                                   |
+| `error`           | レプリケーションタスクエラー。                                                                   |
 | `id`              | `STRING`タイプ。レプリケーションタスク ID。                                                        |
 | `resolved_ts`     | `UINT64`タイプ。レプリケーションタスクの resolved ts。                                               |
-| `sink_uri`        | `STRING`タイプ。レプリケーションタスク シンクの URI。                                                  |
+| `sink_uri`        | `STRING`タイプ。レプリケーションタスクシンクの URI。                                                  |
 | `start_ts`        | `UINT64`タイプ。レプリケーションタスクの start ts。                                                     |
 | `state`           | `STRING`型。レプリケーションタスクのステータス。`normal` 、 `stopped` 、 `error` 、 `failed` 、または`finished`になります。 |
 | `target_ts`       | `UINT64`タイプ。レプリケーションタスクのターゲット ts。                                                   |
@@ -804,8 +804,8 @@ curl -X GET http://127.0.0.1:8300/api/v2/changefeeds/test1/synced
 応答には次のフィールドが含まれます。
 
 - `synced` : このレプリケーションタスクが完了したかどうか。`true`はタスクが完了したこと、 `false`はタスクが完了していない可能性があることを意味します。`false`の場合は、 `info`フィールドとその他のフィールドの両方で具体的なステータスを確認する必要があります。
-- `sink_checkpoint_ts` : シンク モジュールのチェックポイント ts 値 (PD 時間)。
-- `puller_resolved_ts` : PD 時間での、プラー モジュールのresolved-ts値。
+- `sink_checkpoint_ts` : シンクモジュールのチェックポイント ts 値 (PD 時間)。
+- `puller_resolved_ts` : PD 時間での、プラーモジュールのresolved-ts値。
 - `last_synced_ts` : TiCDC によって処理された最新のデータの commit-ts 値 (PD 時間)。
 - `now_ts` : 現在の PD 時間。
 - `info` : 特に`synced`が`false`の場合、同期ステータスの判別を支援する補足情報。
@@ -993,7 +993,7 @@ curl -X GET http://127.0.0.1:8300/api/v2/processors/test/561c3784-77f0-4863-ad52
 
 - `table_ids` : このキャプチャで複製されるテーブル ID。
 
-## TiCDC サービス プロセス リストを照会する {#query-the-ticdc-service-process-list}
+## TiCDC サービスプロセスリストを照会する {#query-the-ticdc-service-process-list}
 
 このAPIは同期インターフェースです。リクエストが成功すると、すべてのレプリケーションプロセスの基本情報( `capture` )が返されます。
 

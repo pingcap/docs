@@ -14,7 +14,7 @@ Grafanaダッシュボードは、Overview、PD、TiDB、TiKV、TiProxy、Node_e
 TiProxy には 4つのパネルグループがあります。これらのパネルに表示されるメトリックは、TiProxy の現在のステータスを示します。
 
 - **TiProxy-Server** : インスタンス情報。
-- **TiProxy-Query-Summary** : CPS などの SQL クエリ メトリック。
+- **TiProxy-Query-Summary** : CPS などの SQL クエリメトリック。
 - **TiProxy-Backend** : TiProxy が接続する可能性のある TiDB ノードに関する情報。
 - **TiProxy-Balance** : 負荷分散メトリック。
 
@@ -51,7 +51,7 @@ TiProxy には 4つのパネルグループがあります。これらのパネ�
 - CPS by Instance: 各 TiProxy インスタンスの 1秒あたりのコマンド数
 - CPS by Backend: 各 TiDB インスタンスの 1秒あたりのコマンド数
 - CPS by CMD: SQL コマンドの種類別にグループ化された 1秒あたりのコマンド数
-- Handshake Duration: クライアントと TiProxy 間のハンドシェイク フェーズの平均、P95、および P99 期間
+- Handshake Duration: クライアントと TiProxy 間のハンドシェイクフェーズの平均、P95、および P99 期間
 
 ## Balance {#balance}
 

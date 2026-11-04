@@ -9,9 +9,9 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ## ページにアクセスする {#access-the-page}
 
-リソースマネージャー ページにアクセスするには、次の2つの方法のいずれかを使用できます。
+リソースマネージャーページにアクセスするには、次の2つの方法のいずれかを使用できます。
 
-- TiDB Dashboardにログインしたら、左側のナビゲーション メニューで**Resource Manager**をクリックします。
+- TiDB Dashboardにログインしたら、左側のナビゲーションメニューで**Resource Manager**をクリックします。
 
 - ブラウザで[http://127.0.0.1:2379/dashboard/#/resource_manager](http://127.0.0.1:2379/dashboard/#/resource_manager)にアクセスしてください。`127.0.0.1:2379`を実際のPDインスタンスのアドレスとポートに置き換えてください。
 
@@ -21,7 +21,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 ![TiDB Dashboard: Resource Manager](/media/dashboard/dashboard-resource-manager-info.png)
 
-リソースマネージャー ページには、次の3つのセクションがあります。
+リソースマネージャーページには、次の3つのセクションがあります。
 
 - Configuration: このセクションには、TiDBの`RESOURCE_GROUPS`テーブルから取得したデータが表示されます。すべてのリソースグループに関する情報が含まれています。詳細については、 [`RESOURCE_GROUPS`](/information-schema/information-schema-resource-groups.md)を参照してください。
 
@@ -38,7 +38,7 @@ summary: TiDB Dashboardのリソースマネージャページは、クラスタ
 
 - [ハードウェアのデプロイに基づいてキャパシティを見積もる](/sql-statements/sql-statement-calibrate-resource.md#estimate-capacity-based-on-hardware-deployment)
 
-    TiDB は次のワークロード タイプを受け入れます。
+    TiDB は次のワークロードタイプを受け入れます。
 
     - `tpcc` : 大量のデータ書き込みを伴うワークロードに適用されます。これは`TPC-C`と同様のワークロードモデルに基づいて推定されます。
     - `oltp_write_only` : 大量のデータ書き込みを伴うワークロードに適用されます。これは`sysbench oltp_write_only`と同様のワークロードモデルに基づいて推定されます。

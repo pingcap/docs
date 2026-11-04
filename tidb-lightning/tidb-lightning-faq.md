@@ -79,9 +79,9 @@ sql-mode = "STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION"
 
 - 手動デプロイの場合： `tidb-lightning`フォアグラウンドで実行されている場合は、 <kbd>Ctrl</kbd> + <kbd>C</kbd>を押して終了します。それ以外の場合は、 `ps aux | grep tidb-lightning`コマンドを使用してプロセス ID を取得し、 `kill -2 ${PID}`コマンドを使用してプロセスを終了します。
 
-## TiDB Lightning は1 ギガビット ネットワークカードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
+## TiDB Lightning は1 ギガビットネットワークカードで使用できますか? {#can-tidb-lightning-be-used-with-1-gigabit-network-card}
 
-TiDB Lightning は、10 ギガビット ネットワークカードで使用するのが最適です。
+TiDB Lightning は、10 ギガビットネットワークカードで使用するのが最適です。
 
 1ギガビットネットワークカードは合計120MB/秒の帯域幅しか提供できず、これをすべてのターゲットTiKVストアで共有する必要があります。TiDB Lightningは、物理インポートモードで1ギガビットネットワークの全帯域幅を簡単に飽和させ、PDに接続できなくなるため、クラスタを停止させる可能性があります。
 
@@ -94,7 +94,7 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 
 ## TiDB Lightningに関連付けられたすべての中間データを完全に破棄するにはどうすればよいですか? {#how-to-completely-destroy-all-intermediate-data-associated-with-tidb-lightning}
 
-1. チェックポイント ファイルを削除します。
+1. チェックポイントファイルを削除します。
 
     ```sh
     tidb-lightning-ctl --config conf/tidb-lightning.toml --checkpoint-remove=all
@@ -109,7 +109,7 @@ TiDB Lightning は、10 ギガビット ネットワークカードで使用す�
 4. 残留メタデータをクリーンアップします。以下のいずれかの条件に該当する場合は、メタデータスキーマを手動でクリーンアップする必要があります。
 
     - TiDB Lightning v5.1.xおよびv5.2.xバージョンの場合、 `tidb-lightning-ctl`コマンドではターゲットクラスタ内のメタデータスキーマがクリーンアップされません。手動でクリーンアップする必要があります。
-    - チェックポイント ファイルを手動で削除した場合は、ダウンストリーム メタデータ スキーマを手動でクリーンアップする必要があります。そうしないと、後続のインポートの正確性が影響を受ける可能性があります。
+    - チェックポイントファイルを手動で削除した場合は、ダウンストリームメタデータスキーマを手動でクリーンアップする必要があります。そうしないと、後続のインポートの正確性が影響を受ける可能性があります。
 
     メタデータをクリーンアップするには、次のコマンドを使用します。
 
@@ -143,7 +143,7 @@ Suppose the source cluster has the following topology:
 
 ![TiDB Lightning FAQ - source cluster topology](/media/lightning-faq-source-cluster-topology.jpg)
 
-ソース クラスターには次の配置ポリシーがあります。
+ソースクラスターには次の配置ポリシーがあります。
 
 ```sql
 CREATE PLACEMENT POLICY p1 PRIMARY_REGION="us-east" REGIONS="us-east,us-west";
@@ -165,7 +165,7 @@ TiDB LightningでSQLの配置ルールを使用するには、データをター
 
 1. データ分散トポロジを計画します。
 2. TiKV および PD に必要なラベルを構成します。
-3. 配置ルール ポリシーを作成し、作成したポリシーをターゲットテーブルに適用します。
+3. 配置ルールポリシーを作成し、作成したポリシーをターゲットテーブルに適用します。
 4. TiDB Lightningを使用して、データをターゲットテーブルにインポートします。
 
 ## TiDB LightningとDumplingを使用してスキーマをコピーするにはどうすればよいですか? {#how-can-i-use-tidb-lightning-and-dumpling-to-copy-a-schema}

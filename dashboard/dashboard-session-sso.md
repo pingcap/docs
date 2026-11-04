@@ -23,7 +23,7 @@ TiDB Dashboardは、 [OIDC](https://openid.net/connect/)ベースのシングル
 
 4. フォームの**OIDC Client ID**と**OIDC Discovery URL**フィールドに入力します。
 
-    通常、SSO サービス プロバイダーから次の2つのフィールドを取得できます。
+    通常、SSO サービスプロバイダーから次の2つのフィールドを取得できます。
 
     - OIDC Client ID は、OIDC Token Issuer とも呼ばれます。
     - OIDC Discovery URL は、OIDC Token Audience とも呼ばれます。
@@ -84,7 +84,7 @@ SQLユーザーのパスワードを変更すると、SSOサインインは失�
 
 TiDB Dashboardに SSO が設定されると、次の手順に従って SSO 経由でサインインできます。
 
-1. TiDB Dashboardのサインイン ページで、 **Sign in via Company Account**をクリックします。
+1. TiDB Dashboardのサインインページで、 **Sign in via Company Account**をクリックします。
 
     ![Sample Step](/media/dashboard/dashboard-session-sso-signin.png)
 

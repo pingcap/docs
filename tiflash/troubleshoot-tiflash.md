@@ -71,7 +71,7 @@ TiFlashのワークロードが大きすぎてTiFlashデータのレプリケー
 
     > **Note:**
     >
-    > テーブルのTiFlashレプリケーション ルールを手動で削除した後、このテーブルに対して`RECOVER TABLE`、 `FLASHBACK TABLE`、または`FLASHBACK DATABASE`操作を実行すると、このテーブルのTiFlashレプリカは復元されません。
+    > テーブルのTiFlashレプリケーションルールを手動で削除した後、このテーブルに対して`RECOVER TABLE`、 `FLASHBACK TABLE`、または`FLASHBACK DATABASE`操作を実行すると、このテーブルのTiFlashレプリカは復元されません。
 
     1. 現在の PD インスタンス内のTiFlashに関連するすべてのデータ複製ルールを表示します。
 

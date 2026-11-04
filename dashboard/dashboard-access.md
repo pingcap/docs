@@ -21,7 +21,7 @@ TiDB Dashboardにアクセスするには、ブラウザから[http://127.0.0.1:
 
 ## ブラウザの互換性 {#browser-compatibility}
 
-TiDB Dashboardは、比較的新しいバージョンの次の一般的なデスクトップ ブラウザーで使用できます。
+TiDB Dashboardは、比較的新しいバージョンの次の一般的なデスクトップブラウザーで使用できます。
 
 - Chrome &gt;= 77
 - Firefox &gt;= 68
@@ -33,7 +33,7 @@ TiDB Dashboardは、比較的新しいバージョンの次の一般的なデス
 
 ## サインイン {#sign-in}
 
-TiDB Dashboardにアクセスすると、ユーザー ログイン インターフェイスに移動します。
+TiDB Dashboardにアクセスすると、ユーザーログインインターフェイスに移動します。
 
 - TiDB `root`アカウントを使用して TiDB Dashboardにサインインできます。
 - TiDB Dashboardには、シングルサインオン（SSO）経由でサインインすることもできます。詳細については、 [TiDB DashboardのSSOを構成する](/dashboard/dashboard-session-sso.md)をご覧ください。
@@ -55,7 +55,7 @@ TiDB Dashboardでは次の言語がサポートされています。
 - 英語
 - 中国語（簡体字）
 
-**SQL ユーザー サインイン**ページで、**言語の切り替え**ドロップダウンリストをクリックしてインターフェイス言語を切り替えることができます。
+**SQL ユーザーサインイン**ページで、**言語の切り替え**ドロップダウンリストをクリックしてインターフェイス言語を切り替えることができます。
 
 ![Switch language](/media/dashboard/dashboard-access-switch-language.png)
 

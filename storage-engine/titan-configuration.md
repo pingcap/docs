@@ -55,7 +55,7 @@ TitanはRocksDBと互換性があるため、RocksDBを使用する既存のTiKV
               enabled = true
     ```
 
-    変更を有効にするために、TiDB クラスターのオンライン ローリング再起動をトリガーする構成を適用します。
+    変更を有効にするために、TiDB クラスターのオンラインローリング再起動をトリガーする構成を適用します。
 
     ```shell
     kubectl apply -f ${cluster_name} -n ${namespace}

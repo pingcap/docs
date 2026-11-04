@@ -21,7 +21,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 - `--changefeed-id` : レプリケーションタスクのID。形式は`^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*$`正規表現に一致する必要があります。このIDが指定されていない場合、TiCDCは自動的にUUID（バージョン4形式）をIDとして生成します。
 
-- `--sink-uri` : レプリケーションタスクのダウンストリーム アドレス。 `--sink-uri`は、次の形式に従って設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
+- `--sink-uri` : レプリケーションタスクのダウンストリームアドレス。 `--sink-uri`は、次の形式に従って設定します。現在、このスキームは`mysql` 、 `tidb` 、および`kafka`をサポートしています。
 
     ```
     [scheme]://[userinfo@][host]:[port][/path]?[query_parameters]
@@ -256,7 +256,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 
 #### `date-separator` {#date-separator}
 
-- ファイル ディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)を参照してください。
+- ファイルディレクトリで使用される日付区切り文字のタイプを指定します。詳細については、 [データ変更記録](/ticdc/ticdc-sink-to-cloud-storage.md#data-change-records)を参照してください。
 - この設定項目は、ダウンストリームがストレージサービスである場合にのみ有効になります。
 - デフォルト値: `day` 、ファイルを日付ごとに分割することを意味します。
 - 値のオプション: `none` 、 `year` 、 `month` 、 `day`
@@ -316,7 +316,7 @@ Info: {"upstream_id":7178706266519722477,"namespace":"default","id":"simple-repl
 - 有効にすると、データ変更のある列の前に`"is-update"`列が追加されます。この追加された列は、現在の行のデータ変更が`UPDATE`イベントによるものか、元の`INSERT`イベントまたは`DELETE`イベントによるものかを識別するために使用されます。現在の行のデータ変更が`UPDATE`イベントによるものである場合、 `"is-update"`列の値は`true`になります。それ以外の場合は、 `false`になります。
 - デフォルト値: `false`
 
-v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロトコルをサポートします。以下は、Simpleプロトコルの設定パラメータです。プロトコルの詳細については、 [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)を参照してください。
+v8.0.0 以降、TiCDC はSimple メッセージエンコーディングプロトコルをサポートします。以下は、Simpleプロトコルの設定パラメータです。プロトコルの詳細については、 [TiCDC Simpleプロトコル](/ticdc/ticdc-simple-protocol.md)を参照してください。
 
 以下の設定パラメータは、ブートストラップメッセージの送信動作を制御します。
 
@@ -330,7 +330,7 @@ v8.0.0 以降、TiCDC はSimple メッセージ エンコーディング プロ�
 
 - ブートストラップを送信するメッセージ間隔をメッセージ数で制御します。
 - デフォルト値： `10000` 。これは、各テーブルで10000行変更メッセージごとにブートストラップメッセージが送信されることを意味します。
-- ブートストラップ メッセージの送信を無効にする場合は、 [`send-bootstrap-interval-in-sec`](#send-bootstrap-interval-in-sec)と`send-bootstrap-in-msg-count`の両方を`0`に設定してください。
+- ブートストラップメッセージの送信を無効にする場合は、 [`send-bootstrap-interval-in-sec`](#send-bootstrap-interval-in-sec)と`send-bootstrap-in-msg-count`の両方を`0`に設定してください。
 
 #### `send-bootstrap-to-all-partition` {#send-bootstrap-to-all-partition}
 

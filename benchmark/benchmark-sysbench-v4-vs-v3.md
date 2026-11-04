@@ -3,7 +3,7 @@ title: TiDB Sysbench Performance Test Report -- v4.0 vs. v3.0
 summary: TiDB 4.0 と TiDB 3.0 の Sysbench パフォーマンスを比較します。
 ---
 
-# TiDB Sysbench パフォーマンス テスト レポート -- v4.0 と v3.0 {#tidb-sysbench-performance-test-report-v4-0-vs-v3-0}
+# TiDB Sysbench パフォーマンステストレポート -- v4.0 と v3.0 {#tidb-sysbench-performance-test-report-v4-0-vs-v3-0}
 
 ## テスト目的 {#test-purpose}
 

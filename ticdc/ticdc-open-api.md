@@ -26,7 +26,7 @@ API を使用して、TiCDC クラスターで次のメンテナンス操作を�
 - [レプリケーションタスクを再開する](#resume-a-replication-task)
 - [レプリケーションサブタスクリストを照会する](#query-the-replication-subtask-list)
 - [特定のレプリケーションサブタスクをクエリする](#query-a-specific-replication-subtask)
-- [TiCDC サービス プロセス リストを照会する](#query-the-ticdc-service-process-list)
+- [TiCDC サービスプロセスリストを照会する](#query-the-ticdc-service-process-list)
 - [所有者ノードの退去](#evict-an-owner-node)
 - [レプリケーションタスク内のすべてのテーブルの負荷分散を手動でトリガーする](#manually-trigger-the-load-balancing-of-all-tables-in-a-replication-task)
 - [テーブルを別のノードに手動でスケジュールする](#manually-schedule-a-table-to-another-node)
@@ -116,7 +116,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/health
 | `changefeed_id` | `STRING`型。レプリケーションタスクの ID。(オプション) |
 | `start_ts` | `UINT64`型。changefeed の開始 TSO を指定します。(オプション) |
 | `target_ts` | `UINT64`型。changefeed のターゲット TSO を指定します。(オプション) |
-| **`sink_uri`** | `STRING`型。レプリケーションタスクのダウンストリーム アドレス。(**必須**) |
+| **`sink_uri`** | `STRING`型。レプリケーションタスクのダウンストリームアドレス。(**必須**) |
 | `force_replicate` | `BOOLEAN`型。一意インデックスのないテーブルを強制的にレプリケートするかどうかを決定します。(オプション) |
 | `ignore_ineligible_table` | `BOOLEAN`型。レプリケートできないテーブルを無視するかどうかを決定します。(オプション) |
 | `filter_rules` | `STRING`型の配列。テーブルスキーマのフィルタリングのルール。(オプション) |
@@ -222,7 +222,7 @@ changefeed 設定を変更するには、 `pause the replication task -> modify 
 | パラメータ名 | 説明 |
 | :--------------------- | :-------------------------- --------------------------- |
 | `target_ts` | `UINT64`型。changefeed のターゲット TSO を指定します。(オプション) |
-| `sink_uri` | `STRING`型。レプリケーションタスクのダウンストリーム アドレス。(オプション) |
+| `sink_uri` | `STRING`型。レプリケーションタスクのダウンストリームアドレス。(オプション) |
 | `filter_rules` | `STRING`型の配列。テーブルスキーマフィルタリングのルール。(オプション) |
 | `ignore_txn_start_ts` | `UINT64`型の配列。指定された start_ts のトランザクションを無視します。(オプション) |
 | `mounter_worker_num` | `INT`型。Mounter スレッドの数。(オプション) |
@@ -458,7 +458,7 @@ curl -X GET http://127.0.0.1:8300/api/v1/processors/test1/561c3784-77f0-4863-ad5
 }
 ```
 
-## TiCDC サービス プロセス リストを照会する {#query-the-ticdc-service-process-list}
+## TiCDC サービスプロセスリストを照会する {#query-the-ticdc-service-process-list}
 
 このAPIは同期インターフェースです。リクエストが成功すると、すべてのレプリケーションプロセスの基本情報( `capture` )が返されます。
 

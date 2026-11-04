@@ -37,7 +37,7 @@ Info: {"upstream_id":7277814241002263370,"namespace":"default","id":"simple-repl
 
 ## Sink URIとchangefeed configを使用してPulsarを構成する {#use-sink-uri-and-changefeed-config-to-configure-pulsar}
 
-Sink URI を使用して TiCDC ターゲット システムの接続情報を指定し、changefeed config を使用して Pulsar に関連するパラメータを構成できます。
+Sink URI を使用して TiCDC ターゲットシステムの接続情報を指定し、changefeed config を使用して Pulsar に関連するパラメータを構成できます。
 
 ### シンクURI {#sink-uri}
 
@@ -319,7 +319,7 @@ dispatchers = [
 
 ### パーティションディスパッチャ {#partition-dispatcher}
 
-現在、TiCDC は、排他的サブスクリプション モデルを使用してメッセージを消費するコンシューマーのみをサポートしています。つまり、各コンシューマーはトピック内のすべてのパーティションからのメッセージを消費できます。
+現在、TiCDC は、排他的サブスクリプションモデルを使用してメッセージを消費するコンシューマーのみをサポートしています。つまり、各コンシューマーはトピック内のすべてのパーティションからのメッセージを消費できます。
 
 パーティションディスパッチャは`partition = "xxx"`で指定できます。サポートされているパーティションディスパッチは`default` 、 `ts` 、 `index-value` 、 `table`です。その他の文字列を入力した場合、TiCDC はその文字列を Pulsarサーバーに送信されるメッセージの`key`として渡します。
 

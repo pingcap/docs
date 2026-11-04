@@ -31,7 +31,7 @@ summary: TiDBのシステムテーブルについて学びましょう。
 
     - `bootstrapped` : TiDBクラスタが初期化されているかどうか。この値は読み取り専用であり、変更できません。
     - `tidb_server_version` : TiDB の初期化時のバージョン情報。この値は読み取り専用であり、変更できません。
-    - `system_tz` : TiDB のシステム タイムゾーン。
+    - `system_tz` : TiDB のシステムタイムゾーン。
     - `new_collation_enabled` : TiDB が[照合順序のための新しいフレームワーク](/character-set-and-collation.md#new-framework-for-collations)を有効にしたかどうか。この値は読み取り専用であり、変更できないことに注意してください。
     - `cluster_id` （v8.5.6で追加）：TiDBクラスタの一意の識別子。この値は読み取り専用であり、変更できません。
 
