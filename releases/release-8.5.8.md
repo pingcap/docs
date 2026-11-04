@@ -15,7 +15,7 @@ TiDB バージョン: 8.5.8
 
 + TiDB
 
-    - 仮想カラムを含む複合インデックスについて、カラム統計が利用できない場合にインデックス統計へフォールバックすることで、オプティマイザーの行数推定を改善し、TiDB がより正確にインデックスを選択できるようにしました [#69134](https://github.com/pingcap/tidb/issues/69134) @[qw4990](https://github.com/qw4990) <!-- component: planner --> <!-- pr: https://github.com/pingcap/tidb/pull/70327 -->
+    - 仮想列を含む複合インデックスについて、列統計が利用できない場合にインデックス統計へフォールバックすることで、オプティマイザーの行数推定を改善し、TiDB がより正確にインデックスを選択できるようにしました [#69134](https://github.com/pingcap/tidb/issues/69134) @[qw4990](https://github.com/qw4990) <!-- component: planner --> <!-- pr: https://github.com/pingcap/tidb/pull/70327 -->
 
 + Tools
 
@@ -71,7 +71,7 @@ TiDB バージョン: 8.5.8
     - 同じリソースグループ内でリクエストレートが不均一な場合に、RU トークンが TiDB インスタンス間で不均等に割り当てられ、高負荷インスタンスで RU 待機時間の増加とレイテンシー上昇を引き起こす問題を修正しました [#9605](https://github.com/tikv/pd/issues/9605) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/10024 -->
     - クライアントが任意の `ConfigPath` またはパス形式の設定名を指定した場合に、PD GlobalConfig gRPC API が意図した名前空間外の etcd キーへアクセスする可能性がある問題を修正しました [#11079](https://github.com/tikv/pd/issues/11079) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11075 -->
     - `pd-forwarded-host` で渡された呼び出し元指定のアドレスに対して、現在の PD leader の advertised client URLs に転送先を制限せず、PD が外向き gRPC 接続を確立してしまう可能性がある問題を修正しました [#11070](https://github.com/tikv/pd/issues/11070) @[rleungx](https://github.com/rleungx) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11091 -->
-    - 新しく作成されたリソースグループコントローラーが定期的な状態更新と競合した場合に、resource group client が `NaN` トークンリクエストを恒久的に送信し続ける可能性がある問題を修正しました [#11022](https://github.com/tikv/pd/issues/11022) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11028 -->
+    - 新しく作成されたリソースグループコントローラーが定期的な状態更新と競合した場合に、リソースグループクライアントが `NaN` トークンリクエストを恒久的に送信し続ける可能性がある問題を修正しました [#11022](https://github.com/tikv/pd/issues/11022) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11028 -->
     - PD Resource Manager の leader ハンドオフ後、または新しい TiDB インスタンス参加時に、新しい Resource Control client が RU 割り当て 0 を受け取る可能性があり、一時的なレイテンシースパイクや `ERROR 8252 Exceeded resource group quota limitation` を引き起こす問題を修正しました [#11148](https://github.com/tikv/pd/issues/11148) @[JmPotato](https://github.com/JmPotato) <!-- component: pd --> <!-- pr: https://github.com/tikv/pd/pull/11150 --> <!-- exported-on-2026-08-24 -->
 
 + TiFlash
