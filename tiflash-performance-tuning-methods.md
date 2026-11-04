@@ -31,7 +31,7 @@ summary: パフォーマンス概要ダッシュボードにTiFlashメトリッ�
 - リクエスト QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサリクエストの数。
     - `run_mpp_task`、`dispatch_mpp_task`、および`mpp_establish_conn`はMPPリクエストです。
     - `batch` : バッチリクエストの数。
-    - `cop` : コプロセッサ インターフェイスを介して直接送信されるコプロセッサリクエストの数。
+    - `cop` : コプロセッサインターフェイスを介して直接送信されるコプロセッサリクエストの数。
     - `cop_execution` : 現在実行中のコプロセッサリクエストの数。
     - `remote_read` `remote_read_sent`リモート読み取り関連のメトリックです。リモート読み取りの増加は通常`remote_read_constructed`システムに問題があることを示しています。
 - Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG オペレーターの数。`table_scan`はテーブルスキャンオペレーター、 `selection`は選択オペレーター、 `aggregation`は集約オペレーター、 `top_n`は TopN オペレーター、 `limit`は制限オペレーター、 `join`は結合オペレーター、 `exchange_sender`はデータ送信オペレーター、 `exchange_receiver`はデータ受信オペレーターです。

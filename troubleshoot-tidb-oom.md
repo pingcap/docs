@@ -18,7 +18,7 @@ summary: TiDB OOM (メモリ不足) の問題を診断して解決する方法�
     - **TiDB** > **Server** > **稼働時間**が突然ゼロに低下します。
     - **TiDB-Runtime** > **メモリ使用量**では、 `estimate-inuse`メトリックが上昇し続けていることがわかります。
 
-- `tidb.log`を確認すると、次のログ エントリが見つかります。
+- `tidb.log`を確認すると、次のログエントリが見つかります。
     - OOMに関するアラーム: `[WARN] [memory_usage_alarm.go:139] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"]` 。詳細については、 [`memory-usage-alarm-ratio`](/system-variables.md#tidb_memory_usage_alarm_ratio)を参照してください。
     - 再起動に関するログエントリ: `[INFO] [printer.go:33] ["Welcome to TiDB."]` 。
 
@@ -53,7 +53,7 @@ OOM の問題をトラブルシューティングする場合は、次のプロ�
 
     - OOM がデプロイの問題によって発生した場合は、リソース構成とハイブリッドデプロイの影響を調査する必要があります。
     - OOM がデータベースの問題によって発生した場合、次のような原因が考えられます。
-        - TiDB は、大規模なクエリ、大規模な書き込み、データのインポートなどの大規模なデータ トラフィックを処理します。
+        - TiDB は、大規模なクエリ、大規模な書き込み、データのインポートなどの大規模なデータトラフィックを処理します。
         - TiDB は、複数の SQL文が同時にリソースを消費したり、オペレーターの同時実行性が高くなったりする、同時実行性の高いシナリオです。
         - TiDB にメモリリークがあり、リソースが解放されません。
 
@@ -73,7 +73,7 @@ OOM の問題は通常、次の原因で発生します。
 
 - オペレーティングシステムのメモリ容量が小さすぎます。
 - TiUP構成[`resource_control`](/tiup/tiup-cluster-topology-reference.md#global)は適切ではありません。
-- ハイブリッド デプロイメント (つまり、TiDB と他のアプリケーションが同じサーバーにデプロイされている) の場合、リソース不足により、TiDB が`oom-killer`によって誤って強制終了されることがあります。
+- ハイブリッドデプロイメント (つまり、TiDB と他のアプリケーションが同じサーバーにデプロイされている) の場合、リソース不足により、TiDB が`oom-killer`によって誤って強制終了されることがあります。
 
 ### データベースの問題 {#database-issues}
 
@@ -175,7 +175,7 @@ OOM 問題の根本原因を特定するには、次の情報を収集する必�
     - TiDB Dashboardで、SQL 文の分析、スロークエリ、メモリ使用量を確認します。
     - `INFORMATION_SCHEMA`の`SLOW_QUERY`と`CLUSTER_SLOW_QUERY`を確認してください。
     - 各 TiDB ノードで`tidb_slow_query.log`をチェックします。
-    - `grep "expensive_query" tidb.log`を実行して、対応するログ エントリを確認します。
+    - `grep "expensive_query" tidb.log`を実行して、対応するログエントリを確認します。
     - `EXPLAIN ANALYZE`を実行して、オペレーターのメモリ使用量を確認します。
     - `SELECT * FROM information_schema.processlist;`を実行して`MEM`列の値を確認します。
 

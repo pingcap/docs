@@ -19,7 +19,7 @@ TiDBはバージョン5.1以降、ロックビュー機能をサポートして�
 
 - [`TIDB_TRX`および`CLUSTER_TIDB_TRX`](/information-schema/information-schema-tidb-trx.md) : 現在の TiDB ノードまたはクラスター全体で実行中のすべてのトランザクションの情報 (トランザクションがロック待機状態にあるかどうか、ロック待機時間、トランザクションで実行されたステートメントのダイジェストなど) を提供します。
 - [`DATA_LOCK_WAITS`](/information-schema/information-schema-data-lock-waits.md) : ブロックしているトランザクションとブロックされたトランザクションの`start_ts` 、ブロックされた SQL文のダイジェスト、待機が発生したキーなど、悲観的ロック待機情報を TiKV で提供します。
-- [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロック ループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロックイベントの情報を提供します。
+- [`DEADLOCKS`と`CLUSTER_DEADLOCKS`](/information-schema/information-schema-deadlocks.md) : デッドロックループ内のトランザクション間の待機関係、トランザクションで現在実行されているステートメントのダイジェスト、待機が発生しているキーなど、現在の TiDB ノードまたはクラスター全体で最近発生したいくつかのデッドロックイベントの情報を提供します。
 
 > **Note:**
 >
@@ -190,7 +190,7 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
         - txnStartTS: 読み取りリクエストを送信しているトランザクションのstart_ts。上記のログでは、 `416643508703592451`がstart_tsです。
         - backoff_types: 読み取り/書き込み競合が発生し、読み取りリクエストがバックオフと再試行を実行する場合、再試行のタイプは`txnLockFast`になります。
         - backoff_ms: 読み取りリクエストがバックオフとリトライに要した時間。単位はミリ秒です。上記のログでは、読み取りリクエストはバックオフとリトライに255ミリ秒を費やしています。
-        - region_id: 読み取りリクエストのターゲット キーに対応するリージョンID。
+        - region_id: 読み取りリクエストのターゲットキーに対応するリージョンID。
 
 2. TiKVサーバーのログ
 
@@ -202,7 +202,7 @@ TiDB クラスター内の読み取り/書き込み競合は、次の方法で�
 
     このメッセージは、TiDBで読み取り/書き込み競合が発生したことを示しています。読み取りリクエストのターゲットキーは別のトランザクションによってロックされています。ロックは、コミットされていない楽観的トランザクションと、プリライトフェーズ後のコミットされていない悲観的トランザクションによって発生しています。
 
-    - primary_lock: ターゲット キーがプライマリ ロックによってロックされていることを示します。
+    - primary_lock: ターゲットキーがプライマリロックによってロックされていることを示します。
     - lock_version: ロックを所有するトランザクションの start_ts。
     - key: ロックされる対象キー。
     - lock_ttl: ロックの TTL (Time To Live)
@@ -245,7 +245,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 1. TiDBサーバーのログを確認する
 
-    "TxnLockNotFound"エラーが発生した場合、TiDB ログ メッセージは次のようになります。
+    "TxnLockNotFound"エラーが発生した場合、TiDB ログメッセージは次のようになります。
 
     ```log
     [WARN] [session.go:446] ["commit failed"] [conn=149370] ["finished txn"="Txn{state=invalid}"] [error="[kv:6]Error: KV error safe to retry tikv restarts txn: Txn(Mvcc(TxnLockNotFound{ start_ts: 412720515987275779, commit_ts: 412720519984971777, key: [116, 128, 0, 0, 0, 0, 1, 111, 16, 95, 114, 128, 0, 0, 0, 0, 0, 0, 2] })) [try again later]"]
@@ -256,7 +256,7 @@ TiDBダッシュボードの`KV Errors`パネルには、トランザクショ�
 
 2. TiKVサーバーのログを確認する
 
-    "TxnLockNotFound"エラーが発生した場合、TiKV ログ メッセージは次のようになります。
+    "TxnLockNotFound"エラーが発生した場合、TiKV ログメッセージは次のようになります。
 
     ```log
     Error: KV error safe to retry restarts txn: Txn(Mvcc(TxnLockNotFound)) [ERROR [Kv.rs:708] ["KvService::batch_raft send response fail"] [err=RemoteStoped]
@@ -333,7 +333,7 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 解決策:
 
 - まず、アプリケーションロジックを最適化できるかどうかを確認します。例えば、大規模なトランザクションはTiDBのトランザクションサイズ制限に達する可能性があり、それを複数の小さなトランザクションに分割できます。
-- また、アプリケーションのトランザクション ロジックに合わせて関連パラメータを適切に調整することもできます。
+- また、アプリケーションのトランザクションロジックに合わせて関連パラメータを適切に調整することもできます。
 
 ### ロックを取得しようとしたときにデッドロックが見つかりました {#deadlock-found-when-trying-to-get-lock}
 
@@ -348,4 +348,4 @@ TTL manager has timed out, pessimistic locks may expire, please commit or rollba
 解決策:
 
 - デッドロックの原因を確認するのが難しい場合は、v5.1以降のバージョンでは、 `INFORMATION_SCHEMA.DEADLOCKS`または`INFORMATION_SCHEMA.CLUSTER_DEADLOCKS`システムテーブルをクエリして、デッドロック待機チェーンの情報を取得することをお勧めします。詳細については、 [デッドロックエラー](#deadlock-errors)セクションと[`DEADLOCKS`テーブル](/information-schema/information-schema-deadlocks.md)ドキュメントを参照してください。
-- デッドロックが頻繁に発生する場合は、そのような発生を減らすために、アプリケーション内のトランザクション クエリ ロジックを調整する必要があります。
+- デッドロックが頻繁に発生する場合は、そのような発生を減らすために、アプリケーション内のトランザクションクエリロジックを調整する必要があります。

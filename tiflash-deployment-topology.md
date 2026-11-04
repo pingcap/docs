@@ -5,7 +5,7 @@ summary: 最小限の TiDB トポロジに基づくTiFlashの展開トポロジ�
 
 # TiFlash展開トポロジ {#tiflash-deployment-topology}
 
-このドキュメントでは、最小限の TiDB トポロジに基づく[TiFlash](/tiflash/tiflash-overview.md)のデプロイメント トポロジについて説明します。
+このドキュメントでは、最小限の TiDB トポロジに基づく[TiFlash](/tiflash/tiflash-overview.md)のデプロイメントトポロジについて説明します。
 
 TiFlashは列指向型ストレージエンジンであり、徐々に標準的なクラスタトポロジーになりつつあります。リアルタイムHTAPアプリケーションに適しています。
 
@@ -28,7 +28,7 @@ TiFlashは列指向型ストレージエンジンであり、徐々に標準的�
 - [TiFlashトポロジのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-tiflash.yaml)
 - [TiFlashトポロジの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-tiflash.yaml)
 
-上記の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスタートポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -39,4 +39,4 @@ TiFlashは列指向型ストレージエンジンであり、徐々に標準的�
 > **Note:**
 >
 > - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPクラスタコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
-> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
+> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホームディレクトリにデプロイされます。

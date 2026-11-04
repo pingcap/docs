@@ -7,7 +7,7 @@ summary: このドキュメントでは、OLTP ワークロードのパフォー
 
 TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的プロファイリング](/dashboard/continuous-profiling.md)機能や、TiDB [パフォーマンス概要ダッシュボード](/grafana-performance-overview-dashboard.md)などの包括的なパフォーマンス診断および分析機能を提供します。
 
-このドキュメントでは、これらの機能を組み合わせて使用し、7つの異なるランタイム シナリオで同じ OLTP ワークロードのパフォーマンスを分析および比較する方法について説明します。これにより、TiDB のパフォーマンスを効率的に分析および調整するのに役立つパフォーマンスチューニング プロセスが示されます。
+このドキュメントでは、これらの機能を組み合わせて使用し、7つの異なるランタイムシナリオで同じ OLTP ワークロードのパフォーマンスを分析および比較する方法について説明します。これにより、TiDB のパフォーマンスを効率的に分析および調整するのに役立つパフォーマンスチューニングプロセスが示されます。
 
 > **Note:**
 >
@@ -30,7 +30,7 @@ TiDB は、TiDB Dashboardの[Top SQL](/dashboard/top-sql.md)と[継続的プロ�
 
 ### アプリケーション構成 {#application-configuration}
 
-アプリケーションは、次の JDBC 構成を使用して、クエリ インターフェイスを介してデータベースに接続します。
+アプリケーションは、次の JDBC 構成を使用して、クエリインターフェイスを介してデータベースに接続します。
 
 ```
 useServerPrepStmts=false
@@ -92,7 +92,7 @@ useServerPrepStmts=false&useConfigs=maxPerformance
 
 ![dashboard-for-maxPerformance](/media/performance/case2.png)
 
-次の TiDB のフレーム チャートから、SQL 実行中に`Compile`や`Optimize`などの関数の CPU 消費が依然として大きいことがわかります。
+次の TiDB のフレームチャートから、SQL 実行中に`Compile`や`Optimize`などの関数の CPU 消費が依然として大きいことがわかります。
 
 ![flame-graph-for-maxPerformance](/media/performance/20220507-145257.jpg)
 
@@ -147,7 +147,7 @@ useServerPrepStmts=true&useConfigs=maxPerformance"
 
 #### TiDB Dashboard {#tidb-dashboard}
 
-次の TiDB のフレーム チャートから、Prepared Statement インターフェイスを有効にした後でも、 `CompileExecutePreparedStmt`と`Optimize`の CPU 消費量が依然として大きいことがわかります。
+次の TiDB のフレームチャートから、Prepared Statement インターフェイスを有効にした後でも、 `CompileExecutePreparedStmt`と`Optimize`の CPU 消費量が依然として大きいことがわかります。
 
 ![flame-graph-for-PrepStmts](/media/performance/3.1.1.png)
 
@@ -206,7 +206,7 @@ TiDB の平均 CPU 使用率は 874% から 936% に増加します。
 
 #### TiDB Dashboard {#tidb-dashboard}
 
-TiDB CPU 使用率のフレーム チャートから、 `CompileExecutePreparedStmt`と`Optimize`のCPU消費量がごくわずかであることがわかります。CPU の 25% は`Prepare`コマンドによって消費されており、これには`PlanBuilder`や`parseSQL`などの Prepare の解析関連の関数が含まれています。
+TiDB CPU 使用率のフレームチャートから、 `CompileExecutePreparedStmt`と`Optimize`のCPU消費量がごくわずかであることがわかります。CPU の 25% は`Prepare`コマンドによって消費されており、これには`PlanBuilder`や`parseSQL`などの Prepare の解析関連の関数が含まれています。
 
 PreparseStmt CPU = 25% CPU 時間 = 12.75秒
 
@@ -265,7 +265,7 @@ useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCache
 
 #### TiDB Dashboard {#tidb-dashboard}
 
-次の TiDB のフレーム チャートから、`Prepare`コマンドの高い CPU 消費がなくなったことがわかります。
+次の TiDB のフレームチャートから、`Prepare`コマンドの高い CPU 消費がなくなったことがわかります。
 
 - ExecutePreparedStmt CPU = 22% CPU時間 = 8.4秒
 
@@ -273,11 +273,11 @@ useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=1000&prepStmtCache
 
 #### パフォーマンス概要ダッシュボード {#performance-overview-dashboard}
 
-パフォーマンス概要ダッシュボードで最も注目すべき変更点は、 **CPS By Type**ペインの 3つの Stmt コマンド タイプが 1つに減り、 **Database Time By SQL Type**ペインの`general`ステートメント タイプが消え、 **QPS**ペインの QPS が 30.9k に増加したことです。
+パフォーマンス概要ダッシュボードで最も注目すべき変更点は、 **CPS By Type**ペインの 3つの Stmt コマンドタイプが 1つに減り、 **Database Time By SQL Type**ペインの`general`ステートメントタイプが消え、 **QPS**ペインの QPS が 30.9k に増加したことです。
 
 ![performance-overview-for-1-command](/media/performance/j-5.png)
 
-- Database Time By SQL Type: `Select`文 タイプが最も多くの時間を費やし、 `general`ステートメント タイプは消えます。
+- Database Time By SQL Type: `Select`文 タイプが最も多くの時間を費やし、 `general`ステートメントタイプは消えます。
 - Database Time By SQL Phase: `execute`フェーズがほとんどの時間を費やします。
 - SQL Execute Time Overview: `tso wait`、`Get`、および`Cop`がほとんどの時間を費やします。
 - 実行プランキャッシュがヒットしました。Queries Using Plan Cache OPSの値は、1秒あたり約`StmtExecute`です。
@@ -301,7 +301,7 @@ TiDBの平均CPU使用率は827%から577%に低下しました。QPSが増加�
 
 ### 分析の結論 {#analysis-conclusion}
 
-- シナリオ 4 と比較すると、シナリオ 5 の**CPS By Type**ペインには`StmtExecute`コマンドのみがあり、これにより 2回のネットワーク ラウンド トリップが回避され、システム全体の QPS が向上します。
+- シナリオ 4 と比較すると、シナリオ 5 の**CPS By Type**ペインには`StmtExecute`コマンドのみがあり、これにより 2回のネットワークラウンドトリップが回避され、システム全体の QPS が向上します。
 - QPSが増加すると、解析時間、コンパイル時間、実行時間の観点からレイテンシーは減少しますが、クエリ実行時間は増加します。これは、TiDBが`StmtPrepare`と`StmtClose`を非常に高速に処理するため、これら2つのコマンドタイプを削除すると平均クエリ実行時間が増加するためです。
 - Database Time By SQL Phaseでは、 `execute`が最も時間がかかり、データベース時間とほぼ一致しています。一方、SQL Execute Time Overviewでは、 `tso wait`が最も時間がかかり、 `execute`の4分の1以上がTSOの待機に費やされています。
 - 1秒あたりの`tso wait`実行時間の合計は5.46秒です。`tso wait`の実行時間の平均は196マイクロ秒、1秒あたりの`tso cmd`実行回数は28,000回で、QPSの30,900に非常に近い値です。これは、TiDBの分離レベル`read committed`の実装により、トランザクション内のすべてのSQL文がPDにTSOを要求する必要があるためです。
@@ -318,7 +318,7 @@ TiDB v6.0 は`rc read`を提供します。これは`tso cmd`を削減するこ�
 
 #### ダッシュボード {#dashboard}
 
-TiDB CPU のフレーム チャートには大きな変化はありません。
+TiDB CPU のフレームチャートには大きな変化はありません。
 
 - ExecutePreparedStmt CPU = 22% CPU時間 = 8.4秒
 
@@ -371,7 +371,7 @@ RC Read を`set global tidb_rc_read_check_ts=on;`で有効にした後、RC Read
 
 #### TiDB Dashboard {#tidb-dashboard}
 
-TiDB CPU のフレーム チャートには大きな変化はありません。
+TiDB CPU のフレームチャートには大きな変化はありません。
 
 ![flame-graph-for-table-cache](/media/performance/7.2.png)
 
@@ -416,10 +416,10 @@ QPSは34.9kから40.9kに増加し、`execute`フェーズで最も時間がか�
 | クエリ実行時間 | 479μs | 1120μs | 528μs | 426μs | 690μs | 533μs | 313μs | -38%              | -41%              |
 | QPS   | 56.3k | 24.2k  | 19.7k | 22.1k | 30.9k | 34.9k | 40.9k | +28%              | +108%             |
 
-これらのシナリオでは、シナリオ 2 はアプリケーションがクエリ インターフェイスを使用する一般的なシナリオであり、シナリオ 5 はアプリケーションがプリペアドステートメント インターフェイスを使用する理想的なシナリオです。
+これらのシナリオでは、シナリオ 2 はアプリケーションがクエリインターフェイスを使用する一般的なシナリオであり、シナリオ 5 はアプリケーションがプリペアドステートメントインターフェイスを使用する理想的なシナリオです。
 
 - シナリオ 5 とシナリオ 2 を比較すると、 Javaアプリケーション開発のベストプラクティスを使用し、クライアント側で Prepared Statement オブジェクトをキャッシュすることで、各 SQL文で実行プランキャッシュをヒットするために必要なコマンドとデータベース操作が 1つだけになり、クエリのレイテンシーが 38% 短縮され、QPS が 28% 増加し、TiDB の平均 CPU 使用率が 874% から 577% に低下していることがわかります。
-- シナリオ 7 とシナリオ 3 を比較すると、シナリオ 5 に RC 読み取りや小さなテーブル キャッシュなどの最新の TiDB 最適化機能を追加すると、レイテンシーが41% 削減され、QPS が 108% 増加し、平均 TiDB CPU 使用率が 936% から 478% に低下することがわかります。
+- シナリオ 7 とシナリオ 3 を比較すると、シナリオ 5 に RC 読み取りや小さなテーブルキャッシュなどの最新の TiDB 最適化機能を追加すると、レイテンシーが41% 削減され、QPS が 108% 増加し、平均 TiDB CPU 使用率が 936% から 478% に低下することがわかります。
 
 各シナリオのパフォーマンスを比較すると、次のような結論を導き出すことができます。
 

@@ -141,7 +141,7 @@ DROP USER 'test'@'localhost';
 
 ## 予約済みユーザーアカウント {#reserved-user-accounts}
 
-TiDB は、データベースの初期化中に`'root'@'%'`デフォルト アカウントを作成します。
+TiDB は、データベースの初期化中に`'root'@'%'`デフォルトアカウントを作成します。
 
 ## アカウントのリソース制限を設定する {#set-account-resource-limits}
 
@@ -205,7 +205,7 @@ TiDBはパスワードを[`mysql.user`](/mysql-schema/mysql-schema-user.md)シ�
     1. TiDB ノードのデプロイメントディレクトリの下の`scripts`ディレクトリを入力します。
     2. Switch to the `root` account of the operating system.
     3. ディレクトリ内の`run_tidb.sh`スクリプトをフォアグラウンドで実行します。
-    4. 新しいターミナル ウィンドウで`root`としてログインし、パスワードを変更します。
+    4. 新しいターミナルウィンドウで`root`としてログインし、パスワードを変更します。
 
         ```bash
         mysql -h 127.0.0.1 -P 4000 -u root

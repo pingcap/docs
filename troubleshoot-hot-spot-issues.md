@@ -13,7 +13,7 @@ TiDBは、ホットスポットのトラブルシューティング、解決、�
 
 ## 一般的なホットスポット {#common-hotspots}
 
-このセクションでは、TiDB エンコーディング ルール、テーブル ホットスポット、およびインデックス ホットスポットについて説明します。
+このセクションでは、TiDB エンコーディングルール、テーブルホットスポット、およびインデックスホットスポットについて説明します。
 
 ### TiDBエンコーディングルール {#tidb-encoding-rules}
 
@@ -116,9 +116,9 @@ ALTER TABLE: ALTER TABLE t SHARD_ROW_ID_BITS = 4;
 
 上記の負荷図に示すように、`SHARD_ROW_ID_BITS`を設定する前では、負荷のホットスポットが単一のリージョンに集中していました。`SHARD_ROW_ID_BITS`を設定した後では、負荷のホットスポットが分散するようになります。
 
-## `AUTO_RANDOM`を使用してAUTO_INCREMENT主キー ホットスポット テーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-auto_random}
+## `AUTO_RANDOM`を使用してAUTO_INCREMENT主キーホットスポットテーブルを処理する {#handle-auto-increment-primary-key-hotspot-tables-using-auto_random}
 
-AUTO_INCREMENT主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`を使用して、AUTO_INCREMENT主キーを持つホットスポット テーブルを処理します。
+AUTO_INCREMENT主キーによってもたらされる書き込みホットスポットを解決するには、 `AUTO_RANDOM`を使用して、AUTO_INCREMENT主キーを持つホットスポットテーブルを処理します。
 
 この機能を有効にすると、TiDB は書き込みホットスポットを分散させる目的を達成するために、ランダムに分散され、重複のない (スペースが使い果たされる前に) 主キーを生成します。
 

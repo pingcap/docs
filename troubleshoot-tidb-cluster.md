@@ -3,7 +3,7 @@ title: TiDB Cluster Troubleshooting Guide
 summary: TiDB を使用する際に問題を診断して解決する方法を学びます。
 ---
 
-# TiDBクラスタシューティング ガイド {#tidb-cluster-troubleshooting-guide}
+# TiDBクラスタシューティングガイド {#tidb-cluster-troubleshooting-guide}
 
 このガイドは、TiDBの使用中に発生する基本的な問題の診断と解決に役立ちます。問題が解決しない場合は、以下の情報を収集して、 [バグを報告する](/support.md)ことができます。
 
@@ -73,7 +73,7 @@ summary: TiDB を使用する際に問題を診断して解決する方法を学
 
 - ファイルは使用中です。
 
-    1 つのデータベース ファイル ディレクトリで 2つの TiKV ファイルを開かないでください。
+    1 つのデータベースファイルディレクトリで 2つの TiKV ファイルを開かないでください。
 
 ## `pd-server`を起動できません {#cannot-start-pd-server}
 

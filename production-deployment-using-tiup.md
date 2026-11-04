@@ -78,7 +78,7 @@ TiUPを使用してTiDBクラスタをオフラインでデプロイするには
 
 #### TiUPオフラインコンポーネントパッケージを準備する {#prepare-the-tiup-offline-component-package}
 
-**方法 1** : 以下のリンクを使用して、対象の TiDB バージョンのオフライン バイナリパッケージ (TiUPオフライン パッケージを含む) をダウンロードします。サーバーとツールキット パッケージの両方をダウンロードする必要があります。ダウンロードすると[プライバシーポリシー](https://www.pingcap.com/privacy-policy/)次の規約に同意したことになります。 。
+**方法 1** : 以下のリンクを使用して、対象の TiDB バージョンのオフラインバイナリパッケージ (TiUPオフラインパッケージを含む) をダウンロードします。サーバーとツールキットパッケージの両方をダウンロードする必要があります。ダウンロードすると[プライバシーポリシー](https://www.pingcap.com/privacy-policy/)次の規約に同意したことになります。 。
 
 ```
 https://download.pingcap.com/tidb-community-server-{version}-linux-{arch}.tar.gz
@@ -154,7 +154,7 @@ https://download.pingcap.com/tidb-community-toolkit-{version}-linux-{arch}.tar.g
         tiup mirror show
         ```
 
-        上記のコマンドの出力で`show`コマンドが存在しないと表示される場合は、 TiUPの古いバージョンを使用している可能性があります。この場合、 `$HOME/.tiup/tiup.toml`から現在のミラー アドレスを取得できます。このミラー アドレスを記録してください。以降の手順では、 `${base_mirror}`このアドレスを参照するために使用されます。
+        上記のコマンドの出力で`show`コマンドが存在しないと表示される場合は、 TiUPの古いバージョンを使用している可能性があります。この場合、 `$HOME/.tiup/tiup.toml`から現在のミラーアドレスを取得できます。このミラーアドレスを記録してください。以降の手順では、 `${base_mirror}`このアドレスを参照するために使用されます。
 
     4. 不完全なオフラインミラーを既存のオフラインミラーに統合する：
 
@@ -182,7 +182,7 @@ sh tidb-community-server-${version}-linux-amd64/local_install.sh && \
 source /home/tidb/.bash_profile
 ```
 
-`local_install.sh`スクリプトは、 `tiup mirror set tidb-community-server-${version}-linux-amd64`コマンドを自動的に実行して、現在のミラー アドレスを`tidb-community-server-${version}-linux-amd64`に設定します。
+`local_install.sh`スクリプトは、 `tiup mirror set tidb-community-server-${version}-linux-amd64`コマンドを自動的に実行して、現在のミラーアドレスを`tidb-community-server-${version}-linux-amd64`に設定します。
 
 #### オフラインパッケージをマージする {#merge-offline-packages}
 
@@ -210,7 +210,7 @@ tiup cluster template > topology.yaml
 
 以下の2つの一般的なシナリオでは、コマンドを実行することで推奨トポロジーテンプレートを生成できます。
 
-- ハイブリッド デプロイメントの場合: 複数のインスタンスが 1台のマシンにデプロイされます。詳細は[ハイブリッド展開トポロジ](/hybrid-deployment-topology.md)を参照。
+- ハイブリッドデプロイメントの場合: 複数のインスタンスが 1台のマシンにデプロイされます。詳細は[ハイブリッド展開トポロジ](/hybrid-deployment-topology.md)を参照。
 
     ```shell
     tiup cluster template --full > topology.yaml

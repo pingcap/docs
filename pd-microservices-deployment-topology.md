@@ -1,11 +1,11 @@
 ---
 title: PD Microservice Deployment Topology
-summary: 最小限の TiDB トポロジに基づく PD マイクロサービスのデプロイメント トポロジを学習します。
+summary: 最小限の TiDB トポロジに基づく PD マイクロサービスのデプロイメントトポロジを学習します。
 ---
 
 # PDマイクロサービスデプロイメントトポロジ {#pd-microservice-deployment-topology}
 
-このドキュメントでは、最小限の TiDB トポロジに基づく[PDマイクロサービス](/pd-microservices.md)のデプロイメント トポロジについて説明します。
+このドキュメントでは、最小限の TiDB トポロジに基づく[PDマイクロサービス](/pd-microservices.md)のデプロイメントトポロジについて説明します。
 
 ## トポロジ情報 {#topology-information}
 
@@ -80,7 +80,7 @@ grafana_servers:
 
 </details>
 
-前述の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+前述の TiDB クラスタートポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 ### 主なパラメータ {#key-parameters}
 
@@ -92,4 +92,4 @@ grafana_servers:
 > **Note:**
 >
 > - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUPTiUPコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
-> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
+> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホームディレクトリにデプロイされます。

@@ -27,7 +27,7 @@ tiup cluster display tidb-test
 
     ![TiDB-Dashboard](/media/tiup/tidb-dashboard.png)
 
-2. ホーム ページには、TiDB クラスター内のノード情報が表示されます。
+2. ホームページには、TiDB クラスター内のノード情報が表示されます。
 
     ![TiDB-Dashboard-status](/media/tiup/tidb-dashboard-status.png)
 

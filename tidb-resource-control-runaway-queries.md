@@ -71,7 +71,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=(EXEC_ELAPSED='60s', ACTION=KILL, WATCH=SIMILAR DURATION='10m');
     ```
 
-3. ランナウェイクエリ チェックをキャンセルするには、 `rg1`リソースグループを変更します。
+3. ランナウェイクエリチェックをキャンセルするには、 `rg1`リソースグループを変更します。
 
     ```sql
     ALTER RESOURCE GROUP rg1 QUERY_LIMIT=NULL;
@@ -116,7 +116,7 @@ summary: リソース管理機能を使用して、リソースを過剰に消�
     QUERY WATCH ADD RESOURCE GROUP rg1 ACTION KILL PLAN DIGEST 'd08bc323a934c39dc41948b0a073725be3398479b6fa4f6dd1db2a9b115f7f57';
     ```
 
-- `INFORMATION_SCHEMA.RUNAWAY_WATCHES`クエリしてウォッチ アイテム ID を取得し、ウォッチ アイテムを削除します。
+- `INFORMATION_SCHEMA.RUNAWAY_WATCHES`クエリしてウォッチアイテム ID を取得し、ウォッチアイテムを削除します。
 
     ```sql
     SELECT * from information_schema.runaway_watches ORDER BY id\G
