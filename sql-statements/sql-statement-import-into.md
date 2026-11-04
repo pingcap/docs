@@ -163,13 +163,13 @@ OptionItem ::=
 
 > **Note:**
 >
-> TiDB Cloud Premium では、 `DISK_QUOTA` 、 `THREAD` 、 `MAX_WRITE_SPEED` 、および`CLOUD_STORAGE_URI`の4つのオプションは、適切な値に自動的に調整されるため、ユーザーが変更できません。これらの設定を調整する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
+> {{{ .premium }}} では、 `DISK_QUOTA` 、 `THREAD` 、 `MAX_WRITE_SPEED` 、および`CLOUD_STORAGE_URI`の4つのオプションは、適切な値に自動的に調整されるため、ユーザーが変更できません。これらの設定を調整する必要がある場合は、 [TiDB Cloudサポート](/tidb-cloud/tidb-cloud-support.md)にお問い合わせください。
 
 </CustomContent>
 
 ## `IMPORT INTO ... FROM FILE`方法 {#import-into-from-file-usage}
 
-TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、および TiDB ローカルストレージに保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および GCS に保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータインポートをサポートしています。
+TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、および TiDB ローカルストレージに保存されているファイルからのデータインポートをサポートしています。 [TiDB Cloud Dedicated](https://docs.pingcap.com/tidbcloud/select-cluster-tier#tidb-cloud-dedicated)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および GCS に保存されているファイルからのデータインポートをサポートしています。 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3 および Alibaba Cloud OSS に保存されているファイルからのデータインポートをサポートしています。
 
 - Amazon S3 または GCS に保存されているデータファイルの場合、 `IMPORT INTO ... FROM FILE`は[TiDB分散実行フレームワーク（DXF）](/tidb-distributed-execution-framework.md)での実行をサポートしています。
 
@@ -197,7 +197,7 @@ TiDB Self-Managed の場合、 `IMPORT INTO ... FROM FILE`は Amazon S3、GCS、
 
 > **Note:**
 >
-> [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは、グローバルソートは利用できません。
+> [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスでは、グローバルソートは利用できません。
 
 `IMPORT INTO ... FROM FILE`は、ソースデータファイルのデータインポートジョブを複数のサブジョブに分割し、各サブジョブはインポート前にデータを個別にエンコードおよびソートします。これらのサブジョブのエンコードされた KV 範囲に大きな重複がある場合 (TiDB がデータを KV にエンコードする方法については、 [TiDBコンピューティング](/tidb-computing.md)を参照)、TiKV はインポート中にコンパクションを継続する必要があり、インポートのパフォーマンスと安定性が低下します。
 

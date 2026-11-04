@@ -11,7 +11,7 @@ summary: TiDBデータベースにおけるDISTRIBUTE TABLEの使用方法の概
 
 > **Note:**
 >
-> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
+> この機能は、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 `DISTRIBUTE TABLE`文は、指定されたテーブルのリージョンを再分配および再スケジュールし、テーブルレベルでバランスの取れた分散を実現します。このステートメントを実行することで、リージョンが少数のTiFlashまたは TiKV ノードに集中するのを防ぎ、テーブル内のリージョンの分散が不均一になる問題を解決できます。
 

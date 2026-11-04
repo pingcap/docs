@@ -20,7 +20,7 @@ TiDB v7.0.0 以降、 `LOAD DATA` SQL文は次の機能をサポートします�
 
 > **Note:**
 >
-> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は`LOAD DATA LOCAL INFILE`と、Amazon S3 または Google Cloud Storage からの`LOAD DATA INFILE`をサポートしますが、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)は`LOAD DATA LOCAL INFILE`のみをサポートします。
+> `LOAD DATA INFILE`ステートメントの場合、 TiDB Cloud Dedicated は`LOAD DATA LOCAL INFILE`と、Amazon S3 または Google Cloud Storage からの`LOAD DATA INFILE`をサポートしますが、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)と[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)は`LOAD DATA LOCAL INFILE`のみをサポートします。
 
 </CustomContent>
 
@@ -50,7 +50,7 @@ Fields ::=
 
 TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカルデータファイルをロードするには、 TiDB Cloudに接続するときに接続文字列に`--local-infile`オプションを追加する必要があります。
 
-- 以下は、 TiDB Cloud Starter の接続文字列の例です。
+- 以下は、 {{{ .starter }}} の接続文字列の例です。
 
     ```
     mysql --connect-timeout 15 -u '<user_name>' -h <host_name> -P 4000 -D test --ssl-mode=VERIFY_IDENTITY --ssl-ca=/etc/ssl/cert.pem -p<your_password> --local-infile

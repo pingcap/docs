@@ -11,7 +11,7 @@ TiDBは、v6.5.6、v7.1.3、v7.5.1、v7.6.0以降で`FLASHBACK CLUSTER TO TSO`�
 
 > **Warning:**
 >
-> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`構文は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)、および[{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium)インスタンスには適用できません。予期しない結果を避けるため、 TiDB Cloud Starter、Essential、およびPremiumインスタンスではこのステートメントを実行しないでください。
+> `FLASHBACK CLUSTER TO [TIMESTAMP|TSO]`構文は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)、[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)、および[{{{ .premium }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#premium)インスタンスには適用できません。予期しない結果を避けるため、 TiDB Cloud Starter、Essential、およびPremiumインスタンスではこのステートメントを実行しないでください。
 
 > **Warning:**
 >

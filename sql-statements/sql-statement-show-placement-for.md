@@ -9,7 +9,7 @@ summary: TiDB における SHOW PLACEMENT FOR の使用方法。
 
 > **Note:**
 >
-> この機能は、 [TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
+> この機能は、 [{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)インスタンスではご利用いただけません。
 
 このステートメントは`Scheduling_State`フィールドがPlacement Driver(PD) が配置スケジュールに関して現在行っている進捗状況を示す結果セットを返します。
 
