@@ -49,7 +49,7 @@ TiDB Dashboardにログイン後、左側のナビゲーションメニューで
 
 ![tidb\_execute node example2](/media/dashboard/dashboard-metrics-relation-node-example2.png)
 
-上記の画像に表示されているテキスト情報は、メトリックノードの説明であり、合計期間、合計時間、平均期間、平均期間 P99、P90、P80 が含まれます。
+上記の画像に表示されているテキスト情報は、メトリックノードの説明であり、合計所要時間、合計回数、平均所要時間、および P99、P90、P80 の平均所要時間が含まれます。
 
 ### ノード間の親子関係 {#the-parent-child-relations-between-nodes}
 
