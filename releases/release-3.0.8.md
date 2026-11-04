@@ -84,7 +84,7 @@ TiDB Ansible バージョン: 3.0.8
 - エンジン
     - 極端な状況でRocksDBイテレーターエラーが正しく処理されないため、空のデータが返される可能性がある問題を修正しました[#6326](https://github.com/tikv/tikv/pull/6326)
 - トランザクション
-    - 悲観的ロックが誤ってクリーンアップされたために、TiKV がキーにデータを書き込むことができず、GC がブロックされる問題を修正しました[#6354](https://github.com/tikv/tikv/pull/6354)
+    - 悲観的ロックが誤ってクリーンアップされたために、TiKV がキーにデータを書き込めず、GC がブロックされる問題を修正しました[#6354](https://github.com/tikv/tikv/pull/6354)
     - ロック競合が深刻なシナリオでのパフォーマンスを向上させるために悲観的ロック待機メカニズムを最適化します[#6296](https://github.com/tikv/tikv/pull/6296)
 - デフォルト値`tikv_alloc`を`tikv_alloc/default`から`jemalloc`に更新します[#6206](https://github.com/tikv/tikv/pull/6206)
 

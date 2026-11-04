@@ -165,7 +165,7 @@ TiDB バージョン: 4.0.9
     - リージョンマージによりネットワークパーティション中にデータが失われる可能性がある問題を修正しました [#9108](https://github.com/tikv/tikv/pull/9108)
     - `latin1`文字セットを使用すると`ANALYZE`文がpanicを引き起こす可能性がある問題を修正しました [#9082](https://github.com/tikv/tikv/pull/9082)
     - 数値型を時間型に変換するときに返される誤った結果を修正[#9031](https://github.com/tikv/tikv/pull/9031)
-    - 透過的データ暗号化 (TDE) が有効な場合、 TiDB Lightning がインポーターバックエンドまたはローカルバックエンドを使用して SST ファイルを TiKV に取り込むことができないバグを修正しました[#8995](https://github.com/tikv/tikv/pull/8995)
+    - 透過的データ暗号化 (TDE) が有効な場合、 TiDB Lightning がインポーターバックエンドまたはローカルバックエンドを使用して SST ファイルを TiKV に取り込めないバグを修正しました[#8995](https://github.com/tikv/tikv/pull/8995)
     - 無効な`advertise-status-addr`の値（ `0.0.0.0` ）を修正する [#9036](https://github.com/tikv/tikv/pull/9036)
     - コミットされたトランザクションでキーがロックされ削除されたときに、キーが存在することを示すエラーが返される問題を修正しました[#8930](https://github.com/tikv/tikv/pull/8930)
     - RocksDB キャッシュマッピングエラーによりデータ破損が発生する問題を修正[#9029](https://github.com/tikv/tikv/pull/9029)
