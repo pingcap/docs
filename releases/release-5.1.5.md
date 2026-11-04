@@ -31,7 +31,7 @@ TiDBバージョン：5.1.5
     - リージョンが空のデータを返した場合に発生する誤った`ANY_VALUE`の結果を修正する [#30923](https://github.com/pingcap/tidb/issues/30923)
     - innerWorkerのpanicによって発生したインデックス結合の誤った結果を修正 [#31494](https://github.com/pingcap/tidb/issues/31494)
     - SQL操作がJSON型の列と`CHAR`型の列を結合する際にキャンセルされる問題を修正しました [#29401](https://github.com/pingcap/tidb/issues/29401)
-    - TiDBのバックグラウンドHTTPサービスが正常に終了せず、クラスターが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
+    - TiDBのバックグラウンドHTTPサービスが正常に終了しない可能性があり、クラスターが異常な状態になる問題を修正しました [#30571](https://github.com/pingcap/tidb/issues/30571)
     - 同時実行される列型変更によってスキーマとデータの間に不整合が生じる問題を修正します [#31048](https://github.com/pingcap/tidb/issues/31048)
     - `KILL TIDB`がアイドル状態の接続で即座に有効にならない問題を修正します [#24031](https://github.com/pingcap/tidb/issues/24031)
     - セッション変数を設定すると`tidb_snapshot`が機能しなくなるバグを修正しました [#35515](https://github.com/pingcap/tidb/issues/35515)
