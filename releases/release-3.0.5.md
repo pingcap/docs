@@ -46,7 +46,7 @@ TiDB Ansible バージョン: 3.0.5
     - `Create Table`文で一意インデックスを作成するときに複数の`unique`をサポートする [#12463](https://github.com/pingcap/tidb/pull/12463)
     - `Alter Table` を使用してビット型の列を追加するときに、既存の行にこの列のデフォルト値を設定するとエラーが発生する可能性がある問題を修正しました。 [#12489](https://github.com/pingcap/tidb/pull/12489)
     - レンジパーティションテーブルで日付または日時型の列をパーティションキーとして使用している場合にパーティションを追加できない問題を修正[#12815](https://github.com/pingcap/tidb/pull/12815)
-    - 日付または日時型の列をパーティションキーとして持つレンジパーティションテーブルの場合、テーブルの作成時またはパーティションの追加時に、パーティションタイプとパーティションキー タイプの一貫性をチェックする機能をサポート[#12792](https://github.com/pingcap/tidb/pull/12792)
+    - 日付または日時型の列をパーティションキーとして持つレンジパーティションテーブルの場合、テーブルの作成時またはパーティションの追加時に、パーティションタイプとパーティションキータイプの一貫性をチェックする機能をサポート[#12792](https://github.com/pingcap/tidb/pull/12792)
     - レンジパーティションテーブルを作成するときに、一意キーの列セットがパーティション化された列セット以上である必要があるというチェックを追加します[#12718](https://github.com/pingcap/tidb/pull/12718)
 - モニター
     - コミットおよびロールバック操作の監視メトリックを`Transaction OPS`ダッシュボードに追加します。 [#12505](https://github.com/pingcap/tidb/pull/12505)
@@ -79,7 +79,7 @@ TiDB Ansible バージョン: 3.0.5
 
 - TiDB Binlog
     - `ALTER DATABASE`に関連する DDL 操作によりDrainerが異常終了する問題を修正[#769](https://github.com/pingcap/tidb-binlog/pull/769)
-    - レプリケーション効率を向上させるためにコミットbinlog のトランザクション ステータス情報のクエリをサポートする[#757](https://github.com/pingcap/tidb-binlog/pull/757)
+    - レプリケーション効率を向上させるためにコミットbinlog のトランザクションステータス情報のクエリをサポートする[#757](https://github.com/pingcap/tidb-binlog/pull/757)
     - Drainerの`start_ts`がPumpの最大`commit_ts`より大きい場合にPump panicが発生する可能性がある問題を修正しました [#758](https://github.com/pingcap/tidb-binlog/pull/758)
 
 - TiDB Lightning

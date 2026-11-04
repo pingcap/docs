@@ -27,7 +27,7 @@ TiDB Ansible バージョン: 3.0.8
     - TiDBが`group by item` を誤って計算するため、 `OUTER JOIN`の実行でエラーが報告される可能性がある問題を修正しました。 [#14014](https://github.com/pingcap/tidb/pull/14014)
     - 範囲を超えるデータがレンジパーティションテーブルに書き込まれたときにエラーメッセージが不正確になる問題を修正[#14107](https://github.com/pingcap/tidb/pull/14107)
     - MySQL 8では`PadCharToFullLength`がすぐに破棄されることを考慮して、特殊なケースで予期しないクエリ結果を回避するために[PR #10124](https://github.com/pingcap/tidb/pull/10124)を元に戻し、 `PadCharToFullLength`の効果をキャンセルします[#14157](https://github.com/pingcap/tidb/pull/14157)
-    - `ExplainExec` の保証されていない`close()`呼び出しによって発生する`EXPLAIN ANALYZE`文の実行時のゴルーチン リークの問題を修正しました。 [#14226](https://github.com/pingcap/tidb/pull/14226)
+    - `ExplainExec` の保証されていない`close()`呼び出しによって発生する`EXPLAIN ANALYZE`文の実行時のゴルーチンリークの問題を修正しました。 [#14226](https://github.com/pingcap/tidb/pull/14226)
 - DDL
     - `change column`のエラーメッセージ出力`modify column`最適化して理解しやすくする[#13796](https://github.com/pingcap/tidb/pull/13796)
     - パーティションテーブルのリージョン分割をサポートするために`SPLIT PARTITION TABLE`構文を追加します [#13929](https://github.com/pingcap/tidb/pull/13929)
@@ -66,7 +66,7 @@ TiDB Ansible バージョン: 3.0.8
     - 新しいクラスターが作成されたときに、 `tidb_txn_mode`変数のデフォルト値を`""`から`"pessimistic"`に更新します[#14171](https://github.com/pingcap/tidb/pull/14171)
     - トランザクションが再試行されたときに単一のステートメントのロック待機時間がリセットされないため、悲観的トランザクションのロック待機時間が長すぎる問題を修正しました[#13990](https://github.com/pingcap/tidb/pull/13990)
     - 悲観的トランザクションモードで未変更データがロック解除されるため、誤ったデータが読み取られる可能性がある問題を修正しました。 [#14050](https://github.com/pingcap/tidb/pull/14050)
-    - mocktikv で事前書き込みを実行するときにトランザクション タイプが区別されないため、挿入値の制限チェックが繰り返される問題を修正しました。 [#14175](https://github.com/pingcap/tidb/pull/14175)
+    - mocktikv で事前書き込みを実行するときにトランザクションタイプが区別されないため、挿入値の制限チェックが繰り返される問題を修正しました。 [#14175](https://github.com/pingcap/tidb/pull/14175)
     - `session.TxnState`が`Invalid`のときにトランザクションが正しく処理されないためpanicを修正 [#13988](https://github.com/pingcap/tidb/pull/13988)
     - mocktikvの`ErrConfclit`構造に`ConflictCommitTS` が含まれていない問題を修正しました [#14080](https://github.com/pingcap/tidb/pull/14080)
     - TiDBがロックを解決した後にロックタイムアウトを正しくチェックしないため、トランザクションがブロックされる問題を修正しました。 [#14083](https://github.com/pingcap/tidb/pull/14083)

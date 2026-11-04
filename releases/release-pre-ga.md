@@ -9,7 +9,7 @@ summary: 2017年8月30日にリリースされたTiDBのプレGAリリースは�
 
 ## TiDB {#tidb}
 
-- SQL クエリ オプティマイザ:
+- SQL クエリオプティマイザ:
     - コストモデルを調整する
     - インデックススキャンを使用して、両側に異なる型を持つ`compare`式を持つ`where`句を処理します。
     - 貪欲アルゴリズムに基づくJoin Reorder をサポート
@@ -31,7 +31,7 @@ summary: 2017年8月30日にリリースされたTiDBのプレGAリリースは�
 - コプロセッサーはより多くのプッシュダウン演算子をサポートするようになりました
 - パフォーマンスと安定性を向上
 
-## Spark 用 TiDB コネクタ ベータリリース {#tidb-connector-for-spark-beta-release}
+## Spark 用 TiDB コネクタベータリリース {#tidb-connector-for-spark-beta-release}
 
 - 述語プッシュダウンを実装する
 - 集約プッシュダウンを実装する

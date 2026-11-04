@@ -82,7 +82,7 @@ TiDB バージョン: 4.0.15
         - DDL実行のPrometheusメトリックを追加する[#2595](https://github.com/pingcap/tiflow/issues/2595) [#2669](https://github.com/pingcap/tiflow/issues/2669)
         - メジャーバージョンまたはマイナーバージョン間での TiCDC クラスターの操作を禁止[#2601](https://github.com/pingcap/tiflow/pull/2601)
         - `file sorter` を削除 [#2325](https://github.com/pingcap/tiflow/pull/2325)
-        - 変更フィードが削除されたときに変更フィード メトリックをクリーンアップし、プロセッサが終了したときにプロセッサ メトリックをクリーンアップします[#2156](https://github.com/pingcap/tiflow/issues/2156)
+        - 変更フィードが削除されたときに変更フィードメトリックをクリーンアップし、プロセッサが終了したときにプロセッサメトリックをクリーンアップします[#2156](https://github.com/pingcap/tiflow/issues/2156)
         - リージョンが初期化された後のロック解決アルゴリズムを最適化する[#2188](https://github.com/pingcap/tiflow/issues/2188)
 
 ## バグ修正 {#bug-fixes}

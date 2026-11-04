@@ -72,7 +72,7 @@ TiDB バージョン: 4.0.3
 
 - TiDB Dashboard
 
-    - コールド論理範囲の Key Visualizer バケット マージの改善 [#674](https://github.com/pingcap-incubator/tidb-dashboard/pull/674)
+    - コールド論理範囲の Key Visualizer バケットマージの改善 [#674](https://github.com/pingcap-incubator/tidb-dashboard/pull/674)
     - 一貫性を保つために設定項目`disable-telemetry`の名前を`enable-telemetry`に変更します[#684](https://github.com/pingcap-incubator/tidb-dashboard/pull/684)
     - ページ切り替え時にプログレスバーを表示する[#661](https://github.com/pingcap-incubator/tidb-dashboard/pull/661)
     - スペース区切り文字がある場合、低速ログ検索がログ検索と同じ動作をすることを確認します[#682](https://github.com/pingcap-incubator/tidb-dashboard/pull/682)
@@ -105,7 +105,7 @@ TiDB バージョン: 4.0.3
 
     - 実行中にエラーが発生した場合、 `IndexHashJoin`で空集合の代わりにエラーを返します[#18586](https://github.com/pingcap/tidb/pull/18586)
     - gRPC トランスポートリーダーが壊れているときに繰り返し発生するpanicを修正[#18562](https://github.com/pingcap/tidb/pull/18562)
-    - Green GC がオフライン ストアのロックをスキャンしないため、データの不完全性が発生する可能性がある問題を修正しました[#18550](https://github.com/pingcap/tidb/pull/18550)
+    - Green GC がオフラインストアのロックをスキャンしないため、データの不完全性が発生する可能性がある問題を修正しました[#18550](https://github.com/pingcap/tidb/pull/18550)
     - TiFlashエンジンを使用して非読み取り専用ステートメントの処理を禁止する [#18534](https://github.com/pingcap/tidb/pull/18534)
     - クエリ接続がパニックになったときに実際のエラーメッセージを返す[#18500](https://github.com/pingcap/tidb/pull/18500)
     - `ADMIN REPAIR TABLE`文の実行で TiDB ノードのテーブルメタデータの再ロードに失敗する問題を修正しました。 [#18323](https://github.com/pingcap/tidb/pull/18323)
@@ -171,4 +171,4 @@ TiDB バージョン: 4.0.3
 
     - TiDB Binlog
 
-        - TiDB Binlog がTLS を有効にしてダウンストリームにデータを複製する場合、チェックポイント更新に使用されるデータベース ドライバーで TLS が有効になっていないためにDrainerを起動できない問題を修正しました。 [#988](https://github.com/pingcap/tidb-binlog/pull/988)
+        - TiDB Binlog がTLS を有効にしてダウンストリームにデータを複製する場合、チェックポイント更新に使用されるデータベースドライバーで TLS が有効になっていないためにDrainerを起動できない問題を修正しました。 [#988](https://github.com/pingcap/tidb-binlog/pull/988)

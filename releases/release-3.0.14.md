@@ -61,7 +61,7 @@ TiDB バージョン: 3.0.14
 
     - TiDB Lightning
 
-        - tidb-lightning-ctl の`fetch-mode`サブコマンドを使用して TiKV クラスター モードの印刷をサポート [#287](https://github.com/pingcap/tidb-lightning/pull/287)
+        - tidb-lightning-ctl の`fetch-mode`サブコマンドを使用して TiKV クラスターモードの印刷をサポート [#287](https://github.com/pingcap/tidb-lightning/pull/287)
 
 ## バグ修正 {#bug-fixes}
 

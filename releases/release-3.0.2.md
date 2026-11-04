@@ -62,7 +62,7 @@ TiDB Ansible バージョン: 3.0.2
     - `INFORMATION_SCHEMA.TIDB_HOT_REGIONS` に`REGION_ID`を足す [#11350](https://github.com/pingcap/tidb/pull/11350)
     - PD APIからのリージョン情報取得のタイムアウト期間を解除し、リージョン数が多い場合にPDタイムアウトによりTiDB API `http://{TiDBIP}:10080/regions/hot`が呼び出されてもリージョン情報の取得が失敗しないようにします[#11383](https://github.com/pingcap/tidb/pull/11383)
     - リージョン関連のリクエストがHTTP API でパーティションテーブル関連のリージョンを返さない問題を修正 [#11466](https://github.com/pingcap/tidb/pull/11466)
-    - ユーザーが手動で悲観的ロックを検証するときに、遅い操作によって発生するロック タイムアウトの可能性を減らすには、次の変更を行います。 [#11521](https://github.com/pingcap/tidb/pull/11521)
+    - ユーザーが手動で悲観的ロックを検証するときに、遅い操作によって発生するロックタイムアウトの可能性を減らすには、次の変更を行います。 [#11521](https://github.com/pingcap/tidb/pull/11521)
         - 悲観的ロックのデフォルトTTLを30秒から40秒に増やす
         - 最大TTLを60秒から120秒に増やす
         - 最初の`LockKeys`リクエストから悲観的ロック期間を計算する

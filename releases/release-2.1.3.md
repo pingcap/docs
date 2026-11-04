@@ -24,7 +24,7 @@ summary: "TiDB 2.1.3 および TiDB Ansible 2.1.3 がリリースされ、シス
 - サーバー
     - コメントに非TiDBヒントが存在する場合、エラーではなく警告を返します。 [#8766](https://github.com/pingcap/tidb/pull/8766)
     - 設定されたTIMEZONE値の有効性を確認する [#8879](https://github.com/pingcap/tidb/pull/8879)
-    - `QueryDurationHistogram`メトリクス項目を最適化して、より多くのステートメント タイプを表示します[#8875](https://github.com/pingcap/tidb/pull/8875)
+    - `QueryDurationHistogram`メトリクス項目を最適化して、より多くのステートメントタイプを表示します[#8875](https://github.com/pingcap/tidb/pull/8875)
     - 一部のケースにおける bigint の下限オーバーフローの問題を修正[#8544](https://github.com/pingcap/tidb/pull/8544)
     - `ALLOW_INVALID_DATES` SQLモードをサポート [#9110](https://github.com/pingcap/tidb/pull/9110)
 - DDL

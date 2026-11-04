@@ -31,7 +31,7 @@ TiDB Ansible バージョン: 4.0.0-beta.2
     - TiDB Lightning
         - TLS構成 をサポートする [#270](https://github.com/pingcap/tidb-lightning/pull/270) [#40](https://github.com/tikv/importer/pull/40)
     - TiCDC
-        - 変更データ キャプチャ (CDC) の最初のリリース。次の機能が提供されます。
+        - 変更データキャプチャ (CDC) の最初のリリース。次の機能が提供されます。
             - TiKVから変更されたデータのキャプチャをサポート
             - TiKVからMySQL互換データベースへの変更データの複製をサポートし、最終的なデータの一貫性を保証します。
             - 変更されたデータをKafkaに複製し、最終的なデータの一貫性または行レベルの順序性を保証することをサポート

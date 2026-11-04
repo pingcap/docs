@@ -95,7 +95,7 @@ summary: "2018年4月27日にリリースされたTiDB 2.0 GAでは、MySQLと�
     - `Raw DeleteRange` APIを追加する
     - `GetMetric` APIを追加する
     - `Raw Batch Put` 、 `Raw Batch Get` 、 `Raw Batch Delete` 、 `Raw Batch Scan`を追加
-    - RawKV API にカラムファミリ オプションを追加し、特定のカラムファミリでの操作の実行をサポートします。
+    - RawKV API にカラムファミリオプションを追加し、特定のカラムファミリでの操作の実行をサポートします。
     - コプロセッサーでのストリーミングとストリーミング集計をサポート
     - コプロセッサーのリクエストタイムアウトの設定をサポート
     - リージョンハートビートでタイムスタンプを伝送

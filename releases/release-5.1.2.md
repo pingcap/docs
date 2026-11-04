@@ -93,7 +93,7 @@ TiDB バージョン: 5.1.2
     - MergeJoin 使用時の CTE バグを修正[#25474](https://github.com/pingcap/tidb/issues/25474)
     - 通常のテーブルがパーティションテーブルに結合するときに、 `SELECT FOR UPDATE`文がデータを正しくロックしないバグを修正しました。 [#26251](https://github.com/pingcap/tidb/issues/26251)
     - 通常のテーブルがパーティションテーブルに結合すると`SELECT FOR UPDATE`文がエラーを返す問題を修正 [#26250](https://github.com/pingcap/tidb/issues/26250)
-    - `PointGet`がロックを解決するライト バージョンを使用しない問題を修正しました [#26562](https://github.com/pingcap/tidb/pull/26562)
+    - `PointGet`がロックを解決するライトバージョンを使用しない問題を修正しました [#26562](https://github.com/pingcap/tidb/pull/26562)
 
 - TiKV
 
@@ -143,7 +143,7 @@ TiDB バージョン: 5.1.2
     - TiCDC
 
         - JSONエンコードが`string`または`[]byte`型の列値を処理する際にpanicを引き起こす可能性があるバグを修正しました。 [#2758](https://github.com/pingcap/tiflow/issues/2758)
-        - OOMを回避するために gRPC ウィンドウ サイズを縮小する [#2673](https://github.com/pingcap/tiflow/issues/2673)
+        - OOMを回避するために gRPC ウィンドウサイズを縮小する [#2673](https://github.com/pingcap/tiflow/issues/2673)
         - メモリ負荷が高い場合の gRPC `keepalive`エラーを修正[#2202](https://github.com/pingcap/tiflow/issues/2202)
         - 符号なし`tinyint`がTiCDCをpanicさせるバグを修正[#2648](https://github.com/pingcap/tiflow/issues/2648)
         - TiCDC Open Protocolにおける空の値の問題を修正しました。1つのトランザクションに変更がない場合、空の値を出力することはなくなりました[#2612](https://github.com/pingcap/tiflow/issues/2612)

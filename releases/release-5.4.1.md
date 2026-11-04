@@ -19,7 +19,7 @@ TiDB v5.4.1では、製品設計上の互換性に関する変更は行われて
 
     - `_tidb_rowid`列を読み取るクエリにPointGetプランの使用をサポート [#31543](https://github.com/pingcap/tidb/issues/31543)
     - `Apply`オペレーターのログとメトリクスを追加して、並列であるかどうかを確認します。 [#33887](https://github.com/pingcap/tidb/issues/33887)
-    - 統計情報を収集するために使用される分析バージョン 2 の`TopN`プルーニング ロジックを改善します。 [#34256](https://github.com/pingcap/tidb/issues/34256)
+    - 統計情報を収集するために使用される分析バージョン 2 の`TopN`プルーニングロジックを改善します。 [#34256](https://github.com/pingcap/tidb/issues/34256)
     - Grafanaダッシュボードで複数のKubernetesクラスターの表示をサポート [#32593](https://github.com/pingcap/tidb/issues/32593)
 
 - TiKV

@@ -90,7 +90,7 @@ TiDB バージョン: 4.0.12
     - TiKVストアをtombstoneとしてマークした後、同じIPアドレスとポートで異なるStoreIDを持つ新しいTiKVストアを開始すると、 `StoreNotMatch`エラーが返され続ける問題を修正しました。 [#23071](https://github.com/pingcap/tidb/pull/23071)
     - `INT`型が`NULL`で`YEAR`と比較される場合は調整しない [#22844](https://github.com/pingcap/tidb/pull/22844)
     - `auto_random`列のテーブルにデータをロードする際に接続が失われる問題を修正しました [#22736](https://github.com/pingcap/tidb/pull/22736)
-    - DDL 操作がキャンセル パスでpanicに遭遇した場合の DDL ハングオーバーの問題を修正しました。 [#23297](https://github.com/pingcap/tidb/pull/23297)
+    - DDL 操作がキャンセルパスでpanicに遭遇した場合の DDL ハングオーバーの問題を修正しました。 [#23297](https://github.com/pingcap/tidb/pull/23297)
     - `YEAR`列と`NULL` を比較する際のインデックススキャンのキー範囲の誤りを修正しました。 [#23104](https://github.com/pingcap/tidb/pull/23104)
     - 正常に作成されたビューが使用できない問題を修正しました [#23083](https://github.com/pingcap/tidb/pull/23083)
 

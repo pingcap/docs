@@ -44,7 +44,7 @@ TiDB Ansible バージョン: 2.1.10
 
 - 転送の失敗を回避するために、最近構成が変更されたリージョンのリーダーの転送を拒否します[#4684](https://github.com/tikv/tikv/pull/4684)
 - コプロセッサーメトリックの優先ラベルを追加します [#4643](https://github.com/tikv/tikv/pull/4643)
-- リーダー転送中に発生する可能性のあるダーティ リード問題を修正しました [#4724](https://github.com/tikv/tikv/pull/4724)
+- リーダー転送中に発生する可能性のあるダーティリード問題を修正しました [#4724](https://github.com/tikv/tikv/pull/4724)
 - `CommitMerge`一部のケースでTiKVの再起動が失敗する問題を修正[#4615](https://github.com/tikv/tikv/pull/4615)
 - 不明なログを修正 [#4730](https://github.com/tikv/tikv/pull/4730)
 

@@ -25,7 +25,7 @@ TiDB バージョン: 5.2.2
 
 - PD
 
-    - ホットスポット スケジューラの QPS ディメンションに書き込みクエリの種類を追加する [#3869](https://github.com/tikv/pd/issues/3869)
+    - ホットスポットスケジューラの QPS ディメンションに書き込みクエリの種類を追加する [#3869](https://github.com/tikv/pd/issues/3869)
     - バランスリージョンスケジューラの再試行制限を動的に調整して、スケジューラのパフォーマンスを向上させることをサポートしました。 [#3744](https://github.com/tikv/pd/issues/3744)
     - TiDB Dashboardをv2021.10.08.1 に更新 [#4070](https://github.com/tikv/pd/pull/4070)
     - 退去リーダースケジューラが不健全なピアを持つリージョンをスケジュールできるようにサポート[#4093](https://github.com/tikv/pd/issues/4093)
@@ -47,7 +47,7 @@ TiDB バージョン: 5.2.2
     - プランキャッシュが符号なし（unsigned）フラグの変更を検出できない問題を修正[#28254](https://github.com/pingcap/tidb/issues/28254)
     - パーティション関数が範囲外の場合の誤ったパーティションプルーニングを修正[#28233](https://github.com/pingcap/tidb/issues/28233)
     - プランナーが`join`の無効なプランをキャッシュする可能性がある問題を修正しました[#28087](https://github.com/pingcap/tidb/issues/28087)
-    - ハッシュ列の型が列挙型の場合の間違ったインデックス ハッシュ結合を修正しました [#27893](https://github.com/pingcap/tidb/issues/27893)
+    - ハッシュ列の型が列挙型の場合の間違ったインデックスハッシュ結合を修正しました [#27893](https://github.com/pingcap/tidb/issues/27893)
     - アイドル接続をリサイクルすると、まれにリクエストの送信がブロックされる可能性があるバッチクライアントのバグを修正しました[#27688](https://github.com/pingcap/tidb/pull/27688)
     - ターゲットクラスタでチェックサムの実行に失敗した場合のTiDB Lightning panic問題を修正しました。 [#27686](https://github.com/pingcap/tidb/pull/27686)
     - いくつかのケースで`date_add`と`date_sub`関数の誤った結果を修正[#27232](https://github.com/pingcap/tidb/issues/27232)
@@ -85,7 +85,7 @@ TiDB バージョン: 5.2.2
     - Raftクライアント実装でバッチメッセージが大きすぎる問題を修正 [#9714](https://github.com/tikv/tikv/issues/9714)
     - `resolved_ts` で一部のコルーチンがリークする問題を修正 [#10965](https://github.com/tikv/tikv/issues/10965)
     - 応答サイズが4GiBを超えるとコプロセッサに発生するpanic問題を修正[#9012](https://github.com/tikv/tikv/issues/9012)
-    - スナップショットファイルがガベージコレクションできない場合に、スナップショット ガベージコレクション (GC) でスナップショットファイルの GC が漏れる問題を修正しました[#10813](https://github.com/tikv/tikv/issues/10813)
+    - スナップショットファイルがガベージコレクションできない場合に、スナップショットガベージコレクション (GC) でスナップショットファイルの GC が漏れる問題を修正しました[#10813](https://github.com/tikv/tikv/issues/10813)
     - コプロセッサーリクエストの処理中にタイムアウトによって発生するpanic問題を修正[#10852](https://github.com/tikv/tikv/issues/10852)
 
 - PD

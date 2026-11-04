@@ -83,7 +83,7 @@ TiDB バージョン: 5.0.3
     - `Limit` を使用してパーティションテーブルをクエリしたときに返される誤った値を修正しました [#24636](https://github.com/pingcap/tidb/issues/24636)
     - `IFNULL`が`ENUM`または`SET`タイプの列に正しく反映されない問題を修正 [#24944](https://github.com/pingcap/tidb/issues/24944)
     - 結合サブクエリの`count`を`first_row`に変更することで発生する誤った結果を修正しました [#24865](https://github.com/pingcap/tidb/issues/24865)
-    - `ParallelApply`が`TopN`オペレーターの下で使用された場合に発生するクエリ ハングの問題を修正しました [#24930](https://github.com/pingcap/tidb/issues/24930)
+    - `ParallelApply`が`TopN`オペレーターの下で使用された場合に発生するクエリハングの問題を修正しました [#24930](https://github.com/pingcap/tidb/issues/24930)
     - マルチカラムプレフィックスインデックスを使用してSQL文を実行したときに予想よりも多くの結果が返される問題を修正[#24356](https://github.com/pingcap/tidb/issues/24356)
     - `<=>`演算子が正しく機能しない問題を修正[#24477](https://github.com/pingcap/tidb/issues/24477)
     - 並列`Apply`オペレーターのデータ競合問題を修正 [#23280](https://github.com/pingcap/tidb/issues/23280)

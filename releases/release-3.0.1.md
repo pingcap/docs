@@ -41,7 +41,7 @@ TiDB Ansible バージョン: 3.0.1
 - `FAST ANALYZE`文で"invalid key"エラーが報告される場合がある問題を修正[#11098](https://github.com/pingcap/tidb/pull/11098)
 - 列のデフォルト値として`CURRENT_TIMESTAMP`が使用され、float精度が指定されている場合、 `SHOW CREATE TABLE`文で表示される精度が不完全になる問題を修正しました。 [#11088](https://github.com/pingcap/tidb/pull/11088)
 - MySQL との互換性を保つために、ウィンドウ関数がエラーを報告するときに関数名が小文字にならない問題を修正しました。 [#11118](https://github.com/pingcap/tidb/pull/11118)
-- TiKV クライアント バッチ gRPC のバックグラウンドスレッドがパニックを起こした後、TiDB が TiKV に接続できず、サービスを提供できなくなる問題を修正しました[#11101](https://github.com/pingcap/tidb/pull/11101)
+- TiKV クライアントバッチ gRPC のバックグラウンドスレッドがパニックを起こした後、TiDB が TiKV に接続できず、サービスを提供できなくなる問題を修正しました[#11101](https://github.com/pingcap/tidb/pull/11101)
 - 文字列の浅いコピーにより`SetVar`によって変数が誤って設定される問題を修正しました [#11044](https://github.com/pingcap/tidb/pull/11044)
 - `INSERT … ON DUPLICATE`ステートメントがテーブルパーティションに適用されると実行が失敗し、エラーが報告される問題を修正しました。 [#11231](https://github.com/pingcap/tidb/pull/11231)
 - 悲観的ロック（実験的機能）
@@ -87,5 +87,5 @@ TiDB Lightning
 - ansibleコマンドとその`jmespath`および`jinja2`依存パッケージの事前チェック機能を追加します[#813](https://github.com/pingcap/tidb-ansible/pull/813) [#803](https://github.com/pingcap/tidb-ansible/pull/803)
 - Pumpに`stop-write-at-available-space`パラメータ（デフォルトでは10 GiB）を追加して、使用可能なディスク容量がパラメータ値より少ない場合にPumpでbinlogファイルの書き込みを停止します。 [#806](https://github.com/pingcap/tidb-ansible/pull/806)
 - TiKV監視情報のI/O監視項目を更新し、新しいバージョンの監視コンポーネントと互換性を持たせます。 [#820](https://github.com/pingcap/tidb-ansible/pull/820)
-- PD 監視情報を更新し、ディスク パフォーマンス ダッシュボードでDisk Latency が空になる異常を修正しました。 [#817](https://github.com/pingcap/tidb-ansible/pull/817)
+- PD 監視情報を更新し、ディスクパフォーマンスダッシュボードでDisk Latency が空になる異常を修正しました。 [#817](https://github.com/pingcap/tidb-ansible/pull/817)
 - TiKV-DetailsダッシュボードにTitanの監視項目を追加する [#824](https://github.com/pingcap/tidb-ansible/pull/824)
