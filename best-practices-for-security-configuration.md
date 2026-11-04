@@ -121,6 +121,6 @@ TiDB Dashboardにアクセスする必要がある場合は、 [リバースプ�
 
 ## サードパーティのMySQL脆弱性スキャナーからの誤検知を解決する {#resolving-false-positives-from-third-party-mysql-vulnerability-scanners}
 
-ほとんどの脆弱性スキャナーは、MySQLの脆弱性をバージョン情報に基づいて検出します。TiDBはMySQLプロトコルと互換性がありますが、MySQL自体は互換性がないため、バージョンベースの脆弱性スキャンは誤検知につながる可能性があります。脆弱性スキャンは原則に基づく評価に重点を置くことをお勧めします。コンプライアンススキャンツールが特定のMySQLバージョンを要求する場合は、 [サーバーのバージョン番号を変更する](/faq/high-reliability-faq.md#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool)を使用して要件を満たすことができます。
+ほとんどの脆弱性スキャナーは、MySQLの脆弱性をバージョン情報に基づいて検出します。TiDBはMySQLプロトコルと互換性がありますが、MySQL自体は互換性がないため、バージョンベースの脆弱性スキャンは誤検知につながる可能性があります。脆弱性スキャンは原則に基づく評価に重点を置くことをお勧めします。コンプライアンススキャンツールが特定のMySQLバージョンを要求する場合は、 [サーバーのバージョン番号を変更する](/faq/high-reliability-faq.md#does-tidb-support-modifying-the-mysql-version-string-of-the-server-to-a-specific-one-that-is-required-by-the-security-vulnerability-scanning-tool)を使用して要件を満たせます。
 
 サーバーのバージョン番号を変更することで、脆弱性スキャナーによる誤検知を回避できます。[`server-version`](/tidb-configuration-file.md#server-version)の値は、TiDB ノードが現在の TiDB バージョンを確認するために使用されます。TiDB クラスターをアップグレードする前に、予期しない動作を回避するために、 `server-version`の値が空であるか、実際の TiDB バージョンであることを確認してください。

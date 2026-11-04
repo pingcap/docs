@@ -155,7 +155,7 @@ SELECT * FROM users;
 
 > **Note:**
 >
-> キャッシュテーブルにデータを挿入すると、第2レベルの書き込みレイテンシーが発生する可能性があります。このレイテンシーはグローバル環境変数[`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600)によって制御されます。アプリケーションに応じてレイテンシーが許容できるかどうかを確認することで、キャッシュテーブル機能を使用するかどうかを決定できます。例えば、読み取り専用のシナリオでは、`tidb_table_cache_lease`の値を増やすことができます。
+> キャッシュテーブルにデータを挿入すると、第2レベルの書き込みレイテンシーが発生する可能性があります。このレイテンシーはグローバル環境変数[`tidb_table_cache_lease`](/system-variables.md#tidb_table_cache_lease-new-in-v600)によって制御されます。アプリケーションに応じてレイテンシーが許容できるかどうかを確認することで、キャッシュテーブル機能を使用するかどうかを決定できます。例えば、読み取り専用のシナリオでは、`tidb_table_cache_lease`の値を増やせます。
 >
 > ```sql
 > set @@global.tidb_table_cache_lease = 10;

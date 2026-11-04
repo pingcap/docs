@@ -7,7 +7,7 @@ summary: TiDBの機能概要について学びましょう。
 
 このドキュメントでは、最新 LTS バージョン以降の[長期サポート（LTS）](/releases/versioning.md#long-term-support-releases)バージョンや[開発マイルストーンリリース（DMR）](/releases/versioning.md#development-milestone-releases)バージョンを含む、さまざまな TiDB バージョンでサポートされている機能をリストします。
 
-[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_features)でTiDBの機能を試すことができます。
+[TiDB Playground](https://play.tidbcloud.com/?utm_source=docs&utm_medium=tidb_features)でTiDBの機能を試せます。
 
 > **Note:**
 >

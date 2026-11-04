@@ -141,7 +141,7 @@ show warnings;
 | `raftstore.merge-check-tick-interval`                     | マージチェックの時間間隔                                                                                                                               |
 | `raftstore.cleanup-import-sst-interval`                   | 期限切れのSSTファイルをチェックする時間間隔                                                                                                                    |
 | `raftstore.local-read-batch-size`                         | 1バッチで処理される読み取りリクエストの最大数                                                                                                                       |
-| `raftstore.apply-yield-write-size`                        | 適用スレッドが各ラウンドで1つのFSM（有限状態機械）に書き込むことができる最大バイト数                                                                                               |
+| `raftstore.apply-yield-write-size`                        | 適用スレッドが各ラウンドで1つのFSM（有限状態機械）に書き込める最大バイト数                                                                                               |
 | `raftstore.hibernate-timeout`                             | 起動時に休止状態に入るまでの最短待機時間。この時間内は、TiKV は休止状態になりません（解放されません）。                                                                                     |
 | `raftstore.apply-pool-size`                               | ディスクにデータをフラッシュするプール内のスレッドの数。これは適用スレッドプールのサイズです。                                                                                           |
 | `raftstore.store-pool-size`                               | Raftを処理するプール内のスレッドの数。これはRaftstoreスレッドプールのサイズです。                                                                                            |

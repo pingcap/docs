@@ -208,4 +208,4 @@ GrafanaまたはTiDB Dashboardにアクセスすることで、TiKV、TiDB、PD�
     SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
-    リージョン 1 が回復したら、前述のコマンドと同様のコマンドを使用して、ユーザーテーブルのリーダーをリージョン 1 に戻すことができます。
+    リージョン 1 が回復したら、前述のコマンドと同様のコマンドを使用して、ユーザーテーブルのリーダーをリージョン 1 に戻せます。

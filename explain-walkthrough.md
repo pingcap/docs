@@ -157,7 +157,7 @@ Query OK, 0 rows affected (2 min 10.23 sec)
 >
 > DDLジョブの進行状況は、 [`ADMIN SHOW DDL JOBS`](/sql-statements/sql-statement-admin-show-ddl.md)コマンドを使用して監視できます。TiDBのデフォルト設定は、インデックスの追加が本番環境の本番ロードに過度な影響を与えないよう、慎重に選択されています。テスト環境では、 [`tidb_ddl_reorg_batch_size`](/system-variables.md#tidb_ddl_reorg_batch_size)と[`tidb_ddl_reorg_worker_cnt`](/system-variables.md#tidb_ddl_reorg_worker_cnt)値を増やすことを検討してください。リファレンスシステムでは、バッチサイズを`10240` 、ワーカー数を`32`にすることで、デフォルト設定の10倍のパフォーマンス向上を実現できます。
 
-インデックスを追加したら、 `EXPLAIN`のクエリを繰り返すことができます。次の出力では、新しい実行計画が選択され、 `TableFullScan`と`Selection`オペレーターが削除されていることがわかります。
+インデックスを追加したら、 `EXPLAIN`のクエリを繰り返せます。次の出力では、新しい実行計画が選択され、 `TableFullScan`と`Selection`オペレーターが削除されていることがわかります。
 
 ```sql
 EXPLAIN SELECT count(*) FROM trips WHERE start_date BETWEEN '2017-07-01 00:00:00' AND '2017-07-01 23:59:59';

@@ -22,7 +22,7 @@ summary: TiDB のレイテンシーと、実際の使用例でレイテンシー
 avg = ${metric_name}_sum / ${metric_name}_count
 ```
 
-このドキュメントで説明されているメトリックは、TiDB の Prometheus ダッシュボードから直接読み取ることができます。
+このドキュメントで説明されているメトリックは、TiDB の Prometheus ダッシュボードから直接読み取れます。
 
 ## 一般的なSQLレイヤー {#general-sql-layer}
 
@@ -351,7 +351,7 @@ execution(non-clustered PK or UK) =
     2 * tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"}
 ```
 
-ロック取得時のPointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。ロック取得時のPointGetの実行時間は[ロック期間](#lock)として扱うことができます。
+ロック取得時のPointGetはキーをロックし、その値を返します。実行後のロックフェーズと比較すると、1ラウンドトリップを節約できます。ロック取得時のPointGetの実行時間は[ロック期間](#lock)として扱えます。
 
 ### ロック取得時のBatch PointGet {#lock-time-batch-point-get}
 
@@ -396,7 +396,7 @@ lock = tidb_tikvclient_txn_cmd_duration_seconds{type="lock_keys"} =
     round * tidb_tikvclient_request_seconds{type="PessimisticLock"}
 ```
 
-ロックは、フロー制御機構を備えた2PC構造を通じて取得されます。フロー制御は、同時オンザフライリクエスト数を`committer-concurrency`に制限します（デフォルト値は`128` ）。簡略化のため、フロー制御はリクエストレイテンシーの増幅（ `round` ）として扱うことができます。
+ロックは、フロー制御機構を備えた2PC構造を通じて取得されます。フロー制御は、同時オンザフライリクエスト数を`committer-concurrency`に制限します（デフォルト値は`128` ）。簡略化のため、フロー制御はリクエストレイテンシーの増幅（ `round` ）として扱えます。
 
 `tidb_tikvclient_request_seconds{type="PessimisticLock"}`は次のように計算されます。
 

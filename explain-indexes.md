@@ -159,7 +159,7 @@ EXPLAIN SELECT id FROM t1 WHERE intkey = 123;
 3 rows in set (0.00 sec)
 ```
 
-`id`は内部的には`RowID`でもあるため、インデックス`intkey`に格納されます。インデックス`intkey`を`└─IndexRangeScan_5`の一部として使用することで、インデックス`RowID`の値を直接返すことができます。
+`id`は内部的には`RowID`でもあるため、インデックス`intkey`に格納されます。インデックス`intkey`を`└─IndexRangeScan_5`の一部として使用することで、インデックス`RowID`の値を直接返せます。
 
 ## Point_Get と Batch_Point_Get {#point_get-and-batch_point_get}
 

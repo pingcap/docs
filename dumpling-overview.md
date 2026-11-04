@@ -39,7 +39,7 @@ TiDBは、必要に応じて選択して使用できるその他のツールも�
 
 - SST ファイル (キーと値のペア) のバックアップ、またはレイテンシーに影響されない増分データのバックアップについては、 [BR](/br/backup-and-restore-overview.md)を参照してください。
 - 増分データのリアルタイムバックアップについては、 [TiCDC](/ticdc/ticdc-overview.md)を参照してください。
-- エクスポートされたすべてのデータは[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してTiDBにインポートし直すことができます。
+- エクスポートされたすべてのデータは[TiDB Lightning](/tidb-lightning/tidb-lightning-overview.md)を使用してTiDBにインポートし直せます。
 
 </CustomContent>
 
@@ -90,7 +90,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 --filetype sql -t 8 -o /tmp/test -r 2
 
 上記のコマンドでは：
 
-- `-h` 、 `-P` 、および`-u`オプションは、それぞれアドレス、ポート、およびユーザーを意味します。認証にパスワードが必要な場合は、 `-p $YOUR_SECRET_PASSWORD`を使用してパスワードをDumplingに渡すことができます。
+- `-h` 、 `-P` 、および`-u`オプションは、それぞれアドレス、ポート、およびユーザーを意味します。認証にパスワードが必要な場合は、 `-p $YOUR_SECRET_PASSWORD`を使用してパスワードをDumplingに渡せます。
 
 - `-o` (または`--output` ) オプションは、ストレージのエクスポートディレクトリを指定します。これは、絶対ローカルファイルパスまたは[外部ストレージURI](/external-storage-uri.md)をサポートします。
 

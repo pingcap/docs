@@ -146,7 +146,7 @@ ALTER TABLE t ADD STATS_EXTENDED s1 correlation(col1, col2);
 
 ### ステップ4. 拡張統計がどのように違いを生むかを確認する {#step-4-see-how-extended-statistics-make-a-difference}
 
-TiDB が相関関係の拡張統計を取得すると、オプティマイザーはスキャンする行数をより正確に見積もることができます。
+TiDB が相関関係の拡張統計を取得すると、オプティマイザーはスキャンする行数をより正確に見積もれます。
 
 この時点で、 [ステージ2. 拡張統計なしでサンプルクエリを実行する](#step-2-execute-an-example-query-without-extended-statistics)のクエリでは、 `col1`と`col2`厳密に順序付けされています。TiDBが`col2`のインデックスを使用してテーブル`t`にアクセスし、 `col1 > 1`満たす最初の行を検索すると、TiDBオプティマイザーは行数推定を次のクエリに変換します。
 
