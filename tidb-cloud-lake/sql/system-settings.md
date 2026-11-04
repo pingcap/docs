@@ -145,7 +145,7 @@ SELECT * FROM system.settings;
 | inlist_to_join_threshold | 1024 | 1024 | DEFAULT | IN リストを JOIN に変換するしきい値を設定します。 | UInt64 |
 | input_read_buffer_size | 4194304 | 4194304 | DEFAULT | バッファー付きリーダーがストレージからデータを読み取る際に使用するバッファーへ割り当てるメモリサイズをバイト単位で設定します。 | UInt64 |
 | join_runtime_filter_selectivity_threshold | 10 | 10 | DEFAULT | bloom join ランタイムフィルターの選択率しきい値 (パーセンテージ) です。デフォルトの 10 は 10% を意味します。 | UInt64 |
-| join_spilling_buffer_threshold_per_proc_mb | 512 | 512 | DEFAULT | 各 join processor のスピルバッファーしきい値 (MB) を設定します。 | UInt64 |
+| join_spilling_buffer_threshold_per_proc_mb | 512 | 512 | DEFAULT | 各 join プロセッサーのスピルバッファーしきい値 (MB) を設定します。 | UInt64 |
 | join_spilling_memory_ratio | 60 | 60 | LOCAL | hash join がデータをストレージにスピルする前に使用できる最大メモリ比率をバイト単位で設定します。0 は無制限です。 | UInt64 |
 | join_spilling_partition_bits | 4 | 4 | DEFAULT | join spilling のパーティション数を設定します。デフォルト値は 4 で、2^4 パーティションを意味します。 | UInt64 |
 | lazy_read_across_join_threshold | 10 | 10 | DEFAULT | join をまたぐ lazy read 最適化を有効にするクエリ内の最大 LIMIT を設定します。0 に設定するとこの最適化を無効にします。 | UInt64 |
