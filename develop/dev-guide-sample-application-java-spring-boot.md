@@ -259,7 +259,7 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Long> {
 }
 ```
 
-次に、 `PlayerRepository`を必要とする任意のクラスで`@Autowired`を使用して自動依存性注入を行うことができます。これにより、CRUD関数を直接使用できるようになります。以下に例を示します。
+次に、 `PlayerRepository`を必要とする任意のクラスで`@Autowired`を使用して自動依存性注入を行えます。これにより、CRUD関数を直接使用できるようになります。以下に例を示します。
 
 ```java
 @Autowired

@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-dbeaver/','/ja/tidb/dev/dev-guide-gui-d
 
 TiDBはMySQL互換データベースであり、 [DBeaver Community](https://dbeaver.io/download/)は、開発者、データベース管理者、アナリスト、およびデータを扱うすべての人向けの無料のクロスプラットフォームデータベースツールです。
 
-このチュートリアルでは、DBeaver Communityを使用してTiDBに接続する方法を学ぶことができます。
+このチュートリアルでは、DBeaver Communityを使用してTiDBに接続する方法を学べます。
 
 > **Note:**
 >

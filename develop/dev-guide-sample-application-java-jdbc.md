@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/dev/sample-application-java','/ja/tidb/dev/dev-guide-sample-
 
 TiDBはMySQL互換データベースであり、JDBC（Java Database Connectivity）はJavaのデータアクセスAPIです。[MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/)は、MySQLにおけるJDBCの実装です。
 
-このチュートリアルでは、TiDBとJDBCを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとJDBCを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - JDBCを使用してTiDBに接続します。

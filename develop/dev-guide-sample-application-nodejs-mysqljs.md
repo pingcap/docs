@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-mysqljs/','/ja/ti
 
 TiDBはMySQL互換データベースであり、 [mysql.js](https://github.com/mysqljs/mysql)ドライバーはMySQLプロトコルを実装した純粋なNode.js JavaScriptクライアントです。
 
-このチュートリアルでは、TiDBとmysql.jsドライバーを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとmysql.jsドライバーを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - mysql.jsドライバーを使用してTiDBに接続します。

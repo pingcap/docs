@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/dev/dev-guide-outdated-for-sqlalchemy','/ja/tidb/stable/dev-
 
 TiDBはMySQL互換のデータベースであり、 [SQLAlchemy](https://www.sqlalchemy.org/)は人気の高いPythonのSQLツールキットおよびオブジェクトリレーショナルマッパー（ORM）です。
 
-このチュートリアルでは、TiDBとSQLAlchemyを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとSQLAlchemyを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - SQLAlchemyを使用してTiDBに接続します。

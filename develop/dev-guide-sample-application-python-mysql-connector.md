@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/dev/dev-guide-sample-application-python','/ja/tidb/dev/dev-g
 
 TiDB は MySQL 互換データベースであり、 [MySQL Connector/Python](https://dev.mysql.com/doc/connector-python/en/)は Python 用の公式 MySQL ドライバーです。
 
-このチュートリアルでは、TiDBとMySQL Connector/Pythonを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとMySQL Connector/Pythonを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - MySQL Connector/Pythonを使用してTiDBに接続します。

@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-mysql2/','/ja/tid
 
 TiDBはMySQL互換のデータベースであり、 [node-mysql2](https://github.com/sidorares/node-mysql2)はNode.js用の高速な[mysqljs/mysql](https://github.com/mysqljs/mysql)互換MySQLドライバーです。
 
-このチュートリアルでは、TiDBとnode-mysql2を使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとnode-mysql2を使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - node-mysql2を使用してTiDBに接続します。

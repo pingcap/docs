@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-pymysql/','/ja/ti
 
 TiDBはMySQL互換のデータベースであり、 [PyMySQL](https://github.com/PyMySQL/PyMySQL)はPython向けの人気の高いオープンソースドライバーです。
 
-このチュートリアルでは、TiDBとPyMySQLを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとPyMySQLを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - PyMySQLを使用してTiDBに接続します。

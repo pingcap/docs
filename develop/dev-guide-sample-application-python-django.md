@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/dev/dev-guide-outdated-for-django','/ja/tidb/stable/dev-guid
 
 TiDBはMySQL互換のデータベースであり、[Django](https://www.djangoproject.com)は、強力なオブジェクトリレーショナルマッパー（ORM）ライブラリを含む、Python向けの人気の高いWebフレームワークです。
 
-このチュートリアルでは、TiDBとDjangoを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとDjangoを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - Djangoを使用してTiDBに接続します。

@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-golang-gorm/','/ja/tidb/
 
 TiDB は MySQL 互換データベースであり、[GORM](https://gorm.io/index.html)はGolang用の人気のあるオープンソース ORM フレームワークです。 GORM は`AUTO_RANDOM`や[TiDBをデフォルトのデータベースオプションとしてサポート](https://gorm.io/docs/connecting_to_the_database.html#TiDB)などの TiDB 機能に対応しています。
 
-このチュートリアルでは、TiDBとGORMを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとGORMを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - GORMを使用してTiDBに接続します。

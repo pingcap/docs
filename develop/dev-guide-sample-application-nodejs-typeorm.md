@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-typeorm/','/ja/ti
 
 TiDBはMySQL互換のデータベースであり、 [TypeORM](https://github.com/TypeORM/TypeORM)はNode.js向けの人気の高いオープンソースのORMフレームワークです。
 
-このチュートリアルでは、TiDBとTypeORMを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとTypeORMを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - TypeORMを使用してTiDBに接続します。

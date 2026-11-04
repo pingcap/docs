@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/dev/dev-guide-outdated-for-go-sql-driver-mysql','/ja/tidb/de
 
 TiDBはMySQL互換データベースであり、 [Go-MySQL-Driver](https://github.com/go-sql-driver/mysql)は[database/sql](https://pkg.go.dev/database/sql)インターフェース用のMySQL実装です。
 
-このチュートリアルでは、TiDBとGo-MySQL-Driverを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとGo-MySQL-Driverを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - Go-MySQL-Driverを使用してTiDBに接続します。

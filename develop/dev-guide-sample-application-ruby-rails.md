@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-ruby-rails/','/ja/tidb/d
 
 TiDBはMySQL互換のデータベースであり、 [Rails](https://github.com/rails/rails)は Rubyで書かれた人気のWebアプリケーションフレームワークであり、 [ActiveRecord ORM](https://github.com/rails/rails/tree/main/activerecord)はRailsにおけるオブジェクトリレーショナルマッピングです。
 
-このチュートリアルでは、TiDBとRailsを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとRailsを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - Railsを使用してTiDBに接続します。

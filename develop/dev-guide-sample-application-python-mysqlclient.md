@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-mysqlclient/','/j
 
 TiDBはMySQL互換のデータベースであり、 [mysqlclient](https://github.com/PyMySQL/mysqlclient)はPythonで広く使われているオープンソースのドライバーです。
 
-このチュートリアルでは、TiDBとmysqlclientを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとmysqlclientを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - mysqlclientを使用してTiDBに接続します。

@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-sequelize/','/ja/
 
 TiDB は MySQL 互換データベースであり、[Sequelize](https://sequelize.org/)は Node.js の人気のある ORM フレームワークです。
 
-このチュートリアルでは、TiDBとSequelizeを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとSequelizeを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - Sequelizeを使用してTiDBに接続します。

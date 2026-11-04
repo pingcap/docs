@@ -150,7 +150,7 @@ CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
 </div>
 <div label="Java" value="java">
 
-グローバル一時テーブルを使用する場合は、まず自動コミットモードをオフにする必要があります。Java では、 `conn.setAutoCommit(false);`文でこれを行うことができ、 `conn.commit();`でトランザクションを明示的にコミットできます。トランザクション中にグローバル一時テーブルに追加されたデータは、トランザクションがコミットまたはキャンセルされた後にクリアされます。
+グローバル一時テーブルを使用する場合は、まず自動コミットモードをオフにする必要があります。Java では、 `conn.setAutoCommit(false);`文でこれを行え、 `conn.commit();`でトランザクションを明示的にコミットできます。トランザクション中にグローバル一時テーブルに追加されたデータは、トランザクションがコミットまたはキャンセルされた後にクリアされます。
 
 ```java
 public List<Author> getTop50EldestAuthorInfo() throws SQLException {

@@ -8,7 +8,7 @@ aliases: ['/ja/tidbcloud/dev-guide-wordpress/']
 
 TiDBはMySQL互換データベースであり、 {{{ .starter }}}はフルマネージド型のTiDBサービスです。[WordPress](https://github.com/WordPress)は、ユーザーがウェブサイトを作成・管理できる無料のオープンソースコンテンツ管理システム（CMS）です。WordPressはPHPで記述されており、MySQLデータベースを使用しています。
 
-このチュートリアルでは、 {{{ .starter }}}を使用してWordPressを無料で実行する方法を学ぶことができます。
+このチュートリアルでは、 {{{ .starter }}}を使用してWordPressを無料で実行する方法を学べます。
 
 > **Note:**
 >

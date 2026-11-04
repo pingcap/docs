@@ -13,7 +13,7 @@ TiDBはMySQL互換データベースであり、 [MySQL Workbench](https://www.m
 > - MySQL WorkbenchはMySQLとの互換性があるため、TiDBに接続できますが、MySQL WorkbenchはTiDBを完全にサポートしているわけではありません。TiDBをMySQLとして扱うため、使用中に問題が発生する可能性があります。
 > - [DataGrip](/develop/dev-guide-gui-datagrip.md)、 [DBeaver](/develop/dev-guide-gui-dbeaver.md) 、 [VS Code SQLTools](/develop/dev-guide-gui-vscode-sqltools.md)など、TiDB を正式にサポートする他の GUI ツールを使用することをお勧めします。 TiDB で完全にサポートされている GUI ツールの完全なリストについては、 [TiDBがサポートするサードパーティツール](/develop/dev-guide-third-party-support.md#gui)を参照してください。
 
-このチュートリアルでは、MySQL Workbenchを使用してTiDBに接続する方法を学ぶことができます。
+このチュートリアルでは、MySQL Workbenchを使用してTiDBに接続する方法を学べます。
 
 > **Note:**
 >

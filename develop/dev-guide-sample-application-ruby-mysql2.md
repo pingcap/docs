@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-ruby-mysql2/','/ja/tidb/
 
 TiDBはMySQL互換のデータベースであり、 [mysql2](https://github.com/brianmario/mysql2)はRubyで最も人気のあるMySQLドライバーの1つです。
 
-このチュートリアルでは、TiDBとmysql2を使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとmysql2を使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - mysql2を使用してTiDBに接続します。

@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-gui-navicat/','/ja/tidb/dev/dev-guide-gui-n
 
 TiDBはMySQL互換データベースであり、[Navicat](https://www.navicat.com)はデータベースユーザー向けのGUIツールセットです。このチュートリアルでは、 [Navicat Premium](https://www.navicat.com/en/products/navicat-premium)ツールを使用してTiDBに接続します。
 
-このチュートリアルでは、Navicatを使用してTiDBに接続する方法を学ぶことができます。
+このチュートリアルでは、Navicatを使用してTiDBに接続する方法を学べます。
 
 > **Note:**
 >

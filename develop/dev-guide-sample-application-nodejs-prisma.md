@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-nodejs-prisma/','/ja/tid
 
 TiDB は MySQL 互換データベースであり、[Prisma](https://github.com/prisma/prisma)は Node.js 用の人気のあるオープンソース ORM フレームワークです。
 
-このチュートリアルでは、TiDBとPrismaを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとPrismaを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - Prismaを使用してTiDBに接続します。

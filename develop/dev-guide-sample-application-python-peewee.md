@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-python-peewee/','/ja/tid
 
 TiDBはMySQL互換のデータベースであり、[peewee](https://docs.peewee-orm.com/)はPythonで人気のオブジェクトリレーショナルマッパー（ORM）です。
 
-このチュートリアルでは、TiDBとpeeweeを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとpeeweeを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - peeweeを使用してTiDBに接続します。

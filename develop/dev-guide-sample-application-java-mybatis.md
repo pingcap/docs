@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/dev-guide-sample-application-java-mybatis/','/ja/tidb
 
 TiDBはMySQL互換のデータベースであり、 [MyBatis](https://mybatis.org/mybatis-3/index.html)は人気の高いオープンソースのJava ORMです。
 
-このチュートリアルでは、TiDBとMyBatisを使用して以下のタスクを実行する方法を学ぶことができます。
+このチュートリアルでは、TiDBとMyBatisを使用して以下のタスクを実行する方法を学べます。
 
 - 環境をセットアップしてください。
 - MyBatisを使用してTiDBに接続します。
