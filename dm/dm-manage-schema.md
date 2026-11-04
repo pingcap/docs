@@ -166,7 +166,7 @@ CREATE TABLE `t1` (
 上記の`CREATE TABLE`文をファイルとして保存し (たとえば、 `db_single.t1-schema.sql` )、次のコマンドを実行します。
 
 ```bash
-operate-schema set -s mysql-replica-01 task_single -d db_single -t t1 db_single.t1-schema.sql
+binlog-schema update -s mysql-replica-01 task_single db_single t1 db_single.t1-schema.sql
 ```
 
 ```

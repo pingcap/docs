@@ -41,7 +41,7 @@ TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCP
     > **Note:**
     >
     > - Oracle Enterprise Linuxの場合、TiDBはRed Hat互換カーネル（RHCK）をサポートしており、Oracle Enterprise Linuxが提供するUnbreakable Enterprise Kernelはサポートしていません。
-    > - TiDBの今後のバージョンでは、Ubuntu 16.04のサポートは終了します。Ubuntu 18.04以降へのアップグレードを強くお勧めします。
+    > - TiDBの今後のバージョンでは、Ubuntu 16.04のサポートは終了します。TiDB のオペレーティングシステム互換性要件を満たすため、Ubuntu 20.04 LTS 以降の LTS バージョンを使用することを強くお勧めします。
     > - CentOS Stream 8 は、2024年 5月 31日に[ビルド終了](https://blog.centos.org/2023/04/end-dates-are-coming-for-centos-stream-8-and-centos-linux-7/)。
 
 - 前述の2つの表に記載されているオペレーティングシステムの 32 ビット版を使用している場合、TiDB は 32 ビットオペレーティングシステムおよび対応する CPUアーキテクチャ上でコンパイル、ビルド、またはデプロイできることが**保証されません**。また、TiDB は 32 ビットオペレーティングシステムに積極的に対応しません。
@@ -58,6 +58,10 @@ TiDBはv8.5 LTSにおいて、様々なオペレーティングシステムとCP
 | LLVM                   | バージョン17.0以降        |
 
 TiDBの実行に必要なライブラリ：glibc（バージョン2.28-151.el8）
+
+> **Note:**
+>
+> TiDB v8.5.1 およびそれ以降の v8.5.x リリースでは、引き続き CentOS Linux 7 を使用している場合、TiDB は glibc 2.17 もサポートします。
 
 ### Dockerイメージの依存関係 {#docker-image-dependencies}
 
@@ -162,7 +166,7 @@ TiCDCを導入する前に、500GB以上のPCIe SSDディスクにTiCDCを導入
 |       TiKV      |   20180  | TiKVの状態を報告するための通信ポート                             |
 |        PD       |   2379   | TiDBとPD間の通信ポート                                   |
 |        PD       |   2380   | PDクラスター内のノード間通信ポート                                |
-|     TiFlash     |   9000   | TiFlash TCPサービスポート                               |
+|     TiFlash     |   9000   | TiFlash TCPサービスポート（TiUP v1.12.5 以降を使用して TiFlash v7.1.0 以降をデプロイする場合、デフォルトで無効。設定は推奨されません） |
 |     TiFlash     |   3930   | TiFlash RAFTおよびコプロセッサーサービスポート                    |
 |     TiFlash     |   20170  | TiFlashプロキシサービスポート                               |
 |     TiFlash     |   20292  | PrometheusがTiFlashプロキシのメトリクスを取得するためのポート          |

@@ -22,7 +22,6 @@ filters:
     schema-pattern: "test_*"
     table-pattern: "t_*"
     events: ["truncate table", "drop table"]
-    sql-pattern: ["^DROP\\s+PROCEDURE", "^CREATE\\s+PROCEDURE"]
     action: Ignore
 ```
 
@@ -105,21 +104,29 @@ filters:
     action: Do
 ```
 
-### TiDB でサポートされていない SQL文を除外する {#filter-out-sql-statements-not-supported-by-tidb}
+### TiDB がサポートしていない SQL 文、または DM が解析できない SQL 文を処理する {#handle-sql-statements-that-tidb-does-not-support-or-that-dm-cannot-parse}
 
-TiDB でサポートされていない SQL文を除外するには、以下に示すように`filter-procedure-rule`を設定します。
+`CREATE PROCEDURE`、`DROP PROCEDURE`、または `ALTER PROCEDURE` に対してフィルターを設定する必要はありません。DM はこれらのステートメントを自動的にスキップします。
 
-```
-filters:
-  filter-procedure-rule:
-    schema-pattern: "*"
-    sql-pattern: [".*\\s+DROP\\s+PROCEDURE", ".*\\s+CREATE\\s+PROCEDURE", "ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
-    action: Ignore
-```
+MySQL でパーティションを追加または削除すると、DM は通常その変更を TiDB にレプリケートします。DM と TiDB の両方がサポートするパーティション操作にはフィルターは不要です。テーブルのパーティションタイプに対して TiDB がどの操作をサポートしているかを確認するには、[パーティション管理](/partitioned-table.md#partition-management) を参照してください。
+
+`ADD PARTITION` または `DROP PARTITION` を使用する `ALTER TABLE` ステートメントに対して DM が解析エラーを報告し、そのパーティション変更を TiDB にレプリケートする必要がない場合は、以下のルールを使用してそのステートメントをスキップできます。DM で解析エラーが発生しても、必ずしも TiDB がその操作をサポートしていないことを意味するわけではありません。
+
+DM がステートメントを解析できない場合、特定のスキーマまたはテーブルを対象とするフィルターを適用できません。この場合、`schema-pattern: "*"` を指定し、`table-pattern` を指定しないグローバルフィルタリングルールが必要です。このルールは、移行タスク内のすべてのテーブルに対する一致ステートメントに適用されます。
 
 > **Warning:**
 >
 > 移行する必要があるデータがフィルタリングされないようにするには、グローバル フィルタリング ルールをできるだけ厳密に構成します。
+>
+> 次のパターンは文字列リテラルを含む SQL テキストに一致するため、意図せず他の DDL ステートメントをフィルタリングしてしまう可能性があります。たとえば、デフォルト値に `ADD PARTITION` を含む `ALTER TABLE ... ADD COLUMN` ステートメントもスキップされる可能性があります。このルールを使用する前に、レプリケートする必要がある DDL ステートメントにこれらのパターンが一致しないことを確認してください。
+
+```
+filters:
+  filter-partition-rule:
+    schema-pattern: "*"
+    sql-pattern: ["ALTER\\s+TABLE[\\s\\S]*ADD\\s+PARTITION", "ALTER\\s+TABLE[\\s\\S]*DROP\\s+PARTITION"]
+    action: Ignore
+```
 
 ## 参照 {#see-also}
 

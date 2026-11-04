@@ -20,6 +20,7 @@ summary: このページでは、{{{ .lake }}} のハッシュ関数について
 
 | 関数 | 説明 | 例 |
 |----------|-------------|--------|
+| [BUCKET](/tidb-cloud-lake/sql/bucket.md) | 物理パーティショニングのために値を安定したバケットにマッピングします | `BUCKET(16, customer_id)` → `0` から `15` までの整数 |
 | [XXHASH32](/tidb-cloud-lake/sql/xxhash.md) | xxHash32 32-bit ハッシュ値を計算します | `XXHASH32('1234567890')` → `3768853052` |
 | [XXHASH64](/tidb-cloud-lake/sql/xxhash.md) | xxHash64 64-bit ハッシュ値を計算します | `XXHASH64('1234567890')` → `12237639266330420150` |
 | [SIPHASH64](/tidb-cloud-lake/sql/siphash.md) / [SIPHASH](/tidb-cloud-lake/sql/siphash.md) | SipHash-2-4 64-bit ハッシュ値を計算します | `SIPHASH64('1234567890')` → `2917646445633666330` |

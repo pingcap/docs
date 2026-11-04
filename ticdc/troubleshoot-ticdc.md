@@ -103,16 +103,70 @@ v4.0.9 以降では、レプリケーションタスクで統合ソーター機�
 
 ## TiCDCを使用してメッセージをKafkaに複製すると、Kafkaから`Message was too large`エラーが返されます。なぜでしょうか？ {#when-i-use-ticdc-to-replicate-messages-to-kafka-kafka-returns-the-message-was-too-large-error-why}
 
-TiCDC が Kafka に送信するメッセージのサイズを制御するには、Sink URI で`max-message-bytes`パラメーターを設定します。ただし、Kafkaサーバーがそのサイズのメッセージを受け入れるように設定されていることも確認する必要があります。TiCDC からのメッセージが Kafka サーバーの制限を超えた場合、Kafka は`Message was too large`エラーを返します。Kafka サーバーのメッセージサイズの上限を引き上げるには、その設定ファイルに次の設定を追加してください。
+このエラーを解決するには、TiCDC Kafka Sink URI の `max-message-bytes` と、メッセージを受信する Kafka トピックの `max.message.bytes` の両方を確認し、これらの設定に互換性があることを確認してください。
 
+TiCDC は `max-message-bytes` を使用して Kafka に送信するメッセージサイズを制限します。一方、Kafka は受信トピック内のレコードバッチに `max.message.bytes` の制限を適用します（圧縮が有効な場合は圧縮後）。TiCDC は、プロトコルオーバーヘッドのための余裕を残すために、デフォルトトピックの `max.message.bytes` に基づいて実効送信上限も調整します。[topic dispatchers](/ticdc/ticdc-sink-to-kafka.md#topic-dispatchers) を設定している場合、TiCDC は別のトピックにデータを送信する可能性があります。受信側のトピックも、そのサイズのメッセージを許可している必要があります。Sink URI または 1 つのトピックだけを変更しても、メッセージサイズエラーが発生することがあります。
+
+まず、`cdc cli changefeed query` を実行して、現在の Sink URI 内のデフォルトトピックを確認します。changefeed 設定内のトピックディスパッチルールを確認し、メッセージを受信する可能性のあるすべてのトピックを特定してください。
+
+```shell
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
 ```
-# The maximum byte number of a message that the broker receives
-message.max.bytes=2147483648
-# The maximum byte number of a message that the broker copies
-replica.fetch.max.bytes=2147483648
-# The maximum message byte number that the consumer side reads
-fetch.message.max.bytes=2147483648
+
+次の例では、デフォルトトピック `default-topic` と、1 つのルーティング先トピック `routed-topic` に対して、上限を 10 MiB（`10485760` バイト）に設定しています。実際のメッセージサイズと既存の設定に基づいて、目標の上限値を決定してください。既存の上限値のほうが高い場合は、例の値まで下げないでください。コマンド内の Kafka アドレス、トピック名、および上限値は、実際の値に置き換えてください。topic dispatchers によってメッセージが複数のトピックにルーティングされる場合は、受信する可能性のあるすべてのトピックを更新してください。topic dispatcher を設定していない場合は、デフォルトトピックのみを更新すれば十分です。
+
+```shell
+bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --entity-type topics --entity-name default-topic \
+  --alter --add-config max.message.bytes=10485760
+
+bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --entity-type topics --entity-name routed-topic \
+  --alter --add-config max.message.bytes=10485760
 ```
+
+デフォルトトピックと、メッセージを受信する可能性のあるすべてのルーティング先トピックを照会し、各トピックの `max.message.bytes` が目標値に更新されていることを確認してください。次のコマンドは、前述の例に対応しています。topic dispatcher を設定していない場合は、デフォルトトピックのみを照会してください。
+
+```shell
+bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --entity-type topics --entity-name default-topic --describe
+
+bin/kafka-configs.sh --bootstrap-server localhost:9092 \
+  --entity-type topics --entity-name routed-topic --describe
+```
+
+次に、changefeed の Sink URI を更新します。`--sink-uri` オプションは完全な URI を受け取るため、既存のプロトコル、認証設定、およびその他のパラメーターは保持してください。次の例では、`max-message-bytes` を `10485760`（10 MiB）に設定しています。この値は、目標の上限値に置き換えてください。
+
+changefeed が実行中の場合は、まず一時停止し、その後に照会して状態が `stopped` であることを確認してください。changefeed がすでに `stopped` または `failed` 状態である場合は、そのまま更新コマンドに進むことができます。
+
+```shell
+cdc cli changefeed pause --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+```shell
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+更新コマンドを実行し、出力内の設定差分を確認して、プロンプトが表示されたら変更を確定してください。
+
+```shell
+cdc cli changefeed update --server=http://127.0.0.1:8300 --changefeed-id=test-cf \
+  --sink-uri='kafka://127.0.0.1:9092/default-topic?protocol=canal-json&max-message-bytes=10485760'
+```
+
+更新が成功したことを確認したら、changefeed を再開します。
+
+```shell
+cdc cli changefeed resume --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+changefeed の再開後、次のコマンドを実行して、照会結果の Sink URI に更新後の `max-message-bytes` パラメーターが含まれていること、および changefeed の状態が `normal` に戻っていることを確認してください。
+
+```shell
+cdc cli changefeed query --server=http://127.0.0.1:8300 --changefeed-id=test-cf
+```
+
+一定時間後に再度照会し、`checkpoint-ts` が継続して進んでいることを確認するとともに、TiCDC ログにメッセージサイズエラーが再発していないか確認してください。
 
 ## TiCDC レプリケーション中に、ダウンストリームで DDL文の実行が失敗したかどうかを確認するにはどうすればよいでしょうか? レプリケーションを再開するにはどうすればよいでしょうか? {#how-can-i-find-out-whether-a-ddl-statement-fails-to-execute-in-downstream-during-ticdc-replication-how-to-resume-the-replication}
 
