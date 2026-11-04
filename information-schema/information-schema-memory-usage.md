@@ -63,13 +63,13 @@ SELECT * FROM information_schema.memory_usage;
 <CustomContent platform="tidb">
 
 - [TiDBメモリ制御](/configure-memory-usage.md)
-- [TiKVメモリパラメータのパフォーマンスを調整する](/tune-tikv-memory-performance.md)
+- [TiKVメモリパラメーターのパフォーマンスを調整する](/tune-tikv-memory-performance.md)
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
 - [TiDBメモリ制御](https://docs.pingcap.com/tidb/stable/configure-memory-usage)
-- [TiKVメモリパラメータのパフォーマンスを調整する](https://docs.pingcap.com/tidb/stable/tune-tikv-memory-performance)
+- [TiKVメモリパラメーターのパフォーマンスを調整する](https://docs.pingcap.com/tidb/stable/tune-tikv-memory-performance)
 
 </CustomContent>

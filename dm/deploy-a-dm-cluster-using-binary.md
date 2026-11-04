@@ -9,7 +9,7 @@ summary: DM バイナリを使用してデータ移行クラスターをデプ�
 
 > **Note:**
 >
-> 本番環境では、 [TiUPを使用したDMクラスタのデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を推奨します。
+> 本番環境では、 [TiUPを使用したDMクラスターのデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を推奨します。
 
 ## DMバイナリをダウンロード {#download-dm-binary}
 
@@ -48,11 +48,11 @@ DMバイナリはTiDB Toolkitに含まれています。TiDB Toolkitをダウン
 
 ### DM-masterをデプロイ {#deploy-dm-master}
 
-[コマンドラインパラメータ](#dm-master-command-line-parameters)または[設定ファイル](#dm-master-configuration-file)を使用して DM-masterを設定できます。
+[コマンドラインパラメーター](#dm-master-command-line-parameters)または[設定ファイル](#dm-master-configuration-file)を使用して DM-masterを設定できます。
 
-#### DM-masterのコマンドラインパラメータ {#dm-master-command-line-parameters}
+#### DM-masterのコマンドラインパラメーター {#dm-master-command-line-parameters}
 
-DM-masterのコマンドラインパラメータの説明は次のとおりです。
+DM-masterのコマンドラインパラメーターの説明は次のとおりです。
 
 ```bash
 ./dm-master --help
@@ -129,11 +129,11 @@ Usage of dm-master:
 
 ### DM-workerをデプロイ {#deploy-dm-worker}
 
-[コマンドラインパラメータ](#dm-worker-command-line-parameters)または[設定ファイル](#dm-worker-configuration-file)を使用して DM-worker を構成できます。
+[コマンドラインパラメーター](#dm-worker-command-line-parameters)または[設定ファイル](#dm-worker-configuration-file)を使用して DM-worker を構成できます。
 
-#### DM-workerのコマンドラインパラメータ {#dm-worker-command-line-parameters}
+#### DM-workerのコマンドラインパラメーター {#dm-worker-command-line-parameters}
 
-DM-worker のコマンドラインパラメータの説明は次のとおりです。
+DM-worker のコマンドラインパラメーターの説明は次のとおりです。
 
 ```bash
 ./dm-worker --help

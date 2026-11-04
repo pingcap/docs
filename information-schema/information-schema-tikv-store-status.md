@@ -5,7 +5,7 @@ summary: "`TIKV_STORE_STATUS` INFORMATION_SCHEMA テーブルについて学習�
 
 # TIKV_STORE_STATUS {#tikv-store-status}
 
-`TIKV_STORE_STATUS`テーブルには、PD の API を介して TiKV ノードの基本情報が表示されます。これには、クラスタに割り当てられた ID、アドレスとポート、現在のノードのステータス、容量、リージョンリーダーの数などが含まれます。
+`TIKV_STORE_STATUS`テーブルには、PD の API を介して TiKV ノードの基本情報が表示されます。これには、クラスターに割り当てられた ID、アドレスとポート、現在のノードのステータス、容量、リージョンリーダーの数などが含まれます。
 
 > **Note:**
 >

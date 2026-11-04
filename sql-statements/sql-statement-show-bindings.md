@@ -24,7 +24,7 @@ ShowLikeOrWhere ::=
 
 | カラム名     | 説明                                                                                                                                                    |
 | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| original_sql | パラメータ化後の元のSQL文                                                                                                                                        |
+| original_sql | パラメーター化後の元のSQL文                                                                                                                                        |
 | bind_sql | ヒント付きのバインドされたSQL文                                                                                                                                     |
 | default_db | デフォルトのデータベース                                                                                                                                          |
 | status | `Using` 、 `Deleted` 、 `Invalid` 、 `Rejected` 、 `Pending verification` などのステータス                                                                                                                 |
@@ -134,5 +134,5 @@ Original_sql: select * from t1 where b = ?
 - [CREATE [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-create-binding.md)
 - [DROP [GLOBAL|SESSION] BINDING](/sql-statements/sql-statement-drop-binding.md)
 - [ANALYZE TABLE](/sql-statements/sql-statement-analyze-table.md)
-- [オプティマイザヒント](/optimizer-hints.md)
+- [オプティマイザーヒント](/optimizer-hints.md)
 - [SQLプラン管理](/sql-plan-management.md)

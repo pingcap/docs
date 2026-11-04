@@ -5,7 +5,7 @@ summary: DM のbinlogイベントフィルター機能の使用方法を学習�
 
 # TiDB データ移行Binlogイベントフィルター {#tidb-data-migration-binlog-event-filter}
 
-TiDB Data Migration (DM) は、特定のスキーマまたはテーブルのbinlogイベントをフィルタリングしたり、ブロックしてエラーを報告したり、特定の種類のbinlogイベントのみを受信したりするためのbinlogイベントフィルタ機能を提供します。例えば、 `TRUNCATE TABLE`または`INSERT`イベントすべてをフィルタリングできます。binlogイベントフィルタ機能は、 [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)機能よりもきめ細かな制御が可能です。
+TiDB Data Migration (DM) は、特定のスキーマまたはテーブルのbinlogイベントをフィルタリングしたり、ブロックしてエラーを報告したり、特定の種類のbinlogイベントのみを受信したりするためのbinlogイベントフィルター機能を提供します。例えば、 `TRUNCATE TABLE`または`INSERT`イベントすべてをフィルタリングできます。binlogイベントフィルター機能は、 [ブロックリストと許可リスト](/dm/dm-block-allow-table-lists.md)機能よりもきめ細かな制御が可能です。
 
 ## binlogイベントフィルターを構成する {#configure-the-binlog-event-filter}
 
@@ -29,7 +29,7 @@ DM v2.0.2以降では、ソース設定ファイルでbinlogイベントフィ�
 
 - `sql-pattern`は正規表現のみをサポートします。
 
-## パラメータの説明 {#parameter-descriptions}
+## パラメーターの説明 {#parameter-descriptions}
 
 - [`schema-pattern` / `table-pattern`](/dm/table-selector.md) : `schema-pattern` / `table-pattern`に一致するアップストリーム MySQL または MariaDB インスタンステーブルのbinlogイベントまたは DDL SQL文は、以下のルールによってフィルター処理されます。
 

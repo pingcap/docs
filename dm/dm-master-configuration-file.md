@@ -5,7 +5,7 @@ summary: DM-master の設定ファイルについて説明します。
 
 # DM-master設定ファイル {#dm-master-configuration-file}
 
-このドキュメントでは、設定ファイルテンプレートと、このファイル内の各設定パラメータの説明を含む、DM-master の構成について説明します。
+このドキュメントでは、設定ファイルテンプレートと、このファイル内の各設定パラメーターの説明を含む、DM-master の構成について説明します。
 
 ## 設定ファイルテンプレート {#configuration-file-template}
 
@@ -38,9 +38,9 @@ cert-allowed-cn = ["dm"]
 secret-key-path = "/path/to/secret/key"
 ```
 
-## 設定パラメータ {#configuration-parameters}
+## 設定パラメーター {#configuration-parameters}
 
-このセクションでは、DM-masterの設定パラメータについて説明します。
+このセクションでは、DM-masterの設定パラメーターについて説明します。
 
 ### グローバル構成 {#global-configuration}
 
@@ -56,7 +56,7 @@ secret-key-path = "/path/to/secret/key"
 
 #### `log-file` {#log-file}
 
-- ログファイルのディレクトリを指定します。パラメータが指定されていない場合、ログは標準出力に出力されます。
+- ログファイルのディレクトリを指定します。パラメーターが指定されていない場合、ログは標準出力に出力されます。
 
 #### `master-addr` {#master-addr}
 

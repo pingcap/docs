@@ -68,7 +68,7 @@ start-relay -s mysql-replica-01
 >
 > この起動方法はバージョン6.1で非推奨とされており、将来のリリースで削除される可能性があります。関連コマンドの出力には、次のプロンプトが表示されます: `start-relay/stop-relay with worker name will be deprecated soon. You can try stopping relay first and use start-relay without worker name instead` 。
 
-コマンド`start-relay`では、指定されたデータソースのリレーログを移行する 1つ以上の DM-workerを設定できます。ただし、パラメータで指定する DM-workerは、空いているか、上流のデータソースにバインドされている必要があります。例を以下に示します。
+コマンド`start-relay`では、指定されたデータソースのリレーログを移行する 1つ以上の DM-workerを設定できます。ただし、パラメーターで指定する DM-workerは、空いているか、上流のデータソースにバインドされている必要があります。例を以下に示します。
 
 ```bash
 start-relay -s mysql-replica-01 worker1 worker2

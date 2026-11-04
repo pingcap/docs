@@ -5,7 +5,7 @@ summary: アップストリームデータベースの設定ファイルを学�
 
 # TiDB データ移行の上流データベース設定ファイル {#upstream-database-configuration-file-of-tidb-data-migration}
 
-このドキュメントでは、アップストリームデータベースの設定ファイルについて紹介します。これには、設定ファイルテンプレートと、このファイル内の各設定パラメータの説明が含まれます。
+このドキュメントでは、アップストリームデータベースの設定ファイルについて紹介します。これには、設定ファイルテンプレートと、このファイル内の各設定パラメーターの説明が含まれます。
 
 ## 設定ファイルテンプレート {#configuration-file-template}
 
@@ -59,9 +59,9 @@ from:
 >
 > DM v2.0.1では、 `enable-gtid`と`enable-relay`を同時に`true`に設定しないでください。そうしないと、増分データが失われる可能性があります。
 
-## 設定パラメータ {#configuration-parameters}
+## 設定パラメーター {#configuration-parameters}
 
-このセクションでは、設定ファイル内の各設定パラメータについて説明します。
+このセクションでは、設定ファイル内の各設定パラメーターについて説明します。
 
 ### グローバル構成 {#global-configuration}
 
@@ -77,18 +77,18 @@ from:
 
 #### `enable-relay` {#enable-relay}
 
-- リレーログ機能を有効にするかどうかを指定します。このパラメータはバージョン5.4以降で有効になります。また、コマンド`start-relay`を使用して[リレーログを動的に有効にする](/dm/relay-log.md#enable-and-disable-relay-log)を実行することもできます。
+- リレーログ機能を有効にするかどうかを指定します。このパラメーターはバージョン5.4以降で有効になります。また、コマンド`start-relay`を使用して[リレーログを動的に有効にする](/dm/relay-log.md#enable-and-disable-relay-log)を実行することもできます。
 - デフォルト値: `false`
 
 #### `relay-binlog-name` {#relay-binlog-name}
 
 - DM-workerがbinlogの取得を開始するファイル名を指定します。例： `"mysql-bin.000002"` 。
-- [`enable-gtid`](#enable-gtid)が`false`の場合にのみ機能します。このパラメータが指定されていない場合、DM-workerは複製される最も古いbinlogファイルからプルを開始します。通常、手動設定は必要ありません。
+- [`enable-gtid`](#enable-gtid)が`false`の場合にのみ機能します。このパラメーターが指定されていない場合、DM-workerは複製される最も古いbinlogファイルからプルを開始します。通常、手動設定は必要ありません。
 
 #### `relay-binlog-gtid` {#relay-binlog-gtid}
 
 - DM-workerがbinlogのプルを開始するGTIDを指定します。例： `"e9a1fc22-ec08-11e9-b2ac-0242ac110003:1-7849"` 。
-- [`enable-gtid`](#enable-gtid)が`true`の場合にのみ機能します。このパラメータが指定されていない場合、DM-workerはレプリケーション中の最新のGTIDからプルを開始します。通常、手動設定は必要ありません。
+- [`enable-gtid`](#enable-gtid)が`true`の場合にのみ機能します。このパラメーターが指定されていない場合、DM-workerはレプリケーション中の最新のGTIDからプルを開始します。通常、手動設定は必要ありません。
 
 #### `relay-dir` {#relay-dir}
 
@@ -117,7 +117,7 @@ from:
 
 ### リレーログクリーンアップ戦略の構成（ `purge` ） {#relay-log-cleanup-strategy-configuration-purge}
 
-通常、リレーログが大量に存在し、ディスク容量が不足している場合を除き、これらのパラメータを手動で設定する必要はありません。
+通常、リレーログが大量に存在し、ディスク容量が不足している場合を除き、これらのパラメーターを手動で設定する必要はありません。
 
 #### `interval` {#interval}
 
@@ -128,7 +128,7 @@ from:
 #### `expires` {#expires}
 
 - リレーログの有効期限を指定します。
-- リレー処理ユニットによって書き込まれていない、または既存のデータ移行タスクによって読み取る必要がないリレーログは、有効期限を過ぎるとDMによって削除されます。このパラメータが指定されていない場合、自動パージは実行されません。
+- リレー処理ユニットによって書き込まれていない、または既存のデータ移行タスクによって読み取る必要がないリレーログは、有効期限を過ぎるとDMによって削除されます。このパラメーターが指定されていない場合、自動パージは実行されません。
 - デフォルト値: `0`
 - 単位: 時間
 
@@ -169,4 +169,4 @@ DM v2.0.2 以降では、ソース設定ファイルでbinlogイベントフィ�
 
 #### `filters` {#filters}
 
-- binlogイベントのフィルタリングルールを指定します。詳細については[Binlogイベントフィルターパラメータの説明](/dm/dm-binlog-event-filter.md#parameter-descriptions)を参照してください。
+- binlogイベントのフィルタリングルールを指定します。詳細については[Binlogイベントフィルターパラメーターの説明](/dm/dm-binlog-event-filter.md#parameter-descriptions)を参照してください。

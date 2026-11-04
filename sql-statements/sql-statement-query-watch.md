@@ -52,9 +52,9 @@ DropQueryWatchStmt ::=
     "QUERY" "WATCH" "REMOVE" NUM
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-[`QUERY WATCH`パラメータ](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
+[`QUERY WATCH`パラメーター](/tidb-resource-control-runaway-queries.md#query-watch-parameters)を参照してください。
 
 ## MySQLとの互換性 {#mysql-compatibility}
 

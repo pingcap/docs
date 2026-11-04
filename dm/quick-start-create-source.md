@@ -7,7 +7,7 @@ summary: データ移行 (DM) のデータソースを作成する方法を学�
 
 > **Note:**
 >
-> データソースを作成する前に、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を実行する必要があります。
+> データソースを作成する前に、 [TiUPを使用して DMクラスターをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を実行する必要があります。
 
 このドキュメントでは、TiDB Data Migration (DM) のデータ移行タスク用のデータソースを作成する方法について説明します。
 
@@ -55,7 +55,7 @@ summary: データ移行 (DM) のデータソースを作成する方法を学�
 tiup dmctl --master-addr <master-addr> operate-source create ./source-mysql-01.yaml
 ```
 
-その他の設定パラメータについては[上流データベース設定ファイル](/dm/dm-source-configuration-file.md)を参照してください。
+その他の設定パラメーターについては[上流データベース設定ファイル](/dm/dm-source-configuration-file.md)を参照してください。
 
 返される結果は次のとおりです。
 

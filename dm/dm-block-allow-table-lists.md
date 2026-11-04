@@ -40,14 +40,14 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 
 - 正規表現は`~`文字で始まる必要があります。
 
-## パラメータの説明 {#parameter-descriptions}
+## パラメーターの説明 {#parameter-descriptions}
 
 - `do-dbs` : MySQL の[`replicate-do-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-db)と同様に、移行するスキーマの許可リストです。
 - `ignore-dbs` : 移行するスキーマのブロックリスト (MySQL の[`replicate-ignore-db`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-db)に類似)。
 - `do-tables` : 移行するテーブルの許可リストです（MySQLの[`replicate-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-do-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
 - `ignore-tables` : 移行対象テーブルのブロックリスト（MySQLの[`replicate-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-ignore-table)に相当）。`db-name`と`tbl-name`の両方を指定する必要があります。
 
-上記のパラメータの値が`~`文字で始まる場合、その値の以降の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメータは、スキーマ名またはテーブル名を一致させるために使用できます。
+上記のパラメーターの値が`~`文字で始まる場合、その値の以降の文字は[正規表現](https://golang.org/pkg/regexp/syntax/#hdr-syntax)として扱われます。このパラメーターは、スキーマ名またはテーブル名を一致させるために使用できます。
 
 ## フィルタリングプロセス {#filtering-process}
 
@@ -58,7 +58,7 @@ block-allow-list:             # Use black-white-list if the DM version is earlie
 >
 > DM と MySQL では、ブロックリストと許可リストのフィルタリングルールが次の点で異なります。
 >
-> - MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)はワイルドカード文字をサポートしています。DMでは、一部のパラメータ値は`~`で始まる正規表現を直接サポートしています。
+> - MySQLでは、 [`replicate-wild-do-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-do-table)と[`replicate-wild-ignore-table`](https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#option_mysqld_replicate-wild-ignore-table)はワイルドカード文字をサポートしています。DMでは、一部のパラメーター値は`~`で始まる正規表現を直接サポートしています。
 > - DMは現在、 `ROW`形式のバイナリログのみをサポートしており、 `STATEMENT`形式と`MIXED`形式のバイナリログはサポートしていません。そのため、DMのフィルタリングルールはMySQLの`ROW`形式のフィルタリングルールに対応しています。
 > - MySQLは、DDL文の`USE`のセクションに明示的に指定されたデータベース名のみに基づいてDDL文を判別します。DMは、まずDDL文のデータベース名セクションに基づいて文を判別します。DDL文にそのようなセクションが含まれていない場合、DMは`USE`セクションに基づいて文を判別します。判別対象のSQL文が`USE test_db_2; CREATE TABLE test_db_1.test_table (c1 INT PRIMARY KEY)`で、MySQLに`replicate-do-db=test_db_1`が設定され、DMに`do-dbs: ["test_db_1"]`が設定されているとします。この場合、このルールはDMにのみ適用され、MySQLには適用されません。
 

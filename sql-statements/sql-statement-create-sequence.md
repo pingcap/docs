@@ -49,9 +49,9 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     [table_options]
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
-| パラメータ       | デフォルト値                       | 説明                                                                                                                                  |
+| パラメーター       | デフォルト値                       | 説明                                                                                                                                  |
 | :---------- | :--------------------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
 | `TEMPORARY` | `false`                      | TiDB は現在`TEMPORARY`オプションをサポートしておらず、構文の互換性のみを提供しています。                                                                                |
 | `INCREMENT` | `1`                          | シーケンスの増分を指定します。正または負の値を指定することで、シーケンスの増加方向を制御できます。                                                                                   |
@@ -75,7 +75,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 - `SETVAL`
 
-    この関数は、シーケンスの現在の値の進行を設定します。この関数の最初のパラメータはシーケンスの`identifier` 、2番目のパラメータは`num`です。
+    この関数は、シーケンスの現在の値の進行を設定します。この関数の最初のパラメーターはシーケンスの`identifier` 、2番目のパラメーターは`num`です。
 
 > **Note:**
 >
@@ -83,7 +83,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
 
 ## 例 {#examples}
 
-- デフォルトのパラメータを使用してシーケンスオブジェクトを作成します。
+- デフォルトのパラメーターを使用してシーケンスオブジェクトを作成します。
 
     ```sql
     CREATE SEQUENCE seq;
@@ -153,7 +153,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.00 sec)
     ```
 
-- デフォルトのカスタムパラメータを使用してシーケンスオブジェクトを作成します。
+- デフォルトのカスタムパラメーターを使用してシーケンスオブジェクトを作成します。
 
     ```sql
     CREATE SEQUENCE seq2 start 3 increment 2 minvalue 1 maxvalue 10 cache 3;
@@ -178,7 +178,7 @@ CREATE [TEMPORARY] SEQUENCE [IF NOT EXISTS] sequence_name
     1 row in set (0.01 sec)
     ```
 
-- シーケンスオブジェクトの`NEXTVAL()`関数の最初の有効な値は、 `START`パラメータの値です。
+- シーケンスオブジェクトの`NEXTVAL()`関数の最初の有効な値は、 `START`パラメーターの値です。
 
     ```sql
     SELECT NEXTVAL(seq2);
@@ -280,7 +280,7 @@ select SETVAL(seq, 6)   // Sets the current value of a sequence to 6.
 7, 9, 11, ...           // Subsequent values still follow the progression rule.
 ```
 
-`CYCLE`モードでは、最初のラウンドのシーケンスの初期値は`START`パラメータの値であり、後続のラウンドの初期値は`MinValue` ( `INCREMENT` &gt; 0) または`MaxValue` ( `INCREMENT` &lt; 0) の値です。
+`CYCLE`モードでは、最初のラウンドのシーケンスの初期値は`START`パラメーターの値であり、後続のラウンドの初期値は`MinValue` ( `INCREMENT` &gt; 0) または`MaxValue` ( `INCREMENT` &lt; 0) の値です。
 
 ## 参照 {#see-also}
 

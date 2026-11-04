@@ -109,7 +109,7 @@ gh-ost で主に使用される SQL文とそれに対応する DM の操作は�
 
 > **Note:**
 >
-> gh-ost の具体的なSQL文は、実行時に使用するパラメータによって異なります。このドキュメントでは主要なSQL文のみを記載しています。詳細については、 [gh-ost ドキュメント](https://github.com/github/gh-ost#gh-ost)を参照してください。
+> gh-ost の具体的なSQL文は、実行時に使用するパラメーターによって異なります。このドキュメントでは主要なSQL文のみを記載しています。詳細については、 [gh-ost ドキュメント](https://github.com/github/gh-ost#gh-ost)を参照してください。
 
 ## オンラインスキーマ変更: pt {#online-schema-change-pt}
 
@@ -210,7 +210,7 @@ pt-osc で主に使用される SQL 文とそれに対応する DM の操作は�
 
 > **Note:**
 >
-> pt-osc の具体的なSQL文は、実行時に使用するパラメータによって異なります。このドキュメントでは主要なSQL文のみを記載しています。詳細については、 [pt-osc ドキュメント](https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html)を参照してください。
+> pt-osc の具体的なSQL文は、実行時に使用するパラメーターによって異なります。このドキュメントでは主要なSQL文のみを記載しています。詳細については、 [pt-osc ドキュメント](https://www.percona.com/doc/percona-toolkit/2.2/pt-online-schema-change.html)を参照してください。
 
 ## その他のオンラインスキーマ変更ツール {#other-online-schema-change-tools}
 

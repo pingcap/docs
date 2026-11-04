@@ -46,7 +46,7 @@ routes:
 
 - `schema-pattern`と`table-pattern`はワイルドカードと正規表現の両方をサポートします。正規表現は`~`で始まる必要があります。
 
-## パラメータの説明 {#parameter-descriptions}
+## パラメーターの説明 {#parameter-descriptions}
 
 - DM は[テーブルセレクターによって提供される`schema-pattern` / `table-pattern`ルール](/dm/table-selector.md)に一致するアップストリーム MySQL または MariaDB インスタンステーブルをダウンストリーム`target-schema` / `target-table`に移行します。
 - `schema-pattern` / `table-pattern`ルールに一致するシャードテーブルについては、DM は`extract-table`.`table-regexp`正規表現を使用してテーブル名、 `extract-schema`.`schema-regexp`正規表現を使用してスキーマ名、 `extract-source`.`source-regexp`正規表現を使用してソース情報を抽出します。その後、DM は抽出した情報を下流のマージ済みテーブルの対応する`target-column`に書き込みます。

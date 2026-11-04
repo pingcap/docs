@@ -153,7 +153,7 @@ select * from information_schema.inspection_result where rule='critical-error';
 
 ## 診断ルール {#diagnostic-rules}
 
-診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスタ情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えた場合、 `warning`または`critical`診断が生成され、対応する情報が`details`列に表示されます。
+診断モジュールには一連のルールが含まれています。これらのルールは、既存の監視テーブルとクラスター情報テーブルを照会した後、結果をしきい値と比較します。結果がしきい値を超えた場合、 `warning`または`critical`診断が生成され、対応する情報が`details`列に表示されます。
 
 `inspection_rules`システムテーブルをクエリすることによって、既存の診断ルールをクエリできます。
 
@@ -248,7 +248,7 @@ DETAILS   | the cluster has 2 different tidb versions, execute the sql to see mo
     | ---- | ----------------------- | ---------------------------------- | -------------------------------------------- |
     | TiDB | panic-count             | tidb_panic_count_total_count       | TiDB でパニックが発生します。                            |
     | TiKV | critical-error          | tikv_critical_error_total_count    | TiKV の重大なエラー。                                |
-    | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | TiKV スケジューラがビジー状態のため、TiKV が一時的に使用できなくなっています。 |
+    | TiKV | scheduler-is-busy       | tikv_scheduler_is_busy_total_count | TiKV スケジューラーがビジー状態のため、TiKV が一時的に使用できなくなっています。 |
     | TiKV | coprocessor-is-busy     | tikv_coprocessor_is_busy_total_count | TiKVコプロセッサーがビジー状態です。                         |
     | TiKV | channel-is-full         | tikv_channel_full_total_count      | TiKV で"channel full"というエラーが発生します。             |
     | TiKV | tikv_engine_write_stall | tikv_engine_write_stall            | TiKV で"stall"エラーが発生します。                       |

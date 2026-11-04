@@ -10,11 +10,11 @@ summary: TiDB データベースの LOAD DATA の使用法の概要。
 TiDB v7.0.0 以降、 `LOAD DATA` SQL文は次の機能をサポートします。
 
 - S3およびGCSからのデータのインポートをサポート
-- 新しいパラメータ`FIELDS DEFINED NULL BY`を追加する
+- 新しいパラメーター`FIELDS DEFINED NULL BY`を追加する
 
 > **Warning:**
 >
-> 新しいパラメータ`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
+> 新しいパラメーター`FIELDS DEFINED NULL BY`と S3 および GCS からのデータインポートのサポートは実験的です。本番環境での使用は推奨されません。この機能は予告なく変更または削除される可能性があります。バグを発見した場合は、GitHub で[問題](https://github.com/pingcap/tidb/issues)を報告してください。
 
 <CustomContent platform="tidb-cloud">
 
@@ -42,7 +42,7 @@ Fields ::=
     | 'DEFINED' 'NULL' 'BY' stringLit ('OPTIONALLY' 'ENCLOSED')?)?
 ```
 
-## パラメータ {#parameters}
+## パラメーター {#parameters}
 
 ### `LOCAL` {#local}
 
@@ -75,13 +75,13 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 
 <CustomContent platform="tidb">
 
-`LOCAL`を指定しない場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳述されているように、ファイルパラメータは有効な S3 または GCS パスである必要があります。
+`LOCAL`を指定しない場合は、 [外部ストレージ](/br/backup-and-restore-storages.md)で詳述されているように、ファイルパラメーターは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
 <CustomContent platform="tidb-cloud">
 
-`LOCAL`を指定しない場合は、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳述されているように、ファイルパラメータは有効な S3 または GCS パスである必要があります。
+`LOCAL`を指定しない場合は、 [外部ストレージ](https://docs.pingcap.com/tidb/stable/backup-and-restore-storages)で詳述されているように、ファイルパラメーターは有効な S3 または GCS パスである必要があります。
 
 </CustomContent>
 
@@ -95,7 +95,7 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 
 ### `Fields` 、 `Lines` 、 `Ignore Lines` {#fields-lines-and-ignore-lines}
 
-`Fields`および`Lines`パラメータを使用して、データ形式の処理方法を指定できます。
+`Fields`および`Lines`パラメーターを使用して、データ形式の処理方法を指定できます。
 
 - `FIELDS TERMINATED BY` : データ区切り文字を指定します。
 - `FIELDS ENCLOSED BY` : データの囲み文字を指定します。
@@ -122,14 +122,14 @@ TiDB Cloudを使用している場合、 `LOAD DATA`文を使用してローカ�
 FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES TERMINATED BY '\r\n'
 ```
 
-上記のパラメータを指定しない場合、インポートされたデータはデフォルトで次のように処理されます。
+上記のパラメーターを指定しない場合、インポートされたデータはデフォルトで次のように処理されます。
 
 ```sql
 FIELDS TERMINATED BY '\t' ENCLOSED BY '' ESCAPED BY '\\'
 LINES TERMINATED BY '\n' STARTING BY ''
 ```
 
-`IGNORE <number> LINES`パラメータを設定することで、ファイルの最初の`number`行を無視できます。例えば、 `IGNORE 1 LINES`を設定すると、ファイルの最初の行が無視されます。
+`IGNORE <number> LINES`パラメーターを設定することで、ファイルの最初の`number`行を無視できます。例えば、 `IGNORE 1 LINES`を設定すると、ファイルの最初の行が無視されます。
 
 ## 例 {#examples}
 
@@ -156,7 +156,7 @@ Query OK, 815264 rows affected (39.63 sec)
 Records: 815264  Deleted: 0  Skipped: 0  Warnings: 0
 ```
 
-`LOAD DATA` 、 `FIELDS ENCLOSED BY`および`FIELDS TERMINATED BY`パラメータとして、16進ASCII文字式または2進ASCII文字式の使用もサポートしています。次の例を参照してください。
+`LOAD DATA` 、 `FIELDS ENCLOSED BY`および`FIELDS TERMINATED BY`パラメーターとして、16進ASCII文字式または2進ASCII文字式の使用もサポートしています。次の例を参照してください。
 
 ```sql
 LOAD DATA LOCAL INFILE '/mnt/evo970/data-sets/bikeshare-data/2017Q4-capitalbikeshare-tripdata.csv' INTO TABLE trips FIELDS TERMINATED BY x'2c' ENCLOSED BY b'100010' LINES TERMINATED BY '\r\n' IGNORE 1 LINES (duration, start_date, end_date, start_station_number, start_station, end_station_number, end_station, bike_number, member_type);

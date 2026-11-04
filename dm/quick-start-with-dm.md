@@ -9,11 +9,11 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 > **Note:**
 >
-> 本番へのデプロイについては、 [TiUPを使用して DMクラスタをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
+> 本番へのデプロイについては、 [TiUPを使用して DMクラスターをデプロイ](/dm/deploy-a-dm-cluster-using-tiup.md)を参照してください。
 
 ## ステップ1: テスト環境をセットアップする {#step-1-set-up-the-test-environment}
 
-[TiUP](/tiup/tiup-overview.md)はクラスタ運用・保守ツールです。Playground機能を使用すると、開発・テスト用にTiDBデータベースとTiDB DMを備えた一時的なローカル環境を迅速に起動できます。
+[TiUP](/tiup/tiup-overview.md)はクラスター運用・保守ツールです。Playground機能を使用すると、開発・テスト用にTiDBデータベースとTiDB DMを備えた一時的なローカル環境を迅速に起動できます。
 
 1. TiUPをインストールします:
 
@@ -65,7 +65,7 @@ summary: TiUP Playground を使用してデータ移行環境をすばやくセ�
 
 Docker を使用すると、テスト用の MySQL 8.0 インスタンスをすばやくデプロイできます。
 
-1. MySQL 8.0 Docker コンテナを実行します。
+1. MySQL 8.0 Docker コンテナーを実行します。
 
     ```shell
     docker run --name mysql80 \
@@ -404,7 +404,7 @@ Ubuntu では、公式の Ubuntu リポジトリから MySQL をインストー�
 
     <div label="Docker" value="docker">
 
-    Docker コンテナを停止して削除するには:
+    Docker コンテナーを停止して削除するには:
 
     ```shell
     docker stop mysql80

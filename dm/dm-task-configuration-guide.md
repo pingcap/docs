@@ -29,7 +29,7 @@ mysql-instances:
   - source-id: "mysql-replica-02"  # Migrate data from the data source whose `source-id` is `mysql-replica-02`.
 ```
 
-## ダウンストリームTiDBクラスタを構成する {#configure-the-downstream-tidb-cluster}
+## ダウンストリームTiDBクラスターを構成する {#configure-the-downstream-tidb-cluster}
 
 次の`target-database`の例は、データ移行タスクの移行先となるターゲット TiDB クラスターを構成する方法を示しています。
 

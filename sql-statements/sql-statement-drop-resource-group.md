@@ -81,7 +81,7 @@ Empty set (0.00 sec)
 
 ## MySQLとの互換性 {#mysql-compatibility}
 
-MySQL は[DROP RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)もサポートしていますが、TiDB は`FORCE`パラメータをサポートしていません。
+MySQL は[DROP RESOURCE GROUP](https://dev.mysql.com/doc/refman/8.0/en/drop-resource-group.html)もサポートしていますが、TiDB は`FORCE`パラメーターをサポートしていません。
 
 ## 参照 {#see-also}
 
