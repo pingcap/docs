@@ -39,7 +39,7 @@ TiDBバージョン5.0以降では、配置ルール機能はデフォルトで�
 | `Count`           | `int` 、正の整数       | レプリカの数。                            |
 | `LabelConstraint` | `[]Constraint`    | ラベルに基づいてノードをフィルタリングします。            |
 | `LocationLabels`  | `[]string`        | 物理的な分離に使用されます。                     |
-| `IsolationLevel`  | `string`          | 最低限の物理的分離レベルを設定するために使用              |
+| `IsolationLevel`  | `string`          | 最低限の物理的分離レベルを設定するために使用されます。      |
 
 `LabelConstraint`は`notIn` `notExists` `in` `exists`のプリミティブに基づいてラベルをフィルタリングします。これらの4つのプリミティブの意味は次のとおりです。
 
