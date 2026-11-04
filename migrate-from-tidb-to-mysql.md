@@ -16,11 +16,17 @@ This document describes how to migrate data from TiDB clusters to MySQL-compatib
 
 1. Deploy a TiDB cluster upstream.
 
-    Deploy a TiDB cluster by using TiUP Playground. For more information, refer to [Deploy and Maintain an Online TiDB Cluster Using TiUP](/tiup/tiup-cluster.md).
+    Deploy a TiDB cluster by using TiUP Playground. For more information, refer to [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md).
+
+    The following example sets `gc-ttl` for TiCDC to `172800` seconds (48 hours). Choose a value that covers full-data export, import, and the time needed for incremental replication to catch up. For details, see the [GC warning in Step 2](#step-2-migrate-full-data).
 
     ```shell
+    # Create the TiCDC configuration file
+    cat > ticdc.toml <<'EOF'
+    gc-ttl = 172800
+    EOF
     # Create a TiDB cluster
-    tiup playground --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
+    tiup playground --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1 --ticdc.config ticdc.toml
     # View cluster status
     tiup status
     ```
@@ -85,7 +91,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
     > **Note:**
     >
-    > TiCDC `gc-ttl` is 24 hours by default. If exporting and importing the full data takes a long time, the default `gc-ttl` might not be sufficient, which could cause the subsequent [incremental replication task](#step-3-migrate-incremental-data) to fail. To avoid this situation, adjust the `gc-ttl` value according to your specific needs when starting the TiCDC server. For more information, see [What is `gc-ttl` in TiCDC](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc).
+    > The default value of `gc-ttl` in TiCDC is 24 hours. If the replication delay of the subsequent [incremental replication task](#step-3-migrate-incremental-data) exceeds `gc-ttl`, the task can fail with `ErrGCTTLExceeded`. For long migrations, configure a larger value before starting TiCDC, as shown in [Step 1](#step-1-set-up-the-environment). For more information, see [What is `gc-ttl` in TiCDC](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc).
 
 2. Back up data.
 
@@ -161,13 +167,19 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 2. Create a changefeed.
 
+    > **Note:**
+    >
+    > Before creating the changefeed, check that each table you want to replicate has at least one [valid index](/ticdc/ticdc-overview.md#valid-index): a primary key or a unique index with all columns defined as `NOT NULL` and no virtual generated columns. By default, TiCDC does not replicate tables without a valid index.
+    >
+    > For tables without a valid index, adding a valid index is recommended. Alternatively, you can set [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) to `true` in the changefeed configuration file. This option does not guarantee data consistency and can cause duplicate data.
+
     In the upstream cluster, run the following command to create a changefeed from the upstream to the downstream clusters:
 
     ```shell
     tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:***@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
 
-    Replace `***` with the password of the downstream MySQL root account that you configured in [Step 1. Set up the environment](#step-1-set-up-the-environment).
+    Replace `***` with the password of the downstream MySQL root account that you configured in [Step 1. Set up the environment](#step-1-set-up-the-environment). For the Docker example, use `my-secret-pw`.
 
     In this command, the parameters are as follows:
 
@@ -209,7 +221,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 ## Step 4. Migrate services
 
-After creating a changefeed, data written to upstream tables that have at least one [valid index](/ticdc/ticdc-overview.md#valid-index) is replicated to the downstream cluster with low latency. If you need to replicate tables without a valid index, you must enable [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate), which does not guarantee data consistency and might cause data redundancy. You can migrate read traffic to the downstream cluster gradually. Observe the read traffic for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster as well in the following steps:
+After creating a changefeed, TiCDC replicates changes from the included upstream tables to the downstream cluster with low latency. You can migrate read traffic to the downstream cluster gradually. Observe the read traffic for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster as well in the following steps:
 
 1. Stop write services in the upstream cluster. Make sure that all upstream data are replicated to downstream before stopping the changefeed.
 
