@@ -13,7 +13,7 @@ TiDB バージョン: 8.0.0
 
 バージョン8.0.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.0/pd-microservices">スケーラビリティ向上のためのPDの分離（実験的）</a></td><td>Placement Driver（PD）には、TiDBクラスタの正常な動作を保証するための複数の重要なモジュールが含まれています。クラスタのワークロードが増加すると、PD内の各モジュールのリソース消費量も増加し、これらのモジュール間で相互干渉が発生し、最終的にクラスタ全体のサービス品質に影響を与えます。v8.0.0以降、TiDBはこの問題に対処するため、PD内のTSOモジュールとスケジューリングモジュールを独立してデプロイ可能なマイクロサービスに分割しました。これにより、クラスタの規模が拡大するにつれて、モジュール間の相互干渉を大幅に削減できます。このアーキテクチャにより、より大規模なワークロードを持つ、より大規模なクラスタの構築が可能になりました。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.0/system-variables#tidb_dml_type-new-in-v800">より大規模なトランザクション向けの一括DML（実験的）</a></td><td>大規模なバッチ DML ジョブ（大規模なクリーンアップジョブ、結合、集計など）は、大量のメモリを消費する可能性があり、これまで非常に大規模な処理には制限がありました。バルク DML ( <code>tidb_dml_type = "bulk"</code> ) は、トランザクション保証を提供し、メモリ不足の問題を軽減しながら、大規模なバッチ DML タスクをより効率的に処理するための新しい DML タイプです。この機能は、データロードに使用する場合、インポート、ロード、およびリストア操作とは異なります。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.0/br-snapshot-guide#restore-cluster-snapshots">クラスタスナップショット復元速度の向上（GA）</a></td><td>この機能により、 BRはクラスタの規模の利点を最大限に活用し、クラスタ内のすべてのTiKVノードがデータ復元の準備段階に参加できるようになります。この機能は、大規模クラスタにおける大規模データセットの復元速度を大幅に向上させます。実際のテストでは、この機能によりダウンロード帯域幅が飽和状態になり、ダウンロード速度が8～10倍、エンドツーエンドの復元速度が約1.5～3倍向上することが示されています。</td></tr><tr><td>テーブル数が膨大な場合のスキーマ情報のキャッシュの安定性を向上させる（実験的）</td><td> TiDBをマルチテナントアプリケーションの記録システムとして利用するSaaS企業は、多くの場合、膨大な数のテーブルを保存する必要があります。以前のバージョンでは、100万個以上のテーブルを処理することは可能でしたが、ユーザーエクスペリエンス全体が低下する可能性がありました。TiDB v8.0.0では、 <code>auto analyze</code>用の<a href="https://docs-archive.pingcap.com/tidb/v8.0/system-variables#tidb_enable_auto_analyze_priority_queue-new-in-v800">優先度キュー</a>を実装することで状況が改善され、処理がより柔軟になり、より幅広いテーブルで安定性が向上します。</td></tr><tr><td rowspan="1">データベースの運用と可観測性</td><td>インデックス使用統計の監視をサポートします</td><td>適切なインデックス設計は、データベースのパフォーマンスを維持するための重要な前提条件です。TiDB v8.0.0 では、インデックスの使用状況統計情報を提供する<a href="https://docs-archive.pingcap.com/tidb/v8.0/information-schema-tidb-index-usage"><code>INFORMATION_SCHEMA.TIDB_INDEX_USAGE</code></a>テーブルと<a href="https://docs-archive.pingcap.com/tidb/v8.0/sys-schema-unused-indexes"><code>sys.schema_unused_indexes</code></a>ビューが導入されました。この機能は、データベース内のインデックスの効率性を評価し、インデックス設計を最適化するのに役立ちます。</td></tr><tr><td rowspan="2">データ移行</td><td>TiCDCが<a href="https://docs-archive.pingcap.com/tidb/v8.0/ticdc-simple-protocol">Simpleプロトコル</a>のサポートを追加</td><td>TiCDCは、新しいプロトコルであるSimpleプロトコルを導入しました。このプロトコルは、DDLおよびBOOTSTRAPイベントにテーブルスキーマ情報を埋め込むことで、スキーマをインバンドで追跡する機能を提供します。</td></tr><tr><td> TiCDCは<a href="https://docs-archive.pingcap.com/tidb/v8.0/ticdc-debezium">Debeziumフォーマットプロトコル</a>のサポートを追加しました。</td><td> TiCDCは、新しいプロトコルであるDebeziumプロトコルを導入しました。TiCDCは、Debezium形式のメッセージを生成するプロトコルを使用して、データ変更イベントをKafkaシンクに発行できるようになりました。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="4">拡張性とパフォーマンス</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.0/pd-microservices">スケーラビリティ向上のためのPDの分離（実験的）</a></td><td>Placement Driver（PD）には、TiDBクラスターの正常な動作を保証するための複数の重要なモジュールが含まれています。クラスターのワークロードが増加すると、PD内の各モジュールのリソース消費量も増加し、これらのモジュール間で相互干渉が発生し、最終的にクラスター全体のサービス品質に影響を与えます。v8.0.0以降、TiDBはこの問題に対処するため、PD内のTSOモジュールとスケジューリングモジュールを独立してデプロイ可能なマイクロサービスに分割しました。これにより、クラスターの規模が拡大するにつれて、モジュール間の相互干渉を大幅に削減できます。このアーキテクチャにより、より大規模なワークロードを持つ、より大規模なクラスターの構築が可能になりました。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.0/system-variables#tidb_dml_type-new-in-v800">より大規模なトランザクション向けの一括DML（実験的）</a></td><td>大規模なバッチ DML ジョブ（大規模なクリーンアップジョブ、結合、集計など）は、大量のメモリを消費する可能性があり、これまで非常に大規模な処理には制限がありました。バルク DML ( <code>tidb_dml_type = "bulk"</code> ) は、トランザクション保証を提供し、メモリ不足の問題を軽減しながら、大規模なバッチ DML タスクをより効率的に処理するための新しい DML タイプです。この機能は、データロードに使用する場合、インポート、ロード、およびリストア操作とは異なります。</td></tr><tr><td><a href="https://docs-archive.pingcap.com/tidb/v8.0/br-snapshot-guide#restore-cluster-snapshots">クラスタースナップショット復元速度の向上（GA）</a></td><td>この機能により、 BRはクラスターの規模の利点を最大限に活用し、クラスター内のすべてのTiKVノードがデータ復元の準備段階に参加できるようになります。この機能は、大規模クラスターにおける大規模データセットの復元速度を大幅に向上させます。実際のテストでは、この機能によりダウンロード帯域幅が飽和状態になり、ダウンロード速度が8～10倍、エンドツーエンドの復元速度が約1.5～3倍向上することが示されています。</td></tr><tr><td>テーブル数が膨大な場合のスキーマ情報のキャッシュの安定性を向上させる（実験的）</td><td> TiDBをマルチテナントアプリケーションの記録システムとして利用するSaaS企業は、多くの場合、膨大な数のテーブルを保存する必要があります。以前のバージョンでは、100万個以上のテーブルを処理することは可能でしたが、ユーザーエクスペリエンス全体が低下する可能性がありました。TiDB v8.0.0では、 <code>auto analyze</code>用の<a href="https://docs-archive.pingcap.com/tidb/v8.0/system-variables#tidb_enable_auto_analyze_priority_queue-new-in-v800">優先度キュー</a>を実装することで状況が改善され、処理がより柔軟になり、より幅広いテーブルで安定性が向上します。</td></tr><tr><td rowspan="1">データベースの運用と可観測性</td><td>インデックス使用統計の監視をサポートします</td><td>適切なインデックス設計は、データベースのパフォーマンスを維持するための重要な前提条件です。TiDB v8.0.0 では、インデックスの使用状況統計情報を提供する<a href="https://docs-archive.pingcap.com/tidb/v8.0/information-schema-tidb-index-usage"><code>INFORMATION_SCHEMA.TIDB_INDEX_USAGE</code></a>テーブルと<a href="https://docs-archive.pingcap.com/tidb/v8.0/sys-schema-unused-indexes"><code>sys.schema_unused_indexes</code></a>ビューが導入されました。この機能は、データベース内のインデックスの効率性を評価し、インデックス設計を最適化するのに役立ちます。</td></tr><tr><td rowspan="2">データ移行</td><td>TiCDCが<a href="https://docs-archive.pingcap.com/tidb/v8.0/ticdc-simple-protocol">Simpleプロトコル</a>のサポートを追加</td><td>TiCDCは、新しいプロトコルであるSimpleプロトコルを導入しました。このプロトコルは、DDLおよびBOOTSTRAPイベントにテーブルスキーマ情報を埋め込むことで、スキーマをインバンドで追跡する機能を提供します。</td></tr><tr><td> TiCDCは<a href="https://docs-archive.pingcap.com/tidb/v8.0/ticdc-debezium">Debeziumフォーマットプロトコル</a>のサポートを追加しました。</td><td> TiCDCは、新しいプロトコルであるDebeziumプロトコルを導入しました。TiCDCは、Debezium形式のメッセージを生成するプロトコルを使用して、データ変更イベントをKafkaシンクに発行できるようになりました。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -21,10 +21,10 @@ TiDB バージョン: 8.0.0
 
 - PDはマイクロサービスモードをサポートしています（実験的） [#5766](https://github.com/tikv/pd/issues/5766) @[binshi-bing](https://github.com/binshi-bing)
 
-    バージョン8.0.0以降、PDはマイクロサービスモードをサポートしています。このモードでは、PDのタイムスタンプ割り当て機能とクラスタスケジューリング機能を個別のマイクロサービスに分割し、それぞれを独立してデプロイできるため、PDのパフォーマンス拡張性が向上し、大規模クラスタにおけるPDのパフォーマンスボトルネックが解消されます。
+    バージョン8.0.0以降、PDはマイクロサービスモードをサポートしています。このモードでは、PDのタイムスタンプ割り当て機能とクラスタースケジューリング機能を個別のマイクロサービスに分割し、それぞれを独立してデプロイできるため、PDのパフォーマンス拡張性が向上し、大規模クラスターにおけるPDのパフォーマンスボトルネックが解消されます。
 
     - `tso`マイクロサービス: クラスター全体に単調増加するタイムスタンプ割り当てを提供します。
-    - `scheduling`マイクロサービス: 負荷分散、ホットスポット処理、レプリカ修復、レプリカ配置などを含むがこれらに限定されない、クラスタ全体のスケジューリング機能を提供します。
+    - `scheduling`マイクロサービス: 負荷分散、ホットスポット処理、レプリカ修復、レプリカ配置などを含むがこれらに限定されない、クラスター全体のスケジューリング機能を提供します。
 
     各マイクロサービスは独立したプロセスとしてデプロイされます。マイクロサービスに複数のレプリカを設定すると、マイクロサービスは自動的にプライマリ/セカンダリのフォールトトレラントモードを実装し、サービスの高い可用性と信頼性を確保します。
 
@@ -68,7 +68,7 @@ TiDB バージョン: 8.0.0
 
 - 自動統計収集の優先キューを導入 [#50132](https://github.com/pingcap/tidb/issues/50132) @[hi-rustin](https://github.com/Rustin170506)
 
-    オプティマイザ統計を最新の状態に保つことは、データベースのパフォーマンスを安定させる鍵となります。ほとんどのユーザーは、最新の統計情報を収集するために、TiDB が提供する[自動統計収集](/statistics.md#automatic-update)機能を利用しています。自動統計収集機能は、すべてのオブジェクトの統計ステータスをチェックし、異常なオブジェクトをキューに追加して順次収集します。以前のバージョンでは、この順序がランダムであったため、より適切な候補が更新されるまで過剰な待ち時間が発生し、パフォーマンスの低下につながる可能性がありました。
+    オプティマイザー統計を最新の状態に保つことは、データベースのパフォーマンスを安定させる鍵となります。ほとんどのユーザーは、最新の統計情報を収集するために、TiDB が提供する[自動統計収集](/statistics.md#automatic-update)機能を利用しています。自動統計収集機能は、すべてのオブジェクトの統計ステータスをチェックし、異常なオブジェクトをキューに追加して順次収集します。以前のバージョンでは、この順序がランダムであったため、より適切な候補が更新されるまで過剰な待ち時間が発生し、パフォーマンスの低下につながる可能性がありました。
 
     バージョン8.0.0以降、自動統計収集機能は、さまざまな条件に基づいてオブジェクトの優先順位を動的に設定し、新規作成されたインデックスや定義変更のあるパーティションテーブルなど、より優先度の高い候補が優先的に処理されるようにします。さらに、TiDBは健全性スコアの低いテーブルを優先し、キューの最上位に配置します。この機能強化により、収集順序がより合理的になり、古い統計情報によって引き起こされるパフォーマンスの問題が軽減されるため、データベースの安定性が向上します。
 
@@ -85,12 +85,12 @@ TiDB バージョン: 8.0.0
 
     詳細については、[ドキュメント](/sql-prepared-plan-cache.md)を参照してください。
 
-- オプティマイザが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
+- オプティマイザーが多値インデックスのサポートを強化[#47759](https://github.com/pingcap/tidb/issues/47759) [#46539](https://github.com/pingcap/tidb/issues/46539) @[Arenatlx](https://github.com/Arenatlx)@[time-and-fate](https://github.com/time-and-fate)
 
-    TiDB v6.6.0 では[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリパフォーマンスが向上しました。v8.0.0 では、オプティマイザが多値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
+    TiDB v6.6.0 では[多値インデックス](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)が導入され、JSON データ型のクエリパフォーマンスが向上しました。v8.0.0 では、オプティマイザーが多値インデックスのサポートを強化し、複雑なシナリオでクエリを最適化するために、それらを正しく識別して利用できるようになりました。
 
-    - オプティマイザは、多値インデックスに関する統計情報を収集し、その統計情報に基づいて実行計画を決定します。SQL文で複数の多値インデックスを選択できる場合、オプティマイザはコストが最も低いインデックスを特定できます。
-    - `OR`を使用して複数の`member of`条件を接続する場合、オプティマイザは各 DNF 項目 ( `member of`条件) に対して有効なインデックス部分パスを照合し、これらのパスを Union を使用して結合して`Index Merge`を形成できます。これにより、条件フィルタリングとデータ取得の効率が向上します。
+    - オプティマイザーは、多値インデックスに関する統計情報を収集し、その統計情報に基づいて実行計画を決定します。SQL文で複数の多値インデックスを選択できる場合、オプティマイザーはコストが最も低いインデックスを特定できます。
+    - `OR`を使用して複数の`member of`条件を接続する場合、オプティマイザーは各 DNF 項目 ( `member of`条件) に対して有効なインデックス部分パスを照合し、これらのパスを Union を使用して結合して`Index Merge`を形成できます。これにより、条件フィルタリングとデータ取得の効率が向上します。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-create-index.md#multi-valued-indexes)を参照してください。
 
@@ -106,14 +106,14 @@ TiDB バージョン: 8.0.0
 
 - プロキシコンポーネントTiProxyが一般提供開始（GA）になりました [#413](https://github.com/pingcap/tiproxy/issues/413) @[djshow832](https://github.com/djshow832) @[xhebox](https://github.com/xhebox)
 
-    TiDB v7.6.0では、実験的機能としてプロキシコンポーネントTiProxyが導入されました。TiProxyはTiDBの公式プロキシコンポーネントであり、クライアントとTiDBサーバーの間に配置されます。TiProxyはTiDBの負荷分散と接続維持機能を提供し、TiDBクラスタのワークロードをよりバランス良く分散させ、メンテナンス作業中のデータベースへのユーザーアクセスに影響を与えないようにします。
+    TiDB v7.6.0では、実験的機能としてプロキシコンポーネントTiProxyが導入されました。TiProxyはTiDBの公式プロキシコンポーネントであり、クライアントとTiDBサーバーの間に配置されます。TiProxyはTiDBの負荷分散と接続維持機能を提供し、TiDBクラスターのワークロードをよりバランス良く分散させ、メンテナンス作業中のデータベースへのユーザーアクセスに影響を与えないようにします。
 
     バージョン8.0.0では、TiProxyが一般提供開始となり、署名証明書の自動生成機能と監視機能が強化されました。
 
     TiProxyの利用シナリオは以下のとおりです。
 
-    - TiDBクラスタにおけるローリング再起動、ローリングアップグレード、スケールインなどのメンテナンス作業中、TiDBサーバーに変更が発生すると、クライアントとTiDBサーバー間の接続が中断されます。TiProxyを使用することで、これらのメンテナンス作業中に接続を他のTiDBサーバーにスムーズに移行できるため、クライアントは影響を受けません。
-    - TiDBサーバーへのクライアント接続を、他のTiDBサーバーに動的に移行できません。複数のTiDBサーバーのワークロードが不均衡になると、クラスタ全体のリソースは十分であっても、特定のTiDBサーバーでリソース枯渇が発生し、レイテンシーが大幅に増加する可能性があります。この問題を解決するために、TiProxyは接続の動的移行機能を提供します。これにより、クライアントに影響を与えることなく、接続をあるTiDBサーバーから別のTiDBサーバーに移行できるため、TiDBクラスタの負荷分散が実現されます。
+    - TiDBクラスターにおけるローリング再起動、ローリングアップグレード、スケールインなどのメンテナンス作業中、TiDBサーバーに変更が発生すると、クライアントとTiDBサーバー間の接続が中断されます。TiProxyを使用することで、これらのメンテナンス作業中に接続を他のTiDBサーバーにスムーズに移行できるため、クライアントは影響を受けません。
+    - TiDBサーバーへのクライアント接続を、他のTiDBサーバーに動的に移行できません。複数のTiDBサーバーのワークロードが不均衡になると、クラスター全体のリソースは十分であっても、特定のTiDBサーバーでリソース枯渇が発生し、レイテンシーが大幅に増加する可能性があります。この問題を解決するために、TiProxyは接続の動的移行機能を提供します。これにより、クライアントに影響を与えることなく、接続をあるTiDBサーバーから別のTiDBサーバーに移行できるため、TiDBクラスターの負荷分散が実現されます。
 
     TiProxyはTiUP、 TiDB Operator、およびTiDB Dashboardに統合されているため、設定、デプロイ、およびメンテナンスが容易です。
 
@@ -153,7 +153,7 @@ TiDB バージョン: 8.0.0
 
 - セッションレベルで不可視インデックスを可視化する機能のサポート [#50653](https://github.com/pingcap/tidb/issues/50653) @[hawkingrei](https://github.com/hawkingrei)
 
-    デフォルトでは、オプティマイザは[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択しません。このメカニズムは通常、インデックスを削除するかどうかを評価するために使用されます。インデックスを削除した場合のパフォーマンスへの影響が不明な場合は、インデックスを一時的に不可視に設定し、必要に応じてすぐに表示に戻すことができます。
+    デフォルトでは、オプティマイザーは[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択しません。このメカニズムは通常、インデックスを削除するかどうかを評価するために使用されます。インデックスを削除した場合のパフォーマンスへの影響が不明な場合は、インデックスを一時的に不可視に設定し、必要に応じてすぐに表示に戻すことができます。
 
     バージョン8.0.0以降では、セッションレベルのシステム変数[`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)を`ON`に設定することで、現在のセッションで不可視インデックスを認識させることができます。この機能を使用すると、まず新しいインデックスを不可視インデックスとして作成し、その後、現在のセッションのシステム変数を変更して、他のセッションに影響を与えることなくそのパフォーマンスをテストできます。この改善により、SQLチューニングの安全性が向上し、本番データベースの安定性も向上します。
 
@@ -180,9 +180,9 @@ TiDB バージョン: 8.0.0
     - インデックスをスキャンしたときの選択性分布
     - インデックスへの最終アクセス時刻
 
-    この情報を用いることで、オプティマイザで使用されていないインデックスや選択性の低いインデックスを特定し、インデックス設計を最適化することでデータベースのパフォーマンスを向上させることができます。
+    この情報を用いることで、オプティマイザーで使用されていないインデックスや選択性の低いインデックスを特定し、インデックス設計を最適化することでデータベースのパフォーマンスを向上させることができます。
 
-    さらに、TiDB v8.0.0 では MySQL と互換性のあるビュー[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)が導入されました。このビューには、TiDB インスタンスの最後の起動以降に使用されていないインデックスが表示されます。v8.0.0 より前のバージョンからアップグレードされたクラスタの場合、 `sys`スキーマとビューは自動的に作成されません。[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md#manually-create-the-schema_unused_indexes-view)を参照して手動で作成できます。
+    さらに、TiDB v8.0.0 では MySQL と互換性のあるビュー[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md)が導入されました。このビューには、TiDB インスタンスの最後の起動以降に使用されていないインデックスが表示されます。v8.0.0 より前のバージョンからアップグレードされたクラスターの場合、 `sys`スキーマとビューは自動的に作成されません。[`sys.schema_unused_indexes`](/sys-schema/sys-schema-unused-indexes.md#manually-create-the-schema_unused_indexes-view)を参照して手動で作成できます。
 
     詳細については、 [ドキュメント](/information-schema/information-schema-tidb-index-usage.md)を参照してください。
 
@@ -234,7 +234,7 @@ TiDB バージョン: 8.0.0
 
     以前のバージョンでは、 TiDB Lightning には論理インポートモード用の[1つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-logical-import-mode-usage.md#conflict-detection)と物理インポートモード用の[2つのデータ競合解決戦略](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#conflict-detection)がありましたが、これらは理解して設定するのが簡単ではありませんでした。
 
-    バージョン 8.0.0 以降、 TiDB Lightning は物理インポートモードの[旧バージョンの競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略を非推奨とし、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメータを使用して論理インポートモードと物理インポートモードの両方の競合検出戦略を制御できるようにし、このパラメータの設定を簡素化しました。さらに、物理インポートモードでは、 `replace`戦略が、インポート時に主キーまたは一意キーの競合があるデータが検出された場合、最新のデータを保持して古いデータを上書きすることをサポートするようになりました。
+    バージョン 8.0.0 以降、 TiDB Lightning は物理インポートモードの[旧バージョンの競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略を非推奨とし、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメーターを使用して論理インポートモードと物理インポートモードの両方の競合検出戦略を制御できるようにし、このパラメーターの設定を簡素化しました。さらに、物理インポートモードでは、 `replace`戦略が、インポート時に主キーまたは一意キーの競合があるデータが検出された場合、最新のデータを保持して古いデータを上書きすることをサポートするようになりました。
 
     詳細については、 [ドキュメント](/tidb-lightning/tidb-lightning-configuration.md)を参照してください。
 
@@ -254,7 +254,7 @@ TiDB バージョン: 8.0.0
 
 - TiUPによってデフォルトでデプロイされているPrometheusのバージョンを2.27.1から2.49.1にアップグレードします。
 - TiUPによってデプロイされたデフォルトのGrafanaバージョンを7.5.11から7.5.17にアップグレードします。
-- GAではないがデフォルトで有効になっているWitness関連のスケジューラを削除する [#7765](https://github.com/tikv/pd/pull/7765) @[rleungx](https://github.com/rleungx)
+- GAではないがデフォルトで有効になっているWitness関連のスケジューラーを削除する [#7765](https://github.com/tikv/pd/pull/7765) @[rleungx](https://github.com/rleungx)
 
 ### 動作の変更 {#behavior-changes}
 
@@ -281,16 +281,16 @@ TiDB バージョン: 8.0.0
 | [`tidb_enable_fast_create_table`](/system-variables.md#tidb_enable_fast_create_table-new-in-v800)                         | 新しく追加された | [TiDB高速テーブル作成](/accelerated-table-creation.md)を有効にするかどうかを制御します。有効にするには`ON`に、無効にするには`OFF`に設定します。デフォルト値は`ON`です。この変数が有効になっている場合、TiDB は[`CREATE TABLE`](/sql-statements/sql-statement-create-table.md)を使用してテーブル作成を高速化します。 |
 | [`tidb_load_binding_timeout`](/system-variables.md#tidb_load_binding_timeout-new-in-v800)                                 | 新しく追加された | バインディングの読み込みタイムアウトを制御します。バインディングの読み込み実行時間がこの値を超えると、読み込みが停止します。                                                                                                                                                             |
 | [`tidb_low_resolution_tso_update_interval`](/system-variables.md#tidb_low_resolution_tso_update_interval-new-in-v800)     | 新しく追加された | TiDB [キャッシュタイムスタンプ](/system-variables.md#tidb_low_resolution_tso)を更新する間隔を制御します。                                                                                                                                        |
-| [`tidb_opt_ordering_index_selectivity_ratio`](/system-variables.md#tidb_opt_ordering_index_selectivity_ratio-new-in-v800) | 新しく追加された | SQL文に`ORDER BY`および`LIMIT`句が存在するものの、インデックスでカバーされていないフィルタ条件がある場合に、SQL文の`ORDER BY`に一致するインデックスの推定行数を制御します。デフォルト値は`-1`で、このシステム変数を無効にすることを意味します。                                                                 |
-| [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
+| [`tidb_opt_ordering_index_selectivity_ratio`](/system-variables.md#tidb_opt_ordering_index_selectivity_ratio-new-in-v800) | 新しく追加された | SQL文に`ORDER BY`および`LIMIT`句が存在するものの、インデックスでカバーされていないフィルター条件がある場合に、SQL文の`ORDER BY`に一致するインデックスの推定行数を制御します。デフォルト値は`-1`で、このシステム変数を無効にすることを意味します。                                                                 |
+| [`tidb_opt_use_invisible_indexes`](/system-variables.md#tidb_opt_use_invisible_indexes-new-in-v800)                       | 新しく追加された | オプティマイザーが現在のセッションでクエリ最適化のために[不可視インデックス](/sql-statements/sql-statement-create-index.md#invisible-index)を選択できるかどうかを制御します。変数が`ON`に設定されている場合、オプティマイザーはセッション内のクエリ最適化のために不可視インデックスを選択できます。                                   |
 | [`tidb_schema_cache_size`](/system-variables.md#tidb_schema_cache_size-new-in-v800)                                       | 新しく追加された | スキーマ情報のキャッシュに使用できるメモリの上限を制御し、メモリの過剰使用を防ぎます。この機能を有効にすると、LRUアルゴリズムを使用して必要なテーブルをキャッシュし、スキーマ情報によって占有されるメモリを効果的に削減します。                                                                                                          |
 
-### 設定ファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメーター {#configuration-file-parameters}
 
-| 設定ファイル | 設定パラメータ                                                                                                                                               | 変更の種類  | 説明                                                                                                                                                                                                          |
+| 設定ファイル | 設定パラメーター                                                                                                                                               | 変更の種類  | 説明                                                                                                                                                                                                          |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`instance.tidb_enable_collect_execution_info`](/tidb-configuration-file.md#tidb_enable_collect_execution_info)                                               | 変更     | [インデックスの使用統計](/information-schema/information-schema-tidb-index-usage.md)を記録するかどうかのコントロールを追加します。デフォルト値は`true`です。                                                                                            |
-| TiDB           | [`tls-version`](/tidb-configuration-file.md#tls-version)                                                                                                      | 変更     | このパラメータは`"TLSv1.0"`と`"TLSv1.1"`をサポートしなくなりました。現在は`"TLSv1.2"`と`"TLSv1.3"`のみをサポートしています。                                                                                                                        |
+| TiDB           | [`tls-version`](/tidb-configuration-file.md#tls-version)                                                                                                      | 変更     | このパラメーターは`"TLSv1.0"`と`"TLSv1.1"`をサポートしなくなりました。現在は`"TLSv1.2"`と`"TLSv1.3"`のみをサポートしています。                                                                                                                        |
 | TiDB           | [`log.file.compression`](/tidb-configuration-file.md#compression-new-in-v800)                                                                                 | 新しく追加された | ポーリングログの圧縮形式を指定します。デフォルト値はnullで、これはポーリングログが圧縮されないことを意味します。                                                                                                                                                  |
 | TiDB           | [`log.general-log-file`](/tidb-configuration-file.md#general-log-file-new-in-v800)                                                                            | 新しく追加された | 一般ログを保存するファイルを指定します。デフォルト値はnullで、これは一般ログがインスタンスファイルに書き込まれることを意味します。                                                                                                                                         |
 | TiDB           | [`tikv-client.enable-replica-selector-v2`](/tidb-configuration-file.md#enable-replica-selector-v2-new-in-v800)                                                | 新しく追加された | TiKV に RPC リクエストを送信する際に、リージョンレプリカセレクターの新しいバージョンを使用するかどうかを制御します。デフォルト値は`true`です。                                                                                                                             |
@@ -303,13 +303,13 @@ TiDB バージョン: 8.0.0
 | TiKV           | [`rocksdb.defaultcf.titan.shared-blob-cache`](/tikv-configuration-file.md#shared-blob-cache-new-in-v800)                                                      | 新しく追加された | Titan blob ファイルと RocksDB ブロックファイルの共有キャッシュを有効にするかどうかを制御します。デフォルト値は`true`です。                                                                                                                                  |
 | TiKV           | [`security.encryption.master-key.gcp.credential-file-path`](/encryption-at-rest.md#specify-a-master-key-via-kms)                                              | 新しく追加された | `security.encryption.master-key.vendor`が`gcp`の場合に、Google Cloud 認証情報ファイルへのパスを指定します。                                                                                                                          |
 | PD             | [`schedule.enable-heartbeat-breakdown-metrics`](/pd-configuration-file.md#enable-heartbeat-breakdown-metrics-new-in-v800)                                     | 新しく追加された | リージョンハートビートの内訳メトリクスを有効にするかどうかを制御します。これらのメトリクスは、リージョンハートビート処理の各段階で消費された時間を測定し、監視による分析を容易にします。デフォルト値は`true`です。                                                                                                |
-| PD             | [`schedule.enable-heartbeat-concurrent-runner`](/pd-configuration-file.md#enable-heartbeat-concurrent-runner-new-in-v800)                                     | 新しく追加された | リージョンハートビートの非同期同時処理を有効にするかどうかを制御します。有効にすると、独立したエグゼキュータがリージョンハートビートリクエストを非同期かつ同時に処理し、ハートビート処理のスループットを向上させ、レイテンシーを削減できます。デフォルト値は`true`です。                                                                        |
+| PD             | [`schedule.enable-heartbeat-concurrent-runner`](/pd-configuration-file.md#enable-heartbeat-concurrent-runner-new-in-v800)                                     | 新しく追加された | リージョンハートビートの非同期同時処理を有効にするかどうかを制御します。有効にすると、独立したエグゼキューターがリージョンハートビートリクエストを非同期かつ同時に処理し、ハートビート処理のスループットを向上させ、レイテンシーを削減できます。デフォルト値は`true`です。                                                                        |
 | TiDB Lightning | [`tikv-importer.duplicate-resolution`](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800) | 非推奨      | 物理インポートモードで一意キーの競合を検出して解決するかどうかを制御します。v8.0.0以降は[`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)に置き換えられています。                                                       |
-| TiDB Lightning | [`conflict.precheck-conflict-before-import`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                             | 新しく追加された | TiDB にデータをインポートする前にデータの競合をチェックする、インポート前の競合検出を有効にするかどうかを制御します。このパラメータのデフォルト値は`false`で、これはTiDB Lightning がデータのインポート後にのみ競合をチェックすることを意味します。このパラメータは、物理インポートモード ( `tikv-importer.backend = "local"` ) でのみ使用できます。 |
+| TiDB Lightning | [`conflict.precheck-conflict-before-import`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                             | 新しく追加された | TiDB にデータをインポートする前にデータの競合をチェックする、インポート前の競合検出を有効にするかどうかを制御します。このパラメーターのデフォルト値は`false`で、これはTiDB Lightning がデータのインポート後にのみ競合をチェックすることを意味します。このパラメーターは、物理インポートモード ( `tikv-importer.backend = "local"` ) でのみ使用できます。 |
 | TiDB Lightning | [`logical-import-batch-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                                            | 新しく追加された | 論理インポートモードでトランザクションごとに挿入される行の最大数を制御します。デフォルト値は`65536`行です。                                                                                                                                                   |
 | TiDB Lightning | [`logical-import-batch-size`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)                                                            | 新しく追加された | 論理インポートモードでダウンストリームのTiDBサーバー上で実行される各SQLクエリの最大サイズを制御します。デフォルト値は`"96KiB"`です。単位はKB、KiB、MB、またはMiBです。                                                                                                            |
 | データ移行          | [`secret-key-path`](/dm/dm-master-configuration-file.md)                                                                                                      | 新しく追加された | 上流および下流のパスワードの暗号化と復号化に使用される秘密鍵のファイルパスを指定します。ファイルには、64文字の16進数AES-256秘密鍵が含まれている必要があります。                                                                                                                       |
-| TiCDC          | [`debezium-disable-schema`](/ticdc/ticdc-changefeed-config.md)                                                                                                | 新しく追加された | スキーマ情報の出力を無効にするかどうかを制御します。このパラメータは、シンクタイプがMQで、出力プロトコルがDebeziumの場合にのみ有効です。                                                                                                                                   |
+| TiCDC          | [`debezium-disable-schema`](/ticdc/ticdc-changefeed-config.md)                                                                                                | 新しく追加された | スキーマ情報の出力を無効にするかどうかを制御します。このパラメーターは、シンクタイプがMQで、出力プロトコルがDebeziumの場合にのみ有効です。                                                                                                                                   |
 | TiCDC          | [`tls-certificate-file`](/ticdc/ticdc-sink-to-pulsar.md)                                                                                                      | 新しく追加された | クライアント上の暗号化証明書ファイルへのパスを指定します。これは、PulsarがTLS暗号化通信を有効にする場合に必要です。                                                                                                                                              |
 | TiCDC          | [`tls-key-file-path`](/ticdc/ticdc-sink-to-pulsar.md)                                                                                                         | 新しく追加された | クライアント上の暗号化された秘密鍵へのパスを指定します。これは、PulsarがTLS暗号化通信を有効にする場合に必要となります。                                                                                                                                            |
 
@@ -322,7 +322,7 @@ TiDB バージョン: 8.0.0
 
 - バージョン8.0.0以降、 [`tidb_disable_txn_auto_retry`](/system-variables.md#tidb_disable_txn_auto_retry)システム変数は非推奨となり、TiDBは楽観的トランザクションの自動再試行をサポートしなくなりました。代替策として、楽観的トランザクションの競合が発生した場合は、エラーを捕捉してアプリケーションでトランザクションを再試行するか、[悲観的トランザクションモード](/pessimistic-transaction.md)を使用してください。
 - バージョン8.0.0以降、TiDBはTLSv1.0およびTLSv1.1プロトコルをサポートしなくなりました。TLSをTLSv1.2またはTLSv1.3にアップグレードする必要があります。
-- バージョン8.0.0以降、 TiDB Lightningは物理インポートモードの[旧バージョンの競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略を非推奨とし、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメータを使用して論理インポートモードと物理インポートモードの両方の競合検出戦略を制御できるようにします。旧バージョンの競合検出の[`duplicate-resolution`](/tidb-lightning/tidb-lightning-configuration.md)パラメータは、今後のリリースで削除されます。
+- バージョン8.0.0以降、 TiDB Lightningは物理インポートモードの[旧バージョンの競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略を非推奨とし、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md)パラメーターを使用して論理インポートモードと物理インポートモードの両方の競合検出戦略を制御できるようにします。旧バージョンの競合検出の[`duplicate-resolution`](/tidb-lightning/tidb-lightning-configuration.md)パラメーターは、今後のリリースで削除されます。
 - 今後のリリースでは [実行プランバインディングの自動進化](/sql-plan-management.md#baseline-evolution)が再設計される予定であり、関連する変数や動作が変更される予定です。
 
 ## 改善点 {#improvements}
@@ -349,9 +349,9 @@ TiDB バージョン: 8.0.0
 
 - TiKV
 
-    - 構成や操作が不適切な場合のクラスタTSOの堅牢性を向上させるため、TSOの検証と検出機能を強化する [#16545](https://github.com/tikv/tikv/issues/16545) @[cfzjywxk](https://github.com/cfzjywxk)
+    - 構成や操作が不適切な場合のクラスターTSOの堅牢性を向上させるため、TSOの検証と検出機能を強化する [#16545](https://github.com/tikv/tikv/issues/16545) @[cfzjywxk](https://github.com/cfzjywxk)
     - 未コミットトランザクションの処理パフォーマンスを向上させるため、悲観的ロックのクリーンアップロジックを最適化する [#16158](https://github.com/tikv/tikv/issues/16158) @[cfzjywxk](https://github.com/cfzjywxk)
-    - TiKV の統一ヘルス制御を導入し、異常な単一の TiKV ノードがクラスタアクセスパフォーマンスに与える影響を軽減します。この最適化は、 [`tikv-client.enable-replica-selector-v2`](/tidb-configuration-file.md#enable-replica-selector-v2-new-in-v800)を`false`に設定することで無効にできます。 [#16297](https://github.com/tikv/tikv/issues/16297) [#1104](https://github.com/tikv/client-go/issues/1104) [#1167](https://github.com/tikv/client-go/issues/1167) @[MyonKeminta](https://github.com/MyonKeminta)@[zyguan](https://github.com/zyguan)@[crazycs520](https://github.com/crazycs520)
+    - TiKV の統一ヘルス制御を導入し、異常な単一の TiKV ノードがクラスターアクセスパフォーマンスに与える影響を軽減します。この最適化は、 [`tikv-client.enable-replica-selector-v2`](/tidb-configuration-file.md#enable-replica-selector-v2-new-in-v800)を`false`に設定することで無効にできます。 [#16297](https://github.com/tikv/tikv/issues/16297) [#1104](https://github.com/tikv/client-go/issues/1104) [#1167](https://github.com/tikv/client-go/issues/1167) @[MyonKeminta](https://github.com/MyonKeminta)@[zyguan](https://github.com/zyguan)@[crazycs520](https://github.com/crazycs520)
     - PDクライアントはメタデータストレージインターフェースを使用して、以前のグローバル構成インターフェースを置き換えます [#14484](https://github.com/tikv/tikv/issues/14484) @[HuSharp](https://github.com/HuSharp)
     - write CF の統計情報によってデータ読み込み動作を判定することで、スキャン性能を向上させる [#16245](https://github.com/tikv/tikv/issues/16245) @[Connor1996](https://github.com/Connor1996)
     - Raft設定変更プロセス中に削除されるノードと降格される投票者の最新のハートビートをチェックして、この動作によってリージョンにアクセスできなくなることがないようにする [#15799](https://github.com/tikv/tikv/issues/15799) @[tonyxuqqi](https://github.com/tonyxuqqi)
@@ -370,7 +370,7 @@ TiDB バージョン: 8.0.0
     - etcdリーダーがPDリーダーに与える影響を軽減する [#7499](https://github.com/tikv/pd/issues/7499) @[JmPotato](https://github.com/JmPotato) @[HuSharp](https://github.com/HuSharp)
     - 異常な etcd ノードの検出メカニズムを強化する [#7730](https://github.com/tikv/pd/issues/7730) @[JmPotato](https://github.com/JmPotato) @[HuSharp](https://github.com/HuSharp)
     - pd-ctlのGCセーフポイントの出力を最適化する [#7767](https://github.com/tikv/pd/issues/7767) @[nolouch](https://github.com/nolouch)
-    - ホットスポットスケジューラにおける履歴ウィンドウ構成の動的な変更をサポートする [#7877](https://github.com/tikv/pd/issues/7877) @[lhy1024](https://github.com/lhy1024)
+    - ホットスポットスケジューラーにおける履歴ウィンドウ構成の動的な変更をサポートする [#7877](https://github.com/tikv/pd/issues/7877) @[lhy1024](https://github.com/lhy1024)
     - オペレーター作成時のロック競合問題を軽減する [#7837](https://github.com/tikv/pd/issues/7837) @[Leavrth](https://github.com/Leavrth)
     - 可用性を向上させるためにGRPC構成を調整 [#7821](https://github.com/tikv/pd/issues/7821) @[rleungx](https://github.com/rleungx)
 
@@ -383,9 +383,9 @@ TiDB バージョン: 8.0.0
 
     - Backup & Restore (BR)
 
-        - `br`コマンドラインツールに新しい復元パラメータ`--load-stats`を導入します。このパラメータは統計情報を復元するかどうかを制御します。 [#50568](https://github.com/pingcap/tidb/issues/50568) @[Leavrth](https://github.com/Leavrth)
-        - `br`コマンドラインツールに新しい復元パラメータ`--tikv-max-restore-concurrency`を導入します。このパラメータは、各 TiKV ノードのダウンロードおよび取り込みファイルの最大数を制御します。また、ジョブキューの最大長を制御することで、 BRノードのメモリ消費量も制御します。 [#51621](https://github.com/pingcap/tidb/issues/51621) @[3pointer](https://github.com/3pointer)
-        - 粒度の粗いリージョン分散アルゴリズムを有効にして同時実行パラメータを適応的に取得できるようにすることで、復元パフォーマンスを向上させます [#50701](https://github.com/pingcap/tidb/issues/50701) @[3pointer](https://github.com/3pointer)
+        - `br`コマンドラインツールに新しい復元パラメーター`--load-stats`を導入します。このパラメーターは統計情報を復元するかどうかを制御します。 [#50568](https://github.com/pingcap/tidb/issues/50568) @[Leavrth](https://github.com/Leavrth)
+        - `br`コマンドラインツールに新しい復元パラメーター`--tikv-max-restore-concurrency`を導入します。このパラメーターは、各 TiKV ノードのダウンロードおよび取り込みファイルの最大数を制御します。また、ジョブキューの最大長を制御することで、 BRノードのメモリ消費量も制御します。 [#51621](https://github.com/pingcap/tidb/issues/51621) @[3pointer](https://github.com/3pointer)
+        - 粒度の粗いリージョン分散アルゴリズムを有効にして同時実行パラメーターを適応的に取得できるようにすることで、復元パフォーマンスを向上させます [#50701](https://github.com/pingcap/tidb/issues/50701) @[3pointer](https://github.com/3pointer)
         - `br`のコマンドラインヘルプ情報に`log`コマンドを表示する [#50927](https://github.com/pingcap/tidb/issues/50927) @[RidRisR](https://github.com/RidRisR)
         - テーブルIDの再利用を最大化し、リストアパフォーマンスを向上させるため、リストアプロセス中にテーブルIDを事前割り当てする機能をサポートする [#51736](https://github.com/pingcap/tidb/issues/51736) @[Leavrth](https://github.com/Leavrth)
         - BR使用時にTiDB内のGCメモリ制限チューナー機能を無効にしてOOM問題を回避する [#51078](https://github.com/pingcap/tidb/issues/51078) @[Leavrth](https://github.com/Leavrth)
@@ -397,7 +397,7 @@ TiDB バージョン: 8.0.0
     - TiCDC
 
         - TiCDCがデータを複製する際のメモリ消費量を削減するために、 `RowChangedEvent`のメモリ消費量を最適化します [#10386](https://github.com/pingcap/tiflow/issues/10386) @[lidezhu](https://github.com/lidezhu)
-        - チェンジフィードタスクの作成と再開時に start-ts パラメータが有効であることを確認します [#10499](https://github.com/pingcap/tiflow/issues/10499) @[3AceShowHand](https://github.com/3AceShowHand)
+        - チェンジフィードタスクの作成と再開時に start-ts パラメーターが有効であることを確認します [#10499](https://github.com/pingcap/tiflow/issues/10499) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Data Migration (DM)
 
@@ -451,7 +451,7 @@ TiDB バージョン: 8.0.0
     - 列のデフォルト値が削除されている場合、列のデフォルト値を取得するとエラーが返される問題を修正します[#50043](https://github.com/pingcap/tidb/issues/50043) [#51324](https://github.com/pingcap/tidb/issues/51324) @[crazycs520](https://github.com/crazycs520)
     - TiFlash の遅延マテリアライゼーション処理で関連する列が処理されると、間違った結果が返される場合がある問題を修正[#49241](https://github.com/pingcap/tidb/issues/49241) [#51204](https://github.com/pingcap/tidb/issues/51204) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - `LIKE()`関数がバイナリ照合順序入力を処理する際に誤った結果を返す可能性がある問題を修正しました [#50393](https://github.com/pingcap/tidb/issues/50393) @[yibin87](https://github.com/yibin87)
-    - `JSON_LENGTH()`関数が、2 番目のパラメータが`NULL`の場合に誤った結果を返す問題を修正しました [#50931](https://github.com/pingcap/tidb/issues/50931) @[SeaRise](https://github.com/SeaRise)
+    - `JSON_LENGTH()`関数が、2 番目のパラメーターが`NULL`の場合に誤った結果を返す問題を修正しました [#50931](https://github.com/pingcap/tidb/issues/50931) @[SeaRise](https://github.com/SeaRise)
     - `CAST(AS DATETIME)`が特定の状況下で時間精度を失う可能性がある問題を修正 [#49555](https://github.com/pingcap/tidb/issues/49555) @[SeaRise](https://github.com/SeaRise)
     - テーブルにクラスター化インデックスがある場合、並列処理`Apply`が誤った結果を生成する可能性がある問題を修正 [#51372](https://github.com/pingcap/tidb/issues/51372) @[guo-shaoge](https://github.com/guo-shaoge)
     - `ALTER TABLE ... COMPACT TIFLASH REPLICA`が主キーの型が`VARCHAR`の場合に正しく終了しない可能性がある問題を修正 [#51810](https://github.com/pingcap/tidb/issues/51810) @[breezewish](https://github.com/breezewish)
@@ -493,7 +493,7 @@ TiDB バージョン: 8.0.0
     - Leaderのリースがログ時刻よりも後に期限切れになる問題を修正 [#7700](https://github.com/tikv/pd/issues/7700) @[CabinfeverB](https://github.com/CabinfeverB)
     - TiDB (PD クライアント) と PD 間の TLS スイッチが矛盾している場合に TiDB がパニックになる問題を修正[#7900](https://github.com/tikv/pd/issues/7900) [#7902](https://github.com/tikv/pd/issues/7902) [#7916](https://github.com/tikv/pd/issues/7916) @[CabinfeverB](https://github.com/CabinfeverB)
     - Goroutine が正しく閉じられなかった場合に Goroutine リークが発生する問題を修正しました [#7782](https://github.com/tikv/pd/issues/7782) @[HuSharp](https://github.com/HuSharp)
-    - 特殊文字を含むスケジューラをpd-ctlが削除できない問題を修正 [#7798](https://github.com/tikv/pd/issues/7798) @[JmPotato](https://github.com/JmPotato)
+    - 特殊文字を含むスケジューラーをpd-ctlが削除できない問題を修正 [#7798](https://github.com/tikv/pd/issues/7798) @[JmPotato](https://github.com/JmPotato)
     - TSO を取得するときに PD クライアントがブロックされる可能性がある問題を修正 [#7864](https://github.com/tikv/pd/issues/7864) @[CabinfeverB](https://github.com/CabinfeverB)
 
 - TiFlash

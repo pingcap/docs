@@ -14,11 +14,11 @@ TiDB バージョン: 6.5.6
 ## 互換性の変更 {#compatibility-changes}
 
 - セキュリティ強化モード（SEM）で[`require_secure_transport`](https://docs.pingcap.com/tidb/v6.5/system-variables#require_secure_transport-new-in-v610)を`ON`に設定することを禁止し、ユーザーの潜在的な接続問題を防ぎます。 [#47665](https://github.com/pingcap/tidb/issues/47665) @[tiancaiamao](https://github.com/tiancaiamao)
-- オプティマイザがテーブルに対してハッシュ結合を選択するかどうかを制御する[`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_opt_enable_hash_join-new-in-v656)システム変数を導入します。 [#46695](https://github.com/pingcap/tidb/issues/46695) @[coderplay](https://github.com/coderplay)
+- オプティマイザーがテーブルに対してハッシュ結合を選択するかどうかを制御する[`tidb_opt_enable_hash_join`](https://docs.pingcap.com/tidb/v6.5/system-variables#tidb_opt_enable_hash_join-new-in-v656)システム変数を導入します。 [#46695](https://github.com/pingcap/tidb/issues/46695) @[coderplay](https://github.com/coderplay)
 - さらなるテストの結果、 TiCDC Changefeed設定項目[`case-sensitive`](/ticdc/ticdc-changefeed-config.md)のデフォルト値が`true`から`false`に変更されました。これは、デフォルトでは TiCDC 設定ファイル内のテーブル名とデータベース名が大文字と小文字を区別しないことを意味します[#10047](https://github.com/pingcap/tiflow/issues/10047) @[sdojjy](https://github.com/sdojjy)
 - TiCDC Changefeed では、次の新しい設定項目が導入されています。
     - [`sql-mode`](/ticdc/ticdc-changefeed-config.md) : TiCDC がデータを複製するときに DDL文を解析するために使用する[SQLモード](https://docs.pingcap.com/tidb/v6.5/ticdc-ddl#sql-mode)を設定できます[#9876](https://github.com/pingcap/tiflow/issues/9876) @[asddongmen](https://github.com/asddongmen)
-    - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメータを設定できます[#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
+    - [`encoding-worker-num`](/ticdc/ticdc-changefeed-config.md)と[`flush-worker-num`](/ticdc/ticdc-changefeed-config.md) : 異なるマシンの仕様に基づいて、再実行モジュールに異なる同時実行パラメーターを設定できます[#10048](https://github.com/pingcap/tiflow/issues/10048) @[CharlesCheung96](https://github.com/CharlesCheung96)
     - [`compression`](/ticdc/ticdc-changefeed-config.md) : REDOログファイルの圧縮動作を設定できます[#10176](https://github.com/pingcap/tiflow/issues/10176) @[sdojjy](https://github.com/sdojjy)
     - [`changefeed-error-stuck-duration`](/ticdc/ticdc-changefeed-config.md) : 内部エラーまたは例外が発生したときに、変更フィードが自動的に再試行される期間を設定できます[#9875](https://github.com/pingcap/tiflow/issues/9875) @[asddongmen](https://github.com/asddongmen)
     - [`sink.cloud-storage-config`](/ticdc/ticdc-changefeed-config.md) : オブジェクトストレージにデータを複製するときに履歴データの自動クリーンアップを設定できます @[CharlesCheung96](https://github.com/CharlesCheung96) [#10109](https://github.com/pingcap/tiflow/issues/10109)
@@ -31,8 +31,8 @@ TiDB バージョン: 6.5.6
 
 - TiKV
 
-    - OOM を防ぐためにリゾルバのメモリ使用量を最適化します [#15458](https://github.com/tikv/tikv/issues/15458) @[overvenus](https://github.com/overvenus)
-    - ルータオブジェクトのLRUCacheを排除してメモリ使用量を削減し、OOM を防止します。 [#15430](https://github.com/tikv/tikv/issues/15430) @[Connor1996](https://github.com/Connor1996)
+    - OOM を防ぐためにリゾルバーのメモリ使用量を最適化します [#15458](https://github.com/tikv/tikv/issues/15458) @[overvenus](https://github.com/overvenus)
+    - ルーターオブジェクトのLRUCacheを排除してメモリ使用量を削減し、OOM を防止します。 [#15430](https://github.com/tikv/tikv/issues/15430) @[Connor1996](https://github.com/Connor1996)
     - `apply_router`と`raft_router`メトリックに`alive`と`leak`監視ディメンションを追加します @[tonyxuqqi](https://github.com/tonyxuqqi) [#15357](https://github.com/tikv/tikv/issues/15357)
 
 - PD
@@ -45,7 +45,7 @@ TiDB バージョン: 6.5.6
 
         - スナップショットバックアップの復元中に、 BRは特定のネットワークエラーが発生すると再試行します[#48528](https://github.com/pingcap/tidb/issues/48528) @[Leavrth](https://github.com/Leavrth)
         - `delete range`シナリオで Point-In-Time Recovery (PITR) の新しい統合テストを導入し、PITR の安定性を強化します。 [#47738](https://github.com/pingcap/tidb/issues/47738) @[Leavrth](https://github.com/Leavrth)
-        - タイムアウトエラーまたはリージョンスキャッタのキャンセルが発生した場合に、スナップショットリカバリ中にリージョンスキャッタの自動再試行を有効にする [#47236](https://github.com/pingcap/tidb/issues/47236) @[Leavrth](https://github.com/Leavrth)
+        - タイムアウトエラーまたはリージョンスキャッターのキャンセルが発生した場合に、スナップショットリカバリ中にリージョンスキャッターの自動再試行を有効にする [#47236](https://github.com/pingcap/tidb/issues/47236) @[Leavrth](https://github.com/Leavrth)
         - BRは、 `merge-schedule-limit`構成を`0` に設定することで、リージョンのマージを一時停止できます。 [#7148](https://github.com/tikv/pd/issues/7148) @[3pointer](https://github.com/3pointer)
 
     - TiCDC
@@ -80,7 +80,7 @@ TiDB バージョン: 6.5.6
     - 統計 TopN 構造を構築するときに発生する可能性のあるpanic問題を修正しました。 [#35948](https://github.com/pingcap/tidb/issues/35948) @[Rustin170506](https://github.com/Rustin170506)
     - MPPで計算された`COUNT(INT)`の結果が正しくない可能性がある問題を修正[#48643](https://github.com/pingcap/tidb/issues/48643) @[AilinKid](https://github.com/AilinKid)
     - `tidb_enable_ordered_result_mode`が有効になっているときにpanicが発生する可能性がある問題を修正[#45044](https://github.com/pingcap/tidb/issues/45044) @[qw4990](https://github.com/qw4990)
-    - ウィンドウ関数によって導入されたソートを削減するために、オプティマイザが誤って IndexFullScan を選択する問題を修正しました。 [#46177](https://github.com/pingcap/tidb/issues/46177) @[qw4990](https://github.com/qw4990)
+    - ウィンドウ関数によって導入されたソートを削減するために、オプティマイザーが誤って IndexFullScan を選択する問題を修正しました。 [#46177](https://github.com/pingcap/tidb/issues/46177) @[qw4990](https://github.com/qw4990)
     - 述語が共通テーブル式にプッシュダウンされたときに結果が不正確になる可能性がある問題を修正しました [#47881](https://github.com/pingcap/tidb/issues/47881) @[winoros](https://github.com/winoros)
     - DUALテーブルを最初のサブノードとして`UNION ALL`を実行するとエラーが発生する可能性がある問題を修正しました。 [#48755](https://github.com/pingcap/tidb/issues/48755) @[winoros](https://github.com/winoros)
     - 特定の状況で列の整理によってpanicが発生する可能性がある問題を修正[#47331](https://github.com/pingcap/tidb/issues/47331) @[Rustin170506](https://github.com/Rustin170506)
@@ -100,19 +100,19 @@ TiDB バージョン: 6.5.6
 
     - ピアを移動するとFollower Readのパフォーマンスが低下する可能性がある問題を修正[#15468](https://github.com/tikv/tikv/issues/15468) @[YuJuncen](https://github.com/YuJuncen)
     - raftstore-applys が継続的に増加するデータエラーを修正しました [#15371](https://github.com/tikv/tikv/issues/15371) @[Connor1996](https://github.com/Connor1996)
-    - オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサのリクエストがタイムアウトする問題を修正しました [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
+    - オンラインワークロードがある場合にTiDB Lightningチェックサムコプロセッサーのリクエストがタイムアウトする問題を修正しました [#15565](https://github.com/tikv/tikv/issues/15565) @[lance6716](https://github.com/lance6716)
     - `lz4-sys`のバージョンを 1.9.4 にアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[SpadeA-Tang](https://github.com/SpadeA-Tang)
     - `tokio-timer`をアップグレードしてセキュリティ問題を修正しました [#15621](https://github.com/tikv/tikv/issues/15621) @[LykxSassinator](https://github.com/LykxSassinator)
     - `flatbuffer` を削除してセキュリティ問題を修正 [#15621](https://github.com/tikv/tikv/issues/15621) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - TiKVストアがネットワーク分断されているときにresolved-tsの遅延が増加する問題を修正しました [#15679](https://github.com/tikv/tikv/issues/15679) @[hicqu](https://github.com/hicqu)
     - TiKV を再起動したときに、適用されていないRaftログが多数存在すると TiKV OOM が発生する問題を修正しました[#15770](https://github.com/tikv/tikv/issues/15770) @[overvenus](https://github.com/overvenus)
     - リージョンをマージした後、古いピアが保持され、resolved-tsがブロックされる問題を修正しました。 [#15919](https://github.com/tikv/tikv/issues/15919) @[overvenus](https://github.com/overvenus)
-    - クラウド環境のGrafanaでスケジューラコマンド変数が正しくない問題を修正[#15832](https://github.com/tikv/tikv/issues/15832) @[Connor1996](https://github.com/Connor1996)
+    - クラウド環境のGrafanaでスケジューラーコマンド変数が正しくない問題を修正[#15832](https://github.com/tikv/tikv/issues/15832) @[Connor1996](https://github.com/Connor1996)
     - Titanの`blob-run-mode`がオンラインに更新できない問題を修正 [#15978](https://github.com/tikv/tikv/issues/15978) @[tonyxuqqi](https://github.com/tonyxuqqi)
     - リージョン間でメタデータが一致しないためにTiKVがパニックを起こす問題を修正しました [#13311](https://github.com/tikv/tikv/issues/13311) @[cfzjywxk](https://github.com/cfzjywxk)
     - オンラインアンセーフリカバリ中にリーダーが強制終了するとTiKVがパニックになる問題を修正 [#15629](https://github.com/tikv/tikv/issues/15629) @[Connor1996](https://github.com/Connor1996)
     - スケールアウトするときに DR 自動同期のジョイント状態がタイムアウトする可能性がある問題を修正しました [#15817](https://github.com/tikv/tikv/issues/15817) @[Connor1996](https://github.com/Connor1996)
-    - Raftピアを削除するときに TiKV コプロセッサが古いデータを返す可能性がある問題を修正しました [#16069](https://github.com/tikv/tikv/issues/16069) @[overvenus](https://github.com/overvenus)
+    - Raftピアを削除するときに TiKV コプロセッサーが古いデータを返す可能性がある問題を修正しました [#16069](https://github.com/tikv/tikv/issues/16069) @[overvenus](https://github.com/overvenus)
     - resolved-tsが2時間ブロックされる可能性がある問題を修正[#39130](https://github.com/pingcap/tidb/issues/39130) @[overvenus](https://github.com/overvenus)
     - `notLeader`または`regionNotFound` に遭遇するとフラッシュバックが停止する可能性がある問題を修正しました [#15712](https://github.com/tikv/tikv/issues/15712) @[HuSharp](https://github.com/HuSharp)
 
@@ -122,10 +122,10 @@ TiDB バージョン: 6.5.6
     - 変更された分離レベルがデフォルトの配置ルールに同期されない問題を修正しました [#7121](https://github.com/tikv/pd/issues/7121) @[rleungx](https://github.com/rleungx)
     - `evict-leader-scheduler`が構成を失う可能性がある問題を修正 [#6897](https://github.com/tikv/pd/issues/6897) @[HuSharp](https://github.com/HuSharp)
     - BR の回復プロセス中に、空のリージョンをカウントする方法によってリージョンのバランスが崩れる可能性がある問題を修正しました。 [#7148](https://github.com/tikv/pd/issues/7148) @[CabinfeverB](https://github.com/CabinfeverB)
-    - 配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`が誤って計算される可能性がある問題を修正しました[#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
-    - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`が誤って計算される問題を修正[#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
+    - 配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで`canSync`と`hasMajority`が誤って計算される可能性がある問題を修正しました[#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
+    - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで`available_stores`が誤って計算される問題を修正[#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
     - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで、セカンダリAZがダウンしているときにプライマリAZがTiKVノードを追加できない問題を修正しました。 [#7218](https://github.com/tikv/pd/issues/7218) @[disksing](https://github.com/disksing)
-    - 大規模クラスタに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[#7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)
+    - 大規模クラスターに複数の TiKV ノードを追加すると、TiKVハートビートレポートが遅くなったり停止したりする可能性がある問題を修正しました[#7248](https://github.com/tikv/pd/issues/7248) @[rleungx](https://github.com/rleungx)
     - TiKVノードが利用できない場合にPDが通常のピアを削除する可能性がある問題を修正[#7249](https://github.com/tikv/pd/issues/7249) @[lhy1024](https://github.com/lhy1024)
     - DR自動同期モードでリーダーの切り替えに時間がかかる問題を修正 [#6988](https://github.com/tikv/pd/issues/6988) @[HuSharp](https://github.com/HuSharp)
     - Gin Web Framework のバージョンを v1.8.1 から v1.9.1 にアップグレードして、いくつかのセキュリティ問題を修正しました[#7438](https://github.com/tikv/pd/issues/7438) @[niubell](https://github.com/niubell)

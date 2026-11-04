@@ -97,7 +97,7 @@ TiDB バージョン: 7.5.5
 
     - リージョンをマージすると稀に TiKV がpanicを起こす可能性がある問題を修正[#17840](https://github.com/tikv/tikv/issues/17840) @[glorv](https://github.com/glorv)
     - Raftと RocksDB が異なるディスクにデプロイされている場合、RocksDB が配置されているディスクでは低速ディスク検出が機能しない問題を修正[#17884](https://github.com/tikv/tikv/issues/17884) @[LykxSassinator](https://github.com/LykxSassinator)
-    - `log-file`パラメータが指定されていない場合、jprof の出力が正しくキャプチャおよび処理されない問題を修正[#17607](https://github.com/tikv/tikv/issues/17607) @[Hexilee](https://github.com/Hexilee)
+    - `log-file`パラメーターが指定されていない場合、jprof の出力が正しくキャプチャおよび処理されない問題を修正[#17607](https://github.com/tikv/tikv/issues/17607) @[Hexilee](https://github.com/Hexilee)
     - 休止状態のリージョンが起動しているときにレイテンシーが増加する可能性がある問題を修正[#17101](https://github.com/tikv/tikv/issues/17101) @[Connor1996](https://github.com/Connor1996)
     - `RADIANS()`または`DEGREES()`関数を含むクエリを実行するとTiKVがpanicする可能性がある問題を修正しました[#17852](https://github.com/tikv/tikv/issues/17852) @[gengliqi](https://github.com/gengliqi)
     - 読み取りスレッドがRaft EngineのMemTable内の古いインデックスにアクセスしたときに発生するpanic問題を修正しました。 [#17383](https://github.com/tikv/tikv/issues/17383) @[LykxSassinator](https://github.com/LykxSassinator)
@@ -116,15 +116,15 @@ TiDB バージョン: 7.5.5
     - ラベル統計のメモリリーク問題を修正 [#8700](https://github.com/tikv/pd/issues/8700) @[lhy1024](https://github.com/lhy1024)
     - 同じストアID で繰り返し作成された場合に`evict-leader-scheduler`が正常に動作しない問題を修正 [#8756](https://github.com/tikv/pd/issues/8756) @[okJiang](https://github.com/okJiang)
     - リソースグループクライアントでスロットが完全に削除されず、割り当てられたトークンの数が指定された値より少なくなる問題を修正しました。 [#7346](https://github.com/tikv/pd/issues/7346) @[guo-shaoge](https://github.com/guo-shaoge)
-    - `evict-leader-scheduler`で間違ったパラメータを使用すると、PD がエラーを正しく報告せず、一部のスケジューラが利用できなくなる問題を修正しました[#8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
+    - `evict-leader-scheduler`で間違ったパラメーターを使用すると、PD がエラーを正しく報告せず、一部のスケジューラーが利用できなくなる問題を修正しました[#8619](https://github.com/tikv/pd/issues/8619) @[rleungx](https://github.com/rleungx)
     - ホットスポットキャッシュのメモリリーク問題を修正 [#8698](https://github.com/tikv/pd/issues/8698) @[lhy1024](https://github.com/lhy1024)
-    - 乱数ジェネレータの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [#8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
+    - 乱数ジェネレーターの頻繁な作成によって発生するパフォーマンスジッターの問題を修正しました [#8674](https://github.com/tikv/pd/issues/8674) @[rleungx](https://github.com/rleungx)
 
 - TiFlash
 
     - TiFlash が同時 DDL 実行中に競合に遭遇した場合のTiFlash panic問題を修正[#8578](https://github.com/pingcap/tiflash/issues/8578) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `LPAD()`と`RPAD()`関数が、場合によっては誤った結果を返す問題を修正しました[#9465](https://github.com/pingcap/tiflash/issues/9465) @[guo-shaoge](https://github.com/guo-shaoge)
-    - 2番目のパラメータが負の場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [#9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
+    - 2番目のパラメーターが負の場合に`SUBSTRING()`関数が誤った結果を返す問題を修正しました [#9604](https://github.com/pingcap/tiflash/issues/9604) @[guo-shaoge](https://github.com/guo-shaoge)
     - テーブルに無効な文字を含むデフォルト値を持つビット型の列が含まれている場合、 TiFlash がテーブルスキーマを解析できない問題を修正しました。 [#9461](https://github.com/pingcap/tiflash/issues/9461) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
     - ストレージとコンピューティングの分離アーキテクチャで新しい列をクエリすると誤った結果が返される可能性がある問題を修正しました [#9665](https://github.com/pingcap/tiflash/issues/9665) @[zimulala](https://github.com/zimulala)
 

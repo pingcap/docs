@@ -23,7 +23,7 @@ TiDB バージョン: 7.1.1
 
 - TiDB
 
-    - プランキャッシュは200以上のパラメータを持つクエリをサポートします[#44823](https://github.com/pingcap/tidb/issues/44823) @[qw4990](https://github.com/qw4990)
+    - プランキャッシュは200以上のパラメーターを持つクエリをサポートします[#44823](https://github.com/pingcap/tidb/issues/44823) @[qw4990](https://github.com/qw4990)
     - ディスクからダンプされたチャンクを読み込む際のパフォーマンスを最適化します@[YangKeao](https://github.com/YangKeao) [#45125](https://github.com/pingcap/tidb/issues/45125)
     - インデックススキャン範囲を構築するロジックを最適化し、複雑な条件をインデックススキャン範囲 に変換できるようにしました。 [#44389](https://github.com/pingcap/tidb/issues/44389) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes) [#41572](https://github.com/pingcap/tidb/issues/41572)
     - ステイル読み取りの再試行リーダーがロックに遭遇すると、TiDBはロックを解決した後、リーダーで強制的に再試行し、不要なオーバーヘッドを回避します[#43659](https://github.com/pingcap/tidb/issues/43659) @[you06](https://github.com/you06)
@@ -46,7 +46,7 @@ TiDB バージョン: 7.1.1
 
     - Dumpling
 
-        - Dumplingは、 `--sql`パラメータが使用されているときにテーブルクエリの実行を回避し、エクスポートのオーバーヘッドを削減します[#45239](https://github.com/pingcap/tidb/issues/45239) @[lance6716](https://github.com/lance6716)
+        - Dumplingは、 `--sql`パラメーターが使用されているときにテーブルクエリの実行を回避し、エクスポートのオーバーヘッドを削減します[#45239](https://github.com/pingcap/tidb/issues/45239) @[lance6716](https://github.com/lance6716)
 
     - TiDB Binlog
 
@@ -59,13 +59,13 @@ TiDB バージョン: 7.1.1
     - GC ロック解決ステップで一部の悲観的ロックが見逃される可能性がある問題を修正しました [#45134](https://github.com/pingcap/tidb/issues/45134) @[MyonKeminta](https://github.com/MyonKeminta)
     - 新しいセッションが作成された場合に統計コレクターがデッドロックを引き起こす可能性がある問題を修正[#44502](https://github.com/pingcap/tidb/issues/44502) @[xuyifangreeneyes](https://github.com/xuyifangreeneyes)
     - メモリトラッカーの潜在的なメモリリーク問題を修正 [#44612](https://github.com/pingcap/tidb/issues/44612) @[wshwsh12](https://github.com/wshwsh12)
-    - バッチコプロセッサの再試行によって誤ったリージョン情報が生成される可能性があり、クエリが失敗する問題を修正しました[#44622](https://github.com/pingcap/tidb/issues/44622) @[windtalker](https://github.com/windtalker)
+    - バッチコプロセッサーの再試行によって誤ったリージョン情報が生成される可能性があり、クエリが失敗する問題を修正しました[#44622](https://github.com/pingcap/tidb/issues/44622) @[windtalker](https://github.com/windtalker)
     - インデックススキャンにおける潜在的なデータ競合問題を修正 [#45126](https://github.com/pingcap/tidb/issues/45126) @[wshwsh12](https://github.com/wshwsh12)
     - `tidb_enable_parallel_apply`が有効になっている場合、MPP モードでのクエリ結果が正しくない問題を修正[#45299](https://github.com/pingcap/tidb/issues/45299) @[windtalker](https://github.com/windtalker)
     - `indexMerge`のクエリが強制終了されたときに発生するハングアップの問題を修正しました [#45279](https://github.com/pingcap/tidb/issues/45279) @[xzhangxian1008](https://github.com/xzhangxian1008)
     - 統計情報におけるSQL実行詳細のメモリ消費量が多すぎると、極端なケースでTiDB OOMが発生する問題を修正[#44047](https://github.com/pingcap/tidb/issues/44047) @[wshwsh12](https://github.com/wshwsh12)
     - `FormatSQL()`メソッドが入力の非常に長い SQL 文を適切に切り捨てることができない問題を修正しました。 [#44542](https://github.com/pingcap/tidb/issues/44542) @[hawkingrei](https://github.com/hawkingrei)
-    - クラスタのアップグレード中に DDL 操作が停止し、アップグレードが失敗する問題を修正しました[#44158](https://github.com/pingcap/tidb/issues/44158) @[zimulala](https://github.com/zimulala)
+    - クラスターのアップグレード中に DDL 操作が停止し、アップグレードが失敗する問題を修正しました[#44158](https://github.com/pingcap/tidb/issues/44158) @[zimulala](https://github.com/zimulala)
     - 1つのTiDBノードで障害が発生した後、他のTiDBノードがTTLタスクを引き継がない問題を修正しました [#45022](https://github.com/pingcap/tidb/issues/45022) @[lcwangchao](https://github.com/lcwangchao)
     - MySQLカーソルフェッチプロトコル使用時に、結果セットのメモリ消費量が`tidb_mem_quota_query`上限を超え、TiDBのメモリオーバーフローが発生する問題を修正しました。修正後、TiDBは結果セットを自動的にディスクに書き込み、メモリを解放します[#43233](https://github.com/pingcap/tidb/issues/43233) @[YangKeao](https://github.com/YangKeao)
     - 権限がなくてもユーザーが`INFORMATION_SCHEMA.TIFLASH_REPLICA`テーブルの情報を表示できる問題を修正 [#45320](https://github.com/pingcap/tidb/issues/45320) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
@@ -115,7 +115,7 @@ TiDB バージョン: 7.1.1
     - Backup & Restore (BR)
 
         - `checksum mismatch`が場合によっては誤って報告される問題を修正[#44472](https://github.com/pingcap/tidb/issues/44472) @[Leavrth](https://github.com/Leavrth)
-        - TiDBクラスタにPITRバックアップタスクがない場合に`resolve lock`の頻度が高すぎる問題を修正 [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
+        - TiDBクラスターにPITRバックアップタスクがない場合に`resolve lock`の頻度が高すぎる問題を修正 [#40759](https://github.com/pingcap/tidb/issues/40759) @[joccau](https://github.com/joccau)
 
     - TiCDC
 

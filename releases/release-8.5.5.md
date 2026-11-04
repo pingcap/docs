@@ -23,7 +23,7 @@ TiDBバージョン：8.5.5
     - データ切り捨てのリスクが検出されない場合、TiDBはメタデータのみを更新し、可能な限りインデックスの再構築を回避します。
     - インデックスの再構築が必要な場合、TiDBはより効率的な取り込みプロセスを使用することで、インデックス再構築のパフォーマンスを大幅に向上させます。
 
-    以下の表は、114 GiB のデータと 6 億行のデータを含むテーブルに対するベンチマークテストに基づいたパフォーマンス改善の例を示しています。テストクラスタは、3つの TiDB ノード、6つの TiKV ノード、および 1つの PD ノードで構成されています。すべてのノードは、16 個の CPU コアと 32 GiB のメモリで構成されています。
+    以下の表は、114 GiB のデータと 6 億行のデータを含むテーブルに対するベンチマークテストに基づいたパフォーマンス改善の例を示しています。テストクラスターは、3つの TiDB ノード、6つの TiKV ノード、および 1つの PD ノードで構成されています。すべてのノードは、16 個の CPU コアと 32 GiB のメモリで構成されています。
 
     | シナリオ      | 操作タイプ                     | 最適化前   | 最適化後   | パフォーマンスの向上 |
     | --------- | ------------------------- | ------ | ------ | ---------- |
@@ -37,15 +37,15 @@ TiDBバージョン：8.5.5
 
 - 外部キーが多数存在するシナリオにおける DDL パフォーマンスを改善し、論理 DDL パフォーマンスを最大 25 倍向上させます [#61126](https://github.com/pingcap/tidb/issues/61126) @[GMHDBJD](https://github.com/GMHDBJD)
 
-    バージョン8.5.5より前のバージョンでは、超大規模テーブル（例えば、外部キーを持つ数十万のテーブルを含む、合計1,000万のテーブルを持つクラスタなど）を扱うシナリオにおいて、論理DDL操作（テーブルの作成や列の追加など）のパフォーマンスが約4QPSまで低下することがありました。これは、マルチテナントSaaS環境における運用効率の低下につながっていました。
+    バージョン8.5.5より前のバージョンでは、超大規模テーブル（例えば、外部キーを持つ数十万のテーブルを含む、合計1,000万のテーブルを持つクラスターなど）を扱うシナリオにおいて、論理DDL操作（テーブルの作成や列の追加など）のパフォーマンスが約4QPSまで低下することがありました。これは、マルチテナントSaaS環境における運用効率の低下につながっていました。
 
-    TiDB v8.5.5 はこれらのシナリオを最適化します。テスト結果によると、1,000 万テーブル（外部キーを持つテーブル 20 万テーブルを含む）という極限環境においても、論理 DDL 処理性能は一貫して 100 QPS を維持します。これは以前のバージョンと比較して 25 倍向上しており、超大規模クラスタの運用応答性を大幅に向上させます。
+    TiDB v8.5.5 はこれらのシナリオを最適化します。テスト結果によると、1,000 万テーブル（外部キーを持つテーブル 20 万テーブルを含む）という極限環境においても、論理 DDL 処理性能は一貫して 100 QPS を維持します。これは以前のバージョンと比較して 25 倍向上しており、超大規模クラスターの運用応答性を大幅に向上させます。
 
 - クエリパフォーマンスを向上させるため、インデックス検索のTiKVへのプッシュダウンをサポート [#62575](https://github.com/pingcap/tidb/issues/62575) @[lcwangchao](https://github.com/lcwangchao)
 
-    TiDBはv8.5.5以降、 `IndexLookUp`オペレーターをTiKVノードにプッシュダウンするために、[オプティマイザのヒント](/optimizer-hints.md)の使用をサポートしています。これにより、リモートプロシージャコール（RPC）の数が減り、クエリのパフォーマンスが向上する可能性があります。実際のパフォーマンス向上はワークロードによって異なるため、検証にはテストが必要です。
+    TiDBはv8.5.5以降、 `IndexLookUp`オペレーターをTiKVノードにプッシュダウンするために、[オプティマイザーのヒント](/optimizer-hints.md)の使用をサポートしています。これにより、リモートプロシージャコール（RPC）の数が減り、クエリのパフォーマンスが向上する可能性があります。実際のパフォーマンス向上はワークロードによって異なるため、検証にはテストが必要です。
 
-    特定のテーブルに対してインデックス検索を TiKV にプッシュダウンするようにオプティマイザに明示的に指示するには、 [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用できます。このヒントは、テーブルの AFFINITY 属性と組み合わせて使用することをお勧めします。たとえば、通常のテーブルには`AFFINITY="table"`を、パーティション化されたテーブルには`AFFINITY="partition"`を設定します。
+    特定のテーブルに対してインデックス検索を TiKV にプッシュダウンするようにオプティマイザーに明示的に指示するには、 [`INDEX_LOOKUP_PUSHDOWN(t1_name, idx1_name [, idx2_name ...])`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用できます。このヒントは、テーブルの AFFINITY 属性と組み合わせて使用することをお勧めします。たとえば、通常のテーブルには`AFFINITY="table"`を、パーティション化されたテーブルには`AFFINITY="partition"`を設定します。
 
     特定のテーブルに対して TiKV へのインデックス検索プッシュダウンを無効にするには、 [`NO_INDEX_LOOKUP_PUSHDOWN(t1_name)`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#no_index_lookup_pushdownt1_name-new-in-v855)ヒントを使用します。
 
@@ -53,7 +53,7 @@ TiDBバージョン：8.5.5
 
 - テーブルレベルのデータアフィニティをサポートしてクエリのパフォーマンスを向上させる（実験的） [#9764](https://github.com/tikv/pd/issues/9764) @[lhy1024](https://github.com/lhy1024)
 
-    バージョン 8.5.5 以降では、テーブルの作成または変更時に`AFFINITY`テーブルオプションを`table`または`partition`として構成できます。このオプションを有効にすると、PD は同じテーブルまたは同じパーティションに属するリージョンを単一のアフィニティグループにグループ化します。スケジューリング中、PD はこれらのリージョンのリーダーレプリカと投票者レプリカを少数の TiKV ノードの同じサブセットに配置することを優先します。このシナリオでは、クエリで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用することで、オプティマイザにインデックスルックアップを TiKV にプッシュダウンするように明示的に指示でき、ノード間分散クエリによって発生するレイテンシーを削減し、クエリパフォーマンスを向上させることができます。
+    バージョン 8.5.5 以降では、テーブルの作成または変更時に`AFFINITY`テーブルオプションを`table`または`partition`として構成できます。このオプションを有効にすると、PD は同じテーブルまたは同じパーティションに属するリージョンを単一のアフィニティグループにグループ化します。スケジューリング中、PD はこれらのリージョンのリーダーレプリカと投票者レプリカを少数の TiKV ノードの同じサブセットに配置することを優先します。このシナリオでは、クエリで[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントを使用することで、オプティマイザーにインデックスルックアップを TiKV にプッシュダウンするように明示的に指示でき、ノード間分散クエリによって発生するレイテンシーを削減し、クエリパフォーマンスを向上させることができます。
 
     この機能は現在実験的であり、デフォルトでは無効になっています。有効にするには、PD 設定項目[`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855)を`0`より大きい値に設定してください。この設定項目は、PD が同時に実行できるアフィニティスケジューリングタスクの最大数を制御します。
 
@@ -71,7 +71,7 @@ TiDBバージョン：8.5.5
 
 - バックアップからのシステムテーブルのリカバリを高速化 [#58757](https://github.com/pingcap/tidb/issues/58757) @[Leavrth](https://github.com/Leavrth)
 
-    バージョン8.5.5以降、 BRはバックアップからシステムテーブルを復元する際に、論理復元ではなく物理復元を使用するための新しい`--fast-load-sys-tables`パラメータを導入しました。このパラメータを有効にすると、 BRは既存のシステムテーブルにデータを復元するのではなく、既存のテーブルを完全に置き換えるか上書きするため、大規模なデプロイにおける復元パフォーマンスが大幅に向上します。
+    バージョン8.5.5以降、 BRはバックアップからシステムテーブルを復元する際に、論理復元ではなく物理復元を使用するための新しい`--fast-load-sys-tables`パラメーターを導入しました。このパラメーターを有効にすると、 BRは既存のシステムテーブルにデータを復元するのではなく、既存のテーブルを完全に置き換えるか上書きするため、大規模なデプロイにおける復元パフォーマンスが大幅に向上します。
 
     詳細については、 [ドキュメント](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)を参照してください。
 
@@ -79,7 +79,7 @@ TiDBバージョン：8.5.5
 
 - ネットワークジッター時のTiKVにおけるスケジューリングの安定性を向上させる [#9359](https://github.com/tikv/pd/issues/9359) @[okJiang](https://github.com/okJiang)
 
-    バージョン8.5.5以降、TiKVはネットワークの遅延ノードを検出してフィードバックするメカニズムを導入しました。このメカニズムが有効になっている場合、TiKVはノード間のネットワークレイテンシーをプローブし、ネットワーク遅延スコアを計算して、そのスコアをPDに報告します。PDはこのスコアに基づいてTiKVノードのネットワーク状態を評価し、それに応じてスケジューリングを調整します。TiKVノードでネットワークジッターが発生していることが検出されると、PDはそのノードへの新しいリーダーのスケジューリングを制限します。ネットワークジッターが続く場合、PDは影響を受けているノードから既存のリーダーを他のTiKVノードに積極的に移動させ、ネットワークの問題がクラスタに与える影響を軽減します。
+    バージョン8.5.5以降、TiKVはネットワークの遅延ノードを検出してフィードバックするメカニズムを導入しました。このメカニズムが有効になっている場合、TiKVはノード間のネットワークレイテンシーをプローブし、ネットワーク遅延スコアを計算して、そのスコアをPDに報告します。PDはこのスコアに基づいてTiKVノードのネットワーク状態を評価し、それに応じてスケジューリングを調整します。TiKVノードでネットワークジッターが発生していることが検出されると、PDはそのノードへの新しいリーダーのスケジューリングを制限します。ネットワークジッターが続く場合、PDは影響を受けているノードから既存のリーダーを他のTiKVノードに積極的に移動させ、ネットワークの問題がクラスターに与える影響を軽減します。
 
     詳細については、 [ドキュメント](/pd-control.md#scheduler-config-evict-slow-store-scheduler)を参照してください。
 
@@ -95,9 +95,9 @@ TiDBバージョン：8.5.5
 
 - 分散`ADD INDEX`ジョブの同時実行性とスループットを動的に変更するサポート [#64947](https://github.com/pingcap/tidb/issues/64947) @[joechenrh](https://github.com/joechenrh)
 
-    TiDB バージョン v8.5.5 より前のバージョンでは、分散実行フレームワーク (DXF) [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、実行中の`ADD INDEX`ジョブの`THREAD` 、 `BATCH_SIZE` 、または`MAX_WRITE_SPEED`パラメータの変更はサポートされていません。これらのパラメータを変更するには、実行中の`ADD INDEX`ジョブをキャンセルし、パラメータを再構成してからジョブを再送信する必要がありますが、これは非効率的です。
+    TiDB バージョン v8.5.5 より前のバージョンでは、分散実行フレームワーク (DXF) [`tidb_enable_dist_task`](/system-variables.md#tidb_enable_dist_task-new-in-v710)が有効になっている場合、実行中の`ADD INDEX`ジョブの`THREAD` 、 `BATCH_SIZE` 、または`MAX_WRITE_SPEED`パラメーターの変更はサポートされていません。これらのパラメーターを変更するには、実行中の`ADD INDEX`ジョブをキャンセルし、パラメーターを再構成してからジョブを再送信する必要がありますが、これは非効率的です。
 
-    バージョン8.5.5以降では、 `ADMIN ALTER DDL JOBS`文を使用して、実行中の分散`ADD INDEX`ジョブのこれらのパラメータを、ジョブを中断することなく、現在のワークロードとパフォーマンス要件に基づいて動的に調整できます。
+    バージョン8.5.5以降では、 `ADMIN ALTER DDL JOBS`文を使用して、実行中の分散`ADD INDEX`ジョブのこれらのパラメーターを、ジョブを中断することなく、現在のワークロードとパフォーマンス要件に基づいて動的に調整できます。
 
     詳細については、 [ドキュメント](/sql-statements/sql-statement-admin-alter-ddl.md)を参照してください。
 
@@ -117,7 +117,7 @@ TiDBバージョン：8.5.5
 
 - ログバックアップからのテーブルレベルの復元をサポート [#57613](https://github.com/pingcap/tidb/issues/57613) @[Tristan1900](https://github.com/Tristan1900)
 
-    バージョン8.5.5以降では、フィルタを使用してログバックアップから個々のテーブルのポイントインタイムリカバリ（PITR）を実行できます。クラスタ全体ではなく特定のテーブルを特定の時点に復元することで、より柔軟で影響の少ないリカバリオプションが提供されます。
+    バージョン8.5.5以降では、フィルターを使用してログバックアップから個々のテーブルのポイントインタイムリカバリ（PITR）を実行できます。クラスター全体ではなく特定のテーブルを特定の時点に復元することで、より柔軟で影響の少ないリカバリオプションが提供されます。
 
     詳細については、 [ドキュメント](/br/br-pitr-manual.md#restore-data-using-filters)を参照してください。
 
@@ -125,7 +125,7 @@ TiDBバージョン：8.5.5
 
 - ステートメントサマリーテーブルとスロークエリログにストレージエンジン識別子を追加する [#61736](https://github.com/pingcap/tidb/issues/61736) @[henrybw](https://github.com/henrybw)
 
-    TiKVとTiFlashの両方がクラスタにデプロイされている場合、データベースの診断やパフォーマンス最適化の際に、ストレージエンジンごとにSQL文をフィルタリングする必要が生じることがよくあります。たとえば、 TiFlashに高負荷がかかっている場合、潜在的な原因を特定するために、 TiFlash上で実行されているSQL文を識別する必要があるかもしれません。このニーズに応えるため、TiDBはv8.5.5以降、ステートメントサマリーテーブルとスロークエリログにストレージエンジン識別子フィールドを追加しました。
+    TiKVとTiFlashの両方がクラスターにデプロイされている場合、データベースの診断やパフォーマンス最適化の際に、ストレージエンジンごとにSQL文をフィルタリングする必要が生じることがよくあります。たとえば、 TiFlashに高負荷がかかっている場合、潜在的な原因を特定するために、 TiFlash上で実行されているSQL文を識別する必要があるかもしれません。このニーズに応えるため、TiDBはv8.5.5以降、ステートメントサマリーテーブルとスロークエリログにストレージエンジン識別子フィールドを追加しました。
 
     [ステートメントサマリーテーブル](/statement-summary-tables.md)の新しいフィールド:
 
@@ -155,12 +155,12 @@ TiDBバージョン：8.5.5
 
 ## 互換性の変更 {#compatibility-changes}
 
-TiDBクラスタがv8.5.4で新規にデプロイされている場合（つまり、v8.5.3より前のバージョンからアップグレードされていない場合）、v8.5.5へスムーズにアップグレードできます。v8.5.5の変更点のほとんどは通常のアップグレードでは問題ありませんが、このリリースには動作の変更、MySQLとの互換性調整、システム変数の更新、設定パラメータの更新、システムテーブルの変更も含まれています。アップグレードする前に、このセクションをよくお読みください。
+TiDBクラスターがv8.5.4で新規にデプロイされている場合（つまり、v8.5.3より前のバージョンからアップグレードされていない場合）、v8.5.5へスムーズにアップグレードできます。v8.5.5の変更点のほとんどは通常のアップグレードでは問題ありませんが、このリリースには動作の変更、MySQLとの互換性調整、システム変数の更新、設定パラメーターの更新、システムテーブルの変更も含まれています。アップグレードする前に、このセクションをよくお読みください。
 
 ### 動作の変更 {#behavior-changes}
 
 - バージョン8.5.5以降、TiDBはデータ復元時に対象テーブルを自動的に`restore`モードに設定します。 `restore`モードのテーブルでは、ユーザーによる読み取りまたは書き込み操作が禁止されます。復元が完了すると、TiDBはこれらのテーブルのモードを自動的に`normal`に戻し、ユーザーが通常どおりテーブルを読み書きできるようにします。この動作により、復元プロセス中のタスクの安定性とデータの一貫性が確保されます。
-- バージョン8.5.5以降、 `--load-stats`パラメータが`false`に設定されている場合、 BRは復元されたテーブルの統計情報を`mysql.stats_meta`テーブルに書き込まなくなりました。関連する統計情報を更新するには、復元後に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を手動で実行してください。
+- バージョン8.5.5以降、 `--load-stats`パラメーターが`false`に設定されている場合、 BRは復元されたテーブルの統計情報を`mysql.stats_meta`テーブルに書き込まなくなりました。関連する統計情報を更新するには、復元後に[`ANALYZE TABLE`](/sql-statements/sql-statement-analyze-table.md)を手動で実行してください。
 - バージョン8.5.5以降、[TiCDCの新アーキテクチャ](/ticdc/ticdc-architecture.md)でテーブルレベルのタスク分割（`scheduler.enable-table-across-nodes = true`）が有効になっている場合、ストレージシンクのデータファイル名は`CDC{num}.{extension}`から`CDC_{uuid}_{num}.{extension}`に変更され、インデックスファイル名は`CDC.index`から`CDC_{uuid}.index`に変更されます。詳細については、[ストレージシンクのファイル名の変更と消費時の注意事項](/ticdc/ticdc-architecture.md#storage-sink-file-name-changes-and-consumption-instructions)を参照してください。
 
 ### MySQLとの互換性 {#mysql-compatibility}
@@ -177,9 +177,9 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 | [`tidb_cb_pd_metadata_error_rate_threshold_ratio`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_cb_pd_metadata_error_rate_threshold_ratio-new-in-v855) | 新しく追加された | TiDB がサーキットブレーカーをトリガーするタイミングを制御します。デフォルト値は`0`で、これはサーキットブレーカーが無効になっていることを意味します。 `0.01`から`1`の間の値を設定すると、サーキットブレーカーが有効になり、PD に送信される特定のリクエストのエラー率がしきい値に達するか超えたときにサーキットブレーカーがトリガーされます。                                                                                                                                 |
 | [`tidb_index_lookup_pushdown_policy`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_index_lookup_pushdown_policy-new-in-v855)                           | 新しく追加された | TiDB が`IndexLookUp`オペレーターを TiKV にプッシュするかどうか、またプッシュするタイミングを制御します。デフォルト値は`hint-only`です。これは、SQL 文で[`INDEX_LOOKUP_PUSHDOWN`](https://docs.pingcap.com/tidb/v8.5/optimizer-hints#index_lookup_pushdownt1_name-idx1_name--idx2_name--new-in-v855)ヒントが明示的に指定されている場合にのみ、TiDB が`IndexLookUp`オペレーターを TiKV にプッシュすることを意味します。 |
 
-### 設定パラメータ {#configuration-parameters}
+### 設定パラメーター {#configuration-parameters}
 
-| 設定ファイルまたはコンポーネント | 設定パラメータ                                                                                                                                      | 変更の種類  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 設定ファイルまたはコンポーネント | 設定パラメーター                                                                                                                                      | 変更の種類  | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB                     | [`performance.enable-async-batch-get`](https://docs.pingcap.com/tidb/v8.5/tidb-configuration-file#enable-async-batch-get-new-in-v855)                | 新しく追加された | TiDB がバッチ Get オペレーターを実行する際に非同期モードを使用するかどうかを制御します。デフォルト値は`false`です。                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | TiKV                     | [<code>rocksdb.\(defaultcf\|writecf\|lockcf\|raftcf\).level0-slowdown-writes-trigger</code>](/tikv-configuration-file.md#level0-slowdown-writes-trigger)             | 変更     | v8.5.5 以降では、フロー制御メカニズムが有効になっている場合 ( [`storage.flow-control.enable`](/tikv-configuration-file.md#enable)が`true`に設定されている場合)、この設定項目は、その値が`storage.flow-control.l0-files-threshold`より大きい場合にのみ[`storage.flow-control.l0-files-threshold`](/tikv-configuration-file.md#l0-files-threshold)によって上書きされます。この動作により、フロー制御しきい値を上げた際に RocksDB のコンパクション高速化メカニズムが弱まるのを防ぎます。v8.5.4 以前のバージョンでは、フロー制御メカニズムが有効になっている場合、この設定項目は`storage.flow-control.l0-files-threshold`によって直接上書きされます。                                                                     |
@@ -190,7 +190,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 | PD                       | [`schedule.max-affinity-merge-region-size`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#max-affinity-merge-region-size-new-in-v855)     | 新しく追加された | 同じ[親和性グループ](https://docs.pingcap.com/tidb/v8.5/table-affinity)内の隣接する小さなリージョンを自動的にマージするためのしきい値を制御します。デフォルト値は`256` （MiB単位）です。                                                                                                                                                                                                                                                                                                                                                                                                         |
 | PD                       | [`schedule.affinity-schedule-limit`](https://docs.pingcap.com/tidb/v8.5/pd-configuration-file#affinity-schedule-limit-new-in-v855)                   | 新しく追加された | 同時に実行できる[親和性](https://docs.pingcap.com/tidb/v8.5/table-affinity)スケジューリングタスクの数を制御します。デフォルト値は`0`で、これはデフォルトで親和性スケジューリングが無効になっていることを意味します。                                                                                                                                                                                                                                                                                                                                                                                          |
 | BR                       | [`--checkpoint-storage`](/br/br-checkpoint-restore.md#implementation-details-store-checkpoint-data-in-the-downstream-cluster)                        | 新しく追加された | チェックポイントデータの外部ストレージを指定します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| BR                       | [`--fast-load-sys-tables`](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)                                                              | 新しく追加された | 新しいクラスタ上でのシステムテーブルの物理的な復元をサポートします。このパラメータはデフォルトで有効になっています。                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| BR                       | [`--fast-load-sys-tables`](/br/br-snapshot-guide.md#restore-tables-in-the-mysql-schema)                                                              | 新しく追加された | 新しいクラスター上でのシステムテーブルの物理的な復元をサポートします。このパラメーターはデフォルトで有効になっています。                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | BR                       | [`--filter`](/br/br-pitr-manual.md#restore-data-using-filters)                                                                                       | 新しく追加された | 復元対象に含める、または除外する特定のデータベースまたはテーブルを指定するパターンを指定します。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ### システムテーブル {#system-tables}
@@ -199,13 +199,13 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 
 ### その他の変更点 {#other-changes}
 
-- TiDBのパフォーマンスを向上させるため、TiDBのGoコンパイラバージョンをgo1.23.6からgo1.25.5にアップグレードしました。TiDB開発者の方は、スムーズなコンパイルを保証するために、Goコンパイラバージョンをアップグレードすることをお勧めします。
+- TiDBのパフォーマンスを向上させるため、TiDBのGoコンパイラーバージョンをgo1.23.6からgo1.25.5にアップグレードしました。TiDB開発者の方は、スムーズなコンパイルを保証するために、Goコンパイラーバージョンをアップグレードすることをお勧めします。
 
 - BR v8.5.5を使用して以前のTiDBバージョン（v8.5.4やv8.1.2など）でPITRリカバリを実行すると、ログリカバリ段階で失敗し、エラーが返される場合があります。
 
     この問題により、データの完全バックアップと復元は影響を受けません。
 
-    ターゲットとなるTiDBクラスタのバージョンと一致するBRバージョンを使用することをお勧めします。たとえば、TiDB v8.5.4クラスタでPITRを実行する場合は、 BR v8.5.4を使用してください。
+    ターゲットとなるTiDBクラスターのバージョンと一致するBRバージョンを使用することをお勧めします。たとえば、TiDB v8.5.4クラスターでPITRを実行する場合は、 BR v8.5.4を使用してください。
 
 ## 改善点 {#improvements}
 
@@ -236,7 +236,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
 
     - TiCDC
 
-        - 変更フィードの構成検証ロジックを強化します。変更フィードを作成または更新する際に、ディスパッチャ構成で参照されている列が存在しない場合、TiCDC はエラーを返して操作を拒否し、実行失敗を防ぎます。 [#12253](https://github.com/pingcap/tiflow/issues/12253) @[wk989898](https://github.com/wk989898)
+        - 変更フィードの構成検証ロジックを強化します。変更フィードを作成または更新する際に、ディスパッチャー構成で参照されている列が存在しない場合、TiCDC はエラーを返して操作を拒否し、実行失敗を防ぎます。 [#12253](https://github.com/pingcap/tiflow/issues/12253) @[wk989898](https://github.com/wk989898)
 
 ## バグ修正 {#bug-fixes}
 
@@ -308,7 +308,7 @@ TiDBクラスタがv8.5.4で新規にデプロイされている場合（つま�
         - クラスターに多数のリージョンが含まれている場合にログバックアップを有効にするとメモリ使用量が過剰になる問題を修正 [#18719](https://github.com/tikv/tikv/issues/18719) @[YuJuncen](https://github.com/YuJuncen)
         - Azure SDK が環境から適切なキーを見つけられない問題を修正 [#18206](https://github.com/tikv/tikv/issues/18206) @[YuJuncen](https://github.com/YuJuncen)
         - `restore point` の期間中に外部キーが正しく復元されない問題を修正します。 [#61642](https://github.com/pingcap/tidb/issues/61642) @[Leavrth](https://github.com/Leavrth)
-        - バックアップとターゲットクラスタ間でシステムテーブルの照合順序に互換性がない場合にリストアが失敗する問題を修正するため、v6.5 から v7.5 への特権テーブルのリストアをサポートする`--sys-check-collation`パラメータを追加しました。 [#64667](https://github.com/pingcap/tidb/issues/64667) @[Leavrth](https://github.com/Leavrth)
+        - バックアップとターゲットクラスター間でシステムテーブルの照合順序に互換性がない場合にリストアが失敗する問題を修正するため、v6.5 から v7.5 への特権テーブルのリストアをサポートする`--sys-check-collation`パラメーターを追加しました。 [#64667](https://github.com/pingcap/tidb/issues/64667) @[Leavrth](https://github.com/Leavrth)
         - `restore point`が失敗した後に`restore log`を実行できない問題を修正します（操作が安全な場合でも）。 [#64908](https://github.com/pingcap/tidb/issues/64908) @[RidRisR](https://github.com/RidRisR)
         - チェックポイントの`restore point`が、ログバックアップデータがフルバックアップと混在している場合にpanicする可能性がある問題を修正 [#58685](https://github.com/pingcap/tidb/issues/58685) @[YuJuncen](https://github.com/YuJuncen)
 

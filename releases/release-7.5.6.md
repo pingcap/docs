@@ -38,7 +38,7 @@ TiDB バージョン: 7.5.6
     - Backup & Restore (BR)
 
         - バックアップパフォーマンスを向上させるために、フルバックアップ中のテーブルレベルのチェックサム計算をデフォルトで無効にする（ `--checksum=false` ） [#56373](https://github.com/pingcap/tidb/issues/56373) @[Tristan1900](https://github.com/Tristan1900)
-        - 非完全リストアの場合、ターゲットクラスタに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。 [#55087](https://github.com/pingcap/tidb/issues/55087) @[RidRisR](https://github.com/RidRisR)
+        - 非完全リストアの場合、ターゲットクラスターに同じ名前のテーブルが含まれているかどうかを確認するチェックを追加します。 [#55087](https://github.com/pingcap/tidb/issues/55087) @[RidRisR](https://github.com/RidRisR)
 
     - TiDB Lightning
 
@@ -56,7 +56,7 @@ TiDB バージョン: 7.5.6
     - 不一致な値タイプとタイプ変換エラーを含む`IN`条件を使用してパーティションテーブルをクエリすると、誤ったクエリ結果が発生する問題を修正しました。 [#54746](https://github.com/pingcap/tidb/issues/54746) @[mjonss](https://github.com/mjonss)
     - `BIT`列のデフォルト値が正しくない問題を修正[#57301](https://github.com/pingcap/tidb/issues/57301) @[YangKeao](https://github.com/YangKeao)
     - Prepareプロトコルで、クライアントがUTF8以外の文字セットを使用するとエラーが発生する問題を修正しました。 [#58870](https://github.com/pingcap/tidb/issues/58870) @[xhebox](https://github.com/xhebox)
-    - `CREATE VIEW`文で変数またはパラメータを使用してもエラーが報告されない問題を修正[#53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
+    - `CREATE VIEW`文で変数またはパラメーターを使用してもエラーが報告されない問題を修正[#53176](https://github.com/pingcap/tidb/issues/53176) @[mjonss](https://github.com/mjonss)
     - 統計ファイルに NULL 値が含まれている場合、統計を手動でロードすると失敗する可能性がある問題を修正しました。 [#53966](https://github.com/pingcap/tidb/issues/53966) @[King-Dylan](https://github.com/King-Dylan)
     - `information_schema.cluster_slow_query`テーブルをクエリするときに、時間フィルターが追加されていない場合、最新のスローログファイルのみがクエリされる問題を修正しました[#56100](https://github.com/pingcap/tidb/issues/56100) @[crazycs520](https://github.com/crazycs520)
     - 一時テーブルをクエリすると、場合によっては予期しない TiKV リクエストがトリガーされる可能性がある問題を修正しました[#58875](https://github.com/pingcap/tidb/issues/58875) @[tiancaiamao](https://github.com/tiancaiamao)
@@ -66,7 +66,7 @@ TiDB バージョン: 7.5.6
     - `cluster_slow_query table`をクエリするときに`ORDER BY`を使用すると、順序付けられていない結果が生成される可能性がある問題を修正しました。 [#51723](https://github.com/pingcap/tidb/issues/51723) @[Defined2014](https://github.com/Defined2014)
     - 仮想生成列の依存関係に属性`ON UPDATE`を持つ列が含まれている場合、更新された行のデータとそのインデックスデータが不整合になる可能性がある問題を修正しました[#56829](https://github.com/pingcap/tidb/issues/56829) @[joechenrh](https://github.com/joechenrh)
     - TiDBハートビートが失われた場合に TTL ジョブをキャンセルできない問題を修正[#57784](https://github.com/pingcap/tidb/issues/57784) @[YangKeao](https://github.com/YangKeao)
-    - パラメータが`Enum` 、 `Bit` 、または`Set`型の場合、 `Conv()`関数はTiKV にプッシュダウンされなくなりました [#51877](https://github.com/pingcap/tidb/issues/51877) @[yibin87](https://github.com/yibin87)
+    - パラメーターが`Enum` 、 `Bit` 、または`Set`型の場合、 `Conv()`関数はTiKV にプッシュダウンされなくなりました [#51877](https://github.com/pingcap/tidb/issues/51877) @[yibin87](https://github.com/yibin87)
     - ストレージとコンピューティングの分離アーキテクチャのTiFlashノードを含むクラスターで`ALTER TABLE ... PLACEMENT POLICY ...`を実行した後、リージョンピアが誤ってTiFlashコンピューティングノードに追加される可能性がある問題を修正しました。 [#58633](https://github.com/pingcap/tidb/issues/58633) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - DDL所有者が変更されるとジョブステータスが上書きされる問題を修正 [#52747](https://github.com/pingcap/tidb/issues/52747) @[D3Hunter](https://github.com/D3Hunter)
     - ハッシュパーティションテーブルで条件`is null`クエリを実行するとpanicが発生する問題を修正 [#58374](https://github.com/pingcap/tidb/issues/58374) @[Defined2014](https://github.com/Defined2014)
@@ -128,7 +128,7 @@ TiDB バージョン: 7.5.6
         - Sarama クライアントによって再送信された順序が乱れたメッセージによって Kafka メッセージの順序が正しくなくなる問題を修正[#11935](https://github.com/pingcap/tiflow/issues/11935) @[3AceShowHand](https://github.com/3AceShowHand)
         - TiCDC が`RENAME TABLE`操作中にフィルタリングに誤ったテーブル名を使用する問題を修正しました [#11946](https://github.com/pingcap/tiflow/issues/11946) @[wk989898](https://github.com/wk989898)
         - チェンジフィードが削除された後に goroutines リークが発生する問題を修正[#11954](https://github.com/pingcap/tiflow/issues/11954) @[hicqu](https://github.com/hicqu)
-        - `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが停止する可能性がある問題を修正しました。 [#12055](https://github.com/pingcap/tiflow/issues/12055) @[hongyunyan](https://github.com/hongyunyan)
+        - `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメーターを使用すると、変更フィードが停止する可能性がある問題を修正しました。 [#12055](https://github.com/pingcap/tiflow/issues/12055) @[hongyunyan](https://github.com/hongyunyan)
         - Avroプロトコル経由で`default NULL`文を複製するときにTiCDCがエラーを報告する問題を修正 [#11994](https://github.com/pingcap/tiflow/issues/11994) @[wk989898](https://github.com/wk989898)
         - PDスケールイン後にTiCDCがPDに正しく接続できない問題を修正 [#12004](https://github.com/pingcap/tiflow/issues/12004) @[lidezhu](https://github.com/lidezhu)
 

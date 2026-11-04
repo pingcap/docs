@@ -28,9 +28,9 @@ TiDB バージョン: 7.5.7
     - インデックス追加中の TiKV への書き込み速度を観察するための監視メトリックを追加します。 [#60925](https://github.com/pingcap/tidb/issues/60925) @[CbcWestwolf](https://github.com/CbcWestwolf)
     - DDL実行中のDMLのロックロジックを最適化し、DMLとDDL間のロック競合を軽減することで、一部のシナリオでDDLのパフォーマンスが向上します。ただし、セカンダリインデックスのロック操作が追加されるため、DMLのパフォーマンスがわずかに低下する可能性があります[#62337](https://github.com/pingcap/tidb/issues/62337) @[lcwangchao](https://github.com/lcwangchao)
     - システム変数[`tidb_opt_ordering_index_selectivity_threshold`](/system-variables.md#tidb_opt_ordering_index_selectivity_threshold-new-in-v700)が`1`に設定されている場合の動作を改善し、この変数の制御機能を強化します。 [#60242](https://github.com/pingcap/tidb/issues/60242) @[time-and-fate](https://github.com/time-and-fate)
-    - `ANALYZE`文実行後にクラスタ全体の統計を更新することを回避し、`ANALYZE`の実行時間を短縮します。 [#57631](https://github.com/pingcap/tidb/issues/57631) @[0xPoe](https://github.com/0xPoe)
+    - `ANALYZE`文実行後にクラスター全体の統計を更新することを回避し、`ANALYZE`の実行時間を短縮します。 [#57631](https://github.com/pingcap/tidb/issues/57631) @[0xPoe](https://github.com/0xPoe)
     - `NOT NULL`制約を持つ列の定数畳み込みをサポートし、 `IS NULL`評価を`FALSE` に畳み込みます。 [#62050](https://github.com/pingcap/tidb/issues/62050) @[hawkingrei](https://github.com/hawkingrei)
-    - オプティマイザは、より多くの種類の`JOIN`操作で定数伝播をサポートします。 [#51700](https://github.com/pingcap/tidb/issues/51700) @[hawkingrei](https://github.com/hawkingrei)
+    - オプティマイザーは、より多くの種類の`JOIN`操作で定数伝播をサポートします。 [#51700](https://github.com/pingcap/tidb/issues/51700) @[hawkingrei](https://github.com/hawkingrei)
     - DML 操作と DDL 操作の間に大規模なロック競合が存在する場合の一時インデックスのマージのパフォーマンスを向上[#61433](https://github.com/pingcap/tidb/issues/61433) @[tangenta](https://github.com/tangenta)
 
 - TiKV
@@ -152,9 +152,9 @@ TiDB バージョン: 7.5.7
 
         - 外部ストレージをダウンストリームとして使用すると、チェンジフィードが停止する可能性がある問題を修正しました。 [#9162](https://github.com/pingcap/tiflow/issues/9162) @[asddongmen](https://github.com/asddongmen)
         - レプリケーショントラフィックが下流の Kafka のトラフィックしきい値を超えた後に、変更フィードがスタックする可能性がある問題を修正しました。 [#12110](https://github.com/pingcap/tiflow/issues/12110) @[3AceShowHand](https://github.com/3AceShowHand)
-        - `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメータを使用すると、変更フィードが停止する可能性がある問題を修正しました。 [#12055](https://github.com/pingcap/tiflow/issues/12055) @[hongyunyan](https://github.com/hongyunyan)
-        - 仮想列を含むテーブルでイベントフィルタ式を評価するとpanicが発生する可能性がある問題を修正[#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
-        - ディスパッチャ構成における列名とインデックス名の大文字と小文字を区別するマッチングの問題を修正しました [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
+        - `changefeed pause`コマンドで`--overwrite-checkpoint-ts`パラメーターを使用すると、変更フィードが停止する可能性がある問題を修正しました。 [#12055](https://github.com/pingcap/tiflow/issues/12055) @[hongyunyan](https://github.com/hongyunyan)
+        - 仮想列を含むテーブルでイベントフィルター式を評価するとpanicが発生する可能性がある問題を修正[#12206](https://github.com/pingcap/tiflow/issues/12206) @[lidezhu](https://github.com/lidezhu)
+        - ディスパッチャー構成における列名とインデックス名の大文字と小文字を区別するマッチングの問題を修正しました [#12103](https://github.com/pingcap/tiflow/issues/12103) @[wk989898](https://github.com/wk989898)
         - 古いストア ID が原因で、同じ IP アドレス上の TiKV ノードをスケールインまたはスケールアウトした後に、Resolved TS のラグが増加し続ける問題を修正しました。 [#12162](https://github.com/pingcap/tiflow/issues/12162) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Lightning

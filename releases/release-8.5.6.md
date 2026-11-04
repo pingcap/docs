@@ -27,7 +27,7 @@ TiDBバージョン：8.5.6
 
 - リソース制御のバックグラウンドタスクにおけるリソース使用量の上限を設定する機能が一般提供開始（GA）になりました [#56019](https://github.com/pingcap/tidb/issues/56019) @[glorv](https://github.com/glorv)
 
-    TiDBのリソース制御機能を使用すると、バックグラウンドタスクを識別して優先度を下げることができます。特定のシナリオでは、リソースが利用可能な場合でも、バックグラウンドタスクのリソース消費を制限したい場合があります。v8.4.0以降では、 `UTILIZATION_LIMIT`パラメータを使用して、バックグラウンドタスクが消費できるリソースの最大割合を設定できます。各ノードは、すべてのバックグラウンドタスクのリソース使用量をこの割合以下に抑えます。この機能により、バックグラウンドタスクのリソース消費を正確に制御できるため、クラスタの安定性がさらに向上します。
+    TiDBのリソース制御機能を使用すると、バックグラウンドタスクを識別して優先度を下げることができます。特定のシナリオでは、リソースが利用可能な場合でも、バックグラウンドタスクのリソース消費を制限したい場合があります。v8.4.0以降では、 `UTILIZATION_LIMIT`パラメーターを使用して、バックグラウンドタスクが消費できるリソースの最大割合を設定できます。各ノードは、すべてのバックグラウンドタスクのリソース使用量をこの割合以下に抑えます。この機能により、バックグラウンドタスクのリソース消費を正確に制御できるため、クラスターの安定性がさらに向上します。
 
     バージョン8.5.6では、この機能は一般提供（GA）されています。
 
@@ -77,7 +77,7 @@ TiDBバージョン：8.5.6
 
 ## 互換性の変更 {#compatibility-changes}
 
-TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5.4より前のバージョンからアップグレードしていない場合）、v8.5.6へスムーズにアップグレードできます。v8.5.6の変更点のほとんどは通常のアップグレードでは問題ありませんが、このリリースにはMySQLとの互換性に関する変更、システム変数の更新、設定パラメータの更新、および非推奨機能も含まれています。アップグレードする前に、このセクションをよくお読みください。
+TiDBクラスターをv8.5.5で新規にデプロイした場合（つまり、v8.5.4より前のバージョンからアップグレードしていない場合）、v8.5.6へスムーズにアップグレードできます。v8.5.6の変更点のほとんどは通常のアップグレードでは問題ありませんが、このリリースにはMySQLとの互換性に関する変更、システム変数の更新、設定パラメーターの更新、および非推奨機能も含まれています。アップグレードする前に、このセクションをよくお読みください。
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
@@ -96,25 +96,25 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 | [`InPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#inpacketbytes-new-in-v856)                                                     | 新しく追加された | この変数は内部統計のみに使用され、ユーザーには表示されません。                                                                                                                                                                                                   |
 | [`OutPacketBytes`](https://docs.pingcap.com/tidb/v8.5/system-variables#outpacketbytes-new-in-v856)                                                   | 新しく追加された | この変数は内部統計のみに使用され、ユーザーには表示されません。                                                                                                                                                                                                   |
 | [`tidb_foreign_key_check_in_shared_lock`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_foreign_key_check_in_shared_lock-new-in-v856)     | 新しく追加された | 悲観的トランザクションにおける外部キーチェックで、親テーブルの行に対して排他ロックではなく共有ロックを使用するかどうかを制御します。デフォルト値は`OFF`で、これは TiDB がデフォルトで排他ロックを使用することを意味します。                                                                                                               |
-| [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856)                               | 新しく追加された | 分散実行フレームワーク (DXF) タスクが使用できる TiDB ノードの最大数を定義します。デフォルト値は`-1`で、これは自動モードが有効になっていることを示します。自動モードでは、TiDB は`min(3, tikv_nodes / 3)`という値を動的に計算します。ここで、 `tikv_nodes`はクラスタ内の TiKV ノードの数を表します。                                                 |
-| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856)             | 新しく追加された | 特定の複数テーブル結合クエリの結合順序最適化を改善します。これを`ON`に設定し、安全条件が満たされている場合、オプティマイザは、連続する結合オペレーター間の`Selection`条件と結合順序候補を評価します。結合ツリーの再構築中、オプティマイザは可能な限りこれらの条件をより適切な位置にプッシュダウンし、より多くのテーブルが結合順序最適化に参加できるようにします。                                                 |
+| [`tidb_max_dist_task_nodes`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_max_dist_task_nodes-new-in-v856)                               | 新しく追加された | 分散実行フレームワーク (DXF) タスクが使用できる TiDB ノードの最大数を定義します。デフォルト値は`-1`で、これは自動モードが有効になっていることを示します。自動モードでは、TiDB は`min(3, tikv_nodes / 3)`という値を動的に計算します。ここで、 `tikv_nodes`はクラスター内の TiKV ノードの数を表します。                                                 |
+| [`tidb_opt_join_reorder_through_sel`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_opt_join_reorder_through_sel-new-in-v856)             | 新しく追加された | 特定の複数テーブル結合クエリの結合順序最適化を改善します。これを`ON`に設定し、安全条件が満たされている場合、オプティマイザーは、連続する結合オペレーター間の`Selection`条件と結合順序候補を評価します。結合ツリーの再構築中、オプティマイザーは可能な限りこれらの条件をより適切な位置にプッシュダウンし、より多くのテーブルが結合順序最適化に参加できるようにします。                                                 |
 | [`tidb_slow_log_max_per_sec`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_max_per_sec)                             | 新しく追加された | TiDBノードごとに1秒あたりに書き込める、スロークエリログエントリの最大数を制御します。<ul><li> `0` （デフォルト値）という値は、1秒あたりに書き込まれるスロークエリログエントリの数に制限がないことを意味します。</li><li> `0`より大きい値を指定すると、TiDBは1秒あたり最大で指定された数のスロークエリログエントリを書き込みます。超過分のログエントリは破棄され、スロークエリログファイルには書き込まれません。</li></ul> |
 | [`tidb_slow_log_rules`](https://docs.pingcap.com/tidb/v8.5/system-variables#tidb_slow_log_rules)                                         | 新しく追加された | スロークエリログのトリガールールを定義します。多次元メトリクスを組み合わせることで、より柔軟で詳細なログ記録を実現します。                                                                                                                                                                     |
 
-### 設定パラメータ {#configuration-parameters}
+### 設定パラメーター {#configuration-parameters}
 
-| 設定ファイルまたはコンポーネント | 設定パラメータ                                                                                                                                | 変更の種類  | 説明                                                                               |
+| 設定ファイルまたはコンポーネント | 設定パラメーター                                                                                                                                | 変更の種類  | 説明                                                                               |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
 | TiKV                     | [`gc.auto-compaction.mvcc-read-aware-enabled`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-aware-enabled-new-in-v856) | 新しく追加された | MVCC読み取り対応のコンパクションを有効にするかどうかを制御します。デフォルト値は`false`です。                                  |
 | TiKV                     | [`gc.auto-compaction.mvcc-read-weight`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-read-weight-new-in-v856)               | 新しく追加された | リージョンのコンパクション優先度スコアを計算する際に、MVCC 読み取りアクティビティに適用される重み乗数。デフォルト値は`3.0`です。                 |
 | TiKV                     | [`gc.auto-compaction.mvcc-scan-threshold`](https://docs.pingcap.com/tidb/v8.5/tikv-configuration-file#mvcc-scan-threshold-new-in-v856)         | 新しく追加された | リージョンをコンパクション候補としてマークするために、読み取りリクエストごとにスキャンされる MVCC バージョンの最小数。デフォルト値は`1000`です。           |
-| TiCDC                    | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv)                                                         | 新しく追加された | CSVファイルにヘッダー行を出力するかどうかを制御します。デフォルト値は`false`です。このパラメータはTiCDCの新しいアーキテクチャにのみ適用されます。 |
+| TiCDC                    | [`sink.csv.output-field-header`](https://docs.pingcap.com/tidb/v8.5/ticdc-csv#use-csv)                                                         | 新しく追加された | CSVファイルにヘッダー行を出力するかどうかを制御します。デフォルト値は`false`です。このパラメーターはTiCDCの新しいアーキテクチャにのみ適用されます。 |
 
 ### システムテーブルの変更 {#system-table-changes}
 
 | システムテーブル                                                                                     | 変更の種類 | 説明                                                                                  |
 | -------------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------- |
-| [`mysql.tidb`](https://docs.pingcap.com/tidb/v8.5/mysql-schema#cluster-status-system-tables) | 変更    | TiDBクラスタの一意の識別子を表す`cluster_id`フィールドを追加します。 `cluster_id`は読み取り専用であり、変更できませんのでご注意ください。 |
+| [`mysql.tidb`](https://docs.pingcap.com/tidb/v8.5/mysql-schema#cluster-status-system-tables) | 変更    | TiDBクラスターの一意の識別子を表す`cluster_id`フィールドを追加します。 `cluster_id`は読み取り専用であり、変更できませんのでご注意ください。 |
 
 ## 非推奨機能 {#deprecated-features}
 
@@ -132,7 +132,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 - TiKV
 
     - MVCCの読み取りオーバーヘッドを検出し、読み取りコストの高いリージョンのコンパクションを優先することでクエリパフォーマンスを向上させる、負荷ベースのコンパクションメカニズムを導入します [#19133](https://github.com/tikv/tikv/issues/19133) @[mittalrishabh](https://github.com/mittalrishabh)
-    - クラスタのスケールアウトおよびスケールイン操作中に、古いキーをSSTファイル取り込みでクリーンアップするのではなく直接削除することで、古いキーの範囲のクリーンアップロジックを最適化し、オンラインリクエストのレイテンシーへの影響を軽減します。 [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
+    - クラスターのスケールアウトおよびスケールイン操作中に、古いキーをSSTファイル取り込みでクリーンアップするのではなく直接削除することで、古いキーの範囲のクリーンアップロジックを最適化し、オンラインリクエストのレイテンシーへの影響を軽減します。 [#18042](https://github.com/tikv/tikv/issues/18042) @[LykxSassinator](https://github.com/LykxSassinator)
 
 - PD
 
@@ -162,7 +162,7 @@ TiDBクラスタをv8.5.5で新規にデプロイした場合（つまり、v8.5
 
     - crossbeam skiplist のメモリリーク問題を修正 [#19285](https://github.com/tikv/tikv/issues/19285) @[ekexium](https://github.com/ekexium)
     - パーティションテーブルの一意でない列のグローバルインデックスが、場合によっては不整合になり、誤った結果を返す可能性がある問題を修正しました [#19262](https://github.com/tikv/tikv/issues/19262) @[mjonss](https://github.com/mjonss)
-    - コプロセッサのスナップショット取得が停止すると、リクエストの期限が切れるまで統合リードプールワーカーが占有され、他のリードリクエストが遅延する問題を修正しました [#18491](https://github.com/tikv/tikv/issues/18491) @[AndreMouche](https://github.com/AndreMouche)
+    - コプロセッサーのスナップショット取得が停止すると、リクエストの期限が切れるまで統合リードプールワーカーが占有され、他のリードリクエストが遅延する問題を修正しました [#18491](https://github.com/tikv/tikv/issues/18491) @[AndreMouche](https://github.com/AndreMouche)
     - ディスクがいっぱいの TiKV ノードでフォロワーの読み取りがブロックされたままになる可能性がある問題を修正するため、ディスクがいっぱいのフォロワーで読み取りインデックスリクエストを拒否します [#19201](https://github.com/tikv/tikv/issues/19201) @[glorv](https://github.com/glorv)
     - resolved-tsワーカーがビジー状態のときに、 resolved-tsタスクのバックログによって OOM が発生する可能性がある問題を修正 [#18359](https://github.com/tikv/tikv/issues/18359) @[overvenus](https://github.com/overvenus)
     - リーダー転送中にロングテールフォロワーの読み取りレイテンシーが発生する可能性がある問題を修正するため、読み取りインデックスリクエストをより早く再試行し、専用の再試行間隔設定を追加しました [#18417](https://github.com/tikv/tikv/issues/18417) @[gengliqi](https://github.com/gengliqi)

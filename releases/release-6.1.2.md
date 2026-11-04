@@ -43,7 +43,7 @@ TiDB バージョン: 6.1.2
     - TiFlash のパーティションテーブルでダイナミックモードを有効にしたときに発生する誤った結果を修正しました [#37254](https://github.com/pingcap/tidb/issues/37254) @[wshwsh12](https://github.com/wshwsh12)
     - リージョンがマージされたときにリージョンキャッシュが速やかにクリーンアップされない問題を修正しました [#37141](https://github.com/pingcap/tidb/issues/37141) @[sticnarf](https://github.com/sticnarf)
     - KVクライアントが不要なpingメッセージを送信する問題を修正しました [#36861](https://github.com/pingcap/tidb/issues/36861) @[jackysp](https://github.com/jackysp)
-    - DMLエグゼキュータを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
+    - DMLエグゼキューターを使用した`EXPLAIN ANALYZE`文が、トランザクションコミットが完了する前に結果を返す可能性がある問題を修正しました[#37373](https://github.com/pingcap/tidb/issues/37373) @[cfzjywxk](https://github.com/cfzjywxk)
     - `ORDER BY`句に相関サブクエリが含まれている場合に`ORDER BY`付きの`GROUP CONCAT`が失敗する可能性がある問題を修正しました。 [#18216](https://github.com/pingcap/tidb/issues/18216) @[winoros](https://github.com/winoros)
     - `UPDATE`文に共通テーブル式 (CTE) が含まれている場合に`Can't find column`が報告される問題を修正しました [#35758](https://github.com/pingcap/tidb/issues/35758) @[AilinKid](https://github.com/AilinKid)
     - 特定のシナリオで`EXECUTE`が予期しないエラーを返す可能性がある問題を修正 [#37187](https://github.com/pingcap/tidb/issues/37187) @[Reminiscent](https://github.com/Reminiscent)
@@ -79,7 +79,7 @@ TiDB バージョン: 6.1.2
         - DMタスクが同期ユニットに入り、中断されると上流のテーブル構造情報が失われる問題を修正[#7159](https://github.com/pingcap/tiflow/issues/7159) @[lance6716](https://github.com/lance6716)
         - チェックポイントを保存するときに SQL文を分割して、大規模なトランザクションエラーを修正します。 [#5010](https://github.com/pingcap/tiflow/issues/5010) @[lance6716](https://github.com/lance6716)
         - DM事前チェックに`INFORMATION_SCHEMA` の`SELECT`権限が必要になる問題を修正 [#7317](https://github.com/pingcap/tiflow/issues/7317) @[lance6716](https://github.com/lance6716)
-        - 高速/完全バリデータで DM タスクを実行した後に DM-workerがデッドロックエラーをトリガーする問題を修正しました [#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
+        - 高速/完全バリデーターで DM タスクを実行した後に DM-workerがデッドロックエラーをトリガーする問題を修正しました [#7241](https://github.com/pingcap/tiflow/issues/7241) @[buchuitoudegou](https://github.com/buchuitoudegou)
         - DMが`Specified key was too long`エラーを報告する問題を修正 [#5315](https://github.com/pingcap/tiflow/issues/5315) @[lance6716](https://github.com/lance6716)
         - レプリケーション中に latin1 データが破損する可能性がある問題を修正しました [#7028](https://github.com/pingcap/tiflow/issues/7028) @[lance6716](https://github.com/lance6716)
 

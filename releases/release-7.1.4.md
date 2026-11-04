@@ -29,7 +29,7 @@ TiDBバージョン: 7.1.4
 
 - PD
 
-    - バックアップクラスタが切断されたときに PD がクラスタステータスを自動更新する速度を向上[#6883](https://github.com/tikv/pd/issues/6883) @[disksing](https://github.com/disksing)
+    - バックアップクラスターが切断されたときに PD がクラスターステータスを自動更新する速度を向上[#6883](https://github.com/tikv/pd/issues/6883) @[disksing](https://github.com/disksing)
 
 - TiFlash
 
@@ -71,7 +71,7 @@ TiDBバージョン: 7.1.4
     - 複数レベルのネストされた`UNION`クエリの`LIMIT`が無効になる可能性がある問題を修正しました[#49874](https://github.com/pingcap/tidb/issues/49874) @[Defined2014](https://github.com/Defined2014)
     - `AUTO_ID_CACHE=1` のAUTO_INCREMENT列を使用すると同時競合によりAUTO_INCREMENT ID 割り当てでエラーが報告される問題を修正しました。 [#50519](https://github.com/pingcap/tidb/issues/50519) @[tiancaiamao](https://github.com/tiancaiamao)
     - クエリで`NATURAL JOIN` が使用される場合に発生する可能性のある`Column ... in from clause is ambiguous`エラーを修正します [#32044](https://github.com/pingcap/tidb/issues/32044) @[AilinKid](https://github.com/AilinKid)
-    - クエリがソートを強制するオプティマイザヒント（ `STREAM_AGG()`など）を使用し、その実行計画に`IndexMerge` が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
+    - クエリがソートを強制するオプティマイザーヒント（ `STREAM_AGG()`など）を使用し、その実行計画に`IndexMerge` が含まれている場合、強制ソートが無効になる可能性がある問題を修正しました。 [#49605](https://github.com/pingcap/tidb/issues/49605) @[AilinKid](https://github.com/AilinKid)
     - `STREAM_AGG()`が CI を誤って処理したためにクエリ結果が正しくない問題を修正しました [#49902](https://github.com/pingcap/tidb/issues/49902) @[wshwsh12](https://github.com/wshwsh12)
     - `HashJoin`オペレーターがディスクにスピルできない場合に発生する可能性のある goroutine リークの問題を修正しました。 [#50841](https://github.com/pingcap/tidb/issues/50841) @[wshwsh12](https://github.com/wshwsh12)
     - `REPLACE INTO`文でヒントが使用できない問題を修正 [#34325](https://github.com/pingcap/tidb/issues/34325) @[YangKeao](https://github.com/YangKeao)
@@ -92,7 +92,7 @@ TiDBバージョン: 7.1.4
     - ネストされた`UNION`のクエリで`LIMIT`と`ORDER BY`が無効になる可能性がある問題を修正しました [#49377](https://github.com/pingcap/tidb/issues/49377) @[AilinKid](https://github.com/AilinKid)
     - `LEADING`ヒントが`UNION ALL`ステートメントで有効にならない問題を修正しました [#50067](https://github.com/pingcap/tidb/issues/50067) @[hawkingrei](https://github.com/hawkingrei)
     - `COM_STMT_EXECUTE`を介して実行された`COMMIT`または`ROLLBACK`操作が、タイムアウトしたトランザクションを終了できない問題を修正しました。 [#49151](https://github.com/pingcap/tidb/issues/49151) @[zyguan](https://github.com/zyguan)
-    - 無効なオプティマイザヒントによって有効なヒントが無効になる可能性がある問題を修正[#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
+    - 無効なオプティマイザーヒントによって有効なヒントが無効になる可能性がある問題を修正[#49308](https://github.com/pingcap/tidb/issues/49308) @[hawkingrei](https://github.com/hawkingrei)
     - 一部のタイムゾーンで夏時間が正しく表示されない問題を修正 [#49586](https://github.com/pingcap/tidb/issues/49586) @[overvenus](https://github.com/overvenus)
     - `PREPARE`メソッドを使用して`SELECT INTO OUTFILE`を実行すると、エラーではなく、誤って成功メッセージが返される問題を修正しました。 [#49166](https://github.com/pingcap/tidb/issues/49166) @[qw4990](https://github.com/qw4990)
     - PD との相互作用の問題により、 `tiup cluster upgrade/start`を使用してローリングアップグレードを実行すると TiDB がpanicになる可能性がある問題を修正しました。 [#50152](https://github.com/pingcap/tidb/issues/50152) @[zimulala](https://github.com/zimulala)
@@ -132,8 +132,8 @@ TiDBバージョン: 7.1.4
     - `MergeLabels`関数が呼び出されたときにデータ競合が発生する問題を修正しました [#7535](https://github.com/tikv/pd/issues/7535) @[lhy1024](https://github.com/lhy1024)
     - TLS が有効な場合に TiDB Dashboardが TiKV プロファイルを取得できない問題を修正[#7561](https://github.com/tikv/pd/issues/7561) @[Connor1996](https://github.com/Connor1996)
     - レプリカ数が要件を満たしていない場合に孤立ピアが削除される問題を修正しました [#7584](https://github.com/tikv/pd/issues/7584) @[bufferflies](https://github.com/bufferflies)
-    - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`available_stores`が誤って計算される問題を修正[#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
-    - 配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスタで`canSync`と`hasMajority`が誤って計算される可能性がある問題を修正しました[#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
+    - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで`available_stores`が誤って計算される問題を修正[#7221](https://github.com/tikv/pd/issues/7221) @[disksing](https://github.com/disksing)
+    - 配置ルールの設定が複雑な場合、データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで`canSync`と`hasMajority`が誤って計算される可能性がある問題を修正しました[#7201](https://github.com/tikv/pd/issues/7201) @[disksing](https://github.com/disksing)
     - データレプリケーション自動同期（DR自動同期）モードを採用しているクラスターで、セカンダリAZがダウンしているときにプライマリAZがTiKVノードを追加できない問題を修正しました。 [#7218](https://github.com/tikv/pd/issues/7218) @[disksing](https://github.com/disksing)
     - リソースグループをバッチでクエリすると PD がpanicになる可能性がある問題を修正しました [#7206](https://github.com/tikv/pd/issues/7206) @[nolouch](https://github.com/nolouch)
     - `pd-ctl`を使用してリーダーのないリージョンを照会すると、PD がpanicになる可能性がある問題を修正しました。 [#7630](https://github.com/tikv/pd/issues/7630) @[rleungx](https://github.com/rleungx)
@@ -144,7 +144,7 @@ TiDBバージョン: 7.1.4
 
     - レプリカ移行中に PD とのネットワーク接続が不安定になり、 TiFlash がpanicする可能性がある問題を修正しました [#8323](https://github.com/pingcap/tiflash/issues/8323) @[JaySon-Huang](https://github.com/JaySon-Huang)
     - `ENUM`値が 0 の場合にTiFlash が`ENUM`を誤って処理する問題を修正しました [#8311](https://github.com/pingcap/tiflash/issues/8311) @[solotzg](https://github.com/solotzg)
-    - 定数文字列パラメータを含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。 [#8604](https://github.com/pingcap/tiflash/issues/8604) @[windtalker](https://github.com/windtalker)
+    - 定数文字列パラメーターを含む`GREATEST`または`LEAST`関数で発生する可能性のある、ランダムに無効なメモリアクセスの問題を修正しました。 [#8604](https://github.com/pingcap/tiflash/issues/8604) @[windtalker](https://github.com/windtalker)
     - `lowerUTF8`と`upperUTF8`関数で、大文字と小文字が異なるバイトを占めることができない問題を修正しました。 [#8484](https://github.com/pingcap/tiflash/issues/8484) @[gengliqi](https://github.com/gengliqi)
     - 短いクエリが正常に実行され、過剰な情報ログが出力される問題を修正しました。 [#8592](https://github.com/pingcap/tiflash/issues/8592) @[windtalker](https://github.com/windtalker)
     - クエリの低速化によりメモリ使用量が大幅に増加する問題を修正 [#8564](https://github.com/pingcap/tiflash/issues/8564) @[JinheLin](https://github.com/JinheLin)

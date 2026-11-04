@@ -13,7 +13,7 @@ TiDB バージョン: 8.2.0
 
 バージョン8.2.0では、以下の主要な機能と改善点が導入されています。
 
-<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tiproxy-load-balance">TiProxyは複数のロードバランシングポリシーをサポートしています。</a></td><td> TiDB v8.2.0では、TiProxyはステータス、接続数、健全性、メモリ、CPU、ロケーションなど、さまざまな要素に基づいてTiDBノードを評価し、ランク付けします。 <code>policy</code>設定項目で指定された負荷分散ポリシーに従って、TiProxyはデータベース操作を実行する最適なTiDBノードを動的に選択します。これにより、リソース使用率全体が最適化され、クラスタのパフォーマンスが向上し、スループットが増加します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800">TiDB の並列 HashAgg アルゴリズムはディスクスピル (GA) をサポートします</a></td><td>HashAgg は、同じフィールド値を持つ行を効率的に集計するために TiDB で広く使用されている集計オペレーターです。TiDB v8.0.0 では、処理速度をさらに向上させる実験的機能として 並列 HashAgg が導入されました。メモリリソースが不足している場合、並列 HashAgg はソート済みの一時データをディスクに書き出すことで、過剰なメモリ使用による潜在的な OOM リスクを回避します。これにより、ノードの安定性を維持しながらクエリパフォーマンスが向上します。v8.2.0 では、この機能が一般提供 (GA) となり、デフォルトで有効になっているため、 <code>tidb_executor_concurrency</code>を使用して 並列 HashAgg の同時実行性を安全に構成できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-new-in-v540">統計情報の読み込み効率を最大10倍向上</a></td><td>SaaSやPaaSサービスなど、テーブルとパーティションの数が多いクラスタでは、統計情報のロード効率を改善することで、TiDBインスタンスの起動速度低下の問題を解決し、統計情報の動的ロードの成功率を高めることができます。この改善により、統計情報のロード失敗によるパフォーマンス低下が軽減され、クラスタの安定性が向上します。</td></tr><tr><td rowspan="1">データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-resource-control#bind-resource-groups">リソースグループの切り替えに対する特権制御を導入する</a></td><td>リソース制御は広く利用されているため、リソースグループの切り替えに関する権限制御は、データベースユーザーによるリソースの不正使用を防ぎ、管理者によるリソース使用全体の保護を強化し、クラスタの安定性を向上させることができます。</td></tr></tbody></table>
+<table><thead><tr><th>カテゴリ</th><th>機能／改善点</th><th>説明</th></tr></thead><tbody><tr><td rowspan="3">信頼性と可用性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tiproxy-load-balance">TiProxyは複数のロードバランシングポリシーをサポートしています。</a></td><td> TiDB v8.2.0では、TiProxyはステータス、接続数、健全性、メモリ、CPU、ロケーションなど、さまざまな要素に基づいてTiDBノードを評価し、ランク付けします。 <code>policy</code>設定項目で指定された負荷分散ポリシーに従って、TiProxyはデータベース操作を実行する最適なTiDBノードを動的に選択します。これにより、リソース使用率全体が最適化され、クラスターのパフォーマンスが向上し、スループットが増加します。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/system-variables#tidb_enable_parallel_hashagg_spill-new-in-v800">TiDB の並列 HashAgg アルゴリズムはディスクスピル (GA) をサポートします</a></td><td>HashAgg は、同じフィールド値を持つ行を効率的に集計するために TiDB で広く使用されている集計オペレーターです。TiDB v8.0.0 では、処理速度をさらに向上させる実験的機能として 並列 HashAgg が導入されました。メモリリソースが不足している場合、並列 HashAgg はソート済みの一時データをディスクに書き出すことで、過剰なメモリ使用による潜在的な OOM リスクを回避します。これにより、ノードの安定性を維持しながらクエリパフォーマンスが向上します。v8.2.0 では、この機能が一般提供 (GA) となり、デフォルトで有効になっているため、 <code>tidb_executor_concurrency</code>を使用して 並列 HashAgg の同時実行性を安全に構成できます。</td></tr><tr><td> <a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-configuration-file#stats-load-concurrency-new-in-v540">統計情報の読み込み効率を最大10倍向上</a></td><td>SaaSやPaaSサービスなど、テーブルとパーティションの数が多いクラスターでは、統計情報のロード効率を改善することで、TiDBインスタンスの起動速度低下の問題を解決し、統計情報の動的ロードの成功率を高めることができます。この改善により、統計情報のロード失敗によるパフォーマンス低下が軽減され、クラスターの安定性が向上します。</td></tr><tr><td rowspan="1">データベースの運用と可観測性</td><td><a href="https://docs-archive.pingcap.com/tidb/v8.2/tidb-resource-control#bind-resource-groups">リソースグループの切り替えに対する特権制御を導入する</a></td><td>リソース制御は広く利用されているため、リソースグループの切り替えに関する権限制御は、データベースユーザーによるリソースの不正使用を防ぎ、管理者によるリソース使用全体の保護を強化し、クラスターの安定性を向上させることができます。</td></tr></tbody></table>
 
 ## 機能の詳細 {#feature-details}
 
@@ -57,7 +57,7 @@ TiDB バージョン: 8.2.0
 
     TiProxyはTiDBの公式プロキシコンポーネントであり、クライアントとTiDBサーバーの間に配置されます。TiProxyはTiDBの負荷分散機能と接続維持機能を提供します。v8.2.0より前のバージョンでは、TiProxyはデフォルトでv1.0.0を使用しており、TiDBサーバーに対してステータスベースおよび接続数ベースの負荷分散ポリシーのみをサポートしています。
 
-    バージョン8.2.0以降、TiProxyはデフォルトでバージョン1.1.0となり、複数の負荷分散ポリシーが導入されました。ステータスベースおよび接続数ベースのポリシーに加え、TiProxyは健全性、メモリ、CPU、およびロケーションに基づいた動的な負荷分散をサポートし、TiDBクラスタの安定性を向上させます。
+    バージョン8.2.0以降、TiProxyはデフォルトでバージョン1.1.0となり、複数の負荷分散ポリシーが導入されました。ステータスベースおよび接続数ベースのポリシーに加え、TiProxyは健全性、メモリ、CPU、およびロケーションに基づいた動的な負荷分散をサポートし、TiDBクラスターの安定性を向上させます。
 
     [`policy`](/tiproxy/tiproxy-configuration.md#policy)設定項目を通じて、負荷分散ポリシーの組み合わせと優先順位を設定できます。
 
@@ -79,7 +79,7 @@ TiDB バージョン: 8.2.0
 
 - TiUPはPDマイクロサービスのデプロイをサポートします [#5766](https://github.com/tikv/pd/issues/5766) @[rleungx](https://github.com/rleungx)
 
-    バージョン8.0.0以降、PDはマイクロサービスモードをサポートしています。このモードでは、PDのタイムスタンプ割り当て機能とクラスタスケジューリング機能が、それぞれ独立してデプロイ可能な個別のマイクロサービスに分割されます。これにより、リソース制御と分離性が向上し、異なるサービス間の影響が軽減されます。バージョン8.2.0より前は、PDマイクロサービスはTiDB Operatorを使用してのみデプロイできます。
+    バージョン8.0.0以降、PDはマイクロサービスモードをサポートしています。このモードでは、PDのタイムスタンプ割り当て機能とクラスタースケジューリング機能が、それぞれ独立してデプロイ可能な個別のマイクロサービスに分割されます。これにより、リソース制御と分離性が向上し、異なるサービス間の影響が軽減されます。バージョン8.2.0より前は、PDマイクロサービスはTiDB Operatorを使用してのみデプロイできます。
 
     バージョン8.2.0以降、PDマイクロサービスはTiUPを使用してデプロイすることもできます。クラスター内で`tso`マイクロサービスと`scheduling`マイクロサービスを個別にデプロイすることで、PDのパフォーマンス拡張性を向上させ、大規模クラスターにおけるPDのパフォーマンスボトルネックを解消できます。このモードは、スケールアップでは解決できないほどPDが深刻なパフォーマンスボトルネックになった場合に推奨されます。
 
@@ -115,7 +115,7 @@ TiDB バージョン: 8.2.0
 
 - 複数の変更フィード間で TiCDC 同期ポイントを調整する [#11212](https://github.com/pingcap/tiflow/issues/11212) @[hongyunyan](https://github.com/hongyunyan)
 
-    バージョン 8.2.0 より前は、複数のチェンジフィード間で TiCDC 同期ポイントを整合させるのは困難でした。チェンジフィードの作成時に、他のチェンジフィードの同期ポイントと整合するように、チェンジフィードの`startTs`を慎重に選択する必要がありました。v8.2.0以降、チェンジフィードの同期ポイントは、そのチェンジフィードの`sync-point-interval`構成の倍数として作成されます。この変更により、同じ`sync-point-interval`構成を持つ複数のチェンジフィード間で同期ポイントを整合させることが可能になり、複数のダウンストリームクラスタの整合が簡素化され、機能が向上します。
+    バージョン 8.2.0 より前は、複数のチェンジフィード間で TiCDC 同期ポイントを整合させるのは困難でした。チェンジフィードの作成時に、他のチェンジフィードの同期ポイントと整合するように、チェンジフィードの`startTs`を慎重に選択する必要がありました。v8.2.0以降、チェンジフィードの同期ポイントは、そのチェンジフィードの`sync-point-interval`構成の倍数として作成されます。この変更により、同じ`sync-point-interval`構成を持つ複数のチェンジフィード間で同期ポイントを整合させることが可能になり、複数のダウンストリームクラスターの整合が簡素化され、機能が向上します。
 
     詳細については、 [ドキュメント](/ticdc/ticdc-upstream-downstream-check.md#notes)を参照してください。
 
@@ -137,7 +137,7 @@ TiDB バージョン: 8.2.0
 
 - [`IMPORT INTO`](/sql-statements/sql-statement-import-into.md)を使用して CSV ファイルをインポートする場合、大きな CSV ファイルを複数の小さな CSV ファイルに分割して同時実行性とインポートパフォーマンスを向上させるために`SPLIT_FILE`パラメーターを指定すると、行末文字`LINES_TERMINATED_BY`を明示的に指定する必要があります。指定できる値は`\r` 、 `\n` 、または`\r\n`です。行末文字を指定しないと、CSV ファイルデータの解析時に例外が発生する可能性があります。 [#37338](https://github.com/pingcap/tidb/issues/37338) @[lance6716](https://github.com/lance6716)
 
-- BR v8.2.0 より前は、TiCDC レプリケーションタスクを持つクラスタで[BRデータ復元](/br/backup-and-restore-overview.md)を実行することはサポートされていませんでした。v8.2.0 以降、 BR はTiCDC のデータ復元に関する制限を緩和しました。復元対象データの BackupTS (バックアップ時刻) が changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (現在のレプリケーションの進行状況を示すタイムスタンプ) より前であれば、 BR は正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオで、 BR はTiCDC レプリケーションタスクを持つクラスタのデータ復元をサポートしていると考えられます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
+- BR v8.2.0 より前は、TiCDC レプリケーションタスクを持つクラスターで[BRデータ復元](/br/backup-and-restore-overview.md)を実行することはサポートされていませんでした。v8.2.0 以降、 BR はTiCDC のデータ復元に関する制限を緩和しました。復元対象データの BackupTS (バックアップ時刻) が changefeed [`CheckpointTS`](/ticdc/ticdc-classic-architecture.md#checkpointts) (現在のレプリケーションの進行状況を示すタイムスタンプ) より前であれば、 BR は正常にデータ復元を進めることができます。 `BackupTS`は通常かなり前であることを考慮すると、ほとんどのシナリオで、 BR はTiCDC レプリケーションタスクを持つクラスターのデータ復元をサポートしていると考えられます。 [#53131](https://github.com/pingcap/tidb/issues/53131) @[YuJuncen](https://github.com/YuJuncen)
 
 ### MySQLとの互換性 {#mysql-compatibility}
 
@@ -147,17 +147,17 @@ TiDB バージョン: 8.2.0
 
 | 変数名                                                                                                                 | 変更の種類  | 説明                                                                                                                                                                                              |
 | ------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて`ANALYZE`操作を実行する際に`scan`操作の同時実行性を適応的に調整します。                                                                                                   |
+| [`tidb_analyze_distsql_scan_concurrency`](/system-variables.md#tidb_analyze_distsql_scan_concurrency-new-in-v760)   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスターサイズに基づいて`ANALYZE`操作を実行する際に`scan`操作の同時実行性を適応的に調整します。                                                                                                   |
 | [`tidb_analyze_skip_column_types`](/system-variables.md#tidb_analyze_skip_column_types-new-in-v720)                 | 変更     | バージョン8.2.0以降、TiDBは潜在的なメモリ不足リスクを回避するため、デフォルトでは`MEDIUMTEXT`および`LONGTEXT`型の列を収集しません。                                                                                                               |
-| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | 変更     | TiDB クラスタのパフォーマンスに対する自動統計収集の影響を軽減するため、デフォルト値を`128`から`8192`に変更します。値の範囲を`[1, 1024]`から`[1, 8192]`に変更します。                                                                                           |
+| [`tidb_auto_analyze_partition_batch_size`](/system-variables.md#tidb_auto_analyze_partition_batch_size-new-in-v640) | 変更     | TiDB クラスターのパフォーマンスに対する自動統計収集の影響を軽減するため、デフォルト値を`128`から`8192`に変更します。値の範囲を`[1, 1024]`から`[1, 8192]`に変更します。                                                                                           |
 | [`tidb_enable_historical_stats`](/system-variables.md#tidb_enable_historical_stats)                                 | 変更     | デフォルト値を`ON`から`OFF`に変更します。これにより、履歴統計が無効になり、潜在的な安定性の問題を回避できます。                                                                                                                                    |
 | [`tidb_executor_concurrency`](/system-variables.md#tidb_executor_concurrency-new-in-v50)                            | 変更     | `sort`演算子の同時実行設定のサポートを追加します。                                                                                                                                                                    |
-| [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスタサイズに基づいて、内部 SQL文の実行時に実行される`scan`操作の同時実行性を適応的に調整します。                                                                                            |
-| [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)           | 新しく追加された | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントおよび[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザヒントに特権制御を適用するかどうかを制御します。 |
+| [`tidb_sysproc_scan_concurrency`](/system-variables.md#tidb_sysproc_scan_concurrency-new-in-v650)                   | 変更     | 最小値を`1`から`0`に変更します。これを`0`に設定すると、TiDB はクラスターサイズに基づいて、内部 SQL文の実行時に実行される`scan`操作の同時実行性を適応的に調整します。                                                                                            |
+| [`tidb_resource_control_strict_mode`](/system-variables.md#tidb_resource_control_strict_mode-new-in-v820)           | 新しく追加された | [`SET RESOURCE GROUP`](/sql-statements/sql-statement-set-resource-group.md)ステートメントおよび[`RESOURCE_GROUP()`](/optimizer-hints.md#resource_groupresource_group_name)オプティマイザーヒントに特権制御を適用するかどうかを制御します。 |
 
-### 設定ファイルパラメータ {#configuration-file-parameters}
+### 設定ファイルパラメーター {#configuration-file-parameters}
 
-| 設定ファイル | 設定パラメータ                                                                                              | 変更の種類 | 説明                                                                                                                                                                    |
+| 設定ファイル | 設定パラメーター                                                                                              | 変更の種類 | 説明                                                                                                                                                                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------ | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | TiDB           | [`concurrently-init-stats`](/tidb-configuration-file.md#concurrently-init-stats-new-in-v810-and-v752)        | 変更    | 統計情報の初期化にかかる時間を短縮するため、デフォルト値を`false`から`true`に変更します。この設定項目は、 [`lite-init-stats`](/tidb-configuration-file.md#lite-init-stats-new-in-v710)が`false`に設定されている場合にのみ有効になります。 |
 | TiDB           | [`stats-load-concurrency`](/tidb-configuration-file.md#stats-load-concurrency-new-in-v540)                   | 変更    | デフォルト値を`5`から`0`に変更し、最小値を`1`から`0`に変更します。値`0`は自動モードを意味し、サーバーの設定に基づいて同時実行数を自動的に調整します。                                                                                    |
@@ -170,17 +170,17 @@ TiDB バージョン: 8.2.0
 
 - [`INFORMATION_SCHEMA.PROCESSLIST`](/information-schema/information-schema-processlist.md)および[`INFORMATION_SCHEMA.CLUSTER_PROCESSLIST`](/information-schema/information-schema-processlist.md#cluster_processlist)システムテーブルに`SESSION_ALIAS`フィールドを追加して、現在のセッションのエイリアスを表示します。 [#46889](https://github.com/pingcap/tidb/issues/46889) @[lcwangchao](https://github.com/lcwangchao)
 
-### コンパイラバージョン {#compiler-versions}
+### コンパイラーバージョン {#compiler-versions}
 
-- TiFlashの開発エクスペリエンスを向上させるため、TiDBのコンパイルとビルドに必要なLLVMの最小バージョンが13.0から17.0にアップグレードされました。TiDB開発者の方は、スムーズなビルドを保証するために、LLVMコンパイラのバージョンをアップグレードする必要があります。 [#7193](https://github.com/pingcap/tiflash/issues/7193) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
+- TiFlashの開発エクスペリエンスを向上させるため、TiDBのコンパイルとビルドに必要なLLVMの最小バージョンが13.0から17.0にアップグレードされました。TiDB開発者の方は、スムーズなビルドを保証するために、LLVMコンパイラーのバージョンをアップグレードする必要があります。 [#7193](https://github.com/pingcap/tiflash/issues/7193) @[Lloyd-Pottiger](https://github.com/Lloyd-Pottiger)
 
 ## 非推奨機能 {#deprecated-features}
 
 - バージョン8.2.0以降、以下の機能は非推奨となります。
 
-    - バージョン8.2.0以降、 [`enable-replica-selector-v2`](/tidb-configuration-file.md#enable-replica-selector-v2-new-in-v800)設定項目は非推奨となりました。TiKVへのRPCリクエスト送信時には、デフォルトで新しいバージョンのリージョンレプリカセレクタが使用されます。
-    - バージョン8.2.0以降、 BRスナップショット復元パラメータ`--concurrency`は非推奨となりました。代替手段として、 [`--tikv-max-restore-concurrency`](/br/use-br-command-line-tool.md#common-options)を使用して、スナップショット復元中のTiKVノードごとの同時実行タスクの最大数を設定できます。
-    - v8.2.0 以降、 BRスナップショット復元パラメータ`--granularity`は非推奨となり、 [粗粒度リージョン分散アルゴリズム](/br/br-snapshot-guide.md#restore-cluster-snapshots)はデフォルトで有効になります。
+    - バージョン8.2.0以降、 [`enable-replica-selector-v2`](/tidb-configuration-file.md#enable-replica-selector-v2-new-in-v800)設定項目は非推奨となりました。TiKVへのRPCリクエスト送信時には、デフォルトで新しいバージョンのリージョンレプリカセレクターが使用されます。
+    - バージョン8.2.0以降、 BRスナップショット復元パラメーター`--concurrency`は非推奨となりました。代替手段として、 [`--tikv-max-restore-concurrency`](/br/use-br-command-line-tool.md#common-options)を使用して、スナップショット復元中のTiKVノードごとの同時実行タスクの最大数を設定できます。
+    - v8.2.0 以降、 BRスナップショット復元パラメーター`--granularity`は非推奨となり、 [粗粒度リージョン分散アルゴリズム](/br/br-snapshot-guide.md#restore-cluster-snapshots)はデフォルトで有効になります。
 
 - 以下の機能は、将来のバージョンで廃止される予定です。
 
@@ -188,11 +188,11 @@ TiDB バージョン: 8.2.0
     - バージョン8.0.0では、TiDBが並列ハッシュアグリゲーションアルゴリズムのディスクスピルをサポートするかどうかを制御するシステム変数[`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)が導入されました。今後のバージョンでは、 [`tidb_enable_parallel_hashagg_spill`](/system-variables.md#tidb_enable_parallel_hashagg_spill-new-in-v800)システム変数は非推奨となります。
     - バージョン7.5.0では、TiDBがパーティション統計情報を非同期でマージしてメモリ不足エラーを回避するために、システム変数[`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750)が導入されました。今後のバージョンでは、パーティション統計情報はデフォルトで非同期でマージされるようになり、システム変数[`tidb_enable_async_merge_global_stats`](/system-variables.md#tidb_enable_async_merge_global_stats-new-in-v750)は非推奨となります。
     - 今後のリリースでは [実行プランバインディングの自動進化](/sql-plan-management.md#baseline-evolution)が再設計される予定であり、関連する変数や動作が変更される予定です。
-    - TiDB Lightning のパラメータ[`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)は、今後のリリースで非推奨となり、その後削除されます。このパラメータは[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)に置き換えられます。これは、競合するレコードの最大数が、単一のインポートタスクで許容できる競合レコードの最大数と一致することを意味します。
+    - TiDB Lightning のパラメーター[`conflict.max-record-rows`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)は、今後のリリースで非推奨となり、その後削除されます。このパラメーターは[`conflict.threshold`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)に置き換えられます。これは、競合するレコードの最大数が、単一のインポートタスクで許容できる競合レコードの最大数と一致することを意味します。
 
 - 今後のバージョンでは、以下の機能が削除される予定です。
 
-    - バージョン8.0.0以降、 TiDB Lightningは[旧バージョンの競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略を非推奨とし、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)パラメータを使用して論理インポートモードと物理インポートモードの両方の競合検出戦略を制御できるようにします。旧バージョンの競合検出の[`duplicate-resolution`](/tidb-lightning/tidb-lightning-configuration.md)パラメータは、今後のリリースで削除されます。
+    - バージョン8.0.0以降、 TiDB Lightningは[旧バージョンの競合検出](/tidb-lightning/tidb-lightning-physical-import-mode-usage.md#the-old-version-of-conflict-detection-deprecated-in-v800)戦略を非推奨とし、 [`conflict.strategy`](/tidb-lightning/tidb-lightning-configuration.md#tidb-lightning-task)パラメーターを使用して論理インポートモードと物理インポートモードの両方の競合検出戦略を制御できるようにします。旧バージョンの競合検出の[`duplicate-resolution`](/tidb-lightning/tidb-lightning-configuration.md)パラメーターは、今後のリリースで削除されます。
 
 ## 改善点 {#improvements}
 
@@ -273,11 +273,11 @@ TiDB バージョン: 8.2.0
     - `PREPARE` / `EXECUTE`文で`CONV`式に`?`引数が含まれている場合、複数回実行するとクエリ結果が正しくない可能性がある問題を修正します。 [#53505](https://github.com/pingcap/tidb/issues/53505) @[qw4990](https://github.com/qw4990)
     - 非 BIGINT 符号なし整数が文字列/10 進数と比較したときに誤った結果を生成する可能性がある問題を修正 [#41736](https://github.com/pingcap/tidb/issues/41736) @[LittleFall](https://github.com/LittleFall)
     - TiDBが外部キーを持つテーブルを作成する際に、対応する統計メタデータ（ `stats_meta` ）を作成しない問題を修正 [#53652](https://github.com/pingcap/tidb/issues/53652) @[hawkingrei](https://github.com/hawkingrei)
-    - クエリ内の特定のフィルタ条件によってプランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました[#53582](https://github.com/pingcap/tidb/issues/53582) [#53580](https://github.com/pingcap/tidb/issues/53580) [#53594](https://github.com/pingcap/tidb/issues/53594) [#53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
+    - クエリ内の特定のフィルター条件によってプランナーモジュールが`invalid memory address or nil pointer dereference`エラーを報告する可能性がある問題を修正しました[#53582](https://github.com/pingcap/tidb/issues/53582) [#53580](https://github.com/pingcap/tidb/issues/53580) [#53594](https://github.com/pingcap/tidb/issues/53594) [#53603](https://github.com/pingcap/tidb/issues/53603) @[YangKeao](https://github.com/YangKeao)
     - `CREATE OR REPLACE VIEW`を同時に実行すると`table doesn't exist`エラーが発生する可能性がある問題を修正しました [#53673](https://github.com/pingcap/tidb/issues/53673) @[tangenta](https://github.com/tangenta)
     - `STATE`フィールドの`size`が定義されていないため、 `INFORMATION_SCHEMA.TIDB_TRX`テーブルの`STATE`フィールドが空になる問題を修正しました。 [#53026](https://github.com/pingcap/tidb/issues/53026) @[cfzjywxk](https://github.com/cfzjywxk)
     - `tidb_enable_async_merge_global_stats`が無効になっている場合、グローバル統計の`Distinct_count`情報が正しくない可能性がある問題を修正しました [#53752](https://github.com/pingcap/tidb/issues/53752) @[hawkingrei](https://github.com/hawkingrei)
-    - オプティマイザヒント使用時の警告情報の誤りを修正 [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
+    - オプティマイザーヒント使用時の警告情報の誤りを修正 [#53767](https://github.com/pingcap/tidb/issues/53767) @[hawkingrei](https://github.com/hawkingrei)
     - 時間型を否定すると誤った値になる問題を修正 [#52262](https://github.com/pingcap/tidb/issues/52262) @[solotzg](https://github.com/solotzg)
     - `REGEXP()`が空のパターン引数に対して明示的にエラーを報告しない問題を修正 [#53221](https://github.com/pingcap/tidb/issues/53221) @[yibin87](https://github.com/yibin87)
     - JSONをdatetimeに変換すると、場合によっては精度が失われる問題を修正しました [#53352](https://github.com/pingcap/tidb/issues/53352) @[YangKeao](https://github.com/YangKeao)
