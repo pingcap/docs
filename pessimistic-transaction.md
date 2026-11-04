@@ -116,7 +116,7 @@ TiDB の悲観的なトランザクションは、MySQL のトランザクショ
 
     MySQL で DDL を実行すると、実行中のトランザクションによってブロックされる可能性があります。しかし、このシナリオでは、TiDB で DDL 操作がブロックされないため、悲観的トランザクションコミット`ERROR 1105 (HY000): Information schema is changed. [try again later]`が失敗します。TiDB はトランザクションの実行中に`TRUNCATE TABLE`文を実行するため、 `table doesn't exist`エラーが発生する可能性があります。
 
-4. `START TRANSACTION WITH CONSISTENT SNAPSHOT`を実行した後でも、MySQL は他のトランザクションで後から作成されたテーブルを読み取れますが、TiDB はできません。
+4. `START TRANSACTION WITH CONSISTENT SNAPSHOT`を実行した後でも、MySQL は他のトランザクションで後から作成されたテーブルを読み取れますが、TiDB は読み取れません。
 
 5. 自動コミットトランザクションは、楽観的ロックを優先します。
 
