@@ -42,7 +42,7 @@ TiDB バージョン: 4.0.13
     - Backup & Restore (BR)
 
         - `mysql`スキーマで作成されたユーザーテーブルのバックアップをサポート [#1077](https://github.com/pingcap/br/pull/1077)
-        - 更新`checkVersion`クラスターデータとバックアップデータチェックする [#1090](https://github.com/pingcap/br/pull/1090)
+        - クラスターデータとバックアップデータをチェックするように`checkVersion`を更新する [#1090](https://github.com/pingcap/br/pull/1090)
         - バックアップ中に少数のTiKVノード障害を許容する [#1062](https://github.com/pingcap/br/pull/1062)
 
     - TiCDC
