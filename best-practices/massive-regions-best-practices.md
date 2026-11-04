@@ -30,7 +30,7 @@ Raftstore のワークフロー図から、各リージョンのメッセージ�
 
 > **Note:**
 >
-> - 前述のRaftstoreのCPU使用率についてですが、 Raftstoreはシングルスレッドです。Raftstoreがマルチスレッドの場合は、CPU使用率のしきい値（85%）を比例的に増やすことができます。
+> - 前述のRaftstoreのCPU使用率についてですが、 Raftstoreはシングルスレッドです。Raftstoreがマルチスレッドの場合は、CPU使用率のしきい値（85%）を比例的に増やせます。
 > - Raftstoreスレッドには I/O 操作が存在するため、CPU 使用率は 100% に達することはありません。
 
 ### パフォーマンス監視 {#performance-monitoring}
@@ -74,7 +74,7 @@ Grafana の**TiKV-Details**ダッシュボードでは、次の監視メトリ�
 
 Raftstore はTiDB v3.0 以降、マルチスレッドモジュールにアップグレードされており、 Raftstoreスレッドがボトルネックになる可能性が大幅に減少しています。
 
-TiKVでは、デフォルトで`raftstore.store-pool-size`は`2`に設定されています。Raftstoreでボトルネックが発生する場合は、実際の状況に応じてこの設定項目の値を適切に増やすことができます。ただし、不要なスレッド切り替えのオーバーヘッドを回避するため、この値を高くしすぎないことをお勧めします。
+TiKVでは、デフォルトで`raftstore.store-pool-size`は`2`に設定されています。Raftstoreでボトルネックが発生する場合は、実際の状況に応じてこの設定項目の値を適切に増やせます。ただし、不要なスレッド切り替えのオーバーヘッドを回避するため、この値を高くしすぎないことをお勧めします。
 
 ### 方法2: Hibernate Regionを有効にする {#method-2-enable-hibernate-region}
 
@@ -112,14 +112,14 @@ I/O リソースと CPU リソースが十分な場合は、単一のマシン�
 
 ### 方法5: `raft-base-tick-interval`を調整する {#method-5-adjust-raft-base-tick-interval}
 
-リージョン数を減らすだけでなく、単位時間あたりに各リージョンに送信されるメッセージ数を減らすことで、 Raftstoreへの負荷を軽減することもできます。例えば、 `raft-base-tick-interval`設定項目の値を適切に増やすことができます。
+リージョン数を減らすだけでなく、単位時間あたりに各リージョンに送信されるメッセージ数を減らすことで、 Raftstoreへの負荷を軽減することもできます。例えば、 `raft-base-tick-interval`設定項目の値を適切に増やせます。
 
 ```
 [raftstore]
 raft-base-tick-interval = "2s"
 ```
 
-上記の設定では、 `raft-base-tick-interval`は、Raftstore が各リージョンのRaftステートマシンを駆動する時間間隔です。つまり、この時間間隔でRaftstore はRaftステートマシンにティックメッセージを送信します。この間隔を長くすることで、 Raftstoreからのメッセージ数を効果的に減らすことができます。
+上記の設定では、 `raft-base-tick-interval`は、Raftstore が各リージョンのRaftステートマシンを駆動する時間間隔です。つまり、この時間間隔でRaftstore はRaftステートマシンにティックメッセージを送信します。この間隔を長くすることで、 Raftstoreからのメッセージ数を効果的に減らせます。
 
 ティックメッセージ間のこの間隔は、 `election timeout`と`heartbeat`の間の間隔も決定することに注意してください。次の例をご覧ください。
 
@@ -132,7 +132,7 @@ raft-heartbeat-interval = raft-base-tick-interval * raft-heartbeat-ticks
 
 ### 方法6:リージョンのサイズを調整する {#method-6-adjust-region-size}
 
-リージョンのデフォルトサイズは256MiBです。リージョンのサイズを大きくすることで、リージョンの数を減らすことができます。詳細については、 [リージョンパフォーマンスの調整](/tune-region-performance.md)をご覧ください。
+リージョンのデフォルトサイズは256MiBです。リージョンのサイズを大きくすることで、リージョンの数を減らせます。詳細については、 [リージョンパフォーマンスの調整](/tune-region-performance.md)をご覧ください。
 
 > **Note:**
 >

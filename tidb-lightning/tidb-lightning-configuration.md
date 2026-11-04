@@ -273,7 +273,7 @@ TiDB Lightningには「グローバル」と「タスク」という2つの設�
 #### `range-concurrency` {#range-concurrency}
 
 - TiKV が物理インポートモードで KV データを書き込む同時実行性を指定します。
-- TiDB Lightningと TiKV 間のネットワーク伝送速度が 10 ギガビットを超える場合は、この値を適宜増やすことができます。
+- TiDB Lightningと TiKV 間のネットワーク伝送速度が 10 ギガビットを超える場合は、この値を適宜増やせます。
 - デフォルト値: `16`
 
 #### `store-write-bwlimit` {#store-write-bwlimit}

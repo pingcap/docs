@@ -131,4 +131,4 @@ v8.4.0 以降、TiCDC は、[ベクトルデータ型](/ai/reference/vector-sear
 
 ダウンストリームがKafkaまたはストレージサービス（Amazon S3、GCS、Azure Blob Storage、NFSなど）の場合、TiCDCはダウンストリームに書き込む前にベクトルデータ型を文字列型に変換します。
 
-ダウンストリームがベクトルデータ型をサポートしないMySQL互換データベースである場合、TiCDCはベクトル型を含むDDLイベントをダウンストリームに書き込むことができません。この場合、 `sink-url`に`has-vector-type=true`パラメーターを追加してください。これにより、TiCDCは書き込み前にベクトルデータ型を`LONGTEXT`型に変換できます。
+ダウンストリームがベクトルデータ型をサポートしないMySQL互換データベースである場合、TiCDCはベクトル型を含むDDLイベントをダウンストリームに書き込めません。この場合、 `sink-url`に`has-vector-type=true`パラメーターを追加してください。これにより、TiCDCは書き込み前にベクトルデータ型を`LONGTEXT`型に変換できます。

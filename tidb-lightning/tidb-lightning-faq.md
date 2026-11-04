@@ -30,7 +30,7 @@ summary: TiDB Lightningに関するよくある質問 (FAQ) と回答につい�
 
 ## インポートされたデータの整合性を確保するにはどうすればよいですか? {#how-to-ensure-the-integrity-of-the-imported-data}
 
-TiDB Lightningはデフォルトで、ローカルデータソースとインポートされたテーブルのチェックサムを実行します。チェックサムが一致しない場合、プロセスは中止されます。このチェックサム情報はログから読み取ることができます。
+TiDB Lightningはデフォルトで、ローカルデータソースとインポートされたテーブルのチェックサムを実行します。チェックサムが一致しない場合、プロセスは中止されます。このチェックサム情報はログから読み取れます。
 
 ターゲットテーブルで[`ADMIN CHECKSUM TABLE`](/sql-statements/sql-statement-admin-checksum-table.md) SQL コマンドを実行して、インポートされたデータのチェックサムを再計算することもできます。
 

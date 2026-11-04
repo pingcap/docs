@@ -101,7 +101,7 @@ SELECT MONTH(rec_date), customer_id, sum(daily_fee) FROM daily_data GROUP BY MON
 
 ## 実行プロセス {#execution-process}
 
-* `INSERT INTO SELECT`文の実行中、TiFlash はまず`SELECT`句のクエリ結果をクラスター内の TiDB サーバーに返し、次にその結果をターゲットテーブル (TiFlash レプリカを持つことができる) に書き込みます。
+* `INSERT INTO SELECT`文の実行中、TiFlash はまず`SELECT`句のクエリ結果をクラスター内の TiDB サーバーに返し、次にその結果をターゲットテーブル (TiFlash レプリカを持てる) に書き込みます。
 * `INSERT INTO SELECT`文の実行により、ACID プロパティが保証されます。
 
 ## 制限 {#restrictions}

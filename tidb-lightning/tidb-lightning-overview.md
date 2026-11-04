@@ -13,7 +13,7 @@ TiDB Lightning は次のファイル形式をサポートしています。
 - CSVファイル
 - [Amazon Auroraによって生成された Apache Parquet ファイル](/migrate-aurora-to-tidb.md) 、Apache Hive、またはSnowflake
 
-TiDB Lightning は次のソースからデータを読み取ることができます。
+TiDB Lightning は次のソースからデータを読み取れます。
 
 - ローカル
 - [Amazon S3](/external-storage-uri.md#amazon-s3-uri-format)

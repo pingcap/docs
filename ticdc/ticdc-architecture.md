@@ -72,7 +72,7 @@ TiCDCの新しいアーキテクチャは、アーキテクチャをステート
 
 テーブル分割モードでは、以下の設定に注意してください。
 
-- [`scheduler.region-threshold`](/ticdc/ticdc-changefeed-config.md#region-threshold) : デフォルト値は`10000`です。テーブル内のリージョン数がこのしきい値を超えると、TiCDC はテーブルを分割します。リージョン数が比較的少ないが全体的な書き込みスループットが高いテーブルの場合は、この値を適切に減らすことができます。このパラメーターは`scheduler.region-count-per-span`以上である必要があります。そうでない場合、タスクが繰り返し再スケジュールされ、レプリケーションのレイテンシーが増加する可能性があります。
+- [`scheduler.region-threshold`](/ticdc/ticdc-changefeed-config.md#region-threshold) : デフォルト値は`10000`です。テーブル内のリージョン数がこのしきい値を超えると、TiCDC はテーブルを分割します。リージョン数が比較的少ないが全体的な書き込みスループットが高いテーブルの場合は、この値を適切に減らせます。このパラメーターは`scheduler.region-count-per-span`以上である必要があります。そうでない場合、タスクが繰り返し再スケジュールされ、レプリケーションのレイテンシーが増加する可能性があります。
 - [`scheduler.region-count-per-span`](/ticdc/ticdc-changefeed-config.md#region-count-per-span-new-in-v854) : デフォルト値は`100`です。変更フィードの初期化中に、TiCDC はこのパラメーターに従って分割条件を満たすテーブルを分割します。分割後、各サブテーブルには最大で`region-count-per-span`個のリージョンが含まれます。
 - [`scheduler.write-key-threshold`](/ticdc/ticdc-changefeed-config.md#write-key-threshold) : デフォルト値は`0` (無効) です。テーブルのシンク書き込みスループットがこのしきい値を超えると、TiCDC はテーブル分割をトリガーします。ほとんどの場合、このパラメーターは`0`に設定してください。
 
