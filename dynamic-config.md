@@ -290,7 +290,7 @@ Query OK, 0 rows affected (0.01 sec)
 | `schedule.enable-make-up-replica`                    | レプリカを自動的に補完する機能を有効にするかどうかを決定します                            |
 | `schedule.enable-remove-extra-replica`               | 余分なレプリカを削除する機能を有効にするかどうかを決定します                             |
 | `schedule.enable-location-replacement`               | 分離レベルチェックを有効にするかどうかを決定します                                  |
-| `schedule.enable-cross-table-merge`                  | テーブル間の結合を有効にするかどうかを決定します                                   |
+| `schedule.enable-cross-table-merge`                  | テーブル間のマージを有効にするかどうかを決定します                                   |
 | `schedule.enable-one-way-merge`                      | 一方向のマージを有効にします。これにより、隣接する次のリージョンとのマージのみが可能になります。           |
 | `schedule.region-score-formula-version`              | リージョンスコア計算式のバージョンを制御します                                    |
 | `schedule.scheduler-max-waiting-operator`            | 各スケジューラー内の待機オペレーターの数を制御します                                   |
