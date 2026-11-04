@@ -45,7 +45,7 @@ TiDB バージョン: 7.1.3
         - S3へのデータの並列書き込みやlz4圧縮アルゴリズムの採用など、REDOログのパフォーマンスを最適化します[#10176](https://github.com/pingcap/tiflow/issues/10176) [#10226](https://github.com/pingcap/tiflow/issues/10226) @[sdojjy](https://github.com/sdojjy)
         - 並列度を増やすことで、TiCDC がオブジェクトストレージにデータを複製する際のパフォーマンスが向上します。 [#10098](https://github.com/pingcap/tiflow/issues/10098) @[CharlesCheung96](https://github.com/CharlesCheung96)
         - TiCDC 増分スキャンによる上流 TiKV への影響を軽減 [#11390](https://github.com/tikv/tikv/issues/11390) @[hicqu](https://github.com/hicqu)
-        - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツフォーマット[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)作成をサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
+        - `sink-uri`構成で`content-compatible=true`を設定することにより、 TiCDC Canal-JSON コンテンツフォーマットを[公式Canal出力のコンテンツ形式と互換性がある](https://docs.pingcap.com/tidb/v6.5/ticdc-canal-json#compatibility-with-the-official-canal)ようにすることをサポートします。 [#10106](https://github.com/pingcap/tiflow/issues/10106) @[3AceShowHand](https://github.com/3AceShowHand)
 
     - TiDB Lightning
 
