@@ -136,7 +136,7 @@ Sqoopでは、 `--batch`各バッチで100個の`statement`文をコミットす
 
 ### TiDB の書き込み容量と読み取り容量の合計に制限はありますか? {#is-there-a-limit-for-the-total-write-and-read-capacity-in-tidb}
 
-読み取り容量の合計に制限はありません。TiDBサーバーを追加することで、読み取り容量を増やすことができます。書き込み容量にも、一般的に制限はありません。TiKVノードを追加することで、書き込み容量を増やすことができます。
+読み取り容量の合計に制限はありません。TiDBサーバーを追加することで、読み取り容量を増やせます。書き込み容量にも、一般的に制限はありません。TiKVノードを追加することで、書き込み容量を増やせます。
 
 ### `transaction too large`エラーメッセージが表示されます {#the-error-message-transaction-too-large-is-displayed}
 

@@ -93,7 +93,7 @@ Usage of ./bin/tidb-server:
 ### TiDB の列数と行サイズの制限は何ですか? {#what-are-the-limits-on-the-number-of-columns-and-row-size-in-tidb}
 
 - TiDB の列の最大数はデフォルトで 1017 に設定されています。この数は最大 4096 まで調整できます。
-- 1行あたりの最大サイズはデフォルトで6MBです。最大120MBまで増やすことができます。
+- 1行あたりの最大サイズはデフォルトで6MBです。最大120MBまで増やせます。
 
 詳細については[TiDB の制限](/tidb-limitations.md)を参照してください。
 

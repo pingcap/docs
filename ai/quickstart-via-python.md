@@ -8,7 +8,7 @@ aliases: ['/ja/tidb/stable/vector-search-get-started-using-python/','/ja/tidb/de
 
 このドキュメントでは、Python SDK を使用して TiDB で[ベクトル検索](/ai/guides/vector-search-overview.md)を開始する方法を説明します。手順に従って、TiDB で動作する最初の AI アプリケーションを構築します。
 
-このドキュメントに従うことで、以下のことを学ぶことができます。
+このドキュメントに従うことで、以下のことを学べます。
 
 - TiDB Python SDKを使用してTiDBに接続します。
 - 一般的な埋め込みモデルを使用してテキスト埋め込みを生成します。
@@ -104,7 +104,7 @@ client = TiDBClient.connect(
 </div>
 </SimpleTab>
 
-接続が完了すると、 `client`オブジェクトを使用して、テーブルの操作、データのクエリなどを行うことができます。
+接続が完了すると、 `client`オブジェクトを使用して、テーブルの操作、データのクエリなどを行えます。
 
 ## 埋め込み関数を作成する {#create-an-embedding-function}
 
@@ -162,7 +162,7 @@ class Chunk(TableModel):
 table = client.create_table(schema=Chunk, if_exists="overwrite")
 ```
 
-作成後は、 `table`オブジェクトを使用して、データの挿入、データの検索などを行うことができます。
+作成後は、 `table`オブジェクトを使用して、データの挿入、データの検索などを行えます。
 
 ## データを挿入する {#insert-data}
 

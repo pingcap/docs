@@ -74,7 +74,7 @@ db = TiDBClient.connect(
 </div>
 </SimpleTab>
 
-接続が完了すると、 `db`オブジェクトを使用して、テーブルの操作、データのクエリなどを行うことができます。
+接続が完了すると、 `db`オブジェクトを使用して、テーブルの操作、データのクエリなどを行えます。
 
 ## 接続文字列を使用して接続する {#connect-with-connection-string}
 
@@ -137,7 +137,7 @@ db = TiDBClient(db_engine=db_engine)
 
 ## 次のステップ {#next-steps}
 
-TiDBデータベースに接続後、以下のガイドを参照してデータの操作方法を学ぶことができます。
+TiDBデータベースに接続後、以下のガイドを参照してデータの操作方法を学べます。
 
 - [テーブルの操作](/ai/guides/tables.md): TiDB でテーブルを定義および管理する方法を学びます。
 - [ベクトル検索](/ai/guides/vector-search.md): ベクトル埋め込みを使用してセマンティック検索を実行します。

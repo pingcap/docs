@@ -156,7 +156,7 @@ v6.0.0より前では、 BRは[配置ルール](/placement-rules-in-sql.md)サ�
 
 ### `the entry too large, the max entry size is 6291456, the size of data is 7690800`というエラーメッセージが表示されて復元が失敗した場合は、どうすればよいですか？ {#what-should-i-do-if-the-restore-fails-with-the-error-message-the-entry-too-large-the-max-entry-size-is-6291456-the-size-of-data-is-7690800}
 
-`--ddl-batch-size`を`128`またはそれより小さい値に設定することで、バッチで作成されるテーブルの数を減らすことができます。
+`--ddl-batch-size`を`128`またはそれより小さい値に設定することで、バッチで作成されるテーブルの数を減らせます。
 
 BRを使用して[`--ddl-batch-size`](/br/br-batch-create-table.md#use-batch-create-table)の値が`1`より大きいバックアップデータを復元する場合、TiDB はテーブル作成の DDL ジョブを TiKV が管理する DDL ジョブキューに書き込みます。このとき、ジョブメッセージの最大値がデフォルトで`6 MB`であるため (この値を変更することは**推奨されません**。詳細については、 [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500)と[`raft-entry-max-size`](/tikv-configuration-file.md#raft-entry-max-size)を参照してください)、TiDB が一度に送信するすべてのテーブルスキーマの合計サイズは 6 MB を超えてはなりません。したがって、 `--ddl-batch-size`を過度に大きな値に設定すると、TiDB が一度にバッチで送信するテーブルのスキーマサイズが指定値を超え、 BR が`entry too large, the max entry size is 6291456, the size of data is 7690800`エラーを報告します。
 

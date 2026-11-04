@@ -72,7 +72,7 @@ Kafka Consumer タスクを作成する前に、以下を確認してくださ�
 
 **Result Viewing** ステップで、Kafka Consumer タスクを実行する **Warehouse** を選択します。
 
-タスクの開始後、Kafka メッセージを読み取り、それらを内部オブジェクトストレージ（テナント Stage）に保存します。ページには SQL の例が表示されます。`LIST @kafka_consumer/<task_name>/` を使用して生成されたオブジェクトを確認し、stage クエリを使用してメッセージ内容を読み取ることができます。
+タスクの開始後、Kafka メッセージを読み取り、それらを内部オブジェクトストレージ（テナント Stage）に保存します。ページには SQL の例が表示されます。`LIST @kafka_consumer/<task_name>/` を使用して生成されたオブジェクトを確認し、stage クエリを使用してメッセージ内容を読み取れます。
 
 ```sql
 -- List stage objects:
