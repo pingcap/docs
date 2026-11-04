@@ -39,9 +39,9 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 
 - Request QPS: すべてのTiFlashインスタンスによって受信されたコプロセッサーリクエストの数。`batch`はバッチリクエストの数です。`batch_cop`はバッチリクエスト内のコプロセッサーリクエストの数です。`cop`はコプロセッサーインターフェイスを介して直接送信されたコプロセッサーリクエストの数です。`cop_dag`はすべてのコプロセッサーリクエスト内の DAG リクエストの数です。`super_batch`はスーパーバッチ機能を有効にするためのリクエストの数です。
 - Executor QPS: すべてのTiFlashインスタンスが受信したリクエスト内の各タイプの DAG Executor の数。`table_scan`はテーブルスキャン Executor です。`selection`は選択 Executor です。`aggregation`は集約 Executor です。`top_n`は`TopN` Executor です。`limit`は制限 Executor です。
-- Request Duration: コプロセッサーリクエストを処理するすべてのTiFlashインスタンスの合計期間。合計期間は、コプロセッサーリクエストを受信してからリクエストへの応答が完了するまでの期間です。
+- Request Duration: コプロセッサーリクエストを処理するすべてのTiFlashインスタンスの合計所要時間。合計所要時間は、コプロセッサーリクエストを受信してからリクエストへの応答が完了するまでの時間です。
 - Error QPS: コプロセッサーリクエストを処理するすべてのTiFlashインスタンスのエラー数。`meet_lock`は読み取りデータがロックされていることを意味します。`region_not_found`はリージョンが存在しないことを意味します。`epoch_not_match`は読み取りリージョンエポックがローカルエポックと一致していないことを意味します。`kv_client_error`はTiKV との通信でエラーが返されたことを意味します。`internal_error`はTiFlashの内部システムエラーです。`other`はその他のタイプのエラーです。
-- Request Handle Duration：すべてのTiFlashインスタンスがコプロセッサーリクエストを処理する期間。処理時間は、コプロセッサーリクエストの実行開始から完了までです。
+- Request Handle Duration：すべてのTiFlashインスタンスがコプロセッサーリクエストを処理する所要時間。処理時間は、コプロセッサーリクエストの実行開始から完了までです。
 - Response Bytes/Seconds: すべてのTiFlashインスタンスからの応答の合計バイト数。
 - Cop task memory usage: コプロセッサーリクエストを処理するすべてのTiFlashインスタンスの合計メモリ使用量。
 - Handling Request Number: コプロセッサーリクエストを処理しているすべてのTiFlashインスタンスの総数。リクエストの分類は、Request QPSと同じです。
@@ -95,7 +95,7 @@ TiFlash には、 **TiFlash-Summary** 、 **TiFlash-Proxy-Summary** 、 **TiFlas
 - Write Stall Duration: インスタンスごとの書き込みおよびリージョンデータの削除 (範囲の削除) の停止期間。
 - Write Throughput By Instance：インスタンスごとの書き込みスループット。Raft書き込みコマンドとRaftスナップショットを適用した場合のスループットも含まれます。
 - Write Command OPS By Instance: インスタンスによって受信されたさまざまな種類のコマンドの合計数。
-    - `write block` 、データログがRaftを通じて同期されることを意味します。
+    - `write block`は、データログがRaftを通じて同期されることを意味します。
     - `delete_range` 、一部のリージョンがこのインスタンスから削除されるか、このインスタンスに移動されることを意味します。
     - `ingest` 、いくつかのリージョンスナップショットがこのインスタンスに適用されていることを意味します。
 
