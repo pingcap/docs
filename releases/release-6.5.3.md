@@ -85,7 +85,7 @@ TiDB バージョン: 6.5.3
     - `batch cop`実行中のスキャン詳細情報が不正確になる可能性がある問題を修正[#41582](https://github.com/pingcap/tidb/issues/41582) @[you06](https://github.com/you06)
     - ステイル読み取りと`PREPARE`文が同時に使用されている場合にTiDBがデータ更新を読み取れない問題を修正[#43044](https://github.com/pingcap/tidb/issues/43044) @[you06](https://github.com/you06)
     - `LOAD DATA`文を実行すると`assertion failed`エラーが誤って報告される可能性がある問題を修正しました [#43849](https://github.com/pingcap/tidb/issues/43849) @[you06](https://github.com/you06)
-    - ステイル読み取り の使用中に`region data not ready`エラーが発生した場合にコプロセッサーがリーダーにフォールバックできない問題を修正しました。 [#43365](https://github.com/pingcap/tidb/issues/43365) @[you06](https://github.com/you06)
+    - ステイル読み取りの使用中に`region data not ready`エラーが発生した場合にコプロセッサーがリーダーにフォールバックできない問題を修正しました。 [#43365](https://github.com/pingcap/tidb/issues/43365) @[you06](https://github.com/you06)
 
 - TiKV
 
