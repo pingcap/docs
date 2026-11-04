@@ -59,11 +59,11 @@ tiup demo bookshop prepare -U <username> -H <endpoint> -P 4000 -p <password>
 
 例えば、以下のコマンドを実行すると、次のものが生成されます。
 
-- `--users`パラメーターを介して取得した 200,000 行のユーザー情報
-- `--books`パラメーターを介して50万行の書籍情報を取得
+- `--users`パラメーターによる 200,000 行のユーザー情報
+- `--books`パラメーターによる50万行の書籍情報
 - `--authors`パラメーターによる 100,000 行の著者情報
 - `--ratings`パラメーターによる 1,000,000 行の評価レコード
-- `--orders`パラメーターを介して1,000,000行の注文レコードを取得
+- `--orders`パラメーターによる1,000,000行の注文レコード
 
 ```shell
 tiup demo bookshop prepare --users=200000 --books=500000 --authors=100000 --ratings=1000000 --orders=1000000 --drop-tables
