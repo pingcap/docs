@@ -150,7 +150,7 @@ ALTER TABLE <database_name>.<table_name> REFRESH CACHE;
 
 ## Iceberg テーブルに書き込む {#write-to-iceberg-tables}
 
-書き込み操作をサポートするカタログでは、Iceberg テーブルを作成して書き込むことができます。
+書き込み操作をサポートするカタログでは、Iceberg テーブルを作成して書き込めます。
 
 ### テーブルを作成する {#create-a-table}
 
