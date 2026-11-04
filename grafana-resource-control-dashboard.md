@@ -15,7 +15,7 @@ TiDBはフロー制御に[トークンバケットアルゴリズム](https://en
 
 このドキュメントでは、リソースコントロールダッシュボードに表示されるいくつかの主要な監視メトリックについて説明します。
 
-## Metrics about Request Unit {#metrics-about-request-unit}
+## リクエストユニットに関する指標 {#metrics-about-request-unit}
 
 - RU: 各リソースグループの[リクエストユニット（RU）](/tidb-resource-control-ru-groups.md#what-is-request-unit-ru)の消費情報。リアルタイムで計算されます。`total`は、すべてのリソースグループで消費されるリクエストユニットの合計です。各リソースグループのリクエストユニット消費量は、読み取り消費量（読み取りリクエストユニット）と書き込み消費量（書き込みリクエストユニット）の合計と等しくなります。
 - RU Per Query: 各SQL文が1秒あたりに消費するリクエストユニットの平均数。上記のRUメトリックを1秒あたりに実行されるSQL文の数で割ることで算出されます。
@@ -26,7 +26,7 @@ TiDBはフロー制御に[トークンバケットアルゴリズム](https://en
 - Available RU: 各リソースグループのRUトークンバケット内の利用可能なトークン数。この値が`0`の場合、このリソースグループは`RU_PER_SEC`の割合でトークンを消費し、レート制限状態にあるとみなされます。
 - Query Max Duration: リソースグループに関する最大クエリ期間。
 
-## Metrics about resources {#metrics-about-resources}
+## リソースに関する指標 {#metrics-about-resources}
 
 - KV Request Count: 各リソースグループに対するKVリクエストの数（1秒あたり）。リクエストは読み取りと書き込みの2種類に分類されます。`total`は 、すべてのリソースグループのKVリクエストの合計です。
 - KV Request Count Per Query: 各SQL文による1秒あたりの読み取りおよび書き込みKVリクエストの平均数。上記のKVリクエスト数メトリックを1秒あたりに実行されるSQL文の数で割ることで算出されます。
@@ -37,7 +37,7 @@ TiDBはフロー制御に[トークンバケットアルゴリズム](https://en
 - KV CPU Time: 各リソースグループで消費された KVレイヤーCPU 時間 (リアルタイムで計算)。`total`は 、すべてのリソースグループで消費された KVレイヤーCPU 時間の合計です。
 - SQL CPU Time: 各リソースグループで消費された SQLレイヤーのCPU 時間 (リアルタイムで計算)。`total`は 、すべてのリソースグループで消費された SQLレイヤーのCPU 時間の合計です。
 
-## Metrics about Resource Controller Client {#metrics-about-resource-controller-client}
+## リソースコントローラークライアントに関する指標 {#metrics-about-resource-controller-client}
 
 - Active Resource Groups: リアルタイムで計算された、各リソースコントローラークライアントのリソースグループの数。
 - Total KV Request Count: 各リソースコントローラークライアントの KV リクエストの数。リアルタイムでリソースグループごとに計算されます。`total`は 、すべてのリソースコントローラークライアントの KV リクエストの合計です。
