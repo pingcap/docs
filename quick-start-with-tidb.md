@@ -493,7 +493,7 @@ TiDBクラスタの最小トポロジーは、以下のインスタンスで構�
 アプリケーション開発者で、TiDBを使用してアプリケーションを迅速に構築したい場合は、以下の手順に従ってください。
 
 - [開発者ガイドの概要](https://docs.pingcap.com/developer/)
-- [TiDB Cloud Starterインスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
+- [{{{ .starter }}}インスタンスを作成する](/develop/dev-guide-build-cluster-in-cloud.md)
 - [応用例](/develop/dev-guide-sample-application-java-jdbc.md)
 
 TiFlashを使った分析ソリューションをお探しの場合は、以下の手順に従ってください。

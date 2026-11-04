@@ -119,7 +119,7 @@ SET SESSION tidb_opt_fix_control = '44262:ON,44389:ON';
 
 > **Note:**
 >
-> これは[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)のみ利用可能です。
+> これは[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)のみ利用可能です。
 
 - デフォルト値: `ON`
 - 可能な値: `ON`、`OFF`

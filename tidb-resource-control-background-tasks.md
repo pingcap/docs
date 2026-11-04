@@ -7,7 +7,7 @@ summary: リソース制御を通じてバックグラウンドタスクを制�
 
 > **Note:**
 >
-> この機能は、[TiDB Cloud Starter](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[TiDB Cloud Essential](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
+> この機能は、[{{{ .starter }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#starter)および[{{{ .essential }}}](https://docs.pingcap.com/tidbcloud/select-cluster-tier#essential)クラスターでは利用できません。
 
 データのバックアップや自動統計収集などのバックグラウンドタスクは、優先度が低いにもかかわらず、多くのリソースを消費します。これらのタスクは通常、定期的または不定期に実行されます。実行中は多くのリソースを消費するため、オンラインの高優先度タスクのパフォーマンスに影響を与えます。
 
