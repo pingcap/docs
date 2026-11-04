@@ -28,7 +28,7 @@ Load Base Splitによって分割されたリージョンは、すぐにはマ�
 
 ## 使用法 {#usage}
 
-ロード ベース分割機能は現在、次のパラメータによって制御されています。
+ロードベース分割機能は現在、次のパラメータによって制御されています。
 
 - [`split.qps-threshold`](/tikv-configuration-file.md#qps-threshold) :リージョンがホットスポットと判断されるQPSのしきい値。4GB [`region-split-size`](/tikv-configuration-file.md#region-split-size)の場合はデフォルト値は1秒あたり`3000` 、それ以外の場合はデフォルト値は`7000`です。
 - [`split.byte-threshold`](/tikv-configuration-file.md#byte-threshold-new-in-v50) : (v5.0で導入)リージョンがホットスポットとして識別されるトラフィックしきい値。単位はバイトです`region-split-size`が4GB未満の場合はデフォルト値は30MiB/秒、それ以外の場合は100MiB/秒です。

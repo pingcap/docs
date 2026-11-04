@@ -314,7 +314,7 @@ data-encryption-method = "aes128-ctr"
 data-key-rotation-period = "168h" # 7 days
 ```
 
-または、 TiUPクラスター テンプレートに次の内容を追加します。
+または、 TiUPクラスターテンプレートに次の内容を追加します。
 
 ```
 server_configs:
@@ -335,7 +335,7 @@ region = "us-west-2"
 endpoint = "https://kms.us-west-2.amazonaws.com"
 ```
 
-または、 TiUPクラスター テンプレートに次の内容を追加します。
+または、 TiUPクラスターテンプレートに次の内容を追加します。
 
 ```
 server_configs:
@@ -356,7 +356,7 @@ type = "file"
 path = "/path/to/key/file"
 ```
 
-または、 TiUPクラスター テンプレートに次の内容を追加します。
+または、 TiUPクラスターテンプレートに次の内容を追加します。
 
 ```
 server_configs:
@@ -385,7 +385,7 @@ key-id = "0987dcba-09fe-87dc-65ba-ab0987654321"
 region = "us-west-2"
 ```
 
-または、 TiUPクラスター テンプレートに次の内容を追加します。
+または、 TiUPクラスターテンプレートに次の内容を追加します。
 
 ```
 server_configs:

@@ -56,7 +56,7 @@ show config where type='tikv' and name='log.level'
 > - TiKV設定項目を動的に変更すると、TiKV設定ファイルは自動的に更新されます。ただし、 `tiup edit-config`を実行して対応する設定項目も変更する必要があります。そうしないと、 `upgrade`や`reload`などの操作によって変更内容が上書きされてしまいます。設定項目の変更方法の詳細については、 [TiUPを使用して構成を変更する](/maintain-tidb-using-tiup.md#modify-the-configuration)を参照してください。
 > - `tiup edit-config`を実行した後、 `tiup reload`を実行する必要はありません。
 
-`set config`ステートメントを使用すると、インスタンス アドレスまたはコンポーネントタイプに応じて、単一のインスタンスの構成またはすべてのインスタンスの構成を変更できます。
+`set config`ステートメントを使用すると、インスタンスアドレスまたはコンポーネントタイプに応じて、単一のインスタンスの構成またはすべてのインスタンスの構成を変更できます。
 
 - すべての TiKV インスタンスの構成を変更します。
 
@@ -224,7 +224,7 @@ show warnings;
 | storage.flow-control.hard-pending-compaction-bytes-limit                                | フロー制御メカニズムがすべての書き込みリクエストを拒否するトリガーとなる、kvDB保留コンパクションバイトのしきい値                                                                                         |
 | `storage.scheduler-worker-pool-size`                      | スケジューラスレッドプール内のスレッド数                                                                                                                       |
 | `import.num-threads`                                      | 復元またはインポート RPC リクエストを処理するスレッドの数 (動的な変更は v8.1.2 以降でサポートされます)                                                                                   |
-| `backup.num-threads`                                      | バックアップ スレッドの数 (v4.0.3 以降でサポート)                                                                                                             |
+| `backup.num-threads`                                      | バックアップスレッドの数 (v4.0.3 以降でサポート)                                                                                                             |
 | `split.qps-threshold`                                     | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのQPSが10秒連続で`qps-threshold`を超える場合、このリージョンは分割される必要があります。                                    |
 | `split.byte-threshold`                                    | リージョンで`load-base-split`を実行するためのしきい値。リージョンの読み取りリクエストのトラフィックが10秒間連続して`byte-threshold`を超える場合、このリージョンは分割されます。                                   |
 | `split.region-cpu-overload-threshold-ratio`               | リージョンで`load-base-split`を実行するためのしきい値。リージョンの統合読み取りプールのCPU使用率が10秒連続で`region-cpu-overload-threshold-ratio`を超えた場合、このリージョンは分割されます。(v6.2.0以降でサポート) |

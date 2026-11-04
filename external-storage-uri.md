@@ -26,7 +26,7 @@ URI の基本的な形式は次のとおりです。
     - `session-token` : 一時セッショントークンを指定します。BRはv7.6.0以降でこのパラメータをサポートしています。
     - `use-accelerate-endpoint` : Amazon S3 の高速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
     - `endpoint` : S3 互換サービスのカスタムエンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
-    - `force-path-style` : 仮想ホスト スタイルのアクセスではなく、パス スタイルのアクセスを使用します (デフォルトは`true` )。
+    - `force-path-style` : 仮想ホストスタイルのアクセスではなく、パススタイルのアクセスを使用します (デフォルトは`true` )。
     - `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
     - `sse` : アップロードされたオブジェクトの暗号化に使用されるサーバー側暗号化アルゴリズムを指定します (値のオプション: 空、 `AES256` 、または`aws:kms` )。
     - `sse-kms-key-id` : `sse` `aws:kms`に設定されている場合は KMS ID を指定します。
@@ -62,13 +62,13 @@ tiup cdc:v7.5.0 cli changefeed create \
 
     - `secret-access-key` : 秘密アクセスキーを指定します。
 
-    - `session-token` : 一時セッション トークンを指定します。
+    - `session-token` : 一時セッショントークンを指定します。
 
     - `use-accelerate-endpoint` : Amazon S3 の高速エンドポイントを使用するかどうかを指定します (デフォルトは`false` )。
 
     - `endpoint` : S3 互換サービスのカスタムエンドポイントの URL を指定します (例: `<https://s3.example.com/>` )。
 
-    - `force-path-style` : 仮想ホスト スタイルのアクセスではなく、パス スタイルのアクセスを使用します (デフォルトは`true` )。
+    - `force-path-style` : 仮想ホストスタイルのアクセスではなく、パススタイルのアクセスを使用します (デフォルトは`true` )。
 
     - `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します (たとえば、 `STANDARD`または`STANDARD_IA` )。
 
@@ -102,7 +102,7 @@ s3://external/testfolder?access-key=${access-key}&secret-access-key=${secret-acc
 - `host` : `bucket name`
 - `parameters` :
 
-    - `credentials-file` : 移行ツール ノード上の資格情報 JSON ファイルへのパスを指定します。
+    - `credentials-file` : 移行ツールノード上の資格情報 JSON ファイルへのパスを指定します。
     - `storage-class` : アップロードされたオブジェクトのストレージクラスを指定します（例： `STANDARD`または`COLDLINE` ）
     - `predefined-acl` : アップロードされたオブジェクトの定義済みACLを指定します（たとえば、 `private`または`project-private` ）
 

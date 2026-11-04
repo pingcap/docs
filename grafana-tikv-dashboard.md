@@ -212,7 +212,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 - Scheduler stage total：コミットコマンド実行時の、各ステージにおける1秒あたりのコマンド数。短時間で多くのエラーが発生するべきではありません。
 - Scheduler command duration: コミットコマンドの実行に要する時間。 `1s`未満である必要があります。
-- Scheduler latch wait duration: コミット コマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
+- Scheduler latch wait duration: コミットコマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
 - Scheduler keys read: コミットコマンドによって読み取られたキーの数
 - Scheduler keys written: コミットコマンドによって書き込まれたキーの数
 - Scheduler scan details: commit コマンド実行時に各 CF のキースキャンの詳細を示します。
@@ -231,14 +231,14 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Scheduler keys written: `pessimistic_rollback`コマンドによって書き込まれたキーの数
 - Scheduler scan details: `pessimistic_rollback`コマンドを実行する際の各 CF のキーのスキャン詳細。
 - Scheduler scan details [lock]: `pessimistic_rollback`コマンド実行時のロック CF のキースキャンの詳細
-- Scheduler scan details [write]: `pessimistic_rollback`コマンド実行時の書き込み CF のキー スキャン詳細
-- Scheduler scan details [default]: `pessimistic_rollback`コマンド実行時のデフォルト CF のキー スキャン詳細
+- Scheduler scan details [write]: `pessimistic_rollback`コマンド実行時の書き込み CF のキースキャン詳細
+- Scheduler scan details [default]: `pessimistic_rollback`コマンド実行時のデフォルト CF のキースキャン詳細
 
 ### Scheduler - prewrite {#scheduler---prewrite}
 
 - Scheduler stage total：プリライトコマンド実行時の、各ステージにおける1秒あたりのコマンド数。短時間で多くのエラーが発生するべきではありません。
 - Scheduler command duration: プリライトコマンドの実行に要する時間。 `1s`未満である必要があります。
-- Scheduler latch wait duration: プリライト コマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
+- Scheduler latch wait duration: プリライトコマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
 - Scheduler keys read：プリライトコマンドによって読み取られたキーの数
 - Scheduler keys written：プリライトコマンドによって書き込まれたキーの数
 - Scheduler scan details：プリライトコマンド実行時の各CFのキースキャン詳細。
@@ -250,7 +250,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 
 - Scheduler stage total：ロールバックコマンド実行時の、各ステージにおける1秒あたりのコマンド数。短時間で多くのエラーが発生するべきではありません。
 - Scheduler command duration: ロールバックコマンドの実行に要する時間。 `1s`未満である必要があります。
-- Scheduler latch wait duration: ロールバック コマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
+- Scheduler latch wait duration: ロールバックコマンドの実行時にラッチによって発生する待機時間。 `1s`より小さくなければなりません。
 - Scheduler keys read：ロールバックコマンドによって読み取られたキーの数
 - Scheduler keys written: ロールバックコマンドによって書き込まれたキーの数
 - Scheduler scan details: ロールバックコマンド実行時に各CFのキースキャンの詳細を示します。
@@ -366,7 +366,7 @@ TiKVコンポーネントのステータス概要は、主要な指標が表示�
 - Flow
     - 書き込み: Raft Engineの書き込みトラフィック
     - リライト追加: リライト追加ログのトラフィック
-    - リライト リライト: リライトのトラフィック リライトログ
+    - リライトリライト: リライトのトラフィックリライトログ
 - Write Duration Breakdown (99%)
     - wal: Raft Engine WAL の書き込みレイテンシー
     - 待機: 書き始める前の待ち時間

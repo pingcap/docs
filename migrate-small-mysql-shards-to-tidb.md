@@ -18,7 +18,7 @@ summary: シャードの小さなデータセットを MySQL から TiDB に移�
 | store_01 | sale_01, sale_02 |
 | store_02 | sale_01, sale_02 |
 
-ターゲット スキーマとテーブル:
+ターゲットスキーマとテーブル:
 
 | スキーマ | テーブル |
 | :--- | :--- |
@@ -168,7 +168,7 @@ block-allow-list:           # filter or only migrate all operations of some data
 
 上記の例は、移行タスクを実行するための最小限の構成です。詳細については、 [DM 高度なタスク設定ファイル](/dm/task-configuration-file-full.md)を参照してください。
 
-タスク ファイル内の`routes` 、およびその他`filters`構成の詳細については、次のドキュメントを参照してください。
+タスクファイル内の`routes` 、およびその他`filters`構成の詳細については、次のドキュメントを参照してください。
 
 - [テーブルルーティング](/dm/dm-table-routing.md)
 - [ブロックと許可のテーブルリスト](/dm/dm-block-allow-table-lists.md)

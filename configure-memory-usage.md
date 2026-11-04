@@ -66,7 +66,7 @@ tidb-server インスタンスのメモリ使用量が総メモリの一定割�
 
 ## 過剰なメモリ使用量のアラームをトリガーする {#trigger-the-alarm-of-excessive-memory-usage}
 
-tidb-server インスタンスのメモリ使用量がメモリしきい値 (デフォルトでは合計メモリの 70%) を超え、次のいずれかの条件が満たされると、TiDB は関連するステータスファイルを記録し、アラーム ログを出力。
+tidb-server インスタンスのメモリ使用量がメモリしきい値 (デフォルトでは合計メモリの 70%) を超え、次のいずれかの条件が満たされると、TiDB は関連するステータスファイルを記録し、アラームログを出力。
 
 - メモリ使用量がメモリしきい値を超えるのは初めてです。
 - メモリ使用量がメモリしきい値を超えており、前回のアラームから 60秒以上経過しています。
@@ -82,7 +82,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
     - ゴルーチンスタック情報
     - ヒープメモリの使用状況
 
-- TiDB は、キーワード`tidb-server has the risk of OOM`と次のメモリ関連のシステム変数の値を含むアラーム ログを出力。
+- TiDB は、キーワード`tidb-server has the risk of OOM`と次のメモリ関連のシステム変数の値を含むアラームログを出力。
 
     - [`tidb_mem_oom_action`](/system-variables.md#tidb_mem_oom_action-new-in-v610)
     - [`tidb_mem_quota_query`](/system-variables.md#tidb_mem_quota_query)
@@ -110,7 +110,7 @@ tidb-server インスタンスのメモリ使用量がメモリしきい値 (デ
     [2022/10/11 16:39:02.281 +08:00] [WARN] [memoryusagealarm.go:212] ["tidb-server has the risk of OOM because of memory usage exceeds alarm ratio. Running SQLs and heap profile will be recorded in record path"] ["is tidb_server_memory_limit set"=false] ["system memory total"=33682427904] ["system memory usage"=22120655360] ["tidb-server memory usage"=21468556992] [memory-usage-alarm-ratio=0.85] ["record path"=/tiup/deploy/tidb-4000/log/oom_record]
     ```
 
-    上記のサンプル ログファイルのフィールドは次のように説明されています。
+    上記のサンプルログファイルのフィールドは次のように説明されています。
 
     - `is tidb_server_memory_limit set`は [`tidb_server_memory_limit`](/system-variables.md#tidb_server_memory_limit-new-in-v640)が設定されているかどうかを示します。
     - `system memory total`は現在のシステムの合計メモリを示します。

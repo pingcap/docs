@@ -9,7 +9,7 @@ summary: TiDB クラスターの監視サービスをデプロイする方法を
 
 ## PrometheusとGrafanaをデプロイ {#deploy-prometheus-and-grafana}
 
-TiDB クラスター トポロジが次のようになっていると仮定します。
+TiDB クラスタートポロジが次のようになっていると仮定します。
 
 | 名前   | ホストIP           | サービス                              |
 | :--- | :-------------- | :-------------------------------- |
@@ -103,7 +103,7 @@ scrape_configs:
 ...
 ```
 
-TiDB、PD、TiKV などのコンポーネントのアラーム ルールを有効にするには、対応するコンポーネントのアラーム ルール ファイルを個別にダウンロードし、アラーム ルール ファイルの構成を Prometheus 設定ファイルに追加します。
+TiDB、PD、TiKV などのコンポーネントのアラームルールを有効にするには、対応するコンポーネントのアラームルールファイルを個別にダウンロードし、アラームルールファイルの構成を Prometheus 設定ファイルに追加します。
 
 - TiDB: [`tidb.rules.yml`](https://github.com/pingcap/tidb/blob/release-8.5/pkg/metrics/alertmanager/tidb.rules.yml)
 - PD: [`pd.rules.yml`](https://github.com/tikv/pd/blob/release-8.5/metrics/alertmanager/pd.rules.yml)
@@ -210,7 +210,7 @@ Grafana サービスを開始します。
     >
     > **Change Password**手順では、 **Skip**を選択できます。
 
-2. Grafana サイドバー メニューで、**Configuration**内の**データソース**をクリックします。
+2. Grafana サイドバーメニューで、**Configuration**内の**データソース**をクリックします。
 
 3. **データソースの追加**をクリックします。
 
@@ -227,9 +227,9 @@ Grafana サービスを開始します。
 
 PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッシュボードをインポートするには、それぞれ次の手順を実行します。
 
-1. Grafana ロゴをクリックしてサイドバー メニューを開きます。
+1. Grafana ロゴをクリックしてサイドバーメニューを開きます。
 
-2. サイドバー メニューで、 **ダッシュボード** -> **インポート**をクリックして、 **ダッシュボードのインポート**ウィンドウを開きます。
+2. サイドバーメニューで、 **ダッシュボード** -> **インポート**をクリックして、 **ダッシュボードのインポート**ウィンドウを開きます。
 
 3. **Upload .json File**をクリックして JSON ファイルをアップロードします ( [pingcap/tidb](https://github.com/pingcap/tidb/tree/release-8.5/pkg/metrics/grafana) [tikv/tikv](https://github.com/tikv/tikv/tree/release-8.5/metrics/grafana)、および[tikv/pd](https://github.com/tikv/pd/tree/release-8.5/metrics/grafana)から TiDB Grafana 設定ファイルをダウンロードします)。
 
@@ -249,7 +249,7 @@ PDサーバー、TiKVサーバー、および TiDBサーバーの Grafana ダッ
 
 ![view dashboard](/media/view-dashboard.png)
 
-クラスター コンポーネントの次のメトリックを取得できます。
+クラスターコンポーネントの次のメトリックを取得できます。
 
 - **TiDBサーバー:**
 

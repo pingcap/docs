@@ -1,6 +1,6 @@
 ---
 title: Minimal Deployment Topology
-summary: TiDB クラスターの最小限のデプロイメント トポロジについて学習します。
+summary: TiDB クラスターの最小限のデプロイメントトポロジについて学習します。
 ---
 
 # 最小限の展開トポロジ {#minimal-deployment-topology}
@@ -25,9 +25,9 @@ summary: TiDB クラスターの最小限のデプロイメント トポロジ�
 - [最小トポロジーのシンプルなテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/simple-mini.yaml)
 - [最小トポロジーの複雑なテンプレート](https://github.com/pingcap/docs/blob/master/config-templates/complex-mini.yaml)
 
-上記の TiDB クラスター トポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
+上記の TiDB クラスタートポロジファイルの設定項目の詳細については、 [TiUPを使用して TiDB をデプロイするためのトポロジ設定ファイル](/tiup/tiup-cluster-topology-reference.md)を参照してください。
 
 > **Note:**
 >
 > - 設定ファイルに`tidb`ユーザーを手動で作成する必要はありません。TiUP クラスターコンポーネントは、ターゲットマシンに`tidb`ユーザーを自動的に作成します。ユーザーをカスタマイズすることも、制御マシンと同じユーザーを維持することもできます。
-> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホーム ディレクトリにデプロイされます。
+> - デプロイメントディレクトリを相対パスとして構成すると、クラスターはユーザーのホームディレクトリにデプロイされます。

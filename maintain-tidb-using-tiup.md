@@ -103,7 +103,7 @@ tiup cluster display ${cluster-name}
 
 ### 例 {#example}
 
-tidb-server でトランザクション サイズ制限パラメータ ( [パフォーマンス](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)モジュールの`txn-total-size-limit` ) を`1G`に設定する場合は、次のように設定を編集します。
+tidb-server でトランザクションサイズ制限パラメータ ( [パフォーマンス](https://github.com/pingcap/tidb/blob/release-8.5/pkg/config/config.toml.example)モジュールの`txn-total-size-limit` ) を`1G`に設定する場合は、次のように設定を編集します。
 
 ```
 server_configs:
@@ -142,7 +142,7 @@ Global Flags:
   -y, --yes               Skip all confirmations and assumes 'yes'
 ```
 
-TiDB ホットフィックス パッケージが`/tmp/tidb-hotfix.tar.gz`にあり、クラスター内のすべての TiDB パッケージを置き換える場合は、次のコマンドを実行します。
+TiDB ホットフィックスパッケージが`/tmp/tidb-hotfix.tar.gz`にあり、クラスター内のすべての TiDB パッケージを置き換える場合は、次のコマンドを実行します。
 
 ```bash
 tiup cluster patch test-cluster /tmp/tidb-hotfix.tar.gz -R tidb

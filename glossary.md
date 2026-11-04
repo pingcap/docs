@@ -193,7 +193,7 @@ Raftグループ（ [ピア](#regionpeerraft-group)構成）では、Leader、Fo
 
 ### 長期サポート（LTS） {#long-term-support-lts}
 
-長期サポート (LTS) とは、長期間にわたって徹底的にテストおよびメンテナンスされるソフトウェア バージョンを指します。詳細については、 [TiDB バージョン管理](/releases/versioning.md)を参照してください。
+長期サポート (LTS) とは、長期間にわたって徹底的にテストおよびメンテナンスされるソフトウェアバージョンを指します。詳細については、 [TiDB バージョン管理](/releases/versioning.md)を参照してください。
 
 ## <a id="M" class="letter" href="#M">M</a> {#m}
 
@@ -264,7 +264,7 @@ PD Control (pd-ctl) は、TiDB クラスタ内の Placement Driver (PD) と対�
 
 ### Placement Driver（PD） {#placement-driver-pd}
 
-Placement Driver(PD) は、メタデータの保存、トランザクション タイムスタンプの[タイムスタンプオラクル（TSO）](/tso.md) 、TiKV 上でのデータ配置の調整、および[TiDB Dashboard](/dashboard/dashboard-overview.md)実行を担当する[TiDBアーキテクチャ](/tidb-architecture.md#placement-driver-pd-server)の中核コンポーネントです。詳細については、 [TiDBスケジューリング](/tidb-scheduling.md)を参照してください。
+Placement Driver(PD) は、メタデータの保存、トランザクションタイムスタンプの[タイムスタンプオラクル（TSO）](/tso.md) 、TiKV 上でのデータ配置の調整、および[TiDB Dashboard](/dashboard/dashboard-overview.md)実行を担当する[TiDBアーキテクチャ](/tidb-architecture.md#placement-driver-pd-server)の中核コンポーネントです。詳細については、 [TiDBスケジューリング](/tidb-scheduling.md)を参照してください。
 
 ### 配置ルール（Placement Rules） {#placement-rules}
 
@@ -377,7 +377,7 @@ TiDB Lightningの概念と用語の詳細については、 [TiDB Lightning用�
 
 ### TiFlash {#tiflash}
 
-[TiFlash](/tiflash/tiflash-overview.md)は、TiDB の HTAPアーキテクチャの重要なコンポーネントです。これは、強力な一貫性と優れた分離性の両方を提供する TiKV の列指向拡張です。TiFlashは、 **Raft Learnerプロトコル**を使用して TiKV からデータを非同期的に複製することで、列指向レプリカを維持します。読み取りに関しては、 **Raftコンセンサス インデックス**と**MVCC (マルチ バージョン同時実行制御)**を活用して、**スナップショット分離の**一貫性を実現します。このアーキテクチャは、HTAP ワークロードにおける分離と同期の課題に効果的に対処し、リアルタイムのデータ一貫性を維持しながら、効率的な分析クエリを可能にします。
+[TiFlash](/tiflash/tiflash-overview.md)は、TiDB の HTAPアーキテクチャの重要なコンポーネントです。これは、強力な一貫性と優れた分離性の両方を提供する TiKV の列指向拡張です。TiFlashは、 **Raft Learnerプロトコル**を使用して TiKV からデータを非同期的に複製することで、列指向レプリカを維持します。読み取りに関しては、 **Raftコンセンサスインデックス**と**MVCC (マルチバージョン同時実行制御)**を活用して、**スナップショット分離の**一貫性を実現します。このアーキテクチャは、HTAP ワークロードにおける分離と同期の課題に効果的に対処し、リアルタイムのデータ一貫性を維持しながら、効率的な分析クエリを可能にします。
 
 ### TiKV MVCC インメモリエンジン (IME) {#tikv-mvcc-in-memory-engine-ime}
 

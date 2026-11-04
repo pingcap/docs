@@ -11,7 +11,7 @@ Grafanaダッシュボードは、Overview、PD、TiDB、TiKV、Node_exporter、
 
 PDダッシュボードでは、コンポーネントのPDステータスの概要と主要な指標を確認できます。このドキュメントでは、これらの主要な指標について詳しく説明します。
 
-PD ダッシュボード メトリック項目の説明は次のとおりです。
+PD ダッシュボードメトリック項目の説明は次のとおりです。
 
 - PD role: 現在のPDインスタンスのロール
 - Storage capacity: この TiDB クラスターの合計ストレージ容量
@@ -112,8 +112,8 @@ PD ダッシュボード メトリック項目の説明は次のとおりです�
 
 ## gRPC {#grpc}
 
-- Completed commands rate: gRPC コマンドが完了するコマンド タイプごとの率
-- 99% Completed commands duration: gRPC コマンドが完了するコマンド タイプごとの所要時間 (P99)
+- Completed commands rate: gRPC コマンドが完了するコマンドタイプごとの率
+- 99% Completed commands duration: gRPC コマンドが完了するコマンドタイプごとの所要時間 (P99)
 
 ![PD Dashboard - gRPC metrics](/media/pd-dashboard-grpc-v2.png)
 

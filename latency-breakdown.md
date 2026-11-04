@@ -73,7 +73,7 @@ e2e duration =
 
 ## クエリを読む {#read-queries}
 
-読み取りクエリにはプロセス フォームが 1つだけあります。
+読み取りクエリにはプロセスフォームが 1つだけあります。
 
 ### PointGet {#point-get}
 
@@ -104,7 +104,7 @@ tidb_session_execute_duration_seconds{type="general"} =
     read value duration
 ```
 
-`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}`はPDから[TSO (タイムスタンプ オラクル)](/tso.md)を取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
+`pd_client_cmd_handle_cmds_duration_seconds{type="wait"}`はPDから[TSO (タイムスタンプオラクル)](/tso.md)を取得するのに要した時間を記録します。クラスター化プライマリインデックスを使用した自動コミットトランザクションモード、またはスナップショットからの読み取りの場合、値は0になります。
 
 `read handle duration`と`read value duration`は次のように計算されます。
 
@@ -317,7 +317,7 @@ Diagram(
 
 - 実行フェーズ: 変更を実行し、TiDB のメモリに書き込みます。
 - ロックフェーズ: 実行結果に対して悲観的ロックを取得します。
-- コミットフェーズ: 2 フェーズコミット プロトコル (2PC) を使用してトランザクションをコミットします。
+- コミットフェーズ: 2 フェーズコミットプロトコル (2PC) を使用してトランザクションをコミットします。
 
 実行フェーズでは、TiDBはメモリ内のデータを操作します。主なレイテンシーは必要なデータの読み取りに起因します。更新クエリと削除クエリの場合、TiDBはまずTiKVからデータを読み取り、次にメモリ内の行を更新または削除します。
 
@@ -522,7 +522,7 @@ Commit_time =
 
 コミット期間は、次の4つの指標に分類できます。
 
-- `Get_latest_ts_time`は、非同期コミットまたはシングル フェーズコミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
+- `Get_latest_ts_time`は、非同期コミットまたはシングルフェーズコミット (1PC) トランザクションで最新の TSO を取得するのにかかる時間を記録します。
 - `Prewrite_time`は事前書き込みフェーズの期間を記録します。
 - `Get_commit_ts_time`は、一般的な 2PC トランザクションの期間を記録します。
 - `Commit_time`はコミットフェーズの所要時間を記録します。非同期コミットまたは1PCトランザクションにはこのフェーズはありません。
@@ -624,8 +624,8 @@ tidb_tikvclient_request_seconds{type="?"} =
     tidb_tikvclient_rpc_net_latency_seconds{store="?"}
 ```
 
-- `tidb_tikvclient_batch_wait_duration`はバッチ システムでの待機期間を記録します。
-- `tidb_tikvclient_batch_send_latency`はバッチ システムでのエンコード期間を記録します。
+- `tidb_tikvclient_batch_wait_duration`はバッチシステムでの待機期間を記録します。
+- `tidb_tikvclient_batch_send_latency`はバッチシステムでのエンコード期間を記録します。
 - `tikv_grpc_msg_duration_seconds{type="kv_?"}`は TiKV 処理期間です。
 - `tidb_tikvclient_rpc_net_latency_seconds`はネットワークレイテンシーを記録します。
 
@@ -657,7 +657,7 @@ tikv_storage_engine_async_request_duration_seconds{type="snapshot"} =
     get snapshot from rocksdb duration
 ```
 
-リーダー リースの有効期限が切れると、TiKV は RocksDB からスナップショットを取得する前に読み取りインデックス コマンドを提案します。`tikv_raftstore_request_wait_time_duration_secs`と`tikv_raftstore_commit_log_duration_seconds`は読み取りインデックス コマンドをコミットする期間です。
+リーダーリースの有効期限が切れると、TiKV は RocksDB からスナップショットを取得する前に読み取りインデックスコマンドを提案します。`tikv_raftstore_request_wait_time_duration_secs`と`tikv_raftstore_commit_log_duration_seconds`は読み取りインデックスコマンドをコミットする期間です。
 
 RocksDB からスナップショットを取得する操作は通常は高速なので、 `get snapshot from rocksdb duration`は無視されます。
 
@@ -825,7 +825,7 @@ raft db write duration(raft engine disabled) =
     tikv_raftstore_store_perf_context_time_duration_secs{type="write_memtable_time"}
 ```
 
-クォーラム ピアの最長期間は`commit log wait duration`であるため、 `raft db write duration`よりも大きくなる可能性があります。
+クォーラムピアの最長期間は`commit log wait duration`であるため、 `raft db write duration`よりも大きくなる可能性があります。
 
 v6.1.0 以降、TiKV はデフォルトのログストレージエンジンとして[Raft Engine](/glossary.md#raft-engine)を使用するようになり、ログの書き込みプロセスが変更されました。
 

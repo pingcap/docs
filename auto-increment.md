@@ -420,7 +420,7 @@ TiDBは、MySQL互換のAUTO_INCREMENT列モードを提供し、IDが厳密に�
 CREATE TABLE t(a int AUTO_INCREMENT key) AUTO_ID_CACHE 1;
 ```
 
-`AUTO_ID_CACHE` `1`に設定すると、すべての TiDB インスタンスにわたって ID が厳密に増加し、各 ID が一意であることが保証され、デフォルトのキャッシュ モード (キャッシュされた値が 30000 の`AUTO_ID_CACHE 0` ) と比較して ID 間のギャップが最小限に抑えられます。
+`AUTO_ID_CACHE` `1`に設定すると、すべての TiDB インスタンスにわたって ID が厳密に増加し、各 ID が一意であることが保証され、デフォルトのキャッシュモード (キャッシュされた値が 30000 の`AUTO_ID_CACHE 0` ) と比較して ID 間のギャップが最小限に抑えられます。
 
 たとえば、 `AUTO_ID_CACHE 1`の場合、次のようなシーケンスが表示されます。
 

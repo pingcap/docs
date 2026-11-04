@@ -124,7 +124,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
     >
     > 利用可能なすべての PD ノードの中で、優先順位番号が最も高いノードがリーダーになります。
 
-3. 配置ルールを作成し、テスト テーブルのプライマリ レプリカをリージョン 1 に固定します。
+3. 配置ルールを作成し、テストテーブルのプライマリレプリカをリージョン 1 に固定します。
 
     ```sql
     -- Create two placement rules: the first rule specifies that region 1 works as the primary region, and region 2 as the secondary region.
@@ -142,7 +142,7 @@ summary: 単一クラスターのマルチレプリカ災害復旧ソリュー�
     SELECT STORE_ID, address, leader_count, label FROM TIKV_STORE_STATUS ORDER BY store_id;
     ```
 
-    次の SQL文は、すべての非システム スキーマ テーブルのリーダーを特定のリージョンに構成する SQL スクリプトを生成できます。
+    次の SQL文は、すべての非システムスキーマテーブルのリーダーを特定のリージョンに構成する SQL スクリプトを生成できます。
 
     ```sql
     SET @region_name=primary_rule_for_region1;

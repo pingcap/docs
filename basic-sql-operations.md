@@ -149,7 +149,7 @@ ALTER TABLE person DROP INDEX person_unique_id;
 
 ## データの挿入、更新、削除 {#insert-update-and-delete-data}
 
-一般的な DML 機能には、テーブル レコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE` 。
+一般的な DML 機能には、テーブルレコードの追加、変更、削除があります。対応するコマンドは`INSERT` 、 `UPDATE` 、 `DELETE` 。
 
 テーブルにデータを挿入するには、 `INSERT`文を使用します。
 

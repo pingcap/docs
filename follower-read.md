@@ -92,7 +92,7 @@ set [session | global] tidb_replica_read = '<target value>';
 >
 > TiDB v7.5.0 以前のバージョンの場合:
 >
-> - `tidb_replica_read`から`follower`に設定し、フォロワー レプリカまたはラーナーレプリカが利用できない場合、TiDB はエラーを返します。
+> - `tidb_replica_read`から`follower`に設定し、フォロワーレプリカまたはラーナーレプリカが利用できない場合、TiDB はエラーを返します。
 > - `tidb_replica_read`から`learner`に設定し、ラーナーレプリカが利用できない場合は、TiDB はエラーを返します。
 
 </CustomContent>

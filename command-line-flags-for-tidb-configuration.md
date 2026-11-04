@@ -119,7 +119,7 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--proxy-protocol-networks` {#--proxy-protocol-networks}
 
-- [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシ サーバーの IP アドレスのリスト。
+- [PROXYプロトコル](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)を使用して TiDB に接続できるプロキシサーバーの IP アドレスのリスト。
 - デフォルト: `""`
 - 通常、リバースプロキシを経由してTiDBにアクセスする場合、TiDBはリバースプロキシサーバーのIPアドレスをクライアントのIPアドレスとして取得します。PROXYプロトコルを有効にすると、HAProxyなどのこのプロトコルをサポートするリバースプロキシは、実際のクライアントIPアドレスをTiDBに渡すことができます。
 - このフラグを設定すると、TiDBは設定された送信元IPアドレスがPROXYプロトコルを使用してTiDBに接続することを許可します。PROXY以外のプロトコルが使用されている場合、この接続は拒否されます。その他のアドレスはPROXYプロトコルを使用せずにTiDBに接続できます。このフラグを空のままにすると、どのIPアドレスもPROXYプロトコルを使用してTiDBに接続できなくなります。値は、IPアドレス（192.168.1.50）またはCIDR（192.168.1.0/24）で、区切り文字として`,`を使用します。`*`は任意のIPアドレスを意味します。
@@ -159,9 +159,9 @@ TiDBクラスタを起動する際には、コマンドラインオプション�
 
 ## `--socket string` {#--socket-string}
 
-- TiDB サービスは、外部接続に Unix ソケット ファイルを使用します。
+- TiDB サービスは、外部接続に Unix ソケットファイルを使用します。
 - デフォルト: `""`
-- `/tmp/tidb.sock`を使用して Unix ソケット ファイルを開きます。
+- `/tmp/tidb.sock`を使用して Unix ソケットファイルを開きます。
 
 ## `--status` {#--status}
 

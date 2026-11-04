@@ -17,10 +17,10 @@ TiDBのセキュリティは、データの整合性と機密性を保護する�
 
 このリスクを回避するには、デプロイメント中にルートパスワードを設定することをお勧めします。
 
-- TiUPを使用したデプロイメントの場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)を参照して、ルートユーザーのランダム パスワードを生成します。
+- TiUPを使用したデプロイメントの場合は、 [TiUPを使用して TiDBクラスタをデプロイ](/production-deployment-using-tiup.md#step-7-start-a-tidb-cluster)を参照して、ルートユーザーのランダムパスワードを生成します。
 - TiDB Operatorを使用したデプロイメントの場合は、 [初期アカウントとパスワードを設定する](https://docs.pingcap.com/tidb-in-kubernetes/stable/initialize-a-cluster#set-initial-account-and-password)を参照して root パスワードを設定してください。
 
-[`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure)オプションを使用して、初期ルートユーザーのネットワーク アクセスを制限することもできます。
+[`--initialize-secure`](/command-line-flags-for-tidb-configuration.md#--initialize-secure)オプションを使用して、初期ルートユーザーのネットワークアクセスを制限することもできます。
 
 ## パスワードの複雑さのチェックを有効にする {#enable-password-complexity-checks}
 
