@@ -5,7 +5,7 @@ summary: TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への�
 
 # TiDB Self-ManagedからTiDB Cloud Premiumまたは{{{ .byoc }}}への移行 {#migrate-from-tidb-self-managed-to-tidb-cloud-premium-or-tidb-cloud-byoc}
 
-このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスターからTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスにAWS上でデータを移行する方法について説明します。
+このドキュメントでは、 DumplingとTiCDCを使用して、TiDB Self-ManagedクラスターからAWS上のTiDB Cloud Premiumまたは{{{ .byoc }}}インスタンスにデータを移行する方法について説明します。
 
 全体の手順は以下のとおりです。
 
