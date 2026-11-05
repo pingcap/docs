@@ -48,7 +48,7 @@ After {{{ .lake }}} support shares the trusted principal information for your or
    }
    ```
 
-   Click `Next`, and input the policy name: `lake-test`, and click `Create policy`
+   Click `Next`, and input the policy name: `lake-test`, and click `Create policy`.
 
 3. Go to AWS Console:
 
