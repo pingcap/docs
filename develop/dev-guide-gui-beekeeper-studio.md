@@ -39,7 +39,7 @@ Connect to TiDB depending on the TiDB deployment option you've selected.
 
 3. Ensure the configurations in the connection dialog match your operating environment.
 
-    - **Connection Type** is set to `Public`.
+    - **Connection Type** is set to `Public Endpoint`.
     - **Branch** is set to `main`.
     - **Connect With** is set to `Beekeeper Studio` (or the closest match, such as `General`, if Beekeeper Studio is not in the list).
     - **Operating System** matches your environment.
