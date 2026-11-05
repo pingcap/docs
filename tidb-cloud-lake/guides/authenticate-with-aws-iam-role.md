@@ -28,7 +28,7 @@ After {{{ .lake }}} support shares the trusted principal information for your or
 
    <https://us-east-2.console.aws.amazon.com/iam/home?region=us-east-2#/policies>
 
-   Click `Create policy`, and select `Custom trust policy`, and input the policy document for S3 bucket access:
+   Click `Create policy`. In the `Policy editor` section, click `JSON`, and input the policy document for S3 bucket access:
 
    ```json
    {
