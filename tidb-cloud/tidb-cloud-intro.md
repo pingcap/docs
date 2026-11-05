@@ -4,7 +4,7 @@ summary: TiDB Cloudとそのアーキテクチャについて学びましょう�
 category: intro
 ---
 
-# TiDB Cloudとは何ですか？ {#what-is-tidb-cloud} <!--Corresponding EN commit: 4274e26e46f003c1c4117cc2920d6c6b6ac5482d-->
+# TiDB Cloudとは何ですか？ {#what-is-tidb-cloud}
 
 [TiDB Cloud](https://www.pingcap.com/tidb-cloud/)は、オープンソースのハイブリッドトランザクションおよび分析処理 (HTAP) データベースである[TiDB](https://docs.pingcap.com/tidb/stable/overview)をベースにした、フルマネージドのクラウドネイティブの Database-as-a-Service (DBaaS) です。 TiDB Cloudは、データベースの導入と管理を簡単に行う方法を提供し、データベースの複雑さではなく、アプリケーションに集中できるようにします。
 
