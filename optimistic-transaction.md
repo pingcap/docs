@@ -192,7 +192,7 @@ As a distributed database, TiDB performs in-memory conflict detection in the TiK
 The configuration is as follows:
 
 ```toml
-# Controls the number of slots. ("2048000" by default）
+# Controls the number of slots. ("524288" by default)
 scheduler-concurrency = 2048000
 ```
 
