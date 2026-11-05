@@ -171,7 +171,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     >
     > Before creating the changefeed, check that each table you want to replicate has at least one [valid index](/ticdc/ticdc-overview.md#valid-index): a primary key or a unique index with all columns defined as `NOT NULL` and no virtual generated columns. By default, TiCDC does not replicate data changes from tables without a valid index. Adding a valid index later allows subsequent data changes to be replicated, but does not recover previously skipped changes. For more information, see [DDL replication rules](/ticdc/ticdc-ddl.md#ddl-allow-list).
     >
-    > For tables without a valid index, adding a valid index is recommended. Alternatively, you can set [`force-replicate`](/ticdc/ticdc-changefeed-config.md#force-replicate) to `true` in the changefeed configuration file and pass the file using `--config` when creating the changefeed. This option does not guarantee data consistency and can cause duplicate data.
+    > For tables without a valid index, adding a valid index is recommended. Alternatively, you can add [`force-replicate = true`](/ticdc/ticdc-changefeed-config.md#force-replicate) at the beginning of the changefeed configuration file, before any `[section]` headers, and pass the file using `--config` when creating the changefeed. This option does not guarantee data consistency and can cause duplicate data.
 
     In the upstream cluster, run the following command to create a changefeed from the upstream to the downstream clusters:
 
