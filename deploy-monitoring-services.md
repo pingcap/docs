@@ -197,7 +197,9 @@ url = https://grafana.net
 
 ```
 
-Before starting Grafana, replace `<grafana-admin-user>` and `<grafana-strong-password>` with a custom administrator username and a unique strong password. The example wraps the password in triple double quotation marks so that `#` and `;` are treated as password characters rather than comments. Do not use `admin` as the password or commit the actual password to version control. `admin_user` and `admin_password` take effect only when the administrator account is created on the first startup. For an existing Grafana instance, change the password in Grafana.
+Before starting Grafana, replace `<grafana-admin-user>` and `<grafana-strong-password>` with a custom administrator username and a unique strong password. The example wraps the password in triple double quotation marks so that `#` and `;` are treated as password characters rather than comments. Grafana expands `${NAME}`, `$__env{NAME}`, and `$__file{PATH}` in configuration values, even inside triple double quotation marks, so do not use these expressions in the password. Do not use `admin` as the password or commit the actual password to version control. `admin_user` and `admin_password` take effect only when the administrator account is created on the first startup. For an existing Grafana instance, change the password in Grafana.
+
+After editing the file, run `chmod 600 conf/grafana.ini` as the same operating system user that starts Grafana. This ensures that only that user can read or modify the configuration file containing the administrator password.
 
 Start the Grafana service:
 

@@ -173,7 +173,7 @@ Some operations in TiDB require writing temporary files to the server, so it is 
     >
     > If the directory does not exist, TiDB will automatically create it upon startup. If the directory creation fails or TiDB does not have the read and write permissions for that directory, [`Fast Online DDL`](/system-variables.md#tidb_ddl_enable_fast_reorg-new-in-v630) will be disabled during runtime.
 
-## Configure the firewall on target machines
+## Check the firewall service of target machines
 
 In a TiDB cluster, the required ports between nodes must be open so that read and write requests, data heartbeats, and other information can be transmitted. At the same time, keep a host firewall or equivalent network access control, such as a cloud security group, enabled. Follow the [network requirements](/hardware-and-software-requirements.md#network-requirements) and allow only trusted sources to access the required ports. Do not stop or disable the firewall, and do not use a zone that allows all traffic by default. In particular, restrict component status, monitoring, and administration ports to trusted management networks.
 

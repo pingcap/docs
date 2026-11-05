@@ -37,6 +37,8 @@ assert "admin_user = <grafana-admin-user>" in GRAFANA
 assert 'admin_password = """<grafana-strong-password>"""' in GRAFANA
 assert "Do not use `admin` as the password" in GRAFANA
 assert "For an existing instance, use its current administrator account" in GRAFANA
+assert "$__file{PATH}" in GRAFANA
+assert "chmod 600 conf/grafana.ini" in GRAFANA
 assert "you can choose **Skip**" not in GRAFANA
 assert "Do not choose **Skip**" in GRAFANA
 assert '--web.listen-address="127.0.0.1:9090"' in GRAFANA
