@@ -114,7 +114,7 @@
   - [集計インデックス](/tidb-cloud-lake/guides/aggregating-index.md)
   - [フルテキストインデックス](/tidb-cloud-lake/guides/full-text-index.md)
   - [Ngram インデックス](/tidb-cloud-lake/guides/ngram-index.md)
-  - [Partition Fuse Tables](/tidb-cloud-lake/guides/partition-by.md)
+  - [Fuse テーブルのパーティショニング](/tidb-cloud-lake/guides/partition-by.md)
   - [クエリ結果キャッシュ](/tidb-cloud-lake/guides/query-result-cache.md)
 - セキュリティと信頼性
   - [概要](/tidb-cloud-lake/guides/security-reliability.md)
