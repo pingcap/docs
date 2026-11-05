@@ -169,7 +169,7 @@ domain = 192.168.199.113
 check_for_updates = true
 [security]
 admin_user = <grafana-admin-user>
-admin_password = <grafana-strong-password>
+admin_password = """<grafana-strong-password>"""
 [snapshots]
 [users]
 [auth.anonymous]
@@ -196,7 +196,7 @@ url = https://grafana.net
 
 ```
 
-Before starting Grafana, replace `<grafana-admin-user>` and `<grafana-strong-password>` with a custom administrator user name and a unique strong password. Do not use `admin` as the password or commit the actual password to version control. `admin_password` takes effect only when the administrator account is created on the first startup. For an existing Grafana instance, change the password in Grafana.
+Before starting Grafana, replace `<grafana-admin-user>` and `<grafana-strong-password>` with a custom administrator username and a unique strong password. The example wraps the password in triple double quotation marks so that `#` and `;` are treated as password characters rather than comments. Do not use `admin` as the password or commit the actual password to version control. `admin_user` and `admin_password` take effect only when the administrator account is created on the first startup. For an existing Grafana instance, change the password in Grafana.
 
 Start the Grafana service:
 
@@ -216,8 +216,8 @@ This section describes how to configure Grafana.
 1. Log in to the Grafana Web interface.
 
     - Default address: [http://localhost:3000](http://localhost:3000)
-    - Administrator account: the `<grafana-admin-user>` value configured in `[security]`
-    - Administrator password: the `<grafana-strong-password>` value configured in `[security]`
+    - Administrator account: for the first sign-in to a new instance, use the `<grafana-admin-user>` value configured in `[security]`. For an existing instance, use its current administrator account.
+    - Administrator password: for the first sign-in to a new instance, use the `<grafana-strong-password>` value configured in `[security]`. For an existing instance, use its current administrator password.
 
     > **Note:**
     >

@@ -199,8 +199,8 @@ listen tidb-cluster                        # Database load balancing.
 > **Warning:**
 >
 > - Before starting HAProxy, replace `<management-ip>`, `<admin-user>`, and `<strong-password>` with actual values. Set a unique strong password for the Stats page. Do not use a sample, default, or reused password.
-> - Use a firewall or security group to restrict port `8080` to trusted management networks. Do not expose the HAProxy Stats page directly to the internet. Because `stats auth` uses HTTP Basic Authentication, access the page only through TLS or another protected management channel.
-> - `stats admin if TRUE` lets users manually enable or disable backend servers. If you only need to view monitoring information, remove this configuration item.
+> - Use a firewall or security group to restrict port `8080` to trusted management networks. Do not expose the HAProxy Stats page directly to the internet. Because `stats auth` uses HTTP Basic Authentication, access the page only through Transport Layer Security (TLS) or another protected management channel; otherwise, another party on the network might intercept the user name and password.
+> - `stats admin if TRUE` grants all accounts configured with `stats auth` the ability to enable or disable backend servers. Remove this configuration item unless manual control is required. If you keep it, restrict access to trusted operators because HAProxy admin POST requests are prone to cross-site request forgery (CSRF) attacks.
 
 To check the source IP address using `SHOW PROCESSLIST`, you need to configure the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to connect to TiDB.
 
