@@ -20,7 +20,7 @@ summary: データ匿名化とは、個人のプライバシーを保護する�
 {{{ .lake }}} は、データマスキング、仮名化、合成データ生成など、さまざまな匿名化手法を実装するための一連の関数を提供します。
 
 - **データマスキング**: [`OBFUSCATE` テーブル関数](/tidb-cloud-lake/sql/obfuscate.md) を使用して、カラムにマスキングルールを自動的に適用し、元の値を本物らしく見える人工的な値に置き換えます。
-- **仮名化**: [FEISTEL_OBFUSCATE](/tidb-cloud-lake/sql/feistel-obfuscate.md) を使用して、識別子を決定論的な代替値に置き換えます。これにより、データの整合性とカーディナリティが維持されるため、結合キーの管理に適しています。
+- **仮名化**: [FEISTEL_OBFUSCATE](/tidb-cloud-lake/sql/feistel-obfuscate.md) を使用して、識別子を決定的な代替値に置き換えます。これにより、データの整合性とカーディナリティが維持されるため、結合キーの管理に適しています。
 - **合成データ**: [MARKOV_TRAIN](/tidb-cloud-lake/sql/markov-train.md) と [MARKOV_GENERATE](/tidb-cloud-lake/sql/markov-generate.md) を使用して、元のデータセットと統計的に類似している一方で、実際のレコードとは直接の関連を持たない機械生成データを作成します。
 
 | 関数 | 説明 |
