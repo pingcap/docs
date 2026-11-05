@@ -37,6 +37,7 @@ Use this guidance for authoring, editing, or reviewing Markdown in `pingcap/docs
 
 ## Terminology and version notation
 
+- In English prose, do not use possessive forms of product names, such as `TiDB's` or `TiCDC's`. Rephrase naturally, for example, `the default value of gc-ttl in TiCDC` instead of `TiCDC's default gc-ttl`.
 - Use terminology consistently. Do not use "database" and "instance" interchangeably. Choose the term that matches the actual product concept.
 - Use "replicate" instead of "synchronize" when referring to replicating data from one TiDB cluster to another.
 - Write MySQL versions as `MySQL 8.0`, `MySQL 8.4`, or `MySQL 8.x`. Do not add a `v` prefix. The `v` prefix is reserved for TiDB and TiDB tool versions, such as `TiDB v8.5` and `DM v2.0`.
@@ -83,6 +84,7 @@ Keep the frontmatter `title` and the H1 aligned in wording and capitalization.
 
 ## Links
 
+- In cross-reference introductions, use `For more information, see ...` or `For more information about <topic>, see ...`. Do not use `For details`, `For more details`, or `refer to` in these introductions.
 - Use descriptive link text.
 - Do not use vague link text such as `here`, `click here`, or `this page`.
 - Preserve repository-relative absolute paths such as `/foo/bar.md` when that is the repository convention.
