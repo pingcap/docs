@@ -175,122 +175,66 @@ Some operations in TiDB require writing temporary files to the server, so it is 
 
 ## Check the firewall service of target machines
 
-In TiDB clusters, the access ports between nodes must be open to ensure the transmission of information such as read and write requests and data heartbeats. In common online scenarios, the data interaction between the database and the application service and between the database nodes are all made within a secure network. Therefore, if there are no special security requirements, it is recommended to stop the firewall of the target machine. Otherwise, refer to [the port usage](/hardware-and-software-requirements.md#network-requirements) and add the needed port information to the allowlist of the firewall service.
+In a TiDB cluster, the required ports between nodes must be open so that read and write requests, data heartbeats, and other information can be transmitted. At the same time, keep a host firewall or equivalent network access control, such as a cloud security group, enabled. Follow the [network requirements](/hardware-and-software-requirements.md#network-requirements) and allow only trusted sources to access the required ports. Do not stop or disable the firewall, and do not use a zone that allows all traffic by default. In particular, restrict component status, monitoring, and administration ports to trusted management networks.
 
-### Stop and disable firewalld
+Check the `firewalld` status. The following example uses CentOS Linux release 7.7.1908 (Core):
 
-This section describes how to stop and disable the firewall service of a target machine.
-
-1. Check the firewall status. The following example uses CentOS Linux release 7.7.1908 (Core):
-
-    ```shell
-    sudo firewall-cmd --state
-    sudo systemctl status firewalld.service
-    ```
-
-2. Stop the firewall service:
-
-    ```bash
-    sudo systemctl stop firewalld.service
-    ```
-
-3. Disable automatic startup of the firewall service:
-
-    ```bash
-    sudo systemctl disable firewalld.service
-    ```
-
-4. Check the firewall status:
-
-    ```bash
-    sudo systemctl status firewalld.service
-    ```
-
-### Change the firewall zone
-
-Instead of disabling the firewall completely, you can use a less restrictive zone. The default `public` zone allows only specific services and ports, while the `trusted` zone allows all traffic by default.
-
-To set the default zone to `trusted`:
-
-```bash
-firewall-cmd --set-default-zone trusted
+```shell
+sudo firewall-cmd --state
+sudo systemctl status firewalld.service
 ```
 
-To verify the default zone:
+If `firewalld` is the selected host firewall and is not running, start it and enable it at boot. If the host uses another firewall or equivalent network access control, do not run the following command. Configure the same source and port restrictions in the existing control instead:
 
 ```bash
-firewall-cmd --get-default-zone
-# trusted
+sudo systemctl enable --now firewalld.service
 ```
 
-To list the policy for a zone:
+To configure the firewall for TiDB cluster components, use the following commands. These IPv4 examples use rich rules to restrict source addresses. Before running them, replace `<application-network-cidr>`, `<cluster-network-cidr>`, and `<management-network-cidr>` with the actual trusted networks. If you use IPv6, configure equivalent IPv6 rules.
+
+Allow the application network to access the TiDB SQL port, and allow only the management network to access the TiDB status port:
 
 ```bash
-firewall-cmd --zone=trusted --list-all
-# trusted
-#   target: ACCEPT
-#   icmp-block-inversion: no
-#   interfaces:
-#   sources:
-#   services:
-#   ports:
-#   protocols:
-#   forward: yes
-#   masquerade: no
-#   forward-ports:
-#   source-ports:
-#   icmp-blocks:
-#   rich rules:
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<application-network-cidr>" port port="4000" protocol="tcp" accept'
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<management-network-cidr>" port port="10080" protocol="tcp" accept'
 ```
 
-### Configure the firewall
-
-To configure the firewall for TiDB cluster components, use the following commands. These examples are for reference only. Adjust the zone names, ports, and services based on your specific environment.
-
-Configure the firewall for the TiDB component:
+Allow the cluster network to access the TiKV service port, and allow only the management network to access the TiKV status port:
 
 ```bash
-firewall-cmd --permanent --new-service tidb
-firewall-cmd --permanent --service tidb --set-description="TiDB Server"
-firewall-cmd --permanent --service tidb --set-short="TiDB"
-firewall-cmd --permanent --service tidb --add-port=4000/tcp
-firewall-cmd --permanent --service tidb --add-port=10080/tcp
-firewall-cmd --permanent --zone=public --add-service=tidb
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<cluster-network-cidr>" port port="20160" protocol="tcp" accept'
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<management-network-cidr>" port port="20180" protocol="tcp" accept'
 ```
 
-Configure the firewall for the TiKV component:
+Allow only the cluster network to access the PD client and peer ports:
 
 ```bash
-firewall-cmd --permanent --new-service tikv
-firewall-cmd --permanent --service tikv --set-description="TiKV Server"
-firewall-cmd --permanent --service tikv --set-short="TiKV"
-firewall-cmd --permanent --service tikv --add-port=20160/tcp
-firewall-cmd --permanent --service tikv --add-port=20180/tcp
-firewall-cmd --permanent --zone=public --add-service=tikv
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<cluster-network-cidr>" port port="2379-2380" protocol="tcp" accept'
 ```
 
-Configure the firewall for the PD component:
+Allow only the management network to access Prometheus:
 
 ```bash
-firewall-cmd --permanent --new-service pd
-firewall-cmd --permanent --service pd --set-description="PD Server"
-firewall-cmd --permanent --service pd --set-short="PD"
-firewall-cmd --permanent --service pd --add-port=2379/tcp
-firewall-cmd --permanent --service pd --add-port=2380/tcp
-firewall-cmd --permanent --zone=public --add-service=pd
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<management-network-cidr>" port port="12020" protocol="tcp" accept'
 ```
 
-Configure the firewall for Prometheus:
+Allow only the management network to access Grafana:
 
 ```bash
-firewall-cmd --permanent --zone=public --add-service=prometheus
-firewall-cmd --permanent --service=prometheus --add-port=12020/tcp
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<management-network-cidr>" port port="3000" protocol="tcp" accept'
 ```
 
-Configure the firewall for Grafana:
+After adding all permanent rules, reload `firewalld` to apply them immediately:
 
 ```bash
-firewall-cmd --permanent --zone=public --add-service=grafana
+sudo firewall-cmd --reload
 ```
 
 ## Check and install the NTP service
