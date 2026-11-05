@@ -149,7 +149,7 @@ Use this function in `GENERATED ALWAYS AS` clauses to automatically generate emb
 
 ### `VEC_EMBED_COSINE_DISTANCE()`
 
-Calculates cosine similarity between a stored vector in the vector column and a text query:
+Calculates cosine distance between a stored vector in the vector column and a text query:
 
 ```sql
 VEC_EMBED_COSINE_DISTANCE(vector_column, "query_text")

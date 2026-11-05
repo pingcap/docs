@@ -134,7 +134,7 @@ public List<Author> getTop50EldestAuthorInfo() throws SQLException {
 <SimpleTab groupId="language">
 <div label="SQL" value="sql">
 
-To create a global temporary table, you can add the `GLOBAL` keyword and end with `ON COMMIT DELETE ROWS`, which means the table will be deleted after the current transaction ends.
+To create a global temporary table, you can add the `GLOBAL` keyword and end with `ON COMMIT DELETE ROWS`, which means the data in the table will be deleted after the current transaction ends.
 
 ```sql
 CREATE GLOBAL TEMPORARY TABLE IF NOT EXISTS top_50_eldest_authors_global (
