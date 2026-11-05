@@ -184,58 +184,57 @@ sudo firewall-cmd --state
 sudo systemctl status firewalld.service
 ```
 
-If `firewalld` is not running, start it and enable it at boot:
+If `firewalld` is the selected host firewall and is not running, start it and enable it at boot. If the host uses another firewall or equivalent network access control, do not run the following command. Configure the same source and port restrictions in the existing control instead:
 
 ```bash
 sudo systemctl enable --now firewalld.service
 ```
 
-To configure the firewall for TiDB cluster components, use the following commands. These examples are for reference only. Adjust the zone names, trusted sources, ports, and services based on your environment. For status, monitoring, and administration ports, also use source address rules to restrict access to the management network.
+To configure the firewall for TiDB cluster components, use the following commands. These IPv4 examples use rich rules to restrict source addresses. Before running them, replace `<application-network-cidr>`, `<cluster-network-cidr>`, and `<management-network-cidr>` with the actual trusted networks. If you use IPv6, configure equivalent IPv6 rules.
 
-Configure the firewall for the TiDB component:
+Allow the application network to access the TiDB SQL port, and allow only the management network to access the TiDB status port:
 
 ```bash
-firewall-cmd --permanent --new-service tidb
-firewall-cmd --permanent --service tidb --set-description="TiDB Server"
-firewall-cmd --permanent --service tidb --set-short="TiDB"
-firewall-cmd --permanent --service tidb --add-port=4000/tcp
-firewall-cmd --permanent --service tidb --add-port=10080/tcp
-firewall-cmd --permanent --zone=public --add-service=tidb
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<application-network-cidr>" port port="4000" protocol="tcp" accept'
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<management-network-cidr>" port port="10080" protocol="tcp" accept'
 ```
 
-Configure the firewall for the TiKV component:
+Allow the cluster network to access the TiKV service port, and allow only the management network to access the TiKV status port:
 
 ```bash
-firewall-cmd --permanent --new-service tikv
-firewall-cmd --permanent --service tikv --set-description="TiKV Server"
-firewall-cmd --permanent --service tikv --set-short="TiKV"
-firewall-cmd --permanent --service tikv --add-port=20160/tcp
-firewall-cmd --permanent --service tikv --add-port=20180/tcp
-firewall-cmd --permanent --zone=public --add-service=tikv
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<cluster-network-cidr>" port port="20160" protocol="tcp" accept'
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<management-network-cidr>" port port="20180" protocol="tcp" accept'
 ```
 
-Configure the firewall for the PD component:
+Allow only the cluster network to access the PD client and peer ports:
 
 ```bash
-firewall-cmd --permanent --new-service pd
-firewall-cmd --permanent --service pd --set-description="PD Server"
-firewall-cmd --permanent --service pd --set-short="PD"
-firewall-cmd --permanent --service pd --add-port=2379/tcp
-firewall-cmd --permanent --service pd --add-port=2380/tcp
-firewall-cmd --permanent --zone=public --add-service=pd
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<cluster-network-cidr>" port port="2379-2380" protocol="tcp" accept'
 ```
 
-Configure the firewall for Prometheus:
+Allow only the management network to access Prometheus:
 
 ```bash
-firewall-cmd --permanent --zone=public --add-service=prometheus
-firewall-cmd --permanent --service=prometheus --add-port=12020/tcp
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<management-network-cidr>" port port="12020" protocol="tcp" accept'
 ```
 
-Configure the firewall for Grafana:
+Allow only the management network to access Grafana:
 
 ```bash
-firewall-cmd --permanent --zone=public --add-service=grafana
+sudo firewall-cmd --permanent --zone=public \
+  --add-rich-rule='rule family="ipv4" source address="<management-network-cidr>" port port="3000" protocol="tcp" accept'
+```
+
+After adding all permanent rules, reload `firewalld` to apply them immediately:
+
+```bash
+sudo firewall-cmd --reload
 ```
 
 ## Check and install the NTP service

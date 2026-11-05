@@ -25,7 +25,10 @@ assert "stats auth admin:pingcap123" not in HAPROXY
 assert "bind <management-ip>:8080" in HAPROXY
 assert "stats auth <admin-user>:<strong-password>" in HAPROXY
 assert "Do not expose the HAProxy Stats page directly to the internet" in HAPROXY
-assert not re.search(r"^\s*stats\s+admin\b", HAPROXY, re.MULTILINE)
+assert not re.search(
+    r"^\s*stats\s+admin\s+if\s+TRUE\b", HAPROXY, re.IGNORECASE | re.MULTILINE
+)
+assert "stats admin if AUTH_ADMIN" in HAPROXY
 assert "keeps the Stats page read-only" in HAPROXY
 
 assert all(
@@ -44,10 +47,13 @@ assert "Do not choose **Skip**" in GRAFANA
 assert '--web.listen-address="127.0.0.1:9090"' in GRAFANA
 assert "--web.enable-admin-api" not in GRAFANA
 assert "leaves the Prometheus admin API disabled" in GRAFANA
+assert "set `--web.external-url`" in GRAFANA
 
-assert "systemctl stop firewalld" not in FIREWALL
-assert "systemctl disable firewalld" not in FIREWALL
-assert "--set-default-zone trusted" not in FIREWALL
+assert not re.search(r"systemctl\s+(?:stop|disable)\b[^\n]*\bfirewalld\b", FIREWALL)
+assert not re.search(r"--set-default-zone(?:=|\s+)trusted\b", FIREWALL)
 assert "allow only trusted sources to access the required ports" in FIREWALL
+assert "--add-rich-rule" in FIREWALL
+assert "<management-network-cidr>" in FIREWALL
+assert "firewall-cmd --reload" in FIREWALL
 
 print("admin credential guidance checks passed")

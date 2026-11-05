@@ -199,7 +199,26 @@ listen tidb-cluster                        # Database load balancing.
 >
 > - Before starting HAProxy, replace `<management-ip>`, `<admin-user>`, and `<strong-password>` with actual values. Set a unique strong password for the Stats page. Do not use a sample, default, or reused password.
 > - Use a firewall or security group to restrict port `8080` to trusted management networks. Do not expose the HAProxy Stats page directly to the internet. Because `stats auth` uses HTTP Basic Authentication, access the page only through Transport Layer Security (TLS) or another protected management channel; otherwise, another party on the network might intercept the user name and password.
-> - This example keeps the Stats page read-only. Do not grant every authenticated account permission to enable or disable backend servers. If backend administration through the Stats page is required, use a separate administrator identity and an access control list, and log administrative operations.
+> - This example keeps the Stats page read-only. Do not grant every authenticated account permission to enable or disable backend servers.
+
+If backend administration through the Stats page is required, remove the `stats auth` directive from the example and use a `userlist` and ACLs to separate read-only accounts from administrator accounts. For example:
+
+```haproxy
+userlist stats-users
+   group admins users <admin-user>
+   group readers users <read-only-user>
+   user <admin-user> password <admin-password-hash>
+   user <read-only-user> password <read-only-password-hash>
+
+listen admin_stats
+   # ...other Stats page settings...
+   acl AUTH http_auth(stats-users)
+   acl AUTH_ADMIN http_auth_group(stats-users) admins
+   stats http-request auth unless AUTH
+   stats admin if AUTH_ADMIN
+```
+
+Do not use an unconditional `TRUE` administration rule. Retain HTTP request logging and send the logs to a protected centralized logging system so that administrative operations can be audited.
 
 To check the source IP address using `SHOW PROCESSLIST`, you need to configure the [PROXY protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt) to connect to TiDB.
 

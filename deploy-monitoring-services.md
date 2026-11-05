@@ -143,7 +143,7 @@ $ ./prometheus \
     --storage.tsdb.retention="15d" &
 ```
 
-This example listens only on the loopback address and leaves the Prometheus admin API disabled. Because Grafana and Prometheus are both deployed on Node1, Grafana can access Prometheus locally. If Prometheus must be accessed from another machine, do not bind it directly to all network interfaces. Expose it through a trusted management network and a reverse proxy that provides TLS and authentication, and restrict source addresses with a firewall or security group.
+This example listens only on the loopback address and leaves the Prometheus admin API disabled. Because Grafana and Prometheus are both deployed on Node1, Grafana can access Prometheus locally. If Prometheus must be accessed from another machine, set `--web.external-url` to the HTTPS URL exposed by the reverse proxy and ensure that its path prefix matches the proxy configuration. Do not bind Prometheus directly to all network interfaces. Expose it through a trusted management network and a reverse proxy that provides TLS and authentication, and restrict source addresses with a firewall or security group.
 
 ### Step 4: Start Grafana on Node1
 
