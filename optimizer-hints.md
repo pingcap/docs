@@ -563,6 +563,39 @@ The `READ_FROM_STORAGE(TIFLASH[t1_name [, tl_name ...]], TIKV[t2_name [, tl_name
 select /*+ READ_FROM_STORAGE(TIFLASH[t1], TIKV[t2]) */ t1.a from t t1, t t2 where t1.a = t2.a;
 ```
 
+### TIFLASH_LM_FILTER(t1_name, col1_name [, col2_name ...])
+
+<!-- TODO: Confirm the introduction version when pingcap/tidb#72191 is assigned to a release. -->
+
+The `TIFLASH_LM_FILTER(t1_name, col1_name [, col2_name ...])` hint specifies the columns used to select filter conditions for [TiFlash late materialization](/tiflash/tiflash-late-materialization.md). Use this hint when the optimizer's cost-based decision does not select the desired filter conditions.
+
+For a TiFlash scan, a filter condition can be pushed down to the TableScan operator for late materialization if it can be executed by TiFlash, references at least one column, and all its referenced columns are specified in the hint. Other filter conditions remain in the Selection operator. The hint replaces cost-based late materialization filter selection for that scan. If no filter conditions match the specified columns, TiDB does not fall back to cost-based selection.
+
+Specify one table and at least one column. The parameters after the table name are column names. If the table has an alias, use the alias in the hint. You can also specify a query block using either of the following forms:
+
+```sql
+TIFLASH_LM_FILTER(@qb_name t1_name, col1_name, col2_name)
+TIFLASH_LM_FILTER(t1_name@qb_name, col1_name, col2_name)
+```
+
+For example, the following query pushes `a + b > 100` down to the TableScan operator for late materialization and leaves `c IN (1, 2, 3)` in the Selection operator:
+
+```sql
+SELECT /*+ READ_FROM_STORAGE(TIFLASH[t1]), TIFLASH_LM_FILTER(t1, a, b) */
+    * FROM t1 WHERE a + b > 100 AND c IN (1, 2, 3);
+```
+
+The hint has the following conditions and limitations:
+
+- [`tidb_opt_enable_late_materialization`](/system-variables.md#tidb_opt_enable_late_materialization-new-in-v700) must be `ON`. The hint does not enable late materialization when this variable is `OFF`.
+- The hint only applies to TiFlash scans. It does not select the storage engine. To request a TiFlash scan, combine it with `READ_FROM_STORAGE(TIFLASH[...])` as in the preceding example.
+- The hint does not take effect for scans that preserve order (`keep order:true`). Late materialization also does not take effect in [fast scan mode](/tiflash/use-fastscan.md).
+- The hint can select late materialization filters even for small tables that the optimizer would otherwise skip.
+
+If the hint specifies no columns, cannot match the table, or includes a nonexistent column, TiDB issues a warning and ignores that hint. To check these warnings, execute `SHOW WARNINGS` immediately after `EXPLAIN` or the query.
+
+For a usage example and instructions on checking the execution plan, see [Specify filter columns with a hint](/tiflash/tiflash-late-materialization.md#specify-filter-columns-with-a-hint).
+
 ### USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])
 
 The `USE_INDEX_MERGE(t1_name, idx1_name [, idx2_name ...])` hint tells the optimizer to access a specific table with the index merge method. Index merge has two types: intersection type and union type. For details, see [Explain Statements Using Index Merge](/explain-index-merge.md).
