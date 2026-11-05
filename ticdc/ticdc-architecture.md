@@ -129,7 +129,7 @@ In the TiCDC classic architecture, DDL replication operations are strictly seria
 
 ### Changes in DDL replication behavior
 
-TiCDC's new and classic architectures differ in the replication behavior of `RENAME` DDLs as follows:
+The TiCDC new and classic architectures differ in the replication behavior of `RENAME` DDLs as follows:
 
 - **Swapping table names**: For DDLs that use an intermediate table name to swap two table names (for example, `RENAME TABLE a TO c, b TO a, c TO b;`), the classic architecture does not support replication, while the new architecture does. During replication, all interdependent renaming steps must be preserved.
 - **Table filtering**: In both architectures, whether to replicate a `RENAME` statement is determined by whether the old table name matches the filter rule. If the old table name does not match but the new table name does, the changefeed reports an error and stops replicating. For multi-table `RENAME`, the classic architecture also requires the target database to be within the replication scope, while the new architecture evaluates each renaming step separately. For example, when `filter.rules = ['test.t*']`, the new architecture can replicate `RENAME TABLE test.t1 TO ignore.t1, test.t2 TO test.t22;` and then stop replicating the renamed `ignore.t1`. For more information, see [DDL replication considerations for renaming tables](/ticdc/ticdc-ddl.md#ddl-replication-considerations-for-renaming-tables).
