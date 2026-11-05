@@ -16,11 +16,17 @@ This document describes how to migrate data from TiDB clusters to MySQL-compatib
 
 1. Deploy a TiDB cluster upstream.
 
-    Deploy a TiDB cluster by using TiUP Playground. For more information, refer to [Deploy and Maintain an Online TiDB Cluster Using TiUP](/tiup/tiup-cluster.md).
+    Deploy a TiDB cluster by using TiUP Playground. For more information, see [Quickly Deploy a Local TiDB Cluster](/tiup/tiup-playground.md).
+
+    [TiCDC](/ticdc/ticdc-overview.md) replicates incremental data changes from the upstream TiDB cluster to the downstream MySQL-compatible database. The following example sets `gc-ttl` for TiCDC to `172800` seconds (48 hours). Choose a value that covers full-data export, import, and the time needed for incremental replication to catch up. For more information, see the [GC warning in Step 2](#step-2-migrate-full-data).
 
     ```shell
+    # Create the TiCDC configuration file
+    cat > ticdc.toml <<'EOF'
+    gc-ttl = 172800
+    EOF
     # Create a TiDB cluster
-    tiup playground --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1
+    tiup playground --db 1 --pd 1 --kv 1 --tiflash 0 --ticdc 1 --ticdc.config ticdc.toml
     # View cluster status
     tiup status
     ```
@@ -44,7 +50,7 @@ This document describes how to migrate data from TiDB clusters to MySQL-compatib
     tiup bench tpcc -H 127.0.0.1 -P 4000 -D tpcc --warehouses 4 run --time 300s
     ```
 
-    For more details about `go-tpc`, refer to [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md).
+    For more information about `go-tpc`, see [How to Run TPC-C Test on TiDB](/benchmark/benchmark-tidb-using-tpcc.md).
 
 ## Step 2. Migrate full data
 
@@ -83,6 +89,10 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     1 row in set (0.00 sec)
     ```
 
+    > **Note:**
+    >
+    > The default value of `gc-ttl` in TiCDC is 24 hours. If the replication delay of the subsequent [incremental replication task](#step-3-migrate-incremental-data) exceeds `gc-ttl`, the task can fail with `ErrGCTTLExceeded`. For long migrations, configure a larger value before starting TiCDC, as shown in [Step 1](#step-1-set-up-the-environment). For more information, see [What is `gc-ttl` in TiCDC](/ticdc/ticdc-faq.md#what-is-gc-ttl-in-ticdc).
+
 2. Back up data.
 
     1. Export data in SQL format using Dumpling:
@@ -108,12 +118,12 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 3. Restore data.
 
-    Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For details about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process metadata files exported by Dumpling.
+    Use MyLoader (an open-source tool) to import data to the downstream MySQL instance. For more information about how to install and use MyLoader, see [MyDumpler/MyLoader](https://github.com/mydumper/mydumper). Note that you need to use MyLoader v0.10 or earlier versions. Higher versions cannot process metadata files exported by Dumpling.
 
     Run the following command to import full data exported by Dumpling to MySQL:
 
     ```shell
-    myloader -h 127.0.0.1 -P 3306 -d ./dumpling_output/
+    myloader -h 127.0.0.1 -P 3306 -u root -p my-secret-pw -d ./dumpling_output/
     ```
 
 4. (Optional) Validate data.
@@ -124,7 +134,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
     sync_diff_inspector -C ./config.yaml
     ```
 
-    For details about how to configure the sync-diff-inspector, see [Configuration file description](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description). In this document, the configuration is as follows:
+    For more information about how to configure the sync-diff-inspector, see [Configuration file description](/sync-diff-inspector/sync-diff-inspector-overview.md#configuration-file-description). In this document, the configuration is as follows:
 
     ```toml
     # Diff Configuration.
@@ -140,7 +150,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
             host = "127.0.0.1" # Replace the value with the IP address of your downstream cluster
             port = 3306
             user = "root"
-            password = ""
+            password = "my-secret-pw"
     ######################### Task config #########################
     [task]
             output-dir = "./output"
@@ -157,11 +167,19 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 2. Create a changefeed.
 
+    > **Note:**
+    >
+    > Before creating the changefeed, check that each table you want to replicate has at least one [valid index](/ticdc/ticdc-overview.md#valid-index): a primary key or a unique index with all columns defined as `NOT NULL` and no virtual generated columns. By default, TiCDC does not replicate data changes from tables without a valid index. Adding a valid index later allows subsequent data changes to be replicated, but does not recover previously skipped changes. For more information, see [DDL replication rules](/ticdc/ticdc-ddl.md#ddl-allow-list).
+    >
+    > For tables without a valid index, adding a valid index is recommended. Alternatively, you can add [`force-replicate = true`](/ticdc/ticdc-changefeed-config.md#force-replicate) at the beginning of the changefeed configuration file, before any `[section]` headers, and pass the file using `--config` when creating the changefeed. This option does not guarantee data consistency and can cause duplicate data.
+
     In the upstream cluster, run the following command to create a changefeed from the upstream to the downstream clusters:
 
     ```shell
-    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
+    tiup cdc:v<CLUSTER_VERSION> cli changefeed create --server=http://127.0.0.1:8300 --sink-uri="mysql://root:***@127.0.0.1:3306" --changefeed-id="upstream-to-downstream" --start-ts="434217889191428107"
     ```
+
+    Replace `***` with the password of the downstream MySQL root account that you configured in [Step 1. Set up the environment](#step-1-set-up-the-environment). For the Docker example, use `my-secret-pw`.
 
     In this command, the parameters are as follows:
 
@@ -174,7 +192,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 3. Enable GC.
 
-    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For details, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
+    In incremental migration using TiCDC, GC only removes history data that is replicated. Therefore, after creating a changefeed, you need to run the following command to enable GC. For more information, see [What is the complete behavior of TiCDC garbage collection (GC) safepoint](/ticdc/ticdc-faq.md#what-is-the-complete-behavior-of-ticdc-garbage-collection-gc-safepoint).
 
    To enable GC, run the following command:
 
@@ -203,7 +221,7 @@ After setting up the environment, you can use [Dumpling](/dumpling-overview.md) 
 
 ## Step 4. Migrate services
 
-After creating a changefeed, data written to the upstream cluster is replicated to the downstream cluster with low latency. You can migrate read traffic to the downstream cluster gradually. Observe the read traffic for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster as well in the following steps:
+After creating a changefeed, TiCDC replicates changes from the included upstream tables to the downstream cluster. Wait for incremental replication to catch up before gradually migrating read traffic to the downstream cluster. Until write traffic is migrated to the downstream cluster, new writes to the upstream cluster still take time to replicate, so query results in the downstream cluster might temporarily lag behind those in the upstream cluster. Observe the read traffic for a period. If the downstream cluster is stable, you can migrate write traffic to the downstream cluster as well in the following steps:
 
 1. Stop write services in the upstream cluster. Make sure that all upstream data are replicated to downstream before stopping the changefeed.
 
