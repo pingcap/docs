@@ -9,11 +9,12 @@ On the Top SQL page of TiDB Dashboard, you can view and analyze the most resourc
 
 - After you enable Top SQL, this feature continuously collects CPU workload data from existing TiDB and TiKV nodes and retains the data for up to 30 days.
 - Starting from v8.5.7 and v9.0.0, you can also enable **TiKV Network IO collection (multi-dimensional)** in the Top SQL settings to further view metrics such as `Network Bytes` and `Logical IO Bytes` for specified TiKV nodes, and perform aggregation analysis in dimensions of `By Query`, `By Table`, `By DB`, and `By Region`.
+- Starting from v8.5.9, you can further enable **detailed TiKV IO dimensions** after enabling TiKV Network IO collection to analyze logical read, logical write, and Read IOPS hotspots separately.
 
 Top SQL provides the following features:
 
 * Visualize the top `5`, `20`, or `100` SQL queries with the most resource consumption in the current time range through charts and tables, with the remaining records automatically summarized as `Others`.
-* Display resource consumption hotspots sorted by CPU time or network bytes. When selecting a TiKV node, you can also sort by logical IO bytes.
+* Display resource consumption hotspots sorted by CPU time or network bytes. When selecting a TiKV node, you can also sort by logical I/O bytes. After enabling detailed TiKV I/O dimensions, you can further sort by logical read bytes, logical write bytes, or Read IOPS.
 * Display SQL and execution plan details by query. When selecting a TiKV node, you can also aggregate analysis in dimensions of `By Table`, `By DB`, and `By Region`.
 * Zoom in on a selected time range in the chart, manually refresh data, enable auto refresh, and export table data to CSV.
 * Collect all SQL statements that are executed, including those that are still running.
@@ -26,7 +27,7 @@ Top SQL is suitable for analyzing performance issues. The following are some typ
 * You discovered that an individual TiDB or TiKV node in the cluster has a very high CPU usage. You want to quickly locate which type of SQL is consuming a lot of CPU resources.
 * The overall cluster queries become slow. You want to find out which SQL is currently consuming the most resources, or compare the main query differences before and after the workload changes.
 * You need to locate hotspots from a higher dimension and want to aggregate and view resource consumption on the TiKV side by `Table`, `DB`, or `Region`.
-* You need to troubleshoot TiKV hotspots from the perspective of network traffic or logical IO, not just limited to the CPU dimension.
+* You need to troubleshoot TiKV hotspots from the perspective of network traffic, logical reads, logical writes, or Read IOPS, not just CPU.
 
 Top SQL cannot be used in the following scenarios:
 
@@ -72,9 +73,7 @@ To view Top SQL by `Order By Network` or `Order By Logical IO` for TiKV nodes, o
 - **Order By Network**: Sorts by the number of network bytes generated during TiKV request processing.
 - **Order By Logical IO**: Sorts by the amount of logical data (in bytes) processed by TiKV at the storage layer for TiKV requests, such as the data scanned or processed during reads and the data written by write requests.
 
-As shown in the following screenshot, the right **Settings** panel displays both the **Enable Feature** and **Enable TiKV Network IO collection (multi-dimensional)** switches.
-
-![Enable TiKV Network IO collection](/media/dashboard/v8.5-top-sql-settings-enable-tikv-network-io.png)
+The right **Settings** panel displays the **Enable Feature** and **Enable TiKV Network IO collection (multi-dimensional)** switches.
 
 **Enabling TiKV Network IO collection (multi-dimensional)** increases storage and query overhead. After enabling, the configuration is delivered to all current TiKV nodes; data display might also have a delay of about 1 minute. If some TiKV nodes fail to enable this feature, the page shows a warning, and new data might be incomplete.
 
@@ -87,6 +86,26 @@ server_configs:
 ```
 
 For more information about TiUP topology configuration, see [TiUP cluster topology file configuration](/tiup/tiup-cluster-topology-reference.md).
+
+#### (Optional) Enable detailed TiKV I/O dimensions <span class="version-mark">New in v8.5.9</span>
+
+After you enable **TiKV Network IO collection (multi-dimensional)**, the **Enable detailed TiKV IO dimensions** switch appears in the settings panel. Enable this switch and save the settings to collect and select logical reads, logical writes, and Read IOPS as independent Top SQL dimensions:
+
+![Enable detailed TiKV IO dimensions](/media/dashboard/v8.5.9-top-sql-settings-enable-detailed-io.png)
+
+- **Order By Logical Read**: Sorts by the number of logical bytes read or processed by TiKV requests at the storage layer.
+- **Order By Logical Write**: Sorts by the number of logical bytes written by TiKV write requests.
+- **Order By Read IOPS**: Sorts by the number of RocksDB block reads triggered by foreground TiKV requests.
+
+After you enable detailed I/O dimensions, the three independent dimensions replace `Order By Logical IO`. `Order By CPU` and `Order By Network` are unaffected.
+
+`Read IOPS` only attributes RocksDB block reads recorded in foreground TiKV request contexts. It is not the actual IOPS of the underlying storage device, so do not directly compare it with device-level metrics such as those reported by `iostat`.
+
+Top SQL displays these independent dimensions only when all TiKV nodes in the cluster have successfully enabled both TiKV Network IO collection and detailed I/O dimensions. If the cluster contains older TiKV nodes that do not support the configuration, or if the configuration is disabled or a node is unreachable, Top SQL considers detailed I/O dimensions disabled.
+
+Enabling detailed I/O dimensions increases the reporting volume and storage overhead. Data display might be delayed by about 1 minute.
+
+For newly added TiKV nodes, the detailed I/O setting does not take effect automatically. To automatically enable both network I/O collection and detailed I/O dimensions on new nodes, also add `resource-metering.enable-detailed-io-collection: true` under `server_configs.tikv` in the TiUP cluster topology file shown earlier.
 
 ## Use Top SQL
 
@@ -115,25 +134,25 @@ The following are the common steps to use Top SQL.
     - Use `Limit` to display the Top `5`, `20`, or `100` SQL queries.
     - The default aggregation dimension is `By Query`. If you select a TiKV node, you can also aggregate in dimensions of `By Table`, `By DB`, or `By Region`.
 
-        ![Select aggregation dimension](/media/dashboard/v8.5-top-sql-usage-select-agg-by.png)
+        ![Select aggregation dimension](/media/dashboard/v8.5.9-top-sql-usage-select-agg-by.png)
 
-    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v857-and-v900), you can also select `Order By Network` (sorted by network bytes) or `Order By Logical IO` (sorted by logical IO bytes).
+    - The default sort order is `Order By CPU` (sorted by CPU time). If you select a TiKV node and have [enabled TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v857-and-v900), you can also select `Order By Network` (sorted by network bytes). If [detailed TiKV I/O dimensions](#optional-enable-detailed-tikv-io-dimensions-new-in-v859) are disabled, you can also select `Order By Logical IO` (sorted by logical I/O bytes). After you enable detailed I/O dimensions, `Order By Logical IO` is replaced by `Order By Logical Read`, `Order By Logical Write`, and `Order By Read IOPS`.
 
-        ![Select order by](/media/dashboard/v8.5-top-sql-usage-select-order-by.png)
+        ![Select sort dimension](/media/dashboard/v8.5.9-top-sql-usage-select-order-by.png)
 
     > **Note:**
     >
-    > `By Region`, `Order By Network`, and `Order By Logical IO` are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v857-and-v900) is enabled. If this feature is not enabled but historical data still exists, the page will continue to display historical data and prompt that new data cannot be fully collected.
+    > `By Region` and sort dimensions other than CPU are only available when [TiKV Network IO collection (multi-dimensional)](#optional-enable-tikv-network-io-collection-new-in-v857-and-v900) is enabled. `Order By Logical Read`, `Order By Logical Write`, and `Order By Read IOPS` additionally require [detailed TiKV I/O dimensions](#optional-enable-detailed-tikv-io-dimensions-new-in-v859) to be enabled on all TiKV nodes. If network IO collection is not enabled but historical data still exists, the page continues to display historical data and prompts that new data cannot be fully collected.
 
 5. Observe the resource consumption hotspot records in the chart and table.
 
-    ![Chart and Table](/media/dashboard/v8.5-top-sql-usage-chart.png)
+    ![Chart and Table](/media/dashboard/v8.5.9-top-sql-usage-chart.png)
 
     The bar chart shows resource consumption under the current sort dimension, with different colors representing different records. The table displays cumulative values according to the current sort dimension, and provides an `Others` row at the end to summarize all non-Top N records.
 
 6. In the `By Query` view, click a row in the table to view the execution plan details for that type of SQL.
 
-    ![Details](/media/dashboard/v8.5-top-sql-details.png)
+    ![Details](/media/dashboard/v8.5.9-top-sql-details.png)
 
     In the SQL statement details, you can view the corresponding SQL template, Query template ID, Plan template ID, and execution plan text. The SQL statement details table displays different metrics depending on the node type:
 
@@ -148,7 +167,7 @@ The following are the common steps to use Top SQL.
 
 7. On TiKV nodes, if you need to locate hotspots from a higher dimension, you can switch to `By Table`, `By DB`, or `By Region` to view the aggregated results.
 
-    ![Aggregated results at DB level](/media/dashboard/v8.5-top-sql-usage-agg-by-db-detail.png)
+    ![Aggregated results at DB level](/media/dashboard/v8.5.9-top-sql-usage-agg-by-db-detail.png)
 
 8. Based on these initial clues, you can further analyze the root cause using the [SQL Statement](/dashboard/dashboard-statement-list.md) or [Slow Queries](/dashboard/dashboard-slow-query.md) page.
 
@@ -180,6 +199,10 @@ After disabling:
 - The Top SQL page can still display previously collected, unexpired historical network IO and logical IO data.
 - New network IO and logical IO data, as well as `By Region` data, will no longer be collected.
 
+### Disable detailed TiKV I/O dimensions
+
+To continue using `Order By Network`, `Order By Logical IO`, and `By Region` without separately collecting logical reads, logical writes, and Read IOPS, disable the **Enable detailed TiKV IO dimensions** switch and save the settings. `Order By Logical Read`, `Order By Logical Write`, and `Order By Read IOPS` are then hidden, and the combined `Order By Logical IO` option is restored.
+
 ## Frequently asked questions
 
 **1. Top SQL cannot be enabled and the UI displays "required component NgMonitoring is not started"**.
@@ -188,7 +211,7 @@ See [TiDB Dashboard FAQ](/dashboard/dashboard-faq.md#a-required-component-ngmoni
 
 **2. Will performance be affected after enabling Top SQL?**
 
-Enabling Top SQL has a slight impact on cluster performance. According to measurements, the average performance impact is less than 3%. If you also enable TiKV Network IO collection (multi-dimensional), there will be additional storage and query overhead.
+Enabling Top SQL has a slight impact on cluster performance. According to measurements, the average performance impact is less than 3%. If you also enable TiKV Network IO collection (multi-dimensional), there will be additional storage and query overhead. Enabling detailed TiKV I/O dimensions further increases the reporting volume and storage overhead.
 
 **3. What is the status of this feature?**
 
@@ -209,16 +232,20 @@ The Y-axis of the Top SQL chart represents the resource consumption under the cu
 - When `Order By CPU` is selected, the Y-axis represents CPU time.
 - When `Order By Network` is selected, the Y-axis represents network bytes.
 - When `Order By Logical IO` is selected, the Y-axis represents logical IO bytes.
+- When `Order By Logical Read` is selected, the Y-axis represents logical read bytes.
+- When `Order By Logical Write` is selected, the Y-axis represents logical write bytes.
+- When `Order By Read IOPS` is selected, the Y-axis represents the number of RocksDB block reads triggered by foreground requests.
 
 **7. Does Top SQL collect running (unfinished) SQL statements?**
 
 Yes. After you enable Top SQL, TiDB Dashboard collects resource consumption for all running SQL statements, including unfinished ones.
 
-**8. Why is there no new data for `Order By Network`, `Order By Logical IO`, or `By Region`?**
+**8. Why is there no new data for sort dimensions other than CPU or for `By Region`?**
 
 These views depend on TiKV Network IO collection (multi-dimensional). You can check the following items:
 
 - You have selected a TiKV node.
 - The **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel is enabled.
 - The relevant TiKV nodes in the cluster have all successfully enabled this configuration. If only some nodes enable this configuration, the Top SQL page prompts that new data might be incomplete.
-- For newly added TiKV nodes, you need to manually enable the **Enable TiKV Network IO collection (multi-dimensional)** switch in the Top SQL settings panel and save again. To make this setting automatically enabled for newly added nodes, also enable `resource-metering.enable-network-io-collection` in the TiKV default configuration of TiUP.
+- To view `Order By Logical Read`, `Order By Logical Write`, and `Order By Read IOPS`, make sure that **Enable detailed TiKV IO dimensions** is enabled and that all TiKV nodes support and enable `resource-metering.enable-detailed-io-collection`.
+- For newly added TiKV nodes, save the corresponding switches in the Top SQL settings panel again to deliver the configuration to all TiKV nodes. To automatically enable the settings for newly added nodes, enable both `resource-metering.enable-network-io-collection` and `resource-metering.enable-detailed-io-collection` in the TiKV default configuration of TiUP.
