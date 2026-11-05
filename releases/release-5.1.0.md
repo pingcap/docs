@@ -250,7 +250,7 @@ To learn more about the information and how to disable this behavior, refer to [
     + TiDB Lightning
 
         - Improve data importing speed. The optimization results show that the speed of importing TPC-C data is increased by 30%, and the speed of importing large tables (2TB+) with more indexes (5 indexes) is increased by more than 50%. [#753](https://github.com/pingcap/br/pull/753)
-        - Add a pre-check on the data to be imported and also on the target cluster before importing, and report errors to reject the import process if it does not meet the import requirements [#999](https://github.com/pingcap/br/pull/999)
+        - Add a precheck on the data to be imported and also on the target cluster before importing, and report errors to reject the import process if it does not meet the import requirements [#999](https://github.com/pingcap/br/pull/999)
         - Optimize the timing of checkpoint updates on the Local backend to improve performance of restarting from breakpoints [#1080](https://github.com/pingcap/br/pull/1080)
 
 ## Bug Fixes

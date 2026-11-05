@@ -127,7 +127,7 @@ TiDB version: 4.0.0-rc.2
     - Fix the issue that the `NotNullFlag` result type is incorrectly set for an expression whose result type is determined by multiple input columns, such as `CASE WHEN` [#16995](https://github.com/pingcap/tidb/pull/16995)
     - Fix the issue that the green GC might leave unresolved locks when dirty stores exist [#16949](https://github.com/pingcap/tidb/pull/16949)
     - Fix the issue that the green GC might leave unresolved locks when encountering a single key with multiple different locks [#16948](https://github.com/pingcap/tidb/pull/16948)
-    - Fix the issue of inserting a wrong value in the `INSERT VALUE` statement because a sub-query refers to a parent query column [#16952](https://github.com/pingcap/tidb/pull/16952)
+    - Fix the issue of inserting a wrong value in the `INSERT VALUE` statement because a subquery refers to a parent query column [#16952](https://github.com/pingcap/tidb/pull/16952)
     - Fix the issue of incorrect results when using the `AND` operator on the `Float` value [#16666](https://github.com/pingcap/tidb/pull/16666)
     - Fix the wrong information of the `WAIT_TIME` field in the expensive log [#16907](https://github.com/pingcap/tidb/pull/16907)
     - Fix the issue that the `SELECT FOR UPDATE` statement cannot be recorded in the slow log in the pessimistic transaction mode [#16897](https://github.com/pingcap/tidb/pull/16897)

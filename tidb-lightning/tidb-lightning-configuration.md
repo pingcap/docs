@@ -54,7 +54,7 @@ TiDB Lightning has two configuration classes: "global" and "task", and they have
 - Default value: `false`
 - Value options:
     - `false`: only the logs related to the import are output, and the logs of other dependent components are not output.
-    - `true`: logs from both the import process and other dependent components are output, and GRPC debugging is enabled, which can be used for diagnosis.
+    - `true`: logs from both the import process and other dependent components are output, and gRPC debugging is enabled, which can be used for diagnosis.
 
 ## TiDB Lightning (Task)
 

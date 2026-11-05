@@ -5,7 +5,7 @@ summary: An overview of the usage of RENAME INDEX for the TiDB database.
 
 # RENAME INDEX
 
-The statement `ALTER TABLE .. RENAME INDEX` renames an existing index to a new name. This operation is instant in TiDB, and requires only a meta data change.
+The statement `ALTER TABLE .. RENAME INDEX` renames an existing index to a new name. This operation is instant in TiDB, and requires only a metadata change.
 
 ## Synopsis
 
