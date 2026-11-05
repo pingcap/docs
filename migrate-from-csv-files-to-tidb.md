@@ -109,7 +109,7 @@ TiDB Lightningは、サイズが約256MiBの均一なCSVファイルからデー
 - 区切り文字が空です。
 - 各フィールドには CR ( `\r` ) または LF ( `\n` ) は含まれていません。
 
-`strict-format`のCSVファイルでは、行終端記号`terminator`を明示的に指定する必要があります。
+`strict-format`のCSVファイルでは、行末記号`terminator`を明示的に指定する必要があります。
 
 CSVファイルが上記の要件を満たしている場合は、次のように`strict-format`モードを有効にすることでインポートを高速化できます。
 
@@ -118,7 +118,7 @@ CSVファイルが上記の要件を満たしている場合は、次のよう�
 strict-format = true
 
 [mydumper.csv]
-terminator = "\n" # 実際のファイル内の行終端記号に応じて、"\n"、"\r"、または "\r\n" に設定します。
+terminator = "\n" # 実際のファイル内の行末記号に応じて、"\n"、"\r"、または "\r\n" に設定します。
 ```
 
 ## ステップ5．データのインポート {#step-5-import-the-data}

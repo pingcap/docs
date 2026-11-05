@@ -147,7 +147,7 @@ tiup dumpling -u root -P 4000 -h 127.0.0.1 -o /tmp/test --filetype csv --sql 'se
 
 > **Note:**
 >
-> Dumplingでは*文字列*と*キーワードは*区別されません。インポートされたデータがブール型の場合、 `true`の値は`1`に変換され、 `false`の値は`0`に変換されます.
+> Dumplingでは*文字列*と*キーワードは*区別されません。インポートされたデータがブール型の場合、 `true`の値は`1`に変換され、 `false`の値は`0`に変換されます。
 
 ### エクスポートされたデータファイルを圧縮する {#compress-the-exported-data-files}
 
