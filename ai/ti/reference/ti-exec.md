@@ -13,9 +13,9 @@ summary: Run remote commands on TiDB Cloud Filesystem, preserve workspace files,
 
 > **Warning:**
 >
-> Preview validation is incomplete. Cancellation in the current test environment can return an unknown outcome (`255`) while execution continues. Verify the result before repeating a command.
+> Preview validation is incomplete. Cancellation in the current test environment can return an unknown outcome (`255`) without confirming whether the command has stopped. Verify the result before deciding whether to run the command again.
 
-<!-- Release gate: confirm the first published ti and companion versions after tidbcloud/ti-cli#79 and its cancellation dependency have passed live validation. Do not publish this page as instructions for an older stable release. -->
+<!-- Release gate: confirm published ti/companion versions and successful live validation before publishing. -->
 
 ## Prerequisites
 
