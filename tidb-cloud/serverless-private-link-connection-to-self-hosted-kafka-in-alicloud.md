@@ -501,7 +501,7 @@ The following configuration applies to a Kafka KRaft cluster. The ZK mode config
 
     # Add EXTERNAL advertised listeners based on the "Kafka Advertised Listener Pattern" in "Prerequisites" section
     # 1. The pattern is "<broker_id>.unique_name.alicloud.plc.tidbcloud.com:<port>"
-    # 2. So the EXTERNAL can be "b2.unique_name.alicloud.plc.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range.
+    # 2. So the EXTERNAL can be "b3.unique_name.alicloud.plc.tidbcloud.com:9095". Replace <broker_id> with "b" prefix plus "node.id" properties, and replace <port> with a unique port(9095) in EXTERNAL advertised listener ports range.
     advertised.listeners=...,EXTERNAL://b3.unique_name.alicloud.plc.tidbcloud.com:9095
 
     # Configure EXTERNAL map

@@ -58,7 +58,7 @@ The default password policy is as follows:
 
 > **Note:**
 >
-> This section is only applicable to TiDB Cloud registration with email and password. If you sign up for TiDB Cloud with Google SSO or GitHub SSO, your password is managed by Google or GitHub and you cannot change it using the TiDB Cloud console.
+> This section is only applicable to TiDB Cloud registration with email and password. If you sign up for TiDB Cloud with Google, GitHub, or Microsoft SSO, your password is managed by Google, GitHub, or Microsoft and you cannot change it using the TiDB Cloud console.
 
 If you forget your password, you can reset it by email as follows:
 
