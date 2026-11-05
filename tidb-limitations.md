@@ -79,14 +79,24 @@ You can adjust this limit using the [`max-index-length`](/tidb-configuration-fil
 
 ## Limitations on data types
 
-| Type       | Upper limit   |
-|:----------|:----------|
-| CHAR       | 255 characters      |
-| BINARY     | 255 bytes      |
-| VARBINARY  | 65535 bytes    |
-| VARCHAR    | 16383 characters    |
-| TEXT       | 65535 bytes    |
-| BLOB       | 65535 bytes    |
+> **Note:**
+>
+> - The `TEXT` and `BLOB` limits match the corresponding MySQL type limits. To store values larger than 65,535 bytes, use `MEDIUMTEXT`, `LONGTEXT`, `MEDIUMBLOB`, or `LONGBLOB`.
+> - The single-row size limit applies to the entire row and can be adjusted using [`txn-entry-size-limit`](/tidb-configuration-file.md#txn-entry-size-limit-new-in-v4010-and-v500).
+
+| Type       | Maximum size for a single value | Single-row size limit |
+|:-----------|:--------------------------------|:----------------------|
+| CHAR       | 255 characters                  | 6 MiB by default, adjustable to 120 MiB |
+| BINARY     | 255 bytes                       | 6 MiB by default, adjustable to 120 MiB |
+| VARBINARY  | 65,535 bytes                    | 6 MiB by default, adjustable to 120 MiB |
+| VARCHAR    | 16,383 characters (utf8mb4)     | 6 MiB by default, adjustable to 120 MiB |
+| TEXT       | 65,535 bytes                    | 6 MiB by default, adjustable to 120 MiB |
+| BLOB       | 65,535 bytes                    | 6 MiB by default, adjustable to 120 MiB |
+| MEDIUMTEXT | 16,777,215 bytes                | 6 MiB by default, adjustable to 120 MiB |
+| LONGTEXT   | 4,294,967,295 bytes             | 6 MiB by default, adjustable to 120 MiB |
+| MEDIUMBLOB | 16,777,215 bytes                | 6 MiB by default, adjustable to 120 MiB |
+| LONGBLOB   | 4,294,967,295 bytes             | 6 MiB by default, adjustable to 120 MiB |
+| JSON       | Not separately specified        | 6 MiB by default, adjustable to 120 MiB |
 
 ## Limitations on SQL statements
 
